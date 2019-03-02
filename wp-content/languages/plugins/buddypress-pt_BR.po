@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - BuddyPress - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-08-06 13:03:05+0000\n"
+"PO-Revision-Date: 2018-11-28 19:07:08+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -623,6 +623,10 @@ msgstr "Usar estilo de aba para a navegação no diretório de grupos."
 msgid "Reorder the primary navigation for a group."
 msgstr "Reordenar a navegação primária para um grupo."
 
+#: bp-templates/bp-nouveau/includes/groups/functions.php:150
+msgid "Loading members. Please wait."
+msgstr "Carregando membros. Aguarde."
+
 #: bp-templates/bp-nouveau/includes/groups/functions.php:123
 msgid "Pending Invites"
 msgstr "Convites Pendentes"
@@ -778,6 +782,10 @@ msgstr "Duas colunas"
 msgid "One column"
 msgstr "Uma coluna"
 
+#: bp-templates/bp-nouveau/includes/functions.php:981
+msgid "Sorry, there were no group members found."
+msgstr "Desculpe, nenhum membro do grupo encontrado."
+
 #: bp-templates/bp-nouveau/includes/friends/ajax.php:130
 msgid "Friendship accepted."
 msgstr "Amizade aceita."
@@ -791,6 +799,18 @@ msgstr "Houve um problema ao realizar essa ação. Por favor, tente novamente."
 #: bp-templates/bp-nouveau/includes/friends/ajax.php:180
 msgid "Friendship cancelled."
 msgstr "Amizade cancelada."
+
+#: bp-templates/bp-nouveau/includes/customizer.php:270
+msgid "Member > Friends"
+msgstr "Membro > Amigos"
+
+#: bp-templates/bp-nouveau/includes/classes.php:313
+msgid "Include navigation title"
+msgstr "Incluir título de navegação"
+
+#: bp-templates/bp-nouveau/includes/friends/ajax.php:154
+msgid "Friendship rejected."
+msgstr "Amizade rejeitada."
 
 #: bp-templates/bp-nouveau/includes/activity/functions.php:199
 #: bp-templates/bp-nouveau/includes/groups/functions.php:118
@@ -878,6 +898,31 @@ msgstr "Selecione quem pode visualizar seus detalhes de perfil."
 #: bp-templates/bp-nouveau/buddypress/members/single/settings/profile.php:12
 msgid "Profile Visibility Settings"
 msgstr "Configurações de Visibilidade de Perfil"
+
+#: bp-templates/bp-nouveau/buddypress/members/single/settings/general.php:12
+msgid "Email & Password"
+msgstr "E-mail & Senha"
+
+#: bp-templates/bp-nouveau/includes/activity/functions.php:253
+#: bp-templates/bp-nouveau/includes/groups/functions.php:517
+msgid "My Groups"
+msgstr "Meus Grupos"
+
+#: bp-templates/bp-nouveau/includes/activity/functions.php:146
+msgid "Post in: Group"
+msgstr "Publicar no: Grupo"
+
+#: bp-templates/bp-nouveau/includes/activity/functions.php:137
+msgid "Post in: Profile"
+msgstr "Publicar no: Perfil"
+
+#: bp-templates/bp-nouveau/buddypress/members/single/profile.php:10
+msgid "Profile menu"
+msgstr "Menu do perfil"
+
+#: bp-templates/bp-nouveau/buddypress/members/single/settings/general.php:16
+msgid "Update your email and or password."
+msgstr "Atualizar seu e-mail e/ou senha."
 
 #: bp-templates/bp-nouveau/buddypress/members/single/groups.php:10
 msgid "Groups menu"
@@ -9163,7 +9208,7 @@ msgstr "Navegador"
 #: bp-core/classes/class-bp-admin.php:817
 #: bp-core/classes/class-bp-admin.php:822
 msgid "Core Developer"
-msgstr "Desenvolvedores Core"
+msgstr "Desenvolvedor Core"
 
 #: bp-core/classes/class-bp-admin.php:748
 msgid "Lead Developer"

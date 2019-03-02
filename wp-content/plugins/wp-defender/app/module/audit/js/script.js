@@ -3,6 +3,7 @@ jQuery(function ($) {
     WDAudit.formHandler();
     //WDAudit.listenFilter();
     WDAudit.filterForm();
+    WDAudit.initDatepicker();
     $('div.auditing').on('form-submitted', function (e, data, form) {
         if (form.attr('id') != 'active-audit') {
             return;
@@ -13,42 +14,23 @@ jQuery(function ($) {
             Defender.showNotification('error', data.data.message);
         }
     });
-
-    $('div.auditing').on('form-submitted', function (e, data, form) {
-        if (!form.hasClass('banIP')) {
-            return;
+    var last_date = null;
+    $('#wd_range_from').change(function () {
+        if (last_date !== null && last_date !== $(this).val()) {
+            var date = $(this).val().split('-');
+            query = [];
+            query.push('date_from=' + $.trim(date[0]));
+            query.push('date_to=' + $.trim(date[1]));
+            WDAudit.ajaxPull(query.join('&'));
         }
-        if (data.success == true) {
-            form.closest('.well').prev().remove();
-            form.closest('.well').remove();
-            Defender.showNotification('success', data.data.message);
-        } else {
-            Defender.showNotification('error', data.data.message);
-        }
-    });
-
-    $('body').on('click', '.ip-action', function (e) {
-        e.preventDefault();
-        var that = $(this);
-        $.ajax({
-            type: 'POST',
-            url: ajaxurl,
-            data: {
-                action: 'lockoutIPAction',
-                ip: that.data('ip'),
-                type: that.data('type'),
-                nonce: that.data('nonce')
-            },
-            success: function (data) {
-                if (data.success == 1) {
-                    that.parent().html(data.data.buttons);
-                    Defender.showNotification('success', data.data.message);
-                } else {
-                    Defender.showNotification('error', data.data.message);
-                }
-            }
-        })
+        last_date = $(this).val();
     })
+
+    $('.deactivate-audit').click(function () {
+        $('.audit-frm').append('<input type="hidden" name="enabled" value="0"/>');
+        $(this).attr('disabled', 'disabled');
+        $('.audit-frm').submit();
+    });
 
     $('div.auditing').on('form-submitted', function (e, data, form) {
         if (!form.hasClass('audit-settings')) {
@@ -68,70 +50,6 @@ jQuery(function ($) {
             $(this).closest('.schedule-box').find('div.days-container').show();
         }
     }).change();
-    $('body').on('click', '.show-info', function (e) {
-        e.preventDefault();
-        var target = $($(this).data('target'));
-        if (target.is(':visible')) {
-            target.addClass('wd-hide');
-            $(this).removeClass('opened');
-            $(this).find('td:nth-child(4) a').html('<i class="dev-icon dev-icon-caret_down"></i>');
-        } else {
-            target.removeClass('wd-hide');
-            $(this).addClass('opened');
-            $(this).find('td:nth-child(4) a').html('<i class="dev-icon dev-icon-caret_up"></i>');
-        }
-    })
-
-    //calendar
-    if ($('.wd-calendar').size() > 0) {
-        var start = moment().subtract(7, 'days');
-        var end = moment();
-        var maxDate = end;
-        var minDate = moment().subtract(1, 'years');
-        $('#wd_range_from').daterangepicker({
-            //startDate: start,
-            //endDate: end,
-            autoApply: true,
-            maxDate: maxDate,
-            minDate: minDate,
-            "linkedCalendars": false,
-            showDropdowns: false,
-            applyClass: 'wd-hide',
-            cancelClass: 'wd-hide',
-            alwaysShowCalendars: true,
-            opens: 'center',
-            dateLimit: {
-                days: 90
-            },
-            locale: {
-                "format": "MM/DD/YYYY",
-                "separator": " - "
-            },
-            template: '<div class="daterangepicker wd-calendar wp-defender dropdown-menu"> ' +
-            '<div class="ranges"> ' +
-            '<div class="range_inputs"> ' +
-            '<button class="applyBtn" disabled="disabled" type="button"></button> ' +
-            '<button class="cancelBtn" type="button"></button> ' +
-            '</div> ' +
-            '</div> ' +
-            '<div class="calendar left"> ' +
-            '<div class="calendar-table"></div> ' +
-            '</div> ' +
-            '<div class="calendar right"> ' +
-            '<div class="calendar-table"></div> ' +
-            '</div> ' +
-            '</div>',
-            showCustomRangeLabel: false,
-            ranges: {
-                'Today': [moment(), moment()],
-                '7 Days': [moment().subtract(6, 'days'), moment()],
-                '30 Days': [moment().subtract(29, 'days'), moment()]
-            }
-        });
-    }
-    if ($('.new-event-count').size() > 0) {
-        //setTimeout(WDAudit.listenForEvents(), 10000)
-    }
 
     $('body').on('click', '.nav a', function (e) {
         e.preventDefault();
@@ -139,7 +57,7 @@ jQuery(function ($) {
             return;
         }
         var query = WDAudit.buildFilterQuery();
-        WDAudit.ajaxPull(query + '&paged=' + $(this).data('paged'), function () {
+        WDAudit.ajaxPull(query + '&paged=' + $(this).attr('href'), function () {
 
         });
     });
@@ -155,7 +73,7 @@ jQuery(function ($) {
             return;
         }
         if (data.success == true) {
-            form.closest('.dev-box').replaceWith($(data.data.html))
+            form.closest('.sui-box').replaceWith($(data.data.html))
         } else {
             Defender.showNotification('error', data.data.message);
         }
@@ -166,7 +84,7 @@ jQuery(function ($) {
         }
         if (data.success == true) {
             if (data.data.eventWeek > 0) {
-                $('.issues-count h5').html(data.data.eventWeek);
+                $('.issues-count').html(data.data.eventWeek);
             }
         } else {
             Defender.showNotification('error', data.data.message);
@@ -191,12 +109,11 @@ jQuery(function ($) {
             var query = WDAudit.buildFilterQuery();
             WDAudit.ajaxPull(query, function () {
                 jQuery("#audit-table-container select").each(function () {
-                    WDP.wpmuSelect(this);
+
                 });
             });
         }
     }
-    ;
 
     $('body').on('click', '.audit-csv', function () {
         var query = WDAudit.buildFilterQuery();
@@ -217,6 +134,23 @@ jQuery(function ($) {
         //     }
         // })
     })
+    $('body').on('click', '.sui-active-filter-remove', function () {
+        var target = $('#' + $(this).data('target'));
+        if (target.is(':checkbox')) {
+            target.prop('checked', false)
+        } else {
+            target.val('');
+        }
+        query = WDAudit.buildFilterQuery();
+        WDAudit.ajaxPull(query);
+        if (target.is(':checkbox')) {
+            $('[data-target="all_type"]:nth-child(2)').click();
+        }
+        $(this).parent().remove();
+        if ($('.sui-active-filter-remove').size() == 0) {
+            $('.filter-container').addClass('wd-hide');
+        }
+    })
 });
 var count;
 
@@ -231,7 +165,7 @@ WDAudit.formHandler = function () {
             url: ajaxurl,
             data: data,
             beforeSend: function () {
-                that.find('.button').attr('disabled', 'disabled');
+                that.find('.sui-button').attr('disabled', 'disabled');
             },
             success: function (data) {
                 if (data.data != undefined && data.data.notification != undefined) {
@@ -249,13 +183,63 @@ WDAudit.formHandler = function () {
                 } else if (data.data != undefined && data.data.url != undefined) {
                     location.href = data.data.url;
                 } else {
-                    that.find('.button').removeAttr('disabled');
+                    that.find('.sui-button').removeAttr('disabled');
                     jq('div.auditing').trigger('form-submitted', [data, that])
                 }
             }
         })
         return false;
     })
+}
+
+WDAudit.initDatepicker = function () {
+    //calendar
+    if (jQuery('#wd_range_from').size() > 0) {
+        var start = moment().subtract(7, 'days');
+        var end = moment();
+        var maxDate = end;
+        var minDate = moment().subtract(1, 'years');
+        jQuery('#wd_range_from').daterangepicker({
+            //startDate: start,
+            //endDate: end,
+            autoApply: true,
+            maxDate: maxDate,
+            minDate: minDate,
+            "linkedCalendars": false,
+            showDropdowns: false,
+            applyClass: 'wd-hide',
+            cancelClass: 'wd-hide',
+            alwaysShowCalendars: true,
+            opens: 'left',
+            dateLimit: {
+                days: 90
+            },
+            locale: {
+                "format": "MM/DD/YYYY",
+                "separator": " - "
+            },
+            template: '<div class="daterangepicker wd-calendar wp-defender dropdown-menu"> ' +
+                '<div class="ranges"> ' +
+                '<div class="range_inputs"> ' +
+                '<button class="applyBtn" disabled="disabled" type="button"></button> ' +
+                '<button class="cancelBtn" type="button"></button> ' +
+                '</div> ' +
+                '</div> ' +
+                '<div class="calendar left"> ' +
+                '<div class="calendar-table"></div> ' +
+                '</div> ' +
+                '<div class="calendar right"> ' +
+                '<div class="calendar-table"></div> ' +
+                '</div> ' +
+                '</div>',
+            showCustomRangeLabel: false,
+            ranges: {
+                'Today': [moment(), moment()],
+                '7 Days': [moment().subtract(6, 'days'), moment()],
+                '30 Days': [moment().subtract(29, 'days'), moment()]
+            }
+        });
+    }
 }
 
 WDAudit.listenForEvents = function () {
@@ -276,6 +260,17 @@ WDAudit.filterForm = function () {
         var query = WDAudit.buildFilterQuery();
         WDAudit.ajaxPull(query, function () {
 
+        })
+        var that = jq(this);
+        var inputs = that.find(':input');
+        jq('.filter-container').removeClass('wd-hide');
+        jq('.sui-pagination-active-filters').html('');
+        inputs.each(function () {
+            if (jq(this).val().length && jq(this).data('name') != undefined) {
+                var html = jq(this).data('name') + ':' + jq(this).val();
+                html += '<span class="sui-active-filter-remove" data-target="' + jq(this).attr('id') + '"></span>';
+                jq('.sui-pagination-active-filters').append(jq('<span class="sui-active-filter"/>').html(html));
+            }
         })
         return false;
     })
@@ -316,6 +311,8 @@ WDAudit.listenFilter = function () {
         }
         WDAudit.ajaxPull(query, function () {
             old_query = query;
+            //create auto filter
+
         })
     }
 };
@@ -325,6 +322,7 @@ WDAudit.buildFilterQuery = function (currentInput) {
     var form = jq('.audit-filter form');
     var inputs = form.find(':input');
     var query = [];
+    inputs.push(jq('#wd_range_from'));
     inputs.each(function () {
         if (jq(this).attr('type') == 'checkbox') {
             if (jq(this).prop('checked') == true) {
@@ -357,35 +355,28 @@ WDAudit.ajaxPull = function (query, callback) {
             }
         },
         success: function (data) {
+            jq('[rel="show-filter"]').removeAttr('disabled');
             if (data.success == 1) {
                 if (data.data.html != undefined) {
                     var html = jq(data.data.html);
-                    if (html.find('#audit-table') > 0 && jq('audit-table').size() > 0) {
-                        jq('.bulk-nav').replaceWith(html.find('.bulk-nav').first());
-                        jq('#audit-table').replaceWith(html.filter('#audit-table').first());
-                        callback();
-                    } else {
-                        jq('#audit-table-inner').html(html.filter('#audit-table').first());
-                        jq('.bulk-nav').html(html.filter('.bulk-nav').first().html());
-                        jQuery(".wpmud select").each(function () {
-                            WDP.wpmuSelect(this);
+                    jq('#audit-table-container').html(html).addClass('sui-row sui-flushed');
+                    if (jQuery('.sui-accordion').length > 0) {
+                        jQuery('.sui-accordion').each(function () {
+                            SUI.suiAccordion(jQuery(this));
                         });
-                        callback();
-                    }
-                    count = data.data.count;
-                    overlay.remove();
-                    if (isFirst == false) {
-                        window.history.pushState(null, document.title, urlOrigin + '&' + query);
-                    } else {
-                        isFirst = false;
                     }
                 } else {
                     jq('.new-event-count').html(data.data.message).removeClass('wd-hide');
                     count = data.data.count;
                     callback();
                 }
+                if (data.data.pagination != undefined) {
+                    jq('.sui-pagination-results').remove();
+                    jq('.sui-pagination').remove();
+                    jq('.sui-pagination-wrap').prepend(data.data.pagination);
+                }
             } else {
-                jq('#audit-table-inner').html(data.data.html);
+                jq('#audit-table-container').html(data.data.html);
                 overlay.remove();
             }
         }

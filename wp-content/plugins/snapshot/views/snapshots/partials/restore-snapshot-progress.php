@@ -88,7 +88,7 @@
 
 					</div>
 
-					<div id="wps-log" style="display: none;">
+					<div id="wps-log" class="hidden">
 						<h4><?php esc_html_e( 'Restoration Log', SNAPSHOT_I18N_DOMAIN ); ?></h4>
 
 						<div id="wps-log-resume" class="wpmud-box-gray">

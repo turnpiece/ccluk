@@ -868,6 +868,46 @@ if ( ! class_exists( 'Snapshot_Helper_Utility' ) ) {
 		}
 
 		/**
+		 * Utility function to remove remaining sql files.
+		 *
+		 * @since 3.2.0.2
+		 *
+		 * @param string $dir Directory from where the sql files are to be removed.
+		 *
+		 * @return none
+		 */
+		public static function remove_sql_files( $dir ) {
+			if ( is_dir( $dir ) ) {
+				$dir = trailingslashit( wp_normalize_path( $dir ) );
+				$sql_files = glob($dir . '*.sql');
+
+				foreach ( $sql_files as $sql_file) {
+					unlink( $sql_file );
+				}
+			}
+		}
+
+		/**
+		 * Utility function to remove the snapshot manifest.
+		 *
+		 * @since 3.2.0.2
+		 *
+		 * @param string $dir Directory from where the manifest file is to be removed.
+		 *
+		 * @return none
+		 */
+		public static function remove_manifest( $dir ) {
+			if ( is_dir( $dir ) ) {
+				$dir = trailingslashit( wp_normalize_path( $dir ) );
+				$manifest_file = $dir . 'snapshot_manifest.txt';
+
+				if ( file_exists( $manifest_file ) ) {
+					unlink( $manifest_file );
+				}
+			}
+		}
+
+		/**
 		 * Utility function to access the latest item's data set.
 		 *
 		 * @since 1.0.4
@@ -1113,30 +1153,28 @@ if ( ! class_exists( 'Snapshot_Helper_Utility' ) ) {
 
 			$buffer = '';
 			$cnt    = 0;
-			$status = false;
 
-			global $wp_filesystem;
-
-			if( self::connect_fs() ) {
-				$file = $wp_filesystem->get_contents( $filename );
-
-				$splitFile = str_split($file, $CHUNK_SIZE);
-				foreach($splitFile as $buffer) {
-					echo $buffer; // phpcs:ignore
-					flush();
-					if ( $retbytes ) {
-						$cnt += strlen( $buffer );
-					}
-				}
-				$status = true;
-			} else {
+			$handle = fopen( $filename, 'rb' ); // phpcs:ignore
+			if ( false === $handle ) {
 				return false;
 			}
 
+			while ( ! feof( $handle ) ) {
+				$buffer = fread( $handle, $CHUNK_SIZE ); // phpcs:ignore
+				echo $buffer; // phpcs:ignore
+				flush();
+				if( ob_get_level() > 0 ){
+					ob_flush();
+				}
+				if ( $retbytes ) {
+					$cnt += strlen( $buffer );
+				}
+			}
+
+			$status = fclose( $handle ); // phpcs:ignore
 			if ( $retbytes && $status ) {
 				return $cnt; // return num. bytes delivered like readfile() does.
 			}
-
 			return $status;
 		}
 
@@ -1857,6 +1895,11 @@ if ( ! class_exists( 'Snapshot_Helper_Utility' ) ) {
 				unlink( $local_file );
 			}
 
+			$remote_host = wp_parse_url( $remote_url, PHP_URL_HOST );
+			if ( strpos( $remote_host, 'dropbox.com' ) ) {
+				$remote_url = add_query_arg( 'dl', '1', $remote_url );
+			}
+
 			global $wp_filesystem;
 
 			if( self::connect_fs() ) {
@@ -2029,6 +2072,40 @@ if ( ! class_exists( 'Snapshot_Helper_Utility' ) ) {
 			}
 
 			return true;
+		}
+
+		/**
+		 * Checks whether we're on WPMU DEV Hosting
+		 *
+		 * @return bool
+		 */
+		public static function is_wpmu_hosting() {
+			return isset( $_SERVER['WPMUDEV_HOSTED'] ) && ! empty( $_SERVER['WPMUDEV_HOSTED'] );
+		}
+
+		/**
+		 * Checks whether we're on WPEngine
+		 *
+		 * @return bool
+		 */
+		public static function is_wpengine_hosting() {
+			return defined('WPE_APIKEY');
+		}
+
+		/**
+		 * Checks whether the S3 request handler is properly spawned.
+		 *
+		 * @param $s3
+		 *
+		 * @return bool
+		 */
+		public static function spawned_S3_handler( $s3 ) {
+			if ( false === $s3 ) {
+				Snapshot_Helper_Log::error( 'Error spawning the S3 request handler, most probably due to a plugin conflict' );
+				return false;
+			} else {
+				return true;
+			}
 		}
 
 	}

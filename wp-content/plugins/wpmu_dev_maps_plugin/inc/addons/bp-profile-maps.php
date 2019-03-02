@@ -12,7 +12,8 @@ Author:      Ve Bailovity (Incsub)
 if ( defined( 'BP_PLUGIN_DIR' ) ) :
 
 
-	/*============================*\
+	/*
+	============================*\
 	================================
 	==                            ==
 	==           SHARED           ==
@@ -38,8 +39,8 @@ if ( defined( 'BP_PLUGIN_DIR' ) ) :
 				$key
 			);
 
-			if ( isset( $opts['bp_profile_maps-' . $key] ) ) {
-				return $opts['bp_profile_maps-' . $key];
+			if ( isset( $opts[ 'bp_profile_maps-' . $key ] ) ) {
+				return $opts[ 'bp_profile_maps-' . $key ];
 			} else {
 				return '';
 			}
@@ -67,7 +68,8 @@ if ( defined( 'BP_PLUGIN_DIR' ) ) :
 	}
 
 
-	/*===========================*\
+	/*
+	===========================*\
 	===============================
 	==                           ==
 	==           ADMIN           ==
@@ -96,6 +98,12 @@ if ( defined( 'BP_PLUGIN_DIR' ) ) :
 			add_action(
 				'agm_google_maps-options-plugins_options',
 				array( $this, 'register_settings' )
+			);
+
+			// GDPR compliance.
+			add_filter(
+				'wp_privacy_personal_data_erasers',
+				array( $this, 'register_data_eraser' )
 			);
 		}
 
@@ -151,12 +159,44 @@ if ( defined( 'BP_PLUGIN_DIR' ) ) :
 			);
 		}
 
+		public function register_data_eraser( $erasers ) {
+			$erasers['agm_google_maps-profile_maps'] = array(
+				'eraser_friendly_name' => __( 'Google Maps Pro profile maps', AGM_LANG ),
+				'callback' => array( $this, 'erase_profile_maps_data' ),
+			);
+			return $erasers;
+		}
+
+		public function erase_profile_maps_data( $email, $page = 1 ) {
+			$user = get_user_by( 'email', $email );
+			$status = false;
+
+			$meta = get_user_meta(
+				$user->ID,
+				'agm-bp-profile_maps-location',
+				true
+			);
+			if ( ! empty( $meta ) ) {
+				delete_user_meta(
+					$user->ID,
+					'agm-bp-profile_maps-location'
+				);
+				$status = true;
+			}
+			return array(
+				'items_removed' => $status,
+				'items_retained' => false,
+				'messages' => array(),
+				'done' => true,
+			);
+		}
+
 		public function create_dependencies_box() {
 			if ( ! defined( 'BP_VERSION' ) || ! class_exists( 'BP_XProfile_Group' ) ) :
 				?>
 				<p>
 					<?php _e(
-						'This Add-On required BuddyPress plugin with active '.
+						'This Add-On required BuddyPress plugin with active ' .
 						'<strong>Extended Profiles</strong> compoennt to work.',
 						AGM_LANG
 					); ?>
@@ -279,7 +319,8 @@ if ( defined( 'BP_PLUGIN_DIR' ) ) :
 	}
 
 
-	/*===============================*\
+	/*
+	===============================*\
 	===================================
 	==                               ==
 	==           FRONT END           ==
@@ -389,7 +430,7 @@ if ( defined( 'BP_PLUGIN_DIR' ) ) :
 					$member_ids[] = bp_get_member_user_id();
 				}
 			}
-			if (function_exists('bp_rewind_members')) bp_rewind_members();
+			if ( function_exists( 'bp_rewind_members' ) ) { bp_rewind_members(); }
 
 			echo '' . $this->show_users_on_map( $member_ids, $overrides );
 		}
@@ -441,8 +482,8 @@ if ( defined( 'BP_PLUGIN_DIR' ) ) :
 		 *
 		 * @return array Folded markers
 		 */
-		private function _fold_markers ($markers ) {
-			if (empty($markers) || !is_array($markers)) return $markers;
+		private function _fold_markers( $markers ) {
+			if ( empty( $markers ) || ! is_array( $markers ) ) { return $markers; }
 			$folded = array();
 			$known = array();
 
@@ -455,40 +496,40 @@ if ( defined( 'BP_PLUGIN_DIR' ) ) :
 				'marker.png'
 			);
 
-			foreach ($markers as $marker) {
-				$fold_key = !empty($marker[$fold_by_key])
-					? $marker[$fold_by_key]
+			foreach ( $markers as $marker ) {
+				$fold_key = ! empty( $marker[ $fold_by_key ] )
+					? $marker[ $fold_by_key ]
 					: false
 				;
 				// Deal with non-scalar fold keys by
 				// converting them to string first
-				if (is_array($fold_key)) $fold_key = md5(serialize($fold_key));
+				if ( is_array( $fold_key ) ) { $fold_key = md5( serialize( $fold_key ) ); }
 
-				if (empty($known[$fold_key])) $known[$fold_key] = array();
-				$known[$fold_key][] = $marker;
+				if ( empty( $known[ $fold_key ] ) ) { $known[ $fold_key ] = array(); }
+				$known[ $fold_key ][] = $marker;
 			}
-			foreach ($known as $idx => $list) {
-				if (empty($list)) continue;
+			foreach ( $known as $idx => $list ) {
+				if ( empty( $list ) ) { continue; }
 
 				// Nothing to fold here, carry on
-				if (1 === count($list)) {
-					$folded[] = end($list);
+				if ( 1 === count( $list ) ) {
+					$folded[] = end( $list );
 					continue;
 				}
 
 				$tmp = array();
 				$description = '';
 
-				foreach ($list as $mrk) {
-					if (empty($tmp['position'])) {
+				foreach ( $list as $mrk ) {
+					if ( empty( $tmp['position'] ) ) {
 						// First folded item, copy and be done with it
-						$tmp = array_merge($tmp, $mrk);
+						$tmp = array_merge( $tmp, $mrk );
 					}
 					// Handle the cases when profile images are used as marker icons
 					$tmp['icon'] = $default_marker; // As this doesn't make sense anymore
 
 					$description .= '' .
-						(!empty($mrk['body']) ? $mrk['body'] : '') .
+						( ! empty( $mrk['body'] ) ? $mrk['body'] : '') .
 					'';
 				}
 
@@ -510,10 +551,10 @@ if ( defined( 'BP_PLUGIN_DIR' ) ) :
 			}
 			$id = $id ? $id : md5( time() . rand() );
 
-			if (!class_exists('Agm_Mc_UserPages')) {
+			if ( ! class_exists( 'Agm_Mc_UserPages' ) ) {
 				// We don't have the map cluster add-on,
 				// so let's collapse the markers manually
-				$markers = $this->_fold_markers($markers);
+				$markers = $this->_fold_markers( $markers );
 			}
 
 			$map = $this->_model->get_map_defaults();
@@ -627,8 +668,8 @@ if ( defined( 'BP_PLUGIN_DIR' ) ) :
 			);
 
 			// Catch protocol-less avatars
-			if (preg_match('~^//~', $avatar)) {
-				$avatar = preg_replace('~^//~', (is_ssl() ? 'https://' : 'http://'), $avatar);
+			if ( preg_match( '~^//~', $avatar ) ) {
+				$avatar = preg_replace( '~^//~', (is_ssl() ? 'https://' : 'http://'), $avatar );
 			}
 
 			return $avatar;

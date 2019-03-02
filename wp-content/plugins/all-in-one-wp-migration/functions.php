@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (C) 2014-2018 ServMask Inc.
+ * Copyright (C) 2014-2019 ServMask Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -733,13 +733,6 @@ function ai1wm_plugin_filters( $filters = array() ) {
 		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . 'all-in-one-wp-migration-glacier-extension';
 	}
 
-	// WebDAV Extension
-	if ( defined( 'AI1WMWE_PLUGIN_BASENAME' ) ) {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . dirname( AI1WMWE_PLUGIN_BASENAME );
-	} else {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . 'all-in-one-wp-migration-webdav-extension';
-	}
-
 	// Mega Extension
 	if ( defined( 'AI1WMEE_PLUGIN_BASENAME' ) ) {
 		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . dirname( AI1WMEE_PLUGIN_BASENAME );
@@ -768,6 +761,13 @@ function ai1wm_plugin_filters( $filters = array() ) {
 		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . 'all-in-one-wp-migration-pcloud-extension';
 	}
 
+	// S3 Client Extension
+	if ( defined( 'AI1WNE_PLUGIN_BASENAME' ) ) {
+		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . dirname( AI1WMNE_PLUGIN_BASENAME );
+	} else {
+		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . 'all-in-one-wp-migration-s3-client-extension';
+	}
+
 	// Amazon S3 Extension
 	if ( defined( 'AI1WMSE_PLUGIN_BASENAME' ) ) {
 		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . dirname( AI1WMSE_PLUGIN_BASENAME );
@@ -787,6 +787,13 @@ function ai1wm_plugin_filters( $filters = array() ) {
 		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . dirname( AI1WMLE_PLUGIN_BASENAME );
 	} else {
 		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . 'all-in-one-wp-migration-url-extension';
+	}
+
+	// WebDAV Extension
+	if ( defined( 'AI1WMWE_PLUGIN_BASENAME' ) ) {
+		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . dirname( AI1WMWE_PLUGIN_BASENAME );
+	} else {
+		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . 'all-in-one-wp-migration-webdav-extension';
 	}
 
 	return $filters;
@@ -853,11 +860,6 @@ function ai1wm_active_servmask_plugins( $plugins = array() ) {
 		$plugins[] = AI1WMRE_PLUGIN_BASENAME;
 	}
 
-	// WebDAV Extension
-	if ( defined( 'AI1WMWE_PLUGIN_BASENAME' ) ) {
-		$plugins[] = AI1WMWE_PLUGIN_BASENAME;
-	}
-
 	// Mega Extension
 	if ( defined( 'AI1WMEE_PLUGIN_BASENAME' ) ) {
 		$plugins[] = AI1WMEE_PLUGIN_BASENAME;
@@ -878,6 +880,11 @@ function ai1wm_active_servmask_plugins( $plugins = array() ) {
 		$plugins[] = AI1WMPE_PLUGIN_BASENAME;
 	}
 
+	// S3 Client Extension
+	if ( defined( 'AI1WMNE_PLUGIN_BASENAME' ) ) {
+		$plugins[] = AI1WMNE_PLUGIN_BASENAME;
+	}
+
 	// Amazon S3 Extension
 	if ( defined( 'AI1WMSE_PLUGIN_BASENAME' ) ) {
 		$plugins[] = AI1WMSE_PLUGIN_BASENAME;
@@ -891,6 +898,11 @@ function ai1wm_active_servmask_plugins( $plugins = array() ) {
 	// URL Extension
 	if ( defined( 'AI1WMLE_PLUGIN_BASENAME' ) ) {
 		$plugins[] = AI1WMLE_PLUGIN_BASENAME;
+	}
+
+	// WebDAV Extension
+	if ( defined( 'AI1WMWE_PLUGIN_BASENAME' ) ) {
+		$plugins[] = AI1WMWE_PLUGIN_BASENAME;
 	}
 
 	return $plugins;
@@ -1303,52 +1315,6 @@ function ai1wm_copy( $source_file, $destination_file ) {
 }
 
 /**
- * Get the size of file in bytes
- *
- * This method supports files > 2GB on PHP x86
- *
- * @param string  $file_path Path to the file
- * @param boolean $as_string Return the filesize as string instead of BigInteger
- *
- * @return mixed Math_BigInteger|string|null
- */
-function ai1wm_filesize( $file_path, $as_string = true ) {
-	$chunk_size = 2000000; // 2MB
-	$file_size  = new Math_BigInteger( 0 );
-
-	try {
-		$file_handle = ai1wm_open( $file_path, 'rb' );
-
-		while ( ! feof( $file_handle ) ) {
-			$bytes     = ai1wm_read( $file_handle, $chunk_size );
-			$file_size = $file_size->add( new Math_BigInteger( strlen( $bytes ) ) );
-		}
-
-		ai1wm_close( $file_handle );
-
-		return $as_string ? $file_size->toString() : $file_size;
-	} catch ( Exception $e ) {
-		return null;
-	}
-}
-
-/**
- * Return the smaller of two numbers
- *
- * @param Math_BigInteger $a First number
- * @param Math_BigInteger $b Second number
- *
- * @return Math_BigInteger
- */
-function ai1wm_find_smaller_number( Math_BigInteger $a, Math_BigInteger $b ) {
-	if ( $a->compare( $b ) === -1 ) {
-		return $a;
-	}
-
-	return $b;
-}
-
-/**
  * Check whether file size is supported by current PHP version
  *
  * @param  string  $file         Path to file
@@ -1372,23 +1338,6 @@ function ai1wm_is_filesize_supported( $file, $php_int_size = PHP_INT_SIZE, $php_
 	}
 
 	return $size_result;
-}
-
-/**
- * Wrapper around fseek
- *
- * This function works with offsets that are > PHP_INT_MAX
- *
- * @param resource        $file_handle Handle to the file
- * @param Math_BigInteger $offset      Offset of the file
- */
-function ai1wm_fseek( $file_handle, Math_BigInteger $offset ) {
-	$chunk_size = ai1wm_find_smaller_number( new Math_BigInteger( 2000000 ), $offset );
-	while ( ! feof( $file_handle ) && $offset->toString() != '0' ) {
-		$bytes      = ai1wm_read( $file_handle, $chunk_size->toInteger() );
-		$offset     = $offset->subtract( new Math_BigInteger( strlen( $bytes ) ) );
-		$chunk_size = ai1wm_find_smaller_number( $chunk_size, $offset );
-	}
 }
 
 /**

@@ -51,7 +51,7 @@ function ctf_return_feed_types( $val ) {
 add_action( 'ctf_admin_upgrade_note', 'ctf_update_note' );
 function ctf_update_note() {
     ?>
-    <span class="ctf_note"> - <a href="https://smashballoon.com/custom-twitter-feeds/" target="_blank">Available in Pro version</a></span>
+    <span class="ctf_note"> - <a href="https://smashballoon.com/custom-twitter-feeds/?utm_source=plugin-free&utm_campaign=ctf" target="_blank">Available in Pro version</a></span>
     <?php
 }
 
@@ -60,7 +60,7 @@ function ctf_usertimeline_error_message( $args )
 { //sbi_notice sbi_user_id_error
     if ( $args['name'] == 'usertimeline') : ?>
         <div class="ctf_notice ctf_usertimeline_error">
-            <?php _e( "<p>Please use a single screenname or Twitter handle of numbers and letters. If you would like to use more than one screen name for your feed, please upgrade to our <a href='https://smashballoon.com/custom-twitter-feeds/' target='_blank'>Pro version</a>.</p>" ); ?>
+            <?php _e( "<p>Please use a single screenname or Twitter handle of numbers and letters. If you would like to use more than one screen name for your feed, please upgrade to our <a href='https://smashballoon.com/custom-twitter-feeds/?utm_source=plugin-free&utm_campaign=ctf' target='_blank'>Pro version</a>.</p>" ); ?>
         </div>
     <?php endif;
 }
@@ -69,7 +69,7 @@ add_action( 'ctf_admin_feed_settings_search_extra', 'ctf_hashtag_error_message' 
 function ctf_hashtag_error_message() {
     ?>
     <div class="ctf_notice ctf_search_error">
-        <?php _e( "<p>Please use a single hashtag of numbers and letters. If you would like to use more than one hashtag or use search terms for your feed, please upgrade to our <a href='https://smashballoon.com/custom-twitter-feeds/' target='_blank'>Pro version</a>.</p>" ); ?>
+        <?php _e( "<p>Please use a single hashtag of numbers and letters. If you would like to use more than one hashtag or use search terms for your feed, please upgrade to our <a href='https://smashballoon.com/custom-twitter-feeds/?utm_source=plugin-free&utm_campaign=ctf' target='_blank'>Pro version</a>.</p>" ); ?>
     </div>
     <?php
 }
@@ -148,15 +148,15 @@ function ctf_add_mentionstimeline_options( $admin ) {
 
 add_filter( 'ctf_admin_show_hide_list', 'ctf_show_hide_list', 10, 1 );
 function ctf_show_hide_list( $show_hide_list ) {
-    $show_hide_list[8] = array( 'include_replied_to', 'In reply to text' );
-    $show_hide_list[9] = array( 'include_media', 'Media (images, videos, gifs)' );
-    $show_hide_list[10] = array( 'include_twittercards', 'Twitter Cards' );
+    $show_hide_list[] = array( 'include_replied_to', 'In reply to text' );
+    $show_hide_list[] = array( 'include_media', 'Media (images, videos, gifs)' );
+    $show_hide_list[] = array( 'include_twittercards', 'Twitter Cards' );
     return $show_hide_list;
 }
 
 function ctf_pro_masonry_section() {
 	?>
-    <p class="ctf_pro_section_note"><a href="https://smashballoon.com/custom-twitter-feeds/" target="_blank">Upgrade to Pro to enable Masonry layouts</a></p>
+    <p class="ctf_pro_section_note"><a href="https://smashballoon.com/custom-twitter-feeds/?utm_source=plugin-free&utm_campaign=ctf" target="_blank">Upgrade to Pro to enable Masonry layouts</a></p>
     <span><a href="javascript:void(0);" class="button button-secondary ctf-show-pro"><b>+</b> Show Pro Options</a></span>
 
     <div class="ctf-pro-options">
@@ -189,7 +189,7 @@ function ctf_pro_masonry_section() {
 
 function ctf_pro_carousel_section() {
 	?>
-    <p class="ctf_pro_section_note"><a href="https://smashballoon.com/custom-twitter-feeds/" target="_blank">Upgrade to Pro to enable Carousel</a></p>
+    <p class="ctf_pro_section_note"><a href="https://smashballoon.com/custom-twitter-feeds/?utm_source=plugin-free&utm_campaign=ctf" target="_blank">Upgrade to Pro to enable Carousel</a></p>
     <span><a href="javascript:void(0);" class="button button-secondary ctf-show-pro"><b>+</b> Show Pro Options</a></span>
 
     <div class="ctf-pro-options">
@@ -251,7 +251,7 @@ function ctf_pro_carousel_section() {
 
 function ctf_pro_autoscroll_section() {
 	?>
-    <p class="ctf_pro_section_note"><a href="https://smashballoon.com/custom-twitter-feeds/" target="_blank">Upgrade to Pro to enable Autoscroll loading</a></p>
+    <p class="ctf_pro_section_note"><a href="https://smashballoon.com/custom-twitter-feeds/?utm_source=plugin-free&utm_campaign=ctf" target="_blank">Upgrade to Pro to enable Autoscroll loading</a></p>
     <span><a href="javascript:void(0);" class="button button-secondary ctf-show-pro"><b>+</b> Show Pro Options</a></span>
 
     <div class="ctf-pro-options">
@@ -271,7 +271,7 @@ function ctf_pro_autoscroll_section() {
 
 function ctf_pro_moderation_section() {
 	?>
-    <p class="ctf_pro_section_note"><a href="https://smashballoon.com/custom-twitter-feeds/" target="_blank">Upgrade to Pro to enable Tweet moderation</a></p>
+    <p class="ctf_pro_section_note"><a href="https://smashballoon.com/custom-twitter-feeds/?utm_source=plugin-free&utm_campaign=ctf" target="_blank">Upgrade to Pro to enable Tweet moderation</a></p>
     <span><a href="javascript:void(0);" class="button button-secondary ctf-show-pro"><b>+</b> Show Pro Options</a></span>
 
     <div class="ctf-pro-options">

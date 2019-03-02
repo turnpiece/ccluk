@@ -167,15 +167,17 @@ defined( 'ABSPATH' ) or exit;
 					<td class="nowrap">
 						<label>
 							<input type="radio" name="<?php echo $this->name_attr( 'enable_user_control' ); ?>" value="1" <?php checked( $this->options['enable_user_control'], 1 ); ?> />
-							<?php _e( 'Yes', 'mailchimp-for-wp' ); ?> &nbsp; <em><?php _e( '(recommended)', 'mailchimp-sync'); ?></em>
+							<?php _e( 'Yes', 'mailchimp-for-wp' ); ?> 
 						</label><br />
 						<label>
 							<input type="radio" name="<?php echo $this->name_attr( 'enable_user_control' ); ?>" value="0" <?php checked( $this->options['enable_user_control'], 0 ); ?> />
 							<?php _e( 'No', 'mailchimp-for-wp' ); ?>
 						</label>
 						<p class="help">
-							<?php _e( 'Select "no" if you do not want users to be able to manage their sign-up status from their profile page.', 'mailchimp-for-wp' ); ?> 
-							<?php printf( __( '<strong>Warning: </strong> this may affect your <a href="%s">GDPR compliance</a>.', 'mailchimp-sync' ), 'https://kb.mc4wp.com/gdpr-compliance/#utm_source=wp-plugin&utm_medium=mailchimp-for-wp&utm_campaign=integrations-page' ); ?> 
+							<?php _e( 'Select "yes" if you want users to manage their sign-up status from their profile page.', 'mailchimp-for-wp' ); ?>
+						</p>
+						<p class="help">
+							<?php printf( __( '<strong>Warning: </strong> enabling this may unsubscribe users that opt-in via other sign-up methods.', 'mailchimp-sync' ) ); ?>
 						</p>
 
 					</td>

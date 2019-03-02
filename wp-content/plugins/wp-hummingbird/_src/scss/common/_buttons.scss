@@ -3,10 +3,6 @@
  */
 
 .wpmud .wrap-wp-hummingbird {
-    .report-status .sui-tag {
-        margin-top: 10px;
-    }
-
     .wpdui-btn {
         font: 500 12px/16px $font !important;
         padding: 7px 16px;
@@ -18,34 +14,6 @@
         transition: all .3s ease;
         -webkit-transition: all .3s ease;
         text-shadow: none !important;
-    }
-}
-
-.wpmud .report-status button.sui-button-upsell {
-    margin-top: 10px !important;
-    text-transform: uppercase;
-    height: 30px;
-    line-height: 16px;
-    padding: 0 16px;
-
-    &:not(:disabled) {
-        background-color: #d1f1ea !important;
-        color: #1abc9c !important;
-
-        &:hover,
-        &:focus {
-            background-color: #d1f1ea !important;
-            color: #1abc9c !important;
-            border-color: #d1f1ea !important;
-        }
-    }
-
-    i {
-        color: #1abc9c;
-        font-size: 16px;
-        position: relative;
-        line-height: 16px;
-        top: 2px;
     }
 }
 

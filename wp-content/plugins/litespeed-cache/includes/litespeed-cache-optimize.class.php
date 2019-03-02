@@ -261,9 +261,14 @@ class LiteSpeed_Cache_Optimize
 	 */
 	public function remove_query_strings( $src )
 	{
-        if ( strpos( $src, '.js?' ) !== false || strpos( $src, '.css?' ) !== false ) {
-            $src = preg_replace( '/\?.*/', '', $src ) ;
-        }
+		if ( strpos( $src, '_litespeed_rm_qs=0' ) || strpos( $src, '/recaptcha' ) ) {
+			return $src ;
+		}
+
+		if ( strpos( $src, '.js?' ) !== false || strpos( $src, '.css?' ) !== false ) {
+			$src = preg_replace( '/\?.*/', '', $src ) ;
+		}
+
 		return $src ;
 	}
 
@@ -606,7 +611,7 @@ class LiteSpeed_Cache_Optimize
 			return ;
 		}
 
-		LiteSpeed_Cache_Log::debug( '[Optm] google fonts async found: ', $this->_ggfonts_urls ) ;
+		LiteSpeed_Cache_Log::debug2( '[Optm] google fonts async found: ', $this->_ggfonts_urls ) ;
 
 		$html = '<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />' ;
 
@@ -1050,7 +1055,7 @@ class LiteSpeed_Cache_Optimize
 			// Check Google fonts hit
 			if ( $this->cfg_ggfonts_rm || $this->cfg_ggfonts_async ) {
 				if ( strpos( $attrs[ 'href' ], 'fonts.googleapis.com' ) !== false ) {
-					LiteSpeed_Cache_Log::debug( '[Optm] rm css snippet [Google fonts] ' . $attrs[ 'href' ] ) ;
+					LiteSpeed_Cache_Log::debug2( '[Optm] rm css snippet [Google fonts] ' . $attrs[ 'href' ] ) ;
 					$this->content = str_replace( $match[ 0 ], '', $this->content ) ;
 
 					/**

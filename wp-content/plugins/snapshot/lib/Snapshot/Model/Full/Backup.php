@@ -70,7 +70,7 @@ class Snapshot_Model_Full_Backup extends Snapshot_Model_Full_Abstract {
 		if ( $this->_local->has_errors() ) {
 			return true;
 		}
-		return empty( $this->_errors );
+		return ! empty( $this->_errors );
 	}
 
 	/**
@@ -182,6 +182,19 @@ class Snapshot_Model_Full_Backup extends Snapshot_Model_Full_Abstract {
 		}
 
 		return ! empty( $plugins['wpmudev-updates/update-notifications.php'] );
+	}
+
+	/**
+	 * Site URL to activate dashboard plugin
+	 *
+	 * @return string URL for dash plugin activation
+	 *
+	 *
+	 */
+	public function get_activate_url() {
+		$function = is_multisite() ? 'network_admin_url' : 'admin_url';
+
+		return wp_nonce_url( $function( 'plugins.php?action=activate&plugin=wpmudev-updates%2Fupdate-notifications.php' ), 'activate-plugin_wpmudev-updates/update-notifications.php' );
 	}
 
 	/**

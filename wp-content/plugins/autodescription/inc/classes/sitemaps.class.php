@@ -8,7 +8,7 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2015 - 2018 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2015 - 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -1031,6 +1031,7 @@ class Sitemaps extends Metaboxes {
 
 		/**
 		 * @since 2.5.2
+		 * @since 3.2.2 Invalid URLs are now skipped.
 		 * @example return value: [ 'http://example.com' => [ 'lastmod' => '14-01-2018', 'priority' => 0.9 ] ]
 		 * @param array $custom_urls : {
 		 *    @param string (key) $url The absolute url to the page. : array {
@@ -1050,9 +1051,13 @@ class Sitemaps extends Metaboxes {
 					$url = $args;
 				}
 
+				$_url = \esc_url_raw( $url, [ 'http', 'https' ] );
+
+				if ( ! $_url ) continue;
+
 				$content .= "\t<url>\n";
 				//* No need to use static vars
-				$content .= "\t\t<loc>" . \esc_url_raw( $url, [ 'http', 'https' ] ) . "</loc>\n";
+				$content .= "\t\t<loc>" . $_url . "</loc>\n";
 
 				if ( isset( $args['lastmod'] ) && $args['lastmod'] ) {
 					$content .= "\t\t<lastmod>" . \mysql2date( $timestamp_format, $args['lastmod'], false ) . "</lastmod>\n";
@@ -1134,14 +1139,17 @@ class Sitemaps extends Metaboxes {
 	 * Ping search engines on post publish.
 	 *
 	 * @since 2.2.9
+	 * @since 2.8.0 Only worked when the blog was not public...
 	 * @since 3.1.0 Now allows one ping per language.
 	 *              @uses $this->add_cache_key_suffix()
+	 * @since 3.2.3 1. Now works as intended again.
+	 *              2. Removed Easter egg.
 	 *
 	 * @return void Early if blog is not public.
 	 */
 	public function ping_searchengines() {
 
-		if ( $this->get_option( 'site_noindex' ) || $this->is_blog_public() )
+		if ( $this->get_option( 'site_noindex' ) || ! $this->is_blog_public() )
 			return;
 
 		$transient = $this->add_cache_key_suffix( 'tsf_throttle_ping' );
@@ -1156,25 +1164,19 @@ class Sitemaps extends Metaboxes {
 			if ( $this->get_option( 'ping_bing' ) )
 				$this->ping_bing();
 
-			if ( $this->get_option( 'ping_yandex' ) )
-				$this->ping_yandex();
-
-			// Sorry, I couldn't help myself.
-			$throttle = 'Bert and Ernie are weird.';
-
 			/**
 			 * @since 2.5.1
 			 * @param int $expiration The minimum time between two pings.
 			 */
 			$expiration = (int) \apply_filters( 'the_seo_framework_sitemap_throttle_s', HOUR_IN_SECONDS );
 
-			//* @NOTE: Using legacy set_transient to prevent ping spam.
-			\set_transient( $transient, $throttle, $expiration );
+			//* @NOTE: Using legacy set_transient to bypass TSF's transient filters and prevent ping spam.
+			\set_transient( $transient, 1, $expiration );
 		}
 	}
 
 	/**
-	 * Ping Google
+	 * Pings the sitemap location to Google.
 	 *
 	 * @since 2.2.9
 	 * @since 3.1.0 Updated ping URL. Old one still worked, too.
@@ -1186,22 +1188,14 @@ class Sitemaps extends Metaboxes {
 	}
 
 	/**
-	 * Ping Bing
+	 * Pings the sitemap location to Bing.
 	 *
 	 * @since 2.2.9
+	 * @since 3.2.3 Updated ping URL. Old one still worked, too.
+	 * @link https://www.bing.com/webmaster/help/how-to-submit-sitemaps-82a15bd4
 	 */
 	public function ping_bing() {
-		$pingurl = 'http://www.bing.com/webmaster/ping.aspx?siteMap=' . urlencode( $this->get_sitemap_xml_url() );
-		\wp_safe_remote_get( $pingurl, [ 'timeout' => 3 ] );
-	}
-
-	/**
-	 * Ping Yandex
-	 *
-	 * @since 2.6.0
-	 */
-	public function ping_yandex() {
-		$pingurl = 'http://blogs.yandex.ru/pings/?status=success&url=' . urlencode( $this->get_sitemap_xml_url() );
+		$pingurl = 'http://www.bing.com/ping?sitemap=' . rawurlencode( $this->get_sitemap_xml_url() );
 		\wp_safe_remote_get( $pingurl, [ 'timeout' => 3 ] );
 	}
 
@@ -1225,22 +1219,14 @@ class Sitemaps extends Metaboxes {
 	 *
 	 * @since 2.3.0
 	 * @access private
-	 * @staticvar bool $flush
+	 * @staticvar bool $flush Determines whether a flush is enqueued.
 	 *
 	 * @param bool $enqueue Whether to enqueue the flush or return its state.
 	 * @return bool Whether to flush.
 	 */
 	public function enqueue_rewrite_activate( $enqueue = false ) {
-
 		static $flush = null;
-
-		if ( isset( $flush ) )
-			return $flush;
-
-		if ( $enqueue )
-			return $flush = true;
-
-		return false;
+		return $flush ?: $flush = $enqueue;
 	}
 
 	/**
@@ -1248,22 +1234,14 @@ class Sitemaps extends Metaboxes {
 	 *
 	 * @since 2.3.0
 	 * @access private
-	 * @staticvar bool $flush Only true
+	 * @staticvar bool $flush Determines whether a flush is enqueued.
 	 *
 	 * @param bool $enqueue Whether to enqueue the flush or return its state.
 	 * @return bool Whether to flush.
 	 */
 	public function enqueue_rewrite_deactivate( $enqueue = false ) {
-
 		static $flush = null;
-
-		if ( isset( $flush ) )
-			return $flush;
-
-		if ( $enqueue )
-			return $flush = true;
-
-		return false;
+		return $flush ?: $flush = $enqueue;
 	}
 
 	/**
@@ -1299,6 +1277,7 @@ class Sitemaps extends Metaboxes {
 	 * Flush rewrite rules on settings change.
 	 *
 	 * @since 2.6.6.1
+	 * @since 3.2.2 Now unsets the XSL stylesheet.
 	 * @access private
 	 * @global \WP_Rewrite $wp_rewrite
 	 */
@@ -1308,6 +1287,7 @@ class Sitemaps extends Metaboxes {
 		$wp_rewrite->init();
 
 		unset( $wp_rewrite->extra_rules_top['sitemap\.xml$'] );
+		unset( $wp_rewrite->extra_rules_top['sitemap\.xsl$'] );
 
 		$wp_rewrite->flush_rules( true );
 	}

@@ -23,6 +23,12 @@ $checks = $requirements_test['checks'];
 $all_good = $requirements_test['all_good'];
 $warning = $requirements_test['warning'];
 
+if ( version_compare(PHP_VERSION, '5.5.0', '<') ) {
+	$aws_sdk_compatible = false;
+} else {
+	$aws_sdk_compatible = true;
+}
+
 ?>
 
 <section id="header">
@@ -45,6 +51,7 @@ $this->render(
 
 	<input type="hidden" name="snapshot-ajax-nonce" id="snapshot-ajax-nonce" value="<?php echo esc_attr( wp_create_nonce( 'snapshot-ajax-nonce' ) ); ?>" />
 
+	<input type="hidden" id="snapshot-transitioned-purging" name="snapshot-transitioned-purging" value="1">
 	<?php wp_nonce_field( 'snapshot-nonce', 'snapshot-noonce-field' ); ?>
 	<div id="container" class="snapshot-three wps-page-wizard">
 
@@ -253,7 +260,7 @@ $this->render(
 										// This global is set within the next calling function. Helps determine which set of descriptions to show.
 										global $snapshot_destination_selected_type;
 
-										Snapshot_Helper_UI::destination_select_radio_boxes( $all_destinations, $selected_destination, $destinationClasses );
+										Snapshot_Helper_UI::destination_select_radio_boxes( $all_destinations, $selected_destination, $destinationClasses, $aws_sdk_compatible );
 										?>
 
 									</div>
@@ -1084,27 +1091,171 @@ $this->render(
 
 											</div>
 
-											<h3><?php esc_html_e( 'Storage Limit', SNAPSHOT_I18N_DOMAIN ); ?></h3>
+											<div id="clean-remote-count" class="clean-storage-limits" >
+												<h3><?php esc_html_e( 'Remote Destination Storage Limit', SNAPSHOT_I18N_DOMAIN ); ?></h3>
 
-											<div class="storage-inline-form">
+												<p>
+													<small><?php esc_html_e( 'Choose the number of snapshots to keep on the remote destination.', SNAPSHOT_I18N_DOMAIN ); ?></small>
+												</p>
 
-												<span class="inbetween">Keep</span>
+												<div class="wps-input--group">
 
-												<?php
-												if ( ! isset( $item['archive-count'] ) ) {
-													$item['archive-count'] = 3; // Default to limited number of recurring archives
-												}
+													<div class="wps-input--item">
 
-												?>
-												<input type="number" name="snapshot-archive-count" id="snapshot-archive-count"
-												       value="<?php echo esc_attr( $item['archive-count'] ); ?>" />
+														<div class="wps-input--radio">
 
-												<span class="inbetween"><?php esc_html_e( 'backups before removing older archives.', SNAPSHOT_I18N_DOMAIN ); ?></span>
+															<input type="radio" name="snapshot-clean-remote" class="snapshot-clean-remote-no" id="snapshot-clean-remote-no" value="0"
+															<?php
+															if ( ! isset( $item['transitioned-purging'] ) && isset( $item['clean-remote'] ) ) {
+																echo ( empty( $item['clean-remote'] ) || empty( $item['archive-count'] ) ) ? ' checked="checked" ' : '';
+															} else if ( ! isset( $item['clean-remote'] ) || empty( $item['clean-remote'] ) ) {
+																echo ' checked="checked" ';
+															}
+															?>
+															>
+
+															<label for="snapshot-clean-remote-no"></label>
+
+														</div>
+
+														<label for="snapshot-clean-remote-no"><?php esc_html_e( 'Keep all snapshots', SNAPSHOT_I18N_DOMAIN ); ?></label>
+
+													</div>
+
+													<div class="wps-input--item">
+
+														<div class="wps-input--radio">
+
+															<input type="radio" name="snapshot-clean-remote" class="snapshot-clean-remote-yes" id="snapshot-clean-remote-yes" value="1"
+															<?php
+															if ( ! isset( $item['transitioned-purging'] ) && isset( $item['clean-remote'] ) ) {
+																echo ! ( empty( $item['clean-remote'] ) || empty( $item['archive-count'] ) ) ? ' checked="checked" ' : '';
+															} else if ( isset( $item['transitioned-purging'] ) && isset( $item['clean-remote'] ) && $item['clean-remote'] ) {
+																echo ' checked="checked" ';
+															}
+															?>
+															>
+
+															<label for="snapshot-clean-remote-yes"></label>
+
+														</div>
+
+														<label for="snapshot-clean-remote-yes"><?php esc_html_e( 'Keep a certain number of latest snapshots and remove the oldest', SNAPSHOT_I18N_DOMAIN ); ?></label>
+
+													</div>
+
+												</div>
+
+												<div id="remote-count">
+
+													<label class="label-title">Choose the number of snapshots to keep at the remote destination</label>
+
+													<div class="storage-inline-form">
+
+														<?php
+														if ( ! isset( $item['transitioned-purging'] ) ) {
+															$item['remote-archive-count'] = isset( $item['archive-count'] ) ? $item['archive-count'] : 3;
+														} else if ( ! isset( $item['remote-archive-count'] ) || 1 > intval( $item['remote-archive-count'] )  ) {
+															$item['remote-archive-count'] = 3; // Default to 3 recurring archives
+														}
+
+														?>
+														<input type="number" name="snapshot-remote-archive-count" id="snapshot-remote-archive-count" min="1"
+															value="<?php echo esc_attr( $item['remote-archive-count'] ); ?>" />
+
+													</div>
+
+													<p>
+														<small><?php esc_html_e( 'You need to keep at least 1 snapshot. We\'ll keep the latest snapshots and keep deleting the older ones.', SNAPSHOT_I18N_DOMAIN ); ?></small>
+													</p>
+
+												</div>
+
 											</div>
 
-											<p>
-												<small><?php esc_html_e( 'Snapshot will run backups as per your schedule and send them to your chosen destination. In addition to sending the copy off site we keep a local copy just in case things go wrong. Here you can specify how many local archives to keep before removing the oldest. If you put 0 here, Snapshot will keep all local archives.', SNAPSHOT_I18N_DOMAIN ); ?></small>
-											</p>
+											<div id="clean-local-count" class="clean-storage-limits" >
+												<h3><?php esc_html_e( 'Local Storage Limit', SNAPSHOT_I18N_DOMAIN ); ?></h3>
+
+												<p>
+													<small><?php esc_html_e( 'In addition to sending the snapshot to your chosen destination, we keep a local copy just in case things go wrong. Here you can specify how many latest snapshots to keep locally before removing the oldest.', SNAPSHOT_I18N_DOMAIN ); ?></small>
+												</p>
+
+												<div class="wps-input--group">
+
+													<div class="wps-input--item">
+
+														<div class="wps-input--radio">
+
+															<input type="radio" name="snapshot-clean-local" class="snapshot-clean-local-no" id="snapshot-clean-local-no" value="0"
+															<?php
+															if ( ! isset( $item['transitioned-purging'] ) ) {
+																if ( ! isset( $item['archive-count'] ) || ! intval( $item['archive-count'] ) ) {
+																	echo ' checked="checked" ';
+																}
+															} else if ( ! isset( $item['clean-local'] ) || ! $item['clean-local'] ) {
+																echo ' checked="checked" ';
+															}
+															?>
+															>
+
+															<label for="snapshot-clean-local-no"></label>
+
+														</div>
+
+														<label for="snapshot-clean-local-no"><?php esc_html_e( 'Keep a local copy of all the snapshots', SNAPSHOT_I18N_DOMAIN ); ?></label>
+
+													</div>
+
+													<div class="wps-input--item">
+
+														<div class="wps-input--radio">
+
+															<input type="radio" name="snapshot-clean-local" class="snapshot-clean-local-yes" id="snapshot-clean-local-yes" value="1"
+															<?php
+															if ( ! isset( $item['transitioned-purging'] ) ) {
+																if ( isset( $item['archive-count'] ) && intval( $item['archive-count'] ) ) {
+																	echo ' checked="checked" ';
+																}
+															} else if ( isset( $item['clean-local'] ) && $item['clean-local'] ) {
+																echo ' checked="checked" ';
+															}
+															?>
+															>
+
+															<label for="snapshot-clean-local-yes"></label>
+
+														</div>
+
+														<label for="snapshot-clean-local-yes"><?php esc_html_e( 'Keep a local copy of a certain number of latest snapshots only', SNAPSHOT_I18N_DOMAIN ); ?></label>
+
+													</div>
+
+												</div>
+
+												<div id="local-count">
+
+													<label class="label-title">Choose the number of snapshots to keep locally</label>
+
+													<div class="storage-inline-form">
+
+														<?php
+														if ( ! isset( $item['archive-count'] ) || 1 > intval( $item['archive-count'] ) ) {
+															$item['archive-count'] = 3; // Default to 3 recurring archives
+														}
+
+														?>
+														<input type="number" name="snapshot-archive-count" id="snapshot-archive-count" min="1"
+														value="<?php echo esc_attr( $item['archive-count'] ); ?>" />
+
+													</div>
+
+													<p>
+														<small><?php esc_html_e( 'You need to keep at least 1 snapshot locally. This will help you quickly restore the latest snapshot.', SNAPSHOT_I18N_DOMAIN ); ?></small>
+													</p>
+
+												</div>
+
+											</div>
 
 											<h3><?php esc_html_e( 'Optional', SNAPSHOT_I18N_DOMAIN ); ?></h3>
 
@@ -1122,15 +1273,6 @@ $this->render(
 
 											</div>
 
-<div class="wps-input--item">
-	<div class="wps-input--checkbox">
-		<input type="checkbox" id="snapshot-clean-remote" name="snapshot-clean-remote" <?php echo !empty($item['clean-remote']) ? 'checked' : ''; ?> value="1" />
-		<label for="snapshot-clean-remote"></label>
-	</div>
-	<label for="snapshot-clean-remote">
-		<?php esc_html_e('Also clean remote repositories', SNAPSHOT_I18N_DOMAIN); ?>
-	</label>
-</div>
 										</div>
 
 									</div>
@@ -1189,7 +1331,21 @@ $this->render(
 
 										<a class="button button-gray" href="<?php echo esc_url( WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url( 'snapshots-newui-snapshots' ) ); ?>"><?php esc_html_e( 'Cancel', SNAPSHOT_I18N_DOMAIN ); ?></a>
 
-										<button id="snapshot-add-update-submit" data-title-save-only="<?php esc_html_e( 'Save', SNAPSHOT_I18N_DOMAIN ); ?>" data-title-save-and-run="<?php esc_html_e( 'Save & Run Backup', SNAPSHOT_I18N_DOMAIN ); ?>" type="submit" class="button button-blue"><?php esc_html_e( 'Save & Run Backup', SNAPSHOT_I18N_DOMAIN ); ?></button>
+										<?php
+										if ( isset( $item['destination'] ) ) {
+
+											$destination_key = $item['destination'];
+
+											if ( isset( WPMUDEVSnapshot::instance()->config_data['destinations'][ $destination_key ] ) ) {
+
+												$destination = WPMUDEVSnapshot::instance()->config_data['destinations'][ $destination_key ];
+
+											}
+
+										}
+										?>
+
+										<button id="snapshot-add-update-submit" data-title-save-only="<?php esc_html_e( 'Save', SNAPSHOT_I18N_DOMAIN ); ?>" data-title-save-and-run="<?php esc_html_e( 'Save & Run Backup', SNAPSHOT_I18N_DOMAIN ); ?>" type="submit" class="button button-blue <?php echo ( ( ! $aws_sdk_compatible ) && ( 'aws' === $destination['type'] ) ) ? 'disabled': ''; ?>"><?php esc_html_e( 'Save & Run Backup', SNAPSHOT_I18N_DOMAIN ); ?></button>
 
 
 									</div>

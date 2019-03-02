@@ -129,7 +129,7 @@ class Snapshot_Helper_Backup {
 	 *
 	 * @param string $idx Index of the session to load.
 	 *
-	 * @return object Snapshot_Helper_Session instance
+	 * @return Snapshot_Helper_Session session instance
 	 */
 	public static function get_session( $idx ) {
 		$loc = trailingslashit( WPMUDEVSnapshot::instance()->get_setting( 'backupSessionFolderFull' ) );
@@ -200,7 +200,7 @@ class Snapshot_Helper_Backup {
 	 *
 	 * @param string $idx Backup index to load.
 	 *
-	 * @return mixed Snapshot_Helper_Backup instance on success, (bool)false on failure
+	 * @return Snapshot_Helper_Backup|bool instance on success, (bool)false on failure
 	 */
 	public static function load( $idx ) {
 		$session = self::get_session( $idx );

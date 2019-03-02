@@ -76,21 +76,12 @@ import Fetcher from './utils/fetcher';
         },
 
 		/**
-         * Run quick setup.
-		 */
-		startQuickSetup: function () {
-            // Show quick setup modal
-            SUI.dialogs['wphb-quick-setup-modal'].show();
-
-        },
-
-		/**
          * Skip quick setup.
 		 */
 		skipSetup: function () {
             Fetcher.dashboard.skipSetup()
                 .then( () => {
-                    window.location.reload(true);
+                    location.reload();
                 });
         },
 

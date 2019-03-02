@@ -2,6 +2,9 @@
 	// page ID or "slug"
 	window.SS_PAGES.snapshot_page_snapshot_pro_snapshot_create = function () {
 
+		// Check if there are hidden invalid values in storage limits. Mainly for taking care of existing snapshots updating to 3.2.
+		validate_archive_count("all", false);
+
 		jQuery("input[name='frequency']").change(function () {
 			var backup_frequency_options = jQuery("input[name='frequency']:checked").val();
 			if ((backup_frequency_options === "once")) {
@@ -20,6 +23,53 @@
 			}
 		}).change();
 
+		jQuery("input[name='snapshot-clean-remote']").change(function () {
+			var clean_remotes = jQuery("input[name='snapshot-clean-remote']:checked").val();
+			if (clean_remotes === "1") {
+				jQuery('div#remote-count').slideDown('fast');
+				validate_archive_count("remote", "enable");
+			} else {
+				jQuery('div#remote-count').slideUp('fast');
+				validate_archive_count("remote", "disable");
+			}
+		}).change();
+
+		jQuery("input[name='snapshot-clean-local']").change(function () {
+			var clean_locals = jQuery("input[name='snapshot-clean-local']:checked").val();
+			if (clean_locals === "1") {
+				jQuery('div#local-count').slideDown('fast');
+				validate_archive_count("local", "enable");
+			} else {
+				jQuery('div#local-count').slideUp('fast');
+				validate_archive_count("local", "disable");
+			}
+		}).change();
+
+		function validate_archive_count(storage, state) {
+			if (storage === "remote") {
+				if (state === "enable") {
+					jQuery('input#snapshot-remote-archive-count').attr('disabled', false);
+				} else {
+					jQuery('input#snapshot-remote-archive-count').attr('disabled', 'disabled');
+				}
+			} else if (storage === "local") {
+				if (state === "enable") {
+					jQuery('input#snapshot-archive-count').attr('disabled', false);
+				} else {
+					jQuery('input#snapshot-archive-count').attr('disabled', 'disabled');
+				}
+			} if (storage === "all") {
+				if (jQuery("input[name='snapshot-clean-local']:checked").val() !== "1") {
+					jQuery('input#snapshot-archive-count').attr('disabled', 'disabled');
+				}
+				if (jQuery("input[name='snapshot-clean-remote']:checked").val() !== "1") {
+					jQuery('input#snapshot-remote-archive-count').attr('disabled', 'disabled');
+				}
+			}
+
+			return false;
+		}
+
 		jQuery("#checkbox-run-backup-now").change(function () {
 			if ($(this).is(':checked') && jQuery("input[name='frequency']:checked").val() !== "once") {
 				jQuery('#snapshot-add-update-submit').text(jQuery('#snapshot-add-update-submit').data('title-save-and-run'));
@@ -37,6 +87,12 @@
 			} else {
 				jQuery('input#snapshot-destination-sync-mirror').attr('disabled', 'disabled');
 				jQuery('input#snapshot-destination-sync-archive').attr('checked', 'checked');
+			}
+
+			if (destination_type == "local") {
+				jQuery('div#clean-remote-count').slideUp('fast');
+			} else {
+				jQuery('div#clean-remote-count').slideDown('fast');
 			}
 		}).change();
 
@@ -213,6 +269,8 @@
 			e.preventDefault();
 
 			var snapshot_form_archive_count = jQuery('input#snapshot-archive-count', this).val();
+			var snapshot_form_remote_archive_count = jQuery('input#snapshot-remote-archive-count', this).val();
+
 
 			var snapshot_form_destination = jQuery('[name=snapshot-destination]:checked', this).val();
 			var snapshot_destination_local = jQuery('select#snapshot-destination-local', this).val();
@@ -232,7 +290,22 @@
 			//var snapshot_form_files_option		= jQuery('input:radio["name=snapshot-files-option"]:checked').val();
 			snapshot_form_files_option = jQuery('input:radio[name=snapshot-files-option]:checked', this).val();
 
-			var snapshot_clean_remote = jQuery("#snapshot-clean-remote", this).is(":checked") ? '1' : '';
+			if (jQuery('input:radio[name=snapshot-clean-remote]:checked', this).val() === "1") {
+				var snapshot_clean_remote = 1;
+			} else {
+				var snapshot_clean_remote = 0;
+				snapshot_form_remote_archive_count = false;
+			}
+
+			if (jQuery('input:radio[name=snapshot-clean-local]:checked', this).val() === "1") {
+				var snapshot_clean_local = 1;
+			} else {
+				var snapshot_clean_local = 0;
+				snapshot_form_archive_count = false;
+			}
+
+			// Set the backwards compatibility flag.
+			var snapshot_transitioned_purging = jQuery('input#snapshot-transitioned-purging', this).val();
 
 			// Clear out the progress text and warning containers
 			jQuery('#snapshot-ajax-warning').html('').hide();
@@ -299,11 +372,14 @@
 						'snapshot-tables-array': snapshot_form_tables_array,
 						'snapshot-interval': snapshot_form_interval,
 						'snapshot-archive-count': snapshot_form_archive_count,
+						'snapshot-remote-archive-count': snapshot_form_remote_archive_count,
 						'snapshot-destination': snapshot_form_destination,
 						'snapshot-store-local': snapshot_destination_local,
 						'snapshot-destination-directory': snapshot_form_destination_directory,
 						'snapshot-destination-sync': snapshot_form_destination_sync,
 						'snapshot-clean-remote': snapshot_clean_remote,
+						'snapshot-clean-local': snapshot_clean_local,
+						'snapshot-transitioned-purging': snapshot_transitioned_purging,
 						'security': security,
 					};
 

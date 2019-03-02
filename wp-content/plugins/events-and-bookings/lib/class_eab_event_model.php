@@ -590,6 +590,12 @@ class Eab_EventModel extends WpmuDev_DatedVenuePremiumModel {
 		$instances = $this->_get_recurring_instances_timestamps($start, $end, $interval, $time_parts);
 
 		$duration = (float)@$time_parts['duration'];
+
+		if( false !== strpos( $time_parts['duration'], ':') ){
+			list( $hours, $minutes ) = explode( ':', $time_parts['duration'] );
+			$duration = ( $minutes * MINUTE_IN_SECONDS ) + ( $hours * HOUR_IN_SECONDS );
+		}
+
 		$duration = $duration ? $duration : 1;
 
 		$venue = $this->get_venue();
@@ -627,7 +633,7 @@ class Eab_EventModel extends WpmuDev_DatedVenuePremiumModel {
 				}
 
 				update_post_meta($post_id, 'incsub_event_start', date("Y-m-d H:i:s", $instance));
-				update_post_meta($post_id, 'incsub_event_end', date("Y-m-d H:i:s", $instance + ($duration * 3600)));
+				update_post_meta($post_id, 'incsub_event_end', date("Y-m-d H:i:s", $instance + $duration ));
 				update_post_meta($post_id, 'incsub_event_venue', $venue);
 				update_post_meta($post_id, 'incsub_event_status', self::STATUS_OPEN);
 				if ($this->is_premium()) {
@@ -641,10 +647,13 @@ class Eab_EventModel extends WpmuDev_DatedVenuePremiumModel {
 			}
 		}
 
+        $new_post_ids = $this->_get_recurring_children_ids();
+
 		if ($old_post_ids) {
-			$new_post_ids = $this->_get_recurring_children_ids();
 			$this->_remap_bookings($old_post_ids, $new_post_ids);
 		}
+
+		do_action( 'eab-events-spawn_recurring_instances-after', $old_post_ids, $new_post_ids );
 	}
 
 	protected function _remap_bookings ($old, $new) {
@@ -796,7 +805,7 @@ class Eab_EventModel extends WpmuDev_DatedVenuePremiumModel {
 			$month_days = date('t', $start)*86400;
 			for ($i = $start; $i <= $end; $i+=$month_days) {
 				$month_days = date('t', $i)*86400;
-				$timestamp = date("Y-m-" . $time_parts['day'], $i) . ' ' . $time_parts['time'];
+				$timestamp = date("Y-m-d", $i) . ' ' . $time_parts['time'];
 				$unix_timestamp = strtotime($timestamp);
 				$check = $unix_timestamp >= $start && checkdate((int)date('n', $unix_timestamp), (int)date('j', $unix_timestamp), (int)date('Y', $unix_timestamp));
 				if ( date( 'Y-m-d', $unix_timestamp ) > date( 'Y-m-d', $end ) )
@@ -1084,21 +1093,63 @@ class Eab_EventModel extends WpmuDev_DatedVenuePremiumModel {
 	}
 
 	public function cancel_attendance ($user_id=false) {
+
 		$user_id = (int)$this->_to_user_id($user_id);
-		if (!$user_id) return false;
-		if ($this->is_premium() && $this->user_paid()) return false; // Can't edit attendance for paid premium events
+        if ( ! $user_id ) return false;
+
+		// Optional via filter
+		// Can't edit attendance for paid premium events
+		if ( $this->user_paid( $user_id ) ) {
+
+			if (
+				apply_filters( 'eab-rsvp_forbid-cancel-paid', false, $this, $user_id ) &&
+				$this->is_premium()
+			) {
+
+				return false;
+			}
+
+			// If it is paid we need to remove payment too
+			// In case we need to keep the payment, use the `eab-rsvp_can-cancel-payment` filter
+			if(
+				apply_filters( 'eab-rsvp_can-cancel-payment', true, $this, $user_id ) &&
+				! $this->cancel_payment( $user_id ) ) {
+					return false;
+			}
+
+		}
 
 		global $wpdb;
 		return $wpdb->query($wpdb->prepare("UPDATE " . Eab_EventsHub::tablename(Eab_EventsHub::BOOKING_TABLE) . " SET status='no' WHERE event_id = %d AND user_id = %d LIMIT 1;", $this->get_id(), $user_id));
+
 	}
 
+	public function cancel_payment( $user_id = false ) {
+
+		if ( ! $user_id ) return false;
+
+ 		global $wpdb;
+
+		$booking_id = $this->get_user_booking_id( $user_id );
+		$meta_table = Eab_EventsHub::tablename( Eab_EventsHub::BOOKING_META_TABLE );
+		$query = $wpdb->prepare( "DELETE FROM {$meta_table} WHERE booking_id = %d AND meta_key = 'booking_transaction_key'", $booking_id );
+
+		// Used for MarketPress Integration
+		do_action( 'eab-rsvp_before_cancel_payment', $this, $user_id );
+
+		return $wpdb->query( $query );
+
+ 	}
+
 	public function delete_attendance ($user_id=false) {
+
 		$user_id = (int)$this->_to_user_id($user_id);
 		if (!$user_id) return false;
 		if ($this->is_premium() && $this->user_paid($user_id)) return false; // Can't edit attendance for paid premium events
 
 		global $wpdb;
 		return $wpdb->query($wpdb->prepare("DELETE FROM " . Eab_EventsHub::tablename(Eab_EventsHub::BOOKING_TABLE) . " WHERE event_id = %d AND user_id = %d LIMIT 1;", $this->get_id(), $user_id));
+
 	}
 
 	public function add_attendance ($user_id, $status) {

@@ -18,7 +18,6 @@ $is_running = time() - $meta[ 'is_running' ] <= $_options[LiteSpeed_Cache_Config
 
 $disabled = LiteSpeed_Cache_Router::can_crawl() ? '' : 'disabled' ;
 
-LiteSpeed_Cache_GUI::show_promo() ;
 ?>
 
 <div class="wrap">
@@ -178,10 +177,7 @@ LiteSpeed_Cache_GUI::show_promo() ;
 					?>
 					</td>
 					<td>
-						<?php echo ucfirst( $v[ 'role_title' ] ) ; ?>
-						<?php if ( $v[ 'webp' ] ) {
-							echo ' - WebP' ;
-						} ?>
+						<?php echo $v[ 'title' ] ; ?>
 					</td>
 					<td><?php echo $recurrence ; ?></td>
 					<td><?php echo "Size: $meta[list_size]" ; ?></td>

@@ -1,8 +1,8 @@
 <h3><?php _e( 'Need help?', 'custom-twitter-feeds' ); ?></h3>
 
-<p><span class="fa fa-life-ring" aria-hidden="true"></span>&nbsp; <?php _e( 'Check out our ', 'custom-twitter-feeds'); ?><a href="https://smashballoon.com/custom-twitter-feeds/docs/" target="_blank"><?php _e( 'setup directions', 'custom-twitter-feeds' ); ?></a> <?php _e( 'for a step-by-step guide on how to setup and use the plugin', 'custom-twitter-feeds' ); ?>.</p>
+<p><span class="fa fa-life-ring" aria-hidden="true"></span>&nbsp; <?php _e( 'Check out our ', 'custom-twitter-feeds'); ?><a href="https://smashballoon.com/custom-twitter-feeds/docs/?utm_source=plugin-free&utm_campaign=ctf" target="_blank"><?php _e( 'setup directions', 'custom-twitter-feeds' ); ?></a> <?php _e( 'for a step-by-step guide on how to setup and use the plugin', 'custom-twitter-feeds' ); ?>.</p>
 
-<p><span class="fa fa-envelope" aria-hidden="true"></span>&nbsp; <?php _e( 'Have a problem? Submit a ', 'custom-twitter-feeds' ); ?><a href="https://smashballoon.com/custom-twitter-feeds/support/" target="_blank"><?php _e( 'support ticket', 'custom-twitter-feeds' ); ?></a> <?php _e( 'on our website', 'custom-twitter-feeds' ); ?>.  <?php _e( 'Please include your <b>System Info</b> below with all support requests.', 'custom-twitter-feeds'  ); ?></p>
+<p><span class="fa fa-envelope" aria-hidden="true"></span>&nbsp; <?php _e( 'Have a problem? Submit a ', 'custom-twitter-feeds' ); ?><a href="https://smashballoon.com/custom-twitter-feeds/support/?utm_source=plugin-free&utm_campaign=ctf" target="_blank"><?php _e( 'support ticket', 'custom-twitter-feeds' ); ?></a> <?php _e( 'on our website', 'custom-twitter-feeds' ); ?>.  <?php _e( 'Please include your <b>System Info</b> below with all support requests.', 'custom-twitter-feeds'  ); ?></p>
 
 <br />
 <h3><?php _e('System Info', 'custom-twitter-feeds' ); ?> &nbsp; <span style="color: #666; font-size: 11px; font-weight: normal;"><?php _e( 'Click the text below to select all', 'custom-twitter-feeds' ); ?></span></h3>

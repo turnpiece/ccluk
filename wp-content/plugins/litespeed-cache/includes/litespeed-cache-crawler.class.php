@@ -22,6 +22,8 @@ class LiteSpeed_Cache_Crawler
 	private $_home_url ;
 	const CRWL_BLACKLIST = 'crawler_blacklist' ;
 
+	private $_options ;
+
 	/**
 	 * Initialize crawler, assign sitemap path
 	 *
@@ -41,6 +43,8 @@ class LiteSpeed_Cache_Crawler
 			$this->_home_url = get_home_url() ;
 		}
 		$this->_blacklist_file = $this->_sitemap_file . '.blacklist' ;
+
+		$this->_options = LiteSpeed_Cache_Config::get_instance()->get_options() ;
 
 		LiteSpeed_Cache_Log::debug('Crawler: Initialized') ;
 	}
@@ -101,7 +105,7 @@ class LiteSpeed_Cache_Crawler
 		}
 		$content = $_POST[ self::CRWL_BLACKLIST ] ;
 		$content = array_map( 'trim', explode( "\n", $content ) ) ;// remove space
-		$content = implode( "\n", array_filter( $content ) ) ;
+		$content = implode( "\n", array_unique( array_filter( $content ) ) ) ;
 
 		// save blacklist file
 		$ret = Litespeed_File::save( $this->_blacklist_file, $content, true, false, false ) ;
@@ -135,6 +139,7 @@ class LiteSpeed_Cache_Crawler
 		$ori_list = array_merge( $ori_list, $list ) ;
 		$ori_list = array_map( 'trim', $ori_list ) ;
 		$ori_list = array_filter( $ori_list ) ;
+		$ori_list = array_unique( $ori_list ) ;
 		$content = implode( "\n", $ori_list ) ;
 
 		// save blacklist
@@ -255,7 +260,7 @@ class LiteSpeed_Cache_Crawler
 	protected function _generate_sitemap()
 	{
 		// use custom sitemap
-		if ( $sitemap = LiteSpeed_Cache::config( LiteSpeed_Cache_Config::CRWL_CUSTOM_SITEMAP ) ) {
+		if ( $sitemap = $this->_options[ LiteSpeed_Cache_Config::CRWL_CUSTOM_SITEMAP ] ) {
 			$sitemap_urls = $this->parse_custom_sitemap( $sitemap ) ;
 			$urls = array() ;
 			$offset = strlen( $this->_home_url ) ;
@@ -266,6 +271,7 @@ class LiteSpeed_Cache_Crawler
 					}
 				}
 			}
+			$urls = array_unique( $urls ) ;
 		}
 		else {
 			$urls = LiteSpeed_Cache_Crawler_Sitemap::get_instance()->generate_data() ;
@@ -379,13 +385,11 @@ class LiteSpeed_Cache_Crawler
 			}
 		}
 
-		$options = LiteSpeed_Cache_Config::get_instance()->get_options() ;
-
 		$crawler = new Litespeed_Crawler($this->_sitemap_file) ;
 		// if finished last time, regenerate sitemap
 		if ( $last_fnished_at = $crawler->get_done_status() ) {
 			// check whole crawling interval
-			if ( ! $force && time() - $last_fnished_at < $options[LiteSpeed_Cache_Config::CRWL_CRAWL_INTERVAL] ) {
+			if ( ! $force && time() - $last_fnished_at < $this->_options[LiteSpeed_Cache_Config::CRWL_CRAWL_INTERVAL] ) {
 				LiteSpeed_Cache_Log::debug('Crawler: Cron abort: cache warmed already.') ;
 				// if not reach whole crawling interval, exit
 				return;
@@ -394,20 +398,20 @@ class LiteSpeed_Cache_Crawler
 			$this->_generate_sitemap() ;
 		}
 		$crawler->set_base_url($this->_home_url) ;
-		$crawler->set_run_duration($options[LiteSpeed_Cache_Config::CRWL_RUN_DURATION]) ;
+		$crawler->set_run_duration($this->_options[LiteSpeed_Cache_Config::CRWL_RUN_DURATION]) ;
 
 		/**
 		 * Limit delay to use server setting
 		 * @since 1.8.3
 		 */
-		$usleep = $options[ LiteSpeed_Cache_Config::CRWL_USLEEP ] ;
+		$usleep = $this->_options[ LiteSpeed_Cache_Config::CRWL_USLEEP ] ;
 		if ( ! empty( $_SERVER[ LiteSpeed_Cache_Config::ENV_CRAWLER_USLEEP ] ) && $_SERVER[ LiteSpeed_Cache_Config::ENV_CRAWLER_USLEEP ] > $usleep ) {
 			$usleep = $_SERVER[ LiteSpeed_Cache_Config::ENV_CRAWLER_USLEEP ] ;
 		}
 		$crawler->set_run_delay( $usleep ) ;
-		$crawler->set_threads_limit( $options[ LiteSpeed_Cache_Config::CRWL_THREADS ] ) ;
+		$crawler->set_threads_limit( $this->_options[ LiteSpeed_Cache_Config::CRWL_THREADS ] ) ;
 
-		$server_load_limit = $options[ LiteSpeed_Cache_Config::CRWL_LOAD_LIMIT ] ;
+		$server_load_limit = $this->_options[ LiteSpeed_Cache_Config::CRWL_LOAD_LIMIT ] ;
 		if ( ! empty( $_SERVER[ LiteSpeed_Cache_Config::ENV_CRAWLER_LOAD_LIMIT_ENFORCE ] ) ) {
 			$server_load_limit = $_SERVER[ LiteSpeed_Cache_Config::ENV_CRAWLER_LOAD_LIMIT_ENFORCE ] ;
 		}
@@ -415,8 +419,8 @@ class LiteSpeed_Cache_Crawler
 			$server_load_limit = $_SERVER[ LiteSpeed_Cache_Config::ENV_CRAWLER_LOAD_LIMIT ] ;
 		}
 		$crawler->set_load_limit( $server_load_limit ) ;
-		if ( $options[LiteSpeed_Cache_Config::CRWL_DOMAIN_IP] ) {
-			$crawler->set_domain_ip($options[LiteSpeed_Cache_Config::CRWL_DOMAIN_IP]) ;
+		if ( $this->_options[LiteSpeed_Cache_Config::CRWL_DOMAIN_IP] ) {
+			$crawler->set_domain_ip($this->_options[LiteSpeed_Cache_Config::CRWL_DOMAIN_IP]) ;
 		}
 
 		// Get current crawler
@@ -431,28 +435,51 @@ class LiteSpeed_Cache_Crawler
 			$curr_crawler_pos = 0 ;
 		}
 		$current_crawler = $crawlers[ $curr_crawler_pos ] ;
+
+		$cookies = array() ;
 		/**
 		 * Set role simulation
 		 * @since 1.9.1
 		 */
-		if ( $current_crawler[ 'uid' ] ) {
+		if ( ! empty( $current_crawler[ 'uid' ] ) ) {
 			// Get role simulation vary name
 			$vary_inst = LiteSpeed_Cache_Vary::get_instance() ;
 			$vary_name = $vary_inst->get_vary_name() ;
 			$vary_val = $vary_inst->finalize_default_vary( $current_crawler[ 'uid' ] ) ;
-			$cookies = array(
-				$vary_name => $vary_val,
-				'litespeed_role' => $current_crawler[ 'uid' ],
-			) ;
+			$cookies[ $vary_name ] = $vary_val ;
+			$cookies[ 'litespeed_role' ] = $current_crawler[ 'uid' ] ;
+		}
 
+		/**
+		 * Check cookie crawler
+		 * @since  2.8
+		 */
+		foreach ( $current_crawler as $k => $v ) {
+			if ( strpos( $k, 'cookie:') !== 0 ) {
+				continue ;
+			}
+
+			$cookies[ substr( $k, 7 ) ] = $v ;
+		}
+
+		if ( $cookies ) {
 			$crawler->set_cookies( $cookies ) ;
 		}
+
 		/**
 		 * Set WebP simulation
 		 * @since  1.9.1
 		 */
-		if ( $current_crawler[ 'webp' ] ) {
+		if ( ! empty( $current_crawler[ 'webp' ] ) ) {
 			$crawler->set_headers( array( 'Accept: image/webp,*/*' ) ) ;
+		}
+
+		/**
+		 * Set mobile crawler
+		 * @since  2.8
+		 */
+		if ( ! empty( $current_crawler[ 'mobile' ] ) ) {
+			$crawler->set_ua( 'Mobile' ) ;
 		}
 
 		$ret = $crawler->engine_start() ;
@@ -487,28 +514,34 @@ class LiteSpeed_Cache_Crawler
 	 */
 	public function list_crawlers( $count_only = false )
 	{
-		// Get roles set
-		$roles = LiteSpeed_Cache_Config::get_instance()->get_item( LiteSpeed_Cache_Config::ITEM_CRWL_AS_UIDS ) ;
+		/**
+		 * Data structure:
+		 * 	[
+		 * 		tagA => [
+		 * 			valueA => titleA,
+		 * 			valueB => titleB
+		 * 			...
+		 * 		],
+		 * 		...
+		 * 	]
+		 */
+		$crawler_factors = array() ;
+
+		// Add default Guest crawler
+		$crawler_factors[ 'uid' ] = array( 0 => __( 'Guest', 'litespeed-cache' ) ) ;
 
 		// WebP on/off
-		$webp = LiteSpeed_Cache_Media::webp_enabled() ;
-
-		if ( $count_only ) {
-			$count = count( $roles ) + 1 ;
-			if ( $webp ) {
-				$count *= 2 ;
-			}
-			return $count ;
+		if ( LiteSpeed_Cache_Media::webp_enabled() ) {
+			$crawler_factors[ 'webp' ] = array( 0 => '', 1 => 'WebP' ) ;
 		}
 
-		$crawler_list = array(
-			array( 'uid' => 0, 'role_title' => __( 'Guest', 'litespeed-cache' ), 'webp' => 0 ),
-		) ;
-
-		if ( $webp ) {
-			$crawler_list[] = array( 'uid' => 0, 'role_title' => __( 'Guest', 'litespeed-cache' ), 'webp' => 1 ) ;
+		// Mobile crawler
+		if ( $this->_options[ LiteSpeed_Cache_Config::OPID_CACHE_MOBILE ] ) {
+			$crawler_factors[ 'mobile' ] = array( 0 => '', 1 => '<font title="Mobile">📱</font>' ) ;
 		}
 
+		// Get roles set
+		$roles = LiteSpeed_Cache_Config::get_instance()->get_item( LiteSpeed_Cache_Config::ITEM_CRWL_AS_UIDS ) ;
 		// List all roles
 		foreach ( $roles as $v ) {
 			$role_title = '' ;
@@ -520,15 +553,74 @@ class LiteSpeed_Cache_Crawler
 			if ( ! $role_title ) {
 				continue ;
 			}
-			$crawler_list[] = array( 'uid' => $v, 'role_title' => $role_title, 'webp' => 0 ) ;
 
-			if ( $webp ) {
-				$crawler_list[] = array( 'uid' => $v, 'role_title' => $role_title, 'webp' => 1 ) ;
+			$crawler_factors[ 'uid' ][ $v ] = ucfirst( $role_title ) ;
+		}
+
+		// Cookie crawler
+		$cookie_crawlers = LiteSpeed_Cache_Config::get_instance()->get_item( LiteSpeed_Cache_Config::ITEM_CRWL_COOKIES ) ;
+		foreach ( $cookie_crawlers as $k => $v ) {
+
+			$this_cookie_key = 'cookie:' . $k ;
+
+			$crawler_factors[ $this_cookie_key ] = array() ;
+
+			foreach ( explode( "\n", $v ) as $v2 ) {
+				$v2 = trim( $v2 ) ;
+				$crawler_factors[ $this_cookie_key ][ $v2 ] = "<font title='Cookie'>🍪</font>$k=$v2" ;
 			}
 		}
 
-		return $crawler_list ;
+		// Crossing generate the crawler list
+		$crawler_list = $this->_recursive_build_crawler( $crawler_factors ) ;
 
+		if ( $count_only ) {
+			return count( $crawler_list ) ;
+		}
+
+		return $crawler_list ;
+	}
+
+
+	/**
+	 * Build a crawler list recursively
+	 *
+	 * @since 2.8
+	 * @access private
+	 */
+	private function _recursive_build_crawler( $crawler_factors, $group = array(), $i = 0 )
+	{
+		$current_factor = array_keys( $crawler_factors ) ;
+		$current_factor = $current_factor[ $i ] ;
+
+		$if_touch_end = $i + 1 >= count( $crawler_factors ) ;
+
+		$final_list = array() ;
+
+		foreach ( $crawler_factors[ $current_factor ] as $k => $v ) {
+
+			// Don't alter $group bcos of loop usage
+			$item = $group ;
+			$item[ 'title' ] = ! empty( $group[ 'title' ] ) ? $group[ 'title' ] : '' ;
+			if ( $v ) {
+				if ( $item[ 'title' ] ) {
+					$item[ 'title' ] .= ' - ' ;
+				}
+				$item[ 'title' ] .= $v ;
+			}
+			$item[ $current_factor ] = $k ;
+
+			if ( $if_touch_end ) {
+				$final_list[] = $item ;
+			}
+			else {
+				// Inception: next layer
+				$final_list = array_merge( $final_list, $this->_recursive_build_crawler( $crawler_factors, $item, $i + 1 ) ) ;
+			}
+
+		}
+
+		return $final_list ;
 	}
 
 	/**

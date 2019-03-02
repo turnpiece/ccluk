@@ -38,6 +38,49 @@ class Agm_GwpAdminPages {
 			'save_post',
 			array( $this, 'save_metabox_values' )
 		);
+		add_filter(
+			'wp_privacy_personal_data_erasers',
+			array( $this, 'register_data_eraser' )
+		);
+	}
+
+	/**
+	 * Registers data erasers for maps
+	 *
+	 * @param array $erasers erasers this far.
+	 *
+	 * @return array
+	 */
+	public function register_data_eraser( $erasers ) {
+		$erasers['agm_google_maps-geotag_wp'] = array(
+			'eraser_friendly_name' => __( 'Google Maps Pro geotagged posts', AGM_LANG ),
+			'callback' => array( $this, 'gdpr_erase_data' ),
+		);
+		return $erasers;
+	}
+
+	public function gdpr_erase_data( $email, $page = 1 ) {
+		$user = get_user_by( 'email', $email );
+		$post_ids = get_posts(array(
+			'post_type' => 'any',
+			'post_status' => 'any',
+			'author' => $user->ID,
+			'meta_key' => '_agm_longitude',
+			'meta_compare' => 'EXISTS',
+			'fields' => 'ids',
+			'limit' => 500,
+		));
+
+		foreach ($post_ids as $pid) {
+			delete_post_meta($pid, '_agm_latitude');
+			delete_post_meta($pid, '_agm_longitude');
+		}
+		return array(
+			'items_removed' => count($post_ids),
+			'items_retained' => false,
+			'messages' => array(),
+			'done' => true,
+		);
 	}
 
 	public function register_settings() {

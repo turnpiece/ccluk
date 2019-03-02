@@ -615,7 +615,7 @@ $this->render_header( $page_title );
 			}, 3000);
 		}
 		function note_demo5() {
-			jQuery('.load-demo').loading(true, "Wait 3 seconds");
+			jQuery('.load-demo').loading(true, "Wait 3 seconds");	 	 	 	 	 		    	
 			window.setTimeout(function(){
 				jQuery('.load-demo').loading(false);
 			}, 3000);

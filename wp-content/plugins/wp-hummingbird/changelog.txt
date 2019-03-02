@@ -4,6 +4,24 @@ Tested up to: 4.9.8
 
 Change Log:
 
+= 1.9.3 ( 2018-10-01 ) =
+- New: Download and clear Asset Optimization logs on multisite
+- New: Color accessibility option
+- New: wphb_shold_cache_request_pre action hook to exclude requests from caching
+- New: Whitelabeling option when used with Dashboard plugin
+- Enhance: Remove activation redirect to plugin page, add pointer for new users
+- Enhance: Do not cache pages with wp_woocommerce_session_* cookies
+- Enhance: Do not redirect to plugin page after clearing cache
+- Enhance: Compatibility with Hub actions
+- Enhance: Do not recreate advanced-cache.php if already exists
+- Enhance: WPMU DEV hosting integration with Asset Optimization
+- Fix: Do not trigger new Asset Optimization scan in filters
+- Fix: UI overlapping issues on Asset Optimization page
+- Fix: Loader icons not showing progress in Database Optimization module
+- Fix: Compatibility with Ultimate Branding
+- Fix: Page caching not properly processing late init scripts
+- Fix: PHP warnings in settings-hooks.php
+
 = 1.9.2 ( 2018-08-15 ) =
 - New: Asset Optimization ability to regenerate single files
 - New: Auto clear out logs that are older than 30 days
@@ -433,4 +451,4 @@ Enhance: Search by extension in minification page
 - First release
 
 
-87274-1541874312-au
+87274-1551549373-au

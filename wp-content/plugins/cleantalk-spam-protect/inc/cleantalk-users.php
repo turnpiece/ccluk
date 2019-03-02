@@ -36,8 +36,8 @@ function ct_show_users_page(){
 					'</a>'
 				)
 			.'</h3>';
+			return;
 		}
-		return;
 	}
 	
 	
@@ -71,10 +71,10 @@ function ct_show_users_page(){
 				
 	<!-- Main info --> 
 		<h3 id="ct_checking_status"><?php echo ct_ajax_info_users(true); ?></h3>
-		
+				
 	<!-- Check options -->
 		<div class="ct_to_hide" id="ct_check_params_wrapper">
-			<button class="button ct_check_params_elem" id="ct_check_spam_button"><?php _e("Start check", 'cleantalk'); ?></button>
+			<button class="button ct_check_params_elem" id="ct_check_spam_button" <?php echo !$apbct->data['moderate'] ? 'disabled="disabled"' : ''; ?>><?php _e("Start check", 'cleantalk'); ?></button>
 			<?php if(!empty($_COOKIE['ct_paused_users_check'])) { ?><button class="button ct_check_params_elem" id="ct_proceed_check_button"><?php _e("Continue check", 'cleantalk'); ?></button><?php } ?>
 			<p class="ct_check_params_desc"><?php _e("The plugin will check all comments against blacklists database and show you senders that have spam activity on other websites.", 'cleantalk'); ?></p>
 			<br />

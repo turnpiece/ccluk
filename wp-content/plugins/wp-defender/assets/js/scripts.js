@@ -1,12 +1,11 @@
 jQuery(function ($) {
     $('body').on('change', '.toggle-checkbox', function (e) {
         if ($(this).prop('checked') == true) {
-            $('label[for="'+$(this).attr('id')+'"]').attr('aria-checked',true);
+            $('label[for="' + $(this).attr('id') + '"]').attr('aria-checked', true);
         } else {
-            $('label[for="'+$(this).attr('id')+'"]').attr('aria-checked',false);
+            $('label[for="' + $(this).attr('id') + '"]').attr('aria-checked', false);
         }
     });
-
     //blacklist helper
     if ($('.blacklist-widget').size() > 0) {
         $('.blacklist-widget').submit(function () {
@@ -16,7 +15,7 @@ jQuery(function ($) {
                 url: ajaxurl,
                 data: that.serialize(),
                 success: function (data) {
-                    var parent = that.closest('.dev-box');
+                    var parent = that.closest('.sui-box');
                     parent.replaceWith(data.data.html);
                 }
             })
@@ -26,7 +25,7 @@ jQuery(function ($) {
     $('body').on('submit', '.toggle-blacklist-widget', function () {
         var that = $(this);
         var overlay = Defender.createOverlay();
-        var parent = that.closest('.dev-box');
+        var parent = that.closest('.sui-box');
         $.ajax({
             type: 'POST',
             url: ajaxurl,
@@ -48,27 +47,21 @@ jQuery(function ($) {
     $('body').on('change', '#toggle_blacklist', function () {
         $('.toggle-blacklist-widget').submit();
     })
-    $('[rel="show-filter"]').click(function () {
-        var target = $($(this).data('target'));
-        if (target.is(':visible')) {
-            target.addClass('wd-hide');
-        } else {
-            target.removeClass('wd-hide')
-        }
-    });
 
     if ($('#activator').size() > 0) {
-        WDP.showOverlay("#activator", {
-            title: dashboard.activator_title,
-            class: 'no-close wp-defender wd-activator'
-        });
+        var listen = setInterval(function () {
+            if (SUI.dialogs !== undefined) {
+                SUI.dialogs['activator'].show();
+                clearInterval(listen);
+            }
+        }, 500)
     }
 
-    $('.change-one-time-pass-email').click(function(){
-      WDP.showOverlay("#edit-one-time-password-email", {
-          title: defender_adtools.edit_email_title,
-          class: 'wd-one-time-pass-email'
-      });
+    $('.change-one-time-pass-email').click(function () {
+        WDP.showOverlay("#edit-one-time-password-email", {
+            title: defender_adtools.edit_email_title,
+            class: 'wd-one-time-pass-email'
+        });
     });
 
     if ($('#requirement').size() > 0) {
@@ -83,20 +76,20 @@ jQuery(function ($) {
         });
     }
 
-    $('body').on('submit', '.activate-picker form', function () {
+    $('body').on('submit', '.activate-picker form:not(.skip-activator)', function () {
         var that = $(this);
         $.ajax({
             type: 'POST',
             url: ajaxurl,
             data: that.serialize(),
             beforeSend: function () {
-                that.find('.button').attr('disabled', 'disabled');
+                that.find('.sui-button').attr('disabled', 'disabled');
             },
             success: function (data) {
-                that.find('.button').removeAttr('disabled');
+                that.find('.sui-button').removeAttr('disabled');
                 if (data.success == 1) {
                     $('.activate-picker').addClass('wd-hide');
-                    $('.activate-picker').closest('.box').attr('style', 'padding-bottom:150px !important');
+                    //$('.activate-picker').closest('.box').attr('style', 'padding-bottom:150px !important');
                     $('.activate-progress').removeClass('wd-hide');
                     //remove skip button
                     $('.skip-activator').hide();
@@ -123,6 +116,11 @@ jQuery(function ($) {
         })
         return false;
     })
+    $('body').on('click', '[rel="show-filter"]', function () {
+        var target = $(this).data('target');
+        $(target).toggleClass('sui-open')
+    })
+
     $('body').on('submit', '.skip-activator', function () {
         var that = $(this);
         $.ajax({
@@ -130,7 +128,7 @@ jQuery(function ($) {
             url: ajaxurl,
             data: that.serialize(),
             beforeSend: function () {
-                that.find('.button').attr('disabled', 'disabled');
+                that.find('.sui-button').attr('disabled', 'disabled');
             },
             success: function (data) {
                 location.reload();
@@ -157,22 +155,26 @@ jQuery(function ($) {
     $('.wp-defender a[disabled="disabled"]').click(function (e) {
         e.preventDefault()
     })
+    $('body').on('click', '[rel="input_value"]', function () {
+        var target = $('[name="' + $(this).data('target') + '"]');
+        $(target).val($(this).data('value'));
+    })
 })
 window.Defender = window.Defender || {};
 
 //Added extra parameter to allow for some actions to keep modal open
 Defender.showNotification = function (type, message, closeModal) {
     var jq = jQuery;
-    if (jq('body').find('.floated-alert').size() > 0) {
+    if (jq('body').find('.sui-notice-floating').size() > 0) {
         return;
     }
-    var div = jq('<div class="floated-alert"/>');
+    var div = jq('<div class="sui-notice-floating"/>');
     if (type == 'error') {
-        div.addClass('alert-error');
+        div.addClass('sui-notice-error');
     } else {
-        div.addClass('alert-ok');
+        div.addClass('sui-notice-success');
     }
-    div.html(message); //Decode the message incase it was esc_html
+    div.html('<p>' + message + '</p>'); //Decode the message incase it was esc_html
     div.hide();
     jq('#wp-defender').prepend(div);
     var close_modal = (typeof closeModal === 'undefined') ? true : closeModal;
@@ -199,6 +201,6 @@ Defender.showNotification = function (type, message, closeModal) {
 Defender.createOverlay = function () {
     var jq = jQuery;
     var div = jq('<div class="wd-overlay"/>');
-    div.html('<i class="wdv-icon wdv-icon-fw wdv-icon-refresh spin"></i>');
+    div.html('<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>');
     return div;
 };

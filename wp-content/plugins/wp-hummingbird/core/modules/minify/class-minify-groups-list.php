@@ -299,7 +299,7 @@ class WP_Hummingbird_Module_Minify_Groups_List {
 			if ( $group->should_process_group() && $group->file_id && $group_src && ! $group->is_expired() ) {
 				// The group has its file and is not expired.
 				$this->set_group_status( $group->hash, 'ready' );
-			} elseif ( ( $group->should_process_group() && ( empty( $group_src ) ) || $group->is_expired() ) ) {
+			} elseif ( $group->should_process_group() && ( empty( $group_src ) || $group->is_expired() ) ) {
 				// The group must be processed but it has no file yet.
 				$this->set_group_status( $group->hash, 'process' );
 

@@ -1,6 +1,7 @@
 {
   "require": {
     "wixel/gump": "^1.4",
-    "katzgrau/klogger": "dev-master"
+    "katzgrau/klogger": "dev-master",
+    "geoip2/geoip2":"~2.0"
   }
 }

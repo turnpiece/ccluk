@@ -4,13 +4,9 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitd5564d492ece931c4e5305fccd29899f
+class ComposerStaticInit316b7f5b9398c4ff60a1605ea1db8527
 {
     public static $prefixLengthsPsr4 = array (
-        'P' => 
-        array (
-            'PHPCompatibility\\' => 17,
-        ),
         'C' => 
         array (
             'Composer\\Installers\\' => 20,
@@ -18,10 +14,6 @@ class ComposerStaticInitd5564d492ece931c4e5305fccd29899f
     );
 
     public static $prefixDirsPsr4 = array (
-        'PHPCompatibility\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/wimg/php-compatibility/PHPCompatibility',
-        ),
         'Composer\\Installers\\' => 
         array (
             0 => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers',
@@ -48,9 +40,9 @@ class ComposerStaticInitd5564d492ece931c4e5305fccd29899f
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitd5564d492ece931c4e5305fccd29899f::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitd5564d492ece931c4e5305fccd29899f::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitd5564d492ece931c4e5305fccd29899f::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit316b7f5b9398c4ff60a1605ea1db8527::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit316b7f5b9398c4ff60a1605ea1db8527::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit316b7f5b9398c4ff60a1605ea1db8527::$classMap;
 
         }, null, ClassLoader::class);
     }

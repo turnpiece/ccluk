@@ -49,10 +49,12 @@
 	<?php if ( ! ( $htaccess_written && $full_enabled ) ) : ?>
 		<div id="wphb-server-instructions-apache" class="wphb-server-instructions" data-server="apache" style="display: none;">
 			<div class="sui-tabs">
-				<div class="sui-tab">
-					<label for="apache-config-auto" class="active"><?php esc_html_e( 'Automatic', 'wphb' ); ?></label>
-					<input type="radio" name="apache-config-type" id="apache-config-auto" checked>
-					<div class="sui-tab-content">
+				<div data-tabs>
+					<div><?php esc_html_e( 'Automatic', 'wphb' ); ?></div>
+					<div><?php esc_html_e( 'Manual', 'wphb' ); ?></div>
+				</div>
+				<div data-panes>
+					<div>
 						<span class="sui-description">
 							<?php esc_html_e( 'Hummingbird can automatically apply GZip compression for Apache servers by writing your .htaccess file. Alternately, switch to Manual to apply these rules yourself.', 'wphb' ); ?>
 						</span>
@@ -72,12 +74,8 @@
 								<?php endif; ?>
 							</div>
 						<?php endif; ?>
-					</div><!-- end content -->
-				</div><!-- end tab -->
-				<div class="sui-tab">
-					<label for="apache-config-manual"><?php esc_html_e( 'Manual', 'wphb' ); ?></label>
-					<input type="radio" name="apache-config-type" id="apache-config-manual">
-					<div class="sui-tab-content apache-instructions">
+					</div>
+					<div class="apache-instructions">
 						<p><?php esc_html_e( 'If you are unable to get the automated method working you can copy the generated code below into your .htaccess file to activate GZip compression.', 'wphb' ); ?></p>
 
 						<ol class="wphb-listing wphb-listing-ordered">
@@ -85,8 +83,8 @@
 							<li>
 								<?php
 								printf(
-									/* translators: %s: Link to recheck GZip status */
-								__( 'Next, <a href="%s">re-check your GZip status</a> to see if it worked. <a href="#" id="troubleshooting-link">Still having issues?</a>', 'wphb' ), esc_url( $recheck_url ) );
+								/* translators: %s: Link to recheck GZip status */
+									__( 'Next, <a href="%s">re-check your GZip status</a> to see if it worked. <a href="#" id="troubleshooting-link">Still having issues?</a>', 'wphb' ), esc_url( $recheck_url ) );
 								?>
 							</li>
 						</ol>
@@ -100,17 +98,19 @@
 							<li><?php esc_html_e( 'If you don\'t know where those files are, or you aren\'t able to reload Apache, you would need to consult with your hosting provider or a system administrator who has access to change the configuration of your server', 'wphb' ); ?></li>
 						</ol>
 						<p><?php WP_Hummingbird_Utils::_still_having_trouble_link(); ?></p>
-					</div><!-- end apache-instructions -->
-				</div><!-- end tab -->
-			</div><!-- end tabs -->
+					</div>
+				</div>
+			</div>
 		</div><!-- end wphb-server-instructions -->
 
 		<div id="wphb-server-instructions-litespeed" class="wphb-server-instructions" data-server="LiteSpeed" style="display: none;">
 			<div class="sui-tabs">
-				<div class="sui-tab">
-					<label for="litespeed-config-auto" class="active"><?php esc_html_e( 'Automatic', 'wphb' ); ?></label>
-					<input type="radio" name="litespeed-config-type" id="litespeed-config-auto" checked>
-					<div class="sui-tab-content">
+				<div data-tabs>
+					<div><?php esc_html_e( 'Automatic', 'wphb' ); ?></div>
+					<div><?php esc_html_e( 'Manual', 'wphb' ); ?></div>
+				</div>
+				<div data-panes>
+					<div>
 						<span class="sui-description">
 							<?php esc_html_e( 'Hummingbird can automatically apply browser caching for LiteSpeed servers by writing your .htaccess file. Alternately, switch to Manual to apply these rules yourself.', 'wphb' ); ?>
 						</span>
@@ -130,12 +130,8 @@
 								<?php endif; ?>
 							</div>
 						<?php endif; ?>
-					</div><!-- end content -->
-				</div><!-- end tab -->
-				<div class="sui-tab">
-					<label for="litespeed-config-manual"><?php esc_html_e( 'Manual', 'wphb' ); ?></label>
-					<input type="radio" name="litespeed-config-type" id="litespeed-config-manual">
-					<div class="sui-tab-content litespeed-instructions">
+					</div>
+					<div class="litespeed-instructions">
 						<p><?php esc_html_e( 'If you are unable to get the automated method working you can copy the generated code below into your .htaccess file to activate GZip compression.', 'wphb' ); ?></p>
 
 						<ol class="wphb-listing wphb-listing-ordered">
@@ -143,7 +139,7 @@
 							<li>
 								<?php
 								printf( /* translators: %s: Link to recheck GZip status */
-								__( 'Next, <a href="%s">re-check your GZip status</a> to see if it worked. <a href="#" id="troubleshooting-link-litespeed">Still having issues?</a>', 'wphb' ), esc_url( $recheck_url ) );
+									__( 'Next, <a href="%s">re-check your GZip status</a> to see if it worked. <a href="#" id="troubleshooting-link-litespeed">Still having issues?</a>', 'wphb' ), esc_url( $recheck_url ) );
 								?>
 							</li>
 						</ol>
@@ -157,9 +153,9 @@
 							<li><?php esc_html_e( 'If you don\'t know where those files are, or you aren\'t able to reload LiteSpeed, you would need to consult with your hosting provider or a system administrator who has access to change the configuration of your server', 'wphb' ); ?></li>
 						</ol>
 						<p><?php WP_Hummingbird_Utils::_still_having_trouble_link(); ?></p>
-					</div><!-- end litespeed-instructions -->
-				</div><!-- end tab -->
-			</div><!-- end tabs -->
+					</div>
+				</div>
+			</div>
 		</div><!-- end wphb-server-instructions -->
 
 		<div id="wphb-server-instructions-nginx" class="wphb-server-instructions" data-server="nginx" style="display: none;">

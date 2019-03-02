@@ -4,7 +4,7 @@
  *
  * @package     Give
  * @subpackage  Classes/API
- * @copyright   Copyright (c) 2018, WordImpress
+ * @copyright   Copyright (c) 2018, GiveWP
  * @license     https://opensource.org/licenses/gpl-license GNU Public License
  * @since       2.1
  */
@@ -87,6 +87,7 @@ class Give_API_V2 {
 
 	/**
 	 * Register API routes
+	 * Note: only for internal purpose.
 	 * @todo   : prevent cross domain api request
 	 *
 	 * @since  2.1

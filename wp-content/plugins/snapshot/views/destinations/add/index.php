@@ -53,6 +53,15 @@ if ( 'dropbox' === $item['type'] && isset( $_GET['dropbox-authenticated'] ) ) {
 	$form_url = add_query_arg( 'dropbox-authenticated', $_GET['dropbox-authenticated'], $form_url );
 }
 
+if ( 'aws' === $item['type'] && version_compare(PHP_VERSION, '5.5.0', '<') ) {
+	$aws_wizard_class = 'aws-incompatible-wizard';
+	$aws_sdk_compatible = false;
+	$disabled_save_button_styling = ' style="background-color: #e6e6e6!important;cursor: default;text-shadow: none!important;"';
+} else {
+	$aws_wizard_class = '';
+	$aws_sdk_compatible = true;
+}
+
 ?>
 
 <section id="header">
@@ -61,7 +70,7 @@ if ( 'dropbox' === $item['type'] && isset( $_GET['dropbox-authenticated'] ) ) {
 
 <div id="container" class="snapshot-three wps-page-destinations">
 
-    <section id="wps-destinations-wizard" class="wpmud-box">
+    <section id="wps-destinations-wizard" class="wpmud-box <?php echo $aws_wizard_class; ?>"><?php // phpcs:ignore ?>
 
         <div class="wpmud-box-title has-button">
 
@@ -73,51 +82,53 @@ if ( 'dropbox' === $item['type'] && isset( $_GET['dropbox-authenticated'] ) ) {
 
         </div>
 
-        <div class="wpmud-box-content">
+		<?php
 
-            <div class="row">
+		$type = 'local';
 
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+		if ( isset( $_REQUEST['snapshot-action'] ) && isset( $_REQUEST['type'] ) ) {
+			$type = sanitize_text_field( $_REQUEST['type'] );
+		}
 
-					<?php
-					if ( $item ) :
+		if ( ! in_array( $type, array( 'aws', 'dropbox', 'google-drive', 'ftp' ), true ) ) {
+			$type = 'local';
+		}
+		$target = 'target="_self"';
+		if ( 'dropbox' === $type ) {
+			if ( ! isset( $item['tokens']['access']['authorization_token'], $item['tokens']['access']['access_token'] )
+					|| empty( $item['tokens']['access']['authorization_token'] ) ) {
+				$target = 'target="_blank"';
+			}
+		}
+		?>
 
-						$type = 'local';
+		<form action="<?php echo esc_url( $form_url ); ?>" method="post" <?php echo wp_kses_post( $target ); ?>>
+			<div class="wpmud-box-content">
 
-						if ( isset( $_REQUEST['snapshot-action'] ) && isset( $_REQUEST['type'] ) ) {
-							$type = sanitize_text_field( $_REQUEST['type'] );
-						}
+				<?php
+				if ( $item ) :
+				?>
 
-						if ( ! in_array( $type, array( 'aws', 'dropbox', 'google-drive', 'ftp' ), true ) ) {
-							$type = 'local';
-						}
-						$target = 'target="_self"';
-						if ( 'dropbox' === $type ) {
-							if ( ! isset( $item['tokens']['access']['authorization_token'], $item['tokens']['access']['access_token'] )
-                                 || empty( $item['tokens']['access']['authorization_token'] ) ) {
-								$target = 'target="_blank"';
-							}
-						}
-						?>
-                        <form action="<?php echo esc_url( $form_url ); ?>" method="post" <?php echo wp_kses_post( $target ); ?>>
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
 							<?php
 							$snapshot_action = sanitize_text_field( $_GET['snapshot-action'] );
 							wp_nonce_field( 'snapshot-destination', 'destination-noonce-field' );
 
 							if ( ( 'edit' === $snapshot_action ) || ( 'update' === $snapshot_action ) ) :
-								?>
+							?>
 
-                                <input type="hidden" name="snapshot-action" value="update"/>
+								<input type="hidden" name="snapshot-action" value="update"/>
 
-                                <input type="hidden" name="item"
-                                       value="<?php echo esc_attr( sanitize_text_field( $_GET['item'] ) ); ?>"/>
+								<input type="hidden" name="item"
+										value="<?php echo esc_attr( sanitize_text_field( $_GET['item'] ) ); ?>"/>
 
 								<?php wp_nonce_field( 'snapshot-update-destination', 'snapshot-noonce-field' ); ?>
 
 							<?php elseif ( 'add' === $snapshot_action ) : ?>
 
-                                <input type="hidden" name="snapshot-action" value="add"/>
+								<input type="hidden" name="snapshot-action" value="add"/>
 
 								<?php wp_nonce_field( 'snapshot-add-destination', 'snapshot-noonce-field' ); ?>
 
@@ -141,100 +152,101 @@ if ( 'dropbox' === $item['type'] && isset( $_GET['dropbox-authenticated'] ) ) {
 
 							if ( strpos( $type, 'dropbox' ) !== false && version_compare( phpversion(), '5.5.0', '<' ) ) {
 								$this->render(
-                                     "destinations/add/dropbox-error", false, array(
+										"destinations/add/dropbox-error", false, array(
 									'item'        => $item,
 								), false, false, false
-                                    );
+									);
 							} else {
 								$this->render(
-                                     "destinations/add/$type", false, array(
+										"destinations/add/$type", false, array(
 									'item'        => $item,
 									'item_object' => $item_object,
 								), false, false, false
-                                    );
+									);
 							}
 
 							?>
+
+						</div>
+					</div>
+					<div class="row" style=" background-color: #fff; ">
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 							<?php if ( strpos( $type, 'dropbox' ) !== false && version_compare( phpversion(), '5.5.0', '<' ) ) : ?>
 								<div class="form-footer"></div>
 							<?php else : ?>
-                            <div class="form-footer">
-
-								<?php
-								if ( ( 'edit' === $snapshot_action || 'update' === $snapshot_action ) && 'local' !== $item['type'] ) :
-									?>
-
-                                    <div class="form-col"><a id="wps-destination-delete"
-                                                             class="button button-outline button-gray"
-                                                             href="#"><?php esc_html_e( 'Delete', SNAPSHOT_I18N_DOMAIN ); ?></a>
-                                    </div>
+								<div class="form-footer">
 
 									<?php
-									$popup_warning_data = array(
-										'popup_id'           => 'wps-destination-warning',
-										'popup_title'        => __( 'Remove Destination', SNAPSHOT_I18N_DOMAIN ),
-										'popup_content'      => sprintf( __( "You are deleting the destination <strong>%1\$s</strong>. This destination has %2\$d archives in it, are you sure you wish to remove it? You will still be able to access any archives at the destinations using the %3\$s interface.", SNAPSHOT_I18N_DOMAIN ), $item['name'], Snapshot_Model_Destination::get_destination_item_count( sanitize_text_field( $_GET['item'] ) ), Snapshot_Model_Destination::get_destination_nice_name( sanitize_text_field( $item['type'] ) ) ),
-										'popup_action_title' => __( 'Remove', SNAPSHOT_I18N_DOMAIN ),
-										'popup_action_url'   => add_query_arg(
-                                             array(
-											'snapshot-action' => 'delete',
-											'item'                  => sanitize_text_field( $_GET['item'] ),
-											'destination-noonce-field' => wp_create_nonce( 'snapshot-destination' ),
-										), WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url( 'snapshots-newui-destinations' )
-                                            ),
-										'popup_cancel_title' => __( 'Cancel', SNAPSHOT_I18N_DOMAIN ),
-										'popup_cancel_url'   => '#',
-									);
-
-									$this->render( 'boxes/modals/popup-warning', false, $popup_warning_data, false, false );
+									if ( ( 'edit' === $snapshot_action || 'update' === $snapshot_action ) && 'local' !== $item['type'] ) :
 									?>
 
-								<?php elseif ( "add" === $snapshot_action ) : ?>
+										<div class="form-col"><a id="wps-destination-delete"
+																	class="button button-outline button-gray"
+																	href="#"><?php esc_html_e( 'Delete', SNAPSHOT_I18N_DOMAIN ); ?></a>
+										</div>
 
-                                    <div class="form-col">
+										<?php
+										$popup_warning_data = array(
+											'popup_id' => 'wps-destination-warning',
+											'popup_title' => __( 'Remove Destination', SNAPSHOT_I18N_DOMAIN ),
+											'popup_content' => sprintf( __( "You are deleting the destination <strong>%1\$s</strong>. This destination has %2\$d archives in it, are you sure you wish to remove it? You will still be able to access any archives at the destinations using the %3\$s interface.", SNAPSHOT_I18N_DOMAIN ), $item['name'], Snapshot_Model_Destination::get_destination_item_count( sanitize_text_field( $_GET['item'] ) ), Snapshot_Model_Destination::get_destination_nice_name( sanitize_text_field( $item['type'] ) ) ),
+											'popup_action_title' => __( 'Remove', SNAPSHOT_I18N_DOMAIN ),
+											'popup_action_url' => add_query_arg(
+													array(
+												'snapshot-action' => 'delete',
+												'item'                  => sanitize_text_field( $_GET['item'] ),
+												'destination-noonce-field' => wp_create_nonce( 'snapshot-destination' ),
+											), WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url( 'snapshots-newui-destinations' )
+												),
+											'popup_cancel_title' => __( 'Cancel', SNAPSHOT_I18N_DOMAIN ),
+											'popup_cancel_url' => '#',
+										);
 
-                                        <a class="button button-outline button-gray"
-                                           href="<?php echo esc_url( WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url( 'snapshots-newui-destinations' ) ); ?>"><?php esc_html_e( 'Cancel', SNAPSHOT_I18N_DOMAIN ); ?></a>
-
-                                    </div>
-
-								<?php endif; ?>
-
-                                <div class="form-col
-                                <?php
-                                if ( 'local' === $type ) {
-									echo ' form-col-right';
-								}
-                                ?>
-                                ">
-
-									<?php
-									if ( 'dropbox' === $type ) {
+										$this->render( 'boxes/modals/popup-warning', false, $popup_warning_data, false, false );
 										?>
-                                        <input class="button button-blue" type="submit"
-                                               data-get-code-text="<?php esc_html_e( 'Get authorization code', SNAPSHOT_I18N_DOMAIN ); ?>"
-                                               data-save-text="<?php esc_html_e( 'Save Destination', SNAPSHOT_I18N_DOMAIN ); ?>"
-                                               data-authenticate-text="<?php esc_html_e( 'Authenticate', SNAPSHOT_I18N_DOMAIN ); ?>"
-                                               value="<?php esc_html_e( 'Get authorization code', SNAPSHOT_I18N_DOMAIN ); ?>"/>
-                                        <?php wp_nonce_field( 'add_dropbox_destination' ); ?>
-									<?php } else { ?>
-                                        <input class="button button-blue" type="submit" value="<?php esc_html_e( 'Save Destination', SNAPSHOT_I18N_DOMAIN ); ?>"/>
-									<?php } ?>
 
-                                </div>
+									<?php elseif ( "add" === $snapshot_action ) : ?>
 
-                            </div>
+										<div class="form-col">
+
+											<a class="button button-outline button-gray"
+												href="<?php echo esc_url( WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url( 'snapshots-newui-destinations' ) ); ?>"><?php esc_html_e( 'Cancel', SNAPSHOT_I18N_DOMAIN ); ?></a>
+
+										</div>
+
+									<?php endif; ?>
+
+									<div class="form-col
+									<?php
+									if ( 'local' === $type ) {
+										echo ' form-col-right';
+									}
+									?>
+									">
+
+										<?php
+										if ( 'dropbox' === $type ) {
+											?>
+											<input class="button button-blue" type="submit"
+													data-get-code-text="<?php esc_html_e( 'Get authorization code', SNAPSHOT_I18N_DOMAIN ); ?>"
+													data-save-text="<?php esc_html_e( 'Save Destination', SNAPSHOT_I18N_DOMAIN ); ?>"
+													data-authenticate-text="<?php esc_html_e( 'Authenticate', SNAPSHOT_I18N_DOMAIN ); ?>"
+													value="<?php esc_html_e( 'Get authorization code', SNAPSHOT_I18N_DOMAIN ); ?>"/>
+											<?php wp_nonce_field( 'add_dropbox_destination' ); ?>
+										<?php } else { ?>
+											<input class="button button-blue" type="submit" value="<?php esc_html_e( 'Save Destination', SNAPSHOT_I18N_DOMAIN ); ?>" <?php echo ( ! $aws_sdk_compatible ) ? 'disabled' . $disabled_save_button_styling : ''; ?> /><?php // phpcs:ignore ?>
+										<?php } ?>
+
+									</div>
+
+								</div>
 							<?php endif; ?>
 
-                        </form>
-
-					<?php endif; ?>
-
-                </div>
-
-            </div>
-
-        </div>
+						</div>
+					</div>
+				<?php endif; ?>
+			</div>
+		</form>
 
     </section>
 

@@ -5,6 +5,7 @@
 
 namespace WP_Defender\Module\IP_Lockout\Model;
 
+use Hammer\GeoIP\GeoIp;
 use Hammer\Helper\HTTP_Helper;
 use Hammer\Helper\WP_Helper;
 use WP_Defender\Behavior\Utils;
@@ -17,6 +18,7 @@ class Settings extends \Hammer\WP\Settings {
 	public $login_protection_login_attempt = 5;
 	public $login_protection_lockout_timeframe = 300;
 	public $login_protection_lockout_duration = 300;
+	public $login_protection_lockout_duration_unit = 'seconds';
 	public $login_protection_lockout_message = "You have been locked out due to too many invalid login attempts.";
 	public $login_protection_ban_admin_brute = false;
 	public $login_protection_lockout_ban = false;
@@ -26,6 +28,7 @@ class Settings extends \Hammer\WP\Settings {
 	public $detect_404_threshold = 20;
 	public $detect_404_timeframe = 300;
 	public $detect_404_lockout_duration = 300;
+	public $detect_404_lockout_duration_unit = 'seconds';
 	public $detect_404_whitelist;
 	public $detect_404_ignored_filetypes;
 	public $detect_404_lockout_message = "You have been locked out due to too many attempts to access a file that doesn’t exist.";
@@ -36,6 +39,9 @@ class Settings extends \Hammer\WP\Settings {
 	public $ip_whitelist;
 	public $ip_lockout_message = 'The administrator has blocked your IP from accessing this website.';
 
+	public $country_blacklist;
+	public $country_whitelist;
+
 	public $login_lockout_notification = true;
 	public $ip_lockout_notification = true;
 
@@ -44,8 +50,9 @@ class Settings extends \Hammer\WP\Settings {
 	public $report_day = 'sunday';
 	public $report_time = '0:00';
 
-	public $storage_days = 30;
+	public $geoIP_db = null;
 
+	public $storage_days = 30;
 
 	public $receipts = array();
 	public $report_receipts = array();
@@ -62,10 +69,9 @@ class Settings extends \Hammer\WP\Settings {
 			$this->receipts[]        = get_current_user_id();
 			$this->report_receipts[] = get_current_user_id();
 			$this->ip_whitelist      = $this->getUserIp() . PHP_EOL;
-
 			//default is weekly
-			$this->report_day  = strtolower( date( 'l' ) );
-			$hour      = date( 'H', current_time( 'timestamp' ) );
+			$this->report_day = strtolower( date( 'l' ) );
+			$hour             = date( 'H', current_time( 'timestamp' ) );
 			if ( $hour == '00' ) {
 				$hour = 0;
 			} else {
@@ -139,6 +145,26 @@ class Settings extends \Hammer\WP\Settings {
 	 */
 	public function getIpWhitelist() {
 		$arr = array_filter( explode( PHP_EOL, $this->ip_whitelist ) );
+		$arr = array_map( 'trim', $arr );
+
+		return $arr;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getCountryBlacklist() {
+		$arr = array_filter( explode( ',', $this->country_blacklist ) );
+		$arr = array_map( 'trim', $arr );
+
+		return $arr;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getCountryWhitelist() {
+		$arr = array_filter( explode( ',', $this->country_whitelist ) );
 		$arr = array_map( 'trim', $arr );
 
 		return $arr;
@@ -383,6 +409,68 @@ class Settings extends \Hammer\WP\Settings {
 		$usernames = array_filter( $usernames );
 
 		return $usernames;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isGeoDBDownloaded() {
+		if ( is_null( $this->geoIP_db ) || ! is_file( $this->geoIP_db ) ) {
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isCountryBlacklist() {
+		//return if php less than 5.4
+		if ( version_compare( phpversion(), '5.4', '<' ) ) {
+			return false;
+		}
+		$country = IP_API::getCurrentCountry();
+		if ( $country == false ) {
+			return false;
+		}
+		//if this country is whitelisted, so we dont need to blacklist this
+		if ( $this->isCountryWhitelist() ) {
+			return false;
+		}
+
+		$blacklisted = $this->getCountryBlacklist();
+		if ( empty( $blacklisted ) ) {
+			return false;
+		}
+		if ( in_array( 'all', $blacklisted ) ) {
+			return true;
+		}
+
+		$country = IP_API::getCurrentCountry();
+
+		if ( in_array( strtoupper( $country['iso'] ), $blacklisted ) ) {
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isCountryWhitelist() {
+		$country   = IP_API::getCurrentCountry();
+		$whitelist = $this->getCountryWhitelist();
+		if ( empty( $whitelist ) ) {
+			return false;
+		}
+
+		if ( in_array( strtoupper( $country['iso'] ), $whitelist ) ) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (C) 2014-2018 ServMask Inc.
+ * Copyright (C) 2014-2019 ServMask Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,13 +24,6 @@
  */
 
 abstract class Ai1wm_Database {
-
-	/**
-	 * Number of queries per transaction
-	 *
-	 * @var integer
-	 */
-	const QUERIES_PER_TRANSACTION = 1000;
 
 	/**
 	 * WordPress database handler
@@ -644,7 +637,7 @@ abstract class Ai1wm_Database {
 					$table_where = implode( ' AND ', $table_where );
 
 					// Set query with offset and rows count
-					$query = sprintf( 'SELECT t1.* FROM `%s` AS t1 JOIN (SELECT %s FROM `%s` WHERE %s ORDER BY %s LIMIT %d, %d) AS t2 USING (%s)', $table_name, $table_keys, $table_name, $table_where, $table_keys, $table_offset, 1000, $table_keys );
+					$query = sprintf( 'SELECT t1.* FROM `%s` AS t1 JOIN (SELECT %s FROM `%s` WHERE %s ORDER BY %s LIMIT %d, %d) AS t2 USING (%s)', $table_name, $table_keys, $table_name, $table_where, $table_keys, $table_offset, AI1WM_MAX_SELECT_RECORDS, $table_keys );
 
 				} else {
 
@@ -660,7 +653,7 @@ abstract class Ai1wm_Database {
 					$table_where = implode( ' AND ', $table_where );
 
 					// Set query with offset and rows count
-					$query = sprintf( 'SELECT * FROM `%s` WHERE %s ORDER BY %s LIMIT %d, %d', $table_name, $table_where, $table_keys, $table_offset, 1000 );
+					$query = sprintf( 'SELECT * FROM `%s` WHERE %s ORDER BY %s LIMIT %d, %d', $table_name, $table_where, $table_keys, $table_offset, AI1WM_MAX_SELECT_RECORDS );
 				}
 
 				// Apply additional table prefix columns
@@ -686,7 +679,7 @@ abstract class Ai1wm_Database {
 					while ( $row = $this->fetch_assoc( $result ) ) {
 
 						// Write start transaction
-						if ( $table_offset % Ai1wm_Database::QUERIES_PER_TRANSACTION === 0 ) {
+						if ( $table_offset % AI1WM_MAX_TRANSACTION_QUERIES === 0 ) {
 							ai1wm_write( $file_handler, "START TRANSACTION;\n" );
 						}
 
@@ -717,14 +710,14 @@ abstract class Ai1wm_Database {
 						$table_rows++;
 
 						// Write end of transaction
-						if ( $table_offset % Ai1wm_Database::QUERIES_PER_TRANSACTION === 0 ) {
+						if ( $table_offset % AI1WM_MAX_TRANSACTION_QUERIES === 0 ) {
 							ai1wm_write( $file_handler, "COMMIT;\n" );
 						}
 					}
 				} else {
 
 					// Write end of transaction
-					if ( $table_offset % Ai1wm_Database::QUERIES_PER_TRANSACTION !== 0 ) {
+					if ( $table_offset % AI1WM_MAX_TRANSACTION_QUERIES !== 0 ) {
 						ai1wm_write( $file_handler, "COMMIT;\n" );
 					}
 

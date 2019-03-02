@@ -114,7 +114,7 @@ if ( $error ) : ?>
 			$has_url_blocks = ! empty( $rule_result->urlblocks ) && is_array( $rule_result->urlblocks ) && ! empty( $rule_result->urlblocks[0] );
 			?>
 			<tr class="sui-accordion-item sui-<?php echo esc_attr( $impact_score_class ); ?>">
-				<td class="sui-accordion-item-title">
+				<td class="sui-accordion-item-title"  width="40%">
 					<i class="sui-icon-<?php echo esc_attr( $impact_icon_class ); ?> sui-<?php echo esc_attr( $impact_score_class ); ?>"></i> <?php echo esc_html( $rule_result->label ); ?>
 				</td>
 				<td>
@@ -136,11 +136,11 @@ if ( $error ) : ?>
 				</td>
 
 				<?php if ( 'disabled' !== $impact_score_class ) : ?>
-					<td class="sui-hidden-xs sui-hidden-sm sui-hidden-md">
+					<td>
 						<span class="sui-accordion-open-indicator">
 							<?php if ( ! empty( $rule_result->summary ) || ! empty( $rule_result->tip ) ) : ?>
 								<?php if ( $rule_result->impact_score < 85 && ( ! $is_subsite && 'server' !== $rule_result->type ) && ! $report_dismissed ) : ?>
-									<a class="sui-button sui-button-ghost"><?php esc_html_e( 'Improve', 'wphb' ); ?></a>
+									<a class="sui-button sui-button-ghost sui-hidden-xs sui-hidden-sm sui-hidden-md"><?php esc_html_e( 'Improve', 'wphb' ); ?></a>
 								<?php endif; ?>
 							<i class="sui-icon-chevron-down"></i>
 							<?php endif; ?>

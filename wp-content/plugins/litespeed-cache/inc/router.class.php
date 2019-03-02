@@ -168,7 +168,7 @@ class LiteSpeed_Cache_Router
 		LiteSpeed_Cache_Log::debug( '[Router] starting crawler role validation' ) ;
 
 		// Check if is from crawler
-		if ( empty( $_SERVER[ 'HTTP_USER_AGENT' ] ) || $_SERVER[ 'HTTP_USER_AGENT' ] !== Litespeed_Crawler::FAST_USER_AGENT ) {
+		if ( empty( $_SERVER[ 'HTTP_USER_AGENT' ] ) || strpos( $_SERVER[ 'HTTP_USER_AGENT' ], Litespeed_Crawler::FAST_USER_AGENT ) !== 0 ) {
 			LiteSpeed_Cache_Log::debug( '[Router] user agent not match' ) ;
 			return ;
 		}
@@ -513,6 +513,9 @@ class LiteSpeed_Cache_Router
 			case LiteSpeed_Cache::ACTION_IMPORT:
 			case LiteSpeed_Cache::ACTION_REPORT:
 			case LiteSpeed_Cache::ACTION_CSS:
+			case LiteSpeed_Cache::ACTION_CFG:
+			case LiteSpeed_Cache::ACTION_ACTIVATION:
+			case LiteSpeed_Cache::ACTION_UTIL:
 				if ( $_can_option && ! $_is_network_admin ) {
 					self::$_action = $action ;
 				}
@@ -530,9 +533,13 @@ class LiteSpeed_Cache_Router
 				return ;
 
 			case LiteSpeed_Cache::ACTION_DISMISS:
-				if ( self::is_ajax() ) {
-					self::$_action = $action ;
-				}
+				/**
+				 * Non ajax call can dismiss too
+				 * @since  2.9
+				 */
+				// if ( self::is_ajax() ) {
+				self::$_action = $action ;
+				// }
 				return ;
 
 			default:

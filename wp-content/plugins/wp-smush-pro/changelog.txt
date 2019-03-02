@@ -1,10 +1,68 @@
 Plugin Name: WP Smush Pro
 Author: WPMU DEV
-Tested up to: 4.9.8
+Tested up to: 5.0.3
 
 Change Log:
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
+
+= 3.1.1 =
+
+* Fix: Auto Smush in Gutenberg
+* Fix: Image backup in Gutenberg
+
+= 3.1.0 =
+
+* New: Onboarding experience for new installs
+* New: WP CLI support for bulk/single image Smush and bulk restore
+* New: Color accessibility settings
+* New: Compatibility with Beaver Builder
+* Enhance: CDN image detection
+* Enhance: Compatibility with Hustle
+* Enhance: Add upgrade link in Plugins section for the free version
+* Enhance: Remove activation tooltips
+* Enhance: CSS for highlighting incorrectly sized images
+* Enhance: Preserve stats during options updates
+* Enhance: CDN will now only accept JPG/PNG/GIF images - no more warnings in browser console
+* Enhance: Support for Edge browser (and some older browser versions)
+* Fix: Browser console errors with CDN auto resizing and webp images
+* Fix: Directory Smush errors on subsites in multisite environments
+* Fix: Fix CDN not enabling on subsites in multisite
+* Fix: JavaScript error during bulk Smush on free version of the plugin
+
+= 3.0.2 =
+
+* Enhance: Support for WordPress 5.0 release and Gutenberg editor
+* Fix: [WP Offload Media] integration with Pro version
+* Fix: PHP warning on update from Smush version 2 to version 3
+
+= 3.0.1 =
+
+* Security: Remove support for Upfront theme functions
+
+= 3.0.0 =
+
+* New: Smush CDN
+* New: Webp support with CDN
+* New: Auto image resize when using CDN
+* New: Plugin structure (Important: plugin globals have been removed)
+* New: Show failure reason during directory Smush
+* New: Settings page with language translation links
+* Security: Fix XSS vulnerability
+* Security: Fix phar deserialization vulnerability (thanks @ripstech)
+* Enhance: Better handling of animated GIFs. Improve performance.
+* Enhance: Update translation strings
+* Enhance: Clean out all the leftover data on plugin uninstall
+* Enhance: Directory Smush modal: support keyboard navigation
+* Enhance: Directory Smush modal: navigate to next node by typing the first letters
+* Enhance: [WPML] PNG to JPEG conversion in media translations
+* Fix: Directory Smush resume button only working when clicked on icon
+* Fix: Errors during image re-check
+* Fix: Meta values are deleted when an image is skipped using wp_smush_image filter.
+* Fix: [WP Offload Media] Backward compatibility errors
+* Fix: [WP Offload Media] Warnings when certain attachment sizes are excluded from compression
+* Fix: [WP Offload Media] Errors during is_animated check with images stored on S3
+* Fix: [WooCommerce] Compatibility issue with WooCommerce 3.5
 
 = 2.9.1 =
 
@@ -483,4 +541,5 @@ Fix: Compatibility issues with latest WP Offload Media (WP Offload S3) update
 - First release
 
 
-87274-1541874356-au
+
+87274-1551549393-au

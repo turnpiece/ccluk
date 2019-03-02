@@ -69,9 +69,3 @@ $this->admin_notices->show(
 		<?php endforeach; ?>
 	<?php endif; ?>
 </ul>
-
-<script>
-	jQuery(document).ready( function() {
-		window.WPHB_Admin.getModule( 'uptime' );
-	});
-</script>

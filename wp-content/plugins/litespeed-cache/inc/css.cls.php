@@ -34,7 +34,7 @@ class LiteSpeed_Cache_CSS
 		$rules = self::get_instance()->_ccss() ;
 
 		// Append default critical css
-		$rules .= get_option( LiteSpeed_Cache_Config::ITEM_OPTM_CSS ) ;
+		$rules .= LiteSpeed_Cache_Config::get_instance()->get_item( LiteSpeed_Cache_Config::ITEM_OPTM_CSS, true ) ;
 
 		$html_head = '<style id="litespeed-optm-css-rules">' . $rules . '</style>' . $html_head ;
 
@@ -223,7 +223,7 @@ class LiteSpeed_Cache_CSS
 	}
 
 	/**
-	 * Send to LiteSpeed CSS API to generate CSS
+	 * Send to LiteSpeed CCSS API to generate CCSS
 	 *
 	 * @since  2.3
 	 * @access private
@@ -239,8 +239,6 @@ class LiteSpeed_Cache_CSS
 		$this->_save_summary( $req_summary ) ;
 
 		// Generate critical css
-		$url = 'http://ccss.api.litespeedtech.com' ;
-
 		$data = array(
 			'home_url'	=> home_url(),
 			'url'		=> $request_url,
@@ -249,40 +247,20 @@ class LiteSpeed_Cache_CSS
 			'is_mobile'	=> $is_mobile ? 1 : 0,
 		) ;
 
-		LiteSpeed_Cache_Log::debug( '[CSS] posting to : ' . $url, $data ) ;
+		LiteSpeed_Cache_Log::debug( '[CSS] Generating: ', $data ) ;
 
-		$param = array(
-			'v'	=> LiteSpeed_Cache::PLUGIN_VERSION,
-			'data' => $data,
-		) ;
-
-		$response = wp_remote_post( $url, array( 'body' => $param, 'timeout' => 15 ) ) ;
-
-		// Parse response data
-		if ( is_wp_error( $response ) ) {
-			$error_message = $response->get_error_message() ;
-			LiteSpeed_Cache_Log::debug( '[CSS] failed to post: ' . $error_message ) ;
-			return false ;
-		}
-
-		$json = json_decode( $response[ 'body' ], true ) ;
-		if ( ! is_array( $json ) ) {
-			LiteSpeed_Cache_Log::debug( '[CSS] failed to decode post json: ' . $response[ 'body' ] ) ;
-			return false ;
-		}
-
-		if ( ! empty( $json[ '_err' ] ) ) {
-			LiteSpeed_Cache_Log::debug( '[CSS] _err: ' . $json[ '_err' ] ) ;
-			return false ;
-		}
+		$json = LiteSpeed_Cache_Admin_API::post( LiteSpeed_Cache_Admin_API::IAPI_ACTION_CCSS, $data, true, false ) ;
 
 		if ( empty( $json[ 'ccss' ] ) ) {
 			LiteSpeed_Cache_Log::debug( '[CSS] empty ccss ' ) ;
 			return false ;
 		}
 
+		// Add filters
+		$ccss = apply_filters( 'litespeed_ccss', $json[ 'ccss' ], $ccss_type ) ;
+
 		// Write to file
-		Litespeed_File::save( $ccss_file, $json[ 'ccss' ], true ) ;
+		Litespeed_File::save( $ccss_file, $ccss, true ) ;
 
 		// Save summary data
 		$req_summary[ 'last_spent' ] = time() - $req_summary[ 'curr_request' ] ;
@@ -298,9 +276,9 @@ class LiteSpeed_Cache_CSS
 
 		LiteSpeed_Cache_Log::debug( '[CSS] saved ccss ' . $ccss_file ) ;
 
-		LiteSpeed_Cache_Log::debug2( '[CSS] ccss con: ' . $json[ 'ccss' ] ) ;
+		LiteSpeed_Cache_Log::debug2( '[CSS] ccss con: ' . $ccss ) ;
 
-		return $json[ 'ccss' ] ;
+		return $ccss ;
 	}
 
 	/**
@@ -311,28 +289,7 @@ class LiteSpeed_Cache_CSS
 	 */
 	private function _which_css()
 	{
-		$css = 'default' ;
-		if ( is_404() ) {
-			$css = '404' ;
-		}
-		elseif ( is_singular() ) {
-			$css = get_post_type() ;
-		}
-		elseif ( is_home() && get_option( 'show_on_front' ) == 'page' ) {
-			$css = 'home' ;
-		}
-		elseif ( is_front_page() ) {
-			$css = 'front' ;
-		}
-		elseif ( is_tax() ) {
-			$css = get_queried_object()->taxonomy ;
-		}
-		elseif ( is_category() ) {
-			$css = 'category' ;
-		}
-		elseif ( is_tag() ) {
-			$css = 'tag' ;
-		}
+		$css = LiteSpeed_Cache_Utility::page_type() ;
 
 		$unique = false ;
 

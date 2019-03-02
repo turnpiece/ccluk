@@ -32,7 +32,7 @@ class Login_Protection_Api extends Component {
 
 		$settings = Settings::instance();
 		//find backward from log date, if there are only log & counter > max attempt, then lock
-		$after = strtotime( '-' . $settings->login_protection_lockout_timeframe . ' seconds' );
+		$after = strtotime( '-' . $settings->login_protection_lockout_timeframe . ' ' . $settings->login_protection_lockout_duration_unit );
 		if ( is_object( $model ) ) {
 			//recal release time, if after time smaller than lock time,then we will use last locktime for check
 			if ( $after < $model->lock_time ) {
@@ -282,16 +282,16 @@ class Login_Protection_Api extends Component {
 		$nonce = wp_create_nonce( 'lockoutIPAction' );
 		if ( $ip != $log->ip ) {
 			if ( ! in_array( $log->ip, $blacklist ) ) {
-				$links[] = '<a data-nonce="' . $nonce . '" class="ip-action button button-primary button-small" data-type="blacklist" data-id="' . esc_attr( $log->id ) . '" data-ip="' . esc_attr( $log->ip ) . '" href="#">' . __( "Ban IP", wp_defender()->domain ) . '</a>';
+				$links[] = '<a data-nonce="' . $nonce . '" class="ip-action sui-button sui-button-red" data-type="blacklist" data-id="' . esc_attr( $log->id ) . '" data-ip="' . esc_attr( $log->ip ) . '" href="#"><i class="sui-icon-cross-close" aria-hidden="true"></i>' . __( "Ban IP", wp_defender()->domain ) . '</a>';
 			} else {
-				$links[] = '<a data-nonce="' . $nonce . '" class="ip-action button button-primary button-small" data-type="unblacklist" data-id="' . esc_attr( $log->id ) . '" data-ip="' . esc_attr( $log->ip ) . '" href="#">' . __( "Unban IP", wp_defender()->domain ) . '</a>';
+				$links[] = '<a data-nonce="' . $nonce . '" class="ip-action sui-button sui-button-blue" data-type="unblacklist" data-id="' . esc_attr( $log->id ) . '" data-ip="' . esc_attr( $log->ip ) . '" href="#">' . __( "Unban IP", wp_defender()->domain ) . '</a>';
 			}
 		}
 
 		if ( ! in_array( $log->ip, $whitelist ) ) {
-			$links[] = '<a data-nonce="' . $nonce . '" class="ip-action button button-secondary button-small" data-type="whitelist" data-id="' . esc_attr( $log->id ) . '" data-ip="' . esc_attr( $log->ip ) . '" href="#">' . __( "Add Whitelist", wp_defender()->domain ) . '</a>';
+			$links[] = '<a data-nonce="' . $nonce . '" class="ip-action sui-button sui-button-ghost" data-type="whitelist" data-id="' . esc_attr( $log->id ) . '" data-ip="' . esc_attr( $log->ip ) . '" href="#"><i class="sui-icon-check-tick" aria-hidden="true"></i>' . __( "Add Whitelist", wp_defender()->domain ) . '</a>';
 		} else {
-			$links[] = '<a data-nonce="' . $nonce . '" class="ip-action button button-secondary button-small" data-type="unwhitelist" data-id="' . esc_attr( $log->id ) . '" data-ip="' . esc_attr( $log->ip ) . '" href="#">' . __( "Unwhitelist", wp_defender()->domain ) . '</a>';
+			$links[] = '<a data-nonce="' . $nonce . '" class="ip-action sui-button sui-button-ghost" data-type="unwhitelist" data-id="' . esc_attr( $log->id ) . '" data-ip="' . esc_attr( $log->ip ) . '" href="#">' . __( "Unwhitelist", wp_defender()->domain ) . '</a>';
 		}
 
 		return implode( '', $links );

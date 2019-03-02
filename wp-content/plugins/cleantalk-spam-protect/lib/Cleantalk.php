@@ -5,6 +5,11 @@
  */
 class Cleantalk {
 
+	/*
+	 * Use Wordpress built-in API
+	 */
+	public $use_bultin_api = false;
+	
     /**
 	* Maximum data size in bytes
 	* @var int
@@ -218,7 +223,6 @@ class Cleantalk {
 				$request->$param = CleantalkHelper::removeNonUTF8FromString($value);
         }
 		
-		$request->message = unserialize($request->message);
 		$request->message = is_array($request->message) ? json_encode($request->message) : $request->message;
 		
         return $request;
@@ -230,7 +234,7 @@ class Cleantalk {
      * @return boolean|\CleantalkResponse
      */
     private function sendRequest($data = null, $url, $server_timeout = 3)
-	{		
+	{
         // Convert to array
         $data = (array)json_decode(json_encode($data), true);
 		
@@ -243,52 +247,75 @@ class Cleantalk {
 		$data = $tmp_data;
 		unset($key, $value, $tmp_data);
 		
-        // Convert to JSON
-        $data = json_encode($data);
+		// Convert to JSON
+		$data = json_encode($data);
 		
         if (isset($this->api_version)) {
             $url = $url . $this->api_version;
         }
         
-        // Switching to secure connection
-        if ($this->ssl_on && !preg_match("/^https:/", $url)){
-            $url = preg_replace("/^(http)/i", "$1s", $url);
-        }
 		
         $result = false;
         $curl_error = null;
-		if(function_exists('curl_init')) {
+		
+		if($this->use_bultin_api){
 			
-            $ch = curl_init();
-			
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_TIMEOUT, $server_timeout);
-            curl_setopt($ch, CURLOPT_POST, 1);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // receive server response ...
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Expect:')); // resolve 'Expect: 100-continue' issue
-            curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_0); // see http://stackoverflow.com/a/23322368
-            
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // Disabling CA cert verivication and 
-			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);     // Disabling common name verification
-			
-            if ($this->ssl_on && $this->ssl_path != '') {
-				curl_setopt($ch, CURLOPT_CAINFO, $this->ssl_path);
-            }
+			$args = array(
+				'body' => $data,
+				'timeout' => $server_timeout,
+				'user-agent' => CLEANTALK_AGENT.' '.get_bloginfo( 'url' ),
+			);
 
-            $result = curl_exec($ch);
-            if (!$result) {
-                $curl_error = curl_error($ch);
-				// Use SSL next time, if error occurs.
-				if(!$this->ssl_on){
-					$this->ssl_on = true;
-					$args = func_get_args();
-					return $this->sendRequest($args[0], $args[1], $server_timeout);
+			$result = wp_remote_post($url, $args);
+
+			if( is_wp_error( $result ) ) {
+				$errors = $result->get_error_message();
+				$result = false;
+			}else{
+				 $result = wp_remote_retrieve_body($result);
+			}
+			
+		}else{
+			
+
+			// Switching to secure connection
+			if ($this->ssl_on && !preg_match("/^https:/", $url)){
+				$url = preg_replace("/^(http)/i", "$1s", $url);
+			}
+			
+			if(function_exists('curl_init')) {
+
+				$ch = curl_init();
+
+				curl_setopt($ch, CURLOPT_URL, $url);
+				curl_setopt($ch, CURLOPT_TIMEOUT, $server_timeout);
+				curl_setopt($ch, CURLOPT_POST, 1);
+				curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // receive server response ...
+				curl_setopt($ch, CURLOPT_HTTPHEADER, array('Expect:')); // resolve 'Expect: 100-continue' issue
+				curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_0); // see http://stackoverflow.com/a/23322368
+
+				curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // Disabling CA cert verivication and 
+				curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);     // Disabling common name verification
+
+				if ($this->ssl_on && $this->ssl_path != '') {
+					curl_setopt($ch, CURLOPT_CAINFO, $this->ssl_path);
 				}
-            }
-            
-            curl_close($ch); 
-        }
+
+				$result = curl_exec($ch);
+				if (!$result) {
+					$curl_error = curl_error($ch);
+					// Use SSL next time, if error occurs.
+					if(!$this->ssl_on){
+						$this->ssl_on = true;
+						$args = func_get_args();
+						return $this->sendRequest($args[0], $args[1], $server_timeout);
+					}
+				}
+
+				curl_close($ch); 
+			}
+		}
 
         if (!$result) {
             $allow_url_fopen = ini_get('allow_url_fopen');
@@ -380,7 +407,7 @@ class Cleantalk {
 		$msg->all_headers = json_encode($msg->all_headers);
 				
 		// Using current server without changing it
-        if (false && (!empty($this->work_url) && ($this->server_changed + $this->server_ttl > time()))){
+        if (!empty($this->work_url) && ($this->server_changed + $this->server_ttl > time())){
 	        
             $url = !empty($this->work_url) ? $this->work_url : $this->server_url;
             $result = $this->sendRequest($msg, $url, $this->server_timeout);
@@ -390,7 +417,7 @@ class Cleantalk {
         }
 
 		// Changing server
-        if (true || ($result === false || $result->errno != 0)) {
+        if ($result === false || $result->errno != 0) {
 			
             // Split server url to parts
             preg_match("@^(https?://)([^/:]+)(.*)@i", $this->server_url, $matches);

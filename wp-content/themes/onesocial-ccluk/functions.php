@@ -135,7 +135,11 @@ function ccluk_theme_scripts_styles()
    * need to ensure this script loads after the parent scripts
    *
    */
-  wp_enqueue_script( 'ccluk-menu-js', get_stylesheet_directory_uri() . '/assets/js/menu.'.(CCLUK_DEBUGGING ? '' : 'min.').'js', array( 'jquery' ) );
+    wp_enqueue_script( 'ccluk-menu-js', get_stylesheet_directory_uri() . '/assets/js/menu.'.(CCLUK_DEBUGGING ? '' : 'min.').'js', array( 'jquery' ) );
+
+    // Google Analytics tracking
+    wp_enqueue_script( 'ccluk-ga-tracking-js', get_stylesheet_directory_uri() . '/assets/js/ga-tracking.'.(CCLUK_DEBUGGING ? '' : 'min.').'js', array( 'jquery' ) );
+
 }
 add_action( 'wp_enqueue_scripts', 'ccluk_theme_scripts_styles', 9999 );
 

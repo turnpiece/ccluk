@@ -2,9 +2,9 @@
 Contributors: yani.iliev, bangelov, pimjitsawang
 Tags: move, transfer, copy, migrate, backup, clone, restore, db migration, wordpress migration, website migration, database export, database import, apoyo, sauvegarde, di riserva, バックアップ
 Requires at least: 3.3
-Tested up to: 5.0
+Tested up to: 5.1
 Requires PHP: 5.2.17
-Stable tag: 6.80
+Stable tag: 6.85
 License: GPLv2 or later
 
 Move, transfer, copy, migrate, and backup a site with 1-click. Quick, easy, and reliable.
@@ -62,6 +62,7 @@ Mobile device compatible: All in One WP Plugin is the first plugin to offer true
 * [Amazon Glacier](https://servmask.com/products/amazon-glacier-extension)
 * [pCloud](https://servmask.com/products/pcloud-extension)
 * [WebDAV](https://servmask.com/products/webdav-extension)
+* [S3 Client](https://servmask.com/products/s3-client-extension)
 
 = Supported hosting providers =
 **The plugin does not have any dependencies, making it compatible with all PHP hosting providers. We support a vast range of hosting providers. Some of the most popular include:**
@@ -107,6 +108,45 @@ Alternatively you can download the plugin using the download button on this page
 All-in-One WP Migration **asks for your consent** to collect **requester's email address** when filling plugin's contact form. [GDPR Compliant Privacy Policy](https://www.iubenda.com/privacy-policy/946881)
 
 == Changelog ==
+= 6.85 =
+**Changed**
+
+* Tested up to WordPress 5.1
+
+= 6.84 =
+**Fixed**
+
+* Set the type of backup file during download via HTML attribute
+* Removed Math_BigInteger class which was causing issues with other plugins
+
+= 6.83 =
+**Added**
+
+* Check for minimum required extension version on import
+* Disable Join My Multisite, MultiSite Clone Duplicator and WordPress MU Domain Mapping plugins after restoring a backup
+
+**Fixed**
+
+* Support for WordPress 3.3
+
+= 6.82 =
+**Added**
+
+* Support for PHP 7.3
+
+**Fixed**
+
+* Feedback form on settings page
+
+= 6.81 =
+**Added**
+
+* Support for S3 Compatible Storage Providers
+
+**Fixed**
+
+* Design issue with localized download button
+
 = 6.80 =
 **Added**
 

@@ -49,11 +49,11 @@ class SWP_CURL {
 						curl_setopt( $curly[ $network ], CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT'] );
 						curl_setopt( $curly[ $network ], CURLOPT_FAILONERROR, 0 );
 						curl_setopt( $curly[ $network ], CURLOPT_FOLLOWLOCATION, 0 );
-						curl_setopt( $curly[ $network ], CURLOPT_RETURNTRANSFER,1 );
+						curl_setopt( $curly[ $network ], CURLOPT_RETURNTRANSFER, 1 );
 						curl_setopt( $curly[ $network ], CURLOPT_SSL_VERIFYPEER, false );
 						curl_setopt( $curly[ $network ], CURLOPT_SSL_VERIFYHOST, false );
-						curl_setopt( $curly[ $network ], CURLOPT_TIMEOUT, 5 );
-						curl_setopt( $curly[ $network ], CURLOPT_CONNECTTIMEOUT, 5 );
+						curl_setopt( $curly[ $network ], CURLOPT_TIMEOUT, 3 );
+						curl_setopt( $curly[ $network ], CURLOPT_CONNECTTIMEOUT, 3 );
 						curl_setopt( $curly[ $network ], CURLOPT_NOSIGNAL, 1 );
 						curl_setopt( $curly[ $network ], CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4 );
 						// curl_setopt($curly[$network], CURLOPT_SSLVERSION, CURL_SSLVERSION_SSLv3);
@@ -67,11 +67,27 @@ class SWP_CURL {
 
 		// execute the handles
 		$running = null;
-		do {
-			curl_multi_exec( $mh, $running );
-		} while ($running > 0);
 
-		  // get content and remove handles
+		do {
+		   $mrc = curl_multi_exec($mh, $running);
+		}
+
+		while ($mrc == CURLM_CALL_MULTI_PERFORM);
+
+
+		while ($running && $mrc == CURLM_OK) {
+			if (curl_multi_select($mh) == -1) {
+				usleep(1);
+			}
+
+			do {
+				$mrc = curl_multi_exec($mh, $running);
+			}
+
+			while ($mrc == CURLM_CALL_MULTI_PERFORM);
+		}
+
+	  // get content and remove handles
 		foreach ( $curly as $network => $content ) {
 			$result[ $network ] = curl_multi_getcontent( $content );
 			curl_multi_remove_handle( $mh, $content );
@@ -82,10 +98,10 @@ class SWP_CURL {
 	  return $result;
 	}
 
-	public static function file_get_contents_curl( $url ) {
+	public static function file_get_contents_curl( $url, $headers = null) {
 		$ch = curl_init();
+		
 		curl_setopt( $ch, CURLOPT_URL, $url );
-        curl_setopt( $ch, CURLOPT_HEADER, 0 );
 		curl_setopt( $ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT'] );
 		curl_setopt( $ch, CURLOPT_FAILONERROR, 0 );
 		curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 0 );
@@ -96,6 +112,14 @@ class SWP_CURL {
 		curl_setopt( $ch, CURLOPT_CONNECTTIMEOUT, 5 );
 		curl_setopt( $ch, CURLOPT_NOSIGNAL, 1 );
 		curl_setopt( $ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4 );
+
+		if ( $headers ) {
+			curl_setopt($ch, CURLOPT_HTTPHEADER, $headers );
+		}
+		else {
+			curl_setopt( $ch, CURLOPT_HEADER, 0 );
+		}
+
 		$cont = @curl_exec( $ch );
 		$curl_errno = curl_errno( $ch );
 		curl_close( $ch );

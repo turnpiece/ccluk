@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * the terms of the GNU Public License, version 3.
  *
  * Copyright (c) 2015 WooThemes
- * Copyright (c) 2016 WordImpress, LLC
+ * Copyright (c) 2016 GiveWP
  */
 
 global $wpdb;
@@ -156,7 +156,7 @@ $give_updates = Give_Updates::get_instance();
 		<tr>
 			<td data-export-label="Admin AJAX"><?php _e( 'Admin AJAX', 'give' ); ?>:</td>
 			<td class="help"><?php echo Give()->tooltips->render_help( __( 'Whether Admin AJAX is accessible.', 'give' ) ); ?></td>
-			<td><?php echo give_test_ajax_works() ? __( 'Accessible', 'give' ) : __( 'Inaccessible', 'give' ); ?></td>
+			<td><?php echo give_test_ajax_works( true ) ? __( 'Accessible', 'give' ) : __( 'Inaccessible', 'give' ); ?></td>
 		</tr>
 		<tr>
 			<td data-export-label="Registered Post Statuses"><?php _e( 'Registered Post Statuses', 'give' ); ?>:</td>
@@ -452,7 +452,7 @@ $give_updates = Give_Updates::get_instance();
 		<tr>
 			<td data-export-label="Give Version"><?php _e( 'Give Version', 'give' ); ?>:</td>
 			<td class="help"><?php echo Give()->tooltips->render_help( __( 'The version of Give installed on your site.', 'give' ) ); ?></td>
-			<td><?php echo esc_html( GIVE_VERSION ); ?></td>
+			<td><?php echo esc_html( get_option( 'give_version' )); ?></td>
 		</tr>
 		<tr>
 			<td data-export-label="Give Cache"><?php _e( 'Give Cache', 'give' ); ?>:</td>
@@ -492,6 +492,32 @@ $give_updates = Give_Updates::get_instance();
 				}
 
 				echo $updates_text;
+				?>
+			</td>
+		</tr>
+		<tr>
+			<td data-export-label="Database Tables"><?php _e( 'Database Tables', 'give' ); ?>:</td>
+			<td class="help"><?php echo Give()->tooltips->render_help( __( 'This will show list of installed database tables.', 'give' ) ); ?></td>
+			<td>
+				<?php
+				$db_table_list = '';
+
+				/* @var  Give_DB $table */
+				foreach ( __give_get_tables() as $table ) {
+					$db_table_list .= sprintf(
+						'<li><mark class="%1$s"><span class="dashicons dashicons-%2$s"></mark> %3$s -  %4$s</li>',
+						$table->installed()
+							? 'yes'
+							: 'error',
+						$table->installed()
+							? 'yes'
+							: 'no-alt',
+						$table->table_name,
+						$table->version
+					);
+				}
+
+				echo "<ul>{$db_table_list}</ul>";
 				?>
 			</td>
 		</tr>

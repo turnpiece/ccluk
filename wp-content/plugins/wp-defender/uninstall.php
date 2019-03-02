@@ -31,6 +31,7 @@ foreach ( $scan as $model ) {
 
 $cache = \Hammer\Helper\WP_Helper::getCache();
 $cache->delete( 'isActivated' );
+$cache->delete( 'wdf_isActivated' );
 $cache->delete( 'wdfchecksum' );
 $cache->delete( 'cleanchecksum' );
 

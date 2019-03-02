@@ -21,7 +21,7 @@ class LiteSpeed_Cache_Admin_Display
 	const NOTICE_GREEN = 'notice notice-success' ;
 	const NOTICE_RED = 'notice notice-error' ;
 	const NOTICE_YELLOW = 'notice notice-warning' ;
-	const TRANSIENT_LITESPEED_MESSAGE = 'litespeed_messages' ;
+	const LITESPEED_MSG = 'litespeed_messages' ;
 
 	const PURGEBY_CAT = '0' ;
 	const PURGEBY_PID = '1' ;
@@ -71,7 +71,8 @@ class LiteSpeed_Cache_Admin_Display
 		if ( current_user_can($manage) ) {
 			add_action( 'wp_before_admin_bar_render', array( LiteSpeed_Cache_GUI::get_instance(), 'backend_shortcut' ) ) ;
 
-			add_action('admin_enqueue_scripts', array($this, 'check_messages')) ;// We can do this bcos admin_notices hook is after admin_enqueue_scripts hook in wp-admin/admin-header.php
+			// add_action('admin_enqueue_scripts', array($this, 'check_messages')) ;// We can do this bcos admin_notices hook is after admin_enqueue_scripts hook in wp-admin/admin-header.php
+			add_action( is_network_admin() ? 'network_admin_notices' : 'admin_notices', array( $this, 'display_messages' ) ) ;
 		}
 
 		/**
@@ -220,8 +221,9 @@ class LiteSpeed_Cache_Admin_Display
 			$localize_data[ 'ajax_url_dismiss_ruleconflict' ] = $ajax_url ;
 		}
 
-		if ( LiteSpeed_Cache_GUI::has_promo_msg() || LiteSpeed_Cache_GUI::has_promo_msg( 'slack' ) ) {
-			$ajax_url_promo = LiteSpeed_Cache_Utility::build_url( LiteSpeed_Cache::ACTION_DISMISS, LiteSpeed_Cache_GUI::TYPE_DISMISS_PROMO, true ) ;
+		$promo_tag = LiteSpeed_Cache_GUI::get_instance()->show_promo( true ) ;
+		if ( $promo_tag ) {
+			$ajax_url_promo = LiteSpeed_Cache_Utility::build_url( LiteSpeed_Cache::ACTION_DISMISS, LiteSpeed_Cache_GUI::TYPE_DISMISS_PROMO, true, null, array( 'promo_tag' => $promo_tag ) ) ;
 			$localize_data[ 'ajax_url_promo' ] = $ajax_url_promo ;
 		}
 
@@ -469,10 +471,20 @@ class LiteSpeed_Cache_Admin_Display
 	{
 		// Bypass adding for CLI or cron
 		if ( defined( 'LITESPEED_CLI' ) || defined( 'DOING_CRON' ) ) {
+			// WP CLI will show the info directly
+			if ( defined( 'WP_CLI' ) && WP_CLI ) {
+				$msg = strip_tags( $msg ) ;
+				if ( $color == self::NOTICE_RED ) {
+					WP_CLI::error( $msg ) ;
+				}
+				else {
+					WP_CLI::success( $msg ) ;
+				}
+			}
 			return ;
 		}
 
-		$messages = (array)get_transient(self::TRANSIENT_LITESPEED_MESSAGE) ;
+		$messages = (array)get_option( self::LITESPEED_MSG ) ;
 		if( ! $messages ) {
 			$messages = array() ;
 		}
@@ -484,7 +496,7 @@ class LiteSpeed_Cache_Admin_Display
 		else {
 			$messages[] = self::build_notice($color, $msg) ;
 		}
-		set_transient(self::TRANSIENT_LITESPEED_MESSAGE, $messages, 86400) ;
+		update_option( self::LITESPEED_MSG, $messages ) ;
 	}
 
 	/**
@@ -495,7 +507,8 @@ class LiteSpeed_Cache_Admin_Display
 	 */
 	public function display_messages()
 	{
-		$messages = get_transient(self::TRANSIENT_LITESPEED_MESSAGE) ;
+		// One time msg
+		$messages = get_option( self::LITESPEED_MSG ) ;
 		if( is_array($messages) ) {
 			$messages = array_unique($messages) ;
 
@@ -509,22 +522,14 @@ class LiteSpeed_Cache_Admin_Display
 				echo $msg ;
 			}
 		}
-		delete_transient(self::TRANSIENT_LITESPEED_MESSAGE) ;
-	}
+		delete_option( self::LITESPEED_MSG ) ;
 
-	/**
-	 * Check if has new messages
-	 *
-	 * @since 1.1.0
-	 * @access public
-	 */
-	public function check_messages()
-	{
-		$messages = get_transient(self::TRANSIENT_LITESPEED_MESSAGE) ;
-		if( ! $messages ) {
-			return ;
-		}
-		add_action(is_network_admin() ? 'network_admin_notices' : 'admin_notices', array($this, 'display_messages')) ;
+		/**
+		 * Check promo msg first
+		 * @since 2.9
+		 */
+		LiteSpeed_Cache_GUI::get_instance()->show_promo() ;
+
 	}
 
 	/**
@@ -963,9 +968,17 @@ class LiteSpeed_Cache_Admin_Display
 	 * @since  2.6.1
 	 * @access public
 	 */
-	public function learn_more( $link )
+	public function learn_more( $link, $title = false, $class = false )
 	{
-		echo ' <a href="' . $link . '" target="_blank">' . __( 'Learn More', 'litespeed-cache' ) . '</a>' ;
+		if ( $class ) {
+			$class = " class='$class' " ;
+		}
+
+		if ( ! $title ) {
+			$title = __( 'Learn More', 'litespeed-cache' ) ;
+		}
+
+		echo " <a href='$link' target='_blank' $class>$title</a>" ;
 	}
 
 	/**

@@ -8,7 +8,7 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2015 - 2018 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2015 - 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -132,8 +132,6 @@ class Cache extends Sitemaps {
 		if ( ! $post_id )
 			return false;
 
-		$success = [];
-
 		$success[] = $this->delete_cache( 'post', $post_id );
 
 		if ( $this->get_option( 'sitemaps_output' ) ) {
@@ -215,7 +213,7 @@ class Cache extends Sitemaps {
 		$success = false;
 
 		switch ( $type ) :
-			case 'front' :
+			case 'front':
 				$front_id = $this->get_the_front_page_ID();
 
 				$this->object_cache_delete( $this->get_meta_output_cache_key_by_type( $front_id, '', 'frontpage' ) );
@@ -223,14 +221,14 @@ class Cache extends Sitemaps {
 				$success = true;
 				break;
 
-			case 'post' :
+			case 'post':
 				$post_type = \get_post_type( $id );
 
 				if ( $post_type ) {
 					switch ( $post_type ) {
-						case 'page' :
-						case 'post' :
-						case 'attachment' :
+						case 'page':
+						case 'post':
+						case 'attachment':
 							break;
 
 						default:
@@ -246,35 +244,35 @@ class Cache extends Sitemaps {
 				break;
 
 			//* Careful, this can only run on archive pages. For now.
-			case 'term' :
+			case 'term':
 				$this->object_cache_delete( $this->get_meta_output_cache_key_by_type( $id, $args['term'], 'term' ) );
 				$this->delete_ld_json_transient( $id, $args['term'], 'term' );
 				$success = true;
 				break;
 
-			case 'author' :
+			case 'author':
 				$this->object_cache_delete( $this->get_meta_output_cache_key_by_type( $id, 'author', 'author' ) );
 				$this->delete_ld_json_transient( $id, 'author', 'author' );
 				$success = true;
 				break;
 
-			case 'sitemap' :
+			case 'sitemap':
 				$success = $this->delete_sitemap_transient();
 				break;
 
-			case 'robots' :
+			case 'robots':
 				$success = $this->object_cache_delete( $this->get_robots_txt_cache_key() );
 				break;
 
-			case 'excluded_post_ids' :
+			case 'excluded_post_ids':
 				$success = $this->delete_excluded_post_ids_transient();
 				break;
 
-			case 'object' :
+			case 'object':
 				$success = \wp_cache_flush();
 				break;
 
-			case 'detection' :
+			case 'detection':
 				break;
 
 			/**
@@ -284,8 +282,9 @@ class Cache extends Sitemaps {
 			 * @NOTE Other caching plugins can override these groups. Therefore this
 			 * does NOT work.
 			 * @TODO make this work.
+			 * @see 'object' switch-index.
 			 */
-			case 'objectflush' :
+			case 'objectflush':
 				//* @NOTE false can't pass.
 				if ( false && $this->use_object_cache ) {
 					if ( isset( $GLOBALS['wp_object_cache']->cache['the_seo_framework'] ) ) {
@@ -309,7 +308,7 @@ class Cache extends Sitemaps {
 		 * @param array  $args    Additional arguments. They can overwrite $type and $id.
 		 * @param bool   $success Whether the action cleared.
 		 */
-		do_action( "the_seo_framework_delete_cache_{$type}", $type, $id, $args, $success );
+		\do_action( "the_seo_framework_delete_cache_{$type}", $type, $id, $args, $success );
 
 		return $success;
 	}
@@ -393,10 +392,10 @@ class Cache extends Sitemaps {
 	 *
 	 * @since 2.4.3
 	 *
-	 * @param string $key The Object cache key.
-	 * @param mixed $data The Object cache data.
-	 * @param int $expire The Object cache expire time.
-	 * @param string $group The Object cache group.
+	 * @param string $key    The Object cache key.
+	 * @param mixed  $data   The Object cache data.
+	 * @param int    $expire The Object cache expire time.
+	 * @param string $group  The Object cache group.
 	 * @return bool true on set, false when disabled.
 	 */
 	public function object_cache_set( $key, $data, $expire = 0, $group = 'the_seo_framework' ) {
@@ -412,10 +411,11 @@ class Cache extends Sitemaps {
 	 *
 	 * @since 2.4.3
 	 *
-	 * @param string $key The Object cache key.
+	 * @param string $key   The Object cache key.
 	 * @param string $group The Object cache group.
-	 * @param bool $force Whether to force an update of the local cache.
-	 * @param bool $found Whether the key was found in the cache. Disambiguates a return of false, a storable value. Passed by reference.
+	 * @param bool   $force Whether to force an update of the local cache.
+	 * @param bool   $found Whether the key was found in the cache.
+	 *                      Disambiguates a return of false, a storable value. Passed by reference.
 	 * @return mixed wp_cache_get if object caching is allowed. False otherwise.
 	 */
 	public function object_cache_get( $key, $group = 'the_seo_framework', $force = false, &$found = null ) {
@@ -431,7 +431,7 @@ class Cache extends Sitemaps {
 	 *
 	 * @since 2.8.0
 	 *
-	 * @param string $key The Object cache key.
+	 * @param string $key   The Object cache key.
 	 * @param string $group The Object cache group.
 	 * @return mixed wp_cache_delete if object caching is allowed. False otherwise.
 	 */
@@ -450,7 +450,7 @@ class Cache extends Sitemaps {
 	 * @NOTE When changing the revision, we MUST delete the old revision key manually.
 	 *       Otherwise, the transient will stay indefinitely.
 	 *
-	 * @return string The current sitemap transient name. Can be empty.
+	 * @return string The current post exclusion transient name. Can be empty.
 	 */
 	public function get_exclusion_transient_name() {
 		$exclude_revision = '1'; // WARNING: SEE NOTE
@@ -475,9 +475,9 @@ class Cache extends Sitemaps {
 	 * @since 3.1.0
 	 * @since 3.1.1 : The first parameter is now optional.
 	 *
-	 * @param int|string|bool $id the Taxonomy or Post ID. If false it will generate for the blog page.
-	 * @param string $taxonomy The taxonomy name.
-	 * @param string|null $type The post type.
+	 * @param int|string|bool $id       The Taxonomy or Post ID. If false it will generate for the blog page.
+	 * @param string          $taxonomy The taxonomy name.
+	 * @param string|null     $type     The post type.
 	 * @return string The ld_json cache key.
 	 */
 	public function get_ld_json_transient_name( $id = 0, $taxonomy = '', $type = null ) {
@@ -492,7 +492,7 @@ class Cache extends Sitemaps {
 		/**
 		 * Change key based on options.
 		 */
-		$options = $this->enable_ld_json_breadcrumbs() ? '1' : '0';
+		$options  = $this->enable_ld_json_breadcrumbs() ? '1' : '0';
 		$options .= $this->enable_ld_json_searchbox() ? '1' : '0';
 
 		return 'tsf_' . $revision . '_' . $options . '_ldjs_' . $cache_key;
@@ -511,9 +511,9 @@ class Cache extends Sitemaps {
 	 * @see $this->generate_cache_key_by_query() to get cache key from the query.
 	 * @see $this->generate_cache_key_by_type() to get cache key outside of the query.
 	 *
-	 * @param int|string|bool $id the Taxonomy or Post ID.
-	 * @param string $taxonomy The taxonomy name.
-	 * @param string $type The Post Type.
+	 * @param int|string|bool $id       The Taxonomy or Post ID.
+	 * @param string          $taxonomy The taxonomy name.
+	 * @param string          $type     The Post Type.
 	 * @return string The generated cache key by query or type.
 	 */
 	public function generate_cache_key( $id = 0, $taxonomy = '', $type = null ) {
@@ -534,9 +534,9 @@ class Cache extends Sitemaps {
 	 * @staticvar array $cached_id : contains cache strings.
 	 * @see $this->generate_cache_key_by_type() to get cache key outside of the query.
 	 *
-	 * @param int|string|bool $page_id the Taxonomy or Post ID.
-	 * @param string $taxonomy The Taxonomy name.
-	 * @param string $type The Post Type
+	 * @param int|string|bool $page_id  The Taxonomy or Post ID.
+	 * @param string          $taxonomy The Taxonomy name.
+	 * @param string          $type     The Post Type.
 	 * @return string The generated cache key by query.
 	 */
 	public function generate_cache_key_by_query( $page_id = 0, $taxonomy = '', $type = null ) {
@@ -636,15 +636,15 @@ class Cache extends Sitemaps {
 			$post_type = \get_post_type( $page_id );
 
 			switch ( $post_type ) :
-				case 'page' :
+				case 'page':
 					$the_id = 'page_' . $page_id;
 					break;
 
-				case 'post' :
+				case 'post':
 					$the_id = 'post_' . $page_id;
 					break;
 
-				case 'attachment' :
+				case 'attachment':
 					$the_id = 'attach_' . $page_id;
 					break;
 
@@ -703,33 +703,33 @@ class Cache extends Sitemaps {
 	 * @see $this->generate_cache_key().
 	 * @see $this->generate_cache_key_by_query() to get cache key from the query.
 	 *
-	 * @param int|string|bool $page_id the Taxonomy or Post ID.
-	 * @param string $taxonomy The term taxonomy.
-	 * @param string $type The Post Type.
+	 * @param int|string|bool $page_id  The Taxonomy or Post ID.
+	 * @param string          $taxonomy The term taxonomy.
+	 * @param string          $type     The Post Type.
 	 * @return string|bool String the generated cache key. Bool false on failure.
 	 */
 	public function generate_cache_key_by_type( $page_id, $taxonomy = '', $type = '' ) {
 
 		switch ( $type ) :
-			case 'author' :
+			case 'author':
 				return $this->add_cache_key_suffix( 'author_' . $page_id );
 				break;
-			case 'frontpage' :
+			case 'frontpage':
 				return $this->add_cache_key_suffix( $this->generate_front_page_cache_key() );
 				break;
-			case 'page' :
+			case 'page':
 				return $this->add_cache_key_suffix( 'page_' . $page_id );
 				break;
-			case 'post' :
+			case 'post':
 				return $this->add_cache_key_suffix( 'post_' . $page_id );
 				break;
-			case 'attachment' :
+			case 'attachment':
 				return $this->add_cache_key_suffix( 'attach_' . $page_id );
 				break;
-			case 'singular' :
+			case 'singular':
 				return $this->add_cache_key_suffix( 'singular_' . $page_id );
 				break;
-			case 'term' :
+			case 'term':
 				return $this->add_cache_key_suffix( $this->generate_taxonomical_cache_key( $page_id, $taxonomy ) );
 				break;
 			default:
@@ -757,7 +757,7 @@ class Cache extends Sitemaps {
 		static $locale = null;
 
 		if ( is_null( $locale ) )
-			$locale = strtolower( get_locale() );
+			$locale = strtolower( \get_locale() );
 
 		return $key . '_' . $GLOBALS['blog_id'] . '_' . $locale;
 	}
@@ -790,7 +790,7 @@ class Cache extends Sitemaps {
 	 *
 	 * @since 2.6.0
 	 *
-	 * @param int $page_id The taxonomy or page ID.
+	 * @param int    $page_id  The taxonomy or page ID.
 	 * @param string $taxonomy The taxonomy name.
 	 * @return string The Taxonomical Archive cache key.
 	 */
@@ -845,8 +845,6 @@ class Cache extends Sitemaps {
 	 * @since 2.9.1
 	 * @uses THE_SEO_FRAMEWORK_DB_VERSION as cache key buster.
 	 *
-	 * @param int $id The ID. Defaults to $this->get_the_real_ID();
-	 * @param string $type The post type.
 	 * @return string The TSF meta output cache key.
 	 */
 	public function get_meta_output_cache_key_by_query() {
@@ -870,9 +868,9 @@ class Cache extends Sitemaps {
 	 * @uses $this->generate_cache_key_by_type()
 	 * @see $this->get_meta_output_cache_key_by_query()
 	 *
-	 * @param int $id The ID. Defaults to $this->get_the_real_ID();
+	 * @param int    $id       The ID. Defaults to current ID.
 	 * @param string $taxonomy The term taxonomy
-	 * @param string $type The post type.
+	 * @param string $type     The post type.
 	 * @return string The TSF meta output cache key.
 	 */
 	public function get_meta_output_cache_key_by_type( $id = 0, $taxonomy = '', $type = '' ) {
@@ -926,7 +924,7 @@ class Cache extends Sitemaps {
 			return false;
 
 		$transient = $this->get_sitemap_transient_name();
-		$transient and \delete_transient( $this->get_sitemap_transient_name() );
+		$transient and \delete_transient( $transient );
 		$this->ping_searchengines();
 
 		return $run = true;
@@ -940,9 +938,9 @@ class Cache extends Sitemaps {
 	 * @since 2.9.1 Now no longer sets object property $this->ld_json_transient.
 	 * @since 2.9.4 Removed cache.
 	 *
-	 * @param mixed $page_id The page ID or identifier.
-	 * @param string $taxonomy The tt name.
-	 * @param string|null $type The post type.
+	 * @param mixed       $page_id  The page ID or identifier.
+	 * @param string      $taxonomy The tt name.
+	 * @param string|null $type     The post type.
 	 * @return bool true
 	 */
 	public function delete_ld_json_transient( $page_id, $taxonomy = '', $type = null ) {

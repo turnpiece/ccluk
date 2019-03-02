@@ -40,7 +40,7 @@
 		<li>
 			<span class="sui-list-label"><?php esc_html_e( 'Outages', 'wphb' ); ?></span>
 			<span class="sui-list-detail">
-				<?php if ( intval( $uptime_stats->outages ) > 0 ) : ?>
+				<?php if ( is_object( $uptime_stats ) && intval( $uptime_stats->outages ) > 0 ) : ?>
 					<?php echo intval( $uptime_stats->outages ); ?>
 				<?php else : ?>
 					<?php esc_html_e( 'None', 'wphb' ); ?>
@@ -62,7 +62,7 @@
 			<span class="sui-list-detail">
 				<?php
 				$site_date = '';
-				if ( $uptime_stats->up_since ) {
+				if ( is_object( $uptime_stats ) && $uptime_stats->up_since ) {
 					$gmt_date = date( 'Y-m-d H:i:s', $uptime_stats->up_since );
 					$site_date = get_date_from_gmt( $gmt_date, get_option( 'date_format' ) . ' ' . get_option( 'time_format' ) );
 				}

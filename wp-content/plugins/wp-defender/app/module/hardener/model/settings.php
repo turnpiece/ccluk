@@ -92,6 +92,9 @@ class Settings extends \Hammer\WP\Settings {
 	 */
 	public $active_server = 'apache';
 
+	public $min_php_version = '';
+	public $stable_php_version = '';
+
 	/**
 	 * shorthand to add to a list
 	 *

@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (C) 2014-2018 ServMask Inc.
+ * Copyright (C) 2014-2019 ServMask Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -555,16 +555,17 @@ class Ai1wm_Main_Controller {
 		);
 
 		wp_register_script(
-			'ai1wm_feedback',
-			Ai1wm_Template::asset_link( 'javascript/feedback.min.js' ),
+			'ai1wm_settings',
+			Ai1wm_Template::asset_link( 'javascript/settings.min.js' ),
 			array( 'ai1wm_util' )
 		);
 
-		wp_register_script(
-			'ai1wm_report',
-			Ai1wm_Template::asset_link( 'javascript/report.min.js' ),
-			array( 'ai1wm_util' )
-		);
+		wp_localize_script( 'ai1wm_settings', 'ai1wm_locale', array(
+			'leave_feedback'                      => __( 'Leave plugin developers any feedback here', AI1WM_PLUGIN_NAME ),
+			'how_may_we_help_you'                 => __( 'How may we help you?', AI1WM_PLUGIN_NAME ),
+			'thanks_for_submitting_your_feedback' => __( 'Thanks for submitting your feedback!', AI1WM_PLUGIN_NAME ),
+			'thanks_for_submitting_your_request'  => __( 'Thanks for submitting your request!', AI1WM_PLUGIN_NAME ),
+		) );
 	}
 
 	/**
@@ -711,6 +712,10 @@ class Ai1wm_Main_Controller {
 			'secret_key' => get_option( AI1WM_SECRET_KEY ),
 		) );
 
+		wp_localize_script( 'ai1wm_import', 'ai1wm_compatibility', array(
+			'messages' => Ai1wm_Compatibility::get( array() ),
+		) );
+
 		wp_localize_script( 'ai1wm_import', 'ai1wm_locale', array(
 			'stop_importing_your_website'         => __( 'You are about to stop importing your website, are you sure?', AI1WM_PLUGIN_NAME ),
 			'preparing_to_import'                 => __( 'Preparing to import...', AI1WM_PLUGIN_NAME ),
@@ -719,7 +724,7 @@ class Ai1wm_Main_Controller {
 			'unable_to_confirm_the_import'        => __( 'Unable to confirm the import. Refresh the page and try again', AI1WM_PLUGIN_NAME ),
 			'unable_to_prepare_blogs_on_import'   => __( 'Unable to prepare blogs on import. Refresh the page and try again', AI1WM_PLUGIN_NAME ),
 			'unable_to_stop_the_import'           => __( 'Unable to stop the import. Refresh the page and try again', AI1WM_PLUGIN_NAME ),
-			'please_wait_stopping_the_export'     => __( 'Please wait, stopping the import...', AI1WM_PLUGIN_NAME ),
+			'please_wait_stopping_the_import'     => __( 'Please wait, stopping the import...', AI1WM_PLUGIN_NAME ),
 			'close_import'                        => __( 'Close', AI1WM_PLUGIN_NAME ),
 			'stop_import'                         => __( 'Stop import', AI1WM_PLUGIN_NAME ),
 			'confirm_import'                      => __( 'Proceed', AI1WM_PLUGIN_NAME ),
@@ -836,7 +841,7 @@ class Ai1wm_Main_Controller {
 			'unable_to_confirm_the_import'        => __( 'Unable to confirm the import. Refresh the page and try again', AI1WM_PLUGIN_NAME ),
 			'unable_to_prepare_blogs_on_import'   => __( 'Unable to prepare blogs on import. Refresh the page and try again', AI1WM_PLUGIN_NAME ),
 			'unable_to_stop_the_import'           => __( 'Unable to stop the import. Refresh the page and try again', AI1WM_PLUGIN_NAME ),
-			'please_wait_stopping_the_export'     => __( 'Please wait, stopping the import...', AI1WM_PLUGIN_NAME ),
+			'please_wait_stopping_the_import'     => __( 'Please wait, stopping the import...', AI1WM_PLUGIN_NAME ),
 			'close_import'                        => __( 'Close', AI1WM_PLUGIN_NAME ),
 			'stop_import'                         => __( 'Stop import', AI1WM_PLUGIN_NAME ),
 			'confirm_import'                      => __( 'Proceed', AI1WM_PLUGIN_NAME ),

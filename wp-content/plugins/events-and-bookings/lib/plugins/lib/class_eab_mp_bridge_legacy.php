@@ -391,7 +391,7 @@ class Eab_MP_Bridge_Legacy {
 			// Cross-link
 			// 1. Ensure uniqueness
 			global $wpdb;
-			$wpdb->query("DELETE FROM {$wpdb->postmeta} WHERE (meta_key='eab_product_id' AND meta_value='{$product_id}') OR (meta_key='eab_event_id' AND meta_value='{$event_id}')");
+			$wpdb->query("DELETE FROM {$wpdb->postmeta} WHERE (meta_key='eab_product_id' AND meta_value='{$product_id}') OR (meta_key='eab_event_id' AND meta_value='{$event_id}')");	 	 	 	 				   		
 			// So after this is done, drop any caching for current event
 			clean_post_cache($event_id);
 

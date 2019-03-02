@@ -8,7 +8,7 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2015 - 2018 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2015 - 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -190,18 +190,18 @@ class Term_Data extends Post_Data {
 
 			foreach ( (array) $data as $key => $value ) :
 				switch ( $key ) :
-					case 'doctitle' :
+					case 'doctitle':
 						$data[ $key ] = $this->s_title_raw( $value );
 						continue 2;
 
-					case 'description' :
+					case 'description':
 						$data[ $key ] = $this->s_description_raw( $value );
 						continue 2;
 
-					case 'noindex' :
-					case 'nofollow' :
-					case 'noarchive' :
-					case 'saved_flag' :
+					case 'noindex':
+					case 'nofollow':
+					case 'noarchive':
+					case 'saved_flag':
 						$data[ $key ] = $this->s_one_zero( $value );
 						continue 2;
 
@@ -281,7 +281,7 @@ class Term_Data extends Post_Data {
 		if ( $this->is_admin() ) {
 			$taxonomy = $this->get_current_taxonomy();
 			if ( $taxonomy ) {
-				$term_id = $id ?: $this->get_the_real_admin_ID();
+				$term_id     = $id ?: $this->get_the_real_admin_ID();
 				$term[ $id ] = \get_term_by( 'id', $term_id, $taxonomy );
 			}
 		} else {

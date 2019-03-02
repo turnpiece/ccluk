@@ -6,10 +6,13 @@
  */
 
 ?>
-<img class="wphb-image wphb-image-center wphb-image-icon-content-top"
-	 src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-graphic-reports-disabled@1x.png' ); ?>"
-	 srcset="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-graphic-reports-disabled@2x.png' ); ?> 2x"
-	 alt="<?php esc_attr_e( 'Reduce your page load time!', 'wphb' ); ?>">
+
+<?php if ( ! WP_Hummingbird_Utils::hide_wpmudev_branding() ): ?>
+	<img class="wphb-image wphb-image-center wphb-image-icon-content-top"
+	     src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-graphic-reports-disabled@1x.png' ); ?>"
+	     srcset="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-graphic-reports-disabled@2x.png' ); ?> 2x"
+	     alt="<?php esc_attr_e( 'Reduce your page load time!', 'wphb' ); ?>">
+<?php endif; ?>
 
 <p>
 	<?php
@@ -26,16 +29,12 @@
 	<?php esc_html_e( 'Activate', 'wphb' ); ?>
 </a>
 
-<?php
-WP_Hummingbird_Utils::get_modal( 'check-files' );
+<?php WP_Hummingbird_Utils::get_modal( 'check-files' ); ?>
 
-// Show the progress bar if we are still checking files.
-if ( WP_Hummingbird_Utils::get_module( 'minify' )->is_scanning() || isset( $_GET['wphb-cache-cleared'] ) ) : ?>
+<?php if ( WP_Hummingbird_Utils::get_module( 'minify' )->is_scanning() ) : ?>
 	<script>
-		window.onload = function () {
-			jQuery(function() {
-				jQuery('#check-files').click();
-			});
-		}
+        window.addEventListener("load", function(){
+            jQuery('#check-files').click();
+        });
 	</script>
 <?php endif; ?>

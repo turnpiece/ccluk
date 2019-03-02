@@ -1,20 +1,14 @@
 'use strict';
 
-var gulp = require('gulp');
-var sass = require('gulp-sass');
-var uglify = require('gulp-uglify');
-var rename = require("gulp-rename");
-var cssmin = require('gulp-cssmin');
-var source = require('vinyl-source-stream');
-var browserify = require('browserify');
-var replace = require('gulp-replace');
-var merge = require('merge-stream');
-var globby = require('globby');
-var buffer = require('vinyl-buffer');
-var through = require('through2');
-
-gulp.task('default', ['sass', 'browserify', 'uglify']);
-
+const gulp = require('gulp');
+const sass = require('gulp-sass');
+const uglify = require('gulp-uglify');
+const rename = require("gulp-rename");
+const cssmin = require('gulp-cssmin');
+const source = require('vinyl-source-stream');
+const browserify = require('browserify');
+const replace = require('gulp-replace');
+const buffer = require('vinyl-buffer');
 
 gulp.task('sass', function () {
 	var files = './assets/sass/[^_]*.scss';
@@ -32,41 +26,31 @@ gulp.task('sass', function () {
 });
 
 gulp.task('browserify', function () {
+	return browserify({ entries: [ './assets/browserify/admin.js'] })
+		.on('error', console.log)
+		.transform("babelify", {presets: ["es2015"]})
+		.bundle()
+		.pipe(source('admin.js'))
 
-	var bundledStream = through()
-		.pipe(buffer());
-
-	globby("./assets/browserify/[^_]*.js").then(function(entries) {
-		var stream = merge(entries.map(function(entry) {
-			var file = entry.split('/').pop();
-
-			return browserify({ entries: [entry] }).on('error', console.log)
-				.transform("babelify", {presets: ["es2015"]})
-				.bundle()
-				.pipe(source(file))
-
-				// create .js file
-				.pipe(rename({ extname: '.js' }))
-				.pipe(gulp.dest('./assets/js'));
-		}));
-
-		stream
-			.pipe(bundledStream);
-	});
-
-	return bundledStream;
+		// create .js file
+		.pipe(rename({ extname: '.js' }))
+		.pipe(gulp.dest('./assets/js'));
+		
 });
 
-gulp.task('uglify', ['browserify'], function() {
+gulp.task('uglify', gulp.series('browserify', function() {
 	return gulp.src(['./assets/js/*.js','!./assets/js/*.min.js'])
 		.pipe(buffer())
 		.pipe(uglify().on('error', console.log))
 		.pipe(rename({extname: '.min.js'}))
 		.pipe(gulp.dest('./assets/js'));
-});
+}));
+
 
 gulp.task('watch', function () {
-	gulp.watch('./assets/sass/**.scss', ['sass']);
-	gulp.watch(['./assets/js/*.js','!./assets/js/*.min.js'], ['uglify']);
-	gulp.watch('./assets/js/src/**.js', ['browserify']);
+	gulp.watch('./assets/sass/**.scss', gulp.series('sass'));
+	gulp.watch(['./assets/js/*.js','!./assets/js/*.min.js'], gulp.series('uglify'));
+	gulp.watch('./assets/js/src/**.js', gulp.series('browserify'));
 });
+
+gulp.task('default', gulp.series('sass', 'uglify'));

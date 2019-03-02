@@ -38,6 +38,7 @@ class Eab_Upcoming_Widget extends Eab_Widget {
 		$title = apply_filters('widget_title', ( empty($options['title']) ) ? __('Upcoming', $this->translation_domain) : $options['title'], $options, $this->id_base);
 		$query_args = array(
 			'posts_per_page' => $options['limit'],
+			'_avoid_pgp_action'    => 1, // Avoids the later pre_get_posts action for Archive pagination
 		);
 		if ($options['category']) {
 			$query_args['tax_query'] = array(array(
@@ -71,7 +72,7 @@ class Eab_Upcoming_Widget extends Eab_Widget {
 					$excerpt = eab_call_template('util_words_limit', $_event->get_excerpt_or_fallback(), $words);
 				}
 				echo '<li>';
-				echo '<a href="' . get_permalink($_event->get_id()) . '" class="' . ($_event->get_id() == $post->ID ? 'current' : '') . '" >' .
+				echo '<a href="' . get_permalink($_event->get_id()) . '" class="' . ($post instanceof WP_Post && $_event->get_id() == $post->ID ? 'current' : 'not_current') . '" >' .
 					($options['thumbnail'] && $thumbnail
 						? '<img src="' . $thumbnail . '" /><br />'
 						: ''

@@ -5,7 +5,10 @@
 
 namespace WP_Defender\Module\IP_Lockout\Component;
 
+use Hammer\GeoIP\GeoIp;
 use Hammer\WP\Component;
+use WP_Defender\Behavior\Utils;
+use WP_Defender\Module\IP_Lockout\Model\Settings;
 
 class IP_API extends Component {
 	public static function compareCIDR( $ip, $block ) {
@@ -151,6 +154,17 @@ class IP_API extends Component {
 		}
 
 		return false;
+	}
+
+	public static function getCurrentCountry() {
+		$settings = Settings::instance();
+		if ( ! $settings->isGeoDBDownloaded() ) {
+			return false;
+		}
+		$geoIP   = new GeoIp( $settings->geoIP_db );
+		$country = $geoIP->ipToCountry( Utils::instance()->getUserIp() );
+
+		return $country;
 	}
 
 	/**

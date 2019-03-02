@@ -6,7 +6,7 @@
  *
  * @package     Give
  * @subpackage  Classes/Give_Import_Core_Settings
- * @copyright   Copyright (c) 2017, WordImpress
+ * @copyright   Copyright (c) 2017, GiveWP
  * @license     https://opensource.org/licenses/gpl-license GNU Public License
  * @since       1.8.17
  */
@@ -220,7 +220,7 @@ if ( ! class_exists( 'Give_Import_Core_Settings' ) ) {
 				'undo'      => 'true',
 			);
 
-			$title = __( 'Settings Importing Completed!', 'give' );
+			$title = __( 'Settings Import Complete!', 'give' );
 			if ( $success ) {
 				$query_arg_success['undo'] = '1';
 				$query_arg_success['step'] = '3';
@@ -230,12 +230,12 @@ if ( ! class_exists( 'Give_Import_Core_Settings' ) ) {
 				if ( $undo ) {
 					$host_give_options = get_option( 'give_settings_old', array() );
 					update_option( 'give_settings', $host_give_options, false );
-					$title = __( 'Undo of Setting Imported Completed!', 'give' );
+					$title = __( 'Successfully Reverted Settings Import', 'give' );
 				} else {
-					$title = __( 'Failed to import', 'give' );
+					$title = __( 'Failed to Import', 'give' );
 				}
 
-				$text = __( 'Importing Again', 'give' );
+				$text = __( 'Import Again', 'give' );
 			}
 			?>
 			<tr valign="top" class="give-import-dropdown">
@@ -274,8 +274,8 @@ if ( ! class_exists( 'Give_Import_Core_Settings' ) ) {
 					</div>
 					<span class="spinner is-active"></span>
 					<input type="hidden" value="2" name="step">
-					<input type="hidden" value="<?php echo $type; ?>" name="type">
-					<input type="hidden" value="<?php echo $file_name; ?>" name="file_name">
+					<input type="hidden" value="<?php echo esc_attr( $type ); ?>" name="type">
+					<input type="hidden" value="<?php echo esc_attr( $file_name ); ?>" name="file_name">
 				</th>
 			</tr>
 			<?php
@@ -456,10 +456,13 @@ if ( ! class_exists( 'Give_Import_Core_Settings' ) ) {
 			$upload = false;
 			if ( isset( $_FILES['json'] ) ) {
 				add_filter( 'upload_mimes', array( __CLASS__, 'json_upload_mimes' ) );
+				add_filter( 'wp_check_filetype_and_ext', array( __CLASS__, 'filetype_mod' ), 10, 4 );
 
 				$upload = wp_handle_upload( $_FILES['json'], array( 'test_form' => false ) );
 
 				remove_filter( 'upload_mimes', array( __CLASS__, 'json_upload_mimes' ) );
+				remove_filter( 'wp_check_filetype_and_ext', array( __CLASS__, 'filetype_mod' ), 10, 4 );
+
 			} else {
 				Give_Admin_Settings::add_error( 'give-import-csv', __( 'Please upload or provide a valid JSON file.', 'give' ) );
 			}
@@ -471,11 +474,36 @@ if ( ! class_exists( 'Give_Import_Core_Settings' ) ) {
 		 * Add mime type for JSON
 		 *
 		 * @param array $existing_mimes
+		 *
+		 * @return array
 		 */
 		public static function json_upload_mimes( $existing_mimes = array() ) {
+
 			$existing_mimes['json'] = 'application/json';
 
 			return $existing_mimes;
+		}
+
+		/**
+		 * Allow for json file type uploads.
+		 *
+		 * https://github.com/impress-org/give/issues/3907
+		 *
+		 * @param $check
+		 * @param $file
+		 * @param $filename
+		 * @param $mimes
+		 *
+		 * @return mixed
+		 */
+		public static function filetype_mod(  $check, $file, $filename, $mimes ) {
+			if ( empty( $check['ext'] ) && empty( $check['type'] ) ) {
+				// Allow JSON uploads
+				$secondary_mime = array( 'json' => 'text/plain' );
+				// Run another check, but only for our secondary mime and not on core mime types.
+				$check = wp_check_filetype_and_ext( $file, $filename, $secondary_mime );
+			}
+			return $check;
 		}
 	}
 

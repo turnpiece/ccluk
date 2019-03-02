@@ -104,7 +104,7 @@ class Main extends Controller {
 			return;
 		}
 
-		$slug 		= HTTP_Helper::retrieve_post( 'slug' );
+		$slug = HTTP_Helper::retrieve_post( 'slug' );
 
 		do_action( "processingHardener" . $slug );
 		//fall back
@@ -189,11 +189,12 @@ class Main extends Controller {
 	 * Enqueue scripts & styles
 	 */
 	public function scripts() {
-		\WDEV_Plugin_Ui::load( wp_defender()->getPluginUrl() . 'shared-ui/' );
+		wp_enqueue_script( 'wpmudev-sui' );
 		wp_enqueue_script( 'defender' );
 		wp_enqueue_script( 'hardener', wp_defender()->getPluginUrl() . 'app/module/hardener/js/scripts.js', array(
 			'jquery-effects-core'
 		) );
+		wp_enqueue_style( 'wpmudev-sui' );
 		wp_enqueue_style( 'defender' );
 	}
 

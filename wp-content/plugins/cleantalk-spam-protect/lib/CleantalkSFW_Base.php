@@ -171,19 +171,19 @@ class CleantalkSFW_Base
 			$this->db->query("DELETE FROM ".$this->data_table.";", true);
 						
 			// Cast result to int
-			foreach($result as $value){
-				$value[0] = intval($value[0]);
-				$value[1] = intval($value[1]);
-			} unset($value);
+//			foreach($result as &$value){
+//				$value[0] = preg_replace('/[^\d]*/', '', $value[0]);
+//				$value[1] = preg_replace('/[^\d]*/', '', $value[0]);
+//				$value[0] = empty($value[0]) ? 0 : $value[0];
+//				$value[1] = empty($value[1]) ? 0 : $value[1];
+//			} unset($value);
 			
-			$query="INSERT INTO ".$this->data_table." VALUES ";
+			$query = "INSERT INTO ".$this->data_table." VALUES ";
+			
 			for($i=0, $arr_count = count($result); $i < $arr_count; $i++){
-				if($i == count($result)-1){
-					$query.="(".$result[$i][0].",".$result[$i][1].");";
-				}else{
-					$query.="(".$result[$i][0].",".$result[$i][1]."), ";
-				}
+				$query.="(".$result[$i][0].",".$result[$i][1]."),";
 			}
+			$query = substr($query, 0, -1).';';
 			$this->db->query($query, true);
 			
 			return true;

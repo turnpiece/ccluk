@@ -10,33 +10,51 @@
 ?>
 
 <div class="sui-box-settings-row sui-no-padding-bottom">
-	<p><?php esc_html_e( 'Get tailored performance reports delivered to your inbox so you don’t have to worry about checking in.', 'wphb' ); ?></p>
+	<p><?php esc_html_e( 'Automate your workflow with daily, weekly or monthly reports sent directly to your inbox.', 'wphb' ); ?></p>
 
-	<div class="sui-row">
-		<div class="sui-col-lg-6">
-			<a href="<?php echo WP_Hummingbird_Utils::get_admin_menu_url( 'performance' ) . '&view=reports'; ?>">
-				<div class="report-status with-corner">
-					<i class="sui-icon-hummingbird" aria-hidden="true"></i>
-					<strong><?php esc_html_e( 'Performance Test', 'wphb' ); ?></strong>
-					<div class="corner">
-						<?php esc_html_e( 'Pro', 'wphb' ); ?>
-					</div>
-				</div>
-			</a>
-		</div>
-		<div class="sui-col-lg-6">
-			<a href="<?php echo WP_Hummingbird_Utils::get_admin_menu_url( 'advanced' ) . '&view=db#wphb-box-advanced-db-settings'; ?>">
-				<div class="report-status with-corner">
-					<i class="sui-icon-user-reputation-points" aria-hidden="true"></i>
-					<strong><?php esc_html_e( 'Database Cleanup', 'wphb' ); ?></strong>
-					<span class="sui-tag sui-tag-inactive"><?php esc_html_e( 'Coming soon', 'wphb' ); ?></span>
-					<div class="corner">
-						<?php esc_html_e( 'Pro', 'wphb' ); ?>
-					</div>
-				</div>
-			</a>
-		</div>
-	</div>
+	<table class="sui-table sui-flushed">
+		<thead>
+		<tr>
+			<th width="50%"><?php esc_html_e( 'Report', 'wphb' ); ?></th>
+			<th width="50%">&nbsp;</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>
+				<i class="sui-icon-hummingbird" aria-hidden="true"></i>
+				<strong><?php esc_html_e( 'Performance Test', 'wphb' ); ?></strong>
+			</td>
+			<td>
+				<a href="<?php echo WP_Hummingbird_Utils::get_link( 'plugin', 'hummingbird_dash_reports_upgrade_button' ); ?>" class="sui-button sui-button-green">
+					<?php esc_html_e( 'Upgrade', 'wphb' ); ?>
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<i class="sui-icon-user-reputation-points" aria-hidden="true"></i>
+				<strong><?php esc_html_e( 'Database Cleanup', 'wphb' ); ?></strong>
+			</td>
+			<td>
+				<a href="<?php echo WP_Hummingbird_Utils::get_link( 'plugin', 'hummingbird_dash_reports_upgrade_button' ); ?>" class="sui-button sui-button-green">
+					<?php esc_html_e( 'Upgrade', 'wphb' ); ?>
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<i class="sui-icon-uptime" aria-hidden="true"></i>
+				<strong><?php esc_html_e( 'Uptime', 'wphb' ); ?></strong>
+			</td>
+			<td>
+				<a href="<?php echo WP_Hummingbird_Utils::get_link( 'plugin', 'hummingbird_dash_reports_upgrade_button' ); ?>" class="sui-button sui-button-green">
+					<?php esc_html_e( 'Upgrade', 'wphb' ); ?>
+				</a>
+			</td>
+		</tr>
+		</tbody>
+	</table>
 </div>
 
 <div class="sui-box-settings-row sui-upsell-row">

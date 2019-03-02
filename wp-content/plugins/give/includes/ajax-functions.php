@@ -6,7 +6,7 @@
  *
  * @package     Give
  * @subpackage  Functions/AJAX
- * @copyright   Copyright (c) 2016, WordImpress
+ * @copyright   Copyright (c) 2016, GiveWP
  * @license     https://opensource.org/licenses/gpl-license GNU Public License
  * @since       1.0
  */
@@ -22,9 +22,11 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since  1.0
  *
+ * @param bool $force Flag to test ajax by discarding cache result
+ *
  * @return bool True if AJAX works, false otherwise
  */
-function give_test_ajax_works() {
+function give_test_ajax_works( $force = false ) {
 	// Handle ajax.
 	if ( doing_action( 'wp_ajax_nopriv_give_test_ajax' ) ) {
 		wp_die( 0, 200 );
@@ -50,49 +52,54 @@ function give_test_ajax_works() {
 
 	add_filter( 'block_local_requests', '__return_false' );
 
-	if ( Give_Cache::get( '_give_ajax_works', true ) ) {
-		return true;
+	$works = Give_Cache::get( '_give_ajax_works', true );
+
+	if ( ! $works || $force ) {
+		$params = array(
+			'sslverify' => false,
+			'timeout'   => 30,
+			'body'      => array(
+				'action' => 'give_test_ajax',
+			),
+		);
+
+		$ajax = wp_remote_post( give_get_ajax_url(), $params );
+
+		$works = true;
+
+		if ( is_wp_error( $ajax ) ) {
+
+			$works = false;
+
+		} else {
+
+			if ( empty( $ajax['response'] ) ) {
+				$works = false;
+			}
+
+			if ( empty( $ajax['response']['code'] ) || 200 !== (int) $ajax['response']['code'] ) {
+				$works = false;
+			}
+
+			if ( empty( $ajax['response']['message'] ) || 'OK' !== $ajax['response']['message'] ) {
+				$works = false;
+			}
+
+			if ( ! isset( $ajax['body'] ) || 0 !== (int) $ajax['body'] ) {
+				$works = false;
+			}
+		}
+
+		if ( $works ) {
+			Give_Cache::set( '_give_ajax_works', '1', DAY_IN_SECONDS, true );
+		}
 	}
 
-	$params = array(
-		'sslverify' => false,
-		'timeout'   => 30,
-		'body'      => array(
-			'action' => 'give_test_ajax',
-		),
-	);
-
-	$ajax = wp_remote_post( give_get_ajax_url(), $params );
-
-	$works = true;
-
-	if ( is_wp_error( $ajax ) ) {
-
-		$works = false;
-
-	} else {
-
-		if ( empty( $ajax['response'] ) ) {
-			$works = false;
-		}
-
-		if ( empty( $ajax['response']['code'] ) || 200 !== (int) $ajax['response']['code'] ) {
-			$works = false;
-		}
-
-		if ( empty( $ajax['response']['message'] ) || 'OK' !== $ajax['response']['message'] ) {
-			$works = false;
-		}
-
-		if ( ! isset( $ajax['body'] ) || 0 !== (int) $ajax['body'] ) {
-			$works = false;
-		}
-	}
-
-	if ( $works ) {
-		Give_Cache::set( '_give_ajax_works', '1', DAY_IN_SECONDS, true );
-	}
-
+	/**
+	 * Filter the output
+	 *
+	 * @since 1.0
+	 */
 	return apply_filters( 'give_test_ajax_works', $works );
 }
 
@@ -761,11 +768,14 @@ add_action( 'wp_ajax_nopriv_give_confirm_email_for_donations_access', 'give_conf
  * @since 2.2.0
  */
 function __give_get_receipt(){
-	if( ! isset( $_GET['shortcode_atts'] ) ) {
+	
+	$get_data = give_clean( filter_input_array( INPUT_GET ) );
+	
+	if( ! isset( $get_data['shortcode_atts'] ) ) {
 		give_die();
 	}
 
-	$atts = urldecode_deep( give_clean( $_GET['shortcode_atts'] ) );
+	$atts = (array) json_decode( $get_data['shortcode_atts'] );
 	$data = give_receipt_shortcode( $atts );
 
 	wp_send_json( $data );

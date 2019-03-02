@@ -4,7 +4,7 @@
  *
  * @package     Give
  * @subpackage  Admin/Plugins
- * @copyright   Copyright (c) 2016, WordImpress
+ * @copyright   Copyright (c) 2016, GiveWP
  * @license     https://opensource.org/licenses/gpl-license GNU Public License
  * @since       1.4
  */
@@ -444,6 +444,10 @@ function give_get_recently_activated_addons() {
  * @since 2.2
  */
 function give_deactivation_popup() {
+	// Bailout.
+	if ( ! current_user_can( 'delete_plugins' ) ) {
+		give_die();
+	}
 
 	$results = array();
 

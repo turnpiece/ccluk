@@ -342,6 +342,27 @@ class Snapshot_Controller_Full_Admin extends Snapshot_Controller_Full {
 		if ( $data->has( 'log-enable' ) ) {
 			Snapshot_Controller_Full_Log::get()->process_submissions( $data );
 		}
+
+		// Do the file exclusion part
+		if ( $data->has( 'managed-backup-exclusions' ) ) {
+			$managed_backup_exclusions = $data->value( 'managed-backup-exclusions' );
+
+			WPMUDEVSnapshot::instance()->config_data['config']['managedBackupExclusions'] = $managed_backup_exclusions;
+
+			if ( "managed" === $managed_backup_exclusions) {
+				$files_ignore = explode( "\n", $data->value( 'managed-backup-files-ignore' ) );
+				if ( ( is_array( $files_ignore ) ) && ( count( $files_ignore ) ) ) {
+					foreach ( $files_ignore as $idx => $file_ignore ) {
+						$file_ignore = sanitize_text_field( trim( $file_ignore ) );
+						if ( ! empty( $file_ignore ) ) {
+							$files_ignore[ $idx ] = $file_ignore;
+						}
+					}
+
+					WPMUDEVSnapshot::instance()->config_data['config']['filesManagedIgnore'] = $files_ignore;
+				}
+			}
+		}
 	}
 
 	/**

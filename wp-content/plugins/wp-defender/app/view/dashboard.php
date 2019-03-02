@@ -1,118 +1,208 @@
-<div class="wrap">
+<?php
+list( $hCount, $sCount ) = $controller->countTotalIssues( true );
+$countAll = $hCount + $sCount;
+?>
+<div class="sui-wrap">
     <div id="wp-defender" class="wp-defender">
         <div class="def-dashboard">
-            <h2 class="title"><?php _e( "Dashboard", wp_defender()->domain ) ?></h2>
-            <div class="dev-box summary-box">
-                <div class="box-content">
-                    <div class="columns">
-                        <div class="column is-7 issues-count">
-                            <div>
-                                <h5 class=""><?php list( $hCount, $sCount ) = $controller->countTotalIssues( true );
-									$countAll = $hCount + $sCount;
-									echo $countAll;
-									?></h5>
-								<?php if ( $countAll == 0 ): ?>
-                                <span class=""
-                                      tooltip="<?php esc_attr_e( 'You have no outstanding security issues.', wp_defender()->domain ); ?>">
-                                        <i class="def-icon icon-tick" aria-hidden="true"></i>
-									<?php else: ?>
-									<?php
-									if ( $sCount > 0 && $hCount > 0 ) :
-									?>
-                                    <span class=""
-                                          tooltip="<?php esc_attr_e( sprintf( __( 'You have %d security tweak(s)  and %d suspicious file(s) needing attention.', wp_defender()->domain ), $hCount, $sCount ) ); ?>">
-                                        <?php elseif ( $hCount > 0 ): ?>
-                                        <span class=""
-                                              tooltip="<?php esc_attr_e( sprintf( __( 'You have %d security tweak(s) needing attention.', wp_defender()->domain ), $hCount ) ); ?>">
-                                        <?php elseif ( $sCount > 0 ): ?>
-                                            <span class=""
-                                                  tooltip="<?php esc_attr_e( sprintf( __( 'You have %d suspicious file(s) needing attention.', wp_defender()->domain ), $sCount ) ); ?>">
-                                        <?php else: ?>
-                                                <span class=""
-                                                      tooltip="<?php esc_attr_e( 'You have no outstanding security issues.', wp_defender()->domain ); ?>">
-                                        <?php endif; ?>
-                                                    <i class="def-icon icon-warning icon-yellow <?php echo $sCount > 0 ? 'fill-red' : null ?>" aria-hidden="true"></i>
-													<?php endif; ?>
-                                </span>
-                                <div class="clear"></div>
-                                <span class="sub"><?php
-	                                _e( "security issues", wp_defender()->domain ) ?></span>
-                            </div>
-                        </div>
-                        <div class="column is-5">
-                            <ul class="dev-list bold">
-                                <li>
-                                    <div>
-                                        <span class="list-label"><?php _e( "Security tweaks actioned", wp_defender()->domain ) ?></span>
-                                        <span class="list-detail"><span>
-                                            <?php
-                                            $settings = \WP_Defender\Module\Hardener\Model\Settings::instance();
-                                            echo count( $settings->fixed ) + count( $settings->ignore ) ?>
-                                                /
-												<?php echo count( $settings->getDefinedRules() ) ?>
-                                        </span></span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>
-                                        <span class="list-label"><?php _e( "File Scan Issues", wp_defender()->domain ) ?></span>
-                                        <span class="list-detail">
-                                       <?php echo $controller->renderScanStatusText() ?>
-                                    </span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>
-                                        <span class="list-label"><?php _e( "Last Lockout" ) ?></span>
-                                        <span class="list-detail lastLockout">.</span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
+            <div class="sui-header">
+                <h1 class="sui-header-title">
+					<?php _e( "Dashboard", wp_defender()->domain ) ?>
+                </h1>
+            </div>
+            <div class="sui-box sui-summary">
+                <div class="sui-summary-image-space" aria-hidden="true"></div>
+                <div class="sui-summary-segment">
+                    <div class="sui-summary-details">
+                        <span class="sui-summary-large"><?php echo $countAll ?></span>
+						<?php if ( $countAll > 0 ): ?>
+                            <i aria-hidden="true" class="sui-icon-info sui-error"></i>
+						<?php else: ?>
+                            <i class="sui-icon-check-tick sui-success" aria-hidden="true"></i>
+						<?php endif; ?>
+                        <span class="sui-summary-sub"><?php _e( "Security issues", wp_defender()->domain ) ?></span>
                     </div>
                 </div>
+                <div class="sui-summary-segment">
+                    <ul class="sui-list">
+                        <li>
+                            <span class="sui-list-label"><?php _e( "Security Tweaks Actioned", wp_defender()->domain ) ?></span>
+                            <span class="sui-list-detail">
+                            <?php
+                            $settings = \WP_Defender\Module\Hardener\Model\Settings::instance();
+                            echo count( $settings->fixed ) + count( $settings->ignore ) ?>
+                                /
+								<?php echo count( $settings->getDefinedRules() )
+								?>
+                            </span>
+                        </li>
+                        <li>
+                            <span class="sui-list-label"><?php _e( "File Scan Issues", wp_defender()->domain ) ?></span>
+                            <span class="sui-list-detail">
+                                  <?php echo $controller->renderScanStatusText() ?>
+                                </span>
+                        </li>
+                        <li>
+                            <span class="sui-list-label"><?php _e( "Last Lockout", wp_defender()->domain ) ?></span>
+                            <span class="sui-list-detail lastLockout">
+                                    -
+                            </span>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="row is_multiline">
-                <div class="col-half">
+            <div class="sui-row">
+                <div class="sui-col">
 					<?php echo $controller->renderHardenerWidget() ?>
 					<?php $controller->renderBlacklistWidget() ?>
-					<?php $controller->renderAuditWidget() ?>
 					<?php $controller->renderATWidget() ?>
-					<?php if ( wp_defender()->isFree ): ?>
-                        <div class="dev-box dev-team">
-                            <div class="box-title">
-                                <h3><?php _e( "TRY PRO FEATURES FOR FREE!", wp_defender()->domain ) ?></h3>
-                            </div>
-                            <div class="box-content tc">
-                                <div class="line">
-									<?php _e( "Upgrade to Defender Pro to unlock Advanced File Scanning, Blacklist Monitoring, Audit Logging and automated reporting for Audit Logging, IP Lockouts and File Scans.", wp_defender()->domain ) ?>
-                                </div>
-                                <div class="line">
-									<?php _e( "Get all this as part of a WPMU DEV Membership, and the best part is you can try everything absolutely free.", wp_defender()->domain ) ?>
-                                </div>
-                                <a href="#pro-feature" rel="dialog"
-                                   class="button button-green">
-		                            <?php _e( "FIND OUT MORE", wp_defender()->domain ) ?></a>
-                            </div>
-                        </div>
-					<?php endif; ?>
                 </div>
-                <div class="col-half">
+                <div class="sui-col">
 					<?php $controller->renderScanWidget() ?>
 					<?php $controller->renderLockoutWidget() ?>
+					<?php $controller->renderAuditWidget() ?>
 					<?php $controller->renderReportWidget() ?>
                 </div>
             </div>
         </div>
+		<?php
+		if ( $controller->isShowActivator() ) {
+			$view = wp_defender()->isFree ? 'activator-free' : 'activator';
+			$controller->renderPartial( $view );
+		} ?>
+		<?php if ( wp_defender()->isFree ): ?>
+            <div id="sui-cross-sell-footer" class="sui-row">
+
+                <div><span class="sui-icon-plugin-2"></span></div>
+                <h3><?php _e( "Check out our other free wordpress.org plugins!", wp_defender()->domain ) ?></h3>
+
+            </div>
+
+            <!-- Cross-Sell Modules -->
+            <div class="sui-row sui-cross-sell-modules">
+
+                <div class="sui-col-md-4">
+
+                    <!-- Cross-Sell Banner #1 -->
+                    <div aria-hidden="true" class="sui-cross-1">
+                        <span></span>
+                    </div>
+
+                    <div class="sui-box">
+                        <div class="sui-box-body">
+                            <h3><?php _e( "Smush Image Compression and Optimization", wp_defender()->domain ) ?></h3>
+                            <p><?php _e( "Resize, optimize and compress all of your images with the incredibly powerful and
+                                award-winning, 100% free WordPress image optimizer.", wp_defender()->domain ) ?></p>
+                            <a href="https://wordpress.org/plugins/wp-smushit/"
+                               target="_blank"
+                               class="sui-button sui-button-ghost">
+								<?php _e( "View features", wp_defender()->domain ) ?> <i aria-hidden="true"
+                                                                                         class="sui-icon-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="sui-col-md-4">
+
+                    <!-- Cross-Sell Banner #2 -->
+                    <div aria-hidden="true" class="sui-cross-2">
+                        <span></span>
+                    </div>
+
+                    <div class="sui-box">
+                        <div class="sui-box-body">
+                            <h3><?php _e( "Hummingbird Page Speed Optimization", wp_defender()->domain ) ?></h3>
+                            <p><?php _e( "Performance Tests, File Optimization & Compression, Page, Browser & Gravatar Caching,
+                                GZIP Compression, CloudFlare Integration & more.", wp_defender()->domain ) ?></p>
+                            <a href="https://wordpress.org/plugins/defender-security/"
+                               target="_blank"
+                               class="sui-button sui-button-ghost">
+								<?php _e( "View features", wp_defender()->domain ) ?> <i aria-hidden="true"
+                                                                                         class="sui-icon-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="sui-col-md-4">
+
+                    <!-- Cross-Sell Banner #3 -->
+                    <div aria-hidden="true" class="sui-cross-3">
+                        <span></span>
+                    </div>
+
+                    <div class="sui-box">
+                        <div class="sui-box-body">
+                            <h3><?php _e( "SmartCrawl Search Engine Optimization", wp_defender()->domain ) ?></h3>
+                            <p><?php _e( "Customize Titles & Meta Data, OpenGraph, Twitter & Pinterest Support, Auto-Keyword
+                                Linking, SEO & Readability Analysis, Sitemaps, URL Crawler & more.", wp_defender()->domain ) ?></p>
+                            <span class="sui-tag"><?php _e( "Coming Soon", wp_defender()->domain ) ?></span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="sui-cross-sell-bottom">
+
+                <h3><?php _e( "WPMU DEV - Your WordPress Toolkit", wp_defender()->domain ) ?></h3>
+                <p><?php _e( "Pretty much everything you need for developing and managing WordPress based websites, and then
+                    some.", wp_defender()->domain ) ?></p>
+
+                <a href="https://premium.wpmudev.org/"
+                   target="_blank"
+                   role="button"
+                   class="sui-button sui-button-green">
+					<?php _e( "Learn more", wp_defender()->domain ) ?>
+                </a>
+
+                <img class="sui-image" src="<?php echo wp_defender()->getPluginUrl() . '/sui/images/dev-team.png' ?>"
+                     aria-hidden="true">
+
+            </div>
+		<?php endif; ?>
+        <div class="sui-footer">Made with <i class="sui-icon-heart"></i> by WPMU DEV</div>
+		<?php if ( wp_defender()->isFree ): ?>
+            <ul class="sui-footer-nav">
+                <li><a href="https://profiles.wordpress.org/wpmudev#content-plugins" target="_blank">Free Plugins</a>
+                </li>
+                <li><a href="https://premium.wpmudev.org/features/" target="_blank">Membership</a></li>
+                <li><a href="https://premium.wpmudev.org/roadmap/" target="_blank">Roadmap</a></li>
+                <li><a href="https://wordpress.org/support/plugin/plugin-name" target="_blank">Support</a></li>
+                <li><a href="https://premium.wpmudev.org/docs/" target="_blank">Docs</a></li>
+                <li><a href="https://premium.wpmudev.org/hub/" target="_blank">The Hub</a></li>
+                <li><a href="https://premium.wpmudev.org/terms-of-service/" target="_blank">Terms of Service</a></li>
+                <li><a href="https://incsub.com/privacy-policy/" target="_blank">Privacy Policy</a></li>
+            </ul>
+		<?php else: ?>
+            <ul class="sui-footer-nav">
+                <li><a href="https://premium.wpmudev.org/hub/" target="_blank">The Hub</a></li>
+                <li><a href="https://premium.wpmudev.org/projects/category/plugins/" target="_blank">Plugins</a></li>
+                <li><a href="https://premium.wpmudev.org/roadmap/" target="_blank">Roadmap</a></li>
+                <li><a href="https://premium.wpmudev.org/hub/support/" target="_blank">Support</a></li>
+                <li><a href="https://premium.wpmudev.org/docs/" target="_blank">Docs</a></li>
+                <li><a href="https://premium.wpmudev.org/hub/community/" target="_blank">Community</a></li>
+                <li><a href="https://premium.wpmudev.org/terms-of-service/" target="_blank">Terms of Service</a></li>
+                <li><a href="https://incsub.com/privacy-policy/" target="_blank">Privacy Policy</a></li>
+            </ul>
+		<?php endif; ?>
+        <ul class="sui-footer-social">
+            <li><a href="https://www.facebook.com/wpmudev" target="_blank">
+                    <i class="sui-icon-social-facebook" aria-hidden="true"></i>
+                    <span class="sui-screen-reader-text">Facebook</span>
+                </a></li>
+            <li><a href="https://twitter.com/wpmudev" target="_blank">
+                    <i class="sui-icon-social-twitter" aria-hidden="true"></i></a>
+                <span class="sui-screen-reader-text">Twitter</span>
+            </li>
+            <li><a href="https://www.instagram.com/wpmu_dev/" target="_blank">
+                    <i class="sui-icon-instagram" aria-hidden="true"></i>
+                    <span class="sui-screen-reader-text">Instagram</span>
+                </a></li>
+        </ul>
     </div>
 </div>
-<?php
-if ( $controller->isShowActivator() ) {
-	$view = wp_defender()->isFree ? 'activator-free' : 'activator';
-	$controller->renderPartial( $view );
-} ?>
-<?php
-if ( wp_defender()->isFree ) {
-	$controller->renderPartial( 'pro-feature' );
-}
-?>

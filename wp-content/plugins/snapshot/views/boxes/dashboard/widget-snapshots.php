@@ -48,7 +48,7 @@ $snapshots = array_slice( $snapshots, 0, 3 );
 
 					<div class="wps-image img-snappie-one"></div>
 
-					<p><?php esc_html_e( 'Snapshots are restore points for your site. Simply choose what you want to back up and then store it on destinations such as Dropbox, Amazon S3 and more.', SNAPSHOT_I18N_DOMAIN ); ?></p>
+					<p><?php esc_html_e( 'Snapshots are restoring points for your site. Simply choose what you want to back up and then store it on destinations such as Dropbox, Amazon S3 and more.', SNAPSHOT_I18N_DOMAIN ); ?></p>
 
 					<p>
 						<a href="<?php echo esc_url( WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url( 'snapshots-newui-new-snapshot' ) . '&snapshot-noonce-field=' . esc_attr( wp_create_nonce  ( 'snapshot-nonce' ) ) ); ?>" class="button button-blue"><?php esc_html_e( 'Create Snapshot', SNAPSHOT_I18N_DOMAIN ); ?></a>
@@ -56,7 +56,7 @@ $snapshots = array_slice( $snapshots, 0, 3 );
 
 				<?php else : ?>
 
-					<p><?php esc_html_e( 'Snapshots are restore points for your site. Here are your latest snapshots.', SNAPSHOT_I18N_DOMAIN ); ?></p>
+					<p><?php esc_html_e( 'Snapshots are restoring points for your site. Here are your latest snapshots.', SNAPSHOT_I18N_DOMAIN ); ?></p>
 
 					<table class="has-footer" cellpadding="0" cellspacing="0">
 

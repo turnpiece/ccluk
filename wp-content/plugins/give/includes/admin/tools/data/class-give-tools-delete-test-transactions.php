@@ -5,7 +5,7 @@
  * This class handles batch processing of deleting test transactions
  *
  * @subpackage  Admin/Tools/Give_Tools_Delete_Test_Transactions
- * @copyright   Copyright (c) 2016, WordImpress
+ * @copyright   Copyright (c) 2016, GiveWP
  * @license     https://opensource.org/licenses/gpl-license GNU Public License
  * @since       1.5
  */
@@ -187,8 +187,17 @@ class Give_Tools_Delete_Test_Transactions extends Give_Batch_Export {
 			$args = apply_filters( 'give_tools_reset_stats_total_args', array(
 				'post_status' => 'any',
 				'number'      => - 1,
-				'meta_key'    => '_give_payment_mode',
-				'meta_value'  => 'test'
+				'meta_query' => array(
+					'relation' => 'OR',
+					array(
+						'key'   => '_give_payment_mode',
+						'value' => 'test',
+					),
+					array(
+						'key'   => '_give_payment_gateway',
+						'value' => 'manual',
+					),
+				),
 			) );
 
 			$posts    = new Give_Payments_Query( $args );

@@ -3,9 +3,9 @@ Contributors:      Toro_Unit,inc2734,ixkaito,keita_kobayashi
 Donate link:       https://www.paypal.me/torounit
 Tags:              permalink,permalinks,custom post type,custom taxonomy,cms
 Requires at least: 4.3
-Tested up to:      4.9
+Tested up to:      5.0
 Requires PHP:      5.3
-Stable tag: 3.2.2
+Stable tag: 3.3.1
 License: GPLv2 or Later
 
 Edit the permalink of custom post type.
@@ -20,7 +20,7 @@ And support `wp_get_archives( 'post_type=foo' )`.
 
 [This Plugin published on GitHub.](https://github.com/torounit/custom-post-type-permalinks)
 
-Donation: Please send [My Wishlist](http://www.amazon.co.jp/registry/wishlist/COKSXS25MVQV) or [Paypal] (https://www.paypal.me/torounit)
+Donation: Please send [My Wishlist](http://www.amazon.co.jp/registry/wishlist/COKSXS25MVQV) or [Paypal](https://www.paypal.me/torounit)
 
 
 = Translators =
@@ -67,6 +67,10 @@ That's it. You can access the permalinks setting by going to *Settings -> Permal
 
 
 == Changelog ==
+
+= 3.3.1 =
+* Add disable option for date / author and post type archive.
+* Bug fix for `parse_request`.
 
 = 3.2.2 =
 * Fix readme.txt

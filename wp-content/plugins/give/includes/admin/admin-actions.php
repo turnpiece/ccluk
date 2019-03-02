@@ -4,7 +4,7 @@
  *
  * @package     Give
  * @subpackage  Admin/Actions
- * @copyright   Copyright (c) 2016, WordImpress
+ * @copyright   Copyright (c) 2016, GiveWP
  * @license     https://opensource.org/licenses/gpl-license GNU Public License
  * @since       1.0
  */
@@ -536,10 +536,12 @@ add_action( 'give_payments_page_top', 'give_import_page_link_callback', 11 );
  * Fire when importing from CSV start
  *
  * @since  1.8.13
- *
- * @return json $json_data
  */
 function give_donation_import_callback() {
+	// Bailout.
+	if ( ! current_user_can( 'manage_give_settings' ) ) {
+		give_die();
+	}
 
 	// Disable Give cache
 	Give_Cache::get_instance()->disable();
@@ -664,11 +666,14 @@ add_action( 'wp_ajax_give_donation_import', 'give_donation_import_callback' );
  * Fire when importing from JSON start
  *
  * @since  1.8.17
- *
- * @return json $json_data
  */
 
 function give_core_settings_import_callback() {
+	// Bailout.
+	if ( ! current_user_can( 'manage_give_settings' ) ) {
+		give_die();
+	}
+
 	$fields = isset( $_POST['fields'] ) ? $_POST['fields'] : null;
 	parse_str( $fields, $fields );
 
@@ -696,8 +701,8 @@ function give_core_settings_import_callback() {
 		$json_string   = give_get_core_settings_json( $file_name );
 		$json_to_array = json_decode( $json_string, true );
 
-		// get the current settign from the options table.
-		$host_give_options = get_option( 'give_settings', array() );
+		// get the current setting from the options table.
+		$host_give_options = Give_Cache_Setting::get_settings();
 
 		// Save old settins for backup.
 		update_option( 'give_settings_old', $host_give_options, false );
@@ -867,11 +872,12 @@ function __give_ajax_donor_manage_addresses() {
 	$donorID               = absint( $post['donorID'] );
 	$form_data             = give_clean( wp_parse_args( $post['form'] ) );
 	$is_multi_address_type = ( 'billing' === $form_data['address-id'] || false !== strpos( $form_data['address-id'], '_' ) );
+	$exploded_address_id   = explode( '_', $form_data['address-id'] );
 	$address_type          = false !== strpos( $form_data['address-id'], '_' ) ?
-		array_shift( explode( '_', $form_data['address-id'] ) ) :
+		array_shift( $exploded_address_id ) :
 		$form_data['address-id'];
 	$address_id            = false !== strpos( $form_data['address-id'], '_' ) ?
-		array_pop( explode( '_', $form_data['address-id'] ) ) :
+		array_pop( $exploded_address_id ) :
 		null;
 	$response_data         = array(
 		'action' => $form_data['address-action'],

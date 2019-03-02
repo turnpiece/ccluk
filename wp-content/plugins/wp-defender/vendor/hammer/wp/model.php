@@ -188,6 +188,7 @@ abstract class Model extends \Hammer\Base\Model {
 		$where  = static::buildWhere( $attributes );
 		$sql    = "SELECT " . implode( ',', $fields ) . " FROM " . static::getWPDB()->posts . ' AS t0';
 		$sql    = $sql . ' ' . implode( ' ', $join ) . ' ' . implode( ' AND ', $where );
+		$sql    = $sql . ' GROUP BY ID';
 		if ( ! empty( $orderBy ) && static::buildOrderBy( $orderBy ) != false ) {
 			$sql = $sql . ' ORDER BY ' . static::buildOrderBy( $orderBy );
 			if ( ! empty( $order ) && in_array( strtolower( $order ), array( 'desc', 'asc' ) ) ) {
@@ -220,6 +221,7 @@ abstract class Model extends \Hammer\Base\Model {
 		$where  = static::buildWhere( $attributes );
 		$sql    = "SELECT " . implode( ',', $fields ) . " FROM " . static::getWPDB()->posts . ' AS t0';
 		$sql    = $sql . ' ' . implode( ' ', $join ) . ' ' . implode( ' AND ', $where );
+		$sql    = $sql . ' GROUP BY ID';
 		if ( ! empty( $orderBy ) && static::buildOrderBy( $orderBy ) != false ) {
 			$sql = $sql . ' ORDER BY ' . static::buildOrderBy( $orderBy );
 			if ( ! empty( $order ) && in_array( strtolower( $order ), array( 'desc', 'asc' ) ) ) {

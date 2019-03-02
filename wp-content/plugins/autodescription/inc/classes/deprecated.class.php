@@ -8,7 +8,7 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2015 - 2018 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2015 - 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -664,5 +664,4 @@ final class Deprecated {
 		$tsf->_deprecated_function( 'the_seo_framework()->generate_description_from_id()', '3.1.0', 'the_seo_framework()->get_generated_description()' );
 		return $tsf->get_generated_description( $args, $escape );
 	}
-
 }

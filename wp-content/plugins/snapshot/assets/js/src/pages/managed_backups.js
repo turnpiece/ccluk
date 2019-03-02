@@ -42,6 +42,16 @@
 			}, 'slow');
 		});
 
+		$("input[name='managed-backup-exclusions']").change(function () {
+			var global_exclusions = jQuery("input[name='managed-backup-exclusions']:checked").val();
+			if (global_exclusions === "global") {
+				$('div#managed-backup-exclusions-config').slideUp();
+			} else {
+				$('div#managed-backup-exclusions-config').slideDown();
+
+			}
+		}).change();
+
 		$("#my-backup-all").on('change', function () {
 			$('input[id^="my-backup"]').attr('checked', $(this).is(':checked'));
 		});
@@ -72,6 +82,7 @@
 		});
 
 		window.SS_PAGES.snapshot_page_snapshot_pro_managed_backups_create();
+		window.SS_PAGES.snapshot_page_snapshot_pro_managed_backups_upload();
 	};
 
 })(jQuery);

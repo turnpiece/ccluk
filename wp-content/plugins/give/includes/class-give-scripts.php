@@ -215,7 +215,10 @@ class Give_Scripts {
 			'give_version'                      => GIVE_VERSION,
 			'thousands_separator'               => $thousand_separator,
 			'decimal_separator'                 => $decimal_separator,
-			'number_decimals'                   => $number_decimals,
+			'number_decimals'                   => $number_decimals, // Use this for number of decimals instead of `currency_decimals`.
+			'currency_decimals'                 => $number_decimals, // If you find usage of this variable then replace it with `number_decimals`.
+			'currency_sign'                     => give_currency_filter( '' ),
+			'currency_pos'                      => isset( $give_options['currency_position'] ) ? $give_options['currency_position'] : 'before',
 			'quick_edit_warning'                => __( 'Not available for variable priced forms.', 'give' ),
 			'delete_payment'                    => __( 'Are you sure you want to <strong>permanently</strong> delete this donation?', 'give' ),
 			'delete_payment_note'               => __( 'Are you sure you want to delete this note?', 'give' ),
@@ -225,9 +228,6 @@ class Give_Scripts {
 			'disconnect_user'                   => __( 'Are you sure you want to disconnect the user from this donor?', 'give' ),
 			'one_option'                        => __( 'Choose a form', 'give' ),
 			'one_or_more_option'                => __( 'Choose one or more forms', 'give' ),
-			'currency_sign'                     => give_currency_filter( '' ),
-			'currency_pos'                      => isset( $give_options['currency_position'] ) ? $give_options['currency_position'] : 'before',
-			'currency_decimals'                 => give_get_price_decimals(),
 			'ok'                                => __( 'Ok', 'give' ),
 			'cancel'                            => __( 'Cancel', 'give' ),
 			'success'                           => __( 'Success', 'give' ),
@@ -381,7 +381,9 @@ class Give_Scripts {
 	public function public_enqueue_scripts() {
 
 		// Call Babel Polyfill with common handle so that it is compatible with plugins and themes.
-		if ( ! wp_script_is( 'babel-polyfill', 'enqueued' ) ) {
+		if ( ! wp_script_is( 'babel-polyfill', 'enqueued' )
+		     && give_is_setting_enabled( give_get_option( 'babel_polyfill_script', 'enabled' ) )
+		) {
 			wp_enqueue_script(
 				'babel-polyfill',
 				GIVE_PLUGIN_URL . 'assets/dist/js/babel-polyfill.js',
@@ -461,7 +463,9 @@ class Give_Scripts {
 				'number_decimals' => give_get_price_decimals(),
 			) ),
 			'cookie_hash'                 => COOKIEHASH,
-			'delete_session_nonce_cookie' => absint( Give()->session->is_delete_nonce_cookie() )
+			'session_nonce_cookie_name'   => Give()->session->get_cookie_name( 'nonce' ),
+			'session_cookie_name'         => Give()->session->get_cookie_name( 'session' ),
+			'delete_session_nonce_cookie' => absint( Give()->session->is_delete_nonce_cookie() ),
 		) );
 
 		wp_localize_script( 'give', 'give_global_vars', $localize_give_vars );
@@ -522,21 +526,26 @@ class Give_Scripts {
 	public function gutenberg_admin_scripts() {
 
 		// Enqueue the bundled block JS file
+		//@todo: Update dependencies on 5.0 Stable release
 		wp_enqueue_script(
 			'give-blocks-js',
 			GIVE_PLUGIN_URL . 'assets/dist/js/gutenberg.js',
-			array( 'wp-i18n', 'wp-element', 'wp-blocks', 'wp-components', 'wp-api' ),
+			array(
+				'wp-i18n',
+				'wp-element',
+				'wp-blocks',
+				'wp-components',
+				'wp-api',
+				'wp-editor',
+			),
 			GIVE_VERSION
 		);
-
-		// Enqueue public styles
-		wp_enqueue_style( 'give-styles' );
 
 		// Enqueue the bundled block css file
 		wp_enqueue_style(
 			'give-blocks-css',
 			GIVE_PLUGIN_URL . 'assets/dist/css/gutenberg.css',
-			array( ),
+			array( 'give-styles' ),
 			GIVE_VERSION
 		);
 

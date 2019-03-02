@@ -6,7 +6,7 @@
  *
  * @package     Give
  * @subpackage  Admin/Export
- * @copyright   Copyright (c) 2016, WordImpress
+ * @copyright   Copyright (c) 2016, GiveWP
  * @license     https://opensource.org/licenses/gpl-license GNU Public License
  */
 
@@ -31,7 +31,10 @@ function give_do_ajax_export() {
 
 	$_REQUEST = $form = (array) $form;
 
-	if ( ! wp_verify_nonce( $_REQUEST['give_ajax_export'], 'give_ajax_export' ) ) {
+	if (
+		! wp_verify_nonce( $_REQUEST['give_ajax_export'], 'give_ajax_export' )
+		|| ! current_user_can( 'manage_give_settings' )
+	) {
 		die( '-2' );
 	}
 

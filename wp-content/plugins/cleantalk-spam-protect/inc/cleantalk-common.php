@@ -105,6 +105,7 @@ function apbct_base_call($params = array(), $reg_flag = false){
 	
 	$ct = new Cleantalk();
 
+	$ct->use_bultin_api = $apbct->settings['use_buitin_http_api'] ? true : false;
 	$ct->ssl_on         = $apbct->settings['ssl_on'];
 	$ct->ssl_path       = APBCT_CASERT_PATH;
 	$ct->server_url     = $apbct->settings['server'];
@@ -168,7 +169,7 @@ function apbct_get_sender_info() {
     
 	if (count($_POST) > 0) {
 		foreach ($_POST as $k => $v) {
-			if (preg_match("/^ct_check.+/", $k)) {
+			if (preg_match("/^(ct_check|checkjs).+/", $k)) {
         		$checkjs_data_post = $v; 
 			}
 		}
@@ -206,6 +207,8 @@ function apbct_get_sender_info() {
 		'page_set_timestamp'     => !empty($_COOKIE['ct_ps_timestamp'])                            ? $_COOKIE['ct_ps_timestamp']                                       : null,
 		'form_visible_inputs'    => !empty($_COOKIE['apbct_visible_fields_count'])                 ? $_COOKIE['apbct_visible_fields_count']                            : null,
 		'apbct_visible_fields'   => !empty($_COOKIE['apbct_visible_fields'])                       ? apbct_visibile_fields__process($_COOKIE['apbct_visible_fields'])  : null,
+		// Misc
+		//'validate_email_existence' => $apbct->settings['validate_email_existence'],
 		// Debug stuff
 		'amp_detected'           => $amp_detected,
 	);
@@ -236,6 +239,16 @@ function apbct_visibile_fields__process($visible_fields) {
 	}
 	
 	return $visible_fields;
+}
+
+/*
+ * Outputs JS key for AJAX-use only. Stops script.
+ */
+function apbct_js_keys__get__ajax($direct_call = false){
+	if(!$direct_call) check_ajax_referer('ct_secret_stuff');
+	die(json_encode(array(
+		'js_key' => ct_get_checkjs_value((bool)$_POST['random_key'])
+	)));
 }
 
 /**
@@ -345,6 +358,7 @@ function ct_hash($new_hash = '') {
  * @return 	string comment_content w\o cleantalk resume
  */
 function ct_feedback($hash, $allow) {
+	global $apbct;
 	
     $ct_feedback = $hash . ':' . $allow . ';';
     if($apbct->data['feedback_request'])
@@ -811,4 +825,25 @@ function apbct_api_key__is_correct($api_key = null)
 	global $apbct;
 	$api_key = $api_key !== null ? $api_key : $apbct->api_key;
     return $api_key && preg_match('/^[a-z\d]{3,15}$/', $api_key) ? true : false;
+}
+
+function apbct_add_async_attribute($tag, $handle, $src) {
+	
+	global $apbct;
+	
+    if(
+		$apbct->settings['async_js'] &&
+		(
+			   $handle === 'ct_public'
+			|| $handle === 'ct_public_gdpr'
+			|| $handle === 'ct_debug_js'
+			|| $handle === 'ct_public_admin_js'
+			|| $handle === 'ct_internal'
+			|| $handle === 'ct_external'
+			|| $handle === 'ct_nocache'
+		)
+	)
+		return str_replace( ' src', ' async="async" src', $tag );
+	else
+		return $tag;
 }

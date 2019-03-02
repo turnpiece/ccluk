@@ -740,8 +740,8 @@ class AgmMapModel {
 				'show_images'            => agm_positive_values( @$options['show_images'], 1, 0 ),
 				'image_size'             => @$options['image_size'],
 				'image_limit'            => @$options['image_limit'],
-				'show_panoramio_overlay' => agm_positive_values( @$options['show_panoramio_overlay'], 1, 0 ),
-				'panoramio_overlay_tag'  => @$options['panoramio_overlay_tag'],
+				//'show_panoramio_overlay' => agm_positive_values( @$options['show_panoramio_overlay'], 1, 0 ),
+				//'panoramio_overlay_tag'  => @$options['panoramio_overlay_tag'],
 				'street_view'            => @$options['street_view'],
 				'street_view_pos'        => @$options['street_view_pos'],
 				'street_view_pov'        => @$options['street_view_pov'],
@@ -798,6 +798,8 @@ class AgmMapModel {
 			'street_view_pos'        => @$data['street_view_pos'],
 			'street_view_pov'        => @$data['street_view_pov'],
 		);
+
+		$data['markers'] = ! empty( $data['markers'] ) ? $data['markers'] : array();
 
 		$data['title'] = apply_filters( 'agm-save-title', $data['title'], $data );
 		$data['markers'] = apply_filters( 'agm-save-markers', $data['markers'], $data );

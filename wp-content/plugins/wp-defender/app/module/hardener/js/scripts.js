@@ -1,7 +1,9 @@
 jQuery(function ($) {
     WDHardener.formHandler();
-    WDHardener.rules();
-
+    var hash = window.location.hash;
+    if ($(hash).size() > 0) {
+        $(hash).addClass('sui-accordion-item--open');
+    }
     //On key up or is a user decides to paste
     $('.hardener-instructions textarea.hardener-php-excuted-ignore').on('keyup keypress paste', function (e) {
         var text_val = $(this).val();
@@ -17,29 +19,18 @@ jQuery(function ($) {
             $(this).val(text_val);
         }
 
-        if ($('.hardener-instructions-apache').is(':visible')) {
-            //Apache
-            $('.hardener-apache-frm [name="file_paths"]').val(text_val);
-        } else if ($('.hardener-instructions-litespeed').is(':visible')) {
-            //Litespeed
-            $('.hardener-litespeed-frm [name="file_paths"]').val(text_val);
-        } else if ($('.hardener-instructions-nginx').is(':visible')) {
-            //Nginx
-            var excludedFiles = text_val.split('\n');
-            var newRule = "";
-            var $wp_content = $('.hardener-wp-content-dir').val();
-            $.each(excludedFiles, function (index, file) {
-                if (file) {
-                    newRule += "\n location ~* ^" + $wp_content + "/.*&#92;" + file + "$ {" +
-                        " \n  allow all;" +
-                        "\n}";
-                }
-            });
-            $('span.hardener-nginx-extra-instructions').html(newRule);
-        }
-        if ($('.hardener-instructions-apache-litespeed').length) {
-            $('.hardener-update-frm [name="file_paths"]').val(text_val);
-        }
+        //Nginx
+        var excludedFiles = text_val.split('\n');
+        var newRule = "";
+        var $wp_content = $('.hardener-wp-content-dir').val();
+        $.each(excludedFiles, function (index, file) {
+            if (file) {
+                newRule += "\n location ~* ^" + $wp_content + "/.*&#92;" + file + "$ {" +
+                    " \n  allow all;" +
+                    "\n}";
+            }
+        });
+        $('span.hardener-nginx-extra-instructions').html(newRule);
     });
 
     /**
@@ -75,30 +66,6 @@ jQuery(function ($) {
         $('.hardener-instructions textarea.hardener-php-excuted-ignore').toggle('fast');
     });
 
-    /**
-     * Server select
-     */
-    $(document).on('change', 'select.hardener-server-list', function () {
-        var selected = $(this).val();
-        if ($(this).hasClass('information')) {
-            $('.hardener-information').each(function () {
-                $(this).addClass('wd-hide');
-            });
-            $('.hardener-information-' + selected).removeClass('wd-hide');
-        } else {
-            $('.hardener-instructions').each(function () {
-                $(this).addClass('wd-hide');
-            });
-            $('.hardener-instructions-' + selected).removeClass('wd-hide');
-        }
-        if (selected == 'apache' || selected == 'litespeed' || selected == 'nginx') {
-            $('.hardener-instructions-extra-exceptions').removeClass('wd-hide');
-        } else {
-            $('.hardener-instructions-extra-exceptions').addClass('wd-hide');
-        }
-
-    });
-
     $('div.hardener').on('form-submitted', function (e, data, form) {
         if (form.hasClass('rule-process') == false) {
             return;
@@ -110,11 +77,11 @@ jQuery(function ($) {
             $('.count-resolved').text(data.data.fixed);
             $('.issues-actioned').text(10 - data.data.issues);
             if (data.data.issues > 0) {
-                $('.issues-count i').removeClass('def-icon icon-tick').addClass('def-icon icon-warning');
+                $('.issues i').removeClass('sui-icon-check-tick sui-success').addClass('sui-icon-info sui-warning');
                 $('.count-issues').removeClass('wd-hide');
             } else {
                 $('.count-issues').addClass('wd-hide');
-                $('.issues-count i').removeClass('def-icon icon-warning').addClass('def-icon icon-tick');
+                $('.issues i').removeClass('sui-icon-info sui-warning').addClass('sui-icon-check-tick sui-success');
             }
             if (data.data.ignore > 0) {
                 $('.count-ignored').removeClass('wd-hide');
@@ -131,9 +98,9 @@ jQuery(function ($) {
                 update_rules = false;
             }
             if (update_rules) {
-                form.closest('.rule').slideUp(500, function () {
+                form.closest('.sui-accordion-item').slideUp(500, function () {
                     $(this).remove();
-                    if ($('.rule').size() == 0) {
+                    if ($('.sui-accordion-item').size() == 0) {
                         setTimeout(function () {
                             location.reload();
                         }, 500)
@@ -169,7 +136,10 @@ WDHardener.formHandler = function () {
             url: ajaxurl,
             data: data,
             beforeSend: function () {
-                that.find('.button').attr('disabled', 'disabled');
+                that.find('.sui-button').attr('disabled', 'disabled');
+                that.find('.sui-button').html('<span class="sui-loading-text">' + that.find('.sui-button').text())
+                that.find('.sui-button').append('<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>');
+                that.find('.sui-button').addClass('sui-button-onload')
             },
             success: function (data) {
                 if (data.data != undefined && data.data.reload != undefined) {
@@ -209,45 +179,13 @@ WDHardener.formHandler = function () {
                 } else if (data.data != undefined && data.data.url != undefined) {
                     location.href = data.data.url;
                 } else {
-                    that.find('.button').removeAttr('disabled');
+                    that.find('.sui-button').html(that.find('.sui-button').text())
+                    that.find('.sui-button').removeClass('sui-button-onload')
+                    that.find('.sui-button').removeAttr('disabled');
                     jq('div.hardener').trigger('form-submitted', [data, that])
                 }
             }
         })
         return false;
-    })
-}
-
-WDHardener.rules = function () {
-    var jq = jQuery;
-    if (jq('.rules.ignored').size() > 0) {
-        //no animation for ignored
-        return;
-    }
-    var id = window.location.hash.substr(1);
-    if (id == undefined) {
-        jq('.rule').first().removeClass('closed');
-    } else {
-        jq('#' + id).removeClass('closed');
-    }
-    jq('.rule .rule-title').click(function () {
-        var parent = jq(this).closest('.rule');
-        var otherRules = jq('.rule').not(parent);
-        otherRules.each(function () {
-            var that = jq(this);
-            jq(this).find('.rule-content').first().slideUp(function () {
-                that.addClass('closed');
-            })
-        })
-        if (parent.hasClass('closed')) {
-            //jq(this).switchClass('closed', '', 1000, 'swing');
-            parent.find('.rule-content').first().slideDown();
-            parent.removeClass('closed');
-        } else {
-            //jq(this).switchClass('', 'closed', 1000, 'swing');
-            parent.find('.rule-content').first().slideUp(function () {
-                parent.addClass('closed');
-            })
-        }
     })
 }

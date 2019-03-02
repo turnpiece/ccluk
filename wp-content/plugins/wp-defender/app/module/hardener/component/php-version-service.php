@@ -6,6 +6,7 @@
 namespace WP_Defender\Module\Hardener\Component;
 
 use WP_Defender\Module\Hardener\IRule_Service;
+use WP_Defender\Module\Hardener\Model\Settings;
 use WP_Defender\Module\Hardener\Rule_Service;
 
 class PHP_Version_Service extends Rule_Service implements IRule_Service {
@@ -14,7 +15,8 @@ class PHP_Version_Service extends Rule_Service implements IRule_Service {
 	 * @return bool
 	 */
 	public function check() {
-		if ( version_compare( $this->getPHPVersion(), '5.6', '<=' ) ) {
+		$this->queryVersion();
+		if ( version_compare( $this->getPHPVersion(),Settings::instance()->min_php_version , '<=' ) ) {
 			return false;
 		}
 
@@ -31,5 +33,31 @@ class PHP_Version_Service extends Rule_Service implements IRule_Service {
 
 	public function listen() {
 
+	}
+
+	protected function queryVersion() {
+		$lastCheck = get_site_transient( 'defender_last_check_php_versions' );
+		if ( ! $lastCheck || strtotime( '+24 hours', $lastCheck ) < time() ) {
+			$html = wp_remote_get( 'http://php.net/supported-versions.php' );
+			if ( is_wp_error( $html ) ) {
+				delete_site_transient('defender_last_check_php_versions');
+				return false;
+			}
+			$dom = new \DOMDocument;
+			libxml_use_internal_errors( true );
+			$dom->loadHTML( $html['body'] );
+			$finder       = new \DOMXPath( $dom );
+			$classname    = "security";
+			$securityNode = $finder->query( "//*[contains(@class, '$classname')]/td[1]/a" );
+			$securityNode = $securityNode->item( 0 )->nodeValue;
+			$classname    = "stable";
+			$lastStable   = $finder->query( "//*[contains(@class, '$classname')][2]/td[1]/a" );;
+			$lastStable                   = $lastStable->item( 0 )->nodeValue;
+			$settings                     = Settings::instance();
+			$settings->stable_php_version = $lastStable;
+			$settings->min_php_version    = $securityNode;
+			$settings->save();
+			set_site_transient( 'defender_last_check_php_versions', time(), 60 * 60 * 24 );
+		}
 	}
 }

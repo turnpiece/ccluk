@@ -1,0 +1,1 @@
+<p><?php printf( __( 'For IIS 7 servers, <a href="%s">visit Microsoft TechNet</a>', wp_defender()->domain ), 'https://technet.microsoft.com/en-us/library/cc754807(v=ws.10).aspx' ); ?></p>

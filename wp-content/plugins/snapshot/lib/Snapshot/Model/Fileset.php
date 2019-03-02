@@ -125,7 +125,14 @@ abstract class Snapshot_Model_Fileset {
 	 */
 	public static function get_excluded_paths ( $format = false ) {
 		$config = WPMUDEVSnapshot::instance()->config_data['config'];
-		$exclusion = !empty($config['filesIgnore']) ? $config['filesIgnore'] : array();
+
+		if ( ! isset( $config['managedBackupExclusions'] ) || "global" === $config['managedBackupExclusions'] ) {
+			$current_exclusions = 'filesIgnore';
+		} else {
+			$current_exclusions = 'filesManagedIgnore';
+		}
+
+		$exclusion = !empty($config[ $current_exclusions ]) ? $config[ $current_exclusions ] : array();
 		$exclusion = !empty($exclusion) && is_array($exclusion)
 			? array_values(array_unique(array_filter(array_map('trim', $exclusion))))
 			: array()
@@ -133,6 +140,31 @@ abstract class Snapshot_Model_Fileset {
 
 		// Always include backup base folder
 		$exclusion[] = WPMUDEVSnapshot::instance()->get_setting('backupBaseFolderFull');
+
+		// Check if on WPMU DEV Hosting or WPEngine, in order to exclude non-editable files.
+		$is_wpmu_hosting = Snapshot_Helper_Utility::is_wpmu_hosting();
+		$is_wpengine_hosting = Snapshot_Helper_Utility::is_wpengine_hosting();
+
+		// WPMU DEV Hosting specific!
+		if ( $is_wpmu_hosting ) {
+			$exclusion[] = trailingslashit( WP_CONTENT_DIR ) . 'object-cache.php';
+			$exclusion[] = trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/wpmudev-hosting.php';
+			$exclusion[] = trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/wpmudev-hosting/misc-functions.php';
+			$exclusion[] = trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/wpmudev-hosting/statsd.php';
+			$exclusion[] = trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/wpmudev-hosting/wp-cli.php';
+		}
+
+		// WPEngine specific!
+		if ( $is_wpengine_hosting ) {
+			$exclusion[] = trailingslashit( ABSPATH ) . '_wpeprivate';
+			$exclusion[] = trailingslashit( WP_CONTENT_DIR ) . 'mysql.sql';
+			$exclusion[] = trailingslashit( WP_CONTENT_DIR ) . 'advanced-cache.php';
+			$exclusion[] = trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/force-strong-passwords';
+			$exclusion[] = trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/wpengine-common';
+			$exclusion[] = trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/mu-plugin.php';
+			$exclusion[] = trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/slt-force-strong-passwords.php';
+			$exclusion[] = trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/stop-long-comments.php';
+		}
 
 		if ( $format ) {
 			// Check for unreadable files
@@ -207,7 +239,7 @@ abstract class Snapshot_Model_Fileset {
 		//Check if find command is available
 		$find_path = Snapshot_Helper_System::get_command( 'find' );
 
-		$command = "cd {$root} && {$find_path} . ! -readable -print";
+		$command = "cd {$root} && {$find_path} . ! -perm -g+r -print";
 		// phpcs:ignore
 		$status = exec($command, $output, $status);
 

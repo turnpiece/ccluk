@@ -164,7 +164,9 @@ class WP_Hummingbird_Module_Performance extends WP_Hummingbird_Module {
 		 *
 		 * @param object $report  Object with report data.
 		 */
-		do_action( 'wphb_get_performance_report', $results->data );
+		if ( isset( $results->data ) && ! is_wp_error( $results->data ) ) {
+			do_action( 'wphb_get_performance_report', $results->data );
+		}
 	}
 
 	/**

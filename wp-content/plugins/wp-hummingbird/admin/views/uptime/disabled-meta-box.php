@@ -10,10 +10,12 @@
 
 ?>
 
-<img class="wphb-image wphb-image-center wphb-image-icon-content-top"
-	 src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-graphic-uptime-disabled@1x.png' ); ?>"
-	 srcset="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-graphic-uptime-disabled@2x.png' ); ?> 2x"
-	 alt="<?php esc_attr_e( 'Monitor your website', 'wphb' ); ?>">
+<?php if ( ! WP_Hummingbird_Utils::hide_wpmudev_branding() ) : ?>
+	<img class="wphb-image wphb-image-center wphb-image-icon-content-top"
+	     src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-graphic-uptime-disabled@1x.png' ); ?>"
+	     srcset="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-graphic-uptime-disabled@2x.png' ); ?> 2x"
+	     alt="<?php esc_attr_e( 'Monitor your website', 'wphb' ); ?>">
+<?php endif; ?>
 
 <div class="sui-margin-bottom">
 	<p>

@@ -8,7 +8,7 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2015 - 2018 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2015 - 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -42,11 +42,10 @@ class Generate extends User_Data {
 	 */
 	protected function fix_generation_args( &$args ) {
 		if ( is_array( $args ) ) {
-			$defaults = [
+			$args = array_merge( [
 				'id'       => 0,
 				'taxonomy' => '',
-			];
-			$args = array_merge( $defaults, $args );
+			], $args );
 		} elseif ( is_numeric( $args ) ) {
 			$args = [
 				'id'       => (int) $args,

@@ -165,12 +165,14 @@
 
 <?php if ( $show_cf_notice ) : ?>
 	<div class="sui-box-settings-row sui-upsell-row cf-dash-notice sui-no-padding-top">
-		<img class="sui-image sui-upsell-image"
-			 src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/graphic-hb-cf-sell.png' ); ?>"
-			 srcset="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/graphic-hb-cf-sell@2x.png' ); ?> 2x"
-			 alt="<?php esc_attr_e( 'Connect your account to Cloudflare', 'wphb' ); ?>">
+		<?php if ( ! WP_Hummingbird_Utils::hide_wpmudev_branding() ) : ?>
+			<img class="sui-image sui-upsell-image"
+			     src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/graphic-hb-cf-sell.png' ); ?>"
+			     srcset="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/graphic-hb-cf-sell@2x.png' ); ?> 2x"
+			     alt="<?php esc_attr_e( 'Connect your account to Cloudflare', 'wphb' ); ?>">
+		<?php endif; ?>
 
-		<div class="sui-upsell-notice">
+		<div class="<?php echo( WP_Hummingbird_Utils::hide_wpmudev_branding() ? esc_attr( 'sui-notice' ) : esc_attr( 'sui-upsell-notice' ) ); ?>">
 			<p>
 				<?php echo esc_html( $cf_notice ); ?>
 				<a href="#" class="connect-cloudflare-link">
@@ -178,12 +180,13 @@
 				</a>
 				<?php
 				esc_html_e( 'to control your settings via Hummingbird.', 'wphb' );
+				$learn_more_link = ( WP_Hummingbird_Utils::hide_wpmudev_doc_link() ? '#' : 'https://premium.wpmudev.org/blog/cloudflare-review/' );
 				if ( ! $cf_server ) {
 					echo '<br>';
 					printf(
 						/* translators: %s: CloudFlare information link */
 						__( 'CloudFlare is a Content Delivery Network (CDN) that sends traffic through its global network to automatically optimize the delivery of your site so your visitors can browse your site at top speeds. There is a free plan and we recommend using it. <a href="%s" target="_blank">Learn more.</a>', 'wphb' ),
-						'https://premium.wpmudev.org/blog/cloudflare-review/'
+						$learn_more_link
 					);
 				}
 				?>

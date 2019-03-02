@@ -63,9 +63,74 @@ class Main extends Controller {
 		$this->add_ajax_action( 'lockoutSummaryData', 'lockoutSummaryData' );
 		$this->add_ajax_action( 'migrateData', 'movingDataToTable' );
 		$this->add_ajax_action( 'lockoutExportAsCsv', 'exportAsCsv' );
+		$this->add_ajax_action( 'bulkAction', 'bulkAction' );
+		$this->add_ajax_action( 'downloadGeoIPDB', 'downloadGeoIPDB' );
 
 		$this->handleIpAction();
 		$this->handleUserSearch();
+	}
+
+	public function bulkAction() {
+		if ( ! $this->checkPermission() ) {
+			return;
+		}
+		if ( ! wp_verify_nonce( HTTP_Helper::retrieve_post( '_wpnonce' ), 'bulkAction' ) ) {
+			return;
+		}
+
+		$ids  = HTTP_Helper::retrieve_post( 'ids' );
+		$ids  = explode( ',', $ids );
+		$type = HTTP_Helper::retrieve_post( 'type' );
+		if ( count( $ids ) && $type ) {
+			$settings = Settings::instance();
+			foreach ( $ids as $id ) {
+				$model = Log_Model::findByID( $id );
+				switch ( $type ) {
+					case 'whitelist':
+						$settings->addIpToList( $model->ip, 'whitelist' );
+						break;
+					case 'ban':
+						$settings->addIpToList( $model->ip, 'blacklist' );
+						break;
+					case 'delete':
+						$model->delete();
+						break;
+				}
+			}
+
+			wp_send_json_success( array(
+				'reload'  => 1,
+				'message' => ''
+			) );
+		}
+	}
+
+	public function downloadGeoIPDB() {
+		if ( ! $this->checkPermission() ) {
+			return;
+		}
+
+		if ( ! wp_verify_nonce( HTTP_Helper::retrieve_post( '_wpnonce' ), 'downloadGeoIPDB' ) ) {
+			return;
+		}
+
+		$url = "http://geolite.maxmind.com/download/geoip/database/GeoLite2-Country.tar.gz";
+		$tmp = download_url( $url );
+		if ( ! is_wp_error( $tmp ) ) {
+			$phar    = new \PharData( $tmp );
+			$defPath = Utils::instance()->getDefUploadDir();
+			$path    = $defPath . DIRECTORY_SEPARATOR . 'maxmind';
+			if ( ! is_dir( $path ) ) {
+				mkdir( $path );
+			}
+			$phar->extractTo( $path, null, true );
+			$settings           = Settings::instance();
+			$settings->geoIP_db = $path . DIRECTORY_SEPARATOR . $phar->current()->getFileName() . DIRECTORY_SEPARATOR . 'GeoLite2-Country.mmdb';
+			$settings->save();
+			wp_send_json_success( array(
+				'message' => __( "Database downloaded", wp_defender()->domain )
+			) );
+		}
 	}
 
 	public function lockoutSummaryData() {
@@ -275,6 +340,13 @@ class Main extends Controller {
 				'message' => $settings->ip_lockout_message
 			) );
 			die;
+		} elseif ( $settings->isCountryBlacklist() ) {
+			header( 'HTTP/1.0 403 Forbidden' );
+			header( 'Cache-Control: private' );
+			$this->renderPartial( 'locked', array(
+				'message' => $settings->ip_lockout_message
+			) );
+			die;
 		} else {
 			if ( is_user_logged_in() ) {
 				//if current user can logged in, and no blacklisted we don't need to check the ip
@@ -285,6 +357,9 @@ class Main extends Controller {
 				'ip' => $ip
 			) );
 			if ( is_object( $model ) && $model->is_locked() ) {
+				if ( ! defined( 'DONOTCACHEPAGE' ) ) {
+					define( 'DONOTCACHEPAGE', true );
+				}
 				header( 'HTTP/1.0 403 Forbidden' );
 				header( 'Cache-Control: private' );
 				$this->renderPartial( 'locked', array(
@@ -300,9 +375,10 @@ class Main extends Controller {
 	 */
 	private function handleUserSearch() {
 		$view                         = HTTP_Helper::retrieve_get( 'view' );
-		$id                           = HTTP_Helper::retrieve_post( 'id' );
+		$id                           = isset( $_REQUEST['id'] ) ? $_REQUEST['id'] : null;
 		$this->email_search           = new Email_Search();
 		$this->email_search->settings = Settings::instance();
+
 		if ( $view == 'notification' || ( defined( 'DOING_AJAX' ) && $id == 'lockout-notification' ) ) {
 			$this->email_search->eId = 'lockout-notification';
 			$this->email_search->add_hooks();
@@ -722,6 +798,9 @@ class Main extends Controller {
 			if ( in_array( $k, $textarea ) ) {
 				$data[ $k ] = wp_kses_post( $v );
 			} else {
+				if ( is_array( $v ) ) {
+					$v = implode( ',', $v );
+				}
 				$data[ $k ] = sanitize_text_field( $v );
 			}
 		}
@@ -830,7 +909,8 @@ class Main extends Controller {
 	 */
 	public function scripts() {
 		if ( $this->isInPage() ) {
-			\WDEV_Plugin_Ui::load( wp_defender()->getPluginUrl() . 'shared-ui/' );
+			wp_enqueue_script( 'wpmudev-sui' );
+			wp_enqueue_style( 'wpmudev-sui' );
 			if ( HTTP_Helper::retrieve_get( 'view' ) == 'blacklist' ) {
 				remove_filter( 'admin_body_class', array( 'WDEV_Plugin_Ui', 'admin_body_class' ) );
 			}

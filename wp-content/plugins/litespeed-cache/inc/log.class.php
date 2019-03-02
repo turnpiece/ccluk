@@ -37,7 +37,7 @@ class LiteSpeed_Cache_Log
 	private function __construct()
 	{
 		self::$log_path = LSCWP_CONTENT_DIR . '/debug.log' ;
-		if ( ! empty( $_SERVER[ 'HTTP_USER_AGENT' ] ) && $_SERVER[ 'HTTP_USER_AGENT' ] === Litespeed_Crawler::FAST_USER_AGENT ) {
+		if ( ! empty( $_SERVER[ 'HTTP_USER_AGENT' ] ) && strpos( $_SERVER[ 'HTTP_USER_AGENT' ], Litespeed_Crawler::FAST_USER_AGENT ) === 0 ) {
 			self::$log_path = LSCWP_CONTENT_DIR . '/crawler.log' ;
 		}
 
@@ -139,6 +139,7 @@ class LiteSpeed_Cache_Log
 			'X-LSCACHE' => '',
 			'LSCACHE_VARY_COOKIE' => '',
 			'LSCACHE_VARY_VALUE' => '',
+			'ESI_CONTENT_TYPE' => '',
 		) ;
 		$server = array_merge( $servervars, $_SERVER ) ;
 		$params = array() ;
@@ -187,6 +188,9 @@ class LiteSpeed_Cache_Log
 		}
 		if( $server['LSCACHE_VARY_VALUE'] ) {
 			$params[] = 'LSCACHE_VARY_VALUE: ' . $server['LSCACHE_VARY_VALUE'] ;
+		}
+		if( $server['ESI_CONTENT_TYPE'] ) {
+			$params[] = 'ESI_CONTENT_TYPE: ' . $server['ESI_CONTENT_TYPE'] ;
 		}
 
 		$request = array_map( 'self::format_message', $params ) ;

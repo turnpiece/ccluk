@@ -320,11 +320,7 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 			), WP_Hummingbird_Utils::get_admin_menu_url( 'caching' ) );
 
 
-			if ( 'clear_cache' === $action && 'page_cache' === $module ) {
-				$redirect_url = add_query_arg( array(
-					'cleared' => true,
-				), $redirect_url );
-			} elseif ( 'enable' === $action && 'caching' === $module ) {
+			if ( 'enable' === $action && 'caching' === $module ) {
 				$redirect_url = add_query_arg( array(
 					'enabled' => true,
 				), $redirect_url );
@@ -360,17 +356,17 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 			$this->admin_notices->show( 'updated', __( 'Browser cache enabled. Your .htaccess file has been updated', 'wphb' ), 'success' );
 		} elseif ( isset( $_GET['disabled'] ) ) { // Input var ok.
 			$this->admin_notices->show( 'updated', __( 'Browser cache disabled. Your .htaccess file has been updated', 'wphb' ), 'success' );
-		} elseif ( isset( $_GET['cleared'] ) ) { // Input var ok.
-			$this->admin_notices->show( 'purged', __( 'Page cache purged', 'wphb' ), 'success' );
 		}
 		?>
 		<div class="sui-header">
 			<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
 			<div class="sui-actions-right">
-				<a href="<?php echo esc_url( WP_Hummingbird_Utils::get_documentation_url( $this->slug, $this->get_current_tab() ) ); ?>" target="_blank" class="sui-button sui-button-ghost">
-					<i class="sui-icon-academy" aria-hidden="true"></i>
-					<?php esc_html_e( 'View Documentation', 'wphb' ); ?>
-				</a>
+				<?php if ( ! WP_Hummingbird_Utils::hide_wpmudev_doc_link() ) : ?>
+					<a href="<?php echo esc_url( WP_Hummingbird_Utils::get_documentation_url( $this->slug, $this->get_current_tab() ) ); ?>" target="_blank" class="sui-button sui-button-ghost">
+						<i class="sui-icon-academy" aria-hidden="true"></i>
+						<?php esc_html_e( 'View Documentation', 'wphb' ); ?>
+					</a>
+				<?php endif; ?>
 			</div>
 		</div><!-- end header -->
 		<?php

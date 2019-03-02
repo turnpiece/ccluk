@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Autoptimize - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-10-31 20:44:11+0000\n"
+"PO-Revision-Date: 2019-01-14 19:40:49+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -11,97 +11,112 @@ msgstr ""
 "Language: pt_BR\n"
 "Project-Id-Version: Plugins - Autoptimize - Stable (latest release)\n"
 
+#. translators: link points to shortpixel.
+#: classes/autoptimizeExtra.php:907
+msgid "%1$sSign-up now%2$s to receive a 1 000 bonus + 50&#37; more image optimization credits regardless of the traffic used. More image optimizations can be purchased starting with $4.99."
+msgstr "%1$sAssine agora%2$s para receber um bônus de 1.000 + 50&#37; créditos de otimizações de imagens independente do tráfego usado. Mais otimizações podem ser compradas a partir de USD 4.99."
+
+#. translators: "here to refresh" links to the Autoptimize Extra page and
+#. forces a refresh of the img opt stats.
+#: classes/autoptimizeExtra.php:744
+msgid "click %1$shere to refresh%2$s"
+msgstr "clique %1$saqui para atualizar%2$s"
+
+#: classes/autoptimizeExtra.php:738
+msgid "based on status at "
+msgstr "baseado no status em"
+
+#: classes/autoptimizeExtra.php:740
+msgid "based on previously fetched data"
+msgstr "baseado em datos coletados anteriormente"
+
 #. Translators: the URL added points to the Autopmize Extra settings.
 #: classes/autoptimizeMain.php:544
 msgid "Did you know Autoptimize includes on-the-fly image optimization and CDN via ShortPixel? Check out the %1$sAutoptimize Extra settings%2$s to activate this option."
 msgstr "Você sabia que Autoptimize inclui otimização de imagens e CDN via ShortPixel?Consulte as %1$sconfigurações Extra do Autoptimize Extra%2$s para ativar esta opção."
 
 #. translators: link points Async Javascript settings page.
-#: classes/autoptimizeExtra.php:891
+#: classes/autoptimizeExtra.php:971
 msgid "You have \"Async JavaScript\" installed, %1$sconfiguration of async javascript is best done there%2$s."
 msgstr "Você tem o \"Async JavaScript\" instalado, %1$smelhor configura ro javascript assíncrono por lá%2$s."
 
 #. translators: link points to shortpixel image test page.
-#: classes/autoptimizeExtra.php:862
+#: classes/autoptimizeExtra.php:942
 msgid "You can %1$stest compression levels here%2$s."
 msgstr "Você pode %1$stestar os níveis de compressão aqui%2$s."
 
 #. translators: links points to shortpixel TOS & Privacy Policy.
-#: classes/autoptimizeExtra.php:834
+#: classes/autoptimizeExtra.php:914
 msgid "Usage of this feature is subject to Shortpixel's %1$sTerms of Use%2$s and %3$sPrivacy policy%4$s."
 msgstr "O uso deste recurso é sujeito aos %1$sTermos de Uso%2$s e %3$sPolítica de Privacidade%4$s do Shortpixel."
 
 #. translators: link points to shortpixel FAQ.
-#: classes/autoptimizeExtra.php:832
+#: classes/autoptimizeExtra.php:912
 msgid "<strong>Questions</strong>? Have a look at the %1$sShortPixel FAQ%2$s!"
 msgstr "<strong>Questões</strong>? Dê uma olhada nas %1$sPerguntas e Respostas (FAQ) do ShortPixel%2$s!"
 
 #. translators: link points to shortpixel.
-#: classes/autoptimizeExtra.php:823
+#: classes/autoptimizeExtra.php:902
 msgid "Get more Google love and improve your website's loading speed by having the images optimized on the fly by %1$sShortPixel%2$s and then cached and served fast from a CDN."
 msgstr "Conseguir mais amor do Google e melhores a velocidade de carregamento do site ao ter as imagens otimizadas onlin pelo %1$sShortPixel%2$s e então tê-las servidas e cacheadas por um CDN."
 
-#. Description of the plugin/theme
+#. Description of the plugin
 msgid "Optimize your website's performance: JS, CSS, HTML, images, Google Fonts and more!"
 msgstr "Otimiza o desempenho de seu site: JS,CSS, HTML, imagens, Fontes Google e mais!"
 
-#: classes/autoptimizeExtra.php:840
+#: classes/autoptimizeExtra.php:920
 msgid "Image Optimization quality"
 msgstr "Qualidade da Otimização de Imagens"
 
-#: classes/autoptimizeExtra.php:827
-msgid "The service is offered for free for 100 images/month regardless of the traffic used. More image optimizations can be purchased starting with $4.99."
-msgstr "Este serviço é gratuito até 100 imagens/mês independente do tráfego usado. Mais otimizações de imagens podem ser compradas a partir de USD4.99."
-
-#: classes/autoptimizeExtra.php:825
-msgid "For a limited time only, this service is offered free-for-all, <b>don't miss the chance to test it</b> and see how much it could improve your site's speed."
+#: classes/autoptimizeExtra.php:904
+msgid "For a limited time only, this service is offered free for all Autoptimize users, <b>don't miss the chance to test it</b> and see how much it could improve your site's speed."
 msgstr "Apenas por um tempo limitado, este serviço está sendo oferecido gratuitamente a todos, <b>não perca a chance de testá-lo</b> e ver o quanto pode melhorar a velocidade de seu site."
 
-#: classes/autoptimizeExtra.php:820
+#: classes/autoptimizeExtra.php:899
 msgid "Shortpixel status: "
 msgstr "Status do Shortpixel:"
 
-#: classes/autoptimizeExtra.php:802
+#: classes/autoptimizeExtra.php:878
 msgid "Optimize images on the fly and serve them from a CDN."
 msgstr "Otimize imagens durante o uso e as sirva a partir de um CDN."
 
-#: classes/autoptimizeExtra.php:800
+#: classes/autoptimizeExtra.php:876
 msgid "Optimize Images"
 msgstr "Otimiza Imagens"
 
-#: classes/autoptimizeExtra.php:795
+#: classes/autoptimizeExtra.php:871
 msgid "Combine and preload in head (fonts load late, but are not render-blocking)"
 msgstr "Combinar e pré carregar no elemento `head` (fontes carregarão mais tarde, mas não vão bloquear a renderização)"
 
-#: classes/autoptimizeExtra.php:794
+#: classes/autoptimizeExtra.php:870
 msgid "Combine and link in head (fonts load fast but are render-blocking)"
-msgstr "Combinar e pré carregar no elemento `head` (fontes carregam rápido mas bloqueiam renderização)"
+msgstr "Combinar e adicionar link no elemento `head` (fontes carregam rápido mas bloqueiam renderização)"
 
-#: classes/autoptimizeExtra.php:777
+#: classes/autoptimizeExtra.php:853
 msgid "The image optimization service is launching, but not yet available for this domain, it should become available in the next couple of days."
 msgstr "O serviço de otimização de imagens estão sendo lançado, mas ainda não está disponível para este domínio, deve estar disponível em alguns dias."
 
 #. translators: "Autoptimize support forum" will appear in a "a href".
-#: classes/autoptimizeExtra.php:767
+#: classes/autoptimizeExtra.php:843
 msgid "The image optimization service is currently down, image optimization will be skipped until further notice. Check the %1$sAutoptimize support forum%2$s for more info."
 msgstr "O serviço de otimização de imagem está fora do ar, a otimização de imagem será pausada até termos mais notícias. Verifique o %1$sfórum de suporte Autoptimize%2$s  para mais informações."
 
-#: classes/autoptimizeExtra.php:756
+#: classes/autoptimizeExtra.php:832
 msgid "Most of below Extra optimizations require at least one of HTML, JS or CSS autoptimizations being active."
 msgstr "A maioria das otimizações Extra abaixo requere que ao menos uma das autoptimizações (HTML, JS ou CSS) estejam ativas."
 
 #. translators: "log in to check your account" will appear in a "a href".
-#: classes/autoptimizeExtra.php:701
+#: classes/autoptimizeExtra.php:748
 msgid "Your ShortPixel image optimization and CDN quota are in good shape, %1$slog in to check your account%2$s."
 msgstr "A sua cota de otimização de imagem e CDN da ShortPixel está em boa forma %1$sfaça o login para checar sua conta%2$s."
 
 #. translators: "add more credits" will appear in a "a href".
-#: classes/autoptimizeExtra.php:697
-msgid "Your ShortPixel image optimization and CDN quota was used, %1$sadd more credits%2$s to keep fast serving optimized images on your site."
+#: classes/autoptimizeExtra.php:732
+msgid "Your ShortPixel image optimization and CDN quota was used, %1$sadd more credits%2$s to keep fast serving optimized images on your site"
 msgstr "A sua cota de otimização de imagem e CDN da ShortPixel se esgotou %1$sadicione mais créditos%2$s para continuar servindo imagens otimizadas rapidamente em seu site."
 
 #. translators: "add more credits" will appear in a "a href".
-#: classes/autoptimizeExtra.php:694
+#: classes/autoptimizeExtra.php:729
 msgid "Your ShortPixel image optimization and CDN quota is almost used, make sure you %1$sadd more credits%2$s to avoid slowing down your website."
 msgstr "A sua cota de otimização de imagem e CDN da ShortPixel está quase esgotada, certifique-se de %1$sadicionar mais créditos%2$s para evitar que seu site fique mais lento."
 
@@ -138,84 +153,84 @@ msgid "More info"
 msgstr "Mais informações"
 
 #. translators: %s will be replaced by a link to "wp youtube lyte" plugin.
-#: classes/autoptimizeExtra.php:916
+#: classes/autoptimizeExtra.php:996
 msgid "%s allows you to “lazy load” your videos, by inserting responsive “Lite YouTube Embeds\". "
 msgstr "%s permite que você carregue seu vídeos \"preguiçosamente\", ao inserir \"Embeds Leves do YouTube\" responsivos."
 
-#: classes/autoptimizeExtra.php:913
+#: classes/autoptimizeExtra.php:993
 msgid "Click here to configure it."
 msgstr "Clique aqui para configurar."
 
-#: classes/autoptimizeExtra.php:911
+#: classes/autoptimizeExtra.php:991
 msgid "Great, you have WP YouTube Lyte installed."
 msgstr "Boa, você tem o WP YouTube Lyte instalado."
 
-#: classes/autoptimizeExtra.php:907
+#: classes/autoptimizeExtra.php:987
 msgid "Optimize YouTube videos"
 msgstr "Otimize seus vídeos do YouTube"
 
-#: classes/autoptimizeExtra.php:901 classes/autoptimizeExtra.php:918
+#: classes/autoptimizeExtra.php:981 classes/autoptimizeExtra.php:998
 msgid "Click here to install and activate it."
 msgstr "Clique aqui para instalar e ativar."
 
 #. translators: %s will be replaced by a link to the "async javascript" plugin.
-#: classes/autoptimizeExtra.php:899
+#: classes/autoptimizeExtra.php:979
 msgid "Configuration of async javascript is easier and more flexible using the %s plugin."
 msgstr "Configuração de javascript assíncrono é mais fácil e flexível com o plugin %s."
 
-#: classes/autoptimizeExtra.php:897
+#: classes/autoptimizeExtra.php:977
 msgid "Comma-separated list of local or 3rd party JS-files that should loaded with the <code>async</code> flag. JS-files from your own site will be automatically excluded if added here. "
 msgstr "Lista de arquivos JS locais ou de terceiros, separados por uma lista, que devem ser carregado com o parâmetro <code>async</code>. Arquivos JS de seu próprio site serão excluídos se adicioná-los aqui."
 
-#: classes/autoptimizeExtra.php:886
+#: classes/autoptimizeExtra.php:966
 msgid "Async Javascript-files <em>(advanced users)</em>"
 msgstr "Arquivos JavaScript assíncronos <em>(usuários avançados)</em>"
 
-#: classes/autoptimizeExtra.php:882
+#: classes/autoptimizeExtra.php:962
 msgid "Add 3rd party domains you want the browser to <a href=\"https://www.keycdn.com/support/preconnect/#primary\" target=\"_blank\">preconnect</a> to, separated by comma's. Make sure to include the correct protocol (HTTP or HTTPS)."
 msgstr "Adicione domínios de terceiros que você quer que o navegador use <a href=\"https://www.keycdn.com/support/preconnect/#primary\" target=\"_blank\">preconnect</a>, separado por vírgulas. Certifique-se de incluir o protocolo corretamente (HTTP ou HTTPS)."
 
-#: classes/autoptimizeExtra.php:880
+#: classes/autoptimizeExtra.php:960
 msgid "Preconnect to 3rd party domains <em>(advanced users)</em>"
 msgstr "Usar \"Preconnect\" para domínios de terceiros <em>(usuários avançados)</em>"
 
-#: classes/autoptimizeExtra.php:796
+#: classes/autoptimizeExtra.php:872
 msgid "Combine and load fonts asynchronously with <a href=\"https://github.com/typekit/webfontloader#readme\" target=\"_blank\">webfont.js</a>"
 msgstr "Combina e carrega fontes assincronamente com <a href=\"https://github.com/typekit/webfontloader#readme\" target=\"_blank\">webfont.js</a>"
 
-#: classes/autoptimizeExtra.php:792
+#: classes/autoptimizeExtra.php:868
 msgid "Leave as is"
 msgstr "Deixar como está"
 
-#: classes/autoptimizeExtra.php:790
+#: classes/autoptimizeExtra.php:866
 msgid "Google Fonts"
 msgstr "Fontes Google"
 
-#: classes/autoptimizeExtra.php:876
+#: classes/autoptimizeExtra.php:956
 msgid "Removing query strings (or more specifically the <code>ver</code> parameter) will not improve load time, but might improve performance scores."
 msgstr "Remover variáveis da url (ou mais especificamente parâmetro <code>ver</code> não vai melhorar o tempo de carregamento, mas pode melhorar notas de desempenho."
 
-#: classes/autoptimizeExtra.php:874
+#: classes/autoptimizeExtra.php:954
 msgid "Remove query strings from static resources"
 msgstr "Remover variáveis da url de recursos estáticos"
 
-#: classes/autoptimizeExtra.php:870
+#: classes/autoptimizeExtra.php:950
 msgid "Removes WordPress' core emojis' inline CSS, inline JavaScript, and an otherwise un-autoptimized JavaScript file."
 msgstr "Remove o CSS e JavaScript em linha dos emojis no arquivos básicos do WordPress e um arquivo não-autoptimizado"
 
-#: classes/autoptimizeExtra.php:868
+#: classes/autoptimizeExtra.php:948
 msgid "Remove emojis"
 msgstr "Remove emojis"
 
-#: classes/autoptimizeExtra.php:787
+#: classes/autoptimizeExtra.php:863
 msgid "The following settings can improve your site's performance even more."
 msgstr "As seguintes configurações podem melhorar o desempenho de seu site ainda mais."
 
-#: classes/autoptimizeExtra.php:786
+#: classes/autoptimizeExtra.php:862
 msgid "Extra Auto-Optimizations"
 msgstr "Auto-Optimizações Extras"
 
-#: classes/autoptimizeExtra.php:728
+#: classes/autoptimizeExtra.php:799
 msgid "Extra"
 msgstr "Extra"
 
@@ -227,10 +242,8 @@ msgstr "Cache limpo."
 msgid "Flushing the cache..."
 msgstr "Limpando o cache..."
 
-#. #-#-#-#-#  autoptimize-code.pot (Autoptimize 2.4.1)  #-#-#-#-#
-#. Plugin URI of the plugin/theme
-#. #-#-#-#-#  autoptimize-code.pot (Autoptimize 2.4.1)  #-#-#-#-#
-#. Author URI of the plugin/theme
+#. Plugin URI of the plugin
+#. Author URI of the plugin
 msgid "https://autoptimize.com/"
 msgstr "https://autoptimize.com/"
 
@@ -303,11 +316,11 @@ msgstr "Estes \"poderes extras\" do Autoptimize e serviços relacionados vão au
 msgid "Optimize More!"
 msgstr "Otimize Mais"
 
-#: classes/autoptimizeCacheChecker.php:64
+#: classes/autoptimizeCacheChecker.php:67
 msgid "Autoptimize's cache size is getting big, consider purging the cache. Have a look at https://wordpress.org/plugins/autoptimize/faq/ to see how you can keep the cache size under control."
 msgstr "O cache do Autoptimize está ficando grande, considere limpar o cache. Verifique a https://br.wordpress.org/plugins/autoptimize/faq/ para ver como manter o tamanho de seu cache sob controle."
 
-#: classes/autoptimizeCacheChecker.php:63
+#: classes/autoptimizeCacheChecker.php:66
 msgid "Autoptimize cache size warning"
 msgstr "Aviso do tamanho do cache do Autoptimize"
 
@@ -335,7 +348,7 @@ msgstr "Principal"
 msgid "Enable this if you want HTML comments to remain in the page."
 msgstr "Habilite isto se você deseja que comentários HTML permaneçam na página."
 
-#: classes/autoptimizeCacheChecker.php:90
+#: classes/autoptimizeCacheChecker.php:92
 msgid "<strong>Autoptimize's cache size is getting big</strong>, consider purging the cache. Have a look at <a href=\"https://wordpress.org/plugins/autoptimize/faq/\" target=\"_blank\" rel=\"noopener noreferrer\">the Autoptimize FAQ</a> to see how you can keep the cache size under control."
 msgstr "<strong>O cache do Autoptimize está ficando grande</strong>, considere limpar o cache. Verifique a <a href=\"https://br.wordpress.org/plugins/autoptimize/faq/\" target=\"_blank\">FAQ do Autoptimize</a> para ver como manter o tamanho de seu cache sob controle."
 
@@ -363,7 +376,7 @@ msgstr "Marque esta opção para que o Autoptimize também agregue o CSS no HTML
 msgid "Also aggregate inline CSS?"
 msgstr "Também agregar o CSS em linha?"
 
-#: classes/autoptimizeExtra.php:793
+#: classes/autoptimizeExtra.php:869
 msgid "Remove Google Fonts"
 msgstr "Remover fontes Google"
 
@@ -371,7 +384,7 @@ msgstr "Remover fontes Google"
 msgid "Also aggregate inline JS?"
 msgstr "Também agregar JS em linha?"
 
-#. Author of the plugin/theme
+#. Author of the plugin
 msgid "Frank Goossens (futtta)"
 msgstr "Frank Goossens (futtta)"
 
@@ -395,9 +408,8 @@ msgstr "Tecnologia Web"
 msgid "WordPress"
 msgstr "WordPress"
 
-#. #-#-#-#-#  autoptimize-code.pot (Autoptimize 2.4.1)  #-#-#-#-#
-#. Plugin Name of the plugin/theme
-#: classes/autoptimizeConfig.php:430 classes/autoptimizeToolbar.php:79
+#. Plugin Name of the plugin
+#: classes/autoptimizeToolbar.php:79 classes/autoptimizeConfig.php:430
 msgid "Autoptimize"
 msgstr "Autoptimize"
 
@@ -409,7 +421,7 @@ msgstr "sobre futta"
 msgid "Save Changes and Empty Cache"
 msgstr "Salvar Mudanças e Esvaziar Cache"
 
-#: classes/autoptimizeConfig.php:398 classes/autoptimizeExtra.php:924
+#: classes/autoptimizeExtra.php:1004 classes/autoptimizeConfig.php:398
 msgid "Save Changes"
 msgstr "Salvar Mudanças"
 
@@ -441,7 +453,7 @@ msgstr "Podemos gravar?"
 msgid "Cache folder"
 msgstr "Diretório do cache"
 
-#: classes/autoptimizeConfig.php:340 classes/autoptimizeToolbar.php:87
+#: classes/autoptimizeToolbar.php:87 classes/autoptimizeConfig.php:340
 msgid "Cache Info"
 msgstr "Informação do Cache"
 
@@ -561,7 +573,7 @@ msgstr "Ocultar configurações avançadas"
 msgid "Show advanced settings"
 msgstr "Exibir configurações avançadas"
 
-#: classes/autoptimizeConfig.php:189 classes/autoptimizeExtra.php:749
+#: classes/autoptimizeExtra.php:825 classes/autoptimizeConfig.php:189
 #: classes/autoptimizePartners.php:136
 msgid "Autoptimize Settings"
 msgstr "Configurações do Autoptimize"

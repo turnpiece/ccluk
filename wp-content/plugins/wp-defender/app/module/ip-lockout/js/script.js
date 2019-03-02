@@ -3,7 +3,6 @@ jQuery(function ($) {
     WDIP.formHandler();
     WDIP.listenFilter();
     WDIP.pullSummaryData();
-    WDIP.showHideLog();
 
     $('div.iplockout').on('form-submitted', function (e, data, form) {
         if (form.attr('id') != 'settings-frm') {
@@ -40,6 +39,24 @@ jQuery(function ($) {
             }, 1000);
         }
     });
+    $('body').on('change', '.single-select, #apply-all', function () {
+        var inputs = $('input[name="ids[]"]:checked');
+        var ids = [];
+        inputs.each(function (index, input) {
+            ids.push($(input).val());
+        });
+        $('.ids').val(ids.join(','));
+    })
+    $('.deactivate-login-lockout').click(function () {
+        $('.ip-frm').append('<input type="hidden" name="login_protection" value="0"/>');
+        $(this).attr('disabled', 'disabled');
+        $('.ip-frm').submit();
+    });
+    $('.deactivate-404-lockout').click(function () {
+        $('.ip-frm').append('<input type="hidden" name="detect_404" value="0"/>');
+        $(this).attr('disabled', 'disabled');
+        $('.ip-frm').submit();
+    });
     //media uploader
     var mediaUploader;
     $('.file-picker').click(function () {
@@ -58,12 +75,20 @@ jQuery(function ($) {
         // When a file is selected, grab the URL and set it as the text field's value
         mediaUploader.on('select', function () {
             var attachment = mediaUploader.state().get('selection').first().toJSON();
-            $('#import').val(attachment.url);
             $('#file_import').val(attachment.id);
+            $('.upload-input').addClass('sui-has_file');
+            $('.upload-input .sui-upload-file span').text(attachment.filename);
         });
         // Open the uploader dialog
         mediaUploader.open();
     })
+    $('.file-picker-remove').click(function () {
+        $('.upload-input').removeClass('sui-has_file');
+        $('#file_import').val('');
+    })
+    $('#apply-all').click(function () {
+        $('.single-select').prop('checked', $(this).prop('checked'));
+    });
     $('.btn-import-ip').click(function () {
         var that = $(this);
         $.ajax({
@@ -88,6 +113,28 @@ jQuery(function ($) {
             }
         })
     });
+    $('.download-geo-ip').click(function () {
+        var that = $(this);
+        $.ajax({
+            type: 'POST',
+            url: ajaxurl,
+            data: {
+                action: 'downloadGeoIPDB',
+                _wpnonce: that.data('nonce')
+            }, beforeSend: function () {
+                that.attr('disabled', 'disabled');
+                that.addClass('sui-button-onload');
+            },
+            success: function (data) {
+                if (data.success == 1) {
+                    Defender.showNotification('success', data.data.message);
+                    location.reload();
+                } else {
+                    Defender.showNotification('error', data.data.message);
+                }
+            }
+        })
+    })
     $('select[name="report_frequency"]').change(function () {
         if ($(this).val() == '1') {
             $(this).closest('.schedule-box').find('div.days-container').hide();
@@ -206,7 +253,7 @@ WDIP.formHandler = function () {
             url: ajaxurl,
             data: data,
             beforeSend: function () {
-                that.find('.button').attr('disabled', 'disabled');
+                that.find('.sui-button').attr('disabled', 'disabled');
             },
             success: function (data) {
                 if (data.data != undefined && data.data.reload != undefined) {
@@ -223,7 +270,7 @@ WDIP.formHandler = function () {
                 } else if (data.data != undefined && data.data.url != undefined) {
                     location.href = data.data.url;
                 } else {
-                    var buttons = that.find('.button');
+                    var buttons = that.find('.sui-button');
                     if (buttons.size() > 0) {
                         buttons.removeAttr('disabled');
                     }
@@ -258,8 +305,12 @@ WDIP.ajaxPull = function (query, callback) {
         },
         success: function (data) {
             jq('.lockout-logs-container table').replaceWith(jq(data.data.html).find('table').first());
-            jq('.lockout-logs-container .nav').replaceWith(jq(data.data.html).find('.nav').first());
+            jq('.lockout-logs-container .sui-pagination-wrap').replaceWith(jq(data.data.html).find('.sui-pagination-wrap').first());
             //jq('.lockout-logs-container').replaceWith(jq(data.data.html));
+            //rebind according
+            jq('.sui-accordion').each(function () {
+                SUI.suiAccordion(this);
+            });
             overlay.remove();
             if (isFirst == false) {
                 //window.history.pushState(null, document.title, urlOrigin + '&' + query);
@@ -307,23 +358,4 @@ WDIP.pullSummaryData = function () {
             }
         })
     }
-}
-
-WDIP.showHideLog = function () {
-    var jq = jQuery;
-    jq('body').on('click', '.show-hide-log', function (e) {
-        if (jq(e.target).is('input')) {
-            return;
-        }
-        var target = jq(this).next('tr.table-info');
-        if (target.hasClass('wd-hide')) {
-            target.removeClass('wd-hide');
-            jq(this).addClass('opened');
-            jq(this).find('i').removeClass().addClass('dev-icon dev-icon-caret_up')
-        } else {
-            target.addClass('wd-hide');
-            jq(this).removeClass('opened');
-            jq(this).find('i').removeClass().addClass('dev-icon dev-icon-caret_down')
-        }
-    })
 }

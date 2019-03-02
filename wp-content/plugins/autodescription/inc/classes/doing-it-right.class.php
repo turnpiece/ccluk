@@ -8,7 +8,7 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2015 - 2018 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2015 - 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -1779,7 +1779,7 @@ class Doing_It_Right extends Generate_Ldjson {
 			return $i18n;
 
 		$guideline_i18n = $this->get_input_guidelines_i18n()['long'];
-
+		// phpcs:disable WordPress.Arrays.MultipleStatementAlignment.DoubleArrowNotAligned -- precision alignment OK.
 		return $i18n = [
 			'title'       => \esc_attr__( 'Title:', 'autodescription' ),
 			'description' => \esc_attr__( 'Description:', 'autodescription' ),
@@ -1808,5 +1808,6 @@ class Doing_It_Right extends Generate_Ldjson {
 			'length_far_too_long'  => $guideline_i18n['farTooLong'],
 			'length_good'          => $guideline_i18n['good'],
 		];
+		// phpcs:enable WordPress.Arrays.MultipleStatementAlignment.DoubleArrowNotAligned
 	}
 }

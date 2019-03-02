@@ -43,11 +43,80 @@ class Content_Result extends \Hammer\Base\Behavior {
 	 * @return string|void
 	 */
 	public function getIssueDetail() {
+		return $this->getIssueSummary();
+	}
+
+	/**
+	 * @return string|void
+	 */
+	public function getIssueSummary() {
 		return __( "Suspicious function found", wp_defender()->domain );
+	}
+
+	public function renderIssueContent() {
+		$raw = $this->getRaw();
+		ob_start();
+		?>
+        <div class="sui-box issue-content">
+            <div class="sui-box-body">
+                <p>
+	                <?php printf( __( " There’s some suspicious looking code in the file %s. If you know the code is harmless you can ignore this warning. Otherwise, you can choose to delete this file. Before deleting any files from your site directory, we recommend backing up your website.", wp_defender()->domain ), $this->getSubtitle() ) ?>
+                </p>
+                <div>
+                    <strong><?php printf( __( "Found %s issues.", wp_defender()->domain ), count( $raw['meta'] ) ) ?></strong>
+                    <button class="sui-button" id="next_issue"><?php _e( "Show", wp_defender()->domain ) ?></button>
+                </div>
+                <div class="source-code">
+                    <i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
+		            <?php _e( "Pulling source file...", wp_defender()->domain ) ?>
+                    <form method="post" class="float-l pull-src scan-frm">
+                        <input type="hidden" name="action" value="pullSrcFile">
+			            <?php wp_nonce_field( 'pullSrcFile' ) ?>
+                        <input type="hidden" name="id" value="<?php echo $this->getOwner()->id ?>"/>
+                    </form>
+                </div>
+            </div>
+            <div class="sui-box-footer">
+                <div class="sui-actions-left">
+                    <form method="post" class="float-l ignore-item scan-frm">
+                        <input type="hidden" name="action" value="ignoreItem">
+				        <?php wp_nonce_field( 'ignoreItem' ) ?>
+                        <input type="hidden" name="id" value="<?php echo $this->getOwner()->id ?>"/>
+                        <button type="submit" class="sui-button sui-button-ghost">
+                            <i class="sui-icon-eye-hide" aria-hidden="true"></i>
+					        <?php _e( "Ignore", wp_defender()->domain ) ?></button>
+                    </form>
+                </div>
+                <div class="sui-actions-right">
+                    <form method="post" class="scan-frm delete-item float-r">
+                        <input type="hidden" name="action" value="deleteItem"/>
+                        <input type="hidden" name="id" value="<?php echo $this->getOwner()->id ?>"/>
+		                <?php wp_nonce_field( 'deleteItem' ) ?>
+                        <button type="button" class="sui-button sui-button-red delete-mitem">
+                            <i class="sui-icon-trash" aria-hidden="true"></i>
+			                <?php _e( "Delete", wp_defender()->domain ) ?></button>
+                        <div class="confirm-box wd-hide">
+                            <span><?php _e( "This will permanently remove the selected file/folder. Are you sure you want to continue?", wp_defender()->domain ) ?></span>
+                            <div>
+                                <button type="submit" class="sui-button sui-button-red">
+					                <?php _e( "Yes", wp_defender()->domain ) ?>
+                                </button>
+                                <button type="button" class="sui-button sui-button-ghost">
+					                <?php _e( "No", wp_defender()->domain ) ?>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+		<?php
+		return ob_get_clean();
 	}
 
 	/**
 	 * @return string
+	 * @deprecated 2.1
 	 */
 	public function renderDialog() {
 		$raw = $this->getRaw();
@@ -85,7 +154,8 @@ class Content_Result extends \Hammer\Base\Behavior {
                                 </li>
                             </ul>
                         </div>
-                        <div class="mline"><?php printf( __( " There’s some suspicious looking code in the file %s. If you know the code is harmless you can ignore this warning. Otherwise, you can choose to delete this file. Before deleting any files from your site directory, we recommend backing up your website.", wp_defender()->domain ), $this->getSubtitle() ) ?>
+                        <div class="mline">
+                            <?php printf( __( " There’s some suspicious looking code in the file %s. If you know the code is harmless you can ignore this warning. Otherwise, you can choose to delete this file. Before deleting any files from your site directory, we recommend backing up your website.", wp_defender()->domain ), $this->getSubtitle() ) ?>
                         </div>
                         <div>
                             <strong><?php printf( __( "Found %s issues.", wp_defender()->domain ), count( $raw['meta'] ) ) ?></strong>
@@ -172,7 +242,7 @@ class Content_Result extends \Hammer\Base\Behavior {
 			//cause this will changing after we inject new dell so just find it by the content
 			$c       = substr( $originalContent, $meta['offset'] - 1, $meta['length'] );
 			$start   = strpos( $content, $c );
-			$openTag = '[[del tooltip="' . esc_attr( $meta['text'] ) . '"]]';
+			$openTag = '[[del data-tooltip="' . esc_attr( $meta['text'] ) . '"]]';
 			$end     = $start + strlen( $c ) + strlen( $openTag );
 			$content = substr_replace( $content, $openTag, $start, 0 );
 			$content = substr_replace( $content, '[[/del]]', $end, 0 );
@@ -182,7 +252,7 @@ class Content_Result extends \Hammer\Base\Behavior {
 			$content = mb_convert_encoding( $content, 'UTF-8', 'ASCII' );
 		}
 		$entities = htmlentities( $content, null, 'UTF-8', false );
-		$entities = preg_replace( '/\[\[del\s*(tooltip=".*\n?"|)\]\]/', '<del $1>', $entities );
+		$entities = preg_replace( '/\[\[del\s*(data-tooltip=".*\n?"|)\]\]/', '<del $1>', $entities );
 		$entities = str_replace( '[[/del]]', '</del>', $entities );
 
 		return '<pre class="inner-sourcecode"><code class="html">' . $entities . '</code></pre>';

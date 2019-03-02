@@ -8,7 +8,7 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2015 - 2018 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2015 - 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -50,6 +50,7 @@ class Query extends Compat {
 	 * @since 3.1.0 1. Is now protected.
 	 *              2. Now asks for and passes $method.
 	 *              3. Now returns false on WP CLI.
+	 * @since 3.2.2 No longer spits out errors on production websites.
 	 * @staticvar bool $cache : Always true if set.
 	 * @global \WP_Query $wp_query
 	 * @global \WP_Screen|null $current_screen
@@ -70,7 +71,8 @@ class Query extends Compat {
 		if ( isset( $GLOBALS['wp_query']->query ) || isset( $GLOBALS['current_screen'] ) )
 			return $cache = true;
 
-		$this->do_query_error_notice( $method );
+		$this->the_seo_framework_debug
+			and $this->do_query_error_notice( $method );
 
 		return false;
 	}
@@ -82,6 +84,7 @@ class Query extends Compat {
 	 *
 	 * @param string $method The original caller method.
 	 */
+	// phpcs:disable -- Method unused in production.
 	protected function do_query_error_notice( $method ) {
 
 		$message = "You've initiated a method that uses queries too early.";
@@ -95,16 +98,12 @@ class Query extends Compat {
 		$this->_doing_it_wrong( \esc_html( $method ), \esc_html( $message ), '2.9.0' );
 
 		//* Backtrace debugging.
-		if ( $this->the_seo_framework_debug ) {
-			static $_more = true;
-			$catch_all = false;
-			$depth = 10;
-			if ( $catch_all || $_more ) {
-				error_log( var_export( debug_backtrace( DEBUG_BACKTRACE_PROVIDE_OBJECT, $depth ), true ) );
-				$_more = false;
-			}
-		}
-	}
+		// $depth = 10;
+		// if ( $_more ) {
+		// 	error_log( var_export( debug_backtrace( DEBUG_BACKTRACE_PROVIDE_OBJECT, $depth ), true ) );
+		// 	$_more = false;
+		// }
+	} // phpcs:enable
 
 	/**
 	 * Returns the post type name from current screen.
@@ -220,9 +219,7 @@ class Query extends Compat {
 	 * @return int the ID.
 	 */
 	public function get_the_front_page_ID() { // phpcs:ignore -- ID is capitalized because WordPress does that too: get_the_ID().
-
 		static $front_id;
-
 		return isset( $front_id )
 			? $front_id
 			: $front_id = ( $this->has_page_on_front() ? (int) \get_option( 'page_on_front' ) : 0 );
@@ -268,13 +265,9 @@ class Query extends Compat {
 
 		if ( isset( $cache ) ) return $cache;
 
-		if ( $this->is_admin() ) {
-			global $current_screen;
-			return $cache = ! empty( $current_screen->taxonomy ) ? $current_screen->taxonomy : '';
-		} else {
-			$_object = \get_queried_object();
-			return $cache = ! empty( $_object->taxonomy ) ? $_object->taxonomy : '';
-		}
+		$_object = $this->is_admin() ? $GLOBALS['current_screen'] : \get_queried_object();
+
+		return $cache = ! empty( $_object->taxonomy ) ? $_object->taxonomy : '';
 	}
 
 	/**
@@ -372,11 +365,7 @@ class Query extends Compat {
 	 */
 	public function is_archive_admin() {
 		global $current_screen;
-
-		if ( isset( $current_screen->base ) && ( 'edit-tags' === $current_screen->base || 'term' === $current_screen->base ) )
-			return true;
-
-		return false;
+		return isset( $current_screen->base ) && in_array( $current_screen->base, [ 'edit-tags', 'term' ], true );
 	}
 
 	/**
@@ -394,13 +383,9 @@ class Query extends Compat {
 
 		global $current_screen;
 
-		$is_term_edit = false;
-		if ( isset( $current_screen->base ) && ( 'term' === $current_screen->base ) )
-			$is_term_edit = true;
-
 		$this->set_query_cache(
 			__METHOD__,
-			$is_term_edit
+			$is_term_edit = isset( $current_screen->base ) && ( 'term' === $current_screen->base )
 		);
 
 		return $is_term_edit;
@@ -416,11 +401,7 @@ class Query extends Compat {
 	 */
 	public function is_post_edit() {
 		global $current_screen;
-
-		if ( isset( $current_screen->base ) && 'post' === $current_screen->base )
-			return true;
-
-		return false;
+		return isset( $current_screen->base ) && 'post' === $current_screen->base;
 	}
 
 	/**
@@ -433,11 +414,7 @@ class Query extends Compat {
 	 */
 	public function is_wp_lists_edit() {
 		global $current_screen;
-
-		if ( isset( $current_screen->base ) && in_array( $current_screen->base, [ 'edit-tags', 'edit' ], true ) )
-			return true;
-
-		return false;
+		return isset( $current_screen->base ) && in_array( $current_screen->base, [ 'edit-tags', 'edit' ], true );
 	}
 
 	/**
@@ -476,6 +453,9 @@ class Query extends Compat {
 	 */
 	public function is_blog_page( $id = 0 ) {
 
+		if ( ! $this->has_page_on_front() )
+			return false;
+
 		$id = $id ?: $this->get_the_real_ID();
 
 		if ( null !== $cache = $this->get_query_cache( __METHOD__, null, $id ) )
@@ -484,15 +464,14 @@ class Query extends Compat {
 		$is_blog_page = false;
 
 		static $pfp = null;
+
 		if ( is_null( $pfp ) )
 			$pfp = (int) \get_option( 'page_for_posts' );
 
-		if ( $this->has_page_on_front() ) {
-			if ( $id && $id === $pfp && false === \is_archive() ) {
-				$is_blog_page = true;
-			} elseif ( \is_home() ) {
-				$is_blog_page = true;
-			}
+		if ( $id && $id === $pfp && false === \is_archive() ) {
+			$is_blog_page = true;
+		} elseif ( \is_home() ) {
+			$is_blog_page = true;
 		}
 
 		$this->set_query_cache(
@@ -629,12 +608,34 @@ class Query extends Compat {
 	}
 
 	/**
+	 * Checks for front page by input ID without engaging into the query.
+	 *
+	 * @NOTE This doesn't check for anomalies in the query.
+	 * So, don't use this to test user-engaged WordPress queries, ever.
+	 * WARNING: This will lead to **FALSE POSITIVES** for Date, PTA, Search, and other archives.
+	 *
+	 * @see $this->is_front_page_by_id(), which supports query checking.
+	 * @see $this->is_real_front_page(), which solely uses query checking.
+	 *
+	 * @since 3.2.2
+	 *
+	 * @param int $id The tested ID.
+	 * @return bool
+	 */
+	public function is_real_front_page_by_id( $id ) {
+		return $id === $this->get_the_front_page_ID();
+	}
+
+	/**
 	 * Checks for front page by input ID.
 	 *
-	 * Returns true if on SEO settings page and when ID is 0.
+	 * Doesn't always return true when the ID is 0, although the home page might be.
+	 * This is because it checks for the query, to prevent conflicts.
+	 * @see $this->is_real_front_page_by_id().
 	 *
 	 * @since 2.9.0
 	 * @since 2.9.3 Now tests for archive and 404 before testing home page as blog.
+	 * @since 3.2.2: Removed SEO settings page check. This now returns false on that page.
 	 *
 	 * @param int The page ID, required. Can be 0.
 	 * @return bool True if ID if for the home page.
@@ -649,32 +650,26 @@ class Query extends Compat {
 		$is_front_page = false;
 		$sof = \get_option( 'show_on_front' );
 
-		//* Elegant Themes Support. Yay.
-		if ( 0 === $id && $this->is_home() ) {
-			if ( 'page' !== $sof && 'posts' !== $sof )
-				$is_front_page = true;
-		}
-
 		//* Compare against $id
-		if ( false === $is_front_page ) {
-			if ( 'page' === $sof ) {
-				if ( (int) \get_option( 'page_on_front' ) === $id ) {
+		if ( 'page' === $sof ) {
+			if ( (int) \get_option( 'page_on_front' ) === $id ) {
+				$is_front_page = true;
+			}
+		} elseif ( 'posts' === $sof ) {
+			if ( 0 === $id ) {
+				//* 0 as ID causes many issues. Just test for is_home().
+				if ( $this->is_home() ) {
 					$is_front_page = true;
 				}
-			} elseif ( 'posts' === $sof ) {
-				if ( 0 === $id ) {
-					//* 0 as ID causes many issues. Just test for is_home().
-					if ( $this->is_home() ) {
-						$is_front_page = true;
-					}
-				} elseif ( (int) \get_option( 'page_for_posts' ) === $id ) {
-					$is_front_page = true;
-				}
+			} elseif ( (int) \get_option( 'page_for_posts' ) === $id ) {
+				$is_front_page = true;
+			}
+		} else {
+			// Elegant Themes' Extra support
+			if ( 0 === $id && $this->is_home() ) {
+				$is_front_page = true;
 			}
 		}
-
-		if ( false === $is_front_page && 0 === $id && $this->is_seo_settings_page() )
-			$is_front_page = true;
 
 		$this->set_query_cache(
 			__METHOD__,
@@ -823,11 +818,7 @@ class Query extends Compat {
 	 */
 	public function is_single_admin() {
 		global $current_screen;
-
-		if ( isset( $current_screen->post_type ) && 'post' === $current_screen->post_type )
-			return true;
-
-		return false;
+		return isset( $current_screen->post_type ) && 'post' === $current_screen->post_type;
 	}
 
 	/**
@@ -849,7 +840,7 @@ class Query extends Compat {
 
 		if ( is_int( $post_types ) ) {
 			//* Cache ID. Core is_singular() doesn't accept integers.
-			$id = $post_types;
+			$id         = $post_types;
 			$post_types = '';
 		}
 
@@ -888,15 +879,13 @@ class Query extends Compat {
 	 * @return bool Post Type is singular
 	 */
 	public function is_singular_admin( $post_id = null ) {
-		global $current_screen;
 
 		if ( isset( $post_id ) ) {
 			$post = \get_post( $post_id );
-			if ( $post && $post instanceof \WP_Post )
-				return true;
+			return $post && $post instanceof \WP_Post;
 		} else {
-			if ( isset( $current_screen->base ) && ( 'edit' === $current_screen->base || 'post' === $current_screen->base ) )
-				return true;
+			global $current_screen;
+			return isset( $current_screen->base ) && in_array( $current_screen->base, [ 'edit', 'post' ], true );
 		}
 
 		return false;
@@ -1060,9 +1049,7 @@ class Query extends Compat {
 	 * @return bool True if SSL, false otherwise.
 	 */
 	public function is_ssl() {
-
 		static $cache = null;
-
 		return isset( $cache ) ? $cache : $cache = \is_ssl();
 	}
 
@@ -1089,11 +1076,9 @@ class Query extends Compat {
 		if ( null !== $cache = $this->get_query_cache( __METHOD__ ) )
 			return $cache;
 
-		$page = $this->is_menu_page( $this->seo_settings_page_hook );
-
 		$this->set_query_cache(
 			__METHOD__,
-			$page
+			$page = $this->is_menu_page( $this->seo_settings_page_hook )
 		);
 
 		return $page;
@@ -1125,11 +1110,9 @@ class Query extends Compat {
 		global $page_hook;
 
 		if ( isset( $page_hook ) ) {
-			if ( $page_hook === $pagehook )
-				return true;
+			return $page_hook === $pagehook;
 		} elseif ( $this->is_admin() && $pageslug ) {
-			if ( ! empty( $_GET['page'] ) && $pageslug === $_GET['page'] )
-				return true;
+			return ! empty( $_GET['page'] ) && $pageslug === $_GET['page']; // CSRF, input var OK.
 		}
 
 		return false;
@@ -1280,8 +1263,8 @@ class Query extends Compat {
 	 * Handles object cache for the query class.
 	 *
 	 * @since 2.7.0
-	 * @staticvar bool $can_cache_query : True when this function can run.
-	 * @staticvar mixed $cache : The cached query.
+	 * @staticvar null|bool $can_cache_query : True when this function can run.
+	 * @staticvar mixed     $cache           : The cached query values.
 	 * @see $this->set_query_cache(); to set query cache.
 	 *
 	 * @param string $method       The method that wants to cache, used as the key to set or get.
@@ -1302,7 +1285,7 @@ class Query extends Compat {
 
 		static $can_cache_query = null;
 
-		if ( is_null( $can_cache_query ) ) {
+		if ( null === $can_cache_query ) {
 			if ( $this->can_cache_query( $method ) ) {
 				$can_cache_query = true;
 			} else {
@@ -1313,6 +1296,7 @@ class Query extends Compat {
 		static $cache = [];
 
 		if ( func_num_args() > 2 ) {
+			// phpcs:ignore -- No objects are inserted, nor is this ever unserialized.
 			$hash = isset( $value_to_set ) ? serialize( (array) func_get_arg( 2 ) ) : serialize( array_slice( func_get_args(), 2 ) );
 		} else {
 			$hash = false;

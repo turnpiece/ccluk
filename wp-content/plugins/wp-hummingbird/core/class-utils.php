@@ -104,7 +104,7 @@ class WP_Hummingbird_Utils {
 	 * @param int $ver Current version number of scripts.
 	 */
 	public static function enqueue_admin_scripts( $ver ) {
-		wp_enqueue_script( 'wphb-admin', WPHB_DIR_URL . 'admin/assets/js/app.min.js', array( 'jquery', 'underscore' ), $ver );
+		wp_enqueue_script( 'wphb-admin', WPHB_DIR_URL . 'admin/assets/js/app.min.js', array( 'jquery', 'underscore', 'wphb-wpmudev-sui' ), $ver, true );
 
 		$i10n = array(
 			'errorCachePurge'        => __( 'There was an error during the cache purge. Check folder permissions are 755
@@ -129,23 +129,10 @@ class WP_Hummingbird_Utils {
 		);
 		wp_localize_script( 'wphb-admin', 'wphbDashboardStrings', $i10n );
 
-		$toggle_uptime_nonce = wp_create_nonce( 'wphb-toggle-uptime' );
+		$url  = add_query_arg( '_wpnonce', wp_create_nonce( 'wphb-toggle-uptime' ), self::get_admin_menu_url( 'uptime' ) );
 		$i10n = array(
-			'enableUptimeURL' => add_query_arg(
-				array(
-					'_wpnonce' => $toggle_uptime_nonce,
-					'action'   => 'enable',
-				),
-				self::get_admin_menu_url( 'uptime' )
-			),
-			'disableUptimeURL' => add_query_arg(
-				array(
-					'_wpnonce' => $toggle_uptime_nonce,
-					'action'   => 'disable',
-				),
-				self::get_admin_menu_url( 'uptime' )
-			),
-
+			'enableUptimeURL'  => add_query_arg( 'action', 'enable', $url ),
+			'disableUptimeURL' => add_query_arg( 'action', 'disable', $url ),
 		);
 		wp_localize_script( 'wphb-admin', 'wphbUptimeStrings', $i10n );
 
@@ -172,6 +159,7 @@ class WP_Hummingbird_Utils {
 				'db_delete'             => __( 'Are you sure you wish to delete', 'wphb' ),
 				'db_entries'            => __( 'database entries', 'wphb' ),
 				'db_backup'             => __( 'Make sure you have a current backup just in case.', 'wphb' ),
+				'successRecipientAdded' => __( ' has been added as a recipient but you still need to save your changes below to set this live.', 'wphb' ),
 			),
 		);
 
@@ -654,6 +642,7 @@ class WP_Hummingbird_Utils {
 	 * human_read_time_diff()
 	 * get_days_of_week()
 	 * get_times()
+	 * get_days_of_month()
 	 *
 	 ***************************/
 
@@ -676,10 +665,10 @@ class WP_Hummingbird_Utils {
 		$minute_in_seconds = 60;
 
 		$minutes = 0;
-		$hours = 0;
-		$days = 0;
-		$months = 0;
-		$years = 0;
+		$hours   = 0;
+		$days    = 0;
+		$months  = 0;
+		$years   = 0;
 
 		while ( $seconds >= $year_in_seconds ) {
 			$years ++;
@@ -707,6 +696,7 @@ class WP_Hummingbird_Utils {
 		}
 
 		$diff = new stdClass();
+
 		$diff->y = $years;
 		$diff->m = $months;
 		$diff->d = $days;
@@ -753,7 +743,7 @@ class WP_Hummingbird_Utils {
 		if ( 7 === get_option( 'start_of_week' ) ) {
 			$timestamp = strtotime( 'next Sunday' );
 		}
-		$days      = array();
+		$days = array();
 		for ( $i = 0; $i < 7; $i ++ ) {
 			$days[]    = strftime( '%A', $timestamp );
 			$timestamp = strtotime( '+1 day', $timestamp );
@@ -763,7 +753,7 @@ class WP_Hummingbird_Utils {
 	}
 
 	/**
-	 * Return times frame for selectbox
+	 * Return times frame for select box
 	 *
 	 * @since 1.4.5
 	 *
@@ -779,6 +769,22 @@ class WP_Hummingbird_Utils {
 		}
 
 		return apply_filters( 'wphb_scan_get_times', $data );
+	}
+
+	/**
+	 * Return days of the month.
+	 *
+	 * @since 1.9.3
+	 *
+	 * @return array
+	 */
+	public static function get_days_of_month() {
+		$days = array();
+		for ( $i = 1; $i <= 28; $i++ ) {
+			$days[] = $i;
+		}
+
+		return apply_filters( 'wphb_scan_get_days_of_week', $days );
 	}
 
 	/***************************
@@ -974,11 +980,26 @@ class WP_Hummingbird_Utils {
 	 *
 	 * @param string $module Module slug.
 	 *
-	 * @return bool|WP_Hummingbird_Module|WP_Hummingbird_Module_Page_Cache|WP_Hummingbird_Module_GZip|WP_Hummingbird_Module_Minify
+	 * @return bool|WP_Hummingbird_Module|WP_Hummingbird_Module_Page_Cache|WP_Hummingbird_Module_GZip|WP_Hummingbird_Module_Minify|WP_Hummingbird_Module_Cloudflare
 	 */
 	public static function get_module( $module ) {
 		$modules = self::get_modules();
 		return isset( $modules[ $module ] ) ? $modules[ $module ] : false;
+	}
+
+	/**
+	 * Get a module instance
+	 *
+	 * @since 1.9.3
+	 *
+	 * @param string $module Module slug.
+	 *
+	 * @return bool|WP_Hummingbird_Module
+	 */
+	public static function get_pro_module( $module ) {
+		/* @var WP_Hummingbird $hummingbird */
+		$hummingbird = WP_Hummingbird::get_instance();
+		return isset( $hummingbird->pro->modules[ $module ] ) ? $hummingbird->pro->modules[ $module ] : false;
 	}
 
 	/**
@@ -1138,6 +1159,38 @@ class WP_Hummingbird_Utils {
 		wp_send_json_success( array(
 			'finished' => false,
 		));
+	}
+
+	/**
+	 * Flag to hide wpmudev branding image.
+	 *
+	 * @since 1.9.3
+	 *
+	 * @return bool
+	 */
+	public static function hide_wpmudev_branding() {
+		if ( self::is_member() ) {
+			return apply_filters( 'wpmudev_branding_hide_branding', false );
+		}
+
+		return false;
+
+	}
+
+	/**
+	 * Flag to hide wpmudev doc link.
+	 *
+	 * @since 1.9.3
+	 *
+	 * @return bool
+	 */
+	public static function hide_wpmudev_doc_link() {
+		if ( self::is_member() ) {
+			return apply_filters( 'wpmudev_branding_hide_doc_link', false );
+		}
+
+		return false;
+
 	}
 
 }

@@ -365,30 +365,6 @@ function Fetcher() {
             },
 
             /**
-             * Add a single email/name recipient to the reports list.
-             *
-             * @param email
-             * @param name
-             */
-            addRecipient: ( email, name ) => {
-                const action = actionPrefixPro + 'performance_add_recipient';
-                return request( action, { email, name }, 'POST' )
-                    .then( ( response ) => {
-                        return response;
-                    });
-            },
-
-            /**
-             * Save reporting settings on performance page.
-             *
-             * @param data From data.
-             */
-            saveReportsSettings: ( data ) => {
-                const action = actionPrefixPro + 'performance_save_reports_settings';
-                return request( action, { data }, 'POST' );
-            },
-
-            /**
              * Save performance test settings.
              *
              * @param data From data.
@@ -457,6 +433,60 @@ function Fetcher() {
 						return response;
 					});
 			}
+		},
+
+		/**
+		 * Settings actions.
+		 */
+		settings: {
+			/**
+			 * Save settings from HB admin settings.
+			 *
+			 * @param form_data
+			 */
+			saveSettings: ( form_data ) => {
+				const action = actionPrefix + 'admin_settings_save_settings';
+				return request( action, { form_data }, 'POST' )
+					.then( ( response ) => {
+						return response;
+					});
+			},
+		},
+
+		/**
+		 * Common actions that are used by several modules.
+		 *
+		 * @since 1.9.3
+		 */
+		common: {
+			/**
+			 * Add recipient for Performance and Uptime reports.
+			 *
+			 * @param {string} module  Module name.
+			 * @param {string} email   Email.
+			 * @param {string} name    User.
+			 */
+			addRecipient: ( module, email, name ) => {
+				const action = actionPrefixPro + 'add_recipient';
+				return request( action, { module, email, name }, 'POST' )
+					.then( ( response ) => {
+					return response;
+				});
+			},
+
+			/**
+			 * Save report settings for Performance and Uptime modules.
+			 *
+			 * @param {string} module  Module name.
+			 * @param {array}  data    From data.
+			 */
+			saveReportsSettings: ( module, data ) => {
+				const action = actionPrefixPro + 'save_report_settings';
+				return request( action, { module, data }, 'POST' )
+					.then( ( response ) => {
+						return response;
+					});
+			},
 		}
     };
 

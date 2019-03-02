@@ -10,6 +10,12 @@ $data = array(
 	'count_all_snapshots' => $count_all_snapshots,
 );
 
+if ( version_compare(PHP_VERSION, '5.5.0', '<') ) {
+	$aws_sdk_compatible = false;
+} else {
+	$aws_sdk_compatible = true;
+}
+
 ?>
 
 <section id="header">
@@ -63,6 +69,20 @@ $data = array(
 			</div>
 
 			<div class="wpmud-box-content">
+
+				<div class="row">
+
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+						<div class="snapshots-import-msg">
+							<p>
+								<?php echo wp_kses_post( sprintf( __( 'The following list includes the snapshots for which a local copy is available. If you want to restore from an older archive present at a remote destination only, you\'ll first need to <strong><a href="%s">Import</a></strong> that Snapshot.', SNAPSHOT_I18N_DOMAIN ), esc_url( WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url( 'snapshots-newui-import' ) ) ) ); ?>
+							</p>
+						</div>
+
+					</div>
+
+				</div>
 
 				<div class="row">
 
@@ -294,7 +314,7 @@ $data = array(
 																		<a href="<?php echo esc_url( WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url( 'snapshots-newui-snapshots' ) ); ?>&amp;snapshot-action=edit&amp;item=<?php echo esc_attr( $snapshot['timestamp'] ) . '&snapshot-noonce-field=' . esc_attr( wp_create_nonce  ( 'snapshot-nonce' ) ); ?>"><?php esc_html_e( 'Edit', SNAPSHOT_I18N_DOMAIN ); ?></a>
 																	</li>
 																	<li>
-																		<a href="<?php echo esc_url( WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url( 'snapshots-newui-snapshots' ) ); ?>&amp;snapshot-action=backup&amp;item=<?php echo esc_attr( $snapshot['timestamp'] ) . '&snapshot-noonce-field=' . esc_attr( wp_create_nonce  ( 'snapshot-nonce' ) ); ?>"><?php esc_html_e( 'Regenerate', SNAPSHOT_I18N_DOMAIN ); ?></a>
+																		<a href="<?php echo esc_url( WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url( 'snapshots-newui-snapshots' ) ); ?>&amp;snapshot-action=backup&amp;item=<?php echo esc_attr( $snapshot['timestamp'] ) . '&snapshot-noonce-field=' . esc_attr( wp_create_nonce  ( 'snapshot-nonce' ) ); ?>" <?php echo ( ( ! $aws_sdk_compatible ) && ( 'aws' === $destination_type ) ) ? 'class="disabled"': ''; ?> ><?php esc_html_e( 'Regenerate', SNAPSHOT_I18N_DOMAIN ); ?></a>
 																	</li>
 																	<?php if ( isset( $data_item['timestamp'] ) && ! empty( $data_item['timestamp'] ) ): ?>
 																		<li>

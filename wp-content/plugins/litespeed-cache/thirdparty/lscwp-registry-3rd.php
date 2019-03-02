@@ -30,6 +30,8 @@ $thirdparty_list = array(
 	'yith-wishlist',
 	'avada',
 	'wp-postratings',
+	'divi-theme-builder',
+	'wpml',
 ) ;
 
 foreach ($thirdparty_list as $val) {

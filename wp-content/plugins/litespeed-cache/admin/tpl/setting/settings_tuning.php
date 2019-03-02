@@ -5,7 +5,7 @@ if ( ! defined( 'WPINC' ) ) die ;
 
 <h3 class="litespeed-title-short">
 	<?php echo __('Tuning Settings', 'litespeed-cache'); ?>
-	<a href="https://www.litespeedtech.com/support/wiki/doku.php/litespeed_wiki:cache:lscwp:configuration:tuning" target="_blank" class="litespeed-learn-more"><?php echo __('Learn More', 'litespeed-cache') ; ?></a>
+	<?php $this->learn_more( 'https://www.litespeedtech.com/support/wiki/doku.php/litespeed_wiki:cache:lscwp:configuration:tuning', false, 'litespeed-learn-more' ) ; ?>
 </h3>
 <table><tbody>
 
@@ -17,7 +17,7 @@ if ( ! defined( 'WPINC' ) ) die ;
 				<?php echo __( 'Load combined CSS files before other CSS files.', 'litespeed-cache' ) ; ?>
 				<?php echo sprintf( __( 'Set to %s by default.', 'litespeed-cache' ), __( 'OFF', 'litespeed-cache' ) ) ; ?>
 				<br /><font class="litespeed-warning">
-					<?php echo __('NOTE', 'litespeed-cache'); ?>:
+					⚠️
 					<?php echo sprintf( __( 'Only set to %s when changing the order of combined and uncombined CSS is needed.', 'litespeed-cache'), __( 'ON', 'litespeed-cache' ) ) ; ?>
 				</font>
 				<br /><font class="litespeed-success">
@@ -53,7 +53,7 @@ if ( ! defined( 'WPINC' ) ) die ;
 				<?php echo __( 'Load combined JS files before other JS files.', 'litespeed-cache' ) ; ?>
 				<?php echo sprintf( __( 'Set to %s by default.', 'litespeed-cache' ), __( 'OFF', 'litespeed-cache' ) ) ; ?>
 				<br /><font class="litespeed-warning">
-					<?php echo __('NOTE', 'litespeed-cache'); ?>:
+					⚠️
 					<?php echo sprintf( __( 'Only set to %s when changing the order of combined and uncombined JS is needed.', 'litespeed-cache'), __( 'ON', 'litespeed-cache' ) ) ; ?>
 				</font>
 				<br /><font class="litespeed-success">
@@ -101,6 +101,14 @@ if ( ! defined( 'WPINC' ) ) die ;
 			<div class="litespeed-desc">
 				<?php echo __( 'Remove query strings from static resources.', 'litespeed-cache' ) ; ?>
 				<?php echo __( 'This can improve your speed score in services like Pingdom, GTmetrix and PageSpeed.', 'litespeed-cache' ) ; ?>
+				<br /><font class="litespeed-warning">
+					⚠️
+					<?php echo __( 'Google reCAPTCHA will be bypassed automatically.', 'litespeed-cache' ) ; ?>
+				</font>
+				<br /><font class="litespeed-success">
+					<?php echo __('API', 'litespeed-cache'); ?>:
+					<?php echo sprintf( __( 'Append query string %s to the resources to bypass this action.', 'litespeed-cache' ), '<code>&_litespeed_rm_qs=0</code>' ) ; ?>
+				</font>
 			</div>
 		</td>
 	</tr>

@@ -143,16 +143,19 @@ class Main extends \WP_Defender\Controller {
 
 		$lastEventDate   = __( "Never", wp_defender()->domain );
 		$dailyEventCount = 0;
-
+		$weekCount       = 0;
 		if ( $eventsInMonth['total_items'] > 0 ) {
-			$request = Audit_API::pullLogsSummary();
+			$request = Audit_API::pullLogs( array(
+				'date_from' => date( 'Y-m-d', strtotime( '-7 days' ) ) . ' 00:00:00',
+				'date_to'   => date( 'Y-m-d' ) . ' 23:59:59'
+			) );
 			if ( is_wp_error( $request ) ) {
 				wp_send_json_error( array(
 					'message' => $request->get_error_message()
 				) );
 			}
-			$dailyEventCount = $request['count'];
-			$lastEventDate   = $eventsInMonth['data'][0]['timestamp'];
+			$weekCount     = $request['total_items'];
+			$lastEventDate = $eventsInMonth['data'][0]['timestamp'];
 			if ( is_array( $lastEventDate ) ) {
 				$lastEventDate = $lastEventDate[0];
 			}
@@ -161,7 +164,8 @@ class Main extends \WP_Defender\Controller {
 		$content = $this->renderPartial( 'widget', array(
 			'eventMonth' => $eventsInMonth['total_items'],
 			'eventDay'   => $dailyEventCount,
-			'lastEvent'  => $lastEventDate
+			'lastEvent'  => $lastEventDate,
+			'weekCount'  => $weekCount
 		), false );
 
 		wp_send_json_success( array(
@@ -233,13 +237,15 @@ class Main extends \WP_Defender\Controller {
 			$table  = $this->_renderTable( $data );
 			if ( ! is_wp_error( $data ) ) {
 				wp_send_json_success( array(
-					'html'  => $table,
-					'count' => is_array( $data ) ? $data['total_items'] : 0
+					'html'       => $table,
+					'count'      => is_array( $data ) ? $data['total_items'] : 0,
+					'pagination' => $this->pagination( $data['total_items'], $data['total_pages'] )
 				) );
 			} else {
 				wp_send_json_error( array(
-					'html'  => $table,
-					'count' => 0
+					'html'       => $table,
+					'count'      => 0,
+					'pagination' => $this->pagination( 0, 0 )
 				) );
 			}
 		}
@@ -313,7 +319,9 @@ class Main extends \WP_Defender\Controller {
 			'paged'     => - 1,
 			//'no_group_item' => 1
 		) );
-
+		if ( is_wp_error( $logs ) ) {
+			return;
+		}
 		$data       = $logs['data'];
 		$email_data = array();
 		foreach ( $data as $row => $val ) {
@@ -334,7 +342,7 @@ class Main extends \WP_Defender\Controller {
 		uasort( $email_data, array( &$this, 'sort_email_data' ) );
 
 		//now we create a table
-		if ( count( $email_data ) ) {
+		if ( is_array( $email_data ) && count( $email_data ) ) {
 			ob_start();
 			?>
             <table class="wrapper main" align="center"
@@ -518,11 +526,13 @@ class Main extends \WP_Defender\Controller {
 
 	public function scripts() {
 		if ( $this->isInPage() ) {
-			\WDEV_Plugin_Ui::load( wp_defender()->getPluginUrl() . 'shared-ui/' );
+			wp_enqueue_script( 'wpmudev-sui' );
+			wp_enqueue_style( 'wpmudev-sui' );
+
 			wp_enqueue_script( 'defender' );
 			wp_enqueue_style( 'defender' );
 			wp_enqueue_script( 'audit', wp_defender()->getPluginUrl() . 'app/module/audit/js/script.js', array(
-				'jquery-effects-core'
+				'jquery-effects-core',
 			) );
 			wp_enqueue_script( 'audit-momentjs', wp_defender()->getPluginUrl() . 'app/module/audit/js/moment/moment.min.js' );
 			wp_enqueue_style( 'audit-daterangepicker', wp_defender()->getPluginUrl() . 'app/module/audit/js/daterangepicker/daterangepicker.css' );
@@ -555,7 +565,7 @@ class Main extends \WP_Defender\Controller {
 				'settings' => $settings
 			) );
 		} else {
-			$this->render( 'new' );
+			$this->renderPartial( 'new' );
 		}
 	}
 
@@ -577,7 +587,7 @@ class Main extends \WP_Defender\Controller {
 				//'table'        => $this->_renderTable( $data )
 			) );
 		} else {
-			$this->render( 'new' );
+			$this->renderPartial( 'new' );
 		}
 	}
 
@@ -608,7 +618,16 @@ class Main extends \WP_Defender\Controller {
 					$params[ $att ] = $df_object->format( 'Y-m-d' );
 				}
 			} elseif ( $att == 'user_id' ) {
-				$params['user_id'] = HTTP_Helper::retrieve_get( 'term' );
+				$term = HTTP_Helper::retrieve_get( 'term' );
+				$term = explode( ',', $term );
+				$ids  = array();
+				foreach ( $term as $uname ) {
+					$u = get_user_by( 'username', $uname );
+					if ( is_object( $u ) ) {
+						$ids[] = $u->ID;
+					}
+				}
+				$params['user_id'] = $ids;
 			} elseif ( $att == 'date_range' && in_array( $value, array( 1, 7, 30 ) ) ) {
 				$params['date_from'] = date( 'Y-m-d', strtotime( '-' . $value . ' days', current_time( 'timestamp' ) ) );
 			}
@@ -625,6 +644,9 @@ class Main extends \WP_Defender\Controller {
 					$params['user_id'] = $user_id;
 				}
 			}
+		}
+		if ( HTTP_Helper::retrieve_get( 'all_type' ) == 1 ) {
+			$params['event_type'] = Audit_API::get_event_type();
 		}
 
 		return $params;
@@ -661,32 +683,30 @@ class Main extends \WP_Defender\Controller {
 
 		$radius = 2;
 		if ( $current_page > 1 && $total_pages > $radius ) {
-			$links['first'] = sprintf( '<a class="button button-small button-light" data-paged="%s" href="%s">%s</a>',
-				1, add_query_arg( 'paged', 1, $current_url ), '&laquo;' );
-			$links['prev']  = sprintf( '<a class="button button-small button-light" data-paged="%s" href="%s">%s</a>',
-				$current_page - 1, add_query_arg( 'paged', $current_page - 1, $current_url ), '&lsaquo;' );
+			$links['prev'] = sprintf( '<li class="nav"><a href="%s">%s</a></li>',
+				$current_page - 1, '<i class="sui-icon-chevron-left" aria-hidden="true"></i>' );
 		}
 
 		for ( $i = 1; $i <= $total_pages; $i ++ ) {
 			if ( ( $i >= 1 && $i <= $radius ) || ( $i > $current_page - 2 && $i < $current_page + 2 ) || ( $i <= $total_pages && $i > $total_pages - $radius ) ) {
 				if ( $i == $current_page ) {
-					$links[ $i ] = sprintf( '<a href="#" class="button button-small button-light" data-paged="%s" disabled="">%s</a>', $i, $i );
+					$links[ $i ] = sprintf( '<li class="nav"><a href="#" disabled="">%s</a></li>', $i );
 				} else {
-					$links[ $i ] = sprintf( '<a class="button button-small button-light" data-paged="%s" href="%s">%s</a>',
-						$i, add_query_arg( 'paged', $i, $current_url ), $i );
+					$links[ $i ] = sprintf( '<li class="nav"><a href="%s">%s</a></li>',
+						$i, $i );
 				}
 			} elseif ( $i == $current_page - $radius || $i == $current_page + $radius ) {
-				$links[ $i ] = '<a href="#" class="button button-light" disabled="">...</a>';
+				$links[ $i ] = '<li class="nav"><a href="#" disabled="">...</a></li>';
 			}
 		}
 
 		if ( $current_page < $total_pages && $total_pages > $radius ) {
-			$links['next'] = sprintf( '<a class="button button-small button-light" data-paged="%s" href="%s">%s</a>',
-				$current_page + 1, add_query_arg( 'paged', $current_page + 1, $current_url ), '&rsaquo;' );
-			$links['last'] = sprintf( '<a class="button button-small button-light" data-paged="%s" href="%s">%s</a>',
-				$total_pages, add_query_arg( 'paged', $total_pages, $current_url ), '&raquo;' );
+			$links['next'] = sprintf( '<li class="nav"><a href="%s">%s</a></li>',
+				$current_page + 1, '<i class="sui-icon-chevron-right" aria-hidden="true"></i>' );
 		}
 		$output = join( "\n", $links );
+		$head   = '<span class="sui-pagination-results">' . sprintf( __( "%s results", wp_defender()->domain ), $total_items ) . '</span>';
+		$output = $head . '<ul class="sui-pagination">' . $output . '</ul>';
 
 		return $output;
 	}
@@ -723,7 +743,7 @@ class Main extends \WP_Defender\Controller {
 				'setting' => Settings::instance()
 			) );
 		} else {
-			$this->render( 'new' );
+			$this->renderPartial( 'new' );
 		}
 	}
 }

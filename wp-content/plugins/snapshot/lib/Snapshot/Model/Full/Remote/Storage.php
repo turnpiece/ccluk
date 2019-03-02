@@ -410,12 +410,40 @@ class Snapshot_Model_Full_Remote_Storage extends Snapshot_Model_Full {
 	/**
 	 * Spawn and return the S3 request handler.
 	 *
-	 * @return mixed Remote storage handling object, or (bool)false on failure
+	 * @return Aws\S3\S3Client|bool Remote storage handling object, or (bool) false on failure
 	 */
 	public function get_remote_storage_handler() {
-		if ( ! class_exists( 'AmazonS3' ) ) {
+		if ( version_compare(PHP_VERSION, '5.5', '<') ) {
+			// Too old PHP, can't do anything about it.
 			return false;
 		}
+		$plugin_path = WPMUDEVSnapshot::instance()->get_plugin_path();
+		$lib_path = wp_normalize_path(
+			trailingslashit( $plugin_path ) .
+			'lib/Snapshot/Model/Destination/aws/vendor/autoload.php'
+		);
+		if ( ! file_exists( $lib_path ) ) {
+			return false;
+		}
+
+		// Before loading the AWS SDK, we check the setup to see if there are older versions of the libs used in the SDK.
+		if ( class_exists( 'GuzzleHttp\Client' ) ) {
+			if ( ! class_exists( 'GuzzleHttp\Psr7\Response' ) ) {
+				return false;
+			}
+		}
+
+		if ( class_exists( 'Aws\S3\S3Client' ) ) {
+			if ( ! class_exists( 'Aws\Sdk' ) ) {
+				return false;
+			}
+		} else {
+			require_once $lib_path ;
+			if ( ! class_exists( 'Aws\S3\S3Client' ) ) {
+				return false;
+			}
+		}
+
 		if ( ! Snapshot_Model_Full_Remote_Api::get()->connect() ) {
 			return false;
 		}
@@ -426,116 +454,282 @@ class Snapshot_Model_Full_Remote_Storage extends Snapshot_Model_Full {
 			if ( empty( $nfo ) ) {
 				return false;
 			} // Error getting the API info, bail out
-			$s3_handler = new AmazonS3(
-                 array(
-					'key' => $nfo['AccessKeyId'],
-					'secret' => $nfo['SecretAccessKey'],
-					'token' => $nfo['SessionToken'],
-					'certificate_authority' => trailingslashit( ABSPATH . WPINC ) . 'certificates/ca-bundle.crt',
-				)
-            );
+
+			// Initiate client handler.
+			require dirname( __FILE__ ) . '/Handler.php' ;
+
 		}
 		return $s3_handler;
 	}
 
 	/**
-	 * Fetch a list of calculated upload parts for the file's S3 upload
+	 * Initializes the upload transfer
 	 *
-	 * If the list doesn't exist, calculate it.
-	 * Uses http://docs.aws.amazon.com/AWSSDKforPHP/latest/#m=AmazonS3/get_multipart_counts
-	 * Uses http://docs.aws.amazon.com/AWSSDKforPHP/latest/#m=AmazonS3/initiate_multipart_upload [<description>]
+	 * @param string $path Local path to the file to be uploaded.
 	 *
-	 * @param string $path Path to file
-	 *
-	 * @return array A list of parts to deal with
+	 * @return object Initialized Snapshot_Model_Transfer_Upload instance
 	 */
-	public function get_upload_parts( $path ) {
-		$key = md5( $path );
-		$parts = get_site_option( $key, array() );
-		if ( ! Snapshot_Model_Full_Remote_Api::get()->connect() ) {
-			return false;
+	public function get_initialized_upload( $path ) {
+		$upload = new Snapshot_Model_Transfer_Upload( $path );
+		if ( $upload->is_initialized() ) {
+			return $upload;
 		}
+
 		$s3 = $this->get_remote_storage_handler();
+		Snapshot_Helper_Utility::spawned_S3_handler( $s3 );
 
 		$nfo = Snapshot_Model_Full_Remote_Api::get()->get_api_info();
 
-		if ( ! empty( $nfo ) && empty( $parts ) ) {
-// http://docs.aws.amazon.com/AWSSDKforPHP/latest/#m=AmazonS3/get_multipart_counts
-			$parts = $s3->get_multipart_counts( filesize( $path ), 50 * 1024 * 1024 );
-// http://docs.aws.amazon.com/AWSSDKforPHP/latest/#m=AmazonS3/initiate_multipart_upload
-			$upload = $s3->initiate_multipart_upload(
-				$nfo['Bucket'],
-				trailingslashit( $nfo['Prefix'] ) . basename( $path ),
-				array(
-					'acl' => 'private',
-					'encryption' => 'AES256',
-				)
-			);
-			$upload_id = (string) $upload->body->UploadId;
-			foreach ( $parts as $idx => $part ) {
-				$part['done'] = false;
-				$part['upload_id'] = $upload_id;
-				$parts[ $idx ] = $part;
+		if ( ! empty( $nfo ) ) {
+			try {
+				$response = $s3->createMultipartUpload(array(
+					'Bucket' => $nfo['Bucket'],
+					'Key' => trailingslashit( $nfo['Prefix'] ) . basename( $path ),
+					'ACL' => 'private',
+					'ServerSideEncryption' => 'AES256',
+				));
+			} catch ( Exception $e ) {
+				return $upload;
 			}
-			add_site_option( $key, $parts );
+
+			$upload->initialize( $response['UploadId'] );
 		}
 
-		return $parts;
+		return $upload;
 	}
 
 	/**
 	 * Finalizes the multipart upload to S3
 	 *
-	 * Uses http://docs.aws.amazon.com/AWSSDKforPHP/latest/index.html#m=AmazonS3/list_parts
-	 * Uses http://docs.aws.amazon.com/AWSSDKforPHP/latest/#m=AmazonS3/complete_multipart_upload
-	 *
-	 * @param string $upload_id Upload ID initiated earlier
-	 * @param string $path File path to finalize
+	 * @param object $upload Snapshot_Model_Transfer_Upload instance.
 	 *
 	 * @return bool
 	 */
-	public function finalize_upload( $upload_id, $path ) {
-		if ( empty( $upload_id ) || empty( $path ) ) {
-			return false;
-		}
+	public function finalize_upload( $upload ) {
 		if ( ! Snapshot_Model_Full_Remote_Api::get()->connect() ) {
 			return false;
 		}
 
-		$key = md5( $path );
-
 		$s3 = $this->get_remote_storage_handler();
+		if ( ! Snapshot_Helper_Utility::spawned_S3_handler( $s3 ) ) {
+			return false;
+		}
 		$nfo = Snapshot_Model_Full_Remote_Api::get()->get_api_info();
 		if ( empty( $nfo ) ) {
 			return false;
 		}
 
-// http://docs.aws.amazon.com/AWSSDKforPHP/latest/index.html#m=AmazonS3/list_parts
-		$parts = $s3->list_parts(
-			$nfo['Bucket'],
-			trailingslashit( $nfo['Prefix'] ) . basename( $path ),
-			$upload_id
-		);
-// http://docs.aws.amazon.com/AWSSDKforPHP/latest/#m=AmazonS3/complete_multipart_upload
-		$complete = $s3->complete_multipart_upload(
-			$nfo['Bucket'],
-			trailingslashit( $nfo['Prefix'] ) . basename( $path ),
-			$upload_id,
-			$parts
-		);
+		$path = $upload->get_path();
+		$parts = $s3->listParts(array(
+			'Bucket' => $nfo['Bucket'],
+			'Key' => trailingslashit( $nfo['Prefix'] ) . basename( $path ),
+			'UploadId' => $upload->get_transfer_id(),
+		));
+		$complete = $s3->completeMultipartUpload(array(
+			'Bucket' => $nfo['Bucket'],
+			'Key' => trailingslashit( $nfo['Prefix'] ) . basename( $path ),
+			'UploadId' => $upload->get_transfer_id(),
+			'MultipartUpload' => array(
+				'Parts' => $parts['Parts'],
+			),
+		));
 
-		if ( $complete->isOk() ) {
-			delete_site_option( $key ); // Clean up the temp storage
+		if ( $complete ) {
+			$upload->complete();
 
 			// Drop the local file!
 			if ( is_writable( $path ) )
 				unlink( $path );
 
-			// Delete cache
-			Snapshot_Model_Transient::delete( $this->get_filter( "backups" ) );
-
+			$this->purge_backups_cache();
 			Snapshot_Helper_Log::info( "File successfully uploaded", "Remote" );
+
 			return true;
+		} else {
+			Snapshot_Helper_Log::error( "Error uploading file", "Remote" );
+		}
+
+		return false;
+	}
+
+	/**
+	 * Aborts the multipart upload to S3
+	 *
+	 * @param string $path Path to file being uploaded.
+	 *
+	 * @return bool
+	 */
+	public function abort_file_upload( $path ) {
+		if ( ! file_exists( $path ) ) {
+			Snapshot_Helper_Log::error( 'Local file not found. The upload may have completed successfully before an abort request could be sent.' );
+			return false;
+		}
+		if ( ! Snapshot_Model_Full_Remote_Api::get()->connect() ) {
+			Snapshot_Helper_Log::error( 'Could not connect to remote API.' );
+			return false;
+		}
+
+		$s3 = $this->get_remote_storage_handler();
+		if ( ! Snapshot_Helper_Utility::spawned_S3_handler( $s3 ) ) {
+			return false;
+		}
+
+		$info = Snapshot_Model_Full_Remote_Api::get()->get_api_info();
+		$upload = new Snapshot_Model_Transfer_Upload( $path );
+
+		if ( ! $upload->get_transfer_id() ) {
+			Snapshot_Helper_Log::error( 'No valid upload ID found for abort.' );
+			return false;
+		}
+
+		$response = false;
+		try {
+			$response = $s3->abortMultipartUpload(array(
+				'Bucket' => $info['Bucket'],
+				'Key' => trailingslashit( $info['Prefix'] ) . basename( $path ),
+				'UploadId' => $upload->get_transfer_id()
+			));
+		} catch( Exception $e ) {
+			$response = false;
+		}
+		if ( ! $response ) {
+			Snapshot_Helper_Log::error( "Abort request sent, but apparently something went wrong." );
+			return false;
+		}
+		$upload->complete();
+
+		return true;
+	}
+
+	/**
+	 * Deletes cached backups list
+	 */
+	public function purge_backups_cache() {
+		Snapshot_Model_Transient::delete( $this->get_filter( "backups" ) );
+	}
+
+	/**
+	 * Attempts remote storage cleanup
+	 *
+	 * Triggered if there isn't enough space for the backup,
+	 * it then tries to make some.
+	 *
+	 * @param string $path Full path to local backup file
+	 *
+	 * @return bool
+	 */
+	public function attempt_remote_cleanup( $path ) {
+		Snapshot_Helper_Log::info( "Not enough space for upload, attempting cleanup", "Remote" );
+
+		// First up, are we out of space?
+		if ( $this->is_out_of_space() ) {
+			Snapshot_Helper_Log::warn(
+				"Out of remote space, currently used storage over quota. Aborting upload",
+				"Remote"
+			);
+
+			// Also clean up API info cache and force re-sync
+			Snapshot_Model_Full_Remote_Api::get()->clean_up_api();
+			Snapshot_Model_Full_Remote_Api::get()->connect();
+
+			return true; // Error condition, stop right here
+		}
+
+		// Quick sanity check - will we have enough room after rotation?
+		$filesize = filesize( $path );
+		$total = (float) $this->get_total_remote_space(); // Cast to number, as it can return false.
+
+		if ( $filesize > $total ) {
+			$this->_set_error( __( 'Backup too large for storage quota.', SNAPSHOT_I18N_DOMAIN ) );
+			Snapshot_Helper_Log::warn( "Backup too large for storage quota", "Remote" );
+			return false; // We don't have enough room to store this anyway.
+		}
+
+		$status = $this->rotate_backups( $path );
+		return $status
+			? false // Not done in this pass.
+			: true // We had an error, clean up and rely on error set in removal.
+		;
+	}
+
+	/**
+	 * Whether we should do a backup rotation on upload
+	 *
+	 * @return bool
+	 */
+	public function should_rotate_on_upload() {
+		// Fresh upload. Check backups rotation first.
+		// We *do* seem to have enough space, *but* do we also have 3+ backups?
+		// If we do, we need to clean them up.
+		Snapshot_Helper_Log::info( 'Checking space/backups kept requirements', 'Remote' );
+
+		// We work with cache, because it's quicker.
+		$backups = Snapshot_Model_Transient::get_any( $this->get_filter( "backups" ), false );
+		if ( false === $backups ) {
+			// So apparently cache has been purged recently, let's rebuild.
+			Snapshot_Helper_Log::info(
+				'No cached backups to count and rotate, requesting fresh list',
+				'Remote'
+			);
+			$this->refresh_backups_list();
+			$backups = Snapshot_Model_Transient::get_any( $this->get_filter( "backups" ), false );
+		}
+
+		// Separate backups by initiator.
+		$user_initiated = 0;
+		$automate_initiated = 0;
+
+		if (Snapshot_Controller_Full_Hub::get()->is_doing_automated_backup()) {
+			// Drop one more to make room for automate.
+			$automate_initiated++;
+		} else {
+			$user_initiated++;
+		}
+
+		if (!empty($backups) && is_array($backups)) {
+			foreach ($backups as $idx => $bkp) {
+				if (Snapshot_Helper_Backup::is_automated_backup($bkp['name'])) {
+					$automate_initiated++;
+				} else {
+					$user_initiated++;
+				}
+			}
+		}
+
+		if (
+			$automate_initiated > $this->get_max_automate_backups_limit()
+			||
+			$user_initiated > $this->get_max_backups_limit()
+		) {
+			Snapshot_Helper_Log::info(
+				sprintf(
+					'More than upper limit backups u(%d/%d) -- a(%d/%d) -- removing some.',
+					$user_initiated, $this->get_max_backups_limit(),
+					$automate_initiated, $this->get_max_automate_backups_limit()
+				), 'Remote'
+			);
+
+			return true;
+		}
+
+		if ( empty( $backups ) && is_array( $backups ) ) {
+			Snapshot_Helper_Log::info(
+				'Apparently no remote backups, no need to rotate',
+				'Remote'
+			);
+		} else if ( empty( $backups ) && ! is_array( $backups ) ) {
+			Snapshot_Helper_Log::info(
+				'Skip rotate, cache needs update',
+				'Remote'
+			);
+		} else if ( ! empty( $backups ) ) {
+			Snapshot_Helper_Log::info(
+				sprintf(
+					'Skip rotate, backups count in check: u%d + a%d',
+					$user_initiated, $automate_initiated
+				),
+				'Remote'
+			);
 		}
 
 		return false;
@@ -543,8 +737,6 @@ class Snapshot_Model_Full_Remote_Storage extends Snapshot_Model_Full {
 
 	/**
 	 * Actually send the finished local backup file to remote storage
-	 *
-	 * Uses http://docs.aws.amazon.com/AWSSDKforPHP/latest/#m=AmazonS3/upload_part
 	 *
 	 * @param string $path Full path to local backup file
 	 *
@@ -559,160 +751,105 @@ class Snapshot_Model_Full_Remote_Storage extends Snapshot_Model_Full {
 		}
 
 		if ( ! $this->has_enough_space_for( $path ) ) {
-			Snapshot_Helper_Log::info( "Not enough space for upload, attempting cleanup", "Remote" );
-
-			// First up, are we out of space?
-			if ( $this->is_out_of_space() ) {
-				Snapshot_Helper_Log::warn( "Out of remote space, currently used storage over quota. Aborting upload", "Remote" );
-
-				// Also clean up API info cache and force re-sync
-				Snapshot_Model_Full_Remote_Api::get()->clean_up_api();
-				Snapshot_Model_Full_Remote_Api::get()->connect();
-
-				return true; // Error condition, stop right here
-			}
-
-			// Quick sanity check - will we have enough room after rotation?
-			$filesize = filesize( $path );
-			$total = (float) $this->get_total_remote_space(); // Cast to int, as it can return false
-
-			if ( $filesize > $total ) {
-				$this->_set_error( __( 'Backup too large for storage quota.', SNAPSHOT_I18N_DOMAIN ) );
-				Snapshot_Helper_Log::warn( "Backup too large for storage quota", "Remote" );
-				return false; // We don't have enough room to store this anyway
-			}
-
-			$status = $this->rotate_backups( $path );
-			return $status
-				? false // Not done in this pass
-				: true // We had an error, clean up and rely on error set in removal
-				;
+			return $this->attempt_remote_cleanup( $path );
 		}
 
-		$parts = $this->get_upload_parts( $path );
-		$key = md5( $path );
-		$upload_id = false;
-
-		$part_keys = array_keys( $parts );
-		$last_key = end( $part_keys );
+		$upload = $this->get_initialized_upload( $path );
 
 		// Determine if we're continuing this upload,
 		// or sending the fresh one
 		$is_continued_upload = false;
-		if ( ! ( defined( 'SNAPSHOT_FORCE_CONTINUATION_PURGE' ) && SNAPSHOT_FORCE_CONTINUATION_PURGE ) ) {
-			foreach ( $parts as $part ) {
-				if ( empty( $part['done'] ) ) {
-					continue;
-				}
-				$is_continued_upload = true;
-				break;
-			}
+		$continuation_purge = defined( 'SNAPSHOT_FORCE_CONTINUATION_PURGE' ) &&
+			constant( 'SNAPSHOT_FORCE_CONTINUATION_PURGE' )
+		;
+		if ( empty( $continuation_purge ) ) {
+			$is_continued_upload = $upload->has_completed_parts();
 		}
 
 		if ( ! $is_continued_upload ) {
-			// Fresh one. Check backups rotation first.
-			// We *do* seem to have enough space, *but* do we also have 3+ backups?
-			// If we do, we need to clean them up
-			Snapshot_Helper_Log::info( 'Checking space/backups kept requirements', 'Remote' );
-
-			// We work with cache, because it's quicker
-			$backups = Snapshot_Model_Transient::get_any( $this->get_filter( "backups" ), false );
-			if ( false === $backups ) {
-				// So apparently cache has been purged recently, let's rebuild
-				Snapshot_Helper_Log::info( 'No cached backups to count and rotate, requesting fresh list', 'Remote' );
-				$this->refresh_backups_list();
-				$backups = Snapshot_Model_Transient::get_any( $this->get_filter( "backups" ), false );
-			}
-
-			// Separate backups by initiator
-			$user_initiated = 0;
-			$automate_initiated = 0;
-
-			if (Snapshot_Controller_Full_Hub::get()->is_doing_automated_backup()) $automate_initiated++; // Drop one more to make room for automate
-			else $user_initiated++;
-
-			if (!empty($backups) && is_array($backups)) foreach ($backups as $idx => $bkp) {
-				if (Snapshot_Helper_Backup::is_automated_backup($bkp['name'])) $automate_initiated++;
-				else $user_initiated++;
-			}
-
-			if ($automate_initiated > $this->get_max_automate_backups_limit() || $user_initiated > $this->get_max_backups_limit()) {
-				Snapshot_Helper_Log::info(
-                    sprintf(
-						'More than upper limit backups u(%d/%d) -- a(%d/%d) -- removing some.',
-						$user_initiated, $this->get_max_backups_limit(),
-						$automate_initiated, $this->get_max_automate_backups_limit()
-					), 'Remote'
-                );
+			if ( $this->should_rotate_on_upload() ) {
 				$status = $this->rotate_backups( $path );
-				return $status
-					? false // Not done in this pass
-					: true // We had an error, clean up and rely on error set in removal
+				return ! empty( $status )
+					? false // We're okay, but not done yet.
+					: true // We encountered an error rotating.
 				;
-			} else {
-				if ( empty( $backups ) && is_array( $backups ) ) {
-					Snapshot_Helper_Log::info( 'Apparently no remote backups, no need to rotate', 'Remote' );
-				} else if ( empty( $backups ) && ! is_array( $backups ) ) {
-					Snapshot_Helper_Log::info( 'Skip rotate, cache needs update', 'Remote' );
-				} else if ( ! empty( $backups ) ) {
-					Snapshot_Helper_Log::info( sprintf( 'Skip rotate, backups count in check: u%d + a%d', $user_initiated, $automate_initiated ), 'Remote' );
-				}
 			}
 		} else {
 			Snapshot_Helper_Log::info( 'A continued upload, we will not be re-rotating', 'Remote' );
 		}
 
 		$s3 = $this->get_remote_storage_handler();
+		if ( ! Snapshot_Helper_Utility::spawned_S3_handler( $s3 ) ) {
+			return false;
+		}
 		$nfo = Snapshot_Model_Full_Remote_Api::get()->get_api_info();
 		$is_done = true;
 
 		Snapshot_Helper_Log::info( "Ready to send file", "Remote" );
 
-		foreach ( $parts as $idx => $part ) {
-			$upload_id = $part['upload_id'];
-			if ( ! empty( $part['done'] ) ) {
-				continue;
-			}
-			// We have a part to upload
+		$part = $upload->get_next_part();
+		if ( ! empty( $part ) ) {
 			$is_done = false;
+			$idx = $part->get_index();
 			try {
-// http://docs.aws.amazon.com/AWSSDKforPHP/latest/#m=AmazonS3/upload_part
-				$response = $s3->upload_part(
-					$nfo['Bucket'], trailingslashit( $nfo['Prefix'] ) . basename( $path ), $upload_id, array(
-						'expect' => '100-continue',
-						'fileUpload' => $path,
-						'partNumber' => $idx + 1,
-						'seekTo' => $part['seekTo'],
-						'length' => $part['length'],
-					)
-                );
-				$part['done'] = $response->isOk();
-				$parts[ $idx ] = $part;
-				update_site_option( $key, $parts );
+				$response = $s3->uploadPart(array(
+					'Bucket' => $nfo['Bucket'],
+					'Key' => trailingslashit( $nfo['Prefix'] ) . basename( $path ),
+					'UploadId' => $upload->get_transfer_id(),
+					'PartNumber' => $part->get_part_number(),
+					'Body' => $upload->get_payload( $part ),
+				));
+				$upload->complete_part( $idx );
+				$upload->save();
 
-				if ( $idx === $last_key ) {
-					$is_done = true;
-				} // If this is the last one, let's process right away
-
-				break;
-			} catch ( Exception $e ) {
+				$is_done = $upload->is_done();
+			} catch( Exception $e ) {
 				Snapshot_Model_Full_Remote_Api::get()->clean_up_api();
 				Snapshot_Helper_Log::warn( "Error uploading the file, part [{$idx}]", "Remote" );
-				break;
 			}
 		}
 
 		if ( $is_done ) {
-			if ( ! empty( $upload_id ) ) {
-				return $this->finalize_upload( $upload_id, $path );
-			} else {
-				$this->_set_error( __( 'Unable to finalize the upload.', SNAPSHOT_I18N_DOMAIN ) );
-				Snapshot_Helper_Log::warn( "Unable to finalize the upload", "Remote" );
-				return false;
-			}
+			return $this->finalize_upload( $upload );
 		}
 
 		return $is_done;
+	}
+
+	/**
+	 * Gets initialized download transfer object
+	 *
+	 * @param string $path Local path to download to.
+	 *
+	 * @return object Initialized Snapshot_Model_Transfer_Download instance.
+	 */
+	public function get_initialized_download( $path ) {
+		$download = new Snapshot_Model_Transfer_Download( $path );
+		if ( $download->is_initialized() ) {
+			return $download;
+		}
+
+		$s3 = $this->get_remote_storage_handler();
+		$spawned_S3_handler = Snapshot_Helper_Utility::spawned_S3_handler( $s3 );
+
+		if ( ! is_object( $s3 ) || false === $spawned_S3_handler ) {
+			$this->_set_error( __( 'Error spawning the S3 request handler, most probably due to a plugin conflict.', SNAPSHOT_I18N_DOMAIN ) );
+			return $download;
+		}
+
+		$nfo = Snapshot_Model_Full_Remote_Api::get()->get_api_info();
+
+		try {
+			$response = $s3->headObject(array(
+				'Bucket' => $nfo['Bucket'],
+				'Key' => trailingslashit( $nfo['Prefix'] ) . basename( $path ),
+			));
+			$download->initialize( $response['ContentLength'] );
+		} catch( Exception $e ) {
+			Snapshot_Helper_Log::warn( 'Unable to query download size', 'Remote' );
+		}
+
+		return $download;
 	}
 
 	/**
@@ -727,43 +864,69 @@ class Snapshot_Model_Full_Remote_Storage extends Snapshot_Model_Full {
 			return false;
 		}
 
-
 		$destination = false;
-		$lock = new Snapshot_Helper_Locker(
-			WPMUDEVSnapshot::instance()->get_setting( 'backupLockFolderFull' ),
-			Snapshot_Helper_String::conceal( $backup )
-		);
-		$local_path = trailingslashit( wp_normalize_path( WPMUDEVSnapshot::instance()->get_setting( 'backupRestoreFolderFull' ) ) );
+		$local_path = trailingslashit( wp_normalize_path(
+			WPMUDEVSnapshot::instance()->get_setting( 'backupRestoreFolderFull' )
+		) );
 
-		if ( $lock->is_locked() ) {
-			if ( Snapshot_Model_Full_Remote_Api::get()->connect() ) {
-				Snapshot_Helper_Log::info( "Starting remote backup file download", 'Remote' );
+		if ( Snapshot_Model_Full_Remote_Api::get()->connect() ) {
+			Snapshot_Helper_Log::info( "Starting remote backup file download", 'Remote' );
 
-				$destination = $local_path . basename( $backup );
-				$s3 = $this->get_remote_storage_handler();
-				$nfo = Snapshot_Model_Full_Remote_Api::get()->get_api_info();
+			$destination = $local_path . basename( $backup );
+			$download = $this->get_initialized_download( $destination );
 
-// http://docs.aws.amazon.com/AWSSDKforPHP/latest/#m=AmazonS3/get_object
-				$resp = $s3->get_object(
-					$nfo['Bucket'],
-					trailingslashit( $nfo['Prefix'] ) . $backup,
-					array(
-						'fileDownload' => $destination,
-					)
-				);
-				if ( ! $resp->isOk() ) {
-					$this->_set_error( __( 'Error fetching file', SNAPSHOT_I18N_DOMAIN ) );
-					Snapshot_Helper_Log::warn( "Error fetching file", "Remote" );
-					return false; // Error fetching the file
-				} else {
-					Snapshot_Helper_Log::info( "Remote backup file successfully downloaded", 'Remote' );
-				}
+			if ( false === $download) {
+				$this->_set_error( __( 'Could not initialize the backup file download', SNAPSHOT_I18N_DOMAIN ) );
+				Snapshot_Helper_Log::warn( "Could not initialize the backup file download", "Remote" );
+				return false;
 			}
 
-			$lock->unlock();
-			unset( $lock ); // Clear lock
-		} else {
-			Snapshot_Helper_Log::warn( "Unable to obtain lock on downloaded remote backup", 'Remote' );
+			if ( ! $download->is_done() ) {
+				$s3 = $this->get_remote_storage_handler();
+				$nfo = Snapshot_Model_Full_Remote_Api::get()->get_api_info();
+				$part = $download->get_next_part();
+				$from_bytes = $part->get_seek();
+				$to_bytes = ($from_bytes + $part->get_length()) - 1;
+
+				$response = false;
+				try {
+					$response = $s3->getObject(array(
+						'Bucket' => $nfo['Bucket'],
+						'Key' => trailingslashit( $nfo['Prefix'] ) . $backup,
+						'SaveAs' => $download->get_part_file_path( $part ),
+						'Range' => "bytes={$from_bytes}-{$to_bytes}",
+					));
+					$download->complete_part( $part->get_index() );
+					$download->save();
+				} catch ( Exception $e ) {
+					$response = false;
+				}
+
+				if ( ! $response ) {
+					$this->_set_error( __( 'Error fetching file part', SNAPSHOT_I18N_DOMAIN ) );
+					Snapshot_Helper_Log::warn( "Error fetching file part", "Remote" );
+					$download->complete();
+					return false; // Error fetching the file
+				}
+				Snapshot_Helper_Log::info( "Remote backup part successfully downloaded", 'Remote' );
+
+				if ( $download->is_done() ) {
+					if ( ! $download->complete() ) {
+						$this->_set_error(
+							__( 'Error finalizing download', SNAPSHOT_I18N_DOMAIN )
+						);
+						// Whoops, we couldn't finalize the download.
+						return false;
+					}
+					Snapshot_Helper_Log::info(
+						"Remote backup file successfully downloaded", 'Remote'
+					);
+					return $destination;
+				} else {
+					// We are not done yet, try again.
+					$destination = false;
+				}
+			}
 		}
 
 		return $destination;
@@ -784,18 +947,17 @@ class Snapshot_Model_Full_Remote_Storage extends Snapshot_Model_Full {
 		$destination = false;
 		if ( Snapshot_Model_Full_Remote_Api::get()->connect() ) {
 			$s3 = $this->get_remote_storage_handler();
+			if ( ! Snapshot_Helper_Utility::spawned_S3_handler( $s3 ) ) {
+				return false;
+			}
 			$nfo = Snapshot_Model_Full_Remote_Api::get()->get_api_info();
 
-//http://docs.aws.amazon.com/AWSSDKforPHP/latest/#m=AmazonS3/get_object_url
-			$resp = $s3->get_object_url(
-				$nfo['Bucket'],
-				trailingslashit( $nfo['Prefix'] ) . $backup,
-				'+1 hours',
-				array(
-					'https' => true,
-				)
-			);
-			$destination = $resp;
+			$cmd = $s3->getCommand( 'getObject', array(
+				'Bucket' => $nfo['Bucket'],
+				'Key' => trailingslashit( $nfo['Prefix'] ) . $backup,
+			));
+			$request = $s3->createPresignedRequest( $cmd, '+1 hours' );
+			$destination = (string) $request->getUri();
 		}
 
 		return $destination;
@@ -813,22 +975,31 @@ class Snapshot_Model_Full_Remote_Storage extends Snapshot_Model_Full {
 		$remote_file = basename( $remote_file );
 
 		if ( empty( $remote_file ) ) {
+			Snapshot_Helper_Log::warn( "No remote file to delete", 'Remote' );
 			return $status;
 		}
 
 		if ( Snapshot_Model_Full_Remote_Api::get()->connect() ) {
 			$s3 = $this->get_remote_storage_handler();
+			if ( ! Snapshot_Helper_Utility::spawned_S3_handler( $s3 ) ) {
+				return false;
+			}
 			$nfo = Snapshot_Model_Full_Remote_Api::get()->get_api_info();
 
-			$resp = $s3->delete_object(
-				$nfo['Bucket'],
-				trailingslashit( $nfo['Prefix'] ) . $remote_file
-			);
+			$resp = $s3->deleteObject(array(
+				'Bucket' => $nfo['Bucket'],
+				'Key' => trailingslashit( $nfo['Prefix'] ) . basename( $remote_file ),
+			));
 
-			$status = $resp->isOk();
-			if ( empty( $status ) ) {
-				$this->_set_error( sprintf( __( 'Error deleting file: %s', SNAPSHOT_I18N_DOMAIN ), $remote_file ) );
+			if ( ! $resp ) {
+				$this->_set_error(
+					sprintf( __( 'Error deleting file: %s', SNAPSHOT_I18N_DOMAIN ), $remote_file )
+				);
 				Snapshot_Helper_Log::warn( "Error deleting remote file: [{$remote_file}]", "Remote" );
+			} else {
+				// Refresh backups upon successful removal.
+				$this->refresh_backups_list();
+				$status = true;
 			}
 		}
 
@@ -847,27 +1018,26 @@ class Snapshot_Model_Full_Remote_Storage extends Snapshot_Model_Full {
 		$error = Snapshot_View_Full_Backup::get_message( 'backup_list_fetch_error' );
 
 		$s3 = $this->get_remote_storage_handler();
+		if ( ! Snapshot_Helper_Utility::spawned_S3_handler( $s3 ) ) {
+			return $raw;
+		}
 		$nfo = Snapshot_Model_Full_Remote_Api::get()->get_api_info();
 
 		if ( $s3 ) {
 			try {
-				// http://docs.aws.amazon.com/AWSSDKforPHP/latest/index.html#m=AmazonS3/list_objects
-				$resp = $s3->list_objects(
-					$nfo['Bucket'],
-					array(
-						'prefix' => $nfo['Prefix'],
-					)
-				);
-				if ( $resp->isOk() ) {
-					// Process the response and get the raw objects info
-					foreach ( $resp->body->Contents as $item ) {
-						$key = (string) $item->Key;
-						if ( empty( $key ) ) {
-							continue;
-						}
+				$objects = $s3->listObjects(array(
+					'Bucket' => $nfo['Bucket'],
+					'Prefix' => $nfo['Prefix'],
+				));
+				if ( ! empty( $objects ) ) {
+					$objects_list = ! empty( $objects['Contents'] )
+						? $objects['Contents']
+						: array()
+					;
+					foreach ( $objects_list as $object ) {
 						$raw[] = array(
-							'name' => basename( $key ),
-							'size' => (int) $item->Size,
+							'name' => basename( $object['Key'] ),
+							'size' => (int) $object['Size'],
 						);
 					}
 				} else {

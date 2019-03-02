@@ -15,6 +15,14 @@ if ( ! empty( $item['data_item']['destination-status'] ) ) {
 	$uploaded = isset( $destination_status['sendFileStatus'] ) && $destination_status['sendFileStatus'];
 }
 
+$destination = WPMUDEVSnapshot::instance()->config_data['destinations'][ $item['destination'] ];
+
+if ( version_compare(PHP_VERSION, '5.5.0', '<') ) {
+	$aws_sdk_compatible = false;
+} else {
+	$aws_sdk_compatible = true;
+}
+
 ?>
 
 <section id="header">
@@ -55,7 +63,7 @@ if ( ! empty( $item['data_item']['destination-status'] ) ) {
 							<a href="<?php echo esc_url( WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url( 'snapshots-newui-snapshots' ) ); ?>&amp;snapshot-action=edit&amp;item=<?php echo esc_attr( $item['timestamp'] ) . '&snapshot-noonce-field=' . esc_attr( wp_create_nonce  ( 'snapshot-nonce' ) ); ?>"><?php esc_html_e( 'Edit', SNAPSHOT_I18N_DOMAIN ); ?></a>
 						</li>
 						<li>
-							<a href="<?php echo esc_url( WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url( 'snapshots-newui-snapshots' ) ); ?>&amp;snapshot-action=backup&amp;item=<?php echo esc_attr( $item['timestamp'] ) . '&snapshot-noonce-field=' . esc_attr( wp_create_nonce  ( 'snapshot-nonce' ) ); ?>"><?php esc_html_e( 'Regenerate', SNAPSHOT_I18N_DOMAIN ); ?></a>
+							<a href="<?php echo esc_url( WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url( 'snapshots-newui-snapshots' ) ); ?>&amp;snapshot-action=backup&amp;item=<?php echo esc_attr( $item['timestamp'] ) . '&snapshot-noonce-field=' . esc_attr( wp_create_nonce  ( 'snapshot-nonce' ) ); ?>" <?php echo ( ( ! $aws_sdk_compatible ) && ( 'aws' === $destination['type'] ) ) ? 'class="disabled"': ''; ?>><?php esc_html_e( 'Regenerate', SNAPSHOT_I18N_DOMAIN ); ?></a>
 						</li>
 						<?php if ( isset( $item['data_item']['timestamp'] ) && ! empty( $item['data_item']['timestamp'] ) ): ?>
 							<li>
@@ -177,7 +185,6 @@ if ( ! empty( $item['data_item']['destination-status'] ) ) {
 						<tr>
 							<th><?php esc_html_e( 'Destination', SNAPSHOT_I18N_DOMAIN ); ?></th>
 							<td>
-								<?php $destination = WPMUDEVSnapshot::instance()->config_data['destinations'][ $item['destination'] ]; ?>
 								<p class="has-typecon">
 									<span class="wps-typecon <?php echo esc_attr( $destination['type'] ); ?>"></span> <?php echo esc_html( $destination['name'] ); ?>
 								</p>

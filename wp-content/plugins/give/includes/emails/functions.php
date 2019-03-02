@@ -4,7 +4,7 @@
  *
  * @package     Give
  * @subpackage  Emails
- * @copyright   Copyright (c) 2016, WordImpress
+ * @copyright   Copyright (c) 2016, GiveWP
  * @license     https://opensource.org/licenses/gpl-license GNU Public License
  * @since       1.0
  */
@@ -114,8 +114,7 @@ function give_get_default_donation_receipt_email() {
 	$default_email_body .= '<strong>' . __( 'Donation Date:', 'give' ) . '</strong> {date}' . "\n";
 	$default_email_body .= '<strong>' . __( 'Amount:', 'give' ) . '</strong> {amount}' . "\n";
 	$default_email_body .= '<strong>' . __( 'Payment Method:', 'give' ) . '</strong> {payment_method}' . "\n";
-	$default_email_body .= '<strong>' . __( 'Payment ID:', 'give' ) . '</strong> {payment_id}' . "\n";
-	$default_email_body .= '<strong>' . __( 'Receipt ID:', 'give' ) . '</strong> {receipt_id}' . "\n\n";
+	$default_email_body .= '<strong>' . __( 'Payment ID:', 'give' ) . '</strong> {payment_id}' . "\n\n";
 	$default_email_body .= '{receipt_link}' . "\n\n";
 	$default_email_body .= "\n\n";
 	$default_email_body .= __( 'Sincerely,', 'give' ) . "\n";

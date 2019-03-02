@@ -151,7 +151,7 @@
 
 		<div class="wphb-minification-exclude">
 			<input type="checkbox" <?php disabled( in_array( 'include', $disable_switchers, true ) ); ?>
-				   class="toggle-checkbox toggle-inline" name="<?php echo esc_attr( $base_name ); ?>[include]"
+				   class="toggle-checkbox toggle-include" name="<?php echo esc_attr( $base_name ); ?>[include]"
 				   id="wphb-minification-include-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>"
 				<?php checked( $disabled, false ); ?>
 				   value="1">

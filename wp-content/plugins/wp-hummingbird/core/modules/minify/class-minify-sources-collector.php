@@ -51,7 +51,7 @@ class WP_Hummingbird_Sources_Collector {
 	public function save_collection() {
 		if ( $this->collection_updated ) {
 			update_option( self::$styles_option, $this->collected['styles'] );
-			update_option( self::$scripts_option, $this->collected['scripts'] );	   			 	 		  		   		
+			update_option( self::$scripts_option, $this->collected['scripts'] );
 		}
 	}
 

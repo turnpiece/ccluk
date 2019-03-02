@@ -24,6 +24,8 @@ class Mask_Api extends Component {
 		if ( empty( $requestUri ) ) {
 			$requestUri = $_SERVER['REQUEST_URI'];
 		}
+		//
+		$requestUri = '/' . ltrim( $requestUri, '/' );
 		$prefix = parse_url( self::site_url(), PHP_URL_PATH );;
 		$requestPath = parse_url( $requestUri, PHP_URL_PATH );
 		//clean it a bit

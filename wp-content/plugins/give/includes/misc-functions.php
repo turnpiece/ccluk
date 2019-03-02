@@ -4,7 +4,7 @@
  *
  * @package     Give
  * @subpackage  Functions
- * @copyright   Copyright (c) 2016, WordImpress
+ * @copyright   Copyright (c) 2016, GiveWP
  * @license     https://opensource.org/licenses/gpl-license GNU Public License
  * @since       1.0
  */
@@ -847,58 +847,86 @@ if ( ! function_exists( 'array_column' ) ) {
  *
  * @since 1.3.2
  *
- * @param string $payment_key
+ * @param int $donation_id Donation ID.
  *
  * @return bool Whether the receipt is visible or not.
  */
-function give_can_view_receipt( $payment_key = '' ) {
-
-	$return = false;
-
-	if ( empty( $payment_key ) ) {
-		return $return;
-	}
+function give_can_view_receipt( $donation_id ) {
 
 	global $give_receipt_args;
 
-	$give_receipt_args['id'] = give_get_donation_id_by_key( $payment_key );
+	$donor            = false;
+	$can_view_receipt = false;
 
-	$user_id = (int) give_get_payment_user_id( $give_receipt_args['id'] );
+	// Bail out, if donation id doesn't exist.
+	if ( empty( $donation_id ) ) {
+		return $can_view_receipt;
+	}
 
-	$payment_meta = give_get_payment_meta( $give_receipt_args['id'] );
+	$give_receipt_args['id'] = $donation_id;
 
-	if ( is_user_logged_in() ) {
-		if ( $user_id === (int) get_current_user_id() ) {
-			$return = true;
-		} elseif ( wp_get_current_user()->user_email === give_get_payment_user_email( $give_receipt_args['id'] ) ) {
-			$return = true;
-		} elseif ( current_user_can( 'view_give_sensitive_data' ) ) {
-			$return = true;
+	// Add backward compatibility.
+	if ( ! is_numeric( $donation_id ) ) {
+		$give_receipt_args['id'] = give_get_donation_id_by_key( $donation_id );
+	}
+
+	// Return to download receipts from admin panel.
+	if ( current_user_can( 'export_give_reports' ) ) {
+
+	    /**
+	     * This filter will be used to modify can view receipt response when accessed from admin.
+         *
+         * @since 2.3.1
+	     */
+		return apply_filters( 'give_can_admin_view_receipt', true );
+	}
+
+	if ( is_user_logged_in() || current_user_can( 'view_give_sensitive_data' ) ) {
+
+		// Proceed only, if user is logged in or can view sensitive Give data.
+		$donor = Give()->donors->get_donor_by( 'user_id', get_current_user_id() );
+
+	} elseif ( ! is_user_logged_in() ) {
+
+		// Check whether it is purchase session?
+		// This condition is to show receipt to donor after donation.
+		$purchase_session = give_get_purchase_session();
+
+		if (
+			! empty( $purchase_session )
+			&& absint( $purchase_session['donation_id'] ) === absint( $donation_id )
+		) {
+			$donor = Give()->donors->get_donor_by( 'email', $purchase_session['user_email'] );
+		}
+
+		// Check whether it is receipt access session?
+		$receipt_session    = give_get_receipt_session();
+		$email_access_token = ! empty( $_COOKIE['give_nl'] ) ? give_clean( $_COOKIE['give_nl'] ) : false;
+
+		if (
+			! empty( $receipt_session ) ||
+			(
+				give_is_setting_enabled( give_get_option( 'email_access' ) ) &&
+				! empty( $email_access_token )
+			)
+		) {
+			$donor              = ! empty( $email_access_token )
+				? Give()->donors->get_donor_by_token( $email_access_token )
+				: false ;
 		}
 	}
 
-	// Check whether it is purchase session?
-	$purchase_session = give_get_purchase_session();
-	if ( ! empty( $purchase_session ) && ! is_user_logged_in() ) {
-		if ( $purchase_session['purchase_key'] === $payment_meta['key'] ) {
-			$return = true;
+	// If donor object exists, compare the donation ids of donor with the donation receipt donor tries to access.
+	if ( is_object( $donor ) ) {
+		$is_donor_donated = in_array( (int) $donation_id, array_map( 'absint', explode( ',', $donor->payment_ids ) ), true );
+		$can_view_receipt = $is_donor_donated ? true : $can_view_receipt;
+
+		if( ! $is_donor_donated ) {
+			Give()->session->set( 'donor_donation_mismatch', true );
 		}
 	}
 
-	// Check whether it is receipt access session?
-	$receipt_session = give_get_receipt_session();
-	if ( ! empty( $receipt_session ) && ! is_user_logged_in() ) {
-		if ( $receipt_session === $payment_meta['key'] ) {
-			$return = true;
-		}
-	}
-
-	// Check whether it is history access session?
-	if ( true === give_get_history_session() ) {
-		$return = true;
-	}
-
-	return (bool) apply_filters( 'give_can_view_receipt', $return, $payment_key );
+	return (bool) apply_filters( 'give_can_view_receipt', $can_view_receipt, $donation_id );
 
 }
 
@@ -954,7 +982,7 @@ function give_get_plugins() {
 
 		$dirname = strtolower( dirname( $plugin_path ) );
 
-		// Is plugin a Give add-on by WordImpress?
+		// Is the plugin a Give add-on?
 		if ( strstr( $dirname, 'give-' ) && strstr( $plugin_data['AuthorURI'], 'wordimpress.com' ) ) {
 			// Plugin is a Give-addon.
 			$plugins[ $plugin_path ]['Type'] = 'add-on';
@@ -1143,7 +1171,7 @@ function give_has_upgrade_completed( $upgrade_action = '' ) {
 
 	// Fresh install?
 	// If fresh install then all upgrades will be consider as completed.
-	$is_fresh_install = ! get_option( 'give_version' );
+	$is_fresh_install = ! Give_Cache_Setting::get_option( 'give_version' );
 	if ( $is_fresh_install ) {
 		return true;
 	}
@@ -1208,7 +1236,7 @@ function give_set_upgrade_complete( $upgrade_action = '' ) {
  * @return array The array of completed upgrades
  */
 function give_get_completed_upgrades() {
-	return (array) get_option( 'give_completed_upgrades' );
+	return (array) Give_Cache_Setting::get_option( 'give_completed_upgrades' );
 }
 
 /**
@@ -1503,7 +1531,7 @@ function give_recount_form_income_donation( $form_id = 0 ) {
 			'give_recount_form_stats_args', array(
 				'give_forms'     => $form_id,
 				'status'         => $accepted_statuses,
-				'posts_per_page' => - 1,
+				'number'         => - 1,
 				'fields'         => 'ids',
 			)
 		);
@@ -1518,12 +1546,12 @@ function give_recount_form_income_donation( $form_id = 0 ) {
 
 		if ( $payments ) {
 			foreach ( $payments as $payment ) {
-				// Ensure acceptible status only
+				// Ensure acceptable status only.
 				if ( ! in_array( $payment->post_status, $accepted_statuses ) ) {
 					continue;
 				}
 
-				// Ensure only payments for this form are counted
+				// Ensure only payments for this form are counted.
 				if ( $payment->form_id != $form_id ) {
 					continue;
 				}
@@ -1565,6 +1593,10 @@ function give_get_attribute_str( $attributes, $default_attributes = array() ) {
 	}
 
 	foreach ( $attributes as $tag => $value ) {
+		if( 'value' == $tag ){
+			$value = esc_attr( $value );
+		}
+
 		$attribute_str .= " {$tag}=\"{$value}\"";
 	}
 
@@ -2019,7 +2051,7 @@ function give_goal_progress_stats( $form ) {
 	 *
 	 * @since 1.8.8
 	 */
-	$total_goal = apply_filters( 'give_goal_amount_target_output', round( give_maybe_sanitize_amount( $form->goal ) ), $form->ID, $form );
+	$total_goal = apply_filters( 'give_goal_amount_target_output', round( give_maybe_sanitize_amount( $form->goal ), 2 ), $form->ID, $form );
 
 	switch ( $goal_format ) {
 		case 'donation':
@@ -2251,7 +2283,8 @@ function give_get_safe_asset_url( $url ) {
 function give_get_formatted_date( $date, $format = 'Y-m-d', $current_format = '' ) {
 	$current_format = empty( $current_format ) ? give_date_format() : $current_format;
 	$date_obj       = DateTime::createFromFormat( $current_format, $date );
-	$formatted_date = $date_obj->format( $format );
+
+	$formatted_date = $date_obj instanceof DateTime ? $date_obj->format( $format ) : '';
 
 	/**
 	 * Give get formatted date.
@@ -2262,4 +2295,186 @@ function give_get_formatted_date( $date, $format = 'Y-m-d', $current_format = ''
 	 * @param array
 	 */
 	return apply_filters( 'give_get_formatted_date', $formatted_date, array( $date, $format, $current_format ) );
+}
+
+/**
+ * This function will be used to fetch the donation receipt link.
+ *
+ * @param int $donation_id Donation ID.
+ *
+ * @since 2.3.1
+ *
+ * @return string
+ */
+function give_get_receipt_link( $donation_id ) {
+
+	return sprintf(
+		'<a href="%1$s">%2$s</a>',
+		esc_url( give_get_receipt_url( $donation_id ) ),
+		esc_html__( 'View the receipt in your browser &raquo;', 'give' )
+	);
+
+}
+
+/**
+ * Get receipt_url
+ *
+ * @since 2.0
+ *
+ * @param int $donation_id Donation ID.
+ *
+ * @return string
+ */
+function give_get_receipt_url( $donation_id ) {
+	
+	$receipt_url = esc_url(
+		add_query_arg(
+			array(
+				'donation_id' => $donation_id,
+			), give_get_history_page_uri()
+		)
+	);
+	
+	return $receipt_url;
+}
+
+/**
+ * Get "View in browser" Receipt Link for email.
+ *
+ * @param int $donation_id Donation ID.
+ *
+ * @since 2.4.1
+ *
+ * @return string
+ */
+function give_get_view_receipt_link( $donation_id ) {
+	
+	return sprintf(
+		'<a href="%1$s">%2$s</a>',
+		esc_url( give_get_view_receipt_url( $donation_id ) ),
+		esc_html__( 'View the receipt in your browser &raquo;', 'give' )
+	);
+	
+}
+
+/**
+ * Get "View in browser" Receipt URL for email.
+ *
+ * @since 2.4.1
+ *
+ * @param int $donation_id Donation ID.
+ *
+ * @return string
+ */
+function give_get_view_receipt_url( $donation_id ) {
+	
+	$receipt_url = esc_url(
+		add_query_arg(
+			array(
+                'action'     => 'view_in_browser',
+				'_give_hash' => give_get_payment_key( $donation_id ),
+			), give_get_history_page_uri()
+		)
+	);
+	
+	return $receipt_url;
+}
+
+/**
+ * This function is used to display donation receipt content based on the parameters.
+ *
+ * @param $args
+ *
+ * @since 2.4.1
+ *
+ * @return bool|mixed
+ */
+function give_display_donation_receipt( $args ) {
+	
+	global $give_receipt_args;
+	
+	$give_receipt_args = $args;
+	
+	ob_start();
+	
+	$get_data     = give_clean( filter_input_array( INPUT_GET ) );
+	$donation_id  = ! empty( $get_data['donation_id'] ) ? $get_data['donation_id'] : false;
+	$receipt_type = ! empty( $get_data['receipt_type'] ) ? $get_data['receipt_type'] : false;
+	
+	$give_receipt_args['id'] = $donation_id;
+	
+	if ( 'view_in_browser' !== $receipt_type ) {
+	 
+		$email_access = give_get_option( 'email_access' );
+		$is_email_access = give_is_setting_enabled( $email_access ) && ! Give()->email_access->token_exists;
+		
+		
+		// No donation id found & Email Access is Turned on.
+		if ( ! $donation_id ) {
+			
+			if( $is_email_access ){
+				give_get_template_part( 'email-login-form' );
+			} else{
+				echo Give()->notices->print_frontend_notice( $args['error'], false, 'error' );
+			}
+			
+			return ob_get_clean();
+		}
+		
+		// Donation id provided, but user is logged out. Offer them the ability to login and view the receipt.
+		if ( ! ( $user_can_view = give_can_view_receipt( $donation_id ) ) ) {
+			
+			if( true === Give()->session->get( 'donor_donation_mismatch' ) ) {
+				
+				/**
+				 * This filter will be used to modify the donor mismatch text for front end error notice.
+				 *
+				 * @since 2.3.1
+				 */
+				$donor_mismatch_text = apply_filters( 'give_receipt_donor_mismatch_notice_text', __( 'You are trying to access invalid donation receipt. Please try again.', 'give' ) );
+				
+				echo Give()->notices->print_frontend_notice(
+					$donor_mismatch_text,
+					false,
+					'error'
+				);
+				
+			} elseif( $is_email_access ) {
+				
+				give_get_template_part( 'email-login-form' );
+				
+			}else{
+				
+				global $give_login_redirect;
+				
+				$give_login_redirect = give_get_current_page_url();
+				
+				Give()->notices->print_frontend_notice(
+					apply_filters( 'give_must_be_logged_in_error_message',
+						__( 'You must be logged in to view this donation receipt.', 'give' )
+					)
+				);
+				
+				give_get_template_part( 'shortcode', 'login' );
+			}
+			
+			return ob_get_clean();
+		}
+		
+		/**
+		 * Check if the user has permission to view the receipt.
+		 *
+		 * If user is logged in, user ID is compared to user ID of ID stored in payment meta
+		 * or if user is logged out and donation was made as a guest, the donation session is checked for
+		 * or if user is logged in and the user can view sensitive shop data.
+		 */
+		if ( ! apply_filters( 'give_user_can_view_receipt', $user_can_view, $args ) ) {
+			return Give()->notices->print_frontend_notice( $args['error'], false, 'error' );
+		}
+		
+	}
+	
+	give_get_template_part( 'shortcode', 'receipt' );
+	
+	return ob_get_clean();
 }

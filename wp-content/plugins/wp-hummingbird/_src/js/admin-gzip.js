@@ -21,16 +21,12 @@ import Fetcher from './utils/fetcher';
                 self.$serverInstructions[$(this).data("server")] = $(this);
             });
             this.showServerInstructions(this.selectedServer);
-            // This is used to trigger the resizing of the tabs.
-            $(window).trigger( 'resize' );
             this.$serverSelector.change(function() {
                 const value = $(this).val();
                 self.hideCurrentInstructions();
                 self.showServerInstructions(value);
                 self.setServer(value);
                 self.selectedServer = value;
-                // This is used to trigger the resizing of the tabs.
-                $(window).trigger( 'resize' );
             });
             configureLink.on('click', function(e) {
                 e.preventDefault();

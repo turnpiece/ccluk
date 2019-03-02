@@ -218,7 +218,9 @@ class DB_Prefix_Service extends Rule_Service implements IRule_Service {
 	}
 
 	public function revert() {
-		// TODO: Implement revert() method.
+		$this->new_prefix = 'wp_';
+
+		return $this->process();
 	}
 
 	public function listen() {

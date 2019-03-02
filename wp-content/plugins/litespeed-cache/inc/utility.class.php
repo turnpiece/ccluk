@@ -12,6 +12,173 @@ if ( ! defined( 'WPINC' ) ) {
 
 class LiteSpeed_Cache_Utility
 {
+	private static $_instance ;
+	private static $_internal_domains ;
+
+	const TYPE_SCORE_CHK = 'score_chk' ;
+
+	/**
+	 * Check if an URL or current page is REST req or not
+	 *
+	 * @since  2.9.3
+	 * @deprecated 2.9.4 Moved to REST class
+	 * @access public
+	 */
+	public static function is_rest( $url = false )
+	{
+		return false ;
+	}
+
+	/**
+	 * Check page score
+	 *
+	 * @since  2.9
+	 * @access private
+	 */
+	private function _score_check()
+	{
+		$_gui = LiteSpeed_Cache_GUI::get_instance() ;
+
+		$_summary = $_gui->get_summary() ;
+
+		$_summary[ 'score.last_check' ] = time() ;
+		$_gui->save_summary( $_summary ) ;
+
+		$score = LiteSpeed_Cache_Admin_API::post( LiteSpeed_Cache_Admin_API::IAPI_ACTION_PAGESCORE, false, true, true, 600 ) ;
+		$_summary[ 'score.data' ] = $score ;
+		$_gui->save_summary( $_summary ) ;
+
+		LiteSpeed_Cache_Log::debug( '[Util] Saved page score ', $score ) ;
+
+		exit() ;
+	}
+
+	/**
+	 * Check latest version
+	 *
+	 * @since  2.9
+	 * @access public
+	 */
+	public static function version_check( $src = false )
+	{
+		// Check latest stable version allowed to upgrade
+		$url = 'https://wp.api.litespeedtech.com/auto_upgrade_v?v=' . LiteSpeed_Cache::PLUGIN_VERSION . '&src=' . $src ;
+
+		$response = wp_remote_get( $url, array( 'timeout' => 15 ) ) ;
+		if ( ! is_array( $response ) || empty( $response[ 'body' ] ) ) {
+			return false ;
+		}
+
+		return $response[ 'body' ] ;
+	}
+
+	/**
+	 * Get current page type
+	 *
+	 * @since  2.9
+	 */
+	public static function page_type()
+	{
+		global $wp_query ;
+		$page_type = 'default' ;
+
+		if ( $wp_query->is_page ) {
+			$page_type = is_front_page() ? 'front' : 'page' ;
+		}
+		elseif ( $wp_query->is_home ) {
+			$page_type = 'home' ;
+		}
+		elseif ( $wp_query->is_single ) {
+			// $page_type = $wp_query->is_attachment ? 'attachment' : 'single' ;
+			$page_type = get_post_type() ;
+		}
+		elseif ( $wp_query->is_category ) {
+			$page_type = 'category' ;
+		}
+		elseif ( $wp_query->is_tag ) {
+			$page_type = 'tag' ;
+		}
+		elseif ( $wp_query->is_tax ) {
+			$page_type = 'tax' ;
+			$page_type = get_queried_object()->taxonomy ;
+		}
+		elseif ( $wp_query->is_archive ) {
+			if ( $wp_query->is_day ) {
+				$page_type = 'day' ;
+			}
+			elseif ( $wp_query->is_month ) {
+				$page_type = 'month' ;
+			}
+			elseif ( $wp_query->is_year ) {
+				$page_type = 'year' ;
+			}
+			elseif ( $wp_query->is_author ) {
+				$page_type = 'author' ;
+			}
+			else {
+				$page_type = 'archive' ;
+			}
+		}
+		elseif ( $wp_query->is_search ) {
+			$page_type = 'search' ;
+		}
+		elseif ( $wp_query->is_404 ) {
+			$page_type = '404' ;
+		}
+
+		return $page_type;
+
+		// if ( is_404() ) {
+		// 	$page_type = '404' ;
+		// }
+		// elseif ( is_singular() ) {
+		// 	$page_type = get_post_type() ;
+		// }
+		// elseif ( is_home() && get_option( 'show_on_front' ) == 'page' ) {
+		// 	$page_type = 'home' ;
+		// }
+		// elseif ( is_front_page() ) {
+		// 	$page_type = 'front' ;
+		// }
+		// elseif ( is_tax() ) {
+		// 	$page_type = get_queried_object()->taxonomy ;
+		// }
+		// elseif ( is_category() ) {
+		// 	$page_type = 'category' ;
+		// }
+		// elseif ( is_tag() ) {
+		// 	$page_type = 'tag' ;
+		// }
+
+		// return $page_type ;
+	}
+
+	/**
+	 * Get ping speed
+	 *
+	 * @since  2.9
+	 */
+	public static function ping( $domain )
+	{
+		if ( strpos( $domain, ':' ) ) {
+			$domain = parse_url( $domain, PHP_URL_HOST ) ;
+		}
+		$starttime	= microtime( true ) ;
+		$file		= fsockopen( $domain, 80, $errno, $errstr, 10 ) ;
+		$stoptime	= microtime( true ) ;
+		$status		= 0 ;
+
+		if ( ! $file ) $status = 99999 ;// Site is down
+		else {
+			fclose( $file ) ;
+			$status = ( $stoptime - $starttime ) * 1000 ;
+			$status = floor( $status ) ;
+		}
+
+		LiteSpeed_Cache_Log::debug( "[Util] ping [Domain] $domain \t[Speed] $status" ) ;
+
+		return $status ;
+	}
 
 	/**
 	 * Set seconds/timestamp to readable format
@@ -156,30 +323,52 @@ class LiteSpeed_Cache_Utility
 	 * @param array $haystack
 	 * @return bool|string False if not found, otherwise return the matched string in haystack.
 	 */
-	public static function str_hit_array( $needle, $haystack )
+	public static function str_hit_array( $needle, $haystack, $has_ttl = false )
 	{
+		$hit = false ;
+		$this_ttl = 0 ;
 		foreach( $haystack as $item ) {
 			if ( ! $item ) {
 				continue ;
 			}
 
+			if ( $has_ttl ) {
+				$this_ttl = 0 ;
+				$item = explode( ' ', $item ) ;
+				if ( ! empty( $item[ 1 ] ) ) {
+					$this_ttl = $item[ 1 ] ;
+				}
+				$item = $item[ 0 ] ;
+			}
+
 			if ( substr( $item, -1 ) === '$' ) {
 				// do exact match
 				if ( substr( $item, 0, -1 ) === $needle ) {
-					return $item ;
+					$hit = $item ;
+					break ;
 				}
 			}
 			elseif ( substr( $item, 0, 1 ) === '^' ) {
 				// match beginning
 				if ( substr( $item, 1 ) === substr( $needle, 0, strlen( $item ) - 1 ) ) {
-					return $item ;
+					$hit = $item ;
+					break ;
 				}
 			}
 			else {
 				if ( strpos( $needle, $item ) !== false ) {
-					return $item ;
+					$hit = $item ;
+					break ;
 				}
 			}
+		}
+
+		if ( $hit ) {
+			if ( $has_ttl ) {
+				return array( $hit, $this_ttl ) ;
+			}
+
+			return $hit ;
 		}
 
 		return false ;
@@ -408,7 +597,7 @@ class LiteSpeed_Cache_Utility
 			$url[ 'query' ] = http_build_query( $built_arr ) ;
 			self::compatibility() ;
 			$url = http_build_url( $url ) ;
-			$url = htmlspecialchars( $url ) ;
+			$url = htmlspecialchars( $url, ENT_QUOTES, 'UTF-8' ) ;
 		}
 
 		return $url ;
@@ -432,7 +621,23 @@ class LiteSpeed_Cache_Utility
 			define( 'LITESPEED_FRONTEND_HOST', parse_url( $home_host, PHP_URL_HOST ) ) ;
 		}
 
-		return $host === LITESPEED_FRONTEND_HOST ;
+		if ( $host === LITESPEED_FRONTEND_HOST ) {
+			return true ;
+		}
+
+		/**
+		 * Filter for multiple domains
+		 * @since 2.9.4
+		 */
+		if ( ! isset( self::$_internal_domains ) ) {
+			self::$_internal_domains = apply_filters( 'litespeed_internal_domains', array() ) ;
+		}
+
+		if ( self::$_internal_domains ) {
+			return in_array( $host, self::$_internal_domains ) ;
+		}
+
+		return false ;
 	}
 
 	/**
@@ -572,7 +777,43 @@ class LiteSpeed_Cache_Utility
 
 
 
+	/**
+	 * Handle all request actions from main cls
+	 *
+	 * @since  2.9
+	 * @access public
+	 */
+	public static function handler()
+	{
+		$instance = self::get_instance() ;
+
+		$type = LiteSpeed_Cache_Router::verify_type() ;
+
+		switch ( $type ) {
+			case self::TYPE_SCORE_CHK :
+				$instance->_score_check() ;
+				break ;
+
+			default:
+				break ;
+		}
+
+		LiteSpeed_Cache_Admin::redirect() ;
+	}
+
+	/**
+	 * Get the current instance object.
+	 *
+	 * @since 2.9
+	 * @access public
+	 * @return Current class instance.
+	 */
+	public static function get_instance()
+	{
+		if ( ! isset( self::$_instance ) ) {
+			self::$_instance = new self() ;
+		}
+
+		return self::$_instance ;
+	}
 }
-
-
-

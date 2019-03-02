@@ -2,15 +2,15 @@
 Contributors: safronik 
 Tags: spam, antispam, protection, comments, firewall 
 Requires at least: 3.0
-Tested up to: 5.0
-Stable tag: 5.109
+Tested up to: 5.1
+Stable tag: 5.115.2
 License: GPLv2
 
 Spam protection, antispam, all-in-one, premium plugin. No spam comments & users, no spam contact form & WooCommerce anti-spam.
 
 == Description ==
 
-**Supports: Contact Form 7, Ninja Forms, Gravity Forms, MailChimp, Formidable forms, WooCommerce, JetPack comments and contact form, BuddyPress, bbPress, Fast Secure Contact form, S2Member, MailPoet, any WordPress registrations & contact forms and themes. Just setup and forget the spam!** 
+**Supports: Contact Form 7, Contact Form by WPForms, Ninja Forms, Gravity Forms, MailChimp, Formidable forms, WooCommerce, JetPack comments and contact form, BuddyPress, bbPress, Fast Secure Contact form, S2Member, MailPoet, any WordPress registrations & contact forms and themes. Just setup and forget the spam!** 
 
 No CAPTCHA, no questions, no animal counting, no puzzles, no math and no spam bots. Universal AntiSpam plugin. 
 
@@ -28,8 +28,9 @@ No CAPTCHA, no questions, no animal counting, no puzzles, no math and no spam bo
 11. Compatible with mobile users and devices. 
 12. Compatible with General Data Protection Regulation (GDPR) (EU). 
 13. Real-time email validation. Is email real or Not.
-14. No Spam - No Google Penalties. Give your SEO boost.
-
+14. Blocking  disposable & temporary emails.
+15. No Spam - No Google Penalties. Give your SEO boost.
+16. Mobile friendly Anti Spam & FireWall. 
 
 = Public reviews =
 > CleanTalk - Cloud-Based Anti-Spam Service to Keep Your Site Bot-Free.
@@ -139,6 +140,9 @@ Service CleanTalk (this plugin is a client application for CleanTalk anti-spam s
 = Spam FireWall =
 CleanTalk has an advanced option "Spam FireWall". This option allows blocking the most active spam bots before they get access to your website. It prevents spam bots from loading website pages so your web server doesn't have to perform all scripts on these pages. Also it prevents scanning of pages of the website by spam bots. Therefore Spam FireWall significantly reduces the load on your web server. Spam FireWall also makes CleanTalk the two-step protection from spam bots. Spam FireWall is the first step and it blocks the most active spam bots.  CleanTalk Anti-Spam is the second step and checks all other requests on the website in the moment of submitting comments/registers etc. 
 
+Spam FireWall is fully compatible with the most popular VPN services. 
+Also, Spam FireWall supports all search engines Google, Bing, Yahoo, Baidu, MSN, Yandex and etc.
+
 = How Spam FireWall works? = 
  * The visitor enters to your web site.
  * HTTP request data are being checked in the nearly 5.8 million of the identified spam bot IPs.
@@ -238,6 +242,10 @@ Non-existing email addresses also entail several other problems for website owne
 * You can never contact them by email,
 * the client will never receive any notifications from you (account activation letter, password recovery, email distribution, notifications, etc.),
 * if you use email marketing for your clients, then a large number of nonexistent emails in the mailing list may result in your IP address being added to various blacklists of email servers.
+
+= Blocking  disposable & temporary emails =
+
+Block fake and suspicious users with disposable & temporary emails to improve email delivery. So, it also prevents malicious activity, spam bots, and internet trolls.
 
 = Translations = 
 * Albanian (sq_AL) - thanks to fjalaime https://wordpress.org/support/users/fjalaime/ 
@@ -534,6 +542,9 @@ We develop plugin to do it as optimized as possible, CleanTalk doesn't downgrade
 Yes, it is. Please read this article,
 <a href="https://cleantalk.org/help/CleanTalk-GDPR-Compliance">https://cleantalk.org/help/CleanTalk-GDPR-Compliance</a>
 
+= Check external forms =
+If your website has forms that send data to external sources, you can enable option to "Protect external forms". In this case, if plugin determinates that the current message is spam, your form action will be temporary replaced to your current hostname to prevent sending false data to an external source.
+
 == Screenshots ==
 1. AntiSpam settings are easy to use. 
 2. AntiSpam plugin rejected a spam bot at the CAPTCHA less registration form. The plugin provides explanation to visitor and websites about each rejected comment/registration or contact message. 
@@ -547,13 +558,72 @@ Yes, it is. Please read this article,
 10. Website's options.
 
 == Changelog ==
+= 5.115.2 February 27 2019 =
+  * Fix: False positives spam detection in WP Forms and Contact Form 7.
+
+= 5.115.1 February 16 2019 =
+  * Fix: SpamFireWall's false positives.
+
+= 5.115 February 14 2019 =
+  * Fix: Http_only flag for backend cookies.
+  * Fix: Spam filtration improved.
+  * New: IP detection improved.
+  * Fix: SpamFirewall update speeded up.
+  * New: False positives with caching solutions decreased.
+  * New: Opportunity to use Wordpress HTTP API to connect with Cloud.
+  
+= 5.114 January 31 2019 =
+  * New: Setting "Use Wordpress HTTP API" as alternative to CURL. Disabled by default.
+  * Fix: Formidable: Adding small JS check when adding JS_key.
+  * Mod: layout of settings page.
+  * Mod: Banner logic altered.
+
+= 5.113.2 January 18 2019 =
+  * Fix: "Settings" link returns to plugin page.
+
+= 5.113.1 January 17 2019 =
+  * Fix: Conflict with CityTours theme.
+  * Fix: Error for Wordpress lower 4.7.
+  * Add: Spam protection: "Validate email for existence".
+
+= 5.113 January 16 2019 =
+  * Fix: Fast and Simple Contact Form.
+  * Fix: Settings layout.
+  * Fix: Error with WooCommerce Quickview.
+  * Fix: Bitrix24 contact form.
+  * Fix: Request time decreased.
+  * Fix: Requesting account status when activating for IP licenses.
+  * Add: Precise AJAX request detection.
+  * Spam protection improved.
+
+= 5.112 December 21 2018 =
+  * Fix: Woocommerce AJAX checkout form.
+  * Fix: Profile Builder Pro.
+  * Fix: DB structure improvements for WPMS.
+  * Spam filtering quality improved.
+  * Minor fixes.
+  
+= 5.111 December 13 2018 =
+  * Fix: Double request in JetPack contact form.
+  * Fix: Email notification about spam registration.
+  * Fix: Links button for feedback comments.
+  * Fix: Mail notification about plugin error.
+  * Fix: Key field output.
+  * Minor fixes.
+
+= 5.110 November 29 2018 =
+  * Integration: BuddyPress ActivityWall spam protection.
+  * Add: GDPR setting for shortcode.
+  * Add: Support different BuddyPress templates on activity wall.
+  * Fix: Admin/moderator checking for validate post data.
+
 = 5.109 November 15 2018 =
-  Fix: Added URL and IP exclusions to Contact Form 7.
-  Fix: js error when responseText is not exists
-  Fix: Sitename when getting key automatically under WPMS.
-  Mod: SpamFireWall is now fully compatible with WPMS.
-  Mod: Setting 'Tell others about CleanTalk' was deleted.
-  Mod: Protection from spam improved.
+  * Fix: Added URL and IP exclusions to Contact Form 7.
+  * Fix: js error when responseText is not exists
+  * Fix: Sitename when getting key automatically under WPMS.
+  * Mod: SpamFireWall is now fully compatible with WPMS.
+  * Mod: Setting 'Tell others about CleanTalk' was deleted.
+  * Mod: Protection from spam improved.
   
 = 5.108.1 November 8 2018 =
   * Fix: Errors with integration class.
@@ -1730,13 +1800,73 @@ Yes, it is. Please read this article,
   * First version
   
 == Upgrade Notice ==
+= 5.115.2 February 27 2019 =
+  * Fix: False positives spam detection in WP Forms and Contact Form 7.
+
+= 5.115.1 February 16 2019 =
+  * Fix: SpamFireWall's false positives.
+  
+= 5.115 February 14 2019 =
+  * Fix: Http_only flag for backend cookies.
+  * Fix: Spam filtration improved.
+  * New: IP detection improved.
+  * Fix: SpamFirewall update speeded up.
+  * New: False positives with caching solutions decreased.
+  * New: Opportunity to use Wordpress HTTP API to connect with Cloud.
+
+= 5.114 January 31 2019 =
+  * New: Setting "Use Wordpress HTTP API" as alternative to CURL. Disabled by default.
+  * Fix: Formidable: Adding small JS check when adding JS_key.
+  * Mod: layout of settings page.
+  * Mod: Banner logic altered.
+
+= 5.113.2 January 18 2019 =
+  * Fix: "Settings" link returns to plugin page.
+  
+= 5.113.1 January 17 2019 =
+  * Fix: Conflict with CityTours theme.
+  * Fix: Error for Wordperss lower 4.7.
+  * Add: Spam protection: "Validate email for existance".
+
+= 5.113 January 16 2019 =
+  * Fix: Fast and Simple Contact Form.
+  * Fix: Settings layout.
+  * Fix: Error with WooCommerce Quickview.
+  * Fix: Bitrix24 contact form.
+  * Fix: Request time decreased.
+  * Fix: Requesting account status when activating for IP licenses.
+  * Add: Precise AJAX request detection.
+  * Spam protection improved.
+
+= 5.112 December 21 2018 =
+  * Fix: Woocommerce AJAX checkout form.
+  * Fix: Profile Builder Pro.
+  * Fix: DB structure improvements for WPMS.
+  * Spam filtering quality improved.
+  * Minor fixes.
+
+= 5.111 December 13 2018 =
+  * Fix: Double request in JetPack contact form.
+  * Fix: Email notification about spam registration.
+  * Fix: Links button for feedback comments.
+  * Fix: Mail notification about plugin error.
+  * Fix: Key field output.
+  * Minor fixes.
+
+= 5.110 November 29 2018 =
+  * Integration: BuddyPress ActivityWall spam protection.
+  * Add: Support different BuddyPress templates on activity wall.
+  * Fix: Admin/moderator checking for validate post data.
+  * Add: GDPR setting for shortcode.
+  * Fix: Increase timeout for spam_check_cms to 15.
+
 = 5.109 November 15 2018 =
-  Fix: Added URL and IP exclusions to Contact Form 7.
-  Fix: js error when responseText is not exists
-  Fix: Sitename when getting key automatically under WPMS.
-  Mod: SpamFireWall is now fully compatible with WPMS.
-  Mod: Setting 'Tell others about CleanTalk' was deleted.
-  Mod: Protection from spam improved.
+  * Fix: Added URL and IP exclusions to Contact Form 7.
+  * Fix: js error when responseText is not exists
+  * Fix: Sitename when getting key automatically under WPMS.
+  * Mod: SpamFireWall is now fully compatible with WPMS.
+  * Mod: Setting 'Tell others about CleanTalk' was deleted.
+  * Mod: Protection from spam improved.
 
 = 5.108.1 November 8 2018 =
   * Fix: Errors with integration class.

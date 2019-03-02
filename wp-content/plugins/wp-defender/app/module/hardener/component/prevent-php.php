@@ -42,6 +42,7 @@ class Prevent_Php extends Rule {
 			return;
 		}
 		$settings = Settings::instance();
+		$server   = $settings->active_server;
 		if ( in_array( $settings->active_server, array( 'apache', 'litespeed' ) ) ) {
 			$service = $this->getApacheService();
 			$service->setHtConfig( $settings->getNewHtConfig() );
@@ -110,7 +111,7 @@ class Prevent_Php extends Rule {
 		if ( ! $this->verifyNonce() ) {
 			return;
 		}
-		$settings   = Settings::instance();
+		$settings = Settings::instance();
 
 		$file_paths = HTTP_Helper::retrieve_post( 'file_paths' ); //File paths to ignore. Apache and litespeed mainly
 		if ( $file_paths ) {

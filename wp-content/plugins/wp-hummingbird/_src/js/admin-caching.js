@@ -66,8 +66,6 @@ import Fetcher from './utils/fetcher';
 			});
 			self.showServerInstructions( this.selectedServer );
 
-            // This is used to trigger the resizing of the tabs.
-            $(window).trigger( 'resize' );
 
 			// Init code snippets.
 			self.snippets.apache    = $('.apache-instructions').find('pre.sui-code-snippet');
@@ -82,8 +80,6 @@ import Fetcher from './utils/fetcher';
 				self.setServer( value );
 				self.selectedServer = value;
 				$('.hb-server-type').val( value );
-                // This is used to trigger the resizing of the tabs.
-                $(window).trigger( 'resize' );
 			});
 
 			// Expiry time change between all types and individual type.
@@ -179,8 +175,6 @@ import Fetcher from './utils/fetcher';
 				$( '#auto-' + selectedServer ).removeClass('active');
 				$( '#manual-' + selectedServer ).trigger("click").addClass('active');
 
-                // This is used to trigger the resizing of the tabs.
-                $(window).trigger( 'resize' );
 				$('html, body').animate({ scrollTop: serverInstructions.offset().top - 50 }, 'slow');
 			});
 
@@ -364,8 +358,6 @@ import Fetcher from './utils/fetcher';
             if ( typeof this.serverInstructions[ server ] !== 'undefined' ) {
                 let serverTab = this.serverInstructions[ server ];
 				serverTab.removeClass( 'sui-hidden' );
-                // Show tab.
-				serverTab.find('.sui-tab:first-child > label').trigger('click');
             }
 
             if ( 'apache' === server || 'LiteSpeed' === server ) {

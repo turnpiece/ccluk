@@ -522,10 +522,13 @@ class LiteSpeed_Cache_Control
 		// Check if URI is forced cache
 		$excludes = LiteSpeed_Cache_Config::get_instance()->get_item( LiteSpeed_Cache_Config::ITEM_FORCE_CACHE_URI ) ;
 		if ( ! empty( $excludes ) ) {
-			$result =  LiteSpeed_Cache_Utility::str_hit_array( $_SERVER[ 'REQUEST_URI' ], $excludes ) ;
+			list( $result, $this_ttl ) =  LiteSpeed_Cache_Utility::str_hit_array( $_SERVER[ 'REQUEST_URI' ], $excludes, true ) ;
 			if ( $result ) {
 				self::force_cacheable() ;
 				LiteSpeed_Cache_Log::debug( '[Ctrl] Forced cacheable due to setting: ' . $result ) ;
+				if ( $this_ttl ) {
+					self::set_custom_ttl( $this_ttl ) ;
+				}
 			}
 		}
 
@@ -544,16 +547,8 @@ class LiteSpeed_Cache_Control
 		$instance = self::get_instance() ;
 
 		// Apply 3rd party filter
-		// Parse ESI block id
-		$esi_id = false ;
-		if ( defined( 'LSCACHE_IS_ESI' ) ) {
-			$params = LiteSpeed_Cache_ESI::parse_esi_param() ;
-			if ( $params !== false ) {
-				$esi_id = $params[LiteSpeed_Cache_ESI::PARAM_BLOCK_ID] ;
-			}
-		}
 		// NOTE: Hook always needs to run asap because some 3rd party set is_mobile in this hook
-		do_action('litespeed_cache_api_control', $esi_id) ;
+		do_action('litespeed_cache_api_control', defined( 'LSCACHE_IS_ESI' ) ? LSCACHE_IS_ESI : false ) ; // Pass ESI block id
 
 		// if is not cacheable, terminate check
 		if ( ! self::is_cacheable() ) {

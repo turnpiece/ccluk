@@ -63,6 +63,13 @@
             }
         }
 
+        .sui-icon-loader {
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
         .wphb-db-row-delete {
             width: 30px;
             height: 30px;
@@ -79,6 +86,9 @@
                 .sui-icon-trash:before {
                     color: #FF6D6D;
                 }
+            }
+            &.sui-hidden {
+                display: none;
             }
         }
 

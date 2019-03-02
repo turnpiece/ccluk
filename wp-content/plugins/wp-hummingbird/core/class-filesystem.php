@@ -517,6 +517,15 @@ if ( ! class_exists( 'WP_Hummingbird_Filesystem' ) ) {
 				}
 			}
 
+			/**
+			 * We really should not be generating unique file names, because there are instances, when WP will
+			 * generate a bunch of similar files.
+			 * TODO: For now, we're going to remove similar files. But better to just remove the wp_unique_filename function.
+			 */
+			if ( file_exists( trailingslashit( $custom_dir ) . $name ) ) {
+				@unlink( trailingslashit( $custom_dir ) . $name );
+			}
+
 			$filename = wp_unique_filename( $custom_dir, $name );
 
 			$new_file = trailingslashit( $custom_dir ) . $filename;

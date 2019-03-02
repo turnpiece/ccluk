@@ -165,7 +165,7 @@ abstract class WP_Hummingbird_Admin_Page {
 	 * @return String
 	 */
 	public function admin_body_class( $classes ) {
-		$classes .= ' sui-2-2-9 wpmud ';
+		$classes .= ' sui-2-3-0 wpmud ';
 
 		return $classes;
 	}
@@ -190,7 +190,6 @@ abstract class WP_Hummingbird_Admin_Page {
 		wp_enqueue_style( 'wphb-admin', WPHB_DIR_URL . 'admin/assets/css/app.min.css', array(), WPHB_VERSION );
 
 		// Scripts.
-		WP_Hummingbird_Utils::enqueue_admin_scripts( WPHB_VERSION );
 		wp_enqueue_script(
 			'wphb-wpmudev-sui',
 			WPHB_DIR_URL . 'admin/assets/js/shared-ui.min.js',
@@ -198,6 +197,7 @@ abstract class WP_Hummingbird_Admin_Page {
 			WPHB_VERSION,
 			true
 		);
+		WP_Hummingbird_Utils::enqueue_admin_scripts( WPHB_VERSION );
 
 		// Google visualization library for Uptime.
 		if ( 'hummingbird-pro_page_wphb-uptime' === $hook ) {
@@ -316,10 +316,12 @@ abstract class WP_Hummingbird_Admin_Page {
 		<div class="sui-header">
 			<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
 			<div class="sui-actions-right">
-				<a href="<?php echo esc_url( WP_Hummingbird_Utils::get_documentation_url( $this->slug, $this->get_current_tab() ) ); ?>" target="_blank" class="sui-button sui-button-ghost">
-					<i class="sui-icon-academy" aria-hidden="true"></i>
-					<?php esc_html_e( 'View Documentation', 'wphb' ); ?>
-				</a>
+				<?php if ( ! WP_Hummingbird_Utils::hide_wpmudev_doc_link() ) : ?>
+					<a href="<?php echo esc_url( WP_Hummingbird_Utils::get_documentation_url( $this->slug, $this->get_current_tab() ) ); ?>" target="_blank" class="sui-button sui-button-ghost">
+						<i class="sui-icon-academy" aria-hidden="true"></i>
+						<?php esc_html_e( 'View Documentation', 'wphb' ); ?>
+					</a>
+				<?php endif; ?>
 			</div>
 		</div><!-- end header -->
 		<?php
@@ -329,8 +331,9 @@ abstract class WP_Hummingbird_Admin_Page {
 	 * Render the page
 	 */
 	public function render() {
+		$settings = WP_Hummingbird_Settings::get_settings( 'settings' );
 		?>
-		<div class="sui-wrap wrap-wp-hummingbird wrap-wp-hummingbird-page <?php echo 'wrap-' . esc_attr( $this->slug ); ?>">
+		<div class="sui-wrap<?php echo $settings['accessible_colors'] ? ' sui-color-accessible ' : ' '; ?>wrap-wp-hummingbird wrap-wp-hummingbird-page <?php echo 'wrap-' . esc_attr( $this->slug ); ?>">
 			<div class="sui-notice-top sui-notice-success sui-hidden" id="wphb-ajax-update-notice">
 				<p><?php esc_html_e( 'Settings updated', 'wphb' ); ?></p>
 			</div>
@@ -355,17 +358,16 @@ abstract class WP_Hummingbird_Admin_Page {
 			<?php
 			$hummingbird = WP_Hummingbird::get_instance();
 			if ( $hummingbird->admin->show_quick_setup ) :
-				WP_Hummingbird_Utils::get_modal( 'quick-setup' );
-				WP_Hummingbird_Utils::get_modal( 'check-performance' );
-			?>
+				$this->view( 'modals/quick-setup-modal' );
+				$this->view( 'modals/check-performance-modal' );
+			    ?>
 				<script>
-					window.onload = function () {
-						if ( window.WPHB_Admin ) {
-							window.WPHB_Admin.getModule('dashboard').startQuickSetup();
-						}
-					};
+                    window.addEventListener("load", function(){
+                        window.WPHB_Admin.getModule( 'dashboard' );
+                        SUI.dialogs['wphb-quick-setup-modal'].show();
+					});
 				</script>
-			<?php
+			    <?php
 			endif;
 			?>
 		</div><!-- end container -->
@@ -488,4 +490,5 @@ abstract class WP_Hummingbird_Admin_Page {
 
 		return $tabs[ $tab ];
 	}
+
 }

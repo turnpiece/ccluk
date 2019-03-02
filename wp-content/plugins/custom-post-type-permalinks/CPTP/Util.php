@@ -171,25 +171,68 @@ class CPTP_Util {
 	 *
 	 * @since 0.9.6
 	 *
-	 * @param string|object $post_type post type name. / object post type object.
+	 * @param string|WP_Post_Type $post_type post type name. / object post type object.
 	 *
 	 * @return string post type structure.
 	 */
 	public static function get_permalink_structure( $post_type ) {
 		if ( is_string( $post_type ) ) {
-			$pt_object = get_post_type_object( $post_type );
-		} else {
-			$pt_object = $post_type;
+			$post_type = get_post_type_object( $post_type );
 		}
 
-		if ( ! empty( $pt_object->cptp_permalink_structure ) ) {
-			$structure = $pt_object->cptp_permalink_structure;
+		if ( ! empty( $post_type->cptp ) && ! empty( $post_type->cptp['permalink_structure'] ) ) {
+			$structure = $post_type->cptp->permalink_structure;
+		} else if ( ! empty( $post_type->cptp_permalink_structure ) ) {
+			$structure = $post_type->cptp_permalink_structure;
 		} else {
+			$structure = get_option( $post_type->name . '_structure', '%postname%' );
+		}
+		$structure = '/' . ltrim( $structure, '/' );
 
-			$structure = get_option( $pt_object->name . '_structure' );
+		return apply_filters( 'CPTP_' . $post_type->name . '_structure', $structure );
+	}
+
+	/**
+	 * Check support date archive.
+	 *
+	 * @since 3.3.0
+	 *
+	 * @param string|WP_Post_Type $post_type post type name. / object post type object.
+	 *
+	 * @return bool
+	 */
+	public static function get_post_type_date_archive_support( $post_type ) {
+		if ( is_string( $post_type ) ) {
+			$post_type = get_post_type_object( $post_type );
 		}
 
-		return apply_filters( 'CPTP_' . $pt_object->name . '_structure', $structure );
+		if ( ! empty( $post_type->cptp ) && isset( $post_type->cptp['date_archive'] ) ) {
+			return ! ! $post_type->cptp['date_archive'];
+		}
+
+		return true;
+	}
+
+	/**
+	 * Check support author archive.
+	 *
+	 * @since 3.3.0
+	 *
+	 * @param string|WP_Post_Type $post_type post type name. / object post type object.
+	 *
+	 * @return bool
+	 */
+	public static function get_post_type_author_archive_support( $post_type ) {
+		if ( is_string( $post_type ) ) {
+			$post_type = get_post_type_object( $post_type );
+		}
+
+		if ( ! empty( $post_type->cptp ) && isset( $post_type->cptp['author_archive'] ) ) {
+			return ! ! $post_type->cptp['author_archive'];
+		}
+
+		return true;
+
 	}
 
 

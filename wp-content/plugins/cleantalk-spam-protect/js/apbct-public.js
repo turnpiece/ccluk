@@ -105,8 +105,6 @@ function apbct_ready(){
 					// Filter fields
 					if( getComputedStyle(elem).display    === "none" ||   // hidden
 						getComputedStyle(elem).visibility === "hidden" || // hidden
-						getComputedStyle(elem).width      === "0" ||      // hidden
-						getComputedStyle(elem).height     === "0" ||      // hidden
 						getComputedStyle(elem).opacity    === "0" ||      // hidden
 						elem.getAttribute("type")         === "hidden" || // type == hidden
 						elem.getAttribute("type")         === "submit" || // type == submit
@@ -165,6 +163,50 @@ jQuery(document).ajaxComplete(function(event, xhr, settings) {
 		}
 	}
 });
+
+function apbct_js_keys__set_input_value(result, data, params, obj){
+	console.log(result);
+	console.log(data);
+	console.log(params);
+	if (document.getElementById(params.input_name) !== null) {
+		var ct_input_value = document.getElementById(params.input_name).value;
+		document.getElementById(params.input_name).value = document.getElementById(params.input_name).value.replace(ct_input_value, result.js_key);
+	}
+}
+
+function apbct_sendAJAXRequest(data, params, obj){
+	
+	// Default params
+	var callback    = params.callback    || null;
+	var notJson     = params.notJson     || null;
+	var timeout     = params.timeout     || 15000;
+	var obj         = obj                || null;
+	
+	data._ajax_nonce = ctPublic._ajax_nonce;
+	
+	jQuery.ajax({
+		type: "POST",
+		url: ctPublic._ajax_url,
+		data: data,
+		success: function(result){
+			if(!notJson) result = JSON.parse(result);
+			if(result.error){
+				
+			}else{
+				if(callback)
+					callback(result, data, params, obj);
+			}
+		},
+		error: function(jqXHR, textStatus, errorThrown){
+			console.log('APBCT_AJAX_ERROR');
+			console.log(data);
+			console.log(jqXHR);
+			console.log(textStatus);
+			console.log(errorThrown);
+		},
+		timeout: timeout
+	});
+}
 
 //(function(open) {
 //    XMLHttpRequest.prototype.open = function(method, url, async, user, pass) {

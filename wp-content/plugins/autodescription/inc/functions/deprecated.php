@@ -6,7 +6,7 @@
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2015 - 2018 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2015 - 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -62,7 +62,7 @@ function the_seo_framework_version() {
 
 	\the_seo_framework()->_deprecated_function( __FUNCTION__, '3.1.0', 'THE_SEO_FRAMEWORK_VERSION' );
 
-	if ( the_seo_framework_active() )
+	if ( the_seo_framework()->loaded )
 		return THE_SEO_FRAMEWORK_VERSION;
 
 	return null;

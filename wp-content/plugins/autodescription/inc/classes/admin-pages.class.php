@@ -8,7 +8,7 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2015 - 2018 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2015 - 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -335,7 +335,7 @@ class Admin_Pages extends Inpost {
 		if ( $this->get_static_cache( 'check_seo_plugin_conflicts' ) && \current_user_can( 'activate_plugins' ) ) {
 			$this->detect_seo_plugins()
 				and $this->do_dismissible_notice(
-					__( 'Multiple SEO tools have been detected. You should only use one.', 'autodescription' ),
+					\__( 'Multiple SEO tools have been detected. You should only use one.', 'autodescription' ),
 					'warning'
 				);
 			$this->update_static_cache( 'check_seo_plugin_conflicts', 0 );
@@ -356,7 +356,7 @@ class Admin_Pages extends Inpost {
 	 */
 	protected function do_settings_page_notices() {
 
-		$get = empty( $_GET ) ? null : $_GET;
+		$get = empty( $_GET ) ? null : $_GET; // CSRF, input var OK.
 
 		if ( null === $get )
 			return;

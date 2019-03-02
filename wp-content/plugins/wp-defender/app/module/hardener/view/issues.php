@@ -1,36 +1,38 @@
-<div class="dev-box">
-    <div class="box-title">
-        <h3><?php _e( "Issues", wp_defender()->domain ) ?>
-			<?php if ( $controller->getCount( 'issues' ) ): ?>
-            <span class="def-tag tag-yellow count-issues"><?php echo $controller->getCount( 'issues' ) ?></span>
-			<?php endif; ?>
-        </h3>
-    </div>
-    <div class="box-content">
-        <div class="box-content">
-            <div class="line">
-				<?php _e( "There are a number of security tweaks you can make to your website to strengthen it against harmful hackers and bots that try to break in. We recommend you action as many tweaks as possible.", wp_defender()->domain ) ?>
-            </div>
-            <div class="rules">
-				<?php
-				$setting = \WP_Defender\Module\Hardener\Model\Settings::instance();
-				$issues  = $setting->getIssues();
-				if ( count( $issues ) == 0 ) {
-					?>
-                    <div class="well well-green with-cap">
-                        <i class="def-icon icon-tick" aria-hidden="true"></i>
-						<?php _e( "You have actioned all available security tweaks. Great work!", wp_defender()->domain ) ?>
-                    </div>
-					<?php
-				} else {
-					foreach ( $setting->getIssues() as $rule ): ?>
-						<?php
-						$rule->getDescription();
-						?>
-					<?php endforeach;
-				}
-				?>
-            </div>
-        </div>
+<?php
+$setting = \WP_Defender\Module\Hardener\Model\Settings::instance();
+$issues  = $setting->getIssues();
+?>
+<div class="sui-box-header">
+    <h2 class="sui-box-title"><?php _e( "Issues", wp_defender()->domain ) ?></h2>
+    <div class="sui-actions-left">
+		<?php if ( count( $issues ) ): ?>
+            <span class="sui-tag sui-tag-warning"><?php echo count( $issues ) ?></span>
+		<?php endif; ?>
     </div>
 </div>
+<div class="sui-box-body">
+    <p>
+		<?php _e( "Activate security tweaks to strengthen your website against harmful hackers and bots who try to break in. We recommend you action as many tweaks as possible, some may require your server provider to help.", wp_defender()->domain ) ?>
+    </p>
+	<?php
+	if ( count( $issues ) == 0 ) {
+		?>
+        <div class="sui-notice sui-notice-success">
+            <p>
+				<?php _e( "You have actioned all available security tweaks, great work!", wp_defender()->domain ) ?>
+            </p>
+        </div>
+		<?php
+	}
+	?>
+</div>
+<?php if ( count( $issues ) ) : ?>
+    <div class="sui-accordion sui-accordion-flushed">
+		<?php
+		foreach ( $issues as $rule ) {
+			$rule->getDescription();
+		} ?>
+    </div>
+    <div class="clearfix"></div>
+    <div class="padding-bottom-30"></div>
+<?php endif; ?>

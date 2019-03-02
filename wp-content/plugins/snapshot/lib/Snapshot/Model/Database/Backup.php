@@ -249,7 +249,7 @@ if ( ! class_exists( 'Snapshot_Model_Database_Backup' ) ) {
 		}
 
 
-		public function restore_databases( $buffer ) {
+		public function restore_databases( $buffer, $source_table_name = false, $subsite_migration = false ) {
 			global $wpdb;
 
 			$sql                         = '';
@@ -261,6 +261,7 @@ if ( ! class_exists( 'Snapshot_Model_Database_Backup' ) ) {
 			$length_of_delimiter_keyword = strlen( $delimiter_keyword );
 			$sql_delimiter               = ';';
 			$finished                    = false;
+			$log                         = array();
 
 			$len = strlen( $buffer );
 
@@ -473,9 +474,36 @@ if ( ! class_exists( 'Snapshot_Model_Database_Backup' ) ) {
 					// Do not try to execute empty SQL
 					if ( ! preg_match( '/^([\s]*;)*$/', trim( $tmp_sql ) ) ) {
 						$sql = $tmp_sql;
-						//echo "sql=[". $sql ."]<br />";
+						$wpdb->query( 'SET foreign_key_checks = 0' );
+
 						$ret_db = $wpdb->query( $sql ); // phpcs:ignore
-						//echo "ret_db<pre>"; print_r($ret_db); echo "</pre>";
+
+						if ( ( false === $ret_db ) && ( (bool) preg_match( '/^create table/i', $sql ) ) ) {
+							$last_error = $wpdb->last_error;
+							// Failed on create statement, this could be down to FK checks.
+							$has_source = ! empty ( $source_table_name ) ? $wpdb->get_var(
+								$wpdb->prepare( 'SHOW TABLES LIKE %s', $source_table_name )
+							) : false;
+							if ( ! empty( $has_source ) && ! empty ( $source_table_name ) && ( false === $subsite_migration )  ) {
+
+								if ( ! empty( $last_error ) && ( false !== strpos( $last_error, 'errno: 121' ) || strpos( false !== $last_error, 'Duplicate key on write or update' ) ) ) {
+									// It actually was down to FK checks, so we drop the original table.
+									$log[] = 'Table creation issue for the ' . $source_table_name . ' table - attempting to drop the original table first';
+
+									$wpdb->query(
+										esc_sql( "DROP TABLE  `{$source_table_name}`;" )
+									);
+									// Retry the query please.
+									$ret_db = $wpdb->query( $sql ); // phpcs:ignore
+									if ( false !== $ret_db ) {
+										$log[] = 'Table creation for the ' . $source_table_name . ' table succeeded after dropping the original table first';
+									}
+
+								}
+							}
+
+						}
+						$wpdb->query( 'SET foreign_key_checks = 1' );
 
 						$buffer = substr( $buffer, $i + strlen( $sql_delimiter ) );
 						// Reset parser:
@@ -496,6 +524,10 @@ if ( ! class_exists( 'Snapshot_Model_Database_Backup' ) ) {
 					}
 				}
 
+			}
+
+			if ( ! empty( $log ) ) {
+				return $log;
 			}
 
 		}

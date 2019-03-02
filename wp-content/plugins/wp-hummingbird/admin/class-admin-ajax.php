@@ -11,6 +11,12 @@ class WP_Hummingbird_Admin_AJAX {
 	 * WP_Hummingbird_Admin_AJAX constructor.
 	 */
 	public function __construct() {
+		// Parse clear cache click from frontend admin bar.
+		add_action( 'wp_ajax_wphb_front_clear_cache', array( $this, 'clear_frontend_cache' ) );
+
+		// Parse clear full cache from admin notice.
+		add_action( 'wp_ajax_wphb_global_clear_cache', array( $this, 'clear_global_cache' ) );
+
 		/**
 		 * DASHBOARD AJAX ACTIONS
 		 */
@@ -122,6 +128,56 @@ class WP_Hummingbird_Admin_AJAX {
 		 * LOGGER MODULE AJAX ACTIONS
 		 */
 		add_action( 'wp_ajax_wphb_logger_clear', array( $this, 'logger_clear' ) );
+
+		/**
+		 * HB SETTINGS MODULE AJAX ACTIONS
+		 */
+		add_action( 'wp_ajax_wphb_admin_settings_save_settings', array( $this, 'admin_settings_save_settings' ) );
+	}
+
+	/**
+	 * Handle clear cache button click from the frontend top admin bar.
+	 *
+	 * @since 1.9.3
+	 */
+	public function clear_frontend_cache() {
+		$pc_module = WP_Hummingbird_Utils::get_module( 'page_cache' );
+		$status    = $pc_module->clear_cache();
+
+		if ( ! $status ) {
+			wp_send_json_error();
+		}
+
+		wp_send_json_success();
+	}
+
+	/**
+	 * Handle clear cache button click from the frontend top admin bar.
+	 *
+	 * @since 1.9.3
+	 */
+	public function clear_global_cache() {
+		$modules = WP_Hummingbird_Utils::get_active_cache_modules();
+
+		foreach ( $modules as $module => $name ) {
+			/* @var WP_Hummingbird_Module|WP_Hummingbird_Module_Minify $mod */
+			$mod = WP_Hummingbird_Utils::get_module( $module );
+
+			if ( ! $mod->is_active() ) {
+				continue;
+			}
+
+			if ( 'minify' === $module ) {
+				$mod->clear_files();
+			} else {
+				$mod->clear_cache();
+			}
+		}
+
+		// Remove notice.
+		delete_option( 'wphb-notice-cache-cleaned-show' );
+
+		wp_send_json_success();
 	}
 
 	/**
@@ -176,8 +232,6 @@ class WP_Hummingbird_Admin_AJAX {
 		}
 
 		WP_Hummingbird_Utils::remove_quick_setup();
-
-		wp_send_json_success();
 	}
 
 	/**
@@ -1285,6 +1339,34 @@ class WP_Hummingbird_Admin_AJAX {
 			'success' => true,
 			'message' => __( 'Log file purged', 'wphb' ),
 		) );
+	}
+
+	/**
+	 * *************************
+	 * HUMMINGBIRD ADMIN SETTINGS AJAX ACTIONS
+	 ***************************/
+
+	/**
+	 * Save Admin settings.
+	 *
+	 * @since 1.9.3
+	 */
+	public function admin_settings_save_settings() {
+		check_ajax_referer( 'wphb-fetch', 'nonce' );
+
+		if ( ! current_user_can( WP_Hummingbird_Utils::get_admin_capability() ) || ! isset( $_POST['form_data'] ) ) { // Input var okay.
+			die();
+		}
+		parse_str( sanitize_text_field( wp_unslash( $_POST['form_data'] ) ), $data ); // Input var ok.
+
+		$settings = WP_Hummingbird_Settings::get_settings( 'settings' );
+
+		if ( isset( $data['color-accessible'] ) ) {
+			$settings['accessible_colors'] = (bool) $data['color-accessible'];
+		}
+		WP_Hummingbird_Settings::update_settings( $settings, 'settings' );
+
+		wp_send_json_success();
 	}
 
 }

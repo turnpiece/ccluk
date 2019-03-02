@@ -166,10 +166,12 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 						<?php esc_html_e( 'Clear Cache', 'wphb' ); ?>
 					</a>
 				<?php } ?>
-				<a href="<?php echo esc_url( WP_Hummingbird_Utils::get_documentation_url( $this->slug, $this->get_current_tab() ) ); ?>" target="_blank" class="sui-button sui-button-ghost">
-					<i class="sui-icon-academy" aria-hidden="true"></i>
-					<?php esc_html_e( 'View Documentation', 'wphb' ); ?>
-				</a>
+				<?php if ( ! WP_Hummingbird_Utils::hide_wpmudev_doc_link() ) : ?>
+					<a href="<?php echo esc_url( WP_Hummingbird_Utils::get_documentation_url( $this->slug, $this->get_current_tab() ) ); ?>" target="_blank" class="sui-button sui-button-ghost">
+						<i class="sui-icon-academy" aria-hidden="true"></i>
+						<?php esc_html_e( 'View Documentation', 'wphb' ); ?>
+					</a>
+				<?php endif; ?>
 			</div>
 		</div><!-- end header -->
 		<?php
@@ -860,11 +862,21 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 		$minify  = WP_Hummingbird_Utils::get_module( 'minify' );
 		$options = $minify->get_options();
 
+		$log = WP_Hummingbird::get_instance()->core->logger->get_file( 'minify' );
+		if ( ! file_exists( $log ) ) {
+			$log = false;
+		}
+
 		$args = array(
 			'enabled'          => $options['enabled'],
 			'log'              => $options['log'],
+			'logs_link'        => $log,
 			'use_cdn'          => $minify->get_cdn_status(),
 			'use_cdn_disabled' => ! WP_Hummingbird_Utils::is_member() || ! $options['enabled'],
+			'download_url'     => wp_nonce_url( add_query_arg( array(
+				'logs'   => 'download',
+				'module' => WP_Hummingbird_Utils::get_module( 'minify' )->get_slug(),
+			)), 'wphb-log-action' ),
 		);
 
 		$this->view( 'dashboard/minification/network-module-meta-box', $args );
@@ -1071,6 +1083,7 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 		global $wpsmushit_admin, $wpsmush_db;
 
 		$smush_data = array(
+			'bytes'   => 0,
 			'human'   => '',
 			'percent' => 0,
 		);
@@ -1078,9 +1091,16 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 		if ( ( $wpsmushit_admin instanceof WpSmushitAdmin ) && method_exists( $wpsmushit_admin, 'global_stats' ) ) {
 			/* @var WpSmushitAdmin $wpsmushit_admin */
 			$smush_data = $wpsmushit_admin->global_stats();
+		} elseif ( class_exists( 'WP_Smush_Core' ) ) {
+			$wpsmushit_admin = new WP_Smush_Core();
+			$smush_data      = $wpsmushit_admin->global_stats();
 		}
+
 		if ( ( $wpsmush_db instanceof WpSmushDB ) && method_exists( $wpsmush_db, 'get_unsmushed_attachments' ) ) {
 			/* @var WpSmushDB $wpsmush_db */
+			$unsmushed_images = count( $wpsmush_db->get_unsmushed_attachments() );
+		} elseif ( class_exists( 'WP_Smush_DB' ) ) {
+			$wpsmush_db       = new WP_Smush_DB();
 			$unsmushed_images = count( $wpsmush_db->get_unsmushed_attachments() );
 		}
 

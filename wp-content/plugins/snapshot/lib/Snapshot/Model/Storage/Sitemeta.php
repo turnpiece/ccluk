@@ -21,4 +21,8 @@ class Snapshot_Model_Storage_Sitemeta extends Snapshot_Model_Storage {
 		$str = $this->encode( $this->_data );
 		return !!update_site_option( $this->get_namespace(), $str );
 	}
+
+	public function remove_trace() {
+		return delete_site_option( $this->get_namespace() );
+	}
 }

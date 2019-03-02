@@ -34,7 +34,6 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 		// If backed up settings exist apply to the files that are still present.
 		if ( isset( $options['backed_up_settings'] ) && ! $minify_module->scanner->is_scanning() ) {
 			$minify_module->merge_backed_up_settings();
-
 		}
 
 		$redirect = false;
@@ -60,25 +59,6 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 		// Clear cache button clicked.
 		if ( isset( $_POST['clear-cache'] ) ) { // Input var okay.
 			WP_Hummingbird_Utils::get_module( 'minify' )->clear_cache( false );
-		}
-
-		// Clear cache button click from notice.
-		if ( isset( $_GET['clear-cache'] ) ) { // Input var okay.
-			// Remove notice.
-			delete_option( 'wphb-notice-cache-cleaned-show' );
-
-			// Clear page caching if set.
-			if ( isset( $_GET['clear-pc'] ) ) { // Input var okay.
-				WP_Hummingbird_Utils::get_module( 'page_cache' )->clear_cache();
-			}
-
-			$minify_module->clear_cache( false );
-
-			// Add clear cache notice.
-			if ( isset( $_GET['clear-cache'] ) ) { // Input var ok.
-				$redirect_url = add_query_arg( 'wphb-cache-cleared', 'true', $redirect_url );
-			}
-			$redirect = true;
 		}
 
 		// Reset to defaults button clicked on settings page.
@@ -149,7 +129,7 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 		}
 
 		// Clear cache show notice (from clear cache button and clear cache notice).
-		if ( isset( $_POST['clear-cache'] ) || isset( $_GET['wphb-cache-cleared'] ) ) { // Input var ok.
+		if ( isset( $_POST['clear-cache'] ) ) { // Input var ok.
 			$this->admin_notices->show(
 				'updated',
 				__( 'Your cache has been successfully cleared. Your assets will regenerate the next time someone visits your website.', 'wphb' ),

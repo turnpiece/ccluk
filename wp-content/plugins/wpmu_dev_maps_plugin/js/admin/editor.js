@@ -1,14 +1,15 @@
-/*! Google Maps Pro - v2.9.4
+/*! Google Maps Pro - v2.9.5
  * http://premium.wpmudev.org/project/wordpress-google-maps-plugin
- * Copyright (c) 2017; * Licensed GPLv2+ */
+ * Copyright (c) 2018; * Licensed GPLv2+ */
 /*global window:false */
+/*global console:false*/
+/*global wp:false*/
 /*global document:false */
 /*global wpmUi:false */
 /*global _agm:false */
 /*global _agmConfig:false */
 /*global l10nEditor:false */
 /*global navigator:false */
-
 
 jQuery(function() {
 
@@ -32,7 +33,7 @@ jQuery(function() {
 	 */
 	var _mbuttons = jQuery( '#wp-content-media-buttons' );
 
-	if ( ! _mbuttons.length ) {
+	if ( ! _mbuttons.length && ! (wp || {}).element ) {
 		return;
 	}
 
@@ -282,6 +283,11 @@ jQuery(function() {
 
 		var text;
 
+		if ( ( wp || {} ).blocks ) {
+			jQuery(document).trigger( 'agm-map-inserted', mapMarker );
+			return false;
+		}
+
 		if ( window.tinyMCE && ! jQuery( '#content' ).is( ':visible' ) ) {
 			text = window.tinyMCE.activeEditor.selection.getContent();
 			window.tinyMCE.execCommand( 'mceInsertContent', true, mapMarker );
@@ -300,7 +306,8 @@ jQuery(function() {
 			text = '';
 
 		if ( window.tinyMCE && ! jQuery( '#content' ).is( ':visible' ) ) {
-			text = window.tinyMCE.activeEditor.selection.getContent();
+			var selection = ( window.tinyMCE.activeEditor || {} ).selection;
+			text = selection && selection.getContent() ? selection.getContent() : '';
 		} else {
 			field = jQuery( '#content' ).get(0);
 

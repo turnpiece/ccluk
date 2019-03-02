@@ -131,6 +131,7 @@ class WP_Hummingbird_Pro {
 			'reporting-cron' => __( 'Cron', 'wphb' ),
 			'reporting'      => __( 'Reporting', 'wphb' ),
 			'cleanup-cron'   => __( 'Database Cleanup', 'wphb' ),
+			'uptime-reports' => __( 'Reports', 'wphb' ),
 		) );
 
 		array_walk( $modules, array( $this, 'load_module' ) );
@@ -152,6 +153,8 @@ class WP_Hummingbird_Pro {
 			$class_name = 'WP_Hummingbird_Module_Reporting_Cron';
 		} elseif ( 'cleanup-cron' === $module ) {
 			$class_name = 'WP_Hummingbird_Module_Cleanup_Cron';
+		} elseif ( 'uptime-reports' === $module ) {
+			$class_name = 'WP_Hummingbird_Module_Uptime_Reports';
 		}
 
 		// Default modules files.

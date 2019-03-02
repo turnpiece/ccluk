@@ -23,20 +23,23 @@ class WD_Main_Activator {
 			$this->maybeUpgrade15();
 		}
 
-		if ( version_compare( $db_ver, '1.7', '<' ) ) {
+		if ( $db_ver != false && version_compare( $db_ver, '1.7', '<' ) ) {
 			if ( ! \WP_Defender\Module\IP_Lockout\Component\Login_Protection_Api::checkIfTableExists() ) {
 				add_site_option( 'defenderLockoutNeedUpdateLog', 1 );
 				\WP_Defender\Module\IP_Lockout\Component\Login_Protection_Api::createTables();
 				update_site_option( 'wd_db_version', "1.7" );
 			}
+		} elseif ( ! \WP_Defender\Module\IP_Lockout\Component\Login_Protection_Api::checkIfTableExists() ) {
+			\WP_Defender\Module\IP_Lockout\Component\Login_Protection_Api::createTables();
+			update_site_option( 'wd_db_version', "1.7" );
 		}
 
-		if ( version_compare( $db_ver, '1.7.1', '<' ) ) {
+		if ( $db_ver != false && version_compare( $db_ver, '1.7.1', '<' ) ) {
 			\WP_Defender\Module\IP_Lockout\Component\Login_Protection_Api::alterTableFor171();
 			update_site_option( 'wd_db_version', "1.7.1" );
 		}
 
-		if ( version_compare( $db_ver, '2.0', '<' ) ) {
+		if ( $db_ver != false && version_compare( $db_ver, '2.0', '<' ) ) {
 			$activeScan = \WP_Defender\Module\Scan\Component\Scan_Api::getActiveScan();
 			if ( is_object( $activeScan ) ) {
 				//remove the current scan and start a new one
@@ -51,7 +54,6 @@ class WD_Main_Activator {
 			&$this,
 			'addSettingsLink'
 		) );
-		add_action( 'admin_enqueue_scripts', array( &$this, 'register_styles' ) );
 		if ( ! \WP_Defender\Behavior\Utils::instance()->checkRequirement() ) {
 		} else {
 			if ( \WP_Defender\Behavior\Utils::instance()->getAPIKey() == false ) {
@@ -125,31 +127,6 @@ class WD_Main_Activator {
 		) );
 
 		return $mylinks;
-	}
-
-	/**
-	 * Register globally css, js will be load on each module
-	 */
-	public function register_styles() {
-		wp_enqueue_style( 'defender-menu', wp_defender()->getPluginUrl() . 'assets/css/defender-icon.css' );
-
-		$css_files = array(
-			'defender' => wp_defender()->getPluginUrl() . 'assets/css/styles.css'
-		);
-
-		foreach ( $css_files as $slug => $file ) {
-			wp_register_style( $slug, $file, array(), wp_defender()->version );
-		}
-
-		$js_files = array(
-			'defender' => wp_defender()->getPluginUrl() . 'assets/js/scripts.js'
-		);
-
-		foreach ( $js_files as $slug => $file ) {
-			wp_register_script( $slug, $file, array(), wp_defender()->version );
-		}
-
-		do_action( 'defender_enqueue_assets' );
 	}
 
 	private function maybeUpgrade() {

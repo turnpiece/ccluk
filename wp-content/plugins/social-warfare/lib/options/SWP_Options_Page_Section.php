@@ -14,7 +14,7 @@
  * @since 3.0.0 | 01 MAR 2018 | Created
  *
  */
-class SWP_Options_Page_Section extends SWP_Abstract {
+class SWP_Options_Page_Section extends SWP_Option_Abstract {
 
 
     /**
@@ -174,7 +174,9 @@ class SWP_Options_Page_Section extends SWP_Abstract {
         $html .= '>';
 
             $html .= '<h2>';
-                $html .= '<a target="_blank" class="swp_support_link" href="'. $this->link .'" title="Click here to learn more about these options.">i</a>';
+			if( !empty( $this->link ) ) {
+            	$html .= '<a target="_blank" class="swp_support_link" href="'. $this->link .'" title="Click here to learn more about these options.">i</a>';
+			}
             $html .= $this->name . '</h2>';
 
         $html .= '</div>';

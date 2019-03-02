@@ -10,6 +10,12 @@ $percentage = $storage_status['used'] ? round( ( $storage_status['used'] / $stor
 if ( $percentage > 100 )
 	$percentage = 100;
 
+if ( version_compare(PHP_VERSION, '5.5.0', '<') ) {
+	$aws_sdk_compatible = false;
+} else {
+	$aws_sdk_compatible = true;
+}
+
 $data = array(
 	'snapshots' => $backups,
 	'results_count' => $results_count,
@@ -17,6 +23,7 @@ $data = array(
 	'max_pages' => $max_pages,
 	'paged' => $paged,
 	'offset' => $offset,
+	'aws_sdk_compatible' => $aws_sdk_compatible,
 );
 
 $disabled = $model->has_api_error() ? 'disabled="disabled"' : '';
@@ -141,7 +148,7 @@ $model = new Snapshot_Model_Full_Backup();
                                         </span>
 								<?php } ?>
 
-								<a id="wps-managed-backups-configure" class="button button-outline button-small button-gray">
+								<a id="wps-managed-backups-configure" class="button button-outline button-small button-gray <?php echo ( ! $aws_sdk_compatible ) ? 'disabled': ''; ?>">
 									<?php
                                     echo $model->get_config( 'disable_cron', false ) ?
 										esc_html__( 'Enable', SNAPSHOT_I18N_DOMAIN ) :
@@ -211,13 +218,19 @@ $model = new Snapshot_Model_Full_Backup();
 
 							<a href="#view-log-file" class="button button-small button-outline button-gray"><?php esc_html_e( 'Show Log', SNAPSHOT_I18N_DOMAIN ); ?></a>
 
-							<a href="<?php echo esc_url( WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url( 'snapshots-newui-managed-backups' ) ); ?>&snapshot-action=backup&snapshot-full_backups-noonce-field=<?php echo esc_attr( wp_create_nonce  ( 'snapshot-full_backups' ) ); ?>" class="button button-small button-blue"><?php esc_html_e( 'New Backup', SNAPSHOT_I18N_DOMAIN ); ?></a>
+							<a href="<?php echo esc_url( WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url( 'snapshots-newui-managed-backups' ) ); ?>&snapshot-action=backup&snapshot-full_backups-noonce-field=<?php echo esc_attr( wp_create_nonce  ( 'snapshot-full_backups' ) ); ?>" class="button button-small button-blue <?php echo ( ! $aws_sdk_compatible ) ? 'disabled': ''; ?>"><?php esc_html_e( 'New Backup', SNAPSHOT_I18N_DOMAIN ); ?></a>
 
 						<?php } ?>
 
 					</div>
-
-					<div class="wpmud-box-content">
+					<?php
+						if ( ( ! $aws_sdk_compatible ) && ( 0 === $results_count ) ) {
+							$wpmud_box_content_class = ' wps-aws-sdk-incompatible';
+						} else {
+							$wpmud_box_content_class = '';
+						}
+					?>
+					<div class="wpmud-box-content<?php echo esc_attr( $wpmud_box_content_class ); ?>">
 
 						<?php if ( 0 === $results_count ) { ?>
 
@@ -227,7 +240,7 @@ $model = new Snapshot_Model_Full_Backup();
 									<p><?php echo wp_kses_post( sprintf( __( "%s, you've enabled Managed Backups but haven't created your first backup yet. Do it now!", SNAPSHOT_I18N_DOMAIN ), wp_get_current_user()->display_name ) ); ?></p>
 									<p>
 										<a href="<?php echo esc_url( WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url( 'snapshots-newui-managed-backups' ) ); ?>&amp;snapshot-action=backup&amp;snapshot-full_backups-noonce-field=<?php echo esc_attr( wp_create_nonce  ( 'snapshot-full_backups' ) ); ?>"
-										   class="button button-blue"><?php esc_html_e( 'Run Backup', SNAPSHOT_I18N_DOMAIN ); ?></a>
+										   class="button button-blue <?php echo ( ! $aws_sdk_compatible ) ? 'disabled': ''; ?>"><?php esc_html_e( 'Run Backup', SNAPSHOT_I18N_DOMAIN ); ?></a>
 									</p>
 								</div>
 							</div>
@@ -268,23 +281,28 @@ $model = new Snapshot_Model_Full_Backup();
 														$data_item = empty( $backup['data'] ) ? array() : Snapshot_Helper_Utility::latest_data_item( $backup['data'] );
 
 														/* Fetch the remote link for the backup */
-														$backup_link = $model->remote()->get_backup_link( $backup['timestamp'] );
+														if ( $aws_sdk_compatible ) {
+															$backup_link = $model->remote()->get_backup_link( $backup['timestamp'] );
 
-														/* If there is no remote URL, build a local download link */
-														if ( ! $backup_link ) {
-															$backup_link = WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url( 'snapshots-newui-managed-backups' );
-															$backup_link = add_query_arg( 'snapshot-action', 'download-backup-archive', $backup_link );
-															$backup_link = add_query_arg( 'backup-item', sanitize_text_field( $backup['timestamp'] ), $backup_link );
+															/* If there is no remote URL, build a local download link */
+															if ( ! $backup_link ) {
+																$backup_link = WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url( 'snapshots-newui-managed-backups' );
+																$backup_link = add_query_arg( 'snapshot-action', 'download-backup-archive', $backup_link );
+																$backup_link = add_query_arg( 'backup-item', sanitize_text_field( $backup['timestamp'] ), $backup_link );
+															}
 														}
 
+														$backup_type_tooltip = '';
 														if ( Snapshot_Helper_Backup::is_automated_backup( $backup['name'] ) ) {
-															$backup_type_class = 'automated';
+															$backup_type_class = 'wps-typecon automated';
 														} else {
-															if ( ! empty( $backup['local'] ) ) {
-																$backup_type_class = 'local';
-															} else {
-																$backup_type_class = 'cloud';
-															}
+															$backup_type_class = 'i-cloud-upload';
+														}
+
+														if ( ! empty( $backup['local'] ) ) {
+															$backup_type_class .= ' upload-error';
+															$backup_type_tooltip = esc_html__( "This backup failed to upload to the Hub and is only being stored locally. We recommend you retry uploading this backup from the options menu to the right so that it's available in the event you need to restore your website.", SNAPSHOT_I18N_DOMAIN );
+
 														}
 
 														?>
@@ -295,12 +313,27 @@ $model = new Snapshot_Model_Full_Backup();
 																	<tbody>
 																	<tr>
 																		<td class="msc-name-type">
-																			<span class="wps-typecon <?php echo esc_attr( $backup_type_class ); ?>"></span>
+																			<div class="sui-component-snapshot">
+																				<div class="<?php echo $backup_type_tooltip ? 'sui-tooltip sui-tooltip-constrained sui-tooltip-top-right' : ''; ?>"
+																				     data-tooltip="<?php echo esc_attr( $backup_type_tooltip ); ?>">
+																					<i class="wps-icon <?php echo esc_attr( $backup_type_class ); ?>"></i>
+																				</div>
+																			</div>
 																		</td>
 
 																		<td class="msc-name-desc">
 																			<p>
-																				<a href="<?php echo esc_url( $backup_link ); ?>"><?php echo esc_html( stripslashes( $backup['name'] ) ); ?></a>
+																				<?php
+																				if ( $aws_sdk_compatible ) {
+																					?>
+																					<a href="<?php echo esc_url( $backup_link ); ?>"><?php echo esc_html( stripslashes( $backup['name'] ) ); ?></a>
+																					<?php
+																				} else {
+																					?>
+																					<a href="#" class="disabled"><?php echo esc_html( stripslashes( $backup['name'] ) ); ?></a>
+																					<?php
+																				}
+																				?>
 																			</p>
 																		</td>
 																	</tr>
@@ -348,6 +381,21 @@ $model = new Snapshot_Model_Full_Backup();
 
 																			<li class="wps-menu-list-title"><?php esc_html_e( 'Options', SNAPSHOT_I18N_DOMAIN ); ?></li>
 																			<?php
+																			$upload_link = add_query_arg(
+																				array(
+																					'snapshot-action'                    => 'upload',
+																					'item'                               => $backup['timestamp'],
+																					'snapshot-full_backups-noonce-field' => wp_create_nonce( 'snapshot-full_backups' ),
+																				),
+																				WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url( 'snapshots-newui-managed-backups' )
+																			);
+																			?>
+																			<?php if ( ! empty( $backup['local'] ) ): ?>
+																				<li>
+																					<a href="<?php echo esc_url( $upload_link ); ?>"><?php esc_html_e( 'Retry Uploading', SNAPSHOT_I18N_DOMAIN ); ?></a>
+																				</li>
+																			<?php endif; ?>
+																			<?php
 																					$restore_link = add_query_arg(
 																							array(
 																								'snapshot-action' => 'restore',
@@ -374,7 +422,7 @@ $model = new Snapshot_Model_Full_Backup();
 
 																			?>
 																			<li>
-																				<a href="<?php echo esc_url( $delete_link ); ?>"><?php esc_html_e( 'Delete', SNAPSHOT_I18N_DOMAIN ); ?></a>
+																				<a href="<?php echo esc_url( $delete_link ); ?>" <?php echo ( ( ! $aws_sdk_compatible ) ) ? 'class="disabled"': ''; ?> ><?php esc_html_e( 'Delete', SNAPSHOT_I18N_DOMAIN ); ?></a>
 																			</li>
 
 																		</ul>
@@ -453,7 +501,7 @@ $model = new Snapshot_Model_Full_Backup();
 											<div class="wps-managed-backups-toggle">
 
 												<div class="toggle">
-													<input type="checkbox" id="wps-managed-backups-onoff" class="toggle-checkbox"
+													<input type="checkbox" id="wps-managed-backups-onoff" class="toggle-checkbox" <?php echo ( ! $aws_sdk_compatible ) ? 'disabled': ''; ?>
                                                     <?php
                                                     if ( false === $cron_disabled ) {
 														echo ' checked';
@@ -554,6 +602,74 @@ $model = new Snapshot_Model_Full_Backup();
 
 											<label><?php esc_html_e( 'backups before removing older archives.', SNAPSHOT_I18N_DOMAIN ); ?></label>
 
+										</div>
+
+									</div>
+
+									<div id="wps-backups-files-exclude" class="row-inner">
+
+										<div class="col-left">
+
+											<label><?php esc_html_e( 'File Exclusion', SNAPSHOT_I18N_DOMAIN ); ?></label>
+
+											<p>
+												<small><?php echo wp_kses_post( sprintf( __( 'By default, Snapshot will exclude the Global File Exclusions mentioned on the <strong><a href="%s">Settings</a></strong> page. However, you can choose to define different file exclusions for your managed backups.', SNAPSHOT_I18N_DOMAIN ), esc_url( WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url( 'snapshots-newui-settings' ) ) ) ); ?></small>
+											</p>
+
+										</div>
+
+										<div class="col-right">
+
+											<div class="wps-input--group">
+
+												<div class="wps-input--item">
+
+													<div class="wps-input--radio">
+
+														<input type="radio" name="managed-backup-exclusions" id="managed-backup-exclusions-global" value="global"
+														<?php
+														if ( ! isset( WPMUDEVSnapshot::instance()->config_data['config']['managedBackupExclusions'] ) || "global" === WPMUDEVSnapshot::instance()->config_data['config']['managedBackupExclusions'] ) {
+															echo ' checked="checked" ';
+														}
+														?>
+														>
+
+														<label for="managed-backup-exclusions-global"></label>
+
+													</div>
+
+													<label for="managed-backup-exclusions-global"><?php esc_html_e( 'Apply Global File Exclusions rules', SNAPSHOT_I18N_DOMAIN ); ?></label>
+
+												</div>
+
+												<div class="wps-input--item">
+
+													<div class="wps-input--radio">
+
+														<input type="radio" name="managed-backup-exclusions" id="managed-backup-exclusions-managed" value="managed"
+														<?php
+														if ( isset( WPMUDEVSnapshot::instance()->config_data['config']['managedBackupExclusions'] ) && "managed" === WPMUDEVSnapshot::instance()->config_data['config']['managedBackupExclusions'] ) {
+															echo ' checked="checked" ';
+														}
+														?>
+														>
+
+														<label for="managed-backup-exclusions-managed"></label>
+
+													</div>
+
+													<label for="managed-backup-exclusions-managed"><?php esc_html_e( 'Define different file exclusions for managed backups', SNAPSHOT_I18N_DOMAIN ); ?></label>
+
+												</div>
+
+											</div>
+											<div id="managed-backup-exclusions-config" class="wpmud-box-gray">
+												<textarea name="managed-backup-files-ignore" id="managed-backup-files-ignore" cols="20" rows="5" placeholder="Enter file urls to be excluded, one per line."><?php if ( ( isset( WPMUDEVSnapshot::instance()->config_data['config']['filesManagedIgnore'] ) ) && ( is_array( WPMUDEVSnapshot::instance()->config_data['config']['filesManagedIgnore'] ) ) && ( count( WPMUDEVSnapshot::instance()->config_data['config']['filesManagedIgnore'] ) ) ) echo wp_kses_post( implode( "\n", WPMUDEVSnapshot::instance()->config_data['config']['filesManagedIgnore'] ) ); ?></textarea>
+
+												<p>
+													<small><?php echo wp_kses_post( __('The exclude feature uses pattern matching so you can easily select files to exclude from your <strong>managed backups</strong>. Example: to exclude the Twenty Ten theme, you can use twentyten, themes/twentyten or public/wp-content/themes/twentyten. <strong>The local folder or any unreadable files are excluded from Snapshot backups by default.</strong>', SNAPSHOT_I18N_DOMAIN) ); ?></small>
+												</p>
+											</div>
 										</div>
 
 									</div>

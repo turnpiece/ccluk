@@ -1,15 +1,32 @@
-# Translation of Plugins - Cookie Consent - Stable (latest release) in French (France)
-# This file is distributed under the same license as the Plugins - Cookie Consent - Stable (latest release) package.
+# Translation of Plugins - GDPR Cookie Consent Banner - Development (trunk) in French (France)
+# This file is distributed under the same license as the Plugins - GDPR Cookie Consent Banner - Development (trunk) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-06-12 20:00:12+0000\n"
+"PO-Revision-Date: 2018-12-23 14:26:31+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: fr\n"
-"Project-Id-Version: Plugins - Cookie Consent - Stable (latest release)\n"
+"Project-Id-Version: Plugins - GDPR Cookie Consent Banner - Development (trunk)\n"
+
+#: admin/class-ctcc-admin.php:729 admin/class-ctcc-admin.php:734
+#: admin/class-ctcc-admin.php:739 admin/class-ctcc-admin.php:744
+msgid "Need a privacy policy? Create one for free with Termly!"
+msgstr "Besoin d’une politique de confidentialité ? Créez-en une gratuitement avec Termly !"
+
+#. Author of the plugin
+msgid "termly"
+msgstr "termly"
+
+#. Author URI of the plugin
+msgid "https://termly.io/"
+msgstr "https://termly.io/"
+
+#. Plugin URI of the plugin
+msgid "https://termly.io/products/"
+msgstr "https://termly.io/products/"
 
 #: uk-cookie-consent.php:95
 msgid "No Thanks"
@@ -20,8 +37,8 @@ msgid "Find Out More"
 msgstr "En savoir plus"
 
 #: uk-cookie-consent.php:91
-msgid "Do you need help with making your site compliant with GDPR? Iubenda provide attorney-level solutions to help with your legal requirements, including generating privacy and cookie policies that are automatically updated if the law changes."
-msgstr "Vous avez besoin d’aide dans la mise en conformité de votre site avec la RGPD ? Iubenda propose des solutions juridiques pour vous aider dans vos obligations légales, ce qui inclut la création de politiques de confidentialité et de gestion des cookies, mises à jour automatiquement en cas de changement réglementaire."
+msgid "Do you need help with making your site compliant with the GDPR? Termly provides attorney-level solutions to help with your legal requirements, including generating privacy and cookie policies that are automatically updated when laws and regulations change."
+msgstr "Vous avez besoin d’aide dans la mise en conformité de votre site avec la RGPD ? Termly propose des solutions juridiques pour vous aider dans vos obligations légales, ce qui inclut la création de politiques de confidentialité et de gestion des cookies, mises à jour automatiquement en cas de changement réglementaire."
 
 #: uk-cookie-consent.php:90
 msgid "Cookie Consent and GDPR"
@@ -34,11 +51,6 @@ msgstr "Si vous avez préalablement autorisé cette extension à suivre des donn
 #: admin/class-ctcc-admin.php:148
 msgid "Opt out of tracking"
 msgstr "Désactiver le suivi"
-
-#: admin/class-ctcc-admin.php:729 admin/class-ctcc-admin.php:734
-#: admin/class-ctcc-admin.php:739 admin/class-ctcc-admin.php:744
-msgid "Create your own privacy policy here"
-msgstr "Créez votre propre politique de confidentialité ici"
 
 #: admin/class-ctcc-admin.php:514
 msgid "If you have the <a href=\"https://wordpress.org/plugins/geoip-detect/\" target=\"_blank\">GeoIP Detect</a> plugin activated, you can specify which areas of the world to exclude from displaying the notification."
@@ -116,7 +128,7 @@ msgstr "Désélectionner pour garder les styles de bouton du thème."
 msgid "Remove the border from the button"
 msgstr "Retirer les bordures du bouton."
 
-#: admin/class-ctcc-admin.php:374 public/customizer.php:234
+#: public/customizer.php:234 admin/class-ctcc-admin.php:374
 msgid "Flat Button"
 msgstr "Bouton plat"
 
@@ -124,33 +136,17 @@ msgstr "Bouton plat"
 msgid "Deselect to float button to right."
 msgstr "Désélectionner pour positionner le bouton à droite."
 
+#: public/customizer.php:122 admin/class-ctcc-admin.php:310
+msgid "Display Button With Text"
+msgstr "Afficher le bouton avec du texte"
+
 #: admin/class-ctcc-admin.php:667
 msgid "Display the confirmation button with notification text"
 msgstr "Afficher le bouton de confirmation avec le texte de notification."
 
-#: admin/class-ctcc-admin.php:310 public/customizer.php:122
-msgid "Display Button With Text"
-msgstr "Afficher le bouton avec du texte"
-
 #: admin/class-ctcc-admin.php:785
 msgid "Reset plugin defaults"
 msgstr "Réinitialiser les réglages de l'extension"
-
-#. Author URI of the plugin/theme
-msgid "https://catapultthemes.com/"
-msgstr "https://catapultthemes.com/"
-
-#. Author of the plugin/theme
-msgid "Catapult_Themes"
-msgstr "Catapult_Themes"
-
-#. Description of the plugin/theme
-msgid "The only cookie consent plugin you'll ever need."
-msgstr "L'unique extension d'acceptation des cookies dont vous avez besoin."
-
-#. Plugin URI of the plugin/theme
-msgid "https://catapultthemes.com/cookie-consent/"
-msgstr "https://catapultthemes.com/cookie-consent/"
 
 #: public/customizer.php:219
 msgid "Background color for your notification bar button."
@@ -264,27 +260,27 @@ msgstr "Vous pouvez ajouter une classe CSS facultative au conteneur, afin d’al
 msgid "Where the notification should appear"
 msgstr "Emplacement de la notification"
 
-#: admin/class-ctcc-admin.php:630 public/customizer.php:41
+#: public/customizer.php:41 admin/class-ctcc-admin.php:630
 msgid "Bottom Right Block"
 msgstr "Bloc en bas à droite"
 
-#: admin/class-ctcc-admin.php:629 public/customizer.php:40
+#: public/customizer.php:40 admin/class-ctcc-admin.php:629
 msgid "Bottom Left Block"
 msgstr "Bloc en bas à gauche"
 
-#: admin/class-ctcc-admin.php:628 public/customizer.php:39
+#: public/customizer.php:39 admin/class-ctcc-admin.php:628
 msgid "Top Right Block"
 msgstr "Bloc en haut à droite"
 
-#: admin/class-ctcc-admin.php:627 public/customizer.php:38
+#: public/customizer.php:38 admin/class-ctcc-admin.php:627
 msgid "Top Left Block"
 msgstr "Bloc en haut à gauche"
 
-#: admin/class-ctcc-admin.php:626 public/customizer.php:37
+#: public/customizer.php:37 admin/class-ctcc-admin.php:626
 msgid "Bottom Bar"
 msgstr "Bandeau inférieur"
 
-#: admin/class-ctcc-admin.php:625 public/customizer.php:36
+#: public/customizer.php:36 admin/class-ctcc-admin.php:625
 msgid "Top Bar"
 msgstr "Bandeau supérieur"
 
@@ -322,7 +318,7 @@ msgstr "Le texte par défaut pour indiquer que votre site utilise des cookies"
 
 #: admin/class-ctcc-admin.php:560
 msgid "The heading text - only applies if you are not using a top or bottom bar"
-msgstr "Le texte d'en-tête - ne remplir que si vous utilisez le bandeau inférieur ou supérieur"
+msgstr "Le texte d’en-tête - s’applique uniquement si vous n’utilisez pas le bandeau inférieur ou supérieur"
 
 #: admin/class-ctcc-admin.php:542
 msgid "A version number for the cookie - update this to invalidate the cookie and force all users to view the notification again"
@@ -356,24 +352,24 @@ msgstr "Au clic"
 msgid "Cookies"
 msgstr "Cookies"
 
-#: admin/class-ctcc-admin.php:358 public/customizer.php:218
+#: public/customizer.php:218 admin/class-ctcc-admin.php:358
 msgid "Button Background"
 msgstr "Arrière-plan du bouton"
 
-#: admin/class-ctcc-admin.php:334 admin/class-ctcc-admin.php:366
-#: public/customizer.php:170
+#: public/customizer.php:170 admin/class-ctcc-admin.php:334
+#: admin/class-ctcc-admin.php:366
 msgid "Background Color"
 msgstr "Couleur de l'arrière-plan"
 
-#: admin/class-ctcc-admin.php:318 public/customizer.php:138
+#: public/customizer.php:138 admin/class-ctcc-admin.php:318
 msgid "Use X Close"
 msgstr "Fermer avec X"
 
-#: admin/class-ctcc-admin.php:302 public/customizer.php:106
+#: public/customizer.php:106 admin/class-ctcc-admin.php:302
 msgid "Drop Shadow"
 msgstr "Ombre portée"
 
-#: admin/class-ctcc-admin.php:294 public/customizer.php:90
+#: public/customizer.php:90 admin/class-ctcc-admin.php:294
 msgid "Rounded Corners"
 msgstr "Coins arrondis"
 
@@ -381,11 +377,11 @@ msgstr "Coins arrondis"
 msgid "Include Stylesheet"
 msgstr "Inclure la feuille de style"
 
-#: admin/class-ctcc-admin.php:278 public/customizer.php:58
+#: public/customizer.php:58 admin/class-ctcc-admin.php:278
 msgid "Container Class"
 msgstr "Classe CSS conteneur"
 
-#: admin/class-ctcc-admin.php:270 public/customizer.php:34
+#: public/customizer.php:34 admin/class-ctcc-admin.php:270
 msgid "Position"
 msgstr "Position"
 
@@ -449,15 +445,15 @@ msgstr "Ce site utilise des cookies :"
 msgid "Notification Duration"
 msgstr "Durée de la notification"
 
-#: admin/class-ctcc-admin.php:350 public/customizer.php:202
+#: public/customizer.php:202 admin/class-ctcc-admin.php:350
 msgid "Button Color"
 msgstr "Couleur du bouton"
 
-#: admin/class-ctcc-admin.php:342 public/customizer.php:186
+#: public/customizer.php:186 admin/class-ctcc-admin.php:342
 msgid "Link Color"
 msgstr "Couleur du lien"
 
-#: admin/class-ctcc-admin.php:326 public/customizer.php:154
+#: public/customizer.php:154 admin/class-ctcc-admin.php:326
 msgid "Text Color"
 msgstr "Couleur du texte"
 
@@ -481,9 +477,7 @@ msgstr "Ce site utilise des cookies - de petits fichiers texte qui sont placés 
 msgid "Cookie Policy"
 msgstr "Politique de cookie"
 
-#. #-#-#-#-#  uk-cookie-consent-code.pot (Cookie Consent 2.3.11)  #-#-#-#-#
-#. Plugin Name of the plugin/theme
+#: public/customizer.php:17 admin/class-ctcc-metafield.php:35
 #: admin/class-ctcc-admin.php:68 admin/class-ctcc-admin.php:759
-#: admin/class-ctcc-metafield.php:35 public/customizer.php:17
 msgid "Cookie Consent"
 msgstr "Cookie Consent"

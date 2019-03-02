@@ -29,10 +29,12 @@
 					<span class="sui-progress-state-text"><?php esc_html_e( 'Performance test in progress...', 'wphb' ); ?></span>
 				</div>
 			</div>
-			<img class="wphb-image wphb-image-center wphb-modal-image-bottom"
-				 src="<?php echo WPHB_DIR_URL . 'admin/assets/image/hummingbird-modal-quicksetup.png'; ?>"
-				 srcset="<?php echo WPHB_DIR_URL . 'admin/assets/image/hummingbird-modal-quicksetup@2x.png'; ?> 2x"
-				 alt="<?php esc_attr_e( 'Reduce your page load time!', 'wphb' ); ?>">
+			<?php if ( ! WP_Hummingbird_Utils::hide_wpmudev_branding() ) : ?>
+				<img class="wphb-image wphb-image-center wphb-modal-image-bottom"
+				     src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hummingbird-modal-quicksetup.png' ); ?>"
+				     srcset="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hummingbird-modal-quicksetup@2x.png' ); ?> 2x"
+				     alt="<?php esc_attr_e( 'Reduce your page load time!', 'wphb' ); ?>">
+			<?php endif; ?>
 		</div>
 
 	</div>

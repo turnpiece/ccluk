@@ -52,6 +52,13 @@ class Core_Result extends Behavior {
 	 * @return string
 	 */
 	public function getIssueDetail() {
+		return $this->getIssueSummary();
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getIssueSummary() {
 		$raw = $this->getRaw();
 		if ( $raw['type'] == 'unknown' ) {
 			return esc_html__( "Unknown file in WordPress core", wp_defender()->domain );
@@ -112,8 +119,126 @@ class Core_Result extends Behavior {
 	}
 
 	/**
+	 * Render current issue content
+	 * @return false|string
+	 */
+	public function renderIssueContent() {
+		$raw    = $this->getRaw();
+		$string = $raw['type'] == 'unknown' ? __( "Defender found this stray file in your WordPress site directory. The current version of WordPress doesn't require it and as far as we can tell it's harmless (maybe even from an older WordPress install), so you can delete it or ignore it. Before deleting any files, be sure to back up your website." ) :
+			( $raw['type'] == 'modified' ? __( "Compare your file with the original file in the WordPress repository. Pieces highlighted in red will be removed when you patch the file, and pieces highlighted in green will be added.", wp_defender()->domain ) :
+				__( "We found this folder in your WordPress file list. Your current version of WordPress doesn’t use this folder so it might belong to another application. If you don’t recognize it, you can delete this folder (don’t forget to back up your website first!) or get in touch with the WPMU DEV support team for more information", wp_defender()->domain ) );
+		ob_start();
+		?>
+        <div class="sui-box issue-content">
+            <div class="sui-box-body">
+                <strong><?php _e( "Issue Details", wp_defender()->domain ) ?></strong>
+                <div>
+					<?php echo $string ?>
+                </div>
+				<?php echo $this->getSrcCode() ?>
+                <table class="sui-table">
+                    <tbody>
+                    <tr>
+                        <td>
+                            <i class="sui-icon-folder-open"
+                               aria-hidden="true"></i><strong><?php _e( "Location", wp_defender()->domain ) ?></strong>
+                        </td>
+                        <td>
+							<?php echo $this->getSubtitle() ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="sui-icon-download-cloud" aria-hidden="true"></i>
+                            <strong>
+								<?php _e( "Size", wp_defender()->domain ) ?>
+                            </strong>
+                        </td>
+                        <td>
+							<?php
+							$bytes = filesize( $this->getSubtitle() );
+							if ( $bytes ) {
+								echo $this->getOwner()->makeReadable( $bytes );
+							} else {
+								echo 'N/A';
+							}
+							?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="sui-icon-calendar" aria-hidden="true"></i>
+                            <strong>
+								<?php _e( "Date added", wp_defender()->domain ) ?>
+                            </strong>
+                        </td>
+                        <td>
+							<?php
+							$filemtime = filemtime( $this->getSubtitle() );
+							if ( $filemtime ) {
+								echo $this->getOwner()->formatDateTime( $filemtime );
+							} else {
+								echo 'N/A';
+							}
+							?>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="sui-box-footer">
+                <div class="sui-actions-left">
+                    <form method="post" class="float-l ignore-item scan-frm">
+                        <input type="hidden" name="action" value="ignoreItem">
+						<?php wp_nonce_field( 'ignoreItem' ) ?>
+                        <input type="hidden" name="id" value="<?php echo $this->getOwner()->id ?>"/>
+                        <button type="submit" class="sui-button sui-button-ghost">
+                            <i class="sui-icon-eye-hide" aria-hidden="true"></i>
+							<?php _e( "Ignore", wp_defender()->domain ) ?></button>
+                    </form>
+                </div>
+                <div class="sui-actions-right">
+					<?php if ( $raw['type'] == 'unknown' || $raw['type'] == 'dir' ): ?>
+                        <form method="post" class="scan-frm delete-item float-r">
+                            <input type="hidden" name="action" value="deleteItem"/>
+                            <input type="hidden" name="id" value="<?php echo $this->getOwner()->id ?>"/>
+							<?php wp_nonce_field( 'deleteItem' ) ?>
+                            <button type="button" class="sui-button sui-button-red delete-mitem">
+                                <i class="sui-icon-trash" aria-hidden="true"></i>
+								<?php _e( "Delete", wp_defender()->domain ) ?></button>
+                            <div class="confirm-box wd-hide">
+                                <span><?php _e( "This will permanently remove the selected file/folder. Are you sure you want to continue?", wp_defender()->domain ) ?></span>
+                                <div>
+                                    <button type="submit" class="sui-button sui-button-red">
+										<?php _e( "Yes", wp_defender()->domain ) ?>
+                                    </button>
+                                    <button type="button" class="sui-button sui-button-ghost">
+										<?php _e( "No", wp_defender()->domain ) ?>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+					<?php elseif ( $raw['type'] == 'modified' ): ?>
+                        <form method="post" class="scan-frm float-r resolve-item">
+                            <input type="hidden" name="id" value="<?php echo $this->getOwner()->id ?>"/>
+                            <input type="hidden" name="action" value="resolveItem"/>
+							<?php wp_nonce_field( 'resolveItem' ) ?>
+                            <button type="submit" class="sui-button sui-button-blue">
+								<?php _e( "Restore to Original", wp_defender()->domain ) ?>
+                            </button>
+                        </form>
+					<?php endif; ?>
+                </div>
+            </div>
+        </div>
+		<?php
+		return ob_get_clean();
+	}
+
+	/**
 	 * Each item should have an dialog to show about itself description
 	 * return string
+	 * @deprecated 2.1
 	 */
 	public function renderDialog() {
 		ob_start();
@@ -234,24 +359,34 @@ class Core_Result extends Behavior {
 		if ( is_file( $this->getSubtitle() ) || is_dir( $this->getSubtitle() ) ) {
 			$raw = $this->getRaw();
 			if ( $raw['type'] == 'unknown' ) {
-				$content = file_get_contents( $this->getSubtitle() );
-				if ( function_exists( 'mb_convert_encoding' ) ) {
-					$content = mb_convert_encoding( $content, 'UTF-8', 'ASCII' );
+				$ext     = pathinfo( $this->getSubtitle(), PATHINFO_EXTENSION );
+				$ext     = strtolower( $ext );
+				$allowed = wp_get_ext_types();
+				$allowed = array_merge( $allowed['code'], array(
+					'sql',
+					'text',
+					'log'
+				) );
+				if ( in_array( $ext, $allowed ) ) {
+					$content = file_get_contents( $this->getSubtitle() );
+					if ( function_exists( 'mb_convert_encoding' ) ) {
+						$content = mb_convert_encoding( $content, 'UTF-8', 'ASCII' );
+					}
+
+					$entities = htmlentities( $content, null, 'UTF-8', false );
+
+					return '<div><strong>' . __( "Current code", wp_defender()->domain ) . '</strong><pre><code class="html">' . $entities . '</code></pre></div>';
 				}
-
-				$entities = htmlentities( $content, null, 'UTF-8', false );
-
-				return '<pre><code class="html">' . $entities . '</code></pre>';
 			} elseif ( $raw['type'] == 'modified' ) {
 				$original = $this->getOriginalSource();
 				$current  = file_get_contents( $this->getSubtitle() );
 				$diff     = $this->textDiff( $original, $current );
 
-				return '<pre><code class="html">' . $diff . '</code></pre>';
+				return '<div><strong>' . __( "Current code", wp_defender()->domain ) . '</strong><pre><code class="html">' . $diff . '</code></pre></div>';
 			} elseif ( $raw['type'] == 'dir' ) {
 				$files = File_Helper::findFiles( $raw['file'], true, false );
 
-				return '<pre><code class="html">' . implode( PHP_EOL, $files ) . '</code></pre>';
+				return '<div><strong>' . __( "Current code", wp_defender()->domain ) . '</strong><pre><code class="html">' . implode( PHP_EOL, $files ) . '</code></pre></div>';
 			}
 		}
 	}
@@ -379,6 +514,7 @@ class Core_Result extends Behavior {
 		global $wp_version;
 		$relPath         = Scan_Api::convertToUnixPath( $file );
 		$source_file_url = "http://core.svn.wordpress.org/tags/$wp_version/" . $relPath;
+		$ds              = DIRECTORY_SEPARATOR;
 		if ( ! function_exists( 'download_url' ) ) {
 			require_once ABSPATH . 'wp-admin' . $ds . 'includes' . $ds . 'file.php';
 		}

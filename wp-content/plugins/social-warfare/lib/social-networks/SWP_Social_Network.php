@@ -17,10 +17,11 @@ class SWP_Social_Network {
 
 
 	/**
-	 * SWP_Utility_Trait provides useful tool like error handling.
+	 * SWP_Debug_Trait provides useful tool like error handling and a debug
+	 * method which outputs the contents of the current object.
 	 *
 	 */
-	use SWP_Utility_Trait;
+	use SWP_Debug_Trait;
 
 
 	/**
@@ -66,10 +67,10 @@ class SWP_Social_Network {
 	 * The default state of this network
 	 *
 	 * This property will determine where the icon appears in the options page
- 	 * prior to the user setting and saving it. If true, it will appear in the
- 	 * active section. If false, it will appear in the inactive section. Once
- 	 * the user has updated/saved their preferences, this property will no
- 	 * longer do anything.
+	  * prior to the user setting and saving it. If true, it will appear in the
+	  * active section. If false, it will appear in the inactive section. Once
+	  * the user has updated/saved their preferences, this property will no
+	  * longer do anything.
 	 *
 	 * @var bool If true, the button is turned on by default.
 	 *
@@ -132,12 +133,12 @@ class SWP_Social_Network {
 	 */
 	public $base_share_url = '';
 
-    /**
-     * Whether or not to show the share count for this network.
-     *
-     * @var boolean $show_shares;
-     */
-    public $show_shares = false;
+	/**
+	 * Whether or not to show the share count for this network.
+	 *
+	 * @var boolean $show_shares;
+	 */
+	public $show_shares = false;
 
 
 	/**
@@ -183,14 +184,14 @@ class SWP_Social_Network {
 	 */
 	public function set_name( $value ) {
 
-        if ( !is_string( $value )  ||  empty( $value ) ) {
-            $this->_throw("Please provide a string for your object's name." );
-        }
+		if ( !is_string( $value )  ||  empty( $value ) ) {
+			$this->_throw("Please provide a string for your object's name." );
+		}
 
-        $this->name = $value;
+		$this->name = $value;
 
-        return $this;
-    }
+		return $this;
+	}
 
 
 	/**
@@ -352,38 +353,39 @@ class SWP_Social_Network {
 
 		$post_data = $panel_context['post_data'];
 		$share_counts = $panel_context['shares'];
-        $post_data['options'] = $panel_context['options'];
+		$post_data['options'] = $panel_context['options'];
+
 
 		$share_link = $this->generate_share_link( $post_data );
 
-        // Build the button.
-        $icon = '<span class="iconFiller">';
-            $icon.= '<span class="spaceManWilly">';
-                $icon.= '<i class="sw swp_'.$this->key.'_icon"></i>';
-                $icon.= '<span class="swp_share">' . $this->cta . '</span>';
-            $icon .= '</span>';
-        $icon .= '</span>';
+		// Build the button.
+		$icon = '<span class="iconFiller">';
+			$icon.= '<span class="spaceManWilly">';
+				$icon.= '<i class="sw swp_'.$this->key.'_icon"></i>';
+				$icon.= '<span class="swp_share">' . $this->cta . '</span>';
+			$icon .= '</span>';
+		$icon .= '</span>';
 
-        if ( true === $this->are_shares_shown( $share_counts , $panel_context['options'] ) ) :
-            $icon .= '<span class="swp_count">' . SWP_Utility::kilomega( $share_counts[$this->key] ) . '</span>';
-        else :
-            $icon = '<span class="swp_count swp_hide">' . $icon . '</span>';
-        endif;
+		if ( true === $this->are_shares_shown( $share_counts , $panel_context['options'] ) ) :
+			$icon .= '<span class="swp_count">' . SWP_Utility::kilomega( $share_counts[$this->key] ) . '</span>';
+		else :
+			$icon = '<span class="swp_count swp_hide">' . $icon . '</span>';
+		endif;
 
-        // Build the wrapper.
-		$html = '<div class="nc_tweetContainer swp_'.$this->key.'" data-network="'.$this->key.'">';
-    		$html .= '<a rel="nofollow noreferrer noopener" target="_blank" href="' . $share_link . '" data-link="' . $share_link . '" class="nc_tweet">';
-                // Put the button inside.
-                $html .= $icon;
-    		$html.= '</a>';
+		// Build the wrapper.
+		$html = '<div class="nc_tweetContainer swp_share_button swp_'.$this->key.'" data-network="'.$this->key.'">';
+			$html .= '<a class="nc_tweet swp_share_link" rel="nofollow noreferrer noopener" target="_blank" href="' . $share_link . '" data-link="' . $share_link . '">';
+				// Put the button inside.
+				$html .= $icon;
+			$html.= '</a>';
 		$html.= '</div>';
 
 		// Store these buttons so that we don't have to generate them for each set
 		$this->html = $html;
 
-        if ( $echo ) :
-            echo $html;
-        endif;
+		if ( $echo ) :
+			echo $html;
+		endif;
 
 		return $html;
 
@@ -405,27 +407,34 @@ class SWP_Social_Network {
 	 */
 	public function are_shares_shown( $share_counts , $options = array()) {
 
+		// Cast a string 'true'/'false' to a boolean true/false in case it was
+		// passed in via the shortcode.
+		if( is_string( $options['network_shares'] ) ) {
+			$options['network_shares'] = (strtolower( $options['network_shares'] ) === 'true');
+		}
+
 		// False if the share count is empty
-		if ( empty( $share_counts[$this->key] ) ) :
+		if ( empty( $share_counts[$this->key] ) ) {
 			return false;
+		}
 
 		// False if the total share count is below the minimum
-		elseif( $share_counts['total_shares'] < SWP_Utility::get_option( 'minimum_shares' ) ):
+		if( $share_counts['total_shares'] < SWP_Utility::get_option( 'minimum_shares' ) ) {
 			return false;
+		}
 
 		// False if the share count is zero.
-		elseif( $share_counts[$this->key] = 0 ):
+		if( $share_counts[$this->key] = 0 ) {
 			return false;
+		}
 
 		// False if network shares are turned off in the options.
-		elseif( false == SWP_Utility::get_option( 'network_shares' ) ):
+		if( false == $options['network_shares'] ) {
 			return false;
+		}
 
-		else :
-			return true;
-		endif;
+		return true;
 
-		return $this;
 	}
 
 

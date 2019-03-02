@@ -10,7 +10,7 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) and $_this = the_seo_framework_class() an
 $instance = $this->get_view_instance( 'the_seo_framework_general_metabox', $instance );
 
 switch ( $instance ) :
-	case 'the_seo_framework_general_metabox_main' :
+	case 'the_seo_framework_general_metabox_main':
 		$default_tabs = [
 			//	'general' => [
 			//		'name'     => __( 'General', 'autodescription' ),
@@ -56,11 +56,11 @@ switch ( $instance ) :
 		$this->nav_tab_wrapper( 'general', $tabs, '2.8.0' );
 		break;
 
-	case 'the_seo_framework_general_metabox_general' :
+	case 'the_seo_framework_general_metabox_general':
 		echo 'Nothing to see here yet.';
 		break;
 
-	case 'the_seo_framework_general_metabox_layout' :
+	case 'the_seo_framework_general_metabox_layout':
 		?>
 		<h4><?php esc_html_e( 'Administrative Layout Settings', 'autodescription' ); ?></h4>
 		<?php
@@ -93,7 +93,7 @@ switch ( $instance ) :
 		<?php
 
 		$pixel_info = $this->make_info(
-			__( 'The pixel counter computes whether the input will fit on search engine Result Pages.', 'autodescription' ),
+			__( 'The pixel counter computes whether the input will fit on search engine result pages.', 'autodescription' ),
 			'',
 			false
 		);
@@ -119,7 +119,7 @@ switch ( $instance ) :
 		], true );
 		break;
 
-	case 'the_seo_framework_general_metabox_performance' :
+	case 'the_seo_framework_general_metabox_performance':
 		?>
 		<h4><?php esc_html_e( 'Performance Settings', 'autodescription' ); ?></h4>
 		<?php
@@ -255,7 +255,7 @@ switch ( $instance ) :
 					'cache_object',
 					esc_html__( 'Enable object cache?', 'autodescription' )
 					. ' ' . $this->make_info( __( 'Object cache generally works faster than transient cache.', 'autodescription' ), '', false ),
-					esc_html__( 'An object cache handler has been detected. If you enable this option, you might wish to disable description and Schema transient caching.', 'autodescription' ),
+					esc_html__( 'An object cache handler has been detected. If you enable this option, you might wish to disable the Schema.org transient caching.', 'autodescription' ),
 					false
 				),
 				true
@@ -263,7 +263,7 @@ switch ( $instance ) :
 		endif;
 		break;
 
-	case 'the_seo_framework_general_metabox_canonical' :
+	case 'the_seo_framework_general_metabox_canonical':
 		?>
 		<h4><?php esc_html_e( 'Canonical URL Settings', 'autodescription' ); ?></h4>
 		<?php
@@ -318,7 +318,7 @@ switch ( $instance ) :
 		break;
 
 
-	case 'the_seo_framework_general_metabox_timestamps' :
+	case 'the_seo_framework_general_metabox_timestamps':
 		//* Sets timezone according to WordPress settings.
 		$this->set_timezone();
 
@@ -376,7 +376,7 @@ switch ( $instance ) :
 		<?php
 		break;
 
-	case 'the_seo_framework_general_metabox_posttypes' :
+	case 'the_seo_framework_general_metabox_posttypes':
 		?>
 		<h4><?php esc_html_e( 'Post Type Settings', 'autodescription' ); ?></h4>
 		<?php

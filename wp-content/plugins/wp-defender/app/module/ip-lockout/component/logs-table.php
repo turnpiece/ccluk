@@ -28,7 +28,8 @@ class Logs_Table extends \WP_List_Table {
 			'list-table',
 			//'hover-effect',
 			'logs',
-			'intro'
+			'sui-table',
+			'sui-accordion'
 		);
 	}
 
@@ -115,10 +116,13 @@ class Logs_Table extends \WP_List_Table {
 		}
 		ob_start();
 		?>
-        <!--        <input type="checkbox" class="single-select" name="ids[]" value="--><?php //echo $log->id ?><!--"/>-->
+        <label class="sui-checkbox">
+            <input type="checkbox" class="single-select" name="ids[]" value="<?php echo $log->id ?>"/>
+            <span aria-hidden="true"></span>
+        </label>
         <span class="badge <?php echo $log->type == 'auth_lock' || $log->type == '404_lock' ? 'locked' : null ?>"><?php echo $log->type == 'auth_fail' || $log->type == 'auth_lock' ? 'login' : '404' ?></span>
 		<?php
-		echo $log->get_log_text( $format );
+		echo wp_trim_words( $log->get_log_text( $format ), 20 );
 
 		return ob_get_clean();
 	}
@@ -155,14 +159,14 @@ class Logs_Table extends \WP_List_Table {
 			<?php $this->display_tablenav( 'top' ); ?>
 			<?php if ( $this->_pagination_args['total_items'] > 0 ): ?>
                 <div class="lockout-logs-inner">
-                    <div class="lockout-logs-filter mline wd-hide">
+                    <div class="lockout-logs-filter sui-pagination-filter">
                         <form method="post">
-                            <div class="well well-white">
-                                <div class="columns">
-                                    <div class="column is-4">
-                                        <strong>
+                            <div class="sui-row">
+                                <div class="sui-col">
+                                    <div class="sui-form-field">
+                                        <label class="sui-label">
 											<?php _e( "Lockout Type", wp_defender()->domain ) ?>
-                                        </strong>
+                                        </label>
                                         <select name="type">
                                             <option value=""><?php esc_html_e( "All", wp_defender()->domain ) ?></option>
                                             <option <?php selected( \WP_Defender\Module\IP_Lockout\Model\Log_Model::AUTH_FAIL, \Hammer\Helper\HTTP_Helper::retrieve_get( 'filter' ) ) ?>
@@ -176,45 +180,69 @@ class Logs_Table extends \WP_List_Table {
                                                     value="<?php echo \WP_Defender\Module\IP_Lockout\Model\Log_Model::LOCKOUT_404 ?>"><?php esc_html_e( "404 lockout", wp_defender()->domain ) ?></option>
                                         </select>
                                     </div>
-                                    <div class="column is-4">
-                                        <strong>
+                                </div>
+                                <div class="sui-col">
+                                    <div class="sui-form-field">
+                                        <label class="sui-label">
 											<?php _e( "IP Address", wp_defender()->domain ) ?>
-                                        </strong>
-                                        <input name="ip_address" type="text"
+                                        </label>
+                                        <input name="ip_address" type="text" class="sui-form-control"
                                                placeholder="<?php esc_attr_e( "Enter an IP address", wp_defender()->domain ) ?>">
                                     </div>
                                 </div>
-                                <div class="well-footer tr">
-                                    <button type="submit" class="button button-small">
-										<?php _e( "Apply", wp_defender()->domain ) ?></button>
+                                <div class="sui-col"></div>
+                            </div>
+                            <hr/>
+                            <div class="sui-row">
+                                <div class="sui-col">
+                                    <button type="button" class="sui-button sui-button-ghost">
+										<?php _e( "Clear Filters", wp_defender()->domain ) ?>
+                                    </button>
+                                </div>
+                                <div class="sui-col">
+                                    <button type="submit" class="sui-button float-r">
+                                        <i class="sui-icon-check" aria-hidden="true"></i>
+										<?php _e( "Apply", wp_defender()->domain ) ?>
+                                    </button>
                                 </div>
                             </div>
                         </form>
                     </div>
-                    <table class="wp-list-table <?php echo implode( ' ', $this->get_table_classes() ); ?>">
-                        <thead>
-                        <tr>
-							<?php $this->print_column_headers(); ?>
-                        </tr>
-                        </thead>
+                    <div class="sui-row sui-flushed">
+                        <table id="iplockout-table"
+                               class="<?php echo implode( ' ', $this->get_table_classes() ); ?>">
+                            <thead>
+                            <tr>
+								<?php $this->print_column_headers(); ?>
+                            </tr>
+                            </thead>
 
-                        <tbody id="the-list"<?php
-						if ( $singular ) {
-							echo " data-wp-lists='list:$singular'";
-						} ?>>
-						<?php $this->display_rows_or_placeholder(); ?>
-                        </tbody>
-                    </table>
+                            <tbody id="the-list"<?php
+							if ( $singular ) {
+								echo " data-wp-lists='list:$singular'";
+							} ?>>
+							<?php $this->display_rows_or_placeholder(); ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 				<?php
 				$this->display_tablenav( 'bottom' );
 				?>
 			<?php else: ?>
-                <div class="well with-cap well-blue">
-                    <i class="def-icon icon-info fill-blue"></i>
-					<?php _e( "No lockout events have been logged within the selected time period.", wp_defender()->domain ) ?>
+                <div class="sui-row sui-flushed">
+                    <table class="sui-table no-border margin-bottom-20">
+                        <tr>
+                            <td>
+                                <div class="sui-notice">
+                                    <p>
+										<?php _e( "No lockout events have been logged within the selected time period.", wp_defender()->domain ) ?>
+                                    </p>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
-                <table></table>
 			<?php endif; ?>
         </div>
 		<?php
@@ -224,18 +252,18 @@ class Logs_Table extends \WP_List_Table {
 	 * @param object $item
 	 */
 	public function single_row( $item ) {
-		$class = '';
+		$class = 'sui-accordion-item sui-warning ';
 		if ( in_array( $item->type, array(
 			Log_Model::AUTH_LOCK,
 			Log_Model::AUTH_FAIL
 		) ) ) {
-			$class = 'log-login';
+			$class .= 'log-login';
 		} elseif ( in_array( $item->type, array(
 			Log_Model::ERROR_404,
 			Log_Model::ERROR_404_IGNORE,
 			Log_Model::LOCKOUT_404
 		) ) ) {
-			$class = 'log-404';
+			$class .= 'log-404';
 		}
 
 		if ( in_array( $item->type, array(
@@ -244,23 +272,72 @@ class Logs_Table extends \WP_List_Table {
 		) ) ) {
 			$class .= ' lockout';
 		}
-		$class .= ' show-hide-log';
+		$class .= ' ';
 		echo '<tr class="' . $class . '">';
 		$this->single_row_columns( $item );
 		echo '</tr>';
-		echo '<tr class="table-info wd-hide">';
+		echo '<tr class="sui-accordion-item-content">';
 		echo $this->detailRow( $item );
 		echo '<tr>';
+	}
+
+	/**
+	 * Generates the columns for a single row of the table
+	 *
+	 * @since 3.1.0
+	 *
+	 * @param object $item The current item
+	 */
+	protected function single_row_columns( $item ) {
+		list( $columns, $hidden, $sortable, $primary ) = $this->get_column_info();
+		foreach ( $columns as $column_name => $column_display_name ) {
+			$classes = "$column_name column-$column_name";
+			if ( $primary === $column_name ) {
+				$classes .= ' sui-table-item-title';
+			}
+
+			if ( in_array( $column_name, $hidden ) ) {
+				$classes .= ' hidden';
+			}
+
+			// Comments column uses HTML in the display name with screen reader text.
+			// Instead of using esc_attr(), we strip tags to get closer to a user-friendly string.
+			$data = 'data-colname="' . wp_strip_all_tags( $column_display_name ) . '"';
+
+			$attributes = "class='$classes' $data";
+
+			if ( 'cb' === $column_name ) {
+				echo '<th scope="row" class="check-column">';
+				echo $this->column_cb( $item );
+				echo '</th>';
+			} elseif ( method_exists( $this, '_column_' . $column_name ) ) {
+				echo call_user_func(
+					array( $this, '_column_' . $column_name ),
+					$item,
+					$classes,
+					$data,
+					$primary
+				);
+			} elseif ( method_exists( $this, 'column_' . $column_name ) ) {
+				echo "<td $attributes>";
+				echo call_user_func( array( $this, 'column_' . $column_name ), $item );
+				echo "</td>";
+			} else {
+				echo "<td $attributes>";
+				echo $this->column_default( $item, $column_name );
+				echo "</td>";
+			}
+		}
 	}
 
 	public function detailRow( $item ) {
 
 		?>
-        <td colspan="4">
-            <div class="dev-box">
-                <div class="box-content">
-                    <div class="columns">
-                        <div class="column is-8">
+        <td colspan="<?php echo count( $this->get_columns() ) ?>">
+            <div class="sui-box">
+                <div class="sui-box-body">
+                    <div class="sui-row">
+                        <div class="sui-col">
                             <p><strong><?php _e( "Description", wp_defender()->domain ) ?></strong></p>
                             <p><?php
 								if ( $item->type == '404_error' ) {
@@ -270,7 +347,7 @@ class Logs_Table extends \WP_List_Table {
 								}
 								?></p>
                         </div>
-                        <div class="column is-4">
+                        <div class="sui-col">
                             <p><strong><?php _e( "Type", wp_defender()->domain ) ?></strong></p>
                             <p>
                                 <a href=""><?php echo in_array( $item->type, array(
@@ -281,27 +358,27 @@ class Logs_Table extends \WP_List_Table {
                             </p>
                         </div>
                     </div>
-                    <div class="columns">
-                        <div class="column is-4">
+                    <div class="sui-row">
+                        <div class="sui-col">
                             <p><strong><?php _e( "IP", wp_defender()->domain ) ?></strong></p>
                             <p><a href=""><?php
 									echo $item->ip
 									?></a></p>
                         </div>
-                        <div class="column is-4">
+                        <div class="sui-col">
                             <p><strong><?php _e( "Date/Time", wp_defender()->domain ) ?></strong></p>
                             <p><?php
 								echo Utils::instance()->formatDateTime( $item->date )
 								?></p>
                         </div>
-                        <div class="column is-4">
+                        <div class="sui-col">
                             <p><strong><?php _e( "Ban Status", wp_defender()->domain ) ?></strong></p>
                             <p><?php
 								echo Login_Protection_Api::getIPStatusText( $item->ip )
 								?></p>
                         </div>
                     </div>
-                    <div class="well well-white">
+                    <div class="sui-border-frame">
                         <div>
 							<?php
 							echo Login_Protection_Api::getLogsActionsText( $item );
@@ -319,29 +396,44 @@ class Logs_Table extends \WP_List_Table {
 
 	protected function display_tablenav( $which ) {
 		?>
-        <div class="intro">
-            <div class="columns">
-                <div class="column is-3">
-                    <!--                    <input type="checkbox" id="bulk-select">-->
-                    <!--                    <a href="#bulk" rel="dialog" class="button button-small button-light button-disabled">-->
-                    <!--						--><?php //_e( "Bulk Action", wp_defender()->domain ) ?>
-                    <!--                    </a>-->
-                </div>
-                <div class="column is-7">
-                    <div class="nav">
-                        <span><?php echo sprintf( esc_html__( "%s results", wp_defender()->domain ), $this->get_pagination_arg( 'total_items' ) ) ?></span>
-                        <div class="button-group">
-							<?php $this->pagination( $which ); ?>
-                        </div>
+        <div class="sui-row">
+            <div class="sui-col-md-5">
+                <form id="bulk-action" class="ip-frm" method="post">
+                    <div class="bulk-action-bar">
+                        <label class="sui-checkbox apply-all">
+                            <input type="checkbox" id="apply-all"/>
+                            <span aria-hidden="true"></span>
+                        </label>
+                        <select name="type" class="sui-select-sm">
+                            <option value=""><?php _e( "Bulk action", wp_defender()->domain ) ?></option>
+                            <option value="ban"><?php _e( "Ban", wp_defender()->domain ) ?></option>
+                            <option value="whitelist"><?php _e( "Whitelist", wp_defender()->domain ) ?></option>
+                            <option value="delete"><?php _e( "Delete", wp_defender()->domain ) ?></option>
+                        </select>
+                        <input type="hidden" name="ids" class="ids"/>
+                        <input type="hidden" name="action" value="bulkAction"/>
+						<?php wp_nonce_field( 'bulkAction' ) ?>
+                        <button type="submit" class="sui-button">
+							<?php _e( "Bulk Update", wp_defender()->domain ) ?>
+                        </button>
                     </div>
-                </div>
-                <div class="column is-2 tr">
-                    <button type="button" rel="show-filter" data-target=".lockout-logs-filter"
-                            class="button button-small button-secondary"><?php _e( "Filter", wp_defender()->domain ) ?></button>
+                </form>
+            </div>
+            <div class="sui-col">
+                <div class="sui-pagination-wrap">
+                    <span class="sui-pagination-results">
+                        <?php printf( __( "%s results", wp_defender()->domain ), $this->_pagination_args['total_items'] ) ?>
+                    </span>
+                    <ul class="sui-pagination">
+						<?php $this->pagination( 'top' ) ?>
+                    </ul>
+                    <button rel="show-filter" data-target=".lockout-logs-filter"
+                            class="sui-button-icon sui-button-outlined sui-pagination-open-filter">
+                        <i class="sui-icon-filter" aria-hidden="true"></i>
+                        <span class="sui-screen-reader-text">Open search filters</span>
+                    </button>
                 </div>
             </div>
-
-            <div class="clear"></div>
         </div>
 		<?php
 	}
@@ -374,32 +466,29 @@ class Logs_Table extends \WP_List_Table {
 		$current_url = set_url_scheme( 'http://' . parse_url( get_site_url(), PHP_URL_HOST ) . $_SERVER['REQUEST_URI'] );
 		$current_url = remove_query_arg( array( 'hotkeys_highlight_last', 'hotkeys_highlight_first' ), $current_url );
 		$current_url = esc_url( $current_url );
-		$radius      = 1;
+
+		$radius = 2;
 		if ( $current_page > 1 && $total_pages > $radius ) {
-//			$links['first'] = sprintf( '<a class="button button-small lockout-nav button-light" data-paged="%s" href="%s">%s</a>',
-//				1, add_query_arg( 'paged', 1, $current_url ), '&laquo;' );
-			$links['prev'] = sprintf( '<a class="button button-small lockout-nav button-light" data-paged="%s" href="%s">%s</a>',
-				$current_page - 1, add_query_arg( 'paged', $current_page - 1, $current_url ), '&lsaquo;' );
+			$links['prev'] = sprintf( '<li><a  data-paged="%s" class="lockout-nav " href="%s">%s</a></li>', $current_page - 1,
+				add_query_arg( 'paged', $current_page - 1, $current_url ), '<i class="sui-icon-chevron-left" aria-hidden="true"></i>' );
 		}
 
 		for ( $i = 1; $i <= $total_pages; $i ++ ) {
 			if ( ( $i >= 1 && $i <= $radius ) || ( $i > $current_page - 2 && $i < $current_page + 2 ) || ( $i <= $total_pages && $i > $total_pages - $radius ) ) {
 				if ( $i == $current_page ) {
-					$links[ $i ] = sprintf( '<a href="#" class="button button-small lockout-nav button-light" data-paged="%s" disabled="">%s</a>', $i, $i );
+					$links[ $i ] = sprintf( '<li><a class="lockout-nav" href="#" data-paged="%s" disabled="">%s</a></li>', $i, $i );
 				} else {
-					$links[ $i ] = sprintf( '<a class="button button-small lockout-nav button-light" data-paged="%s" href="%s">%s</a>',
-						$i, add_query_arg( 'paged', $i, $current_url ), $i );
+					$links[ $i ] = sprintf( '<li><a class="lockout-nav" data-paged="%s" href="%s">%s</a></li>', $i,
+						add_query_arg( 'paged', $i, $current_url ), $i );
 				}
 			} elseif ( $i == $current_page - $radius || $i == $current_page + $radius ) {
-				$links[ $i ] = '<a href="#" class="button lockout-nav button-small button-light" disabled="">...</a>';
+				$links[ $i ] = '<li><a class="lockout-nav " href="#" disabled="">...</a></li>';
 			}
 		}
 
 		if ( $current_page < $total_pages && $total_pages > $radius ) {
-			$links['next'] = sprintf( '<a class="button lockout-nav button-small button-light" data-paged="%s" href="%s">%s</a>',
-				$current_page + 1, add_query_arg( 'paged', $current_page + 1, $current_url ), '&rsaquo;' );
-//			$links['last'] = sprintf( '<a class="button lockout-nav button-small button-light" data-paged="%s" href="%s">%s</a>',
-//				$total_pages, add_query_arg( 'paged', $total_pages, $current_url ), '&raquo;' );
+			$links['next'] = sprintf( '<li><a class="lockout-nav " data-paged="%s" href="%s">%s</a></li>', $current_page + 1,
+				add_query_arg( 'paged', $current_page + 1, $current_url ), '<i class="sui-icon-chevron-right" aria-hidden="true"></i>' );
 		}
 		$output            = join( "\n", $links );
 		$this->_pagination = $output;

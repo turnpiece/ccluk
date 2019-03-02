@@ -4,7 +4,7 @@
  *
  * @package     Give
  * @subpackage  Classes/Give_Email_Access
- * @copyright   Copyright (c) 2016, WordImpress
+ * @copyright   Copyright (c) 2016, GiveWP
  * @license     https://opensource.org/licenses/gpl-license GNU Public License
  * @since       1.4
  */
@@ -105,8 +105,23 @@ class Give_Email_Access {
 	 */
 	public function __construct() {
 
-		// get it started
-		add_action( 'init', array( $this, 'init' ) );
+		// Get it started.
+		add_action( 'wp', array( $this, 'setup' ) );
+	}
+
+	/**
+	 * Setup hooks
+	 *
+	 * @since 2.4.0
+	 */
+	public function setup(){
+		
+		$is_email_access_on_page = apply_filters( 'give_is_email_access_on_page', give_is_success_page() || give_is_history_page() );
+		
+		if ( $is_email_access_on_page ){
+			// Get it started.
+			add_action( 'wp', array( $this, 'init' ), 14 );
+		}
 	}
 
 	/**
@@ -141,7 +156,6 @@ class Give_Email_Access {
 		$this->check_for_token();
 
 		if ( $this->token_exists ) {
-			add_filter( 'give_can_view_receipt', '__return_true' );
 			add_filter( 'give_user_pending_verification', '__return_false' );
 			add_filter( 'give_get_users_donations_args', array( $this, 'users_donations_args' ) );
 		}
@@ -197,7 +211,27 @@ class Give_Email_Access {
 	public function send_email( $donor_id, $email ) {
 		return apply_filters( 'give_email-access_email_notification', $donor_id, $email );
 	}
-
+	
+	/**
+	 * This function is used to fetch the token value from query string or cookies based on availability.
+	 *
+	 * @since  2.4.1
+	 * @access public
+	 *
+	 * @return string
+	 */
+	public function get_token() {
+		
+		$token = isset( $_GET['give_nl'] ) ? give_clean( $_GET['give_nl'] ) : '';
+		
+		// Check for cookie.
+		if ( empty( $token ) ) {
+			$token = isset( $_COOKIE['give_nl'] ) ? give_clean( $_COOKIE['give_nl'] ) : '';
+		}
+		
+		return $token;
+	}
+	
 	/**
 	 * Has the user authenticated?
 	 *
@@ -208,12 +242,7 @@ class Give_Email_Access {
 	 */
 	public function check_for_token() {
 
-		$token = isset( $_GET['give_nl'] ) ? give_clean( $_GET['give_nl'] ) : '';
-
-		// Check for cookie.
-		if ( empty( $token ) ) {
-			$token = isset( $_COOKIE['give_nl'] ) ? give_clean( $_COOKIE['give_nl'] ) : '';
-		}
+		$token = $this->get_token();
 
 		// Must have a token.
 		if ( ! empty( $token ) ) {
@@ -263,8 +292,11 @@ class Give_Email_Access {
 		}
 
 		// Set error only if email access form isn't being submitted.
-		if ( ! isset( $_POST['give_email'] ) && ! isset( $_POST['_wpnonce'] ) ) {
-			give_set_error( 'give_email_token_expired', apply_filters( 'give_email_token_expired_message', __( 'Your access token has expired. Please request a new one below:', 'give' ) ) );
+		if (
+			! isset( $_POST['give_email'] ) &&
+			! isset( $_POST['_wpnonce'] )
+		) {
+			give_set_error( 'give_email_token_expired', apply_filters( 'give_email_token_expired_message', __( 'Your access token has expired. Please request a new one.', 'give' ) ) );
 		}
 
 		return false;
@@ -377,5 +409,4 @@ class Give_Email_Access {
 		// Create columns in donors table.
 		$wpdb->query( "ALTER TABLE {$wpdb->donors} ADD `token` VARCHAR(255) CHARACTER SET utf8 NOT NULL, ADD `verify_key` VARCHAR(255) CHARACTER SET utf8 NOT NULL AFTER `token`, ADD `verify_throttle` DATETIME NOT NULL AFTER `verify_key`" );
 	}
-
 }

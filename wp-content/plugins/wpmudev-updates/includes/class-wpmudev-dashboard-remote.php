@@ -248,6 +248,7 @@ class WPMUDEV_Dashboard_Remote {
 		$this->register_action( 'upgrade', array( $this, 'action_upgrade' ) );
 		$this->register_action( 'delete', array( $this, 'action_delete' ) );
 		$this->register_action( 'core_upgrade', array( $this, 'action_core_upgrade' ) );
+		$this->register_action( 'analytics', array( $this, 'action_analytics' ) );
 	}
 
 	/**
@@ -848,5 +849,53 @@ class WPMUDEV_Dashboard_Remote {
 				'data'    => array( 'log' => WPMUDEV_Dashboard::$upgrader->get_log() )
 			) );
 		}
+	}
+
+	/**
+	 * Enable/Disable Analytics.
+	 *
+	 * @since 4.6.1
+	 *
+	 * @param object $params list of args
+	 * @param string $action name of action
+	 */
+	public function action_analytics( $params, $action ) {
+
+		if ( ! isset( $params->status ) ) {
+			$this->send_json_error( array(
+				'code'    => 'invalid_params',
+				'message' => __( 'The "status" param is missing.', 'wpmudev' )
+			) );
+		}
+
+		switch ( $params->status ) {
+			case 'enabled':
+				/** @var WP_Error|object $result Enable analytics */
+				$result = WPMUDEV_Dashboard::$api->analytics_enable();
+				break;
+			case 'disabled':
+				/** @var WP_Error|object $result Disable Analytics */
+				$result = WPMUDEV_Dashboard::$api->analytics_disable();
+				break;
+			default:
+				// send error.
+				$this->send_json_error( array(
+					'code'    => 'invalid_params',
+					'message' => __( 'Passed invalid value for param "status", it must be either "enabled" or "disabled"', 'wpmudev' )
+				) );
+		}
+
+		if ( isset( $result ) && is_wp_error( $result ) ) {
+			$this->send_json_error( array(
+				'code'    => $result->get_error_code(),
+				'message' => $result->get_error_message()
+			) );
+		}
+
+		// set analytics status.
+		WPMUDEV_Dashboard::$site->set_option( 'analytics_enabled', ( 'enabled' === $params->status ) );
+
+		// success
+		$this->send_json_success();
 	}
 }

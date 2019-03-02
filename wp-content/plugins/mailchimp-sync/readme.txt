@@ -3,8 +3,8 @@ Contributors: Ibericode, DvanKooten, hchouhan, lapzor
 Donate link: https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mailchimp-sync&utm_campaign=donate-link
 Tags: mailchimp,users,sync,mailchimp list,synchronize,zapier,woocommerce,mc4wp
 Requires at least: 4.1
-Tested up to: 4.9.6
-Stable tag: 1.7.5
+Tested up to: 5.1
+Stable tag: 1.7.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Requires PHP: 5.3
@@ -125,6 +125,13 @@ Not by default, but you can enable this by [configuring a webhook in your MailCh
 2. Status overview
 
 == Changelog ==
+
+
+### 1.7.6 - Dec 3, 2018
+
+**Improvements**
+
+- Add warning text to settings that may cause subscribers to be removed from the connected MailChimp list.
 
 
 ### 1.7.5 - July 4, 2018

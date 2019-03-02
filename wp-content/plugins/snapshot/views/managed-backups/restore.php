@@ -1,6 +1,12 @@
 <?php
 
-$requirements_test = Snapshot_Helper_Utility::check_system_requirements();
+$requirements = array(
+	'PhpVersion' => array(
+		'test' => version_compare(PHP_VERSION, '5.5.0', '>='),
+		'value' => PHP_VERSION
+	)
+);
+$requirements_test = Snapshot_Helper_Utility::check_system_requirements( $requirements );
 $checks = $requirements_test['checks'];
 $all_good = $requirements_test['all_good'];
 $warning = $requirements_test['warning'];

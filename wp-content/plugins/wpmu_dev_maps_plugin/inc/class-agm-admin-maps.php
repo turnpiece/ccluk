@@ -95,6 +95,7 @@ class AgmAdminMaps {
 			'agm_google_maps_options_page',
 			'agm_google_maps'
 		);
+		/*
 		add_settings_field(
 			'agm_google_maps_default_image_size',
 			__( 'Default image size', AGM_LANG ),
@@ -109,6 +110,7 @@ class AgmAdminMaps {
 			'agm_google_maps_options_page',
 			'agm_google_maps'
 		);
+		*/
 		add_settings_field(
 			'agm_google_maps_default_map_alignment',
 			__( 'Default map alignment', AGM_LANG ),
@@ -250,12 +252,37 @@ class AgmAdminMaps {
 	 * @since  2.9
 	 */
 	public function load_scripts( $screen ) {
-		if ( 'post' == @$screen->base || 'widgets' == @$screen->base ) {
+		$base = is_object( $screen ) && ! empty( $screen->base )
+			? $screen->base
+			: false
+		;
+		if ( 'post' == $base || 'widgets' == $base ) {
 			lib3()->ui->add( TheLib_Ui::MODULE_CORE );
 			lib3()->ui->add( TheLib_Ui::MODULE_SELECT );
-		} elseif ( 'settings_page_agm_google_maps' == $screen->base ) {
+		} elseif ( 'settings_page_agm_google_maps' == $base ) {
 			lib3()->ui->add( AGM_PLUGIN_URL . 'css/google_maps_admin.min.css' );
 		}
+	}
+
+	/**
+	 * Enqueues the gutenberg block stuff
+	 *
+	 * @since 2.9.5-beta.2
+	 */
+	public function load_gutenberg_scripts() {
+		wp_enqueue_script(
+			'agm_gutenberg_block',
+			AGM_PLUGIN_URL . 'js/admin/editor-gutenberg-block.js',
+			array(
+				'wp-blocks',
+				'wp-element',
+				'wp-components',
+				'jquery',
+				'wpmu-google-maps-min-js',
+			),
+			false,
+			true // Has to go in footer.
+		);
 	}
 
 	/**
@@ -263,11 +290,15 @@ class AgmAdminMaps {
 	 */
 	private function shared_scripts() {
 		$opt = apply_filters( 'agm_google_maps-options', get_option( 'agm_google_maps' ) );
+
+        //Removed  'panoramio'  from defaults['libraries'] array as Panoramio is discontinued by google.
+        //Leaving the "libraries" for future use
+
 		$defaults = array(
 			'ajax_url' => admin_url( 'admin-ajax.php' ),
 			'root_url' => AGM_PLUGIN_URL,
 			'is_multisite' => (int)is_multisite(),
-			'libraries' => array( 'panoramio' ),
+			'libraries' => array(),
 			'maps_api_key' => !empty($opt['map_api_key']) ? $opt['map_api_key'] : '',
 		);
 
@@ -387,10 +418,10 @@ class AgmAdminMaps {
 				'images_strip' => __( 'Images strip settings', AGM_LANG ),
 				'show_images' => __( 'Show images strip', AGM_LANG ),
 				'image_size' => __( 'Use image size', AGM_LANG ),
-				'panoramio_overlay' => __( 'Panoramio overlay', AGM_LANG ),
-				'show_panoramio_overlay' => __( 'Show Panoramio overlay', AGM_LANG ),
-				'panoramio_overlay_tag' => __( 'Restrict Panoramio overlay photos to this tag', AGM_LANG ),
-				'panoramio_overlay_tag_help' => __( 'Leave this field empty for no tag restrictions', AGM_LANG ),
+				//'panoramio_overlay' => __( 'Panoramio overlay', AGM_LANG ),
+				//'show_panoramio_overlay' => __( 'Show Panoramio overlay', AGM_LANG ),
+				//'panoramio_overlay_tag' => __( 'Restrict Panoramio overlay photos to this tag', AGM_LANG ),
+				//'panoramio_overlay_tag_help' => __( 'Leave this field empty for no tag restrictions', AGM_LANG ),
 				'image_limit' => __( 'Show this many images', AGM_LANG ),
 				'add_location' => __( 'Add location:', AGM_LANG ),
 				'apply_settings' => __( 'Apply', AGM_LANG ),
@@ -660,6 +691,7 @@ class AgmAdminMaps {
 
 		// Step1a: Add plugin script core requirements and editor interface
 		add_action( 'current_screen', array( $this, 'load_scripts' ) );
+		add_action( 'enqueue_block_editor_assets', array( $this, 'load_gutenberg_scripts' ) );
 
 		add_action( 'admin_print_scripts-post.php', array( $this, 'js_editor_button' ) );
 		add_action( 'admin_print_scripts-post-new.php', array( $this, 'js_editor_button' ) );

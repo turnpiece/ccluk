@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Snapshot Pro
-Version: 3.1.9.2
+Version: 3.2.0.2
 Description: This plugin allows you to take quick on-demand backup snapshots of your working WordPress database. You can select from the default WordPress tables as well as custom plugin tables within the database structure. All snapshots are logged, and you can restore the snapshot as needed.
 Author: WPMU DEV
 Author URI: https://premium.wpmudev.org/
@@ -38,7 +38,7 @@ WDP ID: 257
  *
  */
 
-define('SNAPSHOT_VERSION', '3.1.9.2');
+define('SNAPSHOT_VERSION', '3.2.0.2');
 
 if ( ! defined( 'SNAPSHOT_I18N_DOMAIN' ) ) {
 	define( 'SNAPSHOT_I18N_DOMAIN', 'snapshot' );
@@ -124,7 +124,7 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 
 			$this->_settings['options_key'] = "wpmudev_snapshot";
 
-			$this->_settings['recover_table_prefix'] = "_snapshot_recover_";
+			$this->_settings['recover_table_prefix'] = "_snap_rcv_";
 
 			$this->_settings['backupBaseFolderFull'] = ""; // Will be set during page load in $this->set_backup_folder();
 			$this->_settings['backupBackupFolderFull'] = ""; // Will be set during page load in $this->set_backup_folder();
@@ -151,11 +151,17 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 				'name' => 'Snapshot',
 				'screens' => array(
 					'toplevel_page_snapshot_pro_dashboard',
+					'toplevel_page_snapshot_pro_dashboard-network',
 					'snapshot_page_snapshot_pro_snapshots',
+					'snapshot_page_snapshot_pro_snapshots-network',
 					'snapshot_page_snapshot_pro_destinations',
+					'snapshot_page_snapshot_pro_destinations-network',
 					'snapshot_page_snapshot_pro_managed_backups',
+					'snapshot_page_snapshot_pro_managed_backups-network',
 					'snapshot_page_snapshot_pro_import',
+					'snapshot_page_snapshot_pro_import-network',
 					'snapshot_page_snapshot_pro_settings',
+					'snapshot_page_snapshot_pro_settings-network'
 				),
 			);
 
@@ -193,6 +199,8 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 			add_action( 'wp_ajax_snapshot_item_abort_ajax', array( $this, 'snapshot_ajax_item_abort_proc' ) );
 			add_action( 'wp_ajax_snapshot_disable_notif_ajax', array( $this, 'snapshot_ajax_disable_notif_proc' ) );
 
+			add_action( 'wp_ajax_dismiss_snapshot_aws_comp_notice', array( $this, 'snapshot_ajax_dismiss_aws_comp_notice' ) );
+
 			add_action( 'wp_ajax_snapshot_save_key', array( $this, 'snapshot_save_key_proc' ) );
 
 			/* Cron related functions */
@@ -226,9 +234,16 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 
 			add_filter( 'admin_body_class', array( $this, 'snapshot_maybe_add_body_classes' ) );
 
+			// Whitelabel plugin pages
+			add_filter( 'wpmudev_whitelabel_plugin_pages', array( $this, 'snapshot_whitelabel_pages' ) );
+
 			require_once dirname( __FILE__ ) . '/lib/Snapshot/Helper/Privacy.php';
 			Snapshot_Gdpr::serve();
 
+			if ( ! class_exists( 'Snapshot_Local_Backups' ) ) {
+				require_once dirname( __FILE__ ) . '/lib/Snapshot/Helper/Local_Backups.php';
+			}
+			Snapshot_Local_Backups::serve();
 		}
 
 		public function snapshot_check_home_path( $path ) {
@@ -291,6 +306,66 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 				}
 			}
 			Snapshot_Controller_Full::get()->run();
+
+			if ( version_compare(PHP_VERSION, '5.5.0', '<') ) {
+				if ( ! isset ( $this->config_data['transitioned_sdk_incompat'] ) || ! $this->config_data['transitioned_sdk_incompat'] ) {
+					// Disable existing scheduled managed backups, due to PHP version incompatibility.
+					$model = new Snapshot_Model_Full_Backup();
+
+					$model->set_config( 'frequency', false );
+					$model->set_config( 'schedule_time', false );
+					$model->set_config( 'disable_cron', true );
+					Snapshot_Controller_Full_Cron::get()->stop();
+
+					// Let the service know
+					$model->update_remote_schedule();
+					if ( isset( $this->config_data['items'] ) ) {
+						// Also, disable any existing scheduled aws snapshots, due to PHP version incompatibility
+						foreach ( $this->config_data['items'] as $item_key => $item ) {
+							$destination = $this->config_data['destinations'][ $item['destination'] ];
+							if ( 'aws' === $destination['type'] ){
+								$item['interval'] = 'immediate';
+								$item['interval-offset'] = array();
+								$this->add_update_config_item( $item_key, $item );
+
+								$timestamp = wp_next_scheduled( $this->_settings['backup_cron_hook'], array( intval( $item_key ) ) );
+								if ( $timestamp ) {
+									wp_unschedule_event( $timestamp, $this->_settings['backup_cron_hook'], array( intval( $item_key ) ) );
+								}
+							}
+						}
+					}
+
+					$this->config_data['transitioned_sdk_incompat'] = true;
+					$this->save_config();
+				}
+			} else {
+				if ( is_main_site() && ( ! isset ( $this->config_data['transitioned_sdk'] ) || ! $this->config_data['transitioned_sdk'] ) ) {
+					// Before instantiate the S3MultiRegionClient, we check the setup to see if there are older versions of the libs used in the SDK.
+					if ( ( ! class_exists( 'GuzzleHttp\Client' ) || class_exists( 'GuzzleHttp\Psr7\Response' ) )  && ( ! class_exists( 'Aws\S3\S3Client' ) || class_exists( 'Aws\S3\S3MultiRegionClient' ) ) ) {
+
+						// Update the regions of the existing AWS destinations to the new SDK format.
+						$current_destinations = $this->config_data['destinations'];
+						if ( ! empty( $current_destinations ) ) {
+							foreach ( $current_destinations as $key => $destination ) {
+								if ( 'aws' !== $destination['type']) {
+									continue;
+								}
+								$destination_object = $this->_settings['destinationClasses'][ $destination['type'] ];
+								$updated_region = $destination_object->get_updated_region( $destination );
+
+								if ( $updated_region ) {
+									$this->config_data['destinations'][ $key ]['region'] = $updated_region;
+									$this->save_config();
+								}
+							}
+						}
+					}
+
+					$this->config_data['transitioned_sdk'] = true;
+					$this->save_config();
+				}
+			}
 		}
 
 		/**
@@ -362,6 +437,11 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 			}
 
 			Snapshot_Controller_Full::get()->deactivate();
+
+			if ( ! class_exists( 'Snapshot_Local_Backups' ) ) {
+				require_once dirname( __FILE__ ) . '/lib/Snapshot/Helper/Local_Backups.php';
+			}
+			Snapshot_Local_Backups::stop();
 		}
 
 		/**
@@ -577,6 +657,11 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 			add_action( 'network_admin_notices', array( $this, 'snapshot_admin_notices_proc' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
 			add_action( 'admin_footer', array( $this, 'snapshot_admin_panels_footer' ) );
+
+			if ( version_compare(PHP_VERSION, '5.5.0', '<') && ! get_option( 'snapshot-aws-combat-dismissed' ) ) {
+				add_action( 'admin_notices', array( 'Snapshot_Helper_UI', 'snapshot_aws_compatibility_notices' ) );
+				add_action( 'network_admin_notices', array( 'Snapshot_Helper_UI', 'snapshot_aws_compatibility_notices' ) );
+			}
 		}
 
 		/**
@@ -1804,20 +1889,44 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 					}
 				}
 			}
-
 			// We have checked for nonces coming into the function.
 			// phpcs:ignore
-			if ( isset( $_POST['snapshot-archive-count'] ) ) {
-				$item['archive-count'] = intval( $_post_array['snapshot-archive-count'] );
+			if ( isset( $_post_array['snapshot-archive-count'] ) ) {
+				$item['archive-count'] = empty( $_post_array['snapshot-archive-count'] ) ? false : intval( $_post_array['snapshot-archive-count'] ); // phpcs:ignore
+				if ( ! isset( $_post_array['snapshot-clean-local'] ) || empty( $_post_array['snapshot-clean-local'] ) ) {
+					$item['archive-count'] = false;
+				}
 			} else {
-				$item['archive-count'] = 0;
+				$item['archive-count'] = false;
 			}
 
 			// phpcs:ignore
+			if ( isset( $_post_array['snapshot-remote-archive-count'] ) ) {
+				$item['remote-archive-count'] = empty( $_post_array['snapshot-remote-archive-count'] ) ? false : intval( $_post_array['snapshot-remote-archive-count'] ); // phpcs:ignore
+				if ( ! isset( $_post_array['snapshot-clean-remote'] ) || empty( $_post_array['snapshot-clean-remote'] ) ) {
+					$item['remote-archive-count'] = false;
+				}
+			} else {
+				$item['remote-archive-count'] = false;
+			}
+			// phpcs:ignore
 			if (!empty($_POST)) {
 				$item['clean-remote'] = !empty($_post_array['snapshot-clean-remote']);
+				$item['clean-local'] = !empty($_post_array['snapshot-clean-local']);
 			} else {
 				$item['clean-remote'] = !empty($item['clean-remote']);
+				$item['clean-local'] = !empty($item['clean-local']);
+			}
+
+			if ( isset( $_post_array['snapshot-transitioned-purging'] ) ) {
+				$item['transitioned-purging'] = $_post_array['snapshot-transitioned-purging'];
+			}
+
+			if ( ! $item['archive-count'] ) {
+				$item['clean-local'] = false;
+			}
+			if ( ! $item['remote-archive-count'] && isset( $item['transitioned-purging'] ) ) {
+				$item['clean-remote'] = false;
 			}
 
 			$item['destination-directory'] = str_replace( '\\', '/', stripslashes( $item['destination-directory'] ) );
@@ -4532,6 +4641,22 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 		}
 
 		/**
+		 * AJAX callback function from all snapshot pages to hide notice about aws sdk compatibility.
+		 *
+		 * @since 3.2
+		 *
+		 * @param none
+		 *
+		 * @return void
+		 */
+		public function snapshot_ajax_dismiss_aws_comp_notice() {
+			if ( current_user_can( "manage_options" ) ) {
+				update_option( 'snapshot-aws-combat-dismissed', true );
+			}
+			die();
+		}
+
+		/**
 		 * AJAX callback function from the snapshot restore form.
 		 *
 		 * @since 1.0.2
@@ -5156,13 +5281,25 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 						$source_table_name = $_POST['snapshot_table'];
 						$dest_table_name = $table_set['table_name_restore'];
 
+						if ( $dest_table_name !== $this->_settings['recover_table_prefix'] . $source_table_name ) {
+							$subsite_migration = true;
+						} else {
+							$subsite_migration = false;
+						}
+
 						if ( ( ! empty( $source_table_name ) ) && ( ! empty( $dest_table_name ) ) ) {
 							$backup_file_content = str_replace( "`" . $source_table_name . "`", "`" . $dest_table_name . "`", $backup_file_content );
 						}
 
 						@set_time_limit( 300 ); // phpcs:ignore
 						$backup_db = new Snapshot_Model_Database_Backup();
-						$backup_db->restore_databases( $backup_file_content );
+						$restore_logs = $backup_db->restore_databases( $backup_file_content, $source_table_name, $subsite_migration );
+
+						if ( ! empty( $restore_logs ) ) {
+							foreach ( $restore_logs as $log ) {
+								$this->snapshot_logger->log_message( $log );
+							}
+						}
 
 						// Check if there were any processing errors during the backup
 						if ( count( $backup_db->errors ) ) {
@@ -5446,6 +5583,10 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 			}
 			flush_rewrite_rules();
 
+
+			Snapshot_Helper_Utility::remove_sql_files( $this->_session->data['restoreFolder'] );
+			Snapshot_Helper_Utility::remove_manifest( $this->_session->data['restoreFolder'] );
+
 			$error_status = array();
 			$error_status['errorStatus'] = false;
 			$error_status['errorText'] = "";
@@ -5481,6 +5622,7 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 					}
 				}
 			}
+			$wpdb->query( 'SET foreign_key_checks = 0' );
 
 			foreach ( $this->_session->data['MANIFEST']['TABLES'] as $table_set ) {
 
@@ -5498,6 +5640,8 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 				$this->snapshot_logger->log_message( 'rename restored table: ' . $sql_str );
 				$wpdb->query( esc_sql( "ALTER TABLE `{$table_set['table_name_restore']}` RENAME `{$table_set['table_name_dest']}`;" ) );
 			}
+
+			$wpdb->query( 'SET foreign_key_checks = 1' );
 		}
 
 		public function snapshot_ajax_restore_convert_db_content( $table_data ) {
@@ -7189,18 +7333,28 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 			$data = isset($item['data']) ? $item['data']: false;
 			if (empty($item['data'])) return false;
 
-			$archive_count = isset($item['archive-count']) ? intval( $item['archive-count'] ) : 0;
-			if (empty($archive_count)) return false;
+			if ( ( ( ! isset( $item['transitioned-purging'] ) ) && ( isset( $item['archive-count'] ) ) && intval( $item['archive-count'] ) ) || ( ( isset( $item['transitioned-purging'] ) ) && ( isset( $item['remote-archive-count'] ) ) && ( $item['remote-archive-count'] ) && ( intval( $item['remote-archive-count'] ) ) ) ) {
+				$archive_count = isset( $item['transitioned-purging'] ) ? intval( $item['remote-archive-count'] ) : intval( $item['archive-count'] );
 
-			$destination_object = Snapshot_Model_Destination_Factory::from_item($item);
-			if (!is_object($destination_object)) return false;
+				if (empty($archive_count)) return false;
 
-			if (!is_callable(array($destination_object, 'purge_remote_items'))) return false;
+				// We decrease the amount of wanted remote backups by one because there is another coming in.
+				// Since we are purging before the current backup is uploaded.
+				$archive_count--;
 
-			$filename_prefix = sanitize_file_name( strtolower( $item['name'] ) );
-			$destination_object->purge_remote_items($filename_prefix, $archive_count);
+				$destination_object = Snapshot_Model_Destination_Factory::from_item($item);
+				if (!is_object($destination_object)) return false;
 
-			return true;
+				if (!is_callable(array($destination_object, 'purge_remote_items'))) return false;
+
+				$filename_prefix = sanitize_file_name( strtolower( $item['name'] ) );
+				$destination_object->purge_remote_items($filename_prefix, $archive_count);
+
+				return true;
+			} else {
+				return false;
+			}
+
 		}
 
 		public function purge_archive_limit( $item_key ) {
@@ -7215,7 +7369,7 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 			// Purge remote files first
 			$this->purge_remote_destination_archive($item);
 
-			if ( ( isset( $item['archive-count'] ) ) && ( intval( $item['archive-count'] ) ) ) {
+			if ( ( isset( $item['archive-count'] ) ) && ( $item['archive-count'] ) && ( intval( $item['archive-count'] ) ) ) {
 				$archive_count = intval( $item['archive-count'] );
 				if ( ( isset( $this->config_data['items'][ $item_key ]['data'] ) )
 				     && ( count( $this->config_data['items'][ $item_key ]['data'] ) > $archive_count )
@@ -8192,6 +8346,184 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 			}
 		}
 
+		/**
+		 * Flag whether snapshot should hide wpmudev branding.
+		 *
+		 * @since 3.2
+		 * @return bool
+		 */
+		public function is_hide_wpmudev_branding() {
+			return apply_filters( 'wpmudev_branding_hide_branding', false );
+		}
+
+		/**
+		 * Get wpmudev hero image should be used in snapshot admin pages.
+		 *
+		 * @since 3.2
+		 *
+		 * @param string $hero_image
+		 *
+		 * @return string
+		 */
+		public function get_wpmudev_hero_image( $hero_image ) {
+			return apply_filters( 'wpmudev_branding_hero_image', $hero_image );
+		}
+
+		/**
+		 * Get footer text that should be displayed in snapshot admin pages.
+		 *
+		 * @since 3.2
+		 *
+		 * @param string $footer_text
+		 *
+		 * @return string
+		 */
+		public function get_wpmudev_footer_text( $footer_text ) {
+			return apply_filters( 'wpmudev_branding_footer_text', $footer_text );
+		}
+
+		/**
+		 * Flag whether snapshot should hide doc link goes to wpmudev.
+		 *
+		 * @since 3.2
+		 * @return bool
+		 */
+		public function is_hide_wpmudev_doc_link() {
+			return apply_filters( 'wpmudev_branding_hide_doc_link', false );
+		}
+
+		/**
+		 * Hook pages with whitelabel functions.
+		 *
+		 * @since 3.2
+		 *
+		 * @param $plugin_pages
+		 *
+		 * @return array
+		 */
+		public function snapshot_whitelabel_pages( $plugin_pages ) {
+			$plugin_pages['toplevel_page_snapshot_pro_dashboard']       = array(
+				array( $this, 'snapshot_maybe_whitelabel_summary_box' ),
+				array( $this, 'snapshot_maybe_whitelabel_box_image' ),
+				array( $this, 'snapshot_maybe_whitelabel_modals' ),
+			);
+			$plugin_pages['snapshot_page_snapshot_pro_snapshots']       = array(
+				array( $this, 'snapshot_maybe_whitelabel_summary_box' ),
+				array( $this, 'snapshot_maybe_whitelabel_box_image' ),
+				array( $this, 'snapshot_maybe_whitelabel_modals' ),
+			);
+			$plugin_pages['snapshot_page_snapshot_pro_destinations']    = array(
+				array( $this, 'snapshot_maybe_whitelabel_modals' ),
+				array( $this, 'snapshot_maybe_whitelabel_summary_box' ),
+			);
+			$plugin_pages['snapshot_page_snapshot_pro_managed_backups'] = array(
+				array( $this, 'snapshot_maybe_whitelabel_box_image' ),
+				array( $this, 'snapshot_maybe_whitelabel_modals' ),
+			);
+
+			return $plugin_pages;
+		}
+
+		/**
+		 * Whitelabel summary box with wpmudev images based on whitelabel configuration from dash plugin.
+		 *
+		 * @since 3.2
+		 */
+		public function snapshot_maybe_whitelabel_summary_box() {
+			$hero_image = $this->get_wpmudev_hero_image( '' );
+			if ( $this->is_hide_wpmudev_branding() && ( empty( $hero_image ) || 'toplevel_page_snapshot_pro_dashboard' !== $this->get_current_screen_id() ) ) {
+				// only hide image
+				wp_add_inline_style(
+					'snapshot-pro-admin-stylesheet',
+					'
+					.wpmud #container.snapshot-three .wps-backups-status .wpmud-box-content:before,
+					.wpmud #container.snapshot-three .try-managed-backups-box .wpmud-box-content:before {
+						display: none;
+					}
+					.wpmud #container.snapshot-three .try-managed-backups-box .wpmud-box-content-wrap {
+						padding-left: 0px;
+					}
+					@media (min-width: 64em) {
+						.wpmud #container.snapshot-three .wps-backups-status .wpmud-box-content .wps-backups-summary {
+							flex: 0 450px;
+							ms-flex: 0 450px;
+						}
+					}'
+				);
+			} elseif ( $this->is_hide_wpmudev_branding() && ! empty( $hero_image ) ) {
+				// replace image
+				// hide image on small screen, due to size
+				wp_add_inline_style(
+					'snapshot-pro-admin-stylesheet',
+					sprintf(
+						'
+						.wpmud #container.snapshot-three .wps-backups-status .wpmud-box-content,
+						.wpmud #container.snapshot-three .try-managed-backups-box .wpmud-box-content {
+							padding-top: 0px;
+						}
+						.wpmud #container.snapshot-three .wps-backups-status .wpmud-box-content:before,
+						.wpmud #container.snapshot-three .try-managed-backups-box .wpmud-box-content:before {
+							background-image: url(%s);
+							background-size: contain;
+							background-position: 50%% center;
+							background-repeat: no-repeat;
+							min-width: 222px;
+							min-height: 212px;
+							-webkit-box-flex: 0;
+							-ms-flex: 0 0 222px;
+							-flex: 0 0 222px;
+						}
+						@media screen and (max-width: 1020px) {
+							.wpmud #container.snapshot-three .wps-backups-status .wpmud-box-content,
+							.wpmud #container.snapshot-three .try-managed-backups-box .wpmud-box-content {
+								padding-top: 15px;
+							}
+							.wpmud #container.snapshot-three .wps-backups-status .wpmud-box-content:before,
+							.wpmud #container.snapshot-three .try-managed-backups-box .wpmud-box-content:before {
+								display:none;
+							}
+						}',
+						esc_url( $hero_image ) )
+				);
+			}
+		}
+
+		/**
+		 * Whitelabel hero images in snapshot boxes.
+		 *
+		 * @since 3.2
+		 */
+		public function snapshot_maybe_whitelabel_box_image() {
+			if ( $this->is_hide_wpmudev_branding() ) {
+				// hide wps-image
+				wp_add_inline_style(
+					'snapshot-pro-admin-stylesheet',
+					'.wpmud .snapshot-three .wps-image, .wpmud #container.snapshot-three .wps-image {
+								display: none;
+							}'
+				);
+			}
+		}
+
+		/**
+		 * Whitelabel hero images in snapshot modals
+		 *
+		 * @since 3.2
+		 */
+		public function snapshot_maybe_whitelabel_modals() {
+			if ( $this->is_hide_wpmudev_branding() ) {
+				wp_add_inline_style(
+					'snapshot-pro-admin-stylesheet',
+					'.wpmud #wps-snapshot-key .wpmud-box-content:after {
+						display: none;
+					}
+					.wpmud #wps-welcome-message .wpmud-box-content:after {
+						display: none;
+					}'
+				);
+			}
+		}
+
 		/** ------------------------------ 2.5 ----------------------------------------------- */
 
 		private function class_loader( $class ) {
@@ -8246,7 +8578,6 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 			return self::$instance;
 		}
 	}
-
 }
 
 $wpmudev_snapshot = WPMUDEVSnapshot::instance();

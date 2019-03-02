@@ -6,9 +6,9 @@
  */
 
 ?>
-<div class="dialog sui-dialog" aria-hidden="true" id="wphb-quick-setup-modal">
+<div class="sui-dialog" aria-hidden="true" tabindex="-1" id="wphb-quick-setup-modal">
 
-	<div class="sui-dialog-overlay" tabindex="-1"></div>
+    <div class="sui-dialog-overlay" data-a11y-dialog-hide></div>
 
 	<div class="sui-dialog-content" aria-labelledby="quickSetup" aria-describedby="dialogDescription" role="dialog">
 
@@ -37,10 +37,12 @@
 				</div>
 			</div>
 
-			<img class="wphb-image wphb-image-center wphb-modal-image-bottom"
-				 src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hummingbird-modal-quicksetup.png' ); ?>"
-				 srcset="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hummingbird-modal-quicksetup@2x.png' ); ?> 2x"
-				 alt="<?php esc_attr_e( 'Reduce your page load time!', 'wphb' ); ?>">
+			<?php if ( ! WP_Hummingbird_Utils::hide_wpmudev_branding() ) : ?>
+				<img class="wphb-image wphb-image-center wphb-modal-image-bottom"
+				     src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hummingbird-modal-quicksetup.png' ); ?>"
+				     srcset="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hummingbird-modal-quicksetup@2x.png' ); ?> 2x"
+				     alt="<?php esc_attr_e( 'Reduce your page load time!', 'wphb' ); ?>">
+			<?php endif; ?>
 		</div>
 
 	</div>

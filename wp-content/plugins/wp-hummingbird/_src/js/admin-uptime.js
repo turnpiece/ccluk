@@ -1,3 +1,5 @@
+import Fetcher from './utils/fetcher';
+
 ( function( $ ) {
     WPHB_Admin.uptime = {
         module: 'uptime',
@@ -8,6 +10,7 @@
         $spinner: null,
         dataRange: null,
         dateFormat: 'MMM d',
+        $reportingForm: null,
         init: function() {
             this.$spinner = $('.spinner');
             this.strings = wphbUptimeStrings;
@@ -16,16 +19,18 @@
             this.downtimeChartData = $('#downtime-chart-json').val();
             this.$disableUptime = $('#wphb-disable-uptime');
             this.dataRange = this.getUrlParameter( 'data-range' );
+            this.$reportingForm = $('#wphb-uptime-reporting');
 
             this.$dataRangeSelector.change( function() {
                 window.location.href = $(this).find( ':selected' ).data( 'url' );
             });
 
             let self = this;
+
             this.$disableUptime.click( function(e) {
                 e.preventDefault();
                 self.$spinner.css( 'visibility', 'visible' );
-                var value = $(this).is(':checked');
+                const value = $(this).is(':checked');
                 if ( value && self.timer ) {
                     clearTimeout( self.timer );
                     self.$spinner.css( 'visibility', 'hidden' );
@@ -37,6 +42,7 @@
                     }, 3000 );
                 }
             });
+
             /* If data range has been selected change the tab urls to retain the chosen range */
             if ( undefined !== this.dataRange ) {
                 $('.wrap-wphb-uptime .wphb-tab a').each( function () {
@@ -59,6 +65,24 @@
             $('#uptime-re-check-status').on( 'click', function(e){
                 e.preventDefault();
                 location.reload();
+            });
+
+            /**
+             * Process form submit for reporting settings.
+             */
+            this.$reportingForm.on('submit', function(e) {
+                e.preventDefault();
+
+                Fetcher.common.saveReportsSettings( self.module, $(this).serialize() )
+                    .then( ( response ) => {
+                        if ( 'undefined' !== typeof response && response.success ) {
+							//WPHB_Admin.notices.show( 'wphb-ajax-update-notice', true );
+							location.reload();
+                        } else {
+                            WPHB_Admin.notices.show( 'wphb-ajax-update-notice', true, 'error', wphb.strings.errorSettingsUpdate  );
+                        }
+                    });
+
             });
         },
 

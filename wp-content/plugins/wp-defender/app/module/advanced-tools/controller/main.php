@@ -526,16 +526,15 @@ class Main extends Controller {
 	 */
 	public function scripts() {
 		if ( $this->isInPage() || $this->isDashboard() ) {
-			\WDEV_Plugin_Ui::load( wp_defender()->getPluginUrl() . 'shared-ui/' );
+			wp_enqueue_script( 'wpmudev-sui' );
+			wp_enqueue_style( 'wpmudev-sui' );
+
 			wp_enqueue_script( 'defender' );
 			wp_enqueue_style( 'defender' );
 			wp_enqueue_script( 'adtools', wp_defender()->getPluginUrl() . 'app/module/advanced-tools/js/scripts.js' );
 			$data = array(
 				'edit_email_title' => __( 'Edit Email', wp_defender()->domain ),
 			);
-			if ( $this->isInPage() ) {
-				remove_filter( 'admin_body_class', array( 'WDEV_Plugin_Ui', 'admin_body_class' ) );
-			}
 			wp_localize_script( 'adtools', 'defender_adtools', $data );
 		}
 	}

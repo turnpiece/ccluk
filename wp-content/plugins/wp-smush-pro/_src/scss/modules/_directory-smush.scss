@@ -4,6 +4,14 @@
 
 @include body-class {
 
+    .sui-meta-boxes-directory .smush-final-log {
+        margin-top: 30px;
+
+        .sui-description {
+            margin-top: 10px;
+        }
+    }
+
     ul.fancytree-container {
 
         color: #666;
@@ -126,10 +134,9 @@
             position: relative;
             transition: .2s;
 
+            @include icon( before, check );
             &:before {
                 opacity: 0;
-                font-family: wpmudev-plugin-icons!important;
-                content: "(";
                 color: #fff;
                 font-size: 10px;
                 line-height: 14px;
@@ -290,6 +297,10 @@
             span.fancytree-title {
                 color: #17A8E3;
             }
+        }
+
+        span.fancytree-focused {
+            background-color: #e1e1e1 !important;
         }
     }
 

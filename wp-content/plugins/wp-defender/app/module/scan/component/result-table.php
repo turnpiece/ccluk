@@ -5,6 +5,7 @@
 
 namespace WP_Defender\Module\Scan\Component;
 
+use Hammer\Helper\HTTP_Helper;
 use WP_Defender\Module\Scan\Model\Result_Item;
 
 if ( ! class_exists( 'WP_List_Table' ) ) {
@@ -16,7 +17,7 @@ class Result_Table extends \WP_List_Table {
 
 	public function __construct( $args = array() ) {
 		parent::__construct( array_merge( array(
-			'plural'     => '',
+			'plural'     => 'sui-table sui-accordion',
 			'autoescape' => false,
 			'screen'     => ''
 		), $args ) );
@@ -30,16 +31,14 @@ class Result_Table extends \WP_List_Table {
 			case Result_Item::STATUS_ISSUE:
 			default:
 				$columns = array(
-					'col_bulk'   => '<input id="apply-all" type="checkbox"/>',
 					'col_file'   => esc_html__( 'Suspicious File', wp_defender()->domain ),
-					'col_issue'  => esc_html__( 'Issue', wp_defender()->domain ),
+					'col_issue'  => esc_html__( 'Details', wp_defender()->domain ),
 					'col_action' => '',
 				);
 				break;
 			case Result_Item::STATUS_IGNORED:
 				$columns = array(
-					'col_bulk'           => '<input id="apply-all" type="checkbox"/>',
-					'col_file'           => esc_html__( 'File Name', wp_defender()->domain ),
+					'col_file'           => esc_html__( 'Suspicious File', wp_defender()->domain ),
 					'col_ignore_date'    => esc_html__( 'Date Ignored', wp_defender()->domain ),
 					'col_ignored_action' => '',
 				);
@@ -85,13 +84,13 @@ class Result_Table extends \WP_List_Table {
 	public function column_col_ignored_action( Result_Item $item ) {
 		ob_start();
 		?>
-        <form method="post" class="ignore-restore scan-frm">
+        <form method="post" class="ignore-restore scan-frm float-r">
             <input type="hidden" name="action" value="unIgnoreItem"/>
             <input type="hidden" name="id" value="<?php echo $item->id ?>"/>
 			<?php wp_nonce_field( 'unIgnoreItem' ) ?>
-            <button type="submit" tooltip="<?php esc_attr_e( "Restore File", wp_defender()->domain ) ?>"
-                    class="button button-small">
-                <i class="wdv-icon wdv-icon-fw wdv-icon-refresh" aria-hidden="true"></i>
+            <button type="submit" data-tooltip="<?php esc_attr_e( "Restore File", wp_defender()->domain ) ?>"
+                    class="sui-button-icon sui-tooltip sui-tooltip-top">
+                <i class="sui-icon-update" aria-hidden="true"></i>
             </button>
         </form>
 		<?php
@@ -103,7 +102,7 @@ class Result_Table extends \WP_List_Table {
 	 */
 	function prepare_items() {
 		$model        = Scan_Api::getLastScan();
-		$itemsPerPage = 100;
+		$itemsPerPage = 40;
 		$totalItems   = $model->countAll( $this->type );
 
 		$this->set_pagination_args( array(
@@ -113,7 +112,16 @@ class Result_Table extends \WP_List_Table {
 		) );
 		$offset                = ( $this->get_pagenum() - 1 ) * $itemsPerPage;
 		$this->_column_headers = array( $this->get_columns(), array(), $this->get_sortable_columns() );
-		$this->items           = $model->getItems( $offset . ',' . $itemsPerPage, $this->type );
+		$issueType             = HTTP_Helper::retrieve_get( 'type', null );
+		if ( ! in_array( $issueType, array(
+			'core',
+			'vuln',
+			'code'
+		) ) ) {
+			$issueType = null;
+		}
+
+		$this->items = $model->getItems( $offset . ',' . $itemsPerPage, $this->type, $issueType );
 	}
 
 	/**
@@ -122,7 +130,7 @@ class Result_Table extends \WP_List_Table {
 	 * @return string
 	 */
 	public function column_col_bulk( $item ) {
-		return '<input value="' . $item->id . '" type="checkbox" class="scan-chk">';
+		return '<label class="sui-checkbox"><input value="' . $item->id . '" type="checkbox" class="scan-chk"><span aria-hidden="true"></span></label>';
 	}
 
 	/**
@@ -131,7 +139,7 @@ class Result_Table extends \WP_List_Table {
 	 * @return string
 	 */
 	public function column_col_file( Result_Item $item ) {
-		return $item->getTitle() . ' <span class="sub">' . $item->getSubtitle() . '</span>';
+		return $this->column_col_bulk( $item ) . '<span>' . $item->getTitle() . '</span>';
 	}
 
 	/**
@@ -140,7 +148,7 @@ class Result_Table extends \WP_List_Table {
 	 * @return mixed
 	 */
 	public function column_col_issue( Result_Item $item ) {
-		return $item->getIssueDetail();
+		return $item->getIssueSummary();
 	}
 
 	/**
@@ -149,13 +157,11 @@ class Result_Table extends \WP_List_Table {
 	 * @return string
 	 */
 	public function column_col_action( Result_Item $item ) {
-		$content = $item->renderDialog();
-
-		$content .= '<a href="#dia_' . $item->id . '" rel="dialog" role="button" tooltip="' . esc_attr__( "Fix Issue", wp_defender()->domain ) . '" class="fix">
-                        <img src="' . wp_defender()->getPluginUrl() . 'assets/img/icon-fix.svg">
-                    </a>';
-
-		return $content;
+		?>
+        <span class="sui-accordion-open-indicator" aria-label="Expand">
+            <i class="sui-icon-chevron-down" aria-hidden="true"></i>
+        </span>
+		<?php
 	}
 
 	/**
@@ -165,21 +171,23 @@ class Result_Table extends \WP_List_Table {
 	 * @access public
 	 */
 	public function display() {
-		$singular = $this->_args['singular'];
 
 		$this->display_tablenav( 'top' );
 		?>
-        <table class="<?php echo( $this->type == Result_Item::STATUS_FIXED ? 'resolved-table' : null ) ?>">
-            <thead>
-            <tr>
-				<?php $this->print_column_headers(); ?>
-            </tr>
-            </thead>
+        <div class="sui-row sui-flushed">
+            <table id="scan-result-table"
+                   class="sui-table <?php echo $this->type == Result_Item::STATUS_ISSUE ? 'sui-accordion' : null ?>">
+                <thead>
+                <tr>
+					<?php $this->print_column_headers(); ?>
+                </tr>
+                </thead>
 
-            <tbody>
-			<?php $this->display_rows_or_placeholder(); ?>
-            </tbody>
-        </table>
+                <tbody>
+				<?php $this->display_rows_or_placeholder(); ?>
+                </tbody>
+            </table>
+        </div>
 		<?php
 		$this->display_tablenav( 'bottom' );
 	}
@@ -189,34 +197,41 @@ class Result_Table extends \WP_List_Table {
 			return null;
 		}
 		?>
-        <div class="bulk-nav">
-            <div class="bulk-action">
+        <div class="sui-row">
+            <div class="sui-col">
                 <form method="post" class="scan-bulk-frm">
                     <input type="hidden" name="action" value="scanBulkAction"/>
 					<?php wp_nonce_field( 'scanBulkAction' ) ?>
-                    <select name="bulk" class="bulk-action">
-						<?php if ( $this->type != Result_Item::STATUS_IGNORED ): ?>
-                            <option value="ignore"><?php _e( "Ignore", wp_defender()->domain ) ?></option>
-                            <!--                            <option value="resolve">--><?php //_e( "Resolve", wp_defender()->domain ) ?><!--</option>-->
-                            <!--                            <option value="delete">--><?php //_e( "Delete", wp_defender()->domain ) ?><!--</option>-->
-						<?php endif; ?>
-						<?php if ( $this->type == Result_Item::STATUS_IGNORED ): ?>
-                            <option value="unignore"><?php _e( "Restore", wp_defender()->domain ) ?></option>
-						<?php endif; ?>
-                    </select>
-                    <button class="button button-grey"><?php _e( "Apply", wp_defender()->domain ) ?></button>
+                    <div class="bulk-action-bar">
+                        <label class="sui-checkbox apply-all">
+                            <input type="checkbox" id="apply-all"/>
+                            <span aria-hidden="true"></span>
+                        </label>
+                        <select name="bulk" class="sui-select-sm bulk-action">
+                            <option value=""><?php _e( "Bulk action", wp_defender()->domain ) ?></option>
+							<?php if ( $this->type == Result_Item::STATUS_ISSUE ): ?>
+                                <option value="ignore"><?php _e( "Ignore", wp_defender()->domain ) ?></option>
+							<?php endif; ?>
+							<?php if ( $this->type == Result_Item::STATUS_IGNORED ): ?>
+                                <option value="unignore"><?php _e( "Restore", wp_defender()->domain ) ?></option>
+							<?php endif; ?>
+                        </select>
+                        <button type="submit" class="sui-button" disabled>
+							<?php _e( "Bulk Update", wp_defender()->domain ) ?>
+                        </button>
+                    </div>
                 </form>
             </div>
-            <div class="nav">
-                <span><?php printf( __( "%s Results", wp_defender()->domain ), $this->_pagination_args['total_items'] ) ?></span>
-                <div class="button-group is-hidden-mobile">
-					<?php $this->pagination( 'top' ) ?>
-                </div>
-                <div class="button-group is-hidden-tablet">
-					<?php $this->pagination( 'top' ) ?>
+            <div class="sui-col">
+                <div class="sui-pagination-wrap">
+                    <span class="sui-pagination-results">
+                        <?php printf( __( "%s results", wp_defender()->domain ), $this->_pagination_args['total_items'] ) ?>
+                    </span>
+                    <ul class="sui-pagination">
+						<?php $this->pagination( 'top' ) ?>
+                    </ul>
                 </div>
             </div>
-            <div class="clear"></div>
         </div>
 		<?php
 	}
@@ -230,9 +245,18 @@ class Result_Table extends \WP_List_Table {
 	 * @param object $item The current item
 	 */
 	public function single_row( $item ) {
-		echo '<tr id="mid-' . $item->id . '">';
+		echo '<tr id="mid-' . $item->id . '" class="sui-accordion-item sui-error">';
 		$this->single_row_columns( $item );
 		echo '</tr>';
+		if ( $this->type == Result_Item::STATUS_ISSUE ) {
+			echo '<tr class="sui-accordion-item-content">';
+			echo '<td colspan="' . $this->get_column_count() . '">' . $this->single_row_according_content( $item ) . '</td>';
+			echo '</tr>';
+		}
+	}
+
+	public function single_row_according_content( $item ) {
+		return $item->renderIssueContent();
 	}
 
 	/**
@@ -264,37 +288,82 @@ class Result_Table extends \WP_List_Table {
 		$current_url = remove_query_arg( array( 'hotkeys_highlight_last', 'hotkeys_highlight_first' ), $current_url );
 		$current_url = esc_url( $current_url );
 
-		$radius = 3;
+		$radius = 2;
 		if ( $current_page > 1 && $total_pages > $radius ) {
-			$links['first'] = sprintf( '<a class="button button-light" href="%s">%s</a>',
-				add_query_arg( 'paged', 1, $current_url ), '&laquo;' );
-			$links['prev']  = sprintf( '<a class="button button-light" href="%s">%s</a>',
-				add_query_arg( 'paged', $current_page - 1, $current_url ), '&lsaquo;' );
+			$links['prev'] = sprintf( '<li><a href="%s">%s</a></li>',
+				add_query_arg( 'paged', $current_page - 1, $current_url ), '<i class="sui-icon-chevron-left" aria-hidden="true"></i>' );
 		}
 
 		for ( $i = 1; $i <= $total_pages; $i ++ ) {
 			if ( ( $i >= 1 && $i <= $radius ) || ( $i > $current_page - 2 && $i < $current_page + 2 ) || ( $i <= $total_pages && $i > $total_pages - $radius ) ) {
 				if ( $i == $current_page ) {
-					$links[ $i ] = sprintf( '<a href="#" class="button audit-nav button-light" disabled="">%s</a>', $i );
+					$links[ $i ] = sprintf( '<li><a href="#" disabled="">%s</a></li>', $i );
 				} else {
-					$links[ $i ] = sprintf( '<a class="button audit-nav button-light" href="%s">%s</a>',
+					$links[ $i ] = sprintf( '<li><a href="%s">%s</a></li>',
 						add_query_arg( 'paged', $i, $current_url ), $i );
 				}
 			} elseif ( $i == $current_page - $radius || $i == $current_page + $radius ) {
-				$links[ $i ] = '<a href="#" class="button audit-nav button-light" disabled="">...</a>';
+				$links[ $i ] = '<li><a href="#" disabled="">...</a></li>';
 			}
 		}
 
 		if ( $current_page < $total_pages && $total_pages > $radius ) {
-			$links['next'] = sprintf( '<a class="button audit-nav button-light" href="%s">%s</a>',
-				add_query_arg( 'paged', $current_page + 1, $current_url ), '&rsaquo;' );
-			$links['last'] = sprintf( '<a class="button audit-nav button-light" href="%s">%s</a>',
-				add_query_arg( 'paged', $total_pages, $current_url ), '&raquo;' );
+			$links['next'] = sprintf( '<li><a href="%s">%s</a></li>',
+				add_query_arg( 'paged', $current_page + 1, $current_url ), '<i class="sui-icon-chevron-right" aria-hidden="true"></i>' );
 		}
 		$output            = join( "\n", $links );
 		$this->_pagination = $output;
 
 		echo $this->_pagination;
+	}
+
+	/**
+	 * Generates the columns for a single row of the table
+	 *
+	 * @since 3.1.0
+	 *
+	 * @param object $item The current item
+	 */
+	protected function single_row_columns( $item ) {
+		list( $columns, $hidden, $sortable, $primary ) = $this->get_column_info();
+		foreach ( $columns as $column_name => $column_display_name ) {
+			$classes = "$column_name column-$column_name";
+			if ( $primary === $column_name ) {
+				$classes .= ' sui-table-item-title';
+			}
+
+			if ( in_array( $column_name, $hidden ) ) {
+				$classes .= ' hidden';
+			}
+
+			// Comments column uses HTML in the display name with screen reader text.
+			// Instead of using esc_attr(), we strip tags to get closer to a user-friendly string.
+			$data = 'data-colname="' . wp_strip_all_tags( $column_display_name ) . '"';
+
+			$attributes = "class='$classes' $data";
+
+			if ( 'cb' === $column_name ) {
+				echo '<th scope="row" class="check-column">';
+				echo $this->column_cb( $item );
+				echo '</th>';
+			} elseif ( method_exists( $this, '_column_' . $column_name ) ) {
+				echo call_user_func(
+					array( $this, '_column_' . $column_name ),
+					$item,
+					$classes,
+					$data,
+					$primary
+				);
+			} elseif ( method_exists( $this, 'column_' . $column_name ) ) {
+				echo "<td $attributes>";
+				echo call_user_func( array( $this, 'column_' . $column_name ), $item );
+				echo "</td>";
+			} else {
+				echo "<td $attributes>";
+				echo $this->column_default( $item, $column_name );
+				echo "</td>";
+			}
+		}
 	}
 
 }
