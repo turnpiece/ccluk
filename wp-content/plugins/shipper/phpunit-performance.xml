@@ -1,0 +1,33 @@
+<phpunit
+	bootstrap="tests/bootstrap.php"
+	backupGlobals="false"
+	colors="true"
+	convertErrorsToExceptions="true"
+	convertNoticesToExceptions="true"
+	convertWarningsToExceptions="true"
+	>
+	<testsuites>
+		<testsuite>
+			<directory suffix="-test.php">./tests/</directory>
+		</testsuite>
+	</testsuites>
+	<filter>
+		<whitelist processUncoveredFilesFromWhitelist="true">
+			<directory suffix=".php">./lib/shipper</directory>
+			<exclude>
+				<directory suffix=".php">./lib/aws/</directory>
+				<directory suffix=".php">./lib/wpmudev/</directory>
+
+				<directory suffix=".php">./lib/shipper/stub/</directory>
+				<directory suffix=".php">./lib/shipper/task/api/</directory>
+
+				<file>./lib/shipper/class-main.php</file>
+				<file>./lib/shipper/controller/class-admin.php</file>
+				<file>./lib/shipper/controller/class-ajax.php</file>
+			</exclude>
+		</whitelist>
+	</filter>
+	<listeners>
+		<listener class="Shipper_Timer_Test_Listener" file="tests/lib/class-phpunit-listener.php" />
+	</listeners>
+</phpunit>

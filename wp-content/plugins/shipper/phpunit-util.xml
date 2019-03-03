@@ -1,0 +1,23 @@
+<phpunit
+	bootstrap="tests/bootstrap.php"
+	backupGlobals="false"
+	colors="true"
+	convertErrorsToExceptions="true"
+	convertNoticesToExceptions="true"
+	convertWarningsToExceptions="true"
+	>
+	<testsuites>
+		<testsuite name="util">
+			<directory suffix="-util.php">./tests/</directory>
+		</testsuite>
+	</testsuites>
+	<filter>
+		<whitelist processUncoveredFilesFromWhitelist="true">
+			<directory suffix=".php">./lib/shipper</directory>
+			<exclude>
+				<directory suffix=".php">./lib/aws/</directory>
+				<directory suffix=".php">./lib/wpmudev/</directory>
+			</exclude>
+		</whitelist>
+	</filter>
+</phpunit>

@@ -1,0 +1,2394 @@
+# Copyright (C) 2019 WPMU DEV
+# This file is distributed under the same license as the Shipper package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Shipper 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/shipper\n"
+"POT-Creation-Date: 2019-01-24 03:14:06+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2019-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"X-Generator: grunt-wp-i18n1.0.2\n"
+
+#: lib/functions.php:148 lib/shipper/model/stored/class-options.php:122
+msgid "Anonymous"
+msgstr ""
+
+#: lib/shipper/controller/ajax/class-notifications.php:57
+msgid "Name is mandatory field"
+msgstr ""
+
+#: lib/shipper/controller/ajax/class-notifications.php:63
+msgid "This is not a valid email: %s"
+msgstr ""
+
+#: lib/shipper/controller/ajax/class-notifications.php:76
+msgid "Unable to add email %s"
+msgstr ""
+
+#: lib/shipper/controller/ajax/class-notifications.php:91
+msgid "This is not a valid email"
+msgstr ""
+
+#: lib/shipper/controller/ajax/class-notifications.php:104
+msgid "Unable to delete email %s"
+msgstr ""
+
+#: lib/shipper/controller/class-admin.php:150
+#: lib/shipper/controller/class-admin.php:172
+#: lib/shipper/controller/class-admin.php:193
+#: lib/shipper/controller/class-admin.php:329
+#: lib/shipper/controller/class-admin.php:344
+#: lib/shipper/controller/class-admin.php:359
+msgid "Nope."
+msgstr ""
+
+#: lib/shipper/controller/class-admin.php:318
+msgid "Destination error: %s"
+msgstr ""
+
+#: lib/shipper/controller/class-ajax.php:38
+msgid "Direct %s access attempt"
+msgstr ""
+
+#: lib/shipper/controller/class-ajax.php:41
+msgid "You are not wanted here, leave."
+msgstr ""
+
+#: lib/shipper/controller/class-ajax.php:51
+msgid "How did you get here?"
+msgstr ""
+
+#: lib/shipper/controller/class-runner.php:201
+msgid "Encountered a FATAL ERROR: %1$s in %2$s on line %3$d"
+msgstr ""
+
+#: lib/shipper/controller/class-runner.php:283
+msgid "Non-success response code (%d)"
+msgstr ""
+
+#: lib/shipper/controller/heartbeat/class-migration.php:48
+msgid "Initializing migration, please be patient."
+msgstr ""
+
+#: lib/shipper/controller/heartbeat/class-preflight.php:52
+msgid "Checking <b>Source Server's configurations</b>..."
+msgstr ""
+
+#: lib/shipper/controller/heartbeat/class-preflight.php:57
+msgid "Checking <b>Destination Server's configurations</b>..."
+msgstr ""
+
+#: lib/shipper/controller/heartbeat/class-preflight.php:62
+msgid "Checking <b>files</b>..."
+msgstr ""
+
+#: lib/shipper/controller/runner/class-migration.php:103
+msgid "Migration start -- %s"
+msgstr ""
+
+#: lib/shipper/controller/runner/class-migration.php:115
+msgid "Preflight check complete"
+msgstr ""
+
+#: lib/shipper/controller/runner/class-migration.php:165
+msgid "Cancelled"
+msgstr ""
+
+#: lib/shipper/controller/runner/class-migration.php:170
+msgid "Migration complete"
+msgstr ""
+
+#: lib/shipper/controller/runner/class-migration.php:232
+msgid "Migration inactive"
+msgstr ""
+
+#: lib/shipper/controller/runner/class-migration.php:236
+msgid "Attempting to cancel %s migration"
+msgstr ""
+
+#: lib/shipper/controller/runner/class-migration.php:261
+msgid "Attempting cancel on %s migration"
+msgstr ""
+
+#: lib/shipper/controller/runner/class-migration.php:269
+msgid "Canceling remote migration failed"
+msgstr ""
+
+#: lib/shipper/controller/runner/class-migration.php:277
+msgid "This is Hub-initiated migration, no remote to cancel"
+msgstr ""
+
+#: lib/shipper/controller/runner/class-migration.php:282
+msgid "Migration cancelled"
+msgstr ""
+
+#: lib/shipper/controller/runner/class-preflight.php:40
+msgid "Preflight check cancel"
+msgstr ""
+
+#: lib/shipper/controller/runner/class-preflight.php:79
+msgid "Preflight check start"
+msgstr ""
+
+#: lib/shipper/controller/runner/class-preflight.php:174
+msgid "Preflight check issue: %s"
+msgstr ""
+
+#: lib/shipper/controller/runner/class-preflight.php:180
+msgid "Preflight check error: %s"
+msgstr ""
+
+#: lib/shipper/helper/class-log.php:178
+msgid "Log file cleared"
+msgstr ""
+
+#: lib/shipper/helper/fs/class-list.php:269
+#: lib/shipper/task/export/class-files.php:64
+msgid "Skipping excluded item: %s"
+msgstr ""
+
+#: lib/shipper/helper/fs/class-list.php:284
+msgid "Skipping unreadable file: %s"
+msgstr ""
+
+#: lib/shipper/helper/fs/class-remote.php:77
+msgid "Credentials update failed: %s"
+msgstr ""
+
+#: lib/shipper/helper/fs/class-remote.php:84
+msgid "Credentials updating task silently failed."
+msgstr ""
+
+#: lib/shipper/helper/fs/class-remote.php:117
+#: lib/shipper/helper/fs/class-remote.php:126
+#: lib/shipper/helper/fs/class-remote.php:253
+msgid "Initialization error on %s"
+msgstr ""
+
+#: lib/shipper/helper/fs/class-remote.php:160
+msgid "Error uploading file %1$s, part %2$s"
+msgstr ""
+
+#: lib/shipper/helper/fs/class-remote.php:192
+msgid "Error finalizing upload %s"
+msgstr ""
+
+#: lib/shipper/helper/fs/class-remote.php:225
+msgid "Unable to upload %s"
+msgstr ""
+
+#: lib/shipper/helper/fs/class-remote.php:270
+msgid "Error downloading file %s"
+msgstr ""
+
+#: lib/shipper/helper/fs/class-remote.php:284
+msgid "Error finalizing download %s"
+msgstr ""
+
+#: lib/shipper/helper/fs/class-remote.php:309
+msgid "Unable to locate the source file: %s"
+msgstr ""
+
+#: lib/shipper/helper/fs/class-remote.php:319
+msgid "Unable to download %s"
+msgstr ""
+
+#: lib/shipper/helper/fs/class-remote.php:546
+msgid "Error initializing upload: %s"
+msgstr ""
+
+#: lib/shipper/model/class-database.php:351
+msgid "Destination table %s exists, moving it to %s first"
+msgstr ""
+
+#: lib/shipper/model/class-database.php:372
+msgid "Move source table %1$s to destination: %2$s"
+msgstr ""
+
+#: lib/shipper/model/class-database.php:382
+msgid "Error renaming table %1$s to %2$s. The DB said: %3$s"
+msgstr ""
+
+#: lib/shipper/model/class-database.php:393
+msgid "Clean up destination table: %s"
+msgstr ""
+
+#: lib/shipper/model/class-database.php:401
+msgid "Error removing intermediate backup table %1$s: %2$s"
+msgstr ""
+
+#: lib/shipper/model/database/table/class-export.php:79
+msgid "Shipper table export for %s"
+msgstr ""
+
+#: lib/shipper/model/database/table/class-export.php:82
+msgid "Export started: on %1$s (%2$d)"
+msgstr ""
+
+#: lib/shipper/model/database/table/class-export.php:84
+msgid "Total rows: %d"
+msgstr ""
+
+#: lib/shipper/model/database/table/class-export.php:159
+msgid "Changing table %1$s %2$s from %3$s to %4$s"
+msgstr ""
+
+#: lib/shipper/model/database/table/class-export.php:305
+msgid "Unable to select results from %1$s:%2$d,%3$d - the database said: [%4$s]"
+msgstr ""
+
+#: lib/shipper/model/database/table/class-import.php:70
+msgid "Unable to read table %1$s data from %2$s"
+msgstr ""
+
+#: lib/shipper/model/database/table/class-import.php:97
+msgid "Unable to get the number of statements to import for %s"
+msgstr ""
+
+#: lib/shipper/model/database/table/class-import.php:137
+msgid "Unable to extract the statements to import for %1$s from position %2$d"
+msgstr ""
+
+#: lib/shipper/model/database/table/class-import.php:391
+msgid "Fatal error processing %1$s at position [%2$d][%3$d]: %4$s"
+msgstr ""
+
+#: lib/shipper/model/database/table/class-import.php:392
+msgid "Ignored issue processing %1$s at position [%2$d][%3$d]: %4$s"
+msgstr ""
+
+#: lib/shipper/model/database/table/class-import.php:459
+#: lib/shipper/model/database/table/class-import.php:505
+msgid "Error in statement %1$s: The database said: %2$s"
+msgstr ""
+
+#: lib/shipper/model/database/table/class-import.php:595
+msgid "Unable to find primary key for %1$s (%2$s)."
+msgstr ""
+
+#: lib/shipper/model/database/table/class-import.php:613
+msgid "Error processing statement in %1$s - empty resultset for %2$d"
+msgstr ""
+
+#: lib/shipper/model/database/table/class-import.php:655
+msgid "Error updating row %1$d - %2$s"
+msgstr ""
+
+#: lib/shipper/model/stored/class-estimate.php:84
+msgid ""
+"Your site is quite large (%1$s) and <b>it could take %2$dh - %3$dh to "
+"migrate</b> because we are migrating one-file-at-a-time to make sure the "
+"process works."
+msgstr ""
+
+#: lib/shipper/model/stored/class-estimate.php:85
+msgid ""
+"Your site is reasonably small (%1$s), but <b>it could still take around "
+"%2$dh - %3$dh to migrate</b> because we are migrating one-file-at-a-time to "
+"make sure the process works."
+msgstr ""
+
+#: lib/shipper/model/stored/class-migration.php:220
+msgid "running"
+msgstr ""
+
+#: lib/shipper/model/stored/class-migration.php:221
+msgid "idle"
+msgstr ""
+
+#: lib/shipper/model/stored/class-migration.php:223
+msgid "Hub-originated"
+msgstr ""
+
+#: lib/shipper/model/stored/class-migration.php:224
+msgid "User-initiated"
+msgstr ""
+
+#: lib/shipper/model/stored/class-preflight.php:84
+msgid "Generic preflight error"
+msgstr ""
+
+#: lib/shipper/model/system/class-php.php:115
+#: lib/shipper/model/system/class-server.php:145
+#: lib/shipper/model/system/class-wp.php:71
+msgid "Yes"
+msgstr ""
+
+#: lib/shipper/model/system/class-php.php:115
+#: lib/shipper/model/system/class-server.php:146
+#: lib/shipper/model/system/class-wp.php:71
+msgid "No"
+msgstr ""
+
+#: lib/shipper/model/system/class-server.php:122
+msgid "Apache"
+msgstr ""
+
+#: lib/shipper/model/system/class-server.php:123
+msgid "Microsoft IIS"
+msgstr ""
+
+#: lib/shipper/model/system/class-server.php:124
+msgid "Nginx"
+msgstr ""
+
+#: lib/shipper/model/system/class-server.php:126
+msgid "something else"
+msgstr ""
+
+#: lib/shipper/task/api/destinations/class-add.php:30
+msgid "Error adding current site"
+msgstr ""
+
+#: lib/shipper/task/api/destinations/class-get.php:27
+msgid "Error listing destinations: service encountered an error"
+msgstr ""
+
+#: lib/shipper/task/api/destinations/class-get.php:40
+msgid "Error listing destinations: service responded with an empty list"
+msgstr ""
+
+#: lib/shipper/task/api/destinations/class-hublist.php:27
+msgid "Error listing Hub sites: service encountered an error"
+msgstr ""
+
+#: lib/shipper/task/api/destinations/class-hublist.php:40
+msgid "Error listing Hub sites: service responded with an empty list"
+msgstr ""
+
+#: lib/shipper/task/api/destinations/class-hubprepare.php:29
+msgid "Error preparing site %s: %s"
+msgstr ""
+
+#: lib/shipper/task/api/destinations/class-ping.php:33
+#: lib/shipper/task/api/migrations/class-get.php:29
+msgid "Missing domain to check"
+msgstr ""
+
+#: lib/shipper/task/api/destinations/class-ping.php:46
+msgid "Domain %s is not Hub-accessible"
+msgstr ""
+
+#: lib/shipper/task/api/destinations/class-remoteadd.php:29
+msgid "Error triggering add for site %s: %s"
+msgstr ""
+
+#: lib/shipper/task/api/info/class-creds.php:27
+msgid "Service error: unable to acquire mediation token"
+msgstr ""
+
+#: lib/shipper/task/api/info/class-creds.php:88
+#: lib/shipper/task/api/info/class-get.php:41
+#: lib/shipper/task/api/info/class-set.php:33
+#: lib/shipper/task/api/migrations/class-cancel.php:43
+#: lib/shipper/task/api/migrations/class-get.php:43
+#: lib/shipper/task/api/migrations/class-set.php:59
+#: lib/shipper/task/api/migrations/class-start.php:77
+msgid "Service error: %s"
+msgstr ""
+
+#: lib/shipper/task/api/migrations/class-cancel.php:29
+msgid "Missing domain to cancel migration"
+msgstr ""
+
+#: lib/shipper/task/api/migrations/class-set.php:41
+msgid "Missing domain to update"
+msgstr ""
+
+#: lib/shipper/task/api/migrations/class-start.php:29
+msgid "Missing domain to attempt migration from"
+msgstr ""
+
+#: lib/shipper/task/api/migrations/class-start.php:42
+msgid "Missing domain to attempt migration to"
+msgstr ""
+
+#: lib/shipper/task/api/migrations/class-start.php:55
+msgid "Missing migration type to attempt"
+msgstr ""
+
+#: lib/shipper/task/check/class-files.php:68
+msgid "Large Files"
+msgstr ""
+
+#: lib/shipper/task/check/class-files.php:123
+msgid "Filenames"
+msgstr ""
+
+#: lib/shipper/task/check/class-files.php:163
+msgid "Package size"
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:29
+msgid "No remote data to process"
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:41
+msgid "Invalid remote data for section %s"
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:48
+msgid "Invalid local data for section %s"
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:57
+msgid "Invalid local data for section %1$s, key %2$s"
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:93
+#: lib/shipper/task/check/class-system.php:176
+msgid "PHP Version"
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:98
+msgid "PHP Version Difference"
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:102
+msgid ""
+"Your local PHP install major version is %1$d, while your remote setup runs "
+"on PHP v%2$d."
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:103
+msgid ""
+"While this might not be significant, having major version differences "
+"<i>can</i> cause issues on your destination site."
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:110
+msgid ""
+"Major PHP versions on your source and destination servers do not differ "
+"significantly."
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:127
+msgid "MySQL Version"
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:132
+msgid "MySQL Version Difference"
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:136
+msgid "Your local MySQL version is %1$s, while your remote system uses %2$s"
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:137
+msgid ""
+"While this might not be significant, having big version differences "
+"<i>can</i> cause issues on your destination site."
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:144
+msgid "MySQL version is %s on this server, which is fine to migrate."
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:162
+msgid "Database Charset"
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:167
+msgid "Database Charsets Difference"
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:171
+msgid "Your local database uses %1$s charset, while your remote system uses %2$s."
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:172
+msgid "This may cause issues with your migrated content."
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:179
+msgid "Charset is %s on this server, which is fine to migrate."
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:197 tpl/pages/tools/sysinfo.php:13
+msgid "Server"
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:202
+msgid "Server Type Difference"
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:207
+msgid "Your local server is %1$s, while your remote system uses %2$s."
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:211
+msgid "This may cause issues with your migrated server setup."
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:218
+msgid "Remote server is %s, which is fine to migrate."
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:236
+msgid "Server OS"
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:241
+msgid "Server Operating System Difference"
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:245
+msgid "Your local OS is %1$s, but your remote system runs %2$s."
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:246
+msgid "This may cause issues with hardcoded paths and system libraries."
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:253
+msgid "Remote operating system is %s, which is fine to migrate."
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:271
+msgid "Multisite"
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:276
+msgid "Multisite Setups Difference"
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:278
+msgid "Your source is multisite, but the destination is a single site installation."
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:279
+msgid "Your source is single site, but the destination is a multisite installation."
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:281
+msgid "Both should have the same installation type for migration to be succesful."
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:285
+msgid "Both the source and destination are a multisite installation."
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:286
+msgid "Both the source and destination are a single site installation."
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:302
+msgid "Subdomain Setup"
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:307
+#: lib/shipper/task/check/class-sysdiff.php:315
+msgid "Subdomain"
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:308
+#: lib/shipper/task/check/class-sysdiff.php:314
+msgid "Subdirectory"
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:312
+msgid "Multisite Subdomain Setups Difference"
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:319
+msgid ""
+"Your source network is following the %1$s addresses while the destination "
+"network is following %2$s addresses. Both should have the same address "
+"pattern for the migration to be successful"
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:327
+msgid ""
+"Both the source and destination have the same pattern for their site "
+"address, i.e. %s"
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:31
+msgid "No data to process"
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:40
+msgid "Invalid data for section %s"
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:70
+msgid "Suhosin"
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:76
+msgid "<b>Suhosin extension loaded!</b>"
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:77
+msgid "This can prevent us from loading our AWS PHP SDK."
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:78
+msgid "Please, make sure you either disable it, or add phar to its whitelist."
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:83
+msgid "Suhosin extension is not loaded."
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:98
+msgid "AWS Support"
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:104
+msgid "<b>Detected a problem with AWS PHP SDK!</b>"
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:105
+msgid ""
+"Either there is a conflicting version present, or we were not able to load "
+"our version."
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:110
+msgid "No AWS PHP SDK conflict detected."
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:125
+msgid "ZIP Support"
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:131
+msgid "<b>No built-in ZIP support detected!</b>"
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:132
+msgid ""
+"PHP's built-in <code>ZipArchive</code> class seems to be missing. We will "
+"not be able to proceed without that."
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:137
+msgid "Built-in PHP archiving detected."
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:152
+msgid "Basic Sanity"
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:157
+msgid "Ancient PHP detected"
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:159
+msgid "<b>This is a very important security issue!</b>"
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:160
+msgid ""
+"PHP 5.2 did not have a release for over %d years now, which makes it very "
+"insecure."
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:161
+msgid ""
+"Not only that we will not be progressing further, but you shouldn't be "
+"either - addressing this issue should be a priority."
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:182
+msgid "Your PHP version is %s."
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:183
+msgid "Minimum recommended PHP version is PHP 5.5"
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:189
+msgid "Your PHP version is %s, which meets our requirements."
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:207
+msgid "Max Execution Time"
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:213
+msgid "<b>Your current max PHP execution time is set to %d seconds.</b>"
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:214
+msgid ""
+"For small websites this will work in most cases, however for large sites we "
+"recommend increasing your <b>max_execution_time</b> to 150s"
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:220
+msgid "Your max execution time is set to %s."
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:237
+msgid "Open Basedir"
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:253
+msgid "It appears that <b>open_basedir</b> rule is in effect."
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:254
+msgid ""
+"We will likely not be able to do what we need to with this PHP setting "
+"enabled"
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:269
+msgid "Working directory writable"
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:283
+msgid "Log directory writable"
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:298
+msgid "Working directory not web-visible"
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:312
+msgid "Working directory not publicly accessible"
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:326
+msgid "Storage directory not web-visible"
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:340
+msgid "Storage directory not publicly accessible"
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:354
+msgid "Temp directory not web-visible"
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:368
+msgid "Temp directory not publicly accessible"
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:385
+msgid "This directory has to be writable."
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:386
+msgid "However, we were not able to write to it."
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:402
+msgid "We are able to write to this directory"
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:418
+msgid "This directory may be exposed publicly."
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:419
+msgid "We will do our best to try to prevent access to it, though."
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:435
+msgid "Directory is not visible from the web."
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:451
+msgid "This directory is to be private."
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:452
+msgid "However, we were able to access it externally."
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:453
+msgid "This means that the whole internet can, too."
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:454
+msgid "This may expose sensitive info about your setup during migration."
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:470
+msgid "Directory can't be accessed from the outside web."
+msgstr ""
+
+#: lib/shipper/task/class-api.php:178
+msgid "Error parsing service response, invalid JSON: %s"
+msgstr ""
+
+#: lib/shipper/task/class-api.php:193
+msgid "Error talking to %1$s, the service responded with %2$d: %3$s"
+msgstr ""
+
+#: lib/shipper/task/class-api.php:230
+msgid "Generic error"
+msgstr ""
+
+#: lib/shipper/task/class-export.php:121
+msgid "Shipper could not open target zip file: %s"
+msgstr ""
+
+#: lib/shipper/task/export/class-all.php:85
+msgid "%1$s - at %2$d%% (step %3$d of %4$d) - total progress: %5$d%% %6$s"
+msgstr ""
+
+#: lib/shipper/task/export/class-all.php:96
+#: lib/shipper/task/import/class-all.php:87
+msgid "%1$s: %2$d of %3$d"
+msgstr ""
+
+#: lib/shipper/task/export/class-all.php:111
+msgid "Export issue: %s"
+msgstr ""
+
+#: lib/shipper/task/export/class-all.php:352
+msgid "Generate export package"
+msgstr ""
+
+#: lib/shipper/task/export/class-cleanup.php:81
+msgid "Clean up"
+msgstr ""
+
+#: lib/shipper/task/export/class-files.php:57
+#: lib/shipper/task/export/class-tables.php:88
+msgid "Shipper couldn't read file: %s"
+msgstr ""
+
+#: lib/shipper/task/export/class-files.php:164
+msgid " (%1$d files, %2$s)"
+msgstr ""
+
+#: lib/shipper/task/export/class-files.php:169
+msgid "Gather files for upload %s"
+msgstr ""
+
+#: lib/shipper/task/export/class-hubclean.php:82
+#: lib/shipper/task/import/class-hubclean.php:19
+msgid "Clean up target Hub data"
+msgstr ""
+
+#: lib/shipper/task/export/class-large.php:62
+#: lib/shipper/task/export/class-large.php:73
+msgid "Unable to upload %1$s: %2$s"
+msgstr ""
+
+#: lib/shipper/task/export/class-large.php:209
+#: lib/shipper/task/export/class-upload.php:160
+msgid "( %1$d of %2$d total )"
+msgstr ""
+
+#: lib/shipper/task/export/class-large.php:213
+msgid "Upload large files %s"
+msgstr ""
+
+#: lib/shipper/task/export/class-meta.php:103
+#: lib/shipper/task/export/class-tables.php:254
+#: lib/shipper/task/export/class-tables.php:273
+msgid "Shipper couldn't write to file: %s"
+msgstr ""
+
+#: lib/shipper/task/export/class-meta.php:157
+msgid "Gather and pack migration meta information"
+msgstr ""
+
+#: lib/shipper/task/export/class-remote.php:147
+msgid ""
+"Unable to remotely import on %1$s. Please visit %1$s and start import there "
+"manually."
+msgstr ""
+
+#: lib/shipper/task/export/class-remote.php:159
+msgid ""
+"Error starting import on %1$s. Please visit %1$s and start import there "
+"manually."
+msgstr ""
+
+#: lib/shipper/task/export/class-remote.php:222
+msgid "Trigger remote import"
+msgstr ""
+
+#: lib/shipper/task/export/class-remote.php:229
+msgid "Import to remote location ( at %d%% )"
+msgstr ""
+
+#: lib/shipper/task/export/class-tables.php:118
+msgid "Exported and archived table %s"
+msgstr ""
+
+#: lib/shipper/task/export/class-tables.php:187
+msgid "Unable to list tables on %1$s - the database said [%2$s]"
+msgstr ""
+
+#: lib/shipper/task/export/class-tables.php:264
+msgid "Error selecting results for %s"
+msgstr ""
+
+#: lib/shipper/task/export/class-tables.php:428
+msgid "uploaded, analyzing next"
+msgstr ""
+
+#: lib/shipper/task/export/class-tables.php:431
+msgid "row %1$d of %2$d"
+msgstr ""
+
+#: lib/shipper/task/export/class-tables.php:439
+msgid "( table %1$d of %2$d: %3$s, %4$s )"
+msgstr ""
+
+#: lib/shipper/task/export/class-tables.php:446
+msgid "Process tables %s"
+msgstr ""
+
+#: lib/shipper/task/export/class-upload.php:164
+msgid "Upload gathered files %s"
+msgstr ""
+
+#: lib/shipper/task/import/class-active.php:29
+msgid "Moving active content: %s"
+msgstr ""
+
+#: lib/shipper/task/import/class-active.php:134
+msgid "Hosted object cache helper, skipping [%s]"
+msgstr ""
+
+#: lib/shipper/task/import/class-active.php:148
+msgid "WARNING: unable to deploy the missing file: %s"
+msgstr ""
+
+#: lib/shipper/task/import/class-active.php:185
+#: lib/shipper/task/import/class-files.php:311
+#: lib/shipper/task/import/class-large.php:161
+msgid "WARNING: unable to copy staged file %1$s to %2$s"
+msgstr ""
+
+#: lib/shipper/task/import/class-all.php:79
+msgid "[Task %1$d of %2$d]: %3$s"
+msgstr ""
+
+#: lib/shipper/task/import/class-all.php:99
+msgid "Import issue: %s"
+msgstr ""
+
+#: lib/shipper/task/import/class-all.php:317
+msgid "Import the migration package"
+msgstr ""
+
+#: lib/shipper/task/import/class-cleanup.php:19
+msgid "Clean up the staging area"
+msgstr ""
+
+#: lib/shipper/task/import/class-cleanup.php:55
+msgid "Unable to clean up subdirectory: %s"
+msgstr ""
+
+#: lib/shipper/task/import/class-cleanup.php:63
+msgid "Unable to remove subdirectory: %s"
+msgstr ""
+
+#: lib/shipper/task/import/class-cleanup.php:72
+msgid "Unable to clean up local temp directory file: %s"
+msgstr ""
+
+#: lib/shipper/task/import/class-cleanup.php:82
+msgid "Error cleaning up local temp directory: %s"
+msgstr ""
+
+#: lib/shipper/task/import/class-config.php:24
+msgid "Skipping the config files deployment step"
+msgstr ""
+
+#: lib/shipper/task/import/class-config.php:25
+msgid "Move config files into place"
+msgstr ""
+
+#: lib/shipper/task/import/class-config.php:76
+msgid "Notice: protective environment detected, skipping config files"
+msgstr ""
+
+#: lib/shipper/task/import/class-config.php:86
+msgid "Temporary files directory doesn't seem to exist: %s"
+msgstr ""
+
+#: lib/shipper/task/import/class-config.php:136
+msgid "Unable to copy staged config file %1$s to %2$s"
+msgstr ""
+
+#: lib/shipper/task/import/class-config.php:149
+msgid "Error removing staged file %s"
+msgstr ""
+
+#: lib/shipper/task/import/class-download.php:22
+msgid "Download the migration meta information"
+msgstr ""
+
+#: lib/shipper/task/import/class-files.php:29
+#: lib/shipper/task/import/class-large.php:24
+msgid "( %1$d of %2$s total )"
+msgstr ""
+
+#: lib/shipper/task/import/class-files.php:34
+msgid "Download and place files %s"
+msgstr ""
+
+#: lib/shipper/task/import/class-large.php:29
+msgid "Download and place large files %s"
+msgstr ""
+
+#: lib/shipper/task/import/class-parse.php:22
+msgid "Parse migration meta information"
+msgstr ""
+
+#: lib/shipper/task/import/class-postprocess.php:21
+msgid "Postprocess the new install"
+msgstr ""
+
+#: lib/shipper/task/import/class-postprocess.php:62
+msgid "Detected Hummingbird, flushing caches"
+msgstr ""
+
+#: lib/shipper/task/import/class-postprocess.php:70
+msgid "Flushing caches for %s"
+msgstr ""
+
+#: lib/shipper/task/import/class-postprocess.php:93
+msgid "Detected unknown Elementor version, flushing caches not possible %s"
+msgstr ""
+
+#: lib/shipper/task/import/class-postprocess.php:98
+msgid "Detected Elementor, flushing caches"
+msgstr ""
+
+#: lib/shipper/task/import/class-prepare.php:22
+msgid "Prepare the staging area"
+msgstr ""
+
+#: lib/shipper/task/import/class-remote.php:68
+msgid "Export remote system"
+msgstr ""
+
+#: lib/shipper/task/import/class-remote.php:70
+msgid "Check remote system export status"
+msgstr ""
+
+#: lib/shipper/task/import/class-remote.php:94
+msgid "Found an existing remote export for %s."
+msgstr ""
+
+#: lib/shipper/task/import/class-remote.php:136
+msgid "No migration file present"
+msgstr ""
+
+#: lib/shipper/task/import/class-remote.php:140
+msgid "Attempting remote export auto-start"
+msgstr ""
+
+#: lib/shipper/task/import/class-remote.php:143
+msgid "Tracking remote export status"
+msgstr ""
+
+#: lib/shipper/task/import/class-remote.php:153
+msgid "No migration file present, remote export started"
+msgstr ""
+
+#: lib/shipper/task/import/class-remote.php:194
+msgid "Pinging remote domain"
+msgstr ""
+
+#: lib/shipper/task/import/class-remote.php:199
+msgid "Remote domain reachable, attempting export"
+msgstr ""
+
+#: lib/shipper/task/import/class-remote.php:215
+msgid ""
+"Unable to remotely export from %1$s. Please visit %1$s and start export "
+"there manually."
+msgstr ""
+
+#: lib/shipper/task/import/class-remote.php:227
+msgid ""
+"Error starting export on %1$s. Please visit %1$s and start export there "
+"manually."
+msgstr ""
+
+#: lib/shipper/task/import/class-scrubremote.php:20
+msgid "Scrubbing the remote leftovers: skipping"
+msgstr ""
+
+#: lib/shipper/task/import/class-scrubremote.php:21
+msgid "Scrubbing any remote leftovers"
+msgstr ""
+
+#: lib/shipper/task/import/class-tables.php:110
+msgid "(table %1$s, restoring, at position %2$d)"
+msgstr ""
+
+#: lib/shipper/task/import/class-tables.php:113
+msgid "(table %s, estimate work)"
+msgstr ""
+
+#: lib/shipper/task/import/class-tables.php:115
+msgid "(table %s, finalize)"
+msgstr ""
+
+#: lib/shipper/task/import/class-tables.php:119
+msgid "Restore the database %s"
+msgstr ""
+
+#: lib/shipper/task/import/class-tables.php:165
+msgid "Error working with intermediate representation: %s"
+msgstr ""
+
+#: lib/shipper/task/import/class-tables.php:178
+msgid "Found %1$d statements for %2$s"
+msgstr ""
+
+#: lib/shipper/task/import/class-tables.php:186
+msgid "Empty statement count found for %s, skipping."
+msgstr ""
+
+#: lib/shipper/task/import/class-tables.php:227
+msgid "Error finalizing table %1$s"
+msgstr ""
+
+#: tpl/emails/export/body.php:9 tpl/emails/import/body.php:9
+msgid "Ahoy Captain!"
+msgstr ""
+
+#: tpl/emails/export/body.php:10 tpl/emails/import/body.php:10
+msgid "Aye Matey,"
+msgstr ""
+
+#: tpl/emails/export/body.php:18 tpl/emails/import/body.php:18
+msgid "Your site http://%1$s was successfully ported to http://%2$s."
+msgstr ""
+
+#: tpl/emails/export/body.php:22 tpl/emails/import/body.php:22
+msgid ""
+"Alas, Shipper was unable to transfer your data from http://%1$s to "
+"http://%2$s"
+msgstr ""
+
+#: tpl/emails/export/body.php:30 tpl/emails/import/body.php:30
+msgid "This calls for drink’s all around."
+msgstr ""
+
+#: tpl/emails/export/body.php:32 tpl/emails/import/body.php:32
+msgid ""
+"Check the Shipper logs for details. Our support crew is standing by if you "
+"need assistance."
+msgstr ""
+
+#: tpl/emails/export/body.php:39 tpl/emails/import/body.php:39
+msgid "Raise your glass!"
+msgstr ""
+
+#: tpl/emails/export/body.php:40 tpl/emails/import/body.php:40
+msgid "Happy Sailing!"
+msgstr ""
+
+#: tpl/emails/export/body.php:43 tpl/emails/import/body.php:43
+msgid "Shipper & WPMU DEV Crew"
+msgstr ""
+
+#: tpl/emails/export/subject.php:11
+msgid "Shipper successfully Exported your site from %s"
+msgstr ""
+
+#: tpl/emails/export/subject.php:16 tpl/emails/import/subject.php:16
+msgid "Shipper Encountered An Error"
+msgstr ""
+
+#: tpl/emails/import/subject.php:11
+msgid "Shipper successfully Imported your site to %s"
+msgstr ""
+
+#: tpl/modals/check/hub.php:20
+msgid "To connect this website, you need to install the WPMU DEV Dashboard plugin."
+msgstr ""
+
+#: tpl/modals/check/hub.php:21 tpl/pages/tools/logs.php:21
+msgid "Download"
+msgstr ""
+
+#: tpl/modals/check/hub.php:26
+msgid ""
+"To connect this website, you need to activate and log in to the WPMU DEV "
+"Dashboard plugin."
+msgstr ""
+
+#: tpl/modals/check/hub.php:27
+msgid "Activate"
+msgstr ""
+
+#: tpl/modals/check/hub.php:32
+msgid "To use it, you need to log in to the WPMU DEV Dashboard."
+msgstr ""
+
+#: tpl/modals/check/hub.php:33
+msgid "Log in"
+msgstr ""
+
+#: tpl/modals/check/preflight-row-files.php:11
+msgid "Exclude file from migration"
+msgstr ""
+
+#: tpl/modals/check/preflight-row-files.php:12
+msgid "Reinclude file"
+msgstr ""
+
+#: tpl/modals/check/preflight-row-files.php:23
+msgid "Filename"
+msgstr ""
+
+#: tpl/modals/check/preflight-row-files.php:25
+#: tpl/pages/preflight/wizard-files-result-wrapper.php:65
+msgid "Size"
+msgstr ""
+
+#: tpl/modals/check/preflight-row-files.php:26
+#: tpl/pages/preflight/wizard-files-result-wrapper.php:52
+msgid "Type"
+msgstr ""
+
+#: tpl/modals/check/preflight-row-files.php:27
+msgid "Include/Exclude"
+msgstr ""
+
+#: tpl/modals/check/preflight-row-files.php:74
+#: tpl/pages/preflight/wizard-files-result-pagination.php:17
+msgid "Exclude"
+msgstr ""
+
+#: tpl/modals/check/preflight-row-files.php:78
+#: tpl/pages/preflight/wizard-files-result-pagination.php:16
+msgid "Include"
+msgstr ""
+
+#: tpl/modals/check/preflight-row-files.php:87
+msgid "Note: Excluding files won't delete them, they just won't be migrated."
+msgstr ""
+
+#: tpl/modals/check/preflight-row.php:11
+msgid "Local server"
+msgstr ""
+
+#: tpl/modals/check/preflight-row.php:15
+msgid "Remote server"
+msgstr ""
+
+#: tpl/modals/check/preflight-row.php:19 tpl/pages/preflight/wizard.php:70
+msgid "Files"
+msgstr ""
+
+#: tpl/modals/check/preflight-row.php:74 tpl/modals/destination-check.php:17
+msgid "Checking..."
+msgstr ""
+
+#: tpl/modals/check/system.php:42
+msgid "Requirements failed"
+msgstr ""
+
+#: tpl/modals/check/system.php:43
+msgid "Whoops, we found a few issues that may cause migrations to fail"
+msgstr ""
+
+#: tpl/modals/check/system.php:50
+msgid ""
+"Your system check found <span class=\"shipper-issues-count\">%d</span> "
+"issue."
+msgid_plural ""
+"Your system check found <span class=\"shipper-issues-count\">%d</span> "
+"issues."
+msgstr[0] ""
+msgstr[1] ""
+
+#: tpl/modals/check/system.php:63
+msgid "We recommend fixing them up and <a href=\"#recheck\">trying again</a>."
+msgstr ""
+
+#: tpl/modals/check/system.php:97
+msgid "Documentation"
+msgstr ""
+
+#: tpl/modals/check/system.php:103 tpl/modals/check/system.php:119
+#: tpl/modals/destination-fail.php:28 tpl/pages/preflight/wizard-ready.php:40
+msgid "Re-check"
+msgstr ""
+
+#: tpl/modals/check/system.php:124
+msgid "Continue anyway"
+msgstr ""
+
+#: tpl/modals/destination-add.php:11 tpl/modals/destination-connect.php:17
+msgid "Add Destination"
+msgstr ""
+
+#: tpl/modals/destination-add.php:12 tpl/modals/destination-check.php:19
+#: tpl/modals/destination-connect.php:18 tpl/modals/destination-fail.php:16
+#: tpl/modals/destination-hub.php:16 tpl/modals/destination-prepare.php:21
+#: tpl/modals/destination-refresh.php:15 tpl/modals/preflight-cancel.php:20
+#: tpl/modals/settings-reset.php:20
+msgid "Close this dialog window"
+msgstr ""
+
+#: tpl/modals/destination-add.php:17
+msgid "Get started by connecting a second website to the Hub."
+msgstr ""
+
+#: tpl/modals/destination-add.php:21
+msgid "Connect a website"
+msgstr ""
+
+#: tpl/modals/destination-add.php:25
+msgid "Done this step?"
+msgstr ""
+
+#: tpl/modals/destination-add.php:26
+msgid "Check Connection"
+msgstr ""
+
+#: tpl/modals/destination-check.php:13 tpl/modals/destination-fail.php:13
+#: tpl/modals/destination-hub.php:13 tpl/modals/destination-prepare.php:15
+#: tpl/modals/migration-cancel.php:27 tpl/modals/preflight-cancel.php:30
+#: tpl/pages/migration/selection-check.php:15
+#: tpl/pages/migration/selection-site.php:66
+msgid "Go back"
+msgstr ""
+
+#: tpl/modals/destination-check.php:22
+msgid "Looking for your new website, please wait..."
+msgstr ""
+
+#: tpl/modals/destination-connect.php:13 tpl/modals/destination-connect.php:43
+msgid "Refresh"
+msgstr ""
+
+#: tpl/modals/destination-connect.php:23
+msgid "Great, choose any of your existing Hub websites, or add a new one."
+msgstr ""
+
+#: tpl/modals/destination-connect.php:29
+msgid "Please, hold on"
+msgstr ""
+
+#: tpl/modals/destination-connect.php:35
+msgid "Prepare"
+msgstr ""
+
+#: tpl/modals/destination-connect.php:42
+msgid "Still not seeing your site?"
+msgstr ""
+
+#: tpl/modals/destination-connect.php:44
+msgid "the list"
+msgstr ""
+
+#: tpl/modals/destination-connect.php:50 tpl/modals/destination-fail.php:32
+msgid "Connect new website"
+msgstr ""
+
+#: tpl/modals/destination-fail.php:15
+#: tpl/pages/migration/selection-initial.php:34
+#: tpl/pages/migration/view-docs-destinations.php:12
+msgid "Add destination"
+msgstr ""
+
+#: tpl/modals/destination-fail.php:21
+msgid "Shipper couldn't find a new website."
+msgstr ""
+
+#: tpl/modals/destination-fail.php:22
+msgid "Double check you've connected your website to the Hub and installed Shipper."
+msgstr ""
+
+#: tpl/modals/destination-hub.php:15
+msgid "New Destination"
+msgstr ""
+
+#: tpl/modals/destination-hub.php:21
+msgid "To set up a new destination, first you'll need to connect it to the Hub."
+msgstr ""
+
+#: tpl/modals/destination-hub.php:22
+msgid "Let's jump over to the Hub and add a new website."
+msgstr ""
+
+#: tpl/modals/destination-hub.php:27
+msgid "Go to the Hub"
+msgstr ""
+
+#: tpl/modals/destination-hub.php:31
+msgid "Prefer to install Shipper manually?"
+msgstr ""
+
+#: tpl/modals/destination-hub.php:32
+msgid "Download Shipper"
+msgstr ""
+
+#: tpl/modals/destination-prepare.php:19
+msgid "Setting up destination..."
+msgstr ""
+
+#: tpl/modals/destination-prepare.php:24
+msgid "We are installing Shipper on your website, please wait..."
+msgstr ""
+
+#: tpl/modals/destination-refresh.php:13
+msgid "Refreshing list..."
+msgstr ""
+
+#: tpl/modals/destination-refresh.php:18
+msgid "Looking for your new websites, please wait..."
+msgstr ""
+
+#: tpl/modals/destination.php:46
+msgid "Site successfully added as destination."
+msgstr ""
+
+#: tpl/modals/destination.php:47
+msgid "You can now migrate to and from it using Shipper!"
+msgstr ""
+
+#: tpl/modals/destination.php:58
+msgid "Refresh complete."
+msgstr ""
+
+#: tpl/modals/destination.php:59
+msgid "You should now see your website in the list below."
+msgstr ""
+
+#: tpl/modals/destination.php:60
+msgid "Select it and click the button to proceed."
+msgstr ""
+
+#: tpl/modals/destination.php:71
+msgid "We encountered an error adding site as destination."
+msgstr ""
+
+#: tpl/modals/email-add.php:20
+msgid "Close"
+msgstr ""
+
+#: tpl/modals/email-add.php:23 tpl/pages/settings/notifications.php:118
+msgid "Add Recipient"
+msgstr ""
+
+#: tpl/modals/email-add.php:28
+msgid "Add as many recipients as you like."
+msgstr ""
+
+#: tpl/modals/email-add.php:29
+msgid "They will receive email reports as per the schedule you set."
+msgstr ""
+
+#: tpl/modals/email-add.php:36
+msgid "First name"
+msgstr ""
+
+#: tpl/modals/email-add.php:40
+msgid "E.g. John"
+msgstr ""
+
+#: tpl/modals/email-add.php:46
+msgid "Email address"
+msgstr ""
+
+#: tpl/modals/email-add.php:50
+msgid "E.g. john@doe.com"
+msgstr ""
+
+#: tpl/modals/email-add.php:57 tpl/modals/settings-reset.php:29
+msgid "Cancel"
+msgstr ""
+
+#: tpl/modals/email-add.php:66
+msgid "Add"
+msgstr ""
+
+#: tpl/modals/migration-cancel.php:17 tpl/modals/migration-cancel.php:30
+msgid "Cancel migration"
+msgstr ""
+
+#: tpl/modals/migration-cancel.php:21
+msgid "Are you sure you want to cancel the migration?"
+msgstr ""
+
+#: tpl/modals/migration-cancel.php:22
+msgid "This may cause your destination website to break and need restoring."
+msgstr ""
+
+#: tpl/modals/migration-ready.php:29
+msgid "Ready to migrate!"
+msgstr ""
+
+#: tpl/modals/migration-ready.php:31
+msgid "Ready to import!"
+msgstr ""
+
+#: tpl/modals/migration-ready.php:44
+msgid "Pre-flight check passed."
+msgstr ""
+
+#: tpl/modals/migration-ready.php:46
+msgid "Let's import your website!"
+msgstr ""
+
+#: tpl/modals/migration-ready.php:54 tpl/pages/preflight/wizard-ready.php:29
+msgid "You're ready to go!"
+msgstr ""
+
+#: tpl/modals/migration-ready.php:55
+msgid ""
+"Note that Shipper will overwrite any existing files or database tables on "
+"your destination website."
+msgstr ""
+
+#: tpl/modals/migration-ready.php:57
+msgid "%s, importing will overwrite any files or database tables on this website."
+msgstr ""
+
+#: tpl/modals/migration-ready.php:59
+msgid ""
+"Please make sure to have a backup of your destination site so you can "
+"easily restore it if needed."
+msgstr ""
+
+#: tpl/modals/migration-ready.php:64 tpl/pages/preflight/wizard-ready.php:46
+msgid "Begin migration"
+msgstr ""
+
+#: tpl/modals/migration-ready.php:66
+msgid "Begin import"
+msgstr ""
+
+#: tpl/modals/preflight-cancel.php:18 tpl/modals/preflight-cancel.php:33
+msgid "Cancel Pre-Flight Check"
+msgstr ""
+
+#: tpl/modals/preflight-cancel.php:24
+msgid "Are you sure you want to cancel the pre-flight check?"
+msgstr ""
+
+#: tpl/modals/preflight-cancel.php:25
+msgid "You’ll have to perform the pre-flight check again if you cancel it."
+msgstr ""
+
+#: tpl/modals/settings-reset.php:18 tpl/pages/settings/data.php:102
+msgid "Reset Settings"
+msgstr ""
+
+#: tpl/modals/settings-reset.php:24
+msgid ""
+"Are you sure you want to reset Shipper’s settings back to the factory "
+"defaults?"
+msgstr ""
+
+#: tpl/modals/settings-reset.php:33
+#: tpl/pages/preflight/wizard-files-result-wrapper.php:87
+#: tpl/pages/settings/data.php:65 tpl/pages/settings/data.php:117
+msgid "Reset"
+msgstr ""
+
+#: tpl/modals/welcome-activation.php:13
+msgid "This plugin works by migrating websites using the WPMU DEV API & Hub."
+msgstr ""
+
+#: tpl/modals/welcome.php:10 tpl/pages/migration/progress-done.php:63
+msgid "Continue"
+msgstr ""
+
+#: tpl/modals/welcome.php:34
+msgid "Welcome to Shipper - the easiest migration tool for WordPress."
+msgstr ""
+
+#: tpl/modals/welcome.php:49
+msgid "I've done this step"
+msgstr ""
+
+#: tpl/pages/maintenance.php:35
+msgid "Scheduled maintenance"
+msgstr ""
+
+#: tpl/pages/maintenance.php:37
+msgid "We are currently doing some super-awesome work on this site."
+msgstr ""
+
+#: tpl/pages/maintenance.php:38
+msgid "This work also happens to be super-secret as well."
+msgstr ""
+
+#: tpl/pages/maintenance.php:39
+msgid "Please, come back later."
+msgstr ""
+
+#: tpl/pages/migration/progress-bar.php:20
+msgid "Migration in progress"
+msgstr ""
+
+#: tpl/pages/migration/progress-bar.php:22
+msgid "Import in progress"
+msgstr ""
+
+#: tpl/pages/migration/progress-bar.php:39
+msgid "Cancel Migration"
+msgstr ""
+
+#: tpl/pages/migration/progress-bar.php:47
+#: tpl/pages/preflight/progress-bar.php:52
+msgid "Waiting for fresh update..."
+msgstr ""
+
+#: tpl/pages/migration/progress-bar.php:48
+msgid "Checking progress state..."
+msgstr ""
+
+#: tpl/pages/migration/progress-bar.php:54
+msgid "%s, your migration is underway!"
+msgstr ""
+
+#: tpl/pages/migration/progress-bar.php:62
+msgid "This can take a while."
+msgstr ""
+
+#: tpl/pages/migration/progress-bar.php:66
+msgid ""
+"So, please be patient and, as long as your site isn't a local installation, "
+"you can close this tab and <b>we'll email you when it's all done.</b>"
+msgstr ""
+
+#: tpl/pages/migration/progress-done.php:31
+msgid "Migration complete!"
+msgstr ""
+
+#: tpl/pages/migration/progress-done.php:33
+msgid "Export complete!"
+msgstr ""
+
+#: tpl/pages/migration/progress-done.php:36
+msgid "Import complete!"
+msgstr ""
+
+#: tpl/pages/migration/progress-done.php:44
+msgid "Your website has been successfully migrated."
+msgstr ""
+
+#: tpl/pages/migration/progress-done.php:45
+msgid "Visit <a href=\"%1$s\" target=\"_blank\">%1$s</a> now."
+msgstr ""
+
+#: tpl/pages/migration/progress-done.php:47
+msgid "Your website has been successfully exported."
+msgstr ""
+
+#: tpl/pages/migration/progress-done.php:48
+#: tpl/pages/migration/progress-errors.php:56
+msgid ""
+"Please visit <a href=\"%1$s\" target=\"_blank\">%2$s</a> now to continue "
+"your migration."
+msgstr ""
+
+#: tpl/pages/migration/progress-done.php:51
+msgid "Your website has been successfully imported."
+msgstr ""
+
+#: tpl/pages/migration/progress-done.php:52
+msgid "Refresh this page to see your new website."
+msgstr ""
+
+#: tpl/pages/migration/progress-done.php:59
+msgid "Refresh page"
+msgstr ""
+
+#: tpl/pages/migration/progress-errors.php:29
+msgid "Migration failed"
+msgstr ""
+
+#: tpl/pages/migration/progress-errors.php:47
+msgid "Try again"
+msgstr ""
+
+#: tpl/pages/migration/progress-errors.php:51
+msgid "Check logs"
+msgstr ""
+
+#: tpl/pages/migration/progress-errors.php:58
+msgid ""
+"Something went wrong with your migration. You can check migration logs for "
+"some errors or follow our troubleshooting guide to resolve the issues. "
+msgstr ""
+
+#: tpl/pages/migration/progress-errors.php:62
+msgid "Troubleshooting Tips"
+msgstr ""
+
+#: tpl/pages/migration/progress-errors.php:66
+msgid ""
+"You ignored few warnings in your destination server and files during the "
+"pre-flight check. Resolve those warnings and try migration again."
+msgstr ""
+
+#: tpl/pages/migration/progress-errors.php:70
+msgid ""
+"You’re migrating between two different hosts and this could be the reason "
+"for failed migration. You can try to contact support for this."
+msgstr ""
+
+#: tpl/pages/migration/progress-errors.php:75
+msgid ""
+"For more common migration issues, check our detailed migration <a "
+"href=\"%s\" target=\"_blank\">troubleshooting guide</a>. "
+msgstr ""
+
+#: tpl/pages/migration/progress-errors.php:82
+msgid ""
+"Still not able to migrate your site! Follow our <a href=\"%s\" "
+"target=\"_blank\">manual migration guide</a> to migrate your website "
+"manually."
+msgstr ""
+
+#: tpl/pages/migration/progress-errors.php:88
+msgid ""
+"Need help or have some questions? <a href=\"%s\" target=\"_blank\">Contact "
+"Support</a>"
+msgstr ""
+
+#: tpl/pages/migration/progress.php:12
+#: tpl/pages/migration/selection-site.php:56
+#: tpl/pages/migration/selection.php:11
+msgid "Migrate"
+msgstr ""
+
+#: tpl/pages/migration/selection-initial.php:23
+msgid "No sites?"
+msgstr ""
+
+#: tpl/pages/migration/selection-initial.php:27
+msgid "%s, we've noticed you don't have any other websites ready for migrations."
+msgstr ""
+
+#: tpl/pages/migration/selection-initial.php:28
+msgid ""
+"Once you have other websites set up with Shipper you'll be able to migrate "
+"between them freely with just a few clicks."
+msgstr ""
+
+#: tpl/pages/migration/selection-initial.php:40
+msgid "Already added a new website?"
+msgstr ""
+
+#: tpl/pages/migration/selection-initial.php:42
+msgid "<a href=\"%s\">Refresh this page</a> to see it here."
+msgstr ""
+
+#: tpl/pages/migration/selection-site.php:15
+#: tpl/pages/migration/selection-type.php:23
+msgid "Ready to ship it, %s?"
+msgstr ""
+
+#: tpl/pages/migration/selection-site.php:21
+msgid "Great, where would you like to migrate this website to?"
+msgstr ""
+
+#: tpl/pages/migration/selection-site.php:23
+msgid "Great, what website would you like to import?"
+msgstr ""
+
+#: tpl/pages/migration/selection-site.php:25
+msgid ""
+"If you don't see your website in the list, make sure you've got both "
+"Shipper and the WPMU DEV Dashboard installed on your source website."
+msgstr ""
+
+#: tpl/pages/migration/selection-site.php:37
+msgid "Reload list"
+msgstr ""
+
+#: tpl/pages/migration/selection-site.php:73
+msgid "Want to add a new destination?"
+msgstr ""
+
+#: tpl/pages/migration/selection-site.php:74
+msgid "Tap &quot;Add destination&quot; at the top of this page."
+msgstr ""
+
+#: tpl/pages/migration/selection-site.php:76
+msgid "Note, Shipper can't import local development sites."
+msgstr ""
+
+#: tpl/pages/migration/selection-site.php:77
+msgid ""
+"To migrate a local site to a staging or live server, initiate the migration "
+"from the local site itself."
+msgstr ""
+
+#: tpl/pages/migration/selection-type.php:27
+msgid ""
+"Do you want to export this website to another server, or import a website "
+"here?"
+msgstr ""
+
+#: tpl/pages/migration/selection-type.php:34
+msgid "Export"
+msgstr ""
+
+#: tpl/pages/migration/selection-type.php:41
+msgid "Import"
+msgstr ""
+
+#: tpl/pages/migration/view-docs-destinations.php:16
+#: tpl/pages/migration/view-docs.php:12
+msgid "View documentation"
+msgstr ""
+
+#: tpl/pages/preflight/progress-bar.php:17 tpl/pages/preflight/wizard.php:12
+msgid "Pre-flight Check"
+msgstr ""
+
+#: tpl/pages/preflight/progress-bar.php:29
+msgid ""
+"We're just running a quick pre-flight check to make sure the migration will "
+"run smoothly."
+msgstr ""
+
+#: tpl/pages/preflight/progress-bar.php:30
+msgid ""
+"Please be patient as it can take anywhere from a few seconds to a couple of "
+"minutes depending on the size of your website."
+msgstr ""
+
+#: tpl/pages/preflight/progress-bar.php:44
+msgid "Cancel Pre-flight Check"
+msgstr ""
+
+#: tpl/pages/preflight/progress-bar.php:53
+msgid "Preparing for the pre-flight check..."
+msgstr ""
+
+#: tpl/pages/preflight/wizard-destination.php:17
+msgid ""
+"Your destination server configuration check is complete, but you have an "
+"error which prevents the migration."
+msgstr ""
+
+#: tpl/pages/preflight/wizard-destination.php:19
+msgid ""
+"Your destination server configuration check is complete and you have got a "
+"few warnings which you might wanna check before migration."
+msgstr ""
+
+#: tpl/pages/preflight/wizard-destination.php:22
+#: tpl/pages/preflight/wizard-source.php:17
+msgid "Your source server configuration check is complete."
+msgstr ""
+
+#: tpl/pages/preflight/wizard-destination.php:28
+msgid "Please, try re-running the preflight."
+msgstr ""
+
+#: tpl/pages/preflight/wizard-destination.php:47
+#: tpl/pages/preflight/wizard-source.php:29
+msgid "Configuration"
+msgstr ""
+
+#: tpl/pages/preflight/wizard-destination.php:48
+#: tpl/pages/preflight/wizard-files.php:31
+#: tpl/pages/preflight/wizard-source.php:30
+msgid "Status"
+msgstr ""
+
+#: tpl/pages/preflight/wizard-destination.php:49
+#: tpl/pages/preflight/wizard-files.php:32
+#: tpl/pages/preflight/wizard-source.php:31
+msgid "Details"
+msgstr ""
+
+#: tpl/pages/preflight/wizard-destination.php:79
+#: tpl/pages/preflight/wizard-files.php:59
+#: tpl/pages/preflight/wizard-source.php:59
+msgid "No issues found"
+msgstr ""
+
+#: tpl/pages/preflight/wizard-files-package_size-full.php:18
+msgid ""
+"Note: The actual migration time may vary depending on a lot of other "
+"factors."
+msgstr ""
+
+#: tpl/pages/preflight/wizard-files-package_size-summary.php:11
+msgid ""
+"You can try excluding the large files to reduce the overall package size "
+"for a faster migration."
+msgstr ""
+
+#: tpl/pages/preflight/wizard-files-result-pagination.php:15
+msgid "Bulk actions"
+msgstr ""
+
+#: tpl/pages/preflight/wizard-files-result-pagination.php:20
+#: tpl/pages/preflight/wizard-files-result-wrapper.php:92
+msgid "Apply"
+msgstr ""
+
+#: tpl/pages/preflight/wizard-files-result-pagination.php:42
+msgid "Filter"
+msgstr ""
+
+#: tpl/pages/preflight/wizard-files-result-pagination.php:43
+msgid "Filter pagination"
+msgstr ""
+
+#: tpl/pages/preflight/wizard-files-result-wrapper.php:19
+msgid ""
+"Some of your files are very large in size which can cause issues with "
+"migrating."
+msgstr ""
+
+#: tpl/pages/preflight/wizard-files-result-wrapper.php:24
+msgid ""
+"Some of your files have very long paths which can cause issues with "
+"migrating."
+msgstr ""
+
+#: tpl/pages/preflight/wizard-files-result-wrapper.php:29
+msgid ""
+"We recommend excluding them and uploading them via FTP if you run into "
+"issues."
+msgstr ""
+
+#: tpl/pages/preflight/wizard-files-result-wrapper.php:43
+msgid "File path has keyword"
+msgstr ""
+
+#: tpl/pages/preflight/wizard-files-result-wrapper.php:46
+msgid "E.g. Plugin Name"
+msgstr ""
+
+#: tpl/pages/preflight/wizard-files-result-wrapper.php:55
+msgid "Any"
+msgstr ""
+
+#: tpl/pages/preflight/wizard-files-result-wrapper.php:56
+msgid "Archive"
+msgstr ""
+
+#: tpl/pages/preflight/wizard-files-result-wrapper.php:68
+msgid "E.g. 150"
+msgstr ""
+
+#: tpl/pages/preflight/wizard-files-result-wrapper.php:74
+msgid "Mb"
+msgstr ""
+
+#: tpl/pages/preflight/wizard-files-result-wrapper.php:101
+msgid "Path:"
+msgstr ""
+
+#: tpl/pages/preflight/wizard-files-result-wrapper.php:106
+msgid "Type:"
+msgstr ""
+
+#: tpl/pages/preflight/wizard-files-result-wrapper.php:111
+msgid "Size:"
+msgstr ""
+
+#: tpl/pages/preflight/wizard-files.php:15
+msgid "Files check is complete and you have a few warnings with your files."
+msgstr ""
+
+#: tpl/pages/preflight/wizard-files.php:16
+msgid "You can try to resolve these warnings before the migration process begins."
+msgstr ""
+
+#: tpl/pages/preflight/wizard-files.php:18
+msgid "Your source files check is complete."
+msgstr ""
+
+#: tpl/pages/preflight/wizard-files.php:30
+msgid "Issue"
+msgstr ""
+
+#: tpl/pages/preflight/wizard-files.php:63
+msgid "We detected some issues with %s"
+msgstr ""
+
+#: tpl/pages/preflight/wizard-files.php:112
+msgid "files excluded from migration successfully."
+msgstr ""
+
+#: tpl/pages/preflight/wizard-files.php:118
+msgid "files included to migration successfully."
+msgstr ""
+
+#: tpl/pages/preflight/wizard-ready.php:14
+msgid "You have a few errors, please check the sections above for more info."
+msgstr ""
+
+#: tpl/pages/preflight/wizard-ready.php:18
+msgid "You have a few warnings, please check the sections above for more info."
+msgstr ""
+
+#: tpl/pages/preflight/wizard-ready.php:21
+msgid "Don't worry!"
+msgstr ""
+
+#: tpl/pages/preflight/wizard-ready.php:22
+msgid ""
+"You can try to resolve these warnings or begin the migration right away "
+"ignoring these warnings."
+msgstr ""
+
+#: tpl/pages/preflight/wizard-ready.php:23
+#: tpl/pages/preflight/wizard-ready.php:30
+msgid ""
+"Note that Shipper overwrites any existing files or database tables on your "
+"destination website."
+msgstr ""
+
+#: tpl/pages/preflight/wizard-ready.php:24
+#: tpl/pages/preflight/wizard-ready.php:31
+msgid "Please make sure you have a backup."
+msgstr ""
+
+#: tpl/pages/preflight/wizard-source.php:15
+msgid ""
+"Your source server configuration check is complete and you have got a few "
+"warnings which you might wanna check before migration."
+msgstr ""
+
+#: tpl/pages/preflight/wizard.php:28
+msgid "Source"
+msgstr ""
+
+#: tpl/pages/preflight/wizard.php:49
+msgid "Destination"
+msgstr ""
+
+#: tpl/pages/preflight/wizard.php:91
+msgid "Ready to sail"
+msgstr ""
+
+#: tpl/pages/settings/accessibility.php:14 tpl/pages/settings/main.php:10
+msgid "Accessibility"
+msgstr ""
+
+#: tpl/pages/settings/accessibility.php:24
+msgid ""
+"Enable support for any accessibility enhancements available in the plugin "
+"interface."
+msgstr ""
+
+#: tpl/pages/settings/accessibility.php:31
+msgid "High Contrast Mode"
+msgstr ""
+
+#: tpl/pages/settings/accessibility.php:33
+msgid ""
+"Increase the visibility and accessibility of the elements and components of "
+"the plugin to meet WCAG AAA requirements."
+msgstr ""
+
+#: tpl/pages/settings/accessibility.php:50
+msgid "Enable high contrast mode"
+msgstr ""
+
+#: tpl/pages/settings/accessibility.php:62 tpl/pages/settings/data.php:132
+#: tpl/pages/settings/migration.php:81 tpl/pages/settings/notifications.php:156
+#: tpl/pages/settings/pagination.php:47
+msgid "Save changes"
+msgstr ""
+
+#: tpl/pages/settings/data.php:15 tpl/pages/settings/data.php:71
+#: tpl/pages/settings/main.php:11
+msgid "Data"
+msgstr ""
+
+#: tpl/pages/settings/data.php:26
+msgid "Control what to do with your settings and data."
+msgstr ""
+
+#: tpl/pages/settings/data.php:27
+msgid ""
+"Settings are your plugin settings such as acessibiliy, data and "
+"notifications settings."
+msgstr ""
+
+#: tpl/pages/settings/data.php:28
+msgid ""
+"Data includes the transient information such as migration logs and "
+"requirements check data collected over the time."
+msgstr ""
+
+#: tpl/pages/settings/data.php:33
+msgid "Uninstallation"
+msgstr ""
+
+#: tpl/pages/settings/data.php:35
+msgid ""
+"When you uninstall this plugin, what do you want to do with your settings "
+"and data?"
+msgstr ""
+
+#: tpl/pages/settings/data.php:44 tpl/pages/settings/main.php:18
+msgid "Settings"
+msgstr ""
+
+#: tpl/pages/settings/data.php:46
+msgid "Choose whether to save your settings for next time, or reset them."
+msgstr ""
+
+#: tpl/pages/settings/data.php:56
+msgid "Preserve"
+msgstr ""
+
+#: tpl/pages/settings/data.php:73
+msgid "Choose whether to keep or remove transient data."
+msgstr ""
+
+#: tpl/pages/settings/data.php:83
+msgid "Keep"
+msgstr ""
+
+#: tpl/pages/settings/data.php:92
+msgid "Remove"
+msgstr ""
+
+#: tpl/pages/settings/data.php:104
+msgid "Needing to start fresh?"
+msgstr ""
+
+#: tpl/pages/settings/data.php:105
+msgid "Use this button to roll back to the default settings."
+msgstr ""
+
+#: tpl/pages/settings/data.php:120
+msgid ""
+"Note: This will instantly revert all settings to their default states "
+"without touching your data."
+msgstr ""
+
+#: tpl/pages/settings/main.php:9 tpl/pages/settings/migration.php:18
+msgid "Migration"
+msgstr ""
+
+#: tpl/pages/settings/main.php:12 tpl/pages/settings/notifications.php:16
+msgid "Notifications"
+msgstr ""
+
+#: tpl/pages/settings/main.php:13 tpl/pages/settings/pagination.php:14
+msgid "Pagination"
+msgstr ""
+
+#: tpl/pages/settings/migration.php:31
+msgid "Working Directory"
+msgstr ""
+
+#: tpl/pages/settings/migration.php:33
+msgid ""
+"Shipper temporarily stores progress information and other temporary files "
+"generated while migration in a working directory."
+msgstr ""
+
+#: tpl/pages/settings/migration.php:50
+msgid "Use uploads directory as working directory"
+msgstr ""
+
+#: tpl/pages/settings/migration.php:54
+msgid ""
+"By default, we use the temp directory as the working directory. However, "
+"because of some restrictions implied by few hosts, the migration tends to "
+"fail. In such cases, you can try enabling this option where we’ll create a "
+"working directory in your uploads folder. "
+msgstr ""
+
+#: tpl/pages/settings/migration.php:66
+msgid ""
+"Since the uploads folder is web accessible, your temporary data will be "
+"accessible on web until migration completes."
+msgstr ""
+
+#: tpl/pages/settings/notifications.php:21
+msgid "Get notified when migrations complete, or if they fail."
+msgstr ""
+
+#: tpl/pages/settings/notifications.php:29
+msgid "Migration notification emails are enabled for %d recipient"
+msgid_plural "Migration notification emails are enabled for %d recipients"
+msgstr[0] ""
+msgstr[1] ""
+
+#: tpl/pages/settings/notifications.php:43
+msgid "Migration notification emails are currently disabled"
+msgstr ""
+
+#: tpl/pages/settings/notifications.php:52
+msgid "Email Notifications"
+msgstr ""
+
+#: tpl/pages/settings/notifications.php:54
+msgid "Choose who should receive an email when migration completes."
+msgstr ""
+
+#: tpl/pages/settings/notifications.php:69
+msgid "Send an email when migration completes"
+msgstr ""
+
+#: tpl/pages/settings/notifications.php:78
+msgid "Recipients"
+msgstr ""
+
+#: tpl/pages/settings/notifications.php:83
+msgid "You haven't added any recipients yet"
+msgstr ""
+
+#: tpl/pages/settings/notifications.php:123
+msgid "Options"
+msgstr ""
+
+#: tpl/pages/settings/notifications.php:134
+msgid "Only send an email if a migration fails"
+msgstr ""
+
+#: tpl/pages/settings/notifications.php:165
+msgid "Error adding recipient"
+msgstr ""
+
+#: tpl/pages/settings/notifications.php:170
+msgid "Recipient has been added"
+msgstr ""
+
+#: tpl/pages/settings/notifications.php:175
+msgid "Error removing recipient"
+msgstr ""
+
+#: tpl/pages/settings/pagination.php:24
+msgid "Pre-flight check"
+msgstr ""
+
+#: tpl/pages/settings/pagination.php:26
+msgid ""
+"Choose the number of entries per page for the pre-flight results such as "
+"large files and files with large path listings."
+msgstr ""
+
+#: tpl/pages/settings/pagination.php:33
+msgid "Entries per page"
+msgstr ""
+
+#: tpl/pages/tools/logs.php:17 tpl/pages/tools/main.php:9
+msgid "Logs"
+msgstr ""
+
+#: tpl/pages/tools/logs.php:32
+msgid "Download data"
+msgstr ""
+
+#: tpl/pages/tools/logs.php:40
+msgid "Here are Shipper's latest logs, use them to debug any issues you are having."
+msgstr ""
+
+#: tpl/pages/tools/logs.php:56
+msgid "Logs will be automatically refreshed each time you initiate a new migration."
+msgstr ""
+
+#: tpl/pages/tools/logs.php:61
+msgid "No event logs have been detected yet."
+msgstr ""
+
+#: tpl/pages/tools/logs.php:62
+msgid "They will appear here once you have made an action."
+msgstr ""
+
+#: tpl/pages/tools/main.php:10
+msgid "System information"
+msgstr ""
+
+#: tpl/pages/tools/main.php:15
+msgid "Tools"
+msgstr ""
+
+#: tpl/pages/tools/sysinfo.php:11
+msgid "PHP"
+msgstr ""
+
+#: tpl/pages/tools/sysinfo.php:12
+msgid "MySQL"
+msgstr ""
+
+#: tpl/pages/tools/sysinfo.php:14
+msgid "WordPress"
+msgstr ""
+
+#: tpl/pages/tools/sysinfo.php:20
+msgid "System Information"
+msgstr ""
+
+#: tpl/pages/tools/sysinfo.php:25
+msgid "Use this info if you are having issues with Shipper and your server setup."
+msgstr ""
+
+#: tpl/pages/tools/sysinfo.php:26
+msgid "It will give you the most up to date information about your stack."
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Shipper"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://premium.wpmudev.org/project/shipper/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "WPMU DEV Shipper plugin"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "WPMU DEV"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://premium.wpmudev.org"
+msgstr ""
+
+#: lib/shipper/controller/class-admin.php:49
+msgctxt "page label"
+msgid "Shipper"
+msgstr ""
+
+#: lib/shipper/controller/class-admin.php:59
+msgctxt "page label"
+msgid "Migrate"
+msgstr ""
+
+#: lib/shipper/controller/class-admin.php:67
+msgctxt "page label"
+msgid "Tools"
+msgstr ""
+
+#: lib/shipper/controller/class-admin.php:75
+msgctxt "page label"
+msgid "Settings"
+msgstr ""
+
+#: lib/shipper/controller/class-admin.php:50
+msgctxt "menu label"
+msgid "Shipper"
+msgstr ""
+
+#: lib/shipper/controller/class-admin.php:60
+msgctxt "menu label"
+msgid "Migrate"
+msgstr ""
+
+#: lib/shipper/controller/class-admin.php:68
+msgctxt "menu label"
+msgid "Tools"
+msgstr ""
+
+#: lib/shipper/controller/class-admin.php:76
+msgctxt "menu label"
+msgid "Settings"
+msgstr ""

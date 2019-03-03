@@ -1,0 +1,67 @@
+@include body-class(true) {
+
+  &.sui-color-accessible {
+    .wphb-filename-extension {
+      &[class*="wphb-filename-extension"] {
+        background-color: $accessible-dark;
+      }
+      &.wphb-filename-extension-js,
+      &.wphb-filename-extension-javascript {
+        color: $accessible-light;
+      }
+    }
+    .wphb-caching-summary-item-type {
+      .wphb-filename-extension-images {
+        color: $accessible-light;
+      }
+    }
+    .wphb-caching-summary-item-expiry {
+      .sui-tag {
+        color: $accessible-light;
+      }
+    }
+    .sui-table {
+      tbody {
+        tr {
+          td {
+            &:first-child{
+              box-shadow: inset 3px 0 0 $accessible-dark;
+            }
+
+          }
+        }
+      }
+    }
+    .wphb-pills-group .wphb-pills:last-child {
+      background-color: $accessible-dark;
+    }
+    [class*="sui-grade-"] {
+      svg {
+        circle:last-child {
+          stroke: $accessible-dark;
+        }
+      }
+    }
+    .sui-upsell-row {
+      .sui-upsell-notice {
+        p {
+          background-color: $accessible-light;
+          color: $accessible-dark;
+          &:after {
+            border: none;
+          }
+        }
+      }
+    }
+    .sui-checkbox,
+    .sui-radio {
+      input:checked {
+        + span:not(.sui-description) {
+          border: 1px solid $accessible-dark;
+          background-color: $accessible-dark;
+        }
+      }
+    }
+  }
+
+}
