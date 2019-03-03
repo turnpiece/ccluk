@@ -1,0 +1,210 @@
+# Translation of Plugins - WordPress Importer - Stable (latest release) in Vietnamese
+# This file is distributed under the same license as the Plugins - WordPress Importer - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2019-01-04 02:29:28+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: GlotPress/2.4.0-alpha\n"
+"Language: vi_VN\n"
+"Project-Id-Version: Plugins - WordPress Importer - Stable (latest release)\n"
+
+#: parsers.php:43
+msgid "Details are shown above. The importer will now try again with a different parser..."
+msgstr "Chi tiết hiển thị bên trên. Trình importer sẽ thử lại với phân tích cú pháp khác..."
+
+#: parsers.php:42 parsers.php:72 parsers.php:80
+msgid "There was an error when reading this WXR file"
+msgstr "Có lỗi xảy ra khi đọc file WXR"
+
+#: parsers.php:84 parsers.php:89 parsers.php:306 parsers.php:502
+msgid "This does not appear to be a WXR file, missing/invalid WXR version number"
+msgstr "Đây có vẻ không phải file WXR, số phiên bản WXR bị lỗi/không hợp lệ"
+
+#: wordpress-importer.php:132 wordpress-importer.php:141
+#: wordpress-importer.php:192 wordpress-importer.php:196
+#: wordpress-importer.php:205
+msgid "Sorry, there has been an error."
+msgstr "Rất tiếc, có lỗi đã xảy ra."
+
+#: wordpress-importer.php:133
+msgid "The file does not exist, please try again."
+msgstr "Tệp không tồn tại, hãy thử lại."
+
+#: wordpress-importer.php:176
+msgid "All done."
+msgstr "Đã hoàn thành."
+
+#: wordpress-importer.php:177
+msgid "Remember to update the passwords and roles of imported users."
+msgstr "Nhớ thay đổi mật khẩu và quyền của người dùng vừa nhập vào."
+
+#: wordpress-importer.php:176
+msgid "Have fun!"
+msgstr "Chúc vui vẻ!"
+
+#: wordpress-importer.php:197
+msgid "The export file could not be found at <code>%s</code>. It is likely that this was caused by a permissions problem."
+msgstr "Không thể tìm thấy file xuất ra tại <code>%s</code>. Có khả năng do vấn đề về quyền."
+
+#: wordpress-importer.php:213
+msgid "This WXR file (version %s) may not be supported by this version of the importer. Please consider updating."
+msgstr "File WXR (phiên bản %s) có thể không được hỗ trợ bởi phiên bản hiện tại của trình importer. Vui lòng cân nhắc việc cập nhật."
+
+#: wordpress-importer.php:238
+msgid "Failed to import author %s. Their posts will be attributed to the current user."
+msgstr "Không thể nhập vào tác giả %s. Bài viết của họ sẽ được gán cho người dùng hiện tại."
+
+#: wordpress-importer.php:265
+msgid "To make it easier for you to edit and save the imported content, you may want to reassign the author of the imported item to an existing user of this site. For example, you may want to import all the entries as <code>admin</code>s entries."
+msgstr "Để dễ đàng hơn cho bạn chỉnh sửa và lưu các nội dung quan trọng, bạn có thể gán tên người dùng hiện tại của trang này cho các thành phần quan trọng.Ví dụ, bạn có thể nhập tất cả các mục như sau: <code>admin</code> "
+
+#: wordpress-importer.php:264
+msgid "Assign Authors"
+msgstr "Chỉ định tác giả"
+
+#: wordpress-importer.php:267
+msgid "If a new user is created by WordPress, a new password will be randomly generated and the new user&#8217;s role will be set as %s. Manually changing the new user&#8217;s details will be necessary."
+msgstr "Nếu một người dùng mới được tạo bởi WordPress, mật khẩu mới sẽ được tạo ngẫu nhiên và vai trò người dùng&#8217;s sẽ được đặt là %s. Thay đổi thủ công thông tin người dùng mới &#8217;s là cần thiết. "
+
+#: wordpress-importer.php:277
+msgid "Import Attachments"
+msgstr "Nhập vào đính kèm"
+
+#: wordpress-importer.php:280
+msgid "Download and import file attachments"
+msgstr "Tải về và nhập vào file đính kèm"
+
+#: wordpress-importer.php:284
+msgid "Submit"
+msgstr "Nộp"
+
+#: wordpress-importer.php:297
+msgid "Import author:"
+msgstr "Nhập vào tác giả:"
+
+#: wordpress-importer.php:311
+msgid "as a new user:"
+msgstr "như một người dùng mới:"
+
+#: wordpress-importer.php:308
+msgid "or create new user with login name:"
+msgstr "hoặc tạo người dùng mới với tên đăng nhập:"
+
+#: wordpress-importer.php:319
+msgid "assign posts to an existing user:"
+msgstr "gán bài viết cho người dùng hiện tại:"
+
+#: wordpress-importer.php:322
+msgid "- Select -"
+msgstr "- Chọn -"
+
+#: wordpress-importer.php:321
+msgid "or assign posts to an existing user:"
+msgstr "hoặc gán bài viết cho người dùng hiện tại:"
+
+#: wordpress-importer.php:372
+msgid "Failed to create new user for %s. Their posts will be attributed to the current user."
+msgstr "Không thể tạo người dùng mới cho %s. Bài viết của họ sẽ được gán cho người dùng hiện tại."
+
+#: wordpress-importer.php:467
+msgid "Failed to import post tag %s"
+msgstr "Không thể nhập vào thẻ bài viết %s"
+
+#: wordpress-importer.php:424
+msgid "Failed to import category %s"
+msgstr "Không thể nhập vào chuyên mục %s"
+
+#: wordpress-importer.php:516 wordpress-importer.php:738
+msgid "Failed to import %s %s"
+msgstr "Không thể nhập vào %s %s"
+
+#: wordpress-importer.php:605
+msgid "Failed to import &#8220;%s&#8221;: Invalid post type %s"
+msgstr "Không thể nhập vào &#8220;%s&#8221;: Kiểu bài viết không hợp lệ %s"
+
+#: wordpress-importer.php:870
+msgid "Menu item skipped due to missing menu slug"
+msgstr "Item menu bị bỏ qua vì lỗi đường dẫn menu"
+
+#: wordpress-importer.php:704
+msgid "Failed to import %s &#8220;%s&#8221;"
+msgstr "Không thể nhập vào %s &#8220;%s&#8221;"
+
+#: wordpress-importer.php:642
+msgid "%s &#8220;%s&#8221; already exists."
+msgstr "%s &#8220;%s&#8221; đã tồn tại."
+
+#: wordpress-importer.php:877
+msgid "Menu item skipped due to invalid menu slug: %s"
+msgstr "Item menu bị bỏ qua vì đường dẫn menu không hợp lệ: %s"
+
+#: wordpress-importer.php:940
+msgid "Fetching attachments is not enabled"
+msgstr "Chưa bật tìm nạp tệp đính kèm"
+
+#: wordpress-importer.php:953
+msgid "Invalid file type"
+msgstr "Kiểu file không hợp lệ"
+
+#: wordpress-importer.php:1003
+msgid "Remote server did not respond"
+msgstr "Máy chủ từ xa không phản hồi"
+
+#: wordpress-importer.php:1018
+msgid "Remote file is incorrect size"
+msgstr "File từ xa không đúng kích cỡ"
+
+#: wordpress-importer.php:1011
+msgid "Remote server returned error response %1$d %2$s"
+msgstr "Máy chủ từ xa báo về lỗi phản hồi %1$d %2$s"
+
+#: wordpress-importer.php:1029
+msgid "Remote file is too large, limit is %s"
+msgstr "File từ xa quá lớn, giới hạn là %s"
+
+#: wordpress-importer.php:1023
+msgid "Zero size file downloaded"
+msgstr "Một file size 0 đã được tải. "
+
+#: wordpress-importer.php:1136
+msgid "A new version of this importer is available. Please update to version %s to ensure compatibility with newer export files."
+msgstr "Phiên bản mới của trình importer đang có sẵn. Hãy cập nhật phiên bản %s để đảm bảo tương tích với file xuất ra mới hơn."
+
+#: wordpress-importer.php:1129
+msgid "Import WordPress"
+msgstr "Nhập vào WordPress"
+
+#: wordpress-importer.php:1151
+msgid "Howdy! Upload your WordPress eXtended RSS (WXR) file and we&#8217;ll import the posts, pages, comments, custom fields, categories, and tags into this site."
+msgstr "Howdy! Tải lên tệp WordPress eXtended RSS (WXR) và chúng tôi sẽ nhập vào bài viết, trang, bình luận, custom field, chuyên mục, và thẻ vào trong trang web này."
+
+#: wordpress-importer.php:1152
+msgid "Choose a WXR (.xml) file to upload, then click Upload file and import."
+msgstr "Chọn một tệp WXR (.xml) để tải lên, sau đó nhấn chuột vào Upload file and Import."
+
+#: wordpress-importer.php:1226
+msgid "Import <strong>posts, pages, comments, custom fields, categories, and tags</strong> from a WordPress export file."
+msgstr "Nhập vào <strong>bài viết, trang, bình luận, custom field, chuyên mục, và thẻ </strong> từ một file xuất ra của WordPress."
+
+#. Plugin URI of the plugin/theme
+msgid "https://wordpress.org/plugins/wordpress-importer/"
+msgstr "https://wordpress.org/plugins/wordpress-importer/"
+
+#. Plugin Name of the plugin/theme
+msgid "WordPress Importer"
+msgstr "WordPress Importer"
+
+#. Description of the plugin/theme
+msgid "Import posts, pages, comments, custom fields, categories, tags and more from a WordPress export file."
+msgstr "Nhập vào bài viết, trang, bình luận, custom field, chuyên mục, thẻ và nhiều nữa từ file xuất ra của WordPress."
+
+#. Author of the plugin/theme
+msgid "wordpressdotorg"
+msgstr "wordpressdotorg"
+
+#. Author URI of the plugin/theme
+msgid "https://wordpress.org/"
+msgstr "https://wordpress.org/"

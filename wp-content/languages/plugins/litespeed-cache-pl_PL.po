@@ -1,0 +1,4186 @@
+# Translation of Plugins - LiteSpeed Cache - Stable (latest release) in Polish
+# This file is distributed under the same license as the Plugins - LiteSpeed Cache - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2019-02-27 14:13:50+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: GlotPress/2.4.0-alpha\n"
+"Language: pl\n"
+"Project-Id-Version: Plugins - LiteSpeed Cache - Stable (latest release)\n"
+
+#: admin/tpl/setting/settings_cdn.php:112
+msgid "If you turn any of the above settings OFF, please remove the related file types from the %s box."
+msgstr "Jeśli wyłączysz którąkolwiek opcję z powyższych, proszę usuń związane typy plików z pola %s."
+
+#: admin/tpl/setting/settings_media.php:52
+msgid "Both full and partial strings can be used."
+msgstr "Mogą być używanie pełne lub częściowe stringi."
+
+#: admin/tpl/setting/settings_media.php:51
+msgid "Images containing these class names will not be lazy loaded."
+msgstr "Obrazki zawierające tą nazwę klasy nie będą wczytywane przez lazy load."
+
+#: admin/tpl/setting/settings_media.php:47
+msgid "Lazy Load Image Class Name Excludes"
+msgstr "Nazwa klasy wykluczającej Lazy Load obrazka."
+
+#: admin/tpl/setting/settings_excludes.php:21
+msgid "For example, %1$s defines a TTL of %2$s seconds for %3$s."
+msgstr "Na przykład, %1$s definiuje TTL na %2$s sekund dla %3$s."
+
+#: admin/tpl/setting/settings_excludes.php:20
+msgid "To define a custom TTL for a URI, add a space followed by the TTL value to the end of the URI."
+msgstr "aby ustawić niestandardowy TTL dla URI, dodaj spację poprzedzającą wartość TTL na końcu adresu URI."
+
+#: admin/tpl/inc/banner_promo.new_version.php:84
+msgid "Maybe Later"
+msgstr "Może później"
+
+#: admin/tpl/inc/banner_promo.new_version.php:78
+msgid "Turn On Auto Upgrade"
+msgstr "Włącz automatyczne aktualizacje"
+
+#: admin/tpl/inc/banner_promo.new_version.php:68
+msgid "Upgrade"
+msgstr "Aktualizuj"
+
+#: admin/tpl/inc/banner_promo.new_version.php:60
+msgid "New release %s is available now."
+msgstr "Nowe wydanie %s jest dostępne."
+
+#: admin/tpl/inc/banner_promo.new_version.php:56
+msgid "New Version Available!"
+msgstr "Nowa wersja jest dostępna!"
+
+#: admin/tpl/inc/banner_promo.php:172
+msgid "<a %s>Support forum</a> | <a %s>Submit a ticket</a>"
+msgstr "<a %s>Forum wsparcia</a> | <a %s>Wyślij ticket</a>"
+
+#: admin/tpl/inc/banner_promo.php:170
+msgid "Created with ❤️ by LiteSpeed team."
+msgstr "Stworzony z ❤️ przez zespół LiteSpeed."
+
+#: admin/tpl/inc/banner_promo.php:161
+msgid "Sure I'd love to review!"
+msgstr "Pewnie, chętnie napiszę recenzję!"
+
+#: admin/tpl/inc/banner_promo.php:72
+msgid "Thank You for Using the LiteSpeed Cache Plugin!"
+msgstr "Dziękujemy za używanie wtyczki LiteSpeed Cache!"
+
+#: includes/litespeed-cache-activation.class.php:368
+#: inc/activation.class.php:368
+msgid "Upgraded successfully."
+msgstr "Aktualizacja przebiegła pomyślnie."
+
+#: includes/litespeed-cache-activation.class.php:359
+#: includes/litespeed-cache-activation.class.php:364
+#: inc/activation.class.php:359 inc/activation.class.php:364
+msgid "Failed to upgrade."
+msgstr "Aktualizacja nie powiodła się."
+
+#: includes/litespeed-cache-config.class.php:768 inc/config.class.php:768
+msgid "Changed setting successfully."
+msgstr "Zmieniono ustawienie pomyślnie."
+
+#: admin/tpl/setting/settings_esi.php:29
+msgid "ESI sample for developers"
+msgstr "Przykład ESI dla programistów"
+
+#: admin/tpl/setting/settings_tuning.php:106
+msgid "Google reCAPTCHA will be bypassed automatically."
+msgstr "reCAPTCHA Google będzie omijana automatycznie."
+
+#: admin/tpl/setting/settings_esi.php:22
+msgid "Replace %1$s with %2$s."
+msgstr "Zamień %1$s z %2$s."
+
+#: admin/tpl/setting/settings_crawler.php:196
+msgid "To crawl for a particular cookie, enter the cookie name, and the values you wish to crawl for. Values should be one per line, and can include a blank line. There will be one crawler created per cookie value, per simulated role."
+msgstr "Aby zaindeksować konkretny plik cookie, wpisz nazwę pliku cookie i wartości, które chcesz indeksować. Wartości powinny być w jednym wierszu i mogą zawierać pustą linię. Zostanie utworzony jeden robot indeksujący na wartość pliku cookie na symulowaną rolę."
+
+#: admin/tpl/setting/settings_crawler.php:151
+msgid "Cookie Values"
+msgstr "Wartości Cookie"
+
+#: admin/tpl/setting/settings_crawler.php:145
+msgid "Cookie Name"
+msgstr "Nazwa Cookie"
+
+#: admin/tpl/setting/settings_crawler.php:139
+msgid "Cookie Simulation"
+msgstr "Symulacja Cookie"
+
+#: admin/tpl/setting/settings_tuning.php:110
+msgid "Append query string %s to the resources to bypass this action."
+msgstr "Dołącz string zapytania %s do zasobów, aby obejść tę akcję."
+
+#: admin/tpl/edit_htaccess.php:49
+msgid "This page is meant for advanced users."
+msgstr "Ta strona jest przeznaczona dla zaawansowanych użytkowników."
+
+#: admin/tpl/setting/settings_esi.php:20
+msgid "You can turn shortcodes into ESI blocks."
+msgstr "Możesz włączyć krótkie kody w blokach ESI."
+
+#: admin/tpl/setting/settings_esi.php:16
+msgid "WpW: Private Cache vs. Public Cache"
+msgstr "WpW: Prywatna pamięć podręczna vs. Publiczna pamięć podręczna"
+
+#: admin/tpl/setting/settings_tuning.php:121
+msgid "Use Web Font Loader library to load Google Fonts asynchronously while leave other CSS intact."
+msgstr "Użyj biblioteki Web Font Loader, aby ładować czcionki Google asynchronicznie, pozostawiając inne CSS w stanie nienaruszonym."
+
+#: admin/tpl/setting/settings_inc.auto_upgrade.php:11
+msgid "Turn this option ON to have LiteSpeed Cache updated automatically, whenever a new version is released. If OFF, update manually as usual."
+msgstr "Włącz tę opcję, aby program LiteSpeed Cache był aktualizowany automatycznie po każdym wydaniu nowej wersji. Jeśli WYŁ., Aktualizować będzie trzeba ręcznie jak zwykle."
+
+#: admin/tpl/setting/settings_inc.auto_upgrade.php:7
+msgid "Automatically Upgrade"
+msgstr "Automatycznie uaktualnij"
+
+#: admin/tpl/setting/settings_debug.php:59
+msgid "Your IP"
+msgstr "Twoje IP"
+
+#: admin/tpl/import_export.php:58 admin/tpl/settings.php:216
+msgid "Reset All Settings"
+msgstr "Zresetuj wszystkie ustawienia"
+
+#: admin/tpl/import_export.php:66
+msgid "This will reset all settings to default settings."
+msgstr "To zresetuje wszystkie ustawienia do ustawień domyślnych"
+
+#: inc/import.class.php:244
+msgid "Reset successfully."
+msgstr "Pomyślnie zresetowano ustawienia."
+
+#: admin/tpl/import_export.php:60
+msgid "Are you sure to reset all settings to default settings?"
+msgstr "Czy jesteś pewny, że chcesz zresetować wszystkie ustawienia?"
+
+#: admin/tpl/setting/settings_optimize.php:216
+msgid "Separate critical CSS files will be generated for paths containing these strings."
+msgstr "Osobne pliki krytycznego CSS zostaną wygenerowane dla ścieżek zawierających te wpisy."
+
+#: admin/tpl/setting/settings_optimize.php:212
+msgid "Separate CCSS Cache URIs"
+msgstr "Oddzielne identyfikatory URI pamięci podręcznej CCSS"
+
+#: admin/tpl/setting/settings_optimize.php:205
+msgid "For example, if every Page on the site has different formatting, enter %s in the box. Separate critical CSS files will be stored for every Page on the site."
+msgstr "Jeśli na przykład każda strona w witrynie ma inne formatowanie, wpisz %s w polu. Oddzielne krytyczne pliki CSS będą przechowywane dla każdej strony w witrynie."
+
+#: admin/tpl/setting/settings_optimize.php:200
+msgid "Separate CCSS Cache Post Types"
+msgstr "Oddzielne typy treści CCSS"
+
+#: admin/tpl/setting/settings_optimize.php:204
+msgid "List post types where each item of that type should have its own CCSS generated."
+msgstr "Wymień typy treści, w których każdy element tego typu powinien mieć wygenerowany własny CCSS."
+
+#: includes/litespeed-cache-purge.class.php:218 inc/purge.class.php:218
+msgid "Cleaned all placeholder files."
+msgstr "Wyczyszczono wszystkie pliki elementu zastępczego."
+
+#: admin/tpl/setting/settings_media.php:118
+msgid "Size list in queue waiting for cron"
+msgstr "Lista rozmiarów w kolejce czeka na crona"
+
+#: admin/tpl/setting/settings_media.php:101
+msgid "If set to %1$s, before the placeholder is localized, the %2$s configuration will be used."
+msgstr "Jeśli ustawione na %1$s, zanim element zastępczy zostanie zlokalizowany, zostanie użyta konfiguracja %2$s."
+
+#: admin/tpl/setting/settings_media.php:99
+msgid "Automatically generate %s in the background via a cron-based queue."
+msgstr "Automatycznie generuj %s w tle za pomocą kolejki cron."
+
+#: admin/tpl/setting/settings_media.php:95
+msgid "Generate Reponsive Placeholder In Background"
+msgstr "Wygeneruj responsywny symbol zastępczy w tle"
+
+#: admin/tpl/setting/settings_media.php:88
+msgid "Specify the placeholder color you want to use."
+msgstr "Określ kolor dla elementu zastępczego, którego chcesz użyć."
+
+#: admin/tpl/setting/settings_media.php:83
+msgid "Responsive Placeholder Background Color"
+msgstr "Responsywny kolor tła elementu zastępczego"
+
+#: admin/tpl/setting/settings_media.php:77
+msgid "This will generate the placeholder with same dimensions as the image if it has the width and height attributes."
+msgstr "Spowoduje to wygenerowanie elementu zastępczego o takich samych wymiarach jak obraz, jeśli ma atrybuty szerokości i wysokości"
+
+#: admin/tpl/setting/settings_media.php:76
+msgid "Responsive image placeholders can help to reduce layout reshuffle when images are loaded."
+msgstr "Elementy zastępcze obrazu responsywnego mogą pomóc w zmniejszeniu przetasowania układu podczas wczytywania obrazków."
+
+#: admin/tpl/setting/settings_media.php:72
+#: admin/tpl/setting/settings_media.php:99
+msgid "Responsive Placeholder"
+msgstr "Responsywny element zastępczy"
+
+#: admin/tpl/manage/manage_purge.php:82
+msgid "This will delete all generated image placeholder files"
+msgstr "Spowoduje to usunięcie wszystkich plików elementów zastępczych  dla wygenerowanych obrazów"
+
+#: admin/tpl/manage/manage_purge.php:81
+#: includes/litespeed-cache-gui.class.php:576 inc/gui.class.php:576
+msgid "Placeholder Cache"
+msgstr "Pamięć podręczna elementów zastępczych"
+
+#: admin/tpl/inc/check_cache_disabled.php:22
+msgid "Please enable LiteSpeed Cache in the plugin settings."
+msgstr "Proszę włączyć LiteSpeed Cache w ustawieniach wtyczki."
+
+#: admin/tpl/inc/check_cache_disabled.php:14
+msgid "Please enable the LSCache Module at the server level, or ask your hosting provider."
+msgstr "Włącz moduł LSCache na poziomie serwera lub skontaktuj się z dostawcą usług hostingowych."
+
+#: admin/tpl/inc/check_cache_disabled.php:9
+msgid "Caching with a non-LiteSpeed server (i.e. Apache or nginx) is not currently supported."
+msgstr "Pamięć podręczna z serwerem innym niż LiteSpeed (np. Apache lub nginx) nie jest obecnie obsługiwana."
+
+#: admin/admin-api.class.php:450
+msgid "Failed to post via WordPress"
+msgstr "Nie powiodło się wysyłanie przez WordPress-a"
+
+#: admin/tpl/setting/settings_media.php:148
+msgid "Include the lazy load image Javascript library inline."
+msgstr "Dołącz wbudowaną bibliotekę JavaScript z lazy-loading."
+
+#: admin/tpl/setting/settings_media.php:144
+msgid "Inline Lazy Load Images Library"
+msgstr "Biblioteka Inline Lazy Load Images"
+
+#. Description of the plugin
+msgid "High-performance page caching and site optimization from LiteSpeed"
+msgstr "Wysokowydajne buforowanie stron i optymalizacja strony od LiteSpeed"
+
+#: admin/tpl/import_export.php:61 inc/media.class.php:241
+msgid "Reset"
+msgstr "Reset"
+
+#: inc/media.class.php:222
+msgid "Click to Switch To Optimized File"
+msgstr "Kliknij aby zmienić na zoptymalizowany plik"
+
+#: inc/media.class.php:217
+msgid "Click to Restore Original File"
+msgstr "Kliknij aby odzyskać oryginalny plik"
+
+#: inc/media.class.php:185
+msgid "Click to Enable WebP"
+msgstr "Kliknij aby włączyć WebP"
+
+#: inc/media.class.php:180
+msgid "Click to Disable WebP"
+msgstr "Kliknij aby wyłączyć WebP"
+
+#: inc/img_optm.class.php:2045
+msgid "Reset the optimized data successfully."
+msgstr "Zrestartowano zoptymalizowane dane pomyślnie."
+
+#: inc/img_optm.class.php:1028
+msgid "LSCWP %1$s has simplified the image pulling process. Please %2$s, or resend the pull notification this one time only. After that, the process will be automated."
+msgstr "LSCWP %1$s uprościło proces przesyłania obrazka. Proszę %2$s lub wyślij powiadomienie o przesłaniu tylko raz. Następnie proces zostanie zautomatyzowany."
+
+#: includes/litespeed-cache-gui.class.php:643 inc/gui.class.php:643
+msgid "Update %s now"
+msgstr "Aktualizuj %s natychmiast"
+
+#: includes/litespeed-cache-gui.class.php:638 inc/gui.class.php:638
+msgid "View %1$s version %2$s details"
+msgstr "Zobacz %1$s wersji %2$s szczegóły"
+
+#: includes/litespeed-cache-gui.class.php:635 inc/gui.class.php:635
+msgid "<a href=\"%1$s\" %2$s>View version %3$s details</a> or <a href=\"%4$s\" %5$s target=\"_blank\">update now</a>."
+msgstr "<a href=\"%1$s\" %2$s>Zobacz szczegóły wersji %3$s</a> lub <a href=\"%4$s\" %5$s target=\"_blank\">zaktualizuj teraz</a>."
+
+#: includes/litespeed-cache-gui.class.php:614 inc/gui.class.php:614
+msgid "Install %s"
+msgstr "Zainstaluj %s"
+
+#: admin/tpl/inc/img_optm.summary.php:113
+msgid "Images previously optimized"
+msgstr "Obrazki zoptymalizowane poprzednio"
+
+#: admin/tpl/inc/check_cache_disabled.php:41
+msgid "Caching functions on this page are currently unavailable!"
+msgstr "Funkcja pamięci podręcznej na tej stronie jest aktualnie niedostępna!"
+
+#: admin/litespeed-cache-admin.class.php:225
+msgid "LiteSpeed Cache does work with other optimization plugins, but only if functionality is not duplicated. Only one full-page cache may be activated."
+msgstr "LiteSpeed Cache działa z innymi wtyczkami optymalizacyjnymi, ale tylko wtedy, gdy funkcjonalność nie jest powielana. Można aktywować tylko jedną pamięć podręczną całej strony."
+
+#: admin/litespeed-cache-admin.class.php:224
+msgid "LiteSpeed has detected another plugin using the \"Advanced Cache\" file."
+msgstr "LiteSpeed wykrył inną wtyczkę za pomocą pliku \"Advanced Cache\"."
+
+#: admin/litespeed-cache-admin.class.php:222
+msgid "If this is the case, please uncheck \"Check Advanced Cache\" in LiteSpeed Cache Advanced settings."
+msgstr "W takim przypadku usuń zaznaczenie opcji \"Sprawdź zaawansowaną pamięć podręczną\" w zaawansowanych ustawieniach LiteSpeed Cache."
+
+#: admin/litespeed-cache-admin.class.php:220
+msgid "If this is the case, the network admin may uncheck \"Check Advanced Cache\" in LiteSpeed Cache Advanced settings."
+msgstr "W takim przypadku administrator sieci może odznaczyć opcję \"Sprawdź zaawansowaną pamięć podręczną\" w zaawansowanych ustawieniach LiteSpeed Cache."
+
+#: admin/admin-api.class.php:501
+msgid "%s plugin version %s required for this action."
+msgstr "%s wersja wtyczki %s jest wymagana dla tej akcji."
+
+#: admin/admin-api.class.php:467
+msgid "We are working hard to improve your Image Optimization experience. The service will be unavailable while we work. We apologize for any inconvenience."
+msgstr "Dokładamy wszelkich starań, aby poprawić jakość optymalizacji obrazku. Usługa będzie niedostępna podczas pracy. Przepraszamy za wszelkie niedogodności."
+
+#: admin/tpl/setting/settings_media.php:191
+msgid "Automatically remove the original image backups after fetching optimized images."
+msgstr "Automatycznie usuwaj oryginalne kopie zapasowe obrazków po pobraniu zoptymalizowanych obrazków."
+
+#: admin/tpl/setting/settings_media.php:187
+msgid "Remove Original Backups"
+msgstr "Usuń oryginalne kopie zapasowe"
+
+#: admin/tpl/setting/settings_media.php:161
+msgid "Requests can only be sent when recovered credits is %s or more."
+msgstr "Żądania można wysyłać tylko wtedy, gdy odzyskane kredyty wynoszą %s lub więcej."
+
+#: admin/tpl/setting/settings_media.php:160
+msgid "Automatically request optimization via cron job."
+msgstr "Automatycznie żądaj optymalizacji za pomocą zadania cron."
+
+#: admin/tpl/setting/settings_media.php:156
+msgid "Optimize Automatically"
+msgstr "Optymalizuj atomatycznie"
+
+#: admin/tpl/setting/settings_inc.check_adv_file.php:17
+msgid "You may need to uncheck this option if you are using multiple optimization plugins."
+msgstr "Może być wymagane wyłączenie ten opcji jeśli używasz kilku wtyczek do optymalizacji."
+
+#: admin/tpl/inc/img_optm.summary.php:230
+msgid "The refresh button will calculate the total amount of disk space used by these backups."
+msgstr "Przycisk odświeżania obliczy całkowitą ilość miejsca na dysku używanego przez te kopie zapasowe."
+
+#: admin/tpl/inc/img_optm.summary.php:229
+msgid "A backup of each image is saved before it is optimized."
+msgstr "Kopia zapasowa każdego obrazka jest zapisywana przed optymalizacją."
+
+#: admin/tpl/inc/img_optm.summary.php:43
+msgid "Current Stage Status"
+msgstr "Obecny status etapu"
+
+#: admin/tpl/inc/img_optm.percentage_summary.php:29
+msgid "Congratulations, all done!"
+msgstr "Gratulujemy, wszystko zrobione!"
+
+#: admin/tpl/inc/img_optm.level_info.php:43
+msgid "Next Level Credit"
+msgstr "Następny poziom kredytu"
+
+#: admin/tpl/inc/img_optm.initialize.php:15
+msgid "Initialize Optimization"
+msgstr "Zainicjuj optymizację"
+
+#: admin/tpl/api/quic.user_welcome.php:19
+msgid "Next"
+msgstr "Dalej"
+
+#: admin/tpl/api/quic.register.php:37
+msgid "Register"
+msgstr "Zarejestruj"
+
+#: admin/tpl/api/quic.register.php:39 admin/tpl/api/quic.login.php:36
+msgid "Back"
+msgstr "Powrót"
+
+#: admin/tpl/api/quic.login.php:34
+msgid "Login"
+msgstr "Zaloguj"
+
+#: admin/tpl/api/quic.login.php:30
+msgid "Or"
+msgstr "Lub"
+
+#: admin/tpl/api/quic.register.php:17 admin/tpl/api/quic.login.php:17
+msgid "ERROR"
+msgstr "BŁĄD"
+
+#: admin/tpl/inc/img_optm.level_info.php:41
+msgid "Next Level"
+msgstr "Następny poziom"
+
+#: admin/admin-api.class.php:492
+msgid "Good news from LiteSpeed image server"
+msgstr "Dobra wiadomość z serwera obrazków LiteSpeed"
+
+#: admin/tpl/api/quic.user_welcome.php:7 admin/tpl/api/quic.register.php:7
+#: admin/tpl/api/quic.login.php:7
+msgid "Quic Cloud User Panel"
+msgstr "Quic Cloud User Panel"
+
+#: inc/img_optm.class.php:1925
+msgid "Switched images successfully."
+msgstr "Zmieniono obrazki pomyślnie."
+
+#: admin/tpl/settings.php:174
+msgid "Show Advanced Options"
+msgstr "Wyświetl zaawansowane opcje"
+
+#: admin/tpl/settings.php:172
+msgid "Hide Advanced Options"
+msgstr "Ukryj zaawansowane opcje"
+
+#: admin/tpl/setting/settings_media.php:218
+msgid "This can improve quality but may result in larger images than lossy compression will."
+msgstr "Może to poprawić jakość, ale może skutkować większymi obrazami niż kompresja stratna."
+
+#: admin/tpl/setting/settings_media.php:217
+msgid "Optimize images using lossless compression."
+msgstr "Optymalizuj obrazki używając kompresji bezstratnej."
+
+#: admin/tpl/setting/settings_media.php:213
+msgid "Optimize Losslessly"
+msgstr "Zoptymalizuj bezstratnie"
+
+#: admin/tpl/setting/settings_media.php:207
+msgid "Request WebP versions of original images when doing optimization."
+msgstr "Poproś o wersje WebP oryginalnych obrazków podczas optymalizacji."
+
+#: admin/tpl/setting/settings_media.php:203
+msgid "Optimize WebP Versions"
+msgstr "Optymalizuj wersje WebP"
+
+#: admin/tpl/setting/settings_media.php:181
+msgid "Optimize images and save backups of the originals in the same folder."
+msgstr "Zoptymalizuj obrazki i zapisz kopie zapasowe oryginałów w tym samym folderze."
+
+#: admin/tpl/setting/settings_media.php:177
+msgid "Optimize Original Images"
+msgstr "Optymalizuj oryginalne obrazki"
+
+#: admin/tpl/setting/settings_media.php:167
+msgid "Optimization Cron"
+msgstr "Cron optymalizacji"
+
+#: admin/tpl/setting/settings_cdn.php:25
+msgid "If using Cloudflare, leave this setting %s and use Cloudflare API setting below."
+msgstr "Jeśli używasz Cloudflare, pozostaw to ustawienie %s i użyj ustawienia Cloudflare API poniżej."
+
+#: admin/tpl/setting/settings_optimize.php:153
+msgid "This option only works if %1$s is %2$s."
+msgstr "Ta opcja działa tylko wtedy gdy %1$s jest %2$s."
+
+#: admin/tpl/setting/settings_optimize.php:152
+msgid "Leave this option %1$s to allow communication with LiteSpeed CCSS server. If set to %2$s, Critical CSS will not be generated."
+msgstr "Zostaw tę opcje %1$s aby umożliwić komunikację z serwerem LiteSpeed CCSS. Jeśli jest %2$s, krytyczny CSS się nie wygeneruje."
+
+#: admin/tpl/setting/settings_optimize.php:148
+msgid "Generate Critical CSS"
+msgstr "Wygeneruj krytyczny CSS"
+
+#: admin/tpl/setting/settings_optimize.php:138
+msgid "When this option is turned %s, it will also load Google Fonts asynchronously."
+msgstr "Jeśli ta opcje jest przestawiona %s, to załaduje, to też czcionki Google asynchronicznie."
+
+#: includes/litespeed-cache-purge.class.php:202 inc/purge.class.php:202
+msgid "Cleaned all critical CSS files."
+msgstr "Wyczyszczono wszystkie krytyczne pliki CSS."
+
+#: admin/tpl/setting/settings_optimize.php:227
+msgid "This will inline the asynchronous CSS library to avoid render blocking."
+msgstr "Spowoduje to wstawienie asynchronicznej biblioteki CSS w celu uniknięcia blokowania renderowania."
+
+#: admin/tpl/setting/settings_optimize.php:223
+msgid "Inline CSS Async Lib"
+msgstr "Wewnętrzny CSS Async Lib"
+
+#: admin/tpl/setting/settings_media.php:124
+#: admin/tpl/setting/settings_optimize.php:191
+msgid "Run Queue Manually"
+msgstr "Uruchom kolejkę ręcznie"
+
+#: admin/tpl/setting/settings_optimize.php:180
+msgid "URL list in queue waiting for cron"
+msgstr "Lista URL w kolejce czeka na crona"
+
+#: admin/tpl/setting/settings_optimize.php:175
+msgid "Last requested cost"
+msgstr "Koszt ostatniego żądania"
+
+#: admin/tpl/setting/settings_media.php:113
+#: admin/tpl/setting/settings_optimize.php:172
+msgid "Last generated"
+msgstr "Ostatnio wygenerowany"
+
+#: admin/tpl/setting/settings_media.php:105
+#: admin/tpl/setting/settings_optimize.php:164
+msgid "If set to %s this is done in the foreground, which may slow down page load."
+msgstr "Jeśli ustawiono %s to działanie odbywa się na pierwszym planie, co może spowolnić ładowanie strony."
+
+#: admin/tpl/setting/settings_optimize.php:163
+msgid "Automatically generate critical CSS in the background via a cron-based queue."
+msgstr "Automatycznie generuj krytyczne CSS w tle za pomocą kolejki cron."
+
+#: admin/tpl/setting/settings_optimize.php:159
+msgid "Generate Critical CSS In Background"
+msgstr "Wygeneruj krytyczne CSS w tle"
+
+#: admin/tpl/setting/settings_optimize.php:136
+msgid "Optimize CSS delivery."
+msgstr "Optymalizuj dostarczanie CSS"
+
+#: admin/tpl/manage/manage_purge.php:73
+msgid "This will delete all generated critical CSS files"
+msgstr "Ta opcja usunie wszystkie wygenerowane krytyczne pliki CSS"
+
+#: admin/tpl/manage/manage_purge.php:72
+#: includes/litespeed-cache-gui.class.php:566 inc/gui.class.php:566
+msgid "Critical CSS"
+msgstr "Krytyczny CSS"
+
+#: inc/doc.cls.php:27
+msgid "This site utilizes caching in order to facilitate a faster response time and better user experience. Caching potentially stores a duplicate copy of every web page that is on display on this site. All cache files are temporary, and are never accessed by any third party, except as necessary to obtain technical support from the cache plugin vendor. Cache files expire on a schedule set by the site administrator, but may easily be purged by the admin before their natural expiration, if necessary."
+msgstr "Ta strona wykorzystuje pamięć podręczną, aby ułatwić szybszy czas reakcji i lepsze wrażenia użytkownika. Buforowanie potencjalnie przechowuje duplikat każdej strony internetowej, która jest wyświetlana na tej stronie. Wszystkie pliki pamięci podręcznej są tymczasowe i nigdy nie są dostępne dla osób trzecich, z wyjątkiem sytuacji, gdy jest to konieczne do uzyskania pomocy technicznej od dostawcy wtyczek pamięci podręcznej. Pliki pamięci podręcznej wygasają zgodnie z harmonogramem ustalonym przez administratora witryny, ale mogą być łatwo usunięte przez administratora przed ich naturalnym wygaśnięciem, jeśli to konieczne."
+
+#: admin/tpl/setting/settings_debug.php:145
+msgid "Enabling this option will cause log file size to grow quickly."
+msgstr "Włączenie tej opcji spowoduje szybki wzrost rozmiaru pliku dziennika."
+
+#: admin/tpl/setting/settings_debug.php:142
+msgid "Log all WordPress filter hooks."
+msgstr "Zapisuj logi wszystkich hooków filtrów WordPress."
+
+#: admin/tpl/setting/settings_debug.php:111
+msgid "Disabling this may cause WordPress tasks triggered by AJAX to stop working."
+msgstr "Wyłączenie tego może spowodować, że zadania WordPress wyzwalane przez AJAX przestaną działać."
+
+#: admin/tpl/setting/settings_debug.php:108
+msgid "Disable WordPress heartbeat to prevent AJAX calls from breaking debug logging."
+msgstr "Wyłącz Puls WordPress, aby zapobiec przerwaniu wywoływania debugowania przez wywołania AJAX."
+
+#: includes/litespeed-cache-utility.class.php:235 inc/utility.class.php:235
+msgid "right now"
+msgstr "teraz"
+
+#: includes/litespeed-cache-utility.class.php:235 inc/utility.class.php:235
+msgid "just now"
+msgstr "właśnie"
+
+#: inc/img_optm.class.php:1730
+msgid "Removed %1$s images and saved %2$s successfully."
+msgstr "Usunięto %1$s obrazów i zapisano %2$s."
+
+#: admin/tpl/inc/img_optm.summary.php:223
+msgid "Saved"
+msgstr "Zapisane"
+
+#: admin/tpl/inc/img_optm.summary.php:217
+msgid "Last ran"
+msgstr "Ostatnio uruchmiono"
+
+#: admin/tpl/inc/img_optm.summary.php:211
+#: admin/tpl/setting/settings_media.php:196
+msgid "You will be unable to Revert Optimization once the backups are deleted!"
+msgstr "Po usunięciu kopii zapasowych nie będzie można przywrócić optymalizacji!"
+
+#: admin/tpl/inc/img_optm.summary.php:210
+#: admin/tpl/setting/settings_media.php:195
+msgid "This is irreversible."
+msgstr "To jest nieodwracalne."
+
+#: admin/tpl/inc/img_optm.summary.php:207
+msgid "This will delete all of the backups of the original images."
+msgstr "Spowoduje to usunięcie wszystkich kopii oryginalnych obrazów."
+
+#: admin/tpl/inc/img_optm.summary.php:204
+msgid "Remove Original Image Backups"
+msgstr "Usuń oryginalne kopie zapasowe obrazów"
+
+#: admin/tpl/inc/img_optm.summary.php:203
+msgid "Are you sure to remove all image backups?"
+msgstr "Czy na pewno chcesz usunąć wszystkie kopie zapasowe obrazków?"
+
+#: admin/tpl/inc/img_optm.summary.php:196
+msgid "Total"
+msgstr "Wszystkich"
+
+#: admin/tpl/inc/img_optm.summary.php:193
+#: admin/tpl/inc/img_optm.summary.php:220
+msgid "Files"
+msgstr "Plików"
+
+#: admin/tpl/inc/img_optm.summary.php:189
+msgid "Last calculated"
+msgstr "Ostatnio obliczono"
+
+#: admin/tpl/inc/img_optm.summary.php:181
+msgid "Calculate Original Image Storage"
+msgstr "Oblicz miejsce zajęte przez oryginalne obrazy"
+
+#: admin/tpl/inc/img_optm.summary.php:179
+msgid "Storage Optimization"
+msgstr "Optymalizacja pamięci masowej"
+
+#: admin/tpl/setting/settings_media.php:262
+msgid "Enable replacement of WebP in %s elements that were generated outside of WordPress logic."
+msgstr "Włącz zastąpienie WebP w elementach %s, które zostały wygenerowane poza logiką WordPress."
+
+#: admin/tpl/setting/settings_media.php:258
+msgid "WebP For Extra srcset"
+msgstr "WebP For Extra srcset"
+
+#: admin/tpl/setting/settings_media.php:251
+msgid "Use the format %1$s or %2$s (element is optional)."
+msgstr "Użyj formatu %1$s lub %2$s (element opcjonalny)"
+
+#: admin/tpl/setting/settings_media.php:250
+msgid "Only attributes listed here will be replaced."
+msgstr "Tylko wymienione tutaj atrybuty zostaną zastąpione."
+
+#: admin/tpl/setting/settings_media.php:249
+msgid "Specify which element attributes will be replaced with WebP."
+msgstr "Określ, które atrybuty elementu zostaną zastąpione przez WebP."
+
+#: admin/tpl/setting/settings_media.php:243
+msgid "WebP Attribute To Replace"
+msgstr "Atrybut WebP do zastąpienia"
+
+#: admin/tpl/setting/settings_cdn.php:138
+msgid "Only files within these directories will be pointed to the CDN."
+msgstr "ylko pliki w tych katalogach będą wskazywane na CDN."
+
+#: admin/tpl/setting/settings_cdn.php:132
+msgid "Included Directories"
+msgstr "Dołączone katalogi"
+
+#: admin/tpl/setting/settings_advanced.php:38
+msgid "A Purge All will be executed when WordPress runs these hooks."
+msgstr "A wyczyszczenie wszystkiego zostanie wykonane, gdy WordPress uruchomi te rozszerzenia."
+
+#: admin/tpl/setting/settings_advanced.php:31
+msgid "Purge All Hooks"
+msgstr "Wyczyść wszystkie rozszerzenia"
+
+#: includes/litespeed-cache-purge.class.php:163 inc/purge.class.php:163
+msgid "Purged all caches successfully."
+msgstr "Wyczyszczono całą pamięć podręczną pomyślnie."
+
+#: includes/litespeed-cache-gui.class.php:469
+#: includes/litespeed-cache-gui.class.php:519 inc/gui.class.php:469
+#: inc/gui.class.php:519
+msgid "LSCache"
+msgstr "LSCache"
+
+#: includes/litespeed-cache-gui.class.php:421 inc/gui.class.php:421
+msgid "Forced cacheable"
+msgstr "Wymuszone buforowanie"
+
+#: admin/tpl/setting/settings_excludes.php:18
+msgid "Paths containing these strings will be cached regardless of no-cacheable settings."
+msgstr "Ścieżki zawierające te łańcuchy będą buforowane bez względu na ustawienia, których nie można buforować."
+
+#: admin/tpl/setting/settings_excludes.php:14
+msgid "Force Cache URIs"
+msgstr "Wymuś identyfikatory URI pamięci podręcznej"
+
+#: admin/tpl/setting/settings_excludes.php:6
+msgid "Exclude Settings"
+msgstr "Wykluczone ustawienia"
+
+#: admin/tpl/setting/settings_debug.php:17
+msgid "This will disable LSCache and all optimization features for debug purpose."
+msgstr "Spowoduje to wyłączenie funkcji LSCache i wszystkich funkcji optymalizacji dla celów debugowania."
+
+#: admin/tpl/inc/disabled_all.php:4 admin/tpl/setting/settings_debug.php:13
+msgid "Disable All Features"
+msgstr "Wyłącz wszystkie funkcje"
+
+#: admin/tpl/manage/manage_purge.php:63
+#: includes/litespeed-cache-gui.class.php:556 inc/gui.class.php:556
+msgid "Opcode Cache"
+msgstr "Pamięć podręczna Opcode"
+
+#: admin/tpl/manage/manage_purge.php:45
+#: includes/litespeed-cache-gui.class.php:527 inc/gui.class.php:527
+msgid "CSS/JS Cache"
+msgstr "Pamięć podręczna CSS / JS"
+
+#: inc/img_optm.class.php:1340
+msgid "Destroy unfinished data successfully."
+msgstr "Zniszcz niedokończone dane."
+
+#: admin/tpl/inc/img_optm.summary.php:306
+msgid "This will also reset the credit level."
+msgstr "Spowoduje to również zresetowanie poziomu kredytu."
+
+#: includes/litespeed-cache-gui.class.php:594 inc/gui.class.php:594
+msgid "Remove all previous unfinished image optimization requests."
+msgstr "Usuń wszystkie wcześniejsze niedokończone żądania optymalizacji obrazu."
+
+#: admin/tpl/inc/img_optm.summary.php:123
+msgid "Images failed with other errors"
+msgstr "Obrazy nie powiodły się z innymi błędami"
+
+#: includes/litespeed-cache-gui.class.php:595 inc/gui.class.php:595
+msgid "Clean Up Unfinished Data"
+msgstr "Wyczyść niedokończone dane"
+
+#: admin/tpl/inc/img_optm.summary.php:143
+msgid "Images with wrong meta"
+msgstr "Obrazy z nieprawidłową meta"
+
+#: inc/img_optm.class.php:223
+msgid "Requested successfully."
+msgstr "Zażądano pomyślnie."
+
+#: admin/tpl/setting/settings_cdn.php:126
+msgid "Separate multiple original URLs with a %s."
+msgstr "Oddziel kilka oryginalnych adresów URL za pomocą %s."
+
+#: admin/tpl/inc/check_cache_disabled.php:29
+msgid "LiteSpeed Cache is disabled."
+msgstr "LiteSpeed Cache jest wyłączony."
+
+#: admin/tpl/inc/banner_promo.slack.php:22
+msgid "Join Us on Slack"
+msgstr "Dołącz do nas na Slacku"
+
+#: admin/tpl/inc/banner_promo.slack.php:13
+msgid "Join the %s community."
+msgstr "Dołącz do społeczności %s."
+
+#: admin/tpl/inc/banner_promo.slack.php:12
+msgid "Want to connect with other LiteSpeed users?"
+msgstr "Chcesz połączyć się z innymi użytkownikami LiteSpeed?"
+
+#: inc/img_optm.class.php:300
+msgid "Pushed %1$s to LiteSpeed optimization server, accepted %2$s."
+msgstr "Przesłano %1$s do serwera optymalizacji LiteSpeed, zaakceptowano %2$s."
+
+#: inc/img_optm.class.php:243
+msgid "Optimized successfully."
+msgstr "Zoptymalizowano pomyślnie."
+
+#: admin/tpl/setting/settings_cdn.php:220
+#: admin/tpl/setting/settings_cdn.php:252
+msgid "Get it from <a %1$s>%2$s</a>."
+msgstr "Pobierz to z <a %1$s>%2$s</a>."
+
+#: admin/tpl/setting/settings_cdn.php:219
+#: admin/tpl/setting/settings_cdn.php:251
+msgid "Your API key is used to access %s APIs."
+msgstr "Twój klucz API który jest używany do uzyskania dostępu do API %s."
+
+#: admin/tpl/setting/settings_cdn.php:210
+#: admin/tpl/setting/settings_cdn.php:242
+msgid "Your Email address on %s."
+msgstr "Twój adres E-Mail na %s."
+
+#: admin/tpl/setting/settings_cdn.php:189
+#: admin/tpl/setting/settings_cdn.php:233
+msgid "Use %s API functionality."
+msgstr "Użyj API %s"
+
+#: admin/tpl/setting/settings_cdn.php:89
+msgid "To randomize CDN hostname, define multiple hostnames for the same resources."
+msgstr "Aby losowo wybrać nazwę hosta CDN, zdefiniuj wiele nazw hostów dla tych samych zasobów."
+
+#: admin/tpl/inc/admin_footer.php:13
+msgid "Join LiteSpeed Slack community"
+msgstr "Dołącz do społeczności LiteSpeed Slack"
+
+#: admin/tpl/inc/admin_footer.php:11
+msgid "Visit LSCWP support forum"
+msgstr "Odwiedź forum pomocy LSCWP"
+
+#: admin/tpl/inc/admin_footer.php:9
+msgid "Read LiteSpeed Wiki"
+msgstr "Czytaj LiteSpeed Wiki"
+
+#: admin/tpl/inc/admin_footer.php:6
+msgid "Rate %s on %s"
+msgstr "Oceń %s na %s"
+
+#: admin/tpl/inc/img_optm.summary.php:70
+msgid "Images notified to pull"
+msgstr "Obrazy zgłoszone do przesłania"
+
+#: admin/tpl/inc/img_optm.summary.php:133
+msgid "Image files missing"
+msgstr "Brakuje plików graficznych"
+
+#: admin/tpl/inc/img_optm.percentage_summary.php:22
+msgid "What is a group?"
+msgstr "Czym jest grupa?"
+
+#: admin/tpl/inc/img_optm.summary.php:246
+msgid "Update Status"
+msgstr "Stan aktualizacji"
+
+#: admin/litespeed-cache-admin-display.class.php:1028
+msgid "%s image"
+msgstr "%s obrazek"
+
+#: admin/litespeed-cache-admin-display.class.php:1025
+msgid "%s group"
+msgstr "%s grupa"
+
+#: admin/litespeed-cache-admin-display.class.php:1015
+msgid "%s images"
+msgstr "%s obrazki"
+
+#: admin/litespeed-cache-admin-display.class.php:1012
+msgid "%s groups"
+msgstr "%s grupy"
+
+#: includes/litespeed-cache-crawler.class.php:531 inc/crawler.class.php:531
+msgid "Guest"
+msgstr "Gość"
+
+#: includes/litespeed-cache-crawler.class.php:503 inc/crawler.class.php:503
+#: lib/litespeed/litespeed-crawler.class.php:414
+msgid "Crawler %s reached end of sitemap file."
+msgstr "Robot indeksujący %s dotarł do końca pliku mapy strony."
+
+#: admin/tpl/setting/settings_crawler.php:297
+msgid "These options will be invalid when using %s."
+msgstr "Te opcje nie będą poprawne gdy używany jest %s."
+
+#: admin/tpl/setting/settings_crawler.php:255
+msgid "Exclude certain Custom Post Types in sitemap."
+msgstr "Wyklucz niektóre niestandardowe typy treści w mapie strony."
+
+#: admin/tpl/setting/settings_crawler.php:215
+msgid "Sitemap Generation"
+msgstr "Generowanie mapy strony"
+
+#: admin/tpl/setting/settings_crawler.php:131
+msgid "To crawl the site as a logged-in user, enter the user ids to be simulated."
+msgstr "Aby indeksować stronę jako zalogowany użytkownik, wpisz id użytkowników którzy maja być symulowani."
+
+#: admin/tpl/setting/settings_crawler.php:126
+msgid "Role Simulation"
+msgstr "Symulacja roli"
+
+#: admin/tpl/api/quic.login.php:30 admin/tpl/setting/settings_cdn.php:215
+msgid "User API Key"
+msgstr "Klucz API użytkownika"
+
+#: admin/tpl/setting/settings_cdn.php:185
+msgid "Quic Cloud API"
+msgstr "Quic Cloud API"
+
+#: admin/tpl/crawler.php:189
+msgid "running"
+msgstr "uruchomione"
+
+#: admin/tpl/crawler.php:165
+msgid "Size"
+msgstr "Rozmiar"
+
+#: admin/tpl/crawler.php:142
+msgid "Ended reason"
+msgstr "Powód zakończenia"
+
+#: admin/tpl/crawler.php:135
+msgid "Last interval"
+msgstr "Ostatni interwał"
+
+#: admin/tpl/crawler.php:128
+msgid "Current crawler started at"
+msgstr "Aktualny robot indeksujący wystartował w"
+
+#: admin/tpl/crawler.php:121
+msgid "Run time for previous crawler"
+msgstr "Ostatni czas uruchomienia robota indeksującego"
+
+#: admin/tpl/crawler.php:115 admin/tpl/crawler.php:122
+msgid "%d seconds"
+msgstr "%d sekund"
+
+#: admin/tpl/crawler.php:114
+msgid "Last complete run time for all crawlers"
+msgstr "Ostatnie pełne uruchomienie wszystkich robotów indeksujących "
+
+#: admin/tpl/crawler.php:100
+msgid "Current sitemap crawl started at"
+msgstr "Aktualny robot indeksujący mapę strony wystartował w"
+
+#: admin/tpl/setting/settings_optimize.php:126
+msgid "Minify inline JS code."
+msgstr "Minifikacja wbudowanego kodu JS."
+
+#: admin/tpl/setting/settings_optimize.php:122
+msgid "Inline JS Minify"
+msgstr "Minifikacja wbudowanego kodu JS"
+
+#: admin/tpl/setting/settings_optimize.php:116
+msgid "Minify inline CSS code."
+msgstr "Minifikacja wbudowanego kodu CSS."
+
+#: admin/tpl/setting/settings_optimize.php:112
+msgid "Inline CSS Minify"
+msgstr "Minifikacja wbudowanego kodu CSS"
+
+#: admin/tpl/setting/settings_inc.cache_object.php:149
+msgid "Save transients in database when %1$s is %2$s."
+msgstr "Zapisuj dane tymczasowe w bazie danych tylko wtedy gdy %1$s wynosi %2$s."
+
+#: admin/tpl/setting/settings_inc.cache_object.php:145
+msgid "Store Transients"
+msgstr "Zapisuj dane tymczasowe"
+
+#: admin/tpl/setting/settings_inc.cache_mobile.php:65
+msgid "If %1$s is %2$s, then %3$s must be populated!"
+msgstr "Jeśli %1$s wynosi %2$s, to %3$s musi zostać wypełnione!"
+
+#: admin/tpl/setting/settings_crawler.php:101
+msgid "Server allowed max value"
+msgstr "Maksymalna dozwolona wartość serwera"
+
+#: admin/tpl/setting/settings_crawler.php:96
+msgid "Server enforced value"
+msgstr "Wymuszona wartość serwera"
+
+#: admin/tpl/setting/settings_crawler.php:23
+msgid "Server allowed min value"
+msgstr "Minimalna dozwolona wartość serwera"
+
+#: admin/tpl/setting/settings_excludes.php:72
+#: admin/tpl/setting/settings_excludes.php:110
+#: admin/tpl/setting/settings_crawler.php:22
+#: admin/tpl/setting/settings_crawler.php:95
+#: admin/tpl/setting/settings_crawler.php:100
+#: admin/tpl/setting/settings_cdn.php:88
+msgid "NOTE"
+msgstr "UWAGA"
+
+#: admin/tpl/setting/network_settings_advanced.php:4
+msgid "Advanced Network"
+msgstr "Zaawansowana sieć"
+
+#: admin/litespeed-cache-admin-display.class.php:960
+msgid "Server variable(s) %s available to override this setting."
+msgstr "Zmienna(e) serwera %s dostępne do nadpisania tego ustawienia."
+
+#: admin/litespeed-cache-admin-display.class.php:959
+#: admin/tpl/setting/settings_media.php:38
+#: admin/tpl/setting/settings_tuning.php:24
+#: admin/tpl/setting/settings_tuning.php:40
+#: admin/tpl/setting/settings_tuning.php:60
+#: admin/tpl/setting/settings_tuning.php:76
+#: admin/tpl/setting/settings_tuning.php:109
+#: admin/tpl/setting/settings_tuning.php:157
+#: admin/tpl/setting/settings_optimize.php:140
+msgid "API"
+msgstr "API"
+
+#: includes/litespeed-cache-purge.class.php:268 inc/purge.class.php:268
+msgid "Reset the entire opcode cache successfully."
+msgstr "Zresetowano całą pamięć podręczną opcode."
+
+#: includes/litespeed-cache-purge.class.php:256 inc/purge.class.php:256
+msgid "Opcode cache is not enabled."
+msgstr "Pamięć podręczna opcode nie jest włączona."
+
+#: inc/import.class.php:201
+msgid "Imported setting file %s successfully."
+msgstr "Pomyślnie importowano plik ustawień %s."
+
+#: inc/import.class.php:148
+msgid "Import failed due to file error."
+msgstr "Importowanie nie powiodło się z powodu błędu pliku."
+
+#: admin/tpl/setting/settings_optimize.php:43
+#: admin/tpl/setting/settings_optimize.php:74
+msgid "How to Fix Problems Caused by CSS/JS Optimization."
+msgstr "Jak naprawić problemy spowodowane przez optymalizację CSS / JS."
+
+#: admin/tpl/setting/settings_advanced.php:64
+msgid "This will generate extra requests to the server, which will increase server load."
+msgstr "Spowoduje to wygenerowanie dodatkowych żądań do serwera, co zwiększy obciążenie serwera."
+
+#: admin/tpl/setting/settings_advanced.php:60
+msgid "When a vistor hovers over a page link, preload that page. This will speed up the visit to that link."
+msgstr "Gdy użytkownik unosi się nad linkiem do strony, wstępnie załaduj tę stronę. Przyspieszy to odwiedziny tego linku."
+
+#: admin/tpl/setting/settings_advanced.php:56
+msgid "Instant Click"
+msgstr "Natychmiastowe kliknięcie"
+
+#: admin/tpl/manage/manage_purge.php:64
+msgid "Reset the entire opcode cache"
+msgstr "Zresetuj całą pamięć podręczną opcode"
+
+#: admin/tpl/import_export.php:55
+msgid "This will import settings from a file and override all current LiteSpeed Cache settings."
+msgstr "Spowoduje to zaimportowanie ustawień z pliku i zastąpienie wszystkich bieżących ustawień pamięci podręcznej LiteSpeed."
+
+#: admin/tpl/import_export.php:50
+msgid "Last imported"
+msgstr "Ostatnio zaimportowano"
+
+#: admin/tpl/import_export.php:44
+msgid "Import"
+msgstr "Import"
+
+#: admin/tpl/import_export.php:35
+msgid "Import Settings"
+msgstr "Ustawienia importu"
+
+#: admin/tpl/import_export.php:32
+msgid "This will export all current LiteSpeed Cache settings and save as a file."
+msgstr "Spowoduje to wyeksportowanie wszystkich aktualnych ustawień LiteSpeed Cache i zapisanie ich jako pliku."
+
+#: admin/tpl/import_export.php:27
+msgid "Last exported"
+msgstr "Ostatni eksport"
+
+#: admin/tpl/import_export.php:22
+msgid "Export"
+msgstr "Eksport"
+
+#: admin/tpl/import_export.php:19
+msgid "Export Settings"
+msgstr "Ustawienia eksportu"
+
+#: admin/tpl/import_export.php:9
+msgid "LiteSpeed Cache Import / Export"
+msgstr "LiteSpeed Cache Import / Eksport"
+
+#: admin/litespeed-cache-admin-display.class.php:168
+msgid "Import / Export"
+msgstr "Importuj / Eksportuj"
+
+#: admin/tpl/setting/settings_inc.cache_object.php:132
+msgid "Use keep-alive connections to speed up cache operations."
+msgstr "Używaj połączeń keep-alive, aby przyspieszyć operacje w pamięci podręcznej."
+
+#: admin/tpl/setting/settings_inc.cache_object.php:103
+msgid "Database to be used"
+msgstr "Baza danych do wykorzystania"
+
+#: admin/tpl/setting/settings_inc.cache_object.php:99
+msgid "Redis Database ID"
+msgstr "ID bazy danych REDIS"
+
+#: admin/tpl/setting/settings_inc.cache_object.php:94
+msgid "Specify the password used when connecting."
+msgstr "Określ hasło używane podczas łączenia."
+
+#: admin/tpl/api/quic.register.php:30 admin/tpl/api/quic.login.php:30
+#: admin/tpl/setting/settings_inc.cache_object.php:90
+msgid "Password"
+msgstr "Hasło"
+
+#: admin/tpl/setting/settings_inc.cache_object.php:85
+msgid "Only available when %s is installed."
+msgstr "Dostępne tylko wtedy gdy %s jest zainstalowany."
+
+#: admin/tpl/setting/settings_inc.cache_object.php:81
+msgid "Username"
+msgstr "Nazwa użytkownika"
+
+#: admin/tpl/setting/settings_inc.cache_object.php:50
+msgid "Your %s Hostname or IP address."
+msgstr "Twój adres IP lub nazwa hosta %s."
+
+#: admin/tpl/setting/settings_inc.cache_object.php:37
+msgid "Method"
+msgstr "Metoda"
+
+#: includes/litespeed-cache-purge.class.php:297 inc/purge.class.php:297
+msgid "Purge all object caches successfully."
+msgstr "Pomyślnie wyczyszczono całą pamięć podręczną obiektów."
+
+#: includes/litespeed-cache-purge.class.php:287 inc/purge.class.php:287
+msgid "Object cache is not enabled."
+msgstr "Pamięć podręczna obiektów nie jest włączona."
+
+#: admin/tpl/setting/settings_inc.cache_object.php:139
+msgid "Improve wp-admin speed through caching. (May encounter expired data)"
+msgstr "Popraw szybkość wp-admin poprzez buforowanie. (Może napotkać wygasłe dane)"
+
+#: admin/tpl/setting/settings_inc.cache_object.php:135
+#: admin/tpl/setting/settings_inc.cache_object.php:149
+msgid "Cache Wp-Admin"
+msgstr "Pamięć podręczna panelu administratora"
+
+#: admin/tpl/setting/settings_inc.cache_object.php:128
+msgid "Persistent Connection"
+msgstr "Trwałe połączenie"
+
+#: admin/tpl/setting/settings_inc.cache_object.php:119
+msgid "Do Not Cache Groups"
+msgstr "Nie zapisuj w pamięci podręcznej grup"
+
+#: admin/tpl/setting/settings_inc.cache_object.php:113
+msgid "Groups cached at the network level."
+msgstr "Grupy zapisywane w pamięci podręcznej na poziomie sieci."
+
+#: admin/tpl/setting/settings_inc.cache_object.php:110
+msgid "Global Groups"
+msgstr "Globalne grupy"
+
+#: admin/tpl/setting/settings_inc.cache_object.php:74
+msgid "Connection Test"
+msgstr "Test połączenia"
+
+#: admin/tpl/setting/settings_inc.cache_object.php:72
+#: admin/tpl/setting/settings_inc.cache_object.php:73
+msgid "%s Extension"
+msgstr "Rozszerzenie %s "
+
+#: admin/tpl/crawler.php:166 admin/tpl/setting/settings_inc.cache_object.php:70
+msgid "Status"
+msgstr "Stan"
+
+#: admin/tpl/setting/settings_inc.cache_object.php:65
+msgid "Default TTL for cached objects."
+msgstr "Domyślny TTL dla obiektów pamięci podręcznej"
+
+#: admin/tpl/setting/settings_inc.cache_object.php:61
+msgid "Default Object Lifetime"
+msgstr "Domyślny czas życia obiektu"
+
+#: admin/tpl/setting/settings_inc.cache_object.php:55
+msgid "Port"
+msgstr "Port"
+
+#: admin/tpl/setting/settings_inc.cache_object.php:46
+msgid "Host"
+msgstr "Host"
+
+#: admin/tpl/setting/settings_inc.cache_object.php:32
+msgid "Use object cache functionality."
+msgstr "Użyj funkcji pamięci podręcznej obiektów."
+
+#: admin/tpl/manage/manage_purge.php:54
+#: admin/tpl/setting/settings_inc.cache_object.php:28
+#: includes/litespeed-cache-gui.class.php:546 inc/gui.class.php:546
+msgid "Object Cache"
+msgstr "Pamięć podręczna obiektów"
+
+#: admin/tpl/setting/settings_inc.cache_object.php:18
+msgid "Failed"
+msgstr "Nie powiodło się"
+
+#: admin/tpl/setting/settings_inc.cache_object.php:15
+msgid "Passed"
+msgstr "Powiodło się"
+
+#: admin/tpl/setting/settings_inc.cache_object.php:12
+msgid "Not Available"
+msgstr "Niedostępne"
+
+#: admin/tpl/setting/settings_debug.php:157
+#: admin/tpl/setting/settings_debug.php:168
+msgid "Recommended default value"
+msgstr "Zalecana wartość domyślna"
+
+#: admin/tpl/manage/manage_purge.php:55
+msgid "Purge all the object caches"
+msgstr "Usuń wszystkie pamięci podręczne obiektów"
+
+#: inc/cdn/cloudflare.class.php:266
+msgid "Failed to communicate with Cloudflare"
+msgstr "Nie można połączyć się z Cloudflare"
+
+#: inc/cdn/cloudflare.class.php:257
+msgid "Communicated with Cloudflare successfully."
+msgstr "Połączenie z Cloudflare pomyślnie."
+
+#: inc/cdn/cloudflare.class.php:162
+msgid "No available Cloudflare zone"
+msgstr "Brak dostępnej strefy Cloudflare"
+
+#: inc/cdn/cloudflare.class.php:147
+msgid "Notified Cloudflare to purge all successfully."
+msgstr "Powiadomiono Cloudflare, aby oczyścił wszystko z powodzeniem."
+
+#: inc/cdn/cloudflare.class.php:131
+msgid "Cloudflare API is set to off."
+msgstr "Cloudflare API jest wyłączone."
+
+#: inc/cdn/cloudflare.class.php:113
+msgid "Notified Cloudflare to set development mode to %s successfully."
+msgstr "Powiadomiono Cloudflare, aby pomyślnie ustawił tryb developerski na %s."
+
+#: admin/tpl/setting/settings_cdn.php:266
+msgid "Once saved, it will be matched with the current list and completed automatically."
+msgstr "Po zapisaniu zostanie dopasowany do bieżącej listy i wypełniony automatycznie."
+
+#: admin/tpl/setting/settings_cdn.php:265
+msgid "You can just type part of the domain."
+msgstr "Możesz po prostu wpisać część domeny."
+
+#: admin/tpl/setting/settings_cdn.php:257
+msgid "Domain"
+msgstr "Domena"
+
+#: admin/tpl/setting/settings_cdn.php:247
+msgid "Global API Key"
+msgstr "Globalny klucz API"
+
+#: admin/tpl/setting/settings_cdn.php:234
+msgid "This can be managed from <a %2$s>%1$s</a>."
+msgstr "To może być zarządzane z <a %2$s>%1$s</a>."
+
+#: admin/tpl/setting/settings_cdn.php:229
+msgid "Cloudflare API"
+msgstr "Cloudflare API"
+
+#: admin/tpl/manage/manage_cdn.php:71
+msgid "Purge Everything"
+msgstr "Wyczyść wszystko"
+
+#: admin/tpl/manage/manage_cdn.php:65
+msgid "Cloudflare Cache"
+msgstr "Pamięć podręczna Cloudflare"
+
+#: admin/tpl/manage/manage_cdn.php:59
+msgid "Development Mode will be turned off automatically after three hours."
+msgstr "Tryb deweloperski zostanie wyłączony automatycznie po trzech godzinach."
+
+#: admin/tpl/manage/manage_cdn.php:58
+msgid "Temporarily bypass Cloudflare cache. This allows changes to the origin server to be seen in realtime."
+msgstr "Tymczasowo pomiń pamięć podręczną Cloudflare. Pozwala to na obserwowanie zmian w serwerze źródłowym w czasie rzeczywistym."
+
+#: admin/tpl/manage/manage_cdn.php:50
+msgid "Development mode will be automatically turned off in %s."
+msgstr "Tryb deweloperski zostanie automatycznie wyłączony za %s."
+
+#: admin/tpl/manage/manage_cdn.php:49
+msgid "Current status is %s."
+msgstr "Aktualny stan to %s."
+
+#: admin/tpl/manage/manage_cdn.php:43
+msgid "Current status is %1$s since %2$s."
+msgstr "Aktualny status to %1$s od %2$s."
+
+#: admin/tpl/manage/manage_cdn.php:34
+msgid "Check Status"
+msgstr "Sprawdź status"
+
+#: admin/tpl/manage/manage_cdn.php:31
+msgid "Turn OFF"
+msgstr "Wyłącz"
+
+#: admin/tpl/manage/manage_cdn.php:28
+msgid "Turn ON"
+msgstr "Włącz"
+
+#: admin/tpl/manage/manage_cdn.php:26
+msgid "Development Mode"
+msgstr "Tryb deweloperski"
+
+#: admin/tpl/manage/manage_cdn.php:23
+msgid "Cloudflare Zone"
+msgstr "Strefa Cloudflare"
+
+#: admin/tpl/manage/manage_cdn.php:22
+msgid "Cloudflare Domain"
+msgstr "Domena Cloudflare"
+
+#: admin/tpl/manage/manage_cdn.php:17
+msgid "Please go to Settings to turn Cloudflare API on before use the following functionalities."
+msgstr "Przejdź do Ustawień, aby włączyć Cloudflare API, zanim skorzystasz z poniższych funkcji."
+
+#: admin/tpl/manage/manage_cdn.php:11
+#: includes/litespeed-cache-gui.class.php:536 inc/gui.class.php:536
+msgid "Cloudflare"
+msgstr "Cloudflare"
+
+#: admin/tpl/inc/img_optm.summary.php:268
+msgid "The current IAPI key must be reset after changing home URL or domain before making any further optimization requests."
+msgstr "Bieżący klucz IAPI musi zostać zresetowany po zmianie adresu URL lub domeny przed wprowadzeniem jakichkolwiek dalszych żądań optymalizacji."
+
+#: admin/tpl/inc/img_optm.summary.php:269
+msgid "Reset IAPI Key"
+msgstr "Zresetuj Klucz IAPI"
+
+#: admin/admin-api.class.php:355
+msgid "Reset IAPI key successfully."
+msgstr "Reset klucza IAPI pomyślny."
+
+#: admin/tpl/setting/settings_tuning.php:91
+msgid "Larger numbers will generate fewer files, which is better for achieving higher page scores, but can cause heavy memory usage."
+msgstr "Większe liczby generują mniej plików, co jest lepsze dla uzyskania wyższych wyników na stronie, ale może powodować duże obciążenie pamięci."
+
+#: admin/tpl/setting/settings_tuning.php:90
+msgid "Specify the maximum size in megabytes for combined files."
+msgstr "Określ maksymalny rozmiar w megabajtach dla połączonych plików."
+
+#: admin/tpl/setting/settings_tuning.php:85
+msgid "Max Combined File Size"
+msgstr "Maksymalny rozmiar pliku łączonego"
+
+#: admin/tpl/setting/settings_optimize.php:275
+msgid "Remove the comments inside of JS/CSS files when minifying."
+msgstr "Usuń komentarze wewnątrz plików JS / CSS podczas minimalizowania."
+
+#: admin/tpl/setting/settings_optimize.php:271
+msgid "Remove Comments"
+msgstr "Usuń komentarze"
+
+#: admin/tpl/setting/settings_optimize.php:263
+msgid "For example"
+msgstr "na przykład"
+
+#: admin/tpl/setting/settings_optimize.php:262
+msgid "Prefetching DNS can reduce latency for visiters."
+msgstr "Wstępne pobieranie DNS może zmniejszyć opóźnienia dla odwiedzających."
+
+#: admin/tpl/setting/settings_optimize.php:258
+msgid "DNS Prefetch"
+msgstr "Wstępne pobieranie DNS"
+
+#: admin/tpl/setting/settings_media.php:23
+msgid "Adding Style to Your Lazy-Loaded Images"
+msgstr "Dodawanie stylu do obrazów Lazy-Load."
+
+#: admin/tpl/setting/settings_cdn.php:109
+msgid "Default value"
+msgstr "Domyślna wartość"
+
+#: admin/tpl/setting/settings_cdn.php:106
+msgid "Static file type links to be replaced by CDN links."
+msgstr "Statyczne odnośniki plików do zastąpienia przez odnośniki CDN."
+
+#: admin/tpl/setting/settings_cdn.php:31
+msgid "CDN Mapping"
+msgstr "Mapowanie CDN"
+
+#: admin/tpl/setting/settings_cache.php:78
+msgid "For example, to drop parameters beginning with %s, %s can be used here."
+msgstr "Na przykład, aby upuścić parametry zaczynające się od %s, można tutaj użyć %s."
+
+#: admin/tpl/setting/settings_cache.php:77
+msgid "Ignore certain query strings when caching."
+msgstr "Zignoruj niektóre ciągi zapytań podczas buforowania."
+
+#: admin/tpl/setting/settings_cache.php:73
+msgid "Drop Query String"
+msgstr "Usuń ciąg zapytań"
+
+#: admin/tpl/setting/settings_advanced.php:49
+msgid "Enable this option if you are using both HTTP and HTTPS in the same domain and are noticing cache irregularities."
+msgstr "Włącz tę opcję, jeśli używasz zarówno protokołu HTTP, jak i HTTPS w tej samej domenie i zauważysz nieprawidłowości w pamięci podręcznej."
+
+#: admin/tpl/setting/settings_advanced.php:45
+msgid "Improve HTTP/HTTPS Compatibility"
+msgstr "Popraw zgodność HTTP / HTTPS"
+
+#: inc/img_optm.class.php:167 inc/img_optm.class.php:1451
+#: inc/img_optm.class.php:1516
+msgid "No image found."
+msgstr "Nie znaleziono obrazka."
+
+#: admin/tpl/inc/img_optm.summary.php:303
+msgid "Remove all previous image optimization requests/results, revert completed optimizations, and delete all optimization files."
+msgstr "Usuń wszystkie poprzednie żądania / wyniki optymalizacji obrazu, przywróć ukończone optymalizacje i usuń wszystkie pliki optymalizacji."
+
+#: admin/tpl/inc/img_optm.summary.php:299
+msgid "Destroy All Optimization Data!"
+msgstr "Zniszcz wszystkie dane optymalizacji!"
+
+#: admin/tpl/inc/img_optm.summary.php:280
+msgid "Scan for any new unoptimized image thumbnail sizes and resend necessary image optimization requests."
+msgstr "Zeskanuj wszystkie nowe niezoptymalizowane rozmiary miniatur obrazu i wyślij ponownie wymagane żądania optymalizacji obrazu."
+
+#: admin/tpl/inc/img_optm.summary.php:281
+msgid "Send New Thumbnail Requests"
+msgstr "Wyślij nowe prośby o miniaturki"
+
+#: inc/img_optm.class.php:195
+msgid "Number of images in one image group (%s) exceeds the credit (%s)"
+msgstr "Liczba zdjęć w jednej grupie obrazów (%s) przekracza wartość kredytu (%s)"
+
+#: admin/tpl/setting/settings_media.php:229
+msgid "This will increase the size of optimized files."
+msgstr "Zwiększy to rozmiar plików zoptymalizowanych."
+
+#: admin/tpl/setting/settings_media.php:228
+msgid "Preserve EXIF data (copyright, GPS, comments, keywords, etc) when optimizing."
+msgstr "Zachowaj dane EXIF (prawa autorskie, GPS, komentarze, tagi, itp.) Podczas optymalizacji."
+
+#: admin/tpl/setting/settings_media.php:224
+msgid "Preserve EXIF data"
+msgstr "Zachowaj dane EXIF"
+
+#: admin/tpl/debug_log.php:30
+msgid "Clear Log"
+msgstr "Wyczyść logi"
+
+#: admin/admin-api.class.php:458
+msgid "Failed to communicate with LiteSpeed image server"
+msgstr "Nie udało się nawiązać komunikacji z serwerem obrazów LiteSpeed"
+
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:867
+msgid "To test the cart, visit the <a %s>FAQ</a>."
+msgstr "Aby przetestować ten koszyk, zajrzyj do <a %s>FAQ</a>."
+
+#: includes/litespeed-cache-utility.class.php:238 inc/utility.class.php:238
+msgid " %s ago"
+msgstr "%s temu"
+
+#: inc/media.class.php:206
+msgid "Original saved %s"
+msgstr "Oryginał zapisany %s"
+
+#: inc/media.class.php:173
+msgid "WebP saved %s"
+msgstr "WebP zapisane %s"
+
+#: admin/tpl/report.php:42
+msgid "If you run into any issues, please refer to the report number in your support message."
+msgstr "Jeśli doświadczysz jakichkolwiek problemów, odwołaj się do tego w swoim raporcie pomocy technicznej."
+
+#: admin/tpl/report.php:38
+msgid "Report Summary"
+msgstr "Podsumowanie raportu"
+
+#: admin/tpl/inc/api_key.php:10
+msgid "This will also generate an API key from LiteSpeed's Server."
+msgstr "To również wygeneruje klucz API z serwera LiteSpeed."
+
+#: admin/tpl/inc/img_optm.summary.php:79
+msgid "Last pull initiated by cron at %s."
+msgstr "Ostatnie wysyłanie zainicjowane przez crona o %s."
+
+#: admin/tpl/inc/img_optm.summary.php:33
+msgid "Images will be pulled automatically if the cron job is running."
+msgstr "Obrazki zostaną automatycznie wysłane jeśli zadanie crona będzie uruchomione."
+
+#: admin/tpl/inc/img_optm.summary.php:33
+msgid "Only press the button if the pull cron job is disabled."
+msgstr "Naciśnij ten przycisk tylko wtedy jeśli zadania wysłania przez crona jest wyłączone."
+
+#: admin/tpl/inc/img_optm.summary.php:34
+msgid "Pull Images"
+msgstr "Wyślij obrazki"
+
+#: admin/tpl/inc/img_optm.summary.php:64
+msgid "This process is automatic."
+msgstr "Ten proces jest automatyczny"
+
+#: admin/tpl/inc/img_optm.summary.php:27
+msgid "You can send at most %s images at once."
+msgstr "Możesz przesłać co najwyżej %s obrazów na raz."
+
+#: admin/tpl/inc/img_optm.summary.php:256
+msgid "Last Request"
+msgstr "Ostatnie żądanie"
+
+#: admin/tpl/inc/img_optm.summary.php:158
+msgid "Images failed to notify"
+msgstr "Obrazki których powiadomienie nie powiodło się"
+
+#: admin/tpl/inc/img_optm.summary.php:103
+#: admin/tpl/inc/img_optm.summary.php:152
+msgid "Images failed to fetch"
+msgstr "Obrazki których pobranie nie powiodło się"
+
+#: admin/tpl/inc/img_optm.summary.php:253
+msgid "Images Pulled"
+msgstr "Wysłane obrazki"
+
+#: admin/tpl/inc/img_optm.level_info.php:37
+msgid "Credit recovers with each successful pull."
+msgstr "Kredyt odzyskuje się przy każdym udanym wysłaniu."
+
+#: admin/tpl/inc/img_optm.level_info.php:34
+msgid "Credit"
+msgstr "Kredyt"
+
+#: admin/tpl/inc/img_optm.level_info.php:32
+msgid "Level"
+msgstr "Poziom"
+
+#: admin/litespeed-cache-admin-display.class.php:167
+msgid "Report"
+msgstr "Raport"
+
+#: admin/admin-api.class.php:476 admin/admin-api.class.php:484
+msgid "Message from LiteSpeed image server"
+msgstr "Wiadomość z serwera obrazków LiteSpeed"
+
+#: admin/tpl/report.php:33
+msgid "Send this report to LiteSpeed. Refer to this report number when posting in the WordPress support forum."
+msgstr "Wyślij ten raport do LiteSpeed. Odwołaj się do tego numeru raportu podczas publikowania na forum pomocy WordPressa."
+
+#: admin/tpl/report.php:30
+msgid "Send To LiteSpeed"
+msgstr "Wyślij do LiteSpeed"
+
+#: admin/tpl/report.php:27
+msgid "Report date"
+msgstr "Data raportu"
+
+#: admin/tpl/report.php:26
+msgid "Report number"
+msgstr "Numer raportu"
+
+#: admin/tpl/report.php:24
+msgid "LiteSpeed Report Number"
+msgstr "Numer raportu LiteSpeed"
+
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:858
+msgid "Privately cache cart when not empty."
+msgstr "Prywatnie zapisuj pamięć podręczną koszyka jeśli nie jest pusty."
+
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:854
+msgid "Privately Cache Cart"
+msgstr "Prywatna pamięć podręczna koszyka"
+
+#: inc/media.class.php:147
+msgid "LiteSpeed Optimization"
+msgstr "Optymizacja LiteSpeed"
+
+#: admin/tpl/setting/settings_tuning.php:122
+msgid "This will also add a preconnect to Google for faster Google Fonts downloading."
+msgstr "Spowoduje to również dodanie wcześniejszego połączenia z Google w celu szybszego pobierania czcionek Google."
+
+#: admin/tpl/setting/settings_tuning.php:117
+msgid "Load Google Fonts Asynchronously"
+msgstr "Załaduj Google Fonts asynchonicznie"
+
+#: admin/tpl/setting/settings_inc.cache_browser.php:26
+msgid "The amount of time, in seconds, that files will be stored in browser cache before expiring. Minimum is %s seconds."
+msgstr "Ilość czasu, w sekundach, które pliki zostaną zapisane w pamięci podręcznej przeglądarki przed wygaśnięciem. Minimum to %s sekund."
+
+#: admin/tpl/setting/settings_inc.cache_browser.php:21
+msgid "Browser Cache TTL"
+msgstr "TTL Pamięci podręcznej przeglądarki"
+
+#: admin/tpl/inc/img_optm.summary.php:285
+msgid "Results can be checked in <a %s>Media Library</a>."
+msgstr "Rezultaty mogą zostać sprawdzone w <a %s>Bibliotece mediów</a>."
+
+#: admin/tpl/inc/img_optm.summary.php:276
+msgid "Switch back to using optimized images."
+msgstr "Wróć do korzystania ze zoptymalizowanych obrazów."
+
+#: admin/tpl/inc/img_optm.summary.php:277
+msgid "Re-do Optimization"
+msgstr "Ponowna optymalizacja"
+
+#: admin/tpl/inc/img_optm.summary.php:272
+msgid "Revert all optimized images back to their original versions."
+msgstr "Przywróć wszystkie zoptymalizowane obrazy z powrotem do ich oryginalnych wersji."
+
+#: admin/tpl/inc/img_optm.summary.php:273
+msgid "Undo Optimization"
+msgstr "Cofnij optymalizację"
+
+#: admin/tpl/inc/img_optm.summary.php:264
+msgid "Switch all images in the media library back to their original unoptimized versions."
+msgstr "Przełącz wszystkie obrazy z biblioteki multimediów z powrotem na oryginalne, nieoptymalizowane wersje."
+
+#: admin/tpl/inc/img_optm.summary.php:261
+msgid "Revert Optimization"
+msgstr "Przywróć optymalizację"
+
+#: admin/litespeed-cache-admin-display.class.php:978
+#: admin/tpl/manage/manage_cdn.php:60 admin/tpl/inc/check_cache_disabled.php:49
+#: admin/tpl/inc/img_optm.summary.php:164
+#: admin/tpl/inc/img_optm.initialize.php:29
+#: admin/litespeed-cache-admin.class.php:228 inc/doc.cls.php:39
+msgid "Learn More"
+msgstr "Dowiedz się więcej"
+
+#: admin/tpl/setting/settings_tuning.php:61
+msgid "Elements with attribute %s in html code will be excluded from moving to top/bottom."
+msgstr "Elementy z atrybutem %s w kodzie HTML zostaną wykluczone z przenoszenia na górę/dół."
+
+#: admin/tpl/setting/settings_tuning.php:25
+msgid "Elements with attribute %s in html code will be excluded from moving to top."
+msgstr "Elementy z atrybutem %s w kodzie HTML zostaną wykluczone z przenoszenia na górę."
+
+#: admin/tpl/inc/img_optm.summary.php:92
+msgid "Images optimized and pulled"
+msgstr "Obrazy zoptymalizowane i wysłane"
+
+#: admin/tpl/inc/img_optm.summary.php:56
+msgid "Images requested"
+msgstr "Zażądane obrazy"
+
+#: admin/tpl/inc/img_optm.percentage_summary.php:26
+msgid "Images not yet requested"
+msgstr "Obrazy oczekujące na żądanie"
+
+#: admin/tpl/inc/img_optm.percentage_summary.php:18
+msgid "Images total"
+msgstr "Wszystkie obrazy"
+
+#: inc/img_optm.class.php:1985
+msgid "Switched to optimized file successfully."
+msgstr "Przełączono na zoptymalizowany plik."
+
+#: inc/img_optm.class.php:1978
+msgid "Restored original file successfully."
+msgstr "Przywrócono oryginalny plik."
+
+#: inc/img_optm.class.php:1962
+msgid "Enabled WebP file successfully."
+msgstr "Włączono plik WebP."
+
+#: inc/img_optm.class.php:1956
+msgid "Disabled WebP file successfully."
+msgstr "Wyłączono plik WebP."
+
+#: admin/tpl/setting/settings_media.php:171
+msgid "Disabling this will stop the cron job responsible for fetching optimized images from LiteSpeed's Image Server."
+msgstr "Wyłączenie tego spowoduje zatrzymanie zadania cron odpowiedzialnego za pobieranie zoptymalizowanych obrazków z serwera LiteSpeed."
+
+#: admin/tpl/setting/settings_inc.media_webp.php:10
+msgid "Significantly improve load time by replacing images with their optimized %s versions."
+msgstr "Lekko poprawia czas ładowania zamieniając obrazki na ich %s zoptymalizowane wersje."
+
+#: admin/tpl/setting/settings_inc.media_webp.php:6
+msgid "Image WebP Replacement"
+msgstr "Zamiennik obrazów WebP"
+
+#: admin/tpl/setting/network_settings_media.php:4
+msgid "Network Media Settings"
+msgstr "Ustawienia sieci mediów"
+
+#: admin/tpl/setting/settings_excludes.php:139
+msgid "Selected roles will be excluded from cache."
+msgstr "Wybierz role które będą wykluczone z pamięci podręcznej."
+
+#: includes/litespeed-cache-task.class.php:239 inc/task.class.php:239
+msgid "LiteSpeed Cache Custom Cron Crawler"
+msgstr "Niestandardowe zadanie robota LiteSpeed Cache"
+
+#: includes/litespeed-cache-task.class.php:218 inc/task.class.php:218
+msgid "LiteSpeed Cache Custom Cron Common"
+msgstr "Niestandardowe zadanie cron optymalizacji LiteSpeed."
+
+#: inc/img_optm.class.php:1554
+msgid "Pushed %1$s groups with %2$s images to LiteSpeed optimization server, accepted %3$s groups with %4$s images."
+msgstr "Przeniesiono %1$s grupy z obrazami %2$s do serwera optymalizacji LiteSpeed, akceptowane grupy %3$s z obrazami %4$s."
+
+#: inc/img_optm.class.php:687
+msgid "Failed to parse data from LiteSpeed IAPI server: %s"
+msgstr "Nie udało się przetworzyć danych z serwera LiteSpeed IAPI: %s"
+
+#: admin/litespeed-cache-admin-report.class.php:64
+msgid "Failed to push to LiteSpeed server"
+msgstr "Nie udało się przesłać danych do serwera LiteSpeed."
+
+#: admin/tpl/settings.php:10
+msgid "Tuning"
+msgstr "Tuning"
+
+#: admin/tpl/setting/settings_tuning.php:194
+msgid "Selected roles will be excluded from all optimizations."
+msgstr "Wybrane role zostaną wykluczone ze wszystkich optymalizacji."
+
+#: admin/tpl/setting/settings_tuning.php:188
+msgid "Role Excludes"
+msgstr "Wykluczone role"
+
+#: admin/tpl/setting/settings_tuning.php:57
+msgid "Only set to %s when changing the order of combined and uncombined JS is needed."
+msgstr "W przypadku zmiany kolejności połączonego i niepołączonego JS wymagane jest ustawienie tylko %s."
+
+#: admin/tpl/setting/settings_tuning.php:53
+msgid "Load combined JS files before other JS files."
+msgstr "Załaduj połączony JS przed innymi plikami JS."
+
+#: admin/tpl/setting/settings_tuning.php:49
+msgid "Combined JS Priority"
+msgstr "Priorytet połączonego JS"
+
+#: admin/tpl/setting/settings_tuning.php:21
+msgid "Only set to %s when changing the order of combined and uncombined CSS is needed."
+msgstr "W przypadku zmiany kolejności połączonego i niepołączonego CSS konieczne jest ustawienie tylko %s."
+
+#: admin/tpl/setting/settings_tuning.php:18
+#: admin/tpl/setting/settings_tuning.php:54
+msgid "Set to %s by default."
+msgstr "Ustawienie domyślne %s."
+
+#: admin/tpl/setting/settings_tuning.php:17
+msgid "Load combined CSS files before other CSS files."
+msgstr "Załaduj połączony CSS przed innymi plikami CSS."
+
+#: admin/tpl/setting/settings_tuning.php:13
+msgid "Combined CSS Priority"
+msgstr "Priorytet połączonych plików CSS"
+
+#: admin/tpl/setting/settings_tuning.php:7
+msgid "Tuning Settings"
+msgstr "Tuning Ustawień"
+
+#: admin/tpl/setting/settings_excludes.php:112
+msgid "If the tag slug is not found, the tag will be removed from the list on save."
+msgstr "Jeśli tag slug nie zostanie znaleziony, znacznik zostanie usunięty z listy w przypadku zapisu."
+
+#: admin/tpl/setting/settings_excludes.php:74
+msgid "If the category slug is not found, the category will be removed from the list on save."
+msgstr "Jeśli nie zostanie znaleziony slug kategorii, kategoria zostanie usunięta z listy w oknie zapisywania."
+
+#: admin/tpl/inc/img_optm.summary.php:63
+msgid "After LiteSpeed's Image Optimization Server finishes optimization, it will notify your site to pull the optimized images."
+msgstr "Po zakończeniu optymalizacji serwera Image Optimization Server LiteSpeed poinformuje witrynę o zoptymalizowaniu obrazów."
+
+#: admin/tpl/inc/img_optm.summary.php:26
+msgid "This will send the optimization request and the images to LiteSpeed's Image Optimization Server."
+msgstr "To wyśle żądanie optymalizacji z obrazów do serwera Image Optimization Server LiteSpeed."
+
+#: admin/tpl/inc/img_optm.summary.php:15
+msgid "Send Optimization Request"
+msgstr "Wyślij żądanie optymalizacji"
+
+#: admin/tpl/inc/img_optm.percentage_summary.php:9
+msgid "Image Information"
+msgstr "Informacje o obrazie"
+
+#: admin/tpl/inc/img_optm.communicate_notify.php:9
+msgid "This will communicate with LiteSpeed's Image Optimization Server and retrieve the most recent status."
+msgstr "Pozwoli to komunikować się z serwerem ImageSite Server LiteSpeed i pobrać najnowszy stan."
+
+#: admin/tpl/inc/img_optm.summary.php:250
+msgid "Total Reduction"
+msgstr "Całkowita redukcja"
+
+#: admin/tpl/inc/img_optm.summary.php:245
+msgid "Optimization Summary"
+msgstr "Podsumowanie optymalizacji"
+
+#: admin/tpl/image_optimization.php:26
+msgid "LiteSpeed Cache Image Optimization"
+msgstr "LiteSpeed Cache Image Optimization"
+
+#: admin/litespeed-cache-admin-display.class.php:165
+#: includes/litespeed-cache-gui.class.php:502 inc/gui.class.php:502
+msgid "Image Optimization"
+msgstr "Optymalizacja obrazów"
+
+#: inc/img_optm.class.php:114
+msgid "Communicated with LiteSpeed Image Optimization Server successfully."
+msgstr "Połączono z serwerem LiteSpeed Image Optimization."
+
+#: admin/admin-api.class.php:284 admin/admin-api.class.php:313
+msgid "IAPI Error %s"
+msgstr "Błąd IAPI %s"
+
+#: admin/tpl/setting/settings_optimize.php:251
+msgid "If there is any JS error related to %1$s when enabled %2$s, please turn on this option."
+msgstr "Jeśli wystąpił błąd JS związany z %1$s po włączeniu %2$s, włącz tę opcję."
+
+#: admin/tpl/setting/settings_optimize.php:248
+msgid "Improve compatibility with inline JS by preventing jQuery optimization. (Recommended Setting: %s)"
+msgstr "Zwiększ kompatybilność z wbudowanym JS, zapobiegając optymalizacji jQuery. (Zalecane ustawienie: %s)"
+
+#: admin/tpl/setting/settings_optimize.php:244
+msgid "Exclude JQuery"
+msgstr "Wyklucz JQuery"
+
+#: admin/tpl/setting/settings_tuning.php:153
+msgid "Listed JS files will not be deferred."
+msgstr "Wymienione pliki JS nie zostaną uwzględnione."
+
+#: admin/tpl/setting/settings_tuning.php:149
+msgid "JS Deferred Excludes"
+msgstr "Wykluczony nieuwzględniony JS"
+
+#: admin/tpl/setting/settings_media.php:66
+msgid "For example, %s can be used for a transparent placeholder."
+msgstr "Na przykład %s można użyć do przezroczystego elementu zastępczego."
+
+#: admin/tpl/setting/settings_media.php:65
+msgid "By default a gray image placeholder %s will be used."
+msgstr "Domyślnie zostanie użyty szary obrazek zastępczy dla %s."
+
+#: admin/tpl/setting/settings_media.php:64
+msgid "This can be predefined in %2$s as well using constant %1$s, with this setting taking priority."
+msgstr "To może być również predefiniowane w %2$s przy użyciu stałych %1$s, przy czym to ustawienie ma priorytet."
+
+#: admin/tpl/setting/settings_media.php:63
+msgid "Specify a base64 image to be used as a placeholder while other images finish loading."
+msgstr "Określ obraz base64, który będzie używany jako symbol zastępczy podczas ładowania innych obrazów."
+
+#: admin/tpl/setting/settings_media.php:59
+#: admin/tpl/setting/settings_media.php:103
+msgid "Lazy Load Image Placeholder"
+msgstr "Obraz zastępczy Lazy Load"
+
+#: admin/tpl/setting/settings_media.php:40
+#: admin/tpl/setting/settings_tuning.php:42
+#: admin/tpl/setting/settings_tuning.php:78
+#: admin/tpl/setting/settings_tuning.php:159
+#: admin/tpl/setting/settings_optimize.php:141
+msgid "Elements with attribute %s in html code will be excluded."
+msgstr "Elementy z atrybutem %s w kodzie html zostaną wykluczone."
+
+#: admin/tpl/setting/settings_media.php:39
+#: admin/tpl/setting/settings_tuning.php:41
+#: admin/tpl/setting/settings_tuning.php:77
+#: admin/tpl/setting/settings_tuning.php:158
+msgid "Filter %s is supported."
+msgstr "Filtr %s jest wspierany."
+
+#: admin/tpl/setting/settings_media.php:34
+msgid "Listed images will not be lazy loaded."
+msgstr "Obrazki z listy nie będą ładowane przez Lazy Load."
+
+#: admin/tpl/setting/settings_media.php:30
+msgid "Lazy Load Image Excludes"
+msgstr "Wykluczone obrazki Lazy Load"
+
+#: admin/tpl/setting/settings_cdn.php:179
+msgid "Improve page load time by loading jQuery from a remote CDN service instead of locally."
+msgstr "Popraw czas ładowania strony, ładując jQuery z usługi zdalnego CDN zamiast lokalnie."
+
+#: admin/tpl/setting/settings_cdn.php:157
+msgid "Load JQuery Remotely"
+msgstr "Ładuj jQuery zdalnie"
+
+#: includes/litespeed-cache-gui.class.php:442 inc/gui.class.php:442
+msgid "No optimization"
+msgstr "Brak optymalizacji"
+
+#: admin/tpl/setting/settings_tuning.php:181
+msgid "Prevent any optimization of listed pages."
+msgstr "Zapobiegaj optymalizacji poniższych stron"
+
+#: admin/tpl/setting/settings_tuning.php:177
+msgid "URI Excludes"
+msgstr "Wykluczone URI"
+
+#: admin/tpl/setting/settings_tuning.php:170
+msgid "Stop loading wordpress.org emoji. Browser default emoji will be displayed instead."
+msgstr "Przestań ładować emoji z wordpress.org. Zamiast tego będą się wyświetlały emoji z przeglądarki."
+
+#: admin/tpl/setting/settings_tuning.php:72
+msgid "Listed JS files will not be minified/combined."
+msgstr "Pliki JS z listy nie będą minifkowane/łączone"
+
+#: admin/tpl/setting/settings_media.php:35
+#: admin/tpl/setting/settings_tuning.php:37
+#: admin/tpl/setting/settings_tuning.php:73
+#: admin/tpl/setting/settings_tuning.php:154
+msgid "Both full URLs and partial strings can be used."
+msgstr "Obydwa schematy URLi i cząstek mogą zostać użyte."
+
+#: admin/tpl/setting/settings_tuning.php:36
+msgid "Listed CSS files will not be minified/combined."
+msgstr "Pliki CSS z listy nie będą minifikowane/łączone."
+
+#: admin/tpl/setting/settings_optimize.php:16
+msgid "Failed to create Optimizer table. Please follow <a %s>Table Creation guidance from LiteSpeed Wiki</a> to finish setup."
+msgstr "Nie udało się stworzyć tabeli optimizera. Proszę postępować zgodnie z <a %s>poradnikiem tworzenia tabeli</a>."
+
+#: admin/tpl/setting/settings_media.php:137
+msgid "Load iframes only when they enter the viewport."
+msgstr "Ładuj iframery tylko wtedy jeśli te wchodzą w port widoku."
+
+#: admin/tpl/setting/settings_media.php:133
+msgid "Lazy Load Iframes"
+msgstr "Lazy Load Iframeów"
+
+#: admin/tpl/setting/settings_media.php:20
+#: admin/tpl/setting/settings_media.php:138
+msgid "This can improve page loading time by reducing initial HTTP requests."
+msgstr "Może poprawić czas ładowania strony redukując wczesne zapytania HTTP."
+
+#: admin/tpl/setting/settings_media.php:19
+msgid "Load images only when they enter the viewport."
+msgstr "Ładuj obrazki tylko wtedy jeśli te są w porcie widoku."
+
+#: admin/tpl/setting/settings_media.php:15
+msgid "Lazy Load Images"
+msgstr "Lazy Load Obrazków"
+
+#: admin/tpl/setting/settings_media.php:9
+msgid "Media Settings"
+msgstr "Ustawienia mediów"
+
+#: admin/tpl/setting/settings_excludes.php:43
+msgid "For example, for %s, %s and %s can be used here."
+msgstr "Na przykład, dla %s, %s i %s mogą zostać użyte tutaj."
+
+#: admin/tpl/setting/settings_cdn.php:125
+msgid "Wildcard %1$s supported (match zero or more characters). For example, to match %2$s and %3$s, use %4$s."
+msgstr "Wildcard %1$s wspierany (dopasuj zero lub więcej znaków). na przykład aby dopasować %2$s i %3$s, użyj %4$s."
+
+#: admin/litespeed-cache-admin-display.class.php:995
+msgid "To match the beginning, add %s to the beginning of the item."
+msgstr "Aby dopasować początek, dodaj %s na początku elementu."
+
+#: admin/litespeed-cache-admin-display.class.php:993
+msgid "For example, for %s, %s can be used here."
+msgstr "Na przykład, dla %s, %s może zostać użyte tutaj."
+
+#: admin/tpl/network_settings.php:9 admin/tpl/settings.php:11
+msgid "Media"
+msgstr "Media"
+
+#: admin/tpl/manage/manage_db.php:47
+msgid "Purge all and clean all minified/combined CSS/JS data"
+msgstr "Usuń i wyczyść wszystkie zminifikowane/połączone pliki CSS/JS"
+
+#: admin/tpl/manage/manage_db.php:46
+msgid "Clean CSS/JS Optimizer"
+msgstr "Wyczyść optymalizator CSS/JS"
+
+#: admin/tpl/inc/banner_promo.php:166
+msgid "Maybe later"
+msgstr "Może później"
+
+#: admin/tpl/inc/banner_promo.php:165
+msgid "I've already left a review"
+msgstr "Zostawiłem/am recenzję"
+
+#: admin/tpl/inc/banner_promo.slack.php:8
+msgid "Welcome to LiteSpeed"
+msgstr "Witamy w LiteSpeed"
+
+#: admin/litespeed-cache-admin-optimize.class.php:196
+msgid "Clean all CSS/JS optimizer data successfully."
+msgstr "Czyszczenie optymizera CSS/JS się powiodła."
+
+#: admin/tpl/setting/settings_tuning.php:166
+msgid "Remove WordPress Emoji"
+msgstr "Usuń emoji Wordpressa"
+
+#: includes/litespeed-cache-gui.class.php:449 inc/gui.class.php:449
+msgid "More settings"
+msgstr "Więcej ustawień"
+
+#: includes/litespeed-cache-gui.class.php:435 inc/gui.class.php:435
+msgid "Private cache"
+msgstr "Prywatna pamięć podręczna"
+
+#: includes/litespeed-cache-gui.class.php:428 inc/gui.class.php:428
+msgid "Non cacheable"
+msgstr "Nie do pamięci podręcznej"
+
+#: includes/litespeed-cache-gui.class.php:414 inc/gui.class.php:414
+msgid "Mark this page as "
+msgstr "Oznacz tę stronę jako"
+
+#: includes/litespeed-cache-gui.class.php:406 inc/gui.class.php:406
+msgid "Purge this page"
+msgstr "Wyczyść tę stronę"
+
+#: admin/tpl/setting/settings_optimize.php:237
+msgid "Doing so can help reduce resource contention and improve performance."
+msgstr "Zrobienie tego może pomóc zredukować ilość zasobów i zwiększyć wydajność."
+
+#: admin/tpl/setting/settings_optimize.php:233
+msgid "Load JS Deferred"
+msgstr "Opóźnij ładowanie JS"
+
+#: admin/tpl/setting/settings_tuning.php:143
+msgid "Specify critical CSS rules for above-the-fold content when enabling %s."
+msgstr "Określ krytyczne reguły CSS w przypadku treści ponadgrupowych po włączeniu %s."
+
+#: admin/tpl/setting/settings_tuning.php:139
+msgid "Critical CSS Rules"
+msgstr "Krytyczne reguły CSS"
+
+#: admin/tpl/setting/settings_tuning.php:143
+#: admin/tpl/setting/settings_optimize.php:132
+#: admin/tpl/setting/settings_optimize.php:153
+msgid "Load CSS Asynchronously"
+msgstr "Ładuj CSS asynchornicznie"
+
+#: admin/tpl/setting/settings_tuning.php:133
+msgid "Prevent google fonts from loading on all your pages."
+msgstr "Zapobiegaj ładowaniu Google Fonts na wszystkich stronach."
+
+#: admin/tpl/setting/settings_tuning.php:129
+msgid "Remove Google Fonts"
+msgstr "Usuń Google Fonts"
+
+#: admin/tpl/setting/settings_media.php:149
+#: admin/tpl/setting/settings_tuning.php:103
+#: admin/tpl/setting/settings_tuning.php:171
+#: admin/tpl/setting/settings_optimize.php:137
+#: admin/tpl/setting/settings_optimize.php:238
+#: admin/tpl/setting/settings_optimize.php:276
+msgid "This can improve your speed score in services like Pingdom, GTmetrix and PageSpeed."
+msgstr "To może zwiększyć szybkość twojej strony w serwisach takich jak Pingdom, GTmetrix i PageSpeed."
+
+#: admin/tpl/setting/settings_tuning.php:102
+msgid "Remove query strings from static resources."
+msgstr "Usuń query strings z zasobów statycznych."
+
+#: admin/tpl/setting/settings_tuning.php:98
+msgid "Remove Query Strings"
+msgstr "Usuń query strings"
+
+#: admin/tpl/setting/settings_inc.exclude_useragent.php:15
+msgid "user agents"
+msgstr "user agenci"
+
+#: admin/tpl/setting/settings_inc.exclude_cookies.php:16
+msgid "cookies"
+msgstr "ciasteczka"
+
+#: admin/tpl/setting/settings_inc.cache_browser.php:15
+msgid "You can turn on browser caching in server admin too. <a %s>Learn more about LiteSpeed browser cache setting</a>."
+msgstr "Możesz włączyć zapisywanie przeglądarek w pamięci podręcznej w administracji serwera. <a %s>dowiedz się więcej na LiteSpeed</a>."
+
+#: admin/tpl/setting/settings_inc.cache_browser.php:10
+msgid "Browser caching stores static files locally in the user's browser. Turn on this setting to reduce repeated requests for static files."
+msgstr "Pamięć podręczna przeglądarki przechowuje statyczne pliki lokalnie w przeglądarce użytkownika. Włącz to ustawienie w celu zredukowania wielokrotnych żądań statycznych plików."
+
+#: admin/tpl/setting/settings_inc.cache_browser.php:6
+msgid "Browser Cache"
+msgstr "Pamięć podręczna przeglądarki"
+
+#: admin/tpl/setting/settings_excludes.php:104
+msgid "tags"
+msgstr "tagi"
+
+#: admin/tpl/setting/settings_excludes.php:83
+msgid "Do Not Cache Tags"
+msgstr "Nie zapisuj w pamięci podręcznej tagów"
+
+#: admin/tpl/setting/settings_excludes.php:75
+#: admin/tpl/setting/settings_excludes.php:113
+msgid "To exclude %1$s, insert %2$s."
+msgstr "Aby wykluczyć %1$s, wpisz %2$s."
+
+#: admin/tpl/setting/settings_excludes.php:66
+msgid "categories"
+msgstr "kategorie"
+
+#: admin/tpl/setting/settings_inc.exclude_cookies.php:16
+#: admin/tpl/setting/settings_excludes.php:66
+#: admin/tpl/setting/settings_excludes.php:104
+#: admin/tpl/setting/settings_inc.exclude_useragent.php:15
+msgid "To prevent %s from being cached, enter it here."
+msgstr "A by zapobiec zapisywaniu w podręcznej %s, wpisz tutaj"
+
+#: admin/tpl/setting/settings_excludes.php:52
+msgid "Do Not Cache Categories"
+msgstr "Nie zapisuj w pamięci podręcznej kategorii"
+
+#: admin/tpl/setting/settings_excludes.php:42
+msgid "Query string containing these parameters will not be cached."
+msgstr "Query stringi zawierające te parametry nie będą zapisywane w pamięci podręcznej."
+
+#: admin/tpl/setting/settings_excludes.php:38
+msgid "Do Not Cache Query Strings"
+msgstr "Nie zapisuj w pamięci podręcznej query stringów"
+
+#: admin/tpl/setting/settings_excludes.php:31
+msgid "Paths containing these strings will not be cached."
+msgstr "Ścieżki zawierające te stringi nie będą zapisywane."
+
+#: admin/tpl/setting/settings_excludes.php:27
+msgid "Do Not Cache URIs"
+msgstr "Nie zapisuj w pamięci podręcznej URLów"
+
+#: admin/tpl/setting/settings_debug.php:48
+msgid "The logs will be outputted to %s."
+msgstr "Te logi zostaną zapisane do %s."
+
+#: admin/litespeed-cache-admin-display.class.php:997
+#: admin/tpl/manage/manage_purge.php:152
+#: admin/tpl/setting/settings_inc.exclude_cookies.php:19
+#: admin/tpl/setting/settings_cache.php:83
+#: admin/tpl/setting/settings_purge.php:85
+#: admin/tpl/setting/settings_media.php:36
+#: admin/tpl/setting/settings_media.php:53
+#: admin/tpl/setting/settings_media.php:252
+#: admin/tpl/setting/settings_inc.cache_object.php:114
+#: admin/tpl/setting/settings_inc.cache_object.php:122
+#: admin/tpl/setting/settings_excludes.php:45
+#: admin/tpl/setting/settings_excludes.php:68
+#: admin/tpl/setting/settings_excludes.php:106
+#: admin/tpl/setting/settings_tuning.php:38
+#: admin/tpl/setting/settings_tuning.php:74
+#: admin/tpl/setting/settings_tuning.php:155
+#: admin/tpl/setting/settings_crawler.php:132
+#: admin/tpl/setting/settings_crawler.php:154
+#: admin/tpl/setting/settings_optimize.php:264
+#: admin/tpl/setting/settings_cdn.php:107
+#: admin/tpl/setting/settings_cdn.php:139
+#: admin/tpl/setting/settings_cdn.php:151
+msgid "One per line."
+msgstr "Jeden na linię."
+
+#: admin/tpl/setting/settings_cache.php:66
+msgid "URI Paths containing these strings will NOT be cached as public."
+msgstr "URI Paths containing these strings will NOT be cached as public."
+
+#: admin/tpl/setting/settings_cache.php:62
+msgid "Private Cached URIs"
+msgstr "Prywatne zapisane URLe"
+
+#: admin/litespeed-cache-admin-settings.class.php:307
+msgid "Site options saved."
+msgstr "Opcje strony zapisane."
+
+#: admin/tpl/setting/settings_cdn.php:150
+msgid "Paths containing these strings will not be served from the CDN."
+msgstr "Ścieżka zawierająca te stringi nie będzie serwowana przez CDN."
+
+#: admin/tpl/setting/settings_cdn.php:145
+msgid "Exclude Path"
+msgstr "Wyklucz ścieżkę"
+
+#: admin/tpl/setting/settings_cdn.php:108
+msgid "This will affect all tags containing attributes: %s %s %s."
+msgstr "To zaingeruje w tagi zawierające następujące atrybuty: %s %s %s."
+
+#: admin/tpl/setting/settings_cdn.php:76 admin/tpl/setting/settings_cdn.php:105
+#: admin/tpl/setting/settings_cdn.php:112
+msgid "Include File Types"
+msgstr "Dodane typy rozszerzeń"
+
+#: admin/tpl/setting/settings_cdn.php:102
+msgid "Serve all JavaScript files through the CDN. This will affect all enqueued WP JavaScript files."
+msgstr "Serwuj cały javascript przez CDN. To zaingeruje również w wszystkie Javascripty WordPressa."
+
+#: admin/tpl/setting/settings_cdn.php:66 admin/tpl/setting/settings_cdn.php:101
+msgid "Include JS"
+msgstr "Dodane JS"
+
+#: admin/tpl/setting/settings_cdn.php:98
+msgid "Serve all CSS files through the CDN. This will affect all enqueued WP CSS files."
+msgstr "Serwuj cały CSS przez CDN. Ingeruje w pliki CSS WordPressa."
+
+#: admin/tpl/setting/settings_cdn.php:59 admin/tpl/setting/settings_cdn.php:97
+msgid "Include CSS"
+msgstr "Dodane CSS"
+
+#: admin/tpl/setting/settings_cdn.php:94
+msgid "Serve all image files through the CDN. This will affect all attachments, HTML %s tags, and CSS %s attributes."
+msgstr "Serwuj wszystkie pliki obrazków przez CDN. Ingeruje we wszystkie załączniki, HTML %s tagi, i atrybuty CSS %s."
+
+#: admin/tpl/setting/settings_cdn.php:52 admin/tpl/setting/settings_cdn.php:93
+msgid "Include Images"
+msgstr "Dodane Obrazki"
+
+#: admin/tpl/setting/settings_cdn.php:46
+msgid "CDN URL to be used. For example, %s"
+msgstr "Adres CDN do użycia. Przykład, %s"
+
+#: admin/tpl/setting/settings_cdn.php:37
+msgid "CDN URL"
+msgstr "CDN URL"
+
+#: admin/tpl/setting/settings_cdn.php:124
+msgid "Site URL to be served through the CDN. Beginning with %1$s. For example, %2$s."
+msgstr "Adres używany przez CDN, Zaczynający się od %1$s. przykład: %2$s"
+
+#: admin/tpl/setting/settings_cdn.php:120
+msgid "Original URLs"
+msgstr "Oryginalne URL"
+
+#: admin/tpl/setting/settings_cdn.php:24
+msgid "Enable Content Delivery Network use."
+msgstr "Włącz użycie sieci przez CDN."
+
+#: admin/tpl/setting/settings_cdn.php:20
+msgid "Enable CDN"
+msgstr "Włącz CDN"
+
+#: admin/tpl/setting/settings_cdn.php:14
+msgid "CDN Settings"
+msgstr "Ustawienia CDN"
+
+#: admin/tpl/settings.php:12 admin/tpl/manage.php:10
+#: admin/tpl/setting/settings_cdn.php:234
+msgid "CDN"
+msgstr "CDN"
+
+#: admin/litespeed-cache-admin-display.class.php:820
+#: admin/litespeed-cache-admin-display.class.php:908
+#: admin/tpl/setting/settings_debug.php:29
+#: admin/tpl/setting/settings_media.php:105
+#: admin/tpl/setting/settings_inc.cache_object.php:149
+#: admin/tpl/setting/settings_tuning.php:18
+#: admin/tpl/setting/settings_tuning.php:54
+#: admin/tpl/setting/settings_optimize.php:152
+#: admin/tpl/setting/settings_optimize.php:164
+#: admin/tpl/setting/settings_cdn.php:25 admin/tpl/setting/settings_cdn.php:163
+msgid "OFF"
+msgstr "Wył"
+
+#: admin/litespeed-cache-admin-display.class.php:819
+#: admin/litespeed-cache-admin-display.class.php:904
+#: admin/tpl/setting/settings_debug.php:35
+#: admin/tpl/setting/settings_inc.cache_mobile.php:65
+#: admin/tpl/setting/settings_media.php:102
+#: admin/tpl/setting/settings_tuning.php:21
+#: admin/tpl/setting/settings_tuning.php:57
+#: admin/tpl/setting/settings_optimize.php:138
+#: admin/tpl/setting/settings_optimize.php:152
+#: admin/tpl/setting/settings_optimize.php:153
+#: admin/tpl/setting/settings_optimize.php:248
+msgid "ON"
+msgstr "Wł"
+
+#: includes/litespeed-cache-purge.class.php:239 inc/purge.class.php:239
+msgid "Notified LiteSpeed Web Server to purge CSS/JS entries."
+msgstr "Powiadomiono LiteSpeed aby wyczyścił wpisy CSS/JS."
+
+#: admin/tpl/setting/settings_optimize.php:106
+msgid "Minify HTML content."
+msgstr "Minifikacja zawartości HTML."
+
+#: admin/tpl/setting/settings_optimize.php:102
+msgid "HTML Minify"
+msgstr "HTML Minify"
+
+#: admin/tpl/setting/settings_optimize.php:95
+msgid "Specify how long, in seconds, CSS/JS files are cached. Minimum is %1$s seconds."
+msgstr "Określ, ile plików w formacie CSS / JS jest w pamięci cache w sekundach. Minimum to %1$s sekund."
+
+#: admin/tpl/setting/settings_optimize.php:90
+msgid "CSS/JS Cache TTL"
+msgstr "Pamięć podręczna CSS/JS TTL"
+
+#: admin/tpl/setting/settings_tuning.php:68
+msgid "JS Excludes"
+msgstr "Wykluczenia JS"
+
+#: admin/tpl/setting/settings_optimize.php:84
+msgid "Pre-send internal JS files to the browser before they are requested. (Requires the HTTP/2 protocol)"
+msgstr "Przed-wysyłanie wewnętrznych plików JS do przeglądarki przed ich żądaniem. (Wymaga protokołu HTTP / 2)"
+
+#: admin/tpl/setting/settings_optimize.php:80
+msgid "JS HTTP/2 Push"
+msgstr "JS HTTP/2 Push"
+
+#: admin/tpl/setting/settings_optimize.php:73
+msgid "Combine JS files."
+msgstr "Połącz pliki JS."
+
+#: admin/tpl/setting/settings_optimize.php:69
+#: admin/tpl/setting/settings_optimize.php:251
+msgid "JS Combine"
+msgstr "Połącz JS"
+
+#: admin/tpl/setting/settings_optimize.php:63
+msgid "Minify JS files."
+msgstr "Minifikacja plików JS."
+
+#: admin/tpl/setting/settings_optimize.php:59
+msgid "JS Minify"
+msgstr "JS Minify"
+
+#: admin/tpl/setting/settings_tuning.php:32
+msgid "CSS Excludes"
+msgstr "Wykluczenia CSS"
+
+#: admin/tpl/setting/settings_optimize.php:53
+msgid "Pre-send internal CSS files to the browser before they are requested. (Requires the HTTP/2 protocol)"
+msgstr "Przed-wysłanie wewnętrznych plików CSS do przeglądarki przed ich żądaniem. (Wymaga protokołu HTTP / 2)"
+
+#: admin/tpl/setting/settings_optimize.php:49
+msgid "CSS HTTP/2 Push"
+msgstr "CSS HTTP/2 Push"
+
+#: admin/tpl/setting/settings_optimize.php:42
+msgid "Combine CSS files."
+msgstr "Połącz pliki CSS."
+
+#: admin/tpl/setting/settings_optimize.php:38
+msgid "CSS Combine"
+msgstr "Połączenie CSS"
+
+#: admin/tpl/setting/settings_optimize.php:32
+msgid "Minify CSS files."
+msgstr "Minifikacja plików CSS."
+
+#: admin/tpl/setting/settings_optimize.php:28
+msgid "CSS Minify"
+msgstr "CSS Minify"
+
+#: admin/tpl/setting/settings_optimize.php:22
+msgid "Please test thoroughly when enabling any option in this list. After changing Minify/Combine settings, please do a Purge All action."
+msgstr "Prosimy o dokładne sprawdzenie podczas włączania dowolnej opcji na tej liście. Po zmianie ustawień Minify / Combine należy wykonać operację Wyczyść wszystko."
+
+#: admin/tpl/settings.php:9
+msgid "Optimize"
+msgstr "Optymalizuj"
+
+#: admin/tpl/manage/manage_purge.php:46
+msgid "This will purge all minified/combined CSS/JS entries only"
+msgstr "Spowoduje to oczyszczenie wszystkich minifikowanych / połączonych wpisów CSS / JS"
+
+#: admin/tpl/setting/settings_optimize.php:9
+msgid "Optimization Settings"
+msgstr "Ustawienia optymalizacji"
+
+#: admin/tpl/setting/settings_esi.php:37
+msgid "Available in LiteSpeed Enterprise version"
+msgstr "Dostępne w wersji LiteSpeed Enterprise"
+
+#: admin/tpl/manage/manage_purge.php:34
+msgid "Purge error pages, including 500 pages"
+msgstr "Wyczyść strony błędów, również błędy 500"
+
+#: admin/tpl/manage/manage_purge.php:33
+msgid "Purge 500 Error"
+msgstr "Wyczyść błąd 500"
+
+#: admin/tpl/manage/manage_purge.php:20 admin/tpl/manage/manage_purge.php:26
+#: admin/tpl/manage/manage_purge.php:32
+msgid "Purge error pages, including %s pages"
+msgstr "Wyczyść strony błędów, również strony %s"
+
+#: admin/tpl/manage/manage_purge.php:19 admin/tpl/manage/manage_purge.php:25
+#: admin/tpl/manage/manage_purge.php:31
+msgid "Purge %s Error"
+msgstr "Wyczyść błąd %s"
+
+#: admin/tpl/manage/manage_db.php:68
+msgid "Database Optimizer"
+msgstr "Optymalizator bazy danych"
+
+#: admin/tpl/manage/manage_db.php:43
+msgid "Optimize all tables in your database"
+msgstr "Optymalizuje wszystkie tabele w twojej bazie danych"
+
+#: admin/tpl/manage/manage_db.php:42
+msgid "Optimize Tables"
+msgstr "Optymalizuj tabele"
+
+#: admin/tpl/manage/manage_db.php:39
+msgid "Clean all transient options"
+msgstr "Wyczyść wszystkie dane tymczasowe"
+
+#: admin/tpl/manage/manage_db.php:38
+msgid "All Transients"
+msgstr "Wszystkie dane tymczasowe"
+
+#: admin/tpl/manage/manage_db.php:35
+msgid "Clean expired transient options"
+msgstr "Wyczyść wszystkie zakończone dane tymczasowe"
+
+#: admin/tpl/manage/manage_db.php:34
+msgid "Expired Transients"
+msgstr "Zakończone dane tymczasowe"
+
+#: admin/tpl/manage/manage_db.php:31
+msgid "Clean all trackbacks and pingbacks"
+msgstr "Wyczyść wszystkie Trackback'i i pingback'i."
+
+#: admin/tpl/manage/manage_db.php:30
+msgid "Trackbacks/Pingbacks"
+msgstr "Trackbacki/Pingbacki"
+
+#: admin/tpl/manage/manage_db.php:27
+msgid "Clean all trashed comments"
+msgstr "Wyczyść wszystkie komentarze w koszu"
+
+#: admin/tpl/manage/manage_db.php:26
+msgid "Trashed Comments"
+msgstr "Komentarze w koszu"
+
+#: admin/tpl/manage/manage_db.php:23
+msgid "Clean all spam comments"
+msgstr "Wyczyść wszystkie komentarze spam"
+
+#: admin/tpl/manage/manage_db.php:22
+msgid "Spam Comments"
+msgstr "Komentarze spam"
+
+#: admin/tpl/manage/manage_db.php:19
+msgid "Clean all trashed posts and pages"
+msgstr "Wyczyść wszystkie usunięte posty i strony"
+
+#: admin/tpl/manage/manage_db.php:18
+msgid "Trashed Posts"
+msgstr "Usunięte posty"
+
+#: admin/tpl/manage/manage_db.php:15
+msgid "Clean all auto saved drafts"
+msgstr "Wyczyść wszystkie automatycznie zapisane wersje robocze"
+
+#: admin/tpl/manage/manage_db.php:14
+msgid "Auto Drafts"
+msgstr "Automatyczne wersje robocze"
+
+#: admin/tpl/manage/manage_db.php:11
+msgid "Clean all post revisions"
+msgstr "Wyczyść wszystkie rewizje postów"
+
+#: admin/tpl/manage/manage_db.php:10
+msgid "Post Revisions"
+msgstr "Rewizje postów"
+
+#: admin/tpl/manage/manage_db.php:6
+msgid "Clean All"
+msgstr "Wyczyść wszystko"
+
+#: admin/tpl/manage.php:19
+msgid "LiteSpeed Cache Network Management"
+msgstr "Zarządzanie siecią LiteSpeed Cache"
+
+#: admin/tpl/manage.php:6
+msgid "DB Optimizer"
+msgstr "Optymalizator DB"
+
+#: admin/litespeed-cache-admin-optimize.class.php:191
+msgid "Optimized all tables."
+msgstr "Zoptymalizowano wszystkie tabele."
+
+#: admin/litespeed-cache-admin-optimize.class.php:181
+msgid "Clean all transients successfully."
+msgstr "Wyczyszczono wszystkie dane tymczasowe."
+
+#: admin/litespeed-cache-admin-optimize.class.php:177
+msgid "Clean expired transients successfully."
+msgstr "Wyczyszczono wszystkie zakończone dane tymczasowe."
+
+#: admin/litespeed-cache-admin-optimize.class.php:173
+msgid "Clean trackbacks and pingbacks successfully."
+msgstr "Wyczyszczono wszystkie trackback'i i pingback'i."
+
+#: admin/litespeed-cache-admin-optimize.class.php:169
+msgid "Clean trashed comments successfully."
+msgstr "Wyczyszczono wszystkie usunięte komentarze."
+
+#: admin/litespeed-cache-admin-optimize.class.php:165
+msgid "Clean spam comments successfully."
+msgstr "Wyczyszczono wszystkie spamerskie komentarze."
+
+#: admin/litespeed-cache-admin-optimize.class.php:161
+msgid "Clean trashed posts and pages successfully."
+msgstr "Wyczyszczono wszystkie usunięte strony i posty."
+
+#: admin/litespeed-cache-admin-optimize.class.php:157
+msgid "Clean auto drafts successfully."
+msgstr "Wyczyszczono wszystkie automatyczne wersje robocze."
+
+#: admin/litespeed-cache-admin-optimize.class.php:153
+msgid "Clean post revisions successfully."
+msgstr "Wyczyszczono wszystkie rewizje."
+
+#: admin/litespeed-cache-admin-optimize.class.php:146
+msgid "Clean all successfully."
+msgstr "Wyczyszczono wszystko."
+
+#: admin/tpl/setting/settings_general.php:79
+msgid "Specify how long, in seconds, private pages are cached. Minimum is %1$s seconds. Maximum is %2$s seconds."
+msgstr "Sprecyzuj jak, w sekundach prywatne strony mają być przechowywane w pamięci podręcznej. Minimalnie %1$s sekund. Maksymalnie %2$s sekund."
+
+#: admin/tpl/setting/settings_general.php:74
+msgid "Default Private Cache TTL"
+msgstr "Domyślny TTL prywatnej pamięci podręcznej"
+
+#: admin/tpl/setting/settings_esi.php:88
+msgid "If your site contains public content that certain user roles can see but other roles cannot, you can specify a Vary Group for those user roles. For example, specifying an administrator vary group allows there to be a separate publicly-cached page tailored to administrators (with “edit” links, etc), while all other user roles see the default public page."
+msgstr "Jeśli witryna zawiera treść publiczną, którą konkretne grupy mogą zobaczyć, ale inne grupy nie mogą, można określić grupę zmienną dla tych ról użytkownika. Na przykład określenie grupy odmiennej dla administratora pozwala na oddzielną stronę publiczną zapisaną w pamięci podręcznej, dostosowaną do administratorów (z liniami \"edytuj\" itp.), Podczas gdy wszystkie inne role użytkowników mają domyślną stronę publiczną."
+
+#: admin/tpl/setting/settings_esi.php:73
+msgid "Vary Group"
+msgstr "Grupa zmienna"
+
+#: admin/tpl/setting/settings_esi.php:67
+msgid "Cache the build-in Comment Form ESI block."
+msgstr "Zapisz bufor wbudowanego bloku komentarzy w bloku ESI."
+
+#: admin/tpl/setting/settings_esi.php:63
+msgid "Cache Comment Form"
+msgstr "Zapisz formularz komentarzy"
+
+#: admin/tpl/setting/settings_esi.php:57
+msgid "Cache the build-in Admin Bar ESI block."
+msgstr "Zapisz wbudowany Pasek administratora jako blok ESI"
+
+#: admin/tpl/setting/settings_esi.php:53
+msgid "Cache Admin Bar"
+msgstr "Zapisuj pasek administratora"
+
+#: admin/tpl/setting/settings_esi.php:47
+msgid "Enable caches public pages for logged in users and serves the Admin Bar and Comment Form via ESI blocks. These two blocks will be uncached unless enabled below."
+msgstr "Włącz buforowanie publicznych stron dla zalogowanych użytkowników i korzystanie z paska administracyjnego i formularza komentarzy przez bloki ESI. Te dwa bloki zostaną usunięte, chyba że zostaną włączone poniżej."
+
+#: admin/tpl/setting/settings_esi.php:15
+msgid "ESI allows you to designate parts of your dynamic page as separate fragments that are then assembled together to make the whole page. In other words, ESI lets you “punch holes” in a page, and then fill those holes with content that may be cached privately, cached publicly with its own TTL, or not cached at all."
+msgstr "ESI umożliwia określenie części strony dynamicznej jako oddzielnych fragmentów, które są następnie montowane razem w celu utworzenia całej strony. Innymi słowy, ESI umożliwia \"łatanie dziur\" na stronie, a następnie wypełnienie tych luk treścią, która może być przechowywana w prywatnych, buforowanych publicznie z własnym TTL lub bez pamięci podręcznej."
+
+#: admin/tpl/setting/settings_esi.php:14
+msgid "With ESI (Edge Side Includes), pages may be served from cache for logged-in users."
+msgstr "W przypadku ESI (Edge Side Includes) strony mogą być wyświetlane z pamięci podręcznej dla zalogowanych użytkowników."
+
+#: admin/tpl/esi_widget_edit.php:48
+msgid "Private"
+msgstr "Prywatny"
+
+#: admin/tpl/esi_widget_edit.php:40
+msgid "Public"
+msgstr "Publiczny"
+
+#: admin/tpl/setting/settings_purge.php:7
+msgid "Purge Settings"
+msgstr "Wyczyść ustawienia"
+
+#: admin/tpl/setting/settings_inc.cache_resources.php:7
+msgid "Cache PHP Resources"
+msgstr "Zapisz zasoby PHP"
+
+#: admin/tpl/setting/settings_inc.cache_mobile.php:8
+#: admin/tpl/setting/settings_inc.cache_mobile.php:65
+msgid "Cache Mobile"
+msgstr "Zapisuj urządzenia mobilne"
+
+#: admin/tpl/setting/settings_debug.php:86
+msgid "Advanced level will log more details."
+msgstr "Poziom zaawansowany będzie rejestrował więcej szczegółów."
+
+#: admin/tpl/setting/settings_debug.php:76
+msgid "Basic"
+msgstr "Prosty"
+
+#: admin/tpl/setting/settings_crawler.php:90
+msgid "The maximum average server load allowed while crawling. The number of crawler threads in use will be actively reduced until average server load falls under this limit. If this cannot be achieved with a single thread, the current crawler run will be terminated."
+msgstr "Maksymalne dozwolone obciążenie serwera podczas indeksowania. Liczba wątków robota przeszukiwacza będzie aktywnie zmniejszana do czasu, gdy średni poziom obciążenia serwera spadnie poniżej tego limitu. Jeśli nie można tego osiągnąć jednym pojedynczym wątkiem, bieżący robot indeksujący zostanie zakończony."
+
+#: admin/tpl/setting/settings_cache.php:44
+msgid "Cache Login Page"
+msgstr "Zapisuj stronę logowanie do pamięci podręcznej"
+
+#: admin/tpl/setting/settings_cache.php:38
+msgid "Cache requests made by WordPress REST API calls."
+msgstr "Żądania dotyczące pamięci podręcznej wywołane przez wywołania API WordPressa REST."
+
+#: admin/tpl/setting/settings_cache.php:34
+msgid "Cache REST API"
+msgstr "Zapisuj REST API do pamięci podręcznej"
+
+#: admin/tpl/setting/settings_cache.php:28
+msgid "Privately cache commenters that have pending comments. Disabling this option will serve non-cacheable pages to commenters. (LSWS %s required)"
+msgstr "Prywatnie zapisuj komentarze, które oczekują na komentarze. Wyłączenie tej opcji spowoduje, że komentarze będą obsługiwane stronom, które nie są buforowane. (Wymaga LSWS %s)"
+
+#: admin/tpl/setting/settings_cache.php:24
+msgid "Cache Commenters"
+msgstr "Zapisuj komentujących w pamięci podręcznej"
+
+#: admin/tpl/setting/settings_cache.php:18
+msgid "Privately cache frontend pages for logged-in users. (LSWS %s required)"
+msgstr "Prywatnie zapisuj strony front-endu dla zalogowanych użytkowników. (LSWS %s wymagany)"
+
+#: admin/tpl/setting/settings_cache.php:14
+msgid "Cache Logged-in Users"
+msgstr "Zapisuj w pamięci podręcznej dla zalogowanych użytkowników"
+
+#: admin/tpl/setting/settings_cache.php:6
+msgid "Cache Control Settings"
+msgstr "Ustawienia kontroli pamięci podręcznej"
+
+#: admin/tpl/settings.php:19
+msgid "Compatibilities"
+msgstr "Kompatybilności"
+
+#: admin/tpl/settings.php:13
+msgid "ESI"
+msgstr "ESI"
+
+#: admin/tpl/setting/network_settings_purge.php:4
+msgid "Purge Network Settings"
+msgstr "Wyczyść ustawienia sieciowie"
+
+#: admin/tpl/setting/network_settings_cache.php:4
+msgid "Cache Control Network Settings"
+msgstr "Zapisz ustawienia sieci pamięci podręcznej"
+
+#: admin/tpl/network_settings.php:8 admin/tpl/settings.php:8
+msgid "Excludes"
+msgstr "Wyjątki"
+
+#: admin/tpl/manage/manage_purge.php:116 admin/tpl/network_settings.php:7
+#: admin/tpl/settings.php:7 admin/tpl/manage.php:5
+msgid "Purge"
+msgstr "Wyczyść"
+
+#: admin/tpl/network_settings.php:6 admin/tpl/settings.php:6
+msgid "Cache"
+msgstr "Pamięć podręczna"
+
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:799
+msgid "WooCommerce"
+msgstr "WooCommerce"
+
+#: admin/tpl/inc/show_rule_conflict.php:5
+msgid "Unexpected cache rule %2$s found in %1$s file. This rule may cause visitors to see old versions of pages due to the browser caching html pages. If you are sure that html pages are not being browser cached, this message can be dismissed. (<a %3$s>Learn More</a>)"
+msgstr "Nieznana reguła pamięci podręcznej %2$s w pliku %1$s. Ta reguła może spowodować, że odwiedzający zobaczą stare wersje stron ze względu na buforowanie stron w przeglądarce. Jeśli jesteś pewien, że strony HTML nie są buforowane w przeglądarce, możesz zignorować ten komunikat. (<a %3$s> Więcej informacji </a>)"
+
+#: admin/tpl/setting/settings_purge.php:97
+msgid "Current server time is %s."
+msgstr "Aktualny czas serwera to %s."
+
+#: admin/tpl/setting/settings_purge.php:96
+msgid "Specify the time to purge the \"%s\" list."
+msgstr "Wpisz czas do usunięcia listy \"%s\" "
+
+#: admin/tpl/setting/settings_purge.php:84
+msgid "Both %1$s and %2$s are acceptable."
+msgstr "Obydwie %1$s i %2$s są przyjmowane."
+
+#: admin/tpl/setting/settings_purge.php:83
+#: admin/tpl/setting/settings_purge.php:91
+msgid "Scheduled Purge Time"
+msgstr "Zaplanowany czas czyszczenia"
+
+#: admin/tpl/setting/settings_purge.php:83
+msgid "The URLs here (one per line) will be purged automatically at the time set in the option \"%s\"."
+msgstr "Adresy URL (jedna na linię) zostaną automatycznie usunięte w czasie ustawionym w opcji \"%s\"."
+
+#: admin/tpl/setting/settings_purge.php:79
+#: admin/tpl/setting/settings_purge.php:96
+msgid "Scheduled Purge URLs"
+msgstr "Zaplanowane adresy URL"
+
+#: admin/tpl/setting/settings_debug.php:167
+msgid "Filters containing these strings (one per line) will not be logged."
+msgstr "Filtry zawierające te ciągi (jedna na linię) nie będą rejestrowane."
+
+#: admin/tpl/setting/settings_debug.php:163
+msgid "Exclude Part Filters"
+msgstr "Wyklucz części flitra"
+
+#: admin/tpl/setting/settings_debug.php:156
+msgid "Listed filters (one per line) will not be logged."
+msgstr "Wymienione filtry (jedna na linię) nie będą rejestrowane."
+
+#: admin/tpl/setting/settings_debug.php:152
+msgid "Exclude Filters"
+msgstr "Wyjątki filtrów"
+
+#: admin/tpl/setting/settings_debug.php:138
+msgid "Log Filters"
+msgstr "Loguj flitry"
+
+#: admin/tpl/setting/settings_debug.php:132
+msgid "Shorten query strings in the debug log to improve readability."
+msgstr "Skróć łańcuchy zapytań w dzienniku debugowania w celu zwiększenia czytelności."
+
+#: admin/tpl/setting/settings_debug.php:122
+msgid "Log request cookie values."
+msgstr "Loguj żądania zawartości ciasteczek."
+
+#: admin/tpl/setting/settings_debug.php:104
+msgid "Heartbeat"
+msgstr "Heartbeat"
+
+#: admin/tpl/setting/settings_debug.php:97
+msgid "Specify the maximum size of the log file. Minimum is 3MB. Maximum is 3000MB."
+msgstr "Określ maksymalny rozmiar pliku dziennika. Minimalna wartość to 3MB. Maksymalna 3000MB."
+
+#: admin/tpl/setting/settings_debug.php:95
+#: admin/tpl/setting/settings_tuning.php:88
+msgid "MB"
+msgstr "MB"
+
+#: admin/tpl/debug_log.php:9
+msgid "LiteSpeed Cache Debug Log Viewer"
+msgstr "LiteSpeed Cache przegląd logów debugowania"
+
+#: admin/tpl/setting/settings_debug.php:92
+msgid "Log File Size Limit"
+msgstr "Loguj limit rozmiaru plików"
+
+#: admin/litespeed-cache-admin-rules.class.php:918
+msgid "<p>Please add/replace the following codes into the beginning of %1$s:</p> %2$s"
+msgstr "<p> Proszę dodać / zastąpić następujące kody na początku %1$s: </p> %2$s"
+
+#: admin/litespeed-cache-admin-error.class.php:212
+msgid "%s file not writable."
+msgstr "plik %s nie jest zapisywalny."
+
+#: admin/litespeed-cache-admin-error.class.php:209
+msgid "%s file not readable."
+msgstr "Plik %s nie nadaje się do odczytu."
+
+#: admin/tpl/setting/settings_debug.php:128
+msgid "Collapse Query Strings"
+msgstr "Zwiń Query Strings"
+
+#: admin/tpl/setting/settings_debug.php:118
+msgid "Log Cookies"
+msgstr "Loguj ciasteczka"
+
+#: admin/tpl/setting/settings_inc.check_adv_file.php:6
+msgid "Check Advanced Cache"
+msgstr "Sprawdź zaawansowaną pamięć podręczną"
+
+#: admin/tpl/setting/settings_esi.php:7
+msgid "ESI Settings"
+msgstr "Ustawienia ESI"
+
+#: admin/tpl/esi_widget_edit.php:73
+msgid "A TTL of 0 indicates do not cache."
+msgstr "Ustawienie TTL na 0 wyłącza zapisywanie do pamięci podręcznej."
+
+#: admin/tpl/esi_widget_edit.php:72
+msgid "Recommended value: 28800 seconds (8 hours)."
+msgstr "Zalecana wartość: 28800 sekund (8 godzin)."
+
+#: admin/tpl/esi_widget_edit.php:66
+msgid "Widget Cache TTL:"
+msgstr "Pamięć podręczna TTL widgetów:"
+
+#: admin/tpl/esi_widget_edit.php:30 admin/tpl/setting/settings_esi.php:43
+msgid "Enable ESI"
+msgstr "Włącz ESI"
+
+#: admin/tpl/setting/settings_crawler.php:209
+msgid "The crawler can use your Google XML Sitemap instead of its own. Enter the full URL to your sitemap here."
+msgstr "Wyszukiwarka może używać własnej mapy witryny Google XML zamiast własnego. Podaj pełny adres URL do mapy witryny."
+
+#: admin/tpl/setting/settings_crawler.php:120
+msgid "Enter this site's IP address to crawl by IP instead of domain name. This eliminates the overhead of DNS and CDN lookups. (optional)"
+msgstr "Wpisz adres IP swojej witryny, aby przeszukiwać adres IP zamiast nazwy domeny. Eliminuje to nadmiar DNS i CDN. (opcjonalny)"
+
+#: admin/tpl/crawler.php:93
+msgid "See <a %s>Introduction for Enabling the Crawler</a> for detailed information."
+msgstr "Zajrzyj do <a %s>poradnika uruchomienia robota</a> aby uzyskać więcej informacji."
+
+#: admin/litespeed-cache-admin-error.class.php:155
+msgid "Please make sure the file is xml format and the %s extension is installed on the server."
+msgstr "Upewnij się, że plik ma format xml, a rozszerzenie %s jest zainstalowane na serwerze."
+
+#: admin/litespeed-cache-admin-error.class.php:154
+msgid "Can not parse custom sitemap xml file: %s."
+msgstr "Nie mogę przeparsować pliku XML niestandardowej mapy strony: %s."
+
+#: admin/litespeed-cache-admin-error.class.php:151
+msgid "Can not fetch Custom Sitemap: %s"
+msgstr "Nie mogę pobrać niestandardowej mapy strony: %s"
+
+#: admin/litespeed-cache-admin-error.class.php:148
+msgid "Invalid Site IP: %s"
+msgstr "Nieprawidłowy adres IP strony: %s"
+
+#: lib/litespeed/litespeed-crawler.class.php:320
+msgid "Stopped: crawler disabled by the server admin"
+msgstr "Zatrzymany: Robot wyłączony przez administratora"
+
+#: admin/tpl/setting/settings_crawler.php:204
+#: admin/tpl/setting/settings_crawler.php:297
+msgid "Custom Sitemap"
+msgstr "Niestandardowa mapa strony"
+
+#: admin/tpl/manage/manage_purge.php:217
+msgid "Purge pages by relative or full URL."
+msgstr "Usuwanie stron według względnego lub pełnego adresu URL."
+
+#: admin/tpl/crawler.php:92
+msgid "The crawler feature is not enabled on the LiteSpeed server. Please consult your server admin."
+msgstr "Funkcja robota indeksującego nie jest włączona na serwerze LiteSpeed. Skonsultuj się z administratorem serwera."
+
+#: admin/tpl/manage/manage_cdn.php:15 admin/tpl/crawler.php:91
+#: admin/tpl/settings.php:183 admin/tpl/inc/check_cache_disabled.php:38
+#: admin/tpl/setting/settings_optimize.php:15
+msgid "WARNING"
+msgstr "UWAGA"
+
+#: admin/litespeed-cache-admin-display.class.php:943
+msgid "Recommended value: %s"
+msgstr "Rekomendowana wartość: %s."
+
+#: lib/litespeed/litespeed-crawler.class.php:366
+msgid "Stopped due to load over limit"
+msgstr "Zatrzymany z powodu przekroczenia limitu"
+
+#: lib/litespeed/litespeed-crawler.class.php:313
+msgid "Stopped due to error when crawling urls %1$s : %2$s"
+msgstr "Zatrzymany ze względu na błąd podczas przeszukiwania adresów URL %1$s : %2$s"
+
+#: lib/litespeed/litespeed-crawler.class.php:231
+msgid "Stopped due to load hit the maximum."
+msgstr "Zatrzymany ze względu na obciążenie maksymalne obiciążenie."
+
+#: admin/tpl/crawler.php:149
+msgid "<b>Last crawled:</b> %s item(s)"
+msgstr "<b>Ostatnio zindeksowano:</b> %s rzeczy"
+
+#: admin/tpl/crawler.php:106
+msgid "The next complete sitemap crawl will start at"
+msgstr "Następne kompletne indeksowanie mapy witryny rozpocznie się za"
+
+#: lib/litespeed/litespeed-file.class.php:171
+msgid "Failed to write to %s."
+msgstr "Błąd zapisu do %s."
+
+#: lib/litespeed/litespeed-file.class.php:152
+msgid "Folder is not writable: %s."
+msgstr "Folder nie jest zapisywalny: %s."
+
+#: lib/litespeed/litespeed-file.class.php:144
+msgid "Can not create folder: %1$s. Error: %2$s"
+msgstr "Nie mogę utworzyć folderu: %1$s. Błąd: %2$s"
+
+#: lib/litespeed/litespeed-file.class.php:135
+msgid "Folder does not exist: %s"
+msgstr "Folder: %s nie istnieje"
+
+#: lib/litespeed/litespeed-crawler.class.php:220
+msgid "Cannot read meta file: %s"
+msgstr "Nie mogę odczytać pliku meta: %s"
+
+#: lib/litespeed/litespeed-crawler.class.php:358
+msgid "Stopped due to reset meta position"
+msgstr "Zatrzymany z powodu restartu pozycji meta"
+
+#: lib/litespeed/litespeed-crawler.class.php:341
+msgid "Stopped due to exceeding defined Maximum Run Time"
+msgstr "Zatrzymany z powodu przekroczenia maksymalnego czasu uruchomienia"
+
+#: lib/litespeed/litespeed-crawler.class.php:225
+msgid "Oh look, there is already another LiteSpeed crawler running!"
+msgstr "Spójrz, tutaj jest uruchomiony inny robot indeksujący LiteSpeed."
+
+#: includes/litespeed-cache.class.php:347 inc/litespeed-cache.class.php:347
+msgid "Notified LiteSpeed Web Server to purge the list."
+msgstr "Poinformowano Serwer LiteSpeed o usunięciu listy."
+
+#: includes/litespeed-cache.class.php:326 inc/litespeed-cache.class.php:326
+msgid "Crawler blacklist is saved."
+msgstr "Czarna lista robotów zapisana."
+
+#: includes/litespeed-cache-crawler.class.php:332 inc/crawler.class.php:332
+msgid "Position reset notification sent successfully"
+msgstr "Informacja o resecie pozycji wysłana."
+
+#: includes/litespeed-cache-crawler.class.php:328 inc/crawler.class.php:328
+msgid "Failed to send position reset notification: %s"
+msgstr "Nie udało się wysłać informacji o resecie pozycji: %s"
+
+#: includes/litespeed-cache-crawler.class.php:169 inc/crawler.class.php:169
+msgid "File created successfully: %s"
+msgstr "Pomyślnie stworzono plik: %s"
+
+#: includes/litespeed-cache-crawler.class.php:117 inc/crawler.class.php:117
+msgid "File saved successfully: %s"
+msgstr "Pomyślnie zapisano plik: %s"
+
+#: includes/litespeed-cache-crawler.class.php:102 inc/crawler.class.php:102
+msgid "Can not find any form data for blacklist"
+msgstr "Nie można znaleźć żadnych danych z formularza dla czarnej listy."
+
+#: admin/tpl/setting/settings_general.php:50
+msgid "Please visit the <a %s>Information</a> page on how to test the cache."
+msgstr "Odwiedź stronę <a %s>informacje</a> aby dowiedzieć się jak przetestować pamięć podręczną."
+
+#: admin/tpl/setting/settings_debug.php:58
+msgid "Allows listed IPs (one per line) to perform certain actions from their browsers."
+msgstr "Pozwala adresom IP na liście (jednym w linii) na pewnie akcje z ich przeglądarek."
+
+#: admin/tpl/setting/settings_crawler.php:293
+msgid "Alphabetical, ascending"
+msgstr "Alfabetycznie, rosnąco"
+
+#: admin/tpl/setting/settings_crawler.php:287
+msgid "Alphabetical, descending"
+msgstr "Alfabetycznie, malejąco"
+
+#: admin/tpl/setting/settings_crawler.php:281
+msgid "Date, ascending"
+msgstr "Data, rosnąco"
+
+#: admin/tpl/setting/settings_crawler.php:275
+msgid "Date, descending (Default)"
+msgstr "Data, malejąco"
+
+#: admin/tpl/setting/settings_crawler.php:269
+msgid "Order links by"
+msgstr "Sortowanie linków przez"
+
+#: admin/tpl/setting/settings_crawler.php:261
+msgid "Available Custom Post Type"
+msgstr "Dostępny typ wpisu niestandardowego"
+
+#: admin/tpl/setting/settings_crawler.php:250
+msgid "Exclude Custom Post Types"
+msgstr "Wyklucz niestandardowe typy postów."
+
+#: admin/tpl/setting/settings_crawler.php:241
+msgid "Include Tags"
+msgstr "Dołącz tagi"
+
+#: admin/tpl/setting/settings_crawler.php:234
+msgid "Include Categories"
+msgstr "Dołącz kategorie"
+
+#: admin/tpl/setting/settings_crawler.php:227
+msgid "Include Pages"
+msgstr "Dołącz strony"
+
+#: admin/tpl/setting/settings_crawler.php:220
+msgid "Include Posts"
+msgstr "Dołącz posty"
+
+#: admin/tpl/setting/settings_crawler.php:85
+msgid "Server Load Limit"
+msgstr "Limit obciążenia serwera"
+
+#: admin/tpl/setting/settings_crawler.php:78
+msgid "Specify Number of Threads to use while crawling."
+msgstr "Wpisz liczbę wątków do użytku podczas indeksowania."
+
+#: admin/tpl/setting/settings_crawler.php:66
+msgid "Specify how long in seconds before the crawler should initiate crawling the entire sitemap again."
+msgstr "Wpisz jak długo w sekundach robot indeksujący powinien inicjować ponowne indeksowanie całej mapy strony."
+
+#: admin/tpl/setting/settings_crawler.php:61
+msgid "Crawl Interval"
+msgstr "Interwał robota indeksującego"
+
+#: admin/tpl/setting/settings_crawler.php:54
+msgid "Specify time in seconds for the time between each run interval. Must be greater than 60."
+msgstr "Wpisz czas w sekundach między kolejnymi uruchomieniami. Musi być większy niż 60."
+
+#: admin/tpl/setting/settings_crawler.php:49
+msgid "Interval Between Runs"
+msgstr "Interwał między uruchomieniami"
+
+#: admin/tpl/setting/settings_crawler.php:42
+msgid "Specify time in seconds for the duration of the crawl interval."
+msgstr "Określ czas w sekundach na czas trwania indeksowania."
+
+#: admin/tpl/setting/settings_crawler.php:18
+msgid "Specify time in microseconds for the delay between requests during a crawl."
+msgstr "Określ czas w milisekundach czasu opóźnienia między żądaniami podczas indeksowania."
+
+#: admin/tpl/setting/settings_crawler.php:16
+msgid "microseconds"
+msgstr "Milisekundy"
+
+#: admin/tpl/setting/settings_crawler.php:7
+msgid "Crawler Settings"
+msgstr "Ustawienia robota indeksującego"
+
+#: admin/tpl/setting/settings_inc.login_cookie.php:44
+msgid "Error getting current rules from %s: %s"
+msgstr "Błąd podczas pobierania bieżących reguł z %s : %s"
+
+#: admin/tpl/setting/settings_inc.check_adv_file.php:10
+msgid "Include advanced-cache.php"
+msgstr "Dołącz advanced-cache.php"
+
+#: admin/tpl/network_settings.php:22
+msgid "LiteSpeed Cache Network Settings"
+msgstr "Ustawienia sieci LiteSpeed Cache"
+
+#: admin/tpl/manage/manage_purge.php:151
+msgid "Select below for \"Purge by\" options."
+msgstr "Wybierz poniżej opcję \"Wyczyść przez\"."
+
+#: admin/tpl/crawler.php:251
+msgid "All Urls which returned no-cache tags will be added here, after the initial crawling."
+msgstr "Wszystkie adresy URL, które zwróciły tagi bez pamięci podręcznej, zostaną dodane tutaj, po pierwszym indeksowaniu."
+
+#: admin/tpl/setting/settings_inc.login_cookie.php:29
+msgid "Then another WordPress is installed (NOT MULTISITE) at %s"
+msgstr "Inna instancja WordPressa jest zainstalowana (NIE MULTISTRONA) jest w %s"
+
+#: admin/tpl/crawler.php:214
+msgid "Show crawler status"
+msgstr "Wyświetl stan robota"
+
+#: admin/tpl/setting/settings_crawler.php:73
+msgid "Threads"
+msgstr "Wątki"
+
+#: admin/tpl/crawler.php:250
+msgid "Current blacklist has %s item(s)."
+msgstr "Aktualna czarna lista zawiera %s przedmiotów."
+
+#: admin/tpl/crawler.php:202
+msgid "Please follow <a %s>Hooking WP-Cron Into the System Task Scheduler</a> to create the system cron task."
+msgstr "Wykonaj <a %s> Wstawianie WP-Crona w Harmonogramie zadań systemowych </a>, aby utworzyć zadanie systemu cron."
+
+#: admin/tpl/report.php:13
+msgid "LiteSpeed Cache Report"
+msgstr "Raport LiteSpeed Cache"
+
+#: admin/tpl/crawler.php:153
+msgid "Reset position"
+msgstr "Zresetuj pozycję"
+
+#: admin/tpl/crawler.php:200
+msgid "Only one crawler can run concurrently."
+msgstr "Jednocześnie może działać tylko jeden robot indeksujący."
+
+#: admin/tpl/crawler.php:199
+msgid "Run frequency is set by the Interval Between Runs setting."
+msgstr "Częstotliwość uruchamiania jest ustawiana przez ustawienie Interwał między uruchomieniami."
+
+#: admin/tpl/crawler.php:232
+msgid "No crawler meta file generated yet"
+msgstr "Nie wygenerowano jeszcze pliku meta dla robota indeksującego."
+
+#: admin/tpl/crawler.php:237
+msgid "Sitemap Generation Blacklist"
+msgstr "Czarna lista generatora mapy strony"
+
+#: admin/tpl/crawler.php:207
+msgid "Watch Crawler Status"
+msgstr "Zobacz status robota ideksującego"
+
+#: admin/tpl/crawler.php:76
+msgid "Crawler Cron"
+msgstr "Cron robota indeksującego"
+
+#: admin/tpl/crawler.php:163
+msgid "Cron Name"
+msgstr "Nazwa cron"
+
+#: admin/tpl/crawler.php:70
+msgid "%d minute"
+msgstr "%d minuta"
+
+#: admin/tpl/crawler.php:38
+msgid "Generate Crawler File"
+msgstr "Wygeneruj plik robota indeksującego"
+
+#: admin/tpl/crawler.php:43
+msgid "Generated at %s"
+msgstr "Wygenerowano %s"
+
+#: admin/tpl/crawler.php:47
+msgid "On click, this will create a crawler sitemap file in plugin directory %s."
+msgstr "Po kliknięciu, to utworzy plik mapy strony robota indeksującego w folderze wtyczki %s."
+
+#: admin/tpl/crawler.php:57
+msgid "%d hours"
+msgstr "%d godzin"
+
+#: admin/tpl/crawler.php:60
+msgid "%d hour"
+msgstr "%d godzina"
+
+#: admin/litespeed-cache-admin-display.class.php:166 admin/tpl/settings.php:22
+msgid "Crawler"
+msgstr "Robot indeksujący"
+
+#: admin/tpl/inc/show_display_installed.php:16
+msgid "If there are any questions, the team is always happy to answer any questions on the <a %s>support forum</a>."
+msgstr "Jeśli masz jakiekolwiek pytania, to nasz zespół chętnie ci udzieli odpowiedzi na <a %s>forum</a>."
+
+#: admin/tpl/setting/settings_crawler.php:13
+msgid "Delay"
+msgstr "Opóźnienie"
+
+#: admin/tpl/crawler.php:25
+msgid "LiteSpeed Cache Crawler"
+msgstr "Robot indeksujący LiteSpeed Cache"
+
+#: admin/tpl/setting/settings_crawler.php:37
+msgid "Run Duration"
+msgstr "Czas uruchomienia"
+
+#: admin/tpl/crawler.php:164
+msgid "Run Frequency"
+msgstr "Częstotliwość uruchamiania"
+
+#: admin/tpl/crawler.php:201
+msgid "If both the cron and manual run start at a similar time, the first one to start will run."
+msgstr "Jeśli zarówno cron, jak i uruchomienie ręczne rozpoczną się w podobnym czasie, uruchomi się pierwszy."
+
+#: admin/tpl/crawler.php:156
+msgid "Manually run"
+msgstr "Ręczne uruchomienie"
+
+#: admin/tpl/crawler.php:67
+msgid "%d minutes"
+msgstr "%d minuty"
+
+#: admin/tpl/crawler.php:36
+msgid "Crawler File"
+msgstr "Plik robota indeksującego"
+
+#. Plugin URI of the plugin
+msgid "https://www.litespeedtech.com/products/cache-plugins/wordpress-acceleration"
+msgstr "https://www.litespeedtech.com/products/cache-plugins/wordpress-acceleration"
+
+#: admin/tpl/manage/manage_purge.php:13
+msgid "Purge Pages"
+msgstr "Wyczyść strony"
+
+#: admin/tpl/manage/manage_purge.php:14
+msgid "This will Purge Pages only"
+msgstr "To wyczyści tylko strony"
+
+#: admin/tpl/setting/settings_purge.php:19
+msgid "Pages"
+msgstr "Strony"
+
+#: admin/tpl/setting/settings_purge.php:21
+msgid "All pages with Recent Posts Widget"
+msgstr "Wszystkie strony z widgetem Ostatnie posty"
+
+#: admin/litespeed-cache-admin-error.class.php:112
+msgid "Bad Purge By selected value."
+msgstr "Niepoprawnie czyszczenie przez wybraną wartość."
+
+#: admin/litespeed-cache-admin-error.class.php:172
+msgid "Invalid Rewrite List."
+msgstr "Nieprawidłowa lista przepisywania."
+
+#: admin/litespeed-cache-admin-error.class.php:173
+msgid "Empty or invalid rule."
+msgstr "Pusta lub nie prawidłowa reguła."
+
+#: admin/litespeed-cache-admin-error.class.php:174
+msgid "Rule: %1$s, list: %2$s"
+msgstr "Reguła: %1$s, lista: %2$s"
+
+#: admin/litespeed-cache-admin-error.class.php:219
+msgid "The %1$s file not writable for %2$s"
+msgstr "Plik %1$s nie jest zapisywalny dla %2$s"
+
+#: admin/litespeed-cache-admin-error.class.php:223
+msgid "%s file did not find a place to insert define."
+msgstr "Plik %s nie znalazł miejsca do wstawienia definicji."
+
+#: includes/litespeed-cache-purge.class.php:463 inc/purge.class.php:463
+msgid "Notified LiteSpeed Web Server to purge pages."
+msgstr "Powiadomiono serwer LiteSpeed o wyczyszczeniu stron."
+
+#: cli/litespeed-cache-cli-purge.class.php:235
+msgid "Purged the tags!"
+msgstr "Wyczyszczono tagi!"
+
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:812
+msgid "For example, if the homepage for the site is located at %1$s, the shop page may be located at %2$s."
+msgstr "Jeśli na przykład strona główna witryny znajduje się w %1$s, strona sklepu może znajdować się w %2$s."
+
+#: admin/litespeed-cache-admin-error.class.php:193
+#: admin/litespeed-cache-admin-error.class.php:231
+msgid "Please add the following to the wp-config.php file: %s"
+msgstr "Dodaj następujące rzeczy do swojego pliku wp-config.php: %s"
+
+#: admin/litespeed-cache-admin-error.class.php:192
+#: admin/litespeed-cache-admin-error.class.php:230
+msgid "LiteSpeed Cache was unable to write to the wp-config.php file."
+msgstr "LiteSpeed Cache nie możne zapisać do pliku wp-config.php."
+
+#: admin/litespeed-cache-admin-error.class.php:90
+msgid "The currently installed version is PHP %s, which is out-dated and insecure."
+msgstr "Aktualnie zainstalowana wersja PHP %s jest nie aktualna i niebezpieczna."
+
+#: admin/litespeed-cache-admin-error.class.php:88
+msgid "The LiteSpeed Cache Plugin requires at least PHP %s."
+msgstr "Wtyczka LiteSpeed Cache wymaga wersji PHP przynajmniej: %s."
+
+#: admin/litespeed-cache-admin-error.class.php:86
+msgid "The installed PHP version is too old for the LiteSpeed Cache Plugin."
+msgstr "Zainstalowana wersja PHP jest za stara dla wtyczki LiteSpeed Cache."
+
+#: admin/litespeed-cache-admin-error.class.php:92
+#: admin/litespeed-cache-admin-error.class.php:101
+msgid "Please upgrade or go to <a href=\"%s\">active plugins</a> and deactivate the LiteSpeed Cache plugin to hide this message."
+msgstr "Proszę zaktualizować lub udać się na stronę <a href=\"%s\">aktywne wtyczki</a> i wyłączyć wtyczkę LiteSpeed Cache aby ukryć tę wiadomość."
+
+#: admin/litespeed-cache-admin-error.class.php:99
+msgid "The LiteSpeed Cache Plugin requires at least WordPress %s."
+msgstr "Wtyczka LiteSpeed Cache wymaga wersji WordPressa w wersji przynajmniej: %s."
+
+#: admin/tpl/setting/settings_crawler.php:115
+msgid "Site IP"
+msgstr "Adres IP strony"
+
+#: admin/tpl/setting/settings_cdn.php:206
+#: admin/tpl/setting/settings_cdn.php:238
+msgid "Email Address"
+msgstr "Adres E-Mail"
+
+#: admin/tpl/api/quic.user_welcome.php:15
+#: admin/tpl/api/quic.user_welcome.php:16 admin/tpl/api/quic.register.php:25
+#: admin/tpl/api/quic.login.php:25
+msgid "Email"
+msgstr "Email"
+
+#: includes/litespeed-cache-gui.class.php:615 inc/gui.class.php:615
+msgid "Install Now"
+msgstr "Zainstaluj teraz"
+
+#: cli/litespeed-cache-cli-purge.class.php:186
+msgid "Purged the url!"
+msgstr "Wyczyszczono ten adres URL!"
+
+#: cli/litespeed-cache-cli-purge.class.php:135
+msgid "Purged the blog!"
+msgstr "Wyczyszczono ten blog!"
+
+#: cli/litespeed-cache-cli-purge.class.php:90
+msgid "Purged All!"
+msgstr "Wyczyszczono wszystko!"
+
+#: includes/litespeed-cache-purge.class.php:483 inc/purge.class.php:483
+msgid "Notified LiteSpeed Web Server to purge error pages."
+msgstr "Powiadomiono LiteSpeed Web Server o usunięciu stron błędów."
+
+#: admin/tpl/inc/show_error_cookie.php:10
+msgid "If using OpenLiteSpeed, the server must be restarted once for the changes to take effect."
+msgstr "Jeśli używasz OpenLiteSpeed, musisz go zrestartować aby zmiany odniosły efekt."
+
+#: admin/tpl/inc/show_error_cookie.php:6
+msgid "If not, please verify the setting in the <a href=\"%1$s\">Advanced tab</a>."
+msgstr "Jeśli nie, zweryfikuj ustawienia w zakładce <a href=\"%1$s\">zaawansowane</a>."
+
+#: admin/tpl/inc/show_error_cookie.php:5
+msgid "If the login cookie was recently changed in the settings, please log out and back in."
+msgstr "Jeśli plik cookie logowania został ostatnio zmieniony w ustawieniach, wyloguj się i zaloguj."
+
+#: admin/tpl/inc/show_display_installed.php:8
+msgid "However, there is no way of knowing all the possible customizations that were implemented."
+msgstr "Jednak nie ma możliwości poznania wszystkich możliwych dostosowań, które zostały wdrożone."
+
+#: admin/tpl/inc/show_display_installed.php:7
+msgid "The LiteSpeed Cache plugin is used to cache pages - a simple way to improve the performance of the site."
+msgstr "Wtyczka  LiteSpeed Cache jest używania do zapisywania stron w pamięci podręcznej -  prosty sposób na przyspieszenie twojej strony."
+
+#: admin/tpl/setting/settings_general.php:137
+msgid "Default 500 Page TTL"
+msgstr "Domyślna strona 500 TTL"
+
+#: admin/tpl/setting/settings_general.php:124
+msgid "Default 403 Page TTL"
+msgstr "Domyślna strona 403 TTL"
+
+#: admin/tpl/setting/settings_general.php:55
+msgid "The network admin setting can be overridden here."
+msgstr "Możesz tutaj nadpisać ustawienia administratora sieci."
+
+#: admin/tpl/setting/settings_general.php:143
+msgid "If this is set to a number less than 30, 500 pages will not be cached."
+msgstr "Jeśli liczba ta jest mniejsza niż 30, 500 stron nie zostanie zapisanych w pamięci podręcznej."
+
+#: admin/tpl/setting/settings_general.php:142
+msgid "Specify how long, in seconds, 500 pages are cached."
+msgstr "Określ, jak długo, w sekundach, 500 buforowanych stron."
+
+#: admin/tpl/setting/settings_general.php:130
+msgid "If this is set to a number less than 30, 403 pages will not be cached."
+msgstr "Jeśli liczba ta jest mniejsza niż 30, 403 stron nie zostanie zapisanych w pamięci podręcznej."
+
+#: admin/tpl/setting/settings_general.php:129
+msgid "Specify how long, in seconds, 403 pages are cached."
+msgstr "Określ, jak długo, w sekundach, buforowane będą strony 403."
+
+#: admin/tpl/edit_htaccess.php:52
+msgid "Please consult the host/server admin before making any changes."
+msgstr "Skontaktuj się z administratorem hostingu/serwera przed jakimikolwiek zmianami."
+
+#: admin/tpl/setting/network_settings_general.php:16
+msgid "It is <b>STRONGLY</b> recommend that the compatibility with other plugins on a single/few sites is tested first."
+msgstr "<b>ZALECA SIĘ</b>  sprawdzić kompatybilność z innymi wtyczkami na jeden lub kilku stronach."
+
+#: admin/tpl/manage/manage_purge.php:208
+msgid "Purge pages by post ID."
+msgstr "Wyczyść strony używając ID postów."
+
+#: admin/tpl/manage/manage_purge.php:40
+msgid "Purge the litespeed cache entries created by this plugin"
+msgstr "Usuń wpisy pamięci podręcznej litespeed utworzone przez tę wtyczkę"
+
+#: admin/tpl/manage/manage_purge.php:8
+msgid "This will Purge Front Page only"
+msgstr "To wyczyści tylko stronę główną."
+
+#: admin/tpl/manage/manage_purge.php:212
+msgid "Purge pages by tag name - e.g. %2$s should be used for the URL %1$s."
+msgstr "Wyczyść strony używając tagów - e.g. %2$s powinno zostać użyte dla adresu %1$s."
+
+#: admin/tpl/manage/manage_purge.php:218
+msgid "e.g. Use %s or %s."
+msgstr "e.g. Użyj %s lub %s."
+
+#: admin/tpl/manage/manage_purge.php:203
+msgid "Purge pages by category name - e.g. %2$s should be used for the URL %1$s."
+msgstr "Wyczyść strony używając nazwy kategorii - e.g. %2$s powinno zostać użyte dla adresu URL %1$s."
+
+#: admin/tpl/manage/manage_purge.php:108
+msgid "If only the WordPress site should be purged, use purge all."
+msgstr "Jeśli tylko ta strona WordPress powinna zostać wyczyszczona, użyj opcji wyczyść wszystko."
+
+#: admin/tpl/inc/help_tabs.php:11
+msgid "A LiteSpeed server (OLS, LSWS, WebADC) and its LSCache module must be installed and enabled."
+msgstr "LiteSpeed server (OLS, LSWS, WebADC) i moduł LSCache muszą być zainstalowane i włączone."
+
+#: includes/litespeed-cache.class.php:337 inc/litespeed-cache.class.php:337
+msgid "Notified LiteSpeed Web Server to purge everything."
+msgstr "Powiadomiono serwer LiteSpeed aby wyczyścił wszystko."
+
+#: admin/litespeed-cache-admin-settings.class.php:57
+msgid "'Use primary site settings' set by Network Administrator."
+msgstr "'Użyj głównych ustawień strony' ustawionych przez Administratora Sieci."
+
+#: admin/tpl/setting/network_settings_general.php:23
+msgid "Use Primary Site Configuration"
+msgstr "Użyj głównych ustawień strony"
+
+#: admin/tpl/setting/network_settings_general.php:28
+msgid "This will disable the settings page on all subsites."
+msgstr "To wyłączy stronę ustawień na wszystkich podstronach."
+
+#: admin/tpl/setting/network_settings_general.php:27
+msgid "Check this option to use the primary site's configuration for all subsites."
+msgstr "Zaznacz tę opcję aby użyć ustawień głównej strony na wszystkich podstronach."
+
+#: admin/tpl/settings.php:208 admin/tpl/settings.php:211
+msgid "Save Changes"
+msgstr "Zapisz zmiany"
+
+#: admin/tpl/settings.php:186
+msgid "The following options are selected, but are not editable in this settings page."
+msgstr "Poniższe opcje są zaznaczone, ale nie są dostępne do edycji na stronie ustawień."
+
+#: admin/tpl/settings.php:185
+msgid "The network admin selected use primary site configs for all subsites."
+msgstr "Administrator sieci zaznaczył wszystkie ustawienia głównej strony dla wszystkich podstron."
+
+#: admin/tpl/manage/manage_purge.php:100
+msgid "Empty Entire Cache"
+msgstr "Opróżnij cały cache"
+
+#: admin/tpl/manage/manage_purge.php:91
+msgid "Purge the cache entries created by this plugin"
+msgstr "Opróżnia cały cache stworzony przez tą wtyczkę."
+
+#: admin/tpl/manage/manage_purge.php:102
+msgid "This action should only be used if things are cached incorrectly."
+msgstr "Ta czynność powinna być wykonywana wyłącznie wtedy, gdy cache nie działa prawidłowo."
+
+#: admin/tpl/manage/manage_purge.php:101
+msgid "Clears all cache entries related to this site, <i>including other web applications</i>."
+msgstr "Usuń wszystkie wpisy w pamięci podręcznej dla tej strony, <i>razem z innymi aplikacjami</i>."
+
+#: admin/tpl/manage/manage_purge.php:107
+msgid "This may cause heavy load on the server."
+msgstr "To może spowodować duże obciążenie na Twoim serwerze."
+
+#: admin/tpl/manage/manage_purge.php:106
+msgid "This will clear EVERYTHING inside the cache."
+msgstr "To wyczyści WSZYSTKO w pamięci podręcznej."
+
+#: admin/litespeed-cache-admin-error.class.php:132
+msgid "Failed to purge by url, invalid input: %s."
+msgstr "Nie udało się opróżnić cache'u na podstawie URLu, wprowadzono niepoprawne dane: %s."
+
+#: includes/litespeed-cache-gui.class.php:469 inc/gui.class.php:469
+msgid "LiteSpeed Cache Purge All"
+msgstr "Opróżnij cały LiteSpeed Cache"
+
+#: admin/tpl/inc/show_display_installed.php:19
+msgid "If you would rather not move at litespeed, you can deactivate this plugin."
+msgstr "Jeśli nie chcesz grzebać przy LiteSpeed, możesz wyłączyć tę wtyczkę."
+
+#: admin/tpl/inc/show_display_installed.php:14
+msgid "Create a post, make sure the front page is accurate."
+msgstr "Utwórz post, upewnij się, że pierwsza strona jest poprawna."
+
+#: admin/tpl/inc/show_display_installed.php:13
+msgid "Visit the site while logged out."
+msgstr "Odwiedź swoją stronę będąc wylogowanym."
+
+#: admin/tpl/inc/show_display_installed.php:11
+msgid "Examples of test cases include:"
+msgstr "Przykłady przypadków testowych zawierają:"
+
+#: admin/tpl/inc/show_display_installed.php:9
+msgid "For that reason, please test the site to make sure everything still functions properly."
+msgstr "Z tego powodu, należy przetestować witrynę, aby upewnić się, że wszystko nadal funkcjonuje prawidłowo."
+
+#: admin/tpl/inc/show_display_installed.php:6
+msgid "This message indicates that the plugin was installed by the server admin."
+msgstr "To wiadomość informuje o tym, że wtyczka została zainstalowana przed administratora Twojego serwera."
+
+#: admin/tpl/inc/show_display_installed.php:5
+msgid "LiteSpeed Cache plugin is installed!"
+msgstr "Wtyczka LiteSpeed Cache jest zainstalowana!"
+
+#: admin/litespeed-cache-admin-display.class.php:171
+#: admin/tpl/setting/settings_debug.php:23
+msgid "Debug Log"
+msgstr "Logi debugowania"
+
+#: admin/tpl/setting/settings_debug.php:41
+msgid "Admin IP only"
+msgstr "Tylko adres IP admina"
+
+#: admin/tpl/setting/settings_debug.php:47
+msgid "The Admin IP option will only output log messages on requests from admin IPs."
+msgstr "Opcja Admin IP wyświetla tylko wiadomości dziennika na żądania z adresów IP administratora."
+
+#: admin/tpl/setting/settings_debug.php:46
+msgid "This should be set to off once everything is working to prevent filling the disk."
+msgstr "To powinno być wyłączone, gdy wszystko działa, aby zapobiec zapełniania dysku."
+
+#: admin/tpl/setting/settings_general.php:111
+msgid "Default 404 Page TTL"
+msgstr "TTL dla domyślnej strony 404"
+
+#: admin/tpl/setting/settings_general.php:117
+msgid "If this is set to a number less than 30, 404 pages will not be cached."
+msgstr "Jeśli liczba ta jest mniejsza niż 30, strony 404 nie zostaną zapisane w pamięci podręcznej."
+
+#: admin/tpl/setting/settings_general.php:116
+msgid "Specify how long, in seconds, 404 pages are cached."
+msgstr "Zdefiniuj jak długo, w sekundach, strony 404 będą cache'owane."
+
+#: admin/tpl/report.php:40
+msgid "The environment report contains detailed information about the WordPress configuration."
+msgstr "Raport środowiska zawiera szczegółowe informacje o konfiguracji WordPress."
+
+#: admin/tpl/setting/settings_inc.check_adv_file.php:14
+msgid "When this option is checked and this file is detected as belonging to another plugin, LiteSpeed's caching functionality will not work."
+msgstr "Gdy ta opcja jest włączona, a plik jest wykrywany jako należący do innej wtyczki, pamięć podręczna LiteSpeed nie będzie działać."
+
+#: admin/tpl/setting/settings_inc.check_adv_file.php:13
+msgid "The advanced-cache.php file is used by many caching plugins to signal that a cache is active."
+msgstr "Plik advanced-cache.php jest używany przez wiele buforujących wtyczek, aby sygnalizować, że pamięć podręczna jest aktywna."
+
+#: admin/tpl/inc/help_tabs.php:10
+msgid "This plugin communicates with LiteSpeed Web Server to let it know which pages are cacheable and when to purge them."
+msgstr "Ta wtyczka komunikuje się z serwerem WWW LiteSpeed, aby poinformować, które strony są zapisywane w pamięci podręcznej i kiedy je oczyścić."
+
+#: admin/tpl/inc/help_tabs.php:9
+msgid "LiteSpeed Cache is a page cache built into LiteSpeed Web Server."
+msgstr "LiteSpeed Cache to bufor stron wbudowany w LiteSpeed Web Server."
+
+#: admin/tpl/setting/settings_purge.php:53
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:864
+msgid "Note"
+msgstr "Notatka"
+
+#: admin/tpl/setting/settings_inc.login_cookie.php:19
+msgid "The server will determine if the user is logged in based on the existance of this cookie."
+msgstr "Serwer określi, czy użytkownik jest zalogowany na podstawie istnienia pliku cookie."
+
+#: admin/tpl/setting/settings_inc.cache_mobile.php:42
+msgid "List in WordPress database is: %s"
+msgstr "Lista w bazie WordPressa: %s"
+
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:866
+msgid "After verifying that the cache works in general, please test the cart."
+msgstr "Po weryfikacji pamięci podręcznej, sprawdź koszyk."
+
+#: admin/tpl/setting/settings_inc.purge_on_upgrade.php:11
+msgid "When enabled, the cache will automatically purge when any plugins, themes, or WordPress core is upgraded."
+msgstr "Kiedy zaznaczone, cache zostanie automatycznie opróżniony, gdy zostanie wykonana aktualizacja wtyczki, szablonu lub WordPressa."
+
+#: admin/tpl/setting/settings_inc.purge_on_upgrade.php:7
+msgid "Purge All On Upgrade"
+msgstr "Opróżnij wszystko podczas aktualizacji."
+
+#: admin/tpl/edit_htaccess.php:57
+msgid "File editing is disabled in configuration."
+msgstr "Możliwość edycji plików jest wyłączona w konfiguracji."
+
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:847
+msgid "Use Front Page TTL for the Shop Page"
+msgstr "Użyj pierwszej strony TTL dla strony sklepu"
+
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:840
+msgid "Product Update Interval"
+msgstr "Interwał aktualizacji produktu"
+
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:811
+msgid "Checking this option will force the shop page to use the front page TTL setting."
+msgstr "Zaznaczenie tej opcji spowoduje, że strona sklepu użyje ustawienia TTL strony pierwszej."
+
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:810
+msgid "Determines how changes in product quantity and product stock status affect product pages and their associated category pages."
+msgstr "Określa, jak zmiany ilości produktów i stanu zapasów produktów wpływają na strony produktów i ich powiązane strony kategorii."
+
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:807
+msgid "Always purge both product and categories on changes to the quantity or stock status."
+msgstr "Zawsze usuwaj zarówno produkt, jak i kategorie w przypadku zmiany ilości lub stanu zapasów."
+
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:806
+msgid "Do not purge categories on changes to the quantity or stock status."
+msgstr "Nie usuwaj kategorii po zmianie ilości lub stanu zapasów."
+
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:805
+msgid "Purge product only when the stock status changes."
+msgstr "Wyczyść stronę produktu tylko w przypadku zmiany stanu zapasów."
+
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:804
+msgid "Purge product and categories only when the stock status changes."
+msgstr "Wyczyść stronę produktu i kategorie tylko po zmianie stanu zapasów."
+
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:803
+msgid "Purge categories only when stock status changes."
+msgstr "Opróżniaj cache kategorii tylko wtedy, gdy zmieni się dostępość produktu."
+
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:802
+msgid "Purge product on changes to the quantity or stock status."
+msgstr "Wyczyść produkt w przypadku zmiany ilości lub stanu zapasów."
+
+#: admin/tpl/setting/settings_inc.cache_mobile.php:41
+msgid "Please re-enter the mobile view setting."
+msgstr "Proszę ponownie wpisać ustawienie widoku mobilnego."
+
+#: admin/tpl/setting/settings_inc.cache_mobile.php:40
+msgid "Htaccess did not match configuration option."
+msgstr "Htaccess nie pasował do opcji konfiguracji."
+
+#: admin/tpl/setting/settings_general.php:104
+msgid "If this is set to a number less than 30, feeds will not be cached."
+msgstr "Jeśli ten numer jest mniejszy niż 30, kanały nie będą zapisywane w pamięci podręcznej."
+
+#: admin/tpl/setting/settings_general.php:103
+msgid "Specify how long, in seconds, feeds are cached."
+msgstr "Określ jak długo w sekundach, kanały mają być przechowywane w pamięci podręcznej."
+
+#: admin/tpl/setting/settings_general.php:98
+msgid "Default Feed TTL"
+msgstr "Domyślny TTL kanału informacji"
+
+#: admin/tpl/setting/settings_general.php:91
+msgid "Specify how long, in seconds, the front page is cached. Minimum is 30 seconds."
+msgstr "Określ jak długo w sekundach, strona główna ma być przechowywana w pamięci podręcznej. Minimum 30 sekund."
+
+#: admin/tpl/setting/settings_general.php:67
+msgid "Specify how long, in seconds, public pages are cached. Minimum is 30 seconds."
+msgstr "Określ jak długo w sekundach, publiczne strony mają być przechowywane w pamięci podręcznej. Minimum 30 sekund."
+
+#: admin/litespeed-cache-admin-display.class.php:268
+msgid "It is recommended that LiteSpeed Cache be purged after updating a plugin."
+msgstr "Zaleca się wyczyszczenie pamięci po aktualizacji wtyczki LiteSpeed Cache."
+
+#: admin/litespeed-cache-admin-error.class.php:183
+msgid "Could not find %s."
+msgstr "Nie można znaleźć %s."
+
+#: admin/litespeed-cache-admin-error.class.php:203
+msgid "Failed to get %s file contents."
+msgstr "Nie udało się pobrać zawartości pliku %s."
+
+#: admin/tpl/setting/settings_inc.cache_resources.php:12
+msgid "Caching these pages may improve server performance by avoiding unnecessary PHP calls."
+msgstr "Zachowanie tych stron w pamięci podręcznej może zwiększyć wydajność serwera redukując wywołania PHP."
+
+#: admin/tpl/setting/settings_inc.cache_resources.php:11
+msgid "Some themes and plugins add resources via a PHP request."
+msgstr "Niektóre motywy i wtyczki dodają zasoby używając żądań PHP."
+
+#: admin/tpl/setting/settings_inc.cache_favicon.php:11
+msgid "Caching this resource may improve server performance by avoiding unnecessary PHP calls."
+msgstr "Zachowanie tych stron w pamięci podręcznej może zwiększyć wydajność serwera redukując wywołania PHP."
+
+#: admin/tpl/setting/settings_inc.cache_favicon.php:10
+msgid "favicon.ico is requested on most pages."
+msgstr "favicon.ico jest żądany na większości stron."
+
+#: admin/tpl/setting/settings_inc.cache_favicon.php:6
+msgid "Cache favicon.ico"
+msgstr "Zapisuj w pamięci podręcznej favicon.ico"
+
+#: admin/tpl/setting/settings_cache.php:48
+msgid "Disabling this option may negatively affect performance."
+msgstr "Wyłączenie tej opcji może mieć negatywny wpływ na wydajność."
+
+#: admin/litespeed-cache-admin-rules.class.php:1030
+msgid "File Saved."
+msgstr "Plik został zapisany."
+
+#: admin/litespeed-cache-admin-error.class.php:189
+msgid "Please remove both and set the login cookie in LiteSpeed Cache advanced settings."
+msgstr "Proszę usunąć obydwie i ustawić ciasteczko logowania w zaawansowanych ustawieniach LiteSpeed Cache."
+
+#: admin/litespeed-cache-admin-error.class.php:188
+msgid "Login cookies do not match."
+msgstr "Ciasteczka logowania nie zgadzają się."
+
+#: admin/litespeed-cache-admin-error.class.php:187
+msgid "This site is a subdirectory install."
+msgstr "Ta strona jest zainstalowana w podkatalogu."
+
+#: admin/litespeed-cache-admin-error.class.php:179
+msgid "%s file not valid. Please verify contents."
+msgstr "Plik %s nie jest poprawny. Zweryfikuj zawartość pliku."
+
+#: admin/litespeed-cache-admin-error.class.php:178
+msgid "Tried to parse for existing login cookie."
+msgstr "Próba przetworzenia istniejącego ciasteczka logowania."
+
+#: admin/litespeed-cache-admin-error.class.php:168
+msgid "Invalid login cookie. Invalid characters found: %s"
+msgstr "Niepoprawne ciasteczko logowania. Znaleziono niepoprawne znaki: %s"
+
+#: admin/tpl/setting/settings_inc.login_cookie.php:52
+msgid "WARNING: The .htaccess login cookie and Database login cookie do not match."
+msgstr "UWAGA: Plik cookie logowania .htaccess i plik cookie logowania do bazy danych nie są zgodne."
+
+#: admin/tpl/setting/settings_inc.login_cookie.php:36
+msgid "Error: invalid login cookie. Please check the %s file"
+msgstr "BŁĄD: Niepoprawne ciasteczko logowania. Sprawdź plik %s"
+
+#: admin/tpl/setting/settings_inc.login_cookie.php:30
+msgid "The cache needs to distinguish who is logged into which WordPress site in order to cache correctly."
+msgstr "Pamięć podręczna musi rozróżnić, kto jest zalogowany do witryny WordPress, aby poprawnie zapisywać buforowanie."
+
+#: admin/tpl/setting/settings_inc.login_cookie.php:27
+msgid "There is a WordPress installed for %s."
+msgstr "Na %s jest zainstalowany WordPress."
+
+#: admin/tpl/setting/settings_inc.login_cookie.php:25
+msgid "Example use case:"
+msgstr "Przykład użycia:"
+
+#: admin/tpl/setting/settings_inc.login_cookie.php:22
+msgid "The cookie set here will be used for this WordPress installation."
+msgstr "Zestaw cookie ustawiony tutaj będzie używany do tej instalacji WordPress."
+
+#: admin/tpl/setting/settings_inc.login_cookie.php:21
+msgid "If every web application uses the same cookie, the server may confuse whether a user is logged in or not."
+msgstr "Jeśli każda aplikacja WWW używa tego samego pliku cookie, serwer może zmylić użytkownika, czy użytkownik jest zalogowany, czy nie."
+
+#: admin/tpl/setting/settings_inc.login_cookie.php:20
+msgid "This setting is useful for those that have multiple web applications for the same domain."
+msgstr "To ustawienie jest przydatne dla tych, którzy mają wiele aplikacji internetowych dla tej samej domeny."
+
+#: admin/tpl/setting/settings_inc.login_cookie.php:18
+msgid "The default login cookie is %s."
+msgstr "Domyślnym ciastkiem logowania jest %s."
+
+#: admin/tpl/setting/settings_inc.login_cookie.php:15
+msgid "MUST BE UNIQUE FROM OTHER WEB APPLICATIONS."
+msgstr "MUSI BYĆ INNE OD INNYCH APLIKACJI SIECIOWYCH."
+
+#: admin/tpl/setting/settings_advanced.php:15
+msgid "These settings are meant for ADVANCED USERS ONLY."
+msgstr "Te ustawienia będą zrozumiałe dla ZAAWANSOWANYCH UŻYTKOWNIKÓW."
+
+#: admin/tpl/manage/manage_purge.php:149
+msgid "Purge By..."
+msgstr "Wyczyść z..."
+
+#: admin/tpl/manage/manage_purge.php:231
+msgid "Purge List"
+msgstr "Lista czyszczenia"
+
+#: admin/tpl/setting/settings_inc.login_cookie.php:7
+msgid "Login Cookie"
+msgstr "Ciasteczko logowania"
+
+#: admin/tpl/edit_htaccess.php:64
+msgid "Current %s Contents"
+msgstr "Aktualna zawartość: %s"
+
+#: admin/tpl/network_settings.php:10 admin/tpl/settings.php:14
+#: admin/tpl/setting/settings_debug.php:82
+msgid "Advanced"
+msgstr "Zaawansowane"
+
+#: admin/tpl/setting/settings_inc.login_cookie.php:14
+msgid "No spaces and case sensitive."
+msgstr "Bez spacji, rozróżnia wielkość liter."
+
+#: admin/tpl/manage/manage_purge.php:191
+msgid "Tag"
+msgstr "Tag"
+
+#: admin/tpl/manage/manage_purge.php:185
+msgid "Post ID"
+msgstr "ID Posta"
+
+#: admin/tpl/manage/manage_purge.php:197
+msgid "URL"
+msgstr "URL"
+
+#: admin/tpl/setting/settings_advanced.php:9
+msgid "Advanced Settings"
+msgstr "Zaawansowane ustawienia"
+
+#: admin/tpl/setting/network_settings_general.php:5
+msgid "General Network Configuration"
+msgstr "Główne ustawienia sieci"
+
+#: admin/tpl/setting/network_settings_excludes.php:5
+msgid "Network Do Not Cache Rules"
+msgstr "Sieć nie będzie zapisywała reguł pamięci podręcznej"
+
+#: admin/tpl/setting/settings_debug.php:63
+msgid "More information about the available commands can be found here."
+msgstr "Więcej informacji na temat dostępnych komend możesz znaleść tutaj."
+
+#: admin/tpl/manage/manage_purge.php:179
+msgid "Category"
+msgstr "Kategoria"
+
+#: admin/tpl/setting/settings_inc.login_cookie.php:13
+msgid "SYNTAX: alphanumeric and \"_\"."
+msgstr "SYNATX: znaki alfanumeryczne i \"_\"."
+
+#: admin/tpl/inc/show_error_cookie.php:4
+msgid "NOTICE: Database login cookie did not match your login cookie."
+msgstr "INFORMACJA: Ciasteczko logowania w bazie danych nie zgadza się z twoim."
+
+#: admin/litespeed-cache-admin-error.class.php:109
+msgid "Tried to purge list with empty list."
+msgstr "Spróbowano wyczyścić listę z pustą listą."
+
+#: admin/litespeed-cache-admin-error.class.php:106
+msgid "Something went wrong with the form! Please try again."
+msgstr "Coś poszło nie tak z formularzem. Spróbuj ponownie."
+
+#: includes/litespeed-cache-purge.class.php:601 inc/purge.class.php:601
+msgid "Purge url %s"
+msgstr "Wyczyszczono %s adresów URL"
+
+#: admin/litespeed-cache-admin-error.class.php:115
+msgid "Failed to purge by category, invalid category slug."
+msgstr "Nie powiodło się czyszczenie kategorią, niepoprawny slug kategorii."
+
+#: admin/litespeed-cache-admin-error.class.php:135
+msgid "Failed to purge by category, does not exist: %s"
+msgstr "Nie powiodło się czyszczenie kategorii, podane nie istnieją: %s"
+
+#: includes/litespeed-cache-purge.class.php:511 inc/purge.class.php:511
+msgid "Purge category %s"
+msgstr "Wyczyszczono %s kategorii"
+
+#: admin/litespeed-cache-admin-error.class.php:125
+msgid "Failed to purge by Post ID, given ID is not numeric: %s"
+msgstr "Nie powiodło się czyszczenie używając ID posta, podane ID nie jest numerem: %s"
+
+#: admin/litespeed-cache-admin-error.class.php:128
+msgid "Failed to purge by Post ID, given ID does not exist or is not published: %s"
+msgstr "Nie powiodło się czyszczenie, używając podanego ID, nie istnieje lub jest nie opublikowane: %s"
+
+#: includes/litespeed-cache-purge.class.php:538 inc/purge.class.php:538
+msgid "Purge Post ID %s"
+msgstr "Wyczyszczono %s ID Postów"
+
+#: admin/litespeed-cache-admin-error.class.php:118
+msgid "Failed to purge by tag, invalid tag slug."
+msgstr "Nie powiodło się czyszczenie tagiem, nie poprawny slug tagów."
+
+#: admin/litespeed-cache-admin-error.class.php:138
+msgid "Failed to purge by tag, does not exist: %s"
+msgstr "Nie powiodło się czyszczenie tagiem, tagi %s nie istnieją"
+
+#: includes/litespeed-cache-purge.class.php:567 inc/purge.class.php:567
+msgid "Purge tag %s"
+msgstr "Wyczyszczono %s tagów."
+
+#: admin/litespeed-cache-admin-error.class.php:121
+msgid "Failed to purge by url, contained \"<\"."
+msgstr "Nie powiodło się czyszczenie ponieważ url zawierał \"<\"."
+
+#: admin/tpl/setting/settings_general.php:53
+msgid "When disabling the cache, all cached entries for this blog will be purged."
+msgstr "Jeśli wyłączysz pamięć podręczną, wszystkie wpisy w pamięci podręcznej zostaną usunięte."
+
+#: admin/tpl/setting/settings_general.php:53
+#: admin/tpl/setting/settings_optimize.php:21
+msgid "NOTICE"
+msgstr "INFORMACJA"
+
+#: admin/tpl/setting/settings_inc.exclude_cookies.php:23
+#: admin/tpl/setting/settings_inc.cache_browser.php:13
+#: admin/tpl/setting/settings_inc.media_webp.php:13
+#: admin/tpl/setting/settings_inc.cache_resources.php:15
+#: admin/tpl/setting/settings_inc.cache_mobile.php:18
+#: admin/tpl/setting/settings_inc.exclude_useragent.php:22
+#: admin/tpl/setting/settings_inc.cache_favicon.php:14
+msgid "This setting will edit the .htaccess file."
+msgstr "To ustawienie edytuje plik .htaccess."
+
+#: admin/tpl/edit_htaccess.php:66
+msgid "DO NOT EDIT ANYTHING WITHIN %s"
+msgstr "NIE EDYTUJ NIC MIĘDZY %s"
+
+#: admin/tpl/edit_htaccess.php:51
+msgid "Any changes made to the .htaccess file may break the site."
+msgstr "Wszystkie zmiany w pliku .htaccess mogą uszkodzić stronę."
+
+#: admin/tpl/edit_htaccess.php:39
+msgid "LiteSpeed Cache Edit .htaccess"
+msgstr "LiteSpeed Cache edycja .htaccess"
+
+#: admin/litespeed-cache-admin-error.class.php:215
+msgid "Failed to overwrite %s."
+msgstr "Nie powiodło się nadpisanie %s."
+
+#: admin/litespeed-cache-admin-error.class.php:197
+msgid "Failed to back up file, aborted changes."
+msgstr "Nie udało się wykonać kopii zapasowej pliku, odrzucono zmiany."
+
+#: admin/litespeed-cache-admin-error.class.php:206
+msgid "%s file not readable or not writable."
+msgstr "Plik %s nie nadaje się do odczytu lub zapisu."
+
+#: admin/tpl/crawler.php:246 admin/tpl/edit_htaccess.php:74
+msgid "Save"
+msgstr "Zapisz"
+
+#: admin/tpl/setting/settings_inc.exclude_cookies.php:6
+msgid "Do Not Cache Cookies"
+msgstr "Nie zapisuj w pamięci podręcznej ciasteczek"
+
+#: admin/tpl/setting/settings_inc.exclude_useragent.php:7
+msgid "Do Not Cache User Agents"
+msgstr "Nie zapisuj w pamięci podręcznej User Agentów."
+
+#: admin/tpl/setting/network_settings_general.php:17
+msgid "This is to ensure compatibility prior to enabling the cache for all sites."
+msgstr "To sprawdzi kompatybilność aby umożliwić włączenie pamięci podręcznej dla wszystkich stron."
+
+#: admin/tpl/setting/network_settings_general.php:11
+msgid "Network Enable Cache"
+msgstr "Włącz sieciową pamięć podręczną"
+
+#: admin/tpl/setting/network_settings_cache.php:8
+msgid "Responsive themes can handle this part automatically."
+msgstr "Responsywne motywy tę część mogą obsługiwać automatycznie."
+
+#: admin/tpl/setting/network_settings_cache.php:7
+msgid "Separate Mobile Views should be enabled if any of the network enabled themes require a different view for mobile devices."
+msgstr "Osobne Widoki mobilne powinny być włączone, jeśli któryś z motywów włączonych sieci wymaga innego widoku dla urządzeń przenośnych."
+
+#: admin/tpl/setting/network_settings_general.php:7
+msgid "These configuration are only available network wide."
+msgstr "Ta konfiguracja jest widoczna tylko po sieci."
+
+#: admin/tpl/setting/settings_advanced.php:14
+msgid "NOTICE:"
+msgstr "INFORMACJA:"
+
+#: admin/tpl/setting/settings_purge.php:56
+msgid "Other checkboxes will be ignored."
+msgstr "Inne checkboxy będą zignorowane."
+
+#: admin/tpl/setting/settings_purge.php:55
+msgid "Select \"All\" if there are dynamic widgets linked to posts on pages other than the front or home pages."
+msgstr "Wybierz \"Wszystko\", jeśli istnieją dynamiczne widgety połączone ze stanowiskami na stronach innych niż strony frontowe lub domowe."
+
+#: admin/tpl/setting/settings_inc.exclude_useragent.php:17
+msgid "SYNTAX: Separate each user agent with a bar, %s."
+msgstr "SYNTAX: Oddziel każdy agent użytkownika paskiem,%s."
+
+#: admin/tpl/setting/settings_inc.exclude_cookies.php:18
+#: admin/tpl/setting/settings_inc.exclude_useragent.php:18
+msgid "Spaces should have a backslash in front of them, %s."
+msgstr "Spacje powinny mieć backlash na samym początku, %s"
+
+#: admin/tpl/setting/settings_inc.cache_mobile.php:25
+#: admin/tpl/setting/settings_inc.cache_mobile.php:65
+msgid "List of Mobile User Agents"
+msgstr "Lista użytkowników mobilnych"
+
+#: admin/tpl/setting/settings_inc.cache_mobile.php:62
+msgid "The default list WordPress uses is %s"
+msgstr "Domyślną listą WordPress jest %s"
+
+#: admin/tpl/setting/settings_inc.cache_mobile.php:59
+msgid "Any spaces should be escaped with a backslash before the space, %s."
+msgstr "Każdą spację należy zakończyć backslashem przed spacją, %s"
+
+#: admin/tpl/setting/settings_inc.cache_mobile.php:58
+msgid "SYNTAX: Each entry should be separated with a bar, %s."
+msgstr "SYNTAX: Każda pozycja powinna być oddzielona paskiem,%s"
+
+#: admin/tpl/setting/settings_inc.cache_mobile.php:15
+msgid "A site built with responsive design does not need to check this."
+msgstr "Responsywna witryna nie musi tego sprawdzać."
+
+#: admin/tpl/setting/settings_inc.cache_mobile.php:14
+msgid "When enabled, mobile views will be cached separately."
+msgstr "Po włączeniu mobilne widoki będą buforowane oddzielnie."
+
+#: admin/litespeed-cache-admin-error.class.php:200
+msgid "Failed to put contents into %s"
+msgstr "Nie udało się dodać zawartości do %s"
+
+#: lib/litespeed/litespeed-file.class.php:159
+#: lib/litespeed/litespeed-file.class.php:164
+msgid "File %s is not writable."
+msgstr "Plik %s nie jest zapisywalny."
+
+#: admin/litespeed-cache-admin-display.class.php:161
+msgid "Edit .htaccess"
+msgstr "Edycja .htaccess"
+
+#: admin/litespeed-cache-admin-display.class.php:158
+#: admin/tpl/setting/settings_cdn.php:234
+#: includes/litespeed-cache-gui.class.php:485 inc/gui.class.php:485
+msgid "Manage"
+msgstr "Zarządzaj/Edytuj"
+
+#: admin/tpl/setting/settings_general.php:86
+msgid "Default Front Page TTL"
+msgstr "Domyślny TTL strony głównej"
+
+#: includes/litespeed-cache-purge.class.php:449 inc/purge.class.php:449
+msgid "Notified LiteSpeed Web Server to purge the front page."
+msgstr "Powiadomiono serwer LiteSpeed w celu oczyszczenia strony głównej."
+
+#: admin/tpl/manage/manage_purge.php:7
+msgid "Purge Front Page"
+msgstr "Wyczyść stronę główną"
+
+#: admin/tpl/setting/settings_compatibilities.php:37
+msgid "After purging the cache, the view count should be updating."
+msgstr "Po oczyszczeniu pamięci podręcznej licznik wyświetleń powinien być aktualizowany."
+
+#: admin/tpl/setting/settings_compatibilities.php:34
+msgid "The ajax code can be found at"
+msgstr "Kod ajakx można znaleźć pod"
+
+#: admin/tpl/setting/settings_compatibilities.php:22
+msgid "Example:"
+msgstr "Przykład:"
+
+#: admin/tpl/setting/settings_compatibilities.php:21
+msgid "Update the ajax request to output the results to that div."
+msgstr "Zaktualizuj żądanie ajax, aby wyświetlić wyniki do tego div."
+
+#: admin/tpl/setting/settings_compatibilities.php:14
+msgid "e.g. Replace <br> <pre>%1$s</pre> with<br> <pre>%2$s</pre>"
+msgstr "e.g. Zamień <br> <pre>%1$s</pre> z <br> <pre>%2$s</pre>"
+
+#: admin/tpl/setting/settings_compatibilities.php:13
+msgid "Replace the following calls in the active theme's template files with a div or span with a unique ID."
+msgstr "Zamień następujące połączenia w plikach szablonów aktywnego motywu na div lub span z unikatowym identyfikatorem."
+
+#: admin/tpl/setting/settings_compatibilities.php:9
+msgid "To make LiteSpeed Cache compatible with WP-PostViews:"
+msgstr "Aby LiteSpeed Cache był kompatybilny z WP-PostViews:"
+
+#: admin/tpl/setting/settings_excludes.php:103
+msgid "All tags are cached by default."
+msgstr "Wszystkie tagi są domyślnie cache'owane."
+
+#: admin/tpl/setting/settings_excludes.php:65
+msgid "All categories are cached by default."
+msgstr "Wszystkie kategorie są cache'owane domyślnie."
+
+#: admin/litespeed-cache-admin-display.class.php:996
+msgid "To do an exact match, add %s to the end of the URL."
+msgstr "Aby wykonać dopasowanie typu exact match, dodaj symbol '$' na końcu adresu URL."
+
+#: admin/litespeed-cache-admin-display.class.php:992
+msgid "The URLs will be compared to the REQUEST_URI server variable."
+msgstr "Adresy URL zostaną porównane z zmienną serwera REQUEST_URI."
+
+#: admin/tpl/setting/settings_purge.php:57
+msgid "Select only the archive types that are currently used, the others can be left unchecked."
+msgstr "Wybierz tylko typy archiwów, które są aktualnie używane, pozostałe pozostają niezaznaczone."
+
+#: admin/tpl/inc/img_optm.initialize.php:22
+msgid "Notes"
+msgstr "Uwaga:"
+
+#: admin/tpl/setting/settings_general.php:44
+msgid "Use Network Admin Setting"
+msgstr "Użyj ustawień administratora sieci"
+
+#: admin/tpl/crawler.php:84 admin/tpl/esi_widget_edit.php:56
+#: admin/tpl/setting/settings_general.php:30
+msgid "Disable"
+msgstr "Wyłącz"
+
+#: admin/tpl/crawler.php:84 admin/tpl/setting/settings_general.php:36
+msgid "Enable"
+msgstr "Włącz"
+
+#: admin/tpl/setting/network_settings_general.php:15
+msgid "Enabling LiteSpeed Cache for WordPress here enables the cache for the network."
+msgstr "Włączenie buforu LiteSpeed w programie WordPress umożliwia buforowanie sieci."
+
+#: admin/tpl/setting/settings_inc.cache_object.php:5
+msgid "Disabled"
+msgstr "Wyłączony"
+
+#: admin/tpl/setting/settings_inc.cache_object.php:4
+msgid "Enabled"
+msgstr "Włączona"
+
+#: admin/litespeed-cache-admin-error.class.php:164
+msgid "Removed tag \"%s\" from list, ID does not exist."
+msgstr "Usunięto tag \"%s\" z listy, identyfikator nie istnieje."
+
+#: admin/litespeed-cache-admin-error.class.php:159
+msgid "Removed category \"%s\" from list, ID does not exist."
+msgstr "Usunięto kategorię \"%s\" z listy, identyfikator nie istnieje."
+
+#: admin/tpl/setting/settings_compatibilities.php:7
+msgid "Compatibility with WP-PostViews"
+msgstr "Zgodność z WP-PostViews"
+
+#: admin/tpl/setting/settings_excludes.php:133
+msgid "Do Not Cache Roles"
+msgstr "Nie zapisuj w pamięci podręcznej ról."
+
+#. Author URI of the plugin
+msgid "https://www.litespeedtech.com"
+msgstr "https://www.litespeedtech.com"
+
+#. Author of the plugin
+msgid "LiteSpeed Technologies"
+msgstr "LiteSpeed Technologies"
+
+#. Plugin Name of the plugin
+#: admin/tpl/inc/banner_promo.new_version.php:56
+#: admin/tpl/inc/admin_footer.php:6 includes/litespeed-cache-gui.class.php:477
+#: inc/gui.class.php:477
+msgid "LiteSpeed Cache"
+msgstr "LiteSpeed Cache"
+
+#: admin/litespeed-cache-admin-error.class.php:97
+msgid "The installed WordPress version is too old for the LiteSpeed Cache Plugin."
+msgstr "Zainstalowana wersja WordPress jest za stara na wtyczkę Cache LiteSpeed."
+
+#: admin/tpl/setting/settings_debug.php:45
+msgid "Outputs to WordPress debug log."
+msgstr "Wypisuje do dziennika debugowania WordPressa."
+
+#: admin/tpl/setting/settings_debug.php:70
+msgid "Debug Level"
+msgstr "Poziom debugowania"
+
+#: admin/tpl/settings.php:15
+msgid "Debug"
+msgstr "Debuguj"
+
+#: admin/tpl/setting/settings_debug.php:7
+msgid "Developer Testing"
+msgstr "Testy deweloperskie"
+
+#: admin/tpl/setting/settings_purge.php:30
+msgid "Term archive (include category, tag, and tax)"
+msgstr "Archiwum terminowe (zawiera kategorie, znaczniki i podatki)"
+
+#: admin/tpl/setting/settings_purge.php:28
+msgid "Daily archive"
+msgstr "Dzienne archiwum"
+
+#: admin/tpl/setting/settings_purge.php:27
+msgid "Monthly archive"
+msgstr "Miesięczne archiwum"
+
+#: admin/tpl/setting/settings_purge.php:26
+msgid "Yearly archive"
+msgstr "Roczne archiwum"
+
+#: admin/tpl/setting/settings_purge.php:24
+msgid "Post type archive"
+msgstr "Archiwum typu post"
+
+#: admin/tpl/setting/settings_purge.php:23
+msgid "Author archive"
+msgstr "Autor Archiwum"
+
+#: admin/tpl/setting/settings_purge.php:18
+msgid "Home page"
+msgstr "Strona główna"
+
+#: admin/tpl/setting/settings_purge.php:17
+msgid "Front page"
+msgstr "Strona główna"
+
+#: admin/tpl/setting/settings_purge.php:16
+msgid "All pages"
+msgstr "Wszystkie strony"
+
+#: admin/tpl/setting/settings_purge.php:73
+msgid "Select which pages will be automatically purged when posts are published/updated."
+msgstr "Wybierz, które strony zostaną automatycznie usunięte podczas publikowania / aktualizowania postów."
+
+#: admin/tpl/setting/settings_purge.php:50
+msgid "Auto Purge Rules For Publish/Update"
+msgstr "Zasady automatycznego oczyszczania dla publikowania / aktualizacji"
+
+#: admin/tpl/setting/settings_general.php:62
+msgid "Default Public Cache TTL"
+msgstr "Domyślny Publiczny Cache TTL"
+
+#: admin/tpl/esi_widget_edit.php:69
+#: admin/tpl/setting/settings_inc.cache_browser.php:24
+#: admin/tpl/setting/settings_general.php:65
+#: admin/tpl/setting/settings_general.php:77
+#: admin/tpl/setting/settings_general.php:89
+#: admin/tpl/setting/settings_general.php:101
+#: admin/tpl/setting/settings_general.php:114
+#: admin/tpl/setting/settings_general.php:127
+#: admin/tpl/setting/settings_general.php:140
+#: admin/tpl/setting/settings_inc.cache_object.php:63
+#: admin/tpl/setting/settings_crawler.php:40
+#: admin/tpl/setting/settings_crawler.php:52
+#: admin/tpl/setting/settings_crawler.php:64
+#: admin/tpl/setting/settings_optimize.php:93
+msgid "seconds"
+msgstr "sekund"
+
+#: admin/tpl/setting/settings_debug.php:54
+msgid "Admin IPs"
+msgstr "Adresy IP administratora"
+
+#: admin/tpl/setting/settings_general.php:15
+msgid "Enable LiteSpeed Cache"
+msgstr "Włącz LiteSpeed Cache"
+
+#: admin/tpl/network_settings.php:5 admin/tpl/settings.php:5
+#: admin/tpl/setting/settings_general.php:7
+msgid "General"
+msgstr "Główne"
+
+#: admin/tpl/settings.php:122
+msgid "LiteSpeed Cache Settings"
+msgstr "Ustawienia LiteSpeed Cache"
+
+#: includes/litespeed-cache-purge.class.php:186 inc/purge.class.php:186
+msgid "Notified LiteSpeed Web Server to purge all LSCache entries."
+msgstr "Powiadomiono LiteSpeed Web Server, aby wyczyścił wszystkie wpisy LSCache."
+
+#: admin/tpl/manage/manage_purge.php:39 admin/tpl/manage/manage_purge.php:45
+#: admin/tpl/manage/manage_purge.php:54 admin/tpl/manage/manage_purge.php:63
+#: admin/tpl/manage/manage_purge.php:72 admin/tpl/manage/manage_purge.php:81
+#: admin/tpl/manage/manage_purge.php:90
+#: includes/litespeed-cache-gui.class.php:511
+#: includes/litespeed-cache-gui.class.php:519
+#: includes/litespeed-cache-gui.class.php:527
+#: includes/litespeed-cache-gui.class.php:536
+#: includes/litespeed-cache-gui.class.php:546
+#: includes/litespeed-cache-gui.class.php:556
+#: includes/litespeed-cache-gui.class.php:566
+#: includes/litespeed-cache-gui.class.php:576 inc/gui.class.php:511
+#: inc/gui.class.php:519 inc/gui.class.php:527 inc/gui.class.php:536
+#: inc/gui.class.php:546 inc/gui.class.php:556 inc/gui.class.php:566
+#: inc/gui.class.php:576
+msgid "Purge All"
+msgstr "Opróżnij wszystko"
+
+#: admin/tpl/manage.php:22
+msgid "LiteSpeed Cache Management"
+msgstr "Zarządzanie LiteSpeed Cache"
+
+#: admin/litespeed-cache-admin-display.class.php:156
+#: admin/litespeed-cache-admin-display.class.php:248
+#: includes/litespeed-cache-gui.class.php:493 inc/gui.class.php:493
+msgid "Settings"
+msgstr "Ustawienia główne"
+
+#: admin/litespeed-cache-admin-error.class.php:145
+msgid "Invalid data in Test IPs."
+msgstr "Nieprawidłowe dane w Testowych numerach IP."
+
+#: admin/litespeed-cache-admin-error.class.php:142
+msgid "Invalid data in Admin IPs."
+msgstr "Nieprawidłowe dane w Administracyjnych numerach IP."
+
+#: admin/tpl/inc/help_tabs.php:24
+msgid "Support Forum"
+msgstr "Pomoc"
+
+#: admin/tpl/inc/help_tabs.php:22
+msgid "For more information:"
+msgstr "Więcej informacji:"
+
+#: admin/tpl/inc/help_tabs.php:7
+msgid "Overview"
+msgstr "Podgląd"

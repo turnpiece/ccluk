@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Themes - OnePress package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-11-05 02:03:11+0000\n"
+"PO-Revision-Date: 2019-02-27 21:42:36+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -11,13 +11,37 @@ msgstr ""
 "Language: nb_NO\n"
 "Project-Id-Version: Themes - OnePress\n"
 
-#. Description of the plugin/theme
+#. Description of the theme
 msgid "OnePress is an outstanding creative and flexible WordPress one page theme well suited for business website, portfolio, digital agency, product showcase, freelancers and everyone else who appreciate good design. The theme overall is an elegant and classic one, a fine example of Bootstrap 4 WordPress theme which compatibility with latest version of WooCommerce. (Live preview : https://demos.famethemes.com/onepress)"
 msgstr "OnePress er et enestående kreativt og fleksibelt én-sides WordPress-tema som er godt egnet for bedriftsnettsteder, porteføljer, digitale byråer, produktfremvisning, frilansere og alle andre som setter pris på godt design. Temaet er generslt elegant og klassisk, et godt eksempel på et Bootstrap 4-basert WordPress-tema som også er kompatibelt med den nyeste versjonen av WooCommerce. (Forhåndsvisning: https://demos.famethemes.com/onepress)"
 
-#. Theme Name of the plugin/theme
+#. Theme Name of the theme
 msgid "OnePress"
 msgstr "OnePress"
+
+#: inc/customize-configs/options-page.php:147
+msgid "Page Title Cover Alignment"
+msgstr "Justering av dekke på sidetittel"
+
+#: inc/customize-configs/options-page.php:124
+msgid "Page Title Alignment"
+msgstr "Justering av sidetittel"
+
+#: inc/customize-configs/options-colors.php:54
+msgid "Secondary Color"
+msgstr "Senkundærfarge"
+
+#: inc/customize-configs/section-gallery.php:331
+msgid "Enable Image Link"
+msgstr "Aktiver bildelenke"
+
+#: inc/customize-configs/options-single.php:46
+msgid "Enter content max width number, e.g : 800"
+msgstr "Oppgi bredde for innholdet, f.eks: 800"
+
+#: inc/customize-configs/options-single.php:45
+msgid "Single Content Max Width"
+msgstr "Maksimal bredde for enkeltinnhold"
 
 #: inc/customize-configs/options-single.php:30
 msgid "Right Sidebar"
@@ -31,11 +55,15 @@ msgstr "Ingen sidekolonne"
 msgid "Single Layout Sidebar"
 msgstr "Sidekolonne for enkeltvis oppsett"
 
-#: inc/class-sections-navigation.php:138
+#: inc/customize-configs/options-blog-posts.php:32
+msgid "Disable archive prefix"
+msgstr "Deaktiver prefiks for arkiv"
+
+#: inc/class-sections-navigation.php:186
 msgid "Label Color"
 msgstr "Farge på merkelapp"
 
-#: inc/class-sections-navigation.php:125
+#: inc/class-sections-navigation.php:166
 msgid "Label Background"
 msgstr "Bakgrunn for merkelapp"
 
@@ -87,6 +115,10 @@ msgstr "Seksjon klienter"
 msgid "Section: Slider"
 msgstr "Seksjon: Karusell"
 
+#: inc/admin/dashboard.php:239
+msgid "Demo Import"
+msgstr "Import av demo"
+
 #: inc/admin/dashboard.php:234
 msgid "Overview"
 msgstr "Oversikt"
@@ -95,21 +127,21 @@ msgstr "Oversikt"
 msgid "Settings saved"
 msgstr "Innstillinger lagret"
 
-#: functions.php:102
+#: functions.php:107
 msgid "Contact Form by WPForms"
 msgstr "Kontaktskjema fra WPForms"
 
-#: inc/extras.php:386
+#: inc/extras.php:411
 msgctxt "daily archives date format"
 msgid "F j, Y"
 msgstr "j. F Y"
 
-#: inc/extras.php:384
+#: inc/extras.php:409
 msgctxt "monthly archives date format"
 msgid "F Y"
 msgstr "F Y"
 
-#: inc/extras.php:382
+#: inc/extras.php:407
 msgctxt "yearly archives date format"
 msgid "Y"
 msgstr "Y"
@@ -147,11 +179,19 @@ msgstr "Tilpasset lengde på utdrag"
 msgid "Hide post categories"
 msgstr "Skjul kategorier for innlegg"
 
-#: inc/customize-configs/options-blog-posts.php:11
+#: inc/customize-configs/options-sections-navigation.php:9
+msgid "Sections Navigation"
+msgstr "Navigasjon for seksjoner"
+
+#: inc/customize-configs/options-blog-posts.php:15
 msgid "Blog Posts"
 msgstr "Blogginnlegg"
 
-#: inc/class-sections-navigation.php:83
+#: inc/class-sections-navigation.php:266
+msgid "Custom navigation label"
+msgstr "Tilpasset navigasjonsetikett"
+
+#: inc/class-sections-navigation.php:104
 msgid "Enable navigation labels"
 msgstr "Aktiver merkelapper for navigering"
 
@@ -163,7 +203,7 @@ msgstr "Hjem"
 msgid "Create a support ticket"
 msgstr "Opprett en brukerstøttesak"
 
-#: inc/customize-configs/options-header.php:282
+#: inc/customize-configs/options-header.php:345
 msgid "Transparent Logo Height in Pixel"
 msgstr "Høyde for gjennomsiktig logo i piksler"
 
@@ -211,23 +251,23 @@ msgstr "Skjul sidehode."
 msgid "Hide breadcrumb."
 msgstr "Skjul brødsmulesti."
 
-#: inc/customize-configs/options-header.php:147
+#: inc/customize-configs/options-header.php:179
 msgid "Only set if display site tagline."
 msgstr "Bare angi hvis du viser nettsidens beskrivelse."
 
-#: inc/customize-configs/options-header.php:145
+#: inc/customize-configs/options-header.php:177
 msgid "Site Tagline Color"
 msgstr "Farge på nettstedsbeskrivelse"
 
-#. Template Name of the plugin/theme
+#. Template Name of the theme
 msgid "Full Width - Contained Content"
 msgstr "Full bredde - innpakket innhold"
 
-#. Template Name of the plugin/theme
+#. Template Name of the theme
 msgid "Full Width - Stretched Content"
 msgstr "Fulle bredde - strukket innhold"
 
-#: inc/sanitize.php:252
+#: inc/sanitize.php:259
 msgid "Upgrade to %1s to unlock this feature."
 msgstr "Oppgrader til %1s for å låse op denne funksjonen."
 
@@ -291,8 +331,8 @@ msgstr "Forfatter"
 msgid "ID"
 msgstr "ID"
 
-#: inc/customize-configs/options-single.php:27
 #: inc/customize-configs/section-news.php:220
+#: inc/customize-configs/options-single.php:27
 msgid "Default"
 msgstr "Standard"
 
@@ -400,12 +440,12 @@ msgstr "Widgeter i sidebunnen"
 msgid "Text Color"
 msgstr "Tekstfarge"
 
-#: inc/customize-configs/options-footer.php:78
-#: inc/customize-configs/section-about.php:159
 #: inc/customize-configs/section-counter.php:131
-#: inc/customize-configs/section-features.php:156
-#: inc/customize-configs/section-services.php:158
+#: inc/customize-configs/options-footer.php:78
 #: inc/customize-configs/section-team.php:153
+#: inc/customize-configs/section-services.php:158
+#: inc/customize-configs/section-about.php:159
+#: inc/customize-configs/section-features.php:156
 msgid "Upgrade to <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> to be able to add more items and unlock other premium features!"
 msgstr "Oppgrader til <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Pluss</a> for å kunne legge til flere elementer og låse opp andre premium-funksjoner!"
 
@@ -413,51 +453,50 @@ msgstr "Oppgrader til <a target=\"_blank\" href=\"https://www.famethemes.com/plu
 msgid "Footer Socials"
 msgstr "Sosiale medier i sidebunn"
 
-#: inc/customize-configs/options-page.php:110
+#: inc/customize-configs/options-page.php:129
+#: inc/customize-configs/options-page.php:154
 msgid "Right"
 msgstr "Høyre"
 
-#: inc/customize-configs/options-page.php:109
+#: inc/customize-configs/options-page.php:128
+#: inc/customize-configs/options-page.php:153
 msgid "Left"
 msgstr "Venstre"
 
-#: inc/customize-configs/options-page.php:108
+#: inc/customize-configs/options-page.php:130
+#: inc/customize-configs/options-page.php:152
 msgid "Center"
 msgstr "Midten"
 
-#: inc/customize-configs/options-page.php:104
-msgid "Content Align"
-msgstr "Innretting av innhold"
-
-#: inc/customize-configs/options-page.php:71
+#: inc/customize-configs/options-page.php:83
 msgid "Color"
 msgstr "Farge"
 
-#: inc/customize-configs/options-page.php:55
+#: inc/customize-configs/options-page.php:65
 msgid "The page cover padding bottom in percent (%)."
 msgstr "Polstring i bunn av sidedeksel i prosent (%)."
 
-#: inc/customize-configs/options-page.php:54
+#: inc/customize-configs/options-page.php:64
 msgid "Padding Bottom"
 msgstr "Polstring i bunn"
 
-#: inc/customize-configs/options-page.php:40
+#: inc/customize-configs/options-page.php:48
 msgid "The page cover padding top in percent (%)."
 msgstr "Polstring i topp av sidedeksel i prosent (%)."
 
-#: inc/customize-configs/options-page.php:39
+#: inc/customize-configs/options-page.php:47
 msgid "Padding Top"
 msgstr "Polstring i topp"
 
-#: inc/customize-configs/options-page.php:26
+#: inc/customize-configs/options-page.php:32
 msgid "Check this box to disable the page title bar on all pages."
 msgstr "Kryss av her for å deaktivere sideoverskrift-linjen på alle sider."
 
-#: inc/customize-configs/options-page.php:24
+#: inc/customize-configs/options-page.php:30
 msgid "Disable Page Title bar?"
 msgstr "Dekativere sideoverskrift-linjen?"
 
-#: inc/customize-configs/options-page.php:8
+#: inc/customize-configs/options-page.php:12
 msgid "Page Title Area"
 msgstr "Område for sideoverskrift"
 
@@ -473,44 +512,44 @@ msgstr "Polstring for menyelementer"
 msgid "Navigation"
 msgstr "Navigasjon"
 
-#: inc/customize-configs/options-header.php:313
+#: inc/customize-configs/options-header.php:382
 msgid "Transparent Site Tagline Color"
 msgstr "Farge for gjennomsiktig nettstedsbeskrivelse"
 
-#: inc/customize-configs/options-header.php:297
+#: inc/customize-configs/options-header.php:363
 msgid "Transparent Site Title Color"
 msgstr "Farge for gjennomsiktig nettstedstittel"
 
-#: inc/customize-configs/options-header.php:264
+#: inc/customize-configs/options-header.php:325
 msgid "Transparent Retina Logo"
 msgstr "Gjennomsiktig retina-logo"
 
-#: inc/customize-configs/options-header.php:246
-#: inc/customize-configs/options-header.php:265
+#: inc/customize-configs/options-header.php:306
+#: inc/customize-configs/options-header.php:326
 msgid "Only apply when transparent header option is checked."
 msgstr "Anvend bare når gjennomsiktig sidehode er valgt."
 
-#: inc/customize-configs/options-header.php:244
+#: inc/customize-configs/options-header.php:304
 msgid "Transparent Logo"
 msgstr "Gjennomsiktig logo"
 
-#: inc/customize-configs/options-header.php:51
+#: inc/customize-configs/options-header.php:60
 msgid "Below Hero Slider"
 msgstr "Under skyvepanelet for helter"
 
-#: inc/customize-configs/options-header.php:50
+#: inc/customize-configs/options-header.php:59
 msgid "Top"
 msgstr "Topp"
 
-#: inc/customize-configs/options-header.php:47
+#: inc/customize-configs/options-header.php:56
 msgid "Header Position"
 msgstr "Posisjon for sidehode"
 
-#: inc/customize-configs/options-header.php:29
+#: inc/customize-configs/options-header.php:36
 msgid "Contained"
 msgstr "Inneholdt"
 
-#: inc/customize-configs/options-header.php:25
+#: inc/customize-configs/options-header.php:32
 msgid "Header Width"
 msgstr "Bredde av sidehode"
 
@@ -534,7 +573,7 @@ msgstr "Retina logo"
 msgid "All"
 msgstr "Alle"
 
-#: functions.php:183
+#: functions.php:196
 msgid "Footer %s"
 msgstr "Sidebunn %s"
 
@@ -630,16 +669,16 @@ msgstr "Importér demodata"
 msgid "Save time by import our demo data, your website will be set up and ready to customize in minutes. %s"
 msgstr "Spar tid ved å importere våre demodata. Nettstedet ditt vil bli ferdig satt opp og klart til å tilpasses på minutter. %s"
 
-#: inc/customize-configs/section-gallery.php:309
+#: inc/customize-configs/section-gallery.php:366
 msgid "Read More Text"
 msgstr "Les mer-tekst"
 
-#: inc/customize-configs/section-gallery.php:304
 #: section-parts/section-gallery.php:38
+#: inc/customize-configs/section-gallery.php:360
 msgid "View More"
 msgstr "Se mer"
 
-#: inc/customize-configs/section-gallery.php:294
+#: inc/customize-configs/section-gallery.php:349
 msgid "Read More Link"
 msgstr "Les mer-lenke"
 
@@ -663,103 +702,99 @@ msgstr "Sideoppsett, gjelder for alle sider, utenom hjemmeside og med tilpassede
 msgid "Site Layout"
 msgstr "Nettstedsoppsett"
 
-#: functions.php:106
+#: functions.php:111
 msgid "Famethemes Demo Importer"
 msgstr "Famethemes Demo-importør"
 
-#: functions.php:172
+#: functions.php:183
 msgid "WooCommerce Sidebar"
 msgstr "WooCommerce sidekolonne"
 
-#: inc/customize-configs/section-about.php:120
 #: inc/customize-configs/section-services.php:120
+#: inc/customize-configs/section-about.php:120
 msgid "1 Column"
 msgstr "1 kolonne"
 
-#: inc/customize-configs/section-gallery.php:278
+#: inc/customize-configs/section-gallery.php:313
 msgid "Enable Lightbox"
 msgstr "Aktivér Lightbox"
 
-#: inc/customize-configs/section-gallery.php:264
+#: inc/customize-configs/section-gallery.php:297
 msgid "Number items"
 msgstr "Antall elementer"
 
-#: inc/customize-configs/section-gallery.php:239
+#: inc/customize-configs/section-gallery.php:270
 msgid "Layout columns"
 msgstr "Kolonner i oppsett"
 
-#: inc/customize-configs/section-gallery.php:223
+#: inc/customize-configs/section-gallery.php:252
 msgid "Row Height"
 msgstr "Radhøyde"
 
-#: inc/customize-configs/section-gallery.php:207
+#: inc/customize-configs/section-gallery.php:234
 msgid "Item Spacing"
 msgstr "Avstand mellom elementer"
 
-#: inc/customize-configs/section-gallery.php:193
+#: inc/customize-configs/section-gallery.php:218
 msgid "Masonry"
 msgstr "Murverk"
 
-#: inc/customize-configs/section-gallery.php:192
+#: inc/customize-configs/section-gallery.php:217
 msgid "Justified"
 msgstr "Strukket"
 
-#: inc/class-config.php:51 inc/customize-configs/section-gallery.php:191
+#: inc/class-config.php:51 inc/customize-configs/section-gallery.php:216
 msgid "Slider"
 msgstr "Skyvepanel"
 
-#: inc/customize-configs/section-gallery.php:190
+#: inc/customize-configs/section-gallery.php:215
 msgid "Carousel"
 msgstr "Karusell"
 
-#: inc/customize-configs/section-gallery.php:189
+#: inc/customize-configs/section-gallery.php:214
 msgid "Grid"
 msgstr "Rutenett"
 
-#: inc/customize-configs/section-gallery.php:184
+#: inc/customize-configs/section-gallery.php:209
 msgid "Display"
 msgstr "Visning"
 
-#: inc/customize-configs/section-gallery.php:169
+#: inc/customize-configs/section-gallery.php:192
 msgid "Default, inside container"
 msgstr "Standard, inne i beholder"
 
 #: inc/customize-configs/options-footer.php:203
-#: inc/customize-configs/section-gallery.php:164
+#: inc/customize-configs/section-gallery.php:187
 msgid "Layout"
 msgstr "Oppsett"
 
-#: inc/customize-configs/section-gallery.php:150
-msgid "Select a page which have content contain [gallery] shortcode."
-msgstr "Velg en side som har kortkoden [gallery] i innholdet"
-
-#: inc/customize-configs/section-gallery.php:145
+#: inc/customize-configs/section-gallery.php:166
 msgid "Select Gallery Page"
 msgstr "Velg galleri-side"
 
-#: inc/customize-configs/section-gallery.php:128
+#: inc/customize-configs/section-gallery.php:147
 msgid "Page"
 msgstr "Side"
 
-#: inc/customize-configs/section-gallery.php:123
+#: inc/customize-configs/section-gallery.php:142
 msgid "Select Gallery Source"
 msgstr "Velg galleri-kilde"
 
-#: inc/class-config.php:142 inc/customize-configs/section-gallery.php:58
-#: section-parts/section-gallery.php:4
+#: section-parts/section-gallery.php:4 inc/class-config.php:142
+#: inc/customize-configs/section-gallery.php:68
 msgid "Gallery"
 msgstr "Galleri"
 
-#: inc/customize-configs/section-gallery.php:43
 #: section-parts/section-gallery.php:2
+#: inc/customize-configs/section-gallery.php:51
 msgid "gallery"
 msgstr "galleri"
 
-#: inc/class-config.php:141 inc/customize-configs/section-gallery.php:8
+#: inc/class-config.php:141 inc/customize-configs/section-gallery.php:12
 msgid "Section: Gallery"
 msgstr "Del: Galleri"
 
-#: inc/customize-configs/options-header.php:101
+#: inc/customize-configs/options-header.php:116
 msgid "Scroll to top when click to the site logo or site title, only apply on front page."
 msgstr "Rull til toppen når man klikker nettstedslogoen. Bare aktuelt for forsiden."
 
@@ -863,8 +898,8 @@ msgstr "Skjul nettstedsbeskrivelsen"
 msgid "Hide site title"
 msgstr "Skjul sideoverskrift"
 
-#: inc/customize-configs/section-features.php:167
 #: inc/customize-configs/section-services.php:165
+#: inc/customize-configs/section-features.php:167
 msgid "image"
 msgstr "bilde"
 
@@ -882,7 +917,7 @@ msgid_plural "%1$s actions required"
 msgstr[0] "%1$s handling påkrevet"
 msgstr[1] "%1$s handlinger påkrevet"
 
-#: inc/customize-configs/options.php:24 inc/customize-configs/options.php:42
+#: inc/customize-configs/options.php:26 inc/customize-configs/options.php:44
 msgid "Custom CSS"
 msgstr "Brukertilpasset CSS"
 
@@ -894,9 +929,9 @@ msgstr "Hvorfor velge oss"
 msgid "Services Layout Settings"
 msgstr "Innstillinger for oppsett av tjenester"
 
+#: inc/customize-configs/section-team.php:161
 #: inc/customize-configs/section-features.php:185
 #: inc/customize-configs/section-news.php:267
-#: inc/customize-configs/section-team.php:161
 msgid "Custom Link"
 msgstr "Egendefinert lenke"
 
@@ -912,13 +947,13 @@ msgstr "Innhold av fremhevede funksjoner"
 msgid "Features Layout Setting"
 msgstr "Innstillinger for oppsett av fremhevede funksjoner"
 
-#: inc/class-config.php:136 inc/customize-configs/section-features.php:58
-#: section-parts/section-features.php:4
+#: section-parts/section-features.php:4 inc/class-config.php:136
+#: inc/customize-configs/section-features.php:58
 msgid "Features"
 msgstr "Funksjoner"
 
-#: inc/customize-configs/section-features.php:43
 #: section-parts/section-features.php:2
+#: inc/customize-configs/section-features.php:43
 msgid "features"
 msgstr "fremhevede funksjoner"
 
@@ -926,20 +961,20 @@ msgstr "fremhevede funksjoner"
 msgid "Section: Features"
 msgstr "Del: Fremhevede funksjoner"
 
-#: inc/customize-configs/section-about.php:95
 #: inc/customize-configs/section-contact.php:95
 #: inc/customize-configs/section-counter.php:94
-#: inc/customize-configs/section-features.php:95
-#: inc/customize-configs/section-gallery.php:95
-#: inc/customize-configs/section-news.php:95
-#: inc/customize-configs/section-services.php:95
 #: inc/customize-configs/section-team.php:94
+#: inc/customize-configs/section-services.php:95
+#: inc/customize-configs/section-gallery.php:110
+#: inc/customize-configs/section-about.php:95
+#: inc/customize-configs/section-features.php:95
+#: inc/customize-configs/section-news.php:95
 msgid "Section Description"
 msgstr "Beskrivelse for del"
 
-#: inc/customize-configs/section-features.php:176
-#: inc/customize-configs/section-hero.php:581
 #: inc/customize-configs/section-services.php:174
+#: inc/customize-configs/section-hero.php:581
+#: inc/customize-configs/section-features.php:176
 msgid "Image"
 msgstr "Bilde"
 
@@ -964,10 +999,10 @@ msgid "URL"
 msgstr "URL"
 
 #: inc/customize-configs/options-footer.php:85
-#: inc/customize-configs/section-features.php:166
-#: inc/customize-configs/section-features.php:171
 #: inc/customize-configs/section-services.php:164
 #: inc/customize-configs/section-services.php:169
+#: inc/customize-configs/section-features.php:166
+#: inc/customize-configs/section-features.php:171
 msgid "Icon"
 msgstr "Ikon"
 
@@ -979,19 +1014,19 @@ msgstr "Sosialt nettverk"
 msgid "Socials"
 msgstr "Sosiale medier"
 
-#: inc/customize-configs/options-header.php:227
+#: inc/customize-configs/options-header.php:286
 msgid "Apply for front page template only."
 msgstr "Bruk kun på forsidemal."
 
-#: inc/customize-configs/options-header.php:225
+#: inc/customize-configs/options-header.php:284
 msgid "Header Transparent"
 msgstr "Gjennomsiktig sidehode"
 
-#: inc/template-tags.php:1659
+#: inc/template-tags.php:1784
 msgid "Subscribe"
 msgstr "Abonnér"
 
-#: inc/template-tags.php:1658
+#: inc/template-tags.php:1783
 msgid "Enter your e-mail address"
 msgstr "Skriv inn din epost-adresse"
 
@@ -1003,24 +1038,24 @@ msgstr "Brukerstøtte for %s WordPress-team blir ivaretatt gjennom FameThemes sy
 msgid "OnePress Documentation"
 msgstr "OnePress dukomentasjon"
 
+#: inc/customize-configs/section-team.php:117
+#: inc/customize-configs/section-services.php:119
 #: inc/customize-configs/section-about.php:119
 #: inc/customize-configs/section-features.php:118
-#: inc/customize-configs/section-services.php:119
-#: inc/customize-configs/section-team.php:117
 msgid "2 Columns"
 msgstr "2 kolonner"
 
+#: inc/customize-configs/section-team.php:116
+#: inc/customize-configs/section-services.php:118
 #: inc/customize-configs/section-about.php:118
 #: inc/customize-configs/section-features.php:117
-#: inc/customize-configs/section-services.php:118
-#: inc/customize-configs/section-team.php:116
 msgid "3 Columns"
 msgstr "3 kolonner"
 
+#: inc/customize-configs/section-team.php:115
+#: inc/customize-configs/section-services.php:117
 #: inc/customize-configs/section-about.php:117
 #: inc/customize-configs/section-features.php:116
-#: inc/customize-configs/section-services.php:117
-#: inc/customize-configs/section-team.php:115
 msgid "4 Columns"
 msgstr "4 kolonner"
 
@@ -1028,21 +1063,21 @@ msgstr "4 kolonner"
 msgid "Team Layout Settings"
 msgstr "Innstillinger for oppsett av team"
 
+#: inc/customize-configs/section-services.php:235
 #: inc/customize-configs/section-about.php:196
 #: inc/customize-configs/section-features.php:210
-#: inc/customize-configs/section-services.php:235
 msgid "Page Excerpt"
 msgstr "Side-utdrag"
 
+#: inc/customize-configs/section-services.php:234
 #: inc/customize-configs/section-about.php:195
 #: inc/customize-configs/section-features.php:209
-#: inc/customize-configs/section-services.php:234
 msgid "Full Page Content"
 msgstr "Fullside innhold"
 
+#: inc/customize-configs/section-services.php:229
 #: inc/customize-configs/section-about.php:190
 #: inc/customize-configs/section-features.php:204
-#: inc/customize-configs/section-services.php:229
 msgid "Item content source"
 msgstr "Kilde for innhold av element"
 
@@ -1054,52 +1089,52 @@ msgstr "Side for innhold om"
 msgid "Enable parallax effect (apply for first BG image only)"
 msgstr "Aktiver parallakse-effekt (virker kun for første bakgrunsbilde)"
 
-#: inc/customize-configs/options-header.php:86
+#: inc/customize-configs/options-header.php:99
 msgid "If you use logo and your logo is too tall, check this box to auto vertical align menu."
 msgstr "Kryss av hvis du bruker logo og en logo som er for høy, slik at menyen likevel kommer på linje med den."
 
-#: inc/customize-configs/options-header.php:84
+#: inc/customize-configs/options-header.php:97
 msgid "Center vertical align for menu"
 msgstr "Midtstill vertikal innretting av meny"
 
-#: inc/customize-configs/options-header.php:206
+#: inc/customize-configs/options-header.php:262
 msgid "Responsive Menu Button Color"
 msgstr "Farge på knapp i responsiv meny"
 
-#: inc/customize-configs/options-header.php:191
+#: inc/customize-configs/options-header.php:241
 msgid "Menu Link Hover/Active BG Color"
 msgstr "Bakgrunnsfarge for sveve/aktiv lenke i meny"
 
-#: inc/customize-configs/options-header.php:175
+#: inc/customize-configs/options-header.php:219
 msgid "Menu Link Hover/Active Color"
 msgstr "Farge for sveve/aktiv lenke i meny"
 
-#: inc/customize-configs/options-header.php:160
+#: inc/customize-configs/options-header.php:198
 msgid "Menu Link Color"
 msgstr "Farge på menylenke"
 
-#: inc/customize-configs/options-header.php:133
+#: inc/customize-configs/options-header.php:159
 msgid "Only set if you don't use an image logo."
 msgstr "Bruk kun hvis du ikke bruker bilde-logo"
 
-#: inc/customize-configs/options-header.php:131
+#: inc/customize-configs/options-header.php:157
 msgid "Site Title Color"
 msgstr "Nettstedets farge"
 
 #: inc/customize-configs/options-footer.php:270
-#: inc/customize-configs/options-header.php:115
+#: inc/customize-configs/options-header.php:135
 msgid "Background Color"
 msgstr "Bakgrunnsfarge"
 
-#: inc/customize-configs/options-header.php:7
+#: inc/customize-configs/options-header.php:12
 msgid "Header"
 msgstr "Overskrift"
 
-#: inc/customize-configs/options-colors.php:20
+#: inc/customize-configs/options-colors.php:28
 msgid "Primary Color"
 msgstr "Hovedfarge"
 
-#: inc/customize-configs/options-colors.php:7
+#: inc/customize-configs/options-colors.php:9
 msgid "Site Colors"
 msgstr "Nettstedsfarger"
 
@@ -1122,17 +1157,6 @@ msgstr "Video URL"
 #: inc/customize-configs/section-videolightbox.php:66
 msgid "Section heading"
 msgstr "Delens topptekst"
-
-#: inc/customize-configs/section-about.php:50
-#: inc/customize-configs/section-contact.php:50
-#: inc/customize-configs/section-counter.php:49
-#: inc/customize-configs/section-features.php:50
-#: inc/customize-configs/section-gallery.php:50
-#: inc/customize-configs/section-hero.php:51
-#: inc/customize-configs/section-news.php:50
-#: inc/customize-configs/section-videolightbox.php:50
-msgid "The section id, we will use this for link anchor."
-msgstr "Delens ID, vi bruker disse til å forankre lenker."
 
 #: inc/class-config.php:165 inc/customize-configs/section-videolightbox.php:8
 msgid "Section: Video Lightbox"
@@ -1186,7 +1210,7 @@ msgstr "OnePress-tema"
 msgid "OnePress Dashboard"
 msgstr "OnePress-kontrollpanel"
 
-#: inc/customize-configs/options-page.php:89
+#: inc/customize-configs/options-page.php:102
 #: inc/customize-configs/section-hero.php:274
 msgid "Background Overlay Color"
 msgstr "Farge for bakgrunnsoverlegg"
@@ -1195,26 +1219,25 @@ msgstr "Farge for bakgrunnsoverlegg"
 msgid "Section Order & Styling"
 msgstr "Rekkefølge og styling av del"
 
-#: inc/customize-configs/options-header.php:69
+#: inc/customize-configs/options-header.php:80
 msgid "Check this box to disable sticky header when scroll."
 msgstr "Kryss av her for å deaktivere klebrig sidehode under vertikal rulling"
 
-#: inc/customize-configs/options-header.php:67
+#: inc/customize-configs/options-header.php:78
 msgid "Disable Sticky Header?"
 msgstr "Deaktivere klebrig sidehode?"
 
-#. #-#-#-#-#  onepress.pot (OnePress 2.2.0)  #-#-#-#-#
-#. Template Name of the plugin/theme
+#. Template Name of the theme
 #: inc/customize-configs/options-single.php:29
 msgid "Left Sidebar"
 msgstr "Venstre sidekolonne"
 
-#: inc/customize-configs/options-header.php:28
-#: inc/customize-configs/section-gallery.php:170
+#: inc/customize-configs/section-gallery.php:193
+#: inc/customize-configs/options-header.php:35
 msgid "Full Width"
 msgstr "full bredde"
 
-#. Template Name of the plugin/theme
+#. Template Name of the theme
 msgid "Frontpage"
 msgstr "Forside"
 
@@ -1234,8 +1257,8 @@ msgstr "Klar for å publisere ditt første innlegg? <a href=\"%1$s\">Begynn her<
 msgid "Nothing Found"
 msgstr "Intet funnet"
 
-#: template-parts/content-list.php:65 template-parts/content-page.php:21
-#: template-parts/content-single.php:35 template-parts/content.php:39
+#: template-parts/content-list.php:78 template-parts/content-page.php:21
+#: template-parts/content.php:47 template-parts/content-single.php:35
 msgid "Pages:"
 msgstr "Sider:"
 
@@ -1243,7 +1266,7 @@ msgstr "Sider:"
 msgid "#services"
 msgstr "#tjenester"
 
-#: section-parts/section-contact.php:48
+#: section-parts/section-contact.php:52
 msgid "You can install %1$s plugin and go to Customizer &rarr; Section: Contact &rarr; Section Content to show a working contact form here."
 msgstr "Du kan installere utvidelsen %1$s og gå til Tilpass &rarr; Del: Kontakt &rarr; \"Innhold av del\" for å vise et fungerende kontaktskjema her."
 
@@ -1251,62 +1274,61 @@ msgstr "Du kan installere utvidelsen %1$s og gå til Tilpass &rarr; Del: Kontakt
 msgid "Search Results for: %s"
 msgstr "Søkeresultaer for: %s"
 
-#: inc/template-tags.php:480
+#: inc/template-tags.php:497
 msgid "Your comment is awaiting moderation."
 msgstr "Kommentaren din venter på moderering."
 
-#: inc/template-tags.php:475
+#: inc/template-tags.php:492
 msgid "Edit"
 msgstr "Editer"
 
-#. translators: 1: date, 2: time
-#: inc/template-tags.php:474
+#: inc/template-tags.php:485
 msgid "Reply"
 msgstr "Svar"
 
-#: inc/template-tags.php:466
+#: inc/template-tags.php:472
 msgid "Post author"
 msgstr "Innleggsforfatter"
 
-#: inc/template-tags.php:447
+#: inc/template-tags.php:452
 msgid "(Edit)"
 msgstr "(Rediger)"
 
-#: inc/template-tags.php:447
+#: inc/template-tags.php:452
 msgid "Pingback:"
 msgstr "Tilbakeping:"
 
-#: inc/template-tags.php:367
+#: inc/template-tags.php:370
 msgid "% Comments"
 msgstr "% kommentarer"
 
-#: inc/template-tags.php:367
+#: inc/template-tags.php:370
 msgid "1 Comment"
 msgstr "Én kommentar"
 
-#: inc/template-tags.php:367
+#: inc/template-tags.php:370
 msgid "Leave a comment"
 msgstr "Legg igjen en kommentar"
 
-#: inc/template-tags.php:361
+#: inc/template-tags.php:364
 msgid "Tagged %1$s"
 msgstr "Merket %1$s"
 
-#: inc/template-tags.php:355
+#: inc/template-tags.php:358
 msgid "Posted in %1$s"
 msgstr "Skrevet i %1$s"
 
 #. translators: used between list items, there is a space after the comma
-#: inc/template-tags.php:353 inc/template-tags.php:359
+#: inc/template-tags.php:356 inc/template-tags.php:362
 msgid ", "
 msgstr ", "
 
-#: inc/template-tags.php:332
+#: inc/template-tags.php:336
 msgctxt "post author"
 msgid "by %s"
 msgstr "av %s"
 
-#: inc/template-tags.php:327
+#: inc/template-tags.php:331
 msgctxt "post date"
 msgid "Posted on %s"
 msgstr "Postet på %s"
@@ -1375,13 +1397,13 @@ msgstr "Skjul kontaktskjemaet fullstendig."
 msgid "Contact Form Shortcode."
 msgstr "Kortkode for kontaktskjemaet"
 
-#: inc/class-config.php:123 inc/customize-configs/section-contact.php:58
-#: section-parts/section-contact.php:4
+#: section-parts/section-contact.php:4 inc/class-config.php:123
+#: inc/customize-configs/section-contact.php:58
 msgid "Get in touch"
 msgstr "Kom i kontakt"
 
-#: inc/customize-configs/section-contact.php:43
 #: section-parts/section-contact.php:2
+#: inc/customize-configs/section-contact.php:43
 msgid "contact"
 msgstr "kontakt"
 
@@ -1389,7 +1411,7 @@ msgstr "kontakt"
 msgid "Section: Contact"
 msgstr "Del: Kontakt"
 
-#: inc/customize-configs/section-news.php:292 section-parts/section-news.php:17
+#: section-parts/section-news.php:16 inc/customize-configs/section-news.php:292
 msgid "Read Our Blog"
 msgstr "Les bloggen vår"
 
@@ -1397,12 +1419,12 @@ msgstr "Les bloggen vår"
 msgid "Number of post to show"
 msgstr "Antall innlegg å vise"
 
-#: inc/class-config.php:148 inc/customize-configs/section-news.php:58
-#: section-parts/section-news.php:12
+#: section-parts/section-news.php:11 inc/class-config.php:148
+#: inc/customize-configs/section-news.php:58
 msgid "Latest News"
 msgstr "Siste nytt"
 
-#: inc/customize-configs/section-news.php:43 section-parts/section-news.php:2
+#: section-parts/section-news.php:2 inc/customize-configs/section-news.php:43
 msgid "news"
 msgstr "nyheter"
 
@@ -1414,12 +1436,12 @@ msgstr "Del: Nyheter"
 msgid "Team members"
 msgstr "Medlemmer av teamet"
 
-#: inc/class-config.php:160 inc/customize-configs/section-team.php:57
-#: section-parts/section-team.php:4
+#: section-parts/section-team.php:4 inc/class-config.php:160
+#: inc/customize-configs/section-team.php:57
 msgid "Our Team"
 msgstr "Vårt team"
 
-#: inc/customize-configs/section-team.php:42 section-parts/section-team.php:2
+#: section-parts/section-team.php:2 inc/customize-configs/section-team.php:42
 msgid "team"
 msgstr "team"
 
@@ -1453,13 +1475,13 @@ msgstr "Tittel"
 msgid "Counter content"
 msgstr "Innhold av teller"
 
-#: inc/class-config.php:130 inc/customize-configs/section-counter.php:57
-#: section-parts/section-counter.php:4
+#: section-parts/section-counter.php:4 inc/class-config.php:130
+#: inc/customize-configs/section-counter.php:57
 msgid "Our Numbers"
 msgstr "Våre tall"
 
-#: inc/customize-configs/section-counter.php:42
 #: section-parts/section-counter.php:2
+#: inc/customize-configs/section-counter.php:42
 msgid "counter"
 msgstr "teller"
 
@@ -1467,8 +1489,8 @@ msgstr "teller"
 msgid "Section: Counter"
 msgstr "Del: Teller"
 
-#: inc/customize-configs/section-features.php:163
 #: inc/customize-configs/section-services.php:161
+#: inc/customize-configs/section-features.php:163
 msgid "Custom icon"
 msgstr "Tilpasset ikon"
 
@@ -1476,13 +1498,13 @@ msgstr "Tilpasset ikon"
 msgid "Service content"
 msgstr "Innhold av tjeneste"
 
+#: section-parts/section-services.php:4 section-parts/section-hero.php:87
 #: inc/class-config.php:154 inc/customize-configs/section-services.php:58
-#: section-parts/section-hero.php:87 section-parts/section-services.php:4
 msgid "Our Services"
 msgstr "Våre tjenester"
 
-#: inc/customize-configs/section-services.php:43
 #: section-parts/section-services.php:2
+#: inc/customize-configs/section-services.php:43
 msgid "services"
 msgstr "tjenester"
 
@@ -1490,8 +1512,8 @@ msgstr "tjenester"
 msgid "Section: Services"
 msgstr "Del: Tjenester"
 
-#: inc/customize-configs/section-about.php:171
 #: inc/customize-configs/section-services.php:185
+#: inc/customize-configs/section-about.php:171
 msgid "Link to single page"
 msgstr "Lenke til enkeltside"
 
@@ -1499,79 +1521,80 @@ msgstr "Lenke til enkeltside"
 msgid "Hide item title"
 msgstr "Skjul overskrift for element"
 
-#: inc/customize-configs/section-about.php:162
 #: inc/customize-configs/section-services.php:180
+#: inc/customize-configs/section-about.php:162
 msgid "Select a page"
 msgstr "Velg en side"
 
-#: inc/customize-configs/options-footer.php:76
-#: inc/customize-configs/section-about.php:157
 #: inc/customize-configs/section-counter.php:129
-#: inc/customize-configs/section-features.php:154
-#: inc/customize-configs/section-services.php:156
+#: inc/customize-configs/options-footer.php:76
 #: inc/customize-configs/section-team.php:151
+#: inc/customize-configs/section-services.php:156
+#: inc/customize-configs/section-about.php:157
+#: inc/customize-configs/section-features.php:154
 msgid "[live_title]"
 msgstr "[live_title]"
 
-#: inc/customize-configs/section-about.php:132
 #: inc/customize-configs/section-contact.php:108
 #: inc/customize-configs/section-counter.php:105
-#: inc/customize-configs/section-features.php:130
-#: inc/customize-configs/section-gallery.php:108
-#: inc/customize-configs/section-services.php:132
 #: inc/customize-configs/section-team.php:127
+#: inc/customize-configs/section-services.php:132
+#: inc/customize-configs/section-gallery.php:125
+#: inc/customize-configs/section-about.php:132
+#: inc/customize-configs/section-features.php:130
 msgid "Section Content"
 msgstr "Innhold av del"
 
-#: inc/customize-configs/section-about.php:78
 #: inc/customize-configs/section-contact.php:78
 #: inc/customize-configs/section-counter.php:77
-#: inc/customize-configs/section-features.php:78
-#: inc/customize-configs/section-gallery.php:78
-#: inc/customize-configs/section-news.php:78
-#: inc/customize-configs/section-services.php:78
 #: inc/customize-configs/section-team.php:77
+#: inc/customize-configs/section-services.php:78
+#: inc/customize-configs/section-gallery.php:91
+#: inc/customize-configs/section-about.php:78
+#: inc/customize-configs/section-features.php:78
+#: inc/customize-configs/section-news.php:78
 msgid "Section Subtitle"
 msgstr "Undertittel for del"
 
-#: inc/customize-configs/section-about.php:73
+#: section-parts/section-contact.php:5 section-parts/section-counter.php:5
+#: section-parts/section-team.php:5 section-parts/section-services.php:5
+#: section-parts/section-gallery.php:5 section-parts/section-about.php:5
+#: section-parts/section-news.php:12
 #: inc/customize-configs/section-contact.php:73
 #: inc/customize-configs/section-counter.php:72
-#: inc/customize-configs/section-features.php:73
-#: inc/customize-configs/section-gallery.php:73
-#: inc/customize-configs/section-news.php:73
+#: inc/customize-configs/section-team.php:72
 #: inc/customize-configs/section-services.php:73
-#: inc/customize-configs/section-team.php:72 section-parts/section-about.php:5
-#: section-parts/section-contact.php:5 section-parts/section-counter.php:5
-#: section-parts/section-gallery.php:5 section-parts/section-news.php:13
-#: section-parts/section-services.php:5 section-parts/section-team.php:5
+#: inc/customize-configs/section-gallery.php:85
+#: inc/customize-configs/section-about.php:73
+#: inc/customize-configs/section-features.php:73
+#: inc/customize-configs/section-news.php:73
 msgid "Section subtitle"
 msgstr "Undertittel for del"
 
-#: inc/customize-configs/section-about.php:63
 #: inc/customize-configs/section-contact.php:63
 #: inc/customize-configs/section-counter.php:62
-#: inc/customize-configs/section-features.php:63
-#: inc/customize-configs/section-gallery.php:63
-#: inc/customize-configs/section-news.php:63
-#: inc/customize-configs/section-services.php:63
 #: inc/customize-configs/section-team.php:62
+#: inc/customize-configs/section-services.php:63
+#: inc/customize-configs/section-gallery.php:74
+#: inc/customize-configs/section-about.php:63
+#: inc/customize-configs/section-features.php:63
+#: inc/customize-configs/section-news.php:63
 msgid "Section Title"
 msgstr "Overskrift for del"
 
-#: inc/customize-configs/section-about.php:43 section-parts/section-about.php:2
+#: section-parts/section-about.php:2 inc/customize-configs/section-about.php:43
 msgid "about"
 msgstr "Om"
 
-#: inc/customize-configs/section-about.php:17
 #: inc/customize-configs/section-contact.php:17
 #: inc/customize-configs/section-counter.php:17
-#: inc/customize-configs/section-features.php:17
-#: inc/customize-configs/section-gallery.php:17
-#: inc/customize-configs/section-news.php:17
-#: inc/customize-configs/section-services.php:17
 #: inc/customize-configs/section-team.php:17
+#: inc/customize-configs/section-services.php:17
+#: inc/customize-configs/section-gallery.php:22
+#: inc/customize-configs/section-about.php:17
+#: inc/customize-configs/section-features.php:17
 #: inc/customize-configs/section-videolightbox.php:17
+#: inc/customize-configs/section-news.php:17
 msgid "Section Settings"
 msgstr "Innstillinger for delen"
 
@@ -1583,7 +1606,7 @@ msgstr "Del: Om"
 msgid "Button #2 Link"
 msgstr "Lenke på knapp nr 2"
 
-#: inc/customize-configs/section-hero.php:500 section-parts/section-hero.php:90
+#: section-parts/section-hero.php:90 inc/customize-configs/section-hero.php:500
 msgid "#contact"
 msgstr "#kontakt"
 
@@ -1591,7 +1614,7 @@ msgstr "#kontakt"
 msgid "Button #2 Text"
 msgstr "Tekst på knapp nr 2"
 
-#: inc/customize-configs/section-hero.php:486 section-parts/section-hero.php:89
+#: section-parts/section-hero.php:89 inc/customize-configs/section-hero.php:486
 msgid "Get Started"
 msgstr "Kom i gang"
 
@@ -1607,8 +1630,9 @@ msgstr "#om"
 msgid "Button #1 Text"
 msgstr "Tekst på knapp nr 1"
 
-#: inc/class-config.php:117 inc/customize-configs/section-about.php:58
-#: inc/customize-configs/section-hero.php:421 section-parts/section-about.php:4
+#: section-parts/section-about.php:4 inc/class-config.php:117
+#: inc/customize-configs/section-hero.php:421
+#: inc/customize-configs/section-about.php:58
 msgid "About Us"
 msgstr "Om oss"
 
@@ -1671,46 +1695,46 @@ msgstr "Kryss av her for å gjøre helt-delen fullskjerm."
 msgid "Make hero section full screen"
 msgstr "Gjør helte-delen fullskjerm"
 
-#: inc/customize-configs/section-about.php:48
 #: inc/customize-configs/section-contact.php:48
 #: inc/customize-configs/section-counter.php:47
-#: inc/customize-configs/section-features.php:48
-#: inc/customize-configs/section-gallery.php:48
-#: inc/customize-configs/section-hero.php:49
-#: inc/customize-configs/section-news.php:48
-#: inc/customize-configs/section-services.php:48
 #: inc/customize-configs/section-team.php:47
+#: inc/customize-configs/section-services.php:48
+#: inc/customize-configs/section-hero.php:49
+#: inc/customize-configs/section-gallery.php:57
+#: inc/customize-configs/section-about.php:48
+#: inc/customize-configs/section-features.php:48
 #: inc/customize-configs/section-videolightbox.php:48
+#: inc/customize-configs/section-news.php:48
 msgid "Section ID:"
 msgstr "Delens ID:"
 
-#: inc/customize-configs/section-hero.php:44 section-parts/section-hero.php:2
+#: section-parts/section-hero.php:2 inc/customize-configs/section-hero.php:44
 msgid "hero"
 msgstr "helt"
 
-#: inc/customize-configs/section-about.php:35
 #: inc/customize-configs/section-contact.php:35
 #: inc/customize-configs/section-counter.php:34
-#: inc/customize-configs/section-features.php:35
-#: inc/customize-configs/section-gallery.php:35
-#: inc/customize-configs/section-hero.php:37
-#: inc/customize-configs/section-news.php:35
-#: inc/customize-configs/section-services.php:35
 #: inc/customize-configs/section-team.php:35
+#: inc/customize-configs/section-services.php:35
+#: inc/customize-configs/section-hero.php:37
+#: inc/customize-configs/section-gallery.php:42
+#: inc/customize-configs/section-about.php:35
+#: inc/customize-configs/section-features.php:35
 #: inc/customize-configs/section-videolightbox.php:35
+#: inc/customize-configs/section-news.php:35
 msgid "Check this box to hide this section."
 msgstr "Kryss av her for å skjule denne delen."
 
-#: inc/customize-configs/section-about.php:33
 #: inc/customize-configs/section-contact.php:33
 #: inc/customize-configs/section-counter.php:32
-#: inc/customize-configs/section-features.php:33
-#: inc/customize-configs/section-gallery.php:33
-#: inc/customize-configs/section-hero.php:35
-#: inc/customize-configs/section-news.php:33
-#: inc/customize-configs/section-services.php:33
 #: inc/customize-configs/section-team.php:33
+#: inc/customize-configs/section-services.php:33
+#: inc/customize-configs/section-hero.php:35
+#: inc/customize-configs/section-gallery.php:40
+#: inc/customize-configs/section-about.php:33
+#: inc/customize-configs/section-features.php:33
 #: inc/customize-configs/section-videolightbox.php:33
+#: inc/customize-configs/section-news.php:33
 msgid "Hide this section?"
 msgstr "Skjule denne delen?"
 
@@ -1774,7 +1798,7 @@ msgstr "Deaktiver animasjonseffekten?"
 msgid "Global"
 msgstr "Globalt"
 
-#: inc/customize-configs/options.php:11
+#: inc/customize-configs/options.php:14
 msgid "Theme Options"
 msgstr "Temavalg"
 
@@ -1813,43 +1837,37 @@ msgstr "Element"
 msgid "Add an item"
 msgstr "Legg til et element"
 
-#: inc/template-tags.php:229
+#: inc/template-tags.php:228
 msgid "Menu"
 msgstr "Meny"
 
-#: header.php:25
+#: header.php:24
 msgid "Skip to content"
 msgstr "Gå til innhold"
 
-#. Translators: If there are characters in your language that are not supported
-#. by Raleway, translate this to 'off'. Do not translate into your own
-#. language.
-#: functions.php:308
+#: functions.php:323
 msgctxt "Raleway font: on or off"
 msgid "on"
 msgstr "on"
 
-#. Translators: If there are characters in your language that are not supported
-#. by Open Sans, translate this to 'off'. Do not translate into your own
-#. language.
-#: functions.php:302
+#: functions.php:316
 msgctxt "Open Sans font: on or off"
 msgid "on"
 msgstr "on"
 
-#: functions.php:161
+#: functions.php:170
 msgid "Sidebar"
 msgstr "Sidekolonne"
 
-#: functions.php:59
+#: functions.php:60
 msgid "Primary Menu"
 msgstr "Hovedmeny"
 
-#: inc/template-tags.php:1388
+#: inc/template-tags.php:1515
 msgid "%1$s theme by %2$s"
 msgstr "%1$s tema av %2$s"
 
-#: inc/template-tags.php:1386
+#: inc/template-tags.php:1513
 msgid "Copyright %1$s %2$s %3$s"
 msgstr "Opphavsrett %1$s %2$s %3$s"
 
@@ -1857,27 +1875,27 @@ msgstr "Opphavsrett %1$s %2$s %3$s"
 msgid "Back To Top"
 msgstr "Tilbake til toppen"
 
-#: inc/customize-configs/options-footer.php:123 inc/template-tags.php:1649
+#: inc/template-tags.php:1773 inc/customize-configs/options-footer.php:123
 msgid "Join our Newsletter"
 msgstr "Meld deg på vårt nyhetsbrev"
 
-#: inc/customize-configs/options-footer.php:46 inc/template-tags.php:1668
+#: inc/template-tags.php:1792 inc/customize-configs/options-footer.php:46
 msgid "Keep Updated"
 msgstr "Hold deg oppdatert"
 
-#: comments.php:91
+#: comments.php:93
 msgid "Comments are closed."
 msgstr "Stengt for kommentarer."
 
-#: comments.php:59 comments.php:79
+#: comments.php:59 comments.php:81
 msgid "Newer Comments"
 msgstr "Nyere kommentarer"
 
-#: comments.php:58 comments.php:78
+#: comments.php:58 comments.php:80
 msgid "Older Comments"
 msgstr "Eldre kommentarer"
 
-#: comments.php:55 comments.php:75
+#: comments.php:55 comments.php:77
 msgid "Comment navigation"
 msgstr "Navigering blant kommentarer"
 
@@ -1906,14 +1924,14 @@ msgstr "Det ser ikke ut som at det er noe her. Kanskje du kan prøve en av lenke
 msgid "Oops! That page can&rsquo;t be found."
 msgstr "Oops! Denne siden ble ikke funnet"
 
-#. Author URI of the plugin/theme
+#. Author URI of the theme
 msgid "http://www.famethemes.com"
 msgstr "http://www.famethemes.com"
 
-#. Author of the plugin/theme
+#. Author of the theme
 msgid "FameThemes"
 msgstr "FameThemes"
 
-#. Theme URI of the plugin/theme
+#. Theme URI of the theme
 msgid "https://www.famethemes.com/themes/onepress/"
 msgstr "https://www.famethemes.com/themes/onepress/"

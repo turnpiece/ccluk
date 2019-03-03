@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Themes - OnePress package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-10-29 17:04:43+0000\n"
+"PO-Revision-Date: 2019-01-11 10:31:55+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -11,13 +11,60 @@ msgstr ""
 "Language: zh_TW\n"
 "Project-Id-Version: Themes - OnePress\n"
 
-#. Description of the plugin/theme
+#. Description of the theme
 msgid "OnePress is an outstanding creative and flexible WordPress one page theme well suited for business website, portfolio, digital agency, product showcase, freelancers and everyone else who appreciate good design. The theme overall is an elegant and classic one, a fine example of Bootstrap 4 WordPress theme which compatibility with latest version of WooCommerce. (Live preview : https://demos.famethemes.com/onepress)"
 msgstr "OnePress 是一款優秀、兼具創意及彈性的 WordPress 一頁式佈景主題，尤其適合商務用途、作品集展示、數位行銷代理、產品展示、自由工作者以及任何喜歡好設計的人。佈景主題整體呈現出高雅經典的外觀，是個使用 Bootstrap 4 並相容於最新版 WooCommerce 的絕佳範例。在 https://demos.famethemes.com/onepress 上可以進行線上預覽。"
 
-#. Theme Name of the plugin/theme
+#. Theme Name of the theme
 msgid "OnePress"
 msgstr "OnePress"
+
+#: inc/customize-configs/section-contact.php:50
+#: inc/customize-configs/section-counter.php:49
+#: inc/customize-configs/section-hero.php:51
+#: inc/customize-configs/section-gallery.php:59
+#: inc/customize-configs/section-about.php:50
+#: inc/customize-configs/section-features.php:50
+#: inc/customize-configs/section-videolightbox.php:50
+#: inc/customize-configs/section-news.php:50
+msgid "The section ID should be English character, lowercase and no space."
+msgstr "區段 ID 必須是小寫英文字元，且不可包含空格。"
+
+#: inc/class-sections-navigation.php:87
+msgid "Disable the section navigation on mobile"
+msgstr "在行動裝置上隱藏區段導覽"
+
+#: inc/customize-configs/options-page.php:148
+msgid "Apply when the page display featured image as header cover."
+msgstr "頁面的精選圖片顯示為頁首封面時，便會套用這項設定。"
+
+#: inc/customize-configs/options-page.php:147
+msgid "Page Title Cover Alignment"
+msgstr "頁面標題封面對齊方式"
+
+#: inc/customize-configs/options-page.php:124
+msgid "Page Title Alignment"
+msgstr "頁面標題對齊方式"
+
+#: inc/customize-configs/options-blog-posts.php:51
+msgid "Hide placeholder if the post thumbnail not exists."
+msgstr "當文章沒有縮圖時，隱藏縮圖預留位置。"
+
+#: inc/customize-configs/options-blog-posts.php:49
+msgid "Hide thumbnail placeholder"
+msgstr "隱藏縮圖預留位置"
+
+#: inc/customize-configs/options-colors.php:54
+msgid "Secondary Color"
+msgstr "次要色彩"
+
+#: inc/customize-configs/section-gallery.php:331
+msgid "Enable Image Link"
+msgstr "啟用圖片連結"
+
+#: inc/customize-configs/section-gallery.php:171
+msgid "Select a page which have content contain [gallery] shortcode or gallery blocks."
+msgstr "選取內容包含 [gallery] 短代碼或 [圖庫] 區塊的頁面。"
 
 #: inc/customize-configs/options-single.php:46
 msgid "Enter content max width number, e.g : 800"
@@ -29,25 +76,25 @@ msgstr "單篇文章內容最大寬度"
 
 #: inc/customize-configs/options-single.php:30
 msgid "Right Sidebar"
-msgstr "右側邊欄"
+msgstr "右側資訊欄"
 
 #: inc/customize-configs/options-single.php:28
 msgid "No Sidebar"
-msgstr "無側邊欄"
+msgstr "無資訊欄"
 
 #: inc/customize-configs/options-single.php:24
 msgid "Single Layout Sidebar"
-msgstr "單篇文章版面配置側邊欄"
+msgstr "單篇文章版面配置資訊欄"
 
-#: inc/customize-configs/options-blog-posts.php:26
+#: inc/customize-configs/options-blog-posts.php:32
 msgid "Disable archive prefix"
 msgstr "停用彙整頁面標題前置詞"
 
-#: inc/class-sections-navigation.php:138
+#: inc/class-sections-navigation.php:186
 msgid "Label Color"
 msgstr "標籤色彩"
 
-#: inc/class-sections-navigation.php:125
+#: inc/class-sections-navigation.php:166
 msgid "Label Background"
 msgstr "標籤背景"
 
@@ -123,21 +170,21 @@ msgstr "設定已儲存"
 msgid "Plus Feature"
 msgstr "Plus 版功能"
 
-#: functions.php:102
+#: functions.php:107
 msgid "Contact Form by WPForms"
 msgstr "Contact Form by WPForms"
 
-#: inc/extras.php:386
+#: inc/extras.php:411
 msgctxt "daily archives date format"
 msgid "F j, Y"
 msgstr "Y 年 n 月 j 日"
 
-#: inc/extras.php:384
+#: inc/extras.php:409
 msgctxt "monthly archives date format"
 msgid "F Y"
 msgstr "Y 年 n 月"
 
-#: inc/extras.php:382
+#: inc/extras.php:407
 msgctxt "yearly archives date format"
 msgid "Y"
 msgstr "Y 年"
@@ -183,39 +230,39 @@ msgstr "隱藏文章類別"
 msgid "Sections Navigation"
 msgstr "區段導覽"
 
-#: inc/customize-configs/options-blog-posts.php:28
+#: inc/customize-configs/options-blog-posts.php:34
 msgid "Check this to disable archive prefix on category, date, tag page."
 msgstr "啟用這項設定後，便可為分類彙整、日期彙整、標籤彙整頁面停用對應的前置詞。"
 
-#: inc/customize-configs/options-blog-posts.php:11
+#: inc/customize-configs/options-blog-posts.php:15
 msgid "Blog Posts"
 msgstr "網站文章"
 
-#: inc/class-sections-navigation.php:208
+#: inc/class-sections-navigation.php:266
 msgid "Custom navigation label"
 msgstr "自訂導覽圓點標籤"
 
-#: inc/class-sections-navigation.php:192
+#: inc/class-sections-navigation.php:249
 msgid "Inverse dots color"
 msgstr "導覽至該區段時，啟用導覽圓點對換色彩"
 
-#: inc/class-sections-navigation.php:112
+#: inc/class-sections-navigation.php:146
 msgid "Dots inverse color"
 msgstr "導覽圓點對換色彩"
 
-#: inc/class-sections-navigation.php:98
+#: inc/class-sections-navigation.php:125
 msgid "Dots color"
 msgstr "導覽圓點色彩"
 
-#: inc/class-sections-navigation.php:84
+#: inc/class-sections-navigation.php:105
 msgid "By default navigation label is section title."
 msgstr "導覽圓點標籤預設為區段標題，各個區段可於下方自訂導覽圓點標籤。"
 
-#: inc/class-sections-navigation.php:83
+#: inc/class-sections-navigation.php:104
 msgid "Enable navigation labels"
 msgstr "啟用導覽圓點標籤"
 
-#: inc/class-sections-navigation.php:69 inc/class-sections-navigation.php:177
+#: inc/class-sections-navigation.php:70 inc/class-sections-navigation.php:232
 msgid "Enable in section navigation"
 msgstr "將這個區段加入區段導覽"
 
@@ -227,7 +274,7 @@ msgstr "首頁"
 msgid "Create a support ticket"
 msgstr "提出技術支援需求"
 
-#: inc/customize-configs/options-header.php:282
+#: inc/customize-configs/options-header.php:345
 msgid "Transparent Logo Height in Pixel"
 msgstr "透明標誌高度 (單位為 px)"
 
@@ -275,23 +322,23 @@ msgstr "隱藏頁首"
 msgid "Hide breadcrumb."
 msgstr "隱藏階層連結"
 
-#: inc/customize-configs/options-header.php:147
+#: inc/customize-configs/options-header.php:179
 msgid "Only set if display site tagline."
 msgstr "僅適用於網站說明。"
 
-#: inc/customize-configs/options-header.php:145
+#: inc/customize-configs/options-header.php:177
 msgid "Site Tagline Color"
 msgstr "網站說明色彩"
 
-#. Template Name of the plugin/theme
+#. Template Name of the theme
 msgid "Full Width - Contained Content"
 msgstr "全螢幕寬度 - 寬幅寬度內容"
 
-#. Template Name of the plugin/theme
+#. Template Name of the theme
 msgid "Full Width - Stretched Content"
 msgstr "全螢幕寬度 - 全幅寬度內容"
 
-#: inc/sanitize.php:252
+#: inc/sanitize.php:259
 msgid "Upgrade to %1s to unlock this feature."
 msgstr "升級至 %1s 以取得這項功能。"
 
@@ -355,8 +402,8 @@ msgstr "作者"
 msgid "ID"
 msgstr "ID"
 
-#: inc/customize-configs/options-single.php:27
 #: inc/customize-configs/section-news.php:220
+#: inc/customize-configs/options-single.php:27
 msgid "Default"
 msgstr "預設"
 
@@ -464,12 +511,12 @@ msgstr "頁尾小工具"
 msgid "Text Color"
 msgstr "文字色彩"
 
-#: inc/customize-configs/options-footer.php:78
-#: inc/customize-configs/section-about.php:159
 #: inc/customize-configs/section-counter.php:131
-#: inc/customize-configs/section-features.php:156
-#: inc/customize-configs/section-services.php:158
+#: inc/customize-configs/options-footer.php:78
 #: inc/customize-configs/section-team.php:153
+#: inc/customize-configs/section-services.php:158
+#: inc/customize-configs/section-about.php:159
+#: inc/customize-configs/section-features.php:156
 msgid "Upgrade to <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> to be able to add more items and unlock other premium features!"
 msgstr "升級至 <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a>，便能新增更多項目並取得其他付費功能！"
 
@@ -477,51 +524,50 @@ msgstr "升級至 <a target=\"_blank\" href=\"https://www.famethemes.com/plugins
 msgid "Footer Socials"
 msgstr "頁尾社交網路資料"
 
-#: inc/customize-configs/options-page.php:110
+#: inc/customize-configs/options-page.php:129
+#: inc/customize-configs/options-page.php:154
 msgid "Right"
 msgstr "靠右"
 
-#: inc/customize-configs/options-page.php:109
+#: inc/customize-configs/options-page.php:128
+#: inc/customize-configs/options-page.php:153
 msgid "Left"
 msgstr "靠左"
 
-#: inc/customize-configs/options-page.php:108
+#: inc/customize-configs/options-page.php:130
+#: inc/customize-configs/options-page.php:152
 msgid "Center"
 msgstr "置中"
 
-#: inc/customize-configs/options-page.php:104
-msgid "Content Align"
-msgstr "內容對齊方式"
-
-#: inc/customize-configs/options-page.php:71
+#: inc/customize-configs/options-page.php:83
 msgid "Color"
 msgstr "色彩"
 
-#: inc/customize-configs/options-page.php:55
+#: inc/customize-configs/options-page.php:65
 msgid "The page cover padding bottom in percent (%)."
 msgstr "宣傳內容的下邊框間距，單位為百分比 (%)。"
 
-#: inc/customize-configs/options-page.php:54
+#: inc/customize-configs/options-page.php:64
 msgid "Padding Bottom"
 msgstr "下邊框距離"
 
-#: inc/customize-configs/options-page.php:40
+#: inc/customize-configs/options-page.php:48
 msgid "The page cover padding top in percent (%)."
 msgstr "宣傳內容的上邊框間距，單位為百分比 (%)。"
 
-#: inc/customize-configs/options-page.php:39
+#: inc/customize-configs/options-page.php:47
 msgid "Padding Top"
 msgstr "上邊框距離"
 
-#: inc/customize-configs/options-page.php:26
+#: inc/customize-configs/options-page.php:32
 msgid "Check this box to disable the page title bar on all pages."
 msgstr "啟用這項設定後，便可在所有頁面停用頁面標題列。"
 
-#: inc/customize-configs/options-page.php:24
+#: inc/customize-configs/options-page.php:30
 msgid "Disable Page Title bar?"
 msgstr "停用頁面標題列"
 
-#: inc/customize-configs/options-page.php:8
+#: inc/customize-configs/options-page.php:12
 msgid "Page Title Area"
 msgstr "頁面標題區域"
 
@@ -537,44 +583,44 @@ msgstr "選單項目邊框間距"
 msgid "Navigation"
 msgstr "導覽"
 
-#: inc/customize-configs/options-header.php:313
+#: inc/customize-configs/options-header.php:382
 msgid "Transparent Site Tagline Color"
 msgstr "透明網站說明色彩"
 
-#: inc/customize-configs/options-header.php:297
+#: inc/customize-configs/options-header.php:363
 msgid "Transparent Site Title Color"
 msgstr "透明網站標題色彩"
 
-#: inc/customize-configs/options-header.php:264
+#: inc/customize-configs/options-header.php:325
 msgid "Transparent Retina Logo"
 msgstr "透明 Retina 標誌"
 
-#: inc/customize-configs/options-header.php:246
-#: inc/customize-configs/options-header.php:265
+#: inc/customize-configs/options-header.php:306
+#: inc/customize-configs/options-header.php:326
 msgid "Only apply when transparent header option is checked."
 msgstr "啟用 [透明頁首] 後才會產生效果。"
 
-#: inc/customize-configs/options-header.php:244
+#: inc/customize-configs/options-header.php:304
 msgid "Transparent Logo"
 msgstr "透明標誌"
 
-#: inc/customize-configs/options-header.php:51
+#: inc/customize-configs/options-header.php:60
 msgid "Below Hero Slider"
 msgstr "宣傳內容投影片輪播下方"
 
-#: inc/customize-configs/options-header.php:50
+#: inc/customize-configs/options-header.php:59
 msgid "Top"
 msgstr "頂端"
 
-#: inc/customize-configs/options-header.php:47
+#: inc/customize-configs/options-header.php:56
 msgid "Header Position"
 msgstr "頁首位置"
 
-#: inc/customize-configs/options-header.php:29
+#: inc/customize-configs/options-header.php:36
 msgid "Contained"
 msgstr "完整置於元素區域內"
 
-#: inc/customize-configs/options-header.php:25
+#: inc/customize-configs/options-header.php:32
 msgid "Header Width"
 msgstr "頁首寬度"
 
@@ -598,7 +644,7 @@ msgstr "Retina 標誌"
 msgid "All"
 msgstr "所有分類"
 
-#: functions.php:183
+#: functions.php:196
 msgid "Footer %s"
 msgstr "頁尾 %s"
 
@@ -694,30 +740,30 @@ msgstr "匯入示範資料"
 msgid "Save time by import our demo data, your website will be set up and ready to customize in minutes. %s"
 msgstr "匯入我們提供的示範資料便可大幅節省時間，而網站將會在幾分鐘內設定完畢並可供自訂。%s"
 
-#: inc/customize-configs/section-gallery.php:309
+#: inc/customize-configs/section-gallery.php:366
 msgid "Read More Text"
 msgstr "[檢閱更多] 連結文字"
 
-#: inc/customize-configs/section-gallery.php:304
 #: section-parts/section-gallery.php:38
+#: inc/customize-configs/section-gallery.php:360
 msgid "View More"
 msgstr "檢閱更多"
 
-#: inc/customize-configs/section-gallery.php:294
+#: inc/customize-configs/section-gallery.php:349
 msgid "Read More Link"
 msgstr "[檢閱更多] 連結"
 
 #: inc/customize-configs/options-global.php:31
 msgid "No sidebar"
-msgstr "無側邊欄"
+msgstr "無資訊欄"
 
 #: inc/customize-configs/options-global.php:30
 msgid "Left sidebar"
-msgstr "左側邊欄"
+msgstr "左側資訊欄"
 
 #: inc/customize-configs/options-global.php:29
 msgid "Right sidebar"
-msgstr "右側邊欄"
+msgstr "右側資訊欄"
 
 #: inc/customize-configs/options-global.php:26
 msgid "Site Layout, apply for all pages, exclude home page and custom page templates."
@@ -727,103 +773,99 @@ msgstr "網站版面配置會套用至所有頁面，但不包含首頁及頁面
 msgid "Site Layout"
 msgstr "網站版面配置"
 
-#: functions.php:106
+#: functions.php:111
 msgid "Famethemes Demo Importer"
 msgstr "Famethemes Demo Importer"
 
-#: functions.php:172
+#: functions.php:183
 msgid "WooCommerce Sidebar"
-msgstr "WooCommerce 側邊欄"
+msgstr "WooCommerce 資訊欄"
 
-#: inc/customize-configs/section-about.php:120
 #: inc/customize-configs/section-services.php:120
+#: inc/customize-configs/section-about.php:120
 msgid "1 Column"
 msgstr "1 欄"
 
-#: inc/customize-configs/section-gallery.php:278
+#: inc/customize-configs/section-gallery.php:313
 msgid "Enable Lightbox"
 msgstr "啟用燈箱效果"
 
-#: inc/customize-configs/section-gallery.php:264
+#: inc/customize-configs/section-gallery.php:297
 msgid "Number items"
 msgstr "項目數量"
 
-#: inc/customize-configs/section-gallery.php:239
+#: inc/customize-configs/section-gallery.php:270
 msgid "Layout columns"
 msgstr "項目行版面配置"
 
-#: inc/customize-configs/section-gallery.php:223
+#: inc/customize-configs/section-gallery.php:252
 msgid "Row Height"
 msgstr "項目列高"
 
-#: inc/customize-configs/section-gallery.php:207
+#: inc/customize-configs/section-gallery.php:234
 msgid "Item Spacing"
 msgstr "項目間距"
 
-#: inc/customize-configs/section-gallery.php:193
+#: inc/customize-configs/section-gallery.php:218
 msgid "Masonry"
 msgstr "柱狀"
 
-#: inc/customize-configs/section-gallery.php:192
+#: inc/customize-configs/section-gallery.php:217
 msgid "Justified"
 msgstr "左右對齊"
 
-#: inc/class-config.php:51 inc/customize-configs/section-gallery.php:191
+#: inc/class-config.php:51 inc/customize-configs/section-gallery.php:216
 msgid "Slider"
 msgstr "投影片輪播"
 
-#: inc/customize-configs/section-gallery.php:190
+#: inc/customize-configs/section-gallery.php:215
 msgid "Carousel"
 msgstr "輪播"
 
-#: inc/customize-configs/section-gallery.php:189
+#: inc/customize-configs/section-gallery.php:214
 msgid "Grid"
 msgstr "格線"
 
-#: inc/customize-configs/section-gallery.php:184
+#: inc/customize-configs/section-gallery.php:209
 msgid "Display"
 msgstr "顯示方式"
 
-#: inc/customize-configs/section-gallery.php:169
+#: inc/customize-configs/section-gallery.php:192
 msgid "Default, inside container"
 msgstr "在容器中顯示 (預設值)"
 
 #: inc/customize-configs/options-footer.php:203
-#: inc/customize-configs/section-gallery.php:164
+#: inc/customize-configs/section-gallery.php:187
 msgid "Layout"
 msgstr "版面配置"
 
-#: inc/customize-configs/section-gallery.php:150
-msgid "Select a page which have content contain [gallery] shortcode."
-msgstr "選取內容中包含 [gallery] 短代碼的頁面。"
-
-#: inc/customize-configs/section-gallery.php:145
+#: inc/customize-configs/section-gallery.php:166
 msgid "Select Gallery Page"
 msgstr "選取藝廊頁面"
 
-#: inc/customize-configs/section-gallery.php:128
+#: inc/customize-configs/section-gallery.php:147
 msgid "Page"
 msgstr "頁面"
 
-#: inc/customize-configs/section-gallery.php:123
+#: inc/customize-configs/section-gallery.php:142
 msgid "Select Gallery Source"
 msgstr "選取藝廊來源"
 
-#: inc/class-config.php:142 inc/customize-configs/section-gallery.php:58
-#: section-parts/section-gallery.php:4
+#: section-parts/section-gallery.php:4 inc/class-config.php:142
+#: inc/customize-configs/section-gallery.php:68
 msgid "Gallery"
 msgstr "藝廊"
 
-#: inc/customize-configs/section-gallery.php:43
 #: section-parts/section-gallery.php:2
+#: inc/customize-configs/section-gallery.php:51
 msgid "gallery"
 msgstr "gallery"
 
-#: inc/class-config.php:141 inc/customize-configs/section-gallery.php:8
+#: inc/class-config.php:141 inc/customize-configs/section-gallery.php:12
 msgid "Section: Gallery"
 msgstr "區段: 藝廊"
 
-#: inc/customize-configs/options-header.php:101
+#: inc/customize-configs/options-header.php:116
 msgid "Scroll to top when click to the site logo or site title, only apply on front page."
 msgstr "按一下網站標誌或網站標題便能返回頂端，這項效果僅適用於首頁。"
 
@@ -927,8 +969,8 @@ msgstr "隱藏網站說明"
 msgid "Hide site title"
 msgstr "隱藏網站標題"
 
-#: inc/customize-configs/section-features.php:167
 #: inc/customize-configs/section-services.php:165
+#: inc/customize-configs/section-features.php:167
 msgid "image"
 msgstr "圖片"
 
@@ -945,7 +987,7 @@ msgid "%1$s action required"
 msgid_plural "%1$s actions required"
 msgstr[0] "%1$s 項必要操作"
 
-#: inc/customize-configs/options.php:24 inc/customize-configs/options.php:42
+#: inc/customize-configs/options.php:26 inc/customize-configs/options.php:44
 msgid "Custom CSS"
 msgstr "自訂 CSS"
 
@@ -957,9 +999,9 @@ msgstr "為什麼選擇我們"
 msgid "Services Layout Settings"
 msgstr "[服務項目] 版面配置設定"
 
+#: inc/customize-configs/section-team.php:161
 #: inc/customize-configs/section-features.php:185
 #: inc/customize-configs/section-news.php:267
-#: inc/customize-configs/section-team.php:161
 msgid "Custom Link"
 msgstr "自訂連結"
 
@@ -975,13 +1017,13 @@ msgstr "精選內容"
 msgid "Features Layout Setting"
 msgstr "[精選內容] 版面配置設定"
 
-#: inc/class-config.php:136 inc/customize-configs/section-features.php:58
-#: section-parts/section-features.php:4
+#: section-parts/section-features.php:4 inc/class-config.php:136
+#: inc/customize-configs/section-features.php:58
 msgid "Features"
 msgstr "精選內容"
 
-#: inc/customize-configs/section-features.php:43
 #: section-parts/section-features.php:2
+#: inc/customize-configs/section-features.php:43
 msgid "features"
 msgstr "features"
 
@@ -989,20 +1031,20 @@ msgstr "features"
 msgid "Section: Features"
 msgstr "區段: 精選內容"
 
-#: inc/customize-configs/section-about.php:95
 #: inc/customize-configs/section-contact.php:95
 #: inc/customize-configs/section-counter.php:94
-#: inc/customize-configs/section-features.php:95
-#: inc/customize-configs/section-gallery.php:95
-#: inc/customize-configs/section-news.php:95
-#: inc/customize-configs/section-services.php:95
 #: inc/customize-configs/section-team.php:94
+#: inc/customize-configs/section-services.php:95
+#: inc/customize-configs/section-gallery.php:110
+#: inc/customize-configs/section-about.php:95
+#: inc/customize-configs/section-features.php:95
+#: inc/customize-configs/section-news.php:95
 msgid "Section Description"
 msgstr "區段內容說明"
 
-#: inc/customize-configs/section-features.php:176
-#: inc/customize-configs/section-hero.php:581
 #: inc/customize-configs/section-services.php:174
+#: inc/customize-configs/section-hero.php:581
+#: inc/customize-configs/section-features.php:176
 msgid "Image"
 msgstr "圖片"
 
@@ -1027,10 +1069,10 @@ msgid "URL"
 msgstr "網址"
 
 #: inc/customize-configs/options-footer.php:85
-#: inc/customize-configs/section-features.php:166
-#: inc/customize-configs/section-features.php:171
 #: inc/customize-configs/section-services.php:164
 #: inc/customize-configs/section-services.php:169
+#: inc/customize-configs/section-features.php:166
+#: inc/customize-configs/section-features.php:171
 msgid "Icon"
 msgstr "圖示"
 
@@ -1042,19 +1084,19 @@ msgstr "社交網路"
 msgid "Socials"
 msgstr "社交網路"
 
-#: inc/customize-configs/options-header.php:227
+#: inc/customize-configs/options-header.php:286
 msgid "Apply for front page template only."
 msgstr "這項效果僅適用於 [首頁] 範本。"
 
-#: inc/customize-configs/options-header.php:225
+#: inc/customize-configs/options-header.php:284
 msgid "Header Transparent"
 msgstr "透明頁首"
 
-#: inc/template-tags.php:1659
+#: inc/template-tags.php:1784
 msgid "Subscribe"
 msgstr "訂閱"
 
-#: inc/template-tags.php:1658
+#: inc/template-tags.php:1783
 msgid "Enter your e-mail address"
 msgstr "輸入你的電子郵件地址"
 
@@ -1066,24 +1108,24 @@ msgstr "%s 這款 WordPress 佈景主題的技術支援，是透過 FameThemes �
 msgid "OnePress Documentation"
 msgstr "OnePress 線上文件"
 
+#: inc/customize-configs/section-team.php:117
+#: inc/customize-configs/section-services.php:119
 #: inc/customize-configs/section-about.php:119
 #: inc/customize-configs/section-features.php:118
-#: inc/customize-configs/section-services.php:119
-#: inc/customize-configs/section-team.php:117
 msgid "2 Columns"
 msgstr "2 欄"
 
+#: inc/customize-configs/section-team.php:116
+#: inc/customize-configs/section-services.php:118
 #: inc/customize-configs/section-about.php:118
 #: inc/customize-configs/section-features.php:117
-#: inc/customize-configs/section-services.php:118
-#: inc/customize-configs/section-team.php:116
 msgid "3 Columns"
 msgstr "3 欄"
 
+#: inc/customize-configs/section-team.php:115
+#: inc/customize-configs/section-services.php:117
 #: inc/customize-configs/section-about.php:117
 #: inc/customize-configs/section-features.php:116
-#: inc/customize-configs/section-services.php:117
-#: inc/customize-configs/section-team.php:115
 msgid "4 Columns"
 msgstr "4 欄"
 
@@ -1091,21 +1133,21 @@ msgstr "4 欄"
 msgid "Team Layout Settings"
 msgstr "[團隊成員] 版面配置設定"
 
+#: inc/customize-configs/section-services.php:235
 #: inc/customize-configs/section-about.php:196
 #: inc/customize-configs/section-features.php:210
-#: inc/customize-configs/section-services.php:235
 msgid "Page Excerpt"
 msgstr "頁面摘要"
 
+#: inc/customize-configs/section-services.php:234
 #: inc/customize-configs/section-about.php:195
 #: inc/customize-configs/section-features.php:209
-#: inc/customize-configs/section-services.php:234
 msgid "Full Page Content"
 msgstr "完整頁面內容"
 
+#: inc/customize-configs/section-services.php:229
 #: inc/customize-configs/section-about.php:190
 #: inc/customize-configs/section-features.php:204
-#: inc/customize-configs/section-services.php:229
 msgid "Item content source"
 msgstr "項目內容來源"
 
@@ -1117,52 +1159,52 @@ msgstr "[關於] 內容頁面"
 msgid "Enable parallax effect (apply for first BG image only)"
 msgstr "啟用視差滾動效果，但效果僅會套用至第一張背景圖片"
 
-#: inc/customize-configs/options-header.php:86
+#: inc/customize-configs/options-header.php:99
 msgid "If you use logo and your logo is too tall, check this box to auto vertical align menu."
 msgstr "如果使用了標誌但標誌高度太高，核取這項設定後便可自動將選單垂直居中對齊。"
 
-#: inc/customize-configs/options-header.php:84
+#: inc/customize-configs/options-header.php:97
 msgid "Center vertical align for menu"
 msgstr "將選單垂直居中對齊"
 
-#: inc/customize-configs/options-header.php:206
+#: inc/customize-configs/options-header.php:262
 msgid "Responsive Menu Button Color"
 msgstr "回應式選單按鈕色彩"
 
-#: inc/customize-configs/options-header.php:191
+#: inc/customize-configs/options-header.php:241
 msgid "Menu Link Hover/Active BG Color"
 msgstr "選單連結游標停駐/點擊背景色彩"
 
-#: inc/customize-configs/options-header.php:175
+#: inc/customize-configs/options-header.php:219
 msgid "Menu Link Hover/Active Color"
 msgstr "選單連結游標停駐/點擊色彩"
 
-#: inc/customize-configs/options-header.php:160
+#: inc/customize-configs/options-header.php:198
 msgid "Menu Link Color"
 msgstr "選單連結色彩"
 
-#: inc/customize-configs/options-header.php:133
+#: inc/customize-configs/options-header.php:159
 msgid "Only set if you don't use an image logo."
 msgstr "僅適用於未使用圖片標誌。"
 
-#: inc/customize-configs/options-header.php:131
+#: inc/customize-configs/options-header.php:157
 msgid "Site Title Color"
 msgstr "網站標題色彩"
 
 #: inc/customize-configs/options-footer.php:270
-#: inc/customize-configs/options-header.php:115
+#: inc/customize-configs/options-header.php:135
 msgid "Background Color"
 msgstr "背景色彩"
 
-#: inc/customize-configs/options-header.php:7
+#: inc/customize-configs/options-header.php:12
 msgid "Header"
 msgstr "頁首"
 
-#: inc/customize-configs/options-colors.php:20
+#: inc/customize-configs/options-colors.php:28
 msgid "Primary Color"
 msgstr "主要色彩"
 
-#: inc/customize-configs/options-colors.php:7
+#: inc/customize-configs/options-colors.php:9
 msgid "Site Colors"
 msgstr "網站色彩"
 
@@ -1185,17 +1227,6 @@ msgstr "影片網址"
 #: inc/customize-configs/section-videolightbox.php:66
 msgid "Section heading"
 msgstr "區段標題"
-
-#: inc/customize-configs/section-about.php:50
-#: inc/customize-configs/section-contact.php:50
-#: inc/customize-configs/section-counter.php:49
-#: inc/customize-configs/section-features.php:50
-#: inc/customize-configs/section-gallery.php:50
-#: inc/customize-configs/section-hero.php:51
-#: inc/customize-configs/section-news.php:50
-#: inc/customize-configs/section-videolightbox.php:50
-msgid "The section id, we will use this for link anchor."
-msgstr "下方的區段 ID 會用於連結錨點。如果不瞭解何謂連結錨點，請不要變更預設值。"
 
 #: inc/class-config.php:165 inc/customize-configs/section-videolightbox.php:8
 msgid "Section: Video Lightbox"
@@ -1249,7 +1280,7 @@ msgstr "OnePress 佈景主題"
 msgid "OnePress Dashboard"
 msgstr "OnePress 控制台"
 
-#: inc/customize-configs/options-page.php:89
+#: inc/customize-configs/options-page.php:102
 #: inc/customize-configs/section-hero.php:274
 msgid "Background Overlay Color"
 msgstr "背景重疊色彩"
@@ -1258,26 +1289,25 @@ msgstr "背景重疊色彩"
 msgid "Section Order & Styling"
 msgstr "區段順序及樣式"
 
-#: inc/customize-configs/options-header.php:69
+#: inc/customize-configs/options-header.php:80
 msgid "Check this box to disable sticky header when scroll."
 msgstr "啟用這項設定後，便可停用頁面捲動時的固定式頁首。"
 
-#: inc/customize-configs/options-header.php:67
+#: inc/customize-configs/options-header.php:78
 msgid "Disable Sticky Header?"
 msgstr "停用固定式頁首"
 
-#. #-#-#-#-#  onepress.pot (OnePress 2.2.0)  #-#-#-#-#
-#. Template Name of the plugin/theme
+#. Template Name of the theme
 #: inc/customize-configs/options-single.php:29
 msgid "Left Sidebar"
-msgstr "左側邊欄"
+msgstr "左側資訊欄"
 
-#: inc/customize-configs/options-header.php:28
-#: inc/customize-configs/section-gallery.php:170
+#: inc/customize-configs/section-gallery.php:193
+#: inc/customize-configs/options-header.php:35
 msgid "Full Width"
 msgstr "全螢幕寬度"
 
-#. Template Name of the plugin/theme
+#. Template Name of the theme
 msgid "Frontpage"
 msgstr "首頁"
 
@@ -1297,8 +1327,8 @@ msgstr "準備好發佈你的第一篇文章嗎？<a href=\"%1$s\">由此開始<
 msgid "Nothing Found"
 msgstr "找不到符合的結果"
 
-#: template-parts/content-list.php:65 template-parts/content-page.php:21
-#: template-parts/content-single.php:35 template-parts/content.php:39
+#: template-parts/content-list.php:78 template-parts/content-page.php:21
+#: template-parts/content.php:47 template-parts/content-single.php:35
 msgid "Pages:"
 msgstr "頁次:"
 
@@ -1306,7 +1336,7 @@ msgstr "頁次:"
 msgid "#services"
 msgstr "#services"
 
-#: section-parts/section-contact.php:48
+#: section-parts/section-contact.php:52
 msgid "You can install %1$s plugin and go to Customizer &rarr; Section: Contact &rarr; Section Content to show a working contact form here."
 msgstr "安裝 %1$s 外掛後，請前往 [外觀自訂器] &rarr; [區段: 聯絡資訊] &rarr; [區段內容] 進行設定，便能在此顯示工作聯絡資訊。"
 
@@ -1314,62 +1344,61 @@ msgstr "安裝 %1$s 外掛後，請前往 [外觀自訂器] &rarr; [區段: 聯�
 msgid "Search Results for: %s"
 msgstr "搜尋「%s」的結果"
 
-#: inc/template-tags.php:480
+#: inc/template-tags.php:497
 msgid "Your comment is awaiting moderation."
 msgstr "你的留言正在進行審核。"
 
-#: inc/template-tags.php:475
+#: inc/template-tags.php:492
 msgid "Edit"
 msgstr "編輯"
 
-#. translators: 1: date, 2: time
-#: inc/template-tags.php:474
+#: inc/template-tags.php:485
 msgid "Reply"
 msgstr "回覆"
 
-#: inc/template-tags.php:466
+#: inc/template-tags.php:472
 msgid "Post author"
 msgstr "文章作者"
 
-#: inc/template-tags.php:447
+#: inc/template-tags.php:452
 msgid "(Edit)"
 msgstr "(編輯)"
 
-#: inc/template-tags.php:447
+#: inc/template-tags.php:452
 msgid "Pingback:"
 msgstr "通告:"
 
-#: inc/template-tags.php:367
+#: inc/template-tags.php:370
 msgid "% Comments"
 msgstr "% 則留言"
 
-#: inc/template-tags.php:367
+#: inc/template-tags.php:370
 msgid "1 Comment"
 msgstr "1 則留言"
 
-#: inc/template-tags.php:367
+#: inc/template-tags.php:370
 msgid "Leave a comment"
 msgstr "留下留言"
 
-#: inc/template-tags.php:361
+#: inc/template-tags.php:364
 msgid "Tagged %1$s"
 msgstr "標籤: %1$s"
 
-#: inc/template-tags.php:355
+#: inc/template-tags.php:358
 msgid "Posted in %1$s"
 msgstr "分類: %1$s"
 
 #. translators: used between list items, there is a space after the comma
-#: inc/template-tags.php:353 inc/template-tags.php:359
+#: inc/template-tags.php:356 inc/template-tags.php:362
 msgid ", "
 msgstr "、"
 
-#: inc/template-tags.php:332
+#: inc/template-tags.php:336
 msgctxt "post author"
 msgid "by %s"
 msgstr "由「%s」撰寫"
 
-#: inc/template-tags.php:327
+#: inc/template-tags.php:331
 msgctxt "post date"
 msgid "Posted on %s"
 msgstr "發佈於 %s"
@@ -1438,13 +1467,13 @@ msgstr "隱藏聯絡表單"
 msgid "Contact Form Shortcode."
 msgstr "聯絡表單短代碼"
 
-#: inc/class-config.php:123 inc/customize-configs/section-contact.php:58
-#: section-parts/section-contact.php:4
+#: section-parts/section-contact.php:4 inc/class-config.php:123
+#: inc/customize-configs/section-contact.php:58
 msgid "Get in touch"
 msgstr "保持聯絡"
 
-#: inc/customize-configs/section-contact.php:43
 #: section-parts/section-contact.php:2
+#: inc/customize-configs/section-contact.php:43
 msgid "contact"
 msgstr "contact"
 
@@ -1452,7 +1481,7 @@ msgstr "contact"
 msgid "Section: Contact"
 msgstr "區段: 聯絡資訊"
 
-#: inc/customize-configs/section-news.php:292 section-parts/section-news.php:17
+#: section-parts/section-news.php:16 inc/customize-configs/section-news.php:292
 msgid "Read Our Blog"
 msgstr "閱讀更多消息"
 
@@ -1460,12 +1489,12 @@ msgstr "閱讀更多消息"
 msgid "Number of post to show"
 msgstr "文章顯示數量"
 
-#: inc/class-config.php:148 inc/customize-configs/section-news.php:58
-#: section-parts/section-news.php:12
+#: section-parts/section-news.php:11 inc/class-config.php:148
+#: inc/customize-configs/section-news.php:58
 msgid "Latest News"
 msgstr "最新消息"
 
-#: inc/customize-configs/section-news.php:43 section-parts/section-news.php:2
+#: section-parts/section-news.php:2 inc/customize-configs/section-news.php:43
 msgid "news"
 msgstr "news"
 
@@ -1477,12 +1506,12 @@ msgstr "區段: 最新消息"
 msgid "Team members"
 msgstr "團隊成員"
 
-#: inc/class-config.php:160 inc/customize-configs/section-team.php:57
-#: section-parts/section-team.php:4
+#: section-parts/section-team.php:4 inc/class-config.php:160
+#: inc/customize-configs/section-team.php:57
 msgid "Our Team"
 msgstr "我們的團隊"
 
-#: inc/customize-configs/section-team.php:42 section-parts/section-team.php:2
+#: section-parts/section-team.php:2 inc/customize-configs/section-team.php:42
 msgid "team"
 msgstr "team"
 
@@ -1516,13 +1545,13 @@ msgstr "標題"
 msgid "Counter content"
 msgstr "統計數字內容"
 
-#: inc/class-config.php:130 inc/customize-configs/section-counter.php:57
-#: section-parts/section-counter.php:4
+#: section-parts/section-counter.php:4 inc/class-config.php:130
+#: inc/customize-configs/section-counter.php:57
 msgid "Our Numbers"
 msgstr "我們的表現"
 
-#: inc/customize-configs/section-counter.php:42
 #: section-parts/section-counter.php:2
+#: inc/customize-configs/section-counter.php:42
 msgid "counter"
 msgstr "counter"
 
@@ -1530,8 +1559,8 @@ msgstr "counter"
 msgid "Section: Counter"
 msgstr "區段: 統計數字"
 
-#: inc/customize-configs/section-features.php:163
 #: inc/customize-configs/section-services.php:161
+#: inc/customize-configs/section-features.php:163
 msgid "Custom icon"
 msgstr "自訂圖示"
 
@@ -1539,13 +1568,13 @@ msgstr "自訂圖示"
 msgid "Service content"
 msgstr "服務項目內容"
 
+#: section-parts/section-services.php:4 section-parts/section-hero.php:87
 #: inc/class-config.php:154 inc/customize-configs/section-services.php:58
-#: section-parts/section-hero.php:87 section-parts/section-services.php:4
 msgid "Our Services"
 msgstr "我們的服務項目"
 
-#: inc/customize-configs/section-services.php:43
 #: section-parts/section-services.php:2
+#: inc/customize-configs/section-services.php:43
 msgid "services"
 msgstr "services"
 
@@ -1553,8 +1582,8 @@ msgstr "services"
 msgid "Section: Services"
 msgstr "區段: 服務項目"
 
-#: inc/customize-configs/section-about.php:171
 #: inc/customize-configs/section-services.php:185
+#: inc/customize-configs/section-about.php:171
 msgid "Link to single page"
 msgstr "連結至單篇頁面"
 
@@ -1562,79 +1591,80 @@ msgstr "連結至單篇頁面"
 msgid "Hide item title"
 msgstr "隱藏項目標題"
 
-#: inc/customize-configs/section-about.php:162
 #: inc/customize-configs/section-services.php:180
+#: inc/customize-configs/section-about.php:162
 msgid "Select a page"
 msgstr "選取頁面"
 
-#: inc/customize-configs/options-footer.php:76
-#: inc/customize-configs/section-about.php:157
 #: inc/customize-configs/section-counter.php:129
-#: inc/customize-configs/section-features.php:154
-#: inc/customize-configs/section-services.php:156
+#: inc/customize-configs/options-footer.php:76
 #: inc/customize-configs/section-team.php:151
+#: inc/customize-configs/section-services.php:156
+#: inc/customize-configs/section-about.php:157
+#: inc/customize-configs/section-features.php:154
 msgid "[live_title]"
 msgstr "[live_title]"
 
-#: inc/customize-configs/section-about.php:132
 #: inc/customize-configs/section-contact.php:108
 #: inc/customize-configs/section-counter.php:105
-#: inc/customize-configs/section-features.php:130
-#: inc/customize-configs/section-gallery.php:108
-#: inc/customize-configs/section-services.php:132
 #: inc/customize-configs/section-team.php:127
+#: inc/customize-configs/section-services.php:132
+#: inc/customize-configs/section-gallery.php:125
+#: inc/customize-configs/section-about.php:132
+#: inc/customize-configs/section-features.php:130
 msgid "Section Content"
 msgstr "區段內容"
 
-#: inc/customize-configs/section-about.php:78
 #: inc/customize-configs/section-contact.php:78
 #: inc/customize-configs/section-counter.php:77
-#: inc/customize-configs/section-features.php:78
-#: inc/customize-configs/section-gallery.php:78
-#: inc/customize-configs/section-news.php:78
-#: inc/customize-configs/section-services.php:78
 #: inc/customize-configs/section-team.php:77
+#: inc/customize-configs/section-services.php:78
+#: inc/customize-configs/section-gallery.php:91
+#: inc/customize-configs/section-about.php:78
+#: inc/customize-configs/section-features.php:78
+#: inc/customize-configs/section-news.php:78
 msgid "Section Subtitle"
 msgstr "區段副標題"
 
-#: inc/customize-configs/section-about.php:73
+#: section-parts/section-contact.php:5 section-parts/section-counter.php:5
+#: section-parts/section-team.php:5 section-parts/section-services.php:5
+#: section-parts/section-gallery.php:5 section-parts/section-about.php:5
+#: section-parts/section-news.php:12
 #: inc/customize-configs/section-contact.php:73
 #: inc/customize-configs/section-counter.php:72
-#: inc/customize-configs/section-features.php:73
-#: inc/customize-configs/section-gallery.php:73
-#: inc/customize-configs/section-news.php:73
+#: inc/customize-configs/section-team.php:72
 #: inc/customize-configs/section-services.php:73
-#: inc/customize-configs/section-team.php:72 section-parts/section-about.php:5
-#: section-parts/section-contact.php:5 section-parts/section-counter.php:5
-#: section-parts/section-gallery.php:5 section-parts/section-news.php:13
-#: section-parts/section-services.php:5 section-parts/section-team.php:5
+#: inc/customize-configs/section-gallery.php:85
+#: inc/customize-configs/section-about.php:73
+#: inc/customize-configs/section-features.php:73
+#: inc/customize-configs/section-news.php:73
 msgid "Section subtitle"
 msgstr "區段副標題"
 
-#: inc/customize-configs/section-about.php:63
 #: inc/customize-configs/section-contact.php:63
 #: inc/customize-configs/section-counter.php:62
-#: inc/customize-configs/section-features.php:63
-#: inc/customize-configs/section-gallery.php:63
-#: inc/customize-configs/section-news.php:63
-#: inc/customize-configs/section-services.php:63
 #: inc/customize-configs/section-team.php:62
+#: inc/customize-configs/section-services.php:63
+#: inc/customize-configs/section-gallery.php:74
+#: inc/customize-configs/section-about.php:63
+#: inc/customize-configs/section-features.php:63
+#: inc/customize-configs/section-news.php:63
 msgid "Section Title"
 msgstr "區段標題"
 
-#: inc/customize-configs/section-about.php:43 section-parts/section-about.php:2
+#: section-parts/section-about.php:2 inc/customize-configs/section-about.php:43
 msgid "about"
 msgstr "about"
 
-#: inc/customize-configs/section-about.php:17
 #: inc/customize-configs/section-contact.php:17
 #: inc/customize-configs/section-counter.php:17
-#: inc/customize-configs/section-features.php:17
-#: inc/customize-configs/section-gallery.php:17
-#: inc/customize-configs/section-news.php:17
-#: inc/customize-configs/section-services.php:17
 #: inc/customize-configs/section-team.php:17
+#: inc/customize-configs/section-services.php:17
+#: inc/customize-configs/section-gallery.php:22
+#: inc/customize-configs/section-about.php:17
+#: inc/customize-configs/section-features.php:17
 #: inc/customize-configs/section-videolightbox.php:17
+#: inc/customize-configs/section-news.php:17
 msgid "Section Settings"
 msgstr "區段設定"
 
@@ -1646,7 +1676,7 @@ msgstr "區段: 關於"
 msgid "Button #2 Link"
 msgstr "第二顆按鈕的連結"
 
-#: inc/customize-configs/section-hero.php:500 section-parts/section-hero.php:90
+#: section-parts/section-hero.php:90 inc/customize-configs/section-hero.php:500
 msgid "#contact"
 msgstr "#contact"
 
@@ -1654,7 +1684,7 @@ msgstr "#contact"
 msgid "Button #2 Text"
 msgstr "第二顆按鈕的文字"
 
-#: inc/customize-configs/section-hero.php:486 section-parts/section-hero.php:89
+#: section-parts/section-hero.php:89 inc/customize-configs/section-hero.php:486
 msgid "Get Started"
 msgstr "開始使用"
 
@@ -1670,8 +1700,9 @@ msgstr "#about"
 msgid "Button #1 Text"
 msgstr "第一顆按鈕的文字"
 
-#: inc/class-config.php:117 inc/customize-configs/section-about.php:58
-#: inc/customize-configs/section-hero.php:421 section-parts/section-about.php:4
+#: section-parts/section-about.php:4 inc/class-config.php:117
+#: inc/customize-configs/section-hero.php:421
+#: inc/customize-configs/section-about.php:58
 msgid "About Us"
 msgstr "關於我們"
 
@@ -1734,46 +1765,46 @@ msgstr "啟用這項設定後，便可以全螢幕寬度顯示宣傳內容。"
 msgid "Make hero section full screen"
 msgstr "以全螢幕寬度顯示宣傳內容"
 
-#: inc/customize-configs/section-about.php:48
 #: inc/customize-configs/section-contact.php:48
 #: inc/customize-configs/section-counter.php:47
-#: inc/customize-configs/section-features.php:48
-#: inc/customize-configs/section-gallery.php:48
-#: inc/customize-configs/section-hero.php:49
-#: inc/customize-configs/section-news.php:48
-#: inc/customize-configs/section-services.php:48
 #: inc/customize-configs/section-team.php:47
+#: inc/customize-configs/section-services.php:48
+#: inc/customize-configs/section-hero.php:49
+#: inc/customize-configs/section-gallery.php:57
+#: inc/customize-configs/section-about.php:48
+#: inc/customize-configs/section-features.php:48
 #: inc/customize-configs/section-videolightbox.php:48
+#: inc/customize-configs/section-news.php:48
 msgid "Section ID:"
 msgstr "區段 ID:"
 
-#: inc/customize-configs/section-hero.php:44 section-parts/section-hero.php:2
+#: section-parts/section-hero.php:2 inc/customize-configs/section-hero.php:44
 msgid "hero"
 msgstr "hero"
 
-#: inc/customize-configs/section-about.php:35
 #: inc/customize-configs/section-contact.php:35
 #: inc/customize-configs/section-counter.php:34
-#: inc/customize-configs/section-features.php:35
-#: inc/customize-configs/section-gallery.php:35
-#: inc/customize-configs/section-hero.php:37
-#: inc/customize-configs/section-news.php:35
-#: inc/customize-configs/section-services.php:35
 #: inc/customize-configs/section-team.php:35
+#: inc/customize-configs/section-services.php:35
+#: inc/customize-configs/section-hero.php:37
+#: inc/customize-configs/section-gallery.php:42
+#: inc/customize-configs/section-about.php:35
+#: inc/customize-configs/section-features.php:35
 #: inc/customize-configs/section-videolightbox.php:35
+#: inc/customize-configs/section-news.php:35
 msgid "Check this box to hide this section."
 msgstr "啟用這項設定後，便可隱藏這個區段。"
 
-#: inc/customize-configs/section-about.php:33
 #: inc/customize-configs/section-contact.php:33
 #: inc/customize-configs/section-counter.php:32
-#: inc/customize-configs/section-features.php:33
-#: inc/customize-configs/section-gallery.php:33
-#: inc/customize-configs/section-hero.php:35
-#: inc/customize-configs/section-news.php:33
-#: inc/customize-configs/section-services.php:33
 #: inc/customize-configs/section-team.php:33
+#: inc/customize-configs/section-services.php:33
+#: inc/customize-configs/section-hero.php:35
+#: inc/customize-configs/section-gallery.php:40
+#: inc/customize-configs/section-about.php:33
+#: inc/customize-configs/section-features.php:33
 #: inc/customize-configs/section-videolightbox.php:33
+#: inc/customize-configs/section-news.php:33
 msgid "Hide this section?"
 msgstr "隱藏這個區段"
 
@@ -1837,7 +1868,7 @@ msgstr "停用動畫效果"
 msgid "Global"
 msgstr "全域設定"
 
-#: inc/customize-configs/options.php:11
+#: inc/customize-configs/options.php:14
 msgid "Theme Options"
 msgstr "佈景主題選項"
 
@@ -1876,43 +1907,37 @@ msgstr "項目"
 msgid "Add an item"
 msgstr "新增項目"
 
-#: inc/template-tags.php:229
+#: inc/template-tags.php:228
 msgid "Menu"
 msgstr "選單"
 
-#: header.php:25
+#: header.php:24
 msgid "Skip to content"
 msgstr "跳至主內容區"
 
-#. Translators: If there are characters in your language that are not supported
-#. by Raleway, translate this to 'off'. Do not translate into your own
-#. language.
-#: functions.php:308
+#: functions.php:323
 msgctxt "Raleway font: on or off"
 msgid "on"
 msgstr "on"
 
-#. Translators: If there are characters in your language that are not supported
-#. by Open Sans, translate this to 'off'. Do not translate into your own
-#. language.
-#: functions.php:302
+#: functions.php:316
 msgctxt "Open Sans font: on or off"
 msgid "on"
 msgstr "on"
 
-#: functions.php:161
+#: functions.php:170
 msgid "Sidebar"
-msgstr "側邊欄"
+msgstr "資訊欄"
 
-#: functions.php:59
+#: functions.php:60
 msgid "Primary Menu"
 msgstr "主要選單"
 
-#: inc/template-tags.php:1388
+#: inc/template-tags.php:1515
 msgid "%1$s theme by %2$s"
 msgstr "本站採用 %2$s 開發的 %1$s 佈景主題"
 
-#: inc/template-tags.php:1386
+#: inc/template-tags.php:1513
 msgid "Copyright %1$s %2$s %3$s"
 msgstr "《%3$s》版權所有 %1$s %2$s"
 
@@ -1920,27 +1945,27 @@ msgstr "《%3$s》版權所有 %1$s %2$s"
 msgid "Back To Top"
 msgstr "返回頂端"
 
-#: inc/customize-configs/options-footer.php:123 inc/template-tags.php:1649
+#: inc/template-tags.php:1773 inc/customize-configs/options-footer.php:123
 msgid "Join our Newsletter"
 msgstr "訂閱電子報"
 
-#: inc/customize-configs/options-footer.php:46 inc/template-tags.php:1668
+#: inc/template-tags.php:1792 inc/customize-configs/options-footer.php:46
 msgid "Keep Updated"
 msgstr "關注我們"
 
-#: comments.php:91
+#: comments.php:93
 msgid "Comments are closed."
 msgstr "留言功能已關閉。"
 
-#: comments.php:59 comments.php:79
+#: comments.php:59 comments.php:81
 msgid "Newer Comments"
 msgstr "較新的留言"
 
-#: comments.php:58 comments.php:78
+#: comments.php:58 comments.php:80
 msgid "Older Comments"
 msgstr "較舊的留言"
 
-#: comments.php:55 comments.php:75
+#: comments.php:55 comments.php:77
 msgid "Comment navigation"
 msgstr "留言導覽"
 
@@ -1962,20 +1987,20 @@ msgstr "常用類別"
 
 #: 404.php:26
 msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
-msgstr "在這裡找不到任何相符內容。請改用以下連結或使用搜尋功能。"
+msgstr "在這裡找不到符合條件的項目，請改用以下連結或使用搜尋功能。"
 
 #: 404.php:15
 msgid "Oops! That page can&rsquo;t be found."
-msgstr "很抱歉，找不到這個頁面。"
+msgstr "很抱歉，找不到符合條件的頁面。"
 
-#. Author URI of the plugin/theme
+#. Author URI of the theme
 msgid "http://www.famethemes.com"
 msgstr "https://www.famethemes.com"
 
-#. Author of the plugin/theme
+#. Author of the theme
 msgid "FameThemes"
 msgstr "FameThemes"
 
-#. Theme URI of the plugin/theme
+#. Theme URI of the theme
 msgid "https://www.famethemes.com/themes/onepress/"
 msgstr "https://www.famethemes.com/themes/onepress/"

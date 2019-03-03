@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - BuddyPress - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2019-02-23 10:41:12+0000\n"
+"PO-Revision-Date: 2019-03-02 20:46:49+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -81,6 +81,26 @@ msgid "%s <span class=\"screen-reader-text\">Comment</span>"
 msgid_plural "%s <span class=\"screen-reader-text\">Comments</span>"
 msgstr[0] "%s <span class=\"screen-reader-text\">yorum</span>"
 msgstr[1] "%s <span class=\"screen-reader-text\">yorum</span>"
+
+#: bp-friends/bp-friends-filters.php:66
+msgid "BuddyPress Friend Requests (Sent)"
+msgstr "BuddyPress arkadaş istekleri (Gönderilen)"
+
+#: bp-friends/bp-friends-filters.php:71
+msgid "BuddyPress Friend Requests (Received)"
+msgstr "BuddyPress arkadaş istekleri (Alınan)"
+
+#: bp-friends/bp-friends-functions.php:1020
+msgid "Pending Friend Requests (Sent)"
+msgstr "Bekleyen arkadaş istekleri (Gönderilen)"
+
+#: bp-friends/bp-friends-functions.php:1083
+msgid "Pending Friend Requests (Received)"
+msgstr "Bekleyen arkadaş istekleri (Alınan)"
+
+#: bp-friends/bp-friends-functions.php:946
+msgid "Initiated By Me"
+msgstr "Benim başlattıklarım"
 
 #: bp-xprofile/bp-xprofile-filters.php:640
 msgid "BuddyPress Extended Profile Data"
@@ -236,9 +256,90 @@ msgstr "Alıcılar"
 msgid "Status"
 msgstr "Durum"
 
+#: bp-groups/bp-groups-filters.php:379
+msgid "BuddyPress Group Memberships"
+msgstr "BuddyPress grup üyelikleri"
+
+#: bp-groups/bp-groups-filters.php:384
+msgid "BuddyPress Pending Group Membership Requests"
+msgstr "BuddyPress bekleyen grup üyelik istekleri"
+
+#: bp-groups/bp-groups-filters.php:389
+msgid "BuddyPress Pending Group Invitations (Received)"
+msgstr "BuddyPress bekleyen grup davetleri (Alınan)"
+
+#: bp-core/classes/class-bp-admin.php:659
+msgid "With every BuddyPress version, we strive to make internal improvements to performance and code quality in addition to introducing new features and fixes. In BuddyPress 4.0, we've improved PHP compatibility both in our codebase and in our automated testing tools; we've reworked some automated tests for faster performance; we've ensured compatibility with upcoming changes in WordPress; and we've fixed a number of bugs in the formatting and sending of emails."
+msgstr "Her BuddyPress sürümüyle, yeni özellikler ve düzeltmelerin yanı sıra performans ve kod kalitesinde içsel iyileştirmeler yapmaya çalışıyoruz. BuddyPress 4.0'da hem kod tabanımızda hem de otomatik test araçlarımızda PHP uyumluluğu geliştirdik; daha hızlı performans için bazı otomatik testler yaptık; WordPress'te yapılacak değişikliklerle uyumluluk sağladık ve e-postaların biçimlendirilmesinde ve gönderilmesinde bazı hataları düzelttik."
+
+#: bp-groups/bp-groups-filters.php:394
+msgid "BuddyPress Pending Group Invitations (Sent)"
+msgstr "BuddyPress bekleyen grup davetleri (Gönderilen)"
+
+#: bp-groups/bp-groups-functions.php:2692
+#: bp-groups/bp-groups-functions.php:2914
+msgid "Invited By"
+msgstr "Davet eden"
+
+#: bp-groups/bp-groups-functions.php:2698
+msgid "Creator"
+msgstr "Oluşturan"
+
+#: bp-groups/bp-groups-functions.php:2785
+msgid "Pending Group Membership Requests"
+msgstr "Bekleyen grup üyelik istekleri"
+
+#: bp-groups/bp-groups-functions.php:2844
+msgid "Sent To"
+msgstr "Gönderilen"
+
+#: bp-groups/bp-groups-functions.php:2855
+msgid "Pending Group Invitations (Sent)"
+msgstr "Bekleyen grup davetleri (Gönderilen)"
+
+#: bp-groups/bp-groups-functions.php:2925
+msgid "Pending Group Invitations (Received)"
+msgstr "Bekleyen grup davetleri (Alınan)"
+
+#: bp-members/screens/register.php:77
+msgid "You must indicate that you have read and agreed to the Privacy Policy."
+msgstr "Gizlilik politikasını okuduğunuzu ve kabul ettiğinizi belirtmelisiniz."
+
+#: bp-messages/bp-messages-functions.php:709
+msgid "Thread URL"
+msgstr "Konu bağlantısı"
+
+#: bp-core/classes/class-bp-admin.php:656
+msgid "BuddyPress 3.0 introduced a new set of default templates, which we call \"Nouveau\". In 4.0, we've fixed bugs and smoothed the edges in these templates, including more accessible markup and improved appearance on mobile devices."
+msgstr "BuddyPress 3.0, \"Nouveau\" olarak adlandırdığımız yeni bir varsayılan şablonlar dizisi oluşturdu. 4.0'da, daha erişilebilir işaretleme ve mobil cihazlarda daha iyi görünme dahil, bu şablonlardaki kenarları yumuşattık ve düzelttik."
+
+#: bp-core/classes/class-bp-admin.php:658
+msgid "BuddyPress: leaner, faster, stronger"
+msgstr "BuddyPress: daha yalın, daha hızlı, daha güçlü"
+
 #: bp-core/classes/class-bp-admin.php:655
 msgid "Nouveau template improvements"
 msgstr "Nouveau şablon iyileştirmeleri"
+
+#: bp-core/classes/class-bp-admin.php:653
+msgid "BuddyPress 4.0 also integrates with WordPress 4.9.8's Privacy Policy tools. When you create or update your Privacy Policy, BP will suggest text that's specifically tailored to the kinds of social data generated on a BuddyPress site. And will prompt registering users to agree to the Privacy Policy, if your theme supports it."
+msgstr "BuddyPress 4.0 ayrıca WordPress 4.9.8'in gizlilik politikası araçlarına entegredir. Gizlilik politikanızı oluşturduğunuzda veya güncellediğinizde, BP, bir BuddyPress sitesinde oluşturulan sosyal veri türlerine özel olarak uyarlanmış bir metin önerir. Ayrıca temanız destekliyorsa kullanıcılardan gizlilik politikasını kabul etmelerini isteyecektir."
+
+#: bp-core/classes/class-bp-admin.php:651
+msgid "The new \"Export Data\" Settings panel lets users request an export of all BuddyPress data they've created. BuddyPress integrates seamlessly with the data export functionality introduced in WordPress 4.9.8, and BP data is included in exports that are initiated either from the Export Data panel or via WP's Tools > Export Personal Data interface."
+msgstr "Yeni \"Verileri dışa aktar\" ayarlar paneli kullanıcıların oluşturdukları tüm BuddyPress verilerinin dışa aktarılmasını isteme olanağı sağlar. BuddyPress, WordPress 4.9.8'de sunulan verileri dışa aktarma işlevselliği ile sorunsuz bir şekilde bütünleşir ve BP verileri, verileri dışa aktar panelinden veya WP'nin Araçlar > Kişisel verileri dışa aktar arabiriminden başlatılan dışa aktarmalara dahil edilir."
+
+#: bp-core/classes/class-bp-admin.php:641
+msgid "BuddyPress boasts a proud history of letting community members and managers control their data, independent of third-party, commercial entities. In this spirit, as well as the spirit of recent regulations like the EU's General Data Protection Regulation (GDPR), BuddyPress 4.0 introduces a suite of tools allowing users and site admins to manage member data and privacy."
+msgstr "BuddyPress, topluluk üyelerinin ve yöneticilerinin, üçüncü taraf ticari varlıklardan bağımsız olarak verilerini kontrol etmelerine izin vermekten gurur duymaktadır. Bu bağlamda, Kişisel verileri koruma kanunu (KVKK) gibi son düzenlemelerin ruhunun yanı sıra, BuddyPress 4.0, kullanıcıların ve site yöneticilerinin üye verilerini ve gizliliğini yönetmelerine izin veren bir araçlar seti sunar."
+
+#: bp-core/classes/class-bp-admin.php:645
+msgid "Screenshot of Export Data settings panel"
+msgstr "Verileri dışa aktar ayarları panelinin ekran görüntüsü"
+
+#: bp-core/classes/class-bp-admin.php:647
+msgid "Improved user control over data exports"
+msgstr "Veri dışa aktarma üzerinde gelişmiş kullanıcı kontrolü"
 
 #: bp-core/classes/class-bp-admin.php:639
 msgid "New tools for data control and privacy"
@@ -248,6 +349,38 @@ msgstr "Veri kontrolü ve gizliliği için yeni araçlar"
 msgctxt "section heading"
 msgid "New in BuddyPress"
 msgstr "BuddyPress'teki Yenilikler"
+
+#: bp-core/classes/class-bp-admin.php:594
+msgid "We use cookies on group, member, and activity directories to keep track of a user's browsing preferences. These preferences include the last-selected values of the sort and filter dropdowns, as well as pagination information. These cookies contain no personal data, and are deleted after 24 hours."
+msgstr "Kullanıcının tarama tercihlerini takip etmek için grup, üye ve etkinlik dizinlerinde çerezleri kullanırız. Bu tercihler, sıralama ve filtre açılan alanlarının son seçilen değerlerini ve ayrıca sayfalandırma bilgilerini içerir. Bu çerezler kişisel veri içermez ve 24 saat sonra silinir."
+
+#: bp-core/classes/class-bp-admin.php:597
+msgid "When a logged-in user creates a new group, we use a number of cookies to keep track of the group creation process. These cookies contain no personal data, and are deleted either upon the successful creation of the group or after 24 hours."
+msgstr "Oturum açan bir kullanıcı yeni bir grup oluşturduğunda, grup oluşturma işlemini takip etmek için bir dizi çerez kullanırız. Bu çerezler kişisel veri içermez ve grubun başarılı bir şekilde oluşturulmasından sonra veya 24 saat sonra silinir."
+
+#: bp-core/classes/class-bp-admin.php:592
+msgid "We use a cookie to show success and failure messages to logged-in users, in response to certain actions, like joining a group. These cookies contain no personal data, and are deleted immediately after the next page load."
+msgstr "Bir gruba katılmak gibi belirli eylemlere karşlık olarak oturum açan kullanıcılara başarı ve hata mesajlarını göstermek için bir çerez kullanıyoruz. Bu çerezler kişisel veri içermez ve bir sonraki sayfa yüklenmesinden hemen sonra silinir."
+
+#: bp-core/classes/class-bp-admin.php:586
+msgid "The content of private messages is visible only to the sender and the recipients of the message. With the exception of site administrators, who can read all private messages, private message content is never visible to other users or site visitors. Site administrators may delete the content of any message."
+msgstr "Özel mesajların içeriği yalnızca mesajın göndereni ve alıcısı tarafından görülebilir. Tüm özel mesajları okuyabilen site yöneticileri hariç, özel mesaj içeriği asla diğer kullanıcılar veya site ziyaretçileri tarafından görülemez. Site yöneticileri herhangi bir mesajın içeriğini silebilir."
+
+#: bp-core/classes/class-bp-admin.php:590
+msgid "In this section you should describe the BuddyPress-specific cookies that your site collects. The suggested text describes the default cookies."
+msgstr "Bu bölümde sitenizin topladığı BuddyPress'e özgü çerezleri tanımlamalısınız. Önerilen metin varsayılan çerezleri açıklar."
+
+#: bp-core/classes/class-bp-admin.php:578
+msgid "The content of activity items obey the same privacy rules as the contexts in which the activity items are created. For example, activity updates created in a user's profile is publicly visible, while activity items generated in a private group are visible only to members of that group. Site administrators can view all activity items, regardless of context."
+msgstr "Etkinlik öğelerinin içeriği, etkinlik öğelerinin oluşturulduğu içeriklerle aynı gizlilik kurallarına uyar. Örneğin, bir kullanıcının profilinde oluşturulan etkinlik güncellemeleri herkese açık görünürken, özel bir grupta oluşturulan etkinlik öğeleri yalnızca o grubun üyeleri tarafından görülebilir. Site yöneticileri, içeriğinden bağımsız olarak tüm etkinlik öğelerini görüntüleyebilir."
+
+#: bp-core/classes/class-bp-admin.php:579
+msgid "Activity items may be deleted at any time by users who created them. Site administrators can edit all activity items."
+msgstr "Etkinlik öğeleri, onları oluşturan kullanıcılar tarafından herhangi bir zamanda silinebilir. Site yöneticileri tüm etkinlik öğelerini düzenleyebilir."
+
+#: bp-core/classes/class-bp-admin.php:584
+msgid "In this section you should describe any personal data related to private messages."
+msgstr "Bu bölümde özel mesajlarla ilgili kişisel verileri tanımlamanız gerekir."
 
 #: bp-core/classes/class-bp-admin.php:577
 msgid "This site records certain user actions, in the form of \"activity\" data. Activity includes updates and comments posted directly to activity streams, as well as descriptions of other actions performed while using the site, such as new friendships, newly joined groups, and profile updates."

@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - WordPress Importer - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-08-30 11:45:16+0000\n"
+"PO-Revision-Date: 2019-02-07 14:10:01+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -103,7 +103,7 @@ msgstr "- Selecteer -"
 
 #: wordpress-importer.php:321
 msgid "or assign posts to an existing user:"
-msgstr "of berichten toewijzen aan een bestaande gebruiker:"
+msgstr "of wijs berichten toe aan een bestaande gebruiker:"
 
 #: wordpress-importer.php:372
 msgid "Failed to create new user for %s. Their posts will be attributed to the current user."
@@ -183,7 +183,7 @@ msgstr "Howdy! Upload je WordPress eXtended RSS (WXR) bestand en wij importeren 
 
 #: wordpress-importer.php:1152
 msgid "Choose a WXR (.xml) file to upload, then click Upload file and import."
-msgstr "Een WXR (.xml) bestand kiezen om te uploaden, klik daarna op 'Bestand uploaden en importeren'"
+msgstr "Kies een WXR(.xml)-bestand om te uploaden, klik daarna op 'Bestand uploaden en importeren'"
 
 #: wordpress-importer.php:1226
 msgid "Import <strong>posts, pages, comments, custom fields, categories, and tags</strong> from a WordPress export file."

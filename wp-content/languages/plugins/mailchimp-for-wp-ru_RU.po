@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - MailChimp for WordPress - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-08-07 18:49:24+0000\n"
+"PO-Revision-Date: 2019-02-19 17:07:36+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,10 @@ msgstr ""
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: ru\n"
 "Project-Id-Version: Plugins - MailChimp for WordPress - Stable (latest release)\n"
+
+#: includes/views/general-settings.php:60
+msgid "You defined your MailChimp API key using the <code>MC4WP_API_KEY</code> constant."
+msgstr "Вы определили свой ключ API MailChimp, используя константу <code>MC4WP_API_KEY</code>."
 
 #: includes/forms/class-admin.php:60
 msgid "Link to your terms & conditions page"
@@ -91,8 +95,8 @@ msgid "Select a MailChimp list"
 msgstr "Выберите список MailChimp"
 
 #: integrations/gravity-forms/admin-before.php:2
-msgid "To integrate with Gravity Forms, add the \"MailChimp\" field to <a href=\"%s\">one of your Gravity Forms forms</a>."
-msgstr "Для интеграции с Gravity Forms, добавьте поле «MailChimp» в <a href=\"%s\">одну из форм Gravity Forms</a>."
+msgid "To integrate with Gravity Forms, add the \"MailChimp for WordPress\" field to <a href=\"%s\">one of your Gravity Forms forms</a>."
+msgstr "Для интеграции с Gravity Forms, добавьте поле «MailChimp for WordPress» в <a href=\"%s\">одну из форм Gravity Forms</a>."
 
 #: includes/forms/class-form-element.php:82
 msgid "Leave this field empty if you're human:"
@@ -131,7 +135,7 @@ msgstr "Подписаться на нашу рассылку?"
 msgid "Use this integration by adding the \"MailChimp\" field to <a href=\"%s\">your WPForms forms</a>."
 msgstr "Используйте эту интеграцию, добавив поле «MailChimp» в <a href=\"%s\">ваши формы WPForms</a>."
 
-#: includes/admin/class-admin.php:426
+#: includes/admin/class-admin.php:427
 msgid "Looks like your server is blocked by MailChimp's firewall. Please contact MailChimp support and include the following reference number: %s"
 msgstr "Похоже, ваш сервер заблокирован брандмауэром MailChimp. Обратитесь в службу поддержки MailChimp и укажите следующий ссылочный номер: %s"
 
@@ -219,25 +223,25 @@ msgstr "Готово! Списки MailChimp обновлены."
 msgid "Fetching MailChimp lists"
 msgstr "Получение списков MailChimp"
 
-#: includes/admin/class-admin.php:434
+#: includes/admin/class-admin.php:435
 msgid "MailChimp returned the following error:"
 msgstr "MailChimp возвратил следующую ошибку:"
 
-#: includes/admin/class-admin.php:429
+#: includes/admin/class-admin.php:430
 msgid "Here's some info on solving common connectivity issues."
 msgstr "Вот информация о решении общих проблем с подключением."
 
-#: includes/admin/class-admin.php:423
+#: includes/admin/class-admin.php:424
 msgid "Error connecting to MailChimp:"
 msgstr "Ошибка подключения к MailChimp:"
 
-#: integrations/ninja-forms/class-field.php:81
 #: integrations/ninja-forms-2/class-ninja-forms.php:62
+#: integrations/ninja-forms/class-field.php:81
 msgid "Checked"
 msgstr "Отмеченный"
 
-#: integrations/ninja-forms/class-field.php:83
 #: integrations/ninja-forms-2/class-ninja-forms.php:58
+#: integrations/ninja-forms/class-field.php:83
 msgid "Unchecked"
 msgstr "Неотмеченный"
 
@@ -313,7 +317,7 @@ msgstr "Отмеченный по умолчанию"
 msgid "Optional"
 msgstr "Необязательно"
 
-#: includes/admin/class-admin.php:503
+#: includes/admin/class-admin.php:504
 msgid "To get started with MailChimp for WordPress, please <a href=\"%s\">enter your MailChimp API key on the settings page of the plugin</a>."
 msgstr "Чтобы начать работу с MailChimp для WordPress, <a href=\"%s\">введите свой ключ API MailChimp на странице настроек плагина</a>."
 
@@ -381,7 +385,7 @@ msgstr "Журнал отладки"
 msgid "This field is marked as required in MailChimp."
 msgstr "Это поле отмечено как обязательное в MailChimp."
 
-#: includes/admin/class-admin.php:473
+#: includes/admin/class-admin.php:474
 msgid "Log successfully emptied."
 msgstr "Журнал успешно очищен."
 
@@ -542,7 +546,7 @@ msgstr "Варианты"
 msgid "City"
 msgstr "Город"
 
-#. Description of the plugin/theme
+#. Description of the plugin
 msgid "MailChimp for WordPress by ibericode. Adds various highly effective sign-up methods to your site."
 msgstr "MailChimp для WordPress от ibericode. Добавляет на ваш сайт различные высокоэффективные методы подписки."
 
@@ -740,8 +744,8 @@ msgstr "Вот как:"
 msgid "To add more fields to your form, you will need to create those fields in MailChimp first."
 msgstr "Чтобы добавить больше полей в форму, вам необходимо создать эти поля в MailChimp."
 
-#: includes/forms/views/parts/add-fields-help.php:4
 #: includes/forms/views/tabs/form-fields.php:10
+#: includes/forms/views/parts/add-fields-help.php:4
 msgid "Add more fields"
 msgstr "Добавить больше полей"
 
@@ -760,7 +764,7 @@ msgstr "Редактировать форму"
 #: includes/forms/views/edit-form.php:22
 #: includes/integrations/views/integration-settings.php:8
 #: includes/integrations/views/integrations.php:57
-#: includes/views/general-settings.php:7 includes/views/other-settings.php:58
+#: includes/views/other-settings.php:58 includes/views/general-settings.php:7
 msgid "You are here: "
 msgstr "Вы здесь:"
 
@@ -896,15 +900,15 @@ msgstr "Читайте больше об общих проблемах с под
 msgid "Usage Tracking"
 msgstr "Отслеживание использования"
 
-#. Author URI of the plugin/theme
+#. Author URI of the plugin
 msgid "https://ibericode.com/"
 msgstr "https://ibericode.com/"
 
-#. Author of the plugin/theme
+#. Author of the plugin
 msgid "ibericode"
 msgstr "ibericode"
 
-#. Plugin URI of the plugin/theme
+#. Plugin URI of the plugin
 msgid "https://mc4wp.com/#utm_source=wp-plugin&utm_medium=mailchimp-for-wp&utm_campaign=plugins-page"
 msgstr "https://mc4wp.com/#utm_source=wp-plugin&utm_medium=mailchimp-for-wp&utm_campaign=plugins-page"
 
@@ -1056,8 +1060,8 @@ msgstr "Заменять группы по интересам?"
 msgid "Update existing subscribers?"
 msgstr "Обновлять данные существующих подписчиков?"
 
-#: includes/forms/views/edit-form.php:69
 #: includes/forms/views/tabs/form-fields.php:40
+#: includes/forms/views/edit-form.php:69
 msgid "Use the shortcode %s to display this form inside a post, page or text widget."
 msgstr "Используйте шорткод \"%s\" чтобы отобразить эту форму внутри поста, страницы или текстового виджета."
 
@@ -1151,8 +1155,8 @@ msgstr "Всего %d списков было найдено в вашей уч�
 msgid "No lists were found in your MailChimp account"
 msgstr "В вашем аккаунте MailChimp списков не обнаружено"
 
-#: includes/admin/class-admin.php:310
 #: includes/forms/views/parts/add-fields-help.php:43
+#: includes/admin/class-admin.php:310
 #: includes/views/parts/lists-overview.php:10
 msgid "Renew MailChimp lists"
 msgstr "Обновить списки MailChimp"
@@ -1177,9 +1181,7 @@ msgstr "НЕ ПОДКЛЮЧЕНО"
 msgid "CONNECTED"
 msgstr "ПОДКЛЮЧЕНО"
 
-#. #-#-#-#-#  mailchimp-for-wp-code.pot (MailChimp for WordPress 4.2.5) 
-#. #-#-#-#-#
-#. Plugin Name of the plugin/theme
+#. Plugin Name of the plugin
 #: integrations/gravity-forms/class-field.php:39
 msgid "MailChimp for WordPress"
 msgstr "MailChimp для WordPress"
@@ -1200,9 +1202,9 @@ msgstr "Email-адрес"
 #: includes/integrations/views/integration-settings.php:189
 #: includes/integrations/views/integration-settings.php:208
 #: includes/views/other-settings.php:25
-#: integrations/contact-form-7/class-contact-form-7.php:75
 #: integrations/gravity-forms/class-gravity-forms.php:111
 #: integrations/wpforms/class-field.php:269
+#: integrations/contact-form-7/class-contact-form-7.php:75
 msgid "No"
 msgstr "Нет"
 
@@ -1218,9 +1220,9 @@ msgstr "Нет"
 #: includes/integrations/views/integration-settings.php:185
 #: includes/integrations/views/integration-settings.php:204
 #: includes/views/other-settings.php:21
-#: integrations/contact-form-7/class-contact-form-7.php:75
 #: integrations/gravity-forms/class-gravity-forms.php:110
 #: integrations/wpforms/class-field.php:269
+#: integrations/contact-form-7/class-contact-form-7.php:75
 msgid "Yes"
 msgstr "Да"
 
@@ -1252,7 +1254,7 @@ msgstr "Оп-па. Что-то пошло не так. Пожалуйста, п�
 msgid "Thank you, your sign-up request was successful! Please check your email inbox to confirm."
 msgstr "Спасибо, ваш запрос на подписку принят. Пожалуйста, проверьте ваш почтовый ящик для подтверждения регистрации."
 
-#: config/default-integration-options.php:7
+#: includes/integrations/class-integration.php:68
 msgid "Sign me up for the newsletter!"
 msgstr "Хочу подписаться на новости!"
 
@@ -1288,7 +1290,7 @@ msgstr "Форма регистрации MailChimp"
 msgid "Email address"
 msgstr "Адрес Email"
 
-#: includes/admin/class-ads.php:143 includes/forms/class-admin.php:92
+#: includes/forms/class-admin.php:92 includes/admin/class-ads.php:143
 msgid "Subscribe"
 msgstr "Подписаться"
 
@@ -1309,8 +1311,8 @@ msgid "Checkboxes"
 msgstr "Флажки"
 
 #: includes/admin/class-admin.php:343
-#: integrations/ninja-forms/class-action.php:20
 #: integrations/ninja-forms-2/class-ninja-forms.php:32
+#: integrations/ninja-forms/class-action.php:20
 msgid "MailChimp"
 msgstr "MailChimp"
 
@@ -1318,6 +1320,6 @@ msgstr "MailChimp"
 msgid "MailChimp API Settings"
 msgstr "Настройки MailChimp API"
 
-#: includes/admin/class-admin-texts.php:62 includes/forms/views/edit-form.php:6
+#: includes/forms/views/edit-form.php:6 includes/admin/class-admin-texts.php:62
 msgid "Settings"
 msgstr "Настройки"

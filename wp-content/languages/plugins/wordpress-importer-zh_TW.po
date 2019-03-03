@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - WordPress Importer - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-11-07 15:04:28+0000\n"
+"PO-Revision-Date: 2018-11-19 06:52:19+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -59,7 +59,7 @@ msgstr "無法匯入作者「%s」，相關文章會指派給目前進行匯入�
 
 #: wordpress-importer.php:265
 msgid "To make it easier for you to edit and save the imported content, you may want to reassign the author of the imported item to an existing user of this site. For example, you may want to import all the entries as <code>admin</code>s entries."
-msgstr "為確保編輯及儲存匯入的內容更加簡單，網站管理員可以將匯入的項目重新指派給網站上現有的使用者。舉例來說，可以在匯入所有項目後都指派給<code>管理員</code>。"
+msgstr "為了讓編輯及儲存匯入的內容更加簡單，網站管理員可以將匯入的項目重新指派給網站上現有的使用者。舉例來說，可以將全部匯入項目指都派給 <code>admin</code>。"
 
 #: wordpress-importer.php:264
 msgid "Assign Authors"
@@ -67,7 +67,7 @@ msgstr "指派作者"
 
 #: wordpress-importer.php:267
 msgid "If a new user is created by WordPress, a new password will be randomly generated and the new user&#8217;s role will be set as %s. Manually changing the new user&#8217;s details will be necessary."
-msgstr "如果透過 WordPress 建立新使用者，會為該使用者隨機產生一組密碼，並將新使用者的使用者角色設定為 [%s]。手動變更新使用者的詳細資料為之後的必要操作。"
+msgstr "如果透過 WordPress 建立新使用者，會為這位新使用者隨機產生一組密碼，並將新使用者的使用者角色指派為 [%s]。手動變更新使用者的詳細資料為匯入操作完成後的必要操作。"
 
 #: wordpress-importer.php:277
 msgid "Import Attachments"

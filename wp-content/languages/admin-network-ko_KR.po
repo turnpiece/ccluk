@@ -1,5 +1,5 @@
-# Translation of WordPress - 4.9.x - Development - Administration - Network Admin in Korean
-# This file is distributed under the same license as the WordPress - 4.9.x - Development - Administration - Network Admin package.
+# Translation of WordPress - 5.0.x - Development - Administration - Network Admin in Korean
+# This file is distributed under the same license as the WordPress - 5.0.x - Development - Administration - Network Admin package.
 msgid ""
 msgstr ""
 "PO-Revision-Date: 2017-12-04 01:44:20+0000\n"
@@ -9,7 +9,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: ko_KR\n"
-"Project-Id-Version: WordPress - 4.9.x - Development - Administration - Network Admin\n"
+"Project-Id-Version: WordPress - 5.0.x - Development - Administration - Network Admin\n"
 
 #. translators: %s: DO_NOT_UPGRADE_GLOBAL_TABLES
 #: wp-admin/includes/network.php:107
@@ -87,10 +87,6 @@ msgstr "죄송합니다. 해당 사이트를 삭제할 권한이 없습니다."
 msgid "Add the following to your %1$s file in %2$s <strong>above</strong> the line reading %3$s:"
 msgstr "다음의 내용을 %2$s의 %1$s 파일에서 %3$s라는 줄의 <strong>위에</strong> 추가하세요:"
 
-#. translators: This string should only be translated if wp-config-sample.php
-#. is localized. You can check the localized release package or
-#. https://i18n.svn.wordpress.org/<locale code>/branches/<wp
-#. version>/dist/wp-config-sample.php
 #: wp-admin/includes/network.php:436
 msgid "That&#8217;s all, stop editing! Happy blogging."
 msgstr "That&#8217;s all, stop editing! Happy blogging."
@@ -99,8 +95,8 @@ msgstr "That&#8217;s all, stop editing! Happy blogging."
 msgid "First Comment Email"
 msgstr "첫 번째 댓글 이메일"
 
-#: wp-admin/network/site-info.php:14 wp-admin/network/site-settings.php:14
-#: wp-admin/network/site-users.php:14
+#: wp-admin/network/site-info.php:14 wp-admin/network/site-users.php:14
+#: wp-admin/network/site-settings.php:14
 msgid "Sorry, you are not allowed to edit this site."
 msgstr "죄송합니다. 이 사이트를 편집할 권한이 없습니다."
 
@@ -368,7 +364,7 @@ msgstr "%s 네트워크 비활성화"
 msgid "Visit %s homepage"
 msgstr "%s테마 홈페이지 방문"
 
-#: wp-admin/network/site-users.php:346 wp-admin/network/user-new.php:117
+#: wp-admin/network/user-new.php:117 wp-admin/network/site-users.php:346
 msgid "A password reset link will be sent to the user via email."
 msgstr "요청하신 비밀번호 재설정 링크는 이메일로 발송하였습니다."
 
@@ -462,8 +458,8 @@ msgstr "사이트 %s을(를) 비활성화하려고 합니다."
 msgid "You are about to activate the site %s."
 msgstr "당신은 사이트 %s을(를) 활성화하려고 합니다."
 
-#: wp-admin/network/site-info.php:28 wp-admin/network/site-settings.php:26
-#: wp-admin/network/site-themes.php:49 wp-admin/network/site-users.php:42
+#: wp-admin/network/site-info.php:28 wp-admin/network/site-users.php:42
+#: wp-admin/network/site-themes.php:49 wp-admin/network/site-settings.php:26
 msgid "The requested site does not exist."
 msgstr "요청한 사이트가 존재하지 않습니다."
 
@@ -516,7 +512,7 @@ msgstr "테마 삭제"
 msgid "Yes, delete these themes"
 msgstr "예, 테마를 삭제하세요"
 
-#: wp-admin/network/site-themes.php:175 wp-admin/network/themes.php:271
+#: wp-admin/network/themes.php:271 wp-admin/network/site-themes.php:175
 msgid "%s theme enabled."
 msgid_plural "%s themes enabled."
 msgstr[0] "%s개의 테마를 활성화함."
@@ -526,7 +522,7 @@ msgid "%s theme deleted."
 msgid_plural "%s themes deleted."
 msgstr[0] "%s개의 테마를 삭제함."
 
-#: wp-admin/network/site-themes.php:183 wp-admin/network/themes.php:279
+#: wp-admin/network/themes.php:279 wp-admin/network/site-themes.php:183
 msgid "%s theme disabled."
 msgid_plural "%s themes disabled."
 msgstr[0] "%s개의 테마를 비활성화함."
@@ -620,8 +616,8 @@ msgstr "전역 네트워크 설정 수정"
 msgid "To search for a user or site, use the search boxes."
 msgstr "사용자 또는 사이트를 검색하려면 검색창을 사용하세요."
 
-#: wp-admin/network/menu.php:34 wp-admin/network/upgrade.php:15
-#: wp-admin/network/upgrade.php:40 wp-admin/network/upgrade.php:131
+#: wp-admin/network/upgrade.php:15 wp-admin/network/upgrade.php:40
+#: wp-admin/network/upgrade.php:131 wp-admin/network/menu.php:34
 msgid "Upgrade Network"
 msgstr "네트워크 업그레이드"
 
@@ -659,7 +655,7 @@ msgstr "wp-config.php 파일 ( <code>/*...stop editing...*/</code> 바로 전에
 msgid "Add New Site"
 msgstr "새로운 사이트 추가"
 
-#: wp-admin/network/site-users.php:310 wp-admin/network/user-new.php:129
+#: wp-admin/network/user-new.php:129 wp-admin/network/site-users.php:310
 msgid "Add User"
 msgstr "사용자 추가"
 
@@ -680,8 +676,8 @@ msgid "Dashboard leads to the Dashboard for that site."
 msgstr "대시보드는 해당 사이트의 대시보드로 이르게 합니다."
 
 #. translators: %s: site name
-#: wp-admin/network/site-info.php:117 wp-admin/network/site-settings.php:70
-#: wp-admin/network/site-themes.php:153 wp-admin/network/site-users.php:196
+#: wp-admin/network/site-info.php:117 wp-admin/network/site-users.php:196
+#: wp-admin/network/site-themes.php:153 wp-admin/network/site-settings.php:70
 msgid "Edit Site: %s"
 msgstr "사이트 편집: %s"
 
@@ -697,8 +693,8 @@ msgstr "존재하는 사용자의 사용자명을 입력하세요."
 msgid "Installed Themes"
 msgstr "설치된 테마"
 
-#: wp-admin/network/site-info.php:23 wp-admin/network/site-settings.php:22
-#: wp-admin/network/site-themes.php:43 wp-admin/network/site-users.php:38
+#: wp-admin/network/site-info.php:23 wp-admin/network/site-users.php:38
+#: wp-admin/network/site-themes.php:43 wp-admin/network/site-settings.php:22
 msgid "Invalid site ID."
 msgstr "잘못된 사이트 ID."
 
@@ -706,7 +702,7 @@ msgstr "잘못된 사이트 ID."
 msgid "Language Settings"
 msgstr "언어 설정"
 
-#: wp-admin/network/menu.php:67 wp-admin/network/settings.php:19
+#: wp-admin/network/settings.php:19 wp-admin/network/menu.php:67
 msgid "Network Settings"
 msgstr "네트워크 설정"
 
@@ -714,7 +710,7 @@ msgstr "네트워크 설정"
 msgid "Network enabled themes are not shown on this screen."
 msgstr "네트워크 활성된 테마는 이 화면에 보이지 않습니다."
 
-#: wp-admin/network/site-themes.php:187 wp-admin/network/themes.php:291
+#: wp-admin/network/themes.php:291 wp-admin/network/site-themes.php:187
 msgid "No theme selected."
 msgstr "선택된 테마 없음."
 
@@ -755,7 +751,7 @@ msgstr "사용자가 생성됨."
 msgid "User is already a member of this site."
 msgstr "사용자는 이미 이 사이트의 맴버입니다."
 
-#: wp-admin/network/menu.php:53 wp-admin/network/themes.php:253
+#: wp-admin/network/themes.php:253 wp-admin/network/menu.php:53
 msgctxt "theme"
 msgid "Add New"
 msgstr "새로 추가"
@@ -796,11 +792,11 @@ msgstr "이 테마는 네트워크 내의 다른 사이트에서 활성화되어
 msgid "Delete Theme"
 msgstr "테마 삭제"
 
-#: wp-admin/network/site-themes.php:181 wp-admin/network/themes.php:277
+#: wp-admin/network/themes.php:277 wp-admin/network/site-themes.php:181
 msgid "Theme disabled."
 msgstr "테마 비활성됨."
 
-#: wp-admin/network/site-themes.php:173 wp-admin/network/themes.php:269
+#: wp-admin/network/themes.php:269 wp-admin/network/site-themes.php:173
 msgid "Theme enabled."
 msgstr "테마 활성됨."
 

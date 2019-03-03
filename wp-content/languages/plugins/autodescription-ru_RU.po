@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - The SEO Framework - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-10-20 20:44:35+0000\n"
+"PO-Revision-Date: 2019-01-24 20:39:08+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,23 @@ msgstr ""
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: ru\n"
 "Project-Id-Version: Plugins - The SEO Framework - Stable (latest release)\n"
+
+#: lib/js/gutenberg.js:135
+msgid "Failed to load content."
+msgstr "Не удалось загрузить содержимое."
+
+#: inc/views/metaboxes/title-metabox.php:204
+msgid "Remove blog name from the title?"
+msgstr "Удалить название блога из заголовка?"
+
+#: inc/views/metaboxes/title-metabox.php:192
+msgid "Blog Name"
+msgstr "Название блога"
+
+#. translators: %s = term name
+#: inc/classes/admin-init.class.php:315
+msgid "Select Primary %s"
+msgstr "Выберите основную %s"
 
 #. translators: URLs are in Markdown.
 #: inc/views/sitemap/xsl-stylesheet.php:351
@@ -65,7 +82,7 @@ msgstr "Примечание: Был обнаружен еще один плаг
 msgid "Note: Another Open Graph plugin has been detected. These tags might conflict."
 msgstr "Примечание: Был обнаружен еще один плагин для Open Graph. Теги могут конфликтовать."
 
-#: inc/views/metaboxes/sitemaps-metabox.php:276
+#: inc/views/metaboxes/sitemaps-metabox.php:275
 msgid "Note: Changes might not appear to have effect directly because the stylesheet is cached in the browser for 30 minutes."
 msgstr "Примечание: Изменения могут не отобразиться сразу, так как файл стилей кешируется в браузере на 30 минут."
 
@@ -204,48 +221,20 @@ msgstr "Канал можно найти %s."
 msgid "Note: The feed is already converted into an excerpt (summary) through the %s."
 msgstr "Примечание: Канал уже преобразован к отрывку (кратко) в %s."
 
-#: inc/views/metaboxes/description-metabox.php:169
-msgid "When additions are enabled, this separator will go in-between the additions and the excerpt."
-msgstr "Когда дополнения включены, этот разделитель будет находиться между дополнениями и отрывком."
-
-#: inc/views/metaboxes/description-metabox.php:168
-msgid "Description Separator"
-msgstr "Разделитель описания"
-
-#: inc/views/metaboxes/description-metabox.php:149
-msgid "Add the blog name to the additions?"
-msgstr "Добавить название блога в дополнения?"
-
-#: inc/views/metaboxes/description-metabox.php:123
-msgid "Enable Additions"
-msgstr "Включить Дополнения"
-
-#: inc/views/metaboxes/description-metabox.php:114
-msgid "The additions consist of the page title, the blog name, and a separator."
-msgstr "Добавления состоят из названия страницы, названия блога и разделителя."
-
 #: inc/views/metaboxes/general-metabox.php:381
 #: inc/views/metaboxes/robots-metabox.php:169
 msgid "Post Type Settings"
 msgstr "Настройки типа записи"
 
-#: inc/views/metaboxes/description-metabox.php:111
-msgid "Automated Description Additions Settings"
-msgstr "Настройки описания в автоматических дополнениях"
-
-#: inc/views/metaboxes/description-metabox.php:89
-msgid "This is an example excerpt..."
-msgstr "Пример отрывка..."
-
-#: inc/views/metaboxes/description-metabox.php:72
+#: inc/views/metaboxes/description-metabox.php:35
 msgid "Automatically generate description?"
 msgstr "Генерировать описание автоматически?"
 
-#: inc/views/metaboxes/description-metabox.php:65
+#: inc/views/metaboxes/description-metabox.php:28
 msgid "Open Graph and Twitter Cards require descriptions. Therefore, it is best to leave this option enabled."
 msgstr "Open Graph и Twitter Cards требуют описаний. Этот параметр должен быть включен."
 
-#: inc/views/metaboxes/description-metabox.php:62
+#: inc/views/metaboxes/description-metabox.php:25
 msgid "A description can be automatically generated for every page."
 msgstr "Описание может генерироваться автоматически для каждой страницы."
 
@@ -265,8 +254,8 @@ msgstr "Это укажет поисковым системам не учиты�
 msgid "This tells search engines not to show this term in their search results."
 msgstr "Это укажет поисковым системам не показывать эту таксономию в результатах поиска."
 
-#: inc/views/inpost/seo-settings-singular.php:450
 #: inc/views/metaboxes/homepage-metabox.php:556
+#: inc/views/inpost/seo-settings-singular.php:458
 msgid "Social Image URL"
 msgstr "URL-адрес изображения для социальных сетей"
 
@@ -274,8 +263,8 @@ msgstr "URL-адрес изображения для социальных сет
 msgid "301 Redirect URL"
 msgstr "URL-адрес перенаправления 301"
 
-#: inc/views/inpost/seo-settings-singular.php:178
 #: inc/views/metaboxes/homepage-metabox.php:339
+#: inc/views/inpost/seo-settings-singular.php:178
 msgid "Warning: No public site should ever disable indexing or following for the homepage."
 msgstr "Внимание: ни один публичный сайт не должен отключать индексацию или учет ссылок для Главной."
 
@@ -291,15 +280,15 @@ msgstr "Используйте это, если хотите перестрои�
 msgid "Remove the blogname?"
 msgstr "Удалять название блога?"
 
+#: inc/views/metaboxes/homepage-metabox.php:118
 #: inc/views/inpost/seo-settings-singular.php:66
 #: inc/views/inpost/seo-settings-tt.php:89
-#: inc/views/metaboxes/homepage-metabox.php:118
 msgid "The meta title can be used to determine the title used on search engine result pages."
 msgstr "Мета-заголовок может использоваться на страницах результатов поисковой системы."
 
+#: inc/views/metaboxes/homepage-metabox.php:115
 #: inc/views/inpost/seo-settings-singular.php:62
 #: inc/views/inpost/seo-settings-tt.php:85
-#: inc/views/metaboxes/homepage-metabox.php:115
 msgid "Meta Title"
 msgstr "Мета-заголовок"
 
@@ -307,17 +296,17 @@ msgstr "Мета-заголовок"
 msgid "Twitter profile name"
 msgstr "Имя в профиле Twitter"
 
-#: inc/classes/generate-title.class.php:974
+#: inc/classes/generate-title.class.php:1048
 msgid "Page %s"
 msgstr "Страница %s"
 
 #. translators: %s: search phrase
-#: inc/classes/generate-title.class.php:896
+#: inc/classes/generate-title.class.php:931
 msgid "Search Results for &#8220;%s&#8221;"
 msgstr "Результаты поиска &#8220;%s&#8221;"
 
 #. translators: %s = Blog page title. Front-end output.
-#: inc/classes/generate-description.class.php:704
+#: inc/classes/generate-description.class.php:671
 msgid "Latest posts: %s"
 msgstr "Последние записи: %s"
 
@@ -364,87 +353,60 @@ msgstr "Обнаружено несколько инструментов SEO. В
 msgid "Schema.org Settings"
 msgstr "Настройки Schema.org"
 
-#: inc/classes/admin-init.class.php:691
+#: inc/classes/admin-init.class.php:778
 msgid "Too long"
 msgstr "Длина большая"
 
-#: inc/classes/admin-init.class.php:690
+#: inc/classes/admin-init.class.php:777
 msgid "Too short"
 msgstr "Длина короткая"
 
-#: inc/classes/admin-init.class.php:688
+#: inc/classes/admin-init.class.php:775
 msgctxt "The string is empty"
 msgid "Empty"
 msgstr "Ничего не содержит"
 
-#: inc/classes/admin-init.class.php:684
+#: inc/classes/admin-init.class.php:771
 msgid "It's too long and it will get truncated in search."
 msgstr "Длина очень большая и будет обрезана в поиске."
 
-#: inc/classes/admin-init.class.php:683
+#: inc/classes/admin-init.class.php:770
 msgid "It's long and it might get truncated in search."
 msgstr "Длина большая и вероятно будет обрезана в поиске. "
 
-#: inc/classes/admin-init.class.php:682
+#: inc/classes/admin-init.class.php:769
 msgid "It's short and it could have more information."
 msgstr "Длина короткая и может содержать больше информации."
 
-#: inc/classes/admin-init.class.php:681
+#: inc/classes/admin-init.class.php:768
 msgid "It's too short and it should have more information."
 msgstr "Длина очень короткая и может содержать больше информации."
 
-#: inc/classes/admin-init.class.php:680
+#: inc/classes/admin-init.class.php:767
 msgid "There's no content."
 msgstr "Содержимого нет."
-
-#: inc/functions/tsfem-suggestion.php:149
-msgid "Install Now"
-msgstr "Установить сейчас"
-
-#. translators: %s: Extension Manager
-#: inc/functions/tsfem-suggestion.php:148
-msgid "Install the %s"
-msgstr "Установить %s"
-
-#: inc/functions/tsfem-suggestion.php:123
-msgid "Focus keywords"
-msgstr "Ключевые слова"
-
-#. translators: 1. "A feature, e.g. Focus keywords", 2: Extension Manager.
-#: inc/functions/tsfem-suggestion.php:120
-msgid "Looking for %1$s? Try out the %2$s for free."
-msgstr "Есть интерес к %1$s? Попробуйте %2$s бесплатно."
-
-#. translators: %s: Plugin name
-#: inc/functions/tsfem-suggestion.php:115
-msgid "More information about %s"
-msgstr "Подробнее о %s"
-
-#: inc/functions/tsfem-suggestion.php:96
-msgid "Extension Manager"
-msgstr "Менеджер расширений"
 
 #: inc/views/metaboxes/schema-metabox.php:205
 msgid "These settings do not affect sharing behavior with the social networks."
 msgstr "Эти настройки не влияют на обмен с социальными сетями."
 
-#: inc/views/inpost/seo-settings-singular.php:422
 #: inc/views/metaboxes/homepage-metabox.php:503
+#: inc/views/inpost/seo-settings-singular.php:430
 msgid "Twitter Description"
 msgstr "Описание Twitter"
 
-#: inc/views/inpost/seo-settings-singular.php:399
 #: inc/views/metaboxes/homepage-metabox.php:479
+#: inc/views/inpost/seo-settings-singular.php:407
 msgid "Twitter Title"
 msgstr "Заголовок Twitter"
 
-#: inc/views/inpost/seo-settings-singular.php:378
 #: inc/views/metaboxes/homepage-metabox.php:451
+#: inc/views/inpost/seo-settings-singular.php:386
 msgid "Open Graph Description"
 msgstr "Описание Open Graph"
 
-#: inc/views/inpost/seo-settings-singular.php:355
 #: inc/views/metaboxes/homepage-metabox.php:427
+#: inc/views/inpost/seo-settings-singular.php:363
 msgid "Open Graph Title"
 msgstr "Заголовок Open Graph"
 
@@ -518,8 +480,8 @@ msgstr "Разрешить Sitelinks Searchbox?"
 msgid "Learn how this data is used."
 msgstr "Читать, как используются эти данные."
 
-#: inc/views/metaboxes/homepage-metabox.php:235
 #: inc/views/metaboxes/title-metabox.php:149
+#: inc/views/metaboxes/homepage-metabox.php:235
 msgid "This setting determines which side the added title text will go on."
 msgstr "Параметр определяет, с какой стороны заголовка будет дополнение."
 
@@ -559,23 +521,15 @@ msgstr "Показывать счетчики пикселей?"
 msgid "The character counter is based on guidelines."
 msgstr "Счетчик символов основан на методических рекомендациях."
 
-#: inc/views/metaboxes/general-metabox.php:96
-msgid "The pixel counter computes whether the input will fit on search engine Result Pages."
-msgstr "Счетчик пикселей вычисляет как поместятся данные на страницах результатов поисковой системы."
-
 #: inc/views/metaboxes/general-metabox.php:92
 msgid "Counter Settings"
 msgstr "Настройки счетчика"
-
-#: inc/views/metaboxes/description-metabox.php:127
-msgid "This creates better automated meta descriptions."
-msgstr "Это делает автоматические метаописания лучше."
 
 #: inc/views/inpost/seo-settings-singular.php:154
 msgid "This urges search engines to go to the outputted URL."
 msgstr "Поисковые системы будут переходить по указанной URL-ссылке."
 
-#: bootstrap/upgrade.php:349
+#: bootstrap/upgrade.php:351
 msgid "The previous sitemap timestamp settings have been converted into new global timestamp settings."
 msgstr "Предыдущие настройки меток времени карты сайта были преобразованы в новые глобальные настройки меток времени."
 
@@ -583,11 +537,11 @@ msgstr "Предыдущие настройки меток времени кар
 msgid "Facebook profile page"
 msgstr "Страница профиля в Facebook"
 
-#: inc/classes/inpost.class.php:170
+#: inc/classes/inpost.class.php:171
 msgid "The SEO Settings take precedence over these settings."
 msgstr "Настройки SEO имеют приоритет над этими настройками."
 
-#: inc/classes/inpost.class.php:168 inc/classes/inpost.class.php:176
+#: inc/classes/inpost.class.php:169 inc/classes/inpost.class.php:177
 msgid "Homepage SEO Settings"
 msgstr "Домашняя страница настроек SEO"
 
@@ -595,39 +549,39 @@ msgstr "Домашняя страница настроек SEO"
 msgid "Settings"
 msgstr "Настройки"
 
-#: inc/classes/admin-init.class.php:237
+#: inc/classes/admin-init.class.php:277
 msgctxt "Frame title"
 msgid "Select Logo"
 msgstr "Выберите логотип"
 
-#: inc/classes/admin-init.class.php:236
+#: inc/classes/admin-init.class.php:276
 msgid "Unset selected logo"
 msgstr "Отменить выбранный логотип"
 
-#: inc/classes/admin-init.class.php:235
+#: inc/classes/admin-init.class.php:275
 msgid "Remove Logo"
 msgstr "Удалить логотип"
 
-#: inc/classes/admin-init.class.php:234
+#: inc/classes/admin-init.class.php:274
 msgid "Change Logo"
 msgstr "Изменить логотип"
 
-#: inc/classes/admin-init.class.php:232 inc/classes/admin-pages.class.php:1044
+#: inc/classes/admin-pages.class.php:1044 inc/classes/admin-init.class.php:272
 msgid "Select Logo"
 msgstr "\tВыберите логотип"
 
 #. translators: Pixel counter. 1: width, 2: guideline
-#: inc/classes/admin-init.class.php:491
+#: inc/classes/admin-init.class.php:580
 msgid "%1$d out of %2$d pixels are used."
 msgstr "Используется %1$d из %2$d пикселей."
 
 #. translators: %s = term name
-#: inc/classes/admin-init.class.php:273
+#: inc/classes/admin-init.class.php:322
 msgid "Primary %s"
-msgstr "%s по умолчанию"
+msgstr "Основная %s"
 
 #. translators: %s = term name
-#: inc/classes/admin-init.class.php:271
+#: inc/classes/admin-init.class.php:320
 msgid "Make primary %s"
 msgstr "Сделать %s основным"
 
@@ -685,7 +639,7 @@ msgstr "Настройки изменения запросов"
 msgid "Depending on your server's configuration, adjusting these settings can affect performance."
 msgstr "В зависимости от конфигурации сервера, эти настройки могут влиять на производительность."
 
-#: inc/classes/admin-init.class.php:889 inc/classes/admin-init.class.php:949
+#: inc/classes/admin-init.class.php:980 inc/classes/admin-init.class.php:1040
 msgid "Image could not be processed."
 msgstr "Изображение не может быть обработано."
 
@@ -717,17 +671,13 @@ msgstr "Конец %s"
 msgid "Start %s"
 msgstr "Начало %s"
 
-#: inc/classes/core.class.php:251
+#: inc/classes/core.class.php:241
 msgctxt "Plugin extensions"
 msgid "Extensions"
 msgstr "Расширения"
 
-#: inc/classes/core.class.php:250
-msgid "https://wordpress.org/plugins/the-seo-framework-extension-manager/"
-msgstr "https://ru.wordpress.org/plugins/the-seo-framework-extension-manager/"
-
 #. translators: %s = Redirect URL markdown
-#: inc/classes/admin-init.class.php:807
+#: inc/classes/admin-init.class.php:894
 msgid "There has been an error redirecting. Refresh the page or follow [this link](%s)."
 msgstr "При переходе произошла ошибка. Обновите страницу или перейдите [по ссылке](%s)."
 
@@ -751,24 +701,24 @@ msgstr "Укажите URL-адрес изображения, которое б�
 msgid "Add link to source below the feed entry content?"
 msgstr "Добавлять ссылку на источник ниже содержимого записи?"
 
-#: inc/classes/inpost.class.php:293 inc/views/metaboxes/homepage-metabox.php:49
+#: inc/classes/inpost.class.php:294 inc/views/metaboxes/homepage-metabox.php:49
 msgid "Social"
 msgstr "Соц.сети"
 
-#: inc/classes/inpost.class.php:299
+#: inc/classes/inpost.class.php:300
 msgid "Visibility"
 msgstr "Видимость"
 
-#: bootstrap/upgrade.php:319
+#: bootstrap/upgrade.php:321
 msgid "Twitter Photo Cards have been deprecated. Your site now uses Summary Cards when applicable."
 msgstr "Twitter Photo Cards устарел. Теперь Ваш сайт использует Summary Cards, когда это возможно."
 
-#: inc/classes/admin-init.class.php:228
+#: inc/classes/admin-init.class.php:268
 msgctxt "Frame title"
 msgid "Select Social Image"
 msgstr "Выберите изображение для соц.сетей"
 
-#: inc/classes/admin-init.class.php:224 inc/classes/admin-pages.class.php:1005
+#: inc/classes/admin-pages.class.php:1005 inc/classes/admin-init.class.php:264
 msgctxt "Button hover"
 msgid "Select social image"
 msgstr "Выберите изображение для соц.сетей"
@@ -785,15 +735,13 @@ msgstr "URL-адрес изображения, использующегося д
 msgid "A social image can be displayed when your website is shared. It is a great way to grab attention."
 msgstr "Изображение для соц.сетей может использоваться, когда делятся страницами Вашего сайта. Это отличный способ привлечь внимание."
 
-#: inc/views/metaboxes/homepage-metabox.php:525
 #: inc/views/metaboxes/social-metabox.php:116
+#: inc/views/metaboxes/homepage-metabox.php:525
 msgid "Social Image Settings"
 msgstr "Настройки изображения для соц.сетей"
 
-#. #-#-#-#-#  autodescription-code.pot (The SEO Framework 3.1.4)  #-#-#-#-#
-#. Plugin URI of the plugin/theme
-#. #-#-#-#-#  autodescription-code.pot (The SEO Framework 3.1.4)  #-#-#-#-#
-#. Author URI of the plugin/theme
+#. Plugin URI of the plugin
+#. Author URI of the plugin
 msgid "https://theseoframework.com/"
 msgstr "https://theseoframework.com/"
 
@@ -824,43 +772,43 @@ msgstr "Созданная карта сайта в формате XML пред�
 msgid "XML Sitemap"
 msgstr "Карта сайта XML"
 
-#: inc/views/metaboxes/sitemaps-metabox.php:326
+#: inc/views/metaboxes/sitemaps-metabox.php:325
 msgid "Sitemap title and lines color"
 msgstr "Цвет заголовка и линий"
 
-#: inc/views/metaboxes/sitemaps-metabox.php:317
+#: inc/views/metaboxes/sitemaps-metabox.php:316
 msgid "Sitemap header background color"
 msgstr "Цвет фона для заголовка"
 
-#: inc/views/metaboxes/sitemaps-metabox.php:304
+#: inc/views/metaboxes/sitemaps-metabox.php:303
 msgid "The logo is set in Customizer."
 msgstr "Установить Логотип можно при визуальной настройке сайта."
 
-#: inc/views/metaboxes/sitemaps-metabox.php:304
+#: inc/views/metaboxes/sitemaps-metabox.php:303
 msgid "Add site logo?"
 msgstr "Добавить логотип сайта?"
 
-#: inc/views/metaboxes/sitemaps-metabox.php:296
+#: inc/views/metaboxes/sitemaps-metabox.php:295
 msgid "Style configuration"
 msgstr "Конфигурация стиля"
 
-#: inc/views/metaboxes/sitemaps-metabox.php:287
+#: inc/views/metaboxes/sitemaps-metabox.php:286
 msgid "This makes the sitemap more readable for humans."
 msgstr "Это делает карту сайта более читаемой для людей."
 
-#: inc/views/metaboxes/sitemaps-metabox.php:287
+#: inc/views/metaboxes/sitemaps-metabox.php:286
 msgid "Style Sitemap?"
 msgstr "Применять стиль оформления карты сайта?"
 
-#: inc/views/metaboxes/sitemaps-metabox.php:280
+#: inc/views/metaboxes/sitemaps-metabox.php:279
 msgid "Enable styling"
 msgstr "Применить стиль оформления"
 
-#: inc/views/metaboxes/sitemaps-metabox.php:275
+#: inc/views/metaboxes/sitemaps-metabox.php:274
 msgid "You can style the sitemap to give it a more personal look. Styling the sitemap has no SEO value whatsoever."
 msgstr "Вы можете создать собственный стиль оформления карты сайта, чтобы придать ей больше индивидуальности. Стиль оформления карты не имеет никакой ценности SEO."
 
-#: inc/views/metaboxes/sitemaps-metabox.php:273
+#: inc/views/metaboxes/sitemaps-metabox.php:272
 msgid "Sitemap Styling Settings"
 msgstr "Настройки стиля оформления карты сайта"
 
@@ -971,10 +919,6 @@ msgstr "Рекомендации SEO можно показывать в пане
 msgid "Administrative Layout Settings"
 msgstr "Настройки для административной части сайта"
 
-#: inc/views/metaboxes/general-metabox.php:258
-msgid "An object cache handler has been detected. If you enable this option, you might wish to disable description and Schema transient caching."
-msgstr "Обнаружен обработчик объектного кэша. Если Вы включите эту опцию, можно выключить временное кэширование для мета-описаний и Schema."
-
 #: inc/views/metaboxes/general-metabox.php:257
 msgid "Object cache generally works faster than transient cache."
 msgstr "Объектное кэширование работает быстрее транзитного кэширования."
@@ -1032,27 +976,27 @@ msgid "Performance"
 msgstr "Производительность"
 
 #. translators: %s = Post type name
-#: inc/views/inpost/seo-settings-singular.php:456
+#: inc/views/inpost/seo-settings-singular.php:464
 msgid "Set preferred %s Social Image URL location."
 msgstr "Укажите URL-адрес предпочтительного изображения, которое будет ассоциироваться с %s в социальных сетях."
 
-#: inc/classes/admin-init.class.php:229 inc/classes/admin-init.class.php:238
+#: inc/classes/admin-init.class.php:269 inc/classes/admin-init.class.php:278
 msgid "Use this image"
 msgstr "Использовать изображение"
 
-#: inc/classes/admin-init.class.php:227
+#: inc/classes/admin-init.class.php:267
 msgid "Remove selected social image"
 msgstr "Удалить выбранное изображение"
 
-#: inc/classes/admin-init.class.php:226
+#: inc/classes/admin-init.class.php:266
 msgid "Remove Image"
 msgstr "Удалить изображение"
 
-#: inc/classes/admin-init.class.php:225
+#: inc/classes/admin-init.class.php:265
 msgid "Change Image"
 msgstr "Сменить изображение"
 
-#: inc/classes/admin-init.class.php:223 inc/classes/admin-pages.class.php:1010
+#: inc/classes/admin-pages.class.php:1010 inc/classes/admin-init.class.php:263
 msgid "Select Image"
 msgstr "Выбрать изображение"
 
@@ -1108,10 +1052,6 @@ msgstr "Просить поисковые системы не сохранять
 #: inc/views/inpost/seo-settings-tt.php:152
 msgid "Apply %s to this term?"
 msgstr "Применять %s для этого элемента таксономии?"
-
-#. Description of the plugin/theme
-msgid "An automated, advanced, accessible, unbranded and extremely fast SEO solution for any WordPress website."
-msgstr "Автоматизированное, передовое, доступное и производительное решение поисковой оптимизации для любого сайта Wordpress."
 
 #: inc/views/metaboxes/schema-metabox.php:91
 msgid "Enable Breadcrumbs?"
@@ -1215,19 +1155,7 @@ msgctxt "...for the entire site"
 msgid "the entire site"
 msgstr "всего сайта"
 
-#: inc/views/metaboxes/description-metabox.php:143
-msgid "Add Blogname to Additions"
-msgstr "Название сайта в дополнении"
-
-#: inc/views/metaboxes/description-metabox.php:134
-msgid "Add additions to automated description?"
-msgstr "Добавить дополнения к автоматическому описанию?"
-
-#: inc/views/metaboxes/description-metabox.php:113
-msgid "To create a more organic description, additions can be added before the description."
-msgstr "Для создания более органичного описания, перед описанием могут быть добавлены дополнения."
-
-#: inc/views/metaboxes/description-metabox.php:59
+#: inc/views/metaboxes/description-metabox.php:22
 msgid "Automated Description Settings"
 msgstr "Настройки автоматизированного описания"
 
@@ -1255,9 +1183,8 @@ msgstr "Пример Рубрики"
 msgid "Prefixes"
 msgstr "Префиксы"
 
-#: inc/views/metaboxes/description-metabox.php:39
-#: inc/views/metaboxes/homepage-metabox.php:39
 #: inc/views/metaboxes/title-metabox.php:71
+#: inc/views/metaboxes/homepage-metabox.php:39
 msgid "Additions"
 msgstr "Дополнения"
 
@@ -1342,7 +1269,7 @@ msgstr "Настройки сброшены."
 msgid "Settings are saved."
 msgstr "Настройки сохранены."
 
-#: inc/classes/admin-init.class.php:693
+#: inc/classes/admin-init.class.php:780
 msgid "Good"
 msgstr "Хорошо"
 
@@ -1403,10 +1330,6 @@ msgstr "Код подтверждения Pinterest Analytics"
 msgid "Output shortlink tag?"
 msgstr "Разрешить короткие ссылки в мета-тегах?"
 
-#: inc/views/metaboxes/description-metabox.php:117
-msgid "Example Automated Description Output"
-msgstr "Пример сгенерированного описания"
-
 #: inc/views/metaboxes/title-metabox.php:213
 msgid "Note: Only use this option if you are aware of its SEO effects."
 msgstr "Внимание: Используйте этот параметр только в том случае, если вы знаете его влияние на SEO."
@@ -1414,14 +1337,6 @@ msgstr "Внимание: Используйте этот параметр то�
 #: inc/views/metaboxes/title-metabox.php:196
 msgid "This might decouple your posts and pages from the rest of the website."
 msgstr "Это может разорвать связи ваших записей и страниц с остальной частью веб-сайта."
-
-#: inc/views/metaboxes/title-metabox.php:204
-msgid "Remove Blogname from title?"
-msgstr "Удалить название сайта из заголовка?"
-
-#: inc/views/metaboxes/title-metabox.php:192
-msgid "Remove Blogname from Title"
-msgstr "Название сайта в заголовке"
 
 #: inc/views/inpost/seo-settings-singular.php:31
 #: inc/views/inpost/seo-settings-tt.php:75
@@ -1442,26 +1357,26 @@ msgstr "Настройки Канала"
 msgid "Page %d"
 msgstr "Страница %d"
 
-#: inc/classes/admin-init.class.php:488
-#: inc/classes/generate-title.class.php:1038
+#: inc/classes/generate-title.class.php:1114
+#: inc/classes/admin-init.class.php:576
 msgid "Private: %s"
 msgstr "Приватных: %s"
 
-#: inc/classes/admin-init.class.php:489
-#: inc/classes/generate-title.class.php:1024
+#: inc/classes/generate-title.class.php:1099
+#: inc/classes/admin-init.class.php:578
 msgid "Protected: %s"
 msgstr "Защищено: %s"
 
-#. Author of the plugin/theme
+#. Author of the plugin
 msgid "Sybre Waaijer"
 msgstr "Sybre Waaijer"
 
-#. Plugin Name of the plugin/theme
+#. Plugin Name of the plugin
 msgid "The SEO Framework"
 msgstr "The SEO Framework"
 
 #. translators: %s = Google
-#: inc/views/metaboxes/sitemaps-metabox.php:263
+#: inc/views/metaboxes/sitemaps-metabox.php:262
 msgid "Notify %s about sitemap changes?"
 msgstr "Уведомлять %s об изменениях карты сайта?"
 
@@ -1732,7 +1647,7 @@ msgstr "Добавлять мета-теги Twitter?"
 #. translators: %s = Facebook
 #: inc/views/metaboxes/social-metabox.php:92
 #: inc/views/metaboxes/social-metabox.php:104
-msgid "Output various tags targetted at %s."
+msgid "Output various tags targeted at %s."
 msgstr "Вывод различных тегов, предназначенных для %s."
 
 #: inc/views/metaboxes/social-metabox.php:90
@@ -1763,10 +1678,10 @@ msgstr "Даты записей"
 msgid "Note: If any of these options are unchecked, but are checked on the home page, they will be outputted regardless."
 msgstr "Примечание: Если какие-либо из этих настроек не выбраны, но активны для Главной страницы, они будут выводиться независимо."
 
-#: inc/views/inpost/seo-settings-singular.php:117
-#: inc/views/inpost/seo-settings-tt.php:116
 #: inc/views/metaboxes/description-metabox.php:17
 #: inc/views/metaboxes/homepage-metabox.php:173
+#: inc/views/inpost/seo-settings-singular.php:117
+#: inc/views/inpost/seo-settings-tt.php:116
 msgid "The meta description can be used to determine the text used under the title on search engine results pages."
 msgstr "Мета-описание может использоваться как определенный текст под заголовком на страницах результатов поисковой системы."
 
@@ -1821,14 +1736,11 @@ msgstr "Учет ссылок"
 msgid "Indexing"
 msgstr "Индексация"
 
-#. translators: %s = Post type name
-#: inc/classes/inpost.class.php:287
-#: inc/views/metaboxes/description-metabox.php:34
-#: inc/views/metaboxes/homepage-metabox.php:34
-#: inc/views/metaboxes/robots-metabox.php:61
-#: inc/views/metaboxes/sitemaps-metabox.php:29
-#: inc/views/metaboxes/social-metabox.php:29
+#: inc/classes/inpost.class.php:288 inc/views/metaboxes/social-metabox.php:29
 #: inc/views/metaboxes/title-metabox.php:66
+#: inc/views/metaboxes/homepage-metabox.php:34
+#: inc/views/metaboxes/sitemaps-metabox.php:29
+#: inc/views/metaboxes/robots-metabox.php:61
 msgid "General"
 msgstr "Общее"
 
@@ -1872,26 +1784,22 @@ msgstr "Автор"
 msgid "Tag"
 msgstr "Метка"
 
-#: inc/views/metaboxes/robots-metabox.php:16
 #: inc/views/metaboxes/title-metabox.php:220
+#: inc/views/metaboxes/robots-metabox.php:16
 msgid "Category"
 msgstr "Рубрика"
-
-#: inc/views/metaboxes/description-metabox.php:87
-msgid "Example Title"
-msgstr "Пример заголовка"
 
 #: inc/views/metaboxes/title-metabox.php:143
 msgid "The Home Page has a specific option."
 msgstr "Главная имеет собственные настройки."
 
-#: inc/views/metaboxes/homepage-metabox.php:252
 #: inc/views/metaboxes/title-metabox.php:162
+#: inc/views/metaboxes/homepage-metabox.php:252
 msgid "Right:"
 msgstr "Справа:"
 
-#: inc/views/metaboxes/homepage-metabox.php:242
 #: inc/views/metaboxes/title-metabox.php:155
+#: inc/views/metaboxes/homepage-metabox.php:242
 msgid "Left:"
 msgstr "Слева:"
 
@@ -1937,9 +1845,9 @@ msgstr "Указывает поисковым системам не показы
 msgid "Apply %1$s to this %2$s"
 msgstr "Применить %1$s для %2$s"
 
+#: inc/views/metaboxes/homepage-metabox.php:170
 #: inc/views/inpost/seo-settings-singular.php:113
 #: inc/views/inpost/seo-settings-tt.php:112
-#: inc/views/metaboxes/homepage-metabox.php:170
 msgid "Meta Description"
 msgstr "Мета-описание"
 
@@ -1950,126 +1858,125 @@ msgstr "Используется символов: %s"
 
 #. translators: %s = Post Type
 #. translators: %s = Term type
-#: inc/classes/inpost.class.php:180 inc/views/inpost/seo-settings-tt.php:67
+#: inc/classes/inpost.class.php:181 inc/views/inpost/seo-settings-tt.php:67
 msgid "%s SEO Settings"
 msgstr "Настройки SEO для %s"
 
 #. translators: Taxonomy term archive title. 1: Taxonomy singular name, 2:
 #. Current taxonomy term
-#: inc/classes/generate-title.class.php:668
-#: inc/classes/generate-title.class.php:730
+#: inc/classes/generate-title.class.php:703
+#: inc/classes/generate-title.class.php:765
 msgid "%1$s: %2$s"
 msgstr "%1$s: %2$s"
 
 #. translators: Post type archive title. 1: Post type name
-#: inc/classes/generate-title.class.php:724
+#: inc/classes/generate-title.class.php:759
 msgid "Archives: %s"
 msgstr "Архивы: %s"
 
-#: inc/classes/generate-title.class.php:719
+#: inc/classes/generate-title.class.php:754
 msgctxt "post format archive title"
 msgid "Chats"
 msgstr "Чаты"
 
-#: inc/classes/generate-title.class.php:717
+#: inc/classes/generate-title.class.php:752
 msgctxt "post format archive title"
 msgid "Audio"
 msgstr "Аудио"
 
-#: inc/classes/generate-title.class.php:715
+#: inc/classes/generate-title.class.php:750
 msgctxt "post format archive title"
 msgid "Statuses"
 msgstr "Статусы"
 
-#: inc/classes/generate-title.class.php:713
+#: inc/classes/generate-title.class.php:748
 msgctxt "post format archive title"
 msgid "Links"
 msgstr "Ссылки"
 
-#: inc/classes/generate-title.class.php:711
+#: inc/classes/generate-title.class.php:746
 msgctxt "post format archive title"
 msgid "Quotes"
 msgstr "Цитаты"
 
-#: inc/classes/generate-title.class.php:709
+#: inc/classes/generate-title.class.php:744
 msgctxt "post format archive title"
 msgid "Videos"
 msgstr "Видео"
 
-#: inc/classes/generate-title.class.php:707
+#: inc/classes/generate-title.class.php:742
 msgctxt "post format archive title"
 msgid "Images"
 msgstr "Изображения"
 
-#: inc/classes/generate-title.class.php:705
+#: inc/classes/generate-title.class.php:740
 msgctxt "post format archive title"
 msgid "Galleries"
 msgstr "Галереи"
 
-#: inc/classes/generate-title.class.php:703
+#: inc/classes/generate-title.class.php:738
 msgctxt "post format archive title"
 msgid "Asides"
 msgstr "Заметки"
 
-#: inc/classes/generate-title.class.php:697
+#: inc/classes/generate-title.class.php:732
 msgctxt "daily archives date format"
 msgid "F j, Y"
 msgstr "d.m.Y"
 
 #. translators: Daily archive title. 1: Date
-#: inc/classes/generate-title.class.php:699
+#: inc/classes/generate-title.class.php:734
 msgid "Day: %s"
 msgstr "Число: %s"
 
-#: inc/classes/generate-title.class.php:693
+#: inc/classes/generate-title.class.php:728
 msgctxt "monthly archives date format"
 msgid "F Y"
 msgstr "F Y"
 
 #. translators: Monthly archive title. 1: Month name and year
-#: inc/classes/generate-title.class.php:695
+#: inc/classes/generate-title.class.php:730
 msgid "Month: %s"
 msgstr "Месяц: %s"
 
-#: inc/classes/generate-title.class.php:689
+#: inc/classes/generate-title.class.php:724
 msgctxt "yearly archives date format"
 msgid "Y"
 msgstr "Y"
 
 #. translators: Yearly archive title. 1: Year
-#: inc/classes/generate-title.class.php:691
+#: inc/classes/generate-title.class.php:726
 msgid "Year: %s"
 msgstr "Год: %s"
 
 #. translators: Author archive title. 1: Author name
-#: inc/classes/generate-title.class.php:686
+#: inc/classes/generate-title.class.php:721
 msgid "Author: %s"
 msgstr "Автор: %s"
 
 #. translators: Tag archive title. 1: Tag name
-#: inc/classes/generate-title.class.php:662
-#: inc/classes/generate-title.class.php:682
+#: inc/classes/generate-title.class.php:697
+#: inc/classes/generate-title.class.php:717
 msgid "Tag: %s"
 msgstr "Метка: %s"
 
 #. translators: Category archive title. 1: Category name
-#: inc/classes/generate-title.class.php:658
-#: inc/classes/generate-title.class.php:678
+#: inc/classes/generate-title.class.php:693
+#: inc/classes/generate-title.class.php:713
 msgid "Category: %s"
 msgstr "Рубрика: %s"
 
-#: inc/classes/generate-title.class.php:672
-#: inc/classes/generate-title.class.php:733
+#: inc/classes/generate-title.class.php:707
+#: inc/classes/generate-title.class.php:768
 msgid "Archives"
 msgstr "Архивы"
 
-#: inc/classes/generate-description.class.php:719
-#: inc/views/metaboxes/description-metabox.php:88
+#: inc/classes/generate-description.class.php:680
 msgctxt "Placement. e.g. Post Title \"on\" Blog Name"
 msgid "on"
 msgstr "на"
 
-#: inc/classes/generate-title.class.php:884
+#: inc/classes/generate-title.class.php:919
 msgid "Untitled"
 msgstr "Без имени"
 
@@ -2140,7 +2047,7 @@ msgstr "Но Вы указали не индексировать для всег
 msgid "%s is being indexed."
 msgstr "%s индексируется."
 
-#: inc/classes/admin-init.class.php:685
+#: inc/classes/admin-init.class.php:772
 msgid "Length is good."
 msgstr "Длина хорошая."
 
@@ -2149,11 +2056,11 @@ msgstr "Длина хорошая."
 msgid "%1$s is used %2$d times."
 msgstr "%1$s использовано %2$d раз."
 
-#: inc/classes/admin-init.class.php:692
+#: inc/classes/admin-init.class.php:779
 msgid "Far too long"
 msgstr "Длина очень большая"
 
-#: inc/classes/admin-init.class.php:689
+#: inc/classes/admin-init.class.php:776
 msgid "Far too short"
 msgstr "Длина очень короткая"
 
@@ -2198,9 +2105,9 @@ msgid "Webmaster Meta Settings"
 msgstr "Настройки мета-данных для Вебмастеров"
 
 #: inc/classes/admin-pages.class.php:284
+#: inc/views/metaboxes/homepage-metabox.php:302
 #: inc/views/inpost/seo-settings-singular.php:171
 #: inc/views/inpost/seo-settings-tt.php:135
-#: inc/views/metaboxes/homepage-metabox.php:302
 msgid "Robots Meta Settings"
 msgstr "Настройки мета-данных для роботов"
 
@@ -2246,11 +2153,11 @@ msgctxt "e.g. en for English, nl for Dutch, fi for Finish, de for German"
 msgid "en"
 msgstr "ru"
 
-#: inc/classes/admin-init.class.php:487
+#: inc/classes/admin-init.class.php:574
 msgid "Are you sure you want to reset all SEO settings to their defaults?"
 msgstr "Вы уверены, что хотите сбросить все настройки на исходные?"
 
-#: inc/classes/admin-init.class.php:486
+#: inc/classes/admin-init.class.php:573
 msgid "The changes you made will be lost if you navigate away from this page."
 msgstr "Внесенные изменения будут утеряны, если вы покинете эту страницу."
 
