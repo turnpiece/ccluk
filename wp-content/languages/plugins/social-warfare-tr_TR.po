@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - WordPress Social Sharing Plugin &#8211; Social Warfare - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-11-06 17:11:51+0000\n"
+"PO-Revision-Date: 2018-12-04 22:03:54+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -11,7 +11,40 @@ msgstr ""
 "Language: tr\n"
 "Project-Id-Version: Plugins - WordPress Social Sharing Plugin &#8211; Social Warfare - Stable (latest release)\n"
 
-#: lib/options/SWP_Section_HTML.php:592
+#: assets/js/post-editor/src/block/click-to-tweet.js:30
+msgid "share"
+msgstr "paylaş"
+
+#: assets/js/post-editor/src/block/click-to-tweet.js:29
+msgid "quote"
+msgstr "alıntı"
+
+#: assets/js/post-editor/src/block/click-to-tweet.js:28
+msgid "twitter"
+msgstr "twitter"
+
+#: lib/options/SWP_Section_HTML.php:202
+msgid "Step 2: Follow the prompts on their website to create an account and add your domain to be tracked for share counts. If you see a prompt to customize your button, ignore and click past that. You are not using their button, you are using ours."
+msgstr "2. Adım: Bir hesap oluşturmak ve paylaşım sayınızı izlenmesi için alan adınızı eklemek adına web sitelerindeki komutları izleyin. Düğmenizi özelleştirmek için bir uyarı görürseniz, bunu göz ardı edin ve devam edin. Onların düğmelerini değil, bizimkini kullanıyorsunuz."
+
+#: lib/options/SWP_Registration_Tab_Template.php:104
+msgid "Enter your registration key for "
+msgstr "için kayıt anahtarınızı girin"
+
+#: lib/options/SWP_Registration_Tab_Template.php:100
+#: lib/options/SWP_Registration_Tab_Template.php:137
+msgid "This copy of "
+msgstr "kopyası"
+
+#: lib/options/SWP_Options_Page.php:412
+msgid "Enable Gutenberg Blocks"
+msgstr "Gutenberg Bloklarını Etkinleştir"
+
+#: lib/options/SWP_Options_Page.php:407
+msgid "Gutenberg Blocks<sup>beta</sup>"
+msgstr "Gutenberg Blokları <sup>beta</sup>"
+
+#: lib/options/SWP_Section_HTML.php:593
 msgid "Create Bitly Links?"
 msgstr "Bitly bağlantıları oluşturulsun mu?"
 
@@ -58,19 +91,19 @@ msgstr "Detayları görüntüle"
 msgid "Click here to visit TwitCount.com"
 msgstr "TwitCount.com'u ziyaret etmek için buraya tıklayın"
 
-#: lib/options/SWP_Section_HTML.php:529
+#: lib/options/SWP_Section_HTML.php:530
 msgid "Yummly Tags"
 msgstr "Yummly Etiketleri"
 
-#: lib/options/SWP_Section_HTML.php:524
+#: lib/options/SWP_Section_HTML.php:525
 msgid "Yummly Categories"
 msgstr "Yummly Kategorileri"
 
-#: lib/options/SWP_Options_Page.php:678
+#: lib/options/SWP_Options_Page.php:767
 msgid "Float Before Content"
 msgstr "İçerikten Önce Kayan"
 
-#: lib/social-networks/SWP_Twitter.php:37
+#: lib/social-networks/SWP_Twitter.php:39
 msgid "Twitter"
 msgstr "Twitter"
 
@@ -94,15 +127,15 @@ msgstr "Google Plus"
 msgid "Facebook"
 msgstr "Facebook"
 
-#: lib/options/SWP_Section_HTML.php:536
+#: lib/options/SWP_Section_HTML.php:537
 msgid "Yummly Terms"
 msgstr "Yummly Terimleri"
 
-#: lib/options/SWP_Section_HTML.php:521
+#: lib/options/SWP_Section_HTML.php:522
 msgid "Choose Tag"
 msgstr "Etiket Seç"
 
-#: lib/options/SWP_Section_HTML.php:517
+#: lib/options/SWP_Section_HTML.php:518
 msgid "Choose Category"
 msgstr "Kategori Seç"
 
@@ -110,79 +143,79 @@ msgstr "Kategori Seç"
 msgid "Bitly Link Shortening"
 msgstr "Bitly Bağlantı Kısaltma"
 
-#: lib/options/SWP_Options_Page.php:748
+#: lib/options/SWP_Options_Page.php:837
 msgid "Save Changes"
 msgstr "Değişiklikleri Kaydet"
 
-#: lib/options/SWP_Options_Page.php:644
+#: lib/options/SWP_Options_Page.php:733
 msgid "On the right side of the page"
 msgstr "Sayfanın sağ tarafında"
 
-#: lib/options/SWP_Options_Page.php:581 lib/options/SWP_Options_Page.php:586
+#: lib/options/SWP_Options_Page.php:696 lib/options/SWP_Options_Page.php:701
 msgid "Buttons Preview"
 msgstr "Düğmeleri Önizleme"
 
-#: lib/options/SWP_Options_Page.php:501
+#: lib/options/SWP_Options_Page.php:563
 msgid "Addon Registrations"
 msgstr "Eklenti Kayıtları"
 
-#: lib/options/SWP_Options_Page.php:471
+#: lib/options/SWP_Options_Page.php:532
 msgid "Position Table"
 msgstr "Pozisyon Tablosu"
 
-#: lib/options/SWP_Options_Page.php:467
+#: lib/options/SWP_Options_Page.php:528
 msgid "These settings let you decide where the share buttons should go for each post type."
 msgstr "Bu ayarlar, paylaşma düğmelerinin her yazı türü için nerede olması gerektiğine karar vermenizi sağlar."
 
-#: lib/options/SWP_Options_Page.php:246
+#: lib/options/SWP_Options_Page.php:279
 msgid "Custom Color Outlines"
 msgstr "Özel Renk Anahatları"
 
-#: lib/options/SWP_Options_Page.php:245
+#: lib/options/SWP_Options_Page.php:278
 msgid "Custom Color"
 msgstr "Özel Renk"
 
-#: lib/options/SWP_Options_Page.php:244
+#: lib/options/SWP_Options_Page.php:277
 msgid "Color Outlines"
 msgstr "Renk Anahatları"
 
-#: lib/options/SWP_Options_Page.php:243
+#: lib/options/SWP_Options_Page.php:276
 msgid "Dark Gray Outlines"
 msgstr "Koyu Gri Anahatlar"
 
-#: lib/options/SWP_Options_Page.php:242
+#: lib/options/SWP_Options_Page.php:275
 msgid "Medium Gray Outlines"
 msgstr "Orta Gri Anahatlar"
 
-#: lib/options/SWP_Options_Page.php:241
+#: lib/options/SWP_Options_Page.php:274
 msgid "Light Gray Outlines"
 msgstr "Açık Gri Anahatlar"
 
-#: lib/options/SWP_Options_Page.php:240
+#: lib/options/SWP_Options_Page.php:273
 msgid "Dark Gray"
 msgstr "Koyu Gri"
 
-#: lib/options/SWP_Options_Page.php:239
+#: lib/options/SWP_Options_Page.php:272
 msgid "Medium Gray"
 msgstr "Orta Gri"
 
-#: lib/options/SWP_Options_Page.php:238
+#: lib/options/SWP_Options_Page.php:271
 msgid "Light Gray"
 msgstr "Açık Gri"
 
-#: lib/options/SWP_Options_Page.php:237
+#: lib/options/SWP_Options_Page.php:270
 msgid "Full Color"
 msgstr "Tüm renkler"
 
-#: lib/options/SWP_Options_Page.php:497
+#: lib/options/SWP_Options_Page.php:558
 msgid "Registration"
 msgstr "Kayıt"
 
-#: lib/utilities/SWP_Plugin_Updater.php:417
+#: lib/utilities/SWP_Plugin_Updater.php:426
 msgid "Error"
 msgstr "Hata"
 
-#: lib/utilities/SWP_Plugin_Updater.php:417
+#: lib/utilities/SWP_Plugin_Updater.php:426
 msgid "You do not have permission to install plugin updates"
 msgstr "Eklenti güncellemeleri kurmak için izne sahip değilsiniz"
 
@@ -231,37 +264,28 @@ msgstr "Eklentiyi kaydet"
 msgid "Step 3: Flip the switch below to \"ON\", select which tracking service the plugin should use, then save your changes."
 msgstr "3. Adım: Aşağıdaki düğmeyi \"Açık\" konumuna getirin, eklentinin hangi izleme servisini kullanacağını seçin, ardından değişikliklerinizi kaydedin."
 
-#: lib/options/SWP_Section_HTML.php:202
-msgid "Step 2: Follow the prompts on their website to create an account and add your domain to be tracked for share counts."
-msgstr "2. Adım: Bir hesap oluşturmak ve paylaşım sayınızın izlenmesi amacıyla alan alan adınızı eklemek için web sitelerindeki komutları izleyin."
-
-#: lib/options/SWP_Section_HTML.php:202
-msgid "Click here to visit OpenShareCount.com (Recommended)"
-msgstr "OpenShareCount.com'u ziyaret etmek için buraya tıklayın (Önerilen)"
-
-#. #-#-#-#-#  social-warfare-code.pot (Social Warfare 3.3.3)  #-#-#-#-#
-#. Plugin URI of the plugin/theme
-#. #-#-#-#-#  social-warfare-code.pot (Social Warfare 3.3.3)  #-#-#-#-#
-#. Author URI of the plugin/theme
+#. Plugin URI of the plugin
+#. Author URI of the plugin
 msgid "https://warfareplugins.com"
 msgstr "https://warfareplugins.com"
 
-#. Plugin Name of the plugin/theme
+#. Plugin Name of the plugin
+#: assets/js/post-editor/blocks.php:59
 msgid "Social Warfare"
 msgstr "Social Warfare"
 
-#: lib/options/SWP_Section_HTML.php:316 lib/social-networks/SWP_Twitter.php:38
+#: lib/social-networks/SWP_Twitter.php:40 lib/options/SWP_Section_HTML.php:317
 msgid "Tweet"
 msgstr "Tweetle"
 
-#: lib/options/SWP_Section_HTML.php:338 lib/options/SWP_Section_HTML.php:349
 #: lib/social-networks/SWP_Facebook.php:38
 #: lib/social-networks/SWP_Linkedin.php:24 lib/social-networks/SWP_Mix.php:38
+#: lib/options/SWP_Section_HTML.php:339 lib/options/SWP_Section_HTML.php:350
 msgid "Share"
 msgstr "Paylaş"
 
-#: lib/options/SWP_Section_HTML.php:305
 #: lib/social-networks/SWP_Google_Plus.php:39
+#: lib/options/SWP_Section_HTML.php:306
 msgid "+1"
 msgstr "+1"
 
@@ -269,7 +293,7 @@ msgstr "+1"
 msgid "Please enter your Twitter username."
 msgstr "Lütfen Twitter kullanıcı adınızı girin."
 
-#: lib/utilities/SWP_Utility.php:86
+#: lib/utilities/SWP_Utility.php:153
 msgid "No settings to save."
 msgstr "Kaydedilecek ayar yok."
 
@@ -277,19 +301,19 @@ msgstr "Kaydedilecek ayar yok."
 msgid "Press Ctrl+C to Copy this information."
 msgstr "Bu bilgiyi kopyalamak için CTRL+C'ye basın."
 
-#: lib/options/SWP_Option_Icons.php:132 lib/options/SWP_Options_Page.php:439
+#: lib/options/SWP_Options_Page.php:469 lib/options/SWP_Option_Icons.php:129
 msgid "Active"
 msgstr "Etkin"
 
-#: lib/options/SWP_Options_Page.php:371
+#: lib/options/SWP_Options_Page.php:404
 msgid "Advanced"
 msgstr "Gelişmiş"
 
-#: lib/options/SWP_Options_Page.php:617
+#: lib/options/SWP_Options_Page.php:516
 msgid "Alignment"
 msgstr "Hizalama"
 
-#: lib/options/SWP_Options_Page.php:435
+#: lib/options/SWP_Options_Page.php:465
 msgid "Drag & Drop to activate and order your share buttons."
 msgstr "Paylaşım düğmelerinizi etkinleştirmek ve sıralamak için sürükleyip bırakın."
 
@@ -297,28 +321,21 @@ msgstr "Paylaşım düğmelerinizi etkinleştirmek ve sıralamak için sürükle
 msgid "Settings"
 msgstr "Ayarlar"
 
-#. Author of the plugin/theme
-msgid "Warfare Plugins"
-msgstr "Warfare Eklentileri"
-
 #: lib/social-networks/SWP_Stumble_Upon.php:38
 msgid "Stumble"
 msgstr "Stumble"
 
-#: lib/options/SWP_Section_HTML.php:327
 #: lib/social-networks/SWP_Pinterest.php:35
+#: lib/options/SWP_Section_HTML.php:328
 msgid "Pin"
 msgstr "Pin"
 
-#: lib/frontend-output/SWP_Script.php:139
-msgid "Characters Remaining"
-msgstr "Kalan Karakterler"
-
-#: lib/frontend-output/SWP_Buttons_Panel.php:1002
+#: lib/buttons-panel/SWP_Buttons_Panel_Trait.php:709
 msgid "Shares"
 msgstr "Paylaşımlar"
 
-#: lib/frontend-output/SWP_Shortcode.php:169
+#: lib/frontend-output/SWP_Shortcode.php:203
+#: assets/js/post-editor/src/block/click-to-tweet.js:23
 msgid "Click To Tweet"
 msgstr "Tweetle"
 
@@ -330,9 +347,8 @@ msgstr "Lütfen Facebook profilinizin URL'sini girin."
 msgid "Facebook Author URL"
 msgstr "Facebook Geliştirici URL'si"
 
-#: lib/Social_Warfare_Addon.php:263
+#: lib/Social_Warfare_Addon.php:263 lib/utilities/SWP_Utility.php:146
 #: lib/options/SWP_Registration_Tab_Template.php:57
-#: lib/utilities/SWP_Utility.php:79
 msgid "Security failed."
 msgstr "Güvenlik başarısız oldu."
 
@@ -352,178 +368,178 @@ msgstr "Kapalı"
 msgid "ON"
 msgstr "Açık"
 
-#: lib/options/SWP_Options_Page.php:402
+#: lib/options/SWP_Options_Page.php:432
 msgid "If your theme does not use excerpts, but instead displays the full post content on archive, category, and home pages, activate this toggle to allow the buttons to appear in those areas."
 msgstr "Temanızda alıntılar kullanılmıyorsa, bunun yerine arşiv, kategori ve ana sayfalardaki tam yazı içeriği görüntülenirse, düğmelerin bu alanlarda görünmesini sağlamak için bu geçişi etkinleştirin."
 
-#: lib/options/SWP_Options_Page.php:400
+#: lib/options/SWP_Options_Page.php:430
 msgid "Full Content vs. Excerpts"
 msgstr "Tam İçerik vs. Alıntılar"
 
-#: lib/options/SWP_Options_Page.php:405
+#: lib/options/SWP_Options_Page.php:435
 msgid "Full Content?"
 msgstr "Tam İçerik?"
 
-#: lib/options/SWP_Options_Page.php:376
+#: lib/options/SWP_Options_Page.php:420
 msgid "If you want to stop content pirates from framing your content, turn this on."
 msgstr "İçerik korsanlarının içeriğinizi kullanmasını durdurmak istiyorsanız, bunu etkinleştirin."
 
-#: lib/options/SWP_Options_Page.php:552
+#: lib/options/SWP_Options_Page.php:668
 msgid "Facebook App ID"
 msgstr "Facebook Uygulama ID"
 
-#: lib/options/SWP_Options_Page.php:540
+#: lib/options/SWP_Options_Page.php:656
 msgid "Pinterest Username"
 msgstr "Pinterest Kullanıcı Adı"
 
-#: lib/options/SWP_Options_Page.php:453
+#: lib/options/SWP_Options_Page.php:483
 msgid "Button Counts"
 msgstr "Düğme Sayımları"
 
-#: lib/options/SWP_Options_Page.php:448
+#: lib/options/SWP_Options_Page.php:478
 msgid "Use the toggles below to determine how to display your social proof."
 msgstr "Sosyal varlığınızı nasıl görüntüleyeceğinizi belirlemek için aşağıdaki geçişleri kullanın."
 
-#: lib/options/SWP_Options_Page.php:447
+#: lib/options/SWP_Options_Page.php:477
 msgid "Share Counts"
 msgstr "Paylaşım Sayımları"
 
-#: lib/options/SWP_Options_Page.php:433
+#: lib/options/SWP_Options_Page.php:463
 msgid "Social Networks"
 msgstr "Sosyal Ağlar"
 
-#: lib/options/SWP_Options_Page.php:430
+#: lib/options/SWP_Options_Page.php:460
 msgid "Display"
 msgstr "Görüntüle"
 
-#: lib/options/SWP_Options_Page.php:608
+#: lib/options/SWP_Options_Page.php:506
 msgid "Decimal Separator"
 msgstr "Ondalık Ayırıcı"
 
-#: lib/options/SWP_Options_Page.php:598
+#: lib/options/SWP_Options_Page.php:495
 msgid "Decimal Places"
 msgstr "Ondalık"
 
-#: lib/options/SWP_Options_Page.php:593
-msgid "Customize how the \"Total Shares\" section of your share buttons look."
-msgstr "Paylaşma düğmelerinizin \"Toplam Paylaşımlar\" bölümünün nasıl görüneceğini özelleştirin."
-
-#: lib/options/SWP_Options_Page.php:578
+#: lib/options/SWP_Options_Page.php:693
 msgid "Styles"
 msgstr "Biçimler"
 
-#: lib/options/SWP_Section_HTML.php:394 lib/options/SWP_Section_HTML.php:560
+#: lib/options/SWP_Section_HTML.php:395 lib/options/SWP_Section_HTML.php:561
 msgid "Off"
 msgstr "Kapalı"
 
-#: lib/options/SWP_Section_HTML.php:393 lib/options/SWP_Section_HTML.php:559
+#: lib/options/SWP_Section_HTML.php:394 lib/options/SWP_Section_HTML.php:560
 msgid "On"
 msgstr "Açık"
 
-#: lib/options/SWP_Options_Page.php:354 lib/options/SWP_Section_HTML.php:389
+#: lib/options/SWP_Options_Page.php:387 lib/options/SWP_Section_HTML.php:390
 msgid "None/Manual Placement"
 msgstr "Hiçbiri/Manuel Yerleşim"
 
-#: lib/options/SWP_Options_Page.php:353 lib/options/SWP_Section_HTML.php:388
+#: lib/options/SWP_Options_Page.php:386 lib/options/SWP_Section_HTML.php:389
 msgid "Both Above and Below the Content"
 msgstr "İçeriğin Üstünde ve Altında"
 
-#: lib/options/SWP_Options_Page.php:352 lib/options/SWP_Section_HTML.php:387
+#: lib/options/SWP_Options_Page.php:385 lib/options/SWP_Section_HTML.php:388
 msgid "Below the Content"
 msgstr "İçeriğin Altında"
 
-#: lib/options/SWP_Options_Page.php:351 lib/options/SWP_Section_HTML.php:386
+#: lib/options/SWP_Options_Page.php:384 lib/options/SWP_Section_HTML.php:387
 msgid "Above the Content"
 msgstr "İçeriğin Üstünde"
 
-#: lib/options/SWP_Section_HTML.php:409
+#: lib/options/SWP_Section_HTML.php:410
 msgid "Floating Buttons (If Activated)"
 msgstr "Kayan Düğmeler (Etkinleştirilmişse)"
 
-#: lib/options/SWP_Section_HTML.php:406
+#: lib/options/SWP_Section_HTML.php:407
 msgid "Static Buttons"
 msgstr "Statik Düğmeler"
 
-#: lib/options/SWP_Section_HTML.php:403 lib/options/SWP_Section_HTML.php:588
+#: lib/options/SWP_Section_HTML.php:404 lib/options/SWP_Section_HTML.php:589
 msgid "Post Type"
 msgstr "Yazı Türü"
 
-#: lib/options/SWP_Options_Page.php:466
+#: lib/options/SWP_Options_Page.php:527
 msgid "Position Share Buttons"
 msgstr "Paylaşma Düğmeleri Konumu"
 
-#: lib/options/SWP_Options_Page.php:459 lib/options/SWP_Options_Page.php:592
+#: lib/options/SWP_Options_Page.php:489
 msgid "Total Counts"
 msgstr "Toplam Sayım"
 
-#: lib/options/SWP_Options_Page.php:627 lib/options/SWP_Options_Page.php:633
+#: lib/options/SWP_Options_Page.php:716 lib/options/SWP_Options_Page.php:722
 msgid "Floating Share Buttons"
 msgstr "Kayan Paylaşım Düğmeleri"
 
-#: lib/admin/SWP_User_Profile.php:64 lib/options/SWP_Options_Page.php:534
+#: lib/options/SWP_Options_Page.php:650 lib/admin/SWP_User_Profile.php:64
 msgid "Twitter Username"
 msgstr "Twitter Kullanıcı Adı"
 
-#: lib/options/SWP_Options_Page.php:531
+#: lib/options/SWP_Options_Page.php:647
 msgid "If you would like to set sitewide defaults for your social identity, add them below."
 msgstr "Sosyal kimliğiniz için site varsayılanlarını ayarlamak isterseniz, bunları aşağıya ekleyin."
 
-#: lib/options/SWP_Options_Page.php:527
+#: lib/options/SWP_Options_Page.php:643
 msgid "Social Identity"
 msgstr "Sosyal Kimlik"
 
-#: lib/options/SWP_Options_Page.php:652
+#: lib/options/SWP_Options_Page.php:741
 msgid "Background Color"
 msgstr "Arkaplan Rengi"
 
-#: lib/options/SWP_Options_Page.php:670
+#: lib/options/SWP_Options_Page.php:759
 msgid "Fade In / Fade Out"
 msgstr "Azalt/Arttır"
 
-#: lib/options/SWP_Options_Page.php:669
+#: lib/options/SWP_Options_Page.php:758
 msgid "Slide In / Slide Out"
 msgstr "İçeri/Dışarı"
 
-#: lib/options/SWP_Options_Page.php:666
+#: lib/options/SWP_Options_Page.php:755
 msgid "Transition"
 msgstr "Geçiş"
 
-#: lib/options/SWP_Options_Page.php:659
+#: lib/options/SWP_Options_Page.php:748
 msgid "Minimum Screen Width"
 msgstr "Minimum Ekran Genişliği"
 
-#: lib/options/SWP_Options_Page.php:643
+#: lib/options/SWP_Options_Page.php:732
 msgid "On the left side of the page"
 msgstr "Sayfanın sol tarafında"
 
-#: lib/options/SWP_Options_Page.php:642
+#: lib/options/SWP_Options_Page.php:731
 msgid "Bottom of the Page"
 msgstr "Sayfanın altı"
 
-#: lib/options/SWP_Options_Page.php:641
+#: lib/options/SWP_Options_Page.php:730
 msgid "Top of the Page"
 msgstr "Sayfanın üstü"
 
-#: lib/options/SWP_Options_Page.php:639
+#: lib/options/SWP_Options_Page.php:728
 msgid "Float Position"
 msgstr "Kayma Konumu"
 
-#: lib/options/SWP_Options_Page.php:628
+#: lib/options/SWP_Options_Page.php:717
 msgid "If you would like to activate floating share buttons, turn this on."
 msgstr "Kayan paylaşım düğmelerini etkinleştirmek isterseniz, bunu etkinleştirin."
 
-#: lib/options/SWP_Options_Page.php:374 lib/options/SWP_Options_Page.php:380
+#: lib/options/SWP_Options_Page.php:418 lib/options/SWP_Options_Page.php:424
 msgid "Frame Buster"
 msgstr "Frame Buster"
 
-#: lib/options/SWP_Option_Icons.php:213 lib/options/SWP_Options_Page.php:442
+#: lib/options/SWP_Options_Page.php:472 lib/options/SWP_Option_Icons.php:180
 msgid "Inactive"
 msgstr "Etkin Değil"
 
-#: lib/options/SWP_Options_Page.php:546
+#: lib/options/SWP_Options_Page.php:662
 msgid "Facebook Page URL"
 msgstr "Facebook Sayfa URL'si"
 
-#. Description of the plugin/theme
+#. Description of the plugin
 msgid "A plugin to maximize social shares and drive more traffic using the fastest and most intelligent share buttons on the market, calls to action via in-post click-to-tweets, popular posts widgets based on share popularity, link-shortening, Google Analytics and much, much more!"
-msgstr "Sosyal paylaşımları en üst düzeye çıkarmak için piyasadaki en hızlı ve en akıllı paylaşım düğmelerini kullanarak daha fazla trafik çekmek ve sosyal paylaşımları en üst düzeye çıkarmak için bir eklenti: Tıklama sonrası tweet'ler, paylaşım popülerliğine dayalı popüler yazı bileşenleri, bağlantı kısaltma, Google Analytics ve çok çok fazlası!"
+msgstr "Piyasadaki en hızlı ve en akıllı paylaşım düğmelerini kullanarak daha fazla trafik çekmek ve sosyal paylaşımları en üst düzeye çıkarmak için bir eklenti: Tıklama sonrası tweet'ler, paylaşım popülerliğine dayalı popüler yazı bileşenleri, bağlantı kısaltma, Google Analytics ve çok daha fazlası!"
+
+#. Author of the plugin
+msgid "Warfare Plugins"
+msgstr "Warfare Plugins"

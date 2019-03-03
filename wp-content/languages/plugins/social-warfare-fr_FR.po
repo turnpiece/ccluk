@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - WordPress Social Sharing Plugin &#8211; Social Warfare - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-07-12 07:46:33+0000\n"
+"PO-Revision-Date: 2019-02-27 07:53:43+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -11,517 +11,539 @@ msgstr ""
 "Language: fr\n"
 "Project-Id-Version: Plugins - WordPress Social Sharing Plugin &#8211; Social Warfare - Stable (latest release)\n"
 
-#: functions/options/SWP_Options_Page.php:681
-msgid "Float Before Content"
-msgstr "Boutons flottants avant le contenu"
+#: lib/options/SWP_Options_Page.php:126
+msgid "Social Network Connections"
+msgstr "Connexion aux réseaux sociaux"
 
-#: functions/options/SWP_Section_HTML.php:520
+#: assets/js/post-editor/src/block/click-to-tweet.js:30
+msgid "share"
+msgstr "partage"
+
+#: assets/js/post-editor/src/block/click-to-tweet.js:29
+msgid "quote"
+msgstr "citation"
+
+#: assets/js/post-editor/src/block/click-to-tweet.js:28
+msgid "twitter"
+msgstr "twitter"
+
+#: lib/options/SWP_Section_HTML.php:202
+msgid "Step 2: Follow the prompts on their website to create an account and add your domain to be tracked for share counts. If you see a prompt to customize your button, ignore and click past that. You are not using their button, you are using ours."
+msgstr "Étape 2 : Suivez les consignes sur leur site pour créer un compte et ajouter votre domaine au suivi des partages sociaux. Si on vous invite à personnaliser votre bouton, passez cette étape. Vous n’utilisez pas leur bouton mais les nôtres."
+
+#: lib/options/SWP_Registration_Tab_Template.php:104
+msgid "Enter your registration key for "
+msgstr "Saisissez votre clé d’activation pour "
+
+#: lib/options/SWP_Registration_Tab_Template.php:100
+#: lib/options/SWP_Registration_Tab_Template.php:137
+msgid "This copy of "
+msgstr "Cette copie de"
+
+#: lib/options/SWP_Options_Page.php:412
+msgid "Enable Gutenberg Blocks"
+msgstr "Activer les blocs Gutenberg"
+
+#: lib/options/SWP_Options_Page.php:407
+msgid "Gutenberg Blocks<sup>beta</sup>"
+msgstr "Blocs Gutenberg<sup>beta</sup>"
+
+#: lib/options/SWP_Section_HTML.php:593
+msgid "Create Bitly Links?"
+msgstr "Créer des liens Bitly ?"
+
+#: lib/social-networks/SWP_Mix.php:37
+msgid "Mix"
+msgstr "Mix"
+
+#: lib/update-checker/Puc/v4p4/Vcs/PluginUpdateChecker.php:98
+msgid "There is no changelog available."
+msgstr "Il n’y a pas de journal de modifications disponible."
+
+#: lib/update-checker/Puc/v4p4/Plugin/Ui.php:223
+msgid "Unknown update checker status \"%s\""
+msgstr "État du vérificateur de mises à jour inconnu \"%s\""
+
+#: lib/update-checker/Puc/v4p4/Plugin/Ui.php:217
+msgctxt "the plugin title"
+msgid "Could not determine if updates are available for %s."
+msgstr "Impossible de déterminer si des mises à jour sont disponibles pour %s."
+
+#: lib/update-checker/Puc/v4p4/Plugin/Ui.php:215
+msgctxt "the plugin title"
+msgid "A new version of the %s plugin is available."
+msgstr "Une nouvelle version de l’extension %s est disponible."
+
+#: lib/update-checker/Puc/v4p4/Plugin/Ui.php:213
+msgctxt "the plugin title"
+msgid "The %s plugin is up to date."
+msgstr "L’extension %s est à jour."
+
+#: lib/update-checker/Puc/v4p4/Plugin/Ui.php:128
+msgid "Check for updates"
+msgstr "Vérifier les mises à jour"
+
+#: lib/update-checker/Puc/v4p4/Plugin/Ui.php:77
+msgid "More information about %s"
+msgstr "Plus d’informations sur %s"
+
+#: lib/update-checker/Puc/v4p4/Plugin/Ui.php:54
+msgid "View details"
+msgstr "Voir les détails"
+
+#: lib/options/SWP_Section_HTML.php:202
+msgid "Click here to visit TwitCount.com"
+msgstr "Cliquez ici pour visiter TwitCount.com"
+
+#: lib/options/SWP_Section_HTML.php:530
 msgid "Yummly Tags"
 msgstr "Étiquettes Yummly"
 
-#: functions/options/SWP_Section_HTML.php:515
+#: lib/options/SWP_Section_HTML.php:525
 msgid "Yummly Categories"
 msgstr "Catégories Yummly"
 
-#: functions/options/SWP_Section_HTML.php:260
-msgid "Bitly Link Shortening"
-msgstr "Raccourcisseur de lien Bitly"
+#: lib/options/SWP_Options_Page.php:767
+msgid "Float Before Content"
+msgstr "Boutons flottants avant le contenu"
 
-#: functions/options/SWP_Options_Page.php:250
-msgid "Custom Color Outlines"
-msgstr "Couleur personnalisée"
-
-#: functions/options/SWP_Options_Page.php:249
-msgid "Custom Color"
-msgstr "Couleur personnalisée"
-
-#: functions/options/SWP_Options_Page.php:248
-msgid "Color Outlines"
-msgstr "Contours colorés"
-
-#: functions/options/SWP_Options_Page.php:247
-msgid "Dark Gray Outlines"
-msgstr "Contours gris foncé"
-
-#: functions/options/SWP_Options_Page.php:246
-msgid "Medium Gray Outlines"
-msgstr "Contours gris"
-
-#: functions/options/SWP_Options_Page.php:245
-msgid "Light Gray Outlines"
-msgstr "Contours gris clair"
-
-#: functions/options/SWP_Options_Page.php:244
-msgid "Dark Gray"
-msgstr "Gris foncé"
-
-#: functions/options/SWP_Options_Page.php:243
-msgid "Medium Gray"
-msgstr "Gris"
-
-#: functions/options/SWP_Options_Page.php:242
-msgid "Light Gray"
-msgstr "Gris clair"
-
-#: functions/options/SWP_Options_Page.php:241
-msgid "Full Color"
-msgstr "Couleurs originales"
-
-#: functions/options/SWP_Section_HTML.php:527
-msgid "Yummly Terms"
-msgstr "Réglages de Yummly"
-
-#: functions/options/SWP_Section_HTML.php:512
-msgid "Choose Tag"
-msgstr "Choisissez une étiquette"
-
-#: functions/options/SWP_Section_HTML.php:508
-msgid "Choose Category"
-msgstr "Choisissez une catégorie"
-
-#: functions/social-networks/SWP_Twitter.php:37
+#: lib/social-networks/SWP_Twitter.php:39
 msgid "Twitter"
 msgstr "Twitter"
 
-#: functions/social-networks/SWP_Stumble_Upon.php:37
+#: lib/social-networks/SWP_Stumble_Upon.php:37
 msgid "StumbleUpon"
 msgstr "StumbleUpon"
 
-#: functions/social-networks/SWP_Pinterest.php:34
+#: lib/social-networks/SWP_Pinterest.php:34
 msgid "Pinterest"
 msgstr "Pinterest"
 
-#: functions/social-networks/SWP_Linkedin.php:23
+#: lib/social-networks/SWP_Linkedin.php:23
 msgid "LinkedIn"
 msgstr "LinkedIn"
 
-#: functions/social-networks/SWP_Google_Plus.php:38
+#: lib/social-networks/SWP_Google_Plus.php:38
 msgid "Google Plus"
 msgstr "Google Plus"
 
-#: functions/social-networks/SWP_Facebook.php:37
+#: lib/social-networks/SWP_Facebook.php:37
 msgid "Facebook"
 msgstr "Facebook"
 
-#: functions/options/SWP_Options_Page.php:751
+#: lib/options/SWP_Section_HTML.php:537
+msgid "Yummly Terms"
+msgstr "Réglages de Yummly"
+
+#: lib/options/SWP_Section_HTML.php:522
+msgid "Choose Tag"
+msgstr "Choisissez une étiquette"
+
+#: lib/options/SWP_Section_HTML.php:518
+msgid "Choose Category"
+msgstr "Choisissez une catégorie"
+
+#: lib/options/SWP_Section_HTML.php:271
+msgid "Bitly Link Shortening"
+msgstr "Raccourcisseur de lien Bitly"
+
+#: lib/options/SWP_Options_Page.php:837
 msgid "Save Changes"
 msgstr "Enregistrer"
 
-#: functions/options/SWP_Options_Page.php:584
-#: functions/options/SWP_Options_Page.php:589
-msgid "Buttons Preview"
-msgstr "Aperçu des boutons"
-
-#: functions/options/SWP_Options_Page.php:504
-msgid "Addon Registrations"
-msgstr "Licence des modules complémentaires"
-
-#: functions/options/SWP_Options_Page.php:647
+#: lib/options/SWP_Options_Page.php:733
 msgid "On the right side of the page"
 msgstr "Sur le côté droit de la page"
 
-#: functions/options/SWP_Options_Page.php:470
-msgid "These settings let you decide where the share buttons should go for each post type."
-msgstr "Ces réglages vous permettent de définir où iront les boutons de partage pour chaque type de contenu."
+#: lib/options/SWP_Options_Page.php:696 lib/options/SWP_Options_Page.php:701
+msgid "Buttons Preview"
+msgstr "Aperçu des boutons"
 
-#: functions/options/SWP_Options_Page.php:474
+#: lib/options/SWP_Options_Page.php:563
+msgid "Addon Registrations"
+msgstr "Licence des modules complémentaires"
+
+#: lib/options/SWP_Options_Page.php:532
 msgid "Position Table"
 msgstr "Tableau de position"
 
-#: functions/options/SWP_Options_Page.php:500
+#: lib/options/SWP_Options_Page.php:528
+msgid "These settings let you decide where the share buttons should go for each post type."
+msgstr "Ces réglages vous permettent de définir où iront les boutons de partage pour chaque type de publication."
+
+#: lib/options/SWP_Options_Page.php:279
+msgid "Custom Color Outlines"
+msgstr "Couleur personnalisée"
+
+#: lib/options/SWP_Options_Page.php:278
+msgid "Custom Color"
+msgstr "Couleur personnalisée"
+
+#: lib/options/SWP_Options_Page.php:277
+msgid "Color Outlines"
+msgstr "Contours colorés"
+
+#: lib/options/SWP_Options_Page.php:276
+msgid "Dark Gray Outlines"
+msgstr "Contours gris foncé"
+
+#: lib/options/SWP_Options_Page.php:275
+msgid "Medium Gray Outlines"
+msgstr "Contours gris"
+
+#: lib/options/SWP_Options_Page.php:274
+msgid "Light Gray Outlines"
+msgstr "Contours gris clair"
+
+#: lib/options/SWP_Options_Page.php:273
+msgid "Dark Gray"
+msgstr "Gris foncé"
+
+#: lib/options/SWP_Options_Page.php:272
+msgid "Medium Gray"
+msgstr "Gris"
+
+#: lib/options/SWP_Options_Page.php:271
+msgid "Light Gray"
+msgstr "Gris clair"
+
+#: lib/options/SWP_Options_Page.php:270
+msgid "Full Color"
+msgstr "Couleurs originales"
+
+#: lib/options/SWP_Options_Page.php:558
 msgid "Registration"
 msgstr "Licence"
 
-#: functions/admin/registration.php:341 functions/includes/SWP_Addon.php:264
-msgid "Plugin successfully unregistered!"
-msgstr "Votre licence a été désactivée !"
-
-#: functions/admin/registration.php:337 functions/includes/SWP_Addon.php:260
-msgid "Plugin could not be unregistered."
-msgstr "La licence ne peut pas être désactivée."
-
-#: functions/admin/registration.php:330 functions/includes/SWP_Addon.php:253
-msgid "Plugin successfully registered!"
-msgstr "Votre licence a été enregistrée !"
-
-#: functions/admin/registration.php:326 functions/includes/SWP_Addon.php:249
-msgid "Plugin could not be registered."
-msgstr "Votre licence ne peut pas être enregistrée."
-
-#: functions/admin/registration.php:318 functions/includes/SWP_Addon.php:241
-msgid "Required fields missing."
-msgstr "Des champs obligatoires sont vides."
-
-#: functions/admin/options-registration.php:79
-#: functions/includes/registration.php:52
-#: functions/options/SWP_Addon_Registration.php:103
-msgid "Unregister Plugin"
-msgstr "Dissocier la licence"
-
-#: functions/admin/options-registration.php:73
-#: functions/includes/registration.php:46
-#: functions/options/SWP_Addon_Registration.php:97
-msgid "Deactivate Registration"
-msgstr "Désactivez votre licence premium"
-
-#: functions/admin/options-registration.php:68
-#: functions/includes/registration.php:41
-#: functions/options/SWP_Addon_Registration.php:92
-msgid "To unregister your license click the button below to free it up for use on another domain."
-msgstr "Pour dissocier votre licence (pour en libérer une ou l’utiliser sur un autre domaine), cliquez sur le bouton ci-dessous."
-
-#: functions/admin/options-registration.php:54
-#: functions/includes/registration.php:27
-#: functions/options/SWP_Addon_Registration.php:70
-msgid "Register Plugin"
-msgstr "Enregistrez votre licence"
-
-#: functions/legacy/update-checker.php:399
-#: functions/utilities/SWP_Plugin_Updater.php:403
+#: lib/utilities/SWP_Plugin_Updater.php:426
 msgid "Error"
 msgstr "Erreur"
 
-#: functions/legacy/update-checker.php:399
-#: functions/utilities/SWP_Plugin_Updater.php:403
+#: lib/utilities/SWP_Plugin_Updater.php:426
 msgid "You do not have permission to install plugin updates"
 msgstr "Vous n’avez pas la permission d’installer les mises à jour de l’extension."
 
-#: functions/legacy/update-checker.php:201
-#: functions/utilities/SWP_Plugin_Updater.php:205
-msgid "There is a new version of %1$s available. %2$sView version %3$s details%4$s."
-msgstr "Une nouvelle version de %1$s est disponible. %2$sConsultez les détails %3$s de cette version%4$s."
+#: lib/Social_Warfare_Addon.php:293
+#: lib/options/SWP_Registration_Tab_Template.php:87
+msgid "Plugin successfully unregistered!"
+msgstr "Votre licence a été désactivée !"
 
-#: functions/legacy/update-checker.php:209
-#: functions/utilities/SWP_Plugin_Updater.php:213
-msgid "There is a new version of %1$s available. %2$sView version %3$s details%4$s or %5$supdate now%6$s."
-msgstr "Une nouvelle version de %1$s est disponible. %2$sConsultez les détails %3$s de la version%4$s ou %5$smettez à jour maintenant%6$s."
+#: lib/Social_Warfare_Addon.php:289
+#: lib/options/SWP_Registration_Tab_Template.php:83
+msgid "Plugin could not be unregistered."
+msgstr "La licence ne peut pas être désactivée."
 
-#: functions/options/SWP_Section_HTML.php:213
-msgid "Click here to visit OpenShareCount.com (Recommended)"
-msgstr "Cliquez ici pour visiter OpenShareCount.com (recommandé)."
+#: lib/Social_Warfare_Addon.php:282
+#: lib/options/SWP_Registration_Tab_Template.php:76
+msgid "Plugin successfully registered!"
+msgstr "Votre licence a été enregistrée !"
 
-#: functions/options/SWP_Section_HTML.php:213
-msgid "Step 2: Follow the prompts on their website to create an account and add your domain to be tracked for share counts."
-msgstr "Étape 2 : Suivez les consignes sur leur site internet pour créer un compte et ajouter votre domaine pour que les partages associés sont comptés."
+#: lib/Social_Warfare_Addon.php:278
+#: lib/options/SWP_Registration_Tab_Template.php:72
+msgid "Plugin could not be registered."
+msgstr "Votre licence ne peut pas être enregistrée."
 
-#: functions/options/SWP_Section_HTML.php:213
+#: lib/Social_Warfare_Addon.php:270
+#: lib/options/SWP_Registration_Tab_Template.php:64
+msgid "Required fields missing."
+msgstr "Des champs obligatoires sont vides."
+
+#: lib/options/SWP_Registration_Tab_Template.php:152
+msgid "Unregister Plugin"
+msgstr "Dissocier la licence"
+
+#: lib/options/SWP_Registration_Tab_Template.php:146
+msgid "Deactivate Registration"
+msgstr "Désactivez votre licence premium"
+
+#: lib/options/SWP_Registration_Tab_Template.php:141
+msgid "To unregister your license click the button below to free it up for use on another domain."
+msgstr "Pour dissocier votre licence (pour en libérer une ou l’utiliser sur un autre domaine), cliquez sur le bouton ci-dessous."
+
+#: lib/options/SWP_Registration_Tab_Template.php:119
+msgid "Register Plugin"
+msgstr "Enregistrez votre licence"
+
+#: lib/options/SWP_Section_HTML.php:202
 msgid "Step 3: Flip the switch below to \"ON\", select which tracking service the plugin should use, then save your changes."
 msgstr "Étape 3 : Activez l’option ci-dessous, choisissez le service de suivi que l’extension doit utiliser et enregistrez vos changements."
 
-#: functions/admin/SWP_User_Profile.php:74
-msgid "Please enter the URL of your Facebok profile."
-msgstr "Veuillez saisir l’URL de votre profil Facebook."
-
-#: functions/admin/SWP_User_Profile.php:71
-msgid "Facebook Author URL"
-msgstr "URL Facebook"
-
-#: functions/admin/SWP_User_Profile.php:67
-msgid "Please enter your Twitter username."
-msgstr "Veuillez saisir votre identifiant Twitter."
-
-#: functions/options/SWP_Options_Page.php:408
-msgid "Full Content?"
-msgstr "Contenu en entier ?"
-
-#: functions/options/SWP_Options_Page.php:405
-msgid "If your theme does not use excerpts, but instead displays the full post content on archive, category, and home pages, activate this toggle to allow the buttons to appear in those areas."
-msgstr "Si votre thème n’utilise pas les extraits mais affiche au contraire les articles entiers sur les archives, activez cette option pour que les boutons apparaissent sur ces pages."
-
-#: functions/options/SWP_Options_Page.php:403
-msgid "Full Content vs. Excerpts"
-msgstr "Contenu en entier ou Extraits"
-
-#: functions/options/SWP_Options_Page.php:379
-msgid "If you want to stop content pirates from framing your content, turn this on."
-msgstr "Si vous voulez empêcher les pirates de « framer » votre contenu, activez cette option."
-
-#: functions/options/SWP_Options_Page.php:377
-#: functions/options/SWP_Options_Page.php:383
-msgid "Frame Buster"
-msgstr "Chasseur de « Frame »"
-
-#: functions/options/SWP_Options_Page.php:374
-msgid "Advanced"
-msgstr "Avancé"
-
-#: functions/options/SWP_Options_Page.php:555
-msgid "Facebook App ID"
-msgstr "ID d’application Facebook"
-
-#: functions/options/SWP_Options_Page.php:549
-msgid "Facebook Page URL"
-msgstr "URL de page Facebook"
-
-#: functions/options/SWP_Options_Page.php:543
-msgid "Pinterest Username"
-msgstr "Nom d’utilisateur Pinterest"
-
-#: functions/admin/SWP_User_Profile.php:64
-#: functions/options/SWP_Options_Page.php:537
-msgid "Twitter Username"
-msgstr "Nom d’utilisateur Twitter"
-
-#: functions/options/SWP_Options_Page.php:534
-msgid "If you would like to set sitewide defaults for your social identity, add them below."
-msgstr "Si vous souhaitez appliquer des réglages par défaut sur votre identité sociale, ajoutez-les ci-dessous."
-
-#: functions/options/SWP_Options_Page.php:530
-msgid "Social Identity"
-msgstr "Identité sociale"
-
-#: functions/options/SWP_Options_Page.php:655
-msgid "Background Color"
-msgstr "Couleur d’arrière-plan"
-
-#: functions/options/SWP_Options_Page.php:673
-msgid "Fade In / Fade Out"
-msgstr "Fondu"
-
-#: functions/options/SWP_Options_Page.php:672
-msgid "Slide In / Slide Out"
-msgstr "Déplacement"
-
-#: functions/options/SWP_Options_Page.php:669
-msgid "Transition"
-msgstr "Transition"
-
-#: functions/options/SWP_Options_Page.php:662
-msgid "Minimum Screen Width"
-msgstr "Taille minimale d’écran"
-
-#: functions/options/SWP_Options_Page.php:646
-msgid "On the left side of the page"
-msgstr "Sur le côté gauche de la page"
-
-#: functions/options/SWP_Options_Page.php:645
-msgid "Bottom of the Page"
-msgstr "Bas de page"
-
-#: functions/options/SWP_Options_Page.php:644
-msgid "Top of the Page"
-msgstr "Haut de page"
-
-#: functions/options/SWP_Options_Page.php:642
-msgid "Float Position"
-msgstr "Position des boutons flottants"
-
-#: functions/options/SWP_Options_Page.php:631
-msgid "If you would like to activate floating share buttons, turn this on."
-msgstr "Si vous souhaitez afficher les boutons flottants, activez cette option."
-
-#: functions/options/SWP_Options_Page.php:630
-#: functions/options/SWP_Options_Page.php:636
-msgid "Floating Share Buttons"
-msgstr "Boutons de partage flottants"
-
-#: functions/options/SWP_Options_Page.php:620
-msgid "Alignment"
-msgstr "Alignement"
-
-#: functions/options/SWP_Options_Page.php:611
-msgid "Decimal Separator"
-msgstr "Séparateur décimal"
-
-#: functions/options/SWP_Options_Page.php:601
-msgid "Decimal Places"
-msgstr "Nombre de chiffres après la virgule"
-
-#: functions/options/SWP_Options_Page.php:596
-msgid "Customize how the \"Total Shares\" section of your share buttons look."
-msgstr "Personnalisez comment la somme des partages va apparaître."
-
-#: functions/options/SWP_Options_Page.php:581
-msgid "Styles"
-msgstr "Style"
-
-#: functions/options/SWP_Section_HTML.php:401
-msgid "Floating Buttons (If Activated)"
-msgstr "Boutons flottants (si activé)"
-
-#: functions/options/SWP_Section_HTML.php:398
-msgid "Static Buttons"
-msgstr "Boutons de partage"
-
-#: functions/options/SWP_Section_HTML.php:395
-msgid "Post Type"
-msgstr "Type de contenu"
-
-#: functions/options/SWP_Options_Page.php:469
-msgid "Position Share Buttons"
-msgstr "Position des boutons de partage"
-
-#: functions/options/SWP_Options_Page.php:462
-#: functions/options/SWP_Options_Page.php:595
-msgid "Total Counts"
-msgstr "Somme des partages"
-
-#: functions/options/SWP_Options_Page.php:456
-msgid "Button Counts"
-msgstr "Compteurs individuels"
-
-#: functions/options/SWP_Options_Page.php:451
-msgid "Use the toggles below to determine how to display your social proof."
-msgstr "Utilisez les interrupteurs pour déterminer comment afficher votre preuve sociale."
-
-#: functions/options/SWP_Options_Page.php:450
-msgid "Share Counts"
-msgstr "Compteurs de partages"
-
-#: functions/options/SWP_Options_Page.php:438
-msgid "Drag & Drop to activate and order your share buttons."
-msgstr "Glissez-déposez pour activer et déterminer l’ordre de vos boutons."
-
-#: functions/options/SWP_Options_Page.php:436
-msgid "Social Networks"
-msgstr "Réseaux sociaux"
-
-#: functions/options/SWP_Options_Page.php:433
-msgid "Display"
-msgstr "Apparence"
-
-#: functions/utilities/utility.php:86
-msgid "No settings to save."
-msgstr "Pas de changement à enregistrer."
-
-#: functions/admin/registration.php:311 functions/includes/SWP_Addon.php:234
-#: functions/utilities/utility.php:79
-msgid "Security failed."
-msgstr "Échec de sécurité"
-
-#: functions/options/SWP_Section_HTML.php:82
-msgid "Press Ctrl+C to Copy this information."
-msgstr "Appuyez sur Ctrl+C pour copier cette information."
-
-#: functions/options/SWP_Section_HTML.php:85
-msgid "Get System Status"
-msgstr "Obtenir le statut système"
-
-#: functions/options/SWP_Section_HTML.php:84
-msgid "Opening a support ticket? Copy your System Status by clicking the button below."
-msgstr "Vous souhaitez contacter le support ? Copiez d’abord votre statut système en cliquant sur le bouton ci-dessous."
-
-#: functions/options/SWP_Section_HTML.php:83
-msgid "Need help? Check out our <a href=\"https://warfareplugins.com/support/\" target=\"_blank\">Knowledgebase."
-msgstr "Besoin d’aide ? Jetez d’abord un oeil à notre <a href=\"https://warfareplugins.com/support/\" target=\"_blank\">base de connaissances."
-
-#: functions/options/SWP_Section_HTML.php:213
-msgid "Click here to visit NewShareCounts.com"
-msgstr "Cliquez ici pour être redirigé sur NewShareCounts.com"
-
-#: functions/options/SWP_Section_HTML.php:252
-msgid "Authenticate"
-msgstr "S’identifier"
-
-#: functions/options/SWP_Section_HTML.php:249
-msgid "Connected"
-msgstr "Connected"
-
-#: functions/options/SWP_Option_Toggle.php:56
-#: functions/options/SWP_Section_HTML.php:221
-msgid "OFF"
-msgstr "DÉSACTIVÉ"
-
-#: functions/options/SWP_Option_Toggle.php:55
-#: functions/options/SWP_Section_HTML.php:221
-msgid "ON"
-msgstr "ACTIVÉ"
-
-#: functions/options/SWP_Option_Icons.php:181
-#: functions/options/SWP_Options_Page.php:445
-msgid "Inactive"
-msgstr "Inactifs"
-
-#: functions/options/SWP_Option_Icons.php:94
-#: functions/options/SWP_Options_Page.php:442
-msgid "Active"
-msgstr "Actifs"
-
-#: functions/admin/SWP_Settings_Link.php:44
-msgid "Settings"
-msgstr "Réglages"
-
-#. Author of the plugin/theme
+#. Author of the plugin
 msgid "Warfare Plugins"
 msgstr "Warfare Plugins"
 
-#. Description of the plugin/theme
+#. Description of the plugin
 msgid "A plugin to maximize social shares and drive more traffic using the fastest and most intelligent share buttons on the market, calls to action via in-post click-to-tweets, popular posts widgets based on share popularity, link-shortening, Google Analytics and much, much more!"
 msgstr "Une extension pour maximiser les partages sociaux et générer plus de trafic en utilisant les boutons de partage les plus rapides et les plus intelligents du marché. Mais aussi des appels à l’action via des click-to-tweet, des widgets d’articles populaires utilisant le nombre de partages, un raccourcisseur de liens, Google Analytics et bien, bien plus !"
 
-#. Plugin Name of the plugin/theme
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+msgid "https://warfareplugins.com"
+msgstr "https://warfareplugins.com"
+
+#. Plugin Name of the plugin
+#: assets/js/post-editor/blocks.php:59
 msgid "Social Warfare"
 msgstr "Social Warfare"
 
-#: functions/frontend-output/SWP_Script.php:143
-msgid "Characters Remaining"
-msgstr "Caractères restants"
-
-#: functions/options/SWP_Section_HTML.php:305
-#: functions/social-networks/SWP_Twitter.php:38
+#: lib/social-networks/SWP_Twitter.php:40 lib/options/SWP_Section_HTML.php:317
 msgid "Tweet"
 msgstr "Tweetez"
 
-#: functions/social-networks/SWP_Stumble_Upon.php:38
+#: lib/social-networks/SWP_Stumble_Upon.php:38
 msgid "Stumble"
 msgstr "Stumble"
 
-#: functions/options/SWP_Section_HTML.php:316
-#: functions/social-networks/SWP_Pinterest.php:35
+#: lib/social-networks/SWP_Pinterest.php:35
+#: lib/options/SWP_Section_HTML.php:328
 msgid "Pin"
 msgstr "Enregistrer"
 
-#: functions/options/SWP_Section_HTML.php:294
-#: functions/social-networks/SWP_Google_Plus.php:39
+#: lib/social-networks/SWP_Google_Plus.php:39
+#: lib/options/SWP_Section_HTML.php:306
 msgid "+1"
 msgstr "+1"
 
-#: functions/options/SWP_Section_HTML.php:327
-#: functions/options/SWP_Section_HTML.php:338
-#: functions/social-networks/SWP_Facebook.php:38
-#: functions/social-networks/SWP_Linkedin.php:24
+#: lib/social-networks/SWP_Facebook.php:38
+#: lib/social-networks/SWP_Linkedin.php:24 lib/social-networks/SWP_Mix.php:38
+#: lib/options/SWP_Section_HTML.php:339 lib/options/SWP_Section_HTML.php:350
 msgid "Share"
 msgstr "Partagez"
 
-#: functions/options/SWP_Section_HTML.php:386
-msgid "Off"
-msgstr "Désactivé"
-
-#: functions/options/SWP_Section_HTML.php:385
-msgid "On"
-msgstr "Activé"
-
-#: functions/options/SWP_Options_Page.php:357
-#: functions/options/SWP_Section_HTML.php:381
-msgid "None/Manual Placement"
-msgstr "Aucun / Placement manuel"
-
-#: functions/options/SWP_Options_Page.php:356
-#: functions/options/SWP_Section_HTML.php:380
-msgid "Both Above and Below the Content"
-msgstr "Au dessus et au dessous du contenu"
-
-#: functions/options/SWP_Options_Page.php:355
-#: functions/options/SWP_Section_HTML.php:379
-msgid "Below the Content"
-msgstr "Au dessous du contenu"
-
-#: functions/options/SWP_Options_Page.php:354
-#: functions/options/SWP_Section_HTML.php:378
-msgid "Above the Content"
-msgstr "Au dessus du contenu"
-
-#: functions/frontend-output/SWP_Shortcode.php:181
-msgid "Click To Tweet"
-msgstr "Click to Tweet"
-
-#: functions/frontend-output/SWP_Buttons_Panel.php:842
+#: lib/buttons-panel/SWP_Buttons_Panel_Trait.php:709
 msgid "Shares"
 msgstr "Partages"
 
-#. #-#-#-#-#  social-warfare-code.pot (Social Warfare 3.1.1)  #-#-#-#-#
-#. Plugin URI of the plugin/theme
-#. #-#-#-#-#  social-warfare-code.pot (Social Warfare 3.1.1)  #-#-#-#-#
-#. Author URI of the plugin/theme
-msgid "https://warfareplugins.com"
-msgstr "https://warfareplugins.com"
+#: lib/frontend-output/SWP_Shortcode.php:203
+#: assets/js/post-editor/src/block/click-to-tweet.js:23
+msgid "Click To Tweet"
+msgstr "Click to Tweet"
+
+#: lib/admin/SWP_User_Profile.php:74
+msgid "Please enter the URL of your Facebok profile."
+msgstr "Veuillez saisir l’URL de votre profil Facebook."
+
+#: lib/admin/SWP_User_Profile.php:71
+msgid "Facebook Author URL"
+msgstr "URL Facebook"
+
+#: lib/admin/SWP_User_Profile.php:67
+msgid "Please enter your Twitter username."
+msgstr "Veuillez saisir votre identifiant Twitter."
+
+#: lib/utilities/SWP_Utility.php:153
+msgid "No settings to save."
+msgstr "Pas de changement à enregistrer."
+
+#: lib/Social_Warfare_Addon.php:263 lib/utilities/SWP_Utility.php:146
+#: lib/options/SWP_Registration_Tab_Template.php:57
+msgid "Security failed."
+msgstr "Échec de sécurité"
+
+#: lib/options/SWP_Section_HTML.php:86
+msgid "Press Ctrl+C to Copy this information."
+msgstr "Appuyez sur Ctrl+C pour copier cette information."
+
+#: lib/options/SWP_Section_HTML.php:250
+msgid "Authenticate"
+msgstr "S’identifier"
+
+#: lib/options/SWP_Section_HTML.php:241
+msgid "Connected"
+msgstr "Connected"
+
+#: lib/options/SWP_Option_Toggle.php:66 lib/options/SWP_Section_HTML.php:210
+msgid "OFF"
+msgstr "DÉSACTIVÉ"
+
+#: lib/options/SWP_Option_Toggle.php:65 lib/options/SWP_Section_HTML.php:210
+msgid "ON"
+msgstr "ACTIVÉ"
+
+#: lib/options/SWP_Options_Page.php:472 lib/options/SWP_Option_Icons.php:180
+msgid "Inactive"
+msgstr "Inactifs"
+
+#: lib/options/SWP_Options_Page.php:469 lib/options/SWP_Option_Icons.php:129
+msgid "Active"
+msgstr "Actifs"
+
+#: lib/options/SWP_Options_Page.php:435
+msgid "Full Content?"
+msgstr "Contenu en entier ?"
+
+#: lib/options/SWP_Options_Page.php:432
+msgid "If your theme does not use excerpts, but instead displays the full post content on archive, category, and home pages, activate this toggle to allow the buttons to appear in those areas."
+msgstr "Si votre thème n’utilise pas les extraits mais affiche au contraire les articles entiers sur les archives, activez cette option pour que les boutons apparaissent sur ces pages."
+
+#: lib/options/SWP_Options_Page.php:430
+msgid "Full Content vs. Excerpts"
+msgstr "Contenu en entier ou Extraits"
+
+#: lib/options/SWP_Options_Page.php:420
+msgid "If you want to stop content pirates from framing your content, turn this on."
+msgstr "Si vous voulez empêcher les pirates de « framer » votre contenu, activez cette option."
+
+#: lib/options/SWP_Options_Page.php:418 lib/options/SWP_Options_Page.php:424
+msgid "Frame Buster"
+msgstr "Chasseur de « Frame »"
+
+#: lib/options/SWP_Options_Page.php:404
+msgid "Advanced"
+msgstr "Avancé"
+
+#: lib/options/SWP_Options_Page.php:668
+msgid "Facebook App ID"
+msgstr "ID d’application Facebook"
+
+#: lib/options/SWP_Options_Page.php:662
+msgid "Facebook Page URL"
+msgstr "URL de page Facebook"
+
+#: lib/options/SWP_Options_Page.php:656
+msgid "Pinterest Username"
+msgstr "Nom d’utilisateur Pinterest"
+
+#: lib/options/SWP_Options_Page.php:650 lib/admin/SWP_User_Profile.php:64
+msgid "Twitter Username"
+msgstr "Nom d’utilisateur Twitter"
+
+#: lib/options/SWP_Options_Page.php:647
+msgid "If you would like to set sitewide defaults for your social identity, add them below."
+msgstr "Si vous souhaitez appliquer des réglages par défaut sur votre identité sociale, ajoutez-les ci-dessous."
+
+#: lib/options/SWP_Options_Page.php:643
+msgid "Social Identity"
+msgstr "Identité sociale"
+
+#: lib/options/SWP_Options_Page.php:741
+msgid "Background Color"
+msgstr "Couleur d’arrière-plan"
+
+#: lib/options/SWP_Options_Page.php:759
+msgid "Fade In / Fade Out"
+msgstr "Fondu"
+
+#: lib/options/SWP_Options_Page.php:758
+msgid "Slide In / Slide Out"
+msgstr "Déplacement"
+
+#: lib/options/SWP_Options_Page.php:755
+msgid "Transition"
+msgstr "Transition"
+
+#: lib/options/SWP_Options_Page.php:748
+msgid "Minimum Screen Width"
+msgstr "Taille minimale d’écran"
+
+#: lib/options/SWP_Options_Page.php:732
+msgid "On the left side of the page"
+msgstr "Sur le côté gauche de la page"
+
+#: lib/options/SWP_Options_Page.php:731
+msgid "Bottom of the Page"
+msgstr "Bas de page"
+
+#: lib/options/SWP_Options_Page.php:730
+msgid "Top of the Page"
+msgstr "Haut de page"
+
+#: lib/options/SWP_Options_Page.php:728
+msgid "Float Position"
+msgstr "Position des boutons flottants"
+
+#: lib/options/SWP_Options_Page.php:717
+msgid "If you would like to activate floating share buttons, turn this on."
+msgstr "Si vous souhaitez afficher les boutons flottants, activez cette option."
+
+#: lib/options/SWP_Options_Page.php:716 lib/options/SWP_Options_Page.php:722
+msgid "Floating Share Buttons"
+msgstr "Boutons de partage flottants"
+
+#: lib/options/SWP_Options_Page.php:516
+msgid "Alignment"
+msgstr "Alignement"
+
+#: lib/options/SWP_Options_Page.php:506
+msgid "Decimal Separator"
+msgstr "Séparateur décimal"
+
+#: lib/options/SWP_Options_Page.php:495
+msgid "Decimal Places"
+msgstr "Nombre de chiffres après la virgule"
+
+#: lib/options/SWP_Options_Page.php:693
+msgid "Styles"
+msgstr "Style"
+
+#: lib/options/SWP_Section_HTML.php:395 lib/options/SWP_Section_HTML.php:561
+msgid "Off"
+msgstr "Désactivé"
+
+#: lib/options/SWP_Section_HTML.php:394 lib/options/SWP_Section_HTML.php:560
+msgid "On"
+msgstr "Activé"
+
+#: lib/options/SWP_Options_Page.php:387 lib/options/SWP_Section_HTML.php:390
+msgid "None/Manual Placement"
+msgstr "Aucun / Placement manuel"
+
+#: lib/options/SWP_Options_Page.php:386 lib/options/SWP_Section_HTML.php:389
+msgid "Both Above and Below the Content"
+msgstr "Au dessus et au dessous du contenu"
+
+#: lib/options/SWP_Options_Page.php:385 lib/options/SWP_Section_HTML.php:388
+msgid "Below the Content"
+msgstr "Au dessous du contenu"
+
+#: lib/options/SWP_Options_Page.php:384 lib/options/SWP_Section_HTML.php:387
+msgid "Above the Content"
+msgstr "Au dessus du contenu"
+
+#: lib/options/SWP_Section_HTML.php:410
+msgid "Floating Buttons (If Activated)"
+msgstr "Boutons flottants (si activé)"
+
+#: lib/options/SWP_Section_HTML.php:407
+msgid "Static Buttons"
+msgstr "Boutons de partage"
+
+#: lib/options/SWP_Section_HTML.php:404 lib/options/SWP_Section_HTML.php:589
+msgid "Post Type"
+msgstr "Type de publication"
+
+#: lib/options/SWP_Options_Page.php:527
+msgid "Position Share Buttons"
+msgstr "Position des boutons de partage"
+
+#: lib/options/SWP_Options_Page.php:489
+msgid "Total Counts"
+msgstr "Somme des partages"
+
+#: lib/options/SWP_Options_Page.php:483
+msgid "Button Counts"
+msgstr "Compteurs individuels"
+
+#: lib/options/SWP_Options_Page.php:478
+msgid "Use the toggles below to determine how to display your social proof."
+msgstr "Utilisez les interrupteurs pour déterminer comment afficher votre preuve sociale."
+
+#: lib/options/SWP_Options_Page.php:477
+msgid "Share Counts"
+msgstr "Compteurs de partages"
+
+#: lib/options/SWP_Options_Page.php:465
+msgid "Drag & Drop to activate and order your share buttons."
+msgstr "Glissez-déposez pour activer et déterminer l’ordre de vos boutons."
+
+#: lib/options/SWP_Options_Page.php:463
+msgid "Social Networks"
+msgstr "Réseaux sociaux"
+
+#: lib/options/SWP_Options_Page.php:460
+msgid "Display"
+msgstr "Apparence"
+
+#: lib/admin/SWP_Settings_Link.php:44
+msgid "Settings"
+msgstr "Réglages"

@@ -1,0 +1,247 @@
+# Translation of Plugins - PHP Compatibility Checker - Stable (latest release) in Japanese
+# This file is distributed under the same license as the Plugins - PHP Compatibility Checker - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2019-02-16 07:35:47+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: GlotPress/2.4.0-alpha\n"
+"Language: ja_JP\n"
+"Project-Id-Version: Plugins - PHP Compatibility Checker - Stable (latest release)\n"
+
+#: src/wpephpcompat.php:229
+msgid "The plugin/theme was skipped as it was too large to scan before the server killed the process."
+msgstr "このプラグイン/テーマはスキャンするには大きすぎるため、サーバーのプロセスを強制終了する前にスキップしました。"
+
+#: wpengine-phpcompat.php:365
+msgid "plugins/themes may not be compatible"
+msgstr "プラグイン/テーマは互換性がない可能性があります"
+
+#: wpengine-phpcompat.php:366
+msgid "Your WordPress site is possibly not PHP"
+msgstr "WordPress サイトは PHP ではないかもしれません"
+
+#: wpengine-phpcompat.php:385
+msgid "PHP Compatibility"
+msgstr "PHP Compatibility"
+
+#. Plugin Name of the plugin
+#: wpengine-phpcompat.php:418
+msgid "PHP Compatibility Checker"
+msgstr "PHP Compatibility Checker"
+
+#: wpengine-phpcompat.php:424
+msgid "Scan Options"
+msgstr "スキャンオプション"
+
+#: wpengine-phpcompat.php:428
+msgid "PHP Version"
+msgstr "PHP のバージョン"
+
+#: wpengine-phpcompat.php:444
+msgid "Scan all plugins and themes"
+msgstr "すべてのプラグインとテーマ"
+
+#. translators: %s: PHP version number
+#: wpengine-phpcompat.php:470
+msgid "Scan Results for PHP %s Compatibility"
+msgstr "PHP %s 互換性のスキャン結果"
+
+#: wpengine-phpcompat.php:477
+msgid "Download Report"
+msgstr "レポートをダウンロード"
+
+#: wpengine-phpcompat.php:481
+msgid "View results as raw text"
+msgstr "結果をテキストで表示"
+
+#: wpengine-phpcompat.php:506
+msgid "Limitations &amp; Caveats"
+msgstr "制限事項と注意事項"
+
+#: wpengine-phpcompat.php:509
+msgid "This tool does not execute your theme or plugin code, so it cannot detect runtime compatibility issues."
+msgstr "このツールは、テーマやプラグインのコードを実行しないため、ランタイムの互換性に関する問題を検出することができません。"
+
+#. translators: %s: FAQ URL
+#: wpengine-phpcompat.php:515
+msgid "The scan will get stuck if WP-Cron is not running correctly. Please <a target=\"_blank\" href=\"%s\">see the FAQ</a> for more information."
+msgstr "WP-Cron が正常に動作していない場合、スキャンが停止します。詳細については、<a target=\"_blank\" href=\"%s\">FAQ</a> を参照してください。"
+
+#: wpengine-phpcompat.php:363 src/wpephpcompat.php:218
+msgid "Name"
+msgstr "名称"
+
+#: wpengine-phpcompat.php:308
+msgid "Jobs"
+msgstr "Jobs"
+
+#: wpengine-phpcompat.php:309
+msgid "Job"
+msgstr "Job"
+
+#: wpengine-phpcompat.php:421
+msgid "This tool will lint your theme and plugin code on this site and provide you a report of compatibility issues. These issues are categorized into errors and warnings and will list the file and line number of the offending code, as well as the info about why that line of code is incompatible with the chosen version of PHP. This tool will also suggest updates to themes and plugins, as a new version may offer compatible code."
+msgstr "このツールは、このサイト上のテーマとプラグインのコードを詳細に調査し、互換性の問題に関するレポートを提供します。これらの問題はエラーと警告に分類し、問題のあるコードのファイルと行番号、およびコード行が選択した PHP バージョンと互換性がない理由に関する情報を一覧で表示します。テーマやプラグインは互換性のある新しいバージョンが提供される可能性があることから、テーマやプラグインの最新バージョンへの更新可否も案内します。"
+
+#. translators: %s: GitHub Wiki URL
+#: wpengine-phpcompat.php:525
+msgid "Report false positives <a target=\"_blank\" href=\"%s\">on our GitHub repo</a>."
+msgstr "誤判定を <a target=\"_blank\" href=\"%s\">このプラグインの GitHub リポジトリ</a>に報告。"
+
+#: wpengine-phpcompat.php:540
+msgid "Make your site 2x faster by upgrading to PHP 7"
+msgstr "PHP 7 にアップグレードすることで、2倍の高速化を実現"
+
+#: wpengine-phpcompat.php:542
+msgid "Make your site 2x faster with PHP 7 WordPress hosting"
+msgstr "PHP 7 の WordPress ホスティングで2倍の高速化を実現"
+
+#: wpengine-phpcompat.php:545
+msgid "Speed up your site and improve your conversion opportunities by upgrading to PHP 7 on the WP Engine platform."
+msgstr "WP Engine の基盤上で PHP 7 にアップグレードすることにより、サイトをスピードアップし、コンバージョンの機会を改善します。"
+
+#: wpengine-phpcompat.php:548
+msgid "Upgrade to PHP 7 for free"
+msgstr "PHP 7 に無料でアップグレード"
+
+#: wpengine-phpcompat.php:550
+msgid "Get PHP 7 Hosting"
+msgstr "PHP 7 ホスティングを手に入れる"
+
+#: wpengine-phpcompat.php:551
+msgid "Already a WP Engine customer?"
+msgstr "すでに WP Engine を利用していますか ?"
+
+#: wpengine-phpcompat.php:508
+msgid "This tool cannot detect unused code paths that might be used for backwards compatibility, potentially showing false positives. We maintain <a target=\"_blank\" href=\"https://github.com/wpengine/phpcompat/wiki/Results\">a whitelist of plugins</a> that can cause false positives."
+msgstr "このツールは、下位互換性のために使用される可能性のある未使用のコードパスを検出することができず、誤った結果を表示する可能性があります。異なる結果を表示する可能性がある<a target=\"_blank\" href=\"https://github.com/wpengine/phpcompat/wiki/Results\">プラグインのホワイトリスト</a>を提供しています。"
+
+#: wpengine-phpcompat.php:551
+msgid "Click here to upgrade to PHP 7"
+msgstr "ここをクリックして PHP 7 にアップグレードしてください"
+
+#: wpengine-phpcompat.php:561
+msgid "Get help from WP Engine partners"
+msgstr "WP Engine のパートナーからの助けを得る"
+
+#: wpengine-phpcompat.php:567
+msgid "Get PHP 7 ready with Codeable"
+msgstr "Codeable で PHP 7 を準備しましょう"
+
+#: wpengine-phpcompat.php:568
+msgid "Automatically submit this error report to Codeable to get a quick quote from their vetted WordPress developers."
+msgstr "このエラーレポートを自動的に Codeable で送信して、WordPress 開発者からの調査結果を得ましょう。"
+
+#: wpengine-phpcompat.php:571
+msgid "Submit to Codeable"
+msgstr "Codeable に送信"
+
+#: wpengine-phpcompat.php:589
+msgid "Unknown"
+msgstr "不明"
+
+#: wpengine-phpcompat.php:592
+msgid "Compatible"
+msgstr "互換性あり"
+
+#. translators: %s: URL to admin page
+#: wpengine-phpcompat.php:648
+msgid "You have just activated the <strong>PHP Compatibility Checker</strong>. <a href=\"%s\">Start scanning your plugins and themes for compatibility with the latest PHP versions now!</a>"
+msgstr "<strong>PHP Compatibility Checker</strong> を有効にしました。<a href=\"%s\">インストールしているプラグインとテーマについて、最新 PHP バージョンとの互換性を今すぐスキャンをしましょう !</a>"
+
+#: wpengine-phpcompat.php:669
+msgid "Start Scan"
+msgstr "スキャンを開始"
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+msgid "https://wpengine.com"
+msgstr "https://wpengine.com"
+
+#. Author of the plugin
+msgid "WP Engine"
+msgstr "WP Engine"
+
+#: wpengine-phpcompat.php:510
+msgid "PHP Warnings could cause compatibility issues with future PHP versions and/or spam your logs."
+msgstr "PHP の警告は、互換性に関して後継の PHP のバージョンへの影響や、大量のログを記録する問題を引き起こす可能性があります。"
+
+#. Description of the plugin
+msgid "Make sure your plugins and themes are compatible with newer PHP versions."
+msgstr "プラグインとテーマについて、新しい PHP バージョンでの互換性を確認することができます。"
+
+#: wpengine-phpcompat.php:440
+msgid "Plugin / Theme Status"
+msgstr "プラグイン/テーマの状態"
+
+#: wpengine-phpcompat.php:368 wpengine-phpcompat.php:452
+msgid "Scan site"
+msgstr "サイトをスキャン"
+
+#: wpengine-phpcompat.php:369
+msgid "Scan site again"
+msgstr "サイトを再スキャン"
+
+#: wpengine-phpcompat.php:420
+msgid "The PHP Compatibility Checker can be used on any WordPress website on any web host."
+msgstr "PHP Compatibility Checker は、あらゆるサーバー上の WordPress サイトで使えます。"
+
+#: wpengine-phpcompat.php:562
+msgid "Our agency partners can help make your site PHP 7 compatible."
+msgstr "当社の代理店パートナーは、あなたのサイトを PHP 7 互換にするお手伝いができます。"
+
+#: wpengine-phpcompat.php:563
+msgid "Find a WP Engine Partner"
+msgstr "WP Engine パートナーを探す"
+
+#: wpengine-phpcompat.php:605
+msgid "toggle details"
+msgstr "詳細切り替え"
+
+#: wpengine-phpcompat.php:370
+msgid "Your WordPress site is"
+msgstr "この WordPress サイトは"
+
+#: src/wpephpcompat.php:245
+msgid " compatible."
+msgstr " 互換性があります。"
+
+#: wpengine-phpcompat.php:478
+msgid "Clear results"
+msgstr "結果をクリア"
+
+#. translators: %s: hosting URL
+#: wpengine-phpcompat.php:496
+msgid "<strong>Attention:</strong> Not all errors are show-stoppers. <a target=\"_blank\" href=\"%s\">Test this site on PHP 7</a> to see if it just works!"
+msgstr "<strong>注:</strong> すべてのエラーメッセージが、選択した PHP のバージョンでは動作しないことを意味するものではありません。<a target=\"_blank\" href=\"%s\">このサイトを PHP 7 でテスト</a>し、動作確認してみましょう。"
+
+#: wpengine-phpcompat.php:443
+msgid "Only scan active plugins and themes"
+msgstr "有効化中のプラグインとテーマのみをスキャン"
+
+#: wpengine-phpcompat.php:595
+msgid "Warnings:"
+msgstr "警告:"
+
+#: wpengine-phpcompat.php:598
+msgid "Errors:"
+msgstr "エラー:"
+
+#: wpengine-phpcompat.php:603
+msgid "Update Available"
+msgstr "更新版を利用可能"
+
+#: wpengine-phpcompat.php:559
+msgid "Need help making this site PHP 7 compatible?"
+msgstr "サイトの PHP 7 対応にヘルプが必要ですか ?"
+
+#: wpengine-phpcompat.php:364
+msgid "compatible"
+msgstr "互換性あり"
+
+#: wpengine-phpcompat.php:367
+msgid "out of"
+msgstr "/"

@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - WordPress Importer - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-06-02 08:58:02+0000\n"
+"PO-Revision-Date: 2018-11-19 06:52:19+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,7 +13,7 @@ msgstr ""
 
 #: parsers.php:43
 msgid "Details are shown above. The importer will now try again with a different parser..."
-msgstr "詳細資訊如上所示。匯入程式將以不同的剖析器再次嘗試匯入..."
+msgstr "詳細資料如上所示。匯入程式將以不同的剖析器再次嘗試匯入..."
 
 #: parsers.php:42 parsers.php:72 parsers.php:80
 msgid "There was an error when reading this WXR file"
@@ -27,7 +27,7 @@ msgstr "由於遺失或無效的版本號碼，系統判定這不是 WXR 格式�
 #: wordpress-importer.php:192 wordpress-importer.php:196
 #: wordpress-importer.php:205
 msgid "Sorry, there has been an error."
-msgstr "抱歉，有錯誤發生。"
+msgstr "很抱歉，匯入過程發生錯誤。"
 
 #: wordpress-importer.php:133
 msgid "The file does not exist, please try again."
@@ -39,27 +39,27 @@ msgstr "全部完成。"
 
 #: wordpress-importer.php:177
 msgid "Remember to update the passwords and roles of imported users."
-msgstr "請記得為匯入的帳號變更密碼及角色。"
+msgstr "請記得為匯入的使用者變更密碼及使用者角色。"
 
 #: wordpress-importer.php:176
 msgid "Have fun!"
-msgstr "返回 [控制台]。"
+msgstr "返回 [控制台]"
 
 #: wordpress-importer.php:197
 msgid "The export file could not be found at <code>%s</code>. It is likely that this was caused by a permissions problem."
-msgstr "在 <code>%s</code> 找不到匯出檔，這可能是由權限問題所造成。"
+msgstr "在 <code>%s</code> 找不到匯出檔案，這可能是由權限問題所造成。"
 
 #: wordpress-importer.php:213
 msgid "This WXR file (version %s) may not be supported by this version of the importer. Please consider updating."
-msgstr "目前版本的匯入程式不支援這個 %s 版的 WXR 檔案，請考慮更新匯入程式以進行匯入。"
+msgstr "目前版本的匯入程式不支援 %s 版的 WXR 檔案，請考慮更新匯入程式以進行匯入。"
 
 #: wordpress-importer.php:238
 msgid "Failed to import author %s. Their posts will be attributed to the current user."
-msgstr "無法匯入作者「%s」，相關文章會指派給目前進行匯入的帳號。"
+msgstr "無法匯入作者「%s」，相關文章會指派給目前進行匯入的使用者。"
 
 #: wordpress-importer.php:265
 msgid "To make it easier for you to edit and save the imported content, you may want to reassign the author of the imported item to an existing user of this site. For example, you may want to import all the entries as <code>admin</code>s entries."
-msgstr "為確保編輯及儲存匯入的內容更加簡單，你可以將匯入的項目重新指派給網站上的既有帳號。舉例來說，你可以匯入所有項目後都指派給<code>管理員</code>。"
+msgstr "為了讓編輯及儲存匯入的內容更加簡單，網站管理員可以將匯入的項目重新指派給網站上現有的使用者。舉例來說，可以將全部匯入項目指都派給 <code>admin</code>。"
 
 #: wordpress-importer.php:264
 msgid "Assign Authors"
@@ -67,7 +67,7 @@ msgstr "指派作者"
 
 #: wordpress-importer.php:267
 msgid "If a new user is created by WordPress, a new password will be randomly generated and the new user&#8217;s role will be set as %s. Manually changing the new user&#8217;s details will be necessary."
-msgstr "如果透過 WordPress 建立新帳號，會為該帳號隨機產生一組密碼，並將新帳號的角色設定為 [%s]。手動變更新帳號的詳細資料為之後的必要操作。"
+msgstr "如果透過 WordPress 建立新使用者，會為這位新使用者隨機產生一組密碼，並將新使用者的使用者角色指派為 [%s]。手動變更新使用者的詳細資料為匯入操作完成後的必要操作。"
 
 #: wordpress-importer.php:277
 msgid "Import Attachments"
@@ -87,15 +87,15 @@ msgstr "匯入作者:"
 
 #: wordpress-importer.php:311
 msgid "as a new user:"
-msgstr "成為新帳號:"
+msgstr "成為新使用者:"
 
 #: wordpress-importer.php:308
 msgid "or create new user with login name:"
-msgstr "或以新的登入名稱建立新帳號:"
+msgstr "或以新的登入名稱建立新使用者:"
 
 #: wordpress-importer.php:319
 msgid "assign posts to an existing user:"
-msgstr "指派文章給既有帳號:"
+msgstr "指派文章給現有使用者:"
 
 #: wordpress-importer.php:322
 msgid "- Select -"
@@ -103,27 +103,27 @@ msgstr "- 選取 -"
 
 #: wordpress-importer.php:321
 msgid "or assign posts to an existing user:"
-msgstr "或指派文章給既有帳號:"
+msgstr "或指派文章給現有使用者:"
 
 #: wordpress-importer.php:372
 msgid "Failed to create new user for %s. Their posts will be attributed to the current user."
-msgstr "無法為「%s」建立新帳號，相關文章會指派給目前進行匯入的帳號。"
+msgstr "無法為「%s」建立新使用者，相關文章會指派給目前進行匯入的使用者。"
 
 #: wordpress-importer.php:467
 msgid "Failed to import post tag %s"
-msgstr "無法匯入文章標籤「%s」"
+msgstr "無法匯入文章標籤《%s》"
 
 #: wordpress-importer.php:424
 msgid "Failed to import category %s"
-msgstr "無法匯入分類「%s」"
+msgstr "無法匯入分類《%s》"
 
 #: wordpress-importer.php:516 wordpress-importer.php:738
 msgid "Failed to import %s %s"
-msgstr "無法匯入%s「%s」"
+msgstr "無法匯入 [%s] 的《%s》"
 
 #: wordpress-importer.php:605
 msgid "Failed to import &#8220;%s&#8221;: Invalid post type %s"
-msgstr "無法匯入「%s」: 不正確的「%s」文章類型"
+msgstr "無法匯入《%s》: 無效的 [%s] 內容類型"
 
 #: wordpress-importer.php:870
 msgid "Menu item skipped due to missing menu slug"
@@ -131,11 +131,11 @@ msgstr "由於缺漏了選單代稱，選單項目不予匯入"
 
 #: wordpress-importer.php:704
 msgid "Failed to import %s &#8220;%s&#8221;"
-msgstr "無法匯入%s「%s」"
+msgstr "無法匯入 [%s] 的《%s》"
 
 #: wordpress-importer.php:642
 msgid "%s &#8220;%s&#8221; already exists."
-msgstr "%s「%s」已存在。"
+msgstr "%s《%s》已存在。"
 
 #: wordpress-importer.php:877
 msgid "Menu item skipped due to invalid menu slug: %s"
@@ -147,11 +147,11 @@ msgstr "[擷取附件] 未啟用"
 
 #: wordpress-importer.php:953
 msgid "Invalid file type"
-msgstr "不正確的檔案型態"
+msgstr "無效的檔案類型"
 
 #: wordpress-importer.php:1003
 msgid "Remote server did not respond"
-msgstr "遠端伺服器未回應"
+msgstr "遠端伺服器沒有回應"
 
 #: wordpress-importer.php:1018
 msgid "Remote file is incorrect size"
@@ -171,7 +171,7 @@ msgstr "大小為零的檔案已完成下載"
 
 #: wordpress-importer.php:1136
 msgid "A new version of this importer is available. Please update to version %s to ensure compatibility with newer export files."
-msgstr "這個匯入程式已有新版本可供更新，請更新至 %s 版以確保與較新版匯出檔格式的相容性。"
+msgstr "這個匯入程式已有新版本可供更新，請更新至 %s 版以確保與較新版匯出檔案格式的相容性。"
 
 #: wordpress-importer.php:1129
 msgid "Import WordPress"
@@ -179,19 +179,19 @@ msgstr "匯入 WordPress 內容"
 
 #: wordpress-importer.php:1151
 msgid "Howdy! Upload your WordPress eXtended RSS (WXR) file and we&#8217;ll import the posts, pages, comments, custom fields, categories, and tags into this site."
-msgstr "你好，請上傳 WordPress eXtended RSS 格式檔案 (WXR 格式，副檔名為 .xml)，匯入程式會將文章、頁面、迴響、自訂欄位、分類以及標籤匯入這個網站中。"
+msgstr "你好，請上傳 WordPress eXtended RSS 格式檔案 (WXR 格式，副檔名為 .xml)，匯入程式會將文章、頁面、留言、自訂欄位、分類以及標籤匯入這個網站中。"
 
 #: wordpress-importer.php:1152
 msgid "Choose a WXR (.xml) file to upload, then click Upload file and import."
-msgstr "選擇要匯入的 WXR 檔案 (副檔名為 .xml)，然後按一下 [上傳檔案並匯入]。"
+msgstr "選擇要匯入的 WXR 檔案 (副檔名為 .xml)，然後點擊 [上傳檔案並匯入]。"
 
 #: wordpress-importer.php:1226
 msgid "Import <strong>posts, pages, comments, custom fields, categories, and tags</strong> from a WordPress export file."
-msgstr "從 WordPress 的內容匯出檔中匯入<strong>文章、迴響、自訂欄位、頁面、分類及標籤</strong>。"
+msgstr "從 WordPress 的內容匯出檔中匯入<strong>文章、留言、自訂欄位、頁面、分類及標籤</strong>。"
 
 #. Plugin URI of the plugin/theme
 msgid "https://wordpress.org/plugins/wordpress-importer/"
-msgstr "https://wordpress.org/plugins/wordpress-importer/"
+msgstr "https://tw.wordpress.org/plugins/wordpress-importer/"
 
 #. Plugin Name of the plugin/theme
 msgid "WordPress Importer"
@@ -199,7 +199,7 @@ msgstr "WordPress 內容匯入程式"
 
 #. Description of the plugin/theme
 msgid "Import posts, pages, comments, custom fields, categories, tags and more from a WordPress export file."
-msgstr "從 WordPress 所匯出的檔案中，匯入文章、頁面、迴響、自訂欄位、分類、標籤及其他內容。"
+msgstr "從 WordPress 所匯出的檔案中，匯入文章、頁面、留言、自訂欄位、分類、標籤及其他內容。"
 
 #. Author of the plugin/theme
 msgid "wordpressdotorg"
@@ -207,4 +207,4 @@ msgstr "wordpressdotorg"
 
 #. Author URI of the plugin/theme
 msgid "https://wordpress.org/"
-msgstr "https://wordpress.org/"
+msgstr "https://tw.wordpress.org/"
