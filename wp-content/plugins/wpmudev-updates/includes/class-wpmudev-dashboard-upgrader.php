@@ -773,7 +773,12 @@ class WPMUDEV_Dashboard_Upgrader {
 		/* ---- these checks are already run later, but we run them now so we can capture detailed errors --- */
 
 		if ( $upgrader->is_disabled() || ( defined( 'WP_AUTO_UPDATE_CORE' ) && false === WP_AUTO_UPDATE_CORE ) ) {
-			$this->set_error( 'core', 'autoupdates_disabled', __( 'Automatic core updates are disabled via define or filter.', 'wpmudev' ) );
+			$this->set_error( 'core',
+			                  'autoupdates_disabled',
+			                  sprintf( __( 'You have disabled automatic core updates via define( \'WP_AUTO_UPDATE_CORE\', false ); in your wp-config.php or a filter. Remove that code to allow updating core by Automate or disable "WordPress Core" in your Automate settings. %1$sContact support%2$s if you need further assistance.',
+			                               'wpmudev' ),
+				                  '<a href="https://premium.wpmudev.org/hub/support/#get-support">',
+				                  '</a>') );
 			return false;
 		}
 
@@ -845,7 +850,12 @@ class WPMUDEV_Dashboard_Upgrader {
 
 		//this is the only reason left this would fail
 		if ( ! Core_Upgrader::should_update_to_version( $auto_update->current ) ) {
-			$this->set_error( 'core', 'autoupdates_disabled', __( 'Automatic core updates are disabled via define or filter.', 'wpmudev' ) );
+			$this->set_error( 'core',
+			                  'autoupdates_disabled',
+			                  sprintf( __( 'You have disabled automatic core updates via define( \'WP_AUTO_UPDATE_CORE\', false ); in your wp-config.php or a filter. Remove that code to allow updating core by Automate or disable "WordPress Core" in your Automate settings. %1$sContact support%2$s if you need further assistance.',
+			                               'wpmudev' ),
+			                           '<a href="https://premium.wpmudev.org/hub/support/#get-support">',
+			                           '</a>') );
 			return false;
 		}
 

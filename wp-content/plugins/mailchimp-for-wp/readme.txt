@@ -3,11 +3,11 @@ Contributors: Ibericode, DvanKooten, hchouhan, lapzor
 Donate link: https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mailchimp-for-wp&utm_campaign=donate-link
 Tags: mailchimp, mc4wp, email, marketing, newsletter, subscribe, widget, mc4wp, contact form 7, woocommerce, buddypress, ibericode, mailchimp form
 Requires at least: 4.1
-Tested up to: 4.9.9
-Stable tag: 4.2.5
+Tested up to: 5.0.2
+Stable tag: 4.3.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Requires PHP: 5.2.4
+Requires PHP: 5.3
 
 MailChimp for WordPress, the #1 MailChimp plugin.
 
@@ -195,6 +195,45 @@ The plugin provides various filter & action hooks that allow you to modify or ex
 6. Dive into detailed sign-up statistics (premium feature).
 
 == Changelog == 
+
+
+#### 4.3.3 - December 31, 2018
+
+**Fixes**
+
+- Update WPForms integration to properly detect if the WPForms plugin is activated.
+
+**Improvements**
+
+- Write API request parameters to the debug log in case of connection timeouts. 
+- Update JavaScript dependencies.
+
+
+#### 4.3.2 - December 11, 2018
+
+**Fixes**
+
+- Use of `readonly` function, which is only available in WordPress 4.9 or later.
+
+
+#### 4.3.1 - November 28, 2018
+
+**Fixes**
+
+- Fatal error on PHP versions older than 5.5
+
+
+#### 4.3 - November 28, 2018
+
+**Additions**
+
+- Added `MC4WP_API_KEY` PHP constant which can be used to set your MailChimp API key.
+- Add `mc4wp_mailchimp_list_limit` filter hook to modify the maximum number of MailChimp lists to fetch. Defaults to 200.
+
+**Improvements**
+
+- Apply `mc4wp_integration_gravity-forms_options` filter hook on Gravity Forms integration options so the checkbox can be prechecked and the checkbox label text modified.
+- The `updated_subscriber` JS event is now fired forms not using AJAX as well (when applicable).
 
 
 #### 4.2.5 - Sep 11, 2018

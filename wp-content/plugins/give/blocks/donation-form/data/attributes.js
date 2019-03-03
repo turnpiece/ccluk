@@ -1,11 +1,12 @@
 /**
  * Block Attributes
 */
-
 const blockAttributes = {
 	id: {
 		type: 'number',
-		default: 0,
+	},
+	prevId: {
+		type: 'number',
 	},
 	displayStyle: {
 		type: 'string',
@@ -17,19 +18,19 @@ const blockAttributes = {
 	},
 	showTitle: {
 		type: 'boolean',
-		default: false,
+		default: true,
 	},
 	showGoal: {
 		type: 'boolean',
-		default: false,
+		default: true,
 	},
 	contentDisplay: {
 		type: 'boolean',
-		default: false,
+		default: true,
 	},
 	showContent: {
 		type: 'string',
-		default: 'none',
+		default: 'above',
 	},
 };
 

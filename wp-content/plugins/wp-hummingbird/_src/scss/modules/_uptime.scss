@@ -246,6 +246,40 @@
     }
 }
 
+/**
+ * Uptime notifications.
+ */
+.wpmud .box-uptime-notifications {
+    .sui-border-frame > .sui-notice-warning {
+        margin: 0 0 10px;
+    }
+}
+
+.wpmud .box-uptime-notifications .spinner,
+.wpmud .box-uptime-notifications-disabled .spinner {
+    margin-top: 2px;
+    margin-right: 10px;
+}
+
+/**
+ * Reporting
+ */
+@include body-class(true) {
+    .wphb-uptime-reporting-recipients {
+        .sui-form-field {
+            margin-bottom: 10px;
+            .select-container {
+                max-width: 240px;
+            }
+        }
+    }
+    #wphb-add-recipient-modal {
+        .sui-box-footer {
+            justify-content: space-between;
+        }
+    }
+}
+
 @include bp(phone-large) {
     .wpmud .select-container.uptime-data-range {
         position: absolute;

@@ -52,7 +52,9 @@ class LiteSpeed_Cache_Optimizer
 		try {
 			$obj = new LiteSpeed_3rd_Lib\Minify_HTML( $content, $options ) ;
 			$content_final = $obj->process() ;
-			$content_final .= "\n" . '<!-- Page optimized by LiteSpeed Cache @' . date('Y-m-d H:i:s') . ' -->' ;
+			if ( ! defined( 'LSCACHE_ESI_SILENCE' ) ) {
+				$content_final .= "\n" . '<!-- Page optimized by LiteSpeed Cache @' . date('Y-m-d H:i:s') . ' -->' ;
+			}
 			return $content_final ;
 
 		} catch ( Exception $e ) {
@@ -131,6 +133,9 @@ class LiteSpeed_Cache_Optimizer
 		}
 
 		LiteSpeed_Cache_Log::debug2( '[Optmer]    Generated content ' . $file_type ) ;
+
+		// Add filter
+		$content = apply_filters( 'litespeed_optm_cssjs', $content, $file_type, $urls ) ;
 
 		return $content ;
 	}
@@ -230,7 +235,7 @@ class LiteSpeed_Cache_Optimizer
 			return $data ;
 		} catch ( Exception $e ) {
 			LiteSpeed_Cache_Log::debug( '******[Optmer] minify_js failed: ' . $e->getMessage() ) ;
-			error_log( '****** LiteSpeed Optimizer minify_js failed: ' . $e->getMessage() ) ;
+			// error_log( '****** LiteSpeed Optimizer minify_js failed: ' . $e->getMessage() ) ;
 			return $data ;
 		}
 	}

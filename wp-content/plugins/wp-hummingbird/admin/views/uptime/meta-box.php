@@ -23,9 +23,11 @@
 	</div>
 <?php elseif ( strpos( $error, 'down for maintenance' ) ) : ?>
 	<div class="sui-block-content-center">
-		<img class="wphb-image-icon-content wphb-image-icon-content-top wphb-image-icon-content-center wphb-uptime-icon"
-			 src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-graphic-uptime-disabled@1x.png' ); ?>"
-			 srcset="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-graphic-uptime-disabled@2x.png' ); ?> 2x">
+		<?php if ( ! WP_Hummingbird_Utils::hide_wpmudev_branding() ) : ?>
+			<img class="wphb-image-icon-content wphb-image-icon-content-top wphb-image-icon-content-center wphb-uptime-icon"
+			     src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-graphic-uptime-disabled@1x.png' ); ?>"
+			     srcset="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-graphic-uptime-disabled@2x.png' ); ?> 2x">
+		<?php endif; ?>
 
 		<p>
 			<?php _e( 'Uptime monitors your server response time and lets you know when your website is down<br>
@@ -64,10 +66,4 @@
 		<span class="downtime-key"><?php esc_html_e( 'Downtime', 'wphb' ); ?></span>
 		<span class="unknown-key"><?php esc_html_e( 'Unknown', 'wphb' ); ?></span>
 	</div>
-
-	<script>
-		jQuery(document).ready( function() {
-			window.WPHB_Admin.getModule( 'uptime' );
-		});
-	</script>
 <?php endif; ?>

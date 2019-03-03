@@ -129,7 +129,8 @@ if (!(defined('EAB_SKIP_FORCED_CATEGORY_ORDERING') && EAB_SKIP_FORCED_CATEGORY_O
 
 // Archive sorting and pagination in default WP requests
 function _eab_dispatch_event_archives($query) {
-    if ( is_admin() || !$query->is_main_query() || !is_post_type_archive('incsub_event') ) return;
+	if ( ! empty( $query->query['_avoid_pgp_action'] ) && 1 == $query->query['_avoid_pgp_action'] ) return;
+    if ( is_admin() || ! is_post_type_archive('incsub_event') ) return;
     $data = Eab_Options::get_instance();
     if ( $pagination = $data->get_option('pagination') ) {
         $query->set( 'posts_per_page', $pagination );
@@ -140,6 +141,28 @@ function _eab_dispatch_event_archives($query) {
 }
 add_action('pre_get_posts', '_eab_dispatch_event_archives', 1);
 // End Archive sorting and pagination in default WP requests
+
+// Exclude expired posts from eab_events_category archive pages
+function _eab_hide_past_events_from_archive_pages( $query ) {
+
+	if ( is_tax( 'eab_events_category' ) && $query->is_main_query() && ! is_admin() ) {
+
+		$meta_query = array(
+             array(
+                'key' 		=> 'incsub_event_start',
+                'value' 	=> gmdate( 'Y-m-d H:i:s' ),
+                'compare' 	=>'>=',
+             ),
+		);
+
+		$query->set('meta_query',$meta_query);
+
+	}
+
+}
+
+add_action( 'pre_get_posts', '_eab_hide_past_events_from_archive_pages', 10 );
+// End Exclude expired posts from eab_events_category archive pages
 
 function eab_ordering_date_ordering_direction_cb() {
 	return 'DESC';

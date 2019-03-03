@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (C) 2014-2018 ServMask Inc.
+ * Copyright (C) 2014-2019 ServMask Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,6 +27,9 @@ class Ai1wm_Import_Clean {
 
 	public static function execute( $params ) {
 		Ai1wm_Directory::delete( ai1wm_storage_path( $params ) );
+		if ( defined( 'WP_CLI' ) ) {
+			return $params;
+		}
 		exit;
 	}
 }

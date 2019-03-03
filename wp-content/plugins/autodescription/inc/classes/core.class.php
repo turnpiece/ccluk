@@ -9,7 +9,7 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2015 - 2018 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2015 - 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -67,6 +67,7 @@ class Core {
 	 * If the property never existed, default PHP behavior is invoked.
 	 *
 	 * @since 2.8.0
+	 * @since 3.2.2 This method no longer allows to overwrite protected or private variables.
 	 *
 	 * @param string $name The property name.
 	 * @param mixed $value The property value.
@@ -75,29 +76,28 @@ class Core {
 		/**
 		 * For now, no deprecation is being handled; as no properties have been deprecated. Just removed.
 		 */
-		$this->_inaccessible_p_or_m( 'the_seo_framework()->' . \esc_html( $name ), 'unknown' );
+		$this->_inaccessible_p_or_m( 'the_seo_framework()->' . $name, 'unknown' );
 
-		//* Invoke default behavior.
-		$this->$name = $value;
+		//* Invoke default behavior: Write variable if it's not protected.
+		if ( ! isset( $this->$name ) )
+			$this->$name = $value;
 	}
 
 	/**
 	 * Handles unapproachable invoked properties.
+	 *
 	 * Makes sure deprecated properties are still accessible.
-	 * If property never existed, default PHP behavior is invoked.
 	 *
 	 * @since 2.7.0
 	 * @since 3.1.0 Removed known deprecations.
+	 * @since 3.2.2 This method no longer invokes PHP errors, nor returns protected values.
 	 *
 	 * @param string $name The property name.
-	 * @return mixed $var The property value.
+	 * @return void
 	 */
 	final public function __get( $name ) {
-
-		$this->_inaccessible_p_or_m( 'the_seo_framework()->' . \esc_html( $name ), 'unknown' );
-
-		//* Invoke default behavior.
-		return $this->$name;
+		$this->_inaccessible_p_or_m( 'the_seo_framework()->' . $name, 'unknown' );
+		return;
 	}
 
 	/**
@@ -120,7 +120,7 @@ class Core {
 			return call_user_func_array( [ $depr_class, $name ], $arguments );
 		}
 
-		\the_seo_framework()->_inaccessible_p_or_m( 'the_seo_framework()->' . \esc_html( $name ) . '()' );
+		\the_seo_framework()->_inaccessible_p_or_m( 'the_seo_framework()->' . $name . '()' );
 		return;
 	}
 
@@ -159,7 +159,7 @@ class Core {
 	 */
 	public function get_view( $view, array $__args = [], $instance = 'main' ) {
 
-		//? extract().
+		//? A faster extract().
 		foreach ( $__args as $__k => $__v ) $$__k = $__v;
 		unset( $__k, $__v, $__args );
 
@@ -235,22 +235,11 @@ class Core {
 			'<a href="https://theseoframework.com/" rel="noreferrer noopener nofollow" target="_blank">%s</a>',
 			\esc_html__( 'About', 'autodescription' )
 		);
-
-		/**
-		 * These are weak checks.
-		 * But it has minimum to no UX/performance impact on failure.
-		 */
-		if ( ! defined( 'TSF_EXTENSION_MANAGER_VERSION' ) ) {
-			$tsfem = \get_plugins( '/the-seo-framework-extension-manager' );
-			//... I want PHP 5.5 for empty expressions :(
-			// TODO open a plugin installation screen?
-			if ( empty( $tsfem ) )
-				$tsf_links['tsfem'] = sprintf(
-					'<a href="%s" rel="noreferrer noopener" target="_blank">%s</a>',
-					\esc_url( \__( 'https://wordpress.org/plugins/the-seo-framework-extension-manager/', 'autodescription' ) ),
-					\esc_html_x( 'Extensions', 'Plugin extensions', 'autodescription' )
-				);
-		}
+		$tsf_links['tsfem'] = sprintf(
+			'<a href="%s" rel="noreferrer noopener" target="_blank">%s</a>',
+			'https://theseoframework.com/extensions/',
+			\esc_html_x( 'Extensions', 'Plugin extensions', 'autodescription' )
+		);
 
 		return array_merge( $links, $tsf_links );
 	}
@@ -751,23 +740,23 @@ class Core {
 		 * The conversion list's keys are per reference only.
 		 */
 		$conversions = [
-			'**'   => 'strong',
-			'*'    => 'em',
-			'`'    => 'code',
-			'[]()' => 'a',
+			'**'     => 'strong',
+			'*'      => 'em',
+			'`'      => 'code',
+			'[]()'   => 'a',
 			'======' => 'h6',
-			'=====' => 'h5',
-			'====' => 'h4',
-			'==='  => 'h3',
-			'=='   => 'h2',
-			'='    => 'h1',
+			'====='  => 'h5',
+			'===='   => 'h4',
+			'==='    => 'h3',
+			'=='     => 'h2',
+			'='      => 'h1',
 		];
 
 		$md_types = empty( $convert ) ? $conversions : array_intersect( $conversions, $convert );
 
 		foreach ( $md_types as $type ) :
 			switch ( $type ) :
-				case 'strong' :
+				case 'strong':
 					$count = preg_match_all( '/(?:\*{2})([^\*{\2}]+)(?:\*{2})/', $text, $matches, PREG_PATTERN_ORDER );
 
 					for ( $i = 0; $i < $count; $i++ ) {
@@ -779,7 +768,7 @@ class Core {
 					}
 					break;
 
-				case 'em' :
+				case 'em':
 					$count = preg_match_all( '/(?:\*{1})([^\*{\1}]+)(?:\*{1})/', $text, $matches, PREG_PATTERN_ORDER );
 
 					for ( $i = 0; $i < $count; $i++ ) {
@@ -791,7 +780,7 @@ class Core {
 					}
 					break;
 
-				case 'code' :
+				case 'code':
 					$count = preg_match_all( '/(?:`{1})([^`{\1}]+)(?:`{1})/', $text, $matches, PREG_PATTERN_ORDER );
 
 					for ( $i = 0; $i < $count; $i++ ) {
@@ -803,12 +792,12 @@ class Core {
 					}
 					break;
 
-				case 'h6' :
-				case 'h5' :
-				case 'h4' :
-				case 'h3' :
-				case 'h2' :
-				case 'h1' :
+				case 'h6':
+				case 'h5':
+				case 'h4':
+				case 'h3':
+				case 'h2':
+				case 'h1':
 					$amount = filter_var( $type, FILTER_SANITIZE_NUMBER_INT );
 					//* Considers word non-boundary. @TODO consider removing this?
 					$expression = sprintf( '/(?:\={%1$s})\B([^\={\%1$s}]+)\B(?:\={%1$s})/', $amount );
@@ -824,8 +813,8 @@ class Core {
 					}
 					break;
 
-				case 'a' :
-					$count = preg_match_all( '/(?:(?:\[{1})([^\]{1}]+)(?:\]{1})(?:\({1})([^\)\(]+)(?:\){1}))/', $text, $matches, PREG_PATTERN_ORDER );
+				case 'a':
+					$count = preg_match_all( '/(?:(?:\[{1})([^\]]+)(?:\]{1})(?:\({1})([^\)\(]+)(?:\){1}))/', $text, $matches, PREG_PATTERN_ORDER );
 
 					$_string = $args['a_internal'] ? '<a href="%s">%s</a>' : '<a href="%s" target="_blank" rel="nofollow noreferrer noopener">%s</a>';
 

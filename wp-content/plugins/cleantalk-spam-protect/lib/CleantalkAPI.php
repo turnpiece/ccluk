@@ -43,8 +43,31 @@ class CleantalkAPI
 		
 		if($date) $request['date'] = $date;
 		
-		$result = self::send_request($request);
+		$result = self::send_request($request, self::URL, 15);
 		$result = $do_check ? self::check_response($result, 'spam_check_cms') : $result;
+		
+		return $result;
+	}
+	
+	/**
+	 * Function gets spam report
+	 *
+	 * @param string website host
+	 * @param integer report days
+	 * @return type
+	 */
+	static public function method__spam_check($api_key, $data, $date = null, $do_check = true)
+	{
+		$request=Array(
+			'method_name' => 'spam_check',
+			'auth_key' => $api_key,
+			'data' => is_array($data) ? implode(',',$data) : $data,
+		);
+		
+		if($date) $request['date'] = $date;
+		
+		$result = self::send_request($request, self::URL, 15);
+		$result = $do_check ? self::check_response($result, 'spam_check') : $result;
 		
 		return $result;
 	}
@@ -341,7 +364,9 @@ class CleantalkAPI
 	 * @return type
 	 */
 	static public function send_request($data, $url = self::URL, $timeout = 5, $ssl = false)
-	{		
+	{
+		global $apbct;
+		
 		// Possibility to switch API url
 		$url = defined('CLEANTALK_API_URL') ? CLEANTALK_API_URL : $url;
 		
@@ -349,53 +374,74 @@ class CleantalkAPI
 		if(defined('CLEANTALK_AGENT'))
 			$data['agent'] = CLEANTALK_AGENT;
 		
-		// Make URL string
-		$data_string = http_build_query($data);
-		$data_string = str_replace("&amp;", "&", $data_string);
-		
-		// For debug purposes
-		global $apbct_debug;
-		$apbct_debug['sent_data'] = $data;
-		$apbct_debug['request_string'] = $data_string;
-		
-		if (function_exists('curl_init')){
+		if($apbct->settings['use_buitin_http_api']){
 			
-			$ch = curl_init();
 			
-			// Set diff options
-			curl_setopt($ch, CURLOPT_URL, $url);
-			curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
-			curl_setopt($ch, CURLOPT_POST, true);
-			curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-			curl_setopt($ch, CURLOPT_HTTPHEADER, array('Expect:'));
+			$args = array(
+				'body' => $data,
+				'timeout' => $timeout,
+				'user-agent' => CLEANTALK_AGENT.' '.get_bloginfo( 'url' ),
+			);
 			
-			// Switch on/off SSL
-			if ($ssl === true) {
-				curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
-				curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-				curl_setopt($ch, CURLOPT_CAINFO, APBCT_CASERT_PATH);
-            }else{
-				curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-				curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+			$result = wp_remote_post($url, $args);
+			
+			if( is_wp_error( $result ) ) {
+				$errors = $result->get_error_message();
+				$result = false;
+			}else{
+				 $result = wp_remote_retrieve_body($result);
 			}
-			
-			// Make a request
-			$result = curl_exec($ch);
-			$errors = curl_error($ch);
-			curl_close($ch);
-			
-			// Get cURL error if result failed
-			if($result === false){
-				
-				// And retry with SSL enabled
-				if($ssl === false)
-					return self::send_request($data, $url, $timeout, true);
-				
-			}
-			
-		}else
-			$errors = 'CURL_NOT_INSTALLED';
+						
+		}else{
+		
+			// Make URL string
+			$data_string = http_build_query($data);
+			$data_string = str_replace("&amp;", "&", $data_string);
+
+			// For debug purposes
+			global $apbct_debug;
+			$apbct_debug['sent_data'] = $data;
+			$apbct_debug['request_string'] = $data_string;
+
+			if (function_exists('curl_init')){
+
+				$ch = curl_init();
+
+				// Set diff options
+				curl_setopt($ch, CURLOPT_URL, $url);
+				curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
+				curl_setopt($ch, CURLOPT_POST, true);
+				curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+				curl_setopt($ch, CURLOPT_HTTPHEADER, array('Expect:'));
+
+				// Switch on/off SSL
+				if ($ssl === true) {
+					curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+					curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+					curl_setopt($ch, CURLOPT_CAINFO, APBCT_CASERT_PATH);
+				}else{
+					curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+					curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+				}
+
+				// Make a request
+				$result = curl_exec($ch);
+				$errors = curl_error($ch);
+				curl_close($ch);
+
+				// Get cURL error if result failed
+				if($result === false){
+
+					// And retry with SSL enabled
+					if($ssl === false)
+						return self::send_request($data, $url, $timeout, true);
+
+				}
+								
+			}else
+				$errors = 'CURL_NOT_INSTALLED';
+		}
 		
 		// Trying to use file_get_contents() to make a API call
 		if(!empty($errors) && ini_get('allow_url_fopen')){
@@ -408,9 +454,9 @@ class CleantalkAPI
 				)
 			);
 			$context = stream_context_create($opts);
-			$result = file_get_contents($url, 0, $context);
+			$result = @file_get_contents($url, 0, $context);
 			
-		}else
+		}elseif(!ini_get('allow_url_fopen'))
 			$errors .= '_AND_ALLOW_URL_FOPEN_IS_DISABLED';
 		
 		if(empty($result) && !empty($errors))

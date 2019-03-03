@@ -125,13 +125,17 @@ import Fetcher from './utils/fetcher';
 			}
 
 			const spinner = row.find('.sui-icon-loader');
+			const button = row.find('#wphb-db-row-delete');
+			console.log(button);
 
 			spinner.removeClass('sui-hidden');
+            button.addClass('sui-hidden');
 
 			Fetcher.advanced.deleteSelectedData( type )
 				.then( ( response ) => {
-                    WPHB_Admin.notices.show( 'wphb-notice-advanced-tools', true, 'success', response.message );
+                    WPHB_Admin.notices.show( 'wphb-notice-advanced-tools', false, 'success', response.message );
 					spinner.addClass('sui-hidden');
+                    button.removeClass('sui-hidden');
 
 					for ( let prop in response.left ) {
 						if ( 'total' === prop ) {
@@ -146,8 +150,8 @@ import Fetcher from './utils/fetcher';
 					}
 				})
 				.catch( ( error ) => {
-					WPHB_Admin.notices.show( 'wphb-notice-advanced-tools', true, 'error', error );
-					spinner.removeClass('visible');
+					WPHB_Admin.notices.show( 'wphb-notice-advanced-tools', false, 'error', error );
+					spinner.addClass('sui-hidden');
 				});
 		}
 	}

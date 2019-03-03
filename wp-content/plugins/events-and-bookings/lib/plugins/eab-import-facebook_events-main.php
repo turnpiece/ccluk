@@ -47,7 +47,7 @@ class Eab_Fbe_Importer_FacebookEventsImporter extends Eab_ScheduledImporter {
 
 	public function import () {
 		$sync_id = $this->_data->get_option('fbe_importer-fb_user');
-		if ($sync_id) $this->import_events($sync_id);
+		$this->import_events($sync_id);
 	}
 
 	public function map_to_raw_events_array ($id) {
@@ -102,43 +102,29 @@ class Eab_Fbe_Importer_FacebookEventsImporter extends Eab_ScheduledImporter {
 	}
 
 	private function _get_request_items ($id) {
-		$token = $this->_oauth->get_token();
+		$token = $this->_oauth->is_authenticated();
+		if ( $token ) {
+			$api_key = $this->_data->get_option('fbe_importer-client_id');
+			$api_secret = $this->_data->get_option('fbe_importer-client_secret');
+			$sync_user = !empty($id)
+					? $id
+					: 'me'
+			;
 
-                $api_key = $this->_data->get_option('fbe_importer-client_id');
-		$api_secret = $this->_data->get_option('fbe_importer-client_secret');
-                $fb_user = $this->_oauth->get_fb_user();
-                $sync_user = !empty($fb_user['id'])
-                        ? $fb_user['id']
-                        : false
-                ;
+			$fb = new Facebook\Facebook(array(
+					'app_id' => $api_key,
+					'app_secret' => $api_secret,
+			));
 
-                $fb = new Facebook\Facebook(array(
-                        'app_id' => $api_key,
-                        'app_secret' => $api_secret,
-                ));
+			$response = $fb->get('/' . $sync_user . '/events?fields=id,name,description,start_time,end_time,updated_time', $token);
+			$items = $response->getDecodedBody();
 
-                $response = $fb->get('/me/events?fields=id,name,description,start_time,end_time,updated_time', $token);
-                $items = $response->getDecodedBody();
-
-                /**
-                 * Debug code
-                 */
-                /*ob_start();
-                print_r($items['data']);
-                $x = ob_get_clean();
-                error_log($x);
-
-		$page = wp_remote_request("https://graph.facebook.com/{$id}/events/?access_token={$token}&fields=id,name,description,start_time,end_time,location,updated_time", $this->_http_headers);
-		if (is_wp_error($page)) return array(); // Request fail
-		if (wp_remote_retrieve_response_code($page) != 200) return array(); // Request fail
-		$raw = wp_remote_retrieve_body($page);
-		$items = json_decode($raw, true);*/
-
-
-                return !empty($items['data'])
-			? $items['data']
-			: array()
-		;
+			return !empty($items['data'])
+				? $items['data']
+				: array()
+			;
+		}
+		return array();
 	}
 
 	private function get_schedule_key () {
@@ -210,11 +196,11 @@ class Eab_Calendars_FacebookEventsImporter {
 			wp_list_pluck($raw_authors, 'ID'),
 			wp_list_pluck($raw_authors, 'display_name')
 		);
-?>
-<div id="eab-settings-fbe_importer" class="eab-metabox postbox">
-	<h3 class="eab-hndle"><?php _e('Facebook Events import settings', Eab_EventsHub::TEXT_DOMAIN); ?></h3>
-	<div class="eab-inside">
-		<div class="eab-settings-settings_item" style="line-height:1.8em">
+		?>
+		<div id="eab-settings-fbe_importer" class="eab-metabox postbox">
+			<h3 class="eab-hndle"><?php _e('Facebook Events import settings', Eab_EventsHub::TEXT_DOMAIN); ?></h3>
+				<div class="eab-inside">
+					<div class="eab-settings-settings_item" style="line-height:1.8em">
                         <table cellpadding="5" cellspacing="5" width="100%">
                                 <tr>
                                         <td valign="top" width="400">
@@ -233,15 +219,15 @@ class Eab_Calendars_FacebookEventsImporter {
                                         </td>
                                 </tr>
                         </table>
-			<div class="fbe_importer-auth_actions">
-		<?php if ($is_authenticated && $api_key && $api_secret) { ?>
-				<a href="#reset" class="button" id="fbe_import-reset"><?php _e('Reset', Eab_EventsHub::TEXT_DOMAIN); ?></a>
-				<span><?php echo $tips->add_tip(__('Remember to also revoke the app privileges <a href="http://www.facebook.com/settings?tab=applications" target="_blank">here</a>.', Eab_EventsHub::TEXT_DOMAIN)); ?></span>
-		<?php } else if ($api_key && $api_secret) { ?>
-				<a href="#authenticate" class="button" id="fbe_import-authenticate"><?php _e('Authenticate', Eab_EventsHub::TEXT_DOMAIN); ?></a>
-		<?php } else { ?>
-				<p><em><?php _e('Enter your API info and save settings first.', Eab_EventsHub::TEXT_DOMAIN); ?></em></p>
-		<?php } ?>
+					<div class="fbe_importer-auth_actions">
+				<?php if ($is_authenticated && $api_key && $api_secret) { ?>
+					<a href="#reset" class="button" id="fbe_import-reset"><?php _e('Reset', Eab_EventsHub::TEXT_DOMAIN); ?></a>
+					<span><?php echo $tips->add_tip(__('Remember to also revoke the app privileges <a href="http://www.facebook.com/settings?tab=applications" target="_blank">here</a>.', Eab_EventsHub::TEXT_DOMAIN)); ?></span>
+				<?php } else if ($api_key && $api_secret) { ?>
+					<a href="#authenticate" class="button" id="fbe_import-authenticate"><?php _e('Authenticate', Eab_EventsHub::TEXT_DOMAIN); ?></a>
+				<?php } else { ?>
+					<p><em><?php _e('Enter your API info and save settings first.', Eab_EventsHub::TEXT_DOMAIN); ?></em></p>
+				<?php } ?>
 			</div>
 		</div>
 		<?php if ($is_authenticated) { ?>

@@ -4,7 +4,7 @@
  *
  * @package     Give
  * @subpackage  Admin/Upgrades
- * @copyright   Copyright (c) 2016, WordImpress
+ * @copyright   Copyright (c) 2016, GiveWP
  * @license     https://opensource.org/licenses/gpl-license GNU Public License
  * @since       1.0
  *
@@ -132,13 +132,13 @@ function give_do_automatic_upgrades() {
 			$did_upgrade = true;
 	}
 
-	if ( $did_upgrade ) {
+	if ( $did_upgrade || version_compare( $give_version, GIVE_VERSION, '<' ) ) {
 		update_option( 'give_version', preg_replace( '/[^0-9.].*/', '', GIVE_VERSION ), false );
 	}
 }
 
-add_action( 'admin_init', 'give_do_automatic_upgrades' );
-add_action( 'give_upgrades', 'give_do_automatic_upgrades' );
+add_action( 'admin_init', 'give_do_automatic_upgrades', 0 );
+add_action( 'give_upgrades', 'give_do_automatic_upgrades', 0 );
 
 /**
  * Display Upgrade Notices.
@@ -455,6 +455,26 @@ function give_show_upgrade_notices( $give_updates ) {
 			),
 		)
 	);
+
+	// v2.4.0 Update donation form goal progress data.
+	$give_updates->register(
+		array(
+			'id'       => 'v240_update_form_goal_progress',
+			'version'  => '2.4.0',
+			'callback' => 'give_v240_update_form_goal_progress_callback',
+		)
+	);
+
+	// v2.4.1 Update to remove sale type log
+	$give_updates->register(
+		array(
+			'id'       => 'v241_remove_sale_logs',
+			'version'  => '2.4.1',
+			'callback' => 'give_v241_remove_sale_logs_callback',
+			'depend'   => array( 'v201_logs_upgrades' ),
+		)
+	);
+
 }
 
 add_action( 'give_register_updates', 'give_show_upgrade_notices' );
@@ -857,7 +877,7 @@ function give_v18_upgrades_core_setting() {
 			// Set checkbox value to radio value.
 			$give_settings[ $setting_name ] = ( ! empty( $give_settings[ $setting_name ] ) && 'on' === $give_settings[ $setting_name ] ? 'enabled' : 'disabled' );
 
-			// @see https://github.com/WordImpress/Give/issues/1063.
+			// @see https://github.com/impress-org/give/issues/1063.
 			if ( false !== strpos( $setting_name, 'disable_' ) ) {
 
 				$give_settings[ $new_setting_name ] = ( give_is_setting_enabled( $give_settings[ $setting_name ] ) ? 'disabled' : 'enabled' );
@@ -921,13 +941,13 @@ function give_v18_upgrades_form_metadata() {
 			}
 
 			// "Disable" Guest Donation. Checkbox.
-			// See: https://github.com/WordImpress/Give/issues/1470.
+			// See: https://github.com/impress-org/give/issues/1470.
 			$guest_donation        = give_get_meta( get_the_ID(), '_give_logged_in_only', true );
 			$guest_donation_newval = ( in_array( $guest_donation, array( 'yes', 'on' ) ) ? 'disabled' : 'enabled' );
 			give_update_meta( get_the_ID(), '_give_logged_in_only', $guest_donation_newval );
 
 			// Offline Donations.
-			// See: https://github.com/WordImpress/Give/issues/1579.
+			// See: https://github.com/impress-org/give/issues/1579.
 			$offline_donation = give_get_meta( get_the_ID(), '_give_customize_offline_donations', true );
 			if ( 'no' === $offline_donation ) {
 				$offline_donation_newval = 'global';
@@ -1356,7 +1376,7 @@ function give_v1812_upgrades() {
  *
  * Standardized amount values to six decimal
  *
- * @see        https://github.com/WordImpress/Give/issues/1849#issuecomment-315128602
+ * @see        https://github.com/impress-org/give/issues/1849#issuecomment-315128602
  *
  * @since      1.8.12
  */
@@ -1457,7 +1477,7 @@ function give_v1812_update_amount_values_callback() {
  *
  * Standardized amount values to six decimal for donor
  *
- * @see        https://github.com/WordImpress/Give/issues/1849#issuecomment-315128602
+ * @see        https://github.com/impress-org/give/issues/1849#issuecomment-315128602
  *
  * @since      1.8.12
  */
@@ -1735,7 +1755,7 @@ function give_v1818_assign_custom_amount_set_donation() {
 /**
  * Upgrade Routine - Removed Give Worker caps.
  *
- * See: https://github.com/WordImpress/Give/issues/2476
+ * See: https://github.com/impress-org/give/issues/2476
  *
  * @since 1.8.18
  */
@@ -3090,6 +3110,25 @@ function give_v224_update_donor_meta_forms_id_callback() {
 	}
 }
 
+/**
+ * Add custom comment table
+ *
+ * @since 2.4.0
+ */
+function  give_v230_add_missing_comment_tables(){
+	$custom_tables = array(
+		Give()->comment->db,
+		Give()->comment->db_meta,
+	);
+
+	/* @var Give_DB $table */
+	foreach ( $custom_tables as $table ) {
+		if ( ! $table->installed() ) {
+			$table->register_table();
+		}
+	}
+}
+
 
 /**
  * Move donor notes to comment table
@@ -3097,6 +3136,9 @@ function give_v224_update_donor_meta_forms_id_callback() {
  * @since 2.3.0
  */
 function give_v230_move_donor_note_callback() {
+	// Add comment table if missing.
+	give_v230_add_missing_comment_tables();
+
 	/* @var Give_Updates $give_updates */
 	$give_updates = Give_Updates::get_instance();
 
@@ -3150,6 +3192,9 @@ function give_v230_move_donor_note_callback() {
  */
 function give_v230_move_donation_note_callback() {
 	global $wpdb;
+
+	// Add comment table if missing.
+	give_v230_add_missing_Comment_tables();
 
 	/* @var Give_Updates $give_updates */
 	$give_updates = Give_Updates::get_instance();
@@ -3294,4 +3339,69 @@ function give_v230_delete_dw_related_comment_data_callback(){
 
 	// The Update Ran.
 	give_set_upgrade_complete( 'v230_delete_donor_wall_related_comment_data' );
+}
+
+/**
+ * Update donation form goal progress data.
+ *
+ * @since 2.4.0
+ *
+ */
+function give_v240_update_form_goal_progress_callback() {
+
+	/* @var Give_Updates $give_updates */
+	$give_updates = Give_Updates::get_instance();
+
+	// form query
+	$forms = new WP_Query(
+		array(
+			'paged'          => $give_updates->step,
+			'status'         => 'any',
+			'order'          => 'ASC',
+			'post_type'      => 'give_forms',
+			'posts_per_page' => 20,
+		)
+	);
+
+	if ( $forms->have_posts() ) {
+		while ( $forms->have_posts() ) {
+			$forms->the_post();
+
+			// Update the goal progress for donation form.
+			give_update_goal_progress( get_the_ID() );
+
+		}// End while().
+
+		wp_reset_postdata();
+
+	} else {
+
+		// No more forms found, finish up.
+		give_set_upgrade_complete( 'v240_update_form_goal_progress' );
+
+	}
+}
+
+
+/**
+ * Manual update handler for v241_remove_sale_logs
+ *
+ * @since 2.4.1
+ */
+function give_v241_remove_sale_logs_callback() {
+	global $wpdb;
+
+	$log_table      = Give()->logs->log_db->table_name;
+	$log_meta_table = Give()->logs->logmeta_db->table_name;
+
+	$sql = "DELETE {$log_table}, {$log_meta_table}
+		FROM {$log_table}
+		INNER JOIN  {$log_meta_table} ON {$log_meta_table}.log_id={$log_table}.ID
+		WHERE log_type='sale'
+		";
+
+	// Remove donation logs.
+	$wpdb->query( $sql );
+
+	give_set_upgrade_complete( 'v241_remove_sale_logs' );
 }

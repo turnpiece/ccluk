@@ -62,8 +62,20 @@
 
 	</div>
 
-	<div class="wpmud-box-content<?php echo $is_client ? ' wps-pro' : ' wps-free'; ?>
-	<?php if ( ( true === $has_snapshot_key )&&( true === $has_backups ) ) echo ' wps-pro-backups'; ?>">
+	<?php
+	if ( $is_client ) {
+		$widget_class = 'wps-pro';
+	} else {
+		$widget_class = 'wps-free';
+	}
+	if ( ( true === $has_snapshot_key )&&( true === $has_backups ) ) {
+		$widget_class .= ' wps-pro-backups';
+	} else {
+		$widget_class .= ( ! $aws_sdk_compatible ) ? ' wps-aws-sdk-incompatible': '';
+	}
+	?>
+
+	<div class="wpmud-box-content <?php echo esc_attr( $widget_class ); ?>">
 
 		<div class="row">
 
@@ -166,7 +178,7 @@
 
 						<p><?php esc_html_e('Automatically backup your entire website on a regular basis and store those backups on WPMU DEV\'s secure cloud servers. Restore your full website at anytime via the WPMU DEV Hub.', SNAPSHOT_I18N_DOMAIN); ?></p>
 
-						<p><a href="<?php echo esc_url( WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url('snapshots-newui-managed-backups') ); ?>" class="button button-blue"><?php esc_html_e('Backup my site' , SNAPSHOT_I18N_DOMAIN); ?></a></p>
+						<p><a href="<?php echo esc_url( WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url('snapshots-newui-managed-backups') ); ?>" class="button button-blue <?php echo ( ! $aws_sdk_compatible ) ? 'disabled': ''; ?>"><?php esc_html_e('Backup my site' , SNAPSHOT_I18N_DOMAIN); ?></a></p>
 
 					<?php endif; ?>
 
@@ -182,7 +194,7 @@
 
 							<div class="wps-cta">
 
-								<div class="wps-cta-text"><?php echo wp_kses_post( __( 'Fully automated managed backups are included in a WPMU DEV membership along with 100+ plugins & themes, 24/7 support and lots of handy site management tools  – <strong><a href="https://premium.wpmudev.org/project/snapshot/" target="_blank" class="snapshot-try-free">Try it all absolutely FREE</a></strong>' , SNAPSHOT_I18N_DOMAIN ) ); ?></div>
+								<div class="wps-cta-text"><?php echo wp_kses_post( __( 'Fully automated managed backups are included in a WPMU DEV membership along with 100+ plugins & 24/7 support and lots of handy site management tools  – <strong><a href="https://premium.wpmudev.org/project/snapshot/" target="_blank" class="snapshot-try-free">Try it all absolutely FREE</a></strong>' , SNAPSHOT_I18N_DOMAIN ) ); ?></div>
 
 							</div>
 
@@ -192,7 +204,7 @@
 
 						<p><?php esc_html_e('Automatically backup your entire website on a regular basis and store those backups on WPMU DEV\'s secure cloud servers. Restore your full website at anytime via the WPMU DEV Hub.', SNAPSHOT_I18N_DOMAIN); ?></p>
 
-						<p><a id="view-snapshot-key-2" class="button <?php echo !empty($apiKey) ? 'has-key' : ''; ?> button-blue"><?php esc_html_e( 'Add Snapshot Key' , SNAPSHOT_I18N_DOMAIN ); ?></a></p>
+						<p><a id="view-snapshot-key-2" class="button <?php echo !empty($apiKey) ? 'has-key' : ''; ?> button-blue <?php echo ( ! $aws_sdk_compatible ) ? 'disabled': ''; ?>"><?php esc_html_e( 'Add Snapshot Key' , SNAPSHOT_I18N_DOMAIN ); ?></a></p>
 
 					<?php endif; ?>
 

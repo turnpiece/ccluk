@@ -3,9 +3,11 @@
  * @package The_SEO_Framework/Bootstrap
  */
 
+defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
+
 /**
  * The SEO Framework plugin
- * Copyright (C) 2015 - 2018 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2015 - 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -19,8 +21,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-
-defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
 
 /**
  * This file holds functions for upgrading the plugin.
@@ -87,7 +87,7 @@ function the_seo_framework_do_upgrade() {
 	if ( ! the_seo_framework()->loaded ) return;
 
 	if ( the_seo_framework()->is_seo_settings_page( false ) ) {
-		wp_redirect( self_admin_url() );
+		wp_redirect( self_admin_url() ); // phpcs:ignore -- self_admin_url() is safe.
 		exit;
 	}
 
@@ -194,6 +194,7 @@ add_action( 'the_seo_framework_upgraded', 'the_seo_framework_prepare_extension_m
  * Enqueues and outputs an Extension Manager suggestion.
  *
  * @since 3.1.0
+ * @since 3.2.2. No longer suggests when the user is new.
  * @staticvar bool $run
  *
  * @return void Early when already enqueued
@@ -204,6 +205,7 @@ function the_seo_framework_prepare_extension_manager_suggestion() {
 
 	if ( is_admin() ) {
 		add_action( 'admin_init', function() {
+			if ( ! the_seo_framework_previous_db_version() ) return;
 			require THE_SEO_FRAMEWORK_DIR_PATH_FUNCT . 'tsfem-suggestion.php';
 			the_seo_framework_load_extension_manager_suggestion();
 		}, 20 );

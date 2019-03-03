@@ -793,7 +793,7 @@
 				return true;
 			}
 			var snapshot_form_archive_count = jQuery('input#snapshot-archive-count', this).val();
-
+			var snapshot_form_remote_archive_count = jQuery('input#snapshot-remote-archive-count', this).val();
 
 			var snapshot_form_destination = jQuery('select#snapshot-destination', this).val();
 			var snapshot_store_local = jQuery('select#snapshot-store-local', this).val();
@@ -896,6 +896,7 @@
 						'snapshot-tables-array': snapshot_form_tables_array,
 						'snapshot-interval': snapshot_form_interval,
 						'snapshot-archive-count': snapshot_form_archive_count,
+						'snapshot-remote-archive-count': snapshot_form_remote_archive_count,
 						'snapshot-destination': snapshot_form_destination,
 						'snapshot-store-local': snapshot_store_local,
 						'snapshot-destination-directory': snapshot_form_destination_directory,
@@ -1746,5 +1747,14 @@
 	}
 	$(window).on('load', toggle_offset_visibility);
 	$(document).on('change', 'select[name="frequency"]', toggle_offset_visibility);
+
+	$(document).on('click', '.snapshot-aws-combat .notice-dismiss', function () {
+		jQuery.ajax({
+			url: ajaxurl,
+			data: {
+				action: 'dismiss_snapshot_aws_comp_notice'
+			}
+		})
+	});
 
 }(jQuery));

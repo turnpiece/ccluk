@@ -39,16 +39,27 @@
 							<?php if( !$checks['PhpVersion']['test'] ) : ?>
 							<td>
 								<?php
-								echo wp_kses_post(
-									sprintf(
-										__(
-											'Your PHP version is out of date.
-											Your current version is %s and we require 5.2 or newer.
-											You\'ll need to update your PHP version to proceed.
-											If you use a managed host, contact them directly to have it updated.', SNAPSHOT_I18N_DOMAIN
-										), $checks['PhpVersion']['value']
-									)
-								);
+								$screen_id = get_current_screen();
+								if ( 'snapshot_page_snapshot_pro_managed_backups' === $screen_id->id ) {
+									echo wp_kses_post(
+										sprintf(
+											__(
+												'<strong>This requires PHP 5.5 or later and your host is using an older version of PHP (%s)</strong>. Contact your host to upgrade your PHP version or go to <a href="https://premium.wpmudev.org/hub/my-websites/" target="_blank" >HUB</a> and use "My website is down" option while restoring and follow the instructions to restore.', SNAPSHOT_I18N_DOMAIN
+											), $checks['PhpVersion']['value']
+										)
+									);
+								} else {
+									echo wp_kses_post(
+										sprintf(
+											__(
+												'Your PHP version is out of date.
+												Your current version is %s and we require 5.2 or newer.
+												You\'ll need to update your PHP version to proceed.
+												If you use a managed host, contact them directly to have it updated.', SNAPSHOT_I18N_DOMAIN
+											), $checks['PhpVersion']['value']
+										)
+									);
+								}
 								?>
 							</td>
 							<?php endif; ?>

@@ -2,9 +2,9 @@
 /**
  * Give Form Functions
  *
- * @package     WordImpress
+ * @package     GiveWP
  * @subpackage  Includes/Forms
- * @copyright   Copyright (c) 2016, WordImpress
+ * @copyright   Copyright (c) 2016, GiveWP
  * @license     https://opensource.org/licenses/gpl-license GNU Public License
  * @since       1.1
  */
@@ -118,7 +118,11 @@ function give_get_success_page_uri() {
  * @return bool True if on the Success page, false otherwise.
  */
 function give_is_success_page() {
-	return apply_filters( 'give_is_success_page', is_page( give_get_success_page_uri() ) );
+	$give_options = give_get_settings();
+
+	$success_page = isset( $give_options['success_page'] ) ? is_page( $give_options['success_page'] ) : false;
+
+	return apply_filters( 'give_is_success_page', $success_page );
 }
 
 /**
@@ -339,6 +343,21 @@ function give_get_history_page_uri() {
 }
 
 /**
+ * Determines if we're currently on the History page.
+ *
+ * @since 1.0
+ *
+ * @return bool True if on the History page, false otherwise.
+ */
+function give_is_history_page() {
+	$give_options = give_get_settings();
+
+	$history_page = isset( $give_options['history_page'] ) ? absint( $give_options['history_page'] ) : 0;
+
+	return apply_filters( 'give_is_history_page', is_page( $history_page ) );
+}
+
+/**
  * Check if a field is required
  *
  * @param string $field
@@ -348,7 +367,7 @@ function give_get_history_page_uri() {
  * @since       1.0
  * @return      bool
  */
-function give_field_is_required( $field = '', $form_id ) {
+function give_field_is_required( $field, $form_id ) {
 
 	$required_fields = give_get_required_fields( $form_id );
 
@@ -403,6 +422,31 @@ function give_increase_donation_count( $form_id = 0, $quantity = 1 ) {
 	$form = new Give_Donate_Form( $form_id );
 
 	return $form->increase_sales( $quantity );
+}
+
+/**
+ * Update the goal progress count of a donation form.
+ *
+ * @since 2.4.0
+ *
+ * @param int $form_id Give Form ID
+ *
+ * @return void
+ */
+function give_update_goal_progress( $form_id = 0 ) {
+
+	//Get goal option meta key
+	$is_goal_enabled = give_is_setting_enabled( give_get_meta( $form_id, '_give_goal_option', true, 'disabled' ) );
+
+	// Check, if the form goal is enabled.
+	if ( $is_goal_enabled ) {
+		$goal_stats               = give_goal_progress_stats( $form_id );
+		$form_goal_progress_value = ! empty( $goal_stats['progress'] ) ? $goal_stats['progress'] : 0;
+	} else {
+		$form_goal_progress_value = -1;
+	}
+
+	give_update_meta( $form_id, '_give_form_goal_progress', $form_goal_progress_value );
 }
 
 /**
@@ -1518,3 +1562,29 @@ function give_handle_form_meta_on_delete( $id ) {
 }
 
 add_action( 'before_delete_post', 'give_handle_form_meta_on_delete', 10, 1 );
+
+
+/**
+ * Get list of default param of form shrtcode.
+ *
+ * @since 2.4.1
+ * @return array
+ */
+function give_get_default_form_shortcode_args() {
+	$default = array(
+		'id'                    => '',
+		'show_title'            => true,
+		'show_goal'             => true,
+		'show_content'          => '',
+		'float_labels'          => '',
+		'display_style'         => '',
+		'continue_button_title' => '',
+	);
+
+	/**
+	 * Fire the filter
+	 */
+	$default = apply_filters( 'give_get_default_form_shortcode_args', $default );
+
+	return $default;
+}

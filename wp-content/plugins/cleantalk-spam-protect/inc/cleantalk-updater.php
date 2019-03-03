@@ -148,3 +148,10 @@ function apbct_update_to_5_109_0(){
 		switch_to_blog($initial_blog);
 	}
 }
+
+function apbct_update_to_5_110_0(){
+	global $apbct;
+	unset($apbct->data['last_remote_call']);
+	$apbct->saveData;
+	$apbct->save('remote_calls');
+}

@@ -209,7 +209,7 @@
 							<div class="wps-auth-message success">
 
 								<p>
-								<?php echo wp_kses_post( sprintf( __( 'Your website has been successfully restored from your snapshot!! <a href="%s">View website</a>.', SNAPSHOT_I18N_DOMAIN ), esc_url( get_site_url() ) ) ); ?>
+								<?php echo wp_kses_post( sprintf( __( 'Your website has been successfully restored from your snapshot! <a href="%s">View website</a>.', SNAPSHOT_I18N_DOMAIN ), esc_url( get_site_url() ) ) ); ?>
 								</p>
 
 							</div>

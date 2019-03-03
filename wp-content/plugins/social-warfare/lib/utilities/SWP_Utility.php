@@ -73,8 +73,6 @@ class SWP_Utility {
      * @return bool Whether or not the options were updated in the database.
      */
     public static function store_settings() {
-		global $swp_user_options;
-
         if ( !check_ajax_referer( 'swp_plugin_options_save', 'security', false ) ) {
     		wp_send_json_error( esc_html__( 'Security failed.', 'social-warfare' ) );
     		die;
@@ -87,6 +85,7 @@ class SWP_Utility {
     		die;
     	}
 
+		$options = get_option( 'social_warfare_settings', array() );
         $settings = $data['settings'];
 
         // Loop and check for checkbox values, convert them to boolean.
@@ -100,7 +99,7 @@ class SWP_Utility {
     		}
     	}
 
-		$new_settings = array_merge( $swp_user_options, $settings );
+		$new_settings = array_merge( $options, $settings );
 
         echo json_encode( update_option( 'social_warfare_settings', $new_settings ) );
 
@@ -312,5 +311,54 @@ class SWP_Utility {
         $options[$key] = $value;
 
         return update_option( 'social_warfare_settings', $options );
+    }
+
+	public static function delete_option( $key ) {
+		if ( empty( $key )  ) {
+			return false;
+		}
+
+		$options = get_option( 'social_warfare_settings', array() );
+		unset( $options[$key] );
+
+		return update_option( 'social_warfare_settings', $options);
+	}
+
+   /**
+    * Check the version range between core and addons.
+    *
+    * The idea here is that we can only maintain backwards compatibility to a
+    * reasonable, but limited, extent. As such, we will check if the version
+    * of core is within 6 version of pro. This will allow us to depracate and
+    * remove some really old backwards-compatibility workarounds that we've put
+    * in place.
+    *
+    * We want to be able to input two version (core and pro) and have it return
+    * a string/integer indicating how many versions they are different from one
+    * another. If the answer is greater than -6 and less than 6, we can fire up
+    * the pro addon.
+    *
+    * @param  string $core_version The verison of Core currently installed.
+    * @param  string $addon_version The version of the addon currently installed.
+    * @return bool   True if the versions are compatible, else false.
+    *
+    */
+    public static function check_version_range( $core_version, $addon_version ) {
+        $core_versions = explode( '.', $core_version );
+        $addon_versions = explode( '.', $addon_version );
+
+        $version_difference = absint( $core_versions[1] - $addon_versions[1] );
+
+        //* Force plugin users to be on the same major version.
+        if ( $core_versions[0] != $addon_verisons[0] ) {
+            return false;
+        }
+
+        //* Require plugin users to be within nearby secondary versions.
+        if ( $version_difference < 5 ) {
+            return true;
+        }
+
+        return false;
     }
 }

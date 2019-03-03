@@ -237,7 +237,15 @@ import Scanner from './minification/Scanner';
             });
 
             // Filter search box
-            $('#wphb-s').keyup(function () {
+            let filter_input = $('#wphb-s');
+            // Prevent enter submitting form to rescan files.
+            filter_input.keydown(function (e) {
+                if( 13 === e.keyCode ) {
+                    event.preventDefault();
+                    return false;
+                }
+            });
+            filter_input.keyup(function () {
                 self.rowsCollection.addFilter($(this).val(), 'primary');
                 self.rowsCollection.applyFilters();
             });

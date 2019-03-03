@@ -40,10 +40,12 @@ class CleantalkDB_Wordpress
 	public function fetch()
 	{
 		$this->result = $this->db->get_row($this->query, ARRAY_A);
+		return $this->result;
 	}
 	
 	public function fetch_all()
 	{
 		$this->result = $this->db->get_results($this->query, ARRAY_A);
+		return $this->result;
 	}
 }

@@ -20,8 +20,8 @@
  * @return void   It echoes the results to the screen.
  */
 function social_warfare( $args = array() ) {
-    $buttons_panel = new SWP_Buttons_Panel( $args );
-    echo $buttons_panel->render_HTML();
+    $buttons_panel = new SWP_Buttons_Panel( $args, true );
+    echo $buttons_panel->render_html();
 }
 
 

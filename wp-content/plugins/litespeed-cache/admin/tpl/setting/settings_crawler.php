@@ -5,7 +5,7 @@ if ( !defined('WPINC') ) die;
 
 <h3 class="litespeed-title-short">
 	<?php echo __('Crawler Settings', 'litespeed-cache'); ?>
-	<a href="https://www.litespeedtech.com/support/wiki/doku.php/litespeed_wiki:cache:lscwp:configuration:crawler" target="_blank" class="litespeed-learn-more"><?php echo __('Learn More', 'litespeed-cache') ; ?></a>
+	<?php $this->learn_more( 'https://www.litespeedtech.com/support/wiki/doku.php/litespeed_wiki:cache:lscwp:configuration:crawler', false, 'litespeed-learn-more' ) ; ?>
 </h3>
 
 <table><tbody>
@@ -130,6 +130,71 @@ if ( !defined('WPINC') ) die;
 			<div class="litespeed-desc">
 				<?php echo __('To crawl the site as a logged-in user, enter the user ids to be simulated.', 'litespeed-cache'); ?>
 				<?php echo __('One per line.', 'litespeed-cache'); ?>
+			</div>
+
+		</td>
+	</tr>
+
+	<tr>
+		<th><?php echo __('Cookie Simulation', 'litespeed-cache'); ?></th>
+		<td>
+			<?php $id = LiteSpeed_Cache_Config::ITEM_CRWL_COOKIES ; ?>
+			<div id="cookie_crawler">
+				<div class="litespeed-block" v-for="( item, key ) in items">
+					<div class='litespeed-col-auto'>
+						<h4><?php echo __( 'Cookie Name', 'litespeed-cache' ) ; ?></h4>
+					</div>
+					<div class='litespeed-col-auto'>
+						<input type="text" v-model="item.name" name="litespeed-cache-conf[<?php echo $id ; ?>][name][]" class="litespeed-regular-text" style="margin-top:1.33em;" >
+					</div>
+					<div class='litespeed-col-auto'>
+						<h4><?php echo __( 'Cookie Values', 'litespeed-cache' ) ; ?></h4>
+					</div>
+					<div class='litespeed-col-auto'>
+						<textarea v-model="item.vals" rows="5" cols="40" class="litespeed-textarea-success" name="litespeed-cache-conf[<?php echo $id ; ?>][vals][]" placeholder="<?php echo __( 'One per line.', 'litespeed-cache' ) ; ?>"></textarea>
+					</div>
+					<div class='litespeed-col-auto'>
+						<button type="button" class="litespeed-btn-danger litespeed-btn-tiny" @click="$delete( items, key )">X</button>
+					</div>
+				</div>
+
+				<button type="button" @click='add_row' class="litespeed-btn-success litespeed-btn-tiny">+</button>
+			</div>
+
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js"></script>
+			<script type="text/javascript">
+				var cookie_crawler = new Vue( {
+					el: '#cookie_crawler',
+					data: {
+						counter: 0,
+						items : [
+							<?php
+								// Build the cookie crawler Vue data
+								$cookies = $this->config->get_item( $id ) ;
+								/**
+								 * Data Src Structure: [ nameA => vals, nameB => vals ]
+								 */
+								$list = array() ;
+								foreach ( $cookies as $k => $v ) {
+									$list[] = "{ name: '$k', vals: `$v` }" ;// $v contains line break
+								}
+								echo implode( ',', $list ) ;
+							?>
+						]
+					},
+					methods: {
+						add_row() {
+							this.items.push( {
+								id: ++ this.counter
+							} ) ;
+						}
+					}
+				} ) ;
+			</script>
+
+			<div class="litespeed-desc">
+				<?php echo __('To crawl for a particular cookie, enter the cookie name, and the values you wish to crawl for. Values should be one per line, and can include a blank line. There will be one crawler created per cookie value, per simulated role.', 'litespeed-cache'); ?>
+				<?php $this->learn_more( 'https://www.litespeedtech.com/support/wiki/doku.php/litespeed_wiki:cache:lscwp:configuration:crawler#cookie_simulation' ) ; ?>
 			</div>
 
 		</td>

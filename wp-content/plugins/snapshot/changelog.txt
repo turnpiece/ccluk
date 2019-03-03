@@ -5,6 +5,43 @@ Change Log:
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
 
+3.2.0.2
+----------------------------------------------------------------------
+- Fix: Files not cleaned up after restore with Snapshots
+- Fix: Issue with restoring WooCommerce tables with Snapshots
+
+3.2.0.1
+----------------------------------------------------------------------
+- Improve: Disable local backups email triggering and update the copy
+- Improve: Handle gracefully incompatibilities with the new AWS SDK
+- Fix: Change icon for automated backups that failed to upload
+- Fix: Import snapshot from directory URL and see size showing 0
+- Fix: Dropbox Import showing error
+
+3.2.0
+----------------------------------------------------------------------
+- Improve: Update AWS SDK
+- Add: Add separate option to select how many snapshots will be kept on remote destination
+- Add: Whitelabeling Plugin based on Dashboard Plugin Settings
+- Fix: Unreadable files in directory causing error
+- Add: Specify different File Exclusions for Managed Backup and Snapshots
+- Fix: Can't set a backup schedule from the HUB
+- Add: Add notification for when there are local managed backups on site
+- Fix: Managed backups can't be cancelled
+- Improve: If a managed backup is cancelled, revert the partial backup file from the WPMU server
+- Fix: Fix backup downloading on hosts with low memory
+- Improve: Disable backup continuation
+- Fix: Managed restore doesn't work on WPMU DEV Hosting
+- Fix: Issues on WPEngine when restoring managed backup
+- Fix: Site broken upon activation on PHPv5.2
+- Fix: PHP warning in MU sites
+- Fix: PHP error in PHPv5.2 MU sites
+- Fix: PHP notice upon deactivation in PHPv5.2 sites
+- Fix: PHP warnings/notices on subsites with PHPv5.3
+- Fix: Add the Activate WPMUDEV Dashboard message when it is deactivated in MU site
+- Fix: Show full log button requires double click to show log
+- Fix: Show full log button is not working for snapshot restore wizard
+- Fix: Snapshot translation typos
 
 3.1.9.2
 ----------------------------------------------------------------------
@@ -534,4 +571,4 @@ http://premium.wpmudev.org/forums/topic/need-to-turn-off-zlib-compression-for-it
 - Initial stable release
 
 
-87274-1541874373-au
+87274-1550006971-au

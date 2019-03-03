@@ -20,7 +20,7 @@ abstract class Snapshot_Model_Full {
 	 * @return bool
 	 */
 	public function has_errors() {
-		return empty( $this->_errors );
+		return ! empty( $this->_errors );
 	}
 
 

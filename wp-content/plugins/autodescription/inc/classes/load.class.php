@@ -8,7 +8,7 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2015 - 2018 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2015 - 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -42,9 +42,9 @@ final class Load extends Feed implements Debug_Interface {
 	 * @var bool Whether transients are enabled.
 	 * @var bool Whether script debugging is enabled.
 	 */
-	public $the_seo_framework_debug = false,
-		   $the_seo_framework_use_transients = true,
-		   $script_debug = false;
+	public $the_seo_framework_debug          = false;
+	public $the_seo_framework_use_transients = true;
+	public $script_debug                     = false;
 
 	/**
 	 * Constructor, setup debug vars and then load parent constructor.

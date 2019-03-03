@@ -47,6 +47,10 @@ class Snapshot_Controller_Full_Ajax extends Snapshot_Controller_Full {
 
 		add_action( 'wp_ajax_snapshot-full_backup-restore', array( $this, 'json_start_restore' ) );
 
+		add_action( 'wp_ajax_snapshot-full_backup-upload', array( $this, 'json_start_upload' ) );
+		add_action( 'wp_ajax_snapshot-full_backup-abort-upload', array( $this, 'json_abort_upload' ) );
+		add_action( 'wp_ajax_snapshot-full_backup-abort-processing', array( $this, 'json_abort_backup_processing' ) );
+
 		add_action( 'wp_ajax_snapshot-full_backup-exchange_key', array( $this, 'json_remote_key_exchange' ) );
 		add_action( 'wp_ajax_snapshot-full_backup-deactivate', array( $this, 'json_deactivate' ) );
 
@@ -446,6 +450,8 @@ class Snapshot_Controller_Full_Ajax extends Snapshot_Controller_Full {
 			unlink( $archive_path );
 		}
 
+		Snapshot_Model_Full_Remote_Storage::get()->purge_backups_cache();
+
 		wp_send_json(array(
 			'task' => $task,
 			'status' => $status,
@@ -471,6 +477,115 @@ class Snapshot_Controller_Full_Ajax extends Snapshot_Controller_Full {
 		wp_send_json(array(
 			'total' => $total,
 		));
+	}
+
+	public function json_abort_backup_processing() {
+		$idx = $this->_get_backup_type();
+		$backup = Snapshot_Helper_Backup::load( $idx );
+
+		if ( ! empty( $backup ) ) {
+			// Let's remove the intermediate files and the session data
+			$backup->stop_and_remove();
+		} else {
+			Snapshot_Helper_Log::error( "Could not lookup backup to abort processing." );
+		}
+
+		wp_send_json_success();
+	}
+
+	/**
+	 * When a backup file has already been partially uploaded, this endpoint calls Amazon S3 to remove the uploaded parts
+	 */
+	public function json_abort_upload() {
+		check_ajax_referer( 'snapshot-ajax-nonce', 'security' );
+		$data = stripslashes_deep( $_POST );
+		$archive = ! empty( $data['archive'] ) && is_numeric( $data['archive'] )
+			? $data['archive']
+			: false;
+
+		if ( empty( $archive ) ) {
+			// Scenario - unable to load backup directly (see also Snapshot_Controller_Full->_finish_backup)
+			// We are creating a new managed backup
+			// Backup preparation has completed
+			// Backup upload has started (there has been at least one call to json_finish_backup)
+			// Since there has been a finish call, post processing has already been done
+			// Data for the backup needs to be fetched from the session like so:
+
+			$session = Snapshot_Helper_Backup::get_session( $this->_get_backup_type() );
+			$archive = ! empty( $session->data['timestamp'] )
+				? $session->data['timestamp']
+				: false;
+		}
+
+		if ( ! $this->_is_backup_processing_ready() || empty( $archive ) ) {
+			$error = esc_html__( 'Error aborting upload: invalid request' );
+			Snapshot_Helper_Log::error( $error );
+			wp_send_json( array( 'error' => $error ) );
+			die;
+		}
+
+		$file_path = $this->_model->get_backup( $archive );
+		$status = Snapshot_Model_Full_Remote_Storage::get()->abort_file_upload( $file_path );
+
+		if ( $status ) {
+			// Remove temporary storage since all the previous parts
+			// should have been deleted at this point
+			delete_site_option( md5( $file_path ) );
+		}
+
+		wp_send_json( array(
+			'is_done' => $status,
+			'error'   => $status
+				? esc_html__( 'Upload has been aborted. You can retry uploading the backup or go back to managed backups listing page.', SNAPSHOT_I18N_DOMAIN )
+				: esc_html__( 'Failed to abort upload. Please view logs.', SNAPSHOT_I18N_DOMAIN ),
+		) );
+	}
+
+	public function json_start_upload() {
+		check_ajax_referer( 'snapshot-ajax-nonce', 'security' );
+		$data = stripslashes_deep( $_POST );
+		$archive = ! empty( $data['archive'] ) && is_numeric( $data['archive'] )
+			? $data['archive']
+			: false;
+
+		if ( ! $this->_is_backup_processing_ready() || empty( $archive ) ) {
+			$error = esc_html__( 'Error reuploading file: invalid request' );
+			Snapshot_Helper_Log::error( $error );
+			wp_send_json( array( 'error' => $error ) );
+			die;
+		}
+
+		$error_response = array( 'error' => esc_html__( 'Your backup failed to upload to the Hub. This can happen for a number of reasons, we recommend checking the error logs to see if you can uncover the issue, or try resetting your Snapshot API Key to see if that fixes the issue. If you get stuck, please contact our support team for help.', 'snapshot' ) );
+		if ( ! Snapshot_Model_Full_Remote_Api::get()->connect() ) {
+			wp_send_json( $error_response );
+			die;
+		}
+
+		$file_path = $this->_model->get_backup( $archive );
+		try {
+			$status = Snapshot_Model_Full_Remote_Storage::get()->send_backup_file( $file_path );
+		} catch ( Exception $e ) {
+			$upload = Snapshot_Model_Full_Remote_Storage::get()->get_initialized_upload( $file_path );
+			$upload->complete();
+			wp_send_json( $error_response );
+			die;
+		}
+
+		$upload = new Snapshot_Model_Transfer_Upload( $file_path );
+
+		$file_parts = $upload->get_parts();
+		$completed = 0;
+		foreach ( $file_parts as $file_part ) {
+			if ( $file_part->is_done() ) {
+				$completed ++;
+			}
+		}
+
+		wp_send_json( array(
+			'is_done'   => $status,
+			'completed' => $completed,
+			'total'     => count( $file_parts ),
+		) );
 	}
 
 	/**

@@ -8,7 +8,7 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2015 - 2018 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2015 - 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -43,6 +43,7 @@ class Detect extends Render {
 	 */
 	public function doing_ajax() {
 		static $cache = null;
+
 		return isset( $cache ) ? $cache : $cache = defined( 'DOING_AJAX' ) && DOING_AJAX;
 	}
 
@@ -121,15 +122,17 @@ class Detect extends Render {
 	public function conflicting_plugins() {
 
 		$conflicting_plugins = [
-			'seo_tools' => [
+			'seo_tools'    => [
 				'Yoast SEO'                  => 'wordpress-seo/wp-seo.php',
 				'Yoast SEO Premium'          => 'wordpress-seo-premium/wp-seo-premium.php',
 				'All in One SEO Pack'        => 'all-in-one-seo-pack/all_in_one_seo_pack.php',
 				'SEO Ultimate'               => 'seo-ultimate/seo-ultimate.php',
 				'Gregs High Performance SEO' => 'gregs-high-performance-seo/ghpseo.php',
 				'SEOPress'                   => 'wp-seopress/seopress.php',
+				'Rank Math'                  => 'seo-by-rank-math/rank-math.php',
+				'Smart Crawl'                => 'smartcrawl-seo/wpmu-dev-seo.php',
 			],
-			'sitemaps' => [
+			'sitemaps'     => [
 				'Google XML Sitemaps'                  => 'google-sitemap-generator/sitemap.php',
 				'Better WordPress Google XML Sitemaps' => 'bwp-google-xml-sitemaps/bwp-simple-gxs.php', // Remove?
 				'Google XML Sitemaps for qTranslate'   => 'google-xml-sitemaps-v3-for-qtranslate/sitemap.php', // Remove?
@@ -138,16 +141,16 @@ class Detect extends Render {
 				'Simple Wp Sitemap'                    => 'simple-wp-sitemap/simple-wp-sitemap.php',
 				'XML Sitemaps'                         => 'xml-sitemaps/xml-sitemaps.php',
 			],
-			'open_graph' => [
+			'open_graph'   => [
 				'Facebook Open Graph Meta Tags for WordPress' => 'wonderm00ns-simple-facebook-open-graph-tags/wonderm00n-open-graph.php',
-				'Facebook Thumb Fixer'                   => 'facebook-thumb-fixer/_facebook-thumb-fixer.php',
-				'NextGEN Facebook OG'                    => 'nextgen-facebook/nextgen-facebook.php',
-				'Open Graph'                             => 'opengraph/opengraph.php',
-				'Open Graph Protocol Framework'          => 'open-graph-protocol-framework/open-graph-protocol-framework.php',
-				'Shareaholic2'                           => 'shareaholic/sexy-bookmarks.php',
-				'Social Sharing Toolkit'                 => 'social-sharing-toolkit/social_sharing_toolkit.php',
-				'WordPress Social Sharing Optimization'  => 'wpsso/wpsso.php',
-				'WP Facebook Open Graph protocol'        => 'wp-facebook-open-graph-protocol/wp-facebook-ogp.php',
+				'Facebook Thumb Fixer'                  => 'facebook-thumb-fixer/_facebook-thumb-fixer.php',
+				'NextGEN Facebook OG'                   => 'nextgen-facebook/nextgen-facebook.php',
+				'Open Graph'                            => 'opengraph/opengraph.php',
+				'Open Graph Protocol Framework'         => 'open-graph-protocol-framework/open-graph-protocol-framework.php',
+				'Shareaholic2'                          => 'shareaholic/sexy-bookmarks.php',
+				'Social Sharing Toolkit'                => 'social-sharing-toolkit/social_sharing_toolkit.php',
+				'WordPress Social Sharing Optimization' => 'wpsso/wpsso.php',
+				'WP Facebook Open Graph protocol'       => 'wp-facebook-open-graph-protocol/wp-facebook-ogp.php',
 			],
 			'twitter_card' => [],
 		];
@@ -270,7 +273,7 @@ class Detect extends Render {
 		}
 
 		ksort( $mapped );
-		$key = serialize( $mapped );
+		$key = serialize( $mapped ); // phpcs:ignore -- No objects are inserted, nor is this ever unserialized.
 
 		if ( isset( $cache[ $key ] ) )
 			return $cache[ $key ];
@@ -934,17 +937,23 @@ class Detect extends Render {
 	 * Gets all post types that could possibly support SEO.
 	 *
 	 * @since 3.1.0
+	 * @since 3.2.1 Added cache.
+	 * @staticvar $cache
 	 *
 	 * @return array The post types with rewrite capabilities.
 	 */
 	protected function get_rewritable_post_types() {
-
-		$post_types = (array) \get_post_types( [
-			'public'  => true,
-			'rewrite' => true,
-		] );
+		static $cache = null;
 		//? array_values() because get_post_types() gives a sequential array.
-		return array_unique( array_merge( $this->get_forced_supported_post_types(), array_values( $post_types ) ) );
+		return isset( $cache ) ? $cache : $cache = array_unique(
+			array_merge(
+				$this->get_forced_supported_post_types(),
+				array_values( (array) \get_post_types( [
+					'public'  => true,
+					'rewrite' => true,
+				] ) )
+			)
+		);
 	}
 
 	/**
@@ -1035,13 +1044,18 @@ class Detect extends Render {
 	 * Detects if we're on a Gutenberg page.
 	 *
 	 * @since 3.1.0
+	 * @since 3.2.0 : 1. Now detects the WP 5.0 block editor.
+	 *                2. Method is now public.
 	 *
 	 * @return bool
 	 */
-	protected function is_gutenberg_page() {
-		if ( function_exists( '\\is_gutenberg_page' ) ) {
+	public function is_gutenberg_page() {
+		if ( function_exists( '\\use_block_editor_for_post' ) )
+			return ! empty( $GLOBALS['post'] ) && \use_block_editor_for_post( $GLOBALS['post'] );
+
+		if ( function_exists( '\\is_gutenberg_page' ) )
 			return \is_gutenberg_page();
-		}
+
 		return false;
 	}
 
@@ -1074,9 +1088,7 @@ class Detect extends Render {
 			return $cache;
 
 		$parsed_url = \wp_parse_url( \get_option( 'home' ) );
-		if ( ! empty( $parsed_url['path'] ) && ltrim( $parsed_url['path'], ' \\/' ) )
-			$cache = true;
 
-		return $cache ?: $cache = false;
+		return $cache = ! empty( $parsed_url['path'] ) && ltrim( $parsed_url['path'], ' \\/' );
 	}
 }

@@ -37,6 +37,7 @@ class Eab_Popular_Widget extends Eab_Widget {
 
 		$_events = Eab_CollectionFactory::get_popular_events(array(
 			'posts_per_page' => $options['limit'],
+			'_avoid_pgp_action'    => 1, // Avoids the later pre_get_posts action for Archive pagination
 		));
 		if (is_array($_events) && count($_events) > 0) {
 		?>
@@ -58,7 +59,7 @@ class Eab_Popular_Widget extends Eab_Widget {
 					}
 			    ?>
 				<li>
-					<a href="<?php print get_permalink($_event->get_id()); ?>" class="<?php print ($_event->get_id() == $post->ID)?'current':''; ?>" >
+					<a href="<?php print get_permalink($_event->get_id()); ?>" class="<?php print ($post instanceof WP_Post && $_event->get_id() == $post->ID) ? 'current' : 'not_current'; ?>" >
 						<?php if ($options['thumbnail'] && $thumbnail) { ?>
 							<img src="<?php echo $thumbnail; ?>" /><br />
 						<?php } ?>

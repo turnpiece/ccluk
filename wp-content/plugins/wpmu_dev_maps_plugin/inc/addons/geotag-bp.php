@@ -221,7 +221,46 @@ if ( defined( 'BP_PLUGIN_DIR' ) ) :
 			bp_activity_update_meta( $activity_id, '_agm_latitude', $lat );
 			bp_activity_update_meta( $activity_id, '_agm_longitude', $lng );
 		}
+
+		public function delete_user_activity_metas( $user_id ) {
+			$activities = BP_Activity_Activity::get(array(
+				'per_page' => 500,
+				'fields' => 'ids',
+				'user_id' => $user_id,
+			));
+			if (!is_array($activities)) return false;
+
+			$activity_ids = array_values($activities['activities']);
+			if (empty($activity_ids)) return false;
+
+			foreach ($activity_ids as $aid) {
+				bp_activity_delete_meta($aid, '_agm_latitude');
+				bp_activity_delete_meta($aid, '_agm_longitude');
+			}
+
+			return true;
+		}
+
+		public function gdpr_erase_user_activity_meta( $email, $page = 1 ) {
+			$user = get_user_by( 'email', $email );
+			$status = $this->delete_user_activity_metas($user->ID);
+			return array(
+				'items_removed' => $status,
+				'items_retained' => false,
+				'messages' => array(),
+				'done' => true,
+			);
+		}
 	};
+
+	function _agm_gwa_register_data_eraser( $erasers ) {
+		$data = new Agm_GwaModel();
+		$erasers['agm_google_maps-geotag_bp'] = array(
+			'eraser_friendly_name' => __( 'Google Maps Pro activity geotags', AGM_LANG ),
+			'callback' => array( $data, 'gdpr_erase_user_activity_meta' ),
+		);
+		return $erasers;
+	}
 
 	function _agm_gwa_init() {
 		$data = new Agm_GwaModel();
@@ -234,6 +273,10 @@ if ( defined( 'BP_PLUGIN_DIR' ) ) :
 			'bp_groups_posted_update',
 			array( $data, 'process_group_activity_update' ),
 			10, 4
+		);
+		add_filter(
+			'wp_privacy_personal_data_erasers',
+			'_agm_gwa_register_data_eraser'
 		);
 	}
 	add_action( 'bp_init', '_agm_gwa_init' );

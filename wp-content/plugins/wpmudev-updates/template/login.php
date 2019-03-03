@@ -136,14 +136,14 @@ $form_action = WPMUDEV_Dashboard::$api->rest_url( 'authenticate' );
                            class="wpmudui-form-field__label"><?php esc_html_e( 'Account email', 'wpmudev' ); ?></label>
                     <input type="text" class="wpmudui-form-field__input" name="username" id="user_name"
                            autocomplete="off" placeholder="<?php echo esc_attr__( 'Your email address', 'wpmudev' ); ?>"
-                           value="<?php echo esc_attr( $last_user ); ?>">
+                           value="<?php echo esc_attr( $last_user ); ?>" required>
                 </div><!-- end wpmudui-form-field -->
 
                 <div class="wpmudui-form-field is-last">
                     <label for="password"
                            class="wpmudui-form-field__label"><?php esc_html_e( 'Account password', 'wpmudev' ); ?></label>
                     <input type="password" class="wpmudui-form-field__input is-password" name="password" id="password"
-                           autocomplete="off" placeholder="<?php echo esc_attr__( 'Your password', 'wpmudev' ); ?>">
+                           autocomplete="off" placeholder="<?php echo esc_attr__( 'Your password', 'wpmudev' ); ?>" required>
                 </div><!-- end wpmudui-form-field -->
 
 				<?php
@@ -186,9 +186,11 @@ $form_action = WPMUDEV_Dashboard::$api->rest_url( 'authenticate' );
                 </div><!-- end wpmudui-form-cta-fields -->
 
                 <input type="hidden" name="redirect_url" value="<?php echo esc_url( $login_url ); ?>">
-                <input type="hidden" name="domain" value="<?php echo esc_url( network_site_url() ); ?>">
+                <input type="hidden" name="domain" value="<?php echo esc_url( WPMUDEV_Dashboard::$api->network_site_url() ); ?>">
 
             </form><!-- end wpmudui-login-form -->
         </section>
     </div><!-- end wpmudui-login-box -->
 </section><!-- end wpmud-login -->
+
+<?php $this->load_template('footer'); ?>

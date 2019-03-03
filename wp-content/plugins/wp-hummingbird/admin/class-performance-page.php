@@ -94,10 +94,12 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 						</a>
 					</span>
 				<?php endif; ?>
-				<a href="<?php echo esc_url( WP_Hummingbird_Utils::get_documentation_url( $this->slug, $this->get_current_tab() ) ); ?>" target="_blank" class="sui-button sui-button-ghost">
-					<i class="sui-icon-academy" aria-hidden="true"></i>
-					<?php esc_html_e( 'View Documentation', 'wphb' ); ?>
-				</a>
+				<?php if ( ! WP_Hummingbird_Utils::hide_wpmudev_doc_link() ) : ?>
+					<a href="<?php echo esc_url( WP_Hummingbird_Utils::get_documentation_url( $this->slug, $this->get_current_tab() ) ); ?>" target="_blank" class="sui-button sui-button-ghost">
+						<i class="sui-icon-academy" aria-hidden="true"></i>
+						<?php esc_html_e( 'View Documentation', 'wphb' ); ?>
+					</a>
+				<?php endif; ?>
 			</div>
 		</div><!-- end header -->
 		<?php
@@ -121,10 +123,10 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 	 */
 	public function on_load() {
 		$this->tabs = array(
-			'main'    => __( 'Improvements', 'wphb' ),
+			'main' => __( 'Improvements', 'wphb' ),
 		);
 		if ( is_multisite() && is_network_admin() ) {
-			$this->tabs['reports'] = __( 'Reporting', 'wphb' );
+			$this->tabs['reports']  = __( 'Reporting', 'wphb' );
 			$this->tabs['settings'] = __( 'Settings', 'wphb' );
 		} elseif ( ! is_multisite() ) {
 			$this->tabs['reports'] = __( 'Reporting', 'wphb' );

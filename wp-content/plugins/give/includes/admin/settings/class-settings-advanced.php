@@ -4,7 +4,7 @@
  *
  * @package     Give
  * @subpackage  Classes/Give_Settings_Advanced
- * @copyright   Copyright (c) 2016, WordImpress
+ * @copyright   Copyright (c) 2016, GiveWP
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since       1.8
  */
@@ -98,6 +98,17 @@ if ( ! class_exists( 'Give_Settings_Advanced' ) ) :
 							'options' => array(
 								'disabled' => __( 'Head', 'give' ),
 								'enabled'  => __( 'Footer', 'give' ),
+							),
+						),
+						array(
+							'name'    => __( 'Babel Polyfill Script', 'give' ),
+							'desc'    => __( 'Decide whether to load the Babel polyfill, which provides backwards compatibility for older browsers such as IE 11. The polyfill may be disabled to avoid conflicts with other themes or plugins that load the same script.', 'give' ),
+							'id'      => 'babel_polyfill_script',
+							'type'    => 'radio_inline',
+							'default' => 'enabled',
+							'options' => array(
+								'enabled'  => __( 'Enabled', 'give' ),
+								'disabled' => __( 'Disabled', 'give' ),
 							),
 						),
 						array(

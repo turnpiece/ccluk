@@ -19,14 +19,6 @@
             return false;
         }
 
-        $("#wps-show-full-log").on('click', function(e) {
-            e.preventDefault();
-	        $('#wps-log').toggle();
-	        var $self = $(this);
-	        var button_text = 'data-wps-' + ($('#wps-log').is(':visible') ? 'hide' :'show') + '-title';
-			$self.text($self.attr(button_text));
-        });
-
         $("#wps-build-error-again").on('click', function(e) {
             e.preventDefault();
             $('#wps-build-error').addClass("hidden");

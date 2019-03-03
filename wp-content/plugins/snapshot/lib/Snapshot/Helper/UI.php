@@ -169,7 +169,7 @@ if ( ! class_exists( 'Snapshot_Helper_UI' ) ) {
 		 * @param string $selected_destination
 		 * @param string $destinationClasses
 		 */
-		public static function destination_select_radio_boxes( $all_destinations, $selected_destination = '', $destinationClasses = '' )  {
+		public static function destination_select_radio_boxes( $all_destinations, $selected_destination = '', $destinationClasses = '', $aws_sdk_compatible = true )  {
 			$i = 0;
 			$destinations['row1'] = array();
 			$destinations['row2'] = array();
@@ -177,8 +177,12 @@ if ( ! class_exists( 'Snapshot_Helper_UI' ) ) {
 				if(isset( $destinationClasses[$item['type']] )){
 					$item["type_name_display"] = $destinationClasses[$item['type']]->name_display;
 				} else {
-					$item["type_name_display"] = "local";
-					$item["type"] = "local";
+					if ( ! $aws_sdk_compatible && 'aws' === $item['type'] ) {
+						$item["type_name_display"] = "Amazon S3";
+					} else {
+						$item["type_name_display"] = "local";
+						$item["type"] = "local";
+					}
 				}
 				$item["key"] = $key;
 				if( 0 === $i % 2){
@@ -199,11 +203,11 @@ if ( ! class_exists( 'Snapshot_Helper_UI' ) ) {
 
 						<?php foreach ( $destinations['row1'] as $destination ) : ?>
 
-						<div class="wps-input--item">
+						<div class="wps-input--item <?php echo ( !$aws_sdk_compatible && 'aws' === $destination['type'] ) ? 'destination-disabled' : ''; ?>">
 
 							<div class="wps-input--radio">
 
-								<input data-destination-type="<?php echo esc_attr( $destination['type'] ); ?>" <?php echo ( $destination['key'] === $selected_destination ) ? "checked" : ""; ?> type="radio" name="snapshot-destination" id="snap-<?php echo esc_attr( $destination['key'] ); ?>" value="<?php echo esc_attr( $destination['key'] ); ?>" />
+								<input data-destination-type="<?php echo esc_attr( $destination['type'] ); ?>" <?php echo ( $destination['key'] === $selected_destination ) ? "checked" : ""; ?> type="radio" name="snapshot-destination" id="snap-<?php echo esc_attr( $destination['key'] ); ?>" value="<?php echo esc_attr( $destination['key'] ); ?>" <?php echo ( !$aws_sdk_compatible && 'aws' === $destination['type'] ) ? 'disabled' : ''; ?> />
 
 								<label for="snap-<?php echo esc_attr( $destination['key'] ); ?>"></label>
 
@@ -217,11 +221,11 @@ if ( ! class_exists( 'Snapshot_Helper_UI' ) ) {
 
 						<?php foreach ( $destinations['row2'] as $destination ) : ?>
 
-						<div class="wps-input--item">
+						<div class="wps-input--item <?php echo ( !$aws_sdk_compatible && 'aws' === $destination['type'] ) ? 'destination-disabled' : ''; ?>">
 
 							<div class="wps-input--radio">
 
-								<input data-destination-type="<?php echo esc_attr( $destination['type'] ); ?>" <?php echo ( $destination['key'] === $selected_destination ) ? "checked" : ""; ?> type="radio" name="snapshot-destination" id="snap-<?php echo esc_attr( $destination['key'] ); ?>" value="<?php echo esc_attr( $destination['key'] ); ?>" />
+								<input data-destination-type="<?php echo esc_attr( $destination['type'] ); ?>" <?php echo ( $destination['key'] === $selected_destination ) ? "checked" : ""; ?> type="radio" name="snapshot-destination" id="snap-<?php echo esc_attr( $destination['key'] ); ?>" value="<?php echo esc_attr( $destination['key'] ); ?>" <?php echo ( !$aws_sdk_compatible && 'aws' === $destination['type'] ) ? 'disabled' : ''; ?> />
 
 								<label for="snap-<?php echo esc_attr( $destination['key'] ); ?>"></label>
 
@@ -374,6 +378,37 @@ if ( ! class_exists( 'Snapshot_Helper_UI' ) ) {
 			</script>
 
 			<?php
+		}
+
+		/**
+		 * Display our message on the Snapshot page(s) header for AWS SDK compatibility
+		 *
+		 * @param string $local_type
+		 * @param string $local_message
+		 *
+		 * @return void
+		 */
+		public static function snapshot_aws_compatibility_notices( $local_type = '', $local_message = '' ) {
+			$model = new Snapshot_Model_Full_Backup();
+
+			$is_dashboard_active = $model->is_dashboard_active();
+			$is_dashboard_installed = $is_dashboard_active
+				? true
+				: $model->is_dashboard_installed()
+			;
+			$has_dashboard_key = $model->has_dashboard_key();
+
+			$is_client = $is_dashboard_installed && $is_dashboard_active && $has_dashboard_key;
+
+			$class = 'notice notice-error snapshot-three snapshot-aws-combat is-dismissible';
+			if ( ! $is_client) {
+				$message = sprintf( __( '<strong>Amazon S3</strong> requires PHP 5.5 or later and your host is using an older version of PHP (%s). Contact your host to upgrade your PHP version if you wish to use Amazon S3 as a destination. Your scheduled S3 snapshots have been disabled.', SNAPSHOT_I18N_DOMAIN ), PHP_VERSION );
+			} else {
+				$message = sprintf( __( '<strong>Managed Backups</strong> and <strong>Amazon S3 Snapshot</strong> require PHP 5.5 or later and your host is using an older version of PHP (%s). Contact your host to upgrade your PHP version if you wish to use any of these features. Your scheduled S3 snapshots have been disabled.', SNAPSHOT_I18N_DOMAIN ), PHP_VERSION );
+			}
+
+			printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), wp_kses_post( $message ) );
+
 		}
 	}
 }

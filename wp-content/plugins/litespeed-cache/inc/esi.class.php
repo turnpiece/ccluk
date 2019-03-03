@@ -63,6 +63,47 @@ class LiteSpeed_Cache_ESI
 			}
 		}
 
+		/**
+		 * Shortcode ESI
+		 *
+		 * To use it, just change the origianl shortcode as below:
+		 * 		old: [someshortcode aa='bb']
+		 * 		new: [esi someshortcode aa='bb' cache='private,no-vary' ttl='600']
+		 *
+		 * 	1. `cache` attribute is optional, default to 'public,no-vary'.
+		 * 	2. `ttl` attribute is optional, default is your public TTL setting.
+		 *
+		 * @since  2.8
+		 * @since  2.8.1 Check is_admin for Elementor compatibility #726013
+		 */
+		if ( ! is_admin() ) {
+			add_shortcode( 'esi', array( $this, 'shortcode' ) ) ;
+		}
+	}
+
+	/**
+	 * Shortcode ESI
+	 *
+	 * @since 2.8
+	 * @access public
+	 */
+	public function shortcode( $atts )
+	{
+		if ( empty( $atts[ 0 ] ) ) {
+			LiteSpeed_Cache_Log::debug( '[ESI] ===shortcode wrong format', $atts ) ;
+			return 'Wrong shortcode esi format' ;
+		}
+
+		$cache = 'public,no-vary' ;
+		if ( ! empty( $atts[ 'cache' ] ) ) {
+			$cache = $atts[ 'cache' ] ;
+			unset( $atts[ 'cache' ] ) ;
+		}
+
+		do_action( 'litespeed_esi_shortcode-' . $atts[ 0 ] ) ;
+
+		// Show ESI link
+		return self::sub_esi_block( 'esi', 'esi-shortcode', $atts, $cache ) ;
 	}
 
 	/**
@@ -124,6 +165,7 @@ class LiteSpeed_Cache_ESI
 		add_action('litespeed_cache_load_esi_block-comment-form', array($this, 'load_comment_form_block')) ;
 
 		add_action('litespeed_cache_load_esi_block-lscwp_nonce_esi', array( $this, 'load_nonce_block' ) ) ;
+		add_action('litespeed_cache_load_esi_block-esi', array( $this, 'load_esi_shortcode' ) ) ;
 	}
 
 	/**
@@ -136,6 +178,10 @@ class LiteSpeed_Cache_ESI
 	public function register_not_esi_actions()
 	{
 		do_action('litespeed_cache_is_not_esi_template') ;
+
+		if ( ! LiteSpeed_Cache_Control::is_cacheable() ) {
+			return ;
+		}
 
 		if ( LiteSpeed_Cache_Router::is_ajax() ) {
 			return ;
@@ -498,7 +544,18 @@ class LiteSpeed_Cache_ESI
 	 */
 	public function load_comment_form_block($params)
 	{
+		ob_start() ;
 		comment_form( $params[ self::PARAM_ARGS ], $params[ self::PARAM_ID ] ) ;
+		$output = ob_get_contents() ;
+		ob_end_clean() ;
+
+		if ( $params[ 'is_json' ] ) {
+			$output = json_encode( $output ) ;
+			$output = ltrim( $output, '"' ) ;
+			$output = rtrim( $output, '"' ) ;
+		}
+
+		echo $output ;
 
 		if ( ! LiteSpeed_Cache::config( LiteSpeed_Cache_Config::OPID_ESI_CACHE_COMMFORM ) ) {
 			LiteSpeed_Cache_Control::set_nocache( 'build-in set to not cacheable' ) ;
@@ -532,6 +589,43 @@ class LiteSpeed_Cache_ESI
 		}
 
 		echo wp_create_nonce( $action ) ;
+	}
+
+	/**
+	 * Show original shortcode
+	 *
+	 * @access public
+	 * @since 2.8
+	 */
+	public function load_esi_shortcode( $params )
+	{
+		unset( $params[ self::PARAM_BLOCK_ID ] ) ;
+
+		if ( isset( $params[ 'ttl' ] ) ) {
+			if ( ! $params[ 'ttl' ] ) {
+				LiteSpeed_Cache_Control::set_nocache( 'ESI shortcode att ttl=0' ) ;
+			}
+			else {
+				LiteSpeed_Cache_Control::set_custom_ttl( $params[ 'ttl' ] ) ;
+			}
+			unset( $params[ 'ttl' ] ) ;
+		}
+
+		// Replace to original shortcode
+		$shortcode = $params[ 0 ] ;
+		$atts_ori = array() ;
+		foreach ( $params as $k => $v ) {
+			if ( $k === 0 ) {
+				continue ;
+			}
+
+			$atts_ori[] = is_string( $k ) ? "$k='" . addslashes( $v ) . "'" : $v ;
+		}
+
+		LiteSpeed_Cache_Tag::add( LiteSpeed_Cache_Tag::TYPE_ESI . "esi.$shortcode" ) ;
+
+		// Output original shortcode final content
+		echo do_shortcode( "[$shortcode " . implode( ' ', $atts_ori ) . " ]" ) ;
 	}
 
 	/**

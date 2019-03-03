@@ -4,7 +4,7 @@
  *
  * @package     Give
  * @subpackage  Payments
- * @copyright   Copyright (c) 2016, WordImpress
+ * @copyright   Copyright (c) 2016, GiveWP
  * @license     https://opensource.org/licenses/gpl-license GNU Public License
  * @since       1.0
  */
@@ -198,6 +198,11 @@ function give_insert_payment( $payment_data = array() ) {
 
 	// Setup donor id.
 	$payment_data['user_info']['donor_id'] = $payment->donor_id;
+
+	// Set donation id to purchase session.
+	$purchase_session = Give()->session->get( 'give_purchase' );
+	$purchase_session['donation_id'] = $payment->ID;
+	Give()->session->set( 'give_purchase', $purchase_session );
 
 	/**
 	 * Fires while inserting payments.

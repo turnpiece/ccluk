@@ -53,7 +53,7 @@ class Agm_Icons_AdminPages {
 		add_settings_section(
 			'agm_google_maps_icons',
 			__( 'Custom icons', AGM_LANG ),
-			create_function( '', '' ),
+			'__return_false',
 			'agm_google_maps_options_page'
 		);
 

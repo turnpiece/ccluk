@@ -382,39 +382,14 @@ class WP_Hummingbird_Admin_Notices {
 				WP_Hummingbird_Utils::get_admin_menu_url( 'minification' )
 			);
 
-			// Clear cache button link.
-			$clear_cache_url = add_query_arg(
-				array(
-					'clear-cache' => 'true',
-					'clear-pc'    => $caching_active,
-				),
-				WP_Hummingbird_Utils::get_admin_menu_url( 'minification' )
-			);
-
 			$text = __( "We've noticed you've made changes to your website. If you’ve installed new plugins or themes,
 			we recommend you re-check Hummingbird's Asset Optimization configuration to ensure those new files are added
-			correctly. <!--<a href='#'>Learn more</a>.-->", 'wphb' );
+			correctly.", 'wphb' );
 
 			$additional .= '<a href="' . esc_url( $recheck_file_url ) . '" class="button button-primary" style="margin-right:10px">' . __( 'Re-check Asset Optimization', 'wphb' ) . '</a>';
-		} elseif ( $caching_active ) {
-			if ( ! is_multisite() || 'blog-admins' === $caching_active ) {
-				// Clear cache button link.
-				$clear_cache_url = wp_nonce_url( add_query_arg(
-					array(
-						'action' => 'clear_cache',
-						'module' => 'page_cache',
-					),
-					WP_Hummingbird_Utils::get_admin_menu_url( 'caching' ) . '&view=main'
-				), 'wphb-caching-actions' );
-			}
 		}
 
-		// If, for some reason, we don't have clear cache url - do nothing.
-		if ( ! isset( $clear_cache_url ) ) {
-			return;
-		}
-
-		$additional .= '<a href="' . esc_url( $clear_cache_url ) . '" class="button">' . __( 'Clear Cache', 'wphb' ) . '</a>';
+		$additional .= '<a href="#" id="wp-admin-notice-wphb-clear-cache" class="button">' . __( 'Clear Cache', 'wphb' ) . '</a>';
 		if ( $caching_active ) {
 			$adjust_settings_url = WP_Hummingbird_Utils::get_admin_menu_url( 'caching' ) . '&view=settings';
 			if ( ! is_multisite() || ( is_multisite() && is_network_admin() ) ) {

@@ -63,9 +63,20 @@ if ( ! class_exists( 'Snapshot_Helper_Session' ) ) {
 			if ( ! isset( $this->data ) ) {
 				$this->data = array();
 			}
-			$data = wp_json_encode( $this->data, JSON_FORCE_OBJECT );
+
+			if ( version_compare(PHP_VERSION, '5.3.0', '<') ) {
+				$temp_data = $this->data;
+				$data = wp_json_encode( (object)$temp_data );
+			} else {
+				$data = wp_json_encode( $this->data, JSON_FORCE_OBJECT );
+			}
+
 			if (defined('SNAPSHOT_SESSION_PROTECT_DATA') && SNAPSHOT_SESSION_PROTECT_DATA) {
 				$data = Snapshot_Helper_String::conceal_string($data);
+			}
+
+			if ( ! is_writable( dirname($this->sessionFileFull) ) ) {
+				return false;
 			}
 
 			return (bool)file_put_contents( $this->sessionFileFull, $data ); // phpcs:ignore
@@ -76,7 +87,12 @@ if ( ! class_exists( 'Snapshot_Helper_Session' ) ) {
 			$this->data = $data;
 
 			if ( is_array( $this->data ) ) {
-				$this->data = wp_json_encode( $this->data, JSON_FORCE_OBJECT );
+				if ( version_compare(PHP_VERSION, '5.3.0', '<') ) {
+					$temp_data = $this->data;
+					$this->data = wp_json_encode( (object)$temp_data );
+				} else {
+					$this->data = wp_json_encode( $this->data, JSON_FORCE_OBJECT );
+				}
 			}
 
 		}

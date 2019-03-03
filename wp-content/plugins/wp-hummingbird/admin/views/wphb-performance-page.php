@@ -19,6 +19,7 @@ if ( $this->has_meta_boxes( 'summary' ) ) {
 		<?php $this->do_meta_boxes( 'main' ); ?>
 	<?php endif; ?>
 </div><!-- end row -->
+<?php WP_Hummingbird_Utils::get_modal( 'add-recipient' ); ?>
 
 <script>
 	jQuery(document).ready( function() {

@@ -33,6 +33,7 @@ class LiteSpeed_Cache_Img_Optm
 	const DB_IMG_OPTIMIZE_DESTROY = 'litespeed-optimize-destroy' ;
 	const DB_IMG_OPTIMIZE_DATA = 'litespeed-optimize-data' ;
 	const DB_IMG_OPTIMIZE_STATUS = 'litespeed-optimize-status' ;
+	const DB_IMG_OPTIMIZE_STATUS_PREPARE = 'prepare' ;
 	const DB_IMG_OPTIMIZE_STATUS_REQUESTED = 'requested' ;
 	const DB_IMG_OPTIMIZE_STATUS_NOTIFIED = 'notified' ;
 	const DB_IMG_OPTIMIZE_STATUS_PULLED = 'pulled' ;
@@ -94,7 +95,7 @@ class LiteSpeed_Cache_Img_Optm
 	 */
 	private function _sync_data( $try_level_up = false )
 	{
-		$json = LiteSpeed_Cache_Admin_API::post( LiteSpeed_Cache_Admin_API::IAPI_ACTION_MEDIA_SYNC_DATA ) ;
+		$json = LiteSpeed_Cache_Admin_API::post( LiteSpeed_Cache_Admin_API::IAPI_ACTION_MEDIA_SYNC_DATA, false, true ) ;
 
 		if ( ! is_array( $json ) ) {
 			return ;
@@ -223,7 +224,7 @@ class LiteSpeed_Cache_Img_Optm
 			LiteSpeed_Cache_Admin_Display::succeed( $msg ) ;
 
 			LiteSpeed_Cache_Log::debug( '[Img_Optm] optimize bypass: empty _img_in_queue' ) ;
-			return [ 'ok' => $msg ] ;
+			return array( 'ok' => $msg ) ;
 		}
 
 		// Filtered from existing data
@@ -241,7 +242,7 @@ class LiteSpeed_Cache_Img_Optm
 		if ( empty( $this->_img_in_queue ) ) {
 			$msg = __( 'Optimized successfully.', 'litespeed-cache' ) ;
 			LiteSpeed_Cache_Admin_Display::succeed( $msg ) ;
-			return [ 'ok' => $msg ] ;
+			return array( 'ok' => $msg ) ;
 		}
 
 		$total_groups = count( $this->_img_in_queue ) ;
@@ -304,7 +305,7 @@ class LiteSpeed_Cache_Img_Optm
 			$this->_update_credit( $json[ 'credit' ] ) ;
 		}
 
-		return [ 'ok' => $msg ] ;
+		return array( 'ok' => $msg ) ;
 
 	}
 
@@ -673,7 +674,7 @@ class LiteSpeed_Cache_Img_Optm
 		) ;
 
 		// Push to LiteSpeed IAPI server
-		$json = LiteSpeed_Cache_Admin_API::post( LiteSpeed_Cache_Admin_API::IAPI_ACTION_REQUEST_OPTIMIZE, LiteSpeed_Cache_Utility::arr2str( $data ), false, false ) ;
+		$json = LiteSpeed_Cache_Admin_API::post( LiteSpeed_Cache_Admin_API::IAPI_ACTION_REQUEST_OPTIMIZE, LiteSpeed_Cache_Utility::arr2str( $data ), true, false ) ;
 
 		// admin_api will handle common err
 		if ( ! is_array( $json ) ) {
@@ -901,7 +902,7 @@ class LiteSpeed_Cache_Img_Optm
 	{
 		$notified_data = unserialize( base64_decode( $_POST[ 'data' ] ) ) ;
 		if ( empty( $notified_data ) || ! is_array( $notified_data ) ) {
-			LiteSpeed_Cache_Log::debug( '[Img_Optm] notify exit: no notified data' ) ;
+			LiteSpeed_Cache_Log::debug( '[Img_Optm] ❌ notify exit: no notified data' ) ;
 			exit( json_encode( 'no notified data' ) ) ;
 		}
 
@@ -1039,17 +1040,6 @@ class LiteSpeed_Cache_Img_Optm
 				return ;
 			}
 
-
-			// send fetch request
-			// LiteSpeed_Cache_Log::debug( '[Img_Optm] Connecting IAPI server for [pid] ' . $row_img->post_id . ' [src_md5]' . $row_img->src_md5 ) ;
-			// $json = LiteSpeed_Cache_Admin_API::post( LiteSpeed_Cache_Admin_API::IAPI_ACTION_PULL_IMG, $data, $server, true ) ;
-
-			// Check if data interrupt or not
-			// if ( empty( $json[ 'ok' ] ) ) {
-			// 	LiteSpeed_Cache_Log::debug( '[Img_Optm] Failed to pull optimized img: ', $json ) ;
-			// 	return ;
-			// }
-
 			$local_file = $this->wp_upload_dir[ 'basedir' ] . '/' . $row_img->src ;
 
 			// Save ori optm image
@@ -1069,7 +1059,7 @@ class LiteSpeed_Cache_Img_Optm
 
 				file_put_contents( $local_file . '.tmp', $response[ 'body' ] ) ;
 
-				if ( ! file_exists( $local_file . '.tmp' ) || md5_file( $local_file . '.tmp' ) !== $server_info[ 'ori_md5' ] ) {
+				if ( ! file_exists( $local_file . '.tmp' ) || ! filesize( $local_file . '.tmp' ) || md5_file( $local_file . '.tmp' ) !== $server_info[ 'ori_md5' ] ) {
 					LiteSpeed_Cache_Log::debug( '[Img_Optm] Failed to pull optimized img: file md5 dismatch, server md5: ' . $server_info[ 'ori_md5' ] ) ;
 
 					// update status to failed
@@ -1078,9 +1068,6 @@ class LiteSpeed_Cache_Img_Optm
 					// Update child images
 					$q = "UPDATE $this->_table_img_optm SET optm_status = %s WHERE root_id = %d " ;
 					$wpdb->query( $wpdb->prepare( $q, array( self::DB_IMG_OPTIMIZE_STATUS_FAILED, $row_img->id ) ) ) ;
-
-					// Notify server to update status
-					$res = LiteSpeed_Cache_Admin_API::post( LiteSpeed_Cache_Admin_API::IAPI_ACTION_PULL_IMG_FAILED, $server_info, $server, true ) ;
 
 					return 'Md5 dismatch' ; // exit from running pull process
 				}
@@ -1118,7 +1105,7 @@ class LiteSpeed_Cache_Img_Optm
 
 				file_put_contents( $local_file . '.webp', $response[ 'body' ] ) ;
 
-				if ( ! file_exists( $local_file . '.webp' ) || md5_file( $local_file . '.webp' ) !== $server_info[ 'webp_md5' ] ) {
+				if ( ! file_exists( $local_file . '.webp' ) || ! filesize( $local_file . '.webp' ) || md5_file( $local_file . '.webp' ) !== $server_info[ 'webp_md5' ] ) {
 					LiteSpeed_Cache_Log::debug( '[Img_Optm] Failed to pull optimized webp img: file md5 dismatch, server md5: ' . $server_info[ 'webp_md5' ] ) ;
 
 					// update status to failed
@@ -1127,9 +1114,6 @@ class LiteSpeed_Cache_Img_Optm
 					// Update child images
 					$q = "UPDATE $this->_table_img_optm SET optm_status = %s WHERE root_id = %d " ;
 					$wpdb->query( $wpdb->prepare( $q, array( self::DB_IMG_OPTIMIZE_STATUS_FAILED, $row_img->id ) ) ) ;
-
-					// Notify server to update status
-					LiteSpeed_Cache_Admin_API::post( LiteSpeed_Cache_Admin_API::IAPI_ACTION_PULL_IMG_FAILED, $server_info, $server, true ) ;
 
 					return 'WebP md5 dismatch' ; // exit from running pull process
 				}
@@ -1160,6 +1144,7 @@ class LiteSpeed_Cache_Img_Optm
 		}
 
 		// Notify IAPI images taken
+		$json = false ;
 		foreach ( $server_list as $server => $img_list ) {
 			$json = LiteSpeed_Cache_Admin_API::post( LiteSpeed_Cache_Admin_API::IAPI_ACTION_IMG_TAKEN, $img_list, $server, true ) ;
 		}
@@ -1178,7 +1163,7 @@ class LiteSpeed_Cache_Img_Optm
 		$tmp = $wpdb->get_row( $wpdb->prepare( $q, self::DB_IMG_OPTIMIZE_STATUS_NOTIFIED ) ) ;
 		if ( $tmp ) {
 			LiteSpeed_Cache_Log::debug( '[Img_Optm] Task in queue, to be continued...' ) ;
-			return [ 'ok' => 'to_be_continued' ] ;
+			return array( 'ok' => 'to_be_continued' ) ;
 		}
 
 		// If all pulled, update tag to done
@@ -1190,7 +1175,7 @@ class LiteSpeed_Cache_Img_Optm
 			$tried_level_up = "[Msg] $tried_level_up" ;
 		}
 
-		return [ 'ok' => "Pulled [ori] $total_pulled_ori [WebP] $total_pulled_webp [cost] {$time_cost}s $tried_level_up" ] ;
+		return array( 'ok' => "Pulled [ori] $total_pulled_ori [WebP] $total_pulled_webp [cost] {$time_cost}s $tried_level_up" ) ;
 	}
 
 	/**
@@ -1321,7 +1306,7 @@ class LiteSpeed_Cache_Img_Optm
 		LiteSpeed_Cache_Log::debug( '[Img_Optm] sending DESTROY_UNFINISHED cmd to LiteSpeed IAPI' ) ;
 
 		// Push to LiteSpeed IAPI server and recover credit
-		$json = LiteSpeed_Cache_Admin_API::post( LiteSpeed_Cache_Admin_API::IAPI_ACTION_REQUEST_DESTROY_UNFINISHED ) ;
+		$json = LiteSpeed_Cache_Admin_API::post( LiteSpeed_Cache_Admin_API::IAPI_ACTION_REQUEST_DESTROY_UNFINISHED, false, true ) ;
 
 		// confirm link will be displayed by Admin_API automatically
 		if ( is_array( $json ) ) {
@@ -1376,7 +1361,7 @@ class LiteSpeed_Cache_Img_Optm
 		update_option( self::DB_IMG_OPTIMIZE_DESTROY, time() ) ;
 
 		// Push to LiteSpeed IAPI server
-		$json = LiteSpeed_Cache_Admin_API::post( LiteSpeed_Cache_Admin_API::IAPI_ACTION_REQUEST_DESTROY ) ;
+		$json = LiteSpeed_Cache_Admin_API::post( LiteSpeed_Cache_Admin_API::IAPI_ACTION_REQUEST_DESTROY, false, true ) ;
 
 		// confirm link will be displayed by Admin_API automatically
 		if ( is_array( $json ) && $json ) {
@@ -1399,7 +1384,7 @@ class LiteSpeed_Cache_Img_Optm
 		$request_time = get_option( self::DB_IMG_OPTIMIZE_DESTROY ) ;
 		if ( time() - $request_time > 300 ) {
 			LiteSpeed_Cache_Log::debug( '[Img_Optm] terminate DESTROY process due to timeout' ) ;
-			exit( 'Destroy callback timeout ( 300 seconds )' ) ;
+			exit( 'Destroy callback timeout ( 300 seconds )[' . time() . " - $request_time]" ) ;
 		}
 
 		// Start deleting files

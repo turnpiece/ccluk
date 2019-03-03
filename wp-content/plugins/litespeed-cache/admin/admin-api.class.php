@@ -17,8 +17,10 @@ class LiteSpeed_Cache_Admin_API
 	private static $_instance ;
 
 	private $_iapi_key ;
+	private $_iapi_cloud ;
 
 	const DB_API_KEY = 'litespeed_api_key' ;
+	const DB_API_CLOUD = 'litespeed_api_cloud' ;
 	const DB_API_KEY_HASH = 'litespeed_api_key_hash' ;
 
 	// For each request, send a callback to confirm
@@ -29,14 +31,16 @@ class LiteSpeed_Cache_Admin_API
 	const TYPE_RESET_KEY = 'reset_key' ;
 
 	const IAPI_ACTION_REQUEST_KEY = 'request_key' ;
+	const IAPI_ACTION_LIST_CLOUDS = 'list_clouds' ;
 	const IAPI_ACTION_MEDIA_SYNC_DATA = 'media_sync_data' ;
 	const IAPI_ACTION_REQUEST_OPTIMIZE = 'request_optimize' ;
-	const IAPI_ACTION_PULL_IMG = 'client_pull' ; // Deprecated
 	const IAPI_ACTION_IMG_TAKEN = 'client_img_taken' ;
-	const IAPI_ACTION_PULL_IMG_FAILED = 'client_pull_failed' ;
 	const IAPI_ACTION_REQUEST_DESTROY = 'imgoptm_destroy' ;
 	const IAPI_ACTION_REQUEST_DESTROY_UNFINISHED = 'imgoptm_destroy_unfinished' ;
 	const IAPI_ACTION_ENV_REPORT = 'env_report' ;
+	const IAPI_ACTION_PLACEHOLDER = 'placeholder' ;
+	const IAPI_ACTION_CCSS = 'ccss' ;
+	const IAPI_ACTION_PAGESCORE = 'pagescore' ;
 
 	/**
 	 * Init
@@ -47,6 +51,7 @@ class LiteSpeed_Cache_Admin_API
 	private function __construct()
 	{
 		$this->_iapi_key = get_option( self::DB_API_KEY ) ?: '' ;
+		$this->_iapi_cloud = get_option( self::DB_API_CLOUD ) ?: '' ;
 	}
 
 	/**
@@ -207,15 +212,43 @@ class LiteSpeed_Cache_Admin_API
 	}
 
 	/**
-	 * Post data to LiteSpeed image server
+	 * Get data from LiteSpeed cloud server
+	 *
+	 * @since  2.9
+	 * @access public
+	 */
+	public static function get( $action, $data = array(), $server = false )
+	{
+		$instance = self::get_instance() ;
+
+		/**
+		 * All requests must have closet cloud server too
+		 * @since  2.9
+		 */
+		if ( ! $instance->_iapi_cloud ) {
+			$instance->_detect_cloud() ;
+		}
+
+		return $instance->_get( $action, $data, $server ) ;
+	}
+
+	/**
+	 * Post data to LiteSpeed cloud server
 	 *
 	 * @since  1.6
 	 * @access public
-	 * @param  array $data
 	 */
-	public static function post( $action, $data = false, $server = false, $no_hash = false )
+	public static function post( $action, $data = false, $server = false, $no_hash = false, $time_out = false )
 	{
 		$instance = self::get_instance() ;
+
+		/**
+		 * All requests must have closet cloud server too
+		 * @since  2.9
+		 */
+		if ( ! $instance->_iapi_cloud ) {
+			$instance->_detect_cloud() ;
+		}
 
 		/**
 		 * All requests must have api_key first
@@ -225,19 +258,23 @@ class LiteSpeed_Cache_Admin_API
 			$instance->_request_key() ;
 		}
 
-		return $instance->_post( $action, $data, $server, $no_hash ) ;
+		return $instance->_post( $action, $data, $server, $no_hash, $time_out ) ;
 	}
 
 	/**
 	 * request key from LiteSpeed
+	 *
+	 * This needs callback validation, so don't use for generic services which don't need security
 	 *
 	 * @since  1.5
 	 * @access private
 	 */
 	private function _request_key()
 	{
+		LiteSpeed_Cache_Log::debug( '[IAPI] req auth_key' ) ;
+
 		// Send request to LiteSpeed
-		$json = $this->_post( self::IAPI_ACTION_REQUEST_KEY, home_url() ) ;
+		$json = $this->_post( self::IAPI_ACTION_REQUEST_KEY, home_url(), true ) ;
 
 		// Check if get key&server correctly
 		if ( empty( $json[ 'auth_key' ] ) ) {
@@ -258,6 +295,52 @@ class LiteSpeed_Cache_Admin_API
 	}
 
 	/**
+	 * ping clouds from LiteSpeed
+	 *
+	 * @since  2.9
+	 * @access private
+	 */
+	private function _detect_cloud()
+	{
+		// Send request to LiteSpeed
+		$json = $this->_post( self::IAPI_ACTION_LIST_CLOUDS, home_url(), false, true ) ;
+
+		// Check if get list correctly
+		if ( empty( $json[ 'list' ] ) ) {
+			LiteSpeed_Cache_Log::debug( '[IAPI] request cloud list failed: ', $json ) ;
+
+			if ( $json ) {
+				$msg = sprintf( __( 'IAPI Error %s', 'litespeed-cache' ), $json ) ;
+				LiteSpeed_Cache_Admin_Display::error( $msg ) ;
+			}
+			return ;
+		}
+
+		// Ping closest cloud
+		$speed_list = array() ;
+		foreach ( $json[ 'list' ] as $v ) {
+			$speed_list[ $v ] = LiteSpeed_Cache_Utility::ping( $v ) ;
+		}
+		$min = min( $speed_list ) ;
+
+		if ( $min == 99999 ) {
+			LiteSpeed_Cache_Log::debug( '[IAPI] failed to ping all clouds' ) ;
+			return ;
+		}
+		$closest = array_search( $min, $speed_list ) ;
+
+		LiteSpeed_Cache_Log::debug( '[IAPI] Found closest cloud ' . $closest ) ;
+
+		// store data into option locally
+		update_option( self::DB_API_CLOUD, $closest ) ;
+
+		$this->_iapi_cloud = $closest ;
+
+		// sync API key
+		$this->_request_key() ;
+	}
+
+	/**
 	 * delete key
 	 *
 	 * @since  1.7.2
@@ -266,21 +349,60 @@ class LiteSpeed_Cache_Admin_API
 	private function _reset_key()
 	{
 		delete_option( self::DB_API_KEY ) ;
-		LiteSpeed_Cache_Log::debug( '[IAPI] delete auth_key' ) ;
+		delete_option( self::DB_API_CLOUD ) ;
+		LiteSpeed_Cache_Log::debug( '[IAPI] delete auth_key & closest cloud' ) ;
 
 		$msg = __( 'Reset IAPI key successfully.', 'litespeed-cache' ) ;
 		LiteSpeed_Cache_Admin_Display::succeed( $msg ) ;
 	}
 
 	/**
-	 * Post data to LiteSpeed image server
+	 * Get data from LiteSpeed cloud server
+	 *
+	 * @since  2.9
+	 * @access private
+	 */
+	private function _get( $action, $data = false, $server = false )
+	{
+
+		if ( $server == false ) {
+			$server = 'https://wp.api.litespeedtech.com' ;
+		}
+		elseif ( $server === true ) {
+			$server = $this->_iapi_cloud ;
+		}
+
+		$url = $server . '/' . $action ;
+
+		if ( $data ) {
+			$url .= '?' . http_build_query( $data ) ;
+		}
+
+		LiteSpeed_Cache_Log::debug( '[IAPI] getting from : ' . $url ) ;
+
+		$response = wp_remote_get( $url, array( 'timeout' => 15 ) ) ;
+
+		// Parse response data
+		if ( is_wp_error( $response ) ) {
+			$error_message = $response->get_error_message() ;
+			LiteSpeed_Cache_Log::debug( '[IAPI] failed to get: ' . $error_message ) ;
+			return false ;
+		}
+
+		$data = $response[ 'body' ] ;
+
+		return $data ;
+
+	}
+
+	/**
+	 * Post data to LiteSpeed cloud server
 	 *
 	 * @since  1.6
 	 * @access private
-	 * @param  array $data
 	 * @return  string | array Must return an error msg string or json array
 	 */
-	private function _post( $action, $data = false, $server = false, $no_hash = false )
+	private function _post( $action, $data = false, $server = false, $no_hash = false, $time_out = false )
 	{
 		$hash = 'no_hash' ;
 		if ( ! $no_hash ) {
@@ -292,6 +414,9 @@ class LiteSpeed_Cache_Admin_API
 		if ( $server == false ) {
 			$server = 'https://wp.api.litespeedtech.com' ;
 		}
+		elseif ( $server === true ) {
+			$server = $this->_iapi_cloud ;
+		}
 
 		$url = $server . '/' . $action ;
 
@@ -299,6 +424,7 @@ class LiteSpeed_Cache_Admin_API
 
 		$param = array(
 			'auth_key'	=> $this->_iapi_key,
+			'cloud'	=> $this->_iapi_cloud,
 			'v'	=> LiteSpeed_Cache::PLUGIN_VERSION,
 			'hash'	=> $hash,
 			'data' => $data,
@@ -307,7 +433,7 @@ class LiteSpeed_Cache_Admin_API
 		 * Extended timeout to avoid cUrl 28 timeout issue as we need callback validation
 		 * @since 1.6.4
 		 */
-		$response = wp_remote_post( $url, array( 'body' => $param, 'timeout' => 15 ) ) ;
+		$response = wp_remote_post( $url, array( 'body' => $param, 'timeout' => $time_out ?: 15 ) ) ;
 
 		if ( is_wp_error( $response ) ) {
 			$error_message = $response->get_error_message() ;
@@ -324,7 +450,7 @@ class LiteSpeed_Cache_Admin_API
 			$msg = __( 'Failed to post via WordPress', 'litespeed-cache' ) . ': ' . $response[ 'body' ] ;
 			LiteSpeed_Cache_Admin_Display::error( $msg ) ;
 
-			return $response[ 'body' ] ;
+			return false ;
 		}
 
 		if ( ! empty( $json[ '_err' ] ) ) {
@@ -332,7 +458,7 @@ class LiteSpeed_Cache_Admin_API
 			$msg = __( 'Failed to communicate with LiteSpeed image server', 'litespeed-cache' ) . ': ' . $json[ '_err' ] ;
 			$msg .= $this->_parse_link( $json ) ;
 			LiteSpeed_Cache_Admin_Display::error( $msg ) ;
-			return $json[ '_err' ] ;
+			return false ;
 		}
 
 		if ( ! empty( $json[ '_503' ] ) ) {
@@ -342,7 +468,7 @@ class LiteSpeed_Cache_Admin_API
 			$msg .= ' ' . $json[ '_503' ] ;
 			LiteSpeed_Cache_Admin_Display::error( $msg ) ;
 
-			return $json[ '_503' ] ;
+			return false ;
 		}
 
 		if ( ! empty( $json[ '_info' ] ) ) {
@@ -379,7 +505,7 @@ class LiteSpeed_Cache_Admin_API
 
 			$msg2 .= $this->_parse_link( $json ) ;
 			LiteSpeed_Cache_Admin_Display::error( $msg . $msg2 ) ;
-			return $msg ;
+			return false ;
 		}
 
 		return $json ;

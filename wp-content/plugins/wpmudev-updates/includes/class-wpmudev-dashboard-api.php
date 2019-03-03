@@ -27,6 +27,13 @@ class WPMUDEV_Dashboard_Api {
 	protected $rest_api = 'api/dashboard/v2/';
 
 	/**
+	 * Path to the Analytics REST API on the server.
+	 *
+	 * @var string (URL)
+	 */
+	protected $rest_api_analytics = 'api/analytics/v1/';
+
+	/**
 	 * The complete WPMUDEV REST API endpoint. Defined in constructor.
 	 *
 	 * @var string (URL)
@@ -80,7 +87,7 @@ class WPMUDEV_Dashboard_Api {
 				'wpmudev_scheduled_jobs',
 				array( $this, 'refresh_projects_data' )
 			);
-		} else if ( wp_next_scheduled( 'wpmudev_scheduled_jobs' ) ) {
+		} elseif ( wp_next_scheduled( 'wpmudev_scheduled_jobs' ) ) {
 			// In case the cron job was already installed in a sub-site...
 			wp_clear_scheduled_hook( 'wpmudev_scheduled_jobs' );
 		}
@@ -132,6 +139,63 @@ class WPMUDEV_Dashboard_Api {
 	public function set_key( $key ) {
 		$this->api_key = $key;
 		update_site_option( 'wpmudev_apikey', $key );
+	}
+
+	/**
+	 * Returns the canonical site_url that should be used for the site in the hub.
+	 *
+	 * Define WPMUDEV_HUB_SITE_URL to override or make static the url it should show as
+	 *  in the hub. Defaults to network_site_url() which may be dynamically filtered
+	 *  by some plugins and hosting providers.
+	 *
+	 * @since  4.6.0
+	 *
+	 * @return string
+	 */
+	public function network_site_url() {
+		return defined( 'WPMUDEV_HUB_SITE_URL' ) ? WPMUDEV_HUB_SITE_URL : network_site_url();
+	}
+
+	/**
+	 * Returns the canonical home_url that should be used for the site in the hub.
+	 *
+	 * Define WPMUDEV_HUB_HOME_URL to override or make static the url it should show as
+	 *  in the hub. Defaults to WPMUDEV_HUB_SITE_URL if set, or network_home_url() which may be dynamically filtered
+	 *  by some plugins and hosting providers.
+	 *
+	 * @since  4.6.0
+	 *
+	 * @return string
+	 */
+	public function network_home_url() {
+		if ( defined( 'WPMUDEV_HUB_HOME_URL' ) ) {
+			return WPMUDEV_HUB_HOME_URL;
+		} elseif ( defined( 'WPMUDEV_HUB_SITE_URL' ) ) {
+			return WPMUDEV_HUB_SITE_URL;
+		} else {
+			return network_home_url();
+		}
+	}
+
+	/**
+	 * Returns the canonical home_url that should be used for the site in the hub.
+	 *
+	 * Define WPMUDEV_HUB_ADMIN_URL to override or make static the url it should show as
+	 *  in the hub. Defaults to deriving from WPMUDEV_HUB_SITE_URL if set, or network_admin_url() which may be dynamically filtered
+	 *  by some plugins and hosting providers.
+	 *
+	 * @since  4.6.0
+	 *
+	 * @return string
+	 */
+	public function network_admin_url() {
+		if ( defined( 'WPMUDEV_HUB_ADMIN_URL' ) ) {
+			return WPMUDEV_HUB_ADMIN_URL;
+		} elseif ( defined( 'WPMUDEV_HUB_SITE_URL' ) ) {
+			return is_multisite() ? trailingslashit( WPMUDEV_HUB_SITE_URL ) . 'wp-admin/network/' : 'wp-admin/';
+		} else {
+			return network_admin_url();
+		}
 	}
 
 	/**
@@ -215,10 +279,10 @@ class WPMUDEV_Dashboard_Api {
 	 *
 	 * @since  4.0.0
 	 *
-	 * @param  str|array $remote_path The API function to call.
-	 * @param  array     $data        Optional. GET or POST data to send.
-	 * @param  string    $method      Optional. GET or POST.
-	 * @param  array     $options     Optional. Array of request options.
+	 * @param  string $remote_path The API function to call.
+	 * @param  array  $data        Optional. GET or POST data to send.
+	 * @param  string $method      Optional. GET or POST.
+	 * @param  array  $options     Optional. Array of request options.
 	 *
 	 * @return array Results of the wp_remote_get/post call.
 	 */
@@ -230,7 +294,7 @@ class WPMUDEV_Dashboard_Api {
 			array(
 				'timeout'    => 15,
 				'sslverify'  => WPMUDEV_API_SSLVERIFY,
-				'user-agent' => 'WPMUDEV Dashboard Client/' . WPMUDEV_Dashboard::$version . " (+" . network_site_url() . ")",
+				'user-agent' => 'WPMUDEV Dashboard Client/' . WPMUDEV_Dashboard::$version . ' (+' . network_site_url() . ')',
 			)
 		);
 
@@ -251,7 +315,7 @@ class WPMUDEV_Dashboard_Api {
 				$link = add_query_arg( $data, $link );
 			}
 			$response = wp_remote_get( $link, $options );
-		} else if ( 'POST' == $method ) {
+		} elseif ( 'POST' == $method ) {
 			$options['body'] = $data;
 			$response        = wp_remote_post( $link, $options );
 		}
@@ -277,7 +341,7 @@ class WPMUDEV_Dashboard_Api {
 					$packages                 = (object) json_decode( $req_body['packages'] );
 					$packages->plugins        = count( (array) $packages->plugins ) . ' PLUGINS';
 					$packages->themes         = count( (array) $packages->themes ) . ' THEMES';
-					$req_body['packages']     = json_encode( $packages );
+					$req_body['packages']     = wp_json_encode( $packages );
 				}
 				$options['body'] = $req_body;
 
@@ -290,12 +354,12 @@ class WPMUDEV_Dashboard_Api {
 						$resp_body->plugin_tags = '[...]';
 					}
 				}
-				$resp_body = json_encode( $resp_body );
+				$resp_body = wp_json_encode( $resp_body );
 			}
 
 			if ( $response && is_array( $response ) ) {
-				$debug_data  = sprintf( "%s %s\n", wp_remote_retrieve_response_code( $response ), wp_remote_retrieve_response_message( $response ) );
-				$debug_data .= var_export( wp_remote_retrieve_headers( $response ), true ) . PHP_EOL;
+				$debug_data = sprintf( "%s %s\n", wp_remote_retrieve_response_code( $response ), wp_remote_retrieve_response_message( $response ) );
+				$debug_data .= var_export( wp_remote_retrieve_headers( $response ), true ) . PHP_EOL; // WPCS: var_export() ok.
 				$debug_data .= $resp_body;
 			} else {
 				$debug_data = '';
@@ -307,7 +371,7 @@ class WPMUDEV_Dashboard_Api {
 				$method,
 				$link,
 				wp_remote_retrieve_response_code( $response ),
-				json_encode( $options ),
+				wp_json_encode( $options ),
 				$debug_data
 			);
 			error_log( $msg );
@@ -334,7 +398,7 @@ class WPMUDEV_Dashboard_Api {
 	public function call_auth( $remote_path, $data = false, $method = 'GET', $options = array() ) {
 		if ( 'GET' == $method ) {
 			$remote_path = $this->rest_url_auth( $remote_path );
-		} else if ( 'POST' == $method ) {
+		} elseif ( 'POST' == $method ) {
 			if ( ! is_array( $data ) ) {
 				$data = array();
 			}
@@ -849,7 +913,7 @@ class WPMUDEV_Dashboard_Api {
 
 			if ( empty( $res['timestamp'] ) ) {
 				$res = false;
-			} else if ( ! empty( $res['timestamp'] ) && $res['timestamp'] <= $retry_stamp ) {
+			} elseif ( ! empty( $res['timestamp'] ) && $res['timestamp'] <= $retry_stamp ) {
 				// Check if version in cache is less then the latest version.
 				if ( version_compare( $res[0]['version'], $last_version, 'lt' ) ) {
 					$res = false; // Cache is outdated and needs to be refreshed.
@@ -971,12 +1035,12 @@ class WPMUDEV_Dashboard_Api {
 
 		$data = array(
 			'call_version' => $call_version,
-			'domain'       => network_site_url(),
+			'domain'       => $this->network_site_url(),
 			'blog_count'   => $blog_count,
 			'wp_version'   => $wp_ver,
 			'projects'     => $projects,
-			'admin_url'    => network_admin_url(),
-			'home_url'     => network_home_url(),
+			'admin_url'    => $this->network_admin_url(),
+			'home_url'     => $this->network_home_url(),
 			'repo_updates' => $repo_updates,
 			'packages'     => $packages,
 			'auth_cookies' => $auth_cookies,
@@ -1003,7 +1067,7 @@ class WPMUDEV_Dashboard_Api {
 	 * @internal Function only is public because it's an action handler.
 	 *
 	 * @param  bool|array $local_projects Optional array of local projects.
-	 * @param  bool       $force     Optional forces a sync
+	 * @param  bool       $force          Optional forces a sync
 	 *
 	 * @return array|bool
 	 */
@@ -1038,13 +1102,15 @@ class WPMUDEV_Dashboard_Api {
 				if ( WPMUDEV_API_DEBUG ) {
 					error_log( '[WPMUDEV API] Skipped sync due to unchanged local data.' );
 				}
+
 				return $this->get_membership_data();
-			} else if ( $last_run['fails'] ) { // check for exponential backoff
+			} elseif ( $last_run['fails'] ) { // check for exponential backoff
 				$backoff = min( pow( 5, $last_run['fails'] ), HOUR_IN_SECONDS ); // 5, 25, 125, 625, 3125, 3600 max
 				if ( $last_run['time'] > ( time() - $backoff ) ) {
 					if ( WPMUDEV_API_DEBUG ) {
 						error_log( '[WPMUDEV API] Skipped sync due to API error exponential backoff.' );
 					}
+
 					return $this->get_membership_data();
 				}
 			}
@@ -1083,7 +1149,7 @@ class WPMUDEV_Dashboard_Api {
 			/*
 			 * For network errors, perform exponential backoff
 			 */
-			$last_run['time'] = time();
+			$last_run['time']  = time();
 			$last_run['fails'] = $last_run['fails'] + 1;
 			WPMUDEV_Dashboard::$site->set_option( 'last_run_sync', $last_run );
 		}
@@ -1316,9 +1382,9 @@ class WPMUDEV_Dashboard_Api {
 
 		if ( 'full' == $membership_type ) {
 			$field = 'full_notice';
-		} else if ( 'single' == $membership_type ) {
+		} elseif ( 'single' == $membership_type ) {
 			$field = 'single_notice';
-		} else if ( 'free' == $membership_type ) {
+		} elseif ( 'free' == $membership_type ) {
 			$field = 'free_notice';
 		}
 
@@ -1555,7 +1621,7 @@ class WPMUDEV_Dashboard_Api {
 				$access = true;
 				if ( ! $option_val ) {
 					$access = false;
-				} else if ( ! is_array( $option_val ) ) {
+				} elseif ( ! is_array( $option_val ) ) {
 					$access = false;
 				}
 
@@ -1589,7 +1655,7 @@ class WPMUDEV_Dashboard_Api {
 
 		if ( empty( $detail ) ) {
 			return (object) $Remote_Details;
-		} else if ( isset( $Remote_Details[ $detail ] ) ) {
+		} elseif ( isset( $Remote_Details[ $detail ] ) ) {
 			return $Remote_Details[ $detail ];
 		} else {
 			return false;
@@ -1635,7 +1701,7 @@ class WPMUDEV_Dashboard_Api {
 		$response = WPMUDEV_Dashboard::$api->call_auth(
 			'grant-access',
 			array(
-				'domain'      => network_site_url(),
+				'domain'      => $this->network_site_url(),
 				'auth_key'    => $access_key,
 				'auth_expire' => $expiration,
 				'auth_url'    => admin_url( 'admin-ajax.php?action=wdpunauth' ),
@@ -1677,7 +1743,7 @@ class WPMUDEV_Dashboard_Api {
 		$response = $this->call_auth(
 			'revoke-access',
 			array(
-				'domain' => network_site_url(),
+				'domain' => $this->network_site_url(),
 			),
 			'POST'
 		);
@@ -1711,13 +1777,13 @@ class WPMUDEV_Dashboard_Api {
 		$error = false;
 		if ( ! $access ) {
 			$error = 'no token';
-		} else if ( ! is_array( $access ) ) {
+		} elseif ( ! is_array( $access ) ) {
 			$error = 'no token';
-		} else if ( empty( $_REQUEST['wdpunkey'] ) ) {
+		} elseif ( empty( $_REQUEST['wdpunkey'] ) ) {
 			$error = 'invalid';
-		} else if ( ! hash_equals( $_REQUEST['wdpunkey'], $access['key'] ) ) { // timing attack safe key comparison.
+		} elseif ( ! hash_equals( $_REQUEST['wdpunkey'], $access['key'] ) ) { // timing attack safe key comparison.
 			$error = 'invalid';
-		} else if ( (int) $access['expire'] <= current_time( 'timestamp' ) ) {
+		} elseif ( (int) $access['expire'] <= current_time( 'timestamp' ) ) {
 			$error = 'expired';
 		}
 
@@ -1756,12 +1822,505 @@ class WPMUDEV_Dashboard_Api {
 		}
 	}
 
+	/**
+	 * Enable and configure analytics to collect data for the site.
+	 *
+	 * @since  4.6
+	 *
+	 * @return bool
+	 */
+	public function analytics_enable() {
+		$api_base = $this->server_root . $this->rest_api_analytics;
+
+		// sets up special auth header.
+		$options['headers']                  = array();
+		$options['headers']['Authorization'] = $this->get_key();
+
+		$response = WPMUDEV_Dashboard::$api->call(
+			$api_base . 'enable',
+			array( 'domain' => $this->network_site_url() ),
+			'POST',
+			$options
+		);
+
+		if ( wp_remote_retrieve_response_code( $response ) == 200 ) {
+			$data = json_decode( wp_remote_retrieve_body( $response ), true );
+
+			WPMUDEV_Dashboard::$site->set_option( 'analytics_site_id', $data['site_id'] );
+			WPMUDEV_Dashboard::$site->set_option( 'analytics_tracker', $data['tracker'] );
+
+			return true;
+		} else {
+			$this->parse_api_error( $response );
+		}
+
+		return false;
+	}
+
+	/**
+	 * Enable and configure analytics to collect data for the site.
+	 *
+	 * @since  4.6
+	 *
+	 * @return bool
+	 */
+	public function analytics_disable() {
+		$api_base = $this->server_root . $this->rest_api_analytics;
+
+		// sets up special auth header.
+		$options['headers']                  = array();
+		$options['headers']['Authorization'] = $this->get_key();
+
+		$response = WPMUDEV_Dashboard::$api->call(
+			$api_base . 'disable',
+			array( 'domain' => $this->network_site_url() ),
+			'POST',
+			$options
+		);
+
+		if ( wp_remote_retrieve_response_code( $response ) == 200 ) {
+			return true;
+		} else {
+			$this->parse_api_error( $response );
+		}
+
+		return false;
+	}
+
+	/**
+	 * Get overall analytics data for the given site.
+	 *  Cached in a transient for 24hrs.
+	 *
+	 * @since  4.6
+	 *
+	 * @param int    $days_ago How many days in the past to look back
+	 * @param int    $subsite  If filtering to a subsite pass the blog_id of it.
+	 *
+	 * @return mixed
+	 */
+	public function analytics_stats_overall( $days_ago = 7, $subsite = 0 ) {
+		$site_id = WPMUDEV_Dashboard::$site->get_option( 'analytics_site_id' );
+
+		// figure out what widget view we want.
+		if ( is_multisite() ) {
+			if ( $subsite ) {
+				$type = 'subsite';
+			} else {
+				$type = 'network';
+			}
+		} else {
+			$type = 'normal';
+		}
+
+		$api_base    = $this->server_root . $this->rest_api_analytics;
+		$remote_path = add_query_arg( 'days_ago', $days_ago, "{$api_base}site/{$site_id}/overall/{$type}" );
+		if ( $subsite ) {
+			$remote_path = add_query_arg( 'subsite', $subsite, $remote_path );
+		}
+
+		$transient_key = 'wdp_analytics_' . md5( $remote_path );
+		// return from cache if possible. We don't use *_site_transient() to avoid unnecessary autoloading.
+		if ( false !== ( $cached = get_transient( $transient_key ) ) ) {
+			return $cached;
+		}
+
+		// sets up special auth header.
+		$options['headers']                  = array();
+		$options['headers']['Authorization'] = $this->get_key();
+
+		$response = WPMUDEV_Dashboard::$api->call(
+			$remote_path,
+			false,
+			'GET',
+			$options
+		);
+
+		if ( wp_remote_retrieve_response_code( $response ) == 200 ) {
+			$data = json_decode( wp_remote_retrieve_body( $response ), true );
+		} else {
+			$this->parse_api_error( $response );
+			return false;
+		}
+
+		// parse the data into a format best for our needs
+		$final_data = array();
+		$final_data['autocomplete'] = array();
+
+		// overall data for charts and totals.
+		if ( isset( $data['overall'] ) ) {
+
+			// available fields are a bit different when filtered to subsite
+			$to_process = array(
+				'bounce_rate'      => array( 'orig_key' => 'bounce_rate', 'label' => __( 'Bounce Rate', 'wpmudev' ), 'callback' => '_analytics_format_pcnt' ),
+				'exit_rate'        => array( 'orig_key' => 'exit_rate', 'label' => __( 'Exit Rate', 'wpmudev' ), 'callback' => '_analytics_format_pcnt' ),
+				'gen_time'         => array( 'orig_key' => 'avg_time_generation', 'label' => __( 'Generation Time', 'wpmudev' ), 'callback' => '_analytics_format_time' ),
+				'visit_time'       => array( 'orig_key' => 'avg_time_on_site', 'label' => __( 'Visit Time', 'wpmudev' ), 'callback' => '_analytics_format_time' ),
+				'visits'           => array( 'orig_key' => 'nb_visits', 'label' => __( 'Visits', 'wpmudev' ), 'callback' => '_analytics_format_num' ),
+				'unique_visits'    => array( 'orig_key' => 'nb_uniq_visitors', 'label' => __( 'Unique Visits', 'wpmudev' ), 'callback' => '_analytics_format_num' ),
+				'pageviews'        => array( 'orig_key' => 'nb_pageviews', 'label' => __( 'Pageviews', 'wpmudev' ), 'callback' => '_analytics_format_num' ),
+				'unique_pageviews' => array( 'orig_key' => 'nb_uniq_pageviews', 'label' => __( 'Unique Pageviews', 'wpmudev' ), 'callback' => '_analytics_format_num' ),
+			);
+			if ( $subsite ) {
+				unset( $to_process['visits'] );
+				unset( $to_process['unique_visits'] );
+				unset( $to_process['visit_time'] );
+				$to_process['pageviews']        = array( 'orig_key' => 'nb_hits', 'label' => __( 'Pageviews', 'wpmudev' ), 'callback' => '_analytics_format_num' );
+				$to_process['unique_pageviews'] = array( 'orig_key' => 'nb_visits', 'label' => __( 'Unique Pageviews', 'wpmudev' ), 'callback' => '_analytics_format_num' );
+				$to_process['page_time']        = array( 'orig_key' => 'avg_time_on_page', 'label' => __( 'Page Time', 'wpmudev' ), 'callback' => '_analytics_format_time' );
+			} else {
+				unset( $to_process['exit_rate'] );
+			}
+
+			foreach ( $data['overall'] as $date => $day ) {
+				if ( isset( $day[0] ) ) {
+					$day = $day[0];
+				}
+
+				// this helps data appear on correct day in x axis.
+				$timestamp = date( 'c', strtotime( '+1 day', strtotime( $date ) ) );
+				foreach( $to_process as $key => $process ) {
+					$y_value = isset( $day[ $process['orig_key'] ] ) ? $day[ $process['orig_key'] ] : null;
+					$final_data['overall']['chart'][ $key ]['label'] = $process['label'];
+					$final_data['overall']['chart'][ $key ]['data'][] = array( 't' => $timestamp, 'y' => $y_value );
+				}
+			}
+
+			foreach( $to_process as $key => $process ) {
+				if ( isset( $final_data['overall']['chart'][ $key ] ) ) {
+					$list   = array_filter( wp_list_pluck( $final_data['overall']['chart'][ $key ]['data'], 'y' ) );
+					if ( count( $list ) ) {
+						$start  = current( $list );
+						$end    = end( $list );
+						$change = round( ( ( $end - $start ) / $end * 100 ), 1 );
+					} else {
+						$change = 0;
+					}
+
+					$final_data['overall']['totals'][ $key ] = array(
+						'change'    => number_format_i18n( abs( $change ) ) . '%',
+						'direction' => ( $change == 0 ) ? 'none' : ( $change > 0 ? 'up' : 'down' ),
+					);
+
+					//for number we want total, others mean
+					if ( '_analytics_format_num' === $process['callback'] ) {
+						$final_data['overall']['totals'][ $key ]['value'] = call_user_func( array( $this, $process['callback'] ), array_sum( $list ) );
+					} else {
+						if ( count( $list ) ) {
+							$avg = array_sum( $list ) / count( $list );
+						} else {
+							$avg = false;
+						}
+						$final_data['overall']['totals'][ $key ]['value'] = call_user_func( array( $this, $process['callback'] ), $avg );
+					}
+				}
+			}
+		}
+
+		$to_process = array(
+			'pageviews'        => array( 'orig_key' => 'nb_hits', 'callback' => '_analytics_format_num' ),
+			'unique_pageviews' => array( 'orig_key' => 'nb_visits', 'callback' => '_analytics_format_num' ),
+			'bounce_rate'      => array( 'orig_key' => 'bounce_rate', 'callback' => '_analytics_format_pcnt' ),
+			'exit_rate'        => array( 'orig_key' => 'exit_rate', 'callback' => '_analytics_format_pcnt' ),
+			'gen_time'         => array( 'orig_key' => 'avg_time_generation', 'callback' => '_analytics_format_time' ),
+			'page_time'        => array( 'orig_key' => 'avg_time_on_page', 'callback' => '_analytics_format_time' ),
+		);
+
+		// top pages & posts list.
+		if ( isset( $data['pages'] ) ) {
+			foreach ( $data['pages'] as $page ) {
+
+				$new_page = array(
+					'filter' => urlencode( $page['label'] ),
+				);
+
+				// process blog_ids in pagenames depending on context.
+				preg_match( '/^(\d+)\/(.*)/', trim( $page['label'] ), $matches ); // regex subject example: 1234/Discovery Bible Study (DBS—Watson, etc.) | Mission Network
+				if ( isset( $matches[1] ) && isset( $matches[2] ) ) {
+					if ( $subsite || ! is_multisite() ) { // collected data as multisite, now single WP don't show domain.
+						$new_page['name'] = trim( $matches[2] );
+					} else {
+						$blog = get_blog_details( absint( $matches[1] ), false );
+						if ( $blog ) {
+							$new_page['name'] = untrailingslashit( $blog->domain . $blog->path ) . ' - ' . trim( $matches[2] );
+						} else {
+							$new_page['name'] = trim( $matches[2] );
+						}
+					}
+				} else {
+					$new_page['name'] = trim( $page['label'] );
+				}
+
+				// get desired categories.
+				foreach( $to_process as $key => $process ) {
+					if ( isset( $page[ $process['orig_key'] ] ) ) {
+						$new_page[ $key ] = array(
+							'value' => call_user_func( array( $this, $process['callback'] ), $page[ $process['orig_key'] ] ),
+							'sort' => $page[ $process['orig_key'] ],
+						);
+					}
+				}
+				$final_data['pages'][] = $new_page;
+				$final_data['autocomplete'][] = array(
+					'label' => sprintf( __( 'Page: %s', 'wpmudev' ), $new_page['name'] ),
+					'value' => array( 'type'=> 'page', 'filter' => $new_page['filter'] ),
+				);
+			}
+		}
+
+		// sites list.
+		if ( isset( $data['sites'] ) && is_multisite() ) {
+			$blog_ids = array();
+			foreach ( $data['sites'] as $site ) {
+
+				$new_site = array(
+					'filter' => urlencode( $site['label'] ),
+				);
+
+				// try to get the blog domain from blog_id
+				$blog_id = trim( $site['label'] );
+				if ( $blog_id && is_numeric( $blog_id ) && absint( $blog_id ) && ! in_array( absint( $blog_id ), $blog_ids, true ) ) {
+					$blog = get_blog_details( absint( $blog_id ), true );
+					if ( $blog ) {
+						$blog_ids[] = absint( $blog_id ); // save to make sure we only see each blog once (first with most data) in case of tracking bugs.
+						$new_site['name'] = untrailingslashit( $blog->domain . $blog->path ) . ' - ' . $blog->blogname;
+					} else {
+						continue;
+					}
+				} else {
+					continue;
+				}
+
+				// get desired categories.
+				foreach( $to_process as $key => $process ) {
+					if ( isset( $site[ $process['orig_key'] ] ) ) {
+						$new_site[ $key ] = array(
+							'value' => call_user_func( array( $this, $process['callback'] ), $site[ $process['orig_key'] ] ),
+							'sort' => $site[ $process['orig_key'] ],
+						);
+					}
+				}
+				$final_data['sites'][] = $new_site;
+				$final_data['autocomplete'][] = array(
+					'label' => sprintf( __( 'Site: %s', 'wpmudev' ), $new_site['name'] ),
+					'value' => array( 'type'=> 'subsite', 'filter' => $new_site['filter']),
+				);
+			}
+		}
+
+		// authors list.
+		if ( isset( $data['authors'] ) ) {
+			// page_time key is different for custom dimension.
+			$to_process['page_time'] = array( 'orig_key' => 'avg_time_on_dimension', 'callback' => '_analytics_format_time' );
+
+			foreach ( $data['authors'] as $author ) {
+
+				// attempt to decode author json object.
+				$author_object = json_decode( trim( $author['label'] ) );
+				if ( ! isset( $author_object->ID ) ) {
+					continue;
+				}
+
+				$new_author = array();
+				$user = get_userdata( $author_object->ID );
+				if ( $user ) {
+					$new_author['name']     = $user->display_name;
+					$new_author['gravatar'] = get_avatar_url( $author_object->ID, array( 'size' => 25 ) );
+				} else {
+					$new_author['name']     = $author_object->name;
+					$new_author['gravatar'] = get_avatar_url( $author_object->avatar, array( 'size' => 25 ) );
+				}
+
+				$new_author['filter'] = urlencode( $author['label'] );
+
+				// get desired categories.
+				foreach( $to_process as $key => $process ) {
+					if ( isset( $author[ $process['orig_key'] ] ) ) {
+						$new_author[ $key ] = array(
+							'value' => call_user_func( array( $this, $process['callback'] ), $author[ $process['orig_key'] ] ),
+							'sort' => $author[ $process['orig_key'] ],
+						);
+					}
+				}
+				$final_data['authors'][] = $new_author;
+				$final_data['autocomplete'][] = array(
+					'label' => sprintf( __( 'Author: %s', 'wpmudev' ), $new_author['name'] ),
+					'value' => array( 'type'=> 'author', 'filter' => $new_author['filter'] ),
+				);
+			}
+		}
+
+		// cache for later.
+		set_transient( $transient_key, $final_data, DAY_IN_SECONDS );
+
+		return $final_data;
+	}
+
+	/**
+	 * Get analytics data for a specific dimension query for the given site.
+	 *  Not cached due to the vast number of possible args.
+	 *
+	 * @since  4.6
+	 *
+	 * @param int    $days_ago How many days in the past to look back
+	 * @param string $type     Can be page|author|subsite.
+	 * @param string $filter   Page, author, or blog_id to filter to.
+	 *
+	 * @return mixed
+	 */
+	public function analytics_stats_single( $days_ago = 7, $type, $filter ) {
+		$site_id = WPMUDEV_Dashboard::$site->get_option( 'analytics_site_id' );
+
+		$api_base    = $this->server_root . $this->rest_api_analytics;
+		$remote_path = add_query_arg(
+			array(
+				'filter'   => $filter,
+				'days_ago' => $days_ago,
+			),
+			"{$api_base}site/{$site_id}/{$type}"
+		);
+
+		// sets up special auth header.
+		$options['headers']                  = array();
+		$options['headers']['Authorization'] = $this->get_key();
+
+		$response = WPMUDEV_Dashboard::$api->call(
+			$remote_path,
+			false,
+			'GET',
+			$options
+		);
+
+		if ( wp_remote_retrieve_response_code( $response ) == 200 ) {
+			$data = json_decode( wp_remote_retrieve_body( $response ), true );
+		} else {
+			$this->parse_api_error( $response );
+			return false;
+		}
+
+		// parse the data into a format best for our needs
+		$final_data = array();
+
+		// available fields are a bit different when filtered to subsite
+		$to_process = array(
+			'bounce_rate'      => array( 'orig_key' => 'bounce_rate', 'label' => __( 'Bounce Rate', 'wpmudev' ), 'callback' => '_analytics_format_pcnt' ),
+			'exit_rate'        => array( 'orig_key' => 'exit_rate', 'label' => __( 'Exit Rate', 'wpmudev' ), 'callback' => '_analytics_format_pcnt' ),
+			'gen_time'         => array( 'orig_key' => 'avg_time_generation', 'label' => __( 'Generation Time', 'wpmudev' ), 'callback' => '_analytics_format_time' ),
+			'page_time'        => array( 'orig_key' => 'avg_time_on_page', 'label' => __( 'Page Time', 'wpmudev' ), 'callback' => '_analytics_format_time' ),
+			'pageviews'        => array( 'orig_key' => 'nb_hits', 'label' => __( 'Pageviews', 'wpmudev' ), 'callback' => '_analytics_format_num' ),
+			'unique_pageviews' => array( 'orig_key' => 'nb_visits', 'label' => __( 'Unique Pageviews', 'wpmudev' ), 'callback' => '_analytics_format_num' ),
+		);
+
+		// key is different for authors
+		if ( 'author' === $type ) {
+			$to_process['page_time']['orig_key'] = 'avg_time_on_dimension';
+		}
+
+		foreach ( $data as $date => $day ) {
+			if ( isset( $day[0] ) ) {
+				$day = $day[0];
+			}
+
+			// this helps data appear on correct day in x axis.
+			$timestamp = date( 'c', strtotime( '+1 day', strtotime( $date ) ) );
+			foreach( $to_process as $key => $process ) {
+				$y_value = isset( $day[ $process['orig_key'] ] ) ? $day[ $process['orig_key'] ] : null;
+				$final_data['chart'][ $key ]['label'] = $process['label'];
+				$final_data['chart'][ $key ]['data'][] = array( 't' => $timestamp, 'y' => $y_value );
+			}
+		}
+
+		foreach( $to_process as $key => $process ) {
+			if ( isset( $final_data['chart'][ $key ] ) ) {
+				$list   = array_filter( wp_list_pluck( $final_data['chart'][ $key ]['data'], 'y' ) );
+				if ( count( $list ) ) {
+					$start  = current( $list );
+					$end    = end( $list );
+					$change = round( ( ( $end - $start ) / $end * 100 ), 1 );
+				} else {
+					$change = 0;
+				}
+
+				$final_data['totals'][ $key ] = array(
+					'change'    => number_format_i18n( abs( $change ) ) . '%',
+					'direction' => ( $change == 0 ) ? 'none' : ( $change > 0 ? 'up' : 'down' ),
+				);
+
+				//for number we want total, others mean
+				if ( '_analytics_format_num' === $process['callback'] ) {
+					$final_data['totals'][ $key ]['value'] = call_user_func( array( $this, $process['callback'] ), array_sum( $list ) );
+				} else {
+					if ( count( $list ) ) {
+						$avg = array_sum( $list ) / count( $list );
+					} else {
+						$avg = false;
+					}
+					$final_data['totals'][ $key ]['value'] = call_user_func( array( $this, $process['callback'] ), $avg );
+				}
+			}
+		}
+
+		return $final_data;
+	}
 
 	/*
 	 * *********************************************************************** *
 	 * *     INTERNAL ACTION HANDLERS
 	 * *********************************************************************** *
 	 */
+
+	/**
+	 * Callback to format percentage for analytics widget.
+	 *
+	 * @since  4.6
+	 *
+	 * @param  int|float $decimal Number to format.
+	 *
+	 * @return string
+	 */
+	public function _analytics_format_pcnt( $decimal ) {
+		if ( false === $decimal ) {
+			return '-';
+		}
+		return round( $decimal * 100, 1 ) . '%';
+	}
+
+	/**
+	 * Callback to format time for analytics widget.
+	 *
+	 * @since  4.6
+	 *
+	 * @param  int|float $seconds Seconds to format.
+	 *
+	 * @return string
+	 */
+	public function _analytics_format_time( $seconds ) {
+		if ( false === $seconds ) {
+			return '-';
+		}
+		if ( $seconds >= 60 ) {
+			$mins = round( ( $seconds / 60 ), 2 );
+			return sprintf( _n( '%s min', '%s mins', $seconds, 'wpmudev' ), $mins );
+		} elseif ( $seconds >= 1 ) {
+			$seconds = round( $seconds, 2 );
+			return sprintf( _n( '%s sec', '%s secs', $seconds, 'wpmudev' ), $seconds );
+		} else {
+			$milliseconds = round( $seconds * 1000 );
+			return sprintf( __( '%s ms', 'wpmudev' ), $milliseconds );
+		}
+	}
+
+	/**
+	 * Callback to format number for analytics widget.
+	 *
+	 * @since  4.6
+	 *
+	 * @param  int|float $number Number to format.
+	 *
+	 * @return string
+	 */
+	public function _analytics_format_num( $number ) {
+		return number_format_i18n( round( $number) );
+	}
 
 	/**
 	 * Used to filter auth cookie expiration.
@@ -1797,9 +2356,9 @@ class WPMUDEV_Dashboard_Api {
 
 		if ( is_scalar( $response ) ) {
 			$this->api_error = $response;
-		} else if ( is_wp_error( $response ) ) {
+		} elseif ( is_wp_error( $response ) ) {
 			$this->api_error = $response->get_error_message();
-		} else if ( is_array( $response ) && ! empty( $body ) ) {
+		} elseif ( is_array( $response ) && ! empty( $body ) ) {
 			$data = json_decode( wp_remote_retrieve_body( $response ), true );
 			if ( is_array( $data ) && ! empty( $data['message'] ) ) {
 				$this->api_error = $data['message'];
@@ -1872,4 +2431,17 @@ class WPMUDEV_Dashboard_Api {
 			WPMUDEV_Dashboard::$api->set_key( '' );
 		}
 	}
+}
+
+/**
+ * Returns the correct network_site_url to use for API calls to the hub.
+ *
+ * For use by other WPMU DEV plugins.
+ *
+ * @since  4.6.0
+ *
+ * @return string
+ */
+function wpmudev_api_url() {
+	return WPMUDEV_Dashboard::$api->network_site_url();
 }

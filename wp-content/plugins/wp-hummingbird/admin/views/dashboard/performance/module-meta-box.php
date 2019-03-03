@@ -16,9 +16,9 @@
 <table class="sui-table sui-accordion">
 	<thead>
 		<tr>
-			<th><?php esc_html_e( 'Recommendation', 'wphb' ); ?></th>
-			<th><?php esc_html_e( 'Score /100', 'wphb' ); ?></th>
-			<th></th>
+			<th width="50%"><?php esc_html_e( 'Recommendation', 'wphb' ); ?></th>
+			<th width="25%"><?php esc_html_e( 'Score /100', 'wphb' ); ?></th>
+			<th width="25%"></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -43,7 +43,7 @@
 					<div class="sui-circle-score sui-grade-<?php echo esc_attr( $impact_score_class ); ?> sui-tooltip"
 					data-tooltip="<?php echo esc_html( $rule_result->impact_score ); ?>/100" data-score="<?php echo esc_attr( $rule_result->impact_score ); ?>"></div>
 				</td>
-				<td>
+				<td style="text-align: right">
 					<?php if ( $rule_result->impact_score < 85 ) : ?>
 						<a href="<?php echo esc_url( $viewreport_link ); ?>#rule-<?php echo esc_attr( $rule ); ?>" class="sui-button sui-button-ghost" name="submit">
 							<?php esc_html_e( 'Improve', 'wphb' ); ?>

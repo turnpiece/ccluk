@@ -8,7 +8,7 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2015 - 2018 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2015 - 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -215,7 +215,7 @@ class Cache extends Sitemaps {
 		$success = false;
 
 		switch ( $type ) :
-			case 'front' :
+			case 'front':
 				$front_id = $this->get_the_front_page_ID();
 
 				$this->object_cache_delete( $this->get_meta_output_cache_key_by_type( $front_id, '', 'frontpage' ) );
@@ -223,14 +223,14 @@ class Cache extends Sitemaps {
 				$success = true;
 				break;
 
-			case 'post' :
+			case 'post':
 				$post_type = \get_post_type( $id );
 
 				if ( $post_type ) {
 					switch ( $post_type ) {
-						case 'page' :
-						case 'post' :
-						case 'attachment' :
+						case 'page':
+						case 'post':
+						case 'attachment':
 							break;
 
 						default:
@@ -246,35 +246,35 @@ class Cache extends Sitemaps {
 				break;
 
 			//* Careful, this can only run on archive pages. For now.
-			case 'term' :
+			case 'term':
 				$this->object_cache_delete( $this->get_meta_output_cache_key_by_type( $id, $args['term'], 'term' ) );
 				$this->delete_ld_json_transient( $id, $args['term'], 'term' );
 				$success = true;
 				break;
 
-			case 'author' :
+			case 'author':
 				$this->object_cache_delete( $this->get_meta_output_cache_key_by_type( $id, 'author', 'author' ) );
 				$this->delete_ld_json_transient( $id, 'author', 'author' );
 				$success = true;
 				break;
 
-			case 'sitemap' :
+			case 'sitemap':
 				$success = $this->delete_sitemap_transient();
 				break;
 
-			case 'robots' :
+			case 'robots':
 				$success = $this->object_cache_delete( $this->get_robots_txt_cache_key() );
 				break;
 
-			case 'excluded_post_ids' :
+			case 'excluded_post_ids':
 				$success = $this->delete_excluded_post_ids_transient();
 				break;
 
-			case 'object' :
+			case 'object':
 				$success = \wp_cache_flush();
 				break;
 
-			case 'detection' :
+			case 'detection':
 				break;
 
 			/**
@@ -284,8 +284,9 @@ class Cache extends Sitemaps {
 			 * @NOTE Other caching plugins can override these groups. Therefore this
 			 * does NOT work.
 			 * @TODO make this work.
+			 * @see 'object' switch-index.
 			 */
-			case 'objectflush' :
+			case 'objectflush':
 				//* @NOTE false can't pass.
 				if ( false && $this->use_object_cache ) {
 					if ( isset( $GLOBALS['wp_object_cache']->cache['the_seo_framework'] ) ) {
@@ -309,7 +310,7 @@ class Cache extends Sitemaps {
 		 * @param array  $args    Additional arguments. They can overwrite $type and $id.
 		 * @param bool   $success Whether the action cleared.
 		 */
-		do_action( "the_seo_framework_delete_cache_{$type}", $type, $id, $args, $success );
+		\do_action( "the_seo_framework_delete_cache_{$type}", $type, $id, $args, $success );
 
 		return $success;
 	}
@@ -492,7 +493,7 @@ class Cache extends Sitemaps {
 		/**
 		 * Change key based on options.
 		 */
-		$options = $this->enable_ld_json_breadcrumbs() ? '1' : '0';
+		$options  = $this->enable_ld_json_breadcrumbs() ? '1' : '0';
 		$options .= $this->enable_ld_json_searchbox() ? '1' : '0';
 
 		return 'tsf_' . $revision . '_' . $options . '_ldjs_' . $cache_key;
@@ -636,15 +637,15 @@ class Cache extends Sitemaps {
 			$post_type = \get_post_type( $page_id );
 
 			switch ( $post_type ) :
-				case 'page' :
+				case 'page':
 					$the_id = 'page_' . $page_id;
 					break;
 
-				case 'post' :
+				case 'post':
 					$the_id = 'post_' . $page_id;
 					break;
 
-				case 'attachment' :
+				case 'attachment':
 					$the_id = 'attach_' . $page_id;
 					break;
 
@@ -711,25 +712,25 @@ class Cache extends Sitemaps {
 	public function generate_cache_key_by_type( $page_id, $taxonomy = '', $type = '' ) {
 
 		switch ( $type ) :
-			case 'author' :
+			case 'author':
 				return $this->add_cache_key_suffix( 'author_' . $page_id );
 				break;
-			case 'frontpage' :
+			case 'frontpage':
 				return $this->add_cache_key_suffix( $this->generate_front_page_cache_key() );
 				break;
-			case 'page' :
+			case 'page':
 				return $this->add_cache_key_suffix( 'page_' . $page_id );
 				break;
-			case 'post' :
+			case 'post':
 				return $this->add_cache_key_suffix( 'post_' . $page_id );
 				break;
-			case 'attachment' :
+			case 'attachment':
 				return $this->add_cache_key_suffix( 'attach_' . $page_id );
 				break;
-			case 'singular' :
+			case 'singular':
 				return $this->add_cache_key_suffix( 'singular_' . $page_id );
 				break;
-			case 'term' :
+			case 'term':
 				return $this->add_cache_key_suffix( $this->generate_taxonomical_cache_key( $page_id, $taxonomy ) );
 				break;
 			default:
@@ -757,7 +758,7 @@ class Cache extends Sitemaps {
 		static $locale = null;
 
 		if ( is_null( $locale ) )
-			$locale = strtolower( get_locale() );
+			$locale = strtolower( \get_locale() );
 
 		return $key . '_' . $GLOBALS['blog_id'] . '_' . $locale;
 	}

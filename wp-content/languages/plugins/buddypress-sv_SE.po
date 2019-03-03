@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - BuddyPress - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-09-18 09:44:52+0000\n"
+"PO-Revision-Date: 2018-08-02 19:51:57+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -778,14 +778,6 @@ msgstr "Accepterade vänskapsförfrågningar"
 #: bp-templates/bp-nouveau/includes/friends/ajax.php:154
 msgid "Friendship rejected."
 msgstr "Vänskap avvisad."
-
-#: bp-templates/bp-nouveau/includes/customizer.php:64
-msgid "Directory layouts"
-msgstr "Kataloglayouter"
-
-#: bp-templates/bp-nouveau/includes/customizer.php:58
-msgid "Loop layouts"
-msgstr "Looplayouter"
 
 #: bp-templates/bp-nouveau/includes/activity/functions.php:199
 #: bp-templates/bp-nouveau/includes/groups/functions.php:118

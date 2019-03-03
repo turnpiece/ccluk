@@ -17,3 +17,4 @@ require('./admin-uptime.js');
 require('./admin-cloudflare.js');
 require('./admin-advanced.js');
 require('./admin-app.js');
+require('./admin-settings.js');

@@ -4,7 +4,7 @@
  *
  * @package     Give
  * @subpackage  Classes/Blocks
- * @copyright   Copyright (c) 2016, WordImpress
+ * @copyright   Copyright (c) 2016, GiveWP
  * @license     https://opensource.org/licenses/gpl-license GNU Public License
  * @since       2.3.0
  */
@@ -77,7 +77,7 @@ class Give_Donor_Wall_Block {
 	 */
 	public function register_block() {
 		// Bailout.
-		if ( ! function_exists('register_block_type' ) ) {
+		if ( ! function_exists( 'register_block_type' ) ) {
 			return;
 		}
 
@@ -85,29 +85,73 @@ class Give_Donor_Wall_Block {
 		register_block_type( 'give/donor-wall', array(
 			'render_callback' => array( $this, 'render_block' ),
 			'attributes'      => array(
-				'columns' => array(
+				'donorsPerPage' => array(
 					'type'    => 'string',
-					'default' => '2',
+					'default' => '12',
 				),
-				'showAvatar' => array(
+				'formID'        => array(
+					'type'    => 'string',
+					'default' => '0',
+				),
+				'orderBy'       => array(
+					'type'    => 'string',
+					'default' => 'post_date',
+				),
+				'order'         => array(
+					'type'    => 'string',
+					'default' => 'DESC',
+				),
+				'paged'         => array(
+					'type'    => 'string',
+					'default' => '1',
+				),
+				'columns'       => array(
+					'type'    => 'string',
+					'default' => 'best-fit',
+				),
+				'showAvatar'    => array(
 					'type'    => 'boolean',
 					'default' => true,
 				),
-				'showName' => array(
+				'showName'      => array(
 					'type'    => 'boolean',
 					'default' => true,
 				),
-				'showTotal' => array(
+				'showTotal'     => array(
 					'type'    => 'boolean',
 					'default' => true,
 				),
-				'showDate' => array(
+				'showDate'      => array(
 					'type'    => 'boolean',
 					'default' => true,
 				),
-				'showComments' => array(
+				'showComments'  => array(
 					'type'    => 'boolean',
 					'default' => true,
+				),
+				'showAnonymous' => array(
+					'type'    => 'boolean',
+					'default' => true,
+				),
+				'onlyComments'  => array(
+					'type'    => 'boolean',
+					'default' => false,
+				),
+				'commentLength' => array(
+					'type'    => 'string',
+					'default' => '140',
+				),
+				'readMoreText'  => array(
+					'type'    => 'string',
+					'default' => __( 'Read more', 'give' ),
+				),
+				'loadMoreText'  => array(
+					'type'    => 'string',
+					'default' => __( 'Load more', 'give' ),
+				),
+				'avatarSize'    => array(
+					'type'    => 'string',
+					'default' => '60',
 				),
 			),
 		) );
@@ -123,15 +167,60 @@ class Give_Donor_Wall_Block {
 	 */
 	public function render_block( $attributes ) {
 		$parameters = array(
-			'columns'       => absint( $attributes['columns'] ),
-			'show_avatar'   => $attributes['showAvatar'],
-			'show_name'     => $attributes['showName'],
-			'show_total'    => $attributes['showTotal'],
-			'show_time'     => $attributes['showDate'],
-			'show_comments' => $attributes['showComments'],
+			'donors_per_page' => absint( $attributes['donorsPerPage'] ),
+			'form_id'         => absint( $attributes['formID'] ),
+			'orderby'         => $attributes['orderBy'],
+			'order'           => $attributes['order'],
+			'pages'           => absint( $attributes['paged'] ),
+			'columns'         => $attributes['columns'],
+			'show_avatar'     => $attributes['showAvatar'],
+			'show_name'       => $attributes['showName'],
+			'show_total'      => $attributes['showTotal'],
+			'show_time'       => $attributes['showDate'],
+			'show_comments'   => $attributes['showComments'],
+			'anonymous'       => $attributes['showAnonymous'],
+			'comment_length'  => absint( $attributes['commentLength'] ),
+			'only_comments'   => $attributes['onlyComments'],
+			'readmore_text'   => $attributes['readMoreText'],
+			'loadmore_text'   => $attributes['loadMoreText'],
+			'avatar_size'     => absint( $attributes['avatarSize'] ),
 		);
 
-		return Give_Donor_Wall::get_instance()->render_shortcode( $parameters );
+		$html = Give_Donor_Wall::get_instance()->render_shortcode( $parameters );
+		$html = ! empty( $html ) ? $html : $this->blank_slate();
+
+		return $html;
+	}
+
+	/**
+	 * Return formatted notice when shortcode return empty string
+	 *
+	 * @since 2.4.0
+	 *
+	 * @return string
+	 */
+	private function blank_slate() {
+		if ( ! defined( 'REST_REQUEST' ) ) {
+			return '';
+		}
+
+		ob_start();
+
+		$content = array(
+			'image_url' => GIVE_PLUGIN_URL . 'assets/dist/images/give-icon-full-circle.svg',
+			'image_alt' => __( 'Give Icon', 'give' ),
+			'heading'   => __( 'No donors found.', 'give' ),
+			'help'      => sprintf(
+			/* translators: 1: Opening anchor tag. 2: Closing anchor tag. */
+				__( 'Need help? Learn more about %1$sDonors%2$s.', 'give' ),
+				'<a href="http://docs.givewp.com/core-donors/">',
+				'</a>'
+			),
+		);
+
+		include_once GIVE_PLUGIN_DIR . 'includes/admin/views/blank-slate.php';
+
+		return ob_get_clean();
 	}
 }
 

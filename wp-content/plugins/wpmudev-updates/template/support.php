@@ -212,7 +212,7 @@ $time_format = get_option( 'time_format' );
 </div>
 <?php $this->load_template( 'element-last-refresh' ); ?>
 
-
+<?php $this->load_template('footer'); ?>
 
 <dialog id="access-info" title="<?php esc_attr_e( 'Support Access is secure', 'wpmudev' ); ?>" class="wpmudui wpmudui-modal">
 <p>

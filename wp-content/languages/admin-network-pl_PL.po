@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.9.x - Development - Administration - Network Admin package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-09-18 05:15:17+0000\n"
+"PO-Revision-Date: 2018-06-12 12:14:24+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -209,9 +209,9 @@ msgstr "Zarejestrowano"
 #: wp-admin/includes/class-wp-ms-users-list-table.php:141
 msgid "Super Admin <span class=\"count\">(%s)</span>"
 msgid_plural "Super Admins <span class=\"count\">(%s)</span>"
-msgstr[0] "Super administrator <span class=\"count\">(%s)</span>"
-msgstr[1] "Super administratorzy <span class=\"count\">(%s)</span>"
-msgstr[2] "Super administratorzy <span class=\"count\">(%s)</span>"
+msgstr[0] "Superadministratorzy <span class=\"count\">(%s)</span>"
+msgstr[1] "Superadministratorzy <span class=\"count\">(%s)</span>"
+msgstr[2] "Superadministratorzy <span class=\"count\">(%s)</span>"
 
 #: wp-admin/includes/class-wp-ms-users-list-table.php:114
 msgctxt "user"
@@ -315,7 +315,7 @@ msgstr "Nie znaleziono żadnych motywów."
 #: wp-admin/includes/class-wp-ms-sites-list-table.php:525
 msgctxt "verb; site"
 msgid "Archive"
-msgstr "Archiwizuj"
+msgstr "Zarchiwizuj"
 
 #: wp-admin/includes/class-wp-ms-sites-list-table.php:523
 msgid "Unarchive"
@@ -334,7 +334,7 @@ msgstr "%1$s &#8211; %2$s"
 #: wp-admin/network/site-info.php:163
 msgctxt "site"
 msgid "Registered"
-msgstr "Zarejestrowany"
+msgstr "Data rejestracji"
 
 #: wp-admin/includes/class-wp-ms-sites-list-table.php:227
 #: wp-admin/network/site-info.php:167
@@ -380,7 +380,7 @@ msgstr "Zarchiwizowana"
 
 #: wp-admin/network/site-users.php:346 wp-admin/network/user-new.php:117
 msgid "A password reset link will be sent to the user via email."
-msgstr "Link do zresetowania hasła zostanie wysłany do mailem."
+msgstr "Odnośnik resetujący hasło zostanie wysłany do użytkownika emailem."
 
 #. translators: 1: NOBLOGREDIRECT 2: wp-config.php
 #: wp-admin/network/settings.php:178
@@ -1265,7 +1265,7 @@ msgstr "Użytkownicy nie mogą zarejestrować witryn o takich nazwach. Oddziel n
 
 #: wp-admin/network/settings.php:195
 msgid "Send the network admin an email notification every time someone registers a site or user account"
-msgstr "Za każdym razem, gdy ktoś zarejestruje witrynę lub użytkownika wyślij mailem powiadomienie do administratora sieci."
+msgstr "Wyślij administratorowi sieci witryn emailowe powiadomienie za każdym razem, kiedy ktoś zarejestruje witrynę lub konto użytkownika"
 
 #: wp-admin/network/settings.php:325
 msgid "Site upload space"

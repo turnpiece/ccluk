@@ -726,22 +726,22 @@ if ( ! class_exists ( 'CTCC_Admin' ) ) {
 
 		public function settings_section_callback() {
 			echo '<p>' . __( 'Basic settings', 'uk-cookie-consent' ) . '</p>';
-			echo '<p><a href="http://iubenda.refr.cc/JKNZ55D" target="_blank">' . __( 'Create your own privacy policy here') . '</a></p>';
+			echo '<p><a href="https://termly.io/products/privacy-policy-generator/?utm_source=Wordpress%20Plugin&utm_medium=privacy%20policy%20link" target="_blank">' . __( 'Need a privacy policy? Create one for free with Termly!') . '</a></p>';
 		}
 
 		public function content_settings_section_callback() {
 			echo '<p>' .__( 'Update the content displayed to the user', 'uk-cookie-consent' ) . '</p>';
-			echo '<p><a href="http://iubenda.refr.cc/JKNZ55D" target="_blank">' . __( 'Create your own privacy policy here') . '</a></p>';
+			echo '<p><a href="https://termly.io/products/privacy-policy-generator/?utm_source=Wordpress%20Plugin&utm_medium=privacy%20policy%20link" target="_blank">' . __( 'Need a privacy policy? Create one for free with Termly!') . '</a></p>';
 		}
 
 		public function styles_settings_section_callback() {
 			echo '<p>' .__( 'Change the styles here if you like - but it\'s better in the Customizer', 'uk-cookie-consent' ) . '</p>';
-			echo '<p><a href="http://iubenda.refr.cc/JKNZ55D" target="_blank">' . __( 'Create your own privacy policy here') . '</a></p>';
+			echo '<p><a href="https://termly.io/products/privacy-policy-generator/?utm_source=Wordpress%20Plugin&utm_medium=privacy%20policy%20link" target="_blank">' . __( 'Need a privacy policy? Create one for free with Termly!') . '</a></p>';
 		}
 
 		public function pages_settings_section_callback() {
 			echo '<p>' . __( 'Use this section to set exclusion rules for pages and posts.', 'uk-cookie-consent' ) . '</p>';
-			echo '<p><a href="http://iubenda.refr.cc/JKNZ55D" target="_blank">' . __( 'Create your own privacy policy here') . '</a></p>';
+			echo '<p><a href="https://termly.io/products/privacy-policy-generator/?utm_source=Wordpress%20Plugin&utm_medium=privacy%20policy%20link" target="_blank">' . __( 'Need a privacy policy? Create one for free with Termly!') . '</a></p>';
 		}
 
 		public function options_page() {

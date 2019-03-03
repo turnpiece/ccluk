@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - bbPress - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-11-05 23:36:14+0000\n"
+"PO-Revision-Date: 2016-07-13 15:48:40+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -11,39 +11,9 @@ msgstr ""
 "Language: nb_NO\n"
 "Project-Id-Version: Plugins - bbPress - Stable (latest release)\n"
 
-#. translators: user role
-#: includes/common/locale.php:56
-msgctxt "User role"
-msgid "Blocked"
-msgstr "Blokkert"
-
-#. translators: user role
-#: includes/common/locale.php:50
-msgctxt "User role"
-msgid "Participant"
-msgstr "Deltaker"
-
-#. translators: user role
-#: includes/common/locale.php:47
-msgctxt "User role"
-msgid "Moderator"
-msgstr "Moderator"
-
-#. translators: user role
-#: includes/common/locale.php:53
-msgctxt "User role"
-msgid "Spectator"
-msgstr "Tilskuer"
-
-#. translators: user role
-#: includes/common/locale.php:44
-msgctxt "User role"
-msgid "Keymaster"
-msgstr "Nøkkelmester"
-
 #. Author of the plugin/theme
 msgid "The bbPress Community"
-msgstr "bbPress-samfunnet"
+msgstr "bbpress samfunnet"
 
 #. Plugin Name of the plugin/theme
 msgid "bbPress"
@@ -2878,6 +2848,26 @@ msgstr "Konverterer emnestikkord (%1$s - %2$s)"
 msgid "Converting replies (%1$s - %2$s)"
 msgstr "Konverterer svar (%1$s - %2$s)"
 
+#: includes/admin/converters/AEF.php:688
+#: includes/admin/converters/FluxBB.php:643
+#: includes/admin/converters/Invision.php:525
+#: includes/admin/converters/Kunena1.php:543
+#: includes/admin/converters/Kunena2.php:585
+#: includes/admin/converters/Kunena3.php:812
+#: includes/admin/converters/PHPFox3.php:649
+#: includes/admin/converters/PunBB.php:677
+#: includes/admin/converters/SMF.php:656
+#: includes/admin/converters/SimplePress5.php:537
+#: includes/admin/converters/Vanilla.php:535
+#: includes/admin/converters/XMB.php:705
+#: includes/admin/converters/XenForo.php:722
+#: includes/admin/converters/bbPress1.php:636
+#: includes/admin/converters/phpBB.php:816
+#: includes/admin/converters/vBulletin.php:652
+#: includes/admin/converters/vBulletin3.php:652
+msgid "Re: "
+msgstr "Re:"
+
 #: includes/admin/admin.php:199
 msgid "Forum Repair"
 msgstr "Reparer forum"
@@ -2902,26 +2892,6 @@ msgstr "bbPress holder rede på forholdene mellom forumer, emner, svar, emne sti
 #: includes/admin/tools.php:37
 msgid "Some of these tools create substantial database overhead. Avoid running more than 1 repair job at a time."
 msgstr "Noen av disse verktøyene krever mye av databasen. Du bør unngå å kjøre mer enn en jobb om gangen."
-
-#: includes/admin/converters/AEF.php:688
-#: includes/admin/converters/FluxBB.php:643
-#: includes/admin/converters/Invision.php:525
-#: includes/admin/converters/Kunena1.php:543
-#: includes/admin/converters/Kunena2.php:585
-#: includes/admin/converters/Kunena3.php:812
-#: includes/admin/converters/PHPFox3.php:649
-#: includes/admin/converters/PunBB.php:677
-#: includes/admin/converters/SMF.php:656
-#: includes/admin/converters/SimplePress5.php:537
-#: includes/admin/converters/Vanilla.php:535
-#: includes/admin/converters/XMB.php:705
-#: includes/admin/converters/XenForo.php:722
-#: includes/admin/converters/bbPress1.php:636
-#: includes/admin/converters/phpBB.php:816
-#: includes/admin/converters/vBulletin.php:652
-#: includes/admin/converters/vBulletin3.php:652
-msgid "Re: "
-msgstr "Re:"
 
 #: includes/admin/tools.php:43
 msgid "Relationships to Repair:"
@@ -3235,6 +3205,10 @@ msgstr "<strong>Tittel</strong> - Oppgi en tittel for forumet ditt. Etter du har
 msgid "<strong>Forum Editor</strong> - Enter the text for your forum. There are two modes of editing: Visual and HTML. Choose the mode by clicking on the appropriate tab. Visual mode gives you a WYSIWYG editor. Click the last icon in the row to get a second row of controls. The HTML mode allows you to enter raw HTML along with your forum text. You can insert media files by clicking the icons above the forum editor and following the directions. You can go to the distraction-free writing screen via the Fullscreen icon in Visual mode (second to last in the top row) or the Fullscreen button in HTML mode (last in the row). Once there, you can make buttons visible by hovering over the top area. Exit Fullscreen back to the regular forum editor."
 msgstr "<strong>Forum redigering</strong> - Her skriver du inn teksten til forumet. Det er to måter å skrive den inn på: Visuell og HTML-redigering. Du velger hvordan du vil bruke denne funksjonen ved å klikke på den respektive fanen. Visuell tekstredigering gir deg tilgang en WYSIWYG tekstredigerer. For å få enda flere redigeringsmuligheter, kan du klikke på den siste knappen i raden. I HTML-redigering kan du skrive inn HTML-koder direkte i teksten. Bilder, film og lyd setter du inn i innlegget ved å klikke på knappen for de respektive medietypene, og følger veiledningen på skjermen. Du kan gå til en ren fullskjerm-modus enten ved å klikke på knappen for fullskjerm-modus i visuell tekstredigering (den nest siste i øverste rad) eller den siste knappen i raden i HTML-redigering. I fullskjerm-modus finner du igjen knappene når du beveger musen over toppen av skjermbildet. Du kommer tilbake til normal tekstredigering ved å klikke på Avslutt fullskjerm."
 
+#: includes/admin/forums.php:195
+msgid "<strong>Publish</strong> - You can set the terms of publishing your forum in the Publish box. For Status, Visibility, and Publish (immediately), click on the Edit link to reveal more options. Visibility includes options for password-protecting a forum or making it stay at the top of your blog indefinitely (sticky). Publish (immediately) allows you to set a future or past date and time, so you can schedule a forum to be published in the future or backdate a forum."
+msgstr "<strong>Publisering</strong> - Du kan bestemme måten ditt forum skal publiseres på i Publiser-boksen. For status, synlighet og publiser (umiddelbart), klikk på rediger-lenken for å se flere valg. Synlighet inkluderer mulighet for passordbeskyttelse av forumet eller å feste innlegget øverst på bloggen (selv etter at du publiserer nye innlegg). Publiser (umiddelbart) tillater deg å sette en fremtidig eller historisk publiseringsdato og -tid, slik at du kan planlegge publisering av innlegg til fremtiden."
+
 #: includes/admin/forums.php:198
 msgid "<strong>Featured Image</strong> - This allows you to associate an image with your forum without inserting it. This is usually useful only if your theme makes use of the featured image as a forum thumbnail on the home page, a custom header, etc."
 msgstr "<strong>Fremhevet bilde</strong> - Dette tillater deg å velge ett bilde som kobles til forumet uten å sette det inn i teksten. Dette er nyttig kun hvis ditt tema bruker fremhevede bilder (\"featured images\" på engelsk) som miniatyrbilde på forsiden, egendefinert toppbilde, eller liknende."
@@ -3246,10 +3220,6 @@ msgstr "Velg egenskapene forumet ditt skal ha:"
 #: includes/admin/forums.php:207
 msgid "<strong>Type</strong> indicates if the forum is a category or forum. Categories generally contain other forums."
 msgstr "<strong>Type</strong> viser om forumet ditt er en kategori eller ett forum. Kategorier inneholder som oftest andre forum."
-
-#: includes/admin/forums.php:195
-msgid "<strong>Publish</strong> - You can set the terms of publishing your forum in the Publish box. For Status, Visibility, and Publish (immediately), click on the Edit link to reveal more options. Visibility includes options for password-protecting a forum or making it stay at the top of your blog indefinitely (sticky). Publish (immediately) allows you to set a future or past date and time, so you can schedule a forum to be published in the future or backdate a forum."
-msgstr "<strong>Publisering</strong> - Du kan bestemme måten ditt forum skal publiseres på i Publiser-boksen. For status, synlighet og publiser (umiddelbart), klikk på rediger-lenken for å se flere valg. Synlighet inkluderer mulighet for passordbeskyttelse av forumet eller å feste innlegget øverst på bloggen (selv etter at du publiserer nye innlegg). Publiser (umiddelbart) tillater deg å sette en fremtidig eller historisk publiseringsdato og -tid, slik at du kan planlegge publisering av innlegg til fremtiden."
 
 #: includes/admin/forums.php:209
 msgid "<strong>Visibility</strong> lets you pick the scope of each forum and what users are allowed to access it."
@@ -3300,6 +3270,10 @@ msgstr "<strong>Forhåndsvis</strong> viser hvordan svaret vil se ut etter at de
 msgid "When using Bulk Edit, you can change the metadata (categories, author, etc.) for all selected replies at once. To remove a reply from the grouping, just click the x next to its name in the Bulk Edit area that appears."
 msgstr "Når du bruker Massehandlinger, kan du endre metadata (kategorier, forfatter, etc) for alle de valgte svarene på en gang. For å fjerne et svar fra oversikten, klikker du x i boksen ved siden av tittelen i skjermbildet."
 
+#: includes/admin/replies.php:193
+msgid "The title field and the big reply editing Area are fixed in place, but you can reposition all the other boxes using drag and drop, and can minimize or expand them by clicking the title bar of each box. Use the Screen Options tab to unhide more boxes (Excerpt, Send Trackbacks, Custom Fields, Discussion, Slug, Author) or to choose a 1- or 2-column layout for this screen."
+msgstr "Tittel feltet og den store forum redigeringsboksen er fastlåst på skjermen men du kan flytte rundt på de andre boksene ved hjelp av dra og slipp prinsippet. Du kan også minimalisere og utvivde dem ved å klikke på tittel-feltet på hver boks. Bruk skjerm valg øverst for å vise flere bokser (utdrag, send tilbakespor, permalenke osv) eller for å velge 1 eller 2 kolonners visning."
+
 #: includes/admin/replies.php:203
 msgid "Title and Reply Editor"
 msgstr "Titel og svar redigerer"
@@ -3308,14 +3282,6 @@ msgstr "Titel og svar redigerer"
 msgid "<strong>Title</strong> - Enter a title for your reply. After you enter a title, you&#8217;ll see the permalink below, which you can edit."
 msgstr "<strong>Tittel</strong> - Oppgi en tittel for forumet ditt. Etter du har gjort det ser du en permalenke under, som du kan redigere."
 
-#: includes/admin/replies.php:212
-msgid "<strong>Featured Image</strong> - This allows you to associate an image with your reply without inserting it. This is usually useful only if your theme makes use of the featured image as a reply thumbnail on the home page, a custom header, etc."
-msgstr "<strong>Fremhevet bilde </strong>- Dette tillater deg å velge ett bilde som kobles til innlegget uten å sette det inn i teksten. Dette er nyttig kun hvis ditt tema bruker fremhevede bilder (\"featured images\" på engelsk) som miniatyrbilde på forsiden, egendefinert toppbilde, eller liknende."
-
-#: includes/admin/replies.php:193
-msgid "The title field and the big reply editing Area are fixed in place, but you can reposition all the other boxes using drag and drop, and can minimize or expand them by clicking the title bar of each box. Use the Screen Options tab to unhide more boxes (Excerpt, Send Trackbacks, Custom Fields, Discussion, Slug, Author) or to choose a 1- or 2-column layout for this screen."
-msgstr "Tittel feltet og den store forum redigeringsboksen er fastlåst på skjermen men du kan flytte rundt på de andre boksene ved hjelp av dra og slipp prinsippet. Du kan også minimalisere og utvivde dem ved å klikke på tittel-feltet på hver boks. Bruk skjerm valg øverst for å vise flere bokser (utdrag, send tilbakespor, permalenke osv) eller for å velge 1 eller 2 kolonners visning."
-
 #: includes/admin/replies.php:206
 msgid "<strong>Reply Editor</strong> - Enter the text for your reply. There are two modes of editing: Visual and HTML. Choose the mode by clicking on the appropriate tab. Visual mode gives you a WYSIWYG editor. Click the last icon in the row to get a second row of controls. The HTML mode allows you to enter raw HTML along with your reply text. You can insert media files by clicking the icons above the reply editor and following the directions. You can go to the distraction-free writing screen via the Fullscreen icon in Visual mode (second to last in the top row) or the Fullscreen button in HTML mode (last in the row). Once there, you can make buttons visible by hovering over the top area. Exit Fullscreen back to the regular reply editor."
 msgstr "<strong>Svar redigerer</strong> - Her skriver du inn teksten til svaret. Det er to måter å skrive den inn på: Visuell og HTML-redigering. Du velger hvordan du vil bruke denne funksjonen ved å klikke på den respektive fanen. Visuell tekstredigering gir deg tilgang en WYSIWYG tekstredigerer. For å få enda flere redigeringsmuligheter, kan du klikke på den siste knappen i raden. I HTML-redigering kan du skrive inn HTML-koder direkte i teksten. Bilder, film og lyd setter du inn i innlegget ved å klikke på knappen for de respektive medietypene, og følger veiledningen på skjermen. Du kan gå til en ren fullskjerm-modus enten ved å klikke på knappen for fullskjerm-modus i visuell tekstredigering (den nest siste i øverste rad) eller den siste knappen i raden i HTML-redigering. I fullskjerm-modus finner du igjen knappene når du beveger musen over toppen av skjermbildet. Du kommer tilbake til normal tekstredigering ved å klikke på Avslutt fullskjerm."
@@ -3323,6 +3289,10 @@ msgstr "<strong>Svar redigerer</strong> - Her skriver du inn teksten til svaret.
 #: includes/admin/replies.php:209
 msgid "<strong>Publish</strong> - You can set the terms of publishing your reply in the Publish box. For Status, Visibility, and Publish (immediately), click on the Edit link to reveal more options. Visibility includes options for password-protecting a reply or making it stay at the top of your blog indefinitely (sticky). Publish (immediately) allows you to set a future or past date and time, so you can schedule a reply to be published in the future or backdate a reply."
 msgstr "<strong>Publiser</strong> - Du kan bestemme måten ditt svaret skal publiseres på i Publiser-boksen. For status, synlighet og publiser (umiddelbart), klikk på rediger-lenken for å se flere valg. Synlighet inkluderer mulighet for passordbeskyttelse av svaret eller å feste innlegget øverst i forumet. Publiser (umiddelbart) tillater deg å sette en fremtidig eller historisk publiseringsdato og -tid, slik at du kan planlegge publisering av svaret til fremtiden."
+
+#: includes/admin/replies.php:212
+msgid "<strong>Featured Image</strong> - This allows you to associate an image with your reply without inserting it. This is usually useful only if your theme makes use of the featured image as a reply thumbnail on the home page, a custom header, etc."
+msgstr "<strong>Fremhevet bilde </strong>- Dette tillater deg å velge ett bilde som kobles til innlegget uten å sette det inn i teksten. Dette er nyttig kun hvis ditt tema bruker fremhevede bilder (\"featured images\" på engelsk) som miniatyrbilde på forsiden, egendefinert toppbilde, eller liknende."
 
 #: includes/admin/replies.php:219
 msgid "Select the attributes that your reply should have:"

@@ -4,7 +4,7 @@ $backups = WPMUDEVSnapshot::instance()->config_data['items'];
 
 $backup_status = array(
 	'title' => __( 'No Backups', SNAPSHOT_I18N_DOMAIN ),
-	'content' => __( "You haven't backed up your site yet. Create your first backup now<br>– it'll only take a minute.", SNAPSHOT_I18N_DOMAIN ),
+	'content' => __( "You haven't backed up your site yet. Create your first backup now<br>– it'll only take a minute, but could take a couple of hours for larger sites.", SNAPSHOT_I18N_DOMAIN ),
 	'date' => __( 'Never', SNAPSHOT_I18N_DOMAIN ),
 	'size' => __( '-', SNAPSHOT_I18N_DOMAIN ),
 );
@@ -96,12 +96,12 @@ $latest_snapshot = Snapshot_Helper_Utility::latest_backup( $snapshot );
 
 						<?php if ( ! $has_snapshot_key ) { ?>
 							<td>
-								<a id="view-snapshot-key" class="button button-small button-blue"><?php esc_html_e( 'Activate', SNAPSHOT_I18N_DOMAIN ); ?></a>
+								<a id="view-snapshot-key" class="button button-small button-blue <?php echo ( ! $aws_sdk_compatible ) ? 'disabled': ''; ?>"><?php esc_html_e( 'Activate', SNAPSHOT_I18N_DOMAIN ); ?></a>
 							</td>
 						<?php } elseif ( $model->get_config( 'disable_cron', false ) ) { ?>
 
 							<td>
-								<a id="wps-managed-backups-configure" class="button button-outline button-small button-gray"
+								<a id="wps-managed-backups-configure" class="button button-outline button-small button-gray <?php echo ( ! $aws_sdk_compatible ) ? 'disabled': ''; ?>"
 								   href="<?php echo esc_url( WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url( 'snapshots-newui-managed-backups' ) . '#wps-backups-settings-schedule' ); ?>">
 									<?php esc_html_e( 'Enable', SNAPSHOT_I18N_DOMAIN ); ?>
 								</a>

@@ -15,6 +15,7 @@ jQuery(function initModules() {
 		,rows  // used for plugins/themes; each row is a project-category
 		,lastFilter  // used for the filter text field on plugins/themes page.
 		,filterProgress // same as lastFilter.
+		,wpMediaFrame // used for wpMedia modal reference.
 	;
 
 
@@ -156,7 +157,11 @@ jQuery(function initModules() {
 	function initSettings() {
 		var userSearch = jQuery('#user-search'),
 			btnAdd = jQuery('#user-add'),
-			autoUpdate = jQuery('#chk_autoupdate');
+			autoUpdate = jQuery('#chk_autoupdate'),
+		    mediaLibBtn = jQuery('.wpmud-media-library'),
+		    clearImageBtn = jQuery('.wpmud-clear-image-input'),
+		    body = jQuery('body')
+		;
 
 		userSearch.on('search', searchUsers);
 		userSearch.on('item:select', function() { formState(true); });
@@ -171,6 +176,67 @@ jQuery(function initModules() {
 				btnAdd.prop('disabled', true).addClass('disabled');
 			}
 		}
+
+		mediaLibBtn.on('click', function (event) {
+			event.preventDefault();
+
+			// If the media frame already exists, reopen it.
+			if (wpMediaFrame) {
+				wpMediaFrame.open();
+				return false;
+			}
+
+			// Create a new media frame
+			wpMediaFrame = wp.media({
+				title: mediaLibBtn.data('frame-title'),
+				button: {
+					text: mediaLibBtn.data('button-text')
+				},
+				multiple: false
+			});
+
+			// When an image is selected in the media frame...
+			wpMediaFrame.on('select', function () {
+
+				// Get media attachment details from the frame state
+				var attachment = wpMediaFrame.state().get('selection').first().toJSON(),
+				    input      = $('#' + mediaLibBtn.data('input-id')),
+				    preview    = $('#' + mediaLibBtn.data('preview-id'))
+				;
+
+				// Send the attachment URL to our custom image input field.
+				preview.css('background-image', 'url(' + attachment.url + ')');
+				// Send the attachment url to our input
+				input.val(attachment.url);
+			});
+
+			wpMediaFrame.on('open', function () {
+				if (body.hasClass('wpmud')) {
+					body.removeClass('wpmud')
+				}
+			});
+
+			wpMediaFrame.on('close', function () {
+				if (!body.hasClass('wpmud')) {
+					body.addClass('wpmud')
+				}
+			});
+
+			// Finally, open the modal on click
+			wpMediaFrame.open();
+		});
+
+		clearImageBtn.on('click', function (event) {
+			event.preventDefault();
+			var input   = $('#' + mediaLibBtn.data('input-id')),
+			    preview = $('#' + mediaLibBtn.data('preview-id'))
+			;
+			// Send the attachment URL to our custom image input field.
+			preview.css('background-image', 'url()');
+			// Send the attachment url to our input
+			input.val('');
+		});
+
 	}
 
 	// ------------------------------------------------------------------------

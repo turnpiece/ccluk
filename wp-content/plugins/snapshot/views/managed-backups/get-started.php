@@ -37,7 +37,7 @@
 					<?php elseif ( empty( $is_dashboard_active ) && ! empty( $is_dashboard_installed ) ) : ?>
 
 						<p>
-							<a href="<?php echo esc_url( network_admin_url( 'plugins.php' ) ); ?>" class="button button-blue">
+							<a href="<?php echo esc_url( $model->get_activate_url() ); ?>" class="button button-blue">
 								<?php esc_html_e( 'Activate The WPMU DEV Dashboard', SNAPSHOT_I18N_DOMAIN ); ?>
 							</a>
 						</p>

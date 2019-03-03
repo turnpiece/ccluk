@@ -4,7 +4,7 @@
  *
  * @package     Give
  * @subpackage  Classes/Give_Settings_General
- * @copyright   Copyright (c) 2016, WordImpress
+ * @copyright   Copyright (c) 2016, GiveWP
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since       1.8
  */
@@ -271,7 +271,8 @@ if ( ! class_exists( 'Give_Settings_General' ) ) :
 								'numberposts' => 30,
 							) ),
 							'attributes' => array(
-								'data-search-type' => 'pages'
+								'data-search-type' => 'pages',
+								'data-placeholder' => esc_html__('Choose a page', 'give'),
 							)
 						),
 						array(
@@ -285,7 +286,8 @@ if ( ! class_exists( 'Give_Settings_General' ) ) :
 								'numberposts' => 30,
 							) ),
 							'attributes' => array(
-								'data-search-type' => 'pages'
+								'data-search-type' => 'pages',
+								'data-placeholder' => esc_html__('Choose a page', 'give'),
 							)
 						),
 						array(
@@ -300,7 +302,8 @@ if ( ! class_exists( 'Give_Settings_General' ) ) :
 								'numberposts' => 30,
 							) ),
 							'attributes' => array(
-								'data-search-type' => 'pages'
+								'data-search-type' => 'pages',
+								'data-placeholder' => esc_html__('Choose a page', 'give'),
 							)
 						),
 						array(

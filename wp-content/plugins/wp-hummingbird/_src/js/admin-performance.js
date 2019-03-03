@@ -39,79 +39,22 @@ import Fetcher from './utils/fetcher';
                 }
             }
 
-            // Schedule show/hide day of week
-            $('select[name="email-frequency"]').change(function () {
-                if ( '1' === $(this).val() ) {
-                    $(this).closest('.schedule-box').find('div.days-container').hide();
-                } else {
-                    $(this).closest('.schedule-box').find('div.days-container').show();
-                }
-            }).change();
-
-            // Remove recipient
-            body.on('click', '.wphb-remove-recipient', function (e) {
-                e.preventDefault();
-                $(this).closest('.recipient').remove();
-                $('.scan-settings').find("input[id='scan_recipient'][value=" + $(this).attr('data-id') + "]").remove();
-            });
-
-            // Add recipient
-            $('#add-receipt').click(function () {
-                const email = $("#wphb-username-search").val();
-                const name = $("#wphb-first-name").val();
-                Fetcher.performance.addRecipient( email, name )
-                    .then( ( response ) => {
-                        const user_row = $('<div class="recipient"/>');
-
-                        const img = $('<img/>').attr({
-                            'src': response.avatar,
-                            'width': '30'
-                        });
-                        const name = $('<span/>').html(response.name);
-
-                        user_row.append('<span class="name"/>');
-                        user_row.find('.name').append( img, name);
-
-
-                        user_row.append($('<span class="email"/>').html(email));
-                        user_row.append($('<a/>').attr({
-                            'data-id': response.user_id,
-                            'class': 'remove float-r wphb-remove-recipient',
-                            'href': '#',
-                            'alt': self.strings.removeButtonText
-                        }).html('<i class="dev-icon dev-icon-cross"></i>'));
-
-                        $('<input>').attr({
-                            type: 'hidden',
-                            id: 'scan_recipient',
-                            name: 'email-recipients[]',
-                            value: JSON.stringify( { email: response.email, name: response.name } )
-                        }).appendTo(user_row);
-
-                        $('.receipt .recipients').append(user_row);
-                        $("#wphb-username-search").val('');
-                        $("#wphb-first-name").val('');
-                    })
-                    .catch( ( error ) => {
-                        alert( error.message );
-                    } );
-                return false;
-            });
-
             // Save report settings
             body.on('submit', '.scan-frm', function (e) {
                 e.preventDefault();
-                const form_data = $(this).serialize();
                 let that = $(this);
 
                 that.find('.button').attr('disabled', 'disabled');
 
-                Fetcher.performance.saveReportsSettings( form_data )
-                    .then( () => {
-                        that.find('.button').removeAttr('disabled');
-						WPHB_Admin.notices.show('wphb-notice-performance-report-settings-updated', true);
+                Fetcher.common.saveReportsSettings( self.module, $(this).serialize() )
+                    .then( ( response ) => {
+						if ( 'undefined' !== typeof response && response.success ) {
+							that.find('.button').removeAttr('disabled');
+							WPHB_Admin.notices.show( 'wphb-ajax-update-notice', true );
+						} else {
+							WPHB_Admin.notices.show( 'wphb-ajax-update-notice', true, 'error', wphb.strings.errorSettingsUpdate  );
+						}
                     });
-                return false;
             });
 
             // Save performance test settings

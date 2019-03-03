@@ -119,6 +119,10 @@ class WPMUDEV_Dashboard_Ui {
 			include_once dirname( __FILE__ ) . '/includes/custom-module.php';
 		}
 
+		// Analytics
+		add_action( 'wp_dashboard_setup', array( $this, 'analytics_widget_setup' ) );
+		add_action( 'wp_network_dashboard_setup', array( $this, 'analytics_widget_setup' ) );
+
 		/**
 		 * Run custom initialization code for the UI module.
 		 *
@@ -516,6 +520,85 @@ class WPMUDEV_Dashboard_Ui {
 		echo '<style>#toplevel_page_wpmudev .wdev-access-granted { font-size: 14px; line-height: 13px; height: 13px; float: right; color: #1ABC9C; }</style>';
 	}
 
+	/**
+	 * Setup the analytics dashboard widgets.
+	 *
+	 * @since    4.6
+	 * @internal Action hook
+	 * @uses $wp_locale
+	 */
+	public function analytics_widget_setup() {
+		$analytics_enabled = WPMUDEV_Dashboard::$site->get_option( 'analytics_enabled' );
+		if ( is_wpmudev_member() && $analytics_enabled ) {
+			global $wp_locale;
+			if ( is_blog_admin() && WPMUDEV_Dashboard::$site->user_can_analytics() ) {
+				wp_add_dashboard_widget( 'wdpun_analytics', __( 'Analytics', 'wpmudev' ), array( $this, 'render_analytics_widget' ) );
+			}
+
+			if ( is_network_admin() ) {
+				wp_add_dashboard_widget( 'wdpun_analytics_network', __( 'Network Analytics', 'wpmudev' ), array( $this, 'render_analytics_widget' ) );
+			}
+
+			// Enqueue styles =====================================================.
+			/*
+			 * Beta-testers will not have cached scripts!
+			 * Just in case we have to update the plugin prior to launch.
+			 */
+			if ( defined( 'WPMUDEV_BETATEST' ) && WPMUDEV_BETATEST ) {
+				$script_version = time();
+			} else {
+				$script_version = WPMUDEV_Dashboard::$version;
+			}
+			wp_enqueue_style(
+				'wpmudev-widget-analytics-css',
+				WPMUDEV_Dashboard::$site->plugin_url . 'css/dashboard-widget.min.css',
+				array(),
+				$script_version
+			);
+			// Register scripts ===================================================.
+			wp_enqueue_script( 'wpmudev-moment-js', WPMUDEV_Dashboard::$site->plugin_url . 'js/moment.min.js', array(), '2.22.2', true );
+			wp_enqueue_script( 'chart-js', WPMUDEV_Dashboard::$site->plugin_url . 'js/chart.min.js', array('wpmudev-moment-js'), '2.7.2', true );
+			wp_enqueue_script( 'jquery-ui-widget' );
+			wp_enqueue_script( 'jquery-ui-autocomplete' );
+			wp_enqueue_script(
+				'wpmudev-dashboard-widget',
+				WPMUDEV_Dashboard::$site->plugin_url . 'js/dashboard-widget.js',
+				array( 'jquery', 'chart-js', 'jquery-ui-widget', 'jquery-ui-autocomplete'),
+				$script_version,
+				true
+			);
+
+			// make chart data available to js
+			$days_ago = ( isset( $_REQUEST['analytics_range'] ) && in_array( $_REQUEST['analytics_range'], array( 1, 7, 30, 90 ) ) ) ? absint( $_REQUEST['analytics_range'] ) : 7;
+			if ( is_network_admin() || ! is_multisite() ) {
+				$data = WPMUDEV_Dashboard::$api->analytics_stats_overall( $days_ago );
+			} else {
+				$data = WPMUDEV_Dashboard::$api->analytics_stats_overall( $days_ago, get_current_blog_id() );
+			}
+
+			$user_locale = get_locale();
+
+			// get_user_locale only available since WP 4.7.0
+			if ( function_exists( 'get_user_locale' ) ) {
+				$user_locale = get_user_locale();
+			}
+
+			wp_localize_script(
+				'wpmudev-dashboard-widget',
+				'wdp_analytics_ajax',
+				array(
+					'nonce'           => wp_create_nonce( 'analytics' ),
+					'overall_data'    => isset( $data['overall'] ) ? $data['overall'] : array(),
+					'current_data'    => isset( $data['overall'] ) ? $data['overall'] : array(),
+					'autocomplete'    => isset( $data['autocomplete'] ) ? $data['autocomplete'] : array(),
+					'locale_settings' => array(
+						'locale'      => $user_locale,
+						'monthsShort' => array_values( $wp_locale->month_abbrev ),
+						'weekdays'    => array_values( $wp_locale->weekday ),
+					),
+				) );
+		}
+	}
 
 	/*
 	 * *********************************************************************** *
@@ -1175,6 +1258,9 @@ class WPMUDEV_Dashboard_Ui {
 			$this->load_template( 'no_access' );
 		}
 
+		// First login redirect is done.
+		WPMUDEV_Dashboard::$site->set_option( 'redirected_v4', 1 );
+
 		if ( ! empty( $_GET['clear_key'] ) ) {
 			// User requested to log-out.
 			WPMUDEV_Dashboard::$site->logout();
@@ -1198,9 +1284,6 @@ class WPMUDEV_Dashboard_Ui {
 				$key_valid = true;
 				WPMUDEV_Dashboard::$site->set_option( 'limit_to_user', $current_user->ID );
 				WPMUDEV_Dashboard::$api->refresh_profile();
-
-				// User is logged in: First redirect is done.
-				WPMUDEV_Dashboard::$site->set_option( 'redirected_v4', 1 );
 
 				// Login worked, so remove the API key again from the URL so it
 				// does not get stored in the browser history.
@@ -1393,6 +1476,7 @@ class WPMUDEV_Dashboard_Ui {
 	 * Outputs the Manage/Settings admin page
 	 *
 	 * @since    1.0.0
+	 * @since    4.5.3 Add `wp_enqueue_media` and whitelabel settings var for template
 	 * @internal Menu callback
 	 */
 	public function render_settings() {
@@ -1401,13 +1485,22 @@ class WPMUDEV_Dashboard_Ui {
 			$this->load_template( 'no_access' );
 		}
 
-		$data             = WPMUDEV_Dashboard::$api->get_projects_data();
-		$member           = WPMUDEV_Dashboard::$api->get_profile();
-		$urls             = $this->page_urls;
-		$membership_label = __( 'Free', 'wpmudev' );
-		$allowed_users    = WPMUDEV_Dashboard::$site->get_allowed_users();
-		$auto_update      = WPMUDEV_Dashboard::$site->get_option( 'autoupdate_dashboard' );
-		$membership_type  = WPMUDEV_Dashboard::$api->get_membership_type( $single_id );
+		// support media library usage
+		if ( function_exists( 'wp_enqueue_media' ) ) {
+			wp_enqueue_media();
+		}
+
+		$data                = WPMUDEV_Dashboard::$api->get_projects_data();
+		$member              = WPMUDEV_Dashboard::$api->get_profile();
+		$urls                = $this->page_urls;
+		$membership_label    = __( 'Free', 'wpmudev' );
+		$allowed_users       = WPMUDEV_Dashboard::$site->get_allowed_users();
+		$auto_update         = WPMUDEV_Dashboard::$site->get_option( 'autoupdate_dashboard' );
+		$membership_type     = WPMUDEV_Dashboard::$api->get_membership_type( $single_id );
+		$whitelabel_settings = WPMUDEV_Dashboard::$site->get_whitelabel_settings();
+		$analytics_enabled   = WPMUDEV_Dashboard::$site->get_option( 'analytics_enabled' );
+		$analytics_role      = WPMUDEV_Dashboard::$site->get_option( 'analytics_role' );
+		$analytics_role      = empty( $analytics_role ) ? 'administrator' : $analytics_role;
 
 		/**
 		 * Custom hook to display own notifications inside Dashboard.
@@ -1418,7 +1511,7 @@ class WPMUDEV_Dashboard_Ui {
 		echo '<div id="container" class="wrap wrap-settings wpmudui-content">';
 		$this->load_template(
 			'settings',
-			compact( 'data', 'member', 'urls', 'membership_type', 'allowed_users', 'auto_update', 'single_id' )
+			compact( 'data', 'member', 'urls', 'membership_type', 'allowed_users', 'auto_update', 'single_id', 'whitelabel_settings', 'analytics_enabled', 'analytics_role' )
 		);
 		echo '</div></div>';
 	}
@@ -1590,6 +1683,22 @@ class WPMUDEV_Dashboard_Ui {
 
 			wp_send_json_success( $data );
 		}
+	}
+
+	/**
+	 * Outputs the Analytics dashboard widget
+	 *
+	 * @since    4.6
+	 * @internal Menu callback
+	 */
+	public function render_analytics_widget() {
+
+		$analytics_data = WPMUDEV_Dashboard::$api->get_membership_type( $single_id );
+
+		$this->load_template(
+			'widget-analytics',
+			compact( '$analytics_data' )
+		);
 	}
 
 	/**

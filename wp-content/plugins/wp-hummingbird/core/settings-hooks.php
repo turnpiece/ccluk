@@ -15,7 +15,7 @@ add_filter( 'wphb_minify_resource', 'wphb_filter_resource_minify', 10, 3 );
 function wphb_filter_resource_minify( $value, $handle, $type ) {
 	$options = WP_Hummingbird_Settings::get_settings( 'minify' );
 	$minify  = $options['minify'][ $type ];
-	if ( ! in_array( $handle, $minify ) ) {
+	if ( ! is_array( $minify ) || ! in_array( $handle, $minify, true ) ) {
 		return $value;
 	}
 

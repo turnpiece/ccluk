@@ -6,7 +6,7 @@
  *
  * @package     Give
  * @subpackage  Classes/Give_MetaBox_Form_Data
- * @copyright   Copyright (c) 2016, WordImpress
+ * @copyright   Copyright (c) 2016, GiveWP
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since       1.8
  */
@@ -1012,6 +1012,9 @@ class Give_MetaBox_Form_Data {
 				}// End if().
 			}// End foreach().
 		}// End if().
+
+		// Update the goal progress for donation form.
+		give_update_goal_progress( $post_id );
 
 		// Fire action after saving form meta.
 		do_action( 'give_post_process_give_forms_meta', $post_id, $post );

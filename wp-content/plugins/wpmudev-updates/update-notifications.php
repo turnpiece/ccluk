@@ -4,7 +4,7 @@
  * Plugin URI:  https://premium.wpmudev.org/project/wpmu-dev-dashboard/
  * Description: Brings the powers of WPMU DEV directly to you. It will revolutionize how you use WordPress. Activate now!
  * Author:      WPMU DEV
- * Version:     4.5.2
+ * Version:     4.6
  * Author URI:  https://premium.wpmudev.org/
  * Text Domain: wpmudev
  * Domain Path: includes/languages/
@@ -44,7 +44,7 @@ class WPMUDEV_Dashboard {
 	 *
 	 * @var string (Version number)
 	 */
-	static public $version = '4.5.2';
+	static public $version = '4.6';
 
 	/**
 	 * Holds the API module.
@@ -136,10 +136,10 @@ class WPMUDEV_Dashboard {
 		require_once 'includes/class-wpmudev-dashboard-upgrader.php';
 		require_once 'includes/class-wpmudev-dashboard-notice.php';
 
-		self::$site = new WPMUDEV_Dashboard_Site( __FILE__ );
-		self::$api = new WPMUDEV_Dashboard_Api();
-		self::$remote = new WPMUDEV_Dashboard_Remote();
-		self::$notice = new WPMUDEV_Dashboard_Message();
+		self::$site     = new WPMUDEV_Dashboard_Site( __FILE__ );
+		self::$api      = new WPMUDEV_Dashboard_Api();
+		self::$remote   = new WPMUDEV_Dashboard_Remote();
+		self::$notice   = new WPMUDEV_Dashboard_Message();
 		self::$upgrader = new WPMUDEV_Dashboard_Upgrader();
 
 		/*
@@ -157,7 +157,7 @@ class WPMUDEV_Dashboard {
 		register_deactivation_hook( __FILE__, array( $this, 'deactivate_plugin' ) );
 
 		// Register the plugin uninstall hook.
-		register_uninstall_hook( __FILE__, array( 'WPMUDEV_Dashboard', 'uninstall_plugin' ) );	 	 	 	 	 		    	
+		register_uninstall_hook( __FILE__, array( 'WPMUDEV_Dashboard', 'uninstall_plugin' ) );
 
 		/**
 		 * Custom code can be executed after Dashboard is initialized with the

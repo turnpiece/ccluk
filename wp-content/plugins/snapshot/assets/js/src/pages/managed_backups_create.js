@@ -27,13 +27,6 @@
 			}
 		}).change();
 
-		jQuery('#wps-build-error-again').on('click', function (e) {
-			e.preventDefault();
-			jQuery('#wps-build-error').addClass('hidden');
-			jQuery('#wps-build-progress').removeClass('hidden');
-			jQuery('form#managed-backup-update').trigger('submit');
-		});
-
 		jQuery('#checkbox-run-backup-now').on('change', function (e) {
 			var run_now = $(this).is(':checked');
 			var button = $('#managed-backup-update button[type=submit]');
@@ -80,13 +73,11 @@
 			snapshot_ajax_hdl_xhr !== null && snapshot_ajax_hdl_xhr.abort();
 			snapshot_ajax_user_aborted = true;
 
-			var prm = $.post(ajaxurl, {
-				action: "snapshot-full_backup-finish"
-			}, noop, 'json');
-
-			jQuery('#wps-build-error').removeClass('hidden').find('.wps-auth-message p').html("Backup aborted");
+			jQuery('#wps-build-error').addClass('hidden');
 			jQuery('.wpmud-box-title .wps-title-result').removeClass("hidden");
 			jQuery('#wps-build-progress').addClass('hidden');
+			jQuery('#wps-build-success').addClass('hidden');
+			jQuery('#wps-build-abort-upload').removeClass('hidden');
 
 			window.Sfb.ManualBackup.current = window.Sfb.ManualBackup.total = 0;
 			window.Sfb.ManualBackup.update_progress();
@@ -94,15 +85,11 @@
 			return false;
 		}
 
-		jQuery("#wps-build-progress-cancel").on('click', function (e) {
+		jQuery("#wps-build-progress-cancel")
+			.off('click.wps-build-progress-cancel')
+			.on('click.wps-build-progress-cancel', function (e) {
 			e.preventDefault();
 			snapshot_button_abort_proc();
-		});
-
-		jQuery("#wps-build-error-back").on('click', function (e) {
-			e.preventDefault();
-			jQuery('#container.wps-page-builder').addClass('hidden');
-			jQuery('#managed-backup-update').removeClass('hidden');
 		});
 
 		var Sfb = window.Sfb || {
@@ -254,6 +241,32 @@
 			element_selector: '.wp-admin .snapshot-wrap button[name="backup"]',
 
 			/**
+			 * Delete partially uploaded file from remote server when backup is aborted during upload phase
+			 * @param nonce
+			 * @returns {*}
+			 */
+			abort_upload: function (nonce) {
+				return $.post(ajaxurl, {
+					security: nonce,
+					action: 'snapshot-full_backup-abort-upload'
+				}, function (data) {
+					Sfb.ManualBackup.error_handler({responseText: (data || {}).error});
+				});
+			},
+
+			/**
+			 * Clean up local files and session data when backup is aborted during preparation phase
+			 * @param nonce
+			 * @returns {*}
+			 */
+			abort_processing: function (nonce) {
+				return $.post(ajaxurl, {
+					action: "snapshot-full_backup-abort-processing",
+					security: nonce
+				}, noop, 'json');
+			},
+
+			/**
 			 * Current progress step
 			 *
 			 * @type {Number}
@@ -299,6 +312,7 @@
 				jQuery("#wps-build-error").removeClass("hidden");
 				jQuery(".wpmud-box-title .wps-title-result").removeClass("hidden");
 				jQuery("#wps-build-progress").addClass("hidden");
+				jQuery('#wps-build-abort-upload').addClass('hidden');
 
 				return !!Sfb.ManualBackup.initialize_listeners();
 			},
@@ -317,10 +331,8 @@
 						percentage = (current * 100) / this.total
 					;
 					if (percentage >= 100) percentage = 100;
-					jQuery("#wps-build-progress .wps-total-status .wps-loading-number").html(parseInt(percentage, 10) + '%');
-					jQuery("#wps-build-progress .wps-total-status .wps-loading-bar span").width(parseInt(percentage, 10) + '%');
-
-
+					jQuery(".wps-total-status .wps-loading-number").html(parseInt(percentage, 10) + '%');
+					jQuery(".wps-total-status .wps-loading-bar span").width(parseInt(percentage, 10) + '%');
 				}
 				return true;
 			},
@@ -352,10 +364,16 @@
 					security: nonce
 				}, noop, 'json');
 				prm.then(function (data) {
-					if (!data.status) return Sfb.ManualBackup.finish_backup( nonce );
-					jQuery("#wps-build-error").addClass("hidden");
-					jQuery("#wps-build-progress").addClass("hidden");
-					jQuery("#wps-build-success").removeClass("hidden");
+					if (data.status) {
+						jQuery("#wps-build-error").addClass("hidden");
+						jQuery("#wps-build-progress").addClass("hidden");
+						jQuery("#wps-build-success").removeClass("hidden");
+						jQuery('#wps-build-abort-upload').addClass('hidden');
+					} else if (snapshot_ajax_user_aborted) {
+						return Sfb.ManualBackup.abort_upload(nonce);
+					} else {
+						return Sfb.ManualBackup.finish_backup(nonce);
+					}
 					//Sfb.ManualBackup.run();
 					//window.location.reload(); // reload when we're done
 				}).fail(Sfb.ManualBackup.error_handler);
@@ -382,8 +400,15 @@
 					} catch (e) {
 						return error_handler();
 					}
-					if (!is_done) Sfb.ManualBackup.process_files( nonce );
-					else Sfb.ManualBackup.finish_backup( nonce );
+					if (snapshot_ajax_user_aborted) {
+						Sfb.ManualBackup.abort_processing(nonce).then(function () {
+							Sfb.ManualBackup.error_handler({responseText: 'Backup aborted'});
+						});
+					} else if (is_done) {
+						Sfb.ManualBackup.finish_backup(nonce);
+					} else {
+						Sfb.ManualBackup.process_files(nonce);
+ 					}
 				}).fail(Sfb.ManualBackup.error_handler);
 			},
 

@@ -97,12 +97,13 @@
 </div>
 <?php if ( $show_cf_notice ) : ?>
 	<div class="sui-box-settings-row sui-upsell-row cf-dash-notice">
-		<img class="sui-image sui-upsell-image"
-			 src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/graphic-hb-cf-sell.png' ); ?>"
-			 srcset="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/graphic-hb-cf-sell@2x.png' ); ?> 2x"
-			 alt="<?php esc_attr_e( 'Connect your account to Cloudflare', 'wphb' ); ?>">
-
-		<div class="sui-upsell-notice">
+		<?php if ( ! WP_Hummingbird_Utils::hide_wpmudev_branding() ) : ?>
+			<img class="sui-image sui-upsell-image"
+			     src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/graphic-hb-cf-sell.png' ); ?>"
+			     srcset="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/graphic-hb-cf-sell@2x.png' ); ?> 2x"
+			     alt="<?php esc_attr_e( 'Connect your account to Cloudflare', 'wphb' ); ?>">
+		<?php endif; ?>
+		<div class="<?php echo( WP_Hummingbird_Utils::hide_wpmudev_branding() ? esc_attr( 'sui-notice' ) : esc_attr( 'sui-upsell-notice' ) ); ?>">
 			<p>
 				<?php
 					echo esc_html( $cf_notice );

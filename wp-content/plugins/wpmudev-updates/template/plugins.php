@@ -97,6 +97,7 @@ $this->render_header( $page_title );
 
 
 <?php $this->load_template( 'element-last-refresh' ); ?>
+<?php $this->load_template('footer'); ?>
 
 <div class="project-list hidden">
 	<?php

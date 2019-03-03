@@ -8,7 +8,7 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2015 - 2018 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2015 - 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -36,10 +36,11 @@ class Inpost extends Profile {
 	 * Defines inpost nonce name.
 	 *
 	 * @since 2.7.0
+	 * @since 3.2.0 Added '_nonce' suffix.
 	 *
 	 * @var string The nonce name.
 	 */
-	public $inpost_nonce_name = 'tsf_inpost_seo_settings';
+	public $inpost_nonce_name = 'tsf_inpost_seo_settings_nonce';
 
 	/**
 	 * Defines inpost nonce field.
@@ -163,7 +164,7 @@ class Inpost extends Profile {
 		if ( $this->is_front_page_by_id( $this->get_the_real_ID() ) ) {
 			if ( $this->can_access_settings() ) {
 				$schema = \is_rtl() ? '%2$s - %1$s' : '%1$s - %2$s';
-				$title = sprintf(
+				$title  = sprintf(
 					$schema,
 					\__( 'Homepage SEO Settings', 'autodescription' ),
 					$this->make_info(
@@ -239,7 +240,7 @@ class Inpost extends Profile {
 			}
 		} elseif ( isset( $object->taxonomy ) ) {
 			//* Singular name.
-			$type = $this->get_tax_type_label( $object->taxonomy );
+			$type    = $this->get_tax_type_label( $object->taxonomy );
 			$is_term = true;
 		}
 
@@ -331,6 +332,8 @@ class Inpost extends Profile {
 		 * @since 2.9.0
 		 */
 		\do_action( 'the_seo_framework_pre_page_inpost_box' );
+		$this->is_gutenberg_page()
+			and $this->get_view( 'inpost/seo-settings-singular-gutenberg-data', get_defined_vars() );
 		$this->get_view( 'inpost/seo-settings-singular', get_defined_vars() );
 		/**
 		 * @since 2.9.0

@@ -295,7 +295,7 @@ $dump_http['PayPal API: POST']    = $remote_paypal;
 		);
 		?>
     </div>
-
+<?php $this->load_template('footer'); ?>
 
 <?php
 

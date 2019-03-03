@@ -6,10 +6,17 @@
 <?php
 $model = new Snapshot_Model_Full_Backup();
 $apiKey = $model->get_config('secret-key', '');
+if ( version_compare(PHP_VERSION, '5.5.0', '<') ) {
+	$aws_sdk_compatible = false;
+} else {
+	$aws_sdk_compatible = true;
+}
+
 $data = array(
 	"hasApikey" => !empty($apiKey),
 	"apiKey" => $apiKey,
-	"apiKeyUrl" => $model->get_current_secret_key_link()
+	"apiKeyUrl" => $model->get_current_secret_key_link(),
+	"aws_sdk_compatible" => $aws_sdk_compatible
 );
 ?>
 
@@ -21,7 +28,7 @@ $data = array(
 			<h3><?php esc_html_e('Get Started', SNAPSHOT_I18N_DOMAIN); ?></h3>
 		</div>
 
-		<div class="wpmud-box-content">
+		<div class="wpmud-box-content <?php echo ( ! $aws_sdk_compatible ) ? 'wps-aws-sdk-incompatible': ''; ?>">
 
 			<div class="row">
 
@@ -36,7 +43,7 @@ $data = array(
 					</div>
 
 					<p>
-						<a id="view-snapshot-key" class="button <?php echo !empty($apiKey) ? 'has-key' : ''; ?> button-blue"><?php esc_html_e( 'Activate Managed Backups', SNAPSHOT_I18N_DOMAIN ); ?></a>
+						<a id="view-snapshot-key" class="button <?php echo !empty($apiKey) ? 'has-key' : ''; ?> button-blue <?php echo ( ! $aws_sdk_compatible ) ? 'disabled': ''; ?>"><?php esc_html_e( 'Activate Managed Backups', SNAPSHOT_I18N_DOMAIN ); ?></a>
 					</p>
 
 				</div>

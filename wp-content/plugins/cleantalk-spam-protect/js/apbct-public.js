@@ -105,8 +105,6 @@ function apbct_ready(){
 					// Filter fields
 					if( getComputedStyle(elem).display    === "none" ||   // hidden
 						getComputedStyle(elem).visibility === "hidden" || // hidden
-						getComputedStyle(elem).width      === "0" ||      // hidden
-						getComputedStyle(elem).height     === "0" ||      // hidden
 						getComputedStyle(elem).opacity    === "0" ||      // hidden
 						elem.getAttribute("type")         === "hidden" || // type == hidden
 						elem.getAttribute("type")         === "submit" || // type == submit

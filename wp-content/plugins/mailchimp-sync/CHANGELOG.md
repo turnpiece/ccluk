@@ -1,6 +1,13 @@
 Changelog
 ===========
 
+### 1.7.6 - Dec 3, 2018
+
+**Improvements**
+
+- Add warning text to settings that may cause subscribers to be removed from the connected MailChimp list.
+
+
 ### 1.7.5 - July 4, 2018
 
 **Improvements**

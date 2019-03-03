@@ -15,7 +15,7 @@
 
 class CleantalkState
 {	
-	public $option_prefix = '';
+	public $option_prefix = 'cleantalk';
 	public $storage = array();
 	public $integrations = array();
 	public $def_settings = array(
@@ -34,6 +34,7 @@ class CleantalkState
 		'wc_checkout_test'           => 0, //WooCommerce checkout default test => OFF
 		'check_external'             => 0,
         'check_internal'             => 0,
+//        'validate_email_existence'   => 1,
 		
 		/* Comments and messages */
 		'bp_private_messages' =>   1, //buddyPress private messages test => ON
@@ -48,6 +49,7 @@ class CleantalkState
 		'general_postdata_test' => 0, //CAPD
         'set_cookies'=>            1, // Disable cookies generatation to be compatible with Varnish.
         'ssl_on' =>                0, // Secure connection to servers 
+		'use_buitin_http_api' =>   0, // Using Wordpress HTTP built in API
 		
 		// Administrator Panel
         'show_adminbar'    => 1, // Show the admin bar.
@@ -66,13 +68,9 @@ class CleantalkState
 		'debug_ajax'              => 0,
 		
 		// GDPR
-		'gdpr_forms_id' => '',
-		'gdpr_text'     => '',
+		'gdpr_enabled' => 0,
+		'gdpr_text'    => 'By using this form you agree with the storage and processing of your data by using the Privacy Policy on this website.',
     );
-	
-	public $settings_fields_description = array();
-	
-	public $settings_groups_description = array();
 	
 	public $def_data = array(
 		
@@ -153,6 +151,21 @@ class CleantalkState
 		'service_id'         => 0,
 	);
 	
+	public $def_remote_calls = array(
+		'close_renew_banner' => array(
+			'last_call' => 0,
+		),
+		'sfw_update' => array(
+			'last_call' => 0,
+		),
+		'sfw_send_logs' => array(
+			'last_call' => 0,
+		),
+		'update_plugin' => array(
+			'last_call' => 0,
+		),
+	);
+	
 	public function __construct($option_prefix, $options = array('settings'), $wpms = false)
 	{
 		$this->option_prefix = $option_prefix;
@@ -180,6 +193,11 @@ class CleantalkState
 			// Setting default errors
 			if($this->option_prefix.'_'.$option_name === 'cleantalk_errors'){
 				$option = $option ? $option : array();
+			}
+			
+			// Default remote calls
+			if($this->option_prefix.'_'.$option_name === 'cleantalk_remote_calls'){
+				$option = is_array($option) ? array_merge($this->def_remote_calls, $option) : $this->def_remote_calls;
 			}
 			
 			$this->$option_name = is_array($option) ? new ArrayObject($option) : $option;

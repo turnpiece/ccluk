@@ -43,7 +43,68 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 			// Add uptime notice.
 			update_site_option( 'wphb-notice-uptime-info-show', 'yes' );
 
+			add_action( 'admin_enqueue_scripts', array( 'WP_Hummingbird_Installer', 'admin_pointer' ) );
+
 			do_action( 'wphb_activate' );
+		}
+
+		/**
+		 * Add custom admin pointer using wp-pointer.
+		 *
+		 * @since 1.9.2
+		 */
+		public static function admin_pointer() {
+			// Get dismissed pointers meta.
+			$dismissed_pointers = get_user_meta( get_current_user_id(), 'dismissed_wp_pointers', true );
+			$dismissed_pointers = explode( ',', (string) $dismissed_pointers );
+
+			// If pointer is not found in dismissed pointers, show.
+			if ( in_array( 'wphb_pointer', $dismissed_pointers, true ) ) {
+				return;
+			}
+
+			// Enqueue wp-pointer styles and scripts.
+			wp_enqueue_style( 'wp-pointer' );
+			wp_enqueue_script( 'wp-pointer' );
+
+			// Register our custom pointer.
+			add_action( 'admin_print_footer_scripts', array( 'WP_Hummingbird_Installer', 'register_admin_pointer' ) );
+		}
+
+		/**
+		 * Register custom pointer to wp-pointer.
+		 *
+		 * Use WordPress dismiss-wp-pointer action on pointer dismissal to store dismissal flag in meta via ajax.
+		 *
+		 * @since 1.9.2
+		 */
+		public static function register_admin_pointer() {
+			// Pointer content.
+			$content  = '<h3>' . __( 'Get Humming', 'wphb' ) . '</h3>';
+			$content .= '<p>' . __( 'Run performance tests, enable caching and optimize your assets here.', 'wphb' ) . '</p>';
+			?>
+
+			<script type="text/javascript">
+				//<![CDATA[
+				jQuery( document ).ready( function( $ ) {
+					// jQuery selector to point the message to.
+					$( '#toplevel_page_wphb' ).pointer({
+						content: '<?php echo $content; ?>',
+						position: {
+							edge: 'left',
+							align: 'center'
+						},
+						close: function() {
+							$.post( ajaxurl, {
+								pointer: 'wphb_pointer',
+								action: 'dismiss-wp-pointer'
+							});
+						}
+					}).pointer( 'open' );
+				});
+				//]]>
+			</script>
+			<?php
 		}
 
 		/**

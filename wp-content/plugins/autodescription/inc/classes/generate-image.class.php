@@ -8,7 +8,7 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2015 - 2018 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2015 - 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -96,6 +96,7 @@ class Generate_Image extends Generate_Url {
 	 * in a grey area... @TODO make images optional for Schema?
 	 *
 	 * @since 2.9.3
+	 * @since 3.2.2 No longer relies on the query.
 	 * @uses $this->get_social_image()
 	 * @staticvar array $images
 	 * @TODO exchange 2nd argument with $taxonomy.
@@ -120,24 +121,12 @@ class Generate_Image extends Generate_Url {
 			return $images[ $id ][ $singular ];
 
 		if ( $singular ) {
-			if ( $id === $this->get_the_front_page_ID() ) {
-				if ( $this->has_page_on_front() ) {
-					$image_args = [
-						'post_id'       => $id,
-						'skip_fallback' => true,
-						'escape'        => false,
-					];
-				} else {
-					$image_args = [
-						'post_id'       => $id,
-						'skip_fallback' => true,
-						'disallowed'    => [
-							'postmeta',
-							'featured',
-						],
-						'escape'        => false,
-					];
-				}
+			if ( $this->is_real_front_page_by_id( $id ) ) {
+				$image_args = [
+					'post_id'       => $id,
+					'skip_fallback' => true,
+					'escape'        => false,
+				];
 			} else {
 				$image_args = [
 					'post_id'       => $id,
@@ -171,6 +160,7 @@ class Generate_Image extends Generate_Url {
 	 *
 	 * @since 2.9.0
 	 * @since 3.0.6 Added attachment page compatibility.
+	 * @since 3.2.2 Now skips the singular meta images on archives.
 	 *
 	 * @todo listen to attached images within post.
 	 * @todo listen to archive images. -> set taxonomy argument.
@@ -198,7 +188,8 @@ class Generate_Image extends Generate_Url {
 				goto end;
 		}
 
-		if ( $args['post_id'] ) {
+		// FIXME: `! $this->is_archive()` = Patch for taxonomies taking incorrect images...
+		if ( $args['post_id'] && ! $this->is_archive() ) {
 			//* 2. Fetch image from SEO meta upload.
 			if ( $all_allowed || false === in_array( 'postmeta', $args['disallowed'], true ) ) {
 				if ( $image = $this->get_social_image_url_from_post_meta( $args['post_id'], true ) )
@@ -231,7 +222,6 @@ class Generate_Image extends Generate_Url {
 
 		if ( $args['skip_fallback'] )
 			goto end;
-
 
 		//* 3.5 Fetch image from fallback filter 0
 		fallback_0 : {
@@ -362,7 +352,7 @@ class Generate_Image extends Generate_Url {
 			return $defaults;
 
 		//* Array merge doesn't support sanitation. We're simply type casting here.
-		// phpcs:disable -- it's ok.
+		// phpcs:disable WordPress.WhiteSpace.OperatorSpacing.SpacingBefore -- precision alignment OK.
 		$args['post_id']       = isset( $args['post_id'] )       ? (int) $args['post_id']        : $defaults['post_id'];
 		$args['image']         = isset( $args['image'] )         ? (string) $args['image']       : $defaults['image'];
 		$args['size']          = isset( $args['size'] )          ? $args['size']                 : $defaults['size']; // Mixed.
@@ -370,7 +360,7 @@ class Generate_Image extends Generate_Url {
 		$args['skip_fallback'] = isset( $args['skip_fallback'] ) ? (bool) $args['skip_fallback'] : $defaults['skip_fallback'];
 		$args['disallowed']    = isset( $args['disallowed'] )    ? (array) $args['disallowed']   : $defaults['disallowed'];
 		$args['escape']        = isset( $args['escape'] )        ? (bool) $args['escape']        : $defaults['escape'];
-		// phpcs:enable
+		// phpcs:enable WordPress.WhiteSpace.OperatorSpacing.SpacingBefore
 
 		return $args;
 	}
@@ -409,7 +399,7 @@ class Generate_Image extends Generate_Url {
 	 */
 	public function get_social_image_url_from_home_meta( $id = 0, $set_og_dimensions = false ) {
 
-		//* Don't output if not front page.
+		//* Don't output if not on the front page ...FIXME... by query.
 		if ( false === $this->is_front_page_by_id( $id ) )
 			return '';
 
@@ -506,7 +496,7 @@ class Generate_Image extends Generate_Url {
 		if ( ! $image_id )
 			return '';
 
-		$args = $this->reparse_image_args( $args );
+		$args                    = $this->reparse_image_args( $args );
 		$args['get_the_real_ID'] = true;
 
 		$src = $this->parse_og_image( $image_id, $args, $set_og_dimensions );
@@ -532,7 +522,7 @@ class Generate_Image extends Generate_Url {
 		if ( ! \wp_attachment_is_image( $id ) )
 			return '';
 
-		$args = $this->reparse_image_args( $args );
+		$args                    = $this->reparse_image_args( $args );
 		$args['get_the_real_ID'] = true;
 
 		$src = $this->parse_og_image( $id, $args, $set_og_dimensions );

@@ -2,6 +2,12 @@
 $destinations = array();
 $all_destinations = WPMUDEVSnapshot::instance()->get_setting( 'destinationClasses' );
 
+if ( version_compare(PHP_VERSION, '5.5.0', '<') ) {
+	$aws_sdk_compatible = false;
+} else {
+	$aws_sdk_compatible = true;
+}
+
 foreach ( WPMUDEVSnapshot::instance()->config_data['destinations'] as $key => $item ) {
 
 	if (isset( $all_destinations[$item['type']] )){
@@ -9,9 +15,12 @@ foreach ( WPMUDEVSnapshot::instance()->config_data['destinations'] as $key => $i
 		$item["type_name_display"] = $all_destinations[$item['type']]->name_display;
 
 	} else {
-
-		$item["type_name_display"] = "local";
-		$item["type"] = "local";
+		if ( ! $aws_sdk_compatible && 'aws' === $item['type'] ) {
+			$item["type_name_display"] = "Amazon S3";
+		} else {
+			$item["type_name_display"] = "local";
+			$item["type"] = "local";
+		}
 
 	}
 
@@ -35,7 +44,7 @@ foreach ( WPMUDEVSnapshot::instance()->config_data['destinations'] as $key => $i
 
 			<div class="col-xs-12">
 
-				<p><?php esc_html_e( 'Destinations are where your snapshots are uploaded and stored. Store files on Dropbox, Google Drive, Amazon S3, FTP/SFTP, or your local computer.', SNAPSHOT_I18N_DOMAIN ); ?></p>
+				<p><?php esc_html_e( 'Destinations are where your snapshots are uploaded and stored. Store files on Dropbox, Google Drive, Amazon S3, FTP/SFTP, or your local server.', SNAPSHOT_I18N_DOMAIN ); ?></p>
 
 				<table class="has-footer" cellpadding="0" cellspacing="0">
 

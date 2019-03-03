@@ -8,7 +8,7 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2015 - 2018 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2015 - 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -767,9 +767,9 @@ class Render extends Admin_Init {
 		if ( ! $this->output_published_time() )
 			return '';
 
-		$id = $this->get_the_real_ID();
-
+		$id   = $this->get_the_real_ID();
 		$post = \get_post( $id );
+
 		$post_date_gmt = $post->post_date_gmt;
 
 		if ( '0000-00-00 00:00:00' === $post_date_gmt )

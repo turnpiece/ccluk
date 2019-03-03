@@ -131,9 +131,13 @@ class Snapshot_Process_Import_Archives {
 
 		flush();
 
-		$restore_file = trailingslashit( WPMUDEVSnapshot::instance()->get_setting( 'backupBaseFolderFull' ) ) . basename( $remote_file );
+		$basename = basename( wp_parse_url( $remote_file, PHP_URL_PATH ) );
+		$restore_file = trailingslashit( WPMUDEVSnapshot::instance()->get_setting( 'backupBaseFolderFull' ) ) . $basename;
 
 		Snapshot_Helper_Utility::remote_url_to_local_file( $remote_file, $restore_file );
+
+		clearstatcache();
+
 		// $response_file = Snapshot_Helper_Utility::remote_url_to_local_file( $remote_file, $restore_file );
 		// if ( ! $response_file)
 		// 	$response_file = __( 'Not a zip file', SNAPSHOT_I18N_DOMAIN );

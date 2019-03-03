@@ -2,12 +2,12 @@
 Contributors: LiteSpeedTech
 Tags: caching, optimize, performance, pagespeed, seo, speed, image optimize, compress, object cache, redis, memcached, database cleaner
 Requires at least: 4.0
-Tested up to: 4.9.8
-Stable tag: 2.7.3
+Tested up to: 5.0.3
+Stable tag: 2.9.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 
-Speed up your page-load times. Get a faster site with high-performance page caching from LiteSpeed Cache. Easy to set up. Easy to use.
+All-in-one unbeatable acceleration & PageSpeed improvement: caching, image/CSS/JS optimization...
 
 == Description ==
 
@@ -18,7 +18,7 @@ LSCWP supports WordPress Multisite and is compatible with most popular plugins, 
 == Requirements ==
 **General Features** may be used by anyone with any web server (LiteSpeed, Apache, NGiNX, etc.).
 
-**LiteSpeed Exclusive Features** require OpenLiteSpeed, commercial LiteSpeed products, or LiteSpeed-powered hosting.
+**LiteSpeed Exclusive Features** require OpenLiteSpeed, commercial LiteSpeed products, or LiteSpeed-powered hosting. [Why?](https://www.litespeedtech.com/support/wiki/doku.php/litespeed_wiki:cache:lscwp:faq#why_do_the_cache_features_require_litespeed_server)
 
 == Plugin Features ==
 
@@ -34,7 +34,6 @@ LSCWP supports WordPress Multisite and is compatible with most popular plugins, 
 * Multiple CDN support
 * Load CSS/JS Asynchronously
 * Browser Cache
-* Smart preload crawler with support for SEO-friendly sitemap
 * Database Cleaner and Optimizer
 * PageSpeed score optimization
 * OPcode Cache
@@ -58,10 +57,15 @@ LSCWP supports WordPress Multisite and is compatible with most popular plugins, 
 * Ability to schedule purge for specified URLs
 * WooCommerce and bbPress support
 * [WordPress CLI](https://www.litespeedtech.com/support/wiki/doku.php/litespeed_wiki:cache:lscwp#wordpress_cli) commands
-* Simple API system for each cache integration
+* API system for easy cache integration
 * Exclude from cache by URI, Category, Tag, Cookie, User Agent
-* HTTP/2 & [QUIC](https://blog.litespeedtech.com/2017/07/11/litespeed-announces-quic-support/) support (QUIC not available in OpenLiteSpeed)
-* ESI (Edge Side Includes) support (Not available in OpenLiteSpeed)
+* Smart preload crawler with support for SEO-friendly sitemap
+* Multiple crawlers for cache varies
+* HTTP/2 & [QUIC](https://blog.litespeedtech.com/2017/07/11/litespeed-announces-quic-support/) support<sup>*</sup>
+* ESI (Edge Side Includes) support<sup>*</sup>
+* Widgets and [Shortcodes](https://www.litespeedtech.com/support/wiki/doku.php/litespeed_wiki:cache:lscwp:configuration:esi:shortcode) as ESI blocks<sup>*</sup>
+
+<sup>*</sup> Feature not available in OpenLiteSpeed
 
 == Screenshots ==
 
@@ -133,8 +137,8 @@ Please see [LiteSpeed’s Privacy Policy](https://www.litespeedtech.com/company/
 
 == Frequently Asked Questions ==
 
-= How do the Cache features of LSCache work? =
-This plugin communicates with your LiteSpeed Web Server and its built-in page cache (LSCache) to deliver superior performance to your WordPress site.
+= Why do the cache features require LiteSpeed Server? =
+This plugin communicates with your LiteSpeed Web Server and its built-in page cache (LSCache) to deliver superior performance to your WordPress site. The plugin's cache features indicate to the server that a page is cacheable and for how long, or they invalidate particular cached pages using tags.
 
 LSCache is a server-level cache, so it's faster than PHP-level caches. [Compare with other PHP-based caches](https://www.litespeedtech.com/benchmarks/wordpress).
 
@@ -267,6 +271,7 @@ Click on the `Advanced View` link at the top of the page, and several more tabs 
 * [WP-PostRatings](https://wordpress.org/plugins/wp-postratings/)
 * [Avada 5.1 RC1+](https://avada.theme-fusion.com/)
 * [Elegant Themes Divi 3.0.67+](https://www.elegantthemes.com/gallery/divi/)
+* [Elegant Divi Builder] (https://www.elegantthemes.com/plugins/divi-builder/)
 * [Caldera Forms](https://wordpress.org/plugins/caldera-forms/) 1.5.6.2+
 * Login With Ajax
 * [Ninja Forms](https://wordpress.org/plugins/ninja-forms/)
@@ -275,6 +280,71 @@ Click on the `Advanced View` link at the top of the page, and several more tabs 
 
 
 == Changelog ==
+
+= 2.9.2 - Feb 5 2019 =
+* <strong>API</strong>: Add a hook `litespeed_esi_shortcode-*` for ESI shortcodes.
+* <strong>3rd</strong>: WooCommerce can purge products now when variation stock is changed.
+* 🐞🕷️: Forced HTTP1.1 for crawler due to a CURL HTTP2 bug.
+
+= 2.9.1 - Jan 25 2019 =
+* <strong>Compatibility</strong>: Fixed fatal error for PHP 5.3.
+* <strong>Compatibility</strong>: Fixed PHP warning in htmlspecialchars when building URLs. (@souljahn2)
+* <strong>Media</strong>: Excluded invalid image src from lazyload. (@andrew55)
+* <strong>Optm</strong>: Improved URL compatibility when detecting closest cloud server.
+* <strong>ESI</strong>: Supported JSON format comment format in ESI with `is_json` parameter.
+* <strong>API</strong>: Added filters to CCSS/CSS/JS content. (@lhoucine)
+* <strong>3rd</strong>: Improved comment compatibility with Elegant Divi Builder.
+* <strong>IAPI</strong>: New Europe Image Optimization server (EU5). <strong>Please whitelist the new [IAPI IP List](https://wp.api.litespeedtech.com/ips).</strong>
+* <strong>GUI</strong>: No longer show banners when `Disable All` in `Debug` is ON. (@rabbitwordpress)
+* <strong>GUI</strong>: Fixed button style for RTL languages.
+* <strong>GUI</strong>: Removed unnecessary translation in report.
+* <strong>GUI</strong>: Updated readme wiki links.
+* <strong>GUI</strong>: Fixed pie styles in image optimization page.
+
+= 2.9 - Dec 31 2018 =
+* 🌱<strong>Media</strong>: Lazy Load Image Classname Excludes. (@thinkmedia)
+* 🌱: New EU/AS cloud servers for faster image optimization handling.
+* 🌱: New EU/AS cloud servers for faster CCSS generation.
+* 🌱: New EU/AS cloud servers for faster responsive placeholder generation.
+* 🌱<strong>Conf</strong>: Ability to set single options via link.
+* 🌱<strong>Cache</strong>: Ability to add custom TTLs to Force Cache URIs.
+* <strong>Purge</strong>: Added post type to Purge tags.
+* <strong>Purge</strong>: Redefined CCSS page types.
+* <strong>Core</strong>: Using Exception for .htaccess R/W.
+* <strong>IAPI</strong>: <strong>New cloud servers added. Please whitelist the new [IAPI IP List](https://wp.api.litespeedtech.com/ips).</strong>
+* <strong>Optm</strong>: Trim BOM when detecting if the page is HTML.
+* <strong>GUI</strong>: Added PageSpeed Score comparison into promotion banner.
+* <strong>GUI</strong>: Refactored promotion banner logic.
+* <strong>GUI</strong>: Removed page optimized comment when ESI Silence is requested.
+* <strong>GUI</strong>: WHM transient changed to option instead of transient when storing.
+* <strong>GUI</strong>: Appending more descriptions to CDN filetype setting.
+* <strong>IAPI</strong>: Removed duplicate messages.
+* <strong>IAPI</strong>: Removed taken_failed/client_pull(duplicated) status.
+* <strong>Debug</strong>: Environment report no longer generates hash for validation.
+* <strong>3rd</strong>: Non-cacheable pages no longer punch ESI holes for Divi compatibility.
+* 🐞<strong>Network</strong>: Added slashes for mobile rules when activating plugin.
+* 🐞<strong>CCSS</strong>: Eliminated a PHP notice when appending CCSS.
+
+= 2.8.1 - Dec 5 2018 =
+* 🐞🕷️: Fixed an activation warning related to cookie crawler. (@kacper3355 @rastel72)
+* 🐞<strong>Media</strong>: Replace safely by checking if pulled images is empty or not first. (@Monarobase)
+* <strong>3rd</strong>: Shortcode ESI compatibility with Elementor.
+
+= 2.8 - Nov 30 2018 =
+* 🌱: ESI shortcodes.
+* 🌱: Mobile crawler.
+* 🌱: Cookie crawler.
+* <strong>API</strong>: Can now add `_litespeed_rm_qs=0` to bypass Remove Query Strings.
+* <strong>Optm</strong>: Removed error log when minify JS failed.
+* 🐞<strong>Core</strong>: Fixed a bug that caused network activation PHP warning.
+* <strong>Media</strong>: Removed canvas checking for WebP to support TOR. (@odeskumair)
+* <strong>Media</strong>: Eliminated potential image placeholder PHP warning.
+* <strong>3rd</strong>: Bypassed Google recaptcha from Remove Query Strings for better compatibility.
+* <strong>IAPI</strong>: Showed destroy timeout details.
+* <strong>Debug</strong>: Moved Google Fonts log to advanced level.
+* <strong>GUI</strong>: Replaced all Learn More links for functions.
+* <strong>GUI</strong>: Cosmetic updates including Emoji.
+* 🕷️: Removed duplicated data in sitemap and blacklist.
 
 = 2.7.3 - Nov 26 2018 =
 * <strong>Optm</strong>: Improved page render speed with Web Font Loader JS library for Load Google Fonts Asynchronously.

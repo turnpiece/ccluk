@@ -36,6 +36,7 @@
 			<div class="wphb-db-items"><?php echo absint( $field['value'] ); ?></div>
 			<div>
 				<span class="spinner standalone"></span>
+				<i class="sui-icon-loader sui-loading sui-hidden" aria-hidden="true"></i>
 				<a id="wphb-db-row-delete"
 				   class="wphb-db-row-delete sui-tooltip sui-tooltip-top-left"
 				   data-tooltip="<?php esc_attr_e( 'Delete entries', 'wphb' ); ?>"

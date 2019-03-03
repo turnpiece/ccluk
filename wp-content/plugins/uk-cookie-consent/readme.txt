@@ -1,24 +1,24 @@
-=== Cookie Consent ===
-Contributors: Catapult_Themes, husobj, jraczynski
-Donate Link: https://www.paypal.me/catapultthemes
-Tags: cookie law, cookies, gdpr, eu privacy directive, cookie compliance, cookie law, cookie notice, cookie notification, wpml, geo ip
+=== GDPR Cookie Consent Banner ===
+Contributors: termly, Catapult_Themes, husobj, jraczynski
+Tags: cookie law, cookie consent, gdpr, eu privacy directive, cookie banner, cookie compliance, cookie notice, eu cookie law, cookie notification, cookies, wpml, geo ip
 Requires at least: 4.3
-Tested up to: 4.9.6
-Stable tag: 2.3.11
+Tested up to: 5.0.1
+Stable tag: 2.3.14
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-The only cookie consent plugin you'll ever need.
+
+Our easy to use cookie consent plugin can assist in your GDPR and ePrivacy Directive compliance efforts.
 
 == Description ==
-Cookie Consent is one of the simplest and most popular cookie notification plugins out there. It's been actively developed and supported since 2012 and has over 100 5 star reviews.
+GDPR Cookie Consent Banner is one of the simplest and most popular cookie consent plugins out there. Compliance with data privacy regulations like the GDPR and the ePrivacy Directive has never more attainable. Simply install our plugin and modify your settings, and you'll have a live cookie consent banner and cookie policy on your site that will help you comply with all of the latest data privacy regulations. GDPR Cookie Consent Banner has been actively developed and supported since 2012, and has over 100 5-star reviews.
 
 > <strong>New in 2.3.0:</strong><br>Geo IP support - choose which continents to display notifications (requires GeoIP Detect plugin to be installed)<br>
 > <strong>New in 2.2.0:</strong><br>Easily select pages or posts where the cookie notification doesn't display. You now have complete control over which pages display a notification and which don't.<br>Close on scroll - optionally choose scrolling as closure method.
 
 = Simple set up =
-One of the most popular aspects of the plugin is its simplicity of use - simply install and activate the plugin to automatically add the cookie consent notification bar. There is no need to configure it. On activation, the plugin creates and populates a page on your site with information about your cookie policy and automatically links to the page from the notification bar. So if you're using the default settings, it's a matter of seconds to get up and running.
+One of the most popular aspects of this plugin is its ease of use - simply install and activate the plugin to automatically add the cookie consent notification bar. There is no need to configure it. Upon activation, the plugin will create and populate a page on your website with information about your cookie policy. Your consent banner will also automatically link to the newly-created cookie policy page from the notification bar. So if you use the default settings, it takes only seconds to get up and running.
 
-= Features =
+== Features ==
 * Choice of dismissal method - on click, on scroll, or timed
 * Choice of dismissal element - either button or 'x' close
 * Option to show the notification on the first page only - subsequent pages visited by the user will not display the message
@@ -35,32 +35,35 @@ One of the most popular aspects of the plugin is its simplicity of use - simply 
 = Translations =
 
 * English
-* Polish (jraczynski)
+* Polish
 * Russian
-* Slovakian (lacike)
-* Italian (wocmultimedia)
+* Slovakian
+* Italian
 
-= EU Directive =
+= EU ePrivacy Directive =
 We think this is the simplest but most effective method of dealing with the legislation.
 
-The plug-in is a straightforward approach to help you comply with the EU regulations regarding usage of website cookies. It follows the notion of "implied consent" as described by the UK's Information Commissioner and makes the assumption that most users who choose not to accept cookies will do so for all websites. A user to your site is presented with a clear yet unobtrusive notification that the site is using cookies and may then acknowledge and dismiss the notification or click to find out more. The plug-in automatically creates a new page with pre-populated information on cookies and how to disable them, which you may edit further if you wish.
+The plug-in is a straightforward approach to help you comply with the EU regulations regarding usage of website cookies. A user to your site is presented with a clear, yet unobtrusive notification that the site is using cookies, and may then acknowledge and dismiss the notification, or click to find out more. The plug-in automatically creates a new page with pre-populated information on cookies and how to disable them, which you may edit further if you wish.
 
-Importantly, the plug-in does not disable cookies on your site or prevent the user from continuing to browse the site. Several plug-ins have adopted the "explicit consent" approach which obliges users to opt in to cookies on your site. This is likely to deter visitors.
+Importantly, the plug-in does not disable cookies on your site or prevent the user from continuing to browse the site.
 
 == Installation ==
-1. Upload the `uk-cookie-consent` folder to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Browse to the Cookie Consent option page in Settings to configure
+1. Simply install GDPR Cookie Consent Banner on your website from the WordPress plugin directory, or upload the `uk-cookie-consent` folder to the `/wp-content/plugins/` directory
+1. Activate the plugin through the 'Plugins' menu in your WordPress backend
+1. Navigate to the Cookie Consent page in your 'Settings' menu to configure your consent banner
+
 == Frequently Asked Questions ==
 
 = Where can I find out more about this plug-in? =
 You can find out more about the plug-in on [its plug-in page](http://catapultthemes.com/cookie-consent/).
-= Is there a demo? =
-Yep. Take a look at [the demo](http://cookieconsent.catapultthemes.com/). Reset the cookie by [going to this URL](http://cookieconsent.catapultthemes.com/?cookie=delete).
-= Does this definitely cover me under the legislation? =
-You have to make up your own mind about that or consult a legal expert.
-= Where can I find out more about the UK laws regarding cookies? =
-You will find more details of the regulations on the [Information Commissioner's Office site](http://www.ico.gov.uk/for_organisations/privacy_and_electronic_communications/the_guide/cookies.aspx).
+= Is there a demo of this plugin? =
+Yes, feel free to have a look at [the demo here](http://cookieconsent.catapultthemes.com/). You can reset the cookie by [going to this URL](http://cookieconsent.catapultthemes.com/?cookie=delete).
+= Will this plugin make me compliant with data privacy legislation like the GDPR? =
+The short answer is no, this plugin alone will not make you compliant. Compliance with data privacy regulations requires certain efforts on the part of the user that a single plugin alone cannot provide.
+= Where can I find out more information about the EU laws regarding the use of cookies? =
+You can find more details on the regulations on the [Information Commissioner's Office site](http://www.ico.gov.uk/for_organisations/privacy_and_electronic_communications/the_guide/cookies.aspx).
+= Can I customize this plugin? =
+Yes, we offer many customization options, from the position of your banner, to the color of the banner, buttons, and text.
 
 == Screenshots ==
 1. Notification bar along the top of the screen
@@ -70,6 +73,13 @@ You will find more details of the regulations on the [Information Commissioner's
 5. Example settings page
 
 == Changelog ==
+
+= 2.3.15 =
+* Updated: tested to 5.0.1
+* Minor changes
+
+= 2.3.12 =
+* Updated: tested to 5.0.1
 
 = 2.3.11 =
 * Added: activation notice

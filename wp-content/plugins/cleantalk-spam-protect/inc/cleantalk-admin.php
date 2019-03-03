@@ -175,7 +175,6 @@ function apbct_admin__init(){
 		}
 		
 	}
-	
 }
 
 /**
@@ -401,7 +400,7 @@ function apbct_admin__notice_message(){
 	$is_dashboard = 	(is_network_admin() || is_admin() ? true : false);
 	$is_admin = 		(current_user_can('activate_plugins') ? true : false);
 	
-	$page_is_ct_settings = 			($page->id == 'settings_page_cleantalk' || $page->id == 'settings_page_cleantalk-network' ? true            : false);
+	$page_is_ct_settings = (in_array($page->id, array('settings_page_cleantalk', 'settings_page_cleantalk-network', 'comments_page_ct_check_spam', 'users_page_ct_check_users')) ? true : false);
 	
 	//Misc
 	$user_token =    ($apbct->user_token ? '&user_token='.$apbct->user_token : '');
@@ -469,7 +468,7 @@ function apbct_admin__notice_message(){
 		}
 		
 		//"Wrong access key" notice (if ct_update_option().METHOD_notice_validate_key returns a error)
-		if ($apbct->notice_show && !$apbct->data['key_is_ok'] && $apbct->moderate_ip == 0 && !$apbct->white_label){
+		if ($apbct->notice_show && $page_is_ct_settings && !$apbct->data['key_is_ok'] && $apbct->moderate_ip == 0 && !$apbct->white_label){
 			echo '<div class="error">
 				<h3><b>'.
 					__("Wrong <a href='{$settings_link}'><b style=\"color: #49C73B;\">Clean</b><b style=\"color: #349ebf;\">Talk</b> access key</a>! Please check it or ask <a target=\"_blank\" href=\"https://cleantalk.org/forum/\">support</a>.", 'cleantalk').
@@ -730,27 +729,4 @@ function apbct_user__delete__hook($user_id, $reassign = null){
 	if ($hash !== '') {
 		ct_feedback($hash, 0);
 	}
-}
-
-/**
- * Checks if the current user has role
- *  
- * @param array $roles
- * @param int $user User ID to check
- * @return boolean Does the user has this role|roles
- */
-function apbct_is_user_role_in( $roles, $user = false ){
-	
-	if( is_numeric($user) ) $user = get_userdata( $user );
-	if( ! $user )           $user = wp_get_current_user();
-
-	if( empty($user->ID) )
-		return false;
-
-	foreach( (array) $roles as $role ){
-		if( isset($user->caps[ $role ]) || in_array($role, $user->roles) )
-			return true;
-	}
-	
-	return false;
 }

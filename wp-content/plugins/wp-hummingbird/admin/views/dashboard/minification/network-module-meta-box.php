@@ -4,10 +4,12 @@
  *
  * @package Hummingbird
  *
- * @var bool $enabled           Asset optimization status.
- * @var bool $use_cdn           CDN status.
- * @var bool $log               Debug log status.
- * @var bool $use_cdn_disabled  Can use CDN?
+ * @var bool   $enabled           Asset optimization status.
+ * @var string $download_url      Download logs URL.
+ * @var bool   $use_cdn           CDN status.
+ * @var bool   $log               Debug log status.
+ * @var bool   $logs_link         Logs link.
+ * @var bool   $use_cdn_disabled  Can use CDN?
  */
 
 ?>
@@ -49,6 +51,7 @@ if ( $enabled ) :
 <?php
 $tooltip_msg_enabled  = __( 'Enable WPMU DEV CDN', 'wphb' );
 $tooltip_msg_disabled = __( 'Enable minification to use the WPMU DEV CDN', 'wphb' );
+
 $tooltip_msg = $use_cdn_disabled ? $tooltip_msg_disabled : $tooltip_msg_enabled;
 ?>
 <input type="hidden" id="cdn_enabled_tooltip" value="<?php echo esc_attr( $tooltip_msg_enabled ); ?>">
@@ -71,11 +74,10 @@ $tooltip_msg = $use_cdn_disabled ? $tooltip_msg_disabled : $tooltip_msg_enabled;
 	</div>
 <?php endif; ?>
 
-<?php if ( ! $use_cdn_disabled ) : ?>
-	<div class="sui-form-field sui-no-margin-bottom">
+<div class="sui-form-field sui-no-margin-bottom">
 		<label class="sui-toggle sui-tooltip sui-tooltip-top-right"
 			   data-tooltip="<?php esc_html_e( 'Turn on the debug log to get insight into any issues you’re having across your subsites.', 'wphb' ); ?>">
-			<input type="checkbox" name="debug_log" id="debug_log" <?php checked( $log ); ?> <?php disabled( $use_cdn_disabled ); ?>>
+			<input type="checkbox" name="debug_log" id="debug_log" <?php checked( $log ); ?>>
 			<span class="sui-toggle-slider"></span>
 		</label>
 		<label for="debug_log"><?php esc_html_e( 'Enable debug log', 'wphb' ); ?></label>
@@ -83,10 +85,23 @@ $tooltip_msg = $use_cdn_disabled ? $tooltip_msg_disabled : $tooltip_msg_enabled;
 		<span id="wphb-minification-debug-log" class="sui-description sui-toggle-description <?php echo ! $log ? 'sui-hidden' : ''; ?>">
 		<?php
 		printf(
-		/* translators: %s: Logs location */
+			/* translators: %s: Logs location */
 			esc_html__( 'Location: %s', 'wphb' ),
 			esc_url( get_home_url() . '/wp-content/wphb-logs/' )
-		); ?>
+		);
+		?>
 	</span>
-	</div>
-<?php endif; ?>
+
+		<div class="wphb-logging-buttons">
+			<a href="<?php echo esc_url( $download_url ); ?>" class="sui-button sui-button-ghost" <?php disabled( ! $logs_link, true ); ?>>
+				<i class="sui-icon-download" aria-hidden="true"></i>
+				<?php esc_html_e( 'Download Logs', 'wphb' ); ?>
+			</a>
+			<a href="#" class="sui-button sui-button-ghost sui-button-red wphb-logs-clear" data-module="minify" <?php disabled( ! $logs_link, true ); ?>>
+				<i class="sui-icon-trash" aria-hidden="true"></i>
+				<?php esc_html_e( 'Clear', 'wphb' ); ?>
+			</a>
+
+
+		</div>
+</div>

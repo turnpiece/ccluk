@@ -187,16 +187,18 @@
 
 		<div id="wphb-server-instructions-apache" class="wphb-server-instructions sui-hidden" data-server="apache">
 			<div class="sui-tabs">
-				<div class="sui-tab">
-					<label id="auto-apache" for="apache-config-auto" class="active">
-						<?php esc_html_e( 'Automatic', 'wphb' ); ?>
-					</label>
-					<input type="radio" name="apache-config-type" id="apache-config-auto" checked>
-					<div class="sui-tab-content">
+				<div data-tabs>
+					<div id="auto-apache"><?php esc_html_e( 'Automatic', 'wphb' ); ?></div>
+					<div id="manual-apache"><?php esc_html_e( 'Manual', 'wphb' ); ?></div>
+				</div>
+				<div data-panes>
+					<div>
 						<p>
-							<?php esc_html_e( 'Hummingbird can automatically apply browser caching for Apache
+							<?php
+							esc_html_e( 'Hummingbird can automatically apply browser caching for Apache
 							servers by writing your .htaccess file. Alternately, switch to Manual to apply these
-							rules yourself.', 'wphb' ); ?>
+							rules yourself.', 'wphb' );
+							?>
 						</p>
 
 						<?php if ( $htaccess_writable && $already_enabled ) : ?>
@@ -223,41 +225,39 @@
 								<?php endif; ?>
 							</div>
 						<?php endif; ?>
-					</div><!-- end content -->
-				</div><!-- end tab -->
-				<div class="sui-tab">
-					<label id="manual-apache" for="apache-config-manual"><?php esc_html_e( 'Manual', 'wphb' ); ?></label>
-					<input type="radio" name="apache-config-type" id="apache-config-manual">
-					<div class="sui-tab-content apache-instructions">
-						<p>
-							<?php esc_html_e( 'Follow the steps below to add browser caching to your Apache server.', 'wphb' ); ?>
-						</p>
+					</div>
+					<div>
+						<div class="apache-instructions">
+							<p>
+								<?php esc_html_e( 'Follow the steps below to add browser caching to your Apache server.', 'wphb' ); ?>
+							</p>
 
-						<ol class="wphb-listing wphb-listing-ordered">
-							<li><?php esc_html_e( 'Copy the generated code into your .htaccess file & save your changes.', 'wphb' ); ?></li>
-							<li><?php esc_html_e( 'Restart Apache.', 'wphb' ); ?></li>
-							<li><a href="<?php echo esc_url( $recheck_expiry_url ); ?>"><?php esc_html_e( 'Re-check expiry status.', 'wphb' ); ?></a></li>
-						</ol>
+							<ol class="wphb-listing wphb-listing-ordered">
+								<li><?php esc_html_e( 'Copy the generated code into your .htaccess file & save your changes.', 'wphb' ); ?></li>
+								<li><?php esc_html_e( 'Restart Apache.', 'wphb' ); ?></li>
+								<li><a href="<?php echo esc_url( $recheck_expiry_url ); ?>"><?php esc_html_e( 'Re-check expiry status.', 'wphb' ); ?></a></li>
+							</ol>
 
-						<pre class="sui-code-snippet" id="wphb-apache"><?php echo htmlentities2( $snippets['apache'] ); ?></pre>
+							<pre class="sui-code-snippet" id="wphb-apache"><?php echo htmlentities2( $snippets['apache'] ); ?></pre>
 
-						<p><strong>Troubleshooting</strong></p>
-						<p><?php esc_html_e( 'If adding the rules to your .htaccess doesn’t work and you have access to vhosts.conf or httpd.conf try to find the line that starts with <Directory> - add the code above into that section and save the file.', 'wphb' ); ?></p>
-						<p><?php esc_html_e( "If you don't know where those files are, or you aren't able to reload Apache, you would need to consult with your hosting provider or a system administrator who has access to change the configuration of your server", 'wphb' ); ?></p>
-						<p><?php WP_Hummingbird_Utils::_still_having_trouble_link(); ?></p>
-					</div><!-- end content -->
-				</div><!-- end tab -->
-			</div><!-- end tabs -->
+							<p><strong>Troubleshooting</strong></p>
+							<p><?php esc_html_e( 'If adding the rules to your .htaccess doesn’t work and you have access to vhosts.conf or httpd.conf try to find the line that starts with <Directory> - add the code above into that section and save the file.', 'wphb' ); ?></p>
+							<p><?php esc_html_e( "If you don't know where those files are, or you aren't able to reload Apache, you would need to consult with your hosting provider or a system administrator who has access to change the configuration of your server", 'wphb' ); ?></p>
+							<p><?php WP_Hummingbird_Utils::_still_having_trouble_link(); ?></p>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div><!-- end wphb-server-instructions -->
 
 		<div id="wphb-server-instructions-litespeed" class="wphb-server-instructions sui-hidden" data-server="LiteSpeed">
 			<div class="sui-tabs">
-				<div class="sui-tab">
-					<label id="auto-litespeed" for="litespeed-config-auto" class="active">
-						<?php esc_html_e( 'Automatic', 'wphb' ); ?>
-					</label>
-					<input type="radio" name="litespeed-config-type" id="litespeed-config-auto">
-					<div class="sui-tab-content">
+				<div data-tabs>
+					<div id="auto-litespeed"><?php esc_html_e( 'Automatic', 'wphb' ); ?></div>
+					<div id="manual-litespeed"><?php esc_html_e( 'Manual', 'wphb' ); ?></div>
+				</div>
+				<div data-panes>
+					<div>
 						<p>
 							<?php esc_html_e( 'Hummingbird can automatically apply browser caching for LiteSpeed servers by writing your .htaccess file. Alternately, switch to Manual to apply these rules yourself.', 'wphb' ); ?>
 						</p>
@@ -286,12 +286,8 @@
 								<?php endif; ?>
 							</div>
 						<?php endif; ?>
-					</div><!-- end content -->
-				</div><!-- end tab -->
-				<div class="sui-tab">
-					<label id="manual-litespeed" for="litespeed-config-manual"><?php esc_html_e( 'Manual', 'wphb' ); ?></label>
-					<input type="radio" name="litespeed-config-type" id="litespeed-config-manual">
-					<div class="sui-tab-content litespeed-instructions">
+					</div>
+					<div class="litespeed-instructions">
 						<p><?php esc_html_e( 'Follow the steps below to add browser caching to your LiteSpeed server.', 'wphb' ); ?></p>
 
 						<ol class="wphb-listing wphb-listing-ordered">
@@ -304,9 +300,9 @@
 						<p><?php esc_html_e( 'If adding the rules to your .htaccess doesn’t work and you have access to vhosts.conf or httpd.conf try to find the line that starts with <Directory> - add the code above into that section and save the file.', 'wphb' ); ?></p>
 						<p><?php esc_html_e( 'If you don\'t know where those files are, or you aren\'t able to reload Apache, you would need to consult with your hosting provider or a system administrator who has access to change the configuration of your server', 'wphb' ); ?></p>
 						<p><?php WP_Hummingbird_Utils::_still_having_trouble_link(); ?></p>
-					</div><!-- end content -->
-				</div><!-- end tab -->
-			</div><!-- end tabs -->
+					</div>
+				</div>
+			</div>
 		</div><!-- end wphb-server-instructions -->
 
 		<div id="wphb-server-instructions-nginx" class="wphb-server-instructions sui-hidden" data-server="nginx">

@@ -5,6 +5,13 @@ Change Log:
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
 
+4.6 - 09/24/2018 - Aaron, Leighton, Hendrawan
+----------------------------------------------------------------------
+- Add: new whitelabeled analytics service!
+- Add: new white-label WPMU DEV plugins settings
+- Improvement: Only redirect to login when activating the Dashboard plugin itself
+- improvement: Accessibility for login screen
+
 4.5.2 - 04/26/2018 - Aaron
 ----------------------------------------------------------------------
 - Important security fix for staff remote logins and protect against timing attacks (props Steve Truman @a3rev)
@@ -493,4 +500,4 @@ Added option to disable admin notices.
 Initial Release.
 
 
-87274-1525112972-au
+87274-1550007040-au

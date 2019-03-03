@@ -8,7 +8,7 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2015 - 2018 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2015 - 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -84,8 +84,8 @@ function _activation_set_options_autoload() {
 		\remove_all_actions( "update_option_{$setting}" );
 		\remove_all_filters( "sanitize_option_{$setting}" );
 
-		//? Write a small difference, so the change will be forwarded to the database.
 		$temp_options = $options;
+		//? Write a small difference, so the change will be forwarded to the database.
 		if ( is_array( $temp_options ) )
 			$temp_options['update_buster'] = (int) time();
 

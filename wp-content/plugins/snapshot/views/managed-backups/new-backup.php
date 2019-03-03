@@ -273,6 +273,53 @@ $this->render(
 
 							</div>
 
+							<div id="wps-new-files-exclude" class="row">
+
+								<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+
+									<label class="label-box"><?php esc_html_e( 'File exclusions', SNAPSHOT_I18N_DOMAIN ); ?></label>
+
+								</div>
+
+								<div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+
+									<div class="wpmud-box-mask">
+
+										<label class="label-title">
+											<?php echo wp_kses_post( sprintf( __( 'Following are the file exclusion patterns, based on which files or folders will be excluded. You can change the file exclusions on the <strong><a href="%s">Managed Backups settings</a></strong> page.', SNAPSHOT_I18N_DOMAIN ), esc_url( WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url( 'snapshots-newui-managed-backups' ) ) . '&tab=settings&snapshot-full_backups-noonce-field=' . esc_attr( wp_create_nonce( 'snapshot-full_backups' ) ) ) ); ?>
+										</label>
+
+										<?php
+										if ( ! isset( WPMUDEVSnapshot::instance()->config_data['config']['managedBackupExclusions'] ) || "global" === WPMUDEVSnapshot::instance()->config_data['config']['managedBackupExclusions'] ) {
+											$current_exclusions = 'filesIgnore';
+										} else {
+											$current_exclusions = 'filesManagedIgnore';
+										}
+
+										$current_exclusions_files = !empty(WPMUDEVSnapshot::instance()->config_data['config'][ $current_exclusions ]) ? WPMUDEVSnapshot::instance()->config_data['config'][ $current_exclusions ] : array();
+										$current_exclusions_files = !empty($current_exclusions_files) && is_array($current_exclusions_files)
+											? array_values(array_unique(array_filter(array_map('trim', $current_exclusions_files))))
+											: array()
+										;
+										if ( ! empty( $current_exclusions_files ) ) {
+											?>
+											<p class="managed-exclusions"><?php if ( ( isset( WPMUDEVSnapshot::instance()->config_data['config'][ $current_exclusions ] ) ) && ( is_array( WPMUDEVSnapshot::instance()->config_data['config'][ $current_exclusions ] ) ) && ( count( WPMUDEVSnapshot::instance()->config_data['config'][ $current_exclusions ] ) ) ) echo wp_kses_post( implode( "</br>", WPMUDEVSnapshot::instance()->config_data['config'][ $current_exclusions ] ) ); ?></p>
+											<?php
+										} else {
+											?>
+											<div class="wps-notice">
+												<p><?php esc_html_e( "No file exclusions have been defined, so the backup will include all the files.", SNAPSHOT_I18N_DOMAIN ); ?></p>
+											</div>
+											<?php
+										}
+										?>
+
+									</div>
+
+								</div>
+
+							</div>
+
 							<div class="row">
 
 								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">

@@ -62,6 +62,9 @@ class WP_Hummingbird_Admin {
 		add_filter( 'network_admin_plugin_action_links_' . $plugin_name . '/wp-hummingbird.php', array( $this, 'add_plugin_action_links' ) );
 		add_filter( 'plugin_action_links_' . $plugin_name . '/wp-hummingbird.php', array( $this, 'add_plugin_action_links' ) );
 
+		// Filter built-in wpmudev branding script.
+		add_filter( 'wpmudev_whitelabel_plugin_pages', array( $this, 'builtin_wpmudev_branding' ) );
+
 		/**
 		 * Triggered when Hummingbird Admin is loaded
 		 */
@@ -109,6 +112,7 @@ class WP_Hummingbird_Admin {
 		include_once 'class-gzip-page.php';
 		include_once 'class-advanced-page.php';
 		include_once 'class-uptime-page.php';
+		include_once 'class-settings-page.php';
 		include_once 'class-admin-notices.php';
 
 		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
@@ -138,7 +142,8 @@ class WP_Hummingbird_Admin {
 			}
 
 			$this->pages['wphb-advanced'] = new WP_Hummingbird_Advanced_Tools_Page( 'wphb-advanced', __( 'Advanced Tools', 'wphb' ), __( 'Advanced Tools', 'wphb' ), 'wphb' );
-			$this->pages['wphb-uptime'] = new WP_Hummingbird_Uptime_Page( 'wphb-uptime', __( 'Uptime', 'wphb' ), __( 'Uptime', 'wphb' ), 'wphb' );
+			$this->pages['wphb-uptime']   = new WP_Hummingbird_Uptime_Page( 'wphb-uptime', __( 'Uptime', 'wphb' ), __( 'Uptime', 'wphb' ), 'wphb' );
+			$this->pages['wphb-settings'] = new WP_Hummingbird_Settings_Page( 'wphb-settings', __( 'Settings', 'wphb' ), __( 'Settings', 'wphb' ), 'wphb' );
 		} else {
 			$minify = WP_Hummingbird_Settings::get_setting( 'enabled', 'minify' );
 			$subsite_tests = false;
@@ -343,6 +348,27 @@ class WP_Hummingbird_Admin {
 		}
 
 		return true;
+	}
+
+	/**
+	 * Add more pages to builtin wpmudev branding.
+	 *
+	 * @since 1.9.3
+	 *
+	 * @param array $plugin_pages
+	 *
+	 * @return array
+	 */
+	public function builtin_wpmudev_branding( $plugin_pages ) {
+		foreach ( $this->pages as $key => $value ) {
+			$plugin_pages[ "hummingbird-pro_page_{$key}" ] = array(
+				'wpmudev_whitelabel_sui_plugins_branding',
+				'wpmudev_whitelabel_sui_plugins_footer',
+				'wpmudev_whitelabel_sui_plugins_doc_links',
+			);
+		}
+
+		return $plugin_pages;
 	}
 
 }

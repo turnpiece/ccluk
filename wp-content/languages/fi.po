@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.9.x - Development package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-10-05 07:24:22+0000\n"
+"PO-Revision-Date: 2018-08-02 11:32:28+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -35,18 +35,6 @@ msgstr " "
 #: wp-includes/class-wp-locale.php:220
 msgid "number_format_decimal_point"
 msgstr ","
-
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:272
-msgid "The offset number requested is larger than or equal to the number of available revisions."
-msgstr "Pyydetty muutosnumero on suurempi kuin käytettävissä olevien muutosten määrä."
-
-#: wp-includes/user.php:3395
-msgid "Unable to send personal data export confirmation email."
-msgstr "Henkilötietojen viennin varmistusviestin lähettäminen epäonnistui."
-
-#: wp-includes/user.php:3289
-msgid "Invalid user request."
-msgstr "Virheellinen käyttäjäpyyntö."
 
 #. translators: 1: Site name. 2: Name of the confirmed action.
 #: wp-includes/user.php:2978
@@ -192,7 +180,7 @@ msgstr ""
 
 #. translators: Privacy data request subject. 1: Site name, 2: Name of the
 #. action
-#: wp-includes/user.php:3366
+#: wp-includes/user.php:3357
 msgid "[%1$s] Confirm Action: %2$s"
 msgstr "[%1$s] Vahvista toiminto: %2$s"
 
@@ -268,11 +256,11 @@ msgstr "Henkilötietojen koostetiedostoa ei luotu."
 msgid "User action confirmed."
 msgstr "Käyttäjän toiminto vahvistettu."
 
-#: wp-includes/user.php:3452
+#: wp-includes/user.php:3433
 msgid "This link has expired."
 msgstr "Linkki on vanhentunut."
 
-#: wp-includes/user.php:3448 wp-login.php:845
+#: wp-includes/user.php:3289 wp-includes/user.php:3429 wp-login.php:845
 msgid "Invalid request."
 msgstr "Virheellinen pyyntö"
 
@@ -316,7 +304,7 @@ msgid "[deleted]"
 msgstr "[poistettu]"
 
 #. translators: %d: Comment ID
-#: wp-includes/comment.php:3363
+#: wp-includes/comment.php:3359
 msgid "Comment %d contains personal data but could not be anonymized."
 msgstr "Kommentti %d sisältää henkilötietoa mutta sitä ei voitu anonymisoida."
 
@@ -324,17 +312,17 @@ msgstr "Kommentti %d sisältää henkilötietoa mutta sitä ei voitu anonymisoid
 msgid "Action has been confirmed."
 msgstr "Toiminto on vahvistettu."
 
-#: wp-includes/user.php:3490
+#: wp-includes/user.php:3471
 msgid "The confirmation email has expired."
 msgstr "Vahvistusviesti on vanhentunut."
 
-#: wp-includes/user.php:3472
+#: wp-includes/user.php:3453
 msgid "Invalid action"
 msgstr "Virheellinen toiminto"
 
 #. translators: Do not translate DESCRIPTION, CONFIRM_URL, SITENAME, SITEURL:
 #. those are placeholders.
-#: wp-includes/user.php:3315
+#: wp-includes/user.php:3306
 msgid ""
 "Howdy,\n"
 "\n"
@@ -421,39 +409,39 @@ msgctxt "request status"
 msgid "Pending"
 msgstr "Vireillä"
 
-#: wp-includes/comment.php:3219
+#: wp-includes/comment.php:3215
 msgid "Comment URL"
 msgstr "Kommentin URL"
 
-#: wp-includes/comment.php:3218
+#: wp-includes/comment.php:3214
 msgid "Comment Content"
 msgstr "Kommentin sisältö"
 
-#: wp-includes/comment.php:3217
+#: wp-includes/comment.php:3213
 msgid "Comment Date"
 msgstr "Kommentin päivämäärä"
 
-#: wp-includes/comment.php:3216
+#: wp-includes/comment.php:3212
 msgid "Comment Author User Agent"
 msgstr "Kommentoijan selaimen tiedot"
 
-#: wp-includes/comment.php:3215
+#: wp-includes/comment.php:3211
 msgid "Comment Author IP"
 msgstr "Kommentoijan IP"
 
-#: wp-includes/comment.php:3214
+#: wp-includes/comment.php:3210
 msgid "Comment Author URL"
 msgstr "Kommentoijan URL"
 
-#: wp-includes/comment.php:3213
+#: wp-includes/comment.php:3209
 msgid "Comment Author Email"
 msgstr "Kommentoijan sähköposti"
 
-#: wp-includes/comment.php:3212
+#: wp-includes/comment.php:3208
 msgid "Comment Author"
 msgstr "Kommentin kirjoittaja"
 
-#: wp-includes/comment.php:3177 wp-includes/comment.php:3286
+#: wp-includes/comment.php:3173 wp-includes/comment.php:3282
 msgid "WordPress Comments"
 msgstr "WordPress-kommentit"
 
@@ -491,16 +479,16 @@ msgid "Something went wrong."
 msgstr "Jotain meni vikaan."
 
 #. translators: %s: User who is customizing the changeset in customizer.
-#: wp-includes/class-wp-customize-manager.php:3973
+#: wp-includes/class-wp-customize-manager.php:3970
 msgid "%s is already customizing this changeset. Do you want to take over?"
 msgstr "%s on jo muokkaamassa näitä muutoksia. Haluatko ottaa ohjat muokkauksen hallintaan?"
 
 #. translators: %s: User who is customizing the changeset in customizer.
-#: wp-includes/class-wp-customize-manager.php:3971
+#: wp-includes/class-wp-customize-manager.php:3968
 msgid "%s is already customizing this changeset. Please wait until they are done to try customizing. Your latest changes have been autosaved."
 msgstr "%s on jo muokkaamassa näitä muutoksia. Odota, että he saavat työn valmiiksi ennen muutosten tekemistä. Tekemäsi muutokset on tallennettu automaattisesti."
 
-#: wp-includes/class-wp-customize-manager.php:4175
+#: wp-includes/class-wp-customize-manager.php:4172
 msgid "Update anyway, even though it might break your site?"
 msgstr "Päivitä siitä huolimatta, että se saattaa rikkoa sivustosi?"
 
@@ -553,7 +541,7 @@ msgctxt "post action/button label"
 msgid "Schedule"
 msgstr "Ajasta"
 
-#: wp-includes/class-wp-customize-manager.php:4630
+#: wp-includes/class-wp-customize-manager.php:4627
 #: wp-includes/script-loader.php:554
 msgctxt "customizer changeset action/button label"
 msgid "Schedule"
@@ -587,33 +575,33 @@ msgstr "%s on ottanut mukauttimen hallintaan ja mukauttaa sivustoa tällä hetke
 msgid "Looks like something&#8217;s gone wrong. Wait a couple seconds, and then try again."
 msgstr "Jokin näyttäisi menneen vikaan. Odota muutama sekunti ja yritä uudelleen."
 
-#: wp-includes/class-wp-customize-manager.php:4161
+#: wp-includes/class-wp-customize-manager.php:4158
 msgid "Take over"
 msgstr "Ota ohjat"
 
-#: wp-includes/class-wp-customize-manager.php:4157
+#: wp-includes/class-wp-customize-manager.php:4154
 msgid "Go back"
 msgstr "Mene takaisin"
 
 #. translators: %s: User who is customizing the changeset in customizer.
-#: wp-includes/class-wp-customize-manager.php:3978
+#: wp-includes/class-wp-customize-manager.php:3975
 msgid "%s is already customizing this site. Please wait until they are done to try customizing. Your latest changes have been autosaved."
 msgstr "%s mukauttaa jo tätä sivustoa. Odota, kunnes hän on valmis kokeillaksesi mukauttamista. Viimeisimmät muutoksesi on tallennettu automaattisesti."
 
 #. translators: %s: User who is customizing the changeset in customizer.
-#: wp-includes/class-wp-customize-manager.php:3980
+#: wp-includes/class-wp-customize-manager.php:3977
 msgid "%s is already customizing this site. Do you want to take over?"
 msgstr "%s mukauttaa jo tätä sivustoa. Haluatko ottaa mukauttimen hallintaan?"
 
-#: wp-includes/class-wp-customize-manager.php:3231
+#: wp-includes/class-wp-customize-manager.php:3228
 msgid "Sorry, you are not allowed to take over."
 msgstr "Valitettavasti sinulla ei ole oikeuksia ottaa mukautinta hallintaasi."
 
-#: wp-includes/class-wp-customize-manager.php:3224
+#: wp-includes/class-wp-customize-manager.php:3221
 msgid "No changeset found to take over"
 msgstr "Muutosjoukkoa ei löytynyt"
 
-#: wp-includes/class-wp-customize-manager.php:3215
+#: wp-includes/class-wp-customize-manager.php:3212
 msgid "Security check failed."
 msgstr "Turvallisuustarkistus epäonnistui."
 
@@ -655,11 +643,11 @@ msgctxt "menu locations"
 msgid "View All Locations"
 msgstr "Näytä kaikki sijainnit"
 
-#: wp-includes/class-wp-customize-manager.php:4831
+#: wp-includes/class-wp-customize-manager.php:4828
 msgid "While previewing a new theme, you can continue to tailor things like widgets and menus, and explore theme-specific options."
 msgstr "Uutta teemaa esikatsellessa voit räätälöidä vimpainten ja valikoiden kaltaisia asioita sekä tutkia teemakohtaisia asetuksia."
 
-#: wp-includes/class-wp-customize-manager.php:4830
+#: wp-includes/class-wp-customize-manager.php:4827
 msgid "Looking for a theme? You can search or browse the WordPress.org theme directory, install and preview themes, then activate them right here."
 msgstr "Etsitkö teemaa? Voit hakea tai selata WordPress.orgin teemavalikoimaa, asentaa ja esikatsella teemoja sekä ottaa teeman käyttöön juuri täällä."
 
@@ -667,7 +655,7 @@ msgstr "Etsitkö teemaa? Voit hakea tai selata WordPress.orgin teemavalikoimaa, 
 msgid "Something went wrong. Your change may not have been saved. Please try again. There is also a chance that you may need to manually fix and upload the file over FTP."
 msgstr "Jokin meni vikaan. Muutoksesi ei ehkä ole tallentunut. Yritä uudestaan. Voi myös olla, että sinun täytyy korjata tiedosto käsin ja siirtää se FTP:n kautta."
 
-#: wp-includes/class-wp-customize-manager.php:5285
+#: wp-includes/class-wp-customize-manager.php:5282
 msgid "Screen reader users: when in forms mode, you may need to press the escape key twice."
 msgstr "Näytönlukijaohjelmistojen käyttäjät: kun olet lomaketilassa, saatat joutua painamaan escape-näppäintä kahdesti."
 
@@ -1448,13 +1436,13 @@ msgstr[1] "Teemasi voi näyttää valikoita %s paikassa."
 msgid "Your theme can display menus in one location."
 msgstr "Teemasi voi näyttää valikoita yhdessä paikassa."
 
-#: wp-includes/class-wp-customize-manager.php:5321
+#: wp-includes/class-wp-customize-manager.php:5318
 msgid "CSS code"
 msgstr "CSS-koodi"
 
 #. translators: 1: link to user profile, 2: additional link attributes, 3:
 #. accessibility text
-#: wp-includes/class-wp-customize-manager.php:5292
+#: wp-includes/class-wp-customize-manager.php:5289
 #: wp-includes/widgets/class-wp-widget-custom-html.php:299
 msgid "The edit field automatically highlights code syntax. You can disable this in your <a href=\"%1$s\" %2$s>user profile%3$s</a> to work in plain text mode."
 msgstr "Kentän muokkaus korostaa automaattisesti koodisyntaksia. Voit poistaa tämän ominaisuuden käytöstä <a href=\"%1$s\" %2$s>käyttäjäprofiilissa%3$s</a> työskennelläksesi pelkällä paljaalla tekstieditorilla."
@@ -1463,51 +1451,51 @@ msgstr "Kentän muokkaus korostaa automaattisesti koodisyntaksia. Voit poistaa t
 msgid "Screen reader users: when in forms mode, you may need to press the Esc key twice."
 msgstr "Ruudunlukijan käyttäjä: saatat joutua painamaan Esc-näppäintä kaksi kertaa lomakemoodissa."
 
-#: wp-includes/class-wp-customize-manager.php:5284
+#: wp-includes/class-wp-customize-manager.php:5281
 #: wp-includes/widgets/class-wp-widget-custom-html.php:312
 msgid "To move away from this area, press the Esc key followed by the Tab key."
 msgstr "Siirtyäksesi pois tältä alueelta paina ensin Esc-näppäintä ja sitten tabulaattoria."
 
-#: wp-includes/class-wp-customize-manager.php:5283
+#: wp-includes/class-wp-customize-manager.php:5280
 #: wp-includes/widgets/class-wp-widget-custom-html.php:311
 msgid "In the editing area, the Tab key enters a tab character."
 msgstr "Muokkausalueella tabulaattorinäppäin syöttää tabulaattorimerkin."
 
-#: wp-includes/class-wp-customize-manager.php:5281
+#: wp-includes/class-wp-customize-manager.php:5278
 #: wp-includes/widgets/class-wp-widget-custom-html.php:309
 msgid "When using a keyboard to navigate:"
 msgstr "Käyttäessäsi näppäimistöä navigoimiseen:"
 
-#: wp-includes/class-wp-customize-manager.php:5271
+#: wp-includes/class-wp-customize-manager.php:5268
 msgid "Add your own CSS code here to customize the appearance and layout of your site."
 msgstr "Lisää oma CSS-koodisi tänne muokataksesi sivuston ulkoasua ja asettelua."
 
-#: wp-includes/class-wp-customize-manager.php:5236
+#: wp-includes/class-wp-customize-manager.php:5233
 msgid "Your homepage displays"
 msgstr "Kotisivusi näyttää"
 
-#: wp-includes/class-wp-customize-manager.php:5225
+#: wp-includes/class-wp-customize-manager.php:5222
 msgid "You can choose what&#8217;s displayed on the homepage of your site. It can be posts in reverse chronological order (classic blog), or a fixed/static page. To set a static homepage, you first need to create two Pages. One will become the homepage, and the other will be where your posts are displayed."
 msgstr "Voit valita, mitä kotisivulla näytetään. Se voi näyttää artikkelit käänteisessä kronologisessa järjestyksessä (perinteinen blogi) tai staattisen sivun. Asettaaksesi staattisen kotisivun tee ensin kaksi sivua. Toisesta tulee kotisivu ja artikkelit näytetään toisella sivulla."
 
-#: wp-includes/class-wp-customize-manager.php:5223
+#: wp-includes/class-wp-customize-manager.php:5220
 msgid "Homepage Settings"
 msgstr "Kotisivun asetukset"
 
 #. translators: %s: site icon size in pixels
-#: wp-includes/class-wp-customize-manager.php:4917
+#: wp-includes/class-wp-customize-manager.php:4914
 msgid "Site Icons should be square and at least %s pixels."
 msgstr "Sivuston ikoneiden tulisi olla neliön muotoisia ja ainakin %s pikseliä."
 
-#: wp-includes/class-wp-customize-manager.php:4915
+#: wp-includes/class-wp-customize-manager.php:4912
 msgid "Site Icons are what you see in browser tabs, bookmark bars, and within the WordPress mobile apps. Upload one here!"
 msgstr "Sivuston ikonit näkyvät selaimen välilehdillä, kirjanmerkeissä ja WordPressin mobiilisovelluksissa. Lataa ikoni tästä!"
 
-#: wp-includes/class-wp-customize-manager.php:4847
+#: wp-includes/class-wp-customize-manager.php:4844
 msgid "WordPress.org themes"
 msgstr "WordPress.org -teemat"
 
-#: wp-includes/class-wp-customize-manager.php:4838
+#: wp-includes/class-wp-customize-manager.php:4835
 msgid "Installed themes"
 msgstr "Asennetut teemat"
 
@@ -1515,40 +1503,40 @@ msgstr "Asennetut teemat"
 msgid "Publish Settings"
 msgstr "Julkaisuasetukset"
 
-#: wp-includes/class-wp-customize-manager.php:4205
+#: wp-includes/class-wp-customize-manager.php:4202
 msgid "Copied"
 msgstr "Kopioitu"
 
-#: wp-includes/class-wp-customize-manager.php:4199
+#: wp-includes/class-wp-customize-manager.php:4196
 msgid "Preview Link"
 msgstr "Esikatselulinkki"
 
-#: wp-includes/class-wp-customize-manager.php:4196
+#: wp-includes/class-wp-customize-manager.php:4193
 msgid "See how changes would look live on your website, and share the preview with people who can't access the Customizer."
 msgstr "Esikatsele muutokset ja jaa esikatselu henkilöille, jotka eivät voi käyttää mukautinta."
 
-#: wp-includes/class-wp-customize-manager.php:4194
+#: wp-includes/class-wp-customize-manager.php:4191
 msgid "Share Preview Link"
 msgstr "Jaa esikatselulinkki"
 
-#: wp-includes/class-wp-customize-manager.php:3045
+#: wp-includes/class-wp-customize-manager.php:3042
 msgid "Changes trashed successfully."
 msgstr "Muutokset tuhottu onnistuneesti."
 
-#: wp-includes/class-wp-customize-manager.php:3030
+#: wp-includes/class-wp-customize-manager.php:3027
 msgid "Changes have already been trashed."
 msgstr "Muutokset on tuhottu jo."
 
-#: wp-includes/class-wp-customize-manager.php:3024
-#: wp-includes/class-wp-customize-manager.php:3040
+#: wp-includes/class-wp-customize-manager.php:3021
+#: wp-includes/class-wp-customize-manager.php:3037
 msgid "Unable to trash changes."
 msgstr "Muutosten tuhoaminen epäonnistui."
 
-#: wp-includes/class-wp-customize-manager.php:3015
+#: wp-includes/class-wp-customize-manager.php:3012
 msgid "No changes saved yet, so there is nothing to trash."
 msgstr "Muutoksia ei tallennettu vielä, joten ei ole mitään tuhottavaa."
 
-#: wp-includes/class-wp-customize-manager.php:3007
+#: wp-includes/class-wp-customize-manager.php:3004
 msgid "There was an authentication problem. Please reload and try again."
 msgstr "Ongelma tunnistautumisessa. Lataa sivu uudelleen."
 
@@ -1983,12 +1971,10 @@ msgid "Limit result set to terms with one or more specific slugs."
 msgstr "Rajaa tulokset termeihin yhdellä tai useammalla polkutunnuksella."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:329
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:274
 msgid "The page number requested is larger than the number of pages available."
 msgstr "Pyydetty sivunumero on suurempi kuin käytettävissä olevien sivujen määrä."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:157
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:207
 msgid "You need to define an include parameter to order by include."
 msgstr "Include-parametri tulee määritellä, jotta sen mukaan voidaan järjestää."
 
@@ -2075,7 +2061,7 @@ msgstr "Suositeltu kuvakoko: %1$s x %2$s pikseliä (leveys x korkeus)."
 msgid "Sorry, this file type is not permitted for security reasons."
 msgstr "Tietoturvasyistä tämän tiedostotyypin käyttö on kielletty."
 
-#: wp-includes/comment.php:3070
+#: wp-includes/comment.php:3066
 msgid "Sorry, comments are not allowed for this item."
 msgstr "Pahoittelemme, kohteen kommentointi ei ole sallittu."
 
@@ -2746,7 +2732,7 @@ msgstr "Piilota valinnat"
 msgid "Document Preview"
 msgstr "Dokumentin esikatselu"
 
-#: wp-includes/class-wp-customize-manager.php:5006
+#: wp-includes/class-wp-customize-manager.php:5003
 msgid "Header Media"
 msgstr "Otsakkeen media"
 
@@ -2780,7 +2766,7 @@ msgstr "Liitteen HTML-muotoinen kuvaus, sellaisena kuin se tulostetaan selaimell
 msgid "Caption for the attachment, as it exists in the database."
 msgstr "Liitteen kuvateksti, sellaisena kuin se on tietokannassa."
 
-#: wp-includes/class-wp-customize-manager.php:5668
+#: wp-includes/class-wp-customize-manager.php:5665
 msgid "Please enter a valid YouTube URL."
 msgstr "Anna kelvollinen YouTube-verkko-osoite"
 
@@ -2803,7 +2789,7 @@ msgid "Terms do not support trashing. Set '%s' to delete."
 msgstr "Termejä ei voi laittaa roskakoriin. Aseta '%s' poistaaksesi."
 
 #. translators: %s: force=true
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:400
+#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:292
 msgid "Revisions do not support trashing. Set '%s' to delete."
 msgstr "Versioita ei voi laittaa roskakoriin. Aseta '%s' poistaaksesi."
 
@@ -2817,7 +2803,7 @@ msgstr "Tätä artikkelia ei voi laittaa roskakoriin. Aseta '%s' poistaaksesi."
 msgid "The comment does not support trashing. Set '%s' to delete."
 msgstr "Tätä kommenttia ei voi laittaa roskakoriin. Aseta '%s' poistaaksesi."
 
-#: wp-includes/class-wp-customize-manager.php:5091
+#: wp-includes/class-wp-customize-manager.php:5088
 msgid "Or, enter a YouTube URL:"
 msgstr "Tai, syötä Youtube URL:"
 
@@ -2871,7 +2857,7 @@ msgstr "Valitettavasti paluuviittaukset tälle kohteelle on suljettu."
 msgid "I really need an ID for this to work."
 msgstr "Tämä toiminto vaatii kohteen tunnisteen."
 
-#: wp-includes/class-wp-customize-manager.php:5251
+#: wp-includes/class-wp-customize-manager.php:5248
 msgid "Homepage"
 msgstr "Etusivu"
 
@@ -3081,7 +3067,6 @@ msgstr "Rajaa tulokset kohteisiin, joiden vanhemmalla on jokin määritellyistä
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1405
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2331
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:708
 #: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:924
 #: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1338
 msgid "Offset the result set by a specific number of items."
@@ -3153,7 +3138,7 @@ msgid "The excerpt for the object."
 msgstr "Kohteen ote."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2025
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:603
+#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:460
 msgid "The ID for the author of the object."
 msgstr "Kohteen kirjoittajan ID."
 
@@ -3182,17 +3167,17 @@ msgid "A named status for the object."
 msgstr "Kohteen nimetty tila."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1878
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:647
+#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:504
 msgid "An alphanumeric identifier for the object unique to its type."
 msgstr "Kohteen tyypilleen uniikki alfanumeerinen tunniste."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1871
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:636
+#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:493
 msgid "The date the object was last modified, as GMT."
 msgstr "Kohteen viimeinen muokkauspäivämäärä GMT-ajassa."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1864
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:630
+#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:487
 msgid "The date the object was last modified, in the site's timezone."
 msgstr "Kohteen viimeinen muokkauspäivämäärä sivuston aikavyöhykkeen ajassa."
 
@@ -3201,7 +3186,7 @@ msgid "GUID for the object, transformed for display."
 msgstr "Kohteen GUID, sellaisena kuin se tulostetaan selaimelle."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1837
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:620
+#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:477
 msgid "GUID for the object, as it exists in the database."
 msgstr "Kohteen GUID sellaisena kuin se on tietokannassa."
 
@@ -3211,13 +3196,13 @@ msgstr "Kohteen ainutkertainen tunnusnumero."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1270
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1825
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:614
+#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:471
 msgid "The date the object was published, as GMT."
 msgstr "Ajankohta kun kohde julkaistiin GMT-ajassa."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1264
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1819
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:608
+#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:465
 msgid "The date the object was published, in the site's timezone."
 msgstr "Ajankohta kun kohde julkaistiin sivuston aikavyöhykkeen ajassa."
 
@@ -3265,7 +3250,6 @@ msgid "Incorrect post password."
 msgstr "Väärä artikkelin salasana."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:152
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:202
 msgid "You need to define a search term to order by relevance."
 msgstr "Sinun on annettava hakusana, jotta voit lajitella relevanssin mukaan."
 
@@ -3368,14 +3352,12 @@ msgstr "Rajaa tulokset kommentteihin, joilla on tiettyjen vanhempien ID."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1420
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2343
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:720
 #: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1351
 msgid "Sort collection by object attribute."
 msgstr "Järjestä kokoelma kohteen ominaisuuden mukaan."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1410
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2336
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:713
 #: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:930
 #: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1344
 msgid "Order sort attribute ascending or descending."
@@ -3383,7 +3365,6 @@ msgstr "Järjestää tulokset nousevaan tai laskevaan järjestykseen."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1396
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2315
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:699
 #: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:914
 #: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1329
 msgid "Limit result set to specific IDs."
@@ -3391,7 +3372,6 @@ msgstr "Rajaa tulokset tiettyihin ID:ihin."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1387
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2306
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:690
 #: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:905
 #: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1320
 msgid "Ensure result set excludes specific IDs."
@@ -3443,7 +3423,7 @@ msgstr "Liittyvän artikkelin ID."
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1909
 #: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:71
 #: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:87
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:642
+#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:499
 msgid "The ID for the parent of the object."
 msgstr "Kohteen vanhemman ID."
 
@@ -3496,7 +3476,7 @@ msgstr "Käyttäjän ID, jos kirjoittaja on tiedossa."
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:89
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1851
 #: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:91
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:625
+#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:482
 msgid "Unique identifier for the object."
 msgstr "Kohteen uniikki tunniste."
 
@@ -3532,7 +3512,7 @@ msgstr "Kommentointi edellyttää kelvollista tekijän nimeä ja sähköpostioso
 msgid "Cannot create existing comment."
 msgstr "Olemassa olevaa kommenttia ei voi luoda. "
 
-#: wp-includes/comment.php:3121
+#: wp-includes/comment.php:3117
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:395
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:412
 msgid "Sorry, you must be logged in to comment."
@@ -3892,122 +3872,122 @@ msgid "Post"
 msgstr "Julkaise"
 
 #. translators: 1: .mp4, 2: .mov
-#: wp-includes/class-wp-customize-manager.php:5644
+#: wp-includes/class-wp-customize-manager.php:5641
 msgid "Only %1$s or %2$s files may be used for header video. Please convert your video file and try again, or, upload your video to YouTube and link it with the option below."
 msgstr "Vain %1$s tai %2$s-muotoisia tiedostoja voidaan käyttää otsakevideoina. Muunna videon muoto ja yritä uudelleen. Voit myös ladata videon YouTubeen ja linkittää sen käytettäväksi."
 
-#: wp-includes/class-wp-customize-manager.php:5638
+#: wp-includes/class-wp-customize-manager.php:5635
 msgid "This video file is too large to use as a header video. Try a shorter video or optimize the compression settings and re-upload a file that is less than 8MB. Or, upload your video to YouTube and link it with the option below."
 msgstr "Videon tiedostokoko on liian suuri käytettäväksi otsakkeen videona. Yritä uudelleen pienemmällä tiedostolla, tiedoston maksimikoko on 8 megatavua. Voit myös ladata tiedoston YouTubeen ja linkittää sen käytettäväksi."
 
-#: wp-includes/class-wp-customize-manager.php:5598
+#: wp-includes/class-wp-customize-manager.php:5595
 msgid "Unrecognized background setting."
 msgstr "Taustakuvan asetusta ei tunnistettu."
 
-#: wp-includes/class-wp-customize-manager.php:5589
-#: wp-includes/class-wp-customize-manager.php:5593
+#: wp-includes/class-wp-customize-manager.php:5586
+#: wp-includes/class-wp-customize-manager.php:5590
 msgid "Invalid value for background size."
 msgstr "Taustan koko ei kelpaa. "
 
-#: wp-includes/class-wp-customize-manager.php:5585
+#: wp-includes/class-wp-customize-manager.php:5582
 msgid "Invalid value for background position Y."
 msgstr "Virheellinen arvo taustakuvan Y-sijainnille."
 
-#: wp-includes/class-wp-customize-manager.php:5581
+#: wp-includes/class-wp-customize-manager.php:5578
 msgid "Invalid value for background position X."
 msgstr "Virheellinen arvo taustakuvan X-sijainnille."
 
-#: wp-includes/class-wp-customize-manager.php:5577
+#: wp-includes/class-wp-customize-manager.php:5574
 msgid "Invalid value for background attachment."
 msgstr "Virheellinen CSS background-attachment -arvo."
 
-#: wp-includes/class-wp-customize-manager.php:5573
+#: wp-includes/class-wp-customize-manager.php:5570
 msgid "Invalid value for background repeat."
 msgstr "Virheellinen CSS background-repeat -arvo."
 
 #. translators: accessibility text
-#: wp-includes/class-wp-customize-manager.php:4202
-#: wp-includes/class-wp-customize-manager.php:5277
-#: wp-includes/class-wp-customize-manager.php:5297
+#: wp-includes/class-wp-customize-manager.php:4199
+#: wp-includes/class-wp-customize-manager.php:5274
+#: wp-includes/class-wp-customize-manager.php:5294
 #: wp-includes/customize/class-wp-customize-nav-menu-locations-control.php:56
 #: wp-includes/widgets/class-wp-widget-custom-html.php:304
 msgid "(opens in a new window)"
 msgstr "(linkki avautuu uuteen ikkunaan)"
 
-#: wp-includes/class-wp-customize-manager.php:5275
+#: wp-includes/class-wp-customize-manager.php:5272
 msgid "Learn more about CSS"
 msgstr "Lue lisää CSS:stä"
 
-#: wp-includes/class-wp-customize-manager.php:5308
+#: wp-includes/class-wp-customize-manager.php:5305
 msgid "Additional CSS"
 msgstr "Oma CSS"
 
-#: wp-includes/class-wp-customize-manager.php:5202
+#: wp-includes/class-wp-customize-manager.php:5199
 msgid "Scroll with Page"
 msgstr "Vieritä sivun mukana"
 
-#: wp-includes/class-wp-customize-manager.php:5190
+#: wp-includes/class-wp-customize-manager.php:5187
 msgid "Repeat Background Image"
 msgstr "Toista taustakuva"
 
-#: wp-includes/class-wp-customize-manager.php:5177
+#: wp-includes/class-wp-customize-manager.php:5174
 msgid "Original"
 msgstr "Alkuperäinen"
 
-#: wp-includes/class-wp-customize-manager.php:5173
+#: wp-includes/class-wp-customize-manager.php:5170
 msgid "Image Size"
 msgstr "Kuvan koko"
 
-#: wp-includes/class-wp-customize-manager.php:5158
+#: wp-includes/class-wp-customize-manager.php:5155
 #: wp-includes/customize/class-wp-customize-background-position-control.php:66
 msgid "Image Position"
 msgstr "Kuvan sijainti"
 
-#: wp-includes/class-wp-customize-manager.php:5141
+#: wp-includes/class-wp-customize-manager.php:5138
 msgctxt "Custom Preset"
 msgid "Custom"
 msgstr "Mukautettu"
 
-#: wp-includes/class-wp-customize-manager.php:5140
+#: wp-includes/class-wp-customize-manager.php:5137
 msgctxt "Repeat Image"
 msgid "Repeat"
 msgstr "Toisto"
 
-#: wp-includes/class-wp-customize-manager.php:5139
-#: wp-includes/class-wp-customize-manager.php:5178
+#: wp-includes/class-wp-customize-manager.php:5136
+#: wp-includes/class-wp-customize-manager.php:5175
 msgid "Fit to Screen"
 msgstr "Sovita ruudulle"
 
-#: wp-includes/class-wp-customize-manager.php:5137
+#: wp-includes/class-wp-customize-manager.php:5134
 msgctxt "Default Preset"
 msgid "Default"
 msgstr "Oletusasetus"
 
-#: wp-includes/class-wp-customize-manager.php:5133
+#: wp-includes/class-wp-customize-manager.php:5130
 msgctxt "Background Preset"
 msgid "Preset"
 msgstr "Oletusasetus"
 
-#: wp-includes/class-wp-customize-manager.php:5081
+#: wp-includes/class-wp-customize-manager.php:5078
 msgid "Header Video"
 msgstr "Otsakkeen video"
 
 #. translators: 1: .mp4, 2: header height in pixels
-#: wp-includes/class-wp-customize-manager.php:5028
+#: wp-includes/class-wp-customize-manager.php:5025
 msgid "Upload your video in %1$s format and minimize its file size for best results. Your theme recommends a height of %2$s pixels."
 msgstr "Lataa video %1$s-muodossa ja pyri minimoimaan sen tiedostokoko. Käyttämäsi teema suosittelee videolle %2$s pikselin korkeutta."
 
 #. translators: 1: .mp4, 2: header width in pixels
-#: wp-includes/class-wp-customize-manager.php:5021
+#: wp-includes/class-wp-customize-manager.php:5018
 msgid "Upload your video in %1$s format and minimize its file size for best results. Your theme recommends a width of %2$s pixels."
 msgstr "Lataa video %1$s-muodossa ja pyri minimoimaan sen tiedostokoko. Käyttämäsi teema suosittelee videolle %2$s pikselin leveyttä."
 
 #. translators: 1: .mp4, 2: header size in pixels
-#: wp-includes/class-wp-customize-manager.php:5014
+#: wp-includes/class-wp-customize-manager.php:5011
 msgid "Upload your video in %1$s format and minimize its file size for best results. Your theme recommends dimensions of %2$s pixels."
 msgstr "Lataa video %1$s-muodossa ja pyri minimoimaan sen tiedostokoko. Käyttämäsi teema suosittelee videolle %2$s pikselin kokoa."
 
-#: wp-includes/class-wp-customize-manager.php:5007
+#: wp-includes/class-wp-customize-manager.php:5004
 msgid "If you add a video, the image will be used as a fallback while the video loads."
 msgstr "Jos lisäät videon, kuvaa näytetään kunnes video on latautunut."
 
@@ -4019,23 +3999,23 @@ msgid "Search themes&hellip;"
 msgstr "Etsi teemoja&hellip;"
 
 #. translators: %s: theme name
-#: wp-includes/class-wp-customize-manager.php:4713
+#: wp-includes/class-wp-customize-manager.php:4710
 msgid "Showing details for theme: %s"
 msgstr "Näytetään tiedot teemasta: %s"
 
 #. translators: %d: number of themes being displayed, which cannot currently
 #. consider singular vs. plural forms
-#: wp-includes/class-wp-customize-manager.php:4711
+#: wp-includes/class-wp-customize-manager.php:4708
 msgid "Displaying %d themes"
 msgstr "Näytetään %d teemaa"
 
 #. translators: %d: number of theme search results, which cannot currently
 #. consider singular vs. plural forms
-#: wp-includes/class-wp-customize-manager.php:4709
+#: wp-includes/class-wp-customize-manager.php:4706
 msgid "%d themes found"
 msgstr "%d teemaa löydetty"
 
-#: wp-includes/class-wp-customize-manager.php:4707
+#: wp-includes/class-wp-customize-manager.php:4704
 msgid "Are you sure you want to delete this theme?"
 msgstr "Haluatko varmasti poistaa tämän teeman?"
 
@@ -4141,7 +4121,7 @@ msgstr "Pysäytä"
 msgid "Play"
 msgstr "Toista"
 
-#: wp-includes/taxonomy.php:2076 wp-includes/taxonomy.php:2702
+#: wp-includes/taxonomy.php:2055 wp-includes/taxonomy.php:2681
 msgid "A name is required for this term."
 msgstr "Tämä termi vaatii nimen."
 
@@ -4511,7 +4491,7 @@ msgstr "Vakio %1$s on <strong>vanhentunut</strong>. Käytä boolean-vakiota %2$s
 
 #. translators: 1: panel id, 2: link to 'customize_loaded_components' filter
 #. reference
-#: wp-includes/class-wp-customize-manager.php:3763
+#: wp-includes/class-wp-customize-manager.php:3760
 msgid "Removing %1$s manually will cause PHP warnings. Use the %2$s filter instead."
 msgstr "%1$s:n poistaminen manuaalisesti aiheuttaa PHP-varoituksen. Käytä sen sijaan %2$s-suodinta (filter)."
 
@@ -4621,20 +4601,20 @@ msgstr "Sulje dialogi"
 msgid "The called constructor method for %1$s in %2$s is <strong>deprecated</strong> since version %3$s! Use %4$s instead."
 msgstr "Kutsuttu luokan %1$s metodi kantaluokassa %2$s on <strong>vanhentunut</strong> versiosta %3$s lähtien! Käytä sen sijaan metodia %4$s."
 
-#: wp-includes/class-wp-customize-manager.php:4947
+#: wp-includes/class-wp-customize-manager.php:4944
 msgid "Choose logo"
 msgstr "Valitse logo"
 
-#: wp-includes/class-wp-customize-manager.php:4945
+#: wp-includes/class-wp-customize-manager.php:4942
 msgid "No logo selected"
 msgstr "Logoa ei ole valittuna"
 
-#: wp-includes/class-wp-customize-manager.php:4942
+#: wp-includes/class-wp-customize-manager.php:4939
 msgid "Change logo"
 msgstr "Vaihda logo"
 
-#: wp-includes/class-wp-customize-manager.php:4941
-#: wp-includes/class-wp-customize-manager.php:4946
+#: wp-includes/class-wp-customize-manager.php:4938
+#: wp-includes/class-wp-customize-manager.php:4943
 msgid "Select logo"
 msgstr "Valitse logo"
 
@@ -4696,24 +4676,24 @@ msgstr "Väärä oliotyyppi"
 msgid "Paste URL or type to search"
 msgstr "Lisää URL tai aloita haku kirjoittamalla kenttään."
 
-#: wp-includes/class-wp-customize-manager.php:4933
+#: wp-includes/class-wp-customize-manager.php:4930
 msgid "Logo"
 msgstr "Logo"
 
-#: wp-includes/class-wp-customize-manager.php:4899
-#: wp-includes/class-wp-customize-manager.php:4977
+#: wp-includes/class-wp-customize-manager.php:4896
+#: wp-includes/class-wp-customize-manager.php:4974
 msgid "Display Site Title and Tagline"
 msgstr "Näytä sivuston otsikko tai kuvaus"
 
-#: wp-includes/class-wp-customize-manager.php:4800
+#: wp-includes/class-wp-customize-manager.php:4797
 msgid "Enter mobile preview mode"
 msgstr "Siirry mobiilinäkymän esikatseluun"
 
-#: wp-includes/class-wp-customize-manager.php:4797
+#: wp-includes/class-wp-customize-manager.php:4794
 msgid "Enter tablet preview mode"
 msgstr "Siirry tablettinäkymän esikatseluun"
 
-#: wp-includes/class-wp-customize-manager.php:4793
+#: wp-includes/class-wp-customize-manager.php:4790
 msgid "Enter desktop preview mode"
 msgstr "Siirry työpöytänäkymän esikatseluun"
 
@@ -4803,7 +4783,7 @@ msgstr "Käytä %s -funktiokutsua jos et halua tulostaa arvoa näkyviin."
 msgid "Term ID is shared between multiple taxonomies"
 msgstr "Termin ID on jaettu useamman taksonomian kesken"
 
-#: wp-includes/taxonomy.php:1165 wp-includes/taxonomy.php:1247
+#: wp-includes/taxonomy.php:1144 wp-includes/taxonomy.php:1226
 msgid "Term meta cannot be added to terms that are shared between taxonomies."
 msgstr "Metatietoa ei voi lisätä termille, joka kuuluu useampaan taksonomiaan."
 
@@ -5377,7 +5357,7 @@ msgid "Press return or enter to open this section"
 msgstr "Avaa osio painamalla enter"
 
 #. translators: %s: document title from the preview
-#: wp-includes/class-wp-customize-manager.php:4375
+#: wp-includes/class-wp-customize-manager.php:4372
 msgid "Live Preview: %s"
 msgstr "Esikatselu: %s"
 
@@ -5525,11 +5505,11 @@ msgstr "Piilota kuva"
 msgid "Hide header image"
 msgstr "Piilota otsakekuva"
 
-#: wp-includes/class-wp-customize-manager.php:4913
+#: wp-includes/class-wp-customize-manager.php:4910
 msgid "Site Icon"
 msgstr "Sivuston kuvake"
 
-#: wp-includes/class-wp-customize-manager.php:4864
+#: wp-includes/class-wp-customize-manager.php:4861
 msgid "Site Identity"
 msgstr "Sivuston identiteetti"
 
@@ -6166,7 +6146,7 @@ msgstr "Asennus onnistui."
 msgid "Taxonomy names must be between 1 and 32 characters in length."
 msgstr "Taksonomian nimen on oltava 1-32 merkkiä pitkä."
 
-#: wp-includes/taxonomy.php:3616
+#: wp-includes/taxonomy.php:3595
 msgid "Could not split shared term."
 msgstr "Jaettua termiä ei voitu jakaa."
 
@@ -6385,7 +6365,7 @@ msgstr "Elementtipolku"
 msgid "The following values do not describe a valid date: month %1$s, day %2$s."
 msgstr "Tämä ei kuvaa todellista päivämäärää: kuukausi %1$s, päivä %2$s."
 
-#: wp-includes/taxonomy.php:2165
+#: wp-includes/taxonomy.php:2144
 msgid "A term with the name provided already exists in this taxonomy."
 msgstr "Termi tällä nimellä ja polkutunnuksella on jo olemassa tässä taksonomiassa."
 
@@ -6710,7 +6690,7 @@ msgstr "Valitse useita kerralla"
 
 #. translators: %s: taxonomy label, %l: list of terms formatted as per
 #. $term_template
-#: wp-includes/taxonomy.php:4120
+#: wp-includes/taxonomy.php:4099
 msgid "%s: %l."
 msgstr "%s: %l."
 
@@ -6846,7 +6826,7 @@ msgstr "Vimpaimet ovat itsenäisiä sisältöelementtejä, jotka voidaan asettaa
 msgid "You are customizing %s"
 msgstr "Olet muokkaamassa kohdetta %s"
 
-#: wp-includes/comment.php:3161
+#: wp-includes/comment.php:3157
 msgid "<strong>ERROR</strong>: The comment could not be saved. Please try again later."
 msgstr "<strong>VIRHE</strong>: Kommenttia ei voitu tallentaa"
 
@@ -8424,7 +8404,7 @@ msgctxt "Display name based on first name and last name"
 msgid "%1$s %2$s"
 msgstr "%1$s %2$s"
 
-#: wp-includes/taxonomy.php:2410
+#: wp-includes/taxonomy.php:2389
 msgid "Could not insert term relationship into the database."
 msgstr "Termin suhteen lisäys tietokantaan epäonnistui"
 
@@ -8516,11 +8496,11 @@ msgstr "Teksti"
 msgid "Skip to toolbar"
 msgstr "Siirry työkalupalkkiin"
 
-#: wp-includes/class-wp-customize-manager.php:4984
+#: wp-includes/class-wp-customize-manager.php:4981
 msgid "Header Text Color"
 msgstr "Otsakkeen tekstin väri"
 
-#: wp-includes/class-wp-customize-manager.php:4961
+#: wp-includes/class-wp-customize-manager.php:4958
 msgid "Colors"
 msgstr "Värit"
 
@@ -8554,7 +8534,7 @@ msgstr "Yksityistä artikkelia ei voi kiinnittää etusivulle."
 msgid "Sorry, you are not allowed to publish this page."
 msgstr "Sinulla ei ole oikeutta julkaista tätä sivua."
 
-#: wp-includes/class-wp-customize-manager.php:5034
+#: wp-includes/class-wp-customize-manager.php:5031
 #: wp-includes/customize/class-wp-customize-header-image-control.php:31
 msgid "Header Image"
 msgstr "Otsakekuva"
@@ -8598,16 +8578,16 @@ msgid_plural "Site name must be at least %s characters."
 msgstr[0] "Sivuston nimessä on oltava ainakin %s merkki."
 msgstr[1] "Sivuston nimessä on oltava ainakin %s merkkiä."
 
-#: wp-includes/class-wp-customize-manager.php:5241
+#: wp-includes/class-wp-customize-manager.php:5238
 msgid "A static page"
 msgstr "Staattinen sivu"
 
-#: wp-includes/class-wp-customize-manager.php:5108
+#: wp-includes/class-wp-customize-manager.php:5105
 #: wp-includes/customize/class-wp-customize-background-image-control.php:30
 msgid "Background Image"
 msgstr "Taustakuva"
 
-#: wp-includes/class-wp-customize-manager.php:4999
+#: wp-includes/class-wp-customize-manager.php:4996
 msgid "Background Color"
 msgstr "Taustaväri"
 
@@ -8623,7 +8603,7 @@ msgstr "Poista kuva"
 msgid "Sorry, you are not allowed to edit this comment."
 msgstr "Valitettavasti et voi muokata tätä kommenttia."
 
-#: wp-includes/class-wp-customize-manager.php:5263
+#: wp-includes/class-wp-customize-manager.php:5260
 msgid "Posts page"
 msgstr "Artikkeleiden sivu"
 
@@ -8631,7 +8611,7 @@ msgstr "Artikkeleiden sivu"
 msgid "Allowed Files"
 msgstr "Sallitut tiedosto"
 
-#: wp-includes/class-wp-customize-manager.php:4943
+#: wp-includes/class-wp-customize-manager.php:4940
 #: wp-includes/class-wp-customize-widgets.php:753
 #: wp-includes/class-wp-editor.php:1256
 #: wp-includes/customize/class-wp-customize-media-control.php:226
@@ -8664,7 +8644,7 @@ msgstr "Termin muokkaaminen ei onnistunut."
 #: wp-includes/class-wp-xmlrpc-server.php:1501
 #: wp-includes/class-wp-xmlrpc-server.php:2053
 #: wp-includes/class-wp-xmlrpc-server.php:2149
-#: wp-includes/class-wp-xmlrpc-server.php:2221 wp-includes/taxonomy.php:2073
+#: wp-includes/class-wp-xmlrpc-server.php:2221 wp-includes/taxonomy.php:2052
 msgid "Invalid term ID."
 msgstr "Väärä käsitteen ID."
 
@@ -8676,7 +8656,7 @@ msgstr "Et voi muokata tämän taksonomian termejä."
 #: wp-includes/class-wp-xmlrpc-server.php:2077
 #: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:406
 #: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:511
-#: wp-includes/taxonomy.php:2082 wp-includes/taxonomy.php:2706
+#: wp-includes/taxonomy.php:2061 wp-includes/taxonomy.php:2685
 msgid "Parent term does not exist."
 msgstr "Yläkäsitettä ei ole olemassa."
 
@@ -8697,11 +8677,11 @@ msgstr "Et voi lisätä termejä tähän taksonomiaan."
 #: wp-includes/class-wp-xmlrpc-server.php:2270
 #: wp-includes/class-wp-xmlrpc-server.php:2365
 #: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:163
-#: wp-includes/taxonomy.php:420 wp-includes/taxonomy.php:673
-#: wp-includes/taxonomy.php:773 wp-includes/taxonomy.php:952
-#: wp-includes/taxonomy.php:1111 wp-includes/taxonomy.php:1922
-#: wp-includes/taxonomy.php:2058 wp-includes/taxonomy.php:2321
-#: wp-includes/taxonomy.php:2464 wp-includes/taxonomy.php:2665
+#: wp-includes/taxonomy.php:420 wp-includes/taxonomy.php:652
+#: wp-includes/taxonomy.php:752 wp-includes/taxonomy.php:931
+#: wp-includes/taxonomy.php:1090 wp-includes/taxonomy.php:1901
+#: wp-includes/taxonomy.php:2037 wp-includes/taxonomy.php:2300
+#: wp-includes/taxonomy.php:2443 wp-includes/taxonomy.php:2644
 msgid "Invalid taxonomy."
 msgstr "Väärä taksonomia."
 
@@ -8751,7 +8731,7 @@ msgid "ERROR: The themes directory is either empty or doesn&#8217;t exist. Pleas
 msgstr "VIRHE: teemahakemisto on joko tyhjä tai sitä ei ole olemassa. Tarkista WP-asennuksesi."
 
 #. translators: %s: document title from the preview
-#: wp-includes/class-wp-customize-manager.php:4372
+#: wp-includes/class-wp-customize-manager.php:4369
 msgid "Customize: %s"
 msgstr "Mukauta: %s"
 
@@ -8761,11 +8741,11 @@ msgstr "Mukauta: %s"
 msgid "&mdash; Select &mdash;"
 msgstr "&mdash; Valitse &mdash;"
 
-#: wp-includes/class-wp-customize-manager.php:4886
+#: wp-includes/class-wp-customize-manager.php:4883
 msgid "Tagline"
 msgstr "Kuvaus"
 
-#: wp-includes/class-wp-customize-manager.php:5240
+#: wp-includes/class-wp-customize-manager.php:5237
 msgid "Your latest posts"
 msgstr "Uusimmat artikkelisi"
 
@@ -8805,7 +8785,7 @@ msgstr "Et voi muokata tätä artikkelia."
 msgid "Edit Site"
 msgstr "Muokkaa sivustoa"
 
-#: wp-includes/post.php:4061 wp-includes/script-loader.php:683
+#: wp-includes/post.php:4044 wp-includes/script-loader.php:683
 #: wp-includes/script-loader.php:755
 msgctxt "tag delimiter"
 msgid ","
@@ -8840,7 +8820,7 @@ msgstr "Sinulla ei ole oikeutta suojata tämän tyyppisiä sisältöjä salasana
 #: wp-includes/class-wp-xmlrpc-server.php:1715
 #: wp-includes/class-wp-xmlrpc-server.php:4863
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:825
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:420
+#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:312
 msgid "The post cannot be deleted."
 msgstr "Artikkelia ei voida poistaa."
 
@@ -8936,7 +8916,7 @@ msgstr "Luo asetustiedosto"
 msgid "You can create a %s file through a web interface, but this doesn't work for all server setups. The safest way is to manually create the file."
 msgstr "Tämä asennustyökalu luo %s-tiedoston automaattisesti, mutta se ei välttämättä toimi kaikilla palvelimilla. Voit tällöin kuitenkin luoda tiedoston käsin."
 
-#: wp-includes/class-wp-customize-manager.php:5274
+#: wp-includes/class-wp-customize-manager.php:5271
 msgid "https://codex.wordpress.org/CSS"
 msgstr "https://codex.wordpress.org/CSS"
 
@@ -9022,15 +9002,15 @@ msgstr "%s ylittää tämän sivuston suurimman sallitun tiedostokoon."
 msgid "Feedback"
 msgstr "Palaute"
 
-#: wp-includes/comment.php:3129
+#: wp-includes/comment.php:3125
 msgid "<strong>ERROR</strong>: please fill the required fields (name, email)."
 msgstr "<strong>VIRHE</strong>: täytä vaaditut kentät (nimi, sähköposti)."
 
-#: wp-includes/comment.php:3131
+#: wp-includes/comment.php:3127
 msgid "<strong>ERROR</strong>: please enter a valid email address."
 msgstr "<strong>VIRHE</strong>: anna oikea sähköpostiosoite."
 
-#: wp-includes/comment.php:3136
+#: wp-includes/comment.php:3132
 msgid "<strong>ERROR</strong>: please type a comment."
 msgstr "<strong>VIRHE</strong>: lisää kommentti, ole hyvä."
 
@@ -9796,7 +9776,7 @@ msgstr "Antamasi WordPress-osoite ei ollut kelvollinen URL-osoite. Syötä kelvo
 msgid "The email address entered did not appear to be a valid email address. Please enter a valid email address."
 msgstr "Antamasi sähköpostiosoite ei ollut kelvollinen. Kirjoita kelvollinen osoite"
 
-#: wp-includes/taxonomy.php:2162
+#: wp-includes/taxonomy.php:2141
 msgid "A term with the name provided already exists with this parent."
 msgstr "Samanniminen termi on jo olemassa."
 
@@ -10188,7 +10168,7 @@ msgstr "Kommentin kirjoittajan nimi ja sähköposti ovat pakollisia."
 #: wp-includes/class-wp-xmlrpc-server.php:6098
 #: wp-includes/class-wp-xmlrpc-server.php:6152
 #: wp-includes/class-wp-xmlrpc-server.php:6271 wp-includes/post.php:3180
-#: wp-includes/post.php:3728
+#: wp-includes/post.php:3714
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:326
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:688
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:369
@@ -10380,8 +10360,8 @@ msgstr "<strong>VIRHE</strong>: Syötä sähköpostiosoitteesi."
 #: wp-includes/user.php:2227 wp-includes/user.php:2230
 #: wp-includes/user.php:2234 wp-includes/user.php:2259
 #: wp-includes/user.php:2268 wp-includes/user.php:2272
-#: wp-includes/user.php:2289 wp-includes/user.php:3456
-#: wp-includes/user.php:3468 wp-includes/user.php:3486 wp-login.php:854
+#: wp-includes/user.php:2289 wp-includes/user.php:3437
+#: wp-includes/user.php:3449 wp-includes/user.php:3467 wp-login.php:854
 msgid "Invalid key"
 msgstr "Avain ei kelpaa"
 
@@ -10448,21 +10428,21 @@ msgstr "Tyylitiedosto puuttuu."
 msgid "The parent theme is missing. Please install the \"%s\" parent theme."
 msgstr "Pääteema puuttuu. Asenna \"%s\"-pääteema."
 
-#: wp-includes/taxonomy.php:4191
+#: wp-includes/taxonomy.php:4170
 msgid "Invalid object ID."
 msgstr "Objektin tunniste ei kelpaa."
 
 #. translators: 1: Taxonomy term slug
-#: wp-includes/taxonomy.php:2764
+#: wp-includes/taxonomy.php:2743
 msgid "The slug &#8220;%s&#8221; is already in use by another term."
 msgstr "Polkutunnus &#8221;%s&#8221; on jo toisen termin käytössä."
 
-#: wp-includes/taxonomy.php:2186
+#: wp-includes/taxonomy.php:2165
 msgid "Could not insert term into the database."
 msgstr "Termin lisääminen tietokantaan epäonnistui."
 
-#: wp-includes/taxonomy.php:769 wp-includes/taxonomy.php:2678
-#: wp-includes/taxonomy.php:3979
+#: wp-includes/taxonomy.php:748 wp-includes/taxonomy.php:2657
+#: wp-includes/taxonomy.php:3958
 msgid "Empty Term."
 msgstr "Tyhjä termi."
 
@@ -10901,8 +10881,8 @@ msgstr "Kommenttien syöte"
 msgid "Insert Page Break tag"
 msgstr "Lisää sivunvaihtoelementti"
 
-#: wp-includes/class-wp-customize-manager.php:5138
-#: wp-includes/class-wp-customize-manager.php:5179
+#: wp-includes/class-wp-customize-manager.php:5135
+#: wp-includes/class-wp-customize-manager.php:5176
 msgid "Fill Screen"
 msgstr "Täytä ruutu"
 
@@ -11039,7 +11019,7 @@ msgstr "Uusi tiedosto"
 msgid "Paste"
 msgstr "Liitä"
 
-#: wp-includes/class-wp-customize-manager.php:4205
+#: wp-includes/class-wp-customize-manager.php:4202
 #: wp-includes/class-wp-editor.php:1043
 msgid "Copy"
 msgstr "Kopioi"
@@ -11888,7 +11868,7 @@ msgstr "Seuraava sivu &raquo;"
 msgid "&laquo; Previous Page"
 msgstr "&laquo; Edellinen sivu"
 
-#: wp-includes/class-wp-xmlrpc-server.php:3634 wp-includes/comment.php:3043
+#: wp-includes/class-wp-xmlrpc-server.php:3634 wp-includes/comment.php:3039
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:465
 msgid "Sorry, comments are closed for this item."
 msgstr "Tätä ei voi kommentoida."
@@ -11931,7 +11911,7 @@ msgstr "Otsikko:"
 msgid "Plugin:"
 msgstr "Lisäosa"
 
-#: wp-includes/class-wp-customize-manager.php:4944
+#: wp-includes/class-wp-customize-manager.php:4941
 #: wp-includes/customize/class-wp-customize-color-control.php:51
 #: wp-includes/customize/class-wp-customize-media-control.php:225
 #: wp-includes/customize/class-wp-customize-media-control.php:235
@@ -11962,7 +11942,7 @@ msgstr "Salli uusien artikkelien kommentointi."
 msgid "Email"
 msgstr "Sähköpostiosoite"
 
-#: wp-includes/class-wp-customize-manager.php:4875
+#: wp-includes/class-wp-customize-manager.php:4872
 #: wp-includes/class-wp-xmlrpc-server.php:540
 msgid "Site Title"
 msgstr "Sivuston otsikko"
@@ -12109,7 +12089,7 @@ msgstr "Uusi sivu"
 msgid "Select"
 msgstr "Valitse"
 
-#: wp-includes/class-wp-customize-manager.php:5304
+#: wp-includes/class-wp-customize-manager.php:5301
 #: wp-includes/class-wp-editor.php:1051 wp-includes/class-wp-editor.php:1701
 #: wp-includes/script-loader.php:277 wp-includes/script-loader.php:371
 #: wp-includes/script-loader.php:562 wp-includes/script-loader.php:1137
@@ -12150,7 +12130,7 @@ msgstr "Kuvat"
 msgid "Search"
 msgstr "Etsi"
 
-#: wp-includes/class-wp-customize-manager.php:4132
+#: wp-includes/class-wp-customize-manager.php:4129
 #: wp-includes/script-loader.php:146 wp-includes/script-loader.php:307
 #: wp-includes/widgets/class-wp-widget-text.php:521
 #: wp-includes/widgets/class-wp-widget-text.php:536
@@ -12335,7 +12315,7 @@ msgstr "Päivitysilmoitus"
 msgid "Reply"
 msgstr "Vastaa"
 
-#: wp-includes/class-wp-customize-manager.php:4625
+#: wp-includes/class-wp-customize-manager.php:4622
 #: wp-includes/script-loader.php:551 wp-includes/script-loader.php:705
 msgid "Save Draft"
 msgstr "Tallenna luonnos"
@@ -12363,7 +12343,7 @@ msgstr "Lisäosat"
 msgid "Recent Comments"
 msgstr "Viimeisimmät kommentit"
 
-#: wp-includes/class-wp-customize-manager.php:4159
+#: wp-includes/class-wp-customize-manager.php:4156
 #: wp-includes/class-wp-editor.php:1117 wp-includes/media-template.php:1247
 msgid "Preview"
 msgstr "Esikatsele"
@@ -12374,7 +12354,7 @@ msgstr "RSS"
 
 #. translators: Name of a comment's author after being anonymized.
 #: wp-includes/class-wp-theme.php:732 wp-includes/comment-template.php:31
-#: wp-includes/comment.php:3332
+#: wp-includes/comment.php:3328
 msgid "Anonymous"
 msgstr "Nimetön"
 
@@ -12471,12 +12451,12 @@ msgstr "Versiot"
 msgid "Excerpt"
 msgstr "Ote"
 
-#: wp-includes/class-wp-customize-manager.php:4620
+#: wp-includes/class-wp-customize-manager.php:4617
 #: wp-includes/script-loader.php:549 wp-includes/script-loader.php:701
 msgid "Publish"
 msgstr "Julkaise"
 
-#: wp-includes/comment.php:3262 wp-includes/script-loader.php:656
+#: wp-includes/comment.php:3258 wp-includes/script-loader.php:656
 msgid "Comments"
 msgstr "Kommentit"
 

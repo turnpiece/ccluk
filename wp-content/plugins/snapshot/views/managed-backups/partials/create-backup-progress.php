@@ -19,8 +19,8 @@
 							<div class="wps-auth-message error"><p></p></div>
 
 							<p>
-								<a id="wps-build-error-back" class="button button-outline button-gray"><?php esc_html_e('Back', SNAPSHOT_I18N_DOMAIN); ?></a>
-								<a href="#" id="wps-build-error-again" class="button button-gray"><?php esc_html_e('Try Again', SNAPSHOT_I18N_DOMAIN); ?></a>
+								<a href="<?php echo esc_url( WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url( 'snapshots-newui-managed-backups' ) ); ?>" id="wps-build-error-back" class="button button-outline button-gray"><?php esc_html_e('Back', SNAPSHOT_I18N_DOMAIN); ?></a>
+								<a href="<?php echo esc_url( WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url( 'snapshots-newui-managed-backups' ) ); ?>&snapshot-action=backup&snapshot-full_backups-noonce-field=<?php echo esc_attr( wp_create_nonce  ( 'snapshot-full_backups' ) ); ?>" id="wps-build-error-again" class="button button-gray"><?php esc_html_e('Try Again', SNAPSHOT_I18N_DOMAIN); ?></a>
 							</p>
 						</div>
 
@@ -54,7 +54,7 @@
 
 							<div class="wps-auth-message success">
 
-								<p><?php esc_html_e('Your backup has been successfully created and uploaded to WPMU DEV servers!.', SNAPSHOT_I18N_DOMAIN); ?></p>
+								<p><?php esc_html_e('Your backup has been successfully created and uploaded to WPMU DEV servers!', SNAPSHOT_I18N_DOMAIN); ?></p>
 
 							</div>
 
@@ -79,6 +79,31 @@
 
 						</div>
 
+						<div id="wps-build-abort-upload" class="hidden">
+							<p><?php echo wp_kses_post( __( 'Your backup is in progress. <strong>You need to keep this page open for the backup to complete.</strong> Once your website has been backed up, it will be uploaded to WPMU DEV servers. If your site is small, this will only take a few minutes, but could take a couple of hours for larger sites.', SNAPSHOT_I18N_DOMAIN ) ); ?></p>
+
+							<div class="wpmud-box-gray">
+
+								<div class="wps-loading-status wps-total-status wps-spinner wps-error">
+									<p class="wps-loading-number">0%</p>
+
+									<div class="wps-loading-bar">
+										<div class="wps-loader"><span style="width: 0;"></span></div>
+									</div>
+								</div>
+
+							</div>
+
+							<div class="wps-auth-message warning">
+								<p><?php esc_html_e( 'Please don\'t close this page while we remove your partially uploaded backup from the Hub. This should only take a few moments.', SNAPSHOT_I18N_DOMAIN ); ?></p>
+							</div>
+
+							<p>
+								<button class="disabled button button-outline button-gray">
+									<?php esc_html_e( 'Cancel In Progress …', SNAPSHOT_I18N_DOMAIN ); ?>
+								</button>
+							</p>
+						</div>
 				</div>
 
 			</div>

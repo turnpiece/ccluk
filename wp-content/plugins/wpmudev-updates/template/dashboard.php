@@ -252,7 +252,7 @@ $this->render_header( $page_title );
             <footer class="wpmudui-box__footer">
                 <a href="<?php echo esc_url( $urls->plugins_url ); ?>" class="wpmudui-btn is-sm is-ghost"><?php
                     /* translators: Number of plugins */
-                    printf( __( 'View %s Plugins', 'wpmudev' ), $projects_nr['plugins'] );
+                    printf( _nx( 'View %s Plugin', 'View %s Plugins', $projects_nr['plugins'], 'number of plugins', 'wpmudev' ), $projects_nr['plugins'] );
                     ?></a>
             </footer>
         </div><!-- end wpmud-dash-plugins-box -->
@@ -260,6 +260,8 @@ $this->render_header( $page_title );
 
     </div>
 </div>
+
+<?php $this->load_template('footer'); ?>
 
 <?php if ( isset( $_GET['synced'] ) ) { //auto show modal after login redirect ?>
     <dialog id="confirmation-modal" title="You’re connected!"

@@ -1,4 +1,12 @@
 <?php /** @var WPMUDEVSnapshot_New_Ui_Tester $this */ ?>
+<?php
+$disabled_buttons_styling = ' style="background-color: #bcbcbc!important; color: #ffffff!important; cursor: default; text-shadow: none!important;"';
+if ( version_compare(PHP_VERSION, '5.5.0', '<') ) {
+	$aws_sdk_compatible = false;
+} else {
+	$aws_sdk_compatible = true;
+}
+?>
 
 <div class="form-content">
 
@@ -24,7 +32,7 @@
 		<div class="form-col">
 
 			<input name="snapshot-destination[name]" id="snapshot-destination-name" type="text" class="<?php $this->input_error_class( 'name' ); ?>"
-				value="<?php if ( isset( $item['name'] ) ) echo esc_attr( stripslashes( sanitize_text_field( $item['name'] ) ) ); ?>">
+				value="<?php if ( isset( $item['name'] ) ) echo esc_attr( stripslashes( sanitize_text_field( $item['name'] ) ) ); ?>" <?php echo ( ! $aws_sdk_compatible ) ? 'readonly': ''; ?>>
 			<?php $this->input_error_message( 'name' ); ?>
 		</div>
 
@@ -38,7 +46,7 @@
 
 		<div class="form-col">
 			<input type="text" name="snapshot-destination[awskey]" id="snapshot-destination-awskey" class="<?php $this->input_error_class( 'awskey' ); ?>"
-				value="<?php if ( isset( $item['awskey'] ) ) echo esc_attr( sanitize_text_field( $item['awskey'] ) ); ?>">
+				value="<?php if ( isset( $item['awskey'] ) ) echo esc_attr( sanitize_text_field( $item['awskey'] ) ); ?>" <?php echo ( ! $aws_sdk_compatible ) ? 'readonly': ''; ?>>
 
 			<?php $this->input_error_message( 'awskey' ); ?>
 
@@ -54,7 +62,7 @@
 		</div>
 
 		<div class="form-col">
-			<input type="password" name="snapshot-destination[secretkey]" id="snapshot-destination-secretkey" class="<?php $this->input_error_class( 'secretkey' ); ?>" value="<?php if ( isset( $item['secretkey'] ) ) echo esc_attr( sanitize_text_field( $item['secretkey'] ) ); ?>" />
+			<input type="password" name="snapshot-destination[secretkey]" id="snapshot-destination-secretkey" class="<?php $this->input_error_class( 'secretkey' ); ?>" value="<?php if ( isset( $item['secretkey'] ) ) echo esc_attr( sanitize_text_field( $item['secretkey'] ) ); ?>" <?php echo ( ! $aws_sdk_compatible ) ? 'readonly': ''; ?>/>
 			<?php $this->input_error_message( 'secretkey' ); ?>
 		</div>
 
@@ -73,7 +81,7 @@
 		<div class="form-col">
 			<div class="wps-input--checkbox">
 				<input name="snapshot-destination[ssl]" type="hidden" value="no" <?php checked( $item['ssl'], "no" ); ?> />
-				<input name="snapshot-destination[ssl]" id="snapshot-destination-ssl" type="checkbox" <?php checked( $item['ssl'], "yes" ); ?> value="yes" />
+				<input name="snapshot-destination[ssl]" id="snapshot-destination-ssl" type="checkbox" <?php checked( $item['ssl'], "yes" ); ?> value="yes" <?php echo ( ! $aws_sdk_compatible ) ? 'disabled': ''; ?> />
 				<label for="snapshot-destination-ssl"></label>
 				<?php $this->input_error_message( 'ssl' ); ?>
 			</div>
@@ -83,7 +91,7 @@
 
 	<?php
     if ( ! isset( $item['region'] ) ) {
-		$item['region'] = AmazonS3::REGION_US_E1;
+		$item['region'] = ( $aws_sdk_compatible ) ? Snapshot_Model_Destination_AWS::REGION_US_E1 : 'US Standard (s3.amazonaws.com)';
 	}
 	?>
 
@@ -95,39 +103,55 @@
 
 		<div class="form-col">
 
-			<select class="inline<?php $this->input_error_class( 'region' ); ?>" name="snapshot-destination[region]" id="snapshot-destination-region">
+			<select class="inline<?php $this->input_error_class( 'region' ); ?>" name="snapshot-destination[region]" id="snapshot-destination-region" <?php echo ( ! $aws_sdk_compatible ) ? 'disabled': ''; ?> >
 
-				<?php foreach ( $item_object->get_regions() as $_key => $_name ) : ?>
+				<?php
+				if ( $aws_sdk_compatible ) {
+					foreach ( $item_object->get_regions() as $_key => $_name ) :
+					?>
+						<option value="<?php echo esc_attr( $_key ); ?>"
+							<?php
+							if ( $item['region'] === $_key ) {
+								echo ' selected="selected" ';
+							}
+							?>
+							>
+							<?php echo esc_html( $_name ); ?> (<?php echo esc_html( $_key ); ?>)
+						</option>
 
-					<option value="<?php echo esc_attr( $_key ); ?>"
-						<?php
-						if ( $item['region'] === $_key ) {
-							echo ' selected="selected" ';
-						}
-						?>
-						>
-						<?php echo esc_html( $_name ); ?> (<?php echo esc_html( $_key ); ?>)
-					</option>
+					<?php
+					endforeach;
+				} else {
+					?>
+					<option value="<?php echo esc_attr( $item['region'] ); ?>"><?php echo esc_html( $item['region'] ); ?></option>
+					<?php
+				}
+				?>
 
-				<?php endforeach; ?>
 
 			</select>
 
 			<?php $this->input_error_message( 'region' ); ?>
 
-			<div id="snapshot-destination-region-other-container"
-            <?php
-			if ( 'other' !== $item['region'] ) {
-				echo ' style="display: none;" ';
+			<?php
+			if ( $aws_sdk_compatible ) {
+			?>
+				<div id="snapshot-destination-region-other-container"
+				<?php
+				if ( 'other' !== $item['region'] ) {
+					echo ' style="display: none;" ';
+				}
+				?>
+				>
+					<br/><label
+						id="snapshot-destination-region-other"><?php esc_html_e( 'Alternate Region host', SNAPSHOT_I18N_DOMAIN ); ?></label><br/>
+					<input name="snapshot-destination[region-other]"
+						id="snapshot-destination-region-other"
+						value="<?php echo esc_attr( $item['region-other'] ); ?>"/>
+				</div>
+				<?php
 			}
-            ?>
-            >
-				<br/><label
-					id="snapshot-destination-region-other"><?php esc_html_e( 'Alternate Region host', SNAPSHOT_I18N_DOMAIN ); ?></label><br/>
-				<input name="snapshot-destination[region-other]"
-				       id="snapshot-destination-region-other"
-				       value="<?php echo esc_attr( $item['region-other'] ); ?>"/>
-			</div>
+			?>
 
 		</div>
 
@@ -135,7 +159,7 @@
 
 	<?php
 	if ( ! isset( $item['storage'] ) ) {
-		$item['storage'] = AmazonS3::STORAGE_STANDARD;
+		$item['storage'] = ( $aws_sdk_compatible ) ? Snapshot_Model_Destination_AWS::STORAGE_STANDARD : 'Standard';
 	}
 	?>
 
@@ -147,21 +171,31 @@
 
 		<div class="form-col">
 
-			<select class="inline<?php $this->input_error_class( 'storage' ); ?>" name="snapshot-destination[storage]" id="snapshot-destination-storage">
+			<select class="inline<?php $this->input_error_class( 'storage' ); ?>" name="snapshot-destination[storage]" id="snapshot-destination-storage" <?php echo ( ! $aws_sdk_compatible ) ? 'disabled': ''; ?> >
 
-				<?php foreach ( $item_object->get_storage() as $_key => $_name ) : ?>
+				<?php
+				if ( $aws_sdk_compatible ) {
+					foreach ( $item_object->get_storage() as $_key => $_name ) :
+					?>
 
-					<option value="<?php echo esc_attr( $_key ); ?>"
-						<?php
-						if ( $item['storage'] === $_key ) {
-							echo ' selected="selected" ';
-						}
-						?>
-						>
-						<?php echo esc_html( $_name ); ?> (<?php echo esc_attr( $_key ); ?>)
-					</option>
+						<option value="<?php echo esc_attr( $_key ); ?>"
+							<?php
+							if ( $item['storage'] === $_key ) {
+								echo ' selected="selected" ';
+							}
+							?>
+							>
+							<?php echo esc_html( $_name ); ?> (<?php echo esc_attr( $_key ); ?>)
+						</option>
 
-				<?php endforeach; ?>
+					<?php
+					endforeach;
+				} else {
+					?>
+					<option value="<?php echo esc_attr( $item['storage'] ); ?>"><?php echo esc_html( $item['storage'] ); ?></option>
+					<?php
+				}
+				?>
 
 			</select>
 
@@ -191,7 +225,7 @@
 				}
                 ?>
 
-				<button id="snapshot-destination-aws-get-bucket-list" class="button-seconary button button-gray<?php if ( empty ( $item['bucket']  ) ) echo ' wps-last-item'; ?>" name=""><?php esc_html_e( 'Select Bucket', SNAPSHOT_I18N_DOMAIN ); ?></button>
+				<button id="snapshot-destination-aws-get-bucket-list" class="button-seconary button button-gray<?php if ( empty ( $item['bucket']  ) ) echo ' wps-last-item'; ?>" name="" <?php echo ( ! $aws_sdk_compatible ) ? 'disabled' . $disabled_buttons_styling : ''; ?>><?php esc_html_e( 'Select Bucket', SNAPSHOT_I18N_DOMAIN ); ?></button> <?php // phpcs:ignore ?>
 
 			</div>
 
@@ -214,18 +248,33 @@
 
 			<?php
             if ( ! isset( $item['acl'] ) ) {
-				$item['acl'] = AmazonS3::ACL_PRIVATE;
+				$item['acl'] = ( $aws_sdk_compatible ) ? Snapshot_Model_Destination_AWS::ACL_PRIVATE : 'Private';
 			}
             ?>
-			<select name="snapshot-destination[acl]" id="snapshot-destination-acl" class="<?php $this->input_error_class( 'acl' ); ?>">
-				<option value="<?php echo esc_attr( AmazonS3::ACL_PRIVATE ); ?>" <?php selected( $item['acl'], AmazonS3::ACL_PRIVATE ); ?>>
-					<?php esc_html_e( 'Private', SNAPSHOT_I18N_DOMAIN ); ?></option>
-				<option value="<?php echo esc_attr( AmazonS3::ACL_PUBLIC ); ?>" <?php selected( $item['acl'], AmazonS3::ACL_PUBLIC ); ?>>
-					<?php esc_html_e( 'Public Read', SNAPSHOT_I18N_DOMAIN ); ?></option>
-				<option value="<?php echo esc_attr( AmazonS3::ACL_OPEN ); ?>" <?php selected( $item['acl'], AmazonS3::ACL_OPEN ); ?>>
-					<?php esc_html_e( 'Public Read/Write', SNAPSHOT_I18N_DOMAIN ); ?></option>
-				<option value="<?php echo esc_attr( AmazonS3::ACL_AUTH_READ ); ?>" <?php selected( $item['acl'], AmazonS3::ACL_AUTH_READ ); ?>>
-					<?php esc_html_e( 'Authenticated Read', SNAPSHOT_I18N_DOMAIN ); ?></option>
+			<select name="snapshot-destination[acl]" id="snapshot-destination-acl" class="<?php $this->input_error_class( 'acl' ); ?>" <?php echo ( ! $aws_sdk_compatible ) ? 'disabled': ''; ?> >
+				<?php
+				if ( $aws_sdk_compatible ) {
+				?>
+					<option value="<?php echo esc_attr( Snapshot_Model_Destination_AWS::ACL_PRIVATE ); ?>" <?php selected( $item['acl'], Snapshot_Model_Destination_AWS::ACL_PRIVATE ); ?>>
+						<?php esc_html_e( 'Private', SNAPSHOT_I18N_DOMAIN ); ?>
+					</option>
+					<option value="<?php echo esc_attr( Snapshot_Model_Destination_AWS::ACL_PUBLIC ); ?>" <?php selected( $item['acl'], Snapshot_Model_Destination_AWS::ACL_PUBLIC ); ?>>
+						<?php esc_html_e( 'Public Read', SNAPSHOT_I18N_DOMAIN ); ?>
+					</option>
+					<option value="<?php echo esc_attr( Snapshot_Model_Destination_AWS::ACL_OPEN ); ?>" <?php selected( $item['acl'], Snapshot_Model_Destination_AWS::ACL_OPEN ); ?>>
+						<?php esc_html_e( 'Public Read/Write', SNAPSHOT_I18N_DOMAIN ); ?>
+					</option>
+					<option value="<?php echo esc_attr( Snapshot_Model_Destination_AWS::ACL_AUTH_READ ); ?>" <?php selected( $item['acl'], Snapshot_Model_Destination_AWS::ACL_AUTH_READ ); ?>>
+						<?php esc_html_e( 'Authenticated Read', SNAPSHOT_I18N_DOMAIN ); ?>
+					</option>
+				<?php
+				} else {
+					?>
+					<option value="<?php echo esc_attr( $item['acl'] ); ?>"><?php echo esc_html( $item['acl'] ); ?></option>
+					<?php
+				}
+				?>
+
 			</select>
 
 			<?php $this->input_error_message( 'acl' ); ?>
@@ -242,11 +291,11 @@
 		</div>
 
 		<div class="form-col">
-			<input type="text" name="snapshot-destination[directory]" id="snapshot-destination-directory" placeholder="i.e. static/files" value="<?php if ( isset( $item['directory'] ) ) echo esc_attr( $item['directory'] ); ?>"/>
+			<input type="text" name="snapshot-destination[directory]" id="snapshot-destination-directory" placeholder="i.e. static/files" value="<?php if ( isset( $item['directory'] ) ) echo esc_attr( $item['directory'] ); ?>" <?php echo ( ! $aws_sdk_compatible ) ? 'disabled': ''; ?> />
 
 			<p><small><?php esc_html_e( "If directory is blank the snapshot file will be stored at the bucket root. If the directory is provided it will be created inside the bucket. This is a global setting and will be used by all snapshot configurations using this destination. You can also define a directory used by a specific snapshot.", SNAPSHOT_I18N_DOMAIN ); ?></small></p>
 
-			<button id="snapshot-destination-test-connection" class="button button-gray"><?php esc_html_e( "Test Connection", SNAPSHOT_I18N_DOMAIN ); ?></button>
+			<button id="snapshot-destination-test-connection" class="button button-gray" <?php echo ( ! $aws_sdk_compatible ) ? 'disabled' . $disabled_buttons_styling : ''; ?>><?php esc_html_e( "Test Connection", SNAPSHOT_I18N_DOMAIN ); ?></button> <?php // phpcs:ignore ?>
 			<div id="snapshot-ajax-destination-test-result" style="display:none"></div>
 		</div>
 

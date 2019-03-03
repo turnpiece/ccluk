@@ -27,17 +27,10 @@
         &.sui-dismissed td:first-child {
             border-left: 2px solid #AAAAAA;
         }
-
-        &.sui-error td:first-child {
-            border-left: 2px solid $error;
-        }
-
-        &.sui-warning td:first-child {
-            border-left: 2px solid $warning;
-        }
-
-        &.sui-success td:first-child {
-            border-left: 2px solid $success;
+        .sui-table tbody {
+            .sui-accordion-open-indicator [class*="sui-icon-"] {
+                display: inline-block;
+            }
         }
     }
 
@@ -147,108 +140,37 @@
             margin-top: 0;
         }
     }
+}
 
-    /**
-     * Performance reports meta box
-     */
-    .recipient {
-        margin-bottom: 10px;
-        padding: 5px 10px;
+// Reporting.
 
-        &:hover {
-            border-radius: 4px;
-            background-color: #F8F8F8;
-
-            a > i {
-                color: #333333;
-            }
-        }
-
-        img {
-            -webkit-border-radius: 50px;
-            -moz-border-radius: 50px;
-            border-radius: 50px;
-            width: 30px;
-            height: 30px;
-            margin-right: 10px;
-            display: inline-block;
-            vertical-align: middle;
-        }
-
-        .name {
-            color: #333333;
-            font-weight: 500;
-        }
-
-        a > i {
-            color: #888888;
-        }
-    }
-
-    .add-recipient {
-        margin-top: 15px;
-
-        & > * {
-            margin-bottom: 0;
-            border-radius: 0;
-            border: 1px solid #E6E6E6;
-            font-weight: normal;
-        }
-
-        & > button {
-            background-color: #888888 !important;
-            border-radius: 0 4px 4px 0 !important;
-            min-width: 60px;
-        }
-
-        & > input::placeholder {
-            color: #AAAAAA;
-            font-weight: 400;
-        }
-
-        #wphb-first-name {
-            border-radius: 4px 0 0 4px;
-            border-right: 0;
-            background-color: #F8F8F8;
-            margin: 0;
-        }
-
-        #wphb-username-search {
-            background-color: #F8F8F8;
-            margin: 0;
-        }
-
-        @include bp(phone) {
-            & > button,
-            #wphb-first-name {
-                border-radius: 0 !important;
-                margin-bottom: 5px;
-                border: 1px solid #E6E6E6;
-            }
-
-            & > button {
-                margin-top: 10px !important;
+@include body-class(true) {
+    .box-performance-reporting {
+        .sui-form-field {
+            margin-bottom: 10px;
+            .select-container {
+                max-width: 240px;
             }
         }
     }
-
-    .recipient,
-    .recipient .name,
-    .add-recipient {
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: space-between;
-        align-items: center;
-        align-content: center;
-
-        @include bp(phone) {
-            flex-flow: row wrap;
+    #wphb-add-recipient-modal {
+        .sui-box-footer {
+            justify-content: space-between;
         }
     }
+}
 
-    .recipient .name > span,
-    .recipient .email {
-        font-size: 13px;
+// SUI Accordion override until it's fixed.
+@include body-class(true) {
+    .sui-accordion.sui-table.performance-report-table {
+        margin: 0;
+        border-top: none;
+        tbody {
+            .sui-accordion-item {
+                .sui-accordion-open-indicator [class*="sui-icon-"] {
+                    display: inline-block;
+                }
+            }
+        }
     }
-
 }

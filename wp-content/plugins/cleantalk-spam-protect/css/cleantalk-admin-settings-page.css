@@ -3,17 +3,31 @@
 #apbctTopWarning h4{margin: 10px;}
 #apbctTopWarning h4 span{margin-top: 5px;}
 
-.apbct_settings-title{ display: inline-block; }
+/* Main title */
+/*.apbct_settings-title{ display: inline-block; }*/
 .apbct_settings-subtitle{
 	position: relative;
 	top: -15px;
 	margin: 0;
 }
 
+/* Setting fields */
 .apbct_settings-field_wrapper{ margin: 15px 0; }
 .apbct_settings-field_wrapper--sub{ margin-left: 30px !important; }
 
 	.apbct_settings-field_title{  }
+	.apbct_settings__label{
+		margin-right: 10px;
+		font-size: 17px;
+		vertical-align: text-bottom;
+	}
+	
+	.apbct_settings-field_content{ display: inline-block; }
+	.apbct_settings-field_content--checkbox{  }
+	.apbct_settings-field_content--radio{ width: 70%; }
+	.apbct_settings-field_content--text{  }
+	
+	.apbct_settings-field_title{}
 	.apbct_settings-field_title--checkbox{  }
 	.apbct_settings-field_title--radio{
 		display: inline-block;
@@ -23,26 +37,8 @@
 		font-size: 14px;
 		vertical-align: top;
 	}
-	.apbct_settings-field_content{ display: inline-block; }
-	.apbct_settings-field_content--checkbox{  }
-	.apbct_settings-field_content--radio{ width: 70%; }
-	
-	.apbct_settings__label{
-		margin-right: 10px;
-		font-size: 17px;
-		vertical-align: text-bottom;
-	}
-
-	.apbct_settings__text_feld{
-		font-size: 14pt;
-	}
-	
-	.apbct_settings-field--checkbox{
-		vertical-align: middle;
-		top: -1px;
-	}
-	
-.gray{ color: gray; }
+	.apbct_input_text{min-width: 255px;}
+	.apbct_input_text-width--500px{width: 500px;}
 
 .cleantalk_manual_link {padding: 10px; background: #3399FF; color: #fff; border:0 none;
 	cursor:pointer;

@@ -6,7 +6,7 @@
  *
  * @package     Give
  * @subpackage  Classes/Emails
- * @copyright   Copyright (c) 2016, WordImpress
+ * @copyright   Copyright (c) 2016, GiveWP
  * @license     https://opensource.org/licenses/gpl-license GNU Public License
  * @since       2.0
  */
@@ -177,6 +177,11 @@ if ( ! class_exists( 'Give_Email_Notification' ) ) :
 		 * @access public
 		 */
 		private function setup_filters() {
+			// Do not setup filters if not admin.
+			if( ! is_admin() ){
+				return;
+			}
+
 			// Apply filter only for current email notification section.
 			if ( give_get_current_setting_section() === $this->config['id'] ) {
 				// Initialize email context for email notification.
@@ -835,33 +840,26 @@ if ( ! class_exists( 'Give_Email_Notification' ) ) :
 		 *
 		 * @since 2.0
 		 *
-		 * @param string $message
+		 * @param string $message Email Template Message.
 		 *
 		 * @return string
 		 */
 		public function preview_email_template_tags( $message ) {
+
+			$get_data = give_clean( filter_input_array( INPUT_GET ) );
+
 			// Set Payment.
-			$payment_id = give_check_variable( give_clean( $_GET ), 'isset_empty', 0, 'preview_id' );
+			$payment_id = give_check_variable( $get_data, 'isset_empty', 0, 'preview_id' );
 			$payment    = $payment_id ? new Give_Payment( $payment_id ) : new stdClass();
 
 			// Set donor.
 			$user_id = $payment_id
 				? $payment->user_id
-				: give_check_variable( give_clean( $_GET ), 'isset_empty', 0, 'user_id' );
+				: give_check_variable( $get_data, 'isset_empty', 0, 'user_id' );
 			$user_id = $user_id ? $user_id : wp_get_current_user()->ID;
 
-			// Set receipt.
-			$receipt_id = strtolower( md5( uniqid() ) );
-
-			$receipt_link_url = esc_url( add_query_arg( array(
-				'payment_key' => $receipt_id,
-			), give_get_history_page_uri() ) );
-
-			$receipt_link = sprintf(
-				'<a href="%1$s">%2$s</a>',
-				$receipt_link_url,
-				esc_html__( 'View the receipt in your browser &raquo;', 'give' )
-			);
+			$receipt_link_url = give_get_receipt_url( $payment_id );
+			$receipt_link     = give_get_receipt_link( $payment_id );
 
 			// Set default values for tags.
 			$this->config['preview_email_tags_values'] = wp_parse_args(
@@ -887,7 +885,6 @@ if ( ! class_exists( 'Give_Email_Notification' ) ) :
 					'amount'                   => $payment_id ? give_email_tag_amount( array( 'payment_id' => $payment_id ) ) : give_currency_filter( '10.50' ),
 					'price'                    => $payment_id ? give_email_tag_price( array( 'payment_id' => $payment_id ) ) : give_currency_filter( '10.50' ),
 					'payment_method'           => $payment_id ? give_email_tag_payment_method( array( 'payment_id' => $payment_id ) ) : __( 'PayPal', 'give' ),
-					'receipt_id'               => $receipt_id,
 					'payment_id'               => $payment_id ? $payment_id : rand( 2000, 2050 ),
 					'receipt_link_url'         => $receipt_link_url,
 					'receipt_link'             => $receipt_link,
@@ -904,6 +901,16 @@ if ( ! class_exists( 'Give_Email_Notification' ) ) :
 							),
 							give_get_history_page_uri()
 						),
+						__( 'View your donation history &raquo;', 'give' )
+					),
+					'donation_history_link'   => sprintf(
+						'<a href="%1$s">%2$s</a>',
+						add_query_arg(
+                            array(
+                                'give_nl' => uniqid(),
+                            ),
+                            give_get_history_page_uri()
+                        ),
 						__( 'View your donation history &raquo;', 'give' )
 					),
 					'reset_password_link'     => $user_id ? give_email_tag_reset_password_link( array( 'user_id' => $user_id ), $payment_id ) : '',

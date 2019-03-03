@@ -8,9 +8,11 @@
 ?>
 
 <div class="sui-box-body sui-block-content-center">
-	<img class="wphb-image wphb-image-center wphb-image-icon-content-top"
-		 src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hummingbird-circle@1x.jpg' ); ?>"
-		 alt="<?php esc_attr_e( "Let's see what we can improve!", 'wphb' ); ?>">
+	<?php if ( ! WP_Hummingbird_Utils::hide_wpmudev_branding() ) : ?>
+		<img class="wphb-image wphb-image-center wphb-image-icon-content-top"
+		     src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hummingbird-circle@1x.jpg' ); ?>"
+		     alt="<?php esc_attr_e( "Let's see what we can improve!", 'wphb' ); ?>">
+	<?php endif; ?>
 
 	<p class="sui-margin-bottom">
 		<?php esc_html_e( "For us to know what to improve we need to test your website. All testing is
@@ -27,10 +29,8 @@
 WP_Hummingbird_Utils::get_modal( 'check-performance' );
 if ( $doing_report ) : // Show the progress bar if we are still checking files. ?>
 	<script>
-		window.onload = function () {
-			jQuery(function() {
-				jQuery('#run-performance-test').click();
-			});
-		}
+        window.addEventListener("load", function(){
+            jQuery('#run-performance-test').click();
+        });
 	</script>
 <?php endif; ?>

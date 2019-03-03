@@ -16,6 +16,7 @@ class LiteSpeed_Cache_Const
 	const ITEM_OPTM_CSS = 'litespeed-optm-css' ;// separate critical css that should be stored in option table
 	const ITEM_OPTM_JS_DEFER_EXC = 'litespeed-optm-js-defer-excludes' ;
 	const ITEM_MEDIA_LAZY_IMG_EXC = 'litespeed-media-lazy-img-excludes' ;
+	const ITEM_MEDIA_LAZY_IMG_CLS_EXC = 'litespeed-media-lazy-img-cls-excludes' ;
 	const ITEM_IMG_OPTM_NEED_PULL = 'litespeed-media-need-pull' ;
 	const ITEM_ENV_REF = 'litespeed-env-ref' ;
 	const ITEM_CACHE_DROP_QS = 'litespeed-cache-drop_qs' ;
@@ -27,6 +28,7 @@ class LiteSpeed_Cache_Const
 	const ITEM_OBJECT_GLOBAL_GROUPS = 'litespeed-object_global_groups' ;
 	const ITEM_OBJECT_NON_PERSISTENT_GROUPS = 'litespeed-object_non_persistent_groups' ;
 	const ITEM_CRWL_AS_UIDS = 'litespeed-crawler-as-uids' ;
+	const ITEM_CRWL_COOKIES = 'litespeed-crawler-cookies' ;
 	const ITEM_ADV_PURGE_ALL_HOOKS = 'litespeed-adv-purge_all_hooks' ;
 	const ITEM_CDN_ORI_DIR = 'litespeed-cdn-ori_dir' ;
 	const ITEM_MEDIA_WEBP_ATTRIBUTE = 'litespeed-media-webp_attribute' ;
@@ -245,6 +247,7 @@ class LiteSpeed_Cache_Const
 			self::ITEM_OPTM_CSS,
 			self::ITEM_OPTM_JS_DEFER_EXC,
 			self::ITEM_MEDIA_LAZY_IMG_EXC,
+			self::ITEM_MEDIA_LAZY_IMG_CLS_EXC,
 			self::ITEM_IMG_OPTM_NEED_PULL,
 			self::ITEM_ENV_REF,
 			self::ITEM_CACHE_DROP_QS,
@@ -257,6 +260,7 @@ class LiteSpeed_Cache_Const
 			self::ITEM_OBJECT_GLOBAL_GROUPS,
 			self::ITEM_OBJECT_NON_PERSISTENT_GROUPS,
 			self::ITEM_CRWL_AS_UIDS,
+			self::ITEM_CRWL_COOKIES,
 			self::ITEM_ADV_PURGE_ALL_HOOKS,
 			self::ITEM_FORCE_CACHE_URI,
 			self::ITEM_CACHE_URI_PRIV,

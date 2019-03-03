@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (C) 2014-2018 ServMask Inc.
+ * Copyright (C) 2014-2019 ServMask Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -71,7 +71,7 @@
 											<?php endif; ?>
 										</td>
 										<td class="ai1wm-column-actions ai1wm-backup-actions">
-											<a href="<?php echo ai1wm_backup_url( array( 'archive' => esc_attr( $backup['filename'] ) ) ); ?>" class="ai1wm-button-green ai1wm-backup-download">
+											<a href="<?php echo ai1wm_backup_url( array( 'archive' => esc_attr( $backup['filename'] ) ) ); ?>" class="ai1wm-button-green ai1wm-backup-download" download="<?php echo esc_attr( $backup['filename'] ); ?>">
 												<i class="ai1wm-icon-arrow-down"></i>
 												<span><?php _e( 'Download', AI1WM_PLUGIN_NAME ); ?></span>
 											</a>

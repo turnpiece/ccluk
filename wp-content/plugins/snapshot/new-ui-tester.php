@@ -184,21 +184,20 @@ class WPMUDEVSnapshot_New_Ui_Tester {
 				case 'backup':
 					$this->render( "managed-backups/new-backup", false, array( 'model' => $model ) );
 					break;
+				case 'upload':
+					$item = $model->get_backup( sanitize_text_field( $_GET['item'] ) );
+					$upload = new Snapshot_Model_Transfer_Upload( $item );
+					$upload->complete();
+					$this->render( "managed-backups/upload", false, array());
+					break;
 				case 'restore':
-					$item = false;
-					if ( isset( $_GET['item'] ) ) {
-						$item = $model->get_backup( sanitize_text_field( $_GET['item'] ) );
-					}
-					if ( $item ) {
-						$this->render(
-                             "managed-backups/restore", false, array(
-								'model' => $model,
-								'item' => $item
-								)
-                            );
-						break;
-					}
-					// Potentially no break.
+					$this->render(
+						"managed-backups/restore", false, array(
+							'model' => $model,
+							'item' => sanitize_text_field( $_GET['item'] ),
+						)
+					);
+					break;
 				default:
 					$backups = $model->get_backups();
 					usort( $backups, '_snapshot_sort_managed_backups_array' );

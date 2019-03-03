@@ -60,9 +60,15 @@ class WP_Hummingbird_Core {
 			$minify    = WP_Hummingbird_Settings::get_setting( 'enabled', 'minify' );
 			$pc_module = WP_Hummingbird_Settings::get_setting( 'enabled', 'page_cache' );
 
-			// Do not stric compare $pc_module to true, because it can also be 'blog-admins'.
+			// Do not strict compare $pc_module to true, because it can also be 'blog-admins'.
 			if ( ! is_multisite() || ( is_multisite() && ( ( 'super-admin' === $minify && is_super_admin() ) || true === $minify || true == $pc_module ) ) ) {
 				add_action( 'admin_bar_menu', array( $this, 'admin_bar_menu' ), 100 );
+
+				add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_global' ) );
+				add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_global' ) );
+
+				// Defer the loading of the global js.
+				add_filter( 'script_loader_tag', array( $this, 'add_defer_attribute' ), 10, 2 );
 			}
 		}
 	}
@@ -224,32 +230,47 @@ class WP_Hummingbird_Core {
 
 		/* @var WP_Hummingbird_Module_Page_Cache $pc_module */
 		$pc_module = WP_Hummingbird_Utils::get_module( 'page_cache' );
-		$options = $pc_module->get_options();
+		$options   = $pc_module->get_options();
 
 		if ( $pc_module->is_active() && $options['control'] ) {
-			$pc_link = admin_url( 'admin.php?page=wphb-caching&view=main' );
-
-			if ( ! is_main_network() || ! is_main_site() ) {
-				$purge_url = add_query_arg( array(
-					'action'  => 'clear_cache',
-					'module'  => 'page_cache',
-				), $pc_link );
-			} else {
-				$purge_url = add_query_arg( array(
-					'action'  => 'clear_cache',
-					'module'  => 'page_cache',
-				), $pc_link );
-			}
-			$purge_url = wp_nonce_url( $purge_url, 'wphb-caching-actions' );
-
 			$admin_bar->add_menu( $menu_args );
 			$admin_bar->add_menu( array(
 				'id'     => 'wphb-clear-cache',
 				'title'  => __( 'Clear page cache', 'wphb' ),
-				'href'   => $purge_url,
 				'parent' => 'wphb',
+				'href'   => '#',
 			));
 		}
+	}
+
+	/**
+	 * Enqueue global scripts.
+	 *
+	 * @since 1.9.3
+	 */
+	public function enqueue_global() {
+		wp_enqueue_script(
+			'wphb-global',
+			WPHB_DIR_URL . 'admin/assets/js/global.min.js',
+			array(),
+			WPHB_VERSION,
+			true
+		);
+		wp_localize_script( 'wphb-global', 'wphbGlobal',
+			array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) )
+		);
+	}
+
+	/**
+	 * Defer global scripts.
+	 *
+	 * @since 1.9.3
+	 */
+	public function add_defer_attribute( $tag, $handle ) {
+		if ( 'wphb-global' !== $handle ) {
+			return $tag;
+		}
+		return str_replace( ' src', ' defer="defer" src', $tag );
 	}
 
 }

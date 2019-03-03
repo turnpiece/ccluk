@@ -1,1 +1,38 @@
-[02-Nov-2017 04:03:27 UTC] WP_Community_Events::maybe_log_events_response: Valid response received. Details: {"api_url":"https:\/\/api.wordpress.org\/events\/1.0\/","request_args":{"body":{"number":5,"ip":"172.17.0.0","locale":"en_US","timezone":"Europe\/Ljubljana"}},"response_code":200,"response_body":{"location":{"ip":"188.246.54.169"},"events":"2 events trimmed."}}
+[12-Oct-2018 06:05:10 UTC] [WPMUDEV API Error] 4.5.2 | cURL error 28: Connection timed out after 10001 milliseconds ((unknown URL) [500]) 
+[17-Oct-2018 04:03:12 UTC] array (
+  'code' => 'INS.06',
+  'message' => 'Download failed. A valid URL was not provided.',
+  'data' => 
+  array (
+    'file' => 39,
+    'log' => 
+    array (
+      0 => 'Downloading installation package from https://local.wpmudev.org/api/dashboard/v2/install/39/4*********************************0bcc55&#8230;',
+      1 => 'Download failed. A valid URL was not provided.',
+    ),
+  ),
+)
+[18-Oct-2018 03:44:20 UTC] start
+[18-Oct-2018 03:44:21 UTC] tick
+[18-Oct-2018 03:44:21 UTC] tick
+[18-Oct-2018 03:44:33 UTC] start
+[18-Oct-2018 03:44:34 UTC] tick
+[18-Oct-2018 03:44:34 UTC] tick
+[18-Oct-2018 03:44:48 UTC] start
+[18-Oct-2018 03:44:48 UTC] tick
+[18-Oct-2018 03:44:48 UTC] tick
+[18-Oct-2018 04:20:34 UTC] PHP Fatal error:  Call to undefined method Shipper_Task_Import_All::get_archive_path() in /var/www/html/wp-content/plugins/shipper/lib/shipper/controller/runner/class-migration.php on line 343
+[20-Oct-2018 02:18:18 UTC] PHP Notice:  Undefined variable: duration in /var/www/html/wp-content/plugins/shipper/lib/shipper/controller/class-maintenance.php on line 113
+[20-Oct-2018 02:21:22 UTC] PHP Notice:  Undefined variable: template in /var/www/html/wp-content/plugins/shipper/lib/shipper/controller/class-maintenance.php on line 114
+[20-Oct-2018 02:21:22 UTC] PHP Fatal error:  Call to a member function get() on null in /var/www/html/wp-content/plugins/shipper/lib/shipper/controller/class-maintenance.php on line 114
+[20-Oct-2018 02:37:16 UTC] PHP Fatal error:  Call to undefined function mictortime() in /var/www/html/wp-content/plugins/shipper/tpl/pages/maintenance.php on line 47
+[20-Oct-2018 02:37:16 UTC] PHP Fatal error:  Call to undefined function mictortime() in /var/www/html/wp-content/plugins/shipper/tpl/pages/maintenance.php on line 47
+[20-Oct-2018 03:17:56 UTC] WPMU DEV Upgrader error: INS.01 - Already installed.
+[29-Oct-2018 03:56:54 UTC] PHP Parse error:  syntax error, unexpected '}' in /var/www/html/wp-content/plugins/shipper/lib/shipper/controller/class-ajax.php on line 299
+[29-Oct-2018 03:56:59 UTC] PHP Parse error:  syntax error, unexpected '}' in /var/www/html/wp-content/plugins/shipper/lib/shipper/controller/class-ajax.php on line 299
+[29-Oct-2018 03:57:29 UTC] array (
+  999992 => 'mdevwp.test',
+  887494 => 'multiwp.test',
+)
+[29-Oct-2018 04:02:13 UTC] PHP Notice:  Use of undefined constant Shipper_Model_Stored_Destinations - assumed 'Shipper_Model_Stored_Destinations' in /var/www/html/wp-content/plugins/shipper/lib/shipper/controller/class-ajax.php on line 297
+[29-Oct-2018 04:02:13 UTC] PHP Fatal error:  Call to a member function get_current() on string in /var/www/html/wp-content/plugins/shipper/lib/shipper/controller/class-ajax.php on line 298

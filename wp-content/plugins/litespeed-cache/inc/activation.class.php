@@ -15,6 +15,10 @@ if ( ! defined( 'WPINC' ) ) {
 
 class LiteSpeed_Cache_Activation
 {
+	private static $_instance ;
+
+	const TYPE_UPGRADE = 'upgrade' ;
+
 	const NETWORK_TRANSIENT_COUNT = 'lscwp_network_count' ;
 
 	/**
@@ -79,6 +83,11 @@ class LiteSpeed_Cache_Activation
 				$options[ $id ] = $__cfg->get_item( $id ) ;
 			}
 
+			if ( ! empty($options[ LiteSpeed_Cache_Config::ID_MOBILEVIEW_LIST ]) ) {
+				$options[ LiteSpeed_Cache_Config::ID_MOBILEVIEW_LIST ] =
+					addslashes( $options[ LiteSpeed_Cache_Config::ID_MOBILEVIEW_LIST ] );
+			}
+
 			LiteSpeed_Cache_Admin_Settings::get_instance()->validate_network_settings( $options, true ) ;
 			return ;
 		}
@@ -100,7 +109,7 @@ class LiteSpeed_Cache_Activation
 		LiteSpeed_Cache_Admin_Settings::get_instance()->validate_plugin_settings( $options, true ) ;
 
 		if ( defined( 'LSCWP_PLUGIN_NAME' ) ) {
-			set_transient( LiteSpeed_Cache::WHM_TRANSIENT, LiteSpeed_Cache::WHM_TRANSIENT_VAL ) ;
+			update_option( LiteSpeed_Cache::WHM_MSG, LiteSpeed_Cache::WHM_MSG_VAL ) ;
 		}
 
 		// Register crawler cron task
@@ -305,15 +314,93 @@ class LiteSpeed_Cache_Activation
 	}
 
 	/**
-	 * Delete whm transient msg tag
+	 * Delete whm msg tag
 	 *
 	 * @since 1.1.1
 	 * @access public
 	 */
 	public static function dismiss_whm()
 	{
-		delete_transient( LiteSpeed_Cache::WHM_TRANSIENT ) ;
+		delete_option( LiteSpeed_Cache::WHM_MSG ) ;
 	}
 
+	/**
+	 * Upgrade LSCWP
+	 *
+	 * @since 2.9
+	 * @access private
+	 */
+	private function _upgrade()
+	{
+		$plugin = LiteSpeed_Cache::PLUGIN_FILE ;
+
+		/**
+		 * @see wp-admin/update.php
+		 */
+		include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php' ;
+		include_once ABSPATH . 'wp-admin/includes/file.php' ;
+		include_once ABSPATH . 'wp-admin/includes/misc.php' ;
+
+		try {
+			ob_start() ;
+			$skin = new \WP_Ajax_Upgrader_Skin() ;
+			$upgrader = new \Plugin_Upgrader( $skin ) ;
+			$result = $upgrader->upgrade( $plugin ) ;
+			if ( ! is_plugin_active( $plugin ) ) {// todo: upgrade should reactivate the plugin again by WP. Need to check why disabled after upgraded.
+				activate_plugin( $plugin ) ;
+			}
+			ob_end_clean() ;
+		} catch ( \Exception $e ) {
+			LiteSpeed_Cache_Admin_Display::error( __( 'Failed to upgrade.', 'litespeed-cache' ) ) ;
+			return ;
+		}
+
+		if ( is_wp_error( $result ) ) {
+			LiteSpeed_Cache_Admin_Display::error( __( 'Failed to upgrade.', 'litespeed-cache' ) ) ;
+			return ;
+		}
+
+		LiteSpeed_Cache_Admin_Display::succeed( __( 'Upgraded successfully.', 'litespeed-cache' ) ) ;
+	}
+
+	/**
+	 * Handle all request actions from main cls
+	 *
+	 * @since  2.9
+	 * @access public
+	 */
+	public static function handler()
+	{
+		$instance = self::get_instance() ;
+
+		$type = LiteSpeed_Cache_Router::verify_type() ;
+
+		switch ( $type ) {
+			case self::TYPE_UPGRADE :
+				$instance->_upgrade() ;
+				break ;
+
+			default:
+				break ;
+		}
+
+		LiteSpeed_Cache_Admin::redirect() ;
+	}
+
+	/**
+	 * Get the current instance object.
+	 *
+	 * @since 2.9
+	 * @access public
+	 * @return Current class instance.
+	 */
+	public static function get_instance()
+	{
+		if ( ! isset( self::$_instance ) ) {
+			self::$_instance = new self() ;
+		}
+
+		return self::$_instance ;
+	}
 
 }

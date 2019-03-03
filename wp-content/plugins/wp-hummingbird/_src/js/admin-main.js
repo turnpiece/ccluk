@@ -38,7 +38,107 @@ import Fetcher from './utils/fetcher';
 						}
 					});
 			});
-        },
+
+			/**
+			 * Add recipient button clicked.
+			 *
+			 * On Performance and Uptime recipient modals.
+			 *
+			 * @since 1.9.3  Unified two handle both modules.
+			 */
+			$('#add-recipient').on('click', function () {
+				let module = '';
+
+				// Get the module name from URL.
+				if ( window.location.search.includes('wphb-performance') ) {
+					module = 'performance'
+				} else if ( window.location.search.includes('wphb-uptime') ) {
+					module = 'uptime';
+				}
+
+				const reportingEmail = $('#reporting-email'),
+					  email_field    = reportingEmail.closest('.sui-form-field'),
+					  email          = reportingEmail.val(),
+					  name           = $('#reporting-first-name').val();
+
+				// Remove errors.
+				email_field.removeClass('sui-form-field-error');
+				email_field.find('.sui-error-message').remove();
+
+				Fetcher.common.addRecipient( module, email, name )
+					.then( ( response ) => {
+						const user_row = $('<div class="sui-recipient"/>');
+
+						user_row.append('<span class="sui-recipient-name"/>');
+						user_row.find('.sui-recipient-name').append(response.name);
+
+						user_row.append($('<span class="sui-recipient-email"/>').html(email));
+						user_row.append($('<button/>').attr({
+							'class': 'sui-button-icon wphb-remove-recipient',
+							'type': 'button'
+						}).html('<i class="sui-icon-trash" aria-hidden="true"></i>'));
+
+						$('<input>').attr({
+							type: 'hidden',
+							id: 'report-recipient',
+							name: 'report-recipients[]',
+							value: JSON.stringify( { email: response.email, name: response.name } ),
+						}).appendTo(user_row);
+
+						$('.sui-recipients').append(user_row);
+						$('#reporting-email').val('');
+						$('#reporting-first-name').val('');
+
+						// Hide no recipients notification.
+						$('.wphb-no-recipients').addClass('sui-hidden');
+						SUI.dialogs['wphb-add-recipient-modal'].hide();
+
+						// Show notice to save settings.
+						WPHB_Admin.notices.show('wphb-ajax-update-notice', false, 'info', name + wphb.strings.successRecipientAdded);
+					})
+					.catch( ( error ) => {
+						email_field.addClass('sui-form-field-error');
+						email_field.append('<span class="sui-error-message"/>');
+						email_field.find('.sui-error-message').append(error.message);
+					} );
+			});
+
+			/**
+			 * Remove recipient button clicked.
+			 */
+			$('body').on('click', '.wphb-remove-recipient', function () {
+				$(this).closest('.sui-recipient').remove();
+				$('.wphb-report-settings').find("input[id='report-recipient'][value=" + $(this).attr('data-id') + "]").remove();
+			});
+
+			/**
+			 * Handle the show/hiding of the report schedule.
+			 */
+			$( '#chk1' ).on( 'click', function () {
+				$( '.schedule-box' ).toggleClass( 'sui-hidden' );
+			} );
+
+			/**
+			 * Schedule show/hide day of week.
+			 */
+			$('select[name="report-frequency"]').change(function () {
+				const freq = $(this).val();
+
+				if ( '1' === freq ) {
+					$(this).closest('.schedule-box').find('div.days-container').hide();
+				} else {
+					$(this).closest('.schedule-box').find('div.days-container').show();
+
+					if ( '7' === freq ) {
+						$(this).closest('.schedule-box').find('[data-type="week"]').show();
+						$(this).closest('.schedule-box').find('[data-type="month"]').hide();
+					} else {
+						$(this).closest('.schedule-box').find('[data-type="week"]').hide();
+						$(this).closest('.schedule-box').find('[data-type="month"]').show();
+					}
+				}
+			}).change();
+		},
         initModule: function( module ) {
             if ( this.hasOwnProperty( module ) ) {
                 this.modules[ module ] = this[ module ].init();
@@ -101,6 +201,7 @@ import Fetcher from './utils/fetcher';
 				// Remove set classes if doing multiple calls per page load.
 				notice.removeClass('sui-notice-error');
 				notice.removeClass('sui-notice-success');
+				notice.removeClass('sui-notice-info');
 				notice.addClass('sui-notice-' + type);
 			}
 

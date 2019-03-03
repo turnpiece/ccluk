@@ -9,7 +9,7 @@
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2018 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -290,6 +290,9 @@ window.tsfTT = function( $ ) {
 
 		addBoundary( '#wpcontent' ); //! All pages, but Gutenberg destroys the boundaries..
 		addBoundary( '#editor' ); //! Gutenberg
+		// if ( tsfL10n && tsf.states && tsf.states.isGutenbergPage ) {
+		// 	addBoundary( '.edit-post-layout__metaboxes' ); //! TSF's postbox container... ideally.
+		// }
 	}
 
 	/**
@@ -345,7 +348,7 @@ window.tsfTT = function( $ ) {
 			borderLeft = $textWrap.offset().left,
 			borderRight = borderLeft + textWrapWidth,
 			boundaryLeft = $boundary.offset().left - ( $boundary.prop( 'scrollLeft' ) || 0 ),
-			boundaryRight = boundaryLeft + $boundary.outerWidth();
+			boundaryRight = boundaryLeft + $boundary.width();
 
 		let direction = 'left',
 			horIndent = NaN;
@@ -482,7 +485,7 @@ window.tsfTT = function( $ ) {
 		 * @return {undefined}
 		 */
 		load: function() {
-			$( document.body ).on( 'tsf-onload', _initToolTips );
+			$( document.body ).ready( _initToolTips );
 		}
 	}, {
 		/**

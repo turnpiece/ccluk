@@ -13,13 +13,9 @@
 
 // ----------------------------------------------------------------------------
 // ----------------------------------------------------------------------------
-//                               SHARED FUNCTIONS
+// SHARED FUNCTIONS
 // ----------------------------------------------------------------------------
 // ----------------------------------------------------------------------------
-
-
-
-
 /**
  * This class contains functions that are used on Admin and on Frontpage.
  */
@@ -92,13 +88,99 @@ class Agm_UCI_Shared {
 			'agm_google_maps_checkins-limit-checkin-count',
 			array( $this, 'limit_checkin_count' ), 10, 3
 		);
+
+		add_filter(
+			'wp_privacy_personal_data_exporters',
+			array( $this, 'register_data_exporter' )
+		);
+		add_filter(
+			'wp_privacy_personal_data_erasers',
+			array( $this, 'register_data_eraser' )
+		);
+	}
+
+	/**
+	 * Registers data exporters for maps
+	 *
+	 * @param array $exporters Exporters this far.
+	 *
+	 * @return array
+	 */
+	public function register_data_exporter( $exporters ) {
+		$exporters['agm_google_maps-checkins'] = array(
+			'exporter_friendly_name' => __( 'Google Maps Pro check-ins', AGM_LANG ),
+			'callback' => array( $this, 'gdpr_export_data' ),
+		);
+		return $exporters;
+	}
+
+	/**
+	 * Registers data erasers for maps
+	 *
+	 * @param array $erasers erasers this far.
+	 *
+	 * @return array
+	 */
+	public function register_data_eraser( $erasers ) {
+		$erasers['agm_google_maps-checkins'] = array(
+			'eraser_friendly_name' => __( 'Google Maps Pro check-ins', AGM_LANG ),
+			'callback' => array( $this, 'gdpr_erase_data' ),
+		);
+		return $erasers;
+	}
+
+	public function gdpr_erase_data( $email, $page = 1 ) {
+		$user = get_user_by( 'email', $email );
+		delete_user_meta( $user->ID, 'agm_google_maps_checkins' );
+		return array(
+			'items_removed' => true,
+			'items_retained' => false,
+			'messages' => array(),
+			'done' => true,
+		);
+	}
+
+	public function gdpr_export_data( $email, $page = 1 ) {
+		$user = get_user_by( 'email', $email );
+		$data = (array) $this->_get_checkin_data( $user->ID );
+
+		$exports = array();
+		if ( ! empty( $data['checkins'] ) ) {
+			foreach ( $data['checkins'] as $chk ) {
+				$chk = (array) $chk;
+				$exports[] = array(
+					'item_id' => 'checkin-' . md5( serialize( $chk ) ),
+					'group_id' => 'agm-checkins',
+					'group_label' => __( 'Google Map Check-ins', AGM_LANG ),
+					'data' => array(
+						array(
+							'name' => __( 'Latitude', AGM_LANG ),
+							'value' => $chk['lat'],
+						),
+						array(
+							'name' => __( 'Longitude', AGM_LANG ),
+							'value' => $chk['lon'],
+						),
+						array(
+							'name' => __( 'Time', AGM_LANG ),
+							'value' => date_i18n( 'r', $chk['created'] ),
+						),
+					),
+				);
+			}
+		}
+
+		return array(
+			'data' => $exports,
+			'done' => true,
+		);
 	}
 
 	/**
 	 * Appends a single location to the user metadata.
 	 *
 	 * @since  1.0.0
-	 * @param  int $user_id Can be 0 for guest checkins.
+	 * @param  int    $user_id Can be 0 for guest checkins.
 	 * @param  object $location Location details.
 	 * @return int|false On success the new/updated checkin-ID is returned.
 	 */
@@ -187,8 +269,8 @@ class Agm_UCI_Shared {
 	 * Main difference to _add_checkin: Locations are not merged or appended.
 	 *
 	 * @since  1.0.0
-	 * @param  int $user_id Can be 0 for guest checkins.
-	 * @param  int $cid The checkin-id
+	 * @param  int   $user_id Can be 0 for guest checkins.
+	 * @param  int   $cid The checkin-id
 	 * @param  array $edit_data An array with location details.
 	 *                Only fields that are specified in the array are updated.
 	 * @return bool
@@ -306,7 +388,7 @@ class Agm_UCI_Shared {
 	 * lowest level SETTER function.
 	 *
 	 * @since  1.0.0
-	 * @param  int $user_id Can be 0 for guests.
+	 * @param  int   $user_id Can be 0 for guests.
 	 * @param  array $data List of checkins.
 	 * @return bool
 	 */
@@ -341,8 +423,8 @@ class Agm_UCI_Shared {
 	 * user-checkin.
 	 *
 	 * @since  1.0.0
-	 * @param  array $data Data collection containing the Location details.
-	 * @param  int $user_id Creator of the checkin.
+	 * @param  array  $data Data collection containing the Location details.
+	 * @param  int    $user_id Creator of the checkin.
 	 * @param  string $mode Either 'add' or 'update'. When adding an item then
 	 *                lat/lng are mandatory, otherwise they are optional.
 	 * @return array|false An array describing the check-in as detailled as possible.
@@ -410,9 +492,9 @@ class Agm_UCI_Shared {
 	 *
 	 * @since  1.0.0
 	 * @param  array $data Checkin list (not the checkin-collection object!)
-	 * @param  int $max_checkins Max number of checkins.
-	 * @param  int $current_id If an item was added this will be the new checkin-ID.
-	 *                We always should not dump this checkin item...
+	 * @param  int   $max_checkins Max number of checkins.
+	 * @param  int   $current_id If an item was added this will be the new checkin-ID.
+	 *                  We always should not dump this checkin item...
 	 * @return array The cleaned checkin list.
 	 */
 	public function limit_checkin_count( $data, $max_checkins, $current_id ) {
@@ -479,7 +561,7 @@ class Agm_UCI_Shared {
 	 *
 	 * @since  1.0.0
 	 * @param  array $checkin The checkin-object to validate.
-	 * @param  int $user_id Owner of the checkin.
+	 * @param  int   $user_id Owner of the checkin.
 	 * @param  array $defaults Optional. A checkin-array that contains default
 	 *                values. This is used to update a checkin.
 	 * @return array Validated checkin-object.
@@ -629,7 +711,7 @@ class Agm_UCI_Shared {
 	 * Returns the value of a user-specific setting
 	 *
 	 * @since  1.0.0
-	 * @param  int $user_id
+	 * @param  int    $user_id
 	 * @param  string $key
 	 * @return mixed Setting value.
 	 */
@@ -648,9 +730,9 @@ class Agm_UCI_Shared {
 	 * Sets the value of a user-specific setting
 	 *
 	 * @since  1.0.0
-	 * @param  int $user_id
+	 * @param  int    $user_id
 	 * @param  string $key
-	 * @param  any $value
+	 * @param  any    $value
 	 * @return mixed Setting value.
 	 */
 	protected function _set_user_option( $user_id, $key, $value ) {
@@ -818,7 +900,7 @@ class Agm_UCI_Shared {
 		$icon = @$checkin['marker']['icon'];
 		if ( empty( $icon ) ) {
 			$icon = AGM_PLUGIN_URL . 'img/system/marker.png';
-		} else if ( strpos( $icon, '<img' ) !== false ) {
+		} elseif ( strpos( $icon, '<img' ) !== false ) {
 			$array = array();
 			preg_match( '/src=\'([^\']*)/i', $icon, $array );
 			if ( empty( $array ) ) {
@@ -838,13 +920,9 @@ class Agm_UCI_Shared {
 
 // ----------------------------------------------------------------------------
 // ----------------------------------------------------------------------------
-//                             USER PROFILE (ADMIN)
+// USER PROFILE (ADMIN)
 // ----------------------------------------------------------------------------
 // ----------------------------------------------------------------------------
-
-
-
-
 /**
  * This class provides functions that any logged-in user can use to customize
  * his checkin-experience:
@@ -1141,13 +1219,9 @@ class Agm_UCI_UserProfile extends Agm_UCI_Shared {
 
 // ----------------------------------------------------------------------------
 // ----------------------------------------------------------------------------
-//                            PLUGIN OPTIONS (ADMIN)
+// PLUGIN OPTIONS (ADMIN)
 // ----------------------------------------------------------------------------
 // ----------------------------------------------------------------------------
-
-
-
-
 /**
  * The Admin class for the check-ins plugin.
  * Handles the option screen.
@@ -1191,7 +1265,6 @@ class Agm_UCI_AdminPages extends Agm_UCI_Shared {
 		);
 
 		// -- Ajax handlers
-
 		// Collect checkin data from user and store it.
 		add_action(
 			'wp_ajax_agm_uci_checkin',
@@ -1243,7 +1316,7 @@ class Agm_UCI_AdminPages extends Agm_UCI_Shared {
 		add_settings_section(
 			'agm_google_maps_uci',
 			__( 'User check-ins', AGM_LANG ),
-			create_function( '', '' ),
+			'__return_false',
 			'agm_google_maps_options_page'
 		);
 
@@ -1591,7 +1664,6 @@ class Agm_UCI_AdminPages extends Agm_UCI_Shared {
 			$checkin = $this->_get_checkin_by_id( $user_id, $cid );
 
 			// Important: Multiple occurances of this code, search for #ReturnCheckin!
-
 			// These fields are not saved in DB:
 			$checkin['user_id'] = $user_id;
 			$checkin['id'] = $cid;
@@ -1628,7 +1700,6 @@ class Agm_UCI_AdminPages extends Agm_UCI_Shared {
 			);
 
 			// Important: Multiple occurances of this code, search for #ReturnCheckin!
-
 			// These fields are not saved in DB:
 			$checkin['user_id'] = -1;
 			$checkin['id'] = -1;
@@ -1665,7 +1736,7 @@ class Agm_UCI_AdminPages extends Agm_UCI_Shared {
 	 * Helper for ajax handlers ajax_checkin() and ajax_guest_checkin()
 	 *
 	 * @since  1.0.0
-	 * @param  int $user_id Can be 0 for guests.
+	 * @param  int   $user_id Can be 0 for guests.
 	 * @param  array $data Data collection containing the location details (e.g. $_POST).
 	 */
 	protected function _ajax_handle_checkin( $user_id, $data ) {
@@ -1689,7 +1760,6 @@ class Agm_UCI_AdminPages extends Agm_UCI_Shared {
 
 			if ( ! empty( $checkin ) ) {
 				// Important: Multiple occurances of this code, search for #ReturnCheckin!
-
 				// These fields are not saved in DB:
 				$checkin['user_id'] = $user_id;
 				$checkin['id'] = $cid;
@@ -1710,10 +1780,10 @@ class Agm_UCI_AdminPages extends Agm_UCI_Shared {
 	 * Builds the HTML form to edit the specified checkin item.
 	 *
 	 * @since  1.0.0
-	 * @param  int $user_id Owner of the checkin.
-	 * @param  int $cid Checkin ID.
+	 * @param  int   $user_id Owner of the checkin.
+	 * @param  int   $cid Checkin ID.
 	 * @param  array $checkin Check details.
-	 * @param  bool $edit_details False: Only sharing can be changed.
+	 * @param  bool  $edit_details False: Only sharing can be changed.
 	 */
 	protected function _checkin_editor( $user_id, $cid, $checkin, $edit_details ) {
 		$sel_check_priv = ($checkin['share'] == 'priv' ? 'selected="selected"' : '');
@@ -1761,13 +1831,9 @@ class Agm_UCI_AdminPages extends Agm_UCI_Shared {
 
 // ----------------------------------------------------------------------------
 // ----------------------------------------------------------------------------
-//                                   FRONTEND
+// FRONTEND
 // ----------------------------------------------------------------------------
 // ----------------------------------------------------------------------------
-
-
-
-
 /**
  * User-side implementation will do two things:
  *  - Collect the check-in data.
@@ -1786,6 +1852,7 @@ class Agm_UCI_UserPages extends Agm_UCI_Shared {
 	/**
 	 * Flag that is calculated once on each request to decide if the addon
 	 * should try to collect the checkin location in background.
+	 *
 	 * @see init_userside() [= the wp_init hook]
 	 *
 	 * @since  1.0.0
@@ -1976,15 +2043,15 @@ class Agm_UCI_UserPages extends Agm_UCI_Shared {
 	 * Creates a map from a list of markers.
 	 *
 	 * @since  1.0.0
-	 * @param  array $markers Map markers to display.
+	 * @param  array     $markers Map markers to display.
 	 * @param  int|false $id ID-Attribute of the map.
-	 * @param  array $overrides Display options (i.e. shortcode attributes)
+	 * @param  array     $overrides Display options (i.e. shortcode attributes)
 	 * @return string HTML Code to display the map.
 	 */
 	private function _create_map( $markers, $id = false, $overrides = array() ) {
 		AgmDependencies::ensure_presence();
 
-		if ( empty ( $markers ) && ! $this->_get_option( 'show_empty_map' ) ) {
+		if ( empty( $markers ) && ! $this->_get_option( 'show_empty_map' ) ) {
 			return false;
 		}
 		$id = $id ? $id : md5( time() . rand() );
@@ -2054,11 +2121,11 @@ class Agm_UCI_UserPages extends Agm_UCI_Shared {
 			// Limit checkins by time (past X hours)
 			'last_hours' => 0,
 			// Limit checkins by page-link
-			# 'page' => '',
-			# 'pages' => null,
+			// 'page' => '',
+			// 'pages' => null,
 			// Limit checkins by comment-link
-			# 'comment' => '',
-			# 'comments' => null,
+			// 'comment' => '',
+			// 'comments' => null,
 			// Show or hide anonymous checkins
 			'guest' => true,
 			'guests' => null,
@@ -2138,8 +2205,8 @@ class Agm_UCI_UserPages extends Agm_UCI_Shared {
 		if ( null !== $users ) { $user = $users; }
 		if ( null !== $roles ) { $role = $roles; }
 		if ( null !== $groups ) { $group = $groups; }
-		# if ( null !== $pages ) { $page = $pages; }
-		# if ( null !== $comments ) { $comment = $comments; }
+		// if ( null !== $pages ) { $page = $pages; }
+		// if ( null !== $comments ) { $comment = $comments; }
 		if ( null !== $guests ) { $guest = $guests; }
 
 		// Get a list of all user-IDs.
@@ -2167,7 +2234,7 @@ class Agm_UCI_UserPages extends Agm_UCI_Shared {
 	 * @param  string $user A single user-ID or a comma separated list.
 	 * @param  string $role A single role name or a comma separated list.
 	 * @param  string $group A single Buddypress group-slug or comma separated list.
-	 * @param  bool $include_guest
+	 * @param  bool   $include_guest
 	 * @return array List of all user-IDs.
 	 */
 	protected function _get_user_ids( $user, $role, $group, $include_guest ) {
@@ -2202,9 +2269,9 @@ class Agm_UCI_UserPages extends Agm_UCI_Shared {
 			}
 
 			// Append all users based on BuddyPress group.
-			//TODO: This function is untested.
+			// TODO: This function is untested.
 			if ( defined( 'BP_VERSION' ) && class_exists( 'BP_Groups_Member' ) ) {
-				if ( ! empty ( $group ) ) {
+				if ( ! empty( $group ) ) {
 					$groups = explode( ',', $group );
 					foreach ( $groups as $group_slug ) {
 						// Get the user_ids of the group.
@@ -2235,8 +2302,8 @@ class Agm_UCI_UserPages extends Agm_UCI_Shared {
 	 *
 	 * @since  1.0.0
 	 * @param  array $users List of user-IDs.
-	 * @param  int $last_hours Only checkins that were created/updated within
-	 *                that amount of time are included (1 = past 1 hour).
+	 * @param  int   $last_hours Only checkins that were created/updated within
+	 *                  that amount of time are included (1 = past 1 hour).
 	 * @return array List of checkin objects.
 	 */
 	protected function _get_checkins_by_user( $users, $last_hours ) {
@@ -2267,7 +2334,6 @@ class Agm_UCI_UserPages extends Agm_UCI_Shared {
 				}
 
 				// Important: Multiple occurances of this code, search for #ReturnCheckin!
-
 				// These fields are not saved in DB:
 				$checkin['user_id'] = $user_id;
 				$checkin['id'] = $cid;
@@ -2286,13 +2352,9 @@ class Agm_UCI_UserPages extends Agm_UCI_Shared {
 
 // ----------------------------------------------------------------------------
 // ----------------------------------------------------------------------------
-//                                 GLOBAL / INIT
+// GLOBAL / INIT
 // ----------------------------------------------------------------------------
 // ----------------------------------------------------------------------------
-
-
-
-
 if ( is_admin() ) {
 	// Hint: All ajax handlers are stored in the AdminPages instance.
 	Agm_UCI_AdminPages::serve();

@@ -511,6 +511,8 @@ eot;
 		 */
 		$excludes = apply_filters( 'litespeed_cache_media_lazy_img_excludes', LiteSpeed_Cache_Config::get_instance()->get_item( LiteSpeed_Cache_Config::ITEM_MEDIA_LAZY_IMG_EXC ) ) ;
 
+		$cls_excludes = apply_filters( 'litespeed_media_lazy_img_cls_excludes', LiteSpeed_Cache_Config::get_instance()->get_item( LiteSpeed_Cache_Config::ITEM_MEDIA_LAZY_IMG_CLS_EXC ) ) ;
+
 		$src_list = array() ;
 		$html_list = array() ;
 		$placeholder_list = array() ;
@@ -540,12 +542,27 @@ eot;
 				continue ;
 			}
 
+			if ( ! empty( $attrs[ 'class' ] ) && $hit = LiteSpeed_Cache_Utility::str_hit_array( $attrs[ 'class' ], $cls_excludes ) ) {
+				LiteSpeed_Cache_Log::debug2( '[Media] lazyload image cls excludes [hit] ' . $hit ) ;
+				continue ;
+			}
+
 			/**
 			 * Exclude from lazyload by setting
 			 * @since  1.5
 			 */
 			if ( $excludes && LiteSpeed_Cache_Utility::str_hit_array( $attrs[ 'src' ], $excludes ) ) {
 				LiteSpeed_Cache_Log::debug2( '[Media] lazyload image exclude ' . $attrs[ 'src' ] ) ;
+				continue ;
+			}
+
+			/**
+			 * Excldues invalid image src from buddypress avatar crop
+			 * @see  https://wordpress.org/support/topic/lazy-load-breaking-buddypress-upload-avatar-feature/#post-11040512
+			 * @since  2.9.1
+			 */
+			if ( strpos( $attrs[ 'src' ], '{' ) !== false ) {
+				LiteSpeed_Cache_Log::debug2( '[Media] image src has {} ' . $attrs[ 'src' ] ) ;
 				continue ;
 			}
 
@@ -907,20 +924,13 @@ eot;
 		$this->_save_summary( $req_summary ) ;
 
 		// Generate placeholder
-		$url = 'https://wp.api.litespeedtech.com/placeholder/' . $size . '?v=' . LiteSpeed_Cache::PLUGIN_VERSION . '&c=' . $this->_cfg_placeholder_resp_color ;
+		$req_data = array(
+			'size'	=> $size,
+			'color'	=> $this->_cfg_placeholder_resp_color,
+		) ;
+		$data = LiteSpeed_Cache_Admin_API::get( LiteSpeed_Cache_Admin_API::IAPI_ACTION_PLACEHOLDER, $req_data, true ) ;
 
-		LiteSpeed_Cache_Log::debug( '[Media] posting to : ' . $url ) ;
-
-		$response = wp_remote_get( $url, array( 'timeout' => 15 ) ) ;
-
-		// Parse response data
-		if ( is_wp_error( $response ) ) {
-			$error_message = $response->get_error_message() ;
-			LiteSpeed_Cache_Log::debug( '[Media] failed to post: ' . $error_message ) ;
-			return false ;
-		}
-
-		$data = $response[ 'body' ] ;
+		LiteSpeed_Cache_Log::debug( '[Media] _generate_placeholder ' ) ;
 
 		if ( strpos( $data, 'data:image/png;base64,' ) !== 0 ) {
 			LiteSpeed_Cache_Log::debug( '[Media] failed to decode response: ' . $data ) ;
@@ -934,7 +944,9 @@ eot;
 		$req_summary[ 'last_spent' ] = time() - $req_summary[ 'curr_request' ] ;
 		$req_summary[ 'last_request' ] = $req_summary[ 'curr_request' ] ;
 		$req_summary[ 'curr_request' ] = 0 ;
-		unset( $req_summary[ 'queue' ][ array_search( $size, $req_summary[ 'queue' ] ) ] ) ;
+		if ( ! empty( $req_summary[ 'queue' ] ) && in_array( $size, $req_summary[ 'queue' ] ) ) {
+			unset( $req_summary[ 'queue' ][ array_search( $size, $req_summary[ 'queue' ] ) ] ) ;
+		}
 
 		$this->_save_summary( $req_summary ) ;
 

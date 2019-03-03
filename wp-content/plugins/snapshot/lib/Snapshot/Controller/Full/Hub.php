@@ -343,9 +343,11 @@ class Snapshot_Controller_Full_Hub extends Snapshot_Controller_Full {
 				$status = new WP_Error(self::ACTION_SCHEDULE_BACKUPS, "Missing parameter: offset");
 			}
 		} else {
-			if (!is_numeric($params->offset)) {
-				// If present, offset has to be numeric.
-				$status = new WP_Error(self::ACTION_SCHEDULE_BACKUPS, "Invalid parameter: offset");
+			if ( ! is_numeric( $params->offset ) ) {
+				if ( ! ( 'daily' === $freq && false === $params->offset ) ) {
+					// If present, offset has to be numeric.
+					$status = new WP_Error( self::ACTION_SCHEDULE_BACKUPS, "Invalid parameter: offset" );
+				}
 			}
 		}
 

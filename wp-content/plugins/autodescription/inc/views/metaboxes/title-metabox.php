@@ -87,7 +87,7 @@ switch ( $instance ) :
 						'left'  => $additions_left,
 						'right' => $additions_right,
 					],
-					'showleft' => $showleft,
+					'showleft'  => $showleft,
 				],
 			],
 		];
@@ -189,7 +189,7 @@ switch ( $instance ) :
 
 		<hr>
 
-		<h4><?php esc_html_e( 'Remove Blogname from Title', 'autodescription' ); ?></h4>
+		<h4><?php esc_html_e( 'Blog Name', 'autodescription' ); ?></h4>
 		<div id="tsf-title-additions-toggle">
 			<?php
 			$info = $this->make_info(
@@ -201,7 +201,7 @@ switch ( $instance ) :
 			$this->wrap_fields(
 				$this->make_checkbox(
 					'title_rem_additions',
-					esc_html__( 'Remove Blogname from title?', 'autodescription' ) . ' ' . $info,
+					esc_html__( 'Remove blog name from the title?', 'autodescription' ) . ' ' . $info,
 					'',
 					false
 				),
@@ -264,7 +264,7 @@ switch ( $instance ) :
 		<hr>
 
 		<h4><?php esc_html_e( 'Archive Title Prefixes', 'autodescription' ); ?></h4>
-		<div id="title-prefixes-toggle">
+		<div id="tsf-title-prefixes-toggle">
 			<?php
 			$info = $this->make_info(
 				__( "The prefix helps visitors and search engines determine what kind of page they're visiting.", 'autodescription' ),

@@ -218,7 +218,6 @@ class Cleantalk {
 				$request->$param = CleantalkHelper::removeNonUTF8FromString($value);
         }
 		
-		$request->message = unserialize($request->message);
 		$request->message = is_array($request->message) ? json_encode($request->message) : $request->message;
 		
         return $request;
@@ -380,7 +379,7 @@ class Cleantalk {
 		$msg->all_headers = json_encode($msg->all_headers);
 				
 		// Using current server without changing it
-        if (false && (!empty($this->work_url) && ($this->server_changed + $this->server_ttl > time()))){
+        if (!empty($this->work_url) && ($this->server_changed + $this->server_ttl > time())){
 	        
             $url = !empty($this->work_url) ? $this->work_url : $this->server_url;
             $result = $this->sendRequest($msg, $url, $this->server_timeout);
@@ -390,7 +389,7 @@ class Cleantalk {
         }
 
 		// Changing server
-        if (true || ($result === false || $result->errno != 0)) {
+        if ($result === false || $result->errno != 0) {
 			
             // Split server url to parts
             preg_match("@^(https?://)([^/:]+)(.*)@i", $this->server_url, $matches);

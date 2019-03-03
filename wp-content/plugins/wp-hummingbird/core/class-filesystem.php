@@ -171,7 +171,7 @@ if ( ! class_exists( 'WP_Hummingbird_Filesystem' ) ) {
 
 			// Can not write to wp-content directory.
 			if ( defined( WP_CONTENT_DIR ) && ! is_writeable( WP_CONTENT_DIR ) ) {
-				return new WP_Error( 'fs-error', __( 'Error: The wp-content directory is not writable. Ensure the folder has proper read/write permissions for caching to function successfully.', 'wphb' ) );
+				return new WP_Error( 'fs-error', __( 'Error: The wp-content directory is not writable. Ensure the folder has proper read/write permissions for caching to function successfully.', 'wphb' ) );	   			 	 		  		   		
 			}
 
 			return true;
@@ -515,6 +515,15 @@ if ( ! class_exists( 'WP_Hummingbird_Filesystem' ) ) {
 					$custom_subdir = $prepend . $user_defined_path;
 					$custom_dir    = $upload['basedir'] . $custom_subdir;
 				}
+			}
+
+			/**
+			 * We really should not be generating unique file names, because there are instances, when WP will
+			 * generate a bunch of similar files.
+			 * TODO: For now, we're going to remove similar files. But better to just remove the wp_unique_filename function.
+			 */
+			if ( file_exists( trailingslashit( $custom_dir ) . $name ) ) {
+				@unlink( trailingslashit( $custom_dir ) . $name );
 			}
 
 			$filename = wp_unique_filename( $custom_dir, $name );
