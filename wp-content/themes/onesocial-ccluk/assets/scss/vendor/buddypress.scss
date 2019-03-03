@@ -186,8 +186,18 @@ body.buddypress {
 			@include border-radius( 50% );
 		}
 
-		div#item-header .user-nicename {
-			padding-left: 15px;
+		div#item-header {
+			.user-nicename {
+				padding-left: 15px;
+			}
+
+			#group-admins {
+				display: none;
+			}
+		}
+
+		.dir-list ul.item-list {
+			justify-content: center;
 		}
 	}
 
@@ -215,13 +225,7 @@ body.buddypress {
 			}
 		}
 	}
-/*
-	.bp-legacy {
-		div#item-body div.item-list-tabs {
-			@include bp-item-list-tabs();
-		}
-	}
-*/
+
 	.bp-user a.button.sap-new-post-btn{
 		font-size: $font-size-sm;
 		&:hover {

@@ -36,7 +36,7 @@ get_header();
 
 				<div class="article-outher">
 
-					<?php get_template_part( 'template-parts/content', 'author' ); ?>
+					<?php get_template_part( 'template-parts/content', ( is_post_type_archive('post') ? 'author' : 'date' ) ); ?>
 					
 					<div class="content-wrap">
 						<?php get_template_part( 'template-parts/content', get_post_format() ); ?>

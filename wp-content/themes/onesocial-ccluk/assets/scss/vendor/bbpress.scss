@@ -36,5 +36,13 @@
 			font-size: $font-size-sm;
 			color: $green;
 		}
+
+		&:before {
+			border-color: $green_bg;
+		}
+	}
+
+	div.bbp-template-notice {
+		display: none;
 	}
 }
