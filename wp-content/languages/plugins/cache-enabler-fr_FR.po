@@ -1,0 +1,168 @@
+# Translation of Plugins - Cache Enabler &#8211; WordPress Cache - Development (trunk) in French (France)
+# This file is distributed under the same license as the Plugins - Cache Enabler &#8211; WordPress Cache - Development (trunk) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2016-05-20 06:57:08+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: GlotPress/2.4.0-alpha\n"
+"Language: fr\n"
+"Project-Id-Version: Plugins - Cache Enabler &#8211; WordPress Cache - Development (trunk)\n"
+
+#: inc/cache_enabler.class.php:1692
+msgid "The <b>%s</b> plugin is already active. Please disable minification in the <b>%s</b> settings."
+msgstr "L&rsquo;extension <b>%s</b> est déjà activée. Veuillez désactiver le minification dans les réglages de <b>%s</b>. "
+
+#: inc/cache_enabler.class.php:1675
+msgid "The <b>%s</b> requires write permissions %s on %s. Please <a href=\"%s\" target=\"_blank\">change the permissions</a>."
+msgstr "Le <b>%s</b> nécessite des permissions d&rsquo;écriture %s sur %s. Veuillez <a href=\"%s\" target=\"_blank\">modifier les permissions</a>."
+
+#. Author URI of the plugin/theme
+msgid "https://www.keycdn.com"
+msgstr "https://www.keycdn.com"
+
+#. Author of the plugin/theme
+msgid "KeyCDN"
+msgstr "KeyCDN"
+
+#. Description of the plugin/theme
+msgid "Simple and fast WordPress disk caching plugin."
+msgstr "Une extension simple et rapide pour la mise en cache du disque de WordPress."
+
+#. Plugin Name of the plugin/theme
+msgid "Cache Enabler"
+msgstr "Cache Enabler"
+
+#: inc/cache_enabler.class.php:1900
+msgid "It is recommended to enable HTTP/2 on your origin server and use a CDN that supports HTTP/2. Avoid domain sharding and concatenation of your assets to benefit from parallelism of HTTP/2."
+msgstr "Il est conseillé d&rsquo;activer HTTP/2 sur votre serveur d’origine et d&rsquo;utiliser un CDN qui prend en charge HTTP/2. Évitez le domain sharding et la concaténation de vos fichiers pour bénéficier du parallélisme de HTTP/2."
+
+#: inc/cache_enabler.class.php:1895
+msgid "Saving these settings will clear the complete cache."
+msgstr "L&rsquo;enregistrement de ces réglages vide le cache de l&rsquo;ensemble du site."
+
+#: inc/cache_enabler.class.php:1875
+msgid "Cache Minification"
+msgstr "Minification du cache"
+
+#: inc/cache_enabler.class.php:1867
+msgid "Post or Pages IDs separated by a <code>,</code> that should not be cached."
+msgstr "Identifiants des articles ou des pages séparés par une <code>,</code> qui ne devraient pas être mis en cache. "
+
+#: inc/cache_enabler.class.php:1861
+msgid "Cache Exclusions"
+msgstr "Exclusions du cache"
+
+#: inc/cache_enabler.class.php:1853
+msgid "Create an additional cached version for WebP image support. Convert your images to WebP with <a href=\"https://optimus.io/en/\" target=\"_blank\">Optimus</a>."
+msgstr "Créer une version de cache supplémentaire pour les images WebP. Convertissez vos images en WebP avec <a href=\"https://optimus.io/en/\" target=\"_blank\">Optimus</a>."
+
+#: inc/cache_enabler.class.php:1846
+msgid "Pre-compression of cached pages. Needs to be disabled if the decoding fails in the web browser."
+msgstr "Pré-compression des pages mises en cache. Doit être désactivé si le décodage échoue dans le navigateur web."
+
+#: inc/cache_enabler.class.php:1839
+msgid "Clear the complete cache if a new comment has been posted (instead of only the page specific cache)."
+msgstr "Vider le cache complètement si un nouveau commentaire est publié (au lieu du cache spécifique de la page)."
+
+#: inc/cache_enabler.class.php:1832
+msgid "Clear the complete cache if a new post has been published (instead of only the home page cache)."
+msgstr "Vider le cache complètement si un nouveau article a été publié (au lieu de seulement celui de la page d&rsquo;accueil)."
+
+#: inc/cache_enabler.class.php:1826
+msgid "Cache Behavior"
+msgstr "Comportement du cache"
+
+#: inc/cache_enabler.class.php:1819
+msgid "Cache expiry in hours. An expiry time of 0 means that the cache never expires."
+msgstr "Expiration du cache en heures. Une heure d&rsquo;expiration de 0 signifie que le cache n&rsquo;expire jamais."
+
+#: inc/cache_enabler.class.php:1813
+msgid "Cache Expiry"
+msgstr "Expiration du cache"
+
+#: inc/cache_enabler.class.php:1803
+msgid "Current cache size: <b>%s</b>"
+msgstr "Taille actuelle du cache&nbsp;: <b>%s</b>"
+
+#: inc/cache_enabler.class.php:1800
+msgid "Combine <b><a href=\"%s\">%s</a></b> with Cache Enabler for even better WordPress performance and achieve the next level of caching with a CDN."
+msgstr "Combinez <b><a href=\"%s\">%s</a></b> avec Cache Enabler pour atteindre une performance supérieur pour WordPress et accéder au niveau supérieur de la mise en cache avec un CDN."
+
+#: inc/cache_enabler.class.php:1796
+msgid "Cache Enabler Settings"
+msgstr "Réglages de Cache Enabler"
+
+#: inc/cache_enabler.class.php:1661
+msgid "The <b>%s</b> is optimized for WordPress %s. Please disable the plugin or upgrade your WordPress installation (recommended)."
+msgstr "<b>%s</b> est optimisé pour WordPress %s. Veuillez désactiver l&rsquo;extension ou mettre à niveau votre installation de WordPress (recommandé)."
+
+#: inc/cache_enabler.class.php:1638
+msgid "HTML & Inline JS"
+msgstr "HTML & Inline JS"
+
+#: inc/cache_enabler.class.php:1637
+msgid "HTML"
+msgstr "HTML"
+
+#: inc/cache_enabler.class.php:1636
+msgid "Disabled"
+msgstr "Désactivé"
+
+#: inc/cache_enabler.class.php:1561
+msgid "Cancel"
+msgstr "Annuler"
+
+#: inc/cache_enabler.class.php:1560
+msgid "OK"
+msgstr "OK"
+
+#: inc/cache_enabler.class.php:1558
+msgid "Edit"
+msgstr "Modifier"
+
+#: inc/cache_enabler.class.php:1556
+msgid "Clear cache"
+msgstr "Vider le cache"
+
+#: inc/cache_enabler.class.php:1526
+msgid "Page specific"
+msgstr "Page spécifique"
+
+#: inc/cache_enabler.class.php:1525
+msgid "Completely"
+msgstr "Complètement"
+
+#: inc/cache_enabler.class.php:914
+msgid "The cache has been cleared."
+msgstr "Le cache a été effacé."
+
+#: inc/cache_enabler.class.php:770 inc/cache_enabler.class.php:771
+msgid "Clear URL Cache"
+msgstr "Vider le cache de l’URL"
+
+#: inc/cache_enabler.class.php:758 inc/cache_enabler.class.php:759
+msgid "Clear Cache"
+msgstr "Vider le cache"
+
+#: inc/cache_enabler.class.php:700
+msgid "Cache Size"
+msgstr "Taille du cache"
+
+#: inc/cache_enabler.class.php:699 inc/cache_enabler.class.php:1803
+msgid "Empty"
+msgstr "Vide"
+
+#: inc/cache_enabler.class.php:698
+msgid "Disk Cache"
+msgstr "Cache du disque"
+
+#: inc/cache_enabler.class.php:635
+msgid "Settings"
+msgstr "Réglages"
+
+#: inc/cache_enabler.class.php:599
+msgid "The <b>%s</b> plugin requires a custom permalink structure to start caching properly. Please go to <a href=\"%s\">Permalink</a> to enable it."
+msgstr "L’extension <b>%s</b> a besoin d&rsquo;une structure personnalisée d’adresses web pour vos permaliens pour que le cache fonctionne correctement. Veuillez aller au <a href=\"%s\">Permaliens</a> pour l&rsquo;activer."

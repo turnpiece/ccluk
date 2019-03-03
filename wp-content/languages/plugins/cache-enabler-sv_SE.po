@@ -1,0 +1,172 @@
+# Translation of Plugins - Cache Enabler &#8211; WordPress Cache - Development (trunk) in Swedish
+# This file is distributed under the same license as the Plugins - Cache Enabler &#8211; WordPress Cache - Development (trunk) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2018-01-09 21:33:45+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/2.4.0-alpha\n"
+"Language: sv_SE\n"
+"Project-Id-Version: Plugins - Cache Enabler &#8211; WordPress Cache - Development (trunk)\n"
+
+#: inc/cache_enabler.class.php:1785
+msgid "%s is not set in %s."
+msgstr "%s är inte angiven i %s."
+
+#: inc/cache_enabler.class.php:1692
+msgid "The <b>%s</b> plugin is already active. Please disable minification in the <b>%s</b> settings."
+msgstr "Tillägget <b>%s</b> är redan aktiverat. Vänligen inaktivera minifiering under inställningarna för <b>%s</b>."
+
+#: inc/cache_enabler.class.php:1675
+msgid "The <b>%s</b> requires write permissions %s on %s. Please <a href=\"%s\" target=\"_blank\">change the permissions</a>."
+msgstr "<b>%s</b> kräver behörighet för att skriva %s på %s. Vänligen <a href=\"%s\" target=\"_blank\">ändra denna behörighet</a>."
+
+#. Author URI of the plugin/theme
+msgid "https://www.keycdn.com"
+msgstr "https://www.keycdn.com"
+
+#. Author of the plugin/theme
+msgid "KeyCDN"
+msgstr "KeyCDN"
+
+#. Description of the plugin/theme
+msgid "Simple and fast WordPress disk caching plugin."
+msgstr "Snabbt och enkelt tillägg för diskcache i WordPress."
+
+#. Plugin Name of the plugin/theme
+msgid "Cache Enabler"
+msgstr "Cache Enabler"
+
+#: inc/cache_enabler.class.php:1900
+msgid "It is recommended to enable HTTP/2 on your origin server and use a CDN that supports HTTP/2. Avoid domain sharding and concatenation of your assets to benefit from parallelism of HTTP/2."
+msgstr "Vi rekommenderar att du aktiverar HTTP/2 på din ursprungsserver och använder ett CDN med stöd för HTTP/2. Undvik domänavstämning och sammanfogning av tillgångar för att dra nytta av parallelstödet i HTTP/2."
+
+#: inc/cache_enabler.class.php:1895
+msgid "Saving these settings will clear the complete cache."
+msgstr "Om du sparar dessa inställningar rensas hela cachen."
+
+#: inc/cache_enabler.class.php:1875
+msgid "Cache Minification"
+msgstr "Cache-minifiering"
+
+#: inc/cache_enabler.class.php:1867
+msgid "Post or Pages IDs separated by a <code>,</code> that should not be cached."
+msgstr "Inlägg- eller sid-ID separerade med ett <code>,</code> som inte ska cachas."
+
+#: inc/cache_enabler.class.php:1861
+msgid "Cache Exclusions"
+msgstr "Cache-exkludering"
+
+#: inc/cache_enabler.class.php:1853
+msgid "Create an additional cached version for WebP image support. Convert your images to WebP with <a href=\"https://optimus.io/en/\" target=\"_blank\">Optimus</a>."
+msgstr "Skapar en extra cachad version för WebP bildstöd. Konvertera dina bilder till WebP med <a href=\"https://optimus.io/en/\" target=\"_blank\">Optimus</a>."
+
+#: inc/cache_enabler.class.php:1846
+msgid "Pre-compression of cached pages. Needs to be disabled if the decoding fails in the web browser."
+msgstr "För-komprimering av cachade sidor. Behöver inaktiveras om avkodningen misslyckas i webbläsaren."
+
+#: inc/cache_enabler.class.php:1839
+msgid "Clear the complete cache if a new comment has been posted (instead of only the page specific cache)."
+msgstr "Rensa hela cachen om en ny kommentar har publicerats (istället för endast den sidspecifika cachen)."
+
+#: inc/cache_enabler.class.php:1832
+msgid "Clear the complete cache if a new post has been published (instead of only the home page cache)."
+msgstr "Rensa hela cachen om ett nytt inlägg har publicerats (istället för endast cachen för startsidan)."
+
+#: inc/cache_enabler.class.php:1826
+msgid "Cache Behavior"
+msgstr "Cache-beteende"
+
+#: inc/cache_enabler.class.php:1819
+msgid "Cache expiry in hours. An expiry time of 0 means that the cache never expires."
+msgstr "Cache-utgång i timmar. En utgångstid på 0 betyder att cachen aldrig går ut."
+
+#: inc/cache_enabler.class.php:1813
+msgid "Cache Expiry"
+msgstr "Cache-utgång"
+
+#: inc/cache_enabler.class.php:1803
+msgid "Current cache size: <b>%s</b>"
+msgstr "Nuvarande cache-storlek: <b>%s</b>"
+
+#: inc/cache_enabler.class.php:1800
+msgid "Combine <b><a href=\"%s\">%s</a></b> with Cache Enabler for even better WordPress performance and achieve the next level of caching with a CDN."
+msgstr "Kombinera <b><a href=\"%s\">%s</a></b> med Cache Enabler för ännu bättre WordPress-prestanda och uppnå nästa nivå av cachning med ett CDN."
+
+#: inc/cache_enabler.class.php:1796
+msgid "Cache Enabler Settings"
+msgstr "Cache Enabler inställningar"
+
+#: inc/cache_enabler.class.php:1661
+msgid "The <b>%s</b> is optimized for WordPress %s. Please disable the plugin or upgrade your WordPress installation (recommended)."
+msgstr "<b>%s</b> är optimerad för WordPress %s. Vänligen inaktivera tillägget eller uppdatera din WordPress-installation (rekommenderas)."
+
+#: inc/cache_enabler.class.php:1638
+msgid "HTML & Inline JS"
+msgstr "HTML & köad JS"
+
+#: inc/cache_enabler.class.php:1637
+msgid "HTML"
+msgstr "HTML"
+
+#: inc/cache_enabler.class.php:1636
+msgid "Disabled"
+msgstr "Inaktiverad"
+
+#: inc/cache_enabler.class.php:1561
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: inc/cache_enabler.class.php:1560
+msgid "OK"
+msgstr "OK"
+
+#: inc/cache_enabler.class.php:1558
+msgid "Edit"
+msgstr "Redigera"
+
+#: inc/cache_enabler.class.php:1556
+msgid "Clear cache"
+msgstr "Rensa cache"
+
+#: inc/cache_enabler.class.php:1526
+msgid "Page specific"
+msgstr "Sidspecifik"
+
+#: inc/cache_enabler.class.php:1525
+msgid "Completely"
+msgstr "Fullständigt"
+
+#: inc/cache_enabler.class.php:914
+msgid "The cache has been cleared."
+msgstr "Cachen har blivit rensad."
+
+#: inc/cache_enabler.class.php:770 inc/cache_enabler.class.php:771
+msgid "Clear URL Cache"
+msgstr "Rensa URL-cache"
+
+#: inc/cache_enabler.class.php:758 inc/cache_enabler.class.php:759
+msgid "Clear Cache"
+msgstr "Rensa cache"
+
+#: inc/cache_enabler.class.php:700
+msgid "Cache Size"
+msgstr "Cache-storlek"
+
+#: inc/cache_enabler.class.php:699 inc/cache_enabler.class.php:1803
+msgid "Empty"
+msgstr "Tomt"
+
+#: inc/cache_enabler.class.php:698
+msgid "Disk Cache"
+msgstr "Disk-cache"
+
+#: inc/cache_enabler.class.php:635
+msgid "Settings"
+msgstr "Inställningar"
+
+#: inc/cache_enabler.class.php:599
+msgid "The <b>%s</b> plugin requires a custom permalink structure to start caching properly. Please go to <a href=\"%s\">Permalink</a> to enable it."
+msgstr "Tillägget <b>%s</b> kräver en anpassad permalänkstruktur för att börja cacha ordentligt. Vänligen besök <a href=\"%s\">Permalänkar</a> för att aktivera det."
