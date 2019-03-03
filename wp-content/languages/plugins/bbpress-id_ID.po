@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - bbPress - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2016-05-02 13:11:39+0000\n"
+"PO-Revision-Date: 2018-11-16 16:18:21+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,36 @@ msgstr ""
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: id\n"
 "Project-Id-Version: Plugins - bbPress - Stable (latest release)\n"
+
+#. translators: user role
+#: includes/common/locale.php:56
+msgctxt "User role"
+msgid "Blocked"
+msgstr "Diblokir"
+
+#. translators: user role
+#: includes/common/locale.php:53
+msgctxt "User role"
+msgid "Spectator"
+msgstr "Penonton"
+
+#. translators: user role
+#: includes/common/locale.php:50
+msgctxt "User role"
+msgid "Participant"
+msgstr "Peserta"
+
+#. translators: user role
+#: includes/common/locale.php:47
+msgctxt "User role"
+msgid "Moderator"
+msgstr "Moderator"
+
+#. translators: user role
+#: includes/common/locale.php:44
+msgctxt "User role"
+msgid "Keymaster"
+msgstr "Keymaster"
 
 #. Author of the plugin/theme
 msgid "The bbPress Community"
@@ -22,6 +52,13 @@ msgstr "bbPress"
 #. Description of the plugin/theme
 msgid "bbPress is forum software with a twist from the creators of WordPress."
 msgstr "bbPress merupakan peranti lunak forum dengan sentuhan khusus dari para pencipta WordPress."
+
+#. #-#-#-#-#  bbpress-code.pot (bbPress 2.5.13)  #-#-#-#-#
+#. Plugin URI of the plugin/theme
+#. #-#-#-#-#  bbpress-code.pot (bbPress 2.5.13)  #-#-#-#-#
+#. Author URI of the plugin/theme
+msgid "https://bbpress.org"
+msgstr "https://bbpress.org"
 
 #: includes/admin/tools.php:1148
 msgid "No reply positions to recalculate!"
@@ -64,7 +101,7 @@ msgstr "Kesukaan tidak lagi aktif."
 #: templates/default/bbpress-functions.php:388
 #: templates/default/bbpress-functions.php:456
 msgid "The request was unsuccessful. Please try again."
-msgstr "Ada masalah ketika menerima permintaan itu. Tolong coba lagi."
+msgstr "Permintaan tidak berhasil. Silakan coba lagi."
 
 #: templates/default/bbpress-functions.php:312
 #: templates/default/bbpress-functions.php:380
@@ -162,7 +199,7 @@ msgstr "Anda saat ini tidak memiliki topik kesukaan."
 
 #: templates/default/bbpress/user-favorites.php:15
 msgid "Favorite Forum Topics"
-msgstr "Topik Forum Kesukaan"
+msgstr "Topik Forum Favorit"
 
 #: templates/default/bbpress/user-details.php:58
 msgid "%s's Subscriptions"
@@ -1005,7 +1042,7 @@ msgstr "Melekat sekali"
 #: includes/topics/functions.php:1983
 msgctxt "Make topic sticky"
 msgid "Sticky"
-msgstr "Melekat"
+msgstr "Lekatkan"
 
 #: includes/topics/functions.php:1982
 msgctxt "Unstick a topic"
@@ -2003,7 +2040,7 @@ msgstr "Nama pengguna"
 #: templates/default/bbpress/form-user-login.php:14
 #: templates/default/bbpress/form-user-login.php:35
 msgid "Log In"
-msgstr "Log Masuk"
+msgstr "Masuk"
 
 #: includes/common/widgets.php:42
 msgid "(bbPress) Login Widget"
@@ -2082,7 +2119,7 @@ msgstr "Sunting Forum: %s"
 
 #: includes/common/template.php:2501
 msgid "Log Out"
-msgstr "Log Keluar"
+msgstr "Keluar"
 
 #: includes/common/template.php:2233
 msgid "&rsaquo;"

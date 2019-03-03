@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - bbPress - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-11-09 21:50:54+0000\n"
+"PO-Revision-Date: 2018-11-13 20:25:49+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2768,6 +2768,73 @@ msgstr[2] "%s тем"
 msgid "Complete!"
 msgstr "Готово!"
 
+#: includes/admin/tools.php:418
+msgid "group-forums"
+msgstr "форуми груп"
+
+#: includes/extend/buddypress/groups.php:478
+msgid "Group Forum"
+msgstr "Форум групи"
+
+#: includes/replies/template.php:2362
+msgid "Viewing %1$s post"
+msgid_plural "Viewing %1$s posts"
+msgstr[0] "Перегляд %1$s запису"
+msgstr[1] "Перегляд %1$s записів"
+msgstr[2] "Перегляд %1$s записів"
+
+#: includes/replies/template.php:2350
+msgid "Viewing %1$s reply"
+msgid_plural "Viewing %1$s replies"
+msgstr[0] "Перегляд %1$s відповіді"
+msgstr[1] "Перегляд %1$s відповідей"
+msgstr[2] "Перегляд %1$s відповідей"
+
+#: includes/topics/template.php:2977
+msgid "Viewing %1$s topic"
+msgid_plural "Viewing %1$s topics"
+msgstr[0] "Перегляд %1$s теми"
+msgstr[1] "Перегляд %1$s тем"
+msgstr[2] "Перегляд %1$s тем"
+
+#: includes/users/functions.php:463 includes/users/functions.php:1178
+#: includes/users/functions.php:1284
+msgid "<strong>ERROR</strong>: You don't have the permission to edit favorites of that user!"
+msgstr "<strong> ПОМИЛКА </strong>: У Вас немає прав для редагування закладок цього користувача!"
+
+#: includes/users/functions.php:1170
+msgid "<strong>ERROR</strong>: No forum was found! Which forum are you subscribing/unsubscribing to?"
+msgstr "<strong>Помилка</strong>: Форум не знайдено! На який форум ви намагаєтеся підписатися / відписатися?"
+
+#: includes/users/functions.php:1225
+msgid "<strong>ERROR</strong>: There was a problem subscribing to that forum!"
+msgstr "<strong>Помилка</strong>: При спробі підписатися на даний форум сталася помилка!"
+
+#: includes/replies/template.php:2343
+msgid "Viewing %1$s reply thread"
+msgid_plural "Viewing %1$s reply threads"
+msgstr[0] "Перегляд %1$s гілки відповідей"
+msgstr[1] "Перегляд %1$s гілок відповідей"
+msgstr[2] "Перегляд %1$s гілок відповідей"
+
+#: includes/search/template.php:405
+msgid "Viewing %2$s results (of %4$s total)"
+msgid_plural "Viewing %1$s results - %2$s through %3$s (of %4$s total)"
+msgstr[0] "Перегляд %2$s результату (всього %4$s)"
+msgstr[1] "Перегляд %1$s результатів - з %2$s по %3$s (всього %4$s)"
+msgstr[2] "Перегляд %1$s результатів - з %2$s по %3$s (всього %4$s)"
+
+#: includes/search/template.php:401
+msgid "Viewing %1$s result"
+msgid_plural "Viewing %1$s results"
+msgstr[0] "Перегляд %1$s результату"
+msgstr[1] "Перегляд %1$s результатів"
+msgstr[2] "Перегляд %1$s результатів"
+
+#: includes/extend/akismet.php:309
+msgid "%1$s reported this %2$s as spam"
+msgstr "%1$s повідомили про це %2$s як спам"
+
 #: bbpress.php:678
 msgid "Most popular topics"
 msgstr "Найпопулярніші теми"
@@ -4433,3 +4500,35 @@ msgstr "Не спам"
 #: includes/admin/replies.php:863
 msgid "Reply restored to revision from %s"
 msgstr "Відновити до ревізії %s"
+
+#: includes/admin/admin.php:776 includes/admin/admin.php:853
+msgid "Welcome to bbPress %s"
+msgstr "Ласкаво просимо в bbPress %s"
+
+#: includes/admin/forums.php:148
+msgid "<strong>View</strong> will show you what your draft forum will look like if you publish it. View will take you to your live site to view the forum. Which link is available depends on your forum&#8217;s status."
+msgstr "<strong> Передперегляд </strong> покаже вам, як буде виглядати ваш форум, коли ви опублікуєте його. Передперегляд відобразить ваш сайт з новим форумом. Яке посилання буде доступне - залежить від статусу вашого форуму."
+
+#: includes/admin/converter.php:371
+msgid "Converting users (%1$s - %2$s)"
+msgstr "Конвертувати користувачів (%1$s - %2$s)"
+
+#: includes/admin/converter.php:425
+msgid "Calculating forum hierarchy (%1$s - %2$s)"
+msgstr "Розрахунок ієрархії форуму (%1$s - %2$s)"
+
+#: bbpress.php:571
+msgctxt "post"
+msgid "Closed <span class=\"count\">(%s)</span>"
+msgid_plural "Closed <span class=\"count\">(%s)</span>"
+msgstr[0] "Закрито <span class=\"count\">(%s)</span>"
+msgstr[1] "Закрито <span class=\"count\">(%s)</span>"
+msgstr[2] "Закрито <span class=\"count\">(%s)</span>"
+
+#: bbpress.php:595
+msgctxt "post"
+msgid "Orphan <span class=\"count\">(%s)</span>"
+msgid_plural "Orphans <span class=\"count\">(%s)</span>"
+msgstr[0] "Одиночних <span class=\"count\">(%s)</span>"
+msgstr[1] "Одиночних <span class=\"count\">(%s)</span>"
+msgstr[2] "Одиночних <span class=\"count\">(%s)</span>"
