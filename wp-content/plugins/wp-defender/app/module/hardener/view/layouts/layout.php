@@ -1,113 +1,124 @@
-<div class="wrap">
+<?php
+$countAll = $controller->getCount( 'issues' );
+$resolved = $controller->getCount( 'fixed' );
+$ignore   = $controller->getCount( 'ignore' );
+$tooltip  = '';
+$class    = '';
+if ( $countAll > 0 ) {
+	$tooltip = 'data-tooltip="' . esc_attr( sprintf( __( 'You have %d security tweak(s) needing attention.', wp_defender()->domain ), $countAll ) ) . '"';
+	$class   = 'sui-tooltip';
+}
+?>
+<div class="sui-wrap">
     <div id="wp-defender" class="wp-defender">
-        <h2 class="title"><?php _e( "Security Tweaks", wp_defender()->domain ) ?></h2>
         <div class="hardener">
-            <div class="dev-box summary-box">
-                <div class="box-content">
-                    <div class="columns">
-                        <div class="column is-7 issues-count">
-                            <div>
-                                <h5 class="">
-                                    <span class="issues-actioned"><?php echo( $controller->getCount( 'fixed' ) + $controller->getCount( 'ignore' ) ) ?></span>
-                                        /<?php echo count( \WP_Defender\Module\Hardener\Model\Settings::instance()->getDefinedRules( false ) ) ?>
-
-                                </h5>
-                                <?php if ( $controller->getCount( 'issues' ) > 0 ) :
-                                    $hardener_issues = ( $controller->getCount( 'fixed' ) + $controller->getCount( 'ignore' ) ) . '/' . count( \WP_Defender\Module\Hardener\Model\Settings::instance()->getDefinedRules( false ) );
-                                ?>
-                                    <span class="" tooltip="<?php esc_attr_e( sprintf( __('You have actioned %s security tweaks.', wp_defender()->domain ), $hardener_issues ) ); ?>">
-                                <?php else : ?>
-                                    <span class="" tooltip="<?php esc_attr_e( 'You have no outstanding security issues.', wp_defender()->domain ); ?>">
-                                <?php endif; ?>
-									<?php
-									$icon = $controller->getCount( 'issues' ) == 0 ? ' <i class="def-icon icon-tick icon-active" aria-hidden="true"></i>' : ' <i class="def-icon icon-warning" aria-hidden="true"></i>';
-									echo $icon;
-									?>
-                                </span>
-                                <div class="clear"></div>
-                                <span class="sub"><?php _e( "Security tweaks actioned", wp_defender()->domain ) ?></span>
-                            </div>
-                        </div>
-                        <div class="column is-5">
-                            <ul class="dev-list bold">
-                                <li>
-                                    <div>
-                                        <span class="list-label"><?php _e( "PHP Version", wp_defender()->domain ) ?></span>
-                                        <span class="list-detail"><?php echo $controller->getPHPVersion() ?></span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>
-                                        <span class="list-label"><?php _e( "WordPress Version", wp_defender()->domain ) ?></span>
-                                        <span class="list-detail">
-                                                <?php
-                                                echo \WP_Defender\Behavior\Utils::instance()->getWPVersion();
-                                                ?>
-                                                </span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+            <div class="sui-header">
+                <h1 class="sui-header-title">
+					<?php _e( "Security Tweaks", wp_defender()->domain ) ?>
+                </h1>
             </div>
-            <div class="row">
-                <div class="col-third">
-					<nav role="navigation" aria-label="Filters">
-						<ul class="inner-nav is-hidden-mobile">
-							<li>
-								<a class="<?php echo \Hammer\Helper\HTTP_Helper::retrieve_get( 'view', false ) == false ? 'active' : null ?>"
-								href="<?php echo network_admin_url( 'admin.php?page=wdf-hardener' ) ?>">
-									<?php _e( "Issues", wp_defender()->domain ) ?>
-									<?php
-										$tooltip = '';
-										if ( $controller->getCount( 'issues' ) > 0 ) :
-											$tooltip = 'tooltip="'.esc_attr( sprintf( __('You have %d security tweak(s) needing attention.', wp_defender()->domain ), $controller->getCount( 'issues' ) ) ).'"';
-										endif;
-									?>
-									<span class="def-tag count-issues tag-yellow <?php echo $controller->getCount( 'issues' ) == 0 ? 'wd-hide' : null ?>" <?php echo $tooltip; ?>><?php echo $controller->getCount( 'issues' ) ?></span>
-								</a>
-							</li>
-							<li>
-								<a class="<?php echo $controller->isView( 'resolved' ) ? 'active' : null ?>"
-								href="<?php echo network_admin_url( 'admin.php?page=wdf-hardener&view=resolved' ) ?>">
-									<?php _e( "Resolved", wp_defender()->domain ) ?>
-									<span class="count-resolved <?php echo $controller->getCount( 'fixed' ) == 0 ? 'wd-hide' : null ?>"><?php echo $controller->getCount( 'fixed' ) ?></span>
-								</a>
-							</li>
-							<li>
-								<a class="<?php echo $controller->isView( 'ignored' ) ? 'active' : null ?>"
-								href="<?php echo network_admin_url( 'admin.php?page=wdf-hardener&view=ignored' ) ?>">
-									<?php _e( "Ignored", wp_defender()->domain ) ?>
-									<span class="count-ignored <?php echo $controller->getCount( 'ignore' ) == 0 ? 'wd-hide' : null ?>"><?php echo $controller->getCount( 'ignore' ) ?></span>
-								</a>
-							</li>
-							<!--                        <li>-->
-							<!--                            <a class="-->
-							<?php //echo $controller->isView( 'notification' ) ? 'active' : null ?><!--"-->
-							<!--                               href="-->
-							<?php //echo network_admin_url( 'admin.php?page=wdf-hardener&view=notification' ) ?><!--">-->
-							<?php //_e( "Notifications", wp_defender()->domain ) ?><!--</a>-->
-							<!--                        </li>-->
-						</ul>
-					</nav>
-                    <div class="is-hidden-tablet mline">
-						<nav role="navigation" aria-label="Filters">
-							<select class="mobile-nav">
-								<option <?php selected( '', \Hammer\Helper\HTTP_Helper::retrieve_get( 'view' ) ) ?>
-										value="<?php echo network_admin_url( 'admin.php?page=wdf-hardener' ) ?>"><?php _e( "Issues", wp_defender()->domain ) ?></option>
-								<option <?php selected( 'resolved', \Hammer\Helper\HTTP_Helper::retrieve_get( 'view' ) ) ?>
-										value="<?php echo network_admin_url( 'admin.php?page=wdf-hardener&view=resolved' ) ?>"><?php _e( "Resolved", wp_defender()->domain ) ?></option>
-								<option <?php selected( 'ignored', \Hammer\Helper\HTTP_Helper::retrieve_get( 'view' ) ) ?>
-										value="<?php echo network_admin_url( 'admin.php?page=wdf-hardener&view=ignored' ) ?>"><?php _e( "Ignored", wp_defender()->domain ) ?></option>
-							</select>
-						</nav>
+            <div class="sui-box sui-summary sui-summary-sm">
+
+                <div class="sui-summary-image-space" aria-hidden="true"></div>
+
+                <div class="sui-summary-segment">
+
+                    <div class="sui-summary-details issues">
+
+                        <span class="sui-summary-large <?php echo $class ?> count-issues" <?php echo $tooltip ?> ><?php echo $countAll ?></span>
+						<?php if ( $countAll > 0 ): ?>
+                            <i aria-hidden="true" class="sui-icon-info sui-warning"></i>
+						<?php else: ?>
+                            <i class="sui-icon-check-tick sui-success" aria-hidden="true"></i>
+						<?php endif; ?>
+                        <span class="sui-summary-sub"><?php _e( "Security issues", wp_defender()->domain ) ?></span>
+                    </div>
+
+                </div>
+
+                <div class="sui-summary-segment">
+                    <ul class="sui-list">
+
+                        <li>
+                            <span class="sui-list-label"><?php _e( "Current PHP version", wp_defender()->domain ) ?></span>
+                            <span class="sui-list-detail issues_wp">
+                                    <?php echo phpversion() ?>
+                                </span>
+                        </li>
+
+                        <li>
+                            <span class="sui-list-label"><?php _e( "Current WordPress version", wp_defender()->domain ) ?></span>
+                            <span class="sui-list-detail vuln_issues">
+                                    <?php
+                                    global $wp_version;
+                                    echo $wp_version
+                                    ?>
+                                </span>
+                        </li>
+
+                    </ul>
+                </div>
+
+            </div>
+            <div class="sui-row-with-sidenav">
+                <div class="sui-sidenav">
+                    <ul class="sui-vertical-tabs sui-sidenav-hide-md">
+                        <li class="sui-vertical-tab <?php echo \Hammer\Helper\HTTP_Helper::retrieve_get( 'view', false ) == false ? 'current' : null ?>">
+                            <a href="<?php echo network_admin_url( 'admin.php?page=wdf-hardener' ) ?>">
+								<?php _e( "Issues", wp_defender()->domain ) ?></a>
+                            <span class="sui-tag sui-tag-warning <?php echo $countAll ? '' : 'wd-hide' ?> count-issues"><?php echo $countAll ?></span>
+                        </li>
+                        <li class="sui-vertical-tab <?php echo $controller->isView( 'resolved' ) ? 'current' : null ?>">
+                            <a href="<?php echo network_admin_url( 'admin.php?page=wdf-hardener&view=resolved' ) ?>">
+								<?php _e( "Resolved", wp_defender()->domain ) ?></a>
+                            <span class="sui-tag count-resolved <?php echo $resolved ? '' : 'wd-hide' ?>"><?php echo $resolved ?></span>
+                        </li>
+                        <li class="sui-vertical-tab <?php echo $controller->isView( 'ignored' ) ? 'current' : null ?>">
+                            <a href="<?php echo network_admin_url( 'admin.php?page=wdf-hardener&view=ignored' ) ?>">
+								<?php _e( "Ignored", wp_defender()->domain ) ?></a>
+                            <span class="sui-tag count-ignored <?php echo $ignore ? '' : 'wd-hide' ?>"><?php echo $ignore ?></span>
+                        </li>
+                    </ul>
+                    <div class="sui-sidenav-hide-lg">
+                        <select class="sui-mobile-nav" style="display: none;">
+                            <option <?php selected( '', \Hammer\Helper\HTTP_Helper::retrieve_get( 'view' ) ) ?>
+                                    value="<?php echo network_admin_url( 'admin.php?page=wdf-hardener' ) ?>"><?php _e( "Issues", wp_defender()->domain ) ?></option>
+                            <option <?php selected( 'resolved', \Hammer\Helper\HTTP_Helper::retrieve_get( 'view' ) ) ?>
+                                    value="<?php echo network_admin_url( 'admin.php?page=wdf-hardener&view=resolved' ) ?>"><?php _e( "Resolved", wp_defender()->domain ) ?></option>
+                            <option <?php selected( 'ignored', \Hammer\Helper\HTTP_Helper::retrieve_get( 'view' ) ) ?>
+                                    value="<?php echo network_admin_url( 'admin.php?page=wdf-hardener&view=ignored' ) ?>"><?php _e( "Ignored", wp_defender()->domain ) ?></option>
+                        </select>
                     </div>
                 </div>
-                <div class="col-two-third">
+                <div class="sui-box">
 					<?php echo $contents ?>
                 </div>
             </div>
         </div>
+        <div class="sui-footer">Made with <i class="sui-icon-heart"></i> by WPMU DEV</div>
+		<?php if ( wp_defender()->isFree ): ?>
+            <ul class="sui-footer-nav">
+                <li><a href="https://profiles.wordpress.org/wpmudev#content-plugins" target="_blank">Free Plugins</a>
+                </li>
+                <li><a href="https://premium.wpmudev.org/features/" target="_blank">Membership</a></li>
+                <li><a href="https://premium.wpmudev.org/roadmap/" target="_blank">Roadmap</a></li>
+                <li><a href="https://wordpress.org/support/plugin/plugin-name" target="_blank">Support</a></li>
+                <li><a href="https://premium.wpmudev.org/docs/" target="_blank">Docs</a></li>
+                <li><a href="https://premium.wpmudev.org/hub/" target="_blank">The Hub</a></li>
+                <li><a href="https://premium.wpmudev.org/terms-of-service/" target="_blank">Terms of Service</a></li>
+                <li><a href="https://incsub.com/privacy-policy/" target="_blank">Privacy Policy</a></li>
+            </ul>
+		<?php else: ?>
+            <ul class="sui-footer-nav">
+                <li><a href="https://premium.wpmudev.org/hub/" target="_blank">The Hub</a></li>
+                <li><a href="https://premium.wpmudev.org/projects/category/plugins/" target="_blank">Plugins</a></li>
+                <li><a href="https://premium.wpmudev.org/roadmap/" target="_blank">Roadmap</a></li>
+                <li><a href="https://premium.wpmudev.org/hub/support/" target="_blank">Support</a></li>
+                <li><a href="https://premium.wpmudev.org/docs/" target="_blank">Docs</a></li>
+                <li><a href="https://premium.wpmudev.org/hub/community/" target="_blank">Community</a></li>
+                <li><a href="https://premium.wpmudev.org/terms-of-service/" target="_blank">Terms of Service</a></li>
+                <li><a href="https://incsub.com/privacy-policy/" target="_blank">Privacy Policy</a></li>
+            </ul>
+		<?php endif; ?>
     </div>
 </div>

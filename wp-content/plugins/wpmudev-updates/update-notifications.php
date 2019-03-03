@@ -4,7 +4,7 @@
  * Plugin URI:  https://premium.wpmudev.org/project/wpmu-dev-dashboard/
  * Description: Brings the powers of WPMU DEV directly to you. It will revolutionize how you use WordPress. Activate now!
  * Author:      WPMU DEV
- * Version:     4.6
+ * Version:     4.6.1
  * Author URI:  https://premium.wpmudev.org/
  * Text Domain: wpmudev
  * Domain Path: includes/languages/
@@ -44,7 +44,7 @@ class WPMUDEV_Dashboard {
 	 *
 	 * @var string (Version number)
 	 */
-	static public $version = '4.6';
+	static public $version = '4.6.1';
 
 	/**
 	 * Holds the API module.

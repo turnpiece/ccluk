@@ -614,7 +614,7 @@ class CtfFeed
 			$api_obj = $this->apiConnectionResponse( 'search', $this->feed_options['feed_term'] );
 			// cache them in a regular option
 			$this->tweet_set = json_decode( $api_obj->json , $assoc = true );
-			//var_dump($this->tweet_set);
+
 			// check for errors/tweets present
 			if ( isset( $this->tweet_set['errors'][0] ) ) {
 				if ( empty( $this->api_obj ) ) {
@@ -758,7 +758,12 @@ class CtfFeed
      * @return int number of tweets needed
      */
     protected function numTweetsNeeded() {
-        $tweet_count = isset( $this->tweet_set['statuses'] ) ? count( $this->tweet_set['statuses'] ) : count( $this->tweet_set );
+	    $tweet_count = 0;
+	    if ( isset( $this->tweet_set['statuses'] ) && is_array( $this->tweet_set['statuses'] ) ) {
+		    $tweet_count = count( $this->tweet_set['statuses'] );
+	    } elseif ( isset( $this->tweet_set ) && is_array( $this->tweet_set ) ) {
+		    $tweet_count = count( $this->tweet_set );
+	    }
 
         return $this->feed_options['num'] - $tweet_count;
     }

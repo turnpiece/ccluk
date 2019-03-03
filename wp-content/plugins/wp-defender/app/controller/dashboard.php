@@ -37,93 +37,6 @@ class Dashboard extends Controller {
 		$this->add_filter( 'wdp_register_hub_action', 'addMyEndpoint' );
 		add_filter( 'custom_menu_order', '__return_true' );
 		$this->add_filter( 'menu_order', 'menuOrder' );
-		// Add pointer script.
-		$this->add_action( 'admin_enqueue_scripts', 'admin_pointers_header' );
-	}
-
-	/**
-	 * Pointer header.
-	 */
-	public function admin_pointers_header() {
-		if ( $this->admin_pointers_check() ) {
-			$this->add_action( 'admin_print_footer_scripts', 'admin_pointers_footer' );
-			wp_enqueue_script( 'wp-pointer' );
-			wp_enqueue_style( 'wp-pointer' );
-		}
-	}
-
-	/**
-	 * Admin pointers check.
-	 */
-	function admin_pointers_check() {
-		$currentScreen = get_current_screen();
-		if ( strpos( $currentScreen->id, 'defender' ) !== false ) {
-			return;
-		}
-		$admin_pointers = $this->admin_pointers();
-		foreach ( $admin_pointers as $pointer => $array ) {
-			if ( $array['active'] ) {
-				return true;
-			}
-		}
-	}
-
-	/**
-	 * Pointer scripts.
-	 */
-	function admin_pointers_footer() {
-		$admin_pointers = $this->admin_pointers();
-		?>
-        <script type="text/javascript">
-            /* <![CDATA[ */
-            (function ($) {
-				<?php
-				foreach ( $admin_pointers as $pointer => $array ) {
-				if ( $array['active'] ) {
-				?>
-                $('<?php echo $array['anchor_id']; ?>').pointer({
-                    content: '<?php echo $array['content']; ?>',
-                    position: {
-                        edge: '<?php echo $array['edge']; ?>',
-                        align: '<?php echo $array['align']; ?>'
-                    },
-                    close: function () {
-                        $.post(ajaxurl, {
-                            pointer: '<?php echo $pointer; ?>',
-                            action: 'dismiss-wp-pointer'
-                        });
-                    }
-                }).pointer('open');
-				<?php
-				}
-				}
-				?>
-            })(jQuery);
-            /* ]]> */
-        </script>
-		<?php
-	}
-
-	/**
-	 * Admin pointers.
-	 */
-	function admin_pointers() {
-		$dismissed = explode( ',', (string) get_user_meta( get_current_user_id(), 'dismissed_wp_pointers', true ) );
-		$version   = \str_replace( '.', '_', wp_defender()->version );
-		$prefix    = 'defneder_admin_pointers' . $version . '_' . ( wp_defender()->isFree ? '_free' : null );
-
-		$new_pointer_content = '<h3>' . __( 'Get Secure', wp_defender()->domain ) . '</h3>';
-		$new_pointer_content .= '<p>' . __( 'Enable security tweaks, activate monitoring and start protecting your login are and files here.', wp_defender()->domain ) . '</p>';
-
-		return array(
-			$prefix . 'menu' => array(
-				'content'   => $new_pointer_content,
-				'anchor_id' => '#toplevel_page_wp-defender',
-				'edge'      => 'top',
-				'align'     => 'left',
-				'active'    => ( ! in_array( $prefix . 'menu', $dismissed ) ),
-			),
-		);
 	}
 
 	public function skipActivator() {
@@ -439,7 +352,8 @@ class Dashboard extends Controller {
 	}
 
 	public function scripts() {
-		\WDEV_Plugin_Ui::load( wp_defender()->getPluginUrl() . 'shared-ui/' );
+		wp_enqueue_script( 'wpmudev-sui' );
+		wp_enqueue_style( 'wpmudev-sui' );
 		wp_enqueue_script( 'defender' );
 		$data = array(
 			'activator_title'    => __( "QUICK SETUP", wp_defender()->domain ) . '<form method="post" class="skip-activator float-r"><input type="hidden" name="action" value="skipActivator"/>' . wp_nonce_field( 'skipActivator', '_wpnonce', true, false ) . '<button type="submit" class="button button-small button-secondary">' . __( "Skip", wp_defender()->domain ) . '</button></form>',
@@ -460,7 +374,7 @@ class Dashboard extends Controller {
 			'utils'     => '\WP_Defender\Behavior\Utils',
 			'activator' => wp_defender()->isFree ? '\WP_Defender\Behavior\Activator_Free' : '\WP_Defender\Behavior\Activator',
 			'hardener'  => '\WP_Defender\Module\Hardener\Behavior\Widget',
-			'scan'      => '\WP_Defender\Module\Scan\Behavior\Scan',
+			'scan'      => '\WP_Defender\Module\Scan\Behavior\Scan_Widget',
 			'lockout'   => '\WP_Defender\Module\IP_Lockout\Behavior\Widget',
 			'audit'     => wp_defender()->isFree ? '\WP_Defender\Module\Audit\Behavior\Audit_Free' : '\WP_Defender\Module\Audit\Behavior\Audit',
 			'blacklist' => wp_defender()->isFree ? '\WP_Defender\Behavior\Blacklist_Free' : '\WP_Defender\Behavior\Blacklist',

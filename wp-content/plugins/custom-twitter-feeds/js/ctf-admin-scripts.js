@@ -264,7 +264,7 @@ jQuery(document).ready(function($){
     }); // clear-persistent-cache click
 
     //Pro version notices
-    var ctfUpgradeNote = '<span class="ctf_note"> - <a href="https://smashballoon.com/custom-twitter-feeds/" target="_blank">Available in Pro version</a></span>';
+    var ctfUpgradeNote = '<span class="ctf_note"> - <a href="https://smashballoon.com/custom-twitter-feeds/?utm_source=plugin-free&utm_campaign=ctf" target="_blank">Available in Pro version</a></span>';
     $('.ctf_pro').each(function(){
         var $pro = $(this);
         $pro.find('td').last().append(ctfUpgradeNote);

@@ -197,7 +197,6 @@ function apbct_admin__plugin_action_links($links, $file) {
 */
 function apbct_admin__register_plugin_links($links, $file){
 	
-	
 	global $apbct;
 	
 	//Return if it's not our plugin
@@ -220,6 +219,7 @@ function apbct_admin__register_plugin_links($links, $file){
 				.__('Translate', 'cleantalk')
 			.'</a>';
 			
+	$links[] = '<a class="ct_meta_links" href="'.$apbct->settings_link.'" target="_blank">' . __( 'Start here','cleantalk' ) . '</a>';
 	$links[] = '<a class="ct_meta_links ct_faq_links" href="http://wordpress.org/plugins/cleantalk-spam-protect/faq/" target="_blank">' . __( 'FAQ','cleantalk' ) . '</a>';
 	$links[] = '<a class="ct_meta_links ct_support_links"href="https://wordpress.org/support/plugin/cleantalk-spam-protect" target="_blank">' . __( 'Support','cleantalk' ) . '</a>';
 	$trial = apbct_admin__badge__get_premium(false);
@@ -304,7 +304,7 @@ function apbct_admin__enqueue_scripts($hook){
 		if($hook == 'comments_page_ct_check_spam'){
 			wp_enqueue_script('ct_comments_checkspam',  plugins_url('/cleantalk-spam-protect/js/cleantalk-comments-checkspam.js'), array(),  APBCT_VERSION);
 		wp_localize_script( 'jquery', 'ctCommentsCheck', array(
-				'ct_ajax_nonce'               => wp_create_nonce('ct_secret_nonce'),
+			'ct_ajax_nonce'               => wp_create_nonce('ct_secret_nonce'),
 			'ct_prev_accurate'            => !empty($prev_check['accurate']) ? true                : false,
 			'ct_prev_from'                => !empty($prev_check['from'])     ? $prev_check['from'] : false,
 			'ct_prev_till'                => !empty($prev_check['till'])     ? $prev_check['till'] : false,
@@ -354,7 +354,7 @@ function apbct_admin__enqueue_scripts($hook){
 		if($hook == 'users_page_ct_check_users'){
 			wp_enqueue_script('ct_users_checkspam',  plugins_url('/cleantalk-spam-protect/js/cleantalk-users-checkspam.js'),  array(), APBCT_VERSION);
 		wp_localize_script( 'jquery', 'ctUsersCheck', array(
-				'ct_ajax_nonce'               => wp_create_nonce('ct_secret_nonce'),
+			'ct_ajax_nonce'               => wp_create_nonce('ct_secret_nonce'),
 			'ct_prev_accurate'            => !empty($prev_check['accurate']) ? true                : false,
 			'ct_prev_from'                => !empty($prev_check['from'])     ? $prev_check['from'] : false,
 			'ct_prev_till'                => !empty($prev_check['till'])     ? $prev_check['till'] : false,

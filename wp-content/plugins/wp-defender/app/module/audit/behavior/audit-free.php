@@ -12,27 +12,34 @@ use WP_Defender\Module\Audit\Model\Settings;
 class Audit_Free extends Behavior {
 	public function renderAuditWidget() {
 		?>
-        <div class="dev-box reporting-sale audit-widget">
-            <div class="box-title">
-                <span class="span-icon icon-blacklist"></span>
-                <h3><?php _e( "AUDIT LOGGING", wp_defender()->domain ) ?></h3>
-                <a href="<?php echo Utils::instance()->campaignURL('defender_dash_auditlogging_pro_tag') ?>" target="_blank" class="button button-small button-pre"
-				 tooltip="<?php esc_attr_e( "Try Defender Pro free today", wp_defender()->domain ) ?>"><?php _e( "PRO FEATURE", wp_defender()->domain ) ?></a>
-            </div>
-            <div class="box-content">
-                <div class="line">
-					<?php
-					esc_html_e( "Track and log events when changes are made to your website, giving you full visibility over what's going on behind the scenes.", wp_defender()->domain )
-					?>
+        <div class="sui-box">
+            <div class="sui-box-header">
+                <h3 class="sui-box-title">
+                    <i class="sui-icon-eye" aria-hidden="true"></i>
+					<?php _e( "Audit Logging", wp_defender()->domain ) ?>
+                </h3>
+                <div class="sui-actions-left">
+                    <span class="sui-tag sui-tag-pro"><?php _e( "Pro", wp_defender()->domain ) ?></span>
                 </div>
-                <div class="presale-text">
-                    <div>
-						<?php printf( __( "Audit logging is a pro feature included in a WPMU DEV membership along with 100+ plugins,
-                        24/7 support and lots of handy site management tools – <a target='_blank' href=\"%s\">Try it all absolutely FREE</a>", wp_defender()->domain ), Utils::instance()->campaignURL('defender_dash_auditlogging_upsell_link') ) ?>
-                        </a>
+            </div>
+            <div class="sui-box-body sui-upsell-items">
+                <div class="sui-box-settings-row no-margin-bottom">
+                    <p>
+						<?php _e( "Track and log events when changes are made to your website giving you full visibility of what’s going on behind the scenes.", wp_defender()->domain ) ?>
+                    </p>
+                </div>
+                <div class="sui-box-settings-row sui-upsell-row">
+                    <img class="sui-image sui-upsell-image"
+                         src="<?php echo wp_defender()->getPluginUrl() . 'assets/img/audit-presale.svg' ?>">
+                    <div class="sui-upsell-notice">
+                        <p>
+							<?php
+							printf( __( "Audit Logging is a Pro feature that requires a WPMU DEV monthly membership. <a target='_blank' href='%s'>Try it out today</a>!", wp_defender()->domain ),
+								Utils::instance()->campaignURL( 'defender_dash_auditlogging_upsell_link' ) )
+							?>
+                        </p>
                     </div>
                 </div>
-                <div class="clear"></div>
             </div>
         </div>
 		<?php

@@ -22,6 +22,13 @@ class Vuln_Scan extends Behavior {
 		return true;
 	}
 
+	/**
+	 * @param null $wp_version
+	 * @param array $plugins
+	 * @param array $themes
+	 *
+	 * @return bool
+	 */
 	public function scan( $wp_version = null, $plugins = array(), $themes = array() ) {
 		if ( ! function_exists( 'get_plugins' ) ) {
 			require_once ABSPATH . 'wp-admin/includes/plugin.php';

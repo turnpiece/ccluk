@@ -51,27 +51,33 @@ class Vuln_Result extends \Hammer\Base\Behavior {
 	 * @return false|string
 	 */
 	public function getSubtitle() {
-		$raw  = $this->getRaw();
-		$text = __( "Version:", wp_defender()->domain );
+		$raw = $this->getRaw();
 		switch ( $raw['type'] ) {
 			case 'plugin':
 				$plugin = $this->getPluginBySlug( $raw['slug'] );
 				if ( isset( $plugin['Name'] ) ) {
-					return $text . ' ' . $plugin['Version'];
+					return $plugin['Version'];
 				}
 				break;
 			case 'theme':
 				$theme = $this->getThemeBySlug( $raw['slug'] );
 				if ( is_object( $theme ) ) {
-					return $text . ' ' . $theme->get( 'Version' );
+					return $theme->get( 'Version' );
 				}
 				break;
 			default:
 				global $wp_version;
 
-				return $text . ' ' . $wp_version;
+				return $wp_version;
 				break;
 		}
+	}
+
+	/**
+	 * @return string|void
+	 */
+	public function getIssueSummary() {
+		return sprintf( __( "Vulnerability found in %s.", wp_defender()->domain ), '<strong>' . $this->getSubtitle() . '</strong>' );
 	}
 
 	/**
@@ -85,13 +91,10 @@ class Vuln_Result extends \Hammer\Base\Behavior {
 			if ( ! empty( $bug['fixed_in'] ) ) {
 				$hasFixed = true;
 			}
-			$text    = '<div class="vuln-list">';
-			$text    .= '<p>' . $bug['title'] . '</p>';
-			$text    .= '<ul>';
-			$text    .= '<li>' . __( "Vulnerability type:", wp_defender()->domain ) . ' ' . $bug['vuln_type'] . '</li>';
-			$text    .= '<li>' . __( "This bug has been fixed in version:", wp_defender()->domain ) . ' ' . $bug['fixed_in'] . '</li>';
-			$text    .= '</ul>';
-			$text    .= '</div>';
+			$text    = '';
+			$text    .= '#' . $bug['title'] . PHP_EOL;
+			$text    .= '-' . __( "Vulnerability type:", wp_defender()->domain ) . ' ' . $bug['vuln_type'] . PHP_EOL;
+			$text    .= '-' . __( "This bug has been fixed in version:", wp_defender()->domain ) . ' ' . $bug['fixed_in'] . PHP_EOL;
 			$texts[] = $text;
 		}
 		$this->hasFix = $hasFixed;
@@ -100,7 +103,49 @@ class Vuln_Result extends \Hammer\Base\Behavior {
 	}
 
 	/**
+	 * @return false|string
+	 */
+	public function renderIssueContent() {
+		$raw = $this->getRaw();
+		ob_start();
+		?>
+        <div class="sui-box issue-content">
+            <div class="sui-box-body">
+                <pre><code><?php echo $this->getIssueDetail(); ?></code></pre>
+            </div>
+            <div class="sui-box-footer">
+                <div class="sui-actions-left">
+                    <form method="post" class="float-l ignore-item scan-frm">
+                        <input type="hidden" name="action" value="ignoreItem">
+						<?php wp_nonce_field( 'ignoreItem' ) ?>
+                        <input type="hidden" name="id" value="<?php echo $this->getOwner()->id ?>"/>
+                        <button type="submit" class="sui-button sui-button-ghost">
+                            <i class="sui-icon-eye-hide" aria-hidden="true"></i>
+							<?php _e( "Ignore", wp_defender()->domain ) ?></button>
+                    </form>
+                </div>
+                <div class="sui-actions-right">
+					<?php if ( $raw['type'] != 'wordpress' ): ?>
+                        <form method="post" class="scan-frm resolve-item">
+                            <input type="hidden" name="id" value="<?php echo $this->getOwner()->id ?>"/>
+                            <input type="hidden" name="action" value="resolveItem"/>
+							<?php wp_nonce_field( 'resolveItem' ) ?>
+                            <button class="sui-button sui-button-blue"><?php _e( "Update", wp_defender()->domain ) ?></button>
+                        </form>
+					<?php else: ?>
+                        <a class="sui-button sui-button-blue"
+                           href="<?php echo network_admin_url( 'update-core.php' ) ?>"><?php _e( "Update", wp_defender()->domain ) ?></a>
+					<?php endif; ?>
+                </div>
+            </div>
+        </div>
+		<?php
+		return ob_get_clean();
+	}
+
+	/**
 	 * @return string
+	 * @deprecated 2.1
 	 */
 	public function renderDialog() {
 		$raw = $this->getRaw();
@@ -199,6 +244,9 @@ class Vuln_Result extends \Hammer\Base\Behavior {
 			$upgrader->upgrade( $raw['slug'] );
 			if ( is_wp_error( $skin->result ) ) {
 				return $skin->result;
+			}
+			if ( $skin->result === false ) {
+				return network_admin_url( 'themes.php?theme=' . $raw['slug'] );
 			}
 			$this->getOwner()->markAsResolved();
 

@@ -18,6 +18,7 @@ class Main extends \WP_Defender\Controller {
 	protected $slug = 'wdf-scan';
 	public $layout = 'layout';
 	private $email_search;
+	private $emailSearchNotification;
 
 	/**
 	 * @return array
@@ -58,12 +59,22 @@ class Main extends \WP_Defender\Controller {
 		$this->add_ajax_action( 'scanBulkAction', 'scanBulkAction' );
 		$this->add_ajax_action( 'pullSrcFile', 'pullSrcFile' );
 		$this->add_ajax_action( 'cancelScan', 'cancelScan' );
-
+		$view = HTTP_Helper::retrieve_get( 'view' );
+		$id   = isset( $_REQUEST['id'] ) ? $_REQUEST['id'] : 0;
 		//init receiption
-		$this->email_search           = new Email_Search();
-		$this->email_search->eId      = 'scan_receipts';
-		$this->email_search->settings = Settings::instance();
-		$this->email_search->add_hooks();
+		if ( $view == 'notification' || ( defined( 'DOING_AJAX' ) && $id == 'scanNotificationReceipts' ) ) {
+			$this->emailSearchNotification            = new Email_Search();
+			$this->emailSearchNotification->eId       = 'scanNotificationReceipts';
+			$this->emailSearchNotification->settings  = Settings::instance();
+			$this->emailSearchNotification->attribute = 'receiptsNotification';
+			$this->emailSearchNotification->add_hooks();
+		} elseif ( $view == 'reporting' || ( defined( 'DOING_AJAX' ) && $id == 'scan_receipts' ) ) {
+			$this->email_search           = new Email_Search();
+			$this->email_search->eId      = 'scan_receipts';
+			$this->email_search->settings = Settings::instance();
+			$this->email_search->add_hooks();
+		}
+
 		//process scan in background
 		$this->add_action( 'processScanCron', 'processScanCron' );
 		//scan as schedule
@@ -105,7 +116,6 @@ class Main extends \WP_Defender\Controller {
 			wp_clear_scheduled_hook( 'processScanCron' );
 			wp_schedule_single_event( strtotime( '+1 minutes' ), 'processScanCron' );
 		}
-
 	}
 
 	public function cancelScan() {
@@ -333,7 +343,8 @@ class Main extends \WP_Defender\Controller {
 					$this->submitStatsToDev();
 					wp_send_json_success( array(
 						'mid'     => 'mid-' . $model->id,
-						'message' => __( "This item has been resolved.", wp_defender()->domain )
+						'message' => __( "This item has been resolved.", wp_defender()->domain ),
+						'counts'  => $this->getIssuesAndIgnoredCounts( $model->parentId )
 					) );
 				} elseif ( $ret === false ) {
 					wp_send_json_error( array(
@@ -529,15 +540,25 @@ class Main extends \WP_Defender\Controller {
 	public function scripts() {
 		$data = array(
 			'scanning_title' => __( "Scan In Progress", wp_defender()->domain ) . '<form class="scan-frm float-r"><input type="hidden" name="action" value="cancelScan"/>' . wp_nonce_field( 'cancelScan', '_wpnonce', true, false ) . '<button type="submit" class="button button-small button-secondary">' . __( "Cancel", wp_defender()->domain ) . '</button></form>',
-			'no_issues'      => __( "Your code is currently clean! There were no issues found during the last scan, though you can always perform a new scan anytime.", wp_defender()->domain )
+			'no_issues'      => __( "Your code is currently clean! There were no issues found during the last scan, though you can always perform a new scan anytime.", wp_defender()->domain ),
+			'url'            => network_admin_url( 'admin.php?page=wdf-scan' )
 		);
 		if ( $this->isInPage() ) {
-			\WDEV_Plugin_Ui::load( wp_defender()->getPluginUrl() . 'shared-ui/' );
+			$view = HTTP_Helper::retrieve_get( 'view' );
+			//init receiption
+			if ( $view == 'notification' ) {
+				$this->emailSearchNotification->add_script();
+			} elseif ( $view == 'reporting' ) {
+				$this->email_search->add_script();
+			}
+			wp_enqueue_script( 'wpmudev-sui' );
+			wp_enqueue_style( 'wpmudev-sui' );
+
 			wp_enqueue_script( 'defender' );
-			wp_enqueue_script( 'scan', wp_defender()->getPluginUrl() . 'app/module/scan/js/script.js' );
 			wp_enqueue_script( 'highlight.js', wp_defender()->getPluginUrl() . 'app/module/scan/js/highlight.pack.js' );
 			wp_enqueue_script( 'highlight-linenumbers.js', wp_defender()->getPluginUrl() . 'app/module/scan/js/highlightjs-line-numbers.js' );
 			wp_enqueue_style( 'defender' );
+			wp_enqueue_script( 'scan', wp_defender()->getPluginUrl() . 'app/module/scan/js/script.js' );
 			wp_localize_script( 'scan', 'scan', $data );
 		} else {
 			wp_enqueue_script( 'scan', wp_defender()->getPluginUrl() . 'app/module/scan/js/script.js' );
@@ -563,6 +584,9 @@ class Main extends \WP_Defender\Controller {
 			case 'settings':
 				$this->viewSettings();
 				break;
+			case 'notification':
+				$this->viewNotification();
+				break;
 			case 'reporting':
 				$this->viewAutomation();
 				break;
@@ -574,6 +598,27 @@ class Main extends \WP_Defender\Controller {
 	 */
 	private function viewBrandNew() {
 		$this->renderPartial( 'new' );
+	}
+
+	private function viewNotification() {
+		$model = Scan_Api::getLastScan();
+		if ( ! is_object( $model ) ) {
+			return $this->viewBrandNew();
+		}
+		$activeScan = Scan_Api::getActiveScan();
+		if ( is_object( $activeScan ) && $activeScan->status != Scan\Model\Scan::STATUS_ERROR ) {
+			$this->viewScanning();
+		} else {
+			$setting = Scan\Model\Settings::instance();
+			//$view    = wp_defender()->isFree ? 'setting-free' : 'setting';
+			$view = 'notification';
+			$this->render( $view, array(
+				'setting'      => $setting,
+				'model'        => $model,
+				'lastScanDate' => $this->getLastScanDate(),
+				'email'        => $this->emailSearchNotification
+			) );
+		}
 	}
 
 	/**
@@ -732,11 +777,17 @@ class Main extends \WP_Defender\Controller {
 		$count = $model->countAll( Result_Item::STATUS_ISSUE );
 
 		//Check one instead of validating both conditions
-		if ( $settings->always_send == false && $count == 0 ) {
-			return;
+		if ( $model->logs == 'report' ) {
+			if ( $settings->always_send == false && $count == 0 ) {
+				return;
+			}
+			$recipients = $settings->receipts;
+		} else {
+			if ( $settings->alwaysSendNotification == false && $count == 0 ) {
+				return;
+			}
+			$recipients = $settings->receiptsNotification;
 		}
-
-		$recipients = $settings->receipts;
 
 		if ( empty( $recipients ) ) {
 			return;
@@ -883,10 +934,17 @@ class Main extends \WP_Defender\Controller {
 			$total_ignored += $ignored_vuln;
 			$total_ignored += $ignored_content;
 
-			$premium_counts = array( 'vuln_issues' => $issues_vuln, 'content_issues' => $issues_content );
+			$premium_counts = array(
+				'vuln_issues'    => $issues_vuln == 0 ? '<i class="sui-icon-check-tick sui-success" aria-hidden="true"></i>' : $issues_vuln,
+				'content_issues' => $issues_content == 0 ? '<i class="sui-icon-check-tick sui-success" aria-hidden="true"></i>' : $issues_content
+			);
 		}
 
-		$counts = array( 'issues' => $total_issues, 'issues_wp' => $issues_wp, 'ignored' => $total_ignored );
+		$counts = array(
+			'issues'    => $total_issues,
+			'issues_wp' => $issues_wp == 0 ? '<i class="sui-icon-check-tick sui-success" aria-hidden="true"></i>' : $issues_wp,
+			'ignored'   => $total_ignored
+		);
 
 		$counts = array_merge( $counts, $premium_counts );
 

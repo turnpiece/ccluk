@@ -131,9 +131,9 @@ if ( WPMUDEV_LIMIT_TO_USER ) {
 
 						<div class="wpmudui-alert is-success is-standalone">
 							<?php if ( is_multisite() ) { ?>
-								<p><i aria-hidden="true" class="wpmudui-fi wpmudui-fi-circle-warning"></i> <?php printf( esc_html( 'Analytics are now being tracked and the widget is being displayed to %s and above in subsite admin dashboards.', 'wpmudev' ), esc_html( $role_name ) ); ?></p>
+								<p><i aria-hidden="true" class="wpmudui-fi wpmudui-fi-circle-warning"></i> <?php printf( __( 'Analytics are now being tracked and the widget is being displayed to %s and above in subsite admin dashboards.', 'wpmudev' ), esc_html( $role_name ) ); ?></p>
 							<?php } else { ?>
-								<p><i aria-hidden="true" class="wpmudui-fi wpmudui-fi-circle-warning"></i> <?php printf( esc_html( 'Analytics are now being tracked and the widget is being displayed to %s and above in the admin dashboard.', 'wpmudev' ), esc_html( $role_name ) ); ?></p>
+								<p><i aria-hidden="true" class="wpmudui-fi wpmudui-fi-circle-warning"></i> <?php printf( __( 'Analytics are now being tracked and the widget is being displayed to %s and above in the admin dashboard.', 'wpmudev' ), esc_html( $role_name ) ); ?></p>
 							<?php } //end if multisite ?>
 						</div>
 						<hr class="wpmud-split-border"/>

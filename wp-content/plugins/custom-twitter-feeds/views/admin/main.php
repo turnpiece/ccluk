@@ -33,7 +33,7 @@
     }
     ?>
 
-    <p><span class="fa fa-life-ring" aria-hidden="true"></span>&nbsp; <?php _e('Need help setting up the plugin? Check out our <a href="https://smashballoon.com/custom-twitter-feeds/free/" target="_blank">setup directions</a>', 'custom-twitter-feeds'); ?></p>
+    <p><span class="fa fa-life-ring" aria-hidden="true"></span>&nbsp; <?php _e('Need help setting up the plugin? Check out our <a href="https://smashballoon.com/custom-twitter-feeds/free/?utm_source=plugin-free&utm_campaign=ctf" target="_blank">setup directions</a>', 'custom-twitter-feeds'); ?></p>
 
     <div class="ctf-quick-start">
         <h3><span class="fa fa-rocket" aria-hidden="true"></span>&nbsp; <?php _e( 'Display your feed', 'custom-twitter-feeds'); ?></h3>
@@ -42,7 +42,7 @@
         <p><?php _e( "Find out how to display <a href='?page=custom-twitter-feeds&tab=display'>multiple feeds</a>.", "custom-twitter-feeds" ); ?></p>
     </div>
 
-    <a href="https://smashballoon.com/custom-twitter-feeds/demo" target="_blank" class="ctf-pro-notice">
+    <a href="https://smashballoon.com/custom-twitter-feeds/demo?utm_source=plugin-free&utm_campaign=ctf" target="_blank" class="ctf-pro-notice">
         <img src="<?php echo plugins_url( '../../img/pro-notice.png?1' , __FILE__ ) ?>" alt="Custom Twitter Feeds Pro" />
     </a>
     

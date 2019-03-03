@@ -752,9 +752,11 @@ class WPMUDEV_Dashboard_Upgrader {
 		$this->clear_log();
 		$this->clear_version();
 
-		//include_once( ABSPATH . '/wp-admin/includes/admin.php' );
-		include_once( ABSPATH . '/wp-admin/includes/class-wp-upgrader.php' );
-		include_once( ABSPATH . 'wp-admin/includes/class-wp-automatic-updater.php' );
+		/**
+		 * mimic @see wp_maybe_auto_update()
+		 */
+		include_once( ABSPATH . 'wp-admin/includes/admin.php' );
+		include_once( ABSPATH . 'wp-admin/includes/class-wp-upgrader.php' );
 
 		add_action( 'automatic_updates_complete', array( $this, 'capture_core_update_results' ) );
 

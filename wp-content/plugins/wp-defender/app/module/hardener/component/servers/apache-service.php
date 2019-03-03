@@ -95,6 +95,17 @@ class Apache_Service extends Rule_Service implements IRule_Service {
 			//append this
 			$htConfig = array_merge( $htConfig, array( implode( '', $default ) ) );
 			file_put_contents( $htPath, implode( '', $htConfig ), LOCK_EX );
+		} elseif ( count( $containsSearch ) != count( $htConfig ) ) {
+			//corrupt
+			$htContent = file_get_contents( $htPath );
+			preg_match( '/## WP Defender(.*?)## WP Defender - End ##/s', $htContent, $matches );
+			if ( count( $matches ) ) {
+				//remove the whole parts as it partial done
+				$htContent = str_replace( $matches[0], '', $htContent );
+				$htConfig  = explode( PHP_EOL, $htContent );
+				$htConfig  = array_merge( $htConfig, $default );
+				file_put_contents( $htPath, implode( PHP_EOL, $htConfig ), LOCK_EX );
+			}
 		}
 
 		return true;
@@ -106,7 +117,7 @@ class Apache_Service extends Rule_Service implements IRule_Service {
 	private function protectContentDir() {
 		$htPath = WP_CONTENT_DIR . '/' . '.htaccess';
 		if ( ! file_exists( $htPath ) ) {
-			if (  file_put_contents( $htPath, '', LOCK_EX ) === false ) {
+			if ( file_put_contents( $htPath, '', LOCK_EX ) === false ) {
 				return new \WP_Error( Error_Code::NOT_WRITEABLE,
 					sprintf( __( "The file %s is not writable", wp_defender()->domain ), $htPath ) );
 			}
@@ -396,5 +407,3 @@ class Apache_Service extends Rule_Service implements IRule_Service {
 		}
 	}
 }
-
-?>

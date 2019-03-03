@@ -3,7 +3,7 @@
   Plugin Name: Anti-Spam by CleanTalk
   Plugin URI: http://cleantalk.org
   Description: Max power, all-in-one, no Captcha, premium anti-spam plugin. No comment spam, no registration spam, no contact spam, protects any WordPress forms.
-  Version: 5.114
+  Version: 5.115.2
   Author: СleanTalk <welcome@cleantalk.org>
   Author URI: http://cleantalk.org
 */
@@ -78,6 +78,10 @@ if(!defined('CLEANTALK_PLUGIN_DIR')){
 		$apbct->settings['apikey'] = defined('CLEANTALK_ACCESS_KEY') ? CLEANTALK_ACCESS_KEY : $apbct->settings['apikey'];
 		
 	}
+	
+	// Passing JS key to frontend
+	add_action('wp_ajax_apbct_js_keys__get',        'apbct_js_keys__get__ajax');
+	add_action('wp_ajax_nopriv_apbct_js_keys__get', 'apbct_js_keys__get__ajax');
 	
 	/** @todo HARDCODE FIX */
 	if($apbct->plugin_version === '1.0.0')
@@ -346,7 +350,10 @@ function apbct_remote_call__perform()
 			$apbct->save('remote_calls');
 
 			if(strtolower($_GET['spbc_remote_call_token']) == strtolower(md5($apbct->api_key))){
-
+				
+				// Flag to let plugin know that Remote Call is running.
+				$apbct->rc_running = true;
+				
 				// Close renew banner
 				if($_GET['spbc_remote_call_action'] == 'close_renew_banner'){
 					$apbct->data['notice_trial'] = 0;
@@ -380,7 +387,7 @@ function apbct_remote_call__perform()
 */
 function apbct_sfw__check()
 {
-	global $apbct, $cleantalk_url_exclusions;
+	global $apbct, $spbc, $cleantalk_url_exclusions;
 	
 	// Turn off the SpamFireWall if current url in the exceptions list and WordPress core pages
 	 if (!empty($cleantalk_url_exclusions) && is_array($cleantalk_url_exclusions)) {
@@ -391,6 +398,10 @@ function apbct_sfw__check()
 			}
 		} 
 	}
+	
+	// Turn off the SpamFireWall if Remote Call is in progress
+	if($apbct->rc_running || (!empty($spbc) && $spbc->rc_running))
+		return;
 	
 	include_once(CLEANTALK_PLUGIN_DIR . "lib/CleantalkSFW_Base.php");
 	include_once(CLEANTALK_PLUGIN_DIR . "lib/CleantalkSFW.php");
@@ -428,6 +439,16 @@ function apbct_sfw__check()
 	
 	if($is_sfw_check){
 		$sfw->ip_check();
+		if($sfw->result){
+			if(isset($_GET['spbc_remote_call_token'], $_GET['spbc_remote_call_action'], $_GET['plugin_name'])){
+				$resolved = gethostbyaddr($sfw->blocked_ip);				
+				if($resolved && preg_match('/cleantalk\.org/', $resolved) === 1 || $resolved === 'back'){
+					$sfw->result = false;
+					$sfw->passed_ip = $sfw->blocked_ip;
+				}
+			}
+		}
+		
 		if($sfw->result){
 			$sfw->logs__update($sfw->blocked_ip, 'blocked');
 			$apbct->data['sfw_counter']['blocked']++;
@@ -758,18 +779,20 @@ function apbct_cookie(){
 		'cookies_names' => array(),
 		'check_value' => $apbct->api_key,
 	);
-		
+	
+	$domain = parse_url(get_option('siteurl'),PHP_URL_HOST);
+	
 	// Submit time
 	if(empty($_POST['ct_multipage_form'])){ // Do not start/reset page timer if it is multipage form (Gravitiy forms))
 		$apbct_timestamp = time();
-		setcookie('apbct_timestamp', $apbct_timestamp, 0, '/');
+		setcookie('apbct_timestamp', $apbct_timestamp, 0, '/', $domain, false, true);
 		$cookie_test_value['cookies_names'][] = 'apbct_timestamp';
 		$cookie_test_value['check_value'] .= $apbct_timestamp;
 	}
 
 	// Pervious referer
 	if(!empty($_SERVER['HTTP_REFERER'])){
-		setcookie('apbct_prev_referer', $_SERVER['HTTP_REFERER'], 0, '/');
+		setcookie('apbct_prev_referer', $_SERVER['HTTP_REFERER'], 0, '/', $domain, false, true);
 		$cookie_test_value['cookies_names'][] = 'apbct_prev_referer';
 		$cookie_test_value['check_value'] .= $_SERVER['HTTP_REFERER'];
 	}
@@ -779,20 +802,20 @@ function apbct_cookie(){
 		$site_landing_timestamp = $_COOKIE['apbct_site_landing_ts'];
 	}else{
 		$site_landing_timestamp = time();
-		setcookie('apbct_site_landing_ts', $site_landing_timestamp, 0, '/');
+		setcookie('apbct_site_landing_ts', $site_landing_timestamp, 0, '/', $domain, false, true);
 	}
 	$cookie_test_value['cookies_names'][] = 'apbct_site_landing_ts';
 	$cookie_test_value['check_value'] .= $site_landing_timestamp;
 	
 	// Page hits
 	$page_hits = isset($_COOKIE['apbct_page_hits']) && apbct_cookies_test() ? $_COOKIE['apbct_page_hits'] + 1 : 1;
-	setcookie('apbct_page_hits', $page_hits, 0, '/');
+	setcookie('apbct_page_hits', $page_hits, 0, '/', $domain, false, true);
 	$cookie_test_value['cookies_names'][] = 'apbct_page_hits';
 	$cookie_test_value['check_value'] .= $page_hits;
 	
 	// Cookies test
 	$cookie_test_value['check_value'] = md5($cookie_test_value['check_value']);
-	setcookie('apbct_cookies_test', urlencode(json_encode($cookie_test_value)), 0, '/');
+	setcookie('apbct_cookies_test', urlencode(json_encode($cookie_test_value)), 0, '/', $domain, false, true);
 	
 	$apbct->flags__cookies_setuped = true;
 	

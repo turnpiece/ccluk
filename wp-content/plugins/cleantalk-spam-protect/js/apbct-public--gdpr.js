@@ -1,8 +1,8 @@
 jQuery(document).ready(function(){
 	
-	if(!ctPublic.gdpr_forms) return;
+	if(!ctPublicGDPR.gdpr_forms) return;
 	
-	ctPublic.gdpr_forms.forEach(function(item, i, arr){
+	ctPublicGDPR.gdpr_forms.forEach(function(item, i, arr){
 		
 		var elem = jQuery('#'+item+', .'+item);
 		
@@ -25,7 +25,7 @@ jQuery(document).ready(function(){
 		// Adding notice
 		if(elem.is('form') || elem.attr('role') === 'form'){
 			elem.append('<input id="apbct_gdpr_'+i+'" type="checkbox" required="required " style="display: inline; margin-right: 10px;">')
-				.append('<label style="display: inline;" for="apbct_gdpr_'+i+'">'+ctPublic.gdpr_text+'</label>');
+				.append('<label style="display: inline;" for="apbct_gdpr_'+i+'">'+ctPublicGDPR.gdpr_text+'</label>');
 		}
 	});
 	

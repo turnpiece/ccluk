@@ -11,159 +11,119 @@ use WP_Defender\Module\Scan\Model\Settings;
 class Report extends Behavior {
 	public function renderReportWidget() {
 		?>
-        <div class="dev-box">
-            <div class="box-title">
-                <span class="span-icon icon-report"></span>
-                <h3><?php _e( "REPORTING", wp_defender()->domain ) ?></h3>
+        <div class="sui-box">
+            <div class="sui-box-header">
+                <h3 class="sui-box-title">
+                    <i class="sui-icon-graph-line" aria-hidden="true"></i>
+					<?php _e( "Reporting", wp_defender()->domain ) ?>
+                </h3>
             </div>
-            <div class="box-content">
-                <div class="line">
-					<?php _e( "Get tailored security reports delivered to your inbox so you don’t have to worry
-                    about checking in.", wp_defender()->domain ) ?>
+            <div class="sui-box-body no-padding-bottom">
+                <p><?php _e( "Get tailored security reports delivered to your inbox so you don’t have to worry about checking in.", wp_defender()->domain ) ?></p>
+                <div class="sui-field-list sui-flushed no-border">
+                    <div class="sui-field-list-body">
+                        <div class="sui-field-list-item">
+                            <label class="sui-field-list-item-label">
+                                <small><strong><?php _e( "File Scanning", wp_defender()->domain ) ?></strong></small>
+                            </label>
+							<?php echo $this->getScanReport() ?>
+                        </div>
+                        <div class="sui-field-list-item">
+                            <label class="sui-field-list-item-label">
+                                <small><strong><?php _e( "IP Lockouts", wp_defender()->domain ) ?></strong></small>
+                            </label>
+							<?php echo $this->getIpLockoutReport() ?>
+                        </div>
+                        <div class="sui-field-list-item">
+                            <label class="sui-field-list-item-label">
+                                <small><strong><?php _e( "Audit Logging", wp_defender()->domain ) ?></strong></small>
+                            </label>
+							<?php echo $this->getAuditReport() ?>
+                        </div>
+                    </div>
                 </div>
-                <div class="row">
-                    <div class="col-half">
-						<?php $this->getScanReport() ?>
-                    </div>
-                    <div class="col-half">
-						<?php $this->getAuditReport(); ?>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-half">
-						<?php $this->getIpLockoutReport(); ?>
-                    </div>
+            </div>
+            <div class="sui-box-footer">
+                <div class="sui-center-box no-padding-bottom">
+                    <p class="sui-p-small">
+	                    <?php printf( __( "You can also <a target='_blank' href=\"%s\">create PDF reports</a> to send to your clients via The Hub.", wp_defender()->domain ), "https://premium.wpmudev.org/reports/" ) ?>
+                    </p>
                 </div>
             </div>
         </div>
 		<?php
 	}
 
+	/**
+	 * @return string|void
+	 */
 	public function getIpLockoutReport() {
 		$settings = \WP_Defender\Module\IP_Lockout\Model\Settings::instance();
-		$class    = null;
-		if ( $settings->report == false ) {
-			$class = 'feature-disabled with-corner';
+		$text     = "";
+		if ( $settings->report ) {
+			switch ( $settings->report_frequency ) {
+				case '1':
+					$text = __( "Daily", wp_defender()->domain );
+					break;
+				case '7':
+					$text = __( "Weekly", wp_defender()->domain );
+					break;
+				case '30':
+					$text = __( "Monthly", wp_defender()->domain );
+					break;
+			}
+			$text = '<span class="sui-tag sui-tag-blue">' . $text . '</span>';
+		} else {
+			$text = '<span class="sui-tag sui-tag-disabled">' . __( "Inactive", wp_defender()->domain ) . '</span>';
 		}
-		?>
-        <div <?php echo $this->getLockoutTooltips() ?>
-                class="report-status <?php echo $class ?>">
-            <a href="<?php echo network_admin_url( 'admin.php?page=wdf-ip-lockout&view=reporting' ) ?>">
-                <img src="<?php echo wp_defender()->getPluginUrl() ?>assets/img/lockout-pre.svg">
-                <strong><?php _e( "IP LOCKOUTS", wp_defender()->domain ) ?></strong>
-				<?php if ( \WP_Defender\Module\IP_Lockout\Model\Settings::instance()->report ): ?>
-                    <span class="def-tag tag-active">
-                               <i class="def-icon icon-tick"></i>
-						<?php
-						switch ( \WP_Defender\Module\IP_Lockout\Model\Settings::instance()->report_frequency ) {
-							case '1':
-								_e( "Daily", wp_defender()->domain );
-								break;
-							case '7':
-								_e( "Weekly", wp_defender()->domain );
-								break;
-							case '30':
-								_e( "Monthly", wp_defender()->domain );
-								break;
-						}
-						?>
-                                </span>
-					<?php
-				else:?>
-                    <span class="def-tag tag-inactive">
-                                        <?php _e( "Inactive", wp_defender()->domain ) ?>
-                                    </span>
-                    <div tooltip="<?php esc_attr_e( "Get a daily, weekly or monthly summary of lockouts that have occurred within the report period." ) ?>"
-                         class="corner">
-                        <i class="def-icon icon-warning"></i>
-                    </div>
-				<?php endif; ?>
-            </a>
-        </div>
-		<?php
+
+		return $text;
 	}
 
+	/**
+	 * @return string|void
+	 */
 	public function getAuditReport() {
-		$class = null;
-		if ( \WP_Defender\Module\Audit\Model\Settings::instance()->enabled == false ) {
-			$class = 'with-corner feature-disabled';
-		} elseif ( \WP_Defender\Module\Audit\Model\Settings::instance()->notification == false ) {
-			$class = 'feature-disabled';
+		$settings = \WP_Defender\Module\Audit\Model\Settings::instance();
+		if ( $settings->enabled && $settings->notification ) {
+			switch ( $settings->frequency ) {
+				case '1':
+					$text = __( "Daily", wp_defender()->domain );
+					break;
+				case '7':
+					$text = __( "Weekly", wp_defender()->domain );
+					break;
+				case '30':
+					$text = __( "Monthly", wp_defender()->domain );
+					break;
+			}
+			$text = '<span class="sui-tag sui-tag-blue">' . $text . '</span>';
+		} else {
+			$text = '<span class="sui-tag sui-tag-disabled">' . __( "Inactive", wp_defender()->domain ) . '</span>';
 		}
-		?>
-        <div <?php echo $this->getAuditToolTip() ?>
-                class="report-status <?php echo $class ?>">
-            <a href="<?php echo network_admin_url( 'admin.php?page=wdf-logging&view=report' ) ?>">
-                <img src="<?php echo wp_defender()->getPluginUrl() ?>assets/img/audit-pre.svg">
-                <strong><?php _e( "AUDIT LOGGING", wp_defender()->domain ) ?></strong>
-				<?php if ( \WP_Defender\Module\Audit\Model\Settings::instance()->enabled == false ): ?>
-                    <div tooltip="<?php esc_attr_e( "To activate this report you must first enable the Audit Logging module." ) ?>"
-                         class="corner">
-                        <i class="def-icon icon-warning"></i>
-                    </div>
-				<?php elseif ( \WP_Defender\Module\Audit\Model\Settings::instance()->notification ): ?>
-                    <span class="def-tag tag-active">
-                                            <i class="def-icon icon-tick"></i>
-						<?php
-						switch ( \WP_Defender\Module\Audit\Model\Settings::instance()->frequency ) {
-							case '1':
-								_e( "Daily", wp_defender()->domain );
-								break;
-							case '7':
-								_e( "Weekly", wp_defender()->domain );
-								break;
-							case '30':
-								_e( "Monthly", wp_defender()->domain );
-								break;
-						}
-						?>
-                                </span>
-					<?php
-				else:?>
-                    <span class="def-tag tag-inactive">
-                        <?php _e( "Inactive", wp_defender()->domain ) ?>
-                    </span>
-				<?php endif; ?>
-            </a>
-        </div>
-		<?php
+
+		return $text;
 	}
 
 	private function getScanReport() {
-		$class    = Settings::instance()->notification == false ? 'feature-disabled' : null;
-		$tooltips = $this->getScanToolTip();
-		?>
-        <div <?php echo $tooltips ?>
-                class="report-status <?php echo $class ?>">
-            <a href="<?php echo network_admin_url( 'admin.php?page=wdf-scan&view=reporting' ) ?>">
-                <img src="<?php echo wp_defender()->getPluginUrl() ?>assets/img/scanning-pre.svg">
-                <strong><?php _e( "FILE SCANNING", wp_defender()->domain ) ?></strong>
-				<?php if ( Settings::instance()->notification ): ?>
-                    <span class="def-tag tag-active">
-                                        <i class="def-icon icon-tick"></i>
-						<?php
-						switch ( Settings::instance()->frequency ) {
-							case '1':
-								_e( "Daily", wp_defender()->domain );
-								break;
-							case '7':
-								_e( "Weekly", wp_defender()->domain );
-								break;
-							case '30':
-								_e( "Monthly", wp_defender()->domain );
-								break;
-						}
-						?>
-                                        </span>
-					<?php
-				else:?>
-                    <span class="def-tag tag-inactive">
-                                            <?php _e( "Inactive", wp_defender()->domain ) ?>
-                                        </span>
-				<?php endif; ?>
-            </a>
-        </div>
-		<?php
+		if ( Settings::instance()->report ) {
+			$text = "";
+			switch ( Settings::instance()->frequency ) {
+				case '1':
+					$text = __( "Daily", wp_defender()->domain );
+					break;
+				case '7':
+					$text = __( "Weekly", wp_defender()->domain );
+					break;
+				case '30':
+					$text = __( "Monthly", wp_defender()->domain );
+					break;
+			}
+
+			return '<span class="sui-tag sui-tag-blue">' . $text . '</span>';
+		} else {
+			return '<span class="sui-tag sui-tag-disabled">' . __( "Inactive", wp_defender()->domain ) . '</span>';
+		}
 	}
 
 	/**

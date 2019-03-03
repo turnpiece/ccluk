@@ -2,15 +2,15 @@
 Contributors: safronik 
 Tags: spam, antispam, protection, comments, firewall 
 Requires at least: 3.0
-Tested up to: 5.0
-Stable tag: 5.114
+Tested up to: 5.1
+Stable tag: 5.115.2
 License: GPLv2
 
 Spam protection, antispam, all-in-one, premium plugin. No spam comments & users, no spam contact form & WooCommerce anti-spam.
 
 == Description ==
 
-**Supports: Contact Form 7, Ninja Forms, Gravity Forms, MailChimp, Formidable forms, WooCommerce, JetPack comments and contact form, BuddyPress, bbPress, Fast Secure Contact form, S2Member, MailPoet, any WordPress registrations & contact forms and themes. Just setup and forget the spam!** 
+**Supports: Contact Form 7, Contact Form by WPForms, Ninja Forms, Gravity Forms, MailChimp, Formidable forms, WooCommerce, JetPack comments and contact form, BuddyPress, bbPress, Fast Secure Contact form, S2Member, MailPoet, any WordPress registrations & contact forms and themes. Just setup and forget the spam!** 
 
 No CAPTCHA, no questions, no animal counting, no puzzles, no math and no spam bots. Universal AntiSpam plugin. 
 
@@ -558,6 +558,20 @@ If your website has forms that send data to external sources, you can enable opt
 10. Website's options.
 
 == Changelog ==
+= 5.115.2 February 27 2019 =
+  * Fix: False positives spam detection in WP Forms and Contact Form 7.
+
+= 5.115.1 February 16 2019 =
+  * Fix: SpamFireWall's false positives.
+
+= 5.115 February 14 2019 =
+  * Fix: Http_only flag for backend cookies.
+  * Fix: Spam filtration improved.
+  * New: IP detection improved.
+  * Fix: SpamFirewall update speeded up.
+  * New: False positives with caching solutions decreased.
+  * New: Opportunity to use Wordpress HTTP API to connect with Cloud.
+  
 = 5.114 January 31 2019 =
   * New: Setting "Use Wordpress HTTP API" as alternative to CURL. Disabled by default.
   * Fix: Formidable: Adding small JS check when adding JS_key.
@@ -1786,6 +1800,20 @@ If your website has forms that send data to external sources, you can enable opt
   * First version
   
 == Upgrade Notice ==
+= 5.115.2 February 27 2019 =
+  * Fix: False positives spam detection in WP Forms and Contact Form 7.
+
+= 5.115.1 February 16 2019 =
+  * Fix: SpamFireWall's false positives.
+  
+= 5.115 February 14 2019 =
+  * Fix: Http_only flag for backend cookies.
+  * Fix: Spam filtration improved.
+  * New: IP detection improved.
+  * Fix: SpamFirewall update speeded up.
+  * New: False positives with caching solutions decreased.
+  * New: Opportunity to use Wordpress HTTP API to connect with Cloud.
+
 = 5.114 January 31 2019 =
   * New: Setting "Use Wordpress HTTP API" as alternative to CURL. Disabled by default.
   * Fix: Formidable: Adding small JS check when adding JS_key.

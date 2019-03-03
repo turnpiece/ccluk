@@ -1,35 +1,28 @@
-<div class="dev-box">
-    <div class="box-title">
-        <h3><?php _e( "Settings", wp_defender()->domain ) ?></h3>
+<div class="sui-box">
+    <div class="sui-box-header">
+        <h3 class="sui-box-title">
+			<?php _e( "Settings", wp_defender()->domain ) ?>
+        </h3>
     </div>
-    <div class="box-content">
-        <form method="post" id="settings-frm" class="audit-frm">
-            <div class="columns">
-                <div class="column is-one-third">
-                    <label for="toggle_audit_logging" role="checkbox" aria-checked="true">
-						<?php esc_html_e( "Deactivate", wp_defender()->domain ) ?>
-                    </label>
-                    <span class="sub">
-					<?php esc_html_e( "If you no longer want to use this feature you can turn it off at any time.", wp_defender()->domain ) ?>
-				</span>
-                </div>
-                <div class="column">
-				<span tooltip="<?php esc_attr_e( "Deactivate Audit Logging", wp_defender()->domain ) ?>"
-                      class="toggle">
-                        <input type="hidden" name="enabled" value="0"/>
-                        <input type="checkbox" checked="checked" name="enabled" value="1"
-                               class="toggle-checkbox" id="toggle_audit_logging"/>
-                        <label class="toggle-label" for="toggle_audit_logging"></label>
+    <form method="post" id="settings-frm" class="audit-frm">
+        <div class="sui-box-body">
+            <div class="sui-box-settings-row">
+                <div class="sui-box-settings-col-1">
+                    <span class="sui-settings-label">
+                        <?php _e( "Deactivate", wp_defender()->domain ) ?>
+                    </span>
+                    <span class="sui-description">
+                       <?php esc_html_e( "If you no longer want to use this feature you can turn it off at any time.", wp_defender()->domain ) ?>
                     </span>
                 </div>
+                <div class="sui-box-settings-col-2">
+                    <input type="hidden" name="action" value="activeAudit">
+					<?php wp_nonce_field( 'activeAudit' ) ?>
+                    <button type="button" class="sui-button sui-button-ghost deactivate-audit">
+						<?php _e( "Deactivate", wp_defender()->domain ) ?>
+                    </button>
+                </div>
             </div>
-            <div class="clear line"></div>
-			<?php wp_nonce_field( 'saveAuditSettings' ) ?>
-            <input type="hidden" name="action" value="saveAuditSettings"/>
-            <button type="submit" class="button button-primary float-r">
-				<?php esc_html_e( "UPDATE SETTINGS", wp_defender()->domain ) ?>
-            </button>
-            <div class="clear"></div>
-        </form>
-    </div>
+        </div>
+    </form>
 </div>

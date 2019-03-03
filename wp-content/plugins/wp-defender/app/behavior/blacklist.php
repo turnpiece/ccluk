@@ -9,6 +9,7 @@ use Hammer\Base\Behavior;
 use WP_Defender\Component\Error_Code;
 
 class Blacklist extends Behavior {
+	const CACHE_KEY = 'wpdefender_blacklist_status', CACHE_TIME = 1800;
 	private $end_point = "https://premium.wpmudev.org/api/defender/v1/blacklist-monitoring";
 
 	public function renderBlacklistWidget() {
@@ -21,38 +22,55 @@ class Blacklist extends Behavior {
 
 	private function _renderPlaceholder() {
 		?>
-        <div class="dev-box">
+        <div class="sui-box">
             <div class="wd-overlay">
-                <i class="wdv-icon wdv-icon-fw wdv-icon-refresh spin"></i>
+                <i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
             </div>
-            <div class="box-title">
-                <span class="span-icon icon-blacklist"></span>
-                <h3><?php _e( "Blacklist Monitor", wp_defender()->domain ) ?></h3>
+            <div class="sui-box-header">
+                <h3 class="sui-box-title">
+                    <i class="sui-icon-target" aria-hidden="true"></i>
+					<?php _e( "Blacklist Monitor", wp_defender()->domain ) ?>
+                </h3>
             </div>
-            <div class="box-content">
-                <div class="line">
-					<?php _e( "Automatically check if you’re on Google’s blacklist every 6 hours. If something’s
-                    wrong, we’ll let you know via email.", wp_defender()->domain ) ?>
-                </div>
-                <div class="well well-blue with-cap mline">
-                    <i class="def-icon icon-warning fill-blue"></i> <?php _e( "We are currently requesting
-                    your domain status from Google. This can take anywhere
-                    from a few minutes up to 12 hours.", wp_defender()->domain ) ?>
-                </div>
-                <p class="sub tc"><?php printf( __( "Want to know more about blacklisting? <a href=\"%s\">Read this article.</a>", wp_defender()->domain ), "https://premium.wpmudev.org/blog/get-off-googles-blacklist/" ) ?>
+            <div class="sui-box-body">
+                <p>
+					<?php _e( "Automatically check if you’re on Google’s blacklist every 6 hours. If something’s wrong, we’ll let you know.", wp_defender()->domain ) ?>
                 </p>
+                <div class="sui-notice sui-notice-info">
+                    <p>
+						<?php _e( "Automatically check if you’re on Google’s blacklist every 6 hours. If something’s
+                    wrong, we’ll let you know via email.", wp_defender()->domain ) ?>
+                    </p>
+                </div>
+                <div class="sui-center-box no-padding-bottom">
+                    <p class="sui-p-small">
+						<?php printf( __( "Want to know more about blacklisting? <a href=\"%s\">Read this article.</a>", wp_defender()->domain ), "https://premium.wpmudev.org/blog/get-off-googles-blacklist/" ) ?>
+                    </p>
+                </div>
+                <form method="post" class="blacklist-widget">
+                    <input type="hidden" name="action" value="blacklistWidgetStatus"/>
+					<?php wp_nonce_field( 'blacklistWidgetStatus' ) ?>
+                </form>
             </div>
-            <form method="post" class="blacklist-widget">
-                <input type="hidden" name="action" value="blacklistWidgetStatus"/>
-				<?php wp_nonce_field( 'blacklistWidgetStatus' ) ?>
-            </form>
         </div>
 		<?php
 	}
 
 	private function _renderFree() {
 		?>
-        <div class="dev-box">
+        <div class="sui-box">
+            <div class="sui-box-header">
+                <h3 class="sui-box-title">
+                    <i class="sui-icon-target" aria-hidden="true"></i>
+					<?php _e( "Blacklist Monitor", wp_defender()->domain ) ?>
+                </h3>
+                <div class="sui-actions-left">
+                    <span class="sui-tag sui-tag-pro"><?php _e( "Pro", wp_defender()->domain ) ?></span>
+                </div>
+            </div>
+            <div class="sui-box-body">
+
+            </div>
             <div class="box-title">
                 <span class="span-icon icon-blacklist"></span>
                 <h3><?php _e( "BLACKLIST MONITOR", wp_defender()->domain ) ?></h3>
@@ -81,17 +99,19 @@ class Blacklist extends Behavior {
 				'message' => __( "A WPMU DEV subscription is required for blacklist monitoring", wp_defender()->domain )
 			) );
 		}
-		if ( is_null( $status ) ) {
-			$status = $this->_pullStatus();
-		}
-		if ( $status === - 1 ) {
-			$result = Utils::instance()->devCall( $this->end_point, array(), array(
+		$status   = get_site_transient( self::CACHE_KEY );
+		$endpoint = $this->end_point . '?domain=' . Utils::instance()->stripProtocol( network_site_url() );
+		if ( intval( $status ) === - 1 ) {
+			$result = Utils::instance()->devCall( $endpoint, array(), array(
 				'method' => 'POST'
 			), true );
+			//re update status
+			set_site_transient( self::CACHE_KEY, 1, self::CACHE_TIME );
 		} else {
-			$result = Utils::instance()->devCall( $this->end_point, array(), array(
+			$result = Utils::instance()->devCall( $endpoint, array(), array(
 				'method' => 'DELETE'
 			), true );
+			set_site_transient( self::CACHE_KEY, - 1, self::CACHE_TIME );
 		}
 
 		if ( $format == false ) {
@@ -110,21 +130,24 @@ class Blacklist extends Behavior {
 	private function _renderDisabled() {
 		ob_start();
 		?>
-        <div class="dev-box">
-            <div class="box-title">
-                <span class="span-icon icon-blacklist"></span>
-                <h3><?php _e( "BLACKLIST MONITOR", wp_defender()->domain ) ?></h3>
+        <div class="sui-box">
+            <div class="sui-box-header">
+                <h3 class="sui-box-title">
+                    <i class="sui-icon-target" aria-hidden="true"></i>
+					<?php _e( "Blacklist Monitor", wp_defender()->domain ) ?>
+                </h3>
             </div>
-            <div class="box-content">
-                <div class="line">
-					<?php _e( " Automatically check if you’re on Google’s blacklist every 6 hours. If something’s
+            <div class="sui-box-body">
+                <div>
+					<?php _e( "Automatically check if you’re on Google’s blacklist every 6 hours. If something’s
                     wrong, we’ll let you know via email.", wp_defender()->domain ) ?>
                 </div>
-                <form method="post" class="toggle-blacklist-widget">
+                <form method="post" class="toggle-blacklist-widget margin-top-30">
                     <input type="hidden" name="action" value="toggleBlacklistWidget"/>
 					<?php wp_nonce_field( 'toggleBlacklistWidget' ) ?>
                     <button type="submit"
-                            class="button button-small"><?php _e( "ACTIVATE", wp_defender()->domain ) ?></button>
+                            class="sui-button sui-button-blue"><?php _e( "Activate", wp_defender()->domain ) ?>
+                    </button>
                 </form>
             </div>
         </div>
@@ -135,22 +158,20 @@ class Blacklist extends Behavior {
 	private function _renderError( $error ) {
 		ob_start();
 		?>
-        <div class="dev-box">
-            <div class="box-title">
-                <span class="span-icon icon-blacklist"></span>
-                <h3><?php _e( "BLACKLIST MONITOR", wp_defender()->domain ) ?></h3>
+        <div class="sui-box">
+            <div class="sui-box-header">
+                <h3 class="sui-header-title">
+                    <i class="sui-icon-target" aria-hidden="true"></i>
+					<?php _e( "Blacklist Monitor", wp_defender()->domain ) ?>
+                </h3>
             </div>
-            <div class="box-content">
-                <div class="line">
-					<?php _e( " Automatically check if you’re on Google’s blacklist every 6 hours. If something’s
-                    wrong, we’ll let you know via email.", wp_defender()->domain ) ?>
-                </div>
-                <div class="well well-error">
+            <div class="sui-box-body">
+                <div class="sui-notice sui-notice-error">
                     <p>
-                        <i class="def-icon icon-cross"></i> <?php echo $error->get_error_message() ?>
+						<?php echo $error->get_error_message() ?>
+                        <a href="<?php echo network_admin_url( "admin.php?page=wp-defender" ) ?>"
+                           class="sui-button"><?php _e( "Try Again", wp_defender()->domain ) ?></a>
                     </p>
-                    <a href="<?php echo network_admin_url( "admin.php?page=wp-defender" ) ?>"
-                       class="button button-small button-grey"><?php _e( "Try Again", wp_defender()->domain ) ?></a>
                 </div>
             </div>
         </div>
@@ -161,42 +182,47 @@ class Blacklist extends Behavior {
 	private function _renderResult( $status ) {
 		ob_start();
 		?>
-        <div class="dev-box">
-            <div class="box-title">
-                <span class="span-icon icon-blacklist"></span>
-                <h3>
-					<?php _e( "BLACKLIST MONITOR", wp_defender()->domain ) ?>
-					<?php if ( $status === 0 ): ?>
-                        <span class="def-tag tag-error">1</span>
-					<?php endif; ?>
+        <div class="sui-box">
+            <div class="sui-box-header">
+                <h3 class="sui-box-title">
+                    <i class="sui-icon-target" aria-hidden="true"></i>
+					<?php _e( "Blacklist Monitor", wp_defender()->domain ) ?>
                 </h3>
-                <span class="toggle float-r">
+                <div class="sui-actions-right">
+                    <label class="sui-toggle">
                         <input type="checkbox" checked="checked" name="enabled" value="1" class="toggle-checkbox"
                                id="toggle_blacklist">
-                        <label class="toggle-label" for="toggle_blacklist"></label>
-                    </span>
-                <form method="post" class="toggle-blacklist-widget">
-                    <input type="hidden" name="action" value="toggleBlacklistWidget"/>
-					<?php wp_nonce_field( 'toggleBlacklistWidget' ) ?>
-                </form>
+                        <span class="sui-toggle-slider"></span>
+                    </label>
+                    <form method="post" class="toggle-blacklist-widget">
+                        <input type="hidden" name="action" value="toggleBlacklistWidget"/>
+						<?php wp_nonce_field( 'toggleBlacklistWidget' ) ?>
+                    </form>
+                </div>
             </div>
-            <div class="box-content">
-                <div class="line">
+            <div class="sui-box-body">
+                <p>
 					<?php _e( " Automatically check if you’re on Google’s blacklist every 6 hours. If something’s
                     wrong, we’ll let you know via email.", wp_defender()->domain ) ?>
-                </div>
+                </p>
 				<?php if ( $status === 0 ): ?>
-                    <div class="well well-error with-cap mline">
-                        <i class="def-icon icon-warning"></i> <?php _e( "Your domain is currently on Google’s blacklist.", wp_defender()->domain ) ?>
+                    <div class="sui-notice sui-notice-error">
+                        <p>
+							<?php _e( "Your domain is currently on Google’s blacklist. Check out the article below to find out how to fix up your domain.", wp_defender()->domain ) ?>
+                        </p>
                     </div>
 				<?php else: ?>
-                    <div class="well well-green with-cap mline">
-                        <i class="def-icon icon-tick"></i>
-						<?php _e( 'Your domain is currently clean.', wp_defender()->domain ) ?>
+                    <div class="sui-notice sui-notice-success">
+                        <p>
+							<?php _e( 'Your domain is currently clean.', wp_defender()->domain ) ?>
+                        </p>
                     </div>
 				<?php endif; ?>
-                <p class="sub tc"><?php printf( __( "Want to know more about blacklisting? <a href=\"%s\">Read this article.</a>", wp_defender()->domain ), "https://premium.wpmudev.org/blog/get-off-googles-blacklist/" ) ?>
-                </p>
+                <div class="sui-center-box no-padding-bottom">
+                    <p class="sui-p-small">
+						<?php printf( __( "Want to know more about blacklisting? <a href=\"%s\">Read this article.</a>", wp_defender()->domain ), "https://premium.wpmudev.org/blog/get-off-googles-blacklist/" ) ?>
+                    </p>
+                </div>
             </div>
         </div>
 		<?php
@@ -209,13 +235,17 @@ class Blacklist extends Behavior {
 	 * @return int|\WP_Error
 	 */
 	public function pullBlackListStatus( $format = true ) {
-		$currStatus = $this->_pullStatus();
+		$currStatus = get_site_transient( self::CACHE_KEY );
+		if ( $currStatus === false ) {
+			$currStatus = $this->_pullStatus();
+			set_site_transient( self::CACHE_KEY, $currStatus, self::CACHE_TIME );
+		}
 		if ( $format == false ) {
 			return $currStatus;
 		}
 		if ( is_wp_error( $currStatus ) ) {
 			$html = $this->_renderError( $currStatus );
-		} elseif ( $currStatus === - 1 ) {
+		} elseif ( intval( $currStatus ) === - 1 ) {
 			$html = $this->_renderDisabled();
 		} else {
 			$html = $this->_renderResult( $currStatus );

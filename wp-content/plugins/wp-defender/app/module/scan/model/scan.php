@@ -119,10 +119,11 @@ class Scan extends Model {
 	 *
 	 * @return Result_Item[]
 	 */
-	public function getItems( $offset = 0, $type = Result_Item::STATUS_ISSUE ) {
+	public function getItems( $offset = 0, $status = Result_Item::STATUS_ISSUE, $type = null ) {
 		$items = Result_Item::findAll( array(
 			'parentId' => $this->id,
-			'status'   => $type
+			'status'   => $status,
+			'type'     => $type
 		), null, null, $offset );
 
 		return $items;

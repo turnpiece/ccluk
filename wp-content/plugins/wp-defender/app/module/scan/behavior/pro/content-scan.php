@@ -28,8 +28,8 @@ class Content_Scan extends Behavior {
 
 	public function processItemInternal( $args, $current ) {
 		set_time_limit( - 1 );
-		$start       = microtime( true );
-		$this->model = $args['model'];
+		$start          = microtime( true );
+		$this->model    = $args['model'];
 		$this->patterns = $args['patterns'];
 		$this->populateChecksums();
 		$this->populateTries();
@@ -78,12 +78,38 @@ class Content_Scan extends Behavior {
 		if ( ! file_exists( $file ) ) {
 			return false;
 		}
-		if ( $this->checksumCheck( $file, $checksum ) ) {
-			//this one is good and still same, no need to do
-			//return true;
+
+		//need to check if this file is have a version in the md5-scan folder
+		$pluginsPath = WP_CONTENT_DIR . DIRECTORY_SEPARATOR . 'plugins';
+		$themesPath  = WP_CONTENT_DIR . DIRECTORY_SEPARATOR . 'themes';
+		if ( ( $isPlugin = strpos( $file, $pluginsPath ) === 0 )
+		     || ( $isTheme = strpos( $file, $themesPath ) === 0 )
+		) {
+			if ( isset( $isPlugin ) && $isPlugin ) {
+				$tmp = str_replace( $pluginsPath, '', $file );
+			} elseif ( isset( $isTheme ) && $isTheme ) {
+				$tmp = str_replace( $themesPath, '', $file );
+			}
+			if ( isset( $tmp ) ) {
+				$ds          = DIRECTORY_SEPARATOR;
+				$compareFile = Utils::instance()->getDefUploadDir() . $ds . 'md5-scan' . $tmp;
+				if ( file_exists( $compareFile ) ) {
+					$checksum            = md5_file( $file );
+					$compareFileChecksum = md5_file( $compareFile );
+					if ( $compareFileChecksum === $checksum ) {
+						$checksum = null;
+						unset( $checksum );
+						$compareFileChecksum = null;
+						unset( $compareFileChecksum );
+
+						return true;
+					} else {
+						//todo need to check more here as it weird
+					}
+				}
+			}
 		}
-		//this file has changed, unset the old one
-		unset( $this->oldChecksum[ $checksum ] );
+
 		$this->tries[] = $file;
 		$count         = array_count_values( $this->tries );
 		$altCache      = WP_Helper::getArrayCache();
@@ -95,7 +121,7 @@ class Content_Scan extends Behavior {
 			$this->tries   = array_unique( $this->tries );
 			$altCache->set( self::FILES_TRIED, $this->tries );
 			//if the file larger than 400kb, we will save immediatly to prevent stuck
-			if ( filesize( $file ) >= apply_filters( 'wdScanPreventStuckSize', 400000 ) ) {
+			if ( filesize( $file ) >= apply_filters( 'wdScanPreventStuckSize', 30000 ) ) {
 				$cache = WP_Helper::getCache();
 				$cache->set( Content_Scan::FILES_TRIED, $this->tries );
 			}
@@ -109,19 +135,16 @@ class Content_Scan extends Behavior {
 		$tokenizer = new \WP_Defender\Vendor\PHP_CodeSniffer_Tokenizers_PHP();
 		$content   = file_get_contents( $file );
 		//set position to 0
-		$this->content = $content;
-		//file_put_contents( __DIR__ . '/test1', $file . PHP_EOL, FILE_APPEND );
+		$this->content                      = $content;
 		$this->tokens                       = \PHP_CodeSniffer_File::tokenizeString( $content, $tokenizer, PHP_EOL, 0, 'iso-8859-1' );
 		Scan\Component\Token_Utils::$tokens = $this->tokens;
 		$scanError                          = array();
-		//file_put_contents( __DIR__ . '/test', $file . PHP_EOL, FILE_APPEND );
-		//file_put_contents( __DIR__ . '/a/' . pathinfo( $file, PATHINFO_FILENAME ), var_export( $this->tokens, true ) );
 		foreach ( $this->tokens as $i => $token ) {
 			if ( $this->skipTo != null && $i < $this->skipTo ) {
 				continue;
 			}
 			$results = array(
-				'asserts' => $this->checkAssert( $i, $token ),
+				'asserts'        => $this->checkAssert( $i, $token ),
 				'crypto'         => $this->checkCrypto( $i, $token ),
 				'callback '      => $this->checkCallBackFuncs( $i, $token ),
 				'createFunc'     => $this->checkCreateFuncs( $i, $token ),
@@ -142,7 +165,6 @@ class Content_Scan extends Behavior {
 
 		$scanError = array_filter( $scanError );
 		if ( count( $scanError ) ) {
-			//var_dump( $scanError );
 			$item           = new Scan\Model\Result_Item();
 			$item->type     = 'content';
 			$item->raw      = array(
@@ -153,9 +175,7 @@ class Content_Scan extends Behavior {
 			$item->status   = Scan\Model\Result_Item::STATUS_ISSUE;
 			$item->save();
 		} else {
-			//store the checksum for later use
-			$this->oldChecksum[ $checksum ] = $file;
-			$altCache->set( self::CONTENT_CHECKSUM, $this->oldChecksum );
+			//$altCache->set( self::CONTENT_CHECKSUM, $this->oldChecksum );
 		}
 		$content                            = null;
 		$this->tokens                       = null;
@@ -193,6 +213,8 @@ class Content_Scan extends Behavior {
 					'level'  => 'info'
 				);
 			}
+			$pAnalyze = null;
+			unset( $pAnalyze );
 		}
 
 		//prevent false positive
@@ -224,7 +246,8 @@ class Content_Scan extends Behavior {
 					'level'  => 'info'
 				);
 			}
-
+			$pAnalyze = null;
+			unset( $pAnalyze );
 		}
 
 		return $res;
@@ -372,6 +395,8 @@ class Content_Scan extends Behavior {
 					'level'  => 'info'
 				);
 			}
+			$pAnalyze = null;
+			unset( $pAnalyze );
 		}
 
 		return $res;
@@ -412,6 +437,8 @@ class Content_Scan extends Behavior {
 				);
 
 			}
+			$pAnalyze = null;
+			unset( $pAnalyze );
 		}
 
 		return $res;
@@ -444,7 +471,8 @@ class Content_Scan extends Behavior {
 					'level'  => 'info'
 				);
 			}
-
+			$pAnalyze = null;
+			unset( $pAnalyze );
 		}
 
 		return $res;
@@ -774,6 +802,7 @@ class Content_Scan extends Behavior {
 	 */
 	private function getPatterns( $key ) {
 		$pattern = $this->patterns;
+
 		return isset( $pattern[ $key ] ) ? $pattern[ $key ] : false;
 	}
 
@@ -792,11 +821,21 @@ class Content_Scan extends Behavior {
 	private function loadDependency() {
 		$ds         = DIRECTORY_SEPARATOR;
 		$vendorPath = wp_defender()->getPluginPath() . 'vendor' . $ds . 'php_codesniffer' . $ds . 'CodeSniffer';
-		include_once $vendorPath . $ds . 'Exception.php';
-		include_once $vendorPath . $ds . 'Tokens.php';
-		include_once $vendorPath . $ds . 'File.php';
-		include_once $vendorPath . $ds . 'Tokenizers' . $ds . 'Comment.php';
-		include_once $vendorPath . $ds . 'Tokenizers' . $ds . 'PHP.php';
+		if ( ! class_exists( 'PHP_CodeSniffer_Exception' ) ) {
+			require_once $vendorPath . $ds . 'Exception.php';
+		}
+		if ( ! class_exists( 'PHP_CodeSniffer_Tokens' ) ) {
+			require_once $vendorPath . $ds . 'Tokens.php';
+		}
+		if ( ! class_exists( 'PHP_CodeSniffer_File' ) ) {
+			require_once $vendorPath . $ds . 'File.php';
+		}
+		if ( ! class_exists( 'PHP_CodeSniffer_Tokenizers_Comment' ) ) {
+			require_once $vendorPath . $ds . 'Tokenizers' . $ds . 'Comment.php';
+		}
+		if ( ! class_exists( 'WP_Defender\Vendor\PHP_CodeSniffer_Tokenizers_PHP' ) ) {
+			require_once $vendorPath . $ds . 'Tokenizers' . $ds . 'PHP.php';
+		}
 	}
 
 	/**

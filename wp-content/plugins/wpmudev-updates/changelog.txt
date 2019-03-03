@@ -5,12 +5,16 @@ Change Log:
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
 
+4.6.1 - 02/26/2019 - Aaron, Hendrawan
+----------------------------------------------------------------------
+- Fix: Automate WP core update from 5.0.x to 5.1+
+
 4.6 - 09/24/2018 - Aaron, Leighton, Hendrawan
 ----------------------------------------------------------------------
 - Add: new whitelabeled analytics service!
 - Add: new white-label WPMU DEV plugins settings
 - Improvement: Only redirect to login when activating the Dashboard plugin itself
-- improvement: Accessibility for login screen
+- Improvement: Accessibility for login screen
 
 4.5.2 - 04/26/2018 - Aaron
 ----------------------------------------------------------------------
@@ -407,7 +411,7 @@ Enables the brand new "Update All" function in Hub! Also includes several small 
 3.1.2 - 6/23/2012
 ----------------------------------------------------------------------
 - Added filter logic to convert images and JS to use https when admin area is using ssl.
-- Modify permissions logic for admin menus. This should work correctly when the site has blocked install/update perms on plugins and themes. Like when setting DISALLOW_FILE_MODES in wp-config.php the Plugins and Themes sections are not displayed to the user. 
+- Modify permissions logic for admin menus. This should work correctly when the site has blocked install/update perms on plugins and themes. Like when setting DISALLOW_FILE_MODES in wp-config.php the Plugins and Themes sections are not displayed to the user.
 - Improve handling of reset API keys
 - Fix permissions bug for some foreign language WP distributions
 
@@ -500,4 +504,4 @@ Added option to disable admin notices.
 Initial Release.
 
 
-87274-1550007040-au
+87274-1551633125-au

@@ -329,7 +329,7 @@ function ct_validate_ccf_submission($value, $field_id, $required){
 	$post_info['comment_type'] = 'feedback_custom_contact_forms';
     $post_info['post_url'] = $_SERVER['HTTP_REFERER'];
 	
-	$checkjs = !apbct_js_test('ct_checkjs', $_COOKIE, true)
+	$checkjs = apbct_js_test('ct_checkjs', $_COOKIE, true)
 		? apbct_js_test('ct_checkjs', $_COOKIE, true)
 		: apbct_js_test('ct_checkjs', $_POST, true);
 	
@@ -377,7 +377,7 @@ function ct_woocommerce_wishlist_check($args){
 	$post_info['comment_type'] = 'feedback'; 
     $post_info['post_url'] = $_SERVER['HTTP_REFERER']; 
 	
-	$checkjs = !apbct_js_test('ct_checkjs', $_COOKIE, true)
+	$checkjs = apbct_js_test('ct_checkjs', $_COOKIE, true)
 		? apbct_js_test('ct_checkjs', $_COOKIE, true)
 		: apbct_js_test('ct_checkjs', $_POST, true);
 		
@@ -527,7 +527,7 @@ function apbct_integration__buddyPres__private_msg_check( $bp_message_obj){
 				'comment_type' => 'buddypress_comment',
 				'post_url'     => isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null,
 			),
-			'checkjs'         => !apbct_js_test('ct_checkjs', $_COOKIE, true)
+			'checkjs' => apbct_js_test('ct_checkjs', $_COOKIE, true)
 				? apbct_js_test('ct_checkjs', $_COOKIE, true)
 				: apbct_js_test('ct_checkjs', $_POST, true),
 			'sender_info'     => array('sender_url' => null),
@@ -564,7 +564,7 @@ function ct_pirate_forms_check(){
     if($subject != '')
 		$message = array_merge(array('subject' => $subject), $message);
 	
-	$post_info['comment_type'] = 'feedback_pirate_contact_form'; 
+	$post_info['comment_type'] = 'contact_form_wordpress_feedback_pirate';
     $post_info['post_url'] = $_SERVER['HTTP_REFERER']; 
 	
 	//Making a call
@@ -629,13 +629,14 @@ function apbct_hook__wp_footer() {
  * Adds hidden filed to define avaialbility of client's JavaScript
  * @param 	bool $random_key switch on generation random key for every page load 
  */
-function ct_add_hidden_fields($random_key = false, $field_name = 'ct_checkjs', $return_string = false, $cookie_check = false, $no_print = false) {
+function ct_add_hidden_fields($random_key = false, $field_name = 'ct_checkjs', $return_string = false, $cookie_check = false, $no_print = false, $ajax = true) {
 		
     global $ct_checkjs_def, $apbct;
 	
     $ct_checkjs_key = ct_get_checkjs_value($random_key); 
     $field_id_hash = md5(rand(0, 1000));
     
+	// Using only cookies
     if ($cookie_check && $apbct->settings['set_cookies'] == 1) {
 		
 		$html =	"<script type='text/javascript'>
@@ -644,9 +645,28 @@ function ct_add_hidden_fields($random_key = false, $field_name = 'ct_checkjs', $
 			}
 			ctSetCookie('{$field_name}', '{$ct_checkjs_key}', '{$ct_checkjs_def}');
 		</script>";
+	
+	// Using AJAX to get key
+    }elseif($apbct->settings['use_ajax'] && $ajax){
 		
-    } else {
+		// Fix only for wp_footer -> apbct_hook__wp_head__set_cookie__ct_checkjs()
+		if($no_print)
+			return;
 		
+        $ct_input_challenge = sprintf("'%s'", $ct_checkjs_key);
+    	$field_id = $field_name . '_' . $field_id_hash;
+		$html = "<input type='hidden' id='{$field_id}' name='{$field_name}' value='{$ct_checkjs_def}' />
+		<script type='text/javascript'>
+			setTimeout(function(){
+				apbct_sendAJAXRequest(
+					{action: 'apbct_js_keys__get', random_key: $random_key},
+					{callback: apbct_js_keys__set_input_value, input_name: '{$field_id}'}
+				);
+			}, 1000);
+		</script>";
+	
+	// Set KEY from backend
+    }else{
 		// Fix only for wp_footer -> apbct_hook__wp_head__set_cookie__ct_checkjs()
 		if($no_print)
 			return;
@@ -663,7 +683,7 @@ function ct_add_hidden_fields($random_key = false, $field_name = 'ct_checkjs', $
 				}
 			}, 1000);
 		</script>";
-    };
+	}
 
     // Simplify JS code and Fixing issue with wpautop()
     $html = str_replace(array("\n","\r","\t"),'', $html);
@@ -759,7 +779,7 @@ function ct_frm_validate_entry ($errors, $values) {
 	} unset($value);
 	$message = array_flip($message);
 	
-    $checkjs = !apbct_js_test('ct_checkjs', $_COOKIE, true)
+    $checkjs = apbct_js_test('ct_checkjs', $_COOKIE, true)
 		? apbct_js_test('ct_checkjs', $_COOKIE, true)
 		: apbct_js_test('ct_checkjs', $_POST, true);
     
@@ -768,7 +788,7 @@ function ct_frm_validate_entry ($errors, $values) {
 			'message'         => $message,
 			'sender_email'    => $sender_email,
 			'sender_nickname' => $sender_nickname,
-			'post_info'       => array('comment_type' => 'contact_form_formidable'),
+			'post_info'       => array('comment_type' => 'contact_form_wordpress_formidable'),
 			'checkjs'         => $checkjs
 		)
 	);
@@ -800,11 +820,9 @@ function ct_bbp_get_topic($topic){
  * @return  mixed[] $comment Comment string 
  */
 function ct_bbp_new_pre_content ($comment) {
+	
     global $apbct, $current_user, $ct_bbp_topic;
     
-    
-    
-
     if ( !$apbct->settings['comments_test']) {
         return $comment;
     }
@@ -814,7 +832,7 @@ function ct_bbp_new_pre_content ($comment) {
 		in_array("administrator", $current_user->roles))
         return $comment;
     
-	$checkjs = !apbct_js_test('ct_checkjs', $_COOKIE, true)
+	$checkjs = apbct_js_test('ct_checkjs', $_COOKIE, true)
 		? apbct_js_test('ct_checkjs', $_COOKIE, true)
 		: apbct_js_test('ct_checkjs', $_POST, true);
 	
@@ -917,7 +935,7 @@ function ct_preprocess_comment($comment) {
 	// Comment type
 	$post_info['comment_type'] = empty($post_info['comment_type']) ? 'general_comment' : $post_info['comment_type'];
 	
-	$checkjs = !apbct_js_test('ct_checkjs', $_COOKIE, true)
+	$checkjs = apbct_js_test('ct_checkjs', $_COOKIE, true)
 		? apbct_js_test('ct_checkjs', $_COOKIE, true)
 		: apbct_js_test('ct_checkjs', $_POST, true);
 
@@ -1246,16 +1264,14 @@ function ct_plugin_active($plugin_name){
  * @return null
  */
 function ct_register_form() {
-    global $ct_checkjs_register_form, $apbct;
     
+	global $ct_checkjs_register_form, $apbct;
     
-    
-
     if ($apbct->settings['registrations_test'] == 0) {
         return false;
     }
 
-    ct_add_hidden_fields(true, $ct_checkjs_register_form, false);
+    ct_add_hidden_fields(true, $ct_checkjs_register_form, false, false, false, false);
 	
     return null;
 }
@@ -1371,17 +1387,16 @@ function ct_test_message($nickname, $email, $ip, $text){
  * @return array with checking result;
  */
 function ct_test_registration($nickname, $email, $ip){
+	
     global $ct_checkjs_register_form, $apbct;
     
-    
-    
-    $checkjs = apbct_js_test($ct_checkjs_register_form, $_POST, true);
-    $sender_info['post_checkjs_passed'] = $checkjs;
-	// This hack can be helpfull when plugin uses with untested themes&signups plugins.
-    if (!$checkjs) {
-        $checkjs = apbct_js_test('ct_checkjs', $_COOKIE, true);
-        $sender_info['cookie_checkjs_passed'] = $checkjs;
-    }
+    if(apbct_js_test($ct_checkjs_register_form, $_POST, true)){
+		$checkjs =  apbct_js_test($ct_checkjs_register_form, $_POST, true);
+		$sender_info['post_checkjs_passed'] = $checkjs;
+	}else{
+		$checkjs =  $checkjs = apbct_js_test('ct_checkjs', $_COOKIE, true);
+        $sender_info['cookie_checkjs_passed'] = $checkjs;		
+	}
 	
 	//Making a call
 	$base_call_result = apbct_base_call(
@@ -1537,8 +1552,8 @@ function apbct_registration__Wordpress__changeMailNotification($wp_new_user_noti
 	$wp_new_user_notification_email_admin['message'] = PHP_EOL
 		.__('CleanTalk AntiSpam: This registration is spam.', 'cleantalk')
 		."\n" . __('CleanTalk\'s anti-spam database:', 'cleantalk')
-		."\n" . 'IP: '    . 'https://cleantalk.org/blacklists/' . $apbct->sender_ip    . '?utm_source=newsletter&utm_medium=email&utm_campaign=wp_spam_registration_passed' 
-		."\n" . 'Email: ' . 'https://cleantalk.org/blacklists/' . $apbct->sender_email . '?utm_source=newsletter&utm_medium=email&utm_campaign=wp_spam_registration_passed'
+		."\n" . 'IP: '    . $apbct->sender_ip
+		."\n" . 'Email: ' . $apbct->sender_email
 		.PHP_EOL . PHP_EOL .
 			__('Activate protection in your Anti-Spam Dashboard: ', 'clentalk')
 			.'https://cleantalk.org/my/?cp_mode=antispam&utm_source=newsletter&utm_medium=email&utm_campaign=wp_spam_registration_passed'
@@ -1655,7 +1670,7 @@ function ct_contact_form_is_spam($form) {
 			'message'         => $message,
 			'sender_email'    => $sender_email,
 			'sender_nickname' => $sender_nickname,
-			'post_info'       => array('comment_type' => 'contact_form_grunion'),
+			'post_info'       => array('comment_type' => 'contact_form_wordpress_grunion'),
 			'sender_info'     => array('sender_url' => @$form['comment_author_url']),
 			'checkjs'         => apbct_js_test($js_field_name, $_POST, true),
 		)
@@ -1690,7 +1705,7 @@ function ct_contact_form_is_spam_jetpack($is_spam,$form) {
 			'message'         => isset($form['comment_content'])      ? $form['comment_content']       : '',
 			'sender_email'    => isset($form['comment_author_email']) ? $form['comment_author_email']  : null,
 			'sender_nickname' => isset($form['comment_author'])       ? $form['comment_author']        : null,
-			'post_info'       => array('comment_type' => 'contact_form_grunion'),
+			'post_info'       => array('comment_type' => 'contact_form_wordpress_grunion'),
 			'sender_info'     => array('sender_url' => @$form['comment_author_url']),
 		)
 	);
@@ -1768,7 +1783,7 @@ function apbct_form__contactForm7__testSpam($param) {
 			'message'         => $message,
 			'sender_email'    => $sender_email,
 			'sender_nickname' => $sender_nickname,
-			'post_info'       => array('comment_type' => 'contact_form_cf7'),
+			'post_info'       => array('comment_type' => 'contact_form_wordpress_cf7'),
 			'checkjs'         => $checkjs,
 		)
 	);
@@ -1782,7 +1797,6 @@ function apbct_form__contactForm7__testSpam($param) {
 		$apbct->sender_ip    = CleantalkHelper::ip_get(array('real'));
 		add_filter('wpcf7_mail_components', 'apbct_form__contactForm7__changeMailNotification');
 	}
-	
 		
     if ($ct_result->allow == 0) {
 	
@@ -1823,7 +1837,7 @@ function apbct_form__contactForm7__changeMailNotification($component){
 	global $apbct;
 	
 	$component['body'] = 
-		__('CleanTalk AntiSpam: This message is spam. You could check it at cleantalk.org.', 'cleantalk')
+		__('CleanTalk AntiSpam: This message is spam.', 'cleantalk')
 		.PHP_EOL . __('CleanTalk\'s anti-spam database:', 'cleantalk')
 		.PHP_EOL . 'IP: '    . $apbct->sender_ip 
 		.PHP_EOL . 'Email: ' . $apbct->sender_email
@@ -1878,7 +1892,7 @@ function apbct_form__ninjaForms__testSpam() {
 			'message'         => $message,
 			'sender_email'    => $sender_email,
 			'sender_nickname' => $sender_nickname,
-			'post_info'       => array('comment_type' => 'contact_form_ninja_froms'),
+			'post_info'       => array('comment_type' => 'contact_form_wordpress_ninja_froms'),
 			'checkjs'         => $checkjs,
 		)
 	);
@@ -1923,8 +1937,8 @@ function apbct_form__ninjaForms__changeMailNotification($message, $data, $action
 		.PHP_EOL
 		.__('CleanTalk AntiSpam: This message is spam.', 'cleantalk')
 		.PHP_EOL . __('CleanTalk\'s anti-spam database:', 'cleantalk')
-		.PHP_EOL . 'IP: '    . 'https://cleantalk.org/blacklists/' . $apbct->sender_ip    . '?utm_source=newsletter&utm_medium=email&utm_campaign=ninjaform_spam_passed' 
-		.PHP_EOL . 'Email: ' . 'https://cleantalk.org/blacklists/' . $apbct->sender_email . '?utm_source=newsletter&utm_medium=email&utm_campaign=ninjaform_spam_passed'
+		.PHP_EOL . 'IP: '    . $apbct->sender_ip
+		.PHP_EOL . 'Email: ' . $apbct->sender_email
 		.PHP_EOL .
 			__('Activate protection in your Anti-Spam Dashboard: ', 'clentalk').
 			'https://cleantalk.org/my/?cp_mode=antispam&utm_source=newsletter&utm_medium=email&utm_campaign=ninjaform_activate_antispam'.$apbct->user_token
@@ -2026,7 +2040,7 @@ function apbct_form__WPForms__testSpam() {
 			'message'         => $message,
 			'sender_email'    => $sender_email,
 			'sender_nickname' => $sender_nickname,
-				'post_info'       => array('comment_type' => 'contact_form_wp_forms'),
+			'post_info'       => array('comment_type' => 'contact_form_wordpress_wp_forms'),
 			'checkjs'         => $checkjs,
 		)
 	);
@@ -2121,7 +2135,7 @@ function ct_si_contact_form_validate($form_errors = array(), $form_id_num = 0) {
 			'message'         => $message,
 			'sender_email'    => $sender_email,
 			'sender_nickname' => $sender_nickname,
-			'post_info'       => array('comment_type' => 'contact_form_fscf'),
+			'post_info'       => array('comment_type' => 'contact_form_wordpress_fscf'),
 			'checkjs'         => apbct_js_test('ct_checkjs', $_POST, true),
 		)
 	);
@@ -2197,7 +2211,7 @@ function ct_check_wplp(){
 			array(
                 'message'      => $message,
                 'sender_email' => $sender_email,
-                'post_info'    => array('comment_type' => 'contact_form_wplp'),
+                'post_info'    => array('comment_type' => 'contact_form_wordpress_wplp'),
 			)
 		);
 		
@@ -2290,7 +2304,7 @@ function apbct_form__gravityForms__testSpam($is_spam, $form, $entry) {
 			'message'         => $message,
 			'sender_email'    => $sender_email,
 			'sender_nickname' => $sender_nickname,
-			'post_info'       => array('comment_type' => 'contact_form_gravity_forms'),
+			'post_info'       => array('comment_type' => 'contact_form_wordpress_gravity_forms'),
 			'checkjs'         => $checkjs,
 		)
 	);
@@ -2387,11 +2401,12 @@ function ct_contact_form_validate() {
         isset($_POST['comment_post_ID']) || // The comment form 
         isset($_GET['for']) ||
 		(isset($_POST['log'], $_POST['pwd'])) || //WooCommerce Sensei login form fix
+		(isset($_POST['wc_reset_password'], $_POST['_wpnonce'], $_POST['_wp_http_referer'])) || // WooCommerce recovery password form
+		(isset($_POST['woocommerce-login-nonce'], $_POST['login'], $_POST['password'], $_POST['_wp_http_referer'])) || // WooCommerce login form
+		(isset($_POST['wc-api']) && strtolower($_POST['wc-api']) == 'wc_gateway_systempay') || // Woo Systempay payment plugin
         (isset($_POST['_wpcf7'], $_POST['_wpcf7_version'], $_POST['_wpcf7_locale'])) || //CF7 fix) 
 		(isset($_POST['hash'], $_POST['device_unique_id'], $_POST['device_name'])) ||//Mobile Assistant Connector fix
 		isset($_POST['gform_submit']) || //Gravity form
-		(isset($_POST['wc_reset_password'], $_POST['_wpnonce'], $_POST['_wp_http_referer'])) || //WooCommerce recovery password form
-		(isset($_POST['woocommerce-login-nonce'], $_POST['login'], $_POST['password'], $_POST['_wp_http_referer'])) || //WooCommerce login form
 		strpos($_SERVER['REQUEST_URI'], 'wc-ajax=get_refreshed_fragments') !== false ||
 		(isset($_POST['ccf_form']) && intval($_POST['ccf_form']) == 1) ||
 		(isset($_POST['contact_tags']) && strpos($_POST['contact_tags'], 'MBR:') !== false) ||
@@ -2399,7 +2414,8 @@ function ct_contact_form_validate() {
 		(isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'],'my-dashboard/') !== false) || // ticket_id=7885
 		isset($_POST['slm_action'], $_POST['license_key'], $_POST['secret_key'], $_POST['registered_domain']) || // ticket_id=9122
 		(isset($_POST['wpforms']['submit']) && $_POST['wpforms']['submit'] == 'wpforms-submit') || // WPForms
-		(isset($_POST['action']) && $_POST['action'] == 'grunion-contact-form') // JetPack
+		(isset($_POST['action']) && $_POST['action'] == 'grunion-contact-form') || // JetPack
+		(isset($_POST['action']) && $_POST['action'] == 'bbp-update-user') //BBP update user info page
 		) {
         return null;
     }
@@ -2723,12 +2739,17 @@ function ct_enqueue_scripts_public($hook){
 		// Differnt JS params
 		wp_enqueue_script('ct_public',      APBCT_URL_PATH.'/js/apbct-public.js',       array('jquery'), APBCT_VERSION, false /*in header*/);
 		
+		wp_localize_script('ct_public', 'ctPublic', array(
+			'_ajax_nonce' => wp_create_nonce('ct_secret_stuff'),
+			'_ajax_url'   => admin_url('admin-ajax.php'),
+		));
+		
 		// GDPR script
 		if($apbct->settings['gdpr_enabled']){
 			
 			wp_enqueue_script('ct_public_gdpr', APBCT_URL_PATH.'/js/apbct-public--gdpr.js', array('jquery', 'ct_public'), APBCT_VERSION, false /*in header*/);
 		
-			wp_localize_script('ct_public_gdpr', 'ctPublic', array(
+			wp_localize_script('ct_public_gdpr', 'ctPublicGDPR', array(
 				'gdpr_forms' => array(),
 				'gdpr_text'  => $apbct->settings['gdpr_text'] ? $apbct->settings['gdpr_text'] : __('By using this form you agree with the storage and processing of your data by using the Privacy Policy on this website.', 'cleantalk'),
 			));

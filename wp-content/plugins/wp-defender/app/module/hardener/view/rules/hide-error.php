@@ -1,48 +1,84 @@
-<div class="rule closed" id="disable-file-editor">
-    <div class="rule-title" role="link" tabindex="0">
-		<?php if ( $controller->check() == false ): ?>
-            <i class="def-icon icon-warning" aria-hidden="true"></i>
-		<?php else: ?>
-            <i class="def-icon icon-tick" aria-hidden="true"></i>
-		<?php endif; ?>
-		<?php _e( "Hide error reporting", wp_defender()->domain ) ?>
-    </div>
-    <div class="rule-content">
-        <h3><?php _e( "Overview", wp_defender()->domain ) ?></h3>
-        <div class="line end">
-			<?php _e( "In addition to hiding error logs, developers often use the built-in front-end PHP and scripts error debugging feature, which displays code errors on the front-end. This provides hackers yet another way to find loopholes in your site's security.", wp_defender()->domain ) ?>
+<?php
+$checked = $controller->check();
+?>
+<div id="disable-file-editor" class="sui-accordion-item <?php echo $controller->getCssClass() ?>">
+    <div class="sui-accordion-item-header">
+        <div class="sui-accordion-item-title">
+            <i aria-hidden="true" class="<?php echo $checked ? 'sui-icon-check-tick sui-success'
+				: 'sui-icon-warning-alert sui-warning' ?>"></i>
+			<?php _e( "Error Reporting", wp_defender()->domain ) ?>
         </div>
-        <h3>
-			<?php _e( "How to fix", wp_defender()->domain ) ?>
-        </h3>
-        <div class="well">
-			<?php if ( $controller->check() ): ?>
-                <p class=""><?php _e( "All PHP errors are hidden.", wp_defender()->domain ) ?></p>
-			<?php else: ?>
-				<?php
-				//if WP debug == true, we will display a form to turn it off
-				if ( WP_DEBUG == true && ( ! defined( 'WP_DEBUG_DISPLAY' ) || WP_DEBUG_DISPLAY != false ) ): ?>
-                    <div class="line">
-                        <p><?php _e( "We will add the necessary code to prevent these errors displaying.", wp_defender()->domain ) ?></p>
+        <div class="sui-accordion-col-4">
+            <button class="sui-button-icon sui-accordion-open-indicator" aria-label="Open item">
+                <i class="sui-icon-chevron-down" aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
+    <div class="sui-accordion-item-body">
+        <div class="sui-box">
+            <div class="sui-box-body">
+                <strong>
+					<?php _e( "Overview", wp_defender()->domain ) ?>
+                </strong>
+                <p>
+					<?php _e( "Developers often use the built-in PHP and scripts error debugging feature, which displays code errors on the frontend of your website. It’s useful for active development, but on live sites provides hackers yet another way to find loopholes in your site's security.", wp_defender()->domain ) ?>
+                </p>
+                <strong>
+					<?php _e( "Status", wp_defender()->domain ) ?>
+                </strong>
+				<?php if ( $checked ): ?>
+                    <div class="sui-notice sui-notice-success">
+                        <p>
+							<?php _e( "You've disabled all error reporting, Houston will never report a problem.", wp_defender()->domain ) ?>
+                        </p>
                     </div>
-                    <form method="post" class="hardener-frm rule-process">
-						<?php $controller->createNonceField(); ?>
-                        <input type="hidden" name="action" value="processHardener"/>
-                        <input type="hidden" name="slug" value="<?php echo $controller::$slug ?>"/>
-                        <button class="button float-r"
-                                type="submit"><?php _e( "Disable error debugging", wp_defender()->domain ) ?></button>
-                    </form>
-					<?php $controller->showIgnoreForm() ?>
-					<?php
-				//php debug is turn off, however the error still dsplay, need to show user about this
-				else: ?>
-                    <p class="line">
-						<?php _e( "We attempted to disable the display_errors setting to prevent code errors displaying but it’s being overridden by your server config. Please contact your hosting provider and ask them to set display_errors to false.", wp_defender()->domain ) ?>
+				<?php else: ?>
+					<?php if ( WP_DEBUG == false || ( WP_DEBUG == true && WP_DEBUG_DISPLAY == false ) ): ?>
+                        <div class="sui-notice sui-notice-warning">
+                            <p>
+								<?php _e( "We attempted to disable the display_errors setting to prevent code errors displaying but it’s being overridden by your server config. Please contact your hosting provider and ask them to set display_errors to false.", wp_defender()->domain ) ?>
+                            </p>
+                        </div>
+					<?php else: ?>
+                        <div class="sui-notice sui-notice-warning">
+                            <p>
+								<?php _e( "Error debugging is currently allowed.", wp_defender()->domain ) ?>
+                            </p>
+                        </div>
+					<?php endif; ?>
+                    <p>
+						<?php _e( "While it may not be in use, we haven’t found any code stopping debugging information being output. It’s best to remove all doubt and disable error reporting completely.", wp_defender()->domain ) ?>
                     </p>
-					<?php $controller->showIgnoreForm() ?>
+                    <strong>
+						<?php _e( "How to fix", wp_defender()->domain ) ?>
+                    </strong>
+                    <p>
+						<?php _e( "We can automatically disable all error reporting for you below. Alternately, you can ignore this tweak if you don’t require it. Either way, you can easily revert these actions at any time.", wp_defender()->domain ) ?>
+                    </p>
 				<?php endif; ?>
+            </div>
+			<?php if ( WP_DEBUG == true && ( ! defined( 'WP_DEBUG_DISPLAY' ) || WP_DEBUG_DISPLAY != false ) ): ?>
+                <div class="sui-box-footer">
+                    <div class="sui-actions-left">
+						<?php $controller->showIgnoreForm() ?>
+                    </div>
+                    <div class="sui-actions-right">
+                        <form method="post" class="hardener-frm rule-process hardener-frm-process-xml-rpc">
+							<?php $controller->createNonceField(); ?>
+                            <input type="hidden" name="action" value="processHardener"/>
+                            <input type="hidden" name="slug" value="<?php echo $controller::$slug ?>"/>
+                            <button class="sui-button sui-button-blue" type="submit">
+								<?php _e( "Disable error debugging", wp_defender()->domain ) ?></button>
+                        </form>
+                    </div>
+                </div>
+			<?php else: ?>
+                <div class="sui-box-footer">
+                    <div class="sui-actions-left">
+						<?php $controller->showIgnoreForm() ?>
+                    </div>
+                </div>
 			<?php endif; ?>
         </div>
-        <div class="clear"></div>
     </div>
 </div>

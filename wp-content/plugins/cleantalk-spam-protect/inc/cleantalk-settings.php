@@ -115,11 +115,11 @@ function apbct_settings__add_page() {
 			'default_params' => array(),
 			'description'    => '',
 			'html_before'    => '<hr><br>'
-				.($apbct->api_key ? '<span id="ct_adv_showhide">'
+				.'<span id="ct_adv_showhide">'
 					.'<a href="#" class="apbct_color--gray" onclick="event.preventDefault(); apbct_show_hide_elem(\'#apbct_settings__davanced_settings\');">'
 						.__('Advanced settings', 'cleantalk')
 					.'</a>'
-				.'</span>' : '')
+				.'</span>'
 				.'<div id="apbct_settings__davanced_settings" style="display: none;">',
 			'html_after'     => '',
 			'fields'         => array(
@@ -278,7 +278,7 @@ function apbct_settings__add_page() {
 				'gdpr_enabled' => array(
 					'type'        => 'checkbox',
 					'title'       => __('Allow to add GDPR notice via shortcode', 'cleantalk'),
-					'description' => __('Adds small checkbox under the form. To add it you should you use shortcode on the page with a form: [cleantalk_gdpr_form id="FORM_ID"]', 'cleantalk'),
+					'description' => __(' Adds small checkbox under your website form. To add it you should use the shortcode on the form\'s page: [cleantalk_gdpr_form id="FORM_ID"]', 'cleantalk'),
 					'childrens'   => array('gdpr_text'),
 				),
 				'gdpr_text' => array(
@@ -345,7 +345,7 @@ function apbct_settings_page() {
 			apbct_settings__error__output();
 			
 			// Top info
-			if(!$apbct->white_label && $apbct->api_key){
+			if(!$apbct->white_label){
 				echo '<div style="float: right; padding: 15px 15px 5px 15px; font-size: 13px; position: relative; top: -55px; background: #f1f1f1;">';
 
 					echo __('CleanTalk\'s tech support:', 'cleantalk')
@@ -581,8 +581,7 @@ function apbct_settings__field__state(){
 			.__('Contact forms', 'cleantalk');
 		echo '<img class="apbct_status_icon" src="'.($apbct->settings['general_contact_forms_test']==1 || $apbct->moderate_ip ? $img : $img_no).'"/>'
 			.__('Custom contact forms', 'cleantalk');
-		if($apbct->api_key)
-			echo '<img class="apbct_status_icon" src="'.($apbct->data['moderate'] == 1                      || $apbct->moderate_ip ? $img : $img_no).'"/>'
+		echo '<img class="apbct_status_icon" src="'.($apbct->data['moderate'] == 1                      || $apbct->moderate_ip ? $img : $img_no).'"/>'
 			.'<a style="color: black" href="https://blog.cleantalk.org/real-time-email-address-existence-validation/">'.__('Validate email for existence', 'cleantalk').'</a>';
 		
 		// SFW + current network count
@@ -946,7 +945,7 @@ function apbct_settings__validate($settings) {
 		// Server error when notice_validate_key
 		}else{
 			$apbct->data['key_is_ok'] = false;
-			$apbct->save('data');
+			$apbct->saveData();
 			$apbct->error_add('key_invalid', $result);
 		}
 	

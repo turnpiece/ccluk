@@ -1,5 +1,4 @@
 <?PHP
-
 /**
  * SWP_Option_Icons: The class used to display available netowrks on the options
  * page.
@@ -39,51 +38,51 @@ class SWP_Option_Icons extends SWP_Option {
 	 * @return void
 	 *
 	 */
-    public function __construct( $name, $key ) {
-        global $swp_user_options;
+	public function __construct( $name, $key ) {
+		global $swp_user_options;
 
-        parent::__construct( $name, $key );
-        add_filter( 'swp_options_page_defaults', array( $this , 'register_default' ) );
-        add_filter( 'swp_options_page_values', array( $this, 'register_available_values' ) );
+		parent::__construct( $name, $key );
+		add_filter( 'swp_options_page_defaults', array( $this , 'register_default' ) );
+		add_filter( 'swp_options_page_values', array( $this, 'register_available_values' ) );
 
-        $this->user_options = $swp_user_options;
-    }
-
-
-    public function register_default( $defaults = array() ) {
-        if ( !array_key_exists( 'order_of_icons', $defaults ) ) :
-            $defaults['order_of_icons'] = array(
-    			'google_plus' => 'google_plus',
-    			'twitter'     => 'twitter',
-    			'facebook'    => 'facebook',
-    			'linkedin'    => 'linkedin',
-    			'pinterest'   => 'pinterest'
-    		);
-        endif;
-
-        return $defaults;
-    }
+		$this->user_options = $swp_user_options;
+	}
 
 
-    public function register_available_values( $values ) {
-        global $swp_social_networks;
-        $networks = array();
+	public function register_default( $defaults = array() ) {
+		if ( !array_key_exists( 'order_of_icons', $defaults ) ) :
+			$defaults['order_of_icons'] = array(
+				'google_plus' => 'google_plus',
+				'twitter'     => 'twitter',
+				'facebook'    => 'facebook',
+				'linkedin'    => 'linkedin',
+				'pinterest'   => 'pinterest'
+			);
+		endif;
 
-        /* order_of_icons is an array of $network_key => $network_key
-         * So we need to create an array in that form.
-         * Yes, it is redundant, but that's how it is.
-         */
-        foreach( $swp_social_networks as $key => $object ) {
-            $networks[$key] = $key;
-        }
+		return $defaults;
+	}
 
-        $values['order_of_icons'] = array(
-            'type' => 'none',
-            'values'   => $networks
-        );
 
-        return $values;
-    }
+	public function register_available_values( $values ) {
+		global $swp_social_networks;
+		$networks = array();
+
+		/* order_of_icons is an array of $network_key => $network_key
+		 * So we need to create an array in that form.
+		 * Yes, it is redundant, but that's how it is.
+		 */
+		foreach( $swp_social_networks as $key => $object ) {
+			$networks[$key] = $key;
+		}
+
+		$values['order_of_icons'] = array(
+			'type' => 'none',
+			'values'   => $networks
+		);
+
+		return $values;
+	}
 
 
 	/**
@@ -94,10 +93,10 @@ class SWP_Option_Icons extends SWP_Option {
 	 * @return object $this Allows for method chaining.
 	 *
 	 */
-    public function do_active_icons() {
-        $this->is_active_icons = true;
-        return $this;
-    }
+	public function do_active_icons() {
+		$this->is_active_icons = true;
+		return $this;
+	}
 
 
 	/**
@@ -108,125 +107,96 @@ class SWP_Option_Icons extends SWP_Option {
 	 * @return object $this Allows for method chaining.
 	 *
 	 */
-    public function do_inactive_icons() {
-        $this->is_active_icons = false;
-        return $this;
-    }
+	public function do_inactive_icons() {
+		$this->is_active_icons = false;
+		return $this;
+	}
 
 
-    /**
-    * The Active buttons UI in the Display tab.
-    *
-    * @since  3.0.0 | 02 MAR 2018 | Created
-    * @param array $icons The array of currently selected icons.
-    * @return object $this The calling instance, for method chaining.
-    *
-    */
-    public function render_active_icons() {
-
-        $all_networks = $this->get_all_networks();
+	/**
+	* The Active buttons UI in the Display tab.
+	*
+	* @since  3.0.0 | 02 MAR 2018 | Created
+	* @param array $icons The array of currently selected icons.
+	* @return object $this The calling instance, for method chaining.
+	*
+	*/
+	public function render_active_icons() {
+		$all_networks = $this->get_all_networks();
 		$user_icons = SWP_Utility::get_option( 'order_of_icons' );
 
-        $html = '<div class="sw-grid sw-col-300">';
-            $html .= '<h3 class="sw-buttons-toggle">' . __( 'Active' , 'social-warfare' ) . '</h3>';
-        $html .= '</div>';
+		$html = '<div class="sw-grid sw-col-300">';
+			$html .= '<h3 class="sw-buttons-toggle">' . __( 'Active' , 'social-warfare' ) . '</h3>';
+		$html .= '</div>';
 
-        $html .= '<div class="sw-grid sw-col-620 sw-fit">';
-            $html .= '<div class="sw-active sw-buttons-sort">';
+		$html .= '<div class="sw-grid sw-col-620 sw-fit">';
+			$html .= '<div class="sw-active sw-buttons-sort">';
 
-            if ( count($user_icons) > 0 ):
-    			foreach( $user_icons as $network_key) {
+			foreach( $user_icons as $network_key ) {
+				// The user no longer has the addon with this $network_key.
+				if ( !array_key_exists( $network_key, $all_networks ) ) {
+					continue;
+				}
 
-                    //* On updates, this is being passed as an object for some reason.
-                    if ( is_object( $network_key ) ) :
+				$network = $all_networks[$network_key];
 
-                        $network_key = $network_key->key;
+				if ( false == $network->active ) {
+					continue;
+				}
 
-                    //* This should not ever be reached. But if it does, fail gracefully.
-                    elseif ( !is_string( $network_key) ) :
-                        return;
-                    endif;
+				$html .= $this->render_icon_HTML( $all_networks[$network_key] );
+			}
 
-                    if ( array_key_exists( $network_key, $all_networks ) && isset( $all_networks[$network_key]) ) :
-                        $network = $all_networks[$network_key];
+			$html .= '</div>';
+		$html .= '</div>';
+		$html .= '<div class="sw-clearfix"></div>';
 
-                        $html .= $this->render_icon_HTML( $network );
-                    endif;
-                }
-            endif;
+		$this->html = $html;
 
-            $html .= '</div>';
-        $html .= '</div>';
-        $html .= '<div class="sw-clearfix"></div>';
-
-        $this->html = $html;
-
-        return $this;
-    }
+		return $this;
+	}
 
 
-    /**
-    * The Inactive buttons UI in the Display tab.
-    *
-    * @since  3.0.0 | 02 MAR 2018 | Created
-    * @param array $icons The array of currently selected icons.
-    * @return object $this The calling instance, for method chaining.
-    *
-    */
-    public function render_inactive_icons() {
-        $all_networks = $this->get_all_networks();
+	/**
+	* The Inactive buttons UI in the Display tab.
+	*
+	* @since  3.0.0 | 02 MAR 2018 | Created
+	* @param array $icons The array of currently selected icons.
+	* @return object $this The calling instance, for method chaining.
+	*
+	*/
+	public function render_inactive_icons() {
+		$all_networks = $this->get_all_networks();
 		$user_icons = SWP_Utility::get_option( 'order_of_icons' );
+		$network_keys = array();
 
-        $first_all = reset( $all_networks );
+		foreach( $all_networks as $object ) {
+			$network_keys[] = $object->key;
+		}
 
-        if ( gettype( $first_all ) === 'object' ) :
+		$inactive_icons = array_diff( $network_keys, $user_icons );
 
-            //* Get the keys first, then diff the array.
-            $keys = array_keys( $all_networks );
+		$html = '<div class="sw-grid sw-col-300">';
+			$html .=  '<h3 class="sw-buttons-toggle">' . __( 'Inactive' , 'social-warfare' ) . '</h3>';
+		$html .=  '</div>';
 
-            $first_user = reset( $user_icons );
+		$html .=  '<div class="sw-grid sw-col-620 sw-fit">';
+			$html .=  '<div class="sw-inactive sw-buttons-sort">';
 
-            if ( gettype( $first_user ) === 'object' ) :
-                $temp = array();
+			foreach( $inactive_icons as $network_key) {
+				$network = $all_networks[$network_key];
 
-                foreach( $user_icons as $object ) {
-                    $temp[] = $object->key;
-                }
 
-                $user_icons = $temp;
+				$html .= $this->render_icon_HTML( $network );
+			}
 
-            endif;
+			$html .= '</div>';
+		$html .= '</div>';
 
-            $inactive_icons = array_diff( $keys, $user_icons );
+		$this->html = $html;
 
-        elseif ( array_key_exists( 0, $all_networks) ) :
-
-            //* If $all_networks is numerically indexed, just diff the array.
-            $inactive_icons = array_diff( $all_networks, $user_icons );
-
-        endif;
-
-        $html = '<div class="sw-grid sw-col-300">';
-            $html .=  '<h3 class="sw-buttons-toggle">' . __( 'Inactive' , 'social-warfare' ) . '</h3>';
-        $html .=  '</div>';
-
-        $html .=  '<div class="sw-grid sw-col-620 sw-fit">';
-            $html .=  '<div class="sw-inactive sw-buttons-sort">';
-            if ( count( $inactive_icons) > 0 ) :
-                foreach( $inactive_icons as $network_key) {
-                    $network = $all_networks[$network_key];
-
-                    $html .= $this->render_icon_HTML( $network );
-                }
-            endif;
-
-            $html .= '</div>';
-        $html .= '</div>';
-
-        $this->html = $html;
-
-        return $this;
-    }
+		return $this;
+	}
 
 
 	/**
@@ -237,19 +207,18 @@ class SWP_Option_Icons extends SWP_Option {
 	 * @return string          The string of html with the new icon added.
 	 *
 	 */
-    protected function render_icon_HTML( $network ) {
-        $html = '<i class="sw-s sw-' . $network->key . '-icon" ';
-        $html .= ' data-network="' . $network->key . '"';
+	protected function render_icon_HTML( $network ) {
+		$html = '<i class="sw-s sw-' . $network->key . '-icon" ';
+		$html .= ' data-network="' . $network->key . '"';
 
-        if ( !empty($network->premium) ) :
-            $html .= ' premium="'.$network->premium.'"';
-        endif;
+		if ( !empty($network->premium) ) :
+			$html .= ' premium="'.$network->premium.'"';
+		endif;
 
-        $html .= '></i>';
+		$html .= '></i>';
 
-
-        return $html;
-    }
+		return $html;
+	}
 
 
 	/**
@@ -260,14 +229,14 @@ class SWP_Option_Icons extends SWP_Option {
 	 * @return void Rendered html will be stored in local html property.
 	 *
 	 */
-    public function render_HTML() {
-        if ($this->is_active_icons) {
-            $this->render_active_icons();
-        } else {
-            $this->render_inactive_icons();
-        }
+	public function render_HTML() {
+		if ($this->is_active_icons) {
+			$this->render_active_icons();
+		} else {
+			$this->render_inactive_icons();
+		}
 
-        return $this->html;
-    }
+		return $this->html;
+	}
 
 }

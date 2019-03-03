@@ -105,6 +105,7 @@ function apbct_base_call($params = array(), $reg_flag = false){
 	
 	$ct = new Cleantalk();
 
+	$ct->use_bultin_api = $apbct->settings['use_buitin_http_api'] ? true : false;
 	$ct->ssl_on         = $apbct->settings['ssl_on'];
 	$ct->ssl_path       = APBCT_CASERT_PATH;
 	$ct->server_url     = $apbct->settings['server'];
@@ -168,7 +169,7 @@ function apbct_get_sender_info() {
     
 	if (count($_POST) > 0) {
 		foreach ($_POST as $k => $v) {
-			if (preg_match("/^ct_check.+/", $k)) {
+			if (preg_match("/^(ct_check|checkjs).+/", $k)) {
         		$checkjs_data_post = $v; 
 			}
 		}
@@ -238,6 +239,16 @@ function apbct_visibile_fields__process($visible_fields) {
 	}
 	
 	return $visible_fields;
+}
+
+/*
+ * Outputs JS key for AJAX-use only. Stops script.
+ */
+function apbct_js_keys__get__ajax($direct_call = false){
+	if(!$direct_call) check_ajax_referer('ct_secret_stuff');
+	die(json_encode(array(
+		'js_key' => ct_get_checkjs_value((bool)$_POST['random_key'])
+	)));
 }
 
 /**

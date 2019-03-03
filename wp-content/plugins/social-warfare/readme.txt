@@ -3,7 +3,7 @@ Contributors: holas84, dustinwstout, webinator, warfareplugins, nutsandboltsmedi
 Tags: sharing buttons, social media share, floating share buttons, facebook share, google plus share, linkedin share, pin it, pinterest save, mix button, tweet button, twitter share, click to tweet, social sharing buttons, social share, social sharing, social media sharing, wordpress social sharing plugin, social sharing plugin, share buttons, share counts
 Requires at least: 4.5.0
 Tested up to: 5.0
-Stable tag: 3.4.2
+Stable tag: 3.5.1
 License: GNU General Public License v2.0 or later
 
 The most beautiful, responsive, lightning fast social share buttons built to boost shares and drive more traffic without slowing down your site.
@@ -193,6 +193,28 @@ We have a growing archive of <a href="https://warfareplugins.com/support/" rel="
 
 == Changelog ==
 
+= 3.5.1 (27 FEB 2019) =
+* Fixed the total share displaying an incorrect value.
+* Fixed PHP notices about 'undefined variable'.
+* Fixed floating buttons not showing or hiding as expected.
+* Fixed SWP Addon error.
+* Restored Custom Color CSS being applied to the page.
+
+
+= 3.5.0 (26 FEB 2019) =
+* Fixed the side floating buttons not showing on some themes.
+* Fixed 'operand type' notice when making cURL share count request.
+* Fixed the Pinterest description sometimes being too long when pinning.
+* Escaped the Pinterest description before sending to the client.
+* Fixed a missing @via tag for Click to Tweets.
+* Fixed the CSS selector for Gutenberg blocks.
+* Updated location of Total Shares and Share Counts options.
+* Updated og:image tags to include a name attribute (for LinkedIn).
+* Updated the Frame Buster feature.
+* Updated the pinterest button search & destroy method.
+* Fixed notice when there are no inactive icons.
+* Added interface for handling oAuth handshakes.
+
 = 3.4.2 (13 DEC 2018) =
 * Fixed floating bottom disappear on mobile when pro is deactivated.
 * Fixed blocks disappearing after Gutenberg update.
@@ -251,7 +273,7 @@ We have a growing archive of <a href="https://warfareplugins.com/support/" rel="
 = 3.2.0 (13 AUG 2018) =
 * Shoutout to our Warfare Community beta testers- thank you so much!
 * Created shortcode for Pinterest Image.
-* Created Custom Pinterst Description on a per-image basis.
+* Created Custom Pinterest Description on a per-image basis.
 * Fixed the Total Shares icon/counts not displaying.
 * Fixed many JS related issues on floating and mobile buttons.
 * Fixed an issue where some buttons did not display on some posts (after 'post_updated' fires).

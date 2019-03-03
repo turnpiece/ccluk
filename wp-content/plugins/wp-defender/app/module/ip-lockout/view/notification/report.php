@@ -1,86 +1,91 @@
-<div class="dev-box">
-    <div class="box-title">
-        <h3><?php esc_html_e( "Reporting", wp_defender()->domain ) ?></h3>
+<div class="sui-box">
+    <div class="sui-box-header">
+        <h3 class="sui-box-title">
+			<?php esc_html_e( "Reporting", wp_defender()->domain ) ?>
+        </h3>
     </div>
-    <div class="box-content">
-        <form method="post" id="settings-frm" class="ip-frm">
-            <div class="columns">
-                <div class="column is-one-third">
-                    <label>
-						<?php esc_html_e( "Lockouts report", wp_defender()->domain ) ?>
-                    </label>
-                    <span class="sub">
-                        <?php esc_html_e( "Configure Defender to automatically email you a lockout report for this website. ", wp_defender()->domain ) ?>
-					</span>
+    <form method="post" id="settings-frm" class="ip-frm">
+        <div class="sui-box-body">
+            <div class="sui-box-settings-row">
+                <div class="sui-box-settings-col-1">
+                    <span class="sui-settings-label">
+                        <?php esc_html_e( "Lockouts Report", wp_defender()->domain ) ?>
+                    </span>
+                    <span class="sui-description">
+                        <?php esc_html_e( "Configure Defender to automatically email you a lockout report for this website.", wp_defender()->domain ) ?>
+                    </span>
                 </div>
-                <div class="column">
-                    <span
-                            tooltip="<?php echo esc_attr( __( "Send regular email report", wp_defender()->domain ) ) ?>"
-                            class="toggle float-l">
-	                                        <input type="hidden" name="report" value="0"/>
-                                <input type="checkbox"
-                                       name="report" <?php checked( 1, $settings->report ) ?>
-                                       value="1" class="toggle-checkbox"
-                                       id="toggle_report"/>
-                                <label class="toggle-label" for="toggle_report"></label>
-                                </span>
-                    <label for="toggle_report" role="checkbox" aria-checked="true">
-						<?php esc_html_e( "Send regular email report", wp_defender()->domain ) ?>
-                    </label>
-                    <div class="clear mline"></div>
-                    <div class="well well-white schedule-box">
-                        <strong><?php esc_html_e( "SCHEDULE", wp_defender()->domain ) ?></strong>
-                        <label><?php esc_html_e( "Frequency", wp_defender()->domain ) ?></label>
-                        <select name="report_frequency">
-                            <option <?php selected( '1', $settings->report_frequency ) ?>
-                                    value="1"><?php esc_html_e( "Daily", wp_defender()->domain ) ?></option>
-                            <option <?php selected( '7', $settings->report_frequency ) ?>
-                                    value="7"><?php esc_html_e( "Weekly", wp_defender()->domain ) ?></option>
-                            <option <?php selected( '30', $settings->report_frequency ) ?>
-                                    value="30"><?php esc_html_e( "Monthly", wp_defender()->domain ) ?></option>
-                        </select>
-                        <div class="days-container">
-                            <label><?php esc_html_e( "Day of the week", wp_defender()->domain ) ?></label>
-                            <select name="report_day">
-								<?php foreach ( \WP_Defender\Behavior\Utils::instance()->getDaysOfWeek() as $day ): ?>
-                                    <option <?php selected( $settings->report_day, strtolower( $day ) ) ?>
-                                            value="<?php echo strtolower( $day ) ?>"><?php echo $day ?></option>
-								<?php endforeach;; ?>
-                            </select>
+
+                <div class="sui-box-settings-col-2">
+                    <div class="sui-form-field">
+                        <label class="sui-toggle">
+                            <input type="hidden" name="report" value="0"/>
+                            <input role="presentation" type="checkbox" name="report"
+                                   class="toggle-checkbox"
+                                   id="report" value="1"
+								<?php checked( true, $settings->report ) ?>/>
+                            <span class="sui-toggle-slider"></span>
+                        </label>
+                        <label for="login_lockout_notification" class="sui-toggle-label">
+							<?php esc_html_e( "Send regular email report", wp_defender()->domain ) ?>
+                        </label>
+                        <div class="sui-border-frame sui-toggle-content">
+                            <strong>
+								<?php _e( "Recipients", wp_defender()->domain ) ?>
+                            </strong>
+							<?php $email_search->renderInput() ?>
+                            <strong>
+								<?php _e( "Schedule", wp_defender()->domain ) ?>
+                            </strong>
+                            <div class="sui-row">
+                                <div class="sui-col">
+                                    <label class="sui-label">
+										<?php _e( "Frequency", wp_defender()->domain ) ?>
+                                    </label>
+                                    <select name="report_frequency">
+                                        <option <?php selected( '1', $settings->report_frequency ) ?>
+                                                value="1"><?php esc_html_e( "Daily", wp_defender()->domain ) ?></option>
+                                        <option <?php selected( '7', $settings->report_frequency ) ?>
+                                                value="7"><?php esc_html_e( "Weekly", wp_defender()->domain ) ?></option>
+                                        <option <?php selected( '30', $settings->report_frequency ) ?>
+                                                value="30"><?php esc_html_e( "Monthly", wp_defender()->domain ) ?></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="sui-row">
+                                <div class="sui-col">
+                                    <label><?php _e( "Day of the week", wp_defender()->domain ) ?></label>
+                                    <select name="report_day">
+										<?php foreach ( \WP_Defender\Behavior\Utils::instance()->getDaysOfWeek() as $day ): ?>
+                                            <option <?php selected( $settings->report_day, strtolower( $day ) ) ?>
+                                                    value="<?php echo strtolower( $day ) ?>"><?php echo $day ?></option>
+										<?php endforeach;; ?>
+                                    </select>
+                                </div>
+                                <div class="sui-col">
+                                    <label><?php _e( "Time of day", wp_defender()->domain ) ?></label>
+                                    <select name="report_time">
+										<?php foreach ( \WP_Defender\Behavior\Utils::instance()->getTimes() as $timestamp => $time ): ?>
+                                            <option <?php selected( $settings->report_time, $timestamp ) ?>
+                                                    value="<?php echo $timestamp ?>"><?php echo strftime( '%I:%M %p', strtotime( $time ) ) ?></option>
+										<?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
-                        <label><?php esc_html_e( "Time of day", wp_defender()->domain ) ?></label>
-                        <select name="report_time">
-							<?php foreach ( \WP_Defender\Behavior\Utils::instance()->getTimes() as $timestamp => $time ): ?>
-                                <option <?php selected( $settings->report_time, $timestamp ) ?>
-                                        value="<?php echo $timestamp ?>"><?php echo strftime( '%I:%M %p', strtotime( $time ) ) ?></option>
-							<?php endforeach; ?>
-                        </select>
-                        <!--						<span>-->
-						<?php //printf( esc_html__( "You will receive a lockout report email %s.", wp_defender()->domain ), date_i18n( WD_Utils::get_date_time_format(), \WP_Defender\IP_Lockout\Component\Login_Protection_Api::get_report_sending_time() ) ) ?><!--</span>-->
                     </div>
                 </div>
             </div>
-
-            <div class="columns">
-                <div class="column is-one-third">
-                    <label>
-						<?php esc_html_e( "Email recipients", wp_defender()->domain ) ?>
-                    </label>
-                    <span class="sub">
-						<?php esc_html_e( "Choose which of your website’s users will receive the lockout report.", wp_defender()->domain ) ?>
-					</span>
-                </div>
-                <div class="column">
-					<?php $email_search->renderInput() ?>
-                </div>
-            </div>
-            <div class="clear line"></div>
+        </div>
+        <div class="sui-box-footer">
 			<?php wp_nonce_field( 'saveLockoutSettings' ) ?>
             <input type="hidden" name="action" value="saveLockoutSettings"/>
-            <button type="submit" class="button button-primary float-r">
-				<?php esc_html_e( "UPDATE SETTINGS", wp_defender()->domain ) ?>
-            </button>
-            <div class="clear"></div>
-        </form>
-    </div>
+            <div class="sui-actions-right">
+                <button type="submit" class="sui-button sui-button-blue">
+                    <i class="sui-icon-save" aria-hidden="true"></i>
+					<?php _e( "Save Changes", wp_defender()->domain ) ?>
+                </button>
+            </div>
+        </div>
+    </form>
 </div>

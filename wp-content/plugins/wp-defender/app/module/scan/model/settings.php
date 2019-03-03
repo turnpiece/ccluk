@@ -10,6 +10,7 @@ use Hammer\Helper\WP_Helper;
 use Hammer\Queue\Queue;
 use WP_Defender\Module\Scan\Behavior\Core_Scan;
 use WP_Defender\Module\Scan\Behavior\Pro\Content_Scan;
+use WP_Defender\Module\Scan\Behavior\Pro\MD5_Scan;
 use WP_Defender\Module\Scan\Behavior\Pro\Vuln_Scan;
 use WP_Defender\Module\Scan\Component\Scan_Api;
 
@@ -40,17 +41,31 @@ class Settings extends \Hammer\WP\Settings {
 	public $receipts = array();
 
 	/**
+	 * @var array
+	 */
+	public $receiptsNotification = array();
+
+	/**
 	 * Toggle notification on or off
 	 * @var bool
 	 */
 	public $notification = true;
 
 	/**
+	 * @var bool
+	 */
+	public $report = false;
+	/**
 	 * Toggle only sending error email or all email
 	 *
 	 * @var bool
 	 */
 	public $always_send = false;
+
+	/**
+	 * @var bool
+	 */
+	public $alwaysSendNotification = false;
 
 	/**
 	 * Maximum filesize to scan, only apply for content scan
@@ -126,7 +141,8 @@ WP Defender
 Official WPMU DEV Superhero', wp_defender()->domain );
 		//call parent to load stored
 		if ( is_admin() || is_network_admin() && current_user_can( 'manage_options' ) ) {
-			$this->receipts[] = get_current_user_id();
+			$this->receipts[]             = get_current_user_id();
+			$this->receiptsNotification[] = get_current_user_id();
 			//default is weekly
 			$this->day = date( 'l' );
 			$hour      = date( 'H', current_time( 'timestamp' ) );
@@ -156,6 +172,7 @@ Official WPMU DEV Superhero', wp_defender()->domain );
 		}
 
 		if ( $this->scan_content && wp_defender()->isFree != true ) {
+			$scans[] = 'md5';
 			$scans[] = 'content';
 		}
 
@@ -205,6 +222,22 @@ Official WPMU DEV Superhero', wp_defender()->domain );
 				$queue->args          = $args;
 				$queue->args['owner'] = $queue;
 				$queue->attachBehavior( 'vuln', new Vuln_Scan() );
+
+				return $queue;
+				break;
+			case 'md5':
+				if ( ! class_exists( '\WP_Defender\Module\Scan\Behavior\Pro\Md5_Scan' ) ) {
+					return null;
+				}
+				$plugins = array();
+				foreach ( get_plugins() as $slug => $plugin ) {
+					$plugin['slug'] = $slug;
+					$plugins[]      = $plugin;
+				}
+				$queue                = new Queue( array_merge( $plugins, wp_get_themes() ), 'md5', true );
+				$queue->args          = $args;
+				$queue->args['owner'] = $queue;
+				$queue->attachBehavior( 'md5', new MD5_Scan() );
 
 				return $queue;
 				break;

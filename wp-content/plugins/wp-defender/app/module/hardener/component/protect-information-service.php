@@ -19,14 +19,19 @@ class Protect_Information_Service extends Rule_Service implements IRule_Service 
 	public function check() {
 		$cache = WP_Helper::getArrayCache()->get( 'Protect_Information_Service', null );
 		if ( $cache === null ) {
-			$url    	= wp_defender()->getPluginUrl() . 'changelog.txt';
+			$url        = wp_defender()->getPluginUrl() . 'changelog.txt';
 			$ssl_verify = apply_filters( 'defender_ssl_verify', true ); //most hosts dont really have valid ssl or ssl still pending
-			$status 	= wp_remote_head( $url, array( 'user-agent' => $_SERVER['HTTP_USER_AGENT'], 'sslverify' => $ssl_verify ) );
+			$status     = wp_remote_head( $url, array(
+				'user-agent' => $_SERVER['HTTP_USER_AGENT'],
+				'sslverify'  => $ssl_verify
+			) );
 			if ( 200 == wp_remote_retrieve_response_code( $status ) ) {
 				WP_Helper::getArrayCache()->set( 'Protect_Information_Service', false );
+
 				return false;
 			}
 			WP_Helper::getArrayCache()->set( 'Protect_Information_Service', true );
+
 			return true;
 		} else {
 			return $cache;
@@ -46,12 +51,24 @@ class Protect_Information_Service extends Rule_Service implements IRule_Service 
 				sprintf( __( "The file %s is not writable", wp_defender()->domain ), $htPath ) );
 		}
 		$htConfig       = file( $htPath );
-		$rules    		= $this->apache_rule();
-		$containsSearch = array_diff( $rules, $htConfig );
-		if ( count( $containsSearch ) == 0 || ( count( $containsSearch ) == count( $rules ) ) ) {
+		$htConfig       = array_map( 'trim', $htConfig );
+		$rules          = $this->apache_rule();
+		$containsSearch = array_diff( array_map( 'trim', $rules ), $htConfig );
+		if ( count( $containsSearch ) < count( $rules ) ) {
+			//search the wrapper block
+			$htContent = file_get_contents( $htPath );
+			preg_match( '/## WP Defender(.*?)## WP Defender - End ##/s', $htContent, $matches );
+			if ( count( $matches ) ) {
+				//remove the whole parts as it partial done
+				$htContent = str_replace( $matches[0], '', $htContent );
+				$htConfig  = explode( PHP_EOL, $htContent );
+				$htConfig  = array_merge( $htConfig, $rules );
+				file_put_contents( $htPath, implode( PHP_EOL, $htConfig ), LOCK_EX );
+			}
+		} elseif ( count( $containsSearch ) == 0 || ( count( $containsSearch ) == count( $rules ) ) ) {
 			//append this
-			$htConfig = array_merge( $htConfig, array( implode( '', $rules ) ) );
-			file_put_contents( $htPath, implode( '', $htConfig ), LOCK_EX );
+			$htConfig = array_merge( $htConfig, $rules );
+			file_put_contents( $htPath, implode( PHP_EOL, $htConfig ), LOCK_EX );
 		}
 
 		return true;
@@ -71,7 +88,7 @@ class Protect_Information_Service extends Rule_Service implements IRule_Service 
 			$htConfig = file_get_contents( $htPath );
 			$rules    = $this->apache_rule();
 
-			preg_match_all('/## WP Defender(.*?)## WP Defender - End ##/s', $htConfig, $matches);
+			preg_match_all( '/## WP Defender(.*?)## WP Defender - End ##/s', $htConfig, $matches );
 			if ( is_array( $matches ) && count( $matches ) > 0 ) {
 				$htConfig = str_replace( implode( '', $matches[0] ), '', $htConfig );
 			} else {
@@ -95,7 +112,7 @@ class Protect_Information_Service extends Rule_Service implements IRule_Service 
 	protected static function apache_rule() {
 		$version = Utils::instance()->determineApacheVersion();
 		if ( floatval( $version ) >= 2.4 ) {
-			$rules    = array(
+			$rules = array(
 				PHP_EOL . '## WP Defender - Prevent information disclosure ##' . PHP_EOL,
 				'<FilesMatch "\.(txt|md|exe|sh|bak|inc|pot|po|mo|log|sql)$">' . PHP_EOL .
 				'Require all denied' . PHP_EOL .
@@ -109,7 +126,7 @@ class Protect_Information_Service extends Rule_Service implements IRule_Service 
 				'## WP Defender - End ##'
 			);
 		} else {
-			$rules    = array(
+			$rules = array(
 				PHP_EOL . '## WP Defender - Prevent information disclosure ##' . PHP_EOL,
 				'<FilesMatch "\.(txt|md|exe|sh|bak|inc|pot|po|mo|log|sql)$">' . PHP_EOL .
 				'Order allow,deny' . PHP_EOL .
@@ -124,6 +141,7 @@ class Protect_Information_Service extends Rule_Service implements IRule_Service 
 				'## WP Defender - End ##'
 			);
 		}
+
 		return $rules;
 	}
 }

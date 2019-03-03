@@ -19,7 +19,7 @@ class Hide_Error_Service extends Rule_Service implements IRule_Service {
 	public function check() {
 		//we will start a request to see if it is showing error
 		$altCache = WP_Helper::getArrayCache();
-		$cached = $altCache->get( 'Hide_Error_Service', null );
+		$cached   = $altCache->get( 'Hide_Error_Service', null );
 		if ( $cached === null ) {
 			//tmp turn off error log
 			$isLog = ini_get( 'log_errors' );
@@ -35,7 +35,7 @@ class Hide_Error_Service extends Rule_Service implements IRule_Service {
 				ini_set( 'log_errors', 1 );
 			}
 			if ( strpos( $body, ABSPATH . 'wp-includes/theme-compat/embed.php' ) !== false ||
-					WP_DEBUG == true && ( ! defined( 'WP_DEBUG_DISPLAY' ) || WP_DEBUG_DISPLAY != false )) {
+			     WP_DEBUG == true && ( ! defined( 'WP_DEBUG_DISPLAY' ) || WP_DEBUG_DISPLAY != false ) ) {
 				$altCache->set( 'Hide_Error_Service', 0 );
 
 				return false;
@@ -149,10 +149,14 @@ class Hide_Error_Service extends Rule_Service implements IRule_Service {
 	}
 
 	public function revert() {
-		/**
-		 * find the line we append by checking the comment
-		 * remove whole block
-		 */
+		$config_path = $this->retrieveWPConfigPath();
+		//check if can write
+		if ( ! is_writeable( $config_path ) ) {
+			return new \WP_Error( Error_Code::NOT_WRITEABLE,
+				sprintf( __( "The file %s is not writable", wp_defender()->domain ), $config_path ) );
+		}
+		$config = file( $config_path );
+
 	}
 
 	public function listen() {

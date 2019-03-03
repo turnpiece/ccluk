@@ -23,10 +23,21 @@ class DB_Prefix extends Rule {
 
 	function addHooks() {
 		$this->add_action( 'processingHardener' . self::$slug, 'process' );
+		$this->add_action( 'processRevert' . self::$slug, 'revert' );
 	}
 
 	function revert() {
-		// TODO: Implement revert() method.
+		if ( ! $this->verifyNonce() ) {
+			return;
+		}
+		$ret = $this->getService()->revert();
+		if ( ! is_wp_error( $ret ) ) {
+			Settings::instance()->addToIssues( self::$slug );
+		} else {
+			wp_send_json_error( array(
+				'message' => $ret->get_error_message()
+			) );
+		}
 	}
 
 	public function getTitle() {

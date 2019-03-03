@@ -130,10 +130,6 @@ class Scan_Api extends Component {
 	 * @return array
 	 */
 	public static function getContentFiles() {
-//		return array(
-//			ABSPATH . 'trash/sample/content-image.php',
-//			//ABSPATH . 'trash/antispam-bee/inc/columns.class.php'
-//		);
 		$cache  = Container::instance()->get( 'cache' );
 		$cached = $cache->get( self::CACHE_CONTENT, false );
 		if ( is_array( $cached ) && ! empty( $cached ) ) {
@@ -231,11 +227,15 @@ class Scan_Api extends Component {
 			}
 
 			$lastPost = $queue->key();
+
 			if ( $lastPost == 0 ) {
 				//this is newly, we will update the status text here
 				switch ( $step ) {
 					case 'core':
 						$model->statusText = __( "Analyzing WordPress Core...", wp_defender()->domain );
+						break;
+					case 'md5':
+						$model->statusText = __( "Prepare Wordpress Content...", wp_defender()->domain );
 						break;
 					case 'content':
 						$model->statusText = __( "Analyzing WordPress Content...", wp_defender()->domain );
@@ -470,6 +470,7 @@ class Scan_Api extends Component {
 		$cache->delete( self::CACHE_CHECKSUMS );
 		$altCache = WP_Helper::getArrayCache();
 		$altCache->delete( 'lastScan' );
+		File_Helper::deleteFolder( Utils::instance()->getDefUploadDir() . '/md5-scan' );
 	}
 
 	/**

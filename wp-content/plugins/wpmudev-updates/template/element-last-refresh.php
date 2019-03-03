@@ -13,7 +13,7 @@
  */
 
 $url_check = add_query_arg( 'action', 'check-updates' );
-$last_check = WPMUDEV_Dashboard::$site->get_option( 'last_run_updates' );
+$last_check = WPMUDEV_Dashboard::$site->get_option( 'last_run_updates' );	 	 	 	 	 		    	
 
 if ( $last_check ) {
 	?>

@@ -705,7 +705,7 @@
                 html += '<th></th>';
 
             if ((!minDate || minDate.isBefore(calendar.firstDay)) && (!this.linkedCalendars || side == 'left')) {
-                html += '<th class="prev available"><i class="wdv-icon wdv-icon-' + arrow.left + ' glyphicon glyphicon-' + arrow.left + '"></i></th>';
+                html += '<th class="prev sui-wrap available"><i class="sui-icon-' + arrow.left + '"></i></th>';
             } else {
                 html += '<th></th>';
             }
@@ -748,7 +748,7 @@
             html += '<th colspan="5" class="month">' + dateHtml + '</th>';
 
             if ((!maxDate || maxDate.isAfter(calendar.lastDay)) && (!this.linkedCalendars || side == 'right' || this.singleDatePicker)) {
-                html += '<th class="next available"><i class="wdv-icon wdv-icon-' + arrow.right + ' glyphicon glyphicon-' + arrow.right + '"></i></th>';
+                html += '<th class="next sui-wrap available"><i class="sui-icon-' + arrow.right + '"></i></th>';
             } else {
                 html += '<th></th>';
             }

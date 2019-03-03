@@ -155,3 +155,7 @@ function apbct_update_to_5_110_0(){
 	$apbct->saveData;
 	$apbct->save('remote_calls');
 }
+
+function apbct_update_to_5_115_1(){
+	ct_sfw_update();
+}

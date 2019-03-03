@@ -1,9 +1,9 @@
-=== LiteSpeed Cache  ===
+=== LiteSpeed Cache ===
 Contributors: LiteSpeedTech
 Tags: caching, optimize, performance, pagespeed, seo, speed, image optimize, compress, object cache, redis, memcached, database cleaner
 Requires at least: 4.0
-Tested up to: 5.0.3
-Stable tag: 2.9.2
+Tested up to: 5.1
+Stable tag: 2.9.4.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 
@@ -277,9 +277,39 @@ Click on the `Advanced View` link at the top of the page, and several more tabs 
 * [Ninja Forms](https://wordpress.org/plugins/ninja-forms/)
 * [Post Types Order 1.9.3.6+](https://wordpress.org/plugins/post-types-order/)
 * [BoomBox — Viral Magazine WordPress Theme](https://themeforest.net/item/boombox-viral-buzz-wordpress-theme/16596434?ref=PX-lab)
+* Beaver Builder
+* FacetWP (LSWS 5.3.6+)
 
 
 == Changelog ==
+
+= 2.9.4.1 - Feb 28 2019 =
+* 🔥🐞<strong>Tag</strong>: Fixed issue where unnecessary warning potentially displayed after upgrade process when object cache is enabled.
+
+= 2.9.4 - Feb 27 2019 =
+* 🐞<strong>REST</strong>: New REST class with better WP5 Gutenberg and internal REST call support when ESI is embedded.
+* <strong>ESI</strong>: ESI block ID is now in plain text in ESI URL parameters.
+* 🐞<strong>ESI</strong>: Fixed a redundant ESI 301 redirect when comma is in ESI URL.
+* <strong>ESI</strong>: REST call can now parse shortcodes in ESI.
+* <strong>API</strong>: Changed ESI `parse_esi_param()` function to private and `load_esi_block` function to non-static.
+* <strong>API</strong>: Added `litespeed_is_json` hook for buffer JSON conversion.
+* <strong>GUI</strong>: Prepended plugin name to new version notification banner.
+* <strong>3rd</strong>: WPML multi domains can now be handled in optimization without CDN tricks.
+
+= 2.9.3 - Feb 20 2019 =
+* <strong>ESI</strong>: ESI shortcodes can now be saved in Gutenberg editor.
+* <strong>ESI</strong>: ESI now honors the parent page JSON data type to avoid breaking REST calls (LSWS 5.3.6+).
+* <strong>ESI</strong>: Added is_json parameter support for admin_bar.
+* <strong>ESI</strong>: Simplified comment form code.
+* <strong>3rd</strong>: Better page builder plugin compatibility within AJAX calls.
+* <strong>3rd</strong>: Compatibility with FacetWP (LSWS 5.3.6+).
+* <strong>3rd</strong>: Compatibility with Beaver Builder.
+* <strong>Debug</strong>: Added ESI buffer content to log.
+* <strong>Tag</strong>: Only append blog ID to cache tags when site is part of a network.
+* <strong>IAPI</strong>: Optimized database query for pulling images.
+* <strong>GUI</strong>: Added more plugin version checking for better feature compatibility.
+* <strong>GUI</strong>: Ability to bypass non-critical banners with the file .litespeed_no_banner.
+* <strong>Media</strong>: Background image WebP replacement now supports quotes around src.
 
 = 2.9.2 - Feb 5 2019 =
 * <strong>API</strong>: Add a hook `litespeed_esi_shortcode-*` for ESI shortcodes.

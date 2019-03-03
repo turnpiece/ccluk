@@ -274,6 +274,7 @@ function ct_ajax_hook($message_obj = false, $additional = false)
         'the_champ_user_auth',  // Super Socializer
         'simbatfa-init-otp', //Two-Factor Auth 
         'wppb_msf_check_required_fields', //ProfileBuilder skip step checking
+        'boss_we_login', //Login form
     );
 	
 	//General post_info for all ajax calls

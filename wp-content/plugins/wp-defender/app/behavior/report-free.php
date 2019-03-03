@@ -11,59 +11,52 @@ use WP_Defender\Module\Scan\Model\Settings;
 class Report_Free extends Behavior {
 	public function renderReportWidget() {
 		?>
-        <div class="dev-box reporting-sale">
-            <div class="box-title">
-                <span class="span-icon icon-report"></span>
-                <h3><?php _e( "REPORTING", wp_defender()->domain ) ?></h3>
+        <div class="sui-box">
+            <div class="sui-box-header">
+                <h3 class="sui-box-title">
+                    <i class="sui-icon-graph-line" aria-hidden="true"></i>
+					<?php _e( "Reporting", wp_defender()->domain ) ?>
+                </h3>
             </div>
-            <div class="box-content">
-                <div class="line">
-					<?php _e( "Get tailored security reports delivered to your inbox so you don’t have to worry
-                    about checking in.", wp_defender()->domain ) ?>
+            <div class="sui-box-body sui-upsell-items">
+                <div class="sui-box-settings-row no-margin-bottom">
+                    <p><?php _e( "Get tailored security reports delivered to your inbox so you don’t have to worry about checking in.", wp_defender()->domain ) ?></p>
                 </div>
-                <div class="row is_multiline">
-                    <div class="col-half">
-                        <a href="<?php echo network_admin_url( 'admin.php?page=wdf-scan&view=reporting' ) ?>">
-                            <div class="report-status with-corner">
-                                <img src="<?php echo wp_defender()->getPluginUrl() ?>assets/img/scanning-pre.svg">
-                                <strong><?php _e( "FILE SCANNING", wp_defender()->domain ) ?></strong>
-                                <div class="corner">
-                                    Pro
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-half">
-                        <a href="<?php echo network_admin_url( 'admin.php?page=wdf-logging&view=report' ) ?>">
-                            <div class="report-status with-corner">
-                                <img src="<?php echo wp_defender()->getPluginUrl() ?>assets/img/audit-pre.svg">
-                                <strong><?php _e( "AUDIT LOGGING", wp_defender()->domain ) ?></strong>
-                                <div class="corner">
-                                    Pro
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-half">
-                        <a href="<?php echo network_admin_url( 'admin.php?page=wdf-ip-lockout&view=reporting' ) ?>">
-                            <div class="report-status with-corner">
-                                <img src="<?php echo wp_defender()->getPluginUrl() ?>assets/img/lockout-pre.svg">
-                                <strong><?php _e( "IP LOCKOUTS", wp_defender()->domain ) ?></strong>
-                                <div class="corner">
-                                    Pro
-                                </div>
-                            </div>
-                        </a>
+                <div class="sui-field-list no-border">
+                    <div class="sui-field-list-body">
+                        <div class="sui-field-list-item">
+                            <label class="sui-field-list-item-label">
+                                <small><strong><?php _e( "File Scanning", wp_defender()->domain ) ?></strong>
+                                </small>
+                            </label>
+                            <span class="sui-tag sui-tag-disabled"><?php _e( "Inactive", wp_defender()->domain ) ?></span>
+                        </div>
+                        <div class="sui-field-list-item">
+                            <label class="sui-field-list-item-label">
+                                <small><strong><?php _e( "IP Lockouts", wp_defender()->domain ) ?></strong></small>
+                            </label>
+                            <span class="sui-tag sui-tag-disabled"><?php _e( "Inactive", wp_defender()->domain ) ?></span>
+                        </div>
+                        <div class="sui-field-list-item">
+                            <label class="sui-field-list-item-label">
+                                <small><strong><?php _e( "Audit Logging", wp_defender()->domain ) ?></strong>
+                                </small>
+                            </label>
+                            <span class="sui-tag sui-tag-disabled"><?php _e( "Inactive", wp_defender()->domain ) ?></span>
+                        </div>
                     </div>
                 </div>
-                <div class="presale-text">
-                    <div>
-						<?php printf( __( " Automated reports are included in a WPMU DEV membership along with 100+ plugins
-                        , 24/7 support and lots of handy site management tools – <a target='_blank' href=\"%s\">Try
-                            it all absolutely FREE</a>", wp_defender()->domain ), Utils::instance()->campaignURL( 'defender_dash_reports_upsell_link' ) ) ?>
+                <div class="sui-box-settings-row sui-upsell-row">
+                    <img class="sui-image sui-upsell-image"
+                         src="<?php echo wp_defender()->getPluginUrl() . 'assets/img/dev-man-pre.svg' ?>">
+                    <div class="sui-upsell-notice">
+                        <p>
+							<?php
+							printf( __( "Automated reports are included in a WPMU DEV membership along with 100+ plugins & themes, 24/7 support and lots of handy site management tools. <a href='%s'>Try it all absolutely free.</a>", wp_defender()->domain ), Utils::instance()->campaignURL( 'defender_dash_reports_upsell_link' ) )
+							?>
+                        </p>
                     </div>
                 </div>
-                <div class="clear"></div>
             </div>
         </div>
 		<?php

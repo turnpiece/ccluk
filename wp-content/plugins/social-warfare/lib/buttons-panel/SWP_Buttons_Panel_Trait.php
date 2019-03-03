@@ -705,7 +705,7 @@ trait SWP_Buttons_Panel_Trait {
 		}
 
 		// Render the html for the total shares.
-		$html = '<div class="nc_tweetContainer total_shares total_sharesalt" >';
+		$html = '<div class="nc_tweetContainer swp_share_button total_shares total_sharesalt" >';
 		   $html .= '<span class="swp_count ">' . SWP_Utility::kilomega( $this->shares['total_shares'] ) . ' <span class="swp_label">' . __( 'Shares','social-warfare' ) . '</span></span>';
 		$html .= '</div>';
 
@@ -805,14 +805,15 @@ trait SWP_Buttons_Panel_Trait {
 			return;
 		}
 
-
 		/**
 		 * If it's not a set of floating buttons and it's not set to the left,
 		 * then we attach the total shares on the right.
 		 *
 		 */
-		$this->inner_html = $buttons_html . $total_shares_html;
 
+		else {
+			$this->inner_html = $buttons_html . $total_shares_html;
+		}
 	}
 
 

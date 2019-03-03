@@ -107,8 +107,9 @@ abstract class Rule extends Component {
 			<?php $this->createNonceField(); ?>
             <input type="hidden" name="action" value="ignoreHardener"/>
             <input type="hidden" name="slug" value="<?php echo static::$slug ?>"/>
-            <button type="submit" name="ignore" value="ignore"
-                    class="button button-secondary"><?php _e( "Ignore", wp_defender()->domain ) ?></button>
+            <button type="submit" name="ignore" value="ignore" class="sui-button sui-button-ghost">
+                <i class="sui-icon-eye-hide" aria-hidden="true"></i> <?php _e( "Ignore", wp_defender()->domain ) ?>
+            </button>
         </form>
 		<?php
 	}
@@ -124,21 +125,44 @@ abstract class Rule extends Component {
 
 	public function showRestoreForm() {
 		?>
-        <div class="rule closed">
-            <div class="rule-title">
-                <i class="def-icon icon-warning fill-grey"></i>
-				<?php echo $this->getTitle(); ?>
-                <form method="post" class="float-r hardener-frm rule-process">
-					<?php $this->createNonceField(); ?>
-                    <input type="hidden" name="action" value="restoreHardener"/>
-                    <input type="hidden" name="slug" value="<?php echo static::$slug ?>"/>
-                    <button type="submit"
-                            class="button button-secondary button-small"><?php _e( "Restore", wp_defender()->domain ) ?></button>
-                </form>
-                <div class="clear"></div>
+        <div class="sui-accordion sui-accordion-flushed">
+            <div class="sui-accordion-item accordion-ignore">
+                <div class="sui-accordion-item-header">
+                    <div class="sui-accordion-item-title">
+                        <i aria-hidden="true" class="sui-icon-eye-hide"></i>
+	                    <?php echo $this->getTitle(); ?>
+                        <div class="sui-actions-right">
+                            <form method="post" class="float-r hardener-frm rule-process">
+		                        <?php $this->createNonceField(); ?>
+                                <input type="hidden" name="action" value="restoreHardener"/>
+                                <input type="hidden" name="slug" value="<?php echo static::$slug ?>"/>
+                                <button type="submit" class="sui-button sui-button-ghost">
+                                    <i class="sui-icon-update" aria-hidden="true"></i>
+			                        <?php _e( "Restore", wp_defender()->domain ) ?>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
 		<?php
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getCssClass() {
+		if ( $this->isIgnored() ) {
+			return '';
+		}
+
+		if ( $this->check() ) {
+			return 'sui-success';
+		}
+
+		return 'sui-warning';
 	}
 
 	/**

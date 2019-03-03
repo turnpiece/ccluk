@@ -48,6 +48,7 @@ class CleantalkState
 		'use_ajax' =>              1,
 		'general_postdata_test' => 0, //CAPD
         'set_cookies'=>            1, // Disable cookies generatation to be compatible with Varnish.
+		'alternative_sessions'=>   0, // AJAX Sessions.
         'ssl_on' =>                0, // Secure connection to servers 
 		'use_buitin_http_api' =>   0, // Using Wordpress HTTP built in API
 		

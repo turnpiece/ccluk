@@ -41,7 +41,8 @@ class Main_Free extends \WP_Defender\Controller {
 
 	public function scripts() {
 		if ( $this->isInPage() ) {
-			\WDEV_Plugin_Ui::load( wp_defender()->getPluginUrl() . 'shared-ui/' );
+			wp_enqueue_script( 'wpmudev-sui' );
+			wp_enqueue_style( 'wpmudev-sui' );
 			wp_enqueue_script( 'defender' );
 			wp_enqueue_style( 'defender' );
 			wp_enqueue_script( 'audit', wp_defender()->getPluginUrl() . 'app/module/audit/js/script.js', array(

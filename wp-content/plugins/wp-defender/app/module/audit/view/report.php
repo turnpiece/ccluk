@@ -1,71 +1,74 @@
-<div class="dev-box">
-    <div class="box-title">
-        <h3><?php _e( "NOTIFICATIONS", wp_defender()->domain ) ?></h3>
+<div class="sui-box">
+    <div class="sui-box-header">
+        <h3 class="sui-box-title">
+			<?php _e( "Notification", wp_defender()->domain ) ?>
+        </h3>
     </div>
-    <div class="box-content">
-        <form method="post" class="audit-frm audit-settings">
-            <div class="columns">
-                <div class="column is-one-third">
-                    <label for="chk1" role="checkbox" aria-checked="<?php echo $setting->notification ? 'true':'false';?>"><strong><?php _e( "Audit report", wp_defender()->domain ) ?></strong></label>
-                    <span class="sub">
-                        <?php _e( "Defender can automatically send an email report summarising your website events so that you can keep track of logs without having to check back here.", wp_defender()->domain ) ?>
-                    </span>
+    <form method="post" class="audit-frm audit-settings">
+        <div class="sui-box-body">
+            <div class="sui-box-settings-row">
+                <div class="sui-box-settings-col-1">
+                    <span class="sui-settings-label"><?php esc_html_e( "Scheduled Reports", wp_defender()->domain ) ?></span>
+                    <span class="sui-description"><?php esc_html_e( "Schedule Defender to automatically email you a summary of all your website events.", wp_defender()->domain ) ?></span>
                 </div>
-                <div class="column">
-                    <span class="toggle">
+                <div class="sui-box-settings-col-2">
+                    <label class="sui-toggle">
                         <input type="hidden" name="notification" value="0"/>
-                        <input type="checkbox" class="toggle-checkbox" name="notification" value="1"
-                               id="chk1" <?php checked( 1, $setting->notification ) ?>/>
-                        <label class="toggle-label" for="chk1"></label>
-                    </span>
-                    <label><?php _e( "Run regular reports", wp_defender()->domain ) ?></label>
-                    <div class="clear mline"></div>
-                    <div class="well well-white schedule-box">
-                        <strong><?php _e( "Schedule", wp_defender()->domain ) ?></strong>
-                        <label><?php _e( "Frequency", wp_defender()->domain ) ?></label>
-                        <select name="frequency">
-                            <option <?php selected( 1, $setting->frequency ) ?>
-                                    value="1"><?php _e( "Daily", wp_defender()->domain ) ?></option>
-                            <option <?php selected( 7, $setting->frequency ) ?>
-                                    value="7"><?php _e( "Weekly", wp_defender()->domain ) ?></option>
-                            <option <?php selected( 30, $setting->frequency ) ?>
-                                    value="30"><?php _e( "Monthly", wp_defender()->domain ) ?></option>
-                        </select>
-                        <div class="days-container">
-                            <label><?php _e( "Day of the week", wp_defender()->domain ) ?></label>
-                            <select name="day">
-								<?php foreach ( \WP_Defender\Behavior\Utils::instance()->getDaysOfWeek() as $day ): ?>
-                                    <option <?php selected( $day, $setting->day ) ?>
-                                            value="<?php echo $day ?>"><?php echo ucfirst( $day ) ?></option>
-								<?php endforeach; ?>
-                            </select>
+                        <input type="checkbox" <?php checked( 1, $setting->notification ) ?> name="notification"
+                               value="1" id="toggle_notification"/>
+                        <span class="sui-toggle-slider"></span>
+                    </label>
+                    <label for="toggle_notification" class="sui-toggle-label">
+						<?php _e( "Send regular email report", wp_defender()->domain ) ?></label>
+                    <div class="sui-border-frame sui-toggle-content">
+						<?php $email->renderInput() ?>
+                        <div class="sui-form-field margin-top-30 schedule-box">
+                            <label class="sui-label"><?php _e( "Frequency", wp_defender()->domain ) ?></label>
+                            <div class="sui-row">
+                                <div class="sui-col">
+                                    <select name="frequency">
+                                        <option <?php selected( 1, $setting->frequency ) ?>
+                                                value="1"><?php _e( "Daily", wp_defender()->domain ) ?></option>
+                                        <option <?php selected( 7, $setting->frequency ) ?>
+                                                value="7"><?php _e( "Weekly", wp_defender()->domain ) ?></option>
+                                        <option <?php selected( 30, $setting->frequency ) ?>
+                                                value="30"><?php _e( "Monthly", wp_defender()->domain ) ?></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="sui-row">
+                                <div class="sui-col days-container">
+                                    <label class="sui-label"><?php _e( "Day of the week", wp_defender()->domain ) ?></label>
+                                    <select name="day">
+										<?php foreach ( \WP_Defender\Behavior\Utils::instance()->getDaysOfWeek() as $day ): ?>
+                                            <option <?php selected( $day, $setting->day ) ?>
+                                                    value="<?php echo $day ?>"><?php echo ucfirst( $day ) ?></option>
+										<?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div class="sui-col">
+                                    <label class="sui-label"><?php _e( "Time of day", wp_defender()->domain ) ?></label>
+                                    <select name="time">
+		                                <?php foreach ( \WP_Defender\Behavior\Utils::instance()->getTimes() as $time ): ?>
+                                            <option <?php selected( $time, $setting->time ) ?>
+                                                    value="<?php echo $time ?>"><?php echo strftime( '%I:%M %p', strtotime( $time ) ) ?></option>
+		                                <?php endforeach;; ?>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
-                        <label><?php _e( "Time of day", wp_defender()->domain ) ?></label>
-                        <select name="time">
-							<?php foreach ( \WP_Defender\Behavior\Utils::instance()->getTimes() as $time ): ?>
-                                <option <?php selected( $time, $setting->time ) ?>
-                                        value="<?php echo $time ?>"><?php echo strftime( '%I:%M %p', strtotime( $time ) ) ?></option>
-							<?php endforeach;; ?>
-                        </select>
                     </div>
                 </div>
             </div>
-            <div class="columns">
-                <div class="column is-one-third">
-                    <strong><?php _e( "Email Recipients", wp_defender()->domain ) ?></strong>
-                    <span class="sub">
-                        <?php _e( "Choose which of your website’s users will receive scan report results to their email inboxes.", wp_defender()->domain ) ?>
-                    </span>
-                </div>
-                <div class="column">
-					<?php $email->renderInput() ?>
-                </div>
+        </div>
+	    <?php wp_nonce_field( 'saveAuditSettings' ) ?>
+        <input type="hidden" name="action" value="saveAuditSettings"/>
+        <div class="sui-box-footer">
+            <div class="sui-actions-right">
+                <button type="submit" class="sui-button sui-button-blue">
+                    <i class="sui-icon-save" aria-hidden="true"></i>
+				    <?php _e( "Save Changes", wp_defender()->domain ) ?></button>
             </div>
-            <div class="clear line"></div>
-            <input type="hidden" name="action" value="saveAuditSettings"/>
-			<?php wp_nonce_field( 'saveAuditSettings' ) ?>
-            <button class="button float-r"><?php _e( "Update Settings", wp_defender()->domain ) ?></button>
-            <div class="clear"></div>
-        </form>
-    </div>
+        </div>
+    </form>
 </div>

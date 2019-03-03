@@ -65,7 +65,6 @@ class Mask_Login extends Controller {
 		//to the 404 redirect, or 403 wp die
 		$requestPath = Mask_Api::getRequestPath();
 		$settings    = Mask_Settings::instance();
-
 		if ( '/' . ltrim( $settings->maskUrl, '/' ) == $requestPath ) {
 			//we need to redirect this one to wp-login and open it
 			$this->_showLoginPage();
@@ -294,7 +293,6 @@ class Mask_Login extends Controller {
 	 */
 	public function scripts() {
 		if ( $this->isInPage() || $this->isDashboard() ) {
-			\WDEV_Plugin_Ui::load( wp_defender()->getPluginUrl() . 'shared-ui/' );
 			wp_enqueue_script( 'defender' );
 			wp_enqueue_style( 'defender' );
 			wp_enqueue_script( 'adtools', wp_defender()->getPluginUrl() . 'app/module/advanced-tools/js/scripts.js' );

@@ -3,9 +3,9 @@ Contributors: Cybr
 Donate link: https://theseoframework.com/donate/
 Tags: SEO, XML Sitemap, Google, Open Graph, Schema.org, Twitter
 Requires at least: 4.6.0
-Tested up to: 5.0.4
+Tested up to: 5.1.0
 Requires PHP: 5.4.0
-Stable tag: 3.2.2
+Stable tag: 3.2.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -241,6 +241,10 @@ The SEO Framework's metadata is put into WordPress' object cache when a caching 
 Please be sure to clear your cache or adjust the plugin's caching settings if deemed necessary.
 
 == Changelog ==
+
+= 3.2.3 =
+
+This minor update fixes some old, [leftover bugs](https://theseoframework.com/?p=3105). We've also removed the sitemap pinging options for Yandex, as they no longer allow this.
 
 = 3.2.2 =
 

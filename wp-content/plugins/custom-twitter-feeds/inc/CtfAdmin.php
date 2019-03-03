@@ -394,15 +394,15 @@ class CtfAdmin
 
         // show/hide
         $show_hide_list = array(
-            0 => array( 'include_retweeter', 'Retweeted text' ),
-            1 => array( 'include_avatar', 'Avatar image' ),
-            2 => array( 'include_author', 'Author name' ),
-            3 => array( 'include_text', 'Tweet text' ),
-            4 => array( 'include_media_placeholder', 'Media placeholder' ),
-            5 => array( 'include_date', 'Date' ),
-            6 => array( 'include_actions', 'Tweet actions (reply, retweet, like)' ),
-            7 => array( 'include_twitterlink', '"Twitter" link' ),
-            8 => array( 'include_linkbox', 'Quoted tweet box' )
+            array( 'include_retweeter', 'Retweeted text' ),
+            array( 'include_avatar', 'Avatar image' ),
+            array( 'include_author', 'Author name' ),
+            array( 'include_text', 'Tweet text' ),
+            array( 'include_media_placeholder', 'Media placeholder' ),
+            array( 'include_date', 'Date' ),
+            array( 'include_actions', 'Tweet actions (reply, retweet, like)' ),
+            array( 'include_twitterlink', '"Twitter" link' ),
+            array( 'include_linkbox', 'Quoted tweet box' )
         );
         $show_hide_list = apply_filters( 'ctf_admin_show_hide_list', $show_hide_list );
 
