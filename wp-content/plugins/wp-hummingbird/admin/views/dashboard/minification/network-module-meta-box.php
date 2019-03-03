@@ -19,7 +19,7 @@
 if ( $enabled ) :
 	$msg = __( 'Asset Optimization is active and configurable by Blog Admins only.', 'wphb' );
 	if ( 'super-admins' === $enabled ) {
-		$msg = __( 'Asset Optimization is active and configurable by Super Admins only.', 'wphb' );
+		$msg = __( 'Asset Optimization is active and configurable by Super Admins only.', 'wphb' );	   			 	 		  		   		
 	}
 	?>
 	<div class="sui-notice sui-notice-success" id="wphb-notice-minification-enabled">
