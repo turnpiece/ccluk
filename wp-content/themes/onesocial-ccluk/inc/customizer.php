@@ -380,9 +380,9 @@ class CCLUK_Customizer {
 		));
 
 		// Link settings
-		$this->add_setting( $section.'_link_page', 'sanitize_number' );
+		$this->add_setting( $section.'_page', 'sanitize_number' );
 
-		$this->customize->add_control( $section.'_link_page',
+		$this->customize->add_control( $section.'_page',
 			array(
 				'label'     	=> esc_html__('Page', 'onesocial'),
 				'section' 		=> $section.'_content',

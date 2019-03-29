@@ -2,7 +2,7 @@
 
 //if (defined('MC4WP_VERSION') && !is_user_logged_in()) :
 
-$slug       = 'ccluk_homepage_embed';
+$slug       = 'homepage_embed';
 $audience   = get_theme_mod( $slug.'_audience', 'all' );
 
 if ($audience == 'none' || 
