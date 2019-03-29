@@ -11,6 +11,8 @@ class CCLUK_Customizer {
 
 	private $customize;
 
+	private $option_pages = array();
+
 	function __construct() {
 
 		/**
@@ -42,15 +44,20 @@ class CCLUK_Customizer {
 		do_action( self::SLUG.'_customize_before_register', $this->customize );
 
 		$pages = get_pages();
-		$option_pages = array();
-		$option_pages[0] = esc_html__( 'Select page', 'onesocial' );
+		$this->option_pages[0] = esc_html__( 'Select page', 'onesocial' );
 		foreach( $pages as $p ){
-			$option_pages[ $p->ID ] = $p->post_title;
+			$this->option_pages[ $p->ID ] = $p->post_title;
 		}
 
 		$static_front_page = get_option( 'show_on_front' ) === 'page';
 
 		if ($static_front_page) {
+
+		/*------------------------------------------------------------------------*/
+	    /*  Homepage: Masthead
+	    /*------------------------------------------------------------------------*/
+
+	    	$this->homepage_masthead( 140 );
 
 		/*------------------------------------------------------------------------*/
 	    /*  Homepage: Join
@@ -156,7 +163,7 @@ class CCLUK_Customizer {
 					'section' 		=> self::SLUG.'_'.$section,
 					'type'          => 'select',
 					'priority'      => 10,
-					'choices'       => $option_pages,
+					'choices'       => $this->option_pages,
 					'description'   => esc_html__('Select the privacy policy page.', 'onesocial'),
 				)
 			);
@@ -342,6 +349,51 @@ class CCLUK_Customizer {
 		);
 	}
 
+	private function homepage_masthead( $priority = 150 ) {
+
+    	$section = 'homepage_masthead';
+
+		$this->add_homepage_panel( 
+			$section, 
+			esc_html__( 'Homepage: Masthead', 'onesocial' ),
+			esc_html__( 'Set the masthead image and content', 'onesocial' ),
+			$priority
+		);
+
+	    $this->standard_settings( $section, 'masthead' );
+
+		$this->add_content_section( $section );
+
+		$this->add_setting( 
+			$section.'_text', 
+			'sanitize_text'
+		);
+
+		$this->customize->add_control( new CCLUK_Editor_Custom_Control(
+			$this->customize,
+			$section.'_text',
+			array(
+				'label' 		=> esc_html__('Text', 'onesocial'),
+				'section' 		=> $section.'_content',
+				'description'   => __( 'Text that will go over the image', 'onesocial' )
+			)
+		));
+
+		// Link settings
+		$this->add_setting( $section.'_link_page', 'sanitize_number' );
+
+		$this->customize->add_control( $section.'_link_page',
+			array(
+				'label'     	=> esc_html__('Page', 'onesocial'),
+				'section' 		=> $section.'_content',
+				'type'          => 'select',
+				'priority'      => 10,
+				'choices'       => $this->option_pages,
+				'description'   => esc_html__('Select the page you want to link to.', 'onesocial'),
+			)
+		);		
+	}
+
 	private function homepage_join( $priority = 160 ) {
 
 		$section = 'homepage_join';
@@ -382,7 +434,7 @@ class CCLUK_Customizer {
 				'section' 		=> $section.'_settings',
 				'type'          => 'select',
 				'priority'      => 10,
-				'choices'       => $option_pages,
+				'choices'       => $this->option_pages,
 				'description'   => esc_html__('Select a page to link to.', 'onesocial'),
 			)
 		);
@@ -534,7 +586,7 @@ class CCLUK_Customizer {
 				'section' 		=> $section.'_content',
 				'type'          => 'select',
 				'priority'      => 10,
-				'choices'       => $option_pages,
+				'choices'       => $this->option_pages,
 				'description'   => esc_html__('Select the page you want to link to. If you\'ve pasted in HTML code for a newsletter signup form then you\'ll need to link to the page your privacy policy is on.', 'onesocial'),
 			)
 		);		
@@ -554,23 +606,22 @@ class CCLUK_Customizer {
 	    $this->standard_settings( $section, 'about' );
 
 		// Title
-		$this->customize->add_setting( $section.'_title',
-			array(
-				'sanitize_callback' => 'sanitize_text_field',
-				'default'           => esc_html__('About Us', 'onesocial'),
-			)
+		$this->add_setting( 
+			$section.'_title',
+			'sanitize_text_field',
+			esc_html__('About Us', 'onesocial')
 		);
 
 		$this->customize->add_control( $section.'_title',
 			array(
 				'label' 		=> esc_html__('Section Title', 'onesocial'),
-				'section' 		=> self::SLUG.'_'.$section.'_settings',
+				'section' 		=> $section.'_settings',
 				'description'   => '',
 			)
 		);
 
 		// Source page settings
-		$this->add_setting( $section.'_source_page', array( $this, 'sanitize_number' ) );
+		$this->add_setting( $section.'_source_page', 'sanitize_number' );
 
 		$this->customize->add_control( $section.'_source_page',
 			array(
@@ -578,7 +629,7 @@ class CCLUK_Customizer {
 				'section' 		=> $section.'_settings',
 				'type'          => 'select',
 				'priority'      => 10,
-				'choices'       => $option_pages,
+				'choices'       => $this->option_pages,
 				'description'   => esc_html__('Select a page the title will link to.', 'onesocial'),
 			)
 		);
