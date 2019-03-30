@@ -105,6 +105,51 @@ body.page-template-homepage {
 				margin: 0 auto;
 			}
 
+			&.masthead {
+
+				position: relative;
+
+				.section-content {
+					max-width: 100%;
+					background-color: $black;
+
+					> img {
+						display: block;
+						object-fit: cover;
+						width: 100%;
+						opacity: 0.5;
+					}
+				}
+
+				.section-title-container {
+					position: absolute;
+					left: 50%;
+					top: 35%;
+					bottom: 35%;
+					padding: 0;
+					text-align: center;
+					z-index: 5;
+					max-width: 450px;
+
+					> .section-title {
+						position: relative;
+						left: -50%;
+
+						h2, 
+						p {
+							color: $white;
+						}
+
+						.buttons > .button {
+							color: $white;
+							font-weight: 500;
+							text-transform: uppercase;
+							margin: 10px;
+						}
+					}
+				}
+			}
+
 			&.feature {
 				.section-content {
 					max-width: 580px;

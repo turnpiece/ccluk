@@ -365,6 +365,20 @@ class CCLUK_Customizer {
 		$this->add_content_section( $section );
 
 		$this->add_setting( 
+			$section.'_heading', 
+			'sanitize_text'
+		);
+
+		$this->customize->add_control( new CCLUK_Editor_Custom_Control(
+			$this->customize,
+			$section.'_heading',
+			array(
+				'label' 		=> esc_html__('Heading', 'onesocial'),
+				'section' 		=> $section.'_content'
+			)
+		));
+
+		$this->add_setting( 
 			$section.'_text', 
 			'sanitize_text'
 		);
@@ -391,7 +405,37 @@ class CCLUK_Customizer {
 				'choices'       => $this->option_pages,
 				'description'   => esc_html__('Select the page you want to link to.', 'onesocial'),
 			)
-		);		
+		);	
+
+		// Buttons
+		for( $i = 1; $i <= 2; $i++ ) {
+			$this->add_setting( $section.'_button_'.$i.'_page', 'sanitize_number' );
+
+			$this->customize->add_control( $section.'_button_'.$i.'_page',
+				array(
+					'label'     	=> esc_html__('Button '.$i.' Page', 'onesocial'),
+					'section' 		=> $section.'_content',
+					'type'          => 'select',
+					'priority'      => 10,
+					'choices'       => $this->option_pages,
+					'description'   => esc_html__('Select the page you want the button to link to.', 'onesocial'),
+				)
+			);	
+
+			$this->add_setting( 
+				$section.'_button_'.$i.'_text', 
+				'sanitize_text'
+			);
+
+			$this->customize->add_control( new CCLUK_Editor_Custom_Control(
+				$this->customize,
+				$section.'_button_'.$i.'_text',
+				array(
+					'label' 		=> esc_html__('Button '.$i.' Text', 'onesocial'),
+					'section' 		=> $section.'_content'
+				)
+			));
+		}
 	}
 
 	private function homepage_join( $priority = 160 ) {

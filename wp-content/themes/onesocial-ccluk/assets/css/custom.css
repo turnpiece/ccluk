@@ -606,6 +606,36 @@ body.page-template-homepage #main {
     body.page-template-homepage #main .section .section-footer {
       text-align: center;
       margin: 0 auto; }
+    body.page-template-homepage #main .section.masthead {
+      position: relative; }
+      body.page-template-homepage #main .section.masthead .section-content {
+        max-width: 100%;
+        background-color: #000; }
+        body.page-template-homepage #main .section.masthead .section-content > img {
+          display: block;
+          object-fit: cover;
+          width: 100%;
+          opacity: 0.5; }
+      body.page-template-homepage #main .section.masthead .section-title-container {
+        position: absolute;
+        left: 50%;
+        top: 35%;
+        bottom: 35%;
+        padding: 0;
+        text-align: center;
+        z-index: 5;
+        max-width: 450px; }
+        body.page-template-homepage #main .section.masthead .section-title-container > .section-title {
+          position: relative;
+          left: -50%; }
+          body.page-template-homepage #main .section.masthead .section-title-container > .section-title h2,
+          body.page-template-homepage #main .section.masthead .section-title-container > .section-title p {
+            color: #fff; }
+          body.page-template-homepage #main .section.masthead .section-title-container > .section-title .buttons > .button {
+            color: #fff;
+            font-weight: 500;
+            text-transform: uppercase;
+            margin: 10px; }
     body.page-template-homepage #main .section.feature .section-content {
       max-width: 580px; }
       body.page-template-homepage #main .section.feature .section-content article {
