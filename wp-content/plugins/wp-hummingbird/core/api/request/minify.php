@@ -13,7 +13,7 @@ class WP_Hummingbird_API_Request_Minify extends WP_Hummingbird_API_Request {
 	public function get_api_key() {
 		global $wpmudev_un;
 
-		if ( ! is_object( $wpmudev_un )  && class_exists( 'WPMUDEV_Dashboard' ) && method_exists( 'WPMUDEV_Dashboard', 'instance' ) ) {
+		if ( ! is_object( $wpmudev_un ) && class_exists( 'WPMUDEV_Dashboard' ) && method_exists( 'WPMUDEV_Dashboard', 'instance' ) ) {
 			$wpmudev_un = WPMUDEV_Dashboard::instance();
 		}
 

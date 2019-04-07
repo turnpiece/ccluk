@@ -73,6 +73,13 @@ class Shipper_Controller_Hub_Migration extends Shipper_Controller_Hub {
 		Shipper_Controller_Runner_Migration::get()->kickstart();
 		Shipper_Helper_Log::write( 'Action kickstarted remotely' );
 
+		/**
+		 * Fires on remote migration kickstart
+		 *
+		 * @since v1.0.1
+		 */
+		do_action( 'shipper_dev_ping' );
+
 		return $this->send_response_success(
 			array( 'status' => true ),
 			$request

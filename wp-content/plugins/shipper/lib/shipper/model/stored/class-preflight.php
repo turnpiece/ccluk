@@ -127,11 +127,35 @@ class Shipper_Model_Stored_Preflight extends Shipper_Model_Stored {
 	 * @return array
 	 */
 	public function get_check( $check ) {
+		if ( self::KEY_CHECKS_FILES === $check ) {
+			return $this->get_files_check();
+		}
 		$checks = $this->get( self::KEY_CHECKS, array() );
 		$data = ! empty( $checks[ $check ] ) && is_array( $checks[ $check ] )
 			? $checks[ $check ]
 			: array()
 		;
+		return $data;
+	}
+
+	/**
+	 * Special-case files check getter.
+	 *
+	 * This is used so we can get the package sizes check updated dynamically.
+	 *
+	 * @return array
+	 */
+	public function get_files_check() {
+		$checks = $this->get( self::KEY_CHECKS, array() );
+		$key = self::KEY_CHECKS_FILES;
+		$data = ! empty( $checks[ $key ] ) && is_array( $checks[ $key ] )
+			? $checks[ $key ]
+			: array()
+		;
+
+		$check = new Shipper_Task_Check_Files;
+		$data[] = $check->get_package_size_check()->get_data();
+
 		return $data;
 	}
 

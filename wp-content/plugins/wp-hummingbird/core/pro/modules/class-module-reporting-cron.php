@@ -6,7 +6,16 @@
  *
  * @since 1.5.0
  */
-class WP_Hummingbird_Module_Reporting_Cron extends WP_Hummingbird_Module {
+class WP_Hummingbird_Module_Reporting_Cron extends WP_Hummingbird_Module_Reports {
+
+	/**
+	 * Module slug.
+	 *
+	 * @since 1.9.4
+	 *
+	 * @var string $module
+	 */
+	protected static $module = 'performance';
 
 	/**
 	 * Initialize the module
@@ -14,107 +23,37 @@ class WP_Hummingbird_Module_Reporting_Cron extends WP_Hummingbird_Module {
 	 * @since 1.5.0
 	 */
 	public function init() {
-		// Process scan cron.
-		add_action( 'wphb_performance_scan', array( $this, 'process_scan_cron' ) );
-
-		// Default settings.
-		add_filter( 'wp_hummingbird_default_options', array( $this, 'add_default_options' ) );
-
+		parent::init();
 		add_action( 'wphb_init_performance_scan', array( $this, 'on_init_performance_scan' ) );
-
-		add_action( 'wphb_activate', array( $this, 'on_activate' ) );
-	}
-
-	/**
-	 * Execute the module actions.
-	 */
-	public function run() {}
-
-	/**
-	 * Implement abstract parent method for clearing cache.
-	 *
-	 * @since 1.7.1
-	 */
-	public function clear_cache() {}
-
-	/**
-	 * Triggered during plugin activation
-	 */
-	public function on_activate() {
-
-		if ( ! WP_Hummingbird_Utils::is_member() ) {
-			return;
-		}
-
-		/* @var WP_Hummingbird_Module_Performance $performance */
-		$performance = WP_Hummingbird_Utils::get_module( 'performance' );
-		$options = $performance->get_options();
-
-		// Try to schedule next scan.
-		if ( $options['reports'] ) {
-			wp_schedule_single_event( WP_Hummingbird_Module_Reporting_Cron::get_scheduled_scan_time(), 'wphb_performance_scan' );
-		}
-
 	}
 
 	/**
 	 * Triggered when a performance scan is initialized
 	 */
 	public function on_init_performance_scan() {
-
 		if ( WP_Hummingbird_Utils::is_member() ) {
 			// Schedule first scan.
-			wp_schedule_single_event( WP_Hummingbird_Module_Reporting_Cron::get_scheduled_scan_time(), 'wphb_performance_scan' );
+			wp_schedule_single_event( parent::get_scheduled_time( self::$module ), 'wphb_performance_report' );
 		} else {
 			/* @var WP_Hummingbird_Module_Performance $performance */
-			$performance = WP_Hummingbird_Utils::get_module( 'performance' );
-			$options = $performance->get_options();
+			$performance        = WP_Hummingbird_Utils::get_module( 'performance' );
+			$options            = $performance->get_options();
 			$options['reports'] = false;
+
 			$performance->update_options( $options );
 		}
-
-	}
-
-	/**
-	 * Add a set of default options to Hummingbird settings
-	 *
-	 * @param  array $options  List of default Hummingbird settings.
-	 * @return array
-	 * @since  1.5.0
-	 */
-	public function add_default_options( $options ) {
-		$week_days = array(
-			'Monday',
-			'Tuesday',
-			'Wednesday',
-			'Thursday',
-			'Friday',
-			'Saturday',
-			'Sunday',
-		);
-
-		$hour = wp_rand( 0, 23 );
-
-		$options['performance']['reports']    = false;
-		$options['performance']['frequency']  = 7;
-		$options['performance']['day']        = $week_days[ array_rand( $week_days, 1 ) ];
-		$options['performance']['time']       = $hour . ':00';
-		$options['performance']['recipients'] = array();
-
-		return $options;
 	}
 
 	/**
 	 * Ajax action for processing a scan on page.
 	 *
 	 * TODO: this code needs to be refactored.
-	 * TODO: change wphb_cron_limit to be a transient instead of option
 	 *
 	 * @since 1.4.5
 	 */
-	public function process_scan_cron() {
+	public function process_report() {
 		// Clean all cron.
-		wp_clear_scheduled_hook( 'wphb_performance_scan' );
+		wp_clear_scheduled_hook( 'wphb_performance_report' );
 
 		if ( ! WP_Hummingbird_Utils::is_member() ) {
 			return;
@@ -123,11 +62,11 @@ class WP_Hummingbird_Module_Reporting_Cron extends WP_Hummingbird_Module {
 		$options = WP_Hummingbird_Settings::get_settings( 'performance' );
 
 		// Don't do any reports if they are not set in the options.
-		if ( ! $options['reports'] ) {
+		if ( ! $options['reports']['enabled'] ) {
 			return;
 		}
 
-		$limit = absint( get_site_option( 'wphb_cron_limit' ) );
+		$limit = absint( get_site_transient( 'wphb_cron_limit' ) );
 
 		// Refresh the report and get the data.
 		WP_Hummingbird_Module_Performance::refresh_report();
@@ -144,138 +83,83 @@ class WP_Hummingbird_Module_Reporting_Cron extends WP_Hummingbird_Module {
 			// First run. Init new report scan.
 			if ( 0 === $limit ) {
 				/* @var WP_Hummingbird_Module_Performance $perf_module */
-				$perf_module = WP_Hummingbird_Utils::get_module( 'performance' );
-				$perf_module->init_scan();
+				WP_Hummingbird_Utils::get_module( 'performance' )->init_scan();
 			}
 
 			// Update cron limit.
-			update_site_option( 'wphb_cron_limit', ++$limit );
+			set_site_transient( 'wphb_cron_limit', ++$limit, 3600 );
 			// Reschedule in 1 minute to collect results.
-			wp_schedule_single_event( strtotime( '+1 minutes' ), 'wphb_performance_scan' );
+			wp_schedule_single_event( strtotime( '+1 minutes' ), 'wphb_performance_report' );
 		} else {
 			// Failed to fetch results in 3 attempts or less, cancel the cron.
 			if ( 3 === $limit ) {
-				delete_site_option( 'wphb_cron_limit' );
+				delete_site_transient( 'wphb_cron_limit' );
 			}
 
 			// Check to see it the email has been sent already.
-			$last_sent_report = (int) $options['last_sent'];
-			$to_utc = (int) self::get_scheduled_scan_time( false );
+			$last_sent_report = isset( $options['reports']['last_sent'] ) ? (int) $options['reports']['last_sent'] : 0;
+			$to_utc           = (int) parent::get_scheduled_time( self::$module, false );
 
 			// Schedule next test.
 			if ( $time_difference < 300 && isset( $last_report ) && ( $to_utc - time() - $last_sent_report ) > 0 ) {
 				// Get the recipient list.
-				$recipients = $options['recipients'];
+				$recipients = $options['reports']['recipients'];
 				// Send the report.
-				WP_Hummingbird_Module_Reporting::send_email_report( $last_report->data, $recipients );
+				$this->send_email_report( $last_report->data, $recipients );
 				// Store the last send time.
-				$options['last_sent'] = time();
+				$options['reports']['last_sent'] = time();
 				WP_Hummingbird_Settings::update_settings( $options, 'performance' );
-				delete_site_option( 'wphb_cron_limit' );
+				delete_site_transient( 'wphb_cron_limit' );
 			}
 
 			// Reschedule.
-			$next_scan_time = self::get_scheduled_scan_time();
-			wp_schedule_single_event( $next_scan_time, 'wphb_performance_scan' );
+			$next_scan_time = parent::get_scheduled_time( self::$module );
+			wp_schedule_single_event( $next_scan_time, 'wphb_performance_report' );
 		} // End if().
 	}
 
 	/**
-	 * Get the schedule time for a scan.
+	 * Send out an email report.
 	 *
-	 * @param  bool $clear_cron  Force to clear scanning cron.
-	 * @return false|int
-	 * @since  1.4.5
-	 */
-	public static function get_scheduled_scan_time( $clear_cron = true ) {
-
-		if ( $clear_cron ) {
-			wp_clear_scheduled_hook( 'wphb_performance_scan' );
-		}
-
-		$options = WP_Hummingbird_Settings::get_settings( 'performance' );
-
-		switch ( $options['frequency'] ) {
-			case '1':
-				// Check if the time is over or not, then send the date.
-				$time_string      = date( 'Y-m-d' ) . ' ' . $options['time'] . ':00';
-				$next_time_string = date( 'Y-m-d', strtotime( 'tomorrow' ) ) . ' ' . $options['time'] . ':00';
-				break;
-			case '7':
-			default:
-				$time_string      = date( 'Y-m-d', strtotime( $options['day'] . ' this week' ) ) . ' ' . $options['time'] . ':00';
-				$next_time_string = date( 'Y-m-d', strtotime( $options['day'] . ' next week' ) ) . ' ' . $options['time'] . ':00';
-				break;
-			case '30':
-				$time_string      = date( 'Y-m-d', strtotime( $options['day'] . ' this week' ) ) . ' ' . $options['time'] . ':00';
-				$next_time_string = date( 'Y-m-d', strtotime( '+1 month ' . $options['day'] . ' this week' ) ) . ' ' . $options['time'] . ':00';
-				break;
-		}
-
-		$to_utc = self::local_to_utc( $time_string );
-		if ( $to_utc < time() ) {
-			return self::local_to_utc( $next_time_string );
-		} else {
-			return $to_utc;
-		}
-
-	}
-
-	/**
-	 * Local time to UTC.
+	 * @since 1.4.5
 	 *
-	 * @param  string $time  Time string.
-	 * @return false|int
-	 * @since  1.4.5
+	 * @param mixed $last_report  Last report data.
+	 * @param array $recipients   List of recipients.
 	 */
-	private static function local_to_utc( $time ) {
-
-		$tz = get_option( 'timezone_string' );
-		if ( ! $tz ) {
-			$gmt_offset = get_option( 'gmt_offset' );
-			if ( 0 === $gmt_offset ) {
-				return strtotime( $time );
-			}
-			$tz = self::get_timezone_string( $gmt_offset );
+	public function send_email_report( $last_report, $recipients = array() ) {
+		if ( WP_Hummingbird_Module_Performance::is_doing_report() ) {
+			return;
 		}
 
-		if ( ! $tz ) {
-			$tz = 'UTC';
-		}
-		$timezone = new DateTimeZone( $tz );
-		$time     = new DateTime( $time, $timezone );
-
-		// Had to switch because of PHP 5.2 compatibility issues.
-		//return $time->getTimestamp();
-		return $time->format( 'U' );
-
-	}
-
-	/**
-	 * Get time zone string.
-	 *
-	 * @param  string $timezone  Time zone.
-	 * @return false|string
-	 * @since  1.4.5
-	 */
-	private static function get_timezone_string( $timezone ) {
-
-		$timezone = explode( '.', $timezone );
-		if ( isset( $timezone[1] ) ) {
-			$timezone[1] = 30;
-		} else {
-			$timezone[1] = '00';
-		}
-		$offset = implode( ':', $timezone );
-		list( $hours, $minutes ) = explode( ':', $offset );
-		$seconds = $hours * 60 * 60 + $minutes * 60;
-		$tz      = timezone_name_from_abbr( '', $seconds, 1 );
-		if ( false === $tz ) {
-			$tz = timezone_name_from_abbr( '', $seconds, 0 );
+		$issues = WP_Hummingbird_Utils::get_number_of_issues( 'performance' );
+		if ( 0 === $issues || empty( $recipients ) ) {
+			return;
 		}
 
-		return $tz;
+		foreach ( $recipients as $recipient ) {
+			// Prepare the parameters.
+			$email = $recipient['email'];
+			/* translators: %s: Url for site */
+			$subject       = sprintf( __( "Here's your latest performance test results for %s", 'wphb' ), network_site_url() );
+			$params        = array(
+				'REPORT_TYPE'     => 'performance',
+				'USER_NAME'       => $recipient['name'],
+				'SCAN_PAGE_LINK'  => network_admin_url( 'admin.php?page=wphb-performance' ),
+				'SITE_MANAGE_URL' => network_site_url( 'wp-admin/admin.php?page=wphb' ),
+				'SITE_URL'        => wp_parse_url( network_site_url(), PHP_URL_HOST ),
+				'SITE_NAME'       => get_bloginfo( 'name' ),
+			);
+			$email_content = parent::issues_list_html( $last_report, $params );
+			// Change nl to br.
+			$email_content  = stripslashes( $email_content );
+			$no_reply_email = 'noreply@' . wp_parse_url( get_site_url(), PHP_URL_HOST );
+			$headers        = array(
+				'From: Hummingbird <' . $no_reply_email . '>',
+				'Content-Type: text/html; charset=UTF-8',
+			);
 
+			wp_mail( $email, $subject, $email_content, $headers );
+		}
 	}
 
 }

@@ -26,13 +26,13 @@
 		foreach ( $report->rule_result as $rule => $rule_result ) :
 			if ( 85 <= $rule_result->impact_score ) :
 				$impact_score_class = 'success';
-				$impact_icon_class = 'check-tick';
+				$impact_icon_class  = 'check-tick';
 			elseif ( 65 <= $rule_result->impact_score ) :
 				$impact_score_class = 'warning';
-				$impact_icon_class = 'warning-alert';
+				$impact_icon_class  = 'warning-alert';
 			else :
 				$impact_score_class = 'error';
-				$impact_icon_class = 'warning-alert';
+				$impact_icon_class  = 'warning-alert';
 			endif;
 			?>
 			<tr class="sui-accordion-item sui-<?php echo esc_attr( $impact_score_class ); ?>">

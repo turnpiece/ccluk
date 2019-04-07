@@ -59,7 +59,7 @@ class WP_Hummingbird_Advanced_Tools_Page extends WP_Hummingbird_Admin_Page {
 			null,
 			'db',
 			array(
-				'box_footer_class'  => WP_Hummingbird_Utils::is_member() ? 'sui-box-footer' : 'sui-box-footer wphb-db-cleanup-no-membership',
+				'box_footer_class' => WP_Hummingbird_Utils::is_member() ? 'sui-box-footer' : 'sui-box-footer wphb-db-cleanup-no-membership',
 			)
 		);
 
@@ -109,11 +109,14 @@ class WP_Hummingbird_Advanced_Tools_Page extends WP_Hummingbird_Admin_Page {
 			$prefetch .= $url . "\r\n";
 		}
 
-		$this->view( 'advanced/general-meta-box', array(
-			'query_stings' => $options['query_string'],
-			'emoji'        => $options['emoji'],
-			'prefetch'     => trim( $prefetch ),
-		) );
+		$this->view(
+			'advanced/general-meta-box',
+			array(
+				'query_stings' => $options['query_string'],
+				'emoji'        => $options['emoji'],
+				'prefetch'     => trim( $prefetch ),
+			)
+		);
 	}
 
 	/**
@@ -126,7 +129,7 @@ class WP_Hummingbird_Advanced_Tools_Page extends WP_Hummingbird_Admin_Page {
 	 */
 	public function advanced_db_metabox() {
 		$fields = WP_Hummingbird_Module_Advanced::get_db_fields();
-		$data = WP_Hummingbird_Module_Advanced::get_db_count();
+		$data   = WP_Hummingbird_Module_Advanced::get_db_count();
 		foreach ( $fields as $type => $field ) {
 			$fields[ $type ]['value'] = $data->$type;
 		}
@@ -155,9 +158,12 @@ class WP_Hummingbird_Advanced_Tools_Page extends WP_Hummingbird_Admin_Page {
 			'server' => $server_info,
 		);
 
-		$this->view( 'advanced/system-info-meta-box', array(
-			'system_info' => $system_info,
-		) );
+		$this->view(
+			'advanced/system-info-meta-box',
+			array(
+				'system_info' => $system_info,
+			)
+		);
 	}
 
 }

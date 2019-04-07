@@ -10,13 +10,18 @@ import Fetcher from './utils/fetcher';
 
             let self = this;
             let body = $('body');
+            let wrap = body.find('.sui-wrap');
 
             // Save settings
             body.on('submit', '.settings-frm', function (e) {
                 e.preventDefault();
                 const form_data = $(this).serialize();
-                body.find('.sui-wrap').toggleClass('sui-color-accessible');
 
+                if ( $('#color_accessible').is(':checked') ) {
+                    wrap.addClass('sui-color-accessible');
+                } else {
+                    wrap.removeClass('sui-color-accessible');
+                }
                 Fetcher.settings.saveSettings( form_data )
                     .then( () => {
 						WPHB_Admin.notices.show('wphb-ajax-update-notice', true);

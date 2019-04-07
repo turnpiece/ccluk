@@ -75,6 +75,17 @@ class Shipper_Controller_Ajax_Admin extends Shipper_Controller_Ajax {
 			? sanitize_text_field( $data['target'] )
 			: false
 		;
+
+		if ( 'system' === $modal ) {
+			$system = new Shipper_Model_System;
+			$check = new Shipper_Task_Check_System;
+			$check->apply( $system->get_data() );
+			if ( $check->has_checks_with_errors() ) {
+				// Do not record system modal as seen if it has errors.
+				$modal = false;
+			}
+		}
+
 		if ( ! empty( $modal ) ) {
 			$modals = new Shipper_Model_Stored_Modals;
 			$modals->set( $modal, Shipper_Model_Stored_Modals::STATE_CLOSED );

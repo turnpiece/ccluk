@@ -612,32 +612,35 @@ function ct_ajax_delete_checked_users()
 	die();
 }
 
-function ct_ajax_delete_all_users()
+function ct_ajax_delete_all_users($count_all = 0)
 {
 	check_ajax_referer( 'ct_secret_nonce', 'security' );
 
     global $wpdb;
     
-	$r = $wpdb->get_results("select count(*) as cnt from $wpdb->usermeta where meta_key='ct_marked_as_spam';");	
-	$count_all = $r ? $r[0]->cnt : 0;
-    
-	$args = array(
-		'meta_key' => 'ct_marked_as_spam',
-		'meta_value' => '1',
-		'fields' => array('ID'),
-		'number' => 50
-	);
-	$users = get_users($args);
+	$r = $wpdb->get_results("select count(*) as cnt from $wpdb->usermeta where meta_key='ct_marked_as_spam';", ARRAY_A);
 	
-    if ($users){
-        foreach($users as $user){
-            wp_delete_user($user->ID);
-            usleep(5000);
-        }
-	}
+	if(!empty($r)){
 
-	print $count_all;
-	die();
+		$count_all = $r ? $r[0]->cnt : 0;
+
+		$args = array(
+			'meta_key' => 'ct_marked_as_spam',
+			'meta_value' => '1',
+			'fields' => array('ID'),
+			'number' => 50
+		);
+		$users = get_users($args);
+
+		if ($users){
+			foreach($users as $user){
+				wp_delete_user($user->ID);
+				usleep(5000);
+			}
+		}
+	}
+	
+	die($count_all);
 }
 
 function ct_ajax_clear_users()

@@ -6,13 +6,8 @@
 @import "../common/mixins";
 
 @include body-class(true) {
-    /**
-     * Empty files meta box.
-     */
-    .box-minification-empty-files {
-        .sui-dialog {
-            text-align: left; /* overwrite for sui-block-content-center */
-        }
+    .sui-dialog {
+        text-align: left;
     }
 
     /* Modal window */
@@ -25,16 +20,7 @@
             padding: 10px 10px;
             width: 70px;
             height: 50px;
-
-            & > [class^="hb-"]:before {
-                margin-right: 0;
-            }
         }
-    }
-
-    /* Overwrite for advanced view */
-    .wphb-minification-advanced-group input[type="checkbox"] + label > [class^="hb-"]:before {
-        margin-right: 0;
     }
 
     /* Checkbox groups & exclude */
@@ -47,7 +33,7 @@
 
         & > span {
             color: #AAAAAA;
-            font-size: 12px;
+            font-size: 16px;
             line-height: 40px;
         }
 
@@ -92,12 +78,8 @@
             & > i {
                 color: #888888;
                 padding: 0;
-                font-size: 12px;
-            }
-
-            & > [class^="hb-"]:before {
-                font-size: 14px;
-                vertical-align: -2px;
+                font-size: 16px;
+                line-height: 16px;
             }
 
             & > [tooltip] {
@@ -130,12 +112,6 @@
             & > i {
                 color: #DDD;
             }
-        }
-
-        label [class^="hb-"] {
-            display: block;
-            padding: 10px 0 4px;
-
         }
     }
 
@@ -449,7 +425,6 @@
         float: left;
         line-height: 30px;
         margin-right: 10px;
-        margin-top: 4px;
     }
 
     /* Filter */
@@ -479,10 +454,6 @@
         text-transform: none;
         margin-right: 21px;
         margin-left: 0;
-    }
-
-    .wphb-minification-filter .select-list-container {
-        min-width: 240px !important;
     }
 
     /* Disabled/hidden row start */
@@ -714,14 +685,6 @@
 
         .checkbox-group input[type="checkbox"] + label {
             width: 60px;
-        }
-
-        .checkbox-group input[type="checkbox"] + label > [class^="hb-"]:before {
-            margin-right: 0;
-        }
-
-        .checkbox-group input[type="checkbox"] + label > span[class^=hb] > span {
-            display: none;
         }
 
         .wphb-minification-files-advanced .fileinfo-group:after {

@@ -330,56 +330,6 @@ if ( ! class_exists( 'Snapshot_Helper_UI' ) ) {
 				: $link;
 		}
 
-		public static function activation_pointers() {
-			// Find out which pointer IDs this user has already seen.
-			$seen_it = explode( ',', (string) get_user_meta( get_current_user_id(), 'dismissed_wp_pointers', true ) );
-			// At first assume we don't want to show pointers.
-			$do_add_script = false;
-
-			$screen = get_current_screen();
-			$screen_id = $screen->id;
-
-			if  ( 'plugins' !== $screen_id ) {
-				return;
-			}
-			// Check for older dismissal of Snapshot settings menu pointer 'snapshot_activation_pointer'.
-			if ( ! in_array( 'snapshot_activation_pointer', $seen_it, true ) ) {
-				$do_add_script = true;
-				add_action( 'admin_print_footer_scripts', array( 'Snapshot_Helper_UI', 'activation_pointer_footer_script' ) );
-			}
-			if ( $do_add_script ) {
-				wp_enqueue_script( 'wp-pointer' );
-				wp_enqueue_style( 'wp-pointer' );
-			}
-		}
-
-		public static function activation_pointer_footer_script() {
-			$pointer_content  = '<h3>' .  __( 'Create Backups', 'SNAPSHOT_I18N_DOMAIN' ) . '</h3>';
-			$pointer_content .= '<p>' .  __( 'Start creating automated and on-demand backups here.', 'SNAPSHOT_I18N_DOMAIN' ) . '</p>';
-			?>
-			<script type="text/javascript">
-			//<![CDATA[
-			jQuery(document).ready( function($) {
-				$('#toplevel_page_snapshot_pro_dashboard').pointer({
-					content:		'<?php echo wp_kses_post( $pointer_content ); ?>',
-					position:		{
-										edge:	'left', // arrow direction
-										align:	'center' // vertical alignment
-									},
-					close:			function() {
-										$.post( ajaxurl, {
-												pointer: 'snapshot_activation_pointer', // pointer ID
-												action: 'dismiss-wp-pointer'
-										});
-									}
-				}).pointer('open');
-			});
-			//]]>
-			</script>
-
-			<?php
-		}
-
 		/**
 		 * Display our message on the Snapshot page(s) header for AWS SDK compatibility
 		 *

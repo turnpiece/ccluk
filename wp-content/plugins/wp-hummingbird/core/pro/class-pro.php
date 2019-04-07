@@ -75,14 +75,17 @@ class WP_Hummingbird_Pro {
 		);
 
 		if ( ! function_exists( 'is_plugin_active' ) || ! function_exists( 'is_plugin_active_for_network' ) ) {
-			include_once( ABSPATH . 'wp-includes/plugin.php' );
+			include_once ABSPATH . 'wp-includes/plugin.php';
 		}
 
 		/* @noinspection PhpIncludeInspection */
-		include_once( WPHB_DIR_PATH . 'core/pro/externals/dash-notice/wpmudev-dash-notification.php' );
+		include_once WPHB_DIR_PATH . 'core/pro/externals/dash-notice/wpmudev-dash-notification.php';
+
+		/* @noinspection PhpIncludeInspection */
+		include_once WPHB_DIR_PATH . 'core/pro/modules/class-abstract-reports.php';
 
 		if ( is_admin() ) {
-			include_once( 'admin/class-pro-admin.php' );
+			include_once 'admin/class-pro-admin.php';
 			$this->admin = new WP_Hummingbird_Pro_Admin();
 			$this->admin->init();
 		}
@@ -116,7 +119,7 @@ class WP_Hummingbird_Pro {
 	private function load_ajax() {
 		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 			/* @noinspection PhpIncludeInspection */
-			include_once( WPHB_DIR_PATH . 'core/pro/class-pro-ajax.php' );
+			include_once WPHB_DIR_PATH . 'core/pro/class-pro-ajax.php';
 			new WP_Hummingbird_Pro_AJAX();
 		}
 	}
@@ -127,12 +130,14 @@ class WP_Hummingbird_Pro {
 	 * @since 1.5.0
 	 */
 	private function load_modules() {
-		$modules = apply_filters( 'wp_hummingbird_modules', array(
-			'reporting-cron' => __( 'Cron', 'wphb' ),
-			'reporting'      => __( 'Reporting', 'wphb' ),
-			'cleanup-cron'   => __( 'Database Cleanup', 'wphb' ),
-			'uptime-reports' => __( 'Reports', 'wphb' ),
-		) );
+		$modules = apply_filters(
+			'wp_hummingbird_modules',
+			array(
+				'reporting-cron' => __( 'Cron', 'wphb' ),
+				'cleanup-cron'   => __( 'Database Cleanup', 'wphb' ),
+				'uptime-reports' => __( 'Reports', 'wphb' ),
+			)
+		);
 
 		array_walk( $modules, array( $this, 'load_module' ) );
 	}

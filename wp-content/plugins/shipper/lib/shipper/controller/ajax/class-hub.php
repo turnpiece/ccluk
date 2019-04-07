@@ -20,6 +20,35 @@ class Shipper_Controller_Ajax_Hub extends Shipper_Controller_Ajax {
 		add_action( 'wp_ajax_shipper_list_hub_sites', array( $this, 'json_list_hub_sites' ) );
 		add_action( 'wp_ajax_shipper_prepare_hub_site', array( $this, 'json_prepare_hub_site' ) );
 		add_action( 'wp_ajax_shipper_clear_cache', array( $this, 'json_clear_cache' ) );
+
+		add_action(
+			'wp_ajax_shipper_remove_destination',
+			array( $this, 'json_remove_destination' )
+		);
+	}
+
+	/**
+	 * Removes a site from the destinations list
+	 *
+	 * As a side-effect, also clears the destinations cache.
+	 */
+	public function json_remove_destination() {
+		$this->do_request_sanity_check();
+
+		$destinations = new Shipper_Model_Stored_Destinations;
+		$destinations->clear()->save();
+
+		$site_id = ! empty( $_POST['site_id'] )
+			? (int) sanitize_text_field( $_POST['site_id'] )
+			: false;
+
+		if ( ! empty( $site_id ) ) {
+			$task = new Shipper_Task_Api_Destinations_Remove;
+			$task->apply( array( 'site_id' => $site_id ) );
+		}
+
+
+		return wp_send_json_success();
 	}
 
 	/**

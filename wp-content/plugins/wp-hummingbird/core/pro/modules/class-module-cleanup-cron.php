@@ -55,7 +55,7 @@ class WP_Hummingbird_Module_Cleanup_Cron extends WP_Hummingbird_Module {
 
 		/* @var WP_Hummingbird_Module_Performance $adv_module */
 		$adv_module = WP_Hummingbird_Utils::get_module( 'advanced' );
-		$options = $adv_module->get_options();
+		$options    = $adv_module->get_options();
 
 		if ( true === (bool) $options['db_cleanups'] ) {
 			wp_schedule_single_event( self::get_scheduled_scan_time(), 'wphb_database_cleanup' );
@@ -73,11 +73,11 @@ class WP_Hummingbird_Module_Cleanup_Cron extends WP_Hummingbird_Module {
 		$options['advanced']['db_frequency'] = 7;
 		$options['advanced']['db_tables']    = array(
 			'revisions'          => true,
-            'drafts'             => true,
-            'trash'              => true,
-            'spam'               => true,
-            'trash_comment'      => true,
-            'expired_transients' => true,
+			'drafts'             => true,
+			'trash'              => true,
+			'spam'               => true,
+			'trash_comment'      => true,
+			'expired_transients' => true,
 		);
 
 		return $options;
@@ -91,7 +91,7 @@ class WP_Hummingbird_Module_Cleanup_Cron extends WP_Hummingbird_Module {
 	public static function get_scheduled_scan_time() {
 		/* @var WP_Hummingbird_Module_Advanced $adv_module */
 		$adv_module = WP_Hummingbird_Utils::get_module( 'advanced' );
-		$options = $adv_module->get_options();
+		$options    = $adv_module->get_options();
 
 		$seconds = DAY_IN_SECONDS * (int) $options['db_frequency'];
 
@@ -110,7 +110,7 @@ class WP_Hummingbird_Module_Cleanup_Cron extends WP_Hummingbird_Module {
 
 		/* @var WP_Hummingbird_Module_Advanced $adv_module */
 		$adv_module = WP_Hummingbird_Utils::get_module( 'advanced' );
-		$options = $adv_module->get_options();
+		$options    = $adv_module->get_options();
 
 		if ( ! isset( $options['db_tables'] ) ) {
 			// Try to schedule next scan.

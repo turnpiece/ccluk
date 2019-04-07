@@ -159,9 +159,12 @@ class WP_Hummingbird_Module_Minify_Groups_List {
 	public function get_group_by_group_id( $group_id ) {
 		/* @var WP_Hummingbird_Module_Minify_Group $group */
 		$groups = $this->get_groups();
-		$result = wp_list_filter( $groups, array(
-			'group_id' => $group_id,
-		) );
+		$result = wp_list_filter(
+			$groups,
+			array(
+				'group_id' => $group_id,
+			)
+		);
 
 		if ( $result ) {
 			return $result[ key( $result ) ];
@@ -213,15 +216,15 @@ class WP_Hummingbird_Module_Minify_Groups_List {
 		}
 
 		/* @var WP_Hummingbird_Module_Minify_Group $group */
-		$group = $this->groups[ $position ];
+		$group      = $this->groups[ $position ];
 		$new_groups = array();
 		foreach ( $new_handles_order as $handles_order ) {
 			$new_groups[] = $group->slice_handles( $handles_order );
 		}
 
 		if ( ! empty( $new_groups ) ) {
-			$sliced_left = array_slice( $this->groups, 0, $position );
-			$sliced_right = array_slice( $this->groups, $position );
+			$sliced_left              = array_slice( $this->groups, 0, $position );
+			$sliced_right             = array_slice( $this->groups, $position );
 			$first_key_on_right_slice = key( $sliced_right );
 
 			$sliced_left = array_merge( $sliced_left, $new_groups );
@@ -253,7 +256,7 @@ class WP_Hummingbird_Module_Minify_Groups_List {
 		}
 
 		$group_hashes = wp_list_pluck( $this->groups, 'hash' );
-		$position = array_search( $key_or_hash, $group_hashes, true );
+		$position     = array_search( $key_or_hash, $group_hashes, true );
 
 		if ( false !== $position ) {
 			return $position;
@@ -329,42 +332,48 @@ class WP_Hummingbird_Module_Minify_Groups_List {
 		$self = $this;
 		// Now that every is marked, let's parse dependencies
 		// This cannot be undone, so do not change groups after this.
-		array_map( function( $group ) use ( &$deps, $self ) {
-			/* @var WP_Hummingbird_Module_Minify_Group $group */
-			$search_group_deps = $group->get_all_handles_dependencies();
-			$search_group_hash = $group->hash;
-			$deps[ $search_group_hash ] = array();
+		array_map(
+			function( $group ) use ( &$deps, $self ) {
+					/* @var WP_Hummingbird_Module_Minify_Group $group */
+					$search_group_deps          = $group->get_all_handles_dependencies();
+					$search_group_hash          = $group->hash;
+					$deps[ $search_group_hash ] = array();
 
-			foreach ( $self->get_groups() as $position => $g ) {
-				/* @var WP_Hummingbird_Module_Minify_Group $g */
-				$g_status = $self->get_group_status( $g->hash );
-				$g_hash = $g->hash;
+				foreach ( $self->get_groups() as $position => $g ) {
+					  /* @var WP_Hummingbird_Module_Minify_Group $g */
+					  $g_status = $self->get_group_status( $g->hash );
+					  $g_hash   = $g->hash;
 
-				if ( $g_hash === $search_group_hash ) {
-					// Don't search deps in the same group.
-					continue;
-				}
+					if ( $g_hash === $search_group_hash ) {
+						// Don't search deps in the same group.
+						continue;
+					}
 
-				$g_handles = $g->get_handles();
-				$intersect = array_intersect( $g_handles, $search_group_deps );
-				if ( ! empty( $intersect ) ) {
-					// We've found dependencies.
-					if ( 'ready' !== $g_status ) {
-						// The group is not ready, dependencies are one or more of its handles.
-						$deps[ $search_group_hash ] = array_merge(
-							$deps[ $search_group_hash ],
-							array_map( function( $handle ) use ( $g ) {
-								return $g->group_id . '-' . $handle;
-							}, $intersect )
-						);
+						$g_handles = $g->get_handles();
+						$intersect = array_intersect( $g_handles, $search_group_deps );
+					if ( ! empty( $intersect ) ) {
+						// We've found dependencies.
+						if ( 'ready' !== $g_status ) {
+							// The group is not ready, dependencies are one or more of its handles.
+							$deps[ $search_group_hash ] = array_merge(
+								$deps[ $search_group_hash ],
+								array_map(
+									function( $handle ) use ( $g ) {
+										return $g->group_id . '-' . $handle;
+									},
+									$intersect
+								)
+							);
 
-					} else {
-						$deps[ $search_group_hash ] = array_merge( $deps[ $search_group_hash ], array( $g->group_id ) );
+						} else {
+							$deps[ $search_group_hash ] = array_merge( $deps[ $search_group_hash ], array( $g->group_id ) );	   			 	 		  		   		
+						}
 					}
 				}
-			}
 
-		}, $this->get_groups() );
+			},
+			$this->get_groups()
+		);
 
 		$this->groups_dependencies = $deps;
 		return $deps;

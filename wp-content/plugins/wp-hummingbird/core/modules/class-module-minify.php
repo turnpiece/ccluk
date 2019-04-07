@@ -1,12 +1,12 @@
 <?php
 
-require_once( 'minify/class-uri-rewriter.php' );
-require_once( 'minify/class-errors-controller.php' );
-require_once( 'minify/class-minify-sources-collector.php' );
-include_once( 'minify/class-minify-group.php' );
-include_once( 'minify/class-minify-groups-list.php' );
-include_once( 'minify/class-minify-housekeeper.php' );
-include_once( 'minify/class-minify-scanner.php' );
+require_once 'minify/class-uri-rewriter.php';
+require_once 'minify/class-errors-controller.php';
+require_once 'minify/class-minify-sources-collector.php';
+require_once 'minify/class-minify-group.php';
+require_once 'minify/class-minify-groups-list.php';
+require_once 'minify/class-minify-housekeeper.php';
+require_once 'minify/class-minify-scanner.php';
 
 /**
  * Class WP_Hummingbird_Module_Minify
@@ -239,7 +239,7 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 	 *
 	 * @return array
 	 */
-	function filter_styles( $handles ) {
+	public function filter_styles( $handles ) {
 		return $this->filter_enqueues_list( $handles, 'styles' );
 	}
 
@@ -250,7 +250,7 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 	 *
 	 * @return array
 	 */
-	function filter_scripts( $handles ) {
+	public function filter_scripts( $handles ) {
 		return $this->filter_enqueues_list( $handles, 'scripts' );
 	}
 
@@ -266,7 +266,7 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 	 *
 	 * @return array List of handles that will be processed by WordPress
 	 */
-	function filter_enqueues_list( $handles, $type ) {
+	public function filter_enqueues_list( $handles, $type ) {
 		if ( ! $this->is_active() ) {
 			// Asset optimization is not active, return the handles.
 			return $handles;
@@ -284,7 +284,6 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 			global $wp_scripts;
 			$wp_dependencies = $wp_scripts;
 		} else {
-			// What is this?
 			return $handles;
 		}
 
@@ -390,7 +389,7 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 
 		foreach ( $groups_list->get_groups() as $group ) {
 			$group_status = $groups_list->get_group_status( $group->hash );
-			$deps = $groups_list->get_group_dependencies( $group->hash );
+			$deps         = $groups_list->get_group_dependencies( $group->hash );
 
 			if ( 'ready' === $group_status ) {
 				// The group has its file and is ready to be enqueued.
@@ -400,7 +399,7 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 				// The group has not yet a file attached or it cannot be processed
 				// for some reason.
 				foreach ( $group->get_handles() as $handle ) {
-					$new_id = $group->enqueue_one_handle( $handle, self::is_in_footer(), $deps );
+					$new_id       = $group->enqueue_one_handle( $handle, self::is_in_footer(), $deps );
 					$return_to_wp = array_merge( $return_to_wp, array( $new_id ) );
 				}
 
@@ -435,8 +434,8 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 		// a new group for them keeping the groups order.
 		$group_todos = array();
 		foreach ( $handles as $handle ) {
-			$value = absint( $value );
-			$not_value = absint( ! $value );
+			$value                  = absint( $value );
+			$not_value              = absint( ! $value );
 			$group_todos[ $handle ] = $group->should_do_handle( $handle, $by ) ? $value : $not_value;
 		}
 
@@ -488,7 +487,7 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 	 * @return array
 	 */
 	private function group_dependencies_by_attributes( $handles, $wp_dependencies, $type ) {
-		$groups = array();
+		$groups                    = array();
 		$prev_differentiators_hash = false;
 
 		foreach ( $handles as $handle ) {
@@ -519,7 +518,7 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 			// If previous group has the same values, we'll add this dep it to that group
 			// otherwise, a new group will be created.
 			$group_extra_differentiators = array( 'alt', 'title', 'rtl', 'conditional' );
-			$group_differentiators = array( 'args' );
+			$group_differentiators       = array( 'args' );
 
 			// We'll create a hash for all differentiators.
 			$differentiators_hash = array();
@@ -611,23 +610,29 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 	 */
 	private function attach_inline_attribute( &$groups_list, $wp_dependencies ) {
 		$registered = $wp_dependencies->registered;
-		$extras = wp_list_pluck( $registered, 'extra' );
-		$after = wp_list_pluck( array_filter( $extras, array( $this, '_filter_after_after_attribute' ) ), 'after' );
-		$before = wp_list_pluck( array_filter( $extras, array( $this, '_filter_after_before_attribute' ) ), 'before' );
+		$extras     = wp_list_pluck( $registered, 'extra' );
+		$after      = wp_list_pluck( array_filter( $extras, array( $this, '_filter_after_after_attribute' ) ), 'after' );
+		$before     = wp_list_pluck( array_filter( $extras, array( $this, '_filter_after_before_attribute' ) ), 'before' );
 
-		array_map( function( $group ) use ( $groups_list, $after, $before ) {
-			/* @var WP_Hummingbird_Module_Minify_Group $group */
-			array_map( function( $handle ) use ( $after, $group, $before ) {
-				if ( isset( $after[ $handle ] ) ) {
-					// Add!
-					$group->add_after( $after[ $handle ] );
-				}
-				if ( isset( $before[ $handle ] ) ) {
-					// Add!
-					$group->add_before( $before[ $handle ] );
-				}
-			}, $group->get_handles() );
-		}, $groups_list->get_groups() );
+		array_map(
+			function( $group ) use ( $groups_list, $after, $before ) {
+					/* @var WP_Hummingbird_Module_Minify_Group $group */
+					array_map(
+						function( $handle ) use ( $after, $group, $before ) {
+							if ( isset( $after[ $handle ] ) ) {
+								// Add!
+								$group->add_after( $after[ $handle ] );
+							}
+							if ( isset( $before[ $handle ] ) ) {
+								// Add!
+								$group->add_before( $before[ $handle ] );
+							}
+						},
+						$group->get_handles()
+					);
+			},
+			$groups_list->get_groups()
+		);
 	}
 
 	/**
@@ -638,23 +643,35 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 	 */
 	private function attach_scripts_localization( &$groups_list, $wp_dependencies ) {
 		$registered = $wp_dependencies->registered;
-		$extra = wp_list_pluck( $registered, 'extra' );
-		$data = wp_list_pluck( array_filter( $extra, function( $a ) {
-			if ( isset( $a['data'] ) ) {
-				return $a['data'];
-			}
-			return false;
-		} ), 'data' );
-
-		array_map( function( $group ) use ( $groups_list, $data ) {
-			/* @var WP_Hummingbird_Module_Minify_Group $group */
-			array_map( function( $handle ) use ( $data, $group ) {
-				if ( isset( $data[ $handle ] ) ) {
-					// Add!
-					$group->add_data( $data[ $handle ] );
+		$extra      = wp_list_pluck( $registered, 'extra' );
+		$data       = wp_list_pluck(
+			array_filter(
+				$extra,
+				function( $a ) {
+					if ( isset( $a['data'] ) ) {
+						return $a['data'];
+					}
+					return false;
 				}
-			}, $group->get_handles() );
-		}, $groups_list->get_groups() );
+			),
+			'data'
+		);
+
+		array_map(
+			function( $group ) use ( $groups_list, $data ) {
+					/* @var WP_Hummingbird_Module_Minify_Group $group */
+					array_map(
+						function( $handle ) use ( $data, $group ) {
+							if ( isset( $data[ $handle ] ) ) {
+								  // Add!
+								  $group->add_data( $data[ $handle ] );
+							}
+						},
+						$group->get_handles()
+					);
+			},
+			$groups_list->get_groups()
+		);
 	}
 
 	/**
@@ -796,11 +813,11 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 		if ( empty( $current_queue ) ) {
 			update_option( 'wphb_process_queue', $items );
 		} else {
-			$updated = false;
+			$updated              = false;
 			$current_queue_hashes = wp_list_pluck( $current_queue, 'hash' );
 			foreach ( $items as $item ) {
 				if ( ! in_array( $item->hash, $current_queue_hashes, true ) ) {
-					$updated = true;
+					$updated         = true;
 					$current_queue[] = $item;
 				}
 			}
@@ -817,9 +834,12 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 	 */
 	private function remove_item_from_persistent_queue( $hash ) {
 		$queue = $this->get_pending_persistent_queue();
-		$items = wp_list_filter( $queue, array(
-			'hash' => $hash,
-		) );
+		$items = wp_list_filter(
+			$queue,
+			array(
+				'hash' => $hash,
+			)
+		);
 
 		if ( ! $items ) {
 			return;
@@ -870,17 +890,19 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 		}
 
 		// Clear all the cached groups data.
-		$option_names = $wpdb->get_col( $wpdb->prepare(
-			"SELECT option_name FROM {$wpdb->options}
+		$option_names = $wpdb->get_col(
+			$wpdb->prepare(
+				"SELECT option_name FROM {$wpdb->options}
 				WHERE option_name LIKE %s
 				OR option_name LIKE %s
 				OR option_name LIKE %s
 				OR option_name LIKE %s",
-			'%wphb-min-scripts%',
-			'%wphb-scripts%',
-			'%wphb-min-styles%',
-			'%wphb-styles%'
-		)); // db call ok; no-cache ok.
+				'%wphb-min-scripts%',
+				'%wphb-scripts%',
+				'%wphb-min-styles%',
+				'%wphb-styles%'
+			)
+		); // db call ok; no-cache ok.
 
 		foreach ( $option_names as $name ) {
 			delete_option( $name );
@@ -893,8 +915,8 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 			WP_Hummingbird_Sources_Collector::clear_collection();
 
 			// Reset the minification settings.
-			$options = $this->get_options();
-			$default_options = WP_Hummingbird_Settings::get_default_settings();
+			$options             = $this->get_options();
+			$default_options     = WP_Hummingbird_Settings::get_default_settings();
 			$options['block']    = $default_options['minify']['block'];
 			$options['minify']   = $default_options['minify']['minify'];
 			$options['combine']  = $default_options['minify']['combine'];
@@ -926,14 +948,16 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 		$this->clear_files();
 
 		// Reset the minification settings.
-		$options = $this->get_options();
+		$options         = $this->get_options();
 		$default_options = WP_Hummingbird_Settings::get_default_settings();
-		$options['block']      = $default_options['minify']['block'];
 		if ( $reset_minify ) {
 			$options['minify'] = $default_options['minify']['minify'];
 		}
-		$options['combine']    = $default_options['minify']['combine'];
-		$options['position']   = $default_options['minify']['position'];
+		$options['block']    = $default_options['minify']['block'];
+		$options['combine']  = $default_options['minify']['combine'];
+		$options['position'] = $default_options['minify']['position'];
+		$options['defer']    = $default_options['minify']['defer'];
+		$options['inline']   = $default_options['minify']['inline'];
 		$this->update_options( $options );
 
 		// Clear the pending process queue.
@@ -1011,7 +1035,7 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 	 */
 	public function get_resources_collection() {
 		$collection = WP_Hummingbird_Sources_Collector::get_collection();
-		$posts = WP_Hummingbird_Module_Minify_Group::get_minify_groups();
+		$posts      = WP_Hummingbird_Module_Minify_Group::get_minify_groups();
 		foreach ( $posts as $post ) {
 			$group = WP_Hummingbird_Module_Minify_Group::get_instance_by_post_id( $post->ID );
 			if ( ! $group ) {
@@ -1019,7 +1043,7 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 			}
 			foreach ( $group->get_handles() as $handle ) {
 				if ( isset( $collection[ $group->type ][ $handle ] ) ) {
-					$collection[ $group->type ][ $handle ]['original_size'] = $group->get_handle_original_size( $handle );
+					$collection[ $group->type ][ $handle ]['original_size']   = $group->get_handle_original_size( $handle );
 					$collection[ $group->type ][ $handle ]['compressed_size'] = $group->get_handle_compressed_size( $handle );
 				}
 			}
@@ -1032,7 +1056,7 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 	 * Backup current settings.
 	 */
 	public function backup_settings() {
-		$options = $this->get_options();
+		$options                                   = $this->get_options();
 		$options['backed_up_settings']['block']    = $options['block'];
 		$options['backed_up_settings']['minify']   = $options['minify'];
 		$options['backed_up_settings']['combine']  = $options['combine'];
@@ -1050,9 +1074,9 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 		if ( ! isset( $options['backed_up_settings'] ) ) {
 			return;
 		}
-		$current_handles = WP_Hummingbird_Sources_Collector::get_handles();
+		$current_handles    = WP_Hummingbird_Sources_Collector::get_handles();
 		$backed_up_settings = $options['backed_up_settings'];
-		$file_settings = self::get_file_settings_types();
+		$file_settings      = self::get_file_settings_types();
 
 		foreach ( $file_settings as $file_setting ) {
 			if ( 'position' !== $file_setting ) {
@@ -1060,7 +1084,7 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 				$options[ $file_setting ]['styles']  = array_intersect( $backed_up_settings[ $file_setting ]['styles'], $current_handles );
 			} else {
 				$options[ $file_setting ]['scripts'] = array_intersect_key( $backed_up_settings[ $file_setting ]['scripts'], array_flip( $current_handles ) );
-				$options[ $file_setting ]['styles'] = array_intersect_key( $backed_up_settings[ $file_setting ]['styles'], array_flip( $current_handles ) );
+				$options[ $file_setting ]['styles']  = array_intersect_key( $backed_up_settings[ $file_setting ]['styles'], array_flip( $current_handles ) );
 			}
 		}
 
@@ -1154,7 +1178,7 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 	 * @param bool $value  CDN status to set.
 	 */
 	public function toggle_cdn( $value ) {
-		$options = $this->get_options();
+		$options            = $this->get_options();
 		$options['use_cdn'] = $value;
 		$this->update_options( $options );
 	}

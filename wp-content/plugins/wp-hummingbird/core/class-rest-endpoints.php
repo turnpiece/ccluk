@@ -48,38 +48,50 @@ class WP_Hummingbird_REST_Endpoints {
 	public function register_routes() {
 
 		// Route to return a modules status.
-		register_rest_route( $this->get_namespace(), '/status/(?P<module>[\\w-]+)', array(
+		register_rest_route(
+			$this->get_namespace(),
+			'/status/(?P<module>[\\w-]+)',
 			array(
-				'methods'         => WP_REST_Server::READABLE,
-				'callback'        => array( $this, 'get_module_status' ),
-				'args'            => array(
-					'module' => array(
-						'required' => true,
+				array(
+					'methods'  => WP_REST_Server::READABLE,
+					'callback' => array( $this, 'get_module_status' ),
+					'args'     => array(
+						'module' => array(
+							'required'          => true,
+							'sanitize_callback' => 'sanitize_key',
+						),
+					),
+				),
+			)
+		);
+
+		// Route to clear a modules cache.
+		register_rest_route(
+			$this->get_namespace(),
+			'/clear_cache/(?P<module>[\\w-]+)',
+			array(
+				array(
+					'methods'  => WP_REST_Server::READABLE,
+					'callback' => array( $this, 'clear_module_cache' ),
+					'module'   => array(
+						'required'          => true,
 						'sanitize_callback' => 'sanitize_key',
 					),
 				),
-			),
-		) );
-
-		// Route to clear a modules cache.
-		register_rest_route( $this->get_namespace(), '/clear_cache/(?P<module>[\\w-]+)', array(
-			array(
-				'methods'         => WP_REST_Server::READABLE,
-				'callback'        => array( $this, 'clear_module_cache' ),
-				'module' => array(
-					'required' => true,
-					'sanitize_callback' => 'sanitize_key',
-				),
-			),
-		) );
+			)
+		);
 
 		// Test route used to check if API is working.
-		register_rest_route( $this->get_namespace(), '/test', array(
+		register_rest_route(
+			$this->get_namespace(),
+			'/test',
 			array(
-				'methods'         => 'POST,GET,PUT,PATCH,DELETE,COPY,HEAD',
-				'callback'        => array( $this, 'test' ),
-			),
-		) );
+				array(
+					'methods'  => 'POST,GET,PUT,PATCH,DELETE,COPY,HEAD',
+					'callback' => array( $this, 'test' ),
+				),
+			)
+		);
 	}
 
 	/**
@@ -89,7 +101,7 @@ class WP_Hummingbird_REST_Endpoints {
 	 * @return mixed
 	 */
 	public function get_module_status( $request ) {
-		$module = $request->get_param( 'module' );
+		$module            = $request->get_param( 'module' );
 		$available_modules = array(
 			'gzip',
 			'caching',
@@ -118,7 +130,7 @@ class WP_Hummingbird_REST_Endpoints {
 	 * @return mixed
 	 */
 	public function clear_module_cache( $request ) {
-		$module = $request->get_param( 'module' );
+		$module            = $request->get_param( 'module' );
 		$available_modules = array(
 			'page_cache',
 			'performance',

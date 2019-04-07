@@ -109,6 +109,21 @@ class Shipper_Helper_Fs_Path {
 	}
 
 	/**
+	 * Checks whether a file is a wp-config.php file
+	 *
+	 * @param string $path Absolute path to a file to check.
+	 *
+	 * @return bool
+	 */
+	public static function is_wp_config( $path ) {
+		if ( 'wp-tests-config.php' === basename( $path ) ) {
+			return true;
+		}
+		return 'wp-config.php' === basename( $path ) &&
+			trailingslashit( ABSPATH ) === trailingslashit( dirname( $path ) );
+	}
+
+	/**
 	 * Check whether we're dealing with a plugin file
 	 *
 	 * @param string $abspath Absolute path to a file.
@@ -133,10 +148,22 @@ class Shipper_Helper_Fs_Path {
 	}
 
 	/**
+	 * Check whether we're dealing with a theme file
+	 *
+	 * @param string $abspath Absolute path to a file.
+	 *
+	 * @return bool
+	 */
+	public static function is_theme_file( $abspath ) {
+		$active_rx = preg_quote( trailingslashit( WP_CONTENT_DIR ) . 'themes', '/' );
+		return (bool) preg_match( "/^{$active_rx}/", $abspath );
+	}
+
+	/**
 	 * Check whether we're dealing with an active file
 	 *
 	 * An "active file" is a file that belongs to a plugin ("must-use" or
-	 * regular).
+	 * regular). Also, object caching drop-in.
 	 * We are making this distinction because one or more of these might belong
 	 * to an active plugin, and we have to move those as one unit.
 	 *
@@ -145,7 +172,14 @@ class Shipper_Helper_Fs_Path {
 	 * @return bool
 	 */
 	public static function is_active_file( $abspath ) {
-		return self::is_plugin_file( $abspath ) || self::is_muplugin_file( $abspath );
+		$object_cache_rx = preg_quote( trailingslashit( WP_CONTENT_DIR ), '/' ) .
+			preg_quote( 'object-cache.php', '/' );
+		if ( preg_match( "/{$object_cache_rx}$/", $abspath ) ) {
+			return true;
+		}
+		return self::is_plugin_file( $abspath )
+			|| self::is_muplugin_file( $abspath )
+			|| self::is_theme_file( $abspath );
 	}
 
 	/**

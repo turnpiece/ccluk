@@ -325,7 +325,7 @@ class WP_Hummingbird_Logger {
 	/**
 	 * Process logger actions.
 	 *
-	 * Accepts module name (slug) and action. So far only 'downloadr' actions is supported.
+	 * Accepts module name (slug) and action. So far only 'download' actions is supported.
 	 *
 	 * @since 1.9.2
 	 */
@@ -339,6 +339,11 @@ class WP_Hummingbird_Logger {
 
 		// Not called by a registered module.
 		if ( ! in_array( $module, $this->modules, true ) ) {
+			return;
+		}
+
+		// Only allow these actions.
+		if ( ! in_array( $action, array( 'download' ), true ) ) {
 			return;
 		}
 

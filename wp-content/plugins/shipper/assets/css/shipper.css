@@ -12156,7 +12156,7 @@ This is used to give admin notices that are loaded outside of the .wrap but insi
  */
 .sui-2-3-15 .sui-wrap [class*="sui-icon-"]:before, .sui-2-3-15 .sui-wrap [class*="sui-icon-"]:after, .sui-2-3-15 .sui-wrap .sui-box-body .sui-upsell-row .sui-upsell-notice p:first-of-type:before, .sui-2-3-15 .sui-wrap .sui-box-selector input:checked + span:before, .sui-2-3-15 .sui-wrap .sui-notice p:first-of-type:before,
 .sui-2-3-15 .sui-wrap .sui-notice-top p:first-of-type:before,
-.sui-2-3-15 .sui-wrap .sui-notice-floating p:first-of-type:before, .sui-2-3-15 .sui-wrap .sui-insert-variables .select-container .select-list-container .list-value:before, .sui-2-3-15 .sui-wrap .sui-insert-variables .sui-variables + .select2 .select2-selection--single .select2-selection__arrow:before, .sui-2-3-15 .sui-wrap .sui-checkbox input + span:before, .sui-2-3-15 .sui-wrap .sui-upload .sui-upload-image .sui-image-preview:before, .sui-2-3-15 .sui-wrap .sui-upload .sui-upload-file:before, .sui-2-3-15 .sui-dialog .sui-dialog-close:before, .sui-2-3-15 .sui-dialog .sui-dialog-back:before, .sui-2-3-15 .sui-wrap .sui-listing li:before, .sui-2-3-15 .sui-wrap .sui-pagination-active-filters .sui-active-filter .sui-active-filter-remove:before, .sui-2-3-15 select.sui-select + .select2-container .select2-selection--single .select2-selection__arrow:before, .sui-2-3-15 .sui-select-dropdown .select2-search--dropdown:after,
+.sui-2-3-15 .sui-wrap .sui-notice-floating p:first-of-type:before, .sui-2-3-15 .sui-wrap .sui-insert-variables .select-container .select-list-container .list-value:before, .sui-2-3-15 .sui-wrap .sui-insert-variables .sui-variables + .select2 .select2-selection--single .select2-selection__arrow:before, .sui-2-3-15 .sui-wrap .sui-checkbox input + span:before, .sui-2-3-15 .sui-wrap .sui-upload .sui-upload-image .sui-image-preview:before, .sui-2-3-15 .sui-wrap .sui-upload .sui-upload-file:before, .sui-2-3-15 .sui-dialog .sui-dialog-close:before, .sui-2-3-15 .sui-dialog .sui-dialog-back:before, .sui-2-3-15 .sui-wrap .sui-listing li:before, .sui-2-3-15 .sui-wrap .sui-pagination-active-filters .sui-active-filter .sui-active-filter-remove:before, .sui-2-3-15 select.sui-select + .select2-container .select2-selection--single .select2-selection__arrow:before, .sui-2-3-15 .sui-select-dropdown .select2-search--dropdown:after,	   	 	    	 		     	 
 .sui-2-3-15 .sui-variables-dropdown .select2-search--dropdown:after, .sui-2-3-15 .sui-calendar .ui-datepicker-header .ui-corner-all.ui-datepicker-prev:before, .sui-2-3-15 .sui-calendar .ui-datepicker-header .ui-corner-all.ui-datepicker-next:before, .sui-2-3-15 .sui-wrap .sui-recipient .sui-recipient-name:before {
   font-family: 'wpmudev-plugin-icons' !important;
   speak: none;
@@ -13043,6 +13043,15 @@ This is used to give admin notices that are loaded outside of the .wrap but insi
   float: right;
 }
 
+.shipper-page-migrate .sui-dialog.shipper-destdelete {
+  margin-top: 10%;
+}
+
+.shipper-page-migrate .sui-dialog.shipper-destdelete h3 {
+  margin: 0 auto;
+  font-size: 22px;
+}
+
 .shipper-page-migrate .sui-dialog.shipper-destination-add {
   text-align: center;
   z-index: 99;
@@ -13142,6 +13151,10 @@ This is used to give admin notices that are loaded outside of the .wrap but insi
 
 .shipper-page-migrate .shipper-content {
   margin-bottom: -30px;
+}
+
+.shipper-page-migrate .shipper-migration-health {
+  text-align: left;
 }
 
 .shipper-page-migrate .shipper-content:after {
@@ -13257,6 +13270,22 @@ This is used to give admin notices that are loaded outside of the .wrap but insi
 .shipper-page-migrate .shipper-select-site form .shipper-form-bit.shipper-selection {
   min-width: 480px;
   margin-right: 10px;
+}
+
+.shipper-page-migrate .shipper-select-site form .shipper-form-bit.shipper-selection .select-container li i {
+  display: none;
+  background-color: rgba(51, 51, 51, 0.05);
+  width: 30px;
+  border-radius: 4px;
+}
+
+.shipper-page-migrate .shipper-select-site form .shipper-form-bit.shipper-selection .select-container li i:before {
+  font-size: 12px;
+}
+
+.shipper-page-migrate .shipper-select-site form .shipper-form-bit.shipper-selection .select-container li:hover i {
+  display: block;
+  float: right;
 }
 
 .shipper-page-migrate .shipper-select-site form .shipper-form-bit button {
@@ -13804,6 +13833,9 @@ This is used to give admin notices that are loaded outside of the .wrap but insi
 	 * Notifications page
 	 */
   /**
+	 * Migration page
+	 */
+  /**
 	 * Data page
 	 */
 }
@@ -13930,6 +13962,10 @@ This is used to give admin notices that are loaded outside of the .wrap but insi
   display: none;
 }
 
+.shipper-page-settings .shipper-page-settings-migration .shipper-form-item {
+  margin-bottom: 25px;
+}
+
 .shipper-page-settings .shipper-page-settings-data .shipper-form-item:last-child:not(:first-child) {
   margin-top: 30px;
 }
@@ -13952,8 +13988,16 @@ This is used to give admin notices that are loaded outside of the .wrap but insi
   display: inline-block;
   float: left;
   height: 40px;
-  border-radius: 4px 0 0 4px;
   background-color: #F8F8F8;
+}
+
+.shipper-page-settings .shipper-page-settings-data .shipper-form-item .shipper-data-toggles label:first-of-type {
+  border-radius: 4px 0 0 4px;
+}
+
+.shipper-page-settings .shipper-page-settings-data .shipper-form-item .shipper-data-toggles label:last-of-type {
+  margin-left: 1px;
+  border-radius: 0 4px 4px 0;
 }
 
 .shipper-page-settings .shipper-page-settings-data .shipper-form-item .shipper-data-toggles label input {
@@ -14204,4 +14248,4 @@ This is used to give admin notices that are loaded outside of the .wrap but insi
 /*# sourceMappingURL=shipper.css.map */
 
 
-/* 87274-1550007752-ai */
+/* 87274-1554644928-au */

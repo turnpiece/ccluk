@@ -23,7 +23,7 @@ class WP_Hummingbird_Module_Performance extends WP_Hummingbird_Module {
 		$last_report = WP_Hummingbird_Settings::get( 'wphb-last-report' );
 		if ( $last_report && isset( $last_report->data->score ) ) {
 			// Save latest score.
-			WP_Hummingbird_Settings::update_setting( 'last_score', $last_report->data->score,'performance' );
+			WP_Hummingbird_Settings::update_setting( 'last_score', $last_report->data->score, 'performance' );
 		}
 		WP_Hummingbird_Settings::delete( 'wphb-last-report' );
 		WP_Hummingbird_Settings::delete( 'wphb-doing-report' );
@@ -61,7 +61,7 @@ class WP_Hummingbird_Module_Performance extends WP_Hummingbird_Module {
 	public static function cron_scan() {
 		// Start the test.
 		self::set_doing_report( true );
-		$api = WP_Hummingbird_Utils::get_api();
+		$api    = WP_Hummingbird_Utils::get_api();
 		$report = $api->performance->check();
 		// Stop the test.
 		self::set_doing_report( false );
@@ -139,7 +139,7 @@ class WP_Hummingbird_Module_Performance extends WP_Hummingbird_Module {
 	 */
 	public static function refresh_report() {
 		self::set_doing_report( false );
-		$api = WP_Hummingbird_Utils::get_api();
+		$api     = WP_Hummingbird_Utils::get_api();
 		$results = $api->performance->results();
 
 		if ( is_wp_error( $results ) ) {
@@ -209,7 +209,7 @@ class WP_Hummingbird_Module_Performance extends WP_Hummingbird_Module {
 
 		if ( (bool) $dismiss ) {
 			// Ignore report in the Hub.
-			$api = WP_Hummingbird_Utils::get_api();
+			$api     = WP_Hummingbird_Utils::get_api();
 			$results = $api->performance->ignore();
 
 			if ( is_wp_error( $results ) ) {

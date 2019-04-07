@@ -5,7 +5,7 @@ Tags: donation, donations, donation plugin, wordpress donation plugin, givewp, g
 Requires at least: 4.8
 Tested up to: 5.1
 Requires PHP: 5.6
-Stable tag: 2.4.1
+Stable tag: 2.4.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -206,6 +206,30 @@ Use Give for donations, and let WooCommerce or WP eCommerce or the like handle y
 11. Give has a dedicated support team to help answer any questions you may have and help you through stumbling blocks.
 
 == Changelog ==
+
+= 2.4.4: March 20th, 2019 =
+* Fix: Resolved a regression where percentage based goals were not displaying their progress correctly. [#4049](https://github.com/impress-org/give/issues/4049)
+* Fix: Resolved a regression in `2.4.3` where IE10/11 browsers had issues with donating with multi-level donation forms. [#4048](https://github.com/impress-org/give/issues/4048)
+* Fix: Corrected a PHP Warning on servers running PHP 7.3.3 within the email tags settings section. [#4044](https://github.com/impress-org/give/issues/4044)
+* Fix: Resolved conflict with iTheme's Sync plugin. [#3989](https://github.com/impress-org/give/issues/3989)
+* Fix: Updated the backwards compatibile TCPDF version used by older plugin versions to the latest version. [#4054](https://github.com/impress-org/give/issues/4054)
+
+= 2.4.3: March 13th, 2019 =
+* Fix: Ensure when a donation form's "Registration" option is set to "Login" that it does not appear incorrectly as optional on the donation form. [#4045](https://github.com/impress-org/give/issues/4045)
+* Fix: Prevent a PHP warning from displaying in the System Info window due to new host detection login in the previous release. [#4041](https://github.com/impress-org/give/issues/4041)
+* Fix: Ensure that logged in users without donor's associated with their WP users can properly donate. This is a regretion fix from the previous version 2.4.2 release. [#4039](https://github.com/impress-org/give/issues/4039)
+* Fix: Resolved an incompatibility with Elementor's "Finder" functionality. [#3912](https://github.com/impress-org/give/issues/3912)
+
+= 2.4.2: March 11th, 2019 =
+* Tweak: Adjusted how web hosts are detected in WP-Admin > Donations > Tools > System Info to improve accuracy. [#3356](https://github.com/impress-org/give/issues/3356)
+* Tweak: Added `get_goal` within the `Give_Donate_Form` for developers. [#4020](https://github.com/impress-org/give/issues/4020)
+* Fix: License statuses were not properly displaying in WP-Admin > Donations > Tools > System Info and that has been fixed. [#3975](https://github.com/impress-org/give/issues/3975)
+* Fix: The label "State" incorrectly displayed on the admin donor details screen. [#3995](https://github.com/impress-org/give/issues/3995)
+* Fix: Resolved a tooltip title that was not translatable. [#3996](https://github.com/impress-org/give/issues/3996)
+* Fix: Date fields now have better support for international date formats. [#4000](https://github.com/impress-org/give/issues/4000)
+* Fix: Resolve a mislabeled name attribute for the donation amount field within donation forms. [#4001](https://github.com/impress-org/give/issues/4001)
+* Fix: Improved support for varying capitalizations within donor's emails when a repeat donation happens. This update will prevent case-insensitive matches being incorrectly compared. [#4025](https://github.com/impress-org/give/issues/4025)
+* Fix: Resolved incorrect setting of the "autocomplete" attribute on certain dropdown fields. [#4028](https://github.com/impress-org/give/issues/4028)
 
 = 2.4.1: February 7th, 2019 =
 * New: Links to view receipts and subscriptions no longer expire. This prevents unnecessary errors and login screens for donors who attempt to access donations and subscription history. [#3956](https://github.com/impress-org/give/issues/3956), [#3963](https://github.com/impress-org/give/issues/3963), [#3964](https://github.com/impress-org/give/issues/3964)

@@ -17,10 +17,13 @@ class WP_Hummingbird_API_Service_Cloudflare extends WP_Hummingbird_API_Service {
 	}
 
 	public function get_zones_list( $page = 1, $per_page = 20 ) {
-		return $this->request->get( 'zones', array(
-			'per_page' => $per_page,
-			'page'     => $page,
-		) );
+		return $this->request->get(
+			'zones',
+			array(
+				'per_page' => $per_page,
+				'page'     => $page,
+			)
+		);
 	}
 
 	public function get_page_rules_list( $zone ) {
@@ -65,9 +68,14 @@ class WP_Hummingbird_API_Service_Cloudflare extends WP_Hummingbird_API_Service {
 	}
 
 	public function purge_cache( $zone ) {
-		return $this->request->delete( "/zones/{$zone}/purge_cache", wp_json_encode( array(
-			'purge_everything' => true,
-		) ) );
+		return $this->request->delete(
+			"/zones/{$zone}/purge_cache",
+			wp_json_encode(
+				array(
+					'purge_everything' => true,
+				)
+			)
+		);
 	}
 
 }

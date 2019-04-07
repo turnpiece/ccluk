@@ -133,24 +133,6 @@ function apbct_admin__init(){
 	
 	global $apbct;
 	
-	// Update logic	
-	if($apbct->plugin_version != APBCT_VERSION){
-		if(is_main_site()){
-			require_once('cleantalk-updater.php');
-			$result = apbct_run_update_actions($apbct->plugin_version, APBCT_VERSION);
-			ct_send_feedback('0:' . CLEANTALK_AGENT ); // Send feedback to let cloud know about updated version.
-			//If update is successfull
-			if($result === true){
-				$apbct->data['plugin_version'] = APBCT_VERSION;
-				$apbct->saveData();
-			}
-		// Update version for side blogs
-		}else{
-			$apbct->data['plugin_version'] = APBCT_VERSION;
-			$apbct->saveData();
-		}
-	}
-	
 	// Getting dashboard widget statistics
 	if(!empty($_POST['ct_brief_refresh'])){
 		$apbct->data['brief_data'] = CleantalkAPI::method__get_antispam_report_breif($apbct->api_key);

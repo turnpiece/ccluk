@@ -60,10 +60,11 @@
 					$tooltip_text        = __( 'Caching is disabled', 'wphb' );
 				}
 				?>
-				<span class="wphb-filename-extension wphb-filename-extension-<?php echo esc_attr( $type ); ?> sui-tooltip sui-tooltip-top-right sui-tooltip-constrained" data-tooltip="<?php echo esc_attr( $caching_type_tooltips[ $type ] ); ?>">
+				<span class="wphb-filename-extension wphb-filename-extension-<?php echo esc_attr( $type ); ?> sui-tooltip sui-tooltip-top-left sui-tooltip-constrained" data-tooltip="<?php echo esc_attr( $caching_type_tooltips[ $type ] ); ?>">
 					<?php
 					switch ( $type ) {
 						case 'javascript':
+                        default:
 							echo 'js';
 							break;
 						case 'images':

@@ -152,7 +152,7 @@ class Give_Scripts {
 
 		// Plugin page script
 		if ( 'plugins.php' === $pagenow ) {
-			$this->plugin_equeue_scripts();
+			$this->plugin_enqueue_scripts();
 		}
 
 		// Give Admin Only.
@@ -179,7 +179,7 @@ class Give_Scripts {
 	 * @since  2.2.0
 	 * @access private
 	 */
-	private function plugin_equeue_scripts() {
+	private function plugin_enqueue_scripts() {
 		wp_enqueue_style( 'plugin-deactivation-survey-css' );
 		wp_enqueue_script( 'plugin-deactivation-survey-js' );
 
@@ -444,7 +444,7 @@ class Give_Scripts {
 					'payment-mode'           => __( 'Please select payment mode.', 'give' ),
 					'give_first'             => __( 'Please enter your first name.', 'give' ),
 					'give_email'             => __( 'Please enter a valid email address.', 'give' ),
-					'give_user_login'        => __( 'Invalid username. Only lowercase letters (a-z) and numbers are allowed.', 'give' ),
+					'give_user_login'        => __( 'Invalid email address or username.', 'give' ),
 					'give_user_pass'         => __( 'Enter a password.', 'give' ),
 					'give_user_pass_confirm' => __( 'Enter the password confirmation.', 'give' ),
 					'give_agree_to_terms'    => __( 'You must agree to the terms and conditions.', 'give' ),

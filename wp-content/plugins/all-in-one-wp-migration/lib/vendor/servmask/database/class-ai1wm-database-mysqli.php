@@ -23,6 +23,10 @@
  * ╚══════╝╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	die( 'Kangaroos cannot jump here' );
+}
+
 class Ai1wm_Database_Mysqli extends Ai1wm_Database {
 
 	/**
@@ -90,6 +94,16 @@ class Ai1wm_Database_Mysqli extends Ai1wm_Database {
 	 */
 	public function fetch_row( $result ) {
 		return mysqli_fetch_row( $result );
+	}
+
+	/**
+	 * Return the field from MySQL query as row
+	 *
+	 * @param  resource $result MySQL resource
+	 * @return object
+	 */
+	public function fetch_field( $result ) {
+		return mysqli_fetch_field( $result );
 	}
 
 	/**

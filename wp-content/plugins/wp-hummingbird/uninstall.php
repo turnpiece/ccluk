@@ -11,7 +11,7 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 }
 
 if ( ! function_exists( 'is_plugin_active' ) ) {
-	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+	include_once ABSPATH . 'wp-admin/includes/plugin.php';
 }
 
 if ( class_exists( 'WP_Hummingbird' ) ) {
@@ -73,7 +73,8 @@ delete_option( 'wphb-notice-minification-optimized-show' );
 delete_site_option( 'wphb-notice-uptime-info-show' );
 
 // Clean all cron.
-wp_clear_scheduled_hook( 'wphb_performance_scan' );
+wp_clear_scheduled_hook( 'wphb_performance_report' );
+wp_clear_scheduled_hook( 'wphb_uptime_report' );
 
 if ( ! class_exists( 'WP_Hummingbird_Filesystem' ) ) {
 	/* @noinspection PhpIncludeInspection */

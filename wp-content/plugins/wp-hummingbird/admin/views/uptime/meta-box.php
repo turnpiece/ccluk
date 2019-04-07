@@ -13,7 +13,7 @@
 
 ?>
 <?php if ( $error && ( ! strpos( $error, 'down for maintenance' ) ) ) : ?>
-	<div class="sui-notice sui-notice-<?php echo esc_attr( $error_type ); ?> wphb-notice-box">
+	<div class="sui-notice sui-notice-<?php echo esc_attr( $error_type ); ?>">
 		<p><?php echo esc_html( $error ); ?></p>
 		<a href="<?php echo esc_url( $retry_url ); ?>" class="sui-button sui-button-primary button-notice"><?php esc_html_e( 'Try again', 'wphb' ); ?></a>
 		<a target="_blank" href="<?php echo esc_url( $support_url ); ?>" class="sui-button sui-button-primary button-notice"><?php esc_html_e( 'Support', 'wphb' ); ?></a>
@@ -24,28 +24,43 @@
 <?php elseif ( strpos( $error, 'down for maintenance' ) ) : ?>
 	<div class="sui-block-content-center">
 		<?php if ( ! WP_Hummingbird_Utils::hide_wpmudev_branding() ) : ?>
-			<img class="wphb-image-icon-content wphb-image-icon-content-top wphb-image-icon-content-center wphb-uptime-icon"
-			     src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-graphic-uptime-disabled@1x.png' ); ?>"
-			     srcset="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-graphic-uptime-disabled@2x.png' ); ?> 2x">
+			<img class="sui-image sui-image-center"
+				 src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-graphic-uptime-disabled@1x.png' ); ?>"
+				 srcset="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-graphic-uptime-disabled@2x.png' ); ?> 2x">
 		<?php endif; ?>
 
 		<p>
-			<?php _e( 'Uptime monitors your server response time and lets you know when your website is down<br>
+			<?php
+			_e(
+				'Uptime monitors your server response time and lets you know when your website is down<br>
 			or too slow for your visitors. This service is currently under maintenance as we build a<br>
-			brand new monitoring service. Check back soon!', 'wphb' ); ?>
+			brand new monitoring service. Check back soon!',
+				'wphb'
+			);
+			?>
 		</p>
 	</div>
 <?php else : ?>
 	<p>
-		<?php esc_html_e( 'Server response time is the amount of time it takes for a web server to
+		<?php
+		esc_html_e(
+			'Server response time is the amount of time it takes for a web server to
 		respond to a request from a browser. The longer it takes, the longer your visitors wait for the page
-		to start loading.', 'wphb' ); ?>
+		to start loading.',
+			'wphb'
+		);
+		?>
 	</p>
 	<?php if ( null === $uptime_stats->response_time && ! is_wp_error( $uptime_stats ) ) : ?>
 		<div class="sui-notice sui-notice-blue">
 			<p>
-				<?php esc_html_e( 'We don’t have any data feeding in yet. It can take an hour or two
-				for this graph to populate with data so feel free to check back soon!', 'wphb' ); ?>
+				<?php
+				esc_html_e(
+					'We don’t have any data feeding in yet. It can take an hour or two
+				for this graph to populate with data so feel free to check back soon!',
+					'wphb'
+				);
+				?>
 			</p>
 		</div>
 	<?php endif; ?>

@@ -5,7 +5,7 @@ class WP_Hummingbird_API_Request_WPMUDEV extends WP_Hummingbird_API_Request {
 	public function get_api_key() {
 		global $wpmudev_un;
 
-		if ( ! is_object( $wpmudev_un )  && class_exists( 'WPMUDEV_Dashboard' ) && method_exists( 'WPMUDEV_Dashboard', 'instance' ) ) {
+		if ( ! is_object( $wpmudev_un ) && class_exists( 'WPMUDEV_Dashboard' ) && method_exists( 'WPMUDEV_Dashboard', 'instance' ) ) {
 			$wpmudev_un = WPMUDEV_Dashboard::instance();
 		}
 
@@ -26,10 +26,10 @@ class WP_Hummingbird_API_Request_WPMUDEV extends WP_Hummingbird_API_Request {
 		/** @var WP_Hummingbird_API_Service_Performance|WP_Hummingbird_API_Service_Uptime $service */
 		if ( defined( 'WPHB_TEST_API_URL' ) && WPHB_TEST_API_URL ) {
 			$service = $this->get_service();
-			$url = WPHB_TEST_API_URL . $service->get_name() . '/' . $service->get_version() . '/';
+			$url     = WPHB_TEST_API_URL . $service->get_name() . '/' . $service->get_version() . '/';
 		} else {
 			$service = $this->get_service();
-			$url = 'https://premium.wpmudev.org/api/' . $service->get_name() . '/' . $service->get_version() . '/';
+			$url     = 'https://premium.wpmudev.org/api/' . $service->get_name() . '/' . $service->get_version() . '/';
 		}
 
 		$url = trailingslashit( $url . $path );

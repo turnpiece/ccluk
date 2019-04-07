@@ -50,6 +50,9 @@ class Shipper_Controller_Heartbeat_Migration extends Shipper_Controller_Heartbea
 
 		$data['kickstart'] = $this->get_kickstart_info();
 
+		$health = new Shipper_Model_Stored_Healthcheck;
+		$data['is_slow'] = $health->is_slow_migration();
+
 		$response['shipper-migration'] = $data;
 		$response['heartbeat_interval'] = Shipper_Helper_Assets::get_update_interval();
 

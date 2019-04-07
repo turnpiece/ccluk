@@ -71,6 +71,12 @@ class CleantalkState
 		// GDPR
 		'gdpr_enabled' => 0,
 		'gdpr_text'    => 'By using this form you agree with the storage and processing of your data by using the Privacy Policy on this website.',
+		
+		// Msic
+		'store_urls'            => 1,
+		'store_urls__sessions'  => 1,
+		'comment_notify'        => 1,
+		'comment_notify__roles' => array('administrator'),
     );
 	
 	public $def_data = array(
@@ -163,6 +169,9 @@ class CleantalkState
 			'last_call' => 0,
 		),
 		'update_plugin' => array(
+			'last_call' => 0,
+		),
+		'update_settings' => array(
 			'last_call' => 0,
 		),
 	);

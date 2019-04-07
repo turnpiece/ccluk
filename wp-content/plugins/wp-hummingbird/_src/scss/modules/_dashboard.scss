@@ -4,7 +4,6 @@
 
 /* Images */
 .wpmud div[class^="box-dashboard-"] .sui-box-title:before {
-    font-family: $font--icons;
     color: #333333;
     float: left;
     font-size: 20px;
@@ -55,11 +54,20 @@
 
 /* Dashboard background images */
 .wpmud .box-dashboard-welcome.sui-summary {
-    @include background-2x( "#{$image--path}/hb-graphic-dash-top", 'png', 192px, 172px, 30px 100% );
 
     .sui-button-green {
         border-radius: 20px;
-    }
+	}
+	
+	&:not(.sui-unbranded):not(.sui-summary-sm) {
+
+		@if variable-exists(summary-image) {
+			@include background-2x( "#{$image--path}/hb-graphic-dash-top", 'png', 192px, 172px, 30px 100% );
+		}
+        @include media(max-width, md) {
+            background-image: unset;
+        }
+	}
 }
 
 /* Dashboard tables */
@@ -168,7 +176,7 @@
         tbody tr td {
             &:first-of-type {
                 display: flex;
-                margin-top: 4px;
+                align-items: center;
             }
 
             [class*="sui-icon-"] { font-size: 20px; }
@@ -180,7 +188,24 @@
         }
     }
 }
-
+.wpmud .box-dashboard-reports-no-membership table.sui-flushed {
+    border-top: 1px solid #E6E6E6;
+    border-radius: 0;
+}
+// Dashboard lists
+@include body-class(true) {
+    li.sui-list-header {
+        justify-content: space-between;
+        padding-bottom: 0;
+        > span {
+            color: #333333;
+            font-size: 13px;
+            font-weight: bold;
+            line-height: 30px;
+            padding-bottom: 0;
+        }
+    }
+}
 /* Up-sell meta boxes in the footer */
 .wpmud .wphb-cross-smush,
 .wpmud .wphb-cross-defender,

@@ -1,10 +1,39 @@
 Plugin Name: WP Smush Pro
 Author: WPMU DEV
-Tested up to: 5.0.3
+Tested up to: 5.1.1
 
 Change Log:
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
+
+= 3.2.0.2 =
+
+* New: Add "Update API status" button in Settings
+* Enhance: API key validation
+* Fix: CDN displaying incorrect usage data
+
+= 3.2.0.1 =
+
+* Fix: CDN upgrade link not showing when bandwidth is over limit
+
+= 3.2.0 =
+
+* New: Image lazy loading
+* New: CDN support for mapped domains in multisite
+* New: Auto update free version of the plugin to Pro if Dashboard plugin is installed and activated
+* New: Options to preserve settings and data on plugin uninstall
+* New: Option to reset settings to defaults
+* New: Ignore images with errors during bulk Smush
+* Enhance: Performance
+* Enhance: Clean up outdated and deprecated code
+* Enhance: Onboarding experience
+* Enhance: Skip auto resized images on CDN from highlighting in image resize detection tab
+* Enhance: Directory Smush where wp-content is placed in a custom location
+* Fix: [NextGEN Gallery] bug with stats count
+* Fix: Translation strings and typos
+* Fix: wp_smush_skip_folder filter
+* Fix: Recalculate stats when clicking 'Re-check status' button
+* Fix: Illegal string offset 'file' warning in PHP
 
 = 3.1.1 =
 
@@ -542,4 +571,4 @@ Fix: Compatibility issues with latest WP Offload Media (WP Offload S3) update
 
 
 
-87274-1550006951-au
+87274-1554644939-au

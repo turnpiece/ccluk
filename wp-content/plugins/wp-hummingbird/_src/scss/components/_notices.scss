@@ -85,6 +85,13 @@
     font-weight: 400;
 }
 
+// Override for sui-notice in sui-settings-row
+.sui-box-settings-row {
+    > .sui-notice {
+        width: 100%;
+    }
+}
+
 
 @include bp(tablet) {
     .wpmud .wrap-wp-hummingbird > .wphb-notice {

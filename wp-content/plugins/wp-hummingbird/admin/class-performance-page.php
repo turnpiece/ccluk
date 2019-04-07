@@ -45,17 +45,13 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 	 * Render header.
 	 */
 	public function render_header() {
-		$this->report = WP_Hummingbird_Module_Performance::get_last_report();
-		if ( is_wp_error( $this->report ) ) {
-			$this->has_error = true;
-		}
-
-		// Check to see if there's a fresh report on the server.
-		if ( false === $this->report && ! WP_Hummingbird_Module_Performance::is_doing_report() ) {
+		// Check to see if there's a fresh report on the server (do not check during quick setup).
+		$quick_setup = get_option( 'wphb-quick-setup' );
+		if ( false === $this->report && ! WP_Hummingbird_Module_Performance::is_doing_report() && isset( $quick_setup['finished'] ) ) {
 			WP_Hummingbird_Module_Performance::refresh_report();
 		}
 
-		$this->dismissed = WP_Hummingbird_Module_Performance::report_dismissed( $this->report );
+		$this->dismissed    = WP_Hummingbird_Module_Performance::report_dismissed( $this->report );
 		$this->can_run_test = WP_Hummingbird_Module_Performance::can_run_test( $this->report );
 
 		$run_url = add_query_arg( 'run', 'true', WP_Hummingbird_Utils::get_admin_menu_url( 'performance' ) );
@@ -113,9 +109,12 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 	 * @since 1.8.2
 	 */
 	protected function render_inner_content() {
-		$this->view( $this->slug . '-page', array(
-			'report' => $this->report,
-		));
+		$this->view(
+			$this->slug . '-page',
+			array(
+				'report' => $this->report,
+			)
+		);
 	}
 
 	/**
@@ -158,9 +157,11 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 
 			WP_Hummingbird_Module_Performance::dismiss_report( true );
 
-			$redirect_to = add_query_arg( array(
-				'report-dismissed' => true,
-			) );
+			$redirect_to = add_query_arg(
+				array(
+					'report-dismissed' => true,
+				)
+			);
 			wp_safe_redirect( $redirect_to );
 		}
 	}
@@ -169,6 +170,12 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 	 * Register meta boxes.
 	 */
 	public function register_meta_boxes() {
+	    // This needs to be here, because it's the first block that runs on page load.
+		$this->report = WP_Hummingbird_Module_Performance::get_last_report();
+		if ( is_wp_error( $this->report ) ) {
+			$this->has_error = true;
+		}
+
 		// Default to empty meta box if doing performance scan, or we will get php notices.
 		if ( ! WP_Hummingbird_Module_Performance::is_doing_report() ) {
 			$this->add_meta_box(
@@ -179,10 +186,11 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 				null,
 				'summary',
 				array(
-					'box_class' => 'sui-box sui-summary',
+					'box_class'         => 'sui-box sui-summary',
 					'box_content_class' => false,
 				)
 			);
+
 			$this->add_meta_box(
 				'performance-summary',
 				__( 'Improvements', 'wphb' ),
@@ -191,7 +199,7 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 				null,
 				'main',
 				array(
-					'box_content_class' => false,
+					'box_content_class' => $this->report ? false : 'sui-box sui-message',
 				)
 			);
 
@@ -228,7 +236,7 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 				null,
 				'main',
 				array(
-					'box_content_class' => 'sui-box-body sui-block-content-center',
+					'box_content_class' => 'sui-box sui-message',
 				)
 			);
 		} // End if().
@@ -238,14 +246,14 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 	 * Summary meta box.
 	 */
 	public function performance_summary_metabox() {
-		$last_test = $this->report;
+		$last_test    = $this->report;
 		$doing_report = WP_Hummingbird_Module_Performance::is_doing_report();
 
 		$error_details = '';
-		$error_text = '';
+		$error_text    = '';
 		if ( $last_test ) {
 			if ( is_wp_error( $last_test ) ) {
-				$error_text = $last_test->get_error_message();
+				$error_text    = $last_test->get_error_message();
 				$error_details = $last_test->get_error_data();
 				if ( is_array( $error_details ) && isset( $error_details['details'] ) ) {
 					$error_details = $error_details['details'];
@@ -290,7 +298,7 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 	public function performance_welcome_metabox() {
 		$last_report = $this->report;
 
-		$last_score = false;
+		$last_score  = false;
 		$improvement = 0;
 
 		if ( $last_report && ! is_wp_error( $last_report ) ) {
@@ -298,7 +306,7 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 
 			if ( $last_report->last_score && isset( $last_report->score ) ) {
 				$improvement = $last_report->score - $last_report->last_score['score'];
-				$last_score = $last_report->last_score['score'];
+				$last_score  = $last_report->last_score['score'];
 			}
 		}
 
@@ -381,6 +389,7 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 				case 'aplus':
 				case 'a':
 				case 'b':
+                default:
 					$class = 'success';
 					break;
 				case 'c':

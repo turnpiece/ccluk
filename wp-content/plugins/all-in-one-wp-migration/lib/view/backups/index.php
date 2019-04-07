@@ -22,6 +22,10 @@
  * ███████║███████╗██║  ██║ ╚████╔╝ ██║ ╚═╝ ██║██║  ██║███████║██║  ██╗
  * ╚══════╝╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	die( 'Kangaroos cannot jump here' );
+}
 ?>
 
 <div class="ai1wm-container">
@@ -58,7 +62,24 @@
 												<br />
 											<?php endif; ?>
 											<i class="ai1wm-icon-file-zip"></i>
-											<?php echo esc_html( basename( $backup['filename'] ) ); ?>
+											<span class="ai1wm-backup-filename">
+												<?php echo esc_html( basename( $backup['filename'] ) ); ?>
+											</span>
+											<?php if ( isset( $backups_labels[ basename( $backup['filename'] ) ] ) ) : ?>
+												<span class="ai1wm-backup-label">
+													<br />
+													<span class="ai1wm-backup-label-colored">
+														<?php echo esc_html( $backups_labels[ basename( $backup['filename'] ) ] ); ?>
+													</span>
+													<i class="ai1wm-icon-edit-pencil"></i>
+												</span>
+											<?php else : ?>
+												<span class="ai1wm-add-description">
+													<br />
+													<?php _e( 'Click to set a label for this backup', AI1WM_PLUGIN_NAME ); ?>
+													<i class="ai1wm-icon-edit-pencil"></i>
+												</span>
+											<?php endif; ?>
 										</td>
 										<td class="ai1wm-column-date">
 											<?php echo esc_html( sprintf( __( '%s ago', AI1WM_PLUGIN_NAME ), human_time_diff( $backup['mtime'] ) ) ); ?>

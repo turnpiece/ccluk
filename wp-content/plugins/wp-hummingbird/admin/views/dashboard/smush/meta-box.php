@@ -14,7 +14,7 @@
  */
 
 ?>
-<div class="sui-box-settings-row">
+<div class="<?php echo ! WP_Hummingbird_Utils::is_member() ? 'sui-box-body' : ''; ?>">
 	<p class="sui-margin-bottom">
 		<?php esc_html_e( 'Automatically compress and optimize your images with our super popular Smush plugin.', 'wphb' ); ?>
 	</p>
@@ -59,7 +59,7 @@
 			</div>
 		<?php else : ?>
 			<div class="sui-notice sui-notice-success">
-				<p><?php printf( esc_html__( "WP Smush is installed. So far you've saved %s of space. That's a total savings of %s. Nice one!", 'wphb' ), $smush_data['human'], number_format_i18n( $smush_data['percent'], 2 ) . '%' ); ?></p>
+				<p><?php printf( esc_html__( "WP Smush is installed. So far you've saved %1\$s of space. That's a total savings of %2\$s. Nice one!", 'wphb' ), $smush_data['human'], number_format_i18n( $smush_data['percent'], 2 ) . '%' ); ?></p>
 			</div>
 		<?php endif; ?>
 	<?php endif; ?>
@@ -75,10 +75,12 @@
 
 		<div class="sui-upsell-notice sui-margin-bottom">
 			<p>
-				<?php printf(
+				<?php
+				printf(
 					__( 'Did you know WP Smush Pro delivers up to 2x better compression, allows you to smush your originals and removes any bulk smushing limits? <a href="%s" target="_blank">Try it absolutely FREE</a>', 'wphb' ),
 					WP_Hummingbird_Utils::get_link( 'plugin', 'hummingbird_dash_smush_upsell_link' )
-				); ?>
+				);
+				?>
 			</p>
 		</div>
 	</div>

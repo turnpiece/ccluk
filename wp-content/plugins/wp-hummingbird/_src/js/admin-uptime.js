@@ -10,7 +10,6 @@ import Fetcher from './utils/fetcher';
         $spinner: null,
         dataRange: null,
         dateFormat: 'MMM d',
-        $reportingForm: null,
         init: function() {
             this.$spinner = $('.spinner');
             this.strings = wphbUptimeStrings;
@@ -19,7 +18,6 @@ import Fetcher from './utils/fetcher';
             this.downtimeChartData = $('#downtime-chart-json').val();
             this.$disableUptime = $('#wphb-disable-uptime');
             this.dataRange = this.getUrlParameter( 'data-range' );
-            this.$reportingForm = $('#wphb-uptime-reporting');
 
             this.$dataRangeSelector.change( function() {
                 window.location.href = $(this).find( ':selected' ).data( 'url' );
@@ -65,24 +63,6 @@ import Fetcher from './utils/fetcher';
             $('#uptime-re-check-status').on( 'click', function(e){
                 e.preventDefault();
                 location.reload();
-            });
-
-            /**
-             * Process form submit for reporting settings.
-             */
-            this.$reportingForm.on('submit', function(e) {
-                e.preventDefault();
-
-                Fetcher.common.saveReportsSettings( self.module, $(this).serialize() )
-                    .then( ( response ) => {
-                        if ( 'undefined' !== typeof response && response.success ) {
-							//WPHB_Admin.notices.show( 'wphb-ajax-update-notice', true );
-							location.reload();
-                        } else {
-                            WPHB_Admin.notices.show( 'wphb-ajax-update-notice', true, 'error', wphb.strings.errorSettingsUpdate  );
-                        }
-                    });
-
             });
         },
 

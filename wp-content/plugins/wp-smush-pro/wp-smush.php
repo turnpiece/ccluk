@@ -13,7 +13,7 @@
  * Plugin Name:       Smush Pro
  * Plugin URI:        http://premium.wpmudev.org/projects/wp-smush-pro/
  * Description:       Reduce image file sizes, improve performance and boost your SEO using the free <a href="https://premium.wpmudev.org/">WPMU DEV</a> WordPress Smush API.
- * Version:           3.1.1
+ * Version:           3.2.0.2
  * Author:            WPMU DEV
  * Author URI:        https://premium.wpmudev.org/
  * License:           GPLv2
@@ -47,7 +47,7 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 if ( ! defined( 'WP_SMUSH_VERSION' ) ) {
-	define( 'WP_SMUSH_VERSION', '3.1.1' );
+	define( 'WP_SMUSH_VERSION', '3.2.0.2' );
 }
 // Used to define body class.
 if ( ! defined( 'WP_SHARED_UI_VERSION' ) ) {
@@ -175,6 +175,15 @@ if ( ! class_exists( 'WP_Smush' ) ) {
 		private static $is_pro;
 
 		/**
+		 * Smush project ID.
+		 *
+		 * @since  3.1.1
+		 *
+		 * @var int $project_id
+		 */
+		private static $project_id = 912164;
+
+		/**
 		 * Return the plugin instance.
 		 *
 		 * @return WP_Smush
@@ -193,6 +202,8 @@ if ( ! class_exists( 'WP_Smush' ) ) {
 		private function __construct() {
 			$this->register_actions();
 
+			$this->maybe_upgrade_to_pro();
+
 			$this->includes();
 
 			$this->init();
@@ -206,6 +217,9 @@ if ( ! class_exists( 'WP_Smush' ) ) {
 		private function register_actions() {
 			add_action( 'admin_init', array( $this, 'register_free_modules' ) );
 			add_action( 'init', array( $this, 'register_pro_modules' ), 5 );
+
+			// Add upgrade schedule.
+			add_action( 'smush_upgrade_to_pro', array( $this, 'upgrade_to_pro' ) );
 		}
 
 		/**
@@ -420,10 +434,12 @@ if ( ! class_exists( 'WP_Smush' ) ) {
 		/**
 		 * Check if user is premium member, check for API key.
 		 *
+		 * @param bool $manual  Is it a manual check? Default: false.
+		 *
 		 * @return bool  True if a premium member, false if regular user.
 		 */
-		public function validate_install() {
-			if ( isset( self::$is_pro ) ) {
+		public function validate_install( $manual = false ) {
+			if ( isset( self::$is_pro ) && ! $manual ) {
 				return self::$is_pro;
 			}
 
@@ -446,53 +462,37 @@ if ( ! class_exists( 'WP_Smush' ) ) {
 				$last_checked = $api_auth[ $api_key ]['timestamp'];
 				$valid        = $api_auth[ $api_key ]['validity'];
 
-				$diff = current_time( 'timestamp' ) - $last_checked;
-
 				// Difference in hours.
-				$diff_h = $diff / 3600;
+				$diff = ( current_time( 'timestamp' ) - $last_checked ) / HOUR_IN_SECONDS;
 
-				// Difference in minutes.
-				$diff_m = $diff / 60;
-
-				switch ( $valid ) {
-					case 'valid':
-						// If last checked was more than 12 hours.
-						if ( $diff_h > 12 ) {
-							$revalidate = true;
-						}
-						break;
-					case 'invalid':
-						// If last checked was more than 24 hours.
-						if ( $diff_h > 24 ) {
-							$revalidate = true;
-						}
-						break;
-					case 'network_failure':
-						// If last checked was more than 5 minutes.
-						if ( $diff_m > 5 ) {
-							$revalidate = true;
-						}
-						break;
+				if ( 24 < $diff ) {
+					$revalidate = true;
 				}
 			}
 
 			// If we are suppose to validate API, update the results in options table.
-			if ( $revalidate ) {
+			if ( $revalidate || $manual ) {
 				if ( empty( $api_auth[ $api_key ] ) ) {
 					// For api key resets.
 					$api_auth[ $api_key ] = array();
 
 					// Storing it as valid, unless we really get to know from API call.
+					$valid                            = 'valid';
 					$api_auth[ $api_key ]['validity'] = 'valid';
 				}
 
-				// Aaron suggested to Update timestamp before making the API call, to avoid any concurrent calls, clever.
-				$api_auth[ $api_key ]['timestamp'] = current_time( 'timestamp' );
-				update_site_option( 'wp_smush_api_auth', $api_auth );
+				// This is the first check.
+				if ( ! isset( $api_auth[ $api_key ]['timestamp'] ) ) {
+					$api_auth[ $api_key ]['timestamp'] = current_time( 'timestamp' );
+				}
 
-				$request = $this->api()->check();
+				$request = $this->api()->check( $manual );
 
 				if ( ! is_wp_error( $request ) && 200 === wp_remote_retrieve_response_code( $request ) ) {
+					// Update the timestamp only on successful attempts.
+					$api_auth[ $api_key ]['timestamp'] = current_time( 'timestamp' );
+					update_site_option( 'wp_smush_api_auth', $api_auth );
+
 					$result = json_decode( wp_remote_retrieve_body( $request ) );
 					if ( ! empty( $result->success ) && $result->success ) {
 						$valid = 'valid';
@@ -500,25 +500,18 @@ if ( ! class_exists( 'WP_Smush' ) ) {
 					} else {
 						$valid = 'invalid';
 					}
-				} else {
-					$valid = 'network_failure';
+				} elseif ( ! isset( $valid ) || 'valid' !== $valid ) {
+					// Invalidate only in case when it was not valid before.
+					$valid = 'invalid';
 				}
 
-				// Reset value.
-				$api_auth = array();
-
-				// Add a fresh timestamp.
-				$timestamp            = current_time( 'timestamp' );
-				$api_auth[ $api_key ] = array(
-					'validity'  => $valid,
-					'timestamp' => $timestamp,
-				);
+				$api_auth[ $api_key ]['validity'] = $valid;
 
 				// Update API validity.
 				update_site_option( 'wp_smush_api_auth', $api_auth );
 			}
 
-			self::$is_pro = isset( $valid ) && ( 'valid' === $valid );
+			self::$is_pro = isset( $valid ) && 'valid' === $valid;
 
 			return self::$is_pro;
 		}
@@ -540,6 +533,70 @@ if ( ! class_exists( 'WP_Smush' ) ) {
 			}
 
 			return $api_key;
+		}
+
+		/**
+		 * Upgrade free version to pro.
+		 *
+		 * @since 3.1.1
+		 */
+		public function upgrade_to_pro() {
+			if ( WPMUDEV_Dashboard::$upgrader->install( self::$project_id ) ) {
+				delete_site_option( 'smush_cron_update_running' );
+				activate_plugin( 'wp-smush-pro/wp-smush.php' );
+
+				// Do we need to deactivate?
+				deactivate_plugins( 'wp-smushit/wp-smush.php', true );
+
+				define( 'WP_SMUSH_PRESERVE_STATS', true );
+				delete_plugins( array( 'wp-smushit/wp-smush.php' ) );
+			}
+		}
+
+		/**
+		 * Check if we can upgrade to Pro version.
+		 *
+		 * @since 3.1.1
+		 */
+		private function maybe_upgrade_to_pro() {
+			if ( 'wp-smush-pro/wp-smush.php' === plugin_basename( __FILE__ ) ) {
+				return;
+			}
+
+			// Check that dashboard plugin is installed.
+			if ( ! class_exists( 'WPMUDEV_Dashboard' ) ) {
+				return;
+			}
+
+			if ( ! is_object( WPMUDEV_Dashboard::$api ) ) {
+				return;
+			}
+
+			if ( ! method_exists( WPMUDEV_Dashboard::$api, 'has_key' ) ) {
+				return;
+			}
+
+			// If user can't install - exit.
+			if ( ! WPMUDEV_Dashboard::$upgrader->user_can_install( self::$project_id ) ) {
+				return;
+			}
+
+			// Check permissions and configuration.
+			if ( ! WPMUDEV_Dashboard::$upgrader->can_auto_install( self::$project_id ) ) {
+				return;
+			}
+
+			$plugin = WPMUDEV_Dashboard::$api->get_project_data( self::$project_id );
+			if ( version_compare( WP_SMUSH_VERSION, $plugin['version'], '>' ) ) {
+				return;
+			}
+
+			$running_cron_update = get_site_option( 'smush_cron_update_running' );
+			if ( empty( $running_cron_update ) ) {
+				// Schedule upgrade.
+				wp_schedule_single_event( time(), 'smush_upgrade_to_pro' );
+				update_site_option( 'smush_cron_update_running', true );
+			}
 		}
 
 	} // End class.

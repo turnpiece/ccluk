@@ -9,7 +9,7 @@
  */
 
 ?>
-<div class="sui-notice sui-notice-error wphb-notice-box">
+<div class="sui-notice sui-notice-error">
 	<p><?php echo esc_html( $error ); ?></p>
 	<div class="sui-notice-buttons">
 		<a href="<?php echo esc_url( $retry_url ); ?>" class="sui-button">

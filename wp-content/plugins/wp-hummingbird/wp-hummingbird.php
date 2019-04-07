@@ -1,7 +1,7 @@
 <?php
 /**
 Plugin Name: Hummingbird Pro
-Version:     1.9.3
+Version:     1.9.4.1
 Plugin URI:  https://premium.wpmudev.org/project/wp-hummingbird/
 Description: Hummingbird zips through your site finding new ways to make it load faster, from file compression and minification to browser caching – because when it comes to pagespeed, every millisecond counts.
 Author:      WPMU DEV
@@ -34,7 +34,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 */
 
 if ( ! defined( 'WPHB_VERSION' ) ) {
-	define( 'WPHB_VERSION', '1.9.3' );
+	define( 'WPHB_VERSION', '1.9.4.1' );
 }
 
 if ( ! defined( 'WPHB_DIR_PATH' ) ) {
@@ -251,7 +251,16 @@ if ( ! class_exists( 'WP_Hummingbird' ) ) {
 				if ( ! $module->is_active() ) {
 					continue;
 				}
-				$module->clear_cache();
+				if ( 'Minify' !== $module->get_name() ) {
+					$module->clear_cache();
+				} else {
+					/**
+					 * Minify module.
+					 *
+					 * @var WP_Hummingbird_Module_Minify $module
+					 */
+					$module->clear_cache( false );
+				}
 			}
 
 			if ( WP_Hummingbird_Module_Server::is_htaccess_written( 'gzip' ) ) {
@@ -283,12 +292,13 @@ if ( ! class_exists( 'WP_Hummingbird' ) ) {
 			include_once WPHB_DIR_PATH . 'core/class-core.php';
 			/* @noinspection PhpIncludeInspection */
 			include_once WPHB_DIR_PATH . 'core/class-filesystem.php';
-			/* @noinspection PhpIncludeInspection */
-			include_once WPHB_DIR_PATH . 'core/integration.php';
 
 			// Helpers files.
 			/* @noinspection PhpIncludeInspection */
 			include_once WPHB_DIR_PATH . 'core/class-utils.php';
+			/* @noinspection PhpIncludeInspection */
+			include_once WPHB_DIR_PATH . 'core/integration.php';
+
 			/* @noinspection PhpIncludeInspection */
 			include_once WPHB_DIR_PATH . 'core/class-settings.php';
 

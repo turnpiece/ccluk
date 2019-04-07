@@ -1,10 +1,34 @@
 Plugin Name: Hummingbird Pro
 Author: Ignacio Cruz, Ricardo Freitas, Anton Vanyukov
-Tested up to: 4.9.8
+Tested up to: 5.1.1
 
 Change Log:
 
-= 1.9.3 ( 2018-10-01 ) =
+= 1.9.4.1 ( 2019-03-25 ) =
+- Fix: Only cache valid http responses (skip 30x, 40x, 50x error codes)
+
+= 1.9.4 ( 2019-03-19 ) =
+- New: Gutenberg compatibility
+- New: WP Hide & Security Enhancer compatibility
+- New: Uptime notifications
+- New: Scheduled Uptime reports
+- New: Gzip compression module will now detect and warn about privacy mode
+- Enhance: PHP 7.3 compatibility
+- Enhance: UI/UX
+- Enhance: Remove activation tooltip
+- Enhance: Improve operations with advanced-cache.php file in Page Caching module
+- Enhance: Remove sitemaps xml from Page Caching (on default settings)
+- Enhance: WPMU DEV hosting integration with Asset Optimization
+- Fix: Typos
+- Fix: Asset Optimization reset button not working
+- Fix: Asset Optimization settings clearing out on plugin deactivation
+- Fix: PHP warning on first plugin activation (or after settings reset)
+- Fix: Front page not caching
+- Fix: Page caching not enabled/disabled from Hub
+- Fix: Fatal error in class-hub-endpoints.php
+- Fix: Inability to clear individual post cache in subdirectory WordPress installs
+
+= 1.9.3 ( 2018-12-06 ) =
 - New: Download and clear Asset Optimization logs on multisite
 - New: Color accessibility option
 - New: wphb_shold_cache_request_pre action hook to exclude requests from caching
@@ -451,4 +475,5 @@ Enhance: Search by extension in minification page
 - First release
 
 
-87274-1550006880-au
+
+87274-1554644886-au

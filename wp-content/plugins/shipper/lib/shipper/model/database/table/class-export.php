@@ -319,6 +319,8 @@ class Shipper_Model_Database_Table_Export extends Shipper_Model_Database_Table {
 		$sql_only_string_rpl->set_codec_list( array(
 			new Shipper_Helper_Codec_Sql
 		) );
+		$skip_emails = $this->get_options_model()
+			->get( Shipper_Model_Stored_Options::KEY_SKIPEMAILS );
 		foreach ( $results as $src ) {
 			if ( ! $this->is_migrated_row( $src ) ) {
 				$sqls[] = $this->get_skipped_row_delimiter( 'skipped row' );
@@ -332,10 +334,20 @@ class Shipper_Model_Database_Table_Export extends Shipper_Model_Database_Table {
 				break;
 			}
 
-			$string_rpl = $this->is_users_table_row( $src, $table )
-				? $sql_only_string_rpl
-				: $full_string_rpl
-			;
+			// Serialized replacer is not a passthrough by default.
+			$replacer->set_passthrough( false );
+
+			$string_rpl = $full_string_rpl;
+			$is_full_replacement_table_row = $this->is_full_replacement_table_row( $src, $table );
+			if ( ! $is_full_replacement_table_row ) {
+				$string_rpl = $sql_only_string_rpl;
+
+				if ( $skip_emails ) {
+					// If there's stuff we need to keep, set passthrough mode.
+					// This affects serialized replacer, which will leave entry verbatim.
+					$replacer->set_passthrough( true );
+				}
+			}
 
 			$sqls[] = $string_rpl->transform(
 				$this->get_row_sql( $src, $description, $replacer )
@@ -343,6 +355,36 @@ class Shipper_Model_Database_Table_Export extends Shipper_Model_Database_Table {
 		}
 
 		return $sqls;
+	}
+
+	/**
+	 * Check whether to perform full replacement on a table row
+	 *
+	 * We can either do full replacement, which will go into the values
+	 * and replace everything, then do overall string replacement again.
+	 * Alternatively, we can do short replacement, which will just do
+	 * the minimum SQL-related transformations.
+	 *
+	 * @param array  $src Source row.
+	 * @param string $table Table name.
+	 *
+	 * @return bool
+	 */
+	public function is_full_replacement_table_row( $src, $table ) {
+		if ( $this->is_users_table_row( $src, $table ) ) {
+			return false;
+		}
+
+		if ( $this->is_options_table_row( $src, $table ) ) {
+			if ( 'admin_email' !== $this->get_table_row_name( $src, $table ) ) {
+				return true;
+			}
+
+			return ! $this->get_options_model()
+				->get( Shipper_Model_Stored_Options::KEY_SKIPEMAILS );
+		}
+
+		return true;
 	}
 
 	/**
@@ -488,5 +530,17 @@ class Shipper_Model_Database_Table_Export extends Shipper_Model_Database_Table {
 			$raw,
 			$table
 		);
+	}
+
+	/**
+	 * Gets options model instance
+	 *
+	 * @return object Shipper_Model_Stored_Options instance
+	 */
+	public function get_options_model() {
+		if ( ! isset( $options ) ) {
+			$options = new Shipper_Model_Stored_Options;
+		}
+		return $options;
 	}
 }

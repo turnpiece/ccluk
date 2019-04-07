@@ -74,6 +74,67 @@ abstract class Shipper_Task_Api extends Shipper_Task {
 	}
 
 	/**
+	 * Checks if we had previous communication errors.
+	 *
+	 * If we did, checks if we're to try again at this time or not.
+	 * If not, adds an error describing the issue.
+	 *
+	 * @return bool
+	 */
+	public function check_api_communication_health_state() {
+		$model = new Shipper_Model_Api;
+		$previous = $model->get_previous_api_fails();
+
+		if ( empty( $previous ) || count( $previous ) <= 2 ) {
+			return true;
+		}
+
+		$last_err = end( $previous );
+		if ( empty( $last_err ) ) {
+			return true;
+		}
+
+		$backoff = $this->get_api_backoff_time( $previous, 2 );
+		if ( $last_err + $backoff >= time() ) {
+			Shipper_Helper_Log::write(
+				sprintf(
+					'Backoff cooldown: %1$s ( %2$s remaining )',
+					$backoff, ( ( $last_err + $backoff ) - time() )
+				)
+			);
+			$this->add_error(
+				self::ERR_CONNECTION,
+				sprintf(
+					__( 'Too many communication errors, cooldown %ds', 'shipper' ),
+					$backoff
+				)
+			);
+			return false;
+		}
+
+		// If we're at max backoff, and it's past that - reset.
+		if ( $backoff >= $this->get_max_backoff() ) {
+			$model->reset_api_fails();
+		}
+
+		return true;
+	}
+
+	public function get_api_backoff_time( $errors, $cutoff = 1 ) {
+		if ( empty( $errors ) || count( $errors ) <= $cutoff ) {
+			return 0;
+		}
+		$err_exponent = count( $errors ) - min( $cutoff, count( $errors ) );
+		$backoff = min( pow( 5, $err_exponent ), $this->get_max_backoff() );
+
+		return $backoff;
+	}
+
+	public function get_max_backoff() {
+		return HOUR_IN_SECONDS;
+	}
+
+	/**
 	 * Gets DEV Shipper API service response
 	 *
 	 * @param string $endpoint Endpoint to ping.
@@ -86,6 +147,12 @@ abstract class Shipper_Task_Api extends Shipper_Task {
 		if ( Shipper_Model_Env::is_phpunit_test() && ! has_filter( 'pre_http_request' ) ) {
 			// We are in test env and we're _not_ mocking request.
 			// This'll fail anyway, so may as well save some time.
+			return array();
+		}
+
+		// So here we check if we had previous failed API calls.
+		// If we did and we're not ready to deal, back off.
+		if ( ! $this->check_api_communication_health_state() ) {
 			return array();
 		}
 
@@ -194,6 +261,7 @@ abstract class Shipper_Task_Api extends Shipper_Task {
 					$endpoint, $status_code, $error_msg
 				)
 			);
+			$model->record_api_fail();
 			return $data;
 		}
 

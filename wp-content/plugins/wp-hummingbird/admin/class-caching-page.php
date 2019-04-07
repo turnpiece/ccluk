@@ -94,11 +94,10 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 				null,
 				'summary',
 				array(
-					'box_class' => 'sui-box sui-summary',
+					'box_class'         => 'sui-box sui-summary',
 					'box_content_class' => false,
 				)
 			);
-
 
 			if ( WP_Hummingbird_Utils::get_module( 'page_cache' )->is_active() ) {
 				$this->add_meta_box(
@@ -130,13 +129,13 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 					null,
 					'main',
 					array(
-						'box_content_class' => 'sui-box-body sui-block-content-center',
+						'box_content_class' => 'sui-box sui-message',
 					)
 				);
 			}
 		} elseif ( is_super_admin() || 'blog-admins' === WP_Hummingbird_Settings::get_setting( 'enabled', 'page_cache' ) ) {
 			/**
-			 * Subsites
+			 * Sub sites
 			 */
 			if ( WP_Hummingbird_Utils::get_module( 'page_cache' )->is_active() ) {
 				$this->add_meta_box(
@@ -156,11 +155,11 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 					null,
 					'main',
 					array(
-						'box_content_class' => 'sui-box-body sui-block-content-center',
+						'box_content_class' => 'sui-box sui-message',
 					)
 				);
 			}
-		} // End if().
+		}
 
 		// Do not continue on subsites.
 		if ( is_multisite() && ! is_network_admin() ) {
@@ -213,7 +212,7 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 				null,
 				'gravatar',
 				array(
-					'box_content_class' => 'sui-box-body sui-block-content-center',
+					'box_content_class' => 'sui-box sui-message',
 				)
 			);
 		}
@@ -306,6 +305,11 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 				return;
 			}
 
+			// Allow only supported actions.
+			if ( ! in_array( $action, array( 'enable', 'disable', 'disconnect' ), true ) ) {
+				return;
+			}
+
 			if ( method_exists( $mod, $action ) ) {
 				call_user_func( array( $mod, $action ) );
 			}
@@ -315,19 +319,27 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 				$module = 'caching';
 			}
 
-			$redirect_url = add_query_arg( array(
-				'view' => $module,
-			), WP_Hummingbird_Utils::get_admin_menu_url( 'caching' ) );
-
+			$redirect_url = add_query_arg(
+				array(
+					'view' => $module,
+				),
+				WP_Hummingbird_Utils::get_admin_menu_url( 'caching' )
+			);
 
 			if ( 'enable' === $action && 'caching' === $module ) {
-				$redirect_url = add_query_arg( array(
-					'enabled' => true,
-				), $redirect_url );
+				$redirect_url = add_query_arg(
+					array(
+						'enabled' => true,
+					),
+					$redirect_url
+				);
 			} elseif ( 'disable' === $action && 'caching' === $module ) {
-				$redirect_url = add_query_arg( array(
-					'disabled' => true,
-				), $redirect_url );
+				$redirect_url = add_query_arg(
+					array(
+						'disabled' => true,
+					),
+					$redirect_url
+				);
 			}
 			wp_safe_redirect( $redirect_url );
 		} // End if().
@@ -398,7 +410,7 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 		 */
 		$cf_module = WP_Hummingbird_Utils::get_module( 'cloudflare' );
 
-		$this->cf_server = $cf_module->has_cloudflare();
+		$this->cf_server  = $cf_module->has_cloudflare();
 		$this->cloudflare = $cf_module->is_connected() && $cf_module->is_zone_selected();
 
 		if ( $this->cloudflare ) {
@@ -428,7 +440,7 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 
 		// Get number of issues.
 		$this->htaccess_written = WP_Hummingbird_Module_Server::is_htaccess_written( 'caching' );
-		$this->issues = WP_Hummingbird_Utils::get_number_of_issues( 'caching', $this->report );
+		$this->issues           = WP_Hummingbird_Utils::get_number_of_issues( 'caching', $this->report );
 	}
 
 	/**
@@ -453,7 +465,7 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 			}
 
 			if ( 0 !== $issues ) {
-				echo '<span class="sui-tag">' . absint( $issues ) . '</span>';
+				echo '<span class="sui-tag sui-tag-warning">' . absint( $issues ) . '</span>';
 				return;
 			}
 			echo '<i class="sui-icon-check-tick sui-success" aria-hidden="true"></i>';
@@ -506,18 +518,16 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 	 * Caching summary meta box.
 	 */
 	public function caching_summary() {
-		global $wpdb;
-
-		$pages = $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->posts} WHERE ( post_type = 'page' OR post_type = 'post' ) AND post_status = 'publish'" ); // db call ok; no-cache ok.
-
-		$this->view( 'caching/summary-meta-box', array(
-			'pc_active' => WP_Hummingbird_Utils::get_module( 'page_cache' )->is_active(),
-			'pages'     => (int) $pages,
-			'cached'    => WP_Hummingbird_Settings::get_setting( 'pages_cached', 'page_cache' ),
-			'issues'    => $this->issues,
-			'gravatar'  => WP_Hummingbird_Utils::get_module( 'gravatar' )->is_active(),
-			'rss'       => WP_Hummingbird_Settings::get_setting( 'duration', 'rss' ),
-		) );
+		$this->view(
+			'caching/summary-meta-box',
+			array(
+				'pc_active' => WP_Hummingbird_Utils::get_module( 'page_cache' )->is_active(),
+				'cached'    => WP_Hummingbird_Settings::get_setting( 'pages_cached', 'page_cache' ),
+				'issues'    => $this->issues,
+				'gravatar'  => WP_Hummingbird_Utils::get_module( 'gravatar' )->is_active(),
+				'rss'       => WP_Hummingbird_Settings::get_setting( 'duration', 'rss' ),
+			)
+		);
 	}
 
 	/**
@@ -531,12 +541,20 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 	 * Disabled page caching meta box.
 	 */
 	public function page_caching_disabled_metabox() {
-		$this->view( 'caching/disabled-page-caching-meta-box', array(
-			'activate_url' => wp_nonce_url( add_query_arg( array(
-				'action' => 'enable',
-				'module' => 'page_cache',
-			)), 'wphb-caching-actions' ),
-		));
+		$this->view(
+			'caching/disabled-page-caching-meta-box',
+			array(
+				'activate_url' => wp_nonce_url(
+					add_query_arg(
+						array(
+							'action' => 'enable',
+							'module' => 'page_cache',
+						)
+					),
+					'wphb-caching-actions'
+				),
+			)
+		);
 	}
 
 	/**
@@ -544,11 +562,11 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 	 */
 	public function page_caching_metabox() {
 		/* @var WP_Hummingbird_Module_Page_Cache $module */
-		$module = WP_Hummingbird_Utils::get_module( 'page_cache' );
+		$module  = WP_Hummingbird_Utils::get_module( 'page_cache' );
 		$options = $module->get_options();
 
 		$custom_post_types = array();
-		$settings = $module->get_settings();
+		$settings          = $module->get_settings();
 		if ( isset( $settings['custom_post_types'] ) ) {
 			$custom_post_types = $settings['custom_post_types'];
 		}
@@ -559,26 +577,43 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 			$log = false;
 		}
 
-		$this->view( 'caching/page-caching-meta-box', array(
-			'error'              => $module->error,
-			'settings'           => $settings,
-			'admins_can_disable' => ( 'blog-admins' === $options['enabled'] ) ? true : false,
-			'blog_is_frontpage'  => ( 'posts' === get_option( 'show_on_front' ) && ! is_multisite() ) ? true : false,
-			'pages'              => WP_Hummingbird_Module_Page_Cache::get_page_types(),
-			'custom_post_types'  => get_post_types( array(
-				'public'   => true,
-				'_builtin' => false,
-			), 'objects','and' ),
-			'logs_link'          => $log,
-			'download_url'       => wp_nonce_url( add_query_arg( array(
-				'logs'   => 'download',
-				'module' => $module->get_slug(),
-			)), 'wphb-log-action' ),
-			'deactivate_url'     => wp_nonce_url( add_query_arg( array(
-				'action' => 'disable',
-				'module' => 'page_cache',
-			)), 'wphb-caching-actions' ),
-		));
+		$this->view(
+			'caching/page-caching-meta-box',
+			array(
+				'error'              => $module->error,
+				'settings'           => $settings,
+				'admins_can_disable' => ( 'blog-admins' === $options['enabled'] ) ? true : false,
+				'blog_is_frontpage'  => ( 'posts' === get_option( 'show_on_front' ) && ! is_multisite() ) ? true : false,
+				'pages'              => WP_Hummingbird_Module_Page_Cache::get_page_types(),
+				'custom_post_types'  => get_post_types(
+					array(
+						'public'   => true,
+						'_builtin' => false,
+					),
+					'objects',
+					'and'
+				),
+				'logs_link'          => $log,
+				'download_url'       => wp_nonce_url(
+					add_query_arg(
+						array(
+							'logs'   => 'download',
+							'module' => $module->get_slug(),
+						)
+					),
+					'wphb-log-action'
+				),
+				'deactivate_url'     => wp_nonce_url(
+					add_query_arg(
+						array(
+							'action' => 'disable',
+							'module' => 'page_cache',
+						)
+					),
+					'wphb-caching-actions'
+				),
+			)
+		);
 	}
 
 	/**
@@ -589,19 +624,27 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 	public function page_caching_subsite_metabox() {
 		/* @var WP_Hummingbird_Module_Page_Cache $page_cache_module */
 		$page_cache_module = WP_Hummingbird_Utils::get_module( 'page_cache' );
-		$options = $page_cache_module->get_options();
-		$can_deactivate = false;
+		$options           = $page_cache_module->get_options();
+		$can_deactivate    = false;
 		if ( 'blog-admins' === $options['enabled'] ) {
 			$can_deactivate = true;
 		}
-		$this->view( 'caching/page-caching-subsite-meta-box', array(
-			'error'          => WP_Hummingbird_Utils::get_module( 'page_cache' )->error,
-			'can_deactivate' => $can_deactivate,
-			'deactivate_url' => wp_nonce_url( add_query_arg( array(
-				'action' => 'disable',
-				'module' => 'page_cache',
-			)), 'wphb-caching-actions' ),
-		));
+		$this->view(
+			'caching/page-caching-subsite-meta-box',
+			array(
+				'error'          => WP_Hummingbird_Utils::get_module( 'page_cache' )->error,
+				'can_deactivate' => $can_deactivate,
+				'deactivate_url' => wp_nonce_url(
+					add_query_arg(
+						array(
+							'action' => 'disable',
+							'module' => 'page_cache',
+						)
+					),
+					'wphb-caching-actions'
+				),
+			)
+		);
 	}
 
 	/**
@@ -610,9 +653,12 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 	 * @since 1.8.0
 	 */
 	public function page_caching_subsite_metabox_header() {
-		$this->view( 'caching/page-caching-meta-box-header', array(
-			'title'      => __( 'Page Caching', 'wphb' ),
-		));
+		$this->view(
+			'caching/page-caching-meta-box-header',
+			array(
+				'title' => __( 'Page Caching', 'wphb' ),
+			)
+		);
 	}
 
 	/**
@@ -634,10 +680,13 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 			$issues = count( $this->report ) + 1;
 		}
 
-		$this->view( 'caching/browser-caching-meta-box-header', array(
-			'title'      => __( 'Browser Caching', 'wphb' ),
-			'issues'     => $issues,
-		));
+		$this->view(
+			'caching/browser-caching-meta-box-header',
+			array(
+				'title'  => __( 'Browser Caching', 'wphb' ),
+				'issues' => $issues,
+			)
+		);
 	}
 
 	/**
@@ -660,28 +709,34 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 		}
 		$cf_notice = $this->cf_server ? __( 'Ahoi, we’ve detected you’re using CloudFlare!', 'wphb' ) : __( 'Using CloudFlare?', 'wphb' );
 
-		$this->view( 'caching/browser-caching-meta-box', array(
-			'htaccess_issue'         => $htaccess_issue,
-			'results'                => $this->report,
-			'issues'                 => $this->issues,
-			'human_results'          => array_map( array( 'WP_Hummingbird_Utils', 'human_read_time_diff' ), $this->report ),
-			'recommended'            => WP_Hummingbird_Utils::get_recommended_caching_values(),
-			'show_cf_notice'         => $show_cf_notice,
-			'cf_notice'              => $cf_notice,
-			'cf_server'              => $this->cf_server,
-			'cf_active'              => $this->cloudflare,
-			'caching_type_tooltips'  => WP_Hummingbird_Utils::get_browser_caching_types(),
-		));
+		$this->view(
+			'caching/browser-caching-meta-box',
+			array(
+				'htaccess_issue'        => $htaccess_issue,
+				'results'               => $this->report,
+				'issues'                => $this->issues,
+				'human_results'         => array_map( array( 'WP_Hummingbird_Utils', 'human_read_time_diff' ), $this->report ),
+				'recommended'           => WP_Hummingbird_Utils::get_recommended_caching_values(),
+				'show_cf_notice'        => $show_cf_notice,
+				'cf_notice'             => $cf_notice,
+				'cf_server'             => $this->cf_server,
+				'cf_active'             => $this->cloudflare,
+				'caching_type_tooltips' => WP_Hummingbird_Utils::get_browser_caching_types(),
+			)
+		);
 	}
 
 	/**
 	 * Display browser caching settings header meta box.
 	 */
 	public function caching_settings_metabox_header() {
-		$this->view( 'caching/browser-caching-configure-meta-box-header', array(
-			'title'     => __( 'Configure', 'wphb' ),
-			'cf_active' => $this->cloudflare,
-		));
+		$this->view(
+			'caching/browser-caching-configure-meta-box-header',
+			array(
+				'title'     => __( 'Configure', 'wphb' ),
+				'cf_active' => $this->cloudflare,
+			)
+		);
 	}
 
 	/**
@@ -725,36 +780,54 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 			'media'      => 'Media',
 		);
 
-		$this->view( 'caching/browser-caching-configure-meta-box', array(
-			'results'             => $this->report,
-			'labels'              => $labels,
-			'human_results'       => array_map( array( 'WP_Hummingbird_Utils', 'human_read_time_diff' ), $this->report ),
-			'expires'             => $this->expires,
-			'different_expiry'    => ( 1 >= count( array_unique( array_values( $this->expires ) ) ) ) ? true : false,
-			'server_type'         => $server_type,
-			'snippets'            => $snippets,
-			'htaccess_written'    => $this->htaccess_written,
-			'htaccess_writable'   => $htaccess_writable,
-			'already_enabled'     => $this->is_caching_fully_enabled() && ! $this->htaccess_written,
-			'cf_active'           => $this->cloudflare,
-			'cf_server'           => $this->cf_server,
-			'cf_current'          => $this->expiration,
-			'all_expiry'          => count( array_unique( $this->expires ) ) === 1,
-			'show_cf_notice'      => $show_cf_notice,
-			'recheck_expiry_url'  => add_query_arg( 'run', 'true' ),
-			'cf_disable_url'      => wp_nonce_url( add_query_arg( array(
-				'action' => 'disconnect',
-				'module' => 'cloudflare',
-			)), 'wphb-caching-actions' ),
-			'enable_link'         => wp_nonce_url( add_query_arg( array(
-				'action' => 'enable',
-				'module' => 'caching',
-			)), 'wphb-caching-actions' ),
-			'disable_link'        => wp_nonce_url( add_query_arg( array(
-				'action' => 'disable',
-				'module' => 'caching',
-			)), 'wphb-caching-actions' ),
-		));
+		$this->view(
+			'caching/browser-caching-configure-meta-box',
+			array(
+				'results'            => $this->report,
+				'labels'             => $labels,
+				'human_results'      => array_map( array( 'WP_Hummingbird_Utils', 'human_read_time_diff' ), $this->report ),
+				'expires'            => $this->expires,
+				'different_expiry'   => ( 1 >= count( array_unique( array_values( $this->expires ) ) ) ) ? true : false,
+				'server_type'        => $server_type,
+				'snippets'           => $snippets,
+				'htaccess_written'   => $this->htaccess_written,
+				'htaccess_writable'  => $htaccess_writable,
+				'already_enabled'    => $this->is_caching_fully_enabled() && ! $this->htaccess_written,
+				'cf_active'          => $this->cloudflare,
+				'cf_server'          => $this->cf_server,
+				'cf_current'         => $this->expiration,
+				'all_expiry'         => count( array_unique( $this->expires ) ) === 1,
+				'show_cf_notice'     => $show_cf_notice,
+				'recheck_expiry_url' => add_query_arg( 'run', 'true' ),
+				'cf_disable_url'     => wp_nonce_url(
+					add_query_arg(
+						array(
+							'action' => 'disconnect',
+							'module' => 'cloudflare',
+						)
+					),
+					'wphb-caching-actions'
+				),
+				'enable_link'        => wp_nonce_url(
+					add_query_arg(
+						array(
+							'action' => 'enable',
+							'module' => 'caching',
+						)
+					),
+					'wphb-caching-actions'
+				),
+				'disable_link'       => wp_nonce_url(
+					add_query_arg(
+						array(
+							'action' => 'disable',
+							'module' => 'caching',
+						)
+					),
+					'wphb-caching-actions'
+				),
+			)
+		);
 	}
 
 	/**
@@ -770,12 +843,20 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 	 * @since 1.5.3
 	 */
 	public function caching_gravatar_disabled_metabox() {
-		$this->view( 'caching/disabled-gravatar-meta-box', array(
-			'activate_url' => wp_nonce_url( add_query_arg( array(
-				'action' => 'enable',
-				'module' => 'gravatar',
-			)), 'wphb-caching-actions' ),
-		));
+		$this->view(
+			'caching/disabled-gravatar-meta-box',
+			array(
+				'activate_url' => wp_nonce_url(
+					add_query_arg(
+						array(
+							'action' => 'enable',
+							'module' => 'gravatar',
+						)
+					),
+					'wphb-caching-actions'
+				),
+			)
+		);
 	}
 
 	/**
@@ -785,14 +866,22 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 		/* @var WP_Hummingbird_Module_Gravatar $module */
 		$module = WP_Hummingbird_Utils::get_module( 'gravatar' );
 
-		$this->view( 'caching/gravatar-meta-box', array(
-			'module_active'    => $module->is_active(),
-			'error'            => $module->error,
-			'deactivate_url'   => wp_nonce_url( add_query_arg( array(
-				'action' => 'disable',
-				'module' => 'gravatar',
-			)), 'wphb-caching-actions' ),
-		));
+		$this->view(
+			'caching/gravatar-meta-box',
+			array(
+				'module_active'  => $module->is_active(),
+				'error'          => $module->error,
+				'deactivate_url' => wp_nonce_url(
+					add_query_arg(
+						array(
+							'action' => 'disable',
+							'module' => 'gravatar',
+						)
+					),
+					'wphb-caching-actions'
+				),
+			)
+		);
 	}
 
 	/**
@@ -809,15 +898,20 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 		$active = WP_Hummingbird_Utils::get_module( 'rss' )->is_active();
 
 		$args = array(
-			'url' => wp_nonce_url( add_query_arg( array(
-				'action' => $active ? 'disable' : 'enable',
-				'module' => 'rss',
-			)), 'wphb-caching-actions' ),
+			'url' => wp_nonce_url(
+				add_query_arg(
+					array(
+						'action' => $active ? 'disable' : 'enable',
+						'module' => 'rss',
+					)
+				),
+				'wphb-caching-actions'
+			),
 		);
 
 		$meta_box = 'caching/rss-disabled-meta-box';
 		if ( $active ) {
-			$meta_box = 'caching/rss-meta-box';
+			$meta_box         = 'caching/rss-meta-box';
 			$args['duration'] = WP_Hummingbird_Settings::get_setting( 'duration', 'rss' );
 		}
 
@@ -835,10 +929,13 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 	 * Display settings meta box.
 	 */
 	public function settings_metabox() {
-		$this->view( 'caching/other-settings-meta-box', array(
-			'control'   => WP_Hummingbird_Settings::get_setting( 'control', 'page_cache' ),
-			'detection' => WP_Hummingbird_Settings::get_setting( 'detection', 'page_cache' ),
-		));
+		$this->view(
+			'caching/other-settings-meta-box',
+			array(
+				'control'   => WP_Hummingbird_Settings::get_setting( 'control', 'page_cache' ),
+				'detection' => WP_Hummingbird_Settings::get_setting( 'detection', 'page_cache' ),
+			)
+		);
 	}
 
 }

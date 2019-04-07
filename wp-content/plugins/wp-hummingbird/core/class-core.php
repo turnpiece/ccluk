@@ -122,19 +122,22 @@ class WP_Hummingbird_Core {
 		/**
 		 * Filters the modules slugs list
 		 */
-		$modules = apply_filters( 'wp_hummingbird_modules', array(
-			'minify'      => __( 'Minify', 'wphb' ),
-			'gzip'        => __( 'Gzip', 'wphb' ),
-			'caching'     => __( 'Caching', 'wphb' ),
-			'performance' => __( 'Performance', 'wphb' ),
-			'uptime'      => __( 'Uptime', 'wphb' ),
-			'smush'       => __( 'Smush', 'wphb' ),
-			'cloudflare'  => __( 'Cloudflare', 'wphb' ),
-			'gravatar'    => __( 'Gravatar Caching', 'wphb' ),
-			'page_cache'  => __( 'Page Caching', 'wphb' ),
-			'advanced'    => __( 'Advanced Tools', 'wphb' ),
-			'rss'         => __( 'RSS Caching', 'wphb' ),
-		) );
+		$modules = apply_filters(
+			'wp_hummingbird_modules',
+			array(
+				'minify'      => __( 'Minify', 'wphb' ),
+				'gzip'        => __( 'Gzip', 'wphb' ),
+				'caching'     => __( 'Caching', 'wphb' ),
+				'performance' => __( 'Performance', 'wphb' ),
+				'uptime'      => __( 'Uptime', 'wphb' ),
+				'smush'       => __( 'Smush', 'wphb' ),
+				'cloudflare'  => __( 'Cloudflare', 'wphb' ),
+				'gravatar'    => __( 'Gravatar Caching', 'wphb' ),
+				'page_cache'  => __( 'Page Caching', 'wphb' ),
+				'advanced'    => __( 'Advanced Tools', 'wphb' ),
+				'rss'         => __( 'RSS Caching', 'wphb' ),
+			)
+		);
 
 		// Do not load minification for PHP less than 5.3.
 		if ( ! WP_Hummingbird_Utils::can_execute_php() ) {
@@ -209,22 +212,26 @@ class WP_Hummingbird_Core {
 		if ( $minification_module->is_active() ) {
 			if ( ! is_admin() && ! isset( $_GET['avoid-minify'] ) ) {
 				$admin_bar->add_menu( $menu_args );
-				$admin_bar->add_menu( array(
-					'id'     => 'wphb-page-minify',
-					'title'  => __( 'See this page unminified', 'wphb' ),
-					'href'   => add_query_arg( 'avoid-minify', 'true' ),
-					'parent' => 'wphb',
-				));
+				$admin_bar->add_menu(
+					array(
+						'id'     => 'wphb-page-minify',
+						'title'  => __( 'See this page unminified', 'wphb' ),
+						'href'   => add_query_arg( 'avoid-minify', 'true' ),
+						'parent' => 'wphb',
+					)
+				);
 			}
 		} else {
 			if ( ! is_admin() && isset( $_GET['avoid-minify'] ) ) {
 				$admin_bar->add_menu( $menu_args );
-				$admin_bar->add_menu( array(
-					'id'     => 'wphb-page-minify',
-					'title'  => __( 'See this page minified', 'wphb' ),
-					'href'   => remove_query_arg( 'avoid-minify' ),
-					'parent' => 'wphb',
-				));
+				$admin_bar->add_menu(
+					array(
+						'id'     => 'wphb-page-minify',
+						'title'  => __( 'See this page minified', 'wphb' ),
+						'href'   => remove_query_arg( 'avoid-minify' ),
+						'parent' => 'wphb',
+					)
+				);
 			}
 		}
 
@@ -234,12 +241,14 @@ class WP_Hummingbird_Core {
 
 		if ( $pc_module->is_active() && $options['control'] ) {
 			$admin_bar->add_menu( $menu_args );
-			$admin_bar->add_menu( array(
-				'id'     => 'wphb-clear-cache',
-				'title'  => __( 'Clear page cache', 'wphb' ),
-				'parent' => 'wphb',
-				'href'   => '#',
-			));
+			$admin_bar->add_menu(
+				array(
+					'id'     => 'wphb-clear-cache',
+					'title'  => __( 'Clear page cache', 'wphb' ),
+					'parent' => 'wphb',
+					'href'   => '#',
+				)
+			);
 		}
 	}
 
@@ -251,7 +260,7 @@ class WP_Hummingbird_Core {
 	public function enqueue_global() {
 		wp_enqueue_script(
 			'wphb-global',
-			WPHB_DIR_URL . 'admin/assets/js/global.min.js',
+			WPHB_DIR_URL . 'admin/assets/js/wphb-global.min.js',
 			array(),
 			WPHB_VERSION,
 			true

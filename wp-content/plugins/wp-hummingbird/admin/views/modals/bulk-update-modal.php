@@ -1,3 +1,12 @@
+<?php
+/**
+ * Bulk update for asset optimization.
+ *
+ * @package Hummingbird
+ */
+
+?>
+
 <div class="dialog sui-dialog sui-dialog-sm" aria-hidden="true" id="bulk-update-modal">
 
 	<div class="sui-dialog-overlay" tabindex="-1" data-a11y-dialog-hide></div>
@@ -20,35 +29,35 @@
 				<div class="checkbox-group">
 					<input type="checkbox" class="toggle-checkbox filter-toggles filter-minify" name="filter-minify" id="filter-minify" aria-label="<?php esc_attr_e( 'Compress', 'wphb' ); ?>">
 					<label for="filter-minify" class="toggle-label sui-tooltip" data-tooltip="<?php esc_attr_e( 'Compress', 'wphb' ); ?>" aria-hidden="true">
-						<span class="hb-icon-minify" aria-hidden="true"></span>
+						<span class="sui-icon-arrows-in" aria-hidden="true"></span>
 					</label>
 
 					<?php
-					$tooltip = __( 'Combine', 'wphb' );
+					$tooltip  = __( 'Combine', 'wphb' );
 					$is_http2 = is_ssl() && 'HTTP/2.0' === $_SERVER['SERVER_PROTOCOL'];
 					if ( $is_http2 ) {
-						$tooltip = __( "Files can't be combined", 'wphb' );
+						$tooltip      = __( "Files can't be combined", 'wphb' );
 						$dont_combine = true;
 					}
 					?>
 					<input type="checkbox" class="toggle-checkbox filter-toggles filter-combine" name="filter-combine" id="filter-combine" aria-label="<?php esc_attr_e( 'Combine', 'wphb' ); ?>" <?php echo disabled( $is_http2 ); ?>>
 					<label for="filter-combine" class="toggle-label sui-tooltip" data-tooltip="<?php echo esc_attr( $tooltip ); ?>" aria-hidden="true">
-						<span class="hb-icon-minify-combine" aria-hidden="true"></span>
+						<span class="sui-icon-combine" aria-hidden="true"></span>
 					</label>
 
 					<input type="checkbox" class="toggle-checkbox filter-toggles filter-position-footer" name="filter-position" id="filter-position-footer" aria-label="<?php esc_attr_e( 'Footer', 'wphb' ); ?>">
 					<label for="filter-position-footer" class="toggle-label sui-tooltip" data-tooltip="<?php esc_attr_e( 'Move to Footer', 'wphb' ); ?>" aria-hidden="true">
-						<span class="hb-icon-minify-footer" aria-hidden="true"></span>
+						<span class="sui-icon-movefooter" aria-hidden="true"></span>
 					</label>
 
 					<input type="checkbox" class="toggle-checkbox filter-toggles filter-defer" name="filter-defer" id="filter-defer" aria-label="<?php esc_attr_e( 'Defer', 'wphb' ); ?>">
 					<label for="filter-defer" class="toggle-label sui-tooltip" data-tooltip="<?php esc_attr_e( 'Defer JavaScript', 'wphb' ); ?>" aria-hidden="true">
-						<span class="hb-icon-minify-defer" aria-hidden="true"></span>
+						<span class="sui-icon-defer" aria-hidden="true"></span>
 					</label>
 
 					<input type="checkbox" class="toggle-checkbox filter-toggles filter-inline" name="filter-inline" id="filter-inline" aria-label="<?php esc_attr_e( 'Inline', 'wphb' ); ?>">
 					<label for="filter-inline" class="toggle-label sui-tooltip" data-tooltip="<?php esc_attr_e( 'Inline CSS', 'wphb' ); ?>" aria-hidden="true">
-						<span class="hb-icon-minify-inline" aria-hidden="true"></span>
+						<span class="sui-icon-inlinecss" aria-hidden="true"></span>
 					</label>
 				</div><!-- end checkbox-group -->
 
@@ -61,18 +70,17 @@
 			</div>
 
 			<?php if ( ! WP_Hummingbird_Utils::hide_wpmudev_branding() ) : ?>
-				<div class="wphb-modal-image wphb-modal-image-bottom dev-man">
-					<img class="wphb-image"
-					     src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/graphic-minify-modal-warning@1x.png' ); ?>"
-					     srcset="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/graphic-minify-modal-warning@2x.png' ); ?> 2x"
-					     alt="<?php esc_attr_e( 'Hummingbird', 'wphb' ); ?>">
-				</div>
+				<img class="sui-image"
+					src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/graphic-minify-modal-warning@1x.png' ); ?>"
+					srcset="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/graphic-minify-modal-warning@2x.png' ); ?> 2x"
+					alt="<?php esc_attr_e( 'Hummingbird', 'wphb' ); ?>">
 			<?php endif; ?>
 		</div>
 
 	</div>
 
 </div>
+
 <script type="text/javascript">
 	jQuery('label[for^="filter-"]').on('click', function() {
 		jQuery(this).toggleClass('toggle-label-background');

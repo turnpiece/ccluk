@@ -16,7 +16,7 @@ class WP_Hummingbird_Module_Smush extends WP_Hummingbird_Module {
 
 	public static function is_smush_installed() {
 		if ( ! function_exists( 'get_plugins' ) ) {
-			include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+			include_once ABSPATH . 'wp-admin/includes/plugin.php';
 		}
 
 		$plugins = get_plugins();
@@ -28,7 +28,7 @@ class WP_Hummingbird_Module_Smush extends WP_Hummingbird_Module {
 
 	public static function is_smush_active() {
 		if ( ! function_exists( 'is_plugin_active' ) ) {
-			include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+			include_once ABSPATH . 'wp-admin/includes/plugin.php';
 		}
 
 		return is_plugin_active( 'wp-smush-pro/wp-smush.php' ) || is_plugin_active( 'wp-smushit/wp-smush.php' );

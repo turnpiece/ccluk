@@ -3,14 +3,14 @@ Contributors: safronik
 Tags: spam, antispam, protection, comments, firewall 
 Requires at least: 3.0
 Tested up to: 5.1
-Stable tag: 5.115.2
+Stable tag: 5.117.1
 License: GPLv2
 
 Spam protection, antispam, all-in-one, premium plugin. No spam comments & users, no spam contact form & WooCommerce anti-spam.
 
 == Description ==
 
-**Supports: Contact Form 7, Contact Form by WPForms, Ninja Forms, Gravity Forms, MailChimp, Formidable forms, WooCommerce, JetPack comments and contact form, BuddyPress, bbPress, Fast Secure Contact form, S2Member, MailPoet, any WordPress registrations & contact forms and themes. Just setup and forget the spam!** 
+**Supports: Contact Form 7, Contact Form by WPForms, Ninja Forms, Gravity Forms, MailChimp, Formidable forms, WooCommerce, JetPack comments and contact form, BuddyPress, bbPress, Fast Secure Contact form, S2Member, MailPoet, wpDiscuz, any WordPress registrations & contact forms and themes. Just setup and forget the spam!** 
 
 No CAPTCHA, no questions, no animal counting, no puzzles, no math and no spam bots. Universal AntiSpam plugin. 
 
@@ -558,6 +558,44 @@ If your website has forms that send data to external sources, you can enable opt
 10. Website's options.
 
 == Changelog ==
+= 5.117.1 April 5 2019 =
+  * Fix: GDPR notice.
+  * Fix: noCacheJS localization.
+  * Fix: Fatal error when updating.
+
+= 5.117 March 27 2019 =
+  * New: Update logic runs on all pages.
+  * New: Integration for Ajax Contact Forms plugin.
+  * New: Notification for users groups about new comments.
+  * New: SFW die page. Show browser and page creation time.
+  * Fix: Huge bug in Cleantalk.php connected with servers changing.
+  * Fix: Check AJAX requests for logged in users.
+  * Fix: Deleting debug in JS.
+  * Fix: Validating settings before saving.
+
+= 5.116.3 March 14 2019 =
+  * Fix: "Headers already sent" error.
+  * Fix: Images paths.
+  * Fix: IP detection.
+  * Fix: Skip lost password form check
+  * Fix: Skip mobile requests (push settings)
+  * Fix: PHP notice when detecting BuddyPress template.
+  
+= 5.116.2 March 7 2019 =
+  * Fix: Creating tables in MariaDB.
+
+= 5.116.1 March 6 2019 =
+  * Fix: Creating tables in DB.
+  * Fix: PHP Warning in spam statistics widget.
+  
+= 5.116 March 6 2019 =
+  * Spam filtration quality improved.
+  * New: Storing visited URLs.
+  * New: Check before validation Contact Form 7, Comments, Jetpack comments.
+  * New: Get validation result for Contact Form 7, Comments, Jetpack comments.
+  * Fix: ES add subscriber.
+  * Fix: IP detection.
+  
 = 5.115.2 February 27 2019 =
   * Fix: False positives spam detection in WP Forms and Contact Form 7.
 
@@ -1800,6 +1838,44 @@ If your website has forms that send data to external sources, you can enable opt
   * First version
   
 == Upgrade Notice ==
+= 5.117.1 April 5 2019 =
+  * Fix: GDPR notice.
+  * Fix: noCacheJS localization.
+  * Fix: Fatal error when updating.
+
+= 5.117 March 27 2019 =
+  * New: Update logic runs on all pages.
+  * New: Integration for Ajax Contact Forms plugin.
+  * New: Notification for users groups about new comments.
+  * New: SFW die page. Show browser and page creation time.
+  * Fix: Huge bug in Cleantalk.php connected with servers changing.
+  * Fix: Check AJAX requests for logged in users.
+  * Fix: Deleting debug in JS.
+  * Fix: Validating settings before saving.
+
+= 5.116.3 March 14 2019 =
+  * Fix: "Headers already sent" error.
+  * Fix: Images paths.
+  * Fix: IP detection.
+  * Fix: Skip lost password form check
+  * Fix: Skip mobile requests (push settings)
+  * Fix: PHP notice when detecting BuddyPress template.
+
+= 5.116.2 March 7 2019 =
+  * Fix: Creating tables in MariaDB.
+
+= 5.116.1 March 6 2019 =
+  * Fix: Creating tables in DB.
+  * Fix: PHP Warning in spam statistics widget.
+
+= 5.116 March 6 2019 =
+  * Spam filtration quality improved.
+  * New: Storing visited URLs.
+  * New: Check before validation Contact Form 7, Comments, Jetpack comments.
+  * New: Get validation result for Contact Form 7, Comments, Jetpack comments.
+  * Fix: ES add subscriber.
+  * Fix: IP detection.
+
 = 5.115.2 February 27 2019 =
   * Fix: False positives spam detection in WP Forms and Contact Form 7.
 

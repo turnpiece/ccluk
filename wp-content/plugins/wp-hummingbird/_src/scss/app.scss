@@ -1,3 +1,5 @@
+$summary-image: '../../admin/assets/image/graphic-hb-minify-summary@2x.png';
+
 /* ****************************************************************************
  * MAIN APP SCSS FILE
  */
@@ -16,6 +18,7 @@
 @import "~@wpmudev/shared-ui/scss/buttons";
 @import "~@wpmudev/shared-ui/scss/toggles";
 @import "~@wpmudev/shared-ui/scss/boxes";
+@import "~@wpmudev/shared-ui/scss/box-settings";
 @import "~@wpmudev/shared-ui/scss/layout";
 @import "~@wpmudev/shared-ui/scss/notifications";
 @import "~@wpmudev/shared-ui/scss/header";
@@ -25,6 +28,7 @@
 @import "~@wpmudev/shared-ui/scss/select";
 @import "~@wpmudev/shared-ui/scss/tags";
 @import "~@wpmudev/shared-ui/scss/forms";
+@import "~@wpmudev/shared-ui/scss/radio-checkbox";
 @import "~@wpmudev/shared-ui/scss/tabs";
 @import "~@wpmudev/shared-ui/scss/sidenav";
 @import "~@wpmudev/shared-ui/scss/scores";
@@ -45,7 +49,6 @@
 @import "common/variables";
 @import "common/mixins";
 @import "common/overwrites";
-@import "common/typography";
 @import "common/buttons";
 @import "common/modals";
 
@@ -86,16 +89,6 @@
 
     .mline {
         margin-bottom: 30px;
-    }
-}
-
-.wpmud .select-list-container {
-    min-width: 100px;
-
-    .list-value {
-        color: #333333;
-        font-weight: 500;
-        padding: 6px 8px 6px 15px;
     }
 }
 
@@ -165,14 +158,6 @@
 }
 
 /* Labels */
-.wpmud .wrap-wp-hummingbird .wphb-label {
-    color: #fff;
-    display: block;
-    font: 500 15px/20px $font;
-    text-shadow: none;
-    white-space: nowrap;
-}
-
 .wpmud .wrap-wp-hummingbird .wphb-label-notice-inline {
     display: inline-block;
     font-size: 13px;
@@ -183,22 +168,6 @@
 /* ****************************************************************************
  * 2. COMMON/GENERAL STYLES
  */
-.wpmud .wphb-image,
-.wpmud .wphb-image-icon-content {
-    display: block;
-    height: auto;
-    max-width: 100%;
-}
-
-.wpmud .wphb-image-center,
-.wpmud .wphb-image-icon-content-center {
-    margin-right: auto;
-    margin-left: auto;
-}
-
-.wpmud .wphb-image-icon-content-top {
-    margin-bottom: 30px;
-}
 
 /* Lists */
 .wpmud .wphb-listing {
@@ -318,14 +287,6 @@
     }
     .wphb-filename-extension-label {
         line-height: 22px;
-    }
-}
-
-/* Code Snippets in settings */
-.sui-box-settings-row {
-    .sui-code-snippet-wrapper {
-        display: inline-grid;
-        width: 100%;
     }
 }
 

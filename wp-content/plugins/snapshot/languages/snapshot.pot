@@ -2,9 +2,9 @@
 # This file is distributed under the GPL2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Snapshot Pro 3.2.0.2\n"
+"Project-Id-Version: Snapshot Pro 3.2.0.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/snapshot\n"
-"POT-Creation-Date: 2019-02-11 09:36:01+00:00\n"
+"POT-Creation-Date: 2019-03-28 09:35:08+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -33,25 +33,25 @@ msgstr ""
 msgid "Disabled"
 msgstr ""
 
-#: lib/Snapshot/Controller/Full/Ajax.php:521
+#: lib/Snapshot/Controller/Full/Ajax.php:526
 msgid "Error aborting upload: invalid request"
 msgstr ""
 
-#: lib/Snapshot/Controller/Full/Ajax.php:539
+#: lib/Snapshot/Controller/Full/Ajax.php:544
 msgid ""
 "Upload has been aborted. You can retry uploading the backup or go back to "
 "managed backups listing page."
 msgstr ""
 
-#: lib/Snapshot/Controller/Full/Ajax.php:540
+#: lib/Snapshot/Controller/Full/Ajax.php:545
 msgid "Failed to abort upload. Please view logs."
 msgstr ""
 
-#: lib/Snapshot/Controller/Full/Ajax.php:552
+#: lib/Snapshot/Controller/Full/Ajax.php:557
 msgid "Error reuploading file: invalid request"
 msgstr ""
 
-#: lib/Snapshot/Controller/Full/Ajax.php:558
+#: lib/Snapshot/Controller/Full/Ajax.php:563
 msgid ""
 "Your backup failed to upload to the Hub. This can happen for a number of "
 "reasons, we recommend checking the error logs to see if you can uncover the "
@@ -59,7 +59,7 @@ msgid ""
 "issue. If you get stuck, please contact our support team for help."
 msgstr ""
 
-#: lib/Snapshot/Controller/Full/Ajax.php:697
+#: lib/Snapshot/Controller/Full/Ajax.php:702
 msgid "Could not communicate with remote service"
 msgstr ""
 
@@ -263,15 +263,7 @@ msgid ""
 "settings or contact your hosting provider.</p>"
 msgstr ""
 
-#: lib/Snapshot/Helper/UI.php:357
-msgid "Create Backups"
-msgstr ""
-
-#: lib/Snapshot/Helper/UI.php:358
-msgid "Start creating automated and on-demand backups here."
-msgstr ""
-
-#: lib/Snapshot/Helper/UI.php:405
+#: lib/Snapshot/Helper/UI.php:355
 msgid ""
 "<strong>Amazon S3</strong> requires PHP 5.5 or later and your host is using "
 "an older version of PHP (%s). Contact your host to upgrade your PHP version "
@@ -279,7 +271,7 @@ msgid ""
 "have been disabled."
 msgstr ""
 
-#: lib/Snapshot/Helper/UI.php:407
+#: lib/Snapshot/Helper/UI.php:357
 msgid ""
 "<strong>Managed Backups</strong> and <strong>Amazon S3 Snapshot</strong> "
 "require PHP 5.5 or later and your host is using an older version of PHP "
@@ -339,9 +331,7 @@ msgstr ""
 msgid "non-core"
 msgstr ""
 
-#: lib/Snapshot/Helper/Utility.php:1082
-#: lib/Snapshot/Model/Destination/aws/index.php:145
-#: views/snapshots/item.php:288
+#: lib/Snapshot/Helper/Utility.php:1082 views/snapshots/item.php:288
 msgid "other"
 msgstr ""
 
@@ -427,52 +417,60 @@ msgstr ""
 msgid "South America (Sao Paulo) Region"
 msgstr ""
 
-#: lib/Snapshot/Model/Destination/aws/index.php:149
-msgid "Standard"
+#: lib/Snapshot/Model/Destination/aws/index.php:145
+msgid "Other AWS region"
+msgstr ""
+
+#: lib/Snapshot/Model/Destination/aws/index.php:146
+msgid "Non-AWS host"
 msgstr ""
 
 #: lib/Snapshot/Model/Destination/aws/index.php:150
+msgid "Standard"
+msgstr ""
+
+#: lib/Snapshot/Model/Destination/aws/index.php:151
 msgid "Reduced Redundancy"
 msgstr ""
 
-#: lib/Snapshot/Model/Destination/aws/index.php:154
-#: lib/Snapshot/Model/Destination/aws/index.php:1039
-#: views/destinations/add/aws.php:259
+#: lib/Snapshot/Model/Destination/aws/index.php:155
+#: lib/Snapshot/Model/Destination/aws/index.php:1055
+#: views/destinations/add/aws.php:289
 msgid "Private"
 msgstr ""
 
-#: lib/Snapshot/Model/Destination/aws/index.php:155
-#: lib/Snapshot/Model/Destination/aws/index.php:1047
-#: views/destinations/add/aws.php:262
+#: lib/Snapshot/Model/Destination/aws/index.php:156
+#: lib/Snapshot/Model/Destination/aws/index.php:1063
+#: views/destinations/add/aws.php:292
 msgid "Public Read"
 msgstr ""
 
-#: lib/Snapshot/Model/Destination/aws/index.php:156
-#: lib/Snapshot/Model/Destination/aws/index.php:1055
-#: views/destinations/add/aws.php:265
+#: lib/Snapshot/Model/Destination/aws/index.php:157
+#: lib/Snapshot/Model/Destination/aws/index.php:1071
+#: views/destinations/add/aws.php:295
 msgid "Public Read/Write"
 msgstr ""
 
-#: lib/Snapshot/Model/Destination/aws/index.php:157
-#: lib/Snapshot/Model/Destination/aws/index.php:1063
-#: views/destinations/add/aws.php:268
+#: lib/Snapshot/Model/Destination/aws/index.php:158
+#: lib/Snapshot/Model/Destination/aws/index.php:1079
+#: views/destinations/add/aws.php:298
 msgid "Authenticated Read"
 msgstr ""
 
-#: lib/Snapshot/Model/Destination/aws/index.php:685
+#: lib/Snapshot/Model/Destination/aws/index.php:694
 #: lib/Snapshot/Model/Destination/ftp/index.php:132
 msgid "Name is required"
 msgstr ""
 
-#: lib/Snapshot/Model/Destination/aws/index.php:686
+#: lib/Snapshot/Model/Destination/aws/index.php:695
 msgid "AWS Key is required"
 msgstr ""
 
-#: lib/Snapshot/Model/Destination/aws/index.php:687
+#: lib/Snapshot/Model/Destination/aws/index.php:696
 msgid "AWS Secret Key is required"
 msgstr ""
 
-#: lib/Snapshot/Model/Destination/aws/index.php:731
+#: lib/Snapshot/Model/Destination/aws/index.php:747
 #: lib/Snapshot/Model/Destination/ftp/index.php:150
 #: lib/Snapshot/Model/Destination/google-drive/index.php:568
 #: views/destinations/add/index.php:185
@@ -482,7 +480,7 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: lib/Snapshot/Model/Destination/aws/index.php:732
+#: lib/Snapshot/Model/Destination/aws/index.php:748
 #: lib/Snapshot/Model/Destination/ftp/index.php:151
 #: lib/Snapshot/Model/Destination/google-drive/index.php:569
 #: views/boxes/dashboard/widget-backups.php:96
@@ -502,19 +500,19 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: lib/Snapshot/Model/Destination/aws/index.php:733
-#: lib/Snapshot/Model/Destination/aws/index.php:858
+#: lib/Snapshot/Model/Destination/aws/index.php:749
+#: lib/Snapshot/Model/Destination/aws/index.php:874
 #: views/destinations/add/aws.php:44
 msgid "AWS Access Key ID"
 msgstr ""
 
-#: lib/Snapshot/Model/Destination/aws/index.php:734
-#: views/destinations/add/aws.php:209
+#: lib/Snapshot/Model/Destination/aws/index.php:750
+#: views/destinations/add/aws.php:239
 #: views/destinations/partials/s3-destination-list.php:17
 msgid "Bucket"
 msgstr ""
 
-#: lib/Snapshot/Model/Destination/aws/index.php:735
+#: lib/Snapshot/Model/Destination/aws/index.php:751
 #: lib/Snapshot/Model/Destination/ftp/index.php:154
 #: lib/Snapshot/Model/Destination/google-drive/index.php:571
 #: views/destinations/add/dropbox.php:50 views/destinations/add/ftp.php:116
@@ -527,95 +525,95 @@ msgstr ""
 msgid "Directory"
 msgstr ""
 
-#: lib/Snapshot/Model/Destination/aws/index.php:736
+#: lib/Snapshot/Model/Destination/aws/index.php:752
 #: lib/Snapshot/Model/Destination/ftp/index.php:155
 #: lib/Snapshot/Model/Destination/google-drive/index.php:572
 msgid "Used"
 msgstr ""
 
-#: lib/Snapshot/Model/Destination/aws/index.php:768
+#: lib/Snapshot/Model/Destination/aws/index.php:784
 #: lib/Snapshot/Model/Destination/ftp/index.php:192
 #: lib/Snapshot/Model/Destination/google-drive/index.php:603
 msgid "edit"
 msgstr ""
 
-#: lib/Snapshot/Model/Destination/aws/index.php:770
+#: lib/Snapshot/Model/Destination/aws/index.php:786
 #: lib/Snapshot/Model/Destination/ftp/index.php:206
 #: lib/Snapshot/Model/Destination/google-drive/index.php:605
 msgid "delete"
 msgstr ""
 
-#: lib/Snapshot/Model/Destination/aws/index.php:803
+#: lib/Snapshot/Model/Destination/aws/index.php:819
 msgid "No Amazon S3 Destinations"
 msgstr ""
 
-#: lib/Snapshot/Model/Destination/aws/index.php:817
+#: lib/Snapshot/Model/Destination/aws/index.php:833
 #: lib/Snapshot/Model/Destination/ftp/index.php:252
 #: lib/Snapshot/Model/Destination/google-drive/index.php:646
 msgid "Delete Destination"
 msgstr ""
 
-#: lib/Snapshot/Model/Destination/aws/index.php:831
+#: lib/Snapshot/Model/Destination/aws/index.php:847
 msgid ""
 "Define an Amazon AWS destination connection. You can define multiple "
 "destinations which use Amazon AWS. Each destination can use different "
 "security keys and/or buckets."
 msgstr ""
 
-#: lib/Snapshot/Model/Destination/aws/index.php:836
+#: lib/Snapshot/Model/Destination/aws/index.php:852
 msgid "Amazon S3 Destination"
 msgstr ""
 
-#: lib/Snapshot/Model/Destination/aws/index.php:845
+#: lib/Snapshot/Model/Destination/aws/index.php:861
 #: lib/Snapshot/Model/Destination/ftp/index.php:303
 #: lib/Snapshot/Model/Destination/google-drive/index.php:706
 msgid "Destination Name"
 msgstr ""
 
-#: lib/Snapshot/Model/Destination/aws/index.php:874
+#: lib/Snapshot/Model/Destination/aws/index.php:890
 #: views/destinations/add/aws.php:61
 msgid "AWS Secret Access Key"
 msgstr ""
 
-#: lib/Snapshot/Model/Destination/aws/index.php:894
+#: lib/Snapshot/Model/Destination/aws/index.php:910
 #: views/destinations/add/aws.php:78
 msgid "Use SSL Connection"
 msgstr ""
 
-#: lib/Snapshot/Model/Destination/aws/index.php:924
+#: lib/Snapshot/Model/Destination/aws/index.php:940
 #: views/destinations/add/aws.php:101
 msgid "AWS Region"
 msgstr ""
 
-#: lib/Snapshot/Model/Destination/aws/index.php:956
+#: lib/Snapshot/Model/Destination/aws/index.php:972
 #: views/destinations/add/aws.php:147
 msgid "Alternate Region host"
 msgstr ""
 
-#: lib/Snapshot/Model/Destination/aws/index.php:971
-#: views/destinations/add/aws.php:169
+#: lib/Snapshot/Model/Destination/aws/index.php:987
+#: views/destinations/add/aws.php:199
 msgid "Storage Type"
 msgstr ""
 
-#: lib/Snapshot/Model/Destination/aws/index.php:996
+#: lib/Snapshot/Model/Destination/aws/index.php:1012
 msgid "Bucket Name"
 msgstr ""
 
-#: lib/Snapshot/Model/Destination/aws/index.php:1008
-#: views/destinations/add/aws.php:228
+#: lib/Snapshot/Model/Destination/aws/index.php:1024
+#: views/destinations/add/aws.php:258
 msgid "Select Bucket"
 msgstr ""
 
-#: lib/Snapshot/Model/Destination/aws/index.php:1024
+#: lib/Snapshot/Model/Destination/aws/index.php:1040
 msgid "File permissions for uploaded files"
 msgstr ""
 
-#: lib/Snapshot/Model/Destination/aws/index.php:1070
-#: views/destinations/add/aws.php:290 views/snapshots/snapshot.php:275
+#: lib/Snapshot/Model/Destination/aws/index.php:1086
+#: views/destinations/add/aws.php:320 views/snapshots/snapshot.php:275
 msgid "Directory (optional)"
 msgstr ""
 
-#: lib/Snapshot/Model/Destination/aws/index.php:1082
+#: lib/Snapshot/Model/Destination/aws/index.php:1098
 msgid ""
 "If directory is blank the snapshot file will be stored at the bucket root. "
 "If the directory is provided it will be created inside the bucket. This is "
@@ -623,14 +621,14 @@ msgid ""
 "destination. You can also defined a directory used by a specific snapshot."
 msgstr ""
 
-#: lib/Snapshot/Model/Destination/aws/index.php:1091
+#: lib/Snapshot/Model/Destination/aws/index.php:1107
 #: lib/Snapshot/Model/Destination/ftp/index.php:500
-#: views/destinations/add/aws.php:298 views/destinations/add/ftp.php:171
+#: views/destinations/add/aws.php:328 views/destinations/add/ftp.php:171
 msgid "Test Connection"
 msgstr ""
 
 #: lib/Snapshot/Model/Destination/dropbox/index.php:46
-#: lib/Snapshot/Model/Destination.php:162 snapshot.php:741
+#: lib/Snapshot/Model/Destination.php:162 snapshot.php:739
 #: views/boxes/destinations/widget-dropbox.php:19
 #: views/boxes/modals/popup-welcome.php:108
 #: views/destinations/add/dropbox-error.php:18
@@ -1162,330 +1160,344 @@ msgstr ""
 msgid "Snapshot Logs"
 msgstr ""
 
-#: snapshot.php:483
+#: snapshot.php:481
 msgid "Click to dismiss"
 msgstr ""
 
-#: snapshot.php:509 views/managed_backups.php:191 views/managed_backups.php:195
+#: snapshot.php:507 views/managed_backups.php:191 views/managed_backups.php:195
 #: views/managed_backups.php:469 views/settings.php:10
 msgid "Settings"
 msgstr ""
 
-#: snapshot.php:642
+#: snapshot.php:640
 msgid "The Snapshot has been updated."
 msgstr ""
 
-#: snapshot.php:643
+#: snapshot.php:641
 msgid "The Snapshot has been created."
 msgstr ""
 
-#: snapshot.php:644
+#: snapshot.php:642
 msgid "Snapshot successfully deleted."
 msgstr ""
 
-#: snapshot.php:645
+#: snapshot.php:643
 msgid "Selected Snapshots successfully deleted."
 msgstr ""
 
-#: snapshot.php:646
+#: snapshot.php:644
 msgid "The Snapshot has been restored."
 msgstr ""
 
-#: snapshot.php:647 snapshot.php:696
+#: snapshot.php:645 snapshot.php:694
 msgid "Settings have been updated."
 msgstr ""
 
-#: snapshot.php:648
+#: snapshot.php:646
 msgid "Item scheduled to run."
 msgstr ""
 
-#: snapshot.php:649
+#: snapshot.php:647
 msgid "Your Snapshot Key has been successfully added."
 msgstr ""
 
-#: snapshot.php:672
+#: snapshot.php:670
 msgid "The Backup has been updated."
 msgstr ""
 
-#: snapshot.php:673
+#: snapshot.php:671
 msgid "The Backup has been created."
 msgstr ""
 
-#: snapshot.php:674
+#: snapshot.php:672
 msgid "Backup successfully deleted."
 msgstr ""
 
-#: snapshot.php:675
+#: snapshot.php:673
 msgid "Selected Backups successfully deleted."
 msgstr ""
 
-#: snapshot.php:676
+#: snapshot.php:674
 msgid "The Backup has been restored."
 msgstr ""
 
-#: snapshot.php:692
+#: snapshot.php:690
 msgid "The Destination has been updated."
 msgstr ""
 
-#: snapshot.php:693
+#: snapshot.php:691
 msgid "The Destination has been added."
 msgstr ""
 
-#: snapshot.php:694
+#: snapshot.php:692
 msgid "The Destination has been deleted."
 msgstr ""
 
-#: snapshot.php:695
+#: snapshot.php:693
 msgid "The Destination has been restored."
 msgstr ""
 
-#: snapshot.php:736
+#: snapshot.php:734
 msgid "Snapshot Log Viewer"
 msgstr ""
 
-#: snapshot.php:737 views/snapshots/restore.php:714
+#: snapshot.php:735 views/snapshots/restore.php:714
 #: views/snapshots/snapshot.php:797
 msgid "Select all"
 msgstr ""
 
-#: snapshot.php:738
+#: snapshot.php:736
 msgid "Unselect all"
 msgstr ""
 
-#: snapshot.php:739 snapshot.php:778
+#: snapshot.php:737 snapshot.php:776
 msgid "Loading..."
 msgstr ""
 
-#: snapshot.php:740
+#: snapshot.php:738
 msgid "Snapshot initializing"
 msgstr ""
 
-#: snapshot.php:742
+#: snapshot.php:740
 msgid "Memory: "
 msgstr ""
 
-#: snapshot.php:743
+#: snapshot.php:741
 msgid "Limit"
 msgstr ""
 
-#: snapshot.php:744
+#: snapshot.php:742
 #: views/managed-backups/partials/restore-backup-progress.php:84
 #: views/snapshots/partials/restore-snapshot-progress.php:102
 msgid "Usage:"
 msgstr ""
 
-#: snapshot.php:745
+#: snapshot.php:743
 #: views/managed-backups/partials/restore-backup-progress.php:90
 #: views/snapshots/partials/restore-snapshot-progress.php:107
 msgid "Peak:"
 msgstr ""
 
-#: snapshot.php:746
+#: snapshot.php:744
 msgid "Abort"
 msgstr ""
 
-#: snapshot.php:747
+#: snapshot.php:745
 msgid "Database:"
 msgstr ""
 
-#: snapshot.php:748
+#: snapshot.php:746
 msgid "Files: "
 msgstr ""
 
-#: snapshot.php:749
+#: snapshot.php:747
 msgid "Snapshot Finishing"
 msgstr ""
 
-#: snapshot.php:750 snapshot.php:774
+#: snapshot.php:748 snapshot.php:772
 msgid ""
 "An unknown response returned from Snapshot backup attempt. Aborting. Double "
 "check Snapshot settings."
 msgstr ""
 
-#: snapshot.php:751
+#: snapshot.php:749
 #: views/managed-backups/partials/restore-backup-progress.php:114
 #: views/snapshots/partials/restore-snapshot-progress.php:123
 msgid "Snapshot determining tables/files to restore"
 msgstr ""
 
-#: snapshot.php:752 views/snapshots/item.php:231
+#: snapshot.php:750 views/snapshots/item.php:231
 #: views/snapshots/restore.php:445 views/snapshots/snapshot.php:313
 msgid "Files"
 msgstr ""
 
-#: snapshot.php:753 snapshot.php:780
+#: snapshot.php:751 snapshot.php:778
 msgid "Snapshot backup aborted"
 msgstr ""
 
-#: snapshot.php:754
+#: snapshot.php:752
 msgid "You must select at least one table"
 msgstr ""
 
-#: snapshot.php:755
+#: snapshot.php:753
 msgid "You must select which Files and/or Tables to backup in this Snapshot"
 msgstr ""
 
-#: snapshot.php:756 snapshot.php:782
+#: snapshot.php:754 snapshot.php:780
 msgid "ERROR: The Snapshot timekey is not set. Try reloading the page"
 msgstr ""
 
-#: snapshot.php:773 views/managed_backups.php:104 views/settings.php:255
+#: snapshot.php:771 views/managed_backups.php:104 views/settings.php:255
 msgid "Snapshot Key"
 msgstr ""
 
-#: snapshot.php:775
+#: snapshot.php:773
 msgid "You must select at least one Files backup option."
 msgstr ""
 
-#: snapshot.php:776
+#: snapshot.php:774
 msgid "You must select at least one database table to include."
 msgstr ""
 
-#: snapshot.php:777
+#: snapshot.php:775
 msgid ""
 "You haven't included any files or database tables in this Snapshot. Please "
 "select what to include and try again."
 msgstr ""
 
-#: snapshot.php:779
+#: snapshot.php:777
 msgid "Working..."
 msgstr ""
 
-#: snapshot.php:781
+#: snapshot.php:779
 msgid "Snapshot restore aborted"
 msgstr ""
 
-#: snapshot.php:1206 snapshot.php:1249
+#: snapshot.php:1204 snapshot.php:1247
 msgid "per Page"
 msgstr ""
 
-#: snapshot.php:2064
+#: snapshot.php:2062
 msgid "ERROR: The new Snapshot folder already exists. "
 msgstr ""
 
-#: snapshot.php:2082
+#: snapshot.php:2078
+msgid "ERROR: The path supplied was not a valid one. "
+msgstr ""
+
+#: snapshot.php:2087
 msgid "Warning: We were unable to find the old Snapshot folder."
 msgstr ""
 
-#: snapshot.php:2330
+#: snapshot.php:2335
 msgid "Local Snapshot"
 msgstr ""
 
-#: snapshot.php:2739
+#: snapshot.php:2744
 msgid ""
 "ERROR: Cannot create snapshot folder. Check that the parent folder is "
 "writable"
 msgstr ""
 
-#: snapshot.php:2755 snapshot.php:2805 snapshot.php:2859 snapshot.php:2888
+#: snapshot.php:2760 snapshot.php:2810 snapshot.php:2864 snapshot.php:2893
 msgid "ERROR: The Snapshot destination folder is not writable"
 msgstr ""
 
-#: snapshot.php:2788 snapshot.php:2845 snapshot.php:2873
+#: snapshot.php:2793 snapshot.php:2850 snapshot.php:2878
 msgid ""
 "ERROR: Cannot create snapshot Log folder. Check that the parent folder is "
 "writeable"
 msgstr ""
 
-#: snapshot.php:2818
+#: snapshot.php:2823
 msgid ""
 "ERROR: Cannot create snapshot Restore folder. Check that the parent folder "
 "is writeable"
 msgstr ""
 
-#: snapshot.php:2832
+#: snapshot.php:2837
 msgid "ERROR: The Snapshot restore folder is not writable"
 msgstr ""
 
-#: snapshot.php:2913
+#: snapshot.php:2907
+msgid ""
+"ERROR: Cannot create snapshot restore imports folder. Check that the parent "
+"folder is writeable"
+msgstr ""
+
+#: snapshot.php:2918
+msgid "ERROR: The Snapshot restore imports folder is not writable"
+msgstr ""
+
+#: snapshot.php:2941
 msgid ""
 "ERROR: Cannot create snapshot Lock folder. Check that the parent folder is "
 "writeable"
 msgstr ""
 
-#: snapshot.php:2930
+#: snapshot.php:2958
 msgid "ERROR: The Snapshot locks folder is not writable"
 msgstr ""
 
-#: snapshot.php:3318
+#: snapshot.php:3346
 msgid ""
 "ERROR: Snapshot backup aborted.<br />The Snapshot folder is not writeable. "
 "Check the settings."
 msgstr ""
 
-#: snapshot.php:3689
+#: snapshot.php:3717
 msgid "ERROR: Snapshot backup aborted."
 msgstr ""
 
-#: snapshot.php:4252
+#: snapshot.php:4280
 msgid "Your snapshot has been successfully created and stored!"
 msgstr ""
 
-#: snapshot.php:4252
+#: snapshot.php:4280
 #: views/managed-backups/partials/restore-backup-progress.php:239
 #: views/snapshots/partials/create-snapshot-progress.php:104
 msgid "View Snapshot"
 msgstr ""
 
-#: snapshot.php:4889
+#: snapshot.php:4917
 msgid "ERROR: The Snapshot missing 'item_data' key"
 msgstr ""
 
-#: snapshot.php:4903
+#: snapshot.php:4931
 msgid "ERROR: The Snapshot incorrect 'item_data' [%d] key"
 msgstr ""
 
-#: snapshot.php:4920 snapshot.php:4930
+#: snapshot.php:4948 snapshot.php:4958
 msgid "ERROR: The Snapshot file not found:"
 msgstr ""
 
-#: snapshot.php:4944
+#: snapshot.php:4972
 msgid "ERROR: The Snapshot folder is not writeable. Check the settings"
 msgstr ""
 
-#: snapshot.php:5328
+#: snapshot.php:5357
 msgid "ERROR: Unable to locate table restore file from archive: "
 msgstr ""
 
-#: snapshot.php:5366
+#: snapshot.php:5395
 msgid "ERROR: The Snapshot missing 'file_data_idx' key"
 msgstr ""
 
-#: snapshot.php:5376
+#: snapshot.php:5405
 msgid "ERROR: The Snapshot missing session 'FILES-DATA' object."
 msgstr ""
 
-#: snapshot.php:5388
+#: snapshot.php:5417
 msgid "ERROR: The Snapshot missing restore file at idx [%d]"
 msgstr ""
 
-#: snapshot.php:5492
+#: snapshot.php:5521
 msgid "Unable to create directory %s. Make sure the parent folder is writeable."
 msgstr ""
 
-#: snapshot.php:5593
+#: snapshot.php:5622
 msgid "SUCCESS: Snapshot Restore complete! "
 msgstr ""
 
-#: snapshot.php:7016
+#: snapshot.php:7045
 msgid "Creating Archive"
 msgstr ""
 
-#: snapshot.php:7233
+#: snapshot.php:7262
 msgid "file: The following files are excluded due to match exclusion patterns."
 msgstr ""
 
-#: snapshot.php:7247
+#: snapshot.php:7276
 msgid ""
 "file: The following files are excluded because snapshot cannot open them. "
 "Check file permissions or locks"
 msgstr ""
 
-#: snapshot.php:7476
+#: snapshot.php:7505
 msgid "Syncing Files"
 msgstr ""
 
-#: snapshot.php:7478
+#: snapshot.php:7507
 msgid "Sending Archive"
 msgstr ""
 
@@ -1513,34 +1525,42 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-#: views/boxes/dashboard/widget-backups.php:144
+#: views/boxes/dashboard/widget-backups.php:123
+msgid ""
+"This backup failed to upload to The Hub and is only being stored locally. "
+"We recommend to retry uploading it to make sure it's available in the event "
+"you need to restore your site. Visit the Managed Backups tab to trigger the "
+"upload."
+msgstr ""
+
+#: views/boxes/dashboard/widget-backups.php:162
 #: views/boxes/dashboard/widget-destinations.php:107
 #: views/boxes/dashboard/widget-snapshots.php:170
 msgid "View All"
 msgstr ""
 
-#: views/boxes/dashboard/widget-backups.php:152
+#: views/boxes/dashboard/widget-backups.php:170
 msgid "Scheduled backups are disabled"
 msgstr ""
 
-#: views/boxes/dashboard/widget-backups.php:159
+#: views/boxes/dashboard/widget-backups.php:177
 msgid "Backups are running %1$s at %2$s"
 msgstr ""
 
-#: views/boxes/dashboard/widget-backups.php:179
-#: views/boxes/dashboard/widget-backups.php:191
-#: views/boxes/dashboard/widget-backups.php:205
+#: views/boxes/dashboard/widget-backups.php:197
+#: views/boxes/dashboard/widget-backups.php:209
+#: views/boxes/dashboard/widget-backups.php:223
 msgid ""
 "Automatically backup your entire website on a regular basis and store those "
 "backups on WPMU DEV's secure cloud servers. Restore your full website at "
 "anytime via the WPMU DEV Hub."
 msgstr ""
 
-#: views/boxes/dashboard/widget-backups.php:181
+#: views/boxes/dashboard/widget-backups.php:199
 msgid "Backup my site"
 msgstr ""
 
-#: views/boxes/dashboard/widget-backups.php:197
+#: views/boxes/dashboard/widget-backups.php:215
 msgid ""
 "Fully automated managed backups are included in a WPMU DEV membership along "
 "with 100+ plugins & 24/7 support and lots of handy site management tools  – "
@@ -1549,7 +1569,7 @@ msgid ""
 "FREE</a></strong>"
 msgstr ""
 
-#: views/boxes/dashboard/widget-backups.php:207
+#: views/boxes/dashboard/widget-backups.php:225
 #: views/boxes/modals/popup-snapshot.php:17
 msgid "Add Snapshot Key"
 msgstr ""
@@ -1966,15 +1986,23 @@ msgid ""
 "Console</a>"
 msgstr ""
 
-#: views/destinations/add/aws.php:244
+#: views/destinations/add/aws.php:169
+msgid "Non AWS host"
+msgstr ""
+
+#: views/destinations/add/aws.php:175
+msgid "Non AWS region"
+msgstr ""
+
+#: views/destinations/add/aws.php:274
 msgid "File Permissions"
 msgstr ""
 
-#: views/destinations/add/aws.php:282
+#: views/destinations/add/aws.php:312
 msgid "Control who will have access to your backup files."
 msgstr ""
 
-#: views/destinations/add/aws.php:296
+#: views/destinations/add/aws.php:326
 msgid ""
 "If directory is blank the snapshot file will be stored at the bucket root. "
 "If the directory is provided it will be created inside the bucket. This is "
@@ -2550,15 +2578,15 @@ msgstr ""
 msgid "Schedule"
 msgstr ""
 
-#: views/managed-backups/new-backup.php:229 views/managed_backups.php:588
+#: views/managed-backups/new-backup.php:253 views/managed_backups.php:588
 msgid "Storage Limit"
 msgstr ""
 
-#: views/managed-backups/new-backup.php:244 views/managed_backups.php:603
+#: views/managed-backups/new-backup.php:268 views/managed_backups.php:603
 msgid "backups before removing older archives."
 msgstr ""
 
-#: views/managed-backups/new-backup.php:249
+#: views/managed-backups/new-backup.php:273
 msgid ""
 "By default, Snapshot will run as many scheduled backups as you need. We "
 "recommend that you remove older backups to avoid filling your remote "
@@ -2566,37 +2594,37 @@ msgid ""
 "set your storage limit to 0."
 msgstr ""
 
-#: views/managed-backups/new-backup.php:252 views/snapshots/snapshot.php:1260
+#: views/managed-backups/new-backup.php:276 views/snapshots/snapshot.php:1260
 msgid "Optional"
 msgstr ""
 
-#: views/managed-backups/new-backup.php:264 views/snapshots/snapshot.php:1272
+#: views/managed-backups/new-backup.php:288 views/snapshots/snapshot.php:1272
 msgid "Also run a backup now"
 msgstr ""
 
-#: views/managed-backups/new-backup.php:280
+#: views/managed-backups/new-backup.php:304
 msgid "File exclusions"
 msgstr ""
 
-#: views/managed-backups/new-backup.php:289
+#: views/managed-backups/new-backup.php:313
 msgid ""
 "Following are the file exclusion patterns, based on which files or folders "
 "will be excluded. You can change the file exclusions on the <strong><a "
 "href=\"%s\">Managed Backups settings</a></strong> page."
 msgstr ""
 
-#: views/managed-backups/new-backup.php:311
+#: views/managed-backups/new-backup.php:335
 msgid ""
 "No file exclusions have been defined, so the backup will include all the "
 "files."
 msgstr ""
 
-#: views/managed-backups/new-backup.php:330 views/managed_backups.php:679
+#: views/managed-backups/new-backup.php:354 views/managed_backups.php:679
 msgid "Update Settings"
 msgstr ""
 
-#: views/managed-backups/new-backup.php:331
-#: views/managed-backups/new-backup.php:332 views/managed_backups.php:243
+#: views/managed-backups/new-backup.php:355
+#: views/managed-backups/new-backup.php:356 views/managed_backups.php:243
 msgid "Run Backup"
 msgstr ""
 
@@ -3800,72 +3828,72 @@ msgctxt "Request error message, then key reset message, then open ticket message
 msgid "%1$s <br /> %2$s <br /> %3$s"
 msgstr ""
 
-#: lib/Snapshot/View/Full/Backup.php:108 snapshot.php:563
+#: lib/Snapshot/View/Full/Backup.php:108 snapshot.php:561
 msgctxt "page label"
 msgid "Managed Backups"
 msgstr ""
 
-#: snapshot.php:530
+#: snapshot.php:528
 msgctxt "page label"
 msgid "Snapshot Pro"
 msgstr ""
 
-#: snapshot.php:539
+#: snapshot.php:537
 msgctxt "page label"
 msgid "Dashboard"
 msgstr ""
 
-#: snapshot.php:547
+#: snapshot.php:545
 msgctxt "page label"
 msgid "Snapshots"
 msgstr ""
 
-#: snapshot.php:555
+#: snapshot.php:553
 msgctxt "page label"
 msgid "Destinations"
 msgstr ""
 
-#: snapshot.php:571
+#: snapshot.php:569
 msgctxt "page label"
 msgid "Import"
 msgstr ""
 
-#: snapshot.php:579
+#: snapshot.php:577
 msgctxt "page label"
 msgid "Settings"
 msgstr ""
 
-#: lib/Snapshot/View/Full/Backup.php:109 snapshot.php:564
+#: lib/Snapshot/View/Full/Backup.php:109 snapshot.php:562
 msgctxt "menu label"
 msgid "Managed Backups"
 msgstr ""
 
-#: snapshot.php:531
+#: snapshot.php:529
 msgctxt "menu label"
 msgid "Snapshot"
 msgstr ""
 
-#: snapshot.php:540
+#: snapshot.php:538
 msgctxt "menu label"
 msgid "Dashboard"
 msgstr ""
 
-#: snapshot.php:548
+#: snapshot.php:546
 msgctxt "menu label"
 msgid "Snapshots"
 msgstr ""
 
-#: snapshot.php:556
+#: snapshot.php:554
 msgctxt "menu label"
 msgid "Destinations"
 msgstr ""
 
-#: snapshot.php:572
+#: snapshot.php:570
 msgctxt "menu label"
 msgid "Import"
 msgstr ""
 
-#: snapshot.php:580
+#: snapshot.php:578
 msgctxt "menu label"
 msgid "Settings"
 msgstr ""

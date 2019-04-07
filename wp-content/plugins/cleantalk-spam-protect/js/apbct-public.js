@@ -165,9 +165,6 @@ jQuery(document).ajaxComplete(function(event, xhr, settings) {
 });
 
 function apbct_js_keys__set_input_value(result, data, params, obj){
-	console.log(result);
-	console.log(data);
-	console.log(params);
 	if (document.getElementById(params.input_name) !== null) {
 		var ct_input_value = document.getElementById(params.input_name).value;
 		document.getElementById(params.input_name).value = document.getElementById(params.input_name).value.replace(ct_input_value, result.js_key);

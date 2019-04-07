@@ -19,7 +19,7 @@
 if ( $enabled ) :
 	$msg = __( 'Asset Optimization is active and configurable by Blog Admins only.', 'wphb' );
 	if ( 'super-admins' === $enabled ) {
-		$msg = __( 'Asset Optimization is active and configurable by Super Admins only.', 'wphb' );	   			 	 		  		   		
+		$msg = __( 'Asset Optimization is active and configurable by Super Admins only.', 'wphb' );
 	}
 	?>
 	<div class="sui-notice sui-notice-success" id="wphb-notice-minification-enabled">
@@ -59,7 +59,7 @@ $tooltip_msg = $use_cdn_disabled ? $tooltip_msg_disabled : $tooltip_msg_enabled;
 
 <?php if ( WP_Hummingbird_Utils::is_member() ) : ?>
 	<div class="sui-form-field">
-		<label class="sui-toggle sui-tooltip sui-tooltip-top-right" data-tooltip="<?php echo esc_attr( $tooltip_msg ); ?>">
+		<label class="sui-toggle sui-tooltip sui-tooltip-top-left" data-tooltip="<?php echo esc_attr( $tooltip_msg ); ?>">
 			<input type="checkbox" name="use_cdn" id="use_cdn" <?php checked( $use_cdn ); ?> <?php disabled( $use_cdn_disabled ); ?>>
 			<span class="sui-toggle-slider"></span>
 		</label>
@@ -75,7 +75,7 @@ $tooltip_msg = $use_cdn_disabled ? $tooltip_msg_disabled : $tooltip_msg_enabled;
 <?php endif; ?>
 
 <div class="sui-form-field sui-no-margin-bottom">
-		<label class="sui-toggle sui-tooltip sui-tooltip-top-right"
+		<label class="sui-toggle sui-tooltip sui-tooltip-top-left"
 			   data-tooltip="<?php esc_html_e( 'Turn on the debug log to get insight into any issues you’re having across your subsites.', 'wphb' ); ?>">
 			<input type="checkbox" name="debug_log" id="debug_log" <?php checked( $log ); ?>>
 			<span class="sui-toggle-slider"></span>

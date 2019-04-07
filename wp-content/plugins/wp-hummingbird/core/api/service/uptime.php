@@ -23,9 +23,12 @@ class WP_Hummingbird_API_Service_Uptime extends WP_Hummingbird_API_Service {
 	 */
 	public function check( $time = 'day' ) {
 		$this->request->set_timeout( 20 );
-		return $this->request->get( 'stats/' . $time, array(
-			'domain' => $this->request->get_this_site(),
-		) );
+		return $this->request->get(
+			'stats/' . $time,
+			array(
+				'domain' => $this->request->get_this_site(),
+			)
+		);
 	}
 
 	/**
@@ -35,9 +38,12 @@ class WP_Hummingbird_API_Service_Uptime extends WP_Hummingbird_API_Service {
 	 */
 	public function is_enabled() {
 		$this->request->set_timeout( 30 );
-		$results = $this->request->get( 'stats/week/', array(
-			'domain' => $this->request->get_this_site(),
-		) );
+		$results = $this->request->get(
+			'stats/week/',
+			array(
+				'domain' => $this->request->get_this_site(),
+			)
+		);
 
 		if ( is_wp_error( $results ) ) {
 			return false;
@@ -53,9 +59,12 @@ class WP_Hummingbird_API_Service_Uptime extends WP_Hummingbird_API_Service {
 	 */
 	public function enable() {
 		$this->request->set_timeout( 30 );
-		$results = $this->request->post( 'monitoring', array(
-			'domain' => $this->request->get_this_site(),
-		) );
+		$results = $this->request->post(
+			'monitoring',
+			array(
+				'domain' => $this->request->get_this_site(),
+			)
+		);
 
 		if ( true !== $results ) {
 			return new WP_Error( 500, __( 'Unknown Error', 'wphb' ) );
@@ -71,9 +80,12 @@ class WP_Hummingbird_API_Service_Uptime extends WP_Hummingbird_API_Service {
 	 */
 	public function disable() {
 		$this->request->set_timeout( 30 );
-		$results = $this->request->delete( 'monitoring', array(
-			'domain' => $this->request->get_this_site(),
-		) );
+		$results = $this->request->delete(
+			'monitoring',
+			array(
+				'domain' => $this->request->get_this_site(),
+			)
+		);
 
 		if ( true !== $results ) {
 			return new WP_Error( 500, __( 'Unknown Error', 'wphb' ) );

@@ -2,8 +2,8 @@
 Contributors: LiteSpeedTech
 Tags: caching, optimize, performance, pagespeed, seo, speed, image optimize, compress, object cache, redis, memcached, database cleaner
 Requires at least: 4.0
-Tested up to: 5.1
-Stable tag: 2.9.4.1
+Tested up to: 5.1.1
+Stable tag: 2.9.7
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 
@@ -18,12 +18,13 @@ LSCWP supports WordPress Multisite and is compatible with most popular plugins, 
 == Requirements ==
 **General Features** may be used by anyone with any web server (LiteSpeed, Apache, NGiNX, etc.).
 
-**LiteSpeed Exclusive Features** require OpenLiteSpeed, commercial LiteSpeed products, or LiteSpeed-powered hosting. [Why?](https://www.litespeedtech.com/support/wiki/doku.php/litespeed_wiki:cache:lscwp:faq#why_do_the_cache_features_require_litespeed_server)
+**LiteSpeed Exclusive Features** require OpenLiteSpeed, commercial LiteSpeed products, LiteSpeed-powered hosting, or [the new QUIC.cloud CDN](https://quic.cloud), now in beta. [Why?](https://www.litespeedtech.com/support/wiki/doku.php/litespeed_wiki:cache:lscwp:faq#why_do_the_cache_features_require_litespeed_server)
 
 == Plugin Features ==
 
 = General Features =
 
+* Free QUIC.cloud CDN Cache
 * Object Cache (Memcached/LSMCD/Redis)
 * Image Optimization (Lossless/Lossy)
 * Minify CSS, JavaScript, and HTML
@@ -145,6 +146,8 @@ LSCache is a server-level cache, so it's faster than PHP-level caches. [Compare 
 A page cache allows the server to bypass PHP and database queries altogether. LSCache, in particular, because of its close relationship with the server, can remember things about the cache entries that other plugins cannot, and it can analyze dependencies. It can utilize tags to manage the smart purging of the cache, and it can use vary cookies to serve multiple versions of cached content based on things like mobile vs. desktop, geographic location, and currencies. [See our Caching 101 blog series](https://blog.litespeedtech.com/tag/caching-101/).
 
 If all of that sounds complicated, no need to worry. LSCWP works right out of the box with default settings that are appropriate for most sites. [See the Beginner's Guide](https://www.litespeedtech.com/support/wiki/doku.php/litespeed_wiki:cache:lscwp:beginner).
+
+**Don't have a LiteSpeed server?** We're beta testing our new QUIC.cloud CDN service, and it allows those on *any server* (nginx and Apache included) to experience the power of LiteSpeed caching! [Click here](https://quic.cloud) to learn more or to give QUIC.cloud a try!
 
 = What about the optimization features of LSCache? =
 
@@ -279,9 +282,37 @@ Click on the `Advanced View` link at the top of the page, and several more tabs 
 * [BoomBox — Viral Magazine WordPress Theme](https://themeforest.net/item/boombox-viral-buzz-wordpress-theme/16596434?ref=PX-lab)
 * Beaver Builder
 * FacetWP (LSWS 5.3.6+)
+* WpDiscuz
 
 
 == Changelog ==
+
+= 2.9.7 - Apr 1 2019 =
+* 🌱🌱🌱 QUIC.cloud CDN feature. Now Apache/Nginx can use LiteSpeed cache freely.
+
+= 2.9.6 - Mar 27 2019 =
+* 🌱<strong>IAPI</strong>: Appended XMP to `Preserve EXIF data` setting. WebP will now honor this setting. (#902219)
+* <strong>Object</script> Fixed SASL connection with LSMCD.
+* <strong>ESI</strong>: Converted ESI URI parameters to JSON; Added ESI validation.
+* <strong>Import</strong>: Import/Export will now use JSON format. <strong>Please re-export any backed up settings. Previous backup format is no longer recognized.</strong>
+* <strong>Media</strong>: WebP replacement will honor `Role Excludes` setting now. (@mfazio26)
+* <strong>Data</strong>: Forbid direct visit to const.default.ini.
+* <strong>Utility</strong>: Can handle WHM passed in `LITESPEED_ERR` constant now.
+* <strong>IAPI</strong>: Communicate via JSON encoding.
+* <strong>IAPI</strong>: IAPI v2.9.6.
+
+= 2.9.5 - Mar 14 2019 =
+* 🌱 Auto convert default WordPress nonce to ESI to avoid expiration.
+* 🌱 <strong>API</strong>: Ability to easily convert custom nonce to ESI by registering `LiteSpeed_Cache_API::nonce_action`.
+* <strong>OPTM</strong>: Tweaked redundant attr `data-no-optimize` in func `_analyse_links` to `data-ignore-optimize` to offer the API to bypass optimization but still move src to top of source code.
+* <strong>API</strong>: Renamed default nonce ESI ID from `lscwp_nonce_esi` to `nonce`.
+* <strong>API</strong>: Added WebP generation & validation hook API. (@alim #wp-stateless)
+* <strong>API</strong>: Added hook to bypass vary commenter check. (#wpdiscuz)
+* <strong>Doc</strong>: Clarified Cache Mobile description. (@JohnnyNguyen)
+* <strong>Doc</strong>: Replaced incorrect link in description. (@JohnnyNguyen)
+* <strong>3rd</strong>: Improved wpDiscuz compatibility.
+* 🐞<strong>3rd</strong>: Fixed Divi Theme Builder comment compatibility on non-builder pages. (#410919)
+* <strong>3rd</strong>: Added YITH ESI adjustment.
 
 = 2.9.4.1 - Feb 28 2019 =
 * 🔥🐞<strong>Tag</strong>: Fixed issue where unnecessary warning potentially displayed after upgrade process when object cache is enabled.

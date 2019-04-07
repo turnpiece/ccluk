@@ -82,10 +82,24 @@ class Shipper_Helper_System {
 	 */
 	static public function get_max_exec_time_capped() {
 		$time = (int) self::get_max_exec_time();
+
+		/**
+		 * Maximum execution time
+		 *
+		 * @since v1.0.1
+		 *
+		 * @param int $time Maximum execution time.
+		 *
+		 * @return int
+		 */
+		$cap_time = (int) apply_filters(
+			'shipper_max_exec_time',
+			180
+		);
 		if ( $time <= 0 ) {
-			return 180;
+			return $cap_time;
 		}
-		return $time <= 180 ? $time : 180;
+		return $time <= $cap_time ? $time : $cap_time;
 	}
 
 	/**

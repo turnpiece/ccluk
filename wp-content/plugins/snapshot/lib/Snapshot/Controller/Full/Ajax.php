@@ -368,6 +368,11 @@ class Snapshot_Controller_Full_Ajax extends Snapshot_Controller_Full {
 			? $data['archive']
 			: false
 		;
+
+		if ( strpos( strtolower( trim( $data['restore'] ) ), 'phar://' ) === 0 ) {
+			throw new Exception('phar handler not allowed when looking for the restore folder');
+		}
+
 		$restore_path = ! empty( $data['restore'] ) && file_exists( $data['restore'] )
 			? $data['restore']
 			: false

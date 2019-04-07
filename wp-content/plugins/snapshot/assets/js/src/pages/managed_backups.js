@@ -81,6 +81,38 @@
 			});
 		});
 
+        /**
+         * Handle managed backups schedule offsets
+         *
+         * Switches offset selection appearance based on frequency state.
+         * Also toggles their respective enabled state.
+         */
+        function toggle_offset_visibility() {
+            var $freq = $('#managed-backup-update select[name="frequency"]');
+            if (!$freq.length) return false;
+
+            $(".select-container.offset").hide().find("select").attr("disabled", true);
+            $(".select-container #frequency").attr("disabled", false);
+            $(".select-container #schedule_time").attr("disabled", false);
+            var $el = $(".select-container.offset." + $freq.val());
+            if ($el.length) $el.show().find("select").attr("disabled", false);
+
+            // Handle the day label toggling.
+            if ($freq.val() === 'weekly') {
+                $(".offset-monthly-label").hide();
+                $(".offset-weekly-label").show();
+            } else if ($freq.val() === 'monthly') {
+                $(".offset-weekly-label").hide();
+                $(".offset-monthly-label").show();
+            } else {
+                $(".offset-monthly-label").hide();
+                $(".offset-weekly-label").hide();
+            }
+        }
+
+        $(window).on('load', toggle_offset_visibility);
+        $(document).on('change', 'select[name="frequency"]', toggle_offset_visibility);
+
 		window.SS_PAGES.snapshot_page_snapshot_pro_managed_backups_create();
 		window.SS_PAGES.snapshot_page_snapshot_pro_managed_backups_upload();
 	};

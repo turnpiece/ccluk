@@ -22,6 +22,8 @@ class Shipper_Model_Stored_Options extends Shipper_Model_Stored {
 	const KEY_DATA = 'preserve_data';
 
 	const KEY_UPLOADS = 'use_uploads_dir';
+	const KEY_SKIPCONFIG = 'skip_wp_config';
+	const KEY_SKIPEMAILS = 'skip_email_replacement';
 
 	const KEY_PER_PAGE = 'entries_per_page';
 

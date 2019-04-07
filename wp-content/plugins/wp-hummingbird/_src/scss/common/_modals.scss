@@ -6,31 +6,6 @@
     line-height: 22px;
 }
 
-/* CDN modal */
-.wphb-cdn-block {
-    border: 1px solid #E6E6E6;
-    border-radius: 5px;
-    padding: 18px 0;
-}
-
-.wphb-cdn-block > div {
-    display: flex;
-    align-content: center;
-    align-items: center;
-    height: auto;
-    padding: 20px 30px 0;
-}
-
-.wphb-cdn-block > div > label {
-    margin: 2px 0 0 0;
-    color: #666666;
-}
-
-.wphb-cdn-block > p {
-    color: #888888 !important;
-    padding: 0 30px 0 76px;
-}
-
 /* Asset Optimization assets found modal */
 .wpmud .wphb-assets-modal .sui-notice-warning {
     text-align: left;

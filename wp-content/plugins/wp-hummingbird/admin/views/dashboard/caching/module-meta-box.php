@@ -16,7 +16,7 @@
  */
 
 ?>
-<div class="sui-box-settings-row">
+<div class="<?php echo $show_cf_notice ? 'sui-box-body' : ''; ?>">
 	<p><?php esc_html_e( 'Store temporary data on your visitors devices so that they don’t have to download assets twice if they don’t have to.', 'wphb' ); ?></p>
 	<?php if ( $issues ) : ?>
 		<div class="sui-notice sui-notice-warning">
@@ -61,10 +61,11 @@
 			?>
 			<li>
 				<span class="sui-list-label">
-					<span class="wphb-filename-extension wphb-filename-extension-<?php echo esc_attr( $type ); ?> sui-tooltip sui-tooltip-top-right sui-tooltip-constrained" data-tooltip="<?php echo esc_attr( $caching_type_tooltips[ $type ] ); ?>">
+					<span class="wphb-filename-extension wphb-filename-extension-<?php echo esc_attr( $type ); ?> sui-tooltip sui-tooltip-top-left sui-tooltip-constrained" data-tooltip="<?php echo esc_attr( $caching_type_tooltips[ $type ] ); ?>">
 						<?php
 						switch ( $type ) {
 							case 'javascript':
+                            default:
 								$label = 'JavaScript';
 								echo 'js';
 								break;
@@ -99,9 +100,9 @@
 	<div class="sui-box-settings-row sui-upsell-row cf-dash-notice">
 		<?php if ( ! WP_Hummingbird_Utils::hide_wpmudev_branding() ) : ?>
 			<img class="sui-image sui-upsell-image"
-			     src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/graphic-hb-cf-sell.png' ); ?>"
-			     srcset="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/graphic-hb-cf-sell@2x.png' ); ?> 2x"
-			     alt="<?php esc_attr_e( 'Connect your account to Cloudflare', 'wphb' ); ?>">
+				 src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/graphic-hb-cf-sell.png' ); ?>"
+				 srcset="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/graphic-hb-cf-sell@2x.png' ); ?> 2x"
+				 alt="<?php esc_attr_e( 'Connect your account to Cloudflare', 'wphb' ); ?>">
 		<?php endif; ?>
 		<div class="<?php echo( WP_Hummingbird_Utils::hide_wpmudev_branding() ? esc_attr( 'sui-notice' ) : esc_attr( 'sui-upsell-notice' ) ); ?>">
 			<p>

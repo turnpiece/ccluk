@@ -48,11 +48,13 @@
 		<span class="sui-summary-sub"><?php esc_html_e( 'Current performance score', 'wphb' ); ?></span>
 		<?php
 		if ( $last_report && ! is_wp_error( $last_report ) ) {
-			$data_time = strtotime( get_date_from_gmt( date( 'Y-m-d H:i:s', $last_report->data->time ) ) );
-			echo date_i18n( get_option( 'date_format' ), $data_time );
 			?>
-			<span class="sui-summary-detail">
-					<?php printf( _x( 'at %s', 'Time of the last performance report', 'wphb' ), date_i18n( get_option( 'time_format' ), $data_time ) ); ?>
+				<span class="sui-summary-detail">
+					<?php
+					$data_time = strtotime( get_date_from_gmt( date( 'Y-m-d H:i:s', $last_report->data->time ) ) );
+					echo date_i18n( get_option( 'date_format' ), $data_time );
+					printf( _x( ' at %s', 'Time of the last performance report', 'wphb' ), date_i18n( get_option( 'time_format' ), $data_time ) );
+					?>
 				</span>
 			<?php
 		} elseif ( $is_doing_report ) {
@@ -73,11 +75,11 @@
 						<?php if ( 691200 <= $cf_current ) : ?>
 							<i class="sui-icon-check-tick sui-lg sui-success" aria-hidden="true"></i>
 						<?php else : ?>
-							<span class="sui-tag">5</span>
+							<span class="sui-tag sui-tag-warning">5</span>
 						<?php endif; ?>
 					<?php else : ?>
 						<?php if ( $caching_issues ) : ?>
-							<span class="sui-tag"><?php echo intval( $caching_issues ); ?></span>
+							<span class="sui-tag sui-tag-warning"><?php echo intval( $caching_issues ); ?></span>
 						<?php else : ?>
 							<i class="sui-icon-check-tick sui-lg sui-success" aria-hidden="true"></i>
 						<?php endif; ?>
@@ -88,7 +90,7 @@
 			<span class="sui-list-label"><?php esc_html_e( 'GZIP Compression', 'wphb' ); ?></span>
 			<span class="sui-list-detail">
 					<?php if ( $gzip_issues ) : ?>
-						<span class="sui-tag"><?php echo intval( $gzip_issues ); ?></span>
+						<span class="sui-tag sui-tag-warning"><?php echo intval( $gzip_issues ); ?></span>
 					<?php else : ?>
 						<i class="sui-icon-check-tick sui-lg sui-success" aria-hidden="true"></i>
 					<?php endif; ?>
@@ -105,11 +107,15 @@
 						<span class="sui-tag sui-tag-disabled">
 							<?php esc_html_e( 'Uptime Inactive', 'wphb' ); ?>
 						</span>
-					<?php elseif ( empty( $site_date ) ) :
-						esc_html_e( 'Website is reported down', 'wphb' ); ?>
-					<?php else :
+					<?php
+					elseif ( empty( $site_date ) ) :
+						esc_html_e( 'Website is reported down', 'wphb' );
+						?>
+						<?php
+					else :
 						echo esc_html( $site_date );
-					endif; ?>
+					endif;
+					?>
 				</span>
 		</li>
 	</ul>

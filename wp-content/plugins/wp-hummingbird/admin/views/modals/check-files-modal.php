@@ -1,13 +1,24 @@
-<div class="dialog sui-dialog" aria-hidden="true" id="check-files-modal">
+<?php
+/**
+ * Asset optimization: checking files modal.
+ *
+ * @package Hummingbird
+ */
 
-	<div class="sui-dialog-overlay" tabindex="-1"></div>
+?>
+
+<div class="sui-dialog" aria-hidden="true" tabindex="-1" id="check-files-modal">
+
+	<div class="sui-dialog-overlay" data-a11y-dialog-hide></div>
 
 	<div class="sui-dialog-content" aria-labelledby="checkingFiles" aria-describedby="dialogDescription" role="dialog">
 
 		<div class="sui-box" role="document">
 
 			<div class="sui-box-header">
-				<h3 class="sui-box-title" id="checkingFiles"><?php esc_html_e( 'Checking files', 'wphb' ); ?></h3>
+				<h3 class="sui-box-title" id="checkingFiles">
+					<?php esc_html_e( 'Checking files', 'wphb' ); ?>
+				</h3>
 				<div class="sui-actions-right title-action">
 					<span><?php esc_html_e( 'File check in progress...', 'wphb' ); ?></span>
 				</div>
@@ -21,19 +32,22 @@
 						checkbox.prop('checked', !checkbox.prop('checked') );
 					});
 				</script>
-				<p><?php esc_html_e( 'Hummingbird is running a test to measure your website performance, please wait.', 'wphb' ); ?></p>
+				<p><?php esc_html_e( 'Hummingbird is running a file check to see what files can be optimized.', 'wphb' ); ?></p>
 
-				<div class="sui-progress-block sui-progress-can-close">
+				<div class="sui-progress-block">
 					<div class="sui-progress">
-						<div class="sui-progress-text sui-icon-loader sui-loading">
+						<span class="sui-progress-icon" aria-hidden="true">
+							<i class="sui-icon-loader sui-loading"></i>
+						</span>
+						<div class="sui-progress-text">
 							<span>0%</span>
 						</div>
-						<div class="sui-progress-bar">
+						<div class="sui-progress-bar" aria-hidden="true">
 							<span style="width: 0"></span>
 						</div>
 					</div>
-					<button class="sui-progress-close sui-tooltip" id="cancel-minification-check" type="button" data-a11y-dialog-hide data-tooltip="Cancel Test">
-						<i class="sui-icon-close"></i>
+					<button class="sui-button-icon sui-tooltip" id="cancel-minification-check" type="button" data-a11y-dialog-hide data-tooltip="Cancel Test">
+						<i class="sui-icon-close" aria-hidden="true"></i>
 					</button>
 				</div>
 
@@ -44,22 +58,28 @@
 				<?php if ( ! WP_Hummingbird_Utils::is_member() ) : ?>
 				<div class="sui-notice sui-notice-info">
 					<p style="font-size:13px;line-height:22px;">
-						<?php /* translators: %s - learn more link */
-						printf( __( 'Did you know the Pro version of Hummingbird comes up to 2x better compression and
-						a CDN to store your assets on? Get it as part of a WPMU DEV membership. <a href="%s" target="_blank">Learn more.</a>', 'wphb' ),
-						esc_url( WP_Hummingbird_Utils::get_link( 'plugin' ) ) );
+						<?php
+						/* translators: %s - learn more link */
+						printf(
+							__(
+								'Did you know the Pro version of Hummingbird comes up to 2x better compression and
+						a CDN to store your assets on? Get it as part of a WPMU DEV membership. <a href="%s" target="_blank">Learn more.</a>',
+								'wphb'
+							),
+							esc_url( WP_Hummingbird_Utils::get_link( 'plugin' ) )
+						);
 						?>
 					</p>
 				</div>
 				<?php endif; ?>
 			<?php
-			/* @var WP_Hummingbird_Module_Minify $minify */
-			$minify = WP_Hummingbird_Utils::get_module( 'minify' );
+			$cdn_status = WP_Hummingbird_Utils::get_module( 'minify' )->get_cdn_status();
 
-			if ( ! is_multisite() && WP_Hummingbird_Utils::is_member() ) : ?>
+			if ( ! is_multisite() && WP_Hummingbird_Utils::is_member() ) :
+				?>
 				<form method="post" class="sui-border-frame" id="enable-cdn-form">
 					<label class="sui-toggle">
-						<input type="checkbox" name="enable_cdn" id="enable_cdn" <?php checked( $minify->get_cdn_status() ); ?>>
+						<input type="checkbox" name="enable_cdn" id="enable_cdn" <?php checked( $cdn_status ); ?>>
 						<span class="sui-toggle-slider"></span>
 					</label>
 					<label><?php esc_html_e( 'Store my files on the WPMU DEV CDN', 'wphb' ); ?></label>
@@ -68,15 +88,15 @@
 					</span>
 				</form>
 			<?php elseif ( is_multisite() && WP_Hummingbird_Utils::is_member() ) : ?>
-				<input type="checkbox" class="sui-hidden" name="enable_cdn" id="enable_cdn" <?php checked( $minify->get_cdn_status() ); ?>>
+				<input type="checkbox" class="sui-hidden" name="enable_cdn" id="enable_cdn" <?php checked( $cdn_status ); ?>>
 			<?php endif; ?>
 
 			</div>
 			<?php if ( ! WP_Hummingbird_Utils::hide_wpmudev_branding() ) : ?>
-				<img class="wphb-image wphb-image-center wphb-modal-image-bottom"
-				     src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-graphic-minify-summary.png' ); ?>"
-				     srcset="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-graphic-minify-summary@2x.png' ); ?> 2x"
-				     alt="<?php esc_attr_e( 'Reduce your page load time!', 'wphb' ); ?>">
+				<img class="sui-image"
+					src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-graphic-minify-summary.png' ); ?>"
+					srcset="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-graphic-minify-summary@2x.png' ); ?> 2x"
+					alt="<?php esc_attr_e( 'Reduce your page load time!', 'wphb' ); ?>">
 			<?php endif; ?>
 		</div>
 

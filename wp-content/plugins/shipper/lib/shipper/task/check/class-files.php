@@ -39,7 +39,9 @@ class Shipper_Task_Check_Files extends Shipper_Task_Check {
 			$method = "are_{$chk}_valid";
 			if ( is_callable( array( $this, $method ) ) ) {
 				$check = call_user_func( array( $this, $method ), $storage );
-				$this->add_check( $check );
+				if ( ! empty( $check ) ) {
+					$this->add_check( $check );
+				}
 			}
 		}
 
@@ -155,25 +157,19 @@ class Shipper_Task_Check_Files extends Shipper_Task_Check {
 	/**
 	 * Checks if the overall package size is within limits
 	 *
+	 * Just updates the estimate with overall file sizes.
+	 * The actual check will be got dynamically.
+	 *
 	 * @param object $storage Shipper_Model_Stored_Filelist instance.
 	 *
-	 * @return object Shipper_Model_Check instance
+	 * @return bool
 	 */
 	public function are_package_sizes_valid( $storage ) {
-		$check = new Shipper_Model_Check( __( 'Package size', 'shipper' ) );
-		$status = Shipper_Model_Check::STATUS_OK;
-
-		$threshold = Shipper_Model_Stored_Migration::get_package_size_threshold();
-
 		$files_total_size = $storage->get( 'files_total_size', 0 );
-		$exclusions_model = new Shipper_Model_Stored_Exclusions;
-		$exclusions = array_keys( $exclusions_model->get_data() );
-
 		$files = isset( $this->_fs ) ? $this->_fs->get_files() : array();
 
 		foreach ( $files as $file ) {
 			if ( ! is_array( $file ) ) { continue; }
-			if ( in_array( $file['path'], $exclusions, true ) ) { continue; } // Already in exclusion list, let's not worry about it.
 			$files_total_size += $file['size'];
 		}
 
@@ -186,7 +182,33 @@ class Shipper_Task_Check_Files extends Shipper_Task_Check {
 		}
 		$package_size = $db_size + $files_total_size;
 
+		// Side-effect: update estimate raw size.
 		$estimate = new Shipper_Model_Stored_Estimate;
+		$estimate->set( 'raw_package_size', $package_size )->save();
+
+		// Package size check will be figured out dynamically.
+		// This is so we can show up-to-date package sizes with exclusions info.
+		return false; // Do not return a check here!
+	}
+
+	/**
+	 * Gets package size check specifically
+	 *
+	 * @return object Shipper_Model_Check instance
+	 */
+	public function get_package_size_check() {
+		$check = new Shipper_Model_Check( __( 'Package size', 'shipper' ) );
+		$status = Shipper_Model_Check::STATUS_OK;
+		$estimate = new Shipper_Model_Stored_Estimate;
+		$package_size = $estimate->get( 'raw_package_size', 0 );
+
+		$threshold = Shipper_Model_Stored_Migration::get_package_size_threshold();
+
+		$exclusions_model = new Shipper_Model_Stored_Exclusions;
+		$exclusions = array_keys( $exclusions_model->get_data() );
+		foreach ( $exclusions as $exc ) {
+			$package_size -= filesize( $exc );
+		}
 		$estimate->set( 'package_size', $package_size )->save();
 
 		if ( $package_size > $threshold ) {
@@ -199,8 +221,6 @@ class Shipper_Task_Check_Files extends Shipper_Task_Check {
 			'message',
 			$tpl->get('pages/preflight/wizard-files-package_size-full', array(
 				'package_size' => $package_size,
-				'files_size' => $files_total_size,
-				'db_size' => $db_size,
 				'threshold' => $threshold,
 			))
 		);
@@ -208,8 +228,6 @@ class Shipper_Task_Check_Files extends Shipper_Task_Check {
 			'short_message',
 			$tpl->get('pages/preflight/wizard-files-package_size-summary', array(
 				'package_size' => $package_size,
-				'files_size' => $files_total_size,
-				'db_size' => $db_size,
 				'threshold' => $threshold,
 			))
 		);

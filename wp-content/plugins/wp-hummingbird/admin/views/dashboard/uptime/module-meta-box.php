@@ -29,7 +29,7 @@
 	</li>
 	<li>
 		<?php
-		$gmt_date = date( 'Y-m-d H:i:s', $uptime_stats->up_since );
+		$gmt_date  = date( 'Y-m-d H:i:s', $uptime_stats->up_since );
 		$site_date = get_date_from_gmt( $gmt_date, get_option( 'date_format' ) . ' ' . get_option( 'time_format' ) );
 		?>
 		<span class="sui-list-label"><?php esc_html_e( 'Last Down', 'wphb' ); ?></span>

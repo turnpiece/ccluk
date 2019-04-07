@@ -65,13 +65,14 @@ $this->do_meta_boxes( 'main' ); ?>
 			<?php esc_html_e( 'Learn more', 'wphb' ); ?>
 		</a>
 
-		<img class="wphb-image"
+		<img class="sui-image"
 			 src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/dev-team.png' ); ?>"
 			 srcset="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/dev-team@2x.png' ); ?> 2x"
 			 alt="<?php esc_attr_e( 'Try pro features for free!', 'wphb' ); ?>">
 	</div>
 
-<?php endif;
+	<?php
+endif;
 
 WP_Hummingbird_Utils::get_modal( 'membership' );
 ?>

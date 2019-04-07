@@ -23,7 +23,7 @@ class WP_Hummingbird_Minification_Errors_Controller {
 	 * WP_Hummingbird_Minification_Errors_Controller constructor.
 	 */
 	public function __construct() {
-		$this->errors = $this->get_errors();
+		$this->errors        = $this->get_errors();
 		$this->server_errors = $this->get_server_errors();
 	}
 
@@ -109,7 +109,7 @@ class WP_Hummingbird_Minification_Errors_Controller {
 				'error'   => '',
 				'disable' => array(),
 			);
-			$error = wp_parse_args( $this->errors[ $type ][ $handle ], $defaults );
+			$error    = wp_parse_args( $this->errors[ $type ][ $handle ], $defaults );
 		}
 
 		return apply_filters( "wphb_handle_error_{$handle}_{$type}", $error, $handle, $type );
@@ -162,7 +162,7 @@ class WP_Hummingbird_Minification_Errors_Controller {
 		}
 
 		/* @var WP_Hummingbird_Module_Minify $minify */
-		$minify = WP_Hummingbird_Utils::get_module( 'minify' );
+		$minify  = WP_Hummingbird_Utils::get_module( 'minify' );
 		$options = $minify->get_options();
 
 		foreach ( $handles as $handle ) {

@@ -111,25 +111,43 @@
 
 							foreach ( $snapshots as $key => $snapshot ) :
 
+								$backup_type_tooltip = '';
 								if ( Snapshot_Helper_Backup::is_automated_backup( $snapshot['name'] ) ) {
-									$backup_type_class = 'automated';
+									$backup_type_class = 'i-cloud-automate';
 								} else {
-									if ( ! empty( $snapshot['local'] ) ) {
-										$backup_type_class = 'local';
-									} else {
-										$backup_type_class = 'cloud';
-									}
+									$backup_type_class = 'i-cloud-upload';
+								}
+
+								if ( ! empty( $snapshot['local'] ) ) {
+									$backup_type_class .= ' upload-error';
+									$backup_type_tooltip = esc_html__( "This backup failed to upload to The Hub and is only being stored locally. We recommend to retry uploading it to make sure it's available in the event you need to restore your site. Visit the Managed Backups tab to trigger the upload.", SNAPSHOT_I18N_DOMAIN );
+
 								}
 
 								?>
 
 								<tr>
 									<td class="wpsb-name">
-										<span class="wps-typecon <?php echo esc_attr( $backup_type_class ); ?>"></span>
-										<p>
-											<?php echo esc_html( $snapshot['name'] ); ?>
-											<small><?php echo esc_html( size_format( $snapshot['size'] ) ); ?></small>
-										</p>
+										<table cellpadding="0" cellspacing="0">
+											<tbody>
+												<tr>
+													<td class="msc-name-type">
+														<div class="sui-component-snapshot">
+															<div class="<?php echo $backup_type_tooltip ? 'sui-tooltip sui-tooltip-constrained sui-tooltip-top-right' : ''; ?>"
+																data-tooltip="<?php echo esc_attr( $backup_type_tooltip ); ?>">
+																<i class="wps-icon <?php echo esc_attr( $backup_type_class ); ?>"></i>
+															</div>
+														</div>
+													</td>
+													<td class="msc-name-desc">
+														<p>
+															<?php echo esc_html( $snapshot['name'] ); ?>
+															<small><?php echo esc_html( size_format( $snapshot['size'] ) ); ?></small>
+														</p>
+													</td>
+												</tr>
+											</tbody>
+										</table>
 
 									<td class="wpsb-date"><?php echo esc_html( Snapshot_Helper_Utility::show_date_time( $snapshot['timestamp'], 'F j, Y' ) ); ?></td>
 								</tr>

@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<tbody>
 				<tr style="padding: 0; text-align: left; vertical-align: top;">
 					<td class="footer-content-inner" style="-moz-hyphens: auto; -webkit-hyphens: auto; border-collapse: collapse !important; color: #555555; font-family: Arial, sans-serif; font-size: 14px; font-weight: normal; hyphens: auto; line-height: 30px; margin: 0; padding: 0; text-align: left; vertical-align: top; word-wrap: break-word;">
-						<p style="color: #555555; font-family: Arial, sans-serif; font-size: 10px; font-weight: normal; line-height: 26px; margin: 0; padding: 0; text-align: center;"><?php _e( 'EVERYTHING YOU NEED FOR WORDPRESS', 'wphb' ); ?></p>
+						<p style="color: #555555; font-family: Arial, sans-serif; font-size: 10px; font-weight: normal; line-height: 26px; margin: 0; padding: 0; text-align: center;"><?php _e( 'EVERYTHING YOU NEED FOR WordPress', 'wphb' ); ?></p>
 						<p style="color: #555555; font-family: Arial, sans-serif; font-size: 10px; font-weight: normal; line-height: 26px; margin: 0; padding: 0; text-align: center;"><i><?php _e( 'One place, one low price, unlimited sites', 'wphb' ); ?></i></p>
 					</td>
 				</tr>

@@ -65,7 +65,7 @@ class Snapshot_Controller_Full_Reporter extends Snapshot_Controller_Full {
 
 		// Send backup error/cleanup info to the hub
 		add_action($this->get_filter('error'), array($this, 'send_backup_creation_error_report'), 10, 3);
-		add_action($cron->get_filter('cron_error_stop'), array($this, 'send_backup_creation_error_report'), 10, 3);
+		add_action($cron->get_filter('cron_error_stop'), array($this, 'send_backup_creation_error_report'), 10, 3);	 	 	 	 				 	 		
 
 		// Add restore hooks
 		//add_action($this->get_filter('restore_processing'), array($this, 'send_restore_status_report'));

@@ -16,7 +16,7 @@
 
 if ( $error ) : ?>
 	<div class="sui-box-body">
-		<div class="sui-notice sui-notice-error wphb-notice-box">
+		<div class="sui-notice sui-notice-error">
 			<p><?php echo $error_text; ?></p>
 			<div id="wphb-error-details">
 				<p><code><?php echo $error_details; ?></code></p>
@@ -63,7 +63,7 @@ if ( $error ) : ?>
 				<div class="sui-notice-buttons">
 					<?php if ( true === $can_run_test ) : ?>
 						<a href="<?php echo esc_url( $retry_url ); ?>"  class="sui-button sui-button-primary"><?php esc_html_e( 'Run Test', 'wphb' ); ?></a>
-					<?php
+						<?php
 					else :
 						$tooltip = sprintf(
 							/* translators: %d: number of minutes. */
@@ -83,12 +83,12 @@ if ( $error ) : ?>
 				</div>
 				<?php
 				$impact_score_class = 'dismissed';
-				$impact_icon_class = 'warning-alert';
+				$impact_icon_class  = 'warning-alert';
 				?>
 			</div>
-		<?php else :
-			echo '<p>' . esc_html_e( 'Here are your latest performance test results. Action as many fixes as possible, however you can always ignore warnings if you are unable to fix them.', 'wphb' ) . '</p>';
-		endif; ?>
+        <?php else : ?>
+			<p><?php esc_html_e( 'Here are your latest performance test results. Action as many fixes as possible, however you can always ignore warnings if you are unable to fix them.', 'wphb' ); ?></p>
+		<?php endif; ?>
 	</div>
 	<table class="sui-table sui-accordion performance-report-table">
 		<tbody>
@@ -97,19 +97,19 @@ if ( $error ) : ?>
 			if ( ! $report_dismissed ) :
 				if ( 85 <= $rule_result->impact_score ) :
 					$impact_score_class = 'success';
-					$impact_icon_class = 'check-tick';
+					$impact_icon_class  = 'check-tick';
 				elseif ( 65 <= $rule_result->impact_score ) :
 					$impact_score_class = 'warning';
-					$impact_icon_class = 'warning-alert';
+					$impact_icon_class  = 'warning-alert';
 				else :
 					$impact_score_class = 'error';
-					$impact_icon_class = 'warning-alert';
+					$impact_icon_class  = 'warning-alert';
 				endif;
 			endif;
 			$colspan = '';
 			if ( $is_subsite && 'server' === $rule_result->type ) :
 				$impact_score_class = 'disabled';
-				$colspan = 'colspan=2';
+				$colspan            = 'colspan=2';
 			endif;
 			$has_url_blocks = ! empty( $rule_result->urlblocks ) && is_array( $rule_result->urlblocks ) && ! empty( $rule_result->urlblocks[0] );
 			?>
@@ -173,9 +173,9 @@ if ( $error ) : ?>
 										<?php
 										if ( ! empty( $url_block->urls ) && is_array( $url_block->urls ) ) :
 											foreach ( $url_block->urls as $url ) :
-											?>
+												?>
 											<li><?php echo make_clickable( $url ); ?></li>
-										<?php
+												<?php
 											endforeach;
 										endif;
 									endforeach;

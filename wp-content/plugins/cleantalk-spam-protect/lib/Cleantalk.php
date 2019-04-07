@@ -191,8 +191,8 @@ class Cleantalk {
         switch ($method) {
             case 'check_message':
                 // Convert strings to UTF8
-                $request->message         = CleantalkHelper::arrayToUTF8( $request->message,         $this->data_codepage);
-                $request->example         = CleantalkHelper::arrayToUTF8( $request->example,         $this->data_codepage);
+                $request->message         = CleantalkHelper::arrayToUTF8( (array)$request->message,         $this->data_codepage);
+                $request->example         = CleantalkHelper::arrayToUTF8( (array)$request->example,         $this->data_codepage);
                 $request->sender_email    = CleantalkHelper::stringToUTF8($request->sender_email,    $this->data_codepage);
                 $request->sender_nickname = CleantalkHelper::stringToUTF8($request->sender_nickname, $this->data_codepage);
 
@@ -473,7 +473,9 @@ class Cleantalk {
 	{
         if (!isset($host))
             return null;
-
+		
+		$servers = array();
+		
 		// Get DNS records about URL
         if (function_exists('dns_get_record')) {
             $records = dns_get_record($host, DNS_A);

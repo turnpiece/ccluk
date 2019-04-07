@@ -1,3 +1,12 @@
+<?php
+/**
+ * Asset optimization: switch to advanced mode modal.
+ *
+ * @package Hummingbird
+ */
+
+?>
+
 <div class="dialog sui-dialog sui-dialog-sm" aria-hidden="true" id="wphb-advanced-minification-modal">
 
 	<div class="sui-dialog-overlay" tabindex="-1" data-a11y-dialog-hide></div>
@@ -27,12 +36,10 @@
 			</div>
 
 			<?php if ( ! WP_Hummingbird_Utils::hide_wpmudev_branding() ) : ?>
-				<div class="wphb-modal-image wphb-modal-image-bottom dev-man">
-					<img class="wphb-image"
-					     src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/graphic-minify-modal-warning@1x.png' ); ?>"
-					     srcset="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/graphic-minify-modal-warning@2x.png' ); ?> 2x"
-					     alt="<?php esc_attr_e( 'Hummingbird', 'wphb' ); ?>">
-				</div>
+				<img class="sui-image"
+					 src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/graphic-minify-modal-warning@1x.png' ); ?>"
+					 srcset="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/graphic-minify-modal-warning@2x.png' ); ?> 2x"
+					 alt="<?php esc_attr_e( 'Hummingbird', 'wphb' ); ?>">
 			<?php endif; ?>
 		</div>
 

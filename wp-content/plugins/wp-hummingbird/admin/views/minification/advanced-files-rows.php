@@ -27,17 +27,22 @@
 <div class="wphb-border-row<?php echo ( $disabled ) ? ' disabled' : ''; ?>"
 	 id="wphb-file-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>"
 	 data-filter="<?php echo esc_attr( $item['handle'] . ' ' . $ext ); ?>"
-	 data-filter-secondary="<?php echo esc_attr( $filter ); echo 'OTHER' === $ext ? 'other' : ''?>">
+	 data-filter-secondary="
+		<?php
+		echo esc_attr( $filter );
+		echo 'OTHER' === $ext ? 'other' : '';
+		?>
+		">
 	<?php if ( $processed && ! $compressed && ! preg_match( '/\.min\.(css|js)/', $full_src ) ) : ?>
-		<span class="wphb-row-status wphb-row-status-already-compressed sui-tooltip sui-tooltip-top-right sui-tooltip-constrained"
+		<span class="wphb-row-status wphb-row-status-already-compressed sui-tooltip sui-tooltip-top-left sui-tooltip-constrained"
 			  data-tooltip="<?php esc_attr_e( 'This file has already been compressed – we recommend you turn off compression for this file to avoid issues', 'wphb' ); ?>"><i
 				class="sui-icon-warning-alert" aria-hidden="true"></i></span>
 	<?php elseif ( 'OTHER' === $ext ) : ?>
-		<span class="wphb-row-status wphb-row-status-other sui-tooltip sui-tooltip-top-right sui-tooltip-constrained"
+		<span class="wphb-row-status wphb-row-status-other sui-tooltip sui-tooltip-top-left sui-tooltip-constrained"
 			  data-tooltip="<?php esc_attr_e( 'This file has no linked URL, it will not be combined/minified', 'wphb' ); ?>"><i
 				class="sui-icon-info" aria-hidden="true"></i></span>
 	<?php endif; ?>
-	<span class="wphb-row-status wphb-row-status-changed sui-tooltip sui-tooltip-top-right sui-hidden"
+	<span class="wphb-row-status wphb-row-status-changed sui-tooltip sui-tooltip-top-left sui-hidden"
 		  data-tooltip="<?php esc_attr_e( 'You need to publish your changes for your new settings to take effect', 'wphb' ); ?>"><i
 			class="sui-icon-update" aria-hidden="true"></i></span>
 
@@ -77,7 +82,7 @@
 			<?php elseif ( ! in_array( $item['handle'], $options['minify'][ $type ], true ) ) : ?>
 				<span class="original-size"><?php echo esc_html( $original_size ); ?>KB &mdash;</span>
 			<?php else : ?>
-				<span class="wphb-row-status wphb-row-status-queued sui-tooltip sui-tooltip-top-right sui-tooltip-constrained"
+				<span class="wphb-row-status wphb-row-status-queued sui-tooltip sui-tooltip-top-left sui-tooltip-constrained"
 					  data-tooltip="<?php esc_attr_e( 'This file is queued for compression. It will get optimized when someone visits a page that requires it.', 'wphb' ); ?>"><i
 						class="sui-icon-loader sui-loading" aria-hidden="true"></i></span>
 				<span class="original-size"><?php echo esc_html( $original_size ); ?>KB &mdash;</span>
@@ -108,12 +113,12 @@
 				   id="wphb-minification-minify-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>" <?php checked( in_array( $item['handle'], $options['minify'][ $type ], true ) ); ?>
 				   aria-label="<?php esc_attr_e( 'Compress', 'wphb' ); ?>">
 			<label for="wphb-minification-minify-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>" class="toggle-label sui-tooltip" data-tooltip="<?php echo esc_attr( $tooltip ); ?>" aria-hidden="true">
-				<span class="hb-icon-minify" aria-hidden="true"></span>
+				<span class="sui-icon-arrows-in" aria-hidden="true"></span>
 			</label>
 			<?php
 			$tooltip = __( 'Combine', 'wphb' );
 			if ( in_array( 'combine', $disable_switchers, true ) && ! $disabled || $is_ssl ) {
-				$tooltip = __( 'This file can’t be combined', 'wphb' );
+				$tooltip      = __( 'This file can’t be combined', 'wphb' );
 				$dont_combine = true;
 			}
 			?>
@@ -122,14 +127,14 @@
 				   id="wphb-minification-combine-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>" <?php checked( in_array( $item['handle'], $options['combine'][ $type ], true ) ); ?>
 				   aria-label="<?php esc_attr_e( 'Combine', 'wphb' ); ?>">
 			<label for="wphb-minification-combine-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>" class="toggle-label sui-tooltip" data-tooltip="<?php echo esc_attr( $tooltip ); ?>" aria-hidden="true">
-				<span class="hb-icon-minify-combine" aria-hidden="true"></span>
+				<span class="sui-icon-combine" aria-hidden="true"></span>
 			</label>
 			<input type="checkbox" <?php disabled( in_array( 'position', $disable_switchers, true ) ); ?>
 				   class="toggle-checkbox toggle-position-footer" name="<?php echo esc_attr( $base_name ); ?>[position]"
 				   id="wphb-minification-position-footer-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>" <?php checked( $position, 'footer' ); ?> value="footer"
 				   aria-label="<?php esc_attr_e( 'Footer', 'wphb' ); ?>">
 			<label for="wphb-minification-position-footer-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>" class="toggle-label sui-tooltip" data-tooltip="<?php esc_attr_e( 'Move to Footer', 'wphb' ); ?>" aria-hidden="true">
-				<span class="hb-icon-minify-footer" aria-hidden="true"></span>
+				<span class="sui-icon-movefooter" aria-hidden="true"></span>
 			</label>
 			<?php if ( 'scripts' === $type ) : ?>
 				<input type="checkbox" <?php disabled( in_array( 'defer', $disable_switchers, true ) ); ?>
@@ -137,14 +142,14 @@
 					   id="wphb-minification-defer-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>" <?php checked( in_array( $item['handle'], $options['defer'][ $type ], true ) ); ?> value="1"
 					   aria-label="<?php esc_attr_e( 'Defer', 'wphb' ); ?>">
 				<label for="wphb-minification-defer-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>" class="toggle-label sui-tooltip" data-tooltip="<?php esc_attr_e( 'Force load this file after the page has loaded', 'wphb' ); ?>" aria-hidden="true">
-					<span class="hb-icon-minify-defer" aria-hidden="true"></span>
+					<span class="sui-icon-defer" aria-hidden="true"></span>
 				</label>
 			<?php elseif ( 'styles' === $type ) : ?>
 				<input type="checkbox" <?php disabled( in_array( 'inline', $disable_switchers, true ) ); ?>
 					   class="toggle-checkbox toggle-inline" name="<?php echo esc_attr( $base_name ); ?>[inline]"
 					   id="wphb-minification-inline-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>" <?php checked( in_array( $item['handle'], $options['inline'][ $type ], true ) ); ?> value="1">
 				<label for="wphb-minification-inline-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>" class="toggle-label sui-tooltip" data-tooltip="<?php esc_attr_e( 'Inline CSS', 'wphb' ); ?>" aria-hidden="true">
-					<span class="hb-icon-minify-inline" aria-hidden="true"></span>
+					<span class="sui-icon-inlinecss" aria-hidden="true"></span>
 				</label>
 			<?php endif; ?>
 		</div><!-- end checkbox-group -->
@@ -156,10 +161,10 @@
 				<?php checked( $disabled, false ); ?>
 				   value="1">
 			<?php
-			$tooltip = __( "Don't load file", 'wphb' );
+			$tooltip       = __( "Don't load file", 'wphb' );
 			$exclude_class = 'fileIncluded';
 			if ( $disabled ) {
-				$tooltip = __( 'Re-include', 'wphb' );
+				$tooltip       = __( 'Re-include', 'wphb' );
 				$exclude_class = '';
 			}
 			?>

@@ -142,7 +142,7 @@ abstract class WP_Hummingbird_API_Request {
 	/**
 	 * Make a GET API Call
 	 *
-	 * @param string $path Endpoint route
+	 * @param string  $path Endpoint route
 	 * @param array() $data
 	 *
 	 * @return mixed
@@ -159,7 +159,7 @@ abstract class WP_Hummingbird_API_Request {
 	/**
 	 * Make a GET API Call
 	 *
-	 * @param string $path Endpoint route
+	 * @param string  $path Endpoint route
 	 * @param array() $data
 	 *
 	 * @return mixed
@@ -185,7 +185,7 @@ abstract class WP_Hummingbird_API_Request {
 	/**
 	 * Make a GET API Call
 	 *
-	 * @param string $path Endpoint route
+	 * @param string  $path Endpoint route
 	 * @param array() $data
 	 *
 	 * @return mixed
@@ -203,7 +203,7 @@ abstract class WP_Hummingbird_API_Request {
 	/**
 	 * Make a GET API Call
 	 *
-	 * @param string $path Endpoint route
+	 * @param string  $path Endpoint route
 	 * @param array() $data
 	 *
 	 * @return mixed
@@ -223,7 +223,7 @@ abstract class WP_Hummingbird_API_Request {
 	 * @since 1.8.1 Timeout for non-blocking changed from 0.1 to 2 seconds.
 	 *
 	 * @param $path
-	 * @param array $data
+	 * @param array  $data
 	 * @param string $method
 	 *
 	 * @return array|mixed|object

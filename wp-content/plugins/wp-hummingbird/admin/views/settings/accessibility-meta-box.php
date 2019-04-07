@@ -3,7 +3,6 @@
  * Settings meta box.
  *
  * @package Hummingbird
- *
  */
 ?>
 <form method="post" class="settings-frm">

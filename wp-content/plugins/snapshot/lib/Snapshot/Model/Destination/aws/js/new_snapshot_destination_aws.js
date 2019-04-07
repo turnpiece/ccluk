@@ -7,6 +7,12 @@ jQuery(document).ready( function($) {
 		} else {
 			jQuery('div#snapshot-destination-region-other-container').hide();
 		}
+
+		if (jQuery(this).val() == 'non-aws') {
+			jQuery('div#snapshot-destination-region-non-aws-container').show();
+		} else {
+			jQuery('div#snapshot-destination-region-non-aws-container').hide();
+		}
 	});
 
 	jQuery("button#snapshot-destination-test-connection").click(function() {
@@ -46,6 +52,14 @@ jQuery(document).ready( function($) {
 		destination_info['region-other'] 	= jQuery('input#snapshot-destination-region-other').val();
 		if (destination_info['region-other'] == null)
 			destination_info['region-other'] = '';
+
+		destination_info['region-non-aws-host'] 	= jQuery('input#snapshot-destination-region-non-aws-host').val();
+		if (destination_info['region-non-aws-host'] == null)
+			destination_info['region-non-aws-host'] = '';
+
+		destination_info['region-non-aws-region'] 	= jQuery('input#snapshot-destination-region-non-aws-region').val();
+		if (destination_info['region-non-aws-region'] == null)
+			destination_info['region-non-aws-region'] = '';
 
 		destination_info['storage'] 	= jQuery('select#snapshot-destination-storage').val();
 		if (destination_info['storage'] == null)
@@ -137,6 +151,14 @@ jQuery(document).ready( function($) {
 		destination_info['region-other'] 	= jQuery('input#snapshot-destination-region-other').val();
 		if (destination_info['region-other'] == null)
 			destination_info['region-other'] = '';
+
+		destination_info['region-non-aws-host'] 	= jQuery('input#snapshot-destination-region-non-aws-host').val();
+		if (destination_info['region-non-aws-host'] == null)
+			destination_info['region-non-aws-host'] = '';
+
+		destination_info['region-non-aws-region'] 	= jQuery('input#snapshot-destination-region-non-aws-region').val();
+		if (destination_info['region-non-aws-region'] == null)
+			destination_info['region-non-aws-region'] = '';
 
 		if (jQuery('span#snapshot-destination-bucket-display').is(':visible')) {
 			destination_info['bucket'] 		= jQuery('span#snapshot-destination-bucket-display').html();

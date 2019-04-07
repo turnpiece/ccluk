@@ -25,7 +25,7 @@
 	$total = 0;
 	foreach ( $fields as $type => $field ) :
 		$total = $total + $field['value'];
-	?>
+		?>
 		<div class="table-row" data-type="<?php echo esc_attr( $type ); ?>">
 			<div>
 				<?php echo esc_html( $field['title'] ); ?>
@@ -38,7 +38,7 @@
 				<span class="spinner standalone"></span>
 				<i class="sui-icon-loader sui-loading sui-hidden" aria-hidden="true"></i>
 				<a id="wphb-db-row-delete"
-				   class="wphb-db-row-delete sui-tooltip sui-tooltip-top-left"
+				   class="wphb-db-row-delete sui-tooltip sui-tooltip-top-right"
 				   data-tooltip="<?php esc_attr_e( 'Delete entries', 'wphb' ); ?>"
 				   data-type="<?php echo esc_attr( $type ); ?>"
 				   data-entries="<?php echo absint( $field['value'] ); ?>">

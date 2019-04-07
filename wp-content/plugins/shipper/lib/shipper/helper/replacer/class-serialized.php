@@ -27,6 +27,13 @@ class Shipper_Helper_Replacer_Serialized extends Shipper_Helper_Replacer {
 	private $_key;
 
 	/**
+	 * Whether the replacement is to take place
+	 *
+	 * @var bool
+	 */
+	private $_is_passthrough = false;
+
+	/**
 	 * Constructor
 	 *
 	 * Optionally sets table context.
@@ -61,7 +68,18 @@ class Shipper_Helper_Replacer_Serialized extends Shipper_Helper_Replacer {
 	 * @return string
 	 */
 	public function transform( $source ) {
+		if ( $this->is_passthrough() ) {
+			return $source;
+		}
 		return maybe_serialize( $this->transform_serialized( $source, 0 ) );
+	}
+
+	public function set_passthrough( $is_passthrough ) {
+		$this->_is_passthrough = (bool) $is_passthrough;
+	}
+
+	public function is_passthrough() {
+		return (bool)$this->_is_passthrough;
 	}
 
 	/**
@@ -90,7 +108,6 @@ class Shipper_Helper_Replacer_Serialized extends Shipper_Helper_Replacer {
 		if ( ! empty( $this->_key ) && 'users' === $this->get_bare_tablename() ) {
 			$skip_keys = array(
 				'user_login',
-				'user_email',
 				'display_name',
 			);
 			if ( in_array( $this->_key, $skip_keys ) ) {

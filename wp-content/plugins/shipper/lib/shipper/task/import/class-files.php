@@ -212,6 +212,9 @@ class Shipper_Task_Import_Files extends Shipper_Task_Import {
 		$sources = array();
 		$queue_size = 0;
 		foreach ( $statements as $data ) {
+			if ( empty( $data ) ) { continue; }
+			if ( empty( $data['destination'] ) ) { continue; }
+
 			$cmd = $this->get_download_file_command( $data['destination'] );
 			if ( $cmd ) {
 				$batch[] = $cmd;

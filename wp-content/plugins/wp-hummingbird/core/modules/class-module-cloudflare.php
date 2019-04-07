@@ -50,10 +50,13 @@ class WP_Hummingbird_Module_Cloudflare extends WP_Hummingbird_Module {
 
 		$is_cloudflare = false;
 		if ( ! is_numeric( $is_cloudflare_db ) || $force ) {
-			$url = add_query_arg( 'wphb-check-cf', 'true', home_url() );
-			$head = wp_remote_head( $url, array(
-				'sslverify' => false,
-			) );
+			$url  = add_query_arg( 'wphb-check-cf', 'true', home_url() );
+			$head = wp_remote_head(
+				$url,
+				array(
+					'sslverify' => false,
+				)
+			);
 
 			if ( ! is_wp_error( $head ) ) {
 				$headers = wp_remote_retrieve_headers( $head );
@@ -147,7 +150,7 @@ class WP_Hummingbird_Module_Cloudflare extends WP_Hummingbird_Module {
 		}
 
 		$options = $this->get_options();
-		$api = WP_Hummingbird_Utils::get_api();
+		$api     = WP_Hummingbird_Utils::get_api();
 
 		$api->cloudflare->set_auth_email( $options['email'] );
 		$api->cloudflare->set_auth_key( $options['api_key'] );
@@ -203,7 +206,7 @@ class WP_Hummingbird_Module_Cloudflare extends WP_Hummingbird_Module {
 		$actions = self::page_rule_actions( $expirations[ $filetype ] );
 
 		$options = $this->get_options();
-		$api = WP_Hummingbird_Utils::get_api();
+		$api     = WP_Hummingbird_Utils::get_api();
 		$api->cloudflare->set_auth_email( $options['email'] );
 		$api->cloudflare->set_auth_key( $options['api_key'] );
 
@@ -226,7 +229,7 @@ class WP_Hummingbird_Module_Cloudflare extends WP_Hummingbird_Module {
 	private function get_filetypes_expirations() {
 		$options = $this->get_options();
 
-		$expirations = array();
+		$expirations  = array();
 		$_expirations = array(
 			'css'  => $options['expiry_css'],
 			'js'   => $options['expiry_javascript'],
@@ -306,7 +309,7 @@ class WP_Hummingbird_Module_Cloudflare extends WP_Hummingbird_Module {
 	 * @param string $filetype  File type.
 	 */
 	private function register_caching_page_rule( $id, $filetype ) {
-		$options = $this->get_options();
+		$options                            = $this->get_options();
 		$options['page_rules'][ $filetype ] = $id;
 		$this->update_options( $options );
 	}
@@ -362,7 +365,7 @@ class WP_Hummingbird_Module_Cloudflare extends WP_Hummingbird_Module {
 			return $zones;
 		}
 		$options = $this->get_options();
-		$api = WP_Hummingbird_Utils::get_api();
+		$api     = WP_Hummingbird_Utils::get_api();
 		$api->cloudflare->set_auth_email( $options['email'] );
 		$api->cloudflare->set_auth_key( $options['api_key'] );
 		$result = $api->cloudflare->get_zones_list( $page );
@@ -394,7 +397,7 @@ class WP_Hummingbird_Module_Cloudflare extends WP_Hummingbird_Module {
 	 */
 	private function get_page_rules_list() {
 		$options = $this->get_options();
-		$api = WP_Hummingbird_Utils::get_api();
+		$api     = WP_Hummingbird_Utils::get_api();
 		$api->cloudflare->set_auth_email( $options['email'] );
 		$api->cloudflare->set_auth_key( $options['api_key'] );
 
@@ -415,7 +418,7 @@ class WP_Hummingbird_Module_Cloudflare extends WP_Hummingbird_Module {
 	 */
 	public function set_caching_expiration( $value ) {
 		$options = $this->get_options();
-		$api = WP_Hummingbird_Utils::get_api();
+		$api     = WP_Hummingbird_Utils::get_api();
 		$api->cloudflare->set_auth_email( $options['email'] );
 		$api->cloudflare->set_auth_key( $options['api_key'] );
 
@@ -463,7 +466,7 @@ class WP_Hummingbird_Module_Cloudflare extends WP_Hummingbird_Module {
 	 */
 	public function clear_cache() {
 		$options = $this->get_options();
-		$api = WP_Hummingbird_Utils::get_api();
+		$api     = WP_Hummingbird_Utils::get_api();
 		$api->cloudflare->set_auth_email( $options['email'] );
 		$api->cloudflare->set_auth_key( $options['api_key'] );
 		$result = $api->cloudflare->purge_cache( $options['zone'] );

@@ -77,6 +77,62 @@
                 $creds = $("form#managed-backup-restore .request-filesystem-credentials-form input"),
                 $security = $("form#managed-backup-restore :hidden#snapshot-ajax-nonce"),
                 rq = {},
+				perform_auth_check = function ( request ) {
+					window._snapshot_last_request = request;
+					$( document ).on(
+						'heartbeat-tick.wp-auth-check',
+						check_auth_context
+					);
+					if ( ( ( wp || {} ).heartbeat || {} ).connectNow ) {
+						wp.heartbeat.connectNow();
+						return true;
+					}
+					return false;
+				},
+				clear_auth_context_check_and_continue = function () {
+					$( document ).off(
+						'heartbeat-tick.wp-auth-check',
+						check_auth_context
+					);
+					var request = window._snapshot_last_request,
+						url = window.location.pathname + '?page=snapshot_pro_managed_backups';
+
+					// New auth context - exchange nonces before continuing.
+					$.get( url, function ( data ) {
+						var $nonce = $( data ).find( '#snapshot-ajax-nonce' ),
+							nonce = $nonce.val();
+						$security.val( nonce );
+						request.security = nonce;
+						callback( request );
+					} );
+				},
+				check_auth_context = function ( event, data ) {
+					// Did we just get logged out?
+					if ( ! ( 'wp-auth-check' in data ) ) {
+						return false;
+					}
+					if (data['wp-auth-check']) {
+						return true;
+					}
+
+					var parent = window,
+						$root = $( '#wp-auth-check-wrap' ),
+						$iframe = $root.find( 'iframe' )
+					;
+					// Handle the login popup.
+					if ( $root.length && !$root.is( '.snapshot-bound' ) && $iframe.length ) {
+						$root.addClass( 'snapshot-bound' );
+						$iframe.on( 'load', function() {
+							var $body = $( this ).contents().find( 'body' );
+							if ( $body.is( '.interim-login-success' ) ) {
+								setTimeout( function() {
+									clear_auth_context_check_and_continue();
+									$root.removeClass( 'snapshot-bound' );
+								} );
+							}
+						});
+					}
+				},
                 callback = function (request) {
                     request.action = "snapshot-full_backup-restore";
                     $.post(ajaxurl, request, function () {}, 'json')
@@ -100,6 +156,11 @@
                             }
                         })
                         .fail(function () {
+							if ( perform_auth_check( request ) ) {
+								// Let's first try to see if we got logged out.
+								// If so, we might be able to handle that.
+								return;
+							}
                             prm.resolve();
                             $('#wps-build-error').removeClass('hidden').find('.wps-auth-message p').html("Restoration failed");
                             $(".wpmud-box-title .wps-title-result").removeClass('hidden');

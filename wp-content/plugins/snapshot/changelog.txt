@@ -5,6 +5,21 @@ Change Log:
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
 
+3.2.0.3
+----------------------------------------------------------------------
+- Fix: Exporting doesn't respect the NULL in table schema
+- Improve: Add option to cover S3-compatible storage destinations
+- Fix: Managed backups restoration fails when reaching the usermeta table
+- Fix: Issues at media when restoring a regular snapshot in a different site
+- Fix: Deal with RIPS issues
+- Improve: Change the icon for local backups on Dashboard managed backup listing
+- Improve: Change the tooltip to equal padding
+- Fix: Offset option not showing for Weekly / Monthly Schedule at new backup page
+- Improvement: Remove activation tooltips
+- Fix: Managed backup restore is failing if previously there was a regular snapshot restore
+- Fix: Issue with Managed backup Frequency options
+
+
 3.2.0.2
 ----------------------------------------------------------------------
 - Fix: Files not cleaned up after restore with Snapshots
@@ -571,4 +586,4 @@ http://premium.wpmudev.org/forums/topic/need-to-turn-off-zlib-compression-for-it
 - Initial stable release
 
 
-87274-1550006971-au
+87274-1554644954-au

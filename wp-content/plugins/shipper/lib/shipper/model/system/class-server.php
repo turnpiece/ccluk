@@ -18,6 +18,8 @@ class Shipper_Model_System_Server extends Shipper_Model {
 	const TEMP_DIR = 'temp_directory';
 	const LOG_DIR = 'log_directory';
 
+	const ACCESS_PROTECTED = 'access_protected';
+
 	const SRV_APACHE = 'apache';
 	const SRV_IIS = 'microsoft-iis';
 	const SRV_NGINX = 'nginx';
@@ -54,6 +56,21 @@ class Shipper_Model_System_Server extends Shipper_Model {
 		$this->set( self::OS, ( ! empty( $os ) ? $os : 'unknown' ) );
 
 		$this->populate_server_paths_info();
+
+		$this->check_password_protection();
+	}
+
+	/**
+	 * Checks for password protection on AJAX endpoint
+	 */
+	public function check_password_protection() {
+		$resp = wp_remote_head(admin_url( 'admin-ajax.php' ), array(
+			'timeout' => 1,
+		));
+		$code = (int) wp_remote_retrieve_response_code( $resp );
+
+		$protected = 401 === $code;
+		$this->set( self::ACCESS_PROTECTED, $protected );
 	}
 
 	/**

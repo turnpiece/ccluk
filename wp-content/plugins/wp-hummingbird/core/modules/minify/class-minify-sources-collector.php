@@ -68,7 +68,7 @@ class WP_Hummingbird_Sources_Collector {
 			return;
 		}
 
-		$this->collection_updated = true;
+		$this->collection_updated                          = true;
 		$this->collected[ $type ][ $registered['handle'] ] = $registered;
 	}
 

@@ -36,10 +36,27 @@ class Shipper_Task_Export_Upload extends Shipper_Task_Export {
 
 		$batch = array();
 
-		$statements = $dumped->get_statements( $pos, 25 );
+		/**
+		 * Number of file statements to upload in one step
+		 *
+		 * @since v1.0.1
+		 *
+		 * @param int $limit Maximum number of files.
+		 *
+		 * @return int
+		 */
+		$max_statements = (int) apply_filters(
+			'shipper_export_max_upload_statements',
+			10
+		);
+		$statements = $dumped->get_statements( $pos, $max_statements );
 		foreach ( $statements as $data ) {
 			$destination = trailingslashit( $dest_root ) . $data['destination'];
-			$batch[] = $remote->get_upload_command( $data['source'], $destination );
+			$cmd = $remote->get_upload_command( $data['source'], $destination );
+			if ( ! empty( $cmd ) ) {
+				// Only add to batch if we were able to create the upload command.
+				$batch[] = $cmd;
+			}
 		}
 
 		if ( ! empty( $batch ) ) {
@@ -140,7 +157,7 @@ class Shipper_Task_Export_Upload extends Shipper_Task_Export {
 		return true;
 	}
 
-	public function get_total_files( $dumped=false ) {
+	public function get_total_files( $dumped = false ) {
 		if ( empty( $dumped ) ) {
 			$dumped = new Shipper_Model_Dumped_Filelist;
 		}

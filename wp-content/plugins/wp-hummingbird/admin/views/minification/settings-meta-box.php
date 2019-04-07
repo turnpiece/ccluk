@@ -27,8 +27,13 @@
 			<input type="text" class="sui-form-control" name="file_path" id="file_path" placeholder="/wp-content/uploads/hummingbird-assets/" value="<?php echo esc_attr( $file_path ); ?>">
 		</label>
 		<span class="sui-description">
-			<?php esc_html_e( 'Leave this blank to use the default folder, or define your own as a relative path.
-			Note: changing the directory will clear out al the generated assets.', 'wphb' ); ?>
+			<?php
+			esc_html_e(
+				'Leave this blank to use the default folder, or define your own as a relative path.
+			Note: changing the directory will clear out al the generated assets.',
+				'wphb'
+			);
+			?>
 		</span>
 	</div>
 </div>
@@ -45,7 +50,7 @@
 		<?php if ( $is_member ) : ?>
 			<span class="sui-tag sui-tag-disabled"><?php esc_html_e( 'Auto-enabled', 'wphb' ); ?></span>
 		<?php else : ?>
-			<label class="sui-toggle sui-tooltip sui-tooltip-top-left" data-tooltip="<?php esc_html_e( 'Enable Super-minify my files', 'wphb' ); ?>">
+			<label class="sui-toggle sui-tooltip sui-tooltip-top-right" data-tooltip="<?php esc_html_e( 'Enable Super-minify my files', 'wphb' ); ?>">
 				<input type="checkbox" name="super_minify_files" id="super_minify_files" disabled>
 				<span class="sui-toggle-slider"></span>
 			</label>
@@ -63,15 +68,20 @@
 			</span>
 		</div>
 		<div class="sui-box-settings-col-2">
-			<label class="sui-toggle sui-tooltip sui-tooltip-top-left" data-tooltip="<?php esc_html_e( 'Enable WPMU DEV CDN', 'wphb' ); ?>">
+			<label class="sui-toggle sui-tooltip sui-tooltip-top-right" data-tooltip="<?php esc_html_e( 'Enable WPMU DEV CDN', 'wphb' ); ?>">
 				<input type="checkbox" name="use_cdn" id="use_cdn" <?php checked( $cdn_status && $is_member ); ?> <?php disabled( ! $is_member ); ?>>
 				<span class="sui-toggle-slider"></span>
 			</label>
 			<label for="use_cdn"><?php esc_html_e( 'Host my files on the WPMU DEV CDN', 'wphb' ); ?></label>
 			<span class="sui-description sui-toggle-description">
-				<?php esc_html_e( 'Enabling this setting will serve your CSS, JS and other compatible files from
+				<?php
+				esc_html_e(
+					'Enabling this setting will serve your CSS, JS and other compatible files from
 				our external CDN, effectively taking the load off your server so that pages load faster for
-				your visitors.', 'wphb' ); ?>
+				your visitors.',
+					'wphb'
+				);
+				?>
 			</span>
 		</div>
 	</div>
@@ -109,19 +119,21 @@
 			 alt="<?php esc_attr_e( 'WP Smush free installed', 'wphb' ); ?>">
 		<div class="sui-upsell-notice">
 			<p>
-				<?php printf(
+				<?php
+				printf(
 					/* translators: %s: upsell modal href link */
 					__( "With our pro version of Hummingbird you can super-compress your files and then host them on our blazing fast CDN. You'll get Hummingbird Pro plus 100+ WPMU DEV plugins & 24/7 WP support.  <a href='%s' target='_blank'>Try Pro for FREE today!</a>", 'wphb' ),
 					WP_Hummingbird_Utils::get_link( 'plugin', 'hummingbird_assetoptimization_settings_upsell_link' )
-				); ?>
+				);
+				?>
 			</p>
 		</div>
 	</div><!-- end sui-upsell-row -->
-<?php
+	<?php
 endif;
 
 if ( ! is_multisite() ) :
-?>
+	?>
 	<div class="sui-box-settings-row">
 		<div class="sui-box-settings-col-1">
 			<span class="sui-settings-label"><?php esc_html_e( 'Debug', 'wphb' ); ?></span>
@@ -130,14 +142,19 @@ if ( ! is_multisite() ) :
 			</span>
 		</div>
 		<div class="sui-box-settings-col-2">
-			<label class="sui-toggle sui-tooltip sui-tooltip-top-left" data-tooltip="<?php esc_html_e( 'Enable debug log', 'wphb' ); ?>">
+			<label class="sui-toggle sui-tooltip sui-tooltip-top-right" data-tooltip="<?php esc_html_e( 'Enable debug log', 'wphb' ); ?>">
 				<input type="checkbox" name="debug_log" id="debug_log" <?php checked( $logging ); ?>>
 				<span class="sui-toggle-slider"></span>
 			</label>
 			<label for="debug_log"><?php esc_html_e( 'Enable debug log', 'wphb' ); ?></label>
 			<div class="sui-description sui-toggle-description sui-border-frame with-padding wphb-logging-box <?php echo $logging ? '' : 'sui-hidden'; ?>">
-				<?php esc_html_e( 'Debug logging is active. Logs are stored for 30 days, you can download the
-				log file below.', 'wphb' ); ?>
+				<?php
+				esc_html_e(
+					'Debug logging is active. Logs are stored for 30 days, you can download the
+				log file below.',
+					'wphb'
+				);
+				?>
 
 				<div class="wphb-logging-buttons">
 					<a href="<?php echo esc_url( $download_url ); ?>" class="sui-button sui-button-ghost" <?php disabled( ! $logs_link, true ); ?>>
@@ -151,7 +168,7 @@ if ( ! is_multisite() ) :
 				</div>
 
 				<?php if ( $logs_link ) : ?>
-					<a href="<?php echo esc_url( $logs_link ) ?>" target="_blank"><?php echo esc_url( $logs_link ) ?></a>
+					<a href="<?php echo esc_url( $logs_link ); ?>" target="_blank"><?php echo esc_url( $logs_link ); ?></a>
 				<?php endif; ?>
 			</div>
 		</div>

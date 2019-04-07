@@ -11,7 +11,6 @@ import Fetcher from './utils/fetcher';
         init: function () {
 
             let self = this;
-            let body = $('body');
 
 			/** @var {array} wphbPerformanceStrings */
             if (wphbPerformanceStrings) {
@@ -39,26 +38,8 @@ import Fetcher from './utils/fetcher';
                 }
             }
 
-            // Save report settings
-            body.on('submit', '.scan-frm', function (e) {
-                e.preventDefault();
-                let that = $(this);
-
-                that.find('.button').attr('disabled', 'disabled');
-
-                Fetcher.common.saveReportsSettings( self.module, $(this).serialize() )
-                    .then( ( response ) => {
-						if ( 'undefined' !== typeof response && response.success ) {
-							that.find('.button').removeAttr('disabled');
-							WPHB_Admin.notices.show( 'wphb-ajax-update-notice', true );
-						} else {
-							WPHB_Admin.notices.show( 'wphb-ajax-update-notice', true, 'error', wphb.strings.errorSettingsUpdate  );
-						}
-                    });
-            });
-
             // Save performance test settings
-            body.on('submit', '.settings-frm', function (e) {
+            $('body').on('submit', '.settings-frm', function (e) {
                 e.preventDefault();
                 const form_data = $(this).serialize();
 

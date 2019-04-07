@@ -294,7 +294,7 @@ $model = new Snapshot_Model_Full_Backup();
 
 														$backup_type_tooltip = '';
 														if ( Snapshot_Helper_Backup::is_automated_backup( $backup['name'] ) ) {
-															$backup_type_class = 'wps-typecon automated';
+															$backup_type_class = 'i-cloud-automate';
 														} else {
 															$backup_type_class = 'i-cloud-upload';
 														}

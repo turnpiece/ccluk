@@ -5,6 +5,10 @@
  * @package WP_Smush
  */
 
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
+
 ?>
 
 <div class="sui-dialog wp-smush-progress-dialog" aria-hidden="true" id="wp-smush-progress-dialog">
@@ -37,7 +41,7 @@
 								the free version. Upgrade to Pro to smush unlimited images, or click resume to
 								smush another 50 attachments.",
 							'wp-smushit'
-						);				 	          			 
+						);
 						?>
 					</p>
 				</div>

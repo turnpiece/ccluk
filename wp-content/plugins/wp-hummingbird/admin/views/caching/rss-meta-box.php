@@ -11,9 +11,14 @@
 ?>
 
 <p>
-	<?php esc_html_e( 'By default, WordPress will cache your RSS feeds to reduce the load on
+	<?php
+	esc_html_e(
+		'By default, WordPress will cache your RSS feeds to reduce the load on
 	your server – which is a great feature. Hummingbird gives you control over the expiry time, or
-	you can disable it all together.', 'wphb' ); ?>
+	you can disable it all together.',
+		'wphb'
+	);
+	?>
 </p>
 
 <div class="sui-box-settings-row">
@@ -28,8 +33,13 @@
 	<div class="sui-box-settings-col-1">
 		<span class="sui-settings-label"><?php esc_html_e( 'Expiry time', 'wphb' ); ?></span>
 		<span class="sui-description">
-			<?php esc_html_e( 'Choose the length of time you want WordPress to cache your RSS feed
-			for. The longer you cache it for, the less load on your server.', 'wphb' ); ?>
+			<?php
+			esc_html_e(
+				'Choose the length of time you want WordPress to cache your RSS feed
+			for. The longer you cache it for, the less load on your server.',
+				'wphb'
+			);
+			?>
 		</span>
 	</div>
 	<div class="sui-box-settings-col-2">

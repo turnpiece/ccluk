@@ -23,6 +23,10 @@
  * ╚══════╝╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	die( 'Kangaroos cannot jump here' );
+}
+
 class Ai1wm_Extractor extends Ai1wm_Archiver {
 
 	/**
@@ -146,19 +150,20 @@ class Ai1wm_Extractor extends Ai1wm_Archiver {
 	/**
 	 * Extract one file to location
 	 *
-	 * @param string $location     Destination path
-	 * @param array  $exclude      Files to exclude
-	 * @param array  $old_paths    Old replace paths
-	 * @param array  $new_paths    New replace paths
-	 * @param int    $file_written File written (in bytes)
-	 * @param int    $file_offset  File offset (in bytes)
+	 * @param string $location           Destination path
+	 * @param array  $exclude_files      Exclude files by name
+	 * @param array  $exclude_extensions Exclude files by extension
+	 * @param array  $old_paths          Old replace paths
+	 * @param array  $new_paths          New replace paths
+	 * @param int    $file_written       File written (in bytes)
+	 * @param int    $file_offset        File offset (in bytes)
 	 *
 	 * @throws \Ai1wm_Not_Directory_Exception
 	 * @throws \Ai1wm_Not_Seekable_Exception
 	 *
 	 * @return bool
 	 */
-	public function extract_one_file_to( $location, $exclude = array(), $old_paths = array(), $new_paths = array(), &$file_written = 0, &$file_offset = 0 ) {
+	public function extract_one_file_to( $location, $exclude_files = array(), $exclude_extensions = array(), $old_paths = array(), $new_paths = array(), &$file_written = 0, &$file_offset = 0 ) {
 		if ( false === is_dir( $location ) ) {
 			throw new Ai1wm_Not_Directory_Exception( sprintf( 'Location is not a directory: %s', $location ) );
 		}
@@ -208,9 +213,17 @@ class Ai1wm_Extractor extends Ai1wm_Archiver {
 					// Set should exclude file
 					$should_exclude_file = false;
 
-					// Should we skip this file?
-					for ( $i = 0; $i < count( $exclude ); $i++ ) {
-						if ( strpos( $file_name . DIRECTORY_SEPARATOR, $exclude[ $i ] . DIRECTORY_SEPARATOR ) === 0 ) {
+					// Should we skip this file by name?
+					for ( $i = 0; $i < count( $exclude_files ); $i++ ) {
+						if ( strpos( $file_name . DIRECTORY_SEPARATOR, $exclude_files[ $i ] . DIRECTORY_SEPARATOR ) === 0 ) {
+							$should_exclude_file = true;
+							break;
+						}
+					}
+
+					// Should we skip this file by extension?
+					for ( $i = 0; $i < count( $exclude_extensions ); $i++ ) {
+						if ( strrpos( $file_name, $exclude_extensions[ $i ] ) === strlen( $file_name ) - strlen( $exclude_extensions[ $i ] ) ) {
 							$should_exclude_file = true;
 							break;
 						}
@@ -262,18 +275,19 @@ class Ai1wm_Extractor extends Ai1wm_Archiver {
 	/**
 	 * Extract specific files from archive
 	 *
-	 * @param string $location     Location where to extract files
-	 * @param array  $files        Files to extract
-	 * @param array  $exclude      Files to exclude
-	 * @param int    $file_written File written (in bytes)
-	 * @param int    $file_offset  File offset (in bytes)
+	 * @param string $location           Location where to extract files
+	 * @param array  $include_files      Include files by name
+	 * @param array  $exclude_files      Exclude files by name
+	 * @param array  $exclude_extensions Exclude files by extension
+	 * @param int    $file_written       File written (in bytes)
+	 * @param int    $file_offset        File offset (in bytes)
 	 *
 	 * @throws \Ai1wm_Not_Directory_Exception
 	 * @throws \Ai1wm_Not_Seekable_Exception
 	 *
 	 * @return bool
 	 */
-	public function extract_by_files_array( $location, $files = array(), $exclude = array(), &$file_written = 0, &$file_offset = 0 ) {
+	public function extract_by_files_array( $location, $include_files = array(), $exclude_files = array(), $exclude_extensions = array(), &$file_written = 0, &$file_offset = 0 ) {
 		if ( false === is_dir( $location ) ) {
 			throw new Ai1wm_Not_Directory_Exception( sprintf( 'Location is not a directory: %s', $location ) );
 		}
@@ -326,17 +340,25 @@ class Ai1wm_Extractor extends Ai1wm_Archiver {
 					// Set should include file
 					$should_include_file = false;
 
-					// Should we extract this file?
-					for ( $i = 0; $i < count( $files ); $i++ ) {
-						if ( strpos( $file_name . DIRECTORY_SEPARATOR, $files[ $i ] . DIRECTORY_SEPARATOR ) === 0 ) {
+					// Should we extract this file by name?
+					for ( $i = 0; $i < count( $include_files ); $i++ ) {
+						if ( strpos( $file_name . DIRECTORY_SEPARATOR, $include_files[ $i ] . DIRECTORY_SEPARATOR ) === 0 ) {
 							$should_include_file = true;
 							break;
 						}
 					}
 
-					// Should we skip this file?
-					for ( $i = 0; $i < count( $exclude ); $i++ ) {
-						if ( strpos( $file_name . DIRECTORY_SEPARATOR, $exclude[ $i ] . DIRECTORY_SEPARATOR ) === 0 ) {
+					// Should we skip this file name?
+					for ( $i = 0; $i < count( $exclude_files ); $i++ ) {
+						if ( strpos( $file_name . DIRECTORY_SEPARATOR, $exclude_files[ $i ] . DIRECTORY_SEPARATOR ) === 0 ) {
+							$should_include_file = false;
+							break;
+						}
+					}
+
+					// Should we skip this file by extension?
+					for ( $i = 0; $i < count( $exclude_extensions ); $i++ ) {
+						if ( strrpos( $file_name, $exclude_extensions[ $i ] ) === strlen( $file_name ) - strlen( $exclude_extensions[ $i ] ) ) {
 							$should_include_file = false;
 							break;
 						}

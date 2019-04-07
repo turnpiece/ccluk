@@ -401,6 +401,14 @@ class Shipper_Controller_Admin extends Shipper_Controller {
 				Shipper_Model_Stored_Options::KEY_UPLOADS,
 				! empty( $_POST[ $tool ][ Shipper_Model_Stored_Options::KEY_UPLOADS ] )
 			);
+			$model->set(
+				Shipper_Model_Stored_Options::KEY_SKIPCONFIG,
+				! empty( $_POST[ $tool ][ Shipper_Model_Stored_Options::KEY_SKIPCONFIG ] )
+			);
+			$model->set(
+				Shipper_Model_Stored_Options::KEY_SKIPEMAILS,
+				! empty( $_POST[ $tool ][ Shipper_Model_Stored_Options::KEY_SKIPEMAILS ] )
+			);
 		}
 
 		if ( 'pagination' === $tool ) {

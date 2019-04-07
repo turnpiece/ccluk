@@ -215,6 +215,30 @@ $this->render(
 													<?php } ?>
 												</select>
 
+												<select id="offset-weekly" class="offset weekly" name="offset" <?php echo esc_attr( $disabled ); ?> >
+													<?php
+													$wday_selected = empty($cron_disabled)
+														? $model->get_offset_base()
+														: rand(0, 6)
+													;
+													?>
+													<?php foreach ( $model->get_offsets('weekly') as $wday => $label ) { ?>
+														<option
+																value="<?php echo esc_attr( $wday ); ?>"
+															<?php selected( $wday, $wday_selected ); ?>
+														><?php echo esc_html($label); ?></option>
+													<?php } ?>
+												</select>
+
+												<select id="offset-monthly" class="offset monthly" name="offset" <?php echo esc_attr( $disabled ); ?> >
+													<?php foreach ( $model->get_offsets('monthly') as $wday => $label ) { ?>
+														<option
+																value="<?php echo esc_attr( $wday ); ?>"
+															<?php selected( $wday, $model->get_offset_base() ); ?>
+														><?php echo esc_html($label); ?></option>
+													<?php } ?>
+												</select>
+
 												<select id="schedule_time" name="schedule_time" <?php echo esc_attr( $disabled ); ?> >
 													<?php foreach ( $model->get_schedule_times() as $key => $label ) { ?>
 														<option

@@ -5,7 +5,7 @@ Support Website: http://smashballoon/custom-twitter-feeds/
 Tags: Twitter, Twitter feed, Tweets, Twitter widget, Custom Twitter Feed
 Requires at least: 3.0
 Tested up to: 5.1
-Stable tag: 1.2.11
+Stable tag: 1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -237,6 +237,11 @@ Not many developers love providing support, but we're a rare breed here at Smash
 7. To display a feed just copy and paste the shortcode into a widget or page
 
 == Changelog ==
+= 1.3 =
+* New: You can now choose to only display a certain amount of text characters in your Tweets, with a clickable link to display the rest. This is set to be 280 characters by default, but can be changed by using the following setting: Customize > Style > Tweet Text > Text Length, or by using the "textlength" shortcode setting.
+* Tweak: Twitter intents JavaScript not loaded on the page if tweet actions are removed
+* Fix: Removed target="_blank" from div element
+
 = 1.2.11 =
 * Fix: Quoted tweets would not display if saving settings on the "Customize tab". After updating, Enable "Quoted tweet box" in the "Show/Hide" section to display quoted tweets
 * Fix: Fixed PHP warning caused by trying to count a boolean in certain circumstances

@@ -17,7 +17,8 @@
 		<a href="<?php echo esc_url( $scan_link ); ?>" class="sui-button sui-button-primary">
 			<?php esc_html_e( 'Run Test', 'wphb' ); ?>
 		</a>
-	<?php else :
+		<?php
+	else :
 		$tooltip = sprintf(
 			/* translators: %d: number of minutes. */
 			_n(
@@ -28,7 +29,7 @@
 			),
 			number_format_i18n( $can_run_scan )
 		);
-	?>
+		?>
 		<span class="sui-tooltip sui-tooltip-constrained" data-tooltip="<?php echo esc_attr( $tooltip ); ?>">
 			<a href="#" class="sui-button sui-button-primary" aria-hidden="true" disabled="disabled">
 				<?php esc_html_e( 'Run Test', 'wphb' ); ?>

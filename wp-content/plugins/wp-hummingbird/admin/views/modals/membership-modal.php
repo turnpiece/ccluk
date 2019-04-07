@@ -1,23 +1,30 @@
+<?php
+/**
+ * Membership modal.
+ *
+ * @package Hummingbird
+ */
+
+?>
+
 <div class="dialog sui-dialog" aria-hidden="true" id="wphb-upgrade-membership-modal">
 
 	<div class="sui-dialog-overlay" data-a11y-dialog-hide tabindex="-1"></div>
 
-	<div class="sui-dialog-content" aria-labelledby="upgradeMembership" aria-describedby="dialogDescription"
-		 role="dialog">
+	<div class="sui-dialog-content" aria-labelledby="upgradeMembership" aria-describedby="dialogDescription" role="dialog">
 
-		<div class="sui-box sui-no-margin-bottom" role="document">
+		<div class="sui-box" role="document">
 
 			<div class="sui-box-header">
 				<h3 class="sui-box-title" id="upgradeMembership">
 					<?php esc_html_e( 'Upgrade Membership', 'wphb' ); ?>
 				</h3>
 				<div class="sui-actions-right">
-					<button data-a11y-dialog-hide class="sui-dialog-close"
-							aria-label="Close this dialog window"></button>
+					<button data-a11y-dialog-hide class="sui-dialog-close" aria-label="Close this dialog window"></button>
 				</div>
 			</div>
 
-			<div class="sui-box-body sui-no-padding-bottom">
+			<div class="sui-box-body">
 				<p><?php esc_html_e( "Here's what you'll get by upgrading to Hummingbird Pro.", 'wphb' ); ?></p>
 
 				<ul class="sui-listing wphb-listing">
@@ -42,22 +49,17 @@
 				<p class="sui-block-content-center"><?php esc_html_e( 'Get all of this, plus heaps more as part of a WPMU DEV membership.', 'wphb' ); ?></p>
 
 				<div class="sui-block-content-center">
-					<a target="_blank"
-					   href="<?php echo esc_url( WP_Hummingbird_Utils::get_link( 'plugin', 'hummingbird_footer_upgrade_button' ) ); ?>"
-					   class="sui-button sui-button-green sui-button-lg">
+					<a target="_blank" class="sui-button sui-button-green sui-button-lg"
+						href="<?php echo esc_url( WP_Hummingbird_Utils::get_link( 'plugin', 'hummingbird_footer_upgrade_button' ) ); ?>" >
 						<?php esc_html_e( 'Upgrade Membership', 'wphb' ); ?>
 					</a>
 				</div>
-
-				<div class="wphb-modal-image wphb-modal-image-bottom dev-man">
-					<img class="wphb-image wphb-image-center"
-						 src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/dev-team.png' ); ?>"
-						 srcset="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/dev-team@2x.png' ); ?> 2x"
-						 alt="<?php esc_attr_e( 'Hummingbird', 'wphb' ); ?>">
-				</div>
-
 			</div>
 
+			<img class="sui-image sui-image-center"
+				src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/dev-team.png' ); ?>"
+				srcset="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/dev-team@2x.png' ); ?> 2x"
+				alt="<?php esc_attr_e( 'Hummingbird', 'wphb' ); ?>">
 		</div>
 	</div>
 </div>

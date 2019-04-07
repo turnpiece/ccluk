@@ -27,6 +27,9 @@ class Shipper_Model_System_Php extends Shipper_Model {
 	 * Populates internal data structure
 	 */
 	public function __construct() {
+		// Call this first, to fill out the static vars.
+		$this->has_conflicting_dependencies();
+
 		$this->populate();
 	}
 
@@ -123,11 +126,68 @@ class Shipper_Model_System_Php extends Shipper_Model {
 		return $this->get( $key, $fallback );
 	}
 
+	/**
+	 * Checks whether we have our preferred SDK version supported
+	 *
+	 * Checks Suhosin extension presence, S3 client presence and AWS SDK version.
+	 *
+	 * @return bool
+	 */
 	public function get_aws_support_level() {
 		if ( $this->get( self::HAS_SUHOSIN ) ) {
 			// Yeah, we might be erroring out here.
 			return false;
 		}
+		if ( $this->has_conflicting_dependencies() ) {
+			// Yeah, so this won't work either.
+			return false;
+		}
+		return $this->has_proper_aws_sdk_version() && $this->has_aws_s3_client();
+	}
+
+	/**
+	 * Checks if dependencies other than actual AWS SDK have already been loaded.
+	 *
+	 * Most notably, GuzzleHttp.
+	 * Uses static variables and is being called right from the constructor.
+	 * This is because the dependencies can get loaded already (by us) in other checks.
+	 *
+	 * @return bool
+	 */
+	public function has_conflicting_dependencies() {
+		static $has_conflicts;
+		if ( ! isset( $has_conflicts ) ) {
+			$has_conflicts = is_callable( 'guzzlehttp\\uri_template' );
+		}
+		return $has_conflicts;
+	}
+
+	/**
+	 * Check whether we have proper AWS SDK version
+	 *
+	 * Returns false for older (2.x) SDK libraries.
+	 *
+	 * @return bool
+	 */
+	public function has_proper_aws_sdk_version() {
+		if ( class_exists( 'Aws\Common\Aws' ) ) {
+			// This is old SDK and should be enough to barf.
+			// Still, let's do the right thing and actually compare versions.
+			return (bool) version_compare(
+				Aws\Common\Aws::VERSION,
+				'3.0.0',
+				'gte'
+			);
+		}
+		return true;
+	}
+
+	/**
+	 * Check if we have (and can instantiate) an S3 client
+	 *
+	 * @return bool
+	 */
+	public function has_aws_s3_client() {
 		if ( ! class_exists( 'Aws\S3\S3Client' ) ) {
 			// Require external SDK just in time for this.
 			require_once( dirname( SHIPPER_PLUGIN_FILE ) . '/lib/aws/sdk-v3.phar' );

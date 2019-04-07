@@ -108,7 +108,7 @@ function apbct_base_call($params = array(), $reg_flag = false){
 	$ct->use_bultin_api = $apbct->settings['use_buitin_http_api'] ? true : false;
 	$ct->ssl_on         = $apbct->settings['ssl_on'];
 	$ct->ssl_path       = APBCT_CASERT_PATH;
-	$ct->server_url     = $apbct->settings['server'];
+	$ct->server_url     = $config['ct_work_url'];
 	$ct->server_ttl     = $config['ct_server_ttl'];
 	// Options store url without shceme because of DB error with ''://'
 	$ct->work_url       = preg_match('/http/', $config['ct_work_url']) ? $config['ct_work_url'] : 'http://'.$config['ct_work_url'];
@@ -182,6 +182,14 @@ function apbct_get_sender_info() {
 			: 0
 		: null;
 	
+	$site_referer = $apbct->settings['store_urls__sessions']
+			? apbct_alt_session__get('apbct_site_referer')
+			: (array)json_decode(filter_input(INPUT_COOKIE, 'apbct_site_referer'), true);
+	
+	$urls = $apbct->settings['store_urls__sessions']
+			? apbct_alt_session__get('apbct_urls')
+			: (array)json_decode(filter_input(INPUT_COOKIE, 'apbct_urls'), true);
+	
 	return array(
 		'remote_addr'            => CleantalkHelper::ip_get(array('remote_addr'), false),
         'REFFERRER'              => isset($_SERVER['HTTP_REFERER'])                                ? htmlspecialchars($_SERVER['HTTP_REFERER'])                        : null,
@@ -208,6 +216,8 @@ function apbct_get_sender_info() {
 		'form_visible_inputs'    => !empty($_COOKIE['apbct_visible_fields_count'])                 ? $_COOKIE['apbct_visible_fields_count']                            : null,
 		'apbct_visible_fields'   => !empty($_COOKIE['apbct_visible_fields'])                       ? apbct_visibile_fields__process($_COOKIE['apbct_visible_fields'])  : null,
 		// Misc
+		'site_referer'           => !empty($site_referer)                                          ? $site_referer                                                     : null,
+		'source_url'             => !empty($urls)                                                  ? json_encode($urls)                                                : null,
 		//'validate_email_existence' => $apbct->settings['validate_email_existence'],
 		// Debug stuff
 		'amp_detected'           => $amp_detected,
@@ -528,18 +538,33 @@ function ct_get_fields_any($arr, $message=array(), $email = null, $nickname = ar
    		if(@array_key_exists($value,$_GET)||@array_key_exists($value,$_POST))
    			$contact = false;
    	} unset($value);
-		
+	
 	if(count($arr)){
+		
 		foreach($arr as $key => $value){
-			
-			if(gettype($value)=='string'){
+						
+			if(gettype($value) == 'string'){
+				
 				$tmp = strpos($value, '\\') !== false ? stripslashes($value) : $value;
 				$decoded_json_value = json_decode($tmp, true);
-				if($decoded_json_value !== null)
+				
+				// Decoding JSON
+				if($decoded_json_value !== null){
 					$value = $decoded_json_value;
+					
+				// Ajax Contact Forms. Get data from such strings:
+					// acfw30_name %% Blocked~acfw30_email %% s@cleantalk.org
+					// acfw30_textarea %% msg
+				}elseif(preg_match('/^\S+\s%%\s\S+.+$/', $value)){
+					$value = explode('~', $value);
+					foreach ($value as &$val){
+						$tmp = explode(' %% ', $val);
+						$val = array($tmp[0] => $tmp[1]);
+					}
+				}
 			}
-			
-			if(!is_array($value) && !is_object($value) && @get_class($value)!='WP_User'){
+						
+			if(!is_array($value) && !is_object($value) && @get_class($value) != 'WP_User'){
 				
 				if (in_array($key, $skip_params, true) && $key != 0 && $key != '' || preg_match("/^ct_checkjs/", $key))
 					$contact = false;

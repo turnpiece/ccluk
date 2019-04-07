@@ -23,6 +23,10 @@
  * ╚══════╝╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	die( 'Kangaroos cannot jump here' );
+}
+
 class Ai1wm_Backups_Controller {
 
 	public static function index() {
@@ -31,9 +35,10 @@ class Ai1wm_Backups_Controller {
 		Ai1wm_Template::render(
 			'backups/index',
 			array(
-				'backups'  => $model->get_files(),
-				'username' => get_option( AI1WM_AUTH_USER ),
-				'password' => get_option( AI1WM_AUTH_PASSWORD ),
+				'backups'        => $model->get_files(),
+				'backups_labels' => get_option( AI1WM_BACKUPS_LABELS, array() ),
+				'username'       => get_option( AI1WM_AUTH_USER ),
+				'password'       => get_option( AI1WM_AUTH_PASSWORD ),
 			)
 		);
 	}
@@ -70,11 +75,51 @@ class Ai1wm_Backups_Controller {
 		try {
 			// Delete file
 			$model->delete_file( $archive );
+
+			$backups_labels = get_option( AI1WM_BACKUPS_LABELS, array() );
+
+			if ( isset( $backups_labels[ $params['archive'] ] ) ) {
+				unset( $backups_labels[ $params['archive'] ] );
+				update_option( AI1WM_BACKUPS_LABELS, $backups_labels );
+			}
 		} catch ( Exception $e ) {
 			$errors[] = $e->getMessage();
 		}
 
 		echo json_encode( array( 'errors' => $errors ) );
+		exit;
+	}
+
+	public static function add_label( $params = array() ) {
+		ai1wm_setup_environment();
+
+		$backups_labels = get_option( AI1WM_BACKUPS_LABELS, array() );
+
+		if ( empty( $params ) ) {
+			$params = stripslashes_deep( $_POST );
+		}
+
+		if ( empty( $params['backup_label'] ) ) {
+			unset( $backups_labels[ trim( $params['backup_name'] ) ] );
+
+			echo json_encode(
+				array(
+					'success' => update_option( AI1WM_BACKUPS_LABELS, $backups_labels ),
+					'label'   => $params['backup_label'],
+				)
+			);
+			exit;
+		}
+
+		echo json_encode(
+			array(
+				'success' => update_option(
+					AI1WM_BACKUPS_LABELS,
+					array_merge( $backups_labels, array( trim( $params['backup_name'] ) => trim( $params['backup_label'] ) ) )
+				),
+				'label'   => trim( $params['backup_label'] ),
+			)
+		);
 		exit;
 	}
 }

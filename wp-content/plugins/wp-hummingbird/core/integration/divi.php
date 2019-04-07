@@ -49,6 +49,7 @@ function wphb_et_maybe_exclude_divi_essential_scripts( $action, $handle, $type )
 
 	/**
 	 * Fixes issue, where background video is not loading with js error.
+	 *
 	 * @since 1.7.2
 	 */
 	if ( 'wp-mediaelement' === $handle ) {

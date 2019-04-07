@@ -10,8 +10,8 @@
  */
 
 ?>
+<p><?php esc_html_e( 'Hummingbird stores static HTML copies of your pages and posts to decrease page load time.', 'wphb' ); ?></p>
 <div class="sui-box-settings-row">
-	<p><?php esc_html_e( 'Hummingbird stores static HTML copies of your pages and posts to decrease page load time.', 'wphb' ); ?></p>
 
 	<?php if ( is_wp_error( $error ) ) : ?>
 		<div class="sui-notice sui-notice-error">

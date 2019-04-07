@@ -108,7 +108,7 @@ abstract class WP_Hummingbird_Admin_Page {
 	 * @return string
 	 */
 	public function view( $name, $args = array(), $echo = true ) {
-		$file = WPHB_DIR_PATH . "admin/views/{$name}.php";
+		$file    = WPHB_DIR_PATH . "admin/views/{$name}.php";
 		$content = '';
 
 		if ( is_file( $file ) ) {
@@ -117,12 +117,12 @@ abstract class WP_Hummingbird_Admin_Page {
 
 			if ( isset( $args['id'] ) ) {
 				$args['orig_id'] = $args['id'];
-				$args['id'] = str_replace( '/', '-', $args['id'] );
+				$args['id']      = str_replace( '/', '-', $args['id'] );
 			}
 			extract( $args );
 
 			/* @noinspection PhpIncludeInspection */
-			include( $file );
+			include $file;
 
 			$content = ob_get_clean();
 		}
@@ -165,7 +165,7 @@ abstract class WP_Hummingbird_Admin_Page {
 	 * @return String
 	 */
 	public function admin_body_class( $classes ) {
-		$classes .= ' sui-2-3-0 wpmud ';
+		$classes .= ' sui-2-3-10 wpmud ';
 
 		return $classes;
 	}
@@ -187,12 +187,12 @@ abstract class WP_Hummingbird_Admin_Page {
 	 */
 	public function enqueue_scripts( $hook ) {
 		// Styles.
-		wp_enqueue_style( 'wphb-admin', WPHB_DIR_URL . 'admin/assets/css/app.min.css', array(), WPHB_VERSION );
+		wp_enqueue_style( 'wphb-admin', WPHB_DIR_URL . 'admin/assets/css/wphb-app.min.css', array(), WPHB_VERSION );
 
 		// Scripts.
 		wp_enqueue_script(
 			'wphb-wpmudev-sui',
-			WPHB_DIR_URL . 'admin/assets/js/shared-ui.min.js',
+			WPHB_DIR_URL . 'admin/assets/js/wphb-shared-ui.min.js',
 			array( 'jquery' ),
 			WPHB_VERSION,
 			true
@@ -339,23 +339,15 @@ abstract class WP_Hummingbird_Admin_Page {
 			</div>
 			<?php
 			if ( isset( $_GET['updated'] ) ) { // Input var ok.
-				$this->admin_notices->show( 'updated', __( 'Settings Updated', 'wphb' ), 'success' );
+				$this->admin_notices->show( 'updated', __( 'Your changes have been saved.', 'wphb' ), 'success' );
 			}
 
 			$this->render_header();
 
 			$this->render_inner_content();
-			?>
-			<div class="sui-footer">
-				<?php
-					printf(
-						/* translators: %s - icon */
-						esc_html__( 'Made with %s by WPMU DEV', 'wphb' ),
-						'<i aria-hidden="true" class="sui-icon-heart"></i>'
-					);
-				?>
-			</div>
-			<?php
+
+			$this->render_footer();
+
 			$hummingbird = WP_Hummingbird::get_instance();
 			if ( $hummingbird->admin->show_quick_setup ) :
 				$this->view( 'modals/quick-setup-modal' );
@@ -388,6 +380,80 @@ abstract class WP_Hummingbird_Admin_Page {
 	 */
 	protected function render_inner_content() {
 		$this->view( $this->slug . '-page' );
+	}
+
+	/**
+	 * Render footer.
+	 */
+	protected function render_footer() {
+		$hide_footer = false;
+		$footer_text = sprintf(
+			/* translators: %s - icon */
+			esc_html__( 'Made with %s by WPMU DEV', 'wphb' ),
+			'<i aria-hidden="true" class="sui-icon-heart"></i>'
+		);
+
+		if ( WP_Hummingbird_Utils::is_member() ) {
+			$hide_footer = apply_filters( 'wpmudev_branding_change_footer', $hide_footer );
+			$footer_text = apply_filters( 'wpmudev_branding_footer_text', $footer_text );
+		}
+		?>
+		<div class="sui-footer">
+			<?php
+			// @codingStandardsIgnoreStart
+			echo $footer_text;
+			// @codingStandardsIgnoreEnd
+			?>
+		</div>
+
+		<?php if ( WP_Hummingbird_Utils::is_member() ) { ?>
+
+			<?php if ( ! $hide_footer ) : ?>
+				<ul class="sui-footer-nav">
+					<li><a href="https://premium.wpmudev.org/hub/" target="_blank"><?php esc_html_e( 'The Hub', 'wphb' ); ?></a></li>
+					<li><a href="https://premium.wpmudev.org/projects/category/plugins/" target="_blank"><?php esc_html_e( 'Plugins', 'wphb' ); ?></a></li>
+					<li><a href="https://premium.wpmudev.org/roadmap/" target="_blank"><?php esc_html_e( 'Roadmap', 'wphb' ); ?></a></li>
+					<li><a href="https://premium.wpmudev.org/hub/support/" target="_blank"><?php esc_html_e( 'Support', 'wphb' ); ?></a></li>
+					<li><a href="https://premium.wpmudev.org/docs/" target="_blank"><?php esc_html_e( 'Docs', 'wphb' ); ?></a></li>
+					<li><a href="https://premium.wpmudev.org/hub/community/" target="_blank"><?php esc_html_e( 'Community', 'wphb' ); ?></a></li>
+					<li><a href="https://premium.wpmudev.org/academy/" target="_blank"><?php esc_html_e( 'Academy', 'wphb' ); ?></a></li>
+					<li><a href="https://premium.wpmudev.org/terms-of-service/" target="_blank"><?php esc_html_e( 'Terms of Service', 'wphb' ); ?></a></li>
+					<li><a href="https://incsub.com/privacy-policy/" target="_blank"><?php esc_html_e( 'Privacy Policy', 'wphb' ); ?></a></li>
+				</ul>
+			<?php endif; ?>
+
+		<?php } else { ?>
+
+			<ul class="sui-footer-nav">
+				<li><a href="https://profiles.wordpress.org/wpmudev#content-plugins" target="_blank"><?php esc_html_e( 'Free Plugins', 'wphb' ); ?></a></li>
+				<li><a href="https://premium.wpmudev.org/features/" target="_blank"><?php esc_html_e( 'Membership', 'wphb' ); ?></a></li>
+				<li><a href="https://premium.wpmudev.org/roadmap/" target="_blank"><?php esc_html_e( 'Roadmap', 'wphb' ); ?></a></li>
+				<li><a href="https://wordpress.org/support/plugin/hummingbird-performance" target="_blank"><?php esc_html_e( 'Support', 'wphb' ); ?></a></li>
+				<li><a href="https://premium.wpmudev.org/docs/" target="_blank"><?php esc_html_e( 'Docs', 'wphb' ); ?></a></li>
+				<li><a href="https://premium.wpmudev.org/hub-welcome/" target="_blank"><?php esc_html_e( 'The Hub', 'wphb' ); ?></a></li>
+				<li><a href="https://premium.wpmudev.org/terms-of-service/" target="_blank"><?php esc_html_e( 'Terms of Service', 'wphb' ); ?></a></li>
+				<li><a href="https://incsub.com/privacy-policy/" target="_blank"><?php esc_html_e( 'Privacy Policy', 'wphb' ); ?></a></li>
+			</ul>
+
+		<?php } ?>
+
+		<?php if ( ! $hide_footer ) : ?>
+			<ul class="sui-footer-social">
+				<li><a href="https://www.facebook.com/wpmudev" target="_blank">
+						<i class="sui-icon-social-facebook" aria-hidden="true"></i>
+						<span class="sui-screen-reader-text">Facebook</span>
+					</a></li>
+				<li><a href="https://twitter.com/wpmudev" target="_blank">
+						<i class="sui-icon-social-twitter" aria-hidden="true"></i></a>
+					<span class="sui-screen-reader-text">Twitter</span>
+				</li>
+				<li><a href="https://www.instagram.com/wpmu_dev/" target="_blank">
+						<i class="sui-icon-instagram" aria-hidden="true"></i>
+						<span class="sui-screen-reader-text">Instagram</span>
+					</a></li>
+			</ul>
+		<?php endif; ?>
+		<?php
 	}
 
 	/**
@@ -450,9 +516,12 @@ abstract class WP_Hummingbird_Admin_Page {
 	 * Display tabs navigation
 	 */
 	public function show_tabs() {
-		$this->view( 'tabs', array(
-			'tabs' => $this->get_tabs(),
-		) );
+		$this->view(
+			'tabs',
+			array(
+				'tabs' => $this->get_tabs(),
+			)
+		);
 	}
 
 	/**

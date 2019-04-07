@@ -47,9 +47,12 @@ class WP_Hummingbird_API_Service_Performance extends WP_Hummingbird_API_Service 
 	 * @return array|mixed|object|WP_Error
 	 */
 	public function check() {
-		return $this->request->post( 'site/check/', array(
-			'domain' => $this->request->get_this_site(),
-		) );
+		return $this->request->post(
+			'site/check/',
+			array(
+				'domain' => $this->request->get_this_site(),
+			)
+		);
 	}
 
 	/**
@@ -61,9 +64,12 @@ class WP_Hummingbird_API_Service_Performance extends WP_Hummingbird_API_Service 
 	 */
 	public function ping() {
 		$this->request->set_timeout( 2 );
-		return $this->request->post( 'site/check/', array(
-			'domain' => $this->request->get_this_site(),
-		));
+		return $this->request->post(
+			'site/check/',
+			array(
+				'domain' => $this->request->get_this_site(),
+			)
+		);
 	}
 
 	/**
@@ -72,9 +78,12 @@ class WP_Hummingbird_API_Service_Performance extends WP_Hummingbird_API_Service 
 	 * @return array|mixed|object|WP_Error
 	 */
 	public function results() {
-		return $this->request->get( 'site/result/latest/', array(
-			'domain' => $this->request->get_this_site(),
-		));
+		return $this->request->get(
+			'site/result/latest/',
+			array(
+				'domain' => $this->request->get_this_site(),
+			)
+		);
 	}
 
 	/**
@@ -83,9 +92,12 @@ class WP_Hummingbird_API_Service_Performance extends WP_Hummingbird_API_Service 
 	 * @return array|mixed|object|WP_Error
 	 */
 	public function ignore() {
-		return $this->request->get( 'site/result/ignore/', array(
-			'domain' => $this->request->get_this_site(),
-		));
+		return $this->request->get(
+			'site/result/ignore/',
+			array(
+				'domain' => $this->request->get_this_site(),
+			)
+		);
 	}
 
 	/**
@@ -103,10 +115,13 @@ class WP_Hummingbird_API_Service_Performance extends WP_Hummingbird_API_Service 
 			'css'        => WPHB_DIR_URL . 'core/modules/dummy/dummy-style.css',
 		);
 
-		return $this->request->post( 'test/gzip/', array(
-			'domain' => $domain,
-			'tests'  => wp_json_encode( $params ),
-		));
+		return $this->request->post(
+			'test/gzip/',
+			array(
+				'domain' => $domain,
+				'tests'  => wp_json_encode( $params ),
+			)
+		);
 	}
 
 	/**
@@ -123,10 +138,13 @@ class WP_Hummingbird_API_Service_Performance extends WP_Hummingbird_API_Service 
 			'images'     => WPHB_DIR_URL . 'core/modules/dummy/dummy-image.png',
 		);
 
-		return $this->request->post( 'test/cache/', array(
-			'domain' => $this->request->get_this_site(),
-			'tests'  => wp_json_encode( $params ),
-		));
+		return $this->request->post(
+			'test/cache/',
+			array(
+				'domain' => $this->request->get_this_site(),
+				'tests'  => wp_json_encode( $params ),
+			)
+		);
 	}
 
 	/**
@@ -135,10 +153,13 @@ class WP_Hummingbird_API_Service_Performance extends WP_Hummingbird_API_Service 
 	 * @return array|mixed|object|WP_Error
 	 */
 	public function ignore_report() {
-		return $this->request->post( 'site/reports/', array(
-			'domain' => $this->request->get_this_site(),
-			'ignore' => 1,
-		) );
+		return $this->request->post(
+			'site/reports/',
+			array(
+				'domain' => $this->request->get_this_site(),
+				'ignore' => 1,
+			)
+		);
 	}
 
 	/**
@@ -147,8 +168,11 @@ class WP_Hummingbird_API_Service_Performance extends WP_Hummingbird_API_Service 
 	 * @return bool
 	 */
 	public function is_report_ignored() {
-		return $this->request->get( 'site/reports/', array(
-			'domain' => $this->request->get_this_site(),
-		) );
+		return $this->request->get(
+			'site/reports/',
+			array(
+				'domain' => $this->request->get_this_site(),
+			)
+		);
 	}
 }

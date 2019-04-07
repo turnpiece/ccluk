@@ -51,7 +51,7 @@ class WP_Hummingbird_Admin_Notices {
 		}
 
 		if ( ! function_exists( 'get_plugins' ) ) {
-			include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+			include_once ABSPATH . 'wp-admin/includes/plugin.php';
 		}
 
 		// Only show notices to users who can do something about it (update, for example).
@@ -333,7 +333,7 @@ class WP_Hummingbird_Admin_Notices {
 		}
 
 		// Show only if at least 7 days have past after installation of the free version.
-		$now = current_time( 'timestamp' );
+		$now               = current_time( 'timestamp' );
 		$free_installation = get_site_option( 'wphb-free-install-date' );
 		if ( ( $now - (int) $free_installation ) < 604800 ) {
 			return;
@@ -359,10 +359,10 @@ class WP_Hummingbird_Admin_Notices {
 		// Only show if minification or page cache is enabled.
 		$minify_active = false;
 		if ( WP_Hummingbird_Utils::can_execute_php() ) {
-			$minify = WP_Hummingbird_Utils::get_module( 'minify' );
+			$minify        = WP_Hummingbird_Utils::get_module( 'minify' );
 			$minify_active = $minify->is_active();
 		}
-		$caching = WP_Hummingbird_Utils::get_module( 'page_cache' );
+		$caching        = WP_Hummingbird_Utils::get_module( 'page_cache' );
 		$caching_active = $caching->is_active();
 
 		// If both modules disabled - don't show notice.
@@ -370,7 +370,7 @@ class WP_Hummingbird_Admin_Notices {
 			return;
 		}
 
-		$text = __( "We've noticed you've made changes to your website. We recommend you clear Hummingbird's page cache to avoid any issues.", 'wphb' );
+		$text       = __( "We've noticed you've made changes to your website. We recommend you clear Hummingbird's page cache to avoid any issues.", 'wphb' );
 		$additional = '';
 
 		if ( $minify_active ) {
@@ -382,9 +382,12 @@ class WP_Hummingbird_Admin_Notices {
 				WP_Hummingbird_Utils::get_admin_menu_url( 'minification' )
 			);
 
-			$text = __( "We've noticed you've made changes to your website. If you’ve installed new plugins or themes,
+			$text = __(
+				"We've noticed you've made changes to your website. If you’ve installed new plugins or themes,
 			we recommend you re-check Hummingbird's Asset Optimization configuration to ensure those new files are added
-			correctly.", 'wphb' );
+			correctly.",
+				'wphb'
+			);
 
 			$additional .= '<a href="' . esc_url( $recheck_file_url ) . '" class="button button-primary" style="margin-right:10px">' . __( 'Re-check Asset Optimization', 'wphb' ) . '</a>';
 		}

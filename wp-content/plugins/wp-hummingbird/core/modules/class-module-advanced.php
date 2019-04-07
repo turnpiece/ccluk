@@ -157,23 +157,23 @@ class WP_Hummingbird_Module_Advanced extends WP_Hummingbird_Module {
 	 */
 	public static function get_db_fields() {
 		return array(
-			'revisions' => array(
+			'revisions'          => array(
 				'title'   => __( 'Post Revisions', 'wphb' ),
 				'tooltip' => __( "Historic versions of your posts and pages. If you don't need to revert to older versions, delete these entries", 'wphb' ),
 			),
-			'drafts' => array(
+			'drafts'             => array(
 				'title'   => __( 'Draft Posts', 'wphb' ),
 				'tooltip' => __( 'Auto-saved versions of your posts and pages. If you don’t use drafts you can safely delete these entries', 'wphb' ),
 			),
-			'trash' => array(
+			'trash'              => array(
 				'title'   => __( 'Trashed Posts', 'wphb' ),
 				'tooltip' => __( "Posts or pages you've marked as trash but haven't permanently deleted yet", 'wphb' ),
 			),
-			'spam' => array(
+			'spam'               => array(
 				'title'   => __( 'Spam Comments', 'wphb' ),
 				'tooltip' => __( "Comments marked as spam that haven't been deleted yet", 'wphb' ),
 			),
-			'trash_comment' => array(
+			'trash_comment'      => array(
 				'title'   => __( 'Trashed Comments', 'wphb' ),
 				'tooltip' => __( "Comments you've marked as trash but haven't permanently deleted yet", 'wphb' ),
 			),
@@ -181,7 +181,7 @@ class WP_Hummingbird_Module_Advanced extends WP_Hummingbird_Module {
 				'title'   => __( 'Expired Transients', 'wphb' ),
 				'tooltip' => __( 'Cached data that themes and plugins have stored, except these ones have expired and can be deleted', 'wphb' ),
 			),
-			'transients' => array(
+			'transients'         => array(
 				'title'   => __( 'All Transients', 'wphb' ),
 				'tooltip' => __( 'Cached data that themes and plugins have stored, but may still be in use. Note: the next page to load could take a bit longer due to WordPress regenerating transients.', 'wphb' ),
 			),
@@ -223,7 +223,8 @@ class WP_Hummingbird_Module_Advanced extends WP_Hummingbird_Module {
 				break;
 			case 'all':
 			default:
-				$count = $wpdb->get_row( "
+				$count = $wpdb->get_row(
+					"
 					SELECT revisions, drafts, trash, spam, trash_comment, expired_transients, transients,
 					       sum(revisions+drafts+trash+spam+trash_comment+expired_transients+transients) AS total
 					FROM (
@@ -261,7 +262,7 @@ class WP_Hummingbird_Module_Advanced extends WP_Hummingbird_Module {
 	public function delete_db_data( $type ) {
 		global $wpdb;
 
-		$sql   = array(
+		$sql = array(
 			'revisions'          => "SELECT ID FROM {$wpdb->posts} WHERE post_type = 'revision' AND post_status = 'inherit'",
 			'drafts'             => "SELECT ID FROM {$wpdb->posts} WHERE post_status = 'draft' OR post_status = 'auto-draft'",
 			'trash'              => "SELECT ID FROM {$wpdb->posts} WHERE post_status = 'trash'",
@@ -443,11 +444,11 @@ class WP_Hummingbird_Module_Advanced extends WP_Hummingbird_Module {
 			'session.use_only_cookies',
 		);
 
-		$php_info[ __( 'Version' , 'wphb' ) ] = phpversion();
+		$php_info[ __( 'Version', 'wphb' ) ] = phpversion();
 		foreach ( $php_vars as $setting ) {
 			$php_info[ $setting ] = ini_get( $setting );
 		}
-		$levels = array();
+		$levels          = array();
 		$error_reporting = error_reporting();
 
 		$extension_constants = array(
@@ -477,10 +478,10 @@ class WP_Hummingbird_Module_Advanced extends WP_Hummingbird_Module {
 				}
 			}
 		}
-		$php_info[ __( 'Error Reporting' , 'wphb' ) ] = implode( '<br>', $levels );
-		$extensions = get_loaded_extensions();
+		$php_info[ __( 'Error Reporting', 'wphb' ) ] = implode( '<br>', $levels );
+		$extensions                                  = get_loaded_extensions();
 		natcasesort( $extensions );
-		$php_info[ __( 'Extensions' , 'wphb' ) ] = implode( '<br>', $extensions );
+		$php_info[ __( 'Extensions', 'wphb' ) ] = implode( '<br>', $extensions );
 
 		return $php_info;
 	}
@@ -504,14 +505,14 @@ class WP_Hummingbird_Module_Advanced extends WP_Hummingbird_Module {
 			'query_cache_type'   => 'ON',   // Query cache on or off.
 		);
 		$extra_info = array();
-		$variables = $wpdb->get_results( "SHOW VARIABLES WHERE Variable_name IN ( '" . implode( "', '", array_keys( $mysql_vars ) ) . "' )" ); // db call ok; no-cache ok.
+		$variables  = $wpdb->get_results( "SHOW VARIABLES WHERE Variable_name IN ( '" . implode( "', '", array_keys( $mysql_vars ) ) . "' )" ); // db call ok; no-cache ok.
 
 		$dbh = $wpdb->dbh;
 		if ( is_resource( $dbh ) ) {
 			$driver  = 'mysql';
 			$version = function_exists( 'mysqli_get_server_info' ) ? mysqli_get_server_info( $dbh ) : mysql_get_server_info( $dbh );
 		} elseif ( is_object( $dbh ) ) {
-			$driver  = get_class( $dbh );
+			$driver = get_class( $dbh );
 			if ( method_exists( $dbh, 'db_version' ) ) {
 				$version = $dbh->db_version();
 			} elseif ( isset( $dbh->server_info ) ) {
@@ -530,13 +531,13 @@ class WP_Hummingbird_Module_Advanced extends WP_Hummingbird_Module {
 		} else {
 			$version = $driver = __( 'Unknown', 'wphb' );
 		}
-		$extra_info['Database'] = $wpdb->dbname;
-		$extra_info['Charset'] = $wpdb->charset;
-		$extra_info['Collate'] = $wpdb->collate;
+		$extra_info['Database']     = $wpdb->dbname;
+		$extra_info['Charset']      = $wpdb->charset;
+		$extra_info['Collate']      = $wpdb->collate;
 		$extra_info['Table Prefix'] = $wpdb->prefix;
 
 		$dump_mysql['Server Version'] = $version;
-		$dump_mysql['Driver'] = $driver;
+		$dump_mysql['Driver']         = $driver;
 		foreach ( $extra_info as $key => $val ) {
 			$dump_mysql[ $key ] = $val;
 		}
@@ -562,8 +563,8 @@ class WP_Hummingbird_Module_Advanced extends WP_Hummingbird_Module {
 	 */
 	public static function get_wp_info() {
 		global $wp_version;
-		$dump_wp = array();
-		$wp_consts = array(
+		$dump_wp                      = array();
+		$wp_consts                    = array(
 			'ABSPATH',
 			'WP_CONTENT_DIR',
 			'WP_PLUGIN_DIR',
@@ -618,8 +619,8 @@ class WP_Hummingbird_Module_Advanced extends WP_Hummingbird_Module {
 	 */
 	public static function get_server_info() {
 		$dump_server = array();
-		$server = explode( ' ', wp_unslash( $_SERVER['SERVER_SOFTWARE'] ) ); // Input var ok.
-		$server = explode( '/', reset( $server ) );
+		$server      = explode( ' ', wp_unslash( $_SERVER['SERVER_SOFTWARE'] ) ); // Input var ok.
+		$server      = explode( '/', reset( $server ) );
 
 		if ( isset( $server[1] ) ) {
 			$server_version = $server[1];
@@ -627,15 +628,15 @@ class WP_Hummingbird_Module_Advanced extends WP_Hummingbird_Module {
 			$server_version = 'Unknown';
 		}
 
-		$dump_server[ __( 'Software Name', 'wphb' ) ] = $server[0];
-		$dump_server[ __( 'Software Version', 'wphb' ) ] = $server_version;
-		$dump_server[ __( 'Server IP', 'wphb' ) ] = @$_SERVER['SERVER_ADDR'];
-		$dump_server[ __( 'Server Hostname', 'wphb' ) ] = @$_SERVER['SERVER_NAME'];
-		$dump_server[ __( 'Server Admin', 'wphb' ) ] = @$_SERVER['SERVER_ADMIN'];
+		$dump_server[ __( 'Software Name', 'wphb' ) ]     = $server[0];
+		$dump_server[ __( 'Software Version', 'wphb' ) ]  = $server_version;
+		$dump_server[ __( 'Server IP', 'wphb' ) ]         = @$_SERVER['SERVER_ADDR'];
+		$dump_server[ __( 'Server Hostname', 'wphb' ) ]   = @$_SERVER['SERVER_NAME'];
+		$dump_server[ __( 'Server Admin', 'wphb' ) ]      = @$_SERVER['SERVER_ADMIN'];
 		$dump_server[ __( 'Server local time', 'wphb' ) ] = date( 'Y-m-d H:i:s (\U\T\C P)' );
-		$dump_server[ __( 'Operating System', 'wphb' ) ] = @php_uname( 's' );
-		$dump_server[ __( 'OS Hostname', 'wphb' ) ] = @php_uname( 'n' );
-		$dump_server[ __( 'OS Version', 'wphb' ) ] = @php_uname( 'v' );
+		$dump_server[ __( 'Operating System', 'wphb' ) ]  = @php_uname( 's' );
+		$dump_server[ __( 'OS Hostname', 'wphb' ) ]       = @php_uname( 'n' );
+		$dump_server[ __( 'OS Version', 'wphb' ) ]        = @php_uname( 'v' );
 
 		return $dump_server;
 	}

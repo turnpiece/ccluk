@@ -12,7 +12,16 @@
  *
  * @since 1.9.3
  */
-class WP_Hummingbird_Module_Uptime_Reports extends WP_Hummingbird_Module {
+class WP_Hummingbird_Module_Uptime_Reports extends WP_Hummingbird_Module_Reports {
+
+	/**
+	 * Module slug.
+	 *
+	 * @since 1.9.4
+	 *
+	 * @var string $module
+	 */
+	protected static $module = 'uptime';
 
 	/**
 	 * Initialize the module
@@ -20,134 +29,125 @@ class WP_Hummingbird_Module_Uptime_Reports extends WP_Hummingbird_Module {
 	 * @since 1.9.3
 	 */
 	public function init() {
-		// Default settings.
+		parent::init();
+
+		// Default settings for Uptime notifications.
 		add_filter( 'wp_hummingbird_default_options', array( $this, 'add_default_options' ) );
 	}
-
-
-	/**
-	 * Execute the module actions.
-	 *
-	 * @since 1.9.3
-	 */
-	public function run() {}
-
-	/**
-	 * Implement abstract parent method for clearing cache.
-	 *
-	 * @since 1.9.3
-	 */
-	public function clear_cache() {}
 
 	/**
 	 * Add a set of default options to Hummingbird settings.
 	 *
-	 * @since  1.9.3
+	 * @since 1.9.3
 	 *
-	 * @param  array $options  List of default Hummingbird settings.
+	 * @param array $options  List of default Hummingbird settings.
 	 *
 	 * @return array
 	 */
 	public function add_default_options( $options ) {
+		$options['uptime']['notifications']['enabled']    = true;
 		$options['uptime']['notifications']['threshold']  = 0;
 		$options['uptime']['notifications']['recipients'] = array();
-
-		$week_days = array(
-			'Monday',
-			'Tuesday',
-			'Wednesday',
-			'Thursday',
-			'Friday',
-			'Saturday',
-			'Sunday',
-		);
-
-		$options['uptime']['reports']['frequency']  = 7;
-		$options['uptime']['reports']['day']        = $week_days[ array_rand( $week_days, 1 ) ];
-		$options['uptime']['reports']['time']       = wp_rand( 0, 23 ) . ':00';
-		$options['uptime']['reports']['recipients'] = array();
 
 		return $options;
 	}
 
 	/**
-	 * Get Reporting notice message.
+	 * Ajax action for processing uptime reports.
 	 *
-	 * @since 1.9.3
-	 *
-	 * @param string $recipients_count  Recipient count.
-	 *
-	 * @return string
+	 * @since 1.9.4
 	 */
-	public function get_uptime_reporting_message( $recipients_count ) {
-		$reports_settings = WP_Hummingbird_Settings::get_setting( 'reports', 'uptime' );
+	public function process_report() {
+		// Clean all cron.
+		wp_clear_scheduled_hook( 'wphb_uptime_report' );
 
-		switch ( $reports_settings['frequency'] ) {
+		if ( ! WP_Hummingbird_Utils::is_member() ) {
+			return;
+		}
+
+		$options = WP_Hummingbird_Settings::get_setting( 'reports', 'uptime' );
+
+		// Don't do any reports if they are not set in the options.
+		if ( ! $options['enabled'] ) {
+			return;
+		}
+
+		switch ( $options['frequency'] ) {
 			case 1:
-				$notice_message = sprintf(
-					/* translators: %d: Number of recipients */
-					__( 'Uptime reports are sending daily to %d recipients.', 'wphb' ),
-					esc_html( $recipients_count )
-				);
-				$notice_frequency = __( 'daily', 'wphb' );
-				if ( 1 === $recipients_count ) {
-					$notice_message = __( 'Uptime reports are sending daily to 1 recipient.', 'wphb' );
-				}
+				$period = 'day';
 				break;
 			case 7:
-				$notice_message = sprintf(
-					/* translators: %1$s: Weekday %2$d: Number of recipients */
-					__( 'Uptime reports are sending weekly on %1$s to %2$d recipients.', 'wphb' ),
-					esc_html( $reports_settings['day'] ),
-					esc_html( $recipients_count )
-				);
-				$notice_frequency = __( 'weekly', 'wphb' );
-				break;
 			default:
-				$notice_message = sprintf(
-					/* translators: %1$s: Weekday %2$d: Number of recipients */
-					__( 'Uptime reports are sending monthly on %1$s to %2$d recipients.', 'wphb' ),
-					esc_html( $reports_settings['day'] ),
-					esc_html( $recipients_count )
-				);
-				$notice_frequency = __( 'monthly', 'wphb' );
+				$period = 'week';
+				break;
+			case 30:
+				$period = 'month';
 				break;
 		}
 
-		if ( 1 === $recipients_count ) {
-			$notice_message = sprintf(
-				/* translators: %s: Frequency of reports */
-				__( 'Uptime reports are sending %s to 1 recipient.', 'wphb' ),
-				esc_html( $notice_frequency )
-			);
+		// Refresh the report and get the data.
+		$last_report = WP_Hummingbird_Utils::get_module( 'uptime' )->get_last_report( $period, true );
+
+		// Check to see it the email has been sent already.
+		$last_sent_report = isset( $options['last_sent'] ) ? (int) $options['last_sent'] : 0;
+		$to_utc           = (int) parent::get_scheduled_time( self::$module, false );
+
+		// Schedule next test.
+		if ( isset( $last_report ) && ! is_wp_error( $last_report ) && ( $to_utc - time() - $last_sent_report ) > 0 ) {
+			// Get the recipient list.
+			$recipients = $options['recipients'];
+
+			// Send the report.
+			$this->send_email_report( $last_report, $recipients );
+
+			// Store the last send time.
+			$options['last_sent'] = time();
+
+			WP_Hummingbird_Settings::update_setting( 'reports', $options, 'uptime' );
 		}
 
-		return $notice_message;
+		// Reschedule.
+		$next_scan_time = parent::get_scheduled_time( self::$module );
+		wp_schedule_single_event( $next_scan_time, 'wphb_uptime_report' );
 	}
 
 	/**
-	 * Get Notifications notice message.
+	 * Send out an email report.
 	 *
-	 * @since 1.9.3
+	 * @since 1.9.4
 	 *
-	 * @param string $recipients_count  Recipient count.
-	 *
-	 * @return string
+	 * @param mixed $last_report  Last report data.
+	 * @param array $recipients   List of recipients.
 	 */
-	public function get_uptime_notifications_message( $recipients_count ) {
-		$reports_settings = WP_Hummingbird_Settings::get_setting( 'reports', 'uptime' );
-
-		if ( isset( $reports_settings['threshold'] ) && 0 < $reports_settings['threshold'] ) {
-			$notice_message = sprintf(
-				/* translators: %d: Number of recipients */
-				__( 'Email notifications are enabled and will be triggered if your website has been down for more than %d minutes.', 'wphb' ),
-				absint( $recipients_count )
-			);
-		} else {
-			$notice_message = __( 'Email notifications are enabled and will be triggered instantly once you site is down.', 'wphb' );
+	public function send_email_report( $last_report, $recipients = array() ) {
+		if ( empty( $recipients ) ) {
+			return;
 		}
 
-		return $notice_message;
+		foreach ( $recipients as $recipient ) {
+			// Prepare the parameters.
+			$email = $recipient['email'];
+			/* translators: %s: Url for site */
+			$subject       = sprintf( __( "Here's your latest uptime report for %s", 'wphb' ), network_site_url() );
+			$params        = array(
+				'REPORT_TYPE'     => 'uptime',
+				'USER_NAME'       => $recipient['name'],
+				'SCAN_PAGE_LINK'  => network_admin_url( 'admin.php?page=wphb-uptime' ),
+				'SITE_MANAGE_URL' => network_site_url( 'wp-admin/admin.php?page=wphb' ),
+				'SITE_URL'        => wp_parse_url( network_site_url(), PHP_URL_HOST ),
+				'SITE_NAME'       => get_bloginfo( 'name' ),
+			);
+			$email_content = parent::issues_list_html( $last_report, $params );
+			// Change nl to br.
+			$email_content  = stripslashes( $email_content );
+			$no_reply_email = 'noreply@' . wp_parse_url( get_site_url(), PHP_URL_HOST );
+			$headers        = array(
+				'From: Hummingbird <' . $no_reply_email . '>',
+				'Content-Type: text/html; charset=UTF-8',
+			);
+
+			wp_mail( $email, $subject, $email_content, $headers );
+		}
 	}
 
 }

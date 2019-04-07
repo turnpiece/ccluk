@@ -98,9 +98,12 @@ class WP_Hummingbird_Module_Gravatar extends WP_Hummingbird_Module {
 		/* @var WP_Hummingbird_Filesystem $wphb_fs */
 		global $wphb_fs;
 
-		$gravatar = get_avatar_data( $id_or_email, array(
-			'size' => $size,
-		));
+		$gravatar = get_avatar_data(
+			$id_or_email,
+			array(
+				'size' => $size,
+			)
+		);
 
 		if ( true === $gravatar['found_avatar'] ) {
 			$remote_avatar = wp_remote_get( $gravatar['url'] );
@@ -124,7 +127,7 @@ class WP_Hummingbird_Module_Gravatar extends WP_Hummingbird_Module {
 			 * Example: 0973085bb3339de14706edda7bc62581x100.jpg
 			 */
 			$email_hash = $this->get_email_hash( $id_or_email );
-			$file = $email_hash . 'x' . $size . '.jpg';
+			$file       = $email_hash . 'x' . $size . '.jpg';
 			return $wphb_fs->write( $file, $remote_avatar['body'], true );
 		} else {
 			return new WP_Error( 'gravatar-not-found', __( 'Error fetching Gravatar. Gravatar not found.', 'wphb' ) );
@@ -142,7 +145,7 @@ class WP_Hummingbird_Module_Gravatar extends WP_Hummingbird_Module {
 	 */
 	private function get_email_hash( $id_or_email ) {
 		$email_hash = '';
-		$user = $email = false;
+		$user       = $email = false;
 
 		// Process the user identifier.
 		if ( is_numeric( $id_or_email ) ) {
@@ -220,11 +223,11 @@ class WP_Hummingbird_Module_Gravatar extends WP_Hummingbird_Module {
 		// Avatar file names for normal and retina.
 		$images = array(
 			'normal' => array(
-				'file'  => $email_hash . 'x' . $size . '.jpg',
+				'file' => $email_hash . 'x' . $size . '.jpg',
 				'size' => $size,
 			),
 			'retina' => array(
-				'file'  => $email_hash . 'x' . ( $size * 2 ) . '.jpg',
+				'file' => $email_hash . 'x' . ( $size * 2 ) . '.jpg',
 				'size' => $size * 2,
 			),
 		);
@@ -246,7 +249,7 @@ class WP_Hummingbird_Module_Gravatar extends WP_Hummingbird_Module {
 
 		$gravatar_dir = trailingslashit( substr( $images['normal']['file'], 0, 3 ) );
 
-		$src = $wphb_fs->baseurl . $gravatar_dir . $images['normal']['file'];
+		$src    = $wphb_fs->baseurl . $gravatar_dir . $images['normal']['file'];
 		$srcset = $wphb_fs->baseurl . $gravatar_dir . $images['retina']['file'];
 
 		$class = array( 'avatar', 'avatar-' . (int) $size, 'photo' );
@@ -276,9 +279,9 @@ class WP_Hummingbird_Module_Gravatar extends WP_Hummingbird_Module {
 	 * Get avatar url.
 	 *
 	 * @since  1.6.1
-	 * @param  array  $args        Arguments passed to get_avatar_data(), after processing.
-	 * @param  mixed  $id_or_email The Gravatar to retrieve. Accepts a user_id, gravatar md5 hash,
-	 *                             user email, WP_User object, WP_Post object, or WP_Comment object.
+	 * @param  array $args        Arguments passed to get_avatar_data(), after processing.
+	 * @param  mixed $id_or_email The Gravatar to retrieve. Accepts a user_id, gravatar md5 hash,
+	 *                            user email, WP_User object, WP_Post object, or WP_Comment object.
 	 * @return mixed
 	 */
 	public function get_avatar_data( $args, $id_or_email ) {
@@ -315,7 +318,7 @@ class WP_Hummingbird_Module_Gravatar extends WP_Hummingbird_Module {
 		}
 
 		$gravatar_dir = trailingslashit( substr( $file, 0, 3 ) );
-		$args['url'] = $wphb_fs->baseurl . $gravatar_dir . $file;
+		$args['url']  = $wphb_fs->baseurl . $gravatar_dir . $file;
 
 		return $args;
 	}

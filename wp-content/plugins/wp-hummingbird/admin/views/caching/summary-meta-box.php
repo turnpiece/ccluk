@@ -20,22 +20,15 @@
 	<div class="sui-summary-details">
 		<?php if ( $pc_active ) : ?>
 			<span class="sui-summary-large"><?php echo absint( $cached ); ?></span>
-			<span class='sui-summary-percent'>/<?php echo absint( $pages ); ?></span>
 		<?php else : ?>
 			<span class="sui-summary-large">-</span>
 		<?php endif; ?>
 		<span class="sui-summary-sub">
-			<?php esc_html_e( 'Pages cached', 'wphb' ); ?>
+			<?php esc_html_e( 'Cache files', 'wphb' ); ?>
+			<span class="sui-tooltip sui-tooltip-constrained" data-tooltip="<?php esc_attr_e( 'Pages are cached when someone first visits them. This number is the total count of static files being cached (not pages) and can be larger than the total number of physical pages you have.', 'wphb' ); ?>">
+				<i class="sui-icon-info" aria-hidden="true"></i>
+			</span>
 		</span>
-
-		<!--
-		<span class="sui-summary-detail">
-			0
-		</span>
-		<span class="sui-summary-sub">
-			<?php esc_html_e( 'Cached hits in the last 30 days', 'wphb' ); ?>
-		</span>
-		-->
 	</div>
 </div>
 <div class="sui-summary-segment">

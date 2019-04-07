@@ -76,13 +76,17 @@ class WP_Hummingbird_CSS_UriRewriter {
 	 * @return string
 	 */
 	private static function _trim_urls( $css ) {
-		return preg_replace('/
+		return preg_replace(
+			'/
             url\\(      # url(
             \\s*
             ([^\\)]+?)  # 1 = URI (assuming does not contain ")")
             \\s*
             \\)         # )
-        /x', 'url($1)', $css);
+        /x',
+			'url($1)',
+			$css
+		);
 	}
 
 	/**
@@ -101,13 +105,13 @@ class WP_Hummingbird_CSS_UriRewriter {
 		// determine URI and the quote character (if any).
 		if ( $is_import ) {
 			$quote_char = $m[1];
-			$uri = $m[2];
+			$uri        = $m[2];
 		} else {
 			// $m[1] is either quoted or not
 			$quote_char = ( "'" === $m[1][0] || '"' === $m[1][0] )
 				? $m[1][0]
 				: '';
-			$uri = ( '' === $quote_char )
+			$uri        = ( '' === $quote_char )
 				? $m[1]
 				: substr( $m[1], 1, strlen( $m[1] ) - 2 );
 		}
@@ -122,13 +126,13 @@ class WP_Hummingbird_CSS_UriRewriter {
 			} else {
 				$uri = self::$_prepend_path . $uri;
 				if ( '/' === $uri[0] ) {
-					$root = '';
+					$root          = '';
 					$root_relative = $uri;
-					$uri = $root . self::remove_dots( $root_relative );
+					$uri           = $root . self::remove_dots( $root_relative );
 				} elseif ( preg_match( '@^((https?\:)?//([^/]+))/@', $uri, $m ) && ( false !== strpos( $m[3], '.' ) ) ) {
-					$root = $m[1];
+					$root          = $m[1];
 					$root_relative = substr( $uri, strlen( $root ) );
-					$uri = $root . self::remove_dots( $root_relative );
+					$uri           = $root . self::remove_dots( $root_relative );
 				}
 			}
 		} elseif ( '/' === $uri[0]                          // root-relative
@@ -172,18 +176,18 @@ class WP_Hummingbird_CSS_UriRewriter {
 	 * @return string
 	 */
 	public static function rewrite( $css, $current_dir, $doc_root = null, $symlinks = array() ) {
-		self::$_doc_root = self::_realpath(
+		self::$_doc_root    = self::_realpath(
 			$doc_root ? $doc_root : $_SERVER['DOCUMENT_ROOT'] // Input var ok.
 		);
 		self::$_current_dir = self::_realpath( $current_dir );
-		self::$_symlinks = array();
+		self::$_symlinks    = array();
 
 		// Normalize symlinks.
 		foreach ( $symlinks as $link => $target ) {
-			$link = ( '//' === $link )
+			$link                     = ( '//' === $link )
 				? self::$_doc_root
 				: str_replace( '//', self::$_doc_root . '/', $link );
-			$link = strtr( $link, '/', DIRECTORY_SEPARATOR );
+			$link                     = strtr( $link, '/', DIRECTORY_SEPARATOR );
 			self::$_symlinks[ $link ] = self::_realpath( $target );
 		}
 
@@ -199,11 +203,13 @@ class WP_Hummingbird_CSS_UriRewriter {
 		// Rewrite.
 		$css = preg_replace_callback(
 			'/@import\\s+([\'"])(.*?)[\'"]/',
-			array( self::$class_name, '_process_uri_cb' ), $css
+			array( self::$class_name, '_process_uri_cb' ),
+			$css
 		);
 		$css = preg_replace_callback(
 			'/url\s*\\(\\s*([^\\)\\s]+)\\s*\\)/',
-			array( self::$class_name, '_process_uri_cb' ), $css
+			array( self::$class_name, '_process_uri_cb' ),
+			$css
 		);
 
 		return $css;
@@ -226,11 +232,13 @@ class WP_Hummingbird_CSS_UriRewriter {
 		// Append.
 		$css = preg_replace_callback(
 			'/@import\\s+([\'"])(.*?)[\'"]/',
-			array( self::$class_name, '_process_uri_cb' ), $css
+			array( self::$class_name, '_process_uri_cb' ),
+			$css
 		);
 		$css = preg_replace_callback(
 			'/url\\(\\s*([^\\)\\s]+)\\s*\\)/',
-			array( self::$class_name, '_process_uri_cb' ), $css
+			array( self::$class_name, '_process_uri_cb' ),
+			$css
 		);
 
 		self::$_prepend_path = null;

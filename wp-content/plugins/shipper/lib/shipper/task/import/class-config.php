@@ -92,27 +92,33 @@ class Shipper_Task_Import_Config extends Shipper_Task_Import {
 			array()
 		);
 
-		$root_rx = preg_quote( $root, '/' );
+		$replacement = trailingslashit( Shipper_Helper_Fs_Path::get_temp_dir() ) .
+			trailingslashit( Shipper_Model_Stored_Migration::COMPONENT_FS );
+		$root_rx = preg_quote( trailingslashit( ABSPATH ), '/' );
 		$replacer = new Shipper_Helper_Replacer_File( Shipper_Helper_Codec::DECODE );
 		$replacer->add_codec( new Shipper_Helper_Codec_Rewrite );
 		$replacer->add_codec( new Shipper_Helper_Codec_Paths );
 
-		foreach ( $config_files as $file ) {
+		foreach ( $config_files as $destination ) {
+
+			$file = preg_replace( "/^{$root_rx}/", $replacement, $destination );
 
 			if ( ! $this->is_config_file_deployable( $file ) ) {
-				/*
-				if ( $this->has_errors() ) {
-					// Break, we have errors.
-					return true;
-				}
-				 */
 				continue; // Do not deploy this file.
 			}
 
 			// Apply transformations to the file.
 			$tmp_file = $replacer->transform( $file );
 
-			$destination = preg_replace( "/^{$root_rx}/", ABSPATH, $file );
+			if ( Shipper_Helper_Fs_Path::is_wp_config( $destination ) ) {
+				// Check here, because we're taking absolute path into consideration.
+				$model = new Shipper_Model_Stored_Options;
+				if ( $model->get( Shipper_Model_Stored_Options::KEY_SKIPCONFIG ) ) {
+					// We're not to deploy the wp-config file.
+					Shipper_Helper_Log::write( 'Skipping wp-config deployment in import' );
+					continue;
+				}
+			}
 
 			/**
 			 * Whether we're in import mocking mode, defaults to false.
@@ -170,28 +176,10 @@ class Shipper_Task_Import_Config extends Shipper_Task_Import {
 	 */
 	public function is_config_file_deployable( $filepath ) {
 		if ( ! is_readable( $filepath ) ) {
-			/*
-			$this->add_error(
-				self::ERR_ACCESS,
-				sprintf(
-					__( 'Could not access staged file: %s', 'shipper' ),
-					$filepath
-				)
-			);
-			 */
 			return false;
 		}
 
 		if ( ! Shipper_Helper_Fs_Path::is_config_file( $filepath ) ) {
-			/*
-			$this->add_error(
-				self::ERR_ACCESS,
-				sprintf(
-					__( 'Not a config file: %s', 'shipper' ),
-					$filepath
-				)
-			);
-			 */
 			return false;
 		}
 

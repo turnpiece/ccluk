@@ -275,6 +275,7 @@ function ct_ajax_hook($message_obj = false, $additional = false)
         'simbatfa-init-otp', //Two-Factor Auth 
         'wppb_msf_check_required_fields', //ProfileBuilder skip step checking
         'boss_we_login', //Login form
+        'sidebar_login_process', // Login CF7
     );
 	
 	//General post_info for all ajax calls
@@ -544,6 +545,15 @@ function ct_ajax_hook($message_obj = false, $additional = false)
 		elseif ( !empty($message_obj) && isset($message_obj['post_type'], $message_obj['post_content']) ){
 			throw new Exception($ct_result->comment);
 		}
+		//ES Add subscriber
+		elseif(isset($_POST['action']) && $_POST['action'] == 'es_add_subscriber')
+		{
+			$result = Array(
+				'error' => 'unexpected-error',
+			);			
+			print json_encode($result);
+			die();
+		}		
 		//Convertplug. Strpos because action value dynamically changes and depends on mailing service 
 		elseif (isset($_POST['action']) && strpos($_POST['action'], '_add_subscriber') !== false){
 			$result = Array(

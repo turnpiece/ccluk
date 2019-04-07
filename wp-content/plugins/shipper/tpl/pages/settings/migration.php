@@ -6,11 +6,15 @@
  */
 
 $constants = new Shipper_Model_Constants_Shipper;
+$model = new Shipper_Model_Stored_Options;
+
 $use_uploads = $constants->is_defined( 'WORKING_DIRECTORY_ROOT' );
 if ( empty( $use_uploads ) ) {
-	$model = new Shipper_Model_Stored_Options;
 	$use_uploads = $model->get( Shipper_Model_Stored_Options::KEY_UPLOADS );
 }
+
+$skip_wpconfig = $model->get( Shipper_Model_Stored_Options::KEY_SKIPCONFIG );
+$skip_emails = $model->get( Shipper_Model_Stored_Options::KEY_SKIPEMAILS );
 ?>
 <div class="sui-box shipper-page-settings-migration">
 
@@ -68,6 +72,64 @@ if ( empty( $use_uploads ) ) {
 						</div>
 					</div>
 				<?php } ?>
+
+			</div>
+		</div>
+
+		<div class="sui-box-settings-row">
+			<div class="sui-box-settings-col-1">
+				<label class="sui-settings-label"><?php esc_html_e( 'Advanced options', 'shipper' ); ?></label>
+				<span class="sui-description">
+					<?php esc_html_e(
+						'Have better control over your migrations with these advanced migration settings.',
+						'shipper'
+					); ?>
+				</span>
+			</div>
+
+			<div class="sui-box-settings-col-2">
+
+				<div class="shipper-form-item">
+					<label class="sui-toggle">
+						<input type="checkbox" <?php checked( $skip_emails ); ?>
+						       id="shipper-skip-emails"
+						       name="migration[<?php echo Shipper_Model_Stored_Options::KEY_SKIPEMAILS; ?>]"
+						       value="1"/>
+						<span class="sui-toggle-slider"></span>
+					</label>
+					<label for="shipper-skip-emails" class="sui-toggle-label">
+						<?php esc_html_e( 'Do not replace domain name in email', 'shipper' ); ?>
+					</label>
+					<div class="sui-toggle-content">
+						<p class="sui-description">
+							<?php esc_html_e(
+								'By default, Shipper replaces all the instances of your source domain with the destination domain. However, if you use an email on your site linked with your source domain and don\'t want the email to be changed then keep this option enabled.',
+								'shipper'
+							); ?>
+						</p>
+					</div>
+				</div>
+
+				<div class="shipper-form-item">
+					<label class="sui-toggle">
+						<input type="checkbox" <?php checked( $skip_wpconfig ); ?>
+						       id="shipper-skip-config"
+						       name="migration[<?php echo Shipper_Model_Stored_Options::KEY_SKIPCONFIG; ?>]"
+						       value="1"/>
+						<span class="sui-toggle-slider"></span>
+					</label>
+					<label for="shipper-skip-config" class="sui-toggle-label">
+						<?php esc_html_e( 'Do not migrate wp-config file', 'shipper' ); ?>
+					</label>
+					<div class="sui-toggle-content">
+						<p class="sui-description">
+							<?php esc_html_e(
+								'Enable this option if you don’t want to migrate the wp-config file from your source site to the destination site.',
+								'shipper'
+							); ?>
+						</p>
+					</div>
+				</div>
 
 			</div>
 		</div>

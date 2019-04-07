@@ -1,5 +1,8 @@
 <?php
 /**
+ * Minify group class.
+ *
+ * @package Hummingbird
  * @author: WPMUDEV, Ignacio Cruz (igmoweb)
  * @version:
  */
@@ -60,11 +63,11 @@ class WP_Hummingbird_Module_Minify_Group {
 	 *
 	 * @var array
 	 */
-	private $dont_minify = array();
+	private $dont_minify  = array();
 	private $dont_combine = array();
 	private $dont_enqueue = array();
-	private $defer = array();
-	private $inline = array();
+	private $defer        = array();
+	private $inline       = array();
 
 	/**
 	 * Save dependencies for each handle
@@ -140,7 +143,7 @@ class WP_Hummingbird_Module_Minify_Group {
 		}
 
 		$_vars = get_class_vars( 'WP_Hummingbird_Module_Minify_Group' );
-		$vars = array();
+		$vars  = array();
 		foreach ( $_vars as $_var_name => $_var_default ) {
 			$value = get_post_meta( $post_id, '_' . $_var_name, true );
 			if ( false !== $value ) {
@@ -175,7 +178,7 @@ class WP_Hummingbird_Module_Minify_Group {
 
 		if ( $found ) {
 			$_vars = get_class_vars( 'WP_Hummingbird_Module_Minify_Group' );
-			$vars = array();
+			$vars  = array();
 			foreach ( $_vars as $_var_name => $_var_default ) {
 				$value = get_post_meta( $found->ID, '_' . $_var_name, true );
 				if ( false !== $value ) {
@@ -222,7 +225,7 @@ class WP_Hummingbird_Module_Minify_Group {
 	 */
 	public static function get_groups_from_handle( $handle, $type ) {
 		$groups = array();
-		$posts = self::get_minify_groups();
+		$posts  = self::get_minify_groups();
 		foreach ( $posts as $post ) {
 			$group = self::get_instance_by_post_id( $post->ID );
 			if ( $group && $type === $group->type && in_array( $handle, $group->get_handles(), true ) ) {
@@ -300,7 +303,7 @@ class WP_Hummingbird_Module_Minify_Group {
 			 * @var string $source_url Source URL
 			 * @var string $type scripts|styles
 			 */
-			if ( apply_filters( 'wphb_defer_resource', false, $handle, $this->type, $url ) ) {;
+			if ( apply_filters( 'wphb_defer_resource', false, $handle, $this->type, $url ) ) {
 				$this->should_do_handle( $handle, 'defer', true );
 			}
 		}
@@ -555,27 +558,27 @@ class WP_Hummingbird_Module_Minify_Group {
 		switch ( $action ) {
 			case 'minify': {
 				$should = 'dont_minify';
-				$do = 'dont';
+				$do     = 'dont';
 				break;
 			}
 			case 'combine': {
 				$should = 'dont_combine';
-				$do = 'dont';
+				$do     = 'dont';
 				break;
 			}
 			case 'enqueue': {
 				$should = 'dont_enqueue';
-				$do = 'dont';
+				$do     = 'dont';
 				break;
 			}
 			case 'defer': {
 				$should = 'defer';
-				$do = 'do';
+				$do     = 'do';
 				break;
 			}
 			case 'inline': {
 				$should = 'inline';
-				$do = 'do';
+				$do     = 'do';
 				break;
 			}
 			default: {
@@ -589,13 +592,13 @@ class WP_Hummingbird_Module_Minify_Group {
 				// Handle should or shouldn't be minified.
 				$value = (bool) $value;
 				if ( ! $value && ! in_array( $handle, $this->$should, true ) ) {
-					$new_should = $this->$should;
-					$new_should[] = $handle;
+					$new_should    = $this->$should;
+					$new_should[]  = $handle;
 					$this->$should = $new_should;
 				} elseif ( $value && in_array( $handle, $this->$should, true ) ) {
 					// Remove from the array.
 					$new_should = $this->$should;
-					$key = array_search( $handle, $new_should, true );
+					$key        = array_search( $handle, $new_should, true );
 					unset( $new_should[ $key ] );
 					$this->$should = array_values( $new_should );
 				}
@@ -603,13 +606,13 @@ class WP_Hummingbird_Module_Minify_Group {
 				// Handle should or shouldn't be done.
 				$value = (bool) $value;
 				if ( $value && ! in_array( $handle, $this->$should, true ) ) {
-					$new_should = $this->$should;
-					$new_should[] = $handle;
+					$new_should    = $this->$should;
+					$new_should[]  = $handle;
 					$this->$should = $new_should;
 				} elseif ( ! $value && in_array( $handle, $this->$should, true ) ) {
 					// Remove from the array.
 					$new_should = $this->$should;
-					$key = array_search( $handle, $new_should, true );
+					$key        = array_search( $handle, $new_should, true );
 					unset( $new_should[ $key ] );
 					$this->$should = array_values( $new_should );
 				}
@@ -695,7 +698,7 @@ class WP_Hummingbird_Module_Minify_Group {
 
 			if ( isset( $wp_styles->text_direction ) && 'rtl' === $wp_styles->text_direction && isset( $this->extra['rtl'] ) && $this->extra['rtl'] ) {
 				if ( is_bool( $this->extra['rtl'] ) || 'replace' === $this->extra['rtl'] ) {
-					$suffix   = isset( $this->extra['suffix'] ) ? $this->extra['suffix'] : '';
+					$suffix    = isset( $this->extra['suffix'] ) ? $this->extra['suffix'] : '';
 					$file_path = str_replace( "{$suffix}.css", "-rtl{$suffix}.css", $wp_styles->_css_href( $this->handle_urls[ $handle ], $this->handle_versions[ $handle ], "$handle-rtl" ) );
 				} else {
 					$file_path = $this->_css_href( $this->extra['rtl'], $this->handle_versions[ $handle ], "$handle-rtl" );
@@ -704,7 +707,6 @@ class WP_Hummingbird_Module_Minify_Group {
 				return $file_path;
 			}
 		}
-
 
 		return $this->handle_urls[ $handle ];
 	}
@@ -870,7 +872,7 @@ class WP_Hummingbird_Module_Minify_Group {
 	 * Refresh the unique hash for this group
 	 */
 	public function refresh_hash() {
-		$handles = $this->get_handles();
+		$handles          = $this->get_handles();
 		$handles_versions = $this->handle_versions;
 
 		if ( ! is_array( $handles ) ) {
@@ -881,10 +883,10 @@ class WP_Hummingbird_Module_Minify_Group {
 			$handles_versions = array( $handles_versions );
 		}
 
-		$hash  = implode( '-', $handles );
-		$hash .= $this->args;
-		$hash .= $this->type;
-		$hash .= implode( '-', $handles_versions );
+		$hash       = implode( '-', $handles );
+		$hash      .= $this->args;
+		$hash      .= $this->type;
+		$hash      .= implode( '-', $handles_versions );
 		$this->hash = self::hash( $hash );
 
 		if ( $this->file_id ) {
@@ -990,9 +992,12 @@ class WP_Hummingbird_Module_Minify_Group {
 					// Rooted URL.
 					$src = 'http:' . $src;
 				}
-				$request = wp_remote_get( $src, array(
-					'sslverify' => false,
-				) );
+				$request = wp_remote_get(
+					$src,
+					array(
+						'sslverify' => false,
+					)
+				);
 				$content = wp_remote_retrieve_body( $request );
 				if ( is_wp_error( $request ) ) {
 					$minify_module->log( $request->get_error_message() );
@@ -1014,21 +1019,20 @@ class WP_Hummingbird_Module_Minify_Group {
 				continue;
 			} else {
 				$minify_module->log( 'Asset (handle: ' . $handle . ') in group ' . $this->type . ' has been successfully processed.' );
-				//$minification_module->errors_controller->clear_handle_error( $handle, $this->type );
+				// $minification_module->errors_controller->clear_handle_error( $handle, $this->type );
 			}
 
-			//$this->set_handle_original_size( $handle, absint( mb_strlen( $content ) ) );
-
+			// $this->set_handle_original_size( $handle, absint( mb_strlen( $content ) ) );
 			// Remove BOM.
 			$content = preg_replace( "/^\xEF\xBB\xBF/", '', $content );
 
 			// Concatenate and minify scripts/styles!
 			if ( 'scripts' === $this->type ) {
-				//$minify_module->log( 'Minify script' );
+				$minify_module->log( 'Do not rewrite URLs in scripts.' );
 			} elseif ( 'styles' === $this->type ) {
-				//$minify_module->log( 'Minify style' );
+				// $minify_module->log( 'Minify style' );
 				if ( $is_local ) {
-					//$content = self::replace_relative_urls( dirname( $path ), $content );
+					// $content = self::replace_relative_urls( dirname( $path ), $content );
 					$content = WP_Hummingbird_CSS_UriRewriter::prepend( $content, trailingslashit( dirname( $src ) ) );
 				}
 
@@ -1058,7 +1062,7 @@ class WP_Hummingbird_Module_Minify_Group {
 					array( 'minify', 'combine' )
 				);
 			} else {
-				//$minification_module->errors_controller->clear_handle_error( $handle, $this->type );
+				// $minification_module->errors_controller->clear_handle_error( $handle, $this->type );
 				$files_data[] = array(
 					'handle'  => $handle,
 					'content' => $content,
@@ -1125,13 +1129,15 @@ class WP_Hummingbird_Module_Minify_Group {
 		 *
 		 * @since 1.9.2  Added as a way to fix the unlimited posts with the same name issue.
 		 */
-		$post_ids = get_posts( array(
-			'name'        => $post_title,
-			'post_type'   => 'wphb_minify_group',
-			'numberposts' => 1,
-			'fields'      => 'ids',
-		) );
-		$post_id = empty( $post_ids ) ? 0 : array_shift( $post_ids );
+		$post_ids = get_posts(
+			array(
+				'name'        => $post_title,
+				'post_type'   => 'wphb_minify_group',
+				'numberposts' => 1,
+				'fields'      => 'ids',
+			)
+		);
+		$post_id  = empty( $post_ids ) ? 0 : array_shift( $post_ids );
 
 		/**
 		 * Insert the new file in posts table.
@@ -1142,13 +1148,15 @@ class WP_Hummingbird_Module_Minify_Group {
 		 *
 		 * In any case, if the above get_posts() does not find any posts, an ID = 0 will create a new post.
 		 */
-		$post_id = wp_insert_post( array(
-			'ID'           => $post_id,
-			'post_title'   => $post_title,
-			'post_status'  => 'publish',
-			'post_type'    => 'wphb_minify_group',
-			'post_content' => $post_content,
-		) );
+		$post_id = wp_insert_post(
+			array(
+				'ID'           => $post_id,
+				'post_title'   => $post_title,
+				'post_status'  => 'publish',
+				'post_type'    => 'wphb_minify_group',
+				'post_content' => $post_content,
+			)
+		);
 
 		if ( $post_id ) {
 			wp_cache_delete( 'wphb_minify_groups' );
@@ -1165,7 +1173,7 @@ class WP_Hummingbird_Module_Minify_Group {
 			}
 
 			$expire_on = apply_filters( 'wphb_file_expiration', MONTH_IN_SECONDS ) + time(); // 1 month;
-			$vars = get_object_vars( $group );
+			$vars      = get_object_vars( $group );
 
 			// Do not save this metadata.
 			$exclude_vars = array( 'group_id' );
@@ -1180,7 +1188,7 @@ class WP_Hummingbird_Module_Minify_Group {
 			if ( 'content' === $file['type'] ) {
 				// Upload contents to filesystem
 				// Any user can upload this as is made during front request.
-				add_filter( 'upload_mimes', array( 'WP_Hummingbird_Module_Minify_Group', '_upload_mimes' ) , 999 );
+				add_filter( 'upload_mimes', array( 'WP_Hummingbird_Module_Minify_Group', '_upload_mimes' ), 999 );
 
 				$suffix = '';
 				if ( 'styles' === $group->type ) {
@@ -1189,7 +1197,7 @@ class WP_Hummingbird_Module_Minify_Group {
 
 					if ( isset( $wp_styles->text_direction ) && 'rtl' === $wp_styles->text_direction && isset( $group->extra['rtl'] ) && $group->extra['rtl'] ) {
 						if ( is_bool( $group->extra['rtl'] ) || 'replace' === $group->extra['rtl'] ) {
-							$suffix   = isset( $group->extra['suffix'] ) ? "-rtl{$group->extra['suffix']}" : '-rtl';
+							$suffix = isset( $group->extra['suffix'] ) ? "-rtl{$group->extra['suffix']}" : '-rtl';
 						}
 					}
 				}
@@ -1198,7 +1206,7 @@ class WP_Hummingbird_Module_Minify_Group {
 				do_action( 'wp_hummingbird_before_upload_minify_group', $filename, $file['response'] );
 				$upload = WP_Hummingbird_Filesystem::handle_file_upload( $filename, $file['response'] );
 				do_action( 'wp_hummingbird_after_upload_minify_group', $filename, $file['response'], $upload );
-				remove_filter( 'upload_mimes', array( 'WP_Hummingbird_Module_Minify_Group', '_upload_mimes' ) , 999 );
+				remove_filter( 'upload_mimes', array( 'WP_Hummingbird_Module_Minify_Group', '_upload_mimes' ), 999 );
 
 				if ( is_wp_error( $upload ) ) {
 					// Save error and delete post.
@@ -1245,17 +1253,17 @@ class WP_Hummingbird_Module_Minify_Group {
 	 * @return array|mixed|object|WP_Error
 	 */
 	public function process_remote_files( $files, $upload_to_cdn = true ) {
-		$f = new stdClass();
+		$f           = new stdClass();
 		$f->contents = array();
-		$f->hash = $this->hash;
-		$f->type = $this->type;
-		$f->expires = $this->expires_on();
-		$f->cdn = $upload_to_cdn;
+		$f->hash     = $this->hash;
+		$f->type     = $this->type;
+		$f->expires  = $this->expires_on();
+		$f->cdn      = $upload_to_cdn;
 		foreach ( $files as $file ) {
-			$c = new stdClass();
-			$c->handle = $file['handle'];
-			$c->content = $file['content'];
-			$c->minify = $file['minify'];
+			$c             = new stdClass();
+			$c->handle     = $file['handle'];
+			$c->content    = $file['content'];
+			$c->minify     = $file['minify'];
 			$f->contents[] = $c;
 		}
 
@@ -1342,7 +1350,7 @@ class WP_Hummingbird_Module_Minify_Group {
 			return true;
 		}
 
-		$handles = $this->get_handles();
+		$handles       = $this->get_handles();
 		$handles_count = count( $handles );
 		if ( 1 === $handles_count && ! $this->should_do_handle( $handles[0], 'minify' ) ) {
 			return false;
@@ -1431,20 +1439,28 @@ class WP_Hummingbird_Module_Minify_Group {
 		}
 
 		$type = 'text/javascript';
-		$tag = 'script';
+		$tag  = 'script';
 		if ( 'styles' === $this->type ) {
 			$type = 'text/css';
-			$tag = 'style';
+			$tag  = 'style';
 		}
 
 		if ( $in_footer ) {
-			add_action( 'wp_footer', function() use ( $tag, $type, $content ) {
-				echo '<' . $tag . ' type="' . $type . '">' . $content . '</' . $tag . '>';
-			}, 999 );
+			add_action(
+				'wp_footer',
+				function() use ( $tag, $type, $content ) {
+					echo '<' . $tag . ' type="' . $type . '">' . $content . '</' . $tag . '>';
+				},
+				999
+			);
 		} else {
-			add_action( 'wp_head', function() use ( $tag, $type, $content ) {
-				echo '<' . $tag . ' type="' . $type . '">' . $content . '</' . $tag . '>';
-			}, 999 );
+			add_action(
+				'wp_head',
+				function() use ( $tag, $type, $content ) {
+					echo '<' . $tag . ' type="' . $type . '">' . $content . '</' . $tag . '>';
+				},
+				999
+			);
 		}
 
 		return true;
@@ -1483,12 +1499,17 @@ class WP_Hummingbird_Module_Minify_Group {
 			$group_id = $this->group_id;
 
 			if ( $this->is_deferred() ) {
-				add_filter( 'script_loader_tag', function( $tag, $handle ) use ( $group_id ) {
-					if ( $group_id !== $handle ) {
-						return $tag;
-					}
-					return str_replace( ' src', ' defer src', $tag );
-				}, 100, 2 );
+				add_filter(
+					'script_loader_tag',
+					function( $tag, $handle ) use ( $group_id ) {
+						if ( $group_id !== $handle ) {
+							return $tag;
+						}
+						return str_replace( ' src', ' defer src', $tag );
+					},
+					100,
+					2
+				);
 			}
 
 			// Add extras to the dependency.
@@ -1516,21 +1537,29 @@ class WP_Hummingbird_Module_Minify_Group {
 
 			$handles = $this->get_handles();
 			// Make sure that this element is makred as done once WordPress has enqueued it.
-			add_action( 'wp_head', function() use ( $handles, $group_id ) {
-				$wp_scripts = wp_scripts();
-				if ( in_array( $group_id, $wp_scripts->done, true ) ) {
-					// If the new ID is done it means that the handle is done too.
-					$wp_scripts->done = array_merge( $wp_scripts->done, $handles );
-				}
-			}, 999 );
+			add_action(
+				'wp_head',
+				function() use ( $handles, $group_id ) {
+					$wp_scripts = wp_scripts();
+					if ( in_array( $group_id, $wp_scripts->done, true ) ) {
+						// If the new ID is done it means that the handle is done too.
+						$wp_scripts->done = array_merge( $wp_scripts->done, $handles );
+					}
+				},
+				999
+			);
 
-			add_action( 'wp_footer', function() use ( $handles, $group_id ) {
-				$wp_scripts = wp_scripts();
-				if ( in_array( $group_id, $wp_scripts->done, true ) ) {
-					// If the new ID is done it means that the handle is done too.
-					$wp_scripts->done = array_merge( $wp_scripts->done, $handles );
-				}
-			}, 999 );
+			add_action(
+				'wp_footer',
+				function() use ( $handles, $group_id ) {
+					$wp_scripts = wp_scripts();
+					if ( in_array( $group_id, $wp_scripts->done, true ) ) {
+						// If the new ID is done it means that the handle is done too.
+						$wp_scripts->done = array_merge( $wp_scripts->done, $handles );
+					}
+				},
+				999
+			);
 
 			$wp_sources->groups[ $this->group_id ] = $in_footer ? 1 : 0;
 		} elseif ( 'styles' === $this->type ) {
@@ -1568,23 +1597,31 @@ class WP_Hummingbird_Module_Minify_Group {
 			}
 
 			$group_id = $this->group_id;
-			$handles = $this->get_handles();
+			$handles  = $this->get_handles();
 			// Make sure that this element is makred as done once WordPress has enqueued it.
-			add_action( 'wp_head', function() use ( $handles, $group_id ) {
-				$wp_styles = wp_styles();
-				if ( in_array( $group_id, $wp_styles->done, true ) ) {
-					// If the new ID is done it means that the handle is done too.
-					$wp_styles->done = array_merge( $wp_styles->done, $handles );
-				}
-			}, 999 );
+			add_action(
+				'wp_head',
+				function() use ( $handles, $group_id ) {
+					$wp_styles = wp_styles();
+					if ( in_array( $group_id, $wp_styles->done, true ) ) {
+						// If the new ID is done it means that the handle is done too.
+						$wp_styles->done = array_merge( $wp_styles->done, $handles );
+					}
+				},
+				999
+			);
 
-			add_action( 'wp_footer', function() use ( $handles, $group_id ) {
-				$wp_styles = wp_styles();
-				if ( in_array( $group_id, $wp_styles->done, true ) ) {
-					// If the new ID is done it means that the handle is done too.
-					$wp_styles->done = array_merge( $wp_styles->done, $handles );
-				}
-			}, 999 );
+			add_action(
+				'wp_footer',
+				function() use ( $handles, $group_id ) {
+					$wp_styles = wp_styles();
+					if ( in_array( $group_id, $wp_styles->done, true ) ) {
+						// If the new ID is done it means that the handle is done too.
+						$wp_styles->done = array_merge( $wp_styles->done, $handles );
+					}
+				},
+				999
+			);
 		} // End if().
 	}
 
@@ -1624,12 +1661,17 @@ class WP_Hummingbird_Module_Minify_Group {
 			}
 
 			if ( $this->is_deferred() ) {
-				add_filter( 'script_loader_tag', function( $tag, $handle ) use ( $new_id ) {
-					if ( $new_id !== $handle ) {
-						return $tag;
-					}
-					return str_replace( ' src', ' defer src', $tag );
-				}, 100, 2 );
+				add_filter(
+					'script_loader_tag',
+					function( $tag, $handle ) use ( $new_id ) {
+						if ( $new_id !== $handle ) {
+							return $tag;
+						}
+						return str_replace( ' src', ' defer src', $tag );
+					},
+					100,
+					2
+				);
 			}
 
 			// A hack to avoid tons of warnings the first time we calculate things.
@@ -1649,21 +1691,29 @@ class WP_Hummingbird_Module_Minify_Group {
 			}
 
 			// Make sure that this element is makred as done once WordPress has enqueued it.
-			add_action( 'wp_head', function() use ( $handle, $new_id ) {
-				$wp_styles = wp_scripts();
-				if ( in_array( $new_id, $wp_styles->done, true ) ) {
-					// If the new ID is done it means that the handle is done too.
-					$wp_styles->done[] = $handle;
-				}
-			}, 999 );
+			add_action(
+				'wp_head',
+				function() use ( $handle, $new_id ) {
+					$wp_styles = wp_scripts();
+					if ( in_array( $new_id, $wp_styles->done, true ) ) {
+						// If the new ID is done it means that the handle is done too.
+						$wp_styles->done[] = $handle;
+					}
+				},
+				999
+			);
 
-			add_action( 'wp_footer', function() use ( $handle, $new_id ) {
-				$wp_styles = wp_scripts();
-				if ( in_array( $new_id, $wp_styles->done, true ) ) {
-					// If the new ID is done it means that the handle is done too.
-					$wp_styles->done[] = $handle;
-				}
-			}, 999 );
+			add_action(
+				'wp_footer',
+				function() use ( $handle, $new_id ) {
+					$wp_styles = wp_scripts();
+					if ( in_array( $new_id, $wp_styles->done, true ) ) {
+						// If the new ID is done it means that the handle is done too.
+						$wp_styles->done[] = $handle;
+					}
+				},
+				999
+			);
 		} elseif ( 'styles' === $this->type ) {
 			$wp_sources = wp_styles();
 
@@ -1692,21 +1742,29 @@ class WP_Hummingbird_Module_Minify_Group {
 			}
 
 			// Make sure that this element is marked as done once WordPress has enqueued it.
-			add_action( 'wp_head', function() use ( $handle, $new_id ) {
-				$wp_styles = wp_styles();
-				if ( in_array( $new_id, $wp_styles->done, true ) ) {
-					// If the new ID is done it means that the handle is done too.
-					$wp_styles->done[] = $handle;
-				}
-			}, 999 );
+			add_action(
+				'wp_head',
+				function() use ( $handle, $new_id ) {
+					$wp_styles = wp_styles();
+					if ( in_array( $new_id, $wp_styles->done, true ) ) {
+						// If the new ID is done it means that the handle is done too.
+						$wp_styles->done[] = $handle;
+					}
+				},
+				999
+			);
 
-			add_action( 'wp_footer', function() use ( $handle, $new_id ) {
-				$wp_styles = wp_styles();
-				if ( in_array( $new_id, $wp_styles->done, true ) ) {
-					// If the new ID is done it means that the handle is done too.
-					$wp_styles->done[] = $handle;
-				}
-			}, 999 );
+			add_action(
+				'wp_footer',
+				function() use ( $handle, $new_id ) {
+					$wp_styles = wp_styles();
+					if ( in_array( $new_id, $wp_styles->done, true ) ) {
+						// If the new ID is done it means that the handle is done too.
+						$wp_styles->done[] = $handle;
+					}
+				},
+				999
+			);
 		} // End if().
 
 		return $new_id;
@@ -1721,7 +1779,7 @@ class WP_Hummingbird_Module_Minify_Group {
 	 * @return string
 	 */
 	public static function replace_relative_urls( $file_url, $css_content ) {
-		include_once( 'class-uri-rewriter.php' );
+		include_once 'class-uri-rewriter.php';
 		return WP_Hummingbird_CSS_UriRewriter::rewrite( $css_content, $file_url );
 	}
 

@@ -32,7 +32,6 @@ class WP_Hummingbird_Utils {
 	 * get_status()
 	 * calculate_sum()
 	 * sanitize_bool()
-	 *
 	 ***************************/
 
 	/**
@@ -104,11 +103,14 @@ class WP_Hummingbird_Utils {
 	 * @param int $ver Current version number of scripts.
 	 */
 	public static function enqueue_admin_scripts( $ver ) {
-		wp_enqueue_script( 'wphb-admin', WPHB_DIR_URL . 'admin/assets/js/app.min.js', array( 'jquery', 'underscore', 'wphb-wpmudev-sui' ), $ver, true );
+		wp_enqueue_script( 'wphb-admin', WPHB_DIR_URL . 'admin/assets/js/wphb-app.min.js', array( 'jquery', 'underscore' ), $ver, true );
 
 		$i10n = array(
-			'errorCachePurge'        => __( 'There was an error during the cache purge. Check folder permissions are 755
-										for /wp-content/wphb-cache or delete directory manually.', 'wphb' ),
+			'errorCachePurge'        => __(
+				'There was an error during the cache purge. Check folder permissions are 755
+										for /wp-content/wphb-cache or delete directory manually.',
+				'wphb'
+			),
 			'successGravatarPurge'   => __( 'Gravatar cache purged.', 'wphb' ),
 			'successPageCachePurge'  => __( 'Page cache purged.', 'wphb' ),
 			'errorRecheckStatus'     => __( 'There was an error re-checking the caching status, please try again later.', 'wphb' ),
@@ -137,20 +139,20 @@ class WP_Hummingbird_Utils {
 		wp_localize_script( 'wphb-admin', 'wphbUptimeStrings', $i10n );
 
 		/* @var WP_Hummingbird_Module_Cloudflare $cf */
-		$cf = self::get_module( 'cloudflare' );
+		$cf   = self::get_module( 'cloudflare' );
 		$i10n = array(
 			'cloudflare' => array(
 				'is' => array(
 					'connected' => $cf->is_connected() && $cf->is_zone_selected(),
 				),
 			),
-			'nonces' => array(
+			'nonces'     => array(
 				'HBFetchNonce' => wp_create_nonce( 'wphb-fetch' ),
 			),
-			'urls'   => array(
+			'urls'       => array(
 				'cachingEnabled' => add_query_arg( 'view', 'caching', self::get_admin_menu_url( 'caching' ) ),
 			),
-			'strings' => array(
+			'strings'    => array(
 				'htaccessUpdated'       => __( 'Your .htaccess file has been updated', 'wphb' ),
 				'htaccessUpdatedFailed' => __( 'There was an error updating the .htaccess file', 'wphb' ),
 				'errorSettingsUpdate'   => __( 'Error updating settings', 'wphb' ),
@@ -170,28 +172,31 @@ class WP_Hummingbird_Utils {
 			$is_scanning = $minify_module->scanner->is_scanning();
 
 			if ( $minify_module->is_on_page() || $is_scanning ) {
-				$i10n = array_merge_recursive( $i10n, array(
-					'minification' => array(
-						'is' => array(
-							'scanning' => $is_scanning,
-							'scanned'  => $minify_module->scanner->is_files_scanned(),
+				$i10n = array_merge_recursive(
+					$i10n,
+					array(
+						'minification' => array(
+							'is'  => array(
+								'scanning' => $is_scanning,
+								'scanned'  => $minify_module->scanner->is_files_scanned(),
+							),
+							'get' => array(
+								'currentScanStep' => $minify_module->scanner->get_current_scan_step(),
+								'totalSteps'      => $minify_module->scanner->get_scan_steps(),
+								'showCDNModal'    => ! is_multisite(),
+							),
 						),
-						'get' => array(
-							'currentScanStep' => $minify_module->scanner->get_current_scan_step(),
-							'totalSteps'      => $minify_module->scanner->get_scan_steps(),
-							'showCDNModal'    => ! is_multisite(),
+						'strings'      => array(
+							'discardAlert'  => __( 'Are you sure? All your changes will be lost', 'wphb' ),
+							'queuedTooltip' => __( 'This file is queued for compression. It will get optimized when someone visits a page that requires it.', 'wphb' ),
+							'excludeFile'   => __( "Don't load file", 'wphb' ),
+							'includeFile'   => __( 'Re-include', 'wphb' ),
 						),
-					),
-					'strings' => array(
-						'discardAlert'  => __( 'Are you sure? All your changes will be lost', 'wphb' ),
-						'queuedTooltip' => __( 'This file is queued for compression. It will get optimized when someone visits a page that requires it.', 'wphb' ),
-						'excludeFile'   => __( "Don't load file", 'wphb' ),
-						'includeFile'   => __( 'Re-include', 'wphb' ),
-					),
-					'links' => array(
-						'minification' => self::get_admin_menu_url( 'minification' ),
-					),
-				));
+						'links'        => array(
+							'minification' => self::get_admin_menu_url( 'minification' ),
+						),
+					)
+				);
 			} // End if().
 		}
 
@@ -275,6 +280,29 @@ class WP_Hummingbird_Utils {
 	}
 
 	/**
+	 * Get the default user data for the report.
+     *
+     * @since 1.9.4
+     *
+     * @return array
+	 */
+	public static function get_user_for_report() {
+		/** Current user @var WP_User $user */
+		$user = wp_get_current_user();
+
+		if ( empty( $user->first_name ) && empty( $user->last_name ) ) {
+			$name = $user->user_login;
+		} else {
+			$name = $user->first_name . ' ' . $user->last_name;
+		}
+
+		return array(
+			'name'  => $name,
+			'email' => $user->user_email,
+		);
+    }
+
+	/**
 	 * Check php version compatibility.
 	 *
 	 * Asset Optimization requires at least php version 5.3 to work.
@@ -304,16 +332,19 @@ class WP_Hummingbird_Utils {
 		$status = false;
 
 		$ch = curl_init();
-		curl_setopt_array( $ch, array(
-			CURLOPT_URL            => get_home_url(),
-			CURLOPT_HEADER         => true,
-			CURLOPT_NOBODY         => true,
-			CURLOPT_RETURNTRANSFER => true,
-			CURLOPT_HTTP_VERSION   => 3, // cURL will attempt to make an HTTP/2.0 request (can downgrade to HTTP/1.1).
-		) );
+		curl_setopt_array(
+			$ch,
+			array(
+				CURLOPT_URL            => get_home_url(),
+				CURLOPT_HEADER         => true,
+				CURLOPT_NOBODY         => true,
+				CURLOPT_RETURNTRANSFER => true,
+				CURLOPT_HTTP_VERSION   => 3, // cURL will attempt to make an HTTP/2.0 request (can downgrade to HTTP/1.1).
+			)
+		);
 		$response = curl_exec( $ch );
 
-		if ( false !== $response && ( 0 === strpos( $response, 'HTTP/2.0' ) || 0 === strpos( $response,  'HTTP/2' ) ) ) {
+		if ( false !== $response && ( 0 === strpos( $response, 'HTTP/2.0' ) || 0 === strpos( $response, 'HTTP/2' ) ) ) {
 			$status = true;
 		}
 
@@ -393,7 +424,7 @@ class WP_Hummingbird_Utils {
 		}
 
 		// Everything else will map nicely to boolean.
-		return (boolean) $value;
+		return (bool) $value;
 	}
 
 	/***************************
@@ -407,7 +438,6 @@ class WP_Hummingbird_Utils {
 	 * get_recommended_caching_values()
 	 * convert_cloudflare_frequency()
 	 * get_browser_caching_types()
-	 *
 	 ***************************/
 
 	/**
@@ -553,7 +583,7 @@ class WP_Hummingbird_Utils {
 	 */
 	public static function get_recommended_caching_values() {
 		return array(
-			'css' => array(
+			'css'        => array(
 				'label' => __( '8+ days', 'wphb' ),
 				'value' => 8 * 24 * 3600,
 			),
@@ -561,11 +591,11 @@ class WP_Hummingbird_Utils {
 				'label' => __( '8+ days', 'wphb' ),
 				'value' => 8 * 24 * 3600,
 			),
-			'media' => array(
+			'media'      => array(
 				'label' => __( '8+ days', 'wphb' ),
 				'value' => 8 * 24 * 3600,
 			),
-			'images' => array(
+			'images'     => array(
 				'label' => __( '8+ days', 'wphb' ),
 				'value' => 8 * 24 * 3600,
 			),
@@ -625,11 +655,11 @@ class WP_Hummingbird_Utils {
 		$cloudflare = self::get_module( 'cloudflare' );
 
 		if ( $cloudflare->is_connected() && $cloudflare->is_zone_selected() ) {
-			$caching_types['javascript']     = 'txt | xml | js';
-			$caching_types['css']            = 'css';
-			$caching_types['media']          = 'flv | ico | pdf | avi | mov | ppt | doc | mp3 | wmv | wav | mp4 | m4v | ogg | webm | aac | eot | ttf | otf | woff | svg';
-			$caching_types['images']         = 'jpg | jpeg | png | gif | swf | webp';
-			$caching_types['cloudflare']     = 'bmp | pict | csv | pls | tif | tiff | eps | ejs | midi | mid | woff2 | svgz | docx | xlsx | xls | pptx | ps | class | jar';
+			$caching_types['javascript'] = 'txt | xml | js';
+			$caching_types['css']        = 'css';
+			$caching_types['media']      = 'flv | ico | pdf | avi | mov | ppt | doc | mp3 | wmv | wav | mp4 | m4v | ogg | webm | aac | eot | ttf | otf | woff | svg';
+			$caching_types['images']     = 'jpg | jpeg | png | gif | swf | webp';
+			$caching_types['cloudflare'] = 'bmp | pict | csv | pls | tif | tiff | eps | ejs | midi | mid | woff2 | svgz | docx | xlsx | xls | pptx | ps | class | jar';
 		}
 
 		return $caching_types;
@@ -643,7 +673,6 @@ class WP_Hummingbird_Utils {
 	 * get_days_of_week()
 	 * get_times()
 	 * get_days_of_month()
-	 *
 	 ***************************/
 
 	/**
@@ -787,6 +816,67 @@ class WP_Hummingbird_Utils {
 		return apply_filters( 'wphb_scan_get_days_of_week', $days );
 	}
 
+	/**
+	 * Local time to UTC.
+	 *
+	 * @since 1.4.5
+	 *
+	 * @param string $time  Time string.
+	 *
+	 * @return false|int
+	 */
+	public static function local_to_utc( $time ) {
+		$tz = get_option( 'timezone_string' );
+		if ( ! $tz ) {
+			$gmt_offset = get_option( 'gmt_offset' );
+			if ( 0 === $gmt_offset ) {
+				return strtotime( $time );
+			}
+			$tz = self::get_timezone_string( $gmt_offset );
+		}
+
+		if ( ! $tz ) {
+			$tz = 'UTC';
+		}
+		$timezone = new DateTimeZone( $tz );
+		try {
+			$time = new DateTime( $time, $timezone );
+		} catch ( Exception $e ) {
+			error_log( '[' . current_time( 'mysql' ) . '] - Error in local_to_utc(). Error: ' . $e->getMessage() );
+		}
+
+		// Had to switch because of PHP 5.2 compatibility issues.
+		// return $time->getTimestamp();
+		return $time->format( 'U' );
+	}
+
+	/**
+	 * Get time zone string.
+	 *
+	 * @since  1.4.5
+	 *
+	 * @param  string $timezone  Time zone.
+	 *
+	 * @return false|string
+	 */
+	private static function get_timezone_string( $timezone ) {
+		$timezone = explode( '.', $timezone );
+		if ( isset( $timezone[1] ) ) {
+			$timezone[1] = 30;
+		} else {
+			$timezone[1] = '00';
+		}
+		$offset                  = implode( ':', $timezone );
+		list( $hours, $minutes ) = explode( ':', $offset );
+		$seconds                 = $hours * 60 * 60 + $minutes * 60;
+		$tz                      = timezone_name_from_abbr( '', $seconds, 1 );
+		if ( false === $tz ) {
+			$tz = timezone_name_from_abbr( '', $seconds, 0 );
+		}
+
+		return $tz;
+	}
+
 	/***************************
 	 *
 	 * IV. Link and url functions
@@ -796,7 +886,6 @@ class WP_Hummingbird_Utils {
 	 * _still_having_trouble_link()
 	 * get_admin_menu_url()
 	 * get_avatar_url()
-	 *
 	 ***************************/
 
 	/**
@@ -832,7 +921,7 @@ class WP_Hummingbird_Utils {
 			case 'smush':
 				if ( self::is_member() ) {
 					// Return the pro plugin URL.
-					$url = WPMUDEV_Dashboard::$ui->page_urls->plugins_url;
+					$url  = WPMUDEV_Dashboard::$ui->page_urls->plugins_url;
 					$link = $url . '#pid=912164';
 				} else {
 					// Return the free URL.
@@ -890,7 +979,8 @@ class WP_Hummingbird_Utils {
 	 */
 	public static function _still_having_trouble_link() {
 		esc_html_e( 'Still having trouble? ', 'wphb' );
-		if ( self::is_member() ) : ?>
+		if ( self::is_member() ) :
+			?>
 			<a target="_blank" href="<?php echo self::get_link( 'chat' ); ?>">
 				<?php esc_html_e( 'Start a live chat.', 'wphb' ); ?>
 			</a>
@@ -898,7 +988,8 @@ class WP_Hummingbird_Utils {
 			<a target="_blank" href="<?php echo self::get_link( 'support' ); ?>">
 				<?php esc_html_e( 'Open a support ticket.', 'wphb' ); ?>
 			</a>
-		<?php endif;
+		<?php
+		endif;
 	}
 
 	/**
@@ -948,7 +1039,6 @@ class WP_Hummingbird_Utils {
 	 * get_number_of_issues()
 	 * minified_files_count()
 	 * remove_quick_setup()
-	 *
 	 ***************************/
 
 	/**
@@ -1011,10 +1101,10 @@ class WP_Hummingbird_Utils {
 	 */
 	public static function get_active_cache_modules() {
 		$modules = array(
-			'page_cache'   => __( 'Page', 'wphb' ),
-			'cloudflare'   => __( 'CloudFlare', 'wphb' ),
-			'gravatar'     => __( 'Gravatar', 'wphb' ),
-			'minify'       => __( 'Asset Optimization', 'wphb' ),
+			'page_cache' => __( 'Page', 'wphb' ),
+			'cloudflare' => __( 'CloudFlare', 'wphb' ),
+			'gravatar'   => __( 'Gravatar', 'wphb' ),
+			'minify'     => __( 'Asset Optimization', 'wphb' ),
 		);
 
 		// Remove minification module where php is not supported.
@@ -1083,7 +1173,14 @@ class WP_Hummingbird_Utils {
 					break;
 				}
 
-				$issues = count( $report ) - count( array_filter( $report ) );
+				$invalid = 0;
+				foreach ( $report as $item => $type ) {
+				    if ( ! $type || 'privacy' === $type ) {
+				        $invalid++;
+                    }
+                }
+
+				$issues = $invalid;
 				break;
 			case 'performance':
 				if ( ! $report ) {
@@ -1153,12 +1250,9 @@ class WP_Hummingbird_Utils {
 	 * @since 1.5.0
 	 */
 	public static function remove_quick_setup() {
-		$quick_setup = get_option( 'wphb-quick-setup' );
+		$quick_setup             = get_option( 'wphb-quick-setup' );
 		$quick_setup['finished'] = true;
 		update_option( 'wphb-quick-setup', $quick_setup );
-		wp_send_json_success( array(
-			'finished' => false,
-		));
 	}
 
 	/**

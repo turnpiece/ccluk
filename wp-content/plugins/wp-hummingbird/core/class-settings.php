@@ -133,7 +133,9 @@ class WP_Hummingbird_Settings {
 				'cache_expiry' => 691200,
 			),
 			'performance' => array(
-				'reports'       => false,
+				'reports'       => array(
+					'enabled' => false,
+				),
 				'subsite_tests' => false,
 				'dismissed'     => false,
 				'last_score'    => 0,

@@ -23,6 +23,10 @@
  * ╚══════╝╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	die( 'Kangaroos cannot jump here' );
+}
+
 class Ai1wm_Import_Database {
 
 	public static function execute( $params ) {
@@ -704,6 +708,9 @@ class Ai1wm_Import_Database {
 		// Get HTTP password
 		$auth_password = get_option( AI1WM_AUTH_PASSWORD );
 
+		// Get backups labels
+		$backups_labels = get_option( AI1WM_BACKUPS_LABELS, array() );
+
 		$old_table_prefixes = array();
 		$new_table_prefixes = array();
 
@@ -768,6 +775,9 @@ class Ai1wm_Import_Database {
 		// Set Visual Composer
 		$mysql->set_visual_composer( ai1wm_validate_plugin_basename( 'js_composer/js_composer.php' ) );
 
+		// Set Optimize Press
+		$mysql->set_optimize_press( ai1wm_validate_plugin_basename( 'optimizePressPlugin/optimizepress.php' ) );
+
 		// Set BeTheme Responsive
 		$mysql->set_betheme_responsive( ai1wm_validate_theme_basename( 'betheme/style.css' ) );
 
@@ -827,6 +837,9 @@ class Ai1wm_Import_Database {
 
 		// Set the new HTTP password
 		update_option( AI1WM_AUTH_PASSWORD, $auth_password );
+
+		// Set the new backups labels
+		update_option( AI1WM_BACKUPS_LABELS, $backups_labels );
 
 		return $params;
 	}

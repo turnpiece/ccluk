@@ -6,13 +6,13 @@
 		if ( $last_report && ! is_wp_error( $last_report ) && ! $report_dismissed ) :
 			if ( 85 <= $last_report->score ) :
 				$error_class = 'success';
-				$icon_class = 'check-tick';
+				$icon_class  = 'check-tick';
 			elseif ( 65 <= $last_report->score ) :
 				$error_class = 'warning';
-				$icon_class = 'warning-alert';
+				$icon_class  = 'warning-alert';
 			else :
 				$error_class = 'error';
-				$icon_class = 'warning-alert';
+				$icon_class  = 'warning-alert';
 			endif;
 			?>
 			<span class="sui-summary-large"><?php echo esc_html( $last_report->score ); ?></span>
@@ -34,11 +34,13 @@
 		<span class="sui-summary-sub"><?php esc_html_e( 'Current performance score', 'wphb' ); ?></span>
 		<?php
 		if ( $last_report && ! is_wp_error( $last_report ) ) {
-			$data_time = strtotime( get_date_from_gmt( date( 'Y-m-d H:i:s', $last_report->time ) ) );
-			echo date_i18n( get_option( 'date_format' ), $data_time );
 			?>
 			<span class="sui-summary-detail">
-				<?php printf( _x( 'at %s', 'Time of the last performance report', 'wphb' ), date_i18n( get_option( 'time_format' ), $data_time ) ); ?>
+				<?php
+				$data_time = strtotime( get_date_from_gmt( date( 'Y-m-d H:i:s', $last_report->time ) ) );
+				echo date_i18n( get_option( 'date_format' ), $data_time );
+				printf( _x( ' at %s', 'Time of the last performance report', 'wphb' ), date_i18n( get_option( 'time_format' ), $data_time ) );
+				?>
 			</span>
 			<?php
 		} elseif ( $is_doing_report ) {
@@ -72,7 +74,7 @@
 				<?php elseif ( intval( $improvement ) === 0 ) : ?>
 					<div class="sui-tag sui-tag-disabled">0</div>
 				<?php else : ?>
-					<div class="sui-tag"><?php echo intval( $improvement ); ?></div>
+					<div class="sui-tag sui-tag-warning"><?php echo intval( $improvement ); ?></div>
 				<?php endif; ?>
 			</span>
 		</li>

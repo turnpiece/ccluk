@@ -288,6 +288,29 @@ function apbct_settings__add_page() {
 					'parent'      => 'gdpr_enabled',
 					'class'       => 'apbct_settings-field_wrapper--sub',
 				),
+				'store_urls' => array(
+					'type'        => 'checkbox',
+					'title'       => __('Store visited URLs', 'cleantalk'),
+					'description' => __("Plugin stores last 10 visited URLs (HTTP REFFERERS) before visitor submits form on the site. You can see stored visited URLS for each visitor in your Dashboard. Turn the option on to improve Anti-Spam protection.", 'cleantalk'),
+					'childrens'   => array('store_urls__sessions'),
+				),
+				'store_urls__sessions' => array(
+					'type'        => 'checkbox',
+					'title'       => __('Use cookies less sessions', 'cleantalk'),
+					'description' => __('Doesn\'t use cookie or PHP sessions. Collect data for all type of bots.', 'cleantalk'),
+					'parent'      => 'store_urls',
+					'class'       => 'apbct_settings-field_wrapper--sub',
+				),
+				'comment_notify' => array(
+					'type'        => 'checkbox',
+					'title'       => __('Notify users with selected roles about new approved comments. Hold CTRL to select multiple roles.', 'cleantalk'),
+					'description' => sprintf(__("If enabled, overrides similar Wordpress %sdiscussion settings%s.", 'cleantalk'), '<a href="options-discussion.php">','</a>'),
+					'childrens'   => array('comment_notify__roles'),
+				),
+				'comment_notify__roles' => array(
+					'callback'    => 'apbct_settings__field__comment_notify',
+				),
+				
 			),
 		),
 	);
@@ -760,6 +783,32 @@ function apbct_settings__field__connection_reports() {
 	echo '</div>';
 }
 
+function apbct_settings__field__comment_notify() {
+	
+	global $apbct, $wp_roles;
+	
+	$wp_roles = new WP_Roles();
+	$roles = $wp_roles->get_names();
+	
+	echo '<div class="apbct_settings-field_wrapper apbct_settings-field_wrapper--sub">';
+		
+		echo '<select multiple="multiple" id="apbct_setting_comment_notify__roles" name="cleantalk_settings[comment_notify__roles][]"'
+			.(!$apbct->settings['comment_notify'] ? ' disabled="disabled"' : '')
+			.' size="'.(count($roles)-1).'"'
+		. '>';
+		
+			foreach ($roles as $role){
+				if($role == 'Subscriber') continue;
+				echo '<option'
+					.(in_array($role, $apbct->settings['comment_notify__roles']) ? ' selected="selected"' : '')
+				. '>'.$role.'</option>';
+			}
+			
+		echo '</select>';
+		
+	echo '</div>';
+}
+
 function apbct_settings__field__draw($params = array()){
 	
 	global $apbct;
@@ -844,10 +893,15 @@ function apbct_settings__field__draw($params = array()){
 function apbct_settings__validate($settings) {
 	
 	global $apbct;
-	
-	// Validating settings
-	$settings['spam_firewall'] = isset($settings['spam_firewall']) ? $settings['spam_firewall'] : 0;
-	
+		
+	// Set missing settings.
+	foreach($apbct->def_settings as $setting => $value){
+		if(!isset($settings[$setting])){
+			$settings[$setting] = null;
+			settype($settings[$setting], gettype($value));
+		}
+	} unset($setting, $value);
+		
 	// validating API key
 	$settings['apikey'] = isset($settings['apikey']) ? trim($settings['apikey']) : '';
 	$settings['apikey'] = $apbct->white_label ? $apbct->settings['apikey'] : $settings['apikey'];

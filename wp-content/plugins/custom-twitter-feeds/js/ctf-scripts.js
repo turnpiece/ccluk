@@ -89,6 +89,11 @@ if(!ctf_js_exists){
                 $ctf.find('.ctf-header .ctf-header-img-hover').stop().fadeOut(600);
             });
 
+            $ctf.find('.ctf_more').unbind('click').bind('click', function(e){
+                e.preventDefault();
+                $(this).hide().next('.ctf_remaining').show();
+            });
+
             // Call Custom JS if it exists
             if (typeof ctf_custom_js == 'function') ctf_custom_js($);
 

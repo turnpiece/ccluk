@@ -28,17 +28,22 @@
 <div class="wphb-border-row<?php echo ( $disabled ) ? ' disabled' : ''; ?>"
 	 id="wphb-file-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>"
 	 data-filter="<?php echo esc_attr( $item['handle'] . ' ' . $ext ); ?>"
-	 data-filter-secondary="<?php echo esc_attr( $filter ); echo 'OTHER' === $ext ? 'other' : ''?>">
+	 data-filter-secondary="
+		<?php
+		echo esc_attr( $filter );
+		echo 'OTHER' === $ext ? 'other' : '';
+		?>
+		">
 	<?php if ( $processed && ! $compressed ) : ?>
-		<span class="wphb-row-status wphb-row-status-already-compressed sui-tooltip sui-tooltip-top-right sui-tooltip-constrained"
+		<span class="wphb-row-status wphb-row-status-already-compressed sui-tooltip sui-tooltip-top-left sui-tooltip-constrained"
 			  data-tooltip="<?php esc_attr_e( 'This file has already been compressed – we recommend you turn off compression for this file to avoid issues', 'wphb' ); ?>"><i
 				class="sui-icon-warning-alert" aria-hidden="true"></i></span>
 	<?php elseif ( 'OTHER' === $ext ) : ?>
-		<span class="wphb-row-status wphb-row-status-other sui-tooltip sui-tooltip-top-right sui-tooltip-constrained"
+		<span class="wphb-row-status wphb-row-status-other sui-tooltip sui-tooltip-top-left sui-tooltip-constrained"
 			  data-tooltip="<?php esc_attr_e( 'This file has no linked URL, it will not be combined/minified', 'wphb' ); ?>"><i
 				class="sui-icon-info" aria-hidden="true"></i></span>
 	<?php endif; ?>
-	<span class="wphb-row-status wphb-row-status-changed sui-tooltip sui-tooltip-top-right sui-hidden"
+	<span class="wphb-row-status wphb-row-status-changed sui-tooltip sui-tooltip-top-left sui-hidden"
 		  data-tooltip="<?php esc_attr_e( 'You need to publish your changes for your new settings to take effect', 'wphb' ); ?>"><i
 			class="sui-icon-update" aria-hidden="true"></i></span>
 
@@ -70,7 +75,7 @@
 			<?php elseif ( ! in_array( $item['handle'], $options['minify'][ $type ], true ) ) : ?>
 				<span class="original-size"><?php echo esc_html( $original_size ); ?>KB &mdash;</span>
 			<?php else : ?>
-				<span class="wphb-row-status wphb-row-status-queued sui-tooltip sui-tooltip-top-right sui-tooltip-constrained"
+				<span class="wphb-row-status wphb-row-status-queued sui-tooltip sui-tooltip-top-left sui-tooltip-constrained"
 					  data-tooltip="<?php esc_attr_e( 'This file is queued for compression. It will get optimized when someone visits a page that requires it.', 'wphb' ); ?>"><i
 						class="sui-icon-loader sui-loading" aria-hidden="true"></i></span>
 				<span class="original-size"><?php echo esc_html( $original_size ); ?>KB &mdash;</span>
@@ -103,7 +108,7 @@
 		<label for="wphb-minification-minify-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>"
 			   class="toggle-label sui-tooltip sui-tooltip-top-left sui-tooltip-constrained"
 			   data-tooltip="<?php echo esc_attr( $tooltip ); ?>">
-			<span class="hb-icon-minify" aria-hidden="true"></span>
+			<span class="sui-icon-arrows-in" aria-hidden="true"></span>
 		</label>
 	</div><!-- end checkbox-group -->
 

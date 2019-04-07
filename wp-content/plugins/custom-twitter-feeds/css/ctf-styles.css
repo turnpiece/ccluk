@@ -13,6 +13,22 @@
 #ctf .ctf-item:first-child{
     border-top: none;
 }
+#ctf .ctf_remaining {
+    display: none;
+}
+#ctf .ctf_more{
+    padding: 1px;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    display: inline-block;
+    line-height: 1;
+}
+#ctf .ctf_more:hover {
+    cursor: pointer;
+    background: rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.1);
+    text-decoration: none;
+}
 
 /* Header */
 #ctf .ctf-header{

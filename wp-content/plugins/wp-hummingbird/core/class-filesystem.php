@@ -97,7 +97,7 @@ if ( ! class_exists( 'WP_Hummingbird_Filesystem' ) ) {
 		 * @access private
 		 */
 		private function __construct() {
-			$this->status  = $this->init_fs();
+			$this->status = $this->init_fs();
 
 			if ( is_multisite() ) {
 				$blog = get_blog_details();
@@ -144,11 +144,11 @@ if ( ! class_exists( 'WP_Hummingbird_Filesystem' ) ) {
 		private function init_fs() {
 			// Need to include file.php for frontend.
 			if ( ! function_exists( 'request_filesystem_credentials' ) ) {
-				require_once( ABSPATH . 'wp-admin/includes/file.php' );
+				require_once ABSPATH . 'wp-admin/includes/file.php';
 			}
 
 			// Removes CRITICAL Uncaught Error: Call to undefined function submit_button() in wp-admin/includes/file.php:1287.
-			require_once( ABSPATH . 'wp-admin/includes/template.php' );
+			require_once ABSPATH . 'wp-admin/includes/template.php';
 
 			// Check if the user has write permissions.
 			$access_type = get_filesystem_method();
@@ -171,7 +171,7 @@ if ( ! class_exists( 'WP_Hummingbird_Filesystem' ) ) {
 
 			// Can not write to wp-content directory.
 			if ( defined( WP_CONTENT_DIR ) && ! is_writeable( WP_CONTENT_DIR ) ) {
-				return new WP_Error( 'fs-error', __( 'Error: The wp-content directory is not writable. Ensure the folder has proper read/write permissions for caching to function successfully.', 'wphb' ) );	   			 	 		  		   		
+				return new WP_Error( 'fs-error', __( 'Error: The wp-content directory is not writable. Ensure the folder has proper read/write permissions for caching to function successfully.', 'wphb' ) );
 			}
 
 			return true;
@@ -262,7 +262,6 @@ if ( ! class_exists( 'WP_Hummingbird_Filesystem' ) ) {
 					}
 				}
 			}
-
 
 			// If directory not found - exit.
 			if ( ! is_dir( $path ) ) {
@@ -402,43 +401,55 @@ if ( ! class_exists( 'WP_Hummingbird_Filesystem' ) ) {
 				// Check if cache folder exists. If not - create it.
 				if ( ! $wp_filesystem->exists( $path ) ) {
 					if ( ! @wp_mkdir_p( $path ) ) {
-						return new WP_Error( 'fs-dir-error', sprintf(
-							/* translators: %s: directory */
-							__( 'Error creating directory %s.', 'wphb' ),
-							esc_html( $path )
-						) );
+						return new WP_Error(
+							'fs-dir-error',
+							sprintf(
+								/* translators: %s: directory */
+								__( 'Error creating directory %s.', 'wphb' ),
+								esc_html( $path )
+							)
+						);
 					}
 				}
 
 				// Create the file.
 				if ( ! $wp_filesystem->put_contents( $path . $file, $content, FS_CHMOD_FILE ) ) {
-					return new WP_Error( 'fs-file-error', sprintf(
-						/* translators: %s: file */
-						__( 'Error uploading file %s.', 'wphb' ),
-						esc_html( $file )
-					) );
+					return new WP_Error(
+						'fs-file-error',
+						sprintf(
+							/* translators: %s: file */
+							__( 'Error uploading file %s.', 'wphb' ),
+							esc_html( $file )
+						)
+					);
 				}
 			} else {
 				// Use direct filesystem php functions.
 				// Check if cache folder exists. If not - create it.
 				if ( ! is_dir( $path ) ) {
 					if ( ! @wp_mkdir_p( $path ) ) {
-						return new WP_Error( 'fs-dir-error', sprintf(
-							/* translators: %s: directory */
-							__( 'Error creating directory %s.', 'wphb' ),
-							esc_html( $path )
-						) );
+						return new WP_Error(
+							'fs-dir-error',
+							sprintf(
+								/* translators: %s: directory */
+								__( 'Error creating directory %s.', 'wphb' ),
+								esc_html( $path )
+							)
+						);
 					}
 				}
 
 				// Create the file.
 				$file = fopen( $path . $file, 'w' );
 				if ( ! fwrite( $file, $content ) ) {
-					return new WP_Error( 'fs-file-error', sprintf(
-						/* translators: %s: file */
-						__( 'Error uploading file %s.', 'wphb' ),
-						esc_html( $file )
-					) );
+					return new WP_Error(
+						'fs-file-error',
+						sprintf(
+							/* translators: %s: file */
+							__( 'Error uploading file %s.', 'wphb' ),
+							esc_html( $file )
+						)
+					);
 				} elseif ( $file ) {
 					fclose( $file );
 				}
@@ -483,13 +494,13 @@ if ( ! class_exists( 'WP_Hummingbird_Filesystem' ) ) {
 
 			$user_defined_path = WP_Hummingbird_Settings::get_setting( 'file_path', 'minify' );
 
-			$basedir       = $upload['basedir'];
-			$baseurl       = $upload['baseurl'];
+			$basedir = $upload['basedir'];
+			$baseurl = $upload['baseurl'];
 
 			// Check if user defined a custom path.
 			if ( ! isset( $user_defined_path ) || empty( $user_defined_path ) ) {
 				$custom_subdir = '/hummingbird-assets';
-				$custom_dir = $upload['basedir'] . $custom_subdir;
+				$custom_dir    = $upload['basedir'] . $custom_subdir;
 			} else {
 				/**
 				 * Possible variations:
@@ -558,7 +569,7 @@ if ( ! class_exists( 'WP_Hummingbird_Filesystem' ) ) {
 			clearstatcache();
 
 			// Set correct file permissions.
-			$stat = @ stat( dirname( $new_file ) );
+			$stat  = @ stat( dirname( $new_file ) );
 			$perms = $stat['mode'] & 0007777;
 			$perms = $perms & 0000666;
 			@ chmod( $new_file, $perms );

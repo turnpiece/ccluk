@@ -78,6 +78,22 @@
 	}
 
 	/**
+	 * Toggles the notifications message based on migration health status
+	 */
+	function toggle_migration_health_message( is_slow ) {
+		var $msg = $( '.shipper-migration-health' ),
+			is_visible = !!$msg.is( ':visible' )
+		;
+		if ( is_slow && !is_visible ) {
+			return $msg.show();
+		}
+
+		if ( !is_slow && is_visible ) {
+			return $msg.hide();
+		}
+	}
+
+	/**
 	 * Adds Shipper flag to heartbeat request
 	 */
 	function heartbeat_request( event, data ) {
@@ -85,18 +101,22 @@
 	}
 
 	function heartbeat_response( event, data ) {
-		if (!data['shipper-migration']) {
+		if ( ! data['shipper-migration'] ) {
 			return;
 		}
 
 		var is_done = !!(data['shipper-migration'] || {}).is_done,
+			is_slow = !!(data['shipper-migration'] || {}).is_slow,
 			percentage = parseInt((data['shipper-migration'] || {}).progress, 10) || 0,
 			msg = (data['shipper-migration'] || {}).message || false,
 			errors = (data['shipper-migration'] || {}).errors || []
 		;
 		update_progress_bar( { progress: percentage, msg: msg });
-		if (percentage >= 100 || is_done) {
-			if (errors.length) {
+
+		toggle_migration_health_message( is_slow );
+
+		if ( percentage >= 100 || is_done ) {
+			if ( errors.length ) {
 				show_done_with_errors();
 			} else {
 				show_page( 'done' );

@@ -70,19 +70,33 @@ class Shipper_Helper_Fs_Remote {
 			$creds->save();
 
 			$this->_creds = $creds;
-		} elseif ( $task->has_errors() ) {
-			foreach ( $task->get_errors() as $error ) {
+
+			// We're good, reset the error count.
+			update_site_option( 'shipper-storage-creds-errcount', 0 );
+		} else {
+			if ( $task->has_errors() ) {
+				foreach ( $task->get_errors() as $error ) {
+					Shipper_Helper_Log::write(
+						sprintf(
+							__( 'Credentials update failed: %s', 'shipper' ),
+							$error->get_error_message()
+						)
+					);
+				}
+			} else {
 				Shipper_Helper_Log::write(
-					sprintf(
-						__( 'Credentials update failed: %s', 'shipper' ),
-						$error->get_error_message()
-					)
+					__( 'Credentials updating task silently failed.', 'shipper' )
 				);
 			}
-		} else {
-			Shipper_Helper_Log::write(
-				__( 'Credentials updating task silently failed.', 'shipper' )
-			);
+
+			$errcount = get_site_option( 'shipper-storage-creds-errcount', 0 );
+			update_site_option( 'shipper-storage-creds-errcount', $errcount + 1 );
+			if ( $errcount > 3 ) {
+				// So we had more than we can take.
+				// Drop now, and let one of continuation mechanisms pick it up later.
+				Shipper_Helper_Log::write( 'Postponing further attempts until later.' );
+				die;
+			}
 		}
 
 		return $status;
@@ -630,11 +644,16 @@ class Shipper_Helper_Fs_Remote {
 	 * @param string $source Source file absolute path (local fs).
 	 * @param string $dest_relpath Destination relative path (on S3).
 	 *
-	 * @return array
+	 * @return array|false
 	 */
 	public function get_upload_command( $source, $dest_relpath ) {
 		$s3 = $this->get_remote_storage_handler();
 		$creds = $this->get_creds();
+
+		if ( ! is_readable( $source ) ) {
+			// We won't be able to upload this.
+			return false;
+		}
 
 		$cmd = $s3->getCommand('PutObject', array(
 			'Bucket' => $creds->get( Shipper_Model_Stored_Creds::KEY_BUCKET ),
@@ -685,34 +704,44 @@ class Shipper_Helper_Fs_Remote {
 		$s3 = $this->get_remote_storage_handler();
 		$this->_batch_error = false;
 
-		\Aws\CommandPool::batch( $s3, $batch, array(
-			'concurrency' => 5,
-			/*
-			'before' => function ( $cmd, $key ) {
-				Shipper_Helper_Log::write( sprintf(
-					'About to send key [%s]',
-					$key
-				) );
-			},
-			'fulfilled' => function( $result, $key ) {
-				Shipper_Helper_Log::write( sprintf(
-					'[OK] Success sending off [%s]',
-					$key
-				) );
-			},
-			 */
-			'rejected' => function ( $reason, $key, $aggregate = false ) {
-				Shipper_Helper_Log::write( sprintf(
-					'[FAIL] Transfer failed for [%s]: [%s]',
-					$key, $reason->getMessage()
-				) );
-				$this->_batch_error = true;
-				if ( $aggregate && is_callable( array( $aggregate, 'reject' ) ) ) {
-					Shipper_Helper_Log::write( 'Rejecting aggregate' );
-					$aggregate->reject( 'Reject all' );
-				}
-			},
-		) );
+		try {
+			\Aws\CommandPool::batch( $s3, $batch, array(
+				'concurrency' => 5,
+				/*
+				'before' => function ( $cmd, $key ) {
+					Shipper_Helper_Log::write( sprintf(
+						'About to send key [%s]',
+						$key
+					) );
+				},
+				'fulfilled' => function( $result, $key ) {
+					Shipper_Helper_Log::write( sprintf(
+						'[OK] Success sending off [%s]',
+						$key
+					) );
+				},
+				 */
+				'rejected' => function ( $reason, $key, $aggregate = false ) {
+					Shipper_Helper_Log::write( sprintf(
+						'[FAIL] Transfer failed for [%s]: [%s]',
+						$key, $reason->getMessage()
+					) );
+					$this->_batch_error = true;
+					if ( $aggregate && is_callable( array( $aggregate, 'reject' ) ) ) {
+						Shipper_Helper_Log::write( 'Rejecting aggregate' );
+						$aggregate->reject( 'Reject all' );
+					}
+				},
+			) );
+		} catch ( Exception $e ) {
+			Shipper_Helper_Log::write(
+				sprintf(
+					'Batch upload unexpected exception: %s',
+					$e->getMessage()
+				)
+			);
+			$this->_batch_error = true;
+		}
 
 		return ! $this->_batch_error;
 	}

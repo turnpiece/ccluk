@@ -91,7 +91,17 @@
  * Summary meta box
  */
 .wpmud .box-uptime-summary .sui-summary {
-    background-image: url("#{$image--path}/hb-graphic-uptime-up@2x.png");
+
+	&:not(.sui-unbranded):not(.sui-summary-sm) {
+
+		@if variable-exists(summary-image) {
+			@include background-2x( "#{$image--path}/hb-graphic-uptime-up", 'png', 192px, 172px, 30px 100% );
+		}
+
+        @include media(max-width, md) {
+            background-image: unset;
+        }
+	}
 }
 
 /**
@@ -265,7 +275,7 @@
  * Reporting
  */
 @include body-class(true) {
-    .wphb-uptime-reporting-recipients {
+    .sui-recipients {
         .sui-form-field {
             margin-bottom: 10px;
             .select-container {
@@ -286,10 +296,6 @@
         top: 0;
         right: 0;
         margin-right: 0;
-    }
-
-    .wpmud .uptime-data-range .select-list-container {
-        min-width: 180px;
     }
 
     .wpmud .wrap-wphb-uptime .actions > .documentation-button {

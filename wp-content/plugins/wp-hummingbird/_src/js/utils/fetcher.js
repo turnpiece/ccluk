@@ -152,6 +152,11 @@ function Fetcher() {
 					.then( ( response ) => {
 						return response;
 					});
+			},
+
+            clearCacheForPost: ( postId ) => {
+				const action = actionPrefix + 'gutenberg_clear_post_cache';
+                return request( action, { postId }, 'POST' );
 			}
         },
 
@@ -463,12 +468,13 @@ function Fetcher() {
 			 * Add recipient for Performance and Uptime reports.
 			 *
 			 * @param {string} module  Module name.
+			 * @param {string} setting Setting name.
 			 * @param {string} email   Email.
 			 * @param {string} name    User.
 			 */
-			addRecipient: ( module, email, name ) => {
+			addRecipient: ( module, setting, email, name ) => {
 				const action = actionPrefixPro + 'add_recipient';
-				return request( action, { module, email, name }, 'POST' )
+				return request( action, { module, setting, email, name }, 'POST' )
 					.then( ( response ) => {
 					return response;
 				});

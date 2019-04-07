@@ -43,68 +43,7 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 			// Add uptime notice.
 			update_site_option( 'wphb-notice-uptime-info-show', 'yes' );
 
-			add_action( 'admin_enqueue_scripts', array( 'WP_Hummingbird_Installer', 'admin_pointer' ) );
-
 			do_action( 'wphb_activate' );
-		}
-
-		/**
-		 * Add custom admin pointer using wp-pointer.
-		 *
-		 * @since 1.9.2
-		 */
-		public static function admin_pointer() {
-			// Get dismissed pointers meta.
-			$dismissed_pointers = get_user_meta( get_current_user_id(), 'dismissed_wp_pointers', true );
-			$dismissed_pointers = explode( ',', (string) $dismissed_pointers );
-
-			// If pointer is not found in dismissed pointers, show.
-			if ( in_array( 'wphb_pointer', $dismissed_pointers, true ) ) {
-				return;
-			}
-
-			// Enqueue wp-pointer styles and scripts.
-			wp_enqueue_style( 'wp-pointer' );
-			wp_enqueue_script( 'wp-pointer' );
-
-			// Register our custom pointer.
-			add_action( 'admin_print_footer_scripts', array( 'WP_Hummingbird_Installer', 'register_admin_pointer' ) );
-		}
-
-		/**
-		 * Register custom pointer to wp-pointer.
-		 *
-		 * Use WordPress dismiss-wp-pointer action on pointer dismissal to store dismissal flag in meta via ajax.
-		 *
-		 * @since 1.9.2
-		 */
-		public static function register_admin_pointer() {
-			// Pointer content.
-			$content  = '<h3>' . __( 'Get Humming', 'wphb' ) . '</h3>';
-			$content .= '<p>' . __( 'Run performance tests, enable caching and optimize your assets here.', 'wphb' ) . '</p>';
-			?>
-
-			<script type="text/javascript">
-				//<![CDATA[
-				jQuery( document ).ready( function( $ ) {
-					// jQuery selector to point the message to.
-					$( '#toplevel_page_wphb' ).pointer({
-						content: '<?php echo $content; ?>',
-						position: {
-							edge: 'left',
-							align: 'center'
-						},
-						close: function() {
-							$.post( ajaxurl, {
-								pointer: 'wphb_pointer',
-								action: 'dismiss-wp-pointer'
-							});
-						}
-					}).pointer( 'open' );
-				});
-				//]]>
-			</script>
-			<?php
 		}
 
 		/**
@@ -183,14 +122,6 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 					define( 'WPHB_UPGRADING', true );
 				}
 
-				if ( version_compare( $version, '1.7.1', '<' ) ) {
-					self::upgrade_1_7_1();
-				}
-
-				if ( version_compare( $version, '1.7.2', '<' ) ) {
-					self::upgrade_1_7_2();
-				}
-
 				if ( version_compare( $version, '1.8.0', '<' ) ) {
 					self::upgrade_1_8();
 				}
@@ -205,6 +136,14 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 
 				if ( version_compare( $version, '1.9.2', '<' ) ) {
 					self::upgrade_1_9_2();
+				}
+
+				if ( version_compare( $version, '1.9.3', '<' ) ) {
+					self::upgrade_1_9_3();
+				}
+
+				if ( version_compare( $version, '1.9.4', '<' ) ) {
+					self::upgrade_1_9_4();
 				}
 
 				update_site_option( 'wphb_version', WPHB_VERSION );
@@ -222,10 +161,6 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 				return;
 			}
 
-			if ( version_compare( $version, '1.8.0', '<' ) ) {
-				self::upgrade_1_8();
-			}
-
 			if ( version_compare( $version, '1.9.2', '<' ) ) {
 				self::upgrade_1_9_2();
 			}
@@ -234,55 +169,11 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 		}
 
 		/**
-		 * Remove caching option, as browser caching is always enabled by default.
-		 * Enable minification advanced view where there are settings already in use.
-		 *
-		 * @deprecated 1.7.2
-		 */
-		private static function upgrade_1_7_1() {
-			$options = WP_Hummingbird_Settings::get_settings();
-
-			if ( isset( $options['caching'] ) ) {
-				unset( $options['caching'] );
-				WP_Hummingbird_Settings::update_settings( $options );
-			}
-
-			// Check if there are settings for minification.
-			$minfication = array( 'block', 'combine', 'position', 'defer', 'inline' );
-
-			foreach ( $minfication as $action ) {
-				if ( ! empty( $options[ $action ]['script'] ) || ! empty( $options[ $action ]['styles'] ) ) {
-					add_site_option( 'wphb-minification-view', true );
-					break;
-				}
-			}
-		}
-
-		/**
-		 * Add new dismissable Uptime notice.
-		 * Add new option for asset optimization logging.
-		 *
-		 * @deprecated 1.9.0
-		 */
-		private static function upgrade_1_7_2() {
-			// Add uptime notice.
-			update_site_option( 'wphb-notice-uptime-info-show', 'yes' );
-
-			// Disable logging by default.
-			WP_Hummingbird_Settings::update_setting( 'minify_log', false );
-
-			// Clear page cache.
-			/* @var WP_Hummingbird_Module_Page_Cache $pc_module */
-			$pc_module = WP_Hummingbird_Utils::get_module( 'page_cache' );
-			if ( $pc_module->is_active() ) {
-				$pc_module->clear_cache();
-			}
-		}
-
-		/**
 		 * Upgrade to new database structure for settings.
 		 *
 		 * @since 1.8.0
+		 *
+		 * @deprecated 1.9.4
 		 */
 		private static function upgrade_1_8() {
 			$options = get_option( 'wphb_settings' );
@@ -394,8 +285,8 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 
 				$hour = mt_rand( 0, 23 ) . ':00';
 
-				$new_settings['performance'] = array(
-					'reports'    => $options['email-notifications'],
+				$new_settings['performance']['reports'] = array(
+					'enabled'    => $options['email-notifications'],
 					'recipients' => $options['email-recipients'],
 					'frequency'  => in_array( $options['email-frequency'], $frequency, true ) ? $options['email-frequency'] : 7,
 					'day'        => in_array( $options['email-frequency'], $week_days, true ) ? $options['email-frequency'] : $day,
@@ -405,10 +296,10 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 
 				$last_sent_report = WP_Hummingbird_Settings::get_setting( 'wphb-last-sent-report' );
 				if ( isset( $last_sent_report ) ) {
-					$new_settings['performance']['last_sent'] = $last_sent_report;
+					$new_settings['performance']['reports']['last_sent'] = $last_sent_report;
 				}
 			} else {
-				$new_settings['performance']['reports'] = false;
+				$new_settings['performance']['reports']['enabled'] = false;
 			}
 
 			if ( isset( $options['subsite-tests'] ) ) {
@@ -446,6 +337,8 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 		 * Fix for corrupt scheduled performance scans.
 		 *
 		 * @since 1.8.0.4
+		 *
+		 * @deprecated 1.9.4
 		 */
 		private static function upgrade_1_8_0_4() {
 			wp_clear_scheduled_hook( 'wphb_performance_scan' );
@@ -454,14 +347,14 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 
 			// If not member, unset schedule.
 			if ( ! WP_Hummingbird_Utils::is_member() ) {
-				$options['reports'] = false;
-				unset( $options['frequency'] );
-				unset( $options['day'] );
-				unset( $options['time'] );
+				$options['reports']['enabled'] = false;
+				unset( $options['reports']['frequency'] );
+				unset( $options['reports']['day'] );
+				unset( $options['reports']['time'] );
 			}
 
 			// If schedule is corrupt, reset it.
-			if ( isset( $options['reports'] ) && $options['reports'] ) {
+			if ( isset( $options['reports']['enabled'] ) && $options['reports']['enabled'] ) {
 				$week_days = array(
 					'Monday',
 					'Tuesday',
@@ -472,27 +365,27 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 					'Sunday',
 				);
 
-				if ( ! isset( $options['day'] ) || ! in_array( $options['day'], $week_days, true ) ) {
+				if ( ! isset( $options['reports']['day'] ) || ! in_array( $options['reports']['day'], $week_days, true ) ) {
 					$options['day'] = $week_days[ array_rand( $week_days, 1 ) ];
 				}
 
-				$options['time'] = mt_rand( 0, 23 ) . ':00';
-				$options['last_sent'] = '';
+				$options['reports']['time']      = mt_rand( 0, 23 ) . ':00';
+				$options['reports']['last_sent'] = '';
 
 				$frequency = array( 1, 7, 30 );
-				if ( ! isset( $options['frequency'] ) || ! in_array( $options['frequency'], $frequency, true ) ) {
-					$options['frequency'] = 7;
+				if ( ! isset( $options['reports']['frequency'] ) || ! in_array( $options['reports']['frequency'], $frequency, true ) ) {
+					$options['reports']['frequency'] = 7;
 				}
-				wp_schedule_single_event( WP_Hummingbird_Module_Reporting_Cron::get_scheduled_scan_time(), 'wphb_performance_scan' );
+				wp_schedule_single_event( WP_Hummingbird_Module_Reporting_Cron::get_scheduled_time( 'performance' ), 'wphb_performance_scan' );
 			} else {
-				$options['reports'] = false;
+				$options['reports']['reports']['enabled'] = false;
 			}
 
 			WP_Hummingbird_Settings::update_settings( $options, 'performance' );
 
 			// Schedule next scan.
-			if ( WP_Hummingbird_Utils::is_member() && $options['reports'] ) {
-				wp_schedule_single_event( WP_Hummingbird_Module_Reporting_Cron::get_scheduled_scan_time(), 'wphb_performance_scan' );
+			if ( WP_Hummingbird_Utils::is_member() && $options['reports']['enabled'] ) {
+				wp_schedule_single_event( WP_Hummingbird_Module_Reporting_Cron::get_scheduled_time( 'performance' ), 'wphb_performance_scan' );
 			}
 		}
 
@@ -524,7 +417,7 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 			$dont_minify = $settings['dont_minify'];
 			unset( $settings['dont_minify'] );
 
-			$collection = WP_Hummingbird_Utils::get_module( 'minify' )->get_resources_collection();
+			$collection        = WP_Hummingbird_Utils::get_module( 'minify' )->get_resources_collection();
 			$options['minify'] = array(
 				'styles'  => array(),
 				'scripts' => array(),
@@ -532,7 +425,7 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 
 			foreach ( $dont_minify as $type => $handles ) {
 				$settings['minify'][ $type ] = array();
-				$type_collection = wp_list_pluck( $collection[ $type ], 'handle' );
+				$type_collection             = wp_list_pluck( $collection[ $type ], 'handle' );
 				foreach ( $type_collection as $type_handle ) {
 					if ( ! in_array( $type_handle, $handles ) ) {
 						$options['minify'][ $type ][] = $type_handle;
@@ -550,6 +443,79 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 				include_once WPHB_DIR_PATH . 'core/class-logger.php';
 			}
 			WP_Hummingbird_Logger::cleanup();
+		}
+
+		/**
+		 * Upgrade to 1.9.3
+		 *
+		 * Add option to page caching to hide page cache comments.
+		 */
+		private static function upgrade_1_9_3() {
+			// Add the new setting cache_identifier to page caching.
+			$config_file = WP_CONTENT_DIR . '/wphb-cache/wphb-cache.php';
+			if ( file_exists( $config_file ) ) {
+				$settings = json_decode( file_get_contents( $config_file ), true );
+				if ( ! isset( $settings['settings']['cache_identifier'] ) ) {
+					$settings['settings']['cache_identifier'] = 1;
+					@file_put_contents( $config_file, json_encode( $settings ) );
+				}
+			}
+		}
+
+		/**
+		 * Upgrade to 1.9.4
+		 *
+		 * Convert the performance reports db data to a new format.
+		 */
+		private static function upgrade_1_9_4() {
+			wp_clear_scheduled_hook( 'wphb_performance_scan' );
+
+			// Remove wphb_cron_limit option. Now it's a transient.
+			delete_site_option( 'wphb_cron_limit' );
+
+			if ( ! WP_Hummingbird_Utils::is_member() ) {
+				return;
+			}
+
+			$options = WP_Hummingbird_Settings::get_settings( 'performance' );
+
+			$new_options = $options;
+
+			if ( ! isset( $options['reports'] ) || is_array( $options['reports'] ) ) {
+				return;
+			}
+
+			unset( $new_options['reports'] );
+			$new_options['reports']['enabled'] = $options['reports'];
+
+			$settings = array( 'frequency', 'day', 'time', 'recipients' );
+			foreach ( $settings as $setting ) {
+				if ( ! isset( $options[ $setting ] ) ) {
+					continue;
+				}
+
+				/**
+				 * Previous version of performance reports had week days (Monday-Sunday) for month schedule,
+				 * now it's replaced with 1-28 days.
+				 */
+				if ( 'frequency' === $setting && 30 === intval( $options[ $setting ] ) ) {
+					$new_options['reports'][ $setting ] = mt_rand( 1, 28 );
+				}
+
+				unset( $new_options[ $setting ] );
+				$new_options['reports'][ $setting ] = $options[ $setting ];
+			}
+
+			// Move the last_sent option.
+			if ( isset( $options['last_sent'] ) ) {
+				unset( $new_options['last_sent'] );
+				$new_options['reports']['last_sent'] = $options['last_sent'];
+			}
+
+			WP_Hummingbird_Settings::update_settings( $new_options, 'performance' );
+
+			// Reschedule reports.
+			do_action( 'wphb_activate' );
 		}
 
 	}

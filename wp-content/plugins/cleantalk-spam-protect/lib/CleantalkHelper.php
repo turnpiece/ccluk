@@ -77,7 +77,7 @@ class CleantalkHelper
 			}
 			
 			// Is private network
-			if(self::ip__is_private_network($ips['real']) || isset($headers['X-Gt-Clientip'])){
+			if(self::ip__is_private_network($ips['real']) || isset($headers['X-Gt-Clientip']) || (isset($_SERVER['SERVER_ADDR']) && $ips['real'] == $_SERVER['SERVER_ADDR'])){
 				
 				// X-Forwarded-For
 				if(isset($headers['X-Forwarded-For'])){
@@ -144,10 +144,10 @@ class CleantalkHelper
 	*/
 	static public function ip_validate($ip)
 	{
-		if(!$ip)                                                  return false; // NULL || FALSE || '' || so on...
-		if(filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) return 'v4';  // IPv4
-		if(filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) return 'v6';  // IPv6
-		                                                          return false; // Unknown
+		if(!$ip)                                                                      return false; // NULL || FALSE || '' || so on...
+		if(filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) && $ip != '0.0.0.0') return 'v4';  // IPv4
+		if(filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6))                     return 'v6';  // IPv6
+		                                                                              return false; // Unknown
 	}
 	
 	/**
@@ -169,22 +169,25 @@ class CleantalkHelper
 		
 			$ch = curl_init();
 			
-			// Obligatory options
-			$opts = array(
-				CURLOPT_URL               => $url,
-				CURLOPT_RETURNTRANSFER    => 1,
-				CURLOPT_CONNECTTIMEOUT_MS => 3000,
-				CURLOPT_FORBID_REUSE      => true,
-				CURLOPT_USERAGENT         => 'Cleantalk Antispam ' . (defined('CLEANTALK_AGENT') ? CLEANTALK_AGENT : 'UNKNOWN_AGENT'),
-				CURLOPT_POST              => true,
-				CURLOPT_POSTFIELDS        => str_replace("&amp;", "&", http_build_query($data)),
-				CURLOPT_SSL_VERIFYPEER    => false,
-				CURLOPT_SSL_VERIFYHOST    => 0,
-				CURLOPT_HTTPHEADER        => array('Expect:'), // Fix for large data and old servers http://php.net/manual/ru/function.curl-setopt.php#82418
+			// Merging OBLIGATORY options with GIVEN options
+			$opts = self::array_merge__save_numeric_keys(
+				array(
+					CURLOPT_URL               => $url,
+					CURLOPT_RETURNTRANSFER    => true,
+					CURLOPT_CONNECTTIMEOUT_MS => 3000,
+					CURLOPT_FORBID_REUSE      => true,
+					CURLOPT_USERAGENT         => 'APBCT('.(defined('CLEANTALK_AGENT') ? CLEANTALK_AGENT : 'UNKNOWN_AGENT').')',
+					CURLOPT_POST              => true,
+					CURLOPT_POSTFIELDS        => str_replace("&amp;", "&", http_build_query($data)),
+					CURLOPT_SSL_VERIFYPEER    => false,
+					CURLOPT_SSL_VERIFYHOST    => 0,
+					CURLOPT_HTTPHEADER        => array('Expect:'), // Fix for large data and old servers http://php.net/manual/ru/function.curl-setopt.php#82418
+				),
+				$opts
 			);
 			
 			// Use presets
-			$presets = is_array($presets) ? $presets : array($presets);
+			$presets = is_array($presets) ? $presets : explode(' ', $presets);
 			foreach($presets as $preset){
 				
 				switch($preset){
@@ -221,23 +224,32 @@ class CleantalkHelper
 			} unset($preset);
 		
 			curl_setopt_array($ch, $opts);
-			$result = @curl_exec($ch);
-		
-			if(in_array('dont_wait_for_answer', $presets)) return true;
+			$result = curl_exec($ch);
+			
+			// RETURN if async request
+			if(in_array('dont_wait_for_answer', $presets))
+				return true;
 		
 			if($result){
-				$result = explode(PHP_EOL, $result);
-				if(in_array('get_code', $presets)) $result = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+				
+				if(!in_array('dont_split_to_array', $presets))
+					$result = explode(PHP_EOL, $result);
+				
+				// Get code crossPHP method
+				if(in_array('get_code', $presets)){
+					$curl_info = curl_getinfo($ch);
+					$result = $curl_info['http_code'];
+				}
 				curl_close($ch);
-				return $result;
+				$out = $result;
 			}else
-				$error = array('error' => true, 'error_string' => curl_error($ch));
+				$out = array('error' => true, 'error_string' => curl_error($ch));
 		}else
-			$error = array('error' => true, 'error_string' => 'CURL_NOT_INSTALLED');
+			$out = array('error' => true, 'error_string' => 'CURL_NOT_INSTALLED');
 		
 		/** Fix for get_code preset */
 		if($presets && ($presets == 'get_code' || (is_array($presets) && in_array('get_code', $presets) ) )
-			&& (isset($error) && $error['error_string'] == 'CURL_NOT_INSTALLED')
+			&& isset($out['error_string']) && $out['error_string'] == 'CURL_NOT_INSTALLED'
 		){
 			$headers = get_headers($url);
 			$out = (int)preg_replace('/.*(\d{3}).*/', '$1', $headers[0]);
@@ -301,6 +313,20 @@ class CleantalkHelper
 				$array[$key] = self::stringToUTF8($val, $data_codepage);
 		}
 		return $array;
+	}
+	
+	/**
+	 * Merging arrays without reseting numeric keys
+	 * 
+	 * @param array $arr1 One-dimentional array
+	 * @param array $arr2 One-dimentional array
+	 * @return array Merged array
+	 */
+	public static function array_merge__save_numeric_keys($arr1, $arr2){
+		foreach ($arr2 as $key => $val){
+			$arr1[$key] = $val;
+		}
+		return $arr1;
 	}
 	
     /**

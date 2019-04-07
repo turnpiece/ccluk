@@ -1,4 +1,9 @@
 <?php
+/**
+ * Asset optimization scanner.
+ *
+ * @package Hummingbird
+ */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -36,18 +41,18 @@ class WP_Hummingbird_Module_Minify_Scanner {
 	 * Options names
 	 */
 
-	const IS_SCANNING_SLUG = 'wphb-minification-files-scanning';
-	const IS_SCANNED_SLUG = 'wphb-minification-files-scanned';
-	const CURRENT_STEP = 'wphb-minification-scan-step';
+	const IS_SCANNING_SLUG    = 'wphb-minification-files-scanning';
+	const IS_SCANNED_SLUG     = 'wphb-minification-files-scanned';
+	const CURRENT_STEP        = 'wphb-minification-scan-step';
 	const MINIFICATION_NOTICE = 'wphb-notice-minification-optimized-show';
-	const HTTP2_NOTICE = 'wphb-notice-http2-info-show';
+	const HTTP2_NOTICE        = 'wphb-notice-http2-info-show';
 
 	/**
 	 * Refresh status variables
 	 */
 	public function refresh_status() {
-		$this->is_scanning = get_transient( self::IS_SCANNING_SLUG );
-		$this->is_scanned = get_option( self::IS_SCANNED_SLUG );
+		$this->is_scanning  = get_transient( self::IS_SCANNING_SLUG );
+		$this->is_scanned   = get_option( self::IS_SCANNED_SLUG );
 		$this->current_step = (int) get_option( self::CURRENT_STEP );
 	}
 
@@ -159,7 +164,7 @@ class WP_Hummingbird_Module_Minify_Scanner {
 
 		foreach ( $post_types as $post_type ) {
 			$args['post_type'] = $post_type;
-			$posts = get_posts( $args );
+			$posts             = get_posts( $args );
 			if ( $posts ) {
 				$urls[] = get_permalink( $posts[0] );
 			}
@@ -198,16 +203,18 @@ class WP_Hummingbird_Module_Minify_Scanner {
 		$cookies = array();
 		foreach ( $_COOKIE as $name => $value ) {
 			if ( strpos( $name, 'wordpress_' ) > -1 ) {
-				$cookies[] = new WP_Http_Cookie( array(
-					'name'  => $name,
-					'value' => $value,
-				) );
+				$cookies[] = new WP_Http_Cookie(
+					array(
+						'name'  => $name,
+						'value' => $value,
+					)
+				);
 			}
 		}
 
 		$result = array();
 
-		$args = array(
+		$args             = array(
 			'timeout'   => 0.01,
 			'cookies'   => $cookies,
 			'blocking'  => false,

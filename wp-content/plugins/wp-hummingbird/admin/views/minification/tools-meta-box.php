@@ -13,22 +13,42 @@
 	<div class="sui-box-settings-col-1">
 		<strong><?php esc_html_e( 'CSS above the fold', 'wphb' ); ?></strong>
 		<span class="sui-description">
-			<?php esc_html_e( 'Drastically reduce your page load time by moving all of your stylesheets
-			to the footer to force them to load after your content.', 'wphb' ); ?>
+			<?php
+			esc_html_e(
+				'Drastically reduce your page load time by moving all of your stylesheets
+			to the footer to force them to load after your content.',
+				'wphb'
+			);
+			?>
 			<br><br>
-			<?php esc_html_e( 'This will result in the content loading quickly, with the styling
-			followed shortly after.', 'wphb' ); ?>
+			<?php
+			esc_html_e(
+				'This will result in the content loading quickly, with the styling
+			followed shortly after.',
+				'wphb'
+			);
+			?>
 		</span>
 	</div>
 	<div class="sui-box-settings-col-2">
 		<ol class="sui-description">
 			<li>
-				<?php esc_html_e( 'Add critical layout and styling CSS here.
-				We will insert into <style> tags in your <head> section of each page.', 'wphb' ); ?>
+				<?php
+				esc_html_e(
+					'Add critical layout and styling CSS here.
+				We will insert into <style> tags in your <head> section of each page.',
+					'wphb'
+				);
+				?>
 			</li>
 			<li>
-				<?php esc_html_e( 'Next, switch to the advanced area of asset optimization and move all
-				of your CSS files to the footer area.', 'wphb' ); ?>
+				<?php
+				esc_html_e(
+					'Next, switch to the advanced area of asset optimization and move all
+				of your CSS files to the footer area.',
+					'wphb'
+				);
+				?>
 			</li>
 		</ol>
 

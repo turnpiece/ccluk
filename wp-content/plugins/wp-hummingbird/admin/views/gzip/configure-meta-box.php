@@ -21,7 +21,7 @@
 ?>
 <div class="sui-box-settings-row">
 	<div class="sui-box-settings-col-1">
-		<span class="sui-settings-label"><?php esc_html_e( 'Server type', 'wphb' ) ?></span>
+		<span class="sui-settings-label"><?php esc_html_e( 'Server type', 'wphb' ); ?></span>
 		<span class="sui-description">
 			<?php esc_html_e( 'Choose your server type. If you don’t know this, please contact your hosting provider.', 'wphb' ); ?>
 		</span>
@@ -31,9 +31,12 @@
 			<?php esc_html_e( 'Server type', 'wphb' ); ?>
 		</label>
 		<?php
-		WP_Hummingbird_Utils::get_servers_dropdown( array(
-			'selected' => $gzip_server_type,
-		), false );
+		WP_Hummingbird_Utils::get_servers_dropdown(
+			array(
+				'selected' => $gzip_server_type,
+			),
+			false
+		);
 		?>
 	</div>
 </div>
@@ -83,8 +86,10 @@
 							<li>
 								<?php
 								printf(
-								/* translators: %s: Link to recheck GZip status */
-									__( 'Next, <a href="%s">re-check your GZip status</a> to see if it worked. <a href="#" id="troubleshooting-link">Still having issues?</a>', 'wphb' ), esc_url( $recheck_url ) );
+									/* translators: %s: Link to recheck GZip status */
+									__( 'Next, <a href="%s">re-check your GZip status</a> to see if it worked. <a href="#" id="troubleshooting-link">Still having issues?</a>', 'wphb' ),
+									esc_url( $recheck_url )
+								);
 								?>
 							</li>
 						</ol>
@@ -139,7 +144,9 @@
 							<li>
 								<?php
 								printf( /* translators: %s: Link to recheck GZip status */
-									__( 'Next, <a href="%s">re-check your GZip status</a> to see if it worked. <a href="#" id="troubleshooting-link-litespeed">Still having issues?</a>', 'wphb' ), esc_url( $recheck_url ) );
+									__( 'Next, <a href="%s">re-check your GZip status</a> to see if it worked. <a href="#" id="troubleshooting-link-litespeed">Still having issues?</a>', 'wphb' ),
+									esc_url( $recheck_url )
+								);
 								?>
 							</li>
 						</ol>
@@ -170,7 +177,7 @@
 			<p><?php esc_html_e( 'If you do not have access to your NGINX config files you will need to contact your hosting provider to make these changes.', 'wphb' ); ?></p>
 			<p><?php WP_Hummingbird_Utils::_still_having_trouble_link(); ?></p>
 
-            <pre class="sui-code-snippet"><?php echo htmlentities2( $snippets['nginx'] ); ?></pre>
+			<pre class="sui-code-snippet"><?php echo htmlentities2( $snippets['nginx'] ); ?></pre>
 		</div>
 
 		<div id="wphb-server-instructions-iis" class="wphb-server-instructions" data-server="iis" style="display: none;">
@@ -178,7 +185,9 @@
 				<?php
 				printf(
 					/* translators: %s: Link to TechNet */
-				__( 'For IIS 7 servers and above, <a href="%s" target="_blank">visit Microsoft TechNet</a>', 'wphb' ), 'https://technet.microsoft.com/en-us/library/cc771003(v=ws.10).aspx' );
+					__( 'For IIS 7 servers and above, <a href="%s" target="_blank">visit Microsoft TechNet</a>', 'wphb' ),
+					'https://technet.microsoft.com/en-us/library/cc771003(v=ws.10).aspx'
+				);
 				?>
 			</p>
 		</div>

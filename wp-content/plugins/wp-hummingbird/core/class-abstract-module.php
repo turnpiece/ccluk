@@ -123,12 +123,12 @@ abstract class WP_Hummingbird_Module {
 	 *
 	 * Do not use __construct in subclasses, use init() instead
 	 */
-	public abstract function init();
+	abstract public function init();
 
 	/**
 	 * Execute the module actions. It must be defined in subclasses. Executed when module is active.
 	 */
-	public abstract function run();
+	abstract public function run();
 
 	/**
 	 * Clear the module cache.
@@ -136,7 +136,7 @@ abstract class WP_Hummingbird_Module {
 	 * @since 1.7.1
 	 * @return mixed
 	 */
-	public abstract function clear_cache();
+	abstract public function clear_cache();
 
 	/**
 	 * Return the options array for this module

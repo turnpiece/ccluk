@@ -114,7 +114,7 @@ function apbct_update_to_5_109_0(){
 	
 	global $apbct, $wpdb;
 	
-	if(is_plugin_active_for_network($apbct->base_name) && !defined('CLEANTALK_ACCESS_KEY')){
+	if(apbct_is_plugin_active_for_network($apbct->base_name) && !defined('CLEANTALK_ACCESS_KEY')){
 		
 		$sfw_data_query = 'CREATE TABLE IF NOT EXISTS `%s` (
 			`network` int(11) unsigned NOT NULL,
@@ -158,4 +158,50 @@ function apbct_update_to_5_110_0(){
 
 function apbct_update_to_5_115_1(){
 	ct_sfw_update();
+}
+
+function apbct_update_to_5_116_0(){
+	
+	global $apbct, $wpdb;
+	
+	$apbct->settings['store_urls'] = 0;
+	$apbct->settings['store_urls__sessions'] = 0;
+	$apbct->saveSettings();
+	
+	$wpdb->query('CREATE TABLE IF NOT EXISTS `'. APBCT_TBL_SESSIONS .'` (
+		`id` VARCHAR(64) NOT NULL,
+		`name` TEXT NOT NULL,
+		`value` TEXT NULL,
+		`last_update` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+		PRIMARY KEY (`id`, `name`(10)))
+		ENGINE = MYISAM;'
+	);
+}
+
+function apbct_update_to_5_116_1(){
+	
+	global $wpdb;
+	
+	$wpdb->query('CREATE TABLE IF NOT EXISTS `'. APBCT_TBL_SESSIONS .'` (
+		`id` VARCHAR(64) NOT NULL,
+		`name` TEXT NOT NULL,
+		`value` TEXT NULL,
+		`last_update` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+		PRIMARY KEY (`id`, `name`(10)))
+		ENGINE = MYISAM;'
+	);
+}
+
+function apbct_update_to_5_116_2(){
+	
+	global $wpdb;
+	
+	$wpdb->query('CREATE TABLE IF NOT EXISTS `'. APBCT_TBL_SESSIONS .'` (
+		`id` VARCHAR(64) NOT NULL,
+		`name` TEXT NOT NULL,
+		`value` TEXT NULL DEFAULT NULL,
+		`last_update` DATETIME NULL DEFAULT NULL,
+		PRIMARY KEY (`id`, `name`(10)))
+		ENGINE = MYISAM;'
+	);
 }

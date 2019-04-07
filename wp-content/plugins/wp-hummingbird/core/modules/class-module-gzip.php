@@ -36,10 +36,16 @@ class WP_Hummingbird_Module_GZip extends WP_Hummingbird_Module_Server {
 
 		if ( 3 !== count( $status ) || in_array( false, $status, true ) ) {
 			// There must be another plugin/server config that is setting its own gzip stuff.
-			$error_message  = '<ul><li>- ' . esc_html__( 'Your server may not have the "deflate" module enabled (mod_deflate for
-				Apache, ngx_http_gzip_module for NGINX).', 'wphb' ) . '</li>';
-			$error_message .= '<li>- ' . esc_html__( 'Contact your host. If deflate is enabled, ask why all .htaccess or
-				nginx.conf compression rules are not being applied.', 'wphb' ) . '</li></ul>';
+			$error_message  = '<ul><li>- ' . esc_html__(
+				'Your server may not have the "deflate" module enabled (mod_deflate for
+				Apache, ngx_http_gzip_module for NGINX).',
+				'wphb'
+			) . '</li>';
+			$error_message .= '<li>- ' . esc_html__(
+				'Contact your host. If deflate is enabled, ask why all .htaccess or
+				nginx.conf compression rules are not being applied.',
+				'wphb'
+			) . '</li></ul>';
 			$error_message .= '<p>' . sprintf(
 				/* translators: %s: support link */
 				__( 'If re-checking and restarting does not resolve, please check with your host or <a href="%s" target="_blank">open a support ticket with us</a>.', 'wphb' ),
@@ -66,22 +72,25 @@ class WP_Hummingbird_Module_GZip extends WP_Hummingbird_Module_Server {
 
 		$results = array();
 		$try_api = false;
-		foreach ( $files as $type  => $file ) {
+		foreach ( $files as $type => $file ) {
 			// We don't use wp_remote, getting the content-encoding is not working.
 			if ( ! class_exists( 'SimplePie' ) ) {
-				require_once( ABSPATH . WPINC . '/class-simplepie.php' );
+				require_once ABSPATH . WPINC . '/class-simplepie.php';
 			}
 
-			$headers = array(
+			$headers   = array(
 				'Content-Type' => 'text/plain',
 			);
 			$useragent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36';
 
 			$result = new SimplePie_File( $file, 10, 5, $headers, $useragent );
 
-			$headers = $result->headers;
+			$headers          = $result->headers;
 			$results[ $type ] = false;
-			if ( ! empty( $headers ) && isset( $headers['content-encoding'] ) && 'gzip' === $headers['content-encoding'] ) {
+
+			if ( ! empty( $headers ) && 401 === $result->status_code ) {
+				$results[ $type ] = 'privacy';
+			} elseif ( ! empty( $headers ) && isset( $headers['content-encoding'] ) && 'gzip' === $headers['content-encoding'] ) {
 				$results[ $type ] = true;
 			} else {
 				$try_api = true;
@@ -91,7 +100,7 @@ class WP_Hummingbird_Module_GZip extends WP_Hummingbird_Module_Server {
 		// Will only trigger on 're-check status' button click and there are some false values.
 		if ( $try_api && $check_api ) {
 			// Get the API results.
-			$api = WP_Hummingbird_Utils::get_api();
+			$api         = WP_Hummingbird_Utils::get_api();
 			$api_results = $api->performance->check_gzip();
 			$api_results = get_object_vars( $api_results );
 			foreach ( $files as $type  => $file ) {
@@ -107,7 +116,7 @@ class WP_Hummingbird_Module_GZip extends WP_Hummingbird_Module_Server {
 					$results[ $type ] = true;
 				}
 			}
-		} // End if().
+		}
 
 		return $results;
 	}

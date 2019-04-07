@@ -14,8 +14,13 @@
 	<div class="sui-box-settings-col-1">
 		<span class="sui-settings-label"><?php esc_html_e( 'Admin Cache Control', 'wphb' ); ?></span>
 		<span class="sui-description">
-			<?php esc_html_e( 'This feature adds a Clear Cache button to the WordPress Admin Top
-			bar area for admin users.', 'wphb' ); ?>
+			<?php
+			esc_html_e(
+				'This feature adds a Clear Cache button to the WordPress Admin Top
+			bar area for admin users.',
+				'wphb'
+			);
+			?>
 		</span>
 	</div>
 	<div class="sui-box-settings-col-2">
@@ -31,8 +36,13 @@
 	<div class="sui-box-settings-col-1">
 		<span class="sui-settings-label"><?php esc_html_e( 'File Change Detection', 'wphb' ); ?></span>
 		<span class="sui-description">
-			<?php esc_html_e( 'Choose how you want Hummingbird to react when we detect changes
-			to your file structure.', 'wphb' ); ?>
+			<?php
+			esc_html_e(
+				'Choose how you want Hummingbird to react when we detect changes
+			to your file structure.',
+				'wphb'
+			);
+			?>
 		</span>
 	</div>
 	<div class="sui-box-settings-col-2">
@@ -42,8 +52,13 @@
 			<span class="sui-description"><?php esc_html_e( 'Manual Notice', 'wphb' ); ?></span>
 		</label>
 		<span class="sui-description sui-radio-description">
-			<?php esc_html_e( 'Get a global notice inside your WordPress Admin area anytime your
-			cache needs clearing.', 'wphb' ); ?>
+			<?php
+			esc_html_e(
+				'Get a global notice inside your WordPress Admin area anytime your
+			cache needs clearing.',
+				'wphb'
+			);
+			?>
 		</span>
 		<label class="sui-radio">
 			<input type="radio" name="detection" id="automatic" value="auto" <?php checked( $detection, 'auto' ); ?>>
@@ -51,8 +66,13 @@
 			<span class="sui-description"><?php esc_html_e( 'Automatic', 'wphb' ); ?></span>
 		</label>
 		<span class="sui-description sui-radio-description">
-			<?php esc_html_e( 'Set Hummingbird to automatically clear your cache instead of
-			prompting you to do it manually.', 'wphb' ); ?>
+			<?php
+			esc_html_e(
+				'Set Hummingbird to automatically clear your cache instead of
+			prompting you to do it manually.',
+				'wphb'
+			);
+			?>
 		</span>
 
 		<label class="sui-radio">

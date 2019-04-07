@@ -106,10 +106,17 @@ class Shipper_Model_Fs_Blacklist {
 			trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/cs-cache-enabler.php',
 			trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/cs-filters-and-actions.php',
 
+			// WPMU DEV specific.
+			trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/wpmudev-hosting.php',
+
 		) );
 		if ( Shipper_Model_Env::is_flywheel() ) {
 			// Flywheel does weird stuff with wp-config.
 			$exclusions[] = trailingslashit( ABSPATH ) . 'wp-config.php';
+		}
+		if ( Shipper_Model_Env::is_wpmu_hosting() ) {
+			// WPMU DEV hosting object-cache.php because it doesn't do much checks.
+			$exclusions[] = trailingslashit( WP_CONTENT_DIR ) . 'object-cache.php';
 		}
 
 		return $exclusions;
@@ -128,6 +135,9 @@ class Shipper_Model_Fs_Blacklist {
 
 			// Snapshot-specific.
 			'_restore/_imports/',
+
+			// Hummingbird caches.
+			trailingslashit( WP_CONTENT_DIR ) . 'wphb-cache/',
 
 			// Ourselves too.
 			trailingslashit( dirname( SHIPPER_PLUGIN_FILE ) ),
@@ -155,6 +165,9 @@ class Shipper_Model_Fs_Blacklist {
 
 			// iThemes specific.
 			trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/cs-cache-enabler/',
+
+			// WPMU DEV specific.
+			trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/wpmudev-hosting/',
 		);
 	}
 

@@ -52,6 +52,8 @@ class WP_Hummingbird_Admin_AJAX {
 		add_action( 'wp_ajax_wphb_page_cache_save_settings', array( $this, 'page_cache_save_settings' ) );
 		// Toggle ability for subsite admins to turn off page caching.
 		add_action( 'wp_ajax_wphb_caching_toggle_admin_subsite_page_caching', array( $this, 'caching_toggle_admin_subsite_page_caching' ) );
+		// Gutenberg clear cache for post.
+		add_action( 'wp_ajax_wphb_gutenberg_clear_post_cache', array( $this, 'gutenberg_clear_post_cache' ) );
 
 		/* BROWSER CACHING */
 
@@ -232,6 +234,12 @@ class WP_Hummingbird_Admin_AJAX {
 		}
 
 		WP_Hummingbird_Utils::remove_quick_setup();
+
+		wp_send_json_success(
+			array(
+				'finished' => false,
+			)
+		);
 	}
 
 	/**
@@ -277,6 +285,13 @@ class WP_Hummingbird_Admin_AJAX {
 
 	/**
 	 * Run performance test.
+	 *
+	 * Ajax will trigger this method every 3 seconds, until 'finished' = true.
+	 * Logic behind this:
+	 * - Remove quick setup (if not removed) and init performance scan (if not running)
+	 * - Running < 15 seconds  - return control to ajax
+	 * - Running 15-59 seconds - check if report is on the server, if not - return to ajax
+	 * - Running 60+ seconds   - stop performance test
 	 */
 	public function performance_run_test() {
 		check_ajax_referer( 'wphb-fetch', 'nonce' );
@@ -292,36 +307,40 @@ class WP_Hummingbird_Admin_AJAX {
 		}
 
 		if ( WP_Hummingbird_Module_Performance::stopped_report() ) {
-			wp_send_json_success( array(
-				'finished' => true,
-			));
+			wp_send_json_success( array( 'finished' => true ) );
 		}
 
 		$started_at = WP_Hummingbird_Module_Performance::is_doing_report();
-
 		if ( ! $started_at ) {
-			/* @var WP_Hummingbird_Module_Performance $perf_module */
-			$perf_module = WP_Hummingbird_Utils::get_module( 'performance' );
-			$perf_module->init_scan();
-
-			wp_send_json_success( array(
-				'finished' => false,
-			));
+			WP_Hummingbird_Utils::get_module( 'performance' )->init_scan();
+			wp_send_json_success( array( 'finished' => false ) );
 		}
 
 		$now = current_time( 'timestamp' );
 		if ( $now >= ( $started_at + 15 ) ) {
+			// If we're over 1 minute - timeout.
+			if ( $now >= ( $started_at + 60 ) ) {
+				wp_send_json_success( array( 'finished' => true ) );
+			}
+
 			// The report should be finished by this time, let's get the results.
 			WP_Hummingbird_Module_Performance::refresh_report();
-			wp_send_json_success( array(
-				'finished' => true,
-			));
+
+			$report = WP_Hummingbird_Module_Performance::get_last_report();
+			if ( is_wp_error( $report ) ) {
+				// Check if the report is still not available on the server.
+				$error = $report->get_error_data( 'performance-error' );
+				if ( isset( $error['details'] ) && 'Performance Results not found' === $error['details'] ) {
+					WP_Hummingbird_Settings::delete( 'wphb-stop-report' );
+					wp_send_json_success( array( 'finished' => false ) );
+				}
+			}
+
+			wp_send_json_success( array( 'finished' => true ) );
 		}
 
 		// Just do nothing until the report is finished.
-		wp_send_json_success( array(
-			'finished' => false,
-		));
+		wp_send_json_success( array( 'finished' => false ) );
 	}
 
 	/**
@@ -338,7 +357,7 @@ class WP_Hummingbird_Admin_AJAX {
 
 		/* @var WP_Hummingbird_Module_Performance $performance */
 		$performance = WP_Hummingbird_Utils::get_module( 'performance' );
-		$options = $performance->get_options();
+		$options     = $performance->get_options();
 
 		// Get the data from ajax.
 		parse_str( sanitize_text_field( wp_unslash( $_POST['data'] ) ), $data ); // Input var ok.
@@ -368,19 +387,23 @@ class WP_Hummingbird_Admin_AJAX {
 		}
 
 		$modules = array( 'page_cache', 'gravatar' );
-		$module = sanitize_text_field( wp_unslash( $_POST['module'] ) ); // Input var ok.
+		$module  = sanitize_text_field( wp_unslash( $_POST['module'] ) ); // Input var ok.
 
 		// Works only for supported modules.
 		if ( ! in_array( $module, $modules, true ) ) {
-			wp_send_json_success( array(
-				'success' => false,
-			));
+			wp_send_json_success(
+				array(
+					'success' => false,
+				)
+			);
 		}
 
 		$status = WP_Hummingbird_Utils::get_module( $module )->clear_cache();
-		wp_send_json_success( array(
-			'success' => $status,
-		));
+		wp_send_json_success(
+			array(
+				'success' => $status,
+			)
+		);
 	}
 
 	/**
@@ -398,7 +421,7 @@ class WP_Hummingbird_Admin_AJAX {
 		parse_str( wp_unslash( $_POST['data'] ), $data ); // Input var ok.
 
 		$admins_can_disable_pc = false;
-		$page_types = array();
+		$page_types            = array();
 		if ( isset( $data['page_types'] ) && is_array( $data['page_types'] ) ) { // Input var ok.
 			$page_types = array_keys( wp_unslash( $data['page_types'] ) ); // Input var ok.
 		}
@@ -414,20 +437,22 @@ class WP_Hummingbird_Admin_AJAX {
 		}
 
 		$cache_settings = array(
-			'logged_in'    => 0,
-			'url_queries'  => 0,
-			'cache_404'    => 0,
-			'clear_update' => 0,
-			'debug_log'    => 0,
+			'logged_in'        => 0,
+			'url_queries'      => 0,
+			'cache_404'        => 0,
+			'clear_update'     => 0,
+			'debug_log'        => 0,
+			'cache_identifier' => 0,
 		);
 
 		if ( isset( $data['settings'] ) ) { // Input var ok.
-			$form_data = $data['settings']; // Input var ok.
-			$cache_settings['logged_in']    = isset( $form_data['logged-in'] ) ? absint( $form_data['logged-in'] ) : 0;
-			$cache_settings['url_queries']  = isset( $form_data['url-queries'] ) ? absint( $form_data['url-queries'] ) : 0;
-			$cache_settings['cache_404']    = isset( $form_data['cache-404'] ) ? absint( $form_data['cache-404'] ) : 0;
-			$cache_settings['clear_update'] = isset( $form_data['clear-update'] ) ? absint( $form_data['clear-update'] ) : 0;
-			$cache_settings['debug_log']    = isset( $form_data['debug-log'] ) ? absint( $form_data['debug-log'] ) : 0;
+			$form_data                          = $data['settings']; // Input var ok.
+			$cache_settings['logged_in']        = isset( $form_data['logged-in'] ) ? absint( $form_data['logged-in'] ) : 0;
+			$cache_settings['url_queries']      = isset( $form_data['url-queries'] ) ? absint( $form_data['url-queries'] ) : 0;
+			$cache_settings['cache_404']        = isset( $form_data['cache-404'] ) ? absint( $form_data['cache-404'] ) : 0;
+			$cache_settings['clear_update']     = isset( $form_data['clear-update'] ) ? absint( $form_data['clear-update'] ) : 0;
+			$cache_settings['debug_log']        = isset( $form_data['debug-log'] ) ? absint( $form_data['debug-log'] ) : 0;
+			$cache_settings['cache_identifier'] = isset( $form_data['cache-identifier'] ) ? absint( $form_data['cache-identifier'] ) : 0;
 
 			if ( isset( $form_data['admins_disable_caching'] ) && 1 === absint( $form_data['admins_disable_caching'] ) ) {
 				$admins_can_disable_pc = true;
@@ -440,9 +465,9 @@ class WP_Hummingbird_Admin_AJAX {
 			$url_strings = preg_split( '/[\r\n\t ]+/', $url_strings );
 
 			foreach ( $url_strings as $id => $string ) {
-				$string = str_replace( '\\', '', $string );
-				$string = str_replace( '/', '\/', $string );
-				$string = preg_replace( '/.php$/', '\\.php', $string );
+				$string             = str_replace( '\\', '', $string );
+				$string             = str_replace( '/', '\/', $string );
+				$string             = preg_replace( '/.php$/', '\\.php', $string );
 				$url_strings[ $id ] = $string;
 			}
 		}
@@ -460,7 +485,7 @@ class WP_Hummingbird_Admin_AJAX {
 		$settings['exclude']['user_agents'] = $user_agents;
 
 		/* @var WP_Hummingbird_Module_Page_Cache $module */
-		$module = WP_Hummingbird_Utils::get_module( 'page_cache' );
+		$module  = WP_Hummingbird_Utils::get_module( 'page_cache' );
 		$options = $module->get_options();
 
 		if ( $admins_can_disable_pc ) {
@@ -472,9 +497,11 @@ class WP_Hummingbird_Admin_AJAX {
 		$module->update_options( $options );
 		$module->save_settings( $settings );
 
-		wp_send_json_success( array(
-			'success' => true,
-		));
+		wp_send_json_success(
+			array(
+				'success' => true,
+			)
+		);
 	}
 
 	/**
@@ -510,6 +537,25 @@ class WP_Hummingbird_Admin_AJAX {
 	}
 
 	/**
+	 * Clear cache for selected page, when 'clear cache' button is clicked from Gutenberg post edit screen.
+	 *
+	 * @since 1.9.4
+	 */
+	public function gutenberg_clear_post_cache() {
+		check_ajax_referer( 'wphb-fetch', 'nonce' );
+
+		if ( ! current_user_can( 'edit_posts' ) || ! isset( $_POST['postId'] ) ) { // Input var okay.
+			die();
+		}
+
+		$id = absint( wp_unslash( $_POST['postId'] ) );
+
+		WP_Hummingbird_Utils::get_module( 'page_cache' )->clear_cache_action( $id );
+
+		wp_send_json_success();
+	}
+
+	/**
 	 * Activate browser caching.
 	 *
 	 * @since 1.9.0
@@ -526,9 +572,11 @@ class WP_Hummingbird_Admin_AJAX {
 		if ( $result ) {
 			// Clear saved status.
 			WP_Hummingbird_Utils::get_module( 'caching' )->clear_cache();
-			wp_send_json_success( array(
-				'success' => true,
-			));
+			wp_send_json_success(
+				array(
+					'success' => true,
+				)
+			);
 		}
 
 		wp_send_json_error();
@@ -550,10 +598,12 @@ class WP_Hummingbird_Admin_AJAX {
 
 		$expiry_values = array_map( array( 'WP_Hummingbird_Utils', 'human_read_time_diff' ), $status );
 
-		wp_send_json_success( array(
-			'success'       => true,
-			'expiry_values' => $expiry_values,
-		));
+		wp_send_json_success(
+			array(
+				'success'       => true,
+				'expiry_values' => $expiry_values,
+			)
+		);
 	}
 
 	/**
@@ -566,7 +616,7 @@ class WP_Hummingbird_Admin_AJAX {
 			die();
 		}
 
-		$sanitized_expiry_times = array();
+		$sanitized_expiry_times                      = array();
 		$sanitized_expiry_times['expiry_javascript'] = sanitize_text_field( wp_unslash( $_POST['expiry_times']['expiry_javascript'] ) ); // Input var ok.
 		$sanitized_expiry_times['expiry_css']        = sanitize_text_field( wp_unslash( $_POST['expiry_times']['expiry_css'] ) ); // Input var ok.
 		$sanitized_expiry_times['expiry_media']      = sanitize_text_field( wp_unslash( $_POST['expiry_times']['expiry_media'] ) ); // Input var ok.
@@ -581,8 +631,8 @@ class WP_Hummingbird_Admin_AJAX {
 		}
 
 		/* @var WP_Hummingbird_Module_Caching $caching */
-		$caching = WP_Hummingbird_Utils::get_module( 'caching' );
-		$options = $caching->get_options();
+		$caching                      = WP_Hummingbird_Utils::get_module( 'caching' );
+		$options                      = $caching->get_options();
 		$options['expiry_css']        = $sanitized_expiry_times['expiry_css'];
 		$options['expiry_javascript'] = $sanitized_expiry_times['expiry_javascript'];
 		$options['expiry_media']      = $sanitized_expiry_times['expiry_media'];
@@ -607,9 +657,12 @@ class WP_Hummingbird_Admin_AJAX {
 		 *                                          second part is the first part in seconds ( 1 hour = 3600 sec).
 		 * }
 		 */
-		do_action( 'wphb_caching_set_expiration', array(
-			'expiry_times' => $sanitized_expiry_times,
-		));
+		do_action(
+			'wphb_caching_set_expiration',
+			array(
+				'expiry_times' => $sanitized_expiry_times,
+			)
+		);
 
 		wp_send_json_success();
 	}
@@ -651,14 +704,14 @@ class WP_Hummingbird_Admin_AJAX {
 		// Check if Clouflare value (array won't exist).
 		if ( ! strpos( wp_unslash( $_POST['expiry_times']['expiry_javascript'] ), '/A' ) ) { // Input var ok.
 			// Convert to readable value.
-			$frequency = WP_Hummingbird_Utils::convert_cloudflare_frequency( (int) $_POST['expiry_times']['expiry_javascript'] ); // Input var ok.
-			$sanitized_expiry_times = array();
+			$frequency                                   = WP_Hummingbird_Utils::convert_cloudflare_frequency( (int) $_POST['expiry_times']['expiry_javascript'] ); // Input var ok.
+			$sanitized_expiry_times                      = array();
 			$sanitized_expiry_times['expiry_javascript'] = $frequency;
 			$sanitized_expiry_times['expiry_css']        = $frequency;
 			$sanitized_expiry_times['expiry_media']      = $frequency;
 			$sanitized_expiry_times['expiry_images']     = $frequency;
 		} else {
-			$sanitized_expiry_times = array();
+			$sanitized_expiry_times                      = array();
 			$sanitized_expiry_times['expiry_javascript'] = sanitize_text_field( wp_unslash( $_POST['expiry_times']['expiry_javascript'] ) ); // Input var ok.
 			$sanitized_expiry_times['expiry_css']        = sanitize_text_field( wp_unslash( $_POST['expiry_times']['expiry_css'] ) ); // Input var ok.
 			$sanitized_expiry_times['expiry_media']      = sanitize_text_field( wp_unslash( $_POST['expiry_times']['expiry_media'] ) ); // Input var ok.
@@ -667,10 +720,12 @@ class WP_Hummingbird_Admin_AJAX {
 
 		$code = WP_Hummingbird_Module_Server::get_code_snippet( 'caching', $type, $sanitized_expiry_times );
 
-		wp_send_json_success( array(
-			'type' => $type,
-			'code' => $code,
-		));
+		wp_send_json_success(
+			array(
+				'type' => $type,
+				'code' => $code,
+			)
+		);
 	}
 
 	/**
@@ -687,9 +742,11 @@ class WP_Hummingbird_Admin_AJAX {
 
 		WP_Hummingbird_Module_Server::unsave_htaccess( 'caching' );
 
-		wp_send_json_success( array(
-			'success' => WP_Hummingbird_Module_Server::save_htaccess( 'caching' ),
-		));
+		wp_send_json_success(
+			array(
+				'success' => WP_Hummingbird_Module_Server::save_htaccess( 'caching' ),
+			)
+		);
 	}
 
 	/**
@@ -707,13 +764,16 @@ class WP_Hummingbird_Admin_AJAX {
 		}
 
 		$form_data = wp_unslash( $_POST['formData'] ); // Input var okay.
-		$form_data = wp_parse_args( $form_data, array(
-			'cloudflare-email'   => '',
-			'cloudflare-api-key' => '',
-			'cloudflare-zone'    => '',
-		));
+		$form_data = wp_parse_args(
+			$form_data,
+			array(
+				'cloudflare-email'   => '',
+				'cloudflare-api-key' => '',
+				'cloudflare-zone'    => '',
+			)
+		);
 
-		$step = sanitize_text_field( wp_unslash( $_POST['step'] ) ); // Input var okay.
+		$step    = sanitize_text_field( wp_unslash( $_POST['step'] ) ); // Input var okay.
 		$cf_data = wp_unslash( $_POST['cfData'] ); // Input var okay.
 
 		/* @var WP_Hummingbird_Module_Cloudflare $cloudflare */
@@ -722,10 +782,11 @@ class WP_Hummingbird_Admin_AJAX {
 		$options = $cloudflare->get_options();
 
 		switch ( $step ) {
-			case 'credentials': {
-				$options['email'] = sanitize_email( $form_data['cloudflare-email'] );
-				$options['api_key'] = sanitize_text_field( $form_data['cloudflare-api-key'] );
-				$options['zone'] = sanitize_text_field( $form_data['cloudflare-zone'] );
+			case 'credentials':
+			default: {
+				$options['email']     = sanitize_email( $form_data['cloudflare-email'] );
+				$options['api_key']   = sanitize_text_field( $form_data['cloudflare-api-key'] );
+				$options['zone']      = sanitize_text_field( $form_data['cloudflare-zone'] );
 				$options['zone_name'] = isset( $form_data['cloudflare-zone-name'] ) ? sanitize_text_field( $form_data['cloudflare-zone-name'] ) : '';
 
 				$cloudflare->update_options( $options );
@@ -733,9 +794,11 @@ class WP_Hummingbird_Admin_AJAX {
 				$zones = $cloudflare->get_zones_list();
 
 				if ( is_wp_error( $zones ) ) {
-					wp_send_json_error( array(
-						'message' => sprintf( '<strong>%s</strong> [%s]', $zones->get_error_message(), $zones->get_error_code() ),
-					));
+					wp_send_json_error(
+						array(
+							'message' => sprintf( '<strong>%s</strong> [%s]', $zones->get_error_message(), $zones->get_error_code() ),
+						)
+					);
 				}
 
 				$cf_data['email']  = $options['email'];
@@ -746,56 +809,67 @@ class WP_Hummingbird_Admin_AJAX {
 				$cloudflare->update_options( $options );
 
 				// Try to auto select domain.
-				$site_url = network_site_url();
-				$site_url = rtrim( preg_replace( '/^https?:\/\//', '', $site_url ), '/' );
+				$site_url      = network_site_url();
+				$site_url      = rtrim( preg_replace( '/^https?:\/\//', '', $site_url ), '/' );
 				$plucked_zones = wp_list_pluck( $zones, 'label' );
-				$found = preg_grep( '/.*' . $site_url . '.*/', $plucked_zones );
+				$found         = preg_grep( '/.*' . $site_url . '.*/', $plucked_zones );
 				if ( is_array( $found ) && count( $found ) === 1 && isset( $zones[ key( $found ) ]['value'] ) ) {
 					// Select the domain and cheat this function.
-					$zone_found = $zones[ key( $found ) ]['value'];
+					$zone_found        = $zones[ key( $found ) ]['value'];
 					$_POST['formData'] = array(
 						'cloudflare-zone' => $zone_found,
 					);
-					$_POST['step'] = 'zone';
-					$_POST['cfData'] = $cf_data;
+					$_POST['step']     = 'zone';
+					$_POST['cfData']   = $cf_data;
 					$this->cloudflare_connect();
 				}
 
-				wp_send_json_success( array(
-					'nextStep' => 'zone',
-					'newData'  => $cf_data,
-				));
+				wp_send_json_success(
+					array(
+						'nextStep' => 'zone',
+						'newData'  => $cf_data,
+					)
+				);
 				break;
 			} // End case().
 			case 'zone': {
 				$options['zone'] = sanitize_text_field( $form_data['cloudflare-zone'] );
 
 				if ( empty( $options['zone'] ) ) {
-					wp_send_json_error( array(
-						'message' => __( 'Please, select a Cloudflare zone. Normally, this is your website', 'wphb' ),
-					));
+					wp_send_json_error(
+						array(
+							'message' => __( 'Please, select a Cloudflare zone. Normally, this is your website', 'wphb' ),
+						)
+					);
 				}
 
 				// Check that the zone exists.
 				$zones = $cloudflare->get_zones_list();
 				if ( is_wp_error( $zones ) ) {
-					wp_send_json_error( array(
-						'message' => sprintf( '<strong>%s</strong> [%s]', $zones->get_error_message(), $zones->get_error_code() ),
-					));
+					wp_send_json_error(
+						array(
+							'message' => sprintf( '<strong>%s</strong> [%s]', $zones->get_error_message(), $zones->get_error_code() ),
+						)
+					);
 				} else {
-					$filtered = wp_list_filter( $zones, array(
-						'value' => $options['zone'],
-					));
+					$filtered = wp_list_filter(
+						$zones,
+						array(
+							'value' => $options['zone'],
+						)
+					);
 					if ( ! $filtered ) {
-						wp_send_json_error( array(
-							'message' => __( 'The selected zone is not valid', 'wphb' ),
-						));
+						wp_send_json_error(
+							array(
+								'message' => __( 'The selected zone is not valid', 'wphb' ),
+							)
+						);
 					}
 					$options['zone_name'] = $filtered[0]['label'];
-					$options['plan'] = $filtered[0]['plan'];
+					$options['plan']      = $filtered[0]['plan'];
 				}
 
-				$options['enabled'] = true;
+				$options['enabled']   = true;
 				$options['connected'] = true;
 
 				$cloudflare->update_options( $options );
@@ -807,11 +881,13 @@ class WP_Hummingbird_Admin_AJAX {
 				$cloudflare->set_caching_expiration( 691200 );
 
 				$redirect = WP_Hummingbird_Utils::get_admin_menu_url( 'caching' );
-				wp_send_json_success( array(
-					'nextStep' => 'final',
-					'newData'  => $cf_data,
-					'redirect' => $redirect,
-				));
+				wp_send_json_success(
+					array(
+						'nextStep' => 'final',
+						'newData'  => $cf_data,
+						'redirect' => $redirect,
+					)
+				);
 				break;
 			} // End case().
 		} // End switch().
@@ -837,9 +913,11 @@ class WP_Hummingbird_Admin_AJAX {
 			return;
 		}
 
-		wp_send_json_success( array(
-			'success' => true,
-		));
+		wp_send_json_success(
+			array(
+				'success' => true,
+			)
+		);
 	}
 
 	/**
@@ -870,18 +948,22 @@ class WP_Hummingbird_Admin_AJAX {
 		}
 
 		/* @var WP_Hummingbird_Module_Cloudflare $cf */
-		$cf = WP_Hummingbird_Utils::get_module( 'cloudflare' );
+		$cf    = WP_Hummingbird_Utils::get_module( 'cloudflare' );
 		$zones = $cf->get_zones_list();
 		foreach ( $zones as $zone ) {
 			if ( strpos( get_site_url(), $zone['label'] ) ) {
-				wp_send_json_success( array(
-					'zones' => $zones,
-				));
+				wp_send_json_success(
+					array(
+						'zones' => $zones,
+					)
+				);
 			}
 		}
-		wp_send_json_error( array(
-			'message' => __( 'Zone not found matching this domain. Please check your CloudFlare account.', 'wphb' ),
-		));
+		wp_send_json_error(
+			array(
+				'message' => __( 'Zone not found matching this domain. Please check your CloudFlare account.', 'wphb' ),
+			)
+		);
 	}
 
 	/**
@@ -900,14 +982,16 @@ class WP_Hummingbird_Admin_AJAX {
 
 		/* @var WP_Hummingbird_Module_Advanced $adv_module */
 		$rss_module = WP_Hummingbird_Utils::get_module( 'rss' );
-		$options = $rss_module->get_options();
+		$options    = $rss_module->get_options();
 
 		$options['duration'] = isset( $data['rss-expiry-time'] ) ? absint( $data['rss-expiry-time'] ) : 0;
 
 		$rss_module->update_options( $options );
-		wp_send_json_success( array(
-			'success' => true,
-		));
+		wp_send_json_success(
+			array(
+				'success' => true,
+			)
+		);
 	}
 
 	/**
@@ -926,9 +1010,9 @@ class WP_Hummingbird_Admin_AJAX {
 
 		/* @var WP_Hummingbird_Module_Page_Cache $pc_module */
 		$pc_module = WP_Hummingbird_Utils::get_module( 'page_cache' );
-		$options = $pc_module->get_options();
+		$options   = $pc_module->get_options();
 
-		$options['control'] = ( isset( $data['cc_button'] ) && 'on' === $data['cc_button'] ) ? true : false;
+		$options['control']   = ( isset( $data['cc_button'] ) && 'on' === $data['cc_button'] ) ? true : false;
 		$options['detection'] = isset( $data['detection'] ) ? sanitize_text_field( $data['detection'] ) : 'manual';
 
 		// Remove notice if File Change Detection is set to 'auto' or 'none'.
@@ -937,9 +1021,11 @@ class WP_Hummingbird_Admin_AJAX {
 		}
 
 		$pc_module->update_options( $options );
-		wp_send_json_success( array(
-			'success' => true,
-		));
+		wp_send_json_success(
+			array(
+				'success' => true,
+			)
+		);
 	}
 
 	/**
@@ -986,8 +1072,8 @@ class WP_Hummingbird_Admin_AJAX {
 		$value = rest_sanitize_boolean( wp_unslash( $_POST['value'] ) ); // Input var okay.
 
 		/* @var WP_Hummingbird_Module_Minify $minify */
-		$minify = WP_Hummingbird_Utils::get_module( 'minify' );
-		$options = $minify->get_options();
+		$minify         = WP_Hummingbird_Utils::get_module( 'minify' );
+		$options        = $minify->get_options();
 		$options['log'] = $value;
 		$minify->update_options( $options );
 
@@ -1050,9 +1136,11 @@ class WP_Hummingbird_Admin_AJAX {
 		$minify_module = WP_Hummingbird_Utils::get_module( 'minify' );
 		$minify_module->init_scan();
 
-		wp_send_json_success( array(
-			'steps'    => $minify_module->scanner->get_scan_steps(),
-		));
+		wp_send_json_success(
+			array(
+				'steps' => $minify_module->scanner->get_scan_steps(),
+			)
+		);
 	}
 
 	/**
@@ -1062,7 +1150,7 @@ class WP_Hummingbird_Admin_AJAX {
 		/* @var WP_Hummingbird_Module_Minify $minify_module */
 		$minify_module = WP_Hummingbird_Utils::get_module( 'minify' );
 
-		$urls = $minify_module->scanner->get_scan_urls();
+		$urls         = $minify_module->scanner->get_scan_urls();
 		$current_step = absint( $_POST['step'] ); // Input var ok.
 
 		$minify_module->scanner->update_current_step( $current_step );
@@ -1094,13 +1182,15 @@ class WP_Hummingbird_Admin_AJAX {
 	public function minification_finish_scan() {
 		delete_transient( 'wphb-minification-files-scanning' );
 		update_option( 'wphb-minification-files-scanned', true );
-		wp_send_json_success( array(
-			'assets_msg' => sprintf(
-				/* translators: %s - number of assets */
-				esc_html__( '%s assets found!', 'wphb' ),
-				WP_Hummingbird_Utils::minified_files_count()
-			),
-		) );
+		wp_send_json_success(
+			array(
+				'assets_msg' => sprintf(
+					/* translators: %s - number of assets */
+					esc_html__( '%s assets found!', 'wphb' ),
+					WP_Hummingbird_Utils::minified_files_count()
+				),
+			)
+		);
 	}
 
 	/**
@@ -1119,10 +1209,12 @@ class WP_Hummingbird_Admin_AJAX {
 
 		$status = WP_Hummingbird_Module_Minify::save_css( $form['critical_css'] );
 
-		wp_send_json_success( array(
-			'success' => $status['success'],
-			'message' => $status['message'],
-		));
+		wp_send_json_success(
+			array(
+				'success' => $status['success'],
+				'message' => $status['message'],
+			)
+		);
 	}
 
 	/**
@@ -1151,9 +1243,11 @@ class WP_Hummingbird_Admin_AJAX {
 		// Update to new setting value.
 		WP_Hummingbird_Settings::update_setting( 'file_path', $path, 'minify' );
 
-		wp_send_json_success( array(
-			'success' => true,
-		) );
+		wp_send_json_success(
+			array(
+				'success' => true,
+			)
+		);
 	}
 
 	/**
@@ -1186,16 +1280,20 @@ class WP_Hummingbird_Admin_AJAX {
 		}
 
 		if ( ! $handle || ! $type ) {
-			wp_send_json_error( array(
-				'message' => __( 'Error removing asset file.', 'wphb' ),
-			));
+			wp_send_json_error(
+				array(
+					'message' => __( 'Error removing asset file.', 'wphb' ),
+				)
+			);
 		}
 
 		WP_Hummingbird_Utils::get_module( 'minify' )->clear_file( $handle, $type );
 
-		wp_send_json_success( array(
-			'success' => true,
-		) );
+		wp_send_json_success(
+			array(
+				'success' => true,
+			)
+		);
 	}
 
 	/**
@@ -1216,29 +1314,35 @@ class WP_Hummingbird_Admin_AJAX {
 		}
 
 		$available_types = array( 'revisions', 'drafts', 'trash', 'spam', 'trash_comment', 'expired_transients', 'transients', 'all' );
-		$type = sanitize_text_field( wp_unslash( $_POST['data'] ) ); // Input var ok.
+		$type            = sanitize_text_field( wp_unslash( $_POST['data'] ) ); // Input var ok.
 
 		if ( ! in_array( $type, $available_types, true ) ) {
-			wp_send_json_error( array(
-				'message' => __( 'Invalid type specified.', 'wphb' ),
-			));
+			wp_send_json_error(
+				array(
+					'message' => __( 'Invalid type specified.', 'wphb' ),
+				)
+			);
 		}
 
 		/* @var WP_Hummingbird_Module_Advanced $adv_module */
 		$adv_module = WP_Hummingbird_Utils::get_module( 'advanced' );
-		$removed = $adv_module->delete_db_data( $type );
+		$removed    = $adv_module->delete_db_data( $type );
 
 		if ( ! is_array( $removed ) || ( 0 === $removed['items'] && 0 > $removed['left'] ) ) {
-			wp_send_json_error( array(
-				'message' => __( 'Error deleting data.', 'wphb' ),
-			));
+			wp_send_json_error(
+				array(
+					'message' => __( 'Error deleting data.', 'wphb' ),
+				)
+			);
 		}
 
-		wp_send_json_success( array(
-			/* translators: %d: number of database entries */
-			'message' => sprintf( __( '<strong>%d database entries</strong> were deleted successfully.', 'wphb' ), $removed['items'] ),
-			'left'    => $removed['left'],
-		));
+		wp_send_json_success(
+			array(
+				/* translators: %d: number of database entries */
+				'message' => sprintf( __( '<strong>%d database entries</strong> were deleted successfully.', 'wphb' ), $removed['items'] ),
+				'left'    => $removed['left'],
+			)
+		);
 	}
 
 	/**
@@ -1258,12 +1362,12 @@ class WP_Hummingbird_Admin_AJAX {
 
 		/* @var WP_Hummingbird_Module_Advanced $adv_module */
 		$adv_module = WP_Hummingbird_Utils::get_module( 'advanced' );
-		$options = $adv_module->get_options();
+		$options    = $adv_module->get_options();
 
 		// General settings tab.
 		if ( 'advanced-general-settings' === $form ) {
 			$options['query_string'] = ( isset( $data['query_strings'] ) && 'on' === $data['query_strings'] ) ? true : false;
-			$options['emoji'] = ( isset( $data['emojis'] ) && 'on' === $data['emojis'] ) ? true : false;
+			$options['emoji']        = ( isset( $data['emojis'] ) && 'on' === $data['emojis'] ) ? true : false;
 			$options['prefetch']     = array();
 			if ( isset( $data['url_strings'] ) && ! empty( $data['url_strings'] ) ) {
 				$options['prefetch'] = preg_split( '/[\r\n\t ]+/', $data['url_strings'] );
@@ -1285,7 +1389,7 @@ class WP_Hummingbird_Admin_AJAX {
 
 			$options['db_cleanups'] = false;
 			if ( isset( $data['scheduled_cleanup'] ) && 'on' === $data['scheduled_cleanup'] ) {
-				$options['db_cleanups']  = true;
+				$options['db_cleanups'] = true;
 			}
 
 			$options['db_frequency'] = absint( $data['cleanup_frequency'] );
@@ -1293,9 +1397,11 @@ class WP_Hummingbird_Admin_AJAX {
 		}
 
 		$adv_module->update_options( $options );
-		wp_send_json_success( array(
-			'success' => true,
-		));
+		wp_send_json_success(
+			array(
+				'success' => true,
+			)
+		);
 	}
 
 	/**
@@ -1320,25 +1426,31 @@ class WP_Hummingbird_Admin_AJAX {
 		$module = WP_Hummingbird_Utils::get_module( $slug );
 
 		if ( ! $module ) {
-			wp_send_json_success( array(
-				'success' => false,
-				'message' => __( 'Module not found', 'wphb' ),
-			) );
+			wp_send_json_success(
+				array(
+					'success' => false,
+					'message' => __( 'Module not found', 'wphb' ),
+				)
+			);
 		}
 
 		$status = WP_Hummingbird::get_instance()->core->logger->clear( $slug );
 
 		if ( ! $status ) {
-			wp_send_json_success( array(
-				'success' => false,
-				'message' => __( 'Log file not found or empty', 'wphb' ),
-			) );
+			wp_send_json_success(
+				array(
+					'success' => false,
+					'message' => __( 'Log file not found or empty', 'wphb' ),
+				)
+			);
 		}
 
-		wp_send_json_success( array(
-			'success' => true,
-			'message' => __( 'Log file purged', 'wphb' ),
-		) );
+		wp_send_json_success(
+			array(
+				'success' => true,
+				'message' => __( 'Log file purged', 'wphb' ),
+			)
+		);
 	}
 
 	/**

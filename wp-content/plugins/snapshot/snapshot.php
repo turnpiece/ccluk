@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Snapshot Pro
-Version: 3.2.0.2
+Version: 3.2.0.3
 Description: This plugin allows you to take quick on-demand backup snapshots of your working WordPress database. You can select from the default WordPress tables as well as custom plugin tables within the database structure. All snapshots are logged, and you can restore the snapshot as needed.
 Author: WPMU DEV
 Author URI: https://premium.wpmudev.org/
@@ -38,7 +38,7 @@ WDP ID: 257
  *
  */
 
-define('SNAPSHOT_VERSION', '3.2.0.2');
+define('SNAPSHOT_VERSION', '3.2.0.3');
 
 if ( ! defined( 'SNAPSHOT_I18N_DOMAIN' ) ) {
 	define( 'SNAPSHOT_I18N_DOMAIN', 'snapshot' );
@@ -171,8 +171,6 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 
 			add_action( 'admin_head', array( $this, 'enqueue_shared_ui' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_icon_admin_style' ) );
-
-			add_action( 'admin_enqueue_scripts', array( 'Snapshot_Helper_UI', 'activation_pointers' ) );
 
 			/* Setup the tetdomain for i18n language handling see http://codex.wordpress.org/Function_Reference/load_plugin_textdomain */
 			load_plugin_textdomain( SNAPSHOT_I18N_DOMAIN, false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
@@ -2075,6 +2073,13 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 						if ( is_writable( $_oldbackupFolderFull ) ) {
 							// If we can reach the old folder, we might still
 							// be able to simply rename it
+							if ( strpos( $_newbackupFolderFull, '../' ) !== false ) {
+								// Prevent path traversal
+								$this->_admin_header_error .= __( 'ERROR: The path supplied was not a valid one. ', SNAPSHOT_I18N_DOMAIN );
+								$this->_admin_header_error .= ' ' . $_newbackupFolderFull;
+
+								return;
+							}
 							$rename_ret = rename( $_oldbackupFolderFull, $_newbackupFolderFull );
 						} else {
 							// Okay, so no old backup folder. Let's just create
@@ -2891,6 +2896,29 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 			}
 			Snapshot_Helper_Utility::secure_folder( $_backupSessionsFolderFull );
 			$this->_settings['backupSessionFolderFull'] = $_backupSessionsFolderFull;
+
+			$restoreFolder = trailingslashit( $this->_settings['backupRestoreFolderFull'] ) . '_imports';
+			if ( ! file_exists( $restoreFolder ) ) {
+
+				/* If the destination folder does not exist try and create it */
+				if ( wp_mkdir_p( $restoreFolder ) === false ) {
+
+					/* If here we cannot create the folder. So report this via the admin header message and return */
+					$this->_admin_header_error .= __( "ERROR: Cannot create snapshot restore imports folder. Check that the parent folder is writeable", SNAPSHOT_I18N_DOMAIN ) . " " . $_backupLogFolderFull;
+
+					return;
+				}
+			}
+
+			if ( ! is_writable( $restoreFolder ) ) {
+				chmod( $restoreFolder, 0775 );
+				if ( ! is_writable( $restoreFolder ) ) {
+
+					/* Appears it is still not writeable then report this via the admin heder message and return */
+					$this->_admin_header_error .= __( "ERROR: The Snapshot restore imports folder is not writable", SNAPSHOT_I18N_DOMAIN )
+					                              . " " . $restoreFolder;
+				}
+			}
 
 			if ( true !== $this->config_data['config']['absoluteFolder'] ) {
 
@@ -5045,7 +5073,8 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 			}
 
 			$wp_upload_dir = wp_upload_dir();
-			$error_status['MANIFEST']['RESTORE']['DEST']['UPLOAD_DIR'] = str_replace( '\\', '/', $wp_upload_dir['basedir'] );
+			$error_status['MANIFEST']['RESTORE']['DEST']['UPLOAD_PATH'] = str_replace( '\\', '/', $wp_upload_dir['basedir'] );
+			$error_status['MANIFEST']['RESTORE']['DEST']['UPLOAD_DIR'] = Snapshot_Helper_Utility::get_blog_upload_path( intval( $error_status['MANIFEST']['RESTORE']['DEST']['WP_BLOG_ID'] ), 'basedir' );
 
 			// phpcs:ignore
 			if ( ! isset( $_POST['snapshot-tables-option'] ) ) {
@@ -5269,7 +5298,7 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 				//die();
 
 				// phpcs:ignore
-				$restoreFile = trailingslashit( $this->_session->data['restoreFolder'] ) . esc_attr( $_POST['snapshot_table'] ) . ".sql";
+				$restoreFile = trailingslashit( $this->_session->data['restoreFolder'] ) . basename( esc_attr( $_POST['snapshot_table'] ) ) . ".sql";
 				if ( file_exists( $restoreFile ) ) {
 					$fp = fopen( $restoreFile, 'r' ); // phpcs:ignore
 
@@ -5472,7 +5501,7 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 
 					if ( 'media' === $this->_session->data['MANIFEST']['FILES-DATA'][ $file_data_idx ] ) {
 						$uploads_source = $restoreFilesBase . $this->_session->data['MANIFEST']['RESTORE']['SOURCE']['UPLOAD_DIR'];
-						$uploads_dest = $this->_session->data['MANIFEST']['RESTORE']['DEST']['UPLOAD_DIR'];
+						$uploads_dest = $this->_session->data['MANIFEST']['RESTORE']['DEST']['UPLOAD_PATH'];
 						$destinationFileFull = str_replace( $uploads_source, $uploads_dest, $restoreFileFull );
 					} else {
 						$file_relative = str_replace( $restoreFilesBase, '', $restoreFileFull );
@@ -7967,6 +7996,8 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 			$backupFolder = str_replace( '[SITE_DOMAIN]', $domain, $backupFolder );
 			$backupFolder = str_replace( '[SNAPSHOT_ID]', $item['timestamp'], $backupFolder );
 
+			$backupFolder = wp_normalize_path( $backupFolder );
+
 			// Only for local destination. If the destination path does not start with a leading slash (for absolute paths), then prepend
 			// the site root path.
 			if ( ( ( empty( $data_item['destination'] ) ) || ( "local" === $data_item['destination'] ) ) && ( ! empty( $backupFolder ) ) ) {
@@ -7974,6 +8005,12 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 					$backupFolder = trailingslashit( $home_path ) . $backupFolder;
 				}
 				if ( $create_folder ) {
+					if ( strpos( strtolower( trim( $backupFolder ) ), 'phar://' ) === 0 ) {
+						throw new Exception('phar handler not allowed when looking for the destination folder');
+					}
+					if ( strpos( strtolower( trim( $backupFolder ) ), '../' ) !== false ) {
+						throw new Exception('path traversal is not allowed');
+					}
 					if ( ! file_exists( $backupFolder ) ) {
 						wp_mkdir_p( $backupFolder );
 					}

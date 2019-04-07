@@ -49,6 +49,8 @@ class Shipper_Task_Export_Files extends Shipper_Task_Export {
 			if ( empty( $item['path'] ) ) { continue; }
 
 			$source = $this->get_source_path( $item['path'], $migration );
+			if ( empty( $source ) ) { continue; }
+
 			$destination = $this->get_destination_path( $item['path'] );
 
 			if ( ! is_readable( $source ) ) {
@@ -95,12 +97,21 @@ class Shipper_Task_Export_Files extends Shipper_Task_Export {
 	 * @param string $path Absolute file path.
 	 * @param object $migration Shipper_Model_Stored_Migration instance.
 	 *
-	 * @return string
+	 * @return string|false
 	 */
 	public function get_source_path( $path, $migration ) {
 		if ( ! Shipper_Helper_Fs_Path::is_config_file( $path ) ) {
 			return $path;
 		}
+
+		if ( Shipper_Helper_Fs_Path::is_wp_config( $path ) ) {
+			$model = new Shipper_Model_Stored_Options;
+			if ( $model->get( Shipper_Model_Stored_Options::KEY_SKIPCONFIG ) ) {
+				Shipper_Helper_Log::write( 'Skipping wp-config in export' );
+				return false;
+			}
+		}
+
 		$replacer = new Shipper_Helper_Replacer_File( Shipper_Helper_Codec::ENCODE );
 		$replacer->add_codec( new Shipper_Helper_Codec_Rewrite );
 		$replacer->add_codec( new Shipper_Helper_Codec_Paths );

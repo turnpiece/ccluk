@@ -72,16 +72,20 @@ class CleantalkAPI
 		return $result;
 	}
 	
-	/*
-	* Wrapper for 2s_blacklists_db API method
-	* 
-	* returns mixed STRING || array('error' => true, 'error_string' => STRING)
-	*/
-	static public function method__get_2s_blacklists_db($api_key, $do_check = true){
+	/**
+	 * Wrapper for 2s_blacklists_db API method
+	 * 
+	 * @param type $api_key
+	 * @param type $out Data output type (JSON or file URL)
+	 * @param type $do_check
+	 * @returns mixed STRING || array('error' => true, 'error_string' => STRING)
+	 */
+	static public function method__get_2s_blacklists_db($api_key, $out = null, $do_check = true){
 		
 		$request = array(
 			'method_name' => '2s_blacklists_db',
 			'auth_key' => $api_key,
+			'out' => $out,
 		);
 		
 		$result = self::send_request($request);
@@ -520,7 +524,7 @@ class CleantalkAPI
 			// mehod_name = notice_validate_key
 			if($method_name == 'notice_validate_key' && isset($result['valid']))
 				$out = $result;
-
+			
 			// Other methods
 			if(isset($result['data']) && is_array($result['data'])){
 				$out = $result['data'];
@@ -530,15 +534,13 @@ class CleantalkAPI
 		// mehod_name = get_antispam_report_breif
 		if($method_name == 'get_antispam_report_breif'){
 
-			if(empty($out['error']))
-				$result = $result['data'];
-
-			for( $tmp = array(), $i = 0; $i < 7; $i++ )
-				$tmp[ date( 'Y-m-d', time() - 86400 * 7 + 86400 * $i ) ] = 0;
-
-			$result['spam_stat']    = array_merge( $tmp, isset($result['spam_stat']) ? $result['spam_stat'] : array() );
-			$result['top5_spam_ip'] = isset($result['top5_spam_ip']) ? $result['top5_spam_ip'] : array();
-			$out = array_merge($result, $out);
+			for($tmp = array(), $i = 0; $i < 7; $i++){
+				$tmp[date('Y-m-d', time() - 86400 * 7 + 86400 * $i)] = 0;
+			}
+			
+			$out['spam_stat']    = (array) array_merge( $tmp, isset($out['spam_stat']) ? $out['spam_stat'] : array() );
+			$out['top5_spam_ip'] = isset($out['top5_spam_ip']) ? $out['top5_spam_ip'] : array();
+			
 		}
 		
 		return $out;

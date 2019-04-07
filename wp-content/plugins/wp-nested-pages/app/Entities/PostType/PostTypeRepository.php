@@ -94,6 +94,27 @@ class PostTypeRepository
 		foreach ( $all_types as $type ){
 			if ( $type->name == $post_type ) $formatted_type = $type;
 		}
+		$row_actions = [
+			'wpml', 
+			'comments', 
+			'insert_before', 
+			'insert_after', 
+			'push_to_top', 
+			'push_to_bottom', 
+			'clone', 
+			'quickedit', 
+			'view', 
+			'trash'
+		];
+		if ( $formatted_type->hierarchical ){
+			$row_actions[] = 'add_child_link';
+			$row_actions[] = 'add_child_page';
+		}
+		$filtered_row_actions = [];
+		foreach ( $row_actions as $action ){
+			if ( apply_filters("nestedpages_row_action_$action", true, $post_type) ) $filtered_row_actions[] = $action;
+		}
+		$formatted_type->row_actions = $filtered_row_actions;
 		return $formatted_type;
 	}
 
@@ -437,5 +458,23 @@ class PostTypeRepository
 			if ( isset($options->page_assignment) && $options->page_assignment == 'true' && isset($options->page_assignment_id) && $options->page_assignment_id !== '' ) $array[$options->page_assignment_id] = $type;
 		}
 		return $array;
+	}
+
+	/**
+	* Get quick edit post statuses for the post type
+	*/
+	public function quickEditStatuses($post_type)
+	{
+		$statuses = [
+			'can_publish' => [
+				'publish' => __('Published', 'wp-nested-pages'),
+				'future' => __('Scheduled', 'wp-nested-pages'),
+			],
+			'other' => [
+				'pending' => __('Pending Review', 'wp-nested-pages'),
+				'draft' => __('Draft', 'wp-nested-pages'),
+			]
+		];
+		return apply_filters('nestedpages_quickedit_post_statuses', $statuses, $post_type);
 	}
 }

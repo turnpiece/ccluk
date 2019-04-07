@@ -35,7 +35,8 @@ $this->do_meta_boxes( 'summary' );
 		<?php endif; ?>
 
 	</div><!-- end row -->
-<?php endif;
+	<?php
+endif;
 if ( 'advanced' === $this->mode ) {
 	WP_Hummingbird_Utils::get_modal( 'minification-basic' );
 } else {

@@ -35,7 +35,7 @@ interface ClientInterface
      *
      * @return PromiseInterface
      */
-    public function sendAsync(RequestInterface $request, array $options = []);	 	 	 	 				 	 		
+    public function sendAsync(RequestInterface $request, array $options = []);
 
     /**
      * Create and send an HTTP request.

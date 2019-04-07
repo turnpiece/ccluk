@@ -60,6 +60,32 @@ class Shipper_Task_Check_System extends Shipper_Task_Check {
 	}
 
 	/**
+	 * Checks whether the site is password protected
+	 *
+	 * @paeam bool $value Whether the password protection is on.
+	 *
+	 * @return object Shipper_Model_Check instance
+	 */
+	public function is_server_access_protected_valid( $value ) {
+		$check = new Shipper_Model_Check( __( 'Password protection', 'shipper' ) );
+		$status = Shipper_Model_Check::STATUS_OK;
+		$msg = __('No password protection detected.', 'shipper');
+
+		if ( ! empty( $value ) ) {
+			$status = Shipper_Model_Check::STATUS_ERROR;
+			$msg = join(' ', array(
+				__( 'Password protection detected.', 'shipper' ),
+				__( 'This can prevent migration from working properly.', 'shipper' ),
+				__( 'Please, make sure you disable password protection.', 'shipper' ),
+			));
+		}
+
+		$check = $this->set_check_message( $check, $msg );
+
+		return $check->complete( $status );
+	}
+
+	/**
 	 * Check if we have suhosin extension
 	 *
 	 * @param bool $value Whether we have Suhosin.

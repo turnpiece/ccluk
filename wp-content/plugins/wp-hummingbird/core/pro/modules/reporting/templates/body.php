@@ -19,9 +19,9 @@ $args = compact( 'last_test', 'params' );
 					<tr style="padding: 0; text-align: left; vertical-align: top;">
 						<td style="-moz-hyphens: auto; -webkit-hyphens: auto; border-collapse: collapse !important; color: #555555; font-family: Arial, sans-serif; font-size: 15px; font-weight: normal; hyphens: auto; line-height: 26px; margin: 0; padding: 0; text-align: left; vertical-align: top; word-wrap: break-word;">
 
-							<?php WP_Hummingbird_Module_Reporting::load_template( 'header', $args ); ?>
-							<?php WP_Hummingbird_Module_Reporting::load_template( 'main', $args ); ?>
-							<?php WP_Hummingbird_Module_Reporting::load_template( 'footer', $args ); ?>
+							<?php WP_Hummingbird_Module_Reports::load_template( 'header', $args ); ?>
+							<?php WP_Hummingbird_Module_Reports::load_template( $params['REPORT_TYPE'], $args ); ?>
+							<?php WP_Hummingbird_Module_Reports::load_template( 'footer', $args ); ?>
 
 						</td>
 					</tr>

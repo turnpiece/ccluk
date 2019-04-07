@@ -9,9 +9,8 @@
  */
 
 ?>
+<p><?php esc_html_e( 'Gravatar Caching stores local copies of avatars used in comments and in your theme. You can control how often you want the cache purged depending on how your website is set up.', 'wphb' ); ?></p>
 <div class="sui-box-settings-row">
-	<p><?php esc_html_e( 'Gravatar Caching stores local copies of avatars used in comments and in your theme. You can control how often you want the cache purged depending on how your website is set up.', 'wphb' ); ?></p>
-
 	<?php if ( is_wp_error( $error ) ) : ?>
 		<div class="wphb-caching-error sui-notice sui-notice-error">
 			<p><?php echo esc_html( $error->get_error_message() ); ?></p>

@@ -15,8 +15,8 @@
  */
 
 ?>
+<p><?php esc_html_e( 'Hummingbird stores static HTML copies of your pages and posts to decrease page load time.', 'wphb' ); ?></p>
 <div class="sui-box-settings-row">
-	<p><?php esc_html_e( 'Hummingbird stores static HTML copies of your pages and posts to decrease page load time.', 'wphb' ); ?></p>
 
 	<?php if ( is_wp_error( $error ) ) : ?>
 		<div class="wphb-caching-error sui-notice sui-notice-error">
@@ -56,7 +56,7 @@
 					<?php else : ?>
 						<span class="sub"><?php echo esc_html( $page_type ); ?></span>
 						<label class="sui-toggle">
-							<input type="checkbox" name="page_types[<?php echo esc_attr( $page_type ); ?>]" id="<?php echo esc_attr( $page_type ); ?>" <?php checked( in_array( $page_type, $settings['page_types'],  true ) ); ?>>
+							<input type="checkbox" name="page_types[<?php echo esc_attr( $page_type ); ?>]" id="<?php echo esc_attr( $page_type ); ?>" <?php checked( in_array( $page_type, $settings['page_types'], true ) ); ?>>
 							<span class="sui-toggle-slider"></span>
 						</label>
 					<?php endif; ?>
@@ -151,8 +151,13 @@
 			<?php esc_html_e( 'If you’re having issues with page caching, turn on the debug log to get insight into what’s going on.', 'wphb' ); ?>
 		</span>
 		<div class="sui-description sui-toggle-description sui-border-frame with-padding wphb-logging-box <?php echo $settings['settings']['debug_log'] ? '' : 'sui-hidden'; ?>">
-			<?php esc_html_e( 'Debug logging is active. Logs are stored for 30 days, you can download the
-				log file below.', 'wphb' ); ?>
+			<?php
+			esc_html_e(
+				'Debug logging is active. Logs are stored for 30 days, you can download the
+				log file below.',
+				'wphb'
+			);
+			?>
 
 			<div class="wphb-logging-buttons">
 				<a href="<?php echo esc_url( $download_url ); ?>" class="sui-button sui-button-ghost" <?php disabled( ! $logs_link, true ); ?>>
@@ -166,9 +171,28 @@
 			</div>
 
 			<?php if ( $logs_link ) : ?>
-				<a href="<?php echo esc_url( $logs_link ) ?>" target="_blank"><?php echo esc_url( $logs_link ) ?></a>
+				<a href="<?php echo esc_url( $logs_link ); ?>" target="_blank"><?php echo esc_url( $logs_link ); ?></a>
 			<?php endif; ?>
 		</div>
+		<div class="clear mline"></div>
+		<label class="sui-toggle">
+			<input type="hidden" name="cache-identifier" value="0">
+			<input
+				type="checkbox"
+				name="settings[cache-identifier]"
+				value="1"
+				id="cache-identifier"
+				<?php checked( $settings['settings']['cache_identifier'] ); ?>
+				<?php disabled( ! WP_Hummingbird_Utils::is_member() ); ?>>
+			<span class="sui-toggle-slider"></span>
+		</label>
+		<label for="cache-identifier"><?php esc_html_e( 'Identify cached pages', 'wphb' ); ?></label>
+		<?php if ( ! WP_Hummingbird_Utils::is_member() ) : ?>
+			<span class="sui-tag sui-tag-pro"><?php esc_html_e( 'Pro', 'wphb' ); ?></span>
+		<?php endif; ?>
+		<span class="sui-description sui-toggle-description">
+			<?php esc_html_e( 'Hummingbird will insert a comment into your page’s <head> tag to easily identify if it’s cached or not.', 'wphb' ); ?>
+		</span>
 	</div><!-- end sui-box-settings-col-2 -->
 </div><!-- end row -->
 
@@ -204,22 +228,29 @@
 			<?php esc_html_e( 'You can tell Hummingbird not to cache specific URLs, or any URLs that contain strings. Add one entry per line.', 'wphb' ); ?>
 		</span>
 		<div class="sui-form-field">
-			<textarea class="sui-form-control" name="url_strings"><?php foreach ( $settings['exclude']['url_strings'] as $url_string ) { echo $url_string . PHP_EOL; }?></textarea>
+			<?php $strings = join( PHP_EOL, $settings['exclude']['url_strings'] ); ?>
+			<textarea class="sui-form-control" name="url_strings"><?php echo $strings; ?></textarea>
 		</div>
 		<span class="sui-description sui-with-bottom-border">
-			<?php echo __( 'For example, if you want to not cache any pages that are nested under your Forums
+			<?php
+			echo __(
+				'For example, if you want to not cache any pages that are nested under your Forums
 				area you might add "/forums/" as a rule. When Hummingbird goes to cache pages, she will ignore any
 				URL that contains "/forums/". To exclude a specific page you might add "/forums/thread-title". Accepts
 				regular expression syntax, for more complex exclusions it can be helpful to test
 				on <a href="https://regex101.com" target="_blank">regex101.com</a>. Note: Hummingbird will auto convert
-				your input into valid regex syntax.', 'wphb' ); ?>
+				your input into valid regex syntax.',
+				'wphb'
+			);
+			?>
 		</span>
 		<span class="sui-settings-label"><?php esc_html_e( 'User agents', 'wphb' ); ?></span>
 		<span class="sui-description">
 			<?php esc_html_e( 'Specify any user agents you don’t want to send cached pages to like bots, spiders and crawlers. We’ve added a couple of common ones for you.', 'wphb' ); ?>
 		</span>
 		<div class="sui-form-field">
-			<textarea class="sui-form-control"  name="user_agents"><?php foreach ( $settings['exclude']['user_agents'] as $user_agent ) { echo $user_agent . PHP_EOL; } ?></textarea>
+			<?php $user_agent = join( PHP_EOL, $settings['exclude']['user_agents'] ); ?>
+			<textarea class="sui-form-control"  name="user_agents"><?php echo $user_agent; ?></textarea>
 		</div>
 	</div>
 </div>

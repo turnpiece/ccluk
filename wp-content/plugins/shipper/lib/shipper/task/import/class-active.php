@@ -88,7 +88,7 @@ class Shipper_Task_Import_Active extends Shipper_Task_Import {
 	/**
 	 * Classifies path as one atomic section member
 	 *
-	 * Either a catch-all muplugin, or a section name based on plugin name.
+	 * Either a catch-all muplugin|theme, or a section name based on plugin name.
 	 *
 	 * @param string $path Absolute path to a file.
 	 *
@@ -97,6 +97,15 @@ class Shipper_Task_Import_Active extends Shipper_Task_Import {
 	public function get_active_section( $path ) {
 		if ( Shipper_Helper_Fs_Path::is_muplugin_file( $path ) ) {
 			return 'mu-plugins';
+		}
+		if ( Shipper_Helper_Fs_Path::is_theme_file( $path ) ) {
+			$theme_rx = preg_quote( trailingslashit( WP_CONTENT_DIR ) . 'themes/', '/' );
+			$relpath = preg_replace( "/^{$theme_rx}/", '', $path );
+			$dirs = array_filter( explode( '/', wp_normalize_path( $relpath ) ) );
+			return empty( $dirs[0] ) || basename( $path ) === $dirs[0]
+				? 'themes'
+				: $dirs[0]
+			;
 		}
 		$plugin_rx = '/^' . preg_quote( trailingslashit( WP_PLUGIN_DIR ), '/' ) . '/';
 

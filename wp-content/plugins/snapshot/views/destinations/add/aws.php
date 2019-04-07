@@ -143,11 +143,41 @@ if ( version_compare(PHP_VERSION, '5.5.0', '<') ) {
 				}
 				?>
 				>
-					<br/><label
-						id="snapshot-destination-region-other"><?php esc_html_e( 'Alternate Region host', SNAPSHOT_I18N_DOMAIN ); ?></label><br/>
-					<input name="snapshot-destination[region-other]"
-						id="snapshot-destination-region-other"
-						value="<?php echo esc_attr( $item['region-other'] ); ?>"/>
+					<br /><label
+							id="snapshot-destination-region-other"><?php esc_html_e( 'Alternate Region host', SNAPSHOT_I18N_DOMAIN ); ?></label>
+						<input name="snapshot-destination[region-other]"
+								id="snapshot-destination-region-other"
+								type="text"
+								value="<?php echo esc_attr( $item['region-other'] ); ?>"/>
+					<br />
+				</div>
+				<?php
+			}
+			?>
+
+			<?php
+			if ( $aws_sdk_compatible ) {
+			?>
+				<div id="snapshot-destination-region-non-aws-container"
+				<?php
+				if ( 'non-aws' !== $item['region'] ) {
+					echo ' style="display: none;" ';
+				}
+				?>
+				>
+					<br /><label
+							id="snapshot-destination-region-non-aws-host"><?php esc_html_e( 'Non AWS host', SNAPSHOT_I18N_DOMAIN ); ?></label>
+						<input name="snapshot-destination[region-non-aws-host]"
+								id="snapshot-destination-region-non-aws-host"
+								type="text"
+								value="<?php echo esc_attr( $item['region-non-aws-host'] ); ?>"/>
+					<label
+							id="snapshot-destination-region-non-aws-region"><?php esc_html_e( 'Non AWS region', SNAPSHOT_I18N_DOMAIN ); ?></label>
+						<input name="snapshot-destination[region-non-aws-region]"
+								id="snapshot-destination-region-non-aws-region"
+								type="text"
+								value="<?php echo esc_attr( $item['region-non-aws-region'] ); ?>"/>
+					<br />
 				</div>
 				<?php
 			}

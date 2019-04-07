@@ -63,7 +63,7 @@
 				<?php
 				$site_date = '';
 				if ( is_object( $uptime_stats ) && $uptime_stats->up_since ) {
-					$gmt_date = date( 'Y-m-d H:i:s', $uptime_stats->up_since );
+					$gmt_date  = date( 'Y-m-d H:i:s', $uptime_stats->up_since );
 					$site_date = get_date_from_gmt( $gmt_date, get_option( 'date_format' ) . ' ' . get_option( 'time_format' ) );
 				}
 				if ( empty( $site_date ) ) {

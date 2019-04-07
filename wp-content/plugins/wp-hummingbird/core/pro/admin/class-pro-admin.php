@@ -85,9 +85,9 @@ class WP_Hummingbird_Pro_Admin {
 		$performance->add_meta_box(
 			'performance/reporting',
 			__( 'Reports', 'wphb' ),
-			array( $this, 'performance_reports_metabox' ),
+			array( $this, 'common_reports_metabox' ),
 			null,
-			array( $this, 'performance_reports_metabox_footer' ),
+			array( $this, 'common_reports_metabox_footer' ),
 			'reports'
 		);
 	}
@@ -106,16 +106,16 @@ class WP_Hummingbird_Pro_Admin {
 			__( 'Notifications', 'wphb' ),
 			array( $this, 'notifications_metabox' ),
 			null,
-			array( $this, 'uptime_reporting_metabox_footer' ),
+			array( $this, 'common_reports_metabox_footer' ),
 			'notifications'
 		);
 
 		$uptime->add_meta_box(
 			'uptime/reporting',
 			__( 'Reporting', 'wphb' ),
-			array( $this, 'uptime_reporting_metabox' ),
+			array( $this, 'common_reports_metabox' ),
 			null,
-			array( $this, 'uptime_reporting_metabox_footer' ),
+			array( $this, 'common_reports_metabox_footer' ),
 			'reports'
 		);
 	}
@@ -168,23 +168,22 @@ class WP_Hummingbird_Pro_Admin {
 	 */
 	public function dashboard_reports_metabox() {
 		/* @var WP_Hummingbird_Module_Performance $performance_module */
-		$performance_module = WP_Hummingbird_Utils::get_module( 'performance' );
-
-		$options = $performance_module->get_options();
+		$options = WP_Hummingbird_Utils::get_module( 'performance' )->get_options();
 
 		$frequency = '';
 
 		$performance_is_active = false;
 
-		if ( $options['reports'] ) {
+		if ( $options['reports']['enabled'] ) {
 			$performance_is_active = true;
 
-			$frequency = $options['frequency'];
+			$frequency = $options['reports']['frequency'];
 			switch ( $frequency ) {
 				case 1:
 					$frequency = __( 'Daily', 'wphb' );
 					break;
 				case 7:
+				default:
 					$frequency = __( 'Weekly', 'wphb' );
 					break;
 				case 30:
@@ -205,6 +204,7 @@ class WP_Hummingbird_Pro_Admin {
 					$db_frequency = __( 'Daily', 'wphb' );
 					break;
 				case 7:
+				default:
 					$db_frequency = __( 'Weekly', 'wphb' );
 					break;
 				case 30:
@@ -215,12 +215,15 @@ class WP_Hummingbird_Pro_Admin {
 
 		$options = WP_Hummingbird_Utils::get_module( 'uptime' )->get_options();
 		$uptime  = $options['reports']['enabled'];
+
+		$uptime_frequency = '';
 		if ( $uptime && isset( $options['reports']['frequency'] ) ) {
 			switch ( $options['reports']['frequency'] ) {
 				case 1:
 					$uptime_frequency = __( 'Daily', 'wphb' );
 					break;
 				case 7:
+				default:
 					$uptime_frequency = __( 'Weekly', 'wphb' );
 					break;
 				case 30:
@@ -253,11 +256,14 @@ class WP_Hummingbird_Pro_Admin {
 			$fields[ $type ]['checked'] = isset( $options['db_tables'][ $type ] ) ? $options['db_tables'][ $type ] : false;
 		}
 
-		$this->pro_view( 'advanced/db-settings-meta-box', array(
-			'fields'    => $fields,
-			'schedule'  => $options['db_cleanups'],
-			'frequency' => $options['db_frequency'],
-		) );
+		$this->pro_view(
+			'advanced/db-settings-meta-box',
+			array(
+				'fields'    => $fields,
+				'schedule'  => $options['db_cleanups'],
+				'frequency' => $options['db_frequency'],
+			)
+		);
 	}
 
 	/**
@@ -275,19 +281,24 @@ class WP_Hummingbird_Pro_Admin {
 	 ***************************/
 
 	/**
-	 * Performance reports meta box footer.
+	 * Common reports meta box.
+	 *
+	 * @since 1.9.4  Made it common for performance and uptime reports.
 	 */
-	public function performance_reports_metabox_footer() {
-		$this->pro_view( 'performance/reporting-meta-box-footer', array() );
-	}
+	public function common_reports_metabox() {
+		$module = 'performance';
 
-	/**
-	 * Performance reports meta box.
-	 */
-	public function performance_reports_metabox() {
-		/* @var WP_Hummingbird_Module_Performance $perf_module */
-		$perf_module = WP_Hummingbird_Utils::get_module( 'performance' );
-		$options     = $perf_module->get_options();
+		if ( isset( $_GET['page'] ) ) {
+			$module = sanitize_key( wp_unslash( $_GET['page'] ) );
+			$module = substr( $module, 5 );
+		}
+
+		$options = WP_Hummingbird_Settings::get_setting( 'reports', $module );
+
+		if ( empty( $options ) || ! is_array( $options ) ) {
+			// TODO: display generic page that module is not found.
+			return;
+		}
 
 		$week_days = array(
 			'Monday',
@@ -299,15 +310,17 @@ class WP_Hummingbird_Pro_Admin {
 			'Sunday',
 		);
 
-		$notification = false;
-		$frequency    = 7;
-		$send_day     = $week_days[ array_rand( $week_days, 1 ) ];
-		$send_time    = mt_rand( 0, 23 ) . ':00';
-		$recipients   = array();
+		$notification   = false;
+		$notice_class   = 'default';
+		$notice_message = __( 'Reporting is currently inactive. Activate it and choose your schedule below.', 'wphb' );
+		$frequency      = 7;
+		$send_day       = $week_days[ array_rand( $week_days, 1 ) ];
+		$send_time      = mt_rand( 0, 23 ) . ':00';
+		$recipients     = array();
 
 		if ( WP_Hummingbird_Utils::is_member() ) {
-			if ( isset( $options['reports'] ) ) {
-				$notification = $options['reports'];
+			if ( isset( $options['enabled'] ) ) {
+				$notification = $options['enabled'];
 			}
 
 			if ( isset( $options['frequency'] ) ) {
@@ -330,8 +343,40 @@ class WP_Hummingbird_Pro_Admin {
 			}
 		}
 
-		$args = compact( 'notification', 'frequency', 'send_day', 'send_time', 'recipients' );
-		$this->pro_view( 'performance/reporting-meta-box', $args );
+		if ( $notification ) {
+			$recipients_count = count( $recipients );
+
+			if ( 0 !== $recipients_count ) {
+				$notice_class   = 'success';
+				$notice_message = $this->get_reporting_message( ucfirst( $module ), $frequency, $send_day, $recipients_count );
+			} else {
+				$notice_class   = 'warning';
+				$notice_message = __( "Reporting is enabled but you haven't added any recipients yet.", 'wphb' );
+			}
+		}
+
+		$this->pro_view(
+			'common/reports-meta-box',
+			array(
+				'enabled'        => $notification,
+				'frequency'      => $frequency,
+				'module'         => $module,
+				'notice_class'   => $notice_class,
+				'notice_message' => $notice_message,
+				'recipients'     => $recipients,
+				'send_day'       => $send_day,
+				'send_time'      => $send_time,
+			)
+		);
+	}
+
+	/**
+	 * Common reports meta box footer.
+	 *
+	 * @since 1.9.4  Made it common for performance and uptime reports.
+	 */
+	public function common_reports_metabox_footer() {
+		$this->pro_view( 'common/reports-meta-box-footer', array() );
 	}
 
 	/**
@@ -342,76 +387,104 @@ class WP_Hummingbird_Pro_Admin {
 	 ***************************/
 
 	/**
-	 * Uptime reporting meta box footer.
-	 *
-	 * @since 1.9.3
-	 */
-	public function uptime_reporting_metabox_footer() {
-		$this->pro_view( 'uptime/reporting-meta-box-footer' );
-	}
-
-	/**
-	 * Uptime reporting meta box.
-	 *
-	 * @since 1.9.3
-	 */
-	public function uptime_reporting_metabox() {
-		$reports_settings = WP_Hummingbird_Settings::get_setting( 'reports', 'uptime' );
-		$notice_class     = 'default';
-		$notice_message   = __( 'Reporting is currently inactive. Activate it and choose your schedule below.', 'wphb' );
-
-		if ( $reports_settings['enabled'] ) {
-			$recipients_count = count( $reports_settings['recipients'] );
-			if ( 0 !== $recipients_count ) {
-				$notice_class   = 'success';
-				$notice_message = WP_Hummingbird_Utils::get_pro_module( 'uptime-reports' )->get_uptime_reporting_message( $recipients_count );
-			} else {
-				$notice_class   = 'warning';
-				$notice_message = __( 'Reporting is enabled but you haven\'t added any recipients yet.', 'wphb' );
-			}
-		}
-
-		// Remove the minutes from the hour to not confuse the user.
-		$send_time    = explode( ':', $reports_settings['time'] );
-		$send_time[1] = '00';
-		$send_time    = implode( ':', $send_time );
-
-
-		$this->pro_view( 'uptime/reporting-meta-box', array(
-			'notice_class'     => $notice_class,
-			'notice_message'   => $notice_message,
-			'reports_settings' => $reports_settings,
-			'send_time'        => $send_time,
-		));
-	}
-
-	/**
 	 * Uptime notifications meta box.
 	 *
 	 * @since 1.9.3
 	 */
 	public function notifications_metabox() {
-		$reports_settings = WP_Hummingbird_Settings::get_setting( 'notifications', 'uptime' );
-		$notice_class     = 'default';
-		$notice_message   = __( "Email notifications are off which means you won't get notified if visitors can't access this website.", 'wphb' );
+		$notifications_settings = WP_Hummingbird_Settings::get_setting( 'notifications', 'uptime' );
+		$notice_class           = 'default';
+		$notice_message         = __( "Email notifications are off which means you won't get notified if visitors can't access this website.", 'wphb' );
 
-		if ( $reports_settings['enabled'] ) {
-			$recipients_count = count( $reports_settings['recipients'] );
+		if ( $notifications_settings['enabled'] ) {
+			$recipients_count = count( $notifications_settings['recipients'] );
 			if ( 0 !== $recipients_count ) {
 				$notice_class   = 'success';
-				$notice_message = WP_Hummingbird_Utils::get_pro_module( 'uptime-reports' )->get_uptime_notifications_message( $recipients_count );
+				if ( isset( $notifications_settings['threshold'] ) && 0 < $notifications_settings['threshold'] ) {
+					$notice_message = sprintf(
+						/* translators: %d: Number of recipients */
+						__( 'Email notifications are enabled and will be triggered if your website has been down for more than %d minutes.', 'wphb' ),
+						absint( $notifications_settings['threshold'] )
+					);
+				} else {
+					$notice_message = __( 'Email notifications are enabled and will be triggered as soon as your website goes down.', 'wphb' );
+				}
 			} else {
 				$notice_class   = 'warning';
 				$notice_message = __( "Email notifications are enabled but you haven't added any recipients yet.", 'wphb' );
 			}
 		}
 
-		$this->pro_view( 'uptime/notifications-meta-box', array(
-			'downtime_url'     => WP_Hummingbird_Utils::get_admin_menu_url( 'uptime' ) . '&view=downtime',
-			'notice_class'     => $notice_class,
-			'notice_message'   => $notice_message,
-			'reports_settings' => $reports_settings,
-		));
+		$this->pro_view(
+			'uptime/notifications-meta-box',
+			array(
+				'downtime_url'     => WP_Hummingbird_Utils::get_admin_menu_url( 'uptime' ) . '&view=downtime',
+				'notice_class'     => $notice_class,
+				'notice_message'   => $notice_message,
+				'reports_settings' => $notifications_settings,
+			)
+		);
+	}
+
+	/**
+	 * Get Reporting notice message.
+	 *
+	 * @since 1.9.3
+	 * @since 1.9.4  Moved here from Uptime module. Added $frequency, $day and $module params.
+	 *
+	 * @param $day
+	 * @param int    $frequency         Report frequency.
+	 * @param string $module            Module name.
+	 * @param string $recipients_count  Recipient count.
+	 *
+	 * @return string
+	 */
+	private function get_reporting_message( $module, $frequency, $day, $recipients_count ) {
+		switch ( $frequency ) {
+			case 1:
+				$notice_message = sprintf(
+				/* translators: %s: Module name, %d: Number of recipients */
+					__( '%s reports are sending daily to %d recipients.', 'wphb' ),
+					esc_html( $module ),
+					esc_html( $recipients_count )
+				);
+				$notice_frequency = __( 'daily', 'wphb' );
+				if ( 1 === $recipients_count ) {
+					$notice_message = __( 'Uptime reports are sending daily to 1 recipient.', 'wphb' );
+				}
+				break;
+			case 7:
+				$notice_message = sprintf(
+				/* translators: %1$s: Module name, %2$s: Weekday %3$d: Number of recipients */
+					__( '%1$s reports are sending weekly on %2$s to %3$d recipients.', 'wphb' ),
+					esc_html( $module ),
+					esc_html( $day ),
+					esc_html( $recipients_count )
+				);
+				$notice_frequency = __( 'weekly', 'wphb' );
+				break;
+			default:
+				$notice_message = sprintf(
+				/* translators: %1$s: Module name, %2$s: Weekday %3$d: Number of recipients */
+					__( '%1$s reports are sending monthly on %2$s to %3$d recipients.', 'wphb' ),
+					esc_html( $module ),
+					esc_html( $day ),
+					esc_html( $recipients_count )
+				);
+				$notice_frequency = __( 'monthly', 'wphb' );
+				break;
+		}
+
+		if ( 1 === $recipients_count ) {
+			$notice_message = sprintf(
+			/* translators: %1$s: Module name, %2$s: Frequency of reports */
+				__( '%1$s reports are sending %2$s to 1 recipient.', 'wphb' ),
+				esc_html( $module ),
+				esc_html( $notice_frequency )
+			);
+		}
+
+		return $notice_message;
 	}
 
 }

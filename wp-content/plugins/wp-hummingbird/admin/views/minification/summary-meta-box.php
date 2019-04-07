@@ -28,7 +28,7 @@
 				<li>
 					<span class="sui-list-label"><?php esc_html_e( 'WPMU DEV CDN', 'wphb' ); ?></span>
 					<span class="sui-list-detail"><div class="toggle-actions">
-						<label class="sui-toggle sui-tooltip sui-tooltip-top-left" data-tooltip="<?php esc_html_e( 'Enable WPMU DEV CDN', 'wphb' ); ?>">
+						<label class="sui-toggle sui-tooltip sui-tooltip-top-right" data-tooltip="<?php esc_html_e( 'Enable WPMU DEV CDN', 'wphb' ); ?>">
 							<input type="checkbox" name="use_cdn" id="use_cdn" <?php checked( $use_cdn ); ?> <?php disabled( ! $is_member ); ?>>
 							<span class="sui-toggle-slider"></span>
 						</label>
@@ -38,7 +38,7 @@
 				<li>
 					<span class="sui-list-label"><?php esc_html_e( 'WPMU DEV CDN', 'wphb' ); ?></span>
 					<span class="sui-list-detail">
-						<span class="sui-tag sui-tag-upsell sui-tooltip sui-tooltip-top-left" data-tooltip="<?php esc_html_e( 'Host your files on WPMU DEV’s blazing fast CDN', 'wphb' ); ?>" data-a11y-dialog-show="wphb-upgrade-membership-modal" id="dash-uptime-update-membership">
+						<span class="sui-tag sui-tag-upsell sui-tooltip sui-tooltip-top-right" data-tooltip="<?php esc_html_e( 'Host your files on WPMU DEV’s blazing fast CDN', 'wphb' ); ?>" data-a11y-dialog-show="wphb-upgrade-membership-modal" id="dash-uptime-update-membership">
 										<?php esc_html_e( 'Pro Feature', 'wphb' ); ?>
 									</span>
 					</span>
@@ -48,9 +48,9 @@
 			<li>
 				<span class="sui-list-label"><?php esc_html_e( 'WPMU DEV CDN', 'wphb' ); ?></span>
 				<?php if ( $use_cdn ) : ?>
-					<span class="sui-list-detail"><span class=" sui-tooltip sui-tooltip-top-left" data-tooltip="<?php esc_html_e( 'The Network Admin has the WPMU DEV CDN turned on', 'wphb' ); ?>"> <i class="sui-icon-check-tick sui-md sui-info"></i></span></span>
+					<span class="sui-list-detail"><span class=" sui-tooltip sui-tooltip-top-right" data-tooltip="<?php esc_html_e( 'The Network Admin has the WPMU DEV CDN turned on', 'wphb' ); ?>"> <i class="sui-icon-check-tick sui-md sui-info"></i></span></span>
 				<?php else : ?>
-					<span class="sui-list-detail"><span class="sui-tag sui-tag-disabled sui-tooltip sui-tooltip-top-left" data-tooltip="<?php esc_html_e( 'The Network Admin has the WPMU DEV CDN turned off', 'wphb' ); ?>"><?php esc_html_e( 'Disabled', 'wphb' ); ?></span></span>
+					<span class="sui-list-detail"><span class="sui-tag sui-tag-disabled sui-tooltip sui-tooltip-top-right" data-tooltip="<?php esc_html_e( 'The Network Admin has the WPMU DEV CDN turned off', 'wphb' ); ?>"><?php esc_html_e( 'Disabled', 'wphb' ); ?></span></span>
 				<?php endif; ?>
 			</li>
 		<?php endif; ?>

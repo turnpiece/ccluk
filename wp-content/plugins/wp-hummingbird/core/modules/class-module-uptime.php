@@ -57,7 +57,7 @@ class WP_Hummingbird_Module_Uptime extends WP_Hummingbird_Module {
 	 */
 	private function refresh_report( $time = 'day', $current_reports = false ) {
 		/* @var WP_Hummingbird_API $api */
-		$api = WP_Hummingbird_Utils::get_api();
+		$api     = WP_Hummingbird_Utils::get_api();
 		$results = $api->uptime->check( $time );
 
 		if ( is_wp_error( $results ) && 412 === $results->get_error_code() ) {
@@ -95,7 +95,7 @@ class WP_Hummingbird_Module_Uptime extends WP_Hummingbird_Module {
 			return false;
 		}
 
-		$api = WP_Hummingbird_Utils::get_api();
+		$api    = WP_Hummingbird_Utils::get_api();
 		$result = $api->uptime->is_enabled();
 		set_site_transient( 'wphb-uptime-remotely-enabled', $result ? 'yes' : 'no', 300 ); // save for 5 minutes
 		return $result;
@@ -124,7 +124,7 @@ class WP_Hummingbird_Module_Uptime extends WP_Hummingbird_Module {
 	}
 
 	public function enable_locally() {
-		$options = $this->get_options();
+		$options            = $this->get_options();
 		$options['enabled'] = true;
 		$this->update_options( $options );
 		set_site_transient( 'wphb-uptime-remotely-enabled', 'yes', 180 ); // save for 3 minutes
@@ -138,8 +138,13 @@ class WP_Hummingbird_Module_Uptime extends WP_Hummingbird_Module {
 	}
 
 	public function disable_locally() {
-		$options = $this->get_options();
+		$options            = $this->get_options();
 		$options['enabled'] = false;
+
+		// Disable reports and notifications.
+		$options['notifications']['enabled'] = false;
+		$options['reports']['enabled']       = false;
+
 		$this->update_options( $options );
 		set_site_transient( 'wphb-uptime-remotely-enabled', 'no', 180 ); // save for 3 minutes
 	}

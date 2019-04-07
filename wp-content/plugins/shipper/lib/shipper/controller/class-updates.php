@@ -274,7 +274,7 @@ class Shipper_Controller_Updates extends Shipper_Controller {
 	 */
 	public function get_updater_file_name( $migration, $task ) {
 		if ( Shipper_Model_Stored_Migration::TYPE_EXPORT === $migration->get_type() ) {
-			return basename( $task->get_archive_path( $migration->get_destination() ) );	   	 	    	 		     	 
+			return basename( $task->get_archive_path( $migration->get_destination() ) );
 		}
 		return Shipper_Task_Import::ARCHIVE;
 	}

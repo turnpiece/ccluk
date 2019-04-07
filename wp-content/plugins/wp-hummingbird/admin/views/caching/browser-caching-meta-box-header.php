@@ -12,7 +12,7 @@
 <h3  class="sui-box-title"><?php echo esc_html( $title ); ?></h3>
 <?php if ( $issues ) : ?>
 	<div class="sui-actions-left">
-		<span class="sui-tag"><?php echo intval( $issues ); ?></span>
+		<span class="sui-tag sui-tag-warning"><?php echo intval( $issues ); ?></span>
 	</div>
 <?php endif; ?>
 <div class="sui-actions-right">

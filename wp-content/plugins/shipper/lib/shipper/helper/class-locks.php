@@ -59,7 +59,7 @@ class Shipper_Helper_Locks {
 		 */
 		$forbid_stale_locks_check = apply_filters(
 			'shipper_locks_forbid_stale_checks',
-			false//Shipper_Model_Env::is_wpmu_hosting()
+			false
 		);
 		if ( $forbid_stale_locks_check ) {
 			return false;

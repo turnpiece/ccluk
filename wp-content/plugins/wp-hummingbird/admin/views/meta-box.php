@@ -7,17 +7,24 @@
 	<?php elseif ( $this->view_exists( $orig_id . '/meta-box-header' ) ) : ?>
 		<div class="<?php echo $args['box_header_class']; ?>">
 			<?php
-			$this->view( $orig_id . '/meta-box-header', array(
-				'title' => $title,
-			) );
+			$this->view(
+				$orig_id . '/meta-box-header',
+				array(
+					'title' => $title,
+				)
+			);
 			?>
 		</div><!-- end sui-box-title -->
 	<?php elseif ( $this->view_exists( $orig_id . '-meta-box-header' ) ) : ?>
 		<div class="<?php echo $args['box_header_class']; ?>">
 			<?php
-			$this->view( $orig_id . '-meta-box-header', array(
-				'title' => $title,
-			) ); ?>
+			$this->view(
+				$orig_id . '-meta-box-header',
+				array(
+					'title' => $title,
+				)
+			);
+			?>
 		</div><!-- end sui-box-title -->
 	<?php elseif ( $title ) : ?>
 		<div class="<?php echo $args['box_header_class']; ?>">
@@ -33,7 +40,7 @@
 				<?php $this->view( $orig_id . '-meta-box' ); ?>
 			<?php endif; ?>
 		</div><!-- end box_content_class -->
-	<?php
+		<?php
 	else :
 		if ( is_callable( $callback ) ) :
 			call_user_func( $callback );

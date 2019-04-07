@@ -12,6 +12,13 @@ $progress = ! empty( $progress )
 $migration = new Shipper_Model_Stored_Migration;
 ?>
 
+<?php
+	$health = new Shipper_Model_Stored_Healthcheck;
+	$this->render( 'msgs/migration-slow-notice', array(
+		'visible' => $health->is_slow_migration(),
+	) );
+?>
+
 <div class="shipper-migration-content shipper-migration-progress-content">
 	<div class="shipper-page-header">
 		<i class="sui-icon-shipper-anchor" aria-hidden="true"></i>
@@ -59,11 +66,11 @@ $migration = new Shipper_Model_Stored_Migration;
 		if ( Shipper_Model_Stored_Migration::TYPE_EXPORT === $migration->get_type() ) {
 			echo Shipper_Model_Stored_Estimate::get_estimated_migration_time_msg();
 		} else {
-			esc_html_e( 'This can take a while.', 'shipper' );
+			esc_html_e( 'It can take a while since we are migrating one-file-at-a-time via a super secure API to ensure 100% effective, secure, safe and foolproof migrations.', 'shipper' );
 		}
 		?>
 		<?php echo wp_kses_post(
-			__( 'So, please be patient and, as long as your site isn\'t a local installation, you can close this tab and <b>we\'ll email you when it\'s all done.</b>', 'shipper' )
+			__( 'It\'s a one-click migration with no flaws, except it can take a long time to complete. It’s worth the wait and, as long as your site isn’t a local installation, you can close this tab and <b>we’ll email you when it’s all done.</b>', 'shipper' )
 		); ?>
 	</p>
 </div> <?php // .shipper-migration-progress-content ?>

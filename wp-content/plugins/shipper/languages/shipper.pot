@@ -2,18 +2,18 @@
 # This file is distributed under the same license as the Shipper package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Shipper 1.0.0\n"
+"Project-Id-Version: Shipper 1.0.1.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/shipper\n"
-"POT-Creation-Date: 2019-01-24 03:14:06+00:00\n"
+"POT-Creation-Date: 2019-03-22 02:54:59+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "PO-Revision-Date: 2019-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"X-Generator: grunt-wp-i18n1.0.2\n"
+"X-Generator: grunt-wp-i18n 1.0.3\n"
 
-#: lib/functions.php:148 lib/shipper/model/stored/class-options.php:122
+#: lib/functions.php:148 lib/shipper/model/stored/class-options.php:124
 msgid "Anonymous"
 msgstr ""
 
@@ -62,11 +62,11 @@ msgstr ""
 msgid "How did you get here?"
 msgstr ""
 
-#: lib/shipper/controller/class-runner.php:201
+#: lib/shipper/controller/class-runner.php:209
 msgid "Encountered a FATAL ERROR: %1$s in %2$s on line %3$d"
 msgstr ""
 
-#: lib/shipper/controller/class-runner.php:283
+#: lib/shipper/controller/class-runner.php:303
 msgid "Non-success response code (%d)"
 msgstr ""
 
@@ -102,27 +102,27 @@ msgstr ""
 msgid "Migration complete"
 msgstr ""
 
-#: lib/shipper/controller/runner/class-migration.php:232
+#: lib/shipper/controller/runner/class-migration.php:234
 msgid "Migration inactive"
 msgstr ""
 
-#: lib/shipper/controller/runner/class-migration.php:236
+#: lib/shipper/controller/runner/class-migration.php:238
 msgid "Attempting to cancel %s migration"
 msgstr ""
 
-#: lib/shipper/controller/runner/class-migration.php:261
+#: lib/shipper/controller/runner/class-migration.php:263
 msgid "Attempting cancel on %s migration"
 msgstr ""
 
-#: lib/shipper/controller/runner/class-migration.php:269
+#: lib/shipper/controller/runner/class-migration.php:271
 msgid "Canceling remote migration failed"
 msgstr ""
 
-#: lib/shipper/controller/runner/class-migration.php:277
+#: lib/shipper/controller/runner/class-migration.php:279
 msgid "This is Hub-initiated migration, no remote to cancel"
 msgstr ""
 
-#: lib/shipper/controller/runner/class-migration.php:282
+#: lib/shipper/controller/runner/class-migration.php:284
 msgid "Migration cancelled"
 msgstr ""
 
@@ -147,7 +147,7 @@ msgid "Log file cleared"
 msgstr ""
 
 #: lib/shipper/helper/fs/class-list.php:269
-#: lib/shipper/task/export/class-files.php:64
+#: lib/shipper/task/export/class-files.php:66
 msgid "Skipping excluded item: %s"
 msgstr ""
 
@@ -155,49 +155,49 @@ msgstr ""
 msgid "Skipping unreadable file: %s"
 msgstr ""
 
-#: lib/shipper/helper/fs/class-remote.php:77
+#: lib/shipper/helper/fs/class-remote.php:81
 msgid "Credentials update failed: %s"
 msgstr ""
 
-#: lib/shipper/helper/fs/class-remote.php:84
+#: lib/shipper/helper/fs/class-remote.php:88
 msgid "Credentials updating task silently failed."
 msgstr ""
 
-#: lib/shipper/helper/fs/class-remote.php:117
-#: lib/shipper/helper/fs/class-remote.php:126
-#: lib/shipper/helper/fs/class-remote.php:253
+#: lib/shipper/helper/fs/class-remote.php:131
+#: lib/shipper/helper/fs/class-remote.php:140
+#: lib/shipper/helper/fs/class-remote.php:267
 msgid "Initialization error on %s"
 msgstr ""
 
-#: lib/shipper/helper/fs/class-remote.php:160
+#: lib/shipper/helper/fs/class-remote.php:174
 msgid "Error uploading file %1$s, part %2$s"
 msgstr ""
 
-#: lib/shipper/helper/fs/class-remote.php:192
+#: lib/shipper/helper/fs/class-remote.php:206
 msgid "Error finalizing upload %s"
 msgstr ""
 
-#: lib/shipper/helper/fs/class-remote.php:225
+#: lib/shipper/helper/fs/class-remote.php:239
 msgid "Unable to upload %s"
 msgstr ""
 
-#: lib/shipper/helper/fs/class-remote.php:270
+#: lib/shipper/helper/fs/class-remote.php:284
 msgid "Error downloading file %s"
 msgstr ""
 
-#: lib/shipper/helper/fs/class-remote.php:284
+#: lib/shipper/helper/fs/class-remote.php:298
 msgid "Error finalizing download %s"
 msgstr ""
 
-#: lib/shipper/helper/fs/class-remote.php:309
+#: lib/shipper/helper/fs/class-remote.php:323
 msgid "Unable to locate the source file: %s"
 msgstr ""
 
-#: lib/shipper/helper/fs/class-remote.php:319
+#: lib/shipper/helper/fs/class-remote.php:333
 msgid "Unable to download %s"
 msgstr ""
 
-#: lib/shipper/helper/fs/class-remote.php:546
+#: lib/shipper/helper/fs/class-remote.php:560
 msgid "Error initializing upload: %s"
 msgstr ""
 
@@ -281,15 +281,16 @@ msgstr ""
 #: lib/shipper/model/stored/class-estimate.php:84
 msgid ""
 "Your site is quite large (%1$s) and <b>it could take %2$dh - %3$dh to "
-"migrate</b> because we are migrating one-file-at-a-time to make sure the "
-"process works."
+"migrate</b> because we are migrating one-file-at-a-time via a super-secure "
+"API to ensure 100%% effective, secure, safe and foolproof migrations."
 msgstr ""
 
 #: lib/shipper/model/stored/class-estimate.php:85
 msgid ""
-"Your site is reasonably small (%1$s), but <b>it could still take around "
-"%2$dh - %3$dh to migrate</b> because we are migrating one-file-at-a-time to "
-"make sure the process works."
+"Your site is reasonably small (%1$s) but <b>it could still take around "
+"%2$dh - %3$dh to migrate</b> because we are migrating one-file-at-a-time "
+"via a super-secure API to ensure 100%% effective, secure, safe and "
+"foolproof migrations."
 msgstr ""
 
 #: lib/shipper/model/stored/class-migration.php:220
@@ -312,31 +313,31 @@ msgstr ""
 msgid "Generic preflight error"
 msgstr ""
 
-#: lib/shipper/model/system/class-php.php:115
-#: lib/shipper/model/system/class-server.php:145
+#: lib/shipper/model/system/class-php.php:118
+#: lib/shipper/model/system/class-server.php:162
 #: lib/shipper/model/system/class-wp.php:71
 msgid "Yes"
 msgstr ""
 
-#: lib/shipper/model/system/class-php.php:115
-#: lib/shipper/model/system/class-server.php:146
+#: lib/shipper/model/system/class-php.php:118
+#: lib/shipper/model/system/class-server.php:163
 #: lib/shipper/model/system/class-wp.php:71
 msgid "No"
 msgstr ""
 
-#: lib/shipper/model/system/class-server.php:122
+#: lib/shipper/model/system/class-server.php:139
 msgid "Apache"
 msgstr ""
 
-#: lib/shipper/model/system/class-server.php:123
+#: lib/shipper/model/system/class-server.php:140
 msgid "Microsoft IIS"
 msgstr ""
 
-#: lib/shipper/model/system/class-server.php:124
+#: lib/shipper/model/system/class-server.php:141
 msgid "Nginx"
 msgstr ""
 
-#: lib/shipper/model/system/class-server.php:126
+#: lib/shipper/model/system/class-server.php:143
 msgid "something else"
 msgstr ""
 
@@ -377,13 +378,17 @@ msgstr ""
 msgid "Error triggering add for site %s: %s"
 msgstr ""
 
+#: lib/shipper/task/api/destinations/class-remove.php:34
+msgid "Error removing domain %s from API list"
+msgstr ""
+
 #: lib/shipper/task/api/info/class-creds.php:27
 msgid "Service error: unable to acquire mediation token"
 msgstr ""
 
 #: lib/shipper/task/api/info/class-creds.php:88
 #: lib/shipper/task/api/info/class-get.php:41
-#: lib/shipper/task/api/info/class-set.php:33
+#: lib/shipper/task/api/info/class-set.php:38
 #: lib/shipper/task/api/migrations/class-cancel.php:43
 #: lib/shipper/task/api/migrations/class-get.php:43
 #: lib/shipper/task/api/migrations/class-set.php:59
@@ -411,15 +416,15 @@ msgstr ""
 msgid "Missing migration type to attempt"
 msgstr ""
 
-#: lib/shipper/task/check/class-files.php:68
+#: lib/shipper/task/check/class-files.php:70
 msgid "Large Files"
 msgstr ""
 
-#: lib/shipper/task/check/class-files.php:123
+#: lib/shipper/task/check/class-files.php:125
 msgid "Filenames"
 msgstr ""
 
-#: lib/shipper/task/check/class-files.php:163
+#: lib/shipper/task/check/class-files.php:200
 msgid "Package size"
 msgstr ""
 
@@ -440,168 +445,186 @@ msgid "Invalid local data for section %1$s, key %2$s"
 msgstr ""
 
 #: lib/shipper/task/check/class-sysdiff.php:93
-#: lib/shipper/task/check/class-system.php:176
-msgid "PHP Version"
+msgid "Password Protection"
 msgstr ""
 
-#: lib/shipper/task/check/class-sysdiff.php:98
-msgid "PHP Version Difference"
+#: lib/shipper/task/check/class-sysdiff.php:101
+msgid "Destination is password protected."
 msgstr ""
 
 #: lib/shipper/task/check/class-sysdiff.php:102
+#: lib/shipper/task/check/class-system.php:78
+msgid "This can prevent migration from working properly."
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:103
+#: lib/shipper/task/check/class-system.php:79
+msgid "Please, make sure you disable password protection."
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:120
+#: lib/shipper/task/check/class-system.php:202
+msgid "PHP Version"
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:125
+msgid "PHP Version Difference"
+msgstr ""
+
+#: lib/shipper/task/check/class-sysdiff.php:129
 msgid ""
 "Your local PHP install major version is %1$d, while your remote setup runs "
 "on PHP v%2$d."
 msgstr ""
 
-#: lib/shipper/task/check/class-sysdiff.php:103
+#: lib/shipper/task/check/class-sysdiff.php:130
 msgid ""
 "While this might not be significant, having major version differences "
 "<i>can</i> cause issues on your destination site."
 msgstr ""
 
-#: lib/shipper/task/check/class-sysdiff.php:110
+#: lib/shipper/task/check/class-sysdiff.php:137
 msgid ""
 "Major PHP versions on your source and destination servers do not differ "
 "significantly."
 msgstr ""
 
-#: lib/shipper/task/check/class-sysdiff.php:127
+#: lib/shipper/task/check/class-sysdiff.php:154
 msgid "MySQL Version"
 msgstr ""
 
-#: lib/shipper/task/check/class-sysdiff.php:132
+#: lib/shipper/task/check/class-sysdiff.php:159
 msgid "MySQL Version Difference"
 msgstr ""
 
-#: lib/shipper/task/check/class-sysdiff.php:136
+#: lib/shipper/task/check/class-sysdiff.php:163
 msgid "Your local MySQL version is %1$s, while your remote system uses %2$s"
 msgstr ""
 
-#: lib/shipper/task/check/class-sysdiff.php:137
+#: lib/shipper/task/check/class-sysdiff.php:164
 msgid ""
 "While this might not be significant, having big version differences "
 "<i>can</i> cause issues on your destination site."
 msgstr ""
 
-#: lib/shipper/task/check/class-sysdiff.php:144
+#: lib/shipper/task/check/class-sysdiff.php:171
 msgid "MySQL version is %s on this server, which is fine to migrate."
 msgstr ""
 
-#: lib/shipper/task/check/class-sysdiff.php:162
+#: lib/shipper/task/check/class-sysdiff.php:189
 msgid "Database Charset"
 msgstr ""
 
-#: lib/shipper/task/check/class-sysdiff.php:167
+#: lib/shipper/task/check/class-sysdiff.php:194
 msgid "Database Charsets Difference"
 msgstr ""
 
-#: lib/shipper/task/check/class-sysdiff.php:171
+#: lib/shipper/task/check/class-sysdiff.php:198
 msgid "Your local database uses %1$s charset, while your remote system uses %2$s."
 msgstr ""
 
-#: lib/shipper/task/check/class-sysdiff.php:172
+#: lib/shipper/task/check/class-sysdiff.php:199
 msgid "This may cause issues with your migrated content."
 msgstr ""
 
-#: lib/shipper/task/check/class-sysdiff.php:179
+#: lib/shipper/task/check/class-sysdiff.php:206
 msgid "Charset is %s on this server, which is fine to migrate."
 msgstr ""
 
-#: lib/shipper/task/check/class-sysdiff.php:197 tpl/pages/tools/sysinfo.php:13
+#: lib/shipper/task/check/class-sysdiff.php:224 tpl/pages/tools/sysinfo.php:13
 msgid "Server"
 msgstr ""
 
-#: lib/shipper/task/check/class-sysdiff.php:202
+#: lib/shipper/task/check/class-sysdiff.php:229
 msgid "Server Type Difference"
 msgstr ""
 
-#: lib/shipper/task/check/class-sysdiff.php:207
+#: lib/shipper/task/check/class-sysdiff.php:234
 msgid "Your local server is %1$s, while your remote system uses %2$s."
 msgstr ""
 
-#: lib/shipper/task/check/class-sysdiff.php:211
+#: lib/shipper/task/check/class-sysdiff.php:238
 msgid "This may cause issues with your migrated server setup."
 msgstr ""
 
-#: lib/shipper/task/check/class-sysdiff.php:218
+#: lib/shipper/task/check/class-sysdiff.php:245
 msgid "Remote server is %s, which is fine to migrate."
 msgstr ""
 
-#: lib/shipper/task/check/class-sysdiff.php:236
+#: lib/shipper/task/check/class-sysdiff.php:263
 msgid "Server OS"
 msgstr ""
 
-#: lib/shipper/task/check/class-sysdiff.php:241
+#: lib/shipper/task/check/class-sysdiff.php:268
 msgid "Server Operating System Difference"
 msgstr ""
 
-#: lib/shipper/task/check/class-sysdiff.php:245
+#: lib/shipper/task/check/class-sysdiff.php:272
 msgid "Your local OS is %1$s, but your remote system runs %2$s."
 msgstr ""
 
-#: lib/shipper/task/check/class-sysdiff.php:246
+#: lib/shipper/task/check/class-sysdiff.php:273
 msgid "This may cause issues with hardcoded paths and system libraries."
 msgstr ""
 
-#: lib/shipper/task/check/class-sysdiff.php:253
+#: lib/shipper/task/check/class-sysdiff.php:280
 msgid "Remote operating system is %s, which is fine to migrate."
 msgstr ""
 
-#: lib/shipper/task/check/class-sysdiff.php:271
+#: lib/shipper/task/check/class-sysdiff.php:298
 msgid "Multisite"
 msgstr ""
 
-#: lib/shipper/task/check/class-sysdiff.php:276
+#: lib/shipper/task/check/class-sysdiff.php:303
 msgid "Multisite Setups Difference"
 msgstr ""
 
-#: lib/shipper/task/check/class-sysdiff.php:278
+#: lib/shipper/task/check/class-sysdiff.php:305
 msgid "Your source is multisite, but the destination is a single site installation."
 msgstr ""
 
-#: lib/shipper/task/check/class-sysdiff.php:279
+#: lib/shipper/task/check/class-sysdiff.php:306
 msgid "Your source is single site, but the destination is a multisite installation."
 msgstr ""
 
-#: lib/shipper/task/check/class-sysdiff.php:281
+#: lib/shipper/task/check/class-sysdiff.php:308
 msgid "Both should have the same installation type for migration to be succesful."
 msgstr ""
 
-#: lib/shipper/task/check/class-sysdiff.php:285
+#: lib/shipper/task/check/class-sysdiff.php:312
 msgid "Both the source and destination are a multisite installation."
 msgstr ""
 
-#: lib/shipper/task/check/class-sysdiff.php:286
+#: lib/shipper/task/check/class-sysdiff.php:313
 msgid "Both the source and destination are a single site installation."
 msgstr ""
 
-#: lib/shipper/task/check/class-sysdiff.php:302
+#: lib/shipper/task/check/class-sysdiff.php:329
 msgid "Subdomain Setup"
 msgstr ""
 
-#: lib/shipper/task/check/class-sysdiff.php:307
-#: lib/shipper/task/check/class-sysdiff.php:315
+#: lib/shipper/task/check/class-sysdiff.php:334
+#: lib/shipper/task/check/class-sysdiff.php:342
 msgid "Subdomain"
 msgstr ""
 
-#: lib/shipper/task/check/class-sysdiff.php:308
-#: lib/shipper/task/check/class-sysdiff.php:314
+#: lib/shipper/task/check/class-sysdiff.php:335
+#: lib/shipper/task/check/class-sysdiff.php:341
 msgid "Subdirectory"
 msgstr ""
 
-#: lib/shipper/task/check/class-sysdiff.php:312
+#: lib/shipper/task/check/class-sysdiff.php:339
 msgid "Multisite Subdomain Setups Difference"
 msgstr ""
 
-#: lib/shipper/task/check/class-sysdiff.php:319
+#: lib/shipper/task/check/class-sysdiff.php:346
 msgid ""
 "Your source network is following the %1$s addresses while the destination "
 "network is following %2$s addresses. Both should have the same address "
 "pattern for the migration to be successful"
 msgstr ""
 
-#: lib/shipper/task/check/class-sysdiff.php:327
+#: lib/shipper/task/check/class-sysdiff.php:354
 msgid ""
 "Both the source and destination have the same pattern for their site "
 "address, i.e. %s"
@@ -616,214 +639,230 @@ msgid "Invalid data for section %s"
 msgstr ""
 
 #: lib/shipper/task/check/class-system.php:70
-msgid "Suhosin"
+msgid "Password protection"
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:76
-msgid "<b>Suhosin extension loaded!</b>"
+#: lib/shipper/task/check/class-system.php:72
+msgid "No password protection detected."
 msgstr ""
 
 #: lib/shipper/task/check/class-system.php:77
+msgid "Password protection detected."
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:96
+msgid "Suhosin"
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:102
+msgid "<b>Suhosin extension loaded!</b>"
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:103
 msgid "This can prevent us from loading our AWS PHP SDK."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:78
+#: lib/shipper/task/check/class-system.php:104
 msgid "Please, make sure you either disable it, or add phar to its whitelist."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:83
+#: lib/shipper/task/check/class-system.php:109
 msgid "Suhosin extension is not loaded."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:98
+#: lib/shipper/task/check/class-system.php:124
 msgid "AWS Support"
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:104
+#: lib/shipper/task/check/class-system.php:130
 msgid "<b>Detected a problem with AWS PHP SDK!</b>"
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:105
+#: lib/shipper/task/check/class-system.php:131
 msgid ""
 "Either there is a conflicting version present, or we were not able to load "
 "our version."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:110
+#: lib/shipper/task/check/class-system.php:136
 msgid "No AWS PHP SDK conflict detected."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:125
+#: lib/shipper/task/check/class-system.php:151
 msgid "ZIP Support"
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:131
+#: lib/shipper/task/check/class-system.php:157
 msgid "<b>No built-in ZIP support detected!</b>"
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:132
+#: lib/shipper/task/check/class-system.php:158
 msgid ""
 "PHP's built-in <code>ZipArchive</code> class seems to be missing. We will "
 "not be able to proceed without that."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:137
+#: lib/shipper/task/check/class-system.php:163
 msgid "Built-in PHP archiving detected."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:152
+#: lib/shipper/task/check/class-system.php:178
 msgid "Basic Sanity"
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:157
+#: lib/shipper/task/check/class-system.php:183
 msgid "Ancient PHP detected"
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:159
+#: lib/shipper/task/check/class-system.php:185
 msgid "<b>This is a very important security issue!</b>"
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:160
+#: lib/shipper/task/check/class-system.php:186
 msgid ""
 "PHP 5.2 did not have a release for over %d years now, which makes it very "
 "insecure."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:161
+#: lib/shipper/task/check/class-system.php:187
 msgid ""
 "Not only that we will not be progressing further, but you shouldn't be "
 "either - addressing this issue should be a priority."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:182
+#: lib/shipper/task/check/class-system.php:208
 msgid "Your PHP version is %s."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:183
+#: lib/shipper/task/check/class-system.php:209
 msgid "Minimum recommended PHP version is PHP 5.5"
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:189
+#: lib/shipper/task/check/class-system.php:215
 msgid "Your PHP version is %s, which meets our requirements."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:207
+#: lib/shipper/task/check/class-system.php:233
 msgid "Max Execution Time"
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:213
+#: lib/shipper/task/check/class-system.php:239
 msgid "<b>Your current max PHP execution time is set to %d seconds.</b>"
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:214
+#: lib/shipper/task/check/class-system.php:240
 msgid ""
 "For small websites this will work in most cases, however for large sites we "
 "recommend increasing your <b>max_execution_time</b> to 150s"
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:220
+#: lib/shipper/task/check/class-system.php:246
 msgid "Your max execution time is set to %s."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:237
+#: lib/shipper/task/check/class-system.php:263
 msgid "Open Basedir"
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:253
+#: lib/shipper/task/check/class-system.php:279
 msgid "It appears that <b>open_basedir</b> rule is in effect."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:254
+#: lib/shipper/task/check/class-system.php:280
 msgid ""
 "We will likely not be able to do what we need to with this PHP setting "
 "enabled"
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:269
+#: lib/shipper/task/check/class-system.php:295
 msgid "Working directory writable"
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:283
+#: lib/shipper/task/check/class-system.php:309
 msgid "Log directory writable"
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:298
+#: lib/shipper/task/check/class-system.php:324
 msgid "Working directory not web-visible"
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:312
+#: lib/shipper/task/check/class-system.php:338
 msgid "Working directory not publicly accessible"
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:326
+#: lib/shipper/task/check/class-system.php:352
 msgid "Storage directory not web-visible"
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:340
+#: lib/shipper/task/check/class-system.php:366
 msgid "Storage directory not publicly accessible"
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:354
+#: lib/shipper/task/check/class-system.php:380
 msgid "Temp directory not web-visible"
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:368
+#: lib/shipper/task/check/class-system.php:394
 msgid "Temp directory not publicly accessible"
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:385
+#: lib/shipper/task/check/class-system.php:411
 msgid "This directory has to be writable."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:386
+#: lib/shipper/task/check/class-system.php:412
 msgid "However, we were not able to write to it."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:402
+#: lib/shipper/task/check/class-system.php:428
 msgid "We are able to write to this directory"
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:418
+#: lib/shipper/task/check/class-system.php:444
 msgid "This directory may be exposed publicly."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:419
+#: lib/shipper/task/check/class-system.php:445
 msgid "We will do our best to try to prevent access to it, though."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:435
+#: lib/shipper/task/check/class-system.php:461
 msgid "Directory is not visible from the web."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:451
+#: lib/shipper/task/check/class-system.php:477
 msgid "This directory is to be private."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:452
+#: lib/shipper/task/check/class-system.php:478
 msgid "However, we were able to access it externally."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:453
+#: lib/shipper/task/check/class-system.php:479
 msgid "This means that the whole internet can, too."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:454
+#: lib/shipper/task/check/class-system.php:480
 msgid "This may expose sensitive info about your setup during migration."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:470
+#: lib/shipper/task/check/class-system.php:496
 msgid "Directory can't be accessed from the outside web."
 msgstr ""
 
-#: lib/shipper/task/class-api.php:178
+#: lib/shipper/task/class-api.php:108
+msgid "Too many communication errors, cooldown %ds"
+msgstr ""
+
+#: lib/shipper/task/class-api.php:245
 msgid "Error parsing service response, invalid JSON: %s"
 msgstr ""
 
-#: lib/shipper/task/class-api.php:193
+#: lib/shipper/task/class-api.php:260
 msgid "Error talking to %1$s, the service responded with %2$d: %3$s"
 msgstr ""
 
-#: lib/shipper/task/class-api.php:230
+#: lib/shipper/task/class-api.php:298
 msgid "Generic error"
 msgstr ""
 
@@ -852,16 +891,16 @@ msgstr ""
 msgid "Clean up"
 msgstr ""
 
-#: lib/shipper/task/export/class-files.php:57
+#: lib/shipper/task/export/class-files.php:59
 #: lib/shipper/task/export/class-tables.php:88
 msgid "Shipper couldn't read file: %s"
 msgstr ""
 
-#: lib/shipper/task/export/class-files.php:164
+#: lib/shipper/task/export/class-files.php:175
 msgid " (%1$d files, %2$s)"
 msgstr ""
 
-#: lib/shipper/task/export/class-files.php:169
+#: lib/shipper/task/export/class-files.php:180
 msgid "Gather files for upload %s"
 msgstr ""
 
@@ -876,7 +915,7 @@ msgid "Unable to upload %1$s: %2$s"
 msgstr ""
 
 #: lib/shipper/task/export/class-large.php:209
-#: lib/shipper/task/export/class-upload.php:160
+#: lib/shipper/task/export/class-upload.php:177
 msgid "( %1$d of %2$d total )"
 msgstr ""
 
@@ -942,7 +981,7 @@ msgstr ""
 msgid "Process tables %s"
 msgstr ""
 
-#: lib/shipper/task/export/class-upload.php:164
+#: lib/shipper/task/export/class-upload.php:181
 msgid "Upload gathered files %s"
 msgstr ""
 
@@ -950,16 +989,16 @@ msgstr ""
 msgid "Moving active content: %s"
 msgstr ""
 
-#: lib/shipper/task/import/class-active.php:134
+#: lib/shipper/task/import/class-active.php:143
 msgid "Hosted object cache helper, skipping [%s]"
 msgstr ""
 
-#: lib/shipper/task/import/class-active.php:148
+#: lib/shipper/task/import/class-active.php:157
 msgid "WARNING: unable to deploy the missing file: %s"
 msgstr ""
 
-#: lib/shipper/task/import/class-active.php:185
-#: lib/shipper/task/import/class-files.php:311
+#: lib/shipper/task/import/class-active.php:194
+#: lib/shipper/task/import/class-files.php:314
 #: lib/shipper/task/import/class-large.php:161
 msgid "WARNING: unable to copy staged file %1$s to %2$s"
 msgstr ""
@@ -1012,11 +1051,11 @@ msgstr ""
 msgid "Temporary files directory doesn't seem to exist: %s"
 msgstr ""
 
-#: lib/shipper/task/import/class-config.php:136
+#: lib/shipper/task/import/class-config.php:142
 msgid "Unable to copy staged config file %1$s to %2$s"
 msgstr ""
 
-#: lib/shipper/task/import/class-config.php:149
+#: lib/shipper/task/import/class-config.php:155
 msgid "Error removing staged file %s"
 msgstr ""
 
@@ -1329,8 +1368,8 @@ msgstr ""
 #: tpl/modals/destination-add.php:12 tpl/modals/destination-check.php:19
 #: tpl/modals/destination-connect.php:18 tpl/modals/destination-fail.php:16
 #: tpl/modals/destination-hub.php:16 tpl/modals/destination-prepare.php:21
-#: tpl/modals/destination-refresh.php:15 tpl/modals/preflight-cancel.php:20
-#: tpl/modals/settings-reset.php:20
+#: tpl/modals/destination-refresh.php:15 tpl/modals/migration-deletedest.php:20
+#: tpl/modals/preflight-cancel.php:20 tpl/modals/settings-reset.php:20
 msgid "Close this dialog window"
 msgstr ""
 
@@ -1500,7 +1539,8 @@ msgstr ""
 msgid "E.g. john@doe.com"
 msgstr ""
 
-#: tpl/modals/email-add.php:57 tpl/modals/settings-reset.php:29
+#: tpl/modals/email-add.php:57 tpl/modals/migration-deletedest.php:32
+#: tpl/modals/settings-reset.php:29
 msgid "Cancel"
 msgstr ""
 
@@ -1518,6 +1558,18 @@ msgstr ""
 
 #: tpl/modals/migration-cancel.php:22
 msgid "This may cause your destination website to break and need restoring."
+msgstr ""
+
+#: tpl/modals/migration-deletedest.php:18
+msgid "Delete Destination"
+msgstr ""
+
+#: tpl/modals/migration-deletedest.php:25
+msgid "Are you sure you want to delete %s from your destinations list?"
+msgstr ""
+
+#: tpl/modals/migration-deletedest.php:36
+msgid "Delete"
 msgstr ""
 
 #: tpl/modals/migration-ready.php:29
@@ -1608,6 +1660,22 @@ msgstr ""
 msgid "I've done this step"
 msgstr ""
 
+#: tpl/msgs/migration-destdelete-success.php:14
+msgid "%s has been successfully removed from your destinations."
+msgstr ""
+
+#: tpl/msgs/migration-slow-notice.php:17
+msgid "Migration may take longer than expected."
+msgstr ""
+
+#: tpl/msgs/migration-slow-notice.php:21
+msgid "Higher traffic or a slow host can slow down the migration process."
+msgstr ""
+
+#: tpl/msgs/migration-slow-notice.php:26
+msgid "Learn more"
+msgstr ""
+
 #: tpl/pages/maintenance.php:35
 msgid "Scheduled maintenance"
 msgstr ""
@@ -1624,39 +1692,43 @@ msgstr ""
 msgid "Please, come back later."
 msgstr ""
 
-#: tpl/pages/migration/progress-bar.php:20
+#: tpl/pages/migration/progress-bar.php:27
 msgid "Migration in progress"
 msgstr ""
 
-#: tpl/pages/migration/progress-bar.php:22
+#: tpl/pages/migration/progress-bar.php:29
 msgid "Import in progress"
 msgstr ""
 
-#: tpl/pages/migration/progress-bar.php:39
+#: tpl/pages/migration/progress-bar.php:46
 msgid "Cancel Migration"
 msgstr ""
 
-#: tpl/pages/migration/progress-bar.php:47
+#: tpl/pages/migration/progress-bar.php:54
 #: tpl/pages/preflight/progress-bar.php:52
 msgid "Waiting for fresh update..."
 msgstr ""
 
-#: tpl/pages/migration/progress-bar.php:48
+#: tpl/pages/migration/progress-bar.php:55
 msgid "Checking progress state..."
 msgstr ""
 
-#: tpl/pages/migration/progress-bar.php:54
+#: tpl/pages/migration/progress-bar.php:61
 msgid "%s, your migration is underway!"
 msgstr ""
 
-#: tpl/pages/migration/progress-bar.php:62
-msgid "This can take a while."
+#: tpl/pages/migration/progress-bar.php:69
+msgid ""
+"It can take a while since we are migrating one-file-at-a-time via a super "
+"secure API to ensure 100% effective, secure, safe and foolproof migrations."
 msgstr ""
 
-#: tpl/pages/migration/progress-bar.php:66
+#: tpl/pages/migration/progress-bar.php:73
 msgid ""
-"So, please be patient and, as long as your site isn't a local installation, "
-"you can close this tab and <b>we'll email you when it's all done.</b>"
+"It's a one-click migration with no flaws, except it can take a long time to "
+"complete. It’s worth the wait and, as long as your site isn’t a local "
+"installation, you can close this tab and <b>we’ll email you when it’s all "
+"done.</b>"
 msgstr ""
 
 #: tpl/pages/migration/progress-done.php:31
@@ -2095,7 +2167,8 @@ msgid "Enable high contrast mode"
 msgstr ""
 
 #: tpl/pages/settings/accessibility.php:62 tpl/pages/settings/data.php:132
-#: tpl/pages/settings/migration.php:81 tpl/pages/settings/notifications.php:156
+#: tpl/pages/settings/migration.php:143
+#: tpl/pages/settings/notifications.php:156
 #: tpl/pages/settings/pagination.php:47
 msgid "Save changes"
 msgstr ""
@@ -2169,7 +2242,7 @@ msgid ""
 "without touching your data."
 msgstr ""
 
-#: tpl/pages/settings/main.php:9 tpl/pages/settings/migration.php:18
+#: tpl/pages/settings/main.php:9 tpl/pages/settings/migration.php:22
 msgid "Migration"
 msgstr ""
 
@@ -2181,21 +2254,21 @@ msgstr ""
 msgid "Pagination"
 msgstr ""
 
-#: tpl/pages/settings/migration.php:31
+#: tpl/pages/settings/migration.php:35
 msgid "Working Directory"
 msgstr ""
 
-#: tpl/pages/settings/migration.php:33
+#: tpl/pages/settings/migration.php:37
 msgid ""
 "Shipper temporarily stores progress information and other temporary files "
 "generated while migration in a working directory."
 msgstr ""
 
-#: tpl/pages/settings/migration.php:50
+#: tpl/pages/settings/migration.php:54
 msgid "Use uploads directory as working directory"
 msgstr ""
 
-#: tpl/pages/settings/migration.php:54
+#: tpl/pages/settings/migration.php:58
 msgid ""
 "By default, we use the temp directory as the working directory. However, "
 "because of some restrictions implied by few hosts, the migration tends to "
@@ -2203,10 +2276,42 @@ msgid ""
 "working directory in your uploads folder. "
 msgstr ""
 
-#: tpl/pages/settings/migration.php:66
+#: tpl/pages/settings/migration.php:70
 msgid ""
 "Since the uploads folder is web accessible, your temporary data will be "
 "accessible on web until migration completes."
+msgstr ""
+
+#: tpl/pages/settings/migration.php:81
+msgid "Advanced options"
+msgstr ""
+
+#: tpl/pages/settings/migration.php:83
+msgid ""
+"Have better control over your migrations with these advanced migration "
+"settings."
+msgstr ""
+
+#: tpl/pages/settings/migration.php:101
+msgid "Do not replace domain name in email"
+msgstr ""
+
+#: tpl/pages/settings/migration.php:105
+msgid ""
+"By default, Shipper replaces all the instances of your source domain with "
+"the destination domain. However, if you use an email on your site linked "
+"with your source domain and don't want the email to be changed then keep "
+"this option enabled."
+msgstr ""
+
+#: tpl/pages/settings/migration.php:122
+msgid "Do not migrate wp-config file"
+msgstr ""
+
+#: tpl/pages/settings/migration.php:126
+msgid ""
+"Enable this option if you don’t want to migrate the wp-config file from "
+"your source site to the destination site."
 msgstr ""
 
 #: tpl/pages/settings/notifications.php:21

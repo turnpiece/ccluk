@@ -10,9 +10,14 @@
 ?>
 
 <p>
-	<?php esc_html_e( 'By default, WordPress will cache your RSS feeds to reduce the load on
+	<?php
+	esc_html_e(
+		'By default, WordPress will cache your RSS feeds to reduce the load on
 	your server – which is a great feature. Hummingbird gives you control over the expiry time, or
-	you can disable it all together.', 'wphb' ); ?>
+	you can disable it all together.',
+		'wphb'
+	);
+	?>
 </p>
 
 <div class="sui-notice sui-notice-warning">

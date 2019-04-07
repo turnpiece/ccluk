@@ -131,8 +131,8 @@ class WP_Hummingbird_Admin {
 		}
 
 		if ( ! is_multisite() ) {
-			$this->pages['wphb'] = new WP_Hummingbird_Dashboard_Page( 'wphb', $hb_title, $hb_title, false, false );
-			$this->pages['wphb-dashboard'] = new WP_Hummingbird_Dashboard_Page( 'wphb', __( 'Dashboard', 'wphb' ), __( 'Dashboard', 'wphb' ), 'wphb' );
+			$this->pages['wphb']             = new WP_Hummingbird_Dashboard_Page( 'wphb', $hb_title, $hb_title, false, false );
+			$this->pages['wphb-dashboard']   = new WP_Hummingbird_Dashboard_Page( 'wphb', __( 'Dashboard', 'wphb' ), __( 'Dashboard', 'wphb' ), 'wphb' );
 			$this->pages['wphb-performance'] = new WP_Hummingbird_Performance_Report_Page( 'wphb-performance', __( 'Performance Test', 'wphb' ), __( 'Performance Test', 'wphb' ), 'wphb' );
 			$this->pages['wphb-caching']     = new WP_Hummingbird_Caching_Page( 'wphb-caching', __( 'Caching', 'wphb' ), __( 'Caching', 'wphb' ), 'wphb' );
 			$this->pages['wphb-gzip']        = new WP_Hummingbird_GZIP_Page( 'wphb-gzip', __( 'Gzip Compression', 'wphb' ), __( 'Gzip Compression', 'wphb' ), 'wphb' );
@@ -145,15 +145,15 @@ class WP_Hummingbird_Admin {
 			$this->pages['wphb-uptime']   = new WP_Hummingbird_Uptime_Page( 'wphb-uptime', __( 'Uptime', 'wphb' ), __( 'Uptime', 'wphb' ), 'wphb' );
 			$this->pages['wphb-settings'] = new WP_Hummingbird_Settings_Page( 'wphb-settings', __( 'Settings', 'wphb' ), __( 'Settings', 'wphb' ), 'wphb' );
 		} else {
-			$minify = WP_Hummingbird_Settings::get_setting( 'enabled', 'minify' );
+			$minify        = WP_Hummingbird_Settings::get_setting( 'enabled', 'minify' );
 			$subsite_tests = false;
 			if ( is_super_admin() || WP_Hummingbird_Settings::get_setting( 'subsite_tests', 'performance' ) ) {
 				$subsite_tests = true;
 			}
 
 			/* @var WP_Hummingbird_Module_Page_Cache $page_cache_module */
-			$page_cache_module = WP_Hummingbird_Utils::get_module( 'page_cache' );
-			$options = $page_cache_module->get_options();
+			$page_cache_module    = WP_Hummingbird_Utils::get_module( 'page_cache' );
+			$options              = $page_cache_module->get_options();
 			$subsite_page_caching = $options['enabled'];
 
 			// Temp until we do the dashboard in 1.8 or 1.9.
@@ -263,7 +263,7 @@ class WP_Hummingbird_Admin {
 		}
 
 		// If we are in minification page, we should redirect when checking files is finished.
-		$screen = get_current_screen();
+		$screen                 = get_current_screen();
 		$minification_screen_id = isset( $this->pages['wphb-minification']->page_id ) ? $this->pages['wphb-minification']->page_id : false;
 
 		// The minification screen will do it for us.
@@ -308,9 +308,9 @@ class WP_Hummingbird_Admin {
 		}
 
 		// If we are in performance page, we should redirect when checking files is finished.
-		$screen = get_current_screen();
+		$screen                = get_current_screen();
 		$performance_screen_id = isset( $this->pages['wphb-performance'] ) && isset( $this->pages['wphb-performance']->page_id ) ? $this->pages['wphb-performance']->page_id : false;
-		$dashboard_screen_id = isset( $this->pages['wphb'] ) && isset( $this->pages['wphb']->page_id ) ? $this->pages['wphb']->page_id : false;
+		$dashboard_screen_id   = isset( $this->pages['wphb'] ) && isset( $this->pages['wphb']->page_id ) ? $this->pages['wphb']->page_id : false;
 
 		$redirect = '';
 		if ( $screen->id === $performance_screen_id || $screen->id === $performance_screen_id . '-network' ) {

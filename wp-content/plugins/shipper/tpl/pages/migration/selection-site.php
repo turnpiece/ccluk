@@ -83,3 +83,6 @@
 		</div><?php // .shipper-content ?>
 	</div><?php // .sui-box-body ?>
 </div><?php // .sui-box ?>
+
+<?php $this->render( 'modals/migration-deletedest' ); ?>
+<?php $this->render( 'msgs/migration-destdelete-success' ); ?>

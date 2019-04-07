@@ -5,9 +5,27 @@ Change Log:
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
 
+1.0.1.1 - 2018-03-22
+----------------------------------------------------------------------
+- Fix: add cooldown time for credentials negotiation.
+- Fix: add exponential backoff times for API communication failures.
+
+1.0.1 - 2018-03-05
+----------------------------------------------------------------------
+- Add: investigate password protection detection
+- Add: migration health check notifications
+- Add: a way to remove a site that from the list
+- Add: support for including/excluding wp-config
+- Add: support for not replacing source domains in emails
+- Fix: treat themes as active content, like plugins
+- Fix: conflict with Amazon Web Services
+- Fix: migrations involving object cache
+- Fix: conflict with Mollie Payments for WooCommerce
+- Fix: default config deployments
+
 1.0.0 - 2018-01-22
 ----------------------------------------------------------------------
 - Initial release
 
 
-87274-1550007752-ai
+87274-1554644927-au

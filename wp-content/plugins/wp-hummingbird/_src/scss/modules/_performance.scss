@@ -35,13 +35,6 @@
     }
 
     /**
-     * Summary meta box
-     */
-    .box-performance-welcome.sui-summary {
-        background-image: url("#{$image--path}/graphic-hb-minify-summary@2x.png");
-    }
-
-    /**
      * Performance report table meta box
      */
     .performance-report-table {
@@ -160,8 +153,8 @@
     }
 }
 
-// SUI Accordion override until it's fixed.
 @include body-class(true) {
+    // SUI Accordion override until it's fixed.
     .sui-accordion.sui-table.performance-report-table {
         margin: 0;
         border-top: none;
@@ -171,6 +164,12 @@
                     display: inline-block;
                 }
             }
+        }
+    }
+    .sui-circle-score.sui-tooltip {
+        &:before,
+        &:after {
+            left: 30px;
         }
     }
 }

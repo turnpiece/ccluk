@@ -1,6 +1,6 @@
 <?php
 /**
- * Shipper AJAX controllers: data recording controller class
+ * Shipper controllers: data recording controller class
  *
  * @package shipper
  */

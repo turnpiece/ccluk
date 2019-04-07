@@ -189,9 +189,134 @@
 		$(document).on('click', '.sui-notice-dismiss a', handle_dismiss_notice);
 	}
 
+	/**
+	 * Sends out the destination removal request
+	 *
+	 * @return object $.Deferred instance
+	 */
+	function remove_destination( site_id ) {
+		return $.post( ajaxurl, {
+			action: 'shipper_remove_destination',
+			site_id: site_id,
+		} );
+	}
+	/**
+	 * Opens up a confirmation popup
+	 *
+	 * @param number site_id Site UN ID to delete.
+	 * @param string site_name Name of the site to show in confirmation.
+	 *
+	 * @return object $.Deferred instance
+	 */
+	function remove_destination_popup( site_id, site_name ) {
+		var dfr = new $.Deferred,
+			$container = $( '.select-container.active' ),
+			oldz = $container.css( 'z-index' ),
+			$popup = $( '#shipper-destdelete-confirmation' ),
+			close = function() {
+				$container.css( 'z-index', oldz );
+				$popup.attr( 'aria-hidden', true ).hide();
+			}
+		;
+		$container.css( 'z-index', 0 );
+		$popup
+			.find( '.shipper-destdelete-target' ).text( site_name ).end()
+			.find( '.shipper-destdelete-continue' )
+				.off( 'click' )
+				.on( 'click', function( e ) {
+					if ( e && e.preventDefault ) e.preventDefault();
+					if ( e && e.stopPropagation ) e.stopPropagation();
+
+					close();
+					remove_destination( site_id )
+						.done( function() {
+							var $notice = $( '.shipper-destdelete-success' );
+							$notice
+								.find( '.shipper-destdelete-target' ).text( site_name ).end()
+								.show();
+							setTimeout( function() { $notice.hide(); }, MSG_SHOW_INTERVAL );
+							dfr.resolve();
+						} )
+						.fail( dfr.reject )
+					;
+
+					return false;
+				} )
+				.end()
+			.find( '.shipper-destdelete-cancel' )
+				.off( 'click' )
+				.on( 'click', function( e ) {
+					if ( e && e.preventDefault ) e.preventDefault();
+					if ( e && e.stopPropagation ) e.stopPropagation();
+
+					close();
+					dfr.reject();
+
+					return false;
+				} )
+				.end()
+			.show();
+
+		return dfr.promise();
+	}
+
+
+	/**
+	 * Injects destination selection items with removal markup
+	 * and sets up the callbacks
+	 */
+	function boot_destinations_selection() {
+		var $root = $( '.shipper-page-migrate .shipper-selection' ),
+			$items = $root.find( 'ul.list-results li' ),
+			$selected = $root.find( '.list-value' ),
+			callback = function( e ) {
+				if ( e && e.preventDefault ) e.preventDefault();
+				if ( e && e.stopPropagation ) e.stopPropagation();
+
+				$( '.shipper-destdelete-success' ).hide();
+
+				var $me = $( this ),
+					$item = $me.closest( 'li' ),
+					site_id = $item.data( 'value' );
+				$me
+					.removeClass('sui-icon-trash')
+					.addClass('sui-icon-loader sui-loading');
+				if ( $item.length && site_id ) {
+					remove_destination_popup( site_id, $item.text() )
+						.done( function() {
+							if ( $item.is( '.current' ) ) {
+								$item.next( 'li' ).trigger( 'click' );
+							}
+							$item.remove();
+						} )
+						.always( function() {
+							$me
+								.addClass('sui-icon-trash')
+								.removeClass('sui-icon-loader sui-loading');
+						} )
+					;
+				}
+
+				return false;
+			}
+		;
+		$items.each( function() {
+			$( this )
+				.append(
+					'<i class="sui-icon-trash" aria-hidden="true"></i>'
+				)
+				.find( 'i' )
+				.off( 'click' ).on( 'click', callback )
+			;
+		} );
+	}
+
 	$(function() {
-		if ($('.shipper-destination-add.sui-dialog').length) {
-			$(window).on('load', boot_dialog);
+		if ( $( '.shipper-destination-add.sui-dialog' ).length ) {
+			$( window ).on( 'load', boot_dialog );
+		}
+		if ( $( '.shipper-page-migrate .shipper-selection' ) ) {
+			$( window ).on( 'load', boot_destinations_selection );
 		}
 	});
 })(jQuery);

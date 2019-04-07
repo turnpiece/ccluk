@@ -4,7 +4,7 @@ add_filter( 'wphb_block_resource', 'wphb_filter_resource_block', 10, 5 );
 function wphb_filter_resource_block( $value, $handle, $type ) {
 	$options = WP_Hummingbird_Settings::get_settings( 'minify' );
 	$blocked = $options['block'][ $type ];
-	if ( in_array( $handle, $blocked ) ) {
+	if ( in_array( $handle, $blocked, true ) ) {
 		return true;
 	}
 
@@ -26,7 +26,7 @@ add_filter( 'wphb_combine_resource', 'wphb_filter_resource_combine', 10, 3 );
 function wphb_filter_resource_combine( $value, $handle, $type ) {
 	$options = WP_Hummingbird_Settings::get_settings( 'minify' );
 	$combine = $options['combine'][ $type ];
-	if ( ! in_array( $handle, $combine ) ) {
+	if ( ! in_array( $handle, $combine, true ) ) {
 		return $value;
 	}
 
@@ -36,8 +36,8 @@ function wphb_filter_resource_combine( $value, $handle, $type ) {
 add_filter( 'wphb_defer_resource', 'wphb_filter_resource_defer', 10, 3 );
 function wphb_filter_resource_defer( $value, $handle, $type ) {
 	$options = WP_Hummingbird_Settings::get_settings( 'minify' );
-	$defer = $options['defer'][ $type ];
-	if ( ! in_array( $handle, $defer ) ) {
+	$defer   = $options['defer'][ $type ];
+	if ( ! in_array( $handle, $defer, true ) ) {
 		return $value;
 	}
 
@@ -47,8 +47,8 @@ function wphb_filter_resource_defer( $value, $handle, $type ) {
 add_filter( 'wphb_inline_resource', 'wphb_filter_resource_inline', 10, 3 );
 function wphb_filter_resource_inline( $value, $handle, $type ) {
 	$options = WP_Hummingbird_Settings::get_settings( 'minify' );
-	$defer = $options['inline'][ $type ];
-	if ( ! in_array( $handle, $defer ) ) {
+	$defer   = $options['inline'][ $type ];
+	if ( ! in_array( $handle, $defer, true ) ) {
 		return $value;
 	}
 
@@ -57,7 +57,7 @@ function wphb_filter_resource_inline( $value, $handle, $type ) {
 
 add_filter( 'wphb_send_resource_to_footer', 'wphb_filter_resource_to_footer', 10, 3 );
 function wphb_filter_resource_to_footer( $value, $handle, $type ) {
-	$options = WP_Hummingbird_Settings::get_settings( 'minify' );
+	$options   = WP_Hummingbird_Settings::get_settings( 'minify' );
 	$to_footer = $options['position'][ $type ];
 	if ( array_key_exists( $handle, $to_footer ) && 'footer' === $to_footer[ $handle ] ) {
 		return true;
@@ -135,7 +135,7 @@ function wphb_set_cloudflare_server_type( $type ) {
 	return apply_filters( 'wp_hummingbird_is_active_module_cloudflare', $type );
 }
 
-// Do not minify files that already are named with .min
+// Do not minify files that already are named with .min.
 add_filter( 'wphb_minify_resource', 'wphb_minify_min_files', 15, 4 );
 function wphb_minify_min_files( $minify, $handle, $type, $url ) {
 	if ( preg_match( '/\.min\.(css|js)/', basename( $url ) ) ) {

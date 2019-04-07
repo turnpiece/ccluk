@@ -32,6 +32,6 @@ if ( 'advanced' === $type ) {
 ?>
 
 <span class="wphb-heading-divider"></span>
-<a href="#" class="wphb-switch-button sui-tooltip sui-tooltip-top-left" data-tooltip="<?php echo esc_attr( $tooltip ); ?>">
+<a href="#" class="wphb-switch-button sui-tooltip sui-tooltip-top-right" data-tooltip="<?php echo esc_attr( $tooltip ); ?>">
 	<i class="sui-icon-settings-slider-control" aria-hidden="true"></i>
 </a>

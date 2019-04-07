@@ -22,7 +22,7 @@
 		</span>
 	</div>
 	<div class="sui-box-settings-col-2">
-		<label class="sui-toggle sui-tooltip sui-tooltip-top-left" data-tooltip="<?php esc_attr_e( 'Remove query strings from my assets', 'wphb' ); ?>">
+		<label class="sui-toggle sui-tooltip sui-tooltip-top-right" data-tooltip="<?php esc_attr_e( 'Remove query strings from my assets', 'wphb' ); ?>">
 			<input type="checkbox" name="query_strings" id="query_strings" <?php checked( $query_stings ); ?>>
 			<span class="sui-toggle-slider"></span>
 		</label>
@@ -38,7 +38,7 @@
 		</span>
 	</div>
 	<div class="sui-box-settings-col-2">
-		<label class="sui-toggle sui-tooltip sui-tooltip-top-left" data-tooltip="<?php esc_attr_e( 'Remove the default Emoji JS & CSS files', 'wphb' ); ?>">
+		<label class="sui-toggle sui-tooltip sui-tooltip-top-right" data-tooltip="<?php esc_attr_e( 'Remove the default Emoji JS & CSS files', 'wphb' ); ?>">
 			<input type="checkbox" name="emojis" id="emojis" <?php checked( $emoji ); ?>>
 			<span class="sui-toggle-slider"></span>
 		</label>
@@ -65,10 +65,12 @@
 //s.gravatar.com"><?php echo esc_html( $prefetch ); ?></textarea>
 		<span class="sui-description">
 			<?php esc_html_e( 'Add one host entry per line replacing the http:// or https:// with // e.g. //fonts.googleapis.com. We’ve added a few common DNS requests to get you started.', 'wphb' ); ?>
-			<?php printf(
+			<?php
+			printf(
 				'<a href="#" id="wphb-adv-paste-value">%s</a>',
 				esc_html__( 'Paste in recommended defaults.', 'wphb' )
-			); ?>
+			);
+			?>
 		</span>
 	</div>
 </div>

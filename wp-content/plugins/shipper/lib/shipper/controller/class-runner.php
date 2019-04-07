@@ -119,6 +119,14 @@ abstract class Shipper_Controller_Runner extends Shipper_Controller {
 			return false;
 		}
 		Shipper_Helper_Log::debug( 'kickstart' );
+
+		/**
+		 * Fires on kickstart attempt
+		 *
+		 * @since v1.0.1
+		 */
+		do_action( 'shipper_kickstarted' );
+
 		return $this->run();
 	}
 
@@ -262,6 +270,18 @@ abstract class Shipper_Controller_Runner extends Shipper_Controller {
 			} else {
 				Shipper_Helper_Log::write( 'Lock overdue, cleaning up' );
 				$locks->release_lock( $lock );
+
+				/**
+				 * Fires on stale lock removal
+				 *
+				 * @since v1.0.1
+				 *
+				 * @param string $lock Process lock identifier.
+				 */
+				do_action(
+					'shipper_flag_cleared',
+					$lock
+				);
 			}
 		}
 

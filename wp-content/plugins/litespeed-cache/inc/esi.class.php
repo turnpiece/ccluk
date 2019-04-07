@@ -22,6 +22,7 @@ class LiteSpeed_Cache_ESI
 	private static $has_esi = false ;
 	private $esi_args = null ;
 	private $_esi_preserve_list = array() ;
+	private $_nonce_actions = array( -1 ) ;
 
 	const QS_ACTION = 'lsesi' ;
 	const QS_PARAMS = 'esi' ;
@@ -48,7 +49,7 @@ class LiteSpeed_Cache_ESI
 		add_action( 'wp_update_comment_count', 'LiteSpeed_Cache_Purge::purge_comment_widget' ) ;
 
 		// This defination is along with LiteSpeed_Cache_API::nonce() func
-		! defined( 'LSCWP_NONCE' ) && define( 'LSCWP_NONCE', true ) ;
+		! defined( 'LSCWP_NONCE' ) && define( 'LSCWP_NONCE', true ) ;//Used in Bloom
 
 		/**
 		 * Recover REQUEST_URI
@@ -74,6 +75,81 @@ class LiteSpeed_Cache_ESI
 		if ( ! is_admin() ) {
 			add_shortcode( 'esi', array( $this, 'shortcode' ) ) ;
 		}
+
+		/**
+		 * Overwrite wp_create_nonce func
+		 * @since  2.9.5
+		 */
+		if ( ! is_admin() && ! function_exists( 'wp_create_nonce' ) ) {
+			$this->_transform_nonce() ;
+		}
+	}
+
+	/**
+	 * Take over all nonce calls and transform to ESI
+	 *
+	 * @since  2.9.5
+	 */
+	private function _transform_nonce()
+	{
+		LiteSpeed_Cache_Log::debug( '[ESI] Overwrite wp_create_nonce()' ) ;
+		/**
+		 * If the nonce is in none_actions filter, convert it to ESI
+		 */
+		function wp_create_nonce( $action = -1 ) {
+			if ( LiteSpeed_Cache_ESI::get_instance()->is_nonce_action( $action ) ) {
+				$params = array(
+					'action'	=> $action,
+				) ;
+				return LiteSpeed_Cache_ESI::sub_esi_block( 'nonce', 'wp_create_nonce ' . $action, $params, '', true, true ) ;
+			}
+
+			return wp_create_nonce_litespeed_esi( $action ) ;
+
+		}
+
+		/**
+		 * Ori WP wp_create_nonce
+		 */
+		function wp_create_nonce_litespeed_esi( $action = -1 ) {
+			$user = wp_get_current_user();
+			$uid  = (int) $user->ID;
+			if ( ! $uid ) {
+				/** This filter is documented in wp-includes/pluggable.php */
+				$uid = apply_filters( 'nonce_user_logged_out', $uid, $action );
+			}
+
+			$token = wp_get_session_token();
+			$i     = wp_nonce_tick();
+
+			return substr( wp_hash( $i . '|' . $action . '|' . $uid . '|' . $token, 'nonce' ), -12, 10 );
+		}
+	}
+
+	/**
+	 * Register a new nonce action to convert it to ESI
+	 *
+	 * @since  2.9.5
+	 */
+	public function nonce_action( $action )
+	{
+		if ( in_array( $action, $this->_nonce_actions ) ) {
+			return ;
+		}
+
+		LiteSpeed_Cache_Log::debug( '[ESI] Append nonce action to nonce list [action] ' . $action ) ;
+
+		$this->_nonce_actions[] = $action ;
+	}
+
+	/**
+	 * Check if an action is registered to replace ESI
+	 *
+	 * @since 2.9.5
+	 */
+	public function is_nonce_action( $action )
+	{
+		return in_array( $action, $this->_nonce_actions ) ;
 	}
 
 	/**
@@ -162,7 +238,7 @@ class LiteSpeed_Cache_ESI
 		add_action('litespeed_cache_load_esi_block-admin-bar', array($this, 'load_admin_bar_block')) ;
 		add_action('litespeed_cache_load_esi_block-comment-form', array($this, 'load_comment_form_block')) ;
 
-		add_action('litespeed_cache_load_esi_block-lscwp_nonce_esi', array( $this, 'load_nonce_block' ) ) ;
+		add_action('litespeed_cache_load_esi_block-nonce', array( $this, 'load_nonce_block' ) ) ;
 		add_action('litespeed_cache_load_esi_block-esi', array( $this, 'load_esi_shortcode' ) ) ;
 	}
 
@@ -269,8 +345,11 @@ class LiteSpeed_Cache_ESI
 			$appended_params[ '_control' ] = $control ;
 		}
 		if ( $params ) {
-			$appended_params[ self::QS_PARAMS ] = base64_encode( serialize( $params ) ) ;
+			$appended_params[ self::QS_PARAMS ] = base64_encode( json_encode( $params ) ) ;
 		}
+
+		// Append hash
+		$appended_params[ '_hash' ] = self::_gen_esi_md5( $appended_params ) ;
 
 		/**
 		 * Escape potential chars
@@ -294,7 +373,7 @@ class LiteSpeed_Cache_ESI
 			$output = "<!-- lscwp $wrapper -->$output<!-- lscwp $wrapper esi end -->" ;
 		}
 
-		LiteSpeed_Cache_Log::debug( "ESI: \t\t[block ID] $block_id \t\t\t[wrapper] $wrapper \t\t\t[Control] $control" ) ;
+		LiteSpeed_Cache_Log::debug( "[ESI] 💕  [BLock_ID] $block_id \t[wrapper] $wrapper \t\t[Control] $control" ) ;
 		LiteSpeed_Cache_Log::debug2( $output ) ;
 
 		self::set_has_esi() ;
@@ -310,6 +389,31 @@ class LiteSpeed_Cache_ESI
 		}
 
 		return $output ;
+	}
+
+	/**
+	 * Generate ESI hash md5
+	 *
+	 * @since  2.9.6
+	 * @access private
+	 */
+	private static function _gen_esi_md5( $params )
+	{
+		$keys = array(
+			self::QS_ACTION,
+			'_control',
+			self::QS_PARAMS,
+		) ;
+
+		$str = '' ;
+		foreach ( $keys as $v ) {
+			if ( isset( $params[ $v ] ) && is_string( $params[ $v ] ) ) {
+				$str .= $params[ $v ] ;
+			}
+		}
+		LiteSpeed_Cache_Log::debug2( '[ESI] md5_string=' . $str ) ;
+
+		return md5( LiteSpeed_Cache::config( LiteSpeed_Cache_Config::HASH ) . $str ) ;
 	}
 
 	/**
@@ -331,10 +435,7 @@ class LiteSpeed_Cache_ESI
 
 		LiteSpeed_Cache_Log::debug2( '[ESI] parms', $unencrypted ) ;
 		// $unencoded = urldecode($unencrypted) ; no need to do this as $_GET is already parsed
-		$params = unserialize( $unencrypted ) ;
-		if ( $params === false ) {
-			return false ;
-		}
+		$params = json_decode( $unencrypted, true ) ;
 
 		return $params ;
 	}
@@ -347,14 +448,23 @@ class LiteSpeed_Cache_ESI
 	 */
 	public function load_esi_block()
 	{
+		/**
+		 * Validate if is a legal ESI req
+		 * @since 2.9.6
+		 */
+		if ( empty( $_GET[ '_hash' ] ) || self::_gen_esi_md5( $_GET ) != $_GET[ '_hash' ] ) {
+			LiteSpeed_Cache_Log::debug( '[ESI] ❌ Failed to validate _hash' ) ;
+			return ;
+		}
+
 		$params = $this->_parse_esi_param() ;
 
 		if ( defined( 'LSCWP_LOG' ) ) {
-			$logInfo = '------- ESI ------- ' ;
+			$logInfo = '[ESI] ⭕ ' ;
 			if( ! empty( $params[ self::PARAM_NAME ] ) ) {
 				$logInfo .= ' Name: ' . $params[ self::PARAM_NAME ] . ' ----- ' ;
 			}
-			$logInfo .= LSCACHE_IS_ESI . ' -------' ;
+			$logInfo .= ' [ID] ' . LSCACHE_IS_ESI ;
 			LiteSpeed_Cache_Log::debug( $logInfo ) ;
 		}
 
@@ -621,7 +731,12 @@ class LiteSpeed_Cache_ESI
 			LiteSpeed_Cache_Control::set_private() ;
 		}
 
-		echo wp_create_nonce( $action ) ;
+		if ( function_exists( 'wp_create_nonce_litespeed_esi' ) ) {
+			echo wp_create_nonce_litespeed_esi( $action ) ;
+		}
+		else {
+			echo wp_create_nonce( $action ) ;
+		}
 	}
 
 	/**

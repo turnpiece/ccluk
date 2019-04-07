@@ -3,8 +3,8 @@
 class WP_Hummingbird_API_Request_Cloudflare extends WP_Hummingbird_API_Request {
 
 	private $auth_email = '';
-	private $auth_key = '';
-	private $zone = '';
+	private $auth_key   = '';
+	private $zone       = '';
 
 	public function get_api_key() {
 		return '';

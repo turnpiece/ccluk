@@ -21,6 +21,8 @@ class CleantalkSFW extends CleantalkSFW_Base
 		// Use default tables if not specified
 		$this->data_table = defined('APBCT_TBL_FIREWALL_DATA') ? APBCT_TBL_FIREWALL_DATA : $this->db->prefix . 'cleantalk_sfw';
 		$this->log_table  = defined('APBCT_TBL_FIREWALL_LOG')  ? APBCT_TBL_FIREWALL_LOG  : $this->db->prefix . 'cleantalk_sfw_logs';
+		
+		$this->debug = isset($_GET['show_debug']) && intval($_GET['show_debug']) === 1 ? true : false;
 	}
 	
 	/*
@@ -29,6 +31,8 @@ class CleantalkSFW extends CleantalkSFW_Base
 	* Stops script executing
 	*/	
 	public function sfw_die($api_key, $cookie_prefix = '', $cookie_domain = ''){
+		
+		global $apbct;
 		
 		// File exists?
 		if(file_exists(CLEANTALK_PLUGIN_DIR . "inc/sfw_die_page.html")){
@@ -47,11 +51,23 @@ class CleantalkSFW extends CleantalkSFW_Base
 		$sfw_die_page = str_replace('{TEST_TITLE}',                     ($this->is_test ? __('This is the testing page for SpamFireWall', 'cleantalk') : ''), $sfw_die_page);
 		
 		// Service info
-		$sfw_die_page = str_replace('{REMOTE_ADDRESS}', $this->blocked_ip, $sfw_die_page);
-		$sfw_die_page = str_replace('{REQUEST_URI}', $request_uri, $sfw_die_page);
-		$sfw_die_page = str_replace('{COOKIE_PREFIX}', $cookie_prefix, $sfw_die_page);
-		$sfw_die_page = str_replace('{COOKIE_DOMAIN}', $cookie_domain, $sfw_die_page);
-		$sfw_die_page = str_replace('{SFW_COOKIE}', md5($this->blocked_ip.$api_key), $sfw_die_page);
+		$sfw_die_page = str_replace('{REMOTE_ADDRESS}', $this->blocked_ip,               $sfw_die_page);
+		$sfw_die_page = str_replace('{REQUEST_URI}',    $request_uri,                    $sfw_die_page);
+		$sfw_die_page = str_replace('{COOKIE_PREFIX}',  $cookie_prefix,                  $sfw_die_page);
+		$sfw_die_page = str_replace('{COOKIE_DOMAIN}',  $cookie_domain,                  $sfw_die_page);
+		$sfw_die_page = str_replace('{SFW_COOKIE}',     md5($this->blocked_ip.$api_key), $sfw_die_page);
+		$sfw_die_page = str_replace( "{SERVICE_ID}",    $apbct->data['service_id'],      $sfw_die_page );
+		$sfw_die_page = str_replace( "{HOST}",          $_SERVER['HTTP_HOST'],           $sfw_die_page );
+				
+		if($this->debug){
+			$debug = '<h1>Networks</h1>'
+				. var_export($this->debug_networks, true)
+				. '<h1>Headers</h1>'
+				. var_export(apache_request_headers(), true);
+		}else
+			$debug = '';
+		
+		$sfw_die_page = str_replace( "{DEBUG}", $debug, $sfw_die_page );
 		
 		// Headers
 		if(headers_sent() === false){
@@ -60,10 +76,8 @@ class CleantalkSFW extends CleantalkSFW_Base
 			header('Cache-Control: post-check=0, pre-check=0', FALSE);
 			header('Pragma: no-cache');
 			header("HTTP/1.0 403 Forbidden");
-			$sfw_die_page = str_replace('{GENERATED}', "", $sfw_die_page);
-		}else{
-			$sfw_die_page = str_replace('{GENERATED}', "<h2 class='second'>The page was generated at&nbsp;".date("D, d M Y H:i:s")."</h2>",$sfw_die_page);
 		}
+		$sfw_die_page = str_replace('{GENERATED}', "<p>The page was generated at&nbsp;".date("D, d M Y H:i:s")."</p>",$sfw_die_page);
 		
 		wp_die($sfw_die_page, "Blacklisted", Array('response'=>403));
 		

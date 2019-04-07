@@ -47,13 +47,17 @@ import Fetcher from './utils/fetcher';
 			 * @since 1.9.3  Unified two handle both modules.
 			 */
 			$('#add-recipient').on('click', function () {
-				let module = '';
+				let module  = '';
+				let setting = 'reports';
 
 				// Get the module name from URL.
 				if ( window.location.search.includes('wphb-performance') ) {
 					module = 'performance'
 				} else if ( window.location.search.includes('wphb-uptime') ) {
 					module = 'uptime';
+					if ( window.location.search.includes('notifications') ) {
+						setting = 'notifications';
+					}
 				}
 
 				const reportingEmail = $('#reporting-email'),
@@ -65,7 +69,7 @@ import Fetcher from './utils/fetcher';
 				email_field.removeClass('sui-form-field-error');
 				email_field.find('.sui-error-message').remove();
 
-				Fetcher.common.addRecipient( module, email, name )
+				Fetcher.common.addRecipient( module, setting, email, name )
 					.then( ( response ) => {
 						const user_row = $('<div class="sui-recipient"/>');
 
@@ -90,7 +94,7 @@ import Fetcher from './utils/fetcher';
 						$('#reporting-first-name').val('');
 
 						// Hide no recipients notification.
-						$('.wphb-no-recipients').addClass('sui-hidden');
+						$('.wphb-no-recipients').slideUp();
 						SUI.dialogs['wphb-add-recipient-modal'].hide();
 
 						// Show notice to save settings.
@@ -103,12 +107,35 @@ import Fetcher from './utils/fetcher';
 					} );
 			});
 
+			let body = $('body');
+
+			/**
+			 * Save report settings clicked (performance reports, uptime reports and uptime notifications).
+			 */
+			body.on('submit', '.wphb-report-settings', function (e) {
+				e.preventDefault();
+
+				$(this).find('.button').attr('disabled', 'disabled');
+
+				Fetcher.common.saveReportsSettings( this.dataset.module, $(this).serialize() )
+					.then( ( response ) => {
+						if ( 'undefined' !== typeof response && response.success ) {
+							window.location.search += '&updated=true';
+						} else {
+							WPHB_Admin.notices.show( 'wphb-ajax-update-notice', true, 'error', wphb.strings.errorSettingsUpdate  );
+						}
+					});
+			});
+
 			/**
 			 * Remove recipient button clicked.
 			 */
-			$('body').on('click', '.wphb-remove-recipient', function () {
+			body.on('click', '.wphb-remove-recipient', function () {
 				$(this).closest('.sui-recipient').remove();
 				$('.wphb-report-settings').find("input[id='report-recipient'][value=" + $(this).attr('data-id') + "]").remove();
+				if ( 0 === $('.sui-recipient').length ) {
+                    $('.wphb-no-recipients').slideDown();
+				}
 			});
 
 			/**

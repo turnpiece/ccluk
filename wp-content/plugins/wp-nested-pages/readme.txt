@@ -3,9 +3,9 @@ Contributors: kylephillips
 Donate link: http://nestedpages.com/
 Tags: pages, admin, nested, tree view, page tree, sort, quick edit, structure
 Requires at least: 3.8
-Tested up to: 5.0
+Tested up to: 5.1
 Requires PHP: 5.4
-Stable tag: 3.0.6
+Stable tag: 3.0.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -79,6 +79,9 @@ Yes! Visit Settings > Nested Pages > Post Types to configure thumbnail settings 
 = Nested Pages changes my permalink structure. How do I stop that? =
 Nested Pages uses the same ordering methodology as WordPress core. The plugin offers an enhanced interface to achieve the same results. Parent/Child relationships are used in conjunction with the post menu_order field to nest and order posts/pages. There is currently no option to disable this core feature.
 
+= Can I generate a menu using a custom post type? =
+No. The menu synchronization currently only works within the pages post type. 
+
 
 == Screenshots ==
 
@@ -102,8 +105,24 @@ Nested Pages uses the same ordering methodology as WordPress core. The plugin of
 
 == Changelog ==
 
+= 3.0.10 =
+* Fixes issue with translation file naming that was preventing plugin translations from loading.
+* Adds settings action to reset user preferences (toggled/visible pages). For clearing user meta that may has become unnormalized during site/other plugin updates, resulting in PHP errors in the listing view.
+
+= 3.0.9 =
+* Fixes Javascript bug introduced in v3.0.8 resulting in console error on page edit screen.
+
+= 3.0.8 =
+* Security Fix: Fixes bug where contributors could quick edit posts not authored by themselves.
+* Adds filters for displaying individual row action/links. 
+* Fixes bug where submenu was not expanded when editing a single page, and "replace default" is selected.
+* Fixes bug where toggle icon still displays when all child items are in the trash.
+* Adds filters for taxonomies and terms in the listing interface.
+* Fixes bug where setting a link item to hide in nav menu doesn't remove the associated menu item.
+
 = 3.0.7 =
 * Adds support for "Dark Mode" plugin.
+* Tested in WordPress v5
 
 = 3.0.6 =
 * Fixes issue introduced in v3.0.3 where some custom post/page dropdown fields were failing to show.

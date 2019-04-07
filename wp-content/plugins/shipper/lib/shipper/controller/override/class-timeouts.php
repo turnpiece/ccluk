@@ -20,6 +20,12 @@ class Shipper_Controller_Override_Timeouts extends Shipper_Controller_Override {
 				array( $this, 'apply_runner_ping_timeout' )
 			);
 		}
+		if ( $this->get_constants()->is_defined( 'SHIPPER_MAX_EXEC_TIME' ) ) {
+			add_filter(
+				'shipper_max_exec_time',
+				array( $this, 'apply_max_exec_time' )
+			);
+		}
 	}
 
 	/**
@@ -33,6 +39,21 @@ class Shipper_Controller_Override_Timeouts extends Shipper_Controller_Override {
 		$tm = $this->get_constants()->get( 'SHIPPER_RUNNER_PING_TIMEOUT' );
 		return is_numeric( $tm )
 			? (float) $tm
+			: $timeout
+		;
+	}
+
+	/**
+	 * Applies runner lock maximum lifetime define value
+	 *
+	 * @param int $timeout Timeout this far.
+	 *
+	 * @return int Timeout
+	 */
+	public function apply_max_exec_time( $timeout ) {
+		$tm = $this->get_constants()->get( 'SHIPPER_MAX_EXEC_TIME' );
+		return is_numeric( $tm )
+			? (int) $tm
 			: $timeout
 		;
 	}

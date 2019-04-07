@@ -3,7 +3,6 @@
  * Advanced tools: system information meta box.
  *
  * @var array $system_info Array of system information ( PHP, MySQL, WordPress & Server) settings and values.
- *
  */
 ?>
 

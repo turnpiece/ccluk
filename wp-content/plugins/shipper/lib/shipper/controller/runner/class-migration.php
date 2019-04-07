@@ -182,7 +182,7 @@ class Shipper_Controller_Runner_Migration extends Shipper_Controller_Runner {
 	}
 
 	/**
-	 * Resets filelist storage
+	 * Resets used models
 	 */
 	public function reset_all() {
 		$storage = new Shipper_Model_Stored_Filelist;
@@ -191,6 +191,8 @@ class Shipper_Controller_Runner_Migration extends Shipper_Controller_Runner {
 		$storage->set( Shipper_Model_Stored_Filelist::KEY_TOTAL, $total_steps );
 		$storage->save();
 
+		$health = new Shipper_Model_Stored_Healthcheck;
+		$health->clear()->save();
 
 		$files = new Shipper_Model_Dumped_Filelist;
 		$filelist_manifest = $files->get_file_path();

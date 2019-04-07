@@ -82,6 +82,33 @@ class Shipper_Task_Check_Sysdiff extends Shipper_Task_Check {
 	}
 
 	/**
+	 * Checks for remote password protection
+	 *
+	 * @param bool $remote Remote password protection status.
+	 * @param bool $local Local password protection status.
+	 *
+	 * @return object Shipper_Model_Check instance
+	 */
+	public function is_server_access_protected_diff_acceptable( $remote, $local ) {
+		$check = new Shipper_Model_Check( __( 'Password Protection', 'shipper' ) );
+		$status = Shipper_Model_Check::STATUS_OK;
+
+		if ( $remote ) {
+			$status = Shipper_Model_Check::STATUS_ERROR;
+			$check = $this->set_check_message(
+				$check,
+				join( ' ', array(
+					__( 'Destination is password protected.', 'shipper' ),
+					__( 'This can prevent migration from working properly.', 'shipper' ),
+					__( 'Please, make sure you disable password protection.', 'shipper' ),
+				) )
+			);
+		}
+
+		return $check->complete( $status );
+	}
+
+	/**
 	 * Checks for significant PHP major version differences
 	 *
 	 * @param int $remote Remote PHP major version.

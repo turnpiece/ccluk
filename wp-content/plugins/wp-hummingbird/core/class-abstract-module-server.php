@@ -71,7 +71,7 @@ abstract class WP_Hummingbird_Module_Server extends WP_Hummingbird_Module {
 	 *
 	 * @return mixed
 	 */
-	protected abstract function analize_data( $check_api = false );
+	abstract protected function analize_data( $check_api = false );
 
 	/**
 	 * Implement abstract parent method for clearing cache.
@@ -176,11 +176,11 @@ abstract class WP_Hummingbird_Module_Server extends WP_Hummingbird_Module {
 	 */
 	public static function is_htaccess_writable() {
 		if ( ! function_exists( 'get_home_path' ) ) {
-			require_once( ABSPATH . 'wp-admin/includes/file.php' );
+			require_once ABSPATH . 'wp-admin/includes/file.php';
 		}
 
 		$home_path = get_home_path();
-		$writable = ( ! file_exists( $home_path . '.htaccess' ) && is_writable( $home_path ) ) || is_writable( $home_path . '.htaccess' );
+		$writable  = ( ! file_exists( $home_path . '.htaccess' ) && is_writable( $home_path ) ) || is_writable( $home_path . '.htaccess' );
 		return $writable;
 	}
 
@@ -193,14 +193,14 @@ abstract class WP_Hummingbird_Module_Server extends WP_Hummingbird_Module {
 	 */
 	public static function is_htaccess_written( $module = '' ) {
 		if ( ! function_exists( 'get_home_path' ) ) {
-			require_once( ABSPATH . 'wp-admin/includes/file.php' );
+			require_once ABSPATH . 'wp-admin/includes/file.php';
 		}
 
 		if ( ! function_exists( 'extract_from_markers' ) ) {
-			require_once( ABSPATH . 'wp-admin/includes/misc.php' );
+			require_once ABSPATH . 'wp-admin/includes/misc.php';
 		}
 
-		$existing_rules  = array_filter( extract_from_markers( get_home_path() . '.htaccess', 'WP-HUMMINGBIRD-' . strtoupper( $module ) ) );
+		$existing_rules = array_filter( extract_from_markers( get_home_path() . '.htaccess', 'WP-HUMMINGBIRD-' . strtoupper( $module ) ) );
 		return ! empty( $existing_rules );
 	}
 

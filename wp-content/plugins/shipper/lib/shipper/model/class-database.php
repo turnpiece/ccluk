@@ -53,7 +53,7 @@ class Shipper_Model_Database {
 	 * @return array
 	 */
 	public function get_reserved_words() {
-		$reserved_names = array( 'key', 'group' );
+		$reserved_names = array( 'key', 'group', 'show', 'order' );
 		return $reserved_names;
 	}
 

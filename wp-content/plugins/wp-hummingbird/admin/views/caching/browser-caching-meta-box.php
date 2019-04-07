@@ -18,7 +18,7 @@
 
 ?>
 
-<div class="sui-box-settings-row">
+<div class="<?php echo $show_cf_notice ? 'sui-box-body' : ''; ?>">
 	<?php if ( $htaccess_issue ) : ?>
 		<div class="wphb-caching-error sui-notice sui-notice-error">
 			<p><?php esc_html_e( 'Browser Caching is not working properly:', 'wphb' ); ?></p>
@@ -45,7 +45,9 @@
 				<?php
 				printf(
 					/* translators: %s: Number of issues */
-				__( '%s of your cache types don’t meet the recommended expiry period of 8+ days. Configure browser caching <a href="#" id="configure-link">here</a>.', 'wphb' ), absint( $issues ) );
+					__( '%s of your cache types don’t meet the recommended expiry period of 8+ days. Configure browser caching <a href="#" id="configure-link">here</a>.', 'wphb' ),
+					absint( $issues )
+				);
 				?>
 			</p>
 		</div>
@@ -81,22 +83,22 @@
 
 			if ( $result ) {
 				if ( $recommended[ $type ]['value'] <= $results[ $type ] ) {
-					$status = $result;
-					$status_color = 'success';
+					$status         = $result;
+					$status_color   = 'success';
 					$status_tooltip = __( 'Caching is enabled', 'wphb' );
 				} else {
-					$status = $result;
-					$status_color = 'warning';
+					$status         = $result;
+					$status_color   = 'warning';
 					$status_tooltip = __( "Caching is enabled but you aren't using our recommended value", 'wphb' );
 				}
 			}
 
 			if ( $cf_active ) {
-				$cf_tooltip = $expiry_tooltip;
-				$cf_recommended = $recommended[ $type ]['label'];
-				$cf_status_color = $status_color;
+				$cf_tooltip        = $expiry_tooltip;
+				$cf_recommended    = $recommended[ $type ]['label'];
+				$cf_status_color   = $status_color;
 				$cf_status_tooltip = $status_tooltip;
-				$cf_status = $status;
+				$cf_status         = $status;
 			}
 			?>
 			<div class="table-row">
@@ -140,9 +142,11 @@
 					</span>
 				</div>
 			</div>
-		<?php endforeach;
+			<?php
+		endforeach;
 
-		if ( $cf_active ) : ?>
+		if ( $cf_active ) :
+			?>
 			<div class="table-row">
 				<div class="wphb-caching-summary-item-type">
 					<span class="wphb-filename-extension wphb-filename-extension-other sui-tooltip sui-tooltip-constrained" data-tooltip="<?php echo esc_attr( $caching_type_tooltips['cloudflare'] ); ?>">oth</span>
@@ -167,9 +171,9 @@
 	<div class="sui-box-settings-row sui-upsell-row cf-dash-notice sui-no-padding-top">
 		<?php if ( ! WP_Hummingbird_Utils::hide_wpmudev_branding() ) : ?>
 			<img class="sui-image sui-upsell-image"
-			     src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/graphic-hb-cf-sell.png' ); ?>"
-			     srcset="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/graphic-hb-cf-sell@2x.png' ); ?> 2x"
-			     alt="<?php esc_attr_e( 'Connect your account to Cloudflare', 'wphb' ); ?>">
+				 src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/graphic-hb-cf-sell.png' ); ?>"
+				 srcset="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/graphic-hb-cf-sell@2x.png' ); ?> 2x"
+				 alt="<?php esc_attr_e( 'Connect your account to Cloudflare', 'wphb' ); ?>">
 		<?php endif; ?>
 
 		<div class="<?php echo( WP_Hummingbird_Utils::hide_wpmudev_branding() ? esc_attr( 'sui-notice' ) : esc_attr( 'sui-upsell-notice' ) ); ?>">

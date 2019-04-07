@@ -48,7 +48,25 @@
  * Summary meta box
  */
 .wpmud .box-caching-summary {
-    @include background-2x( "#{$image--path}/graphic-caching-top", 'png', 192px, 172px, 30px 100% );
+    .sui-summary-segment {
+        overflow: visible !important;
+    }
+
+    .sui-icon-info {
+        top: 2px !important;
+        left: 10px !important;
+    }
+}
+.wpmud .box-caching-summary.sui-summary {
+    &:not(.sui-unbranded):not(.sui-summary-sm) {
+
+        @if variable-exists(summary-image) {
+            @include background-2x( "#{$image--path}/graphic-caching-top", 'png', 192px, 172px, 30px 100% );
+        }
+        @include media(max-width, md) {
+            background-image: unset;
+        }
+    }
 }
 
 /**

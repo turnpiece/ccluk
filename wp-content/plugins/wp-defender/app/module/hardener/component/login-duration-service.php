@@ -51,7 +51,7 @@ class Login_Duration_Service extends Rule_Service implements IRule_Service {
 			$duration = intval( $duration );
 			return ( $in_seconds ) ? $duration * DAY_IN_SECONDS : $duration;
 		} else {
-			return ( $in_seconds ) ? self::DEFAULT_DAYS * DAY_IN_SECONDS : self::DEFAULT_DAYS;
+			return ( $in_seconds ) ? self::DEFAULT_DAYS * DAY_IN_SECONDS : self::DEFAULT_DAYS;	   			 	 		  		  	 	
 		}
 	}
 }

@@ -4,18 +4,6 @@
 ;(function($) {
 
 	/**
-	 * Actually closes dialog and stores the dialog close choice
-	 */
-	function close_dialog() {
-		$('.sui-dialog.shipper-system-check').attr('aria-hidden', true);
-		return $.post(ajaxurl, {
-			action: 'shipper_modal_closed',
-			target: 'system',
-			_wpnonce: $('.sui-dialog.shipper-system-check').attr('data-wpnonce')
-		});
-	}
-
-	/**
 	 * Handles dialog closing button click
 	 *
 	 * @param {Object} e Event object
@@ -23,7 +11,17 @@
 	function handle_close_dialog( e ) {
 		if (e && e.preventDefault) e.preventDefault();
 
-		close_dialog();
+		$.post(ajaxurl, {
+			action: 'shipper_modal_closed',
+			target: 'system',
+			_wpnonce: $('.sui-dialog.shipper-system-check').attr('data-wpnonce')
+		}).always( function () {
+			$.post( ajaxurl, {
+				action: 'shipper_clear_cache'
+			} ).always( function () {
+				window.location.reload();
+			} );
+		} );
 
 		return false;
 	}

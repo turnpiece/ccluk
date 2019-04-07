@@ -389,7 +389,10 @@ function shipper_flush_cache() {
  * @return string
  */
 function shipper_get_user_agent() {
-	return 'Mozilla/5.0 (compatible; WPMU DEV Shipper/1.0; +https://premium.wpmudev.org)';
+	return sprintf(
+		'Mozilla/5.0 (compatible; WPMU DEV Shipper/%1$s; +https://premium.wpmudev.org)',
+		SHIPPER_VERSION
+	);
 }
 
 /**

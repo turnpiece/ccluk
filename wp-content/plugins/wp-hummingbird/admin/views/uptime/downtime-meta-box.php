@@ -10,8 +10,13 @@
 ?>
 
 <p>
-	<?php esc_html_e( 'Here’s a snapshot of when your site went down, which means visitors couldn’t
-	view your website.', 'wphb' ); ?>
+	<?php
+	esc_html_e(
+		'Here’s a snapshot of when your site went down, which means visitors couldn’t
+	view your website.',
+		'wphb'
+	);
+	?>
 </p>
 
 <input type="hidden" id="downtime-chart-json" value="<?php echo esc_attr( $downtime_chart_json ); ?>">
@@ -58,8 +63,8 @@ $this->admin_notices->show(
 							endif;
 							?>
 							<img class="wphb-image-pills-divider"
-									   src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/downtime-splice.svg' ); ?>"
-									   alt="<?php esc_attr_e( 'Spacer image', 'wphb' ); ?>">
+								src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/downtime-splice.svg' ); ?>"
+								alt="<?php esc_attr_e( 'Spacer image', 'wphb' ); ?>">
 							<span class="wphb-pills green"><i class="sui-icon-chevron-up"></i> <?php echo esc_html( date_i18n( 'M j @ g:ia', $up ) ); ?></span>
 						</div>
 					<?php endif; ?>

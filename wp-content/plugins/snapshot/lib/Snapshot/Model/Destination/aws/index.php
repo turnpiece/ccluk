@@ -142,7 +142,8 @@ if ( ( ! class_exists( 'Snapshot_Model_Destination_AWS' ) ) && ( version_compare
 				self::REGION_APAC_SE2         => __( 'Asia Pacific (Sydney) Region', SNAPSHOT_I18N_DOMAIN ),
 				self::REGION_APAC_NE1         => __( 'Asia Pacific (Tokyo) Region', SNAPSHOT_I18N_DOMAIN ),
 				self::REGION_SA_E1            => __( 'South America (Sao Paulo) Region', SNAPSHOT_I18N_DOMAIN ),
-				'other'                           => __( 'other', SNAPSHOT_I18N_DOMAIN )
+				'other'                       => __( 'Other AWS region', SNAPSHOT_I18N_DOMAIN ),
+				'non-aws'					  => __( 'Non-AWS host', SNAPSHOT_I18N_DOMAIN )
 			);
 
 			$this->_storage = array(
@@ -639,6 +640,14 @@ if ( ( ! class_exists( 'Snapshot_Model_Destination_AWS' ) ) && ( version_compare
 				$this->destination_info['region-other'] = $d_info['region-other'];
 			}
 
+			if ( ( isset( $d_info['region-non-aws-host'] ) ) && ( strlen( $d_info['region-non-aws-host'] ) ) ) {
+				$this->destination_info['region-non-aws-host'] = $d_info['region-non-aws-host'];
+			}
+
+			if ( ( isset( $d_info['region-non-aws-region'] ) ) && ( strlen( $d_info['region-non-aws-region'] ) ) ) {
+				$this->destination_info['region-non-aws-region'] = $d_info['region-non-aws-region'];
+			}
+
 			if ( ( isset( $d_info['storage'] ) ) && ( strlen( $d_info['storage'] ) ) ) {
 				if ( isset( $this->_storage[ esc_attr( $d_info['storage'] ) ] ) ) {
 					$this->destination_info['storage'] = esc_attr( $d_info['storage'] );
@@ -702,6 +711,13 @@ if ( ( ! class_exists( 'Snapshot_Model_Destination_AWS' ) ) && ( version_compare
 				$destination_info['region-other'] = $d_info['region-other'];
 			}
 
+			if ( ! empty( $d_info['region-non-aws-host'] ) ) {
+				$destination_info['region-non-aws-host'] = $d_info['region-non-aws-host'];
+			}
+
+			if ( ! empty( $d_info['region-non-aws-region'] ) ) {
+				$destination_info['region-non-aws-region'] = $d_info['region-non-aws-region'];
+			}
 
 			if ( empty( $d_info['storage'] ) ) {
 				$destination_info['storage'] = self::STORAGE_STANDARD;

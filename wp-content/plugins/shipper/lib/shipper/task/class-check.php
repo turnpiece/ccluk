@@ -45,6 +45,28 @@ abstract class Shipper_Task_Check extends Shipper_Task {
 	}
 
 	/**
+	 * Gets a list of checks with errors
+	 *
+	 * @return array
+	 */
+	public function get_checks_with_errors() {
+		$with_errors = array();
+		foreach ( $this->get_checks() as $check ) {
+			if ( $check->is_fatal() ) { $with_errors[] = $check; }
+		}
+		return $with_errors;
+	}
+
+	/**
+	 * Checks whether we have any checks with breaking errors
+	 *
+	 * @return bool
+	 */
+	public function has_checks_with_errors() {
+		return 0 !== count( $this->get_checks_with_errors() );
+	}
+
+	/**
 	 * Checks whether the check has been fully completed
 	 *
 	 * @return bool

@@ -831,6 +831,24 @@ class CtfAdmin
             'class' => '',
         ));
 
+	    $this->create_settings_field( array(
+		    'name' => 'textlength',
+		    'title' => '<label for="ctf_textlength">Text Length</label><code class="ctf_shortcode">textlength
+            Eg: textlength=150</code>', // label for the input field
+		    'callback'  => 'default_text', // name of the function that outputs the html
+		    'page' => 'ctf_options_text', // matches the section name
+		    'section' => 'ctf_options_text', // matches the section name
+		    'option' => 'ctf_options', // matches the options name
+		    'class' => '',
+		    'default' => 280,
+		    'min' => 20,
+		    'max' => 280,
+		    'step' => 1,
+		    'example' => 'characters',
+		    'type' => 'number',
+		    'whatis' => 'The number of characters of text to display in the tweet text. An ellipsis link will be added to allow the user to reveal more text if desired',
+	    ));
+
         // custom retweeted text
         $this->create_settings_field( array(
             'name' => 'retweetedtext',

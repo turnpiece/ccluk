@@ -5,9 +5,14 @@
 
 namespace WP_Defender\Module\Advanced_Tools\Component;
 
+use BaconQrCode\Renderer\Image\SvgImageBackEnd;
+use BaconQrCode\Renderer\ImageRenderer;
+use BaconQrCode\Renderer\RendererStyle\RendererStyle;
+use BaconQrCode\Writer;
 use Hammer\Base\Component;
 use WP_Defender\Behavior\Utils;
 use WP_Defender\Module\Advanced_Tools\Model\Auth_Settings;
+use WP_Defender\Module\Scan\Component\Scan_Api;
 
 class Auth_API extends Component {
 	/**
@@ -34,13 +39,17 @@ class Auth_API extends Component {
 	 *
 	 * @return string
 	 */
-	public static function generateQRCode( $name, $secret, $width = 200, $height = 200, $title = null ) {
-		$chl = urlencode( 'otpauth://totp/' . $name . '?secret=' . $secret . '' );
+	public static function generateQRCode( $name, $holder, $secret, $width = 200, $height = 200, $title = null ) {
+		$chl = ( 'otpauth://totp/' . rawurlencode( $name ) . ':' . rawurlencode( $holder ) . '?secret=' . $secret . '' );
 		if ( ! is_null( $title ) ) {
-			$chl .= urlencode( '&issuer=' . $title );
+			$chl .= ( '&issuer=' . rawurlencode( $title ) );
 		}
+		//manually include the autoload
+		require_once wp_defender()->getPluginPath() . 'vendor/phpqrcode/qrlib.php';
 
-		return "https://chart.googleapis.com/chart?cht=qr&chs={$width}x{$height}&chl=$chl&chld=M|0";
+		$code =  \QRcode::svg( $chl, false, QR_ECLEVEL_L, 4 );
+		//clean up cache folder
+
 	}
 
 	/**

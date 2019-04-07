@@ -23,6 +23,10 @@
  * ╚══════╝╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	die( 'Kangaroos cannot jump here' );
+}
+
 // ================
 // = Plugin Debug =
 // ================
@@ -31,7 +35,7 @@ define( 'AI1WM_DEBUG', false );
 // ==================
 // = Plugin Version =
 // ==================
-define( 'AI1WM_VERSION', '6.85' );
+define( 'AI1WM_VERSION', '6.89' );
 
 // ===============
 // = Plugin Name =
@@ -164,6 +168,11 @@ define( 'AI1WM_FILEMAP_NAME', 'filemap.list' );
 define( 'AI1WM_MUPLUGINS_NAME', 'mu-plugins' );
 
 // =============================
+// = Less Cache Extension Name =
+// =============================
+define( 'AI1WM_LESS_CACHE_NAME', '.less.cache' );
+
+// =============================
 // = Endurance Page Cache Name =
 // =============================
 define( 'AI1WM_ENDURANCE_PAGE_CACHE_NAME', 'endurance-page-cache.php' );
@@ -257,6 +266,11 @@ define( 'AI1WM_ACTIVE_TEMPLATE', 'template' );
 // = Active Stylesheet =
 // =====================
 define( 'AI1WM_ACTIVE_STYLESHEET', 'stylesheet' );
+
+// ===================
+// = Backups Labels  =
+// ===================
+define( 'AI1WM_BACKUPS_LABELS', 'ai1wm_backups_labels' );
 
 // ============
 // = Cron Key =

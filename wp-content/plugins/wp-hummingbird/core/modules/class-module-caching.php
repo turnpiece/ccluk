@@ -79,10 +79,12 @@ class WP_Hummingbird_Module_Caching extends WP_Hummingbird_Module_Server {
 			$cookies = array();
 			foreach ( $_COOKIE as $name => $value ) {
 				if ( strpos( $name, 'wordpress_' ) > -1 ) {
-					$cookies[] = new WP_Http_Cookie( array(
-						'name'  => $name,
-						'value' => $value,
-					));
+					$cookies[] = new WP_Http_Cookie(
+						array(
+							'name'  => $name,
+							'value' => $value,
+						)
+					);
 				}
 			}
 
@@ -102,7 +104,7 @@ class WP_Hummingbird_Module_Caching extends WP_Hummingbird_Module_Server {
 			$this->log( 'result: ' );
 			$this->log( $result );
 
-			$cache_control = wp_remote_retrieve_header( $result, 'cache-control' );
+			$cache_control    = wp_remote_retrieve_header( $result, 'cache-control' );
 			$results[ $type ] = false;
 			if ( $cache_control ) {
 				if ( is_array( $cache_control ) ) {
@@ -111,7 +113,7 @@ class WP_Hummingbird_Module_Caching extends WP_Hummingbird_Module_Server {
 				}
 				if ( preg_match( '/max\-age=([0-9]*)/', $cache_control, $matches ) ) {
 					if ( isset( $matches[1] ) ) {
-						$seconds = absint( $matches[1] );
+						$seconds          = absint( $matches[1] );
 						$results[ $type ] = $seconds;
 					}
 				}
@@ -123,7 +125,7 @@ class WP_Hummingbird_Module_Caching extends WP_Hummingbird_Module_Server {
 		// Will only trigger on 're-check status' button click and there are some false values.
 		if ( $try_api && $check_api ) {
 			// Get the API results.
-			$api = WP_Hummingbird_Utils::get_api();
+			$api         = WP_Hummingbird_Utils::get_api();
 			$api_results = $api->performance->check_cache();
 			$api_results = get_object_vars( $api_results );
 

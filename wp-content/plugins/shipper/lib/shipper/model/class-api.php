@@ -12,6 +12,8 @@
  */
 class Shipper_Model_Api extends Shipper_Model {
 
+	const MAX_FAILURES = 9;
+
 	/**
 	 * Constructor
 	 *
@@ -58,5 +60,48 @@ class Shipper_Model_Api extends Shipper_Model {
 			? WPMUDEV_APIKEY
 			: get_site_option( 'wpmudev_apikey', false );
 		return $api_key;
+	}
+
+	/**
+	 * Gets a list of previous API communication failures.
+	 *
+	 * @return array
+	 */
+	public function get_previous_api_fails() {
+		$failures = get_site_option( 'shipper-storage-api-health-failures', array() );
+		if ( ! is_array( $failures ) ) {
+			$failures = array();
+		}
+		return $failures;
+	}
+
+	/**
+	 * Records an API failure
+	 *
+	 * Adds the error timestamp to failures record queue.
+	 * In order for this to not grow overly long, only keep last few entries.
+	 *
+	 * @param int $timestamp Optional timestamp, used in tests.
+	 */
+	public function record_api_fail( $timestamp = false ) {
+		$errors = $this->get_previous_api_fails();
+
+		if ( count( $errors ) >= self::MAX_FAILURES ) {
+			$errors = array_splice( $errors, -1 * ( self::MAX_FAILURES - 1 ) );
+		}
+
+		$errors[] = ! empty( $timestamp ) && is_numeric( $timestamp )
+			? (int) $timestamp
+			: time();
+		update_site_option( 'shipper-storage-api-health-failures', $errors );
+	}
+
+	/**
+	 * Resets the recorded API failures queue.
+	 *
+	 * Used in tests
+	 */
+	public function reset_api_fails() {
+		delete_site_option( 'shipper-storage-api-health-failures' );
 	}
 }
