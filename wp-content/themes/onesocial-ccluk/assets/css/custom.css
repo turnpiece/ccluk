@@ -281,8 +281,8 @@ Is mobile
 --------------------------------------------------------------*/
 body.is-mobile.single #primary,
 body.is-mobile.single .site-content, body.is-mobile.archive #primary,
-body.is-mobile.archive .site-content, body.is-mobile.page #primary,
-body.is-mobile.page .site-content, body.is-mobile.blog:not(.bp-user) #primary,
+body.is-mobile.archive .site-content, body.is-mobile.page:not(.home-page) #primary,
+body.is-mobile.page:not(.home-page) .site-content, body.is-mobile.blog:not(.bp-user) #primary,
 body.is-mobile.blog:not(.bp-user) .site-content {
   max-width: 750px;
   margin: 0 auto; }
