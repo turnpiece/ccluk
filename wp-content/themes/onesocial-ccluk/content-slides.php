@@ -1,7 +1,9 @@
 <?php
 $slides = onesocial_get_option( 'boss_slides' );
 
-if ( onesocial_get_option( 'boss_slider_switch' ) && is_array( $slides ) && !empty( $slides[ 0 ][ 'attachment_id' ] ) ) {
+$masthead = get_theme_mod( 'homepage_masthead_audience', 'all' );
+
+if ( $masthead != 'none' && ( $masthead == 'logged_in' && is_user_logged_in() || $masthead == 'logged_out' && !is_user_logged_in() ) && onesocial_get_option( 'boss_slider_switch' ) && is_array( $slides ) && !empty( $slides[ 0 ][ 'attachment_id' ] ) ) {
 	?>
 
 	<div class="bb-slider-container">

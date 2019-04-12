@@ -607,7 +607,8 @@ body.page-template-homepage #main {
       text-align: center;
       margin: 0 auto; }
     body.page-template-homepage #main .section.masthead {
-      position: relative; }
+      position: relative;
+      padding: 0; }
       body.page-template-homepage #main .section.masthead .section-content {
         max-width: 100%;
         background-color: #000; }
