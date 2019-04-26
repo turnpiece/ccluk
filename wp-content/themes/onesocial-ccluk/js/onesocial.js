@@ -151,7 +151,6 @@ var BuddyBossMain = ( function ( $, window, undefined ) {
             // The $mobile_check element refers to an empty div#mobile-check we
             // hide or show with media queries. We use this to determine if we're
             // on mobile resolution
-            alert( 'check is mobile' )
 
 //                mobile_css = window.document.getElementById('boss-main-mobile-css'),
 //                $mobile_css = $(mobile_css);
