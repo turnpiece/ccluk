@@ -105,36 +105,42 @@ body.page-template-homepage {
 				margin: 0 auto;
 			}
 
-			&.masthead {
+			&.banner {
 
 				position: relative;
 				padding: 0;
 
 				.section-content {
 					max-width: 100%;
+					min-height: 400px;
 					background-color: $black;
 
 					> img {
 						display: block;
 						object-fit: cover;
-						width: 100%;
+						min-width: 100%;
+						min-height: 100%;
 						opacity: 0.5;
+						margin: auto;
 					}
 				}
 
 				.section-title-container {
+					display: flex;
 					position: absolute;
-					left: 50%;
-					top: 35%;
-					bottom: 35%;
+					left: 0;
+					top: 0;
+					bottom: 0;
 					padding: 0;
 					text-align: center;
 					z-index: 5;
-					max-width: 450px;
+					width: 100%;
+					height: 100%;
 
 					> .section-title {
+						align-self: center;
 						position: relative;
-						left: -50%;
+						max-width: 650px;
 
 						h2, 
 						p {

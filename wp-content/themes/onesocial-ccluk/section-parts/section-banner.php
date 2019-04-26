@@ -1,6 +1,6 @@
 <?php
 
-$slug       = 'homepage_masthead';
+$slug       = 'homepage_banner';
 $audience   = get_theme_mod( $slug.'_audience', 'all' );
 
 if ($audience == 'none' || 
@@ -9,10 +9,10 @@ if ($audience == 'none' ||
     return;
 
 ?>
-<!-- get masthead -->
+<!-- get banner -->
 <?php if ($page = get_theme_mod( $slug.'_page')) :
 
-    $id = get_theme_mod( $slug.'_id', esc_html__('masthead', 'onesocial') );
+    $id = get_theme_mod( $slug.'_id', esc_html__('banner', 'onesocial') );
     $heading = get_theme_mod( $slug.'_heading' );
     $text = get_theme_mod( $slug.'_text' );
     $image = get_the_post_thumbnail( $page, 'full' );
@@ -30,7 +30,7 @@ if ($audience == 'none' ||
 
     if (!empty($image)) :
 ?>
-<section id="<?php echo $id ?>" class="section site-content masthead">
+<section id="<?php echo $id ?>" class="section site-content banner">
     
     <?php if (!empty($heading)) : ?>
     <header class="section-title-container">
@@ -58,6 +58,17 @@ if ($audience == 'none' ||
     <?php endif; ?>
 
     <div class="section-content"><?php echo $image ?></div>
+
+    <script>
+        jQuery(document).ready(function($) {
+            $content = $('#<?php echo $id ?>').find('.section-content');
+            $(window).on('load resize', function() {
+                if ($content.height() > $content.find('img').height()) {
+                    $content.find('img').height( $content.height() );
+                }
+            })
+        })
+    </script>
 
 </section>
 <?php endif; endif; ?>

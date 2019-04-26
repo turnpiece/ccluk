@@ -54,10 +54,10 @@ class CCLUK_Customizer {
 		if ($static_front_page) {
 
 		/*------------------------------------------------------------------------*/
-	    /*  Homepage: Masthead
+	    /*  Homepage: Banner
 	    /*------------------------------------------------------------------------*/
 
-	    	$this->homepage_masthead( 140 );
+	    	$this->homepage_banner( 140 );
 
 		/*------------------------------------------------------------------------*/
 	    /*  Homepage: Join
@@ -349,18 +349,18 @@ class CCLUK_Customizer {
 		);
 	}
 
-	private function homepage_masthead( $priority = 150 ) {
+	private function homepage_banner( $priority = 150 ) {
 
-    	$section = 'homepage_masthead';
+    	$section = 'homepage_banner';
 
 		$this->add_homepage_panel( 
 			$section, 
-			esc_html__( 'Homepage: Masthead', 'onesocial' ),
-			esc_html__( 'Set the masthead image and content', 'onesocial' ),
+			esc_html__( 'Homepage: Banner', 'onesocial' ),
+			esc_html__( 'Set the banner image and content', 'onesocial' ),
 			$priority
 		);
 
-	    $this->standard_settings( $section, 'masthead' );
+	    $this->standard_settings( $section, 'banner' );
 
 		$this->add_content_section( $section );
 
