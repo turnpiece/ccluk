@@ -11,6 +11,7 @@ if ( is_network_admin() || ! is_multisite() ) {
 } else {
 	$data = WPMUDEV_Dashboard::$api->analytics_stats_overall( $days_ago, get_current_blog_id() );
 }
+$metrics = WPMUDEV_Dashboard::$site->get_metrics_on_analytics();
 ?>
 <div class="wpmudui-analytics">
 
@@ -136,12 +137,24 @@ if ( is_network_admin() || ! is_multisite() ) {
 					</select>
 					<label class="wpmudui-label" for="wpmudui-analytics-posts-type"><?php esc_html_e( 'data for', 'wpmudev' ); ?></label>
 					<select id="wpmudui-analytics-posts-type" class="wpmudui-select wpmudui-analytics-column-filter">
-						<option value="pageviews"><?php esc_html_e( 'Pageviews', 'wpmudev' ); ?></option>
-						<option value="unique_pageviews" selected><?php esc_html_e( 'Unique Pageviews', 'wpmudev' ); ?></option>
-						<option value="bounce_rate"><?php esc_html_e( 'Bounce Rate', 'wpmudev' ); ?></option>
-						<option value="exit_rate"><?php esc_html_e( 'Exit Rate', 'wpmudev' ); ?></option>
-						<option value="page_time"><?php esc_html_e( 'Time on Page', 'wpmudev' ); ?></option>
-						<option value="gen_time"><?php esc_html_e( 'Generation Time', 'wpmudev' ); ?></option>
+						<?php if ( in_array( 'pageviews', $metrics, true ) ) : ?>
+							<option value="pageviews"><?php esc_html_e( 'Pageviews', 'wpmudev' ); ?></option>
+						<?php endif; ?>
+						<?php if ( in_array( 'unique_pageviews', $metrics, true ) ) : ?>
+							<option value="unique_pageviews" selected><?php esc_html_e( 'Unique Pageviews', 'wpmudev' ); ?></option>
+						<?php endif; ?>
+						<?php if ( in_array( 'bounce_rate', $metrics, true ) ) : ?>
+							<option value="bounce_rate"><?php esc_html_e( 'Bounce Rate', 'wpmudev' ); ?></option>
+						<?php endif; ?>
+						<?php if ( in_array( 'exit_rate', $metrics, true ) ) : ?>
+							<option value="exit_rate"><?php esc_html_e( 'Exit Rate', 'wpmudev' ); ?></option>
+						<?php endif; ?>
+						<?php if ( in_array( 'page_time', $metrics, true ) ) : ?>
+							<option value="page_time"><?php esc_html_e( 'Time on Page', 'wpmudev' ); ?></option>
+						<?php endif; ?>
+						<?php if ( in_array( 'gen_time', $metrics, true ) ) : ?>
+							<option value="gen_time"><?php esc_html_e( 'Generation Time', 'wpmudev' ); ?></option>
+						<?php endif; ?>
 					</select>
 				</div>
 
@@ -169,15 +182,27 @@ if ( is_network_admin() || ! is_multisite() ) {
 
 						<tbody class="wpmudui-table-sortable">
 
-						<?php foreach( $data['pages'] as $page ) { ?>
-							<tr class="wpmudui-table-item wpmudui-tracking" data-filter-type="page" data-filter="<?php echo esc_attr( $page['filter'] ); ?>" data-label="<?php esc_attr_e( 'Page:', 'wpmudev' ); ?>">
-								<td><span><?php echo esc_html( $page['name'] ); ?></span></td>
-								<td class="wpmudui-table-views data-pageviews" data-sort="<?php echo esc_attr( $page['pageviews']['sort'] ); ?>"><?php echo esc_html( $page['pageviews']['value'] ); ?></td>
-								<td class="wpmudui-table-views data-unique_pageviews" data-sort="<?php echo esc_attr( $page['unique_pageviews']['sort'] ); ?>"><?php echo esc_html( $page['unique_pageviews']['value'] ); ?></td>
-								<td class="wpmudui-table-views data-bounce_rate" data-sort="<?php echo esc_attr( $page['bounce_rate']['sort'] ); ?>"><?php echo esc_html( $page['bounce_rate']['value'] ); ?></td>
-								<td class="wpmudui-table-views data-exit_rate" data-sort="<?php echo esc_attr( $page['exit_rate']['sort'] ); ?>"><?php echo esc_html( $page['exit_rate']['value'] ); ?></td>
-								<td class="wpmudui-table-views data-page_time" data-sort="<?php echo esc_attr( $page['page_time']['sort'] ); ?>"><?php echo esc_html( $page['page_time']['value'] ); ?></td>
-								<td class="wpmudui-table-views data-gen_time" data-sort="<?php echo esc_attr( $page['gen_time']['sort'] ); ?>"><?php echo esc_html( $page['gen_time']['value'] ); ?></td>
+						<?php foreach( $data['pages'] as $site_page ) { ?>
+							<tr class="wpmudui-table-item wpmudui-tracking" data-filter-type="page" data-filter="<?php echo esc_attr( $site_page['filter'] ); ?>" data-label="<?php esc_attr_e( 'Page:', 'wpmudev' ); ?>">
+								<td><span><?php echo esc_html( $site_page['name'] ); ?></span></td>
+								<?php if ( isset( $site_page['pageviews'] ) ) : ?>
+									<td class="wpmudui-table-views data-pageviews" data-sort="<?php echo esc_attr( $site_page['pageviews']['sort'] ); ?>"><?php echo esc_html( $site_page['pageviews']['value'] ); ?></td>
+								<?php endif; ?>
+								<?php if ( isset( $site_page['unique_pageviews'] ) ) : ?>
+									<td class="wpmudui-table-views data-unique_pageviews" data-sort="<?php echo esc_attr( $site_page['unique_pageviews']['sort'] ); ?>"><?php echo esc_html( $site_page['unique_pageviews']['value'] ); ?></td>
+								<?php endif; ?>
+								<?php if ( isset( $site_page['bounce_rate']) ) : ?>
+									<td class="wpmudui-table-views data-bounce_rate" data-sort="<?php echo esc_attr( $site_page['bounce_rate']['sort'] ); ?>"><?php echo esc_html( $site_page['bounce_rate']['value'] ); ?></td>
+								<?php endif; ?>
+								<?php if ( isset( $site_page['exit_rate'] ) ) : ?>
+									<td class="wpmudui-table-views data-exit_rate" data-sort="<?php echo esc_attr( $site_page['exit_rate']['sort'] ); ?>"><?php echo esc_html( $site_page['exit_rate']['value'] ); ?></td>
+								<?php endif; ?>
+								<?php if ( isset( $site_page['page_time'] ) ) : ?>
+									<td class="wpmudui-table-views data-page_time" data-sort="<?php echo esc_attr( $site_page['page_time']['sort'] ); ?>"><?php echo esc_html( $site_page['page_time']['value'] ); ?></td>
+								<?php endif; ?>
+								<?php if ( isset( $site_page['gen_time'] ) ) : ?>
+									<td class="wpmudui-table-views data-gen_time" data-sort="<?php echo esc_attr( $site_page['gen_time']['sort'] ); ?>"><?php echo esc_html( $site_page['gen_time']['value'] ); ?></td>
+								<?php endif; ?>
 							</tr>
 						<?php } ?>
 
@@ -230,12 +255,24 @@ if ( is_network_admin() || ! is_multisite() ) {
 						</select>
 						<label class="wpmudui-label" for="wpmudui-analytics-sites-type"><?php esc_html_e( 'data for', 'wpmudev' ); ?></label>
 						<select id="wpmudui-analytics-authors-type" class="wpmudui-select wpmudui-analytics-column-filter">
-							<option value="pageviews"><?php esc_html_e( 'Pageviews', 'wpmudev' ); ?></option>
-							<option value="unique_pageviews" selected><?php esc_html_e( 'Unique Pageviews', 'wpmudev' ); ?></option>
-							<option value="bounce_rate"><?php esc_html_e( 'Bounce Rate', 'wpmudev' ); ?></option>
-							<option value="exit_rate"><?php esc_html_e( 'Exit Rate', 'wpmudev' ); ?></option>
-							<option value="page_time"><?php esc_html_e( 'Time on Page', 'wpmudev' ); ?></option>
-							<option value="gen_time"><?php esc_html_e( 'Generation Time', 'wpmudev' ); ?></option>
+							<?php if ( in_array( 'pageviews', $metrics, true ) ) : ?>
+								<option value="pageviews"><?php esc_html_e( 'Pageviews', 'wpmudev' ); ?></option>
+							<?php endif; ?>
+							<?php if ( in_array( 'unique_pageviews', $metrics, true ) ) : ?>
+								<option value="unique_pageviews" selected><?php esc_html_e( 'Unique Pageviews', 'wpmudev' ); ?></option>
+							<?php endif; ?>
+							<?php if ( in_array( 'bounce_rate', $metrics, true ) ) : ?>
+								<option value="bounce_rate"><?php esc_html_e( 'Bounce Rate', 'wpmudev' ); ?></option>
+							<?php endif; ?>
+							<?php if ( in_array( 'exit_rate', $metrics, true ) ) : ?>
+								<option value="exit_rate"><?php esc_html_e( 'Exit Rate', 'wpmudev' ); ?></option>
+							<?php endif; ?>
+							<?php if ( in_array( 'page_time', $metrics, true ) ) : ?>
+								<option value="page_time"><?php esc_html_e( 'Time on Page', 'wpmudev' ); ?></option>
+							<?php endif; ?>
+							<?php if ( in_array( 'gen_time', $metrics, true ) ) : ?>
+								<option value="gen_time"><?php esc_html_e( 'Generation Time', 'wpmudev' ); ?></option>
+							<?php endif; ?>
 						</select>
 					</div>
 
@@ -266,12 +303,24 @@ if ( is_network_admin() || ! is_multisite() ) {
 							<?php foreach( $data['authors'] as $author ) { ?>
 								<tr class="wpmudui-table-item wpmudui-tracking" data-filter-type="author" data-filter="<?php echo esc_attr( $author['filter'] ); ?>" data-label="<?php esc_attr_e( 'Author:', 'wpmudev' ); ?>">
 									<td><img src="<?php echo esc_url( $author['gravatar'] ); ?>" width="25" height="25"><span><?php echo esc_html( $author['name'] ); ?></span></td>
-									<td class="wpmudui-table-views data-pageviews" data-sort="<?php echo esc_attr( $author['pageviews']['sort'] ); ?>"><?php echo esc_html( $author['pageviews']['value'] ); ?></td>
-									<td class="wpmudui-table-views data-unique_pageviews" data-sort="<?php echo esc_attr( $author['unique_pageviews']['sort'] ); ?>"><?php echo esc_html( $author['unique_pageviews']['value'] ); ?></td>
-									<td class="wpmudui-table-views data-bounce_rate" data-sort="<?php echo esc_attr( $author['bounce_rate']['sort'] ); ?>"><?php echo esc_html( $author['bounce_rate']['value'] ); ?></td>
-									<td class="wpmudui-table-views data-exit_rate" data-sort="<?php echo esc_attr( $author['exit_rate']['sort'] ); ?>"><?php echo esc_html( $author['exit_rate']['value'] ); ?></td>
-									<td class="wpmudui-table-views data-page_time" data-sort="<?php echo esc_attr( $author['page_time']['sort'] ); ?>"><?php echo esc_html( $author['page_time']['value'] ); ?></td>
-									<td class="wpmudui-table-views data-gen_time" data-sort="<?php echo esc_attr( $author['gen_time']['sort'] ); ?>"><?php echo esc_html( $author['gen_time']['value'] ); ?></td>
+									<?php if ( isset( $author['pageviews'] ) ) : ?>
+										<td class="wpmudui-table-views data-pageviews" data-sort="<?php echo esc_attr( $author['pageviews']['sort'] ); ?>"><?php echo esc_html( $author['pageviews']['value'] ); ?></td>
+									<?php endif; ?>
+									<?php if ( isset( $author['unique_pageviews'] ) ) : ?>
+										<td class="wpmudui-table-views data-unique_pageviews" data-sort="<?php echo esc_attr( $author['unique_pageviews']['sort'] ); ?>"><?php echo esc_html( $author['unique_pageviews']['value'] ); ?></td>
+									<?php endif; ?>
+									<?php if ( isset( $author['bounce_rate'] ) ) : ?>
+										<td class="wpmudui-table-views data-bounce_rate" data-sort="<?php echo esc_attr( $author['bounce_rate']['sort'] ); ?>"><?php echo esc_html( $author['bounce_rate']['value'] ); ?></td>
+									<?php endif; ?>
+									<?php if ( isset( $author['exit_rate'] ) ) : ?>
+										<td class="wpmudui-table-views data-exit_rate" data-sort="<?php echo esc_attr( $author['exit_rate']['sort'] ); ?>"><?php echo esc_html( $author['exit_rate']['value'] ); ?></td>
+									<?php endif; ?>
+									<?php if ( isset( $author['page_time'] ) ) : ?>
+										<td class="wpmudui-table-views data-page_time" data-sort="<?php echo esc_attr( $author['page_time']['sort'] ); ?>"><?php echo esc_html( $author['page_time']['value'] ); ?></td>
+									<?php endif; ?>
+									<?php if ( isset( $author['gen_time'] ) ) : ?>
+										<td class="wpmudui-table-views data-gen_time" data-sort="<?php echo esc_attr( $author['gen_time']['sort'] ); ?>"><?php echo esc_html( $author['gen_time']['value'] ); ?></td>
+									<?php endif; ?>
 								</tr>
 							<?php } ?>
 
@@ -324,12 +373,24 @@ if ( is_network_admin() || ! is_multisite() ) {
 						</select>
 						<label class="wpmudui-label" for="wpmudui-analytics-sites-type"><?php esc_html_e( 'data for', 'wpmudev' ); ?></label>
 						<select id="wpmudui-analytics-sites-type" class="wpmudui-select wpmudui-analytics-column-filter">
-							<option value="pageviews"><?php esc_html_e( 'Pageviews', 'wpmudev' ); ?></option>
-							<option value="unique_pageviews" selected><?php esc_html_e( 'Unique Pageviews', 'wpmudev' ); ?></option>
-							<option value="bounce_rate"><?php esc_html_e( 'Bounce Rate', 'wpmudev' ); ?></option>
-							<option value="exit_rate"><?php esc_html_e( 'Exit Rate', 'wpmudev' ); ?></option>
-							<option value="page_time"><?php esc_html_e( 'Time on Page', 'wpmudev' ); ?></option>
-							<option value="gen_time"><?php esc_html_e( 'Generation Time', 'wpmudev' ); ?></option>
+							<?php if ( in_array( 'pageviews', $metrics, true ) ) : ?>
+								<option value="pageviews"><?php esc_html_e( 'Pageviews', 'wpmudev' ); ?></option>
+							<?php endif; ?>
+							<?php if ( in_array( 'unique_pageviews', $metrics, true ) ) : ?>
+								<option value="unique_pageviews" selected><?php esc_html_e( 'Unique Pageviews', 'wpmudev' ); ?></option>
+							<?php endif; ?>
+							<?php if ( in_array( 'bounce_rate', $metrics, true ) ) : ?>
+								<option value="bounce_rate"><?php esc_html_e( 'Bounce Rate', 'wpmudev' ); ?></option>
+							<?php endif; ?>
+							<?php if ( in_array( 'exit_rate', $metrics, true ) ) : ?>
+								<option value="exit_rate"><?php esc_html_e( 'Exit Rate', 'wpmudev' ); ?></option>
+							<?php endif; ?>
+							<?php if ( in_array( 'page_time', $metrics, true ) ) : ?>
+								<option value="page_time"><?php esc_html_e( 'Time on Page', 'wpmudev' ); ?></option>
+							<?php endif; ?>
+							<?php if ( in_array( 'gen_time', $metrics, true ) ) : ?>
+								<option value="gen_time"><?php esc_html_e( 'Generation Time', 'wpmudev' ); ?></option>
+							<?php endif; ?>
 						</select>
 					</div>
 
@@ -360,12 +421,24 @@ if ( is_network_admin() || ! is_multisite() ) {
 							<?php foreach( $data['sites'] as $site ) { ?>
 								<tr class="wpmudui-table-item wpmudui-tracking" data-filter-type="subsite" data-filter="<?php echo esc_attr( $site['filter'] ); ?>" data-label="<?php esc_attr_e( 'Site:', 'wpmudev' ); ?>">
 									<td><span><?php echo esc_html( $site['name'] ); ?></span></td>
-									<td class="wpmudui-table-views data-pageviews" data-sort="<?php echo esc_attr( $site['pageviews']['sort'] ); ?>"><?php echo esc_html( $site['pageviews']['value'] ); ?></td>
-									<td class="wpmudui-table-views data-unique_pageviews" data-sort="<?php echo esc_attr( $site['unique_pageviews']['sort'] ); ?>"><?php echo esc_html( $site['unique_pageviews']['value'] ); ?></td>
-									<td class="wpmudui-table-views data-bounce_rate" data-sort="<?php echo esc_attr( $site['bounce_rate']['sort'] ); ?>"><?php echo esc_html( $site['bounce_rate']['value'] ); ?></td>
-									<td class="wpmudui-table-views data-exit_rate" data-sort="<?php echo esc_attr( $site['exit_rate']['sort'] ); ?>"><?php echo esc_html( $site['exit_rate']['value'] ); ?></td>
-									<td class="wpmudui-table-views data-page_time" data-sort="<?php echo esc_attr( $site['page_time']['sort'] ); ?>"><?php echo esc_html( $site['page_time']['value'] ); ?></td>
-									<td class="wpmudui-table-views data-gen_time" data-sort="<?php echo esc_attr( $site['gen_time']['sort'] ); ?>"><?php echo esc_html( $site['gen_time']['value'] ); ?></td>
+									<?php if ( isset( $site['pageviews'] ) ) : ?>
+										<td class="wpmudui-table-views data-pageviews" data-sort="<?php echo esc_attr( $site['pageviews']['sort'] ); ?>"><?php echo esc_html( $site['pageviews']['value'] ); ?></td>
+									<?php endif; ?>
+									<?php if ( isset( $site['unique_pageviews'] ) ) : ?>
+										<td class="wpmudui-table-views data-unique_pageviews" data-sort="<?php echo esc_attr( $site['unique_pageviews']['sort'] ); ?>"><?php echo esc_html( $site['unique_pageviews']['value'] ); ?></td>
+									<?php endif; ?>
+									<?php if ( isset( $site['bounce_rate'] ) ) : ?>
+										<td class="wpmudui-table-views data-bounce_rate" data-sort="<?php echo esc_attr( $site['bounce_rate']['sort'] ); ?>"><?php echo esc_html( $site['bounce_rate']['value'] ); ?></td>
+									<?php endif; ?>
+									<?php if ( isset( $site['exit_rate'] ) ) : ?>
+										<td class="wpmudui-table-views data-exit_rate" data-sort="<?php echo esc_attr( $site['exit_rate']['sort'] ); ?>"><?php echo esc_html( $site['exit_rate']['value'] ); ?></td>
+									<?php endif; ?>
+									<?php if ( isset( $site['page_time'] ) ) : ?>
+										<td class="wpmudui-table-views data-page_time" data-sort="<?php echo esc_attr( $site['page_time']['sort'] ); ?>"><?php echo esc_html( $site['page_time']['value'] ); ?></td>
+									<?php endif; ?>
+									<?php if ( isset( $site['gen_time'] ) ) : ?>
+										<td class="wpmudui-table-views data-gen_time" data-sort="<?php echo esc_attr( $site['gen_time']['sort'] ); ?>"><?php echo esc_html( $site['gen_time']['value'] ); ?></td>
+									<?php endif; ?>
 								</tr>
 							<?php } ?>
 
