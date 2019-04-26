@@ -5,6 +5,16 @@ Change Log:
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
 
+4.7.1 - 04/10/2019 - Aaron, Hendrawan
+----------------------------------------------------------------------
+- Fix: WPMU DEV Auto Install Compatibility
+
+4.7 - 10/19/2018 - Aaron, Leighton, Hendrawan
+----------------------------------------------------------------------
+- Improvement: Brand new UI/UX
+- Improvement: Better Onboarding process
+- Add: Displayed analytics metrics configuration
+
 4.6.1 - 02/26/2019 - Aaron, Hendrawan
 ----------------------------------------------------------------------
 - Fix: Automate WP core update from 5.0.x to 5.1+
@@ -504,4 +514,4 @@ Added option to disable admin notices.
 Initial Release.
 
 
-87274-1551633125-au
+87274-1556301477-au

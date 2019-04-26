@@ -360,14 +360,16 @@ class WPMUDEV_Dashboard_Upgrader {
 		);
 		$expire = time() + 900; // 15minutes * 60seconds.
 
+		$secure_cookie = 'https' === wp_parse_url( get_option( 'home' ), PHP_URL_SCHEME );
+
 		return setcookie(
 			COOKIEHASH . '-dev_ftp_data',
 			implode( '&', $cookie_data ),
 			$expire,
 			COOKIEPATH,
 			COOKIE_DOMAIN,
-			false,
-			false
+			$secure_cookie,
+			true
 		);
 	}
 
@@ -378,7 +380,8 @@ class WPMUDEV_Dashboard_Upgrader {
 	 * @since  1.0.0
 	 */
 	public function apply_credentials() {
-		$cookie_name = COOKIEHASH . '-dev_ftp_data';
+		$secure_cookie = 'https' === wp_parse_url( get_option( 'home' ), PHP_URL_SCHEME );
+		$cookie_name   = COOKIEHASH . '-dev_ftp_data';
 		if ( empty( $_COOKIE[ $cookie_name ] ) ) { return; }
 
 		$cookie_data = explode( '&', $_COOKIE[ $cookie_name ] );
@@ -390,8 +393,8 @@ class WPMUDEV_Dashboard_Upgrader {
 				1,
 				COOKIEPATH,
 				COOKIE_DOMAIN,
-				false,
-				false
+				$secure_cookie,
+				true
 			);
 			return;
 		}
@@ -1028,5 +1031,133 @@ class WPMUDEV_Dashboard_Upgrader {
 	 */
 	public function get_version() {
 		return $this->new_version;
+	}
+
+	/**
+	 * Delete Plugin, used internally
+	 *
+	 * @since  4.7
+	 *
+	 * @param  int|string $pid                 The project ID or plugin filename.
+	 * @param  bool       $skip_uninstall_hook to avoid data deleted on uninstall
+	 *
+	 * @return bool True on success.
+	 */
+	public function delete_plugin( $pid, $skip_uninstall_hook = false ) {
+		$this->clear_error();
+		$this->clear_log();
+
+		include_once ABSPATH . 'wp-admin/includes/plugin.php';
+		include_once ABSPATH . 'wp-admin/includes/file.php';
+
+		// Is a WPMU DEV project?
+		$is_dev = is_numeric( $pid );
+
+		if ( $is_dev ) {
+			$pid = (int) $pid;
+
+			if ( ! $this->is_project_installed( $pid ) ) {
+				$this->set_error( $pid, 'DEL.01', __( 'Plugin not installed', 'wpmudev' ) );
+
+				return false;
+			}
+			$local    = WPMUDEV_Dashboard::$site->get_cached_projects( $pid );
+			$filename = $local['filename'];
+		} else {
+			$filename = $pid;
+		}
+
+		$filename = plugin_basename( sanitize_text_field( $filename ) );
+
+		//Check that it's a valid plugin
+		$valid = validate_plugin( $filename );
+		if ( is_wp_error( $valid ) ) {
+			$this->set_error( $pid, 'DEL.09', $valid->get_error_message() );
+
+			return false;
+		}
+
+		// recheck
+		$active_blog    = is_plugin_active( $filename );
+		$active_network = is_multisite() && is_plugin_active_for_network( $filename );
+
+		if ( $active_blog || $active_network ) {
+			$this->set_error( $pid, 'DEL.02', __( 'You cannot delete a plugin while it is active.', 'wpmudev' ) );
+
+			return false;
+		}
+
+		// Check filesystem credentials. `delete_plugins()` will bail otherwise.
+		$url = wp_nonce_url( 'plugins.php?action=delete-selected&verify-delete=1&checked[]=' . $filename, 'bulk-plugins' );
+		ob_start();
+		$credentials = request_filesystem_credentials( $url );
+		ob_end_clean();
+		if ( false === $credentials || ! WP_Filesystem( $credentials ) ) {
+			global $wp_filesystem;
+
+			$error_code = 'DEL.03';
+			$error      = __( 'Unable to connect to the filesystem. Please confirm your credentials.', 'wpmudev' );
+
+			// Pass through the error from WP_Filesystem if one was raised.
+			if ( $wp_filesystem instanceof WP_Filesystem_Base && is_wp_error( $wp_filesystem->errors ) && $wp_filesystem->errors->get_error_code() ) {
+				$error_code = $wp_filesystem->errors->get_error_code();
+				$error      = esc_html( $wp_filesystem->errors->get_error_message() );
+			}
+
+			$this->set_error( $pid, $error_code, $error );
+
+			return false;
+		}
+
+		// skip uninstall hook if asked to
+		if ( $skip_uninstall_hook ) {
+			// uninstall hook available
+			if ( is_uninstallable_plugin( $filename ) ) {
+				/**
+				 * @see is_uninstallable_plugin()
+				 */
+				$uninstallable_plugins = (array) get_option( 'uninstall_plugins' );
+				if ( isset( $uninstallable_plugins[ $filename ] ) ) {
+					unset( $uninstallable_plugins[ $filename ] );
+					update_option( 'uninstall_plugins', $uninstallable_plugins );
+				}
+
+				if ( file_exists( WP_PLUGIN_DIR . '/' . dirname( $filename ) . '/uninstall.php' ) ) {
+					/** @var WP_Filesystem_Base $wp_filesystem */
+					global $wp_filesystem;
+					if ( $wp_filesystem instanceof WP_Filesystem_Base ) {
+						$wp_filesystem->delete( WP_PLUGIN_DIR . '/' . dirname( $filename ) . '/uninstall.php', false, 'f' );
+					}
+				}
+			}
+
+			// one recheck
+			if ( is_uninstallable_plugin( $filename ) ) {
+				$this->set_error( $pid, 'DEL.07', __( 'Plugin Uninstall hook could not be removed.', 'wpmudev' ) );
+			}
+		}
+
+		/*
+		 * Set before the update:
+		 * WP will refresh local cache via action-hook before the install()
+		 * method is finished. That refresh call must scan the FS again.
+		 */
+		WPMUDEV_Dashboard::$site->clear_local_file_cache();
+		$result = delete_plugins( array( $filename ) );
+
+		if ( true === $result ) {
+			wp_clean_plugins_cache( false );
+			WPMUDEV_Dashboard::$site->schedule_shutdown_refresh();
+
+			return true;
+		} elseif ( is_wp_error( $result ) ) {
+			$this->set_error( $pid, $result->get_error_code(), $result->get_error_message() );
+
+			return false;
+		} else {
+			$this->set_error( $pid, 'DEL.05', __( 'Plugin could not be deleted.', 'wpmudev' ) );
+
+			return false;
+		}
 	}
 }

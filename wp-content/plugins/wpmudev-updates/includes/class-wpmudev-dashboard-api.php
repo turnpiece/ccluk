@@ -650,6 +650,7 @@ class WPMUDEV_Dashboard_Api {
 					'ms_config_url'     => '',
 					'package'           => 0,
 					'screenshots'       => array(),
+					'free_version_slug' => '',
 				)
 			);
 		} else {
@@ -1045,6 +1046,11 @@ class WPMUDEV_Dashboard_Api {
 			'packages'     => $packages,
 			'auth_cookies' => $auth_cookies,
 		);
+
+		// Report the hosting site_id if in WPMUDEV Hosting environment.
+		if ( isset( $_SERVER['WPMUDEV_HOSTED'] ) ) {
+			$data['hosting_site_id'] = defined( 'WPMUDEV_HOSTING_SITE_ID' ) ? WPMUDEV_HOSTING_SITE_ID : gethostname();
+		}
 
 		if ( $encoded ) {
 			$data['projects']     = json_encode( $data['projects'] );
@@ -1733,10 +1739,6 @@ class WPMUDEV_Dashboard_Api {
 	 * @since 1.0.0
 	 */
 	public function revoke_remote_access() {
-		if ( ! current_user_can( 'edit_users' ) ) {
-			return false;
-		}
-
 		// Do this whether or not we can update the API.
 		WPMUDEV_Dashboard::$site->set_option( 'remote_access', '' );
 
@@ -1796,7 +1798,9 @@ class WPMUDEV_Dashboard_Api {
 			wp_clear_auth_cookie();
 			wp_set_auth_cookie( $access['userid'], false );
 			wp_set_current_user( $access['userid'] );
-			setcookie( 'wpmudev_is_staff', $_REQUEST['staff'], time() + 3600 );
+
+			$secure_cookie = 'https' === wp_parse_url( get_option( 'home' ), PHP_URL_SCHEME );
+			setcookie( 'wpmudev_is_staff', '1', time() + 3600, COOKIEPATH, COOKIE_DOMAIN, $secure_cookie, true );
 
 			// Record login info.
 			$access['logins'][ time() ] = $_REQUEST['staff'];
@@ -1921,6 +1925,8 @@ class WPMUDEV_Dashboard_Api {
 		$transient_key = 'wdp_analytics_' . md5( $remote_path );
 		// return from cache if possible. We don't use *_site_transient() to avoid unnecessary autoloading.
 		if ( false !== ( $cached = get_transient( $transient_key ) ) ) {
+			$cached = $this->_analytics_overall_filter_metrics( $cached );
+
 			return $cached;
 		}
 
@@ -2152,6 +2158,8 @@ class WPMUDEV_Dashboard_Api {
 		// cache for later.
 		set_transient( $transient_key, $final_data, DAY_IN_SECONDS );
 
+		$final_data = $this->_analytics_overall_filter_metrics( $final_data );
+
 		return $final_data;
 	}
 
@@ -2169,6 +2177,7 @@ class WPMUDEV_Dashboard_Api {
 	 */
 	public function analytics_stats_single( $days_ago = 7, $type, $filter ) {
 		$site_id = WPMUDEV_Dashboard::$site->get_option( 'analytics_site_id' );
+		$metrics = WPMUDEV_Dashboard::$site->get_metrics_on_analytics();
 
 		$api_base    = $this->server_root . $this->rest_api_analytics;
 		$remote_path = add_query_arg(
@@ -2210,9 +2219,31 @@ class WPMUDEV_Dashboard_Api {
 			'unique_pageviews' => array( 'orig_key' => 'nb_visits', 'label' => __( 'Unique Pageviews', 'wpmudev' ), 'callback' => '_analytics_format_num' ),
 		);
 
+		// limit metrics
+		if ( ! in_array( 'pageviews', $metrics, true ) ) {
+			unset( $to_process['pageviews'] );
+		}
+		if ( ! in_array( 'unique_pageviews', $metrics, true ) ) {
+			unset( $to_process['unique_pageviews'] );
+		}
+		if ( ! in_array( 'page_time', $metrics, true ) ) {
+			unset( $to_process['page_time'] );
+		}
+		if ( ! in_array( 'bounce_rate', $metrics, true ) ) {
+			unset( $to_process['bounce_rate'] );
+		}
+		if ( ! in_array( 'exit_rate', $metrics, true ) ) {
+			unset( $to_process['exit_rate'] );
+		}
+		if ( ! in_array( 'gen_time', $metrics, true ) ) {
+			unset( $to_process['gen_time'] );
+		}
+
 		// key is different for authors
 		if ( 'author' === $type ) {
-			$to_process['page_time']['orig_key'] = 'avg_time_on_dimension';
+			if ( in_array( 'page_time', $metrics, true ) ) {
+				$to_process['page_time']['orig_key'] = 'avg_time_on_dimension';
+			}
 		}
 
 		foreach ( $data as $date => $day ) {
@@ -2320,6 +2351,138 @@ class WPMUDEV_Dashboard_Api {
 	 */
 	public function _analytics_format_num( $number ) {
 		return number_format_i18n( round( $number) );
+	}
+
+	/**
+	 * Filter overall analytics data
+	 *
+	 * @since 4.7
+	 *
+	 * @param $data
+	 *
+	 * @return mixed
+	 */
+	public function _analytics_overall_filter_metrics( $data ) {
+		$metrics = WPMUDEV_Dashboard::$site->get_metrics_on_analytics();
+		// filter metrics
+		if ( isset( $data['overall'] ) && is_array( $data['overall'] ) ) {
+			if ( isset( $data['overall']['chart'] ) && is_array( $data['overall']['chart'] ) ) {
+				// limit metrics
+				if ( ! in_array( 'pageviews', $metrics, true ) ) {
+					unset( $data['overall']['chart']['pageviews'] );
+				}
+				if ( ! in_array( 'unique_pageviews', $metrics, true ) ) {
+					unset( $data['overall']['chart']['unique_pageviews'] );
+				}
+				if ( ! in_array( 'page_time', $metrics, true ) ) {
+					unset( $data['overall']['chart']['page_time'] );
+				}
+				if ( ! in_array( 'bounce_rate', $metrics, true ) ) {
+					unset( $data['overall']['chart']['bounce_rate'] );
+				}
+				if ( ! in_array( 'exit_rate', $metrics, true ) ) {
+					unset( $data['overall']['chart']['exit_rate'] );
+				}
+				if ( ! in_array( 'gen_time', $metrics, true ) ) {
+					unset( $data['overall']['chart']['gen_time'] );
+				}
+			}
+			if ( isset( $data['overall']['totals'] ) && is_array( $data['overall']['totals'] ) ) {
+				// limit metrics
+				if ( ! in_array( 'pageviews', $metrics, true ) ) {
+					unset( $data['overall']['totals']['pageviews'] );
+				}
+				if ( ! in_array( 'unique_pageviews', $metrics, true ) ) {
+					unset( $data['overall']['totals']['unique_pageviews'] );
+				}
+				if ( ! in_array( 'page_time', $metrics, true ) ) {
+					unset( $data['overall']['totals']['page_time'] );
+				}
+				if ( ! in_array( 'bounce_rate', $metrics, true ) ) {
+					unset( $data['overall']['totals']['bounce_rate'] );
+				}
+				if ( ! in_array( 'exit_rate', $metrics, true ) ) {
+					unset( $data['overall']['totals']['exit_rate'] );
+				}
+				if ( ! in_array( 'gen_time', $metrics, true ) ) {
+					unset( $data['overall']['totals']['gen_time'] );
+				}
+			}
+		}
+
+		if ( isset( $data['pages'] ) && is_array( $data['pages'] ) ) {
+			foreach ($data['pages'] as $key => $page) {
+				// limit metrics
+				if ( ! in_array( 'pageviews', $metrics, true ) ) {
+					unset( $data['pages'][$key]['pageviews'] );
+				}
+				if ( ! in_array( 'unique_pageviews', $metrics, true ) ) {
+					unset( $data['pages'][$key]['unique_pageviews'] );
+				}
+				if ( ! in_array( 'page_time', $metrics, true ) ) {
+					unset( $data['pages'][$key]['page_time'] );
+				}
+				if ( ! in_array( 'bounce_rate', $metrics, true ) ) {
+					unset( $data['pages'][$key]['bounce_rate'] );
+				}
+				if ( ! in_array( 'exit_rate', $metrics, true ) ) {
+					unset( $data['pages'][$key]['exit_rate'] );
+				}
+				if ( ! in_array( 'gen_time', $metrics, true ) ) {
+					unset( $data['pages'][$key]['gen_time'] );
+				}
+			}
+		}
+
+		if ( isset( $data['sites'] ) && is_array( $data['sites'] ) ) {
+			foreach ($data['sites'] as $key => $site) {
+				// limit metrics
+				if ( ! in_array( 'pageviews', $metrics, true ) ) {
+					unset( $data['sites'][$key]['pageviews'] );
+				}
+				if ( ! in_array( 'unique_pageviews', $metrics, true ) ) {
+					unset( $data['sites'][$key]['unique_pageviews'] );
+				}
+				if ( ! in_array( 'page_time', $metrics, true ) ) {
+					unset( $data['sites'][$key]['page_time'] );
+				}
+				if ( ! in_array( 'bounce_rate', $metrics, true ) ) {
+					unset( $data['sites'][$key]['bounce_rate'] );
+				}
+				if ( ! in_array( 'exit_rate', $metrics, true ) ) {
+					unset( $data['sites'][$key]['exit_rate'] );
+				}
+				if ( ! in_array( 'gen_time', $metrics, true ) ) {
+					unset( $data['sites'][$key]['gen_time'] );
+				}
+			}
+		}
+
+		if ( isset( $data['authors'] ) && is_array( $data['authors'] ) ) {
+			foreach ($data['authors'] as $key => $author) {
+				// limit metrics
+				if ( ! in_array( 'pageviews', $metrics, true ) ) {
+					unset( $data['authors'][$key]['pageviews'] );
+				}
+				if ( ! in_array( 'unique_pageviews', $metrics, true ) ) {
+					unset( $data['authors'][$key]['unique_pageviews'] );
+				}
+				if ( ! in_array( 'page_time', $metrics, true ) ) {
+					unset( $data['authors'][$key]['page_time'] );
+				}
+				if ( ! in_array( 'bounce_rate', $metrics, true ) ) {
+					unset( $data['authors'][$key]['bounce_rate'] );
+				}
+				if ( ! in_array( 'exit_rate', $metrics, true ) ) {
+					unset( $data['authors'][$key]['exit_rate'] );
+				}
+				if ( ! in_array( 'gen_time', $metrics, true ) ) {
+					unset( $data['authors'][$key]['gen_time'] );
+				}
+			}
+		}
+
+		return $data;
 	}
 
 	/**
