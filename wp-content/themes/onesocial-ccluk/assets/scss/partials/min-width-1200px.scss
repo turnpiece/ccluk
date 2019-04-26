@@ -28,6 +28,16 @@ body.page-template-homepage {
 					}
 				}
 			}
+
+			&.banner {
+				.section-title-container > .section-title {
+					max-width: 900px;
+					
+					h2 {
+						font-size: $font-size-big;
+					}
+				}
+			}
 		}
 	}
 }

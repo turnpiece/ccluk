@@ -86,7 +86,7 @@ Is mobile
 body.is-mobile {
 	&.single,
 	&.archive, 
-	&.page,
+	&.page:not(.home-page),
 	&.blog:not(.bp-user) {
 		#primary,
 		.site-content {
