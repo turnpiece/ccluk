@@ -248,6 +248,10 @@ Mobile Header
     #mobile-header .right-btn:before {
       color: #333;
       font-size: 21px; }
+  #mobile-header .left-btn {
+    left: 21px; }
+  #mobile-header .right-btn {
+    right: 21px; }
   #mobile-header #mobile-logo img {
     max-height: 70px;
     max-width: 300px;
@@ -280,9 +284,13 @@ Mobile Menu
 Is mobile
 --------------------------------------------------------------*/
 body.is-mobile.single #primary,
+body.is-mobile.single #secondary,
 body.is-mobile.single .site-content, body.is-mobile.archive #primary,
+body.is-mobile.archive #secondary,
 body.is-mobile.archive .site-content, body.is-mobile.page:not(.home-page) #primary,
+body.is-mobile.page:not(.home-page) #secondary,
 body.is-mobile.page:not(.home-page) .site-content, body.is-mobile.blog:not(.bp-user) #primary,
+body.is-mobile.blog:not(.bp-user) #secondary,
 body.is-mobile.blog:not(.bp-user) .site-content {
   max-width: 750px;
   margin: 0 auto; }

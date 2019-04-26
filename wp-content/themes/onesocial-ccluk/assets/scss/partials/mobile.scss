@@ -25,6 +25,14 @@ Mobile Header
 		}
 	}
 
+	.left-btn {
+		left: $font-size-std;
+	}
+
+	.right-btn {
+		right: $font-size-std;
+	}
+
 	#mobile-logo {
 		img {
 			max-height: 70px;
@@ -89,6 +97,7 @@ body.is-mobile {
 	&.page:not(.home-page),
 	&.blog:not(.bp-user) {
 		#primary,
+		#secondary,
 		.site-content {
 			max-width: $content_w;
 			@include centred-margin( 0 );
