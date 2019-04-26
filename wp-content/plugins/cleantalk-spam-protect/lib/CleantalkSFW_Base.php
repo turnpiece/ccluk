@@ -29,6 +29,7 @@ class CleantalkSFW_Base
 	protected $log_table;
 	
 	public $debug;
+	public $debug_data = '';
 	public $debug_networks = array();
 	
 	/**
@@ -41,7 +42,7 @@ class CleantalkSFW_Base
 	*
 	* @return void
 	*/
-	public function __construct($params, $username, $password)
+	public function __construct()
 	{
 		// Creating database object
 		$this->db = new ClentalkDB();
@@ -55,14 +56,14 @@ class CleantalkSFW_Base
 	*	Getting arrays of IP (REMOTE_ADDR, X-Forwarded-For, X-Real-Ip, Cf_Connecting_Ip)
 	*	reutrns array('remote_addr' => 'val', ['x_forwarded_for' => 'val', ['x_real_ip' => 'val', ['cloud_flare' => 'val']]])
 	*/
-	public function ip_get($ips_input = array('real', 'remote_addr', 'x_forwarded_for', 'x_real_ip', 'cloud_flare'), $v4_only = true){
+	public function ip__get($ips_input = array('real', 'remote_addr', 'x_forwarded_for', 'x_real_ip', 'cloud_flare'), $v4_only = true){
 		
-		$result = (array)CleantalkHelper::ip_get($ips_input, $v4_only);
+		$result = (array)CleantalkHelper::ip__get($ips_input, $v4_only);
 		
 		$result = !empty($result) ? $result : array();
 		
 		if(isset($_GET['sfw_test_ip'])){
-			if(CleantalkHelper::ip_validate($_GET['sfw_test_ip']) !== false){
+			if(CleantalkHelper::ip__validate($_GET['sfw_test_ip']) !== false){
 				$result['sfw_test'] = $_GET['sfw_test_ip'];
 				$this->is_test = true;
 			}
@@ -170,13 +171,13 @@ class CleantalkSFW_Base
 		// Getting remote file name
 		if(!$file_url){
 			
+			sleep(6);
+			
 			$result = CleantalkAPI::method__get_2s_blacklists_db($ct_key, 'file');
 						
 			if(empty($result['error'])){
 			
 				if( !empty($result['file_url']) ){
-					
-					$file_url = $result['file_url'];
 					
 					$pattenrs = array();
 					$pattenrs[] = 'get';
@@ -198,16 +199,14 @@ class CleantalkSFW_Base
 			}else
 				return $result;
 		}else{
-			
-			sleep(3);
-			
+						
 			if(CleantalkHelper::http__request($file_url, array(), 'get_code') === 200){ // Check if it's there
 				
-				$this->db->query("DELETE FROM ".$this->data_table.";", true);
-
 				$gf = gzopen($file_url, 'rb');
 				
 				if($gf){
+					
+					$this->db->query("DELETE FROM ".$this->data_table.";", true);
 					
 					for($count_result = 0; !gzeof($gf); ){
 						

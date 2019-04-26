@@ -237,86 +237,82 @@ class Ai1wm_Import_Database {
 			// Get Site URL
 			foreach ( $site_urls as $site_url ) {
 
-				// Replace Site URL
-				if ( $site_url !== $blog['New']['SiteURL'] ) {
+				// Get www URL
+				if ( stripos( $site_url, '//www.' ) !== false ) {
+					$site_url_www_inversion = str_ireplace( '//www.', '//', $site_url );
+				} else {
+					$site_url_www_inversion = str_ireplace( '//', '//www.', $site_url );
+				}
 
-					// Get www URL
-					if ( stripos( $site_url, '//www.' ) !== false ) {
-						$site_url_www_inversion = str_ireplace( '//www.', '//', $site_url );
-					} else {
-						$site_url_www_inversion = str_ireplace( '//', '//www.', $site_url );
+				// Replace Site URL
+				foreach ( array( $site_url, $site_url_www_inversion ) as $url ) {
+
+					// Get domain
+					$old_domain = parse_url( $url, PHP_URL_HOST );
+					$new_domain = parse_url( $blog['New']['SiteURL'], PHP_URL_HOST );
+
+					// Get path
+					$old_path = parse_url( $url, PHP_URL_PATH );
+					$new_path = parse_url( $blog['New']['SiteURL'], PHP_URL_PATH );
+
+					// Get scheme
+					$new_scheme = parse_url( $blog['New']['SiteURL'], PHP_URL_SCHEME );
+
+					// Add domain and path
+					if ( ! in_array( sprintf( "'%s','%s'", $old_domain, trailingslashit( $old_path ) ), $old_replace_raw_values ) ) {
+						$old_replace_raw_values[] = sprintf( "'%s','%s'", $old_domain, trailingslashit( $old_path ) );
+						$new_replace_raw_values[] = sprintf( "'%s','%s'", $new_domain, trailingslashit( $new_path ) );
 					}
 
-					// Replace Site URL
-					foreach ( array( $site_url, $site_url_www_inversion ) as $url ) {
+					// Add domain and path with single quote
+					if ( ! in_array( sprintf( "='%s%s", $old_domain, untrailingslashit( $old_path ) ), $old_replace_values ) ) {
+						$old_replace_values[] = sprintf( "='%s%s", $old_domain, untrailingslashit( $old_path ) );
+						$new_replace_values[] = sprintf( "='%s%s", $new_domain, untrailingslashit( $new_path ) );
+					}
 
-						// Get domain
-						$old_domain = parse_url( $url, PHP_URL_HOST );
-						$new_domain = parse_url( $blog['New']['SiteURL'], PHP_URL_HOST );
+					// Add domain and path with double quote
+					if ( ! in_array( sprintf( '="%s%s', $old_domain, untrailingslashit( $old_path ) ), $old_replace_values ) ) {
+						$old_replace_values[] = sprintf( '="%s%s', $old_domain, untrailingslashit( $old_path ) );
+						$new_replace_values[] = sprintf( '="%s%s', $new_domain, untrailingslashit( $new_path ) );
+					}
 
-						// Get path
-						$old_path = parse_url( $url, PHP_URL_PATH );
-						$new_path = parse_url( $blog['New']['SiteURL'], PHP_URL_PATH );
+					// Add Site URL scheme
+					$old_schemes = array( 'http', 'https', '' );
+					$new_schemes = array( $new_scheme, $new_scheme, '' );
 
-						// Get scheme
-						$new_scheme = parse_url( $blog['New']['SiteURL'], PHP_URL_SCHEME );
+					// Replace Site URL scheme
+					for ( $i = 0; $i < count( $old_schemes ); $i++ ) {
 
-						// Add domain and path
-						if ( ! in_array( sprintf( "'%s','%s'", $old_domain, trailingslashit( $old_path ) ), $old_replace_raw_values ) ) {
-							$old_replace_raw_values[] = sprintf( "'%s','%s'", $old_domain, trailingslashit( $old_path ) );
-							$new_replace_raw_values[] = sprintf( "'%s','%s'", $new_domain, trailingslashit( $new_path ) );
+						// Add plain Site URL
+						if ( ! in_array( ai1wm_url_scheme( $url, $old_schemes[ $i ] ), $old_replace_values ) ) {
+							$old_replace_values[] = ai1wm_url_scheme( $url, $old_schemes[ $i ] );
+							$new_replace_values[] = ai1wm_url_scheme( $blog['New']['SiteURL'], $new_schemes[ $i ] );
 						}
 
-						// Add domain and path with single quote
-						if ( ! in_array( sprintf( "='%s%s", $old_domain, untrailingslashit( $old_path ) ), $old_replace_values ) ) {
-							$old_replace_values[] = sprintf( "='%s%s", $old_domain, untrailingslashit( $old_path ) );
-							$new_replace_values[] = sprintf( "='%s%s", $new_domain, untrailingslashit( $new_path ) );
+						// Add URL encoded Site URL
+						if ( ! in_array( urlencode( ai1wm_url_scheme( $url, $old_schemes[ $i ] ) ), $old_replace_values ) ) {
+							$old_replace_values[] = urlencode( ai1wm_url_scheme( $url, $old_schemes[ $i ] ) );
+							$new_replace_values[] = urlencode( ai1wm_url_scheme( $blog['New']['SiteURL'], $new_schemes[ $i ] ) );
 						}
 
-						// Add domain and path with double quote
-						if ( ! in_array( sprintf( '="%s%s', $old_domain, untrailingslashit( $old_path ) ), $old_replace_values ) ) {
-							$old_replace_values[] = sprintf( '="%s%s', $old_domain, untrailingslashit( $old_path ) );
-							$new_replace_values[] = sprintf( '="%s%s', $new_domain, untrailingslashit( $new_path ) );
+						// Add URL raw encoded Site URL
+						if ( ! in_array( rawurlencode( ai1wm_url_scheme( $url, $old_schemes[ $i ] ) ), $old_replace_values ) ) {
+							$old_replace_values[] = rawurlencode( ai1wm_url_scheme( $url, $old_schemes[ $i ] ) );
+							$new_replace_values[] = rawurlencode( ai1wm_url_scheme( $blog['New']['SiteURL'], $new_schemes[ $i ] ) );
 						}
 
-						// Add Site URL scheme
-						$old_schemes = array( 'http', 'https', '' );
-						$new_schemes = array( $new_scheme, $new_scheme, '' );
-
-						// Replace Site URL scheme
-						for ( $i = 0; $i < count( $old_schemes ); $i++ ) {
-
-							// Add plain Site URL
-							if ( ! in_array( ai1wm_url_scheme( $url, $old_schemes[ $i ] ), $old_replace_values ) ) {
-								$old_replace_values[] = ai1wm_url_scheme( $url, $old_schemes[ $i ] );
-								$new_replace_values[] = ai1wm_url_scheme( $blog['New']['SiteURL'], $new_schemes[ $i ] );
-							}
-
-							// Add URL encoded Site URL
-							if ( ! in_array( urlencode( ai1wm_url_scheme( $url, $old_schemes[ $i ] ) ), $old_replace_values ) ) {
-								$old_replace_values[] = urlencode( ai1wm_url_scheme( $url, $old_schemes[ $i ] ) );
-								$new_replace_values[] = urlencode( ai1wm_url_scheme( $blog['New']['SiteURL'], $new_schemes[ $i ] ) );
-							}
-
-							// Add URL raw encoded Site URL
-							if ( ! in_array( rawurlencode( ai1wm_url_scheme( $url, $old_schemes[ $i ] ) ), $old_replace_values ) ) {
-								$old_replace_values[] = rawurlencode( ai1wm_url_scheme( $url, $old_schemes[ $i ] ) );
-								$new_replace_values[] = rawurlencode( ai1wm_url_scheme( $blog['New']['SiteURL'], $new_schemes[ $i ] ) );
-							}
-
-							// Add JSON escaped Site URL
-							if ( ! in_array( addcslashes( ai1wm_url_scheme( $url, $old_schemes[ $i ] ), '/' ), $old_replace_values ) ) {
-								$old_replace_values[] = addcslashes( ai1wm_url_scheme( $url, $old_schemes[ $i ] ), '/' );
-								$new_replace_values[] = addcslashes( ai1wm_url_scheme( $blog['New']['SiteURL'], $new_schemes[ $i ] ), '/' );
-							}
+						// Add JSON escaped Site URL
+						if ( ! in_array( addcslashes( ai1wm_url_scheme( $url, $old_schemes[ $i ] ), '/' ), $old_replace_values ) ) {
+							$old_replace_values[] = addcslashes( ai1wm_url_scheme( $url, $old_schemes[ $i ] ), '/' );
+							$new_replace_values[] = addcslashes( ai1wm_url_scheme( $blog['New']['SiteURL'], $new_schemes[ $i ] ), '/' );
 						}
+					}
 
-						// Add email
-						if ( ! isset( $config['NoEmailReplace'] ) ) {
-							if ( ! in_array( sprintf( '@%s', $old_domain ), $old_replace_values ) ) {
-								$old_replace_values[] = sprintf( '@%s', $old_domain );
-								$new_replace_values[] = sprintf( '@%s', $new_domain );
-							}
+					// Add email
+					if ( ! isset( $config['NoEmailReplace'] ) ) {
+						if ( ! in_array( sprintf( '@%s', $old_domain ), $old_replace_values ) ) {
+							$old_replace_values[] = sprintf( '@%s', $old_domain );
+							$new_replace_values[] = sprintf( '@%s', $new_domain );
 						}
 					}
 				}
@@ -339,86 +335,82 @@ class Ai1wm_Import_Database {
 			// Get Home URL
 			foreach ( $home_urls as $home_url ) {
 
-				// Replace Home URL
-				if ( $home_url !== $blog['New']['HomeURL'] ) {
+				// Get www URL
+				if ( stripos( $home_url, '//www.' ) !== false ) {
+					$home_url_www_inversion = str_ireplace( '//www.', '//', $home_url );
+				} else {
+					$home_url_www_inversion = str_ireplace( '//', '//www.', $home_url );
+				}
 
-					// Get www URL
-					if ( stripos( $home_url, '//www.' ) !== false ) {
-						$home_url_www_inversion = str_ireplace( '//www.', '//', $home_url );
-					} else {
-						$home_url_www_inversion = str_ireplace( '//', '//www.', $home_url );
+				// Replace Home URL
+				foreach ( array( $home_url, $home_url_www_inversion ) as $url ) {
+
+					// Get domain
+					$old_domain = parse_url( $url, PHP_URL_HOST );
+					$new_domain = parse_url( $blog['New']['HomeURL'], PHP_URL_HOST );
+
+					// Get path
+					$old_path = parse_url( $url, PHP_URL_PATH );
+					$new_path = parse_url( $blog['New']['HomeURL'], PHP_URL_PATH );
+
+					// Get scheme
+					$new_scheme = parse_url( $blog['New']['HomeURL'], PHP_URL_SCHEME );
+
+					// Add domain and path
+					if ( ! in_array( sprintf( "'%s','%s'", $old_domain, trailingslashit( $old_path ) ), $old_replace_raw_values ) ) {
+						$old_replace_raw_values[] = sprintf( "'%s','%s'", $old_domain, trailingslashit( $old_path ) );
+						$new_replace_raw_values[] = sprintf( "'%s','%s'", $new_domain, trailingslashit( $new_path ) );
 					}
 
-					// Replace Home URL
-					foreach ( array( $home_url, $home_url_www_inversion ) as $url ) {
+					// Add domain and path with single quote
+					if ( ! in_array( sprintf( "='%s%s", $old_domain, untrailingslashit( $old_path ) ), $old_replace_values ) ) {
+						$old_replace_values[] = sprintf( "='%s%s", $old_domain, untrailingslashit( $old_path ) );
+						$new_replace_values[] = sprintf( "='%s%s", $new_domain, untrailingslashit( $new_path ) );
+					}
 
-						// Get domain
-						$old_domain = parse_url( $url, PHP_URL_HOST );
-						$new_domain = parse_url( $blog['New']['HomeURL'], PHP_URL_HOST );
+					// Add domain and path with double quote
+					if ( ! in_array( sprintf( '="%s%s', $old_domain, untrailingslashit( $old_path ) ), $old_replace_values ) ) {
+						$old_replace_values[] = sprintf( '="%s%s', $old_domain, untrailingslashit( $old_path ) );
+						$new_replace_values[] = sprintf( '="%s%s', $new_domain, untrailingslashit( $new_path ) );
+					}
 
-						// Get path
-						$old_path = parse_url( $url, PHP_URL_PATH );
-						$new_path = parse_url( $blog['New']['HomeURL'], PHP_URL_PATH );
+					// Set Home URL scheme
+					$old_schemes = array( 'http', 'https', '' );
+					$new_schemes = array( $new_scheme, $new_scheme, '' );
 
-						// Get scheme
-						$new_scheme = parse_url( $blog['New']['HomeURL'], PHP_URL_SCHEME );
+					// Replace Home URL scheme
+					for ( $i = 0; $i < count( $old_schemes ); $i++ ) {
 
-						// Add domain and path
-						if ( ! in_array( sprintf( "'%s','%s'", $old_domain, trailingslashit( $old_path ) ), $old_replace_raw_values ) ) {
-							$old_replace_raw_values[] = sprintf( "'%s','%s'", $old_domain, trailingslashit( $old_path ) );
-							$new_replace_raw_values[] = sprintf( "'%s','%s'", $new_domain, trailingslashit( $new_path ) );
+						// Add plain Home URL
+						if ( ! in_array( ai1wm_url_scheme( $url, $old_schemes[ $i ] ), $old_replace_values ) ) {
+							$old_replace_values[] = ai1wm_url_scheme( $url, $old_schemes[ $i ] );
+							$new_replace_values[] = ai1wm_url_scheme( $blog['New']['HomeURL'], $new_schemes[ $i ] );
 						}
 
-						// Add domain and path with single quote
-						if ( ! in_array( sprintf( "='%s%s", $old_domain, untrailingslashit( $old_path ) ), $old_replace_values ) ) {
-							$old_replace_values[] = sprintf( "='%s%s", $old_domain, untrailingslashit( $old_path ) );
-							$new_replace_values[] = sprintf( "='%s%s", $new_domain, untrailingslashit( $new_path ) );
+						// Add URL encoded Home URL
+						if ( ! in_array( urlencode( ai1wm_url_scheme( $url, $old_schemes[ $i ] ) ), $old_replace_values ) ) {
+							$old_replace_values[] = urlencode( ai1wm_url_scheme( $url, $old_schemes[ $i ] ) );
+							$new_replace_values[] = urlencode( ai1wm_url_scheme( $blog['New']['HomeURL'], $new_schemes[ $i ] ) );
 						}
 
-						// Add domain and path with double quote
-						if ( ! in_array( sprintf( '="%s%s', $old_domain, untrailingslashit( $old_path ) ), $old_replace_values ) ) {
-							$old_replace_values[] = sprintf( '="%s%s', $old_domain, untrailingslashit( $old_path ) );
-							$new_replace_values[] = sprintf( '="%s%s', $new_domain, untrailingslashit( $new_path ) );
+						// Add URL raw encoded Home URL
+						if ( ! in_array( rawurlencode( ai1wm_url_scheme( $url, $old_schemes[ $i ] ) ), $old_replace_values ) ) {
+							$old_replace_values[] = rawurlencode( ai1wm_url_scheme( $url, $old_schemes[ $i ] ) );
+							$new_replace_values[] = rawurlencode( ai1wm_url_scheme( $blog['New']['HomeURL'], $new_schemes[ $i ] ) );
 						}
 
-						// Set Home URL scheme
-						$old_schemes = array( 'http', 'https', '' );
-						$new_schemes = array( $new_scheme, $new_scheme, '' );
-
-						// Replace Home URL scheme
-						for ( $i = 0; $i < count( $old_schemes ); $i++ ) {
-
-							// Add plain Home URL
-							if ( ! in_array( ai1wm_url_scheme( $url, $old_schemes[ $i ] ), $old_replace_values ) ) {
-								$old_replace_values[] = ai1wm_url_scheme( $url, $old_schemes[ $i ] );
-								$new_replace_values[] = ai1wm_url_scheme( $blog['New']['HomeURL'], $new_schemes[ $i ] );
-							}
-
-							// Add URL encoded Home URL
-							if ( ! in_array( urlencode( ai1wm_url_scheme( $url, $old_schemes[ $i ] ) ), $old_replace_values ) ) {
-								$old_replace_values[] = urlencode( ai1wm_url_scheme( $url, $old_schemes[ $i ] ) );
-								$new_replace_values[] = urlencode( ai1wm_url_scheme( $blog['New']['HomeURL'], $new_schemes[ $i ] ) );
-							}
-
-							// Add URL raw encoded Home URL
-							if ( ! in_array( rawurlencode( ai1wm_url_scheme( $url, $old_schemes[ $i ] ) ), $old_replace_values ) ) {
-								$old_replace_values[] = rawurlencode( ai1wm_url_scheme( $url, $old_schemes[ $i ] ) );
-								$new_replace_values[] = rawurlencode( ai1wm_url_scheme( $blog['New']['HomeURL'], $new_schemes[ $i ] ) );
-							}
-
-							// Add JSON escaped Home URL
-							if ( ! in_array( addcslashes( ai1wm_url_scheme( $url, $old_schemes[ $i ] ), '/' ), $old_replace_values ) ) {
-								$old_replace_values[] = addcslashes( ai1wm_url_scheme( $url, $old_schemes[ $i ] ), '/' );
-								$new_replace_values[] = addcslashes( ai1wm_url_scheme( $blog['New']['HomeURL'], $new_schemes[ $i ] ), '/' );
-							}
+						// Add JSON escaped Home URL
+						if ( ! in_array( addcslashes( ai1wm_url_scheme( $url, $old_schemes[ $i ] ), '/' ), $old_replace_values ) ) {
+							$old_replace_values[] = addcslashes( ai1wm_url_scheme( $url, $old_schemes[ $i ] ), '/' );
+							$new_replace_values[] = addcslashes( ai1wm_url_scheme( $blog['New']['HomeURL'], $new_schemes[ $i ] ), '/' );
 						}
+					}
 
-						// Add email
-						if ( ! isset( $config['NoEmailReplace'] ) ) {
-							if ( ! in_array( sprintf( '@%s', $old_domain ), $old_replace_values ) ) {
-								$old_replace_values[] = sprintf( '@%s', $old_domain );
-								$new_replace_values[] = sprintf( '@%s', $new_domain );
-							}
+					// Add email
+					if ( ! isset( $config['NoEmailReplace'] ) ) {
+						if ( ! in_array( sprintf( '@%s', $old_domain ), $old_replace_values ) ) {
+							$old_replace_values[] = sprintf( '@%s', $old_domain );
+							$new_replace_values[] = sprintf( '@%s', $new_domain );
 						}
 					}
 				}
@@ -442,86 +434,82 @@ class Ai1wm_Import_Database {
 		// Get Site URL
 		foreach ( $site_urls as $site_url ) {
 
-			// Replace Site URL
-			if ( $site_url !== site_url() ) {
+			// Get www URL
+			if ( stripos( $site_url, '//www.' ) !== false ) {
+				$site_url_www_inversion = str_ireplace( '//www.', '//', $site_url );
+			} else {
+				$site_url_www_inversion = str_ireplace( '//', '//www.', $site_url );
+			}
 
-				// Get www URL
-				if ( stripos( $site_url, '//www.' ) !== false ) {
-					$site_url_www_inversion = str_ireplace( '//www.', '//', $site_url );
-				} else {
-					$site_url_www_inversion = str_ireplace( '//', '//www.', $site_url );
+			// Replace Site URL
+			foreach ( array( $site_url, $site_url_www_inversion ) as $url ) {
+
+				// Get domain
+				$old_domain = parse_url( $url, PHP_URL_HOST );
+				$new_domain = parse_url( site_url(), PHP_URL_HOST );
+
+				// Get path
+				$old_path = parse_url( $url, PHP_URL_PATH );
+				$new_path = parse_url( site_url(), PHP_URL_PATH );
+
+				// Get scheme
+				$new_scheme = parse_url( site_url(), PHP_URL_SCHEME );
+
+				// Add domain and path
+				if ( ! in_array( sprintf( "'%s','%s'", $old_domain, trailingslashit( $old_path ) ), $old_replace_raw_values ) ) {
+					$old_replace_raw_values[] = sprintf( "'%s','%s'", $old_domain, trailingslashit( $old_path ) );
+					$new_replace_raw_values[] = sprintf( "'%s','%s'", $new_domain, trailingslashit( $new_path ) );
 				}
 
-				// Replace Site URL
-				foreach ( array( $site_url, $site_url_www_inversion ) as $url ) {
+				// Add domain and path with single quote
+				if ( ! in_array( sprintf( "='%s%s", $old_domain, untrailingslashit( $old_path ) ), $old_replace_values ) ) {
+					$old_replace_values[] = sprintf( "='%s%s", $old_domain, untrailingslashit( $old_path ) );
+					$new_replace_values[] = sprintf( "='%s%s", $new_domain, untrailingslashit( $new_path ) );
+				}
 
-					// Get domain
-					$old_domain = parse_url( $url, PHP_URL_HOST );
-					$new_domain = parse_url( site_url(), PHP_URL_HOST );
+				// Add domain and path with double quote
+				if ( ! in_array( sprintf( '="%s%s', $old_domain, untrailingslashit( $old_path ) ), $old_replace_values ) ) {
+					$old_replace_values[] = sprintf( '="%s%s', $old_domain, untrailingslashit( $old_path ) );
+					$new_replace_values[] = sprintf( '="%s%s', $new_domain, untrailingslashit( $new_path ) );
+				}
 
-					// Get path
-					$old_path = parse_url( $url, PHP_URL_PATH );
-					$new_path = parse_url( site_url(), PHP_URL_PATH );
+				// Set Site URL scheme
+				$old_schemes = array( 'http', 'https', '' );
+				$new_schemes = array( $new_scheme, $new_scheme, '' );
 
-					// Get scheme
-					$new_scheme = parse_url( site_url(), PHP_URL_SCHEME );
+				// Replace Site URL scheme
+				for ( $i = 0; $i < count( $old_schemes ); $i++ ) {
 
-					// Add domain and path
-					if ( ! in_array( sprintf( "'%s','%s'", $old_domain, trailingslashit( $old_path ) ), $old_replace_raw_values ) ) {
-						$old_replace_raw_values[] = sprintf( "'%s','%s'", $old_domain, trailingslashit( $old_path ) );
-						$new_replace_raw_values[] = sprintf( "'%s','%s'", $new_domain, trailingslashit( $new_path ) );
+					// Add plain Site URL
+					if ( ! in_array( ai1wm_url_scheme( $url, $old_schemes[ $i ] ), $old_replace_values ) ) {
+						$old_replace_values[] = ai1wm_url_scheme( $url, $old_schemes[ $i ] );
+						$new_replace_values[] = ai1wm_url_scheme( site_url(), $new_schemes[ $i ] );
 					}
 
-					// Add domain and path with single quote
-					if ( ! in_array( sprintf( "='%s%s", $old_domain, untrailingslashit( $old_path ) ), $old_replace_values ) ) {
-						$old_replace_values[] = sprintf( "='%s%s", $old_domain, untrailingslashit( $old_path ) );
-						$new_replace_values[] = sprintf( "='%s%s", $new_domain, untrailingslashit( $new_path ) );
+					// Add URL encoded Site URL
+					if ( ! in_array( urlencode( ai1wm_url_scheme( $url, $old_schemes[ $i ] ) ), $old_replace_values ) ) {
+						$old_replace_values[] = urlencode( ai1wm_url_scheme( $url, $old_schemes[ $i ] ) );
+						$new_replace_values[] = urlencode( ai1wm_url_scheme( site_url(), $new_schemes[ $i ] ) );
 					}
 
-					// Add domain and path with double quote
-					if ( ! in_array( sprintf( '="%s%s', $old_domain, untrailingslashit( $old_path ) ), $old_replace_values ) ) {
-						$old_replace_values[] = sprintf( '="%s%s', $old_domain, untrailingslashit( $old_path ) );
-						$new_replace_values[] = sprintf( '="%s%s', $new_domain, untrailingslashit( $new_path ) );
+					// Add URL raw encoded Site URL
+					if ( ! in_array( rawurlencode( ai1wm_url_scheme( $url, $old_schemes[ $i ] ) ), $old_replace_values ) ) {
+						$old_replace_values[] = rawurlencode( ai1wm_url_scheme( $url, $old_schemes[ $i ] ) );
+						$new_replace_values[] = rawurlencode( ai1wm_url_scheme( site_url(), $new_schemes[ $i ] ) );
 					}
 
-					// Set Site URL scheme
-					$old_schemes = array( 'http', 'https', '' );
-					$new_schemes = array( $new_scheme, $new_scheme, '' );
-
-					// Replace Site URL scheme
-					for ( $i = 0; $i < count( $old_schemes ); $i++ ) {
-
-						// Add plain Site URL
-						if ( ! in_array( ai1wm_url_scheme( $url, $old_schemes[ $i ] ), $old_replace_values ) ) {
-							$old_replace_values[] = ai1wm_url_scheme( $url, $old_schemes[ $i ] );
-							$new_replace_values[] = ai1wm_url_scheme( site_url(), $new_schemes[ $i ] );
-						}
-
-						// Add URL encoded Site URL
-						if ( ! in_array( urlencode( ai1wm_url_scheme( $url, $old_schemes[ $i ] ) ), $old_replace_values ) ) {
-							$old_replace_values[] = urlencode( ai1wm_url_scheme( $url, $old_schemes[ $i ] ) );
-							$new_replace_values[] = urlencode( ai1wm_url_scheme( site_url(), $new_schemes[ $i ] ) );
-						}
-
-						// Add URL raw encoded Site URL
-						if ( ! in_array( rawurlencode( ai1wm_url_scheme( $url, $old_schemes[ $i ] ) ), $old_replace_values ) ) {
-							$old_replace_values[] = rawurlencode( ai1wm_url_scheme( $url, $old_schemes[ $i ] ) );
-							$new_replace_values[] = rawurlencode( ai1wm_url_scheme( site_url(), $new_schemes[ $i ] ) );
-						}
-
-						// Add JSON escaped Site URL
-						if ( ! in_array( addcslashes( ai1wm_url_scheme( $url, $old_schemes[ $i ] ), '/' ), $old_replace_values ) ) {
-							$old_replace_values[] = addcslashes( ai1wm_url_scheme( $url, $old_schemes[ $i ] ), '/' );
-							$new_replace_values[] = addcslashes( ai1wm_url_scheme( site_url(), $new_schemes[ $i ] ), '/' );
-						}
+					// Add JSON escaped Site URL
+					if ( ! in_array( addcslashes( ai1wm_url_scheme( $url, $old_schemes[ $i ] ), '/' ), $old_replace_values ) ) {
+						$old_replace_values[] = addcslashes( ai1wm_url_scheme( $url, $old_schemes[ $i ] ), '/' );
+						$new_replace_values[] = addcslashes( ai1wm_url_scheme( site_url(), $new_schemes[ $i ] ), '/' );
 					}
+				}
 
-					// Add email
-					if ( ! isset( $config['NoEmailReplace'] ) ) {
-						if ( ! in_array( sprintf( '@%s', $old_domain ), $old_replace_values ) ) {
-							$old_replace_values[] = sprintf( '@%s', $old_domain );
-							$new_replace_values[] = sprintf( '@%s', $new_domain );
-						}
+				// Add email
+				if ( ! isset( $config['NoEmailReplace'] ) ) {
+					if ( ! in_array( sprintf( '@%s', $old_domain ), $old_replace_values ) ) {
+						$old_replace_values[] = sprintf( '@%s', $old_domain );
+						$new_replace_values[] = sprintf( '@%s', $new_domain );
 					}
 				}
 			}
@@ -544,86 +532,82 @@ class Ai1wm_Import_Database {
 		// Get Home URL
 		foreach ( $home_urls as $home_url ) {
 
-			// Replace Home URL
-			if ( $home_url !== home_url() ) {
+			// Get www URL
+			if ( stripos( $home_url, '//www.' ) !== false ) {
+				$home_url_www_inversion = str_ireplace( '//www.', '//', $home_url );
+			} else {
+				$home_url_www_inversion = str_ireplace( '//', '//www.', $home_url );
+			}
 
-				// Get www URL
-				if ( stripos( $home_url, '//www.' ) !== false ) {
-					$home_url_www_inversion = str_ireplace( '//www.', '//', $home_url );
-				} else {
-					$home_url_www_inversion = str_ireplace( '//', '//www.', $home_url );
+			// Replace Home URL
+			foreach ( array( $home_url, $home_url_www_inversion ) as $url ) {
+
+				// Get domain
+				$old_domain = parse_url( $url, PHP_URL_HOST );
+				$new_domain = parse_url( home_url(), PHP_URL_HOST );
+
+				// Get path
+				$old_path = parse_url( $url, PHP_URL_PATH );
+				$new_path = parse_url( home_url(), PHP_URL_PATH );
+
+				// Get scheme
+				$new_scheme = parse_url( home_url(), PHP_URL_SCHEME );
+
+				// Add domain and path
+				if ( ! in_array( sprintf( "'%s','%s'", $old_domain, trailingslashit( $old_path ) ), $old_replace_raw_values ) ) {
+					$old_replace_raw_values[] = sprintf( "'%s','%s'", $old_domain, trailingslashit( $old_path ) );
+					$new_replace_raw_values[] = sprintf( "'%s','%s'", $new_domain, trailingslashit( $new_path ) );
 				}
 
-				// Replace Home URL
-				foreach ( array( $home_url, $home_url_www_inversion ) as $url ) {
+				// Add domain and path with single quote
+				if ( ! in_array( sprintf( "='%s%s", $old_domain, untrailingslashit( $old_path ) ), $old_replace_values ) ) {
+					$old_replace_values[] = sprintf( "='%s%s", $old_domain, untrailingslashit( $old_path ) );
+					$new_replace_values[] = sprintf( "='%s%s", $new_domain, untrailingslashit( $new_path ) );
+				}
 
-					// Get domain
-					$old_domain = parse_url( $url, PHP_URL_HOST );
-					$new_domain = parse_url( home_url(), PHP_URL_HOST );
+				// Add domain and path with double quote
+				if ( ! in_array( sprintf( '="%s%s', $old_domain, untrailingslashit( $old_path ) ), $old_replace_values ) ) {
+					$old_replace_values[] = sprintf( '="%s%s', $old_domain, untrailingslashit( $old_path ) );
+					$new_replace_values[] = sprintf( '="%s%s', $new_domain, untrailingslashit( $new_path ) );
+				}
 
-					// Get path
-					$old_path = parse_url( $url, PHP_URL_PATH );
-					$new_path = parse_url( home_url(), PHP_URL_PATH );
+				// Add Home URL scheme
+				$old_schemes = array( 'http', 'https', '' );
+				$new_schemes = array( $new_scheme, $new_scheme, '' );
 
-					// Get scheme
-					$new_scheme = parse_url( home_url(), PHP_URL_SCHEME );
+				// Replace Home URL scheme
+				for ( $i = 0; $i < count( $old_schemes ); $i++ ) {
 
-					// Add domain and path
-					if ( ! in_array( sprintf( "'%s','%s'", $old_domain, trailingslashit( $old_path ) ), $old_replace_raw_values ) ) {
-						$old_replace_raw_values[] = sprintf( "'%s','%s'", $old_domain, trailingslashit( $old_path ) );
-						$new_replace_raw_values[] = sprintf( "'%s','%s'", $new_domain, trailingslashit( $new_path ) );
+					// Add plain Home URL
+					if ( ! in_array( ai1wm_url_scheme( $url, $old_schemes[ $i ] ), $old_replace_values ) ) {
+						$old_replace_values[] = ai1wm_url_scheme( $url, $old_schemes[ $i ] );
+						$new_replace_values[] = ai1wm_url_scheme( home_url(), $new_schemes[ $i ] );
 					}
 
-					// Add domain and path with single quote
-					if ( ! in_array( sprintf( "='%s%s", $old_domain, untrailingslashit( $old_path ) ), $old_replace_values ) ) {
-						$old_replace_values[] = sprintf( "='%s%s", $old_domain, untrailingslashit( $old_path ) );
-						$new_replace_values[] = sprintf( "='%s%s", $new_domain, untrailingslashit( $new_path ) );
+					// Add URL encoded Home URL
+					if ( ! in_array( urlencode( ai1wm_url_scheme( $url, $old_schemes[ $i ] ) ), $old_replace_values ) ) {
+						$old_replace_values[] = urlencode( ai1wm_url_scheme( $url, $old_schemes[ $i ] ) );
+						$new_replace_values[] = urlencode( ai1wm_url_scheme( home_url(), $new_schemes[ $i ] ) );
 					}
 
-					// Add domain and path with double quote
-					if ( ! in_array( sprintf( '="%s%s', $old_domain, untrailingslashit( $old_path ) ), $old_replace_values ) ) {
-						$old_replace_values[] = sprintf( '="%s%s', $old_domain, untrailingslashit( $old_path ) );
-						$new_replace_values[] = sprintf( '="%s%s', $new_domain, untrailingslashit( $new_path ) );
+					// Add URL raw encoded Home URL
+					if ( ! in_array( rawurlencode( ai1wm_url_scheme( $url, $old_schemes[ $i ] ) ), $old_replace_values ) ) {
+						$old_replace_values[] = rawurlencode( ai1wm_url_scheme( $url, $old_schemes[ $i ] ) );
+						$new_replace_values[] = rawurlencode( ai1wm_url_scheme( home_url(), $new_schemes[ $i ] ) );
 					}
 
-					// Add Home URL scheme
-					$old_schemes = array( 'http', 'https', '' );
-					$new_schemes = array( $new_scheme, $new_scheme, '' );
-
-					// Replace Home URL scheme
-					for ( $i = 0; $i < count( $old_schemes ); $i++ ) {
-
-						// Add plain Home URL
-						if ( ! in_array( ai1wm_url_scheme( $url, $old_schemes[ $i ] ), $old_replace_values ) ) {
-							$old_replace_values[] = ai1wm_url_scheme( $url, $old_schemes[ $i ] );
-							$new_replace_values[] = ai1wm_url_scheme( home_url(), $new_schemes[ $i ] );
-						}
-
-						// Add URL encoded Home URL
-						if ( ! in_array( urlencode( ai1wm_url_scheme( $url, $old_schemes[ $i ] ) ), $old_replace_values ) ) {
-							$old_replace_values[] = urlencode( ai1wm_url_scheme( $url, $old_schemes[ $i ] ) );
-							$new_replace_values[] = urlencode( ai1wm_url_scheme( home_url(), $new_schemes[ $i ] ) );
-						}
-
-						// Add URL raw encoded Home URL
-						if ( ! in_array( rawurlencode( ai1wm_url_scheme( $url, $old_schemes[ $i ] ) ), $old_replace_values ) ) {
-							$old_replace_values[] = rawurlencode( ai1wm_url_scheme( $url, $old_schemes[ $i ] ) );
-							$new_replace_values[] = rawurlencode( ai1wm_url_scheme( home_url(), $new_schemes[ $i ] ) );
-						}
-
-						// Add JSON escaped Home URL
-						if ( ! in_array( addcslashes( ai1wm_url_scheme( $url, $old_schemes[ $i ] ), '/' ), $old_replace_values ) ) {
-							$old_replace_values[] = addcslashes( ai1wm_url_scheme( $url, $old_schemes[ $i ] ), '/' );
-							$new_replace_values[] = addcslashes( ai1wm_url_scheme( home_url(), $new_schemes[ $i ] ), '/' );
-						}
+					// Add JSON escaped Home URL
+					if ( ! in_array( addcslashes( ai1wm_url_scheme( $url, $old_schemes[ $i ] ), '/' ), $old_replace_values ) ) {
+						$old_replace_values[] = addcslashes( ai1wm_url_scheme( $url, $old_schemes[ $i ] ), '/' );
+						$new_replace_values[] = addcslashes( ai1wm_url_scheme( home_url(), $new_schemes[ $i ] ), '/' );
 					}
+				}
 
-					// Add email
-					if ( ! isset( $config['NoEmailReplace'] ) ) {
-						if ( ! in_array( sprintf( '@%s', $old_domain ), $old_replace_values ) ) {
-							$old_replace_values[] = sprintf( '@%s', $old_domain );
-							$new_replace_values[] = sprintf( '@%s', $new_domain );
-						}
+				// Add email
+				if ( ! isset( $config['NoEmailReplace'] ) ) {
+					if ( ! in_array( sprintf( '@%s', $old_domain ), $old_replace_values ) ) {
+						$old_replace_values[] = sprintf( '@%s', $old_domain );
+						$new_replace_values[] = sprintf( '@%s', $new_domain );
 					}
 				}
 			}
@@ -632,32 +616,28 @@ class Ai1wm_Import_Database {
 		// Get WordPress Content Dir
 		if ( isset( $config['WordPress']['Content'] ) && ( $content_dir = $config['WordPress']['Content'] ) ) {
 
-			// Replace WordPress Content Dir
-			if ( $content_dir !== WP_CONTENT_DIR ) {
+			// Add plain WordPress Content
+			if ( ! in_array( $content_dir, $old_replace_values ) ) {
+				$old_replace_values[] = $content_dir;
+				$new_replace_values[] = WP_CONTENT_DIR;
+			}
 
-				// Add plain WordPress Content
-				if ( ! in_array( $content_dir, $old_replace_values ) ) {
-					$old_replace_values[] = $content_dir;
-					$new_replace_values[] = WP_CONTENT_DIR;
-				}
+			// Add URL encoded WordPress Content
+			if ( ! in_array( urlencode( $content_dir ), $old_replace_values ) ) {
+				$old_replace_values[] = urlencode( $content_dir );
+				$new_replace_values[] = urlencode( WP_CONTENT_DIR );
+			}
 
-				// Add URL encoded WordPress Content
-				if ( ! in_array( urlencode( $content_dir ), $old_replace_values ) ) {
-					$old_replace_values[] = urlencode( $content_dir );
-					$new_replace_values[] = urlencode( WP_CONTENT_DIR );
-				}
+			// Add URL raw encoded WordPress Content
+			if ( ! in_array( rawurlencode( $content_dir ), $old_replace_values ) ) {
+				$old_replace_values[] = rawurlencode( $content_dir );
+				$new_replace_values[] = rawurlencode( WP_CONTENT_DIR );
+			}
 
-				// Add URL raw encoded WordPress Content
-				if ( ! in_array( rawurlencode( $content_dir ), $old_replace_values ) ) {
-					$old_replace_values[] = rawurlencode( $content_dir );
-					$new_replace_values[] = rawurlencode( WP_CONTENT_DIR );
-				}
-
-				// Add JSON escaped WordPress Content
-				if ( ! in_array( addcslashes( $content_dir, '/' ), $old_replace_values ) ) {
-					$old_replace_values[] = addcslashes( $content_dir, '/' );
-					$new_replace_values[] = addcslashes( WP_CONTENT_DIR, '/' );
-				}
+			// Add JSON escaped WordPress Content
+			if ( ! in_array( addcslashes( $content_dir, '/' ), $old_replace_values ) ) {
+				$old_replace_values[] = addcslashes( $content_dir, '/' );
+				$new_replace_values[] = addcslashes( WP_CONTENT_DIR, '/' );
 			}
 		}
 

@@ -629,16 +629,16 @@ class Query extends Compat {
 	/**
 	 * Checks for front page by input ID.
 	 *
-	 * Doesn't always return true when the ID is 0, although the home page might be.
+	 * Doesn't always return true when the ID is 0, although the homepage might be.
 	 * This is because it checks for the query, to prevent conflicts.
 	 * @see $this->is_real_front_page_by_id().
 	 *
 	 * @since 2.9.0
-	 * @since 2.9.3 Now tests for archive and 404 before testing home page as blog.
+	 * @since 2.9.3 Now tests for archive and 404 before testing homepage as blog.
 	 * @since 3.2.2: Removed SEO settings page check. This now returns false on that page.
 	 *
 	 * @param int The page ID, required. Can be 0.
-	 * @return bool True if ID if for the home page.
+	 * @return bool True if ID if for the homepage.
 	 */
 	public function is_front_page_by_id( $id ) {
 
@@ -681,7 +681,7 @@ class Query extends Compat {
 	}
 
 	/**
-	 * Detects home page.
+	 * Determines whether the query is for the blog page.
 	 *
 	 * @since 2.6.0
 	 * @staticvar bool $cache
@@ -1123,6 +1123,8 @@ class Query extends Compat {
 	 * Fetches global $page through Query Var to prevent conflicts.
 	 *
 	 * @since 2.6.0
+	 * @since 3.2.4 1. Added overflow protection.
+	 *              2. Now always returns 1 on the admin screens.
 	 *
 	 * @return int (R>0) $page Always a positive number.
 	 */
@@ -1131,11 +1133,20 @@ class Query extends Compat {
 		if ( null !== $cache = $this->get_query_cache( __METHOD__ ) )
 			return $cache;
 
-		$page = $this->is_multipage() ? \get_query_var( 'page' ) : 1;
+		if ( $this->is_multipage() ) {
+			$page = (int) \get_query_var( 'page' );
+
+			if ( $page > $this->numpages() ) {
+				// On overflow, WP returns the first page.
+				$page = 1;
+			}
+		} else {
+			$page = 1;
+		}
 
 		$this->set_query_cache(
 			__METHOD__,
-			$page = $page ? (int) $page : 1
+			$page = $page ?: 1
 		);
 
 		return $page;
@@ -1146,6 +1157,8 @@ class Query extends Compat {
 	 * Fetches global $paged through Query var to prevent conflicts.
 	 *
 	 * @since 2.6.0
+	 * @since 3.2.4 1. Added overflow protection.
+	 *              2. Now always returns 1 on the admin screens.
 	 *
 	 * @return int (R>0) $paged Always a positive number.
 	 */
@@ -1154,11 +1167,21 @@ class Query extends Compat {
 		if ( null !== $cache = $this->get_query_cache( __METHOD__ ) )
 			return $cache;
 
-		$paged = $this->is_multipage() ? \get_query_var( 'paged' ) : 1;
+		if ( $this->is_multipage() ) {
+			$paged = (int) \get_query_var( 'paged' );
+			$max   = $this->numpages();
+
+			if ( $paged > $max ) {
+				// On overflow, WP returns the last page.
+				$paged = $max;
+			}
+		} else {
+			$paged = 1;
+		}
 
 		$this->set_query_cache(
 			__METHOD__,
-			$paged = $paged ? (int) $paged : 1
+			$paged = $paged ?: 1
 		);
 
 		return $paged;
@@ -1171,6 +1194,7 @@ class Query extends Compat {
 	 * we need is set up in the loop, not in the header; where TSF is active.
 	 *
 	 * @since 3.1.0
+	 * @since 3.2.4 Now only returns "1" in the admin.
 	 * @global \WP_Query $wp_query
 	 *
 	 * @return int
@@ -1179,6 +1203,8 @@ class Query extends Compat {
 
 		if ( null !== $cache = $this->get_query_cache( __METHOD__ ) )
 			return $cache;
+
+		if ( $this->is_admin() ) return 1;
 
 		global $wp_query;
 
@@ -1230,6 +1256,7 @@ class Query extends Compat {
 	 * @since 2.7.0
 	 * @since 3.1.0 1. Now also works on archives.
 	 *              2. Now is public.
+	 * @since 3.2.4 Now always returns false on the admin pages.
 	 *
 	 * @return bool True if multipage.
 	 */

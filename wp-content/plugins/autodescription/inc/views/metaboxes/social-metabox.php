@@ -74,14 +74,14 @@ switch ( $instance ) :
 			$this->make_checkbox(
 				'og_tags',
 				__( 'Output Open Graph meta tags?', 'autodescription' ),
-				__( 'Facebook, Twitter, Pinterest and many other social sites make use of these tags.', 'autodescription' ),
+				__( 'Facebook, Twitter, Pinterest and many other social sites make use of these meta tags.', 'autodescription' ),
 				true
 			),
 			true
 		);
 
 		if ( $this->detect_og_plugin() )
-			$this->attention_description( __( 'Note: Another Open Graph plugin has been detected. These tags might conflict.', 'autodescription' ) );
+			$this->attention_description( __( 'Note: Another Open Graph plugin has been detected. These meta tags might conflict.', 'autodescription' ) );
 
 		//* Echo Facebook Tags checkbox.
 		$this->wrap_fields(
@@ -89,7 +89,7 @@ switch ( $instance ) :
 				'facebook_tags',
 				__( 'Output Facebook meta tags?', 'autodescription' ),
 				/* translators: %s = Facebook */
-				sprintf( __( 'Output various tags targeted at %s.', 'autodescription' ), 'Facebook' ),
+				sprintf( __( 'Output various meta tags targeted at %s.', 'autodescription' ), 'Facebook' ),
 				true
 			),
 			true
@@ -101,14 +101,14 @@ switch ( $instance ) :
 				'twitter_tags',
 				__( 'Output Twitter meta tags?', 'autodescription' ),
 				/* translators: %s = Facebook */
-				sprintf( __( 'Output various tags targeted at %s.', 'autodescription' ), 'Twitter' ),
+				sprintf( __( 'Output various meta tags targeted at %s.', 'autodescription' ), 'Twitter' ),
 				true
 			),
 			true
 		);
 
 		if ( $this->detect_twitter_card_plugin() )
-			$this->attention_description( __( 'Note: Another Twitter Card plugin has been detected. These tags might conflict.', 'autodescription' ) );
+			$this->attention_description( __( 'Note: Another Twitter Card plugin has been detected. These meta tags might conflict.', 'autodescription' ) );
 
 		?>
 		<hr>
@@ -311,26 +311,35 @@ switch ( $instance ) :
 
 	case 'the_seo_framework_social_metabox_postdates':
 		$posts_i18n = esc_html__( 'Posts', 'autodescription' );
-		$home_i18n = esc_html__( 'Home Page', 'autodescription' );
 
 		?>
 		<h4><?php esc_html_e( 'Post Date Settings', 'autodescription' ); ?></h4>
 		<?php
-		$this->description( __( 'Some social sites output the published date and modified date in the sharing snippet.', 'autodescription' ) );
+		$this->description( __( 'Some social sites output the publishing and modified date in the sharing snippet.', 'autodescription' ) );
 		?>
 		<hr>
 		<?php
 
-		/* translators: 1: Option, 2: Post Type */
-		$post_publish_time_label = sprintf( esc_html__( 'Add %1$s to %2$s?', 'autodescription' ), $this->code_wrap( 'article:published_time' ), $posts_i18n );
-		$post_publish_time_checkbox = $this->make_checkbox( 'post_publish_time', $post_publish_time_label, '', false );
+		$_options = [
+			'post_publish_time' => 'article:published_time',
+			'post_modify_time'  => 'article:modified_time',
+		];
 
-		/* translators: 1: Option, 2: Post Type */
-		$post_modify_time_label = sprintf( esc_html__( 'Add %1$s to %2$s?', 'autodescription' ), $this->code_wrap( 'article:modified_time' ), $posts_i18n );
-		$post_modify_time_checkbox = $this->make_checkbox( 'post_modify_time', $post_modify_time_label, '', false );
+		/* translators: %s = code example */
+		$label  = esc_html__( 'Add %s to posts?', 'autodescription' );
+		$output = '';
+
+		foreach ( $_options as $_option => $_example ) {
+			$output .= $this->make_checkbox(
+				$_option,
+				sprintf( $label, $this->code_wrap( $_example ) ),
+				'',
+				false
+			);
+		}
 
 		//* Echo checkboxes.
-		$this->wrap_fields( $post_publish_time_checkbox . $post_modify_time_checkbox, true );
+		$this->wrap_fields( $output, true );
 		break;
 
 	default:

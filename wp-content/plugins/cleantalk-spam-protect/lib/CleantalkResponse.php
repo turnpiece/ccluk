@@ -130,15 +130,13 @@ class CleantalkResponse {
                 $this->{$param} = $value;
             }
         } else {
-            $this->errno = $obj->errno;
-            $this->errstr = $obj->errstr;
-
-			$this->errstr = preg_replace("/.+(\*\*\*.+\*\*\*).+/", "$1", $this->errstr);
+            $this->errno = (isset($obj->errno)) ? $obj->errno : 0;
+            $this->errstr = (isset($obj->errstr)) ? preg_replace("/.+(\*\*\*.+\*\*\*).+/", "$1", $obj->errstr) : null;
 
             $this->stop_words = isset($obj->stop_words) ? utf8_decode($obj->stop_words) : null;
             $this->comment = isset($obj->comment) ? utf8_decode($obj->comment) : null;
             $this->blacklisted = (isset($obj->blacklisted)) ? $obj->blacklisted : null;
-            $this->allow = (isset($obj->allow)) ? $obj->allow : 0;
+            $this->allow = (isset($obj->allow)) ? $obj->allow : 1;
             $this->id = (isset($obj->id)) ? $obj->id : null;
             $this->fast_submit = (isset($obj->fast_submit)) ? $obj->fast_submit : 0;
             $this->spam = (isset($obj->spam)) ? $obj->spam : 0;

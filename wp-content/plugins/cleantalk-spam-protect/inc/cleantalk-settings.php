@@ -210,6 +210,13 @@ function apbct_settings__add_page() {
 				'set_cookies' => array(
 					'title'       => __("Set cookies", 'cleantalk'),
 					'description' => __('Turn this option off to deny plugin generates any cookies on website front-end. This option is helpful if you use Varnish. But most of contact forms will not be protected if the option is turned off! <b>Warning: We strongly recommend you to enable this otherwise it could cause false positives spam detection.</b>', 'cleantalk'),
+					'childrens'   => array('set_cookies__sessions'),
+				),
+				'set_cookies__sessions' => array(
+					'title'       => __('Use alternative mechanism for cookies.', 'cleantalk'),
+					'description' => __('Doesn\'t use cookie or PHP sessions. Collect data for all types of bots.', 'cleantalk'),
+					'parent'      => 'set_cookies',
+					'class'       => 'apbct_settings-field_wrapper--sub',
 				),
 				'ssl_on' => array(
 					'title'       => __("Use SSL", 'cleantalk'),
@@ -297,7 +304,7 @@ function apbct_settings__add_page() {
 				'store_urls__sessions' => array(
 					'type'        => 'checkbox',
 					'title'       => __('Use cookies less sessions', 'cleantalk'),
-					'description' => __('Doesn\'t use cookie or PHP sessions. Collect data for all type of bots.', 'cleantalk'),
+					'description' => __('Doesn\'t use cookie or PHP sessions. Collect data for all types of bots.', 'cleantalk'),
 					'parent'      => 'store_urls',
 					'class'       => 'apbct_settings-field_wrapper--sub',
 				),
@@ -763,19 +770,37 @@ function apbct_settings__field__connection_reports() {
 			if ($apbct->connection_reports['negative'] == 0){
 				_e('There are no failed connections to server.', 'cleantalk');
 			}else{
-				echo "<table id='negative_reports_table' style='display: none;'>
+				echo "<table id='negative_reports_table''>
 					<tr>
 						<td>#</td>
 						<td><b>Date</b></td>
 						<td><b>Page URL</b></td>
 						<td><b>Report</b></td>
+						<td><b>Server IP</b></td>
 					</tr>";
 				foreach($apbct->connection_reports['negative_report'] as $key => $report){
-					echo "<tr><td>".($key+1).".</td><td>".$report['date']."</td><td>".$report['page_url']."</td><td>".$report['lib_report']."</td></tr>";
+					echo '<tr>'
+						. '<td>'.($key+1).'.</td>'
+						. '<td>'.$report['date'].'</td>'
+						. '<td>'.$report['page_url'].'</td>'
+						. '<td>'.$report['lib_report'].'</td>'
+						. '<td>'.$report['work_url'].'</td>'
+					. '</tr>';
 				}
 				echo "</table>";
-				echo '<br/>'
-				.'<button name="submit" class="cleantalk_manual_link" value="ct_send_connection_report">'.__('Send report', 'cleantalk').'</button>';
+				echo '<br/>';
+					echo '<button'
+						. ' name="submit"'
+						. ' class="cleantalk_manual_link"'
+						. ' value="ct_send_connection_report"'
+						. (!$apbct->settings['send_connection_reports'] ? ' disabled="disabled"' : '')
+						. '>'
+							.__('Send report', 'cleantalk')
+						.'</button>';
+				if (!$apbct->settings['send_connection_reports']){
+					echo '<br><br>';
+					_e('Please, enable "Send connection reports" setting to be able to send reports', 'cleantalk');
+				}
 			}
 
 		}
@@ -922,19 +947,26 @@ function apbct_settings__validate($settings) {
 	// Auto getting key
 	if (isset($_POST['submit']) && $_POST['submit'] == 'get_key_auto'){
 		
-		$website = parse_url(get_option('siteurl'), PHP_URL_HOST).parse_url(get_option('siteurl'), PHP_URL_PATH);
-		$platform = 'wordpress';
-		$timezone = isset($_POST['ct_admin_timezone']) ? $_POST['ct_admin_timezone'] : null;
-		$language = !empty($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? $_SERVER['HTTP_ACCEPT_LANGUAGE'] : null;
-		$ip       = CleantalkHelper::ip_get(array('real'), false);
+		$website        = parse_url(get_option('siteurl'), PHP_URL_HOST).parse_url(get_option('siteurl'), PHP_URL_PATH);
+		$platform       = 'wordpress';
+		$user_ip             = CleantalkHelper::ip__get(array('real'), false);
+		$timezone       = filter_input(INPUT_POST, 'ct_admin_timezone');
+		$language       = filter_input(INPUT_SERVER, 'HTTP_ACCEPT_LANGUAGE');
+		$wpms           = APBCT_WPMS && defined('SUBDOMAIN_INSTALL') && !SUBDOMAIN_INSTALL ? true : false;
+		$white_label    = $apbct->white_label                                   ? 1                                : 0;
+		$hoster_api_key = $apbct->white_label&& defined('APBCT_HOSTER_API_KEY') ? APBCT_HOSTER_API_KEY             : '';
 		
-		if(!$apbct->white_label){
-			$result = CleantalkAPI::method__get_api_key(ct_get_admin_email(), $website, $platform, $timezone, $language, $ip);
-		}else{
-			$white_label    = 1;
-			$hoster_api_key = defined('APBCT_HOSTER_API_KEY') ? APBCT_HOSTER_API_KEY : '';
-			$result = CleantalkAPI::method__get_api_key(ct_get_admin_email(), $website, $platform, $timezone, $language, $ip, $white_label, $hoster_api_key);
-		}
+		$result = CleantalkAPI::method__get_api_key(
+			ct_get_admin_email(),
+			$website,
+			$platform,
+			$timezone,
+			$language,
+			$user_ip,
+			$wpms,
+			$white_label,
+			$hoster_api_key
+		);
 		
 		if(empty($result['error'])){
 			

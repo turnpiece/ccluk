@@ -112,7 +112,9 @@ class Ai1wm_Import_Controller {
 					// Do request
 					if ( $completed === false || ( $next = next( $filters ) ) && ( $params['priority'] = key( $filters ) ) ) {
 						if ( defined( 'WP_CLI' ) ) {
-							continue;
+							if ( ! defined( 'DOING_CRON' ) ) {
+								continue;
+							}
 						}
 
 						if ( isset( $params['ai1wm_manual_import'] ) || isset( $params['ai1wm_manual_restore'] ) ) {

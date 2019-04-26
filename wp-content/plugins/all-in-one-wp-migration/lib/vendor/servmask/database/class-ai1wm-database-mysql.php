@@ -97,16 +97,6 @@ class Ai1wm_Database_Mysql extends Ai1wm_Database {
 	}
 
 	/**
-	 * Return the field from MySQL query as row
-	 *
-	 * @param  resource $result MySQL resource
-	 * @return object
-	 */
-	public function fetch_field( $result ) {
-		return mysql_fetch_field( $result );
-	}
-
-	/**
 	 * Return the number for rows from MySQL results
 	 *
 	 * @param  resource $result MySQL resource

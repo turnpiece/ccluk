@@ -77,27 +77,16 @@ class SWP_Utility {
 	 */
 	 public static function get_meta( $id, $key ) {
 		 $value = get_post_meta( $id, $key, true );
-		 /*
-		   WordPress offers functions that might help us filter meta values.
-		   Offline right now but I think they can work something like this
-		   1. register_post_meta()
-			 - In the addon, we register the meta key`
-			 - In SWP_Utility::get_meta, check if the key is registered.
-			 - If no, imeediately return false
-			 - the last paramter is a meta validation callback. We can let the callback check to see if the addon is registered.
 
-		   2. meta_key_exists()
-			 - (maybe?) pairs ith register_post_meta, and returns false if not registered.
-		   */
-
-		// Sometimes a boolean value is stored in the meta as a string.
-		if ( 'false' === $value ) {
-			 return false;
+		 // Sometimes a boolean value is stored in the meta as a string.
+		 if ( 'false' === $value ) {
+			  return false;
 		 }
 
-		if ( 'true' === $value ) {
-			return true;
-		}
+		 if ( 'true' === $value ) {
+			 return true;
+		 }
+		 // echo "<br>".__METHOD__, var_dump($id), var_dump($key), var_dump($value);
 
 		 return $value;
 	 }
@@ -142,16 +131,18 @@ class SWP_Utility {
 	 * @return bool Whether or not the options were updated in the database.
 	 */
 	public static function store_settings() {
+
+
 		if ( !check_ajax_referer( 'swp_plugin_options_save', 'security', false ) ) {
-			wp_send_json_error( esc_html__( 'Security failed.', 'social-warfare' ) );
-			die;
+			wp_send_json_error( esc_html__( 'Security failed 1.', 'social-warfare' ) );
+			wp_die();
 		}
 
 		$data = wp_unslash( $_POST );
 
 		if ( empty( $data['settings'] ) ) {
 			wp_send_json_error( esc_html__( 'No settings to save.', 'social-warfare' ) );
-			die;
+			wp_die();
 		}
 
 		$options = get_option( 'social_warfare_settings', array() );
@@ -173,6 +164,24 @@ class SWP_Utility {
 		echo json_encode( update_option( 'social_warfare_settings', $new_settings ) );
 
 		wp_die();
+	}
+
+	/**
+	 * Handle the options save request inside of admin-ajax.php
+	 *
+	 * @since  2.x.x | Unknown | Created.
+	 * @since  3.5.3 | 21 MAR 2019 | Created the method.
+	 *
+	 * @return bool True if it is good, else it dies.
+	 *
+	 */
+	public static function auth() {
+		if ( !current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( esc_html__( 'Security failed 2.', 'social-warfare' ) );
+			wp_die();
+		}
+
+		return true;
 	}
 
 
@@ -476,7 +485,6 @@ class SWP_Utility {
 			if ( ( strpos( $meta_key, 'swp_' ) === 0 ||
 				 ( strpos( $meta_key, '_shares' ) > 0 ) &&
 				   strpos( $meta_key, '_') === 0 ) ) {
-				//* Everything comes in as an array, pull out the first value.
 				delete_post_meta( $post_id, $meta_key );
 			}
 		}

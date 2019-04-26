@@ -205,3 +205,20 @@ function apbct_update_to_5_116_2(){
 		ENGINE = MYISAM;'
 	);
 }
+
+function apbct_update_to_5_118_0(){
+	global $wpdb;
+	$wpdb->query(
+		'DELETE
+			FROM `'. APBCT_TBL_SESSIONS .'`
+			WHERE last_update < NOW() - INTERVAL '. APBCT_SEESION__LIVE_TIME .' SECOND;'
+	);
+	delete_option('cleantalk_server');
+}
+
+function apbct_update_to_5_118_2(){
+	global $apbct;
+	$apbct->data['connection_reports'] = $apbct->def_data['connection_reports'];
+	$apbct->data['connection_reports']['since'] = date('d M');
+	$apbct->saveData();
+}

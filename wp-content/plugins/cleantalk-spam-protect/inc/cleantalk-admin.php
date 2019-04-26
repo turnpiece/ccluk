@@ -241,6 +241,11 @@ function apbct_admin__enqueue_scripts($hook){
 		// Preparing widget data
 		// Parsing brief data 'spam_stat' {"yyyy-mm-dd": spam_count, "yyyy-mm-dd": spam_count} to [["yyyy-mm-dd", "spam_count"], ["yyyy-mm-dd", "spam_count"]]
 		$to_chart = array();
+		
+		// Crunch. Response contains error.
+		if(!empty($apbct->data['brief_data']['error']))
+			$apbct->data['brief_data'] = array_merge($apbct->data['brief_data'], $apbct->def_data['brief_data']);
+		
 		foreach( $apbct->data['brief_data']['spam_stat'] as $key => $value ){
 			$to_chart[] = array( $key, $value );
 		} unset( $key, $value );

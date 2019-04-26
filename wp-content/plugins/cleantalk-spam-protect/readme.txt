@@ -2,8 +2,8 @@
 Contributors: safronik 
 Tags: spam, antispam, protection, comments, firewall 
 Requires at least: 3.0
-Tested up to: 5.1
-Stable tag: 5.117.1
+Tested up to: 5.2
+Stable tag: 5.118.2
 License: GPLv2
 
 Spam protection, antispam, all-in-one, premium plugin. No spam comments & users, no spam contact form & WooCommerce anti-spam.
@@ -55,7 +55,7 @@ Native spam protection for WordPress, JetPack comments and any other comment plu
 Filters spam bots on registration forms of WordPress, BuddyPress, bbPress, S2Member, WooCommerce, Profile builder, Login with AJAX and any other registration plugins.
 
 = Protection from contact form spam =
-The plugin is tested and ready to protect from spam emails via Formidable forms, Contact form 7, JetPack Contact form, Fast Secure Contact form, Ninja forms, Landing pages, Gravity forms, Contact Form by BestWebSoft, Simple Contact Form Plugin - PirateForms, Visual Form Builder, Form, Contact Form by WebDorado, Contact Form Email, MW WP Form, Contact Form by Jeff Bulllins, Easy Contact, Contact Us Form, Grunion Contact Form, WCP Contact Form, Easy WordPress Contact Form Plugin, WPForms Lite, Custom Contact, Forms, Amo Forms, Caldera Forms, Visual Form Builder, Contact Form Clean and Simple, Divi by Elegant Themes and any other themes or custom contact forms, amoForms, Custom Contact Form, Ultimate Form Builder, Contact Bank - Contact Forms Builder, Forms easily built with Smart Forms, Quick Contact Form, Usernoise contact form, cformsII - contact form, Contact Form by Web-Settler, HubSpot Marketing Free.
+The plugin is tested and ready to protect from spam emails via Formidable forms, Contact form 7, JetPack Contact form, Fast Secure Contact form, Ninja forms, Landing pages, Gravity forms, Contact Form by BestWebSoft, Simple Contact Form Plugin - PirateForms, Visual Form Builder, Form, Contact Form by WebDorado, Contact Form Email, MW WP Form, Contact Form by Jeff Bulllins, Easy Contact, Contact Us Form, Grunion Contact Form, WCP Contact Form, Easy WordPress Contact Form Plugin, WPForms Lite, Custom Contact, Forms, Amo Forms, Caldera Forms, Visual Form Builder, Contact Form Clean and Simple, Divi by Elegant Themes, The7 theme and any other themes or custom contact forms, amoForms, Custom Contact Form, Ultimate Form Builder, Contact Bank - Contact Forms Builder, Forms easily built with Smart Forms, Quick Contact Form, Usernoise contact form, cformsII - contact form, Contact Form by Web-Settler, HubSpot Marketing Free.
 
 = WooCommerce spam filter =
 Anti-spam by CleanTalk filters spam registrations and spam reviews for WooCommerce. The plugin is fully compatible with WooCommerce 2.1 and higher.
@@ -558,6 +558,33 @@ If your website has forms that send data to external sources, you can enable opt
 10. Website's options.
 
 == Changelog ==
+= 5.118.2 April 25 2019 =
+  * Mod: Spam filtration quality improved.
+  * Mod: Store SFW cookie for 30 days.
+  * Mod: Server IP added to connection report.
+  * Fix: spam_stat is not defined.
+
+= 5.118.1 April 19 2019 =
+  * Fix: Fatal error.
+  * Mod: Spam protection improved on registrations.
+
+= 5.118 April 19 2019 =
+  * Fix: Cookies on registration page.
+  * Fix: Update fix.
+  * Fix: Wordpress built-in API.
+  * Fix: WooCommerce checkout form.
+  * Fix: UpdraftPlus. Saving settings.
+  * Fix: Convert Pro saving settings.
+  * Fix: UTF-8 Converting.
+  * Fix: GDPR notice.
+  * Fix: cleantalk_sessions table size reduced.
+  * Mod: Localization.
+  * Mod: Performance improved.
+  * Mod: SpamFierWall improvments.
+  * Mod: IP detection improved.
+  * Mod: JavaScript check rewised.
+  * New: Setting "Use alternative mechanism for cookies".
+
 = 5.117.1 April 5 2019 =
   * Fix: GDPR notice.
   * Fix: noCacheJS localization.
@@ -1838,6 +1865,33 @@ If your website has forms that send data to external sources, you can enable opt
   * First version
   
 == Upgrade Notice ==
+= 5.118.2 April 25 2019 =
+  * Mod: Spam filtration quality improved.
+  * Mod: Store SFW cookie for 30 days.
+  * Mod: Server IP added to connection report.
+  * Fix: spam_stat is not defined.
+
+= 5.118.1 April 19 2019 =
+  * Fix: Fatal error.
+  * Mod: Spam protection improved on registrations.
+
+= 5.118 April 19 2019 =
+  * Fix: Cookies on registration page.
+  * Fix: Update fix.
+  * Fix: Wordpress built-in API.
+  * Fix: WooCommerce checkout form.
+  * Fix: UpdraftPlus. Saving settings.
+  * Fix: Convert Pro saving settings.
+  * Fix: UTF-8 Converting.
+  * Fix: GDPR notice.
+  * Fix: cleantalk_sessions table size reduced.
+  * Mod: Localization.
+  * Mod: Performance improved.
+  * Mod: SpamFierWall improvments.
+  * Mod: IP detection improved.
+  * Mod: JavaScript check rewised.
+  * New: Setting "Use alternative mechanism for cookies".
+
 = 5.117.1 April 5 2019 =
   * Fix: GDPR notice.
   * Fix: noCacheJS localization.

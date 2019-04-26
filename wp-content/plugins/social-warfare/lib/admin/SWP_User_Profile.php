@@ -85,19 +85,29 @@ class SWP_User_Profile {
 	 * is updated.
 	 *
 	 * @param  integer $user_id The user ID
-	 * @since  Unknown
+	 * @since  3.5.4 | 25 MAR 2018 | Added strlen checks and sanitization.
 	 * @access public
 	 * @return none
 	 *
 	 */
 	public function save_user_profile_fields( $user_id ) {
 
-		if ( ! current_user_can( 'edit_user', $user_id ) ) {
+		if ( !current_user_can( 'edit_user' ) ) {
 			return false;
 		}
 
-		update_user_meta( $user_id, 'swp_twitter', $_POST['swp_twitter'] );
-		update_user_meta( $user_id, 'swp_fb_author', $_POST['swp_fb_author'] );
+		$twitter =  isset( $_POST['swp_twitter'] ) ? sanitize_text_field( $_POST['swp_twitter'] ) : '';
+		if( strlen( $twitter ) > 15 ) {
+			$twitter = '';
+		}
+
+		$facebook =	isset( $_POST['swp_fb_author']) ? sanitize_text_field( $_POST['swp_fb_author'] ) : '';
+		if ( strlen( $facebook ) > 50 ) {
+			$facebook = '';
+		}
+
+		update_user_meta( $user_id, 'swp_twitter', $twitter );
+		update_user_meta( $user_id, 'swp_fb_author', $facebook );
 	}
 
 

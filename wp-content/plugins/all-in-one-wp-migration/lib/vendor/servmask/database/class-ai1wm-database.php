@@ -339,12 +339,12 @@ abstract class Ai1wm_Database {
 	/**
 	 * Set table where clauses
 	 *
-	 * @param  string $table   Table name
-	 * @param  array  $clauses Table clauses
+	 * @param  string $table_name    Table name
+	 * @param  array  $where_clauses Table clauses
 	 * @return object
 	 */
-	public function set_table_where_clauses( $table, $clauses ) {
-		$this->table_where_clauses[ strtolower( $table ) ] = $clauses;
+	public function set_table_where_clauses( $table_name, $where_clauses ) {
+		$this->table_where_clauses[ strtolower( $table_name ) ] = $where_clauses;
 
 		return $this;
 	}
@@ -352,12 +352,12 @@ abstract class Ai1wm_Database {
 	/**
 	 * Get table where clauses
 	 *
-	 * @param  string $table Table name
+	 * @param  string $table_name Table name
 	 * @return array
 	 */
-	public function get_table_where_clauses( $table ) {
-		if ( isset( $this->table_where_clauses[ strtolower( $table ) ] ) ) {
-			return $this->table_where_clauses[ strtolower( $table ) ];
+	public function get_table_where_clauses( $table_name ) {
+		if ( isset( $this->table_where_clauses[ strtolower( $table_name ) ] ) ) {
+			return $this->table_where_clauses[ strtolower( $table_name ) ];
 		}
 
 		return array();
@@ -366,13 +366,13 @@ abstract class Ai1wm_Database {
 	/**
 	 * Set table prefix columns
 	 *
-	 * @param  string $table   Table name
-	 * @param  array  $columns Table columns
+	 * @param  string $table_name     Table name
+	 * @param  array  $prefix_columns Table columns
 	 * @return object
 	 */
-	public function set_table_prefix_columns( $table, $columns ) {
-		foreach ( $columns as $column ) {
-			$this->table_prefix_columns[ strtolower( $table ) ][ strtolower( $column ) ] = true;
+	public function set_table_prefix_columns( $table_name, $prefix_columns ) {
+		foreach ( $prefix_columns as $column_name ) {
+			$this->table_prefix_columns[ strtolower( $table_name ) ][ strtolower( $column_name ) ] = true;
 		}
 
 		return $this;
@@ -381,12 +381,12 @@ abstract class Ai1wm_Database {
 	/**
 	 * Get table prefix columns
 	 *
-	 * @param  string $table Table name
+	 * @param  string $table_name Table name
 	 * @return array
 	 */
-	public function get_table_prefix_columns( $table ) {
-		if ( isset( $this->table_prefix_columns[ strtolower( $table ) ] ) ) {
-			return $this->table_prefix_columns[ strtolower( $table ) ];
+	public function get_table_prefix_columns( $table_name ) {
+		if ( isset( $this->table_prefix_columns[ strtolower( $table_name ) ] ) ) {
+			return $this->table_prefix_columns[ strtolower( $table_name ) ];
 		}
 
 		return array();
@@ -709,8 +709,8 @@ abstract class Ai1wm_Database {
 					$table_columns = array();
 
 					// Loop over table columns
-					while ( $column = $this->fetch_field( $result ) ) {
-						$table_columns[ strtolower( $column->name ) ] = $column->type;
+					foreach ( $this->get_column_types( $table_name ) as $column_name => $column_type ) {
+						$table_columns[ strtolower( $column_name ) ] = $column_type;
 					}
 
 					// Loop over table rows
@@ -1024,6 +1024,29 @@ abstract class Ai1wm_Database {
 	}
 
 	/**
+	 * Get MySQL column types
+	 *
+	 * @param  string $table_name Table name
+	 * @return array
+	 */
+	protected function get_column_types( $table_name ) {
+		$column_types = array();
+
+		// Get column types
+		$result = $this->query( "SHOW COLUMNS FROM `{$table_name}`" );
+		while ( $row = $this->fetch_assoc( $result ) ) {
+			if ( isset( $row['Field'] ) ) {
+				$column_types[ $row['Field'] ] = $row['Type'];
+			}
+		}
+
+		// Close result cursor
+		$this->free_result( $result );
+
+		return $column_types;
+	}
+
+	/**
 	 * Replace table prefixes
 	 *
 	 * @param  string $input    Table value
@@ -1294,12 +1317,12 @@ abstract class Ai1wm_Database {
 	/**
 	 * Check whether input is INSERT INTO query
 	 *
-	 * @param  string  $input SQL statement
-	 * @param  string  $table Table name (case insensitive)
+	 * @param  string  $input      SQL statement
+	 * @param  string  $table_name Table name (case insensitive)
 	 * @return boolean
 	 */
-	protected function is_insert_into_query( $input, $table ) {
-		return stripos( $input, sprintf( 'INSERT INTO `%s`', $table ) ) === 0;
+	protected function is_insert_into_query( $input, $table_name ) {
+		return stripos( $input, sprintf( 'INSERT INTO `%s`', $table_name ) ) === 0;
 	}
 
 	/**
@@ -1447,23 +1470,23 @@ abstract class Ai1wm_Database {
 	protected function prepare_table_values( $input, $column_type ) {
 		if ( is_null( $input ) ) {
 			return 'NULL';
-		} elseif ( $column_type === 1 ) { // tinyint
+		} elseif ( stripos( $column_type, 'tinyint' ) === 0 ) {
 			return $input;
-		} elseif ( $column_type === 2 ) { // smallint
+		} elseif ( stripos( $column_type, 'smallint' ) === 0 ) {
 			return $input;
-		} elseif ( $column_type === 3 ) { // integer
+		} elseif ( stripos( $column_type, 'mediumint' ) === 0 ) {
 			return $input;
-		} elseif ( $column_type === 4 ) { // float
+		} elseif ( stripos( $column_type, 'int' ) === 0 ) {
 			return $input;
-		} elseif ( $column_type === 5 ) { // double
+		} elseif ( stripos( $column_type, 'bigint' ) === 0 ) {
 			return $input;
-		} elseif ( $column_type === 8 ) { // bigint
+		} elseif ( stripos( $column_type, 'float' ) === 0 ) {
 			return $input;
-		} elseif ( $column_type === 9 ) { // mediumint
+		} elseif ( stripos( $column_type, 'double' ) === 0 ) {
 			return $input;
-		} elseif ( $column_type === 16 ) { // bit
+		} elseif ( stripos( $column_type, 'decimal' ) === 0 ) {
 			return $input;
-		} elseif ( $column_type === 246 ) { // decimal
+		} elseif ( stripos( $column_type, 'bit' ) === 0 ) {
 			return $input;
 		}
 
@@ -1522,14 +1545,6 @@ abstract class Ai1wm_Database {
 	 * @return array
 	 */
 	abstract public function fetch_row( $result );
-
-	/**
-	 * Return the field from MySQL query as row
-	 *
-	 * @param  resource $result MySQL resource
-	 * @return object
-	 */
-	abstract public function fetch_field( $result );
 
 	/**
 	 * Return the number for rows from MySQL results

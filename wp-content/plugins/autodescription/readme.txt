@@ -3,9 +3,9 @@ Contributors: Cybr
 Donate link: https://theseoframework.com/donate/
 Tags: SEO, XML Sitemap, Google, Open Graph, Schema.org, Twitter
 Requires at least: 4.6.0
-Tested up to: 5.1.0
+Tested up to: 5.1.1
 Requires PHP: 5.4.0
-Stable tag: 3.2.3
+Stable tag: 3.2.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -241,6 +241,12 @@ The SEO Framework's metadata is put into WordPress' object cache when a caching 
 Please be sure to clear your cache or adjust the plugin's caching settings if deemed necessary.
 
 == Changelog ==
+
+= 3.2.4 =
+
+In this minor update, we bring you the most advanced description generation yet. The generator is now context-sensitive, so you can expect the descriptions to be even more natural; a real time-saver!
+
+Oh, we also [fixed some bugs](https://theseoframework.com/?p=3130), and we've implemented some improvements in preparation for version 3.3.0.
 
 = 3.2.3 =
 

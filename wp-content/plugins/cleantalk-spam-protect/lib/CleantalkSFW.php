@@ -63,7 +63,15 @@ class CleantalkSFW extends CleantalkSFW_Base
 			$debug = '<h1>Networks</h1>'
 				. var_export($this->debug_networks, true)
 				. '<h1>Headers</h1>'
-				. var_export(apache_request_headers(), true);
+				. var_export(apache_request_headers(), true)
+				. '<h1>REMOTE_ADDR</h1>'
+				. var_export($_SERVER['REMOTE_ADDR'], true)
+				. '<h1>SERVER_ADDR</h1>'
+				. var_export($_SERVER['SERVER_ADDR'], true)
+				. '<h1>IP_ARRAY</h1>'
+				. var_export($this->ip_array, true)
+				. '<h1>ADDITIONAL</h1>'
+				. var_export($this->debug_data, true);
 		}else
 			$debug = '';
 		

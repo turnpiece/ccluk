@@ -104,7 +104,7 @@ class Generate_Description extends Generate {
 	 * Falls back to meta description.
 	 *
 	 * @since 3.1.0
-	 * @since 3.2.2 Now tests for the home page as page prior getting custom field data.
+	 * @since 3.2.2 Now tests for the homepage as page prior getting custom field data.
 	 * @see $this->get_open_graph_description()
 	 * @see $this->get_open_graph_description_from_custom_field()
 	 *
@@ -138,7 +138,7 @@ class Generate_Description extends Generate {
 	 * Falls back to meta description.
 	 *
 	 * @since 3.1.0
-	 * @since 3.2.2: 1. Now tests for the home page as page prior getting custom field data.
+	 * @since 3.2.2: 1. Now tests for the homepage as page prior getting custom field data.
 	 *               2. Now obtains custom field data for terms.
 	 * @see $this->get_open_graph_description()
 	 * @see $this->get_open_graph_description_from_custom_field()
@@ -221,7 +221,7 @@ class Generate_Description extends Generate {
 	 * Falls back to Open Graph description.
 	 *
 	 * @since 3.1.0
-	 * @since 3.2.2: 1. Now tests for the home page as page prior getting custom field data.
+	 * @since 3.2.2: 1. Now tests for the homepage as page prior getting custom field data.
 	 *               2. Now obtains custom field data for terms.
 	 * @see $this->get_twitter_description()
 	 * @see $this->get_twitter_description_from_custom_field()
@@ -260,7 +260,7 @@ class Generate_Description extends Generate {
 	 * Falls back to Open Graph description.
 	 *
 	 * @since 3.1.0
-	 * @since 3.2.2: 1. Now tests for the home page as page prior getting custom field data.
+	 * @since 3.2.2: 1. Now tests for the homepage as page prior getting custom field data.
 	 *               2. Now obtains custom field data for terms.
 	 * @see $this->get_twitter_description()
 	 * @see $this->get_twitter_description_from_custom_field()
@@ -338,7 +338,7 @@ class Generate_Description extends Generate {
 	 * Gets a custom description, based on expected or current query, without escaping.
 	 *
 	 * @since 3.1.0
-	 * @since 3.2.2 Now tests for the home page as page prior getting custom field data.
+	 * @since 3.2.2 Now tests for the homepage as page prior getting custom field data.
 	 * @internal
 	 * @see $this->get_description_from_custom_field()
 	 *
@@ -370,7 +370,7 @@ class Generate_Description extends Generate {
 	 * Gets a custom description, based on input arguments query, without escaping.
 	 *
 	 * @since 3.1.0
-	 * @since 3.2.2 Now tests for the home page as page prior getting custom field data.
+	 * @since 3.2.2 Now tests for the homepage as page prior getting custom field data.
 	 * @internal
 	 * @see $this->get_description_from_custom_field()
 	 *
@@ -411,7 +411,6 @@ class Generate_Description extends Generate {
 	 *              2. Now no longer converts additions into excerpt when no excerpt is found.
 	 * @since 3.2.2 Now converts HTML characters prior trimming.
 	 * @uses $this->generate_description()
-	 * @staticvar array $cache
 	 *
 	 * @param array|null $args   An array of 'id' and 'taxonomy' values.
 	 *                           Accepts int values for backward compatibility.
@@ -653,7 +652,7 @@ class Generate_Description extends Generate {
 	 * @since 3.1.0
 	 * @since 3.2.0 : 1. Now no longer listens to options.
 	 *                2. Now only works for the front and blog pages.
-	 * @since 3.2.2 Now works for home pages from external requests.
+	 * @since 3.2.2 Now works for homepages from external requests.
 	 * @see $this->get_generated_description()
 	 *
 	 * @param array|null $args   An array of 'id' and 'taxonomy' values.
