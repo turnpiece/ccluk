@@ -1,6 +1,7 @@
 <?php
 $checked = $controller->check();
 global $wpdb;
+$prefix = uniqid();
 ?>
 <div id="db_prefix" class="sui-accordion-item <?php echo $controller->getCssClass() ?>">
     <div class="sui-accordion-item-header">
@@ -49,21 +50,21 @@ global $wpdb;
                     <div class="sui-border-frame">
                         <div class="sui-form-field ">
                             <label class="sui-label"><?php _e( "New database prefix", wp_defender()->domain ) ?></label>
-                            <input type="text" id="dbprefix" class="sui-form-control"/>
+                            <input type="text" value="<?php echo $prefix ?>" name="dbprefix" id="dbprefix" class="sui-form-control"/>
                         </div>
                     </div>
 				<?php endif; ?>
             </div>
             <div class="sui-box-footer">
 				<?php if ( $checked ): ?>
-                    <form method="post" class="hardener-frm rule-process">
-						<?php $controller->createNonceField(); ?>
-                        <input type="hidden" name="action" value="processRevert"/>
-                        <input type="hidden" name="slug" value="<?php echo $controller::$slug ?>"/>
-                        <button class="sui-button" type="submit">
-                            <i class="sui-icon-undo" aria-hidden="true"></i>
-							<?php _e( "Revert", wp_defender()->domain ) ?></button>
-                    </form>
+<!--                    <form method="post" class="hardener-frm rule-process">-->
+<!--						--><?php //$controller->createNonceField(); ?>
+<!--                        <input type="hidden" name="action" value="processRevert"/>-->
+<!--                        <input type="hidden" name="slug" value="--><?php //echo $controller::$slug ?><!--"/>-->
+<!--                        <button class="sui-button" type="submit">-->
+<!--                            <i class="sui-icon-undo" aria-hidden="true"></i>-->
+<!--							--><?php //_e( "Revert", wp_defender()->domain ) ?><!--</button>-->
+<!--                    </form>-->
 				<?php else: ?>
                     <div class="sui-actions-left">
 						<?php $controller->showIgnoreForm() ?>
@@ -71,7 +72,7 @@ global $wpdb;
                     <div class="sui-actions-right">
                         <form method="post" class="hardener-frm rule-process hardener-frm-process-xml-rpc">
 							<?php $controller->createNonceField(); ?>
-                            <input type="hidden" name="dbprefix"/>
+                            <input type="hidden" name="dbprefix" value="<?php echo $prefix ?>"/>
                             <input type="hidden" name="action" value="processHardener"/>
                             <input type="hidden" name="slug" value="<?php echo $controller::$slug ?>"/>
                             <button class="sui-button sui-button-blue" type="submit">

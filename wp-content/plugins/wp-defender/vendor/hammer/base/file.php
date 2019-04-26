@@ -5,7 +5,7 @@
 
 namespace Hammer\Base;
 
-class File extends HObject{
+class File extends HObject {
 	const ENGINE_SPL = 'spl', ENGINE_SCANDIR = 'scan_dir', ENGINE_OPENDIR = 'open_dir';
 	/**
 	 * Engine use to create a dir tree
@@ -28,6 +28,8 @@ class File extends HObject{
 	 * @var bool
 	 */
 	public $include_dir = true;
+
+	public $include_hidden = false;
 
 	/**
 	 * This is where to define the rules for exclude files out of the result
@@ -72,14 +74,15 @@ class File extends HObject{
 	 * @param array $exclude
 	 * @param bool|true $is_recursive
 	 */
-	public function __construct( $path, $include_file = true, $include_dir = false, $include = array(), $exclude = array(), $is_recursive = true ) {
-		$this->path         = $path;
-		$this->include_file = $include_file;
-		$this->include_dir  = $include_dir;
-		$this->include      = $include;
-		$this->exclude      = $exclude;
-		$this->is_recursive = $is_recursive;
-		$this->engine = self::ENGINE_SCANDIR;
+	public function __construct( $path, $include_file = true, $include_dir = false, $include = array(), $exclude = array(), $is_recursive = true, $include_hidden = false ) {
+		$this->path           = $path;
+		$this->include_file   = $include_file;
+		$this->include_dir    = $include_dir;
+		$this->include        = $include;
+		$this->exclude        = $exclude;
+		$this->is_recursive   = $is_recursive;
+		$this->engine         = self::ENGINE_SCANDIR;
+		$this->include_hidden = $include_hidden;
 //		if ( function_exists( 'scandir' ) && stristr( PHP_OS, 'win' ) == false ) {
 //			$this->engine = self::ENGINE_SCANDIR;
 //		} elseif ( class_exists( 'FilesystemIterator' ) && class_exists( 'RecursiveDirectoryIterator' ) && class_exists( 'RecursiveCallbackFilterIterator' ) ) {
@@ -139,7 +142,7 @@ class File extends HObject{
 			$real_path = $file->getRealPath();
 
 			$is_hidden = explode( DIRECTORY_SEPARATOR . '.', $real_path );
-			if ( count( $is_hidden ) > 1 ) {
+			if ( count( $is_hidden ) > 1 && $this->include_hidden == false) {
 				continue;
 			}
 			if ( $this->is_recursive == false ) {

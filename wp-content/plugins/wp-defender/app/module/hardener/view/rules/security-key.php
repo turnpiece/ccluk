@@ -33,7 +33,8 @@ $checked = $controller->check();
                     </strong>
                     <div class="sui-notice sui-notice-warning">
                         <p>
-							<?php printf( __( "Your current security keys are %d days old. Time to update them!", wp_defender()->domain ), $daysAgo ) ?>
+							<?php
+                            printf( __( "Your current security keys are %s days old. Time to update them!", wp_defender()->domain ), $daysAgo ) ?>
                         </p>
                     </div>
                     <p>

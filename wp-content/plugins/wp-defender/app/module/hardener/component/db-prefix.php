@@ -6,6 +6,7 @@
 namespace WP_Defender\Module\Hardener\Component;
 
 use Hammer\Helper\HTTP_Helper;
+use WP_Defender\Behavior\Utils;
 use WP_Defender\Module\Hardener\Model\Settings;
 use WP_Defender\Module\Hardener\Rule;
 
@@ -52,13 +53,11 @@ class DB_Prefix extends Rule {
 		$this->getService()->new_prefix = $dbprefix;
 		$ret                            = $this->getService()->process();
 
-		if ( ! is_wp_error( $ret ) ) {
-			Settings::instance()->addToResolved( self::$slug );
-		} else {
+		if ( is_wp_error( $ret ) ) {
 			wp_send_json_error( array(
 				'message' => $ret->get_error_message()
 			) );
-		}
+		} ;
 	}
 
 	/**

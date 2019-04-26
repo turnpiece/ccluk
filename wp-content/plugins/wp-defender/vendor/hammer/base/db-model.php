@@ -266,9 +266,15 @@ class DB_Model extends Model {
 			}
 			if ( is_array( $attribute ) ) {
 				if ( isset( $attribute['compare'] ) ) {
-					$sql         = $key . ' ' . $attribute['compare'] . ' %s';
-					$sql         = $wpdb->prepare( $sql, $attribute['value'] );
-					$condition[] = $sql;
+					if ( $attribute['compare'] == 'between' ) {
+						$sql         = '(' . $key . ' ' . $attribute['compare'] . ' %s AND %s)';
+						$sql         = $wpdb->prepare( $sql, $attribute['from'], $attribute['to'] );
+						$condition[] = $sql;
+					} else {
+						$sql         = $key . ' ' . $attribute['compare'] . ' %s';
+						$sql         = $wpdb->prepare( $sql, $attribute['value'] );
+						$condition[] = $sql;
+					}
 				} elseif ( ! empty( $attribute ) ) {
 					$sql = $key . " IN (" . implode( ', ', array_fill( 0, count( $attribute ), '%s' ) ) . ")";
 

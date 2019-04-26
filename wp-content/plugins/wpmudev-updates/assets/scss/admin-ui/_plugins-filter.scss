@@ -1,0 +1,45 @@
+@include body-class(true) {
+
+	.dashui-plugins-filter {
+		display: flex;
+		margin: 0 0 $sui-gutter;
+
+		.dashui-plugins-filter-search {
+
+			.sui-form-field {
+
+				@include media(min-width, md) {
+					max-width: 240px;
+				}
+			}
+
+			@include media(max-width, md) {
+				margin-bottom: $sui-gutter-md;
+			}
+
+			@include media(min-width, md) {
+				flex: 1;
+				margin-right: #{$sui-gutter / 2};
+			}
+		}
+
+		.dashui-plugins-filter-tabs {
+			flex: 0 0 auto;
+		}
+
+		+ .sui-row {
+
+			@include media(max-width, md) {
+				display: none;
+			}
+		}
+
+		@include media(max-width, md) {
+			flex-direction: column;
+		}
+
+		@include media(min-width, md) {
+			align-items: center;
+		}
+	}
+}

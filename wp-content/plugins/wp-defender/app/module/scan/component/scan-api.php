@@ -138,7 +138,7 @@ class Scan_Api extends Component {
 		$settings = Settings::instance();
 		$files    = File_Helper::findFiles( WP_CONTENT_DIR, true, false, array(), array(
 			'ext' => array( 'php' )
-		), true, $settings->max_filesize );
+		), true, $settings->max_filesize, true );
 //		$files = File_Helper::findFiles( ABSPATH . 'wp-content/trash/sample', true, false, array(), array(
 //			'ext' => array( 'php' )
 //		), true, $settings->max_filesize );
@@ -242,6 +242,10 @@ class Scan_Api extends Component {
 						break;
 					case 'vuln':
 						$model->statusText = __( "Checking for any published vulnerabilities your plugins & themes...", wp_defender()->domain );
+						break;
+					default:
+						//param not from the button on frontend, log it
+						error_log( sprintf( 'Unexpected value %s from IP %s', $step, Utils::instance()->getUserIp() ) );
 						break;
 				}
 				$model->save();

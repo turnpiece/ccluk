@@ -1,10 +1,19 @@
-<div class="sui-wrap">
+<div class="sui-wrap <?php echo \WP_Defender\Behavior\Utils::instance()->maybeHighContrast() ?>">
     <div class="wp-defender">
         <div class="auditing">
             <div class="sui-header">
                 <h1 class="sui-header-title">
 			        <?php _e( "Aduit Logging", wp_defender()->domain ) ?>
                 </h1>
+	            <?php if ( wp_defender()->hideDocLinks === false ): ?>
+                    <div class="sui-actions-right">
+                        <div class="sui-actions-right">
+                            <a href="https://premium.wpmudev.org/docs/wpmu-dev-plugins/defender/" target="_blank" class="sui-button sui-button-ghost">
+                                <i class="sui-icon-academy"></i> <?php _e( "View Documentation", wp_defender()->domain ) ?>
+                            </a>
+                        </div>
+                    </div>
+	            <?php endif; ?>
             </div>
             <div class="sui-box">
                 <div class="sui-box-header">

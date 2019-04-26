@@ -46,7 +46,7 @@
                     </div>
                     <div class="sui-notice">
                         <p>
-							<?php printf( __( "We recommend you add your own IP to avoid getting locked out accidentally! Your current IP is 192.87.990.06.", wp_defender()->domain ), \WP_Defender\Behavior\Utils::instance()->getUserIp() ) ?>
+							<?php printf( __( "We recommend you add your own IP to avoid getting locked out accidentally! Your current IP is <span class='admin-ip'>%s</span>.", wp_defender()->domain ), \WP_Defender\Behavior\Utils::instance()->getUserIp() ) ?>
                         </p>
                     </div>
                 </div>

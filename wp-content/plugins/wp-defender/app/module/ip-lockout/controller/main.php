@@ -95,6 +95,10 @@ class Main extends Controller {
 					case 'delete':
 						$model->delete();
 						break;
+					default:
+						//param not from the button on frontend, log it
+						error_log( sprintf( 'Unexpected value %s from IP %s', $type, Utils::instance()->getUserIp() ) );
+						break;
 				}
 			}
 
@@ -334,6 +338,9 @@ class Main extends Controller {
 		if ( $settings->isWhitelist( $ip ) ) {
 			return;
 		} elseif ( $settings->isBlacklist( $ip ) ) {
+			if ( ! defined( 'DONOTCACHEPAGE' ) ) {
+				define( 'DONOTCACHEPAGE', true );
+			}
 			header( 'HTTP/1.0 403 Forbidden' );
 			header( 'Cache-Control: private' );
 			$this->renderPartial( 'locked', array(
@@ -341,6 +348,9 @@ class Main extends Controller {
 			) );
 			die;
 		} elseif ( $settings->isCountryBlacklist() ) {
+			if ( ! defined( 'DONOTCACHEPAGE' ) ) {
+				define( 'DONOTCACHEPAGE', true );
+			}
 			header( 'HTTP/1.0 403 Forbidden' );
 			header( 'Cache-Control: private' );
 			$this->renderPartial( 'locked', array(
@@ -379,7 +389,7 @@ class Main extends Controller {
 		$this->email_search           = new Email_Search();
 		$this->email_search->settings = Settings::instance();
 
-		if ( $view == 'notification' || ( defined( 'DOING_AJAX' ) && $id == 'lockout-notification' ) ) {
+		if ( $view == 'notification' && $this->isInPage() || ( defined( 'DOING_AJAX' ) && $id == 'lockout-notification' ) ) {
 			$this->email_search->eId = 'lockout-notification';
 			$this->email_search->add_hooks();
 		} elseif ( $view == 'reporting' || ( defined( 'DOING_AJAX' ) && $id == 'lockout-report' ) ) {
@@ -447,6 +457,7 @@ class Main extends Controller {
 			'54.197.28.242',
 			'54.221.174.186',
 			'54.236.233.244',
+			'127.0.0.1',
 			array_key_exists( 'SERVER_ADDR', $_SERVER ) ? $_SERVER['SERVER_ADDR'] : ( isset( $_SERVER['LOCAL_ADDR'] ) ? $_SERVER['LOCAL_ADDR'] : null )
 		) );
 
@@ -507,22 +518,19 @@ class Main extends Controller {
 		if ( ! Login_Protection_Api::maybeSendNotification( '404', $model, $settings ) ) {
 			return;
 		}
-		foreach ( $settings->receipts as $user_id ) {
-			$user = get_user_by( 'id', $user_id );
-			if ( is_object( $user ) ) {
-				$content        = $this->renderPartial( $isBlacklisted == true ? 'emails/404-ban' : 'emails/404-lockout', array(
-					'admin' => $user->display_name,
-					'ip'    => $model->ip,
-					'uri'   => $uri
-				), false );
-				$no_reply_email = "noreply@" . parse_url( get_site_url(), PHP_URL_HOST );
-				$no_reply_email = apply_filters( 'wd_lockout_noreply_email', $no_reply_email );
-				$headers        = array(
-					'From: Defender <' . $no_reply_email . '>',
-					'Content-Type: text/html; charset=UTF-8'
-				);
-				wp_mail( $user->user_email, sprintf( __( "404 lockout alert for %s", wp_defender()->domain ), network_site_url() ), $content, $headers );
-			}
+		foreach ( $settings->receipts as $item ) {
+			$content        = $this->renderPartial( $isBlacklisted == true ? 'emails/404-ban' : 'emails/404-lockout', array(
+				'admin' => $item['first_name'],
+				'ip'    => $model->ip,
+				'uri'   => $uri
+			), false );
+			$no_reply_email = "noreply@" . parse_url( get_site_url(), PHP_URL_HOST );
+			$no_reply_email = apply_filters( 'wd_lockout_noreply_email', $no_reply_email );
+			$headers        = array(
+				'From: Defender <' . $no_reply_email . '>',
+				'Content-Type: text/html; charset=UTF-8'
+			);
+			wp_mail( $item['email'], sprintf( __( "404 lockout alert for %s", wp_defender()->domain ), network_site_url() ), $content, $headers );
 		}
 	}
 
@@ -531,25 +539,24 @@ class Main extends Controller {
 	 */
 	public function lockoutLoginNotification( IP_Model $model, $force, $blacklist ) {
 		$settings = Settings::instance();
+
 		if ( ! Login_Protection_Api::maybeSendNotification( 'login', $model, $settings ) ) {
 			return;
 		}
-		foreach ( $settings->receipts as $user_id ) {
-			$user = get_user_by( 'id', $user_id );
-			if ( is_object( $user ) ) {
-				$view           = ( $force && $blacklist ) ? 'emails/login-username-ban' : 'emails/login-lockout';
-				$content        = $this->renderPartial( $view, array(
-					'admin' => $user->display_name,
-					'ip'    => $model->ip,
-				), false );
-				$no_reply_email = "noreply@" . parse_url( get_site_url(), PHP_URL_HOST );
-				$no_reply_email = apply_filters( 'wd_lockout_noreply_email', $no_reply_email );
-				$headers        = array(
-					'From: Defender <' . $no_reply_email . '>',
-					'Content-Type: text/html; charset=UTF-8'
-				);
-				wp_mail( $user->user_email, sprintf( __( "Login lockout alert for %s", wp_defender()->domain ), network_site_url() ), $content, $headers );
-			}
+
+		foreach ( $settings->receipts as $item ) {
+			$view           = ( $force && $blacklist ) ? 'emails/login-username-ban' : 'emails/login-lockout';
+			$content        = $this->renderPartial( $view, array(
+				'admin' => $item['first_name'],
+				'ip'    => $model->ip,
+			), false );
+			$no_reply_email = "noreply@" . parse_url( get_site_url(), PHP_URL_HOST );
+			$no_reply_email = apply_filters( 'wd_lockout_noreply_email', $no_reply_email );
+			$headers        = array(
+				'From: Defender <' . $no_reply_email . '>',
+				'Content-Type: text/html; charset=UTF-8'
+			);
+			wp_mail( $item['email'], sprintf( __( "Login lockout alert for %s", wp_defender()->domain ), network_site_url() ), $content, $headers );
 		}
 	}
 
@@ -587,9 +594,24 @@ class Main extends Controller {
 				$uri = substr( $uri, strlen( $absUrl ) );
 			}
 			$uri = rtrim( $uri, '/' );
-			if ( in_array( $uri, $settings->get404Whitelist() ) ) {
-				//it is white list, just return
-				return;
+			foreach ( $settings->get404Whitelist() as $whitelistedUrl ) {
+				if ( substr( $whitelistedUrl, - 1 ) == '*' ) {
+					$whitelistedUrl = substr( $whitelistedUrl, 0, - 1 );
+					if ( strpos( $uri, $whitelistedUrl ) === 0 ) {
+						return true;
+					}
+				} elseif ( pathinfo( $whitelistedUrl, PATHINFO_FILENAME ) == '*' ) {
+					//get the ext
+					$ext           = pathinfo( $whitelistedUrl, PATHINFO_EXTENSION );
+					$uriExt        = pathinfo( $uri, PATHINFO_EXTENSION );
+					$whitelistPath = pathinfo( $whitelistedUrl, PATHINFO_DIRNAME );
+					$uriPath       = pathinfo( $uri, PATHINFO_DIRNAME );
+					if ( $ext == $uriExt && $whitelistPath == $uriPath ) {
+						return true;
+					}
+				} elseif ( $uri == $whitelistedUrl ) {
+					return true;
+				}
 			}
 
 			$ext               = pathinfo( $uri, PATHINFO_EXTENSION );
@@ -797,6 +819,12 @@ class Main extends Controller {
 		foreach ( $data as $k => $v ) {
 			if ( in_array( $k, $textarea ) ) {
 				$data[ $k ] = wp_kses_post( $v );
+			} elseif ( in_array( $k, array( 'receipts', 'report_receipts' ) ) ) {
+				$v = array_values( $v );
+				foreach ( $v as &$item ) {
+					$item = array_map( 'wp_strip_all_tags', $item );
+				}
+				$data[ $k ] = $v;
 			} else {
 				if ( is_array( $v ) ) {
 					$v = implode( ',', $v );
@@ -844,6 +872,7 @@ class Main extends Controller {
 				$this->scheduleReport();
 			}
 			Utils::instance()->submitStatsToDev();
+			$res['reload'] = 1;
 			wp_send_json_success( $res );
 		} else {
 			wp_send_json_error( array(
@@ -917,6 +946,9 @@ class Main extends Controller {
 			wp_enqueue_script( 'defender' );
 			wp_enqueue_style( 'defender' );
 			wp_enqueue_script( 'iplockout', wp_defender()->getPluginUrl() . 'app/module/ip-lockout/js/script.js' );
+			wp_enqueue_script( 'def-momentjs', wp_defender()->getPluginUrl() . 'assets/js/moment/moment.min.js' );
+			wp_enqueue_style( 'def-daterangepicker', wp_defender()->getPluginUrl() . 'assets/js/daterangepicker/daterangepicker.css' );
+			wp_enqueue_script( 'def-daterangepicker', wp_defender()->getPluginUrl() . 'assets/js/daterangepicker/daterangepicker.js' );
 		} else {
 			wp_enqueue_script( 'iplockout', wp_defender()->getPluginUrl() . 'app/module/ip-lockout/js/script.js' );
 		}

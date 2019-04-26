@@ -80,11 +80,11 @@
                                     </div>
                                     <div class="sui-col-md-4">
                                         <select name="login_protection_lockout_duration_unit">
-                                            <option <?php echo selected( 'second', $settings->login_protection_lockout_duration_unit ) ?>
+                                            <option <?php echo selected( 'seconds', $settings->login_protection_lockout_duration_unit ) ?>
                                                     value="seconds"><?php _e( "Seconds", wp_defender()->domain ) ?></option>
-                                            <option <?php echo selected( 'minute', $settings->login_protection_lockout_duration_unit ) ?>
+                                            <option <?php echo selected( 'minutes', $settings->login_protection_lockout_duration_unit ) ?>
                                                     value="minutes"><?php _e( "Minutes", wp_defender()->domain ) ?></option>
-                                            <option <?php echo selected( 'hour', $settings->login_protection_lockout_duration_unit ) ?>
+                                            <option <?php echo selected( 'hours', $settings->login_protection_lockout_duration_unit ) ?>
                                                     value="hours"><?php _e( "Hours", wp_defender()->domain ) ?></option>
                                         </select>
                                     </div>

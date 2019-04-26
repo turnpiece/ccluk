@@ -103,8 +103,8 @@ class Apache_Service extends Rule_Service implements IRule_Service {
 				//remove the whole parts as it partial done
 				$htContent = str_replace( $matches[0], '', $htContent );
 				$htConfig  = explode( PHP_EOL, $htContent );
-				$htConfig  = array_merge( $htConfig, $default );
-				file_put_contents( $htPath, implode( PHP_EOL, $htConfig ), LOCK_EX );
+				$htConfig  = array_merge( $htConfig, array( implode( '', $default ) ) );
+				file_put_contents( $htPath, implode( '', $htConfig ), LOCK_EX );
 			}
 		}
 

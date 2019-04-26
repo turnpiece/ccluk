@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Defender Pro
  * Plugin URI: https://premium.wpmudev.org/project/wp-defender/
- * Version:     2.1.1.1
+ * Version:     2.1.2
  * Description: Get regular security scans, vulnerability reports, safety recommendations and customized hardening for your site in just a few clicks. Defender is the analyst and enforcer who never sleeps.
  * Author:      WPMU DEV
  * Author URI:  http://premium.wpmudev.org/
@@ -67,7 +67,30 @@ class WP_Defender {
 	 */
 	public $plugin_slug = 'wp-defender/wp-defender.php';
 
-	public $db_version = "2.1";
+	public $db_version = "2.1.1";
+
+	public $whiteLabel = 0;
+
+	/**
+	 * @var int
+	 */
+	public $hideHeroImage = 0;
+	/**
+	 * @var null
+	 */
+	public $heroImage = null;
+	/**
+	 * @var null
+	 */
+	public $footerText = null;
+	/**
+	 * @var bool
+	 */
+	public $hideDocLinks = false;
+	/**
+	 * @var bool
+	 */
+	public $changeFooter = false;
 
 	/**
 	 * @return WP_Defender
@@ -99,6 +122,7 @@ class WP_Defender {
 		}
 		//for the new SUI
 		add_filter( 'admin_body_class', array( &$this, 'adminBodyClasses' ) );
+
 	}
 
 	public function loadTextdomain() {
@@ -114,7 +138,7 @@ class WP_Defender {
 	}
 
 	public function adminBodyClasses( $classes ) {
-		$classes .= ' sui-2-3-15 ';
+		$classes .= ' sui-2-3-20 ';
 
 		return $classes;
 	}
@@ -245,6 +269,7 @@ if ( ! function_exists( 'wp_defender' ) ) {
 		wp_clear_scheduled_hook( 'auditReportCron' );
 		wp_clear_scheduled_hook( 'cleanUpOldLog' );
 		wp_clear_scheduled_hook( 'scanReportCron' );
+		wp_clear_scheduled_hook('tweaksSendNotification');
 	}
 
 	function wp_defender_activate() {
@@ -256,6 +281,9 @@ if ( ! function_exists( 'wp_defender' ) ) {
 		if ( version_compare( $phpVersion, '5.3', '>=' ) ) {
 			wp_defender()->global['bootstrap']->activationHook();
 		}
+		$hs            = \WP_Defender\Module\Hardener\Model\Settings::instance();
+		$hs->last_seen = time();
+		$hs->save();
 	}
 
 	register_deactivation_hook( __FILE__, 'wp_defender_deactivate' );

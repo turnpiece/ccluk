@@ -62,7 +62,7 @@ class Main extends \WP_Defender\Controller {
 		$view = HTTP_Helper::retrieve_get( 'view' );
 		$id   = isset( $_REQUEST['id'] ) ? $_REQUEST['id'] : 0;
 		//init receiption
-		if ( $view == 'notification' || ( defined( 'DOING_AJAX' ) && $id == 'scanNotificationReceipts' ) ) {
+		if ( $view == 'notification' && $this->isInPage() || ( defined( 'DOING_AJAX' ) && $id == 'scanNotificationReceipts' ) ) {
 			$this->emailSearchNotification            = new Email_Search();
 			$this->emailSearchNotification->eId       = 'scanNotificationReceipts';
 			$this->emailSearchNotification->settings  = Settings::instance();
@@ -251,6 +251,10 @@ class Main extends \WP_Defender\Controller {
 						'message' => __( "No item has been resolved", wp_defender()->domain )
 					) );
 				}
+				break;
+			default:
+				//param not from the button on frontend, log it
+				error_log( sprintf( 'Unexpected value %s from IP %s', $bulk, Utils::instance()->getUserIp() ) );
 				break;
 		}
 	}
@@ -793,15 +797,11 @@ class Main extends \WP_Defender\Controller {
 			return;
 		}
 
-		foreach ( $recipients as $user_id ) {
-			$user = get_user_by( 'id', $user_id );
-			if ( ! is_object( $user ) ) {
-				continue;
-			}
+		foreach ( $recipients as $item ) {
 			//prepare the parameters
-			$email   = $user->user_email;
+			$email   = $item['email'];
 			$params  = array(
-				'USER_NAME'      => $this->getDisplayName( $user_id ),
+				'USER_NAME'      => $item['first_name'],
 				'ISSUES_COUNT'   => $count,
 				'SCAN_PAGE_LINK' => network_admin_url( 'admin.php?page=wdf-scan' ),
 				'ISSUES_LIST'    => $this->issues_list_html( $model ),

@@ -1,5 +1,6 @@
 jQuery(function ($) {
     WDHardener.formHandler();
+    WDHardener.settingsFormHandler();
     var hash = window.location.hash;
     if ($(hash).size() > 0) {
         $(hash).addClass('sui-accordion-item--open');
@@ -111,6 +112,15 @@ jQuery(function ($) {
             Defender.showNotification('error', data.data.message);
         }
     });
+    $('div.hardener').on('settings-form-submitted', function (e, data, form) {
+        console.log(data);
+        if (data.success == true) {
+            location.reload();
+            Defender.showNotification('success', data.data.message);
+        } else {
+            Defender.showNotification('error', data.data.message);
+        }
+    });
 });
 
 function debounce(fn, delay) {
@@ -130,6 +140,7 @@ WDHardener.formHandler = function () {
     var jq = jQuery;
     jq('body').on('submit', '.hardener-frm', function () {
         var data = jq(this).serialize();
+        console.log(data);
         var that = jq(this);
         jq.ajax({
             type: 'POST',
@@ -184,6 +195,34 @@ WDHardener.formHandler = function () {
                     that.find('.sui-button').removeAttr('disabled');
                     jq('div.hardener').trigger('form-submitted', [data, that])
                 }
+            }
+        })
+        return false;
+    })
+}
+
+WDHardener.settingsFormHandler = function () {
+    var jq = jQuery;
+    jq('body').on('submit', '.hardener-settings-frm', function () {
+        var data = jq(this).serialize();
+        var that = jq(this);
+        jq.ajax({
+            type: 'POST',
+            url: ajaxurl,
+            data: data,
+            beforeSend: function () {
+                that.find('.sui-button-blue').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                if (data.data != undefined && data.data.url != undefined) {
+                    location.href = data.data.url;
+                } else {
+                    that.find('.sui-button').removeAttr('disabled');
+                    jq('div.hardener').trigger('settings-form-submitted', [data, that])
+                }
+            },
+            error: function (xhr) {
+                jq('div.hardener').trigger('settings-form-submitted', [data, that, xhr])
             }
         })
         return false;

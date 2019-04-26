@@ -7,6 +7,7 @@ namespace WP_Defender\Module\Hardener;
 
 use Hammer\Base\Component;
 use Hammer\Base\Container;
+use WP_Defender\Behavior\Utils;
 use WP_Defender\Module\Hardener;
 
 class Rule_Service extends Component {
@@ -36,6 +37,10 @@ class Rule_Service extends Component {
 				break;
 			case 'issue':
 				$settings->addToIssues( $slug );
+				break;
+			default:
+				//param not from the button on frontend, log it
+				error_log( sprintf( 'Unexpected value %s from IP %s', $curr_status, Utils::instance()->getUserIp() ) );
 				break;
 		}
 	}

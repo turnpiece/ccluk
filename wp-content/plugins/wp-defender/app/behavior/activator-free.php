@@ -11,7 +11,7 @@ use Hammer\Helper\WP_Helper;
 use WP_Defender\Module\Scan\Component\Scan_Api;
 use WP_Defender\Module\Scan\Model\Settings;
 
-class Activator_Free extends Behavior{
+class Activator_Free extends Behavior {
 	public function activateModule() {
 		if ( ! Utils::instance()->checkPermission() ) {
 			return;
@@ -35,8 +35,12 @@ class Activator_Free extends Behavior{
 						$settings                   = \WP_Defender\Module\IP_Lockout\Model\Settings::instance();
 						$settings->detect_404       = 1;
 						$settings->login_protection = 1;
-						$activated[] = $item;
+						$activated[]                = $item;
 						$settings->save();
+						break;
+					default:
+						//param not from the button on frontend, log it
+						error_log( sprintf( 'Unexpected value %s from IP %s', $item, Utils::instance()->getUserIp() ) );
 						break;
 				}
 			}
@@ -60,10 +64,7 @@ class Activator_Free extends Behavior{
 			return false;
 		}
 		//alread has data, just return
-		if ( get_site_option( 'wp_defender' ) != false
-		     || get_site_option( 'wd_scan_settings' ) != false
-		     || get_site_option( 'wd_lockdown_settings' ) != false
-		) {
+		if ( get_site_option( 'wp_defender' ) != false ) {
 			return false;
 		}
 

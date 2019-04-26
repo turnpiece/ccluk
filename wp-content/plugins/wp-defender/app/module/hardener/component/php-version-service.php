@@ -16,7 +16,7 @@ class PHP_Version_Service extends Rule_Service implements IRule_Service {
 	 */
 	public function check() {
 		$this->queryVersion();
-		if ( version_compare( $this->getPHPVersion(),Settings::instance()->min_php_version , '<=' ) ) {
+		if ( version_compare( phpversion(), Settings::instance()->min_php_version, '<=' ) ) {
 			return false;
 		}
 
@@ -40,24 +40,33 @@ class PHP_Version_Service extends Rule_Service implements IRule_Service {
 		if ( ! $lastCheck || strtotime( '+24 hours', $lastCheck ) < time() ) {
 			$html = wp_remote_get( 'http://php.net/supported-versions.php' );
 			if ( is_wp_error( $html ) ) {
-				delete_site_transient('defender_last_check_php_versions');
+				delete_site_transient( 'defender_last_check_php_versions' );
+
 				return false;
 			}
-			$dom = new \DOMDocument;
-			libxml_use_internal_errors( true );
-			$dom->loadHTML( $html['body'] );
-			$finder       = new \DOMXPath( $dom );
-			$classname    = "security";
-			$securityNode = $finder->query( "//*[contains(@class, '$classname')]/td[1]/a" );
-			$securityNode = $securityNode->item( 0 )->nodeValue;
-			$classname    = "stable";
-			$lastStable   = $finder->query( "//*[contains(@class, '$classname')][2]/td[1]/a" );;
-			$lastStable                   = $lastStable->item( 0 )->nodeValue;
-			$settings                     = Settings::instance();
-			$settings->stable_php_version = $lastStable;
-			$settings->min_php_version    = $securityNode;
-			$settings->save();
-			set_site_transient( 'defender_last_check_php_versions', time(), 60 * 60 * 24 );
+			if ( class_exists( '\DOMDocument' ) ) {
+				$dom = new \DOMDocument;
+				libxml_use_internal_errors( true );
+				$dom->loadHTML( $html['body'] );
+				$finder       = new \DOMXPath( $dom );
+				$classname    = "security";
+				$securityNode = $finder->query( "//*[contains(@class, '$classname')]/td[1]/a" );
+				$securityNode = $securityNode->item( 0 )->nodeValue;
+				$classname    = "stable";
+				$lastStable   = $finder->query( "//*[contains(@class, '$classname')][2]/td[1]/a" );;
+				$lastStable                   = $lastStable->item( 0 )->nodeValue;
+				$settings                     = Settings::instance();
+				$settings->stable_php_version = $lastStable;
+				$settings->min_php_version    = $securityNode;
+				$settings->save();
+				set_site_transient( 'defender_last_check_php_versions', time(), 60 * 60 * 24 );
+			} else {
+				//do it manually
+				$settings                     = Settings::instance();
+				$settings->stable_php_version = 7.3;
+				$settings->min_php_version    = 7.1;
+				$settings->save();
+			}
 		}
 	}
 }

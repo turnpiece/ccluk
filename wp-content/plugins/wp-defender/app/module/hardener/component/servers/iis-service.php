@@ -101,13 +101,13 @@ class Iis_Service extends Rule_Service implements IRule_Service {
 			return true;
 		}
 
-		$doc = new \DOMDocument();
+		$doc = new DOMDocument();
 		$doc->preserveWhiteSpace = false;
 		if ( $doc->load( $path . '/' . $filename ) === false ) {
 		  return false;
 		}
 
-		$xpath = new \DOMXPath( $doc );
+		$xpath = new DOMXPath( $doc );
 		$handlers = $xpath->query( '/configuration/system.webServer/handlers[contains(@accessPolicy,\'Read\')]' );
 		if ( $handlers->length > 0 ) {
 			$child = $handlers->item(0);

@@ -1,4 +1,4 @@
-<div class="sui-wrap">
+<div class="sui-wrap <?php echo \WP_Defender\Behavior\Utils::instance()->maybeHighContrast() ?>">
     <div class="wp-defender">
         <div class="sui-header">
             <h1 class="sui-header-title"><?php _e( "Audit Logging", wp_defender()->domain ) ?></h1>
@@ -17,8 +17,10 @@
                 </h3>
             </div>
             <div class="sui-message">
-                <img src="<?php echo wp_defender()->getPluginUrl() ?>assets/img/def-stand.svg" class="sui-image"
-                     aria-hidden="true">
+				<?php if ( wp_defender()->whiteLabel == 0 ): ?>
+                    <img src="<?php echo wp_defender()->getPluginUrl() ?>assets/img/def-stand.svg" class="sui-image"
+                         aria-hidden="true">
+				<?php endif; ?>
 
                 <div class="sui-message-content">
 

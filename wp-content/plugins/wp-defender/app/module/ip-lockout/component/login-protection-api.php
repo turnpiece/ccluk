@@ -32,7 +32,7 @@ class Login_Protection_Api extends Component {
 
 		$settings = Settings::instance();
 		//find backward from log date, if there are only log & counter > max attempt, then lock
-		$after = strtotime( '-' . $settings->login_protection_lockout_timeframe . ' ' . $settings->login_protection_lockout_duration_unit );
+		$after = strtotime( '-' . $settings->login_protection_lockout_timeframe . ' seconds' );
 		if ( is_object( $model ) ) {
 			//recal release time, if after time smaller than lock time,then we will use last locktime for check
 			if ( $after < $model->lock_time ) {
@@ -525,6 +525,7 @@ class Login_Protection_Api extends Component {
   `lock_time_404` int(11) DEFAULT NULL,
   `attempt` int(11) DEFAULT NULL,
   `attempt_404` int(11) DEFAULT NULL,
+  `meta` text,
   PRIMARY KEY (`id`)
 ) $charsetCollate;
 CREATE TABLE `{$tableName2}` (
@@ -535,6 +536,7 @@ CREATE TABLE `{$tableName2}` (
   `type` varchar(16) DEFAULT NULL,
   `user_agent` varchar(255) DEFAULT NULL,
   `blog_id` int(11) DEFAULT NULL,
+  `tried` VARCHAR (255),
   PRIMARY KEY (`id`)
 ) $charsetCollate;
 ";

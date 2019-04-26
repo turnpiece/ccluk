@@ -2,15 +2,24 @@
 list( $hCount, $sCount ) = $controller->countTotalIssues( true );
 $countAll = $hCount + $sCount;
 ?>
-<div class="sui-wrap">
+<div class="sui-wrap <?php echo \WP_Defender\Behavior\Utils::instance()->maybeHighContrast() ?>">
     <div id="wp-defender" class="wp-defender">
         <div class="def-dashboard">
             <div class="sui-header">
                 <h1 class="sui-header-title">
 					<?php _e( "Dashboard", wp_defender()->domain ) ?>
                 </h1>
+	            <?php if ( wp_defender()->hideDocLinks === false ): ?>
+                    <div class="sui-actions-right">
+                        <div class="sui-actions-right">
+                            <a href="https://premium.wpmudev.org/docs/wpmu-dev-plugins/defender/" target="_blank" class="sui-button sui-button-ghost">
+                                <i class="sui-icon-academy"></i> <?php _e( "View Documentation", wp_defender()->domain ) ?>
+                            </a>
+                        </div>
+                    </div>
+	            <?php endif; ?>
             </div>
-            <div class="sui-box sui-summary">
+            <div class="sui-box sui-summary <?php echo \WP_Defender\Behavior\Utils::instance()->getSummaryClass() ?>">
                 <div class="sui-summary-image-space" aria-hidden="true"></div>
                 <div class="sui-summary-segment">
                     <div class="sui-summary-details">
@@ -165,44 +174,54 @@ $countAll = $hCount + $sCount;
 
             </div>
 		<?php endif; ?>
-        <div class="sui-footer">Made with <i class="sui-icon-heart"></i> by WPMU DEV</div>
-		<?php if ( wp_defender()->isFree ): ?>
-            <ul class="sui-footer-nav">
-                <li><a href="https://profiles.wordpress.org/wpmudev#content-plugins" target="_blank">Free Plugins</a>
-                </li>
-                <li><a href="https://premium.wpmudev.org/features/" target="_blank">Membership</a></li>
-                <li><a href="https://premium.wpmudev.org/roadmap/" target="_blank">Roadmap</a></li>
-                <li><a href="https://wordpress.org/support/plugin/plugin-name" target="_blank">Support</a></li>
-                <li><a href="https://premium.wpmudev.org/docs/" target="_blank">Docs</a></li>
-                <li><a href="https://premium.wpmudev.org/hub/" target="_blank">The Hub</a></li>
-                <li><a href="https://premium.wpmudev.org/terms-of-service/" target="_blank">Terms of Service</a></li>
-                <li><a href="https://incsub.com/privacy-policy/" target="_blank">Privacy Policy</a></li>
-            </ul>
+		<?php if ( wp_defender()->changeFooter && ! empty( wp_defender()->footerText ) ): ?>
+            <div class="sui-footer"><?php echo wp_defender()->footerText ?></div>
 		<?php else: ?>
-            <ul class="sui-footer-nav">
-                <li><a href="https://premium.wpmudev.org/hub/" target="_blank">The Hub</a></li>
-                <li><a href="https://premium.wpmudev.org/projects/category/plugins/" target="_blank">Plugins</a></li>
-                <li><a href="https://premium.wpmudev.org/roadmap/" target="_blank">Roadmap</a></li>
-                <li><a href="https://premium.wpmudev.org/hub/support/" target="_blank">Support</a></li>
-                <li><a href="https://premium.wpmudev.org/docs/" target="_blank">Docs</a></li>
-                <li><a href="https://premium.wpmudev.org/hub/community/" target="_blank">Community</a></li>
-                <li><a href="https://premium.wpmudev.org/terms-of-service/" target="_blank">Terms of Service</a></li>
-                <li><a href="https://incsub.com/privacy-policy/" target="_blank">Privacy Policy</a></li>
+            <div class="sui-footer">Made with <i class="sui-icon-heart"></i> by WPMU DEV</div>
+		<?php endif; ?>
+		<?php if ( wp_defender()->hideDocLinks == false ): ?>
+			<?php if ( wp_defender()->isFree ): ?>
+                <ul class="sui-footer-nav">
+                    <li><a href="https://profiles.wordpress.org/wpmudev#content-plugins" target="_blank">Free
+                            Plugins</a>
+                    </li>
+                    <li><a href="https://premium.wpmudev.org/features/" target="_blank">Membership</a></li>
+                    <li><a href="https://premium.wpmudev.org/roadmap/" target="_blank">Roadmap</a></li>
+                    <li><a href="https://wordpress.org/support/plugin/plugin-name" target="_blank">Support</a></li>
+                    <li><a href="https://premium.wpmudev.org/docs/" target="_blank">Docs</a></li>
+                    <li><a href="https://premium.wpmudev.org/hub/" target="_blank">The Hub</a></li>
+                    <li><a href="https://premium.wpmudev.org/terms-of-service/" target="_blank">Terms of Service</a>
+                    </li>
+                    <li><a href="https://incsub.com/privacy-policy/" target="_blank">Privacy Policy</a></li>
+                </ul>
+			<?php else: ?>
+                <ul class="sui-footer-nav">
+                    <li><a href="https://premium.wpmudev.org/hub/" target="_blank">The Hub</a></li>
+                    <li><a href="https://premium.wpmudev.org/projects/category/plugins/" target="_blank">Plugins</a>
+                    </li>
+                    <li><a href="https://premium.wpmudev.org/roadmap/" target="_blank">Roadmap</a></li>
+                    <li><a href="https://premium.wpmudev.org/hub/support/" target="_blank">Support</a></li>
+                    <li><a href="https://premium.wpmudev.org/docs/" target="_blank">Docs</a></li>
+                    <li><a href="https://premium.wpmudev.org/hub/community/" target="_blank">Community</a></li>
+                    <li><a href="https://premium.wpmudev.org/terms-of-service/" target="_blank">Terms of Service</a>
+                    </li>
+                    <li><a href="https://incsub.com/privacy-policy/" target="_blank">Privacy Policy</a></li>
+                </ul>
+			<?php endif; ?>
+            <ul class="sui-footer-social">
+                <li><a href="https://www.facebook.com/wpmudev" target="_blank">
+                        <i class="sui-icon-social-facebook" aria-hidden="true"></i>
+                        <span class="sui-screen-reader-text">Facebook</span>
+                    </a></li>
+                <li><a href="https://twitter.com/wpmudev" target="_blank">
+                        <i class="sui-icon-social-twitter" aria-hidden="true"></i></a>
+                    <span class="sui-screen-reader-text">Twitter</span>
+                </li>
+                <li><a href="https://www.instagram.com/wpmu_dev/" target="_blank">
+                        <i class="sui-icon-instagram" aria-hidden="true"></i>
+                        <span class="sui-screen-reader-text">Instagram</span>
+                    </a></li>
             </ul>
 		<?php endif; ?>
-        <ul class="sui-footer-social">
-            <li><a href="https://www.facebook.com/wpmudev" target="_blank">
-                    <i class="sui-icon-social-facebook" aria-hidden="true"></i>
-                    <span class="sui-screen-reader-text">Facebook</span>
-                </a></li>
-            <li><a href="https://twitter.com/wpmudev" target="_blank">
-                    <i class="sui-icon-social-twitter" aria-hidden="true"></i></a>
-                <span class="sui-screen-reader-text">Twitter</span>
-            </li>
-            <li><a href="https://www.instagram.com/wpmu_dev/" target="_blank">
-                    <i class="sui-icon-instagram" aria-hidden="true"></i>
-                    <span class="sui-screen-reader-text">Instagram</span>
-                </a></li>
-        </ul>
     </div>
 </div>

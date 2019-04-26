@@ -15,9 +15,9 @@
                        <?php esc_html_e( "If you no longer want to use this feature you can turn it off at any time.", wp_defender()->domain ) ?>
                     </span>
                 </div>
+				<?php wp_nonce_field( 'saveAuditSettings' ) ?>
+                <input type="hidden" name="action" value="saveAuditSettings">
                 <div class="sui-box-settings-col-2">
-                    <input type="hidden" name="action" value="activeAudit">
-					<?php wp_nonce_field( 'activeAudit' ) ?>
                     <button type="button" class="sui-button sui-button-ghost deactivate-audit">
 						<?php _e( "Deactivate", wp_defender()->domain ) ?>
                     </button>

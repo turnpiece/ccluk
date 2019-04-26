@@ -1,0 +1,97 @@
+@include body-class(true) {
+
+	.dashui-table {
+		width: 100%;
+		max-width: 100%;
+		margin: 0;
+		padding: 0;
+		border: 0;
+
+		tbody {
+
+			tr {
+				margin: 0;
+				padding: 0;
+				border: 0;
+
+				th, td {
+					margin: 0;
+					padding: 0;
+					border: 0;
+					font: $font--medium 13px/22px $font;
+					letter-spacing: $font--letter-spacing;
+					text-align: left;
+
+					&:first-child {
+
+						@include media(min-width, md) {
+							padding-left: $sui-gutter-md;
+						}
+					}
+
+					&:not(:last-child) {
+
+						@include media(max-width, md) {
+							margin-bottom: 8px;
+						}
+					}
+
+					&:last-child {
+
+						@include media(min-width, md) {
+							padding-right: $sui-gutter-md;
+						}
+					}
+
+					@include media(max-width, md) {
+						display: block;
+					}
+
+					@include media(min-width, md) {
+						padding: 9px 8px;
+					}
+				}
+
+				th {
+					color: palette(gray, dark);
+				}
+
+				td {
+					color: palette(gray, light);
+				}
+
+				&:nth-child(2n+1) {
+
+					th, td {
+
+						@include media(min-width, md) {
+							background-color: palette(silver, light);
+						}
+					}
+
+					@include media(max-width, md) {
+						background-color: palette(silver, light);
+					}
+				}
+
+				@include media(max-width, md) {
+					display: block;
+					padding: 9px $sui-gutter-md;
+				}
+			}
+
+			@include media(max-width, md) {
+				display: block;
+			}
+		}
+
+		@include media(max-width, md) {
+			display: block;
+		}
+
+		@include media(min-width, md) {
+			border-spacing: 0;
+			border-collapse: collapse;
+		}
+	}
+}

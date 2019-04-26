@@ -19,8 +19,8 @@ class File_Helper {
 	 *
 	 * @return array
 	 */
-	public static function findFiles( $path, $include_file = true, $include_dir = true, $exclude = array(), $include = array(), $is_recursive = true, $max_size = false ) {
-		$tv = new File( $path, $include_file, $include_dir, $include, $exclude, $is_recursive );
+	public static function findFiles( $path, $include_file = true, $include_dir = true, $exclude = array(), $include = array(), $is_recursive = true, $max_size = false, $is_hidden = false ) {
+		$tv = new File( $path, $include_file, $include_dir, $include, $exclude, $is_recursive, $is_hidden );
 		if ( $max_size != false ) {
 			$tv->max_filesize = $max_size;
 		}

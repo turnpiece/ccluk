@@ -7,6 +7,7 @@ namespace WP_Defender\Module\Scan\Model;
 
 use Hammer\Helper\Log_Helper;
 use Hammer\WP\Model;
+use WP_Defender\Behavior\Utils;
 use WP_Defender\Module\Scan\Behavior\Core_Result;
 
 /**
@@ -175,6 +176,10 @@ class Scan extends Model {
 					'status'   => Result_Item::STATUS_ISSUE,
 					'type'     => 'vuln'
 				) );
+			default:
+				//param not from the button on frontend, log it
+				error_log( sprintf( 'Unexpected value %s from IP %s', $type, Utils::instance()->getUserIp() ) );
+				break;
 		}
 	}
 

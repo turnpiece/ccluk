@@ -135,6 +135,19 @@ class Utils extends Behavior {
 	}
 
 	/**
+	 * @return string|null
+	 */
+	public function getSummaryClass() {
+		if ( wp_defender()->hideHeroImage && strlen( wp_defender()->heroImage ) == 0 ) {
+			return 'sui-unbranded';
+		} elseif ( wp_defender()->hideHeroImage && strlen( wp_defender()->heroImage ) > 0 ) {
+			return 'sui-rebranded';
+		}
+
+		return null;
+	}
+
+	/**
 	 * Check if WPMUDEV Dashboard installed, return version, else return false
 	 * @return bool|string
 	 */
@@ -778,6 +791,10 @@ class Utils extends Behavior {
 			case '30':
 				$after_time = '-30 days';
 				break;
+			default:
+				//param not from the button on frontend, log it
+				error_log( sprintf( 'Unexpected value %s from IP %s', $lockoutSettings->report_frequency, Utils::instance()->getUserIp() ) );
+				break;
 		}
 
 		$events_in_month = \WP_Defender\Module\Audit\Component\Audit_API::pullLogs( array(
@@ -920,6 +937,12 @@ class Utils extends Behavior {
 		return $meet;
 	}
 
+	/**
+	 * @return string
+	 */
+	public function maybeHighContrast() {
+		return \WP_Defender\Module\Setting\Model\Settings::instance()->high_contrast_mode == 0 ? '' : 'sui-color-accessible';
+	}
 
 	/**
 	 * @param $freq
@@ -938,11 +961,14 @@ class Utils extends Behavior {
 			case 30:
 				$text = __( "monthly", wp_defender()->domain );
 				break;
+			default:
+				//param not from the button on frontend, log it
+				error_log( sprintf( 'Unexpected value %s from IP %s', $freq, Utils::instance()->getUserIp() ) );
+				break;
 		}
 
 		return $text;
 	}
-
 
 	/**
 	 * List server types

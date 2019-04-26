@@ -4,13 +4,15 @@ Tested up to: 4.7.4
 
 Change Log:
 
-2.1.1.1 - 2019-20-03
+2.1.2 - 2019-10-04
 ----------------------------------------------------------------------
-- Fix: Two-Factor Authentication QR code not being displayed on new device registration.
-
-2.1.1 - 2019-18-02
-----------------------------------------------------------------------
-- Fix: Prevent Information Disclosure corrupts htaccess code
+- Feature: Defender Pro now supports the WPMU DEV Dashboard’s white label feature.
+- Feature: You can now perform a factory reset of Defender’s settings via the Settings screen, as well as control what happens to data when the plugin is uninstalled.
+- Improvement: Defender File Scanning no longer identifies robots.txt as a potentially harmful file.
+- Improvement: We’ve turned off autocomplete on the two-factor authentication field so that previous codes don’t show up.
+- Fix: Fixed a conflict with Defender where the 404 lockout feature would lock out users who tried to access old Hummingbird cache files.
+- Fix: You can now view date ranges greater than 7 days for IP Lockout logs
+ - Fix: Minor grammar and UX improvements.
 
 2.1 - 2019-18-02
 ----------------------------------------------------------------------
@@ -285,4 +287,4 @@ Fixed: Scanning was sometimes slow or getting stuck
 - First release
 
 
-87274-1554644854-au
+87274-1556303117-au

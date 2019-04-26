@@ -66,9 +66,19 @@ class Settings extends \Hammer\WP\Settings {
 
 	public function __construct( $id, $isMulti ) {
 		if ( ( is_admin() || is_network_admin() ) && current_user_can( 'manage_options' ) ) {
-			$this->receipts[]        = get_current_user_id();
-			$this->report_receipts[] = get_current_user_id();
-			$this->ip_whitelist      = $this->getUserIp() . PHP_EOL;
+			$user = wp_get_current_user();
+			if ( is_object( $user ) ) {
+				$this->receipts[]        = array(
+					'first_name' => $user->display_name,
+					'email'      => $user->user_email
+				);
+				$this->report_receipts[] = array(
+					'first_name' => $user->display_name,
+					'email'      => $user->user_email
+				);
+			}
+
+			$this->ip_whitelist = $this->getUserIp() . PHP_EOL;
 			//default is weekly
 			$this->report_day = strtolower( date( 'l' ) );
 			$hour             = date( 'H', current_time( 'timestamp' ) );
@@ -392,6 +402,16 @@ class Settings extends \Hammer\WP\Settings {
 				array(
 					function () use ( $that ) {
 						$that->before_update();
+						//need to turn off notification or report off if no recipients
+						$this->receipts = array_filter( $this->receipts );
+						if ( count( $this->receipts ) == 0 ) {
+							$this->ip_lockout_notification    = 0;
+							$this->login_lockout_notification = 0;
+						}
+						$this->report_receipts = array_filter( $this->report_receipts );
+						if ( count( $this->report_receipts ) == 0 ) {
+							$this->report = 0;
+						}
 					}
 				)
 			)

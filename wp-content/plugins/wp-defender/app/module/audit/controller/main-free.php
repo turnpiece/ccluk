@@ -43,16 +43,8 @@ class Main_Free extends \WP_Defender\Controller {
 		if ( $this->isInPage() ) {
 			wp_enqueue_script( 'wpmudev-sui' );
 			wp_enqueue_style( 'wpmudev-sui' );
-			wp_enqueue_script( 'defender' );
+			//wp_enqueue_script( 'defender' );
 			wp_enqueue_style( 'defender' );
-			wp_enqueue_script( 'audit', wp_defender()->getPluginUrl() . 'app/module/audit/js/script.js', array(
-				'jquery-effects-core'
-			) );
-			wp_enqueue_script( 'audit-momentjs', wp_defender()->getPluginUrl() . 'app/module/audit/js/moment/moment.min.js' );
-			wp_enqueue_style( 'audit-daterangepicker', wp_defender()->getPluginUrl() . 'app/module/audit/js/daterangepicker/daterangepicker.css' );
-			wp_enqueue_script( 'audit-daterangepicker', wp_defender()->getPluginUrl() . 'app/module/audit/js/daterangepicker/daterangepicker.js' );
-		} else {
-			wp_enqueue_script( 'audit', wp_defender()->getPluginUrl() . 'app/module/audit/js/script.js' );
 		}
 	}
 

@@ -28,7 +28,7 @@ class Core_Scan extends Behavior {
 		$checksums = Scan_Api::getCoreChecksums();
 
 		if ( ! is_array( $checksums ) ) {
-
+			$checksums = array();
 		} else {
 			$item           = new Result_Item();
 			$item->parentId = $model->id;
@@ -47,6 +47,10 @@ class Core_Scan extends Behavior {
 				} elseif ( ! isset( $checksums[ $relPath ] ) ) {
 					//we need to check if this is wp-config, a hot fix for windows
 					if ( DIRECTORY_SEPARATOR == '\\' && $relPath == 'wp-config.php' ) {
+						return null;
+					}
+					//some common files like robots.txt, we will move this to content scan
+					if ( in_array( $relPath, array( 'robots.txt' ) ) ) {
 						return null;
 					}
 					$item->raw = array(

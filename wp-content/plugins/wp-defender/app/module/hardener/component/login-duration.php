@@ -137,7 +137,7 @@ class Login_Duration extends Rule {
 						}
 						set_transient( 'defender_logout_payload', $after_logout_payload, 30 * 60 );
 						$logout_url = add_query_arg( 'defender_logout', '1', site_url() );
-						wp_redirect( $logout_url );
+						wp_safe_redirect( $logout_url );
 						exit;
 					}
 				} else {
@@ -151,7 +151,7 @@ class Login_Duration extends Rule {
 				$after_logout = HTTP_Helper::retrieve_get( 'after_logout', false );
 				if ( $after_logout ) {
 					$after_logout_url = esc_url( $after_logout );
-					wp_redirect( $after_logout_url );
+					wp_safe_redirect( $after_logout_url );
 					exit;
 				}
 				$login_url      = wp_login_url();
@@ -161,14 +161,14 @@ class Login_Duration extends Rule {
 					'redirect_to'            => $logout_payload['redirect_to'],
 					'defender_login_message' => $logout_payload['msg'],
 				), $login_url );
-				wp_redirect( $login_url );
+				wp_safe_redirect( $login_url );
 				exit;
 			}
 		} else if ( $defender_logout ) {
 			$after_logout = HTTP_Helper::retrieve_get( 'after_logout', false );
 			if ( $after_logout ) {
 				$after_logout_url = esc_url( $after_logout );
-				wp_redirect( $after_logout_url );
+				wp_safe_redirect( $after_logout_url );
 			}
 			$login_url      = wp_login_url();
 			$logout_payload = ( is_multisite() ? get_site_transient( 'defender_logout_payload' ) : get_transient( 'defender_logout_payload' ) );
@@ -177,7 +177,7 @@ class Login_Duration extends Rule {
 				'redirect_to'            => $logout_payload['redirect_to'],
 				'defender_login_message' => $logout_payload['msg'],
 			), $login_url );
-			wp_redirect( $login_url );
+			wp_safe_redirect( $login_url );
 			exit;
 		}
 	}

@@ -46,6 +46,7 @@ class Disable_File_Editor_Service extends Rule_Service implements IRule_Service 
 			list( $value, $line ) = $line;
 			if ( $value == true ) {
 				//already disable it, if we sitll here mean st not work, do nothing
+				return;
 			} else {
 				$config[ $line ] = "define( 'DISALLOW_FILE_EDIT', true );" . PHP_EOL;
 
@@ -69,12 +70,14 @@ class Disable_File_Editor_Service extends Rule_Service implements IRule_Service 
 		$line   = $this->findLine( $config );
 		if ( $line === false ) {
 			//perhaps this already removed manually, do nothing
+			return;
 		} else {
 			$value = $line[0];
 			$line  = $line[1];
 			if ( $value == "true" ) {
 				//value is true, we will remove this
 				unset( $config[ $line ] );
+
 				//save it
 				return file_put_contents( $config_path, implode( null, $config ), LOCK_EX );
 			}

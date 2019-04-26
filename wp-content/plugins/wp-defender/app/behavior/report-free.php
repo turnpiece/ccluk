@@ -127,6 +127,10 @@ class Report_Free extends Behavior {
 			case 30:
 				$text = __( "monthly", wp_defender()->domain );
 				break;
+			default:
+				//param not from the button on frontend, log it
+				error_log( sprintf( 'Unexpected value %s from IP %s', $freq, Utils::instance()->getUserIp() ) );
+				break;
 		}
 
 		return $text;

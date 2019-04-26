@@ -5,12 +5,14 @@
         </h3>
     </div>
     <div class="sui-message">
-        <img
-                src="<?php echo wp_defender()->getPluginUrl() ?>assets/img/lockout-man.svg"
-                class="sui-image"/>
+		<?php if ( wp_defender()->whiteLabel == 0 ): ?>
+            <img
+                    src="<?php echo wp_defender()->getPluginUrl() ?>assets/img/lockout-man.svg"
+                    class="sui-image"/>
+		<?php endif; ?>
         <div class="sui-message-content">
             <p>
-	            <?php esc_html_e( "With 404 detection enabled, Defender will keep an eye out for IP addresses that repeatedly request pages on your website that don’t exist and then temporarily block them from accessing your site.", wp_defender()->domain ) ?>
+				<?php esc_html_e( "With 404 detection enabled, Defender will keep an eye out for IP addresses that repeatedly request pages on your website that don’t exist and then temporarily block them from accessing your site.", wp_defender()->domain ) ?>
             </p>
             <form method="post" id="settings-frm" class="ip-frm">
 				<?php wp_nonce_field( 'saveLockoutSettings' ) ?>

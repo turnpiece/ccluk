@@ -37,6 +37,7 @@ class Dashboard extends Controller {
 		$this->add_filter( 'wdp_register_hub_action', 'addMyEndpoint' );
 		add_filter( 'custom_menu_order', '__return_true' );
 		$this->add_filter( 'menu_order', 'menuOrder' );
+		add_action( 'admin_head', array( &$this, 'replaceHeroImages' ) );
 	}
 
 	public function skipActivator() {
@@ -72,6 +73,25 @@ class Dashboard extends Controller {
 		}
 
 		return $menu_order;
+	}
+
+	public function replaceHeroImages() {
+		if ( strlen( wp_defender()->heroImage ) > 0 ) {
+			?>
+            <style type="text/css">
+                .wp-defender .def-dashboard .sui-summary:not(.sui-unbranded),
+                .wp-defender .wdf-scanning .sui-summary:not(.sui-unbranded),
+                .wp-defender .auditing .sui-summary:not(.sui-unbranded),
+                .wp-defender .iplockout .sui-summary:not(.sui-unbranded) {
+                    background-image: url("<?php echo wp_defender()->heroImage ?>");
+                    background-position: 3% 50%;
+                }
+                .wp-defender .hardener .sui-summary:not(.sui-unbranded){
+                    background-image: none;
+                }
+            </style>
+			<?php
+		}
 	}
 
 	public function defenderSubmitStats() {

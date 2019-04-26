@@ -9,52 +9,20 @@ class WD_Main_Activator {
 	public function __construct( WP_Defender $wp_defender ) {
 		add_action( 'init', array( &$this, 'init' ), 9 );
 		add_action( 'wp_loaded', array( &$this, 'maybeShowUpgradedNotice' ), 9 );
-		//add_action( 'activated_plugin', array( &$this, 'redirectToDefender' ) );
+		add_action( 'plugins_loaded', array( &$this, 'prepareBrandingInfo' ) );
 	}
 
 	/**
 	 * Initial
 	 */
 	public function init() {
-		$db_ver = get_site_option( 'wd_db_version' );
-		if ( wp_defender()->db_version == "1.4" && $db_ver != false && version_compare( $db_ver, wp_defender()->db_version, '<' ) == true ) {
-			$this->maybeUpgrade();
-		} elseif ( wp_defender()->db_version == "1.5" && version_compare( $db_ver, wp_defender()->db_version, '<' ) ) {
-			$this->maybeUpgrade15();
-		}
-
-		if ( $db_ver != false && version_compare( $db_ver, '1.7', '<' ) ) {
-			if ( ! \WP_Defender\Module\IP_Lockout\Component\Login_Protection_Api::checkIfTableExists() ) {
-				add_site_option( 'defenderLockoutNeedUpdateLog', 1 );
-				\WP_Defender\Module\IP_Lockout\Component\Login_Protection_Api::createTables();
-				update_site_option( 'wd_db_version', "1.7" );
-			}
-		} elseif ( ! \WP_Defender\Module\IP_Lockout\Component\Login_Protection_Api::checkIfTableExists() ) {
-			\WP_Defender\Module\IP_Lockout\Component\Login_Protection_Api::createTables();
-			update_site_option( 'wd_db_version', "1.7" );
-		}
-
-		if ( $db_ver != false && version_compare( $db_ver, '1.7.1', '<' ) ) {
-			\WP_Defender\Module\IP_Lockout\Component\Login_Protection_Api::alterTableFor171();
-			update_site_option( 'wd_db_version', "1.7.1" );
-		}
-
-		if ( $db_ver != false && version_compare( $db_ver, '2.0', '<' ) ) {
-			$activeScan = \WP_Defender\Module\Scan\Component\Scan_Api::getActiveScan();
-			if ( is_object( $activeScan ) ) {
-				//remove the current scan and start a new one
-				$activeScan->delete();
-				\WP_Defender\Module\Scan\Component\Scan_Api::flushCache();
-			}
-			//force to start new one
-			\WP_Defender\Module\Scan\Component\Scan_Api::createScan();
-			update_site_option( 'wd_db_version', "2.0" );
-		}
 		add_filter( 'plugin_action_links_' . plugin_basename( wp_defender()->plugin_slug ), array(
 			&$this,
 			'addSettingsLink'
 		) );
 		if ( ! \WP_Defender\Behavior\Utils::instance()->checkRequirement() ) {
+			//requirement not met, return
+			return;
 		} else {
 			if ( \WP_Defender\Behavior\Utils::instance()->getAPIKey() == false ) {
 				wp_defender()->isFree = true;
@@ -67,25 +35,24 @@ class WD_Main_Activator {
 			\Hammer\Base\Container::instance()->set( 'lockout', new \WP_Defender\Module\IP_Lockout() );
 			\Hammer\Base\Container::instance()->set( 'advanced_tool', new \WP_Defender\Module\Advanced_Tools() );
 			\Hammer\Base\Container::instance()->set( 'gdpr', new \WP_Defender\Controller\GDPR() );
+			\Hammer\Base\Container::instance()->set( 'setting', new \WP_Defender\Module\Setting() );
 			//no need to set debug
 			new \WP_Defender\Controller\Debug();
 		}
 	}
 
-	/**
-	 * redirect to defender dahsboard after plugin activated
-	 */
-	public function redirectToDefender( $plugin ) {
-		if ( isset( $_POST['plugin_status'] ) && $_POST['plugin_status'] == 'all' ) {
-			//seem like a bulk action, do nothing
-			return;
-		}
-		//activate inside dashboard plugin
-		if ( isset( $_POST['action'] ) && $_POST['action'] == 'wdp-project-activate' ) {
-			return;
-		}
-		if ( $plugin == wp_defender()->plugin_slug ) {
-			// exit( wp_redirect( network_admin_url( 'admin.php?page=wp-defender' ) ) );
+	public function prepareBrandingInfo() {
+		if ( \WP_Defender\Behavior\Utils::instance()->getAPIKey() ) {
+			$site = WPMUDEV_Dashboard::$site;
+			if ( is_object( $site ) ) {
+				$info = $site->get_wpmudev_branding( array() );
+
+				wp_defender()->hideHeroImage = $info['hide_branding'];
+				wp_defender()->heroImage     = $info['hero_image'];
+				wp_defender()->footerText    = $info['footer_text'];
+				wp_defender()->changeFooter  = $info['change_footer'];
+				wp_defender()->hideDocLinks  = $info['hide_doc_link'];
+			}
 		}
 	}
 
@@ -238,6 +205,61 @@ class WD_Main_Activator {
 	}
 
 	public function activationHook() {
+		$db_ver = get_site_option( 'wd_db_version' );
+		if ( wp_defender()->db_version == "1.4" && $db_ver != false && version_compare( $db_ver, wp_defender()->db_version, '<' ) == true ) {
+			$this->maybeUpgrade();
+		}
+		if ( wp_defender()->db_version == "1.5" && $db_ver != false && version_compare( $db_ver, wp_defender()->db_version, '<' ) ) {
+			$this->maybeUpgrade15();
+		}
+
+		if ( $db_ver != false && version_compare( $db_ver, '1.7', '<' ) ) {
+			if ( ! \WP_Defender\Module\IP_Lockout\Component\Login_Protection_Api::checkIfTableExists() ) {
+				add_site_option( 'defenderLockoutNeedUpdateLog', 1 );
+				\WP_Defender\Module\IP_Lockout\Component\Login_Protection_Api::createTables();
+				update_site_option( 'wd_db_version', "1.7" );
+			}
+		} elseif ( ! \WP_Defender\Module\IP_Lockout\Component\Login_Protection_Api::checkIfTableExists() ) {
+			\WP_Defender\Module\IP_Lockout\Component\Login_Protection_Api::createTables();
+			update_site_option( 'wd_db_version', "1.7" );
+		}
+
+		if ( $db_ver != false && version_compare( $db_ver, '1.7.1', '<' ) ) {
+			\WP_Defender\Module\IP_Lockout\Component\Login_Protection_Api::alterTableFor171();
+			update_site_option( 'wd_db_version', "1.7.1" );
+		}
+
+		if ( $db_ver != false && version_compare( $db_ver, '2.0', '<' ) ) {
+			$activeScan = \WP_Defender\Module\Scan\Component\Scan_Api::getActiveScan();
+			if ( is_object( $activeScan ) ) {
+				//remove the current scan and start a new one
+				$activeScan->delete();
+				\WP_Defender\Module\Scan\Component\Scan_Api::flushCache();
+			}
+			//force to start new one
+			\WP_Defender\Module\Scan\Component\Scan_Api::createScan();
+			update_site_option( 'wd_db_version', "2.0" );
+		}
+		if ( $db_ver != false && version_compare( $db_ver, '2.1.1', '<' ) ) {
+			//convert scan notification
+			$settings                       = \WP_Defender\Module\Scan\Model\Settings::instance();
+			$settings->receipts             = $this->convertOldToNewRecipients( $settings->receipts );
+			$settings->receiptsNotification = $this->convertOldToNewRecipients( $settings->receiptsNotification );
+			$settings->save();
+			//audit
+			$settings           = \WP_Defender\Module\Audit\Model\Settings::instance();
+			$settings->receipts = $this->convertOldToNewRecipients( $settings->receipts );
+			$settings->save();
+			//lockout
+			$settings                  = \WP_Defender\Module\IP_Lockout\Model\Settings::instance();
+			$settings->receipts        = $this->convertOldToNewRecipients( $settings->receipts );
+			$settings->report_receipts = $this->convertOldToNewRecipients( $settings->report_receipts );
+			$settings->save();
+		}
+		//check to fix missing table
+		\WP_Defender\Module\IP_Lockout\Component\Login_Protection_Api::alterTableFor171();
+		update_site_option( 'wd_db_version', wp_defender()->db_version );
+
 		$settings = \WP_Defender\Module\Scan\Model\Settings::instance();
 		if ( $settings->notification ) {
 			$cronTime = \WP_Defender\Behavior\Utils::instance()->reportCronTimestamp( $settings->time, 'scanReportCron' );
@@ -253,5 +275,22 @@ class WD_Main_Activator {
 			$cronTime = \WP_Defender\Behavior\Utils::instance()->reportCronTimestamp( $settings->report_time, 'lockoutReportCron' );
 			wp_schedule_event( $cronTime, 'daily', 'lockoutReportCron' );
 		}
+	}
+
+	private function convertOldToNewRecipients( $data ) {
+		$tmp = array();
+		foreach ( $data as $id ) {
+			if ( filter_var( $id, FILTER_VALIDATE_INT ) ) {
+				$user = get_user_by( 'id', $id );
+				if ( is_object( $user ) ) {
+					$temp[] = array(
+						'first_name' => $user->display_name,
+						'email'      => $user->user_email
+					);
+				}
+			}
+		}
+
+		return $tmp;
 	}
 }

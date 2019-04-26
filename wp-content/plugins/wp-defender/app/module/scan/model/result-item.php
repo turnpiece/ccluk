@@ -3,6 +3,7 @@
 namespace WP_Defender\Module\Scan\Model;
 
 use Hammer\WP\Model;
+use WP_Defender\Behavior\Utils;
 use WP_Defender\Module\Scan\Component\Scan_Api;
 
 /**
@@ -134,6 +135,10 @@ class Result_Item extends Model {
 					'contentResult' => '\WP_Defender\Module\Scan\Behavior\Pro\Content_Result',
 					'utils'         => '\WP_Defender\Behavior\Utils'
 				);
+				break;
+			default:
+				//param not from the button on frontend, log it
+				error_log( sprintf( 'Unexpected value %s from IP %s', $this->type, Utils::instance()->getUserIp() ) );
 				break;
 		}
 	}

@@ -1,0 +1,264 @@
+@include body-class(true) {
+
+	.dashui-table-plugins {
+		table-layout: auto;
+		color: palette(gray, light);
+
+		tbody {
+
+			tr {
+
+				td {
+
+					&:first-child {
+
+						@include media(max-width, md) {
+							padding-left: 0;
+						}
+					}
+
+					&:not(:last-child) {
+
+						@include media(max-width, md) {
+							margin-bottom: 10px;
+						}
+					}
+
+					&:last-child {
+
+						@include media(max-width, md) {
+							padding-right: 0;
+						}
+					}
+
+					@include media(max-width, md) {
+						height: auto;
+						display: block;
+						padding: 0 0 0 26px;
+						border-bottom-width: 0;
+					}
+				}
+
+				.dashui-column-title,
+				.dashui-column-actions {
+
+					.dashui-plugin-actions {
+
+						&.dashui-mobile-hidden {
+
+							@include media(max-width, md) {
+								display: none;
+							}
+						}
+
+						&.dashui-desktop-hidden {
+
+							@include media(min-width, md) {
+								display: none;
+							}
+						}
+					}
+				}
+
+				.dashui-column-title {
+
+					.dashui-plugin-title {
+						display: flex;
+
+						.sui-checkbox {
+
+							input + span {
+
+								@include media(max-width, md) {
+									margin: 7px 0;
+								}
+							}
+
+							@include media(max-width, md) {
+								margin-right: 10px;
+								margin-bottom: 0;
+							}
+						}
+
+						.dashui-plugin-image {
+							width: 30px;
+							height: 30px;
+							display: block;
+							flex: 0 0 30px;
+							border-radius: $border-radius;
+							background-color: palette(silver, light);
+							background-repeat: no-repeat;
+							background-position: center;
+							background-size: cover;
+
+							+ .dashui-plugin-name {
+								margin-left: 15px;
+							}
+						}
+
+						.dashui-plugin-name {
+							cursor: pointer;
+							display: block;
+							margin: 0;
+							padding: 0;
+							border: 0;
+							background-color: transparent;
+							color: palette(gray, dark);
+							font: bold 15px/22px $font;
+							letter-spacing: $font--letter-spacing;
+							text-align: left;
+							transition: 0.2s ease;
+
+							&,
+							&:hover,
+							&:active {
+								outline: none;
+								box-shadow: none;
+							}
+
+							&:hover,
+							&:active {
+								color: $blue;
+							}
+
+							@include media(max-width, md) {
+								flex: 1;
+							}
+
+							@include media(min-width, md) {
+								flex: 0 1 auto;
+							}
+						}
+
+						.dashui-plugin-actions {
+							margin-left: 10px;
+						}
+
+						@include media(min-width, md) {
+							align-items: center;
+						}
+					}
+
+					@include media(min-width, md) {
+						width: 33%;
+						min-width: 290px;
+					}
+				}
+
+				.dashui-column-description {
+
+					@include media(min-width, md) {
+						width: 33%;
+					}
+				}
+
+				.dashui-column-actions {
+
+					.dashui-plugin-actions {
+						display: flex;
+						align-items: center;
+
+						&.dashui-mobile-hidden {
+
+							strong {
+								flex: 0 0 auto;
+
+								+ .sui-actions-right {
+									margin-left: 10px;
+								}
+							}
+
+							.sui-button {
+								//max-width: 113px;
+
+								.sui-loading-text {
+									overflow: hidden;
+									text-overflow: ellipsis;
+									white-space: nowrap;
+								}
+
+								&[data-action="project-configure"] {
+									min-width: 113px;
+								}
+							}
+
+							.sui-actions-right {
+								flex: 1;
+								justify-content: flex-end;
+
+								.sui-tag {
+									overflow: hidden;
+									display: block;
+									text-overflow: ellipsis;
+									white-space: nowrap;
+								}
+
+								@include media(max-width, md) {
+									overflow: hidden;
+								}
+							}
+						}
+
+						&.dashui-desktop-hidden {
+							padding-top: 10px;
+						}
+					}
+
+					@include media(max-width, md) {
+						margin-top: -10px;
+					}
+
+					@include media(min-width, md) {
+						//width: 23%;
+						//min-width: 206px;
+					}
+				}
+
+				&.dashui-bulk-action {
+
+					td {
+
+						.sui-checkbox {
+
+							@include media(max-width, md) {
+								margin-bottom: 0;
+								margin-right: 10px;
+							}
+						}
+
+						@include media(max-width, md) {
+							display: flex;
+							align-items: center;
+							padding: 0;
+						}
+
+						@include media(min-width, md) {
+							padding-top: 0;
+							padding-bottom: 15px;
+						}
+					}
+
+					@include media(max-width, md) {
+						padding-top: 0;
+						padding-bottom: 14px;
+					}
+				}
+
+				@include media(max-width, md) {
+					display: block;
+					position: relative;
+					padding: 20px;
+					border-bottom: 1px solid palette(silver, soft);
+				}
+			}
+
+			@include media(max-width, md) {
+				display: block;
+			}
+		}
+
+		@include media(max-width, md) {
+			display: block;
+		}
+	}
+}

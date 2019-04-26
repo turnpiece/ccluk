@@ -5,9 +5,11 @@
         </h3>
     </div>
     <div class="sui-message">
-        <img
-                src="<?php echo wp_defender()->getPluginUrl() ?>assets/img/lockout-man.svg"
-                class="sui-image"/>
+		<?php if ( wp_defender()->whiteLabel == 0 ): ?>
+            <img
+                    src="<?php echo wp_defender()->getPluginUrl() ?>assets/img/lockout-man.svg"
+                    class="sui-image"/>
+		<?php endif; ?>
         <div class="sui-message-content">
             <p>
 				<?php esc_html_e( "Put a stop to hackers trying to randomly guess your login credentials. Defender will lock out users after a set number of failed login attempts.", wp_defender()->domain ) ?>

@@ -46,7 +46,7 @@ class Report extends Behavior {
             <div class="sui-box-footer">
                 <div class="sui-center-box no-padding-bottom">
                     <p class="sui-p-small">
-	                    <?php printf( __( "You can also <a target='_blank' href=\"%s\">create PDF reports</a> to send to your clients via The Hub.", wp_defender()->domain ), "https://premium.wpmudev.org/reports/" ) ?>
+						<?php printf( __( "You can also <a target='_blank' href=\"%s\">create PDF reports</a> to send to your clients via The Hub.", wp_defender()->domain ), "https://premium.wpmudev.org/reports/" ) ?>
                     </p>
                 </div>
             </div>
@@ -70,6 +70,9 @@ class Report extends Behavior {
 					break;
 				case '30':
 					$text = __( "Monthly", wp_defender()->domain );
+					break;
+				default:
+					error_log( sprintf( 'Unexpected value %s', $settings->report_frequency ) );
 					break;
 			}
 			$text = '<span class="sui-tag sui-tag-blue">' . $text . '</span>';
@@ -96,6 +99,9 @@ class Report extends Behavior {
 				case '30':
 					$text = __( "Monthly", wp_defender()->domain );
 					break;
+				default:
+					error_log( sprintf( 'Unexpected value %s', $settings->frequency ) );
+					break;
 			}
 			$text = '<span class="sui-tag sui-tag-blue">' . $text . '</span>';
 		} else {
@@ -117,6 +123,9 @@ class Report extends Behavior {
 					break;
 				case '30':
 					$text = __( "Monthly", wp_defender()->domain );
+					break;
+				default:
+					error_log( sprintf( 'Unexpected value %s', Settings::instance()->frequency ) );
 					break;
 			}
 
@@ -188,6 +197,9 @@ class Report extends Behavior {
 				break;
 			case 30:
 				$text = __( "monthly", wp_defender()->domain );
+				break;
+			default:
+				error_log( sprintf( 'Unexpected value %s', $freq ) );
 				break;
 		}
 

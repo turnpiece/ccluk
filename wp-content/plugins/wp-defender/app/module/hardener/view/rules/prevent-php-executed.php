@@ -48,7 +48,7 @@ $checked = $controller->check();
 				<?php if ( $checked ): ?>
                     <div class="sui-notice sui-notice-success">
                         <p>
-							<?php _e( "You've disabled the file editor, winning.", wp_defender()->domain ) ?>
+		                    <?php _e( "You've automatically disabled PHP execution..", wp_defender()->domain ) ?>
                         </p>
                     </div>
 				<?php else: ?>

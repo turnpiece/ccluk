@@ -746,8 +746,6 @@ class Content_Scan extends Behavior {
 			} else {
 				$ignoreTo = $index + 5;
 			}
-		} elseif ( in_array( $token['code'], array( T_STRING_CONCAT ) ) ) {
-
 		}
 
 		return array( $errorFound, $ignoreTo );

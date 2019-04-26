@@ -5,6 +5,7 @@
 
 namespace WP_Defender\Module\Hardener\Component;
 
+use Faker\Factory;
 use Hammer\Helper\Log_Helper;
 use Hammer\Helper\WP_Helper;
 use WP_Defender\Behavior\Utils;
@@ -103,9 +104,8 @@ class DB_Prefix_Service extends Rule_Service implements IRule_Service {
 	 */
 	private function updateData() {
 		global $wpdb;
-		$prefix     = $this->new_prefix;
-		$old_prefix = $this->old_prefix;
-
+		$prefix            = $this->new_prefix;
+		$old_prefix        = $this->old_prefix;
 		if ( is_multisite() ) {
 			/**
 			 * case multiste

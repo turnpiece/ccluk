@@ -25,8 +25,9 @@ class Security_Key extends Rule {
 		if ( $time ) {
 			$daysAgo = ( time() - $time ) / ( 60 * 60 * 24 );
 		} else {
-			$daysAgo = null;
+			$daysAgo = __( "unknown", wp_defender()->domain );
 		}
+
 		$this->renderPartial( 'rules/security-key', array(
 			'interval' => $interval,
 			'daysAgo'  => $daysAgo

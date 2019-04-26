@@ -51,13 +51,36 @@ class Scan_Widget extends Behavior {
 			} elseif ( is_object( $activeScan ) && $activeScan->status != \WP_Defender\Module\Scan\Model\Scan::STATUS_ERROR ) {
 				echo $this->_renderScanning( $activeScan );
 			} elseif ( is_object( $activeScan ) && $activeScan->status == \WP_Defender\Module\Scan\Model\Scan::STATUS_ERROR ) {
-
+				echo $this->_renderError( $activeScan );
 			} else {
 				echo $this->_renderResult( $lastScan );
 			}
 			?>
         </div>
 		<?php
+	}
+
+	/**
+	 * @param \WP_Defender\Module\Scan\Model\Scan $activeScan
+	 *
+	 * @return false|string
+	 */
+	private function _renderError( $activeScan ) {
+		ob_start();
+		?>
+        <div class="sui-box-body">
+            <p>
+				<?php _e( "Scan your website for file changes, vulnerabilities and injected code and get and get notified about anything suspicious.", wp_defender()->domain ) ?>
+            </p>
+            <div class="sui-notice sui-notice-error">
+                <p><?php echo $activeScan->error ?></p>
+                <div class="sui-notice-buttons">
+                    <a href="#" class="sui-button"><?php _e( "Try again", wp_defender()->domain ) ?></a>
+                </div>
+            </div>
+        </div>
+		<?php
+		return ob_get_clean();
 	}
 
 	private function _renderScanning( $model ) {
@@ -172,23 +195,26 @@ class Scan_Widget extends Behavior {
 			<?php if ( ! wp_defender()->isFree ): ?>
                 <div class="sui-actions-right">
                     <p class="sui-p-small">
-	                    <?php
-	                    if ( ! empty( Settings::instance()->notification ) ) {
-		                    switch ( Settings::instance()->frequency ) {
-			                    case '1':
-				                    _e( "Automatic scans are running daily", wp_defender()->domain );
-				                    break;
-			                    case '7':
-				                    _e( "Automatic scans are running weekly", wp_defender()->domain );
-				                    break;
-			                    case '30':
-				                    _e( "Automatic scans are running monthly", wp_defender()->domain );
-				                    break;
-		                    }
-	                    } else {
-		                    _e( "Automatic scans are disabled", wp_defender()->domain );
-	                    }
-	                    ?>
+						<?php
+						if ( ! empty( Settings::instance()->notification ) ) {
+							switch ( Settings::instance()->frequency ) {
+								case '1':
+									_e( "Automatic scans are running daily", wp_defender()->domain );
+									break;
+								case '7':
+									_e( "Automatic scans are running weekly", wp_defender()->domain );
+									break;
+								case '30':
+									_e( "Automatic scans are running monthly", wp_defender()->domain );
+									break;
+								default:
+									error_log( sprintf( 'Unexpected value %s', Settings::instance()->frequency ) );
+									break;
+							}
+						} else {
+							_e( "Automatic scans are disabled", wp_defender()->domain );
+						}
+						?>
                     </p>
                 </div>
 			<?php endif; ?>

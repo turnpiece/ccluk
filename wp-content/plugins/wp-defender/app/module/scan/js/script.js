@@ -242,7 +242,7 @@ WDScan.formHandler = function () {
             url: ajaxurl,
             data: data,
             beforeSend: function () {
-                that.find('.sui-button, .sui-button-icon').attr('disabled', 'disabled');
+                that.find('.sui-button-blue').attr('disabled', 'disabled');
             },
             success: function (data) {
                 if (data.data != undefined && data.data.url != undefined) {

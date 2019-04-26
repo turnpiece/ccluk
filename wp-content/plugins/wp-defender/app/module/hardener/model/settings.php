@@ -59,6 +59,10 @@ class Settings extends \Hammer\WP\Settings {
 	 * @var bool
 	 */
 	public $notification = true;
+	/**
+	 * @var bool
+	 */
+	public $notification_repeat = false;
 
 	/**
 	 * Holding receipts info
@@ -92,7 +96,22 @@ class Settings extends \Hammer\WP\Settings {
 	 */
 	public $active_server = 'apache';
 
+	/**
+	 * @var integer
+	 */
+	public $last_seen;
+	/**
+	 * @var integer
+	 */
+	public $last_sent;
+
+	/**
+	 * @var string
+	 */
 	public $min_php_version = '';
+	/**
+	 * @var string
+	 */
 	public $stable_php_version = '';
 
 	/**
@@ -101,6 +120,20 @@ class Settings extends \Hammer\WP\Settings {
 	 * @param $slug
 	 * @param $devPush
 	 */
+
+	public function __construct( $id, $is_multi ) {
+		if ( is_admin() || is_network_admin() && current_user_can( 'manage_options' ) ) {
+			$user = wp_get_current_user();
+			if ( is_object( $user ) ) {
+				$this->receipts[] = array(
+					'first_name' => $user->display_name,
+					'email'      => $user->user_email
+				);
+			}
+		}
+		parent::__construct( $id, $is_multi );
+	}
+
 	public function addToIssues( $slug, $devPush = true ) {
 		$this->addToList( 'issues', $slug, $devPush );
 	}
@@ -342,5 +375,36 @@ class Settings extends \Hammer\WP\Settings {
 	 */
 	public function setActiveServer( $server ) {
 		$this->active_server = $server;
+	}
+
+	public function events() {
+		$that = $this;
+
+		return array(
+			self::EVENT_BEFORE_SAVE => array(
+				array(
+					function () use ( $that ) {
+						//need to turn off notification or report off if no recipients
+						$keys = array(
+							'receipts' => 'notification',
+						);
+						foreach ( $keys as $key => $attr ) {
+							if ( isset( $_POST[ $key ] ) ) {
+								$recipients = $_POST[ $key ];
+								$recipients = array_filter( $recipients );
+								foreach ( $recipients as &$recipient ) {
+									$recipient = array_map( 'wp_strip_all_tags', $recipient );
+								}
+								$this->$key = $recipients;
+							}
+							$this->$key = array_filter( $this->$key );
+							if ( count( $this->$key ) == 0 ) {
+								$this->$attr = 0;
+							}
+						}
+					}
+				)
+			)
+		);
 	}
 }

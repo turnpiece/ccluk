@@ -12,12 +12,19 @@ use WP_Defender\Module\IP_Lockout\Model\IP_Model;
 use WP_Defender\Module\IP_Lockout\Model\Log_Model;
 
 class Logs_Table extends \WP_List_Table {
+	protected $from;
+	protected $to;
+
 	public function __construct( $args = array() ) {
 		parent::__construct( array_merge( array(
 			'plural'     => '',
 			'autoescape' => false,
 			'screen'     => 'lockout_logs'
 		), $args ) );
+
+		$date_format = 'm/d/Y';
+		$this->from  = Http_Helper::retrieve_get( 'date_from', date( $date_format, strtotime( 'today midnight', strtotime( '-14 days', current_time( 'timestamp' ) ) ) ) );
+		$this->to    = Http_Helper::retrieve_get( 'date_to', date( $date_format, current_time( 'timestamp' ) ) );
 	}
 
 	/**
@@ -61,8 +68,9 @@ class Logs_Table extends \WP_List_Table {
 
 		$params = array(
 			'date' => array(
-				'compare' => '>=',
-				'value'   => strtotime( '-' . HTTP_Helper::retrieve_get( 'interval', 30 ) . ' days' )
+				'compare' => 'between',
+				'from'    => strtotime( 'midnight', strtotime( $this->from ) ),
+				'to'      => strtotime( 'tomorrow', strtotime( $this->to ) )
 			)
 		);
 
@@ -73,13 +81,15 @@ class Logs_Table extends \WP_List_Table {
 			$params['ip'] = $ip;
 		}
 
-		$logs       = Log_Model::findAll( $params,
+		$logs = Log_Model::findAll( $params,
 			HTTP_Helper::retrieve_get( 'orderby', 'id' ),
 			HTTP_Helper::retrieve_get( 'order', 'desc' ),
 			$offset . ',' . $per_page
 		);
+
 		$cache      = WP_Helper::getArrayCache();
 		$totalItems = $cache->get( Login_Protection_Api::COUNT_TOTAL, false );
+
 		if ( $totalItems == false ) {
 			$totalItems = Log_Model::count( $params );
 			$cache->set( Login_Protection_Api::COUNT_TOTAL, $totalItems, 3600 );
@@ -120,7 +130,7 @@ class Logs_Table extends \WP_List_Table {
             <input type="checkbox" class="single-select" name="ids[]" value="<?php echo $log->id ?>"/>
             <span aria-hidden="true"></span>
         </label>
-        <span class="badge <?php echo $log->type == 'auth_lock' || $log->type == '404_lock' ? 'locked' : null ?>"><?php echo $log->type == 'auth_fail' || $log->type == 'auth_lock' ? 'login' : '404' ?></span>
+        <span class="badge <?php echo $log->type == 'auth_lock' || $log->type == '404_lockout' ? 'locked' : null ?>"><?php echo $log->type == 'auth_fail' || $log->type == 'auth_lock' ? 'login' : '404' ?></span>
 		<?php
 		echo wp_trim_words( $log->get_log_text( $format ), 20 );
 
@@ -340,11 +350,7 @@ class Logs_Table extends \WP_List_Table {
                         <div class="sui-col">
                             <p><strong><?php _e( "Description", wp_defender()->domain ) ?></strong></p>
                             <p><?php
-								if ( $item->type == '404_error' ) {
-									printf( __( "%s tried to access file %s", wp_defender()->domain ), $item->ip, $item->log );
-								} elseif ( $item->type == 'auth_fail' ) {
-									printf( __( "%s tried to login with username %s", wp_defender()->domain ), $item->ip, $item->tried );
-								}
+								echo $item->get_log_text();
 								?></p>
                         </div>
                         <div class="sui-col">
@@ -398,6 +404,34 @@ class Logs_Table extends \WP_List_Table {
 		?>
         <div class="sui-row">
             <div class="sui-col-md-5">
+				<?php if ( $which == 'top' ): ?>
+                    <small class="font-heavy"><?php _e( "Date range", wp_defender()->domain ) ?></small>
+                    <div class="sui-date">
+                        <i class="sui-icon-calendar" aria-hidden="true"></i>
+                        <input name="date_from" id="wd_range_from" type="text"
+                               class="sui-form-control filterable"
+                               value="<?php echo esc_attr( $this->from . ' - ' . $this->to ) ?>">
+                    </div>
+				<?php endif; ?>
+            </div>
+            <div class="sui-col">
+                <div class="sui-pagination-wrap">
+                    <span class="sui-pagination-results">
+                        <?php printf( __( "%s results", wp_defender()->domain ), $this->_pagination_args['total_items'] ) ?>
+                    </span>
+                    <ul class="sui-pagination">
+						<?php $this->pagination( 'top' ) ?>
+                    </ul>
+                    <button rel="show-filter" data-target=".lockout-logs-filter"
+                            class="sui-button-icon sui-button-outlined sui-pagination-open-filter">
+                        <i class="sui-icon-filter" aria-hidden="true"></i>
+                        <span class="sui-screen-reader-text">Open search filters</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="sui-row">
+            <div class="sui-col">
                 <form id="bulk-action" class="ip-frm" method="post">
                     <div class="bulk-action-bar">
                         <label class="sui-checkbox apply-all">
@@ -418,21 +452,6 @@ class Logs_Table extends \WP_List_Table {
                         </button>
                     </div>
                 </form>
-            </div>
-            <div class="sui-col">
-                <div class="sui-pagination-wrap">
-                    <span class="sui-pagination-results">
-                        <?php printf( __( "%s results", wp_defender()->domain ), $this->_pagination_args['total_items'] ) ?>
-                    </span>
-                    <ul class="sui-pagination">
-						<?php $this->pagination( 'top' ) ?>
-                    </ul>
-                    <button rel="show-filter" data-target=".lockout-logs-filter"
-                            class="sui-button-icon sui-button-outlined sui-pagination-open-filter">
-                        <i class="sui-icon-filter" aria-hidden="true"></i>
-                        <span class="sui-screen-reader-text">Open search filters</span>
-                    </button>
-                </div>
             </div>
         </div>
 		<?php

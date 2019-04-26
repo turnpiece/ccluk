@@ -1,4 +1,4 @@
-<div class="sui-wrap">
+<div class="sui-wrap <?php echo \WP_Defender\Behavior\Utils::instance()->maybeHighContrast() ?>">
     <div class="wp-defender">
         <div class="wdf-scanning">
             <div class="sui-header">

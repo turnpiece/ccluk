@@ -8,6 +8,7 @@ namespace WP_Defender\Module\Scan\Model;
 use Hammer\Helper\Log_Helper;
 use Hammer\Helper\WP_Helper;
 use Hammer\Queue\Queue;
+use WP_Defender\Behavior\Utils;
 use WP_Defender\Module\Scan\Behavior\Core_Scan;
 use WP_Defender\Module\Scan\Behavior\Pro\Content_Scan;
 use WP_Defender\Module\Scan\Behavior\Pro\MD5_Scan;
@@ -141,8 +142,18 @@ WP Defender
 Official WPMU DEV Superhero', wp_defender()->domain );
 		//call parent to load stored
 		if ( is_admin() || is_network_admin() && current_user_can( 'manage_options' ) ) {
-			$this->receipts[]             = get_current_user_id();
-			$this->receiptsNotification[] = get_current_user_id();
+			$user = wp_get_current_user();
+			if ( is_object( $user ) ) {
+				$this->receipts[]             = array(
+					'first_name' => $user->display_name,
+					'email'      => $user->user_email
+				);
+				$this->receiptsNotification[] = array(
+					'first_name' => $user->display_name,
+					'email'      => $user->user_email
+				);
+			}
+
 			//default is weekly
 			$this->day = date( 'l' );
 			$hour      = date( 'H', current_time( 'timestamp' ) );
@@ -172,7 +183,7 @@ Official WPMU DEV Superhero', wp_defender()->domain );
 		}
 
 		if ( $this->scan_content && wp_defender()->isFree != true ) {
-			$scans[] = 'md5';
+			//$scans[] = 'md5';
 			$scans[] = 'content';
 		}
 
@@ -255,6 +266,41 @@ Official WPMU DEV Superhero', wp_defender()->domain );
 
 				return $queue;
 				break;
+			default:
+				//param not from the button on frontend, log it
+				error_log( sprintf( 'Unexpected value %s from IP %s', $slug, Utils::instance()->getUserIp() ) );
+				break;
 		}
+	}
+
+	public function events() {
+		$that = $this;
+
+		return array(
+			self::EVENT_BEFORE_SAVE => array(
+				array(
+					function () use ( $that ) {
+						//need to turn off notification or report off if no recipients
+						$keys = array(
+							'receipts'             => 'report',
+							'receiptsNotification' => 'notification'
+						);
+						foreach ( $keys as $key => $attr ) {
+							if ( isset( $_POST[ $key ] ) ) {
+								$recipients = $_POST[ $key ];
+								foreach ( $recipients as &$recipient ) {
+									$recipient = array_map( 'wp_strip_all_tags', $recipient );
+								}
+								$this->$key = $recipients;
+							}
+							$this->$key = array_filter( $this->$key );
+							if ( count( $this->$key ) == 0 ) {
+								$this->$attr = 0;
+							}
+						}
+					}
+				)
+			)
+		);
 	}
 }

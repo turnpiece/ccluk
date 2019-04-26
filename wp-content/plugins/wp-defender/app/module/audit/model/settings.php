@@ -57,9 +57,15 @@ class Settings extends \Hammer\WP\Settings {
 
 	public function __construct( $id, $isMulti ) {
 		if ( is_admin() || is_network_admin() && current_user_can( 'manage_options' ) ) {
-			$this->receipts[] = get_current_user_id();
-			$this->day        = date( 'l' );
-			$hour             = date( 'H', current_time( 'timestamp' ) );
+			$user = wp_get_current_user();
+			if ( is_object( $user ) ) {
+				$this->receipts[] = array(
+					'first_name' => $user->display_name,
+					'email'      => $user->user_email
+				);
+			}
+			$this->day = date( 'l' );
+			$hour      = date( 'H', current_time( 'timestamp' ) );
 			if ( $hour == '00' ) {
 				$hour = 0;
 			} else {
@@ -82,4 +88,28 @@ class Settings extends \Hammer\WP\Settings {
 		return self::$_instance;
 	}
 
+	public function events() {
+		$that = $this;
+
+		return array(
+			self::EVENT_BEFORE_SAVE => array(
+				array(
+					function () use ( $that ) {
+						//need to turn off notification or report off if no recipients
+						if ( isset( $_POST['receipts'] ) ) {
+							$recipients = $_POST['receipts'];
+							foreach ( $recipients as &$recipient ) {
+								$recipient = array_map( 'wp_strip_all_tags', $recipient );
+							}
+							$this->receipts = $recipients;
+						}
+						$this->receipts = array_filter( $this->receipts );
+						if ( count( $this->receipts ) == 0 ) {
+							$this->notification = 0;
+						}
+					}
+				)
+			)
+		);
+	}
 }

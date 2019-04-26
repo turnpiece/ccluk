@@ -3,6 +3,7 @@ jQuery(function ($) {
     WDIP.formHandler();
     WDIP.listenFilter();
     WDIP.pullSummaryData();
+    WDIP.initDatepicker();
 
     $('div.iplockout').on('form-submitted', function (e, data, form) {
         if (form.attr('id') != 'settings-frm') {
@@ -142,7 +143,16 @@ jQuery(function ($) {
             $(this).closest('.schedule-box').find('div.days-container').show();
         }
     }).change();
+    var last_date = $('#wd_range_from').val();
+    $('#wd_range_from').change(function () {
+        if (last_date !== $(this).val()) {
+            query = WDIP.buildFilterQuery();
+            WDIP.ajaxPull(query, function () {
 
+            });
+        }
+        last_date = $(this).val();
+    })
     $('body').on('click', '.ip-action', function (e) {
         e.preventDefault();
         var that = $(this);
@@ -283,8 +293,7 @@ WDIP.formHandler = function () {
 };
 WDIP.listenFilter = function () {
     var jq = jQuery;
-    var form = jq('.lockout-logs-filter form');
-    form.on('submit', function () {
+    jq('body').on('submit', '.lockout-logs-filter form', function () {
         var query = WDIP.buildFilterQuery();
         WDIP.ajaxPull(query, function () {
         })
@@ -332,6 +341,11 @@ WDIP.buildFilterQuery = function () {
             query.push(jq(this).attr('name') + '=' + jq(this).val());
         }
     });
+    //need to input the date range too
+    var range = jq('#wd_range_from').val();
+    range = range.split('-');
+    query.push('date_from=' + jq.trim(range[0]));
+    query.push('date_to=' + jq.trim(range[1]));
     return query.join('&');
 };
 
@@ -357,5 +371,55 @@ WDIP.pullSummaryData = function () {
                 }
             }
         })
+    }
+}
+
+WDIP.initDatepicker = function () {
+    //calendar
+    if (jQuery('#wd_range_from').size() > 0) {
+        var start = moment().subtract(7, 'days');
+        var end = moment();
+        var maxDate = end;
+        var minDate = moment().subtract(30, 'days');
+        jQuery('#wd_range_from').daterangepicker({
+            //startDate: start,
+            //endDate: end,
+            autoApply: true,
+            maxDate: maxDate,
+            minDate: minDate,
+            "linkedCalendars": false,
+            showDropdowns: false,
+            applyClass: 'wd-hide',
+            cancelClass: 'wd-hide',
+            alwaysShowCalendars: true,
+            opens: 'left',
+            dateLimit: {
+                days: 90
+            },
+            locale: {
+                "format": "MM/DD/YYYY",
+                "separator": " - "
+            },
+            template: '<div class="daterangepicker wd-calendar wp-defender dropdown-menu"> ' +
+                '<div class="ranges"> ' +
+                '<div class="range_inputs"> ' +
+                '<button class="applyBtn" disabled="disabled" type="button"></button> ' +
+                '<button class="cancelBtn" type="button"></button> ' +
+                '</div> ' +
+                '</div> ' +
+                '<div class="calendar left"> ' +
+                '<div class="calendar-table"></div> ' +
+                '</div> ' +
+                '<div class="calendar right"> ' +
+                '<div class="calendar-table"></div> ' +
+                '</div> ' +
+                '</div>',
+            showCustomRangeLabel: false,
+            ranges: {
+                'Today': [moment(), moment()],
+                '7 Days': [moment().subtract(6, 'days'), moment()],
+                '30 Days': [moment().subtract(29, 'days'), moment()]
+            }
+        });
     }
 }

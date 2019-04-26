@@ -93,7 +93,7 @@
                         <?php _e( "Deactivate", wp_defender()->domain ) ?>
                     </span>
                     <span class="sui-description">
-                        <?php _e( "Disable two-factor authentication on your website.", wp_defender()->domain ) ?>
+                        <?php _e( "Disable login area masking and return to the default wp-admin and wp-login URLS.", wp_defender()->domain ) ?>
                     </span>
                 </div>
                 <div class="sui-box-settings-col-2">

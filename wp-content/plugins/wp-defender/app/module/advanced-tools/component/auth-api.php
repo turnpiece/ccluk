@@ -5,14 +5,15 @@
 
 namespace WP_Defender\Module\Advanced_Tools\Component;
 
+use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
 use BaconQrCode\Renderer\Image\SvgImageBackEnd;
 use BaconQrCode\Renderer\ImageRenderer;
 use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use BaconQrCode\Writer;
 use Hammer\Base\Component;
+use PragmaRX\Google2FA\Google2FA;
 use WP_Defender\Behavior\Utils;
 use WP_Defender\Module\Advanced_Tools\Model\Auth_Settings;
-use WP_Defender\Module\Scan\Component\Scan_Api;
 
 class Auth_API extends Component {
 	/**
@@ -47,8 +48,7 @@ class Auth_API extends Component {
 		//manually include the autoload
 		require_once wp_defender()->getPluginPath() . 'vendor/phpqrcode/qrlib.php';
 
-		$code =  \QRcode::svg( $chl, false, QR_ECLEVEL_L, 4 );
-		//clean up cache folder
+		$code = \QRcode::svg( $chl, false, QR_ECLEVEL_L, 4 );
 
 	}
 

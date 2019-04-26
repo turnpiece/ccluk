@@ -68,6 +68,10 @@ class Activator extends Behavior {
 						$activated[] = $item;
 						$settings->save();
 						break;
+					default:
+						//param not from the button on frontend, log it
+						error_log( sprintf( 'Unexpected value %s from IP %s', $item, Utils::instance()->getUserIp() ) );
+						break;
 				}
 			}
 		}
@@ -96,11 +100,7 @@ class Activator extends Behavior {
 		}
 
 		//alread has data, just return
-		if ( get_site_option( 'wp_defender' ) != false
-		     || get_site_option( 'wd_scan_settings' ) != false
-		     || get_site_option( 'wd_audit_settings' ) != false
-		     || get_site_option( 'wd_lockdown_settings' ) != false
-		) {
+		if ( get_site_option( 'wp_defender' ) != false ) {
 			return false;
 		}
 

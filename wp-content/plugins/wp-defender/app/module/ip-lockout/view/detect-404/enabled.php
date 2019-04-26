@@ -73,11 +73,11 @@
                                     </div>
                                     <div class="sui-col-md-3">
                                         <select name="detect_404_lockout_duration_unit">
-                                            <option <?php echo selected( 'second', $settings->detect_404_lockout_duration_unit ) ?>
+                                            <option <?php echo selected( 'seconds', $settings->detect_404_lockout_duration_unit ) ?>
                                                     value="seconds"><?php _e( "Seconds", wp_defender()->domain ) ?></option>
-                                            <option <?php echo selected( 'minute', $settings->detect_404_lockout_duration_unit ) ?>
+                                            <option <?php echo selected( 'minutes', $settings->detect_404_lockout_duration_unit ) ?>
                                                     value="minutes"><?php _e( "Minutes", wp_defender()->domain ) ?></option>
-                                            <option <?php echo selected( 'hour', $settings->detect_404_lockout_duration_unit ) ?>
+                                            <option <?php echo selected( 'hours', $settings->detect_404_lockout_duration_unit ) ?>
                                                     value="hours"><?php _e( "Hours", wp_defender()->domain ) ?></option>
                                         </select>
                                     </div>

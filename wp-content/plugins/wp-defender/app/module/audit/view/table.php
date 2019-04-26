@@ -15,7 +15,7 @@
 				<?php
 				$timestamp = is_array( $row['timestamp'] ) ? $row['timestamp'][1] : $row['timestamp'];
 				?>
-                <tr class="sui-accordion-item sui-error">
+                <tr class="sui-accordion-item sui-default">
                     <td class="sui-table-item-title">
 						<?php echo wp_trim_words( $row['msg'], 10 ) ?>
                     </td>

@@ -1,0 +1,108 @@
+@include body-class(true) {
+
+	.dashui-list-users {
+
+		.dashui-user {
+			width: 100%;
+			max-width: 100%; // IE Fix
+			height: 50px;
+			display: flex;
+			align-items: center;
+			margin: 0 0 10px;
+			padding: 5px 9px 5px 15px;
+			border: 1px solid palette(silver, soft);
+			border-radius: $border-radius;
+
+			.dashui-user-name {
+				overflow: hidden;
+				display: flex;
+				flex: 1;
+				align-items: center;
+				margin-right: 10px;
+				color: palette(gray, dark);
+				font: 500 13px/26px $font;
+				letter-spacing: $font--letter-spacing;
+
+				[class*="sui-icon-"] {
+					width: 26px;
+					height: 26px;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					flex: 0 0 24px;
+					font-size: 16px;
+					text-align: center;
+					margin-right: 6px;
+
+					&:before {
+						display: block;
+					}
+				}
+
+				span:not(.sui-tag) {
+					overflow: hidden;
+					display: block;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+				}
+
+				span.sui-tag {
+
+					@include media(max-width, md) {
+						display: block;
+						flex: 0 0 auto;
+						margin-left: 10px;
+					}
+
+					@include media(min-width, md) {
+						display: none;
+					}
+				}
+			}
+
+			.dashui-user-email {
+				overflow: hidden;
+				display: flex;
+				flex: 1;
+				align-items: center;
+				margin-right: 26px;
+				color: palette(gray, light);
+				font: 500 13px/22px $font;
+				letter-spacing: $font--letter-spacing;
+
+				span {
+					display: block;
+				}
+
+				.sui-tag {
+					flex: 0 0 auto;
+				}
+
+				span:not(.sui-tag) {
+					overflow: hidden;
+					flex: 0 1 auto;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+				}
+
+				@include media(max-width, md) {
+					display: none;
+				}
+			}
+
+			.dashui-user-action {
+				display: block;
+				flex: 0 0 auto;
+
+				.sui-button-icon {
+
+					&.disabled,
+					&[disabled] {
+						cursor: help;
+						pointer-events: all;
+					}
+				}
+			}
+		}
+	}
+}

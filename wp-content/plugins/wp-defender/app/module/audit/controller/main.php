@@ -230,7 +230,7 @@ class Main extends \WP_Defender\Controller {
 
 		$lite = HTTP_Helper::retrieve_get( 'lite', false );
 		if ( $lite == 1 ) {
-
+			return;
 		} else {
 			$params = $this->prepareAuditParams();
 			$data   = Audit_API::pullLogs( $params );
@@ -301,6 +301,10 @@ class Main extends \WP_Defender\Controller {
 			case 30:
 				$date_from = strtotime( '-30 days' );
 				$date_to   = time();
+				break;
+			default:
+				//param not from the button on frontend, log it
+				error_log( sprintf( 'Unexpected value %s from IP %s', $settings->frequency, Utils::instance()->getUserIp() ) );
 				break;
 		}
 
@@ -459,13 +463,9 @@ class Main extends \WP_Defender\Controller {
 		), false );
 
 
-		foreach ( Settings::instance()->receipts as $user_id ) {
-			$user = get_user_by( 'id', $user_id );
-			if ( ! is_object( $user ) ) {
-				continue;
-			}
+		foreach ( Settings::instance()->receipts as $item ) {
 			//prepare the parameters
-			$email = $user->user_email;
+			$email = $item['email'];
 
 			$no_reply_email = "noreply@" . parse_url( get_site_url(), PHP_URL_HOST );
 			$no_reply_email = apply_filters( 'wd_audit_noreply_email', $no_reply_email );
@@ -474,7 +474,7 @@ class Main extends \WP_Defender\Controller {
 				'Content-Type: text/html; charset=UTF-8'
 			);
 			$params         = array(
-				'USER_NAME' => $this->getDisplayName( $user_id ),
+				'USER_NAME' => $item['first_name'],
 				'SITE_URL'  => network_site_url(),
 			);
 			$email_content  = $template;
