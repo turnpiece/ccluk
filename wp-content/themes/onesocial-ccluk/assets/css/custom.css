@@ -294,6 +294,12 @@ body.is-mobile.blog:not(.bp-user) #secondary,
 body.is-mobile.blog:not(.bp-user) .site-content {
   max-width: 750px;
   margin: 0 auto; }
+body.is-mobile.single.page.page-sidebar-active #secondary, body.is-mobile.archive.page.page-sidebar-active #secondary, body.is-mobile.page:not(.home-page).page.page-sidebar-active #secondary, body.is-mobile.blog:not(.bp-user).page.page-sidebar-active #secondary {
+  margin-top: 20px;
+  margin-top: 2rem; }
+  body.is-mobile.single.page.page-sidebar-active #secondary .widget, body.is-mobile.archive.page.page-sidebar-active #secondary .widget, body.is-mobile.page:not(.home-page).page.page-sidebar-active #secondary .widget, body.is-mobile.blog:not(.bp-user).page.page-sidebar-active #secondary .widget {
+    margin-bottom: 20px;
+    margin-bottom: 2rem; }
 body.is-mobile #main-wrap {
   padding-top: 70px; }
 
