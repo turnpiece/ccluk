@@ -4,19 +4,30 @@ class CCLUK_BP_Custom {
 
 	const DEBUGGING = false;
 
-	private $fields = array(
+	const TWFY_URL = 'https://www.theyworkforyou.com';
+
+	private $location = array(
 		'parliamentary_constituency',
 		'region',
 		'european_electoral_region',
 		'country'
 	);
 
-	function __construct() {
+	private $mp = array(
+		'full_name',
+		'party',
+		'url',
+		'image',
+		'image_height',
+		'image_width'
+	);
+
+	public function __construct() {
 		add_action('xprofile_data_after_save', array( $this, 'profile_location' ));
 		add_action('bp_after_profile_field_content', array( $this, 'user_location_fields' ) );
 	}
 
-	function user_location_fields( $user_id = false ) {
+	public function user_location_fields( $user_id = false ) {
 	    global $bp;
 
 	    if( !$user_id )
@@ -56,6 +67,10 @@ class CCLUK_BP_Custom {
 	                            <td class="data"><?php echo $value; ?></td>
 	                        </tr>
 
+	                        <?php if( $key == 'parliamentary_constituency') {
+	                        	$this->output_mp( $user_id );
+	                        } ?>
+
 	                    <?php endforeach; ?>
 	                    </tbody>
 	                </table>
@@ -63,6 +78,27 @@ class CCLUK_BP_Custom {
 	            <?php
 	        }
 	    }
+	}
+
+	private function output_mp( $user_id ) {
+		// get MP details
+
+        $mp = (array) get_user_meta($user_id, 'mp', true);
+
+        if (!empty($mp) && isset($mp['full_name'])) : ?>
+        	<tr class="field_type_textbox field_mp">
+        		<td class="label"><?php _e( 'MP' ) ?></td>
+        		<td class="data">
+        			<a href="<?php echo self::TWFY_URL . $mp['url'] ?>">
+        				<img src="<?php echo self::TWFY_URL . $mp['image'] ?>" alt="<?php echo $mp['full_name']?>" />
+        				<?php echo $mp['full_name'] ?>
+        				<?php if (!empty($mp['party'])) : ?>
+        					(<?php echo $mp['party'] ?>)
+        				<?php endif; ?>
+        			</a>	
+        		</td>
+			</tr>
+		<?php endif;
 	}
 
 	/**
@@ -78,7 +114,11 @@ class CCLUK_BP_Custom {
 		$postcode_id = xprofile_get_field_id_from_name( 'postcode' );
 
 		if ($obj->field_id == $postcode_id) {
+			// get location data
 			$this->postcode_lookup( $obj->user_id, $obj->value );
+
+			// get MP
+			$this->get_mp( $obj->user_id, $obj->value );
 		}
 	}
 
@@ -99,15 +139,37 @@ class CCLUK_BP_Custom {
 
 			$location = array();
 
-			foreach( $this->fields as $field ) {
+			foreach( $this->location as $field ) {
 				$this->debug( 'setting user '.$user_id.' '.$field.' = '.$result->{ $field } );
 				$location[ $field ] = $result->{ $field };
 			}
+
+			$this->debug( print_r( $mp_data, true ) );
 
 			update_user_meta( $user_id, 'location', $location );
 
 			do_action( 'ccluk_location_saved', $location );
 		}
+	}
+
+	private function get_mp( $user_id, $postcode ) {
+		// get MP
+		$MPAPI = new CCLUK_Parliament_API();
+
+		$result = $MPAPI->getMP( $postcode );
+
+		if (!empty($result)) {
+
+			$mp = array();
+
+			foreach( $this->mp as $field ) {
+				$mp[ $field ] = $result[ $field ];
+			}
+
+		}
+
+		update_user_meta( $user_id, 'mp', $mp );
+		
 	}
 
 	/**
@@ -123,16 +185,20 @@ class CCLUK_BP_Custom {
 	    return false;
 	}
 
-/*
-	private function get_field_id( $name ) {
-		global $wpdb;
-		$bp = buddypress();
-		$name = strtolower($name);
-		$table = $bp->table_prefix . 'bp_xprofile_fields';
-		return $wpdb->get_var( "SELECT `id` FROM `$table` WHERE LOWER(`name`) = '$name'" );
+	protected function request($jsonurl){
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, str_replace(' ', '%20', $jsonurl));
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+		curl_setopt($ch, CURLOPT_HTTPHEADER, [
+		  'Content-Type: application/json',
+		]);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		$response = curl_exec($ch);
+		curl_close($ch);
+		return $response;
 	}
-*/
-	private function debug( $message ) {
+
+	protected function debug( $message ) {
 		if (self::DEBUGGING)
 			error_log( __CLASS__ . ' :: ' . $message );
 	}
@@ -144,7 +210,7 @@ new CCLUK_BP_Custom;
 //Put together by Ryan Hart 2016
 //Class to use the API provided by http://postcodes.io
 
-class CCLUK_Postcode_API{
+class CCLUK_Postcode_API extends CCLUK_BP_Custom {
 
 	const URL = 'https://api.postcodes.io';
 	
@@ -383,17 +449,17 @@ class CCLUK_Postcode_API{
 		    return $miles;
 		}	
 	}
+}
 
-	public function request($jsonurl){
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, str_replace(' ', '%20', $jsonurl));
-		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-		curl_setopt($ch, CURLOPT_HTTPHEADER, [
-		  'Content-Type: application/json',
-		]);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		$response = curl_exec($ch);
-		curl_close($ch);
-		return $response;
+class CCLUK_Parliament_API extends CCLUK_BP_Custom {
+
+	const KEY = 'EuoStzCe22iZBfnZboAf3cBM';
+
+	public function getMP( $postcode ) {
+		$url = parent::TWFY_URL.'/api/getMP?key='.self::KEY.'&postcode='.$postcode.'&output=php';
+		$data = $this->request($url);
+
+		if (!empty($data))
+			return unserialize( $data );
 	}
 }
