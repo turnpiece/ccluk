@@ -5,6 +5,10 @@
  * @package BuddyPress
  * @subpackage bp-legacy
  */
+
+$current_user	 = get_current_user_id();
+$displayed_user	 = bp_displayed_user_id();
+
 ?>
 
 <?php do_action( 'bp_before_member_header' ); ?>
@@ -27,6 +31,10 @@
 		<h2 class="user-nicename">@<?php bp_displayed_user_mentionname(); ?></h2>
 	<?php endif; ?>
 
+	<?php if ( ( $location = get_user_meta( $displayed_user, 'location', true ) ) && ( $region = $location['region'] ) ) : ?>
+		<p class="region"><?php echo $region ?></p>
+	<?php endif; ?>
+
 	<?php
 	$bio_field = onesocial_get_option( 'boss_bio_field' );
 	if ( $bio_field && function_exists( 'bp_get_profile_field_data' ) ) {
@@ -43,8 +51,6 @@
 	<div class="btn-group social">
 
 		<?php
-		$current_user	 = get_current_user_id();
-		$displayed_user	 = bp_displayed_user_id();
 
 		if ( $current_user != $displayed_user ) {
 			if ( function_exists( 'bp_follow_add_follow_button' ) ) {

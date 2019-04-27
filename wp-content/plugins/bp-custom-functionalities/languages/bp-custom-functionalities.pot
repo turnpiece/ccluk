@@ -1,0 +1,46 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: BP Custom Functionalities 1.0.0\n"
+"POT-Creation-Date: 2018-10-09 04:07+0530\n"
+"PO-Revision-Date: 2018-10-08 04:18+0530\n"
+"Last-Translator: \n"
+"Language-Team: prashantsinghvatsh@gmail.com\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.1.1\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: bp-custom-functionalities.php:24
+msgid "BP Custom Functionalities Settings"
+msgstr ""
+
+#: bp-custom-functionalities.php:29
+msgid "Lock BuddyPress For Guest Users"
+msgstr ""
+
+#: bp-custom-functionalities.php:38
+msgid "Restrict BuddyPress To Certain Membership levels"
+msgstr ""
+
+#: bp-custom-functionalities.php:52
+msgid "Restrict Members From Viewing Other Members Profile"
+msgstr ""
+
+#: bp-custom-functionalities.php:59
+msgid "Exclude Roles From Members Directory"
+msgstr ""
+
+#: bp-custom-functionalities.php:74
+msgid "For any custom development or support you can contact at <a href=\"https://prashantdev.wordpress.com/contact\">https://prashantdev.wordpress.com/contact</a>."
+msgstr ""
+
+#: loader.php:27
+msgid "BP Custom Functionalities requires BuddyPress to be active and running."
+msgstr ""

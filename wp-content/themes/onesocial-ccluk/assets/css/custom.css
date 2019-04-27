@@ -1492,6 +1492,8 @@ body.buddypress #buddypress .profile .standard-form fieldset {
   body.buddypress #buddypress .profile .standard-form fieldset legend {
     margin: 0 0 10px;
     line-height: 1; }
+body.buddypress #buddypress .profile .bp-widget.general {
+  display: none; }
 body.buddypress #buddypress .activity-list .activity-content .activity-header,
 body.buddypress #buddypress div#item-header #item-meta p,
 body.buddypress #buddypress #activity-stream p {

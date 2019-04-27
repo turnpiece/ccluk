@@ -837,6 +837,6 @@ function ccluk_remove_admin_bar_links() {
     foreach( $rm_items as $item )
         $wp_admin_bar->remove_menu( 'my-account-'.$item );
 
-    error_log( print_r( $wp_admin_bar, true ) );
+    //error_log( print_r( $wp_admin_bar, true ) );
 }
 add_action( 'wp_before_admin_bar_render', 'ccluk_remove_admin_bar_links' );

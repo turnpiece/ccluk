@@ -112,7 +112,7 @@ function buddyboss_user_social_fields( $user_id = false ) {
         if( buddyboss_array_not_all_empty($socials)){
             ?>
             <div class="bp-widget social">
-                <h4><?php _e('Social', 'onesocial');?></h4>
+                <h2><?php _e('Social', 'onesocial');?></h2>
                 <table class="profile-fields">
                     <tbody>
 
@@ -166,7 +166,6 @@ function buddyboss_user_social_fields( $user_id = false ) {
 
 //add_action("bp_custom_profile_edit_fields","buddyboss_user_social_fields");
 add_action("bp_after_profile_field_content","buddyboss_user_social_fields");
-
 
 /**
  * Output the fields inputs on user screen
