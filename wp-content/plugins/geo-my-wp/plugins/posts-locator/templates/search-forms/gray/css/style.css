@@ -1,0 +1,75 @@
+/**
+ * Posts Locator search form stylesheet "gray"
+ */
+div.gmw-form-wrapper.gray {
+ 	background: #f8f8f8;
+	padding:15px;
+	border-top:1px solid #ddd;
+	border-bottom:1px solid #ddd;
+	margin-bottom:1px;
+}
+
+div.gmw-form-wrapper.gray label {
+	text-transform: capitalize;
+	color: #555;
+}
+ 
+
+div.gmw-form-wrapper.gray select {
+	border: 1px solid #ccc;
+	height:30px;
+	font-size: 14px;
+	color:#555;
+}
+
+div.gmw-form-wrapper.gray .gmw-field-label {
+	padding: 5px 0px;
+	background-color: #ABF1D4;
+	font-size: 13px;
+	text-align: center;
+	border: 1px solid #9BDFC3;
+	display: inline-block;
+	width: 100%;
+	color: #555;
+	line-height: 20px;
+}
+
+div.gmw-form-wrapper.gray .gmw-no-address-error {
+	border: 1px solid rgb(252, 165, 165) !important;
+}
+
+div.gmw-form-wrapper.gmw-form-wrapper.gray .gmw-locator-button-wrapper.text, 
+div.gmw-form-wrapper.gray .gmw-submit-button {
+	padding: 6px 0px;
+	background-color: #333;
+	line-height: 24px;
+	color: white;
+}
+
+div.gmw-form-wrapper.gmw-form-wrapper.gray .gmw-locator-button-wrapper.text:hover, 
+div.gmw-form-wrapper.gray .gmw-submit-button:hover {
+	background-color:#666;
+}
+
+div.gmw-form-wrapper.gray .gmw-submit {
+	width:100%;
+}
+
+/* widget */
+.widget_gmw_search_form_widget div.gmw-form-wrapper.gray {
+ 	background: none;
+	padding:0px;
+	border:0;
+}
+
+.widget_gmw_search_form_widget div.gmw-form-wrapper.gray .gmw-submit-button {
+	padding: 9px 0px;
+}
+
+div.gmw-form-wrapper.gray input.gmw-single-checkbox {
+	margin-right: 5px;	
+}
+
+div.gmw-form-wrapper.gray ul.chosen-choices {
+	padding:2px;
+}

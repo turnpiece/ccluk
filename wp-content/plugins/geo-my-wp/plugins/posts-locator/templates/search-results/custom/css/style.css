@@ -1,0 +1,70 @@
+/**
+ * Custom theme stylesheet.
+ * @version 1.0
+ * @author Eyal Fitoussi
+ */
+	
+.wppl-single-result {
+	position:relative;
+}	
+
+.wppl-single-result .wppl-info {
+	padding: 5px 10px;
+	border: 1px solid #eee;
+	margin-top: 5px;
+}
+			
+.wppl-single-result .wppl-info div span {	
+	font-weight:bold;
+}
+
+.gmw-pt-per-page-dropdown {
+	height:25px !important;
+	font-size: 12px;
+	border:1px solid #ccc;
+	margin-left: 15px
+}
+
+.gmw-results-count {
+	background: #fdfdfd;
+	padding:8px 15px;
+	border-bottom:1px solid #ddd;
+	border-top:1px solid #ddd;
+}
+
+.gmw-results-count span {
+	font-size:13px;	
+}
+
+/* pagination */
+.gmw-pt-pagination-wrapper {}
+
+.gmw-pt-bottom-pagination-wrapper {}
+
+ul.gmw-pagination {
+	float: right;
+	text-align: center;
+	margin:0px;
+	list-style:none;
+	padding:0px;
+}
+
+ul.gmw-pagination li  {
+	text-align:center;
+	display: inline-block;
+	margin:0 0 0 2px;
+}
+
+ul.gmw-pagination li a,
+ul.gmw-pagination li span {
+	padding: 3px 4px;
+	border: solid 1px #ddd;
+	background: white;
+	font-size: 12px;
+	text-decoration: none
+}
+
+ul.gmw-pagination li a:hover, 
+ul.gmw-pagination li span {
+	background: #eee;
+}
