@@ -276,7 +276,8 @@ Mobile Menu
   background: rgba(0, 0, 0, 0.9);
   padding-left: 40px; }
 #mobile-right-panel .submenu-btn {
-  color: #22a7f0; }
+  color: #22a7f0;
+  right: 20px; }
   #mobile-right-panel .submenu-btn:hover {
     color: #54ae68; }
 
@@ -298,8 +299,8 @@ body.is-mobile.single.page.page-sidebar-active #secondary, body.is-mobile.archiv
   margin-top: 20px;
   margin-top: 2rem; }
   body.is-mobile.single.page.page-sidebar-active #secondary .widget, body.is-mobile.archive.page.page-sidebar-active #secondary .widget, body.is-mobile.page:not(.home-page).page.page-sidebar-active #secondary .widget, body.is-mobile.blog:not(.bp-user).page.page-sidebar-active #secondary .widget {
-    margin-bottom: 20px;
-    margin-bottom: 2rem; }
+    margin-bottom: 30px;
+    margin-bottom: 3rem; }
 body.is-mobile #main-wrap {
   padding-top: 70px; }
 
