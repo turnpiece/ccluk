@@ -26,7 +26,7 @@ class LiteSpeed_Cache
 	const NAME = 'LiteSpeed Cache' ;
 	const PLUGIN_NAME = 'litespeed-cache' ;
 	const PLUGIN_FILE = 'litespeed-cache/litespeed-cache.php' ;
-	const PLUGIN_VERSION = '2.9.7.1' ;
+	const PLUGIN_VERSION = '2.9.7.2' ;
 
 	const PAGE_EDIT_HTACCESS = 'lscache-edit-htaccess' ;
 
@@ -105,7 +105,7 @@ class LiteSpeed_Cache
 		}
 
 		if ( self::config( LiteSpeed_Cache_Config::OPID_DEBUG_DISABLE_ALL ) ) {
-			define( 'LITESPEED_DISABLE_ALL', true ) ;
+			! defined( 'LITESPEED_DISABLE_ALL' ) && define( 'LITESPEED_DISABLE_ALL', true ) ;
 		}
 
 		/**
@@ -139,6 +139,7 @@ class LiteSpeed_Cache
 		/**
 		 * Added hook before init
 		 * @since  1.6.6
+		 * @deprecated 2.9.7.2 This can't be used by any plugin due to unpredictable plugin loading priority.
 		 */
 		do_action( 'litespeed_before_init' ) ;
 
@@ -146,9 +147,7 @@ class LiteSpeed_Cache
 		 * Preload ESI functionality for ESI request uri recovery
 		 * @since 1.8.1
 		 */
-		if ( ! LiteSpeed_Cache_Router::is_ajax() && LiteSpeed_Cache_Router::esi_enabled() ) {
-			LiteSpeed_Cache_ESI::get_instance() ;
-		}
+		LiteSpeed_Cache_ESI::get_instance() ;
 	}
 
 	/**
@@ -191,6 +190,8 @@ class LiteSpeed_Cache
 			LiteSpeed_Cache_Log::debug( '[Core] Bypassed due to debug disable all setting' ) ;
 			return ;
 		}
+
+		do_action( 'litespeed_initing' ) ;
 
 		ob_start( array( $this, 'send_headers_force' ) ) ;
 		add_action( 'shutdown', array( $this, 'send_headers' ), 0 ) ;

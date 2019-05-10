@@ -19,7 +19,7 @@
 
 
 <?php if ( ! $is_active ) : ?>
-	<a href="<?php echo esc_url( $activate_url ); ?>" class="sui-button sui-button-primary" id="activate-page-caching">
+	<a href="<?php echo esc_url( $activate_url ); ?>" class="sui-button sui-button-blue" id="activate-page-caching">
 		<?php esc_html_e( 'Activate', 'wphb' ); ?>
 	</a>
 <?php endif; ?>

@@ -19,27 +19,20 @@
 </p>
 
 <table class="sui-table sui-flushed">
-	<thead>
-		<tr>
-			<th width="50%"><?php esc_html_e( 'Report', 'wphb' ); ?></th>
-			<th width="25%"><?php esc_html_e( 'Schedule', 'wphb' ); ?></th>
-			<th width="25%">&nbsp;</th>
-		</tr>
-	</thead>
 	<tbody>
 		<tr>
 			<td>
 				<i class="sui-icon-hummingbird" aria-hidden="true"></i>
 				<strong><?php esc_html_e( 'Performance Test', 'wphb' ); ?></strong>
 			</td>
-			<td>
+			<td width="25%">
 				<?php if ( ! $performance_is_active ) : ?>
 					<span class="sui-tag sui-tag-inactive"><?php esc_html_e( 'Inactive', 'wphb' ); ?></span>
 				<?php else : ?>
 					<span class="sui-tag sui-tag-success"><?php echo esc_html( $frequency ); ?></span>
 				<?php endif; ?>
 			</td>
-			<td>
+			<td width="25%">
 				<a href="<?php echo WP_Hummingbird_Utils::get_admin_menu_url( 'performance' ) . '&view=reports#wphb-box-reporting-summary'; ?>">
 					<i class="sui-icon-widget-settings-config" aria-hidden="true"></i>
 				</a>

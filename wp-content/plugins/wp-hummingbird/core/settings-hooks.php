@@ -124,10 +124,10 @@ function wphb_cloudflare_module_status( $current ) {
 	$options = WP_Hummingbird_Settings::get_settings( 'cloudflare' );
 
 	if ( ! $options['enabled'] && empty( $options['zone'] ) ) {
-		return false;
+		return $current;
 	}
 
-	return $current;
+	return true;
 }
 
 add_filter( 'wphb_get_server_type', 'wphb_set_cloudflare_server_type' );

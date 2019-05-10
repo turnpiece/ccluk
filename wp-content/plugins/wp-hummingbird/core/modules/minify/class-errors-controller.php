@@ -161,7 +161,6 @@ class WP_Hummingbird_Minification_Errors_Controller {
 			$handles = array( $handles );
 		}
 
-		/* @var WP_Hummingbird_Module_Minify $minify */
 		$minify  = WP_Hummingbird_Utils::get_module( 'minify' );
 		$options = $minify->get_options();
 

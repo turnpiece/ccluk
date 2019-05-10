@@ -56,7 +56,6 @@ $summary-image: '../../admin/assets/image/graphic-hb-minify-summary@2x.png';
 @import "components/notices";
 @import "components/pills";
 @import "components/border_frame";
-@import "components/settings_form";
 
 // Modules
 @import "modules/dashboard";
@@ -66,6 +65,7 @@ $summary-image: '../../admin/assets/image/graphic-hb-minify-summary@2x.png';
 @import "modules/minification";
 @import "modules/uptime";
 @import "modules/advanced";
+@import "modules/settings";
 
 // Color Accessibility
 @import "common/color-accessibility";
@@ -98,37 +98,14 @@ $summary-image: '../../admin/assets/image/graphic-hb-minify-summary@2x.png';
     }
 
     &.small > li {
-        .list-label-stats,
-        .list-detail-stats-heading {
+        .list-label-stats {
             line-height: 26px;
         }
     }
 
-    .list-label-stats,
-    .list-detail-stats-heading {
+    .list-label-stats {
         color: #333;
         font: 500 13px/30px $font;
-    }
-
-    .list-detail-stats-heading {
-        font-weight: 400;
-        font-size: 18px;
-        color: #666;
-
-        &.small {
-            font-size: 26px;
-        }
-    }
-
-    .list-detail-stats-heading-extra-info {
-        color: #BABABA;
-        display: block;
-        font: 500 12px/16px $font;
-        margin-top: 5px;
-    }
-
-    .list-label-stats-date {
-        margin-right: 30px;
     }
 }
 

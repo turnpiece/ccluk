@@ -14,7 +14,7 @@
 <h3 class="sui-box-title"><?php echo esc_html( $title ); ?></h3>
 <div class="sui-actions-right">
 	<?php if ( true === $can_run_scan ) : ?>
-		<a href="<?php echo esc_url( $scan_link ); ?>" class="sui-button sui-button-primary">
+		<a href="<?php echo esc_url( $scan_link ); ?>" class="sui-button sui-button-blue">
 			<?php esc_html_e( 'Run Test', 'wphb' ); ?>
 		</a>
 		<?php
@@ -31,7 +31,7 @@
 		);
 		?>
 		<span class="sui-tooltip sui-tooltip-constrained" data-tooltip="<?php echo esc_attr( $tooltip ); ?>">
-			<a href="#" class="sui-button sui-button-primary" aria-hidden="true" disabled="disabled">
+			<a href="#" class="sui-button sui-button-blue" aria-hidden="true" disabled="disabled">
 				<?php esc_html_e( 'Run Test', 'wphb' ); ?>
 			</a>
 		</span>

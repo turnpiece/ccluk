@@ -10,60 +10,51 @@
  * @var int    $gzip_issues        Number of gzip issues.
  * @var bool   $is_doing_report    If is doing performance report.
  * @var object $last_report        Last report object.
+ * @var string $report_type        Performance report type: desktop or mobile.
  * @var bool   $uptime_active      Uptime status.
  * @var object $uptime_report      Uptime report object.
  * @var bool   $report_dismissed   Last report dismissed warning.
  */
 
 ?>
-<div class="sui-summary-image-space">
-</div>
+<div class="sui-summary-image-space"></div>
 <div class="sui-summary-segment">
 	<div class="sui-summary-details">
-		<?php
-		if ( $last_report && ! is_wp_error( $last_report ) && ! $report_dismissed ) :
-			if ( 85 <= $last_report->data->score ) {
-				$error_class = 'success';
-				$icon_class  = 'check-tick';
-			} elseif ( 65 <= $last_report->data->score ) {
-				$error_class = 'warning';
-				$icon_class  = 'warning-alert';
-			} else {
-				$error_class = 'error';
-				$icon_class  = 'warning-alert';
-			}
-			?>
-			<span class="sui-summary-large"><?php echo esc_html( $last_report->data->score ); ?></span>
-			<i class="sui-icon-<?php echo esc_attr( $icon_class ); ?> sui-lg sui-<?php echo esc_attr( $error_class ); ?>"></i>
+		<?php if ( $last_report && ! is_wp_error( $last_report ) && ! $report_dismissed ) : ?>
+			<span class="sui-summary-large"><?php echo esc_html( $last_report->{$report_type}->score ); ?></span>
+			<i class="sui-icon-<?php echo esc_attr( WP_Hummingbird_Module_Performance::get_impact_class( $last_report->{$report_type}->score, 'icon' ) ); ?> sui-md sui-<?php echo esc_attr( WP_Hummingbird_Module_Performance::get_impact_class( $last_report->{$report_type}->score ) ); ?>"></i>
 			<span class='sui-summary-percent'>/100</span>
 		<?php elseif ( $is_doing_report ) : ?>
-			<div class="sui-progress-text sui-icon-loader sui-loading">
-		<?php elseif ( $report_dismissed && isset( $last_report->data->score ) ) : ?>
-			<span class="sui-summary-large"><?php echo esc_html( $last_report->data->score ); ?></span>
-			<i class="sui-icon-info sui-lg"></i>
+			<div class="sui-progress-text sui-icon-loader sui-loading"></div>
+		<?php elseif ( $report_dismissed && isset( $last_report->{$report_type}->score ) ) : ?>
+			<span class="sui-summary-large"><?php echo esc_html( $last_report->{$report_type}->score ); ?></span>
+			<i class="sui-icon-info sui-md"></i>
 			<span class='sui-summary-percent'>/100</span>
 		<?php else : ?>
 			&mdash;
 		<?php endif; ?>
-		<span class="sui-summary-sub"><?php esc_html_e( 'Current performance score', 'wphb' ); ?></span>
-		<?php
-		if ( $last_report && ! is_wp_error( $last_report ) ) {
-			?>
-				<span class="sui-summary-detail">
-					<?php
-					$data_time = strtotime( get_date_from_gmt( date( 'Y-m-d H:i:s', $last_report->data->time ) ) );
-					echo date_i18n( get_option( 'date_format' ), $data_time );
-					printf( _x( ' at %s', 'Time of the last performance report', 'wphb' ), date_i18n( get_option( 'time_format' ), $data_time ) );
-					?>
-				</span>
+		<span class="sui-summary-sub"><?php esc_html_e( 'Performance score', 'wphb' ); ?></span>
+
+		<span class="sui-summary-detail">
 			<?php
-		} elseif ( $is_doing_report ) {
-			esc_html_e( 'Running scan...', 'wphb' );
-		} else {
-			esc_html_e( 'Never', 'wphb' );
-		}
-		?>
-		<span class="sui-summary-sub"><?php esc_html_e( 'Last test', 'wphb' ); ?></span>
+			if ( $last_report && ! is_wp_error( $last_report ) ) {
+				$data_time    = strtotime( get_date_from_gmt( date( 'Y-m-d H:i:s', $last_report->time ) ) );
+				$time_string  = esc_html( date_i18n( get_option( 'date_format' ), $data_time ) );
+				$time_string .= sprintf(
+					/* translators: %s - time in proper format */
+					esc_html_x( ' at %s', 'Time of the last performance report', 'wphb' ),
+					esc_html( date_i18n( get_option( 'time_format' ), $data_time ) )
+				);
+				echo esc_html( $time_string );
+			} elseif ( $is_doing_report ) {
+				$time_string = esc_html__( 'Running scan...', 'wphb' );
+			} else {
+				$time_string = esc_html__( 'Never', 'wphb' );
+			}
+			?>
+		</span>
+		<span class="sui-summary-sub">
+	<?php esc_html_e( 'Last test date', 'wphb' ); ?>
 	</div>
 </div>
 <div class="sui-summary-segment">
@@ -107,7 +98,7 @@
 						<span class="sui-tag sui-tag-disabled">
 							<?php esc_html_e( 'Uptime Inactive', 'wphb' ); ?>
 						</span>
-					<?php
+						<?php
 					elseif ( empty( $site_date ) ) :
 						esc_html_e( 'Website is reported down', 'wphb' );
 						?>

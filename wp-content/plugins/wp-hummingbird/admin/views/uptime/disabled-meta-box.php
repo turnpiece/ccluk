@@ -29,6 +29,6 @@
 	</p>
 </div>
 
-<a href="<?php echo esc_url( $activate_url ); ?>" class="sui-button sui-button-primary" id="activate-uptime">
+<a href="<?php echo esc_url( $activate_url ); ?>" class="sui-button sui-button-blue" id="activate-uptime">
 	<?php esc_html_e( 'Activate', 'wphb' ); ?>
 </a>

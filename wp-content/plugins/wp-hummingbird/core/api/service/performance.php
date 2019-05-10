@@ -23,7 +23,7 @@ class WP_Hummingbird_API_Service_Performance extends WP_Hummingbird_API_Service 
 	 * @access private
 	 * @var    string $version
 	 */
-	private $version = 'v1';
+	private $version = 'v2';
 
 	/**
 	 * WP_Hummingbird_API_Service_Performance constructor.
@@ -60,14 +60,16 @@ class WP_Hummingbird_API_Service_Performance extends WP_Hummingbird_API_Service 
 	 *
 	 * @since 1.8.1 Changed timeout from 0.1 to 2 seconds.
 	 *
+	 * @param bool|string $url  Custom URL.
+	 *
 	 * @return array|mixed|object|WP_Error
 	 */
-	public function ping() {
+	public function ping( $url = false ) {
 		$this->request->set_timeout( 2 );
 		return $this->request->post(
 			'site/check/',
 			array(
-				'domain' => $this->request->get_this_site(),
+				'domain' => $url ? $url : $this->request->get_this_site(),
 			)
 		);
 	}
@@ -75,13 +77,15 @@ class WP_Hummingbird_API_Service_Performance extends WP_Hummingbird_API_Service 
 	/**
 	 * Get the latest performance test results.
 	 *
+	 * @param bool|string $url  Custom URL.
+	 *
 	 * @return array|mixed|object|WP_Error
 	 */
-	public function results() {
+	public function results( $url = false ) {
 		return $this->request->get(
 			'site/result/latest/',
 			array(
-				'domain' => $this->request->get_this_site(),
+				'domain' => $url ? $url : $this->request->get_this_site(),
 			)
 		);
 	}

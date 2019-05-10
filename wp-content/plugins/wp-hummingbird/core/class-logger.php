@@ -268,9 +268,7 @@ class WP_Hummingbird_Logger {
 		switch ( $module ) {
 			case 'minify':
 				// Log for minification only if debug is enabled.
-				/* @var WP_Hummingbird_Module_Minify $minify */
-				$minify  = WP_Hummingbird_Utils::get_module( 'minify' );
-				$options = $minify->get_options();
+				$options = WP_Hummingbird_Utils::get_module( 'minify' )->get_options();
 
 				if ( $options['log'] ) {
 					$do_log = true;
@@ -468,18 +466,19 @@ class WP_Hummingbird_Logger {
 
 					// Delete.
 					unset( $content[ $i ] );
+				} else {
+					// It looks like it's a valid date string, compare with today.
+					$more_than_day = round( ( strtotime( $now ) - strtotime( $items[1] ) ) / MONTH_IN_SECONDS );
+
+					// We don't need to continue on, because if this entry is not older than 30 days, the next one will not be as well.
+					if ( ! $more_than_day ) {
+						break;
+					}
+
+					$delete = true;
+					unset( $content[ $i ] );
+
 				}
-
-				// It looks like it's a valid date string, compare with today.
-				$more_than_day = round( ( strtotime( $now ) - strtotime( $items[1] ) ) / MONTH_IN_SECONDS );
-
-				// We don't need to continue on, because if this entry is not older than 30 days, the next one will not be as well.
-				if ( ! $more_than_day ) {
-					break;
-				}
-
-				$delete = true;
-				unset( $content[ $i ] );
 			}
 
 			// Nothing changed - do nothing.

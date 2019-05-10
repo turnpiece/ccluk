@@ -85,10 +85,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 						</table>
 						<p style="color: #555555;font-family: Arial, sans-serif;font-size: 15px;font-weight: normal;line-height: 30px;margin: 0 0 30px;padding: 0;text-align: left"><a href="<?php echo esc_url( $params['SCAN_PAGE_LINK'] ); ?>" class="brand-button" style="background: #17A8E3;color: #ffffff;font-family: Arial, sans-serif;font-size: 12px;font-weight: normal;line-height: 20px;margin: 0;padding: 10px 20px;text-align: center;text-decoration: none;display: inline-block;border-radius: 4px;text-transform: uppercase"><?php esc_html_e( 'View full report', 'wphb' ); ?></a></p>
 
-						<p style="color: #555555;font-family: Arial, sans-serif;font-size: 15px;font-weight: normal;line-height: 20px;margin: 0 0 20px;padding: 0;text-align: left"><?php esc_html_e( 'Stay humming.', 'wphb' ); ?></p>
+						<p style="color: #666666;font-family: Arial, sans-serif;font-size: 15px;font-weight: normal;line-height: 20px;margin: 0 0 20px;padding: 0;text-align: left;clear: both"><?php esc_html_e( 'Stay humming.', 'wphb' ); ?></p>
 						<strong><?php esc_html_e( 'Hummingbird', 'wphb' ); ?></strong>
-						<p style="color: #555555;font-family: Arial, sans-serif;font-size: 15px;font-weight: normal;line-height: 15px;margin: 0 0 10px;padding: 0;text-align: left"><?php esc_html_e( 'Performance Hero', 'wphb' ); ?></p>
-						<p style="color: #555555;font-family: Arial, sans-serif;font-size: 15px;font-weight: normal;line-height: 15px;margin: 0 0 30px;padding: 0;text-align: left"><?php esc_html_e( 'WPMU DEV', 'wphb' ); ?></p>
+						<p style="color: #666666;font-family: Arial, sans-serif;font-size: 15px;font-weight: normal;line-height: 15px;margin: 0 0 10px;padding: 0;text-align: left"><?php esc_html_e( 'Performance Hero', 'wphb' ); ?></p>
+						<p style="color: #666666;font-family: Arial, sans-serif;font-size: 15px;font-weight: normal;line-height: 15px;margin: 0 0 30px;padding: 0;text-align: left"><?php esc_html_e( 'WPMU DEV', 'wphb' ); ?></p>
 					</td>
 				</tr>
 				</tbody>

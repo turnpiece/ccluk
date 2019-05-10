@@ -91,6 +91,11 @@ abstract class WP_Hummingbird_Module_Reports extends WP_Hummingbird_Module {
 			$options[ $module ]['reports']['recipients'] = array();
 		}
 
+		$options['performance']['reports']['type']     = 'desktop'; // desktop, mobile or both.
+		$options['performance']['reports']['metrics']  = true;
+		$options['performance']['reports']['audits']   = true;
+		$options['performance']['reports']['historic'] = true;
+
 		return $options;
 	}
 

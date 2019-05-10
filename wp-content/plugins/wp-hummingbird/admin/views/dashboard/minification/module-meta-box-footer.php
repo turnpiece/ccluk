@@ -10,12 +10,16 @@
  */
 
 ?>
+
 <a href="<?php echo esc_url( $url ); ?>" class="sui-button sui-button-ghost">
 	<i class="sui-icon-wrench-tool" aria-hidden="true"></i>
 	<?php esc_html_e( 'Configure', 'wphb' ); ?>
 </a>
-<div class="sui-actions-right">
-	<span class="status-text">
-		<?php $cdn_status ? esc_html_e( 'WPMU DEV CDN is active', 'wphb' ) : esc_html_e( 'WPMU DEV CDN is disabled', 'wphb' ); ?>
-	</span>
-</div>
+
+<?php if ( ! is_multisite() ) : ?>
+	<div class="sui-actions-right">
+		<span class="status-text">
+			<?php $cdn_status ? esc_html_e( 'WPMU DEV CDN is active', 'wphb' ) : esc_html_e( 'WPMU DEV CDN is disabled', 'wphb' ); ?>
+		</span>
+	</div>
+<?php endif; ?>

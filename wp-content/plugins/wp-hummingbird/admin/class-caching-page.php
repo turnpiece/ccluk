@@ -173,7 +173,7 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 		if ( is_multisite() && is_network_admin() || ! is_multisite() ) {
 			$this->add_meta_box(
 				'caching-status',
-				__( 'Browser Caching', 'wphb' ),
+				__( 'Status', 'wphb' ),
 				array( $this, 'caching_summary_metabox' ),
 				array( $this, 'caching_summary_metabox_header' ),
 				null,
@@ -683,7 +683,7 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 		$this->view(
 			'caching/browser-caching-meta-box-header',
 			array(
-				'title'  => __( 'Browser Caching', 'wphb' ),
+				'title'  => __( 'Status', 'wphb' ),
 				'issues' => $issues,
 			)
 		);
@@ -749,10 +749,9 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 
 		// Server code snippets.
 		$snippets = array(
-			'apache'    => WP_Hummingbird_Module_Server::get_code_snippet( 'caching', 'apache' ),
-			'litespeed' => WP_Hummingbird_Module_Server::get_code_snippet( 'caching', 'LiteSpeed' ),
-			'nginx'     => WP_Hummingbird_Module_Server::get_code_snippet( 'caching', 'nginx' ),
-			'iis'       => WP_Hummingbird_Module_Server::get_code_snippet( 'caching', 'iis' ),
+			'apache' => WP_Hummingbird_Module_Server::get_code_snippet( 'caching', 'apache' ),
+			'nginx'  => WP_Hummingbird_Module_Server::get_code_snippet( 'caching', 'nginx' ),
+			'iis'    => WP_Hummingbird_Module_Server::get_code_snippet( 'caching', 'iis' ),
 		);
 
 		// Default to show Cloudflare or Apache if set up.
@@ -769,7 +768,7 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 					$show_cf_notice = true;
 				}
 			}
-		} elseif ( $htaccess_writable && $this->htaccess_written && 'LiteSpeed' !== $server_type ) {
+		} elseif ( $htaccess_writable && $this->htaccess_written ) {
 			$server_type = 'apache';
 		}
 

@@ -387,7 +387,7 @@ if ( ! class_exists( 'WP_Hummingbird_Filesystem' ) ) {
 
 				$path = $this->gravatar_dir . $hash;
 			} else {
-				// Determin path for page caching module.
+				// Determine path for page caching module.
 				$path = trailingslashit( dirname( $file ) );
 				// Remove directory from file.
 				$file = basename( $file );

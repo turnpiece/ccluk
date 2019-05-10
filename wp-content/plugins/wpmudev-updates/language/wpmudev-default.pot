@@ -1,8 +1,8 @@
-# Copyright (C) 2019 WPMU DEV Dashboard 4.7.1
-# This file is distributed under the same license as the WPMU DEV Dashboard 4.7.1 package.
+# Copyright (C) 2019 WPMU DEV Dashboard 4.7.1.1
+# This file is distributed under the same license as the WPMU DEV Dashboard 4.7.1.1 package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WPMU DEV Dashboard 4.7.1\n"
+"Project-Id-Version: WPMU DEV Dashboard 4.7.1.1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -206,141 +206,141 @@ msgstr ""
 msgid "Network Analytics"
 msgstr ""
 
-#: includes/class-wpmudev-dashboard-ui.php:639
+#: includes/class-wpmudev-dashboard-ui.php:637
 msgid "Business"
 msgstr ""
 
-#: includes/class-wpmudev-dashboard-ui.php:643
+#: includes/class-wpmudev-dashboard-ui.php:638
 msgid "SEO"
 msgstr ""
 
-#: includes/class-wpmudev-dashboard-ui.php:647
+#: includes/class-wpmudev-dashboard-ui.php:639
 msgid "Marketing"
 msgstr ""
 
-#: includes/class-wpmudev-dashboard-ui.php:651
+#: includes/class-wpmudev-dashboard-ui.php:640
 msgid "Publishing"
 msgstr ""
 
-#: includes/class-wpmudev-dashboard-ui.php:655, template/sui/dashboard.php:97, template/sui/footer.php:34
+#: includes/class-wpmudev-dashboard-ui.php:641, template/sui/dashboard.php:97, template/sui/footer.php:34
 msgid "Community"
 msgstr ""
 
-#: includes/class-wpmudev-dashboard-ui.php:659
+#: includes/class-wpmudev-dashboard-ui.php:642
 msgid "BuddyPress"
 msgstr ""
 
-#: includes/class-wpmudev-dashboard-ui.php:663
+#: includes/class-wpmudev-dashboard-ui.php:643
 msgid "Multisite"
 msgstr ""
 
-#: includes/class-wpmudev-dashboard-ui.php:876, includes/class-wpmudev-dashboard-ui.php:877
+#: includes/class-wpmudev-dashboard-ui.php:867, includes/class-wpmudev-dashboard-ui.php:868
 msgid "Return to WPMU DEV Plugins"
 msgstr ""
 
-#: includes/class-wpmudev-dashboard-ui.php:964
+#: includes/class-wpmudev-dashboard-ui.php:955
 msgid "%s Plugin update"
 msgid_plural "%s Plugin updates"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/class-wpmudev-dashboard-ui.php:979
+#: includes/class-wpmudev-dashboard-ui.php:970
 msgid "Log in to your WPMU DEV account to use all features!"
 msgstr ""
 
-#: includes/class-wpmudev-dashboard-ui.php:991, includes/class-wpmudev-dashboard-ui.php:1004, template/sui/login-system.php:54, template/sui/support.php:746
+#: includes/class-wpmudev-dashboard-ui.php:982, includes/class-wpmudev-dashboard-ui.php:995, template/sui/login-system.php:54, template/sui/support.php:746
 msgid "WPMU DEV Dashboard"
 msgstr ""
 
-#: includes/class-wpmudev-dashboard-ui.php:1005
+#: includes/class-wpmudev-dashboard-ui.php:996
 msgid "Dashboard"
 msgstr ""
 
-#: includes/class-wpmudev-dashboard-ui.php:1030
+#: includes/class-wpmudev-dashboard-ui.php:1021
 msgid "WPMU DEV Plugins"
 msgstr ""
 
-#: includes/class-wpmudev-dashboard-ui.php:1031, template/sui/dashboard.php:181, template/sui/footer.php:18, template/sui/plugins.php:3
+#: includes/class-wpmudev-dashboard-ui.php:1022, template/sui/dashboard.php:181, template/sui/footer.php:18, template/sui/plugins.php:3
 msgid "Plugins"
 msgstr ""
 
-#: includes/class-wpmudev-dashboard-ui.php:1043
+#: includes/class-wpmudev-dashboard-ui.php:1034
 msgid "Support Access enabled"
 msgstr ""
 
-#: includes/class-wpmudev-dashboard-ui.php:1048
+#: includes/class-wpmudev-dashboard-ui.php:1039
 msgid "WPMU DEV Support"
 msgstr ""
 
-#: includes/class-wpmudev-dashboard-ui.php:1049, template/sui/dashboard.php:84, template/sui/footer.php:26, template/sui/header.php:35, template/sui/login-system.php:6, template/sui/support.php:23
+#: includes/class-wpmudev-dashboard-ui.php:1040, template/sui/dashboard.php:84, template/sui/footer.php:26, template/sui/header.php:35, template/sui/login-system.php:6, template/sui/support.php:23
 msgid "Support"
 msgstr ""
 
-#: includes/class-wpmudev-dashboard-ui.php:1059
+#: includes/class-wpmudev-dashboard-ui.php:1050
 msgid "WPMU DEV Tools"
 msgstr ""
 
-#: includes/class-wpmudev-dashboard-ui.php:1060, template/sui/dashboard.php:53, template/sui/tools.php:19
+#: includes/class-wpmudev-dashboard-ui.php:1051, template/sui/dashboard.php:53, template/sui/tools.php:19
 msgid "Tools"
 msgstr ""
 
-#: includes/class-wpmudev-dashboard-ui.php:1070
+#: includes/class-wpmudev-dashboard-ui.php:1061
 msgid "WPMU DEV Settings"
 msgstr ""
 
-#: includes/class-wpmudev-dashboard-ui.php:1071, template/sui/settings.php:21
+#: includes/class-wpmudev-dashboard-ui.php:1062, template/sui/settings.php:21
 msgid "Settings"
 msgstr ""
 
-#: includes/class-wpmudev-dashboard-ui.php:1347
+#: includes/class-wpmudev-dashboard-ui.php:1338
 msgid "Error: The template %s does not exist. Please re-install the plugin."
 msgstr ""
 
-#: includes/class-wpmudev-dashboard-ui.php:1453
+#: includes/class-wpmudev-dashboard-ui.php:1444
 msgid "Updating %s ..."
 msgstr ""
 
-#: includes/class-wpmudev-dashboard-ui.php:1454
+#: includes/class-wpmudev-dashboard-ui.php:1445
 msgid "Activating %s ..."
 msgstr ""
 
-#: includes/class-wpmudev-dashboard-ui.php:1455
+#: includes/class-wpmudev-dashboard-ui.php:1446
 msgid "Installing %s ..."
 msgstr ""
 
-#: includes/class-wpmudev-dashboard-ui.php:1456
+#: includes/class-wpmudev-dashboard-ui.php:1447
 msgid "Deactivating %s ..."
 msgstr ""
 
-#: includes/class-wpmudev-dashboard-ui.php:1457
+#: includes/class-wpmudev-dashboard-ui.php:1448
 msgid "Deleting %s ..."
 msgstr ""
 
-#: includes/class-wpmudev-dashboard-ui.php:1458
+#: includes/class-wpmudev-dashboard-ui.php:1449
 msgid "There is no plugins match with your search term. Please try again with some different keyword."
 msgstr ""
 
-#: includes/class-wpmudev-dashboard-ui.php:1459
+#: includes/class-wpmudev-dashboard-ui.php:1450
 msgid "There is no activated plugins match with your search terms. Please try again with some different keyword."
 msgstr ""
 
-#: includes/class-wpmudev-dashboard-ui.php:1460
+#: includes/class-wpmudev-dashboard-ui.php:1451
 msgid "There is no deactivated plugins match with your search terms. Please try again with some different keyword."
 msgstr ""
 
-#: includes/class-wpmudev-dashboard-ui.php:1461
+#: includes/class-wpmudev-dashboard-ui.php:1452
 msgid "There is no plugins that need updates match with your search terms. Please try again with some different keyword."
 msgstr ""
 
-#: includes/class-wpmudev-dashboard-ui.php:1462
+#: includes/class-wpmudev-dashboard-ui.php:1453
 msgid "There is no activated plugins at this time."
 msgstr ""
 
-#: includes/class-wpmudev-dashboard-ui.php:1463
+#: includes/class-wpmudev-dashboard-ui.php:1454
 msgid "There is no deactivated plugins at this time."
 msgstr ""
 
-#: includes/class-wpmudev-dashboard-ui.php:1464
+#: includes/class-wpmudev-dashboard-ui.php:1455
 msgid "There is no plugins need to be updated at this time."
 msgstr ""
 

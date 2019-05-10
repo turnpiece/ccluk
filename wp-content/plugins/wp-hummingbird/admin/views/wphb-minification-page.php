@@ -5,6 +5,10 @@
  * @package Hummingbird
  */
 
+if ( is_multisite() && is_network_admin() ) {
+	$this->do_meta_boxes( 'main' );
+}
+
 if ( $this->has_meta_boxes( 'box-enqueued-files-empty' ) ) {
 	$this->do_meta_boxes( 'box-enqueued-files-empty' );
 }
@@ -12,7 +16,7 @@ if ( $this->has_meta_boxes( 'box-enqueued-files-empty' ) ) {
 $this->do_meta_boxes( 'summary' );
 ?>
 
-<?php if ( ! $this->has_meta_boxes( 'box-enqueued-files-empty' ) ) : ?>
+<?php if ( ! $this->has_meta_boxes( 'box-enqueued-files-empty' ) && ! is_network_admin() ) : ?>
 	<div class="sui-row-with-sidenav">
 		<?php $this->show_tabs(); ?>
 

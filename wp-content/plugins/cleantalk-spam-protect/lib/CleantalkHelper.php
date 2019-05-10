@@ -61,7 +61,7 @@ class CleantalkHelper
 		// X-Real-Ip
 		if(isset($ips['x_real_ip'])){
 			if(isset($headers['X-Real-Ip'])){
-				$tmp = explode(",", trim($headers['X-Forwarded-For']));
+				$tmp = explode(",", trim($headers['X-Real-Ip']));
 				$tmp = trim($tmp[0]);
 				$ip_type = self::ip__validate($tmp);
 				if($ip_type){

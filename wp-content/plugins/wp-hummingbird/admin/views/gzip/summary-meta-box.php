@@ -31,18 +31,18 @@ if ( $external_problem && is_wp_error( $external_problem ) ) : ?>
 		</p>
 	</div>
 <?php elseif ( $inactive_types && in_array( 'privacy', $status ) ) : ?>
-    <div class="sui-notice sui-notice-info">
-        <p>
+	<div class="sui-notice sui-notice-info">
+		<p>
 			<?php
 
 			printf(
-			    /* translators: %d: Number of inactive types */
+				/* translators: %d: Number of inactive types */
 				__( "GZip compression is currently active for %d/3 types. We've detected you have Privacy Mode active which prevents us from accurately detecting whether HTML compression is active or not. You can re-check this when you've disabled Privacy Mode.", 'wphb' ),
 				absint( 3 - $inactive_types )
 			);
 			?>
-        </p>
-    </div>
+		</p>
+	</div>
 <?php else : ?>
 	<div class="sui-notice sui-notice-success">
 		<p><?php esc_html_e( 'GZip compression is currently active. Good job!', 'wphb' ); ?></p>
@@ -77,8 +77,8 @@ if ( $external_problem && is_wp_error( $external_problem ) ) : ?>
 		if ( 'privacy' === $result ) {
 			$result_status       = __( 'Unknown', 'wphb' );
 			$result_status_color = '';
-			$tooltip = esc_html__( 'While Privacy Mode is active, we can’t accurately detect if HTML compression is active and working. Re-check this once you’ve disabled Privacy Mode.', 'wphb' );
-        }
+			$tooltip             = esc_html__( 'While Privacy Mode is active, we can’t accurately detect if HTML compression is active and working. Re-check this once you’ve disabled Privacy Mode.', 'wphb' );
+		}
 		?>
 		<div class="table-row">
 			<div class="wphb-caching-summary-item-type">

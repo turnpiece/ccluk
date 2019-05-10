@@ -1,15 +1,38 @@
 <?php
 
+/**
+ * Class WP_Hummingbird_API_Service_Uptime
+ */
 class WP_Hummingbird_API_Service_Uptime extends WP_Hummingbird_API_Service {
 
+	/**
+	 * API module name.
+	 *
+	 * @var string $name
+	 */
 	protected $name = 'uptime';
 
+	/**
+	 * API version.
+	 *
+	 * @var string $version
+	 */
 	private $version = 'v1';
 
+	/**
+	 * WP_Hummingbird_API_Service_Uptime constructor.
+	 *
+	 * @throws WP_Hummingbird_API_Exception
+	 */
 	public function __construct() {
 		$this->request = new WP_Hummingbird_API_Request_WPMUDEV( $this );
 	}
 
+	/**
+	 * Get API version.
+	 *
+	 * @return string
+	 */
 	public function get_version() {
 		return $this->version;
 	}
@@ -17,7 +40,7 @@ class WP_Hummingbird_API_Service_Uptime extends WP_Hummingbird_API_Service {
 	/**
 	 * Get Uptime data for a given segment of time
 	 *
-	 * @param string $time day|week|month
+	 * @param string $time  day|week|month.
 	 *
 	 * @return mixed
 	 */
@@ -67,6 +90,14 @@ class WP_Hummingbird_API_Service_Uptime extends WP_Hummingbird_API_Service {
 		);
 
 		if ( true !== $results ) {
+			if ( is_wp_error( $results ) ) {
+				return $results;
+			}
+
+			if ( isset( $results->code ) && isset( $results->message ) ) {
+				return new WP_Error( 500, $results->message );
+			}
+
 			return new WP_Error( 500, __( 'Unknown Error', 'wphb' ) );
 		}
 

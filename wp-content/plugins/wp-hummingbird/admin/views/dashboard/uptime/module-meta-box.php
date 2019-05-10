@@ -14,25 +14,37 @@
 	<p><?php esc_html_e( 'Your website is currently up and humming.', 'wphb' ); ?></p>
 </div>
 
-<ul class="sui-list sui-list-top-border sui-margin-top sui-no-margin-bottom">
+<ul class="sui-list sui-margin-top sui-no-margin-bottom">
 	<li>
 		<span class="sui-list-label"><?php esc_html_e( 'Availability', 'wphb' ); ?></span>
-		<span class="sui-list-detail"><?php echo esc_html( $uptime_stats->availability ); ?></span>
+		<span class="sui-list-detail">
+			<?php echo isset( $uptime_stats->availability ) ? esc_html( $uptime_stats->availability ) : esc_html__( 'Waiting for data...', 'wphb' ); ?>
+		</span>
 	</li>
 	<li>
 		<span class="sui-list-label"><?php esc_html_e( 'Downtime', 'wphb' ); ?></span>
-		<span class="sui-list-detail"><?php echo esc_html( $uptime_stats->period_downtime ); ?></span>
+		<span class="sui-list-detail">
+			<?php echo isset( $uptime_stats->period_downtime ) ? esc_html( $uptime_stats->period_downtime ) : '-'; ?>
+		</span>
 	</li>
 	<li>
-		<span class="sui-list-label"><?php esc_html_e( 'Average Response Time', 'wphb' ); ?></span>
-		<span class="sui-list-detail"><?php echo $uptime_stats->response_time ? esc_html( $uptime_stats->response_time ) : esc_html__( 'Calculating...', 'wphb' ); ?></span>
+		<span class="sui-list-label"><?php esc_html_e( 'Average response time', 'wphb' ); ?></span>
+		<span class="sui-list-detail">
+			<?php echo isset( $uptime_stats->response_time ) ? esc_html( $uptime_stats->response_time ) : esc_html__( 'Calculating...', 'wphb' ); ?>
+		</span>
 	</li>
 	<li>
-		<?php
-		$gmt_date  = date( 'Y-m-d H:i:s', $uptime_stats->up_since );
-		$site_date = get_date_from_gmt( $gmt_date, get_option( 'date_format' ) . ' ' . get_option( 'time_format' ) );
-		?>
-		<span class="sui-list-label"><?php esc_html_e( 'Last Down', 'wphb' ); ?></span>
-		<span class="sui-list-detail"><?php echo esc_html( $site_date ); ?></span>
+		<span class="sui-list-label"><?php esc_html_e( 'Last down', 'wphb' ); ?></span>
+		<span class="sui-list-detail">
+			<?php
+			if ( isset( $uptime_stats->up_since ) ) {
+				$gmt_date  = date( 'Y-m-d H:i:s', $uptime_stats->up_since );
+				$site_date = get_date_from_gmt( $gmt_date, get_option( 'date_format' ) . ' ' . get_option( 'time_format' ) );
+				echo esc_html( $site_date );
+			} else {
+				echo '-';
+			}
+			?>
+		</span>
 	</li>
 </ul>

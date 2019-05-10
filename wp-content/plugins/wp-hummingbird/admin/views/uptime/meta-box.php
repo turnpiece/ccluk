@@ -15,8 +15,12 @@
 <?php if ( $error && ( ! strpos( $error, 'down for maintenance' ) ) ) : ?>
 	<div class="sui-notice sui-notice-<?php echo esc_attr( $error_type ); ?>">
 		<p><?php echo esc_html( $error ); ?></p>
-		<a href="<?php echo esc_url( $retry_url ); ?>" class="sui-button sui-button-primary button-notice"><?php esc_html_e( 'Try again', 'wphb' ); ?></a>
-		<a target="_blank" href="<?php echo esc_url( $support_url ); ?>" class="sui-button sui-button-primary button-notice"><?php esc_html_e( 'Support', 'wphb' ); ?></a>
+
+		<div class="sui-notice-buttons">
+			<a href="<?php echo esc_url( $retry_url ); ?>" class="sui-button sui-button-blue button-notice"><?php esc_html_e( 'Try again', 'wphb' ); ?></a>
+			<a target="_blank" href="<?php echo esc_url( $support_url ); ?>" class="sui-button sui-button-blue button-notice"><?php esc_html_e( 'Support', 'wphb' ); ?></a>
+		</div>
+
 		<span class="sui-notice-dismiss">
 			<a href="#">Dismiss</a>
 		</span>

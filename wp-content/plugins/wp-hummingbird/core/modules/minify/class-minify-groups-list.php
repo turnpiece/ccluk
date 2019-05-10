@@ -128,7 +128,7 @@ class WP_Hummingbird_Module_Minify_Groups_List {
 	 * Return a list of group hashes that are dependant of another group hash
 	 *
 	 * This function will search among all groups and compare if any handles of it
-	 * has dependencies with any other group on the list. After taht, it will return
+	 * has dependencies with any other group on the list. After that, it will return
 	 * all those group hashes
 	 *
 	 * IMPORTANT NOTE: All group IDs ($group->group_id) should be already set
@@ -140,7 +140,6 @@ class WP_Hummingbird_Module_Minify_Groups_List {
 	 * @return array|WP_Error
 	 */
 	public function get_group_dependencies( $key_or_hash ) {
-		/* @var WP_Hummingbird_Module_Minify_Group $group */
 		$group = $this->get_group( $key_or_hash );
 		if ( ! $group ) {
 			return array();
@@ -157,7 +156,6 @@ class WP_Hummingbird_Module_Minify_Groups_List {
 	 * @return bool|WP_Hummingbird_Module_Minify_Group
 	 */
 	public function get_group_by_group_id( $group_id ) {
-		/* @var WP_Hummingbird_Module_Minify_Group $group */
 		$groups = $this->get_groups();
 		$result = wp_list_filter(
 			$groups,
@@ -215,7 +213,6 @@ class WP_Hummingbird_Module_Minify_Groups_List {
 			return false;
 		}
 
-		/* @var WP_Hummingbird_Module_Minify_Group $group */
 		$group      = $this->groups[ $position ];
 		$new_groups = array();
 		foreach ( $new_handles_order as $handles_order ) {
@@ -295,7 +292,6 @@ class WP_Hummingbird_Module_Minify_Groups_List {
 	 */
 	public function preprocess_groups() {
 		foreach ( $this->get_groups() as $group ) {
-			/* @var WP_Hummingbird_Module_Minify_Group $group */
 			$group->maybe_load_file();
 			$group_src = $group->get_group_src();
 
@@ -334,23 +330,22 @@ class WP_Hummingbird_Module_Minify_Groups_List {
 		// This cannot be undone, so do not change groups after this.
 		array_map(
 			function( $group ) use ( &$deps, $self ) {
-					/* @var WP_Hummingbird_Module_Minify_Group $group */
-					$search_group_deps          = $group->get_all_handles_dependencies();
-					$search_group_hash          = $group->hash;
-					$deps[ $search_group_hash ] = array();
+				/* @var WP_Hummingbird_Module_Minify_Group $group */
+				$search_group_deps          = $group->get_all_handles_dependencies();
+				$search_group_hash          = $group->hash;
+				$deps[ $search_group_hash ] = array();
 
 				foreach ( $self->get_groups() as $position => $g ) {
-					  /* @var WP_Hummingbird_Module_Minify_Group $g */
-					  $g_status = $self->get_group_status( $g->hash );
-					  $g_hash   = $g->hash;
+					$g_status = $self->get_group_status( $g->hash );
+					$g_hash   = $g->hash;
 
 					if ( $g_hash === $search_group_hash ) {
 						// Don't search deps in the same group.
 						continue;
 					}
 
-						$g_handles = $g->get_handles();
-						$intersect = array_intersect( $g_handles, $search_group_deps );
+					$g_handles = $g->get_handles();
+					$intersect = array_intersect( $g_handles, $search_group_deps );
 					if ( ! empty( $intersect ) ) {
 						// We've found dependencies.
 						if ( 'ready' !== $g_status ) {
@@ -366,7 +361,7 @@ class WP_Hummingbird_Module_Minify_Groups_List {
 							);
 
 						} else {
-							$deps[ $search_group_hash ] = array_merge( $deps[ $search_group_hash ], array( $g->group_id ) );	   			 	 		  		   		
+							$deps[ $search_group_hash ] = array_merge( $deps[ $search_group_hash ], array( $g->group_id ) );
 						}
 					}
 				}

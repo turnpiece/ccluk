@@ -1,44 +1,62 @@
+import WPHBReports from './performance/reports';
+
 ( function() {
-    'use strict';
+  'use strict';
 
-    const WPHB_Global = {
-    	menuButton: document.querySelector('#wp-admin-bar-wphb-clear-cache > a'),
-    	noticeButton: document.getElementById('wp-admin-notice-wphb-clear-cache'),
-        ajaxurl: null,
+  const WPHBGlobal = {
+    menuButton: document.querySelector('#wp-admin-bar-wphb-clear-cache > a'),
+    noticeButton: document.getElementById('wp-admin-notice-wphb-clear-cache'),
+    reportButton: document
+        .getElementById('wp-admin-bar-wphb-performance-report'),
+    ajaxurl: null,
 
-        init: function() {
-            /** @var {array} wphbGlobal */
-            if ( wphbGlobal ) {
-                this.ajaxurl = wphbGlobal.ajaxurl;
-            } else {
-                this.ajaxurl = ajaxurl;
-            }
-    		if ( this.menuButton ) {
-    			this.clearCache( this.menuButton, 'wphb_front_clear_cache' );
-			}
-    		if ( this.noticeButton ) {
-    			this.clearCache( this.noticeButton, 'wphb_global_clear_cache' );
-			}
-		},
+    init: function() {
+      /** @var {array} wphbGlobal */
+      if ( wphbGlobal ) {
+        this.ajaxurl = wphbGlobal.ajaxurl;
+      } else {
+        this.ajaxurl = ajaxurl;
+      }
 
-		clearCache: ( sender, action ) => {
-            sender.addEventListener('click', () => {
-                const xhr = new XMLHttpRequest();
-                xhr.open('POST', WPHB_Global.ajaxurl+'?action='+action);
-                xhr.onload = function() {
-                    if (xhr.status === 200) {
-                        location.reload();
-                    }
-                    else {
-                        console.log( 'Request failed.  Returned status of ' + xhr.status );
-                    }
-                };
-                xhr.send();
-            });
-		}
-	};
+      WPHBReports.init();
 
-    document.addEventListener("DOMContentLoaded", function(){
-        WPHB_Global.init();
-    } );
+      if ( this.menuButton ) {
+        this.menuButton.addEventListener(
+            'click',
+            () => this.post(WPHBGlobal.ajaxurl, 'wphb_front_clear_cache')
+        );
+      }
+
+      if ( this.noticeButton ) {
+        this.noticeButton.addEventListener(
+            'click',
+            () => this.post(WPHBGlobal.ajaxurl,'wphb_global_clear_cache')
+        );
+      }
+
+      if ( this.reportButton ) {
+        this.reportButton.addEventListener(
+            'click',
+            () => SUI.dialogs['wphb-performance-dialog'].show()
+        );
+      }
+    },
+
+    post: (url, action) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open( 'POST', url+'?action='+action );
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+          location.reload();
+        } else {
+          console.log( 'Request failed.  Returned status of ' + xhr.status );
+        }
+      };
+      xhr.send();
+    },
+  };
+
+  document.addEventListener('DOMContentLoaded', function() {
+    WPHBGlobal.init();
+  } );
 }());

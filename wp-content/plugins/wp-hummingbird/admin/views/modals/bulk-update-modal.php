@@ -32,16 +32,8 @@
 						<span class="sui-icon-arrows-in" aria-hidden="true"></span>
 					</label>
 
-					<?php
-					$tooltip  = __( 'Combine', 'wphb' );
-					$is_http2 = is_ssl() && 'HTTP/2.0' === $_SERVER['SERVER_PROTOCOL'];
-					if ( $is_http2 ) {
-						$tooltip      = __( "Files can't be combined", 'wphb' );
-						$dont_combine = true;
-					}
-					?>
-					<input type="checkbox" class="toggle-checkbox filter-toggles filter-combine" name="filter-combine" id="filter-combine" aria-label="<?php esc_attr_e( 'Combine', 'wphb' ); ?>" <?php echo disabled( $is_http2 ); ?>>
-					<label for="filter-combine" class="toggle-label sui-tooltip" data-tooltip="<?php echo esc_attr( $tooltip ); ?>" aria-hidden="true">
+					<input type="checkbox" class="toggle-checkbox filter-toggles filter-combine" name="filter-combine" id="filter-combine" aria-label="<?php esc_attr_e( 'Combine', 'wphb' ); ?>">
+					<label for="filter-combine" class="toggle-label sui-tooltip" data-tooltip="<?php esc_attr_e( 'Combine', 'wphb' ); ?>" aria-hidden="true">
 						<span class="sui-icon-combine" aria-hidden="true"></span>
 					</label>
 

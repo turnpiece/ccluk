@@ -19,7 +19,7 @@
 			<div class="sui-box-footer">
 				<form method="post">
 					<a class="sui-button sui-button-ghost" data-a11y-dialog-hide><?php esc_html_e( 'Cancel', 'wphb' ); ?></a>
-					<button type="submit" name="dismiss_report" class="sui-button sui-button-primary"><?php esc_html_e( 'Confirm', 'wphb' ); ?></button>
+					<button type="submit" name="dismiss_report" class="sui-button sui-button-blue"><?php esc_html_e( 'Confirm', 'wphb' ); ?></button>
 					<?php wp_nonce_field( 'wphb-dismiss-performance-report' ); ?>
 				</form>
 			</div>

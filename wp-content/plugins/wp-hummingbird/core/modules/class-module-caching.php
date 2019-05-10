@@ -120,21 +120,25 @@ class WP_Hummingbird_Module_Caching extends WP_Hummingbird_Module_Server {
 			} elseif ( ! $cache_control ) {
 				$try_api = true;
 			}
-		} // End foreach().
+		}
 
 		// Will only trigger on 're-check status' button click and there are some false values.
 		if ( $try_api && $check_api ) {
 			// Get the API results.
 			$api         = WP_Hummingbird_Utils::get_api();
 			$api_results = $api->performance->check_cache();
-			$api_results = get_object_vars( $api_results );
 
-			foreach ( $files as $type  => $file ) {
-				if ( ! isset( $api_results[ $type ]->response_error ) && ! isset( $api_results[ $type ]->http_request_failed ) && absint( $api_results[ $type ] ) > 0 ) {
-					$results[ $type ] = absint( $api_results[ $type ] );
+			// This will prevent errors on local hosts and when API is not reachable.
+			if ( ! is_wp_error( $api_results ) ) {
+				$api_results = get_object_vars( $api_results );
+
+				foreach ( $files as $type  => $file ) {
+					if ( ! isset( $api_results[ $type ]->response_error ) && ! isset( $api_results[ $type ]->http_request_failed ) && absint( $api_results[ $type ] ) > 0 ) {
+						$results[ $type ] = absint( $api_results[ $type ] );
+					}
 				}
 			}
-		} // End if().
+		}
 
 		do_action( 'wphb_caching_analize_data', $results );
 
@@ -276,17 +280,6 @@ ExpiresDefault %%IMAGES%%
 		$code = str_replace( '%%CSS_HEAD%%', ltrim( $css_expiration, 'A' ), $code );
 
 		return $code;
-	}
-
-	/**
-	 * Get code for LightSpeed
-	 *
-	 * @param array $expiry_times Type expiry times (javascript, css...). Used with AJAX call caching_reload_snippet.
-	 *
-	 * @return string
-	 */
-	public function get_litespeed_code( $expiry_times = array() ) {
-		return $this->get_apache_code( $expiry_times );
 	}
 
 	/**

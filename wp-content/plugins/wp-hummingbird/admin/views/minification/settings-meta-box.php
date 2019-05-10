@@ -129,51 +129,49 @@
 			</p>
 		</div>
 	</div><!-- end sui-upsell-row -->
-	<?php
-endif;
+<?php endif; ?>
 
-if ( ! is_multisite() ) :
-	?>
-	<div class="sui-box-settings-row">
-		<div class="sui-box-settings-col-1">
-			<span class="sui-settings-label"><?php esc_html_e( 'Debug', 'wphb' ); ?></span>
-			<span class="sui-description">
-				<?php esc_html_e( 'Turn on the debug log to get insight into any issues you’re having.', 'wphb' ); ?>
-			</span>
-		</div>
-		<div class="sui-box-settings-col-2">
+<div class="sui-box-settings-row">
+	<div class="sui-box-settings-col-1">
+		<span class="sui-settings-label"><?php esc_html_e( 'Debug', 'wphb' ); ?></span>
+		<span class="sui-description">
+			<?php esc_html_e( 'Turn on the debug log to get insight into any issues you’re having.', 'wphb' ); ?>
+		</span>
+	</div>
+	<div class="sui-box-settings-col-2">
+		<?php if ( ! is_multisite() ) : ?>
 			<label class="sui-toggle sui-tooltip sui-tooltip-top-right" data-tooltip="<?php esc_html_e( 'Enable debug log', 'wphb' ); ?>">
 				<input type="checkbox" name="debug_log" id="debug_log" <?php checked( $logging ); ?>>
 				<span class="sui-toggle-slider"></span>
 			</label>
 			<label for="debug_log"><?php esc_html_e( 'Enable debug log', 'wphb' ); ?></label>
-			<div class="sui-description sui-toggle-description sui-border-frame with-padding wphb-logging-box <?php echo $logging ? '' : 'sui-hidden'; ?>">
-				<?php
-				esc_html_e(
-					'Debug logging is active. Logs are stored for 30 days, you can download the
-				log file below.',
-					'wphb'
-				);
-				?>
+		<?php endif; ?>
+		<div class="sui-description sui-border-frame with-padding wphb-logging-box <?php echo $logging ? '' : 'sui-hidden'; ?>">
+			<?php
+			esc_html_e(
+				'Debug logging is active. Logs are stored for 30 days, you can download the
+			log file below.',
+				'wphb'
+			);
+			?>
 
-				<div class="wphb-logging-buttons">
-					<a href="<?php echo esc_url( $download_url ); ?>" class="sui-button sui-button-ghost" <?php disabled( ! $logs_link, true ); ?>>
-						<i class="sui-icon-download" aria-hidden="true"></i>
-						<?php esc_html_e( 'Download Logs', 'wphb' ); ?>
-					</a>
-					<a href="#" class="sui-button sui-button-ghost sui-button-red wphb-logs-clear" data-module="minify" <?php disabled( ! $logs_link, true ); ?>>
-						<i class="sui-icon-trash" aria-hidden="true"></i>
-						<?php esc_html_e( 'Clear', 'wphb' ); ?>
-					</a>
-				</div>
-
-				<?php if ( $logs_link ) : ?>
-					<a href="<?php echo esc_url( $logs_link ); ?>" target="_blank"><?php echo esc_url( $logs_link ); ?></a>
-				<?php endif; ?>
+			<div class="wphb-logging-buttons">
+				<a href="<?php echo esc_url( $download_url ); ?>" class="sui-button sui-button-ghost" <?php disabled( ! $logs_link, true ); ?>>
+					<i class="sui-icon-download" aria-hidden="true"></i>
+					<?php esc_html_e( 'Download Logs', 'wphb' ); ?>
+				</a>
+				<a href="#" class="sui-button sui-button-ghost sui-button-red wphb-logs-clear" data-module="minify" <?php disabled( ! $logs_link, true ); ?>>
+					<i class="sui-icon-trash" aria-hidden="true"></i>
+					<?php esc_html_e( 'Clear', 'wphb' ); ?>
+				</a>
 			</div>
+
+			<?php if ( $logs_link ) : ?>
+				<a href="<?php echo esc_url( $logs_link ); ?>" target="_blank"><?php echo esc_url( $logs_link ); ?></a>
+			<?php endif; ?>
 		</div>
 	</div>
-<?php endif; ?>
+</div>
 
 <div class="sui-box-settings-row">
 	<div class="sui-box-settings-col-1">

@@ -194,37 +194,40 @@ class WP_Hummingbird_Module_Advanced extends WP_Hummingbird_Module {
 	 * @param string $type Accepts: 'revisions', 'drafts', 'trash', 'spam', 'trash_comment',
 	 *                     'expired_transients', 'transients', 'all'.
 	 *
-	 * @return int|array
+	 * @return int|array|stdClass
 	 */
 	public static function get_db_count( $type = 'all' ) {
 		global $wpdb;
 
-		switch ( $type ) {
-			case 'revisions':
-				$count = $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->posts} WHERE post_type = 'revision' AND post_status = 'inherit'" ); // Db call ok; no-cache ok.
-				break;
-			case 'drafts':
-				$count = $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->posts} WHERE post_status = 'draft' OR post_status = 'auto-draft'" ); // Db call ok; no-cache ok.
-				break;
-			case 'trash':
-				$count = $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->posts} WHERE post_status = 'trash'" ); // Db call ok; no-cache ok.
-				break;
-			case 'spam':
-				$count = $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->comments} WHERE comment_approved = 'spam'" ); // Db call ok; no-cache ok.
-				break;
-			case 'trash_comment':
-				$count = $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->comments} WHERE comment_approved = 'trash'" ); // Db call ok; no-cache ok.
-				break;
-			case 'expired_transients':
-				$count = $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->options} WHERE option_name LIKE '\_transient\_timeout\__%%' AND option_value < UNIX_TIMESTAMP()" ); // Db call ok; no-cache ok.
-				break;
-			case 'transients':
-				$count = $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->options} WHERE option_name LIKE '%_transient_%'" ); // Db call ok; no-cache ok.
-				break;
-			case 'all':
-			default:
-				$count = $wpdb->get_row(
-					"
+		$count = wp_cache_get( "wphb_db_optimization:{$type}" );
+
+		if ( false === $count ) {
+			switch ( $type ) {
+				case 'revisions':
+					$count = $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->posts} WHERE post_type = 'revision' AND post_status = 'inherit'" ); // Db call ok.
+					break;
+				case 'drafts':
+					$count = $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->posts} WHERE post_status = 'draft' OR post_status = 'auto-draft'" ); // Db call ok.
+					break;
+				case 'trash':
+					$count = $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->posts} WHERE post_status = 'trash'" ); // Db call ok.
+					break;
+				case 'spam':
+					$count = $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->comments} WHERE comment_approved = 'spam'" ); // Db call ok.
+					break;
+				case 'trash_comment':
+					$count = $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->comments} WHERE comment_approved = 'trash'" ); // Db call ok.
+					break;
+				case 'expired_transients':
+					$count = $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->options} WHERE option_name LIKE '\_transient\_timeout\__%%' AND option_value < UNIX_TIMESTAMP()" ); // Db call ok.
+					break;
+				case 'transients':
+					$count = $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->options} WHERE option_name LIKE '%_transient_%'" ); // Db call ok.
+					break;
+				case 'all':
+				default:
+					$count = $wpdb->get_row(
+						"
 					SELECT revisions, drafts, trash, spam, trash_comment, expired_transients, transients,
 					       sum(revisions+drafts+trash+spam+trash_comment+expired_transients+transients) AS total
 					FROM (
@@ -242,9 +245,12 @@ class WP_Hummingbird_Module_Advanced extends WP_Hummingbird_Module {
 					    COUNT(CASE WHEN option_name LIKE '%_transient_%' THEN 1 ELSE NULL END) AS transients
 					  FROM {$wpdb->options}) as options
 					)"
-				); // Db call ok; no-cache ok.
-				break;
-		} // End switch().
+					); // Db call ok.
+					break;
+			}
+
+			wp_cache_set( "wphb_db_optimization:{$type}", $count );
+		}
 
 		return $count;
 	}

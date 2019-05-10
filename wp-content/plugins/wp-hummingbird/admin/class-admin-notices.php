@@ -73,6 +73,7 @@ class WP_Hummingbird_Admin_Notices {
 			add_action( 'admin_notices', array( $this, 'free_version_rate' ) );
 		}
 
+		add_action( 'upgrader_process_complete', array( $this, 'plugin_changed' ) );
 		add_action( 'activated_plugin', array( $this, 'plugin_changed' ) );
 		add_action( 'deactivated_plugin', array( $this, 'plugin_changed' ) );
 		add_action( 'after_switch_theme', array( $this, 'plugin_changed' ) );
@@ -208,7 +209,7 @@ class WP_Hummingbird_Admin_Notices {
 		if ( in_array( $notice, $user_notices, true ) ) {
 			update_user_meta( get_current_user_id(), 'wphb-' . $notice . '-dismissed', true );
 		} elseif ( in_array( $notice, $options_notices, true ) ) {
-			delete_site_option( 'wphb-notice-' . $notice . '-show' );
+			delete_option( 'wphb-notice-' . $notice . '-show' );
 		}
 
 		$redirect = remove_query_arg( array( 'wphb-dismiss', '_wpnonce' ) );
@@ -292,7 +293,7 @@ class WP_Hummingbird_Admin_Notices {
 			return;
 		}
 
-		if ( ! get_site_option( 'wphb-pro' ) && WP_Hummingbird_Utils::is_member() ) {
+		if ( defined( 'WPHB_WPORG' ) && WPHB_WPORG && WP_Hummingbird_Utils::is_member() ) {
 			$url = WPMUDEV_Dashboard::$ui->page_urls->plugins_url;
 			/* translators: %s: Upgrade URL */
 			$message = sprintf( __( 'Awww yeah! You’ve got access to Hummingbird Pro! Let’s upgrade your free version so you can start using premium features. <a href="%s">Upgrade</a>', 'wphb' ), esc_url( $url ) );
@@ -324,7 +325,7 @@ class WP_Hummingbird_Admin_Notices {
 	 * @since 1.5.4
 	 */
 	public function free_version_rate() {
-		if ( get_site_option( 'wphb-pro' ) && WP_Hummingbird_Utils::is_member() ) {
+		if ( WP_Hummingbird_Utils::is_member() ) {
 			return;
 		}
 
@@ -342,7 +343,7 @@ class WP_Hummingbird_Admin_Notices {
 		$this->show_notice(
 			'free-rated',
 			__( "We've spent countless hours developing Hummingbird and making it free for you to use. We would really appreciate it if you dropped us a quick rating!", 'wphb' ),
-			'<a href="https://wordpress.org/support/plugin/hummingbird-performance/reviews/" class="sui-button sui-button-primary" target="_blank">' . __( 'Rate Hummingbird', 'wphb' ) . '</a>'
+			'<a href="https://wordpress.org/support/plugin/hummingbird-performance/reviews/" class="sui-button sui-button-blue" target="_blank">' . __( 'Rate Hummingbird', 'wphb' ) . '</a>'
 		);
 	}
 

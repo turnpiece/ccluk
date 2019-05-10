@@ -134,6 +134,11 @@ $cleantalk_hooked_actions[]='rwp-submit-wrap';
 
 $cleantalk_hooked_actions[]='post_update';
 
+/* Ninja Forms hoocked actions */
+$cleantalk_hooked_actions[]='ninja_forms_ajax_submit';
+$cleantalk_hooked_actions[]='nf_ajax_submit';
+$cleantalk_hooked_actions[]='ninja_forms_process'; // Depricated ?
+
 function ct_validate_email_ajaxlogin($email=null, $is_ajax=true){
 	
 	require_once(CLEANTALK_PLUGIN_DIR . 'cleantalk-public.php');
@@ -281,11 +286,17 @@ function ct_ajax_hook($message_obj = false, $additional = false)
 		'wpdUpdateAutomatically', //Comments update
 		'upload-attachment', // Skip ulpload attachments
 		'iwj_update_profile', //Skip profile page checker
+		'st_partner_create_service', //Skip add hotel via admin
     );
 	
 	//General post_info for all ajax calls
 	$post_info = array('comment_type' => 'feedback_ajax');
-
+		
+	// Use exclusions
+	if(check_url_exclusions()){
+		return false;
+	}
+	
 	$checkjs = apbct_js_test('ct_checkjs', $_COOKIE, true);
     if ($checkjs && // Spammers usually fail the JS test
         (isset($_POST['action']) && in_array($_POST['action'], $skip_post))

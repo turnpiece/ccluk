@@ -16,7 +16,10 @@
 	</div>
 <?php endif; ?>
 <div class="sui-actions-right">
-	<span class="spinner standalone"></span>
+	<span class="spinner"></span>
 	<span class="wphb-label-notice-inline sui-hidden-xs sui-hidden-sm"><?php esc_html_e( 'Made changes?', 'wphb' ); ?></span>
-	<input type="submit" class="sui-button sui-button-ghost" value="<?php esc_attr_e( 'Re-Check Expiry', 'wphb' ); ?>">
+	<a href="#" class="sui-button sui-button-ghost sui-button-icon-left">
+		<i class="sui-icon-update" aria-hidden="true"></i>
+		<?php esc_attr_e( 'Re-Check Status', 'wphb' ); ?>
+	</a>
 </div>

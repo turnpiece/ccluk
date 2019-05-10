@@ -11,7 +11,7 @@
 ?>
 
 <p>
-	<?php esc_html_e( 'Clean up your database of unnecessary data you probably don’t need. You can schedule daily, weekly or monthly automatic cleanups.', 'wphb' ); ?>
+	<?php esc_html_e( 'Cleanup your database of unnecessary data you probably don’t need that’s slowing down your server. You can schedule daily, weekly or monthly automatic cleanups.', 'wphb' ); ?>
 </p>
 
 <div class="wphb-border-frame">
@@ -35,15 +35,16 @@
 			</div>
 			<div class="wphb-db-items"><?php echo absint( $field['value'] ); ?></div>
 			<div>
-				<span class="spinner standalone"></span>
 				<i class="sui-icon-loader sui-loading sui-hidden" aria-hidden="true"></i>
-				<a id="wphb-db-row-delete"
-				   class="wphb-db-row-delete sui-tooltip sui-tooltip-top-right"
-				   data-tooltip="<?php esc_attr_e( 'Delete entries', 'wphb' ); ?>"
-				   data-type="<?php echo esc_attr( $type ); ?>"
-				   data-entries="<?php echo absint( $field['value'] ); ?>">
-					<i class="sui-icon-trash" aria-hidden="true"></i>
-				</a>
+				<button type="button" class="sui-button-icon sui-tooltip sui-tooltip-top-right" id="wphb-db-row-delete"
+						data-tooltip="<?php esc_attr_e( 'Delete entries', 'wphb' ); ?>"
+						data-type="<?php echo esc_attr( $type ); ?>"
+						data-entries="<?php echo absint( $field['value'] ); ?>">
+					<i class="sui-icon-trash sui-md" aria-hidden="true"></i>
+					<span class="sui-screen-reader-text">
+						<?php esc_html_e( 'Delete entries', 'wphb' ); ?>
+					</span>
+				</button>
 			</div>
 		</div>
 	<?php endforeach; ?>

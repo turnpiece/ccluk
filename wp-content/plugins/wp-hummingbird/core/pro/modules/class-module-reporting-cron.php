@@ -35,7 +35,6 @@ class WP_Hummingbird_Module_Reporting_Cron extends WP_Hummingbird_Module_Reports
 			// Schedule first scan.
 			wp_schedule_single_event( parent::get_scheduled_time( self::$module ), 'wphb_performance_report' );
 		} else {
-			/* @var WP_Hummingbird_Module_Performance $performance */
 			$performance        = WP_Hummingbird_Utils::get_module( 'performance' );
 			$options            = $performance->get_options();
 			$options['reports'] = false;
@@ -46,8 +45,6 @@ class WP_Hummingbird_Module_Reporting_Cron extends WP_Hummingbird_Module_Reports
 
 	/**
 	 * Ajax action for processing a scan on page.
-	 *
-	 * TODO: this code needs to be refactored.
 	 *
 	 * @since 1.4.5
 	 */
@@ -82,7 +79,6 @@ class WP_Hummingbird_Module_Reporting_Cron extends WP_Hummingbird_Module_Reports
 		if ( ( ! $last_report || $time_difference > 300 ) && $limit < 3 ) {
 			// First run. Init new report scan.
 			if ( 0 === $limit ) {
-				/* @var WP_Hummingbird_Module_Performance $perf_module */
 				WP_Hummingbird_Utils::get_module( 'performance' )->init_scan();
 			}
 
@@ -115,7 +111,7 @@ class WP_Hummingbird_Module_Reporting_Cron extends WP_Hummingbird_Module_Reports
 			// Reschedule.
 			$next_scan_time = parent::get_scheduled_time( self::$module );
 			wp_schedule_single_event( $next_scan_time, 'wphb_performance_report' );
-		} // End if().
+		}
 	}
 
 	/**
@@ -131,10 +127,11 @@ class WP_Hummingbird_Module_Reporting_Cron extends WP_Hummingbird_Module_Reports
 			return;
 		}
 
-		$issues = WP_Hummingbird_Utils::get_number_of_issues( 'performance' );
-		if ( 0 === $issues || empty( $recipients ) ) {
+		if ( empty( $recipients ) ) {
 			return;
 		}
+
+		$options = WP_Hummingbird_Settings::get_setting( 'reports', 'performance' );
 
 		foreach ( $recipients as $recipient ) {
 			// Prepare the parameters.
@@ -148,6 +145,10 @@ class WP_Hummingbird_Module_Reporting_Cron extends WP_Hummingbird_Module_Reports
 				'SITE_MANAGE_URL' => network_site_url( 'wp-admin/admin.php?page=wphb' ),
 				'SITE_URL'        => wp_parse_url( network_site_url(), PHP_URL_HOST ),
 				'SITE_NAME'       => get_bloginfo( 'name' ),
+				'DEVICE'          => $options['type'], // Can be: desktop, mobile, both.
+				'SHOW_METRICS'    => $options['metrics'],
+				'SHOW_AUDITS'     => $options['audits'],
+				'SHOW_HISTORIC'   => $options['historic'],
 			);
 			$email_content = parent::issues_list_html( $last_report, $params );
 			// Change nl to br.

@@ -23,7 +23,7 @@ if ( $this->has_meta_boxes( 'box-uptime-disabled' ) ) {
 					<div class="sui-notice sui-notice-error can-close">
 						<span class="close"></span>
 						<p><?php echo esc_html( $error ); ?></p>
-						<a href="<?php echo esc_url( $retry_url ); ?>" class="sui-button sui-button-primary">
+						<a href="<?php echo esc_url( $retry_url ); ?>" class="sui-button sui-button-blue">
 							<?php esc_html_e( 'Try again', 'wphb' ); ?>
 						</a>
 					</div>

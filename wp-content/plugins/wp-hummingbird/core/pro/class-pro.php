@@ -92,23 +92,6 @@ class WP_Hummingbird_Pro {
 
 		$this->load_ajax();
 		$this->load_modules();
-
-		add_action( 'wphb_deactivate', array( $this, 'on_deactivate' ) );
-		add_action( 'wphb_activate', array( $this, 'on_activate' ) );
-	}
-
-	/**
-	 * Action on deactivate.
-	 */
-	public function on_deactivate() {
-		delete_site_option( 'wphb-pro' );
-	}
-
-	/**
-	 * Actions on activate.
-	 */
-	public function on_activate() {
-		update_site_option( 'wphb-pro', 'yes' );
 	}
 
 	/**

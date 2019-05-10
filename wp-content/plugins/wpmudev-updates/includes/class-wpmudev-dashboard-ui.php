@@ -633,37 +633,28 @@ class WPMUDEV_Dashboard_Ui {
 		if ( 'plugin' === $type ) {
 			if ( isset( $data['plugin_tags'] ) ) {
 				$tags = (array) $data['plugin_tags'];
-				$res  = array(
-					// Important: Index 0 is "All", added automatically.
-					1 => array(
-						'name' => __( 'Business', 'wpmudev' ),
-						'pids' => (array) $tags[32]['pids'],
-					),
-					2 => array(
-						'name' => __( 'SEO', 'wpmudev' ),
-						'pids' => (array) $tags[50]['pids'],
-					),
-					3 => array(
-						'name' => __( 'Marketing', 'wpmudev' ),
-						'pids' => (array) $tags[498]['pids'],
-					),
-					4 => array(
-						'name' => __( 'Publishing', 'wpmudev' ),
-						'pids' => (array) $tags[31]['pids'],
-					),
-					5 => array(
-						'name' => __( 'Community', 'wpmudev' ),
-						'pids' => (array) $tags[29]['pids'],
-					),
-					6 => array(
-						'name' => __( 'BuddyPress', 'wpmudev' ),
-						'pids' => (array) $tags[489]['pids'],
-					),
-					7 => array(
-						'name' => __( 'Multisite', 'wpmudev' ),
-						'pids' => (array) $tags[16]['pids'],
-					),
+				$known_tags = array(
+					32  => __( 'Business', 'wpmudev' ),
+					50  => __( 'SEO', 'wpmudev' ),
+					498 => __( 'Marketing', 'wpmudev' ),
+					31  => __( 'Publishing', 'wpmudev' ),
+					29  => __( 'Community', 'wpmudev' ),
+					489 => __( 'BuddyPress', 'wpmudev' ),
+					16  => __( 'Multisite', 'wpmudev' ),
 				);
+
+				// Important: Index 0 is "All", added automatically.
+				$tag_index = 1;
+				foreach ( $known_tags as $tag_id => $tag_name ) {
+					if ( ! isset( $tags[ $tag_id ] ) ) {
+						continue;
+					}
+					$res[ $tag_index ] = array(
+						'name' => $tag_name,
+						'pids' => (array) $tags[ $tag_id ]['pids'],
+					);
+					$tag_index ++;
+				}
 			}
 		} elseif ( 'theme' === $type ) {
 			if ( isset( $data['theme_tags'] ) ) {

@@ -2020,8 +2020,9 @@ function apbct_form__ninjaForms__testSpam() {
     global $apbct;
 	
 	if(
-		$apbct->settings['contact_forms_test'] == 0 ||
-		$apbct->settings['protect_logged_in'] != 1 && is_user_logged_in() // Skip processing for logged in users.
+			$apbct->settings['contact_forms_test'] == 0
+		|| ($apbct->settings['protect_logged_in'] != 1 && is_user_logged_in()) // Skip processing for logged in users.
+		|| check_url_exclusions()
 	){
 		return;
 	}

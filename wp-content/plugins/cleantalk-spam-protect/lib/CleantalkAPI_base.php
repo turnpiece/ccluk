@@ -582,11 +582,17 @@ class CleantalkAPI_base
 		
 		// get_antispam_report_breif
 			case 'get_antispam_report_breif':
+				
+				$out = isset($result['data']) && is_array($result['data'])
+					? $result['data']
+					: array('error' => true, 'error_string' => 'NO_DATA');
+				
 				for($tmp = array(), $i = 0; $i < 7; $i++){
 					$tmp[date('Y-m-d', time() - 86400 * 7 + 86400 * $i)] = 0;
 				}
 				$out['spam_stat']    = (array) array_merge( $tmp, isset($out['spam_stat']) ? $out['spam_stat'] : array() );
 				$out['top5_spam_ip'] = isset($out['top5_spam_ip']) ? $out['top5_spam_ip'] : array();
+				
 				break;
 			
 			default:

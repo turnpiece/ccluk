@@ -556,34 +556,28 @@ class WP_Hummingbird_Module_Minify_Group {
 	 */
 	public function should_do_handle( $handle, $action, $value = null ) {
 		switch ( $action ) {
-			case 'minify': {
+			case 'minify':
 				$should = 'dont_minify';
 				$do     = 'dont';
 				break;
-			}
-			case 'combine': {
+			case 'combine':
 				$should = 'dont_combine';
 				$do     = 'dont';
 				break;
-			}
-			case 'enqueue': {
+			case 'enqueue':
 				$should = 'dont_enqueue';
 				$do     = 'dont';
 				break;
-			}
-			case 'defer': {
+			case 'defer':
 				$should = 'defer';
 				$do     = 'do';
 				break;
-			}
-			case 'inline': {
+			case 'inline':
 				$should = 'inline';
 				$do     = 'do';
 				break;
-			}
-			default: {
+			default:
 				return null;
-			}
 		}
 
 		// @TODO: Refactor a bit
@@ -624,7 +618,7 @@ class WP_Hummingbird_Module_Minify_Group {
 			} else {
 				return ! in_array( $handle, $this->$should, true ) ? false : true;
 			}
-		} // End if().
+		}
 		return null;
 	}
 
@@ -933,7 +927,6 @@ class WP_Hummingbird_Module_Minify_Group {
 			return false;
 		}
 
-		/* @var WP_Hummingbird_Module_Minify $minify_module */
 		$minify_module = WP_Hummingbird_Utils::get_module( 'minify' );
 
 		$handles = $this->get_handles();
@@ -1043,7 +1036,7 @@ class WP_Hummingbird_Module_Minify_Group {
 						$this->type,
 						'import-not-allowed',
 						__( '@import directive is not allowed in stylesheets', 'wphb' ),
-						array( 'minify', 'combine' ), // Disallow minification/concat
+						array( 'minify', 'combine' ), // Disallow minification/concat.
 						array( 'minify', 'combine' ) // Disable minify/concat switchers.
 					);
 					continue;
@@ -1069,7 +1062,7 @@ class WP_Hummingbird_Module_Minify_Group {
 					'minify'  => $this->should_do_handle( $handle, 'minify' ),
 				);
 			}
-		} // End foreach().
+		}
 
 		unset( $content );
 
@@ -1222,12 +1215,12 @@ class WP_Hummingbird_Module_Minify_Group {
 			} else {
 				// Just save URL.
 				update_post_meta( $group->file_id, '_url', $file['response'] );
-			} // End if().
+			}
 
 			update_post_meta( $group->file_id, '_expires', $expire_on );
 
 			return true;
-		} // End if().
+		}
 
 		return false;
 	}
@@ -1342,7 +1335,6 @@ class WP_Hummingbird_Module_Minify_Group {
 	 * @return bool
 	 */
 	public function should_process_group() {
-		/* @var WP_Hummingbird_Module_Minify $minify */
 		$minify = WP_Hummingbird_Utils::get_module( 'minify' );
 
 		// Always process group if CDN is enabled.
@@ -1449,7 +1441,7 @@ class WP_Hummingbird_Module_Minify_Group {
 			add_action(
 				'wp_footer',
 				function() use ( $tag, $type, $content ) {
-					echo '<' . $tag . ' type="' . $type . '">' . $content . '</' . $tag . '>';
+					echo '<' . $tag . ' type="' . $type . '">' . htmlspecialchars_decode( $content ) . '</' . $tag . '>';
 				},
 				999
 			);
@@ -1457,7 +1449,7 @@ class WP_Hummingbird_Module_Minify_Group {
 			add_action(
 				'wp_head',
 				function() use ( $tag, $type, $content ) {
-					echo '<' . $tag . ' type="' . $type . '">' . $content . '</' . $tag . '>';
+					echo '<' . $tag . ' type="' . $type . '">' . htmlspecialchars_decode( $content ) . '</' . $tag . '>';
 				},
 				999
 			);
@@ -1622,7 +1614,7 @@ class WP_Hummingbird_Module_Minify_Group {
 				},
 				999
 			);
-		} // End if().
+		}
 	}
 
 	/**
@@ -1765,7 +1757,7 @@ class WP_Hummingbird_Module_Minify_Group {
 				},
 				999
 			);
-		} // End if().
+		}
 
 		return $new_id;
 	}
@@ -1822,8 +1814,38 @@ class WP_Hummingbird_Module_Minify_Group {
 			return true;
 		}
 
+		if ( is_multisite() && defined( 'DOMAINMAP_BASEFILE' ) ) {
+			return $parsed_src['host'] === $this->check_mapped_domain();
+		}
+
 		// Not local.
 		return false;
+	}
+
+	/**
+	 * Support for domain mapping plugin.
+	 *
+	 * @since 2.0.0
+	 */
+	private function check_mapped_domain() {
+		$domain = wp_cache_get( 'smush_mapped_site_domain', 'smush' );
+
+		if ( ! $domain ) {
+			global $wpdb;
+
+			$domain = $wpdb->get_var(
+				$wpdb->prepare(
+					"SELECT domain FROM {$wpdb->base_prefix}domain_mapping WHERE blog_id = %d ORDER BY id ASC LIMIT 1",
+					get_current_blog_id()
+				)
+			); // Db call ok.
+
+			if ( null !== $domain ) {
+				wp_cache_add( 'smush_mapped_site_domain', $domain, 'smush' );
+			}
+		}
+
+		return $domain;
 	}
 
 }

@@ -15,13 +15,13 @@
 ?>
 <p class="sui-margin-bottom"><?php esc_html_e( 'Compress, combine and position your assets to dramatically improve your page load speed.', 'wphb' ); ?></p>
 
-<ul class="sui-list sui-list-top-border sui-no-margin-bottom">
+<ul class="sui-list sui-no-margin-bottom">
 	<li>
-		<span class="sui-list-label"><?php esc_html_e( 'Total Enqueued Files', 'wphb' ); ?></span>
+		<span class="sui-list-label"><?php esc_html_e( 'Enqueued files', 'wphb' ); ?></span>
 		<span class="sui-list-detail"><?php echo absint( $enqueued_files ); ?></span>
 	</li>
 	<li>
-		<span class="sui-list-label"><?php esc_html_e( 'Total Size Reductions', 'wphb' ); ?></span>
+		<span class="sui-list-label"><?php esc_html_e( 'Total file size reductions', 'wphb' ); ?></span>
 		<span class="sui-list-detail">
 			<div class="wphb-pills-group">
 				<span class="wphb-pills with-arrow right grey"><?php echo esc_html( $original_size ); ?>KB</span>
@@ -30,7 +30,7 @@
 		</span>
 	</li>
 	<li>
-		<span class="sui-list-label"><?php esc_html_e( 'Total % Reductions', 'wphb' ); ?></span>
+		<span class="sui-list-label"><?php esc_html_e( 'Total % reductions', 'wphb' ); ?></span>
 		<span class="sui-list-detail"><?php echo esc_html( $percentage ); ?>%</span>
 	</li>
 	</li>

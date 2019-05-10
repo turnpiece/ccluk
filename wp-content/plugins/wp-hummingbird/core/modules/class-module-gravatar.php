@@ -297,7 +297,7 @@ class WP_Hummingbird_Module_Gravatar extends WP_Hummingbird_Module {
 		// Try to save the avatar.
 		$file = $email_hash . 'x' . $args['size'] . '.jpg';
 
-		if ( ! $wphb_fs->find( $file ) && isset( $args['url'] ) ) {
+		if ( ! $wphb_fs->find( $file, true ) && isset( $args['url'] ) ) {
 			$remote_avatar = wp_remote_get( $args['url'] );
 			// If error fetching avatar.
 			if ( is_wp_error( $remote_avatar ) ) {

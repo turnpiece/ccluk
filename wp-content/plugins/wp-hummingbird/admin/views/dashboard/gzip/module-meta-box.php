@@ -24,13 +24,13 @@
 	</div>
 <?php else : ?>
 	<div class="sui-notice sui-notice-success">
-		<p><?php esc_html_e( 'GZip compression is currently active. Good job!', 'wphb' ); ?></p>
+		<p><?php esc_html_e( 'Gzip compression is currently active. Good job!', 'wphb' ); ?></p>
 	</div>
 <?php endif; ?>
 
 <ul class="sui-list sui-no-margin-bottom">
 	<li class="sui-list-header">
-		<span><?php esc_html_e( 'File Type', 'wphb' ); ?></span>
+		<span><?php esc_html_e( 'File type', 'wphb' ); ?></span>
 		<span><?php esc_html_e( 'Status', 'wphb' ); ?></span>
 	</li>
 	<?php

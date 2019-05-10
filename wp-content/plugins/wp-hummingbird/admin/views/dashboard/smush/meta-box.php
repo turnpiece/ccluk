@@ -21,7 +21,7 @@
 
 	<!-- No plugin is installed -->
 	<?php if ( ! $is_installed ) : ?>
-		<a href="<?php echo esc_url( WP_Hummingbird_Utils::get_link( 'smush' ) ); ?>" class="sui-button sui-button-primary" id="smush-install">
+		<a href="<?php echo esc_url( WP_Hummingbird_Utils::get_link( 'smush' ) ); ?>" class="sui-button sui-button-blue" id="smush-install">
 			<?php
 			if ( WP_Hummingbird_Utils::is_member() ) {
 				esc_html_e( 'Install Smush Pro', 'wphb' );
@@ -37,11 +37,11 @@
 			<p><?php esc_html_e( 'WP Smush is installed but not activated! Activate and set up now to reduce page load time.', 'wphb' ); ?></p>
 		</div>
 		<?php if ( $is_pro ) : ?>
-			<a href="<?php echo esc_url( $activate_pro_url ); ?>" class="sui-button sui-button-primary" id="smush-activate">
+			<a href="<?php echo esc_url( $activate_pro_url ); ?>" class="sui-button sui-button-blue" id="smush-activate">
 				<?php esc_html_e( 'Activate Smush Pro', 'wphb' ); ?>
 			</a>
 		<?php else : ?>
-			<a href="<?php echo esc_url( $activate_url ); ?>" class="sui-button sui-button-primary" id="smush-activate">
+			<a href="<?php echo esc_url( $activate_url ); ?>" class="sui-button sui-button-blue" id="smush-activate">
 				<?php esc_html_e( 'Activate Smush', 'wphb' ); ?>
 			</a>
 		<?php endif; ?>

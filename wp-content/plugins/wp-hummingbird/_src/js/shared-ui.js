@@ -1,5 +1,6 @@
 /**
- * Shared UI JS libraries. Use only what we need to keep the vendor file size smaller.
+ * Shared UI JS libraries. Use only what we need to keep the vendor
+ * file size smaller.
  */
 require('@wpmudev/shared-ui/dist/js/_src/accordion');
 require('@wpmudev/shared-ui/dist/js/_src/code-snippet');

@@ -57,7 +57,7 @@ final class Plugin {
 				'enabled' => 1,
 				'secret_key' => ''
 			),
-			'enable_user_control' => 1,
+			'enable_user_control' => 0,
 			'default_optin_status' => 'unsubscribed',
 			'user_profile_heading_text' => __( 'Newsletter', 'mailchimp-sync' ),
 			'user_profile_label_text' => __( 'Send me occasional email updates.', 'mailchimp-sync'),

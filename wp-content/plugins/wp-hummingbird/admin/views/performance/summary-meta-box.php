@@ -1,201 +1,98 @@
 <?php
 /**
- * Performance summary meta box.
+ * Performance test summary meta box.
  *
  * @package Hummingbird
  *
- * @var bool     $error             Was there an error during performance scan.
- * @var string   $error_text        Error text.
- * @var string   $error_details     Error details.
- * @var string   $retry_url         Url to start a new performance scan.
- * @var bool     $report_dismissed  If performance report is dismissed.
- * @var bool     $can_run_test      If there is no cool down period and user can run a new test.
- * @var stdClass $last_test         Last test details.
- * @var bool     $is_subsite        Is this a subsite.
+ * @var string            $type              Report type: desktop/mobile.
+ * @var stdClass|WP_Error $last_report       Last performance report.
+ * @var bool              $report_dismissed  Is report dismissed.
+ * @var bool              $is_doing_report   Is running a scan.
+ * @var int               $opportunities     Number of failed opportunities.
+ * @var int               $diagnostics       Number of failed diagnostics.
+ * @var int               $passed_audits     Number of passed audits (passed opportunities + passed diagnostics).
  */
 
-if ( $error ) : ?>
-	<div class="sui-box-body">
-		<div class="sui-notice sui-notice-error">
-			<p><?php echo $error_text; ?></p>
-			<div id="wphb-error-details">
-				<p><code><?php echo $error_details; ?></code></p>
-			</div>
-			<div class="sui-notice-buttons">
-				<a href="<?php echo esc_url( $retry_url ); ?>" class="sui-button sui-button-primary button-notice"><?php esc_html_e( 'Try again', 'wphb' ); ?></a>
-				<a target="_blank" href="<?php echo esc_url( WP_Hummingbird_Utils::get_link( 'support' ) ); ?>" class="sui-button sui-button-primary button-notice"><?php esc_html_e( 'Support', 'wphb' ); ?></a>
-			</div>
-		</div>
-	</div>
-	<script>
-		var pressedKeys = [],
-			timer;
+?>
 
-		function wphbSetInterval() {
-			timer = window.setInterval(function(){
-				// Clean pressedKeys every 1sec
-				pressedKeys = [];
-			}, 1000);
-		}
-
-		wphbSetInterval();
-
-		document.onkeyup = function( e ) {
-			clearInterval( timer );
-			wphbSetInterval();
-			e = e || event;
-			pressedKeys.push( e.keyCode );
-			var count = pressedKeys.length;
-			if ( count >= 2 ) {
-				// Get the previous key pressed. If they are H+B, we'll display the error
-				if ( pressedKeys[ count - 1 ] == 66 && pressedKeys[ count - 2 ] == 72 ) {
-					var errorDetails = document.getElementById('wphb-error-details');
-					errorDetails.style.display = 'block';
-				}
-			}
-		};
-	</script>
-<?php else : ?>
-	<div class="sui-box-body">
-		<?php if ( $report_dismissed ) : ?>
-			<div class="sui-notice">
-				<p><?php esc_html_e( 'You have chosen to ignore this performance test. Run a new test to see new recommendations.', 'wphb' ); ?></p>
-				<div class="sui-notice-buttons">
-					<?php if ( true === $can_run_test ) : ?>
-						<a href="<?php echo esc_url( $retry_url ); ?>"  class="sui-button sui-button-primary"><?php esc_html_e( 'Run Test', 'wphb' ); ?></a>
-						<?php
-					else :
-						$tooltip = sprintf(
-							/* translators: %d: number of minutes. */
-							_n(
-								'Hummingbird is just catching her breath - you can run another test in %d minute',
-								'Hummingbird is just catching her breath - you can run another test in %d minutes',
-								$can_run_test,
-								'wphb'
-							),
-							number_format_i18n( $can_run_test )
-						);
-						?>
-						<span class="sui-tooltip sui-tooltip-constrained" disabled="disabled" data-tooltip="<?php echo esc_attr( $tooltip ); ?>" aria-hidden="true">
-							<a href="<?php echo esc_url( $retry_url ); ?>" disabled class="sui-button sui-button-primary"><?php esc_html_e( 'Run Test', 'wphb' ); ?></a>
-						</span>
-					<?php endif; ?>
-				</div>
-				<?php
-				$impact_score_class = 'dismissed';
-				$impact_icon_class  = 'warning-alert';
-				?>
-			</div>
-        <?php else : ?>
-			<p><?php esc_html_e( 'Here are your latest performance test results. Action as many fixes as possible, however you can always ignore warnings if you are unable to fix them.', 'wphb' ); ?></p>
+<div class="sui-summary-image-space"></div>
+<div class="sui-summary-segment">
+	<div class="sui-summary-details">
+		<?php if ( $last_report && ! is_wp_error( $last_report ) && ! $report_dismissed ) : ?>
+			<span class="sui-summary-large"><?php echo esc_html( $last_report->{$type}->score ); ?></span>
+			<i class="sui-icon-<?php echo esc_attr( WP_Hummingbird_Module_Performance::get_impact_class( $last_report->{$type}->score, 'icon' ) ); ?> sui-md sui-<?php echo esc_attr( WP_Hummingbird_Module_Performance::get_impact_class( $last_report->{$type}->score ) ); ?>"></i>
+			<span class='sui-summary-percent'>/100</span>
+		<?php elseif ( $report_dismissed ) : ?>
+			<?php if ( isset( $last_report->{$type}->score ) ) : ?>
+				<span class="sui-summary-large"><?php echo esc_html( $last_report->{$type}->score ); ?></span>
+				<i class="sui-icon-info sui-md"></i>
+				<span class='sui-summary-percent'>/100</span>
+			<?php else : ?>
+				<span class="sui-summary-large">-</span>
+			<?php endif; ?>
+		<?php else : ?>
+			-
 		<?php endif; ?>
-	</div>
-	<table class="sui-table sui-accordion performance-report-table">
-		<tbody>
-		<?php
-		foreach ( $last_test->rule_result as $rule => $rule_result ) :
-			if ( ! $report_dismissed ) :
-				if ( 85 <= $rule_result->impact_score ) :
-					$impact_score_class = 'success';
-					$impact_icon_class  = 'check-tick';
-				elseif ( 65 <= $rule_result->impact_score ) :
-					$impact_score_class = 'warning';
-					$impact_icon_class  = 'warning-alert';
-				else :
-					$impact_score_class = 'error';
-					$impact_icon_class  = 'warning-alert';
-				endif;
-			endif;
-			$colspan = '';
-			if ( $is_subsite && 'server' === $rule_result->type ) :
-				$impact_score_class = 'disabled';
-				$colspan            = 'colspan=2';
-			endif;
-			$has_url_blocks = ! empty( $rule_result->urlblocks ) && is_array( $rule_result->urlblocks ) && ! empty( $rule_result->urlblocks[0] );
-			?>
-			<tr class="sui-accordion-item sui-<?php echo esc_attr( $impact_score_class ); ?>">
-				<td class="sui-accordion-item-title"  width="40%">
-					<i class="sui-icon-<?php echo esc_attr( $impact_icon_class ); ?> sui-<?php echo esc_attr( $impact_score_class ); ?>"></i> <?php echo esc_html( $rule_result->label ); ?>
-				</td>
-				<td>
-					<div class="sui-circle-score sui-grade-<?php echo esc_attr( $impact_score_class ); ?> sui-tooltip"
-						 data-tooltip="<?php echo esc_html( $rule_result->impact_score ); ?>/100" data-score="<?php echo esc_attr( $rule_result->impact_score ); ?>"></div>
-				</td>
-				<td class="sui-hidden-xs sui-hidden-sm wphb-performance-report-item-type <?php echo esc_attr( $impact_score_class ); ?>" <?php echo esc_attr( $colspan ); ?>>
-					<?php
-					if ( 'disabled' === $impact_score_class ) :
-						$disabled_label = __( 'This improvement is controlled by the network admin for this site.', 'wphb' );
-						if ( is_super_admin() ) :
-							$disabled_label = __( 'This can’t be improved at the subsite level.', 'wphb' );
-						endif;
-						echo esc_html( $disabled_label );
-					else :
-						echo esc_html( $rule_result->type );
-					endif;
-					?>
-				</td>
+		<span class="sui-summary-sub"><?php esc_html_e( 'Performance score', 'wphb' ); ?></span>
 
-				<?php if ( 'disabled' !== $impact_score_class ) : ?>
-					<td>
-						<span class="sui-accordion-open-indicator">
-							<?php if ( ! empty( $rule_result->summary ) || ! empty( $rule_result->tip ) ) : ?>
-								<?php if ( $rule_result->impact_score < 85 && ( ! $is_subsite && 'server' !== $rule_result->type ) && ! $report_dismissed ) : ?>
-									<a class="sui-button sui-button-ghost sui-hidden-xs sui-hidden-sm sui-hidden-md"><?php esc_html_e( 'Improve', 'wphb' ); ?></a>
-								<?php endif; ?>
-							<i class="sui-icon-chevron-down"></i>
-							<?php endif; ?>
-						</span>
-					</td>
-				<?php endif; ?>
-			</tr>
-			<tr class="sui-accordion-item-content">
-				<td colspan=4>
-					<div class="sui-box">
-						<div class="sui-box-body sui-box-performance-report-additional-content <?php echo $is_subsite ? 'disable-buttons' : ''; ?>">
-							<?php if ( ! empty( $rule_result->summary ) ) : ?>
-								<h4><?php esc_html_e( 'Overview', 'wphb' ); ?></h4>
-								<p><?php echo $rule_result->summary; ?></p>
-							<?php endif; ?>
-
-							<?php if ( $has_url_blocks ) : ?>
-								<h4><?php esc_html_e( 'Benchmarks', 'wphb' ); ?></h4>
-
-								<ol>
-									<?php
-									foreach ( $rule_result->urlblocks as $url_block ) :
-										if ( empty( $url_block ) ) {
-											continue;
-										}
-										?>
-
-										<p><?php echo $url_block->header; ?></p>
-
-										<?php
-										if ( ! empty( $url_block->urls ) && is_array( $url_block->urls ) ) :
-											foreach ( $url_block->urls as $url ) :
-												?>
-											<li><?php echo make_clickable( $url ); ?></li>
-												<?php
-											endforeach;
-										endif;
-									endforeach;
-									?>
-								</ol>
-							<?php endif; ?>
-
-							<?php if ( ! empty( $rule_result->tip ) ) : ?>
-								<h4><?php esc_html_e( 'How to improve', 'wphb' ); ?></h4>
-								<?php echo wpautop( $rule_result->tip ); ?>
-							<?php endif; ?>
-						</div>
-					</div>
-				</td>
-			</tr>
+		<span class="sui-summary-detail">
 			<?php
-		endforeach;
-		?>
-		</tbody>
-	</table>
-<?php endif; ?>
-
-<?php WP_Hummingbird_Utils::get_modal( 'dismiss-report' ); ?>
+			if ( $last_report && ! is_wp_error( $last_report ) ) {
+				$data_time    = strtotime( get_date_from_gmt( date( 'Y-m-d H:i:s', $last_report->time ) ) );
+				$time_string  = esc_html( date_i18n( get_option( 'date_format' ), $data_time ) );
+				$time_string .= sprintf(
+					/* translators: %s - time in proper format */
+					esc_html_x( ' at %s', 'Time of the last performance report', 'wphb' ),
+					esc_html( date_i18n( get_option( 'time_format' ), $data_time ) )
+				);
+				echo esc_html( $time_string );
+			} elseif ( $is_doing_report ) {
+				$time_string = esc_html__( 'Running scan...', 'wphb' );
+			} else {
+				$time_string = esc_html__( 'Never', 'wphb' );
+			}
+			?>
+		</span>
+		<span class="sui-summary-sub">
+			<?php esc_html_e( 'Last test date', 'wphb' ); ?>
+		</span>
+	</div>
+</div>
+<div class="sui-summary-segment">
+	<ul class="sui-list">
+		<li>
+			<span class="sui-list-label"><?php esc_html_e( 'Opportunities', 'wphb' ); ?></span>
+			<span class="sui-list-detail">
+				<?php if ( is_wp_error( $last_report ) ) : ?>
+					-
+				<?php else : ?>
+					<span class="sui-tag sui-tag-<?php echo esc_attr( WP_Hummingbird_Module_Performance::get_audits_class( $last_report->{$type}->audits->opportunities ) ); ?>">
+						<?php echo esc_html( $opportunities ); ?>
+					</span>
+				<?php endif; ?>
+			</span>
+		</li>
+		<li>
+			<span class="sui-list-label"><?php esc_html_e( 'Diagnostics', 'wphb' ); ?></span>
+			<span class="sui-list-detail">
+				<?php if ( is_wp_error( $last_report ) ) : ?>
+					-
+				<?php else : ?>
+					<span class="sui-tag sui-tag-<?php echo esc_attr( WP_Hummingbird_Module_Performance::get_audits_class( $last_report->{$type}->audits->opportunities ) ); ?>">
+						<?php echo esc_html( $diagnostics ); ?>
+					</span>
+				<?php endif; ?>
+			</span>
+		</li>
+		<li>
+			<span class="sui-list-label"><?php esc_html_e( 'Passed audits', 'wphb' ); ?></span>
+			<span class="sui-list-detail">
+				<?php if ( is_wp_error( $last_report ) ) : ?>
+					-
+				<?php else : ?>
+					<span class="sui-tag sui-tag-success"><?php echo esc_html( $passed_audits ); ?></span>
+				<?php endif; ?>
+			</span>
+		</li>
+	</ul>
+</div>

@@ -28,8 +28,6 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 	 * Register meta boxes.
 	 */
 	public function register_meta_boxes() {
-		$this->uptime = WP_Hummingbird_Utils::get_module( 'uptime' );
-
 		if ( ! WP_Hummingbird_Utils::is_member() ) {
 			$this->add_meta_box(
 				'uptime/no-membership',
@@ -46,9 +44,9 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 			return;
 		}
 
-		$is_active = $this->uptime->is_active();
+		$this->uptime = WP_Hummingbird_Utils::get_module( 'uptime' );
 
-		if ( ! $is_active ) {
+		if ( ! $this->uptime->is_active() ) {
 			$this->add_meta_box(
 				'uptime-disabled',
 				__( 'Get Started', 'wphb' ),
@@ -64,12 +62,12 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 			return;
 		}
 
-		$uptime_report = $is_active ? $this->uptime->get_last_report( $this->get_current_data_range() ) : '';
+		$this->current_report = $this->get_current_report();
 
-		if ( $is_active && is_wp_error( $uptime_report ) ) {
+		if ( $this->uptime->is_active() && is_wp_error( $this->current_report ) ) {
 			$this->add_meta_box(
 				'uptime',
-				__( 'Uptime', 'wphb' ),
+				__( 'Uptime Monitoring', 'wphb' ),
 				array( $this, 'uptime_metabox' ),
 				null,
 				null,
@@ -135,9 +133,16 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 			'main'          => __( 'Response Time', 'wphb' ),
 			'downtime'      => __( 'Downtime', 'wphb' ),
 			'notifications' => __( 'Notifications', 'wphb' ),
-			'reports'       => __( 'Reporting', 'wphb' ),
+			'reports'       => __( 'Reports', 'wphb' ),
 			'settings'      => __( 'Settings', 'wphb' ),
 		);
+
+		if ( is_wp_error( $this->current_report ) || ! $this->current_report ) {
+			unset( $this->tabs['downtime'] );
+			unset( $this->tabs['notifications'] );
+			unset( $this->tabs['reports'] );
+			unset( $this->tabs['settings'] );
+		}
 	}
 
 	/**
@@ -233,8 +238,10 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 			<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
 			<div class="sui-actions-right">
 				<?php if ( WP_Hummingbird_Utils::is_member() && $this->uptime->is_active() ) : ?>
-					<label for="wphb-uptime-data-range" class="inline-label header-label sui-hidden-xs sui-hidden-sm"><?php esc_html_e( 'Reporting period', 'wphb' ); ?></label>
-					<select name="wphb-uptime-data-range" class="uptime-data-range" id="wphb-uptime-data-range">
+					<label for="wphb-uptime-data-range" class="inline-label header-label sui-hidden-xs sui-hidden-sm">
+						<?php esc_html_e( 'Reporting period', 'wphb' ); ?>
+					</label>
+					<select name="wphb-uptime-data-range" class="uptime-data-range sui-select-sm" id="wphb-uptime-data-range">
 						<?php
 						foreach ( $data_ranges as $range => $label ) :
 							$data_url = add_query_arg(
@@ -356,11 +363,13 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 	protected function render_inner_content() {
 		$error = false;
 
-		if ( $this->uptime->is_active() ) {
-			$uptime_stats = $this->uptime->get_last_report( $this->get_current_data_range() );
-			if ( isset( $uptime_stats->code ) ) {
-				$error = $uptime_stats->message;
-			}
+		if ( ! WP_Hummingbird_Utils::is_member() ) {
+			parent::render_inner_content();
+			return;
+		}
+
+		if ( $this->uptime->is_active() && isset( $this->current_report->code ) ) {
+			$error = $this->current_report->message;
 		}
 
 		$retry_url = add_query_arg(
@@ -399,23 +408,26 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 	 * Uptime meta box.
 	 */
 	public function uptime_metabox() {
-		$error = '';
+		$error = $downtime_chart_json = '';
 
-		$stats = $this->uptime->get_last_report( $this->get_current_data_range() );
+		$stats = $this->current_report;
 		if ( is_wp_error( $stats ) ) {
 			$error      = $stats->get_error_message();
 			$error_type = 'error';
 		} elseif ( isset( $_GET['error'] ) ) { // Input var ok.
 			$error      = urldecode( $_GET['message'] ); // Input var ok.
 			$error_type = 'error';
-		}
+		} else {
+			// This is used for testing to create the state where no data exists when uptime is first activated.
+			if ( defined( 'WPHB_UPTIME_REFRESH' ) ) {
+				$stats = $this->first_activated_state_data();
+			}
 
-		// This is used for testing to create the state where no data exists when uptime is first activated.
-		if ( defined( 'WPHB_UPTIME_REFRESH' ) ) {
-			$stats = $this->first_activated_state_data();
-		}
-		if ( empty( $stats->chart_json ) ) {
-			$stats->chart_json = $this->get_chart_data( 'dummy' );
+			if ( empty( $stats->chart_json ) ) {
+				$stats->chart_json = $this->get_chart_data( 'dummy' );
+			}
+
+			$downtime_chart_json = $this->get_chart_data();
 		}
 
 		$retry_url = add_query_arg( 'run', 'true' );
@@ -426,7 +438,7 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 			'error'               => $error,
 			'retry_url'           => $retry_url,
 			'support_url'         => WP_Hummingbird_Utils::get_link( 'support' ),
-			'downtime_chart_json' => $this->get_chart_data(),
+			'downtime_chart_json' => $downtime_chart_json,
 		);
 
 		if ( ! empty( $error_type ) ) {
@@ -442,9 +454,7 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 	 * @since 1.5.0
 	 */
 	public function uptime_summary_metabox() {
-		$current_data_range = $this->get_current_data_range();
-
-		$stats = $this->uptime->get_last_report( $current_data_range );
+		$stats = $this->current_report;
 
 		// This is used for testing to create the state where no data exists when uptime is first activated.
 		if ( defined( 'WPHB_UPTIME_REFRESH' ) ) {
@@ -461,7 +471,7 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 			'uptime/summary-meta-box',
 			array(
 				'uptime_stats'    => $stats,
-				'data_range_text' => $current_range[ $current_data_range ],
+				'data_range_text' => $current_range[ $this->get_current_data_range() ],
 			)
 		);
 	}
@@ -502,10 +512,8 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 	 * @return false|string
 	 */
 	public function get_chart_data( $type = 'downtime' ) {
-		$data           = array();
-		$count          = 0;
-		$time           = time();
-		$time_increment = 0;
+		$data = array();
+		$time = time();
 
 		$current_data_range = $this->get_current_data_range();
 
@@ -515,7 +523,7 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 				$time_increment = 3600;
 				break;
 			case 'week':
-            default:
+			default:
 				$count          = 7;
 				$time_increment = 86400;
 				break;
@@ -543,13 +551,14 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 			$time     -= $count * $time_increment;
 			$end_time  = time();
 			$first     = true;
-			$event_arr = array_reverse( $stats->events );
+			$event_arr = ( isset( $stats->events ) && is_array( $stats->events ) ) ? array_reverse( $stats->events ) : array();
 
 			// If no downtime events and uptime has not just been enabled for the first time return Website Available.
 			if ( empty( $stats->events ) && ! empty( $stats->chart_json ) ) {
 				$data[] = array( 'Downtime', 'Up', 'Website Available', date( 'D M d Y H:i:s O', time() - $time_increment ), date( 'D M d Y H:i:s O', time() ) );
 				return wp_json_encode( $data );
 			}
+
 			foreach ( $event_arr as $event ) {
 				if ( ! empty( $event->down ) && ! empty( $event->up ) ) {
 					if ( ! $first ) {
@@ -564,6 +573,7 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 					}
 				}
 			}
+
 			if ( $first ) {
 				$data[] = array( 'Downtime', 'Unknown', 'Unknown Availability', date( 'D M d Y H:i:s O', $time - 180 ), date( 'D M d Y H:i:s O', $end_time - 120 ) );
 				$data[] = array( 'Downtime', 'Up', 'Website Available', date( 'D M d Y H:i:s O', $end_time - 120 ), date( 'D M d Y H:i:s O', $end_time ) );

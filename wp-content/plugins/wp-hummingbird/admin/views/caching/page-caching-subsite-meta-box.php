@@ -53,7 +53,8 @@
 			</span>
 		</div>
 		<div class="sui-box-settings-col-2">
-			<a href="<?php echo esc_url( $deactivate_url ); ?>" class="sui-button sui-button-ghost">
+			<a href="<?php echo esc_url( $deactivate_url ); ?>" class="sui-button sui-button-ghost sui-button-icon-left">
+				<i class="sui-icon-power-on-off" aria-hidden="true"></i>
 				<?php esc_html_e( 'Deactivate', 'wphb' ); ?>
 			</a>
 			<span class="sui-description">

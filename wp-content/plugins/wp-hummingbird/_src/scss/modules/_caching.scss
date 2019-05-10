@@ -119,13 +119,31 @@
 /**
  * Browser caching meta box
  */
-.wpmud .box-caching-status {
-    .cf-dash-notice .sui-upsell-notice span a {
-        display: block;
-        margin-top: 6px;
-        text-transform: uppercase;
-        text-decoration: none;
-        color: #888;
+.sui-wrap:not(.sui-color-accessible) .box-dashboard-browser-caching-module .sui-upsell-notice p,
+.sui-wrap:not(.sui-color-accessible) .box-caching-status .sui-upsell-notice p {
+    border-left: 2px solid #17a8e3 !important;
+    &:before { color: #17a8e3 !important; }
+}
+
+.sui-wrap .box-caching-status {
+    .cf-dash-notice .sui-upsell-notice {
+        span {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+
+            a:not(.sui-button) {
+                color: #17a8e3;
+                margin-left: 10px;
+            }
+        }
+
+        a#dismiss-cf-notice {
+            float: right;
+            margin-top: -25px;
+            text-transform: uppercase;
+            color: #888 !important;
+        }
     }
 
     .wphb-caching-summary-item-expiry .sui-tag {
@@ -169,7 +187,7 @@
  */
 .wpmud .box-caching-settings {
     .select-container.server-type,
-    .wphb-expiry-select-box .wphb-expiry-select {
+    .wphb-expiry-select {
         max-width: 240px;
     }
 
@@ -200,9 +218,6 @@
  * RSS caching meta box
  */
 .wpmud .box-caching-rss {
-    .sui-box-footer .spinner {
-        margin: 2px 10px 0;
-    }
     .sui-box-settings-row {
         input[type="text"] {
             margin: 0;
@@ -218,9 +233,3 @@
     }
 }
 
-/**
- * Settings meta box
- */
-.wpmud .box-caching-other-settings .spinner {
-    margin: 2px 10px 0 0;
-}

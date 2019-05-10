@@ -87,6 +87,10 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 	 * @since 1.8.2
 	 */
 	private function setup_navigation() {
+		if ( is_multisite() && is_network_admin() ) {
+			return;
+		}
+
 		$this->tabs = array(
 			'files'    => __( 'Assets', 'wphb' ),
 			'tools'    => __( 'Tools', 'wphb' ),
@@ -157,6 +161,19 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 	 * Register meta boxes.
 	 */
 	public function register_meta_boxes() {
+		if ( is_multisite() && is_network_admin() ) {
+			$this->add_meta_box(
+				'minification/network-settings',
+				__( 'Settings', 'wphb' ),
+				array( $this, 'network_settings_meta_box' ),
+				null,
+				null,
+				'main'
+			);
+
+			return;
+		}
+
 		/**
 		 * Disabled state meta box.
 		 *
@@ -612,9 +629,6 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 			}
 		}
 
-		// This will be used to disable the combine button if site is ssl.
-		$is_ssl = is_ssl() && WP_Hummingbird_Utils::get_http2_status();
-
 		$content = array(
 			'content' => '',
 			'other'   => '',
@@ -731,7 +745,6 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 				'row_error',
 				'disable_switchers',
 				'filter',
-				'is_ssl',
 				'minified_file',
 				'disabled',
 				'processed',
@@ -743,8 +756,43 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 			} else {
 				$content['other'] .= $this->view( "minification/{$view}-files-rows", $args, false );
 			}
-		} // End foreach().
+		}
 
 		return $content;
+	}
+
+	/**
+	 * Network settings meta box.
+	 *
+	 * @since 2.0.0
+	 */
+	public function network_settings_meta_box() {
+		$minify  = WP_Hummingbird_Utils::get_module( 'minify' );
+		$options = $minify->get_options();
+
+		$is_member = WP_Hummingbird_Utils::is_member();
+
+		$enabled = 'super-admins' === $options['enabled'] || $options['enabled'];
+
+		$this->view(
+			'minification/network-settings-meta-box',
+			array(
+				'download_url'     => wp_nonce_url(
+					add_query_arg(
+						array(
+							'logs'   => 'download',
+							'module' => WP_Hummingbird_Utils::get_module( 'minify' )->get_slug(),
+						)
+					),
+					'wphb-log-action'
+				),
+				'enabled'          => $enabled,
+				'is_member'        => $is_member,
+				'log_enabled'      => $options['log'],
+				'type'             => $enabled ? $options['enabled'] : 'super-admins',
+				'use_cdn'          => $minify->get_cdn_status(),
+				'use_cdn_disabled' => ! $is_member || ! $options['enabled'],
+			)
+		);
 	}
 }

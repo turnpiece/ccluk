@@ -1,4 +1,9 @@
 <?php
+/**
+ * Performance page.
+ *
+ * @package Hummingbird
+ */
 
 /**
  * Class WP_Hummingbird_Performance_Report_Page
@@ -42,20 +47,22 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 	private $can_run_test = true;
 
 	/**
+	 * Report type: desktop or mobile.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @var string $type
+	 */
+	private $type = 'desktop';
+
+	/**
 	 * Render header.
 	 */
 	public function render_header() {
-		// Check to see if there's a fresh report on the server (do not check during quick setup).
-		$quick_setup = get_option( 'wphb-quick-setup' );
-		if ( false === $this->report && ! WP_Hummingbird_Module_Performance::is_doing_report() && isset( $quick_setup['finished'] ) ) {
-			WP_Hummingbird_Module_Performance::refresh_report();
-		}
-
-		$this->dismissed    = WP_Hummingbird_Module_Performance::report_dismissed( $this->report );
-		$this->can_run_test = WP_Hummingbird_Module_Performance::can_run_test( $this->report );
-
-		$run_url = add_query_arg( 'run', 'true', WP_Hummingbird_Utils::get_admin_menu_url( 'performance' ) );
-		$run_url = wp_nonce_url( $run_url, 'wphb-run-performance-test' );
+		$types = array(
+			'desktop' => __( 'Desktop', 'wphb' ),
+			'mobile'  => __( 'Mobile', 'wphb' ),
+		);
 
 		if ( isset( $_GET['report-dismissed'] ) ) { // Input var ok.
 			$this->admin_notices->show( 'updated', __( 'You have successfully ignored this performance test.', 'wphb' ), 'success' );
@@ -66,29 +73,29 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 		</div>
 		<div class="sui-header">
 			<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
+
 			<div class="sui-actions-right">
-				<?php if ( true === $this->can_run_test ) : ?>
-					<a href="<?php echo esc_url( $run_url ); ?>" class="sui-button">
-						<?php esc_html_e( 'New Test', 'wphb' ); ?>
-					</a>
-					<?php
-				else :
-					$tooltip = sprintf(
-						/* translators: %d: number of minutes. */
-						_n(
-							'Hummingbird is just catching her breath - you can run another test in %d minute',
-							'Hummingbird is just catching her breath - you can run another test in %d minutes',
-							$this->can_run_test,
-							'wphb'
-						),
-						number_format_i18n( $this->can_run_test )
-					);
-					?>
-					<span class="sui-tooltip sui-tooltip-bottom sui-tooltip-constrained" disabled="disabled" data-tooltip="<?php echo esc_attr( $tooltip ); ?>" aria-hidden="true">
-						<a href="#" class="sui-button wphb-disabled-test" disabled="disabled" aria-hidden="true">
-							<?php esc_html_e( 'New Test', 'wphb' ); ?>
-						</a>
-					</span>
+				<?php if ( WP_Hummingbird_Module_Performance::get_last_report() ) : ?>
+					<label for="wphb-performance-report-type" class="inline-label header-label sui-hidden-xs sui-hidden-sm">
+						<?php esc_html_e( 'Show results for', 'wphb' ); ?>
+					</label>
+					<select name="wphb-performance-report-type" class="sui-select-sm" id="wphb-performance-report-type">
+						<?php foreach ( $types as $type => $label ) : ?>
+							<?php
+							$data_url = add_query_arg(
+								array(
+									'view'       => $this->get_current_tab(),
+									'data-range' => $type,
+								),
+								WP_Hummingbird_Utils::get_admin_menu_url( 'performance' )
+							);
+							?>
+							<option value="<?php echo esc_attr( $type ); ?>"
+								<?php selected( $this->type, $type ); ?> data-url="<?php echo esc_url( $data_url ); ?>">
+								<?php echo esc_html( $label ); ?>
+							</option>
+						<?php endforeach; ?>
+					</select>
 				<?php endif; ?>
 				<?php if ( ! WP_Hummingbird_Utils::hide_wpmudev_doc_link() ) : ?>
 					<a href="<?php echo esc_url( WP_Hummingbird_Utils::get_documentation_url( $this->slug, $this->get_current_tab() ) ); ?>" target="_blank" class="sui-button sui-button-ghost">
@@ -122,30 +129,31 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 	 */
 	public function on_load() {
 		$this->tabs = array(
-			'main' => __( 'Improvements', 'wphb' ),
+			'main'     => __( 'Score Metrics', 'wphb' ),
+			'audits'   => __( 'Audits', 'wphb' ),
+			'historic' => __( 'Historic Field Data', 'wphb' ),
+			'reports'  => __( 'Reports', 'wphb' ),
+			'settings' => __( 'Settings', 'wphb' ),
 		);
-		if ( is_multisite() && is_network_admin() ) {
-			$this->tabs['reports']  = __( 'Reporting', 'wphb' );
-			$this->tabs['settings'] = __( 'Settings', 'wphb' );
-		} elseif ( ! is_multisite() ) {
-			$this->tabs['reports'] = __( 'Reporting', 'wphb' );
+
+		if ( is_multisite() && ! is_network_admin() ) {
+			unset( $this->tabs['reports'] );
 		}
 
-		// We need to actually tweak these tasks.
-		add_filter( 'wphb_admin_after_tab_' . $this->get_slug(), array( $this, 'after_tab' ) );
+		if ( $this->has_error ) {
+			unset( $this->tabs['audits'] );
+			unset( $this->tabs['historic'] );
+		}
 
 		if ( isset( $_GET['run'] ) ) { // Input var ok.
 			check_admin_referer( 'wphb-run-performance-test' );
-
-			/* @var WP_Hummingbird_Module_Performance $perf_module */
-			$perf_module = WP_Hummingbird_Utils::get_module( 'performance' );
 
 			if ( WP_Hummingbird_Module_Performance::is_doing_report() ) {
 				return;
 			}
 
 			// Start the test.
-			$perf_module->init_scan();
+			WP_Hummingbird_Utils::get_module( 'performance' )->init_scan();
 
 			wp_safe_redirect( remove_query_arg( array( 'run', '_wpnonce' ) ) );
 			exit;
@@ -167,40 +175,159 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 	}
 
 	/**
-	 * Register meta boxes.
+	 * Init performance module, prior to page load.
+	 *
+	 * The logic behind this is following:
+	 * - First check if there's a report in the db.
+	 * - If not - check one on the API.
+	 * - If no report on API, display the error that no report was found.
+	 *
+	 * @since 2.0.0
 	 */
-	public function register_meta_boxes() {
-	    // This needs to be here, because it's the first block that runs on page load.
-		$this->report = WP_Hummingbird_Module_Performance::get_last_report();
-		if ( is_wp_error( $this->report ) ) {
+	private function init() {
+		$selected_type = filter_input( INPUT_GET, 'type', FILTER_SANITIZE_STRING );
+		if ( $selected_type ) {
+			$this->type = $selected_type;
+		}
+
+		$is_doing_report = WP_Hummingbird_Utils::get_module( 'performance' )->is_doing_report();
+
+		// Try to get the current report from the database.
+		if ( ! $is_doing_report ) {
+			// This needs to be here, because it's the first block that runs on page load.
+			$this->report = WP_Hummingbird_Module_Performance::get_last_report();
+		}
+
+		// Is that a report with errors?
+		if ( is_wp_error( $this->report ) || ( $this->report && is_null( $this->report->data->{$this->type}->metrics ) ) ) {
 			$this->has_error = true;
 		}
 
+		$this->dismissed    = WP_Hummingbird_Module_Performance::report_dismissed( $this->report );
+		$this->can_run_test = WP_Hummingbird_Module_Performance::can_run_test( $this->report );
+	}
+
+	/**
+	 * Register meta boxes.
+	 */
+	public function register_meta_boxes() {
+		$this->init();
+
 		// Default to empty meta box if doing performance scan, or we will get php notices.
-		if ( ! WP_Hummingbird_Module_Performance::is_doing_report() ) {
+		if ( WP_Hummingbird_Utils::get_module( 'performance' )->is_doing_report() || ! $this->report ) {
+			/**
+			 * Empty meta box.
+			 */
 			$this->add_meta_box(
-				'performance-welcome',
+				'performance/empty',
+				__( 'Performance test', 'wphb' ),
 				null,
-				array( $this, 'performance_welcome_metabox' ),
 				null,
 				null,
-				'summary',
+				'main',
 				array(
-					'box_class'         => 'sui-box sui-summary',
+					'box_content_class' => 'sui-box sui-message',
+				)
+			);
+
+			return;
+		}
+
+		if ( $this->has_error ) {
+			/**
+			 * Error meta box.
+			 */
+			$this->add_meta_box(
+				'performance/error',
+				__( 'Score Metrics', 'wphb' ),
+				array( $this, 'error_metabox' ),
+				null,
+				null,
+				'main'
+			);
+		}
+
+		/**
+		 * Summary meta box.
+		 */
+		$this->add_meta_box(
+			'performance-welcome',
+			null,
+			array( $this, 'summary_metabox' ),
+			null,
+			null,
+			'summary',
+			array(
+				'box_class'         => 'sui-box sui-summary',
+				'box_content_class' => false,
+			)
+		);
+
+		if ( $this->report && ! $this->has_error ) {
+			/**
+			 * Score Metrics meta box.
+			 */
+			$this->add_meta_box(
+				'performance/metrics',
+				__( 'Score Metrics', 'wphb' ),
+				array( $this, 'metrics_metabox' ),
+				array( $this, 'reports_metabox_header' ),
+				null,
+				'main',
+				array(
+					'box_content_class' => false,
+				)
+			);
+
+			/**
+			 * Audits meta boxes.
+			 */
+			$this->add_meta_box(
+				'performance/audits/opportunities',
+				__( 'Opportunities', 'wphb' ),
+				array( $this, 'opportunities_audit_metaboxes' ),
+				array( $this, 'reports_metabox_header' ),
+				null,
+				'audits',
+				array(
 					'box_content_class' => false,
 				)
 			);
 
 			$this->add_meta_box(
-				'performance-summary',
-				__( 'Improvements', 'wphb' ),
-				array( $this, 'performance_summary_metabox' ),
-				array( $this, 'performance_summary_metabox_header' ),
+				'performance/audits/diagnostics',
+				__( 'Diagnostics', 'wphb' ),
+				array( $this, 'diagnostics_audit_metaboxes' ),
 				null,
-				'main',
+				null,
+				'audits',
 				array(
-					'box_content_class' => $this->report ? false : 'sui-box sui-message',
+					'box_content_class' => false,
 				)
+			);
+
+			$this->add_meta_box(
+				'performance/audits/passed',
+				__( 'Passed Audits', 'wphb' ),
+				array( $this, 'passed_audit_metaboxes' ),
+				null,
+				null,
+				'audits',
+				array(
+					'box_content_class' => false,
+				)
+			);
+
+			/**
+			 * Historic Field Data meta box.
+			 */
+			$this->add_meta_box(
+				'performance/field-data',
+				__( 'Historic Field Data', 'wphb' ),
+				array( $this, 'historic_field_data_metabox' ),
+				array( $this, 'reports_metabox_header' ),
+				null,
+				'historic'
 			);
 
 			if ( is_multisite() && is_network_admin() || ! is_multisite() ) {
@@ -216,134 +343,73 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 					)
 				);
 			}
+		}
 
-			if ( is_multisite() && is_network_admin() ) {
-				$this->add_meta_box(
-					'settings-summary',
-					__( 'Settings', 'wphb' ),
-					array( $this, 'settings_metabox' ),
-					null,
-					array( $this, 'settings_metabox_footer' ),
-					'settings'
-				);
-			}
-		} else {
-			$this->add_meta_box(
-				'performance-summary',
-				__( 'Performance test', 'wphb' ),
-				array( $this, 'performance_empty_metabox' ),
-				null,
-				null,
-				'main',
-				array(
-					'box_content_class' => 'sui-box sui-message',
-				)
-			);
-		} // End if().
+		$this->add_meta_box(
+			'settings-summary',
+			__( 'Settings', 'wphb' ),
+			array( $this, 'settings_metabox' ),
+			null,
+			array( $this, 'settings_metabox_footer' ),
+			'settings'
+		);
 	}
 
 	/**
-	 * Summary meta box.
+	 * Performance metrics meta box.
 	 */
-	public function performance_summary_metabox() {
-		$last_test    = $this->report;
-		$doing_report = WP_Hummingbird_Module_Performance::is_doing_report();
+	public function metrics_metabox() {
+		$retry_url = wp_nonce_url(
+			add_query_arg( 'run', 'true', WP_Hummingbird_Utils::get_admin_menu_url( 'performance' ) ),
+			'wphb-run-performance-test'
+		);
 
-		$error_details = '';
-		$error_text    = '';
-		if ( $last_test ) {
-			if ( is_wp_error( $last_test ) ) {
-				$error_text    = $last_test->get_error_message();
-				$error_details = $last_test->get_error_data();
-				if ( is_array( $error_details ) && isset( $error_details['details'] ) ) {
-					$error_details = $error_details['details'];
-				} else {
-					$error_details = '';
-				}
-
-				$this->has_error = true;
-			} else {
-				$last_test = $this->report->data;
-			}
-
-			$retry_url = add_query_arg( 'run', 'true', WP_Hummingbird_Utils::get_admin_menu_url( 'performance' ) );
-			$retry_url = wp_nonce_url( $retry_url, 'wphb-run-performance-test' );
-
-			$this->view(
-				'performance/summary-meta-box',
-				array(
-					'last_test'        => $last_test,
-					'error'            => $this->has_error,
-					'error_details'    => $error_details,
-					'error_text'       => $error_text,
-					'retry_url'        => $retry_url,
-					'report_dismissed' => $this->dismissed,
-					'can_run_test'     => $this->can_run_test,
-					'is_subsite'       => ! is_main_site(),
-				)
-			);
-		} else {
-			$this->view(
-				'performance/empty-summary-meta-box',
-				array(
-					'doing_report' => $doing_report,
-				)
-			);
-		} // End if().
+		$this->view(
+			'performance/metrics-meta-box',
+			array(
+				'last_test'        => $this->report->data->{$this->type},
+				'report_dismissed' => $this->dismissed,
+				'can_run_test'     => $this->can_run_test,
+				'retry_url'        => $retry_url,
+				'type'             => $this->type,
+			)
+		);
 	}
 
 	/**
 	 * Performance welcome meta box.
 	 */
-	public function performance_welcome_metabox() {
+	public function summary_metabox() {
 		$last_report = $this->report;
 
-		$last_score  = false;
-		$improvement = 0;
+		$opportunities = $diagnostics = $passed_audits = '-';
 
 		if ( $last_report && ! is_wp_error( $last_report ) ) {
 			$last_report = $last_report->data;
 
-			if ( $last_report->last_score && isset( $last_report->score ) ) {
-				$improvement = $last_report->score - $last_report->last_score['score'];
-				$last_score  = $last_report->last_score['score'];
+			if ( ! is_null( $last_report->{$this->type}->audits->opportunities ) ) {
+				$opportunities = count( get_object_vars( $last_report->{$this->type}->audits->opportunities ) );
+			}
+
+			if ( ! is_null( $last_report->{$this->type}->audits->diagnostics ) ) {
+				$diagnostics = count( get_object_vars( $last_report->{$this->type}->audits->diagnostics ) );
+			}
+
+			if ( ! is_null( $last_report->{$this->type}->audits->passed ) ) {
+				$passed_audits = count( get_object_vars( $last_report->{$this->type}->audits->passed ) );
 			}
 		}
 
 		$this->view(
-			'performance/module-resume-meta-box',
+			'performance/summary-meta-box',
 			array(
+				'type'             => $this->type,
 				'last_report'      => $last_report,
-				'improvement'      => $improvement,
-				'last_score'       => $last_score,
-				'recommendations'  => WP_Hummingbird_Utils::get_number_of_issues( 'performance', $this->report ),
+				'opportunities'    => $opportunities,
+				'diagnostics'      => $diagnostics,
+				'passed_audits'    => $passed_audits,
 				'report_dismissed' => $this->dismissed,
 				'is_doing_report'  => WP_Hummingbird_Module_Performance::is_doing_report(),
-			)
-		);
-	}
-
-	/**
-	 * Performance summary meta box header.
-	 */
-	public function performance_summary_metabox_header() {
-		$this->view(
-			'performance/summary-meta-box-header',
-			array(
-				'title'     => __( 'Improvements', 'wphb' ),
-				'dismissed' => $this->dismissed,
-			)
-		);
-	}
-
-	/**
-	 * Empty performance meta box.
-	 */
-	public function performance_empty_metabox() {
-		$this->view(
-			'performance/empty-summary-meta-box',
-			array(
-				'doing_report' => true,
 			)
 		);
 	}
@@ -354,10 +420,17 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 	 * @since 1.7.1
 	 */
 	public function settings_metabox() {
-		$subsite_tests = WP_Hummingbird_Settings::get_setting( 'subsite_tests', 'performance' );
+		$performance_settings = WP_Hummingbird_Settings::get_settings( 'performance' );
 
-		$args = compact( 'subsite_tests' );
-		$this->view( 'performance/settings-meta-box', $args );
+		$this->view(
+			'performance/settings-meta-box',
+			array(
+				'dismissed'     => $this->dismissed,
+				'widget'        => $performance_settings['widget'],
+				'hub'           => $performance_settings['hub'],
+				'subsite_tests' => $performance_settings['subsite_tests'],
+			)
+		);
 	}
 
 	/**
@@ -370,45 +443,183 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 	}
 
 	/**
-	 * We need to insert an extra label to the tabs sometimes
+	 * Error meta box.
 	 *
-	 * @param string $tab Current tab.
+	 * @since 2.0.0
 	 */
-	public function after_tab( $tab ) {
-		if ( 'main' !== $tab ) {
-			return;
+	public function error_metabox() {
+		$error_text = sprintf(
+			/* translators: %s - type of report */
+			esc_html__( 'There was a problem fetching the %s test results. Please try running a new scan.', 'wphb' ),
+			esc_html( $this->type )
+		);
+
+		$error_details = '';
+
+		if ( is_wp_error( $this->report ) ) {
+			$error_text    = $this->report->get_error_message();
+			$error_details = $this->report->get_error_data();
 		}
 
-		if ( ! $this->report ) {
-			return;
-		}
-
-		$class = '';
-		if ( isset( $this->report->data->score_class ) ) {
-			switch ( $this->report->data->score_class ) {
-				case 'aplus':
-				case 'a':
-				case 'b':
-                default:
-					$class = 'success';
-					break;
-				case 'c':
-				case 'd':
-					$class = 'warning';
-					break;
-				case 'e':
-				case 'f':
-					$class = 'error';
-					break;
-			}
-		}
-		if ( $this->dismissed ) {
-			echo ' <i class="sui-icon-info" aria-hidden="true"></i>';
-		} elseif ( ! $this->has_error ) {
-			echo ' <span class="sui-tag sui-tag-' . esc_attr( $class ) . '">' . esc_html( WP_Hummingbird_Utils::get_number_of_issues( 'performance', $this->report ) ) . '</span>';
+		if ( is_array( $error_details ) && isset( $error_details['details'] ) ) {
+			$error_details = $error_details['details'];
 		} else {
-			echo ' <i class="sui-icon-warning-alert sui-warning" aria-hidden="true"></i>';
+			$error_details = '';
 		}
+
+		$retry_url = wp_nonce_url(
+			add_query_arg( 'run', 'true', WP_Hummingbird_Utils::get_admin_menu_url( 'performance' ) ),
+			'wphb-run-performance-test'
+		);
+
+		$this->view(
+			'performance/error-meta-box',
+			array(
+				'error_details' => $error_details,
+				'error_text'    => $error_text,
+				'retry_url'     => $retry_url,
+			)
+		);
+	}
+
+	/**
+	 * Performance audits meta boxes (Opportunities).
+	 *
+	 * @since 2.0.0
+	 */
+	public function opportunities_audit_metaboxes() {
+		$this->view(
+			'performance/audits-meta-box',
+			array(
+				'last_test'        => $this->report->data->{$this->type}->audits->opportunities,
+				'report_dismissed' => $this->dismissed,
+				'type'             => 'opportunities',
+			)
+		);
+	}
+
+	/**
+	 * Performance audits meta boxes (Diagnostics).
+	 *
+	 * @since 2.0.0
+	 */
+	public function diagnostics_audit_metaboxes() {
+		$this->view(
+			'performance/audits-meta-box',
+			array(
+				'last_test'        => $this->report->data->{$this->type}->audits->diagnostics,
+				'report_dismissed' => $this->dismissed,
+				'type'             => 'diagnostics',
+			)
+		);
+	}
+
+	/**
+	 * Performance audits meta boxes (Passed Audits).
+	 *
+	 * @since 2.0.0
+	 */
+	public function passed_audit_metaboxes() {
+		$this->view(
+			'performance/audits-meta-box',
+			array(
+				'last_test'        => $this->report->data->{$this->type}->audits->passed,
+				'report_dismissed' => $this->dismissed,
+				'type'             => 'passed',
+			)
+		);
+	}
+
+	/**
+	 * Historic Field Data met box.
+	 *
+	 * @since 2.0.0
+	 */
+	public function historic_field_data_metabox() {
+		$field_data = $this->report->data->{$this->type}->field_data;
+
+		$fcp_fast = $fcp_average = $fcp_slow = false;
+		$fid_fast = $fid_average = $fid_slow = false;
+
+		if ( $field_data ) {
+			$fcp_fast    = round( $field_data->FIRST_CONTENTFUL_PAINT_MS->distributions[0]->proportion * 100 );
+			$fcp_average = round( $field_data->FIRST_CONTENTFUL_PAINT_MS->distributions[1]->proportion * 100 );
+			$fcp_slow    = round( $field_data->FIRST_CONTENTFUL_PAINT_MS->distributions[2]->proportion * 100 );
+
+			$fid_fast    = round( $field_data->FIRST_INPUT_DELAY_MS->distributions[0]->proportion * 100 );
+			$fid_average = round( $field_data->FIRST_INPUT_DELAY_MS->distributions[1]->proportion * 100 );
+			$fid_slow    = round( $field_data->FIRST_INPUT_DELAY_MS->distributions[2]->proportion * 100 );
+
+			$i10n = array(
+				'fcp' => array(
+					'fast'         => $fcp_fast,
+					'fast_desc'    => sprintf(
+						/* translators: %d - number of percent */
+						esc_html__( '%d%% of loads for this page have a fast (< 1 s) First Contentful Paint (FCP).', 'wphb' ),
+						absint( $fcp_fast )
+					),
+					'average'      => $fcp_average,
+					'average_desc' => sprintf(
+						/* translators: %d - number of percent */
+						esc_html__( '%d%% of loads for this page have an average (1 s ~ 2.5 s) First Contentful Paint (FCP).', 'wphb' ),
+						absint( $fcp_average )
+					),
+					'slow'         => $fcp_slow,
+					'slow_desc'    => sprintf(
+						/* translators: %d - number of percent */
+						esc_html__( '%d%% of loads for this page have a slow (> 2.5 s) First Contentful Paint (FCP).', 'wphb' ),
+						absint( $fcp_slow )
+					),
+				),
+				'fid' => array(
+					'fast'         => $fid_fast,
+					'fast_desc'    => sprintf(
+						/* translators: %d - number of percent */
+						esc_html__( '%d%% of loads for this page have a fast (< 50 ms) First Input Delay (FID).', 'wphb' ),
+						absint( $fid_fast )
+					),
+					'average'      => $fid_average,
+					'average_desc' => sprintf(
+						/* translators: %d - number of percent */
+						esc_html__( '%d%% of loads for this page have an average (50 ms ~ 250 ms) First Input Delay (FID).', 'wphb' ),
+						absint( $fid_average )
+					),
+					'slow'         => $fid_slow,
+					'slow_desc'    => sprintf(
+						/* translators: %d - number of percent */
+						esc_html__( '%d%% of loads for this page have a slow (> 250 ms) First Input Delay (FID).', 'wphb' ),
+						absint( $fid_slow )
+					),
+				),
+			);
+
+			wp_localize_script( 'wphb-google-chart', 'wphbHistoricFieldData', $i10n );
+		}
+
+		$this->view(
+			'performance/field-data-meta-box',
+			compact( 'field_data', 'fcp_fast', 'fcp_average', 'fcp_slow', 'fid_fast', 'fid_average', 'fid_slow' )
+		);
+	}
+
+	/**
+	 * Common audits header meta box.
+	 */
+	public function reports_metabox_header() {
+		$run_url = add_query_arg( 'run', 'true', WP_Hummingbird_Utils::get_admin_menu_url( 'performance' ) );
+		$run_url = wp_nonce_url( $run_url, 'wphb-run-performance-test' );
+
+		$title = $this->get_tab_name( $this->get_current_tab() );
+		$title = 'Audits' === $title ? __( 'Opportunities', 'wphb' ) : $title;
+
+		$this->view(
+			'performance/report-meta-box-header',
+			array(
+				'can_run_test' => $this->can_run_test,
+				'run_url'      => $run_url,
+				'title'        => $title,
+			)
+		);
 	}
 
 }

@@ -1,9 +1,23 @@
 <?php
+/**
+ * Uptime module.
+ *
+ * @package Hummingbird
+ */
 
-
+/**
+ * Class WP_Hummingbird_Module_Uptime
+ */
 class WP_Hummingbird_Module_Uptime extends WP_Hummingbird_Module {
 
+	/**
+	 * Initialize module.
+	 */
 	public function init() {}
+
+	/**
+	 * Execute module actions.
+	 */
 	public function run() {}
 
 	/**
@@ -20,8 +34,8 @@ class WP_Hummingbird_Module_Uptime extends WP_Hummingbird_Module {
 	 * Get last report.
 	 *
 	 * @since 1.7.1 Removed static property.
-	 * @param $time
-	 * @param bool $force
+	 * @param string $time   Report period.
+	 * @param bool   $force  Force refresh.
 	 *
 	 * @return bool|WP_Error
 	 */
@@ -50,15 +64,13 @@ class WP_Hummingbird_Module_Uptime extends WP_Hummingbird_Module {
 	 *
 	 * @access private
 	 *
-	 * @param string     $time
-	 * @param bool|array $current_reports
+	 * @param string     $time             Report period.
+	 * @param bool|array $current_reports  Current reports.
 	 *
 	 * @return array|mixed
 	 */
 	private function refresh_report( $time = 'day', $current_reports = false ) {
-		/* @var WP_Hummingbird_API $api */
-		$api     = WP_Hummingbird_Utils::get_api();
-		$results = $api->uptime->check( $time );
+		$results = WP_Hummingbird_Utils::get_api()->uptime->check( $time );
 
 		if ( is_wp_error( $results ) && 412 === $results->get_error_code() ) {
 			// Uptime has been deactivated.
@@ -97,7 +109,9 @@ class WP_Hummingbird_Module_Uptime extends WP_Hummingbird_Module {
 
 		$api    = WP_Hummingbird_Utils::get_api();
 		$result = $api->uptime->is_enabled();
-		set_site_transient( 'wphb-uptime-remotely-enabled', $result ? 'yes' : 'no', 300 ); // save for 5 minutes
+		// Save for 5 minutes.
+		set_site_transient( 'wphb-uptime-remotely-enabled', $result ? 'yes' : 'no', 300 );
+
 		return $result;
 	}
 
@@ -123,20 +137,30 @@ class WP_Hummingbird_Module_Uptime extends WP_Hummingbird_Module {
 		self::disable_remotely();
 	}
 
+	/**
+	 * Enable locally.
+	 */
 	public function enable_locally() {
 		$options            = $this->get_options();
 		$options['enabled'] = true;
 		$this->update_options( $options );
-		set_site_transient( 'wphb-uptime-remotely-enabled', 'yes', 180 ); // save for 3 minutes
+		// Save for 3 minutes.
+		set_site_transient( 'wphb-uptime-remotely-enabled', 'yes', 180 );
 	}
 
+	/**
+	 * Enable remotely.
+	 *
+	 * @return mixed|WP_Error
+	 */
 	public static function enable_remotely() {
-		/* @var WP_Hummingbird_API $api */
-		$api = WP_Hummingbird_Utils::get_api();
 		delete_site_transient( 'wphb-uptime-remotely-enabled' );
-		return $api->uptime->enable();
+		return WP_Hummingbird_Utils::get_api()->uptime->enable();
 	}
 
+	/**
+	 * Disable locally.
+	 */
 	public function disable_locally() {
 		$options            = $this->get_options();
 		$options['enabled'] = false;
@@ -145,24 +169,38 @@ class WP_Hummingbird_Module_Uptime extends WP_Hummingbird_Module {
 		$options['notifications']['enabled'] = false;
 		$options['reports']['enabled']       = false;
 
-		$this->update_options( $options );
-		set_site_transient( 'wphb-uptime-remotely-enabled', 'no', 180 ); // save for 3 minutes
-	}
+		// Clean all cron.
+		wp_clear_scheduled_hook( 'wphb_uptime_report' );
 
-	public static function disable_remotely() {
-		/* @var WP_Hummingbird_API $api */
-		$api = WP_Hummingbird_Utils::get_api();
-		delete_site_transient( 'wphb-uptime-remotely-enabled' );
-		return $api->uptime->disable();
+		$this->update_options( $options );
+		// Save for 3 minutes.
+		set_site_transient( 'wphb-uptime-remotely-enabled', 'no', 180 );
 	}
 
 	/**
-	 * @param WP_Error $error
+	 * Disable remotely.
+	 *
+	 * @return mixed|WP_Error
+	 */
+	public static function disable_remotely() {
+		delete_site_transient( 'wphb-uptime-remotely-enabled' );
+		return WP_Hummingbird_Utils::get_api()->uptime->disable();
+	}
+
+	/**
+	 * Set error.
+	 *
+	 * @param WP_Error $error  Error.
 	 */
 	public static function set_error( $error ) {
 		set_site_transient( 'wphb-uptime-last-error', $error );
 	}
 
+	/**
+	 * Get error.
+	 *
+	 * @return mixed
+	 */
 	public static function get_error() {
 		return get_site_transient( 'wphb-uptime-last-error' );
 	}

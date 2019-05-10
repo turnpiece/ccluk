@@ -4,7 +4,7 @@
  *
  * @package Hummingbird
  *
- * @var string        $activate_url      Activation URL.
+ * @var string        $deactivate_url    Deactivation URL.
  * @var bool|WP_Error $error             Error if present.
  */
 
@@ -22,21 +22,6 @@
 	<?php endif; ?>
 </div>
 
-<!--
-<div class="sui-box-settings-row">
-	<div class="sui-box-settings-col-1">
-		<span class="sui-settings-label"><?php esc_html_e( 'Cache Length', 'wphb' ); ?></span>
-		<span class="sui-description">
-			<?php esc_html_e( 'Choose the length of time you want to cache avatars for before Hummingbird will request new ones from Gravatar.', 'wphb' ); ?>
-		</span>
-	</div>
-	<div class="sui-box-settings-col-2">
-		<small>
-			<?php esc_html_e( 'Tip: the longer the better - you can always purge the cache manually.', 'wphb' ); ?>
-		</small>
-	</div>
-</div>
--->
 <div class="sui-box-settings-row">
 
 	<div class="sui-box-settings-col-1">
@@ -46,7 +31,8 @@
 		</span>
 	</div><!-- end sui-box-settings-col-1 -->
 	<div class="sui-box-settings-col-2">
-		<a href="<?php echo esc_url( $deactivate_url ); ?>" class="sui-button sui-button-ghost">
+		<a href="<?php echo esc_url( $deactivate_url ); ?>" class="sui-button sui-button-ghost sui-button-icon-left">
+			<i class="sui-icon-power-on-off" aria-hidden="true"></i>
 			<?php esc_html_e( 'Deactivate', 'wphb' ); ?>
 		</a>
 	</div><!-- end sui-box-settings-col-2 -->

@@ -4,14 +4,6 @@
 
 @import "../common/mixins";
 
-/* Styles for all advanced meta boxes */
-.wpmud [class^="box-advanced"] {
-    .spinner {
-        margin: 5px 10px 0;
-        vertical-align: top;
-    }
-}
-
 /* Database cleanup tab */
 .wpmud .box-advanced-db .wphb-border-frame {
     margin-top: 30px !important;
@@ -32,7 +24,7 @@
     }
 
     .table-header div {
-        flex-basis: 50px;
+        flex-basis: 20px;
     }
 
     .table-header div:first-child,
@@ -50,6 +42,11 @@
                 color: #333;
                 font-weight: 500;
             }
+
+            &:last-child {
+                display: flex;
+                align-items: center;
+            }
         }
 
         .sui-icon-info {
@@ -57,10 +54,7 @@
             margin-left: 10px;
 
             &:hover:before { color: #aaa; }
-            &:before {
-                color: #ddd;
-                vertical-align: middle;
-            }
+            &:before { vertical-align: middle; }
         }
 
         .sui-icon-loader {
@@ -70,16 +64,7 @@
             vertical-align: middle;
         }
 
-        .wphb-db-row-delete {
-            width: 30px;
-            height: 30px;
-            display: inline-block;
-            border-radius: 4px;
-            margin-top: -5px;
-            text-align: center;
-            vertical-align: middle;
-            cursor: pointer;
-
+        #wphb-db-row-delete {
             &:hover {
                 background-color: #f5f5f5;
 
@@ -87,19 +72,6 @@
                     color: #FF6D6D;
                 }
             }
-            &.sui-hidden {
-                display: none;
-            }
-        }
-
-        .spinner {
-            margin-top: 1px;
-        }
-
-        .sui-icon-trash:before {
-            color: #888;
-            font-size: 12px;
-            margin-top: 8px;
         }
     }
 
@@ -110,28 +82,6 @@
         }
     }
 }
-
-/* Database cleanup tab (settings) */
-.wpmud .box-advanced-db-settings {
-    .settings-form {
-        .schedule-box > label:first-child,
-        .included-tables > label:first-child {
-            margin-top: 0;
-        }
-
-        .included-tables > label {
-            margin-top: 7px;
-            color: #333;
-        }
-
-
-    }
-
-    .wphb-db-cleanup-no-membership {
-        padding-top: 0;
-    }
-}
-
 
 /* Database cleanup tab */
 .wpmud .box-advanced-system-info {
@@ -145,6 +95,7 @@
                     background-color: #FAFAFA
                 }
                 td {
+                    height: 40px;
                     padding: 5px 20px;
                     border-bottom: none;
                     border-radius: 4px;
@@ -158,7 +109,7 @@
     }
 
     .wphb-system-info-dropdown {
-        max-width: 160px;
+        max-width: 240px;
     }
 
 }

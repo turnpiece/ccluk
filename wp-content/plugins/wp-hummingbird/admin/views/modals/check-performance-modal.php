@@ -7,7 +7,7 @@
 
 ?>
 
-<div class="dialog sui-dialog" aria-hidden="true" id="run-performance-test-modal">
+<div class="dialog sui-dialog run-performance-test-modal" aria-hidden="true" id="run-performance-test-modal">
 
 	<div class="sui-dialog-overlay" tabindex="-1"></div>
 
@@ -34,13 +34,13 @@
 							<span>0%</span>
 						</div>
 						<div class="sui-progress-bar" aria-hidden="true">
-							<span style="width: 0"></span>
+							<span style="width: 0;"></span>
 						</div>
 					</div>
 				</div>
 
 				<div class="sui-progress-state">
-					<span class="sui-progress-state-text"><?php esc_html_e( 'Performance test in progress...', 'wphb' ); ?></span>
+					<span class="sui-progress-state-text"><?php esc_html_e( 'Initializing engines...', 'wphb' ); ?></span>
 				</div>
 			</div>
 			<?php if ( ! WP_Hummingbird_Utils::hide_wpmudev_branding() ) : ?>

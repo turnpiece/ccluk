@@ -3,7 +3,7 @@
   Plugin Name: Anti-Spam by CleanTalk
   Plugin URI: http://cleantalk.org
   Description: Max power, all-in-one, no Captcha, premium anti-spam plugin. No comment spam, no registration spam, no contact spam, protects any WordPress forms.
-  Version: 5.118.2
+  Version: 5.118.3
   Author: СleanTalk <welcome@cleantalk.org>
   Author URI: http://cleantalk.org
 */
@@ -162,9 +162,6 @@ if(!defined('CLEANTALK_PLUGIN_DIR')){
 	add_action( 'wp_ajax_nopriv_nf_ajax_submit',          'apbct_form__ninjaForms__testSpam', 1);
 	add_action( 'wp_ajax_nf_ajax_submit',                 'apbct_form__ninjaForms__testSpam', 1);
 	add_action( 'ninja_forms_process',                    'apbct_form__ninjaForms__testSpam', 1); // Depricated ?
-	$cleantalk_hooked_actions[]='ninja_forms_ajax_submit';
-	$cleantalk_hooked_actions[]='nf_ajax_submit';
-	$cleantalk_hooked_actions[]='ninja_forms_process'; // Depricated ?
 	
 	if(!is_admin() && !defined('DOING_AJAX')){
 		
@@ -235,6 +232,9 @@ if(!defined('CLEANTALK_PLUGIN_DIR')){
 		
 		if(apbct_is_ajax() || isset($_POST['cma-action'])){
 			
+			$cleantalk_hooked_actions = array();
+			$cleantalk_ajax_actions_to_check = array();
+			
 			require_once(CLEANTALK_PLUGIN_DIR . 'inc/cleantalk-public.php');
 			require_once(CLEANTALK_PLUGIN_DIR . 'inc/cleantalk-ajax.php');
 			
@@ -247,9 +247,6 @@ if(!defined('CLEANTALK_PLUGIN_DIR')){
 				add_action( 'wp_ajax_nopriv_ct_feedback_user', 'apbct_user__send_feedback',1 );
 				add_action( 'wp_ajax_ct_feedback_user',        'apbct_user__send_feedback',1 );
 			}
-			
-			$cleantalk_hooked_actions = array();
-			$cleantalk_ajax_actions_to_check = array();
 			
 			// Check AJAX requests
 				// if User is not logged in

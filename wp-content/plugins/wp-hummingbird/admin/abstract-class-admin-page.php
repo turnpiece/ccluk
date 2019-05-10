@@ -61,7 +61,7 @@ abstract class WP_Hummingbird_Admin_Page {
 				WP_Hummingbird_Utils::get_admin_capability(),
 				$slug,
 				$render ? array( $this, 'render' ) : null,
-				'data:image/svg+xml;base64,' . base64_encode( '<?xml version="1.0" encoding="utf-8"?><svg width="1024" height="1024" viewBox="0 -960 1024 1024" xmlns="http://www.w3.org/2000/svg"><path fill="black" transform="scale(-1,1) rotate(180)" d="M1009.323 570.197c-72.363-3.755-161.621-7.509-238.933-8.192l192.171 128.512c19.042-34.586 34.899-74.653 45.502-116.806zM512 960c189.862-0.034 355.572-103.406 443.951-256.93-61.487-12.553-225.839-36.617-400.943-48.051-34.133-2.219-55.979-36.181-68.267-62.464 0 0-31.061 195.925-244.907 145.408-41.984 18.944-81.237 34.133-116.224 46.251 94.16 107.956 231.957 175.787 385.597 175.787 0.279 0 0.557 0 0.836-0.001zM0 448c0 0.221-0.001 0.483-0.001 0.746 0 121.29 42.344 232.689 113.056 320.222 39.45-15.556 74.218-33.581 106.162-55.431s37.807-77.121 65.284-135.489 46.592-91.136 54.613-161.109 65.877-184.491 168.277-221.867c-34.879-47.972-65.982-102.598-90.759-160.574 26.898-39.4 57.774-69.843 91.053-97.495-280.204 0.74-507.686 229.298-507.686 510.988 0 0.003 0 0.007 0 0.010zM573.952-60.416c0 19.115 0 36.352 1.195 51.2 2.803 46.275 12.454 89.473 27.966 129.761 19.44 50.098 31.281 111.481 31.281 175.63 0 12.407-0.443 24.711-1.314 36.896-1.165 15.156-3.891 30.694-7.991 45.664l392.938 149.478c4.007-24.063 6.297-51.79 6.297-80.052 0-260.928-195.185-476.268-447.514-507.978z"/></svg>' )
+				$this->get_menu_icon()
 			);
 		} else {
 			$this->page_id = add_submenu_page(
@@ -165,7 +165,7 @@ abstract class WP_Hummingbird_Admin_Page {
 	 * @return String
 	 */
 	public function admin_body_class( $classes ) {
-		$classes .= ' sui-2-3-10 wpmud ';
+		$classes .= ' ' . WPHB_SUI_VERSION . ' wpmud ';
 
 		return $classes;
 	}
@@ -200,12 +200,18 @@ abstract class WP_Hummingbird_Admin_Page {
 		WP_Hummingbird_Utils::enqueue_admin_scripts( WPHB_VERSION );
 
 		// Google visualization library for Uptime.
-		if ( 'hummingbird-pro_page_wphb-uptime' === $hook ) {
+		// @see https://core.trac.wordpress.org/ticket/18857 for explanation on why.
+		if ( sanitize_title( __( 'Hummingbird Pro', 'wphb' ) ) . '_page_wphb-uptime' === $hook ) {
 			wp_enqueue_script(
 				'wphb-google-chart',
 				"https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['corechart','timeline']}]}",
 				array( 'jquery' )
 			);
+		}
+
+		if ( 'historic' === $this->get_current_tab() ) {
+			// Inject Google Visualization library on Historic Field Data Page.
+			wp_enqueue_script( 'wphb-google-chart', 'https://www.gstatic.com/charts/loader.js', array(), WPHB_VERSION, true );
 		}
 	}
 
@@ -348,20 +354,17 @@ abstract class WP_Hummingbird_Admin_Page {
 
 			$this->render_footer();
 
-			$hummingbird = WP_Hummingbird::get_instance();
-			if ( $hummingbird->admin->show_quick_setup ) :
+			if ( WP_Hummingbird::get_instance()->admin->show_quick_setup ) :
 				$this->view( 'modals/quick-setup-modal' );
 				$this->view( 'modals/check-performance-modal' );
-			    ?>
+				?>
 				<script>
-                    window.addEventListener("load", function(){
-                        window.WPHB_Admin.getModule( 'dashboard' );
-                        SUI.dialogs['wphb-quick-setup-modal'].show();
+					window.addEventListener("load", function(){
+						window.WPHB_Admin.getModule( 'dashboard' );
+						SUI.dialogs['wphb-quick-setup-modal'].show();
 					});
 				</script>
-			    <?php
-			endif;
-			?>
+			<?php endif; ?>
 		</div><!-- end container -->
 
 		<script>
@@ -406,7 +409,7 @@ abstract class WP_Hummingbird_Admin_Page {
 			?>
 		</div>
 
-		<?php if ( WP_Hummingbird_Utils::is_member() ) { ?>
+		<?php if ( WP_Hummingbird_Utils::is_member() ) : ?>
 
 			<?php if ( ! $hide_footer ) : ?>
 				<ul class="sui-footer-nav">
@@ -422,7 +425,7 @@ abstract class WP_Hummingbird_Admin_Page {
 				</ul>
 			<?php endif; ?>
 
-		<?php } else { ?>
+		<?php else : ?>
 
 			<ul class="sui-footer-nav">
 				<li><a href="https://profiles.wordpress.org/wpmudev#content-plugins" target="_blank"><?php esc_html_e( 'Free Plugins', 'wphb' ); ?></a></li>
@@ -435,7 +438,7 @@ abstract class WP_Hummingbird_Admin_Page {
 				<li><a href="https://incsub.com/privacy-policy/" target="_blank"><?php esc_html_e( 'Privacy Policy', 'wphb' ); ?></a></li>
 			</ul>
 
-		<?php } ?>
+		<?php endif; ?>
 
 		<?php if ( ! $hide_footer ) : ?>
 			<ul class="sui-footer-social">
@@ -558,6 +561,27 @@ abstract class WP_Hummingbird_Admin_Page {
 		}
 
 		return $tabs[ $tab ];
+	}
+
+	/**
+	 * Hummingbird icon svg image.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @return string
+	 */
+	private function get_menu_icon() {
+		ob_start();
+		?>
+		<svg width="1024" height="1024" viewBox="0 -960 1024 1024" xmlns="http://www.w3.org/2000/svg">
+			<g stroke="none" fill="#a0a5aa" fill-rule="evenodd">
+				<path transform="scale(-1,1) rotate(180)" d="M1009.323 570.197c-72.363-3.755-161.621-7.509-238.933-8.192l192.171 128.512c19.042-34.586 34.899-74.653 45.502-116.806zM512 960c189.862-0.034 355.572-103.406 443.951-256.93-61.487-12.553-225.839-36.617-400.943-48.051-34.133-2.219-55.979-36.181-68.267-62.464 0 0-31.061 195.925-244.907 145.408-41.984 18.944-81.237 34.133-116.224 46.251 94.16 107.956 231.957 175.787 385.597 175.787 0.279 0 0.557 0 0.836-0.001zM0 448c0 0.221-0.001 0.483-0.001 0.746 0 121.29 42.344 232.689 113.056 320.222 39.45-15.556 74.218-33.581 106.162-55.431s37.807-77.121 65.284-135.489 46.592-91.136 54.613-161.109 65.877-184.491 168.277-221.867c-34.879-47.972-65.982-102.598-90.759-160.574 26.898-39.4 57.774-69.843 91.053-97.495-280.204 0.74-507.686 229.298-507.686 510.988 0 0.003 0 0.007 0 0.010zM573.952-60.416c0 19.115 0 36.352 1.195 51.2 2.803 46.275 12.454 89.473 27.966 129.761 19.44 50.098 31.281 111.481 31.281 175.63 0 12.407-0.443 24.711-1.314 36.896-1.165 15.156-3.891 30.694-7.991 45.664l392.938 149.478c4.007-24.063 6.297-51.79 6.297-80.052 0-260.928-195.185-476.268-447.514-507.978z"/>
+			</g>
+		</svg>
+		<?php
+		$svg = ob_get_clean();
+
+		return 'data:image/svg+xml;base64,' . base64_encode( $svg );
 	}
 
 }

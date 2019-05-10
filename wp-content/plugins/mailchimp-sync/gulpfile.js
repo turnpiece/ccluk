@@ -7,11 +7,10 @@ const rename = require("gulp-rename");
 const cssmin = require('gulp-cssmin');
 const source = require('vinyl-source-stream');
 const browserify = require('browserify');
-const replace = require('gulp-replace');
 const buffer = require('vinyl-buffer');
 
 gulp.task('sass', function () {
-	var files = './assets/sass/[^_]*.scss';
+	const files = './assets/sass/[^_]*.scss';
 
 	return gulp.src(files)
 		// create .css file
@@ -28,7 +27,11 @@ gulp.task('sass', function () {
 gulp.task('browserify', function () {
 	return browserify({ entries: [ './assets/browserify/admin.js'] })
 		.on('error', console.log)
-		.transform("babelify", {presets: ["es2015"]})
+		.transform("babelify", {
+			presets: [
+				["@babel/preset-env", { "targets": "> 0.25%, not dead", "forceAllTransforms": true }]
+			],
+		})
 		.bundle()
 		.pipe(source('admin.js'))
 

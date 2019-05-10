@@ -783,9 +783,15 @@ function check_url_exclusions($exclusions = NULL){
 	if ((isset($cleantalk_url_exclusions) && is_array($cleantalk_url_exclusions) && sizeof($cleantalk_url_exclusions)>0) ||
 		($exclusions !== NULL && is_array($exclusions) && sizeof($exclusions)>0)
 	){
-		foreach($cleantalk_url_exclusions as $key => $value){
-			if(stripos($_SERVER['REQUEST_URI'], $value) !== false){
-				return true; 
+		
+		// Fix for AJAX forms
+		$haystack = $_SERVER['REQUEST_URI'] == '/wp-admin/admin-ajax.php' && !empty($_SERVER['HTTP_REFERER'])
+			? $_SERVER['HTTP_REFERER']
+			: $_SERVER['REQUEST_URI'];
+		
+		foreach($cleantalk_url_exclusions as $value){
+			if(stripos($haystack, $value) !== false){
+				return true;
 			}
 		}
 	}

@@ -249,12 +249,7 @@ class SWP_Post_Cache {
 	 * The methods in this section are used to rebuild all of the cached data.
 	 *
 	 */
-	static function get_image_id( $image_url ) {
-		global $wpdb;
-		$attachment = $wpdb->get_col($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE guid='%s';", $image_url ));
-		// Add a check here for a valid response prior to returning a subset of an array
-		return $attachment[0];
-	}
+
 
 	/**
 	 * A method to rebuild all cached data
@@ -277,6 +272,7 @@ class SWP_Post_Cache {
 		$this->update_image_cache( 'swp_pinterest_image' );
 		$this->update_image_cache( 'swp_og_image' );
 
+		// Don't run these methods unless the post is published.
 		if( true === $this->is_post_published() ) {
 			$this->rebuild_share_counts();
 			$this->process_urls();
@@ -380,20 +376,24 @@ class SWP_Post_Cache {
 		$restore_from_cache = empty( $new_id ) && is_array( $old_data ) && false !== filter_var( $old_data[0], FILTER_VALIDATE_URL );
 		$restore_from_array = is_array( $new_id ) && false !== filter_var( $new_id[0], FILTER_VALIDATE_URL );
 
-		if ( $restore_from_cache || $restore_from_array ) {
-			/**
-			 * This block is for people who are missing a key like `swp_og_image`
-			 * between v3.5.0 and v3.5.4.
-			 * The logic below will create the missing key based off of
-			 * data we have previously saved.
-			 *
-			 */
-			
+
+		/**
+		 * Filter out requests from the admin so that this "fix" doesn't
+		 * override the user's preference whilst they are updating a post.
+		 *
+		 * This block is for people who are missing a key like `swp_og_image`
+		 * between v3.5.0 and v3.5.4. The logic below will create the missing
+		 * key based off of data we have previously saved.
+		 *
+		 */
+		if ( ($restore_from_cache || $restore_from_array) && !is_admin() ) {
+
+
 			// Convert the image URL into a valid WP ID.
 			if ( $restore_from_array ) {
-				$new_id = self::get_image_id( $new_id[0] );
+				$new_id = SWP_Utility::get_image_id_by_url( $new_id[0] );
 			} elseif ( $restore_from_cache ) {
-				$new_id = self::get_image_id( $old_data[0] );
+				$new_id = SWP_Utility::get_image_id_by_url( $old_data[0] );
 			}
 
 			// Bail if we didn't get an ID from the above function.

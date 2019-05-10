@@ -32,7 +32,7 @@
 							</p>
 						</div>
 						<div class="sui-col-md-5 textright">
-							<input type="button" class="sui-button sui-button-primary" value="<?php esc_attr_e( 'Run Performance Test', 'wphb' ); ?>" onclick="window.WPHB_Admin.dashboard.runPerformanceTest()">
+							<input type="button" class="sui-button sui-button-blue" value="<?php esc_attr_e( 'Run Performance Test', 'wphb' ); ?>" onclick="window.WPHB_Admin.dashboard.runPerformanceTest()">
 						</div>
 					</div>
 				</div>

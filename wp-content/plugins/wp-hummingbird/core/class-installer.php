@@ -42,8 +42,6 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 
 			// Add uptime notice.
 			update_site_option( 'wphb-notice-uptime-info-show', 'yes' );
-
-			do_action( 'wphb_activate' );
 		}
 
 		/**
@@ -62,24 +60,8 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 		 * Plugin deactivation
 		 */
 		public static function deactivate() {
-			WP_Hummingbird::flush_cache();
-
-			delete_option( 'wphb_cache_folder_error' );
-			delete_site_option( 'wphb_version' );
-			delete_site_option( 'wphb-gzip-api-checked' );
-			delete_site_option( 'wphb-caching-api-checked' );
-			delete_site_option( 'wphb-cloudflare-dash-notice' );
-			delete_site_option( 'wphb-notice-free-deactivated-dismissed' );
-			delete_site_transient( 'wphb-uptime-remotely-enabled' );
-
-			if ( wp_next_scheduled( 'wphb_minify_clear_files' ) ) {
-				wp_clear_scheduled_hook( 'wphb_minify_clear_files' );
-			}
-
-			/* @var WP_Hummingbird_Module_Page_Cache $module */
-			$module = WP_Hummingbird_Utils::get_module( 'page_cache' );
-			$module->toggle_service( false );
-
+			$settings = WP_Hummingbird_Settings::get_settings( 'settings' );
+			WP_Hummingbird::flush_cache( $settings['remove_data'], $settings['remove_settings'] );
 			do_action( 'wphb_deactivate' );
 		}
 
@@ -144,6 +126,10 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 
 				if ( version_compare( $version, '1.9.4', '<' ) ) {
 					self::upgrade_1_9_4();
+				}
+
+				if ( version_compare( $version, '2.0.0', '<' ) ) {
+					self::upgrade_2_0();
 				}
 
 				update_site_option( 'wphb_version', WPHB_VERSION );
@@ -518,5 +504,24 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 			do_action( 'wphb_activate' );
 		}
 
+		/**
+		 * Upgrade to 2.0.0.
+		 *
+		 * @since 2.0.0
+		 */
+		private static function upgrade_2_0() {
+			// Remove old report data.
+			WP_Hummingbird_Utils::get_module( 'performance' )->clear_cache();
+
+			// Add additional report options.
+			$defaults = WP_Hummingbird_Settings::get_default_settings();
+			$options  = WP_Hummingbird_Settings::get_setting( 'reports', 'performance' );
+
+			$new_options = wp_parse_args( $options, $defaults['performance']['reports'] );
+			WP_Hummingbird_Settings::update_setting( 'reports', $new_options, 'performance' );
+
+			delete_site_option( 'wphb-pro' );
+		}
+
 	}
-} // End if().
+}

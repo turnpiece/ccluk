@@ -18,6 +18,7 @@ class WP_Hummingbird_Settings_Page extends WP_Hummingbird_Admin_Page {
 		parent::__construct( $slug, $page_title, $menu_title, $parent, $render );
 
 		$this->tabs = array(
+			'data' => __( 'Data & Settings', 'wphb' ),
 			'main' => __( 'Accessibility', 'wphb' ),
 		);
 	}
@@ -27,13 +28,21 @@ class WP_Hummingbird_Settings_Page extends WP_Hummingbird_Admin_Page {
 	 */
 	public function register_meta_boxes() {
 		$this->add_meta_box(
+			'data',
+			__( 'Data & Settings', 'wphb' ),
+			array( $this, 'data_metabox' ),
+			null,
+			array( $this, 'accessibility_metabox_footer' ),
+			'data'
+		);
+
+		$this->add_meta_box(
 			'settings',
 			__( 'Accessibility', 'wphb' ),
 			array( $this, 'accessibility_metabox' ),
 			null,
 			array( $this, 'accessibility_metabox_footer' ),
-			'main',
-			null
+			'main'
 		);
 	}
 
@@ -52,8 +61,20 @@ class WP_Hummingbird_Settings_Page extends WP_Hummingbird_Admin_Page {
 	 * Accessibility meta box footer.
 	 */
 	public function accessibility_metabox_footer() {
-		$args = array();
-
-		$this->view( 'settings/accessibility-meta-box-footer', $args );
+		$this->view( 'settings/accessibility-meta-box-footer', array() );
 	}
+
+	/**
+	 * Data & Settings meta box.
+	 *
+	 * @since 2.0.0
+	 */
+	public function data_metabox() {
+		$args = array(
+			'settings' => WP_Hummingbird_Settings::get_settings( 'settings' ),
+		);
+
+		$this->view( 'settings/data-meta-box', $args );
+	}
+
 }

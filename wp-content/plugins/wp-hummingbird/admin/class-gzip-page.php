@@ -117,7 +117,7 @@ class WP_Hummingbird_GZIP_Page extends WP_Hummingbird_Admin_Page {
 	public function register_meta_boxes() {
 		$this->add_meta_box(
 			'gzip-summary',
-			__( 'Summary', 'wphb' ),
+			__( 'Status', 'wphb' ),
 			array( $this, 'gzip_summary_metabox' ),
 			array( $this, 'gzip_summary_metabox_header' ),
 			null,
@@ -176,8 +176,9 @@ class WP_Hummingbird_GZIP_Page extends WP_Hummingbird_Admin_Page {
 		$this->view(
 			'gzip/summary-meta-box-header',
 			array(
+				'issues'       => WP_Hummingbird_Utils::get_number_of_issues( 'gzip', $this->status ),
 				'recheck_url'  => $recheck_url,
-				'title'        => __( 'Summary', 'wphb' ),
+				'title'        => __( 'Status', 'wphb' ),
 				'full_enabled' => $full_enabled,
 			)
 		);
@@ -218,10 +219,9 @@ class WP_Hummingbird_GZIP_Page extends WP_Hummingbird_Admin_Page {
 
 		$full_enabled   = array_sum( $this->status ) === 3;
 		$snippets       = array(
-			'apache'    => WP_Hummingbird_Module_Server::get_code_snippet( 'gzip', 'apache' ),
-			'litespeed' => WP_Hummingbird_Module_Server::get_code_snippet( 'gzip', 'LiteSpeed' ),
-			'nginx'     => WP_Hummingbird_Module_Server::get_code_snippet( 'gzip', 'nginx' ),
-			'iis'       => WP_Hummingbird_Module_Server::get_code_snippet( 'gzip', 'iis' ),
+			'apache' => WP_Hummingbird_Module_Server::get_code_snippet( 'gzip', 'apache' ),
+			'nginx'  => WP_Hummingbird_Module_Server::get_code_snippet( 'gzip', 'nginx' ),
+			'iis'    => WP_Hummingbird_Module_Server::get_code_snippet( 'gzip', 'iis' ),
 		);
 		$htaccess_error = false;
 		if ( isset( $_GET['htaccess-error'] ) ) { // Input var ok.

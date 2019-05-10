@@ -568,7 +568,17 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 
 				$new_group->set_args( $registered_dependency->args );
 
-				if ( $registered_dependency->src ) {
+				/**
+				 * This is not a perfect fix, but it works. 'mediaelement' script does not have a source file,
+				 * but has an inline script with _wpmejsSettings variable. Without it, media elements do not
+				 * function properly. So we do not exclude such a script.
+				 *
+				 * TODO: In case there are other scripts that work in a similar way, we need to find a way to fetch
+				 * the dependencies with $groups_list->get_group_dependencies() and maybe using print_extra_script().
+				 *
+				 * @since 2.0.0
+				 */
+				if ( $registered_dependency->src || 'mediaelement' === $handle ) {
 					$new_group->add_handle( $handle, $registered_dependency->src );
 
 					// Add dependencies.
@@ -586,7 +596,7 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 			}
 
 			$prev_differentiators_hash = $differentiators_hash;
-		} // End foreach().
+		}
 
 		// Remove group without handles.
 		$return = array();
@@ -663,8 +673,7 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 					array_map(
 						function( $handle ) use ( $data, $group ) {
 							if ( isset( $data[ $handle ] ) ) {
-								  // Add!
-								  $group->add_data( $data[ $handle ] );
+								$group->add_data( $data[ $handle ] ); // Add!
 							}
 						},
 						$group->get_handles()
@@ -764,7 +773,6 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 				continue;
 			}
 
-			/* @var WP_Hummingbird_Module_Minify_Group $item */
 			if ( $item->should_generate_file() ) {
 				$result = $item->process_group();
 				if ( is_wp_error( $result ) ) {
@@ -1155,6 +1163,7 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 				// If deactivated for whole network, also deactivate CDN.
 				if ( false === $value ) {
 					$options['use_cdn'] = false;
+					$options['log']     = false;
 				}
 			} else {
 				// Updating on subsite.
@@ -1212,7 +1221,7 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 			return;
 		}
 
-		wp_register_style( 'wphb-critical-css', WPHB_DIR_URL . 'admin/assets/css/critical.css' );
+		wp_register_style( 'wphb-critical-css', WPHB_DIR_URL . 'admin/assets/css/critical.css', array(), WPHB_VERSION );
 		wp_enqueue_style( 'wphb-critical-css' );
 	}
 

@@ -32,6 +32,8 @@ class WP_Hummingbird_Utils {
 	 * get_status()
 	 * calculate_sum()
 	 * sanitize_bool()
+	 * format_bytes()
+	 * format_interval()
 	 ***************************/
 
 	/**
@@ -120,9 +122,13 @@ class WP_Hummingbird_Utils {
 		wp_localize_script( 'wphb-admin', 'wphbCachingStrings', $i10n );
 
 		$i10n = array(
-			'finishedTestURLsLink' => self::get_admin_menu_url( 'performance' ),
+			'finishedTestURLsLink' => self::get_admin_menu_url( 'performance' ) . '&view=audits',
 			'removeButtonText'     => __( 'Remove', 'wphb' ),
 			'youLabelText'         => __( 'You', 'wphb' ),
+			'scanRunning'          => __( 'Running speed test...', 'wphb' ),
+			'scanAnalyzing'        => __( 'Analyzing data and preparing report...', 'wphb' ),
+			'scanWaiting'          => __( 'Test is taking a little longer than expected, hang in there…', 'wphb' ),
+			'scanComplete'         => __( 'Test complete! Reloading…', 'wphb' ),
 		);
 		wp_localize_script( 'wphb-admin', 'wphbPerformanceStrings', $i10n );
 
@@ -151,6 +157,7 @@ class WP_Hummingbird_Utils {
 			),
 			'urls'       => array(
 				'cachingEnabled' => add_query_arg( 'view', 'caching', self::get_admin_menu_url( 'caching' ) ),
+                'resetSettings'  => add_query_arg( 'wphb-clear', 'all', WP_Hummingbird_Utils::get_admin_menu_url() ),
 			),
 			'strings'    => array(
 				'htaccessUpdated'       => __( 'Your .htaccess file has been updated', 'wphb' ),
@@ -425,6 +432,55 @@ class WP_Hummingbird_Utils {
 
 		// Everything else will map nicely to boolean.
 		return (bool) $value;
+	}
+
+	/**
+	 * Return the file size in a humanly readable format.
+	 *
+	 * Taken from http://www.php.net/manual/en/function.filesize.php#91477
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param int $bytes      Number of bytes.
+	 * @param int $precision  Precision.
+	 *
+	 * @return string
+	 */
+	public static function format_bytes( $bytes, $precision = 1 ) {
+		$units  = array( 'B', 'KB', 'MB', 'GB', 'TB' );
+		$bytes  = max( $bytes, 0 );
+		$pow    = floor( ( $bytes ? log( $bytes ) : 0 ) / log( 1024 ) );
+		$pow    = min( $pow, count( $units ) - 1 );
+		$bytes /= pow( 1024, $pow );
+
+		return round( $bytes, $precision ) . ' ' . $units[ $pow ];
+	}
+
+	/**
+	 * Convert seconds to a readable value.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param int $seconds  Number of seconds.
+	 *
+	 * @return string
+	 */
+	public static function format_interval( $seconds ) {
+		if ( 3600 <= $seconds && 86400 > $seconds ) {
+			return floor( $seconds / HOUR_IN_SECONDS ) . ' h';
+		}
+
+		if ( 86400 <= $seconds && 2419200 > $seconds ) {
+			return floor( $seconds / DAY_IN_SECONDS ) . ' d';
+		}
+
+		if ( 2419200 <= $seconds && 31536000 > $seconds ) {
+			return floor( $seconds / MONTH_IN_SECONDS ) . ' m';
+		}
+
+		if ( 31536000 < $seconds && 26611200 >= $seconds ) {
+			return floor( $seconds / YEAR_IN_SECONDS ) . ' y';
+		}
 	}
 
 	/***************************
@@ -846,7 +902,10 @@ class WP_Hummingbird_Utils {
 		}
 
 		// Had to switch because of PHP 5.2 compatibility issues.
-		// return $time->getTimestamp();
+		if ( self::can_execute_php() ) {
+			return $time->getTimestamp();
+		}
+
 		return $time->format( 'U' );
 	}
 
@@ -927,6 +986,12 @@ class WP_Hummingbird_Utils {
 					// Return the free URL.
 					$link = wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=wp-smushit' ), 'install-plugin_wp-smushit' );
 				}
+				break;
+			case 'smush-plugin':
+				$link = "{$domain}/project/wp-smush-pro/{$utm_tags}";
+				break;
+			case 'hosting':
+				$link = "{$domain}/hub/hosting/{$utm_tags}";
 				break;
 			default:
 				$link = '';
@@ -1070,7 +1135,7 @@ class WP_Hummingbird_Utils {
 	 *
 	 * @param string $module Module slug.
 	 *
-	 * @return bool|WP_Hummingbird_Module|WP_Hummingbird_Module_Page_Cache|WP_Hummingbird_Module_GZip|WP_Hummingbird_Module_Minify|WP_Hummingbird_Module_Cloudflare
+	 * @return bool|WP_Hummingbird_Module|WP_Hummingbird_Module_Page_Cache|WP_Hummingbird_Module_GZip|WP_Hummingbird_Module_Minify|WP_Hummingbird_Module_Cloudflare|WP_Hummingbird_Module_Uptime|WP_Hummingbird_Module_Performance
 	 */
 	public static function get_module( $module ) {
 		$modules = self::get_modules();
@@ -1175,31 +1240,14 @@ class WP_Hummingbird_Utils {
 
 				$invalid = 0;
 				foreach ( $report as $item => $type ) {
-				    if ( ! $type || 'privacy' === $type ) {
-				        $invalid++;
-                    }
-                }
+					if ( ! $type || 'privacy' === $type ) {
+						$invalid++;
+					}
+				}
 
 				$issues = $invalid;
 				break;
-			case 'performance':
-				if ( ! $report ) {
-					$report = WP_Hummingbird_Module_Performance::get_last_report();
-				}
-
-				// No report - break.
-				if ( ! $report || is_wp_error( $report ) ) {
-					break;
-				}
-
-				$last_report = $report->data;
-				foreach ( $last_report->rule_result as $recommendation ) {
-					if ( 'a' !== $recommendation->impact_score_class ) {
-						$issues++;
-					}
-				}
-				break;
-		} // End switch().
+		}
 
 		return $issues;
 	}

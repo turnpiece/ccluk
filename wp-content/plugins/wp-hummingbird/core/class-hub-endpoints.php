@@ -203,11 +203,13 @@ class WP_Hummingbird_Hub_Endpoints {
 		$options               = $performance_module->get_options();
 		$performance_is_active = $options['reports']['enabled'];
 
+		$result['performance'] = $options['hub'];
+
 		$uptime_is_active     = WP_Hummingbird_Utils::get_module( 'uptime' )->is_active();
 		$uptime_reporting     = WP_Hummingbird_Settings::get_setting( 'reports', 'uptime' );
 		$uptime_notifications = WP_Hummingbird_Settings::get_setting( 'notifications', 'uptime' );
 
-		$result['uptime']['reports'] = $uptime_reporting;
+		$result['uptime']['reports']       = $uptime_reporting;
 		$result['uptime']['notifications'] = $uptime_notifications;
 
 		$frequency = '';

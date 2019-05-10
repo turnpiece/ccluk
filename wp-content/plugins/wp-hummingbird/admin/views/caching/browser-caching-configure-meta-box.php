@@ -50,17 +50,30 @@
 		);
 		if ( ! $cf_active && ! $show_cf_notice ) :
 			?>
-			<span class="sui-description">
-				<?php esc_html_e( 'This is the server type your website is hosted on. If you are using CloudFlare', 'wphb' ); ?>
-				<a href="#" class="connect-cloudflare-link"><?php esc_html_e( 'connect your account', 'wphb' ); ?></a>
-				<?php esc_html_e( 'to control your cache settings from here.', 'wphb' ); ?>
-			</span>
+			<div class="sui-notice sui-notice-sm">
+				<p>
+					<?php
+					printf(
+						/* translators: %1$s: server type, %2$s: opening a tag, %3$s: closing a tag */
+						esc_html__(
+							"We've automatically detected your server type is %1\$s. If this is incorrect, manually
+                        select your server type to generate the relevant rules and instructions. If you are using Cloudflare
+                        %2\$sconnect your account%3\$s to control your cache settings from here.",
+							'wphb'
+						),
+						ucfirst( esc_html( $server_type ) ),
+						'<a href="#" class="connect-cloudflare-link">',
+						'</a>'
+					);
+					?>
+				</p>
+			</div>
 		<?php elseif ( ! $cf_active ) : ?>
 			<div class="wphb-cf-detected-notice sui-notice sui-notice-sm">
 				<p>
 					<?php
 					esc_html_e(
-						'We’ve detected you’re using CloudFlare which handles browser caching
+						'We’ve detected you’re using Cloudflare which handles browser caching
 					for you. You can control your CloudFlare settings from Hummingbird by connecting
 					your account below.',
 						'wphb'
@@ -88,25 +101,74 @@
 	<div class="sui-box-settings-col-2">
 		<form method="post" id="expiry-settings">
 			<input type="hidden" class="hb-server-type" name="hb_server_type" value="<?php echo esc_attr( $server_type ); ?>">
-			<?php if ( ! $cf_active && ! $cf_server ) : ?>
-				<label class="sui-radio sui-radio-stacked">
-					<input type="radio" name="expiry-set-type" id="expiry-all" value="all" <?php checked( $all_expiry ); ?>>
-					<span aria-hidden="true"></span>
-					<span class="sui-description">
-						<?php esc_html_e( 'All file types', 'wphb' ); ?>
-					</span>
-				</label>
-				<label class="sui-radio sui-radio-stacked">
-					<input type="radio" name="expiry-set-type" id="expiry-single" value="single" <?php checked( ! $all_expiry ); ?>>
-					<span aria-hidden="true"></span>
-					<span class="sui-description">
-						<?php esc_html_e( 'Individual file types', 'wphb' ); ?>
-					</span>
-				</label>
-			<?php endif; ?>
-			<div class="<?php echo $cf_server ? 'wphb-expiry-select-box' : 'sui-border-frame'; ?>">
+			<?php wp_nonce_field( 'wphb-caching' ); ?>
+			<div class="sui-side-tabs sui-tabs">
 				<?php if ( ! $cf_active && ! $cf_server ) : ?>
-					<div class="<?php echo ! $different_expiry ? 'sui-hidden' : ''; ?>" data-type="expiry-all">
+					<div data-tabs>
+						<div class="<?php echo $all_expiry ? 'active' : ''; ?>" data-name="expiry-set-type" data-value="all">
+							<?php esc_html_e( 'All file types', 'wphb' ); ?>
+						</div>
+						<div class="<?php echo $all_expiry ? '' : 'active'; ?>" data-name="expiry-set-type" data-value="single">
+							<?php esc_html_e( 'Individual file types', 'wphb' ); ?>
+						</div>
+					</div>
+					<div data-panes>
+						<div class="sui-tab-boxed <?php echo $different_expiry ? 'active' : ''; ?>">
+							<label class="sui-label">
+								<?php esc_html_e( 'JavaScript, CSS, Media, Images', 'wphb' ); ?>
+							</label>
+							<?php
+							WP_Hummingbird_Utils::get_caching_frequencies_dropdown(
+								array(
+									'name'      => 'set-expiry-all',
+									'class'     => 'wphb-expiry-select',
+									'selected'  => $expires['css'],
+									'data-type' => 'all',
+								)
+							);
+							?>
+						</div>
+						<div class="sui-tab-boxed <?php echo $different_expiry ? '' : 'active'; ?>">
+							<?php foreach ( $human_results as $type => $result ) : ?>
+								<div class="sui-form-field">
+									<label class="sui-label">
+										<?php echo esc_html( $labels[ $type ] ); ?>
+									</label>
+									<?php
+									WP_Hummingbird_Utils::get_caching_frequencies_dropdown(
+										array(
+											'name'      => "set-expiry-{$type}",
+											'class'     => 'wphb-expiry-select',
+											'selected'  => $expires[ $type ],
+											'data-type' => $type,
+										)
+									);
+									?>
+								</div>
+							<?php endforeach; ?>
+						</div>
+
+						<div class="wphb-expiry-changes sui-notice sui-notice-warning sui-notice-sm sui-margin-top" style="display: none" id="wphb-expiry-change-notice">
+							<p>
+								<?php if ( $htaccess_writable && $already_enabled ) : ?>
+									<?php esc_html_e( 'You’ve made changes to your browser cache settings. You need to update your .htaccess file with the newly generated code below.', 'wphb' ); ?>
+									<br />
+									<a class="sui-button update-htaccess" id="view-snippet-code" >
+										<?php esc_attr_e( 'View code', 'wphb' ); ?>
+									</a>
+								<?php elseif ( $htaccess_writable && $htaccess_written ) : ?>
+									<?php esc_html_e( 'You’ve made changes to your browser cache settings. You need to update your .htaccess for the new settings to take effect.', 'wphb' ); ?>
+									<br />
+									<input type="submit" class="sui-button update-htaccess" name="submit" value="<?php esc_attr_e( 'Update .htaccess', 'wphb' ); ?>"/>
+									<span class="spinner standalone"></span>
+								<?php else : ?>
+									<?php esc_html_e( 'Code snippet updated.', 'wphb' ); ?>
+								<?php endif; ?>
+							</p>
+						</div><!-- end wphb-expiry-change-notice -->
+					</div><!-- end data-panes -->
+				<?php elseif ( $cf_active || $cf_server ) : ?>
+					<div class="sui-border-frame">
 						<label class="sui-label">
 							<?php esc_html_e( 'JavaScript, CSS, Media, Images', 'wphb' ); ?>
 						</label>
@@ -115,107 +177,33 @@
 							array(
 								'name'      => 'set-expiry-all',
 								'class'     => 'wphb-expiry-select',
-								'selected'  => $expires['css'],
+								'selected'  => $cf_current,
 								'data-type' => 'all',
-							)
+							),
+							true
 						);
 						?>
-					</div>
-					<div class="<?php echo $different_expiry ? 'sui-hidden' : ''; ?>" data-type="expiry-single">
-						<?php foreach ( $human_results as $type => $result ) : ?>
-							<div class="sui-form-field">
-								<label class="sui-label">
-									<?php echo esc_html( $labels[ $type ] ); ?>
-								</label>
-								<?php
-								WP_Hummingbird_Utils::get_caching_frequencies_dropdown(
-									array(
-										'name'      => "set-expiry-{$type}",
-										'class'     => 'wphb-expiry-select',
-										'selected'  => $expires[ $type ],
-										'data-type' => $type,
-									)
-								);
-								?>
-
-							</div>
-						<?php endforeach; ?>
-					</div>
-				<?php elseif ( $cf_active || $cf_server ) : ?>
-					<label class="sui-label">
-						<?php esc_html_e( 'JavaScript, CSS, Media, Images', 'wphb' ); ?>
-					</label>
-					<?php
-					WP_Hummingbird_Utils::get_caching_frequencies_dropdown(
-						array(
-							'name'      => 'set-expiry-all',
-							'class'     => 'wphb-expiry-select',
-							'selected'  => $cf_current,
-							'data-type' => 'all',
-						),
-						true
-					);
-				endif;
-?>
-				<div id="wphb-expiry-change-notice" style="display: none">
-					<?php if ( ! $cf_active && $cf_server ) : ?>
-						<div class="wphb-cf-detected-notice sui-notice sui-notice-sm">
-							<p>
-								<?php
-								esc_html_e(
-									'Note: You need to connect your CloudFlare account below for your
-								selected expiry time to take effect.',
-									'wphb'
-								);
-								?>
-							</p>
-						</div>
-					<?php else : ?>
-						<div class="wphb-expiry-changes sui-notice sui-notice-warning sui-notice-sm sui-margin-top">
-							<p>
-							<?php if ( $cf_active ) : ?>
-								<?php
-								esc_html_e(
-									'You’ve made changes to your browser cache settings. You need to
-								save changes for the new settings to take effect.',
-									'wphb'
-								);
-								?>
-								<br />
-								<input type="submit" class="sui-button update-htaccess" id="set-cf-expiry-button" name="submit" value="<?php esc_attr_e( 'Save Changes', 'wphb' ); ?>"/>
-								<span class="spinner standalone"></span>
-							<?php elseif ( $htaccess_writable && $already_enabled ) : ?>
-								<?php
-								esc_html_e(
-									'You’ve made changes to your browser cache settings. You need
-								to update your .htaccess file with the newly generated code below.',
-									'wphb'
-								);
-								?>
-								<br />
-								<a class="sui-button update-htaccess" id="view-snippet-code" >
-									<?php esc_attr_e( 'View code', 'wphb' ); ?>
-								</a>
-							<?php elseif ( $htaccess_writable && $htaccess_written ) : ?>
-								<?php
-								esc_html_e(
-									'You’ve made changes to your browser cache settings. You need to
-								update your .htaccess for the new settings to take effect.',
-									'wphb'
-								);
-								?>
-								<br />
-								<input type="submit" class="sui-button update-htaccess" name="submit" value="<?php esc_attr_e( 'Update .htaccess', 'wphb' ); ?>"/>
-								<span class="spinner standalone"></span>
-							<?php else : ?>
-								<?php esc_html_e( 'Code snippet updated.', 'wphb' ); ?>
+						<div id="wphb-expiry-change-notice" style="display: none">
+							<?php if ( ! $cf_active && $cf_server ) : ?>
+								<div class="wphb-cf-detected-notice sui-notice sui-notice-sm">
+									<p>
+										<?php esc_html_e( 'Note: You need to connect your CloudFlare account below for your selected expiry time to take effect.', 'wphb' ); ?>
+									</p>
+								</div>
+							<?php elseif ( $cf_active ) : ?>
+								<div class="wphb-expiry-changes sui-notice sui-notice-warning sui-notice-sm sui-margin-top">
+									<p>
+										<?php esc_html_e( 'You’ve made changes to your browser cache settings. You need to save changes for the new settings to take effect.', 'wphb' ); ?>
+										<br />
+										<input type="submit" class="sui-button update-htaccess" name="submit" value="<?php esc_attr_e( 'Save Changes', 'wphb' ); ?>" id="set-cf-expiry-button"/>
+										<span class="spinner standalone"></span>
+									</p>
+								</div>
 							<?php endif; ?>
-							</p>
-						</div>
-					<?php endif; ?>
-				</div>
-			</div><!-- end wphb-border-frame -->
-			<?php wp_nonce_field( 'wphb-caching' ); ?>
+						</div><!-- end wphb-expiry-change-notice -->
+					</div><!-- end sui-border-frame -->
+				<?php endif; ?>
+			</div><!-- end sui-side-tabs -->
 		</form>
 	</div><!-- end sui-box-settings-col-2 -->
 </div><!-- end row -->
@@ -235,11 +223,11 @@
 		<div id="wphb-server-instructions-apache" class="wphb-server-instructions sui-hidden" data-server="apache">
 			<div class="sui-tabs">
 				<div data-tabs>
-					<div id="auto-apache"><?php esc_html_e( 'Automatic', 'wphb' ); ?></div>
+					<div id="auto-apache" class="active"><?php esc_html_e( 'Automatic', 'wphb' ); ?></div>
 					<div id="manual-apache"><?php esc_html_e( 'Manual', 'wphb' ); ?></div>
 				</div>
 				<div data-panes>
-					<div>
+					<div class="active">
 						<p>
 							<?php
 							esc_html_e(
@@ -268,7 +256,7 @@
 										<?php esc_html_e( 'Deactivate', 'wphb' ); ?>
 									</a>
 								<?php elseif ( ! $already_enabled ) : ?>
-									<a href="<?php echo esc_url( $enable_link ); ?>" class="sui-button sui-button-primary activate-button">
+									<a href="<?php echo esc_url( $enable_link ); ?>" class="sui-button sui-button-blue activate-button">
 										<span class="sui-loading-text"><?php esc_html_e( 'Activate', 'wphb' ); ?></span>
 										<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
 									</a>
@@ -295,61 +283,6 @@
 							<p><?php esc_html_e( "If you don't know where those files are, or you aren't able to reload Apache, you would need to consult with your hosting provider or a system administrator who has access to change the configuration of your server", 'wphb' ); ?></p>
 							<p><?php WP_Hummingbird_Utils::_still_having_trouble_link(); ?></p>
 						</div>
-					</div>
-				</div>
-			</div>
-		</div><!-- end wphb-server-instructions -->
-
-		<div id="wphb-server-instructions-litespeed" class="wphb-server-instructions sui-hidden" data-server="LiteSpeed">
-			<div class="sui-tabs">
-				<div data-tabs>
-					<div id="auto-litespeed"><?php esc_html_e( 'Automatic', 'wphb' ); ?></div>
-					<div id="manual-litespeed"><?php esc_html_e( 'Manual', 'wphb' ); ?></div>
-				</div>
-				<div data-panes>
-					<div>
-						<p>
-							<?php esc_html_e( 'Hummingbird can automatically apply browser caching for LiteSpeed servers by writing your .htaccess file. Alternately, switch to Manual to apply these rules yourself.', 'wphb' ); ?>
-						</p>
-
-						<?php if ( $htaccess_writable && $already_enabled ) : ?>
-							<div class="sui-notice sui-notice-success">
-								<p><?php esc_html_e( 'Your browser caching is already enabled and working well', 'wphb' ); ?></p>
-							</div>
-						<?php elseif ( $htaccess_writable && $htaccess_written ) : ?>
-							<div class="sui-notice sui-notice-info">
-								<p><?php esc_html_e( 'Automatic browser caching is active.', 'wphb' ); ?></p>
-							</div>
-						<?php endif; ?>
-
-						<?php if ( ! $cf_active && true === $htaccess_writable ) : ?>
-							<div id="enable-cache-wrap" class="enable-cache-wrap-LiteSpeed <?php echo 'LiteSpeed' === $server_type ? '' : 'hidden'; ?>">
-								<?php if ( true === $htaccess_written ) : ?>
-									<a href="<?php echo esc_url( $disable_link ); ?>" class="sui-button sui-button-ghost">
-										<?php esc_html_e( 'Deactivate', 'wphb' ); ?>
-									</a>
-								<?php elseif ( ! $already_enabled ) : ?>
-									<a href="<?php echo esc_url( $enable_link ); ?>" class="sui-button sui-button-primary activate-button">
-										<span class="sui-loading-text"><?php esc_html_e( 'Activate', 'wphb' ); ?></span>
-										<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
-									</a>
-								<?php endif; ?>
-							</div>
-						<?php endif; ?>
-					</div>
-					<div class="litespeed-instructions">
-						<p><?php esc_html_e( 'Follow the steps below to add browser caching to your LiteSpeed server.', 'wphb' ); ?></p>
-
-						<ol class="wphb-listing wphb-listing-ordered">
-							<li><?php esc_html_e( 'Copy the generated code into your .htaccess file & save your changes.', 'wphb' ); ?></li>
-							<li><?php esc_html_e( 'Restart LiteSpeed.', 'wphb' ); ?></li>
-							<li><a href="<?php echo esc_url( $recheck_expiry_url ); ?>"><?php esc_html_e( 'Re-check expiry status.', 'wphb' ); ?></a></li>
-						</ol>
-						<pre class="sui-code-snippet" id="wphb-litespeed"><?php echo htmlentities2( $snippets['litespeed'] ); ?></pre>
-						<p><strong>Troubleshooting</strong></p>
-						<p><?php esc_html_e( 'If adding the rules to your .htaccess doesn’t work and you have access to vhosts.conf or httpd.conf try to find the line that starts with <Directory> - add the code above into that section and save the file.', 'wphb' ); ?></p>
-						<p><?php esc_html_e( 'If you don\'t know where those files are, or you aren\'t able to reload Apache, you would need to consult with your hosting provider or a system administrator who has access to change the configuration of your server', 'wphb' ); ?></p>
-						<p><?php WP_Hummingbird_Utils::_still_having_trouble_link(); ?></p>
 					</div>
 				</div>
 			</div>
@@ -403,7 +336,7 @@
 
 		<div id="wphb-server-instructions-cloudflare" class="wphb-server-instructions sui-hidden" data-server="cloudflare">
 			<span class="sui-description">
-				<?php esc_html_e( 'Hummingbird can control your Cloudflare Browser Cache settings from here. Simply add your Cloudflare API details and configure away.', 'wphb' ); ?>
+				<?php esc_html_e( 'Hummingbird can control your CloudFlare Browser Cache settings from here. Simply add your CloudFlare API details and configure away.', 'wphb' ); ?>
 			</span>
 			<?php
 			/* @var WP_Hummingbird_Module_Cloudflare $cf_module */
@@ -447,9 +380,9 @@
 							<input type="text" class="sui-form-control" autocomplete="off" value="{{ data.apiKey }}" name="cloudflare-api-key" id="cloudflare-api-key" placeholder="<?php esc_attr_e( 'Enter your 37 digit API key', 'wphb' ); ?>">
 						</div>
 
-						<div class="cloudflare-submit sui-margin-top">
+						<div class="cloudflare-submit sui-margin-top sui-no-padding-bottom">
 							<a href="#cloudflare-how-to" class="cloudflare-how-to-title"><?php esc_html_e( 'Need help getting your API Key?', 'wphb' ); ?></a>
-							<input type="submit" class="sui-button sui-button-primary" value="<?php echo esc_attr( _x( 'Connect', 'Connect to Cloudflare button text', 'wphb' ) ); ?>">
+							<input type="submit" class="sui-button sui-button-blue" value="<?php echo esc_attr( _x( 'Connect', 'Connect to Cloudflare button text', 'wphb' ) ); ?>">
 						</div>
 
 						<ol id="cloudflare-how-to" class="wphb-block-content-blue">
@@ -468,7 +401,7 @@
 						<# if ( ! data.zones.length ) { #>
 							<p><?php esc_html_e( 'It appears you have no active zones available. Double check your domain has been added to Cloudflare and try again.', 'wphb' ); ?></p>
 							<p class="cloudflare-submit">
-								<a href="<?php echo esc_url( WP_Hummingbird_Utils::get_admin_menu_url( 'caching' ) ); ?>&reload=<?php echo time(); ?>#wphb-box-dashboard-cloudflare" class="sui-button sui-button-primary"><?php esc_html_e( 'Re-Check', 'wphb' ); ?></a>
+								<a href="<?php echo esc_url( WP_Hummingbird_Utils::get_admin_menu_url( 'caching' ) ); ?>&reload=<?php echo time(); ?>#wphb-box-dashboard-cloudflare" class="sui-button sui-button-blue"><?php esc_html_e( 'Re-Check', 'wphb' ); ?></a>
 							</p>
 						<# } else { #>
 							<# var zone = false; #>
@@ -488,16 +421,23 @@
 									<# } #>
 								</select>
 								<div class="cloudflare-submit">
-									<input type="submit" class="sui-button sui-button-primary" value="<?php esc_attr_e( 'Enable Cloudflare', 'wphb' ); ?>">
+									<input type="submit" class="sui-button sui-button-blue" value="<?php esc_attr_e( 'Enable Cloudflare', 'wphb' ); ?>">
 								</div>
 							<# } else { #>
 								<div class="wphb-cloudflare sui-notice sui-notice-sm sui-notice-warning">
 									<p>
-										<strong><?php esc_html_e( 'CloudFlare is connected, but it appears you don’t have any active zones for this domain.', 'wphb' ); ?></strong>
-										<?php esc_html_e( 'Double check your domain has been added to Cloudflare and tap re-check when ready.', 'wphb' ); ?>
+										<?php
+										esc_html_e(
+											'CloudFlare is connected, but it appears you don’t have any active
+                                        zones for this domain. Double check your domain has been added to Cloudflare and tap
+                                        re-check when ready.',
+											'wphb'
+										);
+										?>
 									</p>
 									<p>
-										<button type="button" class="sui-button" id="cf-recheck-zones">
+										<button type="button" class="sui-button sui-button-icon-left" id="cf-recheck-zones">
+											<i class="sui-icon-update" aria-hidden="true"></i>
 											<span class="sui-loading-text"><?php esc_html_e( 'Re-check', 'wphb' ); ?></span>
 											<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
 										</button>
@@ -514,12 +454,14 @@
 				<div class="cloudflare-step">
 					<div class="sui-notice sui-notice-info sui-notice-sm sui-margin-top">
 						<p>
-							<strong><?php esc_html_e( 'Cloudflare is connected for this domain.', 'wphb' ); ?></strong>
-							<?php esc_html_e( 'Adjust your expiry settings and save your settings to update your Cloudflare cache settings.', 'wphb' ); ?>
+							<?php esc_html_e( 'Cloudflare is connected for this domain. Adjust your expiry settings and save your settings to update your Cloudflare cache settings.', 'wphb' ); ?>
 						</p>
 					</div>
 					<div class="buttons buttons-on-left">
-						<a href="<?php echo esc_url( $cf_disable_url ); ?>" class="cloudflare-deactivate sui-button sui-button-ghost"><?php esc_attr_e( 'Deactivate', 'wphb' ); ?></a>
+						<a href="<?php echo esc_url( $cf_disable_url ); ?>" class="cloudflare-deactivate sui-button sui-button-ghost sui-button-icon-left">
+							<i class="sui-icon-power-on-off" aria-hidden="true"></i>
+							<?php esc_attr_e( 'Deactivate', 'wphb' ); ?>
+						</a>
 						<span class="alignright sui-tooltip sui-tooltip-top-right" data-tooltip="<?php esc_attr_e( 'Clear all assets cached by CloudFlare', 'wphb' ); ?>">
 							<input type="submit" class="cloudflare-clear-cache sui-button" value="<?php esc_attr_e( 'Clear Cache', 'wphb' ); ?>">
 						</span>
@@ -533,20 +475,17 @@
 		</div>
 
 	</div><!-- end sui-box-settings-col-1 -->
-</div><!-- end row -->
 
-<script>
-	jQuery(document).ready( function() {
-		window.WPHB_Admin.DashboardCloudFlare.init( <?php echo $cloudflare_js_settings; ?> );
-	});
-</script>
-
-<?php if ( $cf_active ) : ?>
 	<script>
 		jQuery(document).ready( function() {
-			if ( window.WPHB_Admin ) {
-				window.WPHB_Admin.getModule( 'cloudflare' );
-			}
+			window.WPHB_Admin.DashboardCloudFlare.init( <?php echo $cloudflare_js_settings; ?> );
+			<?php if ( $cf_active ) : ?>
+				if ( window.WPHB_Admin ) {
+					window.WPHB_Admin.getModule( 'cloudflare' );
+				}
+			<?php endif; ?>
 		});
 	</script>
-<?php endif; ?>
+</div><!-- end row -->
+
+

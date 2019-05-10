@@ -89,7 +89,7 @@ $this->render_sui_header( $page_title );
 
 		<div class="sui-row js-plugins-showcase">
 
-			<div class="sui-col-md-4">
+			<div class="sui-col-md-4 dashui-top-plugin-box">
 
 				<span tabindex="4" class="dashui-plugin-card-label"><?php esc_html_e( 'Top Plugins', 'wpmudev' ); ?></span>
 
@@ -97,13 +97,13 @@ $this->render_sui_header( $page_title );
 
 			</div>
 
-			<div class="sui-col-md-4 top-plugins-item">
+			<div class="sui-col-md-4 top-plugins-item dashui-top-plugin-box">
 
 				<div class="dashui-top-plugin"></div>
 
 			</div>
 
-			<div class="sui-col-md-4">
+			<div class="sui-col-md-4 dashui-new-plugin-box">
 
 				<span class="dashui-plugin-card-label" tabindex="5"><?php esc_html_e( 'New Releases', 'wpmudev' ); ?></span>
 
@@ -387,5 +387,6 @@ if ( ! WPMUDEV_Dashboard::$upgrader->can_auto_install( 'plugin' ) ) {
 
 	</div>
 </div>
+
 
 

@@ -102,18 +102,22 @@ class WP_Hummingbird_Module_GZip extends WP_Hummingbird_Module_Server {
 			// Get the API results.
 			$api         = WP_Hummingbird_Utils::get_api();
 			$api_results = $api->performance->check_gzip();
-			$api_results = get_object_vars( $api_results );
-			foreach ( $files as $type  => $file ) {
-				// If already true, do not overwrite with check.
-				if ( true === $results[ $type ] ) {
-					continue;
-				}
 
-				$index = strtolower( $type );
-				if ( ! isset( $api_results[ $index ]->response_error )
-					&& ( isset( $api_results[ $index ] ) && true === $api_results[ $index ] )
-				) {
-					$results[ $type ] = true;
+			// This will prevent errors on local hosts and when API is not reachable.
+			if ( ! is_wp_error( $api_results ) ) {
+				$api_results = get_object_vars( $api_results );
+				foreach ( $files as $type  => $file ) {
+					// If already true, do not overwrite with check.
+					if ( true === $results[ $type ] ) {
+						continue;
+					}
+
+					$index = strtolower( $type );
+					if ( ! isset( $api_results[ $index ]->response_error )
+						&& ( isset( $api_results[ $index ] ) && true === $api_results[ $index ] )
+					) {
+						$results[ $type ] = true;
+					}
 				}
 			}
 		}
@@ -221,15 +225,6 @@ gzip_disable  "MSIE [1-6]\.(?!.*SV1)";';
         AddEncoding gzip              svgz
     </IfModule>
 </IfModule>';
-	}
-
-	/**
-	 * Code to use on LiteSpeed servers.
-	 *
-	 * @return string
-	 */
-	public function get_litespeed_code() {
-		return $this->get_apache_code();
 	}
 
 	/**

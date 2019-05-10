@@ -30,7 +30,7 @@
 		?>
 	</p>
 
-	<a id="check-files" class="sui-button sui-button-primary" data-a11y-dialog-show="check-files-modal">
+	<a id="check-files" class="sui-button sui-button-blue" data-a11y-dialog-show="check-files-modal">
 		<?php esc_html_e( 'Activate', 'wphb' ); ?>
 	</a>
 </div>
@@ -39,8 +39,8 @@
 
 <?php if ( WP_Hummingbird_Utils::get_module( 'minify' )->is_scanning() ) : ?>
 	<script>
-        window.addEventListener("load", function(){
-            jQuery('#check-files').click();
-        });
+		window.addEventListener("load", function(){
+			jQuery('#check-files').click();
+		});
 	</script>
 <?php endif; ?>

@@ -11,14 +11,15 @@ if ( $this->has_meta_boxes( 'summary' ) ) {
 	$this->do_meta_boxes( 'summary' );
 } ?>
 
-<div class="sui-row-with-sidenav">
-	<?php if ( $report ) : ?>
+<?php if ( $report ) : ?>
+	<div class="sui-row-with-sidenav">
 		<?php $this->show_tabs(); ?>
 		<?php $this->do_meta_boxes( $this->get_current_tab() ); ?>
-	<?php else : ?>
-		<?php $this->do_meta_boxes( 'main' ); ?>
-	<?php endif; ?>
-</div><!-- end row -->
+	</div><!-- end row -->
+<?php else : ?>
+	<?php $this->do_meta_boxes( 'main' ); ?>
+<?php endif; ?>
+
 <?php WP_Hummingbird_Utils::get_modal( 'add-recipient' ); ?>
 
 <script>

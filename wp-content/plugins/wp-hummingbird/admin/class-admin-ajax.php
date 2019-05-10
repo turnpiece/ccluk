@@ -21,8 +21,6 @@ class WP_Hummingbird_Admin_AJAX {
 		 * DASHBOARD AJAX ACTIONS
 		 */
 
-		// Activate network minification.
-		add_action( 'wp_ajax_wphb_dash_toggle_network_minification', array( $this, 'dash_toggle_network_minification' ) );
 		// Skip quick setup.
 		add_action( 'wp_ajax_wphb_dash_skip_setup', array( $this, 'dashboard_skip_setup' ) );
 		// Dismiss notice.
@@ -38,6 +36,8 @@ class WP_Hummingbird_Admin_AJAX {
 		add_action( 'wp_ajax_wphb_performance_run_test', array( $this, 'performance_run_test' ) );
 		// Save performance settings.
 		add_action( 'wp_ajax_wphb_performance_save_settings', array( $this, 'performance_save_settings' ) );
+		// Show one-off performance modal.
+		add_action( 'wp_ajax_wphb_show_report_modal', array( $this, 'show_report_modal' ) );
 
 		/**
 		 * CACHING MODULE AJAX ACTIONS
@@ -50,8 +50,6 @@ class WP_Hummingbird_Admin_AJAX {
 
 		// Save page caching settings.
 		add_action( 'wp_ajax_wphb_page_cache_save_settings', array( $this, 'page_cache_save_settings' ) );
-		// Toggle ability for subsite admins to turn off page caching.
-		add_action( 'wp_ajax_wphb_caching_toggle_admin_subsite_page_caching', array( $this, 'caching_toggle_admin_subsite_page_caching' ) );
 		// Gutenberg clear cache for post.
 		add_action( 'wp_ajax_wphb_gutenberg_clear_post_cache', array( $this, 'gutenberg_clear_post_cache' ) );
 
@@ -98,8 +96,6 @@ class WP_Hummingbird_Admin_AJAX {
 		add_action( 'wp_ajax_wphb_minification_toggle_cdn', array( $this, 'minification_toggle_cdn' ) );
 		// Toggle logs.
 		add_action( 'wp_ajax_wphb_minification_toggle_log', array( $this, 'minification_toggle_log' ) );
-		// Toggle minification.
-		add_action( 'wp_ajax_wphb_minification_toggle_minification', array( $this, 'minification_toggle_minification' ) );
 		// Toggle advanced minification view.
 		add_action( 'wp_ajax_wphb_minification_toggle_view', array( $this, 'minification_toggle_view' ) );
 		// Start scan.
@@ -116,6 +112,8 @@ class WP_Hummingbird_Admin_AJAX {
 		add_action( 'wp_ajax_wphb_minification_update_asset_path', array( $this, 'minification_update_asset_path' ) );
 		// Reset individual file.
 		add_action( 'wp_ajax_wphb_minification_reset_asset', array( $this, 'minification_reset_asset' ) );
+		// Update settings in network admin.
+		add_action( 'wp_ajax_wphb_minification_update_network_settings', array( $this, 'minification_update_network_settings' ) );
 
 		/**
 		 * ADVANCED TOOLS AJAX ACTIONS
@@ -132,9 +130,12 @@ class WP_Hummingbird_Admin_AJAX {
 		add_action( 'wp_ajax_wphb_logger_clear', array( $this, 'logger_clear' ) );
 
 		/**
-		 * HB SETTINGS MODULE AJAX ACTIONS
+		 * SETTINGS MODULE AJAX ACTIONS
 		 */
+
 		add_action( 'wp_ajax_wphb_admin_settings_save_settings', array( $this, 'admin_settings_save_settings' ) );
+		// Reset settings.
+		add_action( 'wp_ajax_wphb_reset_settings', array( $this, 'reset_settings' ) );
 	}
 
 	/**
@@ -186,40 +187,6 @@ class WP_Hummingbird_Admin_AJAX {
 	 * *************************
 	 * DASHBOARD AJAX ACTIONS
 	 ***************************/
-
-	/**
-	 * Toggle settings for network minification in multisite installs.
-	 */
-	public function dash_toggle_network_minification() {
-		check_ajax_referer( 'wphb-fetch', 'nonce' );
-
-		if ( ! current_user_can( WP_Hummingbird_Utils::get_admin_capability() ) || ! isset( $_POST['value'] ) ) { // Input var okay.
-			die();
-		}
-
-		$post_value = sanitize_text_field( wp_unslash( $_POST['value'] ) ); // Input var okay.
-
-		switch ( $post_value ) {
-			case 'false': {
-				$value = false;
-				break;
-			}
-			case 'super-admins': {
-				$value = 'super-admins';
-				break;
-			}
-			default: {
-				$value = true;
-				break;
-			}
-		}
-
-		/* @var WP_Hummingbird_Module_Minify $minify */
-		$minify = WP_Hummingbird_Utils::get_module( 'minify' );
-		$minify->toggle_service( $value, true );
-
-		wp_send_json_success();
-	}
 
 	/**
 	 * Skip quick setup and go straight to dashboard.
@@ -290,8 +257,8 @@ class WP_Hummingbird_Admin_AJAX {
 	 * Logic behind this:
 	 * - Remove quick setup (if not removed) and init performance scan (if not running)
 	 * - Running < 15 seconds  - return control to ajax
-	 * - Running 15-59 seconds - check if report is on the server, if not - return to ajax
-	 * - Running 60+ seconds   - stop performance test
+	 * - Running 15-89 seconds - check if report is on the server, if not - return to ajax
+	 * - Running 90+ seconds   - stop performance test
 	 */
 	public function performance_run_test() {
 		check_ajax_referer( 'wphb-fetch', 'nonce' );
@@ -300,33 +267,41 @@ class WP_Hummingbird_Admin_AJAX {
 			die();
 		}
 
-		// Remove quick setup.
-		$quick_setup = get_option( 'wphb-quick-setup' );
-		if ( ! isset( $quick_setup['finished'] ) ) {
-			WP_Hummingbird_Utils::remove_quick_setup();
-		}
+		// This comes from performance report modal on page scans.
+		$name  = filter_input( INPUT_POST, 'user', FILTER_SANITIZE_STRING );
+		$email = filter_input( INPUT_POST, 'email', FILTER_SANITIZE_EMAIL );
+		$url   = filter_input( INPUT_POST, 'url', FILTER_SANITIZE_URL, FILTER_NULL_ON_FAILURE );
 
-		if ( WP_Hummingbird_Module_Performance::stopped_report() ) {
-			wp_send_json_success( array( 'finished' => true ) );
+		// Remove quick setup only when running regular performance report.
+		if ( ! $name && ! $email && ! $url ) {
+			$quick_setup = get_option( 'wphb-quick-setup' );
+			if ( ! isset( $quick_setup['finished'] ) ) {
+				WP_Hummingbird_Utils::remove_quick_setup();
+			}
 		}
 
 		$started_at = WP_Hummingbird_Module_Performance::is_doing_report();
 		if ( ! $started_at ) {
-			WP_Hummingbird_Utils::get_module( 'performance' )->init_scan();
+			WP_Hummingbird_Utils::get_module( 'performance' )->init_scan( $url );
 			wp_send_json_success( array( 'finished' => false ) );
 		}
 
 		$now = current_time( 'timestamp' );
 		if ( $now >= ( $started_at + 15 ) ) {
 			// If we're over 1 minute - timeout.
-			if ( $now >= ( $started_at + 60 ) ) {
+			if ( $now >= ( $started_at + 90 ) ) {
+				WP_Hummingbird_Module_Performance::set_doing_report( false );
 				wp_send_json_success( array( 'finished' => true ) );
 			}
 
 			// The report should be finished by this time, let's get the results.
-			WP_Hummingbird_Module_Performance::refresh_report();
+			$report = WP_Hummingbird_Module_Performance::refresh_report( $url );
 
-			$report = WP_Hummingbird_Module_Performance::get_last_report();
+			if ( ! $name && ! $email && ! $url ) {
+				$report = WP_Hummingbird_Module_Performance::get_last_report();
+			}
+
+			// Do not cancel the scan if the report is not ready. We might still have some time to wait.
 			if ( is_wp_error( $report ) ) {
 				// Check if the report is still not available on the server.
 				$error = $report->get_error_data( 'performance-error' );
@@ -334,6 +309,15 @@ class WP_Hummingbird_Admin_AJAX {
 					WP_Hummingbird_Settings::delete( 'wphb-stop-report' );
 					wp_send_json_success( array( 'finished' => false ) );
 				}
+			}
+
+			if ( isset( $name ) && ! empty( $name ) && isset( $email ) && ! empty( $email ) && isset( $url ) && ! empty( $url ) ) {
+				$recipients = array(
+					'name'  => $name,
+					'email' => $email,
+				);
+
+				WP_Hummingbird_Utils::get_pro_module( 'reporting-cron' )->send_email_report( $report, $recipients );
 			}
 
 			wp_send_json_success( array( 'finished' => true ) );
@@ -355,18 +339,41 @@ class WP_Hummingbird_Admin_AJAX {
 			die();
 		}
 
-		/* @var WP_Hummingbird_Module_Performance $performance */
 		$performance = WP_Hummingbird_Utils::get_module( 'performance' );
 		$options     = $performance->get_options();
 
 		// Get the data from ajax.
 		parse_str( sanitize_text_field( wp_unslash( $_POST['data'] ) ), $data ); // Input var ok.
 
-		$options['subsite_tests'] = (bool) $data['subsite-tests'];
+		// This option can only be updated on network admin.
+		if ( ! is_multisite() || ( is_multisite() && $data['network_admin'] ) ) {
+			// I don't like the way this is duplicated in three different modules. This needs to be extracted.
+			$options['subsite_tests'] = isset( $data['subsite-tests'] ) && 'super-admins' !== $data['subsite-tests'] ? (bool) $data['subsite-tests'] : 'super-admins';
+
+			if ( WP_Hummingbird_Utils::is_member() ) {
+				$options['hub']['show_metrics']  = isset( $data['hub-metrics'] ) ? (bool) $data['hub-metrics'] : false;
+				$options['hub']['show_audits']   = isset( $data['hub-audits'] ) ? (bool) $data['hub-audits'] : false;
+				$options['hub']['show_historic'] = isset( $data['hub-field-data'] ) ? (bool) $data['hub-field-data'] : false;
+			}
+		}
+		$options['widget']['desktop']       = isset( $data['desktop-report'] ) ? (bool) $data['desktop-report'] : false;
+		$options['widget']['show_metrics']  = isset( $data['metrics'] ) ? (bool) $data['metrics'] : false;
+		$options['widget']['show_audits']   = isset( $data['audits'] ) ? (bool) $data['audits'] : false;
+		$options['widget']['show_historic'] = isset( $data['field-data'] ) ? (bool) $data['field-data'] : false;
+
 
 		$performance->update_options( $options );
 
 		wp_send_json_success();
+	}
+
+	/**
+	 * Show one-off performance report modal.
+	 *
+	 * @since 2.0.0
+	 */
+	public function show_report_modal() {
+		check_ajax_referer( 'wphb-fetch', 'nonce' );
 	}
 
 	/**
@@ -475,7 +482,7 @@ class WP_Hummingbird_Admin_AJAX {
 		$user_agents = '';
 		if ( isset( $data['user_agents'] ) ) { // Input var ok.
 			$user_agents = sanitize_textarea_field( wp_unslash( $data['user_agents'] ) ); // Input var okay.
-			$user_agents = preg_split( '/[\r\n\t ]+/', $user_agents );
+			$user_agents = preg_split( '/[\r\n\t]+/', $user_agents );
 		}
 
 		$settings['page_types']             = $page_types;
@@ -502,38 +509,6 @@ class WP_Hummingbird_Admin_AJAX {
 				'success' => true,
 			)
 		);
-	}
-
-	/**
-	 * Toggle Subsite Admin able to turn off page caching.
-	 *
-	 * Used on multisite install. Allows subsite admin to turn off page caching.
-	 *
-	 * @since 1.8.0
-	 */
-	public function caching_toggle_admin_subsite_page_caching() {
-		check_ajax_referer( 'wphb-fetch', 'nonce' );
-
-		if ( ! current_user_can( WP_Hummingbird_Utils::get_admin_capability() ) || ! isset( $_POST['value'] ) ) { // Input var okay.
-			die();
-		}
-
-		if ( function_exists( 'rest_sanitize_boolean' ) ) {
-			$post_value = rest_sanitize_boolean( wp_unslash( $_POST['value'] ) ); // Input var okay.
-		} else {
-			$post_value = WP_Hummingbird_Utils::sanitize_bool( wp_unslash( $_POST['value'] ) ); // Input var okay.
-		}
-
-		$value = true;
-		if ( $post_value ) {
-			$value = 'blog-admins';
-		}
-
-		/* @var WP_Hummingbird_Module_Page_Cache $page_cache_module */
-		$page_cache_module = WP_Hummingbird_Utils::get_module( 'page_cache' );
-		$page_cache_module->toggle_service( $value, true );
-
-		wp_send_json_success();
 	}
 
 	/**
@@ -852,10 +827,12 @@ class WP_Hummingbird_Admin_AJAX {
 						)
 					);
 				} else {
-					$filtered = wp_list_filter(
-						$zones,
-						array(
-							'value' => $options['zone'],
+					$filtered = array_values(
+						wp_list_filter(
+							$zones,
+							array(
+								'value' => $options['zone'],
+							)
 						)
 					);
 					if ( ! $filtered ) {
@@ -1081,23 +1058,6 @@ class WP_Hummingbird_Admin_AJAX {
 	}
 
 	/**
-	 * Toggle minification on per site basis.
-	 */
-	public function minification_toggle_minification() {
-		check_ajax_referer( 'wphb-fetch', 'nonce' );
-
-		if ( ! current_user_can( WP_Hummingbird_Utils::get_admin_capability() ) || ! isset( $_POST['value'] ) ) { // Input var okay.
-			die();
-		}
-
-		$value = rest_sanitize_boolean( wp_unslash( $_POST['value'] ) ); // Input var okay.
-
-		WP_Hummingbird_Utils::get_module( 'minify' )->toggle_service( $value );
-
-		wp_send_json_success();
-	}
-
-	/**
 	 * Toggle minification advanced view.
 	 *
 	 * @since 1.7.1
@@ -1297,6 +1257,44 @@ class WP_Hummingbird_Admin_AJAX {
 	}
 
 	/**
+	 * Update network settings.
+	 *
+	 * @since 2.0.0
+	 */
+	public function minification_update_network_settings() {
+		check_ajax_referer( 'wphb-fetch', 'nonce' );
+
+		if ( ! current_user_can( WP_Hummingbird_Utils::get_admin_capability() ) || ! isset( $_POST['settings'] ) ) { // Input var okay.
+			die();
+		}
+
+		wp_parse_str( sanitize_text_field( wp_unslash( $_POST['settings'] ) ), $form );
+
+		if ( isset( $form['enabled'] ) && 'super-admins' !== $form['enabled'] ) {
+			$form['enabled'] = boolval( $form['enabled'] );
+		}
+
+		$minify  = WP_Hummingbird_Utils::get_module( 'minify' );
+		$options = $minify->get_options();
+
+		$options['use_cdn'] = isset( $form['use_cdn'] ) ? boolval( $form['use_cdn'] ) : false;
+		$options['log']     = isset( $form['log'] ) ? boolval( $form['log'] ) : false;
+
+		$minify->update_options( $options );
+		if ( ! isset( $form['network'] ) ) {
+			$minify->toggle_service( false, true );
+		} else {
+			$minify->toggle_service( $form['enabled'], true );
+		}
+
+		wp_send_json_success(
+			array(
+				'success' => true,
+			)
+		);
+	}
+
+	/**
 	 * *************************
 	 * ADVANCED TOOLS AJAX ACTIONS
 	 ***************************/
@@ -1473,10 +1471,30 @@ class WP_Hummingbird_Admin_AJAX {
 
 		$settings = WP_Hummingbird_Settings::get_settings( 'settings' );
 
-		if ( isset( $data['color-accessible'] ) ) {
-			$settings['accessible_colors'] = (bool) $data['color-accessible'];
+		foreach ( $data as $setting => $value ) {
+			if ( ! isset( $settings[ $setting ] ) ) {
+				continue;
+			}
+
+			$settings[ $setting ] = (bool) $value;
 		}
+
 		WP_Hummingbird_Settings::update_settings( $settings, 'settings' );
+
+		wp_send_json_success();
+	}
+
+	/**
+	 * Reset plugin settings.
+	 *
+	 * @since 2.0.0
+	 */
+	public function reset_settings() {
+		check_ajax_referer( 'wphb-fetch', 'nonce' );
+
+		if ( ! current_user_can( WP_Hummingbird_Utils::get_admin_capability() ) ) {
+			die();
+		}
 
 		wp_send_json_success();
 	}

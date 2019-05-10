@@ -178,18 +178,17 @@ class WP_Hummingbird_Pro_AJAX {
 			$email_time[1]            = sprintf( '%02d', wp_rand( 0, 59 ) );
 			$options[ $type ]['time'] = implode( ':', $email_time );
 
+			// Update data for performance reports.
+			if ( 'performance' === $module ) {
+				$options['reports']['type']     = isset( $data['report-type'] ) ? sanitize_key( $data['report-type'] ) : 'desktop';
+				$options['reports']['metrics']  = isset( $data['metrics'] ) ? (bool) $data['metrics'] : false;
+				$options['reports']['audits']   = isset( $data['audits'] ) ? (bool) $data['audits'] : false;
+				$options['reports']['historic'] = isset( $data['field-data'] ) ? (bool) $data['field-data'] : false;
+			}
+
 			// Clear last sent time.
 			if ( isset( $options[ $type ]['last_sent'] ) ) {
 				$options[ $type ]['last_sent'] = '';
-			}
-
-			// Reschedule.
-			wp_clear_scheduled_hook( "wphb_{$module}_report" );
-
-			if ( true === (bool) $options['reports']['enabled'] ) {
-				// Reschedule. No need to clear again, as we've just cleared on top.
-				$next_scan_time = WP_Hummingbird_Module_Reports::get_scheduled_time( $module, false );
-				wp_schedule_single_event( $next_scan_time, "wphb_{$module}_report" );
 			}
 		} else {
 			$options[ $type ]['threshold'] = intval( $data['threshold'] );
@@ -211,6 +210,13 @@ class WP_Hummingbird_Pro_AJAX {
 		}
 
 		$reports->update_options( $options );
+
+		// We need to do this at the end, because the settings need to be saved first.
+		if ( 'reports' === $type && true === (bool) $options['reports']['enabled'] ) {
+			// Reschedule. No need to clear again, as we've just cleared on top.
+			$next_scan_time = WP_Hummingbird_Module_Reports::get_scheduled_time( $module, true );
+			wp_schedule_single_event( $next_scan_time, "wphb_{$module}_report" );
+		}
 
 		wp_send_json_success(
 			array(

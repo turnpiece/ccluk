@@ -81,7 +81,7 @@ class WP_Hummingbird_Advanced_Tools_Page extends WP_Hummingbird_Admin_Page {
 
 		$this->add_meta_box(
 			'advanced/db-settings',
-			__( 'Settings', 'wphb' ),
+			__( 'Schedule', 'wphb' ),
 			null,
 			null,
 			null,

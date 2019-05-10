@@ -13,7 +13,6 @@
  * @var string      $full_src           File URL.
  * @var array       $item               File info.
  * @var bool|string $original_size      False if no original size. Or size.
- * @var bool        $is_ssl             True if site is ssl.
  * @var bool        $minified_file      True if site is file is already minified (extension *.min.*).
  * @var bool        $processed          True file has been processed (compressed).
  * @var bool        $compressed         True if processed file is smaller than original file.
@@ -117,12 +116,12 @@
 			</label>
 			<?php
 			$tooltip = __( 'Combine', 'wphb' );
-			if ( in_array( 'combine', $disable_switchers, true ) && ! $disabled || $is_ssl ) {
+			if ( in_array( 'combine', $disable_switchers, true ) && ! $disabled ) {
 				$tooltip      = __( 'This file can’t be combined', 'wphb' );
 				$dont_combine = true;
 			}
 			?>
-			<input type="checkbox" <?php disabled( in_array( 'combine', $disable_switchers, true ) || $is_ssl ); ?>
+			<input type="checkbox" <?php disabled( in_array( 'combine', $disable_switchers, true ) ); ?>
 				   class="toggle-checkbox toggle-combine" name="<?php echo esc_attr( $base_name ); ?>[combine]"
 				   id="wphb-minification-combine-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>" <?php checked( in_array( $item['handle'], $options['combine'][ $type ], true ) ); ?>
 				   aria-label="<?php esc_attr_e( 'Combine', 'wphb' ); ?>">

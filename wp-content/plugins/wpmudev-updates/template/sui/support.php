@@ -30,7 +30,7 @@ $this->render_sui_header( $page_title );
 
 $url_grant       = wp_nonce_url( add_query_arg( 'action', 'remote-grant', $urls->support_url . '#access' ), 'remote-grant', 'hash' );
 $url_revoke      = wp_nonce_url( add_query_arg( 'action', 'remote-revoke', $urls->support_url . '#access' ), 'remote-revoke', 'hash' );
-$url_extend      = wp_nonce_url( add_query_arg( 'action', 'remote-extend', $urls->support_url . '#access' ), 'remote-extend', 'hash' );	 	 	 	 	 		    	
+$url_extend      = wp_nonce_url( add_query_arg( 'action', 'remote-extend', $urls->support_url . '#access' ), 'remote-extend', 'hash' );
 $url_all_tickets = $urls->remote_site . 'hub/support/';
 $url_search      = $urls->remote_site . 'forums/search.php';
 $url_open_ticket = 'https://premium.wpmudev.org/hub/support/#wpmud-chat-pre-survey-modal';

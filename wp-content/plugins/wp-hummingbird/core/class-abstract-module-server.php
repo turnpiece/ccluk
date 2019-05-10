@@ -139,7 +139,6 @@ abstract class WP_Hummingbird_Module_Server extends WP_Hummingbird_Module {
 	public static function get_servers() {
 		return array(
 			'apache'     => 'Apache',
-			'LiteSpeed'  => 'LiteSpeed',
 			'nginx'      => 'NGINX',
 			'iis'        => 'IIS',
 			'cloudflare' => 'Cloudflare',

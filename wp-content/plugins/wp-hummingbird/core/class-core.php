@@ -61,7 +61,7 @@ class WP_Hummingbird_Core {
 			$pc_module = WP_Hummingbird_Settings::get_setting( 'enabled', 'page_cache' );
 
 			// Do not strict compare $pc_module to true, because it can also be 'blog-admins'.
-			if ( ! is_multisite() || ( is_multisite() && ( ( 'super-admin' === $minify && is_super_admin() ) || true === $minify || true == $pc_module ) ) ) {
+			if ( ! is_multisite() || ( is_multisite() && ( ( 'super-admins' === $minify && is_super_admin() ) || true === $minify || true === (bool) $pc_module ) ) ) {
 				add_action( 'admin_bar_menu', array( $this, 'admin_bar_menu' ), 100 );
 
 				add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_global' ) );
@@ -129,7 +129,7 @@ class WP_Hummingbird_Core {
 				'gzip'        => __( 'Gzip', 'wphb' ),
 				'caching'     => __( 'Caching', 'wphb' ),
 				'performance' => __( 'Performance', 'wphb' ),
-				'uptime'      => __( 'Uptime', 'wphb' ),
+				'uptime'      => __( 'Uptime Monitoring', 'wphb' ),
 				'smush'       => __( 'Smush', 'wphb' ),
 				'cloudflare'  => __( 'Cloudflare', 'wphb' ),
 				'gravatar'    => __( 'Gravatar Caching', 'wphb' ),
@@ -194,9 +194,6 @@ class WP_Hummingbird_Core {
 	 * @param WP_Admin_Bar $admin_bar  Admin bar.
 	 */
 	public function admin_bar_menu( $admin_bar ) {
-		/* @var WP_Hummingbird_Module_Minify $minification_module */
-		$minification_module = WP_Hummingbird_Utils::get_module( 'minify' );
-
 		$menu_args = array(
 			'id'    => 'wphb',
 			'title' => 'Hummingbird',
@@ -209,33 +206,44 @@ class WP_Hummingbird_Core {
 			unset( $menu_args['href'] );
 		}
 
-		if ( $minification_module->is_active() ) {
-			if ( ! is_admin() && ! isset( $_GET['avoid-minify'] ) ) {
-				$admin_bar->add_menu( $menu_args );
-				$admin_bar->add_menu(
-					array(
-						'id'     => 'wphb-page-minify',
-						'title'  => __( 'See this page unminified', 'wphb' ),
-						'href'   => add_query_arg( 'avoid-minify', 'true' ),
-						'parent' => 'wphb',
-					)
-				);
-			}
-		} else {
-			if ( ! is_admin() && isset( $_GET['avoid-minify'] ) ) {
-				$admin_bar->add_menu( $menu_args );
-				$admin_bar->add_menu(
-					array(
-						'id'     => 'wphb-page-minify',
-						'title'  => __( 'See this page minified', 'wphb' ),
-						'href'   => remove_query_arg( 'avoid-minify' ),
-						'parent' => 'wphb',
-					)
-				);
+		if ( ! is_admin() ) {
+			/*
+			$admin_bar->add_menu( $menu_args );
+			$admin_bar->add_menu(
+				array(
+					'id'     => 'wphb-performance-report',
+					'title'  => __( 'Performance Report', 'wphb' ),
+					'href'   => '',
+					'parent' => 'wphb',
+				)
+			);
+			*/
+
+			if ( WP_Hummingbird_Utils::get_module( 'minify' )->is_active() ) {
+				if ( ! isset( $_GET['avoid-minify'] ) ) {
+					$admin_bar->add_menu(
+						array(
+							'id'     => 'wphb-page-minify',
+							'title'  => __( 'See this page unminified', 'wphb' ),
+							'parent' => 'wphb',
+							'href'   => add_query_arg( 'avoid-minify', 'true' ),
+						)
+					);
+				}
+			} else {
+				if ( isset( $_GET['avoid-minify'] ) ) {
+					$admin_bar->add_menu(
+						array(
+							'id'     => 'wphb-page-minify',
+							'title'  => __( 'See this page minified', 'wphb' ),
+							'href'   => remove_query_arg( 'avoid-minify' ),
+							'parent' => 'wphb',
+						)
+					);
+				}
 			}
 		}
 
-		/* @var WP_Hummingbird_Module_Page_Cache $pc_module */
 		$pc_module = WP_Hummingbird_Utils::get_module( 'page_cache' );
 		$options   = $pc_module->get_options();
 
@@ -261,12 +269,21 @@ class WP_Hummingbird_Core {
 		wp_enqueue_script(
 			'wphb-global',
 			WPHB_DIR_URL . 'admin/assets/js/wphb-global.min.js',
-			array(),
-			WPHB_VERSION,
-			true
+			array( 'underscore' ),
+			WPHB_VERSION
 		);
-		wp_localize_script( 'wphb-global', 'wphbGlobal',
-			array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) )
+
+		wp_localize_script(
+			'wphb-global',
+			'wphbGlobal',
+			array(
+				'ajaxurl'       => admin_url( 'admin-ajax.php' ),
+				'scanRunning'   => __( 'Running speed test...', 'wphb' ),
+				'scanAnalyzing' => __( 'Analyzing data and preparing report...', 'wphb' ),
+				'scanWaiting'   => __( 'Test is taking a little longer than expected, hang in there…', 'wphb' ),
+				'scanComplete'  => __( 'Test complete! Reloading…', 'wphb' ),
+
+			)
 		);
 	}
 
@@ -274,6 +291,11 @@ class WP_Hummingbird_Core {
 	 * Defer global scripts.
 	 *
 	 * @since 1.9.3
+	 *
+	 * @param string $tag     HTML element tag.
+	 * @param string $handle  Script handle.
+	 *
+	 * @return mixed
 	 */
 	public function add_defer_attribute( $tag, $handle ) {
 		if ( 'wphb-global' !== $handle ) {

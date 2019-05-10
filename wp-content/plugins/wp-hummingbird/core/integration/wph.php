@@ -51,7 +51,7 @@ class WP_Hummingbird_WPH_Integration {
 	public function replace_links( $content ) {
 		global $wph;
 
-		$content = $wph->functions->content_urls_replacement( $content, $wph->functions->get_replacement_list() );
+		$content = $wph->ob_start_callback( $content );
 
 		return $content;
 	}

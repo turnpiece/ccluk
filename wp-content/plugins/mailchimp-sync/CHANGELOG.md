@@ -1,6 +1,14 @@
 Changelog
 ===========
 
+### 1.7.7 - May 10, 2019
+
+**Fixes**
+
+- Fix webhook listener creating a new user.
+
+
+
 ### 1.7.6 - Dec 3, 2018
 
 **Improvements**

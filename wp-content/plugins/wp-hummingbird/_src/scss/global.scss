@@ -1,0 +1,50 @@
+@import "~@wpmudev/shared-ui/scss/functions";
+@import "~@wpmudev/shared-ui/scss/colors";
+@import "~@wpmudev/shared-ui/scss/variables";
+@import "~@wpmudev/shared-ui/scss/mixins";
+@import "~@wpmudev/shared-ui/scss/accessibility";
+@import "~@wpmudev/shared-ui/scss/animations";
+@import "~@wpmudev/shared-ui/scss/typography";
+@import "~@wpmudev/shared-ui/scss/icons";
+@import "~@wpmudev/shared-ui/scss/buttons";
+@import "~@wpmudev/shared-ui/scss/boxes";
+@import "~@wpmudev/shared-ui/scss/forms";
+@import "~@wpmudev/shared-ui/scss/modals";
+@import "~@wpmudev/shared-ui/scss/progress-bars";
+
+.sui-wrap {
+  .sui-dialog {
+    left: 0;
+  }
+
+  .sui-dialog.sui-dialog-sm .sui-dialog-content {
+    max-width: 500px;
+  }
+
+  .sui-box-header.sui-dialog-with-image {
+    padding-top: 140px !important;
+  }
+
+  .sui-box-header {
+    .sui-dialog-close {
+      top: -20px !important;
+    }
+
+    .sui-dialog-image {
+      width: 100% !important;
+      height: auto !important;
+      left: 35px !important;
+    }
+  }
+
+  .sui-box-body {
+    .sui-form-field-error .sui-error-message {
+      text-align: left;
+    }
+  }
+
+  .sui-progress-block {
+    margin-bottom: 0 !important;
+  }
+}
+

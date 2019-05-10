@@ -116,8 +116,8 @@ class WP_Hummingbird_CSS_UriRewriter {
 				: substr( $m[1], 1, strlen( $m[1] ) - 2 );
 		}
 		// analyze URI (non rool-relative).
-		if ( '/' !== $uri[0]                          // root-relative
-			&& false === strpos( $uri, '//' )  // protocol (non-data)
+		if ( '/' !== $uri[0]                          // root-relative.
+			&& false === strpos( $uri, '//' )  // protocol (non-data).
 			&& 0 !== strpos( $uri, 'data:' )   // data protocol.
 		) {
 			// URI is file-relative: rewrite depending on options.
@@ -135,14 +135,12 @@ class WP_Hummingbird_CSS_UriRewriter {
 					$uri           = $root . self::remove_dots( $root_relative );
 				}
 			}
-		} elseif ( '/' === $uri[0]                          // root-relative
-					&& false === strpos( $uri, '//' )  // protocol (non-data)
+		} elseif ( '/' === $uri[0]                            // root-relative.
+					&& false === strpos( $uri, '//' )  // protocol (non-data).
 					&& 0 !== strpos( $uri, 'data:' )   // data protocol.
 					&& null !== self::$_prepend_path
 		) {
 			preg_match( '@^((https?\:)?//([^/]+))/@', self::$_prepend_path, $m );
-			$a = ( false !== strpos( $m[3], '.' ) );
-
 			if ( preg_match( '@^((https?\:)?//([^/]+))/@', self::$_prepend_path, $m ) && ( false !== strpos( $m[3], '.' ) ) ) {
 				$uri = $m[1] . self::remove_dots( $uri );
 			}

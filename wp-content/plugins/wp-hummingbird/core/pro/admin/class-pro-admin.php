@@ -43,15 +43,17 @@ class WP_Hummingbird_Pro_Admin {
 	 * @param WP_Hummingbird_Dashboard_Page $dashboard_page  Dashboard page.
 	 */
 	public function register_dashboard_do_meta_boxes( $dashboard_page ) {
-		/* Reports */
-		$dashboard_page->add_meta_box(
-			'dashboard-reports',
-			__( 'Reports', 'wphb' ),
-			array( $this, 'dashboard_reports_metabox' ),
-			null,
-			null,
-			'box-dashboard-right'
-		);
+		if ( ! is_multisite() || is_network_admin() ) {
+			/* Reports */
+			$dashboard_page->add_meta_box(
+				'dashboard-reports',
+				__( 'Reports', 'wphb' ),
+				array( $this, 'dashboard_reports_metabox' ),
+				null,
+				null,
+				'box-dashboard-right'
+			);
+		}
 	}
 
 	/**
@@ -65,7 +67,7 @@ class WP_Hummingbird_Pro_Admin {
 		/* Advanced tools db settings */
 		$advanced_tools->add_meta_box(
 			'advanced/db-settings',
-			__( 'Settings', 'wphb' ),
+			__( 'Schedule', 'wphb' ),
 			array( $this, 'db_settings_metabox' ),
 			null,
 			array( $this, 'db_settings_metabox_footer' ),
@@ -112,7 +114,7 @@ class WP_Hummingbird_Pro_Admin {
 
 		$uptime->add_meta_box(
 			'uptime/reporting',
-			__( 'Reporting', 'wphb' ),
+			__( 'Reports', 'wphb' ),
 			array( $this, 'common_reports_metabox' ),
 			null,
 			array( $this, 'common_reports_metabox_footer' ),
@@ -167,7 +169,6 @@ class WP_Hummingbird_Pro_Admin {
 	 * Reports meta box
 	 */
 	public function dashboard_reports_metabox() {
-		/* @var WP_Hummingbird_Module_Performance $performance_module */
 		$options = WP_Hummingbird_Utils::get_module( 'performance' )->get_options();
 
 		$frequency = '';
@@ -192,7 +193,6 @@ class WP_Hummingbird_Pro_Admin {
 			}
 		}
 
-		/* @var WP_Hummingbird_Module_Advanced $adv_module */
 		$adv_module = WP_Hummingbird_Utils::get_module( 'advanced' );
 		$options    = $adv_module->get_options();
 
@@ -247,7 +247,6 @@ class WP_Hummingbird_Pro_Admin {
 	 * Advanced tools db settings meta box.
 	 */
 	public function db_settings_metabox() {
-		/* @var WP_Hummingbird_Module_Advanced $adv_module */
 		$adv_module = WP_Hummingbird_Utils::get_module( 'advanced' );
 		$options    = $adv_module->get_options();
 
@@ -310,12 +309,13 @@ class WP_Hummingbird_Pro_Admin {
 			'Sunday',
 		);
 
+		$data           = array();
 		$notification   = false;
 		$notice_class   = 'default';
 		$notice_message = __( 'Reporting is currently inactive. Activate it and choose your schedule below.', 'wphb' );
 		$frequency      = 7;
 		$send_day       = $week_days[ array_rand( $week_days, 1 ) ];
-		$send_time      = mt_rand( 0, 23 ) . ':00';
+		$send_time      = wp_rand( 0, 23 ) . ':00';
 		$recipients     = array();
 
 		if ( WP_Hummingbird_Utils::is_member() ) {
@@ -341,6 +341,16 @@ class WP_Hummingbird_Pro_Admin {
 			if ( isset( $options['recipients'] ) ) {
 				$recipients = $options['recipients'];
 			}
+
+			// This is only available for performance reports.
+			if ( 'performance' === $module ) {
+				$data = array(
+					'type'     => isset( $options['type'] ) ? $options['type'] : 'desktop',
+					'metrics'  => isset( $options['metrics'] ) ? $options['metrics'] : true,
+					'audits'   => isset( $options['audits'] ) ? $options['audits'] : true,
+					'historic' => isset( $options['historic'] ) ? $options['historic'] : true,
+				);
+			}
 		}
 
 		if ( $notification ) {
@@ -358,6 +368,7 @@ class WP_Hummingbird_Pro_Admin {
 		$this->pro_view(
 			'common/reports-meta-box',
 			array(
+				'data'           => $data,
 				'enabled'        => $notification,
 				'frequency'      => $frequency,
 				'module'         => $module,
@@ -399,7 +410,7 @@ class WP_Hummingbird_Pro_Admin {
 		if ( $notifications_settings['enabled'] ) {
 			$recipients_count = count( $notifications_settings['recipients'] );
 			if ( 0 !== $recipients_count ) {
-				$notice_class   = 'success';
+				$notice_class = 'success';
 				if ( isset( $notifications_settings['threshold'] ) && 0 < $notifications_settings['threshold'] ) {
 					$notice_message = sprintf(
 						/* translators: %d: Number of recipients */
@@ -432,9 +443,9 @@ class WP_Hummingbird_Pro_Admin {
 	 * @since 1.9.3
 	 * @since 1.9.4  Moved here from Uptime module. Added $frequency, $day and $module params.
 	 *
-	 * @param $day
-	 * @param int    $frequency         Report frequency.
 	 * @param string $module            Module name.
+	 * @param int    $frequency         Report frequency.
+	 * @param string $day               Report day.
 	 * @param string $recipients_count  Recipient count.
 	 *
 	 * @return string
@@ -443,8 +454,8 @@ class WP_Hummingbird_Pro_Admin {
 		switch ( $frequency ) {
 			case 1:
 				$notice_message = sprintf(
-				/* translators: %s: Module name, %d: Number of recipients */
-					__( '%s reports are sending daily to %d recipients.', 'wphb' ),
+					/* translators: %1$s: Module name, %2$d: Number of recipients */
+					__( '%1$s reports are sending daily to %2$d recipients.', 'wphb' ),
 					esc_html( $module ),
 					esc_html( $recipients_count )
 				);
@@ -455,7 +466,7 @@ class WP_Hummingbird_Pro_Admin {
 				break;
 			case 7:
 				$notice_message = sprintf(
-				/* translators: %1$s: Module name, %2$s: Weekday %3$d: Number of recipients */
+					/* translators: %1$s: Module name, %2$s: Weekday %3$d: Number of recipients */
 					__( '%1$s reports are sending weekly on %2$s to %3$d recipients.', 'wphb' ),
 					esc_html( $module ),
 					esc_html( $day ),
@@ -465,7 +476,7 @@ class WP_Hummingbird_Pro_Admin {
 				break;
 			default:
 				$notice_message = sprintf(
-				/* translators: %1$s: Module name, %2$s: Weekday %3$d: Number of recipients */
+					/* translators: %1$s: Module name, %2$s: Weekday %3$d: Number of recipients */
 					__( '%1$s reports are sending monthly on %2$s to %3$d recipients.', 'wphb' ),
 					esc_html( $module ),
 					esc_html( $day ),
@@ -477,7 +488,7 @@ class WP_Hummingbird_Pro_Admin {
 
 		if ( 1 === $recipients_count ) {
 			$notice_message = sprintf(
-			/* translators: %1$s: Module name, %2$s: Frequency of reports */
+				/* translators: %1$s: Module name, %2$s: Frequency of reports */
 				__( '%1$s reports are sending %2$s to 1 recipient.', 'wphb' ),
 				esc_html( $module ),
 				esc_html( $notice_frequency )

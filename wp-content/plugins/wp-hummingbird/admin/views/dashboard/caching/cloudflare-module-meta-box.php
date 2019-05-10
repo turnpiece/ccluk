@@ -38,7 +38,7 @@
 
 <ul class="sui-list sui-no-margin-bottom">
 	<li class="sui-list-header">
-		<span><?php esc_html_e( 'File Type', 'wphb' ); ?></span>
+		<span><?php esc_html_e( 'File type', 'wphb' ); ?></span>
 		<span><?php esc_html_e( 'Current expiry', 'wphb' ); ?></span>
 	</li>
 
@@ -64,7 +64,7 @@
 					<?php
 					switch ( $type ) {
 						case 'javascript':
-                        default:
+						default:
 							echo 'js';
 							break;
 						case 'images':

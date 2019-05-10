@@ -43,6 +43,36 @@ class LiteSpeed_Cache_ESI
 	 */
 	private function __construct()
 	{
+		/**
+		 * Bypass ESI related funcs if disabled ESI to fix potential DIVI compatibility issue
+		 * @since  2.9.7.2
+		 */
+		if ( LiteSpeed_Cache_Router::is_ajax() || ! LiteSpeed_Cache_Router::esi_enabled() ) {
+			return ;
+		}
+
+		// Init ESI in `after_setup_theme` hook after detected if LITESPEED_DISABLE_ALL is ON or not
+		add_action( 'litespeed_initing', array( $this, 'esi_init' ) ) ;
+
+		/**
+		 * Overwrite wp_create_nonce func
+		 * @since  2.9.5
+		 */
+		if ( ! is_admin() && ! function_exists( 'wp_create_nonce' ) ) {
+			$this->_transform_nonce() ;
+		}
+	}
+
+	/**
+	 * Init ESI related hooks
+	 *
+	 * Load delayed by hook to give the ability to bypass by LITESPEED_DISABLE_ALL const
+	 *
+	 * @since 2.9.7.2
+	 * @access public
+	 */
+	public function esi_init()
+	{
 		add_action( 'template_include', 'LiteSpeed_Cache_ESI::esi_template', 100 ) ;
 
 		add_action( 'load-widgets.php', 'LiteSpeed_Cache_Purge::purge_widget' ) ;
@@ -76,13 +106,6 @@ class LiteSpeed_Cache_ESI
 			add_shortcode( 'esi', array( $this, 'shortcode' ) ) ;
 		}
 
-		/**
-		 * Overwrite wp_create_nonce func
-		 * @since  2.9.5
-		 */
-		if ( ! is_admin() && ! function_exists( 'wp_create_nonce' ) ) {
-			$this->_transform_nonce() ;
-		}
 	}
 
 	/**
@@ -97,7 +120,7 @@ class LiteSpeed_Cache_ESI
 		 * If the nonce is in none_actions filter, convert it to ESI
 		 */
 		function wp_create_nonce( $action = -1 ) {
-			if ( LiteSpeed_Cache_ESI::get_instance()->is_nonce_action( $action ) ) {
+			if ( ! defined( 'LITESPEED_DISABLE_ALL' ) && LiteSpeed_Cache_ESI::get_instance()->is_nonce_action( $action ) ) {
 				$params = array(
 					'action'	=> $action,
 				) ;
@@ -282,7 +305,7 @@ class LiteSpeed_Cache_ESI
 			return ;
 		}
 
-		add_filter('widget_display_callback', array($this, 'sub_widget_block'), 0, 3) ;
+	add_filter('widget_display_callback', array($this, 'sub_widget_block'), 0, 3) ;
 
 		// Add admin_bar esi
 		if ( LiteSpeed_Cache_Router::is_logged_in() ) {
@@ -586,8 +609,13 @@ class LiteSpeed_Cache_ESI
 	 * @param array $args Parameter used to build the widget.
 	 * @return mixed Return false if display through esi, instance otherwise.
 	 */
-	public function sub_widget_block( array $instance, WP_Widget $widget, array $args )
+	public function sub_widget_block( $instance, WP_Widget $widget, array $args )
 	{
+		// #210407
+		if ( ! is_array( $instance ) ) {
+			return $instance ;
+		}
+
 		$name = get_class( $widget ) ;
 		if ( ! isset( $instance[ LiteSpeed_Cache_Config::OPTION_NAME ] ) ) {
 			return $instance ;
@@ -675,6 +703,20 @@ class LiteSpeed_Cache_ESI
 	 */
 	public function load_admin_bar_block( $params )
 	{
+
+		if ( ! empty( $params[ 'ref' ] ) ) {
+			$ref_qs = parse_url( $params[ 'ref' ], PHP_URL_QUERY ) ;
+			if ( ! empty( $ref_qs ) ) {
+				parse_str( $ref_qs, $ref_qs_arr ) ;
+
+				if ( ! empty( $ref_qs_arr ) ) {
+					foreach ( $ref_qs_arr as $k => $v ) {
+						$_GET[ $k ] = $v ;
+					}
+				}
+			}
+		}
+
 		wp_admin_bar_render() ;
 
 		if ( ! LiteSpeed_Cache::config( LiteSpeed_Cache_Config::OPID_ESI_CACHE_ADMBAR ) ) {

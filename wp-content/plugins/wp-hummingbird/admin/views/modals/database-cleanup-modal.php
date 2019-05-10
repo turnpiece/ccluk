@@ -20,8 +20,9 @@
 					<a class="sui-button sui-button-ghost" data-a11y-dialog-hide>
 						<?php esc_html_e( 'Cancel', 'wphb' ); ?>
 					</a>
-					<a class="sui-button wphb-delete-db-row"
+					<a class="sui-button sui-button-ghost sui-button-red wphb-delete-db-row sui-button-icon-left"
 					   onclick="WPHB_Admin.advanced.confirmDelete( jQuery(this).attr('data-type') )">
+						<i class="sui-icon-trash" aria-hidden="true"></i>
 						<?php esc_html_e( 'Delete entries', 'wphb' ); ?>
 					</a>
 				</div>

@@ -58,7 +58,7 @@
     .sui-button-green {
         border-radius: 20px;
 	}
-	
+
 	&:not(.sui-unbranded):not(.sui-summary-sm) {
 
 		@if variable-exists(summary-image) {
@@ -70,56 +70,50 @@
 	}
 }
 
-/* Dashboard tables */
+/* Dashboard Performance Test */
+.wpmud .sui-color-accessible .box-dashboard-performance-module .sui-table td:first-child  {
+    padding-left: 15px !important;
+}
+
 .wpmud .box-dashboard-performance-module {
-    .sui-accordion {
-        margin: 0;
-        border: none;
-        &:after {
-            margin-bottom: 0;
+    .wphb-performance-report-item {
+        cursor: pointer;
+    }
+
+    .sui-table {
+        border: 0;
+
+        td:first-child { padding-left: 0 !important; }
+
+        td:last-child {
+            padding-right: 0 !important;
+            text-align: right;
         }
 
-        &.sui-table {
-            th {
-                @media (max-width: 783px) {
-                    padding: 0 15px 0 20px;
-                }
-            }
+        td:nth-child(2) {
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        th {
-            color: #333333;
-            font-size: 13px;
-            font-weight: bold;
-            line-height: 30px;
-            padding-top: 0;
-            padding-bottom: 0;
-        }
-
-        .sui-accordion-item {
-            &:hover {
-                cursor: default;
-                background-color: transparent;
-            }
-
-            .sui-button {
-                @media (max-width: 783px) {
-                    margin-right: 20px;
-                }
-            }
-        }
-
-        td.sui-accordion-item-title {
-            font-size: 13px;
-            color: #333333;
-            font-weight: 500;
-            line-height: 16px;
-
-            i {
-                font-size: 16px;
-            }
+        i[class^=sui-icon] {
+            margin-left: 7px;
+            margin-right: 0;
+            vertical-align: sub;
         }
     }
+
+    .sui-box-body {
+        border-bottom: 1px solid #E6E6E6;
+        .status-text { float: right; }
+        .sui-table { margin-top: 10px; }
+    }
+
+    .sui-box-footer { border-top: 0 !important; }
+
+    .wphb-metrics-widget,
+    .wphb-historic-widget { padding-bottom: 0 !important; }
+    .wphb-audits-widget { padding-bottom: 20px !important; }
 }
 
 .wpmud .wphb-border-frame .wphb-caching-summary-item-type,
@@ -139,25 +133,33 @@
 
 /* Dashboard Asset Optimization */
 .wpmud .box-dashboard-minification-network-module {
-    .wphb-dash-ao-upsell {
-        background-color: rgba(242,242,242,0.5);
-        margin: 0 -30px;
-        padding: 20px 30px;
-
-        .sui-button-green {
-            border-radius: 20px;
-            float: right;
-        }
+    .sui-button-purple {
+        border-radius: 20px !important;
+        text-transform: none !important;
     }
 
-    .wphb-logging-buttons {
-        margin-left: 48px;
-        margin-top: 10px;
+    .sui-disabled {
+        background-color: rgba(242,242,242,0.5);
+        margin-left: -30px !important;
+        margin-right: -30px !important;
+        padding: 20px 30px !important;
+        border-bottom: 0 !important;
+
+        & + li {
+            border-top: 1px solid #E6E6E6;
+        }
     }
 }
 
 .wpmud .box-dashboard-minification-module .wphb-pills {
     font-weight: bold;
+}
+
+/* Gzip compression */
+.wpmud .box-dashboard-gzip-module .sui-list-label,
+.wpmud .box-dashboard-browser-caching-module .sui-list-label {
+    display: flex;
+    align-items: center;
 }
 
 /* Reporting meta box */
@@ -254,10 +256,6 @@
 @include bp(phone) {
     .wpmud .box-dashboard-minification-module .wphb-pills {
         display: block;
-    }
-
-    .wpmud .box-dashboard-performance-module .sui-accordion .sui-button-ghost {
-        padding: 5px 6px 7px !important;
     }
 
     .wpmud .box-dashboard-smush .buttons {

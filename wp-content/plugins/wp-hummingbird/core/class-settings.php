@@ -22,7 +22,18 @@ class WP_Hummingbird_Settings {
 	 *
 	 * @var array
 	 */
-	private static $available_modules = array( 'minify', 'page_cache', 'performance', 'uptime', 'gravatar', 'caching', 'cloudflare', 'advanced', 'rss' );
+	private static $available_modules = array(
+		'minify',
+		'page_cache',
+		'performance',
+		'uptime',
+		'gravatar',
+		'caching',
+		'cloudflare',
+		'advanced',
+		'rss',
+		'settings',
+	);
 
 	/**
 	 * List of network modules that have settings for each sub-site.
@@ -136,9 +147,19 @@ class WP_Hummingbird_Settings {
 				'reports'       => array(
 					'enabled' => false,
 				),
-				'subsite_tests' => false,
+				'subsite_tests' => true,
 				'dismissed'     => false,
-				'last_score'    => 0,
+				'widget'        => array(
+					'desktop'       => true, // Desktop or mobile report.
+					'show_metrics'  => true,
+					'show_audits'   => true,
+					'show_historic' => true,
+				),
+				'hub'           => array(
+					'show_metrics'  => true,
+					'show_audits'   => true,
+					'show_historic' => true,
+				),
 			),
 			'advanced'    => array(
 				'query_string' => false,
@@ -152,6 +173,8 @@ class WP_Hummingbird_Settings {
 			),
 			'settings'    => array(
 				'accessible_colors' => false,
+				'remove_settings'   => false,
+				'remove_data'       => false,
 			),
 		);
 
@@ -179,7 +202,7 @@ class WP_Hummingbird_Settings {
 		$options = array(
 			'minify'      => array( 'minify_blog', 'view', 'block', 'minify', 'combine', 'position', 'defer', 'inline' ),
 			'page_cache'  => array( 'cache_blog' ),
-			'performance' => array( 'dismissed', 'last_score' ),
+			'performance' => array( 'dismissed', 'widget' ),
 			'advanced'    => array( 'query_string', 'emoji', 'prefetch' ),
 		);
 
@@ -342,8 +365,9 @@ class WP_Hummingbird_Settings {
 	 */
 	private static function is_exception( $module, $options, $option_name ) {
 		$exceptions = array(
-			'minify'     => 'super-admins',
-			'page_cache' => 'blog-admins',
+			'minify'      => 'super-admins',
+			'page_cache'  => 'blog-admins',
+			'performance' => 'super-admins',
 		);
 
 		if ( isset( $exceptions[ $module ] ) && $exceptions[ $module ] === $options[ $option_name ] ) {

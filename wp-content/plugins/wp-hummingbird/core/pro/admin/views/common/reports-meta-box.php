@@ -6,6 +6,7 @@
  *
  * @package Hummingbird
  *
+ * @var array  $data            Performance report data.
  * @var bool   $enabled         Status of performance reports.
  * @var int    $frequency       Report frequency.
  * @var string $module          Report module.
@@ -147,3 +148,62 @@ if ( 'performance' === $module ) {
 			</div><!-- end sui-border-frame -->
 		</div>
 	</div>
+<?php if ( 'performance' === $module ) : ?>
+	<div class="sui-box-settings-row">
+		<div class="sui-box-settings-col-1">
+			<span class="sui-settings-label">
+				<?php esc_html_e( 'Customize', 'wphb' ); ?>
+			</span>
+				<span class="sui-description">
+				<?php esc_html_e( 'Choose your email preferences for the performance test results.', 'wphb' ); ?>
+			</span>
+		</div>
+
+		<div class="sui-box-settings-col-2">
+			<strong><?php esc_html_e( 'Device', 'wphb' ); ?></strong>
+			<span class="sui-description">
+				<?php esc_html_e( 'Choose which device you want to show the performance test results for in your scheduled performance test reports.', 'wphb' ); ?>
+			</span>
+
+			<div class="sui-side-tabs">
+				<div class="sui-tabs-menu">
+					<label for="report_type-desktop" class="sui-tab-item <?php echo 'desktop' === $data['type'] ? 'active' : ''; ?>">
+						<input type="radio" name="report-type" value="desktop" id="report_type-desktop" <?php checked( $data['type'], 'desktop' ); ?>>
+						<?php esc_html_e( 'Desktop', 'wphb' ); ?>
+					</label>
+
+					<label for="report_type-mobile" class="sui-tab-item <?php echo 'mobile' === $data['type'] ? 'active' : ''; ?>">
+						<input type="radio" name="report-type" value="mobile" id="report_type-mobile" <?php checked( $data['type'], 'mobile' ); ?>>
+						<?php esc_html_e( 'Mobile', 'wphb' ); ?>
+					</label>
+
+					<label for="report_type-both" class="sui-tab-item <?php echo 'both' === $data['type'] ? 'active' : ''; ?>">
+						<input type="radio" name="report-type" value="both" id="report_type-both" <?php checked( $data['type'], 'both' ); ?>>
+						<?php esc_html_e( 'Both', 'wphb' ); ?>
+					</label>
+				</div>
+			</div>
+
+			<strong><?php esc_html_e( 'Results', 'wphb' ); ?></strong>
+			<span class="sui-description">
+				<?php esc_html_e( 'Choose what results do you to see in your scheduled performance test reports.', 'wphb' ); ?>
+			</span>
+
+			<label for="metrics" class="sui-checkbox sui-checkbox-stacked sui-checkbox-sm">
+				<input type="checkbox" name="metrics" id="metrics" <?php checked( $data['metrics'] ); ?> />
+				<span aria-hidden="true"></span>
+				<span><?php esc_html_e( 'Score Metrics', 'wphb' ); ?></span>
+			</label>
+			<label for="audits" class="sui-checkbox sui-checkbox-stacked sui-checkbox-sm">
+				<input type="checkbox" name="audits" id="audits" <?php checked( $data['audits'] ); ?> />
+				<span aria-hidden="true"></span>
+				<span><?php esc_html_e( 'Audits', 'wphb' ); ?></span>
+			</label>
+			<label for="field-data" class="sui-checkbox sui-checkbox-stacked sui-checkbox-sm">
+				<input type="checkbox" name="field-data" id="field-data" <?php checked( $data['historic'] ); ?> />
+				<span aria-hidden="true"></span>
+				<span><?php esc_html_e( 'Historic Field Data', 'wphb' ); ?></span>
+			</label>
+		</div>
+	</div>
+<?php endif; ?>

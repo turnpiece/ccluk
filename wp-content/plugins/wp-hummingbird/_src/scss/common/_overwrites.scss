@@ -23,6 +23,10 @@ button.notice-dismiss {
     color: #333333;
 }
 
+.wpmud .sui-box-settings-row textarea {
+    height: 180px !important;
+}
+
 /* Install dashboard message */
 .wpmud #wpmu-install-dashboard {
     margin-left: 0;
@@ -54,7 +58,7 @@ button.notice-dismiss {
         display: none;
     }
 
-    .visible { /* Re-set visibility to visible */
+    &.visible { /* Re-set visibility to visible */
         visibility: visible;
     }
 }

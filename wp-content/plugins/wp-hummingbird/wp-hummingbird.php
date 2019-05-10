@@ -1,7 +1,7 @@
 <?php
 /**
 Plugin Name: Hummingbird Pro
-Version:     1.9.4.1
+Version:     2.0.0.1
 Plugin URI:  https://premium.wpmudev.org/project/wp-hummingbird/
 Description: Hummingbird zips through your site finding new ways to make it load faster, from file compression and minification to browser caching – because when it comes to pagespeed, every millisecond counts.
 Author:      WPMU DEV
@@ -34,7 +34,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 */
 
 if ( ! defined( 'WPHB_VERSION' ) ) {
-	define( 'WPHB_VERSION', '1.9.4.1' );
+	define( 'WPHB_VERSION', '2.0.0.1' );
+}
+
+if ( ! defined( 'WPHB_SUI_VERSION' ) ) {
+	define( 'WPHB_SUI_VERSION', 'sui-2-3-22' );
 }
 
 if ( ! defined( 'WPHB_DIR_PATH' ) ) {
@@ -225,11 +229,35 @@ if ( ! class_exists( 'WP_Hummingbird' ) ) {
 
 			self::flush_cache();
 
-			WP_Hummingbird_Settings::update_setting( 'last_score', 0, 'performance' );
-
 			if ( 'all' === $_GET['wphb-clear'] ) {
 				WP_Hummingbird_Settings::reset_to_defaults();
 				delete_option( 'wphb-quick-setup' );
+
+				// Clean all cron.
+				wp_clear_scheduled_hook( 'wphb_performance_report' );
+				wp_clear_scheduled_hook( 'wphb_uptime_report' );
+				wp_clear_scheduled_hook( 'wphb_minify_clear_files' );
+
+				if ( is_multisite() ) {
+					global $wpdb;
+					$offset = 0;
+					$limit  = 100;
+					while ( $blogs = $wpdb->get_results( "SELECT blog_id FROM {$wpdb->blogs} LIMIT {$offset}, {$limit}", ARRAY_A ) ) { // Db call ok; no-cache ok.
+						if ( $blogs ) {
+							foreach ( $blogs as $blog ) {
+								switch_to_blog( $blog['blog_id'] );
+
+								WP_Hummingbird_Settings::reset_to_defaults();
+								delete_option( 'wphb-quick-setup' );
+
+								// Clean all cron.
+								wp_clear_scheduled_hook( 'wphb_minify_clear_files' );
+							}
+							restore_current_blog();
+						}
+						$offset += $limit;
+					}
+				}
 			}
 
 			wp_safe_redirect( remove_query_arg( 'wphb-clear' ) );
@@ -238,8 +266,11 @@ if ( ! class_exists( 'WP_Hummingbird' ) ) {
 
 		/**
 		 * Flush all WP Hummingbird Cache
+		 *
+		 * @param bool $remove_data      Remove data.
+		 * @param bool $remove_settings  Remove settings.
 		 */
-		public static function flush_cache() {
+		public static function flush_cache( $remove_data = true, $remove_settings = true ) {
 			$hummingbird = self::get_instance();
 
 			/**
@@ -248,30 +279,46 @@ if ( ! class_exists( 'WP_Hummingbird' ) ) {
 			 * @var WP_Hummingbird_Module $module
 			 */
 			foreach ( $hummingbird->core->modules as $module ) {
+				if ( ! $remove_data ) {
+					continue;
+				}
+
 				if ( ! $module->is_active() ) {
 					continue;
 				}
-				if ( 'Minify' !== $module->get_name() ) {
-					$module->clear_cache();
-				} else {
+
+				if ( 'Minify' === $module->get_name() ) {
 					/**
 					 * Minify module.
 					 *
 					 * @var WP_Hummingbird_Module_Minify $module
 					 */
 					$module->clear_cache( false );
+					continue;
+				}
+
+				if ( 'page_cache' === $module->get_slug() ) {
+					// Remove page cache files.
+					$module->toggle_service( false );
+				}
+
+				$module->clear_cache();
+			}
+
+			if ( $remove_settings ) {
+				if ( WP_Hummingbird_Module_Server::is_htaccess_written( 'gzip' ) ) {
+					WP_Hummingbird_Module_Server::unsave_htaccess( 'gzip' );
+				}
+
+				if ( WP_Hummingbird_Module_Server::is_htaccess_written( 'caching' ) ) {
+					WP_Hummingbird_Module_Server::unsave_htaccess( 'caching' );
 				}
 			}
 
-			if ( WP_Hummingbird_Module_Server::is_htaccess_written( 'gzip' ) ) {
-				WP_Hummingbird_Module_Server::unsave_htaccess( 'gzip' );
+			if ( $remove_data ) {
+				WP_Hummingbird_Filesystem::instance()->clean_up();
+				WP_Hummingbird_Logger::cleanup();
 			}
-
-			if ( WP_Hummingbird_Module_Server::is_htaccess_written( 'caching' ) ) {
-				WP_Hummingbird_Module_Server::unsave_htaccess( 'caching' );
-			}
-
-			WP_Hummingbird_Utils::get_module( 'cloudflare' )->disconnect();
 		}
 
 		/**

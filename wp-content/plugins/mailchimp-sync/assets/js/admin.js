@@ -2,24 +2,25 @@
 'use strict';
 
 var m = window.m = require('mithril');
+
 var Wizard = require('./admin/wizard.js');
+
 var FieldMapper = require('./admin/field-mapper.js');
-var $ = window.jQuery;
 
-// init wizard
+var $ = window.jQuery; // init wizard
+
 var wizardContainer = document.getElementById('wizard');
+
 if (wizardContainer) {
-	m.mount(wizardContainer, Wizard);
-}
+  m.mount(wizardContainer, Wizard);
+} // init fieldmapper
 
-// init fieldmapper
-new FieldMapper($('.mc4wp-sync-field-map'));
 
-// update webhook url as secret key changes
+new FieldMapper($('.mc4wp-sync-field-map')); // update webhook url as secret key changes
+
 var secretKeyInput = document.getElementById('webhook-secret-key-input');
 var webhookUrlInput = document.getElementById('webhook-url-input');
 var button = document.getElementById('webhook-generate-button');
-
 /**
  * Generate a random alphanumeric string of the specified length
  *
@@ -27,34 +28,42 @@ var button = document.getElementById('webhook-generate-button');
  *
  * @returns {string}
  */
+
 function randomString(length) {
-	var chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_';
-	var result = '';
-	for (var i = length; i > 0; --i) {
-		result += chars[Math.floor(Math.random() * chars.length)];
-	}return result;
-}
+  var chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_';
+  var result = '';
 
-// update the webhook url field with the value from the secret key field
+  for (var i = length; i > 0; --i) {
+    result += chars[Math.floor(Math.random() * chars.length)];
+  }
+
+  return result;
+} // update the webhook url field with the value from the secret key field
+
+
 function updateWebhookUrl() {
-	var sanitized = secretKeyInput.value.replace(/\W+/g, "");
-	if (sanitized != secretKeyInput.value) {
-		secretKeyInput.value = sanitized;
-	}
-	var format = webhookUrlInput.getAttribute('data-url-format');
-	webhookUrlInput.value = format.replace('%s', secretKeyInput.value);
-}
+  var sanitized = secretKeyInput.value.replace(/\W+/g, "");
 
-// set the secret key field to a random string of 20 chars
+  if (sanitized != secretKeyInput.value) {
+    secretKeyInput.value = sanitized;
+  }
+
+  var format = webhookUrlInput.getAttribute('data-url-format');
+  webhookUrlInput.value = format.replace('%s', secretKeyInput.value);
+} // set the secret key field to a random string of 20 chars
+
+
 function setRandomSecret(e) {
-	if (secretKeyInput.value) {
-		var sure = confirm("Are you sure you want to set a new webhook secret? You will have to update your webhook URL in MailChimp.");
-		if (!sure) {
-			return;
-		}
-	}
-	secretKeyInput.value = randomString(20);
-	updateWebhookUrl();
+  if (secretKeyInput.value) {
+    var sure = confirm("Are you sure you want to set a new webhook secret? You will have to update your webhook URL in MailChimp.");
+
+    if (!sure) {
+      return;
+    }
+  }
+
+  secretKeyInput.value = randomString(20);
+  updateWebhookUrl();
 }
 
 $(secretKeyInput).keyup(updateWebhookUrl);
@@ -64,55 +73,49 @@ $(button).click(setRandomSecret);
 'use strict';
 
 function FieldMapper($context) {
+  var $ = window.jQuery;
 
-	var $ = window.jQuery;
+  function addRow() {
+    var $row = $context.find(".field-map-row").last();
+    var $newRow = $row.clone();
+    var $userField = $newRow.find('.user-field');
+    var $mailChimpField = $newRow.find('.mailchimp-field');
+    $userField.val('').suggest(ajaxurl + "?action=mcs_autocomplete_user_field").attr('name', $userField.attr('name').replace(/\[(\d+)\]/, function (str, p1) {
+      return '[' + (parseInt(p1, 10) + 1) + ']';
+    })); // empty select boxes and set new `name` attribute
 
-	function addRow() {
-		var $row = $context.find(".field-map-row").last();
-		var $newRow = $row.clone();
-		var $userField = $newRow.find('.user-field');
-		var $mailChimpField = $newRow.find('.mailchimp-field');
+    $mailChimpField.val('').attr('name', $mailChimpField.attr('name').replace(/\[(\d+)\]/, function (str, p1) {
+      return '[' + (parseInt(p1, 10) + 1) + ']';
+    }));
+    $newRow.insertAfter($row);
+    setAvailableFields();
+    return false;
+  }
 
-		$userField.val('').suggest(ajaxurl + "?action=mcs_autocomplete_user_field").attr('name', $userField.attr('name').replace(/\[(\d+)\]/, function (str, p1) {
-			return '[' + (parseInt(p1, 10) + 1) + ']';
-		}));
+  function removeRow() {
+    $(this).parents('.field-map-row').remove();
+    setAvailableFields();
+  }
 
-		// empty select boxes and set new `name` attribute
-		$mailChimpField.val('').attr('name', $mailChimpField.attr('name').replace(/\[(\d+)\]/, function (str, p1) {
-			return '[' + (parseInt(p1, 10) + 1) + ']';
-		}));
+  function setAvailableFields() {
+    var selectBoxes = $context.find('.mailchimp-field');
+    selectBoxes.each(function () {
+      var otherSelectBoxes = selectBoxes.not(this);
+      var chosenFields = $.map(otherSelectBoxes, function (a, i) {
+        return $(a).val();
+      });
+      $(this).find('option').each(function () {
+        var value = $(this).val();
+        var alreadyChosen = $.inArray(value, chosenFields) > -1;
+        $(this).prop('disabled', value === '' || alreadyChosen);
+      });
+    });
+  }
 
-		$newRow.insertAfter($row);
-
-		setAvailableFields();
-		return false;
-	}
-
-	function removeRow() {
-		$(this).parents('.field-map-row').remove();
-		setAvailableFields();
-	}
-
-	function setAvailableFields() {
-		var selectBoxes = $context.find('.mailchimp-field');
-		selectBoxes.each(function () {
-			var otherSelectBoxes = selectBoxes.not(this);
-			var chosenFields = $.map(otherSelectBoxes, function (a, i) {
-				return $(a).val();
-			});
-
-			$(this).find('option').each(function () {
-				var value = $(this).val();
-				var alreadyChosen = $.inArray(value, chosenFields) > -1;
-				$(this).prop('disabled', value === '' || alreadyChosen);
-			});
-		});
-	}
-
-	$context.find('.user-field').suggest(ajaxurl + "?action=mcs_autocomplete_user_field");
-	$context.find('.mailchimp-field').change(setAvailableFields).trigger('change');
-	$context.find('.add-row').click(addRow);
-	$context.on('click', '.remove-row', removeRow);
+  $context.find('.user-field').suggest(ajaxurl + "?action=mcs_autocomplete_user_field");
+  $context.find('.mailchimp-field').change(setAvailableFields).trigger('change');
+  $context.find('.add-row').click(addRow);
+  $context.on('click', '.remove-row', removeRow);
 }
 
 module.exports = FieldMapper;
@@ -123,46 +126,44 @@ module.exports = FieldMapper;
 var items = [];
 
 function error(msg) {
-	log("Error: " + msg);
+  log("Error: " + msg);
 }
 
 function success(msg) {
-	log("Success: " + msg);
+  log("Success: " + msg);
 }
 
 function log(msg) {
-	var line = {
-		time: new Date(),
-		text: msg
-	};
-
-	items.push(line);
-	m.redraw();
+  var line = {
+    time: new Date(),
+    text: msg
+  };
+  items.push(line);
+  m.redraw();
 }
 
 function scroll(element, initialized, context) {
-	element.scrollTop = element.scrollHeight;
+  element.scrollTop = element.scrollHeight;
 }
 
 function render() {
-	return m("div.log", { config: scroll }, [items.map(function (item) {
-
-		var timeString = ("0" + item.time.getHours()).slice(-2) + ":" + ("0" + item.time.getMinutes()).slice(-2) + ":" + ("0" + item.time.getSeconds()).slice(-2);
-
-		return m("div", [m('span.time', timeString), m.trust(item.text)]);
-	})]);
+  return m("div.log", {
+    config: scroll
+  }, [items.map(function (item) {
+    var timeString = ("0" + item.time.getHours()).slice(-2) + ":" + ("0" + item.time.getMinutes()).slice(-2) + ":" + ("0" + item.time.getSeconds()).slice(-2);
+    return m("div", [m('span.time', timeString), m.trust(item.text)]);
+  })]);
 }
 
 module.exports = {
-	'error': error,
-	'success': success,
-	'log': log,
-	'render': render
+  'error': error,
+  'success': success,
+  'log': log,
+  'render': render
 };
 
 },{}],4:[function(require,module,exports){
 'use strict';
-
 /**
  * User Model
  *
@@ -182,7 +183,9 @@ module.exports = User;
 'use strict';
 
 var logger = require('./logger.js');
+
 var User = require('./user.js');
+
 var started = false,
     running = false,
     done = false,
@@ -194,169 +197,164 @@ var started = false,
     hasUnsavedChanges = false;
 
 function controller() {
-	settingsForm = document.getElementById('settings-form');
-
-	settingsForm.addEventListener('change', function () {
-		hasUnsavedChanges = true;
-	});
+  settingsForm = document.getElementById('settings-form');
+  settingsForm.addEventListener('change', function () {
+    hasUnsavedChanges = true;
+  });
 }
 
 function askToStart() {
-	var sure = confirm("Are you sure you want to start synchronising all of your users? This can take a while if you have many users, please don't close your browser window.");
-	if (sure) {
-		start();
-	}
+  var sure = confirm("Are you sure you want to start synchronising all of your users? This can take a while if you have many users, please don't close your browser window.");
+
+  if (sure) {
+    start();
+  }
 }
 
 function start() {
-	started = true;
-	running = true;
-
-	fetchTotalUserCount().then(prepareBatch).then(subscribeFromBatch);
+  started = true;
+  running = true;
+  fetchTotalUserCount().then(prepareBatch).then(subscribeFromBatch);
 }
 
 function resume() {
-	running = true;
-	subscribeFromBatch();
+  running = true;
+  subscribeFromBatch();
 }
 
 function pause() {
-	running = false;
+  running = false;
 }
 
 function finish() {
-	done = true;
-	logger.log("Done");
+  done = true;
+  logger.log("Done");
 }
 
 function fetchTotalUserCount() {
-	return new Promise(function (resolve, reject) {
-		m.request({
-			method: "GET",
-			url: ajaxurl,
-			data: {
-				action: 'mcs_wizard',
-				mcs_action: 'get_user_count'
-			}
-		}).then(function (data) {
-			logger.log("Found " + data + " users.");
-			userCount = data;
-			resolve();
-		}, function (error) {
-			logger.log("Error fetching user count. Error: " + error);
-			reject();
-		});
-	});
+  return new Promise(function (resolve, reject) {
+    m.request({
+      method: "GET",
+      url: ajaxurl,
+      data: {
+        action: 'mcs_wizard',
+        mcs_action: 'get_user_count'
+      }
+    }).then(function (data) {
+      logger.log("Found " + data + " users.");
+      userCount = data;
+      resolve();
+    }, function (error) {
+      logger.log("Error fetching user count. Error: " + error);
+      reject();
+    });
+  });
 }
 
 function prepareBatch() {
-	return new Promise(function (resolve, reject) {
-		m.request({
-			method: "GET",
-			url: ajaxurl,
-			data: {
-				action: 'mcs_wizard',
-				mcs_action: 'get_users',
-				offset: usersProcessed,
-				limit: 100
-			},
-			type: User
-		}).then(function (data) {
-			userBatch = data;
-			logger.log("Fetched " + userBatch.length + " users.");
+  return new Promise(function (resolve, reject) {
+    m.request({
+      method: "GET",
+      url: ajaxurl,
+      data: {
+        action: 'mcs_wizard',
+        mcs_action: 'get_users',
+        offset: usersProcessed,
+        limit: 100
+      },
+      type: User
+    }).then(function (data) {
+      userBatch = data;
+      logger.log("Fetched " + userBatch.length + " users."); // finish if we didn't get any users
 
-			// finish if we didn't get any users
-			if (userBatch.length == 0) {
-				finish();
-			}
+      if (userBatch.length == 0) {
+        finish();
+      } // otherwise, fill batch and move on.
 
-			// otherwise, fill batch and move on.
-			resolve();
-		}, function (error) {
-			logger.log("Error fetching users. Error: " + error);
-			reject();
-		});
-	});
+
+      resolve();
+    }, function (error) {
+      logger.log("Error fetching users. Error: " + error);
+      reject();
+    });
+  });
 }
 
 function subscribeFromBatch() {
-	if (!running || done) {
-		return;
-	}
+  if (!running || done) {
+    return;
+  } // do we have users left in this batch
 
-	// do we have users left in this batch
-	if (userBatch.length === 0) {
-		return prepareBatch().then(subscribeFromBatch);
-	}
 
-	// Get next user
-	var user = userBatch.shift();
+  if (userBatch.length === 0) {
+    return prepareBatch().then(subscribeFromBatch);
+  } // Get next user
 
-	// Add line to log
-	logger.log("Handling <strong> #" + user.id + " " + user.username + " &lt;" + user.email + "&gt;</strong>");
 
-	// Perform subscribe request
-	var data = {
-		action: "mcs_wizard",
-		mcs_action: "handle_user",
-		user_id: user.id
-	};
+  var user = userBatch.shift(); // Add line to log
 
-	m.request({
-		method: "GET",
-		data: data,
-		url: ajaxurl
-	}).then(function (response) {
-		usersProcessed++;
-		response.success ? logger.success(response.message) : logger.error(response.message);
-	}, function (e) {
-		usersProcessed++;
-		logger.error(e);
-	}).then(updateProgress).then(subscribeFromBatch);
-}
+  logger.log("Handling <strong> #" + user.id + " " + user.username + " &lt;" + user.email + "&gt;</strong>"); // Perform subscribe request
 
-// calculate new progress & update progress bar.
+  var data = {
+    action: "mcs_wizard",
+    mcs_action: "handle_user",
+    user_id: user.id
+  };
+  m.request({
+    method: "GET",
+    data: data,
+    url: ajaxurl
+  }).then(function (response) {
+    usersProcessed++;
+    response.success ? logger.success(response.message) : logger.error(response.message);
+  }, function (e) {
+    usersProcessed++;
+    logger.error(e);
+  }).then(updateProgress).then(subscribeFromBatch);
+} // calculate new progress & update progress bar.
+
+
 function updateProgress() {
-	// calculate % progress
-	progress = Math.round(usersProcessed / userCount * 100);
+  // calculate % progress
+  progress = Math.round(usersProcessed / userCount * 100); // finish after processing all users
 
-	// finish after processing all users
-	if (usersProcessed >= userCount) {
-		finish();
-	}
+  if (usersProcessed >= userCount) {
+    finish();
+  }
 }
-
 /**
  * View
  *
  * @returns {*}
  */
-function view() {
-	// Wizard isn't running, show button to start it
-	if (!started) {
-		return m('p', [m('input', {
-			type: 'button',
-			class: 'button',
-			value: 'Synchronise All',
-			onclick: askToStart,
-			disabled: hasUnsavedChanges
-		}), hasUnsavedChanges ? m('span.help', ' — Please save your changes first.') : '']);
-	}
 
-	// Show progress
-	return [done ? '' : m("p", m("input", {
-		type: 'button',
-		class: 'button',
-		value: running ? "Pause" : "Resume",
-		onclick: running ? pause : resume
-	})), m('div.progress-bar', [m("div.value", {
-		style: "width: " + progress + "%"
-	}), m("div.text", done ? "Done!" : "Working: " + progress + "%")]), logger.render()];
+
+function view() {
+  // Wizard isn't running, show button to start it
+  if (!started) {
+    return m('p', [m('input', {
+      type: 'button',
+      "class": 'button',
+      value: 'Synchronise All',
+      onclick: askToStart,
+      disabled: hasUnsavedChanges
+    }), hasUnsavedChanges ? m('span.help', ' — Please save your changes first.') : '']);
+  } // Show progress
+
+
+  return [done ? '' : m("p", m("input", {
+    type: 'button',
+    "class": 'button',
+    value: running ? "Pause" : "Resume",
+    onclick: running ? pause : resume
+  })), m('div.progress-bar', [m("div.value", {
+    style: "width: " + progress + "%"
+  }), m("div.text", done ? "Done!" : "Working: " + progress + "%")]), logger.render()];
 }
 
 module.exports = {
-	'controller': controller,
-	'view': view
+  'controller': controller,
+  'view': view
 };
 
 },{"./logger.js":3,"./user.js":4}],6:[function(require,module,exports){
@@ -1619,86 +1617,7 @@ if (typeof module !== "undefined") module["exports"] = m
 else window.m = m
 }());
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("timers").setImmediate)
-},{"timers":7}],7:[function(require,module,exports){
-(function (setImmediate,clearImmediate){
-var nextTick = require('process/browser.js').nextTick;
-var apply = Function.prototype.apply;
-var slice = Array.prototype.slice;
-var immediateIds = {};
-var nextImmediateId = 0;
-
-// DOM APIs, for completeness
-
-exports.setTimeout = function() {
-  return new Timeout(apply.call(setTimeout, window, arguments), clearTimeout);
-};
-exports.setInterval = function() {
-  return new Timeout(apply.call(setInterval, window, arguments), clearInterval);
-};
-exports.clearTimeout =
-exports.clearInterval = function(timeout) { timeout.close(); };
-
-function Timeout(id, clearFn) {
-  this._id = id;
-  this._clearFn = clearFn;
-}
-Timeout.prototype.unref = Timeout.prototype.ref = function() {};
-Timeout.prototype.close = function() {
-  this._clearFn.call(window, this._id);
-};
-
-// Does not start the time, just sets up the members needed.
-exports.enroll = function(item, msecs) {
-  clearTimeout(item._idleTimeoutId);
-  item._idleTimeout = msecs;
-};
-
-exports.unenroll = function(item) {
-  clearTimeout(item._idleTimeoutId);
-  item._idleTimeout = -1;
-};
-
-exports._unrefActive = exports.active = function(item) {
-  clearTimeout(item._idleTimeoutId);
-
-  var msecs = item._idleTimeout;
-  if (msecs >= 0) {
-    item._idleTimeoutId = setTimeout(function onTimeout() {
-      if (item._onTimeout)
-        item._onTimeout();
-    }, msecs);
-  }
-};
-
-// That's not how node.js implements it but the exposed api is the same.
-exports.setImmediate = typeof setImmediate === "function" ? setImmediate : function(fn) {
-  var id = nextImmediateId++;
-  var args = arguments.length < 2 ? false : slice.call(arguments, 1);
-
-  immediateIds[id] = true;
-
-  nextTick(function onNextTick() {
-    if (immediateIds[id]) {
-      // fn.call() is faster so we optimize for the common use-case
-      // @see http://jsperf.com/call-apply-segu
-      if (args) {
-        fn.apply(null, args);
-      } else {
-        fn.call(null);
-      }
-      // Prevent ids from leaking
-      exports.clearImmediate(id);
-    }
-  });
-
-  return id;
-};
-
-exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate : function(id) {
-  delete immediateIds[id];
-};
-}).call(this,require("timers").setImmediate,require("timers").clearImmediate)
-},{"process/browser.js":8,"timers":7}],8:[function(require,module,exports){
+},{"timers":8}],7:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -1884,4 +1803,83 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}]},{},[1]);
+},{}],8:[function(require,module,exports){
+(function (setImmediate,clearImmediate){
+var nextTick = require('process/browser.js').nextTick;
+var apply = Function.prototype.apply;
+var slice = Array.prototype.slice;
+var immediateIds = {};
+var nextImmediateId = 0;
+
+// DOM APIs, for completeness
+
+exports.setTimeout = function() {
+  return new Timeout(apply.call(setTimeout, window, arguments), clearTimeout);
+};
+exports.setInterval = function() {
+  return new Timeout(apply.call(setInterval, window, arguments), clearInterval);
+};
+exports.clearTimeout =
+exports.clearInterval = function(timeout) { timeout.close(); };
+
+function Timeout(id, clearFn) {
+  this._id = id;
+  this._clearFn = clearFn;
+}
+Timeout.prototype.unref = Timeout.prototype.ref = function() {};
+Timeout.prototype.close = function() {
+  this._clearFn.call(window, this._id);
+};
+
+// Does not start the time, just sets up the members needed.
+exports.enroll = function(item, msecs) {
+  clearTimeout(item._idleTimeoutId);
+  item._idleTimeout = msecs;
+};
+
+exports.unenroll = function(item) {
+  clearTimeout(item._idleTimeoutId);
+  item._idleTimeout = -1;
+};
+
+exports._unrefActive = exports.active = function(item) {
+  clearTimeout(item._idleTimeoutId);
+
+  var msecs = item._idleTimeout;
+  if (msecs >= 0) {
+    item._idleTimeoutId = setTimeout(function onTimeout() {
+      if (item._onTimeout)
+        item._onTimeout();
+    }, msecs);
+  }
+};
+
+// That's not how node.js implements it but the exposed api is the same.
+exports.setImmediate = typeof setImmediate === "function" ? setImmediate : function(fn) {
+  var id = nextImmediateId++;
+  var args = arguments.length < 2 ? false : slice.call(arguments, 1);
+
+  immediateIds[id] = true;
+
+  nextTick(function onNextTick() {
+    if (immediateIds[id]) {
+      // fn.call() is faster so we optimize for the common use-case
+      // @see http://jsperf.com/call-apply-segu
+      if (args) {
+        fn.apply(null, args);
+      } else {
+        fn.call(null);
+      }
+      // Prevent ids from leaking
+      exports.clearImmediate(id);
+    }
+  });
+
+  return id;
+};
+
+exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate : function(id) {
+  delete immediateIds[id];
+};
+}).call(this,require("timers").setImmediate,require("timers").clearImmediate)
+},{"process/browser.js":7,"timers":8}]},{},[1]);

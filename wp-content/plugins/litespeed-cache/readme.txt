@@ -3,7 +3,7 @@ Contributors: LiteSpeedTech
 Tags: caching, optimize, performance, pagespeed, seo, speed, image optimize, compress, object cache, redis, memcached, database cleaner
 Requires at least: 4.0
 Tested up to: 5.1.1
-Stable tag: 2.9.7.1
+Stable tag: 2.9.7.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 
@@ -286,6 +286,23 @@ Click on the `Advanced View` link at the top of the page, and several more tabs 
 
 
 == Changelog ==
+
+= 2.9.7.2 - May 2 2019 =
+* <strong>Conf</strong>: Enhanced compatibility when an option is not properly initialized.
+* <strong>Conf</strong>: Prevent non-array instance in widget from causing 500 error. (#210407)
+* <strong>CCSS</strong>: Increase CCSS generation timeout to 60s.
+* <strong>Media</strong>: Renamed lazyload CSS class to avoid conflicts with other plugins. (@DynamoProd)
+* <strong>JS</strong>: Improved W3 validator. (@istanbulantik)
+* <strong>QUIC</strong>: Synced cache tag prefix for static files cache.
+* <strong>ESI</strong>: Restored query strings to ESI admin bar for accurate rendering. (#977284)
+* <strong>ESI</strong>: Tweaked ESI init priority to honor LITESPEED_DISABLE_ALL const. ESI will now init after plugin loaded.
+* 🐞<strong>ESI</strong>: No longer initialize ESI if ESI option is OFF.
+* <strong>API</strong>: New "Disable All" API function.
+* <strong>API</strong>: New "Force public cache" API function.
+* 🐞<strong>Vary</strong>: Fixed an issue with saving vary groups.
+* 🐞<strong>IAPI</strong>: Fixed an issue where image md5 validation failed due to whitespace in the image path.
+* 🐞<strong>3rd</strong>: Bypass all optimization/ESI/Cache features when entering Divi Theme Builder frontend editor.
+* 🐞<strong>3rd</strong>: Fixed an issue where DIVI admin bar exit button didn't work when ESI was ON.
 
 = 2.9.7.1 - Apr 9 2019 =
 * <strong>Purge</script>: Purge All no longer includes Purge CCSS/Placeholder.

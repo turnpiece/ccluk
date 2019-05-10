@@ -647,6 +647,12 @@ abstract class Ai1wm_Database {
 			// Get primary keys
 			$primary_keys = $this->get_primary_keys( $table_name );
 
+			// Get table columns
+			$table_columns = $this->get_column_types( $table_name );
+
+			// Get prefix columns
+			$prefix_columns = $this->get_table_prefix_columns( $table_name );
+
 			do {
 
 				// Set query
@@ -688,9 +694,6 @@ abstract class Ai1wm_Database {
 					$query = sprintf( 'SELECT * FROM `%s` WHERE %s ORDER BY %s LIMIT %d, %d', $table_name, $table_where, $table_keys, $table_offset, AI1WM_MAX_SELECT_RECORDS );
 				}
 
-				// Apply additional table prefix columns
-				$prefix_columns = $this->get_table_prefix_columns( $table_name );
-
 				// Run SQL query
 				$result = $this->query( $query );
 
@@ -706,12 +709,6 @@ abstract class Ai1wm_Database {
 
 				// Generate insert statements
 				if ( $num_rows = $this->num_rows( $result ) ) {
-					$table_columns = array();
-
-					// Loop over table columns
-					foreach ( $this->get_column_types( $table_name ) as $column_name => $column_type ) {
-						$table_columns[ strtolower( $column_name ) ] = $column_type;
-					}
 
 					// Loop over table rows
 					while ( $row = $this->fetch_assoc( $result ) ) {
@@ -1036,7 +1033,7 @@ abstract class Ai1wm_Database {
 		$result = $this->query( "SHOW COLUMNS FROM `{$table_name}`" );
 		while ( $row = $this->fetch_assoc( $result ) ) {
 			if ( isset( $row['Field'] ) ) {
-				$column_types[ $row['Field'] ] = $row['Type'];
+				$column_types[ strtolower( $row['Field'] ) ] = $row['Type'];
 			}
 		}
 
