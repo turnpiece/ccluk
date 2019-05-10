@@ -176,3 +176,29 @@
   padding: 12px;
   height: auto;
 }
+
+@mixin mobile-styles() {
+  &.single,
+  &.archive, 
+  &.page:not(.home-page),
+  &.blog:not(.bp-user) {
+    #primary,
+    #secondary,
+    .site-content {
+      max-width: $content_w;
+      @include centred-margin( 0 );
+    }
+    &.page.page-sidebar-active {
+      #secondary {
+        @include margin-top( 2 );
+
+        .widget {
+          @include margin-bottom( 3 );
+        }
+      }
+    }
+  }
+  #main-wrap {
+    padding-top: 70px;
+  }
+}

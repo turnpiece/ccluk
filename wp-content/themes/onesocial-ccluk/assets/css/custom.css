@@ -1859,7 +1859,26 @@ MAXIMUM width of 1024 pixels (tablets)
   body.page.buddypress #buddypress .item-header-mobile {
     display: block; }
   body.page.buddypress #buddypress .item-header-sidebar {
-    display: none; } }
+    display: none; }
+  body.single #primary,
+  body.single #secondary,
+  body.single .site-content, body.archive #primary,
+  body.archive #secondary,
+  body.archive .site-content, body.page:not(.home-page) #primary,
+  body.page:not(.home-page) #secondary,
+  body.page:not(.home-page) .site-content, body.blog:not(.bp-user) #primary,
+  body.blog:not(.bp-user) #secondary,
+  body.blog:not(.bp-user) .site-content {
+    max-width: 750px;
+    margin: 0 auto; }
+  body.single.page.page-sidebar-active #secondary, body.archive.page.page-sidebar-active #secondary, body.page:not(.home-page).page.page-sidebar-active #secondary, body.blog:not(.bp-user).page.page-sidebar-active #secondary {
+    margin-top: 20px;
+    margin-top: 2rem; }
+    body.single.page.page-sidebar-active #secondary .widget, body.archive.page.page-sidebar-active #secondary .widget, body.page:not(.home-page).page.page-sidebar-active #secondary .widget, body.blog:not(.bp-user).page.page-sidebar-active #secondary .widget {
+      margin-bottom: 30px;
+      margin-bottom: 3rem; }
+  body #main-wrap {
+    padding-top: 70px; } }
 /*--------------------------------------------------------------
 MAXIMUM width of 520 pixels (large phones and smaller)
 --------------------------------------------------------------*/
