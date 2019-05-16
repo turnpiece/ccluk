@@ -1541,7 +1541,7 @@ body.buddypress #buddypress #send_message_form.standard-form label[for=subject] 
 body.buddypress #buddypress div#subnav.item-list-tabs ul li a span, body.buddypress #buddypress div:not(#item-nav) > .item-list-tabs ul li a span {
   color: #54ae68; }
 body.buddypress #buddypress > div[role="navigation"].item-list-tabs ul li a span {
-  color: #54ae68; }
+  color: #fff; }
 body.buddypress #buddypress div#subnav.item-list-tabs ul li.feed a:hover, body.buddypress #buddypress div#subnav.item-list-tabs ul li.feed a:before {
   color: #54ae68; }
 body.buddypress #buddypress div.messages-options-nav .buddyboss-select-inner:after {

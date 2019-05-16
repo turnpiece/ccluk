@@ -130,6 +130,8 @@ function buddyboss_onesocial_scripts_styles() {
 
 	global $bp, $onesocial, $buddyboss_js_params;
 
+	$ext = ( CCLUK_DEBUGGING ? '' : 'min.' ) . 'css';
+
 	// Used in js file to detect if we are using only mobile layout
 	$only_mobile = false;
 
@@ -154,8 +156,9 @@ function buddyboss_onesocial_scripts_styles() {
 
 	$css_dest = ( is_rtl() ) ? '/css-rtl' : '/css';
 	$css_compressed_dest = ( is_rtl() ) ? '/css-rtl-compressed' : '/css-compressed';
+	$assets_dir = get_stylesheet_directory_uri() . '/assets';
 
-	$CSS_URL = onesocial_get_option( 'boss_minified_css' ) ? get_stylesheet_directory_uri() . $css_compressed_dest : get_stylesheet_directory_uri() . $css_dest;
+	$CSS_URL = $assets_dir . ( onesocial_get_option( 'boss_minified_css' ) ? $css_compressed_dest : $css_dest );
 
 	// OneSocial icon fonts.
 	wp_register_style( 'icons', $CSS_URL . '/onesocial-icons.css', array(), $onesocial_version, 'all' );
@@ -170,18 +173,18 @@ function buddyboss_onesocial_scripts_styles() {
 	// Switch between mobile and desktop
 	if ( isset( $_COOKIE[ 'switch_mode' ] ) && (onesocial_get_option( 'boss_layout_switcher' )) ) {
 		if ( $_COOKIE[ 'switch_mode' ] == 'mobile' ) {
-			wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.css', array( 'icons' ), $onesocial_version, 'all' );
+			wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.'.$ext, array( 'icons' ), $onesocial_version, 'all' );
 			$only_mobile = true;
 		} else {
 			wp_enqueue_style( 'onesocial-main-desktop', $CSS_URL . '/main-desktop.css', array( 'icons' ), $onesocial_version, 'screen and (min-width: 1025px)' );
 			// Activate our own Fixed or Floating (defaults to Fixed) adminbar stylesheet. Load DashIcons and GoogleFonts first.
 			wp_enqueue_style( 'buddyboss-wp-adminbar-desktop-' . $adminbar_layout, $CSS_URL . '/adminbar-desktop-' . $adminbar_layout . '.css', array( 'dashicons' ), $onesocial_version, 'screen and (min-width: 1025px)' );
-			wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.css', array( 'icons' ), $onesocial_version, 'screen and (max-width: 1024px)' );
+			wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.'.$ext, array( 'icons' ), $onesocial_version, 'screen and (max-width: 1024px)' );
 		}
 		// Defaults
 	} else {
 		if ( is_phone() ) {
-			wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.css', array( 'icons' ), $onesocial_version, 'all' );
+			wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.'.$ext, array( 'icons' ), $onesocial_version, 'all' );
 			$only_mobile = true;
 		} elseif ( wp_is_mobile() ) {
 			if ( onesocial_get_option( 'boss_layout_tablet' ) == 'desktop' ) {
@@ -189,12 +192,12 @@ function buddyboss_onesocial_scripts_styles() {
 				// Activate our own Fixed or Floating (defaults to Fixed) adminbar stylesheet. Load DashIcons and GoogleFonts first.
 				wp_enqueue_style( 'buddyboss-wp-adminbar-desktop-' . $adminbar_layout, $CSS_URL . '/adminbar-desktop-' . $adminbar_layout . '.css', array( 'dashicons' ), $onesocial_version, 'all' );
 			} else {
-				wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.css', array( 'icons' ), $onesocial_version, 'all' );
+				wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.'.$ext, array( 'icons' ), $onesocial_version, 'all' );
 				$only_mobile = true;
 			}
 		} else {
 			if ( onesocial_get_option( 'boss_layout_desktop' ) == 'mobile' ) {
-				wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.css', array( 'icons' ), $onesocial_version, 'all' );
+				wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.'.$ext, array( 'icons' ), $onesocial_version, 'all' );
 				$only_mobile = true;
 			} else {
 				wp_enqueue_style( 'onesocial-main-desktop', $CSS_URL . '/main-desktop.css', array( 'icons' ), $onesocial_version, 'screen and (min-width: 1025px)' );
@@ -205,7 +208,7 @@ function buddyboss_onesocial_scripts_styles() {
 
 		// Media query fallback
 		if ( !wp_script_is( 'onesocial-main-mobile', 'enqueued' ) ) {
-			wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.css', array( 'icons' ), $onesocial_version, 'screen and (max-width: 1024px)' );
+			wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.'.$ext, array( 'icons' ), $onesocial_version, 'screen and (max-width: 1024px)' );
 		}
 	}
 
