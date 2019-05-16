@@ -130,7 +130,7 @@ function buddyboss_onesocial_scripts_styles() {
 
 	global $bp, $onesocial, $buddyboss_js_params;
 
-	$ext = ( CCLUK_DEBUGGING ? '' : 'min.' ) . 'css';
+	$ext = 'css';
 
 	// Used in js file to detect if we are using only mobile layout
 	$only_mobile = false;
@@ -158,7 +158,7 @@ function buddyboss_onesocial_scripts_styles() {
 	$css_compressed_dest = ( is_rtl() ) ? '/css-rtl-compressed' : '/css-compressed';
 	$assets_dir = get_stylesheet_directory_uri() . '/assets';
 
-	$CSS_URL = $assets_dir . ( onesocial_get_option( 'boss_minified_css' ) ? $css_compressed_dest : $css_dest );
+	$CSS_URL = $assets_dir . ( onesocial_get_option( 'boss_minified_css' ) && !CCLUK_DEBUGGING ? $css_compressed_dest : $css_dest );
 
 	// OneSocial icon fonts.
 	wp_register_style( 'icons', $CSS_URL . '/onesocial-icons.css', array(), $onesocial_version, 'all' );

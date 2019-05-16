@@ -90,6 +90,7 @@ This is the Mobile stylesheet, served to phones and tablets.
 /*----------------------------------------------------------------
 >>> WORDPRESS
 ----------------------------------------------------------------*/
+/** Variables **/
 /*--------------------------------------------------------------
 1.0 - All mobile devices
 --------------------------------------------------------------*/
@@ -352,7 +353,7 @@ body .buddyboss-select {
     content: "P";
     font-size: 14px;
     -webkit-font-smoothing: antialiased;
-    color: #aaa;
+    color: #22a7f0;
     position: absolute;
     right: 12px;
     top: 12px; }
@@ -927,7 +928,7 @@ body.activity-permalink #buddypress ul#activity-stream {
   margin-top: 8px; }
 
 #buddypress a.activity-time-since {
-  color: #aaa;
+  color: #22a7f0;
   font-weight: 400 !important; }
   #buddypress a.activity-time-since:hover {
     color: #888; }
@@ -1766,9 +1767,9 @@ body.has-activity #buddypress div.item-list-tabs ul {
   margin: 0 10px 10px 0;
   line-height: 22px;
   background-color: #fff;
-  -webkit-box-shadow: 0 0 0 1px #ccc inset;
-  -moz-box-shadow: 0 0 0 1px #ccc inset;
-  box-shadow: 0 0 0 1px #ccc inset; }
+  -webkit-box-shadow: 0 0 0 1px #22a7f0 inset;
+  -moz-box-shadow: 0 0 0 1px #22a7f0 inset;
+  box-shadow: 0 0 0 1px #22a7f0 inset; }
 
 #blog-order-select form {
   margin-left: 0; }
@@ -1777,7 +1778,6 @@ body.has-activity #buddypress div.item-list-tabs ul {
   margin: 0 0 30px;
   overflow: hidden; }
 #buddypress div.item-list-tabs ul li a, #buddypress div.item-list-tabs ul li span {
-  color: #aaa;
   text-decoration: none;
   font-weight: 400;
   padding: 8px 10px;
@@ -1909,7 +1909,7 @@ body.bp-user a.button.sap-new-post-btn {
     content: "\f0dc";
     font-size: 20px;
     -webkit-font-smoothing: antialiased;
-    color: #aaa;
+    color: $blue;
     position: absolute;
     right: 12px;
     top: 9px;
@@ -3365,7 +3365,7 @@ body.articles #buddypress ul.nav-tabs {
   font-size: 13px;
   text-decoration: none;
   background-color: #fff;
-  color: #aaa;
+  color: #22a7f0;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;

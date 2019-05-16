@@ -90,6 +90,9 @@ This is the Mobile stylesheet, served to phones and tablets.
 /*----------------------------------------------------------------
 >>> WORDPRESS
 ----------------------------------------------------------------*/
+
+@import "partials/variables";
+
 /*--------------------------------------------------------------
 1.0 - All mobile devices
 --------------------------------------------------------------*/
@@ -429,7 +432,7 @@ body .buddyboss-select {
     content: "P";
     font-size: 14px;
     -webkit-font-smoothing: antialiased;
-    color: #aaa;
+    color: $blue;
     position: absolute;
     right: 12px;
     top: 12px;
@@ -1208,7 +1211,7 @@ body.activity-permalink #buddypress ul#activity-stream {
 #buddypress {
   a {
     &.activity-time-since {
-      color: #aaa;
+      color: $blue;
       font-weight: 400 !important;
       &:hover {
         color: #888;
@@ -2346,10 +2349,10 @@ body.has-activity #buddypress div.item-list-tabs ul {
     position: relative;
     margin: 0 10px 10px 0;
     line-height: 22px;
-    background-color: #fff;
-    -webkit-box-shadow: 0 0 0 1px #ccc inset;
-    -moz-box-shadow: 0 0 0 1px #ccc inset;
-    box-shadow: 0 0 0 1px #ccc inset;
+    background-color: $white;
+    -webkit-box-shadow: 0 0 0 1px $blue inset;
+    -moz-box-shadow: 0 0 0 1px $blue inset;
+    box-shadow: 0 0 0 1px $blue inset;
   }
 }
 
@@ -2363,7 +2366,6 @@ body.has-activity #buddypress div.item-list-tabs ul {
     overflow: hidden;
   }
   a, span {
-    color: #aaa;
     text-decoration: none;
     font-weight: 400;
     padding: 8px 10px;
@@ -2542,7 +2544,7 @@ body.bp-user a.button.sap-new-post-btn {
     content: "\f0dc";
     font-size: 20px;
     -webkit-font-smoothing: antialiased;
-    color: #aaa;
+    color: $blue;
     position: absolute;
     right: 12px;
     top: 9px;
@@ -4595,7 +4597,7 @@ body.articles #buddypress ul.nav-tabs {
   font-size: 13px;
   text-decoration: none;
   background-color: #fff;
-  color: #aaa;
+  color: $blue;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
