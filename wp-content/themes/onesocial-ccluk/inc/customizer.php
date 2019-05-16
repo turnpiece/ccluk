@@ -362,6 +362,23 @@ class CCLUK_Customizer {
 
 	    $this->standard_settings( $section, 'banner' );
 
+	    $this->customize->add_setting( $section.'_layout', array(
+		  	'capability' => 'edit_theme_options',
+		  	'default' => 'background',
+		  	'sanitize_callback' => array( $this, 'sanitize_text' ),
+		) );
+
+		$this->customize->add_control( $section.'_layout', array(
+		  	'type' => 'radio',
+		  	'section' => $section.'_settings',
+		  	'label' => __( 'Layout', 'onesocial' ),
+		  	'choices' => array(
+		    	'text-left' => __( 'Text on left, image on right', 'onesocial' ),
+		    	'text-right' => __( 'Text on right, image on left', 'onesocial' ),
+		    	'background' => __( 'Text over background image', 'onesocial' )
+		  	),
+		) );
+
 		$this->add_content_section( $section );
 
 		$this->add_setting( 
@@ -405,7 +422,19 @@ class CCLUK_Customizer {
 				'choices'       => $this->option_pages,
 				'description'   => esc_html__('Select the page you want to link to.', 'onesocial'),
 			)
-		);	
+		);
+
+		// Image
+		$this->add_setting( $section.'_image', 'sanitize_number' );	
+
+		$this->customize->add_control( new WP_Customize_Image_Control( 
+			$this->customize, 
+			$section.'_image', 
+			array(
+	        'label'             => __('Image', 'onesocial'),
+	        'section'           => $section.'_content',
+	        'settings'          => $section.'_image',    
+	    )));
 
 		// Buttons
 		for( $i = 1; $i <= 2; $i++ ) {

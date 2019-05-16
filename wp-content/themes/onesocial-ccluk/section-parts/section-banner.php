@@ -15,7 +15,10 @@ if ($audience == 'none' ||
     $id = get_theme_mod( $slug.'_id', esc_html__('banner', 'onesocial') );
     $heading = get_theme_mod( $slug.'_heading' );
     $text = get_theme_mod( $slug.'_text' );
-    $image = get_the_post_thumbnail( $page, 'full' );
+    $image_id = get_theme_mod( $slug.'_image' );
+    $layout = get_theme_mod( $slug.'_layout', 'background' );
+
+    $image = $image_id ? wp_get_attachment_image( $image_id, 'full' ) : get_the_post_thumbnail( $page, 'full' );
 
     $button_1_page = get_theme_mod( $slug.'_button_1_page' );
     $button_1_text = get_theme_mod( $slug.'_button_1_text' );
@@ -30,7 +33,7 @@ if ($audience == 'none' ||
 
     if (!empty($image)) :
 ?>
-<section id="<?php echo $id ?>" class="section site-content banner">
+<section id="<?php echo $id ?>" class="section site-content banner <?php echo $layout ?>">
     
     <?php if (!empty($heading)) : ?>
     <header class="section-title-container">

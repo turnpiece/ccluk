@@ -109,38 +109,23 @@ body.page-template-homepage {
 
 				position: relative;
 				padding: 0;
+				min-height: 400px;
 
 				.section-content {
-					max-width: 100%;
 					min-height: 400px;
-					background-color: $black;
-
 					> img {
 						display: block;
 						object-fit: cover;
-						min-width: 100%;
-						min-height: 100%;
-						opacity: 0.5;
-						margin: auto;
 					}
 				}
 
 				.section-title-container {
 					display: flex;
-					position: absolute;
-					left: 0;
-					top: 0;
-					bottom: 0;
 					padding: 0;
-					text-align: center;
 					z-index: 5;
-					width: 100%;
-					height: 100%;
 
 					> .section-title {
-						align-self: center;
 						position: relative;
-						max-width: 650px;
 
 						h2, 
 						p {
@@ -153,6 +138,75 @@ body.page-template-homepage {
 							text-transform: uppercase;
 							margin: 10px;
 						}
+					}
+				}
+
+				&.background {
+					.section-content {
+						max-width: 100%;
+						background-color: $black;
+
+						> img {
+							min-width: 100%;
+							min-height: 100%;
+							opacity: 0.5;
+							margin: auto;
+						}
+					}
+
+					.section-title-container {
+						display: flex;
+						position: absolute;
+						left: 0;
+						top: 0;
+						bottom: 0;
+						padding: 0;
+						text-align: center;
+						z-index: 5;
+						width: 100%;
+						height: 100%;
+
+						> .section-title {
+							align-self: center;
+							position: relative;
+							max-width: 650px;
+						}
+					}
+				}
+
+				&.text-left,
+				&.text-right {
+					.section-content {
+						float: right;
+						width: 50%;
+						> img {
+							width: 100%;
+							height: 100%;
+						}
+					}
+					.section-title-container {
+						width: 50%;
+						min-height: 400px;
+						float: left;
+						background-color: $green;
+						color: $white;
+
+						> .section-title {
+							margin: 50px 8%;
+							h2, 
+							p {
+								text-align: left;
+							}
+						}
+					}
+				}
+
+				&.text-right {
+					.section-content {
+						float: left;
+					}
+					.section-title-container {
+						float: right;
 					}
 				}
 			}
