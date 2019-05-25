@@ -117,6 +117,13 @@ This is the Global stylesheet, served to all devices.
 ----------------------------------------------------------------*/
 
 /*--------------------------------------------------------------
+# Variables
+--------------------------------------------------------------*/
+
+@import "partials/variables";
+@import "partials/mixins";
+
+/*--------------------------------------------------------------
 # Normalize
 --------------------------------------------------------------*/
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
@@ -680,11 +687,15 @@ kbd, pre, samp {
  */
 
 q, blockquote {
-  border-left: 4px solid #ccc;
-  color: #999;
+  border-left: 4px solid $green;
+  color: $green;
   font-style: italic;
   margin: 0 0 1.625rem 1.625rem;
   padding-left: 1rem;
+
+  cite {
+    font-size: 80%;
+  }
 }
 
 /**
@@ -692,7 +703,7 @@ q, blockquote {
  */
 
 hr {
-  background-color: #ddd;
+  background-color: $green;
   border: 0;
   box-sizing: content-box;
   /* Address differences between Firefox and other browsers. Source- normalize.css */

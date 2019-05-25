@@ -719,9 +719,6 @@ body.page-template-homepage #main {
       justify-content: center; }
       body.page-template-homepage #main .section.about .section-content .list-item {
         padding: 30px;
-        -webkit-border-radius: 10px;
-        -moz-border-radius: 10px;
-        border-radius: 10px;
         background-color: #54ae68;
         color: #fff;
         font-size: 130%;
