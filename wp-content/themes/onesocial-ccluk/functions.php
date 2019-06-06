@@ -843,5 +843,6 @@ add_action( 'wp_before_admin_bar_render', 'ccluk_remove_admin_bar_links' );
 
 // WordPress social login
 add_action( 'bp_after_registration_submit_buttons', function() {
-    do_action( 'wordpress_social_login' );
+    if ( 'registration-disabled' != bp_get_current_signup_step() )
+        do_action( 'wordpress_social_login' );
 } );
