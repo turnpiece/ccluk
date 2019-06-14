@@ -6516,7 +6516,7 @@ h2.entry-title .button.bp-title-button {
 }
 
 #buddypress .standard-form .editfield, #buddyboss-media-album-create-form > div, #buddypress #create-group-form .editfield {
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .album-wrapper .editfield > .buddyboss-select {
@@ -9279,7 +9279,7 @@ body.registration {
     margin: 70px 0 20px;
     text-align: center;
   }
-  div#pass-strength-result, .wp-social-login-provider-list {
+  .wp-social-login-provider-list {
     margin-bottom: 40px;
   }
 }
@@ -9296,28 +9296,41 @@ div#register-page {
     width: auto;
   }
   .register-section h4, .security-question-section h4 {
-    color: #555;
     font-size: 21px;
-    margin: 0 0 40px;
+    margin: 0 0 30px;
     padding: 0 0 10px;
   }
   .register-section, .security-question-section {
-    background-color: #FFFFFF;
     font-weight: 400;
     margin: 0 auto 25px !important;
     padding: 24px;
+    padding-top: 0;
     text-align: left;
     max-width: 400px;
     width: auto !important;
     clear: both;
+    border: 0;
     float: none !important;
-    border: 1px solid #ddd;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
-    -moz-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
-    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  .security-question-section {
+    text-align: center;
+    width: 200px;
+
+    h4 {
+      margin: 20px auto;
+    }
+
+    label {
+        width: 80px;
+        margin-left: 20px;
+        display: inline;
+    }
+
+    input#bp-security-check {
+        width: 80px;
+        margin-right: 20px;
+    }
   }
 }
 
@@ -9329,9 +9342,7 @@ div#register-page {
 }
 
 div#register-page #basic-details-section input {
-  height: 40px;
-  margin-bottom: 40px;
-  padding: 0;
+  margin-bottom: 30px;
 }
 
 #buddypress div#register-page #basic-details-section input {
@@ -14066,7 +14077,7 @@ p.description:empty {
     margin-bottom: 10px;
   }
   .editfield.field_bmt_member_type {
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     label {
       margin-bottom: 10px;
     }
