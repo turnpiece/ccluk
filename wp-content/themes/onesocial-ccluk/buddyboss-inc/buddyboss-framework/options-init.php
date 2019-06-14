@@ -892,7 +892,7 @@ if ( !class_exists( 'onesocial_Redux_Framework_config' ) ) {
 				array( 'slug' => 'admin_screen_text_color', 'title' => 'Login Screen Text', 'subtitle' => 'Links and text such as "Remember Me".', 'desc' => '', 'type' => 'color', 'default' => '#333333' ),
 				array( 'slug' => 'admin_screen_button_color', 'title' => 'Login Screen Button', 'subtitle' => 'Submit button on login screen.', 'desc' => '', 'type' => 'color', 'default' => '#54ae68' ),
 			);
-			
+
 			$color_scheme_elements = apply_filters( 'onesocial_color_element_options', $style_elements );
 
 			$style_fields = array();
@@ -1089,7 +1089,7 @@ if ( !class_exists( 'onesocial_Redux_Framework_config' ) ) {
 						'id'		 => 'boss_login_message',
 						'title'		 => __( 'Social Login Message', 'onesocial' ),
 						'type'		 => 'editor',
-						'default'	 => __( 'We will never post to Twitter or Facebook without your permission.', 'onesocial' ),
+						'default'	 => '',
 						'args'		 => array(
 							'teeny'			 => true,
 							'media_buttons'	 => false,
