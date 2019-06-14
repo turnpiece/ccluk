@@ -34,7 +34,7 @@ class Google_0814_Service_IdentityToolkit extends Google_0814_Service
 
 
   public $relyingparty;
-
+  
 
   /**
    * Constructs the internal representation of the IdentityToolkit service.

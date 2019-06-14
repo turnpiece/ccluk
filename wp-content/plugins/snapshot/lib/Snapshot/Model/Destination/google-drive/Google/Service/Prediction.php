@@ -42,7 +42,7 @@ class Google_0814_Service_Prediction extends Google_0814_Service
 
   public $hostedmodels;
   public $trainedmodels;
-
+  
 
   /**
    * Constructs the internal representation of the Prediction service.

@@ -74,7 +74,7 @@ $latest_snapshot = Snapshot_Helper_Utility::latest_backup( $snapshot );
 											esc_html__( 'at %s', SNAPSHOT_I18N_DOMAIN ),
 											Snapshot_Helper_Utility::show_date_time( $latest_snapshot['timestamp'], 'g:ia' )
 									)
-								);
+								); 
 							?>
 							</span>
 						</td>
@@ -90,48 +90,66 @@ $latest_snapshot = Snapshot_Helper_Utility::latest_backup( $snapshot );
 					</td>
 				</tr>
 
-				<?php if ( $is_client ) : ?>
+				<?php
+
+				if ( Snapshot_Helper_Utility::is_wpmu_hosting() ) {
+					?>
 					<tr>
-						<th><?php esc_html_e( 'Managed Backups Schedule', SNAPSHOT_I18N_DOMAIN ); ?></th>
+						<th><?php esc_html_e( 'Backups Schedule', SNAPSHOT_I18N_DOMAIN ); ?></th>
 
-						<?php if ( ! $has_snapshot_key ) { ?>
-							<td>
-								<a id="view-snapshot-key" class="button button-small button-blue <?php echo ( ! $aws_sdk_compatible ) ? 'disabled': ''; ?>"><?php esc_html_e( 'Activate', SNAPSHOT_I18N_DOMAIN ); ?></a>
-							</td>
-						<?php } elseif ( $model->get_config( 'disable_cron', false ) ) { ?>
-
-							<td>
-								<a id="wps-managed-backups-configure" class="button button-outline button-small button-gray <?php echo ( ! $aws_sdk_compatible ) ? 'disabled': ''; ?>"
-								   href="<?php echo esc_url( WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url( 'snapshots-newui-managed-backups' ) . '#wps-backups-settings-schedule' ); ?>">
-									<?php esc_html_e( 'Enable', SNAPSHOT_I18N_DOMAIN ); ?>
-								</a>
-							</td>
-
-						<?php } else { ?>
-
-							<td class="fancy-date-time">
-								<?php
-								$frequencies = $model->get_frequencies();
-								echo esc_html( $frequencies[$model->get_frequency()] );
-								?>
-								<span>
-                                <?php
-									$schedule_times = $model->get_schedule_times();
-									echo wp_kses_post(
-										sprintf(
-												esc_html__( 'at %s', SNAPSHOT_I18N_DOMAIN ),
-												$schedule_times[$model->get_schedule_time()]
-										)
-									);
-
-								?>
-								</span>
-							</td>
-
-						<?php } ?>
-
+						<td>
+							<?php esc_html_e( 'Nightly', SNAPSHOT_I18N_DOMAIN ); ?>
+							<span class="wps-hosting-backups-schedule-dashboard"><?php esc_html_e( 'at', SNAPSHOT_I18N_DOMAIN ); ?> <?php echo esc_html( Snapshot_Helper_Utility::get_hosting_backup_local_time() ); ?></span>
+						</td>
 					</tr>
-				<?php endif; ?>
+					<?php
+				} else {
+					?>
+					<?php if ( $is_client ) : ?>
+						<tr>
+							<th><?php esc_html_e( 'Managed Backups Schedule', SNAPSHOT_I18N_DOMAIN ); ?></th>
+
+							<?php if ( ! $has_snapshot_key ) { ?>
+								<td>
+									<a id="view-snapshot-key" class="button button-small button-blue <?php echo ( ! $aws_sdk_compatible ) ? 'disabled': ''; ?>"><?php esc_html_e( 'Activate', SNAPSHOT_I18N_DOMAIN ); ?></a>
+								</td>
+							<?php } elseif ( $model->get_config( 'disable_cron', false ) ) { ?>
+
+								<td>
+									<a id="wps-managed-backups-configure" class="button button-outline button-small button-gray <?php echo ( ! $aws_sdk_compatible ) ? 'disabled': ''; ?>"
+									href="<?php echo esc_url( WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url( 'snapshots-newui-managed-backups' ) . '#wps-backups-settings-schedule' ); ?>">
+										<?php esc_html_e( 'Enable', SNAPSHOT_I18N_DOMAIN ); ?>
+									</a>
+								</td>
+
+							<?php } else { ?>
+
+								<td class="fancy-date-time">
+									<?php
+									$frequencies = $model->get_frequencies();
+									echo esc_html( $frequencies[$model->get_frequency()] );
+									?>
+									<span>
+									<?php
+										$schedule_times = $model->get_schedule_times();
+										echo wp_kses_post(
+											sprintf(
+													esc_html__( 'at %s', SNAPSHOT_I18N_DOMAIN ),
+													$schedule_times[$model->get_schedule_time()]
+											) 
+										);
+
+									?>
+									</span>
+								</td>
+
+							<?php } ?>
+
+						</tr>
+					<?php endif; ?>
+				<?php
+				}
+				?>
 
 				</tbody>
 			</table>

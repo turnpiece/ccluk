@@ -40,7 +40,7 @@ class Google_0814_Service_Reports extends Google_0814_Service
   public $channels;
   public $customerUsageReports;
   public $userUsageReport;
-
+  
 
   /**
    * Constructs the internal representation of the Reports service.

@@ -11,7 +11,7 @@
 	<div class="sui-col">
 		<div class="sui-form-field shipper-bulk-actions-field">
 			<div class="sui-with-button">
-				<select name="shipper-bulk-action">
+				<select class="sui-select-sm" name="shipper-bulk-action">
 					<option value=""><?php esc_html_e( 'Bulk actions', 'shipper' ); ?></option>
 					<option value="include"><?php esc_html_e( 'Include', 'shipper' ); ?></option>
 					<option value="exclude"><?php esc_html_e( 'Exclude', 'shipper' ); ?></option>

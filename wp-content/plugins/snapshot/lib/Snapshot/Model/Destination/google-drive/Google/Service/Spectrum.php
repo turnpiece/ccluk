@@ -34,7 +34,7 @@ class Google_0814_Service_Spectrum extends Google_0814_Service
 
 
   public $paws;
-
+  
 
   /**
    * Constructs the internal representation of the Spectrum service.

@@ -40,7 +40,7 @@ class Google_0814_Service_Dfareporting extends Google_0814_Service
   public $reports_compatibleFields;
   public $reports_files;
   public $userProfiles;
-
+  
 
   /**
    * Constructs the internal representation of the Dfareporting service.

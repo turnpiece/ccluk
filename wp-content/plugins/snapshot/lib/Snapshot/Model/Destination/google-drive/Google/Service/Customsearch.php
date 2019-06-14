@@ -34,7 +34,7 @@ class Google_0814_Service_Customsearch extends Google_0814_Service
 
 
   public $cse;
-
+  
 
   /**
    * Constructs the internal representation of the Customsearch service.

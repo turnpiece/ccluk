@@ -20,7 +20,9 @@ class Shipper_Controller_Setup_Uninstall extends Shipper_Controller_Setup {
 			->clear_intermediate_tables()
 			->clear_fs_storage()
 			->clear_stub_storage();
-		self::get()->clear_db_storage();
+		self::get()
+			->clear_db_storage()
+			->unregister_from_api();
 	}
 
 	/**
@@ -55,6 +57,41 @@ class Shipper_Controller_Setup_Uninstall extends Shipper_Controller_Setup {
 		);
 
 		shipper_flush_cache();
+
+		return $this;
+	}
+
+	/**
+	 * Unregisters the current site from Shipper API
+	 *
+	 * @return object Shipper_Controller_Setup instance
+	 */
+	public function unregister_from_api() {
+		$site_id = false;
+
+		$model = new Shipper_Model_Stored_Destinations;
+		$site = $model->get_current();
+
+		if ( empty( $site['site_id'] ) ) {
+			// Attempt to re-acquire the data.
+			$task =  new Shipper_Task_Api_Destinations_Get;
+			$sites = $task->apply();
+			$model->set_data( $sites );
+			$site = $model->get_current();
+			$model->clear(); // This is only temporary.
+		}
+		$site_id = ! empty( $site['site_id'] )
+			? $site['site_id']
+			: false;
+
+		if ( empty( $site_id ) ) {
+			return $this;
+		}
+
+		$task = new Shipper_Task_Api_Destinations_Remove;
+		$task->apply( array(
+			'site_id' => $site_id,
+		) );
 
 		return $this;
 	}

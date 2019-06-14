@@ -34,7 +34,7 @@ class Google_0814_Service_Licensing extends Google_0814_Service
 
 
   public $licenseAssignments;
-
+  
 
   /**
    * Constructs the internal representation of the Licensing service.

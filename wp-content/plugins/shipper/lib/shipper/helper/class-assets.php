@@ -42,6 +42,10 @@ class Shipper_Helper_Assets {
 			$cls[] = 'sui-color-accessible';
 		}
 
+		if ( self::is_branding_hidden() ) {
+			$cls[] = 'shipper-whitelabel';
+		}
+
 		return join( ' ', array_map( 'sanitize_html_class', $cls ) );
 	}
 
@@ -154,5 +158,96 @@ class Shipper_Helper_Assets {
 
 		$icon = file_get_contents( $icon );
 		return 'data:image/svg+xml;base64,' . base64_encode( $icon );
+	}
+
+	/**
+	 * Checks whether the WPMU DEV branding is hidden
+	 *
+	 * @return bool
+	 */
+	static public function is_branding_hidden() {
+		return (bool) apply_filters(
+			'wpmudev_branding_hide_branding',
+			false
+		);
+	}
+
+	/**
+	 * Gets custom hero image link
+	 *
+	 * @return string
+	 */
+	static public function get_custom_hero_image() {
+		return apply_filters( 'wpmudev_branding_hero_image', '' );
+	}
+
+	/**
+	 * Checks whether we have a custom hero image
+	 *
+	 * @return bool
+	 */
+	static public function has_custom_hero_image() {
+		return ! empty( self::get_custom_hero_image() );
+	}
+
+	/**
+	 * Gets custom hero image full HTML markup
+	 *
+	 * Or empty, if we're not overriding the branding.
+	 *
+	 * @return string
+	 */
+	static public function get_custom_hero_image_markup() {
+		if ( ! self::has_custom_hero_image() ) {
+			return '';
+		}
+		$link = self::get_custom_hero_image();
+		return '<img class="shipper-branding-hero" src="' . esc_url( $link ) . '" />';
+	}
+
+	/**
+	 * Gets custom footer text link
+	 *
+	 * @param mixed $default String by default, or (bool)false for check.
+	 *
+	 * @return string
+	 */
+	static public function get_custom_footer( $default = '' ) {
+		return apply_filters( 'wpmudev_branding_footer_text', $default );
+	}
+
+	/**
+	 * Checks whether we have a custom footer text
+	 *
+	 * @return bool
+	 */
+	static public function has_custom_footer() {
+		return false !== self::get_custom_footer( false );
+	}
+
+	/**
+	 * Checks whether we're hiding documentation links
+	 *
+	 * @return true
+	 */
+	static public function has_docs_links() {
+		return ! apply_filters( 'wpmudev_branding_hide_doc_link', false );
+	}
+
+	/**
+	 * Returns the footer text
+	 * This is either the custom footer (if set and used), or our default
+	 * branding footer.
+	 *
+	 * @return string Footer (HTML)
+	 */
+	static function get_footer_text() {
+		if ( self::has_custom_footer() ) {
+			return self::get_custom_footer();
+		}
+		return sprintf(
+			__( 'Made with %s by WPMU DEV', 'shipper' ),
+			'<i class="sui-icon-heart" aria-hidden="true"></i>'
+		);
 	}
 }

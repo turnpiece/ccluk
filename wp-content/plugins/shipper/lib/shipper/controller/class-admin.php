@@ -149,8 +149,13 @@ class Shipper_Controller_Admin extends Shipper_Controller {
 	public function render_page_migrate_setup( $type, $site, $check = false ) {
 		if ( ! shipper_user_can_ship() ) { return wp_die( esc_html( __( 'Nope.', 'shipper' ) ) ); }
 
-		$errors = $this->update_destinations();
+		$errors = $this->handle_migration_destinations_cache();
 		$destinations = new Shipper_Model_Stored_Destinations;
+
+		if ( ! empty( $type ) && empty( $site ) ) {
+			// Fetch fresh list from the API on site selection page.
+			$this->update_destinations_cache();
+		}
 
 		$tpl = new Shipper_Helper_Template;
 		$tpl->render( 'pages/migration/selection', array(
@@ -171,7 +176,7 @@ class Shipper_Controller_Admin extends Shipper_Controller {
 	public function render_page_migrate_progress( $type, $site ) {
 		if ( ! shipper_user_can_ship() ) { return wp_die( esc_html( __( 'Nope.', 'shipper' ) ) ); }
 
-		$errors = $this->update_destinations();
+		$errors = $this->handle_migration_destinations_cache();
 		$destinations = new Shipper_Model_Stored_Destinations;
 
 		$tpl = new Shipper_Helper_Template;
@@ -277,7 +282,7 @@ class Shipper_Controller_Admin extends Shipper_Controller {
 	 *
 	 * @return array
 	 */
-	public function update_destinations() {
+	public function handle_migration_destinations_cache() {
 		if ( ! shipper_user_can_ship() ) { return array(); }
 		$destinations = new Shipper_Model_Stored_Destinations;
 
@@ -302,15 +307,7 @@ class Shipper_Controller_Admin extends Shipper_Controller {
 
 		if ( empty( $errors ) && $destinations->is_expired() ) {
 			// Expired destinations cache - update.
-			$task = new Shipper_Task_Api_Destinations_Get;
-			$result = $task->apply();
-			if ( ! empty( $result ) ) {
-				// We got the listing result - update stored destinations cache.
-				$destinations->set_data( $result );
-				$destinations->set_timestamp( time() );
-				$destinations->save();
-			}
-			$errors = array_merge( $errors, $task->get_errors() );
+			$errors = array_merge( $errors, $this->update_destinations_cache() );
 		}
 
 		foreach ( $errors as $error ) {
@@ -320,6 +317,25 @@ class Shipper_Controller_Admin extends Shipper_Controller {
 		}
 
 		return $errors;
+	}
+
+
+	/**
+	 * Updates the destinations cache model
+	 *
+	 * @return array Errors, if any
+	 */
+	public function update_destinations_cache() {
+		$task = new Shipper_Task_Api_Destinations_Get;
+		$result = $task->apply();
+		if ( ! empty( $result ) ) {
+			// We got the listing result - update stored destinations cache.
+			$destinations = new Shipper_Model_Stored_Destinations;
+			$destinations->set_data( $result );
+			$destinations->set_timestamp( time() );
+			$destinations->save();
+		}
+		return $task->get_errors();
 	}
 
 	/**
@@ -460,7 +476,7 @@ class Shipper_Controller_Admin extends Shipper_Controller {
 		wp_enqueue_script(
 			'shipper',
 			$assets->get_asset( 'js/shipper.js' ),
-			array( 'jquery' ),
+			array( 'jquery', 'underscore' ),
 			SHIPPER_VERSION,
 			true
 		);

@@ -37,7 +37,7 @@ class Google_0814_Service_SiteVerification extends Google_0814_Service
   const SITEVERIFICATION_VERIFY_ONLY = "https://www.googleapis.com/auth/siteverification.verify_only";
 
   public $webResource;
-
+  
 
   /**
    * Constructs the internal representation of the SiteVerification service.

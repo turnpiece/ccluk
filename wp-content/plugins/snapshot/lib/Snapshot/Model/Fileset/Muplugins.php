@@ -11,7 +11,7 @@ class Snapshot_Model_Fileset_Muplugins extends Snapshot_Model_Fileset {
 
 		return $path;
 	}
-
+	
 	public function get_files ($chunk = false) {
 		$path = $this->get_root();
 		if (empty($path)) return array();

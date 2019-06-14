@@ -34,7 +34,7 @@ class Google_0814_Service_GroupsMigration extends Google_0814_Service
 
 
   public $archive;
-
+  
 
   /**
    * Constructs the internal representation of the GroupsMigration service.

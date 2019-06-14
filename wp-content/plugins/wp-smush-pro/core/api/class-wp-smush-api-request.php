@@ -337,17 +337,16 @@ class WP_Smush_API_Request {
 				break;
 		}
 
-		if ( ! $manual ) {
-			$last_run['time'] = time();
+		$last_run['time'] = time();
 
-			if ( ! is_wp_error( $response ) && 200 === wp_remote_retrieve_response_code( $response ) ) {
-				$last_run['fails'] = 0;
-				WP_Smush_Settings::get_instance()->set_setting( WP_SMUSH_PREFIX . 'last_run_sync', $last_run );
-			} else {
-				// For network errors, perform exponential backoff.
-				$last_run['fails'] = $last_run['fails'] + 1;
-				WP_Smush_Settings::get_instance()->set_setting( WP_SMUSH_PREFIX . 'last_run_sync', $last_run );
-			}
+		// Clear the API backoff if it's a manual scan or the API call was a success.
+		if ( $manual || ( ! is_wp_error( $response ) && 200 === wp_remote_retrieve_response_code( $response ) ) ) {
+			$last_run['fails'] = 0;
+			WP_Smush_Settings::get_instance()->set_setting( WP_SMUSH_PREFIX . 'last_run_sync', $last_run );
+		} else {
+			// For network errors, perform exponential backoff.
+			$last_run['fails'] = $last_run['fails'] + 1;
+			WP_Smush_Settings::get_instance()->set_setting( WP_SMUSH_PREFIX . 'last_run_sync', $last_run );
 		}
 
 		return $response;

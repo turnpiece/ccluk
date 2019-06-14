@@ -64,7 +64,7 @@ class Google_0814_Service_Analytics extends Google_0814_Service
   public $management_webpropertyUserLinks;
   public $metadata_columns;
   public $provisioning;
-
+  
 
   /**
    * Constructs the internal representation of the Analytics service.

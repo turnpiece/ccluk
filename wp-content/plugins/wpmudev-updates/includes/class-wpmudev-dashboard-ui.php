@@ -1202,8 +1202,9 @@ class WPMUDEV_Dashboard_Ui {
 	 */
 	public function render_dashboard() {
 		// These two variables are used in template login.php.
-		$connection_error = false;
-		$key_valid        = true;
+		$connection_error    = false;
+		$key_valid           = true;
+		$site_limit_exceeded = false;
 
 		if ( ! current_user_can( 'manage_options' ) ) {
 			$this->load_sui_template( 'no_access' );
@@ -1228,6 +1229,8 @@ class WPMUDEV_Dashboard_Ui {
 			$key_valid = false;
 		} elseif ( ! empty( $_REQUEST['connection_error'] ) ) {
 			$connection_error = true;
+		} elseif ( ! empty( $_REQUEST['site_limit_exceeded'] ) ) {
+			$site_limit_exceeded = true;
 		}
 
 		$is_logged_in = WPMUDEV_Dashboard::$api->has_key();
@@ -1235,7 +1238,7 @@ class WPMUDEV_Dashboard_Ui {
 
 		if ( ! $is_logged_in ) {
 			// User did not log in to WPMUDEV -> Show login page!
-			$this->load_sui_template( 'login', compact( 'key_valid', 'connection_error', 'urls' ) );
+			$this->load_sui_template( 'login', compact( 'key_valid', 'connection_error', 'site_limit_exceeded', 'urls' ) );
 		} elseif ( ! WPMUDEV_Dashboard::$site->allowed_user() ) {
 			// User has no permission to view the page.
 			$this->load_sui_template( 'no_access' );

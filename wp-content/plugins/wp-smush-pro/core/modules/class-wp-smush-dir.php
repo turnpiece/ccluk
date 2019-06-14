@@ -274,7 +274,7 @@ class WP_Smush_Dir {
 		// All good, Update the stats.
 		$wpdb->query(
 			$wpdb->prepare(
-				"UPDATE {$wpdb->prefix}smush_dir_images SET image_size=%d, file_time=%d, lossy=%s WHERE id=%d LIMIT 1",
+				"UPDATE {$wpdb->prefix}smush_dir_images SET error=NULL, image_size=%d, file_time=%d, lossy=%s WHERE id=%d LIMIT 1",
 				$smush_results['data']->after_size,
 				$file_time,
 				$lossy,
@@ -521,7 +521,7 @@ class WP_Smush_Dir {
 					);
 				}
 
-				wp_send_json_success( $tree );
+				wp_send_json( $tree );
 			}
 		}
 	}

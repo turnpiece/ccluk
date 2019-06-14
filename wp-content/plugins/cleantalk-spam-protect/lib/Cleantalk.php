@@ -251,8 +251,12 @@ class Cleantalk {
 
 			// Loop until find work server
 			foreach ($servers as $server) {
-
-				$this->work_url = $url_protocol . $server['ip'] . $url_suffix;
+				
+				$dns = CleantalkHelper::ip__resolve__cleantalks($server['ip']);
+				if(!$dns)
+					continue;
+				
+				$this->work_url = $url_protocol.$dns.$url_suffix;
 				$this->server_ttl = $server['ttl'];
 
 				$result = $this->sendRequest($msg, $this->work_url, $this->server_timeout);
@@ -410,6 +414,11 @@ class Cleantalk {
         $result = false;
         $curl_error = null;
 		
+		// Switching to secure connection
+		if ($this->ssl_on && !preg_match("/^https:/", $url)){
+			$url = preg_replace("/^(http)/i", "$1s", $url);
+		}
+		
 		if($this->use_bultin_api){
 			
 			$args = array(
@@ -428,12 +437,6 @@ class Cleantalk {
 			}
 			
 		}else{
-			
-
-			// Switching to secure connection
-			if ($this->ssl_on && !preg_match("/^https:/", $url)){
-				$url = preg_replace("/^(http)/i", "$1s", $url);
-			}
 			
 			if(function_exists('curl_init')) {
 

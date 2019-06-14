@@ -67,10 +67,10 @@ if ( version_compare(PHP_VERSION, '5.5.0', '<') ) {
 		</div>
 
 	</div>
-	<?php
+	<?php 
     if ( ! isset( $item['ssl'] ) ) {
 			$item['ssl'] = "yes";
-	}
+	} 
     ?>
 	<div id="wps-destination-ssl" class="form-row">
 
@@ -89,10 +89,10 @@ if ( version_compare(PHP_VERSION, '5.5.0', '<') ) {
 
 	</div>
 
-	<?php
+	<?php 
     if ( ! isset( $item['region'] ) ) {
 		$item['region'] = ( $aws_sdk_compatible ) ? Snapshot_Model_Destination_AWS::REGION_US_E1 : 'US Standard (s3.amazonaws.com)';
-	}
+	} 
 	?>
 
 	<div id="wps-destination-region" class="form-row">
@@ -109,16 +109,16 @@ if ( version_compare(PHP_VERSION, '5.5.0', '<') ) {
 				if ( $aws_sdk_compatible ) {
 					foreach ( $item_object->get_regions() as $_key => $_name ) :
 					?>
-						<option value="<?php echo esc_attr( $_key ); ?>"
-							<?php
+						<option value="<?php echo esc_attr( $_key ); ?>" 
+							<?php 
 							if ( $item['region'] === $_key ) {
 								echo ' selected="selected" ';
-							}
+							} 
 							?>
 							>
 							<?php echo esc_html( $_name ); ?> (<?php echo esc_html( $_key ); ?>)
 						</option>
-
+	
 					<?php
 					endforeach;
 				} else {
@@ -136,11 +136,11 @@ if ( version_compare(PHP_VERSION, '5.5.0', '<') ) {
 			<?php
 			if ( $aws_sdk_compatible ) {
 			?>
-				<div id="snapshot-destination-region-other-container"
+				<div id="snapshot-destination-region-other-container" 
 				<?php
 				if ( 'other' !== $item['region'] ) {
 					echo ' style="display: none;" ';
-				}
+				} 
 				?>
 				>
 					<br /><label
@@ -158,11 +158,11 @@ if ( version_compare(PHP_VERSION, '5.5.0', '<') ) {
 			<?php
 			if ( $aws_sdk_compatible ) {
 			?>
-				<div id="snapshot-destination-region-non-aws-container"
+				<div id="snapshot-destination-region-non-aws-container" 
 				<?php
 				if ( 'non-aws' !== $item['region'] ) {
 					echo ' style="display: none;" ';
-				}
+				} 
 				?>
 				>
 					<br /><label
@@ -187,10 +187,10 @@ if ( version_compare(PHP_VERSION, '5.5.0', '<') ) {
 
 	</div>
 
-	<?php
+	<?php 
 	if ( ! isset( $item['storage'] ) ) {
 		$item['storage'] = ( $aws_sdk_compatible ) ? Snapshot_Model_Destination_AWS::STORAGE_STANDARD : 'Standard';
-	}
+	} 
 	?>
 
 	<div id="wps-destination-storage" class="form-row">
@@ -208,11 +208,11 @@ if ( version_compare(PHP_VERSION, '5.5.0', '<') ) {
 					foreach ( $item_object->get_storage() as $_key => $_name ) :
 					?>
 
-						<option value="<?php echo esc_attr( $_key ); ?>"
-							<?php
+						<option value="<?php echo esc_attr( $_key ); ?>" 
+							<?php 
 							if ( $item['storage'] === $_key ) {
 								echo ' selected="selected" ';
-							}
+							} 
 							?>
 							>
 							<?php echo esc_html( $_name ); ?> (<?php echo esc_attr( $_key ); ?>)
@@ -242,9 +242,9 @@ if ( version_compare(PHP_VERSION, '5.5.0', '<') ) {
 		<div class="form-col">
 
 			<div class="wps-aws-bucket-align">
-
+			
 				<?php
-				if ( isset( $item['bucket'] ) ) {
+				if ( isset( $item['bucket'] ) ) { 
                 ?>
 					<span id="snapshot-destination-bucket-display"><?php echo esc_html( $item['bucket'] ); ?></span>
 					<input
@@ -252,7 +252,7 @@ if ( version_compare(PHP_VERSION, '5.5.0', '<') ) {
 					id="snapshot-destination-bucket"
 					value="<?php if ( isset( $item['bucket'] ) ) echo esc_attr( $item['bucket'] ); ?>" />
                     <?php
-				}
+				} 
                 ?>
 
 				<button id="snapshot-destination-aws-get-bucket-list" class="button-seconary button button-gray<?php if ( empty ( $item['bucket']  ) ) echo ' wps-last-item'; ?>" name="" <?php echo ( ! $aws_sdk_compatible ) ? 'disabled' . $disabled_buttons_styling : ''; ?>><?php esc_html_e( 'Select Bucket', SNAPSHOT_I18N_DOMAIN ); ?></button> <?php // phpcs:ignore ?>
@@ -276,10 +276,10 @@ if ( version_compare(PHP_VERSION, '5.5.0', '<') ) {
 
 		<div class="form-col">
 
-			<?php
+			<?php 
             if ( ! isset( $item['acl'] ) ) {
 				$item['acl'] = ( $aws_sdk_compatible ) ? Snapshot_Model_Destination_AWS::ACL_PRIVATE : 'Private';
-			}
+			} 
             ?>
 			<select name="snapshot-destination[acl]" id="snapshot-destination-acl" class="<?php $this->input_error_class( 'acl' ); ?>" <?php echo ( ! $aws_sdk_compatible ) ? 'disabled': ''; ?> >
 				<?php

@@ -35,7 +35,7 @@ class Google_0814_Service_Groupssettings extends Google_0814_Service
   const APPS_GROUPS_SETTINGS = "https://www.googleapis.com/auth/apps.groups.settings";
 
   public $groups;
-
+  
 
   /**
    * Constructs the internal representation of the Groupssettings service.

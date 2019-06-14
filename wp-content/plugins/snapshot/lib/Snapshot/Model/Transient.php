@@ -109,7 +109,7 @@ class Snapshot_Model_Transient {
 	 */
 	public static function expire ($transient) {
 		if (empty($transient)) return false;
-
+		
 		$value = self::get($transient, false);
 		return self::set(
 			$transient,
@@ -133,7 +133,7 @@ class Snapshot_Model_Transient {
 			? (int)$timeout
 			: self::ttl(self::get_default_ttl())
 		;
-
+		
 		$now = time();
 		$expiry = $now + (int)$timeout;
 

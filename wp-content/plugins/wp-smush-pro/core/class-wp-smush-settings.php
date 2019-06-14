@@ -48,6 +48,7 @@ class WP_Smush_Settings {
 		'nextgen'           => false,
 		's3'                => false,
 		'gutenberg'         => false,
+		'js_builder'        => false,
 		'cdn'               => false,
 		'auto_resize'       => false,
 		'webp'              => true,
@@ -64,7 +65,7 @@ class WP_Smush_Settings {
 	 *
 	 * @var array
 	 */
-	private $bulk_fields = array( 'networkwide', 'auto', 'lossy', 'original', 'strip_exif', 'resize', 'backup', 'png_to_jpg', 'detection' );
+	private $bulk_fields = array( 'networkwide', 'auto', 'lossy', 'original', 'strip_exif', 'resize', 'backup', 'png_to_jpg' );
 
 	/**
 	 * List of fields in integration form.
@@ -73,7 +74,7 @@ class WP_Smush_Settings {
 	 *
 	 * @var array
 	 */
-	private $integration_fields = array( 'gutenberg', 'nextgen', 's3' );
+	private $integration_fields = array( 'gutenberg', 'nextgen', 's3', 'js_builder' );
 
 	/**
 	 * List of fields in CDN form.
@@ -101,6 +102,15 @@ class WP_Smush_Settings {
 	 * @var array
 	 */
 	private $lazy_load_fields = array( 'lazy_load' );
+
+	/**
+	 * List of fields in tools form.
+	 *
+	 * @used-by save()
+	 *
+	 * @var array
+	 */
+	private $tools_fields = array( 'detection' );
 
 	/**
 	 * Return the plugin instance.
@@ -291,7 +301,7 @@ class WP_Smush_Settings {
 			return;
 		}
 
-		$pages_with_settings = array( 'bulk', 'integration', 'cdn', 'settings', 'lazy_load' );
+		$pages_with_settings = array( 'bulk', 'integration', 'cdn', 'settings', 'lazy_load', 'tools' );
 		$setting_form        = isset( $_POST['setting_form'] ) ? sanitize_text_field( wp_unslash( $_POST['setting_form'] ) ) : '';
 
 		// Continue only if form name is set.
@@ -358,20 +368,20 @@ class WP_Smush_Settings {
 	 * @since 3.2.0  Moved from save method.
 	 */
 	private function parse_bulk_settings() {
-		$image_sizes = array();
-
 		check_ajax_referer( 'save_wp_smush_options', 'wp_smush_options_nonce' );
 
 		// Save the selected image sizes.
-		if ( ! empty( $_POST['wp-smush-image_sizes'] ) ) {
+		if ( empty( $_POST['wp-smush-image_sizes'] ) ) {
+			$this->delete_setting( WP_SMUSH_PREFIX . 'image_sizes' );
+		} else {
 			$image_sizes = array_filter( array_map( 'sanitize_text_field', wp_unslash( $_POST['wp-smush-image_sizes'] ) ) );
+			$this->set_setting( WP_SMUSH_PREFIX . 'image_sizes', $image_sizes );
 		}
 
 		// Update Resize width and height settings if set.
 		$resize_sizes['width']  = isset( $_POST['wp-smush-resize_width'] ) ? intval( $_POST['wp-smush-resize_width'] ) : 0; // Input var ok.
 		$resize_sizes['height'] = isset( $_POST['wp-smush-resize_height'] ) ? intval( $_POST['wp-smush-resize_height'] ) : 0; // Input var ok.
 
-		$this->set_setting( WP_SMUSH_PREFIX . 'image_sizes', $image_sizes );
 		$this->set_setting( WP_SMUSH_PREFIX . 'resize_sizes', $resize_sizes );
 	}
 

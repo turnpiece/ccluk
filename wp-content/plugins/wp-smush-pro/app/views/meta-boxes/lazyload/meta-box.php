@@ -21,7 +21,7 @@ if ( ! defined( 'WPINC' ) ) {
 </p>
 
 <div class="sui-notice sui-notice-info smush-notice-sm">
-	<p><?php esc_html_e( 'Lazyloading is active.', 'wp-smushit' ); ?></p>
+	<p><?php esc_html_e( 'Lazy loading is active.', 'wp-smushit' ); ?></p>
 </div>
 
 <form id="wp-smush-settings-form" method="post">
@@ -37,7 +37,7 @@ if ( ! defined( 'WPINC' ) ) {
 				<?php esc_html_e( 'Media Types', 'wp-smushit' ); ?>
 			</span>
 			<span class="sui-description">
-				<?php esc_html_e( 'Choose which media types you want to lazyload.', 'wp-smushit' ); ?>
+				<?php esc_html_e( 'Choose which media types you want to lazy load.', 'wp-smushit' ); ?>
 			</span>
 		</div>
 		<div class="sui-box-settings-col-2">
@@ -74,7 +74,7 @@ if ( ! defined( 'WPINC' ) ) {
 				<?php esc_html_e( 'Output Locations', 'wp-smushit' ); ?>
 			</span>
 			<span class="sui-description">
-				<?php esc_html_e( 'By default we will lazyload all images, but you can refine this to specific media outputs too.', 'wp-smushit' ); ?>
+				<?php esc_html_e( 'By default we will lazy load all images, but you can refine this to specific media outputs too.', 'wp-smushit' ); ?>
 			</span>
 		</div>
 		<div class="sui-box-settings-col-2">
@@ -160,14 +160,14 @@ if ( ! defined( 'WPINC' ) ) {
 				<?php esc_html_e( 'Include / Exclude', 'wp-smushit' ); ?>
 			</span>
 			<span class="sui-description">
-				<?php esc_html_e( 'Disable lazyloading for specific pages, posts or image classes that you wish to prevent lazyloading on.', 'wp-smushit' ); ?>
+				<?php esc_html_e( 'Disable lazy loading for specific pages, posts or image classes that you wish to prevent lazyloading on.', 'wp-smushit' ); ?>
 			</span>
 		</div>
 		<div class="sui-box-settings-col-2">
 			<div class="sui-form-field">
 				<strong><?php esc_html_e( 'Post Types', 'wp-smushit' ); ?></strong>
 				<div class="sui-description">
-					<?php esc_html_e( 'Choose the post types you want to lazyload.', 'wp-smushit' ); ?>
+					<?php esc_html_e( 'Choose the post types you want to lazy load.', 'wp-smushit' ); ?>
 				</div>
 				<table class="sui-table">
 					<thead>
@@ -262,7 +262,7 @@ if ( ! defined( 'WPINC' ) ) {
 			<div class="sui-form-field">
 				<strong><?php esc_html_e( 'Post, Pages & URLs', 'wp-smushit' ); ?></strong>
 				<div class="sui-description">
-					<?php esc_html_e( 'Add URLs to the posts and/or pages you want to disable lazyloading on.', 'wp-smushit' ); ?>
+					<?php esc_html_e( 'Add URLs to the posts and/or pages you want to disable lazy loading on.', 'wp-smushit' ); ?>
 				</div>
 				<?php
 				$strings = '';
@@ -286,15 +286,20 @@ if ( ! defined( 'WPINC' ) ) {
 			<div class="sui-form-field">
 				<strong><?php esc_html_e( 'Classes & IDs', 'wp-smushit' ); ?></strong>
 				<div class="sui-description">
-					<?php esc_html_e( 'Additionally, you can specify classes or IDs to avoid lazyloading. This gives you absolute control over each image on a page, not just the page itself.', 'wp-smushit' ); ?>
+					<?php esc_html_e( 'Additionally, you can specify classes or IDs to avoid lazy loading. This gives you absolute control over each image on a page, not just the page itself.', 'wp-smushit' ); ?>
 				</div>
-				<?php $strings = join( PHP_EOL, $settings['exclude-classes'] ); ?>
+				<?php
+				$strings = '';
+				if ( is_array( $settings['exclude-classes'] ) ) {
+					$strings = join( PHP_EOL, $settings['exclude-classes'] );
+				}
+				?>
 				<textarea class="sui-form-control" name="exclude-classes" placeholder="<?php esc_attr_e( 'Add classes or IDs, one per line', 'wp-smushit' ); ?>"><?php echo esc_attr( $strings ); ?></textarea>
 				<div class="sui-description">
 					<?php
 					printf(
 						/* translators: %1$s - opening strong tag, %2$s - closing strong tag */
-						esc_html__( 'Add one class or ID per line, including the prefix. E.g %1$s#image-id%2$s or %1$s#image-class%2$s.', 'wp-smushit' ),
+						esc_html__( 'Add one class or ID per line, including the prefix. E.g %1$s#image-id%2$s or %1$s.image-class%2$s.', 'wp-smushit' ),
 						'<strong>',
 						'</strong>'
 					);

@@ -257,7 +257,7 @@ class WP_Smush_DB {
 		}
 
 		// Add the attachments to cache.
-		wp_cache_add( 'media_attachments', $posts, 'wp-smushit' );
+		wp_cache_add( 'media_attachments', $posts, 'wp-smush' );
 
 		if ( $return_count ) {
 			return count( $posts );

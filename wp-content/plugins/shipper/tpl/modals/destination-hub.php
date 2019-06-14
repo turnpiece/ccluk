@@ -29,6 +29,6 @@
 
 	<p class="shipper-note">
 		<?php esc_html_e( 'Prefer to install Shipper manually?', 'shipper' ); ?>
-		<a href="http://"><?php esc_html_e( 'Download Shipper', 'shipper' ); ?></a>
+		<a href="https://premium.wpmudev.org/project/shipper-pro/"><?php esc_html_e( 'Download Shipper', 'shipper' ); ?></a>
 	</p>
 </div>

@@ -55,6 +55,12 @@ class Snapshot_Process_Import_Archives {
 
 		$dir = trailingslashit( $dir );
 
+		$normalizedPath = strtolower( trim( $dir ) );
+
+		if ( strpos( $normalizedPath, 'phar://' ) !== false ) {
+			throw new Exception('phar handler not allowed');
+		}
+
 		if ( ! is_dir( $dir ) ) {
 			return false;
 		}
@@ -174,7 +180,7 @@ class Snapshot_Process_Import_Archives {
 		if ( ! wp_verify_nonce( $_POST['snapshot-noonce-field'], 'snapshot-import' ) ) {
 			return;
 		}
-
+		
 		/* If no URL or directory is specified, check the local directory */
 		if ( empty( $_POST['snapshot-import-archive-remote-url'] ) ) {
 			$this->process_local_archives();
@@ -312,3 +318,7 @@ class Snapshot_Process_Import_Archives {
 
 	</section>
 </div>
+<?php
+if( Snapshot_Helper_Utility::is_wpmu_hosting() ) {
+	$this->render( 'boxes/modals/popup-hosting', false, array(), false, false );
+}

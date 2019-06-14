@@ -102,7 +102,7 @@ $model = new Snapshot_Model_Full_Backup();
 						<tr>
 
 							<th><?php esc_html_e( 'Snapshot Key', SNAPSHOT_I18N_DOMAIN ); ?>
-								<?php
+								<?php 
 								if ( $hasApikey ) :
 								?>
 									<i class="wps-icon i-check"></i>
@@ -141,7 +141,7 @@ $model = new Snapshot_Model_Full_Backup();
 												esc_html__( '%1$s at %2$s', SNAPSHOT_I18N_DOMAIN ),
 												$frequencies[ $model->get_frequency() ],
 												$schedule_times[ $model->get_schedule_time() ]
-											)
+											) 
 										);
 
 										?>
@@ -149,10 +149,10 @@ $model = new Snapshot_Model_Full_Backup();
 								<?php } ?>
 
 								<a id="wps-managed-backups-configure" class="button button-outline button-small button-gray <?php echo ( ! $aws_sdk_compatible ) ? 'disabled': ''; ?>">
-									<?php
+									<?php 
                                     echo $model->get_config( 'disable_cron', false ) ?
 										esc_html__( 'Enable', SNAPSHOT_I18N_DOMAIN ) :
-										esc_html__( 'Configure', SNAPSHOT_I18N_DOMAIN );
+										esc_html__( 'Configure', SNAPSHOT_I18N_DOMAIN ); 
                                         ?>
 								</a>
 							</td>
@@ -199,10 +199,10 @@ $model = new Snapshot_Model_Full_Backup();
 			<div class="wps-managed-backups-pages">
 
 				<section class="wpmud-box wps-managed-backups-list wps-widget-available_backups
-                <?php
+                <?php 
                 if ( 'backups' !== $backup_menu ) {
 					echo ' hidden';
-				}
+				} 
                 ?>
                 ">
 
@@ -223,11 +223,11 @@ $model = new Snapshot_Model_Full_Backup();
 						<?php } ?>
 
 					</div>
-					<?php
+					<?php 
 						if ( ( ! $aws_sdk_compatible ) && ( 0 === $results_count ) ) {
-							$wpmud_box_content_class = ' wps-aws-sdk-incompatible';
+							$wpmud_box_content_class = ' wps-aws-sdk-incompatible'; 
 						} else {
-							$wpmud_box_content_class = '';
+							$wpmud_box_content_class = ''; 
 						}
 					?>
 					<div class="wpmud-box-content<?php echo esc_attr( $wpmud_box_content_class ); ?>">
@@ -283,7 +283,7 @@ $model = new Snapshot_Model_Full_Backup();
 														/* Fetch the remote link for the backup */
 														if ( $aws_sdk_compatible ) {
 															$backup_link = $model->remote()->get_backup_link( $backup['timestamp'] );
-
+	
 															/* If there is no remote URL, build a local download link */
 															if ( ! $backup_link ) {
 																$backup_link = WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url( 'snapshots-newui-managed-backups' );
@@ -347,7 +347,7 @@ $model = new Snapshot_Model_Full_Backup();
 
 															<td class="msc-date" data-title="<?php esc_html_e( 'Date', SNAPSHOT_I18N_DOMAIN ); ?>:">
 
-																<?php
+																<?php 
                                                                 if ( isset( $backup['timestamp'] ) ) {
 
 																	echo esc_html( Snapshot_Helper_Utility::show_date_time( $backup['timestamp'] ) );
@@ -457,10 +457,10 @@ $model = new Snapshot_Model_Full_Backup();
 				</section><?php // .wps-widget-available_backups ?>
 
 				<section class="wpmud-box wps-managed-backups-configs wps-widget-backups_settings
-                <?php
+                <?php 
                 if ( 'settings' !== $backup_menu ) {
 					echo ' hidden';
-				}
+				} 
                 ?>
                 ">
 
@@ -501,11 +501,11 @@ $model = new Snapshot_Model_Full_Backup();
 											<div class="wps-managed-backups-toggle">
 
 												<div class="toggle">
-													<input type="checkbox" id="wps-managed-backups-onoff" class="toggle-checkbox" <?php echo ( ! $aws_sdk_compatible ) ? 'disabled': ''; ?>
-                                                    <?php
+													<input type="checkbox" id="wps-managed-backups-onoff" class="toggle-checkbox" <?php echo ( ! $aws_sdk_compatible ) ? 'disabled': ''; ?> 
+                                                    <?php 
                                                     if ( false === $cron_disabled ) {
 														echo ' checked';
-													}
+													} 
                                                     ?>
                                                     >
 													<label class="toggle-label" for="wps-managed-backups-onoff"></label>
@@ -575,6 +575,10 @@ $model = new Snapshot_Model_Full_Backup();
 													<?php } ?>
 												</select>
 
+												<p class="spread-managed-schedules">
+													<small><?php esc_html_e( 'Note: If you have multiple websites hosted on the same server which all have the same backups schedule, you could run into issues. We recommend spreading your backup schedules over different days, or at at least different times of the day.', SNAPSHOT_I18N_DOMAIN ); ?></small>
+												</p>
+
 											</div>
 
 										</div>
@@ -626,7 +630,7 @@ $model = new Snapshot_Model_Full_Backup();
 
 													<div class="wps-input--radio">
 
-														<input type="radio" name="managed-backup-exclusions" id="managed-backup-exclusions-global" value="global"
+														<input type="radio" name="managed-backup-exclusions" id="managed-backup-exclusions-global" value="global" 
 														<?php
 														if ( ! isset( WPMUDEVSnapshot::instance()->config_data['config']['managedBackupExclusions'] ) || "global" === WPMUDEVSnapshot::instance()->config_data['config']['managedBackupExclusions'] ) {
 															echo ' checked="checked" ';
@@ -646,8 +650,8 @@ $model = new Snapshot_Model_Full_Backup();
 
 													<div class="wps-input--radio">
 
-														<input type="radio" name="managed-backup-exclusions" id="managed-backup-exclusions-managed" value="managed"
-														<?php
+														<input type="radio" name="managed-backup-exclusions" id="managed-backup-exclusions-managed" value="managed" 
+														<?php 
 														if ( isset( WPMUDEVSnapshot::instance()->config_data['config']['managedBackupExclusions'] ) && "managed" === WPMUDEVSnapshot::instance()->config_data['config']['managedBackupExclusions'] ) {
 															echo ' checked="checked" ';
 														}

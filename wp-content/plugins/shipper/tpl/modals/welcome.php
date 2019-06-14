@@ -10,6 +10,24 @@ $message = ! empty( $message ) ? $message : '';
 $button = ! empty( $button ) ? $button : __( 'Continue', 'shipper' );
 $skippable = ! empty( $skippable ) ? $skippable : '';
 $action = ! empty( $action ) ? $action : '#close';
+
+$notice = '';
+if ( ! empty( $message ) && ! empty( $skippable ) && ! empty( $_GET['done_this'] ) ) {
+	$notice = $this->get( 'msgs/welcome-dash-issue', array( 'action' => $action ) );
+}
+
+if ( empty( $message ) && empty( $skippable ) ) {
+	$destinations = new Shipper_Model_Stored_Destinations;
+	if ( count( $destinations->get_data() ) > 1 ) {
+		// Yeah ok, not the first-time user.
+		// No need to show them the dialog.
+		return false;
+	}
+	$message = sprintf(
+		__( '<b>%s</b> has been added as a destination and is ready for migrating!', 'shipper' ),
+		Shipper_Model_Stored_Destinations::get_current_domain()
+	);
+}
 ?>
 
 <div class="sui-dialog shipper-welcome <?php
@@ -25,15 +43,20 @@ aria-hidden="true">
 		<div class="sui-box" role="document">
 			<div class="shipper-welcome-title">
 				<div class="shipper-wrapper">
-					<h3>Yarr, <?php echo esc_html( shipper_get_user_name() ); ?></h3>
+					<h3><i class="sui-icon-shipper-anchor" aria-hidden="true"></i></h3>
+					<?php echo Shipper_Helper_Assets::get_custom_hero_image_markup(); ?>
 				</div>
 			</div>
 			<div class="shipper-welcome-body">
 				<div class="sui-box-body">
 					<p>
 						<?php esc_html_e( 'Welcome to Shipper - the easiest migration tool for WordPress.', 'shipper' ); ?>
-						<?php echo esc_html( $message ); ?>
+						<?php echo wp_kses_post( $message ); ?>
 					</p>
+
+					<?php if ( ! empty( $notice ) ) { ?>
+						<?php echo wp_kses_post( $notice ); ?>
+					<?php } ?>
 
 					<div>
 						<a
@@ -45,7 +68,7 @@ aria-hidden="true">
 
 						<?php if ( ! empty( $skippable ) ) { ?>
 						<p>
-							<small><a href="#skip">
+							<small><a href="<?php echo esc_url( add_query_arg( 'done_this', 1 ) ); ?>">
 								<?php esc_html_e( 'I\'ve done this step', 'shipper' ); ?>
 							</a></small>
 						</p>

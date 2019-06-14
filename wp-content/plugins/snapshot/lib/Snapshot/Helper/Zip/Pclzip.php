@@ -23,7 +23,7 @@ class Snapshot_Helper_Zip_Pclzip extends Snapshot_Helper_Zip_Abstract {
 		Snapshot_Helper_Utility::check_server_timeout();
 
 		$this->_zip->add(
-			$files,
+			$files, 
 			PCLZIP_OPT_REMOVE_PATH, $this->_get_root_path(),
 			PCLZIP_OPT_ADD_PATH, $relative_path,
 			PCLZIP_OPT_TEMP_FILE_THRESHOLD, 10,

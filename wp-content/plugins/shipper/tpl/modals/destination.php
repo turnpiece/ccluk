@@ -5,34 +5,63 @@
  * @package shipper
  */
 
+$destinations = new Shipper_Model_Stored_Destinations;
+
+// Only show 'add destination' initial state if we don't have other sites around.
+$initial_state = count( $destinations->get_data() ) > 1
+	? 'connect'
+	: 'add';
 ?>
-<div class="sui-dialog shipper-destination-add" aria-hidden="true">
+<div class="sui-dialog shipper-destination-add" aria-hidden="true"
+	data-shipper-initial-state="<?php echo esc_attr( $initial_state ); ?>">
 	<div class="sui-dialog-overlay" tabindex="-1" data-a11y-dialog-hide></div>
 
 	<div class="sui-dialog-content" role="dialog">
 
 		<div class="sui-box" role="document">
-			<div class="shipper-destination-state shipper-destination-state-add">
+
+			<div class="shipper-destination-state shipper-destination-state-add"
+				style="display:none">
 				<?php $this->render( 'modals/destination-add' ); ?>
+				<?php echo Shipper_Helper_Assets::get_custom_hero_image_markup(); ?>
 			</div>
-			<div class="shipper-destination-state shipper-destination-state-check" style="display:none">
+
+			<div class="shipper-destination-state shipper-destination-state-check"
+				style="display:none">
 				<?php $this->render( 'modals/destination-check' ); ?>
+				<?php echo Shipper_Helper_Assets::get_custom_hero_image_markup(); ?>
 			</div>
-			<div class="shipper-destination-state shipper-destination-state-connect" style="display:none">
+
+			<div class="shipper-destination-state shipper-destination-state-connect"
+				style="display:none">
 				<?php $this->render( 'modals/destination-connect' ); ?>
+				<?php echo Shipper_Helper_Assets::get_custom_hero_image_markup(); ?>
 			</div>
-			<div class="shipper-destination-state shipper-destination-state-refresh" style="display:none">
+
+			<div class="shipper-destination-state shipper-destination-state-refresh"
+				style="display:none">
 				<?php $this->render( 'modals/destination-refresh' ); ?>
+				<?php echo Shipper_Helper_Assets::get_custom_hero_image_markup(); ?>
 			</div>
-			<div class="shipper-destination-state shipper-destination-state-hub" style="display:none">
+
+			<div class="shipper-destination-state shipper-destination-state-hub"
+				style="display:none">
 				<?php $this->render( 'modals/destination-hub' ); ?>
+				<?php echo Shipper_Helper_Assets::get_custom_hero_image_markup(); ?>
 			</div>
-			<div class="shipper-destination-state shipper-destination-state-prepare" style="display:none">
+
+			<div class="shipper-destination-state shipper-destination-state-prepare"
+				style="display:none">
 				<?php $this->render( 'modals/destination-prepare' ); ?>
+				<?php echo Shipper_Helper_Assets::get_custom_hero_image_markup(); ?>
 			</div>
-			<div class="shipper-destination-state shipper-destination-state-fail" style="display:none">
+
+			<div class="shipper-destination-state shipper-destination-state-fail"
+				style="display:none">
 				<?php $this->render( 'modals/destination-fail' ); ?>
+				<?php echo Shipper_Helper_Assets::get_custom_hero_image_markup(); ?>
 			</div>
+
 		</div>
 
 	</div><?php // .sui-dialog-content ?>

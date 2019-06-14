@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Snapshot Pro
-Version: 3.2.0.3
+Version: 3.2.1.1
 Description: This plugin allows you to take quick on-demand backup snapshots of your working WordPress database. You can select from the default WordPress tables as well as custom plugin tables within the database structure. All snapshots are logged, and you can restore the snapshot as needed.
 Author: WPMU DEV
 Author URI: https://premium.wpmudev.org/
@@ -38,7 +38,7 @@ WDP ID: 257
  *
  */
 
-define('SNAPSHOT_VERSION', '3.2.0.3');
+define('SNAPSHOT_VERSION', '3.2.1.1');
 
 if ( ! defined( 'SNAPSHOT_I18N_DOMAIN' ) ) {
 	define( 'SNAPSHOT_I18N_DOMAIN', 'snapshot' );
@@ -187,6 +187,11 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 			add_action( is_multisite() ? 'network_admin_menu' : 'admin_menu', array( $this, 'snapshot_admin_menu_proc' ) );
 			add_action( 'admin_init', array( $this, 'redirect_old_admin_menus' ) );
 
+			if ( Snapshot_Helper_Utility::is_wpmu_hosting() ) {
+				add_filter( 'submenu_file', array( $this, 'snapshot_remove_managed_page' ) );
+				add_action( 'current_screen', array( $this, 'snapshot_redirect_managed_page' ) );
+			}
+
 			/* Hook into the WordPress AJAX systems. */
 			add_action( 'wp_ajax_snapshot_backup_ajax', array( $this, 'snapshot_ajax_backup_proc' ) );
 			add_action( 'wp_ajax_snapshot_show_blog_tables', array( $this, 'snapshot_ajax_show_blog_tables' ) );
@@ -200,6 +205,9 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 			add_action( 'wp_ajax_dismiss_snapshot_aws_comp_notice', array( $this, 'snapshot_ajax_dismiss_aws_comp_notice' ) );
 
 			add_action( 'wp_ajax_snapshot_save_key', array( $this, 'snapshot_save_key_proc' ) );
+			add_action( 'wp_ajax_dismiss_hosting_backups_notice', array( $this, 'dismiss_hosting_backups_notice' ) );
+
+			add_action( 'wp_ajax_dismiss_managed_backups_notice', array( $this, 'dismiss_managed_backups_notice' ) );
 
 			/* Cron related functions */
 			add_filter( 'cron_schedules', array( 'Snapshot_Helper_Utility', 'add_cron_schedules' ), 99 );
@@ -234,6 +242,13 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 
 			// Whitelabel plugin pages
 			add_filter( 'wpmudev_whitelabel_plugin_pages', array( $this, 'snapshot_whitelabel_pages' ) );
+
+			/**
+			 * Check should I run cron
+			 *
+			 * @since 3.2.1
+			 */
+			add_filter( 'snapshot_maybe_should_it_stop', array( $this, 'maybe_should_it_stop' ) );
 
 			require_once dirname( __FILE__ ) . '/lib/Snapshot/Helper/Privacy.php';
 			Snapshot_Gdpr::serve();
@@ -304,6 +319,26 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 				}
 			}
 			Snapshot_Controller_Full::get()->run();
+
+			if ( Snapshot_Helper_Utility::is_wpmu_hosting() ) {
+				Snapshot_Controller_Hosting::get()->run();
+
+				$model = new Snapshot_Model_Full_Backup();
+
+				if ( ! $model->get_config( 'disable_cron', false ) ) {
+					// Disable any managed backup scheduling.
+					$model->set_config( 'frequency', false );
+					$model->set_config( 'schedule_time', false );
+					$model->set_config( 'disable_cron', true );
+					Snapshot_Controller_Full_Cron::get()->stop();
+	
+					// Let the service know
+					$model->update_remote_schedule();
+				}
+			} else {
+				// Replace the ajax handler fetching hosting backups list, that runs with every page load in the Snapshot dashboard.
+				add_action( 'wp_ajax_snapshot-hosting_backup-dashboard-list', array( $this, 'json_hosting_backup_dashboard_list_mock' ) );
+			}
 
 			if ( version_compare(PHP_VERSION, '5.5.0', '<') ) {
 				if ( ! isset ( $this->config_data['transitioned_sdk_incompat'] ) || ! $this->config_data['transitioned_sdk_incompat'] ) {
@@ -556,6 +591,16 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 				'snapshot_pro_destinations',
 				array( $this->_new_ui_tester, 'destinations' )
 			);
+			if ( Snapshot_Helper_Utility::is_wpmu_hosting() ) {
+				$this->_pagehooks['snapshots-newui-hosting-backups'] = add_submenu_page(
+					'snapshot_pro_dashboard',
+					_x( 'Backups', 'page label', SNAPSHOT_I18N_DOMAIN ),
+					_x( 'Backups', 'menu label', SNAPSHOT_I18N_DOMAIN ),
+					'manage_options',
+					'snapshot_pro_hosting_backups',
+					array( $this->_new_ui_tester, 'hosting_backups' )
+				);
+			}
 			$this->_pagehooks['snapshots-newui-managed-backups'] = add_submenu_page(
 				'snapshot_pro_dashboard',
 				_x( 'Managed Backups', 'page label', SNAPSHOT_I18N_DOMAIN ),
@@ -582,7 +627,11 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 			);
 
 			// Hook into the WordPress load page action for our new nav items. This is better then checking page query_str values.
-			$panels = array( 'dashboard', 'snapshots', 'destinations', 'managed-backups', 'import', 'settings' );
+			if ( Snapshot_Helper_Utility::is_wpmu_hosting() ) {
+				$panels = array( 'dashboard', 'snapshots', 'destinations', 'managed-backups', 'hosting-backups', 'import', 'settings' );
+			} else {
+				$panels = array( 'dashboard', 'snapshots', 'destinations', 'managed-backups', 'import', 'settings' );
+			}
 			$extra_actions = array(
 				'destinations' => 'on_load_destination_panels',
 				'managed-backups' => 'on_load_managed_backups_panels'
@@ -659,6 +708,10 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 			if ( version_compare(PHP_VERSION, '5.5.0', '<') && ! get_option( 'snapshot-aws-combat-dismissed' ) ) {
 				add_action( 'admin_notices', array( 'Snapshot_Helper_UI', 'snapshot_aws_compatibility_notices' ) );
 				add_action( 'network_admin_notices', array( 'Snapshot_Helper_UI', 'snapshot_aws_compatibility_notices' ) );
+			}
+
+			if ( isset( $_GET['dismiss_hosting_modal'], $_GET['_wpnonce'] ) && wp_verify_nonce( sanitize_key( $_GET['_wpnonce'] ), 'dismiss_notice' ) && 1 === absint( $_GET['dismiss_hosting_modal'] ) ) {
+				$this->dismiss_hosting_backups_notice( false );
 			}
 		}
 
@@ -1633,9 +1686,7 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 
 				$item['tables-option'] = $_post_array['snapshot-tables-option'];
 				if ( "none" === $item['tables-option'] ) {
-					assert(true); // Nothing to see here.
 				} else if ( "all" === $item['tables-option'] ) {
-					assert(true); // Nothing to see here.
 				} else if ( "selected" === $item['tables-option'] ) {
 
 					// The form submit when not immediate will be this form element.
@@ -1680,7 +1731,6 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 
 				$item['files-option'] = $_post_array['snapshot-files-option'];
 				if ( 'none' === $item['files-option'] ) {
-					assert(true); // Nothing to see here.
 				} else if ( 'all' === $item['files-option'] ) {
 					if ( is_main_site( $item['blog-id'] ) ) {
 						$item['files-sections'] = array( 'themes', 'plugins', 'media' );
@@ -2206,31 +2256,9 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 			global $wpdb;
 
 			if ( is_multisite() ) {
-				//$this->config_data = get_blog_option($wpdb->blogid, $this->_settings['options_key']);
-				$blog_prefix = $wpdb->get_blog_prefix( $wpdb->blogid );
-				// We are using placeholder for non-dynamic data here.
-				$row = $wpdb->get_col(
-					$wpdb->prepare(
-						// phpcs:ignore
-						"SELECT option_value FROM {$blog_prefix}options
-						WHERE option_name = %s", $this->_settings['options_key']
-					)
-				);
-				if ( $row ) {
-					$this->config_data = maybe_unserialize( $row[0] );
-				}
-
+				$this->config_data = get_blog_option($wpdb->blogid, $this->_settings['options_key']);
 			} else {
-				//$this->config_data = get_option($this->_settings['options_key']);
-				$row = $wpdb->get_col(
-					$wpdb->prepare(
-						"SELECT option_value FROM $wpdb->options
-						WHERE option_name = %s LIMIT 1", $this->_settings['options_key']
-					)
-				);
-				if ( $row ) {
-					$this->config_data = maybe_unserialize( $row[0] );
-				}
+				$this->config_data = get_option($this->_settings['options_key']);
 			}
 
 			if ( empty( $this->config_data ) ) {
@@ -3377,7 +3405,6 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 			if ( isset( $item['tables-option'] ) ) {
 
 				if ( "none" === $item['tables-option'] ) {
-					assert(true); // No-op.
 				} else if ( "all" === $item['tables-option'] ) {
 					$tables_sections = Snapshot_Helper_Utility::get_database_tables( $item['blog-id'] );
 				} else if ( "selected" === $item['tables-option'] ) {
@@ -5612,7 +5639,7 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 			}
 			flush_rewrite_rules();
 
-
+			
 			Snapshot_Helper_Utility::remove_sql_files( $this->_session->data['restoreFolder'] );
 			Snapshot_Helper_Utility::remove_manifest( $this->_session->data['restoreFolder'] );
 
@@ -6973,6 +7000,10 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 		 * @return void
 		 */
 		public function snapshot_backup_cron_proc( $item_key ) {
+			$stop = $this->maybe_should_it_stop();
+			if ( $stop ) {
+				return;
+			}
 
 			global $wpdb;
 
@@ -7079,8 +7110,6 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 
 				$_post_array['snapshot-tables-array'] = array();
 				if ( "none" === $_post_array['snapshot-tables-option'] ) {
-					assert(true); // Nothing to process here.
-
 				} else if ( "all" === $_post_array['snapshot-tables-option'] ) {
 
 					$tables_sections = Snapshot_Helper_Utility::get_database_tables( $item['blog-id'] );
@@ -7105,7 +7134,6 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 					$_post_array['snapshot-files-option'] = $item['files-option'];
 					$_post_array['snapshot-files-sections'] = array();
 					if ( "none" === $_post_array['snapshot-files-option'] ) {
-						assert(true); // No-op.
 					} else if ( "all" === $_post_array['snapshot-files-option'] ) {
 
 						if ( is_main_site( $item['blog-id'] ) ) {
@@ -7557,7 +7585,7 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 				// We make sure to check it against the item master. If they don't match it means
 				// the data_item archive was sent to the data_item destination. We probably don't
 				// have the archive file to resent.
-				assert(true); // @TODO ... or we don't?
+				// @TODO ... or we don't?
 			}
 
 			$destination_key = $item['destination'];
@@ -8473,7 +8501,7 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 				wp_add_inline_style(
 					'snapshot-pro-admin-stylesheet',
 					'
-					.wpmud #container.snapshot-three .wps-backups-status .wpmud-box-content:before,
+					.wpmud #container.snapshot-three .wps-backups-status .wpmud-box-content:before, 
 					.wpmud #container.snapshot-three .try-managed-backups-box .wpmud-box-content:before {
 						display: none;
 					}
@@ -8494,11 +8522,11 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 					'snapshot-pro-admin-stylesheet',
 					sprintf(
 						'
-						.wpmud #container.snapshot-three .wps-backups-status .wpmud-box-content,
+						.wpmud #container.snapshot-three .wps-backups-status .wpmud-box-content, 
 						.wpmud #container.snapshot-three .try-managed-backups-box .wpmud-box-content {
 							padding-top: 0px;
 						}
-						.wpmud #container.snapshot-three .wps-backups-status .wpmud-box-content:before,
+						.wpmud #container.snapshot-three .wps-backups-status .wpmud-box-content:before, 
 						.wpmud #container.snapshot-three .try-managed-backups-box .wpmud-box-content:before {
 							background-image: url(%s);
 							background-size: contain;
@@ -8511,11 +8539,11 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 							-flex: 0 0 222px;
 						}
 						@media screen and (max-width: 1020px) {
-							.wpmud #container.snapshot-three .wps-backups-status .wpmud-box-content,
+							.wpmud #container.snapshot-three .wps-backups-status .wpmud-box-content, 
 							.wpmud #container.snapshot-three .try-managed-backups-box .wpmud-box-content {
 								padding-top: 15px;
 							}
-							.wpmud #container.snapshot-three .wps-backups-status .wpmud-box-content:before,
+							.wpmud #container.snapshot-three .wps-backups-status .wpmud-box-content:before, 
 							.wpmud #container.snapshot-three .try-managed-backups-box .wpmud-box-content:before {
 								display:none;
 							}
@@ -8614,6 +8642,102 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 
 			return self::$instance;
 		}
+
+		public function dismiss_hosting_backups_notice( $response = true ) {
+			$plugin = self::instance();
+			$plugin->config_data['hosting_backups_notice_seen'] = true;
+			$plugin->save_config();
+			if( $response ) {
+				wp_send_json_success();
+			}
+		}
+
+		public function dismiss_managed_backups_notice () {
+			$plugin = self::instance();
+
+			$plugin->config_data['managed_backups_notice_dismissed'] = true;
+			$plugin->save_config();
+			wp_send_json_success();
+		}
+
+		public function snapshot_remove_managed_page ( $submenu_file ) {
+			$hidden_submenu = 'snapshot_pro_managed_backups';
+		
+			// Hide the submenu.
+			remove_submenu_page( 'snapshot_pro_dashboard', $hidden_submenu );
+		
+			return $submenu_file;
+		}
+
+		public function snapshot_redirect_managed_page () {
+			if ( is_admin() && "snapshot_page_snapshot_pro_managed_backups" === $this->get_current_screen_id() ) {
+				if ( isset( $_REQUEST['snapshot-action'] ) ) {
+					$snapshot_action = sanitize_text_field( $_REQUEST['snapshot-action'] );
+
+					if ( ! isset( $_REQUEST['snapshot-full_backups-noonce-field']  ) ) {
+						return;
+					}
+
+					if ( ! wp_verify_nonce( $_REQUEST['snapshot-full_backups-noonce-field'], 'snapshot-full_backups' ) ) {
+						return;
+					}
+
+					if ( "restore" !== $snapshot_action ) {
+						$url = $this->snapshot_get_pagehook_url( 'snapshots-newui-hosting-backups' );
+						wp_safe_redirect( $url );
+						exit;
+					}	
+				} else {
+					$url = $this->snapshot_get_pagehook_url( 'snapshots-newui-hosting-backups' );
+					wp_safe_redirect( $url );
+					exit;
+				}
+			}
+		}
+
+		/**
+		 * Check should we do cronjobs?
+		 *
+		 * @since 3.2.1
+		 *
+		 * @param boolean $stop Init value, default false.
+		 *
+		 * @return boolean $stop Shoold I stop doing cron?
+		 */
+		public function maybe_should_it_stop( $stop = false ) {
+			/**
+			 * Check Shipper Migration
+			 *
+			 * @since 3.2.1
+			 */
+			if ( class_exists( 'Shipper_Model_Stored_Migration' ) ) {
+				$migration = new Shipper_Model_Stored_Migration;
+				$is_active = $migration->is_active();
+				if ( $is_active ) {
+					$stop = true;
+				}
+			}
+			/**
+			 * Allows to overide Snapshot CRON job run status.
+			 *
+			 * @since 3.2.1
+			 *
+			 */
+			return apply_filters( 'snapshot_stop_cron', $stop );
+		}
+
+		/**
+		 * Mock response for fetching hosting backups, when not or WPMU DEV hosting.
+		 *
+		 * @since 3.2.1
+		 */
+		public function json_hosting_backup_dashboard_list_mock() {
+			wp_send_json_error( array(
+				'not_wpmudev_hosting' => true,
+				)
+			);
+		}
+
 	}
 }
 

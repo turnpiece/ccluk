@@ -40,7 +40,7 @@ class Google_0814_Service_Resourceviews extends Google_0814_Service
 
   public $regionViews;
   public $zoneViews;
-
+  
 
   /**
    * Constructs the internal representation of the Resourceviews service.

@@ -46,7 +46,7 @@ class Google_0814_Service_Manager extends Google_0814_Service
 
   public $deployments;
   public $templates;
-
+  
 
   /**
    * Constructs the internal representation of the Manager service.

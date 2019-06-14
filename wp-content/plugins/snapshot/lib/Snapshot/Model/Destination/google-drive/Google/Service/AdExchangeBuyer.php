@@ -39,7 +39,7 @@ class Google_0814_Service_AdExchangeBuyer extends Google_0814_Service
   public $directDeals;
   public $performanceReport;
   public $pretargetingConfig;
-
+  
 
   /**
    * Constructs the internal representation of the AdExchangeBuyer service.

@@ -44,7 +44,7 @@ class Google_0814_Service_Blogger extends Google_0814_Service
   public $postUserInfos;
   public $posts;
   public $users;
-
+  
 
   /**
    * Constructs the internal representation of the Blogger service.

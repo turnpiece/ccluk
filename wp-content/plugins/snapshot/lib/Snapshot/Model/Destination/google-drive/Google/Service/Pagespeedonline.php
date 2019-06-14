@@ -34,7 +34,7 @@ class Google_0814_Service_Pagespeedonline extends Google_0814_Service
 
 
   public $pagespeedapi;
-
+  
 
   /**
    * Constructs the internal representation of the Pagespeedonline service.

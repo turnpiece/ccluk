@@ -43,7 +43,7 @@ class Google_0814_Service_Mirror extends Google_0814_Service
   public $subscriptions;
   public $timeline;
   public $timeline_attachments;
-
+  
 
   /**
    * Constructs the internal representation of the Mirror service.

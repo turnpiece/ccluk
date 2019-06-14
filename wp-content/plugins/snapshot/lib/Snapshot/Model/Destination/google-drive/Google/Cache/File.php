@@ -36,12 +36,12 @@ class Google_0814_Cache_File extends Google_0814_Cache_Abstract
   {
     $this->path = $client->getClassConfig($this, 'directory');
   }
-
+  
   public function get($key, $expiration = false)
   {
     $storageFile = $this->getCacheFile($key);
     $data = false;
-
+    
     if (!file_exists($storageFile)) {
       return false;
     }
@@ -82,7 +82,7 @@ class Google_0814_Cache_File extends Google_0814_Cache_Abstract
       throw new Google_0814_Cache_Exception("Cache file could not be deleted");
     }
   }
-
+  
   private function getWriteableCacheFile($file)
   {
     return $this->getCacheFile($file, true);
@@ -92,7 +92,7 @@ class Google_0814_Cache_File extends Google_0814_Cache_Abstract
   {
     return $this->getCacheDir($file, $forWrite) . '/' . md5($file);
   }
-
+  
   private function getCacheDir($file, $forWrite)
   {
     // use the first 2 characters of the hash as a directory prefix
@@ -106,12 +106,12 @@ class Google_0814_Cache_File extends Google_0814_Cache_Abstract
     }
     return $storageDir;
   }
-
+  
   private function acquireReadLock($storageFile)
   {
     return $this->acquireLock(LOCK_SH, $storageFile);
   }
-
+  
   private function acquireWriteLock($storageFile)
   {
     $rc = $this->acquireLock(LOCK_EX, $storageFile);
@@ -120,7 +120,7 @@ class Google_0814_Cache_File extends Google_0814_Cache_Abstract
     }
     return $rc;
   }
-
+  
   private function acquireLock($type, $storageFile)
   {
     $mode = $type == LOCK_EX ? "w" : "r";
@@ -135,7 +135,7 @@ class Google_0814_Cache_File extends Google_0814_Cache_Abstract
     }
     return true;
   }
-
+  
   public function unlock($storageFile)
   {
     if ($this->fh) {

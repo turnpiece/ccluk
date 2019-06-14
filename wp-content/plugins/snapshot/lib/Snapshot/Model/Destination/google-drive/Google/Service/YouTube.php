@@ -59,7 +59,7 @@ class Google_0814_Service_YouTube extends Google_0814_Service
   public $videoCategories;
   public $videos;
   public $watermarks;
-
+  
 
   /**
    * Constructs the internal representation of the YouTube service.

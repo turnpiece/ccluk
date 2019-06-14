@@ -43,7 +43,7 @@ class Google_0814_Service_ShoppingContent extends Google_0814_Service
   public $inventory;
   public $products;
   public $productstatuses;
-
+  
 
   /**
    * Constructs the internal representation of the ShoppingContent service.

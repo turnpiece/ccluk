@@ -605,6 +605,7 @@
 		if (e && e.preventDefault) e.preventDefault();
 
 		hide_messages();
+		$( '.select-container' ).removeClass( 'active' );
 
 		return false;
 	}
@@ -615,11 +616,17 @@
 	 * @param {Object} e Event object
 	 */
 	function handle_show_click( e ) {
-		if (e && e.preventDefault) e.preventDefault();
+		if ( e && e.preventDefault ) e.preventDefault();
+
+		var $dialog = $( '.shipper-destination-add.sui-dialog' ),
+			initial_state = $dialog.data( 'shipper-initial-state' ) || 'add'
+		;
 
 		handle_dismiss_notice();
-		$('.shipper-destination-add.sui-dialog').attr('aria-hidden', false);
-		show_state('add');
+		$dialog.attr( 'aria-hidden', false );
+		if ( 'add' === initial_state ) {
+			show_state( 'add' );
+		} else handle_connect_click();
 
 		return false;
 	}
@@ -632,7 +639,14 @@
 	function handle_back_click( e ) {
 		if (e && e.preventDefault) e.preventDefault();
 
-		show_state('add');
+		var $dialog = $( '.shipper-destination-add.sui-dialog' ),
+			initial_state = $dialog.data( 'shipper-initial-state' ) || 'add'
+		;
+		if ( 'add' === initial_state ) {
+			show_state( 'add' );
+		} else {
+			show_state('connect');
+		}
 
 		return false;
 	}
@@ -832,12 +846,33 @@
 		return dfr.promise();
 	}
 
+	/**
+	 * Moves the export screen "Add destination" notification
+	 * into the site selection dropdown.
+	 */
+	function boot_selection_message_placement() {
+		var $root = $( '.shipper-page-migrate .shipper-selection' ),
+			$msg = $root.find( '.shipper-page-notice' ),
+			$dropdown = $root.find( '.list-results' );
+
+		if ( ! $msg.length ) {
+			return false;
+		}
+
+		$dropdown
+			.prepend( '<li class="shipper-moved-msg" />' ).end()
+			.find( 'li.shipper-moved-msg' )
+			.append( $msg );
+		$msg.show();
+	}
+
 
 	/**
 	 * Injects destination selection items with removal markup
 	 * and sets up the callbacks
 	 */
 	function boot_destinations_selection() {
+		boot_selection_message_placement();
 		var $root = $( '.shipper-page-migrate .shipper-selection' ),
 			$items = $root.find( 'ul.list-results li' ),
 			$selected = $root.find( '.list-value' ),
@@ -873,7 +908,9 @@
 			}
 		;
 		$items.each( function() {
-			$( this )
+			var $me = $( this );
+			if ( $me.is( '.shipper-moved-msg' ) ) { return true; }
+			$me
 				.append(
 					'<i class="sui-icon-trash" aria-hidden="true"></i>'
 				)
@@ -1165,17 +1202,27 @@
 		}
 
 		function toggle_all_selection_visible() {
-			var $rows = $( '.shipper-filelist tr.shipper-paginated-visible', $root );
-			$rows.each( function( idx, row ) {
-				toggle_selection( $( row ) );
-			} );
+			var $rows = $( '.shipper-filelist tr.shipper-paginated-visible', $root ),
+				$me = $( '.shipper-filelist :checkbox[name="shipper-bulk-all"]', $root );
+			if ( $me.attr( 'checked' ) ) {
+				select_all();
+			} else {
+				unselect_all();
+			}
 		}
 
-		function toggle_selection( $row ) {
-			var $cbox = $row.find( ':checkbox[name="shipper-bulk"]' ),
-				is_checked = !!$cbox.attr( 'checked' )
-			;
-			$cbox.attr( 'checked', ! is_checked );
+		function select_all() {
+			var $rows = $( '.shipper-filelist tr.shipper-paginated-visible', $root );
+			$rows.each( function( idx, row ) {
+				select( $( row ) );
+			} );
+			$( '.shipper-filelist :checkbox[name="shipper-bulk-all"]', $root )
+				.attr( 'checked', true );
+		}
+
+		function select( $row ) {
+			$row.find( ':checkbox[name="shipper-bulk"]' )
+				.attr( 'checked', true );
 		}
 
 		function unselect_all() {
@@ -1284,6 +1331,168 @@
 			}
 		}
 
+		function toggle_files_top_level_warning() {
+			var $notice = $( '.shipper-wizard-files .sui-notice.sui-notice-warning' ),
+				$warn_statuses = $( '.shipper-wizard-files .shipper-check-status .sui-tag-warning' )
+			;
+			if ( ! $notice.length ) {
+				return false;
+			}
+			if ( $warn_statuses.length ) {
+				$notice.show();
+			} else {
+				$notice.hide();
+			}
+		}
+
+		function update_package_size_message() {
+			var $package_size = $( '.shipper-wizard-files tr.sui-accordion-item:last .shipper-check-status' );
+
+			if ( ! $package_size.find( 'i.sui-loading' ).length ) {
+				$package_size.append(
+					'<i class="sui-icon-loader sui-loading"></i>'
+				);
+			}
+			$.post(
+				ajaxurl,
+				{ action: 'shipper_get_package_size_message' },
+				function( rsp ) {
+					var oversized = ( ( rsp || {} ).data || {} ).oversized || false,
+						markup = ( ( rsp || {} ).data || {} ).markup || false,
+						excluded = ( ( rsp || {} ).data || {} ).excluded || 0,
+						package_size = ( ( rsp || {} ).data || {} ).package_size || ''
+					;
+					if ( ! markup ) {
+						// No markup, nothing to do here.
+						return false;
+					}
+
+					var $target = $( '.shipper-wizard-files tr.sui-accordion-item:last' ),
+						$msg = $( '.shipper-package-size-summary' ),
+						$file_items = $( '.shipper-wizard-files .shipper-filelist tbody tr' ),
+						$status = $target.find( 'td.shipper-check-status span.sui-tag' )
+					;
+
+					// Change all statuses here, then readjust the package below.
+					/*
+					if ( excluded >= $file_items.length ) {
+						$( '.shipper-wizard-files .shipper-check-status .sui-tag:not(.shipper-zero)' )
+							.removeClass( 'sui-tag-warning' )
+							.addClass( 'sui-tag-success' )
+						;
+					} else {
+						$( '.shipper-wizard-files .shipper-check-status .sui-tag:not(.shipper-zero)' )
+							.removeClass( 'sui-tag-success' )
+							.addClass( 'sui-tag-warning' )
+						;
+					}
+					*/
+
+					if ( !! oversized ) {
+						$status
+							.removeClass( 'sui-tag-success' )
+							.addClass( 'sui-tag-warning' )
+							.text( package_size )
+						;
+					} else {
+						$status
+							.removeClass( 'sui-tag-warning' )
+							.addClass( 'sui-tag-success' )
+							.text( package_size )
+						;
+					}
+					$msg.each( function () {
+						$( this ).replaceWith( markup );
+					} );
+
+					update_file_item_rows();
+					toggle_files_top_level_warning();
+				}
+			).always( function() {
+				$package_size.find( 'i.sui-loading' ).remove();
+				update_files_tab_status();
+			} );
+		}
+		var debounced_msg_update = _.debounce( update_package_size_message, 1000 );
+
+		function update_file_item_check_row( row_cls ) {
+			var $root = $( '.shipper-wizard-tab.shipper-wizard-files'),
+				$row = $root.find( 'tr.sui-accordion-item' + row_cls ),
+				$cnt_row = $root.find( 'tr.sui-accordion-item-content' + row_cls ),
+				$status = $row.find( '.sui-tag' ),
+				ex = $cnt_row.find( 'tbody .shipper-paginated:not(.shipper-file-excluded)' ).length
+			;
+
+			// Update the counts.
+			$status.text( ex );
+
+			// Update the colors.
+			if ( ex ) {
+				$status
+					.removeClass( 'sui-tag-success' )
+					.addClass( 'sui-tag-warning' )
+				;
+			} else {
+				$status
+					.removeClass( 'sui-tag-warning' )
+					.addClass( 'sui-tag-success' )
+				;
+			}
+
+			// Update the status messages.
+			var $cell = $row.find( '[data-shipper-success-msg]' );
+			if ( $status.is( '.sui-tag-success' ) ) {
+				$cell.text( $cell.attr( 'data-shipper-success-msg' ) );
+			} else {
+				$cell.text( $cell.attr( 'data-shipper-warning-msg' ) );
+			}
+		}
+
+		function update_file_item_rows() {
+			update_file_item_check_row( '.shipper-file_sizes' );
+			update_file_item_check_row( '.shipper-file_names' );
+		}
+
+		function update_files_tab_status() {
+			var $status = $( '#shipper-tab-files .shipper-check-status i' ),
+				$warnings = $( '.shipper-wizard-files .shipper-check-status .sui-tag-warning' );
+
+			if ( $warnings.length ) {
+				$status
+					.removeClass( 'sui-icon-check-tick sui-success' )
+					.addClass( 'sui-icon-warning-alert sui-warning' );
+			} else {
+				$status
+					.removeClass( 'sui-icon-warning-alert sui-warning' )
+					.addClass( 'sui-icon-check-tick sui-success' );
+			}
+
+			update_overall_tab_status();
+		}
+
+		function update_overall_tab_status() {
+			var $status = $( '#shipper-tab-overall .shipper-check-status i' ),
+				$body = $( '.shipper-preflight-result-overall' ),
+				$issues = $( '.shipper-preflight-done-tab:not( #shipper-tab-overall )' )
+					.find( '.shipper-check-status i:not(.sui-success)' );
+
+			if ( $issues.length ) {
+				$status
+					.removeClass( 'sui-icon-check-tick sui-success' )
+					.addClass( 'sui-icon-warning-alert sui-warning' );
+				$body
+					.filter( '.shipper-has-warnings' ).show().end()
+					.filter( '.shipper-no-warnings' ).hide().end();
+			} else {
+				$status
+					.removeClass( 'sui-icon-warning-alert sui-warning' )
+					.addClass( 'sui-icon-check-tick sui-success' );
+				$body
+					.filter( '.shipper-has-warnings' ).hide().end()
+					.filter( '.shipper-no-warnings' ).show().end();
+			}
+		}
+
 		function exclude_file( $el ) {
 			var exclude = $el.attr( 'data-path' );
 
@@ -1294,6 +1503,7 @@
 				}, function( resp ) {
 					var exs = (resp || {}).data || {};
 					update_exclusion( exs, $el );
+					debounced_msg_update();
 				})
 			;
 		}
@@ -1320,6 +1530,7 @@
 				}, function( resp ) {
 					var exs = (resp || {}).data || {};
 					update_exclusions( exs );
+					update_file_item_rows();
 				})
 			;
 		}
@@ -1365,7 +1576,9 @@
 				unselect_all();
 			});
 
+			update_files_tab_status();
 			load_exclusions();
+			toggle_files_top_level_warning();
 		}
 
 		boot();
@@ -1395,7 +1608,20 @@
 		$( '.shipper-wizard-result-files' ).each( function() {
 			_areas.push( new PaginatedFilterArea( $( this ) ) );
 		} );
-		window._a = _areas;
+		// Work around the sui-tabs not really working well issue.
+		$( '.shipper-wizard-tab a[href*="#shipper-tab-"]' ).click( function( e ) {
+			var url = $( this ).attr( 'href' ),
+				hash = url.substring( url.indexOf('#') + 1 ),
+				$tab = $( '#' + hash );
+			if ( $tab.length ) {
+				$tab.click();
+				return stop_prop( e )
+			} else {
+				setTimeout( function() {
+					window.location.reload();
+				} );
+			}
+		} );
 	}
 
 	$( window ).on('load', function() {
@@ -12671,10 +12897,10 @@ ace.define( 'ace/theme/sui', [], function( require, exports, module ) {
 /*!******************************************************!*\
   !*** ./node_modules/@wpmudev/shared-ui/package.json ***!
   \******************************************************/
-/*! exports provided: _args, _from, _hasShrinkwrap, _id, _inCache, _location, _nodeVersion, _npmOperationalInternal, _npmUser, _npmVersion, _phantomChildren, _requested, _requiredBy, _resolved, _shasum, _shrinkwrap, _spec, _where, author, browserslist, bugs, dependencies, description, devDependencies, directories, dist, eslintConfig, eslintIgnore, gitHead, homepage, license, main, maintainers, name, optionalDependencies, readme, repository, sass, scripts, style, version, default */
+/*! exports provided: _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _shasum, _spec, _where, author, browserslist, bugs, bundleDependencies, deprecated, description, devDependencies, eslintConfig, eslintIgnore, files, homepage, license, main, name, repository, sass, scripts, style, version, default */
 /***/ (function(module) {
 
-module.exports = {"_args":[[{"raw":"@wpmudev/shared-ui@2.3.15","scope":"@wpmudev","escapedName":"@wpmudev%2fshared-ui","name":"@wpmudev/shared-ui","rawSpec":"2.3.15","spec":"2.3.15","type":"version"},"/home/ve/Env/wpd/projects/plugins/shipper"]],"_from":"@wpmudev/shared-ui@2.3.15","_hasShrinkwrap":false,"_id":"@wpmudev/shared-ui@2.3.15","_inCache":true,"_location":"/@wpmudev/shared-ui","_nodeVersion":"9.11.1","_npmOperationalInternal":{"host":"s3://npm-registry-packages","tmp":"tmp/shared-ui_2.3.15_1543913799279_0.15508902505442146"},"_npmUser":{"name":"calumbrash","email":"calumbrash@gmail.com"},"_npmVersion":"6.1.0","_phantomChildren":{},"_requested":{"raw":"@wpmudev/shared-ui@2.3.15","scope":"@wpmudev","escapedName":"@wpmudev%2fshared-ui","name":"@wpmudev/shared-ui","rawSpec":"2.3.15","spec":"2.3.15","type":"version"},"_requiredBy":["#DEV:/"],"_resolved":"https://registry.npmjs.org/@wpmudev/shared-ui/-/shared-ui-2.3.15.tgz","_shasum":"9805f7cf4c49ff1d5764d30cdc260a7d11d112ed","_shrinkwrap":null,"_spec":"@wpmudev/shared-ui@2.3.15","_where":"/home/ve/Env/wpd/projects/plugins/shipper","author":{"name":"WPMU DEV"},"browserslist":["> 1%","Last 2 versions","not ie <= 8"],"bugs":{"url":"https://github.com/wpmudev/shared-ui/issues"},"dependencies":{},"description":"For internal use in WPMU DEV plugins","devDependencies":{"browser-sync":"^2.26.3","chalk":"^2.4.1","eslint-config-wordpress":"^2.0.0","fs":"0.0.1-security","gulp":"^3.9.1","gulp-autoprefixer":"^6.0.0","gulp-clean-css":"^3.10.0","gulp-concat":"^2.6.1","gulp-eslint":"^5.0.0","gulp-header":"^2.0.5","gulp-rename":"^1.4.0","gulp-replace":"^1.0.0","gulp-sass":"^4.0.2","gulp-uglify":"^3.0.1","gulp-watch":"^5.0.1","natives":"^1.1.6","pump":"^3.0.0"},"directories":{},"dist":{"integrity":"sha512-dOBio17DMl/7JZFKidiALQXx7VVm7a7mqgkJ1l/IkVaDLXvRoPFwrLu4g3oFHf3UIeVcMEOmxXKwp7wV+sAt6w==","shasum":"9805f7cf4c49ff1d5764d30cdc260a7d11d112ed","tarball":"https://registry.npmjs.org/@wpmudev/shared-ui/-/shared-ui-2.3.15.tgz","fileCount":136,"unpackedSize":5590284,"npm-signature":"-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJcBkFHCRA9TVsSAnZWagAAxFgP/0e2QDNLrbr+uo35pfTd\nj8jOYL/CRyvgKd/Jgb1w2hqtSRf6x8+YGf9Ml1xpaC95o7hi7j/Bu5Ai4p6v\nb1poHyNNu6MsD9yvd9UHg63wUIqUnJF4GkIJGZRMt3HYA2RvaLP/0jzTL864\ndCdqeYTW8gDXnuFK7mhAHxlW3WBQo1ozM7iq1NhqiN9oHLH+NAJU9qgSIrvj\nwVdDG2HdWleNiJvBHR/gmtk9XIj9aHdbEBDWSot9UBakZVwaca4mKjtfVrYp\n5LihQsx8gFE7YWzRvQS24Ts7GalJ8f/n0LC0jm/3JoWOXC+4Ghj0INTxqoY3\nSQemOfOOKoqQQ4c0+bjnz5j098fwXedGr9KWC/s6FPs6+aK9qyXho4EEaGE6\nhH5AsNqfWVYFt1mxL79kCqFVFdnkTp5cJgNlWn1wfGBbwSJPdmadaYLhuuwh\nipVGSGNj0XTH+mKxttPIzWtBBgYUB7TA+0M+nv/7ajFqfh1/LNd0GmuQAUIt\nYjzgSeeyQYgj+G8DxEUVY8E5EdTvo5kl4D/P2yZynY5JWyKYp4snLBjlN966\ndWdjnmzqNUsKbOaaYmtnFYdr20SUZaKsMhO3jiyuajhy+C+jJL4Rz2X9UZR/\nlV6K+zLMA9v6yM5C4BPZ5yX7uupS/nT4yjOXSesLUlTsmZe6LnbvejcRs9A2\n9R0r\r\n=eiak\r\n-----END PGP SIGNATURE-----\r\n"},"eslintConfig":{"extends":"wordpress"},"eslintIgnore":["a11y-dialog.js","clipboard.js","gulpfile.js","select2.full.js","ace.js","mode-css.js","sticky-box.js","mode-html.js","worker-css.js"],"gitHead":"ca52e0a0cb79d86b3110869c4ecf668cea4a43f9","homepage":"https://wpmudev.github.io/shared-ui/","license":"GPL-2.0","main":"dist/js/shared-ui","maintainers":[{"name":"calumbrash","email":"calumbrash@gmail.com"},{"name":"iamleigh","email":"shiasapir@gmail.com"},{"name":"josephfusco","email":"hello@josephfus.co"},{"name":"spoygg","email":"spoygg@spoygg.com"}],"name":"@wpmudev/shared-ui","optionalDependencies":{},"readme":"ERROR: No README data found!","repository":{"type":"git","url":"git://github.com/wpmudev/shared-ui.git"},"sass":"scss/shared-ui.scss","scripts":{"changelog":" ./changelog.sh","dev":"gulp dev","release:major":"npm version major --no-git-tag-version && gulp update-versions:build && git add -A && git commit -m \":package:\" && npm publish","release:minor":"npm version minor --no-git-tag-version && gulp update-versions:build && git add -A && git commit -m \":package:\" && npm publish","release:patch":"npm version patch --no-git-tag-version && gulp update-versions:build && git add -A && git commit -m \":package:\" && npm publish"},"style":"dist/css/shared-ui.css","version":"2.3.15"};
+module.exports = {"_from":"@wpmudev/shared-ui@2.3.15","_id":"@wpmudev/shared-ui@2.3.15","_inBundle":false,"_integrity":"sha512-dOBio17DMl/7JZFKidiALQXx7VVm7a7mqgkJ1l/IkVaDLXvRoPFwrLu4g3oFHf3UIeVcMEOmxXKwp7wV+sAt6w==","_location":"/@wpmudev/shared-ui","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"@wpmudev/shared-ui@2.3.15","name":"@wpmudev/shared-ui","escapedName":"@wpmudev%2fshared-ui","scope":"@wpmudev","rawSpec":"2.3.15","saveSpec":null,"fetchSpec":"2.3.15"},"_requiredBy":["#DEV:/"],"_resolved":"https://registry.npmjs.org/@wpmudev/shared-ui/-/shared-ui-2.3.15.tgz","_shasum":"9805f7cf4c49ff1d5764d30cdc260a7d11d112ed","_spec":"@wpmudev/shared-ui@2.3.15","_where":"/data/Environments/wpd/projects/plugins/shipper","author":{"name":"WPMU DEV"},"browserslist":["> 1%","Last 2 versions","not ie <= 8"],"bugs":{"url":"https://github.com/wpmudev/shared-ui/issues"},"bundleDependencies":false,"deprecated":false,"description":"For internal use in WPMU DEV plugins","devDependencies":{"browser-sync":"^2.26.3","chalk":"^2.4.1","eslint-config-wordpress":"^2.0.0","fs":"0.0.1-security","gulp":"^3.9.1","gulp-autoprefixer":"^6.0.0","gulp-clean-css":"^3.10.0","gulp-concat":"^2.6.1","gulp-eslint":"^5.0.0","gulp-header":"^2.0.5","gulp-rename":"^1.4.0","gulp-replace":"^1.0.0","gulp-sass":"^4.0.2","gulp-uglify":"^3.0.1","gulp-watch":"^5.0.1","natives":"^1.1.6","pump":"^3.0.0"},"eslintConfig":{"extends":"wordpress"},"eslintIgnore":["a11y-dialog.js","clipboard.js","gulpfile.js","select2.full.js","ace.js","mode-css.js","sticky-box.js","mode-html.js","worker-css.js"],"files":["dist/","js/","scss/"],"homepage":"https://wpmudev.github.io/shared-ui/","license":"GPL-2.0","main":"dist/js/shared-ui","name":"@wpmudev/shared-ui","repository":{"type":"git","url":"git://github.com/wpmudev/shared-ui.git"},"sass":"scss/shared-ui.scss","scripts":{"changelog":" ./changelog.sh","dev":"gulp dev","release:major":"npm version major --no-git-tag-version && gulp update-versions:build && git add -A && git commit -m \":package:\" && npm publish","release:minor":"npm version minor --no-git-tag-version && gulp update-versions:build && git add -A && git commit -m \":package:\" && npm publish","release:patch":"npm version patch --no-git-tag-version && gulp update-versions:build && git add -A && git commit -m \":package:\" && npm publish"},"style":"dist/css/shared-ui.css","version":"2.3.15"};
 
 /***/ }),
 

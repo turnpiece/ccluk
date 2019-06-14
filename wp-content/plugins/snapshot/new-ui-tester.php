@@ -25,7 +25,7 @@ class WPMUDEVSnapshot_New_Ui_Tester {
 						'snapshots/snapshot', false, array(
 						'action' => 'add',
 						'item' => array()
-						)
+						) 
 				);
 				return;
 			}
@@ -53,7 +53,7 @@ class WPMUDEVSnapshot_New_Ui_Tester {
 							'action' => 'update',
 							'item' => $item,
 							'force_backup' => $force_backup
-							)
+							) 
                         );
 					break;
 
@@ -64,7 +64,7 @@ class WPMUDEVSnapshot_New_Ui_Tester {
                              'snapshots/restore', false, array(
 								'item' => $item,
 								'data_item_key' => $data_item_key
-								)
+								) 
                             );
 					} else {
 						$this->render( 'snapshots/item', false, array( 'item' => $item ) );
@@ -123,7 +123,7 @@ class WPMUDEVSnapshot_New_Ui_Tester {
 			}
 			if ( ! wp_verify_nonce( $_REQUEST['destination-noonce-field'], 'snapshot-destination' ) ) {
 				return;
-			}
+			}			
 			$snapshot_action = sanitize_text_field( $_REQUEST['snapshot-action'] );
 		}
 
@@ -241,12 +241,37 @@ class WPMUDEVSnapshot_New_Ui_Tester {
 						'offset' => $offset,
 						'filter' => $filter,
 						'months' => $months
-
 					);
-
 					$this->render( 'managed_backups', false, $data );
 			}
 		}
+	}
+
+	public function hosting_backups() {
+		$model = new Snapshot_Model_Full_Backup();
+
+		$is_dashboard_active = $model->is_dashboard_active();
+		$is_dashboard_installed = $is_dashboard_active
+			? true
+			: $model->is_dashboard_installed();
+		$has_dashboard_key = $model->has_dashboard_key();
+
+		$is_client = $is_dashboard_installed && $is_dashboard_active && $has_dashboard_key;
+
+		$apiKey = $model->get_config( 'secret-key', '' );
+
+		$has_snapshot_key = $is_client && Snapshot_Model_Full_Remote_Api::get()->get_token() !== false && ! empty( $apiKey );
+
+		$apiKey = $model->get_config( 'secret-key', '' );
+
+		$show_managed_backup_notice = ( $is_client && $has_snapshot_key );
+
+		$data = array(
+			"model" => $model,
+			"show_managed_backup_notice" => $show_managed_backup_notice,
+		);
+
+		$this->render( 'wpmu_backups', false, $data );
 	}
 
 	public function import() {

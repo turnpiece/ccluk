@@ -38,7 +38,7 @@ class Google_0814_Service_Taskqueue extends Google_0814_Service
 
   public $taskqueues;
   public $tasks;
-
+  
 
   /**
    * Constructs the internal representation of the Taskqueue service.

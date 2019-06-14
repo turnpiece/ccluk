@@ -114,7 +114,7 @@ $custom_directory = $use_folder;
 
 				</div><!-- #wps-settings--exclusions -->
 
-				<?php
+				<?php 
                 $error_reporting_errors = array(
 					E_ERROR   => array(
 						'label_log' => __( 'Errors', SNAPSHOT_I18N_DOMAIN ),
@@ -131,7 +131,7 @@ $custom_directory = $use_folder;
 						'description' => __( 'Run-time notices. Indicate that the script encountered something that could indicate an error, but could also happen in the normal course of running a script.', SNAPSHOT_I18N_DOMAIN ),
 						'label_stop' => __( 'Stop the backup process if a notice occurs', SNAPSHOT_I18N_DOMAIN )
 					),
-				);
+				); 
                 ?>
 
 				<div id="wps-settings--error" class="row">
@@ -148,7 +148,7 @@ $custom_directory = $use_folder;
 
 							<label class="label-title"><?php esc_html_e('Choose how you want Snapshot to handle error conditions during the backup and restore process.', SNAPSHOT_I18N_DOMAIN); ?></label>
 
-							<?php
+							<?php 
                             foreach ( $error_reporting_errors as $error_key => $error_label ){
 
                             	$checked_stop = false;
@@ -160,7 +160,7 @@ $custom_directory = $use_folder;
 									$error_class = '';
 								}
 
-								$checked_stop = isset( WPMUDEVSnapshot::instance()->config_data['config']['errorReporting'][ $error_key ]['stop']);
+								$checked_stop = isset( WPMUDEVSnapshot::instance()->config_data['config']['errorReporting'][ $error_key ]['stop']); 
                                 ?>
 
 								<div class="wps-input--item wps-input--parent">
@@ -227,7 +227,7 @@ $custom_directory = $use_folder;
 
 	<?php
 	$model = new Snapshot_Model_Full_Backup();
-	$apiKey = $model->get_config('secret-key', '');
+	$apiKey = $model->get_config('secret-key', ''); 
     ?>
 
 	<section class="wpmud-box">
@@ -303,3 +303,7 @@ $custom_directory = $use_folder;
 	</section>
 
 </div>
+<?php
+if( Snapshot_Helper_Utility::is_wpmu_hosting() ) {
+	$this->render( 'boxes/modals/popup-hosting', false, array(), false, false );
+}

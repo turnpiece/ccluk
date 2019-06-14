@@ -181,10 +181,22 @@ if ( ! class_exists( 'Snapshot_Model_Database_Backup' ) ) {
 			$total_rows = 0;
 			// Use of esc_sql() instead of $wpdb->prepare() because of backticks in query.
 			$table_structure = $wpdb->get_results( esc_sql( "DESCRIBE `{$table}`" ) );
+			
 			if ( ! $table_structure ) {
 				$this->error( __( 'Error getting table details', SNAPSHOT_I18N_DOMAIN ) . ": $table" );
 
 				return false;
+			} else {
+				// We should get the names of the existing columns,
+				// in case we will later restore to a table whose columns have been modified.
+				// eg. when a plugin creates a new column in a table and the older backup doesn't contain that column.
+				$insert_into_columns = '(';
+				foreach ( $table_structure as $table_columns ) {
+					$insert_into_columns .= $table_columns->Field . ', ';
+				}
+				$insert_into_columns = trim( $insert_into_columns, ', ' );
+				$insert_into_columns .= ')';
+				$insert_into_columns = ' ' . $insert_into_columns;
 			}
 
 			if ( 0 === $rows_start ) {
@@ -212,7 +224,7 @@ if ( ! class_exists( 'Snapshot_Model_Database_Backup' ) ) {
 			}
 
 			//echo "table_data<pre>"; print_r($table_data); echo "</pre>";
-			$entries = 'INSERT INTO ' . $this->backquote( $table ) . ' VALUES (';
+			$entries = 'INSERT INTO ' . $this->backquote( $table ) . $insert_into_columns . ' VALUES (';
 			//    \x08\\x09, not required
 			$search  = array( "\x00", "\x0a", "\x0d", "\x1a" );
 			$replace = array( '\0', '\n', '\r', '\Z' );
@@ -481,7 +493,7 @@ if ( ! class_exists( 'Snapshot_Model_Database_Backup' ) ) {
 						$wpdb->query( 'SET foreign_key_checks = 0' );
 
 						$ret_db = $wpdb->query( $sql ); // phpcs:ignore
-
+						
 						if ( ( false === $ret_db ) && ( (bool) preg_match( '/^create table/i', $sql ) ) ) {
 							$last_error = $wpdb->last_error;
 							// Failed on create statement, this could be down to FK checks.
@@ -502,7 +514,7 @@ if ( ! class_exists( 'Snapshot_Model_Database_Backup' ) ) {
 									if ( false !== $ret_db ) {
 										$log[] = 'Table creation for the ' . $source_table_name . ' table succeeded after dropping the original table first';
 									}
-
+									
 								}
 							}
 

@@ -86,7 +86,7 @@ class Snapshot_Local_Backups {
 
 	public function display_local_backups_warning() {
 		// phpcs:ignore
-		if ( isset( $_GET['page'] ) && self::MANAGED_BACKUPS_QUERY_VAR === $_GET['page'] ) {
+		if ( Snapshot_Helper_Utility::is_wpmu_hosting() || ( isset( $_GET['page'] ) && self::MANAGED_BACKUPS_QUERY_VAR === $_GET['page'] ) ) {
 			return;
 		}
 
@@ -152,9 +152,9 @@ class Snapshot_Local_Backups {
 	}
 
 	public function snapshot_backups_notice_style() {
-		echo
+		echo 
 '<style type="text/css">
-	.toplevel_page_snapshot_pro_dashboard .snapshot-notice-local-backups, .snapshot_page_snapshot_pro_snapshots .snapshot-notice-local-backups, .snapshot_page_snapshot_pro_destinations .snapshot-notice-local-backups,
+	.toplevel_page_snapshot_pro_dashboard .snapshot-notice-local-backups, .snapshot_page_snapshot_pro_snapshots .snapshot-notice-local-backups, .snapshot_page_snapshot_pro_destinations .snapshot-notice-local-backups, 
 	.snapshot_page_snapshot_pro_import .snapshot-notice-local-backups, .snapshot_page_snapshot_pro_settings .snapshot-notice-local-backups {
 		max-width: 980px;
 		margin: 15px 10px 2px;

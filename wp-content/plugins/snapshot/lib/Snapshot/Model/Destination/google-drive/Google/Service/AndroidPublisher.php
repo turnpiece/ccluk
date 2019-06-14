@@ -46,7 +46,7 @@ class Google_0814_Service_AndroidPublisher extends Google_0814_Service
   public $inappproducts;
   public $purchases_products;
   public $purchases_subscriptions;
-
+  
 
   /**
    * Constructs the internal representation of the AndroidPublisher service.

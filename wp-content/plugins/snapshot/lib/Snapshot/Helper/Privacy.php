@@ -149,7 +149,7 @@ class Snapshot_Gdpr {
 			}
 
 		}
-
+		
 		return $result;
 	}
 

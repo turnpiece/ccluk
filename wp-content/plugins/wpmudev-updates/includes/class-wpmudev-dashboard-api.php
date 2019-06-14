@@ -1152,6 +1152,19 @@ class WPMUDEV_Dashboard_Api {
 		} else {
 			$this->parse_api_error( $response );
 
+			// Check specifically for whether the user has exceeded the sites they can add to the Hub, due to being on the single site plan.
+			$body = is_array( $response )
+				? wp_remote_retrieve_body( $response )
+				: false;
+
+			$data = array();
+			if ( is_array( $response ) && ! empty( $body ) ) {
+				$data = json_decode( $body, true );
+			}
+			if ( isset( $data['code'] ) && 'limit_exceeded' === $data['code'] ) {
+				$res['limit_exceeded'] = true;
+			}
+
 			/*
 			 * For network errors, perform exponential backoff
 			 */
@@ -1997,7 +2010,7 @@ class WPMUDEV_Dashboard_Api {
 					if ( count( $list ) ) {
 						$start  = current( $list );
 						$end    = end( $list );
-						$change = round( ( ( $end - $start ) / $end * 100 ), 1 );
+						$change = round( ( ( $end - $start ) / $start * 100 ), 1 );
 					} else {
 						$change = 0;
 					}
@@ -2266,7 +2279,7 @@ class WPMUDEV_Dashboard_Api {
 				if ( count( $list ) ) {
 					$start  = current( $list );
 					$end    = end( $list );
-					$change = round( ( ( $end - $start ) / $end * 100 ), 1 );
+					$change = round( ( ( $end - $start ) / $start * 100 ), 1 );
 				} else {
 					$change = 0;
 				}

@@ -111,7 +111,7 @@ class WP_Smushit extends WP_Smush_Module {
 			$percent        = $percent < 0 ? 0 : $percent;
 
 			// Show resmush link, if the settings were changed.
-			$show_resmush = $this->show_resmush( $id, $wp_smush_data );
+			$show_resmush = $this->show_resmush( $id, $wp_smush_data, $attachment_data );
 
 			if ( empty( $wp_resize_savings['bytes'] ) && isset( $wp_smush_data['stats']['size_before'] ) && $wp_smush_data['stats']['size_before'] == 0 && ! empty( $wp_smush_data['sizes'] ) ) {
 				$status_txt = __( 'Already Optimized', 'wp-smushit' );
@@ -145,7 +145,7 @@ class WP_Smushit extends WP_Smush_Module {
 						$status_txt .= $image_size;
 					}
 
-					$show_resmush = $this->show_resmush( $id, $wp_smush_data );
+					$show_resmush = $this->show_resmush( $id, $wp_smush_data, $attachment_data );
 
 					if ( $show_resmush ) {
 						$links .= $this->get_resmsuh_link( $id );
@@ -354,12 +354,13 @@ class WP_Smushit extends WP_Smush_Module {
 	/**
 	 * Checks the current settings and returns the value whether to enable or not the resmush option.
 	 *
-	 * @param string $id             Attachment ID.
-	 * @param array  $wp_smush_data  Smush data.
+	 * @param string $id               Attachment ID.
+	 * @param array  $wp_smush_data    Smush data.
+	 * @param array  $attachment_data  Attachment data.
 	 *
 	 * @return bool
 	 */
-	private function show_resmush( $id = '', $wp_smush_data ) {
+	private function show_resmush( $id = '', $wp_smush_data = array(), $attachment_data = array() ) {
 		// Resmush: Show resmush link, Check if user have enabled smushing the original and full image was skipped
 		// Or: If keep exif is unchecked and the smushed image have exif
 		// PNG To JPEG.
@@ -387,6 +388,23 @@ class WP_Smushit extends WP_Smush_Module {
 		if ( WP_Smush::get_instance()->core()->mod->png2jpg->can_be_converted( $id ) ) {
 			return true;
 		}
+
+		// This is duplicating a part of scan_images() in class-wp-smush-ajax.php. See detailed description there.
+		$image_sizes = $this->settings->get_setting( WP_SMUSH_PREFIX . 'image_sizes' );
+		if ( is_array( $image_sizes ) && count( $image_sizes ) > count( $wp_smush_data['sizes'] ) && count( $attachment_data['sizes'] ) !== count( $wp_smush_data['sizes'] ) ) {
+			foreach ( $image_sizes as $image_size ) {
+				// Already compressed.
+				if ( isset( $wp_smush_data['sizes'][ $image_size ] ) ) {
+					continue;
+				}
+
+				// If image has the size that can be compressed.
+				if ( isset( $attachment_data['sizes'][ $image_size ] ) ) {
+					return true;
+				}
+			}
+		}
+
 
 		return false;
 	}
@@ -611,11 +629,11 @@ class WP_Smushit extends WP_Smush_Module {
 		// Full size.
 		$full_image = get_attached_file( $image_id );
 
-		// If full image was not smushed, reason 1. Large Size logic, 2. Free and greater than 1Mb.
+		// If full image was not smushed, reason 1. Large Size logic, 2. Free and greater than 5Mb.
 		if ( ! array_key_exists( 'full', $size_stats ) ) {
 			// For free version, Check the image size.
 			if ( ! WP_Smush::is_pro() ) {
-				// For free version, check if full size is greater than 1 Mb, show the skipped status.
+				// For free version, check if full size is greater than 5 Mb, show the skipped status.
 				$file_size = file_exists( $full_image ) ? filesize( $full_image ) : '';
 				if ( ! empty( $file_size ) && ( $file_size / WP_SMUSH_MAX_BYTES ) > 1 ) {
 					$skipped[] = array(
@@ -974,11 +992,11 @@ class WP_Smushit extends WP_Smush_Module {
 		// Check if file exists.
 		if ( 0 === (int) $file_size ) {
 			/* translators: %1$s: image size, %2$s: image name */
-			$errors->add( 'image_not_found', '<p>' . sprintf( __( 'Skipped (%1$s), image not found. Attachment: %2$s', 'wp-smushit' ), size_format( $file_size, 1 ), basename( $file_path ) ) . '</p>' );
+			$errors->add( 'image_not_found', sprintf( __( 'Skipped (%1$s), image not found', 'wp-smushit' ), size_format( $file_size, 1 ) ) );
 		} elseif ( $file_size > $max_size ) {
 			// Check size limit.
 			/* translators: %1$s: image size, %2$s: image name */
-			$errors->add( 'size_limit', '<p>' . sprintf( __( 'Skipped (%1$s), size limit exceeded. Attachment: %2$s', 'wp-smushit' ), size_format( $file_size, 1 ), basename( $file_path ) ) . '</p>' );
+			$errors->add( 'size_limit', sprintf( __( 'Skipped (%1$s), size limit exceeded', 'wp-smushit' ), size_format( $file_size, 1 ) ) );
 		}
 
 		if ( count( $errors->get_error_messages() ) ) {
@@ -1717,7 +1735,7 @@ class WP_Smushit extends WP_Smush_Module {
 		$skip_msg = array(
 			'large_size' => $smush_orgnl_txt,
 			'size_limit' => esc_html__(
-				"Image couldn't be smushed as it exceeded the 1Mb size limit,
+				"Image couldn't be smushed as it exceeded the 5Mb size limit,
 			Pro users can smush images with size up to 32Mb.",
 				'wp-smushit'
 			),

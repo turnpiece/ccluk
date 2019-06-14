@@ -40,6 +40,7 @@ $target = $destinations->get_by_site_id( $site );
 					);
 				?>
 
+				<?php echo Shipper_Helper_Assets::get_custom_hero_image_markup(); ?>
 			</div><?php // .shipper-content ?>
 
 		<?php $this->render( 'modals/migration-cancel' ); ?>

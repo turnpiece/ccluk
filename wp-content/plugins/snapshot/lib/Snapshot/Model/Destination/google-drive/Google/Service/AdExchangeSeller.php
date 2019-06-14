@@ -49,7 +49,7 @@ class Google_0814_Service_AdExchangeSeller extends Google_0814_Service
   public $reports;
   public $reports_saved;
   public $urlchannels;
-
+  
 
   /**
    * Constructs the internal representation of the AdExchangeSeller service.

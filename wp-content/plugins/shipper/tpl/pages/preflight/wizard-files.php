@@ -10,14 +10,22 @@ $has_issues = (bool) $checks['errors_count'];
 ?>
 
 <div class="shipper-wizard-tab shipper-wizard-files">
-	<p>
-		<?php if ( $has_issues ) { ?>
+	<?php if ( $has_issues ) { ?>
+	<div class="sui-notice sui-notice-warning">
+		<p>
 			<?php esc_html_e( 'Files check is complete and you have a few warnings with your files.', 'shipper' ); ?>
 			<?php esc_html_e( 'You can try to resolve these warnings before the migration process begins.', 'shipper' ); ?>
-		<?php } else { //has issues ?>
-			<?php esc_html_e( 'Your source files check is complete.', 'shipper' ); ?>
-		<?php } ?>
-	</p>
+		</p>
+		<p>
+			<a href="#reload" class="sui-button sui-button-ghost">
+				<i class="sui-icon-update" aria-hidden="true"></i>
+				<?php esc_html_e( 'Re-check', 'shipper' ); ?>
+			</a>
+		</p>
+	</div>
+	<?php } else { //has issues ?>
+		<p><?php esc_html_e( 'Your source files check is complete.', 'shipper' ); ?></p>
+	<?php } ?>
 
 	<table class="sui-table sui-table-flushed sui-accordion">
 		<colgroup>
@@ -34,11 +42,11 @@ $has_issues = (bool) $checks['errors_count'];
 		</thead>
 		<tbody>
 		<?php foreach ( $checks['checks'] as $check_type => $check ) { ?>
-			<tr class="sui-accordion-item">
+			<tr class="sui-accordion-item shipper-<?php echo esc_attr( $check['check_type'] ); ?>">
 				<td class="sui-table-item-title">
 					<?php echo esc_html( $check['title'] ); ?>
 				</td>
-
+				
 				<td class="shipper-check-status">
 				<?php
 					$icon_type = 'ok' === $check['status']
@@ -49,22 +57,71 @@ $has_issues = (bool) $checks['errors_count'];
 						? $check['status']
 						: 'success'
 					;
+					$content = 0;
+					if ( 'ok' !== $check['status'] ) {
+						if ( in_array(
+							$check['check_type'],
+							array( 'file_sizes', 'file_names' ),
+							true
+						) ) {
+							$content = ! empty( $check['count'] )
+								? (int) $check['count']
+								: $content;
+							$exclusions = new Shipper_Model_Stored_Exclusions;
+							if ( count( $exclusions->get_data() ) >= $check['count'] ) {
+								$icon_kind = 'success';
+							}
+						}
+						if ( 'package_size' === $check['check_type'] ) {
+							$estimate = new Shipper_Model_Stored_Estimate;
+							$content = size_format( $estimate->get( 'package_size' ) );
+						}
+					}
+					if ( 'package_size' === $check['check_type'] ) {
+						$chk = new Shipper_Task_Check_Files;
+						$content = size_format( $chk->get_updated_package_size() );
+					}
+					$zero_class = '';
+					if ( empty( $content ) && in_array( $check['check_type'], array(
+						'file_sizes', 'file_names'
+					), true) ) {
+						$zero_class = 'shipper-zero';
+					}
 				?>
-					<i aria-hidden="true"
-						class="sui-icon-<?php echo $icon_type; ?> sui-<?php echo $icon_kind; ?>"></i>
+
+					<span
+						class="sui-tag sui-tag-<?php echo $icon_kind; ?>
+						<?php echo esc_attr( $zero_class ); ?>">
+						<?php echo esc_html( $content ); ?>
+					</span>
 				</td>
 
 				<td>
 				<?php
-					$message = __( 'No issues found', 'shipper' );
+					$message_ok = __( 'No issues found', 'shipper' );
+					$generic_warning = sprintf(
+						__( 'We detected some issues with %s', 'shipper' ),
+						$check['title']
+					);
+				?>
+				<div
+					data-shipper-success-msg="<?php echo esc_attr( $message_ok ); ?>"
+					data-shipper-warning-msg="<?php echo esc_attr( $generic_warning ); ?>"
+					class="shipper-check-message">
+				<?php
+					$message = $message_ok;
 					if ( 'ok' !== $check['status'] ) {
 						$message = ! empty( $check['short_message'] )
 							? $check['short_message']
-							: sprintf( __( 'We detected some issues with %s', 'shipper' ), $check['title'] )
-							;
+							: $generic_warning
+						;
+					}
+					if ( 'package_size' === $check['check_type'] && 'ok' === $check['status'] ) {
+						$message = '<span class="shipper-package-size-summary">' . $message . '</span>';
 					}
 					echo $message;
 				?>
+				</div>
 				<?php if ( ! empty( $check['message'] ) ) { ?>
 					<button class="sui-button-icon sui-accordion-open-indicator">
 						<i class="sui-icon-chevron-down" aria-hidden="true"></i>
@@ -73,7 +130,7 @@ $has_issues = (bool) $checks['errors_count'];
 				</td>
 			</tr>
 			<?php if ( ! empty( $check['message'] ) ) { ?>
-			<tr class="sui-accordion-item-content">
+			<tr class="sui-accordion-item-content shipper-<?php echo esc_attr( $check['check_type'] ); ?>">
 				<td colspan="3">
 					<div class="sui-box">
 						<div class="sui-box-body shipper-wizard-result-files">

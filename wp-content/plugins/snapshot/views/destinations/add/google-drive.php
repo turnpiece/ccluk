@@ -22,7 +22,7 @@ $item = array_merge(
 		'directory' => '',
 		'clientid' => '',
 		'clientsecret' => '',
-	), $item
+	), $item 
 );
 
 ?>
@@ -262,20 +262,20 @@ $item = array_merge(
 					$auth_url = add_query_arg(
 						array( 'supportsTeamDrives' => true ), $auth_url
 					);
-					if ( $auth_url ) {
+					if ( $auth_url ) { 
                     ?>
 
 						<p class="wps-auth-button">
 							<a id="snapshot-destination-authorize-connection" class="button button-blue" href="<?php echo esc_url( $auth_url ); ?>">
-								<?php
+								<?php 
 								echo empty( $item_object->destination_info['access_token'] ) ?
 									esc_html__( 'Authorize', SNAPSHOT_I18N_DOMAIN ) :
-									esc_html__( 'Re-Authorize', SNAPSHOT_I18N_DOMAIN );
+									esc_html__( 'Re-Authorize', SNAPSHOT_I18N_DOMAIN ); 
 								?>
 							</a>
 						</p>
 
-					<?php
+					<?php 
                     } else {
 						echo '<div class="wps-auth-message error"><p>', esc_html__( 'Unable to obtain an authorization URL from Google', SNAPSHOT_I18N_DOMAIN ), '</p></div>';
 					}

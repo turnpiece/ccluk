@@ -44,7 +44,7 @@ class Google_0814_Service_Plus extends Google_0814_Service
   public $comments;
   public $moments;
   public $people;
-
+  
 
   /**
    * Constructs the internal representation of the Plus service.

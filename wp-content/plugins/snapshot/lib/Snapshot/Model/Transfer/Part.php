@@ -62,7 +62,7 @@ class Snapshot_Model_Transfer_Part {
 		$is_done = isset( $data['is_done'] )
 			? (bool) $data['is_done']
 			: false
-		;
+		;	
 		$obj = new self( $index, $is_done );
 
 		if ( isset( $data['seek'] ) ) {

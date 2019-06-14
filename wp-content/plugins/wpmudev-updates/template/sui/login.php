@@ -19,6 +19,7 @@ $trial_info_url    = 'https://premium.wpmudev.org/manuals/how-free-trials-work/'
 $websites_url      = 'https://premium.wpmudev.org/hub/my-websites/';
 $security_info_url = 'https://premium.wpmudev.org/manuals/hub-security/';
 $support_url       = 'https://premium.wpmudev.org/hub/support/';
+$support_modal_url = 'https://premium.wpmudev.org/hub/support/#get-support';
 
 $login_url = $urls->dashboard_url;
 if ( ! empty( $_GET['pid'] ) ) { // wpcs csrf ok.
@@ -126,6 +127,9 @@ if ( isset( $_GET['api_error'] ) ) { // wpcs csrf ok.
 } elseif ( ! $key_valid ) {
 	// Variable `$key_valod` is set by the UI function `render_dashboard`.
 	$login_errors[] = __( 'Your API Key was invalid. Please try again.', 'wpmudev' );
+} elseif ( $site_limit_exceeded ) {
+	// Variable `$site_limit_exceeded` is set by the UI function `render_dashboard`.
+	$login_errors[] = sprintf( __( 'You have already reached your plans limit of 1 site, not hosted with us, connected to The Hub. <a target="_blank" href="%1$s">Upgrade to unlimited sites</a> or <a target="_blank" href="%2$s">remove a site</a> before adding another. <a target="_blank" href="%3$s">Contact support</a> for assistance.', 'wpmudev' ), $account_url, $websites_url, $support_modal_url );
 }
 
 // Get the login URL.

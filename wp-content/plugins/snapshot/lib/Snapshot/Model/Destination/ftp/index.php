@@ -101,7 +101,7 @@ if ( ( ! class_exists( 'SnapshotDestinationFTP' ) )
 			if ( ! wp_verify_nonce( $_REQUEST['destination-noonce-field'], 'snapshot-destination' ) ) {
 				return;
 			}
-
+			
 			if ( ( ! isset( $_GET['page'] ) ) || ( ! in_array( sanitize_text_field( $_GET['page'] ), array( "snapshots_destinations_panel", "snapshot_pro_destinations" ), true ) ) ) {
 				return;
 			}
@@ -174,7 +174,7 @@ if ( ( ! class_exists( 'SnapshotDestinationFTP' ) )
 						<?php
 						if ( isset( $item['type'] ) ) {
 							echo ' snapshot-row-filter-type-' . esc_attr( $item['type'] );
-						}
+						} 
                         ?>
                         ">
 							<td class="snapshot-col-delete" style="width:5px;"><input type="checkbox"
@@ -189,19 +189,19 @@ if ( ( ! class_exists( 'SnapshotDestinationFTP' ) )
 									<span class="edit">
 										<a href="<?php echo esc_url( $edit_url ); ?>item=<?php echo esc_attr( $idx ); ?>">
 											<?php
-											esc_html_e( 'edit', SNAPSHOT_I18N_DOMAIN );
+											esc_html_e( 'edit', SNAPSHOT_I18N_DOMAIN ); 
                                             ?>
                                         </a>
-                                    </span> |
+                                    </span> | 
                                     <span class="delete">
                                     	<a
 											href="
                                             <?php
-											echo esc_url( $delete_url );
+											echo esc_url( $delete_url ); 
                                             ?>
                                             item=<?php echo esc_attr( $idx ); ?>&amp;destination-noonce-field=
                                             <?php
-											echo esc_attr( wp_create_nonce( 'snapshot-destination' ) );
+											echo esc_attr( wp_create_nonce( 'snapshot-destination' ) ); 
                                             ?>
                                             "><?php esc_html_e( 'delete', SNAPSHOT_I18N_DOMAIN ); ?>
                                         </a>
@@ -305,10 +305,10 @@ if ( ( ! class_exists( 'SnapshotDestinationFTP' ) )
 							</th>
 							<td><input type="text" name="snapshot-destination[name]" id="snapshot-destination-name"
 							           value="
-                                       <?php
+                                       <?php 
                                        if ( isset( $item['name'] ) ) {
 								           echo esc_attr( stripslashes( $item['name'] ) );
-							           }
+							           } 
                                        ?>
                                        "/>
 							</td>
@@ -322,10 +322,10 @@ if ( ( ! class_exists( 'SnapshotDestinationFTP' ) )
 							<td><input type="text" name="snapshot-destination[address]"
 							           id="snapshot-destination-address"
 							           value="
-                                       <?php
+                                       <?php 
                                        if ( isset( $item['address'] ) ) {
 								           echo esc_attr( $item['address'] );
-							           }
+							           } 
                                        ?>
                                        "/>
 
@@ -341,10 +341,10 @@ if ( ( ! class_exists( 'SnapshotDestinationFTP' ) )
 							<td><input type="text" name="snapshot-destination[username]"
 							           id="snapshot-destination-username"
 							           value="
-                                       <?php
+                                       <?php 
                                        if ( isset( $item['name'] ) ) {
 								           echo esc_attr( $item['username'] );
-							           }
+							           } 
                                        ?>
                                        "/></td>
 						</tr>
@@ -357,10 +357,10 @@ if ( ( ! class_exists( 'SnapshotDestinationFTP' ) )
 							<td><input type="password" name="snapshot-destination[password]"
 							           id="snapshot-destination-password"
 							           value="
-                                       <?php
+                                       <?php 
                                        if ( isset( $item['name'] ) ) {
 								           echo esc_attr( $item['password'] );
-							           }
+							           } 
                                        ?>
                                        "/></td>
 						</tr>
@@ -371,10 +371,10 @@ if ( ( ! class_exists( 'SnapshotDestinationFTP' ) )
 							<td><input type="text" name="snapshot-destination[directory]"
 							           id="snapshot-destination-directory"
 							           value="
-                                       <?php
+                                       <?php 
                                        if ( isset( $item['directory'] ) ) {
 								           echo esc_attr( $item['directory'] );
-							           }
+							           } 
                                        ?>
                                        "/>
 
@@ -392,11 +392,11 @@ if ( ( ! class_exists( 'SnapshotDestinationFTP' ) )
 									foreach ( $this->protocols as $protocol_key => $protocol_label ) {
 										?>
 										<option
-										value="<?php echo esc_attr( $protocol_key ); ?>"
-										<?php
+										value="<?php echo esc_attr( $protocol_key ); ?>" 
+										<?php 
                                         if ( ( isset( $item['protocol'] ) ) && ( $item['protocol'] === $protocol_key ) ) {
 											echo ' selected="selected" ';
-										}
+										} 
                                         ?>
                                          ><?php echo esc_html( $protocol_label ); ?></option>
                                         <?php
@@ -409,7 +409,7 @@ if ( ( ! class_exists( 'SnapshotDestinationFTP' ) )
 						</tr>
 
 						<?php //if (!isset($item['ssl'])) { $item['ssl'] = "yes"; } ?>
-						<?php
+						<?php 
                         /* ?>
 					<tr class="form-field">
 						<th scope="row"><label for="snapshot-destination-ssl"><?php _e('Use sFTP Connection', SNAPSHOT_I18N_DOMAIN); ?></label></th>
@@ -422,7 +422,7 @@ if ( ( ! class_exists( 'SnapshotDestinationFTP' ) )
 							<p class="description"><?php _e('Default: Yes. If set to yes, will attempt to connect to the remote server using a secure connection using the <a href="http://phpseclib.sourceforge.net" target="_blank">PHP Secure Communications Library</a>. This option may not work depending on how your PHP binaries are compiled. This option will not work under Windows. Suggestion is to try SSL. If the test connection fails then try setting SSL to no.', SNAPSHOT_I18N_DOMAIN); ?></p>
 						</td>
 					</tr>
-<?php */
+<?php */ 
 ?>
 						<tr class="form-field">
 							<th scope="row"><label
@@ -430,10 +430,10 @@ if ( ( ! class_exists( 'SnapshotDestinationFTP' ) )
 							</th>
 							<td><input type="text" name="snapshot-destination[port]" id="snapshot-destination-port"
 							           value="
-                                       <?php
+                                       <?php 
                                        if ( isset( $item['port'] ) ) {
 								           echo esc_attr( $item['port'] );
-							           }
+							           } 
                                        ?>
                                        "/>
 
@@ -448,10 +448,10 @@ if ( ( ! class_exists( 'SnapshotDestinationFTP' ) )
 							<td><input type="text" name="snapshot-destination[timeout]"
 							           id="snapshot-destination-timeout"
 							           value="
-                                       <?php
+                                       <?php 
                                        if ( isset( $item['timeout'] ) ) {
 								           echo esc_attr( $item['timeout'] );
-							           }
+							           } 
                                        ?>
                                        "/>
 
@@ -459,10 +459,10 @@ if ( ( ! class_exists( 'SnapshotDestinationFTP' ) )
 							</td>
 						</tr>
 
-						<?php
+						<?php 
                         if ( ! isset( $item['passive'] ) ) {
 							$item['passive'] = "no";
-						}
+						} 
                         ?>
 						<tr class="form-field">
 							<th scope="row"><label
@@ -470,19 +470,19 @@ if ( ( ! class_exists( 'SnapshotDestinationFTP' ) )
 							</th>
 							<td>
 								<select name="snapshot-destination[passive]" id="snapshot-destination-passive">
-									<option value="yes"
-                                    <?php
+									<option value="yes" 
+                                    <?php 
                                     if ( "yes" === $item['passive'] ) {
 										echo ' selected="selected" ';
-									}
+									} 
                                     ?>
                                      >Yes
 									</option>
-									<option value="no"
-                                    <?php
+									<option value="no" 
+                                    <?php 
                                     if ( "no" === $item['passive'] ) {
 										echo ' selected="selected" ';
-									}
+									} 
                                     ?>
                                      >No
 									</option>
@@ -497,7 +497,7 @@ if ( ( ! class_exists( 'SnapshotDestinationFTP' ) )
 							<td>
 								<button id="snapshot-destination-test-connection" class="button-seconary" name="">
 								<?php
-									esc_html_e( 'Test Connection', SNAPSHOT_I18N_DOMAIN );
+									esc_html_e( 'Test Connection', SNAPSHOT_I18N_DOMAIN ); 
 								?>
                                 </button>
 								<div id="snapshot-ajax-destination-test-result" style="display:none"></div>

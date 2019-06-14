@@ -75,7 +75,7 @@ class WP_Smush_Lazy_Load extends WP_Smush_Content {
 			return;
 		}
 
-		$loader = WP_SMUSH_URL . 'app/assets/images/icon-lazyloader.svg';
+		$loader = WP_SMUSH_URL . 'app/assets/images/icon-loader.gif';
 		$fadein = isset( $this->options['animation']['duration'] ) ? $this->options['animation']['duration'] : 0;
 		$delay  = isset( $this->options['animation']['delay'] ) ? $this->options['animation']['delay'] : 0;
 		?>
@@ -105,10 +105,10 @@ class WP_Smush_Lazy_Load extends WP_Smush_Content {
 				}
 				.lazyload { opacity: 0; }
 				.lazyloading {
+					border: 0 !important;
 					opacity: 1;
-					background: #fff url('<?php echo esc_url( $loader ); ?>') no-repeat center;
-					-webkit-animation: spin 1.3s linear infinite;
-					animation: spin 1.3s linear infinite;
+					background: rgba(255, 255, 255, 0) url('<?php echo esc_url( $loader ); ?>') no-repeat center !important;
+					background-size: 30px 30px !important;
 				}
 			<?php else : ?>
 				.lazyload, .lazyloading { opacity: 0; }
@@ -137,6 +137,19 @@ class WP_Smush_Lazy_Load extends WP_Smush_Content {
 			WP_SMUSH_VERSION,
 			$in_footer
 		);
+
+		$custom = "window.lazySizesConfig = window.lazySizesConfig || {};
+
+window.lazySizesConfig.lazyClass    = 'lazyload';
+window.lazySizesConfig.loadingClass = 'lazyloading';
+window.lazySizesConfig.loadedClass  = 'lazyloaded';
+
+//page is optimized for fast onload event
+lazySizesConfig.loadMode = 1;";
+
+		wp_add_inline_script( 'smush-lazy-load', $custom, 'before' );
+
+		wp_add_inline_script( 'smush-lazy-load', 'lazySizes.init();' );
 	}
 
 	/**
@@ -196,6 +209,10 @@ class WP_Smush_Lazy_Load extends WP_Smush_Content {
 		}
 
 		foreach ( $images[0] as $key => $image ) {
+			if ( apply_filters( 'smush_skip_image_from_lazy_load', false, $images['img_url'][ $key ] ) ) {
+				continue;
+			}
+
 			/**
 			 * Check if some image formats are excluded.
 			 */
@@ -229,7 +246,7 @@ class WP_Smush_Lazy_Load extends WP_Smush_Content {
 			} else {
 				$class = 'lazyload';
 			}
-			$this->add_attribute( $new_image, 'class', $class );
+			$this->add_attribute( $new_image, 'class', apply_filters( 'wp_smush_lazy_load_classes', $class ) );
 
 			$this->add_attribute( $new_image, 'src', 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' );
 
@@ -290,7 +307,7 @@ class WP_Smush_Lazy_Load extends WP_Smush_Content {
 			return false;
 		}
 
-		$request_uri = filter_input( INPUT_ENV, 'REQUEST_URI', FILTER_SANITIZE_URL );
+		$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
 
 		// Remove empty values.
 		$uri_pattern = array_filter( $this->options['exclude-pages'] );
@@ -322,6 +339,11 @@ class WP_Smush_Lazy_Load extends WP_Smush_Content {
 		}
 
 		foreach ( $image_classes as $class ) {
+			// Skip Revolution Slider images.
+			if ( 'rev-slidebg' === $class ) {
+				return true;
+			}
+
 			if ( in_array( ".{$class}", $this->options['exclude-classes'], true ) ) {
 				return true;
 			}

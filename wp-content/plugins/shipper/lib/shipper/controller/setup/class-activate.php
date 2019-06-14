@@ -21,7 +21,8 @@ class Shipper_Controller_Setup_Activate extends Shipper_Controller_Setup {
 
 		self::get()
 			->add_admin_notification()
-			->activate_email_notifications();
+			->activate_email_notifications()
+			->add_to_api();
 	}
 
 	/**
@@ -64,4 +65,24 @@ class Shipper_Controller_Setup_Activate extends Shipper_Controller_Setup {
 		return $this;
 	}
 
+	/**
+	 * Adds the site to the API on activation
+	 *
+	 * @since v1.0.2
+	 *
+	 * @return bool
+	 */
+	public function add_to_api() {
+		$task = new Shipper_Task_Api_Destinations_Add;
+		$result = $task->apply();
+
+		if ( ! empty( $result ) ) {
+			// Let's also refresh our systems info.
+			$info_task = new Shipper_Task_Api_Info_Set;
+			$system = new Shipper_Model_System;
+			$result = $info_task->apply( $system->get_data() );
+		}
+
+		return $result;
+	}
 }

@@ -44,9 +44,9 @@
 								<div class="wps-snapshot-popin-content wps-snapshot-popin-content-step-2 hidden">
 									<p><?php esc_html_e('Please wait while we verify your Snapshot key...', SNAPSHOT_I18N_DOMAIN); ?></p>
 								</div>
-
+								
 								<div class="wps-snapshot-popin-content wps-snapshot-popin-content-step-3 hidden">
-									<div class="wps-snapshot-error wpmud-box-gray">
+									<div class="wps-snapshot-error wpmud-box-gray">									
 										<p><?php echo wp_kses_post( sprintf(__('We couldn’t verify your Snapshot key. Try entering it again, or reset it for this website in <a target="_blank" href="%s">The Hub</a> over at WPMU DEV.', SNAPSHOT_I18N_DOMAIN ), 'https://premium.wpmudev.org/hub/' ) ); ?></p>
 									</div>
 								</div>
@@ -61,7 +61,7 @@
 							<form method="post" action="?page=snapshot_pro_settings" data-security="<?php echo esc_attr( $ajax_nonce ); ?>">
 
 								<div class="wps-snapshot-key wpmud-box-gray">
-
+									
 									<input type="text" name="secret-key" id="secret-key" value="<?php echo ( isset( $apiKey ) && !empty( $apiKey ) ) ? esc_attr( $apiKey ) : ''; ?>"  data-url="<?php echo ( isset( $apiKeyUrl ) && !empty( $apiKeyUrl ) ) ? esc_attr( $apiKeyUrl ) : ''; ?>" placeholder="<?php esc_html_e('Enter your key here', SNAPSHOT_I18N_DOMAIN); ?>">
 
 									<button type="submit" name="activate" value="yes" class="button button-gray"><?php esc_html_e('Save Key', SNAPSHOT_I18N_DOMAIN); ?></button>
@@ -70,21 +70,21 @@
 									<p><a href="<?php echo esc_attr( $model->get_current_secret_key_link() ); ?>" target='_blank' class="wps-snapshot-popin-content-step-4 <?php echo ( isset( $apiKey ) && !empty( $apiKey ) ) ? '' : 'hidden'; ?>"><?php esc_html_e('Reset Key', SNAPSHOT_I18N_DOMAIN); ?></a></p>
 
 
-
+									
 								</div>
 
-							</form>
-
+							</form>	
+							
 						</div>
-
+						
 					</div>
-
+						
 				</div>
-
+				
 			</div>
-
+			
 		</div>
-
+		
 	</div>
 
 </div>

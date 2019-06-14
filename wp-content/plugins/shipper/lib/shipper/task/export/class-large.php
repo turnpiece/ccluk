@@ -207,7 +207,7 @@ class Shipper_Task_Export_Large extends Shipper_Task_Export {
 	public function get_work_description() {
 		$desc = sprintf(
 			__( '( %1$d of %2$d total )', 'shipper' ),
-			$this->get_current_step(), $this->get_total_steps()
+			$this->get_current_step(), $this->get_total_steps() 
 		);
 		return sprintf(
 			__( 'Upload large files %s', 'shipper' ),

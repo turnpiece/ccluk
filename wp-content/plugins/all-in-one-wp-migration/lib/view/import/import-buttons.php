@@ -41,7 +41,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					</p>
 					<div class="ai1wm-button-group ai1wm-button-import ai1wm-expandable">
 						<div class="ai1wm-button-main">
-							<span><?php _e( 'Import From', AI1WM_PLUGIN_NAME ); ?></span>
+							<span role="list" aria-label="<?php _e( 'Import From', AI1WM_PLUGIN_NAME ); ?>"><?php _e( 'Import From', AI1WM_PLUGIN_NAME ); ?></span>
 							<span class="ai1mw-lines">
 								<span class="ai1wm-line ai1wm-line-first"></span>
 								<span class="ai1wm-line ai1wm-line-second"></span>

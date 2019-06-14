@@ -22,7 +22,7 @@
  */
 abstract class Google_0814_Cache_Abstract
 {
-
+  
   abstract public function __construct(Google_0814_Client $client);
 
   /**

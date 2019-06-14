@@ -4,7 +4,7 @@ abstract class Snapshot_Helper_Zip_Abstract {
 
 	protected $_zip;
 	protected $_path;
-
+	
 	private $_root_path;
 
 	public function __construct () {
@@ -36,7 +36,7 @@ abstract class Snapshot_Helper_Zip_Abstract {
 	 * @return bool
 	 */
 	abstract public function extract ($destination);
-
+	
 	/**
 	 * Extract specific files from prepared archive
 	 *

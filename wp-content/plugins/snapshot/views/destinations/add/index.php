@@ -42,7 +42,7 @@ $form_url = add_query_arg(
 	array(
 		'snapshot-action' => sanitize_text_field( $_GET['snapshot-action'] ),
 		'type'            => rawurlencode( $item['type'] )
-	), WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url( 'snapshots-newui-destinations' )
+	), WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url( 'snapshots-newui-destinations' ) 
 );
 
 if ( 'edit' === $_GET['snapshot-action'] || 'update' === $_GET['snapshot-action'] ) {
@@ -104,7 +104,7 @@ if ( 'aws' === $item['type'] && version_compare(PHP_VERSION, '5.5.0', '<') ) {
 
 		<form action="<?php echo esc_url( $form_url ); ?>" method="post" <?php echo wp_kses_post( $target ); ?>>
 			<div class="wpmud-box-content">
-
+				
 				<?php
 				if ( $item ) :
 				?>
@@ -154,14 +154,14 @@ if ( 'aws' === $item['type'] && version_compare(PHP_VERSION, '5.5.0', '<') ) {
 								$this->render(
 										"destinations/add/dropbox-error", false, array(
 									'item'        => $item,
-								), false, false, false
+								), false, false, false 
 									);
 							} else {
 								$this->render(
 										"destinations/add/$type", false, array(
 									'item'        => $item,
 									'item_object' => $item_object,
-								), false, false, false
+								), false, false, false 
 									);
 							}
 
@@ -196,7 +196,7 @@ if ( 'aws' === $item['type'] && version_compare(PHP_VERSION, '5.5.0', '<') ) {
 												'snapshot-action' => 'delete',
 												'item'                  => sanitize_text_field( $_GET['item'] ),
 												'destination-noonce-field' => wp_create_nonce( 'snapshot-destination' ),
-											), WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url( 'snapshots-newui-destinations' )
+											), WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url( 'snapshots-newui-destinations' ) 
 												),
 											'popup_cancel_title' => __( 'Cancel', SNAPSHOT_I18N_DOMAIN ),
 											'popup_cancel_url' => '#',
@@ -217,10 +217,10 @@ if ( 'aws' === $item['type'] && version_compare(PHP_VERSION, '5.5.0', '<') ) {
 									<?php endif; ?>
 
 									<div class="form-col
-									<?php
+									<?php 
 									if ( 'local' === $type ) {
 										echo ' form-col-right';
-									}
+									} 
 									?>
 									">
 
@@ -241,7 +241,7 @@ if ( 'aws' === $item['type'] && version_compare(PHP_VERSION, '5.5.0', '<') ) {
 
 								</div>
 							<?php endif; ?>
-
+						
 						</div>
 					</div>
 				<?php endif; ?>

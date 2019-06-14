@@ -43,7 +43,7 @@ class Google_0814_Service_AdSenseHost extends Google_0814_Service
   public $customchannels;
   public $reports;
   public $urlchannels;
-
+  
 
   /**
    * Constructs the internal representation of the AdSenseHost service.

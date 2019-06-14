@@ -4,6 +4,7 @@
  *
  * @package shipper
  */
+
 ?>
 
 <div class="shipper-migration-content shipper-migration-progress-content shipper-preflight-wizard">
@@ -23,7 +24,7 @@
 
 	<div class="sui-tabs sui-tabs-flushed shipper-preflight-results">
 		<div data-tabs="">
-			<div class="shipper-preflight-done-tab">
+			<div class="shipper-preflight-done-tab" id="shipper-tab-source">
 				<i class="sui-icon-storage-server-data" aria-hidden="true"></i>
 				<span><?php esc_html_e( 'Source', 'shipper' ); ?></span>
 				<span class="shipper-check-status">
@@ -44,7 +45,7 @@
 						?> sui-<?php echo $icon_kind; ?>"></i>
 				</span>
 			</div>
-			<div class="shipper-preflight-done-tab">
+			<div class="shipper-preflight-done-tab" id="shipper-tab-destination">
 				<i class="sui-icon-upload-cloud" aria-hidden="true"></i>
 				<span><?php esc_html_e( 'Destination', 'shipper' ); ?></span>
 				<span class="shipper-check-status">
@@ -65,7 +66,7 @@
 						?> sui-<?php echo $icon_kind; ?>"></i>
 				</span>
 			</div>
-			<div class="shipper-preflight-done-tab">
+			<div class="shipper-preflight-done-tab" id="shipper-tab-files">
 				<i class="sui-icon-clipboard-notes" aria-hidden="true"></i>
 				<span><?php esc_html_e( 'Files', 'shipper' ); ?></span>
 				<span class="shipper-check-status">
@@ -86,7 +87,7 @@
 						?> sui-<?php echo $icon_kind; ?>"></i>
 				</span>
 			</div>
-			<div  class="shipper-preflight-done-tab active">
+			<div  class="shipper-preflight-done-tab active" id="shipper-tab-overall">
 				<i class="sui-icon-shipper-anchor" aria-hidden="true"></i>
 				<span><?php esc_html_e( 'Ready to sail', 'shipper' ); ?></span>
 				<span class="shipper-check-status">

@@ -1,6 +1,3 @@
-<?php
-assert(true);
-?>
 <div class="wpmud-box-title badge">
     <h3>Managed Backups</h3><span class="badge">Premium</span>
 </div><!-- end wpmud-box-title -->

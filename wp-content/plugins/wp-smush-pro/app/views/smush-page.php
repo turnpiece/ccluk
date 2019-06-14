@@ -14,7 +14,9 @@ $this->do_meta_boxes( 'summary' );
 
 <div class="sui-row-with-sidenav">
 	<?php $this->show_tabs(); ?>
-	<?php $this->do_meta_boxes( $this->get_current_tab() ); ?>
+	<div>
+		<?php $this->do_meta_boxes( $this->get_current_tab() ); ?>
+	</div>
 </div><!-- end row -->
 
 <?php if ( ! WP_Smush::is_pro() ) : ?>

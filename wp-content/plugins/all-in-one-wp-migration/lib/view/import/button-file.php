@@ -28,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 
-<a href="#" id="ai1wm-import-file">
+<a href="#" aria-label="<?php _e( 'To choose a file please go inside the link and click on the browse button.', AI1WM_PLUGIN_NAME ); ?>" id="ai1wm-import-file">
 	<?php _e( 'File', AI1WM_PLUGIN_NAME ); ?>
 	<input type="file" id="ai1wm-select-file" />
 </a>

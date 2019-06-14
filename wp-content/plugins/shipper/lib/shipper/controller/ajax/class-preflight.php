@@ -32,6 +32,37 @@ class Shipper_Controller_Ajax_Preflight extends Shipper_Controller_Ajax {
 			'wp_ajax_shipper_get_path_exclusions',
 			array( $this, 'json_get_path_exclusions' )
 		);
+		add_action(
+			'wp_ajax_shipper_get_package_size_message',
+			array( $this, 'json_get_package_size_message' )
+		);
+	}
+
+	/**
+	 * Sends package size message back to client
+	 */
+	public function json_get_package_size_message() {
+		$this->do_request_sanity_check();
+
+		$chk = new Shipper_Task_Check_Files;
+		$package_size = $chk->get_updated_package_size();
+		$threshold = Shipper_Model_Stored_Migration::get_package_size_threshold();
+		$exclusions = new Shipper_Model_Stored_Exclusions;
+
+		$tpl = new Shipper_Helper_Template;
+		$markup = $tpl->get(
+			'pages/preflight/wizard-files-package_size-summary',
+			array(
+				'package_size' => $package_size,
+				'threshold' => $threshold,
+			)
+		);
+		wp_send_json_success( array(
+			'excluded' => count( $exclusions->get_data() ),
+			'package_size' => size_format( $package_size ),
+			'oversized' => $package_size > $threshold,
+			'markup' => $markup,
+		) );
 	}
 
 	/**

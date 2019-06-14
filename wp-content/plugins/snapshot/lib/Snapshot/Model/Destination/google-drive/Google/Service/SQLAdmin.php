@@ -42,7 +42,7 @@ class Google_0814_Service_SQLAdmin extends Google_0814_Service
   public $operations;
   public $sslCerts;
   public $tiers;
-
+  
 
   /**
    * Constructs the internal representation of the SQLAdmin service.

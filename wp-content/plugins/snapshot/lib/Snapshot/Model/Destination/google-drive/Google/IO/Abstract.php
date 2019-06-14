@@ -58,13 +58,13 @@ abstract class Google_0814_IO_Abstract
    * @param $options
    */
   abstract public function setOptions($options);
-
+  
   /**
    * Set the maximum request time in seconds.
    * @param $timeout in seconds
    */
   abstract public function setTimeout($timeout);
-
+  
   /**
    * Get the maximum request time in seconds.
    * @return timeout in seconds
@@ -99,7 +99,7 @@ abstract class Google_0814_IO_Abstract
 
     return false;
   }
-
+  
   /**
    * Execute an HTTP Request
    *

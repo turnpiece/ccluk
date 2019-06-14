@@ -88,7 +88,7 @@ class Snapshot_Helper_Zip_Archive extends Snapshot_Helper_Zip_Abstract {
 		}
 
 		$this->_zip->close();
-
+		
 		return $status;
 	}
 

@@ -24,12 +24,12 @@ $include_msg = __( 'Reinclude file', 'shipper' );
 			</th>
 			<th width="15%"><?php esc_html_e( 'Size', 'shipper' ); ?></th>
 			<th width="10%"><?php esc_html_e( 'Type', 'shipper' ); ?></th>
-			<th width="10%"><?php esc_html_e( 'Include/Exclude', 'shipper' ); ?></th>
+			<th width="20%"><?php esc_html_e( 'Include/Exclude', 'shipper' ); ?></th>
 		</tr>
 	</thead>
 	<tbody>
 	<?php foreach ( $files as $file ) { ?>
-	<?php
+	<?php 
 		if ( isset( $file['path'] ) ) {
 			$file['path'] = wp_normalize_path( realpath( $file['path'] ) );
 		}

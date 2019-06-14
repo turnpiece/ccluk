@@ -126,9 +126,9 @@ class HTTP_OAuth_Consumer_Request extends HTTP_OAuth_Message
     }
 
     /**
-     * Returns $this->request if it is an instance of HTTP_Request.  If not, it
+     * Returns $this->request if it is an instance of HTTP_Request.  If not, it 
      * creates one.
-     *
+     * 
      * @return HTTP_Request2
      */
     protected function getHTTPRequest2()

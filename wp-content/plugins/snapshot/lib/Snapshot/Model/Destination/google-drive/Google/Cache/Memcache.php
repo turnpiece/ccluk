@@ -52,7 +52,7 @@ class Google_0814_Cache_Memcache extends Google_0814_Cache_Abstract
       }
     }
   }
-
+  
   /**
    * @inheritDoc
    */
@@ -113,8 +113,8 @@ class Google_0814_Cache_Memcache extends Google_0814_Cache_Abstract
   }
 
   /**
-   * Lazy initialiser for memcache connection. Uses pconnect for to take
-   * advantage of the persistence pool where possible.
+   * Lazy initialiser for memcache connection. Uses pconnect for to take 
+   * advantage of the persistence pool where possible. 
    */
   private function connect()
   {
@@ -129,7 +129,7 @@ class Google_0814_Cache_Memcache extends Google_0814_Cache_Abstract
     } else {
       $this->connection = memcache_pconnect($this->host, $this->port);
     }
-
+    
     if (! $this->connection) {
       throw new Google_0814_Cache_Exception("Couldn't connect to memcache server");
     }

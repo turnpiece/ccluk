@@ -38,7 +38,7 @@ class Google_0814_Service_Autoscaler extends Google_0814_Service
 
   public $autoscalers;
   public $zoneOperations;
-
+  
 
   /**
    * Constructs the internal representation of the Autoscaler service.

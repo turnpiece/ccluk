@@ -18,7 +18,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 ?>
 
-<?php if ( $cdn_enabled && ( ( ! is_network_admin() && ! $opt_networkwide_val ) || ( is_network_admin() && $opt_networkwide_val ) ) ) : ?>
+<?php if ( WP_Smush::is_pro() && $cdn_enabled && ( ( ! is_network_admin() && ! $opt_networkwide_val ) || ( is_network_admin() && $opt_networkwide_val ) ) ) : ?>
 	<div class="sui-notice sui-notice-info">
 		<p><?php esc_html_e( 'Your images are currently being served via the WPMU DEV CDN. Bulk smush will continue to operate as per your settings below and is treated completely separately in case you ever want to disable the CDN.', 'wp-smushit' ); ?></p>
 	</div>
@@ -53,8 +53,7 @@ if ( ! defined( 'WPINC' ) ) {
 		<div class="network-settings-wrapper<?php echo $opt_networkwide_val ? '' : ' sui-hidden'; ?>">
 	<?php endif; ?>
 
-	<?php
-	if ( ! is_multisite() || ( ! $opt_networkwide_val && ! is_network_admin() ) || is_network_admin() ) {
+	<?php if ( ! is_multisite() || ( ! $opt_networkwide_val && ! is_network_admin() ) || is_network_admin() ) {
 		foreach ( $settings_data as $name => $value ) {
 			// Skip networkwide settings, we already printed it.
 			if ( 'networkwide' === $name ) {

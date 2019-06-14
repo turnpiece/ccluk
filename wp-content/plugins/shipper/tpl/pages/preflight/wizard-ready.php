@@ -4,34 +4,21 @@
  *
  * @package shipper
  */
+
 ?>
 
 <div class="shipper-wizard-tab">
 <?php // Body copy area ?>
-<?php if ( $has_issues ) { ?>
-	<?php if ( $has_errors ) { ?>
-		<div class="sui-notice sui-notice-error">
-			<p><?php esc_html_e( 'You have a few errors, please check the sections above for more info.', 'shipper' ); ?></p>
-		</div>
-	<?php } else { // has errors ?>
-		<div class="sui-notice sui-notice-warning">
-			<p><?php esc_html_e( 'You have a few warnings, please check the sections above for more info.', 'shipper' ); ?></p>
-		</div>
-		<p>
-			<?php esc_html_e( 'Don\'t worry!', 'shipper' ); ?>
-			<?php esc_html_e( 'You can try to resolve these warnings or begin the migration right away ignoring these warnings.', 'shipper' ); ?>
-			<?php esc_html_e( 'Note that Shipper overwrites any existing files or database tables on your destination website.', 'shipper' ); ?>
-			<?php esc_html_e( 'Please make sure you have a backup.', 'shipper' ); ?>
-		</p>
-	<?php } // has errors ?>
-<?php } else { // has issues ?>
-		<p>
-			<?php esc_html_e( 'You\'re ready to go!', 'shipper' ); ?>
-			<?php esc_html_e( 'Note that Shipper overwrites any existing files or database tables on your destination website.', 'shipper' ); ?>
-			<?php esc_html_e( 'Please make sure you have a backup.', 'shipper' ); ?>
-		</p>
-<?php } // has issues ?>
-
+	<?php
+		$this->render(
+			'msgs/wizard-ready-main-notice',
+			array(
+				'has_issues' => $has_issues,
+				'has_errors' => $has_errors,
+				'result' => $result,
+			)
+		);
+	?>
 	<?php // Actions area ?>
 	<div>
 		<?php if ( $has_issues ) { ?>
@@ -48,3 +35,4 @@
 		<?php } // does not have errors ?>
 	</div>
 </div>
+

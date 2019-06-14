@@ -35,7 +35,7 @@ class Google_0814_Service_AppState extends Google_0814_Service
   const APPSTATE = "https://www.googleapis.com/auth/appstate";
 
   public $states;
-
+  
 
   /**
    * Constructs the internal representation of the AppState service.

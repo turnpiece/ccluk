@@ -95,7 +95,7 @@ if ( version_compare(PHP_VERSION, '5.5.0', '<') ) {
 								<span class="filter-label"><?php esc_html_e( 'Filter by', SNAPSHOT_I18N_DOMAIN ); ?></span>
 
 								<input type="hidden" name="page" value="snapshot_pro_snapshots">
-
+								
 								<select name='destination'>
 									<option><?php esc_html_e( 'All Destinations', SNAPSHOT_I18N_DOMAIN ); ?></option>
 									<?php foreach ( WPMUDEVSnapshot::instance()->config_data['destinations'] as $key => $destination ) : ?>
@@ -111,7 +111,7 @@ if ( version_compare(PHP_VERSION, '5.5.0', '<') ) {
 						</div>
 
 						<div class="my-snapshots">
-
+							
 							<form id="snapshot-edit-listing" action="<?php echo esc_url( WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url( 'snapshot_pro_snapshots' ) ); ?>" method="post">
 								<input type="hidden" name="snapshot-action" value="delete-bulk"/>
 								<?php wp_nonce_field( 'snapshot-delete', 'snapshot-noonce-field' ); ?>
@@ -155,7 +155,7 @@ if ( version_compare(PHP_VERSION, '5.5.0', '<') ) {
 
 										<tbody>
 										<?php $per_page_snapshots = array_slice( $snapshots, $offset, $per_page ); ?>
-										<?php
+										<?php 
                                         foreach ( $per_page_snapshots as $key => $snapshot ) :
 											$snapshot_locker = null;
 											$snapshot_locker = new Snapshot_Helper_Locker( WPMUDEVSnapshot::instance()->get_setting( 'backupLockFolderFull' ), $snapshot['timestamp'] );
@@ -207,7 +207,7 @@ if ( version_compare(PHP_VERSION, '5.5.0', '<') ) {
 
 												}
 
-											}
+											} 
                                             ?>
 
 											<tr>
@@ -252,7 +252,7 @@ if ( version_compare(PHP_VERSION, '5.5.0', '<') ) {
 
 												<td class="msc-size" data-text="<?php esc_html_e('Size', SNAPSHOT_I18N_DOMAIN); ?>:">
 
-													<?php
+													<?php 
                                                     if ( isset( $data_item['file_size'] ) ) {
 
 														$file_size = Snapshot_Helper_Utility::size_format( $data_item['file_size'] );
@@ -263,14 +263,14 @@ if ( version_compare(PHP_VERSION, '5.5.0', '<') ) {
 
 														echo "-";
 
-													}
+													} 
                                                     ?>
 
 												</td>
 
 												<td class="msc-date" data-text="<?php esc_html_e('Date', SNAPSHOT_I18N_DOMAIN); ?>:">
 
-													<?php
+													<?php 
                                                     if ( isset( $data_item['timestamp'] ) ) {
 
 														echo esc_html( Snapshot_Helper_Utility::show_date_time( $data_item['timestamp'] ) );
@@ -360,3 +360,7 @@ if ( version_compare(PHP_VERSION, '5.5.0', '<') ) {
 
 	<?php } ?>
 </div>
+<?php
+if( Snapshot_Helper_Utility::is_wpmu_hosting() ) {
+	$this->render( 'boxes/modals/popup-hosting', false, array(), false, false );
+}

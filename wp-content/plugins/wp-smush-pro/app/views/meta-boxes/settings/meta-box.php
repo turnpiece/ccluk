@@ -121,8 +121,11 @@ if ( ! defined( 'WPINC' ) ) {
 
 		<div class="sui-box-settings-col-2">
 			<button type="button" class="sui-button sui-button-ghost" id="wp-smush-update-api-status">
-				<i class="sui-icon-undo" aria-hidden="true"></i>
-				<?php esc_html_e( 'Update API status', 'wp-smushit' ); ?>
+				<span class="sui-loading-text">
+					<i class="sui-icon-undo" aria-hidden="true"></i>
+					<?php esc_html_e( 'Update API status', 'wp-smushit' ); ?>
+				</span>
+				<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
 			</button>
 		</div>
 	</div>

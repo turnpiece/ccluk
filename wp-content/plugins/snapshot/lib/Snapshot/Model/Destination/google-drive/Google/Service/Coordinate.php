@@ -41,7 +41,7 @@ class Google_0814_Service_Coordinate extends Google_0814_Service
   public $location;
   public $schedule;
   public $worker;
-
+  
 
   /**
    * Constructs the internal representation of the Coordinate service.

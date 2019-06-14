@@ -5,6 +5,27 @@ Change Log:
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
 
+1.0.2 - 2018-05-14
+----------------------------------------------------------------------
+- Add: Add a method to rerun pre-flight check in every tab
+- Add: Auto-remove site from the Shipper API on plugin removal
+- Add: Automatically fetch latest API for new sites on install
+- Add: Support Whitelabel in Shipper
+- Add: Additional dashboard login check messages
+- Fix: Improve restore reliability by solving conflict with plugins
+- Fix: Fix multiple S3 object instantiations
+- Fix: Deprecate Add Destination modals
+- Fix: Improve the error states in pre-flight check
+- Fix: Notice content aligment in the Welcome to Shipper popup
+- Fix: Improved Export -> Ready to Migrate screen layout
+- Fix: Update the Ready to Sail status on issues addressed
+- Fix: Deprecate Continue Anyway button in the Requirement Failed modal
+- Fix: Update the Shipper character
+- Fix: Placement of Back buttons
+- Fix: Update copy of Package Size pre-flight check
+- Fix: Remove Greeting modal if it's not the users first website
+- Fix: Update the package size on excluding the large files 
+
 1.0.1.1 - 2018-03-22
 ----------------------------------------------------------------------
 - Fix: add cooldown time for credentials negotiation.
@@ -26,6 +47,3 @@ Change Log:
 1.0.0 - 2018-01-22
 ----------------------------------------------------------------------
 - Initial release
-
-
-87274-1554644927-au

@@ -501,7 +501,7 @@ if ( ! class_exists( 'Snapshot_Helper_Utility' ) ) {
 		 * @return array
 		 */
 		public static function scandir( $base = '' ) {
-			if ( defined('SNAPSHOT_IGNORE_SYMLINKS') && SNAPSHOT_IGNORE_SYMLINKS === true) {
+			if ( ! defined('SNAPSHOT_IGNORE_SYMLINKS') || SNAPSHOT_IGNORE_SYMLINKS === true) {
 				if ( is_link ( $base ) )
 					return array();
 			}
@@ -979,7 +979,7 @@ if ( ! class_exists( 'Snapshot_Helper_Utility' ) ) {
 
 			if ( ! file_exists( trailingslashit( $folder ) . "CACHEDIR.TAG" ) ) {
 				global $wp_filesystem;
-
+				
 				if( self::connect_fs() ) {
 					$wp_filesystem->put_contents( trailingslashit( $folder ) . "CACHEDIR.TAG", "", FS_CHMOD_FILE );
 				} else {
@@ -1413,8 +1413,14 @@ if ( ! class_exists( 'Snapshot_Helper_Utility' ) ) {
 
 			} else {
 
+				$normalizedArchiveFilename = wp_normalize_path( $archiveFilename );
+
+				if ( strpos( strtolower( trim( $normalizedArchiveFilename ) ), '../' ) !== false ) {
+					throw new Exception('path traversal is not allowed');
+				}
+
 				$zip = new ZipArchive();
-				$res = $zip->open( $archiveFilename );
+				$res = $zip->open( $normalizedArchiveFilename );
 				if ( true === $res ) {
 					$zip->extractTo( $restoreFolder, array( 'snapshot_manifest.txt' ) );
 					$zip->close();
@@ -1639,6 +1645,12 @@ if ( ! class_exists( 'Snapshot_Helper_Utility' ) ) {
 					$error_status['errorText']   = __( "Manifest ITEM does not contain 'data' section.", SNAPSHOT_I18N_DOMAIN );
 
 					return $error_status;
+				}
+
+				$normalizedPath = strtolower( trim( $restoreFile ) );
+
+				if ( strpos( $normalizedPath, 'phar://' ) !== false ) {
+					throw new Exception('phar handler not allowed');
 				}
 
 				// Now we check the manifest item against the config data.
@@ -2049,7 +2061,7 @@ if ( ! class_exists( 'Snapshot_Helper_Utility' ) ) {
 
 		/**
 		 * Connect to the filesystem
-		 *
+		 * 
 		 * @param $url
 		 * @param $method
 		 * @param $context
@@ -2065,7 +2077,7 @@ if ( ! class_exists( 'Snapshot_Helper_Utility' ) ) {
 			}
 
 			//check if credentials are correct or not.
-			if( ! WP_Filesystem( $credentials ) )
+			if( ! WP_Filesystem( $credentials ) ) 
 			{
 				request_filesystem_credentials( $url, $method, true, $context );
 				return false;
@@ -2076,7 +2088,7 @@ if ( ! class_exists( 'Snapshot_Helper_Utility' ) ) {
 
 		/**
 		 * Checks whether we're on WPMU DEV Hosting
-		 *
+		 * 
 		 * @return bool
 		 */
 		public static function is_wpmu_hosting() {
@@ -2085,7 +2097,7 @@ if ( ! class_exists( 'Snapshot_Helper_Utility' ) ) {
 
 		/**
 		 * Checks whether we're on WPEngine
-		 *
+		 * 
 		 * @return bool
 		 */
 		public static function is_wpengine_hosting() {
@@ -2093,10 +2105,25 @@ if ( ! class_exists( 'Snapshot_Helper_Utility' ) ) {
 		}
 
 		/**
+		 * Return converted UTC to local hosting backup time
+		 *
+		 * @return false|string
+		 */
+		public static function get_hosting_backup_local_time() {
+			// Currently backup time is hardcoded to 2:00AM UTC
+			$time = '2:00';
+
+			// Convert to local time
+			$time = Snapshot_Helper_Utility::show_date_time( strtotime( $time ), 'g:ia' );
+
+			return $time;
+		}
+
+		/**
 		 * Checks whether the S3 request handler is properly spawned.
-		 *
+		 * 
 		 * @param $s3
-		 *
+		 * 
 		 * @return bool
 		 */
 		public static function spawned_S3_handler( $s3 ) {

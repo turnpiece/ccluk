@@ -52,7 +52,7 @@ class Google_0814_Service_MapsEngine extends Google_0814_Service
   public $tables_features;
   public $tables_files;
   public $tables_parents;
-
+  
 
   /**
    * Constructs the internal representation of the MapsEngine service.

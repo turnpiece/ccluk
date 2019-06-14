@@ -49,7 +49,7 @@ class Google_0814_Service_Bigquery extends Google_0814_Service
   public $projects;
   public $tabledata;
   public $tables;
-
+  
 
   /**
    * Constructs the internal representation of the Bigquery service.

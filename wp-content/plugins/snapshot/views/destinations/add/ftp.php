@@ -130,7 +130,7 @@
 	<?php
 	if ( ! isset( $item['passive'] ) ) {
 		$item['passive'] = "no";
-	}
+	} 
     ?>
 
 	<div id="wps-destination-mode" class="form-row">
@@ -177,3 +177,4 @@
 	<input type="hidden" name="snapshot-destination[type]" id="snapshot-destination-type" value="<?php echo esc_attr( $item['type'] ); ?>"/>
 	<input type="hidden" name="snapshot-ajax-nonce" id="snapshot-ajax-nonce" value="<?php echo esc_attr( wp_create_nonce( 'snapshot-ajax-nonce' ) ); ?>" />
 </div>
+

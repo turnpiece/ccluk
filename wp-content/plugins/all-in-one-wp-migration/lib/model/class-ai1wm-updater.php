@@ -109,7 +109,7 @@ class Ai1wm_Updater {
 	/**
 	 * Check for extension updates
 	 *
-	 * @return void
+	 * @return boolean
 	 */
 	public static function check_for_updates() {
 		// Get current updates
@@ -150,8 +150,7 @@ class Ai1wm_Updater {
 			}
 		}
 
-		// Set new updates
-		update_option( AI1WM_UPDATER, $updates );
+		return update_option( AI1WM_UPDATER, $updates );
 	}
 
 	/**
