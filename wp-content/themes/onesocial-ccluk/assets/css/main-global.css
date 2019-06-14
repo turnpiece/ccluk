@@ -6369,7 +6369,7 @@ div#sitewide-notice div#message.error p {
   color: #fff;
   margin: 0 0 10px 0;
   padding: 6px;
-  width: 90%;
+  text-align: center;
 }
 
 #buddypress div.accept, #buddypress div.reject {
