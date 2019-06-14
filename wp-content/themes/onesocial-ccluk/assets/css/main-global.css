@@ -8297,6 +8297,11 @@ body.activity-permalink .entry-header {
   font-size: 14px;
 }
 
+#pass-strength-result {
+  margin-top: -25px;
+  float: right;
+}
+
 #pass-strength-result.bad, #pass-strength-result.short {
   color: #f25d65;
 }
