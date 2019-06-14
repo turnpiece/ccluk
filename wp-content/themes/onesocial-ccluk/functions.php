@@ -48,8 +48,8 @@ add_action( 'plugins_loaded', function() {
 // Category archives to include news posts
 function ccluk_show_cpt_archives( $query ) {
     if( ( is_category() || is_tag() ) && empty( $query->query_vars['suppress_filters'] ) ) {
-        $query->set( 
-            'post_type', 
+        $query->set(
+            'post_type',
             array(
                 'post', 'ccluk_news'
             )
@@ -180,9 +180,9 @@ function boss_generate_option_css() {
     a { color: <?php echo $accent_color; ?>; }
           .widget_mc4wp_form_widget form p input[type="submit"], .widget.widget_newsletterwidget form p input[type="submit"],
           .footer-widget #switch-mode input[type="submit"],
-          .woocommerce #respond input#submit, 
-          .woocommerce a.button, 
-          .woocommerce button.button, 
+          .woocommerce #respond input#submit,
+          .woocommerce a.button,
+          .woocommerce button.button,
           .woocommerce input.button,
     button,
     input[type="button"],
@@ -503,11 +503,11 @@ function boss_generate_option_css() {
     body, body #main-wrap, .formatted-content {
       background-color: <?php echo $primary_color; ?>;
     }
-          
+
           @media screen and (max-width: 1024px) and (min-width: 768px) {
               .side-panel {
                   background-color: <?php echo $primary_color; ?>;
-              }                
+              }
           }
 
           body:not(.buddypress) #content article, body.buddypress #content article.error404, .site-content nav.nav-single, .site-content #comments, .bp-legacy div#item-body,
@@ -616,7 +616,7 @@ function boss_generate_option_css() {
     }
     <?php } ?>
   </style>
-  <?php 
+  <?php
 }
 
 /* Add Action */
@@ -624,7 +624,7 @@ add_action( 'wp_head', 'boss_generate_option_css', 200 );
 
 function ccluk_login_styles() { ?>
     <style type="text/css">
-        .login #loginform input[type=text], 
+        .login #loginform input[type=text],
         .login #loginform input[type=password] {
             font-size: 21px;
             border-bottom: 1px solid #54ae68;
@@ -722,7 +722,7 @@ if ( ! function_exists( 'ccluk_posted_on' ) ) {
     function ccluk_posted_on() {
         printf( '<a href="%1$s" title="%2$s" rel="bookmark" class="entry-date"><time datetime="%3$s">%4$s</time></a>', esc_url( get_permalink() ), esc_attr( get_the_time() ), esc_attr( get_the_date( 'c' ) ), esc_html( get_the_date() ));
     }
-    
+
 }
 
 /**
@@ -789,15 +789,15 @@ add_action( 'bp_setup_nav', function() {
 
     $bp = buddypress();
 
-    bp_core_new_nav_item( 
-        array( 
-            'name' => __('Messages', 'buddypress'), 
-            'slug' => $bp->messages->slug, 
-            'position' => 50, 
-            'show_for_displayed_user' => false, 
-            'screen_function' => 'messages_screen_inbox', 
-            'default_subnav_slug' => 'inbox', 
-            'item_css_id' => $bp->messages->id 
+    bp_core_new_nav_item(
+        array(
+            'name' => __('Messages', 'buddypress'),
+            'slug' => $bp->messages->slug,
+            'position' => 50,
+            'show_for_displayed_user' => false,
+            'screen_function' => 'messages_screen_inbox',
+            'default_subnav_slug' => 'inbox',
+            'item_css_id' => $bp->messages->id
         )
     );
 });
@@ -846,14 +846,3 @@ add_action( 'bp_after_registration_submit_buttons', function() {
     if ( 'registration-disabled' != bp_get_current_signup_step() )
         do_action( 'wordpress_social_login' );
 } );
-
-/**
- * Add custom BuddyPress registration fields to MailChimp.
- *
- * - Replace "CUST1" with your MailChimp field name.
- * - Replace "13" with your BuddyPress field ID.
- */
-add_filter( 'mc4wp_integration_buddypress_data', function( $data, $user_id ) {
-    $data['CUST1'] = xprofile_get_field_data( 13 , $user_id );
-    return $data;
-}, 10, 2);
