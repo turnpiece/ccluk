@@ -8341,6 +8341,9 @@ body {
 }
 
 #pass-strength-result {
+    margin-top: -25px;
+    float: right;
+
   &.bad, &.short {
     color: #f25d65;
   }
