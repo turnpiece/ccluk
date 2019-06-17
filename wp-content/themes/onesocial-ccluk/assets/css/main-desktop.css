@@ -875,6 +875,10 @@ header-aside, #logo-area {
   font-size: 18px;
 }
 
+.header-button.login {
+  width: 76px;
+}
+
 .header-notifications a.header-button span > b {
   background: #54ae68;
   border-radius: 100%;
