@@ -352,7 +352,7 @@
 			do_action( 'bp_before_registration_submit_buttons' ); ?>
 
 			<div class="submit">
-				<input type="submit" name="signup_submit" id="signup_submit" value="<?php esc_attr_e( 'Complete Sign Up', 'buddypress' ); ?>" />
+				<input type="submit" name="signup_submit" id="signup_submit" value="<?php esc_attr_e( 'JOIN CCL', 'buddypress' ); ?>" />
 			</div>
 
 			<?php

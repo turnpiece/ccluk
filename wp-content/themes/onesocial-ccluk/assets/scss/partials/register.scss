@@ -3,7 +3,7 @@
 .register {
 
     fieldset,
-    div#register-page .register-section, 
+    div#register-page .register-section,
     div#register-page .security-question-section {
     	border: none;
     }
@@ -12,7 +12,7 @@
     	background: rgba( 255, 255, 255, 0.8 );
     }
 
-    .popup-content input:not([type="checkbox"]):not([type="radio"]):not([type="button"]), 
+    .popup-content input:not([type="checkbox"]):not([type="radio"]):not([type="button"]),
     .popup-content .input:not([type="checkbox"]):not([type="radio"]):not([type="button"]) {
     	font-size: 18px;
     }
@@ -22,9 +22,9 @@
             color: $blue;
         }
     }
-        
+
     div#register-page {
-        
+
         text-align: left;
 
         p {
@@ -96,6 +96,11 @@
                     line-height: 1.5;
                 }
             }
+        }
+
+        .privacy-text {
+            text-align: center;
+            font-size: $font-size-sm;
         }
 
         .submit {
