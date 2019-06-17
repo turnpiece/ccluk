@@ -6,8 +6,6 @@ class CCLUK_BP_Custom {
 
 	const TWFY_URL = 'https://www.theyworkforyou.com';
 
-	const MEMBERS_GROUP_ID = 28;
-
 	private $location = array(
 		'parliamentary_constituency',
 		'region',
@@ -30,12 +28,14 @@ class CCLUK_BP_Custom {
 		add_action( 'bp_core_activated_user', array( $this, 'join_group_on_signup' ) );
 
 		// sync BP/mailchimp user data
-		add_filter( 'mc4wp_integration_buddypress_data', array( $this, 'mailchimp_user_sync' ), 10, 2 );
+		add_filter( 'mailchimp_sync_user_data', array( $this, 'mailchimp_user_sync' ), 10, 2 );
 	}
 
 	// join members group on signup
 	public function join_group_on_signup( $user_id ){
-	    groups_join_group( self::MEMBERS_GROUP_ID, $user_id );
+
+		if ($group_id = $this->get_members_group_id())
+	    	groups_join_group( $group_id, $user_id );
 	}
 
 	/**
@@ -49,6 +49,11 @@ class CCLUK_BP_Custom {
 	    $data['LNAME'] = $lname;
 	    if ($postcode = xprofile_get_field_data( 2 , $user_id )) {
 	        $data['POSTCODE'] = $postcode;
+
+			if ($location = get_user_meta( $user_id, 'location', true )) {
+				if (isset($location['parliamentary_constituency']))
+					$data['CONSTITUEN'] = $location['parliamentary_constituency'];
+			}
 
 			if (($mp = (array) get_user_meta($user_id, 'mp', true) || $mp = $this->get_mp( $user_id, $postcode ))
 				&& isset($mp['full_name'])) {
@@ -237,6 +242,14 @@ class CCLUK_BP_Custom {
 		$response = curl_exec($ch);
 		curl_close($ch);
 		return $response;
+	}
+
+	private function get_members_group_id() {
+		global $wpdb;
+
+		$bp = buddypress();
+
+		return $wpdb->get_var( "SELECT `id` FROM `{$bp->groups->table_name}` WHERE `status` = 'public' AND `parent_id` = 0 AND `slug` LIKE '%all-members'" );
 	}
 
 	protected function debug( $message ) {
