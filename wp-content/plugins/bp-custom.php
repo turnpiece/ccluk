@@ -28,6 +28,7 @@ class CCLUK_BP_Custom {
 		add_action( 'bp_core_activated_user', array( $this, 'join_group_on_signup' ) );
 
 		// sync BP/mailchimp user data
+		add_filter( 'mc4wp_user_merge_vars', array( $this, 'mailchimp_user_sync' ), 10, 2 );
 		add_filter( 'mailchimp_sync_user_data', array( $this, 'mailchimp_user_sync' ), 10, 2 );
 	}
 
@@ -41,25 +42,23 @@ class CCLUK_BP_Custom {
 	/**
 	 * Add custom BuddyPress registration fields to MailChimp.
 	 */
-	public function mailchimp_user_sync( $data, $user_id ) {
-	    $name = trim( xprofile_get_field_data( 1 , $user_id ) );
-	    $lname = (strpos($name, ' ') === false) ? '' : preg_replace('#.*\s([\w-\']*)$#', '$1', $name);
-	    $fname = trim( preg_replace('#'.$lname.'#', '', $name ) );
-	    $data['FNAME'] = $fname;
-	    $data['LNAME'] = $lname;
-	    if ($postcode = xprofile_get_field_data( 2 , $user_id )) {
+	public function mailchimp_user_sync( $data, $user ) {
+
+	    if ($postcode = xprofile_get_field_data( 2 , $user->id )) {
 	        $data['POSTCODE'] = $postcode;
 
-			if ($location = get_user_meta( $user_id, 'location', true )) {
+			if ($location = get_user_meta( $user->id, 'location', true )) {
 				if (isset($location['parliamentary_constituency']))
 					$data['CONSTITUEN'] = $location['parliamentary_constituency'];
 			}
 
-			if (($mp = (array) get_user_meta($user_id, 'mp', true) || $mp = $this->get_mp( $user_id, $postcode ))
-				&& isset($mp['full_name'])) {
-				$data['MP'] = $mp['full_name'];
+			if ($mp = (array) get_user_meta($user->id, 'mp', true)) {
+				self::debug( print_r( $mp, true ) );
+				if (isset($mp['full_name']))
+					$data['MP'] = $mp['full_name'];
 			}
 	    }
+		self::debug( print_r( $data, true ) );
 	    return $data;
 	}
 
