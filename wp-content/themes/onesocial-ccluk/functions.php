@@ -846,3 +846,19 @@ add_action( 'bp_after_registration_submit_buttons', function() {
     if ( 'registration-disabled' != bp_get_current_signup_step() )
         do_action( 'wordpress_social_login' );
 } );
+
+// output privacy policy link
+add_action( 'bp_before_registration_submit_buttons', function() {
+    // get MailChimp integration options
+    $options = get_option('mc4wp_integrations');
+
+    // bail if implicit option is not set as then we'll
+    // be displaying a checkbox and text
+    if (empty($options['buddypress']['implicit']))
+        return;
+
+    ?>
+    <p class="privacy-text">
+        <a href="/privacy-policy"><?php _e( 'We respect your privacy.', 'onesocial' ) ?></a>
+    </p>
+<?php } );
