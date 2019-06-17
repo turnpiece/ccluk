@@ -42,11 +42,13 @@ class CCLUK_BP_Custom {
 	 * Add custom BuddyPress registration fields to MailChimp.
 	 */
 	public function mailchimp_user_sync( $data, $user_id ) {
+		/*
 	    $name = trim( xprofile_get_field_data( 1 , $user_id ) );
 	    $lname = (strpos($name, ' ') === false) ? '' : preg_replace('#.*\s([\w-\']*)$#', '$1', $name);
 	    $fname = trim( preg_replace('#'.$lname.'#', '', $name ) );
 	    $data['FNAME'] = $fname;
 	    $data['LNAME'] = $lname;
+		*/
 	    if ($postcode = xprofile_get_field_data( 2 , $user_id )) {
 	        $data['POSTCODE'] = $postcode;
 
