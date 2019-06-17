@@ -848,7 +848,16 @@ add_action( 'bp_after_registration_submit_buttons', function() {
 } );
 
 // output privacy policy link
-add_action( 'bp_before_registration_submit_buttons', function() { ?>
+add_action( 'bp_before_registration_submit_buttons', function() {
+    // get MailChimp integration options
+    $options = get_option('mc4wp_integrations');
+
+    // bail if implicit option is not set as then we'll
+    // be displaying a checkbox and text
+    if (empty($options['buddypress']['implicit']))
+        return;
+
+    ?>
     <p class="privacy-text">
         <a href="/privacy-policy"><?php _e( 'We respect your privacy.', 'onesocial' ) ?></a>
     </p>
