@@ -874,6 +874,9 @@ header-aside, #logo-area {
   #search-open {
       font-size: 18px;
   }
+  &.login {
+      width: 76px;
+  }
 }
 
 .header-notifications a.header-button span > b {
