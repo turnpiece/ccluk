@@ -6,6 +6,11 @@
  * @subpackage bp-legacy
  */
 
+// required field label
+add_filter( 'bp_get_the_profile_field_required_label', function( $text ) {
+	return '';
+} );
+
 ?>
 
 <div id="buddypress">
@@ -81,7 +86,7 @@
 
 				<h2><?php _e( 'Account Details', 'buddypress' ); ?></h2>
 
-				<label for="signup_username"><?php _e( 'Username', 'buddypress' ); ?> <?php _e( '(required)', 'buddypress' ); ?></label>
+				<label for="signup_username"><?php _e( 'Username', 'buddypress' ); ?> </label>
 				<?php
 
 				/**
@@ -92,7 +97,7 @@
 				do_action( 'bp_signup_username_errors' ); ?>
 				<input type="text" name="signup_username" id="signup_username" value="<?php bp_signup_username_value(); ?>" <?php bp_form_field_attributes( 'username' ); ?>/>
 
-				<label for="signup_email"><?php _e( 'Email Address', 'buddypress' ); ?> <?php _e( '(required)', 'buddypress' ); ?></label>
+				<label for="signup_email"><?php _e( 'Email Address', 'buddypress' ); ?> </label>
 				<?php
 
 				/**
@@ -103,7 +108,7 @@
 				do_action( 'bp_signup_email_errors' ); ?>
 				<input type="email" name="signup_email" id="signup_email" value="<?php bp_signup_email_value(); ?>" <?php bp_form_field_attributes( 'email' ); ?>/>
 
-				<label for="signup_password"><?php _e( 'Choose a Password', 'buddypress' ); ?> <?php _e( '(required)', 'buddypress' ); ?></label>
+				<label for="signup_password"><?php _e( 'Choose a Password', 'buddypress' ); ?> </label>
 				<?php
 
 				/**
@@ -115,7 +120,7 @@
 				<input type="password" name="signup_password" id="signup_password" value="" class="password-entry" <?php bp_form_field_attributes( 'password' ); ?>/>
 				<div id="pass-strength-result"></div>
 
-				<label for="signup_password_confirm"><?php _e( 'Confirm Password', 'buddypress' ); ?> <?php _e( '(required)', 'buddypress' ); ?></label>
+				<label for="signup_password_confirm"><?php _e( 'Confirm Password', 'buddypress' ); ?> </label>
 				<?php
 
 				/**
@@ -174,53 +179,6 @@
 							<?php
 							$field_type = bp_xprofile_create_field_type( bp_get_the_profile_field_type() );
 							$field_type->edit_field_html();
-
-							/**
-							 * Fires before the display of the visibility options for xprofile fields.
-							 *
-							 * @since 1.7.0
-							 */
-							do_action( 'bp_custom_profile_edit_fields_pre_visibility' );
-
-							if ( bp_current_user_can( 'bp_xprofile_change_field_visibility' ) ) : ?>
-								<p class="field-visibility-settings-toggle" id="field-visibility-settings-toggle-<?php bp_the_profile_field_id() ?>"><span id="<?php bp_the_profile_field_input_name(); ?>-2">
-									<?php
-									printf(
-										__( 'This field can be seen by: %s', 'buddypress' ),
-										'<span class="current-visibility-level">' . bp_get_the_profile_field_visibility_level_label() . '</span>'
-									);
-									?>
-									</span>
-									<button type="button" class="visibility-toggle-link" aria-describedby="<?php bp_the_profile_field_input_name(); ?>-2" aria-expanded="false"><?php _ex( 'Change', 'Change profile field visibility level', 'buddypress' ); ?></button>
-								</p>
-
-								<div class="field-visibility-settings" id="field-visibility-settings-<?php bp_the_profile_field_id() ?>">
-									<fieldset>
-										<legend><?php _e( 'Who can see this field?', 'buddypress' ) ?></legend>
-
-										<?php bp_profile_visibility_radio_buttons() ?>
-
-									</fieldset>
-									<button type="button" class="field-visibility-settings-close"><?php _e( 'Close', 'buddypress' ) ?></button>
-
-								</div>
-
-							<?php else : ?>
-								<p class="field-visibility-settings-notoggle" id="field-visibility-settings-toggle-<?php bp_the_profile_field_id() ?>">
-									<?php if ((int)bp_get_the_profile_field_id() == 2) { // postcode field
-										_e( "Your postcode will not be displayed to other people but will be used to get the constituency you're in and the name of your MP.", 'onesocial' );
-
-									} else {
-										printf(
-											__( 'This field can be seen by: %s', 'buddypress' ),
-											'<span class="current-visibility-level">' . bp_get_the_profile_field_visibility_level_label() . '</span>'
-										);
-
-									} ?>
-								</p>
-							<?php endif ?>
-
-							<?php
 
 							/**
 							 * Fires after the display of the visibility options for xprofile fields.
@@ -307,9 +265,9 @@
 
 			<div id="template-notices" role="alert" aria-atomic="true">
 				<?php if ( bp_registration_needs_activation() ) : ?>
-					<p><?php _e( 'You have successfully created your account! To begin using this site you will need to activate your account via the email we have just sent to your address.', 'buddypress' ); ?></p>
+					<p><?php _e( "You have successfully joined Citizens' Climate Lobby! To begin using this site you will need to activate your account via the email we've just sent you.", 'onesocial' ); ?></p>
 				<?php else : ?>
-					<p><?php _e( 'You have successfully created your account! Please log in using the username and password you have just created.', 'buddypress' ); ?></p>
+					<p><?php _e( "You have successfully joined Citizens' Climate Lobby! Please log in using the username and password you just created.", 'onesocial' ); ?></p>
 				<?php endif; ?>
 			</div>
 
