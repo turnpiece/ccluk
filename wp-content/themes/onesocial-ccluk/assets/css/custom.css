@@ -879,11 +879,6 @@ body.page-template-homepage #main .section.banner.background .section-content > 
   margin: auto;
 }
 
-body.page-template-homepage #main .section.banner.background.text-left .section-title-container, body.page-template-homepage #main .section.banner.background.text-right .section-title-container, body.page-template-homepage #main .section.banner.background-box.text-left .section-title-container, body.page-template-homepage #main .section.banner.background-box.text-right .section-title-container {
-  background-color: #54ae68;
-  color: #fff;
-}
-
 body.page-template-homepage #main .section.banner.background .section-title-container, body.page-template-homepage #main .section.banner.background-box .section-title-container {
   display: flex;
   position: absolute;
@@ -903,6 +898,11 @@ body.page-template-homepage #main .section.banner.background .section-title-cont
   align-self: center;
   position: relative;
   max-width: 650px;
+}
+
+body.page-template-homepage #main .section.banner.text-left .section-title-container, body.page-template-homepage #main .section.banner.text-right .section-title-container {
+  background-color: #54ae68;
+  color: #fff;
 }
 
 body.page-template-homepage #main .section.banner.background .section-content img {

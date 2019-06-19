@@ -152,14 +152,6 @@ body.page-template-homepage {
 						}
 					}
 
-					&.text-left,
-					&.text-right {
-						.section-title-container {
-							background-color: $green;
-							color: $white;
-						}
-					}
-
 					.section-title-container {
 						display: flex;
 						position: absolute;
@@ -182,6 +174,14 @@ body.page-template-homepage {
 					}
 				}
 
+				&.text-left,
+				&.text-right {
+					.section-title-container {
+						background-color: $green;
+						color: $white;
+					}
+				}
+				
 				&.background {
 					.section-content img {
 						opacity: 0.5;
