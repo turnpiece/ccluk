@@ -1,6 +1,4 @@
-/** Register **/
-
-.register {
+body.register {
 
     fieldset,
     div#register-page .register-section,
@@ -78,6 +76,20 @@
                 .field-visibility-settings-notoggle {
                     font-size: $font-size-sm;
                     color: $green;
+                }
+
+                .input-options {
+                    padding: 10px 0;
+
+                    label.option-label {
+                        font-size: $font-size-sm;
+                    }
+
+                    input[type="checkbox"]+span,
+                    input[type="checkbox"]+label,
+                    input[type="checkbox"]+strong {
+                        margin-right: 10px;
+                    }
                 }
             }
         }
