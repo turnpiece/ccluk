@@ -835,6 +835,8 @@ body.page-template-homepage #main .section.banner {
   position: relative;
   padding: 0;
   min-height: 400px;
+  max-height: 600px;
+  overflow: hidden;
 }
 
 body.page-template-homepage #main .section.banner .section-content {
@@ -890,7 +892,7 @@ body.page-template-homepage #main .section.banner.background .section-title-cont
   z-index: 5;
   width: 100%;
   height: 100%;
-  background-color: rgba(84, 174, 104, 0.85);
+  background-color: rgba(84, 174, 104, 0.9);
   color: #fff;
 }
 
@@ -918,7 +920,7 @@ body.page-template-homepage #main .section.banner.background-box .section-title-
   margin-right: -50%;
   transform: translate(-50%, -50%);
   height: auto;
-  max-height: 80%;
+  max-height: 95%;
   padding: 30px;
 }
 
@@ -2505,7 +2507,7 @@ body.buddypress.members #buddypress #members-directory-form.dir-form div.item-li
 }
 
 #bbpress-forums .bbp-forum-data {
-  border-color: rgba(84, 174, 104, 0.85);
+  border-color: rgba(84, 174, 104, 0.9);
 }
 
 #bbpress-forums .bbp-forum-data .last-activity {
@@ -2514,7 +2516,7 @@ body.buddypress.members #buddypress #members-directory-form.dir-form div.item-li
 }
 
 #bbpress-forums .bbp-forum-data:before {
-  border-color: rgba(84, 174, 104, 0.85);
+  border-color: rgba(84, 174, 104, 0.9);
 }
 
 #bbpress-forums div.bbp-template-notice {
@@ -2931,12 +2933,12 @@ MINIMUM width of 1200 pixels (large desktops)
     width: 540px;
   }
   body.page-template-homepage #main .section.feature .section-content article .list-item.entry-content .entry-title {
-    font-size: 50px;
+    font-size: 48px;
   }
   body.page-template-homepage #main .section.banner .section-title-container > .section-title {
     max-width: 900px;
   }
   body.page-template-homepage #main .section.banner .section-title-container > .section-title h2 {
-    font-size: 50px;
+    font-size: 48px;
   }
 }
