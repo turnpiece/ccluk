@@ -1465,10 +1465,6 @@ body.page-template-homepage .slick-slide img {
   background-color: #22a7f0;
 }
 
-.woocommerce #respond input#submit, .woocommerce a.button, .woocommerce button.button, .woocommerce input.button {
-  background-color: #22a7f0;
-}
-
 button {
   background-color: #54ae68;
 }
@@ -1500,7 +1496,7 @@ a.button {
   background-color: #54ae68;
 }
 
-#buddyboss-bbpress-media-attach, #buddyboss-comment-media-attach, .woocommerce .site-content nav.woocommerce-pagination ul li .current {
+#buddyboss-bbpress-media-attach, #buddyboss-comment-media-attach {
   background-color: #54ae68;
 }
 
@@ -1514,10 +1510,6 @@ a.button {
 
 .header-account-login .count, .header-notifications a.header-button span b, #aw-whats-new-submit-bbmedia {
   background-color: #54ae68;
-}
-
-.woocommerce span.onsale, .boss-modal-form .button {
-  background: #54ae68;
 }
 
 .bb-sidebar-on .bb-side-icon {
@@ -1538,18 +1530,6 @@ a.button {
 
 body #selectionSharerPopunder-inner a.action:hover {
   background: #54ae68;
-}
-
-.woocommerce ul.products li.product .price {
-  color: #54ae68;
-}
-
-.woocommerce div.product p.price, .woocommerce div.product span.price {
-  color: #54ae68;
-}
-
-.woocommerce [type='checkbox']:checked + span {
-  color: #54ae68;
 }
 
 .header-account-login .pop .boss-logout, .header-account-login .pop a:hover {
@@ -1636,7 +1616,7 @@ li.bbp-forum-info a.bbp-forum-title:before, li.bbp-topic-title a.bbp-topic-perma
   color: #54ae68;
 }
 
-.widget #bbp-search-index-form button i:before, .widget .woocommerce-product-search button i:before {
+.widget #bbp-search-index-form button i:before {
   color: #54ae68;
 }
 
@@ -1819,12 +1799,6 @@ input[type="radio"] + span:before, input[type="radio"] + label:before, input[typ
   -webkit-box-shadow: 0px 0px 0px 2px #54ae68;
   -moz-box-shadow: 0px 0px 0px 2px #54ae68;
   box-shadow: 0px 0px 0px 2px #54ae68;
-}
-
-.woocommerce-checkout [type='checkbox']:checked + span:before {
-  -webkit-box-shadow: 0px 0px 0px 1px #54ae68;
-  -moz-box-shadow: 0px 0px 0px 1px #54ae68;
-  box-shadow: 0px 0px 0px 1px #54ae68;
 }
 
 /********** Desktop  *************/

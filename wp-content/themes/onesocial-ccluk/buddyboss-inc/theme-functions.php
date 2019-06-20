@@ -37,12 +37,6 @@ function onesocial_setup() {
 	 */
 	add_theme_support( 'title-tag' );
 
-	// Declare theme support for WooCommerce
-	add_theme_support( 'woocommerce' );
-	add_theme_support( 'wc-product-gallery-zoom' );
-	add_theme_support( 'wc-product-gallery-lightbox' );
-	add_theme_support( 'wc-product-gallery-slider' );
-
 	// Adds wp_nav_menu() in two locations with BuddyPress deactivated.
 	register_nav_menus( array(
 		'primary-menu'		 => __( 'Titlebar', 'onesocial' ),
@@ -747,19 +741,7 @@ function buddyboss_widgets_init() {
 		'before_title'	 => '<h4 class="widgettitle">',
 		'after_title'	 => '</h4>'
 	) );
-	global $woocommerce;
-	if ( $woocommerce ) {
-		// Area 17, dedicated sidebar for WooCommerce
-		register_sidebar( array(
-			'name'			 => 'WooCommerce',
-			'id'			 => 'woo_sidebar',
-			'description'	 => 'The widget area on WooCommerce shop index and Category pages.',
-			'before_widget'	 => '<aside id="%1$s" class="widget %2$s">',
-			'after_widget'	 => '</aside>',
-			'before_title'	 => '<h4 class="widgettitle">',
-			'after_title'	 => '</h4>',
-		) );
-	}
+
 
 // Area 12, located in the Footer column 1. Only appears if widgets are added.
 	register_sidebar( array(
@@ -918,20 +900,6 @@ if ( !function_exists( 'buddyboss_post_content' ) ) :
 endif;
 
 /**
- * Check if we are on some of WC pages
- * */
-function onesocial_is_woocommerce() {
-
-	if ( function_exists( 'is_woocommerce' ) ) {
-		return (is_woocommerce() || is_shop() || is_product_tag() || is_product_category() || is_product()
-		//  || is_cart()
-		//  || is_checkout()
-		//  || is_account_page()
-		);
-	}
-}
-
-/**
  * Extends the default WordPress body classes.
  *
  * @since OneSocial 1.0.0
@@ -989,12 +957,6 @@ function buddyboss_body_class( $classes ) {
 			}
 			$classes[] = 'is-desktop';
 		}
-	}
-
-	// WooCommerce sidebar
-	if ( is_active_sidebar( 'woo_sidebar' ) && onesocial_is_woocommerce() ) {
-		$woocommerce_sidebar_alignment	 = onesocial_get_option( 'woocommerce_sidebar' );
-		$classes[]						 = 'woo-sidebar-active bb-has-sidebar sidebar-' . $woocommerce_sidebar_alignment;
 	}
 
 	// Search sidebar
@@ -2946,20 +2908,6 @@ if ( !function_exists( 'buddyboss_comment' ) ) {
 		return false;
 	}
 
-	/**
-	 * Woocommerce remove sidebar
-	 */
-	remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar', 10 );
-
-	/* --------------------------------
-	 * Woocommerce pages markup
-	  -------------------------------- */
-	remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10 );
-	remove_action( 'woocommerce_after_main_content', 'woocommerce_output_content_wrapper_end', 10 );
-
-	add_action( 'woocommerce_before_main_content', 'onesocial_theme_wrapper_start', 10 );
-	add_action( 'woocommerce_after_main_content', 'onesocial_theme_wrapper_end', 10 );
-
 	function onesocial_theme_wrapper_start() {
 		// Fixed - Sidebar moved to the bottom of shop page (Not needed)
 		//		if ( is_active_sidebar( 'woo_sidebar' ) ) {
@@ -3194,29 +3142,6 @@ if ( !function_exists( 'buddyboss_comment' ) ) {
 	add_action( 'onesocial_custom_slider', 'onesocial_execute_slider_shortcode' );
 
 	global $BUDDYBOSS_BM;
-
-	if ( $BUDDYBOSS_BM ) {
-		if ( !function_exists( 'woocommerce_get_product_thumbnail' ) ) {
-
-			/**
-			 * Override woocommerce product loop thumbnail
-			 * @param  [[Type]] [$size = 'bm-product-archive'] [[Description]]
-			 * @param  [[Type]] [$deprecated1 = 0]             [[Description]]
-			 * @param  [[Type]] [$deprecated2 = 0]             [[Description]]
-			 * @return [[Type]] [[Description]]
-			 */
-			function woocommerce_get_product_thumbnail( $size = 'bm-product-archive', $deprecated1 = 0, $deprecated2 = 0 ) {
-				global $post;
-
-				if ( has_post_thumbnail() ) {
-					return get_the_post_thumbnail( $post->ID, $size );
-				} elseif ( wc_placeholder_img_src() ) {
-					return wc_placeholder_img( $size );
-				}
-			}
-
-		}
-	}
 
 	function onesocial_userblog_is_network_activated() {
 		$network_activated = '';

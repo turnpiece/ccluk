@@ -122,13 +122,6 @@ $boss_support_plugins = array(
 		'is_paid_product'	 => false,
 		'product_link'		 => false,
 	),
-	'woocommerce'							 => array(
-		'title'				 => 'WooCommerce - excelling eCommerce',
-		'plugin_path'		 => 'woocommerce/woocommerce.php',
-		'plugin_link'		 => '//wordpress.org/plugins/woocommerce/',
-		'is_paid_product'	 => false,
-		'product_link'		 => false,
-	),
 	'wordpress-seo'							 => array(
 		'title'				 => 'WordPress SEO by Yoast',
 		'plugin_path'		 => 'wordpress-seo/wp-seo.php',
