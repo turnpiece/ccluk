@@ -1,3 +1,5 @@
+// Main Mobile
+
 /*--------------------------------------------------------------
 This is the Mobile stylesheet, served to phones and tablets.
 ----------------------------------------------------------------
@@ -79,7 +81,7 @@ This is the Mobile stylesheet, served to phones and tablets.
 ----------------------------------------------------------------
 >>> PLUGIN
 ----------------------------------------------------------------
-1.1 - WooCommerce
+
 1.2 - BuddyPress Activity Plus
 1.3 - Invite Anyone
 1.4 - BuddyPress Links
@@ -4447,43 +4449,7 @@ body.open-right #mobile-right-panel {
 /*--------------------------------------------------------------
 >>>PLUGINS
 --------------------------------------------------------------*/
-/*--------------------------------------------------------------
-2.1.1 - WooCommerce
---------------------------------------------------------------*/
-/*
-.woocommerce ul.products li.product, .woocommerce-page ul.products li.product {
-  margin: 0 4% 2.992em 0;
-  width: 46%;
-}
 
-.woocommerce .col2-set .col-1, .woocommerce-page .col2-set .col-1, .woocommerce .col2-set .col-2, .woocommerce-page .col2-set .col-2 {
-  float: left !important;
-  clear: left !important;
-  width: 100% !important;
-}
-
-.woocommerce {
-  a.button, button.button, input.button, #respond input#submit, #content input.button {
-    margin: 0 0 10px !important;
-    display: block;
-    clear: left;
-  }
-}
-
-.woocommerce-page {
-  a.button, button.button, input.button, #respond input#submit, #content input.button {
-    margin: 0 0 10px !important;
-    display: block;
-    clear: left;
-  }
-}
-
-.woocommerce .cart-collaterals .cart_totals, .woocommerce-page .cart-collaterals .cart_totals {
-  float: none;
-  text-align: left;
-  width: 100%;
-}
-*/
 /*--------------------------------------------------------------
 2.1.2 - BuddyPress Activity Plus
 --------------------------------------------------------------*/

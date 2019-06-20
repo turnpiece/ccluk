@@ -440,18 +440,6 @@ if ( !class_exists( 'onesocial_Redux_Framework_config' ) ) {
 				'default'	 => 'left'
 			);
 
-			$woocommerce_sidebar_array = array(
-				'id'		 => 'woocommerce_sidebar',
-				'type'		 => 'button_set',
-				'title'		 => __( 'WooCommerce &rarr; Shop Sidebar', 'onesocial' ),
-				'subtitle'	 => __( 'Select the woocommerce sidebar alignment.', 'onesocial' ),
-				'options'	 => array(
-					'left'	 => 'Left',
-					'right'	 => 'Right'
-				),
-				'default'	 => 'right'
-			);
-
 			$search_sidebar_array = array(
 				'id'		 => 'search_sidebar',
 				'type'		 => 'button_set',
@@ -477,7 +465,6 @@ if ( !class_exists( 'onesocial_Redux_Framework_config' ) ) {
 					$activity_sidebar_array,
 					$forums_sidebar_array,
 					$blogs_sidebar_array,
-					$woocommerce_sidebar_array,
 					$search_sidebar_array,
 				)
 			);
@@ -680,7 +667,7 @@ if ( !class_exists( 'onesocial_Redux_Framework_config' ) ) {
 						'font-family'	 => 'Lato',
 						'font-weight'	 => '400',
 					),
-					'output'		 => array( 'html, #profile-nav span, #wp-admin-bar-shortcode-secondary .alert, .header-notifications a.notification-link span, .site-header #wp-admin-bar-shortcode-secondary .alert, .header-notifications a.notification-link span, .entry-meta .comments-link a, .entry-meta, .activity, .item-list-tabs, #whats-new-options, #item-header-content, #buddypress div#message, #buddypress ul.item-list li div.item-desc, .generic-button, .bb-meta, #item-photos, .forum-titles, .sap-container, .bb-search-forums-label, .woocommerce-page.woocommerce-page .entry-content, .footer-style-2 .footer-inner-top, .footer-style-2 .footer-widget a' ),
+					'output'		 => array( 'html, #profile-nav span, #wp-admin-bar-shortcode-secondary .alert, .header-notifications a.notification-link span, .site-header #wp-admin-bar-shortcode-secondary .alert, .header-notifications a.notification-link span, .entry-meta .comments-link a, .entry-meta, .activity, .item-list-tabs, #whats-new-options, #item-header-content, #buddypress div#message, #buddypress ul.item-list li div.item-desc, .generic-button, .bb-meta, #item-photos, .forum-titles, .sap-container, .bb-search-forums-label, .footer-style-2 .footer-inner-top, .footer-style-2 .footer-widget a' ),
 				),
 				array(
 					'id'			 => 'boss_h1_font_options',
