@@ -1335,102 +1335,115 @@ body.page-template-homepage .slick-slide img {
   min-width: 600px;
 }
 
-/** Register **/
-.register fieldset,
-.register div#register-page .register-section,
-.register div#register-page .security-question-section {
+body.register fieldset,
+body.register div#register-page .register-section,
+body.register div#register-page .security-question-section {
   border: none;
 }
 
-.register .popup-content {
+body.register .popup-content {
   background: rgba(255, 255, 255, 0.8);
 }
 
-.register .popup-content input:not([type="checkbox"]):not([type="radio"]):not([type="button"]),
-.register .popup-content .input:not([type="checkbox"]):not([type="radio"]):not([type="button"]) {
+body.register .popup-content input:not([type="checkbox"]):not([type="radio"]):not([type="button"]),
+body.register .popup-content .input:not([type="checkbox"]):not([type="radio"]):not([type="button"]) {
   font-size: 18px;
 }
 
-.register .entry-header h1.entry-title {
+body.register .entry-header h1.entry-title {
   color: #22a7f0;
 }
 
-.register div#register-page {
+body.register div#register-page {
   text-align: left;
   /* newsletter sighup checkbox */
 }
 
-.register div#register-page p {
+body.register div#register-page p {
   font-size: 21px;
 }
 
-.register div#register-page .wp-social-login-widget {
+body.register div#register-page .wp-social-login-widget {
   text-align: center;
 }
 
-.register div#register-page .register-section {
+body.register div#register-page .register-section {
   box-shadow: none;
 }
 
-.register div#register-page .register-section label, .register div#register-page .register-section legend {
+body.register div#register-page .register-section label, body.register div#register-page .register-section legend {
   font-size: 18px;
   color: #54ae68;
 }
 
-.register div#register-page .register-section h2 {
+body.register div#register-page .register-section h2 {
   color: #54ae68;
   font-weight: normal;
 }
 
-.register div#register-page .register-section#basic-details-section input {
+body.register div#register-page .register-section#basic-details-section input {
   padding: 12px;
   height: auto;
 }
 
-.register div#register-page .register-section#profile-details-section .editfield {
+body.register div#register-page .register-section#profile-details-section .editfield {
   padding: 0;
 }
 
-.register div#register-page .register-section#profile-details-section .editfield fieldset {
+body.register div#register-page .register-section#profile-details-section .editfield fieldset {
   border: none;
   margin: 0;
   padding: 0;
 }
 
-.register div#register-page .register-section#profile-details-section .editfield fieldset legend {
+body.register div#register-page .register-section#profile-details-section .editfield fieldset legend {
   margin-bottom: 10px;
   line-height: 1;
 }
 
-.register div#register-page .register-section#profile-details-section .field-visibility-settings-toggle {
+body.register div#register-page .register-section#profile-details-section .field-visibility-settings-toggle {
   display: none;
 }
 
-.register div#register-page .register-section#profile-details-section .field-visibility-settings-notoggle {
+body.register div#register-page .register-section#profile-details-section .field-visibility-settings-notoggle {
   font-size: 15px;
   color: #54ae68;
 }
 
-.register div#register-page .mc4wp-checkbox {
+body.register div#register-page .register-section#profile-details-section .input-options {
+  padding: 10px 0;
+}
+
+body.register div#register-page .register-section#profile-details-section .input-options label.option-label {
+  font-size: 15px;
+}
+
+body.register div#register-page .register-section#profile-details-section .input-options input[type="checkbox"] + span,
+body.register div#register-page .register-section#profile-details-section .input-options input[type="checkbox"] + label,
+body.register div#register-page .register-section#profile-details-section .input-options input[type="checkbox"] + strong {
+  margin-right: 10px;
+}
+
+body.register div#register-page .mc4wp-checkbox {
   text-align: center;
 }
 
-.register div#register-page .mc4wp-checkbox label strong {
+body.register div#register-page .mc4wp-checkbox label strong {
   margin-right: 12px;
 }
 
-.register div#register-page .mc4wp-checkbox label span {
+body.register div#register-page .mc4wp-checkbox label span {
   color: #54ae68;
   font-size: 18px;
   line-height: 1.5;
 }
 
-.register div#register-page .privacy-text {
+body.register div#register-page .privacy-text {
   text-align: center;
   font-size: 15px;
 }
 
-.register div#register-page .submit {
+body.register div#register-page .submit {
   margin: 10px auto 24px;
   max-width: 400px;
   text-align: center;
@@ -2646,6 +2659,10 @@ Responsive media queries (mobile styles)
 MAXIMUM width of 1024 pixels (tablets)
 --------------------------------------------------------------*/
 @media screen and (max-width: 1024px) {
+  body .entry-title,
+  body h2 {
+    font-size: 24px;
+  }
   body.page #secondary.widget-area {
     margin: 20px auto;
     margin: 2rem auto;
@@ -2665,6 +2682,9 @@ MAXIMUM width of 1024 pixels (tablets)
   }
   body.page.buddypress #buddypress .item-header-sidebar {
     display: none;
+  }
+  body.register div#register-page p {
+    font-size: 15px;
   }
   body.single #primary,
   body.single #secondary,

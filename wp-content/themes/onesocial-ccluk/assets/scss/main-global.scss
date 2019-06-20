@@ -8543,6 +8543,7 @@ body #buddypress table#message-threads tr td:first-child {
         position: relative;
         color: rgba(0, 0, 0, 0.4);
         left: 10px;
+        margin-right: 10px;
         z-index: 0;
         &:before {
           content: '';
