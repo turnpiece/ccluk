@@ -108,6 +108,8 @@ body.page-template-homepage {
 				position: relative;
 				padding: 0;
 				min-height: 400px;
+				max-height: 600px;
+				overflow: hidden;
 
 				.section-content {
 					min-height: 400px;
@@ -181,7 +183,7 @@ body.page-template-homepage {
 						color: $white;
 					}
 				}
-				
+
 				&.background {
 					.section-content img {
 						opacity: 0.5;
@@ -198,7 +200,7 @@ body.page-template-homepage {
 					    margin-right: -50%;
 					    transform: translate(-50%, -50%);
 						height: auto;
-						max-height: 80%;
+						max-height: 95%;
 						padding: 30px;
 					}
 				}
