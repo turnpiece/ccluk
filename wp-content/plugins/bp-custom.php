@@ -26,11 +26,31 @@ class CCLUK_BP_Custom {
 		add_action( 'xprofile_data_after_save', array( $this, 'profile_location' ));
 		add_action( 'bp_after_profile_field_content', array( $this, 'user_location_fields' ) );
 		add_action( 'bp_core_activated_user', array( $this, 'join_group_on_signup' ) );
+		add_action( 'bp_signup_pre_validate', array( $this, 'signup_pre_validate' ) );
+		add_action( 'bp_account_details_fields', array( $this, 'password_optional_notice' ) );
 
 		// sync BP/mailchimp user data
 		add_filter( 'mc4wp_user_merge_vars', array( $this, 'mailchimp_user_sync' ), 10, 2 );
 		add_filter( 'mailchimp_sync_user_data', array( $this, 'mailchimp_user_sync' ), 10, 2 );
 	}
+
+	// use name as username
+	public function signup_pre_validate() {
+	    if (empty($_POST['signup_username'])) {
+			$field = xprofile_get_field_id_from_name( 'name' );
+
+			if (!empty($field) && !empty($_POST[$field]))
+	        	$_POST['signup_username'] = sanitize_user( str_replace( ' ', '_', $_POST[$field] ) );
+	    }
+
+		if (empty($_POST['signup_password'])) {
+			$_POST['signup_password'] = wp_generate_password();
+		}
+	}
+
+	public function password_optional_notice() { ?>
+		<p class="description"><?php _e( "A password is optional, but providing one will mean you can login to this site and update any of the information you've given us. You'll also be able to keep up to date with what's going on and connect with other members.", 'onesocial' ) ?></p>
+	<?php }
 
 	// join members group on signup
 	public function join_group_on_signup( $user_id ){
@@ -95,7 +115,7 @@ class CCLUK_BP_Custom {
 	     * It's safe enough to assume that 'base' profile group will always be there and its id will be 1,
 	     * since there's no apparent way of deleting this field group.
 	     */
-	    if( !function_exists('bp_get_the_profile_group_id') || (function_exists('bp_get_the_profile_group_id') && bp_get_the_profile_group_id() != 1 && ! is_admin() )) {
+	    if( !function_exists('bp_get_the_profile_group_id') || (bp_get_the_profile_group_id() != 1 && ! is_admin() )) {
 	        return;
 	    }
 

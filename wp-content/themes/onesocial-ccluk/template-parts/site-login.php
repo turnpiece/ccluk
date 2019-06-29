@@ -34,8 +34,8 @@ if ( $WORDPRESS_SOCIAL_LOGIN_VERSION ) {
 			<div class="<?php echo $class; ?> with-email">
 
 				<p class="username-wrap">
-					<label for="login_username"><?php _e( 'Username', 'onesocial' ); ?></label>
-					<input type="text" id="login_username" placeholder="<?php _e( 'Enter', 'onesocial' ); ?>" class="input" autocapitalize="none" />
+					<label for="login_username"><?php _e( 'Email', 'onesocial' ); ?></label>
+					<input type="email" id="login_username" placeholder="<?php _e( 'Email', 'onesocial' ); ?>" class="input" autocapitalize="none" />
 				</p>
 
 				<p class="password-wrap">
@@ -45,7 +45,7 @@ if ( $WORDPRESS_SOCIAL_LOGIN_VERSION ) {
 
 					<!-- fake fields are a workaround for chrome autofill getting the wrong fields -->
 					<input style="display:none" type="password" name="fakepasswordremembered" />
-					<input type="password" id="login_password" placeholder="<?php _e( '****', 'onesocial' ); ?>" class="input" />
+					<input type="password" id="login_password" placeholder="" class="input" />
 				</p>
 
 				<p class="options-wrap">

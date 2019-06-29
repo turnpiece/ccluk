@@ -86,17 +86,6 @@ add_filter( 'bp_get_the_profile_field_required_label', function( $text ) {
 
 				<h2><?php _e( 'Account Details', 'buddypress' ); ?></h2>
 
-				<label for="signup_username"><?php _e( 'Username', 'buddypress' ); ?> </label>
-				<?php
-
-				/**
-				 * Fires and displays any member registration username errors.
-				 *
-				 * @since 1.1.0
-				 */
-				do_action( 'bp_signup_username_errors' ); ?>
-				<input type="text" name="signup_username" id="signup_username" value="<?php bp_signup_username_value(); ?>" <?php bp_form_field_attributes( 'username' ); ?>/>
-
 				<label for="signup_email"><?php _e( 'Email Address', 'buddypress' ); ?> </label>
 				<?php
 
@@ -207,14 +196,17 @@ add_filter( 'bp_get_the_profile_field_required_label', function( $text ) {
 
 				</div><!-- #profile-details-section -->
 
-				<?php
+				<div class="after-signup-fields clearfix">
+					<?php
 
-				/**
-				 * Fires after the display of member registration xprofile fields.
-				 *
-				 * @since 1.1.0
-				 */
-				do_action( 'bp_after_signup_profile_fields' ); ?>
+					/**
+					 * Fires after the display of member registration xprofile fields.
+					 *
+					 * @since 1.1.0
+					 */
+					do_action( 'bp_after_signup_profile_fields' ); ?>
+
+				</div>
 
 			<?php endif; ?>
 
@@ -293,6 +285,10 @@ add_filter( 'bp_get_the_profile_field_required_label', function( $text ) {
 
 		</form>
 
+	</div>
+
+	<div class="manual-registration">
+		<p>If you'd rather speak to someone before signing up, please <a href="/contact-us/">get in touch</a>.</p>
 	</div>
 
 	<?php
