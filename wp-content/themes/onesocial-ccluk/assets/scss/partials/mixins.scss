@@ -146,12 +146,12 @@
   }
 }
 
-@mixin page-header() {
+@mixin page-header( $font-size: $font-size-lg ) {
   @include margin( 1.2, 0 );
   border-bottom: 1px solid $green;
 
   h1.entry-title {
-    @include page-title();
+    @include page-title( $font-size );
   }
 
   a > .entry-title {
@@ -159,8 +159,8 @@
   }
 }
 
-@mixin page-title() {
-  font-size: $font-size-lg;
+@mixin page-title( $font-size: $font-size-lg ) {
+  font-size: $font-size;
   padding-bottom: 15px;
   color: $green;
 }
