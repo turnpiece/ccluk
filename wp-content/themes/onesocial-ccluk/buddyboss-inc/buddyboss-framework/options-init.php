@@ -632,7 +632,7 @@ if ( !class_exists( 'onesocial_Redux_Framework_config' ) ) {
 					)
 				)
 			);
-
+/*
 			$font_options = array(
 				array(
 					'id'			 => 'boss_site_title_font_family',
@@ -849,103 +849,7 @@ if ( !class_exists( 'onesocial_Redux_Framework_config' ) ) {
 					'output'		 => array( '.bb-slider-container .title' ),
 				),
 			);
-
-			// Typography Settings
-			$this->sections[] = array(
-				'title'	 => __( 'Typography', 'onesocial' ),
-				'icon'	 => 'el-icon-font',
-				'fields' => apply_filters( 'onesocial_font_options', $font_options )
-			);
-
-			$style_elements = array(
-				//Color Presets
-				array( 'slug' => 'onesocial_scheme_select', 'desc' => 'ss', 'type' => 'preset', 'default' => 'default' ),
-				// Colors
-				array( 'slug' => 'color_options_info', 'desc' => 'Background Colors', 'type' => 'info' ),
-				array( 'slug' => 'titlebar_bg', 'title' => 'Titlebar Background', 'subtitle' => 'The area at the top, containing logo, navigation, and user dropdown.', 'desc' => '', 'type' => 'color', 'default' => '#fbfbfb' ),
-				array( 'slug' => 'boss_primary_color', 'title' => 'Body Background', 'subtitle' => 'The main content area of the theme.', 'desc' => '', 'type' => 'color', 'default' => '#ffffff' ),
-				array( 'slug' => 'accent_color', 'title' => 'Accents', 'subtitle' => 'Used for links, icons, buttons, highlights, and the mobile titlebar.', 'desc' => '', 'type' => 'color', 'default' => '#54ae68' ),
-				array( 'slug' => 'boss_secondary_color', 'title' => 'Secondary Content Areas', 'subtitle' => 'Used in small areas, including mobile activity stream backgrounds, forum notices, and some form elements.', 'desc' => '', 'type' => 'color', 'default' => '#f9f9f9' ),
-				array( 'slug' => 'footer_widget_background', 'title' => 'Footer Widget Background', 'subtitle' => 'Only visible if you have added widgets to the footer at <em>Appearance &gt; Widgets</em>.', 'desc' => '', 'type' => 'color', 'default' => '#f9f9f9' ),
-				array( 'slug' => 'footer_background', 'title' => 'Footer Background', 'subtitle' => 'The main footer area at the bottom of the site.', 'desc' => '', 'type' => 'color', 'default' => '#242424' ),
-				array( 'slug' => 'onesocial_group_cover_bg', 'title' => 'Cover Image Background', 'subtitle' => 'Only visible if you have enabled Group cover images in the <a href="javascript:void(0);" class="redux-group-tab-link-a" data-key="4" data-rel="4">Cover Images</a> options area.', 'desc' => '', 'type' => 'color', 'default' => '#54ae68' ),
-				array( 'slug' => 'text_color_options_info', 'desc' => 'Text Colors', 'type' => 'info' ),
-				array( 'slug' => 'sitetitle_color', 'title' => 'Site Title', 'subtitle' => 'Site title, only visible if no <a href="javascript:void(0);" class="redux-group-tab-link-a" data-key="0" data-rel="0">logo</a> is uploaded.', 'desc' => '', 'type' => 'color', 'default' => '#333333' ),
-				array( 'slug' => 'heading_text_color', 'title' => 'Heading Text', 'subtitle' => 'Page and post titles.', 'desc' => '', 'type' => 'color', 'default' => '#333333' ),
-				array( 'slug' => 'body_text_color', 'title' => 'Body Text', 'subtitle' => 'Paragraphs and main content text.', 'desc' => '', 'type' => 'color', 'default' => '#333333' ),
-				array( 'slug' => 'admin_screen_info', 'desc' => 'WordPress Login Screen', 'type' => 'info' ),
-				array( 'slug' => 'admin_screen_background_color', 'title' => 'Login Screen Background', 'subtitle' => 'Background color on WordPress login screen. Enable the custom login screen in the <a href="javascript:void(0);" class="redux-group-tab-link-a" data-key="10" data-rel="10">WordPress Login</a> options area.', 'desc' => '', 'type' => 'color', 'default' => '#ffffff' ),
-				array( 'slug' => 'admin_site_title_color', 'title' => 'Login Screen Site Title', 'subtitle' => 'Only visible if you have not added a logo. Upload a logo in the <a href="javascript:void(0);" class="redux-group-tab-link-a" data-key="10" data-rel="10">WordPress Login</a> options area.', 'desc' => '', 'type' => 'color', 'default' => '#54ae68' ),
-				array( 'slug' => 'admin_screen_text_color', 'title' => 'Login Screen Text', 'subtitle' => 'Links and text such as "Remember Me".', 'desc' => '', 'type' => 'color', 'default' => '#333333' ),
-				array( 'slug' => 'admin_screen_button_color', 'title' => 'Login Screen Button', 'subtitle' => 'Submit button on login screen.', 'desc' => '', 'type' => 'color', 'default' => '#54ae68' ),
-			);
-
-			$color_scheme_elements = apply_filters( 'onesocial_color_element_options', $style_elements );
-
-			$style_fields = array();
-
-			$color_schemes = array(
-				'default' => array(
-					'alt'		 => 'Default',
-					'img'		 => get_template_directory_uri() . '/buddyboss-inc/buddyboss-framework/assets/images/presets/default.png',
-					'presets'	 => array(
-						'accent_color'					 => '#54ae68',
-						'titlebar_bg'					 => '#fbfbfb',
-						'boss_primary_color'			 => '#ffffff',
-						'boss_secondary_color'			 => '#f9f9f9',
-						'body_text_color'				 => '#333333',
-						'heading_text_color'			 => '#333333',
-						'sitetitle_color'				 => '#333333',
-						'footer_widget_background'		 => '#f9f9f9',
-						'footer_background'				 => '#242424',
-						'onesocial_group_cover_bg'		 => '#54ae68',
-						'admin_screen_background_color'	 => '#ffffff',
-						'admin_site_title_color'		 => '#54ae68',
-						'admin_screen_text_color'		 => '#333333',
-						'admin_screen_button_color'		 => '#54ae68',
-					)
-				)
-			);
-
-			foreach ( $color_scheme_elements as $elem ) {
-				if ( $elem[ 'type' ] == 'color' ) {
-					$style_fields[] = array(
-						'id'		 => $elem[ 'slug' ],
-						'type'		 => $elem[ 'type' ],
-						'title'		 => $elem[ 'title' ],
-						'subtitle'	 => $elem[ 'subtitle' ],
-						'desc'		 => $elem[ 'desc' ],
-						'default'	 => $elem[ 'default' ]
-					);
-				} elseif ( $elem[ 'type' ] == 'info' ) {
-					$style_fields[] = array(
-						'id'	 => $elem[ 'slug' ],
-						'type'	 => 'info',
-						'desc'	 => $elem[ 'desc' ],
-					);
-				} elseif ( $elem[ 'type' ] == 'preset' ) {
-					$style_fields[] = array(
-						'id'		 => $elem[ 'slug' ],
-						'type'		 => 'custom_image_select',
-						'title'		 => 'Color Presets',
-						'subtitle'	 => 'Change section colors based on these presets.',
-						'presets'	 => true,
-						'customizer' => false,
-						'default'	 => $elem[ 'default' ],
-						'options'	 => apply_filters( 'onesocial_color_schemes', $color_schemes )
-					);
-				}
-			}
-
-			$this->sections[] = array(
-				'icon'		 => 'el-icon-tint',
-				'icon_class' => 'icon-large',
-				'title'		 => __( 'Styling', 'onesocial' ),
-				'priority'	 => 20,
-				'desc'		 => '',
-				'fields'	 => $style_fields,
-			);
-
+*/
 			// Array of social options
 			$social_options = array(
 				'facebook'		 => '',
