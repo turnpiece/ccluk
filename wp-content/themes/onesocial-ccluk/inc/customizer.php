@@ -729,7 +729,7 @@ class CCLUK_Customizer {
 
 			$this->customize->add_control( new CCLUK_Editor_Custom_Control(
 				$this->customize,
-				self::SLUG.'_'.$section.'_box_'.$box,
+				$section.'_box_'.$box,
 				array(
 					'label' 		=> sprintf( esc_html__('Box %d content', 'onesocial'), $box ),
 					'section' 		=> $section.'_content',
