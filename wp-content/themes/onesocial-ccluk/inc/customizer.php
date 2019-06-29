@@ -94,7 +94,7 @@ class CCLUK_Customizer {
 		/*------------------------------------------------------------------------*/
 	    /*  Join CCL
 	    /*------------------------------------------------------------------------*/
-
+/*
 			$this->customize->add_section( self::SLUG.'_join' ,
 				array(
 					'priority'    => 3,
@@ -119,11 +119,11 @@ class CCLUK_Customizer {
 				)
 			));
 
-
+*/
 			/**
 			 * Hook to add other customize
 			 */
-			do_action( self::SLUG.'_customize_after_register', $this->customize );
+			//do_action( self::SLUG.'_customize_after_register', $this->customize );
 
 
 
@@ -131,10 +131,10 @@ class CCLUK_Customizer {
 		/*------------------------------------------------------------------------*/
 	    /*  Newsletter
 	    /*------------------------------------------------------------------------*/
-
+/*
 	    	$section = 'newsletter';
 
-			$this->customize->add_section( self::SLUG.'_'.$section ,
+			$this->customize->add_section( $section ,
 				array(
 					'priority'    => 9,
 					'title'       => esc_html__( 'Newsletter', 'onesocial' ),
@@ -146,10 +146,10 @@ class CCLUK_Customizer {
 
 			$this->customize->add_control( new CCLUK_Editor_Custom_Control(
 				$this->customize,
-				self::SLUG.'_'.$section.'_signup_form',
+				$section.'_signup_form',
 				array(
 					'label' 		=> esc_html__('HTML code', 'onesocial'),
-					'section' 		=> self::SLUG.'_'.$section,
+					'section' 		=> $section,
 					'description'   => __( 'Paste in the HTML code for whatever you want to embed', 'onesocial' )
 				)
 			));
@@ -157,17 +157,17 @@ class CCLUK_Customizer {
 			// Privacy settings
 			$this->add_setting( $section.'_privacy_page', 'sanitize_number' );
 
-			$this->customize->add_control( self::SLUG.'_'.$section.'_privacy_page',
+			$this->customize->add_control( $section.'_privacy_page',
 				array(
 					'label'     	=> esc_html__('Privacy Policy', 'onesocial'),
-					'section' 		=> self::SLUG.'_'.$section,
+					'section' 		=> $section,
 					'type'          => 'select',
 					'priority'      => 10,
 					'choices'       => $this->option_pages,
 					'description'   => esc_html__('Select the privacy policy page.', 'onesocial'),
 				)
 			);
-
+*/
 	}
 
 	private function add_setting( $id, $callback = null, $default = '' ) {
@@ -263,7 +263,7 @@ class CCLUK_Customizer {
 	 *
 	 */
 	private function add_homepage_panel( $section, $title, $description, $priority = 100 ) {
-		$this->customize->add_panel( self::SLUG.'_'.$section ,
+		$this->customize->add_panel( $section ,
 			array(
 				'priority'        => $priority,
 				'title'           => $title,
@@ -289,7 +289,7 @@ class CCLUK_Customizer {
 				'priority'    => 3,
 				'title'       => esc_html__( 'Section Settings', 'onesocial' ),
 				'description' => '',
-				'panel'       => self::SLUG.'_'.$name,
+				'panel'       => $name,
 			)
 		);
 
@@ -344,7 +344,7 @@ class CCLUK_Customizer {
 				'priority'    => 6,
 				'title'       => esc_html__( 'Section Content', 'onesocial' ),
 				'description' => '',
-				'panel'       => empty($panel) ? self::SLUG.'_'.$section : $panel,
+				'panel'       => empty($panel) ? $section : $panel,
 			)
 		);
 	}
@@ -743,7 +743,7 @@ class CCLUK_Customizer {
 
 		$this->customize->add_control( new CCLUK_Editor_Custom_Control(
 			$this->customize,
-			self::SLUG.'_homepage_about_footer',
+			'homepage_about_footer',
 			array(
 				'label' 		=> sprintf( esc_html__('Footer', 'onesocial'), $box ),
 				'section' 		=> self::SLUG.'_homepage_about_content',
@@ -783,10 +783,10 @@ class CCLUK_Customizer {
 		// Sub Title
 		$this->add_setting( $section.'_subtitle', 'sanitize_text_field', esc_html__('Section subtitle', 'onesocial') );
 
-		$this->customize->add_control( self::SLUG.'_'.$section.'_subtitle',
+		$this->customize->add_control( $section.'_subtitle',
 			array(
 				'label'     => esc_html__('Section Subtitle', 'onesocial'),
-				'section' 		=> self::SLUG.'_'.$section.'_settings',
+				'section' 		=> $section.'_settings',
 				'description'   => '',
 			)
 		);
@@ -796,10 +796,10 @@ class CCLUK_Customizer {
 
         $this->customize->add_control( new CCLUK_Editor_Custom_Control(
             $this->customize,
-            self::SLUG.'_'.$section.'_desc',
+            $section.'_desc',
             array(
                 'label' 		=> esc_html__('Section Description', 'onesocial'),
-                'section' 		=> self::SLUG.'_'.$section.'_settings',
+                'section' 		=> $section.'_settings',
                 'description'   => '',
             )
         ));
@@ -809,9 +809,9 @@ class CCLUK_Customizer {
 		// Contact form 7 guide.
 		$this->add_setting( $section.'_cf7_guide', array( $this, 'sanitize_text' ) );
 
-		$this->customize->add_control( new CCLUK_Misc_Control( $this->customize, self::SLUG.'_'.$section.'_cf7_guide',
+		$this->customize->add_control( new CCLUK_Misc_Control( $this->customize, $section.'_cf7_guide',
 			array(
-				'section'     => self::SLUG.'_'.$section.'_content',
+				'section'     => $section.'_content',
 				'type'        => 'custom_message',
 				'description' => wp_kses_post( 'In order to display contact form please install <a target="_blank" href="https://wordpress.org/plugins/contact-form-7/">Contact Form 7</a> plugin and then copy the contact form shortcode and paste it here, the shortcode will be like this <code>[contact-form-7 id="xxxx" title="Example Contact Form"]</code>', 'onesocial' )
 			)
