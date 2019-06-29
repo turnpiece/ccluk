@@ -11,61 +11,7 @@ onesocial_addShortcodes();
  * Extend VC
  */
 function onesocial_requireVcExtend(){
-    
-    /*** Slider ***/
-    vc_map( array(
-        "name" => "Slider",
-        "base" => "slider",
-        "category" => 'BuddyBoss',
-        "icon" => "icon-buddyboss",
-        "allowed_container_element" => 'vc_row',
-        "params" => array(            
-            array(
-                'type' => 'param_group',
-                'heading' => 'Slides',
-                'param_name' => 'slides',
-                'description' => 'Add features',
-                'params' => array(
-                    array(
-                        "type" => "textfield",
-                        "holder" => "div",
-                        "class" => "",
-                        "heading" => "Title",
-                        "param_name" => "title"
-                    ),                                                        
-                    array(
-                        "type" => "textarea",
-                        "holder" => "div",
-                        "class" => "",
-                        "heading" => "Short Description",
-                        "param_name" => "short_description"
-                    ), 
-                    array(
-                        "type" => "attach_image",
-                        "holder" => "div",
-                        "class" => "",
-                        "heading" => "Image",
-                        "param_name" => "image"
-                    ),  
-                    array(
-                        "type" => "vc_link",
-                        "holder" => "div",
-                        "class" => "",
-                        "heading" => "Button 1",
-                        "param_name" => "button1"
-                    ),                    
-                    array(
-                        "type" => "vc_link",
-                        "holder" => "div",
-                        "class" => "",
-                        "heading" => "Button 2",
-                        "param_name" => "button2"
-                    )
-                )
-            )
-        )
-    ) );   
-    
+
     /*** Testimonials ***/
     vc_map( array(
         "name" => "Testimonials",
@@ -73,13 +19,13 @@ function onesocial_requireVcExtend(){
         "category" => 'BuddyBoss',
         "icon" => "icon-buddyboss",
         "allowed_container_element" => 'vc_row',
-        "params" => array(            
+        "params" => array(
             array(
                 'type' => 'param_group',
                 'heading' => 'Testimonial',
                 'param_name' => 'testimonial_items',
                 'description' => 'Add testimonials',
-                'params' => array(                                                       
+                'params' => array(
                     array(
                         "type" => "textarea",
                         "holder" => "div",
@@ -88,7 +34,7 @@ function onesocial_requireVcExtend(){
                         "param_name" => "quote",
                         "value" => "",
                         "description" => ""
-                    ), 
+                    ),
                     array(
                         "type" => "textfield",
                         "holder" => "div",
@@ -102,12 +48,12 @@ function onesocial_requireVcExtend(){
                         "class" => "",
                         "heading" => "Author Image",
                         "param_name" => "author_image"
-                    ), 
+                    ),
                 )
             )
         )
     ) );
-    
+
     /*** Service ***/
     vc_map( array(
         "name" => "Service",
@@ -122,7 +68,7 @@ function onesocial_requireVcExtend(){
                 "class" => "",
                 "heading" => "Title",
                 "param_name" => "title"
-            ),            
+            ),
             array(
                 "type" => "textfield",
                 "holder" => "div",
@@ -130,7 +76,7 @@ function onesocial_requireVcExtend(){
                 "heading" => "Fontawesome Icon Class",
                 "param_name" => "icon",
                 "value" => "fa-bell"
-            ),         
+            ),
             array(
                 "type" => "colorpicker",
                 "holder" => "div",
@@ -150,7 +96,7 @@ function onesocial_requireVcExtend(){
             )
         )
     ) );
-    
+
     /*** Blog Posts ***/
     vc_map( array(
         "name" => "Blog Posts",
@@ -182,7 +128,7 @@ function onesocial_requireVcExtend(){
             )
         )
     ) );
-        
+
     /*** Blog Posts ***/
     vc_map( array(
         "name" => "Blog Post",
@@ -200,73 +146,11 @@ function onesocial_requireVcExtend(){
             )
         )
     ) );
-  
+
 }
 
-function onesocial_addShortcodes(){  
-    
-    /* Slider */
-    if (!function_exists('slider')) {
-        function slider($atts, $content = null) {
-        
-            $args = array(
-                "slides"   => "",
-            );
+function onesocial_addShortcodes(){
 
-            extract(shortcode_atts($args, $atts));                 
-            $slides = (array) vc_param_group_parse_atts( $slides );
-            
-            $el_start = '<li>';
-            $el_end = '</li>';
-            $slides_wrap_start = '<ul class="slides">';
-            $slides_wrap_end = '</ul>';
-            wp_enqueue_style( 'flexslider' );
-            wp_enqueue_script( 'flexslider' );
-            
-            $type = ' wpb_flexslider flexslider_fade flexslider';
-            $flex_fx = ' data-flex_fx="fade"';
-            
-            $interval = 7;
-            
-            $i = - 1;
-
-            foreach ( $slides as $slide ) {
-                $i ++;
-                if ( $slide['image'] > 0 ) {
-                    $post_thumbnail = wp_get_attachment_image( $slide['image'], 'large' );
-                } 
-
-                $slide_content = "\n" . '<div class="slide-content">';
-                $slide_content .= "\n\t" . '<div class="table">';
-                $slide_content .= "\n\t\t" . '<div class="table-cell">';
-                $slide_content .= "\n\t\t\t" . '<h2>'.$slide['title'].'</h2>';
-                $slide_content .= "\n\t\t\t" . '<p>'.$slide['short_description'].'</p>';
-                $button1 = vc_build_link( $slide['button1'] );
-                $button2 = vc_build_link( $slide['button2'] );
-                if($button1['url']) {
-                $slide_content .= "\n\t\t\t" . '<a href="'. $button1['url'] .'" class="button" target="' . $button1['target'] . '">' . trim($button1['title']) .'</a>';
-                }
-                if($button2['url']) {
-                $slide_content .= "\n\t\t\t" . '<a href="'. $button2['url'] .'" class="button primary" target="' . $button2['target'] . '">' . trim($button2['title']) .'</a>';
-                }
-                $slide_content .= "\n\t\t" . '</div>';
-                $slide_content .= "\n\t" . '</div>';
-                $slide_content .= "\n" . '</div>';
-                
-                $gal_images .= $el_start . $post_thumbnail . $slide_content . $el_end;
-            }
-            $css_class = 'vc_column-inner onesocial-slider';
-            $output .= "\n\t" . '<div class="' . $css_class . '">';
-            $output .= "\n\t\t" . '<div class="wpb_wrapper">';
-            $output .= '<div class="wpb_gallery_slides' . $type . '" data-interval="' . $interval . '"' . $flex_fx . '>' . $slides_wrap_start . $gal_images . $slides_wrap_end . '</div>';
-            $output .= "\n\t\t" . '</div> ';
-            $output .= "\n\t" . '</div> ';
-            return $output;
-        }
-    }
-
-    add_shortcode('slider', 'slider');
-    
     /* Service */
     if (!function_exists('service')) {
 
@@ -279,25 +163,25 @@ function onesocial_addShortcodes(){
             );
 
             extract(shortcode_atts($args, $atts));
-            
+
             ob_start();
             ?>
-            <div class="onesocial-service">					
+            <div class="onesocial-service">
                 <i class="fa <?php echo $icon; ?>" style="color: <?php echo $color; ?>"></i>
                 <div class="service-content">
                     <h4 class="title"><?php echo $title; ?></h4>
                     <p><?php echo $description; ?></p>
                 </div>
-									
-            </div>                         
+
+            </div>
             <?php
             $html = ob_get_contents();
             ob_end_clean();
             return $html;
         }
     }
-    add_shortcode('service', 'service'); 
-    
+    add_shortcode('service', 'service');
+
     /* Blog Posts */
     if (!function_exists('blog_posts')) {
 
@@ -310,17 +194,17 @@ function onesocial_addShortcodes(){
             );
 
             extract(shortcode_atts($args, $atts));
-            
+
             ob_start();
             ?>
 			<div class="onesocial-posts-carousel">
 				<?php
 				$query_args = array();
-            
+
                 if ( $posts_in != '' ) {
                     $query_args['post__in'] = explode( ",", $posts_in );
                 }
-        
+
                 // Post teasers count
                 if ( $count != '' && ! is_numeric( $count ) ) {
                     $count = - 1;
@@ -372,9 +256,9 @@ function onesocial_addShortcodes(){
 
                                         <?php
                                             printf( '<a href="%1$s" title="%2$s" rel="bookmark" class="entry-date"><i class="fa fa-calendar"></i><time datetime="%3$s">%4$s</time></a>',
-                                                   esc_url( get_permalink() ), 
-                                                   esc_attr( get_the_time() ), 
-                                                   esc_attr( get_the_date( 'c' ) ), 
+                                                   esc_url( get_permalink() ),
+                                                   esc_attr( get_the_time() ),
+                                                   esc_attr( get_the_date( 'c' ) ),
                                                    esc_html( get_the_date() )
                                             );
                                         ?>
@@ -383,7 +267,7 @@ function onesocial_addShortcodes(){
                                     </div>
 
                                 </article>
-								<?php  
+								<?php
                                     if($i == 1) echo '</li><!-- li -->';
                                     $i++;
                                     if($i == 2) $i = 0;
@@ -396,15 +280,15 @@ function onesocial_addShortcodes(){
 
 				<?php endif; ?>
 
-			</div>                       
+			</div>
             <?php
             $html = ob_get_contents();
             ob_end_clean();
             return $html;
         }
     }
-    add_shortcode('blog_posts', 'blog_posts');    
-    
+    add_shortcode('blog_posts', 'blog_posts');
+
     /* Blog Post */
     if (!function_exists('blog_post')) {
 
@@ -415,12 +299,12 @@ function onesocial_addShortcodes(){
             );
 
             extract(shortcode_atts($args, $atts));
-            
+
             ob_start();
-            
+
             global $post;
             $save_post = $post;
-            $post = get_post( $id ); 
+            $post = get_post( $id );
             ?>
 
             <article class="post-box">
@@ -439,9 +323,9 @@ function onesocial_addShortcodes(){
                 <div class="entry-summary">
                     <?php
                         printf( '<a href="%1$s" title="%2$s" rel="bookmark" class="entry-date"><i class="fa fa-calendar"></i><time datetime="%3$s">%4$s</time></a>',
-                               esc_url( get_permalink() ), 
-                               esc_attr( get_the_time() ), 
-                               esc_attr( get_the_date( 'c' ) ), 
+                               esc_url( get_permalink() ),
+                               esc_attr( get_the_time() ),
+                               esc_attr( get_the_date( 'c' ) ),
                                esc_html( get_the_date() )
                         );
                     ?>
@@ -450,7 +334,7 @@ function onesocial_addShortcodes(){
                     <a class="button content-button" href="<?php the_permalink(); ?>">More</a>
                 </div>
             </article>
-                      
+
             <?php
             $post = $save_post;
             $html = ob_get_contents();
@@ -458,8 +342,8 @@ function onesocial_addShortcodes(){
             return $html;
         }
     }
-    add_shortcode('blog_post', 'blog_post');  
-    
+    add_shortcode('blog_post', 'blog_post');
+
     /* Testimonials */
     if (!function_exists('testimonials')) {
 
@@ -477,10 +361,10 @@ function onesocial_addShortcodes(){
             <div class="testimonials-wrap">
                 <!-- Teatimonials  -->
                 <div class="testimonial-items">
-                    <?php 
+                    <?php
                     $authors = '';
                     $i = 1;
-                    foreach ( $testimonials as $testimonial ) { 
+                    foreach ( $testimonials as $testimonial ) {
                     ?>
                     <!-- Testimonial -->
                     <div class="testimonial" id="<?php echo $i; ?>">
@@ -494,11 +378,11 @@ function onesocial_addShortcodes(){
                         </div>
                     </div>
                     <!-- Testimonial -->
-                    <?php 
+                    <?php
                         if ( $testimonial['author_image'] > 0 ) {
                             $post_thumbnail = wp_get_attachment_image( $testimonial['author_image'], 'thumbnail' );
-                        } 
-                        $authors .= 
+                        }
+                        $authors .=
                         '<li>
                             <span data-id="'.$i.'">
                                 '.$post_thumbnail.'
@@ -516,7 +400,7 @@ function onesocial_addShortcodes(){
                 </ul>
                 <!-- End Authors -->
             </div>
-                      
+
             <?php
             $html = ob_get_contents();
             ob_end_clean();
@@ -525,4 +409,3 @@ function onesocial_addShortcodes(){
     }
     add_shortcode('testimonials', 'testimonials');
 }
-            
