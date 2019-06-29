@@ -3328,10 +3328,6 @@ span.bbp-admin-links a {
   .is-mobile.single #sitewide-notice:not(:empty) + #page {
     padding-top: 0;
   }
-  .bb-slider-container {
-    top: 54px;
-    margin-bottom: 54px;
-  }
   .single-post .entry-header.has-image {
     padding-top: 55px;
   }

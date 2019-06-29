@@ -352,8 +352,6 @@ function buddyboss_onesocial_scripts_styles() {
 
 		wp_enqueue_script( 'onesocail-growl', get_stylesheet_directory_uri() . '/js/jquery.growl.js', array(), '1.2.4', true );
 
-		wp_enqueue_script( 'buddyboss-slider', get_stylesheet_directory_uri() . '/js/slider/slick.min.js', array( 'jquery' ), '1.1.2', true );
-
 		/* Images Lazy Loading */
 		wp_enqueue_script( 'onesocail-waypoints', get_stylesheet_directory_uri() . '/js/jquery.waypoints.js', array(), '1.2.4', true );
 		wp_enqueue_script( 'css3-animate-it', get_stylesheet_directory_uri() . '/js/css3-animate-it.js', array(), '1.2.4', true );
@@ -3111,35 +3109,6 @@ if ( !function_exists( 'buddyboss_comment' ) ) {
 	function onesocial_posted_on() {
                     printf( '<a href="%1$s" title="%2$s" rel="bookmark" class="entry-date"><time datetime="%3$s">%4$s</time></a>', esc_url( get_permalink() ), esc_attr( get_the_time() ), esc_attr( get_the_date( 'c' ) ), esc_html( get_the_date( 'M j, Y' ) ));
 	}
-
-	if ( !function_exists( 'buddyboss_slider' ) ) {
-
-		function buddyboss_slider() {
-			if ( 'page' == get_option( 'show_on_front' ) && is_front_page() ) {
-				// Frontpage Slider
-				get_template_part( 'content', 'slides' );
-				do_action( 'onesocial_custom_slider' );
-			}
-		}
-
-	}
-	add_action( 'buddyboss_inside_wrapper', 'buddyboss_slider' );
-
-	/**
-	 * Run custom slider shortcode
-	 */
-	if ( !function_exists( 'onesocial_execute_slider_shortcode' ) ):
-
-		function onesocial_execute_slider_shortcode() {
-			$slider_shortcode = onesocial_get_option( 'boss_plugins_slider' );
-			if ( !empty( $slider_shortcode ) && !onesocial_get_option( 'boss_slider_switch' ) ) {
-				echo do_shortcode( onesocial_get_option( 'boss_plugins_slider' ) );
-			}
-		}
-
-	endif;
-
-	add_action( 'onesocial_custom_slider', 'onesocial_execute_slider_shortcode' );
 
 	global $BUDDYBOSS_BM;
 

@@ -36,9 +36,6 @@
     class Redux_Customizer_Control_gallery extends Redux_Customizer_Control {
         public $type = "redux-gallery";
     }
-    class Redux_Customizer_Control_slider extends Redux_Customizer_Control {
-        public $type = "redux-slider";
-    }
     class Redux_Customizer_Control_sortable extends Redux_Customizer_Control {
         public $type = "redux-sortable";
     }

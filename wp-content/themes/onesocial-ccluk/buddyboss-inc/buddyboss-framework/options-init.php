@@ -512,44 +512,6 @@ if ( !class_exists( 'onesocial_Redux_Framework_config' ) ) {
 				)
 			);
 
-			$this->sections[] = array(
-				'title'		 => __( 'Homepage Slides', 'onesocial' ),
-				'icon'		 => 'el-icon-home',
-				'customizer' => false,
-				'fields'	 => array(
-					array(
-						'id'		 => 'boss_slider_switch',
-						'type'		 => 'switch',
-						'title'		 => __( 'Slider Options', 'onesocial' ),
-						'subtitle'	 => __( 'Select if you want to use the OneSocial slider, or shortcodes from a 3rd party plugin.', 'onesocial' ),
-						'default'	 => '1',
-						'on'		 => __( 'OneSocial', 'onesocial' ),
-						'off'		 => __( 'Shortcode', 'onesocial' ),
-					),
-					array(
-						'id'			 => 'boss_slides',
-						'type'			 => 'custom_slides',
-						'title'			 => __( 'OneSocial Slider', 'onesocial' ),
-						'subtitle'		 => __( 'Use our internal slider code. Drag and drop to re-order. Ideal image size is 1040px by 400px.', 'onesocial' ),
-						'required'		 => array( 'boss_slider_switch', 'equals', '1' ),
-						'placeholder'	 => array(
-							'title'			 => __( 'Slide Title', 'onesocial' ),
-							'description'	 => __( 'Slide Description', 'onesocial' ),
-							//'button_text'	 => __( 'Read More', 'onesocial' ),
-							'url'			 => __( 'Give us a link!', 'onesocial' ),
-						)
-					),
-					array(
-						'id'		 => 'boss_plugins_slider',
-						'type'		 => 'textarea',
-						'required'	 => array( 'boss_slider_switch', 'equals', '0' ),
-						'title'		 => __( 'Slider Shortcode', 'onesocial' ),
-						'subtitle'	 => __( 'Add a different slider without editing code. Many of the popular slider plugins provide shortcodes to display their slides, which you can add here.', 'onesocial' ),
-						'default'	 => ''
-					),
-				)
-			);
-
 			// Profile Settings
 			$this->sections[] = array(
 				'title'		 => __( 'Profiles', 'onesocial' ),
@@ -830,24 +792,7 @@ if ( !class_exists( 'onesocial_Redux_Framework_config' ) ) {
 					),
 					'output'		 => array( '#buddypress div#group-create-tabs ul li:before' ),
 				),
-				array(
-					'id'			 => 'boss_slide_title_font_options',
-					'type'			 => 'typography',
-					'title'			 => __( 'Slide Title', 'onesocial' ),
-					'subtitle'		 => __( 'Specify the slide title font properties.', 'onesocial' ),
-					'google'		 => true,
-					'font-size'		 => true,
-					'line-height'	 => false,
-					'text-align'	 => false,
-					'subsets'		 => true,
-					'color'			 => false,
-					'default'		 => array(
-						'font-family'	 => 'Merriweather',
-						'font-size'		 => '50px',
-						'font-weight'	 => '600',
-					),
-					'output'		 => array( '.bb-slider-container .title' ),
-				),
+
 			);
 
 			// Typography Settings

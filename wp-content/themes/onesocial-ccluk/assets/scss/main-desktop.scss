@@ -16,12 +16,12 @@ This is the Desktop stylesheet, served to laptops and desktop devices.
     1.1.6 - Blog
     1.1.7 - Single Post
     1.1.8 - Sliding Panels
-    1.1.9 - BuddyBoss Image Slider
+
     1.1.10 - Dropdowns
     1.1.11 - Search Template
 1.2 - Custom media queries (desktops and laptops)
     1.2.1 - Basic Structure
-    1.2.2 - BuddyBoss Image Slider
+
     1.2.3 - Widgets
     1.2.4 - Footer
 ----------------------------------------------------------------
@@ -1653,16 +1653,6 @@ body.single-post #page {
 }
 
 /*--------------------------------------------------------------
-1.1.9 - BuddyBoss Image Slider
---------------------------------------------------------------*/
-
-.buddyboss_slides_container {
-  margin: -30px -30px 40px;
-  position: relative;
-  z-index: 1;
-}
-
-/*--------------------------------------------------------------
 1.1.10 - Dropdowns
 --------------------------------------------------------------*/
 
@@ -1765,12 +1755,7 @@ body.search h1.entry-title {
   /*--------------------------------------------------------------
   1.2.1 - Basic Structure
   --------------------------------------------------------------*/
-  /*--------------------------------------------------------------
-  1.2.2 - BuddyBoss Image Slider
-  --------------------------------------------------------------*/
-  .buddyboss_slides_container {
-    margin: -40px 0 40px;
-  }
+
   /*--------------------------------------------------------------
   1.2.3 - Widgets
   --------------------------------------------------------------*/
