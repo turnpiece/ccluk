@@ -21,7 +21,7 @@ $class			 = 'full-width-col';
 		?>
 
 		<h5 class="title"><?php _e( 'Lost Password', 'onesocial' ); ?></h5>
-		<div class="info"><?php _e( 'Lost your password? Please enter your username or email address. You will receive a link to create a new password via email.', 'onesocial' ); ?></div>
+		<div class="info"><?php _e( 'Lost your password? Please enter your email address. You will receive a link to create a new password via email.', 'onesocial' ); ?></div>
 
 		<div id="message" class="messages-output"></div>
 
@@ -34,7 +34,7 @@ $class			 = 'full-width-col';
 			?>
 
 			<p>
-				<label for="user_login"><?php _e( 'Username or E-mail:', 'onesocial' ) ?>
+				<label for="user_login"><?php _e( 'Email:', 'onesocial' ) ?>
 					<br />
 					<input type="text" name="user_login" id="user_login" class="input" value="" size="20" />
 				</label>
