@@ -3381,7 +3381,7 @@ article.format-aside blockquote:last-child, article.format-aside p:last-child {
 }
 
 .single-post .entry-content {
-  margin-bottom: 70px;
+  margin-bottom: 20px;
 }
 
 .single-post .entry-main .entry-meta {
