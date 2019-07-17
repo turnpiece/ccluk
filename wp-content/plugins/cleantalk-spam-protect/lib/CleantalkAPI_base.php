@@ -7,11 +7,12 @@ class CleantalkAPI_base
 	
 	/**
 	 * Wrapper for 2s_blacklists_db API method
-	 * 
-	 * @param type $api_key
+	 *
+	 * @param string $api_key
 	 * @param type $out Data output type (JSON or file URL)
-	 * @param type $do_check
-	 * @returns mixed STRING || array('error' => true, 'error_string' => STRING)
+	 * @param boolean $do_check
+	 * @return mixed|string|array('error' => true, 'error_string' => STRING)
+	 * @returns mixed STRING ||
 	 */
 	static public function method__get_2s_blacklists_db($api_key, $out = null, $do_check = true){
 		
@@ -62,9 +63,10 @@ class CleantalkAPI_base
 	 *
 	 * @param string website host
 	 * @param integer report days
+	 * @param boolean do_check
 	 * @return type
 	 */
-	static public function method__get_antispam_report($host, $period = 1)
+	static public function method__get_antispam_report($host, $period = 1, $do_check = true)
 	{
 		$request=Array(
 			'method_name' => 'get_antispam_report',
@@ -101,33 +103,15 @@ class CleantalkAPI_base
 	/**
 	 * Function gets information about renew notice
 	 *
-	 * @param string api_key
+	 * @param string api_key      API key
+	 * @param string $path_to_cms Path to website
 	 * @return type
 	 */
-	static public function method__notice_validate_key($api_key, $path_to_cms, $do_check = true)
-	{
-		$request = array(
-			'method_name' => 'notice_validate_key',
-			'auth_key' => $api_key,
-			'path_to_cms' => $path_to_cms	
-		);
-		
-		$result = self::send_request($request);
-		$result = $do_check ? self::check_response($result, 'notice_validate_key') : $result;
-		
-		return $result;
-	}
-	
-	/**
-	 * Function gets information about renew notice
-	 *
-	 * @param string api_key
-	 * @return type
-	 */
-	static public function method__notice_paid_till($api_key, $do_check = true)
+	static public function method__notice_paid_till($api_key, $path_to_cms, $do_check = true)
 	{
 		$request = array(
 			'method_name' => 'notice_paid_till',
+			'path_to_cms' => $path_to_cms,
 			'auth_key' => $api_key
 		);
 		
@@ -522,8 +506,11 @@ class CleantalkAPI_base
 				);
 				$context = stream_context_create($opts);
 				$result = @file_get_contents($url, 0, $context);
-				if($result === false)
-					$errors .= '_FAILED_TO_USE_FILE_GET_CONTENTS';
+				
+				$errors = $result === false
+					? $errors . '_FAILED_TO_USE_FILE_GET_CONTENTS'
+					: false;
+				
 			}else
 				$errors .= '_AND_ALLOW_URL_FOPEN_IS_DISABLED';
 		}
@@ -575,12 +562,7 @@ class CleantalkAPI_base
 		// Pathces for different methods			
 		switch ($method_name) {
 			
-		// notice_validate_key
-			case 'notice_validate_key':
-				$out = isset($result['valid']) ? $result : 'NO_VALID_VALUE';
-				break;
-		
-		// get_antispam_report_breif
+			// get_antispam_report_breif
 			case 'get_antispam_report_breif':
 				
 				$out = isset($result['data']) && is_array($result['data'])

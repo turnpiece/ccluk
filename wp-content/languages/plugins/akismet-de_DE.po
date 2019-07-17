@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Akismet Anti-Spam - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-11-12 20:00:30+0000\n"
+"PO-Revision-Date: 2019-05-13 08:02:25+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -344,7 +344,7 @@ msgstr "Dein Pro-Abonnement erlaubt die Benutzung von Akismet nur für eine Webs
 
 #: views/notice.php:115
 msgid "The connection to akismet.com could not be established. Please refer to <a href=\"%s\" target=\"_blank\">our guide about firewalls</a> and check your server configuration."
-msgstr "Die Verbindung zu akismet.com konnte nicht eingerichtet werden. Schau dir <a href=\"%s\" target=\"_blank\">unser Handbuch zu Firefalls</a> an und prüfe deine Server-Konfiguration."
+msgstr "Die Verbindung zu akismet.com konnte nicht eingerichtet werden. Schau dir <a href=\"%s\" target=\"_blank\">unser Handbuch zu Firewalls</a> an und prüfe deine Server-Konfiguration."
 
 #: views/notice.php:114
 msgid "The API key you entered could not be verified."

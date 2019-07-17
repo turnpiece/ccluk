@@ -22,6 +22,10 @@ class WP_Version extends Rule {
 		return $this->getService()->check();
 	}
 
+	function getSubDescription() {
+		return sprintf( __( "Your current WordPress version is out of date, which means you could be missing out on the latest security patches in v%s", wp_defender()->domain ), $this->getService()->getLatestVersion() );
+	}
+
 	function revert() {
 		// TODO: Implement revert() method.
 	}

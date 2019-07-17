@@ -25,6 +25,8 @@ class Scan_Api extends Component {
 
 	private static $ignoreList = false;
 
+	public static $scanResults = array();
+
 	/**
 	 * @return Scan|\WP_Error
 	 */
@@ -139,7 +141,7 @@ class Scan_Api extends Component {
 		$files    = File_Helper::findFiles( WP_CONTENT_DIR, true, false, array(), array(
 			'ext' => array( 'php' )
 		), true, $settings->max_filesize, true );
-//		$files = File_Helper::findFiles( ABSPATH . 'wp-content/trash/sample', true, false, array(), array(
+//		$files    = File_Helper::findFiles( ABSPATH . 'wp-content/randomly/a', true, false, array(), array(
 //			'ext' => array( 'php' )
 //		), true, $settings->max_filesize );
 		//include wp-config.php here

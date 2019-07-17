@@ -28,7 +28,8 @@ class Shipper_Task_Api_Destinations_Remove extends Shipper_Task_Api {
 		));
 
 		if ( empty( $status['success'] ) ) {
-			$this->add_error(
+			$this->record_non_success(
+				'destinations-remove',
 				self::ERR_SERVICE,
 				sprintf(
 					__( 'Error removing domain %s from API list', 'shipper' ),
@@ -38,6 +39,7 @@ class Shipper_Task_Api_Destinations_Remove extends Shipper_Task_Api {
 			return false;
 		}
 
+		$this->record_success( 'destinations-remove' );
 		return true;
 	}
 

@@ -373,6 +373,8 @@ class CleantalkHelper
 					CURLOPT_SSL_VERIFYPEER    => false,
 					CURLOPT_SSL_VERIFYHOST    => 0,
 					CURLOPT_HTTPHEADER        => array('Expect:'), // Fix for large data and old servers http://php.net/manual/ru/function.curl-setopt.php#82418
+					CURLOPT_FOLLOWLOCATION    => true,
+					CURLOPT_MAXREDIRS         => 5,
 				),
 				$opts
 			);
@@ -383,6 +385,12 @@ class CleantalkHelper
 				
 				switch($preset){
 					
+					// Do not follow redirects
+					case 'dont_follow_redirects':
+						$opts[CURLOPT_FOLLOWLOCATION] = false;
+						$opts[CURLOPT_MAXREDIRS] = 0;
+						break;
+						
 					// Get headers only
 					case 'get_code':
 						$opts[CURLOPT_HEADER] = true;

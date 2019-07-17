@@ -35,7 +35,8 @@ class Shipper_Task_Api_Info_Get extends Shipper_Task_Api {
 		));
 
 		if ( empty( $status['success'] ) ) {
-			$this->add_error(
+			$this->record_non_success(
+				'info-get',
 				self::ERR_SERVICE,
 				sprintf(
 					__( 'Service error: %s', 'shipper' ),
@@ -45,6 +46,7 @@ class Shipper_Task_Api_Info_Get extends Shipper_Task_Api {
 			return $data;
 		}
 
+		$this->record_success( 'info-get' );
 		return $status['data'];
 	}
 

@@ -31,6 +31,7 @@ class CleantalkState
         'contact_forms_test'         => 1, 
         'general_contact_forms_test' => 1, // Antispam test for unsupported and untested contact forms 
 		'wc_checkout_test'           => 0, // WooCommerce checkout default test => OFF
+		'wc_register_from_order'     => 1, // Woocommerce registration during checkout => ON
 		'search_test'                => 1, // Test deafult Wordpress form
 		'check_external'             => 0,
         'check_internal'             => 0,
@@ -46,10 +47,10 @@ class CleantalkState
 		// Data processing
         'protect_logged_in' =>     1, // Do anit-spam tests to for logged in users.
 		'use_ajax' =>              1,
+		'use_static_js_key' =>     0,
 		'general_postdata_test' => 0, //CAPD
         'set_cookies'=>            1, // Disable cookies generatation to be compatible with Varnish.
         'set_cookies__sessions'=>  0, // Use alt sessions for cookies.
-		'alternative_sessions'=>   0, // AJAX Sessions.
         'ssl_on' =>                0, // Secure connection to servers 
 		'use_buitin_http_api' =>   0, // Using Wordpress HTTP built in API
 		
@@ -149,6 +150,7 @@ class CleantalkState
 		// Misc
 		'feedback_request' => '',
 		'key_is_ok'        => 0,
+		'salt'             => '',
     );
 	
 	public $def_network_data = array(
@@ -230,6 +232,10 @@ class CleantalkState
 			// Setting default data
 			if($this->option_prefix.'_'.$option_name === 'cleantalk_data'){
 				$option = is_array($option) ? array_merge($this->def_data,     $option) : $this->def_data;
+				// Generate salt
+				$option['salt'] = empty($option['salt'])
+					? str_pad(rand(0, getrandmax()), 6, '0').str_pad(rand(0, getrandmax()), 6, '0')
+					: $option['salt'];
 			}
 			
 			// Setting default errors

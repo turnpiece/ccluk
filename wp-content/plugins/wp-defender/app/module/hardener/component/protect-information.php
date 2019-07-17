@@ -17,6 +17,10 @@ class Protect_Information extends Rule {
 		$this->renderPartial( 'rules/protect-information' );
 	}
 
+	function getSubDescription() {
+		return __( "You don't have information disclosure protection active.", wp_defender()->domain );
+	}
+
 	/**
 	 * @return bool|false|mixed|null
 	 */

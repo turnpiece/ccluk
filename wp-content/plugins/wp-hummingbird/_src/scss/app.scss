@@ -1,4 +1,6 @@
 $summary-image: '../../admin/assets/image/graphic-hb-minify-summary@2x.png';
+$upgrade-image: '../../admin/assets/image/hero@2x.png';
+$upgrade-image-mobile: '../../admin/assets/image/hero-mobile@2x.png';
 
 /* ****************************************************************************
  * MAIN APP SCSS FILE
@@ -44,6 +46,8 @@ $summary-image: '../../admin/assets/image/graphic-hb-minify-summary@2x.png';
 @import "~@wpmudev/shared-ui/scss/wp-admin-notices";
 @import "~@wpmudev/shared-ui/scss/recipient";
 @import "~@wpmudev/shared-ui/scss/color-accessibility";
+@import "~@wpmudev/shared-ui/scss/upgrade-page";
+@import "~@wpmudev/shared-ui/scss/reviews";
 
 // Common
 @import "common/variables";

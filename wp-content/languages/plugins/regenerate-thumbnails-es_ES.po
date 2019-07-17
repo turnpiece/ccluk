@@ -1,15 +1,15 @@
-# Translation of Plugins - Regenerate Thumbnails - Development (trunk) in Spanish (Spain)
-# This file is distributed under the same license as the Plugins - Regenerate Thumbnails - Development (trunk) package.
+# Translation of Plugins - Regenerate Thumbnails - Stable (latest release) in Spanish (Spain)
+# This file is distributed under the same license as the Plugins - Regenerate Thumbnails - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2019-01-05 12:52:26+0000\n"
+"PO-Revision-Date: 2019-05-10 15:36:46+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: es\n"
-"Project-Id-Version: Plugins - Regenerate Thumbnails - Development (trunk)\n"
+"Project-Id-Version: Plugins - Regenerate Thumbnails - Stable (latest release)\n"
 
 #: regenerate-thumbnails.php:491
 msgctxt "bulk actions dropdown"
@@ -210,14 +210,14 @@ msgstr "Actualiza el contenido de las entradas para usar los nuevos tamaños."
 msgid "To process a specific image, visit your media library and click the &quot;Regenerate Thumbnails&quot; link or button. To process multiple specific images, make sure you're in the <a href=\"%s\">list view</a> and then use the Bulk Actions dropdown after selecting one or more images."
 msgstr "Para procesar una imagen específica vista tu biblioteca de medios y haz clic en el enlace o botón &quot;Regenerar miniaturas&quot;. Para procesar varias imágenes específicas asegúrate de estar en la <a href=\"%s\">vista de lista</a> y luego utiliza el desplegable de acciones en lote tras seleccionar una o más imágenes."
 
+#: regenerate-thumbnails.php:231
+msgid "proportionally resized to fit inside dimensions"
+msgstr "redimensionado proporcional para que se ajusten a las dimensiones interiores"
+
 #. translators: %s: Media options URL
 #: regenerate-thumbnails.php:236
 msgid "When you change WordPress themes or change the sizes of your thumbnails at <a href=\"%s\">Settings → Media</a>, images that you have previously uploaded to you media library will be missing thumbnail files for those new image sizes. This tool will allow you to create those missing thumbnail files for all images."
 msgstr "Cuando cambies de tema WordPress o cambies los tamaños de tus miniaturas en <a href=\"%s\">Ajustes \t Medios</a>, las imágenes que habías subido previamente a tu biblioteca de medios no tendrán archivos de miniatura disponibles para los nuevos tamaños de imagen. Esta herramienta te permitirá crear esos archivos de miniatura que falten para todas las imágenes."
-
-#: regenerate-thumbnails.php:231
-msgid "proportionally resized to fit inside dimensions"
-msgstr "redimensionado proporcional para que se ajusten a las dimensiones interiores"
 
 #: regenerate-thumbnails.php:230
 msgid "cropped to fit"
@@ -247,7 +247,7 @@ msgstr "Saltar la regeneración si existe el tamaño correcto de miniatura (más
 msgid "Loading…"
 msgstr "Cargando…"
 
-#: includes/class-regeneratethumbnails-rest-controller.php:254
+#: includes/class-regeneratethumbnails-rest-controller.php:258
 msgid "The page number requested is larger than the number of pages available."
 msgstr "El número de página solicitado es mayor que el número de páginas disponibles."
 

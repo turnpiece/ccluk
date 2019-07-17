@@ -11,6 +11,7 @@ use Hammer\Queue\Queue;
 use WP_Defender\Behavior\Utils;
 use WP_Defender\Module\Scan\Behavior\Core_Scan;
 use WP_Defender\Module\Scan\Behavior\Pro\Content_Scan;
+use WP_Defender\Module\Scan\Behavior\Pro\Content_Scan2;
 use WP_Defender\Module\Scan\Behavior\Pro\MD5_Scan;
 use WP_Defender\Module\Scan\Behavior\Pro\Vuln_Scan;
 use WP_Defender\Module\Scan\Component\Scan_Api;
@@ -141,7 +142,7 @@ Stay safe,
 WP Defender
 Official WPMU DEV Superhero', wp_defender()->domain );
 		//call parent to load stored
-		if ( is_admin() || is_network_admin() && current_user_can( 'manage_options' ) ) {
+		if ( ( is_admin() || is_network_admin() ) && current_user_can( 'manage_options' ) ) {
 			$user = wp_get_current_user();
 			if ( is_object( $user ) ) {
 				$this->receipts[]             = array(

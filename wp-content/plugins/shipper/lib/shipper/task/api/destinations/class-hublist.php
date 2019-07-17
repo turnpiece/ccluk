@@ -11,6 +11,19 @@
 class Shipper_Task_Api_Destinations_Hublist extends Shipper_Task_Api {
 
 	/**
+	 * Gets maximum API cache time for this task
+	 *
+	 * This can be a bit longer.
+	 *
+	 * @since v1.0.3
+	 *
+	 * @return int
+	 */
+	public function get_api_cache_ttl() {
+		return 300;
+	}
+
+	/**
 	 * Gets a list of all Hub-connected sites
 	 *
 	 * @param array $args Unused.
@@ -22,7 +35,8 @@ class Shipper_Task_Api_Destinations_Hublist extends Shipper_Task_Api {
 		$destinations = array();
 
 		if ( empty( $status['success'] ) ) {
-			$this->add_error(
+			$this->record_non_success(
+				'destinations-listall',
 				self::ERR_SERVICE,
 				__( 'Error listing Hub sites: service encountered an error', 'shipper' )
 			);
@@ -35,13 +49,15 @@ class Shipper_Task_Api_Destinations_Hublist extends Shipper_Task_Api {
 		;
 
 		if ( empty( $destinations ) ) {
-			$this->add_error(
+			$this->record_non_success(
+				'destinations-listall',
 				self::ERR_SERVICE,
 				__( 'Error listing Hub sites: service responded with an empty list', 'shipper' )
 			);
 			return $destinations;
 		}
 
+		$this->record_success( 'destinations-listall' );
 		return $destinations;
 	}
 }

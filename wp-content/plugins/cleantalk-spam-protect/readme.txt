@@ -2,8 +2,8 @@
 Contributors: safronik 
 Tags: spam, antispam, protection, comments, firewall 
 Requires at least: 3.0
-Tested up to: 5.2
-Stable tag: 5.120.1
+Tested up to: 5.3
+Stable tag: 5.122
 License: GPLv2
 
 Spam protection, antispam, all-in-one, premium plugin. No spam comments & users, no spam contact form & WooCommerce anti-spam.
@@ -31,6 +31,7 @@ No CAPTCHA, no questions, no animal counting, no puzzles, no math and no spam bo
 14. Blocking  disposable & temporary emails.
 15. No Spam - No Google Penalties. Give your SEO boost.
 16. Mobile friendly Anti Spam & FireWall. 
+16. Stops spam in Search Form. 
 
 = Public reviews =
 > CleanTalk - Cloud-Based Anti-Spam Service to Keep Your Site Bot-Free.
@@ -243,9 +244,23 @@ Non-existing email addresses also entail several other problems for website owne
 * the client will never receive any notifications from you (account activation letter, password recovery, email distribution, notifications, etc.),
 * if you use email marketing for your clients, then a large number of nonexistent emails in the mailing list may result in your IP address being added to various blacklists of email servers.
 
+Improve your email list with email validation without fake emails.
+
 = Blocking  disposable & temporary emails =
 
 Block fake and suspicious users with disposable & temporary emails to improve email delivery. So, it also prevents malicious activity, spam bots, and internet trolls.
+
+= Stops Spam in Search Form =
+
+Spam bots can use your search form to make a GET request with spam text.
+CleanTalk Anti-Spam has the option to protect your website search form from spam bots. Each time, the search generates a new page and if there are many requests, this can create additional load. So, under some conditions, spam searches can be indexed, which affects SEO,
+
+* Spam FireWall blocks access to all website pages for the most active spambots. It lowers your web server load and traffic just by doing this.
+* Anti-Spam protection for website search forms repels spambots.
+* If your search form gets data too often the CleanTalk Anti-Spam plugin will add a pause and increase it with each new attempt to send data. It saves your web server processor time.
+* Spam protection allows you to not forbid indexation for the crawler bots if you really need it but simultaneously you will get protection from spambots.
+
+You will always know what users were looking for on your site.
 
 = Translations = 
 * Albanian (sq_AL) - thanks to fjalaime https://wordpress.org/support/users/fjalaime/ 
@@ -560,6 +575,29 @@ If your website has forms that send data to external sources, you can enable opt
 10. Website's options.
 
 == Changelog ==
+= 5.122 July 10 2019 =
+  * Spam Protection improved.
+  * Fix: Error while checking account status.
+  * Fix: Conflict with Elementor Pro.
+  * Fix: Integration with Ninja Forms.
+  * Fix: Integration with Formidable.
+  * New: Detecting mobile devices.
+  * New: Integration for Easy Forms for Mailchimp.
+
+= 5.121 June 26 2019 =
+  * Fix: Translation typos.
+  * Fix: Woocommerce integration.
+  * Fix: Catching admin in AJAX queries.
+  * Mod: Session table (cleantalk_sessions) issue.
+  * Mod: Spam protection improved.
+  * Integration: Wilcity theme custom registration validation enabled
+  * New: Option "Use static JS key".
+
+= 5.120.2 June 17 2019 =
+  * Fix: WPForms integration.
+  * Fix: Translation and spelling.
+  * Fix: Minor PHP error
+
 = 5.120.1 June 6 2019 =
   * Mod: Description for Search form protection.
   * Fix: CSS and JS attachment.
@@ -1909,6 +1947,29 @@ If your website has forms that send data to external sources, you can enable opt
   * First version
   
 == Upgrade Notice ==
+= 5.122 July 10 2019 =
+  * Spam Protection improved.
+  * Fix: Error while checking account status.
+  * Fix: Conflict with Elementor Pro.
+  * Fix: Integration with Ninja Forms.
+  * Fix: Integration with Formidable.
+  * New: Detecting mobile devices.
+  * New: Integration for Easy Forms for Mailchimp.
+
+= 5.121 June 26 2019 =
+  * Fix: Translation typos.
+  * Fix: Woocommerce integration.
+  * Fix: Catching admin in AJAX queries.
+  * Mod: Session table (cleantalk_sessions) issue.
+  * Mod: Spam protection improved.
+  * Integration: Wilcity theme custom registration validation enabled
+  * New: Option "Use static JS key".
+
+= 5.120.2 June 17 2019 =
+  * Fix: WPForms integration.
+  * Fix: Translation and spelling.
+  * Fix: Minor PHP error
+
 = 5.120.1 June 6 2019 =
   * Mod: Description for Search form protection.
   * Fix: CSS and JS attachment.

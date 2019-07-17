@@ -27,7 +27,7 @@
 
 				<li>
 					<span class="sui-list-label"><?php esc_html_e( 'WPMU DEV CDN', 'wphb' ); ?></span>
-					<span class="sui-list-detail"><div class="toggle-actions">
+					<span class="sui-list-detail">
 						<label class="sui-toggle sui-tooltip sui-tooltip-top-right" data-tooltip="<?php esc_html_e( 'Enable WPMU DEV CDN', 'wphb' ); ?>">
 							<input type="checkbox" name="use_cdn" id="use_cdn" <?php checked( $use_cdn ); ?> <?php disabled( ! $is_member ); ?>>
 							<span class="sui-toggle-slider"></span>

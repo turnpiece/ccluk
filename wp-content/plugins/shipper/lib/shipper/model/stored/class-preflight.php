@@ -18,7 +18,9 @@ class Shipper_Model_Stored_Preflight extends Shipper_Model_Stored {
 
 	const KEY_CHECKS_SYSTEM = 'local';
 	const KEY_CHECKS_REMOTE = 'remote';
+	const KEY_CHECKS_SYSDIFF = 'sysdiff';
 	const KEY_CHECKS_FILES = 'files';
+	const KEY_CHECKS_RPKG = 'remote_package';
 
 	/**
 	 * Constructor
@@ -155,6 +157,9 @@ class Shipper_Model_Stored_Preflight extends Shipper_Model_Stored {
 
 		$check = new Shipper_Task_Check_Files;
 		$data[] = $check->get_package_size_check()->get_data();
+		if ( ! isset( $data['is_done'] ) ) {
+			$data['is_done'] = false;
+		}
 
 		return $data;
 	}
@@ -175,15 +180,35 @@ class Shipper_Model_Stored_Preflight extends Shipper_Model_Stored {
 	}
 
 	/**
+	 * Clears all check errors pertaining to an individual check.
+	 *
+	 * @param string $check Check for the errors to be reset for.
+	 */
+	public function clear_check_errors( $check ) {
+		$errs = $this->get( self::KEY_ERRORS, array() );
+		$errs[ $check ] = array();
+		return $this->set( self::KEY_ERRORS, $errs );
+	}
+
+	/**
 	 * Gets known check types
 	 *
 	 * @return array
 	 */
 	public function get_check_types() {
-		return array(
+		$types = array(
 			self::KEY_CHECKS_SYSTEM,
 			self::KEY_CHECKS_REMOTE,
-			self::KEY_CHECKS_FILES,
+			self::KEY_CHECKS_SYSDIFF,
 		);
+
+		$migration = new Shipper_Model_Stored_Migration;
+		if ( Shipper_Model_Stored_Migration::TYPE_IMPORT === $migration->get_type() ) {
+			$types[] = self::KEY_CHECKS_RPKG;
+		} else {
+			$types[] = self::KEY_CHECKS_FILES;
+		}
+
+		return $types;
 	}
 }

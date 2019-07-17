@@ -5,6 +5,17 @@ Change Log:
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
 
+1.0.3 - 2019-06-19
+----------------------------------------------------------------------
+- Feature: Restrict Shipper access to Dash user and add a Permissions tab in Shipper settings
+- Improvement: Improve Import/Export workflow, also we remove the Add Destination because it is not needed anymore
+- Improvement: UI/UX for Preflight check
+- Fix: Conflict with some heart-beat manager like Heartbeat Control, which prevent the preflight and migration progresses get updated
+- Fix: In some cases, migration will be fail if a DB table larger than 5MB
+- Fix: Migration failed but success message was sent
+- Fix: Show correct size of the remote install when running import task.
+- Fix: Better notification message for not approved users
+
 1.0.2 - 2018-05-14
 ----------------------------------------------------------------------
 - Add: Add a method to rerun pre-flight check in every tab

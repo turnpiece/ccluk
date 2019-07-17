@@ -13,6 +13,8 @@ use WP_Defender\Module\Scan\Model\Result_Item;
 class Vuln_Scan extends Behavior {
 	protected $endPoint = "https://premium.wpmudev.org/api/defender/v1/vulnerabilities";
 	protected $model;
+	protected $plugins;
+	protected $themes;
 
 	public function processItemInternal( $args, $current ) {
 		$model       = $args['model'];
@@ -48,6 +50,9 @@ class Vuln_Scan extends Behavior {
 
 		if ( empty( $themes ) ) {
 			foreach ( wp_get_themes() as $theme ) {
+				if ( is_object( $theme->parent() ) ) {
+					continue;
+				}
 				$themes[ $theme->get_template() ] = $theme->Version;
 			}
 		}
@@ -62,6 +67,10 @@ class Vuln_Scan extends Behavior {
 		) );
 
 		if ( is_array( $response ) ) {
+			//store the plugins=>versions for later use
+			$this->plugins = $plugins;
+			$this->themes  = $themes;
+			//run a raw check for plugins and version
 			$this->processWordPressVuln( $response['wordpress'] );
 			$this->processPluginsVuln( $response['plugins'] );
 			$this->processThemesVuln( $response['themes'] );
@@ -106,7 +115,6 @@ class Vuln_Scan extends Behavior {
 		if ( empty( $issues ) ) {
 			return;
 		}
-
 		foreach ( $issues as $slug => $bugs ) {
 			if ( ( $id = Scan_Api::isIgnored( $slug ) ) ) {
 				$status = Result_Item::STATUS_IGNORED;
@@ -115,6 +123,7 @@ class Vuln_Scan extends Behavior {
 				$status = Result_Item::STATUS_ISSUE;
 				$model  = new Result_Item();
 			}
+
 			$model->parentId = $this->model->id;
 			$model->type     = 'vuln';
 			$model->status   = $status;
@@ -124,14 +133,18 @@ class Vuln_Scan extends Behavior {
 				'bugs' => array()
 			);
 			if ( isset( $bugs['confirmed'] ) && is_array( $bugs['confirmed'] ) ) {
+				$currentVersion = isset( $this->themes[ $slug ] ) ? $this->themes[ $slug ] : 0;
 				foreach ( $bugs['confirmed'] as $bug ) {
-					$model->raw['bugs'][] = array(
-						'vuln_type' => $bug['vuln_type'],
-						'title'     => $bug['title'],
-						'ref'       => $bug['references'],
-						'fixed_in'  => $bug['fixed_in'],
-					);
+					if ( $currentVersion <= $bug['fixed_in'] ) {
+						$model->raw['bugs'][] = array(
+							'vuln_type' => $bug['vuln_type'],
+							'title'     => $bug['title'],
+							'ref'       => $bug['references'],
+							'fixed_in'  => $bug['fixed_in'],
+						);
+					}
 				}
+
 			}
 			if ( count( $model->raw['bugs'] ) ) {
 				$model->save();
@@ -164,15 +177,20 @@ class Vuln_Scan extends Behavior {
 			);
 			if ( is_array( $bugs['confirmed'] ) ) {
 				foreach ( $bugs['confirmed'] as $bug ) {
-					$model->raw['bugs'][] = array(
-						'vuln_type' => $bug['vuln_type'],
-						'title'     => $bug['title'],
-						'ref'       => $bug['references'],
-						'fixed_in'  => $bug['fixed_in'],
-					);
+					$currentVersion = isset( $this->plugins[ $slug ] ) ? $this->plugins[ $slug ] : 0;
+					if ( $currentVersion <= $bug['fixed_in'] ) {
+						$model->raw['bugs'][] = array(
+							'vuln_type' => $bug['vuln_type'],
+							'title'     => $bug['title'],
+							'ref'       => $bug['references'],
+							'fixed_in'  => $bug['fixed_in'],
+						);
+					}
 				}
 			}
-			$model->save();
+			if ( count( $model->raw['bugs'] ) ) {
+				$model->save();
+			}
 		}
 	}
 

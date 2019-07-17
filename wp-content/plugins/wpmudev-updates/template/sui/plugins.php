@@ -1,9 +1,10 @@
 <?php
 // Render the page header section.
 $page_title = __( 'Plugins', 'wpmudev' );
+$page_slug  = 'plugins';
 
 /** @var $this WPMUDEV_Dashboard_Sui */
-$this->render_sui_header( $page_title );
+$this->render_sui_header( $page_title, $page_slug );
 ?>
 
 <div class="sui-box">
@@ -182,8 +183,8 @@ $this->render_sui_header( $page_title );
 	<div class="js-notifications">
 		<div class="sui-notice-top sui-notice-success js-activated-single">
 			<div class="sui-notice-content">
-				<p><strong><?php esc_html_e( 'Success', 'wpmudev' ); ?>:</strong> <?php esc_html_e( 'Plugin activated.', 'wpmudev' ); ?></p>
-				<p><?php esc_html_e( 'Hold on a moment while we are refreshing your WordPress installation...', 'wpmudev' ); ?></p>
+				<p><strong><?php esc_html_e( 'Success', 'wpmudev' ); ?>:</strong> <?php esc_html_e( 'Plugin activated successfully.', 'wpmudev' ); ?></p>
+				<p><?php esc_html_e( 'Please wait while we refresh the page...', 'wpmudev' ); ?></p>
 			</div>
 		</div>
 		<div class="sui-notice-top sui-notice-error sui-can-dismiss js-failed-activated-single">
@@ -198,20 +199,20 @@ $this->render_sui_header( $page_title );
 		<div class="sui-notice-top sui-notice-success js-activated-multi">
 			<div class="sui-notice-content">
 				<p><strong><?php esc_html_e( 'Success', 'wpmudev' ); ?>:</strong> <?php esc_html_e( 'Plugins activated.', 'wpmudev' ); ?></p>
-				<p><?php esc_html_e( 'Hold on a moment while we are refreshing your WordPress installation...', 'wpmudev' ); ?></p>
+				<p><?php esc_html_e( 'Please wait while we refresh the page...', 'wpmudev' ); ?></p>
 			</div>
 		</div>
 
 		<div class="sui-notice-top sui-notice-success js-deactivated-single">
 			<div class="sui-notice-content">
 				<p><strong><?php esc_html_e( 'Success', 'wpmudev' ); ?>:</strong> <?php esc_html_e( 'Plugin deactivated.', 'wpmudev' ); ?></p>
-				<p><?php esc_html_e( 'Hold on a moment while we are refreshing your WordPress installation...', 'wpmudev' ); ?></p>
+				<p><?php esc_html_e( 'Please wait while we refresh the page...', 'wpmudev' ); ?></p>
 			</div>
 		</div>
 		<div class="sui-notice-top sui-notice-success js-deactivated-multi">
 			<div class="sui-notice-content">
 				<p><strong><?php esc_html_e( 'Success', 'wpmudev' ); ?>:</strong> <?php esc_html_e( 'Plugins deactivated.', 'wpmudev' ); ?></p>
-				<p><?php esc_html_e( 'Hold on a moment while we are refreshing your WordPress installation...', 'wpmudev' ); ?></p>
+				<p><?php esc_html_e( 'Please wait while we refresh the page...', 'wpmudev' ); ?></p>
 			</div>
 		</div>
 
@@ -299,7 +300,7 @@ $this->render_sui_header( $page_title );
 
 		<div class="sui-notice-top sui-notice-error sui-can-dismiss js-general-fail">
 			<div class="sui-notice-content">
-				<p><strong><?php esc_html_e( 'Failed', 'wpmudev' ); ?>:</strong> <?php esc_html_e( 'Unexpected response from WordPress.', 'wpmudev' ); ?></p>
+				<p><strong><?php esc_html_e( 'Failed', 'wpmudev' ); ?>:</strong> <?php esc_html_e( 'Whoops, we had an unexpected response from WordPress, please try again.', 'wpmudev' ); ?></p>
 			</div>
 			<span class="sui-notice-dismiss">
 				<a role="button" aria-label="Dismiss" class="sui-icon-check"></a>

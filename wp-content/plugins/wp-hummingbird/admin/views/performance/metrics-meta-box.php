@@ -58,8 +58,8 @@
 		$score = isset( $rule_result->score ) ? $rule_result->score : 0;
 
 		if ( ! $report_dismissed ) {
-			$impact_score_class = WP_Hummingbird_Module_Performance::get_impact_class( $score * 100 );
-			$impact_icon_class  = WP_Hummingbird_Module_Performance::get_impact_class( $score * 100, 'icon' );
+			$impact_score_class = WP_Hummingbird_Module_Performance::get_impact_class( absint( $score * 100 ) );
+			$impact_icon_class  = WP_Hummingbird_Module_Performance::get_impact_class( absint(  $score * 100 ), 'icon' );
 		}
 		?>
 		<div class="sui-accordion-item sui-<?php echo esc_attr( $impact_score_class ); ?>" id="<?php echo esc_attr( $rule ); ?>">

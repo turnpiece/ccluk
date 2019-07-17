@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - WordPress Importer - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-11-19 06:52:19+0000\n"
+"PO-Revision-Date: 2019-04-14 06:30:27+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -21,7 +21,7 @@ msgstr "讀取 WXR 檔案時發生錯誤"
 
 #: parsers.php:84 parsers.php:89 parsers.php:306 parsers.php:502
 msgid "This does not appear to be a WXR file, missing/invalid WXR version number"
-msgstr "由於遺失或無效的版本號碼，系統判定這不是 WXR 格式的檔案。"
+msgstr "由於找不到版本號碼或版本號碼無效，系統判定這不是 WXR 格式的檔案。"
 
 #: wordpress-importer.php:132 wordpress-importer.php:141
 #: wordpress-importer.php:192 wordpress-importer.php:196
@@ -47,7 +47,7 @@ msgstr "返回 [控制台]"
 
 #: wordpress-importer.php:197
 msgid "The export file could not be found at <code>%s</code>. It is likely that this was caused by a permissions problem."
-msgstr "在 <code>%s</code> 找不到匯出檔案，這可能是由權限問題所造成。"
+msgstr "在 <code>%s</code> 找不到資料匯出檔，這通常是由權限問題所造成。"
 
 #: wordpress-importer.php:213
 msgid "This WXR file (version %s) may not be supported by this version of the importer. Please consider updating."
@@ -67,7 +67,7 @@ msgstr "指派作者"
 
 #: wordpress-importer.php:267
 msgid "If a new user is created by WordPress, a new password will be randomly generated and the new user&#8217;s role will be set as %s. Manually changing the new user&#8217;s details will be necessary."
-msgstr "如果透過 WordPress 建立新使用者，會為這位新使用者隨機產生一組密碼，並將新使用者的使用者角色指派為 [%s]。手動變更新使用者的詳細資料為匯入操作完成後的必要操作。"
+msgstr "如果透過 WordPress 建立新使用者，會為這位新使用者隨機產生一組密碼，並將新使用者的使用者角色指派為 %s。手動變更新使用者的詳細資料為匯入操作完成後的必要操作。"
 
 #: wordpress-importer.php:277
 msgid "Import Attachments"
@@ -111,31 +111,31 @@ msgstr "無法為「%s」建立新使用者，相關文章會指派給目前進�
 
 #: wordpress-importer.php:467
 msgid "Failed to import post tag %s"
-msgstr "無法匯入文章標籤《%s》"
+msgstr "無法匯入文章標籤〈%s〉"
 
 #: wordpress-importer.php:424
 msgid "Failed to import category %s"
-msgstr "無法匯入分類《%s》"
+msgstr "無法匯入分類〈%s〉"
 
 #: wordpress-importer.php:516 wordpress-importer.php:738
 msgid "Failed to import %s %s"
-msgstr "無法匯入 [%s] 的《%s》"
+msgstr "無法匯入 [%s] 分類法的分類法詞彙〈%s〉"
 
 #: wordpress-importer.php:605
 msgid "Failed to import &#8220;%s&#8221;: Invalid post type %s"
-msgstr "無法匯入《%s》: 無效的 [%s] 內容類型"
+msgstr "無法匯入〈%s〉: 無效的 [%s] 內容類型"
 
 #: wordpress-importer.php:870
 msgid "Menu item skipped due to missing menu slug"
-msgstr "由於缺漏了選單代稱，選單項目不予匯入"
+msgstr "由於找不到了選單代稱，選單項目不予匯入"
 
 #: wordpress-importer.php:704
 msgid "Failed to import %s &#8220;%s&#8221;"
-msgstr "無法匯入 [%s] 的《%s》"
+msgstr "無法匯入內容類型為 [%s] 的〈%s〉"
 
 #: wordpress-importer.php:642
 msgid "%s &#8220;%s&#8221; already exists."
-msgstr "%s《%s》已存在。"
+msgstr "內容類型為 [%s] 的〈%s〉已存在。"
 
 #: wordpress-importer.php:877
 msgid "Menu item skipped due to invalid menu slug: %s"
@@ -171,7 +171,7 @@ msgstr "大小為零的檔案已完成下載"
 
 #: wordpress-importer.php:1136
 msgid "A new version of this importer is available. Please update to version %s to ensure compatibility with newer export files."
-msgstr "這個匯入程式已有新版本可供更新，請更新至 %s 版以確保與較新版匯出檔案格式的相容性。"
+msgstr "這個匯入程式已有新版本可供更新，請更新至 %s 版以確保與較新版資料匯出檔格式的相容性。"
 
 #: wordpress-importer.php:1129
 msgid "Import WordPress"
@@ -187,7 +187,7 @@ msgstr "選擇要匯入的 WXR 檔案 (副檔名為 .xml)，然後點擊 [上傳
 
 #: wordpress-importer.php:1226
 msgid "Import <strong>posts, pages, comments, custom fields, categories, and tags</strong> from a WordPress export file."
-msgstr "從 WordPress 的內容匯出檔中匯入<strong>文章、留言、自訂欄位、頁面、分類及標籤</strong>。"
+msgstr "從 WordPress 的資料匯出檔中匯入<strong>文章、留言、自訂欄位、頁面、分類及標籤</strong>。"
 
 #. Plugin URI of the plugin/theme
 msgid "https://wordpress.org/plugins/wordpress-importer/"
@@ -199,7 +199,7 @@ msgstr "WordPress 內容匯入程式"
 
 #. Description of the plugin/theme
 msgid "Import posts, pages, comments, custom fields, categories, tags and more from a WordPress export file."
-msgstr "從 WordPress 所匯出的檔案中，匯入文章、頁面、留言、自訂欄位、分類、標籤及其他內容。"
+msgstr "從 WordPress 資料匯出檔匯入文章、頁面、留言、自訂欄位、分類、標籤及其他內容。"
 
 #. Author of the plugin/theme
 msgid "wordpressdotorg"

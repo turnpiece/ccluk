@@ -19,8 +19,8 @@
 		</span>
 	</div>
 	<div class="sui-box-settings-col-2">
+		<input type="hidden" name="email-notifications" value="0" />
 		<label class="sui-toggle">
-			<input type="hidden" name="email-notifications" value="0" />
 			<input type="checkbox" name="email-notifications" value="1" id="chk1" />
 			<span class="sui-toggle-slider"></span>
 		</label>

@@ -114,6 +114,8 @@ class Settings extends \Hammer\WP\Settings {
 	 */
 	public $stable_php_version = '';
 
+	public $is_prefix_changed = false;
+
 	/**
 	 * shorthand to add to a list
 	 *

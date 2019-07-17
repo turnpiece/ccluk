@@ -167,6 +167,7 @@ $lt = localtime();
 $dump_server['Software Name']     = $server[0];
 $dump_server['Software Version']  = $server_version;
 $dump_server['Server IP']         = @$_SERVER['SERVER_ADDR'];
+$dump_server['External IP']       = @$_SERVER['SERVER_ADDR'];
 $dump_server['Server Hostname']   = @$_SERVER['SERVER_NAME'];
 $dump_server['Server Admin']      = @$_SERVER['SERVER_ADMIN'];
 $dump_server['Server local time'] = date( 'Y-m-d H:i:s (\U\T\C P)' );
@@ -181,14 +182,11 @@ if ( WPMUDEV_API_UNCOMPRESSED ) {
 	$options['decompress'] = false;
 }
 
-$remote_url    = WPMUDEV_Dashboard::$api->get_test_url();
-$url           = parse_url( $remote_url );
-$remote_get    = wp_remote_get( $remote_url, $options );
-$remote_post   = wp_remote_post( $remote_url, $options );
-$remote_paypal = wp_remote_post(
-	'https://api-3t.paypal.com/nvp',
-	array( 'body' => '"METHOD=SetExpressCheckout&VERSION=63.0&USER=xxxxx&PWD=xxxxx&SIGNATURE=xxxxx' )
-);
+$remote_url  = WPMUDEV_Dashboard::$api->get_test_url();
+$url         = parse_url( $remote_url );
+$remote_get  = wp_remote_get( $remote_url, $options );
+$remote_post = wp_remote_post( $remote_url, $options );
+$remote_ip   = wp_remote_get( 'https://ipinfo.io/ip', $options );
 
 if ( is_wp_error( $remote_get ) ) {
 	$remote_get = $remote_get->get_error_message();
@@ -202,16 +200,17 @@ if ( is_wp_error( $remote_post ) ) {
 	$remote_post = wp_remote_retrieve_response_message( $remote_post );
 }
 
-if ( is_wp_error( $remote_paypal ) ) {
-	$remote_paypal = $remote_paypal->get_error_message();
+if ( is_wp_error( $remote_ip ) ) {
+	$remote_ip = $remote_ip->get_error_message();
 } else {
-	$remote_paypal = wp_remote_retrieve_response_message( $remote_paypal );
+	$remote_ip = wp_remote_retrieve_body( $remote_ip );
 }
 
 $dump_http['WPMU DEV API Server'] = $url['scheme'] . '://' . $url['host'];
 $dump_http['WPMU DEV: GET']       = $remote_get;
 $dump_http['WPMU DEV: POST']      = $remote_post;
-$dump_http['PayPal API: POST']    = $remote_paypal;
+$dump_http['External IP']         = $remote_ip;
+$dump_server['External IP']       = $remote_ip;
 
 /* -------------------------------------------------------------------------- */
 ?>
@@ -281,7 +280,7 @@ $dump_http['PayPal API: POST']    = $remote_paypal;
 				<table class="dashui-table">
 					<?php foreach ( $dump_http as $item => $value ): ?>
 						<tr>
-							<th><?php echo esc_html( $item ); ?></td>
+							<th><?php echo esc_html( $item ); ?></th>
 							<td><?php echo wp_kses_post( $value ); ?></td>
 						</tr>
 					<?php endforeach; ?>

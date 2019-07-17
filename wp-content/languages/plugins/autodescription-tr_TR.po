@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - The SEO Framework - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2019-01-26 21:08:55+0000\n"
+"PO-Revision-Date: 2019-03-19 12:02:24+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,29 @@ msgstr ""
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: tr\n"
 "Project-Id-Version: Plugins - The SEO Framework - Stable (latest release)\n"
+
+#: inc/classes/core.class.php:267
+msgid "View documentation"
+msgstr "Dökümantasyonu Görüntüle"
+
+#: inc/classes/core.class.php:274
+msgid "View API docs"
+msgstr "API belgelerini görüntüle"
+
+#: inc/classes/core.class.php:281
+msgctxt "Extension Manager is a product name; do not translate"
+msgid "Get the Extension Manager"
+msgstr "Extension Manager'ı edinin"
+
+#. translators: %s = Extension URL markdown
+#: inc/functions/upgrade-suggestion.php:113
+msgid "Looking for more SEO functionality? Check out [The SEO Framework's extensions](%s)."
+msgstr "Daha fazla SEO işlevselliği mi arıyorsunuz? [The SEO Framework uzantılarını] inceleyin (%s)."
+
+#. translators: %s = code example
+#: inc/views/metaboxes/social-metabox.php:329
+msgid "Add %s to posts?"
+msgstr "Yazılara %s ekle?"
 
 #: lib/js/gutenberg.js:135
 msgid "Failed to load content."
@@ -28,15 +51,6 @@ msgstr "Birincil %s'yi seçin"
 msgid "Remove blog name from the title?"
 msgstr "Başlıktan blog ismi kaldırılsın mı?"
 
-#: inc/functions/tsfem-suggestion.php:99
-msgid "The SEO Framework's extensions"
-msgstr "The SEO Framework uzantıları"
-
-#. translators: %s: SEO extensions link.
-#: inc/functions/tsfem-suggestion.php:95
-msgid "Looking for more SEO functionality? Check out %s."
-msgstr "Daha fazla SEO işlevselliği mi arıyorsunuz? %s'a göz atın."
-
 #: inc/views/metaboxes/title-metabox.php:277
 msgid "Remove term type prefixes from title?"
 msgstr "Terim tipi önekleri başlıktan kaldırılsın mı?"
@@ -54,14 +68,14 @@ msgid "Facebook Author Fallback Page"
 msgstr "Facebook Geri Dönüş Sayfası"
 
 #: inc/views/metaboxes/social-metabox.php:84
-msgid "Note: Another Open Graph plugin has been detected. These tags might conflict."
+msgid "Note: Another Open Graph plugin has been detected. These meta tags might conflict."
 msgstr "Not: Başka bir Open Graph eklentisi tespit edildi. Bu etiketler çakışabilir."
 
-#: inc/views/metaboxes/sitemaps-metabox.php:226
+#: inc/views/metaboxes/sitemaps-metabox.php:225
 msgid "The priority index suggests to search engines which pages are deemed more important. It has no known impact on the SEO value and it is generally ignored."
 msgstr "Öncelik endeksi, hangi sayfaların daha önemli olduğunu arama motorlarına belli eder. SEO değeri üzerinde bilinen bir etkisi yoktur ve genellikle göz ardı edilir."
 
-#: inc/views/metaboxes/sitemaps-metabox.php:224
+#: inc/views/metaboxes/sitemaps-metabox.php:223
 msgid "Priority Settings"
 msgstr "Öncelik Ayarları"
 
@@ -78,7 +92,7 @@ msgid "Consider lowering this value when the sitemap shows a white screen or not
 msgstr "Site haritası beyaz bir ekran gösterdiğinde veya yüksek bellek konusunda sizi bilgilendirdiğinde bu değeri düşürmeyi düşünün."
 
 #: inc/views/metaboxes/sitemaps-metabox.php:115
-msgid "The sitemap is generated with three queries: Pages, Posts, and other Post Types. This setting affects how many posts are requested from the database per query. The home and blog pages are included separately."
+msgid "The sitemap is generated with three queries: Pages, posts, and other post types. This setting affects how many posts are requested from the database per query. The homepage and blog page are included separately."
 msgstr "Site haritası üç sorguyla oluşturulur: Sayfalar, Gönderiler ve Diğer Yazı Türleri. Bu ayar, sorgu başına veritabanından kaç gönderinin isteneceğini etkiler. Ana sayfa ve blog sayfaları ayrı olarak eklenmiştir."
 
 #: inc/views/metaboxes/sitemaps-metabox.php:111
@@ -145,7 +159,7 @@ msgstr "Yazı Türleri"
 msgid "Post Type Settings"
 msgstr "Yazı Türü Ayarları"
 
-#: inc/views/metaboxes/sitemaps-metabox.php:275
+#: inc/views/metaboxes/sitemaps-metabox.php:274
 msgid "Note: Changes might not appear to have effect directly because the stylesheet is cached in the browser for 30 minutes."
 msgstr "Not: Stil sayfası tarayıcıda 30 dakika boyunca önbelleğe alındığından değişiklikler doğrudan etkili görünmeyebilir."
 
@@ -155,7 +169,7 @@ msgid "The sitemap can be found %s."
 msgstr "Site haritası %s bulunabilir."
 
 #: inc/views/metaboxes/social-metabox.php:111
-msgid "Note: Another Twitter Card plugin has been detected. These tags might conflict."
+msgid "Note: Another Twitter Card plugin has been detected. These meta tags might conflict."
 msgstr "Not: Başka bir Twitter Kart eklentisi tespit edildi. Bu etiketler çakışabilir."
 
 #. translators: URLs are in Markdown.
@@ -264,15 +278,15 @@ msgstr "Kanonik URL"
 msgid "Use this when you want to rearrange the title parts manually."
 msgstr "Başlık bölümlerini el ile yeniden düzenlemek istediğinizde bunu kullanın."
 
-#: inc/views/metaboxes/homepage-metabox.php:118
-#: inc/views/inpost/seo-settings-singular.php:66
 #: inc/views/inpost/seo-settings-tt.php:89
+#: inc/views/inpost/seo-settings-singular.php:66
+#: inc/views/metaboxes/homepage-metabox.php:118
 msgid "The meta title can be used to determine the title used on search engine result pages."
 msgstr "Meta başlığı, arama motoru sonuç sayfalarında kullanılan başlığı belirlemek için kullanılabilir."
 
-#: inc/views/metaboxes/homepage-metabox.php:115
-#: inc/views/inpost/seo-settings-singular.php:62
 #: inc/views/inpost/seo-settings-tt.php:85
+#: inc/views/inpost/seo-settings-singular.php:62
+#: inc/views/metaboxes/homepage-metabox.php:115
 msgid "Meta Title"
 msgstr "Meta Başlığı"
 
@@ -280,26 +294,26 @@ msgstr "Meta Başlığı"
 msgid "Twitter profile name"
 msgstr "Twitter profil ismi"
 
-#: inc/classes/generate-title.class.php:1048
+#: inc/classes/generate-title.class.php:1050
 msgid "Page %s"
 msgstr "Sayfa %s"
 
 #. translators: %s: search phrase
-#: inc/classes/generate-title.class.php:931
+#: inc/classes/generate-title.class.php:934
 msgid "Search Results for &#8220;%s&#8221;"
 msgstr "&#8220;%s&#8221 için arama sorunları;"
 
 #. translators: %s = Blog page title. Front-end output.
-#: inc/classes/generate-description.class.php:671
+#: inc/classes/generate-description.class.php:670
 msgid "Latest posts: %s"
 msgstr "Son yazılar: %s"
 
 #. translators: %s = But or And
-#: inc/classes/doing-it-right.class.php:1537
+#: inc/classes/doing-it-right.class.php:1538
 msgid "%s this post type is discouraging from being archived."
 msgstr "%s bu yazı türü arşivlenmekten vazgeçiyor."
 
-#: inc/classes/core.class.php:236
+#: inc/classes/core.class.php:234
 msgid "About"
 msgstr "Hakkında"
 
@@ -325,22 +339,22 @@ msgid "There's no content."
 msgstr "İçerik yok."
 
 #. translators: %s is Post/Page/Term
-#: inc/classes/doing-it-right.class.php:1477
+#: inc/classes/doing-it-right.class.php:1478
 msgid "Bots are discouraged to archive this %s."
 msgstr "Botların %s arşivlemesine izin verilmez."
 
 #. translators: 1 = But or And, 1 = Post/Page
-#: inc/classes/doing-it-right.class.php:1278
+#: inc/classes/doing-it-right.class.php:1279
 msgid "%1$s this %2$s is in draft; therefore, indexing has been discouraged."
 msgstr "%1$s %2$s taslakta; bu nedenle, endeksleme önerilmez."
 
 #. translators: %s = But or And
-#: inc/classes/doing-it-right.class.php:1266
+#: inc/classes/doing-it-right.class.php:1267
 msgid "%s there are no posts on this blog; therefore, indexing has been discouraged."
 msgstr "%s bu blogda yazı yok; bu nedenle, endeksleme önerilmez."
 
 #. translators: %s = But or And
-#: inc/classes/doing-it-right.class.php:1203
+#: inc/classes/doing-it-right.class.php:1204
 msgid "%s the post type is discouraging from being indexed."
 msgstr "%s posta türü endekslenmekten vazgeçiliyor."
 
@@ -356,13 +370,13 @@ msgstr "Arama motorlarına bu terimdeki bağlantıları izlememesini söyler."
 msgid "This tells search engines not to show this term in their search results."
 msgstr "Arama motorlarına arama terimlerinde bu terimi göstermemesini söyler."
 
-#: inc/views/metaboxes/homepage-metabox.php:339
 #: inc/views/inpost/seo-settings-singular.php:178
+#: inc/views/metaboxes/homepage-metabox.php:339
 msgid "Warning: No public site should ever disable indexing or following for the homepage."
 msgstr "Uyarı: Herkese açık siteler, ana sayfa için dizin oluşturmayı veya izlemeyi devre dışı bırakmamalıdır."
 
 #. translators: %s = But or And
-#: inc/classes/doing-it-right.class.php:1419
+#: inc/classes/doing-it-right.class.php:1420
 msgid "%s this post type is discouraging from having its links followed."
 msgstr "%s bu yazı türü bağlantılarını takip etmekten vazgeçiyor."
 
@@ -387,7 +401,7 @@ msgid "Multiple SEO tools have been detected. You should only use one."
 msgstr "Birden çok SEO aracı tespit edildi. Sadece bir tanesi kullanılmalıdır."
 
 #. translators: %s is Post/Page/Term
-#: inc/classes/doing-it-right.class.php:1482
+#: inc/classes/doing-it-right.class.php:1483
 msgid "Bots are allowed to archive this %s."
 msgstr "Botların %s arşivlemesine izin veriliyor."
 
@@ -399,8 +413,8 @@ msgstr "Çok uzun ve aramada kısaltılacak."
 msgid "It's long and it might get truncated in search."
 msgstr "Uzun ve aramada kısaltılabilir."
 
-#: inc/views/metaboxes/homepage-metabox.php:556
 #: inc/views/inpost/seo-settings-singular.php:458
+#: inc/views/metaboxes/homepage-metabox.php:556
 msgid "Social Image URL"
 msgstr "Sosyal Medya Görsel URL'si"
 
@@ -408,23 +422,23 @@ msgstr "Sosyal Medya Görsel URL'si"
 msgid "These settings do not affect sharing behavior with the social networks."
 msgstr "Bu ayarlar, sosyal ağlardaki paylaşım davranışlarını etkilemez. "
 
-#: inc/views/metaboxes/homepage-metabox.php:503
 #: inc/views/inpost/seo-settings-singular.php:430
+#: inc/views/metaboxes/homepage-metabox.php:503
 msgid "Twitter Description"
 msgstr "Twitter Açıklaması"
 
-#: inc/views/metaboxes/homepage-metabox.php:479
 #: inc/views/inpost/seo-settings-singular.php:407
+#: inc/views/metaboxes/homepage-metabox.php:479
 msgid "Twitter Title"
 msgstr "Twitter Başlığı"
 
-#: inc/views/metaboxes/homepage-metabox.php:451
 #: inc/views/inpost/seo-settings-singular.php:386
+#: inc/views/metaboxes/homepage-metabox.php:451
 msgid "Open Graph Description"
 msgstr "Open Graph Açıklaması"
 
-#: inc/views/metaboxes/homepage-metabox.php:427
 #: inc/views/inpost/seo-settings-singular.php:363
+#: inc/views/metaboxes/homepage-metabox.php:427
 msgid "Open Graph Title"
 msgstr "Open Graph Başlığı"
 
@@ -440,8 +454,8 @@ msgstr "Bu verinin nasıl kullanılacağını öğrenin."
 msgid "Authors can override this option on their profile page."
 msgstr "Yazarlar, bu seçeneği profil sayfalarında geçersiz kılabilir."
 
-#: inc/views/metaboxes/social-metabox.php:319
-msgid "Some social sites output the published date and modified date in the sharing snippet."
+#: inc/views/metaboxes/social-metabox.php:318
+msgid "Some social sites output the publishing and modified date in the sharing snippet."
 msgstr "Bazı sosyal siteler, yayınlanma tarihi ve değişiklik tarihini paylaşım özetinde gösterir."
 
 #: inc/views/metaboxes/title-metabox.php:179
@@ -530,7 +544,7 @@ msgstr "Ekran piksel sayaçları gösterilsin mi?"
 msgid "Counter Settings"
 msgstr "Sayaç Ayarları"
 
-#: bootstrap/upgrade.php:351
+#: bootstrap/upgrade.php:358
 msgid "The previous sitemap timestamp settings have been converted into new global timestamp settings."
 msgstr "Önceki site haritası zaman damgası ayarları yeni global zaman damgası ayarlarına dönüştürüldü."
 
@@ -546,7 +560,7 @@ msgstr "SEO Ayarları bu ayarların önüne geçer."
 msgid "Homepage SEO Settings"
 msgstr "Anasayfa SEO Ayarları"
 
-#: inc/classes/core.class.php:231
+#: inc/classes/core.class.php:229
 msgid "Settings"
 msgstr "Ayarlar"
 
@@ -576,14 +590,18 @@ msgstr "Birincil %s"
 msgid "This urges search engines to go to the outputted URL."
 msgstr "Arama motorlarını çıkış URL'sine gitmeye teşvik eder."
 
-#: inc/views/metaboxes/title-metabox.php:149
 #: inc/views/metaboxes/homepage-metabox.php:235
+#: inc/views/metaboxes/title-metabox.php:149
 msgid "This setting determines which side the added title text will go on."
 msgstr "Bu ayar, eklenen başlık metninin hangi tarafa devam edeceğini belirler."
 
 #: inc/views/metaboxes/title-metabox.php:148
 msgid "Title Additions Location"
 msgstr "Başlık Eklerinin Konumu"
+
+#: inc/views/metaboxes/general-metabox.php:96
+msgid "The pixel counter computes whether the input will fit on search engine result pages."
+msgstr "Piksel sayacı, girdinin arama motoru Sonuç Sayfalarına sığıp sığmayacağını hesaplar."
 
 #. translators: Pixel counter. 1: width, 2: guideline
 #: inc/classes/admin-init.class.php:580
@@ -595,7 +613,7 @@ msgstr "%2$d pikselden %1$d kullanıldı."
 msgid "Make primary %s"
 msgstr "%s birincil yap"
 
-#: inc/classes/admin-pages.class.php:1044 inc/classes/admin-init.class.php:272
+#: inc/classes/admin-init.class.php:272 inc/classes/admin-pages.class.php:1044
 msgid "Select Logo"
 msgstr "Logo Seç"
 
@@ -683,18 +701,18 @@ msgstr "Bu %s'yı tüm site içi arşiv listelerinden hariç tut."
 msgid "This means the robots.txt file can't be outputted via the WordPress rewrite rules."
 msgstr "Bu, robots.txt dosyasının WordPress yeniden yazma kuralları aracılığıyla alınamayacağı anlamına gelir."
 
-#: inc/classes/core.class.php:241
+#: inc/classes/core.class.php:239
 msgctxt "Plugin extensions"
 msgid "Extensions"
 msgstr "Uzantılar"
 
 #. translators: %s = 'The SEO Framework'
-#: inc/classes/render.class.php:1175
+#: inc/classes/render.class.php:1197
 msgid "Start %s"
 msgstr "Başlat %s"
 
 #. translators: %s = 'The SEO Framework'
-#: inc/classes/render.class.php:1177
+#: inc/classes/render.class.php:1199
 msgid "End %s"
 msgstr "Bitir %s"
 
@@ -723,7 +741,7 @@ msgstr "Sosyal"
 msgid "Visibility"
 msgstr "Görünürlük"
 
-#: bootstrap/upgrade.php:321
+#: bootstrap/upgrade.php:328
 msgid "Twitter Photo Cards have been deprecated. Your site now uses Summary Cards when applicable."
 msgstr "Twitter Fotoğraf Kartları kullanımdan kaldırıldı. Siteniz şimdi uygun olduğunda Özet Kartları kullanmaktadır."
 
@@ -736,7 +754,7 @@ msgstr "Sosyal Görseli Seç"
 msgid "Set preferred homepage Social Image URL location."
 msgstr "Tercih edilen ana sayfa Sosyal Medya Görsel URL'inin konumunu ayarlayın."
 
-#: inc/classes/admin-pages.class.php:1005 inc/classes/admin-init.class.php:264
+#: inc/classes/admin-init.class.php:264 inc/classes/admin-pages.class.php:1005
 msgctxt "Button hover"
 msgid "Select social image"
 msgstr "Sosyal görsel seç"
@@ -789,27 +807,27 @@ msgstr "Bu, [Google] (https://www.google.com/) veya [Bing] (https://www.bing.com
 msgid "XML Sitemap"
 msgstr "XML Site Haritası"
 
-#: inc/views/metaboxes/sitemaps-metabox.php:325
+#: inc/views/metaboxes/sitemaps-metabox.php:324
 msgid "Sitemap title and lines color"
 msgstr "Site haritası başlığı ve çizgi rengi"
 
-#: inc/views/metaboxes/sitemaps-metabox.php:316
+#: inc/views/metaboxes/sitemaps-metabox.php:315
 msgid "Sitemap header background color"
 msgstr "Site haritası üstbilgisi arka plan rengi"
 
-#: inc/views/metaboxes/sitemaps-metabox.php:303
+#: inc/views/metaboxes/sitemaps-metabox.php:302
 msgid "The logo is set in Customizer."
 msgstr "Logo Özelleştirici'de ayarlanır."
 
-#: inc/views/metaboxes/sitemaps-metabox.php:295
+#: inc/views/metaboxes/sitemaps-metabox.php:294
 msgid "Style configuration"
 msgstr "Biçim yapılandırması"
 
-#: inc/views/metaboxes/sitemaps-metabox.php:274
+#: inc/views/metaboxes/sitemaps-metabox.php:273
 msgid "You can style the sitemap to give it a more personal look. Styling the sitemap has no SEO value whatsoever."
 msgstr "Site haritasına daha kişisel bir görünüm vermek için stil uygulayabilirsiniz. Site haritasının şekillendirilmesi hiçbir şekilde SEO'ya katkı sağlamamaktadır."
 
-#: inc/views/metaboxes/sitemaps-metabox.php:272
+#: inc/views/metaboxes/sitemaps-metabox.php:271
 msgid "Sitemap Styling Settings"
 msgstr "Site Haritası Stil Ayarları"
 
@@ -904,6 +922,10 @@ msgstr "Nesne Önbellek Ayarları"
 msgid "Object cache generally works faster than transient cache."
 msgstr "Nesne önbelleği genellikle geçici önbellekten daha hızlı çalışır."
 
+#: inc/views/metaboxes/general-metabox.php:258
+msgid "An object cache handler has been detected. If you enable this option, you might wish to disable the Schema.org transient caching."
+msgstr "Bir nesne önbellekleyicisi tespit edildi. Bu seçeneği etkinleştirirseniz, açıklamayı ve Schema geçici önbelleğini devre dışı bırakmak isteyebilirsiniz."
+
 #: inc/views/metaboxes/general-metabox.php:65
 msgid "Administrative Layout Settings"
 msgstr "Yönetici Düzen Ayarları"
@@ -972,7 +994,7 @@ msgstr "Görseli Kaldır"
 msgid "Change Image"
 msgstr "Görseli Değiştir"
 
-#: inc/classes/admin-pages.class.php:1010 inc/classes/admin-init.class.php:263
+#: inc/classes/admin-init.class.php:263 inc/classes/admin-pages.class.php:1010
 msgid "Select Image"
 msgstr "Görsel Seç"
 
@@ -981,7 +1003,7 @@ msgid "incorrectly"
 msgstr "hatalı olarak"
 
 #. translators: 1 = But or And, 1 = Post/Page
-#: inc/classes/doing-it-right.class.php:1189
+#: inc/classes/doing-it-right.class.php:1190
 msgid "%1$s the %2$s is protected from public visibility. This means indexing is discouraged."
 msgstr "%1$s %2$s herkese görünürlükten korunmaktadır. Bu, indekslemenin önerilmediği anlamına gelir."
 
@@ -996,19 +1018,19 @@ msgstr "%2$s. %1$s erişilebilir değil."
 msgid "%1$s was called %2$s. %3$s %4$s"
 msgstr "%1$s %2$s olarak adlandırıldı. %3$s %4$s"
 
-#: inc/views/metaboxes/sitemaps-metabox.php:286
+#: inc/views/metaboxes/sitemaps-metabox.php:285
 msgid "This makes the sitemap more readable for humans."
 msgstr "Site haritasının insanlar için daha okunabilir olmasını sağlar."
 
-#: inc/views/metaboxes/sitemaps-metabox.php:189
+#: inc/views/metaboxes/sitemaps-metabox.php:188
 msgid "This only has effect when the sitemap is active."
 msgstr "Sadece site haritası aktif olduğunda etkindir."
 
-#: inc/views/metaboxes/sitemaps-metabox.php:303
+#: inc/views/metaboxes/sitemaps-metabox.php:302
 msgid "Add site logo?"
 msgstr "Site logosu eklesin mi?"
 
-#: inc/views/metaboxes/sitemaps-metabox.php:286
+#: inc/views/metaboxes/sitemaps-metabox.php:285
 msgid "Style Sitemap?"
 msgstr "Site Haritası biçimlendirilsin mi?"
 
@@ -1036,7 +1058,7 @@ msgstr "Site haritası oluşturma önbelleği etkinleştirilsin mi??"
 msgid "Enable automated Schema.org output cache?"
 msgstr "Otomatik Schema.org çıktı önbelleğini etkinleştir?"
 
-#: inc/views/metaboxes/sitemaps-metabox.php:279
+#: inc/views/metaboxes/sitemaps-metabox.php:278
 msgid "Enable styling"
 msgstr "Stili Etkinleştir"
 
@@ -1092,6 +1114,10 @@ msgctxt "The feed can be found %s."
 msgid "here"
 msgstr "burada"
 
+#. Description of the plugin
+msgid "An automated, advanced, accessible, unbranded and extremely fast SEO solution for your WordPress website."
+msgstr "Herhangi bir WordPress web sitesi için otomatik, gelişmiş, erişilebilir, markasız ve son derece hızlı bir SEO çözümü."
+
 #: inc/views/metaboxes/schema-metabox.php:82
 msgid "Breadcrumb trails indicate page positions in the site's hierarchy. Using the following option will show the hierarchy within the search results when available."
 msgstr "Bağlantı haritası, sitenin hiyerarşisindeki sayfa konumlarını gösterir. Aşağıdaki seçeneği kullanmak, mevcut olduğunda arama sonuçlarında hiyerarşiyi gösterir."
@@ -1137,8 +1163,8 @@ msgstr "Başlık Önek Seçenekleri"
 msgid "Example Category"
 msgstr "Örnek Kategori"
 
-#: inc/views/metaboxes/title-metabox.php:71
 #: inc/views/metaboxes/homepage-metabox.php:39
+#: inc/views/metaboxes/title-metabox.php:71
 msgid "Additions"
 msgstr "Ekler"
 
@@ -1172,7 +1198,7 @@ msgstr "Yandex Web Yöneticisi Doğrulama Kodu"
 
 #. translators: %s = <code>rel</code>
 #: inc/views/metaboxes/general-metabox.php:313
-msgid "Add %s link tags to the Home Page?"
+msgid "Add %s link tags to the homepage?"
 msgstr "Ana sayfaya %s bağlantı etiketi eklensin mi?"
 
 #: inc/views/metaboxes/social-metabox.php:64
@@ -1196,7 +1222,7 @@ msgstr "Robots"
 msgid "Automated Title Settings"
 msgstr "Otomatik Başlık Ayarları"
 
-#: inc/classes/doing-it-right.class.php:1801
+#: inc/classes/doing-it-right.class.php:1802
 msgctxt "But there are..."
 msgid "But"
 msgstr "Fakat"
@@ -1216,17 +1242,17 @@ msgid "This tells search engines not to follow links on this %s."
 msgstr "Arama motorlarına bu %s üzerindeki bağlantıları izlememesini söyler."
 
 #. translators: %s = But or And
-#: inc/classes/doing-it-right.class.php:927
+#: inc/classes/doing-it-right.class.php:928
 msgid "%s the Title contains the Blogname multiple times."
 msgstr "%s Başlık, Blog Adını birçok kez içeriyor."
 
 #. translators: 1: But or And, 2: Current taxonomy term plural label
-#: inc/classes/doing-it-right.class.php:1180
+#: inc/classes/doing-it-right.class.php:1181
 msgid "%1$s indexing for %2$s have been discouraged."
 msgstr "%1$s %2$s bağlantılarının endekslenmesinden vazgeçildi."
 
 #. translators: 1: Title, 2: on, 3: Blogname
-#: inc/classes/generate-description.class.php:684
+#: inc/classes/generate-description.class.php:683
 msgid "%1$s %2$s %3$s"
 msgstr "%1$s %2$s %3$s"
 
@@ -1247,18 +1273,18 @@ msgstr "Ana sayfaya her ikinci veya daha sonraki sayfaya %s uygulayın."
 msgid "Home Page Pagination Robots Settings"
 msgstr "Ana Sayfa Sayfalama Robot Ayarları"
 
-#: inc/classes/doing-it-right.class.php:1802
+#: inc/classes/doing-it-right.class.php:1803
 msgctxt "And there are..."
 msgid "And"
 msgstr "Ve"
 
 #. translators: 1: But or And, 2: Current taxonomy term plural label
-#: inc/classes/doing-it-right.class.php:1520
+#: inc/classes/doing-it-right.class.php:1521
 msgid "%1$s archiving for %2$s have been discouraged."
 msgstr "%1$s %2$s için arşivleme önerilmez."
 
 #. translators: 1: But or And, 2: Current taxonomy term plural label
-#: inc/classes/doing-it-right.class.php:1403
+#: inc/classes/doing-it-right.class.php:1404
 msgid "%1$s following of links for %2$s have been discouraged."
 msgstr "%1$s %2$s için bağlantılarının izlenmesi vazgeçildi."
 
@@ -1270,12 +1296,6 @@ msgstr "ilgiliprofil"
 #: inc/views/inpost/seo-settings-singular.php:190
 msgid "This tells search engines not to show this %s in their search results."
 msgstr "Arama motorlarına bu %syı arama sonuçlarında gösterilmemesini söyler."
-
-#. translators: 1: Option, 2: Post Type
-#: inc/views/metaboxes/social-metabox.php:325
-#: inc/views/metaboxes/social-metabox.php:329
-msgid "Add %1$s to %2$s?"
-msgstr "%2$sa %1$s eklensin mi?"
 
 #: inc/views/metaboxes/robots-metabox.php:21
 msgctxt "...for the entire site"
@@ -1349,12 +1369,12 @@ msgstr "Pinterest doğrulama kodunu alın."
 msgid "Pinterest Analytics Verification Code"
 msgstr "Pinterest Analytics Doğrulama Kodu"
 
-#: inc/views/inpost/seo-settings-singular.php:31
 #: inc/views/inpost/seo-settings-tt.php:75
+#: inc/views/inpost/seo-settings-singular.php:31
 msgid "Doing it Right"
 msgstr "SEO Kontrolü"
 
-#: inc/classes/render.class.php:1178
+#: inc/classes/render.class.php:1200
 msgid "by Sybre Waaijer"
 msgstr "Sybre Waaijer tarafından"
 
@@ -1389,16 +1409,16 @@ msgid "Note: Only use this option if you are aware of its SEO effects."
 msgstr "Not: Sadece SEO etkilerinin farkındaysanız bu seçeneği kullanın."
 
 #. translators: %d = page number. Front-end output.
-#: inc/classes/deprecated.class.php:314
+#: inc/classes/deprecated.class.php:315
 msgid "Page %d"
 msgstr "Sayfa %d"
 
-#: inc/classes/generate-title.class.php:1114
+#: inc/classes/generate-title.class.php:1116
 #: inc/classes/admin-init.class.php:576
 msgid "Private: %s"
 msgstr "Özel: %s"
 
-#: inc/classes/generate-title.class.php:1099
+#: inc/classes/generate-title.class.php:1101
 #: inc/classes/admin-init.class.php:578
 msgid "Protected: %s"
 msgstr "Korumalı: %s"
@@ -1407,32 +1427,32 @@ msgstr "Korumalı: %s"
 msgid "Sybre Waaijer"
 msgstr "Sybre Waaijer"
 
-#: inc/views/metaboxes/sitemaps-metabox.php:245
+#: inc/views/metaboxes/sitemaps-metabox.php:244
 msgid "By default this will happen at most once an hour."
 msgstr "Varsayılan olarak bu en fazla bir saatte bir gerçekleşir."
 
-#: inc/views/metaboxes/sitemaps-metabox.php:244
+#: inc/views/metaboxes/sitemaps-metabox.php:243
 msgid "Notifying search engines of a sitemap change is helpful to get your content indexed as soon as possible."
 msgstr "Site haritasındaki değişikliklerin arama motorlarına bildirilmesi, içeriğinizin mümkün olan en kısa sürede dizine eklenmesine yardımcı olur."
 
-#: inc/views/metaboxes/sitemaps-metabox.php:242
+#: inc/views/metaboxes/sitemaps-metabox.php:241
 msgid "Ping Settings"
 msgstr "Ping Ayarları"
 
-#: inc/views/metaboxes/sitemaps-metabox.php:208
+#: inc/views/metaboxes/sitemaps-metabox.php:207
 msgid "The modified time suggests to search engines where to look for content changes. It has no impact on the SEO value unless you drastically change pages or posts. It then depends on how well your content is constructed."
 msgstr "Değiştirilen zaman, içerik değişikliklerinde arama motorlarına nereye bakılacağını önerir. Sayfaları veya yazıları önemli ölçüde değiştirmediğiniz sürece SEO değeri üzerinde hiçbir etkisi yoktur. Daha sonra içeriğinizin ne kadar iyi yapılandırıldığına bağlıdır."
 
-#: inc/views/metaboxes/sitemaps-metabox.php:206
+#: inc/views/metaboxes/sitemaps-metabox.php:205
 msgid "Timestamps Settings"
 msgstr "Zaman Damgası Ayarları"
 
-#: inc/views/metaboxes/sitemaps-metabox.php:200
+#: inc/views/metaboxes/sitemaps-metabox.php:199
 msgctxt "%s = here"
 msgid "The robots.txt file can be found %s."
 msgstr "Robots.txt dosyası %s bulunabilir."
 
-#: inc/views/metaboxes/sitemaps-metabox.php:184
+#: inc/views/metaboxes/sitemaps-metabox.php:183
 msgid "Add sitemap location in robots.txt"
 msgstr "Robots.txt dosyasında site haritasının konumunu ekleyin"
 
@@ -1448,7 +1468,7 @@ msgstr "Robots.txt dosyası, arama motorlarının aradığı ilk şeydir. Robots
 msgid "Robots.txt Settings"
 msgstr "Robots.txt Ayarları"
 
-#: inc/views/metaboxes/sitemaps-metabox.php:198
+#: inc/views/metaboxes/sitemaps-metabox.php:197
 msgid "View robots.txt"
 msgstr "Robots.txt dosyasını görüntüle"
 
@@ -1456,7 +1476,7 @@ msgstr "Robots.txt dosyasını görüntüle"
 msgid "View sitemap"
 msgstr "Site Haritasını görüntüle"
 
-#: inc/views/metaboxes/sitemaps-metabox.php:250
+#: inc/views/metaboxes/sitemaps-metabox.php:249
 msgid "Notify Search Engines"
 msgstr "Arama Motorlarına Bildir"
 
@@ -1488,7 +1508,7 @@ msgstr "Not: Düz kalıcı bağlantı yapısını kullanıyorsunuz."
 
 #: inc/views/metaboxes/sitemaps-metabox.php:101
 #: inc/views/metaboxes/sitemaps-metabox.php:159
-#: inc/views/metaboxes/sitemaps-metabox.php:198
+#: inc/views/metaboxes/sitemaps-metabox.php:197
 msgctxt "The sitemap can be found %s."
 msgid "here"
 msgstr "burada"
@@ -1502,11 +1522,11 @@ msgid "The SEO Framework"
 msgstr "SEO Framework"
 
 #. translators: %s = Google
-#: inc/views/metaboxes/sitemaps-metabox.php:262
+#: inc/views/metaboxes/sitemaps-metabox.php:261
 msgid "Notify %s about sitemap changes?"
 msgstr "Site haritası değişiklikleriyle ilgili %s bilgilendirilsin mi?"
 
-#: inc/views/metaboxes/sitemaps-metabox.php:189
+#: inc/views/metaboxes/sitemaps-metabox.php:188
 msgid "Add sitemap location in robots?"
 msgstr "Robotlarda site haritasının yeri eklensin mi?"
 
@@ -1515,8 +1535,8 @@ msgid "Output Sitemap?"
 msgstr "Site Haritası Oluşturulsun mu?"
 
 #. translators: %s = An XML tag example
-#: inc/views/metaboxes/sitemaps-metabox.php:215
-#: inc/views/metaboxes/sitemaps-metabox.php:233
+#: inc/views/metaboxes/sitemaps-metabox.php:214
+#: inc/views/metaboxes/sitemaps-metabox.php:232
 msgid "Add %s to the sitemap?"
 msgstr "Site haritasına %s eklensin mi?"
 
@@ -1594,18 +1614,18 @@ msgstr "Bazı arama motorları, sayfalarınızın içeriği arasındaki ilişkil
 msgid "Link Relationship Settings"
 msgstr "Bağlantı İlişki Ayarları"
 
-#: inc/views/metaboxes/social-metabox.php:317
+#: inc/views/metaboxes/social-metabox.php:316
 msgid "Post Date Settings"
 msgstr "Yazı Tarihi Ayarları"
 
 #. translators: %s = <code>rel</code>
 #: inc/views/metaboxes/general-metabox.php:309
-msgid "Add %s link tags to Archives?"
+msgid "Add %s link tags to archives?"
 msgstr "Arşivlere %s bağlantı etiketleri eklensin mi?"
 
 #. translators: %s = <code>rel</code>
 #: inc/views/metaboxes/general-metabox.php:305
-msgid "Add %s link tags to Posts and Pages?"
+msgid "Add %s link tags to posts and pages?"
 msgstr "%s bağlantı etiketleri Yazılar ve Sayfalara eklensin mi?"
 
 #: inc/views/metaboxes/social-metabox.php:313
@@ -1677,7 +1697,7 @@ msgid "Default Facebook Integration Settings"
 msgstr "Varsayılan Facebook Bütünleştirme Ayarları"
 
 #: inc/views/metaboxes/social-metabox.php:77
-msgid "Facebook, Twitter, Pinterest and many other social sites make use of these tags."
+msgid "Facebook, Twitter, Pinterest and many other social sites make use of these meta tags."
 msgstr "Facebook, Twitter, Pinterest ve diğer birçok sosyal medya sitesi bu etiketleri kullanmaktadır."
 
 #: inc/views/metaboxes/social-metabox.php:90
@@ -1696,7 +1716,7 @@ msgstr "https://www.facebook.com/YourPersonalProfile"
 #. translators: %s = Facebook
 #: inc/views/metaboxes/social-metabox.php:92
 #: inc/views/metaboxes/social-metabox.php:104
-msgid "Output various tags targeted at %s."
+msgid "Output various meta tags targeted at %s."
 msgstr "%s'ta hedeflenen çeşitli etiketleri oluştur."
 
 #: inc/views/metaboxes/social-metabox.php:66
@@ -1719,10 +1739,10 @@ msgstr "Yazı Tarihleri"
 msgid "Note: If any of these options are unchecked, but are checked on the home page, they will be outputted regardless."
 msgstr "Not: Bu seçeneklerden herhangi biri işaretlenmemişse, ancak ana sayfada kontrol işaretlenmişse, bunlar bağımsız olarak oluşturulacaktır."
 
-#: inc/views/metaboxes/description-metabox.php:17
-#: inc/views/metaboxes/homepage-metabox.php:173
-#: inc/views/inpost/seo-settings-singular.php:117
 #: inc/views/inpost/seo-settings-tt.php:116
+#: inc/views/inpost/seo-settings-singular.php:117
+#: inc/views/metaboxes/homepage-metabox.php:173
+#: inc/views/metaboxes/description-metabox.php:17
 msgid "The meta description can be used to determine the text used under the title on search engine results pages."
 msgstr "Meta açıklama, arama motoru sonuçları sayfalarında başlık altında kullanılan metni belirlemek için kullanılabilir."
 
@@ -1737,10 +1757,6 @@ msgstr "Sayfada kontrol edildi"
 #: inc/views/metaboxes/homepage-metabox.php:298
 msgid "View Home Page Settings"
 msgstr "Ana Sayfa Ayarlarını Görüntüle"
-
-#: inc/views/metaboxes/social-metabox.php:314
-msgid "Home Page"
-msgstr "Ana Sayfa"
 
 #: inc/views/metaboxes/robots-metabox.php:102
 msgid "Indexing the second or later page of any archive might cause duplication errors. Search engines look down upon them; therefore, it's recommended to disable indexing of those pages."
@@ -1778,9 +1794,9 @@ msgid "Apply %1$s to %2$s Archives?"
 msgstr "%2$s Arşivlerine %1$s uygulansın mı?"
 
 #: inc/classes/inpost.class.php:288 inc/views/metaboxes/social-metabox.php:29
-#: inc/views/metaboxes/title-metabox.php:66
 #: inc/views/metaboxes/homepage-metabox.php:34
 #: inc/views/metaboxes/sitemaps-metabox.php:29
+#: inc/views/metaboxes/title-metabox.php:66
 #: inc/views/metaboxes/robots-metabox.php:61
 msgid "General"
 msgstr "Genel"
@@ -1830,16 +1846,16 @@ msgid "Example Post Title"
 msgstr "Örnek Yazı Başlığı"
 
 #: inc/views/metaboxes/title-metabox.php:143
-msgid "The Home Page has a specific option."
+msgid "The homepage has a specific option."
 msgstr "Ana Sayfa'nın belirli bir seçeneği vardır."
 
-#: inc/views/metaboxes/title-metabox.php:162
 #: inc/views/metaboxes/homepage-metabox.php:252
+#: inc/views/metaboxes/title-metabox.php:162
 msgid "Right:"
 msgstr "Sağ:"
 
-#: inc/views/metaboxes/title-metabox.php:155
 #: inc/views/metaboxes/homepage-metabox.php:242
+#: inc/views/metaboxes/title-metabox.php:155
 msgid "Left:"
 msgstr "Sol:"
 
@@ -1849,7 +1865,7 @@ msgid "Category"
 msgstr "Kategori"
 
 #: inc/views/metaboxes/title-metabox.php:180
-msgid "If the title consists of two parts (original title, pagination, and blogname), then the separator will go in-between them."
+msgid "If the title consists of multiple parts (original title, pagination, and blogname), then the separator will go in-between them."
 msgstr "Başlık iki bölümden (orijinal başlık, sayfalandırma ve blog adı) oluşuyorsa, ayırıcı aralarına girer."
 
 #. translators: %s = Post Type
@@ -1863,9 +1879,9 @@ msgstr "%s SEO Ayarları"
 msgid "Characters Used: %s"
 msgstr "Kullanılan Karakterler: %s"
 
-#: inc/views/metaboxes/homepage-metabox.php:170
-#: inc/views/inpost/seo-settings-singular.php:113
 #: inc/views/inpost/seo-settings-tt.php:112
+#: inc/views/inpost/seo-settings-singular.php:113
+#: inc/views/metaboxes/homepage-metabox.php:170
 msgid "Meta Description"
 msgstr "Meta Açıklaması"
 
@@ -1905,135 +1921,135 @@ msgstr "Bu %s'yı yerel aramadan hariç tut."
 
 #. translators: Taxonomy term archive title. 1: Taxonomy singular name, 2:
 #. Current taxonomy term
-#: inc/classes/generate-title.class.php:703
-#: inc/classes/generate-title.class.php:765
+#: inc/classes/generate-title.class.php:706
+#: inc/classes/generate-title.class.php:768
 msgid "%1$s: %2$s"
 msgstr "%1$s: %2$s"
 
-#: inc/classes/generate-title.class.php:754
+#: inc/classes/generate-title.class.php:757
 msgctxt "post format archive title"
 msgid "Chats"
 msgstr "Sohbetler"
 
 #. translators: Post type archive title. 1: Post type name
-#: inc/classes/generate-title.class.php:759
+#: inc/classes/generate-title.class.php:762
 msgid "Archives: %s"
 msgstr "Arşivler: %s"
 
-#: inc/classes/generate-title.class.php:752
+#: inc/classes/generate-title.class.php:755
 msgctxt "post format archive title"
 msgid "Audio"
 msgstr "Ses"
 
-#: inc/classes/generate-title.class.php:748
+#: inc/classes/generate-title.class.php:751
 msgctxt "post format archive title"
 msgid "Links"
 msgstr "Bağlantılar"
 
-#: inc/classes/generate-title.class.php:750
+#: inc/classes/generate-title.class.php:753
 msgctxt "post format archive title"
 msgid "Statuses"
 msgstr "Durumlar"
 
-#: inc/classes/generate-title.class.php:744
+#: inc/classes/generate-title.class.php:747
 msgctxt "post format archive title"
 msgid "Videos"
 msgstr "Videolar"
 
-#: inc/classes/generate-title.class.php:746
+#: inc/classes/generate-title.class.php:749
 msgctxt "post format archive title"
 msgid "Quotes"
 msgstr "Alıntılar"
 
-#: inc/classes/generate-title.class.php:742
+#: inc/classes/generate-title.class.php:745
 msgctxt "post format archive title"
 msgid "Images"
 msgstr "Görseller"
 
-#: inc/classes/generate-title.class.php:740
+#: inc/classes/generate-title.class.php:743
 msgctxt "post format archive title"
 msgid "Galleries"
 msgstr "Galeriler"
 
-#: inc/classes/generate-title.class.php:738
+#: inc/classes/generate-title.class.php:741
 msgctxt "post format archive title"
 msgid "Asides"
 msgstr "Yan sütunlar"
 
-#: inc/classes/generate-title.class.php:732
+#: inc/classes/generate-title.class.php:735
 msgctxt "daily archives date format"
 msgid "F j, Y"
 msgstr "F j, Y"
 
 #. translators: Daily archive title. 1: Date
-#: inc/classes/generate-title.class.php:734
+#: inc/classes/generate-title.class.php:737
 msgid "Day: %s"
 msgstr "Gün: %s"
 
-#: inc/classes/generate-title.class.php:728
+#: inc/classes/generate-title.class.php:731
 msgctxt "monthly archives date format"
 msgid "F Y"
 msgstr "F Y"
 
 #. translators: Monthly archive title. 1: Month name and year
-#: inc/classes/generate-title.class.php:730
+#: inc/classes/generate-title.class.php:733
 msgid "Month: %s"
 msgstr "Ay: %s"
 
-#: inc/classes/generate-title.class.php:724
+#: inc/classes/generate-title.class.php:727
 msgctxt "yearly archives date format"
 msgid "Y"
 msgstr "Y"
 
 #. translators: Yearly archive title. 1: Year
-#: inc/classes/generate-title.class.php:726
+#: inc/classes/generate-title.class.php:729
 msgid "Year: %s"
 msgstr "Yıl: %s"
 
 #. translators: Author archive title. 1: Author name
-#: inc/classes/generate-title.class.php:721
+#: inc/classes/generate-title.class.php:724
 msgid "Author: %s"
 msgstr "Yazar: %s"
 
 #. translators: Tag archive title. 1: Tag name
-#: inc/classes/generate-title.class.php:697
-#: inc/classes/generate-title.class.php:717
+#: inc/classes/generate-title.class.php:700
+#: inc/classes/generate-title.class.php:720
 msgid "Tag: %s"
 msgstr "Etiket: %s"
 
 #. translators: Category archive title. 1: Category name
-#: inc/classes/generate-title.class.php:693
-#: inc/classes/generate-title.class.php:713
+#: inc/classes/generate-title.class.php:696
+#: inc/classes/generate-title.class.php:716
 msgid "Category: %s"
 msgstr "Kategori: %s"
 
-#: inc/classes/generate-title.class.php:707
-#: inc/classes/generate-title.class.php:768
+#: inc/classes/generate-title.class.php:710
+#: inc/classes/generate-title.class.php:771
 msgid "Archives"
 msgstr "Arşivler"
 
-#: inc/classes/generate-description.class.php:680
+#: inc/classes/generate-description.class.php:679
 msgctxt "Placement. e.g. Post Title \"on\" Blog Name"
 msgid "on"
 msgstr ","
 
 #. translators:* %s = post type name
-#: inc/classes/doing-it-right.class.php:1636
-#: inc/classes/doing-it-right.class.php:1680
+#: inc/classes/doing-it-right.class.php:1637
+#: inc/classes/doing-it-right.class.php:1681
 msgid "%s is not being indexed. This means no SEO values have to be set."
 msgstr "%s endekslenmiyor. Bu, SEO değerinin ayarlanmasına gerek olmadığı anlamına gelir."
 
 #. translators:* %s = post type name
-#: inc/classes/doing-it-right.class.php:1591
+#: inc/classes/doing-it-right.class.php:1592
 msgid "%s isn't being redirected."
 msgstr "%s yeniden yönlendirilmiyor."
 
 #. translators: %s = But or And
-#: inc/classes/doing-it-right.class.php:1547
+#: inc/classes/doing-it-right.class.php:1548
 msgid "%s the blog isn't set to public. This means WordPress allows the blog to be archived regardless."
 msgstr "%s blog herkese açık değil. Bu, WordPress'in blogun bağımsız olarak arşivlenmesine izin verdiği anlamına gelir."
 
-#: inc/classes/doing-it-right.class.php:1798
+#: inc/classes/doing-it-right.class.php:1799
 msgctxt "no-Archive"
 msgid "A"
 msgstr "A"
@@ -2043,49 +2059,49 @@ msgid "Failed to fetch post ID."
 msgstr "Yazı no alınamadı."
 
 #. translators:* %s = post type name
-#: inc/classes/doing-it-right.class.php:1632
-#: inc/classes/doing-it-right.class.php:1663
+#: inc/classes/doing-it-right.class.php:1633
+#: inc/classes/doing-it-right.class.php:1664
 msgid "%s is being redirected. This means no SEO values have to be set."
 msgstr "%s yeniden yönlendiriliyor. Bu, SEO değerinin ayarlanmasına gerek olmadığı anlamına gelir."
 
-#: inc/classes/doing-it-right.class.php:1795
+#: inc/classes/doing-it-right.class.php:1796
 msgctxt "Description"
 msgid "D"
 msgstr "A"
 
-#: inc/classes/doing-it-right.class.php:1794
+#: inc/classes/doing-it-right.class.php:1795
 msgctxt "Title"
 msgid "T"
 msgstr "B"
 
-#: inc/classes/doing-it-right.class.php:1796
+#: inc/classes/doing-it-right.class.php:1797
 msgctxt "no-Index"
 msgid "I"
 msgstr "İ"
 
-#: inc/classes/doing-it-right.class.php:1797
+#: inc/classes/doing-it-right.class.php:1798
 msgctxt "no-Follow"
 msgid "F"
 msgstr "T"
 
-#: inc/classes/doing-it-right.class.php:1799
+#: inc/classes/doing-it-right.class.php:1800
 msgctxt "Redirect"
 msgid "R"
 msgstr "Y"
 
-#: inc/classes/generate-title.class.php:919
+#: inc/classes/generate-title.class.php:922
 msgid "Untitled"
 msgstr "Başlıksız"
 
-#: inc/classes/doing-it-right.class.php:1785
+#: inc/classes/doing-it-right.class.php:1786
 msgid "Description:"
 msgstr "Açıklama:"
 
-#: inc/classes/doing-it-right.class.php:1789
+#: inc/classes/doing-it-right.class.php:1790
 msgid "Redirect:"
 msgstr "Yeniden Yönlendir:"
 
-#: inc/classes/doing-it-right.class.php:1793
+#: inc/classes/doing-it-right.class.php:1794
 msgctxt "Generated"
 msgid "G"
 msgstr "G"
@@ -2098,30 +2114,30 @@ msgstr "Çok uzun"
 msgid "Far too short"
 msgstr "Çok kısa"
 
-#: inc/classes/doing-it-right.class.php:1791
+#: inc/classes/doing-it-right.class.php:1792
 msgid "Generated: Automatically generated."
 msgstr "Oluşturuldu: Otomatik olarak oluşturuldu."
 
 #. translators: 1: Word, 2: Occurrences
-#: inc/classes/doing-it-right.class.php:1110
+#: inc/classes/doing-it-right.class.php:1111
 msgid "%1$s is used %2$d times."
 msgstr "%1$s %2$d kere kullanıldı."
 
 #. translators: %s = But or And
-#: inc/classes/doing-it-right.class.php:1429
+#: inc/classes/doing-it-right.class.php:1430
 msgid "%s the blog isn't set to public. This means WordPress allows the links to be followed regardless."
 msgstr "%s blog herkese açık değil. Bu, WordPress'in bağlantıların takip edilmesine izin verdiği anlamına gelir."
 
-#: inc/classes/doing-it-right.class.php:1359
+#: inc/classes/doing-it-right.class.php:1360
 msgid "%s links aren't being followed."
 msgstr "%s bağlantıları takip edilmiyor."
 
 #. translators: %s = But or And
-#: inc/classes/doing-it-right.class.php:1377
+#: inc/classes/doing-it-right.class.php:1378
 msgid "%s you've discouraged the following of links for the whole site."
 msgstr "%s you've discouraged the following of links for the whole site."
 
-#: inc/classes/doing-it-right.class.php:1365
+#: inc/classes/doing-it-right.class.php:1366
 msgid "%s links are being followed."
 msgstr "%s bağlantıları takip ediliyor."
 
@@ -2130,41 +2146,41 @@ msgid "Length is good."
 msgstr "Uzunluk iyi."
 
 #. Translators: %s = Post / Page / Category, etc.
-#: inc/classes/doing-it-right.class.php:1148
+#: inc/classes/doing-it-right.class.php:1149
 msgid "%s is being indexed."
 msgstr "%s dizine ekleniyor."
 
-#: inc/classes/doing-it-right.class.php:1495
+#: inc/classes/doing-it-right.class.php:1496
 msgid "%s you've discouraged archiving for the whole site."
 msgstr "Tüm site için %s arşivlemeyi kaldırdınız."
 
 #. translators: %s = But or And
-#: inc/classes/doing-it-right.class.php:1212
+#: inc/classes/doing-it-right.class.php:1213
 msgid "%s the blog isn't set to public. This means WordPress discourages indexing."
 msgstr "%s blog herkese açık değil. Bu, WordPress'in endekslenmeden vazgeçtiği anlamına gelir."
 
 #. translators: %s = But or And
-#: inc/classes/doing-it-right.class.php:1241
+#: inc/classes/doing-it-right.class.php:1242
 msgid "%s there are no posts in this term; therefore, indexing has been discouraged."
 msgstr "%s terimle ilgili yazı yok; bu nedenle endekslemeden vazgeçildi."
 
-#: inc/classes/doing-it-right.class.php:1788
+#: inc/classes/doing-it-right.class.php:1789
 msgid "Archive:"
 msgstr "Arşiv:"
 
-#: inc/classes/doing-it-right.class.php:1787
+#: inc/classes/doing-it-right.class.php:1788
 msgid "Follow:"
 msgstr "Takip:"
 
-#: inc/classes/doing-it-right.class.php:1157
+#: inc/classes/doing-it-right.class.php:1158
 msgid "But you've discouraged indexing for the whole site."
 msgstr "Fakat tüm site için dizine eklemeyi kaldırdınız."
 
-#: inc/classes/doing-it-right.class.php:1786
+#: inc/classes/doing-it-right.class.php:1787
 msgid "Index:"
 msgstr "İndeks:"
 
-#: inc/classes/doing-it-right.class.php:1784
+#: inc/classes/doing-it-right.class.php:1785
 msgid "Title:"
 msgstr "Başlık:"
 
@@ -2177,7 +2193,7 @@ msgid "Title Settings"
 msgstr "Başlık Ayarları"
 
 #: inc/classes/admin-pages.class.php:251
-msgid "Home Page Settings"
+msgid "Homepage Settings"
 msgstr "Ana Sayfa Ayarları"
 
 #: inc/classes/admin-pages.class.php:240
@@ -2189,9 +2205,9 @@ msgid "Social Meta Settings"
 msgstr "Sosyal Meta Ayarları"
 
 #: inc/classes/admin-pages.class.php:284
-#: inc/views/metaboxes/homepage-metabox.php:302
-#: inc/views/inpost/seo-settings-singular.php:171
 #: inc/views/inpost/seo-settings-tt.php:135
+#: inc/views/inpost/seo-settings-singular.php:171
+#: inc/views/metaboxes/homepage-metabox.php:302
 msgid "Robots Meta Settings"
 msgstr "Robots Meta Ayarları"
 

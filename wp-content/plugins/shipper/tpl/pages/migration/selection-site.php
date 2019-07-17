@@ -8,12 +8,6 @@
 ?>
 <div class="sui-box shipper-select-site">
 	<div class="sui-box-body">
-		<div>
-			<a href="<?php echo esc_url( remove_query_arg( 'type' ) ); ?>" class="shipper-button-back shipper-work-activator">
-				<i class="sui-icon-arrow-left" aria-hidden="true"></i>
-				<span><?php esc_html_e( 'Go back', 'shipper' ); ?></span>
-			</a>
-		</div>
 		<div class="shipper-content">
 
 			<div class="shipper-header">
@@ -33,57 +27,30 @@
 			?>
 			</p>
 
-			<form action="<?php echo esc_url( add_query_arg( 'run', 'yes' ) ); ?>" method="GET">
-				<input type="hidden" name="page" value="shipper" />
-				<input type="hidden" name="type" value="<?php echo esc_attr( $type ); ?>" />
 
-				<div class="shipper-form">
-					<div class="shipper-form-bit">
-						<a href="#refresh-locations"
-							data-tooltip="<?php esc_attr_e( 'Reload list', 'shipper' ); ?>"
-							class="shipper-button-refresh sui-tooltip shipper-work-activator">
-							<i class="sui-icon-update" aria-hidden="true"></i>
-						</a>
-					</div>
-					<div class="shipper-form-bit shipper-selection">
-						<div class="sui-notice sui-notice-info shipper-page-notice" style="display:none">
-							<p>
-								<?php esc_html_e( 'Want to add a new destination?', 'shipper' ); ?>
-								<a href="#" class="shipper-add-website">
-									<?php esc_html_e( 'Click here', 'shipper' ); ?>
-								</a>
-								<?php esc_html_e( 'to add a destination', 'shipper' ); ?>
-							</p>
-						</div>
-						<select name="site">
-						<?php foreach ( $destinations->get_data() as $item ) { ?>
-							<?php if ( $destinations->is_current( $item ) ) { continue; } ?>
-							<option value="<?php echo esc_attr( $item['site_id'] ); ?>">
-								<?php echo esc_html( $item['domain'] ); ?>
-							</option>
-						<?php } ?>
-						</select>
-					</div><?php // .shipper-form-bit ?>
+			<?php
+				$this->render(
+					'modals/selection',
+					array( 'modal' => 'loading', 'type' => $type )
+				);
+				$this->render(
+					'modals/selection',
+					array( 'modal' => 'loading-error', 'type' => $type )
+				);
+				$this->render(
+					'modals/selection',
+					array( 'modal' => 'destination', 'type' => $type )
+				);
+				$this->render(
+					'modals/selection',
+					array( 'modal' => 'prepare', 'type' => $type )
+				);
+				$this->render(
+					'modals/selection',
+					array( 'modal' => 'install-fail', 'type' => $type )
+				);
+			?>
 
-					<div class="shipper-form-bit">
-						<button type="submit" class="sui-button sui-button-primary">
-							<i class="sui-icon-arrow-right" aria-hidden="true"></i>
-							<span><?php esc_html_e( 'Migrate', 'shipper' ); ?></span>
-						</button>
-					</div><?php // .shipper-form-bit ?>
-				</div><?php // .shipper-form ?>
-
-			</form>
-
-		<?php if ( 'export' !== $type ) { ?>
-			<div class="sui-notice sui-notice-info shipper-page-notice">
-				<p>
-					<?php esc_html_e( 'Note, Shipper can\'t import local development sites.', 'shipper' ); ?>
-					<?php esc_html_e( 'To migrate a local site to a staging or live server, initiate the migration from the local site itself.', 'shipper' ); ?>
-
-				</p>
-			</div>
-		<?php } ?>
 
 			<?php echo Shipper_Helper_Assets::get_custom_hero_image_markup(); ?>
 		</div><?php // .shipper-content ?>

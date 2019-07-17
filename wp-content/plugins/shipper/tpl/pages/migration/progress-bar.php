@@ -29,6 +29,9 @@ $migration = new Shipper_Model_Stored_Migration;
 			<?php esc_html_e( 'Import in progress', 'shipper' ); ?>
 		<?php } ?>
 		</h2>
+		<?php
+			$this->render( 'tags/domains-tag' );
+		?>
 	</div>
 
 	<div class="sui-progress-block sui-progress-can-close">

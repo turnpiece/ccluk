@@ -5,6 +5,7 @@
 
 namespace WP_Defender\Module\Hardener\Component;
 
+use WP_Defender\Module\Hardener\Model\Settings;
 use WP_Defender\Module\Hardener\Rule;
 
 class PHP_Version extends Rule {
@@ -13,6 +14,12 @@ class PHP_Version extends Rule {
 
 	function getDescription() {
 		$this->renderPartial( 'rules/php-version' );
+	}
+
+	function getSubDescription() {
+		$settings = Settings::instance();
+
+		return sprintf( __( "PHP versions older than %s are no longer supported. For security and stability we strongly recommend you upgrade your PHP version to version %s or newer as soon as possible. ", wp_defender()->domain ), $settings->min_php_version, $settings->min_php_version );
 	}
 
 	/**

@@ -3,15 +3,16 @@
         <div class="iplockout">
             <div class="sui-header">
                 <h1 class="sui-header-title"><?php _e( "IP Lockout", wp_defender()->domain ) ?></h1>
-	            <?php if ( wp_defender()->hideDocLinks === false ): ?>
+				<?php if ( wp_defender()->hideDocLinks === false ): ?>
                     <div class="sui-actions-right">
                         <div class="sui-actions-right">
-                            <a href="https://premium.wpmudev.org/docs/wpmu-dev-plugins/defender/#ip-lockouts" target="_blank" class="sui-button sui-button-ghost">
+                            <a href="https://premium.wpmudev.org/docs/wpmu-dev-plugins/defender/#ip-lockouts"
+                               target="_blank" class="sui-button sui-button-ghost">
                                 <i class="sui-icon-academy"></i> <?php _e( "View Documentation", wp_defender()->domain ) ?>
                             </a>
                         </div>
                     </div>
-	            <?php endif; ?>
+				<?php endif; ?>
             </div>
             <div class="sui-box sui-summary <?php echo \WP_Defender\Behavior\Utils::instance()->getSummaryClass() ?>"
                  id="lockoutSummary">
@@ -92,7 +93,7 @@
 				<?php echo $contents ?>
             </div>
         </div>
-		<?php if ( wp_defender()->changeFooter && ! empty( wp_defender()->footerText ) ): ?>
+		<?php if ( wp_defender()->changeFooter ): ?>
             <div class="sui-footer"><?php echo wp_defender()->footerText ?></div>
 		<?php else: ?>
             <div class="sui-footer">Made with <i class="sui-icon-heart"></i> by WPMU DEV</div>

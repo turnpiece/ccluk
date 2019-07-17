@@ -67,9 +67,6 @@
                         </div>
                         <div data-panes>
                             <div class="sui-tab-boxed <?php echo $settings->login_protection_lockout_ban == 0 ? 'active' : null ?>">
-                                <p class="sui-description">
-									<?php _e( "Choose a timeframe to temporarily lock out blocked the IP for.", wp_defender()->domain ) ?>
-                                </p>
                                 <div class="sui-row">
                                     <div class="sui-col-md-3">
                                         <input value="<?php echo $settings->login_protection_lockout_duration ?>"

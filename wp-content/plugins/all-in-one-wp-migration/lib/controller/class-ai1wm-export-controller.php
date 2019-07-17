@@ -164,24 +164,27 @@ class Ai1wm_Export_Controller {
 	}
 
 	public static function cleanup() {
-		// Iterate over storage directory
-		$iterator = new Ai1wm_Recursive_Directory_Iterator( AI1WM_STORAGE_PATH );
+		try {
+			// Iterate over storage directory
+			$iterator = new Ai1wm_Recursive_Directory_Iterator( AI1WM_STORAGE_PATH );
 
-		// Exclude index.php
-		$iterator = new Ai1wm_Recursive_Exclude_Filter( $iterator, array( 'index.php' ) );
+			// Exclude index.php
+			$iterator = new Ai1wm_Recursive_Exclude_Filter( $iterator, array( 'index.php' ) );
 
-		// Loop over folders and files
-		foreach ( $iterator as $item ) {
-			try {
-				if ( $item->getMTime() < ( time() - AI1WM_MAX_STORAGE_CLEANUP ) ) {
-					if ( $item->isDir() ) {
-						Ai1wm_Directory::delete( $item->getPathname() );
-					} else {
-						Ai1wm_File::delete( $item->getPathname() );
+			// Loop over folders and files
+			foreach ( $iterator as $item ) {
+				try {
+					if ( $item->getMTime() < ( time() - AI1WM_MAX_STORAGE_CLEANUP ) ) {
+						if ( $item->isDir() ) {
+							Ai1wm_Directory::delete( $item->getPathname() );
+						} else {
+							Ai1wm_File::delete( $item->getPathname() );
+						}
 					}
+				} catch ( Exception $e ) {
 				}
-			} catch ( Exception $e ) {
 			}
+		} catch ( Exception $e ) {
 		}
 	}
 }

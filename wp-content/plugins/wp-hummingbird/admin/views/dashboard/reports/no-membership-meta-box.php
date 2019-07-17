@@ -49,17 +49,18 @@
 
 <div class="sui-box-settings-row sui-upsell-row sui-padding-top">
 	<img class="sui-image sui-upsell-image"
-		 src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-graphic-upsell-reports.png' ); ?>"
-		 srcset="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-graphic-upsell-reports@2x.png' ); ?> 2x"
-		 alt="<?php esc_attr_e( 'Scheduled automated reports', 'wphb' ); ?>">
+		src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-graphic-upsell-reports.png' ); ?>"
+		srcset="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-graphic-upsell-reports@2x.png' ); ?> 2x"
+		alt="<?php esc_attr_e( 'Scheduled automated reports', 'wphb' ); ?>">
 
 	<div class="sui-upsell-notice">
 		<p>
 			<?php
 			printf(
-				/* translators: %s: WPMUDEV url */
-				__( 'Schedule automatic reports and get them emailed direct to your inbox to stay on top of potential performance issues. Get Reports as part of a WPMU DEV membership. <a href="%s" target="_blank">Try it out for free.</a>', 'wphb' ),
-				WP_Hummingbird_Utils::get_link( 'plugin', 'hummingbird_dash_reports_upsell_link' )
+				/* translators: %1$s: WPMUDEV url, %2$s: </a> */
+				esc_html__( 'Schedule automatic reports and get them emailed direct to your inbox to stay on top of potential performance issues. Get Reports as part of a WPMU DEV membership. %1$sTry it out for free.%2$s', 'wphb' ),
+				'<br><a href="' . esc_url( WP_Hummingbird_Utils::get_link( 'plugin', 'hummingbird_dash_reports_upsell_link' ) ) . '" target="_blank">',
+				'</a>'
 			);
 			?>
 		</p>

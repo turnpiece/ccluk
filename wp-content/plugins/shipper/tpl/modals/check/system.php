@@ -39,11 +39,17 @@ if ( ! empty( $status ) && empty( $errors ) ) {
 			<div class="sui-box-body shipper-system-check-body">
 
 				<div class="shipper-system-title">
+					<div class="shipper-actions-left">
+						<a href="#recheck">
+							<i class="sui-icon-update" aria-hidden="true"></i>
+						</a>
+					</div>
 					<h3 class="shipper-dialog-title"><?php esc_html_e( 'Requirements failed', 'shipper' ); ?></h3>
-					<p><?php echo wp_kses_post( sprintf(
+
+					<p><?php echo esc_html( sprintf(
 						__( '%s, we’ve uncovered a few potential issues that may cause the migration to fail. Please fix the following errors to continue using the plugin.', 'shipper' ),
 						shipper_get_user_name()
-					) ); ?></p>
+					) );; ?></p>
 				</div>
 
 				<table class="sui-table sui-accordion shipper-system-checks-list">
@@ -69,13 +75,7 @@ if ( ! empty( $status ) && empty( $errors ) ) {
 									<?php echo wp_kses_post( $check->get( 'message' ) ); ?>
 									<div class="sui-row shipper-item-actions">
 										<div class="sui-col">
-											<a href="https://premium.wpmudev.org/docs/wpmu-dev-plugins/shipper/" type="button" class="sui-button sui-button-ghost" target="_blank">
-												<i class="sui-icon-academy" aria-hidden="true"></i>
-												<?php esc_html_e( 'Documentation', 'shipper' ); ?>
-											</a>
-										</div>
-										<div class="sui-col">
-											<a href="#recheck" type="button" class="sui-button">
+											<a href="#recheck" type="button" class="sui-button sui-button-ghost">
 												<i class="sui-icon-update" aria-hidden="true"></i>
 												<?php esc_html_e( 'Re-check', 'shipper' ); ?>
 											</a>
@@ -89,7 +89,7 @@ if ( ! empty( $status ) && empty( $errors ) ) {
 				</table>
 
 				<div class="shipper-system-footer">
-					<a href="#recheck" type="button" class="sui-button sui-button-ghost">
+					<a href="#recheck" type="button" class="sui-button">
 						<i class="sui-icon-update" aria-hidden="true"></i>
 						<?php esc_attr_e( 'Re-check', 'shipper' ); ?>
 					</a>

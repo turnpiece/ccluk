@@ -26,11 +26,29 @@ class Shipper_Model_Stored_Estimate extends Shipper_Model_Stored {
 	 *
 	 * Used in templates.
 	 *
+	 * @param int $size Optional package size in bytes.
+	 *
 	 * @return string
 	 */
-	static public function get_estimated_migration_time_msg() {
+	static public function get_estimated_migration_time_msg( $size = 0 ) {
 		$me = new self;
-		return $me->get_migration_time_msg();
+		return $me->get_migration_time_msg( $size );
+	}
+
+	/**
+	 * Static message helper
+	 *
+	 * Used in templates.
+	 *
+	 * @since v1.0.3
+	 *
+	 * @param int $size Optional package size in bytes.
+	 *
+	 * @return string
+	 */
+	static public function get_estimated_migration_time_span( $size = 0 ) {
+		$me = new self;
+		return $me->get_migration_time_span( $size );
 	}
 
 	/**
@@ -45,11 +63,15 @@ class Shipper_Model_Stored_Estimate extends Shipper_Model_Stored {
 	/**
 	 * Gets migration estimated time span, in hours
 	 *
+	 * @param int $size Optional package size in bytes.
+	 *
 	 * @return array
 	 */
-	public function get_migration_time_span() {
+	public function get_migration_time_span( $size = 0 ) {
 		$time_per_b = 0.000050690110;
-		$package_size = $this->get( 'package_size', 0 );
+		$package_size = ! empty( $size ) && is_numeric( $size )
+			? (float) $size
+			: $this->get( 'package_size', 0 );
 
 		$estimate_secs = $time_per_b * $package_size;
 		$padding = $estimate_secs * 0.2;

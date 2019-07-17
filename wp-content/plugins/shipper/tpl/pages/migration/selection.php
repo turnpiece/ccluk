@@ -27,13 +27,7 @@
 	<?php $this->render( 'modals/destination' ); ?>
 
 	<?php
-		$domains = $destinations->get_data();
-	if ( 1 >= count( $domains ) ) {
-		// No sites available, can't migrate.
-		$this->render('pages/migration/selection-initial', array(
-			'destinations' => $destinations,
-		));
-	} elseif ( empty( $type ) ) {
+	if ( empty( $type ) ) {
 		// Render migration type selection.
 		$this->render('pages/migration/selection-type', array(
 			'destinations' => $destinations,

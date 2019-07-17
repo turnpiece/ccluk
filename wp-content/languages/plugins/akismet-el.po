@@ -55,7 +55,7 @@ msgstr "Akismet σημείωση ιδιωτικότητας"
 msgid "Privacy"
 msgstr "Ιδιωτικότητα"
 
-#: class.akismet.php:1423
+#: class.akismet.php:1418
 msgid "This site uses Akismet to reduce spam. <a href=\"%s\" target=\"_blank\" rel=\"nofollow noopener\">Learn how your comment data is processed</a>."
 msgstr "Αυτός ο ιστότοπος χρησιμοποιεί το Akismet για να μειώσει τα ανεπιθύμητα σχόλια. <a href=\"%s\" target=\"_blank\" rel=\"nofollow noopener\">Μάθετε πώς υφίστανται επεξεργασία τα δεδομένα των σχολίων σας</a>."
 
@@ -116,11 +116,12 @@ msgstr "Χειροκίνητη Ρύθμιση"
 msgid "On this page, you are able to update your Akismet settings and view spam stats."
 msgstr "Σε αυτή τη σελίδα, έχετε τη δυνατότητα να ενημερώσετε τις ρυθμίσεις σας Akismet και να προβάλετε στατιστικά spam."
 
-#. Description of the plugin
+#. Description of the plugin/theme
 msgid "Used by millions, Akismet is quite possibly the best way in the world to <strong>protect your blog from spam</strong>. It keeps your site protected even while you sleep. To get started: activate the Akismet plugin and then go to your Akismet Settings page to set up your API key."
 msgstr "Χρησιμοποιείτε από εκατομμύρια ιστοσελίδες, το Akismet είναι ίσως ο καλύτερος τρόπος στον κόσμο για να <strong>προστατέψετε την ιστοσελίδα σας από τα spam</strong>. Διατηρεί την ιστοσελίδα σας ασφαλή ακόμα και όταν κοιμάστε. Για να αρχίσετε: ενεργοποιήστε το πρόσθετο Akismet και στην συνέχεια πηγαίνετε στην σελίδα ρυθμίσεων του Akismet για να ρυθμίσετε το κλειδί API."
 
-#. Plugin Name of the plugin
+#. #-#-#-#-#  akismet-code.pot (Akismet Anti-Spam 4.1)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
 #: class.akismet-admin.php:114 class.akismet-admin.php:117
 msgid "Akismet Anti-Spam"
 msgstr "Akismet Anti-Spam"
@@ -414,8 +415,8 @@ msgstr "Αφαιρείται..."
 msgid "Akismet"
 msgstr "Akismet"
 
-#: views/config.php:60 class.akismet-admin.php:107 class.akismet-admin.php:239
-#: class.akismet-admin.php:658
+#: class.akismet-admin.php:107 class.akismet-admin.php:239
+#: class.akismet-admin.php:658 views/config.php:60
 msgid "Settings"
 msgstr "Ρυθμίσεις"
 
@@ -478,7 +479,7 @@ msgstr "Σε αυτή την σελίδα, μπορείτε να δείτε τα
 msgid "Akismet Configuration"
 msgstr "Ρυθμίσεις Akismet"
 
-#: views/config.php:70 class.akismet-admin.php:242
+#: class.akismet-admin.php:242 views/config.php:70
 msgid "API Key"
 msgstr "Κλειδί API"
 
@@ -486,7 +487,7 @@ msgstr "Κλειδί API"
 msgid "Enter/remove an API key."
 msgstr "Δώστε αφαιρέστε ένα API κλειδί."
 
-#: views/config.php:105 class.akismet-admin.php:243
+#: class.akismet-admin.php:243 views/config.php:105
 msgid "Comments"
 msgstr "Σχόλια"
 
@@ -498,15 +499,15 @@ msgstr "Εμφάνιζε τον αριθμό τον εγκεκριμένων σ�
 msgid "Choose to either discard the worst spam automatically or to always put all spam in spam folder."
 msgstr "Επιλέξτε να αφαιρούνται τα χειρότερα ανεπιθύμητα σχόλια αυτόματα ή πάντα να τοποθετούνται στο φάκελο ανεπιθυμήτων."
 
-#: views/config.php:128 class.akismet-admin.php:244
+#: class.akismet-admin.php:244 views/config.php:128
 msgid "Strictness"
 msgstr "Αυστηρότητα"
 
-#: views/config.php:188 class.akismet-admin.php:252
+#: class.akismet-admin.php:252 views/config.php:188
 msgid "Account"
 msgstr "Λογαριασμός"
 
-#: views/config.php:196 class.akismet-admin.php:255
+#: class.akismet-admin.php:255 views/config.php:196
 msgid "Subscription Type"
 msgstr "Τύπος συνδρομής"
 
@@ -514,7 +515,7 @@ msgstr "Τύπος συνδρομής"
 msgid "The subscription status - active, cancelled or suspended"
 msgstr "Η κατάσταση συνδρομής - ενεργή, ακυρωμένη ή σε αναστολή"
 
-#: views/config.php:203 class.akismet-admin.php:256
+#: class.akismet-admin.php:256 views/config.php:203
 msgid "Status"
 msgstr "Κατάσταση"
 
@@ -693,11 +694,11 @@ msgstr "Το Akismet σήμανε το σχόλιο ως ανεπιθύμητο 
 msgid "Akismet cleared this comment during an automatic retry."
 msgstr "Το Akismet καθάρισε το σχόλιο αυτό κατά τον αυτόματο επανέλεγχο."
 
-#: class.akismet.php:1268
+#: class.akismet.php:1263
 msgid "Please <a href=\"%1$s\">upgrade WordPress</a> to a current version, or <a href=\"%2$s\">downgrade to version 2.4 of the Akismet plugin</a>."
 msgstr "Παρακαλώ <a href=\"%1$s\">αναβαθμίστε το WordPress</a> στην τρέχουσα έκδοση, ή <a href=\"%2$s\">υποβαθμίστε στην έκδοση 2.4 του Akismet πρόσθετου</a>."
 
-#: class.akismet.php:1268
+#: class.akismet.php:1263
 msgid "Akismet %s requires WordPress %s or higher."
 msgstr "Το Akismet %s απαιτεί WordPress %s ή νεώτερο."
 
@@ -879,15 +880,15 @@ msgstr "Ενεργοποιήστε το Akismet"
 msgid "Get your API key"
 msgstr "Αποκτήστε το API κλειδί σας"
 
-#. Plugin URI of the plugin
+#. Plugin URI of the plugin/theme
 msgid "https://akismet.com/"
 msgstr "https://akismet.com/"
 
-#. Author URI of the plugin
+#. Author URI of the plugin/theme
 msgid "https://automattic.com/wordpress-plugins/"
 msgstr "https://automattic.com/wordpress-plugins/"
 
-#. Author of the plugin
+#. Author of the plugin/theme
 msgid "Automattic"
 msgstr "Automattic"
 

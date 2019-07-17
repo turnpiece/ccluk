@@ -16,6 +16,21 @@ $target = $destinations->get_by_site_id( $site );
 	<div class="sui-box shipper-page-migrate-progress">
 		<div class="sui-box-body">
 
+		<div class="shipper-actions">
+			<div class="shipper-actions-left">
+				<a href="<?php echo esc_url( remove_query_arg( array( 'begin', 'check', 'site', 'type' ) ) ); ?>" class="shipper-button-back shipper-migration-cancel">
+					<i class="sui-icon-arrow-left" aria-hidden="true"></i>
+					<span><?php esc_html_e( 'Go back', 'shipper' ); ?></span>
+				</a>
+			</div>
+			<div class="shipper-actions-right">
+				<a href="<?php echo esc_url( remove_query_arg( array( 'begin', 'site', 'type', 'check' ) ) ); ?>" class="shipper-button-back shipper-migration-cancel">
+					<i class="sui-icon-close" aria-hidden="true"></i>
+					<span><?php esc_html_e( 'Go back', 'shipper' ); ?></span>
+				</a>
+			</div>
+		</div>
+
 			<div class="shipper-content">
 
 				<?php

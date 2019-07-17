@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Akismet Anti-Spam - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-11-29 05:47:59+0000\n"
+"PO-Revision-Date: 2019-03-11 06:21:32+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -294,11 +294,11 @@ msgstr "Akismet プランを取り消しました。"
 
 #: views/notice.php:55
 msgid "We cannot process your payment. Please <a href=\"%s\" target=\"_blank\">update your payment details</a>."
-msgstr "お支払いを処理できません。<a href=\"%s\" target=\"_blank\">お支払い情報を更新</a>してください。"
+msgstr "お支払いを処理できません。<a href=\"%s\" target=\"_blank\">支払い情報を更新</a>してください。"
 
 #: views/notice.php:54
 msgid "Please update your payment information."
-msgstr "お支払い情報を更新してください。"
+msgstr "支払い情報を更新してください。"
 
 #: views/notice.php:11
 msgid "<strong>Almost done</strong> - configure Akismet and say goodbye to spam"
@@ -354,11 +354,11 @@ msgstr "2012年以降、Akismet は (無料を含む) すべてのアカウン�
 
 #: views/config.php:95
 msgid "All systems functional."
-msgstr "全てのシステムは機能しています。"
+msgstr "すべてのシステムは作動中です。"
 
 #: views/config.php:95
 msgid "Enabled."
-msgstr "有効化済み。"
+msgstr "有効。"
 
 #: views/config.php:92
 msgid "Akismet encountered a problem with a previous SSL request and disabled it temporarily. It will begin using SSL for requests again shortly."
@@ -366,7 +366,7 @@ msgstr "Akismet は以前の SSL リクエストで問題に直面し、一時�
 
 #: views/config.php:92
 msgid "Temporarily disabled."
-msgstr "一時的に無効化済み。"
+msgstr "一時的に無効化中。"
 
 #: views/config.php:86
 msgid "Your Web server cannot make SSL requests; contact your Web host and ask them to add support for SSL requests."
@@ -374,7 +374,7 @@ msgstr "お使いの Web サーバは SSL リクエストを発行すること�
 
 #: views/config.php:86
 msgid "Disabled."
-msgstr "無効化済み。"
+msgstr "無効。"
 
 #: views/config.php:79
 msgid "SSL Status"
@@ -730,7 +730,7 @@ msgstr[0] "<a href=\"%1$s\">スパムフォルダー</a>内の%2$d日以上経�
 
 #: views/config.php:135
 msgid "Note:"
-msgstr "注意:"
+msgstr "注:"
 
 #: views/config.php:208
 msgid "Cancelled"
@@ -796,7 +796,7 @@ msgstr "ホスティングサービスまたはサーバー管理者が PHP の 
 
 #: views/notice.php:44
 msgid "Network functions are disabled."
-msgstr "ネットワーク関数が無効化されています。"
+msgstr "サイトネットワーク関数が無効化されています。"
 
 #: views/notice.php:50
 msgid "Your firewall may be blocking Akismet from connecting to its API. Please contact your host and refer to <a href=\"%s\" target=\"_blank\">our guide about firewalls</a>."

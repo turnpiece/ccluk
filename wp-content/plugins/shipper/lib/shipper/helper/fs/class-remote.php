@@ -604,7 +604,7 @@ class Shipper_Helper_Fs_Remote {
 		if ( empty( $storage_handler ) ) {
 			if ( ! class_exists( 'Aws\S3\S3Client' ) ) {
 				// Require external SDK just in time for this.
-				require_once( dirname( SHIPPER_PLUGIN_FILE ) . '/lib/aws/sdk-v3.phar' );
+				require_once( dirname( SHIPPER_PLUGIN_FILE ) . '/lib/external/autoload.php' );
 			}
 			$creds = $this->get_creds();
 			$ca = trailingslashit( ABSPATH . WPINC ) . 'certificates/ca-bundle.crt';

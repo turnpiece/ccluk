@@ -569,9 +569,9 @@
 		return this;
 	};
 
-	if ( 0 !== $( '.sui-2-3-20 .sui-accordion' ).length ) {
+	if ( 0 !== $( '.sui-2-3-22 .sui-accordion' ).length ) {
 
-		$( '.sui-2-3-20 .sui-accordion' ).each( function() {
+		$( '.sui-2-3-22 .sui-accordion' ).each( function() {
 			SUI.suiAccordion( this );
 		});
 	}
@@ -1644,7 +1644,7 @@
     SUI.suiCodeSnippet = function( ) {
 
         // Convert all code snippet.
-        $( '.sui-2-3-20 .sui-code-snippet:not(.sui-no-copy)' ).each( function() {
+        $( '.sui-2-3-22 .sui-code-snippet:not(.sui-no-copy)' ).each( function() {
 
             // backward compat of instantiate new accordion
             $( this ).SUICodeSnippet({});
@@ -1668,11 +1668,370 @@
 		window.SUI = {};
 	}
 
+	SUI.sliderBack = function( el ) {
+
+		var slider = $( el ),
+			dialog = slider.closest( '.sui-dialog' ),
+			slides = slider.find( '.sui-slider-content > li' )
+			;
+
+		var navigation = slider.find( '.sui-slider-navigation' ),
+			navButtons = navigation.find( 'button' ),
+			btnBack    = navigation.find( '.sui-prev' ),
+			btnNext    = navigation.find( '.sui-next' )
+			;
+
+		if ( ! dialog.hasClass( 'sui-dialog-onboard' ) ) {
+			return;
+		}
+
+		function init() {
+
+			var currSlide = slider.find( '.sui-slider-content > li.sui-current' ),
+				prevSlide = currSlide.prev()
+				;
+
+			if ( ! prevSlide.length ) {
+
+				if ( slider.hasClass( 'sui-infinite' ) ) {
+
+					prevSlide = slider.find( '.sui-slider-content > li:last' );
+
+					currSlide.removeClass( 'sui-current' );
+					currSlide.removeClass( 'sui-loaded' );
+
+					prevSlide.addClass( 'sui-current' );
+					prevSlide.addClass( 'fadeInLeft' );
+
+					navButtons.prop( 'disabled', true );
+
+					setTimeout( function() {
+						prevSlide.addClass( 'sui-loaded' );
+						prevSlide.removeClass( 'fadeInLeft' );
+					}, 600 );
+
+					setTimeout( function() {
+						navButtons.prop( 'disabled', false );
+					}, 650 );
+				}
+
+			} else {
+
+				currSlide.removeClass( 'sui-current' );
+				currSlide.removeClass( 'sui-loaded' );
+
+				prevSlide.addClass( 'sui-current' );
+				prevSlide.addClass( 'fadeInLeft' );
+
+				navButtons.prop( 'disabled', true );
+
+				if ( ! slider.hasClass( 'sui-infinite' ) ) {
+
+					btnNext.removeClass( 'sui-hidden' );
+
+					if ( slides.first().data( 'slide' ) === prevSlide.data( 'slide' ) ) {
+						btnBack.addClass( 'sui-hidden' );
+					}
+				}
+
+				setTimeout( function() {
+					prevSlide.addClass( 'sui-loaded' );
+					prevSlide.removeClass( 'fadeInLeft' );
+				}, 600 );
+
+				setTimeout( function() {
+					navButtons.prop( 'disabled', false );
+				}, 650 );
+			}
+		}
+
+		init();
+
+		return this;
+	};
+
+	SUI.sliderNext = function( el ) {
+
+		var slider = $( el ),
+			dialog = slider.closest( '.sui-dialog' ),
+			slides = slider.find( '.sui-slider-content > li' )
+			;
+
+		var navigation = slider.find( '.sui-slider-navigation' ),
+			navButtons = navigation.find( 'button' ),
+			btnBack    = navigation.find( '.sui-prev' ),
+			btnNext    = navigation.find( '.sui-next' )
+			;
+
+		if ( ! dialog.hasClass( 'sui-dialog-onboard' ) ) {
+			return;
+		}
+
+		function init() {
+
+			var currSlide = slider.find( '.sui-slider-content > li.sui-current' ),
+				nextSlide = currSlide.next()
+				;
+
+			if ( ! nextSlide.length ) {
+
+				if ( slider.hasClass( 'sui-infinite' ) ) {
+
+					nextSlide = slider.find( '.sui-slider-content > li:first' );
+
+					currSlide.removeClass( 'sui-current' );
+					currSlide.removeClass( 'sui-loaded' );
+
+					nextSlide.addClass( 'sui-current' );
+					nextSlide.addClass( 'fadeInRight' );
+
+					navButtons.prop( 'disabled', true );
+
+					setTimeout( function() {
+						nextSlide.addClass( 'sui-loaded' );
+						nextSlide.removeClass( 'fadeInRight' );
+					}, 600 );
+
+					setTimeout( function() {
+						navButtons.prop( 'disabled', false );
+					}, 650 );
+
+				}
+
+			} else {
+
+				currSlide.removeClass( 'sui-current' );
+				currSlide.removeClass( 'sui-loaded' );
+
+				nextSlide.addClass( 'sui-current' );
+				nextSlide.addClass( 'fadeInRight' );
+
+				navButtons.prop( 'disabled', true );
+
+				if ( ! slider.hasClass( 'sui-infinite' ) ) {
+
+					btnBack.removeClass( 'sui-hidden' );
+
+					if ( slides.length === nextSlide.data( 'slide' ) ) {
+						btnNext.addClass( 'sui-hidden' );
+					}
+				}
+
+				setTimeout( function() {
+					nextSlide.addClass( 'sui-loaded' );
+					nextSlide.removeClass( 'fadeInRight' );
+				}, 600 );
+
+				setTimeout( function() {
+					navButtons.prop( 'disabled', false );
+				}, 650 );
+
+			}
+		}
+
+		init();
+
+		return this;
+	};
+
+	SUI.sliderStep = function( el ) {
+
+		var slider = $( el ),
+			dialog = slider.closest( '.sui-dialog' )
+			;
+
+		var slides = slider.find( '.sui-slider-content' ),
+			slide  = slides.find( '> li' )
+			;
+
+		var steps  = slider.find( '.sui-slider-steps' ),
+			step   = steps.find( 'li' ),
+			button = step.find( 'button' )
+			;
+
+		var navigation = slider.find( '.sui-slider-navigation' ),
+			navButtons = navigation.find( 'button' ),
+			navBack    = navigation.find( '.sui-prev' ),
+			navNext    = navigation.find( '.sui-next' )
+			;
+
+		if ( ! dialog.hasClass( 'sui-dialog-onboard' ) && ! steps.hasClass( 'sui-clickable' ) ) {
+			return;
+		}
+
+		function reset() {
+
+			// Remove current class
+			slide.removeClass( 'sui-current' );
+
+			// Remove loaded state
+			slide.removeClass( 'sui-loaded' );
+
+		}
+
+		function load( element ) {
+
+			var button  = $( element ),
+				index   = button.data( 'slide' )
+				;
+
+			var curSlide = button.closest( 'li[data-slide]' ),
+				newSlide  = slides.find( '> li[data-slide="' + index + '"]' )
+				;
+
+			newSlide.addClass( 'sui-current' );
+
+			if ( curSlide.data( 'slide' ) < newSlide.data( 'slide' ) ) {
+				newSlide.addClass( 'fadeInRight' );
+			} else {
+				newSlide.addClass( 'fadeInLeft' );
+			}
+
+			navButtons.prop( 'disabled', true );
+
+			if ( ! slider.hasClass( 'sui-infinite' ) ) {
+
+				if ( 1 === newSlide.data( 'slide' ) ) {
+					navBack.addClass( 'sui-hidden' );
+					navNext.removeClass( 'sui-hidden' );
+				}
+
+				if ( slide.length === newSlide.data( 'slide' ) ) {
+					navBack.removeClass( 'sui-hidden' );
+					navNext.addClass( 'sui-hidden' );
+				}
+			}
+
+			setTimeout( function() {
+
+				newSlide.addClass( 'sui-loaded' );
+
+				if ( curSlide.data( 'slide' ) < newSlide.data( 'slide' ) ) {
+					newSlide.removeClass( 'fadeInRight' );
+				} else {
+					newSlide.removeClass( 'fadeInLeft' );
+				}
+			}, 600 );
+
+			setTimeout( function() {
+				navButtons.prop( 'disabled', false );
+			}, 650 );
+		}
+
+		function init() {
+
+			if ( button.length ) {
+
+				button.on( 'click', function( e ) {
+
+					reset();
+
+					load( this );
+
+					e.preventDefault();
+					e.stopPropagation();
+
+				});
+			}
+		}
+
+		init();
+
+		return this;
+	};
+
+	SUI.dialogSlider = function( el ) {
+
+		var slider   = $( el ),
+			dialog   = slider.closest( '.sui-dialog' ),
+			btnBack  = slider.find( '.sui-slider-navigation .sui-prev' ),
+			btnNext  = slider.find( '.sui-slider-navigation .sui-next' ),
+			tourBack = slider.find( '*[data-a11y-dialog-tour-back]' ),
+			tourNext = slider.find( '*[data-a11y-dialog-tour-next]' ),
+			steps    = slider.find( '.sui-slider-steps' )
+			;
+
+		if ( ! dialog.hasClass( 'sui-dialog-onboard' ) || slider.hasClass( 'sui-slider-off' ) ) {
+			return;
+		}
+
+		function init() {
+
+			if ( btnBack.length ) {
+
+				btnBack.on( 'click', function( e ) {
+
+					SUI.sliderBack( slider );
+
+					e.preventDefault();
+
+				});
+			}
+
+			if ( tourBack.length ) {
+
+				tourBack.on( 'click', function( e ) {
+
+					SUI.sliderBack( slider );
+
+					e.preventDefault();
+
+				});
+			}
+
+			if ( btnNext.length ) {
+
+				btnNext.on( 'click', function( e ) {
+
+					SUI.sliderNext( slider );
+
+					e.preventDefault();
+
+				});
+			}
+
+			if ( tourNext.length ) {
+
+				tourNext.on( 'click', function( e ) {
+
+					SUI.sliderNext( slider );
+
+					e.preventDefault();
+
+				});
+			}
+
+			if ( steps.length ) {
+				SUI.sliderStep( slider );
+			}
+		}
+
+		init();
+
+		return this;
+	};
+
+	$( '.sui-2-3-22 .sui-slider' ).each( function() {
+		SUI.dialogSlider( this );
+	});
+
+}( jQuery ) );
+
+( function( $ ) {
+
+	// Enable strict mode.
+	'use strict';
+
+	// Define global SUI object if it doesn't exist.
+	if ( 'object' !== typeof window.SUI ) {
+		window.SUI = {};
+	}
+
 	SUI.linkDropdown = function() {
 
 		function closeAllDropdowns( $except ) {
 
-			var $dropdowns = $( '.sui-2-3-20 .sui-dropdown' );
+			var $dropdowns = $( '.sui-2-3-22 .sui-dropdown' );
 
 			if ( $except ) {
 				$dropdowns = $dropdowns.not( $except );
@@ -1699,7 +2058,7 @@
 
 		$( 'body' ).mouseup( function( e ) {
 
-			var $anchor = $( '.sui-2-3-20 .sui-dropdown-anchor' );
+			var $anchor = $( '.sui-2-3-22 .sui-dropdown-anchor' );
 
 			if ( ( ! $anchor.is( e.target ) ) && ( 0 === $anchor.has( e.target ).length ) ) {
 				closeAllDropdowns();
@@ -1710,6 +2069,20 @@
 	};
 
 	SUI.linkDropdown();
+
+}( jQuery ) );
+
+// This file is to be used for fixing up issues with IE11.
+
+( function( $ ) {
+
+    var colorpickers = $( '.sui-colorpicker-wrap' );
+
+    // If IE11 remove SUI colorpicker styles.
+    if ( !! navigator.userAgent.match( /Trident\/7\./ ) && colorpickers[0]) {
+        colorpickers.find( '.sui-colorpicker' ).hide();
+        colorpickers.removeClass( 'sui-colorpicker-wrap' );
+    }
 
 }( jQuery ) );
 
@@ -1739,9 +2112,9 @@
 ( function( $ ) {
 
 	// This will auto hide the top notice if the classes .sui-can-dismiss or .sui-cant-dismiss aren't present.
-	$( '.sui-2-3-20 .sui-notice-top:not(.sui-can-dismiss, .sui-cant-dismiss)' ).delay( 3000 ).slideUp( 'slow' );
+	$( '.sui-2-3-22 .sui-notice-top:not(.sui-can-dismiss, .sui-cant-dismiss)' ).delay( 3000 ).slideUp( 'slow' );
 
-	$( '.sui-2-3-20 .sui-notice-dismiss' ).click( function( e ) {
+	$( '.sui-2-3-22 .sui-notice-dismiss' ).click( function( e ) {
 		e.preventDefault();
 
         $( this ).parent().stop().slideUp( 'slow' );
@@ -1763,7 +2136,7 @@
 
 	SUI.showHidePassword = function() {
 
-		$( '.sui-2-3-20 .sui-form-field' ).each( function() {
+		$( '.sui-2-3-22 .sui-form-field' ).each( function() {
 
 			var $this = $( this );
 
@@ -1827,7 +2200,7 @@
 		$( el ).prepend( svg ).addClass( 'loaded' ).find( 'circle:last-child' ).css( 'animation', 'sui' + score + ' 3s forwards' );
 	};
 
-	$( '.sui-2-3-20 .sui-circle-score' ).each( function() {
+	$( '.sui-2-3-22 .sui-circle-score' ).each( function() {
 		SUI.loadCircleScore( this );
 	});
 
@@ -2045,7 +2418,7 @@
 	};
 
 	// Convert all select lists to fancy sui Select lists.
-	$( '.sui-2-3-20 select:not([multiple])' ).each( function() {
+	$( '.sui-2-3-22 select:not([multiple])' ).each( function() {
 		SUI.suiSelect( this );
 	});
 
@@ -8799,7 +9172,7 @@
     };
 
 
-    if ( 0 !== $( '.sui-2-3-20 .sui-tabs' ).length ) {
+    if ( 0 !== $( '.sui-2-3-22 .sui-tabs' ).length ) {
         SUI.suiTabs();
     }
 
@@ -8817,7 +9190,7 @@
 
 	SUI.upload = function() {
 
-		$( '.sui-2-3-20 .sui-upload-group input[type="file"]' ).on( 'change', function( e ) {
+		$( '.sui-2-3-22 .sui-upload-group input[type="file"]' ).on( 'change', function( e ) {
 			var file = $( this )[0].files[0],
 				message = $( this ).find( '~ .sui-upload-message' );
 

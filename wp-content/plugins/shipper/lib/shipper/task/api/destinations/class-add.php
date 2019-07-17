@@ -25,13 +25,15 @@ class Shipper_Task_Api_Destinations_Add extends Shipper_Task_Api {
 		));
 
 		if ( empty( $status['success'] ) ) {
-			$this->add_error(
+			$this->record_non_success(
+				'destinations-add',
 				self::ERR_SERVICE,
 				__( 'Error adding current site', 'shipper' )
 			);
 			return false;
 		}
 
+		$this->record_success( 'destinations-add' );
 		return true;
 	}
 

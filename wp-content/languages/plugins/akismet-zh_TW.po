@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Akismet Anti-Spam - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-11-12 20:00:11+0000\n"
+"PO-Revision-Date: 2019-06-21 07:17:45+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -41,11 +41,11 @@ msgstr "Akismet 及隱私權"
 
 #: views/config.php:160
 msgid "Do not display privacy notice."
-msgstr "不顯示隱私權聲明。"
+msgstr "不顯示隱私權聲明"
 
 #: views/config.php:159
 msgid "Display a privacy notice under your comment forms."
-msgstr "在留言表單下方顯示隱私權聲明。"
+msgstr "在留言表單下方顯示隱私權聲明"
 
 #: views/config.php:158
 msgid "Akismet privacy notice"
@@ -55,7 +55,7 @@ msgstr "Akismet 隱私權聲明"
 msgid "Privacy"
 msgstr "隱私權"
 
-#: class.akismet.php:1423
+#: class.akismet.php:1418
 msgid "This site uses Akismet to reduce spam. <a href=\"%s\" target=\"_blank\" rel=\"nofollow noopener\">Learn how your comment data is processed</a>."
 msgstr "這個網站採用 Akismet 服務減少垃圾留言。<a href=\"%s\" target=\"_blank\" rel=\"nofollow noopener\">進一步瞭解 Akismet 如何處理網站訪客的留言資料</a>。"
 
@@ -63,7 +63,7 @@ msgstr "這個網站採用 Akismet 服務減少垃圾留言。<a href=\"%s\" tar
 msgid "We collect information about visitors who comment on Sites that use our Akismet anti-spam service. The information we collect depends on how the User sets up Akismet for the Site, but typically includes the commenter's IP address, user agent, referrer, and Site URL (along with other information directly provided by the commenter such as their name, username, email address, and the comment itself)."
 msgstr "Akismet 公司會在採用 Akismet 反垃圾留言服務的網站上，對進行留言的訪客收集相關資料。Akismet 公司收集的資訊取決於網站管理員在這個網站上為 Akismet 服務所進行的設定，但通常會包含留言者的 IP 地址、使用者代理程式，參照網址及網站網址，以及由留言者直接提供的其他資訊，例如姓名、使用者名稱、電子郵件地址及留言內容評論本身。"
 
-#: class.akismet.php:226
+#: class.akismet.php:231
 msgid "Comment discarded."
 msgstr "留言已捨棄。"
 
@@ -118,7 +118,7 @@ msgstr "網站管理員可以在這個頁面中為 Akismet 外掛變更設定並
 
 #. Description of the plugin
 msgid "Used by millions, Akismet is quite possibly the best way in the world to <strong>protect your blog from spam</strong>. It keeps your site protected even while you sleep. To get started: activate the Akismet plugin and then go to your Akismet Settings page to set up your API key."
-msgstr "數以百萬的使用者採用 Akismet，它是<strong>保護網站遠離垃圾留言</strong>的絕佳方式，也為你的網站提供不間斷的保護。使用方式很簡單，啟用 Akismet 外掛後前往 Akismet 設定頁，輸入 Akismet 的 API 金鑰後儲存變更。"
+msgstr "數以百萬的使用者採用 Akismet，它是<strong>保護網站遠離垃圾留言</strong>的絕佳方式，也為你的網站提供不間斷的保護。使用方式很簡單，啟用 Akismet 外掛後前往 Akismet 設定頁，輸入 Akismet 的 API 金鑰後儲存設定。"
 
 #. Plugin Name of the plugin
 #: class.akismet-admin.php:114 class.akismet-admin.php:117
@@ -219,7 +219,7 @@ msgstr "沒有可供檢查的留言。Akismet 目前僅會檢查在 [待審閱] 
 msgid "Checking for Spam"
 msgstr "正在檢查是否有垃圾留言"
 
-#: class.akismet.php:507
+#: class.akismet.php:512
 msgid "Comment not found."
 msgstr "沒有留言。"
 
@@ -644,7 +644,7 @@ msgstr "Akismet 已將這則留言判定為垃圾留言。"
 
 #: class.akismet-admin.php:632
 msgid "Comment status was changed to %s"
-msgstr "留言狀態已變更為 %s"
+msgstr "留言狀態已變更為 [%s]"
 
 #: class.akismet-admin.php:590
 msgid "Akismet cleared this comment."
@@ -678,11 +678,11 @@ msgstr "經過自動重新檢查，Akismet 判定這是垃圾留言。"
 msgid "Akismet cleared this comment during an automatic retry."
 msgstr "Akismet 在自動重試時已清除這則留言。"
 
-#: class.akismet.php:1268
+#: class.akismet.php:1277
 msgid "Please <a href=\"%1$s\">upgrade WordPress</a> to a current version, or <a href=\"%2$s\">downgrade to version 2.4 of the Akismet plugin</a>."
 msgstr "請將 <a href=\"%1$s\">WordPress 升級</a>至最新版本，或<a href=\"%2$s\">將 Akismet 外掛程式降級至 2.4 版</a>。"
 
-#: class.akismet.php:1268
+#: class.akismet.php:1277
 msgid "Akismet %s requires WordPress %s or higher."
 msgstr "Akismet %s 需要 WordPress %s 版或更新版本。"
 
@@ -717,11 +717,11 @@ msgstr "Akismet 反垃圾留言嚴謹度"
 
 #: views/config.php:132
 msgid "Silently discard the worst and most pervasive spam so I never see it."
-msgstr "自動捨棄最嚴重和最普遍的垃圾留言，來個眼不見為淨。"
+msgstr "自動捨棄最嚴重和最普遍的垃圾留言，來個眼不見為淨"
 
 #: views/config.php:133
 msgid "Always put spam in the Spam folder for review."
-msgstr "一律將垃圾留言移至垃圾留言資料夾中，以供稍後審閱。"
+msgstr "一律將垃圾留言移至垃圾留言資料夾中，以供稍後審閱"
 
 #: views/config.php:141
 msgid "Spam in the <a href=\"%1$s\">spam folder</a> older than 1 day is deleted automatically."
@@ -738,7 +738,7 @@ msgstr "已取消"
 
 #: views/config.php:176
 msgid "Save Changes"
-msgstr "儲存變更"
+msgstr "儲存設定"
 
 #: views/config.php:170
 msgid "Disconnect this account"

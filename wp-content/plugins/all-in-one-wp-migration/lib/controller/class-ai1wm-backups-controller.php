@@ -105,7 +105,7 @@ class Ai1wm_Backups_Controller {
 			echo json_encode(
 				array(
 					'success' => update_option( AI1WM_BACKUPS_LABELS, $backups_labels ),
-					'label'   => $params['backup_label'],
+					'label'   => esc_html( $params['backup_label'] ),
 				)
 			);
 			exit;
@@ -117,7 +117,20 @@ class Ai1wm_Backups_Controller {
 					AI1WM_BACKUPS_LABELS,
 					array_merge( $backups_labels, array( trim( $params['backup_name'] ) => trim( $params['backup_label'] ) ) )
 				),
-				'label'   => trim( $params['backup_label'] ),
+				'label'   => esc_html( $params['backup_label'] ),
+			)
+		);
+		exit;
+	}
+
+	public static function backup_list() {
+		$model = new Ai1wm_Backups;
+
+		Ai1wm_Template::render(
+			'backups/backups-list',
+			array(
+				'backups'        => $model->get_files(),
+				'backups_labels' => get_option( AI1WM_BACKUPS_LABELS, array() ),
 			)
 		);
 		exit;

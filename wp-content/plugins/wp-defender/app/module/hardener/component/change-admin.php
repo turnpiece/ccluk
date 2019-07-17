@@ -17,6 +17,10 @@ class Change_Admin extends Rule {
 		$this->renderPartial( 'rules/change-admin' );
 	}
 
+	public function getSubDescription() {
+		return __( "You have a user account with the admin username.", wp_defender()->domain );
+	}
+
 	public function check() {
 		return $this->getService()->check();
 	}

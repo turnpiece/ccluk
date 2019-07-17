@@ -55,7 +55,7 @@ msgstr "Akismet повідомлення про конфіденційність
 msgid "Privacy"
 msgstr "Конфіденційність"
 
-#: class.akismet.php:1423
+#: class.akismet.php:1418
 msgid "This site uses Akismet to reduce spam. <a href=\"%s\" target=\"_blank\" rel=\"nofollow noopener\">Learn how your comment data is processed</a>."
 msgstr "Цей сайт використовує Akismet для зменшення спаму.  <a href=\"%s\" target=\"_blank\" rel=\"nofollow noopener\"> Дізнайтеся, як обробляються ваші дані коментарів</a>."
 
@@ -116,11 +116,12 @@ msgstr "Ручне налаштування"
 msgid "On this page, you are able to update your Akismet settings and view spam stats."
 msgstr "На цій сторінці ви можете оновити налаштування Akismet і переглянути статистику спаму."
 
-#. Description of the plugin
+#. Description of the plugin/theme
 msgid "Used by millions, Akismet is quite possibly the best way in the world to <strong>protect your blog from spam</strong>. It keeps your site protected even while you sleep. To get started: activate the Akismet plugin and then go to your Akismet Settings page to set up your API key."
 msgstr "Використовуваний мільйонами, Akismet, цілком можливо, кращий спосіб в світі <strong>захистити свій блог від спаму</strong>. Ваш сайт повністю налаштований і захищений, навіть коли ви спите. Для початку: активуйте плагін Akismet, а потім перейдіть на сторінку налаштувань Akismet, щоб налаштувати ваш ключ API."
 
-#. Plugin Name of the plugin
+#. #-#-#-#-#  akismet-code.pot (Akismet Anti-Spam 4.1)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
 #: class.akismet-admin.php:114 class.akismet-admin.php:117
 msgid "Akismet Anti-Spam"
 msgstr "Akismet Anti-Spam"
@@ -424,8 +425,8 @@ msgstr "Видалення..."
 msgid "Akismet"
 msgstr "Akismet"
 
-#: views/config.php:60 class.akismet-admin.php:107 class.akismet-admin.php:239
-#: class.akismet-admin.php:658
+#: class.akismet-admin.php:107 class.akismet-admin.php:239
+#: class.akismet-admin.php:658 views/config.php:60
 msgid "Settings"
 msgstr "Налаштування"
 
@@ -488,7 +489,7 @@ msgstr "На цій сторінці ви можете подивитися ст
 msgid "Akismet Configuration"
 msgstr "Конфігурація Akismet."
 
-#: views/config.php:70 class.akismet-admin.php:242
+#: class.akismet-admin.php:242 views/config.php:70
 msgid "API Key"
 msgstr "Ключ API"
 
@@ -496,7 +497,7 @@ msgstr "Ключ API"
 msgid "Enter/remove an API key."
 msgstr "Ввести/видалити ключ API."
 
-#: views/config.php:105 class.akismet-admin.php:243
+#: class.akismet-admin.php:243 views/config.php:105
 msgid "Comments"
 msgstr "Коментарі"
 
@@ -508,15 +509,15 @@ msgstr "Відображати кількість схвалених комен�
 msgid "Choose to either discard the worst spam automatically or to always put all spam in spam folder."
 msgstr "Виберіть, чи відхиляти очевидний спам автоматично, або завжди поміщати весь спам в папку спаму."
 
-#: views/config.php:128 class.akismet-admin.php:244
+#: class.akismet-admin.php:244 views/config.php:128
 msgid "Strictness"
 msgstr "Режим"
 
-#: views/config.php:188 class.akismet-admin.php:252
+#: class.akismet-admin.php:252 views/config.php:188
 msgid "Account"
 msgstr "Обліковий запис"
 
-#: views/config.php:196 class.akismet-admin.php:255
+#: class.akismet-admin.php:255 views/config.php:196
 msgid "Subscription Type"
 msgstr "Тип підписки"
 
@@ -524,7 +525,7 @@ msgstr "Тип підписки"
 msgid "The subscription status - active, cancelled or suspended"
 msgstr "Статус підписки &#8212; активна, скасована або призупинена."
 
-#: views/config.php:203 class.akismet-admin.php:256
+#: class.akismet-admin.php:256 views/config.php:203
 msgid "Status"
 msgstr "Статус"
 
@@ -708,11 +709,11 @@ msgstr "Akismet позначив цей коментар як спам при п
 msgid "Akismet cleared this comment during an automatic retry."
 msgstr "Akismet узгодив цей коментар при повторній перевірці."
 
-#: class.akismet.php:1268
+#: class.akismet.php:1263
 msgid "Please <a href=\"%1$s\">upgrade WordPress</a> to a current version, or <a href=\"%2$s\">downgrade to version 2.4 of the Akismet plugin</a>."
 msgstr "Будь ласка, <a href=\"%1$s\">оновіть WordPress</a> до поточної версії, або <a href=\"%2$s\">поверніться до використання Akismet версії 2.4</a>."
 
-#: class.akismet.php:1268
+#: class.akismet.php:1263
 msgid "Akismet %s requires WordPress %s or higher."
 msgstr "Akismet %s вимагає WordPress %s або вище."
 
@@ -896,15 +897,15 @@ msgstr "Активувати Akismet"
 msgid "Get your API key"
 msgstr "Отримати ключ API"
 
-#. Plugin URI of the plugin
+#. Plugin URI of the plugin/theme
 msgid "https://akismet.com/"
 msgstr "https://akismet.com/"
 
-#. Author URI of the plugin
+#. Author URI of the plugin/theme
 msgid "https://automattic.com/wordpress-plugins/"
 msgstr "https://automattic.com/wordpress-plugins/"
 
-#. Author of the plugin
+#. Author of the plugin/theme
 msgid "Automattic"
 msgstr "Automattic"
 

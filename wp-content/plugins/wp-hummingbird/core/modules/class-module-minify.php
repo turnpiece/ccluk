@@ -303,6 +303,7 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 				continue;
 			}
 
+			// Only show items that have a handle and a source.
 			if ( isset( $wp_dependencies->registered[ $handle ] ) && ! empty( $wp_dependencies->registered[ $handle ]->src ) ) {
 				$this->sources_collector->add_to_collection( $wp_dependencies->registered[ $handle ], $type );
 			}
@@ -478,7 +479,10 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 	}
 
 	/**
-	 * Group dependencies by alt, title, rtl, conditional and args attributes
+	 * Group dependencies by alt, title, rtl, conditional and args attributes.
+	 *
+	 * This is a very-very fragile function. When making changes, please provide a detailed comment on why a
+	 * change has been made.
 	 *
 	 * @param array                $handles          Handles array.
 	 * @param WP_Scripts|WP_Styles $wp_dependencies  List of dependencies.
@@ -514,9 +518,11 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 				}
 			}
 
-			// We'll group by these extras $wp_style->extras and $wp_style->args (args is no more than a string, confusing)
-			// If previous group has the same values, we'll add this dep it to that group
-			// otherwise, a new group will be created.
+			/**
+			 * We'll group by these extras $wp_style->extras and $wp_style->args (args is no more than a string, confusing)
+			 * If previous group has the same values, we'll add this dep it to that group
+			 * otherwise, a new group will be created.
+			 */
 			$group_extra_differentiators = array( 'alt', 'title', 'rtl', 'conditional' );
 			$group_differentiators       = array( 'args' );
 
@@ -569,16 +575,19 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 				$new_group->set_args( $registered_dependency->args );
 
 				/**
-				 * This is not a perfect fix, but it works. 'mediaelement' script does not have a source file,
-				 * but has an inline script with _wpmejsSettings variable. Without it, media elements do not
-				 * function properly. So we do not exclude such a script.
+				 * A little bit of explanation behind this. Originally, we were only checking to see if the
+				 * $registered_dependency->src was present. But at some point there were conflicts with themes/plugins
+				 * that were enqueueing an asset with an empty source (just to inline something). That was first noticed
+				 * with WP core mediaelement, with a fix introduced in 2.0. Then later on in 2.0.1 this lead to a more
+				 * general approach of checking if there were some extra attributes for the asset.
 				 *
-				 * TODO: In case there are other scripts that work in a similar way, we need to find a way to fetch
-				 * the dependencies with $groups_list->get_group_dependencies() and maybe using print_extra_script().
-				 *
-				 * @since 2.0.0
+				 * @since 2.0.0  This is not a perfect fix, but it works. 'mediaelement' script does not have a source
+				 *               file, but has an inline script with _wpmejsSettings variable. Without it, media
+				 *               elements do not function properly. So we do not exclude such a script.
+				 * @since 2.0.1  Instead of checking for 'mediaelement', we check if there are extra attributes
+				 *               with $registered_dependency->extra
 				 */
-				if ( $registered_dependency->src || 'mediaelement' === $handle ) {
+				if ( $registered_dependency->src || 0 < count( $registered_dependency->extra ) ) {
 					$new_group->add_handle( $handle, $registered_dependency->src );
 
 					// Add dependencies.

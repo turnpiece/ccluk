@@ -24,6 +24,7 @@ class Shipper_Task_Api_Destinations_Remoteadd extends Shipper_Task_Api {
 		));
 
 		if ( empty( $status['success'] ) ) {
+			$this->clear_cached_api_response( 'destinations-preparelist' );
 			Shipper_Helper_Log::write(
 				sprintf(
 					__( 'Error triggering add for site %s: %s', 'shipper' ),
@@ -33,6 +34,7 @@ class Shipper_Task_Api_Destinations_Remoteadd extends Shipper_Task_Api {
 			return false;
 		}
 
+		$this->record_success( 'destinations-preparelist' );
 		return true;
 	}
 }

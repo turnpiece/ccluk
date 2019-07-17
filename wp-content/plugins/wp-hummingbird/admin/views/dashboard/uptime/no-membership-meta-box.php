@@ -12,16 +12,18 @@
 
 <div class="sui-box-settings-row sui-upsell-row">
 	<img class="sui-image sui-upsell-image"
-		 src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-graphic-upsell-uptime.png' ); ?>"
-		 srcset="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-graphic-upsell-uptime@2x.png' ); ?> 2x"
-		 alt="<?php esc_attr_e( 'Try Pro for FREE', 'wphb' ); ?>">
+		src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-graphic-upsell-uptime.png' ); ?>"
+		srcset="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-graphic-upsell-uptime@2x.png' ); ?> 2x"
+		alt="<?php esc_attr_e( 'Try Pro for FREE', 'wphb' ); ?>">
 
 	<div class="sui-upsell-notice">
 		<p>
 			<?php
 			printf(
-				__( 'Performance improvements hardly matter if your website isn’t accessible. Monitor your uptime and downtime with WPMU DEV’s Uptime Monitoring website management tool. <a href="%s" target="_blank">Try Pro for FREE today!</a>', 'wphb' ),
-				WP_Hummingbird_Utils::get_link( 'plugin', 'hummingbird_dash_uptime_upsell_link' )
+				/* translators: %1$s - new line and link, %2$s - </a> */
+				esc_html__( 'Performance improvements hardly matter if your website isn’t accessible. Monitor your uptime and downtime with WPMU DEV’s Uptime Monitoring website management tool. %1$sTry Pro for FREE today!%2$s', 'wphb' ),
+				'<br><a href="' . esc_url( WP_Hummingbird_Utils::get_link( 'plugin', 'hummingbird_dash_uptime_upsell_link' ) ) . '" target="_blank">',
+				'</a>'
 			);
 			?>
 		</p>

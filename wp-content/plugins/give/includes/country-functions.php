@@ -293,7 +293,7 @@ function give_get_country_list() {
 		'SD' => esc_html__( 'Sudan', 'give' ),
 		'SR' => esc_html__( 'Suriname', 'give' ),
 		'SJ' => esc_html__( 'Svalbard and Jan Mayen Islands', 'give' ),
-		'SZ' => esc_html__( 'Swaziland', 'give' ),
+		'SZ' => esc_html__( 'Eswatini', 'give' ),
 		'SE' => esc_html__( 'Sweden', 'give' ),
 		'CH' => esc_html__( 'Switzerland', 'give' ),
 		'SY' => esc_html__( 'Syrian Arab Republic', 'give' ),
@@ -821,6 +821,11 @@ function give_get_country_locale() {
 		'ZA' => array(
 			'state' => array(
 				'label' => __( 'Province', 'give' ),
+			),
+		),
+		'PA' => array(
+			'state' => array(
+				'required' => true,
 			),
 		),
 	) );
@@ -1499,12 +1504,17 @@ function give_get_iran_states_list() {
 function give_get_ireland_states_list() {
 	$states = array(
 		''   => '',
+		'AN' => __( 'Antrim', 'give' ),
+		'AR' => __( 'Armagh', 'give' ),
 		'CE' => __( 'Clare', 'give' ),
 		'CK' => __( 'Cork', 'give' ),
 		'CN' => __( 'Cavan', 'give' ),
 		'CW' => __( 'Carlow', 'give' ),
 		'DL' => __( 'Donegal', 'give' ),
 		'DN' => __( 'Dublin', 'give' ),
+		'DO' => __( 'Down', 'give' ),
+		'DY' => __( 'Derry', 'give' ),
+		'FM' => __( 'Fermanagh', 'give' ),
 		'GY' => __( 'Galway', 'give' ),
 		'KE' => __( 'Kildare', 'give' ),
 		'KK' => __( 'Kilkenny', 'give' ),
@@ -1520,6 +1530,7 @@ function give_get_ireland_states_list() {
 		'OY' => __( 'Offaly', 'give' ),
 		'RN' => __( 'Roscommon', 'give' ),
 		'SO' => __( 'Sligo', 'give' ),
+		'TR' => __( 'Tyrone', 'give' ),
 		'TY' => __( 'Tipperary', 'give' ),
 		'WD' => __( 'Waterford', 'give' ),
 		'WH' => __( 'Westmeath', 'give' ),

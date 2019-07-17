@@ -118,8 +118,14 @@ class Shipper_Controller_Runner_Migration extends Shipper_Controller_Runner {
 		// Re-initialize the storages.
 		$this->reset_all();
 
+		$ctrl = Shipper_Controller_Runner_Preflight::get();
+		$preflight = $ctrl->get_proxied_results();
+		$warnings = ! empty( $preflight['warnings'] )
+			? (int) $preflight['warnings']
+			: 0;
+
 		// Also reset preflight here.
-		Shipper_Controller_Runner_Preflight::get()->clear();
+		$ctrl->clear();
 
 		// Reset locks.
 		$locks = new Shipper_Helper_Locks;
@@ -127,6 +133,8 @@ class Shipper_Controller_Runner_Migration extends Shipper_Controller_Runner {
 
 		$migration = new Shipper_Model_Stored_Migration;
 		$migration->begin();
+
+		$migration->set( 'preflight_warnings', $warnings )->save();
 
 		/**
 		 * Fires on migration start

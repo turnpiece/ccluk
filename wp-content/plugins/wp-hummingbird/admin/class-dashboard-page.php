@@ -290,6 +290,20 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 		}
 
 		/**
+		 * Up-sell meta box.
+		 */
+		if ( ! WP_Hummingbird_Utils::is_member() ) {
+			$this->add_meta_box(
+				'dashboard/welcome/upsell',
+				__( 'Hummingbird Pro', 'wphb' ),
+				null,
+				null,
+				null,
+				'box-dashboard-right'
+			);
+		}
+
+		/**
 		 * Page caching meta boxes.
 		 *
 		 * @var WP_Hummingbird_Module_Page_Cache $module
@@ -433,32 +447,31 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 			)
 		);
 
+		/* Smush */
+		if ( is_main_site() || is_network_admin() || ( is_multisite() && WP_Hummingbird_Module_Smush::is_enabled() && ! get_site_option( 'wp-smush-networkwide' ) ) ) {
+			$smush_id     = WP_Hummingbird_Utils::is_member() ? 'dashboard-smush' : 'dashboard/smush/no-membership';
+			$smush_footer = array( $this, 'dashboard_smush_metabox_footer' );
+			if ( ! WP_Hummingbird_Module_Smush::is_installed() || ! WP_Hummingbird_Module_Smush::is_enabled() || ! WP_Hummingbird_Module_Smush::can_be_configured() ) {
+				$smush_footer = null;
+			}
+			$box_content_class = WP_Hummingbird_Utils::is_member() ? 'sui-box-body' : 'sui-box-body sui-upsell-items';
+
+			$this->add_meta_box(
+				$smush_id,
+				__( 'Image Optimization', 'wphb' ),
+				array( $this, 'dashboard_smush_metabox' ),
+				array( $this, 'dashboard_smush_metabox_header' ),
+				$smush_footer,
+				'box-dashboard-left',
+				array(
+					'box_content_class' => $box_content_class,
+				)
+			);
+		}
+
 		if ( is_multisite() && ! is_network_admin() ) {
 			return;
 		}
-
-		/* Smush */
-		$smush_id     = WP_Hummingbird_Utils::is_member() ? 'dashboard-smush' : 'dashboard/smush/no-membership';
-		$smush_footer = array( $this, 'dashboard_smush_metabox_footer' );
-		if ( ! WP_Hummingbird_Module_Smush::is_installed() || ! WP_Hummingbird_Module_Smush::is_enabled() ) {
-			$smush_footer = null;
-		}
-
-		$box_content_class = 'sui-box-body';
-		if ( ! WP_Hummingbird_Utils::is_member() ) {
-			$box_content_class = 'sui-box-body sui-upsell-items';
-		}
-		$this->add_meta_box(
-			$smush_id,
-			__( 'Image Optimization', 'wphb' ),
-			array( $this, 'dashboard_smush_metabox' ),
-			array( $this, 'dashboard_smush_metabox_header' ),
-			$smush_footer,
-			'box-dashboard-left',
-			array(
-				'box_content_class' => $box_content_class,
-			)
-		);
 
 		/* Uptime */
 		if ( ! WP_Hummingbird_Utils::is_member() ) {
@@ -725,12 +738,12 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 		$module       = WP_Hummingbird_Utils::get_module( 'page_cache' );
 		$activate_url = add_query_arg(
 			array(
-				'type' => 'pc-activate',
-				'run'  => 'true',
+				'action' => 'enable',
+				'module' => 'page_cache',
 			),
 			WP_Hummingbird_Utils::get_admin_menu_url( 'caching' )
 		);
-		$activate_url = wp_nonce_url( $activate_url, 'wphb-run-caching' );
+		$activate_url = wp_nonce_url( $activate_url, 'wphb-caching-actions' );
 
 		$is_active = $module->is_active();
 
@@ -760,13 +773,13 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 		$module       = WP_Hummingbird_Utils::get_module( 'gravatar' );
 		$activate_url = add_query_arg(
 			array(
-				'type' => 'gc-activate',
-				'run'  => 'true',
-				'view' => 'gravatar',
+				'action' => 'enable',
+				'module' => 'gravatar',
+				'view'   => 'gravatar',
 			),
 			WP_Hummingbird_Utils::get_admin_menu_url( 'caching' )
 		);
-		$activate_url = wp_nonce_url( $activate_url, 'wphb-run-caching' ) . '#wphb-box-dashboard-gravatar';
+		$activate_url = wp_nonce_url( $activate_url, 'wphb-caching-actions' );
 
 		$is_active = $module->is_active();
 
@@ -1181,6 +1194,7 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 			array(
 				'activate_url'     => wp_nonce_url( 'plugins.php?action=activate&amp;plugin=wp-smushit/wp-smush.php', 'activate-plugin_wp-smushit/wp-smush.php' ),
 				'activate_pro_url' => wp_nonce_url( 'plugins.php?action=activate&amp;plugin=wp-smush-pro/wp-smush.php', 'activate-plugin_wp-smush-pro/wp-smush.php' ),
+				'can_activate'     => is_main_site() || is_network_admin(),
 				'is_active'        => WP_Hummingbird_Module_Smush::is_enabled(),
 				'is_installed'     => WP_Hummingbird_Module_Smush::is_installed(),
 				'smush_data'       => $smush_data,

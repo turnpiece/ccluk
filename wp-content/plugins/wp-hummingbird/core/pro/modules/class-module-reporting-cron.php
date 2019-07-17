@@ -32,6 +32,12 @@ class WP_Hummingbird_Module_Reporting_Cron extends WP_Hummingbird_Module_Reports
 	 */
 	public function on_init_performance_scan() {
 		if ( WP_Hummingbird_Utils::is_member() ) {
+			$reports = WP_Hummingbird_Settings::get_setting( 'reports', 'performance' );
+			// Do not continue if reports are not enabled.
+			if ( ! $reports['enabled'] ) {
+				return;
+			}
+
 			// Schedule first scan.
 			wp_schedule_single_event( parent::get_scheduled_time( self::$module ), 'wphb_performance_report' );
 		} else {

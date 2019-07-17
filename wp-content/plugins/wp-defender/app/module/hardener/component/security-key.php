@@ -34,6 +34,10 @@ class Security_Key extends Rule {
 		) );
 	}
 
+	function getSubDescription() {
+		return sprintf( __( "Your current security keys are %s days old. Time to update them!", wp_defender()->domain ), $this->check() );
+	}
+
 	/**
 	 * @return string
 	 */

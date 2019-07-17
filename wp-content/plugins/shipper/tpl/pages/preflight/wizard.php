@@ -5,6 +5,7 @@
  * @package shipper
  */
 
+$migration = new Shipper_Model_Stored_Migration;
 ?>
 
 <div class="shipper-migration-content shipper-migration-progress-content shipper-preflight-wizard">
@@ -24,9 +25,9 @@
 
 	<div class="sui-tabs sui-tabs-flushed shipper-preflight-results">
 		<div data-tabs="">
-			<div class="shipper-preflight-done-tab" id="shipper-tab-source">
+			<div class="shipper-preflight-done-tab" id="shipper-tab-local">
 				<i class="sui-icon-storage-server-data" aria-hidden="true"></i>
-				<span><?php esc_html_e( 'Source', 'shipper' ); ?></span>
+				<span><?php echo esc_html( $migration->get_source() ); ?></span>
 				<span class="shipper-check-status">
 				<?php
 					$checks = $result['checks']['local'];
@@ -45,9 +46,11 @@
 						?> sui-<?php echo $icon_kind; ?>"></i>
 				</span>
 			</div>
-			<div class="shipper-preflight-done-tab" id="shipper-tab-destination">
-				<i class="sui-icon-upload-cloud" aria-hidden="true"></i>
-				<span><?php esc_html_e( 'Destination', 'shipper' ); ?></span>
+			<div class="shipper-preflight-done-tab" id="shipper-tab-remote">
+				<i class="sui-icon-clipboard-notes" aria-hidden="true"></i>
+				<span>
+					<?php echo esc_html( $migration->get_destination() ); ?>
+				</span>
 				<span class="shipper-check-status">
 				<?php
 					$checks = $result['checks']['remote'];
@@ -66,12 +69,12 @@
 						?> sui-<?php echo $icon_kind; ?>"></i>
 				</span>
 			</div>
-			<div class="shipper-preflight-done-tab" id="shipper-tab-files">
-				<i class="sui-icon-clipboard-notes" aria-hidden="true"></i>
-				<span><?php esc_html_e( 'Files', 'shipper' ); ?></span>
+			<div class="shipper-preflight-done-tab" id="shipper-tab-sysdiff">
+				<i class="sui-icon-upload-cloud" aria-hidden="true"></i>
+				<span><?php esc_html_e( 'System Difference', 'shipper' ); ?></span>
 				<span class="shipper-check-status">
 				<?php
-					$checks = $result['checks']['files'];
+					$checks = $result['checks']['sysdiff'];
 					$icon_type = empty( $checks['errors_count'] )
 						? 'check-tick'
 						: 'warning-alert'
@@ -128,7 +131,7 @@
 				) ); ?>
 			</div>
 			<div>
-				<?php $this->render( 'pages/preflight/wizard-files', array(
+				<?php $this->render( 'pages/preflight/wizard-sysdiff', array(
 					'result' => $result,
 					'has_issues' => $has_issues,
 					'has_errors' => $has_errors,

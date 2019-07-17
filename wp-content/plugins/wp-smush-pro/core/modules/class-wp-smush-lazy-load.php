@@ -13,7 +13,7 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Class WP_Smush_Lazy_Load
  */
-class WP_Smush_Lazy_Load extends WP_Smush_Content {
+class WP_Smush_Lazy_Load extends WP_Smush_Module {
 
 	/**
 	 * Lazy loading settings.
@@ -22,6 +22,25 @@ class WP_Smush_Lazy_Load extends WP_Smush_Content {
 	 * @var array $settings
 	 */
 	private $options;
+
+	/**
+	 * Page parser.
+	 *
+	 * @since 3.2.2
+	 * @var WP_Smush_Page_Parser $parser
+	 */
+	protected $parser;
+
+	/**
+	 * WP_Smush_Lazy_Load constructor.
+	 *
+	 * @since 3.2.2
+	 * @param WP_Smush_Page_Parser $parser  Page parser instance.
+	 */
+	public function __construct( WP_Smush_Page_Parser $parser ) {
+		$this->parser = $parser;
+		parent::__construct();
+	}
 
 	/**
 	 * Initialize module actions.
@@ -41,6 +60,11 @@ class WP_Smush_Lazy_Load extends WP_Smush_Content {
 			return;
 		}
 
+		// Skip AMP pages.
+		if ( function_exists( 'is_amp_endpoint' ) && is_amp_endpoint() ) {
+			return;
+		}
+
 		// Load js file that is required in public facing pages.
 		add_action( 'wp_head', array( $this, 'add_inline_styles' ) );
 
@@ -49,73 +73,81 @@ class WP_Smush_Lazy_Load extends WP_Smush_Content {
 		// Allow lazy load attributes in img tag.
 		add_filter( 'wp_kses_allowed_html', array( $this, 'add_lazy_load_attributes' ) );
 
+		$this->parser->enable( 'lazy_load' );
+		add_filter( 'wp_smush_should_skip_parse', array( $this, 'maybe_skip_parse' ), 10 );
+
 		// Filter images.
-		if ( isset( $this->options['output']['content'] ) && $this->options['output']['content'] ) {
-			add_filter( 'the_content', array( $this, 'set_lazy_load_attributes' ), 100 );
+		if ( ! isset( $this->options['output']['content'] ) || ! $this->options['output']['content'] ) {
+			add_filter( 'the_content', array( $this, 'exclude_from_lazy_loading' ), 100 );
 		}
-		if ( isset( $this->options['output']['thumbnails'] ) && $this->options['output']['thumbnails'] ) {
-			add_filter( 'post_thumbnail_html', array( $this, 'set_lazy_load_attributes' ), 100 );
+		if ( ! isset( $this->options['output']['thumbnails'] ) || ! $this->options['output']['thumbnails'] ) {
+			add_filter( 'post_thumbnail_html', array( $this, 'exclude_from_lazy_loading' ), 100 );
 		}
-		if ( isset( $this->options['output']['gravatars'] ) && $this->options['output']['gravatars'] ) {
-			add_filter( 'get_avatar', array( $this, 'set_lazy_load_attributes' ), 100 );
+		if ( ! isset( $this->options['output']['gravatars'] ) || ! $this->options['output']['gravatars'] ) {
+			add_filter( 'get_avatar', array( $this, 'exclude_from_lazy_loading' ), 100 );
 		}
-		if ( isset( $this->options['output']['widgets'] ) && $this->options['output']['widgets'] ) {
+		if ( ! isset( $this->options['output']['widgets'] ) || ! $this->options['output']['widgets'] ) {
 			add_action( 'dynamic_sidebar_before', array( $this, 'filter_sidebar_content_start' ), 0 );
 			add_action( 'dynamic_sidebar_after', array( $this, 'filter_sidebar_content_end' ), 1000 );
 		}
 	}
 
 	/**
-	 * Add inline styles at the top of the page for preloaders and effects.
+	 * Add inline styles at the top of the page for pre-loaders and effects.
 	 *
 	 * @since 3.2.0
 	 */
 	public function add_inline_styles() {
-		if ( $this->options['animation']['disabled'] ) {
+		if ( ! $this->options['animation']['selected'] ) {
 			return;
 		}
 
-		$loader = WP_SMUSH_URL . 'app/assets/images/icon-loader.gif';
-		$fadein = isset( $this->options['animation']['duration'] ) ? $this->options['animation']['duration'] : 0;
-		$delay  = isset( $this->options['animation']['delay'] ) ? $this->options['animation']['delay'] : 0;
+		// Spinner.
+		if ( 'spinner' === $this->options['animation']['selected'] ) {
+			$loader = WP_SMUSH_URL . 'app/assets/images/smush-lazyloader-' . $this->options['animation']['spinner']['selected'] . '.gif';
+			if ( isset( $this->options['animation']['spinner']['selected'] ) && 5 < (int) $this->options['animation']['spinner']['selected'] ) {
+				$loader = wp_get_attachment_image_src( $this->options['animation']['spinner']['selected'], 'full' );
+				$loader = $loader[0];
+			}
+			$background = 'rgba(255, 255, 255, 0)';
+		} else {
+			// Placeholder.
+			$loader     = WP_SMUSH_URL . 'app/assets/images/smush-placeholder.png';
+			$background = '#FAFAFA';
+			if ( isset( $this->options['animation']['placeholder']['selected'] ) && 2 === (int) $this->options['animation']['placeholder']['selected'] ) {
+				$background = '#333333';
+			}
+			if ( isset( $this->options['animation']['placeholder']['selected'] ) && 2 < (int) $this->options['animation']['placeholder']['selected'] ) {
+				$loader = wp_get_attachment_image_src( $this->options['animation']['placeholder']['selected'], 'full' );
+				$loader = $loader[0];
+
+				if ( isset( $this->options['animation']['placeholder']['color'] ) ) {
+					$background = $this->options['animation']['placeholder']['color'];
+				}
+			}
+		}
+
+		// Fade in.
+		$fadein = isset( $this->options['animation']['fadein']['duration'] ) ? $this->options['animation']['fadein']['duration'] : 0;
+		$delay  = isset( $this->options['animation']['fadein']['delay'] ) ? $this->options['animation']['fadein']['delay'] : 0;
 		?>
 		<style>
 			.no-js img.lazyload { display: none; }
 			figure.wp-block-image img.lazyloading { min-width: 150px; }
-			<?php if ( $this->options['animation']['spinner'] ) : ?>
-				@-webkit-keyframes spin {
-					0% {
-						-webkit-transform: rotate(0deg);
-						transform: rotate(0deg);
-					}
-					100% {
-						-webkit-transform: rotate(360deg);
-						transform: rotate(360deg);
-					}
-				}
-				@keyframes spin {
-					0% {
-						-webkit-transform: rotate(0deg);
-						transform: rotate(0deg);
-					}
-					100% {
-						-webkit-transform: rotate(360deg);
-						transform: rotate(360deg);
-					}
-				}
-				.lazyload { opacity: 0; }
-				.lazyloading {
-					border: 0 !important;
-					opacity: 1;
-					background: rgba(255, 255, 255, 0) url('<?php echo esc_url( $loader ); ?>') no-repeat center !important;
-					background-size: 30px 30px !important;
-				}
-			<?php else : ?>
+			<?php if ( 'fadein' === $this->options['animation']['selected'] ) : ?>
 				.lazyload, .lazyloading { opacity: 0; }
 				.lazyloaded {
 					opacity: 1;
 					transition: opacity <?php echo esc_html( $fadein ); ?>ms;
 					transition-delay: <?php echo esc_html( $delay ); ?>ms;
+				}
+			<?php else : ?>
+				.lazyload { opacity: 0; }
+				.lazyloading {
+					border: 0 !important;
+					opacity: 1;
+					background: <?php echo esc_attr( $background ); ?> url('<?php echo esc_url( $loader ); ?>') no-repeat center !important;
+					background-size: 16px auto !important;
 				}
 			<?php endif; ?>
 		</style>
@@ -179,79 +211,124 @@ lazySizesConfig.loadMode = 1;";
 	}
 
 	/**
-	 * Process images from content and add appropriate lazy load attributes.
+	 * Check if we need to skip parsing of this page.
 	 *
-	 * @since 3.2.0
+	 * @since 3.2.2
+	 * @param bool $skip  Skip parsing.
+	 *
+	 * @return bool
+	 */
+	public function maybe_skip_parse( $skip ) {
+		// Don't lazy load for feeds, previews.
+		if ( is_feed() || is_preview() ) {
+			$skip = true;
+		}
+
+		if ( ! $this->is_allowed_post_type() || $this->is_exluded_uri() ) {
+			$skip = true;
+		}
+
+		return $skip;
+	}
+
+	/**
+	 * Parse image for Lazy load.
+	 *
+	 * @since 3.2.2
+	 *
+	 * @param string $src    Image URL.
+	 * @param string $image  Image tag (<img>).
+	 *
+	 * @return string
+	 */
+	public function parse_image( $src, $image ) {
+		/**
+		 * Filter to skip a single image from lazy load.
+		 *
+		 * @param bool   $skip  Should skip? Default: false.
+		 * @param string $src   Image url.
+		 */
+		if ( apply_filters( 'smush_skip_image_from_lazy_load', false, $src ) ) {
+			return $image;
+		}
+
+		// Avoid conflicts if attributes are set (another plugin, for example).
+		if ( false !== strpos( $image, 'data-src' ) ) {
+			return $image;
+		}
+
+		/**
+		 * Check if some image formats are excluded.
+		 */
+		if ( in_array( false, $this->options['format'], true ) ) {
+			$ext = strtolower( pathinfo( $src, PATHINFO_EXTENSION ) );
+			$ext = 'jpg' === $ext ? 'jpeg' : $ext;
+
+			if ( isset( $this->options['format'][ $ext ] ) && ! $this->options['format'][ $ext ] ) {
+				return $image;
+			}
+		}
+
+		if ( $this->has_excluded_class_or_id( $image ) ) {
+			return $image;
+		}
+
+		$new_image = $image;
+
+		$src = WP_Smush_Page_Parser::get_attribute( $new_image, 'src' );
+		WP_Smush_Page_Parser::remove_attribute( $new_image, 'src' );
+		WP_Smush_Page_Parser::add_attribute( $new_image, 'data-src', $src );
+		WP_Smush_Page_Parser::add_attribute( $new_image, 'data-sizes', 'auto' );
+
+		// Change srcset to data-srcset attribute.
+		$new_image = preg_replace( '/<img(.*?)(srcset=)(.*?)>/i', '<img$1data-$2$3>', $new_image );
+
+		// Add .lazyload class.
+		$class = WP_Smush_Page_Parser::get_attribute( $new_image, 'class' );
+		if ( $class ) {
+			WP_Smush_Page_Parser::remove_attribute( $new_image, 'class' );
+			$class .= ' lazyload';
+		} else {
+			$class = 'lazyload';
+		}
+		WP_Smush_Page_Parser::add_attribute( $new_image, 'class', apply_filters( 'wp_smush_lazy_load_classes', $class ) );
+
+		WP_Smush_Page_Parser::add_attribute( $new_image, 'src', 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' );
+
+		// Use noscript element in HTML to load elements normally when JavaScript is disabled in browser.
+		$new_image .= '<noscript>' . $image . '</noscript>';
+
+		return $new_image;
+	}
+
+	/**
+	 * Get images from content and add exclusion class.
+	 *
+	 * @since 3.2.2
 	 *
 	 * @param string $content  Page/block content.
 	 *
 	 * @return string
 	 */
-	public function set_lazy_load_attributes( $content ) {
-		// Don't lazy load for feeds, previews.
-		if ( is_feed() || is_preview() ) {
-			return $content;
-		}
-
-		if ( ! $this->is_allowed_post_type() || $this->is_exluded_uri() ) {
-			return $content;
-		}
-
-		// Avoid conflicts if attributes are set (another plugin, for example).
-		if ( false !== strpos( $content, 'data-src' ) ) {
-			return $content;
-		}
-
-		$images = $this->get_images_from_content( $content );
+	public function exclude_from_lazy_loading( $content ) {
+		$images = WP_Smush_Page_Parser::get_images_from_content( $content );
 
 		if ( empty( $images ) ) {
 			return $content;
 		}
 
 		foreach ( $images[0] as $key => $image ) {
-			if ( apply_filters( 'smush_skip_image_from_lazy_load', false, $images['img_url'][ $key ] ) ) {
-				continue;
-			}
-
-			/**
-			 * Check if some image formats are excluded.
-			 */
-			if ( in_array( false, $this->options['format'], true ) ) {
-				$ext = strtolower( pathinfo( $images['img_url'][ $key ], PATHINFO_EXTENSION ) );
-				$ext = 'jpg' === $ext ? 'jpeg' : $ext;
-
-				if ( isset( $this->options['format'][ $ext ] ) && ! $this->options['format'][ $ext ] ) {
-					continue;
-				}
-			}
-
-			if ( $this->has_excluded_class_or_id( $image ) ) {
-				return $content;
-			}
-
 			$new_image = $image;
 
-			$this->remove_attribute( $new_image, 'src' );
-			$this->add_attribute( $new_image, 'data-src', $images['img_url'][ $key ] );
-			$this->add_attribute( $new_image, 'data-sizes', 'auto' );
-
-			// Change srcset to data-srcset attribute.
-			$new_image = preg_replace( '/<img(.*?)(srcset=)(.*?)>/i', '<img$1data-$2$3>', $new_image );
-
-			// Add .lazyload class.
-			$class = $this->get_attribute( $new_image, 'class' );
+			// Add .no-lazyload class.
+			$class = WP_Smush_Page_Parser::get_attribute( $new_image, 'class' );
 			if ( $class ) {
-				$this->remove_attribute( $new_image, 'class' );
-				$class .= ' lazyload';
+				WP_Smush_Page_Parser::remove_attribute( $new_image, 'class' );
+				$class .= ' no-lazyload';
 			} else {
-				$class = 'lazyload';
+				$class = 'no-lazyload';
 			}
-			$this->add_attribute( $new_image, 'class', apply_filters( 'wp_smush_lazy_load_classes', $class ) );
-
-			$this->add_attribute( $new_image, 'src', 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' );
-
-			// Use noscript element in HTML to load elements normally when JavaScript is disabled in browser.
-			$new_image .= '<noscript>' . $image . '</noscript>';
+			WP_Smush_Page_Parser::add_attribute( $new_image, 'class', $class );
 
 			$content = str_replace( $image, $new_image, $content );
 		}
@@ -274,11 +351,11 @@ lazySizesConfig.loadMode = 1;";
 
 		$blog_is_frontpage = ( 'posts' === get_option( 'show_on_front' ) && ! is_multisite() ) ? true : false;
 
-		if ( is_front_page() && isset( $this->options['include']['frontpage'] ) && $this->options['include']['frontpage'] ) {
-			return true;
+		if ( is_front_page() && ( ! isset( $this->options['include']['frontpage'] ) || ! $this->options['include']['frontpage'] ) ) {
+			return false;
 		} elseif ( is_home() && isset( $this->options['include']['home'] ) && $this->options['include']['home'] && ! $blog_is_frontpage ) {
 			return true;
-		} elseif ( is_page() && isset( $this->options['include']['page'] ) && $this->options['include']['page'] ) {
+		} elseif ( is_page() && ! is_front_page() && isset( $this->options['include']['page'] ) && $this->options['include']['page'] ) {
 			return true;
 		} elseif ( is_single() && isset( $this->options['include']['single'] ) && $this->options['include']['single'] ) {
 			return true;
@@ -330,9 +407,9 @@ lazySizesConfig.loadMode = 1;";
 	 * @return bool
 	 */
 	private function has_excluded_class_or_id( $image ) {
-		$image_classes = $this->get_attribute( $image, 'class' );
+		$image_classes = WP_Smush_Page_Parser::get_attribute( $image, 'class' );
 		$image_classes = explode( ' ', $image_classes );
-		$image_id      = '#' . $this->get_attribute( $image, 'id' );
+		$image_id      = '#' . WP_Smush_Page_Parser::get_attribute( $image, 'id' );
 
 		if ( in_array( $image_id, $this->options['exclude-classes'], true ) ) {
 			return true;
@@ -341,6 +418,11 @@ lazySizesConfig.loadMode = 1;";
 		foreach ( $image_classes as $class ) {
 			// Skip Revolution Slider images.
 			if ( 'rev-slidebg' === $class ) {
+				return true;
+			}
+
+			// Internal class to skip images.
+			if ( 'no-lazyload' === $class ) {
 				return true;
 			}
 
@@ -369,7 +451,7 @@ lazySizesConfig.loadMode = 1;";
 	public function filter_sidebar_content_end() {
 		$content = ob_get_clean();
 
-		echo $this->set_lazy_load_attributes( $content );
+		echo $this->exclude_from_lazy_loading( $content );
 
 		unset( $content );
 	}

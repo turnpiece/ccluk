@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - LiteSpeed Cache - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2019-02-27 14:13:50+0000\n"
+"PO-Revision-Date: 2019-04-06 08:09:31+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,26 @@ msgstr ""
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: pl\n"
 "Project-Id-Version: Plugins - LiteSpeed Cache - Stable (latest release)\n"
+
+#: admin/tpl/inc/check_cache_disabled.php:9
+msgid "To use the caching functions you must have a LiteSpeed web server or be using QUIC.cloud CDN."
+msgstr "Aby używać funkcji pamięci podręcznej musisz posiadać Web Server LiteSpeed lub używac QUIC.cloud CDN."
+
+#: admin/tpl/setting/settings_media.php:224
+msgid "Preserve EXIF/XMP data"
+msgstr "Zachowaj dane EXIF/XMP"
+
+#: admin/tpl/setting/settings_inc.cache_mobile.php:15
+msgid "Only enable for AMP or mobile-specific design/content, not for responsive sites."
+msgstr "Włącz tylko dla AMP lub tylko mobilnych designów/zawartości, nie dla responsywnych stron."
+
+#: admin/tpl/setting/settings_inc.cache_mobile.php:14
+msgid "Cache mobile views separately."
+msgstr "Przechowuj odrębnie w pamięci podręcznej, przeglądnięcia mobilne."
+
+#: admin/tpl/debug_log.php:20
+msgid "Try GitHub Version"
+msgstr "Wypróbuj wersję GitHub"
 
 #: admin/tpl/setting/settings_cdn.php:112
 msgid "If you turn any of the above settings OFF, please remove the related file types from the %s box."
@@ -43,7 +63,7 @@ msgstr "Może później"
 msgid "Turn On Auto Upgrade"
 msgstr "Włącz automatyczne aktualizacje"
 
-#: admin/tpl/inc/banner_promo.new_version.php:68
+#: admin/tpl/inc/banner_promo.new_version.php:68 admin/tpl/debug_log.php:26
 msgid "Upgrade"
 msgstr "Aktualizuj"
 
@@ -82,7 +102,7 @@ msgstr "Aktualizacja przebiegła pomyślnie."
 msgid "Failed to upgrade."
 msgstr "Aktualizacja nie powiodła się."
 
-#: includes/litespeed-cache-config.class.php:768 inc/config.class.php:768
+#: includes/litespeed-cache-config.class.php:776 inc/config.class.php:776
 msgid "Changed setting successfully."
 msgstr "Zmieniono ustawienie pomyślnie."
 
@@ -227,8 +247,8 @@ msgstr "Responsywny element zastępczy"
 msgid "This will delete all generated image placeholder files"
 msgstr "Spowoduje to usunięcie wszystkich plików elementów zastępczych  dla wygenerowanych obrazów"
 
-#: admin/tpl/manage/manage_purge.php:81
 #: includes/litespeed-cache-gui.class.php:576 inc/gui.class.php:576
+#: admin/tpl/manage/manage_purge.php:81
 msgid "Placeholder Cache"
 msgstr "Pamięć podręczna elementów zastępczych"
 
@@ -239,10 +259,6 @@ msgstr "Proszę włączyć LiteSpeed Cache w ustawieniach wtyczki."
 #: admin/tpl/inc/check_cache_disabled.php:14
 msgid "Please enable the LSCache Module at the server level, or ask your hosting provider."
 msgstr "Włącz moduł LSCache na poziomie serwera lub skontaktuj się z dostawcą usług hostingowych."
-
-#: admin/tpl/inc/check_cache_disabled.php:9
-msgid "Caching with a non-LiteSpeed server (i.e. Apache or nginx) is not currently supported."
-msgstr "Pamięć podręczna z serwerem innym niż LiteSpeed (np. Apache lub nginx) nie jest obecnie obsługiwana."
 
 #: admin/admin-api.class.php:450
 msgid "Failed to post via WordPress"
@@ -260,23 +276,23 @@ msgstr "Biblioteka Inline Lazy Load Images"
 msgid "High-performance page caching and site optimization from LiteSpeed"
 msgstr "Wysokowydajne buforowanie stron i optymalizacja strony od LiteSpeed"
 
-#: admin/tpl/import_export.php:61 inc/media.class.php:241
+#: inc/media.class.php:246 admin/tpl/import_export.php:61
 msgid "Reset"
 msgstr "Reset"
 
-#: inc/media.class.php:222
+#: inc/media.class.php:227
 msgid "Click to Switch To Optimized File"
 msgstr "Kliknij aby zmienić na zoptymalizowany plik"
 
-#: inc/media.class.php:217
+#: inc/media.class.php:222
 msgid "Click to Restore Original File"
 msgstr "Kliknij aby odzyskać oryginalny plik"
 
-#: inc/media.class.php:185
+#: inc/media.class.php:190
 msgid "Click to Enable WebP"
 msgstr "Kliknij aby włączyć WebP"
 
-#: inc/media.class.php:180
+#: inc/media.class.php:185
 msgid "Click to Disable WebP"
 msgstr "Kliknij aby wyłączyć WebP"
 
@@ -284,7 +300,7 @@ msgstr "Kliknij aby wyłączyć WebP"
 msgid "Reset the optimized data successfully."
 msgstr "Zrestartowano zoptymalizowane dane pomyślnie."
 
-#: inc/img_optm.class.php:1028
+#: inc/img_optm.class.php:1021
 msgid "LSCWP %1$s has simplified the image pulling process. Please %2$s, or resend the pull notification this one time only. After that, the process will be automated."
 msgstr "LSCWP %1$s uprościło proces przesyłania obrazka. Proszę %2$s lub wyślij powiadomienie o przesłaniu tylko raz. Następnie proces zostanie zautomatyzowany."
 
@@ -416,7 +432,7 @@ msgstr "Następny poziom"
 msgid "Good news from LiteSpeed image server"
 msgstr "Dobra wiadomość z serwera obrazków LiteSpeed"
 
-#: admin/tpl/api/quic.user_welcome.php:7 admin/tpl/api/quic.register.php:7
+#: admin/tpl/api/quic.register.php:7 admin/tpl/api/quic.user_welcome.php:7
 #: admin/tpl/api/quic.login.php:7
 msgid "Quic Cloud User Panel"
 msgstr "Quic Cloud User Panel"
@@ -497,8 +513,8 @@ msgstr "Spowoduje to wstawienie asynchronicznej biblioteki CSS w celu uniknięci
 msgid "Inline CSS Async Lib"
 msgstr "Wewnętrzny CSS Async Lib"
 
-#: admin/tpl/setting/settings_media.php:124
 #: admin/tpl/setting/settings_optimize.php:191
+#: admin/tpl/setting/settings_media.php:124
 msgid "Run Queue Manually"
 msgstr "Uruchom kolejkę ręcznie"
 
@@ -510,13 +526,13 @@ msgstr "Lista URL w kolejce czeka na crona"
 msgid "Last requested cost"
 msgstr "Koszt ostatniego żądania"
 
-#: admin/tpl/setting/settings_media.php:113
 #: admin/tpl/setting/settings_optimize.php:172
+#: admin/tpl/setting/settings_media.php:113
 msgid "Last generated"
 msgstr "Ostatnio wygenerowany"
 
-#: admin/tpl/setting/settings_media.php:105
 #: admin/tpl/setting/settings_optimize.php:164
+#: admin/tpl/setting/settings_media.php:105
 msgid "If set to %s this is done in the foreground, which may slow down page load."
 msgstr "Jeśli ustawiono %s to działanie odbywa się na pierwszym planie, co może spowolnić ładowanie strony."
 
@@ -536,8 +552,8 @@ msgstr "Optymalizuj dostarczanie CSS"
 msgid "This will delete all generated critical CSS files"
 msgstr "Ta opcja usunie wszystkie wygenerowane krytyczne pliki CSS"
 
-#: admin/tpl/manage/manage_purge.php:72
 #: includes/litespeed-cache-gui.class.php:566 inc/gui.class.php:566
+#: admin/tpl/manage/manage_purge.php:72
 msgid "Critical CSS"
 msgstr "Krytyczny CSS"
 
@@ -561,11 +577,11 @@ msgstr "Wyłączenie tego może spowodować, że zadania WordPress wyzwalane prz
 msgid "Disable WordPress heartbeat to prevent AJAX calls from breaking debug logging."
 msgstr "Wyłącz Puls WordPress, aby zapobiec przerwaniu wywoływania debugowania przez wywołania AJAX."
 
-#: includes/litespeed-cache-utility.class.php:235 inc/utility.class.php:235
+#: includes/litespeed-cache-utility.class.php:239 inc/utility.class.php:239
 msgid "right now"
 msgstr "teraz"
 
-#: includes/litespeed-cache-utility.class.php:235 inc/utility.class.php:235
+#: includes/litespeed-cache-utility.class.php:239 inc/utility.class.php:239
 msgid "just now"
 msgstr "właśnie"
 
@@ -698,13 +714,13 @@ msgstr "Spowoduje to wyłączenie funkcji LSCache i wszystkich funkcji optymaliz
 msgid "Disable All Features"
 msgstr "Wyłącz wszystkie funkcje"
 
-#: admin/tpl/manage/manage_purge.php:63
 #: includes/litespeed-cache-gui.class.php:556 inc/gui.class.php:556
+#: admin/tpl/manage/manage_purge.php:63
 msgid "Opcode Cache"
 msgstr "Pamięć podręczna Opcode"
 
-#: admin/tpl/manage/manage_purge.php:45
 #: includes/litespeed-cache-gui.class.php:527 inc/gui.class.php:527
+#: admin/tpl/manage/manage_purge.php:45
 msgid "CSS/JS Cache"
 msgstr "Pamięć podręczna CSS / JS"
 
@@ -951,10 +967,10 @@ msgstr "Minimalna dozwolona wartość serwera"
 
 #: admin/tpl/setting/settings_excludes.php:72
 #: admin/tpl/setting/settings_excludes.php:110
+#: admin/tpl/setting/settings_cdn.php:88
 #: admin/tpl/setting/settings_crawler.php:22
 #: admin/tpl/setting/settings_crawler.php:95
 #: admin/tpl/setting/settings_crawler.php:100
-#: admin/tpl/setting/settings_cdn.php:88
 msgid "NOTE"
 msgstr "UWAGA"
 
@@ -967,6 +983,7 @@ msgid "Server variable(s) %s available to override this setting."
 msgstr "Zmienna(e) serwera %s dostępne do nadpisania tego ustawienia."
 
 #: admin/litespeed-cache-admin-display.class.php:959
+#: admin/tpl/setting/settings_optimize.php:140
 #: admin/tpl/setting/settings_media.php:38
 #: admin/tpl/setting/settings_tuning.php:24
 #: admin/tpl/setting/settings_tuning.php:40
@@ -974,7 +991,6 @@ msgstr "Zmienna(e) serwera %s dostępne do nadpisania tego ustawienia."
 #: admin/tpl/setting/settings_tuning.php:76
 #: admin/tpl/setting/settings_tuning.php:109
 #: admin/tpl/setting/settings_tuning.php:157
-#: admin/tpl/setting/settings_optimize.php:140
 msgid "API"
 msgstr "API"
 
@@ -1158,9 +1174,9 @@ msgstr "Host"
 msgid "Use object cache functionality."
 msgstr "Użyj funkcji pamięci podręcznej obiektów."
 
+#: includes/litespeed-cache-gui.class.php:546 inc/gui.class.php:546
 #: admin/tpl/manage/manage_purge.php:54
 #: admin/tpl/setting/settings_inc.cache_object.php:28
-#: includes/litespeed-cache-gui.class.php:546 inc/gui.class.php:546
 msgid "Object Cache"
 msgstr "Pamięć podręczna obiektów"
 
@@ -1289,8 +1305,8 @@ msgstr "Domena Cloudflare"
 msgid "Please go to Settings to turn Cloudflare API on before use the following functionalities."
 msgstr "Przejdź do Ustawień, aby włączyć Cloudflare API, zanim skorzystasz z poniższych funkcji."
 
-#: admin/tpl/manage/manage_cdn.php:11
 #: includes/litespeed-cache-gui.class.php:536 inc/gui.class.php:536
+#: admin/tpl/manage/manage_cdn.php:11
 msgid "Cloudflare"
 msgstr "Cloudflare"
 
@@ -1407,11 +1423,7 @@ msgstr "Zwiększy to rozmiar plików zoptymalizowanych."
 msgid "Preserve EXIF data (copyright, GPS, comments, keywords, etc) when optimizing."
 msgstr "Zachowaj dane EXIF (prawa autorskie, GPS, komentarze, tagi, itp.) Podczas optymalizacji."
 
-#: admin/tpl/setting/settings_media.php:224
-msgid "Preserve EXIF data"
-msgstr "Zachowaj dane EXIF"
-
-#: admin/tpl/debug_log.php:30
+#: admin/tpl/debug_log.php:42
 msgid "Clear Log"
 msgstr "Wyczyść logi"
 
@@ -1423,15 +1435,15 @@ msgstr "Nie udało się nawiązać komunikacji z serwerem obrazów LiteSpeed"
 msgid "To test the cart, visit the <a %s>FAQ</a>."
 msgstr "Aby przetestować ten koszyk, zajrzyj do <a %s>FAQ</a>."
 
-#: includes/litespeed-cache-utility.class.php:238 inc/utility.class.php:238
+#: includes/litespeed-cache-utility.class.php:242 inc/utility.class.php:242
 msgid " %s ago"
 msgstr "%s temu"
 
-#: inc/media.class.php:206
+#: inc/media.class.php:211
 msgid "Original saved %s"
 msgstr "Oryginał zapisany %s"
 
-#: inc/media.class.php:173
+#: inc/media.class.php:178
 msgid "WebP saved %s"
 msgstr "WebP zapisane %s"
 
@@ -1536,7 +1548,7 @@ msgstr "Prywatnie zapisuj pamięć podręczną koszyka jeśli nie jest pusty."
 msgid "Privately Cache Cart"
 msgstr "Prywatna pamięć podręczna koszyka"
 
-#: inc/media.class.php:147
+#: inc/media.class.php:152
 msgid "LiteSpeed Optimization"
 msgstr "Optymizacja LiteSpeed"
 
@@ -1584,11 +1596,11 @@ msgstr "Przełącz wszystkie obrazy z biblioteki multimediów z powrotem na oryg
 msgid "Revert Optimization"
 msgstr "Przywróć optymalizację"
 
-#: admin/litespeed-cache-admin-display.class.php:978
-#: admin/tpl/manage/manage_cdn.php:60 admin/tpl/inc/check_cache_disabled.php:49
-#: admin/tpl/inc/img_optm.summary.php:164
+#: inc/doc.cls.php:39 admin/litespeed-cache-admin-display.class.php:978
+#: admin/tpl/manage/manage_cdn.php:60 admin/tpl/inc/img_optm.summary.php:164
 #: admin/tpl/inc/img_optm.initialize.php:29
-#: admin/litespeed-cache-admin.class.php:228 inc/doc.cls.php:39
+#: admin/tpl/inc/check_cache_disabled.php:49
+#: admin/litespeed-cache-admin.class.php:228
 msgid "Learn More"
 msgstr "Dowiedz się więcej"
 
@@ -1757,8 +1769,8 @@ msgstr "Podsumowanie optymalizacji"
 msgid "LiteSpeed Cache Image Optimization"
 msgstr "LiteSpeed Cache Image Optimization"
 
-#: admin/litespeed-cache-admin-display.class.php:165
 #: includes/litespeed-cache-gui.class.php:502 inc/gui.class.php:502
+#: admin/litespeed-cache-admin-display.class.php:165
 msgid "Image Optimization"
 msgstr "Optymalizacja obrazów"
 
@@ -1811,11 +1823,11 @@ msgstr "Określ obraz base64, który będzie używany jako symbol zastępczy pod
 msgid "Lazy Load Image Placeholder"
 msgstr "Obraz zastępczy Lazy Load"
 
+#: admin/tpl/setting/settings_optimize.php:141
 #: admin/tpl/setting/settings_media.php:40
 #: admin/tpl/setting/settings_tuning.php:42
 #: admin/tpl/setting/settings_tuning.php:78
 #: admin/tpl/setting/settings_tuning.php:159
-#: admin/tpl/setting/settings_optimize.php:141
 msgid "Elements with attribute %s in html code will be excluded."
 msgstr "Elementy z atrybutem %s w kodzie html zostaną wykluczone."
 
@@ -1918,7 +1930,7 @@ msgstr "Aby dopasować początek, dodaj %s na początku elementu."
 msgid "For example, for %s, %s can be used here."
 msgstr "Na przykład, dla %s, %s może zostać użyte tutaj."
 
-#: admin/tpl/network_settings.php:9 admin/tpl/settings.php:11
+#: admin/tpl/settings.php:11 admin/tpl/network_settings.php:9
 msgid "Media"
 msgstr "Media"
 
@@ -1986,9 +1998,9 @@ msgstr "Określ krytyczne reguły CSS w przypadku treści ponadgrupowych po wł�
 msgid "Critical CSS Rules"
 msgstr "Krytyczne reguły CSS"
 
-#: admin/tpl/setting/settings_tuning.php:143
 #: admin/tpl/setting/settings_optimize.php:132
 #: admin/tpl/setting/settings_optimize.php:153
+#: admin/tpl/setting/settings_tuning.php:143
 msgid "Load CSS Asynchronously"
 msgstr "Ładuj CSS asynchornicznie"
 
@@ -2000,12 +2012,12 @@ msgstr "Zapobiegaj ładowaniu Google Fonts na wszystkich stronach."
 msgid "Remove Google Fonts"
 msgstr "Usuń Google Fonts"
 
-#: admin/tpl/setting/settings_media.php:149
-#: admin/tpl/setting/settings_tuning.php:103
-#: admin/tpl/setting/settings_tuning.php:171
 #: admin/tpl/setting/settings_optimize.php:137
 #: admin/tpl/setting/settings_optimize.php:238
 #: admin/tpl/setting/settings_optimize.php:276
+#: admin/tpl/setting/settings_media.php:149
+#: admin/tpl/setting/settings_tuning.php:103
+#: admin/tpl/setting/settings_tuning.php:171
 msgid "This can improve your speed score in services like Pingdom, GTmetrix and PageSpeed."
 msgstr "To może zwiększyć szybkość twojej strony w serwisach takich jak Pingdom, GTmetrix i PageSpeed."
 
@@ -2054,10 +2066,10 @@ msgstr "Aby wykluczyć %1$s, wpisz %2$s."
 msgid "categories"
 msgstr "kategorie"
 
-#: admin/tpl/setting/settings_inc.exclude_cookies.php:16
 #: admin/tpl/setting/settings_excludes.php:66
 #: admin/tpl/setting/settings_excludes.php:104
 #: admin/tpl/setting/settings_inc.exclude_useragent.php:15
+#: admin/tpl/setting/settings_inc.exclude_cookies.php:16
 msgid "To prevent %s from being cached, enter it here."
 msgstr "A by zapobiec zapisywaniu w podręcznej %s, wpisz tutaj"
 
@@ -2087,26 +2099,26 @@ msgstr "Te logi zostaną zapisane do %s."
 
 #: admin/litespeed-cache-admin-display.class.php:997
 #: admin/tpl/manage/manage_purge.php:152
-#: admin/tpl/setting/settings_inc.exclude_cookies.php:19
-#: admin/tpl/setting/settings_cache.php:83
-#: admin/tpl/setting/settings_purge.php:85
-#: admin/tpl/setting/settings_media.php:36
-#: admin/tpl/setting/settings_media.php:53
-#: admin/tpl/setting/settings_media.php:252
 #: admin/tpl/setting/settings_inc.cache_object.php:114
 #: admin/tpl/setting/settings_inc.cache_object.php:122
+#: admin/tpl/setting/settings_optimize.php:264
 #: admin/tpl/setting/settings_excludes.php:45
 #: admin/tpl/setting/settings_excludes.php:68
 #: admin/tpl/setting/settings_excludes.php:106
-#: admin/tpl/setting/settings_tuning.php:38
-#: admin/tpl/setting/settings_tuning.php:74
-#: admin/tpl/setting/settings_tuning.php:155
-#: admin/tpl/setting/settings_crawler.php:132
-#: admin/tpl/setting/settings_crawler.php:154
-#: admin/tpl/setting/settings_optimize.php:264
+#: admin/tpl/setting/settings_media.php:36
+#: admin/tpl/setting/settings_media.php:53
+#: admin/tpl/setting/settings_media.php:252
 #: admin/tpl/setting/settings_cdn.php:107
 #: admin/tpl/setting/settings_cdn.php:139
 #: admin/tpl/setting/settings_cdn.php:151
+#: admin/tpl/setting/settings_cache.php:83
+#: admin/tpl/setting/settings_purge.php:85
+#: admin/tpl/setting/settings_crawler.php:132
+#: admin/tpl/setting/settings_crawler.php:154
+#: admin/tpl/setting/settings_tuning.php:38
+#: admin/tpl/setting/settings_tuning.php:74
+#: admin/tpl/setting/settings_tuning.php:155
+#: admin/tpl/setting/settings_inc.exclude_cookies.php:19
 msgid "One per line."
 msgstr "Jeden na linię."
 
@@ -2191,35 +2203,35 @@ msgstr "Włącz CDN"
 msgid "CDN Settings"
 msgstr "Ustawienia CDN"
 
-#: admin/tpl/settings.php:12 admin/tpl/manage.php:10
-#: admin/tpl/setting/settings_cdn.php:234
+#: admin/tpl/settings.php:12 admin/tpl/setting/settings_cdn.php:234
+#: admin/tpl/manage.php:10
 msgid "CDN"
 msgstr "CDN"
 
 #: admin/litespeed-cache-admin-display.class.php:820
 #: admin/litespeed-cache-admin-display.class.php:908
-#: admin/tpl/setting/settings_debug.php:29
-#: admin/tpl/setting/settings_media.php:105
 #: admin/tpl/setting/settings_inc.cache_object.php:149
-#: admin/tpl/setting/settings_tuning.php:18
-#: admin/tpl/setting/settings_tuning.php:54
 #: admin/tpl/setting/settings_optimize.php:152
 #: admin/tpl/setting/settings_optimize.php:164
+#: admin/tpl/setting/settings_media.php:105
 #: admin/tpl/setting/settings_cdn.php:25 admin/tpl/setting/settings_cdn.php:163
+#: admin/tpl/setting/settings_tuning.php:18
+#: admin/tpl/setting/settings_tuning.php:54
+#: admin/tpl/setting/settings_debug.php:29
 msgid "OFF"
 msgstr "Wył"
 
 #: admin/litespeed-cache-admin-display.class.php:819
 #: admin/litespeed-cache-admin-display.class.php:904
-#: admin/tpl/setting/settings_debug.php:35
 #: admin/tpl/setting/settings_inc.cache_mobile.php:65
-#: admin/tpl/setting/settings_media.php:102
-#: admin/tpl/setting/settings_tuning.php:21
-#: admin/tpl/setting/settings_tuning.php:57
 #: admin/tpl/setting/settings_optimize.php:138
 #: admin/tpl/setting/settings_optimize.php:152
 #: admin/tpl/setting/settings_optimize.php:153
 #: admin/tpl/setting/settings_optimize.php:248
+#: admin/tpl/setting/settings_media.php:102
+#: admin/tpl/setting/settings_tuning.php:21
+#: admin/tpl/setting/settings_tuning.php:57
+#: admin/tpl/setting/settings_debug.php:35
 msgid "ON"
 msgstr "Wł"
 
@@ -2591,16 +2603,16 @@ msgstr "Wyczyść ustawienia sieciowie"
 msgid "Cache Control Network Settings"
 msgstr "Zapisz ustawienia sieci pamięci podręcznej"
 
-#: admin/tpl/network_settings.php:8 admin/tpl/settings.php:8
+#: admin/tpl/settings.php:8 admin/tpl/network_settings.php:8
 msgid "Excludes"
 msgstr "Wyjątki"
 
-#: admin/tpl/manage/manage_purge.php:116 admin/tpl/network_settings.php:7
-#: admin/tpl/settings.php:7 admin/tpl/manage.php:5
+#: admin/tpl/manage/manage_purge.php:116 admin/tpl/settings.php:7
+#: admin/tpl/manage.php:5 admin/tpl/network_settings.php:7
 msgid "Purge"
 msgstr "Wyczyść"
 
-#: admin/tpl/network_settings.php:6 admin/tpl/settings.php:6
+#: admin/tpl/settings.php:6 admin/tpl/network_settings.php:6
 msgid "Cache"
 msgstr "Pamięć podręczna"
 
@@ -2674,12 +2686,12 @@ msgstr "Heartbeat"
 msgid "Specify the maximum size of the log file. Minimum is 3MB. Maximum is 3000MB."
 msgstr "Określ maksymalny rozmiar pliku dziennika. Minimalna wartość to 3MB. Maksymalna 3000MB."
 
-#: admin/tpl/setting/settings_debug.php:95
 #: admin/tpl/setting/settings_tuning.php:88
+#: admin/tpl/setting/settings_debug.php:95
 msgid "MB"
 msgstr "MB"
 
-#: admin/tpl/debug_log.php:9
+#: admin/tpl/debug_log.php:8
 msgid "LiteSpeed Cache Debug Log Viewer"
 msgstr "LiteSpeed Cache przegląd logów debugowania"
 
@@ -2777,7 +2789,7 @@ msgid "The crawler feature is not enabled on the LiteSpeed server. Please consul
 msgstr "Funkcja robota indeksującego nie jest włączona na serwerze LiteSpeed. Skonsultuj się z administratorem serwera."
 
 #: admin/tpl/manage/manage_cdn.php:15 admin/tpl/crawler.php:91
-#: admin/tpl/settings.php:183 admin/tpl/inc/check_cache_disabled.php:38
+#: admin/tpl/inc/check_cache_disabled.php:38 admin/tpl/settings.php:183
 #: admin/tpl/setting/settings_optimize.php:15
 msgid "WARNING"
 msgstr "UWAGA"
@@ -3194,9 +3206,8 @@ msgstr "Adres IP strony"
 msgid "Email Address"
 msgstr "Adres E-Mail"
 
-#: admin/tpl/api/quic.user_welcome.php:15
-#: admin/tpl/api/quic.user_welcome.php:16 admin/tpl/api/quic.register.php:25
-#: admin/tpl/api/quic.login.php:25
+#: admin/tpl/api/quic.register.php:25 admin/tpl/api/quic.user_welcome.php:15
+#: admin/tpl/api/quic.user_welcome.php:16 admin/tpl/api/quic.login.php:25
 msgid "Email"
 msgstr "Email"
 
@@ -3449,8 +3460,8 @@ msgstr "Ta wtyczka komunikuje się z serwerem WWW LiteSpeed, aby poinformować, 
 msgid "LiteSpeed Cache is a page cache built into LiteSpeed Web Server."
 msgstr "LiteSpeed Cache to bufor stron wbudowany w LiteSpeed Web Server."
 
-#: admin/tpl/setting/settings_purge.php:53
 #: thirdparty/lscwp-3rd-woocommerce.cls.php:864
+#: admin/tpl/setting/settings_purge.php:53
 msgid "Note"
 msgstr "Notatka"
 
@@ -3670,8 +3681,8 @@ msgstr "Ciasteczko logowania"
 msgid "Current %s Contents"
 msgstr "Aktualna zawartość: %s"
 
-#: admin/tpl/network_settings.php:10 admin/tpl/settings.php:14
-#: admin/tpl/setting/settings_debug.php:82
+#: admin/tpl/settings.php:14 admin/tpl/setting/settings_debug.php:82
+#: admin/tpl/network_settings.php:10
 msgid "Advanced"
 msgstr "Zaawansowane"
 
@@ -3775,17 +3786,17 @@ msgstr "Nie powiodło się czyszczenie ponieważ url zawierał \"<\"."
 msgid "When disabling the cache, all cached entries for this blog will be purged."
 msgstr "Jeśli wyłączysz pamięć podręczną, wszystkie wpisy w pamięci podręcznej zostaną usunięte."
 
-#: admin/tpl/setting/settings_general.php:53
 #: admin/tpl/setting/settings_optimize.php:21
+#: admin/tpl/setting/settings_general.php:53
 msgid "NOTICE"
 msgstr "INFORMACJA"
 
-#: admin/tpl/setting/settings_inc.exclude_cookies.php:23
-#: admin/tpl/setting/settings_inc.cache_browser.php:13
 #: admin/tpl/setting/settings_inc.media_webp.php:13
-#: admin/tpl/setting/settings_inc.cache_resources.php:15
 #: admin/tpl/setting/settings_inc.cache_mobile.php:18
 #: admin/tpl/setting/settings_inc.exclude_useragent.php:22
+#: admin/tpl/setting/settings_inc.cache_resources.php:15
+#: admin/tpl/setting/settings_inc.cache_browser.php:13
+#: admin/tpl/setting/settings_inc.exclude_cookies.php:23
 #: admin/tpl/setting/settings_inc.cache_favicon.php:14
 msgid "This setting will edit the .htaccess file."
 msgstr "To ustawienie edytuje plik .htaccess."
@@ -3862,8 +3873,8 @@ msgstr "Wybierz \"Wszystko\", jeśli istnieją dynamiczne widgety połączone ze
 msgid "SYNTAX: Separate each user agent with a bar, %s."
 msgstr "SYNTAX: Oddziel każdy agent użytkownika paskiem,%s."
 
-#: admin/tpl/setting/settings_inc.exclude_cookies.php:18
 #: admin/tpl/setting/settings_inc.exclude_useragent.php:18
+#: admin/tpl/setting/settings_inc.exclude_cookies.php:18
 msgid "Spaces should have a backslash in front of them, %s."
 msgstr "Spacje powinny mieć backlash na samym początku, %s"
 
@@ -3884,14 +3895,6 @@ msgstr "Każdą spację należy zakończyć backslashem przed spacją, %s"
 msgid "SYNTAX: Each entry should be separated with a bar, %s."
 msgstr "SYNTAX: Każda pozycja powinna być oddzielona paskiem,%s"
 
-#: admin/tpl/setting/settings_inc.cache_mobile.php:15
-msgid "A site built with responsive design does not need to check this."
-msgstr "Responsywna witryna nie musi tego sprawdzać."
-
-#: admin/tpl/setting/settings_inc.cache_mobile.php:14
-msgid "When enabled, mobile views will be cached separately."
-msgstr "Po włączeniu mobilne widoki będą buforowane oddzielnie."
-
 #: admin/litespeed-cache-admin-error.class.php:200
 msgid "Failed to put contents into %s"
 msgstr "Nie udało się dodać zawartości do %s"
@@ -3905,9 +3908,9 @@ msgstr "Plik %s nie jest zapisywalny."
 msgid "Edit .htaccess"
 msgstr "Edycja .htaccess"
 
+#: includes/litespeed-cache-gui.class.php:485 inc/gui.class.php:485
 #: admin/litespeed-cache-admin-display.class.php:158
 #: admin/tpl/setting/settings_cdn.php:234
-#: includes/litespeed-cache-gui.class.php:485 inc/gui.class.php:485
 msgid "Manage"
 msgstr "Zarządzaj/Edytuj"
 
@@ -4025,9 +4028,9 @@ msgid "LiteSpeed Technologies"
 msgstr "LiteSpeed Technologies"
 
 #. Plugin Name of the plugin
+#: includes/litespeed-cache-gui.class.php:477 inc/gui.class.php:477
+#: admin/tpl/inc/admin_footer.php:6
 #: admin/tpl/inc/banner_promo.new_version.php:56
-#: admin/tpl/inc/admin_footer.php:6 includes/litespeed-cache-gui.class.php:477
-#: inc/gui.class.php:477
 msgid "LiteSpeed Cache"
 msgstr "LiteSpeed Cache"
 
@@ -4100,7 +4103,8 @@ msgid "Default Public Cache TTL"
 msgstr "Domyślny Publiczny Cache TTL"
 
 #: admin/tpl/esi_widget_edit.php:69
-#: admin/tpl/setting/settings_inc.cache_browser.php:24
+#: admin/tpl/setting/settings_inc.cache_object.php:63
+#: admin/tpl/setting/settings_optimize.php:93
 #: admin/tpl/setting/settings_general.php:65
 #: admin/tpl/setting/settings_general.php:77
 #: admin/tpl/setting/settings_general.php:89
@@ -4108,11 +4112,10 @@ msgstr "Domyślny Publiczny Cache TTL"
 #: admin/tpl/setting/settings_general.php:114
 #: admin/tpl/setting/settings_general.php:127
 #: admin/tpl/setting/settings_general.php:140
-#: admin/tpl/setting/settings_inc.cache_object.php:63
 #: admin/tpl/setting/settings_crawler.php:40
 #: admin/tpl/setting/settings_crawler.php:52
 #: admin/tpl/setting/settings_crawler.php:64
-#: admin/tpl/setting/settings_optimize.php:93
+#: admin/tpl/setting/settings_inc.cache_browser.php:24
 msgid "seconds"
 msgstr "sekund"
 
@@ -4124,8 +4127,8 @@ msgstr "Adresy IP administratora"
 msgid "Enable LiteSpeed Cache"
 msgstr "Włącz LiteSpeed Cache"
 
-#: admin/tpl/network_settings.php:5 admin/tpl/settings.php:5
-#: admin/tpl/setting/settings_general.php:7
+#: admin/tpl/settings.php:5 admin/tpl/setting/settings_general.php:7
+#: admin/tpl/network_settings.php:5
 msgid "General"
 msgstr "Główne"
 
@@ -4137,10 +4140,6 @@ msgstr "Ustawienia LiteSpeed Cache"
 msgid "Notified LiteSpeed Web Server to purge all LSCache entries."
 msgstr "Powiadomiono LiteSpeed Web Server, aby wyczyścił wszystkie wpisy LSCache."
 
-#: admin/tpl/manage/manage_purge.php:39 admin/tpl/manage/manage_purge.php:45
-#: admin/tpl/manage/manage_purge.php:54 admin/tpl/manage/manage_purge.php:63
-#: admin/tpl/manage/manage_purge.php:72 admin/tpl/manage/manage_purge.php:81
-#: admin/tpl/manage/manage_purge.php:90
 #: includes/litespeed-cache-gui.class.php:511
 #: includes/litespeed-cache-gui.class.php:519
 #: includes/litespeed-cache-gui.class.php:527
@@ -4151,7 +4150,10 @@ msgstr "Powiadomiono LiteSpeed Web Server, aby wyczyścił wszystkie wpisy LSCac
 #: includes/litespeed-cache-gui.class.php:576 inc/gui.class.php:511
 #: inc/gui.class.php:519 inc/gui.class.php:527 inc/gui.class.php:536
 #: inc/gui.class.php:546 inc/gui.class.php:556 inc/gui.class.php:566
-#: inc/gui.class.php:576
+#: inc/gui.class.php:576 admin/tpl/manage/manage_purge.php:39
+#: admin/tpl/manage/manage_purge.php:45 admin/tpl/manage/manage_purge.php:54
+#: admin/tpl/manage/manage_purge.php:63 admin/tpl/manage/manage_purge.php:72
+#: admin/tpl/manage/manage_purge.php:81 admin/tpl/manage/manage_purge.php:90
 msgid "Purge All"
 msgstr "Opróżnij wszystko"
 
@@ -4159,9 +4161,9 @@ msgstr "Opróżnij wszystko"
 msgid "LiteSpeed Cache Management"
 msgstr "Zarządzanie LiteSpeed Cache"
 
+#: includes/litespeed-cache-gui.class.php:493 inc/gui.class.php:493
 #: admin/litespeed-cache-admin-display.class.php:156
 #: admin/litespeed-cache-admin-display.class.php:248
-#: includes/litespeed-cache-gui.class.php:493 inc/gui.class.php:493
 msgid "Settings"
 msgstr "Ustawienia główne"
 

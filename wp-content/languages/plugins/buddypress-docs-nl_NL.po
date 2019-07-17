@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - BuddyPress Docs - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2019-01-10 20:36:18+0000\n"
+"PO-Revision-Date: 2019-06-08 11:02:31+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -11,29 +11,32 @@ msgstr ""
 "Language: nl\n"
 "Project-Id-Version: Plugins - BuddyPress Docs - Stable (latest release)\n"
 
+#: includes/class-wp-widget-recent-docs.php:187
+msgid "When used within a group or on a user&rsquo;s profile, limit docs to the current group or displayed user&rsquo;s docs."
+msgstr "Bij gebruik binnen een groep of een gebruikersprofiel, docs beperken tot de huidige groep of weergegeven gebruikersdocumenten."
+
+#: includes/class-wp-widget-recent-docs.php:44
+msgid "Displays the most recent BuddyPress Docs that the visitor can read."
+msgstr "Geeft de meest recente BuddyPress Docs weer die de bezoeker kan lezen."
+
 #: bp-docs.php:628
 msgid "You do not have permission to do that."
 msgstr "Je hebt geen toestemming om dat te doen."
+
+#: includes/templatetags.php:2355
+msgid "This Doc is awaiting moderation"
+msgstr "Dit document wacht op moderatie"
+
+#: includes/templates/docs/tabs-nouveau.php:2
+msgid "Directory menu"
+msgstr "Directory menu"
 
 #: includes/templates/docs/docs-loop.php:46
 #: includes/templates/docs/docs-loop-list.php:9
 msgid "Has attachment"
 msgstr "Heeft bijlage"
 
-#: includes/templates/docs/tabs-nouveau.php:2
-msgid "Directory menu"
-msgstr "Directory menu"
-
-#: includes/templatetags.php:2355
-msgid "This Doc is awaiting moderation"
-msgstr "Dit document wacht op moderatie"
-
 #: includes/templatetags.php:2355 includes/addon-moderation.php:59
-msgid "Awaiting Moderation"
-msgstr "In afwachting van moderatie"
-
-#: includes/addon-moderation.php:39
-msgctxt "General name of pending doc status"
 msgid "Awaiting Moderation"
 msgstr "In afwachting van moderatie"
 
@@ -43,609 +46,118 @@ msgid_plural "Awaiting Moderation (%s)"
 msgstr[0] "Afwachting van moderatie (%s)"
 msgstr[1] "Afwachting van moderatie (%s)"
 
-#: includes/admin.php:267
-msgid "Recent Comments"
-msgstr "Recente reacties"
-
-#: includes/component.php:152
-msgid "Search Docs..."
-msgstr "Documenten zoeken..."
-
-#: includes/component.php:314
-msgid "My Docs "
-msgstr "Mijn documenten"
-
-#. translators: group name
-#: includes/component.php:314 includes/integration-groups.php:1739
-msgid "%s&#8217;s Docs"
-msgstr "Documenten van %s"
-
-#: includes/component.php:1007
-msgid "Still working?"
-msgstr "Nog aan het werk?"
-
-#: includes/functions.php:548 includes/templatetags.php:1667
-msgid "Logged-in Users"
-msgstr "Ingelogde gebruikers"
-
-#: includes/functions.php:572 includes/templatetags.php:1666
-msgid "Anyone"
-msgstr "Iedereen"
-
-#: includes/integration-groups.php:540
-msgid "Members of %s"
-msgstr "Leden van %s"
-
-#: includes/integration-groups.php:771
-msgid "Group"
-msgstr "Groep"
-
-#: includes/integration-groups.php:939
-msgid "%s <span>%d</span>"
-msgstr "%s <span>%d</span>"
-
-#: includes/integration-groups.php:1252
-msgid "Options"
-msgstr "Opties"
-
-#: includes/integration-groups.php:1438
-msgid "View Docs"
-msgstr "Documenten bekijken"
-
-#: includes/query-builder.php:572
-msgid "There was an error when creating the doc."
-msgstr "Er is een fout opgetreden bij het aanmaken van dit document."
-
-#: includes/query-builder.php:575
-msgid "There was an error when saving the doc."
-msgstr "Er is een fout opgetreden bij het opslaan van dit document."
-
-#: includes/templates/docs/docs-header.php:25 includes/templatetags.php:1208
-msgid "Read"
-msgstr "Lezen"
-
-#: includes/component.php:906 includes/component.php:929
-#: includes/component.php:931
-msgid "Search"
-msgstr "Zoeken"
-
-#: includes/templates/docs/docs-loop.php:50
-#: includes/templates/docs/docs-loop-list.php:13
-#: includes/templates/docs/single/edit.php:41
-msgid "Title"
-msgstr "Titel"
-
-#: includes/templates/docs/docs-loop.php:60
-#: includes/templates/docs/docs-loop-list.php:21
-msgid "Created"
-msgstr "Aangemaakt"
-
-#: includes/templates/docs/docs-loop.php:172
-#: includes/templates/docs/docs-loop-list.php:91
-#: includes/templates/docs/docs-folder-loop.php:100
-msgid "There are no docs for this view."
-msgstr "Er zijn hier geen documenten te vinden."
-
-#: includes/templates/docs/single/comments.php:66
-msgid "Comment display has been disabled on this doc."
-msgstr "Reacties zijn uitgeschakeld voor dit document."
-
-#: includes/templates/docs/single/edit.php:47
-msgid "Permalink"
-msgstr "Permalink"
-
-#: includes/templates/docs/single/edit.php:55
-msgid "Content"
-msgstr "Inhoud"
-
-#: includes/templates/docs/single/edit.php:89
-#: includes/templates/docs/single/edit.php:90
-msgid "Associated Group"
-msgstr "Toegewezen groepen"
-
-#: includes/templates/docs/single/edit.php:110
-#: includes/templates/docs/single/edit.php:111
-msgid "Access"
-msgstr "Toegang"
-
-#: includes/templates/docs/single/edit.php:193
-#: includes/templates/docs/manage-folders.php:28
-msgid "Cancel"
-msgstr "Annuleren"
-
-#: includes/templates/docs/single/history.php:28
-msgid "Older: %s"
-msgstr "Ouder: %s"
-
-#: includes/templates/docs/single/history.php:29
-msgid "Newer: %s"
-msgstr "Nieuwer: %s"
-
-#: includes/templates/docs/single/history.php:36
-msgid "You are currently viewing a revision titled \"%1$s\", saved on %2$s by %3$s"
-msgstr "Dit is revisie \"%1$s\", bewaard op %2$s door %3$s"
-
-#: includes/templates/docs/single/history.php:60
-msgid "These revisions are identical."
-msgstr "Deze revisies zijn identiek."
-
-#: includes/templatetags.php:274
-msgid "<strong><a href=\"%s\" title=\"View All Docs\">View All Docs</a></strong>"
-msgstr "<strong><a href=\"%s\" title=\"Alle documenten bekijken\">Alle documenten bekijken</a></strong>"
-
-#: includes/templatetags.php:953
-msgid "None"
-msgstr "Geen"
-
-#: includes/templatetags.php:1140
-msgid "Who can read comments on this doc?"
-msgstr "Wie kan reacties op dit document lezen?"
-
-#: includes/templatetags.php:1144
-msgid "Who can post comments on this doc?"
-msgstr "Wie kan reacties op dit document plaatsen?"
-
-#: includes/templatetags.php:1379
-msgid "&laquo;"
-msgstr "&laquo;"
-
-#: includes/templatetags.php:1380
-msgid "&raquo;"
-msgstr "&raquo;"
-
-#: includes/templates/docs/tabs-nouveau.php:4
-#: includes/templates/docs/tabs-legacy.php:2
-msgid "All Docs"
-msgstr "Alle documenten"
-
-#: includes/templates/docs/tabs-nouveau.php:14
-#: includes/templates/docs/tabs-legacy.php:12
-msgid "My Groups"
-msgstr "Mijn groepen"
-
-#: includes/templatetags.php:1668
-msgid "My Friends"
-msgstr "Mijn vrienden"
-
-#: includes/templatetags.php:1674
-msgid "Members of: %s"
-msgstr "Leden van: %s"
-
-#: includes/templatetags.php:1750
-msgid "Limited"
-msgstr "Beperkt"
-
-#: includes/templatetags.php:1755
-msgid "Access: <strong>%s</strong>"
-msgstr "Toegang: <strong>%s</strong>"
-
-#: includes/upgrade.php:61 includes/upgrade.php:99
-msgid "Thanks for updating BuddyPress Docs. We need to run a few quick operations before your new Docs is ready to use."
-msgstr "Bedankt voor het updaten van BuddyPress Docs. We moeten nog enkele snelle aanpassingen doen voor uw nieuwe Docs helemaal gebruiksklaar is."
-
-#: includes/upgrade.php:62
-msgid "Click here to start the upgrade."
-msgstr "Klik hier om de upgrade te starten."
-
-#: includes/upgrade.php:71
-msgid "Upgrade"
-msgstr "Upgrade"
-
-#: includes/integration-users.php:296
-msgctxt "user Docs directory breadcrumb"
-msgid "%s&#8217;s Docs"
-msgstr "%s documenten"
-
-#: includes/integration-groups.php:1248
-msgid "Enable Docs for this group"
-msgstr "Activeer documenten voor deze groep"
-
-#: includes/integration-groups.php:1687
-msgctxt "group Docs directory breadcrumb"
-msgid "%s&#8217;s Docs"
-msgstr "%s documenten"
-
-#: includes/templates/docs/manage-folders.php:61
-msgid "Create"
-msgstr "Aanmaken"
-
-#: includes/upgrade.php:306
-msgid "Migrated %s of %s Docs. Migrating...."
-msgstr "Migreren %s van  %s documenten. Migreren...."
-
-#: includes/class-wp-widget-recent-docs.php:45
-msgctxt "widget name"
-msgid "(BuddyPress Docs) Recent Docs"
-msgstr "(BuddyPress Docs) Recente documenten"
-
-#: includes/class-wp-widget-recent-docs.php:70
-msgid "Recent BuddyPress Docs"
-msgstr "Recente BuddyPress documenten"
-
-#: includes/class-wp-widget-recent-docs.php:177
-msgid "Title:"
-msgstr "Titel:"
-
-#: includes/class-wp-widget-recent-docs.php:180
-msgid "Number of docs to show:"
-msgstr "Toon aantal documenten:"
-
-#: includes/class-wp-widget-recent-docs.php:184
-msgid "Display post date?"
-msgstr "Toon datum?"
-
-#: includes/templatetags.php:1321 includes/templatetags.php:1326
-msgid "Permanently Delete"
-msgstr "Permanent verwijderen"
-
-#: includes/templatetags.php:1324
-msgid "Move to Trash"
-msgstr "Naar prullenbak verplaatsen"
-
-#: includes/templates/docs/docs-loop.php:30
-#: includes/templates/docs/docs-loop-tree.php:7
-msgid "Manage Folders"
-msgstr "Mappen beheren"
-
-#: includes/templates/docs/manage-folders.php:3
-msgid "Delete Folder"
-msgstr "Map verwijderen"
-
-#: includes/templates/docs/docs-folder-loop.php:85
-msgid "Viewing %1$s-%2$s of %3$s docs in this folder."
-msgstr "Bekijk %1$s-%2$s van %3$s documenten in deze map."
-
-#: includes/templates/docs/docs-loop.php:35
-msgid "Hide Folders"
-msgstr "Mappen verbergen"
-
-#: includes/templates/docs/docs-loop.php:36
-msgid "Show Folders"
-msgstr "Mappen tonen"
-
-#: includes/templates/docs/docs-loop.php:85
-msgctxt "up one folder"
-msgid ".."
-msgstr ".."
-
-#. Plugin Name of the plugin
-#: includes/component.php:42
-msgid "BuddyPress Docs"
-msgstr "BuddyPress documenten"
-
-#. Plugin URI of the plugin
-msgid "http://github.com/boonebgorges/buddypress-docs"
-msgstr "http://github.com/boonebgorges/buddypress-docs"
+#: includes/addon-moderation.php:39
+msgctxt "General name of pending doc status"
+msgid "Awaiting Moderation"
+msgstr "In afwachting van moderatie"
 
 #. Author URI of the plugin
 msgid "http://boone.gorg.es"
 msgstr "http://boone.gorg.es"
 
-#: includes/upgrade.php:70 includes/upgrade.php:91
-msgid "BuddyPress Docs Upgrade"
-msgstr "BuddyPress documenten Upgrade"
+#. Author of the plugin
+msgid "Boone B Gorges, David Cavins"
+msgstr "Boone B Gorges, David Cavins"
 
-#: includes/upgrade.php:101
-msgid "Start the upgrade"
-msgstr "Start de upgrade"
+#. Description of the plugin
+msgid "Adds collaborative Docs to BuddyPress"
+msgstr "Voegt samenwerkende documenten toe aan BuddyPress"
+
+#. Plugin URI of the plugin
+msgid "http://github.com/boonebgorges/buddypress-docs"
+msgstr "http://github.com/boonebgorges/buddypress-docs"
+
+#: includes/upgrade.php:306
+msgid "Migrated %s of %s Docs. Migrating...."
+msgstr "Migreren %s van  %s documenten. Migreren...."
+
+#: includes/upgrade.php:258
+msgid "Group terms migrated. Now migrating Doc access terms...."
+msgstr "Groepstermen gemigreerd. Nu migreren de toegangsvoorwaarden van document...."
+
+#: includes/upgrade.php:243
+msgid "Docs associated with the group %s"
+msgstr "Documenten die zijn gekoppeld aan de groep %s"
+
+#: includes/upgrade.php:138
+msgid "Migration complete! <a href=\"%s\">Dashboard</a>"
+msgstr "Migratie voltooid! <a href=\"%s\">Dashboard</a>"
 
 #: includes/upgrade.php:107
 msgid "Migrating..."
 msgstr "Migreren ..."
 
-#: includes/templatetags-edit.php:144
-msgid "(no parent)"
-msgstr "(geen hoofd)"
-
-#: includes/attachments.php:74 includes/attachments.php:81
-msgid "File not found."
-msgstr "Bestand niet gevonden"
-
-#: includes/attachments.php:346
-msgid "Attachment deleted"
-msgstr "Bijlage verwijdert"
-
-#: includes/attachments.php:348
-msgid "Could not delete attachment"
-msgstr "Kan bijlage niet verwijderen"
-
-#: includes/component.php:1005 includes/attachments.php:395
-msgid "Upload File"
-msgstr "Bestand uploaden"
-
-#: includes/component.php:1006 includes/attachments.php:396
-msgid "OK"
-msgstr "OK"
-
-#: includes/templates/docs/single/index.php:39
-#: includes/templates/docs/single/edit.php:75 includes/attachments.php:576
-#: includes/templatetags.php:2267 includes/admin.php:134
-msgid "Attachments"
-msgstr "Bijlagen"
-
-#: includes/attachments.php:592
-msgid "Has attachment?"
-msgstr "Heeft bijlagen?"
-
-#: includes/attachments.php:594
-msgid "Yes"
-msgstr "Ja"
-
-#: includes/attachments.php:595
-msgid "No"
-msgstr "Nee"
-
-#: includes/attachments.php:596
-msgid "Doesn&#8217;t matter"
-msgstr "Maakt niet uit"
-
-#: includes/attachments.php:598
-msgid "Filter"
-msgstr "Filter"
-
-#: includes/attachments.php:787
-msgid "See <a href=\"%s\">this wiki page</a> for more information."
-msgstr "Bekijk <a href=\"%s\">deze wiki pagina</a> voor meer informatie."
-
-#: includes/attachments.php:790
-msgid "Dismiss this message"
-msgstr "Verberg dit bericht"
-
-#: includes/functions.php:1077
-msgid "Docs Directory"
-msgstr "Documenten map"
-
-#: includes/query-builder.php:493
-msgid "Unknown error. Please try again."
-msgstr "Onbekende fout. Probeer nogmaals."
-
-#: includes/query-builder.php:518
-msgid "The title field is required."
-msgstr "Het titel veld is verplicht."
-
-#: includes/query-builder.php:619
-msgid "Doc successfully created!"
-msgstr "Document succesvol aangemaakt!"
-
-#: includes/query-builder.php:625
-msgid "Doc successfully edited!"
-msgstr "Document succesvol bijgewerkt!"
-
-#: includes/admin.php:123
-msgid "Group Tab Name"
-msgstr "Groep tabnaam"
-
-#: includes/admin.php:142
-msgid "Enable Attachments"
-msgstr "Bijlagen activeren"
-
-#: includes/admin.php:222
-msgid "Enabled"
-msgstr "Activeren"
-
-#: includes/admin.php:223
-msgid "Disabled"
-msgstr "Deactiveren"
-
-#: includes/admin.php:341
-msgid "No comments yet."
-msgstr "Nog geen reacties."
-
-#: includes/component.php:199 includes/component.php:317
-#: includes/templates/docs/tabs-nouveau.php:10
-#: includes/templates/docs/tabs-legacy.php:8 includes/integration-users.php:305
-msgid "Started By Me"
-msgstr "Gestart door mijn"
-
-#: includes/component.php:206 includes/component.php:326
-#: includes/templates/docs/tabs-nouveau.php:11
-#: includes/templates/docs/tabs-legacy.php:9 includes/integration-users.php:314
-msgid "Edited By Me"
-msgstr "Bewerkt door mijn"
-
-#: includes/component.php:213 includes/templatetags.php:1591
-msgid "Create New Doc"
-msgstr "Nieuw document maken"
-
-#: includes/component.php:317
-msgid "Started By %s"
-msgstr "Gestart door %s"
-
-#: includes/component.php:326
-msgid "Edited By %s"
-msgstr "Bijgewerkt door %s"
-
-#: includes/component.php:488
-msgid "Lock successfully removed"
-msgstr "Slot succesvol verwijderd"
-
-#: includes/component.php:520
-msgid "Doc successfully deleted!"
-msgstr "Document succesvol verwijdert!"
-
-#: includes/component.php:522
-msgid "Could not delete doc."
-msgstr "Kan document niet verwijderen."
-
-#: includes/component.php:546
-msgid "Doc successfully removed from Trash!"
-msgstr "Document succesvol verwijderd uit de prullenbak!"
-
-#: includes/component.php:548
-msgid "Could not remove Doc from Trash."
-msgstr "Kan document niet uit de prullenbak verwijderen."
-
-#: includes/component.php:566
-msgid "Doc successfully removed from the group"
-msgstr "Document succesvol verwijderd uit de groep"
-
-#: includes/component.php:568
-msgid "Could not remove Doc from the group."
-msgstr "Kan document niet uit de groep verwijderen."
-
-#: includes/integration-groups.php:552
-msgid "Admins and mods of %s"
-msgstr "Beheerders en moderators van %s"
-
-#: includes/integration-groups.php:638
-msgid "%1$s created the doc %2$s in the group %3$s"
-msgstr "%1$s maakte het document %2$s in de groep %3$s"
-
-#: includes/integration-groups.php:640
-msgid "%1$s edited the doc %2$s in the group %3$s"
-msgstr "%1$s bewerkte het document %2$s in de groep %3$s"
-
-#: includes/integration-groups.php:695
-msgid "%1$s commented on the doc %2$s in the group %3$s"
-msgstr "%1$s reageerde op het document %2$s in de groep %3$s"
-
-#: includes/integration-groups.php:1179
-msgid "There was an error saving, please try again"
-msgstr "Er was een fout tijdens het opslaan, probeer nogmaals"
-
-#: includes/integration-groups.php:1181
-msgid "Settings saved successfully"
-msgstr "Instellingen succesvol opgeslagen"
-
-#: includes/integration-groups.php:1256
-msgid "Group admin"
-msgstr "Groep beheerder"
-
-#: includes/integration-groups.php:1257
-msgid "Group moderator"
-msgstr "Groep moderator"
-
-#: includes/integration-groups.php:1258
-msgid "Group member"
-msgstr "Groep lid"
-
-#: includes/templatetags.php:1076 includes/templatetags.php:1078
-msgid "%s member"
-msgid_plural "%s members"
-msgstr[0] "%s lid"
-msgstr[1] ""
-
-#: includes/templatetags.php:1083
-msgid "Public Group"
-msgstr "Publieke groep"
-
-#: includes/templatetags.php:1087
-msgid "Private Group"
-msgstr "Privé groep"
-
-#: includes/templatetags.php:1132
-msgid "Who can read this doc?"
-msgstr "Wie kan dit document lezen?"
-
-#: includes/templatetags.php:1136
-msgid "Who can edit this doc?"
-msgstr "Wie kan dit document bewerken?"
-
-#: includes/templatetags.php:1148
-msgid "Who can view the history of this doc?"
-msgstr "Wie kan de geschiedenis van dit document bekijken?"
-
-#: includes/templatetags.php:1654
-msgid " %s"
-msgstr " %s"
-
-#: includes/functions.php:553 includes/templatetags.php:1669
-msgid "The Doc author only"
-msgstr "Enkel de document auteur"
-
-#: includes/templatetags.php:1670
-msgid "Just Me"
-msgstr "Alleen ik"
-
-#: includes/templatetags.php:1675
-msgid "Admins and mods of the group %s"
-msgstr "Beheerders en moderators van groep %s"
-
-#: includes/templatetags.php:1679
-msgid "The Doc author only (that's you!)"
-msgstr "Enkel de document auteur (dat ben jij!)"
-
-#: includes/templatetags.php:1694
-msgid "Comments are visible to: <strong>%s</strong>"
-msgstr "Reacties zijn zichtbaar voor: <strong>%s</strong>"
-
-#: includes/templatetags.php:1698
-msgid "Comments can be posted by: <strong>%s</strong>"
-msgstr "Reacties kunnen worden geplaatst door: <strong>%s</strong>"
-
-#: includes/templatetags.php:1744
-msgid "Private"
-msgstr "Privé"
-
-#: includes/templatetags.php:2080
-msgid "Add Files"
-msgstr "Bestanden toevoegen"
-
-#: includes/templates/docs/docs-header.php:16 includes/templatetags.php:2353
-msgid "This Doc is in the Trash"
-msgstr "Dit document is in de prullenbak"
-
-#: includes/templates/docs/docs-header.php:16 includes/templatetags.php:2353
-msgid "Trash"
-msgstr "Prullenbak"
-
-#: includes/templates/docs/docs-loop.php:64
-#: includes/templates/docs/docs-loop-list.php:25
-msgid "Last Edited"
-msgstr "Laatst bijgewerkt"
-
-#: includes/templates/docs/docs-loop.php:189
-#: includes/templates/docs/docs-loop-list.php:78
-msgid "Viewing %1$s-%2$s of %3$s docs"
-msgstr "Bekijk %1$s-%2$s van %3$s documenten"
-
-#: includes/templates/docs/single/edit.php:139
-msgid "Separate tags with commas (for example: <em>orchestra, snare drum, piccolo, Brahms</em>)"
-msgstr "Tags scheiden met comma's (bijvoorbeeld: <em>orchestra, snare drum, piccolo, Brahms</em>)"
-
-#: includes/templates/docs/single/edit.php:167
-msgid "Select a parent for this Doc."
-msgstr "Een hoofd voor dit document selecteren."
-
-#: includes/templates/docs/single/edit.php:193
-msgid "Save"
-msgstr "Opslaan"
-
-#: includes/templates/docs/single/comments.php:27
-msgid "Discussion (%d)"
-msgstr "Reacties (%d)"
-
-#: includes/templates/docs/single/comments.php:49
-msgid "There are no comments for this doc yet."
-msgstr "Er zijn nog geen reacties op dit document."
-
-#. Author of the plugin
-msgid "Boone B Gorges, David Cavins"
-msgstr "Boone B Gorges, David Cavins"
-
-#: includes/admin.php:233
-msgid "Settings updated."
-msgstr "Instellingen bijgewerkt."
+#: includes/upgrade.php:101
+msgid "Start the upgrade"
+msgstr "Start de upgrade"
+
+#: includes/upgrade.php:71
+msgid "Upgrade"
+msgstr "Upgrade"
+
+#: includes/upgrade.php:70 includes/upgrade.php:91
+msgid "BuddyPress Docs Upgrade"
+msgstr "BuddyPress documenten Upgrade"
+
+#: includes/upgrade.php:62
+msgid "Click here to start the upgrade."
+msgstr "Klik hier om de upgrade te starten."
+
+#: includes/upgrade.php:61 includes/upgrade.php:99
+msgid "Thanks for updating BuddyPress Docs. We need to run a few quick operations before your new Docs is ready to use."
+msgstr "Bedankt voor het updaten van BuddyPress Docs. We moeten nog enkele snelle aanpassingen doen voor uw nieuwe Docs helemaal gebruiksklaar is."
 
 #: includes/upgrade.php:40
 msgid "Upgrade complete!"
 msgstr "Upgrade voltooid!"
 
-#: includes/templatetags.php:1756
-msgid "Show Details"
-msgstr "Toon details"
+#: includes/theme-bridge.php:268
+msgid "Create a Doc"
+msgstr "Nieuwe document aanmaken"
+
+#: includes/templates/docs/docs-header.php:16 includes/templatetags.php:2353
+msgid "Trash"
+msgstr "Prullenbak"
+
+#: includes/templatetags.php:2080
+msgid "Add Files"
+msgstr "Bestanden toevoegen"
 
 #: includes/templatetags.php:1772
 msgid "Hide Details"
 msgstr "Verberg details"
 
+#: includes/templatetags.php:1756
+msgid "Show Details"
+msgstr "Toon details"
+
+#: includes/templatetags.php:1755
+msgid "Access: <strong>%s</strong>"
+msgstr "Toegang: <strong>%s</strong>"
+
+#: includes/templatetags.php:1750
+msgid "Limited"
+msgstr "Beperkt"
+
 #: includes/templatetags.php:1747
 msgid "Public"
 msgstr "Openbaar"
 
+#: includes/templatetags.php:1744
+msgid "Private"
+msgstr "Privé"
+
 #: includes/templatetags.php:1702
 msgid "History can be viewed by: <strong>%s</strong>"
 msgstr "Geschiedenis kan worden bekeken door:<strong>%s</strong>"
+
+#: includes/templatetags.php:1698
+msgid "Comments can be posted by: <strong>%s</strong>"
+msgstr "Reacties kunnen worden geplaatst door: <strong>%s</strong>"
+
+#: includes/templatetags.php:1694
+msgid "Comments are visible to: <strong>%s</strong>"
+msgstr "Reacties zijn zichtbaar voor: <strong>%s</strong>"
 
 #: includes/templatetags.php:1690
 msgid "This Doc can be edited by: <strong>%s</strong>"
@@ -655,62 +167,110 @@ msgstr "Dit document kan worden bewerkt door:<strong>%s</strong>"
 msgid "This Doc can be read by: <strong>%s</strong>"
 msgstr "Dit document kan worden gelezen door: <strong>%s</strong>"
 
+#: includes/templatetags.php:1679
+msgid "The Doc author only (that's you!)"
+msgstr "Enkel de document auteur (dat ben jij!)"
+
+#: includes/templatetags.php:1675
+msgid "Admins and mods of the group %s"
+msgstr "Beheerders en moderators van groep %s"
+
+#: includes/templatetags.php:1674
+msgid "Members of: %s"
+msgstr "Leden van: %s"
+
+#: includes/templatetags.php:1670
+msgid "Just Me"
+msgstr "Alleen ik"
+
+#: includes/templatetags.php:1668
+msgid "My Friends"
+msgstr "Mijn vrienden"
+
+#: includes/templatetags.php:1654
+msgid " %s"
+msgstr " %s"
+
 #: includes/templatetags.php:1652
 msgid "Group: "
 msgstr "Groep: "
+
+#: includes/templates/docs/tabs-nouveau.php:14
+#: includes/templates/docs/tabs-legacy.php:12
+msgid "My Groups"
+msgstr "Mijn groepen"
 
 #: includes/templates/docs/tabs-nouveau.php:8
 #: includes/templates/docs/tabs-legacy.php:6
 msgid "%s's Docs"
 msgstr "%s's documenten"
 
+#: includes/templates/docs/tabs-nouveau.php:4
+#: includes/templates/docs/tabs-legacy.php:2
+msgid "All Docs"
+msgstr "Alle documenten"
+
+#: includes/templatetags.php:1380
+msgid "&raquo;"
+msgstr "&raquo;"
+
+#: includes/templatetags.php:1379
+msgid "&laquo;"
+msgstr "&laquo;"
+
+#: includes/templatetags.php:1324
+msgid "Move to Trash"
+msgstr "Naar prullenbak verplaatsen"
+
+#: includes/templatetags.php:1321 includes/templatetags.php:1326
+msgid "Permanently Delete"
+msgstr "Permanent verwijderen"
+
 #: includes/templatetags.php:1319
 msgid "Remove from Trash"
 msgstr "Verwijderen uit de prullenbak"
+
+#: includes/templatetags.php:1219
+msgid "Untrash"
+msgstr "Terugplaatsen"
+
+#: includes/templatetags.php:1148
+msgid "Who can view the history of this doc?"
+msgstr "Wie kan de geschiedenis van dit document bekijken?"
+
+#: includes/templatetags.php:1144
+msgid "Who can post comments on this doc?"
+msgstr "Wie kan reacties op dit document plaatsen?"
+
+#: includes/templatetags.php:1140
+msgid "Who can read comments on this doc?"
+msgstr "Wie kan reacties op dit document lezen?"
+
+#: includes/templatetags.php:1136
+msgid "Who can edit this doc?"
+msgstr "Wie kan dit document bewerken?"
+
+#: includes/templatetags.php:1132
+msgid "Who can read this doc?"
+msgstr "Wie kan dit document lezen?"
 
 #: includes/templatetags.php:1091
 msgid "Hidden Group"
 msgstr "Verborgen Groep"
 
-#: includes/templates/docs/single/index.php:23
-msgid "Please try again in a few minutes."
-msgstr "Probeer het over een paar minuten opnieuw."
+#: includes/templatetags.php:1087
+msgid "Private Group"
+msgstr "Privé groep"
 
-#: includes/templates/docs/single/index.php:16
-msgid "(click for more info)"
-msgstr "(klik voor meer info)"
+#: includes/templatetags.php:1083
+msgid "Public Group"
+msgstr "Publieke groep"
 
-#: includes/templates/docs/single/index.php:16
-msgid "Locked"
-msgstr "Op slot"
-
-#: includes/templates/docs/single/history.php:15
-msgid "Click on a revision date from the list below to view that revision."
-msgstr "Klik op een revisiedatum in de onderstaande lijst om die revisie te bekijken ."
-
-#: includes/templates/docs/single/edit.php:230
-msgid "I'm still editing!"
-msgstr "Ik ben nog aan het bewerken !"
-
-#: includes/templates/docs/single/edit.php:226
-msgid "Are you still there?"
-msgstr "Ben je er nog?"
-
-#: includes/upgrade.php:138
-msgid "Migration complete! <a href=\"%s\">Dashboard</a>"
-msgstr "Migratie voltooid! <a href=\"%s\">Dashboard</a>"
-
-#: includes/upgrade.php:243
-msgid "Docs associated with the group %s"
-msgstr "Documenten die zijn gekoppeld aan de groep %s"
-
-#: includes/upgrade.php:258
-msgid "Group terms migrated. Now migrating Doc access terms...."
-msgstr "Groepstermen gemigreerd. Nu migreren de toegangsvoorwaarden van document...."
-
-#. Description of the plugin
-msgid "Adds collaborative Docs to BuddyPress"
-msgstr "Voegt samenwerkende documenten toe aan BuddyPress"
+#: includes/templatetags.php:1076 includes/templatetags.php:1078
+msgid "%s member"
+msgid_plural "%s members"
+msgstr[0] "%s lid"
+msgstr[1] ""
 
 #: includes/templatetags.php:1020
 msgid "(Optional) Note that the Access settings available for this Doc may be limited by the privacy settings of the group you choose."
@@ -720,87 +280,147 @@ msgstr "(Optioneel) Houd er rekening mee dat de toegangsinstellingen die beschik
 msgid "Which group should this Doc be associated with?"
 msgstr "Met welke groep moet dit document worden geassocieerd?"
 
-#: includes/templatetags.php:284
-msgid "Filter by: %s"
-msgstr "Filteren op :%s"
-
-#: includes/templatetags.php:1219
-msgid "Untrash"
-msgstr "Terugplaatsen"
-
-#: includes/templates/docs/single/edit.php:193
-msgid "Save and Continue Editing"
-msgstr "Opslaan en doorgaan met bewerken"
-
-#: includes/templates/docs/docs-loop.php:170
-#: includes/templates/docs/docs-loop-list.php:89
-#: includes/templates/docs/docs-folder-loop.php:98
-msgid "There are no docs for this view. Why not <a href=\"%s\">create one</a>?"
-msgstr "Er zijn hier geen documenten te vinden. Wil je er eentje <a href=\"%s\">aanmaken</a>?"
-
-#: includes/templates/docs/single/edit.php:138
-msgid "Tags are words or phrases that help to describe and organize your Docs."
-msgstr "Tags zijn woorden of zinnen die helpen om je documenten te beschrijven en organiseren."
-
-#: includes/templates/docs/single/history.php:17
-msgid "Alternatively, you can compare two revisions by selecting them in the 'Old' and 'New' columns, and clicking 'Compare Revisions'."
-msgstr "Je kan ook twee revisies vergelijken door deze te selecteren in de 'Oud' en 'Nieuw' kolom, en dan op 'Revisies vergelijken' te klikken."
+#: includes/templatetags.php:953
+msgid "None"
+msgstr "Geen"
 
 #: includes/templatetags.php:432
 msgid "You are searching for docs containing the term <em>%s</em>"
 msgstr "Je zoekt naar documenten met de term <em>%s</em>"
 
-#: includes/theme-bridge.php:268
-msgid "Create a Doc"
-msgstr "Nieuwe document aanmaken"
+#: includes/templatetags.php:284
+msgid "Filter by: %s"
+msgstr "Filteren op :%s"
+
+#: includes/templatetags.php:274
+msgid "<strong><a href=\"%s\" title=\"View All Docs\">View All Docs</a></strong>"
+msgstr "<strong><a href=\"%s\" title=\"Alle documenten bekijken\">Alle documenten bekijken</a></strong>"
 
 #: includes/templatetags.php:254
 msgid "You are viewing <strong>all</strong> docs."
 msgstr "Je bekijkt <strong>alle</strong> documenten."
 
+#: includes/templatetags-edit.php:144
+msgid "(no parent)"
+msgstr "(geen hoofd)"
+
+#: includes/templates/docs/single/index.php:23
+msgid "Please try again in a few minutes."
+msgstr "Probeer het over een paar minuten opnieuw."
+
 #: includes/templates/docs/single/index.php:21
 msgid "Please try again in a few minutes. Or, as an admin, you can <a href=\"%s\">force cancel</a> the edit lock."
 msgstr "Gelieve binnen enkele minuten opnieuw te proberen. Of, als beheerder, kan je de beveiliging <a href=\"%s\">forceren</a>."
+
+#: includes/templates/docs/single/index.php:18
+msgid "This doc is currently being edited by %1$s. In order to prevent edit conflicts, only one user can edit a doc at a time."
+msgstr "Dit document wordt momenteel bewerkt door%1$s. Om conflicten te voorkomen met bewerken, kan slechts één gebruiker het document bewerken."
+
+#: includes/templates/docs/single/index.php:16
+msgid "(click for more info)"
+msgstr "(klik voor meer info)"
+
+#: includes/templates/docs/single/index.php:16
+msgid "Locked"
+msgstr "Op slot"
+
+#: includes/templates/docs/single/history.php:60
+msgid "These revisions are identical."
+msgstr "Deze revisies zijn identiek."
+
+#: includes/templates/docs/single/history.php:36
+msgid "You are currently viewing a revision titled \"%1$s\", saved on %2$s by %3$s"
+msgstr "Dit is revisie \"%1$s\", bewaard op %2$s door %3$s"
+
+#: includes/templates/docs/single/history.php:29
+msgid "Newer: %s"
+msgstr "Nieuwer: %s"
+
+#: includes/templates/docs/single/history.php:28
+msgid "Older: %s"
+msgstr "Ouder: %s"
+
+#: includes/templates/docs/single/history.php:17
+msgid "Alternatively, you can compare two revisions by selecting them in the 'Old' and 'New' columns, and clicking 'Compare Revisions'."
+msgstr "Je kan ook twee revisies vergelijken door deze te selecteren in de 'Oud' en 'Nieuw' kolom, en dan op 'Revisies vergelijken' te klikken."
+
+#: includes/templates/docs/single/history.php:15
+msgid "Click on a revision date from the list below to view that revision."
+msgstr "Klik op een revisiedatum in de onderstaande lijst om die revisie te bekijken ."
+
+#: includes/templates/docs/single/edit.php:230
+msgid "I'm still editing!"
+msgstr "Ik ben nog aan het bewerken !"
+
+#: includes/templates/docs/single/edit.php:228
+msgid "In order to prevent overwriting content, only one person can edit a given doc at a time. For that reason, you must periodically ensure the system that you're still actively editing. If you are idle for more than 30 minutes, your changes will be auto-saved, and you'll be sent out of Edit mode so that others can access the doc."
+msgstr "Om te voorkomen dat inhoud wordt overschreven, kan slechts één persoon een bepaald document tegelijk bewerken. Om die reden moet je periodiek zorgen voor het systeem dat je nog steeds actief aan het bewerken bent. Als je meer dan 30 minuten niet-actief bent, worden je wijzigingen automatisch opgeslagen en wordt je uit de bewerkmodus gehaald, zodat anderen toegang hebben tot het document."
+
+#: includes/templates/docs/single/edit.php:226
+msgid "Are you still there?"
+msgstr "Ben je er nog?"
+
+#: includes/templates/docs/single/edit.php:193
+msgid "Save and Continue Editing"
+msgstr "Opslaan en doorgaan met bewerken"
+
+#: includes/templates/docs/single/edit.php:193
+msgid "Save"
+msgstr "Opslaan"
+
+#: includes/templates/docs/single/edit.php:169
+msgid "(Optional) Assigning a parent Doc means that a link to the parent will appear at the bottom of this Doc, and a link to this Doc will appear at the bottom of the parent."
+msgstr "(Optioneel) Een hoofd toewijzen betekent dat er onderaan dit document een link naar het hoofd zal verschijnen, en vice versa."
+
+#: includes/templates/docs/single/edit.php:167
+msgid "Select a parent for this Doc."
+msgstr "Een hoofd voor dit document selecteren."
+
+#: includes/templates/docs/single/edit.php:139
+msgid "Separate tags with commas (for example: <em>orchestra, snare drum, piccolo, Brahms</em>)"
+msgstr "Tags scheiden met comma's (bijvoorbeeld: <em>orchestra, snare drum, piccolo, Brahms</em>)"
+
+#: includes/templates/docs/single/edit.php:138
+msgid "Tags are words or phrases that help to describe and organize your Docs."
+msgstr "Tags zijn woorden of zinnen die helpen om je documenten te beschrijven en organiseren."
+
+#: includes/templates/docs/single/edit.php:110
+#: includes/templates/docs/single/edit.php:111
+msgid "Access"
+msgstr "Toegang"
+
+#: includes/templates/docs/single/edit.php:89
+#: includes/templates/docs/single/edit.php:90
+msgid "Associated Group"
+msgstr "Toegewezen groepen"
+
+#: includes/templates/docs/single/edit.php:55
+msgid "Content"
+msgstr "Inhoud"
+
+#: includes/templates/docs/single/edit.php:47
+msgid "Permalink"
+msgstr "Permalink"
+
+#: includes/templates/docs/single/comments.php:66
+msgid "Comment display has been disabled on this doc."
+msgstr "Reacties zijn uitgeschakeld voor dit document."
 
 #: includes/templates/docs/single/comments.php:58
 msgid "Comment posting has been disabled on this doc."
 msgstr "Reacties plaatsen zijn uitgeschakeld voor dit document."
 
-#: includes/query-builder.php:622
-msgid "You idled a bit too long while in Edit mode. In order to allow others to edit the doc you were working on, your changes have been autosaved. Click the Edit button to return to Edit mode."
-msgstr "Je aanpassingen zijn automatisch opgeslagen, en je sessie is verlopen. Klik opnieuw op Bewken om verdere aanpassingen te maken."
+#: includes/templates/docs/single/comments.php:49
+msgid "There are no comments for this doc yet."
+msgstr "Er zijn nog geen reacties op dit document."
 
-#: includes/integration-groups.php:334
-msgid "You are not allowed to associate a Doc with that group."
-msgstr "Je hebt geen toestemming om een document aan deze groep toe te wijzen."
+#: includes/templates/docs/single/comments.php:27
+msgid "Discussion (%d)"
+msgstr "Reacties (%d)"
 
-#: includes/functions.php:648
-msgid "Your Doc was successfully saved, but some of your access settings have been changed to match the Doc's permissions."
-msgstr "Je document is opgeslagen, maar sommige van je instellingen zijn aangepast om overeen te komen met de instellingen van het document."
-
-#: includes/component.php:525
-msgid "You do not have permission to delete that doc."
-msgstr "Je hebt onvoldoende rechten om dit document te verwijderen."
-
-#: includes/component.php:434
-msgid "You do not have permission to edit the doc."
-msgstr "Je hebt onvoldoende rechten om dit document aan te passen."
-
-#: includes/component.php:448
-msgid "You do not have permission to create a Doc in this group."
-msgstr "Je hebt onvoldoende rechten om een document aan te maken in deze groep."
-
-#: includes/component.php:464
-msgid "You do not have permission to view this Doc's history."
-msgstr "Je hebt onvoldoende rechten om de geschiedenis van dit document te bekijken."
-
-#: includes/component.php:421
-msgid "This doc is currently being edited by %s. To prevent overwrites, you cannot edit until that user has finished. Please try again in a few minutes."
-msgstr "Dit document wordt momenteel aangepast door %s. Om problemen te vermijden kan je dit niet aanpassen tot %s dit document weer heeft gesloten. Probeer binnen een aantal minuten opnieuw."
-
-#: includes/templates/docs/single/edit.php:169
-msgid "(Optional) Assigning a parent Doc means that a link to the parent will appear at the bottom of this Doc, and a link to this Doc will appear at the bottom of the parent."
-msgstr "(Optioneel) Een hoofd toewijzen betekent dat er onderaan dit document een link naar het hoofd zal verschijnen, en vice versa."
+#: includes/templates/docs/manage-folders.php:61
+msgid "Create"
+msgstr "Aanmaken"
 
 #: includes/templates/docs/manage-folders.php:55
 msgid "Create New Folder"
@@ -810,110 +430,388 @@ msgstr "Maak een nieuwe map"
 msgid "Manage Existing Folders"
 msgstr "Bestaande mappen beheren"
 
+#: includes/templates/docs/single/edit.php:193
+#: includes/templates/docs/manage-folders.php:28
+msgid "Cancel"
+msgstr "Annuleren"
+
 #: includes/templates/docs/manage-folders.php:23
 msgid "I understand the consequences and wish to continue deleting this folder."
 msgstr "Ik begrijp de gevolgen en wil doorgaan met het verwijderen van deze map ."
 
-#: includes/integration-groups.php:1245
-msgid "Docs is a powerful tool for collaboration with members of your group. A cross between document editor and wiki, Docs allows you to co-author and co-edit documents with your fellow group members, which you can then sort and tag in a way that helps your group to get work done."
-msgstr "Documenten is een krachtig hulpmiddel voor samenwerking met leden van uw groep. Een kruising tussen document editor en wiki, Google Documenten kunt  u co-auteur en co bewerken van documenten met uw groepsgenoten, die je vervolgens kunt sorteren en tag op een manier die helpt uw groep om het werk gedaan te krijgen."
+#: includes/templates/docs/manage-folders.php:19
+msgid "<strong>WARNING:</strong> Deleting a folder will also delete all Docs and subfolders in the folder. This action cannot be undone. To preserve your content, remove everything from this folder before deleting it."
+msgstr "<strong>WAARSCHUWING:</strong>Als je een map verwijdert, worden ook alle documenten en submappen in de map verwijderd . Deze actie kan niet ongedaan gemaakt worden. Om je  inhoud te behouden, verwijdert je alles uit deze map voordat je het verwijdert."
 
-#: includes/templates/docs/docs-loop.php:85
-msgid "Go up one folder"
-msgstr "Ga één map omhoog"
+#: includes/templates/docs/manage-folders.php:13
+msgid "You are about to delete the folder %s."
+msgstr "Je staat op het punt de map te verwijderen %s."
 
 #: includes/templates/docs/manage-folders.php:7
 msgid "This does not appear to be a valid folder."
 msgstr "Dit lijkt geen geldige map te zijn ."
 
-#: includes/component.php:1008
-msgid "and %d more"
-msgstr "en %d meer"
+#: includes/templates/docs/manage-folders.php:3
+msgid "Delete Folder"
+msgstr "Map verwijderen"
 
-#: includes/admin.php:220
-msgid "Allow users to add attachments."
-msgstr "Sta gebruikers toe om  bijlagen toe te voegen ."
+#: includes/templates/docs/docs-loop.php:85
+msgctxt "up one folder"
+msgid ".."
+msgstr ".."
 
-#: includes/admin.php:225
-msgid "Allow users to add attachments to their Docs."
-msgstr "Sta gebruikers toe om  bijlagen toe te voegen aan hun documenten."
+#: includes/templates/docs/docs-loop.php:85
+msgid "Go up one folder"
+msgstr "Ga één map omhoog"
+
+#: includes/templates/docs/docs-loop.php:36
+msgid "Show Folders"
+msgstr "Mappen tonen"
+
+#: includes/templates/docs/docs-loop.php:35
+msgid "Hide Folders"
+msgstr "Mappen verbergen"
+
+#: includes/templates/docs/docs-loop.php:30
+#: includes/templates/docs/docs-loop-tree.php:7
+msgid "Manage Folders"
+msgstr "Mappen beheren"
+
+#: includes/templates/docs/docs-loop.php:170
+#: includes/templates/docs/docs-loop-list.php:89
+#: includes/templates/docs/docs-folder-loop.php:98
+msgid "There are no docs for this view. Why not <a href=\"%s\">create one</a>?"
+msgstr "Er zijn hier geen documenten te vinden. Wil je er eentje <a href=\"%s\">aanmaken</a>?"
+
+#: includes/templates/docs/docs-loop.php:189
+#: includes/templates/docs/docs-loop-list.php:78
+msgid "Viewing %1$s-%2$s of %3$s docs"
+msgstr "Bekijk %1$s-%2$s van %3$s documenten"
+
+#: includes/templates/docs/docs-loop.php:64
+#: includes/templates/docs/docs-loop-list.php:25
+msgid "Last Edited"
+msgstr "Laatst bijgewerkt"
+
+#: includes/templates/docs/docs-loop.php:60
+#: includes/templates/docs/docs-loop-list.php:21
+msgid "Created"
+msgstr "Aangemaakt"
+
+#: includes/templates/docs/docs-loop.php:50
+#: includes/templates/docs/docs-loop-list.php:13
+#: includes/templates/docs/single/edit.php:41
+msgid "Title"
+msgstr "Titel"
+
+#: includes/templates/docs/docs-header.php:25 includes/templatetags.php:1208
+msgid "Read"
+msgstr "Lezen"
+
+#: includes/templates/docs/docs-header.php:16 includes/templatetags.php:2353
+msgid "This Doc is in the Trash"
+msgstr "Dit document is in de prullenbak"
+
+#: includes/templates/docs/docs-loop.php:172
+#: includes/templates/docs/docs-loop-list.php:91
+#: includes/templates/docs/docs-folder-loop.php:100
+msgid "There are no docs for this view."
+msgstr "Er zijn hier geen documenten te vinden."
+
+#: includes/templates/docs/docs-folder-loop.php:86
+msgid "View all docs in <strong>%s</strong>."
+msgstr "Bekijk  alle documenten in<strong>%s</strong>."
+
+#: includes/templates/docs/docs-folder-loop.php:85
+msgid "Viewing %1$s-%2$s of %3$s docs in this folder."
+msgstr "Bekijk %1$s-%2$s van %3$s documenten in deze map."
+
+#: includes/query-builder.php:625
+msgid "Doc successfully edited!"
+msgstr "Document succesvol bijgewerkt!"
+
+#: includes/query-builder.php:622
+msgid "You idled a bit too long while in Edit mode. In order to allow others to edit the doc you were working on, your changes have been autosaved. Click the Edit button to return to Edit mode."
+msgstr "Je aanpassingen zijn automatisch opgeslagen, en je sessie is verlopen. Klik opnieuw op Bewken om verdere aanpassingen te maken."
+
+#: includes/query-builder.php:619
+msgid "Doc successfully created!"
+msgstr "Document succesvol aangemaakt!"
+
+#: includes/query-builder.php:575
+msgid "There was an error when saving the doc."
+msgstr "Er is een fout opgetreden bij het opslaan van dit document."
+
+#: includes/query-builder.php:572
+msgid "There was an error when creating the doc."
+msgstr "Er is een fout opgetreden bij het aanmaken van dit document."
+
+#: includes/query-builder.php:518
+msgid "The title field is required."
+msgstr "Het titel veld is verplicht."
+
+#: includes/query-builder.php:493
+msgid "Unknown error. Please try again."
+msgstr "Onbekende fout. Probeer nogmaals."
+
+#: includes/integration-users.php:296
+msgctxt "user Docs directory breadcrumb"
+msgid "%s&#8217;s Docs"
+msgstr "%s documenten"
+
+#: includes/integration-groups.php:1687
+msgctxt "group Docs directory breadcrumb"
+msgid "%s&#8217;s Docs"
+msgstr "%s documenten"
+
+#: includes/integration-groups.php:1438
+msgid "View Docs"
+msgstr "Documenten bekijken"
+
+#: includes/integration-groups.php:1258
+msgid "Group member"
+msgstr "Groep lid"
+
+#: includes/integration-groups.php:1257
+msgid "Group moderator"
+msgstr "Groep moderator"
+
+#: includes/integration-groups.php:1256
+msgid "Group admin"
+msgstr "Groep beheerder"
+
+#: includes/integration-groups.php:1254
+msgid "Minimum role to associate Docs with this group:"
+msgstr "Minimale rol om documenten aan deze groep te koppelen:"
+
+#: includes/integration-groups.php:1252
+msgid "Options"
+msgstr "Opties"
+
+#: includes/integration-groups.php:1248
+msgid "Enable Docs for this group"
+msgstr "Activeer documenten voor deze groep"
+
+#: includes/integration-groups.php:1245
+msgid "Docs is a powerful tool for collaboration with members of your group. A cross between document editor and wiki, Docs allows you to co-author and co-edit documents with your fellow group members, which you can then sort and tag in a way that helps your group to get work done."
+msgstr "Documenten is een krachtig hulpmiddel voor samenwerking met leden van uw groep. Een kruising tussen document editor en wiki, Google Documenten kunt  u co-auteur en co bewerken van documenten met uw groepsgenoten, die je vervolgens kunt sorteren en tag op een manier die helpt uw groep om het werk gedaan te krijgen."
+
+#: includes/integration-groups.php:1181
+msgid "Settings saved successfully"
+msgstr "Instellingen succesvol opgeslagen"
+
+#: includes/integration-groups.php:1179
+msgid "There was an error saving, please try again"
+msgstr "Er was een fout tijdens het opslaan, probeer nogmaals"
+
+#: includes/integration-groups.php:939
+msgid "%s <span>%d</span>"
+msgstr "%s <span>%d</span>"
+
+#: includes/integration-groups.php:849
+msgid "Unlink from Group"
+msgstr "Ontkoppelen van Group"
+
+#: includes/integration-groups.php:771
+msgid "Group"
+msgstr "Groep"
+
+#: includes/integration-groups.php:695
+msgid "%1$s commented on the doc %2$s in the group %3$s"
+msgstr "%1$s reageerde op het document %2$s in de groep %3$s"
+
+#: includes/integration-groups.php:640
+msgid "%1$s edited the doc %2$s in the group %3$s"
+msgstr "%1$s bewerkte het document %2$s in de groep %3$s"
+
+#: includes/integration-groups.php:638
+msgid "%1$s created the doc %2$s in the group %3$s"
+msgstr "%1$s maakte het document %2$s in de groep %3$s"
+
+#: includes/integration-groups.php:552
+msgid "Admins and mods of %s"
+msgstr "Beheerders en moderators van %s"
+
+#: includes/integration-groups.php:540
+msgid "Members of %s"
+msgstr "Leden van %s"
+
+#: includes/integration-groups.php:334
+msgid "You are not allowed to associate a Doc with that group."
+msgstr "Je hebt geen toestemming om een document aan deze groep toe te wijzen."
+
+#: includes/functions.php:1077
+msgid "Docs Directory"
+msgstr "Documenten map"
+
+#: includes/functions.php:648
+msgid "Your Doc was successfully saved, but some of your access settings have been changed to match the Doc's permissions."
+msgstr "Je document is opgeslagen, maar sommige van je instellingen zijn aangepast om overeen te komen met de instellingen van het document."
+
+#: includes/functions.php:572 includes/templatetags.php:1666
+msgid "Anyone"
+msgstr "Iedereen"
+
+#: includes/functions.php:553 includes/templatetags.php:1669
+msgid "The Doc author only"
+msgstr "Enkel de document auteur"
+
+#: includes/functions.php:548 includes/templatetags.php:1667
+msgid "Logged-in Users"
+msgstr "Ingelogde gebruikers"
 
 #: includes/functions.php:159
 msgctxt "Description for the associated-item taxonomy term. Of the form \"Docs associated with the [item-type] [item-name]\" - item-type is group, user, etc"
 msgid "Docs associated with the %1$s %2$s"
 msgstr "Documenten die zijn gekoppeld aan de %1$s %2$s"
 
-#: includes/component.php:551
-msgid "You do not have permission to remove that Doc from the Trash."
-msgstr "Je bent niet gemachtigd om dat document uit de prullenbak te verwijderen ."
+#: includes/component.php:1008
+msgid "and %d more"
+msgstr "en %d meer"
+
+#: includes/component.php:1007
+msgid "Still working?"
+msgstr "Nog aan het werk?"
+
+#: includes/component.php:906 includes/component.php:929
+#: includes/component.php:931
+msgid "Search"
+msgstr "Zoeken"
 
 #: includes/component.php:571
 msgid "You do not have permission to remove that Doc from this group."
 msgstr "Je bent niet gemachtigd om dat document uit deze groep te verwijderen ."
 
-#: includes/integration-groups.php:849
-msgid "Unlink from Group"
-msgstr "Ontkoppelen van Group"
+#: includes/component.php:568
+msgid "Could not remove Doc from the group."
+msgstr "Kan document niet uit de groep verwijderen."
 
-#: includes/integration-groups.php:1254
-msgid "Minimum role to associate Docs with this group:"
-msgstr "Minimale rol om documenten aan deze groep te koppelen:"
+#: includes/component.php:566
+msgid "Doc successfully removed from the group"
+msgstr "Document succesvol verwijderd uit de groep"
 
-#: includes/templates/docs/docs-folder-loop.php:86
-msgid "View all docs in <strong>%s</strong>."
-msgstr "Bekijk  alle documenten in<strong>%s</strong>."
+#: includes/component.php:551
+msgid "You do not have permission to remove that Doc from the Trash."
+msgstr "Je bent niet gemachtigd om dat document uit de prullenbak te verwijderen ."
 
-#: includes/templates/docs/manage-folders.php:13
-msgid "You are about to delete the folder %s."
-msgstr "Je staat op het punt de map te verwijderen %s."
+#: includes/component.php:548
+msgid "Could not remove Doc from Trash."
+msgstr "Kan document niet uit de prullenbak verwijderen."
 
-#: includes/templates/docs/manage-folders.php:19
-msgid "<strong>WARNING:</strong> Deleting a folder will also delete all Docs and subfolders in the folder. This action cannot be undone. To preserve your content, remove everything from this folder before deleting it."
-msgstr "<strong>WAARSCHUWING:</strong>Als je een map verwijdert, worden ook alle documenten en submappen in de map verwijderd . Deze actie kan niet ongedaan gemaakt worden. Om je  inhoud te behouden, verwijdert je alles uit deze map voordat je het verwijdert."
+#: includes/component.php:546
+msgid "Doc successfully removed from Trash!"
+msgstr "Document succesvol verwijderd uit de prullenbak!"
 
-#: includes/templates/docs/single/index.php:18
-msgid "This doc is currently being edited by %1$s. In order to prevent edit conflicts, only one user can edit a doc at a time."
-msgstr "Dit document wordt momenteel bewerkt door%1$s. Om conflicten te voorkomen met bewerken, kan slechts één gebruiker het document bewerken."
+#: includes/component.php:525
+msgid "You do not have permission to delete that doc."
+msgstr "Je hebt onvoldoende rechten om dit document te verwijderen."
 
-#: includes/admin.php:209
-msgid "Change the word on users' Docs tab."
-msgstr "Wijzig het woord op het gebruikers tabblad."
+#: includes/component.php:522
+msgid "Could not delete doc."
+msgstr "Kan document niet verwijderen."
 
-#: includes/admin.php:173
-msgid "Change the value for longer or shorter excerpts."
-msgstr "Wijzig de waarde voor langere of kortere samenvattingen ."
+#: includes/component.php:520
+msgid "Doc successfully deleted!"
+msgstr "Document succesvol verwijdert!"
 
-#: includes/admin.php:184
-msgid "Change the title of the main Docs directory."
-msgstr "Wijzig de titel van de hoofddirectory van documenten."
+#: includes/component.php:488
+msgid "Lock successfully removed"
+msgstr "Slot succesvol verwijderd"
 
-#: includes/admin.php:162 includes/admin.php:164
-msgid "Change the slug used to build Docs URLs."
-msgstr "Wijzig de slug die wordt gebruikt om de URL's van documenten te maken."
+#: includes/component.php:464
+msgid "You do not have permission to view this Doc's history."
+msgstr "Je hebt onvoldoende rechten om de geschiedenis van dit document te bekijken."
 
-#: includes/admin.php:164
-msgid "You have already defined this value in <code>wp-config.php</code>, so it cannot be edited here."
-msgstr "Je hebt deze waarde al gedefinieerd in<code>wp-config.php</code>, dus deze kan hier niet worden bewerkt ."
+#: includes/component.php:448
+msgid "You do not have permission to create a Doc in this group."
+msgstr "Je hebt onvoldoende rechten om een document aan te maken in deze groep."
+
+#: includes/component.php:434
+msgid "You do not have permission to edit the doc."
+msgstr "Je hebt onvoldoende rechten om dit document aan te passen."
+
+#: includes/component.php:421
+msgid "This doc is currently being edited by %s. To prevent overwrites, you cannot edit until that user has finished. Please try again in a few minutes."
+msgstr "Dit document wordt momenteel aangepast door %s. Om problemen te vermijden kan je dit niet aanpassen tot %s dit document weer heeft gesloten. Probeer binnen een aantal minuten opnieuw."
+
+#: includes/component.php:326
+msgid "Edited By %s"
+msgstr "Bijgewerkt door %s"
+
+#: includes/component.php:317
+msgid "Started By %s"
+msgstr "Gestart door %s"
+
+#. translators: group name
+#: includes/component.php:314 includes/integration-groups.php:1739
+msgid "%s&#8217;s Docs"
+msgstr "Documenten van %s"
+
+#: includes/component.php:314
+msgid "My Docs "
+msgstr "Mijn documenten"
+
+#: includes/component.php:213 includes/templatetags.php:1591
+msgid "Create New Doc"
+msgstr "Nieuw document maken"
+
+#: includes/component.php:206 includes/component.php:326
+#: includes/templates/docs/tabs-nouveau.php:11
+#: includes/templates/docs/tabs-legacy.php:9 includes/integration-users.php:314
+msgid "Edited By Me"
+msgstr "Bewerkt door mijn"
+
+#: includes/component.php:199 includes/component.php:317
+#: includes/templates/docs/tabs-nouveau.php:10
+#: includes/templates/docs/tabs-legacy.php:8 includes/integration-users.php:305
+msgid "Started By Me"
+msgstr "Gestart door mijn"
+
+#: includes/component.php:152
+msgid "Search Docs..."
+msgstr "Documenten zoeken..."
+
+#. Plugin Name of the plugin
+#: includes/component.php:42
+msgid "BuddyPress Docs"
+msgstr "BuddyPress documenten"
+
+#: includes/class-wp-widget-recent-docs.php:184
+msgid "Display post date?"
+msgstr "Toon datum?"
+
+#: includes/class-wp-widget-recent-docs.php:180
+msgid "Number of docs to show:"
+msgstr "Toon aantal documenten:"
+
+#: includes/class-wp-widget-recent-docs.php:177
+msgid "Title:"
+msgstr "Titel:"
+
+#: includes/class-wp-widget-recent-docs.php:70
+msgid "Recent BuddyPress Docs"
+msgstr "Recente BuddyPress documenten"
+
+#: includes/class-wp-widget-recent-docs.php:45
+msgctxt "widget name"
+msgid "(BuddyPress Docs) Recent Docs"
+msgstr "(BuddyPress Docs) Recente documenten"
+
+#: includes/attachments.php:790
+msgid "Dismiss this message"
+msgstr "Verberg dit bericht"
+
+#: includes/attachments.php:787
+msgid "See <a href=\"%s\">this wiki page</a> for more information."
+msgstr "Bekijk <a href=\"%s\">deze wiki pagina</a> voor meer informatie."
 
 #: includes/attachments.php:780
 msgid "<strong>Your BuddyPress Docs attachments directory is publicly accessible.</strong> Doc attachments will not be properly protected from direct viewing, even if the parent Docs are non-public."
 msgstr "<strong>Je BuddyPress documenten bijlagen map is publiek toegankelijk.</strong>document bijlagen worden niet goed beschermd tegen direct bekijken , zelfs als de bovenliggende documenten niet openbaar zijn."
 
-#: includes/admin.php:198
-msgid "Change the word on groups' Docs tab."
-msgstr "Wijzig het woord op het tabblad 'Documenten' van groepen."
-
-#: includes/admin.php:186
-msgid "Change the title of the main Docs directory from 'Docs Directory' to whatever you&rsquo;d like."
-msgstr "Wijzig de titel van de hoofddirectory van Documenten van 'Documenten directory' in wat je maar wilt."
-
-#: includes/admin.php:175
-msgid "Excerpts are shown on Docs directories, to provide better context. If your theme or language requires longer or shorter excerpts, change this value. Set to <code>0</code> to disable these excerpts."
-msgstr "Samenvattingen worden weergegeven in de documenten directory's om een ​​betere context te bieden. Als je thema of taal langere of kortere samenvattingen vereist, wijzigt je deze waarde. Instellen op<code>0</code>om deze fragmenten uit te schakelen ."
-
-#: includes/admin.php:211
-msgid "Change the word on users' Docs tabs from 'Docs' to whatever you'd like. Keep in mind that this will not change the text anywhere else on the page. For a more thorough text change, create a <a href='http://codex.buddypress.org/extending-buddypress/customizing-labels-messages-and-urls/'>language file</a> for BuddyPress Docs."
-msgstr "Wijzig het woord op de Documenten tabbladen van 'Documenten' in wat je maar wilt. Houd er rekening mee dat dit de tekst nergens anders op de pagina zal wijzigen . Voor een grondiger tekstwijziging maak je een<a href='http://codex.buddypress.org/extending-buddypress/customizing-labels-messages-and-urls/'>taalbestand</a> voor BuddyPress Documenten aan."
+#: includes/attachments.php:774
+msgid "It looks like you are running <strong>Apache</strong>. The most likely cause of your problem is that the <code>AllowOverride</code> directive has been disabled, either globally (<code>httpd.conf</code>) or in a <code>VirtualHost</code> definition. Contact your host for assistance."
+msgstr "Het lijkt erop dat je <strong>Apache</strong> gebruikt. De meest waarschijnlijke oorzaak van je probleem is dat de<code>AllowOverride</code> is uitgeschakeld in (<code>httpd.conf</code>) of in een <code>VirtualHost</code>definitie. Neem contact op met je host voor assistentie."
 
 #: includes/attachments.php:762
 msgid "It looks like you are running <strong>IIS 7</strong>. We recommend the following setting in your Web.config file:"
@@ -923,380 +821,139 @@ msgstr "Het lijkt erop dat je <strong>IIS 7</strong> gebruikt. We raden de volge
 msgid "It looks like you are running <strong>nginx</strong>. We recommend the following setting in your site configuration file:"
 msgstr "Het lijkt erop dat je <strong>nginx</strong> gebruikt. We raden de volgende instelling aan in je  website configuratiebestand:"
 
-#: includes/attachments.php:774
-msgid "It looks like you are running <strong>Apache</strong>. The most likely cause of your problem is that the <code>AllowOverride</code> directive has been disabled, either globally (<code>httpd.conf</code>) or in a <code>VirtualHost</code> definition. Contact your host for assistance."
-msgstr "Het lijkt erop dat je <strong>Apache</strong> gebruikt. De meest waarschijnlijke oorzaak van je probleem is dat de<code>AllowOverride</code> is uitgeschakeld in (<code>httpd.conf</code>) of in een <code>VirtualHost</code>definitie. Neem contact op met je host voor assistentie."
+#: includes/attachments.php:598
+msgid "Filter"
+msgstr "Filter"
+
+#: includes/attachments.php:596
+msgid "Doesn&#8217;t matter"
+msgstr "Maakt niet uit"
+
+#: includes/attachments.php:595
+msgid "No"
+msgstr "Nee"
+
+#: includes/attachments.php:594
+msgid "Yes"
+msgstr "Ja"
+
+#: includes/attachments.php:592
+msgid "Has attachment?"
+msgstr "Heeft bijlagen?"
+
+#: includes/component.php:1006 includes/attachments.php:396
+msgid "OK"
+msgstr "OK"
+
+#: includes/component.php:1005 includes/attachments.php:395
+msgid "Upload File"
+msgstr "Bestand uploaden"
+
+#: includes/attachments.php:348
+msgid "Could not delete attachment"
+msgstr "Kan bijlage niet verwijderen"
+
+#: includes/attachments.php:346
+msgid "Attachment deleted"
+msgstr "Bijlage verwijdert"
+
+#: includes/attachments.php:74 includes/attachments.php:81
+msgid "File not found."
+msgstr "Bestand niet gevonden"
+
+#: includes/admin.php:341
+msgid "No comments yet."
+msgstr "Nog geen reacties."
+
+#: includes/admin.php:267
+msgid "Recent Comments"
+msgstr "Recente reacties"
+
+#: includes/admin.php:233
+msgid "Settings updated."
+msgstr "Instellingen bijgewerkt."
+
+#: includes/admin.php:225
+msgid "Allow users to add attachments to their Docs."
+msgstr "Sta gebruikers toe om  bijlagen toe te voegen aan hun documenten."
+
+#: includes/admin.php:223
+msgid "Disabled"
+msgstr "Deactiveren"
+
+#: includes/admin.php:222
+msgid "Enabled"
+msgstr "Activeren"
+
+#: includes/admin.php:220
+msgid "Allow users to add attachments."
+msgstr "Sta gebruikers toe om  bijlagen toe te voegen ."
+
+#: includes/admin.php:211
+msgid "Change the word on users' Docs tabs from 'Docs' to whatever you'd like. Keep in mind that this will not change the text anywhere else on the page. For a more thorough text change, create a <a href='http://codex.buddypress.org/extending-buddypress/customizing-labels-messages-and-urls/'>language file</a> for BuddyPress Docs."
+msgstr "Wijzig het woord op de Documenten tabbladen van 'Documenten' in wat je maar wilt. Houd er rekening mee dat dit de tekst nergens anders op de pagina zal wijzigen . Voor een grondiger tekstwijziging maak je een<a href='http://codex.buddypress.org/extending-buddypress/customizing-labels-messages-and-urls/'>taalbestand</a> voor BuddyPress Documenten aan."
+
+#: includes/admin.php:209
+msgid "Change the word on users' Docs tab."
+msgstr "Wijzig het woord op het gebruikers tabblad."
 
 #: includes/admin.php:200
 msgid "Change the word on the BuddyPress group tab from 'Docs' to whatever you'd like. Keep in mind that this will not change the text anywhere else on the page. For a more thorough text change, create a <a href='http://codex.buddypress.org/extending-buddypress/customizing-labels-messages-and-urls/'>language file</a> for BuddyPress Docs."
 msgstr "Wijzig het woord op het BuddyPress groeptabblad van 'Documenten' in wat je maar wilt. Houd er rekening mee dat dit de tekst nergens anders op de pagina zal wijzigen . Voor een grondiger tekstwijziging maak je een<a href='http://codex.buddypress.org/extending-buddypress/customizing-labels-messages-and-urls/'>taalbestand</a> voor BuddyPress Documenten aan."
 
-#: bp-docs.php:292
-msgctxt "post type singular name"
-msgid "Doc"
-msgstr "Document"
-
-#: bp-docs.php:294
-msgid "Add New Doc"
-msgstr "Nieuw document toevoegen"
-
-#: bp-docs.php:296 includes/templates/docs/docs-header.php:40
-#: includes/integration-groups.php:966 includes/integration-groups.php:1441
-msgid "New Doc"
-msgstr "Nieuw document"
-
-#: bp-docs.php:297
-msgid "View Doc"
-msgstr "Document bekijken"
-
-#: bp-docs.php:298
-msgid "Search Docs"
-msgstr "Documenten zoeken"
-
-#: bp-docs.php:299
-msgid "No Docs found"
-msgstr "Geen documenten gevonden"
-
-#: includes/addon-history.php:162
-msgid "Compare Revisions of &#8220;%1$s&#8221;"
-msgstr "Vergelijk de revisies van &#8220;%1$s&#8221;"
-
-#: includes/addon-history.php:163 includes/addon-history.php:192
-msgid "Revisions"
-msgstr "Revisies"
-
-#: includes/addon-history.php:191
-msgid "Revision for &#8220;%1$s&#8221; created on %2$s"
-msgstr "Revisie voor &#8220;%1$s&#8221; gemaakt op %2$s"
-
-#. translators: post revision: 1: when, 2: author name
-#: includes/addon-history.php:351
-msgctxt "post revision"
-msgid "%1$s by %2$s"
-msgstr "%1$s door %2$s"
-
-#. translators: column name in revisons
-#: includes/addon-history.php:383 includes/addon-history.php:417
-msgid "Old"
-msgstr "Oud"
-
-#. translators: column name in revisons
-#: includes/addon-history.php:384 includes/addon-history.php:418
-msgid "New"
-msgstr "Nieuw"
-
-#. translators: column name in revisons
-#: includes/templates/docs/docs-loop.php:55
-#: includes/templates/docs/docs-loop-list.php:17 includes/addon-history.php:420
-msgid "Author"
-msgstr "Auteur"
-
-#: includes/addon-history.php:421
-msgid "Actions"
-msgstr "Acties"
-
-#: includes/addon-taxonomy.php:198
-msgid "Tags: %s"
-msgstr "Tags: %s"
-
-#: includes/templates/docs/single/edit.php:130
-#: includes/templates/docs/single/edit.php:131 includes/addon-taxonomy.php:276
-msgid "Tags"
-msgstr "Tags"
-
-#: includes/addon-taxonomy.php:376
-msgid "(%d)"
-msgstr "(%d)"
-
-#: includes/addon-taxonomy.php:558
-msgid "Most Used"
-msgstr "Meest gebruikt"
-
-#. translators: %s: add new taxonomy label
-#: includes/addon-taxonomy.php:582
-msgid "+ %s"
-msgstr "+ %s"
-
-#: includes/addon-folders.php:1924
-msgid "Select a folder for this Doc."
-msgstr "Een map voor dit document selecteren."
-
-#: includes/addon-folders.php:1930
-msgid "Use an existing folder"
-msgstr "Gebruik een bestaande map"
-
-#: includes/addon-folders.php:1943
-msgid "Create a new folder"
-msgstr "Maak een nieuwe map"
-
-#: bp-docs.php:291
-msgctxt "post type general name"
-msgid "Docs"
-msgstr "Documenten"
-
-#: includes/addon-folders.php:41
-msgid "BuddyPress Docs Folders"
-msgstr "BuddyPress documenten mappen"
-
-#: includes/addon-folders.php:42
-msgid "BuddyPress Docs Folder"
-msgstr "BuddyPress documenten map"
-
-#: includes/addon-folders.php:44
-msgid "Docs Folder"
-msgstr "Documenten map"
-
-#: includes/addon-folders.php:193
-msgctxt "Doc edit tab name"
-msgid "Folders"
-msgstr "Mappen"
-
-#: includes/addon-folders.php:194
-msgctxt "Doc edit tab name"
-msgid "Group Folders"
-msgstr "Groep mappen"
-
-#: includes/addon-folders.php:1084
-msgid "You must provide a folder name."
-msgstr "Je moet een map naam opgeven."
-
-#: includes/addon-folders.php:1192
-msgid "Folder successfully updated."
-msgstr "Map succesvol bijgewerkt."
-
-#: includes/addon-folders.php:1262
-msgid "Folder successfully created."
-msgstr "Map succesvol aangemaakt."
-
-#: includes/addon-folders.php:1313
-msgid "Folder deleted."
-msgstr "Map verwijderd."
-
-#: includes/addon-folders.php:1315
-msgid "Could not delete folder."
-msgstr "Kan map niet verwijderen."
-
-#: includes/addon-folders.php:1665
-msgid "My Folders"
-msgstr "Mijn mappen"
-
-#: includes/addon-folders.php:1698
-msgid " - None - "
-msgstr "- Geen -"
-
-#: includes/addon-folders.php:1742
-msgid "Personal"
-msgstr "Persoonlijk"
-
-#: includes/addon-folders.php:1857 includes/addon-folders.php:2400
-msgid "Name"
-msgstr "Naam"
-
-#: includes/addon-folders.php:1864
-msgid "Folder type"
-msgstr "Maptype"
-
-#: includes/addon-folders.php:1874
-msgid "Parent (optional)"
-msgstr "Hoofd (optioneel)"
-
-#: includes/addon-folders.php:1916 includes/addon-folders.php:1917
-msgid "Folders"
-msgstr "Mappen"
-
-#: includes/addon-folders.php:2278
-msgid "#%d (no title)"
-msgstr "#%d (geen titel)"
-
-#: includes/addon-folders.php:2363
-msgid "Type"
-msgstr "Type"
-
-#: includes/addon-folders.php:2398
-msgid "Close"
-msgstr "Sluiten"
-
-#: includes/addon-folders.php:2488
-msgid "This folder contains no Docs."
-msgstr "Deze map bevat geen documenten."
-
-#: bp-docs.php:293
-msgctxt "add new"
-msgid "Add New"
-msgstr "Toevoegen"
-
-#: bp-docs.php:295
-msgid "Edit Doc"
-msgstr "Document bewerken"
-
-#: bp-docs.php:300
-msgid "No Docs found in Trash"
-msgstr "Geen documenten gevonden in prullenbak"
-
-#: includes/addon-taxonomy.php:86
-msgid "Docs Tags"
-msgstr "Documenten tags"
-
-#: includes/addon-taxonomy.php:326
-msgid "You are viewing docs with the following tags: %s"
-msgstr "Je bekijkt documenten met de volgende tags: %s"
-
-#: includes/addon-taxonomy.php:335
-msgid "Tag"
-msgstr "Tag"
-
-#: includes/addon-taxonomy.php:381
-msgid "No tags to show."
-msgstr "Geen tags om te tonen."
-
-#: includes/addon-taxonomy.php:485
-msgid "Docs tagged %s"
-msgstr "Documenten tagged %s"
-
-#: includes/activity.php:66 includes/activity.php:383
-msgid "%1$s commented on the doc %2$s"
-msgstr "%1$s reageerde op het document %2$s"
-
-#: includes/activity.php:188 includes/activity.php:323
-msgid "%1$s created the doc %2$s"
-msgstr "%1$s maakte het document %2$s"
-
-#: includes/activity.php:190 includes/activity.php:352
-msgid "%1$s edited the doc %2$s"
-msgstr "%1$s bewerkte het document %2$s"
-
-#: includes/activity.php:279
-msgid "Created a Doc"
-msgstr "Maakte een document"
-
-#: includes/activity.php:286
-msgid "Edited a Doc"
-msgstr "Bewerkte een document"
-
-#: includes/activity.php:293
-msgid "Commented on a Doc"
-msgstr "Reageerde op een document"
-
-#: includes/activity.php:448
-msgid "New Docs"
-msgstr "Nieuwe documenten"
-
-#: includes/activity.php:450
-msgid "Doc Comments"
-msgstr "Document reacties"
-
-#: includes/addon-history.php:401
-msgid "Compare Revisions"
-msgstr "Revisies vergelijken"
-
-#. translators: column name in revisons
-#: includes/addon-history.php:419
-msgid "Date Created"
-msgstr "Datum aangemaakt"
-
-#: includes/addon-history.php:448 includes/integration-groups.php:975
-#: includes/templatetags.php:1215
-msgid "History"
-msgstr "Geschiedenis"
-
-#: includes/admin.php:31 includes/admin.php:43
-msgid "BuddyPress Docs Settings"
-msgstr "BuddyPress documenten instellingen"
-
-#: includes/admin.php:32
-msgid "Settings"
-msgstr "Instellingen"
-
-#: includes/admin.php:56
-msgid "General"
-msgstr "Algemeen"
-
-#: includes/admin.php:64
-msgid "Slug"
-msgstr "Slug"
-
-#: includes/admin.php:96
-msgid "Users"
-msgstr "Gebruikers"
-
-#: includes/admin.php:104
-msgid "User Tab Name"
-msgstr "Gebruikers tabnaam"
+#: includes/admin.php:198
+msgid "Change the word on groups' Docs tab."
+msgstr "Wijzig het woord op het tabblad 'Documenten' van groepen."
+
+#: includes/admin.php:186
+msgid "Change the title of the main Docs directory from 'Docs Directory' to whatever you&rsquo;d like."
+msgstr "Wijzig de titel van de hoofddirectory van Documenten van 'Documenten directory' in wat je maar wilt."
+
+#: includes/admin.php:184
+msgid "Change the title of the main Docs directory."
+msgstr "Wijzig de titel van de hoofddirectory van documenten."
+
+#: includes/admin.php:175
+msgid "Excerpts are shown on Docs directories, to provide better context. If your theme or language requires longer or shorter excerpts, change this value. Set to <code>0</code> to disable these excerpts."
+msgstr "Samenvattingen worden weergegeven in de documenten directory's om een ​​betere context te bieden. Als je thema of taal langere of kortere samenvattingen vereist, wijzigt je deze waarde. Instellen op<code>0</code>om deze fragmenten uit te schakelen ."
+
+#: includes/admin.php:173
+msgid "Change the value for longer or shorter excerpts."
+msgstr "Wijzig de waarde voor langere of kortere samenvattingen ."
+
+#: includes/admin.php:164
+msgid "You have already defined this value in <code>wp-config.php</code>, so it cannot be edited here."
+msgstr "Je hebt deze waarde al gedefinieerd in<code>wp-config.php</code>, dus deze kan hier niet worden bewerkt ."
+
+#: includes/admin.php:162 includes/admin.php:164
+msgid "Change the slug used to build Docs URLs."
+msgstr "Wijzig de slug die wordt gebruikt om de URL's van documenten te maken."
+
+#: includes/admin.php:142
+msgid "Enable Attachments"
+msgstr "Bijlagen activeren"
+
+#: includes/templates/docs/single/index.php:39
+#: includes/templates/docs/single/edit.php:75 includes/attachments.php:576
+#: includes/templatetags.php:2267 includes/admin.php:134
+msgid "Attachments"
+msgstr "Bijlagen"
+
+#: includes/admin.php:123
+msgid "Group Tab Name"
+msgstr "Groep tabnaam"
 
 #: includes/admin.php:115
 msgid "Groups"
 msgstr "Groepen"
 
-#: includes/addon-hierarchy.php:118
-msgid "Parent: "
-msgstr "Hoofd: "
+#: includes/admin.php:104
+msgid "User Tab Name"
+msgstr "Gebruikers tabnaam"
 
-#: includes/addon-hierarchy.php:168
-msgid "Children: "
-msgstr "Sub:"
-
-#: includes/templates/docs/docs-header.php:30 includes/addon-folders.php:2397
-#: includes/integration-groups.php:973 includes/templatetags.php:1211
-#: includes/templatetags.php:1770
-msgid "Edit"
-msgstr "Bewerken"
-
-#: includes/addon-folders.php:2410 includes/integration-groups.php:1155
-msgid "Save Changes"
-msgstr "Veranderingen opslaan"
-
-#: includes/templates/docs/manage-folders.php:27
-#: includes/addon-folders.php:2373 includes/templatetags.php:2194
-msgid "Delete"
-msgstr "Verwijderen"
-
-#: includes/templates/docs/single/edit.php:159
-#: includes/templates/docs/single/edit.php:160 includes/addon-folders.php:2405
-msgid "Parent"
-msgstr "Hoofd"
-
-#: includes/addon-folders.php:1634 includes/addon-folders.php:1741
-msgid "Global"
-msgstr "Globaal"
-
-#: includes/addon-folders.php:1745
-msgid "Group-specific"
-msgstr "Groep specifiek"
-
-#: includes/addon-history.php:114
-msgid "You have successfully restored the Doc to the revision from %s."
-msgstr "Je hebt de revisie van %s teruggeplaatst."
-
-#: includes/addon-taxonomy.php:87
-msgid "Docs Tag"
-msgstr "Document tag"
-
-#: bp-docs.php:326
-msgid "Associated Items"
-msgstr "Bijbehorende items"
-
-#: includes/activity.php:449
-msgid "Doc Edits"
-msgstr "Document bewerkingen"
-
-#: bp-docs.php:327
-msgid "Associated Item"
-msgstr "Bijbehorend item"
-
-#: bp-docs.php:307 includes/integration-groups.php:960
-#: includes/integration-groups.php:1059 includes/integration-groups.php:1243
-#: includes/integration-groups.php:1668 includes/integration-users.php:277
-msgid "Docs"
-msgstr "Documenten"
-
-#: includes/addon-folders.php:1166 includes/addon-folders.php:1194
-#: includes/addon-folders.php:1222
-msgid "There was a problem editing that folder. Please try again."
-msgstr "Er is een probleem opgetreden bij het bewerken van die map . Probeer het opnieuw."
-
-#: includes/addon-folders.php:1264
-msgid "There was a problem creating the folder. Please try again."
-msgstr "Er is een probleem opgetreden bij het maken van de map . Probeer het opnieuw."
+#: includes/admin.php:96
+msgid "Users"
+msgstr "Gebruikers"
 
 #: includes/admin.php:86
 msgid "Directory Title"
@@ -1306,16 +963,371 @@ msgstr "Directorytitel"
 msgid "Directory Excerpt Length"
 msgstr "Lengte van directory samenvatting"
 
+#: includes/admin.php:64
+msgid "Slug"
+msgstr "Slug"
+
+#: includes/admin.php:56
+msgid "General"
+msgstr "Algemeen"
+
+#: includes/admin.php:32
+msgid "Settings"
+msgstr "Instellingen"
+
+#: includes/admin.php:31 includes/admin.php:43
+msgid "BuddyPress Docs Settings"
+msgstr "BuddyPress documenten instellingen"
+
+#. translators: %s: add new taxonomy label
+#: includes/addon-taxonomy.php:582
+msgid "+ %s"
+msgstr "+ %s"
+
+#: includes/addon-taxonomy.php:558
+msgid "Most Used"
+msgstr "Meest gebruikt"
+
+#: includes/addon-taxonomy.php:485
+msgid "Docs tagged %s"
+msgstr "Documenten tagged %s"
+
+#: includes/addon-taxonomy.php:381
+msgid "No tags to show."
+msgstr "Geen tags om te tonen."
+
+#: includes/addon-taxonomy.php:376
+msgid "(%d)"
+msgstr "(%d)"
+
+#: includes/addon-taxonomy.php:335
+msgid "Tag"
+msgstr "Tag"
+
+#: includes/addon-taxonomy.php:326
+msgid "You are viewing docs with the following tags: %s"
+msgstr "Je bekijkt documenten met de volgende tags: %s"
+
+#: includes/templates/docs/single/edit.php:130
+#: includes/templates/docs/single/edit.php:131 includes/addon-taxonomy.php:276
+msgid "Tags"
+msgstr "Tags"
+
+#: includes/addon-taxonomy.php:198
+msgid "Tags: %s"
+msgstr "Tags: %s"
+
+#: includes/addon-taxonomy.php:87
+msgid "Docs Tag"
+msgstr "Document tag"
+
+#: includes/addon-taxonomy.php:86
+msgid "Docs Tags"
+msgstr "Documenten tags"
+
+#: includes/addon-history.php:448 includes/integration-groups.php:975
+#: includes/templatetags.php:1215
+msgid "History"
+msgstr "Geschiedenis"
+
+#: includes/addon-history.php:421
+msgid "Actions"
+msgstr "Acties"
+
+#. translators: column name in revisons
+#: includes/templates/docs/docs-loop.php:55
+#: includes/templates/docs/docs-loop-list.php:17 includes/addon-history.php:420
+msgid "Author"
+msgstr "Auteur"
+
+#. translators: column name in revisons
+#: includes/addon-history.php:419
+msgid "Date Created"
+msgstr "Datum aangemaakt"
+
+#: includes/addon-history.php:401
+msgid "Compare Revisions"
+msgstr "Revisies vergelijken"
+
+#. translators: column name in revisons
+#: includes/addon-history.php:384 includes/addon-history.php:418
+msgid "New"
+msgstr "Nieuw"
+
+#. translators: column name in revisons
+#: includes/addon-history.php:383 includes/addon-history.php:417
+msgid "Old"
+msgstr "Oud"
+
 #: includes/addon-history.php:378
 msgid "Restore"
 msgstr "Herstellen"
 
-#: includes/addon-folders.php:43
-msgid "Docs Folders"
-msgstr "Documenten mappen"
+#. translators: post revision: 1: when, 2: author name
+#: includes/addon-history.php:351
+msgctxt "post revision"
+msgid "%1$s by %2$s"
+msgstr "%1$s door %2$s"
+
+#: includes/addon-history.php:191
+msgid "Revision for &#8220;%1$s&#8221; created on %2$s"
+msgstr "Revisie voor &#8220;%1$s&#8221; gemaakt op %2$s"
+
+#: includes/addon-history.php:163 includes/addon-history.php:192
+msgid "Revisions"
+msgstr "Revisies"
+
+#: includes/addon-history.php:162
+msgid "Compare Revisions of &#8220;%1$s&#8221;"
+msgstr "Vergelijk de revisies van &#8220;%1$s&#8221;"
+
+#: includes/addon-history.php:114
+msgid "You have successfully restored the Doc to the revision from %s."
+msgstr "Je hebt de revisie van %s teruggeplaatst."
+
+#: includes/addon-hierarchy.php:168
+msgid "Children: "
+msgstr "Sub:"
+
+#: includes/addon-hierarchy.php:118
+msgid "Parent: "
+msgstr "Hoofd: "
+
+#: includes/addon-folders.php:2488
+msgid "This folder contains no Docs."
+msgstr "Deze map bevat geen documenten."
+
+#: includes/addon-folders.php:2410 includes/integration-groups.php:1155
+msgid "Save Changes"
+msgstr "Veranderingen opslaan"
+
+#: includes/templates/docs/single/edit.php:159
+#: includes/templates/docs/single/edit.php:160 includes/addon-folders.php:2405
+msgid "Parent"
+msgstr "Hoofd"
+
+#: includes/addon-folders.php:2398
+msgid "Close"
+msgstr "Sluiten"
+
+#: includes/templates/docs/docs-header.php:30 includes/addon-folders.php:2397
+#: includes/integration-groups.php:973 includes/templatetags.php:1211
+#: includes/templatetags.php:1770
+msgid "Edit"
+msgstr "Bewerken"
+
+#: includes/templates/docs/manage-folders.php:27
+#: includes/addon-folders.php:2373 includes/templatetags.php:2194
+msgid "Delete"
+msgstr "Verwijderen"
+
+#: includes/addon-folders.php:2363
+msgid "Type"
+msgstr "Type"
+
+#: includes/addon-folders.php:2278
+msgid "#%d (no title)"
+msgstr "#%d (geen titel)"
 
 #: includes/addon-folders.php:2121
 msgid "You are viewing docs in the following folder: %s"
 msgid_plural "You are viewing docs in the following folders: %s"
 msgstr[0] "Je bekijkt de documenten in de volgende map: %s"
 msgstr[1] "Je bekijkt de documenten in de volgende mappen: %s"
+
+#: includes/addon-folders.php:1943
+msgid "Create a new folder"
+msgstr "Maak een nieuwe map"
+
+#: includes/addon-folders.php:1930
+msgid "Use an existing folder"
+msgstr "Gebruik een bestaande map"
+
+#: includes/addon-folders.php:1924
+msgid "Select a folder for this Doc."
+msgstr "Een map voor dit document selecteren."
+
+#: includes/addon-folders.php:1916 includes/addon-folders.php:1917
+msgid "Folders"
+msgstr "Mappen"
+
+#: includes/addon-folders.php:1874
+msgid "Parent (optional)"
+msgstr "Hoofd (optioneel)"
+
+#: includes/addon-folders.php:1864
+msgid "Folder type"
+msgstr "Maptype"
+
+#: includes/addon-folders.php:1857 includes/addon-folders.php:2400
+msgid "Name"
+msgstr "Naam"
+
+#: includes/addon-folders.php:1745
+msgid "Group-specific"
+msgstr "Groep specifiek"
+
+#: includes/addon-folders.php:1742
+msgid "Personal"
+msgstr "Persoonlijk"
+
+#: includes/addon-folders.php:1698
+msgid " - None - "
+msgstr "- Geen -"
+
+#: includes/addon-folders.php:1665
+msgid "My Folders"
+msgstr "Mijn mappen"
+
+#: includes/addon-folders.php:1634 includes/addon-folders.php:1741
+msgid "Global"
+msgstr "Globaal"
+
+#: includes/addon-folders.php:1315
+msgid "Could not delete folder."
+msgstr "Kan map niet verwijderen."
+
+#: includes/addon-folders.php:1313
+msgid "Folder deleted."
+msgstr "Map verwijderd."
+
+#: includes/addon-folders.php:1264
+msgid "There was a problem creating the folder. Please try again."
+msgstr "Er is een probleem opgetreden bij het maken van de map . Probeer het opnieuw."
+
+#: includes/addon-folders.php:1262
+msgid "Folder successfully created."
+msgstr "Map succesvol aangemaakt."
+
+#: includes/addon-folders.php:1192
+msgid "Folder successfully updated."
+msgstr "Map succesvol bijgewerkt."
+
+#: includes/addon-folders.php:1166 includes/addon-folders.php:1194
+#: includes/addon-folders.php:1222
+msgid "There was a problem editing that folder. Please try again."
+msgstr "Er is een probleem opgetreden bij het bewerken van die map . Probeer het opnieuw."
+
+#: includes/addon-folders.php:1084
+msgid "You must provide a folder name."
+msgstr "Je moet een map naam opgeven."
+
+#: includes/addon-folders.php:194
+msgctxt "Doc edit tab name"
+msgid "Group Folders"
+msgstr "Groep mappen"
+
+#: includes/addon-folders.php:193
+msgctxt "Doc edit tab name"
+msgid "Folders"
+msgstr "Mappen"
+
+#: includes/addon-folders.php:44
+msgid "Docs Folder"
+msgstr "Documenten map"
+
+#: includes/addon-folders.php:43
+msgid "Docs Folders"
+msgstr "Documenten mappen"
+
+#: includes/addon-folders.php:42
+msgid "BuddyPress Docs Folder"
+msgstr "BuddyPress documenten map"
+
+#: includes/addon-folders.php:41
+msgid "BuddyPress Docs Folders"
+msgstr "BuddyPress documenten mappen"
+
+#: includes/activity.php:450
+msgid "Doc Comments"
+msgstr "Document reacties"
+
+#: includes/activity.php:449
+msgid "Doc Edits"
+msgstr "Document bewerkingen"
+
+#: includes/activity.php:448
+msgid "New Docs"
+msgstr "Nieuwe documenten"
+
+#: includes/activity.php:293
+msgid "Commented on a Doc"
+msgstr "Reageerde op een document"
+
+#: includes/activity.php:286
+msgid "Edited a Doc"
+msgstr "Bewerkte een document"
+
+#: includes/activity.php:279
+msgid "Created a Doc"
+msgstr "Maakte een document"
+
+#: includes/activity.php:190 includes/activity.php:352
+msgid "%1$s edited the doc %2$s"
+msgstr "%1$s bewerkte het document %2$s"
+
+#: includes/activity.php:188 includes/activity.php:323
+msgid "%1$s created the doc %2$s"
+msgstr "%1$s maakte het document %2$s"
+
+#: includes/activity.php:66 includes/activity.php:383
+msgid "%1$s commented on the doc %2$s"
+msgstr "%1$s reageerde op het document %2$s"
+
+#: bp-docs.php:327
+msgid "Associated Item"
+msgstr "Bijbehorend item"
+
+#: bp-docs.php:326
+msgid "Associated Items"
+msgstr "Bijbehorende items"
+
+#: bp-docs.php:307 includes/integration-groups.php:960
+#: includes/integration-groups.php:1059 includes/integration-groups.php:1243
+#: includes/integration-groups.php:1668 includes/integration-users.php:277
+msgid "Docs"
+msgstr "Documenten"
+
+#: bp-docs.php:300
+msgid "No Docs found in Trash"
+msgstr "Geen documenten gevonden in prullenbak"
+
+#: bp-docs.php:299
+msgid "No Docs found"
+msgstr "Geen documenten gevonden"
+
+#: bp-docs.php:298
+msgid "Search Docs"
+msgstr "Documenten zoeken"
+
+#: bp-docs.php:297
+msgid "View Doc"
+msgstr "Document bekijken"
+
+#: bp-docs.php:296 includes/templates/docs/docs-header.php:40
+#: includes/integration-groups.php:966 includes/integration-groups.php:1441
+msgid "New Doc"
+msgstr "Nieuw document"
+
+#: bp-docs.php:295
+msgid "Edit Doc"
+msgstr "Document bewerken"
+
+#: bp-docs.php:294
+msgid "Add New Doc"
+msgstr "Nieuw document toevoegen"
+
+#: bp-docs.php:293
+msgctxt "add new"
+msgid "Add New"
+msgstr "Toevoegen"
+
+#: bp-docs.php:292
+msgctxt "post type singular name"
+msgid "Doc"
+msgstr "Document"
+
+#: bp-docs.php:291
+msgctxt "post type general name"
+msgid "Docs"
+msgstr "Documenten"

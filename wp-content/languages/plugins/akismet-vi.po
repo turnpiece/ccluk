@@ -55,7 +55,7 @@ msgstr "Thông báo bảo mật của Akismet"
 msgid "Privacy"
 msgstr "Riêng tư"
 
-#: class.akismet.php:1423
+#: class.akismet.php:1418
 msgid "This site uses Akismet to reduce spam. <a href=\"%s\" target=\"_blank\" rel=\"nofollow noopener\">Learn how your comment data is processed</a>."
 msgstr "Website này sử dụng Akismet để hạn chế spam. <a href=\"%s\" target=\"_blank\" rel=\"nofollow noopener\">Tìm hiểu bình luận của bạn được duyệt như thế nào</a>."
 
@@ -116,11 +116,12 @@ msgstr "Cấu hình bằng tay"
 msgid "On this page, you are able to update your Akismet settings and view spam stats."
 msgstr "Trong trang này, bạn có thể cập nhật thiết lập Akismet và xem thống kê spam."
 
-#. Description of the plugin
+#. Description of the plugin/theme
 msgid "Used by millions, Akismet is quite possibly the best way in the world to <strong>protect your blog from spam</strong>. It keeps your site protected even while you sleep. To get started: activate the Akismet plugin and then go to your Akismet Settings page to set up your API key."
 msgstr "Được sử dụng bởi hàng triệu người, Akismet có thể là cách tốt nhất trên thế giới để <strong>bảo vệ blog của bạn từ spam</strong>. Nó giúp trang của bạn được bảo vệ cả khi bạn đang ngủ. Để bắt đầu: kích hoạt phần mở rộng Akismet và chuyển đến trang Thiết lập Akismet để cài đặt API key của bạn. "
 
-#. Plugin Name of the plugin
+#. #-#-#-#-#  akismet-code.pot (Akismet Anti-Spam 4.1)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
 #: class.akismet-admin.php:114 class.akismet-admin.php:117
 msgid "Akismet Anti-Spam"
 msgstr "Akismet Anti-Spam"
@@ -404,8 +405,8 @@ msgstr "Đang xóa"
 msgid "Akismet"
 msgstr "Akismet"
 
-#: views/config.php:60 class.akismet-admin.php:107 class.akismet-admin.php:239
-#: class.akismet-admin.php:658
+#: class.akismet-admin.php:107 class.akismet-admin.php:239
+#: class.akismet-admin.php:658 views/config.php:60
 msgid "Settings"
 msgstr "Cài đặt"
 
@@ -468,7 +469,7 @@ msgstr "Trong trang này, bạn có thể xem thống kê về lọc spam trên 
 msgid "Akismet Configuration"
 msgstr "Cấu hình Akismet"
 
-#: views/config.php:70 class.akismet-admin.php:242
+#: class.akismet-admin.php:242 views/config.php:70
 msgid "API Key"
 msgstr "API Key"
 
@@ -476,7 +477,7 @@ msgstr "API Key"
 msgid "Enter/remove an API key."
 msgstr "Thêm/Gỡ API key"
 
-#: views/config.php:105 class.akismet-admin.php:243
+#: class.akismet-admin.php:243 views/config.php:105
 msgid "Comments"
 msgstr "Bình luận"
 
@@ -488,15 +489,15 @@ msgstr "Hiển thị số bình luận đã được thông qua ngay bên cạnh
 msgid "Choose to either discard the worst spam automatically or to always put all spam in spam folder."
 msgstr "Chọn hoặc loại bỏ các thư rác nhất hoặc luôn luôn đặt các thư rác vào trong thư mục thư rác."
 
-#: views/config.php:128 class.akismet-admin.php:244
+#: class.akismet-admin.php:244 views/config.php:128
 msgid "Strictness"
 msgstr "Độ nghiêm ngặt"
 
-#: views/config.php:188 class.akismet-admin.php:252
+#: class.akismet-admin.php:252 views/config.php:188
 msgid "Account"
 msgstr "Tài khoản"
 
-#: views/config.php:196 class.akismet-admin.php:255
+#: class.akismet-admin.php:255 views/config.php:196
 msgid "Subscription Type"
 msgstr "Gói dịch vụ"
 
@@ -504,7 +505,7 @@ msgstr "Gói dịch vụ"
 msgid "The subscription status - active, cancelled or suspended"
 msgstr "Trạng thái gói dịch vụ: đang kích hoạt, đã huỷ hoặc đã khoá"
 
-#: views/config.php:203 class.akismet-admin.php:256
+#: class.akismet-admin.php:256 views/config.php:203
 msgid "Status"
 msgstr "Trạng thái"
 
@@ -678,11 +679,11 @@ msgstr "Akismet nhận định đây là bình luận rác trong quá trình t�
 msgid "Akismet cleared this comment during an automatic retry."
 msgstr "Akismet đã xác minh đây không phải là bình luận rác trong quá trình tự động kiểm tra lại."
 
-#: class.akismet.php:1268
+#: class.akismet.php:1263
 msgid "Please <a href=\"%1$s\">upgrade WordPress</a> to a current version, or <a href=\"%2$s\">downgrade to version 2.4 of the Akismet plugin</a>."
 msgstr "Hãy <a href=\"%1$s\">nâng cấp Wordpress</a> tới phiên bản hiện tại, hoặc <a href=\"%2$s\">hạ cấp plugin Akismet xuống 2.4</a>."
 
-#: class.akismet.php:1268
+#: class.akismet.php:1263
 msgid "Akismet %s requires WordPress %s or higher."
 msgstr "Akismet %s yêu cầu phiên bản WordPress %s hoặc cao hơn."
 
@@ -862,15 +863,15 @@ msgstr "Kích hoạt Akismet"
 msgid "Get your API key"
 msgstr "Lấy API Key"
 
-#. Plugin URI of the plugin
+#. Plugin URI of the plugin/theme
 msgid "https://akismet.com/"
 msgstr "https://akismet.com/"
 
-#. Author URI of the plugin
+#. Author URI of the plugin/theme
 msgid "https://automattic.com/wordpress-plugins/"
 msgstr "https://automattic.com/wordpress-plugins/"
 
-#. Author of the plugin
+#. Author of the plugin/theme
 msgid "Automattic"
 msgstr "Automattic"
 

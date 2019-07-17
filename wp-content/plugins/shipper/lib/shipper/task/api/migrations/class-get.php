@@ -24,6 +24,7 @@ class Shipper_Task_Api_Migrations_Get extends Shipper_Task_Api {
 		;
 
 		if ( empty( $domain ) ) {
+			$this->clear_cached_api_response( 'migration-get' );
 			$this->add_error(
 				self::ERR_REQFORMAT,
 				__( 'Missing domain to check', 'shipper' )
@@ -37,7 +38,8 @@ class Shipper_Task_Api_Migrations_Get extends Shipper_Task_Api {
 		));
 
 		if ( empty( $status['success'] ) ) {
-			$this->add_error(
+			$this->record_non_success(
+				'migration-get',
 				self::ERR_SERVICE,
 				sprintf(
 					__( 'Service error: %s', 'shipper' ),
@@ -52,6 +54,7 @@ class Shipper_Task_Api_Migrations_Get extends Shipper_Task_Api {
 			: array()
 		;
 
+		$this->record_success( 'migration-get' );
 		return $data;
 	}
 

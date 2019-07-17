@@ -1,15 +1,15 @@
-# Translation of Plugins - Regenerate Thumbnails - Development (trunk) in Chinese (Taiwan)
-# This file is distributed under the same license as the Plugins - Regenerate Thumbnails - Development (trunk) package.
+# Translation of Plugins - Regenerate Thumbnails - Stable (latest release) in Chinese (Taiwan)
+# This file is distributed under the same license as the Plugins - Regenerate Thumbnails - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2019-02-20 04:15:17+0000\n"
+"PO-Revision-Date: 2019-05-13 03:57:46+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: zh_TW\n"
-"Project-Id-Version: Plugins - Regenerate Thumbnails - Development (trunk)\n"
+"Project-Id-Version: Plugins - Regenerate Thumbnails - Stable (latest release)\n"
 
 #: regenerate-thumbnails.php:491
 msgctxt "bulk actions dropdown"
@@ -165,10 +165,6 @@ msgstr "<strong>錯誤:</strong> {error}"
 msgid "Regenerate Thumbnails: {name} — WordPress"
 msgstr "重新產生縮圖: {name} — WordPress"
 
-#: regenerate-thumbnails.php:253
-msgid "Another alternative is to use the <a href=\"{url-photon}\">Photon</a> functionality that comes with the <a href=\"{url-jetpack}\">Jetpack</a> plugin. It generates thumbnails on-demand using WordPress.com's infrastructure. <em>Disclaimer: The author of this plugin, Regenerate Thumbnails, is an employee of the company behind WordPress.com and Jetpack but I would recommend it even if I wasn't.</em>"
-msgstr "另一個替代方案便是使用 <a href=\"{url-jetpack}\" target=\"_blank\">Jetpack</a> 外掛內建的 <a href=\"{url-photon}\" target=\"_blank\">Photon</a> 功能，它使用 WordPress.com 的基礎結構依需求產生縮圖。<em>免責聲明: Regenerate Thumbnails 的外掛開發者，是 WordPress.com 及 Jetpack 服務的母公司員工；但我 (指這位外掛開發者) 即使不是公司員工，也會推薦 Photon 功能。</em>"
-
 #: regenerate-thumbnails.php:252
 msgid "If you have <a href=\"{url-cli}\">command-line</a> access to your site's server, consider using <a href=\"{url-wpcli}\">WP-CLI</a> instead of this tool. It has a built-in <a href=\"{url-wpcli-regenerate}\">regenerate command</a> that works similarly to this tool but should be significantly faster since it has the advantage of being a command-line tool."
 msgstr "如果網站管理員能透過<a href=\"{url-cli}\" target=\"_blank\">命令列</a>存取這個網站的伺服器，便可以考慮使用 <a href=\"{url-wpcli}\" target=\"_blank\">WP-CLI</a> 取代這個外掛的功能。WP-CLI 內建與這個外掛工作方式類似的<a href=\"{url-wpcli-regenerate}\" target=\"_blank\">重新產生縮圖命令</a>，但執行效率應該會更快，因為 WP-CLI 具有命令列工具的效能優勢。"
@@ -210,11 +206,6 @@ msgstr "更新文章內容以使用新尺寸縮圖。"
 msgid "When you change WordPress themes or change the sizes of your thumbnails at <a href=\"%s\">Settings → Media</a>, images that you have previously uploaded to you media library will be missing thumbnail files for those new image sizes. This tool will allow you to create those missing thumbnail files for all images."
 msgstr "網站管理員為 WordPress 網站變更佈景主題或在 <a href=\"%s\">[設定] \t [媒體]</a> 中變更縮圖尺寸後，在此之前上傳至媒體庫的圖片不會有新尺寸的縮圖檔案，而這個外掛能讓網站管理員為網站上的全部圖片重新產生新尺寸的縮圖。"
 
-#. translators: %s: Media library URL
-#: regenerate-thumbnails.php:241
-msgid "To process a specific image, visit your media library and click the &quot;Regenerate Thumbnails&quot; link or button. To process multiple specific images, make sure you're in the <a href=\"%s\">list view</a> and then use the Bulk Actions dropdown after selecting one or more images."
-msgstr "如需對單張指定圖片產生縮圖，請前往 [媒體庫] 然後點擊個別圖片的 [重新產生縮圖] 連結或按鈕。如需對多張指定圖片產生縮圖，請在 [媒體庫] 的 [<a href=\"%s\">清單檢視</a>] 中選取要進行處理的一或多張圖片，然後在 [批次操作] 下拉式選單中點擊 [重新產生縮圖]。"
-
 #: regenerate-thumbnails.php:231
 msgid "proportionally resized to fit inside dimensions"
 msgstr "等比例調整至最適內部尺寸"
@@ -235,6 +226,11 @@ msgstr "<strong>{label}:</strong> {width}×{height} 像素 <code>{filename}</cod
 msgid "<strong>{label}:</strong> {width}×{height} pixels ({cropMethod}) <code>{filename}</code>"
 msgstr "<strong>{label}:</strong> {width}×{height} 像素 ({cropMethod}) <code>{filename}</code>"
 
+#. translators: %s: Media library URL
+#: regenerate-thumbnails.php:241
+msgid "To process a specific image, visit your media library and click the &quot;Regenerate Thumbnails&quot; link or button. To process multiple specific images, make sure you're in the <a href=\"%s\">list view</a> and then use the Bulk Actions dropdown after selecting one or more images."
+msgstr "如需對單張指定圖片產生縮圖，請前往 [媒體庫] 然後點擊個別圖片的 [重新產生縮圖] 連結或按鈕。如需對多張指定圖片產生縮圖，請在 [媒體庫] 的 [<a href=\"%s\">清單檢視</a>] 中選取要進行處理的一或多張圖片，然後在 [批次操作] 下拉式選單中點擊 [重新產生縮圖]。"
+
 #: regenerate-thumbnails.php:226
 msgid "<strong>{label}:</strong> {width}×{height} pixels ({cropMethod})"
 msgstr "<strong>{label}:</strong> {width}×{height} 像素 ({cropMethod})"
@@ -247,7 +243,7 @@ msgstr "現有縮圖若正確尺寸，便會略過不重新產生縮圖 (較快)
 msgid "Loading…"
 msgstr "正在載入…"
 
-#: includes/class-regeneratethumbnails-rest-controller.php:254
+#: includes/class-regeneratethumbnails-rest-controller.php:258
 msgid "The page number requested is larger than the number of pages available."
 msgstr "要求的頁碼大於實際頁數。"
 
@@ -313,3 +309,7 @@ msgstr "為單張圖片重新產生縮圖"
 #. Plugin Name of the plugin
 msgid "Regenerate Thumbnails"
 msgstr "Regenerate Thumbnails"
+
+#: regenerate-thumbnails.php:253
+msgid "Another alternative is to use the <a href=\"{url-photon}\">Photon</a> functionality that comes with the <a href=\"{url-jetpack}\">Jetpack</a> plugin. It generates thumbnails on-demand using WordPress.com's infrastructure. <em>Disclaimer: The author of this plugin, Regenerate Thumbnails, is an employee of the company behind WordPress.com and Jetpack but I would recommend it even if I wasn't.</em>"
+msgstr "另一個替代方案便是使用 <a href=\"{url-jetpack}\" target=\"_blank\">Jetpack</a> 外掛內建的 <a href=\"{url-photon}\" target=\"_blank\">Photon</a> 功能，它使用 WordPress.com 的基礎結構依需求產生縮圖。<strong>免責聲明: Regenerate Thumbnails 的外掛開發者，是 WordPress.com 及 Jetpack 服務的母公司員工；但我 (指這位外掛開發者) 即使不是公司員工，也會推薦 Photon 功能。</strong>"

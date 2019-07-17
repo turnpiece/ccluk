@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - BuddyPress - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2019-02-20 16:12:28+0000\n"
+"PO-Revision-Date: 2019-03-15 01:44:51+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,6 +23,13 @@ msgstr "La demande d’exportation de données a bien été effectuée"
 #: bp-settings/actions/data.php:40
 msgid "We were unable to generate the data export request."
 msgstr "Nous n’avons pas pu générer la demande d’exportation de données."
+
+#. Translators: Url to the Gravatar site, you can use the one for your country
+#. eg: https://fr.gravatar.com for French translation
+#: bp-templates/bp-nouveau/buddypress/members/single/profile/change-avatar.php:23
+#: bp-templates/bp-nouveau/buddypress/members/single/profile/change-avatar.php:89
+msgid "https://gravatar.com"
+msgstr "https://fr.gravatar.com"
 
 #. Translators: %s is used to output the link to the Gravatar site
 #: bp-templates/bp-nouveau/buddypress/members/single/profile/change-avatar.php:21

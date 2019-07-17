@@ -1,68 +1,87 @@
-# Translation of Plugins - Regenerate Thumbnails - Development (trunk) in German
-# This file is distributed under the same license as the Plugins - Regenerate Thumbnails - Development (trunk) package.
+# Translation of Plugins - Regenerate Thumbnails - Stable (latest release) in German
+# This file is distributed under the same license as the Plugins - Regenerate Thumbnails - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2019-02-03 09:32:34+0000\n"
+"PO-Revision-Date: 2019-05-11 11:25:15+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: de\n"
-"Project-Id-Version: Plugins - Regenerate Thumbnails - Development (trunk)\n"
+"Project-Id-Version: Plugins - Regenerate Thumbnails - Stable (latest release)\n"
+
+#. translators: Used for listing old sizes of currently registered thumbnails
+#: includes/class-regeneratethumbnails-regenerator.php:682
+msgid "%s (old)"
+msgstr "%s (alt)"
+
+#: includes/class-regeneratethumbnails-regenerator.php:608
+msgid "Attachment %d"
+msgstr "Anhang %d"
+
+#: includes/class-regeneratethumbnails-regenerator.php:570
+msgid "Unable to load the metadata for this attachment."
+msgstr "Die Metadaten für diese Anhänge können nicht geladen werden."
+
+#: includes/class-regeneratethumbnails-regenerator.php:554
+msgid "The current image editor cannot process this file type."
+msgstr "Der aktuell verwendete Bild-Editor kann diesen Bildtyp nicht verarbeiten."
+
+#. translators: The relative upload path to the attachment.
+#: includes/class-regeneratethumbnails-regenerator.php:137
+msgid "The fullsize image file cannot be found in your uploads directory at <code>%s</code>. Without it, new thumbnail images can't be generated."
+msgstr "Die Datei mit dem Bild in Vollgröße konnte in deinem Upload-Verzeichnis unter <code>%s</code> nicht gefunden werden. Ohne die Datei können keine neuen Vorschaubilder erstellt werden."
+
+#: includes/class-regeneratethumbnails-regenerator.php:84
+msgid "This attachment is a site icon and therefore the thumbnails shouldn't be touched."
+msgstr "Dieser Anhang ist ein Website-Icon und deshalb sollte das Vorschaubild nicht verändert werden."
+
+#: includes/class-regeneratethumbnails-regenerator.php:73
+msgid "This item is not an attachment."
+msgstr "Dieser Eintrag ist kein Anhang."
+
+#: includes/class-regeneratethumbnails-regenerator.php:62
+msgid "No attachment exists with that ID."
+msgstr "Es gibt keinen Anhang mit dieser ID."
+
+#: includes/class-regeneratethumbnails-rest-controller.php:258
+msgid "The page number requested is larger than the number of pages available."
+msgstr "Die angeforderte Seitenzahl ist größer als die Anzahl der verfügbaren Seiten."
+
+#: includes/class-regeneratethumbnails-rest-controller.php:64
+msgid "Posts to process per loop. This is to control memory usage and you likely don't need to adjust this."
+msgstr "Beiträge, die pro Durchlauf verarbeitet werden sollen. Damit soll die Nutzung von Arbeitsspeicher kontrolliert werden und wahrscheinlich brauchst du diesen Wert nicht anzupassen."
+
+#: includes/class-regeneratethumbnails-rest-controller.php:58
+msgid "Specific post IDs to update rather than any posts that use this attachment."
+msgstr "Bestimmte Beitrag-IDs, die aktualisiert werden sollen, statt aller Beiträge, die diese Anlage verwenden."
+
+#: includes/class-regeneratethumbnails-rest-controller.php:52
+msgid "The types of posts to update. Defaults to all public post types."
+msgstr "Der Typ von Beiträgen, die aktualisiert werden sollen. Standard sind alle öffentlichen Beitragstypen."
+
+#: includes/class-regeneratethumbnails-rest-controller.php:47
+msgid "Whether to update the image tags in any posts that make use of this attachment."
+msgstr "Ob die Bilder-Schlagwörter in allen Beiträgen, die diesen Anhang verwenden, aktualisiert werden sollen."
+
+#: includes/class-regeneratethumbnails-rest-controller.php:42
+msgid "Whether to delete any old, now unregistered thumbnail files."
+msgstr "Ob alle alten, jetzt nicht mehr zugewiesene Vorschaubilder gelöscht werden sollen."
+
+#: includes/class-regeneratethumbnails-rest-controller.php:37
+msgid "Whether to only regenerate missing thumbnails. It's faster with this enabled."
+msgstr "Ob nur fehlende Vorschaubilder regeneriert werden sollen. Damit geht es schneller."
 
 #: regenerate-thumbnails.php:491
 msgctxt "bulk actions dropdown"
 msgid "Regenerate Thumbnails"
 msgstr "Vorschaubilder regenerieren"
 
-#: regenerate-thumbnails.php:256 regenerate-thumbnails.php:429
-#: regenerate-thumbnails.php:445 regenerate-thumbnails.php:469
-msgctxt "action for a single image"
-msgid "Regenerate Thumbnails"
-msgstr "Vorschaubilder regenerieren"
-
-#: regenerate-thumbnails.php:166
-msgctxt "admin menu entry title"
-msgid "Regenerate Thumbnails"
-msgstr "Vorschaubilder regenerieren"
-
-#: regenerate-thumbnails.php:165 regenerate-thumbnails.php:317
-msgctxt "admin page title"
-msgid "Regenerate Thumbnails"
-msgstr "Vorschaubilder regenerieren"
-
-#: regenerate-thumbnails.php:225
-msgid "Delete thumbnail files for old unregistered sizes in order to free up server space. This may result in broken images in your posts and pages."
-msgstr "Vorschaubilder löschen für alte, unregistrierte Größen, um Server-Speicherplatz einzusparen. Dies könnte zu defekten Bildern in deinen Beiträgen und Seiten führen."
-
-#: includes/class-regeneratethumbnails-regenerator.php:608
-msgid "Attachment %d"
-msgstr "Anhang %d"
-
-#: regenerate-thumbnails.php:277
-msgid "Skipped Attachment ID {id}: {reason}"
-msgstr "Übersprungene Anhänge-ID {id}: {reason}"
-
-#: regenerate-thumbnails.php:276
-msgid "Skipped Attachment ID {id} ({name}): {reason}"
-msgstr "Übersprungene Anhänge-ID {id} ({name}): {reason}"
-
-#: includes/class-regeneratethumbnails-regenerator.php:570
-msgid "Unable to load the metadata for this attachment."
-msgstr "Die Metadaten für diese Anhänge können nicht geladen werden."
-
-#. Author URI of the plugin
-msgid "https://alex.blog/"
-msgstr "https://alex.blog/"
-
-#. Description of the plugin
-msgid "Regenerate the thumbnails for one or more of your image uploads. Useful when changing their sizes or your theme."
-msgstr "Regeneriere die Vorschaubilder für ein oder mehrere hochgeladene Bilder. Nützlich, wenn sich die Bildgrößen deines Themes ändern."
-
-#. Plugin URI of the plugin
-msgid "https://alex.blog/wordpress-plugins/regenerate-thumbnails/"
-msgstr "https://alex.blog/wordpress-plugins/regenerate-thumbnails/"
+#: regenerate-thumbnails.php:429 regenerate-thumbnails.php:445
+#: regenerate-thumbnails.php:469
+msgid "Regenerate the thumbnails for this single image"
+msgstr "Regeneriere Vorschaubilder für dieses einzelne Bild"
 
 #: regenerate-thumbnails.php:360
 msgid "This tool won't be able to do anything because your server doesn't support image editing which means that WordPress can't create thumbnail images. Please ask your host to install the Imagick or GD PHP extensions."
@@ -100,6 +119,14 @@ msgstr "{count} Stunden"
 msgid "All done in {duration}."
 msgstr "Alles erledigt in {duration}."
 
+#: regenerate-thumbnails.php:277
+msgid "Skipped Attachment ID {id}: {reason}"
+msgstr "Übersprungene Anhänge-ID {id}: {reason}"
+
+#: regenerate-thumbnails.php:276
+msgid "Skipped Attachment ID {id} ({name}): {reason}"
+msgstr "Übersprungene Anhänge-ID {id} ({name}): {reason}"
+
 #: regenerate-thumbnails.php:275
 msgid "Regenerated {name}"
 msgstr "{name} regeneriert"
@@ -123,10 +150,6 @@ msgstr "Aufgetauchte Fehler"
 #: regenerate-thumbnails.php:268
 msgid "The attachment says it also has these thumbnail sizes but they are no longer in use by WordPress. You can probably safely have this plugin delete them, especially if you have this plugin update any posts that make use of this attachment."
 msgstr "Laut Anhang gibt es auch diese Vorschaubild-Größen, aber sie werden nicht mehr von WordPress verwendet. Du kannst sie wahrscheinlich mit diesem Plugin sicher löschen, besonders, wenn du mit dem Plugin alle Beiträge aktualisierst, die diesen Anhang nutzen."
-
-#: regenerate-thumbnails.php:252
-msgid "If you have <a href=\"{url-cli}\">command-line</a> access to your site's server, consider using <a href=\"{url-wpcli}\">WP-CLI</a> instead of this tool. It has a built-in <a href=\"{url-wpcli-regenerate}\">regenerate command</a> that works similarly to this tool but should be significantly faster since it has the advantage of being a command-line tool."
-msgstr "Statt dieses Tools kannst du auch <a href=\"{url-wpcli}\">WP-CLI</a> verwenden, wenn du Zugriff auf die <a href=\"{url-cli}\">Kommandozeile</a> deines Webservers hast. WP-CLI enthält den Befehl <a href=\"{url-wpcli-regenerate}\">media regenerate</a>, was ähnlich wie dieses Tool arbeitet, aber als Kommandozeilen-Tool deutlich schneller sein sollte."
 
 #: regenerate-thumbnails.php:267
 msgid "These are the currently registered thumbnail sizes, whether they exist for this attachment, and their filenames:"
@@ -169,146 +192,123 @@ msgstr "<strong>FEHLER:</strong> {error}"
 msgid "Regenerate Thumbnails: {name} — WordPress"
 msgstr "Regeneriere Vorschaubilder: {name} – WordPress"
 
+#: regenerate-thumbnails.php:256 regenerate-thumbnails.php:429
+#: regenerate-thumbnails.php:445 regenerate-thumbnails.php:469
+msgctxt "action for a single image"
+msgid "Regenerate Thumbnails"
+msgstr "Vorschaubilder regenerieren"
+
 #: regenerate-thumbnails.php:253
 msgid "Another alternative is to use the <a href=\"{url-photon}\">Photon</a> functionality that comes with the <a href=\"{url-jetpack}\">Jetpack</a> plugin. It generates thumbnails on-demand using WordPress.com's infrastructure. <em>Disclaimer: The author of this plugin, Regenerate Thumbnails, is an employee of the company behind WordPress.com and Jetpack but I would recommend it even if I wasn't.</em>"
 msgstr "Eine andere Alternative ist die Verwendung der Funktionen von <a href=\"{url-photon}\">Photon</a>, das Bestandteil des Plugins <a href=\"{url-jetpack}\">Jetpack</a> ist. Es erstellt Vorschaubilder on-demand unter Verwendung der Infrastruktur von WordPress.com. <em>Disclaimer: Der Autor dieses Plugins, Regenerate Thumbnails, ist ein Angestellter der Firma, die hinter WordPress.com und Jetpack steht, aber ich würde es auch empfehlen, wenn das nicht so wäre.</em>"
+
+#: regenerate-thumbnails.php:252
+msgid "If you have <a href=\"{url-cli}\">command-line</a> access to your site's server, consider using <a href=\"{url-wpcli}\">WP-CLI</a> instead of this tool. It has a built-in <a href=\"{url-wpcli-regenerate}\">regenerate command</a> that works similarly to this tool but should be significantly faster since it has the advantage of being a command-line tool."
+msgstr "Statt dieses Tools kannst du auch <a href=\"{url-cli}\">WP-CLI</a> verwenden, wenn du Zugriff auf die <a href=\"{url-wpcli}\">Kommandozeile</a> deines Webservers hast. WP-CLI enthält den Befehl <a href=\"{url-wpcli-regenerate}\">media regenerate</a>, was ähnlich wie dieses Tool arbeitet, aber als Kommandozeilen-Tool deutlich schneller sein sollte."
+
+#: regenerate-thumbnails.php:251
+msgid "Alternatives"
+msgstr "Alternativen"
+
+#: regenerate-thumbnails.php:250
+msgid "These are all of the thumbnail sizes that are currently registered:"
+msgstr "Dies sind alle Vorschaubild-Größen, die aktuell registriert sind:"
+
+#: regenerate-thumbnails.php:249
+msgid "Thumbnail Sizes"
+msgstr "Vorschaubild-Größen"
+
+#: regenerate-thumbnails.php:248
+msgid "Regenerate Thumbnails For The {attachmentCount} Featured Images Only"
+msgstr "Regeneriere Vorschaubilder nur für {attachmentCount} Beitragsbilder"
+
+#: regenerate-thumbnails.php:247
+msgid "Regenerate Thumbnails For Featured Images Only"
+msgstr "Regeniere Vorschaubilder nur für Beitragsbilder"
+
+#: regenerate-thumbnails.php:246
+msgid "Regenerate Thumbnails For All {attachmentCount} Attachments"
+msgstr "Regeneriere Vorschaubilder für alle {attachmentCount} Anhänge"
+
+#: regenerate-thumbnails.php:245
+msgid "Regenerate Thumbnails For All Attachments"
+msgstr "Regeneriere Vorschaubilder für alle Anhänge"
+
+#: regenerate-thumbnails.php:244
+msgid "Update the content of posts to use the new sizes."
+msgstr "Aktualisiere den Inhalt von Beiträgen, um die neuen Bildgrößen zu verwenden."
 
 #. translators: %s: Media library URL
 #: regenerate-thumbnails.php:241
 msgid "To process a specific image, visit your media library and click the &quot;Regenerate Thumbnails&quot; link or button. To process multiple specific images, make sure you're in the <a href=\"%s\">list view</a> and then use the Bulk Actions dropdown after selecting one or more images."
 msgstr "Um ein bestimmtes Bild zu bearbeiten, geh in die Mediathek und klicke auf den Link oder Button „Regenerate Thumbnails“. Wenn du mehrere Bilder verarbeiten möchtest, geh in die <a href=\"%s\">Listenansicht</a> und wähle dann das Pulldown-Menü für Sammelaktionen, nachdem du eins oder mehrere Bilder ausgewählt hast. "
 
-#: regenerate-thumbnails.php:244
-msgid "Update the content of posts to use the new sizes."
-msgstr "Aktualisiere den Inhalt von Beiträgen, um die neuen Bildgrößen zu verwenden."
-
-#: regenerate-thumbnails.php:245
-msgid "Regenerate Thumbnails For All Attachments"
-msgstr "Regeneriere Vorschaubilder für alle Anhänge"
-
-#: regenerate-thumbnails.php:246
-msgid "Regenerate Thumbnails For All {attachmentCount} Attachments"
-msgstr "Regeneriere Vorschaubilder für alle {attachmentCount} Anhänge"
-
-#: regenerate-thumbnails.php:247
-msgid "Regenerate Thumbnails For Featured Images Only"
-msgstr "Regeniere Vorschaubilder nur für Beitragsbilder"
-
-#: regenerate-thumbnails.php:248
-msgid "Regenerate Thumbnails For The {attachmentCount} Featured Images Only"
-msgstr "Regeneriere Vorschaubilder nur für {attachmentCount} Beitragsbilder"
-
-#: regenerate-thumbnails.php:249
-msgid "Thumbnail Sizes"
-msgstr "Vorschaubild-Größen"
-
-#: regenerate-thumbnails.php:250
-msgid "These are all of the thumbnail sizes that are currently registered:"
-msgstr "Dies sind alle Vorschaubild-Größen, die aktuell registriert sind:"
-
-#: regenerate-thumbnails.php:251
-msgid "Alternatives"
-msgstr "Alternativen"
-
 #. translators: %s: Media options URL
 #: regenerate-thumbnails.php:236
 msgid "When you change WordPress themes or change the sizes of your thumbnails at <a href=\"%s\">Settings → Media</a>, images that you have previously uploaded to you media library will be missing thumbnail files for those new image sizes. This tool will allow you to create those missing thumbnail files for all images."
 msgstr "Wenn du das WordPress-Theme wechselst oder die Größe deiner Vorschaubilder unter <a href=\"%s\">Einstellungen \t Medien</a> änderst, fehlen zu Bildern, die du vorher in deine Mediathek hochgeladen hast, die Vorschaubilder für die neuen Bildgrößen. Mit diesem Tool kannst du die fehlenden Vorschaubilder für alle Bilder erstellen."
 
-#: includes/class-regeneratethumbnails-regenerator.php:62
-msgid "No attachment exists with that ID."
-msgstr "Es gibt keinen Anhang mit dieser ID."
-
-#: includes/class-regeneratethumbnails-regenerator.php:73
-msgid "This item is not an attachment."
-msgstr "Dieser Eintrag ist kein Anhang."
-
-#: includes/class-regeneratethumbnails-regenerator.php:84
-msgid "This attachment is a site icon and therefore the thumbnails shouldn't be touched."
-msgstr "Dieser Anhang ist ein Website-Icon und deshalb sollte das Vorschaubild nicht verändert werden."
-
-#. translators: The relative upload path to the attachment.
-#: includes/class-regeneratethumbnails-regenerator.php:137
-msgid "The fullsize image file cannot be found in your uploads directory at <code>%s</code>. Without it, new thumbnail images can't be generated."
-msgstr "Die Datei mit dem Bild in Vollgröße konnte in deinem Upload-Verzeichnis unter <code>%s</code> nicht gefunden werden. Ohne die Datei können keine neuen Vorschaubilder erstellt werden."
-
-#: includes/class-regeneratethumbnails-regenerator.php:554
-msgid "The current image editor cannot process this file type."
-msgstr "Der aktuell verwendete Bild-Editor kann diesen Bildtyp nicht verarbeiten."
-
-#. translators: Used for listing old sizes of currently registered thumbnails
-#: includes/class-regeneratethumbnails-regenerator.php:682
-msgid "%s (old)"
-msgstr "%s (alt)"
-
-#: includes/class-regeneratethumbnails-rest-controller.php:37
-msgid "Whether to only regenerate missing thumbnails. It's faster with this enabled."
-msgstr "Ob nur fehlende Vorschaubilder regeneriert werden sollen. Damit geht es schneller."
-
-#: includes/class-regeneratethumbnails-rest-controller.php:42
-msgid "Whether to delete any old, now unregistered thumbnail files."
-msgstr "Ob alle alten, jetzt nicht mehr zugewiesene Vorschaubilder gelöscht werden sollen."
-
-#: includes/class-regeneratethumbnails-rest-controller.php:47
-msgid "Whether to update the image tags in any posts that make use of this attachment."
-msgstr "Ob die Bilder-Schlagwörter in allen Beiträgen, die diesen Anhang verwenden, aktualisiert werden sollen."
-
-#: includes/class-regeneratethumbnails-rest-controller.php:52
-msgid "The types of posts to update. Defaults to all public post types."
-msgstr "Der Typ von Beiträgen, die aktualisiert werden sollen. Standard sind alle öffentlichen Beitragstypen."
-
-#: includes/class-regeneratethumbnails-rest-controller.php:58
-msgid "Specific post IDs to update rather than any posts that use this attachment."
-msgstr "Bestimmte Beitrag-IDs, die aktualisiert werden sollen, statt aller Beiträge, die diese Anlage verwenden."
-
-#: includes/class-regeneratethumbnails-rest-controller.php:64
-msgid "Posts to process per loop. This is to control memory usage and you likely don't need to adjust this."
-msgstr "Beiträge, die pro Durchlauf verarbeitet werden sollen. Damit soll die Nutzung von Arbeitsspeicher kontrolliert werden und wahrscheinlich brauchst du diesen Wert nicht anzupassen."
-
-#: includes/class-regeneratethumbnails-rest-controller.php:254
-msgid "The page number requested is larger than the number of pages available."
-msgstr "Die angeforderte Seitenzahl ist größer als die Anzahl der verfügbaren Seiten."
-
-#: regenerate-thumbnails.php:223 regenerate-thumbnails.php:334
-msgid "Loading…"
-msgstr "Lädt …"
-
-#: regenerate-thumbnails.php:226
-msgid "<strong>{label}:</strong> {width}×{height} pixels ({cropMethod})"
-msgstr "<strong>{label}:</strong> {width}×{height} Pixel ({cropMethod})"
-
-#: regenerate-thumbnails.php:227
-msgid "<strong>{label}:</strong> {width}×{height} pixels ({cropMethod}) <code>{filename}</code>"
-msgstr "<strong>{label}:</strong> {width}×{height} Pixel ({cropMethod}) <code>{filename}</code>"
-
-#: regenerate-thumbnails.php:228
-msgid "<strong>{label}:</strong> {width}×{height} pixels <code>{filename}</code>"
-msgstr "<strong>{label}:</strong> {width}×{height} Pixel <code>{filename}</code>"
-
-#: regenerate-thumbnails.php:229
-msgid "<strong>{label}:</strong> {width}×{height} pixels (thumbnail would be larger than original)"
-msgstr "<strong>{label}:</strong> {width}×{height} Pixel (Vorschaubild wäre größer als das Original)"
+#: regenerate-thumbnails.php:231
+msgid "proportionally resized to fit inside dimensions"
+msgstr "proportionale Größenanpassung an die Innenabmessungen"
 
 #: regenerate-thumbnails.php:230
 msgid "cropped to fit"
 msgstr "passgenau zugeschnitten"
 
-#: regenerate-thumbnails.php:231
-msgid "proportionally resized to fit inside dimensions"
-msgstr "proportionale Größenanpassung an die Innenabmessungen"
+#: regenerate-thumbnails.php:229
+msgid "<strong>{label}:</strong> {width}×{height} pixels (thumbnail would be larger than original)"
+msgstr "<strong>{label}:</strong> {width}×{height} Pixel (Vorschaubild wäre größer als das Original)"
+
+#: regenerate-thumbnails.php:228
+msgid "<strong>{label}:</strong> {width}×{height} pixels <code>{filename}</code>"
+msgstr "<strong>{label}:</strong> {width}×{height} Pixel <code>{filename}</code>"
+
+#: regenerate-thumbnails.php:227
+msgid "<strong>{label}:</strong> {width}×{height} pixels ({cropMethod}) <code>{filename}</code>"
+msgstr "<strong>{label}:</strong> {width}×{height} Pixel ({cropMethod}) <code>{filename}</code>"
+
+#: regenerate-thumbnails.php:226
+msgid "<strong>{label}:</strong> {width}×{height} pixels ({cropMethod})"
+msgstr "<strong>{label}:</strong> {width}×{height} Pixel ({cropMethod})"
+
+#: regenerate-thumbnails.php:225
+msgid "Delete thumbnail files for old unregistered sizes in order to free up server space. This may result in broken images in your posts and pages."
+msgstr "Vorschaubilder löschen für alte, unregistrierte Größen, um Server-Speicherplatz einzusparen. Dies könnte zu defekten Bildern in deinen Beiträgen und Seiten führen."
 
 #: regenerate-thumbnails.php:224
 msgid "Skip regenerating existing correctly sized thumbnails (faster)."
 msgstr "Regenerierung vorhander Vorschaubilder in richtiger Größe überspringen (schneller)."
 
+#: regenerate-thumbnails.php:223 regenerate-thumbnails.php:334
+msgid "Loading…"
+msgstr "Lädt …"
+
+#: regenerate-thumbnails.php:166
+msgctxt "admin menu entry title"
+msgid "Regenerate Thumbnails"
+msgstr "Vorschaubilder regenerieren"
+
+#: regenerate-thumbnails.php:165 regenerate-thumbnails.php:317
+msgctxt "admin page title"
+msgid "Regenerate Thumbnails"
+msgstr "Vorschaubilder regenerieren"
+
+#. Author URI of the plugin
+msgid "https://alex.blog/"
+msgstr "https://alex.blog/"
+
 #. Author of the plugin
 msgid "Alex Mills (Viper007Bond)"
 msgstr "Alex Mills (Viper007Bond)"
 
-#: regenerate-thumbnails.php:429 regenerate-thumbnails.php:445
-#: regenerate-thumbnails.php:469
-msgid "Regenerate the thumbnails for this single image"
-msgstr "Regeneriere Vorschaubilder für dieses einzelne Bild"
+#. Description of the plugin
+msgid "Regenerate the thumbnails for one or more of your image uploads. Useful when changing their sizes or your theme."
+msgstr "Regeneriere die Vorschaubilder für ein oder mehrere hochgeladene Bilder. Nützlich, wenn sich die Bildgrößen deines Themes ändern."
+
+#. Plugin URI of the plugin
+msgid "https://alex.blog/wordpress-plugins/regenerate-thumbnails/"
+msgstr "https://alex.blog/wordpress-plugins/regenerate-thumbnails/"
 
 #. Plugin Name of the plugin
 msgid "Regenerate Thumbnails"

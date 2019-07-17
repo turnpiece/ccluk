@@ -1,8 +1,32 @@
 Plugin Name: Hummingbird Pro
 Author: Ignacio Cruz, Ricardo Freitas, Anton Vanyukov
-Tested up to: 5.1.1
+Tested up to: 5.2.2
 
 Change Log:
+
+= 2.0.1 ( 2019-07-01 ) =
+- New: Upgrade page
+- Enhance: Show Smush meta box on dashboard in network installs
+- Enhance: Allow activating Gravatar and Page caching modules from dashboard
+- Enhance: Do not reschedule performance reports if no reports are enabled
+- Enhance: Uninstall procedure
+- Enhance: IE 11 compatibility
+- Enhance: Uninstall procedures
+- Enhance: Divi integration
+- Enhance: WP Hide & Security Enhancer compatibility
+- Enhance: Asset Optimization processing inline assets
+- Fix: Warnings from Page Caching module during uninstall
+- Fix: PHP notice when saving Performance report settings on main site in a network install
+- Fix: Asset Optimization filters
+- Fix: Asset Optimization PHP 5.4 incompatibility
+- Fix: Asset Optimization tooltips
+- Fix: Asset Optimization stripping slashes from local compressed files
+- Fix: Hide scheduled database cleanup from subsites
+- Fix: PHP warning when updating from Free to Pro
+- Fix: wphb_page_cache_custom_terms filter in multisite
+- Fix: Performance report audits classifications
+- Fix: Undefined index HTTP_HOST notice
+- Fix: Allow using / in user exclusion rules in Page Caching module
 
 = 2.0.0.1 ( 2019-05-03 ) =
 - Fix: Frontend extra padding issue

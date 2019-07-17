@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Themes - Twenty Nineteen package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-12-06 19:08:27+0000\n"
+"PO-Revision-Date: 2019-05-08 10:08:39+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -11,9 +11,18 @@ msgstr ""
 "Language: tr\n"
 "Project-Id-Version: Themes - Twenty Nineteen\n"
 
+#. Description of the theme
+msgid "Our 2019 default theme is designed to show off the power of the block editor. It features custom styles for all the default blocks, and is built so that what you see in the editor looks like what you'll see on your website. Twenty Nineteen is designed to be adaptable to a wide range of websites, whether you’re running a photo blog, launching a new business, or supporting a non-profit. Featuring ample whitespace and modern sans-serif headlines paired with classic serif body text, it's built to be beautiful on all screen sizes."
+msgstr "2019 için öntanımlı temamız, blok editörünün gücünü her yönüyle göstermek için tasarlandı. Tema, öntanımlı blokların her biri için özelleşmiş stiller sunmanın yanında yazarken, yazının sitede görüneceği şekilde düzenlenmesi için tasarlandı. Yirmi Ondokuz, fotoğraf blogu, yeni kurduğunuz şirket ya da bir sivil toplum örgütü gibi farklı ihtiyaçlara uyum sağlayacak biçimde tasarlandı. Başlıklarda yazıtipi olarak modern tırnaksız seçeneklere, gövde metninde klasik tırnaklı yazıtipi eşlik ediyor ve bunlar her ekran boyunda güzel görünecek biçimde bol boş alanlı bir düzende sunuluyor."
+
 #. Theme Name of the theme
 msgid "Twenty Nineteen"
 msgstr "Yirmi Ondokuz"
+
+#. translators: %s: parent post link
+#: single.php:31
+msgid "<span class=\"meta-nav\">Published in</span><span class=\"post-title\">%s</span>"
+msgstr "<span class=\"post-title\">%s</span> <span class=\"meta-nav\">içinde yayınlandı</span>"
 
 #: image.php:87
 msgctxt "Parent post link"
@@ -56,19 +65,19 @@ msgctxt "primary color"
 msgid "Default"
 msgstr "Varsayılan"
 
-#: functions.php:170
+#: functions.php:166
 msgid "White"
 msgstr "Beyaz"
 
-#: functions.php:165
+#: functions.php:161
 msgid "Light Gray"
 msgstr "Açık gri"
 
-#: functions.php:160
+#: functions.php:156
 msgid "Dark Gray"
 msgstr "Koyu gri"
 
-#: functions.php:155
+#: functions.php:151
 msgid "Secondary"
 msgstr "İkincil"
 
@@ -117,11 +126,11 @@ msgstr "Tam boy"
 msgid "Page"
 msgstr "Sayfa"
 
-#: functions.php:194
+#: functions.php:190
 msgid "Add widgets here to appear in your footer."
 msgstr "Alt alanda gözükmek üzere buraya bileşenler ekleyin."
 
-#: template-parts/footer/footer-widgets.php:12 functions.php:192
+#: functions.php:188 template-parts/footer/footer-widgets.php:12
 msgid "Footer"
 msgstr "Dip"
 
@@ -159,9 +168,9 @@ msgstr "Üst menü"
 msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
 msgstr "Okumaya devam et<span class=\"screen-reader-text\"> \"%s\"</span>"
 
+#: image.php:52 template-parts/content/content-page.php:27
 #: template-parts/content/content.php:49
-#: template-parts/content/content-page.php:27
-#: template-parts/content/content-single.php:40 image.php:52
+#: template-parts/content/content-single.php:40
 msgid "Pages:"
 msgstr "Sayfalar:"
 
@@ -286,15 +295,15 @@ msgstr "Kategori arşivleri"
 msgid "Edit <span class=\"screen-reader-text\">%s</span>"
 msgstr "Düzenle <span class=\"screen-reader-text\">%s</span>"
 
-#: header.php:24
+#: header.php:25
 msgid "Skip to content"
 msgstr "İçeriğe geç"
 
-#: template-parts/header/site-branding.php:46 functions.php:61
+#: functions.php:61 template-parts/header/site-branding.php:46
 msgid "Social Links Menu"
 msgstr "Sosyal bağlantılar menüsü"
 
-#: functions.php:59 functions.php:150
+#: functions.php:59 functions.php:146
 msgid "Primary"
 msgstr "Birincil"
 
@@ -341,20 +350,20 @@ msgstr "Yorum Gönderin"
 msgid "Join the Conversation"
 msgstr "Sohbete katılın"
 
-#: classes/class-twentynineteen-walker-comment.php:100
+#: classes/class-twentynineteen-walker-comment.php:99
 msgid "Your comment is awaiting moderation."
 msgstr "Yorumunuz denetim için bekliyor."
 
-#: classes/class-twentynineteen-walker-comment.php:95
+#: classes/class-twentynineteen-walker-comment.php:94
 msgid "Edit"
 msgstr "Düzenle"
 
 #. translators: 1: comment date, 2: comment time
-#: classes/class-twentynineteen-walker-comment.php:87
+#: classes/class-twentynineteen-walker-comment.php:86
 msgid "%1$s at %2$s"
 msgstr "%1$s, %2$s"
 
-#: classes/class-twentynineteen-walker-comment.php:67
+#: classes/class-twentynineteen-walker-comment.php:66
 msgid "%s <span class=\"screen-reader-text says\">says:</span>"
 msgstr "%s <span class=\"screen-reader-text says\">diyor ki:</span>"
 
@@ -366,13 +375,13 @@ msgstr "Burada bir şey bulamadık. Bir de aramayı denemek ister misiniz?"
 msgid "Oops! That page can&rsquo;t be found."
 msgstr "Amanın! O sayfa bulunamadı."
 
+#. Theme URI of the theme
+msgid "https://wordpress.org/themes/twentynineteen/"
+msgstr "https://wordpress.org/themes/twentynineteen/"
+
 #. Author of the theme
 msgid "the WordPress team"
 msgstr "WordPress ekibi"
-
-#. Theme URI of the theme
-msgid "https://github.com/WordPress/twentynineteen"
-msgstr "https://github.com/WordPress/twentynineteen"
 
 #. Author URI of the theme
 #: footer.php:25

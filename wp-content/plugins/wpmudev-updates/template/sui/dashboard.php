@@ -2,7 +2,8 @@
 // Render the page header section.
 /** @var WPMUDEV_Dashboard_Sui $this */
 $page_title = __( 'Overview', 'wpmudev' );
-$this->render_sui_header( $page_title );
+$page_slug  = 'dashboard';
+$this->render_sui_header( $page_title, $page_slug );
 
 /** @var WPMUDEV_Dashboard_Sui_Page_Urls $urls */
 

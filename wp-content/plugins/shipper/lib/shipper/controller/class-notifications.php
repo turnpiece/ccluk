@@ -78,6 +78,12 @@ class Shipper_Controller_Notifications extends Shipper_Controller {
 	 * @param bool   $status Migration status.
 	 */
 	public function send_notifications( $migration, $status ) {
+		if ( $migration->is_from_hub() ) {
+			// Do not send out notifications if we're not local.
+			// Hub-originated migrations have a corresponding local one.
+			// The local one should notify.
+			return false;
+		}
 		$model = $this->get_model();
 		$tpl = new Shipper_Helper_Template;
 		$type = $migration->get_type();

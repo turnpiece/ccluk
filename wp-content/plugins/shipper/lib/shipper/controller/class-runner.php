@@ -229,12 +229,22 @@ abstract class Shipper_Controller_Runner extends Shipper_Controller {
 				Shipper_Helper_Log::write( 'Lock set, wait for the running tasks to shut down' );
 				$locks->set_lock( Shipper_Helper_Locks::LOCK_CANCEL );
 			} else {
-				$locks->release_lock( $lock );
-				$this->ping();
+				$is_old_lock = $locks->is_old_lock( $lock );
+				if ( $is_old_lock ) {
+					$locks->release_lock( $lock );
+					$this->ping();
+				}
 			}
 		} else {
-			$this->ping();
+			if ( ! $locks->has_lock( Shipper_Helper_Locks::LOCK_CANCEL ) ) {
+				$this->cancel();
+			} else {
+				if ( $locks->is_old_lock( Shipper_Helper_Locks::LOCK_CANCEL ) ) {
+					$this->ping();
+				}
+			}
 		}
+
 	}
 
 	/**

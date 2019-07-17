@@ -22,6 +22,7 @@ class Shipper_Task_Api_Destinations_Get extends Shipper_Task_Api {
 		$destinations = array();
 
 		if ( empty( $status['success'] ) ) {
+			$this->clear_cached_api_response( 'destinations-get' );
 			$this->add_error(
 				self::ERR_SERVICE,
 				__( 'Error listing destinations: service encountered an error', 'shipper' )
@@ -35,6 +36,7 @@ class Shipper_Task_Api_Destinations_Get extends Shipper_Task_Api {
 		;
 
 		if ( empty( $destinations ) ) {
+			$this->clear_cached_api_response( 'destinations-get' );
 			$this->add_error(
 				self::ERR_SERVICE,
 				__( 'Error listing destinations: service responded with an empty list', 'shipper' )
@@ -42,6 +44,7 @@ class Shipper_Task_Api_Destinations_Get extends Shipper_Task_Api {
 			return $destinations;
 		}
 
+		$this->record_success( 'destinations-get' );
 		return $destinations;
 	}
 }

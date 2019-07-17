@@ -26,7 +26,7 @@ if ( ! function_exists( 'wphb_divi_after_init' ) ) :
 endif;
 
 function wphb_et_visual_builder_active() {
-	return false !== strpos( $_SERVER['REQUEST_URI'], '?et_fb=1' );
+	return false !== strpos( $_SERVER['REQUEST_URI'], 'et_fb=1' );
 }
 
 function wphb_et_divi_builder_active() {

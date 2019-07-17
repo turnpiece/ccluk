@@ -209,6 +209,169 @@ abstract class Shipper_Task_Api extends Shipper_Task {
 			$endpoint
 		);
 
+		$data = $this->get_cached_api_response( $endpoint, $args );
+		if ( false === $data ) {
+			$data = $this->get_api_response( $url, $endpoint, $args );
+			$model->set_cached_api_response( $endpoint, $args, $data );
+		}
+
+		return $data;
+	}
+
+	/**
+	 * Gets maximum API cache time for this task
+	 *
+	 * Is to be overridden as needed in concrete API task implementations.
+	 *
+	 * @since v1.0.3
+	 *
+	 * @return int
+	 */
+	public function get_api_cache_ttl() {
+		return 120;
+	}
+
+	/**
+	 * Whether or not to cache this API request result
+	 *
+	 * Is to be overridden as needed in concrete API task implementations.
+	 *
+	 * @since v1.0.3
+	 *
+	 * @return bool
+	 */
+	public function is_cacheable() {
+		return true;
+	}
+
+	/**
+	 * Gets cached API request data.
+	 *
+	 * Proxies the API model cache getter to inject the TTL data.
+	 *
+	 * @since v1.0.3
+	 *
+	 * @param string $endpoint API endpoint.
+	 * @param array $payload API request params.
+	 *
+	 * @return false|array Cached data, or (bool)false on failure.
+	 */
+	public function get_cached_api_response( $endpoint, $payload  ) {
+		if ( ! $this->is_cacheable() ) {
+			return false;
+		}
+
+		$model = new Shipper_Model_Api;
+		return $model->get_cached_api_response(
+			$endpoint,
+			$payload,
+			$this->get_api_cache_ttl()
+		);
+	}
+
+	/**
+	 * Clears cached API response
+	 *
+	 * Proxied the API model cache clearing so it can be called from the
+	 * concrete implementations without instantiating the model.
+	 *
+	 * @since v1.0.3
+	 *
+	 * @param string $endpoint API endpoint.
+	 * @param array|false $payload Optional payload.
+	 */
+	public function clear_cached_api_response( $endpoint, $payload = false ) {
+		$model = new Shipper_Model_Api;
+		return $model->clear_cached_api_response( $endpoint, $payload );
+	}
+
+	/**
+	 * Records a non-success response from a task implementation
+	 *
+	 * Clears endpoint cache so we're primed for next attempt.
+	 * Also records an API call error if needed.
+	 * This is so that the API protection mechanism can kick in.
+	 * Record the API call error only if needed - as in, we didn't have an API error earlier.
+	 * This is so we don't double down on API errors.
+	 * Non-http errors is optional.
+	 *
+	 * @since v1.0.3
+	 *
+	 * @param string $endpoint API endpoint.
+	 * @param string $error_type Error suffix to be added to error type.
+	 * @param string $error_message Optional error message.
+	 */
+	public function record_non_success( $endpoint, $error_type, $error_message ) {
+		if ( $this->get_constants()->get( 'RECORD_NONHTTP_ERRORS' ) && ! $this->has_errors() ) {
+			// Record API failure if we have't errored out earlier.
+			$model = new Shipper_Model_Api;
+			$model->record_api_fail();
+		}
+		$this->add_error( $error_type, $error_message );
+		$this->clear_cached_api_response( $endpoint );
+	}
+
+	/**
+	 * Records a success response from task implementation
+	 *
+	 * Clears previous API fails, optionally.
+	 *
+	 * @since v1.0.3
+	 *
+	 * @param string $endpoint API endpoint.
+	 */
+	public function record_success( $endpoint ) {
+		if ( $this->get_constants()->get( 'RECORD_NONHTTP_ERRORS' ) && ! $this->has_errors() ) {
+			// Record API failure if we have't errored out earlier.
+			$model = new Shipper_Model_Api;
+			$model->reset_api_fails();
+		}
+	}
+
+	/**
+	 * Gets constants model instance
+	 *
+	 * Either an overridden constants instance, as used in tests,
+	 * or a brand new object instance
+	 *
+	 * @since v1.0.3
+	 *
+	 * @return object Shipper_Model_Constants_Shipper instance
+	 */
+	public function get_constants() {
+		if ( isset( $this->_constants ) ) {
+			return $this->_constants;
+		}
+		return new Shipper_Model_Constants_Shipper;
+	}
+
+	/**
+	 * Sets overridden constants instance
+	 *
+	 * Used in tests.
+	 *
+	 * @since v1.0.3
+	 *
+	 * @param object $constants Shipper_Model_Constants_Shipper instance
+	 */
+	public function set_constants( Shipper_Model_Constants $constants ) {
+		$this->_constants = $constants;
+	}
+
+	/**
+	 * Actually call the API endpoint
+	 *
+	 * @since v1.0.3
+	 *
+	 * @param string $url API URL to send the request to.
+	 * @param string $endpoint API endpoint to call.
+	 * @param array $args Actual request arguments.
+	 *
+	 * @return array
+	 */
+	public function get_api_response( $url, $endpoint, $args ) {
+		$model = new Shipper_Model_Api;
+
 		$timer = Shipper_Helper_Timer_Basic::get();
 		$timer->start( $endpoint );
 		$resp = wp_remote_request( $url, $args );
@@ -235,6 +398,7 @@ abstract class Shipper_Task_Api extends Shipper_Task {
 			$is_connection_error = true;
 		}
 
+		$data = array();
 		if ( ! empty( $raw ) ) {
 			$data = json_decode( $raw, true );
 			if ( ! is_array( $data ) ) {

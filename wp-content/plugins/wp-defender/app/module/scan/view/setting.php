@@ -16,9 +16,9 @@
 
                 <div class="sui-box-settings-col-2">
                     <div class="sui-form-field">
+                        <input type="hidden" name="scan_core" value="0"/>
                         <label class="sui-toggle">
-                            <input type="hidden" name="scan_core" value="0"/>
-                            <input role="presentation" type="checkbox" name="scan_core" class="toggle-checkbox"
+                            <input type="checkbox" name="scan_core" class="toggle-checkbox"
                                    id="core-scan" value="1"
 								<?php checked( true, $setting->scan_core ) ?>/>
                             <span class="sui-toggle-slider"></span>
@@ -31,11 +31,11 @@
                         </p>
                     </div>
                     <div class="sui-form-field">
+                        <input type="hidden" name="scan_vuln" value="0"/>
                         <label class="sui-toggle">
-                            <input type="hidden" name="scan_vuln" value="0"/>
-                            <input role="presentation" type="checkbox" class="toggle-checkbox" name="scan_vuln"
+                            <input type="checkbox" class="toggle-checkbox" name="scan_vuln"
                                    value="1"
-                                   id="scan-vuln" <?php checked( true, $setting->scan_vuln ) ?>/>
+                                   id="scan_vuln" <?php checked( true, $setting->scan_vuln ) ?>/>
                             <span class="sui-toggle-slider"></span>
                         </label>
                         <label for="scan_vuln" class="sui-toggle-label">
@@ -46,11 +46,11 @@
                         </p>
                     </div>
                     <div class="sui-form-field">
+                        <input type="hidden" name="scan_content" value="0"/>
                         <label class="sui-toggle">
-                            <input type="hidden" name="scan_content" value="0"/>
                             <input role="presentation" type="checkbox" class="toggle-checkbox" name="scan_content"
                                    value="1"
-                                   id="scan-content" <?php checked( true, $setting->scan_content ) ?>/>
+                                   id="scan_content" <?php checked( true, $setting->scan_content ) ?>/>
                             <span class="sui-toggle-slider"></span>
                         </label>
                         <label for="scan_content" class="sui-toggle-label">

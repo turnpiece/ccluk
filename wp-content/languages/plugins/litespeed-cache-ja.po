@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - LiteSpeed Cache - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2019-02-08 21:36:09+0000\n"
+"PO-Revision-Date: 2019-06-22 15:33:30+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,46 @@ msgstr ""
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: ja_JP\n"
 "Project-Id-Version: Plugins - LiteSpeed Cache - Stable (latest release)\n"
+
+#: admin/tpl/inc/banner_promo.php:116
+msgid "PageSpeed Score"
+msgstr "PageSpeed スコア"
+
+#: admin/tpl/inc/banner_promo.php:103 admin/tpl/inc/banner_promo.php:142
+msgid "Improved by"
+msgstr "改善しました"
+
+#: admin/tpl/inc/banner_promo.php:93 admin/tpl/inc/banner_promo.php:132
+msgid "After"
+msgstr "以後"
+
+#: admin/tpl/inc/banner_promo.php:82 admin/tpl/inc/banner_promo.php:122
+msgid "Before"
+msgstr "以前"
+
+#: admin/tpl/inc/banner_promo.php:76
+msgid "Page Load Time"
+msgstr "ページの読み込み時間"
+
+#: admin/tpl/inc/check_cache_disabled.php:9
+msgid "To use the caching functions you must have a LiteSpeed web server or be using QUIC.cloud CDN."
+msgstr "キャッシュ機能を使用するには、LiteSpeed Webサーバーを持っているか、QUIC.cloud CDNを使用している必要があります。"
+
+#: admin/tpl/setting/settings_media.php:224
+msgid "Preserve EXIF/XMP data"
+msgstr "EXIF / XMPデータを保存する"
+
+#: admin/tpl/setting/settings_inc.cache_mobile.php:15
+msgid "Only enable for AMP or mobile-specific design/content, not for responsive sites."
+msgstr "レスポンシブサイトではなく、AMPまたはモバイル固有のデザイン/コンテンツに対してのみ有効にします。"
+
+#: admin/tpl/setting/settings_inc.cache_mobile.php:14
+msgid "Cache mobile views separately."
+msgstr "モバイルビューを個別にキャッシュします。"
+
+#: admin/tpl/debug_log.php:20
+msgid "Try GitHub Version"
+msgstr "GitHubのバージョンを試す"
 
 #: admin/tpl/setting/settings_cdn.php:112
 msgid "If you turn any of the above settings OFF, please remove the related file types from the %s box."
@@ -43,7 +83,7 @@ msgstr "たぶん後で"
 msgid "Turn On Auto Upgrade"
 msgstr "自動アップグレードを有効にする"
 
-#: admin/tpl/inc/banner_promo.new_version.php:68
+#: admin/tpl/debug_log.php:26 admin/tpl/inc/banner_promo.new_version.php:68
 msgid "Upgrade"
 msgstr "アップグレード"
 
@@ -71,18 +111,18 @@ msgstr "私はレビューしたいです！"
 msgid "Thank You for Using the LiteSpeed Cache Plugin!"
 msgstr "LiteSpeed Cache プラグインをご利用いただきありがとう!"
 
-#: includes/litespeed-cache-activation.class.php:368
-#: inc/activation.class.php:368
+#: includes/litespeed-cache-activation.class.php:394
+#: inc/activation.class.php:394
 msgid "Upgraded successfully."
 msgstr "アップグレードに成功しました。"
 
-#: includes/litespeed-cache-activation.class.php:359
-#: includes/litespeed-cache-activation.class.php:364
-#: inc/activation.class.php:359 inc/activation.class.php:364
+#: includes/litespeed-cache-activation.class.php:385
+#: includes/litespeed-cache-activation.class.php:390
+#: inc/activation.class.php:385 inc/activation.class.php:390
 msgid "Failed to upgrade."
 msgstr "アップグレードに失敗しました。"
 
-#: includes/litespeed-cache-config.class.php:768 inc/config.class.php:768
+#: includes/litespeed-cache-config.class.php:776 inc/config.class.php:776
 msgid "Changed setting successfully."
 msgstr "設定を変更しました。"
 
@@ -240,10 +280,6 @@ msgstr "プラグインの設定で LiteSpeed Cache を有効にしてくださ�
 msgid "Please enable the LSCache Module at the server level, or ask your hosting provider."
 msgstr "サーバレベルでLSCacheモジュールを有効にするか、ホスティングプロバイダにお尋ねください。"
 
-#: admin/tpl/inc/check_cache_disabled.php:9
-msgid "Caching with a non-LiteSpeed server (i.e. Apache or nginx) is not currently supported."
-msgstr "LiteSpeed 以外のサーバ（Apache や nginx など）でのキャッシュは現在サポートされていません。"
-
 #: admin/admin-api.class.php:450
 msgid "Failed to post via WordPress"
 msgstr "WordPress 経由で投稿できませんでした"
@@ -260,31 +296,31 @@ msgstr "インラインレイジーロードイメージライブラリ"
 msgid "High-performance page caching and site optimization from LiteSpeed"
 msgstr "LiteSpeed からの高性能なページキャッシュとサイトの最適化"
 
-#: admin/tpl/import_export.php:61 inc/media.class.php:241
+#: admin/tpl/import_export.php:61 inc/media.class.php:312
 msgid "Reset"
 msgstr "リセット"
 
-#: inc/media.class.php:222
+#: inc/media.class.php:293
 msgid "Click to Switch To Optimized File"
 msgstr "クリックすると最適化されたファイルに切り替わります"
 
-#: inc/media.class.php:217
+#: inc/media.class.php:288
 msgid "Click to Restore Original File"
 msgstr "元のファイルを復元するにはクリックしてください"
 
-#: inc/media.class.php:185
+#: inc/media.class.php:256
 msgid "Click to Enable WebP"
 msgstr "クリックして WebP を有効にする"
 
-#: inc/media.class.php:180
+#: inc/media.class.php:251
 msgid "Click to Disable WebP"
 msgstr "クリックして WebP を無効にする"
 
-#: inc/img_optm.class.php:2045
+#: inc/img_optm.class.php:2063
 msgid "Reset the optimized data successfully."
 msgstr "最適化されたデータをリセットします。"
 
-#: inc/img_optm.class.php:1028
+#: inc/img_optm.class.php:1030
 msgid "LSCWP %1$s has simplified the image pulling process. Please %2$s, or resend the pull notification this one time only. After that, the process will be automated."
 msgstr "LSCWP %1$s は画像の引き込み処理を簡略化しました。 %2$s してください。またはプル通知を1回だけ再送信してください。 その後、プロセスは自動化されます。"
 
@@ -421,7 +457,7 @@ msgstr "LiteSpeed image server からのお知らせ"
 msgid "Quic Cloud User Panel"
 msgstr "Quic Cloud ユーザーパネル"
 
-#: inc/img_optm.class.php:1925
+#: inc/img_optm.class.php:1947
 msgid "Switched images successfully."
 msgstr "画像を正常に切り替えました。"
 
@@ -561,15 +597,15 @@ msgstr "これを無効にすると、AJAX によってトリガーされた Wor
 msgid "Disable WordPress heartbeat to prevent AJAX calls from breaking debug logging."
 msgstr "WordPress ハートビートを無効にして、AJAX 呼び出しがデバッグログを破棄しないようにします。"
 
-#: includes/litespeed-cache-utility.class.php:235 inc/utility.class.php:235
+#: includes/litespeed-cache-utility.class.php:239 inc/utility.class.php:239
 msgid "right now"
 msgstr "今すぐに"
 
-#: includes/litespeed-cache-utility.class.php:235 inc/utility.class.php:235
+#: includes/litespeed-cache-utility.class.php:239 inc/utility.class.php:239
 msgid "just now"
 msgstr "たった今"
 
-#: inc/img_optm.class.php:1730
+#: inc/img_optm.class.php:1754
 msgid "Removed %1$s images and saved %2$s successfully."
 msgstr "%1$s の画像を削除し、%2$s を正常に保存しました。"
 
@@ -708,7 +744,7 @@ msgstr "OPcode キャッシュ"
 msgid "CSS/JS Cache"
 msgstr "CSS/JS キャッシュ"
 
-#: inc/img_optm.class.php:1340
+#: inc/img_optm.class.php:1349
 msgid "Destroy unfinished data successfully."
 msgstr "完了していないデータを破棄しました。"
 
@@ -732,7 +768,7 @@ msgstr "完了していないデータのクリーンアップ"
 msgid "Images with wrong meta"
 msgstr "間違ったメタの画像"
 
-#: inc/img_optm.class.php:223
+#: inc/img_optm.class.php:226
 msgid "Requested successfully."
 msgstr "要求されました。"
 
@@ -756,11 +792,11 @@ msgstr "%s コミュニティに参加しよう。"
 msgid "Want to connect with other LiteSpeed users?"
 msgstr "他の LiteSpeed ユーザーと接したいですか？"
 
-#: inc/img_optm.class.php:300
+#: inc/img_optm.class.php:303
 msgid "Pushed %1$s to LiteSpeed optimization server, accepted %2$s."
 msgstr "LiteSpeed optimization server に %1$s を押し出し、%2$s を受け入れました。"
 
-#: inc/img_optm.class.php:243
+#: inc/img_optm.class.php:246
 msgid "Optimized successfully."
 msgstr "最適化しました。"
 
@@ -1374,8 +1410,8 @@ msgstr "同じドメインで HTTP と HTTPS の両方を使用し、キャッ�
 msgid "Improve HTTP/HTTPS Compatibility"
 msgstr "HTTP / HTTPS の互換性を向上させる"
 
-#: inc/img_optm.class.php:167 inc/img_optm.class.php:1451
-#: inc/img_optm.class.php:1516
+#: inc/img_optm.class.php:170 inc/img_optm.class.php:1478
+#: inc/img_optm.class.php:1543
 msgid "No image found."
 msgstr "画像が見つかりません。"
 
@@ -1395,7 +1431,7 @@ msgstr "新しい最適化されていない画像サムネイルサイズをス
 msgid "Send New Thumbnail Requests"
 msgstr "新しいサムネイルリクエストを送信する"
 
-#: inc/img_optm.class.php:195
+#: inc/img_optm.class.php:198
 msgid "Number of images in one image group (%s) exceeds the credit (%s)"
 msgstr "1つの画像グループ (%s) 内の画像の数が点数 (%s) を超えています"
 
@@ -1407,11 +1443,7 @@ msgstr "これにより、最適化されたファイルのサイズが大きく
 msgid "Preserve EXIF data (copyright, GPS, comments, keywords, etc) when optimizing."
 msgstr "最適化する際に EXIF データ（著作権、GPS、コメント、キーワードなど）を保存します。"
 
-#: admin/tpl/setting/settings_media.php:224
-msgid "Preserve EXIF data"
-msgstr "EXIF データを保持する"
-
-#: admin/tpl/debug_log.php:30
+#: admin/tpl/debug_log.php:42
 msgid "Clear Log"
 msgstr "ログを消去する"
 
@@ -1419,19 +1451,19 @@ msgstr "ログを消去する"
 msgid "Failed to communicate with LiteSpeed image server"
 msgstr "LiteSpeed Image Optimization Server と通信できませんでした"
 
-#: thirdparty/lscwp-3rd-woocommerce.cls.php:867
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:869
 msgid "To test the cart, visit the <a %s>FAQ</a>."
 msgstr "カートをテストするには、<a %s>FAQ</a>をご覧ください。"
 
-#: includes/litespeed-cache-utility.class.php:238 inc/utility.class.php:238
+#: includes/litespeed-cache-utility.class.php:242 inc/utility.class.php:242
 msgid " %s ago"
 msgstr " %s 前"
 
-#: inc/media.class.php:206
+#: inc/media.class.php:277
 msgid "Original saved %s"
 msgstr "元を保存しました %s"
 
-#: inc/media.class.php:173
+#: inc/media.class.php:244
 msgid "WebP saved %s"
 msgstr "WebP で保存しました %s"
 
@@ -1528,15 +1560,15 @@ msgstr "レポート番号"
 msgid "LiteSpeed Report Number"
 msgstr "LiteSpeed レポート番号"
 
-#: thirdparty/lscwp-3rd-woocommerce.cls.php:858
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:860
 msgid "Privately cache cart when not empty."
 msgstr "空でないときにカートをプライベートにキャッシュする。"
 
-#: thirdparty/lscwp-3rd-woocommerce.cls.php:854
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:856
 msgid "Privately Cache Cart"
 msgstr "プライベートキャッシュカート"
 
-#: inc/media.class.php:147
+#: inc/media.class.php:217
 msgid "LiteSpeed Optimization"
 msgstr "LiteSpeed の最適化"
 
@@ -1616,19 +1648,19 @@ msgstr "最適化を要求されていない画像数"
 msgid "Images total"
 msgstr "画像合計数"
 
-#: inc/img_optm.class.php:1985
+#: inc/img_optm.class.php:2005
 msgid "Switched to optimized file successfully."
 msgstr "最適化されたファイルに切り替えました。"
 
-#: inc/img_optm.class.php:1978
+#: inc/img_optm.class.php:1998
 msgid "Restored original file successfully."
 msgstr "元のファイルを復元しました。"
 
-#: inc/img_optm.class.php:1962
+#: inc/img_optm.class.php:1982
 msgid "Enabled WebP file successfully."
 msgstr "WebP ファイルを有効にしました。"
 
-#: inc/img_optm.class.php:1956
+#: inc/img_optm.class.php:1976
 msgid "Disabled WebP file successfully."
 msgstr "WebP ファイルを無効にしました。"
 
@@ -1660,11 +1692,11 @@ msgstr "LiteSpeed Cache Custom Cron Crawler"
 msgid "LiteSpeed Cache Custom Cron Common"
 msgstr "LiteSpeed キャッシュカスタム Cron 一般"
 
-#: inc/img_optm.class.php:1554
+#: inc/img_optm.class.php:1581
 msgid "Pushed %1$s groups with %2$s images to LiteSpeed optimization server, accepted %3$s groups with %4$s images."
 msgstr "LiteSpeed optimization server に %2$s つの画像を含む %1$s つのグループをプッシュし、 %4$s つの画像を含む %3$s つのグループを受け入れました。"
 
-#: inc/img_optm.class.php:687
+#: inc/img_optm.class.php:696
 msgid "Failed to parse data from LiteSpeed IAPI server: %s"
 msgstr "LiteSpeed IAPIサーバーからデータを解析できませんでした：%s"
 
@@ -1762,7 +1794,7 @@ msgstr "LiteSpeed Cache 画像の最適化"
 msgid "Image Optimization"
 msgstr "画像の最適化"
 
-#: inc/img_optm.class.php:114
+#: inc/img_optm.class.php:117
 msgid "Communicated with LiteSpeed Image Optimization Server successfully."
 msgstr "LiteSpeed Image Optimization サーバーと通信しました。"
 
@@ -2510,11 +2542,11 @@ msgstr "ESIでは、動的ページの一部を別々のフラグメントとし
 msgid "With ESI (Edge Side Includes), pages may be served from cache for logged-in users."
 msgstr "ESI (Edge Side Includes) では、ログイン中ユーザーのためにキャッシュからページを提供することができます。"
 
-#: admin/tpl/esi_widget_edit.php:48
+#: admin/tpl/esi_widget_edit.php:44
 msgid "Private"
 msgstr "プライベート"
 
-#: admin/tpl/esi_widget_edit.php:40
+#: admin/tpl/esi_widget_edit.php:43
 msgid "Public"
 msgstr "パブリック"
 
@@ -2604,7 +2636,7 @@ msgstr "パージ"
 msgid "Cache"
 msgstr "キャッシュ"
 
-#: thirdparty/lscwp-3rd-woocommerce.cls.php:799
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:801
 msgid "WooCommerce"
 msgstr "WooCommerce"
 
@@ -2679,7 +2711,7 @@ msgstr "ログファイルの最大サイズを指定します。 最小値は3M
 msgid "MB"
 msgstr "MB"
 
-#: admin/tpl/debug_log.php:9
+#: admin/tpl/debug_log.php:8
 msgid "LiteSpeed Cache Debug Log Viewer"
 msgstr "LiteSpeed Cache デバッグログビューア"
 
@@ -2715,19 +2747,19 @@ msgstr "高度なキャッシュの確認"
 msgid "ESI Settings"
 msgstr "ESI設定"
 
-#: admin/tpl/esi_widget_edit.php:73
+#: admin/tpl/esi_widget_edit.php:71
 msgid "A TTL of 0 indicates do not cache."
 msgstr "TTL が 0 の場合、キャッシュされません。"
 
-#: admin/tpl/esi_widget_edit.php:72
+#: admin/tpl/esi_widget_edit.php:70
 msgid "Recommended value: 28800 seconds (8 hours)."
 msgstr "推奨値: 28800秒 (8 時間)。"
 
-#: admin/tpl/esi_widget_edit.php:66
+#: admin/tpl/esi_widget_edit.php:60
 msgid "Widget Cache TTL:"
 msgstr "ウィジェットキャッシュTTL:"
 
-#: admin/tpl/esi_widget_edit.php:30 admin/tpl/setting/settings_esi.php:43
+#: admin/tpl/esi_widget_edit.php:34 admin/tpl/setting/settings_esi.php:43
 msgid "Enable ESI"
 msgstr "ESIを有効にする"
 
@@ -2838,11 +2870,11 @@ msgstr "定義済み最大実行時間の超過による停止"
 msgid "Oh look, there is already another LiteSpeed crawler running!"
 msgstr "あれ、もう一つの LiteSpeed クローラーが走っています！"
 
-#: includes/litespeed-cache.class.php:347 inc/litespeed-cache.class.php:347
+#: includes/litespeed-cache.class.php:337 inc/litespeed-cache.class.php:337
 msgid "Notified LiteSpeed Web Server to purge the list."
 msgstr "LiteSpeed Web Server にリストをパージするよう通知しました。"
 
-#: includes/litespeed-cache.class.php:326 inc/litespeed-cache.class.php:326
+#: includes/litespeed-cache.class.php:316 inc/litespeed-cache.class.php:316
 msgid "Crawler blacklist is saved."
 msgstr "クローラーブラックリストを保存しました。"
 
@@ -3150,7 +3182,7 @@ msgstr "LiteSpeed Web Server にページをパージするよう通知しまし
 msgid "Purged the tags!"
 msgstr "タグをパージしました！"
 
-#: thirdparty/lscwp-3rd-woocommerce.cls.php:812
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:814
 msgid "For example, if the homepage for the site is located at %1$s, the shop page may be located at %2$s."
 msgstr "例えば、サイトのホームページが %1$s にあるなら、ショップページは %2$s にあります。"
 
@@ -3308,7 +3340,7 @@ msgstr "WordPress サイトだけをパージする必要があるなら、す�
 msgid "A LiteSpeed server (OLS, LSWS, WebADC) and its LSCache module must be installed and enabled."
 msgstr "LiteSpeed server (OLS, LSWS, WebADC) とその LSCache モジュールインストールして有効にする必要があります。"
 
-#: includes/litespeed-cache.class.php:337 inc/litespeed-cache.class.php:337
+#: includes/litespeed-cache.class.php:327 inc/litespeed-cache.class.php:327
 msgid "Notified LiteSpeed Web Server to purge everything."
 msgstr "LiteSpeed Web Server にすべてをパージするよう通知しました。"
 
@@ -3450,7 +3482,7 @@ msgid "LiteSpeed Cache is a page cache built into LiteSpeed Web Server."
 msgstr "LiteSpeed Cache は、LiteSpeed Web Server に組み込まれたページキャッシュです。"
 
 #: admin/tpl/setting/settings_purge.php:53
-#: thirdparty/lscwp-3rd-woocommerce.cls.php:864
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:866
 msgid "Note"
 msgstr "注釈"
 
@@ -3462,7 +3494,7 @@ msgstr "サーバーは、このクッキーの存在に基づいてユーザー
 msgid "List in WordPress database is: %s"
 msgstr "WordPress データベース内のリスト:  %s"
 
-#: thirdparty/lscwp-3rd-woocommerce.cls.php:866
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:868
 msgid "After verifying that the cache works in general, please test the cart."
 msgstr "キャッシュが一般的に動作することを確認した後、カートをテストしてください。"
 
@@ -3478,43 +3510,43 @@ msgstr "アップグレード時にすべてをパージする"
 msgid "File editing is disabled in configuration."
 msgstr "ファイル編集が設定で無効になっています。"
 
-#: thirdparty/lscwp-3rd-woocommerce.cls.php:847
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:849
 msgid "Use Front Page TTL for the Shop Page"
 msgstr "Shop ページのフロントページ TTL を使用する"
 
-#: thirdparty/lscwp-3rd-woocommerce.cls.php:840
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:842
 msgid "Product Update Interval"
 msgstr "製品更新間隔"
 
-#: thirdparty/lscwp-3rd-woocommerce.cls.php:811
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:813
 msgid "Checking this option will force the shop page to use the front page TTL setting."
 msgstr "このオプションをチェックすると、ショップのページでフロントページのTTL設定が使用されます。"
 
-#: thirdparty/lscwp-3rd-woocommerce.cls.php:810
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:812
 msgid "Determines how changes in product quantity and product stock status affect product pages and their associated category pages."
 msgstr "製品数量および製品在庫状況の変化が製品ページおよび関連カテゴリページに与える影響を判断します。"
 
-#: thirdparty/lscwp-3rd-woocommerce.cls.php:807
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:809
 msgid "Always purge both product and categories on changes to the quantity or stock status."
 msgstr "数量または在庫状況の変更で、製品とカテゴリの両方をパージします。"
 
-#: thirdparty/lscwp-3rd-woocommerce.cls.php:806
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:808
 msgid "Do not purge categories on changes to the quantity or stock status."
 msgstr "数量又は在庫状況の変更時にカテゴリをパージしない。"
 
-#: thirdparty/lscwp-3rd-woocommerce.cls.php:805
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:807
 msgid "Purge product only when the stock status changes."
 msgstr "在庫状況が変更されたときのみ、製品をパージします。"
 
-#: thirdparty/lscwp-3rd-woocommerce.cls.php:804
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:806
 msgid "Purge product and categories only when the stock status changes."
 msgstr "在庫状況が変更されたときのみ、製品とカテゴリをパージします。"
 
-#: thirdparty/lscwp-3rd-woocommerce.cls.php:803
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:805
 msgid "Purge categories only when stock status changes."
 msgstr "在庫状況が変更されたときのみ、カテゴリをパージします。"
 
-#: thirdparty/lscwp-3rd-woocommerce.cls.php:802
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:804
 msgid "Purge product on changes to the quantity or stock status."
 msgstr "量または在庫状況の変更で、製品をパージします。"
 
@@ -3884,14 +3916,6 @@ msgstr "スペースは、スペースの前にをバックスラッシュ %s �
 msgid "SYNTAX: Each entry should be separated with a bar, %s."
 msgstr "構文: 各エントリは、バー %s で区切る必要があります。"
 
-#: admin/tpl/setting/settings_inc.cache_mobile.php:15
-msgid "A site built with responsive design does not need to check this."
-msgstr "レスポンシブデザインで構築したサイトは、これをチェックする必要はありません。"
-
-#: admin/tpl/setting/settings_inc.cache_mobile.php:14
-msgid "When enabled, mobile views will be cached separately."
-msgstr "有効にすると、モバイルビューは個別にキャッシュされます。"
-
 #: admin/litespeed-cache-admin-error.class.php:200
 msgid "Failed to put contents into %s"
 msgstr "%s に内容を配置するに失敗しました"
@@ -3979,7 +4003,7 @@ msgstr "注釈"
 msgid "Use Network Admin Setting"
 msgstr "ネットワーク管理の設定を使用する"
 
-#: admin/tpl/crawler.php:84 admin/tpl/esi_widget_edit.php:56
+#: admin/tpl/crawler.php:84 admin/tpl/esi_widget_edit.php:45
 #: admin/tpl/setting/settings_general.php:30
 msgid "Disable"
 msgstr "無効"
@@ -4099,7 +4123,7 @@ msgstr "公開 / 更新の自動パージルール"
 msgid "Default Public Cache TTL"
 msgstr "デフォルトのパブリックキャッシュ TTL"
 
-#: admin/tpl/esi_widget_edit.php:69
+#: admin/tpl/esi_widget_edit.php:67
 #: admin/tpl/setting/settings_inc.cache_browser.php:24
 #: admin/tpl/setting/settings_general.php:65
 #: admin/tpl/setting/settings_general.php:77

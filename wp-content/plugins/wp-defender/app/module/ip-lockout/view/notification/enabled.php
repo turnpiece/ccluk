@@ -16,8 +16,8 @@
 
                 <div class="sui-box-settings-col-2">
                     <div class="sui-form-field">
+                        <input type="hidden" name="login_lockout_notification" value="0"/>
                         <label class="sui-toggle">
-                            <input type="hidden" name="login_lockout_notification" value="0"/>
                             <input role="presentation" type="checkbox" name="login_lockout_notification"
                                    class="toggle-checkbox"
                                    id="login_lockout_notification" value="1"
@@ -32,8 +32,8 @@
                         </p>
                     </div>
                     <div class="sui-form-field">
+                        <input type="hidden" name="ip_lockout_notification" value="0"/>
                         <label class="sui-toggle">
-                            <input type="hidden" name="ip_lockout_notification" value="0"/>
                             <input role="presentation" type="checkbox" name="ip_lockout_notification"
                                    class="toggle-checkbox"
                                    id="ip_lockout_notification" value="1"
@@ -74,15 +74,15 @@
                 </div>
 
                 <div class="sui-box-settings-col-2">
+                    <input type="hidden" name="cooldown_enabled" value="0"/>
                     <label class="sui-toggle">
-                        <input type="hidden" name="cooldown_enabled" value="0"/>
                         <input role="presentation" type="checkbox" name="cooldown_enabled"
                                class="toggle-checkbox"
                                id="cooldown_enabled" value="1"
 							<?php checked( true, $settings->cooldown_enabled ) ?>/>
                         <span class="sui-toggle-slider"></span>
                     </label>
-                    <label for="ip_lockout_notification" class="sui-toggle-label">
+                    <label for="cooldown_enabled" class="sui-toggle-label">
 						<?php esc_html_e( "Limit email notifications for repeat lockouts", wp_defender()->domain ) ?>
                     </label>
                     <div class="sui-border-frame sui-toggle-content">

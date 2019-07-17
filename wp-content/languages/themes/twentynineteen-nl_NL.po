@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Themes - Twenty Nineteen package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2019-01-16 06:37:00+0000\n"
+"PO-Revision-Date: 2019-05-12 09:24:57+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -65,19 +65,19 @@ msgctxt "primary color"
 msgid "Default"
 msgstr "Standaard"
 
-#: functions.php:170
+#: functions.php:166
 msgid "White"
 msgstr "Wit"
 
-#: functions.php:165
+#: functions.php:161
 msgid "Light Gray"
 msgstr "Lichtgrijs"
 
-#: functions.php:160
+#: functions.php:156
 msgid "Dark Gray"
 msgstr "Donkergrijs"
 
-#: functions.php:155
+#: functions.php:151
 msgid "Secondary"
 msgstr "Secundair"
 
@@ -126,11 +126,11 @@ msgstr "Volledige grootte"
 msgid "Page"
 msgstr "Pagina"
 
-#: functions.php:194
+#: functions.php:190
 msgid "Add widgets here to appear in your footer."
 msgstr "Voeg hier widgets toe die in de footer verschijnen."
 
-#: template-parts/footer/footer-widgets.php:12 functions.php:192
+#: functions.php:188 template-parts/footer/footer-widgets.php:12
 msgid "Footer"
 msgstr "Footer"
 
@@ -168,9 +168,9 @@ msgstr "Bovenste menu"
 msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
 msgstr "<span class=\"screen-reader-text\">\"%s\"</span> verder lezen"
 
+#: image.php:52 template-parts/content/content-page.php:27
 #: template-parts/content/content.php:49
-#: template-parts/content/content-page.php:27
-#: template-parts/content/content-single.php:40 image.php:52
+#: template-parts/content/content-single.php:40
 msgid "Pages:"
 msgstr "Pagina's:"
 
@@ -295,15 +295,15 @@ msgstr "Categorie archief:"
 msgid "Edit <span class=\"screen-reader-text\">%s</span>"
 msgstr "Bewerk <span class=\"screen-reader-text\">%s</span>"
 
-#: header.php:24
+#: header.php:25
 msgid "Skip to content"
 msgstr "Naar de inhoud springen"
 
-#: template-parts/header/site-branding.php:46 functions.php:61
+#: functions.php:61 template-parts/header/site-branding.php:46
 msgid "Social Links Menu"
 msgstr "Sociale links menu"
 
-#: functions.php:59 functions.php:150
+#: functions.php:59 functions.php:146
 msgid "Primary"
 msgstr "Primair"
 
@@ -350,20 +350,20 @@ msgstr "Laat een reactie achter"
 msgid "Join the Conversation"
 msgstr "Doe mee met de conversatie"
 
-#: classes/class-twentynineteen-walker-comment.php:100
+#: classes/class-twentynineteen-walker-comment.php:99
 msgid "Your comment is awaiting moderation."
 msgstr "Je reactie is in afwachting van goedkeuring."
 
-#: classes/class-twentynineteen-walker-comment.php:95
+#: classes/class-twentynineteen-walker-comment.php:94
 msgid "Edit"
 msgstr "Bewerk"
 
 #. translators: 1: comment date, 2: comment time
-#: classes/class-twentynineteen-walker-comment.php:87
+#: classes/class-twentynineteen-walker-comment.php:86
 msgid "%1$s at %2$s"
 msgstr "%1$s om %2$s"
 
-#: classes/class-twentynineteen-walker-comment.php:67
+#: classes/class-twentynineteen-walker-comment.php:66
 msgid "%s <span class=\"screen-reader-text says\">says:</span>"
 msgstr "%s <span class=\"screen-reader-text says\">zei:</span>"
 
@@ -375,13 +375,13 @@ msgstr "Het lijkt erop dat er niets gevonden is op deze locatie. Probeer het een
 msgid "Oops! That page can&rsquo;t be found."
 msgstr "Oeps! Deze pagina kon niet worden gevonden."
 
+#. Theme URI of the theme
+msgid "https://wordpress.org/themes/twentynineteen/"
+msgstr "https://nl.wordpress.org/themes/twentynineteen/"
+
 #. Author of the theme
 msgid "the WordPress team"
 msgstr "het WordPress team"
-
-#. Theme URI of the theme
-msgid "https://github.com/WordPress/twentynineteen"
-msgstr "https://github.com/WordPress/twentynineteen"
 
 #. Author URI of the theme
 #: footer.php:25

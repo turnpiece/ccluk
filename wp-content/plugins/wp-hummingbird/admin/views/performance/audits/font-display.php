@@ -75,8 +75,20 @@
 	<p>
 		<?php
 		printf(
+			/* translators: %1$s - <strong>, %2$s - </strong>, %3$s - <strong> with font color */
+			esc_html__( 'To add the %1$sfont-display%2$s property for Google Fonts, you can pass the desired value in the query string %3$sdisplay%2$s parameter as shown in the example below:', 'wphb' ),
+			'<strong>',
+			'</strong>',
+			'<strong style="color:#8D00B1 !important">'
+		);
+		?>
+	</p>
+	<pre class="sui-code-snippet sui-no-copy">https://fonts.googleapis.com/css?family=Roboto&<span style="color:#3B78E7 !important;">display</span>=<span style="color:#1ABC9C !important">swap</span></pre>
+	<p>
+		<?php
+		printf(
 			/* translators: %1$s - <strong>, %2$s - </strong> */
-			esc_html__( "Unfortunately, it's not possible to change the @font-face rule for web fonts hosted with external services such as Google Fonts. For fonts hosted locally, add the %1\$sfont-display%2\$s property to the @font-face CSS rule as shown below:", 'wphb' ),
+			esc_html__( 'For fonts hosted locally, add the %1$sfont-display%2$s property to the @font-face CSS rule as shown below:', 'wphb' ),
 			'<strong>',
 			'</strong>'
 		);
@@ -84,7 +96,7 @@
 	</p>
 	<pre class="sui-code-snippet sui-no-copy"><span style="color:#8D00B1 !important">@font-face{</span>
 	font-family: <span style="color:#1ABC9C !important">'myWebFont'</span>;
-	font-display: <span style="color:#3B78E7 !important;">auto</span>;
+	font-display: <span style="color:#3B78E7 !important;">swap</span>;
 	src: <span style="color:#3B78E7 !important;">url</span>(<span style="color:#1ABC9C !important">'myfont.woff2'</span>) <span style="color:#3B78E7 !important;">format</span>(<span style="color:#1ABC9C !important">'woff2'</span>);
 <span style="color:#8D00B1 !important">}</span></pre>
 	<p>
@@ -98,5 +110,10 @@
 			'</a>'
 		);
 		?>
+	</p>
+
+	<h4><?php esc_html_e( 'Additional notes', 'wphb' ); ?></h4>
+	<p>
+		<?php esc_html_e( "It's not possible to change the @font-face CSS rule for web fonts hosted with most external services. You should confirm if there is a way to specify the font-display rule with your font hosting service.", 'wphb' ); ?>
 	</p>
 <?php endif; ?>

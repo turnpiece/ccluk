@@ -2,6 +2,12 @@
 $core           = $model->getCount( 'core' );
 $vuln           = $model->getCount( 'vuln' );
 $content        = $model->getCount( 'content' );
+$tooltips       = __( "You don't have any outstanding security issues, nice work!", wp_defender()->domain );
+if ( $countAll == 1 ) {
+	$tooltips = __( "We've detected a potential security risk in your file system. We recommend you take a look and action a fix, or ignore the file if it's harmless.", wp_defender()->domain );
+} elseif ( $countAll > 1 ) {
+	$tooltips = sprintf( __( "You have %s potential security risks in your file system. We recommend you take a look and action fixes, or ignore the issues if they are harmless." ), $countAll );
+}
 ?>
 <div class="sui-wrap <?php echo \WP_Defender\Behavior\Utils::instance()->maybeHighContrast() ?>">
     <div id="wp-defender" class="wp-defender">
@@ -21,25 +27,32 @@ $content        = $model->getCount( 'content' );
                         </button>
                     </form>
                 </div>
-	            <?php if ( wp_defender()->hideDocLinks === false ): ?>
+				<?php if ( wp_defender()->hideDocLinks === false ): ?>
                     <div class="sui-actions-right">
                         <div class="sui-actions-right">
-                            <a href="https://premium.wpmudev.org/docs/wpmu-dev-plugins/defender/" target="_blank" class="sui-button sui-button-ghost">
+                            <a href="https://premium.wpmudev.org/docs/wpmu-dev-plugins/defender/#security-scans" target="_blank"
+                               class="sui-button sui-button-ghost">
                                 <i class="sui-icon-academy"></i> <?php _e( "View Documentation", wp_defender()->domain ) ?>
                             </a>
                         </div>
                     </div>
-	            <?php endif; ?>
+				<?php endif; ?>
             </div>
-            <div class="sui-box sui-summary <?php echo \WP_Defender\Behavior\Utils::instance()->getSummaryClass()?>">
+            <div class="sui-box sui-summary <?php echo \WP_Defender\Behavior\Utils::instance()->getSummaryClass() ?>">
                 <div class="sui-summary-image-space" aria-hidden="true"></div>
                 <div class="sui-summary-segment">
                     <div class="sui-summary-details">
                         <span class="sui-summary-large issues"><?php echo $countAll ?></span>
 						<?php if ( $countAll > 0 ): ?>
-                            <i aria-hidden="true" class="sui-icon-info sui-error"></i>
+                            <span class="sui-tooltip sui-tooltip-top-left sui-tooltip-constrained"
+                                  data-tooltip="<?php echo $tooltips ?>">
+                            <i aria-hidden="true" class="sui-icon-info sui-warning"></i>
+                        </span>
 						<?php else: ?>
+                            <span class="sui-tooltip sui-tooltip-top-left sui-tooltip-constrained"
+                                  data-tooltip="<?php echo $tooltips ?>">
                             <i class="sui-icon-check-tick sui-success" aria-hidden="true"></i>
+                        </span>
 						<?php endif; ?>
                         <span class="sui-summary-sub"><?php _e( "File scanning issues", wp_defender()->domain ) ?></span>
 
@@ -110,7 +123,7 @@ $content        = $model->getCount( 'content' );
 				<?php echo $contents ?>
             </div>
         </div>
-		<?php if ( wp_defender()->changeFooter && ! empty( wp_defender()->footerText ) ): ?>
+		<?php if ( wp_defender()->changeFooter ): ?>
             <div class="sui-footer"><?php echo wp_defender()->footerText ?></div>
 		<?php else: ?>
             <div class="sui-footer">Made with <i class="sui-icon-heart"></i> by WPMU DEV</div>

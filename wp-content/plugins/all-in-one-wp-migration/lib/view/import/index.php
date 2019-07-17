@@ -39,23 +39,31 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 				<?php include AI1WM_TEMPLATES_PATH . '/common/report-problem.php'; ?>
 
-				<form action="" method="post" id="ai1wm-import-form" class="ai1wm-clear" enctype="multipart/form-data">
+				<?php if ( is_readable( AI1WM_STORAGE_PATH ) && is_writable( AI1WM_STORAGE_PATH ) ) : ?>
 
-					<?php do_action( 'ai1wm_import_left_options' ); ?>
+					<form action="" method="post" id="ai1wm-import-form" class="ai1wm-clear" enctype="multipart/form-data">
 
-					<?php include AI1WM_TEMPLATES_PATH . '/import/import-buttons.php'; ?>
+						<?php do_action( 'ai1wm_import_left_options' ); ?>
 
-					<input type="hidden" name="ai1wm_manual_import" value="1" />
+						<?php include AI1WM_TEMPLATES_PATH . '/import/import-buttons.php'; ?>
 
-				</form>
+						<input type="hidden" name="ai1wm_manual_import" value="1" />
 
-				<?php do_action( 'ai1wm_import_left_end' ); ?>
+					</form>
 
+					<?php do_action( 'ai1wm_import_left_end' ); ?>
+
+				<?php else : ?>
+
+					<?php include AI1WM_TEMPLATES_PATH . '/import/import-permissions.php'; ?>
+
+				<?php endif; ?>
 			</div>
 		</div>
 		<div class="ai1wm-right">
 			<div class="ai1wm-sidebar">
 				<div class="ai1wm-segment">
+
 					<?php if ( ! AI1WM_DEBUG ) : ?>
 						<?php include AI1WM_TEMPLATES_PATH . '/common/share-buttons.php'; ?>
 					<?php endif; ?>
@@ -63,6 +71,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<h2><?php _e( 'Leave Feedback', AI1WM_PLUGIN_NAME ); ?></h2>
 
 					<?php include AI1WM_TEMPLATES_PATH . '/common/leave-feedback.php'; ?>
+
 				</div>
 			</div>
 		</div>

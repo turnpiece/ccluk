@@ -5,6 +5,26 @@ Change Log:
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
 
+4.7.3.1 - 07/17/2019 - Aaron, Leonidas
+----------------------------------------------------------------------
+- Improvement: Automatically sync with the Hub when enabling SSO from Dashboard settings
+
+4.7.3 - 07/16/2019 - Aaron, Leonidas, Biplav
+----------------------------------------------------------------------
+- Add: Single Sign-On for The Hub (and also hosting!)
+- Improvement: New styling for analytics chart makes it easier to read when you've had the same number of views on consecutive days
+- Improvement: Add external IP address to system info (for easier checking of blacklist status).
+
+4.7.2 - 07/01/2019 - Aaron, Leonidas, Biplav
+----------------------------------------------------------------------
+- Fix: When upgrading multiple plugins from FREE to PRO, some plugins get deactivated
+- Improvement: Add text informing the $19 users of having an option to add a hosted site in the Hub
+- Improvement: Update the Documentation links
+- Improvement: Update the general error strings across the site
+- Fix: The typo in the help text on the Tools > Whitelabel menu item
+- Fix: The typo in the Permissions / Add User
+- Fix: Getting an error while updating the plugins
+
 4.7.1.3 - 06/10/2019 - Aaron, Biplav
 ----------------------------------------------------------------------
 - Improvement: Better calculation of Analytics on dashboard widget.

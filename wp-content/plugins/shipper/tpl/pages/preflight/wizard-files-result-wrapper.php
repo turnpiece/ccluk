@@ -17,19 +17,15 @@ if ( 'package_size' === $check_type ) {
 <p>
 	<?php if ( 'file_sizes' === $check_type ) { ?>
 		<?php esc_html_e(
-			'Some of your files are very large in size which can cause issues with migrating.',
+			'Files over 8MB are listed below. Large files such as media files or backups can cause timeout issues on some budget hosts during the migration. We recommend excluding them from the migration and uploading them via FTP to your destination.',
 			'shipper'
 		); ?>
 	<?php } else if ( 'file_names' === $check_type ) { ?>
 		<?php esc_html_e(
-			'Some of your files have very long paths which can cause issues with migrating.',
+			'Files with names longer than 256 characters are listed below. Files with large names can cause issues on some hosts. We recommend excluding them from the migration and uploading them via FTP to your destination.',
 			'shipper'
 		); ?>
 	<?php } ?>
-	<?php esc_html_e(
-		'We recommend excluding them and uploading them via FTP if you run into issues.',
-		'shipper'
-	); ?>
 </p>
 
 <hr />

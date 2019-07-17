@@ -1,5 +1,5 @@
-# Translation of WordPress - 5.1.x - Development - Administration - Network Admin in Finnish
-# This file is distributed under the same license as the WordPress - 5.1.x - Development - Administration - Network Admin package.
+# Translation of WordPress - 5.2.x - Development - Administration - Network Admin in Finnish
+# This file is distributed under the same license as the WordPress - 5.2.x - Development - Administration - Network Admin package.
 msgid ""
 msgstr ""
 "PO-Revision-Date: 2019-02-18 08:15:55+0000\n"
@@ -9,7 +9,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: fi\n"
-"Project-Id-Version: WordPress - 5.1.x - Development - Administration - Network Admin\n"
+"Project-Id-Version: WordPress - 5.2.x - Development - Administration - Network Admin\n"
 
 #. translators: %s: DO_NOT_UPGRADE_GLOBAL_TABLES
 #: wp-admin/includes/network.php:113
@@ -44,10 +44,6 @@ msgstr "Alihakemistoihin asennus"
 #: wp-admin/includes/class-wp-ms-themes-list-table.php:671
 msgid "Active Child Theme"
 msgstr "Aktivoi lapsiteema"
-
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:666
-msgid "Active Theme"
-msgstr "Aktivoi teema"
 
 #: wp-admin/network/site-info.php:192
 msgid "Attributes"
@@ -193,23 +189,23 @@ msgstr "Varmista että Apachen %s-moduuli on käytössä, koska sitä tullaan k�
 msgid "You cannot use port numbers such as %s."
 msgstr "Et voi käyttää portin numeroita kuten %s."
 
-#: wp-admin/includes/class-wp-ms-users-list-table.php:173
+#: wp-admin/includes/class-wp-ms-users-list-table.php:171
 msgctxt "user"
 msgid "Registered"
 msgstr "Rekisteröitynyt"
 
-#: wp-admin/includes/class-wp-ms-users-list-table.php:144
+#: wp-admin/includes/class-wp-ms-users-list-table.php:142
 msgid "Super Admin <span class=\"count\">(%s)</span>"
 msgid_plural "Super Admins <span class=\"count\">(%s)</span>"
 msgstr[0] "Verkon ylläpitäjä <span class=\"count\">(%s)</span>"
 msgstr[1] "Verkon ylläpitäjiä <span class=\"count\">(%s)</span>"
 
-#: wp-admin/includes/class-wp-ms-users-list-table.php:118
+#: wp-admin/includes/class-wp-ms-users-list-table.php:116
 msgctxt "user"
 msgid "Not Spam"
 msgstr "Ei roskaa"
 
-#: wp-admin/includes/class-wp-ms-users-list-table.php:117
+#: wp-admin/includes/class-wp-ms-users-list-table.php:115
 msgctxt "user"
 msgid "Mark as Spam"
 msgstr "Merkitse roskapostittajaksi"
@@ -492,7 +488,7 @@ msgid "<a href=\"https://codex.wordpress.org/Network_Admin_Settings_Screen\">Doc
 msgstr "<a href=\"https://codex.wordpress.org/Network_Admin_Settings_Screen\">Verkon asetusten dokumentaatio</a>"
 
 #. translators: 1: site url, 2: server error message
-#: wp-admin/network/upgrade.php:96
+#: wp-admin/network/upgrade.php:97
 msgid "Warning! Problem updating %1$s. Your server may not be able to connect to sites running on it. Error message: %2$s"
 msgstr "Varoitus! Ongelma päivitettäessä %1$s. Kyseessä voi olla palvelimen yhteysongelmat. Virheilmoitus: %2$s"
 
@@ -619,7 +615,7 @@ msgstr "Täältä käsin voit:"
 msgid "Welcome to your Network Admin. This area of the Administration Screens is used for managing all aspects of your Multisite Network."
 msgstr "Tervetuloa verkon hallintaan. Tätä hallinnan puolta käytetään multisite-verkon asetusten muokkaamiseksi."
 
-#: wp-admin/network/upgrade.php:137
+#: wp-admin/network/upgrade.php:138
 msgid "WordPress has been updated! Before we send you on your way, we need to individually upgrade the sites in your network."
 msgstr "WordPress on päivitetty! Ennen kuin pääset jatkamaan, yksittäiset verkon sivustot on vielä päivitettävä."
 
@@ -628,7 +624,7 @@ msgid "Only use this screen once you have updated to a new version of WordPress 
 msgstr "Käytä tätä sivua vain päivitettyäsi WordPressin uuteen versioon Päivitykset-sivulta. Päivitä kaikki sivustot -painikkeen napsauttaminen käy läpi jokaisen verkkoon kuuluvan sivuston (5 kerrallaan) ja varmistaa että tarvittavat tietokantapäivitykset suoritetaan."
 
 #: wp-admin/network/upgrade.php:15 wp-admin/network/upgrade.php:42
-#: wp-admin/network/upgrade.php:141 wp-admin/network/menu.php:34
+#: wp-admin/network/upgrade.php:142 wp-admin/network/menu.php:34
 msgid "Upgrade Network"
 msgstr "Päivitä verkko"
 
@@ -922,6 +918,10 @@ msgstr "Tarvitset ns. wildcard DNS -tietueen voidaksesi käyttää virtual host 
 msgid "You cannot install a network of sites with your server address."
 msgstr "Et voi ottaa verkkoa käyttöön palvelimen osoitteellasi."
 
+#: wp-admin/includes/network.php:189
+msgid "Note:"
+msgstr "Huom:"
+
 #: wp-admin/includes/network.php:177
 msgid "Fill in the information below and you&#8217;ll be on your way to creating a network of WordPress sites. We will create configuration files in the next step."
 msgstr "Täytä tiedot alle edetäksesi verkon luomisessa. Luomme asetustiedostot seuraavassa vaiheessa."
@@ -1078,7 +1078,7 @@ msgstr "Uuden sivuston asetukset ovat oletuksilla, kun uusi sivusto luodaan verk
 msgid "The following words are reserved for use by WordPress functions and cannot be used as blog names: %s"
 msgstr "Seuraavat sanat on varattu WordPressin toiminnoille, eikä niitä voida käyttää sivuston nimenä: %s"
 
-#: wp-admin/network/upgrade.php:121
+#: wp-admin/network/upgrade.php:122
 msgid "If your browser doesn&#8217;t start loading the next page automatically, click this link:"
 msgstr "Jos selaimesi ei siirry seuraavalle sivulle automaattisesti, napsauta tätä linkkiä:"
 
@@ -1182,7 +1182,7 @@ msgstr "Uuden sivuston ensimmäinen artikkeli."
 msgid "The author of the first comment on a new site."
 msgstr "Ensimmäisen kommentin kirjoittaja uudella sivustolla."
 
-#: wp-admin/network/upgrade.php:72
+#: wp-admin/network/upgrade.php:73
 msgid "All done!"
 msgstr "Valmista tuli!"
 
@@ -1230,7 +1230,7 @@ msgstr "Sähköpostiosoite puuttuu."
 msgid "Missing or invalid site address."
 msgstr "Sivuston osoite puuttuu tai on virheellinen."
 
-#: wp-admin/network/upgrade.php:121
+#: wp-admin/network/upgrade.php:122
 msgid "Next Sites"
 msgstr "Seuraavat sivustot"
 

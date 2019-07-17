@@ -113,7 +113,7 @@ function ct_dashboard_statistics_widget_output( $post, $callback_args ) {
 					? '<br><br>'
 				.'<b style="font-size: 16px;">'
 					.sprintf(
-						__('Do you like CleanTalk?%s Post your feedback here%s.', 'cleantalk'),
+						__('Do you like CleanTalk? %sPost your feedback here%s.', 'cleantalk'),
 						'<u><a href="https://wordpress.org/support/plugin/cleantalk-spam-protect/reviews/#new-post" target="_blank">',
 						'</a></u>'
 					)

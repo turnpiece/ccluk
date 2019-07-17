@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Themes - OnePress package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2019-01-14 19:35:48+0000\n"
+"PO-Revision-Date: 2019-03-22 17:19:31+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,14 +19,14 @@ msgstr "OnePress es un excepcional tema de WordPress de única página creativo 
 msgid "OnePress"
 msgstr "OnePress"
 
-#: inc/customize-configs/section-contact.php:50
-#: inc/customize-configs/section-counter.php:49
 #: inc/customize-configs/section-hero.php:51
-#: inc/customize-configs/section-gallery.php:59
-#: inc/customize-configs/section-about.php:50
 #: inc/customize-configs/section-features.php:50
+#: inc/customize-configs/section-gallery.php:59
 #: inc/customize-configs/section-videolightbox.php:50
 #: inc/customize-configs/section-news.php:50
+#: inc/customize-configs/section-counter.php:49
+#: inc/customize-configs/section-about.php:50
+#: inc/customize-configs/section-contact.php:50
 msgid "The section ID should be English character, lowercase and no space."
 msgstr "La sección ID debe estar en inglés, en minúscula y sin espacios."
 
@@ -402,8 +402,8 @@ msgstr "Autor"
 msgid "ID"
 msgstr "ID"
 
-#: inc/customize-configs/section-news.php:220
 #: inc/customize-configs/options-single.php:27
+#: inc/customize-configs/section-news.php:220
 msgid "Default"
 msgstr "Predeterminado"
 
@@ -511,12 +511,12 @@ msgstr "Widgets del pie"
 msgid "Text Color"
 msgstr "Color de texto"
 
-#: inc/customize-configs/section-counter.php:131
 #: inc/customize-configs/options-footer.php:78
-#: inc/customize-configs/section-team.php:153
 #: inc/customize-configs/section-services.php:158
-#: inc/customize-configs/section-about.php:159
 #: inc/customize-configs/section-features.php:156
+#: inc/customize-configs/section-team.php:153
+#: inc/customize-configs/section-counter.php:131
+#: inc/customize-configs/section-about.php:159
 msgid "Upgrade to <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> to be able to add more items and unlock other premium features!"
 msgstr "¡Mejora a <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> para poder añadir más elementos y desbloquear funciones premium!"
 
@@ -814,7 +814,7 @@ msgstr "Masonry"
 msgid "Justified"
 msgstr "Justificada"
 
-#: inc/class-config.php:51 inc/customize-configs/section-gallery.php:216
+#: inc/customize-configs/section-gallery.php:216 inc/class-config.php:51
 msgid "Slider"
 msgstr "Deslizador"
 
@@ -851,8 +851,8 @@ msgstr "Página"
 msgid "Select Gallery Source"
 msgstr "Seleccion el origen de la galería"
 
-#: section-parts/section-gallery.php:4 inc/class-config.php:142
-#: inc/customize-configs/section-gallery.php:68
+#: section-parts/section-gallery.php:4
+#: inc/customize-configs/section-gallery.php:68 inc/class-config.php:142
 msgid "Gallery"
 msgstr "Galería"
 
@@ -861,7 +861,7 @@ msgstr "Galería"
 msgid "gallery"
 msgstr "galería"
 
-#: inc/class-config.php:141 inc/customize-configs/section-gallery.php:12
+#: inc/customize-configs/section-gallery.php:12 inc/class-config.php:141
 msgid "Section: Gallery"
 msgstr "Sección: Galería"
 
@@ -958,8 +958,8 @@ msgid "The delay between the changing of each phrase in milliseconds."
 msgstr "El retardo en milisegundos entre cambios de cada frase."
 
 #: inc/customize-configs/options-footer.php:147
-msgid "The newsletter form use MailChimp, please follow <a target=\"_blank\" href=\"http://goo.gl/uRVIst\">this guide</a> to know how to get MailChimp Action URL. Example <i>//famethemes.us8.list-manage.com/subscribe/post?u=521c400d049a59a4b9c0550c2&amp;id=83187e0006</i>"
-msgstr "El formulario del boletín de noticias utiliza MailChimp, sigue esta <a target=\"_blank\" href=\"http://goo.gl/uRVIst\">guía</a> para saber cómo obtener la URL de acción de MailChimp. Por ejemplo <i>//famethemes.us8.list-manage.com/subscribe/post?u=521c400d049a59a4b9c0550c2&amp;id=83187e0006</i>"
+msgid "The newsletter form use MailChimp, please follow <a target=\"_blank\" href=\"https://mailchimp.com/help/host-your-own-signup-forms/\">this guide</a> to know how to get MailChimp Action URL. Example <i>//famethemes.us8.list-manage.com/subscribe/post?u=521c400d049a59a4b9c0550c2&amp;id=83187e0006</i>"
+msgstr "El formulario del boletín de noticias utiliza MailChimp, sigue esta<a target=\"_blank\" href=\"https://mailchimp.com/help/host-your-own-signup-forms/\">guía</a> para saber cómo obtener la URL de acción de MailChimp. Por ejemplo <i>//famethemes.us8.list-manage.com/subscribe/post?u=521c400d049a59a4b9c0550c2&amp;id=83187e0006</i>"
 
 #: inc/customize-configs/site-identity.php:32
 msgid "Hide site tagline"
@@ -1000,9 +1000,9 @@ msgstr "Por qué elegirnos"
 msgid "Services Layout Settings"
 msgstr "Ajustes de disposición de los servicios"
 
-#: inc/customize-configs/section-team.php:161
 #: inc/customize-configs/section-features.php:185
 #: inc/customize-configs/section-news.php:267
+#: inc/customize-configs/section-team.php:161
 msgid "Custom Link"
 msgstr "Enlace personalizado"
 
@@ -1018,8 +1018,8 @@ msgstr "Contenido funcionalidades"
 msgid "Features Layout Setting"
 msgstr "Configuración diseño de funcionalidades"
 
-#: section-parts/section-features.php:4 inc/class-config.php:136
-#: inc/customize-configs/section-features.php:58
+#: section-parts/section-features.php:4
+#: inc/customize-configs/section-features.php:58 inc/class-config.php:136
 msgid "Features"
 msgstr "Funcionalidades"
 
@@ -1028,23 +1028,23 @@ msgstr "Funcionalidades"
 msgid "features"
 msgstr "funcionalidades"
 
-#: inc/class-config.php:135 inc/customize-configs/section-features.php:8
+#: inc/customize-configs/section-features.php:8 inc/class-config.php:135
 msgid "Section: Features"
 msgstr "Sección: Funcionalidades"
 
-#: inc/customize-configs/section-contact.php:95
-#: inc/customize-configs/section-counter.php:94
-#: inc/customize-configs/section-team.php:94
 #: inc/customize-configs/section-services.php:95
-#: inc/customize-configs/section-gallery.php:110
-#: inc/customize-configs/section-about.php:95
 #: inc/customize-configs/section-features.php:95
+#: inc/customize-configs/section-gallery.php:110
 #: inc/customize-configs/section-news.php:95
+#: inc/customize-configs/section-team.php:94
+#: inc/customize-configs/section-counter.php:94
+#: inc/customize-configs/section-about.php:95
+#: inc/customize-configs/section-contact.php:95
 msgid "Section Description"
 msgstr "Descripción de la sección"
 
-#: inc/customize-configs/section-services.php:174
 #: inc/customize-configs/section-hero.php:581
+#: inc/customize-configs/section-services.php:174
 #: inc/customize-configs/section-features.php:176
 msgid "Image"
 msgstr "Image"
@@ -1093,11 +1093,11 @@ msgstr "Aplicable únicamente a la plantilla de portada."
 msgid "Header Transparent"
 msgstr "Cabecera transparente"
 
-#: inc/template-tags.php:1784
+#: inc/template-tags.php:1792
 msgid "Subscribe"
 msgstr "Suscribirme"
 
-#: inc/template-tags.php:1783
+#: inc/template-tags.php:1791
 msgid "Enter your e-mail address"
 msgstr "Introduce tu correo electrónico"
 
@@ -1109,24 +1109,24 @@ msgstr "El soporte para el tema de WordPress %s es dirigido a través del sistem
 msgid "OnePress Documentation"
 msgstr "Documentación de OnePress"
 
-#: inc/customize-configs/section-team.php:117
 #: inc/customize-configs/section-services.php:119
-#: inc/customize-configs/section-about.php:119
 #: inc/customize-configs/section-features.php:118
+#: inc/customize-configs/section-team.php:117
+#: inc/customize-configs/section-about.php:119
 msgid "2 Columns"
 msgstr "2 columnas"
 
-#: inc/customize-configs/section-team.php:116
 #: inc/customize-configs/section-services.php:118
-#: inc/customize-configs/section-about.php:118
 #: inc/customize-configs/section-features.php:117
+#: inc/customize-configs/section-team.php:116
+#: inc/customize-configs/section-about.php:118
 msgid "3 Columns"
 msgstr "3 Columnas"
 
-#: inc/customize-configs/section-team.php:115
 #: inc/customize-configs/section-services.php:117
-#: inc/customize-configs/section-about.php:117
 #: inc/customize-configs/section-features.php:116
+#: inc/customize-configs/section-team.php:115
+#: inc/customize-configs/section-about.php:117
 msgid "4 Columns"
 msgstr "4 Columnas"
 
@@ -1135,20 +1135,20 @@ msgid "Team Layout Settings"
 msgstr "Ajustes de disposición del equipo"
 
 #: inc/customize-configs/section-services.php:235
-#: inc/customize-configs/section-about.php:196
 #: inc/customize-configs/section-features.php:210
+#: inc/customize-configs/section-about.php:196
 msgid "Page Excerpt"
 msgstr "Extracto Página"
 
 #: inc/customize-configs/section-services.php:234
-#: inc/customize-configs/section-about.php:195
 #: inc/customize-configs/section-features.php:209
+#: inc/customize-configs/section-about.php:195
 msgid "Full Page Content"
 msgstr "Contenido a página completa"
 
 #: inc/customize-configs/section-services.php:229
-#: inc/customize-configs/section-about.php:190
 #: inc/customize-configs/section-features.php:204
+#: inc/customize-configs/section-about.php:190
 msgid "Item content source"
 msgstr "Fuente del contenido del elemento "
 
@@ -1229,7 +1229,7 @@ msgstr "Url del video"
 msgid "Section heading"
 msgstr "Título de la sección"
 
-#: inc/class-config.php:165 inc/customize-configs/section-videolightbox.php:8
+#: inc/customize-configs/section-videolightbox.php:8 inc/class-config.php:165
 msgid "Section: Video Lightbox"
 msgstr "Sección: Video Lightbox"
 
@@ -1281,8 +1281,8 @@ msgstr "Tema OnePress"
 msgid "OnePress Dashboard"
 msgstr "Escritorio OnePress"
 
-#: inc/customize-configs/options-page.php:102
 #: inc/customize-configs/section-hero.php:274
+#: inc/customize-configs/options-page.php:102
 msgid "Background Overlay Color"
 msgstr "Color superpuesto del fondo"
 
@@ -1328,12 +1328,12 @@ msgstr "¿Preparado para publicar tu primera entrada? <a href=\"%1$s\">Comienza 
 msgid "Nothing Found"
 msgstr "No se encontró nada"
 
-#: template-parts/content-list.php:78 template-parts/content-page.php:21
-#: template-parts/content.php:47 template-parts/content-single.php:35
+#: template-parts/content-single.php:35 template-parts/content-page.php:21
+#: template-parts/content-list.php:78 template-parts/content.php:47
 msgid "Pages:"
 msgstr "Páginas:"
 
-#: section-parts/section-hero.php:88
+#: section-parts/section-hero.php:94
 msgid "#services"
 msgstr "#servicios"
 
@@ -1468,8 +1468,8 @@ msgstr "Ocultar el formulario de contacto completamente."
 msgid "Contact Form Shortcode."
 msgstr "Shortcode del formulario de contacto."
 
-#: section-parts/section-contact.php:4 inc/class-config.php:123
-#: inc/customize-configs/section-contact.php:58
+#: section-parts/section-contact.php:4
+#: inc/customize-configs/section-contact.php:58 inc/class-config.php:123
 msgid "Get in touch"
 msgstr "Contáctenos"
 
@@ -1478,7 +1478,7 @@ msgstr "Contáctenos"
 msgid "contact"
 msgstr "contacto"
 
-#: inc/class-config.php:122 inc/customize-configs/section-contact.php:8
+#: inc/customize-configs/section-contact.php:8 inc/class-config.php:122
 msgid "Section: Contact"
 msgstr "Sección: Contacto"
 
@@ -1490,8 +1490,8 @@ msgstr "Lee nuestro blog"
 msgid "Number of post to show"
 msgstr "Número de entradas a mostrar"
 
-#: section-parts/section-news.php:11 inc/class-config.php:148
-#: inc/customize-configs/section-news.php:58
+#: section-parts/section-news.php:11 inc/customize-configs/section-news.php:58
+#: inc/class-config.php:148
 msgid "Latest News"
 msgstr "Últimas noticias"
 
@@ -1499,7 +1499,7 @@ msgstr "Últimas noticias"
 msgid "news"
 msgstr "noticias"
 
-#: inc/class-config.php:147 inc/customize-configs/section-news.php:8
+#: inc/customize-configs/section-news.php:8 inc/class-config.php:147
 msgid "Section: News"
 msgstr "Sección: Noticias"
 
@@ -1507,8 +1507,8 @@ msgstr "Sección: Noticias"
 msgid "Team members"
 msgstr "Miembros del equipo"
 
-#: section-parts/section-team.php:4 inc/class-config.php:160
-#: inc/customize-configs/section-team.php:57
+#: section-parts/section-team.php:4 inc/customize-configs/section-team.php:57
+#: inc/class-config.php:160
 msgid "Our Team"
 msgstr "Nuestro equipo"
 
@@ -1516,7 +1516,7 @@ msgstr "Nuestro equipo"
 msgid "team"
 msgstr "equipo"
 
-#: inc/class-config.php:159 inc/customize-configs/section-team.php:8
+#: inc/customize-configs/section-team.php:8 inc/class-config.php:159
 msgid "Section: Team"
 msgstr "Sección: Equipo"
 
@@ -1536,9 +1536,9 @@ msgstr "Número"
 msgid "Your counter label"
 msgstr "Etiqueta de tu contador"
 
-#: inc/customize-configs/section-counter.php:134
 #: inc/customize-configs/section-features.php:159
 #: inc/customize-configs/section-news.php:223
+#: inc/customize-configs/section-counter.php:134
 msgid "Title"
 msgstr "Título"
 
@@ -1546,8 +1546,8 @@ msgstr "Título"
 msgid "Counter content"
 msgstr "Contenido del contador"
 
-#: section-parts/section-counter.php:4 inc/class-config.php:130
-#: inc/customize-configs/section-counter.php:57
+#: section-parts/section-counter.php:4
+#: inc/customize-configs/section-counter.php:57 inc/class-config.php:130
 msgid "Our Numbers"
 msgstr "Nuestros números"
 
@@ -1556,7 +1556,7 @@ msgstr "Nuestros números"
 msgid "counter"
 msgstr "contador"
 
-#: inc/class-config.php:129 inc/customize-configs/section-counter.php:8
+#: inc/customize-configs/section-counter.php:8 inc/class-config.php:129
 msgid "Section: Counter"
 msgstr "Sección: Contadores"
 
@@ -1569,8 +1569,8 @@ msgstr "Icono personalizado"
 msgid "Service content"
 msgstr "Contenido de servicios"
 
-#: section-parts/section-services.php:4 section-parts/section-hero.php:87
-#: inc/class-config.php:154 inc/customize-configs/section-services.php:58
+#: section-parts/section-hero.php:93 section-parts/section-services.php:4
+#: inc/customize-configs/section-services.php:58 inc/class-config.php:154
 msgid "Our Services"
 msgstr "Nuestros servicios"
 
@@ -1579,7 +1579,7 @@ msgstr "Nuestros servicios"
 msgid "services"
 msgstr "servicios"
 
-#: inc/class-config.php:153 inc/customize-configs/section-services.php:8
+#: inc/customize-configs/section-services.php:8 inc/class-config.php:153
 msgid "Section: Services"
 msgstr "Sección: Servicios"
 
@@ -1597,59 +1597,59 @@ msgstr "Ocultar título del elemento"
 msgid "Select a page"
 msgstr "Selecciona una página"
 
-#: inc/customize-configs/section-counter.php:129
 #: inc/customize-configs/options-footer.php:76
-#: inc/customize-configs/section-team.php:151
 #: inc/customize-configs/section-services.php:156
-#: inc/customize-configs/section-about.php:157
 #: inc/customize-configs/section-features.php:154
+#: inc/customize-configs/section-team.php:151
+#: inc/customize-configs/section-counter.php:129
+#: inc/customize-configs/section-about.php:157
 msgid "[live_title]"
 msgstr "[live_title]"
 
-#: inc/customize-configs/section-contact.php:108
-#: inc/customize-configs/section-counter.php:105
-#: inc/customize-configs/section-team.php:127
 #: inc/customize-configs/section-services.php:132
-#: inc/customize-configs/section-gallery.php:125
-#: inc/customize-configs/section-about.php:132
 #: inc/customize-configs/section-features.php:130
+#: inc/customize-configs/section-gallery.php:125
+#: inc/customize-configs/section-team.php:127
+#: inc/customize-configs/section-counter.php:105
+#: inc/customize-configs/section-about.php:132
+#: inc/customize-configs/section-contact.php:108
 msgid "Section Content"
 msgstr "Contenido de la sección"
 
-#: inc/customize-configs/section-contact.php:78
-#: inc/customize-configs/section-counter.php:77
-#: inc/customize-configs/section-team.php:77
 #: inc/customize-configs/section-services.php:78
-#: inc/customize-configs/section-gallery.php:91
-#: inc/customize-configs/section-about.php:78
 #: inc/customize-configs/section-features.php:78
+#: inc/customize-configs/section-gallery.php:91
 #: inc/customize-configs/section-news.php:78
+#: inc/customize-configs/section-team.php:77
+#: inc/customize-configs/section-counter.php:77
+#: inc/customize-configs/section-about.php:78
+#: inc/customize-configs/section-contact.php:78
 msgid "Section Subtitle"
 msgstr "Subtítulo de la sección"
 
-#: section-parts/section-contact.php:5 section-parts/section-counter.php:5
-#: section-parts/section-team.php:5 section-parts/section-services.php:5
-#: section-parts/section-gallery.php:5 section-parts/section-about.php:5
-#: section-parts/section-news.php:12
-#: inc/customize-configs/section-contact.php:73
-#: inc/customize-configs/section-counter.php:72
-#: inc/customize-configs/section-team.php:72
+#: section-parts/section-services.php:5 section-parts/section-gallery.php:5
+#: section-parts/section-news.php:12 section-parts/section-team.php:5
+#: section-parts/section-counter.php:5 section-parts/section-about.php:5
+#: section-parts/section-contact.php:5
 #: inc/customize-configs/section-services.php:73
-#: inc/customize-configs/section-gallery.php:85
-#: inc/customize-configs/section-about.php:73
 #: inc/customize-configs/section-features.php:73
+#: inc/customize-configs/section-gallery.php:85
 #: inc/customize-configs/section-news.php:73
+#: inc/customize-configs/section-team.php:72
+#: inc/customize-configs/section-counter.php:72
+#: inc/customize-configs/section-about.php:73
+#: inc/customize-configs/section-contact.php:73
 msgid "Section subtitle"
 msgstr "Subtítulo de la sección"
 
-#: inc/customize-configs/section-contact.php:63
-#: inc/customize-configs/section-counter.php:62
-#: inc/customize-configs/section-team.php:62
 #: inc/customize-configs/section-services.php:63
-#: inc/customize-configs/section-gallery.php:74
-#: inc/customize-configs/section-about.php:63
 #: inc/customize-configs/section-features.php:63
+#: inc/customize-configs/section-gallery.php:74
 #: inc/customize-configs/section-news.php:63
+#: inc/customize-configs/section-team.php:62
+#: inc/customize-configs/section-counter.php:62
+#: inc/customize-configs/section-about.php:63
+#: inc/customize-configs/section-contact.php:63
 msgid "Section Title"
 msgstr "Título de la sección"
 
@@ -1657,19 +1657,19 @@ msgstr "Título de la sección"
 msgid "about"
 msgstr "acerca de"
 
-#: inc/customize-configs/section-contact.php:17
-#: inc/customize-configs/section-counter.php:17
-#: inc/customize-configs/section-team.php:17
 #: inc/customize-configs/section-services.php:17
-#: inc/customize-configs/section-gallery.php:22
-#: inc/customize-configs/section-about.php:17
 #: inc/customize-configs/section-features.php:17
+#: inc/customize-configs/section-gallery.php:22
 #: inc/customize-configs/section-videolightbox.php:17
 #: inc/customize-configs/section-news.php:17
+#: inc/customize-configs/section-team.php:17
+#: inc/customize-configs/section-counter.php:17
+#: inc/customize-configs/section-about.php:17
+#: inc/customize-configs/section-contact.php:17
 msgid "Section Settings"
 msgstr "Parámetros de la sección"
 
-#: inc/class-config.php:116 inc/customize-configs/section-about.php:8
+#: inc/customize-configs/section-about.php:8 inc/class-config.php:116
 msgid "Section: About"
 msgstr "Sección: Acerca de"
 
@@ -1677,7 +1677,7 @@ msgstr "Sección: Acerca de"
 msgid "Button #2 Link"
 msgstr "Enlace botón #2"
 
-#: section-parts/section-hero.php:90 inc/customize-configs/section-hero.php:500
+#: section-parts/section-hero.php:96 inc/customize-configs/section-hero.php:500
 msgid "#contact"
 msgstr "#contacto"
 
@@ -1685,7 +1685,7 @@ msgstr "#contacto"
 msgid "Button #2 Text"
 msgstr "Texto del botón #2"
 
-#: section-parts/section-hero.php:89 inc/customize-configs/section-hero.php:486
+#: section-parts/section-hero.php:95 inc/customize-configs/section-hero.php:486
 msgid "Get Started"
 msgstr "Comencemos"
 
@@ -1701,9 +1701,8 @@ msgstr "#acerca de"
 msgid "Button #1 Text"
 msgstr "Texto botón #1"
 
-#: section-parts/section-about.php:4 inc/class-config.php:117
-#: inc/customize-configs/section-hero.php:421
-#: inc/customize-configs/section-about.php:58
+#: section-parts/section-about.php:4 inc/customize-configs/section-hero.php:421
+#: inc/customize-configs/section-about.php:58 inc/class-config.php:117
 msgid "About Us"
 msgstr "Sobre nosotros"
 
@@ -1766,16 +1765,16 @@ msgstr "Marca esta opción para hacer la sección Hero a pantalla completa."
 msgid "Make hero section full screen"
 msgstr "Hacer la sección Hero a pantalla completa"
 
-#: inc/customize-configs/section-contact.php:48
-#: inc/customize-configs/section-counter.php:47
-#: inc/customize-configs/section-team.php:47
-#: inc/customize-configs/section-services.php:48
 #: inc/customize-configs/section-hero.php:49
-#: inc/customize-configs/section-gallery.php:57
-#: inc/customize-configs/section-about.php:48
+#: inc/customize-configs/section-services.php:48
 #: inc/customize-configs/section-features.php:48
+#: inc/customize-configs/section-gallery.php:57
 #: inc/customize-configs/section-videolightbox.php:48
 #: inc/customize-configs/section-news.php:48
+#: inc/customize-configs/section-team.php:47
+#: inc/customize-configs/section-counter.php:47
+#: inc/customize-configs/section-about.php:48
+#: inc/customize-configs/section-contact.php:48
 msgid "Section ID:"
 msgstr "ID de la sección:"
 
@@ -1783,29 +1782,29 @@ msgstr "ID de la sección:"
 msgid "hero"
 msgstr "hero"
 
-#: inc/customize-configs/section-contact.php:35
-#: inc/customize-configs/section-counter.php:34
-#: inc/customize-configs/section-team.php:35
-#: inc/customize-configs/section-services.php:35
 #: inc/customize-configs/section-hero.php:37
-#: inc/customize-configs/section-gallery.php:42
-#: inc/customize-configs/section-about.php:35
+#: inc/customize-configs/section-services.php:35
 #: inc/customize-configs/section-features.php:35
+#: inc/customize-configs/section-gallery.php:42
 #: inc/customize-configs/section-videolightbox.php:35
 #: inc/customize-configs/section-news.php:35
+#: inc/customize-configs/section-team.php:35
+#: inc/customize-configs/section-counter.php:34
+#: inc/customize-configs/section-about.php:35
+#: inc/customize-configs/section-contact.php:35
 msgid "Check this box to hide this section."
 msgstr "Marca esta opción para ocultar esta sección."
 
-#: inc/customize-configs/section-contact.php:33
-#: inc/customize-configs/section-counter.php:32
-#: inc/customize-configs/section-team.php:33
-#: inc/customize-configs/section-services.php:33
 #: inc/customize-configs/section-hero.php:35
-#: inc/customize-configs/section-gallery.php:40
-#: inc/customize-configs/section-about.php:33
+#: inc/customize-configs/section-services.php:33
 #: inc/customize-configs/section-features.php:33
+#: inc/customize-configs/section-gallery.php:40
 #: inc/customize-configs/section-videolightbox.php:33
 #: inc/customize-configs/section-news.php:33
+#: inc/customize-configs/section-team.php:33
+#: inc/customize-configs/section-counter.php:32
+#: inc/customize-configs/section-about.php:33
+#: inc/customize-configs/section-contact.php:33
 msgid "Hide this section?"
 msgstr "¿Ocultar esta sección?"
 
@@ -1813,7 +1812,7 @@ msgstr "¿Ocultar esta sección?"
 msgid "Hero Settings"
 msgstr "Ajustes de Hero"
 
-#: inc/class-config.php:110 inc/customize-configs/section-hero.php:9
+#: inc/customize-configs/section-hero.php:9 inc/class-config.php:110
 msgid "Section: Hero"
 msgstr "Sección: Hero"
 
@@ -1946,11 +1945,11 @@ msgstr "Copyright %1$s %2$s %3$s"
 msgid "Back To Top"
 msgstr "Volver arriba"
 
-#: inc/template-tags.php:1773 inc/customize-configs/options-footer.php:123
+#: inc/template-tags.php:1781 inc/customize-configs/options-footer.php:123
 msgid "Join our Newsletter"
 msgstr "Únete a nuestro boletín de noticias"
 
-#: inc/template-tags.php:1792 inc/customize-configs/options-footer.php:46
+#: inc/template-tags.php:1800 inc/customize-configs/options-footer.php:46
 msgid "Keep Updated"
 msgstr "Mantente actualizado"
 

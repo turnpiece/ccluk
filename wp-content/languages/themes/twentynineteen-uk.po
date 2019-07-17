@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Themes - Twenty Nineteen package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2019-01-10 07:05:20+0000\n"
+"PO-Revision-Date: 2019-06-19 09:17:53+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -33,7 +33,7 @@ msgstr "<span class=\"meta-nav\">Опубліковано в</span><br><span cla
 #: template-parts/content/content-excerpt.php:18
 msgctxt "post"
 msgid "Featured"
-msgstr "Обрана"
+msgstr "Обраний"
 
 #: inc/back-compat.php:39 inc/back-compat.php:53 inc/back-compat.php:73
 msgid "Twenty Nineteen requires at least WordPress version 4.7. You are running version %s. Please upgrade and try again."
@@ -65,19 +65,19 @@ msgctxt "primary color"
 msgid "Default"
 msgstr "За замовчуванням"
 
-#: functions.php:170
+#: functions.php:166
 msgid "White"
 msgstr "Біла"
 
-#: functions.php:165
+#: functions.php:161
 msgid "Light Gray"
 msgstr "Світло-сіра"
 
-#: functions.php:160
+#: functions.php:156
 msgid "Dark Gray"
 msgstr "Темно-сіра"
 
-#: functions.php:155
+#: functions.php:151
 msgid "Secondary"
 msgstr "Вторинна"
 
@@ -126,11 +126,11 @@ msgstr "Повний розмір"
 msgid "Page"
 msgstr "Сторінка"
 
-#: functions.php:194
+#: functions.php:190
 msgid "Add widgets here to appear in your footer."
 msgstr "Додайте віджети сюди, для розміщення їх в підвал сайту."
 
-#: template-parts/footer/footer-widgets.php:12 functions.php:192
+#: functions.php:188 template-parts/footer/footer-widgets.php:12
 msgid "Footer"
 msgstr "Підвал"
 
@@ -169,15 +169,15 @@ msgstr "Верхнє меню"
 msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
 msgstr "Продовжити читання<span class=\"screen-reader-text\"> \"%s\"</span>"
 
+#: image.php:52 template-parts/content/content-page.php:27
 #: template-parts/content/content.php:49
-#: template-parts/content/content-page.php:27
-#: template-parts/content/content-single.php:40 image.php:52
+#: template-parts/content/content-single.php:40
 msgid "Pages:"
 msgstr "Сторінки:"
 
 #: template-parts/content/content-none.php:46
 msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
-msgstr "Схоже не вдалося знайти те, що ви шукаєте. Можливо допоможе пошук."
+msgstr "Схоже, що не вдалося знайти те, що ви шукаєте. Можливо допоможе пошук."
 
 #: template-parts/content/content-none.php:39
 msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
@@ -296,15 +296,15 @@ msgstr "Архіви категорій:"
 msgid "Edit <span class=\"screen-reader-text\">%s</span>"
 msgstr "Редагувати <span class=\"screen-reader-text\">%s</span>"
 
-#: header.php:24
+#: header.php:25
 msgid "Skip to content"
 msgstr "Перейти до вмісту"
 
-#: template-parts/header/site-branding.php:46 functions.php:61
+#: functions.php:61 template-parts/header/site-branding.php:46
 msgid "Social Links Menu"
 msgstr "Меню соціальних посилань"
 
-#: functions.php:59 functions.php:150
+#: functions.php:59 functions.php:146
 msgid "Primary"
 msgstr "Головна"
 
@@ -352,20 +352,20 @@ msgstr "Залишити коментар"
 msgid "Join the Conversation"
 msgstr "Долучитися до обговорення"
 
-#: classes/class-twentynineteen-walker-comment.php:100
+#: classes/class-twentynineteen-walker-comment.php:99
 msgid "Your comment is awaiting moderation."
 msgstr "Ваш коментар чекає схвалення."
 
-#: classes/class-twentynineteen-walker-comment.php:95
+#: classes/class-twentynineteen-walker-comment.php:94
 msgid "Edit"
 msgstr "Редагувати"
 
 #. translators: 1: comment date, 2: comment time
-#: classes/class-twentynineteen-walker-comment.php:87
+#: classes/class-twentynineteen-walker-comment.php:86
 msgid "%1$s at %2$s"
 msgstr "%1$s о %2$s"
 
-#: classes/class-twentynineteen-walker-comment.php:67
+#: classes/class-twentynineteen-walker-comment.php:66
 msgid "%s <span class=\"screen-reader-text says\">says:</span>"
 msgstr "%s <span class=\"screen-reader-text says\">пише:</span>"
 
@@ -375,15 +375,15 @@ msgstr "За даною адресою нічого не знайдено. Сп�
 
 #: 404.php:20
 msgid "Oops! That page can&rsquo;t be found."
-msgstr "Отакої! Сторінка не знайдена."
+msgstr "Отакої! Цю сторінку не знайдено."
+
+#. Theme URI of the theme
+msgid "https://wordpress.org/themes/twentynineteen/"
+msgstr "https://uk.wordpress.org/themes/twentynineteen/"
 
 #. Author of the theme
 msgid "the WordPress team"
 msgstr "Команда WordPress"
-
-#. Theme URI of the theme
-msgid "https://github.com/WordPress/twentynineteen"
-msgstr "https://github.com/WordPress/twentynineteen"
 
 #. Author URI of the theme
 #: footer.php:25

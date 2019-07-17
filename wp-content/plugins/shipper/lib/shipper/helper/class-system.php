@@ -68,7 +68,22 @@ class Shipper_Helper_System {
 		if ( empty( self::$_max_exec_time ) ) {
 			self::$_max_exec_time = @ini_get( 'max_execution_time' );
 		}
-		return self::$_max_exec_time;
+
+		/**
+		 * Max exec time before limit optimization
+		 *
+		 * Used in tests.
+		 *
+		 * @since v1.0.3
+		 *
+		 * @param int $time Maximum execution time.
+		 *
+		 * @return int
+		 */
+		return (int) apply_filters(
+			'shipper_max_exec_time',
+			self::$_max_exec_time
+		);
 	}
 
 	/**
@@ -93,13 +108,17 @@ class Shipper_Helper_System {
 		 * @return int
 		 */
 		$cap_time = (int) apply_filters(
-			'shipper_max_exec_time',
+			'shipper_max_exec_time_capped',
 			180
 		);
 		if ( $time <= 0 ) {
 			return $cap_time;
 		}
-		return $time <= $cap_time ? $time : $cap_time;
+
+		return min(
+			max( 60, $time ),
+			$cap_time
+		);
 	}
 
 	/**

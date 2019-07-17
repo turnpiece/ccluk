@@ -135,7 +135,7 @@ class Ai1wm_Export_Config {
 		$config['WordPress'] = array( 'Version' => $wp_version, 'Content' => WP_CONTENT_DIR );
 
 		// Set database version
-		$config['Database'] = array( 'Version' => $mysql->version() );
+		$config['Database'] = array( 'Version' => $mysql->version(), 'Charset' => DB_CHARSET, 'Collate' => DB_COLLATE );
 
 		// Set PHP version
 		$config['PHP'] = array( 'Version' => PHP_VERSION );

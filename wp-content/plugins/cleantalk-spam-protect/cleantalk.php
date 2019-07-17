@@ -3,9 +3,11 @@
   Plugin Name: Anti-Spam by CleanTalk
   Plugin URI: http://cleantalk.org
   Description: Max power, all-in-one, no Captcha, premium anti-spam plugin. No comment spam, no registration spam, no contact spam, protects any WordPress forms.
-  Version: 5.120.1
+  Version: 5.122
   Author: СleanTalk <welcome@cleantalk.org>
   Author URI: http://cleantalk.org
+  Text Domain: cleantalk
+  Domain Path: /i18n
 */
 
 $cleantalk_executed = false;
@@ -35,8 +37,8 @@ define('APBCT_DEBUG',            'cleantalk_debug');            //Option name wi
 define('APBCT_WPMS', (is_multisite() ? true : false)); // WMPS is enabled
 
 // Sessions
-define('APBCT_SEESION__LIVE_TIME', 86400*3);
-define('APBCT_SEESION__CHANCE_TO_CLEAN', 50);
+define('APBCT_SEESION__LIVE_TIME', 86400*2);
+define('APBCT_SEESION__CHANCE_TO_CLEAN', 100);
 
 // Different params
 define('APBCT_REMOTE_CALL_SLEEP', 5); // Minimum time between remote call
@@ -760,7 +762,7 @@ function ct_add_event($event_type)
 function ct_get_cookie()
 {
 	global $ct_checkjs_def;
-	$ct_checkjs_key = ct_get_checkjs_value(true); 
+	$ct_checkjs_key = ct_get_checkjs_value();
 	print $ct_checkjs_key;
 	die();
 }
@@ -1267,9 +1269,9 @@ function ct_account_status_check($api_key = null, $process_errors = true){
 	
 	$api_key = $api_key ? $api_key : $apbct->api_key;
 	
-	$result = CleantalkAPI::method__notice_paid_till($api_key);	
+	$result = CleantalkAPI::method__notice_paid_till($api_key, preg_replace('/http[s]?:\/\//', '', get_option('siteurl'), 1));
 	
-	if(empty($result['error'])){
+	if(empty($result['error']) || (isset($result['error_no']) && $result['error_no'] == 12)){
 		
 		// Notices
 		$apbct->data['notice_show']        = isset($result['show_notice'])             ? (int)$result['show_notice']             : 0;
@@ -1290,7 +1292,6 @@ function ct_account_status_check($api_key = null, $process_errors = true){
 		$apbct->data['license_trial']      = isset($result['license_trial'])                      ? (int)$result['license_trial']      : 0;
 		$apbct->data['account_name_ob']    = isset($result['account_name_ob'])                    ? (string)$result['account_name_ob'] : '';
 		
-		
 		if($apbct->data['notice_show'] == 1 && $apbct->data['notice_trial'] == 1)
 			CleantalkCron::updateTask('check_account_status', 'ct_account_status_check',  3600);
 		
@@ -1300,16 +1301,23 @@ function ct_account_status_check($api_key = null, $process_errors = true){
 		if($apbct->data['notice_show'] == 0)
 			CleantalkCron::updateTask('check_account_status', 'ct_account_status_check',  86400);
 		
-		$apbct->data['key_is_ok'] = true;
+		$apbct->error_delete('account_check', 'save');
 		
 		$apbct->saveData();
-		$apbct->error_delete('account_check', 'save');
 		
 	}elseif($process_errors){
 		$apbct->error_add('account_check', $result);
 	}
 	
+	if(isset($result['service_id']) && is_int($result['service_id'])){
+		$apbct->data['key_is_ok'] = true;
+		$result = true;
+	}else{
+		$apbct->data['key_is_ok'] = false;
+		$result = false;
+	}
 	
+	return $result;
 }
 
 function ct_mail_send_connection_report() {

@@ -30,8 +30,8 @@
                                 <p class="sui-p-small">
 									<?php _e( "By default, we will only notify the recipients below when there is an issue from your file scan. Enable this option to send emails even when no issues are detected. ", wp_defender()->domain ) ?>
                                 </p>
+                                <input type="hidden" name="always_send" value="0"/>
                                 <label class="sui-toggle">
-                                    <input type="hidden" name="always_send" value="0"/>
                                     <input role="presentation" type="checkbox" name="always_send"
                                            class="toggle-checkbox"
                                            id="always_send" value="1"

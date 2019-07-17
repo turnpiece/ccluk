@@ -13,6 +13,15 @@
 class Shipper_Controller_Admin extends Shipper_Controller {
 
 	/**
+	 * Gets order in which menu registration takes place
+	 *
+	 * @return int Page order
+	 */
+	public function get_page_order() {
+		return 10;
+	}
+
+	/**
 	 * Boots the controller and sets up event listeners.
 	 */
 	public function boot() {
@@ -20,7 +29,8 @@ class Shipper_Controller_Admin extends Shipper_Controller {
 
 		add_action(
 			(is_multisite() ? 'network_admin_menu' : 'admin_menu'),
-			array( $this, 'add_menu' )
+			array( $this, 'add_menu' ),
+			$this->get_page_order()
 		);
 	}
 
@@ -42,239 +52,19 @@ class Shipper_Controller_Admin extends Shipper_Controller {
 	 * Also sets up front-end dependencies loading on page load.
 	 */
 	public function add_menu() {
+		if ( ! $this->can_user_access_shipper_pages() ) {
+			return false;
+		}
 		$capability = $this->get_capability();
-		if ( ! current_user_can( $capability ) ) { return false; }
 
 		add_menu_page(
 			_x( 'Shipper', 'page label', 'shipper' ),
 			_x( 'Shipper', 'menu label', 'shipper' ),
 			$capability,
 			'shipper',
-			array( $this, 'page_migrate' ),
+			array( Shipper_Controller_Admin_Migrate::get(), 'page_migrate' ),
 			Shipper_Helper_Assets::get_encoded_icon()
 		);
-
-		$migrate = add_submenu_page(
-			'shipper',
-			_x( 'Migrate', 'page label', 'shipper' ),
-			_x( 'Migrate', 'menu label', 'shipper' ),
-			$capability,
-			'shipper',
-			array( $this, 'page_migrate' )
-		);
-		$tools = add_submenu_page(
-			'shipper',
-			_x( 'Tools', 'page label', 'shipper' ),
-			_x( 'Tools', 'menu label', 'shipper' ),
-			$capability,
-			'shipper-tools',
-			array( $this, 'page_tools' )
-		);
-		$settings = add_submenu_page(
-			'shipper',
-			_x( 'Settings', 'page label', 'shipper' ),
-			_x( 'Settings', 'menu label', 'shipper' ),
-			$capability,
-			'shipper-settings',
-			array( $this, 'page_settings' )
-		);
-		add_action( "load-{$migrate}", array( $this, 'add_migrate_dependencies' ) );
-		add_action( "load-{$tools}", array( $this, 'add_tools_dependencies' ) );
-		add_action( "load-{$settings}", array( $this, 'add_settings_dependencies' ) );
-
-		add_action( "load-{$migrate}", array( $this, 'do_migration_begin_redirection' ) );
-		add_action( "load-{$migrate}", array( $this, 'do_migration_complete_redirection' ) );
-		add_action( "load-{$settings}", array( $this, 'save_settings' ) );
-	}
-
-	/**
-	 * Redirects migration page to begin the migration actual processing
-	 */
-	public function do_migration_begin_redirection() {
-		if ( ! shipper_user_can_ship() ) { return false; }
-
-		if ( ! empty( $_GET['begin'] ) ) {
-			// Already beginning.
-			return false;
-		}
-
-		$args = array(
-			'type',
-			'site',
-			'check',
-		);
-		$do_not_begin = false;
-		foreach ( $args as $arg ) {
-			if ( empty( $_GET[ $arg ] ) ) {
-				$do_not_begin = true;
-				break;
-			}
-		}
-		if ( $do_not_begin ) {
-			// Don't do anything.
-			return false;
-		}
-
-		Shipper_Controller_Runner_Migration::get()->begin();
-		wp_safe_redirect( esc_url_raw( add_query_arg( 'begin', true ) ) );
-		die;
-	}
-
-	/**
-	 * Redirects admin migration page during migration actual processing
-	 */
-	public function do_migration_complete_redirection() {
-		if ( ! shipper_user_can_ship() ) { return false; }
-
-		$migration = new Shipper_Model_Stored_Migration;
-		$not_actionable = $migration->is_completed() || $migration->is_empty();
-		if ( $not_actionable && isset( $_GET['begin'] ) ) {
-			wp_safe_redirect(esc_url_raw(remove_query_arg(array(
-				'type',
-				'site',
-				'check',
-				'begin',
-			))));
-			die;
-		}
-	}
-
-	/**
-	 * Render migration setup pageset
-	 *
-	 * @param string $type Migration type.
-	 * @param int    $site Destination site ID.
-	 * @param bool   $check Whether we're at the preflight check stage or not.
-	 */
-	public function render_page_migrate_setup( $type, $site, $check = false ) {
-		if ( ! shipper_user_can_ship() ) { return wp_die( esc_html( __( 'Nope.', 'shipper' ) ) ); }
-
-		$errors = $this->handle_migration_destinations_cache();
-		$destinations = new Shipper_Model_Stored_Destinations;
-
-		if ( ! empty( $type ) && empty( $site ) ) {
-			// Fetch fresh list from the API on site selection page.
-			$this->update_destinations_cache();
-		}
-
-		$tpl = new Shipper_Helper_Template;
-		$tpl->render( 'pages/migration/selection', array(
-			'type' => $type,
-			'site' => $site,
-			'check' => $check,
-			'errors' => $errors,
-			'destinations' => $destinations,
-		));
-	}
-
-	/**
-	 * Render migration progress pageset
-	 *
-	 * @param string $type Migration type.
-	 * @param int    $site Destination site ID.
-	 */
-	public function render_page_migrate_progress( $type, $site ) {
-		if ( ! shipper_user_can_ship() ) { return wp_die( esc_html( __( 'Nope.', 'shipper' ) ) ); }
-
-		$errors = $this->handle_migration_destinations_cache();
-		$destinations = new Shipper_Model_Stored_Destinations;
-
-		$tpl = new Shipper_Helper_Template;
-		$tpl->render( 'pages/migration/progress', array(
-			'type' => $type,
-			'site' => $site,
-			'check' => true,
-			'begin' => true,
-			'progress' => 0,
-			'errors' => $errors,
-			'destinations' => $destinations,
-		));
-	}
-
-	/**
-	 * Dispatches migrate page states.
-	 */
-	public function page_migrate() {
-		if ( ! shipper_user_can_ship() ) { return wp_die( esc_html( __( 'Nope.', 'shipper' ) ) ); }
-
-		$migration = new Shipper_Model_Stored_Migration;
-		$destinations = new Shipper_Model_Stored_Destinations;
-
-		if ( $migration->is_active() ) {
-			// If we have active migration, let's go with it.
-			$type = $migration->get_type();
-			$site_hash = Shipper_Model_Stored_Migration::TYPE_EXPORT === $type
-				? $destinations->get_by_domain( $migration->get_destination() )
-				: $destinations->get_by_domain( $migration->get_source() );
-			$site = $site_hash['site_id'];
-			$check = true;
-			$begin = true;
-		}
-
-		if ( empty( $type ) ) {
-			$type = ! empty( $_GET['type'] )
-				? sanitize_text_field( $_GET['type'] )
-				: false
-			;
-		}
-
-		if ( empty( $site ) ) {
-			$site = ! empty( $_GET['site'] )
-				? (int) sanitize_text_field( $_GET['site'] )
-				: false
-			;
-		}
-
-		if ( empty( $check ) ) {
-			$check = ! empty( $_GET['check'] )
-				? sanitize_text_field( $_GET['check'] )
-				: false
-			;
-		}
-
-		if ( empty( $begin ) ) {
-			$begin = ! empty( $_GET['begin'] )
-				? sanitize_text_field( $_GET['begin'] )
-				: false
-			;
-		}
-
-		// First, check if we have the stuff to skip preflight.
-		if ( ! empty( $type ) && ! empty( $site ) && empty( $check ) ) {
-			$ctrl = Shipper_Controller_Runner_Preflight::get();
-			if ( $ctrl->is_done() && ! $ctrl->has_issues() ) {
-				// So apparently we ran the preflight and there are no issues.
-				// Carry on with the migration.
-				$check = true;
-			}
-		}
-
-		// Decision time!
-		if ( ! empty( $type ) && ! empty( $site ) ) {
-			// Alright, we have the initial selection set up.
-			// Let's see where do we go from here.
-			if ( empty( $check ) ) {
-				// About to run pre-flight check. Prepare the migration.
-				Shipper_Controller_Runner_Migration::get()->prepare( $type, $site );
-			} else {
-				// We have done the preflight, what's next?
-				if ( ! empty( $begin ) ) {
-					// Okay, migration bootstrapped and ready to go - run it.
-					Shipper_Controller_Runner_Migration::get()->run();
-				}
-			}
-		} else {
-			// Init page. Clear preflight.
-			$ctrl = Shipper_Controller_Runner_Preflight::get()->clear();
-			if ( ! $migration->is_active() ) {
-				$estimate = new Shipper_Model_Stored_Estimate;
-				$estimate->clear()->save();
-			}
-		}
-
-		return empty( $type ) || empty( $site ) || empty( $check ) || empty( $begin )
-			? $this->render_page_migrate_setup( $type, $site, $check )
-			: $this->render_page_migrate_progress( $type, $site );
 	}
 
 	/**
@@ -339,107 +129,6 @@ class Shipper_Controller_Admin extends Shipper_Controller {
 	}
 
 	/**
-	 * Renders the tools page
-	 */
-	public function page_tools() {
-		if ( ! shipper_user_can_ship() ) { return wp_die( esc_html( __( 'Nope.', 'shipper' ) ) ); }
-
-		$tool = 'logs';
-		if ( ! empty( $_GET['tool'] ) ) {
-			$tool = sanitize_text_field( $_GET['tool'] );
-		}
-
-		$tpl = new Shipper_Helper_Template;
-		$tpl->render( 'pages/tools/main', array( 'current_tool' => $tool ) );
-	}
-
-	/**
-	 * Renders the settings page
-	 */
-	public function page_settings() {
-		if ( ! shipper_user_can_ship() ) { return wp_die( esc_html( __( 'Nope.', 'shipper' ) ) ); }
-
-		$tool = 'notifications';
-		if ( ! empty( $_GET['tool'] ) ) {
-			$tool = sanitize_text_field( $_GET['tool'] );
-		}
-
-		$tpl = new Shipper_Helper_Template;
-		$tpl->render( 'pages/settings/main', array( 'current_tool' => $tool ) );
-	}
-
-	/**
-	 * Saves the submitted settings
-	 */
-	public function save_settings() {
-		if ( ! shipper_user_can_ship() ) { return wp_die( esc_html( __( 'Nope.', 'shipper' ) ) ); }
-
-		$tool = false;
-		if ( ! empty( $_GET['tool'] ) ) {
-			$tool = sanitize_text_field( $_GET['tool'] );
-		}
-		if ( empty( $tool ) ) { return false; }
-
-		if ( empty( $_POST[ $tool ] ) ) {
-			return false; // Nothing to do here.
-		}
-		if ( empty( $_POST[ $tool ]['shipper-nonce'] ) ) {
-			return false; // Can't validate.
-		}
-		if ( ! wp_verify_nonce( $_POST[ $tool ]['shipper-nonce'], "shipper-{$tool}" ) ) {
-			return false; // Invalid.
-		}
-		$model = new Shipper_Model_Stored_Options;
-
-		// A11n.
-		if ( 'accessibility' === $tool ) {
-			$model->set(
-				Shipper_Model_Stored_Options::KEY_A11N,
-				! empty( $_POST[ $tool ][ Shipper_Model_Stored_Options::KEY_A11N ] )
-			);
-		}
-
-		// Preservation settings.
-		if ( 'data' === $tool ) {
-			$model->set(
-				Shipper_Model_Stored_Options::KEY_SETTINGS,
-				! empty( $_POST[ $tool ][ Shipper_Model_Stored_Options::KEY_SETTINGS ] )
-			);
-			$model->set(
-				Shipper_Model_Stored_Options::KEY_DATA,
-				! empty( $_POST[ $tool ][ Shipper_Model_Stored_Options::KEY_DATA ] )
-			);
-		}
-
-		// Migration settings.
-		if ( 'migration' === $tool ) {
-			$model->set(
-				Shipper_Model_Stored_Options::KEY_UPLOADS,
-				! empty( $_POST[ $tool ][ Shipper_Model_Stored_Options::KEY_UPLOADS ] )
-			);
-			$model->set(
-				Shipper_Model_Stored_Options::KEY_SKIPCONFIG,
-				! empty( $_POST[ $tool ][ Shipper_Model_Stored_Options::KEY_SKIPCONFIG ] )
-			);
-			$model->set(
-				Shipper_Model_Stored_Options::KEY_SKIPEMAILS,
-				! empty( $_POST[ $tool ][ Shipper_Model_Stored_Options::KEY_SKIPEMAILS ] )
-			);
-		}
-
-		if ( 'pagination' === $tool ) {
-			$model->set(
-				Shipper_Model_Stored_Options::KEY_PER_PAGE,
-				intval( $_POST[ $tool ][ Shipper_Model_Stored_Options::KEY_PER_PAGE ] )
-			);
-		}
-
-		$model->save();
-		wp_safe_redirect( esc_url_raw( add_query_arg( 'saved', true ) ) );
-		die;
-	}
-
-	/**
 	 * Adds shared UI body class
 	 *
 	 * @see https://wpmudev.github.io/shared-ui/
@@ -452,7 +141,7 @@ class Shipper_Controller_Admin extends Shipper_Controller {
 		if ( ! shipper_user_can_ship() ) { return $classes; }
 
 		$cls = explode( ' ', $classes );
-		$cls[] = 'sui-2-3-15';
+		$cls[] = 'sui-2-3-27';
 		$cls[] = 'shipper-admin';
 		$cls[] = 'shipper-sui';
 		return join( ' ', $cls );
@@ -489,29 +178,64 @@ class Shipper_Controller_Admin extends Shipper_Controller {
 				'per_page' => $model->get( Shipper_Model_Stored_Options::KEY_PER_PAGE, 10 )
 			)
 		);
+
+		// Trigger this on print, but early enough!
+		add_action( 'admin_print_scripts', array( $this, 'reenable_heartbeat' ), 0 );
 	}
 
-	/**
-	 * Adds front-end dependencies specific for the migrate page
-	 */
-	public function add_migrate_dependencies() {
-		if ( ! shipper_user_can_ship() ) { return false; }
-		$this->add_shared_dependencies();
-	}
 
 	/**
-	 * Adds front-end dependencies specific for the tools page
+	 * Re-adds the heartbeat JS if it's been deregistered by a plugin
+	 *
+	 * Gets triggered "too late" to ensure it's run in time.
 	 */
-	public function add_tools_dependencies() {
-		if ( ! shipper_user_can_ship() ) { return false; }
-		$this->add_shared_dependencies();
-	}
+	public function reenable_heartbeat() {
+		if ( wp_script_is( 'heartbeat', 'done' ) ) {
+			return false;
+		}
+		if ( wp_script_is( 'heartbeat', 'registered' ) && wp_script_is( 'heartbeat', 'enqueued' ) ) {
+			// Heartbeat's present, move on.
+			return false;
+		}
+
+		$suffix = wp_scripts_get_suffix();
+		wp_scripts()->add(
+			'heartbeat',
+			"/wp-includes/js/heartbeat$suffix.js",
+			array( 'jquery', 'wp-hooks' ),
+			false, 1
+		);
+		wp_scripts()->localize(
+			'heartbeat',
+			'heartbeatSettings',
+			apply_filters( 'heartbeat_settings', array() )
+		);
+ 	}
 
 	/**
-	 * Adds front-end dependencies specific for the settings page
+	 * Whether or not the current user can access shipper pages
+	 *
+	 * @return bool
 	 */
-	public function add_settings_dependencies() {
-		if ( ! shipper_user_can_ship() ) { return false; }
-		$this->add_shared_dependencies();
+	public function can_user_access_shipper_pages() {
+		$capability = $this->get_capability();
+		if ( ! current_user_can( $capability ) ) {
+			return false;
+		}
+
+		$allowed_users = shipper_get_allowed_users();
+		if ( ! empty( $allowed_users ) ) {
+			$user_id = get_current_user_id();
+			return in_array(
+				(int) $user_id,
+				array_map( 'intval', $allowed_users ),
+				true
+			);
+		}
+
+		// We passed capabilities check, but we don't have any explicitly allowed users.
+		// That's kinda weird, but okay.
+		// Let's fall back to allowing access.
+		return true;
 	}
 }

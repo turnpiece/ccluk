@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - BuddyPress - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2019-02-20 16:12:00+0000\n"
+"PO-Revision-Date: 2019-07-10 12:08:52+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,6 +18,135 @@ msgid_plural "%s <span class=\"screen-reader-text\">Comments</span>"
 msgstr[0] "%s <span class=\"screen-reader-text\">Kommentar</span>"
 msgstr[1] "%s <span class=\"screen-reader-text\">Kommentarer</span>"
 
+#: bp-settings/classes/class-bp-settings-component.php:198
+#: bp-settings/classes/class-bp-settings-component.php:275
+msgid "Export Data"
+msgstr "Eksporter data"
+
+#: bp-settings/actions/data.php:51
+msgid "Data export request successfully created"
+msgstr "Anmodning om dataeksport er fuldført uden problemer"
+
+#: bp-settings/actions/data.php:40
+msgid "We were unable to generate the data export request."
+msgstr "Det var ikke muligt at genere anmodningen om dataeksport."
+
+#: bp-friends/bp-friends-functions.php:1072
+msgid "Requester"
+msgstr "Anmoder"
+
+#: bp-friends/bp-friends-functions.php:1009
+msgid "Recipient"
+msgstr "Modtager"
+
+#: bp-activity/bp-activity-functions.php:4202
+msgid "Activity Content"
+msgstr "Aktivitets indhold"
+
+#: bp-settings/bp-settings-functions.php:182
+msgid "Receive email when your request to join a group has been approved or denied?"
+msgstr "Modtag email, når din anmodning om at komme ind i en gruppe er blevet godkendt eller afvist?"
+
+#. Translators: Url to the Gravatar site, you can use the one for your country
+#. eg: https://fr.gravatar.com for French translation
+#: bp-templates/bp-nouveau/buddypress/members/single/profile/change-avatar.php:23
+#: bp-templates/bp-nouveau/buddypress/members/single/profile/change-avatar.php:89
+msgid "https://gravatar.com"
+msgstr "https://gravatar.com"
+
+#: bp-templates/bp-legacy/buddypress-functions.php:1555
+msgid "Error accepting invitation"
+msgstr "Fejl i accept af invitation"
+
+#: bp-settings/bp-settings-functions.php:201
+msgid "Receive group invitations from my friends only?"
+msgstr "Vil du kun modtage gruppeinvitationer fra venner?"
+
+#: bp-settings/bp-settings-functions.php:178
+msgid "Receive email when a member requests to join a private group for which you are an admin?"
+msgstr "Modtag email, når et medlem anmoder om at komme med i en privat gruppe, som du er administrator for?"
+
+#: bp-settings/bp-settings-functions.php:174
+msgid "Receive email when you are promoted to a group administrator or moderator?"
+msgstr "Modtag email, når du bliver udnævnt til at være gruppeadministrator eller moderator?"
+
+#: bp-settings/bp-settings-functions.php:170
+msgid "Receive email when group information is updated?"
+msgstr "Modtag email, når gruppeinformation er blevet opdateret?"
+
+#: bp-settings/bp-settings-functions.php:163
+msgid "Receive email when a member invites you to join a group?"
+msgstr "Modtag email, når et medlem inviterer dig ind i en gruppe?"
+
+#: bp-settings/bp-settings-functions.php:156
+msgid "Receive email when a member sends you a new message?"
+msgstr "Modtag email, når et medlem sender dig en besked?"
+
+#: bp-settings/bp-settings-functions.php:149
+msgid "Receive email when a member replies to an update or comment you've posted?"
+msgstr "Modtag email, når et medlem svarer på en opdatering eller kommentar, som du har skrevet?"
+
+#: bp-settings/bp-settings-functions.php:145
+msgid "Receive email when a member mentions you in an update?"
+msgstr "Modtag email, når et medlem nævner dig i en opdatering?"
+
+#: bp-settings/bp-settings-filters.php:22
+msgid "BuddyPress Settings Data"
+msgstr "BuddyPress indstillinger data"
+
+#. Translators: %s is used to output the link to the Gravatar site
+#: bp-templates/bp-nouveau/buddypress/members/single/profile/change-avatar.php:21
+msgid "Your profile photo will be used on your profile and throughout the site. If there is a %s associated with your account email we will use that, or you can upload an image from your computer."
+msgstr "Dit profilbillede vil blive brugt på din profil og på hele webstedet. Hvis der er en %s forbundet med din konto email, vil vi bruge den, eller du kan uploade et billede fra din computer."
+
+#: bp-friends/bp-friends-functions.php:1083
+msgid "Pending Friend Requests (Received)"
+msgstr "Afventende kontaktanmodninger (modtaget)"
+
+#: bp-friends/bp-friends-functions.php:1020
+msgid "Pending Friend Requests (Sent)"
+msgstr "Afventende kontaktanmodninger (sendt)"
+
+#: bp-friends/bp-friends-functions.php:946
+msgid "Initiated By Me"
+msgstr "Startet af mig"
+
+#: bp-friends/bp-friends-functions.php:950
+msgid "Friendship Date"
+msgstr "Venskabsdato"
+
+#: bp-friends/bp-friends-functions.php:942
+msgid "Friend"
+msgstr "Kontakt"
+
+#: bp-friends/bp-friends-filters.php:71
+msgid "BuddyPress Friend Requests (Received)"
+msgstr "BuddyPress kontaktanmodninger (modtaget)"
+
+#: bp-friends/bp-friends-filters.php:66
+msgid "BuddyPress Friend Requests (Sent)"
+msgstr "BuddyPress kontaktanmodninger (sendt)"
+
+#: bp-friends/bp-friends-filters.php:61
+msgid "BuddyPress Friends"
+msgstr "BuddyPress kontakter"
+
+#: bp-activity/bp-activity-functions.php:4195
+msgid "Activity URL"
+msgstr "Aktivitets URL"
+
+#: bp-activity/bp-activity-functions.php:4191
+msgid "Activity Description"
+msgstr "Aktivitets beskrivelse"
+
+#: bp-activity/bp-activity-functions.php:4187
+msgid "Activity Date"
+msgstr "Aktivitets dato"
+
+#: bp-activity/bp-activity-filters.php:821
+msgid "BuddyPress Activity Data"
+msgstr "BuddyPress Aktivitetsdata"
+
 #: bp-templates/bp-nouveau/buddypress/members/activate.php:23
 msgid "Your account was activated successfully! You can now log in with the username and password you provided when you signed up."
 msgstr "Din konto blev aktiveret med succes! Du kan nu logge ind med det brugernavn og adgangskode, du angav, da du tilmeldte dig."
@@ -29,6 +158,362 @@ msgstr "Modtagere"
 #: bp-notifications/bp-notifications-functions.php:875
 msgid "Status"
 msgstr "Status"
+
+#: bp-xprofile/bp-xprofile-filters.php:640
+msgid "BuddyPress Extended Profile Data"
+msgstr "BuddyPress udvidet profildata"
+
+#. translators: Link to Delete Account Settings page
+#: bp-templates/bp-nouveau/buddypress/members/single/settings/data.php:66
+msgid "You may delete your account by visiting the %s page."
+msgstr "Du kan slette din konto på %s siden."
+
+#. translators: Link to Delete Account Settings page
+#: bp-templates/bp-nouveau/buddypress/members/single/settings/data.php:66
+msgid "Please contact the site administrator to request account deletion."
+msgstr "Kontakt venligst webstedets administrator for at anmode om sletning af konto."
+
+#. translators: Link to Delete Account Settings page
+#: bp-templates/bp-nouveau/buddypress/members/single/settings/data.php:66
+msgid "To erase all data associated with your account, your user account must be completely deleted."
+msgstr "For at slette alle data på din konto skal din brugerkonto slettes helt."
+
+#. translators: accessibility text
+#: bp-templates/bp-nouveau/buddypress/members/single/settings/data.php:62
+#: bp-templates/bp-legacy/buddypress/members/single/settings/data.php:64
+msgid "Data Erase"
+msgstr "Slet data"
+
+#: bp-templates/bp-nouveau/buddypress/members/single/settings/data.php:56
+#: bp-templates/bp-legacy/buddypress/members/single/settings/data.php:56
+msgid "Request personal data export"
+msgstr "Anmod om eksport af persondata"
+
+#: bp-templates/bp-nouveau/buddypress/members/single/settings/data.php:53
+#: bp-templates/bp-legacy/buddypress/members/single/settings/data.php:53
+msgid "If you want to make a request, please click on the button below:"
+msgstr "Klik venligst på knappen nedenfor, hvis du ønsker at sende en anmodning:"
+
+#: bp-templates/bp-nouveau/buddypress/members/single/settings/data.php:49
+#: bp-templates/bp-legacy/buddypress/members/single/settings/data.php:49
+msgid "You can request an export of your personal data, containing the following items if applicable:"
+msgstr "Du kan anmode om eksport af dine personlige data indeholdende følgende egenskaber, hvis det er relevant:"
+
+#: bp-templates/bp-nouveau/buddypress/members/single/settings/data.php:43
+#: bp-templates/bp-legacy/buddypress/members/single/settings/data.php:43
+msgid "You will receive a link to download your export via email once we are able to fulfill your request."
+msgstr "Du vil modtage et link på mail til download af din eksport, når vi er klar til at opfylde din anmodning."
+
+#: bp-templates/bp-nouveau/buddypress/members/single/settings/data.php:42
+#: bp-templates/bp-legacy/buddypress/members/single/settings/data.php:42
+msgid "You previously requested an export of your personal data on %s."
+msgstr "Du har tidligere anmodet om eksport af dine personlige data på %s"
+
+#: bp-templates/bp-nouveau/buddypress/members/single/settings/data.php:35
+#: bp-templates/bp-legacy/buddypress/members/single/settings/data.php:35
+msgid "Request new data export"
+msgstr "Anmod om ny dataeksport"
+
+#: bp-templates/bp-nouveau/buddypress/members/single/settings/data.php:31
+#: bp-templates/bp-legacy/buddypress/members/single/settings/data.php:31
+msgid "Please click on the button below to make a new request."
+msgstr "Klik på knappen nedenfor for at lave en ny anmodning"
+
+#: bp-templates/bp-nouveau/buddypress/members/single/settings/data.php:30
+#: bp-templates/bp-legacy/buddypress/members/single/settings/data.php:30
+msgid "Your previous request for an export of personal data has expired."
+msgstr "Din anmodning om eksport af persondata er udløbet."
+
+#: bp-templates/bp-nouveau/buddypress/members/single/settings/data.php:26
+#: bp-templates/bp-legacy/buddypress/members/single/settings/data.php:26
+msgid "Download personal data"
+msgstr "Download persondata"
+
+#: bp-templates/bp-nouveau/buddypress/members/single/settings/data.php:24
+#: bp-templates/bp-legacy/buddypress/members/single/settings/data.php:24
+msgid "You may download your personal data by clicking on the link below. For privacy and security, we will automatically delete the file on %s, so please download it before then."
+msgstr "Du kan downloade dine personlige data ved at klikke på linket nedenfor. Af fortroligheds og sikkerhedsmæssige grunde sletter vi automatisk filen på %s, så venligst download dem før da."
+
+#: bp-templates/bp-nouveau/buddypress/members/single/settings/data.php:23
+#: bp-templates/bp-legacy/buddypress/members/single/settings/data.php:23
+msgid "Your request for an export of personal data has been completed."
+msgstr "Din anmodning om eksport af personlig data er fuldført."
+
+#: bp-templates/bp-nouveau/buddypress/members/single/settings/data.php:12
+#: bp-templates/bp-legacy/buddypress/members/single/settings/data.php:13
+msgid "Data Export"
+msgstr "Dataeksport"
+
+#: bp-core/classes/class-bp-admin.php:670
+msgctxt "screen heading"
+msgid "Your feedback"
+msgstr "Din tilbagemelding"
+
+#: bp-core/classes/class-bp-admin.php:659
+msgid "With every BuddyPress version, we strive to make internal improvements to performance and code quality in addition to introducing new features and fixes. In BuddyPress 4.0, we've improved PHP compatibility both in our codebase and in our automated testing tools; we've reworked some automated tests for faster performance; we've ensured compatibility with upcoming changes in WordPress; and we've fixed a number of bugs in the formatting and sending of emails."
+msgstr ""
+"Med hver eneste BuddyPress version anstrenger vi os for at forbedre ydeevne og kodekvalitet og introducere nye funktioner og rettelser. \n"
+"I BuddyPress 4.0 har vi forbedret PHP kompatibilitet både i vores kodebase og i vores automatiske testredskaber; vi har gennemgået nogle automatiske tests for at skabe hurtigere ydeevne; vi har sikret kompatibilitet i forhold til kommende ændringer i WordPress; og vi har rettet en del fejl i formatering og afsendelse af mails."
+
+#: bp-notifications/bp-notifications-functions.php:871
+msgid "Notification Date"
+msgstr "Notifikationsdato"
+
+#: bp-notifications/bp-notifications-functions.php:867
+msgid "Notification Content"
+msgstr "Notifikationsindhold"
+
+#: bp-notifications/bp-notifications-filters.php:23
+msgid "BuddyPress Notifications Data"
+msgstr "BuddyPress notifikationsdata"
+
+#: bp-xprofile/bp-xprofile-functions.php:1381
+msgid "Extended Profile Data"
+msgstr "Udvidet profildata"
+
+#. translators: link to Privacy Policy
+#: bp-templates/bp-nouveau/includes/template-tags.php:2482
+msgid "I have read and agree to this site's %s."
+msgstr "Jeg har læst og accepterer dette websteds %s."
+
+#: bp-messages/bp-messages-functions.php:709
+msgid "Thread URL"
+msgstr "Tråd URL"
+
+#: bp-messages/bp-messages-functions.php:697
+msgid "Message Content"
+msgstr "Beskedindhold"
+
+#: bp-messages/bp-messages-functions.php:693
+msgid "Message Subject"
+msgstr "Besked emne"
+
+#: bp-messages/bp-messages-filters.php:143
+msgid "BuddyPress Messages"
+msgstr "BuddyPress beskeder"
+
+#: bp-members/screens/register.php:77
+msgid "You must indicate that you have read and agreed to the Privacy Policy."
+msgstr "Du skal angive, at du har læst og accepteret Privatlivspolitik."
+
+#: bp-groups/bp-groups-functions.php:2925
+msgid "Pending Group Invitations (Received)"
+msgstr "Afventende gruppeinvitationer (modtaget)"
+
+#: bp-groups/bp-groups-functions.php:2855
+msgid "Pending Group Invitations (Sent)"
+msgstr "Afventende gruppeinvitationer (sendt)"
+
+#: bp-groups/bp-groups-functions.php:2844
+msgid "Sent To"
+msgstr "Sendt til"
+
+#: bp-groups/bp-groups-functions.php:2785
+msgid "Pending Group Membership Requests"
+msgstr "Afventende anmodninger om gruppemedlemsskab"
+
+#: bp-groups/bp-groups-functions.php:2713
+msgid "Date Joined"
+msgstr "Indmeldelsesdato"
+
+#: bp-groups/bp-groups-functions.php:2708
+msgid "Group Role"
+msgstr "Rolle i gruppen"
+
+#: bp-groups/bp-groups-functions.php:2698
+msgid "Creator"
+msgstr "Forfatter"
+
+#: bp-groups/bp-groups-functions.php:2692
+#: bp-groups/bp-groups-functions.php:2914
+msgid "Invited By"
+msgstr "Inviteret af"
+
+#: bp-groups/bp-groups-functions.php:2685
+#: bp-groups/bp-groups-functions.php:2774
+#: bp-groups/bp-groups-functions.php:2840
+#: bp-groups/bp-groups-functions.php:2910
+msgid "Group URL"
+msgstr "Gruppe URL"
+
+#: bp-groups/bp-groups-filters.php:394
+msgid "BuddyPress Pending Group Invitations (Sent)"
+msgstr "BuddyPress afventende gruppeinvitationer (sendt)"
+
+#: bp-groups/bp-groups-filters.php:389
+msgid "BuddyPress Pending Group Invitations (Received)"
+msgstr "BuddyPress afventende gruppeinvitationer (modtaget)"
+
+#: bp-groups/bp-groups-filters.php:384
+msgid "BuddyPress Pending Group Membership Requests"
+msgstr "BuddyPress afventende anmodninger om gruppemedlemsskab"
+
+#: bp-groups/bp-groups-filters.php:379
+msgid "BuddyPress Group Memberships"
+msgstr "BuddyPress gruppemedlemsskaber"
+
+#: bp-groups/bp-groups-functions.php:2778
+#: bp-groups/bp-groups-functions.php:2848
+#: bp-groups/bp-groups-functions.php:2918
+#: bp-messages/bp-messages-functions.php:701
+#: bp-friends/bp-friends-functions.php:1013
+#: bp-friends/bp-friends-functions.php:1076
+msgid "Date Sent"
+msgstr "Dato sendt"
+
+#: bp-core/classes/class-bp-admin.php:658
+msgid "BuddyPress: leaner, faster, stronger"
+msgstr "BuddyPress: slankere, hurtigere, stærkere"
+
+#: bp-core/classes/class-bp-admin.php:656
+msgid "BuddyPress 3.0 introduced a new set of default templates, which we call \"Nouveau\". In 4.0, we've fixed bugs and smoothed the edges in these templates, including more accessible markup and improved appearance on mobile devices."
+msgstr "BuddyPress 3.0 introducerede et nyt sæt skabeloner, som vi kalder \"Nouveau\". I 4.0 har vi rettet fejl og gjort kanterne i disse skabeloner blødere, inklusiv lettere tilgængelig formatering og forbedret visning på mobile enheder."
+
+#: bp-core/classes/class-bp-admin.php:655
+msgid "Nouveau template improvements"
+msgstr "Nouveau skabelons forbedringer"
+
+#: bp-core/classes/class-bp-admin.php:653
+msgid "BuddyPress 4.0 also integrates with WordPress 4.9.8's Privacy Policy tools. When you create or update your Privacy Policy, BP will suggest text that's specifically tailored to the kinds of social data generated on a BuddyPress site. And will prompt registering users to agree to the Privacy Policy, if your theme supports it."
+msgstr "BuddyPress 4.0 integrerer også med WordPress 4.9s redskaber til Privatlivspolitik. Når du laver eller opdaterer din Privatlivspolitik, vil BP foreslå en tekst, som specifik er skræddersyet til den slags sociale data, som genereres på et BuddyPress websted. Og som vil henvise registrerende brugere til at acceptere Privatlivspolitikken, hvis dit tema understøtter det."
+
+#: bp-core/classes/class-bp-admin.php:651
+msgid "The new \"Export Data\" Settings panel lets users request an export of all BuddyPress data they've created. BuddyPress integrates seamlessly with the data export functionality introduced in WordPress 4.9.8, and BP data is included in exports that are initiated either from the Export Data panel or via WP's Tools > Export Personal Data interface."
+msgstr "Det nye \"Eksporter Data\" indstillingspanel vil give brugere mulighed for at anmode om eksport af al BuddyPress data, som de har opført. BuddyPress integrerer uden problemer med funktionen til data eksport, som er introduceret i WordPress 4.9.8, og BP data inkluderes i eksport, der er startet enten i Eksporter Data panelet eller gennem WPs redskaber > Eksporter Persondata grænseflade."
+
+#: bp-core/classes/class-bp-admin.php:647
+msgid "Improved user control over data exports"
+msgstr "Forbedret brugerkontrol over dataeksport"
+
+#: bp-core/classes/class-bp-admin.php:645
+msgid "Screenshot of Export Data settings panel"
+msgstr "Screenshot af panelet til indstilling af Eksporter Data"
+
+#: bp-core/classes/class-bp-admin.php:641
+msgid "BuddyPress boasts a proud history of letting community members and managers control their data, independent of third-party, commercial entities. In this spirit, as well as the spirit of recent regulations like the EU's General Data Protection Regulation (GDPR), BuddyPress 4.0 introduces a suite of tools allowing users and site admins to manage member data and privacy."
+msgstr ""
+"BuddyPress kan fremvise en stolt historie om at lade deres fællesskabs medlemmer og managere kontrollere deres data, uafhængigt af tredjeparts kommercielle enheder. I denne ånd \n"
+" - og i tråd med de seneste reguleringer som EU's General Data Protection Regulation (GDPR) - introducerer BuddyPress 4.0 en række redskaber, som tillader brugere og webstedsadministratorer at håndtere medlemsdata og privatliv."
+
+#: bp-core/classes/class-bp-admin.php:639
+msgid "New tools for data control and privacy"
+msgstr "Nye redskaber til datakontrol og privatliv"
+
+#: bp-core/classes/class-bp-admin.php:634
+msgctxt "section heading"
+msgid "New in BuddyPress"
+msgstr "Ny i BuddyPress"
+
+#: bp-core/classes/class-bp-admin.php:597
+msgid "When a logged-in user creates a new group, we use a number of cookies to keep track of the group creation process. These cookies contain no personal data, and are deleted either upon the successful creation of the group or after 24 hours."
+msgstr "Når en bruger, der er logget ind, opretter en ny gruppe, så bruger vi cookies til følge gruppestartsprocessen. Disse cookies indeholder ikke persondata og slettes enten efter vellykket start af gruppen eller efter 24 timer."
+
+#: bp-core/classes/class-bp-admin.php:594
+msgid "We use cookies on group, member, and activity directories to keep track of a user's browsing preferences. These preferences include the last-selected values of the sort and filter dropdowns, as well as pagination information. These cookies contain no personal data, and are deleted after 24 hours."
+msgstr "Vi bruger cookies på gruppe-, medlems- og aktivitetslister for at holde øje med en brugers browser præferencer. Disse præferencer inkluderer både de senest valgte værdier i sorterings- og filter-rullemenuer og information om sidedeling. Disse cookies indeholder ikke persondata og slettes efter 24 timer."
+
+#: bp-core/classes/class-bp-admin.php:592
+msgid "We use a cookie to show success and failure messages to logged-in users, in response to certain actions, like joining a group. These cookies contain no personal data, and are deleted immediately after the next page load."
+msgstr "Vi bruger en cookie til at vise succes- og fejlbeskeder til brugere, der er logget ind, som svar på bestemte handlinger, som f.eks. tilslutning til en gruppe. Disse cookies indeholder ikke persondata og slettes straks efter load af næste side."
+
+#: bp-core/classes/class-bp-admin.php:590
+msgid "In this section you should describe the BuddyPress-specific cookies that your site collects. The suggested text describes the default cookies."
+msgstr "I denne sektion kan du beskrive de specifikke BuddyPress cookies, som dit websted indsamler. Tekstforslaget beskriver standard cookies."
+
+#: bp-core/classes/class-bp-admin.php:586
+msgid "The content of private messages is visible only to the sender and the recipients of the message. With the exception of site administrators, who can read all private messages, private message content is never visible to other users or site visitors. Site administrators may delete the content of any message."
+msgstr "Indholdet i private beskeder er kun synligt for afsender og modtagere af beskeden. Private beskeder er aldrig synlige for andre brugere eller besøgende på webstedet med undtagelse af administratorer af webstedet, som kan læse alle private beskeder. Webstedets administratorer kan slette indholdet i enhver besked."
+
+#: bp-core/classes/class-bp-admin.php:584
+msgid "In this section you should describe any personal data related to private messages."
+msgstr "I denne sektion skriver man al personlig data, som er relateret til private beskeder."
+
+#: bp-core/classes/class-bp-admin.php:579
+msgid "Activity items may be deleted at any time by users who created them. Site administrators can edit all activity items."
+msgstr "Aktivitetselementer kan til enhver tid slettes af de brugere, der skrev dem. Webstedets administratorer kan redigere i alle aktivitetselementer."
+
+#: bp-core/classes/class-bp-admin.php:578
+msgid "The content of activity items obey the same privacy rules as the contexts in which the activity items are created. For example, activity updates created in a user's profile is publicly visible, while activity items generated in a private group are visible only to members of that group. Site administrators can view all activity items, regardless of context."
+msgstr "Indholdet i aktivitetselementer er underlagt de samme privatlivs regler som den kontekst, aktivitetselementerne er lavet i. For eksempel er aktivitetsopdateringer, som er lavet i en brugerprofil synligt offentligt, mens aktivitetselementer genereret i en privat gruppe kun er synlige for gruppens medlemmer. Webstedets administratorer kan se alle aktivitetselementer uanset indhold."
+
+#: bp-core/classes/class-bp-admin.php:577
+msgid "This site records certain user actions, in the form of \"activity\" data. Activity includes updates and comments posted directly to activity streams, as well as descriptions of other actions performed while using the site, such as new friendships, newly joined groups, and profile updates."
+msgstr "Webstedet registrerer visse brugerhandlindlinger i form af \"aktivitets\"-data. Aktivitet inkluderer opdateringer og kommentarer skrevet direkte i aktivitetsstrømmen såvel som beskrivelser af andre handlinger udført mens webstedet bruges, som f.eks. nye kontakter, nye gruppeindmeldelser og profilopdateringer."
+
+#: bp-core/classes/class-bp-admin.php:575
+msgid "In this section you should describe the kinds of information collected in the activity stream, how and whether it can be edited or deleted, and to whom the activity is visible."
+msgstr "I denne sektion kan man beskrive hvilken slags information der er samlet i aktivitetsstrømmen, hvordan og om det kan redigeres eller slettes, og hvem aktiviteten er synlig for."
+
+#: bp-core/classes/class-bp-admin.php:570
+msgid "User information provided during account registration can be modified or removed on the Profile > Edit panel. In most cases, users also have control over who is able to view a particular piece of profile content, limiting visibility on a field-by-field basis to friends, logged-in users, or administrators only. Site administrators can read and edit all profile data for all users."
+msgstr "Brugerinformation, som er fremkommet ved kontoregistreringen kan modificeres og fjernes på Profil > Rediger panel. I de fleste tilfælde har brugerne også kontrol over, hvem der kan se en bestemt del af profilindholdet, begrænset synlighed på felt-til-felt basis til kontakter, indloggede brugere eller administratorer. Webstedets administratorer kan læse og redigere al profildata for alle brugere."
+
+#: bp-core/classes/class-bp-admin.php:569
+msgid "When you register for the site, you may be asked to provide certain personal data for display on your profile. The \"Name\" field is required as well as public, and user profiles are visible to any site visitor. Other profile information may be required or optional, as configured by the site administrator."
+msgstr "Når du registrerer dig på webstedet, kan du blive bedt om bestemte persondata, som vil være synlig på din profil. \"Navn\" feltet kræves og er offentlig, og brugerprofiler er synlige for alle besøgende på stedet. Anden profilinformation kan kræves eller være valgfri, alt efter konfigurering af webstedets administrator."
+
+#: bp-core/classes/class-bp-admin.php:566
+msgid "Profile Data"
+msgstr "Profildata"
+
+#: bp-core/classes/class-bp-admin.php:557
+msgid "Suggested text:"
+msgstr "Foreslået tekst:"
+
+#. translators: do not remove {} brackets or translate its contents.
+#: bp-core/bp-core-functions.php:3441
+msgid ""
+"Thanks for registering!\n"
+"\n"
+"To complete the activation of your account, go to the following link and click on the 'Activate' button: {{{activate.url}}}\n"
+"\n"
+"If the 'Activation Key' field is empty, copy and paste the following into the field - {{key}}"
+msgstr ""
+"Tak for din registrering!\n"
+"\n"
+"For at fuldføre aktivering af din konto skal du fortsætte til følgende link og klikke på 'Aktiver' knappen: {{{activate.url}}}\n"
+"\n"
+"Hvis 'Aktiveringsnøgle' feltet er tomt, så kopier og indsæt følgende i feltet - {{key}}"
+
+#: bp-core/classes/class-bp-admin.php:562
+msgid "What personal data we collect and why we collect it"
+msgstr "Hvilke persondata vi indsamler, og hvorfor vi indsamler dem."
+
+#: bp-core/classes/class-bp-admin.php:567
+msgid "In this section you should note what information is collected on user profiles. The suggested text gives an overview of the kinds of profile data collected by BuddyPress."
+msgstr "I denne sektion kan man notere, hvilken information der indsamles på brugerprofiler. Den foreslåede tekst giver et overblik over, hvilken slags profildata der indsamles af BuddyPress."
+
+#: bp-core/classes/class-bp-admin.php:563
+msgid "Sites powered by BuddyPress rely heavily on user-provided data. In this section, you should note what data you collect, from both registered users and anonymous visitors."
+msgstr "Websteder, som drives af BuddyPress, bygger meget på data fra brugere. I denne sektion kan du notere, hvilke data du indsamler både fra registrerede brugere og anonyme besøgende."
+
+#. translators: do not remove {} brackets or translate its contents.
+#: bp-core/bp-core-functions.php:3439
+msgid ""
+"Thanks for registering!\n"
+"\n"
+"To complete the activation of your account, go to the following link and click on the <strong>Activate</strong> button:\n"
+"<a href=\"{{{activate.url}}}\">{{{activate.url}}}</a>\n"
+"\n"
+"If the 'Activation Key' field is empty, copy and paste the following into the field - {{key}}"
+msgstr ""
+"Tak for din registrering!\n"
+"\n"
+"For at fuldføre aktivering af din kontor skal du følge linket og klikke på denne knap <strong>Activate</strong> button:\n"
+"<a href=\"{{{activate.url}}}\">{{{activate.url}}}</a>\n"
+"\n"
+"Hvis 'Aktiveringsnøgle' feltet er tomt, så kopier og indsæt følgende i feltet - {{key}}"
+
+#. translators: link to Privacy Policy
+#: bp-core/bp-core-functions.php:3288
+#: bp-templates/bp-nouveau/includes/template-tags.php:2482
+msgid "Privacy Policy"
+msgstr "Privatlivspolitik"
+
+#: bp-core/bp-core-functions.php:3276
+msgctxt "email"
+msgid "&copy; %1$s %2$s"
+msgstr "&copy; %1$s %2$s"
 
 #. translators: Do not translate placeholders. 2 = form field name, 3 =
 #. "(required)".
@@ -206,6 +691,15 @@ msgstr "Der var et problem med at markere denne aktivitet som spam. Prøv igen."
 #: bp-templates/bp-nouveau/buddypress/members/single/profile/edit.php:34
 msgid "Editing \"%s\" Profile Group"
 msgstr "Redigerer \"%s\" profilgruppe"
+
+#: bp-templates/bp-nouveau/includes/activity/ajax.php:455
+msgid "No activities were found."
+msgstr "Ingen aktiviteter fundet"
+
+#. Translators: %s is used to output the link to the Gravatar site
+#: bp-templates/bp-nouveau/buddypress/members/single/profile/change-avatar.php:87
+msgid "Your profile photo will be used on your profile and throughout the site. To change your profile photo, create an account with %s using the same email address as you used to register with this site."
+msgstr "Dit profilbillede vil blive brugt på din profil og på hele webstedet. For at ændre dit profilbillede skal du oprette en konto med %s, hvor du bruger samme email adresse, som du brugte til at registrere dig på webstedet."
 
 #: bp-templates/bp-nouveau/buddypress/members/single/parts/profile-visibility.php:25
 msgctxt "button"
@@ -668,6 +1162,10 @@ msgstr "Gruppeinvitationer ryddet. Brug venligst en af de tilgængelige faner fo
 #: bp-templates/bp-nouveau/includes/groups/functions.php:151
 msgid "Use the \"Send\" button to send your invite or the \"Cancel\" button to abort."
 msgstr "Brug \"Send\"-knappen for at sende invitationer eller \"Annuller\"-knappen for at afbryde."
+
+#: bp-templates/bp-nouveau/includes/messages/ajax.php:560
+msgid "There was a problem unstarring your messages. Please try again."
+msgstr "Der var et problem med at fjerne reaktioner på dine beskeder. Venligst prøv igen."
 
 #: bp-templates/bp-nouveau/includes/groups/classes.php:284
 msgctxt "My Group screen nav"
@@ -3744,10 +4242,6 @@ msgstr "Tags for forum-emner"
 msgid "Please <a href=\"%s\" title=\"Create an account\">create an account</a> to get started."
 msgstr "<a href=\"%s\" title=\"Opret en konto\">Opret venligst en konto</a> for at begynde."
 
-#: bp-themes/bp-default/search.php:10
-msgid "Site"
-msgstr "Site"
-
 #: bp-themes/bp-default/single.php:45
 msgid "Sorry, no posts matched your criteria."
 msgstr "Beklager, ingen indlæg matchede dine kriterier."
@@ -3789,6 +4283,10 @@ msgstr "Din avatar vil blive brugt på din profil og på hele webstedet. For at 
 #: bp-themes/bp-default/members/single/settings/profile.php:49
 msgid "Profile Settings"
 msgstr "Profil indstillinger"
+
+#: bp-themes/bp-default/search.php:10
+msgid "Site"
+msgstr "Websted"
 
 #: bp-themes/bp-default/members/single/profile/change-avatar.php:31
 msgid "Crop Your New Avatar"
@@ -8494,7 +8992,7 @@ msgstr "Nyt emne"
 
 #: bp-templates/bp-nouveau/includes/functions.php:1183
 msgid "Site URL"
-msgstr "Webstedets URL"
+msgstr "Websteds URL"
 
 #: bp-themes/bp-default/archive.php:37 bp-themes/bp-default/single.php:33
 #: bp-themes/bp-default/search.php:38 bp-themes/bp-default/index.php:41
@@ -8637,6 +9135,10 @@ msgstr "Generelle indstillinger"
 #: bp-xprofile/classes/class-bp-xprofile-field-type-datebox.php:466
 msgid "Date format"
 msgstr "Dato format"
+
+#: bp-core/classes/class-bp-admin.php:589
+msgid "Cookies"
+msgstr "Cookies"
 
 #: bp-themes/bp-default/forums/forums-loop.php:39
 msgid "Topic"
@@ -10172,16 +10674,6 @@ msgstr "Seneste poster: %s"
 msgid "Never active"
 msgstr "Aldrig aktiv"
 
-#: bp-blogs/bp-blogs-template.php:340
-msgid "Profile picture of site author %s"
-msgstr "Profilbillede af site-forfatter %s"
-
-#: bp-blogs/bp-blogs-template.php:245
-msgid "Viewing %1$s - %2$s of %3$s site"
-msgid_plural "Viewing %1$s - %2$s of %3$s sites"
-msgstr[0] "Viser %1$s - %2$s af %3$s websted"
-msgstr[1] "Viser %1$s - %2$s af %3$s websteder"
-
 #. translators: %s = last activity timestamp (e.g. "active 1 hour ago")
 #: bp-core/classes/class-bp-core-user.php:172
 #: bp-groups/bp-groups-widgets.php:72
@@ -10199,6 +10691,16 @@ msgstr[1] "Viser %1$s - %2$s af %3$s websteder"
 #: bp-themes/bp-default/groups/groups-loop.php:47
 msgid "active %s"
 msgstr "aktiv %s"
+
+#: bp-blogs/bp-blogs-template.php:340
+msgid "Profile picture of site author %s"
+msgstr "Profilbillede af site-forfatter %s"
+
+#: bp-blogs/bp-blogs-template.php:245
+msgid "Viewing %1$s - %2$s of %3$s site"
+msgid_plural "Viewing %1$s - %2$s of %3$s sites"
+msgstr[0] "Viser %1$s - %2$s af %3$s websted"
+msgstr[1] "Viser %1$s - %2$s af %3$s websteder"
 
 #: bp-blogs/classes/class-bp-blogs-template.php:151
 msgctxt "Blog pagination next text"

@@ -9,7 +9,7 @@
  * Plugin Name: Shipper
  * Plugin URI: http://premium.wpmudev.org/project/shipper/
  * Description: WPMU DEV Shipper plugin
- * Version: 1.0.2
+ * Version: 1.0.3
  * Network: true
  * Text Domain: shipper
  * Author: WPMU DEV
@@ -35,7 +35,7 @@
 * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 */
 
-define( 'SHIPPER_VERSION', '1.0.2' );
+define( 'SHIPPER_VERSION', '1.0.3' );
 define( 'SHIPPER_PLUGIN_FILE', __FILE__ );
 
 if ( ! defined( 'SHIPPER_IS_TEST_ENV' ) ) {

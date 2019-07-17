@@ -73,7 +73,7 @@ class LiteSpeed_Cache_ESI
 	 */
 	public function esi_init()
 	{
-		add_action( 'template_include', 'LiteSpeed_Cache_ESI::esi_template', 100 ) ;
+		add_filter( 'template_include', 'LiteSpeed_Cache_ESI::esi_template', 99999 ) ;
 
 		add_action( 'load-widgets.php', 'LiteSpeed_Cache_Purge::purge_widget' ) ;
 		add_action( 'wp_update_comment_count', 'LiteSpeed_Cache_Purge::purge_comment_widget' ) ;
@@ -352,8 +352,8 @@ class LiteSpeed_Cache_ESI
 			$params[ 'is_json' ] = 1 ;
 		}
 
-		$params = apply_filters('litespeed_cache_sub_esi_params-' . $block_id, $params) ;
-		$control = apply_filters('litespeed_cache_sub_esi_control-' . $block_id, $control) ;
+		$params = apply_filters( 'litespeed_esi_params', $params, $block_id ) ;
+		$control = apply_filters('litespeed_esi_control', $control, $block_id ) ;
 		if ( !is_array($params) || !is_string($control) ) {
 			defined( 'LSCWP_LOG' ) && LiteSpeed_Cache_Log::debug( "[ESI] 🛑 Sub hooks returned Params: \n" . var_export($params, true) . "\ncache control: \n" . var_export($control, true) ) ;
 

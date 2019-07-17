@@ -79,11 +79,11 @@ msgstr "Ο τύπος αρχείου που προσπαθήσατε να ανε
 msgid "WordPress Multisite is supported via our All in One WP Migration Multisite Extension. You can get a copy of it here"
 msgstr "Το WordPress Multisite υποστηρίζεται μέσω του All in One WP Migration Multisite Extension. Μπορείτε να πάρετε ένα αντίγραφο του από εδώ"
 
-#: lib/view/main/backups-index-notice.php:31
 #: lib/view/main/storage-index-notice.php:31
-#: lib/view/main/backups-htaccess-notice.php:31
-#: lib/view/main/wordpress-htaccess-notice.php:31
 #: lib/view/main/backups-webconfig-notice.php:31
+#: lib/view/main/backups-index-notice.php:31
+#: lib/view/main/wordpress-htaccess-notice.php:31
+#: lib/view/main/backups-htaccess-notice.php:31
 msgid "All in One WP Migration is not able to create <strong>%s</strong> file. Try to change permissions of the parent folder or send us an email at <a href=\"mailto:support@servmask.com\">support@servmask.com</a> for assistance."
 msgstr "Το All in One WP Migration δεν μπορεί να δημιουργήσει <strong>%s </strong> αρχείο. Προσπαθήστε να αλλάξετε τα δικαιώματα του γονικού φακέλου ή στείλτε μας ένα μήνυμα ηλεκτρονικού ταχυδρομείου στη διεύθυνση <a href=\"mailto:support@servmask.com\">support@servmask.com</a> για βοήθεια."
 
@@ -313,7 +313,7 @@ msgstr "Δεν είναι δυνατή η εύρεση διαδρομής αρχ
 msgid "Unable to locate storage path. <a href=\"https://help.servmask.com/knowledgebase/invalid-storage-path/\" target=\"_blank\">Technical details</a>"
 msgstr "Δεν είναι δυνατή η εύρεση της διαδρομής αποθήκευσης. <a href=\"https://help.servmask.com/knowledgebase/invalid-storage-path/\" target=\"_blank\">Τεχνικές λεπτομέρειες</a>"
 
-#: lib/view/common/leave-feedback.php:62 lib/view/common/report-problem.php:42
+#: lib/view/common/report-problem.php:42 lib/view/common/leave-feedback.php:62
 msgid "I agree that by filling in the contact form with my data, I authorize All-in-One WP Migration to use my <strong>email</strong> to reply to my requests for information. <a href=\"https://www.iubenda.com/privacy-policy/946881\" target=\"_blank\">Privacy policy</a>"
 msgstr "Συμφωνώ ότι συμπληρώνοντας τη φόρμα επικοινωνίας με τα δεδομένα μου, εξουσιοδοτώ το plugin All-in-One WP Migration να χρησιμοποιεί το <strong>email</strong> ως απάντηση στης ερωτήσεις μου. <a href=\"https://www.iubenda.com/privacy-policy/946881\" target=\"_blank\">Πολιτική απορρήτου</a>"
 
@@ -455,7 +455,7 @@ msgstr "Προετοιμασία blogs."
 msgid "Please accept report term conditions."
 msgstr "Παρακαλώ, αποδεχτείτε τους όρους χρήσης."
 
-#: lib/model/class-ai1wm-feedback.php:64 lib/model/class-ai1wm-report.php:60
+#: lib/model/class-ai1wm-report.php:60 lib/model/class-ai1wm-feedback.php:64
 msgid "Something went wrong: %s"
 msgstr "Κάτι πήγε στραβά: %s"
 
@@ -463,11 +463,11 @@ msgstr "Κάτι πήγε στραβά: %s"
 msgid "Please accept feedback term conditions."
 msgstr "Παρακαλώ αποδεχτείτε τους όρους χρήσης σχολίων."
 
-#: lib/model/class-ai1wm-feedback.php:47 lib/model/class-ai1wm-report.php:44
+#: lib/model/class-ai1wm-report.php:44 lib/model/class-ai1wm-feedback.php:47
 msgid "Please enter comments in the text area."
 msgstr "Παρακαλώ, εισάγετε σχόλια στην περιοχή κειμένου."
 
-#: lib/model/class-ai1wm-feedback.php:45 lib/model/class-ai1wm-report.php:42
+#: lib/model/class-ai1wm-report.php:42 lib/model/class-ai1wm-feedback.php:45
 msgid "Your email is not valid."
 msgstr "Το email σας δεν είναι έγκυρο."
 
@@ -507,8 +507,8 @@ msgstr "Για να ενημερώσετε το plugin/extension στην τελ
 msgid "Enter your Purchase ID"
 msgstr "Εισάγετε το ID αγοράς"
 
-#: lib/controller/class-ai1wm-main-controller.php:896
 #: lib/view/updater/check.php:27
+#: lib/controller/class-ai1wm-main-controller.php:896
 msgid "Check for updates"
 msgstr "Ελεγχος για ενημερώσεις"
 
@@ -649,11 +649,11 @@ msgstr "Παρακαλώ, περιγράψτε το πρόβλημα σας εδ
 msgid "Report issue"
 msgstr "Αναφορά σφάλματος"
 
-#: lib/view/common/leave-feedback.php:67 lib/view/common/report-problem.php:47
+#: lib/view/common/report-problem.php:47 lib/view/common/leave-feedback.php:67
 msgid "Cancel"
 msgstr "Άκυρο"
 
-#: lib/view/common/leave-feedback.php:70 lib/view/common/report-problem.php:50
+#: lib/view/common/report-problem.php:50 lib/view/common/leave-feedback.php:70
 msgid "Send"
 msgstr "Αποστολή"
 
@@ -661,7 +661,7 @@ msgstr "Αποστολή"
 msgid "Leave plugin developers any feedback here.."
 msgstr "Επικοινωνία με τους δημιουργούς του plugin εδώ.."
 
-#: lib/view/common/leave-feedback.php:54 lib/view/common/report-problem.php:34
+#: lib/view/common/report-problem.php:34 lib/view/common/leave-feedback.php:54
 msgid "Enter your email address.."
 msgstr "Εισάγετε την διεύθυνση του email σας.."
 
@@ -754,9 +754,9 @@ msgstr "Δημιουργήθηκε ένα κενό αρχείο."
 msgid "Creating an empty archive..."
 msgstr "Δημιουργία ενός κενού αρχείου ..."
 
+#: lib/view/backups/index.php:33
 #: lib/controller/class-ai1wm-main-controller.php:525
 #: lib/controller/class-ai1wm-main-controller.php:526
-#: lib/view/backups/index.php:33
 msgid "Backups"
 msgstr "Αντίγραφα ασφαλείας"
 
@@ -774,10 +774,10 @@ msgstr "Εξαγωγές"
 msgid "Get multisite"
 msgstr "Πάρτε το Multisite"
 
-#: lib/controller/class-ai1wm-import-controller.php:94
-#: lib/controller/class-ai1wm-import-controller.php:95
 #: lib/controller/class-ai1wm-main-controller.php:722
 #: lib/controller/class-ai1wm-main-controller.php:839
+#: lib/controller/class-ai1wm-import-controller.php:94
+#: lib/controller/class-ai1wm-import-controller.php:95
 msgid "Unable to import"
 msgstr "Δεν είναι δυνατή η εισαγωγή"
 

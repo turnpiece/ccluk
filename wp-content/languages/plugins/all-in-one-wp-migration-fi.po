@@ -35,6 +35,10 @@ msgstr "Tämä voi estää palautusprosessia. Tekniset tiedot:  https://help.ser
 msgid "Your backup is from a PHP 5 but the site that you are importing to is PHP 7."
 msgstr "Kopioisi on PHP:n versiosta 5, mutta käytät tällä hetkellä PHP:n versiota 7."
 
+#: lib/model/export/class-ai1wm-export-download.php:59
+msgid "<a href=\"%s\" class=\"ai1wm-button-green ai1wm-emphasize\" title=\"%s\"><span>Download %s</span><em>Size: %s</em></a>"
+msgstr "<a href=\"%s\" class=\"ai1wm-button-green ai1wm-emphasize\" title=\"%s\"><span>Lataa %s</span><em>Koko: %s</em></a>"
+
 #: lib/model/import/class-ai1wm-import-validate.php:106
 msgid "Please make sure that your file was exported using <strong>All-in-One WP Migration</strong> plugin. <a href=\"https://help.servmask.com/knowledgebase/invalid-backup-file/\" target=\"_blank\">Technical details</a>"
 msgstr "Varmista, että tiedosto on viety käyttäen <strong>All-in-One WP Migration</strong> plugin. <a href=\"https://help.servmask.com/knowledgebase/invalid-backup-file/\" target=\"_blank\">Technical details</a>"
@@ -55,7 +59,7 @@ msgstr "<i class=\"ai1wm-import-info\">Varmuuskopio on PHP 5 versiosta, mutta yr
 msgid "The import process will overwrite your website including the database, media, plugins, and themes. Please ensure that you have a backup of your data before proceeding to the next step."
 msgstr "Tuonti yliajaa nykyisen sivuston tietokannan, mediat, lisäosat ja teemat. Varmista, että sinulla on varmuuskopio ennen kuin jatkat seuraavaan vaiheeseen."
 
-#: lib/model/import/class-ai1wm-import-done.php:214
+#: lib/model/import/class-ai1wm-import-done.php:211
 msgid "You need to perform two more steps:<br /><strong>1. You must save your permalinks structure twice. <a class=\"ai1wm-no-underline\" href=\"%s\" target=\"_blank\">Permalinks Settings</a></strong> <small>(opens a new window)</small><br /><strong>2. <a class=\"ai1wm-no-underline\" href=\"https://wordpress.org/support/view/plugin-reviews/all-in-one-wp-migration?rate=5#postform\" target=\"_blank\">Optionally, review the plugin</a>.</strong> <small>(opens a new window)</small>"
 msgstr "Sinun tulee edetä vielä kaksi vaihetta:<br /><strong>1. Sinun tulee tallentaa staattiset linkit kaksi kertaa <a class=\"ai1wm-no-underline\" href=\"%s\" target=\"_blank\">Staattisetlinkit</a></strong> <small>(aukeaa uuteen ikkunaan)</small><br /><strong>2. <a class=\"ai1wm-no-underline\" href=\"https://wordpress.org/support/view/plugin-reviews/all-in-one-wp-migration?rate=5#postform\" target=\"_blank\">Vaihtoehtoisesti voit arvostella lisäosan</a>.</strong> <small>(aukeaa uuteen ikkunaan)</small>"
 
@@ -269,7 +273,7 @@ msgstr "Vientiä ei pystytty aloittamaan. Päivitä sivu ja yritä uudelleen."
 msgid "You are about to stop exporting your website, are you sure?"
 msgstr "Olet pysäyttämässä verkkosivusi vientiä, oletko varma?"
 
-#: functions.php:1352
+#: functions.php:1415
 msgid "Unable to authenticate the secret key. <a href=\"https://help.servmask.com/knowledgebase/invalid-secret-key/\" target=\"_blank\">Technical details</a>"
 msgstr "Salausavainta ei pystytty varmentamaan. <a href=\"https://help.servmask.com/knowledgebase/invalid-secret-key/\" target=\"_blank\">Tekninen info</a>"
 
@@ -383,7 +387,7 @@ msgstr "Viikoittain"
 msgid "Do <strong>not</strong> export must-use plugins (files)"
 msgstr "<strong>Älä</strong> vie pakollisia lisäosia (tiedostoja)"
 
-#: lib/model/import/class-ai1wm-import-mu-plugins.php:51
+#: lib/model/import/class-ai1wm-import-mu-plugins.php:50
 msgid "Done activating mu-plugins."
 msgstr "Pakollisten lisäosien aktivointi valmis."
 
@@ -710,7 +714,7 @@ msgstr "Päiväys"
 msgid "Name"
 msgstr "Nimi"
 
-#: lib/model/import/class-ai1wm-import-done.php:209
+#: lib/model/import/class-ai1wm-import-done.php:206
 msgid "Your data has been imported successfully!"
 msgstr "Tiedot on ladattu onnistuneesti!"
 

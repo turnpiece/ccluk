@@ -46,9 +46,7 @@ class Mask_Login extends Controller {
 				remove_action( 'template_redirect', 'wp_redirect_admin_locations' );
 				//if prosite is activate and useremail is not defined, we need to update the
 				//email to match the new login URL
-				if ( is_plugin_active_for_network( 'pro-sites/pro-sites.php' ) ) {
-					$this->add_filter( 'update_welcome_email', 'updateWelcomeEmailPrositeCase', 10, 6 );
-				}
+				$this->add_filter( 'update_welcome_email', 'updateWelcomeEmailPrositeCase', 9999, 6 );
 			} else {
 				if ( $isJetpackSSO ) {
 					wp_defender()->global['compatibility'][] = __( "We’ve detected a conflict with Jetpack’s Wordpress.com Log In feature. Please disable it and return to this page to continue setup.", wp_defender()->domain );
@@ -88,8 +86,8 @@ class Mask_Login extends Controller {
 	 * @return mixed
 	 */
 	public function updateWelcomeEmailPrositeCase( $welcome_email, $blog_id, $user_id, $password, $title, $meta ) {
-		$url           = get_blogaddress_by_id( $blog_id );
-		$welcome_email = str_replace( $url . 'wp-login.php', Mask_Api::getNewLoginUrl( rtrim( '/', $url ) ), $welcome_email );
+		$url = get_blogaddress_by_id( $blog_id );
+		$welcome_email = str_replace( $url . 'wp-login.php', Mask_Api::getNewLoginUrl( rtrim( $url, '/' ) ), $welcome_email );
 
 		return $welcome_email;
 	}
@@ -134,7 +132,7 @@ class Mask_Login extends Controller {
 	 * @return string
 	 */
 	private function alterLoginUrl( $currentUrl, $scheme = null ) {
-		if ( strpos( $currentUrl, 'wp-login.php' ) !== false ) {
+		if ( stristr( $currentUrl, 'wp-login.php' ) !== false ) {
 			//this is URL go to old wp-login.php
 			$parts = parse_url( $currentUrl );
 			if ( isset( $parts['query'] ) ) {
@@ -217,7 +215,7 @@ class Mask_Login extends Controller {
 	}
 
 	private function _showLoginPage() {
-		global $error, $interim_login, $action, $user_login;
+		global $error, $interim_login, $action, $user_login, $user, $redirect_to;
 		require_once ABSPATH . 'wp-login.php';
 		die;
 	}

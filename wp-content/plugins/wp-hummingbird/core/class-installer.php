@@ -27,8 +27,10 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 				define( 'WPHB_ACTIVATING', true );
 			}
 
-			/* @noinspection PhpIncludeInspection */
-			include_once WPHB_DIR_PATH . 'core/class-utils.php';
+			if ( ! class_exists( 'WP_Hummingbird_Utils' ) ) {
+				/* @noinspection PhpIncludeInspection */
+				include_once WPHB_DIR_PATH . 'core/class-utils.php';
+			}
 			/* @noinspection PhpIncludeInspection */
 			include_once WPHB_DIR_PATH . 'core/class-settings.php';
 			/* @noinspection PhpIncludeInspection */
@@ -48,8 +50,10 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 		 * Plugin activation in a blog (if the site is a multisite)
 		 */
 		public static function activate_blog() {
-			/* @noinspection PhpIncludeInspection */
-			include_once WPHB_DIR_PATH . 'core/class-utils.php';
+			if ( ! class_exists( 'WP_Hummingbird_Utils' ) ) {
+				/* @noinspection PhpIncludeInspection */
+				include_once WPHB_DIR_PATH . 'core/class-utils.php';
+			}
 
 			update_option( 'wphb_version', WPHB_VERSION );
 
@@ -60,6 +64,16 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 		 * Plugin deactivation
 		 */
 		public static function deactivate() {
+			// Avoid to execute this over an over in same thread execution.
+			if ( defined( 'WPHB_SWITCHING_VERSION' ) ) {
+				return;
+			}
+
+			if ( ! class_exists( 'WP_Hummingbird_Settings' ) ) {
+				/* @noinspection PhpIncludeInspection */
+				include_once WPHB_DIR_PATH . 'core/class-settings.php';
+			}
+
 			$settings = WP_Hummingbird_Settings::get_settings( 'settings' );
 			WP_Hummingbird::flush_cache( $settings['remove_data'], $settings['remove_settings'] );
 			do_action( 'wphb_deactivate' );
@@ -69,8 +83,8 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 		 * Plugin upgrades
 		 */
 		public static function maybe_upgrade() {
+			// Avoid to execute this over an over in same thread execution.
 			if ( defined( 'WPHB_ACTIVATING' ) ) {
-				// Avoid to execute this over an over in same thread execution.
 				return;
 			}
 

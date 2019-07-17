@@ -1,5 +1,5 @@
-# Translation of WordPress - 5.1.x - Development - Administration - Network Admin in Swedish
-# This file is distributed under the same license as the WordPress - 5.1.x - Development - Administration - Network Admin package.
+# Translation of WordPress - 5.2.x - Development - Administration - Network Admin in Swedish
+# This file is distributed under the same license as the WordPress - 5.2.x - Development - Administration - Network Admin package.
 msgid ""
 msgstr ""
 "PO-Revision-Date: 2019-01-26 15:46:32+0000\n"
@@ -9,7 +9,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: sv_SE\n"
-"Project-Id-Version: WordPress - 5.1.x - Development - Administration - Network Admin\n"
+"Project-Id-Version: WordPress - 5.2.x - Development - Administration - Network Admin\n"
 
 #. translators: %s: DO_NOT_UPGRADE_GLOBAL_TABLES
 #: wp-admin/includes/network.php:113
@@ -36,10 +36,6 @@ msgstr "En ändring av e-postadressen för nätverksadministratören till %s inv
 #: wp-admin/includes/network.php:326
 msgid "Sub-domain Installation"
 msgstr "Installation med sub-domäner"
-
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:666
-msgid "Active Theme"
-msgstr "Aktivt tema"
 
 #: wp-admin/includes/class-wp-ms-themes-list-table.php:671
 msgid "Active Child Theme"
@@ -237,7 +233,7 @@ msgctxt "verb; site"
 msgid "Archive"
 msgstr "Arkiv"
 
-#: wp-admin/includes/class-wp-ms-users-list-table.php:173
+#: wp-admin/includes/class-wp-ms-users-list-table.php:171
 msgctxt "user"
 msgid "Registered"
 msgstr "Registrerad"
@@ -282,7 +278,7 @@ msgid_plural "Enabled <span class=\"count\">(%s)</span>"
 msgstr[0] "Aktiverat <span class=\"count\">(%s)</span>"
 msgstr[1] "Aktiverade <span class=\"count\">(%s)</span>"
 
-#: wp-admin/includes/class-wp-ms-users-list-table.php:144
+#: wp-admin/includes/class-wp-ms-users-list-table.php:142
 msgid "Super Admin <span class=\"count\">(%s)</span>"
 msgid_plural "Super Admins <span class=\"count\">(%s)</span>"
 msgstr[0] "Superadmin <span class=\"count\">(%s)</span>"
@@ -315,12 +311,12 @@ msgstr[1] "Inaktiva <span class=\"count\">(%s)</span>"
 msgid "Theme"
 msgstr "Tema"
 
-#: wp-admin/includes/class-wp-ms-users-list-table.php:118
+#: wp-admin/includes/class-wp-ms-users-list-table.php:116
 msgctxt "user"
 msgid "Not Spam"
 msgstr "Ta bort markering som skräppostare"
 
-#: wp-admin/includes/class-wp-ms-users-list-table.php:117
+#: wp-admin/includes/class-wp-ms-users-list-table.php:115
 msgctxt "user"
 msgid "Mark as Spam"
 msgstr "Markera som skräppostare"
@@ -492,7 +488,7 @@ msgid "<a href=\"https://codex.wordpress.org/Network_Admin_Settings_Screen\">Doc
 msgstr "<a href=\"https://codex.wordpress.org/Network_Admin_Settings_Screen\">Dokumentation för nätverksinställningar</a>"
 
 #. translators: 1: site url, 2: server error message
-#: wp-admin/network/upgrade.php:96
+#: wp-admin/network/upgrade.php:97
 msgid "Warning! Problem updating %1$s. Your server may not be able to connect to sites running on it. Error message: %2$s"
 msgstr "Varning! Ett problem uppstod vid uppdatering av %1$s. Din server kanske inte kan anslut mot webbplatser på den. Felmeddelande: %2$s"
 
@@ -620,7 +616,7 @@ msgid "Quick Tasks"
 msgstr "Snabbuppgifter"
 
 #: wp-admin/network/upgrade.php:15 wp-admin/network/upgrade.php:42
-#: wp-admin/network/upgrade.php:141 wp-admin/network/menu.php:34
+#: wp-admin/network/upgrade.php:142 wp-admin/network/menu.php:34
 msgid "Upgrade Network"
 msgstr "Uppdatera nätverk"
 
@@ -628,7 +624,7 @@ msgstr "Uppdatera nätverk"
 msgid "Only use this screen once you have updated to a new version of WordPress through Updates/Available Updates (via the Network Administration navigation menu or the Toolbar). Clicking the Upgrade Network button will step through each site in the network, five at a time, and make sure any database updates are applied."
 msgstr "Använd endast denna sida när du uppdaterat till en ny version av WordPress via Uppdateringar/Tillgängliga uppdateringar (via nätverksadministrationens meny eller verktygsfält). Att klicka på knappen Uppdatera nätverk kommer att gå igenom vardera webbplats i nätverket, fem i taget, och kontrollera så att all databasuppdateringar genomförs."
 
-#: wp-admin/network/upgrade.php:137
+#: wp-admin/network/upgrade.php:138
 msgid "WordPress has been updated! Before we send you on your way, we need to individually upgrade the sites in your network."
 msgstr "WordPress har uppdaterats! Innan vi låter dig fortsätta så behöver vi uppdatera webbplatserna i nätverket individuellt."
 
@@ -854,6 +850,10 @@ msgstr "Den här sidan tillåter dig att konfigurera ett nätverk att använda s
 #: wp-admin/includes/network.php:240
 msgid "Sub-directories"
 msgstr "Undermappar"
+
+#: wp-admin/includes/network.php:189
+msgid "Note:"
+msgstr "Notera:"
 
 #: wp-admin/network.php:29
 msgid "The Network creation panel is not for WordPress MU networks."
@@ -1090,7 +1090,7 @@ msgstr "Om du vill begränsa webbplatsregistreringar till vissa domäner. Ange e
 msgid "If you want to ban domains from site registrations. One domain per line."
 msgstr "Om du vill bannlysa vissa e-postdomän från registrering. Ange ett domän per rad."
 
-#: wp-admin/network/upgrade.php:121
+#: wp-admin/network/upgrade.php:122
 msgid "If your browser doesn&#8217;t start loading the next page automatically, click this link:"
 msgstr "Om du inte skickas vidare automatiskt, klicka på följande knapp:"
 
@@ -1182,7 +1182,7 @@ msgstr "Första kommentarsförfattaren för en ny webbplats."
 msgid "The URL for the first comment on a new site."
 msgstr "URL för den första kommentaren för en ny webbplats."
 
-#: wp-admin/network/upgrade.php:72
+#: wp-admin/network/upgrade.php:73
 msgid "All done!"
 msgstr "Allt klart!"
 
@@ -1251,7 +1251,7 @@ msgstr "Välkomstmeddelande som skickas via e-post till nya webbplatsägare."
 msgid "Site upload space"
 msgstr "Utrymmeskvot för uppladdning på webbplats"
 
-#: wp-admin/network/upgrade.php:121
+#: wp-admin/network/upgrade.php:122
 msgid "Next Sites"
 msgstr "Nästkommande webbplatser"
 

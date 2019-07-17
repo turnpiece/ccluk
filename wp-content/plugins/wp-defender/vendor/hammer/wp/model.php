@@ -141,7 +141,6 @@ abstract class Model extends \Hammer\Base\Model {
 		if ( ! empty( $limit ) ) {
 			$sql .= ' LIMIT ' . $limit;
 		}
-
 		$ids = self::getWPDB()->get_col( $sql );
 
 		foreach ( $ids as $id ) {
@@ -219,6 +218,7 @@ abstract class Model extends \Hammer\Base\Model {
 		$fields = static::buildFields();
 		$join   = static::buildJoins();
 		$where  = static::buildWhere( $attributes );
+
 		$sql    = "SELECT " . implode( ',', $fields ) . " FROM " . static::getWPDB()->posts . ' AS t0';
 		$sql    = $sql . ' ' . implode( ' ', $join ) . ' ' . implode( ' AND ', $where );
 		$sql    = $sql . ' GROUP BY ID';
@@ -371,7 +371,6 @@ abstract class Model extends \Hammer\Base\Model {
 				$sql = $wpdb->prepare( $sql, $value['value'] );
 			} elseif ( ! empty( $value ) ) {
 				$sql = 't' . $pos . "." . $field . " IN (" . implode( ', ', array_fill( 0, count( $value ), '%s' ) ) . ")";
-
 				$sql = call_user_func_array( array( $wpdb, 'prepare' ), array_merge( array( $sql ), $value ) );
 			} else {
 				//this case the in array is empty,

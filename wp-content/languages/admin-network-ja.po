@@ -1,5 +1,5 @@
-# Translation of WordPress - 5.1.x - Development - Administration - Network Admin in Japanese
-# This file is distributed under the same license as the WordPress - 5.1.x - Development - Administration - Network Admin package.
+# Translation of WordPress - 5.2.x - Development - Administration - Network Admin in Japanese
+# This file is distributed under the same license as the WordPress - 5.2.x - Development - Administration - Network Admin package.
 msgid ""
 msgstr ""
 "PO-Revision-Date: 2019-02-06 13:40:29+0000\n"
@@ -9,7 +9,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: ja_JP\n"
-"Project-Id-Version: WordPress - 5.1.x - Development - Administration - Network Admin\n"
+"Project-Id-Version: WordPress - 5.2.x - Development - Administration - Network Admin\n"
 
 #. translators: %s: DO_NOT_UPGRADE_GLOBAL_TABLES
 #: wp-admin/includes/network.php:113
@@ -44,10 +44,6 @@ msgstr "サブディレクトリへのインストール"
 #: wp-admin/includes/class-wp-ms-themes-list-table.php:671
 msgid "Active Child Theme"
 msgstr "有効な子テーマ"
-
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:666
-msgid "Active Theme"
-msgstr "有効なテーマ"
 
 #: wp-admin/network/site-info.php:192
 msgid "Attributes"
@@ -193,22 +189,22 @@ msgstr "Apache %s モジュールがインストールされているか確認�
 msgid "You cannot use port numbers such as %s."
 msgstr "%s のようなポート番号は使用できません。"
 
-#: wp-admin/includes/class-wp-ms-users-list-table.php:173
+#: wp-admin/includes/class-wp-ms-users-list-table.php:171
 msgctxt "user"
 msgid "Registered"
 msgstr "作成日時"
 
-#: wp-admin/includes/class-wp-ms-users-list-table.php:144
+#: wp-admin/includes/class-wp-ms-users-list-table.php:142
 msgid "Super Admin <span class=\"count\">(%s)</span>"
 msgid_plural "Super Admins <span class=\"count\">(%s)</span>"
 msgstr[0] "特権管理者 <span class=\"count\">(%s)</span>"
 
-#: wp-admin/includes/class-wp-ms-users-list-table.php:118
+#: wp-admin/includes/class-wp-ms-users-list-table.php:116
 msgctxt "user"
 msgid "Not Spam"
 msgstr "スパムを解除"
 
-#: wp-admin/includes/class-wp-ms-users-list-table.php:117
+#: wp-admin/includes/class-wp-ms-users-list-table.php:115
 msgctxt "user"
 msgid "Mark as Spam"
 msgstr "スパムとしてマーク"
@@ -487,7 +483,7 @@ msgid "<a href=\"https://codex.wordpress.org/Network_Admin_Settings_Screen\">Doc
 msgstr "<a href=\"https://wpdocs.osdn.jp/Network_Admin_Settings_Screen\">サイトネットワーク設定の解説</a>"
 
 #. translators: 1: site url, 2: server error message
-#: wp-admin/network/upgrade.php:96
+#: wp-admin/network/upgrade.php:97
 msgid "Warning! Problem updating %1$s. Your server may not be able to connect to sites running on it. Error message: %2$s"
 msgstr "注意してください！%1$s の更新中に問題が発生しました。サーバーは稼働しているサイトに接続できないようです。エラーメッセージ: %2$s"
 
@@ -611,7 +607,7 @@ msgstr "ここでは以下のようなことができます。"
 msgid "Welcome to your Network Admin. This area of the Administration Screens is used for managing all aspects of your Multisite Network."
 msgstr "サイトネットワーク管理画面へようこそ。この画面は、マルチサイトネットワーク向け各種設定の管理に使います。"
 
-#: wp-admin/network/upgrade.php:137
+#: wp-admin/network/upgrade.php:138
 msgid "WordPress has been updated! Before we send you on your way, we need to individually upgrade the sites in your network."
 msgstr "WordPress を更新しました。使い始める前にサイトネットワーク内の各サイトをアップグレードする必要があります。"
 
@@ -620,7 +616,7 @@ msgid "Only use this screen once you have updated to a new version of WordPress 
 msgstr "この画面は、サイトネットワーク管理メニューまたはツールバーから「更新 / 利用可能な更新」を使って新バージョンの WordPress へアップグレードした際にのみご利用ください。「サイトネットワークをアップグレード」をクリックすると、ネットワーク内の各サイトを5つずつチェックしてデータベースの更新を適用します。"
 
 #: wp-admin/network/upgrade.php:15 wp-admin/network/upgrade.php:42
-#: wp-admin/network/upgrade.php:141 wp-admin/network/menu.php:34
+#: wp-admin/network/upgrade.php:142 wp-admin/network/menu.php:34
 msgid "Upgrade Network"
 msgstr "サイトネットワークをアップグレード"
 
@@ -914,6 +910,10 @@ msgstr "バーチャルホスト (サブドメイン) 機能を使う場合は�
 msgid "You cannot install a network of sites with your server address."
 msgstr "このサーバーアドレスにはサイトネットワークをインストールできません。"
 
+#: wp-admin/includes/network.php:189
+msgid "Note:"
+msgstr "注意:"
+
 #: wp-admin/includes/network.php:177
 msgid "Fill in the information below and you&#8217;ll be on your way to creating a network of WordPress sites. We will create configuration files in the next step."
 msgstr "以下の情報を記入すれば WordPress サイトネットワークの作成を開始できます。次のステップで設定ファイルを作成します。"
@@ -1070,7 +1070,7 @@ msgstr "新規サイト設定は、新しいサイトがサイトネットワー
 msgid "The following words are reserved for use by WordPress functions and cannot be used as blog names: %s"
 msgstr "以下の語句は WordPress の機能によって予約されており、ブログ名として使うことはできません: %s"
 
-#: wp-admin/network/upgrade.php:121
+#: wp-admin/network/upgrade.php:122
 msgid "If your browser doesn&#8217;t start loading the next page automatically, click this link:"
 msgstr "次のページに自動で移動しない場合は、このリンクをクリックしてください。"
 
@@ -1174,7 +1174,7 @@ msgstr "新規サイトの最初の投稿。"
 msgid "The author of the first comment on a new site."
 msgstr "新規サイトの最初のコメント投稿者名。"
 
-#: wp-admin/network/upgrade.php:72
+#: wp-admin/network/upgrade.php:73
 msgid "All done!"
 msgstr "すべて完了しました。"
 
@@ -1222,7 +1222,7 @@ msgstr "メールアドレスがありません。"
 msgid "Missing or invalid site address."
 msgstr "サイトのアドレスがないか、または間違っています。"
 
-#: wp-admin/network/upgrade.php:121
+#: wp-admin/network/upgrade.php:122
 msgid "Next Sites"
 msgstr "次のサイトへ"
 

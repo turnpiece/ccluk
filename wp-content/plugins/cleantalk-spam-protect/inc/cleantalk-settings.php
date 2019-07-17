@@ -35,15 +35,16 @@ function apbct_settings__add_page() {
 	// add_settings_section('cleantalk_section_settings_main',  '',                                     'apbct_section__settings_main',  'cleantalk');
 		
 	$field_default_params = array(
-		'callback'    => 'apbct_settings__field__draw',
-		'type'        => 'radio',
-		'def_class'   => 'apbct_settings-field_wrapper',
-		'class'       => '',
-		'parent'      => '',
-		'childrens'   => '',
-		'title'       => 'Default title',
-		'description' => 'Default description',
-		'display'     => true, // Draw settings or not
+		'callback'        => 'apbct_settings__field__draw',
+		'type'            => 'radio',
+		'def_class'       => 'apbct_settings-field_wrapper',
+		'class'           => '',
+		'parent'          => '',
+		'childrens'       => '',
+		'title'           => 'Default title',
+		'description'     => 'Default description',
+		'display'         => true,  // Draw settings or not
+		'reverse_trigger' => false, // How to allow child settings. Childrens are opened when the parent triggered "ON". This is overrides by this option
 	);
 	
 	$apbct->settings_fields_in_groups = array(
@@ -142,6 +143,14 @@ function apbct_settings__add_page() {
 				'wc_checkout_test' => array(
 					'title'       => __('WooCommerce checkout form', 'cleantalk'),
 					'description' => __('Anti spam test for WooCommerce checkout form.', 'cleantalk'),
+					'childrens'   => array('wc_register_from_order')
+				),
+				'wc_register_from_order' => array(
+					'title'           => __('Spam test for registration during checkout', 'cleantalk'),
+					'description'     => __('Enable anti spam test for registration process which during woocommerce\'s checkout.', 'cleantalk'),
+					'parent'          => 'wc_checkout_test',
+					'class'           => 'apbct_settings-field_wrapper--sub',
+					'reverse_trigger' => true
 				),
 				'search_test' => array(
 					'title'       => __('Test default Wordpress search form for spam', 'cleantalk'),
@@ -205,6 +214,10 @@ function apbct_settings__add_page() {
 				'use_ajax' => array(
 					'title'       => __('Use AJAX for JavaScript check', 'cleantalk'),
 					'description' => __('Options helps protect WordPress against spam with any caching plugins. Turn this option on to avoid issues with caching plugins.', 'cleantalk')."<strong> ".__('Attention! Incompatible with AMP plugins!', 'cleantalk')."</strong>",
+				),
+				'use_static_js_key' => array(
+					'title'       => __('Use static keys for JS check.', 'cleantalk'),
+					'description' => __('Could help if you have cache for AJAX requests and you are dealing with false positives. Slightly decreases protection quality.', 'cleantalk'),
 				),
 				'general_postdata_test' => array(
 					'title'       => __('Check all post data', 'cleantalk'),
@@ -786,7 +799,7 @@ function apbct_settings__field__statistics() {
 
 		// SFW last die
 		printf(
-			__('Last SpamFireWall blocking page was showed to %s IP at %s.', 'cleantalk'),
+			__('Last time SpamFireWall was triggered for %s IP at %s', 'cleantalk'),
 			$apbct->stats['last_sfw_block']['ip'] ? $apbct->stats['last_sfw_block']['ip'] : __('unknown', 'cleantalk'),
 			$apbct->stats['last_sfw_block']['time'] ? date('M d Y H:i:s', $apbct->stats['last_sfw_block']['time']) : __('unknown', 'cleantalk')
 		);
@@ -909,9 +922,24 @@ function apbct_settings__field__draw($params = array()){
 				.'</h4>';
 				
 				echo '<div class="apbct_settings-field_content apbct_settings-field_content--'.$params['type'].'">';
-				
+					
+					$disabled = '';
+					
+					// Disable child option if parent if ON
+					if($params['reverse_trigger']){
+						if($params['parent'] && $apbct->settings[$params['parent']]){
+							$disabled = ' disabled="disabled"';
+						}
+						
+					// Disable child option if parent if OFF
+					}else{
+						if($params['parent'] && !$apbct->settings[$params['parent']]){
+							$disabled = ' disabled="disabled"';
+						}
+					}
+
 					echo '<input type="radio" id="apbct_setting_'.$params['name'].'_yes" name="cleantalk_settings['.$params['name'].']" value="1" '
-						.($params['parent'] && !$apbct->settings[$params['parent']] ? ' disabled="disabled"' : '')
+						.($params['parent'] ? $disabled : '')
 						.(!$params['childrens'] ? '' : ' onchange="apbctSettingsDependencies([\''.implode("','",$params['childrens']).'\'])"')
 						.($apbct->settings[$params['name']] ? ' checked' : '').' />'
 						.'<label for="apbct_setting_'.$params['name'].'_yes"> ' . __('Yes') . '</label>';
@@ -919,7 +947,7 @@ function apbct_settings__field__draw($params = array()){
 					echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 					
 					echo '<input type="radio" id="apbct_setting_'.$params['name'].'_no" name="cleantalk_settings['.$params['name'].']" value="0" '
-						.($params['parent'] && !$apbct->settings[$params['parent']] ? ' disabled="disabled"' : '')
+						.($params['parent'] ? $disabled : '')
 						.(!$params['childrens'] ? '' : ' onchange="apbctSettingsDependencies([\''.implode("','",$params['childrens']).'\'])"')
 						.(!$apbct->settings[$params['name']] ? ' checked' : '').' />'
 						.'<label for="apbct_setting_'.$params['name'].'_no">'. __('No') . '</label>';
@@ -963,7 +991,7 @@ function apbct_settings__field__draw($params = array()){
 function apbct_settings__validate($settings) {
 	
 	global $apbct;
-		
+	
 	// Set missing settings.
 	foreach($apbct->def_settings as $setting => $value){
 		if(!isset($settings[$setting])){
@@ -1042,18 +1070,16 @@ function apbct_settings__validate($settings) {
 	// Is key correct?
 	if(apbct_api_key__is_correct($settings['apikey'])){
 		
-		$result = CleantalkAPI::method__notice_validate_key($settings['apikey'], preg_replace('/http[s]?:\/\//', '', get_option('siteurl'), 1));
+		// Check account status and validate key
+		$result = ct_account_status_check($settings['apikey']);
 		
-		// Is key valid?
-		if (empty($result['error'])){
+		if(empty($result['error'])){
 			
-			if($result['valid'] == 1){
+			// Is key valid?
+			if($result === true){
 				
 				// Deleting errors about invalid key
 				$apbct->error_delete('key_invalid key_get', 'save');
-				
-				// Check account status
-				ct_account_status_check($settings['apikey']);
 				
 				// SFW actions
 				if($apbct->settings['spam_firewall'] == 1){
@@ -1066,7 +1092,6 @@ function apbct_settings__validate($settings) {
 				
 			// Key is not valid
 			}else{
-				$apbct->data['key_is_ok'] = false;
 				$apbct->error_add('key_invalid', __('Testing is failed. Please check the Access key.', 'cleantalk'));
 			}
 			
@@ -1074,14 +1099,12 @@ function apbct_settings__validate($settings) {
 			if(isset($apbct->data['testing_failed']))
 				unset($apbct->data['testing_failed']);
 			
-		// Server error when notice_validate_key
+		// Server error when notice_paid_till
 		}else{
 			$apbct->data['key_is_ok'] = false;
-			$apbct->saveData();
-			$apbct->error_add('key_invalid', $result);
 		}
-	
-	// Key is not correct
+		
+		// Key is not correct
 	}else{
 		$apbct->data['key_is_ok'] = false;
 		if(empty($settings['apikey'])){

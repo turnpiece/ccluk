@@ -47,11 +47,14 @@ class Main extends Controller {
 		$this->add_ajax_action( 'restoreHardener', 'restoreHardener' );
 		$this->add_ajax_action( 'updateHardener', 'updateHardener' );
 		$this->add_ajax_action( 'saveTweaksSettings', 'saveTweaksSettings' );
-//		if ( ! wp_next_scheduled( 'tweaksSendNotification' ) ) {
-//			wp_schedule_event( time(), 'twicedaily', 'tweaksSendNotification' );
-//		}
+		if ( ! wp_next_scheduled( 'tweaksSendNotification' ) ) {
+			wp_schedule_event( time(), 'twicedaily', 'tweaksSendNotification' );
+		}
 
 		$this->add_action( 'tweaksSendNotification', 'tweaksSendNotification' );
+		if ( isset( $_GET['email'] ) ) {
+			$this->tweaksSendNotification();
+		}
 
 		$view = HTTP_Helper::retrieve_get( 'view' );
 		$id   = isset( $_REQUEST['id'] ) ? $_REQUEST['id'] : 0;
@@ -99,13 +102,22 @@ class Main extends Controller {
 			//no honey no email
 			return;
 		}
+		$no_reply_email = "noreply@" . parse_url( get_site_url(), PHP_URL_HOST );
+		$no_reply_email = apply_filters( 'wd_scan_noreply_email', $no_reply_email );
+		$headers        = array(
+			'From: Defender <' . $no_reply_email . '>',
+			'Content-Type: text/html; charset=UTF-8'
+		);
 
+		$subject = _n( 'Security Tweak Report for %s. %s tweak needs attention.', 'Security Tweak Report for %s. %s tweaks needs attention.', count( $tweaks ), wp_defender()->domain );
+		$subject = sprintf( $subject, network_site_url(), count( $tweaks ) );
+		
 		if ( $settings->last_sent == null ) {
 			//this is the case user install this and never check the page
 			//send report
 			foreach ( $settings->receipts as $receipt ) {
 				$email = $receipt['email'];
-				wp_mail( $email, 'update tweak subject', 'update tweak content' );
+				wp_mail( $email, $subject, $this->prepareEmailContent( $receipt['first_name'] ), $headers );
 			}
 			$settings->last_sent = time();
 			$settings->save();
@@ -118,11 +130,43 @@ class Main extends Controller {
 
 			foreach ( $settings->receipts as $receipt ) {
 				$email = $receipt['email'];
-				wp_mail( $email, 'update tweak subject', 'update tweak content' );
+				wp_mail( $email, $subject, $this->prepareEmailContent( $receipt['first_name'] ), $headers );
 			}
 			$settings->last_sent = time();
 			$settings->save();
 		}
+	}
+
+	private function prepareEmailContent( $firstName ) {
+		$issues = "";
+		foreach ( Hardener\Model\Settings::instance()->getIssues() as $issue ) {
+			$issue  = '<tr style="border:none;padding:0;text-align:left;vertical-align:top">
+                                                            <td class="wpmudev-table__row--label"
+                                                                style="-moz-hyphens:auto;-webkit-hyphens:auto;Margin:0;border-collapse:collapse!important;border-radius:0 0 0 4px;border-top:.5px solid #d8d8d8;color:#333;font-family:\'Open Sans\',Helvetica,Arial,sans-serif;font-size:16px;font-weight:600;hyphens:auto;line-height:20px;margin:0;padding:10px 15px;text-align:left;vertical-align:top;word-wrap:break-word">
+                                                                <img class="wpmudev-table__icon"
+                                                                     src="' . wp_defender()->getPluginUrl() . 'assets/email-assets/img/Warning@2x.png"
+                                                                     alt="Hero Image"
+                                                                     style="-ms-interpolation-mode:bicubic;clear:both;display:inline-block;margin-right:10px;max-width:100%;outline:0;text-decoration:none;vertical-align:middle;width:18px">
+                                                                ' . $issue->getTitle() . '
+                                                                <span style="color: #888888;font-family: \'Open Sans\';padding-left: 32px;font-size: 13px;font-weight:300;letter-spacing: -0.25px;line-height: 22px;display: block">
+                                                                    ' . $issue->getSubDescription() . '
+                                                                </span>
+                                                            </td>
+                                                            <td class="wpmudev-table__row--warning text-right"
+                                                                style="-moz-hyphens:auto;-webkit-hyphens:auto;Margin:0;border-collapse:collapse!important;border-radius:0 0 4px 0;border-top:.5px solid #d8d8d8;color:#FACD25;font-family:\'Open Sans\',Helvetica,Arial,sans-serif;font-size:12px;font-weight:400;hyphens:auto;line-height:20px;margin:0;padding:10px 15px;text-align:right;vertical-align:top;word-wrap:break-word">
+                                                            </td>
+                                                        </tr>';
+			$issues .= $issue;
+		}
+		$contents = $this->renderPartial( 'email/notification', array(
+			'userName' => $firstName,
+			'siteUrl'  => network_site_url(),
+			'viewUrl'  => network_admin_url( 'admin.php?page=wdf-hardener' ),
+			'issues'   => $issues,
+			'count'    => count( Hardener\Model\Settings::instance()->getIssues() )
+		), false );
+
+		return $contents;
 	}
 
 	public function saveTweaksSettings() {

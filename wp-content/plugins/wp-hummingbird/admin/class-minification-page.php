@@ -19,7 +19,6 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 	public function on_load() {
 		$this->setup_navigation();
 
-		/* @var WP_Hummingbird_Module_Minify $minify_module */
 		$minify_module = WP_Hummingbird_Utils::get_module( 'minify' );
 
 		if ( ! $minify_module->scanner->is_scanning() ) {
@@ -39,13 +38,14 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 		$redirect     = false;
 		$redirect_url = WP_Hummingbird_Utils::get_admin_menu_url( 'minification' );
 
+		// We are here from a performance report - enable advanced mode.
+		if ( isset( $_GET['enable-advanced-settings'] ) ) {
+			WP_Hummingbird_Settings::update_setting( 'view', 'advanced', 'minify' );
+			$redirect = true;
+		}
+
 		// Re-check files button clicked.
 		if ( isset( $_POST['recheck-files'] ) || isset( $_GET['recheck-files'] ) ) { // Input var ok.
-			// Remove notice.
-			if ( isset( $_GET['recheck-files'] ) ) { // Input var ok.
-				delete_option( 'wphb-notice-cache-cleaned-show' );
-			}
-
 			// We want to backup the current settings.
 			$minify_module->backup_settings();
 
@@ -210,7 +210,6 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 			null,
 			'summary',
 			array(
-				'box_class'         => false,
 				'box_content_class' => 'sui-box sui-summary',
 			)
 		);
@@ -396,6 +395,11 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 			$log = false;
 		}
 
+		$path_url = $log;
+		if ( defined( 'WP_CONTENT_DIR' ) ) {
+		    $path_url = content_url() . str_replace( WP_CONTENT_DIR, '', $log );
+        }
+
 		$this->view(
 			'minification/settings-meta-box',
 			array(
@@ -413,6 +417,7 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 					),
 					'wphb-log-action'
 				),
+                'path_url'     => $path_url,
 			)
 		);
 	}

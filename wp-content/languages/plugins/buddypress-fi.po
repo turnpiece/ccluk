@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - BuddyPress - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2019-02-20 16:12:24+0000\n"
+"PO-Revision-Date: 2019-05-03 15:47:23+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,82 @@ msgstr ""
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: fi\n"
 "Project-Id-Version: Plugins - BuddyPress - Stable (latest release)\n"
+
+#: bp-friends/bp-friends-functions.php:1083
+msgid "Pending Friend Requests (Received)"
+msgstr "Odottavat ystäväpyynnöt (vastaanotetut)"
+
+#: bp-friends/bp-friends-functions.php:1072
+msgid "Requester"
+msgstr "Pyynnön lähettäjä"
+
+#: bp-friends/bp-friends-functions.php:1020
+msgid "Pending Friend Requests (Sent)"
+msgstr "Odottavat ystäväpyynnöt (lähetetyt)"
+
+#: bp-friends/bp-friends-functions.php:1009
+msgid "Recipient"
+msgstr "Vastaanottaja"
+
+#: bp-friends/bp-friends-functions.php:950
+msgid "Friendship Date"
+msgstr "Ystävyyden päivä"
+
+#: bp-friends/bp-friends-functions.php:946
+msgid "Initiated By Me"
+msgstr "Minun aloittamani"
+
+#: bp-friends/bp-friends-functions.php:942
+msgid "Friend"
+msgstr "Ystävä"
+
+#: bp-friends/bp-friends-filters.php:71
+msgid "BuddyPress Friend Requests (Received)"
+msgstr "BuddyPress ystäväpyynnöt (vastaanotettu)"
+
+#: bp-friends/bp-friends-filters.php:66
+msgid "BuddyPress Friend Requests (Sent)"
+msgstr "BuddyPress ystäväpyynnöt (lähetetyt) "
+
+#: bp-friends/bp-friends-filters.php:61
+msgid "BuddyPress Friends"
+msgstr "BuddyPress ystävät"
+
+#: bp-settings/bp-settings-functions.php:201
+msgid "Receive group invitations from my friends only?"
+msgstr "Vastaanota ryhmäpyyntöjä vain ystäviltäni?"
+
+#: bp-settings/bp-settings-functions.php:182
+msgid "Receive email when your request to join a group has been approved or denied?"
+msgstr "Vastaanota sähköpostiviesti, kun pyyntösi liittyä ryhmään on hyväksytty tai hylätty?"
+
+#: bp-settings/bp-settings-functions.php:178
+msgid "Receive email when a member requests to join a private group for which you are an admin?"
+msgstr "Vastaanota sähköpostiviesti, kun jäsen pyytää liittymistä yksityiseen ryhmään  jossa olet pääkäyttäjä?"
+
+#: bp-settings/bp-settings-functions.php:174
+msgid "Receive email when you are promoted to a group administrator or moderator?"
+msgstr "Vastaanota sähköpostiviesti, kun sinut nostetaan ryhmänvalvojaksi tai moderaattoriksi?"
+
+#: bp-settings/bp-settings-functions.php:170
+msgid "Receive email when group information is updated?"
+msgstr "Vastaanota sähköpostiviesti, kun ryhmän tietoja päivitetään?"
+
+#: bp-settings/bp-settings-functions.php:163
+msgid "Receive email when a member invites you to join a group?"
+msgstr "Vastaanota sähköpostiviesti, kun jäsen kutsuu sinut liittymään ryhmään?"
+
+#: bp-settings/bp-settings-functions.php:156
+msgid "Receive email when a member sends you a new message?"
+msgstr "Vastaanota sähköpostiviesti, kun jäsen lähettää sinulle uuden viestin?"
+
+#: bp-settings/bp-settings-functions.php:149
+msgid "Receive email when a member replies to an update or comment you've posted?"
+msgstr "Vastaanota sähköpostiviesti, kun jäsen vastaa lähettämään päivitykseen tai kommenttiin?"
+
+#: bp-settings/bp-settings-functions.php:145
+msgid "Receive email when a member mentions you in an update?"
+msgstr "Vastaanota sähköpostiviesti, kun jäsen mainitsee sinut päivityksessä?"
 
 #: bp-settings/actions/data.php:51
 msgid "Data export request successfully created"
@@ -23,6 +99,53 @@ msgstr "Emme pystyneet käsittelemään tietojen viennin pyyntöä."
 #: bp-settings/classes/class-bp-settings-component.php:275
 msgid "Export Data"
 msgstr "Tietojen vienti"
+
+#: bp-settings/bp-settings-filters.php:22
+msgid "BuddyPress Settings Data"
+msgstr "BuddyPress asetustiedot"
+
+#: bp-activity/bp-activity-functions.php:4202
+msgid "Activity Content"
+msgstr "Aktiviteetin sisältö"
+
+#: bp-activity/bp-activity-functions.php:4195
+msgid "Activity URL"
+msgstr "Aktiviteetin URL"
+
+#: bp-activity/bp-activity-functions.php:4191
+msgid "Activity Description"
+msgstr "Aktiviteetin kuvaus"
+
+#: bp-activity/bp-activity-functions.php:4187
+msgid "Activity Date"
+msgstr "Aktiviteetin päivämäärä"
+
+#: bp-activity/bp-activity-filters.php:821
+msgid "BuddyPress Activity Data"
+msgstr "BuddyPress Aktiviteetin tiedot"
+
+#. translators: accessibility text
+#: bp-activity/classes/class-bp-activity-oembed-extension.php:313
+msgid "%s <span class=\"screen-reader-text\">Comment</span>"
+msgid_plural "%s <span class=\"screen-reader-text\">Comments</span>"
+msgstr[0] "%s <span class=\"screen-reader-text\">Kommentti</span>"
+msgstr[1] "%s <span class=\"screen-reader-text\">Kommentit</span>"
+
+#: bp-templates/bp-legacy/buddypress-functions.php:1555
+msgid "Error accepting invitation"
+msgstr "Virhe kutsun hyväksymisessä"
+
+#. Translators: Url to the Gravatar site, you can use the one for your country
+#. eg: https://fr.gravatar.com for French translation
+#: bp-templates/bp-nouveau/buddypress/members/single/profile/change-avatar.php:23
+#: bp-templates/bp-nouveau/buddypress/members/single/profile/change-avatar.php:89
+msgid "https://gravatar.com"
+msgstr "https://gravatar.com"
+
+#. Translators: %s is used to output the link to the Gravatar site
+#: bp-templates/bp-nouveau/buddypress/members/single/profile/change-avatar.php:21
+msgid "Your profile photo will be used on your profile and throughout the site. If there is a %s associated with your account email we will use that, or you can upload an image from your computer."
+msgstr "Profiilikuvaasi käytetään profiilissasi ja koko sivustossa. Jos tilisi sähköpostiosoitteeseen liittyy gravatar %s, käytämme sitä. Voit myös ladata kuvan tietokoneeltasi."
 
 #. translators: Link to Delete Account Settings page
 #: bp-templates/bp-nouveau/buddypress/members/single/settings/data.php:66
@@ -59,6 +182,11 @@ msgstr "Jos haluat tehdä pyynnön, klikkaa alla olevaa nappulaa:"
 #: bp-templates/bp-legacy/buddypress/members/single/settings/data.php:49
 msgid "You can request an export of your personal data, containing the following items if applicable:"
 msgstr "Voit pyytää henkilötietojesi vientiä, joka sisältää seuraavat kohteet jos tarpeen:"
+
+#: bp-templates/bp-nouveau/buddypress/members/single/settings/data.php:43
+#: bp-templates/bp-legacy/buddypress/members/single/settings/data.php:43
+msgid "You will receive a link to download your export via email once we are able to fulfill your request."
+msgstr "Saat sähköpostitse linkin ladataksesi vientitoiminnon tuloksen, kun olemme käsitelleet sen."
 
 #: bp-templates/bp-nouveau/buddypress/members/single/settings/data.php:42
 #: bp-templates/bp-legacy/buddypress/members/single/settings/data.php:42
@@ -104,34 +232,284 @@ msgstr "Tietojen vienti"
 msgid "Your account was activated successfully! You can now log in with the username and password you provided when you signed up."
 msgstr "Tilisi on aktivoitu onnistuneesti! Voit kirjautua sisään käyttäjätunnuksella ja salasanalla, jotka olet luonut rekisteröinnin aikana."
 
+#. translators: link to Privacy Policy
+#: bp-templates/bp-nouveau/includes/template-tags.php:2482
+msgid "I have read and agree to this site's %s."
+msgstr "Olen lukenut ja hyväksyn tämän sivuston %s."
+
+#: bp-xprofile/bp-xprofile-functions.php:1381
+msgid "Extended Profile Data"
+msgstr "Laajennettu profiilidata"
+
 #: bp-xprofile/bp-xprofile-filters.php:640
 msgid "BuddyPress Extended Profile Data"
 msgstr "BuddyPress laajennettu profiilidata"
+
+#: bp-messages/bp-messages-functions.php:709
+msgid "Thread URL"
+msgstr "Viestiketjun URL"
 
 #: bp-messages/bp-messages-functions.php:705
 msgid "Recipients"
 msgstr "Vastaanottajat"
 
+#: bp-messages/bp-messages-functions.php:697
+msgid "Message Content"
+msgstr "Viestin sisältö"
+
+#: bp-messages/bp-messages-functions.php:693
+msgid "Message Subject"
+msgstr "Viestin aihe"
+
+#: bp-messages/bp-messages-filters.php:143
+msgid "BuddyPress Messages"
+msgstr "BuddyPress viestit"
+
+#: bp-members/screens/register.php:77
+msgid "You must indicate that you have read and agreed to the Privacy Policy."
+msgstr "Sinun on ilmoitettava, että olet lukenut ja hyväksynyt tietosuojakäytännön."
+
 #: bp-notifications/bp-notifications-functions.php:875
 msgid "Status"
 msgstr "Tila"
+
+#: bp-notifications/bp-notifications-functions.php:871
+msgid "Notification Date"
+msgstr "Ilmoituksen päivämäärä"
+
+#: bp-notifications/bp-notifications-functions.php:867
+msgid "Notification Content"
+msgstr "Ilmoituksen sisältö"
+
+#: bp-notifications/bp-notifications-filters.php:23
+msgid "BuddyPress Notifications Data"
+msgstr "BuddyPress ilmoitusten tiedot"
+
+#: bp-groups/bp-groups-filters.php:394
+msgid "BuddyPress Pending Group Invitations (Sent)"
+msgstr "BuddyPressin odottavat ryhmäkutsut (lähetetyt)"
+
+#: bp-groups/bp-groups-filters.php:389
+msgid "BuddyPress Pending Group Invitations (Received)"
+msgstr "BuddyPressin odottavat ryhmäkutsut (vastaanotetut) "
+
+#: bp-groups/bp-groups-filters.php:384
+msgid "BuddyPress Pending Group Membership Requests"
+msgstr "BuddyPressin odottavat ryhmän jäsenpyynnöt"
+
+#: bp-groups/bp-groups-filters.php:379
+msgid "BuddyPress Group Memberships"
+msgstr "BuddyPressin ryhmäjäsenyydet"
+
+#: bp-groups/bp-groups-functions.php:2925
+msgid "Pending Group Invitations (Received)"
+msgstr "Odottavat ryhmäkutsut (vastaanotetut)"
+
+#: bp-groups/bp-groups-functions.php:2855
+msgid "Pending Group Invitations (Sent)"
+msgstr "Odottavat ryhmäkutsut (lähetetyt) "
+
+#: bp-groups/bp-groups-functions.php:2844
+msgid "Sent To"
+msgstr "Lähetetty henkilölle"
+
+#: bp-groups/bp-groups-functions.php:2785
+msgid "Pending Group Membership Requests"
+msgstr "Odottavat ryhmän jäsenpyynnöt"
+
+#: bp-groups/bp-groups-functions.php:2778
+#: bp-groups/bp-groups-functions.php:2848
+#: bp-groups/bp-groups-functions.php:2918
+#: bp-messages/bp-messages-functions.php:701
+#: bp-friends/bp-friends-functions.php:1013
+#: bp-friends/bp-friends-functions.php:1076
+msgid "Date Sent"
+msgstr "Lähetyspäivämäärä"
+
+#: bp-groups/bp-groups-functions.php:2713
+msgid "Date Joined"
+msgstr "Liittymispäivämäärä"
+
+#: bp-groups/bp-groups-functions.php:2708
+msgid "Group Role"
+msgstr "Rooli ryhmässä"
+
+#: bp-groups/bp-groups-functions.php:2698
+msgid "Creator"
+msgstr "Luoja"
+
+#: bp-groups/bp-groups-functions.php:2692
+#: bp-groups/bp-groups-functions.php:2914
+msgid "Invited By"
+msgstr "Kutsuja"
+
+#: bp-groups/bp-groups-functions.php:2685
+#: bp-groups/bp-groups-functions.php:2774
+#: bp-groups/bp-groups-functions.php:2840
+#: bp-groups/bp-groups-functions.php:2910
+msgid "Group URL"
+msgstr "Ryhmän URL"
 
 #: bp-core/classes/class-bp-admin.php:670
 msgctxt "screen heading"
 msgid "Your feedback"
 msgstr "Palautteesi"
 
+#: bp-core/classes/class-bp-admin.php:659
+msgid "With every BuddyPress version, we strive to make internal improvements to performance and code quality in addition to introducing new features and fixes. In BuddyPress 4.0, we've improved PHP compatibility both in our codebase and in our automated testing tools; we've reworked some automated tests for faster performance; we've ensured compatibility with upcoming changes in WordPress; and we've fixed a number of bugs in the formatting and sending of emails."
+msgstr "Jokaisen BuddyPress-version kohdalla pyrimme tekemään parannuksia suorituskykyyn ja koodin laatuun uusien ominaisuuksien ja korjausten lisäksi. BuddyPress versiossa 4.0 olemme parantaneet PHP-yhteensopivuutta sekä koodikannassamme että automatisoitujen testaustyökalujemme osalta. Olemme muuttaneet joitakin automaattisia testejä nopeamman suorituskyvyn saavuttamiseksi. Olemme varmistaneet yhteensopivuuden tulevien WordPress-muutosten kanssa ja olemme korjanneet useita virheitä sähköpostien muotoilun ja lähettämisen osalta."
+
 #: bp-core/classes/class-bp-admin.php:658
 msgid "BuddyPress: leaner, faster, stronger"
 msgstr "BuddyPress: kevyempi, nopeampi, vahvempi"
+
+#: bp-core/classes/class-bp-admin.php:656
+msgid "BuddyPress 3.0 introduced a new set of default templates, which we call \"Nouveau\". In 4.0, we've fixed bugs and smoothed the edges in these templates, including more accessible markup and improved appearance on mobile devices."
+msgstr "BuddyPress 3.0 esitteli uuden joukon oletusmalleja, joita kutsumme nimellä \"Nouveau\". Versiossa 4.0 olemme kirjanneet vikoja ja säätäneet näiden mallien ominaisuuksia, mukaan lukien parempi saavutettavuus ja parannettu ulkoasu mobiililaitteissa."
 
 #: bp-core/classes/class-bp-admin.php:655
 msgid "Nouveau template improvements"
 msgstr "Nouveau mallipohjan parannukset"
 
+#: bp-core/classes/class-bp-admin.php:653
+msgid "BuddyPress 4.0 also integrates with WordPress 4.9.8's Privacy Policy tools. When you create or update your Privacy Policy, BP will suggest text that's specifically tailored to the kinds of social data generated on a BuddyPress site. And will prompt registering users to agree to the Privacy Policy, if your theme supports it."
+msgstr "BuddyPress 4.0 integroituu myös WordPressin version 4.9.8 tietosuojakäytäntöihin. Kun luot tai päivität tietosuojakäytäntösi, BP ehdottaa tekstiä, joka on räätälöity nimenomaan BuddyPress-sivustolla luotuihin yhteisötietoihin ja edotta rekisteröityneitä käyttäjiä hyväksymään tietosuojakäytännön, mikäli teema tukee sitä."
+
+#: bp-core/classes/class-bp-admin.php:651
+msgid "The new \"Export Data\" Settings panel lets users request an export of all BuddyPress data they've created. BuddyPress integrates seamlessly with the data export functionality introduced in WordPress 4.9.8, and BP data is included in exports that are initiated either from the Export Data panel or via WP's Tools > Export Personal Data interface."
+msgstr "Uuden \"Vie tiedot\" -paneelin avulla käyttäjät voivat pyytää kaikkien luomiensa BuddyPress-tietojen vientiä. BuddyPress integroituu saumattomasti WordPressin versiossa 4.9.8  käyttöön otettuun tietojen vientitoimintoon kanssa. ja BP-tiedot sisältyvät vientiin, jota käynnistetään joko tietojen vienti -paneelista tai WP:n Työkalut> Vie henkilötietoa käyttöliittymästä."
+
+#: bp-core/classes/class-bp-admin.php:647
+msgid "Improved user control over data exports"
+msgstr "Parannettu hallinta tietojen viennissä"
+
 #: bp-core/classes/class-bp-admin.php:645
 msgid "Screenshot of Export Data settings panel"
 msgstr "Ruutukaappaus tietojen vienti ohjausnäkymästä"
+
+#: bp-core/classes/class-bp-admin.php:641
+msgid "BuddyPress boasts a proud history of letting community members and managers control their data, independent of third-party, commercial entities. In this spirit, as well as the spirit of recent regulations like the EU's General Data Protection Regulation (GDPR), BuddyPress 4.0 introduces a suite of tools allowing users and site admins to manage member data and privacy."
+msgstr "BuddyPressissä on ylpeä historia, jonka avulla yhteisön jäsenet ja johtajat voivat valvoa tietojaan riippumatta kolmannsien osapuolten kaupallisista tahoista. Tässä hengessä ja hiljattain annettujen asetusten, kuten EU:n yleisen tietosuoja-asetuksen (GDPR) hengessä, BuddyPress 4.0 esittelee joukon työkaluja, joiden avulla käyttäjät ja sivuston ylläpitäjät voivat hallita jäsentietoja ja yksityisyyttä."
+
+#: bp-core/classes/class-bp-admin.php:639
+msgid "New tools for data control and privacy"
+msgstr "Uusia työkaluja tietojenkäsittelyyn ja yksityisyyden suojaan"
+
+#: bp-core/classes/class-bp-admin.php:634
+msgctxt "section heading"
+msgid "New in BuddyPress"
+msgstr "Uutta BuddyPressissä"
+
+#: bp-core/classes/class-bp-admin.php:597
+msgid "When a logged-in user creates a new group, we use a number of cookies to keep track of the group creation process. These cookies contain no personal data, and are deleted either upon the successful creation of the group or after 24 hours."
+msgstr "Kun sisäänkirjautunut käyttäjä luo uuden ryhmän, käytämme useita evästeitä seurataksemme ryhmän luomisprosessia. Näissä evästeissä ei säilytetä henkilötietoja ja ne poistetaan joko ryhmän onnistuneen luomisen jälkeen taikka 24 tunnin kuluttua."
+
+#: bp-core/classes/class-bp-admin.php:594
+msgid "We use cookies on group, member, and activity directories to keep track of a user's browsing preferences. These preferences include the last-selected values of the sort and filter dropdowns, as well as pagination information. These cookies contain no personal data, and are deleted after 24 hours."
+msgstr "Käytämme evästeitä ryhmien, jäsenten ja aktiviteettien hakemistoissa seurataksemme käyttäjän selauskäyttäytymistä. Nämä määritykset sisältävät viimeisimmät valitut lajittelu- ja suodatustoimintojen arvot sekä sivutustiedot. Nämä evästeet eivät sisällä henkilötietoja, ja ne poistetaan 24 tunnin kuluttua."
+
+#: bp-core/classes/class-bp-admin.php:592
+msgid "We use a cookie to show success and failure messages to logged-in users, in response to certain actions, like joining a group. These cookies contain no personal data, and are deleted immediately after the next page load."
+msgstr "Käytämme kirjautuneille käyttäjille evästettä onnistuneiden ja epäonnistuneiden toimintojen näyttämiseksi sekä vastauksena tiettyihin toimintoihin, kuten ryhmään liittymiseen. Nämä evästeet eivät sisällä henkilökohtaisia ​​tietoja, ja ne poistetaan välittömästi seuraavan sivun lataamisen jälkeen."
+
+#: bp-core/classes/class-bp-admin.php:590
+msgid "In this section you should describe the BuddyPress-specific cookies that your site collects. The suggested text describes the default cookies."
+msgstr "Tässä osassa sinun pitäisi kuvata sivustossasi kerättävät BuddyPress-evästeet. Ehdotettu teksti kuvaa oletusarvoisia evästeitä."
+
+#: bp-core/classes/class-bp-admin.php:586
+msgid "The content of private messages is visible only to the sender and the recipients of the message. With the exception of site administrators, who can read all private messages, private message content is never visible to other users or site visitors. Site administrators may delete the content of any message."
+msgstr "Yksityisten viestien sisältö näkyy vain viestin lähettäjälle ja  vastaanottajille. Sivuston ylläpitäjät voivat lukea kaikkia yksityisiä viestejä mutta yksityisten viestien sisältö ei ole koskaan näkyvissä muille käyttäjille tai sivuston kävijöille. Sivuston ylläpitäjät voivat poistaa minkä tahansa viestin sisällön."
+
+#: bp-core/classes/class-bp-admin.php:584
+msgid "In this section you should describe any personal data related to private messages."
+msgstr "Tässä osiossa sinun tulee selventää henkilötiedot jotka liittyvät henkilökohtaisiin ​​viesteihin."
+
+#: bp-core/classes/class-bp-admin.php:579
+msgid "Activity items may be deleted at any time by users who created them. Site administrators can edit all activity items."
+msgstr "Aktiviteetti toiminnot voidaan poistaa koska tahansa niiden käyttäjien toimesta, jotka ovat niitä luoneet. Sivuston järjestelmänvalvojat voivat muokata kaikkia aktiviteetin toimintoja."
+
+#: bp-core/classes/class-bp-admin.php:578
+msgid "The content of activity items obey the same privacy rules as the contexts in which the activity items are created. For example, activity updates created in a user's profile is publicly visible, while activity items generated in a private group are visible only to members of that group. Site administrators can view all activity items, regardless of context."
+msgstr "Toimintotietojen sisältö noudattaa samoja tietosuojaa koskevia sääntöjä kuin kontekstit, joissa aktiviteettitoimintaa luodaan. Esimerkiksi käyttäjän profiiliin luodut aktiviteetin päivitykset ovat julkisia, kun taas yksityisessä ryhmässä luodut aktiviteettitoiminnot ovat näkyvissä vain kyseisen ryhmän jäsenille. Sivuston järjestelmänvalvojat näkevät kaikki aktiviteetitoiminnat kontekstista riippumatta."
+
+#: bp-core/classes/class-bp-admin.php:577
+msgid "This site records certain user actions, in the form of \"activity\" data. Activity includes updates and comments posted directly to activity streams, as well as descriptions of other actions performed while using the site, such as new friendships, newly joined groups, and profile updates."
+msgstr "Tämä sivusto tallentaa tietyt käyttäjätoiminnot \"aktiviteettitietojen\" muodossa. Toiminnot sisältävät päivitykset ja kommentit jotka on lähetetty suoraan aktiviteettivirtoihin  sekä kuvaukset muista toimista, joita suoritetaan sivuston käytön aikana, kuten uudet ystävyyssuhteet, uudet ryhmät ja profiilien päivitykset."
+
+#: bp-core/classes/class-bp-admin.php:575
+msgid "In this section you should describe the kinds of information collected in the activity stream, how and whether it can be edited or deleted, and to whom the activity is visible."
+msgstr "Tässä osiossa sinun tulee kuvata aktiviteettivirrassa kerätyt tiedot ja miten niitä voidaan muokata taikka poistaa ja kenelle toiminta on näkyvissä."
+
+#: bp-core/classes/class-bp-admin.php:570
+msgid "User information provided during account registration can be modified or removed on the Profile > Edit panel. In most cases, users also have control over who is able to view a particular piece of profile content, limiting visibility on a field-by-field basis to friends, logged-in users, or administrators only. Site administrators can read and edit all profile data for all users."
+msgstr "Tilin rekisteröinnin aikana annettuja käyttäjätietoja voidaan muokata/poistaa kohdasta Profiili > Muokkaa-paneelista. Useimmissa tapauksissa käyttäjillä on myös mahdollisuus valvoa, kuka voi tarkastella tiettyä profiilin sisältöä ja rajoittaa sisällön näkyvyyttä kenttäkohtaisesti ystäville, kirjautuneille käyttäjille taikka vain järjestelmänvalvojille. Sivuston ylläpitäjät voivat lukea ja muokata kaikkia käyttäjien profiilitietoja."
+
+#: bp-core/classes/class-bp-admin.php:569
+msgid "When you register for the site, you may be asked to provide certain personal data for display on your profile. The \"Name\" field is required as well as public, and user profiles are visible to any site visitor. Other profile information may be required or optional, as configured by the site administrator."
+msgstr "Kun rekisteröidyt sivustolle, sinua saatetaan pyytää antamaan tiettyjä henkilökohtaisia ​​tietoja jotka näkyvät profiilissasi. \"Nimi\" -kenttä on pakollinen sekä julkinen ja käyttäjäprofiilit ovat näkyvissä kaikille sivuston kävijöille. Muut profiilitiedot voivat olla pakollisia taikka valinnaisia siten kuin sivuston ylläpitäjä on ne määrittänyt."
+
+#: bp-core/classes/class-bp-admin.php:567
+msgid "In this section you should note what information is collected on user profiles. The suggested text gives an overview of the kinds of profile data collected by BuddyPress."
+msgstr "Tässä osiossa sinun tulee kertoa, mitä tietoja käyttäjäprofiileista kerätään. Ehdotettu teksti antaa yleiskuvan BuddyPressin keräämistä profiilitiedoista."
+
+#: bp-core/classes/class-bp-admin.php:566
+msgid "Profile Data"
+msgstr "Profiilin tiedot"
+
+#: bp-core/classes/class-bp-admin.php:563
+msgid "Sites powered by BuddyPress rely heavily on user-provided data. In this section, you should note what data you collect, from both registered users and anonymous visitors."
+msgstr "BuddyPressin pyörittämät sivustot tukeutuvat suurelta osin käyttäjän luomiin tietoihin. Tässä osassa sinun tulee huomioida, mitä tietoja keräät sekä rekisteröityneiltä että anonyymeiltä kävijöiltä."
+
+#: bp-core/classes/class-bp-admin.php:562
+msgid "What personal data we collect and why we collect it"
+msgstr "Mitä henkilötietoja keräämme ja miksi niitä keräämme"
+
+#: bp-core/classes/class-bp-admin.php:557
+msgid "Suggested text:"
+msgstr "Ehdotettu teksti:"
+
+#. translators: do not remove {} brackets or translate its contents.
+#: bp-core/bp-core-functions.php:3441
+msgid ""
+"Thanks for registering!\n"
+"\n"
+"To complete the activation of your account, go to the following link and click on the 'Activate' button: {{{activate.url}}}\n"
+"\n"
+"If the 'Activation Key' field is empty, copy and paste the following into the field - {{key}}"
+msgstr ""
+"Kiitos rekisteröitymisestä!\n"
+"\n"
+"Viedäksesi tilin aktivoinnin loppuun siirry seuraavaan linkkiin ja napsauta 'Aktivoi' painiketta: {{{activate.url}}}\n"
+"\n"
+"Jos 'Aktivointiavain' -kenttä on tyhjä, kopioi ja liitä seuraava tieto kenttään - {{key}}"
+
+#. translators: do not remove {} brackets or translate its contents.
+#: bp-core/bp-core-functions.php:3439
+msgid ""
+"Thanks for registering!\n"
+"\n"
+"To complete the activation of your account, go to the following link and click on the <strong>Activate</strong> button:\n"
+"<a href=\"{{{activate.url}}}\">{{{activate.url}}}</a>\n"
+"\n"
+"If the 'Activation Key' field is empty, copy and paste the following into the field - {{key}}"
+msgstr ""
+"Kiitos rekisteröitymisestä!\n"
+"\n"
+"Voit viimeistellä tilin aktivoinnin seuraavasta linkistä napsauttamalla <strong>Aktivoi</strong> -painiketta:\n"
+"<a href=\"{{{activate.url}}}\">{{{activate.url}}}</a>\n"
+"\n"
+"Mikäli 'Aktivointiavain' -kenttä on tyhjä, kopioi ja liitä seuraava tieto kenttään - {{key}}"
+
+#: bp-core/bp-core-functions.php:3276
+msgctxt "email"
+msgid "&copy; %1$s %2$s"
+msgstr "&copy; %1$s %2$s"
+
+#. translators: link to Privacy Policy
+#: bp-core/bp-core-functions.php:3288
+#: bp-templates/bp-nouveau/includes/template-tags.php:2482
+msgid "Privacy Policy"
+msgstr "Tietosuojakäytäntö"
 
 #. translators: Do not translate placeholders. 2 = form field name, 3 =
 #. "(required)".
@@ -1605,7 +1983,7 @@ msgstr "Tapaa BuddyPress:in avustajat:"
 msgid "Built by <a href=\"%s\">%s volunteer</a>."
 msgid_plural "Built by <a href=\"%s\">%s volunteers</a>."
 msgstr[0] "Rakennettu <a href=\"%s\">%s vapaaehtoisen</a> voimin."
-msgstr[1] "Rakennettu <a href=\"%s\">%s vapaaehtoisten</a> voimin."
+msgstr[1] "Rakennettu <a href=\"%s\">%s vapaaehtoisen</a> voimin."
 
 #: bp-core/classes/class-bp-admin.php:679
 msgid "Thank you for using BuddyPress! 😊"

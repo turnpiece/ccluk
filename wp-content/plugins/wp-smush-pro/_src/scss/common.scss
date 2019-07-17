@@ -16,8 +16,7 @@
 	}
 
 	.wp-smush-send {
-		display: inline-block;
-		float: left;
+		display: block;
 		margin-right: 5px;
 	}
 
@@ -82,45 +81,6 @@
 	color: red;
 }
 
-.compat-field-wp_smush {
-	margin-top: 10px;
-
-	button {
-		&.wp-smush-send {
-			float: left;
-			margin-bottom: 5px;
-		}
-
-		/** If we have button-primary class, this style will be loaded already **/
-		&:not(.button-primary) {
-			background: #0085ba;
-			border-color: #0073aa #006799 #006799;
-			-webkit-box-shadow: 0 1px 0 #006799;
-			box-shadow: 0 1px 0 #006799;
-			color: #fff;
-			text-decoration: none;
-			text-shadow: 0 -1px 1px #006799, 1px 0 1px #006799, 0 1px 1px #006799, -1px 0 1px #006799;
-			margin-bottom: 10px;
-
-			&:hover {
-				background: #008ec2;
-				border-color: #006799;
-				color: #fff;
-			}
-		}
-
-		&:disabled:not( .button-primary ) {
-			color: #66c6e4 !important;
-			background: #008ec2 !important;
-			border-color: #007cb2 !important;
-			-webkit-box-shadow: none !important;
-			box-shadow: none !important;
-			text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1) !important;
-			cursor: default;
-		}
-	}
-}
-
 #post-body-content .smush-status {
 	margin: 4px 0;
 }
@@ -159,7 +119,8 @@ label.setting.smush-stats .smush-wrap,
 
 .smush-skipped .dashicons-editor-help {
 	cursor: pointer;
-	margin-top: -3px;
+	margin-top: -1px;
+	margin-left: 5px;
 }
 
 /** Help Tip **/
@@ -247,6 +208,7 @@ label.setting.smush-stats .smush-wrap,
 .attachment-details .setting div.smush-status-links {
 	float: left;
 	text-align: left;
+	color: #ddd;
 
 	.wp-smush-action {
 		margin-right: 5px;

@@ -140,7 +140,7 @@ abstract class Shipper_Model_Dumped {
 		$will_correct = $queue_size > $allowed_bytesize &&
 			( $queue_size - $allowed_bytesize ) > $correction_threshold;
 		if ( count( $lines ) > 1 && $will_correct ) {
-			Shipper_Helper_Log::write(
+			Shipper_Helper_Log::debug(
 				sprintf( 'Backing off one because %s', size_format( $queue_size ) )
 			);
 			array_pop( $lines );

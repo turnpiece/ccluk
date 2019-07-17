@@ -26,12 +26,7 @@
 <div class="wphb-border-row<?php echo ( $disabled ) ? ' disabled' : ''; ?>"
 	 id="wphb-file-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>"
 	 data-filter="<?php echo esc_attr( $item['handle'] . ' ' . $ext ); ?>"
-	 data-filter-secondary="
-		<?php
-		echo esc_attr( $filter );
-		echo 'OTHER' === $ext ? 'other' : '';
-		?>
-		">
+	 data-filter-secondary="<?php echo esc_attr( $filter ); echo 'OTHER' === $ext ? 'other' : ''; ?>">
 	<?php if ( $processed && ! $compressed && ! preg_match( '/\.min\.(css|js)/', $full_src ) ) : ?>
 		<span class="wphb-row-status wphb-row-status-already-compressed sui-tooltip sui-tooltip-top-left sui-tooltip-constrained"
 			  data-tooltip="<?php esc_attr_e( 'This file has already been compressed – we recommend you turn off compression for this file to avoid issues', 'wphb' ); ?>"><i

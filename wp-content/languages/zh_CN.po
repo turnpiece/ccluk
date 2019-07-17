@@ -40,23 +40,23 @@ msgstr "."
 msgid "Editor tips"
 msgstr "编辑器贴士"
 
-#: wp-includes/js/dist/block-library.js:9124
+#: wp-includes/js/dist/block-library.js:9106
 msgctxt "content placeholder"
 msgid "Content…"
 msgstr "内容…"
 
-#: wp-includes/js/dist/block-library.js:7640
+#: wp-includes/js/dist/block-library.js:7622
 msgctxt "button label"
 msgid "Convert to link"
 msgstr "转换为链接"
 
-#: wp-includes/js/dist/block-library.js:7637
+#: wp-includes/js/dist/block-library.js:7619
 msgctxt "button label"
 msgid "Try again"
 msgstr "重试"
 
 #. translators: %s: font size name
-#: wp-includes/js/dist/components.js:31036
+#: wp-includes/js/dist/components.js:31027
 msgid "Font size: %s"
 msgstr "字号：%s"
 
@@ -79,11 +79,11 @@ msgstr "区块（已选择）"
 msgid "Document (selected)"
 msgstr "文档（已选择）"
 
-#: wp-includes/js/dist/block-library.js:10553
+#: wp-includes/js/dist/block-library.js:10537
 msgid "Mark the excerpt of this content. Content before this block will be shown in the excerpt on your archives page."
 msgstr "标记此内容的摘要。在此区块之前的内容会在存档页中作为摘要显示。"
 
-#: wp-includes/js/dist/block-library.js:11498
+#: wp-includes/js/dist/block-library.js:11482
 msgid "Create content, and save it for you and other contributors to reuse across your site. Update the block, and the changes apply everywhere it’s used."
 msgstr "创建内容，并保存来让您和其他贡献者在站点上重复使用。对这个区块的更新会在所有用到这个区块的地方生效。"
 
@@ -92,7 +92,7 @@ msgid "Top Toolbar"
 msgstr "顶部工具栏"
 
 #. translators: %d: number of words
-#: wp-includes/js/dist/editor.js:29470
+#: wp-includes/js/dist/editor.js:29365
 msgid "%d word"
 msgid_plural "%d words"
 msgstr[0] "%d字"
@@ -102,7 +102,7 @@ msgctxt "Google Font Name and Variants"
 msgid "Noto Serif:400,400i,700,700i"
 msgstr "Noto Serif:400,400i,700,700i"
 
-#: wp-includes/class-wp-editor.php:1272
+#: wp-includes/class-wp-editor.php:1271
 msgid "Classic Block Keyboard Shortcuts"
 msgstr "传统区块键盘快捷键"
 
@@ -118,35 +118,35 @@ msgstr "此图像的alt属性为空；文件名为%s"
 msgid "Permalink"
 msgstr "永久链接"
 
-#: wp-includes/js/dist/editor.js:24932
+#: wp-includes/js/dist/editor.js:24842
 msgid "To edit the featured image, you need permission to upload media."
 msgstr "要编辑特色图像，您需要有上传媒体的权限。"
 
-#: wp-includes/js/dist/editor.js:22930
+#: wp-includes/js/dist/editor.js:22840
 msgid "Given your current role, you can only link a video, you cannot upload."
 msgstr "基于您现在的角色，您只能链接到视频，而不能上传。"
 
-#: wp-includes/js/dist/editor.js:22928
+#: wp-includes/js/dist/editor.js:22838
 msgid "Given your current role, you can only link an image, you cannot upload."
 msgstr "基于您现在的角色，您只能链接到图像，而不能上传。"
 
-#: wp-includes/js/dist/editor.js:22926
+#: wp-includes/js/dist/editor.js:22836
 msgid "Given your current role, you can only link an audio, you cannot upload."
 msgstr "基于您现在的角色，您只能链接到音频，而不能上传。"
 
-#: wp-includes/js/dist/editor.js:22923
+#: wp-includes/js/dist/editor.js:22833
 msgid "Given your current role, you can only link a media file, you cannot upload."
 msgstr "基于您现在的角色，您只能链接到媒体文件，而不能上传。"
 
-#: wp-includes/js/dist/editor.js:22902
+#: wp-includes/js/dist/editor.js:22812
 msgid "To edit this block, you need permission to upload media."
 msgstr "要编辑此区块，您需要有上传媒体的权限。"
 
-#: wp-includes/js/dist/editor.js:14940
+#: wp-includes/js/dist/editor.js:14841
 msgid "(selected block)"
 msgstr "（选定的区块）"
 
-#: wp-includes/js/dist/editor.js:17052
+#: wp-includes/js/dist/editor.js:16953
 msgid "Block tools"
 msgstr "区块工具"
 
@@ -170,49 +170,49 @@ msgstr "空区块；开始写作或按正斜杠来选择区块"
 msgid "Paragraph block"
 msgstr "段落区块"
 
-#: wp-includes/js/dist/editor.js:13987
+#: wp-includes/js/dist/editor.js:13888
 msgid "%s block selected."
 msgid_plural "%s blocks selected."
 msgstr[0] "已选择%s个区块。"
 
-#: wp-includes/js/dist/editor.js:23241
+#: wp-includes/js/dist/editor.js:23151
 msgid "Link selected"
 msgstr "链接已选择"
 
-#: wp-includes/js/dist/editor.js:28300
+#: wp-includes/js/dist/editor.js:28203
 msgid "Start writing with text or HTML"
 msgstr "开始写作文本或HTML"
 
-#: wp-includes/js/dist/editor.js:28292
+#: wp-includes/js/dist/editor.js:28195
 msgid "Type text or HTML"
 msgstr "键入文本或HTML"
 
-#: wp-includes/js/dist/editor.js:19336
+#: wp-includes/js/dist/editor.js:19248
 #: wp-includes/js/dist/block-library.js:1732
 msgid "Start writing or type / to choose a block"
 msgstr "开始写作或按/来选择区块"
 
-#: wp-includes/js/dist/editor.js:30229
+#: wp-includes/js/dist/editor.js:30124
 msgid "Block icon"
 msgstr "区块图标"
 
-#: wp-includes/js/dist/editor.js:14568
+#: wp-includes/js/dist/editor.js:14469
 msgid "Align text right"
 msgstr "右对齐文本"
 
-#: wp-includes/js/dist/editor.js:14564
+#: wp-includes/js/dist/editor.js:14465
 msgid "Align text center"
 msgstr "居中文本"
 
-#: wp-includes/js/dist/editor.js:14560
+#: wp-includes/js/dist/editor.js:14461
 msgid "Align text left"
 msgstr "左对齐文本"
 
-#: wp-includes/js/dist/block-library.js:10646
+#: wp-includes/js/dist/block-library.js:10630
 msgid "Page Break"
 msgstr "分页符"
 
-#: wp-includes/js/dist/block-library.js:9282
+#: wp-includes/js/dist/block-library.js:9264
 msgid "Stack on mobile"
 msgstr "在移动设备上堆叠显示"
 
@@ -220,7 +220,7 @@ msgstr "在移动设备上堆叠显示"
 msgid "Custom Fields"
 msgstr "自定义字段"
 
-#: wp-includes/js/dist/editor.js:27166
+#: wp-includes/js/dist/editor.js:27072
 msgid "Scheduled"
 msgstr "已计划"
 
@@ -274,248 +274,248 @@ msgstr "内联图像"
 msgid "media"
 msgstr "媒体"
 
-#: wp-includes/js/dist/block-library.js:13311
+#: wp-includes/js/dist/block-library.js:13295
 msgid "movie"
 msgstr "电影"
 
-#: wp-includes/js/dist/block-library.js:13301
+#: wp-includes/js/dist/block-library.js:13285
 msgid "Embed a video from your media library or upload a new one."
 msgstr "从您的媒体库中嵌入视频，或上传新视频。"
 
-#: wp-includes/js/dist/block-library.js:13255
+#: wp-includes/js/dist/block-library.js:13239
 msgid "Remove Poster Image"
 msgstr "移除海报图像"
 
-#: wp-includes/js/dist/block-library.js:13215
+#: wp-includes/js/dist/block-library.js:13199
 msgid "Playback Controls"
 msgstr "回放控制"
 
-#: wp-includes/js/dist/block-library.js:13211
+#: wp-includes/js/dist/block-library.js:13195
 msgid "Muted"
 msgstr "静音"
 
-#: wp-includes/js/dist/block-library.js:13201
+#: wp-includes/js/dist/block-library.js:13185
 msgid "Video Settings"
 msgstr "视频设置"
 
-#: wp-includes/js/dist/block-library.js:13197
+#: wp-includes/js/dist/block-library.js:13181
 msgid "Edit video"
 msgstr "编辑视频"
 
-#: wp-includes/js/dist/block-library.js:12945
+#: wp-includes/js/dist/block-library.js:12929
 msgid "Write…"
 msgstr "编写…"
 
-#: wp-includes/js/dist/block-library.js:12892
+#: wp-includes/js/dist/block-library.js:12876
 msgid "poetry"
 msgstr "诗歌"
 
-#: wp-includes/js/dist/block-library.js:12881
+#: wp-includes/js/dist/block-library.js:12865
 msgid "Insert poetry. Use special spacing formats. Or quote song lyrics."
 msgstr "插入诗歌，使用特殊的空白格式，或引用歌词。"
 
-#: wp-includes/js/dist/block-library.js:12880
+#: wp-includes/js/dist/block-library.js:12864
 msgid "Verse"
 msgstr "诗句"
 
-#: wp-includes/js/dist/block-library.js:12844
+#: wp-includes/js/dist/block-library.js:12828
 msgid "New Column"
 msgstr "新列"
 
-#: wp-includes/js/dist/block-library.js:12744
+#: wp-includes/js/dist/block-library.js:12728
 msgid "This block is deprecated. Please use the Columns block instead."
 msgstr "此区块已被废弃，请使用多栏区块。"
 
-#: wp-includes/js/dist/block-library.js:12743
+#: wp-includes/js/dist/block-library.js:12727
 msgid "Text Columns (deprecated)"
 msgstr "文本栏（已废弃）"
 
-#: wp-includes/js/dist/block-library.js:12694
+#: wp-includes/js/dist/block-library.js:12678
 msgid "Template block used as a container."
 msgstr "被用作容器的模板区块。"
 
-#: wp-includes/js/dist/block-library.js:12692
+#: wp-includes/js/dist/block-library.js:12676
 msgid "Reusable Template"
 msgstr "可重用模板"
 
-#: wp-includes/js/dist/block-library.js:12612
+#: wp-includes/js/dist/block-library.js:12596
 msgid "Stripes"
 msgstr "条带"
 
-#: wp-includes/js/dist/block-library.js:12586
+#: wp-includes/js/dist/block-library.js:12570
 msgid "Insert a table — perfect for sharing charts and data."
 msgstr "插入表格——共享图表和数据的完美选项。"
 
-#: wp-includes/js/dist/block-library.js:12484
+#: wp-includes/js/dist/block-library.js:12468
 msgid "Fixed width table cells"
 msgstr "定宽单元格"
 
-#: wp-includes/js/dist/block-library.js:12481
+#: wp-includes/js/dist/block-library.js:12465
 msgid "Table Settings"
 msgstr "表格设置"
 
-#: wp-includes/js/dist/block-library.js:12478
+#: wp-includes/js/dist/block-library.js:12462
 msgid "Edit Table"
 msgstr "编辑表格"
 
-#: wp-includes/js/dist/block-library.js:12470
+#: wp-includes/js/dist/block-library.js:12454
 msgid "Create"
 msgstr "创建"
 
-#: wp-includes/js/dist/block-library.js:12463
+#: wp-includes/js/dist/block-library.js:12447
 msgid "Row Count"
 msgstr "列数"
 
-#: wp-includes/js/dist/block-library.js:12457
+#: wp-includes/js/dist/block-library.js:12441
 msgid "Column Count"
 msgstr "行数"
 
-#: wp-includes/js/dist/block-library.js:12368
+#: wp-includes/js/dist/block-library.js:12352
 msgid "Delete Column"
 msgstr "删除行"
 
-#: wp-includes/js/dist/block-library.js:12363
+#: wp-includes/js/dist/block-library.js:12347
 msgid "Add Column After"
 msgstr "插入行（之后）"
 
-#: wp-includes/js/dist/block-library.js:12358
+#: wp-includes/js/dist/block-library.js:12342
 msgid "Add Column Before"
 msgstr "插入行（之前）"
 
-#: wp-includes/js/dist/block-library.js:12353
+#: wp-includes/js/dist/block-library.js:12337
 msgid "Delete Row"
 msgstr "删除列"
 
-#: wp-includes/js/dist/block-library.js:12348
+#: wp-includes/js/dist/block-library.js:12332
 msgid "Add Row After"
 msgstr "插入列（之后）"
 
-#: wp-includes/js/dist/block-library.js:12343
+#: wp-includes/js/dist/block-library.js:12327
 msgid "Add Row Before"
 msgstr "插入列（之前）"
 
-#: wp-includes/js/dist/block-library.js:11843
+#: wp-includes/js/dist/block-library.js:11827
 msgid "Write subheading…"
 msgstr "编写副标题…"
 
-#: wp-includes/js/dist/block-library.js:11781
+#: wp-includes/js/dist/block-library.js:11765
 msgid "This block is deprecated. Please use the Paragraph block instead."
 msgstr "此区块已被废弃，请使用段落区块。"
 
-#: wp-includes/js/dist/block-library.js:11780
+#: wp-includes/js/dist/block-library.js:11764
 msgid "Subheading (deprecated)"
 msgstr "副标题（已废弃）"
 
-#: wp-includes/js/dist/block-library.js:11736
+#: wp-includes/js/dist/block-library.js:11720
 msgid "Height in pixels"
 msgstr "高度（像素）"
 
-#: wp-includes/js/dist/block-library.js:11734
+#: wp-includes/js/dist/block-library.js:11718
 msgid "Spacer Settings"
 msgstr "空白设置"
 
-#: wp-includes/js/dist/block-library.js:11684
+#: wp-includes/js/dist/block-library.js:11668
 msgid "Add white space between blocks and customize its height."
 msgstr "在区块间加入空白，并自定义空白的高度。"
 
-#: wp-includes/js/dist/block-library.js:11683
+#: wp-includes/js/dist/block-library.js:11667
 msgid "Spacer"
 msgstr "空白"
 
-#: wp-includes/js/dist/block-library.js:11651
+#: wp-includes/js/dist/block-library.js:11635
 msgid "Write shortcode here…"
 msgstr "在此编写短代码…"
 
-#: wp-includes/js/dist/block-library.js:11594
+#: wp-includes/js/dist/block-library.js:11578
 msgid "Insert additional custom elements with a WordPress shortcode."
 msgstr "通过WordPress短代码加入额外的自定义元素。"
 
-#: wp-includes/js/dist/block-library.js:11593
-#: wp-includes/js/dist/block-library.js:11647
+#: wp-includes/js/dist/block-library.js:11577
+#: wp-includes/js/dist/block-library.js:11631
 msgid "Shortcode"
 msgstr "短代码"
 
-#: wp-includes/js/dist/block-library.js:11548
+#: wp-includes/js/dist/block-library.js:11532
 msgid "Dots"
 msgstr "点线"
 
-#: wp-includes/js/dist/block-library.js:11545
+#: wp-includes/js/dist/block-library.js:11529
 msgid "Wide Line"
 msgstr "宽线"
 
-#: wp-includes/js/dist/block-library.js:11541
+#: wp-includes/js/dist/block-library.js:11525
 msgid "Short Line"
 msgstr "短线"
 
-#: wp-includes/js/dist/block-library.js:11538
+#: wp-includes/js/dist/block-library.js:11522
 msgid "divider"
 msgstr "分隔符"
 
-#: wp-includes/js/dist/block-library.js:11538
+#: wp-includes/js/dist/block-library.js:11522
 msgid "horizontal-line"
 msgstr "横线"
 
-#: wp-includes/js/dist/block-library.js:11527
+#: wp-includes/js/dist/block-library.js:11511
 msgid "Create a break between ideas or sections with a horizontal separator."
 msgstr "在不同的点子或章节之间通过横向分隔符来制造间断。"
 
-#: wp-includes/js/dist/block-library.js:11526
+#: wp-includes/js/dist/block-library.js:11510
 msgid "Separator"
 msgstr "分隔符"
 
-#: wp-includes/js/dist/block-library.js:4333
+#: wp-includes/js/dist/block-library.js:4315
 msgctxt "block style"
 msgid "Large"
 msgstr "大"
 
-#: wp-includes/js/dist/block-library.js:4325
+#: wp-includes/js/dist/block-library.js:4307
 msgid "blockquote"
 msgstr "块引用"
 
-#: wp-includes/js/dist/block-library.js:4314
+#: wp-includes/js/dist/block-library.js:4296
 msgid "Give quoted text visual emphasis. \"In quoting others, we cite ourselves.\" — Julio Cortázar"
 msgstr "给引文提供视觉强调。“在引用其他人时，我们引用自己。”——胡里奥·科塔萨尔"
 
-#: wp-includes/js/dist/block-library.js:11015
+#: wp-includes/js/dist/block-library.js:10999
 msgid "Solid Color"
 msgstr "纯色"
 
-#: wp-includes/js/dist/block-library.js:4329
-#: wp-includes/js/dist/block-library.js:11011
-#: wp-includes/js/dist/block-library.js:12608
+#: wp-includes/js/dist/block-library.js:4311
+#: wp-includes/js/dist/block-library.js:10995
+#: wp-includes/js/dist/block-library.js:12592
 msgctxt "block style"
 msgid "Regular"
 msgstr "常规"
 
-#: wp-includes/js/dist/block-library.js:10993
+#: wp-includes/js/dist/block-library.js:10977
 msgid "Give special visual emphasis to a quote from your text."
 msgstr "给您文中的引用增加视觉强调的空间。"
 
-#: wp-includes/js/dist/block-library.js:10992
+#: wp-includes/js/dist/block-library.js:10976
 msgid "Pullquote"
 msgstr "引文"
 
-#: wp-includes/js/dist/block-library.js:10922
+#: wp-includes/js/dist/block-library.js:10906
 msgid "Main Color"
 msgstr "主颜色"
 
 #. translators: placeholder text used for the citation
-#: wp-includes/js/dist/block-library.js:4532
-#: wp-includes/js/dist/block-library.js:10910
+#: wp-includes/js/dist/block-library.js:4514
+#: wp-includes/js/dist/block-library.js:10894
 msgid "Write citation…"
 msgstr "编写引用…"
 
 #. translators: placeholder text used for the quote
-#: wp-includes/js/dist/block-library.js:4522
-#: wp-includes/js/dist/block-library.js:10905
+#: wp-includes/js/dist/block-library.js:4504
+#: wp-includes/js/dist/block-library.js:10889
 msgid "Write quote…"
 msgstr "编写引文…"
 
-#: wp-includes/js/dist/block-library.js:10779
+#: wp-includes/js/dist/block-library.js:10763
 msgid "Write preformatted text…"
 msgstr "编写预格式化文本…"
 
-#: wp-includes/js/dist/block-library.js:10697
+#: wp-includes/js/dist/block-library.js:10681
 msgid "Add text that respects your spacing and tabs, and also allows styling."
 msgstr "这里加入的文本会尊重您的空白和制表符，您也可以格式化这些文本。"
 
@@ -543,158 +543,158 @@ msgstr "切换显示大型首字母。"
 msgid "Showing large initial letter."
 msgstr "显示大型首字母。"
 
-#: wp-includes/js/dist/block-library.js:10655
+#: wp-includes/js/dist/block-library.js:10639
 msgid "pagination"
 msgstr "分页"
 
-#: wp-includes/js/dist/block-library.js:10655
+#: wp-includes/js/dist/block-library.js:10639
 msgid "next page"
 msgstr "下一页"
 
-#: wp-includes/js/dist/block-library.js:10647
+#: wp-includes/js/dist/block-library.js:10631
 msgid "Separate your content into a multi-page experience."
 msgstr "将您的内容分成多个页面。"
 
-#: wp-includes/js/dist/block-library.js:10552
+#: wp-includes/js/dist/block-library.js:10536
 msgctxt "block name"
 msgid "More"
 msgstr "更多"
 
-#: wp-includes/js/dist/block-library.js:10510
+#: wp-includes/js/dist/block-library.js:10494
 msgid "Hide the teaser before the \"More\" tag"
 msgstr "将伏笔放在“更多”标签之前"
 
-#: wp-includes/js/dist/block-library.js:10404
+#: wp-includes/js/dist/block-library.js:10388
 msgid "Your site doesn’t include support for this block."
 msgstr "您的站点不支持这一区块。"
 
-#: wp-includes/js/dist/block-library.js:10403
+#: wp-includes/js/dist/block-library.js:10387
 msgid "Unrecognized Block"
 msgstr "未识别的区块"
 
-#: wp-includes/js/dist/block-library.js:10376
+#: wp-includes/js/dist/block-library.js:10360
 msgid "Your site doesn’t include support for the \"%s\" block. You can leave this block intact or remove it entirely."
 msgstr "您的站点不支持“%s”区块。您可以原样保留此区块或移除此区块。"
 
-#: wp-includes/js/dist/block-library.js:10374
+#: wp-includes/js/dist/block-library.js:10358
 msgid "Keep as HTML"
 msgstr "留作HTML"
 
-#: wp-includes/js/dist/block-library.js:10368
+#: wp-includes/js/dist/block-library.js:10352
 msgid "Your site doesn’t include support for the \"%s\" block. You can leave this block intact, convert its content to a Custom HTML block, or remove it entirely."
 msgstr "您的站点不支持“%s”区块。您可以原样保留此区块，将内容转换为自定义HTML区块，或移除此区块。"
 
-#: wp-includes/js/dist/block-library.js:9021
+#: wp-includes/js/dist/block-library.js:9003
 msgid "Media area"
 msgstr "媒体区"
 
-#: wp-includes/js/dist/block-library.js:9386
+#: wp-includes/js/dist/block-library.js:9368
 msgid "Set media and words side-by-side for a richer layout."
 msgstr "并排显示媒体和文字来丰富布局。"
 
-#: wp-includes/js/dist/block-library.js:9385
+#: wp-includes/js/dist/block-library.js:9367
 msgid "Media & Text"
 msgstr "媒体和文本"
 
-#: wp-includes/js/dist/block-library.js:9280
+#: wp-includes/js/dist/block-library.js:9262
 msgid "Media & Text Settings"
 msgstr "媒体和文本设置"
 
-#: wp-includes/js/dist/block-library.js:9264
+#: wp-includes/js/dist/block-library.js:9246
 msgid "Show media on right"
 msgstr "在右侧显示媒体"
 
-#: wp-includes/js/dist/block-library.js:9255
+#: wp-includes/js/dist/block-library.js:9237
 msgid "Show media on left"
 msgstr "在左侧显示媒体"
 
-#: wp-includes/js/dist/block-library.js:10298
+#: wp-includes/js/dist/block-library.js:10282
 msgid "Write list…"
 msgstr "编写列表…"
 
-#: wp-includes/js/dist/editor.js:20941
+#: wp-includes/js/dist/editor.js:20853
 msgid "Indent list item"
 msgstr "增加列表项目缩进量"
 
-#: wp-includes/js/dist/editor.js:20934
+#: wp-includes/js/dist/editor.js:20846
 msgid "Outdent list item"
 msgstr "减少列表项目缩进量"
 
-#: wp-includes/js/dist/editor.js:20922
+#: wp-includes/js/dist/editor.js:20834
 msgid "Convert to ordered list"
 msgstr "转换为有序列表"
 
-#: wp-includes/js/dist/editor.js:20910
+#: wp-includes/js/dist/editor.js:20822
 msgid "Convert to unordered list"
 msgstr "转换为无序列表"
 
-#: wp-includes/js/dist/block-library.js:10132
+#: wp-includes/js/dist/block-library.js:10116
 msgid "numbered list"
 msgstr "编号列表"
 
-#: wp-includes/js/dist/block-library.js:10124
+#: wp-includes/js/dist/block-library.js:10108
 msgid "Create a bulleted or numbered list."
 msgstr "创建项目符号或编号列表。"
 
-#: wp-includes/js/dist/block-library.js:10049
+#: wp-includes/js/dist/block-library.js:10033
 msgid "recent posts"
 msgstr "最新文章"
 
-#: wp-includes/js/dist/block-library.js:10008
+#: wp-includes/js/dist/block-library.js:9992
 msgid "Display a list of your most recent posts."
 msgstr "显示您的最新文章的列表。"
 
-#: wp-includes/js/dist/block-library.js:9909
-#: wp-includes/js/dist/block-library.js:10007
+#: wp-includes/js/dist/block-library.js:9893
+#: wp-includes/js/dist/block-library.js:9991
 msgid "Latest Posts"
 msgstr "最新文章"
 
-#: wp-includes/js/dist/block-library.js:9890
+#: wp-includes/js/dist/block-library.js:9874
 msgid "Display post date"
 msgstr "显示文章日期"
 
-#: wp-includes/js/dist/block-library.js:9861
+#: wp-includes/js/dist/block-library.js:9845
 msgid "Latest Posts Settings"
 msgstr "最新文章设置"
 
-#: wp-includes/js/dist/block-library.js:9722
+#: wp-includes/js/dist/block-library.js:9704
 msgid "recent comments"
 msgstr "最新评论"
 
-#: wp-includes/js/dist/block-library.js:9709
+#: wp-includes/js/dist/block-library.js:9691
 msgid "Display a list of your most recent comments."
 msgstr "显示您的最新评论的列表。"
 
-#: wp-includes/js/dist/block-library.js:9708
+#: wp-includes/js/dist/block-library.js:9690
 msgid "Latest Comments"
 msgstr "最新评论"
 
-#: wp-includes/js/dist/block-library.js:9676
+#: wp-includes/js/dist/block-library.js:9658
 msgid "Number of Comments"
 msgstr "评论数量"
 
-#: wp-includes/js/dist/block-library.js:9672
+#: wp-includes/js/dist/block-library.js:9654
 msgid "Display Excerpt"
 msgstr "显示摘要"
 
-#: wp-includes/js/dist/block-library.js:9668
+#: wp-includes/js/dist/block-library.js:9650
 msgid "Display Date"
 msgstr "显示日期"
 
-#: wp-includes/js/dist/block-library.js:9664
+#: wp-includes/js/dist/block-library.js:9646
 msgid "Display Avatar"
 msgstr "显示头像"
 
-#: wp-includes/js/dist/block-library.js:9662
+#: wp-includes/js/dist/block-library.js:9644
 msgid "Latest Comments Settings"
 msgstr "最新评论设置"
 
-#: wp-includes/js/dist/block-library.js:3644
+#: wp-includes/js/dist/block-library.js:3631
 #: wp-includes/js/dist/format-library.js:499
 msgid "photo"
 msgstr "照片"
 
-#: wp-includes/js/dist/block-library.js:3630
+#: wp-includes/js/dist/block-library.js:3617
 msgid "Insert an image to make a visual statement."
 msgstr "插入图片来做出视觉声明。"
 
@@ -703,12 +703,12 @@ msgid "Image Dimensions"
 msgstr "图像尺寸"
 
 #: wp-includes/js/dist/block-library.js:3273
-#: wp-includes/js/dist/block-library.js:9293
+#: wp-includes/js/dist/block-library.js:9275
 msgid "Alternative text describes your image to people who can’t see it. Add a short description with its key details."
 msgstr "替换文本为那些不能看到您的图片的人描述您的图片。请加入一段简短的描述，列出图片的关键细节。"
 
 #: wp-includes/js/dist/block-library.js:3270
-#: wp-includes/js/dist/block-library.js:9290
+#: wp-includes/js/dist/block-library.js:9272
 msgid "Alt Text (Alternative Text)"
 msgstr "Alt文本（替换文本）"
 
@@ -716,209 +716,209 @@ msgstr "Alt文本（替换文本）"
 msgid "Image Settings"
 msgstr "图像设置"
 
-#: wp-includes/js/dist/block-library.js:3212
-#: wp-includes/js/dist/block-library.js:3225
+#: wp-includes/js/dist/block-library.js:3213
+#: wp-includes/js/dist/block-library.js:3226
 msgid "Edit image"
 msgstr "编辑图像"
 
-#: wp-includes/js/dist/block-library.js:8921
+#: wp-includes/js/dist/block-library.js:8903
 msgid "Write HTML…"
 msgstr "编写HTML…"
 
-#: wp-includes/js/dist/block-library.js:8853
+#: wp-includes/js/dist/block-library.js:8835
 msgid "embed"
 msgstr "嵌入"
 
-#: wp-includes/js/dist/block-library.js:8845
+#: wp-includes/js/dist/block-library.js:8827
 msgid "Add custom HTML code and preview it as you edit."
 msgstr "添加自定义HTML代码，并实时预览。"
 
-#: wp-includes/js/dist/block-library.js:4149
+#: wp-includes/js/dist/block-library.js:4131
 msgid "subtitle"
 msgstr "副标题"
 
-#: wp-includes/js/dist/block-library.js:4149
+#: wp-includes/js/dist/block-library.js:4131
 msgid "title"
 msgstr "标题"
 
-#: wp-includes/js/dist/block-library.js:4138
+#: wp-includes/js/dist/block-library.js:4120
 msgid "Introduce new sections and organize content to help visitors (and search engines) understand the structure of your content."
 msgstr "插入新的章节并整理内容来让您的访客（和搜索引擎）理解您的内容的结构。"
 
-#: wp-includes/js/dist/block-library.js:4137
+#: wp-includes/js/dist/block-library.js:4119
 msgid "Heading"
 msgstr "标题"
 
 #. translators: %s: heading level e.g: "1", "2", "3"
-#: wp-includes/js/dist/block-library.js:3958
+#: wp-includes/js/dist/block-library.js:3940
 msgid "Heading %d"
 msgstr "标题%d"
 
-#: wp-includes/js/dist/block-library.js:4075
+#: wp-includes/js/dist/block-library.js:4057
 msgid "Write heading…"
 msgstr "编写标题…"
 
-#: wp-includes/js/dist/block-library.js:4037
+#: wp-includes/js/dist/block-library.js:4019
 msgid "Text Alignment"
 msgstr "文本对齐"
 
-#: wp-includes/js/dist/block-library.js:4028
+#: wp-includes/js/dist/block-library.js:4010
 msgid "Level"
 msgstr "级别"
 
-#: wp-includes/js/dist/block-library.js:4027
+#: wp-includes/js/dist/block-library.js:4009
 msgid "Heading Settings"
 msgstr "标题设置"
 
-#: wp-includes/js/dist/block-library.js:5268
+#: wp-includes/js/dist/block-library.js:5250
 msgid "photos"
 msgstr "照片"
 
-#: wp-includes/js/dist/block-library.js:5268
+#: wp-includes/js/dist/block-library.js:5250
 msgid "images"
 msgstr "图像"
 
-#: wp-includes/js/dist/block-library.js:5253
+#: wp-includes/js/dist/block-library.js:5235
 msgid "Display multiple images in a rich gallery."
 msgstr "在相册中展示多张图片。"
 
-#: wp-includes/js/dist/block-library.js:4809
+#: wp-includes/js/dist/block-library.js:4791
 msgid "Remove Image"
 msgstr "移除图像"
 
-#: wp-includes/js/dist/block-library.js:5157
+#: wp-includes/js/dist/block-library.js:5139
 msgid "Upload an image"
 msgstr "上传图像"
 
-#: wp-includes/js/dist/block-library.js:5117
+#: wp-includes/js/dist/block-library.js:5099
 msgid "Crop Images"
 msgstr "裁切图像"
 
-#: wp-includes/js/dist/block-library.js:5097
+#: wp-includes/js/dist/block-library.js:5079
 msgid "Drag images, upload new ones or select files from your library."
 msgstr "拖动图像，上传新图像或从您的媒体库中选择文件。"
 
-#: wp-includes/js/dist/block-library.js:5000
+#: wp-includes/js/dist/block-library.js:4982
 msgid "Thumbnails are not cropped."
 msgstr "缩略图未被裁切。"
 
-#: wp-includes/js/dist/block-library.js:5000
+#: wp-includes/js/dist/block-library.js:4982
 msgid "Thumbnails are cropped to align."
 msgstr "缩略图已被裁切到对齐。"
 
-#: wp-includes/js/dist/block-library.js:8325
+#: wp-includes/js/dist/block-library.js:8307
 msgid "Show Download Button"
 msgstr "显示下载按钮"
 
-#: wp-includes/js/dist/block-library.js:8323
+#: wp-includes/js/dist/block-library.js:8305
 msgid "Download Button Settings"
 msgstr "下载按钮设置"
 
-#: wp-includes/js/dist/block-library.js:8312
+#: wp-includes/js/dist/block-library.js:8294
 msgid "Text Link Settings"
 msgstr "文本链接设置"
 
-#: wp-includes/js/dist/block-library.js:8283
+#: wp-includes/js/dist/block-library.js:8265
 msgid "The download button is hidden."
 msgstr "隐藏下载按钮。"
 
-#: wp-includes/js/dist/block-library.js:8283
+#: wp-includes/js/dist/block-library.js:8265
 msgid "The download button is visible."
 msgstr "下载按钮可见。"
 
-#: wp-includes/js/dist/block-library.js:8672
+#: wp-includes/js/dist/block-library.js:8654
 msgctxt "button label"
 msgid "Download"
 msgstr "下载"
 
-#: wp-includes/js/dist/block-library.js:8637
+#: wp-includes/js/dist/block-library.js:8619
 msgid "pdf"
 msgstr "pdf"
 
-#: wp-includes/js/dist/block-library.js:8637
+#: wp-includes/js/dist/block-library.js:8619
 msgid "document"
 msgstr "文档"
 
-#: wp-includes/js/dist/block-library.js:8626
+#: wp-includes/js/dist/block-library.js:8608
 msgid "Add a link to a downloadable file."
 msgstr "添加到可下载文件的链接。"
 
-#: wp-includes/js/dist/block-library.js:8584
+#: wp-includes/js/dist/block-library.js:8566
 msgid "Copy URL"
 msgstr "复制URL"
 
-#: wp-includes/js/dist/block-library.js:8553
+#: wp-includes/js/dist/block-library.js:8535
 msgid "Write file name…"
 msgstr "编写文件名…"
 
-#: wp-includes/js/dist/block-library.js:8539
+#: wp-includes/js/dist/block-library.js:8521
 msgid "Edit file"
 msgstr "编辑文件"
 
-#: wp-includes/js/dist/block-library.js:8508
+#: wp-includes/js/dist/block-library.js:8490
 msgid "Drag a file, upload a new one or select a file from your library."
 msgstr "拖动文件，上传新的文件或在您的媒体库中选择文件。"
 
 #. translators: %s: Name of service (e.g. VideoPress, YouTube)
-#: wp-includes/js/dist/block-library.js:8120
+#: wp-includes/js/dist/block-library.js:8102
 msgid "Add a block that displays content pulled from other sites, like Twitter, Instagram or YouTube."
 msgstr "加入用来显示其他站点内容的区块，如Twitter、Instagram或YouTube。"
 
-#: wp-includes/js/dist/block-library.js:8242
+#: wp-includes/js/dist/block-library.js:8224
 msgid "Embed videos, images, tweets, audio, and other content from external sources."
 msgstr "嵌入来自外部来源的视频、图像、推文、音频和其他内容。"
 
-#: wp-includes/js/dist/block-library.js:8241
+#: wp-includes/js/dist/block-library.js:8223
 msgctxt "block title"
 msgid "Embed"
 msgstr "嵌入"
 
-#: wp-includes/js/dist/block-library.js:7797
+#: wp-includes/js/dist/block-library.js:7779
 msgid "Previews for this are unavailable in the editor, sorry!"
 msgstr "不能在编辑器中预览此内容，抱歉！"
 
-#: wp-includes/js/dist/block-library.js:7769
+#: wp-includes/js/dist/block-library.js:7751
 msgid "Embedded content from %s"
 msgstr "嵌入来自%s的内容"
 
-#: wp-includes/js/dist/block-library.js:7634
+#: wp-includes/js/dist/block-library.js:7616
 msgid "Sorry, we could not embed that content."
 msgstr "抱歉，我们不能嵌入此内容。"
 
-#: wp-includes/js/dist/block-library.js:7632
+#: wp-includes/js/dist/block-library.js:7614
 msgctxt "button label"
 msgid "Embed"
 msgstr "嵌入"
 
-#: wp-includes/js/dist/block-library.js:7627
+#: wp-includes/js/dist/block-library.js:7609
 msgid "Enter URL to embed here…"
 msgstr "键入要在此嵌入的URL…"
 
-#: wp-includes/js/dist/block-library.js:8012
+#: wp-includes/js/dist/block-library.js:7994
 msgid "%s URL"
 msgstr "%sURL"
 
-#: wp-includes/js/dist/block-library.js:7589
+#: wp-includes/js/dist/block-library.js:7571
 msgid "Embedding…"
 msgstr "嵌入中…"
 
-#: wp-includes/js/dist/block-library.js:7568
+#: wp-includes/js/dist/block-library.js:7550
 msgid "Resize for smaller devices"
 msgstr "为小设备调整尺寸"
 
-#: wp-includes/js/dist/block-library.js:7565
+#: wp-includes/js/dist/block-library.js:7547
 msgid "Media Settings"
 msgstr "媒体设置"
 
-#: wp-includes/js/dist/block-library.js:7561
+#: wp-includes/js/dist/block-library.js:7543
 msgid "Edit URL"
 msgstr "编辑URL"
 
-#: wp-includes/js/dist/block-library.js:7970
+#: wp-includes/js/dist/block-library.js:7952
 msgid "This embed may not preserve its aspect ratio when the browser is resized."
 msgstr "在浏览器尺寸变化时，此嵌入可能不会保持其高宽比。"
 
-#: wp-includes/js/dist/block-library.js:7970
+#: wp-includes/js/dist/block-library.js:7952
 msgid "This embed will preserve its aspect ratio when the browser is resized."
 msgstr "在浏览器尺寸变化时，此嵌入会保持其高宽比。"
 
@@ -1054,7 +1054,7 @@ msgstr "嵌入Instagram贴文。"
 
 #: wp-includes/js/dist/block-library.js:2164
 #: wp-includes/js/dist/block-library.js:2200
-#: wp-includes/js/dist/block-library.js:9394
+#: wp-includes/js/dist/block-library.js:9376
 msgid "image"
 msgstr "图像"
 
@@ -1069,7 +1069,7 @@ msgstr "嵌入YouTube视频。"
 #: wp-includes/js/dist/block-library.js:2147
 #: wp-includes/js/dist/block-library.js:2209
 #: wp-includes/js/dist/block-library.js:2416
-#: wp-includes/js/dist/block-library.js:9394
+#: wp-includes/js/dist/block-library.js:9376
 msgid "video"
 msgstr "视频"
 
@@ -1084,171 +1084,171 @@ msgstr "音乐"
 msgid "Embed a tweet."
 msgstr "嵌入推文。"
 
-#: wp-includes/js/dist/block-library.js:7421
+#: wp-includes/js/dist/block-library.js:7403
 msgid "Write title…"
 msgstr "编写标题…"
 
-#: wp-includes/js/dist/block-library.js:7394
+#: wp-includes/js/dist/block-library.js:7380
 msgid "Drag an image or a video, upload a new one or select a file from your library."
 msgstr "拖动图像或视频，上传新的图像或视频或在您的媒体库中选择文件。"
 
-#: wp-includes/js/dist/block-library.js:7372
+#: wp-includes/js/dist/block-library.js:7358
 msgid "Background Opacity"
 msgstr "背景透明度"
 
-#: wp-includes/js/dist/block-library.js:7369
+#: wp-includes/js/dist/block-library.js:7355
 msgid "Overlay Color"
 msgstr "覆盖颜色"
 
-#: wp-includes/js/dist/block-library.js:7364
+#: wp-includes/js/dist/block-library.js:7350
 msgid "Overlay"
 msgstr "覆盖"
 
-#: wp-includes/js/dist/block-library.js:7360
+#: wp-includes/js/dist/block-library.js:7346
 msgid "Fixed Background"
 msgstr "固定背景"
 
-#: wp-includes/js/dist/block-library.js:7358
+#: wp-includes/js/dist/block-library.js:7344
 msgid "Cover Settings"
 msgstr "封面设置"
 
-#: wp-includes/js/dist/block-library.js:7352
-#: wp-includes/js/dist/block-library.js:8978
+#: wp-includes/js/dist/block-library.js:7338
+#: wp-includes/js/dist/block-library.js:8960
 msgid "Edit media"
 msgstr "编辑媒体"
 
-#: wp-includes/js/dist/block-library.js:7137
+#: wp-includes/js/dist/block-library.js:7119
 msgid "Add an image or video with a text overlay — great for headers."
 msgstr "加入有文字浮层的图像或视频，适合作为头部。"
 
-#: wp-includes/js/dist/block-library.js:7136
-#: wp-includes/js/dist/block-library.js:7388
+#: wp-includes/js/dist/block-library.js:7118
+#: wp-includes/js/dist/block-library.js:7374
 msgid "Cover"
 msgstr "封面"
 
-#: wp-includes/js/dist/block-library.js:6941
+#: wp-includes/js/dist/block-library.js:6923
 msgid "Add a block that displays content in multiple columns, then add whatever content blocks you’d like."
 msgstr "加入一个显示多栏内容的区块，您可以向其中加入任何您喜欢的内容区块。"
 
-#: wp-includes/js/dist/block-library.js:7056
+#: wp-includes/js/dist/block-library.js:7038
 msgid "A single column within a columns block."
 msgstr "多栏区块中的一栏。"
 
-#: wp-includes/js/dist/block-library.js:6775
+#: wp-includes/js/dist/block-library.js:6757
 msgid "Display code snippets that respect your spacing and tabs."
 msgstr "显示代码片段，这会尊重您的空白和制表符。"
 
-#: wp-includes/js/dist/block-library.js:6753
+#: wp-includes/js/dist/block-library.js:6735
 msgid "Write code…"
 msgstr "编写代码…"
 
-#: wp-includes/js/dist/block-library.js:13674
+#: wp-includes/js/dist/block-library.js:13658
 msgid "Use the classic WordPress editor."
 msgstr "使用经典WordPress编辑器。"
 
-#: wp-includes/js/dist/block-library.js:13673
+#: wp-includes/js/dist/block-library.js:13657
 msgctxt "block title"
 msgid "Classic"
 msgstr "经典"
 
-#: wp-includes/js/dist/block-library.js:13641
+#: wp-includes/js/dist/block-library.js:13625
 msgid "Classic"
 msgstr "经典"
 
-#: wp-includes/js/dist/block-library.js:13572
+#: wp-includes/js/dist/block-library.js:13556
 msgctxt "button to expand options"
 msgid "More"
 msgstr "更多"
 
-#: wp-includes/js/dist/block-library.js:6678
+#: wp-includes/js/dist/block-library.js:6660
 msgid "Display a list of all categories."
 msgstr "显示所有分类的列表。"
 
-#: wp-includes/js/dist/block-library.js:6613
+#: wp-includes/js/dist/block-library.js:6595
 msgid "Show Hierarchy"
 msgstr "显示层次结构"
 
-#: wp-includes/js/dist/block-library.js:6607
+#: wp-includes/js/dist/block-library.js:6589
 msgid "Categories Settings"
 msgstr "分类设置"
 
-#: wp-includes/js/dist/block-library.js:6303
+#: wp-includes/js/dist/block-library.js:6285
 msgctxt "block style"
 msgid "Squared"
 msgstr "方形"
 
-#: wp-includes/js/dist/block-library.js:6300
+#: wp-includes/js/dist/block-library.js:6282
 msgid "Outline"
 msgstr "轮廓"
 
-#: wp-includes/js/dist/block-library.js:6296
+#: wp-includes/js/dist/block-library.js:6278
 msgctxt "block style"
 msgid "Rounded"
 msgstr "圆角"
 
-#: wp-includes/js/dist/block-library.js:6278
+#: wp-includes/js/dist/block-library.js:6260
 msgid "Prompt visitors to take action with a custom button."
 msgstr "通过自定义按钮来提示访客做出动作。"
 
-#: wp-includes/js/dist/block-library.js:6277
+#: wp-includes/js/dist/block-library.js:6259
 msgid "Button"
 msgstr "按钮"
 
 #: wp-includes/js/dist/block-library.js:1686
-#: wp-includes/js/dist/block-library.js:6167
-#: wp-includes/js/dist/block-library.js:9296
-#: wp-includes/js/dist/block-library.js:10918
+#: wp-includes/js/dist/block-library.js:6149
+#: wp-includes/js/dist/block-library.js:9278
+#: wp-includes/js/dist/block-library.js:10902
 msgid "Color Settings"
 msgstr "颜色设置"
 
-#: wp-includes/js/dist/block-library.js:6150
-#: wp-includes/js/dist/block-library.js:8571
+#: wp-includes/js/dist/block-library.js:6132
+#: wp-includes/js/dist/block-library.js:8553
 msgid "Add text…"
 msgstr "添加文本…"
 
 #. translators: %s: title/name of the reusable block
-#: wp-includes/js/dist/block-library.js:11255
+#: wp-includes/js/dist/block-library.js:11239
 msgid "Reusable Block: %s"
 msgstr "可重用区块：%s"
 
-#: wp-includes/js/dist/block-library.js:11496
+#: wp-includes/js/dist/block-library.js:11480
 msgid "Reusable Block"
 msgstr "可重用区块"
 
-#: wp-includes/js/dist/block-library.js:11421
+#: wp-includes/js/dist/block-library.js:11405
 msgid "Block has been deleted or is unavailable."
 msgstr "区块已被删除或不可用。"
 
-#: wp-includes/js/dist/block-library.js:5976
+#: wp-includes/js/dist/block-library.js:5958
 msgid "Embed a simple audio player."
 msgstr "嵌入简单音频播放器。"
 
 #: wp-includes/js/dist/block-library.js:3467
-#: wp-includes/js/dist/block-library.js:4814
-#: wp-includes/js/dist/block-library.js:5939
-#: wp-includes/js/dist/block-library.js:7799
-#: wp-includes/js/dist/block-library.js:13264
+#: wp-includes/js/dist/block-library.js:4796
+#: wp-includes/js/dist/block-library.js:5921
+#: wp-includes/js/dist/block-library.js:7781
+#: wp-includes/js/dist/block-library.js:13248
 msgid "Write caption…"
 msgstr "编写说明…"
 
-#: wp-includes/js/dist/block-library.js:5904
+#: wp-includes/js/dist/block-library.js:5886
 msgid "Audio Settings"
 msgstr "音频设置"
 
-#: wp-includes/js/dist/block-library.js:5900
+#: wp-includes/js/dist/block-library.js:5882
 msgid "Edit audio"
 msgstr "编辑音频"
 
-#: wp-includes/js/dist/block-library.js:5667
+#: wp-includes/js/dist/block-library.js:5649
 msgid "Display a monthly archive of your posts."
 msgstr "显示您的文章的按月归档。"
 
-#: wp-includes/js/dist/block-library.js:5630
-#: wp-includes/js/dist/block-library.js:6617
+#: wp-includes/js/dist/block-library.js:5612
+#: wp-includes/js/dist/block-library.js:6599
 msgid "Show Post Counts"
 msgstr "显示文章计数"
 
-#: wp-includes/js/dist/block-library.js:5620
+#: wp-includes/js/dist/block-library.js:5602
 msgid "Archives Settings"
 msgstr "存档设置"
 
@@ -1349,7 +1349,7 @@ msgstr "退出代码编辑器"
 msgid "Editing Code"
 msgstr "正在编辑代码"
 
-#: wp-includes/js/dist/edit-post.js:5074
+#: wp-includes/js/dist/edit-post.js:5073
 msgid "Editor settings"
 msgstr "编辑器设置"
 
@@ -1364,7 +1364,7 @@ msgid "Close settings"
 msgstr "关闭设置"
 
 #. translators: %d: number of blocks
-#: wp-includes/js/dist/editor.js:29466
+#: wp-includes/js/dist/editor.js:29361
 msgid "%d block"
 msgid_plural "%d blocks"
 msgstr[0] "%d个区块"
@@ -1381,19 +1381,19 @@ msgstr "状态与可见性"
 msgid "Click to change"
 msgstr "点击以修改"
 
-#: wp-includes/js/dist/edit-post.js:5567
+#: wp-includes/js/dist/edit-post.js:5566
 msgid "Pin to toolbar"
 msgstr "加入工具栏"
 
-#: wp-includes/js/dist/edit-post.js:5567
+#: wp-includes/js/dist/edit-post.js:5566
 msgid "Unpin from toolbar"
 msgstr "从工具栏移除"
 
-#: wp-includes/js/dist/edit-post.js:5564
+#: wp-includes/js/dist/edit-post.js:5563
 msgid "Close plugin"
 msgstr "关闭插件"
 
-#: wp-includes/js/dist/edit-post.js:5562
+#: wp-includes/js/dist/edit-post.js:5561
 msgid "Editor plugins"
 msgstr "编辑器插件"
 
@@ -1401,7 +1401,7 @@ msgstr "编辑器插件"
 msgid "Advanced Panels"
 msgstr "高级面板"
 
-#: wp-includes/js/dist/edit-post.js:3910 wp-includes/js/dist/edit-post.js:4955
+#: wp-includes/js/dist/edit-post.js:3910 wp-includes/js/dist/edit-post.js:4954
 msgid "Discussion"
 msgstr "讨论"
 
@@ -1417,16 +1417,16 @@ msgstr "启用贴士"
 msgid "Enable Pre-publish Checks"
 msgstr "启用发布前检查"
 
-#: wp-includes/js/dist/edit-post.js:5324
+#: wp-includes/js/dist/edit-post.js:5323
 msgid "Open publish panel"
 msgstr "打开发布面板"
 
-#: wp-includes/js/dist/edit-post.js:5300
+#: wp-includes/js/dist/edit-post.js:5299
 msgid "Editor content"
 msgstr "编辑器内容"
 
 #. translators: accessibility text for the publish landmark region.
-#: wp-includes/js/dist/edit-post.js:5290
+#: wp-includes/js/dist/edit-post.js:5289
 msgid "Editor publish"
 msgstr "编辑器发布"
 
@@ -1630,43 +1630,43 @@ msgid "Document and block tools"
 msgstr "文档和区块工具"
 
 #. translators: %s: file name
-#: wp-includes/js/dist/editor.js:22557
+#: wp-includes/js/dist/editor.js:22467
 msgid "Error while uploading file %s to the media library."
 msgstr "在将文件%s上传至媒体库时出现错误。"
 
-#: wp-includes/js/dist/editor.js:22467
+#: wp-includes/js/dist/editor.js:22377
 msgid "This file is empty."
 msgstr "此文件为空。"
 
-#: wp-includes/js/dist/editor.js:22441
+#: wp-includes/js/dist/editor.js:22351
 msgid "Sorry, this file type is not supported here."
 msgstr "抱歉，不支持此文件类型。"
 
-#: wp-includes/js/dist/editor.js:13316
+#: wp-includes/js/dist/editor.js:13217
 msgid "Untitled Reusable Block"
 msgstr "未命名可重用区块"
 
-#: wp-includes/js/dist/editor.js:13224
+#: wp-includes/js/dist/editor.js:13125
 msgid "Block deleted."
 msgstr "区块已删除。"
 
-#: wp-includes/js/dist/editor.js:13112
+#: wp-includes/js/dist/editor.js:13013
 msgid "Block created."
 msgstr "区块已创建。"
 
-#: wp-includes/js/dist/editor.js:13725
+#: wp-includes/js/dist/editor.js:13626
 msgid "Trashing failed"
 msgstr "移动到回收站失败"
 
-#: wp-includes/js/dist/editor.js:13648
+#: wp-includes/js/dist/editor.js:13549
 msgid "Updating failed"
 msgstr "更新失败"
 
-#: wp-includes/js/dist/editor.js:13646
+#: wp-includes/js/dist/editor.js:13547
 msgid "Scheduling failed"
 msgstr "计划失败"
 
-#: wp-includes/js/dist/editor.js:13644 wp-includes/js/dist/editor.js:13645
+#: wp-includes/js/dist/editor.js:13545 wp-includes/js/dist/editor.js:13546
 msgid "Publishing failed"
 msgstr "发布失败"
 
@@ -1730,880 +1730,880 @@ msgstr "亮红色"
 msgid "Pale pink"
 msgstr "浅粉色"
 
-#: wp-includes/js/dist/editor.js:33481
+#: wp-includes/js/dist/editor.js:33373
 msgid "Additional CSS Class"
 msgstr "额外的CSS类"
 
-#: wp-includes/js/dist/editor.js:33385
+#: wp-includes/js/dist/editor.js:33277
 msgid "Anchors lets you link directly to a section on a page."
 msgstr "锚点能让您直接链接到文章的章节。"
 
-#: wp-includes/js/dist/editor.js:33384
+#: wp-includes/js/dist/editor.js:33276
 msgid "HTML Anchor"
 msgstr "HTML锚点"
 
-#: wp-includes/js/dist/editor.js:22265
+#: wp-includes/js/dist/editor.js:22175
 #: wp-includes/js/dist/block-library.js:3320
 msgid "Link Settings"
 msgstr "链接设置"
 
-#: wp-includes/js/dist/editor.js:23409
+#: wp-includes/js/dist/editor.js:23319
 msgid "Insert Link"
 msgstr "插入链接"
 
-#: wp-includes/js/dist/editor.js:29188
+#: wp-includes/js/dist/editor.js:29083
 msgid "You have unsaved changes. If you proceed, they will be lost."
 msgstr "您有未保存的修改。如果您继续，这些修改将会丢失。"
 
-#: wp-includes/js/dist/editor.js:24205
+#: wp-includes/js/dist/editor.js:24115
 msgid "Reset the template"
 msgstr "重置模板"
 
-#: wp-includes/js/dist/editor.js:24202
+#: wp-includes/js/dist/editor.js:24112
 msgid "Keep it as is"
 msgstr "保持原样"
 
-#: wp-includes/js/dist/editor.js:24199
+#: wp-includes/js/dist/editor.js:24109
 msgid "The content of your post doesn’t match the template assigned to your post type."
 msgstr "您的文章的内容不匹配指定给您的文章类别的模板。"
 
-#: wp-includes/js/dist/editor.js:24190
+#: wp-includes/js/dist/editor.js:24100
 msgid "Resetting the template may result in loss of content, do you want to continue?"
 msgstr "重置模板可能会导致丢失内容，您希望继续吗？"
 
-#: wp-includes/js/dist/editor.js:29075
+#: wp-includes/js/dist/editor.js:28970
 msgid "Document Outline"
 msgstr "文档大纲"
 
-#: wp-includes/js/dist/editor.js:29067
+#: wp-includes/js/dist/editor.js:28962
 msgid "Paragraphs"
 msgstr "段落"
 
-#: wp-includes/js/dist/editor.js:29063
+#: wp-includes/js/dist/editor.js:28958
 msgid "Headings"
 msgstr "标题"
 
-#: wp-includes/js/dist/editor.js:29057
+#: wp-includes/js/dist/editor.js:28952
 msgid "Document Statistics"
 msgstr "文档统计"
 
-#: wp-includes/js/dist/editor.js:29117
+#: wp-includes/js/dist/editor.js:29012
 msgid "Content structure"
 msgstr "内容结构"
 
-#: wp-includes/js/dist/editor.js:29236
+#: wp-includes/js/dist/editor.js:29131
 msgid "Skip to the selected block"
 msgstr "跳转到选定的区块"
 
-#: wp-includes/js/dist/editor.js:32920
+#: wp-includes/js/dist/editor.js:32812
 msgid "View the autosave"
 msgstr "查看自动保存"
 
-#: wp-includes/js/dist/editor.js:32917
+#: wp-includes/js/dist/editor.js:32809
 msgid "There is an autosave of this post that is more recent than the version below."
 msgstr "此文章存在比下列版本更新的自动保存。"
 
-#: wp-includes/js/dist/editor.js:26091
+#: wp-includes/js/dist/editor.js:25997
 msgid "Protected with a password you choose. Only those with the password can view this post."
 msgstr "受您选择的密码保护，只有持有密码的人士可查看此文章。"
 
-#: wp-includes/js/dist/editor.js:26087
+#: wp-includes/js/dist/editor.js:25993
 msgid "Only visible to site admins and editors."
 msgstr "只有站点管理员和编辑可见。"
 
-#: wp-includes/js/dist/editor.js:26083
+#: wp-includes/js/dist/editor.js:25989
 msgid "Visible to everyone."
 msgstr "所有人可见。"
 
-#: wp-includes/js/dist/editor.js:26247
+#: wp-includes/js/dist/editor.js:26153
 msgid "Use a secure password"
 msgstr "使用安全的密码"
 
-#: wp-includes/js/dist/editor.js:26241
+#: wp-includes/js/dist/editor.js:26147
 msgid "Create password"
 msgstr "创建密码"
 
-#: wp-includes/js/dist/editor.js:26212
+#: wp-includes/js/dist/editor.js:26118
 msgid "Post Visibility"
 msgstr "文章可见性"
 
-#: wp-includes/js/dist/editor.js:26151
+#: wp-includes/js/dist/editor.js:26057
 msgid "Would you like to privately publish this post now?"
 msgstr "您希望现在私密地发布此文章吗？"
 
-#: wp-includes/js/dist/editor.js:28921
+#: wp-includes/js/dist/editor.js:28816
 msgid "Move to trash"
 msgstr "移动到回收站"
 
-#: wp-includes/js/dist/editor.js:28813 wp-includes/js/dist/editor.js:28818
+#: wp-includes/js/dist/editor.js:28708 wp-includes/js/dist/editor.js:28713
 msgid "Add title"
 msgstr "添加标题"
 
-#: wp-includes/js/dist/editor.js:28045
+#: wp-includes/js/dist/editor.js:27950
 msgctxt "term"
 msgid "Available %s"
 msgstr "可用%s"
 
-#: wp-includes/js/dist/editor.js:28044 wp-includes/js/dist/editor.js:28045
+#: wp-includes/js/dist/editor.js:27949 wp-includes/js/dist/editor.js:27950
 msgid "Terms"
 msgstr "项目"
 
-#: wp-includes/js/dist/editor.js:28044
+#: wp-includes/js/dist/editor.js:27949
 msgctxt "term"
 msgid "Search %s"
 msgstr "搜索%s"
 
-#: wp-includes/js/dist/editor.js:28039
+#: wp-includes/js/dist/editor.js:27944
 msgid "Parent Term"
 msgstr "父项目"
 
-#: wp-includes/js/dist/editor.js:28037 wp-includes/js/dist/editor.js:28038
+#: wp-includes/js/dist/editor.js:27942 wp-includes/js/dist/editor.js:27943
 msgid "Add new term"
 msgstr "添加新项目"
 
-#: wp-includes/js/dist/editor.js:28037 wp-includes/js/dist/editor.js:28038
+#: wp-includes/js/dist/editor.js:27942 wp-includes/js/dist/editor.js:27943
 msgid "Add new category"
 msgstr "添加新分类"
 
-#: wp-includes/js/dist/editor.js:26638
+#: wp-includes/js/dist/editor.js:26544
 msgctxt "term"
 msgid "Remove %s"
 msgstr "移除%s"
 
-#: wp-includes/js/dist/editor.js:26637
+#: wp-includes/js/dist/editor.js:26543
 msgctxt "term"
 msgid "%s removed"
 msgstr "%s已移除"
 
-#: wp-includes/js/dist/editor.js:26636 wp-includes/js/dist/editor.js:27789
+#: wp-includes/js/dist/editor.js:26542 wp-includes/js/dist/editor.js:27694
 msgctxt "term"
 msgid "%s added"
 msgstr "%s已添加"
 
-#: wp-includes/js/dist/editor.js:26635 wp-includes/js/dist/editor.js:27789
+#: wp-includes/js/dist/editor.js:26541 wp-includes/js/dist/editor.js:27694
 msgid "Term"
 msgstr "项目"
 
-#: wp-includes/js/dist/editor.js:26635
+#: wp-includes/js/dist/editor.js:26541
 msgid "Tag"
 msgstr "标签"
 
-#: wp-includes/js/dist/editor.js:26634
+#: wp-includes/js/dist/editor.js:26540
 msgid "Add New Term"
 msgstr "添加新项目"
 
-#: wp-includes/js/dist/editor.js:27282
+#: wp-includes/js/dist/editor.js:27188
 msgid "Switch to Draft"
 msgstr "切换到草稿"
 
-#: wp-includes/js/dist/editor.js:27268
+#: wp-includes/js/dist/editor.js:27174
 msgid "Are you sure you want to unschedule this post?"
 msgstr "您确定要取消计划此文章吗？"
 
-#: wp-includes/js/dist/editor.js:27266
+#: wp-includes/js/dist/editor.js:27172
 msgid "Are you sure you want to unpublish this post?"
 msgstr "您确定要取消发布此文章吗？"
 
-#: wp-includes/js/dist/editor.js:27573
+#: wp-includes/js/dist/editor.js:27478
 msgid "Stick to the Front Page"
 msgstr "置顶到首页"
 
-#: wp-includes/js/dist/editor.js:26371
+#: wp-includes/js/dist/editor.js:26277
 msgid "Immediately"
 msgstr "立即"
 
-#: wp-includes/js/dist/editor.js:27407
+#: wp-includes/js/dist/editor.js:27314
 msgid "Saving"
 msgstr "正在保存"
 
-#: wp-includes/js/dist/editor.js:27407
+#: wp-includes/js/dist/editor.js:27314
 msgid "Autosaving"
 msgstr "正在自动保存"
 
-#: wp-includes/js/dist/editor.js:26031
+#: wp-includes/js/dist/editor.js:25937
 msgid "Finished writing? That’s great, let’s get this published right now. Just click “Publish” and you’re good to go."
 msgstr "完成写作了？好极了，现在就发布吧。请点击“发布”按钮。"
 
-#: wp-includes/js/dist/editor.js:26021
+#: wp-includes/js/dist/editor.js:25927
 msgid "Publish…"
 msgstr "发布…"
 
-#: wp-includes/js/dist/editor.js:26915
+#: wp-includes/js/dist/editor.js:26821
 msgid "Publish:"
 msgstr "发布："
 
-#: wp-includes/js/dist/editor.js:26909
+#: wp-includes/js/dist/editor.js:26815
 msgid "Visibility:"
 msgstr "可见性："
 
-#: wp-includes/js/dist/editor.js:26902
+#: wp-includes/js/dist/editor.js:26808
 msgid "Double-check your settings before publishing."
 msgstr "请在发布前再次检查您的设置。"
 
-#: wp-includes/js/dist/editor.js:26901
+#: wp-includes/js/dist/editor.js:26807
 msgid "Are you ready to publish?"
 msgstr "您准备好发布了吗？"
 
-#: wp-includes/js/dist/editor.js:26899
+#: wp-includes/js/dist/editor.js:26805
 msgid "Your work will be published at the specified date and time."
 msgstr "您的工作会在指定的日期和时间被发布。"
 
-#: wp-includes/js/dist/editor.js:26898
+#: wp-includes/js/dist/editor.js:26804
 msgid "Are you ready to schedule?"
 msgstr "您准备好计划了吗？"
 
-#: wp-includes/js/dist/editor.js:26896
+#: wp-includes/js/dist/editor.js:26802
 msgid "When you’re ready, submit your work for review, and an Editor will be able to approve it for you."
 msgstr "当您准备好后，请提交您的工作至复审，然后其他编辑就可以批准您的文章。"
 
-#: wp-includes/js/dist/editor.js:26895
+#: wp-includes/js/dist/editor.js:26801
 msgid "Are you ready to submit for review?"
 msgstr "您准备好提交复审了吗？"
 
-#: wp-includes/js/dist/editor.js:27049
+#: wp-includes/js/dist/editor.js:26955
 msgid "Copy Link"
 msgstr "复制链接"
 
-#: wp-includes/js/dist/editor.js:27049 wp-includes/js/dist/edit-post.js:1057
-#: wp-includes/js/dist/block-library.js:8584
+#: wp-includes/js/dist/editor.js:26955 wp-includes/js/dist/edit-post.js:1057
+#: wp-includes/js/dist/block-library.js:8566
 msgid "Copied!"
 msgstr "已复制！"
 
 #. translators: %s: post type singular name
-#: wp-includes/js/dist/editor.js:27037
+#: wp-includes/js/dist/editor.js:26943
 msgid "%s address"
 msgstr "%s地址"
 
-#: wp-includes/js/dist/editor.js:27032
+#: wp-includes/js/dist/editor.js:26938
 msgid "What’s next?"
 msgstr "现在要做什么？"
 
-#: wp-includes/js/dist/editor.js:27022
+#: wp-includes/js/dist/editor.js:26928
 msgid "is now live."
 msgstr "已被发布。"
 
-#: wp-includes/js/dist/editor.js:27022
+#: wp-includes/js/dist/editor.js:26928
 msgid "is now scheduled. It will go live on"
 msgstr "已被计划，将在此时间发布："
 
-#: wp-includes/js/dist/editor.js:26715
+#: wp-includes/js/dist/editor.js:26621
 msgid "Tags help users and search engines navigate your site and find your content. Add a few keywords to describe your post."
 msgstr "标签能够帮助用户和搜索引擎浏览您的站点并找到内容。请加入一些能描述您的文章的关键词。"
 
-#: wp-includes/js/dist/editor.js:26711
+#: wp-includes/js/dist/editor.js:26617
 msgid "Add tags"
 msgstr "添加标签"
 
-#: wp-includes/js/dist/editor.js:26825
+#: wp-includes/js/dist/editor.js:26731
 msgid "Apply the \"%1$s\" format."
 msgstr "应用“%1$s”格式。"
 
-#: wp-includes/js/dist/editor.js:26822
+#: wp-includes/js/dist/editor.js:26728
 msgid "Your theme uses post formats to highlight different kinds of content, like images or videos. Apply a post format to see this special styling."
 msgstr "您的主题使用了文章格式来呈现不同类型的内容，如图像或视频。应用文章格式来查看这些特殊格式。"
 
-#: wp-includes/js/dist/editor.js:26818
+#: wp-includes/js/dist/editor.js:26724
 msgid "Use a post format"
 msgstr "使用文章格式"
 
-#: wp-includes/js/dist/editor.js:27187
+#: wp-includes/js/dist/editor.js:27093
 msgid "Always show pre-publish checks."
 msgstr "总是显示发布前检查。"
 
-#: wp-includes/js/dist/editor.js:27179
+#: wp-includes/js/dist/editor.js:27085
 msgid "Close panel"
 msgstr "关闭面板"
 
-#: wp-includes/js/dist/editor.js:25878
+#: wp-includes/js/dist/editor.js:25788
 msgid "Submit for Review"
 msgstr "提交复审"
 
-#: wp-includes/js/dist/editor.js:25874
+#: wp-includes/js/dist/editor.js:25784
 msgid "Scheduling…"
 msgstr "正在计划…"
 
-#: wp-includes/js/dist/editor.js:25872
+#: wp-includes/js/dist/editor.js:25782
 msgid "Updating…"
 msgstr "正在更新…"
 
-#: wp-includes/js/dist/editor.js:25870
+#: wp-includes/js/dist/editor.js:25780
 msgid "Publishing…"
 msgstr "正在发布…"
 
-#: wp-includes/js/dist/editor.js:25435
+#: wp-includes/js/dist/editor.js:25345
 msgid "Click “Preview” to load a preview of this page, so you can make sure you’re happy with your blocks."
 msgstr "点击“预览”来载入本页的预览，这样您可以确定您对所有区块均满意。"
 
-#: wp-includes/js/dist/editor.js:25429
+#: wp-includes/js/dist/editor.js:25339
 msgctxt "imperative verb"
 msgid "Preview"
 msgstr "预览"
 
-#: wp-includes/js/dist/editor.js:25315 wp-includes/js/dist/editor.js:25318
+#: wp-includes/js/dist/editor.js:25225 wp-includes/js/dist/editor.js:25228
 msgid "Generating preview…"
 msgstr "正在生成预览…"
 
-#: wp-includes/js/dist/editor.js:25833
+#: wp-includes/js/dist/editor.js:25743
 msgid "Allow Pingbacks & Trackbacks"
 msgstr "允许Pingback和Trackback"
 
-#: wp-includes/js/dist/editor.js:28619
+#: wp-includes/js/dist/editor.js:28520
 msgid "Change Permalinks"
 msgstr "修改永久链接"
 
-#: wp-includes/js/dist/editor.js:28591
+#: wp-includes/js/dist/editor.js:28492
 msgid "Permalink:"
 msgstr "永久链接："
 
-#: wp-includes/js/dist/editor.js:28569
+#: wp-includes/js/dist/editor.js:28470
 msgid "Copy the permalink"
 msgstr "复制永久链接"
 
-#: wp-includes/js/dist/editor.js:28569
+#: wp-includes/js/dist/editor.js:28470
 msgid "Permalink copied"
 msgstr "已复制永久链接"
 
-#: wp-includes/js/dist/editor.js:28426
+#: wp-includes/js/dist/editor.js:28329
 msgid "Edit post permalink"
 msgstr "编辑文章永久链接"
 
-#: wp-includes/js/dist/editor.js:25688
+#: wp-includes/js/dist/editor.js:25598
 msgid "Take Over"
 msgstr "接管"
 
 #. translators: %s: user's display name
-#: wp-includes/js/dist/editor.js:25678
+#: wp-includes/js/dist/editor.js:25588
 msgid "Another user is currently working on this post, which means you cannot make changes, unless you take over."
 msgstr "其他用户现在正在编辑此文章，这意味着您现在不能进行修改，除非您接管此文章。"
 
 #. translators: %s: user's display name
-#: wp-includes/js/dist/editor.js:25678
+#: wp-includes/js/dist/editor.js:25588
 msgid "%s is currently working on this post, which means you cannot make changes, unless you take over."
 msgstr "%s现在正在编辑此文章，这意味着您现在不能进行修改，除非您接管此文章。"
 
 #. translators: %s: user's display name
-#: wp-includes/js/dist/editor.js:25670
+#: wp-includes/js/dist/editor.js:25580
 msgid "Another user now has editing control of this post. Don’t worry, your changes up to this moment have been saved."
 msgstr "其他用户现在正在编辑此文章。不用慌，您到现在为止的更改均已被保存。"
 
 #. translators: %s: user's display name
-#: wp-includes/js/dist/editor.js:25670
+#: wp-includes/js/dist/editor.js:25580
 msgid "%s now has editing control of this post. Don’t worry, your changes up to this moment have been saved."
 msgstr "%s现在正在编辑此文章。不用慌，您到现在为止的更改均已被保存。"
 
-#: wp-includes/js/dist/editor.js:25666
+#: wp-includes/js/dist/editor.js:25576
 msgid "Avatar"
 msgstr "头像"
 
-#: wp-includes/js/dist/editor.js:25658
+#: wp-includes/js/dist/editor.js:25568
 msgid "This post is already being edited."
 msgstr "此文章正在被编辑。"
 
-#: wp-includes/js/dist/editor.js:25658
+#: wp-includes/js/dist/editor.js:25568
 msgid "Someone else has taken over this post."
 msgstr "其他人接管了此文章。"
 
-#: wp-includes/js/dist/editor.js:25259
+#: wp-includes/js/dist/editor.js:25169
 msgid "%d Revision"
 msgid_plural "%d Revisions"
 msgstr[0] "%d个修订版本"
 
-#: wp-includes/js/dist/editor.js:25149
+#: wp-includes/js/dist/editor.js:25059
 msgid "Post Format"
 msgstr "文章格式"
 
-#: wp-includes/js/dist/editor.js:25123
+#: wp-includes/js/dist/editor.js:25033
 msgid "Chat"
 msgstr "聊天"
 
-#: wp-includes/js/dist/editor.js:25111
+#: wp-includes/js/dist/editor.js:25021
 msgid "Standard"
 msgstr "标准"
 
-#: wp-includes/js/dist/editor.js:25096
+#: wp-includes/js/dist/editor.js:25006
 msgid "Aside"
 msgstr "日志"
 
-#: wp-includes/js/dist/editor.js:24984
-#: wp-includes/js/dist/block-library.js:13249
+#: wp-includes/js/dist/editor.js:24894
+#: wp-includes/js/dist/block-library.js:13233
 msgid "Replace image"
 msgstr "更换图像"
 
-#: wp-includes/js/dist/editor.js:24963
+#: wp-includes/js/dist/editor.js:24873
 msgid "Edit or update the image"
 msgstr "编辑或更新此图像"
 
-#: wp-includes/js/dist/editor.js:24792
+#: wp-includes/js/dist/editor.js:24702
 msgid "Learn more about manual excerpts"
 msgstr "了解关于人工摘要细节"
 
-#: wp-includes/js/dist/editor.js:24784
+#: wp-includes/js/dist/editor.js:24694
 msgid "Write an excerpt (optional)"
 msgstr "撰写摘要（可选）"
 
-#: wp-includes/js/dist/editor.js:24751
+#: wp-includes/js/dist/editor.js:24661
 msgid "Allow Comments"
 msgstr "允许评论"
 
-#: wp-includes/js/dist/editor.js:20106
+#: wp-includes/js/dist/editor.js:20018
 msgid "(%s: %s)"
 msgstr "（%s：%s）"
 
-#: wp-includes/js/dist/editor.js:24494
+#: wp-includes/js/dist/editor.js:24404
 msgid "no parent"
 msgstr "无父级"
 
-#: wp-includes/js/dist/editor.js:24489
+#: wp-includes/js/dist/editor.js:24399
 msgid "no title"
 msgstr "无标题"
 
-#: wp-includes/js/dist/editor.js:24390
+#: wp-includes/js/dist/editor.js:24300
 msgid "Order"
 msgstr "排序"
 
-#: wp-includes/js/dist/editor.js:22920
+#: wp-includes/js/dist/editor.js:22830
 msgid "Drag a video, upload a new one or select a file from your library."
 msgstr "拖动视频，上传新视频或从您的媒体库中选择文件。"
 
-#: wp-includes/js/dist/editor.js:22918
+#: wp-includes/js/dist/editor.js:22828
 msgid "Drag an image, upload a new one or select a file from your library."
 msgstr "拖动图像，上传新图像或从您的媒体库中选择文件。"
 
-#: wp-includes/js/dist/editor.js:22916
+#: wp-includes/js/dist/editor.js:22826
 msgid "Drag an audio, upload a new one or select a file from your library."
 msgstr "拖动音频，上传新音频或从您的媒体库中选择文件。"
 
-#: wp-includes/js/dist/editor.js:22913
+#: wp-includes/js/dist/editor.js:22823
 msgid "Drag a media file, upload a new one or select a file from your library."
 msgstr "拖动媒体文件，上传新文件或从您的媒体库中选择文件。"
 
-#: wp-includes/js/dist/editor.js:22753
+#: wp-includes/js/dist/editor.js:22663
 msgid "Paste or type URL"
 msgstr "粘贴或键入URL"
 
-#: wp-includes/js/dist/editor.js:17755 wp-includes/js/dist/edit-post.js:1156
+#: wp-includes/js/dist/editor.js:17656 wp-includes/js/dist/edit-post.js:1156
 msgid "Manage All Reusable Blocks"
 msgstr "管理所有可重用区块"
 
-#: wp-includes/js/dist/editor.js:17743
+#: wp-includes/js/dist/editor.js:17644
 msgid "Reusable"
 msgstr "可重用"
 
-#: wp-includes/js/dist/editor.js:17712
+#: wp-includes/js/dist/editor.js:17613
 msgctxt "blocks"
 msgid "Most Used"
 msgstr "最常用"
 
-#: wp-includes/js/dist/editor.js:17705
+#: wp-includes/js/dist/editor.js:17606
 msgid "Available block types"
 msgstr "可用的区块类型"
 
-#: wp-includes/js/dist/editor.js:17693 wp-includes/js/dist/editor.js:17696
+#: wp-includes/js/dist/editor.js:17594 wp-includes/js/dist/editor.js:17597
 msgid "Search for a block"
 msgstr "搜索区块"
 
-#: wp-includes/js/dist/editor.js:17645 wp-includes/js/dist/editor.js:27947
+#: wp-includes/js/dist/editor.js:17546 wp-includes/js/dist/editor.js:27852
 msgid "%d result found."
 msgid_plural "%d results found."
 msgstr[0] "找到%d个结果。"
 
-#: wp-includes/js/dist/editor.js:17377
+#: wp-includes/js/dist/editor.js:17278
 msgid "Inline Elements"
 msgstr "内联元素"
 
-#: wp-includes/js/dist/editor.js:18308
+#: wp-includes/js/dist/editor.js:18209
 msgid "Add %s"
 msgstr "添加%s"
 
-#: wp-includes/js/dist/editor.js:30625
+#: wp-includes/js/dist/editor.js:30520
 msgid "The editor has encountered an unexpected error."
 msgstr "编辑器遇到了未知错误。"
 
-#: wp-includes/js/dist/editor.js:30624
+#: wp-includes/js/dist/editor.js:30519
 msgid "Copy Error"
 msgstr "复制错误"
 
-#: wp-includes/js/dist/editor.js:30620
+#: wp-includes/js/dist/editor.js:30515
 msgid "Copy Post Text"
 msgstr "复制文章文本"
 
-#: wp-includes/js/dist/editor.js:30616
+#: wp-includes/js/dist/editor.js:30511
 msgid "Attempt Recovery"
 msgstr "尝试恢复"
 
-#: wp-includes/js/dist/editor.js:23582
+#: wp-includes/js/dist/editor.js:23492
 msgid "(Click to focus this heading)"
 msgstr "（点击来聚焦此标题）"
 
-#: wp-includes/js/dist/editor.js:23628
+#: wp-includes/js/dist/editor.js:23538
 msgid "(Multiple H1 headings are not recommended)"
 msgstr "（不推荐使用多个H1标题）"
 
-#: wp-includes/js/dist/editor.js:23623
+#: wp-includes/js/dist/editor.js:23533
 msgid "(Your theme may already use a H1 for the post title)"
 msgstr "（您的主题可能已经为文章标题使用了H1）"
 
-#: wp-includes/js/dist/editor.js:23618
+#: wp-includes/js/dist/editor.js:23528
 msgid "(Incorrect heading level)"
 msgstr "（错误的标题级别）"
 
-#: wp-includes/js/dist/editor.js:23613
+#: wp-includes/js/dist/editor.js:23523
 msgid "(Empty heading)"
 msgstr "（空标题）"
 
-#: wp-includes/js/dist/editor.js:15372
+#: wp-includes/js/dist/editor.js:15273
 msgid "This color combination may be hard for people to read. Try using a brighter background color and/or a darker text color."
 msgstr "此颜色组合可能不便阅读，请尝试使用较浅的背景颜色和/或较深的文本颜色。"
 
-#: wp-includes/js/dist/editor.js:15372
+#: wp-includes/js/dist/editor.js:15273
 msgid "This color combination may be hard for people to read. Try using a darker background color and/or a brighter text color."
 msgstr "此颜色组合可能不便阅读，请尝试使用较深的背景颜色和/或较浅的文本颜色。"
 
-#: wp-includes/js/dist/editor.js:20019
+#: wp-includes/js/dist/editor.js:19931
 msgid "(current %s: %s)"
 msgstr "（当前%s：%s）"
 
-#: wp-includes/js/dist/editor.js:30282
+#: wp-includes/js/dist/editor.js:30177
 msgid "Transform To:"
 msgstr "转换为："
 
-#: wp-includes/js/dist/editor.js:30275
+#: wp-includes/js/dist/editor.js:30170
 msgid "Block Styles"
 msgstr "区块样式"
 
-#: wp-includes/js/dist/editor.js:30252
+#: wp-includes/js/dist/editor.js:30147
 msgid "Change type of %d block"
 msgid_plural "Change type of %d blocks"
 msgstr[0] "修改%d个区块的类型"
 
-#: wp-includes/js/dist/editor.js:30252
+#: wp-includes/js/dist/editor.js:30147
 msgid "Change block type"
 msgstr "修改区块类型"
 
-#: wp-includes/js/dist/editor.js:29852
+#: wp-includes/js/dist/editor.js:29747
 msgid "Remove from Reusable Blocks"
 msgstr "从可重用区块中移除"
 
-#: wp-includes/js/dist/editor.js:29771
+#: wp-includes/js/dist/editor.js:29666
 msgid "Convert to Regular Block"
 msgstr "转换为常规区块"
 
-#: wp-includes/js/dist/editor.js:29767
+#: wp-includes/js/dist/editor.js:29662
 msgid "Add to Reusable Blocks"
 msgstr "添加到可重用区块"
 
-#: wp-includes/js/dist/editor.js:30119
+#: wp-includes/js/dist/editor.js:30014
 msgid "Remove Block"
 msgstr "移除区块"
 
-#: wp-includes/js/dist/editor.js:30098
+#: wp-includes/js/dist/editor.js:29993
 msgid "Insert After"
 msgstr "在之后插入"
 
-#: wp-includes/js/dist/editor.js:30093
+#: wp-includes/js/dist/editor.js:29988
 msgid "Insert Before"
 msgstr "在之前插入"
 
-#: wp-includes/js/dist/editor.js:30088
+#: wp-includes/js/dist/editor.js:29983
 msgid "Duplicate"
 msgstr "复制"
 
-#: wp-includes/js/dist/editor.js:16263 wp-includes/js/dist/editor.js:16270
-#: wp-includes/js/dist/editor.js:30052
+#: wp-includes/js/dist/editor.js:16164 wp-includes/js/dist/editor.js:16171
+#: wp-includes/js/dist/editor.js:29947
 msgid "More options"
 msgstr "更多选项"
 
-#: wp-includes/js/dist/editor.js:30052
+#: wp-includes/js/dist/editor.js:29947
 msgid "Hide options"
 msgstr "隐藏选项"
 
-#: wp-includes/js/dist/editor.js:29704
+#: wp-includes/js/dist/editor.js:29599
 msgid "Edit visually"
 msgstr "可视化编辑"
 
-#: wp-includes/js/dist/editor.js:29704
+#: wp-includes/js/dist/editor.js:29599
 msgid "Edit as HTML"
 msgstr "作为HTML编辑"
 
-#: wp-includes/js/dist/editor.js:14968 wp-includes/js/dist/editor.js:15043
+#: wp-includes/js/dist/editor.js:14869 wp-includes/js/dist/editor.js:14944
 msgid "Block Navigation"
 msgstr "区块导航"
 
 #. translators: 1: Number of selected blocks, 2: Position of selected blocks
-#: wp-includes/js/dist/editor.js:15698
+#: wp-includes/js/dist/editor.js:15599
 msgid "Move %1$d block from position %2$d down by one place"
 msgid_plural "Move %1$d blocks from position %2$d down by one place"
 msgstr[0] "将%1$d个区块从位置%2$d下移一位"
 
 #. translators: 1: Number of selected blocks, 2: Position of selected blocks
-#: wp-includes/js/dist/editor.js:15693
+#: wp-includes/js/dist/editor.js:15594
 msgid "Move %1$d block from position %2$d up by one place"
 msgid_plural "Move %1$d blocks from position %2$d up by one place"
 msgstr[0] "将%1$d个区块从位置%2$d上移一位"
 
-#: wp-includes/js/dist/editor.js:15688
+#: wp-includes/js/dist/editor.js:15589
 msgid "Blocks cannot be moved down as they are already at the bottom"
 msgstr "区块已在最底，不能被下移"
 
-#: wp-includes/js/dist/editor.js:15684
+#: wp-includes/js/dist/editor.js:15585
 msgid "Blocks cannot be moved up as they are already at the top"
 msgstr "区块已在最顶，不能被上移"
 
 #. translators: %s: Type of block (i.e. Text, Image etc)
-#: wp-includes/js/dist/editor.js:15664
+#: wp-includes/js/dist/editor.js:15565
 msgid "Block %s is at the beginning of the content and can’t be moved up"
 msgstr "区块%s已在内容最始，不能被上移"
 
 #. translators: 1: Type of block (i.e. Text, Image etc), 2: Position of
 #. selected block, 3: New position
-#: wp-includes/js/dist/editor.js:15658
+#: wp-includes/js/dist/editor.js:15559
 msgid "Move %1$s block from position %2$d up to position %3$d"
 msgstr "将区块%1$s从位置%2$d上移到位置%3$d"
 
 #. translators: %s: Type of block (i.e. Text, Image etc)
-#: wp-includes/js/dist/editor.js:15652
+#: wp-includes/js/dist/editor.js:15553
 msgid "Block %s is at the end of the content and can’t be moved down"
 msgstr "区块%s已在内容最末，不能被下移"
 
 #. translators: 1: Type of block (i.e. Text, Image etc), 2: Position of
 #. selected block, 3: New position
-#: wp-includes/js/dist/editor.js:15646
+#: wp-includes/js/dist/editor.js:15547
 msgid "Move %1$s block from position %2$d down to position %3$d"
 msgstr "将区块%1$s从位置%2$d下移到位置%3$d"
 
 #. translators: %s: Type of block (i.e. Text, Image etc)
-#: wp-includes/js/dist/editor.js:15640
+#: wp-includes/js/dist/editor.js:15541
 msgid "Block %s is the only block, and cannot be moved"
 msgstr "区块%s是唯一的区块，不能被移动"
 
-#: wp-includes/js/dist/editor.js:18977
+#: wp-includes/js/dist/editor.js:18901
 msgid "Block: %s"
 msgstr "区块：%s"
 
-#: wp-includes/js/dist/editor.js:16538
+#: wp-includes/js/dist/editor.js:16439
 msgid "This block contains unexpected or invalid content."
 msgstr "此区块包含未预料的或无效的内容。"
 
 #. translators: Button to fix block content
-#: wp-includes/js/dist/editor.js:16531
+#: wp-includes/js/dist/editor.js:16432
 msgctxt "imperative verb"
 msgid "Resolve"
 msgstr "解析"
 
-#: wp-includes/js/dist/editor.js:16520 wp-includes/js/dist/editor.js:29903
+#: wp-includes/js/dist/editor.js:16421 wp-includes/js/dist/editor.js:29798
 msgid "Convert to Blocks"
 msgstr "转换为区块"
 
 #. translators: Dialog title to fix block content
-#: wp-includes/js/dist/editor.js:16512
+#: wp-includes/js/dist/editor.js:16413
 msgid "Resolve Block"
 msgstr "解析区块"
 
-#: wp-includes/js/dist/editor.js:16505
+#: wp-includes/js/dist/editor.js:16406
 msgid "Convert to Classic Block"
 msgstr "转换为经典区块"
 
-#: wp-includes/js/dist/editor.js:16599
+#: wp-includes/js/dist/editor.js:16500
 msgid "This block has encountered an error and cannot be previewed."
 msgstr "此区块遇到了一个错误，不能被预览。"
 
-#: wp-includes/js/dist/editor.js:17849 wp-includes/js/dist/editor.js:19368
-#: wp-includes/js/dist/editor.js:19467
+#: wp-includes/js/dist/editor.js:17750 wp-includes/js/dist/editor.js:19280
+#: wp-includes/js/dist/editor.js:19379
 msgid "Add block"
 msgstr "添加区块"
 
-#: wp-includes/js/dist/editor.js:29529
+#: wp-includes/js/dist/editor.js:29424
 msgid "No block selected."
 msgstr "未选择区块。"
 
-#: wp-includes/js/dist/editor.js:16422
+#: wp-includes/js/dist/editor.js:16323
 msgid "After Conversion"
 msgstr "转换后"
 
-#: wp-includes/js/dist/editor.js:16418 wp-includes/js/dist/editor.js:16536
+#: wp-includes/js/dist/editor.js:16319 wp-includes/js/dist/editor.js:16437
 msgid "Convert to HTML"
 msgstr "转换为HTML"
 
-#: wp-includes/js/dist/editor.js:16415
+#: wp-includes/js/dist/editor.js:16316
 msgid "Current"
 msgstr "当前"
 
-#: wp-includes/js/dist/editor.js:14685
+#: wp-includes/js/dist/editor.js:14586
 msgid "Change Alignment"
 msgstr "修改对齐方式"
 
-#: wp-includes/js/dist/editor.js:14658
+#: wp-includes/js/dist/editor.js:14559
 msgid "Full width"
 msgstr "全宽"
 
-#: wp-includes/js/dist/editor.js:14654
+#: wp-includes/js/dist/editor.js:14555
 msgid "Wide width"
 msgstr "阔宽"
 
-#: wp-includes/js/dist/editor.js:14590
+#: wp-includes/js/dist/editor.js:14491
 msgid "Change Text Alignment"
 msgstr "修改文本对齐"
 
 #. translators: %s: error message describing the problem
-#: wp-includes/js/dist/components.js:34765
+#: wp-includes/js/dist/components.js:34754
 msgid "Error loading block: %s"
 msgstr "载入区块时发生错误：%s"
 
-#: wp-includes/js/dist/components.js:33473
+#: wp-includes/js/dist/components.js:33464
 msgid "Number of items"
 msgstr "项目数量"
 
-#: wp-includes/js/dist/components.js:33467 wp-includes/js/dist/editor.js:27789
+#: wp-includes/js/dist/components.js:33458 wp-includes/js/dist/editor.js:27694
 msgid "Category"
 msgstr "类别"
 
 #. translators: label for ordering posts by title in descending order
-#: wp-includes/js/dist/components.js:33447
+#: wp-includes/js/dist/components.js:33438
 msgid "Z → A"
 msgstr "Z \t A"
 
 #. translators: label for ordering posts by title in ascending order
-#: wp-includes/js/dist/components.js:33443
+#: wp-includes/js/dist/components.js:33434
 msgid "A → Z"
 msgstr "A \t Z"
 
-#: wp-includes/js/dist/components.js:33439
+#: wp-includes/js/dist/components.js:33430
 msgid "Oldest to Newest"
 msgstr "从旧到新"
 
-#: wp-includes/js/dist/components.js:33436
+#: wp-includes/js/dist/components.js:33427
 msgid "Newest to Oldest"
 msgstr "从新到旧"
 
-#: wp-includes/js/dist/components.js:33433
+#: wp-includes/js/dist/components.js:33424
 msgid "Order by"
 msgstr "排序"
 
-#: wp-includes/js/dist/components.js:33005
+#: wp-includes/js/dist/components.js:32996
 msgid "Dismiss this notice"
 msgstr "忽略此通知"
 
 #. translators: 1: term name, 2: term position in a set of terms, 3: total term
 #. set count.
-#: wp-includes/js/dist/components.js:31296
+#: wp-includes/js/dist/components.js:31287
 msgid "%1$s (%2$s of %3$s)"
 msgstr "%1$s（%2$s/%3$s）"
 
-#: wp-includes/js/dist/components.js:32239
+#: wp-includes/js/dist/components.js:32230
 msgid "Remove item"
 msgstr "移除项目"
 
-#: wp-includes/js/dist/components.js:32238
+#: wp-includes/js/dist/components.js:32229
 msgid "Item removed."
 msgstr "项目已移除。"
 
-#: wp-includes/js/dist/components.js:32237
+#: wp-includes/js/dist/components.js:32228
 msgid "Item added."
 msgstr "项目已添加。"
 
-#: wp-includes/js/dist/components.js:32203
+#: wp-includes/js/dist/components.js:32194
 msgid "Separate with commas"
 msgstr "用逗号分隔"
 
-#: wp-includes/js/dist/components.js:32155
+#: wp-includes/js/dist/components.js:32146
 msgid "Add item"
 msgstr "添加项目"
 
-#: wp-includes/js/dist/components.js:30962
-#: wp-includes/js/dist/components.js:31078
+#: wp-includes/js/dist/components.js:30953
+#: wp-includes/js/dist/components.js:31069
 #: wp-includes/js/dist/block-library.js:3319
 msgid "Reset"
 msgstr "重置"
 
-#: wp-includes/js/dist/components.js:31016
+#: wp-includes/js/dist/components.js:31007
 msgctxt "font size name"
 msgid "Custom"
 msgstr "自定义"
 
-#: wp-includes/js/dist/components.js:31016 wp-includes/js/dist/editor.js:8298
+#: wp-includes/js/dist/components.js:31007 wp-includes/js/dist/editor.js:8298
 msgctxt "font size name"
 msgid "Normal"
 msgstr "常规"
 
-#: wp-includes/js/dist/components.js:31067
+#: wp-includes/js/dist/components.js:31058
 msgid "Custom font size"
 msgstr "自定义字号"
 
 #. translators: accessibility text
-#: wp-includes/js/dist/components.js:30788 wp-includes/js/dist/editor.js:25433
+#: wp-includes/js/dist/components.js:30779 wp-includes/js/dist/editor.js:25343
 msgid "(opens in a new tab)"
 msgstr "（在新窗口中打开）"
 
-#: wp-includes/js/dist/components.js:29468
+#: wp-includes/js/dist/components.js:29463
 msgid "Minutes"
 msgstr "分钟"
 
-#: wp-includes/js/dist/components.js:29598
+#: wp-includes/js/dist/components.js:29593
 msgid "Calendar Help"
 msgstr "日历帮助"
 
-#: wp-includes/js/dist/components.js:29591
+#: wp-includes/js/dist/components.js:29586
 msgid "Go to the first (home) or last (end) day of a week."
 msgstr "前往一周的第一天（home）或最后一天（end）"
 
-#: wp-includes/js/dist/components.js:29589
+#: wp-includes/js/dist/components.js:29584
 msgid "Home/End"
 msgstr "Home/End"
 
-#: wp-includes/js/dist/components.js:29588
+#: wp-includes/js/dist/components.js:29583
 msgid "Home and End"
 msgstr "Home和End"
 
-#: wp-includes/js/dist/components.js:29587
+#: wp-includes/js/dist/components.js:29582
 msgid "Move backward (PgUp) or forward (PgDn) by one month."
 msgstr "向前（PgUp）或向后（PgDn）移动一个月。"
 
-#: wp-includes/js/dist/components.js:29585
+#: wp-includes/js/dist/components.js:29580
 msgid "PgUp/PgDn"
 msgstr "PgUp/PgDn"
 
-#: wp-includes/js/dist/components.js:29584
+#: wp-includes/js/dist/components.js:29579
 msgid "Page Up and Page Down"
 msgstr "Page Up和Page Down"
 
-#: wp-includes/js/dist/components.js:29583
+#: wp-includes/js/dist/components.js:29578
 msgid "Move backward (up) or forward (down) by one week."
 msgstr "向前（上）或向后（下）移动一周。"
 
-#: wp-includes/js/dist/components.js:29580
+#: wp-includes/js/dist/components.js:29575
 msgid "Up and Down Arrows"
 msgstr "上下方向键"
 
-#: wp-includes/js/dist/components.js:29579
+#: wp-includes/js/dist/components.js:29574
 msgid "Move backward (left) or forward (right) by one day."
 msgstr "向前（左）或向后（右）移动一天。"
 
-#: wp-includes/js/dist/components.js:29576
+#: wp-includes/js/dist/components.js:29571
 msgid "Left and Right Arrows"
 msgstr "左右方向键"
 
-#: wp-includes/js/dist/components.js:29575
+#: wp-includes/js/dist/components.js:29570
 msgid "Select the date in focus."
 msgstr "选择当前高亮的日期。"
 
-#: wp-includes/js/dist/components.js:29572
+#: wp-includes/js/dist/components.js:29567
 msgctxt "keyboard button"
 msgid "Enter"
 msgstr "回车"
 
-#: wp-includes/js/dist/components.js:29571
+#: wp-includes/js/dist/components.js:29566
 msgid "Navigating with a keyboard"
 msgstr "用键盘导航"
 
-#: wp-includes/js/dist/components.js:29571
+#: wp-includes/js/dist/components.js:29566
 msgid "Click the desired day to select it."
 msgstr "点击您期望的日期来选择。"
 
-#: wp-includes/js/dist/components.js:29571
+#: wp-includes/js/dist/components.js:29566
 msgid "Click the right or left arrows to select other months in the past or the future."
 msgstr "点击左右箭头来选择过去或将来的月份。"
 
-#: wp-includes/js/dist/components.js:29571
+#: wp-includes/js/dist/components.js:29566
 msgid "Click to Select"
 msgstr "点击以选择"
 
@@ -2672,17 +2672,17 @@ msgid "Custom color picker"
 msgstr "自定义颜色选择器"
 
 #: wp-includes/js/dist/components.js:26577
-#: wp-includes/js/dist/components.js:31826 wp-includes/js/dist/editor.js:23144
+#: wp-includes/js/dist/components.js:31817 wp-includes/js/dist/editor.js:23054
 msgid "No results."
 msgstr "没有结果。"
 
 #: wp-includes/js/dist/components.js:26575
-#: wp-includes/js/dist/components.js:31824 wp-includes/js/dist/editor.js:23142
+#: wp-includes/js/dist/components.js:31815 wp-includes/js/dist/editor.js:23052
 msgid "%d result found, use up and down arrow keys to navigate."
 msgid_plural "%d results found, use up and down arrow keys to navigate."
 msgstr[0] "找到%d个结果，使用上下方向键来导航。"
 
-#: wp-includes/post.php:252 wp-includes/js/dist/editor.js:13112
+#: wp-includes/post.php:252 wp-includes/js/dist/editor.js:13013
 msgid "Block updated."
 msgstr "区块已更新。"
 
@@ -2714,7 +2714,7 @@ msgstr "区块列表导航"
 msgid "Filter blocks list"
 msgstr "过滤区块列表"
 
-#: wp-includes/post.php:243 wp-includes/js/dist/editor.js:17757
+#: wp-includes/post.php:243 wp-includes/js/dist/editor.js:17658
 msgid "No blocks found."
 msgstr "未找到区块。"
 
@@ -2768,7 +2768,7 @@ msgstr "区块"
 msgid "M j, Y g:i a"
 msgstr "Y年n月j日H:i"
 
-#: wp-includes/js/dist/editor.js:29071
+#: wp-includes/js/dist/editor.js:28966
 msgid "Blocks"
 msgstr "区块"
 
@@ -3237,12 +3237,12 @@ msgid "User Requests"
 msgstr "用户请求"
 
 #. translators: deleted long text
-#: wp-includes/functions.php:6052
+#: wp-includes/functions.php:6005
 msgid "This content was deleted by the author."
 msgstr "此内容已被作者删除。"
 
 #. translators: deleted text
-#: wp-includes/functions.php:6048
+#: wp-includes/functions.php:6001
 msgid "[deleted]"
 msgstr "[已删除]"
 
@@ -3403,7 +3403,7 @@ msgstr "我的"
 msgid "Whether or not the post type can be viewed."
 msgstr "此文章类型是否可被查看。"
 
-#: wp-includes/functions.php:2691
+#: wp-includes/functions.php:2664
 msgid "The link you followed has expired."
 msgstr "您点击的链接已过期。"
 
@@ -3414,7 +3414,7 @@ msgstr "您需要更高级别的权限。"
 
 #: wp-includes/script-loader.php:869 wp-includes/script-loader.php:1301
 #: wp-includes/script-loader.php:1381 wp-includes/script-loader.php:1586
-#: wp-includes/class-wp-xmlrpc-server.php:3695 wp-includes/functions.php:2701
+#: wp-includes/class-wp-xmlrpc-server.php:3695 wp-includes/functions.php:2674
 #: wp-includes/class-wp-customize-manager.php:450
 msgid "Something went wrong."
 msgstr "出现了问题。"
@@ -3656,9 +3656,9 @@ msgid "Displays an image gallery."
 msgstr "显示图像画廊。"
 
 #: wp-includes/widgets/class-wp-widget-media-gallery.php:25
-#: wp-includes/js/dist/editor.js:25099
-#: wp-includes/js/dist/block-library.js:5096
-#: wp-includes/js/dist/block-library.js:5252
+#: wp-includes/js/dist/editor.js:25009
+#: wp-includes/js/dist/block-library.js:5078
+#: wp-includes/js/dist/block-library.js:5234
 msgid "Gallery"
 msgstr "画廊"
 
@@ -3787,7 +3787,7 @@ msgstr "放弃修改"
 msgid "Please save your changes in order to share the preview."
 msgstr "要分享预览，请先保存您的修改。"
 
-#: wp-includes/js/dist/editor.js:26021
+#: wp-includes/js/dist/editor.js:25927
 msgid "Schedule…"
 msgstr "计划…"
 
@@ -4187,13 +4187,13 @@ msgstr "Scrape nonce检查失败，请重试。"
 
 #. translators: Site admin email change notification email subject. %s: Site
 #. title
-#: wp-includes/functions.php:5911
+#: wp-includes/functions.php:5864
 msgid "[%s] Notice of Admin Email Change"
 msgstr "[%s] 管理邮件地址变更通知"
 
 #. translators: Do not translate OLD_EMAIL, NEW_EMAIL, SITENAME, SITEURL: those
 #. are placeholders.
-#: wp-includes/functions.php:5896
+#: wp-includes/functions.php:5849
 msgid ""
 "Hi,\n"
 "\n"
@@ -4219,7 +4219,7 @@ msgstr ""
 "###SITENAME###团队\n"
 "###SITEURL###"
 
-#: wp-includes/functions.php:5812
+#: wp-includes/functions.php:5785
 msgid "Only UUID V4 is supported at this time."
 msgstr "现时仅支持UUID V4。"
 
@@ -4326,22 +4326,22 @@ msgid "Hour"
 msgstr "时"
 
 #: wp-includes/customize/class-wp-customize-date-time-control.php:160
-#: wp-includes/js/dist/components.js:29450
+#: wp-includes/js/dist/components.js:29445
 msgid "Time"
 msgstr "时间"
 
 #: wp-includes/customize/class-wp-customize-date-time-control.php:146
-#: wp-includes/js/dist/components.js:29430
+#: wp-includes/js/dist/components.js:29425
 msgid "Day"
 msgstr "日"
 
 #: wp-includes/customize/class-wp-customize-date-time-control.php:130
-#: wp-includes/js/dist/components.js:29398
+#: wp-includes/js/dist/components.js:29393
 msgid "Month"
 msgstr "月"
 
 #: wp-includes/customize/class-wp-customize-date-time-control.php:127
-#: wp-includes/js/dist/components.js:29393
+#: wp-includes/js/dist/components.js:29388
 msgid "Date"
 msgstr "日期"
 
@@ -4552,7 +4552,7 @@ msgid "Some HTML tags are not permitted, including:"
 msgstr "不允许使用某些HTML标记，其中包括："
 
 #: wp-includes/widgets/class-wp-widget-custom-html.php:53
-#: wp-includes/js/dist/block-library.js:8844
+#: wp-includes/js/dist/block-library.js:8826
 msgid "Custom HTML"
 msgstr "自定义HTML"
 
@@ -5006,7 +5006,7 @@ msgid "Suggested image dimensions: %1$s by %2$s pixels."
 msgstr "建议的图片尺寸：%1$s x %2$s像素。"
 
 #: wp-includes/script-loader.php:1027 wp-includes/functions.php:2161
-#: wp-includes/js/dist/editor.js:22428
+#: wp-includes/js/dist/editor.js:22338
 msgid "Sorry, this file type is not permitted for security reasons."
 msgstr "抱歉，由于安全原因，这个文件类型不受支持。"
 
@@ -5696,7 +5696,7 @@ msgstr "分类法的REST base路由。"
 msgid "+ %s"
 msgstr "+ %s"
 
-#: wp-includes/l10n.php:1422
+#: wp-includes/l10n.php:1409
 msgctxt "default site language"
 msgid "Site Default"
 msgstr "站点默认"
@@ -5812,7 +5812,7 @@ msgstr "我需要ID来执行操作。"
 msgid "Homepage"
 msgstr "主页"
 
-#: wp-includes/js/dist/components.js:29455
+#: wp-includes/js/dist/components.js:29450
 msgid "Hours"
 msgstr "小时"
 
@@ -6561,7 +6561,7 @@ msgid "The REST API can no longer be completely disabled, the rest_authenticatio
 msgstr "REST API不再能被完全禁用，不过您可以用“rest_authentication_errors”过滤器来限制对该API的访问。"
 
 #: wp-includes/post.php:1526 wp-includes/js/dist/edit-post.js:3913
-#: wp-includes/js/dist/edit-post.js:5010
+#: wp-includes/js/dist/edit-post.js:5009
 msgid "Page Attributes"
 msgstr "页面属性"
 
@@ -7041,7 +7041,7 @@ msgstr "嗨，%s"
 msgid "Edit selected menu"
 msgstr "编辑选中的菜单"
 
-#: wp-includes/class-wp-editor.php:1286
+#: wp-includes/class-wp-editor.php:1285
 #: wp-includes/js/dist/format-library.js:1060
 msgid "Warning: the link has been inserted but may have errors. Please test it."
 msgstr "警告：此链接已被插入但可能含有错误，请测试。"
@@ -7474,7 +7474,7 @@ msgstr "选项%1$s已被<strong>弃用</strong>。请改用%3$s中的%2$s布尔�
 msgid "Removing %1$s manually will cause PHP warnings. Use the %2$s filter instead."
 msgstr "手工移除%1$s会导致PHP警告。请改用%2$s过滤器。"
 
-#: wp-includes/class-wp-editor.php:1294
+#: wp-includes/class-wp-editor.php:1293
 msgid "The next group of formatting shortcuts are applied as you type or when you insert them around plain text in the same paragraph. Press Escape or the Undo button to undo."
 msgstr "以下的格式捷径将会在您打字或将它们插入同一段落种的纯文本周围时被自动应用。按Esc或撤销按钮来撤销。"
 
@@ -7510,8 +7510,8 @@ msgid "Drag boxes here"
 msgstr "拖动方块至此"
 
 #: wp-includes/script-loader.php:1308 wp-includes/blocks/latest-posts.php:36
-#: wp-includes/js/dist/block-library.js:6515
-#: wp-includes/js/dist/block-library.js:9958
+#: wp-includes/js/dist/block-library.js:6497
+#: wp-includes/js/dist/block-library.js:9942
 msgid "(Untitled)"
 msgstr "（无标题）"
 
@@ -7572,13 +7572,13 @@ msgstr "<strong>错误</strong>：用户名、电子邮件地址无效或密码�
 msgid "%1$s %2$s %3$s %4$s Feed"
 msgstr "%1$s %2$s %3$s %4$s Feed"
 
-#: wp-includes/functions.php:5403 wp-includes/js/dist/components.js:32652
+#: wp-includes/functions.php:5376 wp-includes/js/dist/components.js:32643
 msgid "Close dialog"
 msgstr "关闭对话框"
 
 #. translators: 1: PHP class name, 2: PHP parent class name, 3: version number,
 #. 4: __construct() method
-#: wp-includes/functions.php:3985
+#: wp-includes/functions.php:3958
 msgid "The called constructor method for %1$s in %2$s is <strong>deprecated</strong> since version %3$s! Use %4$s instead."
 msgstr "在%2$s中为%1$s调用的构造函数已自版本%3$s起<strong>废弃</strong>！请改用%4$s。"
 
@@ -7653,7 +7653,7 @@ msgstr "模板丢失。独立主题需要有%1$s模板文件，<a href=\"%2$s\">
 msgid "Invalid object type"
 msgstr "无效对象类型"
 
-#: wp-includes/class-wp-editor.php:1263 wp-includes/js/dist/editor.js:23302
+#: wp-includes/class-wp-editor.php:1263 wp-includes/js/dist/editor.js:23212
 msgid "Paste URL or type to search"
 msgstr "粘贴URL或键入来搜索"
 
@@ -7716,12 +7716,12 @@ msgstr "https://codex.wordpress.org/Debugging_a_WordPress_Network"
 msgid "Read the <a href=\"%s\" target=\"_blank\">bug report</a> page. Some of the guidelines there may help you figure out what went wrong."
 msgstr "阅读<a href=\"%s\" target=\"_blank\">bug报告</a>页。其中的一些指引可能对您查找问题有所帮助。"
 
-#: wp-includes/functions.php:4228
+#: wp-includes/functions.php:4201
 msgid "https://codex.wordpress.org/Debugging_in_WordPress"
 msgstr "https://codex.wordpress.org/Debugging_in_WordPress"
 
 #. translators: %s: Codex URL
-#: wp-includes/functions.php:4227
+#: wp-includes/functions.php:4200
 msgid "Please see <a href=\"%s\">Debugging in WordPress</a> for more information."
 msgstr "请查阅<a href=\"%s\">调试WordPress</a>来获取更多信息。"
 
@@ -8314,7 +8314,7 @@ msgid "%s <span class=\"screen-reader-text\">Comment</span>"
 msgid_plural "%s <span class=\"screen-reader-text\">Comments</span>"
 msgstr[0] "%s<span class=\"screen-reader-text\">条评论</span>"
 
-#: wp-includes/js/dist/block-library.js:10465
+#: wp-includes/js/dist/block-library.js:10449
 msgid "Read more"
 msgstr "阅读更多"
 
@@ -8375,7 +8375,7 @@ msgstr "%1$s已被废弃，请改用%2$s。"
 msgid "Clear Results"
 msgstr "清空结果"
 
-#: wp-includes/class-wp-editor.php:1292
+#: wp-includes/class-wp-editor.php:1291
 msgid "The following formatting shortcuts are replaced when pressing Enter. Press Escape or the Undo button to undo."
 msgstr "以下格式捷径在按回车键时被替换。请按退出或撤销键来撤销。"
 
@@ -8389,7 +8389,7 @@ msgstr "切换小节：%s"
 #. 'characters_including_spaces'. Otherwise, enter 'words'. Do not translate
 #. into your own language.
 #: wp-includes/script-loader.php:1884 wp-includes/formatting.php:3373
-#: wp-includes/js/dist/editor.js:29021
+#: wp-includes/js/dist/editor.js:28916
 msgctxt "Word count type. Do not translate!"
 msgid "words"
 msgstr "characters_excluding_spaces"
@@ -8507,7 +8507,7 @@ msgstr "站点身份"
 msgid "Add to menu: %1$s (%2$s)"
 msgstr "添加到菜单：%1$s（%2$s）"
 
-#: wp-includes/class-wp-editor.php:1290
+#: wp-includes/class-wp-editor.php:1289
 msgid "When starting a new paragraph with one of these formatting shortcuts followed by a space, the formatting will be applied automatically. Press Backspace or Escape to undo."
 msgstr "当使用这些格式快捷键后跟空格来创建新段落时，这些格式会被自动应用。按退格或退出键来撤销。"
 
@@ -8537,7 +8537,7 @@ msgid "The %s directory of the develop repository must be used for RTL."
 msgstr "必须为RTL使用开发库目录%s。"
 
 #. translators: 1: PHP class name, 2: version number, 3: __construct() method
-#: wp-includes/functions.php:3989
+#: wp-includes/functions.php:3962
 msgid "The called constructor method for %1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead."
 msgstr "为%1$s调用的构造方法已自版本%2$s起<strong>废弃</strong>！请改用%3$s。"
 
@@ -8782,31 +8782,31 @@ msgstr "内容："
 msgid "Allow link notifications from other blogs (pingbacks and trackbacks) on new articles"
 msgstr "允许其他博客发送链接通知（pingback和trackback）到新文章"
 
-#: wp-includes/class-wp-editor.php:1283
+#: wp-includes/class-wp-editor.php:1282
 msgid "Ctrl + letter:"
 msgstr "Ctrl+字母："
 
-#: wp-includes/class-wp-editor.php:1282
+#: wp-includes/class-wp-editor.php:1281
 msgid "Cmd + letter:"
 msgstr "Cmd+字母："
 
-#: wp-includes/class-wp-editor.php:1281
+#: wp-includes/class-wp-editor.php:1280
 msgid "Shift + Alt + letter:"
 msgstr "Shift+Alt+字母："
 
-#: wp-includes/class-wp-editor.php:1280
+#: wp-includes/class-wp-editor.php:1279
 msgid "Ctrl + Alt + letter:"
 msgstr "Ctrl+Alt+字母："
 
-#: wp-includes/class-wp-editor.php:1276
+#: wp-includes/class-wp-editor.php:1275
 msgid "Inline toolbar (when an image, link or preview is selected)"
 msgstr "内联工具栏（当图片、链接或预览被选中时）"
 
-#: wp-includes/class-wp-editor.php:1274
+#: wp-includes/class-wp-editor.php:1273
 msgid "Additional shortcuts,"
 msgstr "额外的快捷方式，"
 
-#: wp-includes/class-wp-editor.php:1273
+#: wp-includes/class-wp-editor.php:1272
 msgid "Default shortcuts,"
 msgstr "默认快捷方式，"
 
@@ -9007,7 +9007,7 @@ msgstr "标题属性"
 #: wp-includes/widgets/class-wp-widget-media-image.php:136
 #: wp-includes/media-template.php:1008
 #: wp-includes/customize/class-wp-customize-nav-menu-item-control.php:100
-#: wp-includes/class-wp-editor.php:1725
+#: wp-includes/class-wp-editor.php:1724
 msgid "Open link in a new tab"
 msgstr "在新标签页中打开链接"
 
@@ -9237,7 +9237,7 @@ msgctxt "revision date format"
 msgid "F j, Y @ H:i:s"
 msgstr "Y年n月j日 @ H:i:s"
 
-#: wp-includes/media-template.php:820 wp-includes/class-wp-editor.php:1720
+#: wp-includes/media-template.php:820 wp-includes/class-wp-editor.php:1719
 #: wp-includes/class-wp-customize-nav-menus.php:1115
 msgid "Link Text"
 msgstr "链接文本"
@@ -9330,23 +9330,23 @@ msgstr "小工具已下移"
 msgid "Rich Text Area. Press Alt-Shift-H for help."
 msgstr "富文本区域。按Alt-Shift-H获取帮助。"
 
-#: wp-includes/class-wp-editor.php:1275
+#: wp-includes/class-wp-editor.php:1274
 msgid "Focus shortcuts:"
 msgstr "焦点快捷方式："
 
-#: wp-includes/class-wp-editor.php:1277
+#: wp-includes/class-wp-editor.php:1276
 msgid "Editor menu (when enabled)"
 msgstr "编辑菜单（如被启用）"
 
-#: wp-includes/class-wp-editor.php:1278
+#: wp-includes/class-wp-editor.php:1277
 msgid "Editor toolbar"
 msgstr "编辑工具栏"
 
-#: wp-includes/class-wp-editor.php:1288
+#: wp-includes/class-wp-editor.php:1287
 msgid "To move focus to other buttons use Tab or the arrow keys. To return focus to the editor press Escape or use one of the buttons."
 msgstr "要移动焦点到其他按钮，请使用Tab或箭头键；要将焦点移回编辑器，请按Esc或使用任意一个按钮。"
 
-#: wp-includes/class-wp-editor.php:1279
+#: wp-includes/class-wp-editor.php:1278
 msgid "Elements path"
 msgstr "元素路径"
 
@@ -9368,12 +9368,12 @@ msgstr "%s必须为转义设置数据库连接。"
 msgid "You need to pass an array of types."
 msgstr "您需要传入类型数组。"
 
-#: wp-includes/l10n.php:1414
+#: wp-includes/l10n.php:1401
 msgctxt "translations"
 msgid "Installed"
 msgstr "已安装"
 
-#: wp-includes/l10n.php:1448
+#: wp-includes/l10n.php:1435
 msgctxt "translations"
 msgid "Available"
 msgstr "可用"
@@ -9769,11 +9769,11 @@ msgstr "编辑下一媒体项目"
 msgid "Edit previous media item"
 msgstr "编辑上一媒体项目"
 
-#: wp-includes/media-template.php:258 wp-includes/js/dist/block-library.js:9926
+#: wp-includes/media-template.php:258 wp-includes/js/dist/block-library.js:9910
 msgid "Grid View"
 msgstr "网格视图"
 
-#: wp-includes/media-template.php:255 wp-includes/js/dist/block-library.js:9917
+#: wp-includes/media-template.php:255 wp-includes/js/dist/block-library.js:9901
 msgid "List View"
 msgstr "列表视图"
 
@@ -9789,7 +9789,7 @@ msgstr "关闭上传器"
 msgid "Close media panel"
 msgstr "关闭媒体面板"
 
-#: wp-includes/class-wp-editor.php:1746
+#: wp-includes/class-wp-editor.php:1745
 msgid "Search or use up and down arrow keys to select an item."
 msgstr "搜索或使用上下方向键来选择一项。"
 
@@ -9837,7 +9837,7 @@ msgstr "地址"
 msgid "If you&#8217;re looking to paste rich content from Microsoft Word, try turning this option off. The editor will clean up text pasted from Word automatically."
 msgstr "如果您希望从Microsoft Word粘贴富文本内容，请将此选项关闭。编辑器将自动清理从Word粘贴来的文本。"
 
-#: wp-includes/class-wp-editor.php:1271 wp-includes/js/dist/edit-post.js:1090
+#: wp-includes/class-wp-editor.php:1270 wp-includes/js/dist/edit-post.js:1090
 #: wp-includes/js/dist/edit-post.js:3478
 msgid "Keyboard Shortcuts"
 msgstr "键盘快捷键"
@@ -9887,7 +9887,7 @@ msgstr "长度"
 
 #: wp-includes/media.php:2182
 #: wp-includes/customize/class-wp-customize-date-time-control.php:151
-#: wp-includes/js/dist/components.js:29441
+#: wp-includes/js/dist/components.js:29436
 msgid "Year"
 msgstr "年"
 
@@ -9919,7 +9919,7 @@ msgstr "图像标题属性"
 msgid "Advanced Options"
 msgstr "高级选项"
 
-#: wp-includes/media-template.php:959 wp-includes/js/dist/components.js:31080
+#: wp-includes/media-template.php:959 wp-includes/js/dist/components.js:31071
 msgid "Custom Size"
 msgstr "自定义尺寸"
 
@@ -10298,8 +10298,8 @@ msgstr "拖放来排序曲目。"
 msgid "Add Subtitles"
 msgstr "添加字幕"
 
-#: wp-includes/media.php:3593 wp-includes/js/dist/block-library.js:13240
-#: wp-includes/js/dist/block-library.js:13249
+#: wp-includes/media.php:3593 wp-includes/js/dist/block-library.js:13224
+#: wp-includes/js/dist/block-library.js:13233
 msgid "Select Poster Image"
 msgstr "选择海报图像"
 
@@ -10369,24 +10369,24 @@ msgid "There are no associated subtitles."
 msgstr "没有关联的字幕。"
 
 #: wp-includes/media-template.php:1165
-#: wp-includes/js/dist/block-library.js:13238
+#: wp-includes/js/dist/block-library.js:13222
 msgid "Poster Image"
 msgstr "海报图像"
 
 #: wp-includes/media-template.php:1092 wp-includes/media-template.php:1181
-#: wp-includes/js/dist/block-library.js:5906
-#: wp-includes/js/dist/block-library.js:13203
+#: wp-includes/js/dist/block-library.js:5888
+#: wp-includes/js/dist/block-library.js:13187
 msgid "Autoplay"
 msgstr "自动播放"
 
 #: wp-includes/media-template.php:1085 wp-includes/media-template.php:1174
-#: wp-includes/js/dist/block-library.js:5927
-#: wp-includes/js/dist/block-library.js:13231
+#: wp-includes/js/dist/block-library.js:5909
+#: wp-includes/js/dist/block-library.js:13215
 msgid "Metadata"
 msgstr "元数据"
 
-#: wp-includes/js/dist/block-library.js:5924
-#: wp-includes/js/dist/block-library.js:13228
+#: wp-includes/js/dist/block-library.js:5906
+#: wp-includes/js/dist/block-library.js:13212
 msgid "Auto"
 msgstr "自动"
 
@@ -10452,8 +10452,8 @@ msgid "Tools"
 msgstr "工具"
 
 #: wp-includes/js/dist/list-reusable-blocks.js:618
-#: wp-includes/js/dist/block-library.js:8507
-#: wp-includes/js/dist/block-library.js:8625
+#: wp-includes/js/dist/block-library.js:8489
+#: wp-includes/js/dist/block-library.js:8607
 msgid "File"
 msgstr "文件"
 
@@ -10469,7 +10469,7 @@ msgstr "文字颜色"
 msgid "Background color"
 msgstr "背景颜色"
 
-#: wp-includes/js/dist/editor.js:24565
+#: wp-includes/js/dist/editor.js:24475
 msgid "Template:"
 msgstr "模板："
 
@@ -10530,7 +10530,7 @@ msgid "Paste as text"
 msgstr "粘贴为文本"
 
 #: wp-includes/class-wp-editor.php:1120
-#: wp-includes/js/dist/block-library.js:10630
+#: wp-includes/js/dist/block-library.js:10614
 msgid "Page break"
 msgstr "分页符"
 
@@ -10594,7 +10594,7 @@ msgstr "恢复上一草稿"
 msgid "Visual aids"
 msgstr "视觉辅助"
 
-#: wp-includes/class-wp-editor.php:1042 wp-includes/js/dist/editor.js:14642
+#: wp-includes/class-wp-editor.php:1042 wp-includes/js/dist/editor.js:14543
 msgid "Align left"
 msgstr "左对齐"
 
@@ -10610,7 +10610,7 @@ msgstr "当前处于纯文本粘贴模式，粘贴的内容将被视作纯文本
 msgid "Decrease indent"
 msgstr "减少缩进量"
 
-#: wp-includes/class-wp-editor.php:1040 wp-includes/js/dist/editor.js:14646
+#: wp-includes/class-wp-editor.php:1040 wp-includes/js/dist/editor.js:14547
 msgid "Align center"
 msgstr "居中对齐"
 
@@ -10618,7 +10618,7 @@ msgstr "居中对齐"
 msgid "Clear formatting"
 msgstr "清除格式"
 
-#: wp-includes/js/dist/block-library.js:10132
+#: wp-includes/js/dist/block-library.js:10116
 msgid "bullet list"
 msgstr "项目符号列表"
 
@@ -10635,7 +10635,7 @@ msgstr "增加缩进量"
 msgid "Numbered list"
 msgstr "编号列表"
 
-#: wp-includes/class-wp-editor.php:1041 wp-includes/js/dist/editor.js:14650
+#: wp-includes/class-wp-editor.php:1041 wp-includes/js/dist/editor.js:14551
 msgid "Align right"
 msgstr "右对齐"
 
@@ -10650,13 +10650,13 @@ msgstr "选择将小工具移动到的区域："
 
 #: wp-includes/class-wp-customize-widgets.php:685
 #: wp-includes/class-wp-customize-nav-menus.php:948
-#: wp-includes/js/dist/editor.js:15930
+#: wp-includes/js/dist/editor.js:15831
 msgid "Move up"
 msgstr "上移"
 
 #: wp-includes/class-wp-customize-widgets.php:684
 #: wp-includes/class-wp-customize-nav-menus.php:949
-#: wp-includes/js/dist/editor.js:15947
+#: wp-includes/js/dist/editor.js:15848
 msgid "Move down"
 msgstr "下移"
 
@@ -10720,7 +10720,7 @@ msgstr "http://zh-cn.forums.wordpress.org/"
 msgid "https://wordpress.org/"
 msgstr "https://cn.wordpress.org/"
 
-#: wp-includes/js/dist/editor.js:25114
+#: wp-includes/js/dist/editor.js:25024
 msgid "Status"
 msgstr "状态"
 
@@ -10752,7 +10752,7 @@ msgstr "列组"
 msgid "Could not find the specified string."
 msgstr "无法找到指定的字符串。"
 
-#: wp-includes/js/dist/block-library.js:12585
+#: wp-includes/js/dist/block-library.js:12569
 msgid "Table"
 msgstr "表格"
 
@@ -11050,7 +11050,7 @@ msgstr "%3$s-%1$s-%2$s @ %4$s:%5$s"
 msgid "Your session has expired. You can log in again from this page or go to the login page."
 msgstr "您的登录会话已过期，请重新登录。"
 
-#: wp-includes/functions.php:5420
+#: wp-includes/functions.php:5393
 msgid "The login page will open in a new window. After logging in you can close it and return to this page."
 msgstr "登录页会在新窗口中打开，在登录后您可关闭该窗口并返回本页。"
 
@@ -11075,7 +11075,7 @@ msgctxt "placeholder"
 msgid "Search &hellip;"
 msgstr "搜索&hellip;"
 
-#: wp-includes/script-loader.php:1305 wp-includes/functions.php:5418
+#: wp-includes/script-loader.php:1305 wp-includes/functions.php:5391
 msgid "Session expired"
 msgstr "会话已过期"
 
@@ -11117,7 +11117,7 @@ msgstr "描述此图&hellip;"
 msgid "Random Order"
 msgstr "随机顺序"
 
-#: wp-includes/media.php:3549 wp-includes/js/dist/editor.js:22984
+#: wp-includes/media.php:3549 wp-includes/js/dist/editor.js:22894
 msgid "Insert from URL"
 msgstr "从URL插入"
 
@@ -11145,7 +11145,7 @@ msgstr "找不到条目。"
 msgid "Reverse order"
 msgstr "反转顺序"
 
-#: wp-includes/js/dist/editor.js:24920
+#: wp-includes/js/dist/editor.js:24830
 msgid "Set featured image"
 msgstr "设置特色图像"
 
@@ -11189,9 +11189,9 @@ msgid "Manage Video"
 msgstr "管理视频"
 
 #: wp-includes/widgets/class-wp-widget-media-video.php:25
-#: wp-includes/post.php:2479 wp-includes/js/dist/editor.js:22943
-#: wp-includes/js/dist/editor.js:25117
-#: wp-includes/js/dist/block-library.js:13300
+#: wp-includes/post.php:2479 wp-includes/js/dist/editor.js:22853
+#: wp-includes/js/dist/editor.js:25027
+#: wp-includes/js/dist/block-library.js:13284
 msgid "Video"
 msgstr "视频"
 
@@ -11222,9 +11222,9 @@ msgid "Insert into page"
 msgstr "插入至页面"
 
 #: wp-includes/widgets/class-wp-widget-media-audio.php:25
-#: wp-includes/post.php:2478 wp-includes/js/dist/editor.js:22939
-#: wp-includes/js/dist/editor.js:25120
-#: wp-includes/js/dist/block-library.js:5975
+#: wp-includes/post.php:2478 wp-includes/js/dist/editor.js:22849
+#: wp-includes/js/dist/editor.js:25030
+#: wp-includes/js/dist/block-library.js:5957
 msgid "Audio"
 msgstr "音频"
 
@@ -11245,11 +11245,11 @@ msgstr "&#8592; 回到媒体库"
 msgid "Custom URL"
 msgstr "自定义URL"
 
-#: wp-includes/media-template.php:740 wp-includes/js/dist/block-library.js:5111
-#: wp-includes/js/dist/block-library.js:6924
-#: wp-includes/js/dist/block-library.js:7008
-#: wp-includes/js/dist/block-library.js:9894
-#: wp-includes/js/dist/block-library.js:12819
+#: wp-includes/media-template.php:740 wp-includes/js/dist/block-library.js:5093
+#: wp-includes/js/dist/block-library.js:6906
+#: wp-includes/js/dist/block-library.js:6990
+#: wp-includes/js/dist/block-library.js:9878
+#: wp-includes/js/dist/block-library.js:12803
 msgid "Columns"
 msgstr "栏目"
 
@@ -11276,7 +11276,7 @@ msgstr "&#8592; 取消相册"
 msgid "Upload Images"
 msgstr "上传文件"
 
-#: wp-includes/media-template.php:715 wp-includes/js/dist/block-library.js:5109
+#: wp-includes/media-template.php:715 wp-includes/js/dist/block-library.js:5091
 msgid "Gallery Settings"
 msgstr "相册设置"
 
@@ -11301,7 +11301,7 @@ msgid "Insert gallery"
 msgstr "插入相册"
 
 #: wp-includes/media-template.php:174 wp-includes/media-template.php:180
-#: wp-includes/js/dist/components.js:30340
+#: wp-includes/js/dist/components.js:30337
 msgid "Drop files to upload"
 msgstr "拖文件至此可上传"
 
@@ -11309,7 +11309,7 @@ msgstr "拖文件至此可上传"
 msgid "Create Gallery"
 msgstr "创建相册"
 
-#: wp-includes/media.php:3515 wp-includes/js/dist/editor.js:22975
+#: wp-includes/media.php:3515 wp-includes/js/dist/editor.js:22885
 msgid "Media Library"
 msgstr "媒体库"
 
@@ -11367,15 +11367,15 @@ msgstr ""
 
 #: wp-includes/media-template.php:663 wp-includes/media-template.php:731
 #: wp-includes/media-template.php:974 wp-includes/js/dist/block-library.js:3140
-#: wp-includes/js/dist/block-library.js:4876
-#: wp-includes/js/dist/block-library.js:8304
+#: wp-includes/js/dist/block-library.js:4858
+#: wp-includes/js/dist/block-library.js:8286
 msgid "Media File"
 msgstr "媒体文件"
 
 #: wp-includes/media-template.php:670 wp-includes/media-template.php:728
 #: wp-includes/media-template.php:977 wp-includes/js/dist/block-library.js:3143
-#: wp-includes/js/dist/block-library.js:4873
-#: wp-includes/js/dist/block-library.js:8307
+#: wp-includes/js/dist/block-library.js:4855
+#: wp-includes/js/dist/block-library.js:8289
 msgid "Attachment Page"
 msgstr "附件页面"
 
@@ -11383,8 +11383,8 @@ msgstr "附件页面"
 #: wp-includes/media-template.php:640 wp-includes/media-template.php:718
 #: wp-includes/media-template.php:866 wp-includes/media-template.php:970
 #: wp-includes/js/dist/block-library.js:3322
-#: wp-includes/js/dist/block-library.js:5122
-#: wp-includes/js/dist/block-library.js:8314
+#: wp-includes/js/dist/block-library.js:5104
+#: wp-includes/js/dist/block-library.js:8296
 msgid "Link To"
 msgstr "链接到"
 
@@ -11486,7 +11486,7 @@ msgstr "插入至文章"
 msgid "Create a new gallery"
 msgstr "创建新相册"
 
-#: wp-includes/js/dist/block-library.js:13588
+#: wp-includes/js/dist/block-library.js:13572
 msgid "Insert Media"
 msgstr "插入媒体"
 
@@ -11571,7 +11571,7 @@ msgid "Colors"
 msgstr "颜色"
 
 #: wp-includes/script-loader.php:1296 wp-includes/script-loader.php:1470
-#: wp-includes/js/dist/editor.js:27423
+#: wp-includes/js/dist/editor.js:27330
 msgid "Saved"
 msgstr "已保存"
 
@@ -11655,14 +11655,14 @@ msgstr "背景图像"
 
 #: wp-includes/class-wp-customize-manager.php:4996
 #: wp-includes/js/dist/block-library.js:1691
-#: wp-includes/js/dist/block-library.js:6171
-#: wp-includes/js/dist/block-library.js:9251
+#: wp-includes/js/dist/block-library.js:6153
+#: wp-includes/js/dist/block-library.js:9233
 msgid "Background Color"
 msgstr "背景颜色"
 
 #: wp-includes/js/dist/block-library.js:1695
-#: wp-includes/js/dist/block-library.js:6175
-#: wp-includes/js/dist/block-library.js:10926
+#: wp-includes/js/dist/block-library.js:6157
+#: wp-includes/js/dist/block-library.js:10910
 msgid "Text Color"
 msgstr "文本颜色"
 
@@ -11671,7 +11671,7 @@ msgid "Change image"
 msgstr "更换图像"
 
 #: wp-includes/customize/class-wp-customize-header-image-control.php:113
-#: wp-includes/js/dist/editor.js:24922
+#: wp-includes/js/dist/editor.js:24832
 msgid "Remove image"
 msgstr "移除图像"
 
@@ -11699,11 +11699,11 @@ msgstr "允许的文件"
 msgid "Remove"
 msgstr "移除"
 
-#: wp-includes/js/dist/editor.js:22963
+#: wp-includes/js/dist/editor.js:22873
 msgid "Upload"
 msgstr "上传"
 
-#: wp-includes/js/dist/editor.js:24918 wp-includes/js/dist/edit-post.js:3904
+#: wp-includes/js/dist/editor.js:24828 wp-includes/js/dist/edit-post.js:3904
 #: wp-includes/js/dist/edit-post.js:4685
 msgid "Featured Image"
 msgstr "特色图像"
@@ -11835,7 +11835,7 @@ msgstr "副标题"
 msgid "Your latest posts"
 msgstr "您的最新文章"
 
-#: wp-includes/js/dist/editor.js:29544
+#: wp-includes/js/dist/editor.js:29439
 msgid "Styles"
 msgstr "样式"
 
@@ -12133,12 +12133,12 @@ msgstr "文档"
 msgid "&hellip;"
 msgstr "&hellip;"
 
-#: wp-includes/wp-db.php:1577 wp-includes/functions.php:3862
+#: wp-includes/wp-db.php:1577 wp-includes/functions.php:3835
 #: wp-includes/ms-load.php:455
 msgid "Error establishing a database connection"
 msgstr "建立数据库连接时出错"
 
-#: wp-includes/functions.php:3858
+#: wp-includes/functions.php:3831
 msgid "Database Error"
 msgstr "数据库错误"
 
@@ -12238,7 +12238,7 @@ msgstr "所有页面"
 msgid "All Posts"
 msgstr "所有文章"
 
-#: wp-includes/class-wp-editor.php:1133 wp-includes/js/dist/editor.js:25102
+#: wp-includes/class-wp-editor.php:1133 wp-includes/js/dist/editor.js:25012
 #: wp-includes/js/dist/format-library.js:1192
 #: wp-includes/js/dist/format-library.js:1292
 msgid "Link"
@@ -12271,8 +12271,8 @@ msgstr "深灰色"
 #: wp-includes/widgets/class-wp-widget-media-audio.php:65
 #: wp-includes/widgets/class-wp-widget-media-video.php:66
 #: wp-includes/media-template.php:1082 wp-includes/media-template.php:1171
-#: wp-includes/js/dist/block-library.js:5914
-#: wp-includes/js/dist/block-library.js:13219
+#: wp-includes/js/dist/block-library.js:5896
+#: wp-includes/js/dist/block-library.js:13203
 msgid "Preload"
 msgstr "预加载"
 
@@ -12280,7 +12280,7 @@ msgstr "预加载"
 msgid "Poster"
 msgstr "海报"
 
-#: wp-includes/js/dist/editor.js:29061
+#: wp-includes/js/dist/editor.js:28956
 msgid "Words"
 msgstr "字数"
 
@@ -12297,11 +12297,11 @@ msgctxt "post format"
 msgid "Format"
 msgstr "形式"
 
-#: wp-includes/class-wp-editor.php:1728
+#: wp-includes/class-wp-editor.php:1727
 msgid "Or link to existing content"
 msgstr "或链接到站点中的内容"
 
-#: wp-includes/class-wp-editor.php:1714
+#: wp-includes/class-wp-editor.php:1713
 msgid "Enter the destination URL"
 msgstr "输入目标URL"
 
@@ -12326,13 +12326,13 @@ msgid "The user is already active."
 msgstr "用户帐户已经在正常状态了。"
 
 #. translators: %s: version number
-#: wp-includes/functions.php:4224
+#: wp-includes/functions.php:4197
 msgid "(This message was added in version %s.)"
 msgstr "（这个消息是在%s版本添加的。）"
 
 #. translators: Developer debugging message. 1: PHP function name, 2:
 #. Explanatory message, 3: Version information message
-#: wp-includes/functions.php:4231
+#: wp-includes/functions.php:4204
 msgid "%1$s was called <strong>incorrectly</strong>. %2$s %3$s"
 msgstr "%1$s的调用方法<strong>不正确</strong>。%2$s %3$s"
 
@@ -12364,7 +12364,7 @@ msgstr "音频"
 msgid "Invalid post format."
 msgstr "无效的文章格式。"
 
-#: wp-includes/class-wp-editor.php:1745
+#: wp-includes/class-wp-editor.php:1744
 msgid "No search term specified. Showing recent items."
 msgstr "未指定搜索条件。自动显示近期条目。"
 
@@ -12485,7 +12485,7 @@ msgid "Large size image height"
 msgstr "大尺寸图像的高度"
 
 #: wp-includes/js/dist/block-library.js:3333
-#: wp-includes/js/dist/block-library.js:8319
+#: wp-includes/js/dist/block-library.js:8301
 #: wp-includes/js/dist/format-library.js:1119
 msgid "Open in New Tab"
 msgstr "在新窗口打开"
@@ -12620,7 +12620,7 @@ msgstr "Y年n月"
 msgid "Choose from the most used tags"
 msgstr "从常用标签中选择"
 
-#: wp-includes/js/dist/editor.js:22454
+#: wp-includes/js/dist/editor.js:22364
 msgid "This file exceeds the maximum upload size for this site."
 msgstr "此文件超过了本站点的最大上传尺寸。"
 
@@ -12633,7 +12633,7 @@ msgstr "分类目录"
 msgid "All Tags"
 msgstr "所有标签"
 
-#: wp-includes/taxonomy.php:518 wp-includes/js/dist/editor.js:28039
+#: wp-includes/taxonomy.php:518 wp-includes/js/dist/editor.js:27944
 msgid "Parent Category"
 msgstr "父级分类目录"
 
@@ -12645,7 +12645,7 @@ msgstr "父级分类目录："
 msgid "Update Tag"
 msgstr "更新标签"
 
-#: wp-includes/taxonomy.php:523 wp-includes/js/dist/editor.js:26634
+#: wp-includes/taxonomy.php:523 wp-includes/js/dist/editor.js:26540
 msgid "Add New Tag"
 msgstr "添加新标签"
 
@@ -13523,7 +13523,7 @@ msgstr "<strong>错误</strong>：WordPress %1$s需要MySQL %2$s以上版本"
 msgid "Sidebar %d"
 msgstr "边栏%d"
 
-#: wp-includes/user.php:285 wp-includes/functions.php:5419
+#: wp-includes/user.php:285 wp-includes/functions.php:5392
 msgid "Please log in again."
 msgstr "请重新登录。"
 
@@ -13593,7 +13593,7 @@ msgstr "保存更改时发生错误。"
 msgid "Submitted on:"
 msgstr "提交于："
 
-#: wp-includes/script-loader.php:1445 wp-includes/js/dist/editor.js:26090
+#: wp-includes/script-loader.php:1445 wp-includes/js/dist/editor.js:25996
 msgid "Password Protected"
 msgstr "密码保护"
 
@@ -13680,9 +13680,9 @@ msgstr "/"
 
 #: wp-includes/script-loader.php:1011
 #: wp-includes/widgets/class-wp-widget-media-image.php:25
-#: wp-includes/class-wp-editor.php:1089 wp-includes/js/dist/editor.js:22941
-#: wp-includes/js/dist/editor.js:25105
-#: wp-includes/js/dist/block-library.js:3629
+#: wp-includes/class-wp-editor.php:1089 wp-includes/js/dist/editor.js:22851
+#: wp-includes/js/dist/editor.js:25015
+#: wp-includes/js/dist/block-library.js:3616
 #: wp-includes/js/dist/format-library.js:498
 msgid "Image"
 msgstr "图像"
@@ -13957,13 +13957,13 @@ msgstr "该用户不存在。"
 
 #: wp-includes/class-wp-locale.php:201
 #: wp-includes/customize/class-wp-customize-date-time-control.php:173
-#: wp-includes/js/dist/components.js:29490
+#: wp-includes/js/dist/components.js:29485
 msgid "PM"
 msgstr "下午"
 
 #: wp-includes/class-wp-locale.php:200
 #: wp-includes/customize/class-wp-customize-date-time-control.php:172
-#: wp-includes/js/dist/components.js:29484
+#: wp-includes/js/dist/components.js:29479
 msgid "AM"
 msgstr "上午"
 
@@ -14008,8 +14008,8 @@ msgstr "插入分页标签"
 msgid "Fill Screen"
 msgstr "填满屏幕"
 
-#: wp-includes/js/dist/editor.js:25108
-#: wp-includes/js/dist/block-library.js:4313
+#: wp-includes/js/dist/editor.js:25018
+#: wp-includes/js/dist/block-library.js:4295
 msgid "Quote"
 msgstr "引语"
 
@@ -14029,11 +14029,11 @@ msgstr "拼写检查"
 msgid "Select all"
 msgstr "全选"
 
-#: wp-includes/script-loader.php:1299 wp-includes/class-wp-editor.php:1285
+#: wp-includes/script-loader.php:1299 wp-includes/class-wp-editor.php:1284
 msgid "Action"
 msgstr "操作"
 
-#: wp-includes/class-wp-editor.php:1284
+#: wp-includes/class-wp-editor.php:1283
 msgid "Letter"
 msgstr "字母"
 
@@ -14047,7 +14047,7 @@ msgstr "链接Rel"
 msgid "Source"
 msgstr "源"
 
-#: wp-includes/media.php:3557 wp-includes/js/dist/block-library.js:5084
+#: wp-includes/media.php:3557 wp-includes/js/dist/block-library.js:5066
 msgid "Edit Gallery"
 msgstr "编辑相册"
 
@@ -14086,8 +14086,8 @@ msgstr "对齐"
 #: wp-includes/widgets/class-wp-widget-media-audio.php:70
 #: wp-includes/widgets/class-wp-widget-media-video.php:72
 #: wp-includes/media-template.php:1097 wp-includes/media-template.php:1186
-#: wp-includes/js/dist/block-library.js:5910
-#: wp-includes/js/dist/block-library.js:13207
+#: wp-includes/js/dist/block-library.js:5892
+#: wp-includes/js/dist/block-library.js:13191
 msgid "Loop"
 msgstr "循环"
 
@@ -14095,7 +14095,7 @@ msgstr "循环"
 msgid "Constrain proportions"
 msgstr "保持长宽比"
 
-#: wp-includes/js/dist/block-library.js:10123
+#: wp-includes/js/dist/block-library.js:10107
 msgid "List"
 msgstr "列表"
 
@@ -14145,7 +14145,7 @@ msgstr "边框"
 msgid "Image description"
 msgstr "图像描述"
 
-#: wp-includes/js/dist/block-library.js:11219
+#: wp-includes/js/dist/block-library.js:11203
 msgid "Name:"
 msgstr "名称："
 
@@ -14178,7 +14178,7 @@ msgstr "下标"
 msgid "Unlink"
 msgstr "移除链接"
 
-#: wp-includes/js/dist/block-library.js:10132
+#: wp-includes/js/dist/block-library.js:10116
 msgid "ordered list"
 msgstr "有序列表"
 
@@ -14205,8 +14205,8 @@ msgid "Bold"
 msgstr "粗体"
 
 #: wp-includes/script-loader.php:854 wp-includes/class-wp-editor.php:1035
-#: wp-includes/js/dist/block-library.js:6754
-#: wp-includes/js/dist/block-library.js:6774
+#: wp-includes/js/dist/block-library.js:6736
+#: wp-includes/js/dist/block-library.js:6756
 #: wp-includes/js/dist/format-library.js:435
 msgid "Code"
 msgstr "代码"
@@ -14239,7 +14239,7 @@ msgstr "二级标题"
 msgid "Heading 1"
 msgstr "一级标题"
 
-#: wp-includes/js/dist/block-library.js:10696
+#: wp-includes/js/dist/block-library.js:10680
 msgid "Preformatted"
 msgstr "预格式化的"
 
@@ -14248,12 +14248,12 @@ msgstr "预格式化的"
 msgid "Paragraph"
 msgstr "段落"
 
-#: wp-includes/js/dist/components.js:31019
+#: wp-includes/js/dist/components.js:31010
 msgid "Font Size"
 msgstr "字号"
 
-#: wp-includes/js/dist/editor.js:25163 wp-includes/js/dist/editor.js:26708
-#: wp-includes/js/dist/editor.js:26815
+#: wp-includes/js/dist/editor.js:25073 wp-includes/js/dist/editor.js:26614
+#: wp-includes/js/dist/editor.js:26721
 msgid "Suggestion:"
 msgstr "推荐："
 
@@ -14272,7 +14272,7 @@ msgstr "文档属性"
 msgid "The changes you made will be lost if you navigate away from this page."
 msgstr "离开这个页面，您所做的更改将丢失。"
 
-#: wp-includes/js/dist/block-library.js:7045
+#: wp-includes/js/dist/block-library.js:7027
 msgid "Column"
 msgstr "行"
 
@@ -14337,7 +14337,7 @@ msgid "Insert row before"
 msgstr "在上方插入行"
 
 #: wp-includes/script-loader.php:1259 wp-includes/class-wp-editor.php:1129
-#: wp-includes/class-wp-editor.php:1135 wp-includes/class-wp-editor.php:1710
+#: wp-includes/class-wp-editor.php:1135 wp-includes/class-wp-editor.php:1709
 msgid "Insert/edit link"
 msgstr "插入或编辑链接"
 
@@ -14441,83 +14441,83 @@ msgstr "星期日"
 #. translators: month name
 #. translators: three-letter abbreviation of the month
 #: wp-includes/class-wp-locale.php:167 wp-includes/class-wp-locale.php:195
-#: wp-includes/js/dist/components.js:29427
+#: wp-includes/js/dist/components.js:29422
 msgid "December"
 msgstr "十二月"
 
 #. translators: month name
 #. translators: three-letter abbreviation of the month
 #: wp-includes/class-wp-locale.php:166 wp-includes/class-wp-locale.php:194
-#: wp-includes/js/dist/components.js:29425
+#: wp-includes/js/dist/components.js:29420
 msgid "November"
 msgstr "十一月"
 
 #. translators: month name
 #. translators: three-letter abbreviation of the month
 #: wp-includes/class-wp-locale.php:165 wp-includes/class-wp-locale.php:193
-#: wp-includes/js/dist/components.js:29423
+#: wp-includes/js/dist/components.js:29418
 msgid "October"
 msgstr "十月"
 
 #. translators: month name
 #. translators: three-letter abbreviation of the month
 #: wp-includes/class-wp-locale.php:164 wp-includes/class-wp-locale.php:192
-#: wp-includes/js/dist/components.js:29421
+#: wp-includes/js/dist/components.js:29416
 msgid "September"
 msgstr "九月"
 
 #. translators: month name
 #. translators: three-letter abbreviation of the month
 #: wp-includes/class-wp-locale.php:163 wp-includes/class-wp-locale.php:191
-#: wp-includes/js/dist/components.js:29419
+#: wp-includes/js/dist/components.js:29414
 msgid "August"
 msgstr "八月"
 
 #. translators: month name
 #. translators: three-letter abbreviation of the month
 #: wp-includes/class-wp-locale.php:162 wp-includes/class-wp-locale.php:190
-#: wp-includes/js/dist/components.js:29417
+#: wp-includes/js/dist/components.js:29412
 msgid "July"
 msgstr "七月"
 
 #. translators: month name
 #. translators: three-letter abbreviation of the month
 #: wp-includes/class-wp-locale.php:161 wp-includes/class-wp-locale.php:189
-#: wp-includes/js/dist/components.js:29415
+#: wp-includes/js/dist/components.js:29410
 msgid "June"
 msgstr "六月"
 
 #. translators: month name
 #. translators: three-letter abbreviation of the month
 #: wp-includes/class-wp-locale.php:160 wp-includes/class-wp-locale.php:188
-#: wp-includes/js/dist/components.js:29413
+#: wp-includes/js/dist/components.js:29408
 msgid "May"
 msgstr "五月"
 
 #. translators: month name
 #. translators: three-letter abbreviation of the month
 #: wp-includes/class-wp-locale.php:159 wp-includes/class-wp-locale.php:187
-#: wp-includes/js/dist/components.js:29411
+#: wp-includes/js/dist/components.js:29406
 msgid "April"
 msgstr "四月"
 
 #. translators: month name
 #. translators: three-letter abbreviation of the month
 #: wp-includes/class-wp-locale.php:158 wp-includes/class-wp-locale.php:186
-#: wp-includes/js/dist/components.js:29409
+#: wp-includes/js/dist/components.js:29404
 msgid "March"
 msgstr "三月"
 
 #. translators: month name
 #. translators: three-letter abbreviation of the month
 #: wp-includes/class-wp-locale.php:157 wp-includes/class-wp-locale.php:185
-#: wp-includes/js/dist/components.js:29407
+#: wp-includes/js/dist/components.js:29402
 msgid "February"
 msgstr "二月"
 
 #. translators: month name
 #: wp-includes/class-wp-locale.php:156 wp-includes/class-wp-locale.php:184
-#: wp-includes/js/dist/components.js:29405
+#: wp-includes/js/dist/components.js:29400
 msgid "January"
 msgstr "一月"
 
@@ -14625,34 +14625,34 @@ msgstr "登出"
 msgid "Log in"
 msgstr "登录"
 
-#: wp-includes/functions.php:4807
+#: wp-includes/functions.php:4780
 msgid "Manual Offsets"
 msgstr "手动指定偏差"
 
-#: wp-includes/functions.php:4799 wp-includes/functions.php:4803
+#: wp-includes/functions.php:4772 wp-includes/functions.php:4776
 msgid "UTC"
 msgstr "协调世界时（UTC）"
 
-#: wp-includes/functions.php:4754
+#: wp-includes/functions.php:4727
 msgid "Select a city"
 msgstr "选择一个城市"
 
 #. translators: 1: PHP function name, 2: version number
-#: wp-includes/functions.php:4118
+#: wp-includes/functions.php:4091
 msgid "%1$s was called with an argument that is <strong>deprecated</strong> since version %2$s with no alternative available."
 msgstr "自%2$s版本起，已<strong>不建议</strong>给%1$s传入一个参数！没有替代方案。"
 
 #. translators: 1: PHP function name, 2: version number, 3: optional message
 #. regarding the change
-#: wp-includes/functions.php:4115
+#: wp-includes/functions.php:4088
 msgid "%1$s was called with an argument that is <strong>deprecated</strong> since version %2$s! %3$s"
 msgstr "自%2$s版本起，已<strong>不建议</strong>给%1$s传入一个参数！%3$s"
 
 #. translators: 1: PHP function name, 2: version number
 #. translators: 1: PHP file name, 2: version number
 #. translators: 1: WordPress hook name, 2: version number
-#: wp-includes/functions.php:3926 wp-includes/functions.php:4054
-#: wp-includes/functions.php:4177
+#: wp-includes/functions.php:3899 wp-includes/functions.php:4027
+#: wp-includes/functions.php:4150
 msgid "%1$s is <strong>deprecated</strong> since version %2$s with no alternative available."
 msgstr "自%2$s版本起，已<strong>不建议使用</strong>%1$s。没有替代方案。"
 
@@ -14661,30 +14661,30 @@ msgstr "自%2$s版本起，已<strong>不建议使用</strong>%1$s。没有替�
 #. translators: 1: PHP file name, 2: version number, 3: alternative file name
 #. translators: 1: WordPress hook name, 2: version number, 3: alternative hook
 #. name
-#: wp-includes/functions.php:3923 wp-includes/functions.php:4051
-#: wp-includes/functions.php:4174
+#: wp-includes/functions.php:3896 wp-includes/functions.php:4024
+#: wp-includes/functions.php:4147
 msgid "%1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead."
 msgstr "自%2$s版本起，已<strong>不建议使用</strong>%1$s，请换用%3$s。"
 
-#: wp-load.php:92 wp-includes/functions.php:2833
+#: wp-load.php:92 wp-includes/functions.php:2806
 msgid "WordPress &rsaquo; Error"
 msgstr "WordPress&rsaquo;错误"
 
-#: wp-includes/functions.php:2821
+#: wp-includes/functions.php:2794
 msgid "&laquo; Back"
 msgstr "&laquo; 返回"
 
-#: wp-includes/functions.php:2696 wp-includes/ms-functions.php:2047
+#: wp-includes/functions.php:2669 wp-includes/ms-functions.php:2047
 msgid "Please try again."
 msgstr "请重试。"
 
 #. translators: %s: logout URL
-#: wp-includes/functions.php:2687
+#: wp-includes/functions.php:2660
 msgid "Do you really want to <a href=\"%s\">log out</a>?"
 msgstr "您确实要<a href=\"%s\">登出</a>？"
 
 #. translators: %s: site name
-#: wp-includes/functions.php:2680
+#: wp-includes/functions.php:2653
 msgid "You are attempting to log out of %s"
 msgstr "您正试图注销%s"
 
@@ -14842,8 +14842,8 @@ msgstr "日历"
 msgid "Entries <abbr title=\"Really Simple Syndication\">RSS</abbr>"
 msgstr "文章<abbr title=\"Really Simple Syndication\">RSS</abbr>"
 
-#: wp-includes/js/dist/block-library.js:5622
-#: wp-includes/js/dist/block-library.js:6609
+#: wp-includes/js/dist/block-library.js:5604
+#: wp-includes/js/dist/block-library.js:6591
 msgid "Display as Dropdown"
 msgstr "显示为下拉菜单"
 
@@ -15070,7 +15070,7 @@ msgstr "《%s》上的评论"
 #: wp-includes/script-loader.php:978 wp-includes/script-loader.php:1263
 #: wp-includes/script-loader.php:1633
 #: wp-includes/class-wp-customize-nav-menus.php:276
-#: wp-includes/js/dist/components.js:34768
+#: wp-includes/js/dist/components.js:34757
 msgid "No results found."
 msgstr "未找到结果。"
 
@@ -15082,7 +15082,7 @@ msgstr "下一页 &raquo;"
 msgid "&laquo; Previous Page"
 msgstr "&laquo; 上一页"
 
-#: wp-includes/js/dist/components.js:33468
+#: wp-includes/js/dist/components.js:33459
 msgid "All"
 msgstr "全部"
 
@@ -15097,7 +15097,7 @@ msgid "For some strange yet very annoying reason, this post could not be edited.
 msgstr "由于某个奇怪的原因，无法编辑这篇文章。"
 
 #: wp-includes/admin-bar.php:830 wp-includes/class-wp-customize-widgets.php:412
-#: wp-includes/functions.php:3799 wp-includes/js/dist/blocks.js:5503
+#: wp-includes/functions.php:3772 wp-includes/js/dist/blocks.js:5503
 msgid "Widgets"
 msgstr "小工具"
 
@@ -15126,7 +15126,7 @@ msgstr "多个标签请用英文逗号（,）分开"
 msgid "Title:"
 msgstr "标题："
 
-#: wp-includes/js/dist/block-library.js:8922
+#: wp-includes/js/dist/block-library.js:8904
 msgid "HTML"
 msgstr "HTML"
 
@@ -15198,7 +15198,7 @@ msgstr "主题"
 msgid "Sites"
 msgstr "站点"
 
-#: wp-includes/js/dist/editor.js:23409
+#: wp-includes/js/dist/editor.js:23319
 msgid "Edit Link"
 msgstr "编辑链接"
 
@@ -15300,7 +15300,7 @@ msgstr "帮助"
 #: wp-includes/script-loader.php:1262 wp-includes/script-loader.php:1490
 #: wp-includes/widgets/class-wp-widget-recent-posts.php:91
 #: wp-includes/blocks/latest-comments.php:31 wp-includes/media.php:3143
-#: wp-includes/js/dist/editor.js:23333 wp-includes/js/dist/editor.js:27030
+#: wp-includes/js/dist/editor.js:23243 wp-includes/js/dist/editor.js:26936
 #: wp-includes/js/dist/edit-post.js:4232
 msgid "(no title)"
 msgstr "(无标题)"
@@ -15324,8 +15324,8 @@ msgstr "选择"
 #: wp-includes/script-loader.php:1013 wp-includes/script-loader.php:1107
 #: wp-includes/script-loader.php:1298 wp-includes/script-loader.php:1921
 #: wp-includes/class-wp-customize-manager.php:5301
-#: wp-includes/class-wp-editor.php:1056 wp-includes/class-wp-editor.php:1711
-#: wp-includes/js/dist/components.js:29594 wp-includes/js/dist/editor.js:23427
+#: wp-includes/class-wp-editor.php:1056 wp-includes/class-wp-editor.php:1710
+#: wp-includes/js/dist/components.js:29589 wp-includes/js/dist/editor.js:23337
 #: wp-includes/js/dist/edit-post.js:3485 wp-includes/js/dist/edit-post.js:3883
 msgid "Close"
 msgstr "关闭"
@@ -15360,7 +15360,7 @@ msgid "Images"
 msgstr "图像"
 
 #: wp-includes/admin-bar.php:904 wp-includes/admin-bar.php:905
-#: wp-includes/media.php:3496 wp-includes/class-wp-editor.php:1732
+#: wp-includes/media.php:3496 wp-includes/class-wp-editor.php:1731
 msgid "Search"
 msgstr "搜索"
 
@@ -15386,15 +15386,15 @@ msgstr "添加或删除标签"
 
 #: wp-includes/script-loader.php:1260 wp-includes/script-loader.php:1439
 #: wp-includes/script-loader.php:1520 wp-includes/media.php:3499
-#: wp-includes/js/dist/editor.js:25880
+#: wp-includes/js/dist/editor.js:25790
 msgid "Update"
 msgstr "更新"
 
-#: wp-includes/js/dist/editor.js:25882
+#: wp-includes/js/dist/editor.js:25792
 msgid "Schedule"
 msgstr "计划"
 
-#: wp-includes/script-loader.php:1443 wp-includes/js/dist/editor.js:26082
+#: wp-includes/script-loader.php:1443 wp-includes/js/dist/editor.js:25988
 msgid "Public"
 msgstr "公开"
 
@@ -15403,7 +15403,7 @@ msgid "Public, Sticky"
 msgstr "公开、置顶"
 
 #: wp-includes/script-loader.php:1442 wp-includes/post.php:802
-#: wp-includes/post.php:822 wp-includes/js/dist/editor.js:26086
+#: wp-includes/post.php:822 wp-includes/js/dist/editor.js:25992
 msgid "Private"
 msgstr "私密"
 
@@ -15415,7 +15415,7 @@ msgstr "确定"
 msgid "Privately Published"
 msgstr "私密、已发布"
 
-#: wp-includes/script-loader.php:1440 wp-includes/js/dist/editor.js:27434
+#: wp-includes/script-loader.php:1440 wp-includes/js/dist/editor.js:27339
 msgid "Save as Pending"
 msgstr "保存并提请审核"
 
@@ -15424,7 +15424,7 @@ msgid "Image URL"
 msgstr "图像URL"
 
 #: wp-includes/media.php:4022 wp-includes/class-wp-editor.php:1106
-#: wp-includes/js/dist/editor.js:22936
+#: wp-includes/js/dist/editor.js:22846
 msgid "Media"
 msgstr "媒体"
 
@@ -15492,7 +15492,6 @@ msgid "Saved."
 msgstr "已保存。"
 
 #: wp-includes/media.php:3495 wp-includes/media.php:3516
-#: wp-includes/class-wp-editor.php:1268
 msgid "Add Media"
 msgstr "添加媒体"
 
@@ -15516,7 +15515,7 @@ msgstr "“%s”文件不存在？"
 msgid "Thumbnail"
 msgstr "缩略图"
 
-#: wp-includes/class-wp-editor.php:1052 wp-includes/js/dist/editor.js:24109
+#: wp-includes/class-wp-editor.php:1052 wp-includes/js/dist/editor.js:24019
 msgid "Redo"
 msgstr "重做"
 
@@ -15532,7 +15531,7 @@ msgstr "用户名"
 #: wp-includes/widgets/class-wp-widget-archives.php:43
 #: wp-includes/blocks/archives.php:35 wp-includes/general-template.php:1512
 #: wp-includes/theme-compat/sidebar.php:91
-#: wp-includes/js/dist/block-library.js:5666
+#: wp-includes/js/dist/block-library.js:5648
 msgid "Archives"
 msgstr "文章归档"
 
@@ -15566,7 +15565,7 @@ msgstr "回复"
 
 #: wp-includes/script-loader.php:1287 wp-includes/script-loader.php:1441
 #: wp-includes/class-wp-customize-manager.php:4622
-#: wp-includes/js/dist/editor.js:27434
+#: wp-includes/js/dist/editor.js:27339
 msgid "Save Draft"
 msgstr "保存草稿"
 
@@ -15580,7 +15579,7 @@ msgstr "内容"
 
 #: wp-includes/script-loader.php:1246 wp-includes/script-loader.php:1297
 #: wp-includes/script-loader.php:1429 wp-includes/media.php:3498
-#: wp-includes/class-wp-editor.php:1055 wp-includes/class-wp-editor.php:1757
+#: wp-includes/class-wp-editor.php:1055 wp-includes/class-wp-editor.php:1756
 msgid "Cancel"
 msgstr "取消"
 
@@ -15595,9 +15594,9 @@ msgstr "近期评论"
 
 #: wp-includes/media-template.php:1246
 #: wp-includes/class-wp-customize-manager.php:4156
-#: wp-includes/class-wp-editor.php:1122 wp-includes/js/dist/editor.js:17152
+#: wp-includes/class-wp-editor.php:1122 wp-includes/js/dist/editor.js:17053
 #: wp-includes/js/dist/edit-post.js:4856
-#: wp-includes/js/dist/block-library.js:8911
+#: wp-includes/js/dist/block-library.js:8893
 msgid "Preview"
 msgstr "预览"
 
@@ -15605,7 +15604,7 @@ msgstr "预览"
 msgid "RSS"
 msgstr "RSS"
 
-#: wp-includes/js/dist/editor.js:23434
+#: wp-includes/js/dist/editor.js:23344
 msgid "Submit"
 msgstr "提交"
 
@@ -15648,9 +15647,9 @@ msgstr "编辑标签"
 #: wp-includes/media-template.php:926 wp-includes/media-template.php:988
 #: wp-includes/media-template.php:1086 wp-includes/media-template.php:1175
 #: wp-includes/deprecated.php:688 wp-includes/js/dist/block-library.js:3137
-#: wp-includes/js/dist/block-library.js:4879
-#: wp-includes/js/dist/block-library.js:5930
-#: wp-includes/js/dist/block-library.js:13234
+#: wp-includes/js/dist/block-library.js:4861
+#: wp-includes/js/dist/block-library.js:5912
+#: wp-includes/js/dist/block-library.js:13218
 msgid "None"
 msgstr "无"
 
@@ -15664,7 +15663,7 @@ msgstr "图像描述"
 msgid "Name"
 msgstr "姓名"
 
-#: wp-includes/class-wp-editor.php:1092 wp-includes/js/dist/editor.js:29551
+#: wp-includes/class-wp-editor.php:1092 wp-includes/js/dist/editor.js:29446
 msgid "Advanced"
 msgstr "高级"
 
@@ -15675,21 +15674,21 @@ msgstr "打开方式"
 #: wp-includes/widgets/class-wp-widget-categories.php:30
 #: wp-includes/widgets/class-wp-widget-categories.php:47
 #: wp-includes/category-template.php:523
-#: wp-includes/theme-compat/sidebar.php:97 wp-includes/js/dist/editor.js:28044
-#: wp-includes/js/dist/editor.js:28045
-#: wp-includes/js/dist/block-library.js:6571
-#: wp-includes/js/dist/block-library.js:6625
-#: wp-includes/js/dist/block-library.js:6677
+#: wp-includes/theme-compat/sidebar.php:97 wp-includes/js/dist/editor.js:27949
+#: wp-includes/js/dist/editor.js:27950
+#: wp-includes/js/dist/block-library.js:6553
+#: wp-includes/js/dist/block-library.js:6607
+#: wp-includes/js/dist/block-library.js:6659
 msgid "Categories"
 msgstr "分类目录"
 
 #: wp-includes/script-loader.php:1469 wp-includes/class-wp-editor.php:1124
-#: wp-includes/js/dist/editor.js:28441
-#: wp-includes/js/dist/block-library.js:11234
+#: wp-includes/js/dist/editor.js:28344
+#: wp-includes/js/dist/block-library.js:11218
 msgid "Save"
 msgstr "保存"
 
-#: wp-includes/script-loader.php:1261 wp-includes/class-wp-editor.php:1760
+#: wp-includes/script-loader.php:1261 wp-includes/class-wp-editor.php:1759
 msgid "Add Link"
 msgstr "添加链接"
 
@@ -15720,7 +15719,7 @@ msgstr "摘要"
 
 #: wp-includes/script-loader.php:1285 wp-includes/script-loader.php:1437
 #: wp-includes/class-wp-customize-manager.php:4617
-#: wp-includes/js/dist/editor.js:25885 wp-includes/js/dist/edit-post.js:4394
+#: wp-includes/js/dist/editor.js:25795 wp-includes/js/dist/edit-post.js:4394
 msgid "Publish"
 msgstr "发布"
 
@@ -15729,13 +15728,13 @@ msgid "Comments"
 msgstr "评论"
 
 #: wp-includes/class-wp-customize-widgets.php:751 wp-includes/media.php:3538
-#: wp-includes/class-wp-editor.php:1264 wp-includes/js/dist/editor.js:22759
-#: wp-includes/js/dist/block-library.js:6201
+#: wp-includes/class-wp-editor.php:1264 wp-includes/js/dist/editor.js:22669
+#: wp-includes/js/dist/block-library.js:6183
 #: wp-includes/js/dist/format-library.js:910
 msgid "Apply"
 msgstr "应用"
 
-#: wp-includes/class-wp-editor.php:1051 wp-includes/js/dist/editor.js:24147
+#: wp-includes/class-wp-editor.php:1051 wp-includes/js/dist/editor.js:24057
 msgid "Undo"
 msgstr "撤销"
 
@@ -15751,8 +15750,8 @@ msgstr "%s前"
 
 #: wp-includes/class-wp-editor.php:1262
 #: wp-includes/class-walker-comment.php:236
-#: wp-includes/class-walker-comment.php:340 wp-includes/js/dist/editor.js:28613
-#: wp-includes/js/dist/block-library.js:11213
+#: wp-includes/class-walker-comment.php:340 wp-includes/js/dist/editor.js:28514
+#: wp-includes/js/dist/block-library.js:11197
 #: wp-includes/js/dist/format-library.js:950
 msgid "Edit"
 msgstr "编辑"
@@ -15775,16 +15774,16 @@ msgstr "评论"
 #: wp-includes/media-template.php:1049 wp-includes/media-template.php:1132
 #: wp-includes/media.php:3494 wp-includes/media.php:4017
 #: wp-includes/customize/class-wp-customize-nav-menu-item-control.php:86
-#: wp-includes/class-wp-editor.php:1139 wp-includes/class-wp-editor.php:1716
+#: wp-includes/class-wp-editor.php:1139 wp-includes/class-wp-editor.php:1715
 #: wp-includes/class-wp-customize-nav-menus.php:1111
-#: wp-includes/js/dist/editor.js:22752 wp-includes/js/dist/editor.js:23297
+#: wp-includes/js/dist/editor.js:22662 wp-includes/js/dist/editor.js:23207
 #: wp-includes/js/dist/edit-post.js:4821
-#: wp-includes/js/dist/block-library.js:8298
+#: wp-includes/js/dist/block-library.js:8280
 msgid "URL"
 msgstr "URL"
 
 #: wp-includes/class-wp-editor.php:1086 wp-includes/theme-compat/sidebar.php:27
-#: wp-includes/js/dist/editor.js:24695
+#: wp-includes/js/dist/editor.js:24605
 msgid "Author"
 msgstr "作者"
 
@@ -15797,7 +15796,7 @@ msgstr "登出"
 msgid "Visit Site"
 msgstr "查看站点"
 
-#: wp-includes/class-wp-editor.php:1650
+#: wp-includes/class-wp-editor.php:1649
 msgid "Y/m/d"
 msgstr "Y-m-d"
 
@@ -15805,23 +15804,23 @@ msgstr "Y-m-d"
 msgid "Draft"
 msgstr "草稿"
 
-#: wp-includes/post.php:801 wp-includes/js/dist/editor.js:25790
+#: wp-includes/post.php:801 wp-includes/js/dist/editor.js:25700
 msgid "Pending Review"
 msgstr "等待复审"
 
 #: wp-includes/script-loader.php:1286 wp-includes/script-loader.php:1447
 #: wp-includes/post.php:803 wp-includes/post.php:823
-#: wp-includes/js/dist/editor.js:27166
+#: wp-includes/js/dist/editor.js:27072
 msgid "Published"
 msgstr "已发布"
 
 #: wp-includes/media-template.php:382 wp-includes/media-template.php:563
 #: wp-includes/revision.php:34 wp-includes/class-wp-editor.php:1082
-#: wp-includes/js/dist/editor.js:23698
+#: wp-includes/js/dist/editor.js:23608
 msgid "Title"
 msgstr "标题"
 
-#: wp-includes/post.php:1521 wp-includes/js/dist/block-library.js:9910
+#: wp-includes/post.php:1521 wp-includes/js/dist/block-library.js:9894
 msgid "No posts found."
 msgstr "未找到文章。"
 

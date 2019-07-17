@@ -1,7 +1,7 @@
 jQuery(function ($) {
     //bind form handler for every form inside scan section
     WDAudit.formHandler();
-    //WDAudit.listenFilter();
+    WDAudit.listenFilter();
     WDAudit.filterForm();
     WDAudit.initDatepicker();
     $('div.auditing').on('form-submitted', function (e, data, form) {
@@ -107,6 +107,13 @@ jQuery(function ($) {
     if ($('#audit-table-container').size() > 0) {
         if ($('#audit-table-container').find('table').size() == 0) {
             var query = WDAudit.buildFilterQuery();
+            var parts = WDAudit.getHashParams();
+            if (parts.context !== undefined) {
+                query += '&context=' + parts.context;
+            }
+            if (parts.term !== undefined) {
+                query += '&term=' + parts.term;
+            }
             WDAudit.ajaxPull(query, function () {
                 jQuery("#audit-table-container select").each(function () {
 
@@ -267,9 +274,13 @@ WDAudit.filterForm = function () {
         jq('.sui-pagination-active-filters').html('');
         inputs.each(function () {
             if (jq(this).val().length && jq(this).data('name') != undefined) {
-                var html = jq(this).data('name') + ':' + jq(this).val();
-                html += '<span class="sui-active-filter-remove" data-target="' + jq(this).attr('id') + '"></span>';
-                jq('.sui-pagination-active-filters').append(jq('<span class="sui-active-filter"/>').html(html));
+                if (jq(this).attr('type') === 'checkbox' && jq(this).prop('checked') === false) {
+
+                } else {
+                    var html = jq(this).data('name') + ':' + jq(this).val();
+                    html += '<span class="sui-active-filter-remove" data-target="' + jq(this).attr('id') + '"></span>';
+                    jq('.sui-pagination-active-filters').append(jq('<span class="sui-active-filter"/>').html(html));
+                }
             }
         })
         return false;
@@ -277,42 +288,33 @@ WDAudit.filterForm = function () {
 }
 
 WDAudit.listenFilter = function () {
+    //parse the URL
     var jq = jQuery;
-    var form = jq('.audit-filter form');
-    var inputs = form.find(':input');
-    var typingTimer;                //timer identifier
-    var doneTypingInterval = 800;  //time in ms, 5 second for example
-    var state = 0;
-    var old_query = '';
-    //on keyup, start the countdown
-    var currentInput = null;
-    inputs.on('change', function () {
-        currentInput = jq(this);
-        clearTimeout(typingTimer);
-        typingTimer = setTimeout(doneTyping, doneTypingInterval);
+
+    var parts = WDAudit.getHashParams();
+    var filters = ['comment', 'system', 'media', 'settings', 'content', 'user'];
+    var currentActive = [];
+    for (var i in parts) {
+        var v = parts[i];
+        if (i.indexOf('event_type') !== -1 && filters.indexOf(v) !== -1) {
+            currentActive.push(v);
+        } else if (i === 'ip') {
+            jq('#ip').val(parts.ip);
+        }
+    }
+    var notActive = jq(filters).not(currentActive).get();
+    jq.each(notActive, function (i, v) {
+        jq('input[name="event_type[]"][value="' + v + '"]').prop('checked', false);
     });
 
-    //on keydown, clear the countdown
-    inputs.on('click', function () {
-        state = 1;
-        clearTimeout(typingTimer);
-    });
-
-    //user is "finished typing," do something
-    function doneTyping() {
-        //build query
-        var query = WDAudit.buildFilterQuery(currentInput);
-        if (query == old_query) {
-            //no need
-            return;
-        }
-        if (state == 0 && currentInput.is('select') == false) {
-            return;
-        }
-        WDAudit.ajaxPull(query, function () {
-            old_query = query;
-            //create auto filter
-
+    if (currentActive.length) {
+        jq('.filter-container').removeClass('wd-hide');
+        jq('.sui-pagination-active-filters').html('');
+        jq.each(currentActive, function (i, v) {
+            var input = jq('input[name="event_type[]"][value="' + v + '"]');
+            var html = input.data('name') + ':' + input.val();
+            html += '<span class="sui-active-filter-remove" data-target="' + input + '"></span>';
+            jq('.sui-pagination-active-filters').append(jq('<span class="sui-active-filter"/>').html(html));
         })
     }
 };
@@ -370,7 +372,7 @@ WDAudit.ajaxPull = function (query, callback) {
                     count = data.data.count;
                     callback();
                 }
-                if (data.data.pagination != undefined) {
+                if (data.data.pagination !== undefined) {
                     jq('.sui-pagination-results').remove();
                     jq('.sui-pagination').remove();
                     jq('.sui-pagination-wrap').prepend(data.data.pagination);
@@ -381,4 +383,21 @@ WDAudit.ajaxPull = function (query, callback) {
             }
         }
     })
+}
+
+WDAudit.getHashParams = function () {
+
+    var hashParams = {};
+    var e,
+        a = /\+/g,  // Regex for replacing addition symbol with a space
+        r = /([^&;=]+)=?([^&;]*)/g,
+        d = function (s) {
+            return decodeURIComponent(s.replace(a, " "));
+        },
+        q = window.location.hash.substring(1);
+
+    while (e = r.exec(q))
+        hashParams[d(e[1])] = d(e[2]);
+
+    return hashParams;
 }

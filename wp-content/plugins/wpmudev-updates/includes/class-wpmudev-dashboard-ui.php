@@ -874,6 +874,37 @@ class WPMUDEV_Dashboard_Ui {
 	}
 
 	/**
+	 * Add WPMUDEV link as return action after upgrading DEV plugins.
+	 *
+	 * Default actions are "Return to Themes/Plugins" and "Return to WP Updates"
+	 * This filter adds a "Return to WPMUDEV Updates"
+	 *
+	 * @since    1.0.0
+	 * @internal Action hook
+	 *
+	 * @param  array  $update_actions Array of further actions to display.
+	 * @param  string $plugin         Main plugin file.
+	 *
+	 * @return array
+	 */
+	public function branding_update_plugin_done( $update_actions, $plugin ) {
+		$updates = WPMUDEV_Dashboard::$site->get_transient( 'update_plugins', false );
+
+		if ( ! empty( $updates->response[ $plugin ] ) ) {
+			if ( WPMUDEV_Dashboard::$api->is_server_url( $updates->response[ $plugin ]->package ) ) {
+				$update_actions['plugins_page'] = sprintf(
+					'<a href="%s" title="%s" target="_parent">%s</a>',
+					$this->page_urls->plugins_url,
+					esc_attr__( 'Return to WPMU DEV Plugins', 'wpmudev' ),
+					__( 'Return to WPMU DEV Plugins', 'wpmudev' )
+				);
+			}
+		}
+
+		return $update_actions;
+	}
+
+	/**
 	 * If a certain URL param is defined we will abort the request now.
 	 *
 	 * Handles the admin hook `in_admin_header`
@@ -1202,9 +1233,10 @@ class WPMUDEV_Dashboard_Ui {
 	 */
 	public function render_dashboard() {
 		// These two variables are used in template login.php.
-		$connection_error    = false;
-		$key_valid           = true;
-		$site_limit_exceeded = false;
+		$connection_error                = false;
+		$key_valid                       = true;
+		$site_limit_exceeded             = false;
+		$non_hosting_site_limit_exceeded = false;
 
 		if ( ! current_user_can( 'manage_options' ) ) {
 			$this->load_sui_template( 'no_access' );
@@ -1231,6 +1263,8 @@ class WPMUDEV_Dashboard_Ui {
 			$connection_error = true;
 		} elseif ( ! empty( $_REQUEST['site_limit_exceeded'] ) ) {
 			$site_limit_exceeded = true;
+		} elseif ( ! empty( $_REQUEST['non_hosting_site_limit_exceeded'] ) ) {
+			$non_hosting_site_limit_exceeded = true;
 		}
 
 		$is_logged_in = WPMUDEV_Dashboard::$api->has_key();
@@ -1238,7 +1272,7 @@ class WPMUDEV_Dashboard_Ui {
 
 		if ( ! $is_logged_in ) {
 			// User did not log in to WPMUDEV -> Show login page!
-			$this->load_sui_template( 'login', compact( 'key_valid', 'connection_error', 'site_limit_exceeded', 'urls' ) );
+			$this->load_sui_template( 'login', compact( 'key_valid', 'connection_error', 'site_limit_exceeded', 'non_hosting_site_limit_exceeded', 'urls' ) );
 		} elseif ( ! WPMUDEV_Dashboard::$site->allowed_user() ) {
 			// User has no permission to view the page.
 			$this->load_sui_template( 'no_access' );
@@ -1449,13 +1483,13 @@ class WPMUDEV_Dashboard_Ui {
 				'installing_plugin'                   => __( 'Installing %s ...', 'wpmudev' ),
 				'deactivating_plugin'                 => __( 'Deactivating %s ...', 'wpmudev' ),
 				'deleting_plugin'                     => __( 'Deleting %s ...', 'wpmudev' ),
-				'no_result_search_plugin_all'         => __( 'There is no plugins match with your search term. Please try again with some different keyword.', 'wpmudev' ),
-				'no_result_search_plugin_activated'   => __( 'There is no activated plugins match with your search terms. Please try again with some different keyword.', 'wpmudev' ),
-				'no_result_search_plugin_deactivated' => __( 'There is no deactivated plugins match with your search terms. Please try again with some different keyword.', 'wpmudev' ),
-				'no_result_search_plugin_updates'     => __( 'There is no plugins that need updates match with your search terms. Please try again with some different keyword.', 'wpmudev' ),
-				'no_plugin_activated'                 => __( 'There is no activated plugins at this time.', 'wpmudev' ),
-				'no_plugin_deactivated'               => __( 'There is no deactivated plugins at this time.', 'wpmudev' ),
-				'no_plugin_updates'                   => __( 'There is no plugins need to be updated at this time.', 'wpmudev' ),
+				'no_result_search_plugin_all'         => __( 'There are no plugins matching your search, please try again.', 'wpmudev' ),
+				'no_result_search_plugin_activated'   => __( 'There are no active plugins matching your search, please try again.', 'wpmudev' ),
+				'no_result_search_plugin_deactivated' => __( 'There are no deactivated plugins matching your search, please try again.', 'wpmudev' ),
+				'no_result_search_plugin_updates'     => __( 'There are no plugins with updates available matching your search, please try again.', 'wpmudev' ),
+				'no_plugin_activated'                 => __( "You don't have any WPMU DEV plugins installed and activated.", 'wpmudev' ),
+				'no_plugin_deactivated'               => __( "You don't have any deactivated WPMU DEV plugins.", 'wpmudev' ),
+				'no_plugin_updates'                   => __( "There are no WPMU DEV plugin updates available.", 'wpmudev' ),
 			)
 		);
 
@@ -1470,13 +1504,13 @@ class WPMUDEV_Dashboard_Ui {
 	 *
 	 * @param  string $page_title The page caption.
 	 */
-	public function render_sui_header( $page_title ) {
+	public function render_sui_header( $page_title, $page_slug ) {
 		$is_logged_in      = WPMUDEV_Dashboard::$api->has_key();
 		$urls              = $this->page_urls;
 		$url_support       = $urls->support_url;
 		$url_dash          = $urls->hub_url;
 		$url_logout        = $urls->dashboard_url . '&clear_key=1';
-		$documentation_url = $urls->documentation_url;
+		$documentation_url = $urls->documentation_url[ $page_slug ];
 
 		$member  = WPMUDEV_Dashboard::$api->get_profile();
 		$profile = $member['profile'];
@@ -1629,6 +1663,7 @@ class WPMUDEV_Dashboard_Ui {
 		$urls            = $this->page_urls;
 		$allowed_users   = WPMUDEV_Dashboard::$site->get_allowed_users();
 		$auto_update     = WPMUDEV_Dashboard::$site->get_option( 'autoupdate_dashboard' );
+		$enable_sso     = WPMUDEV_Dashboard::$site->get_option( 'enable_sso' );
 		$membership_type = WPMUDEV_Dashboard::$api->get_membership_type( $single_id );
 
 		/**
@@ -1636,7 +1671,7 @@ class WPMUDEV_Dashboard_Ui {
 		 */
 		do_action( 'wpmudev_dashboard_notice-settings' );
 
-		$this->load_sui_template( 'settings', compact( 'member', 'urls', 'allowed_users', 'auto_update', 'membership_type', $single_id ) );
+		$this->load_sui_template( 'settings', compact( 'member', 'urls', 'allowed_users', 'auto_update', 'enable_sso', 'membership_type', $single_id ) );
 	}
 
 	/**
@@ -1677,7 +1712,13 @@ class WPMUDEV_Dashboard_Sui_Page_Urls {
 	public $remote_site          = 'https://premium.wpmudev.org/';
 	public $external_support_url = '';
 	public $hub_url              = 'https://premium.wpmudev.org/hub';
-	public $documentation_url    = 'https://premium.wpmudev.org/docs';
+	public $documentation_url    = array(
+		'dashboard' => 'https://premium.wpmudev.org/docs/wpmu-dev-plugins/wpmu-dev-dashboard-plugin-instructions/',
+		'plugins'   => 'https://premium.wpmudev.org/docs/wpmu-dev-plugins/wpmu-dev-dashboard-plugin-instructions/#wpmu-dev-dashboard-plugin-manager',
+		'support'   => 'https://premium.wpmudev.org/docs/wpmu-dev-plugins/wpmu-dev-dashboard-plugin-instructions/#wpmu-dev-dashboard-support',
+		'tools'     => 'https://premium.wpmudev.org/docs/wpmu-dev-plugins/wpmu-dev-dashboard-plugin-instructions/#wpmu-dev-dashboard-tools',
+		'settings'  => 'https://premium.wpmudev.org/docs/wpmu-dev-plugins/wpmu-dev-dashboard-plugin-instructions/#the-wpmu-dev-dashboard-plugin-settings',
+	);
 	public $community_url        = 'https://premium.wpmudev.org/hub/community';
 	public $academy_url          = 'https://premium.wpmudev.org/academy';
 	public $hub_account_url      = 'https://premium.wpmudev.org/hub/account';
@@ -1709,7 +1750,13 @@ class WPMUDEV_Dashboard_Sui_Page_Urls {
 		}
 
 		$this->hub_url              = $this->remote_site . 'hub';
-		$this->documentation_url    = $this->remote_site . 'docs';
+		$this->documentation_url    = array(
+			'dashboard' => $this->remote_site . 'docs/wpmu-dev-plugins/wpmu-dev-dashboard-plugin-instructions/',
+			'plugins'   => $this->remote_site . 'docs/wpmu-dev-plugins/wpmu-dev-dashboard-plugin-instructions/#wpmu-dev-dashboard-plugin-manager',
+			'support'   => $this->remote_site . 'docs/wpmu-dev-plugins/wpmu-dev-dashboard-plugin-instructions/#wpmu-dev-dashboard-support',
+			'tools'     => $this->remote_site . 'docs/wpmu-dev-plugins/wpmu-dev-dashboard-plugin-instructions/#wpmu-dev-dashboard-tools',
+			'settings'  => $this->remote_site . 'docs/wpmu-dev-plugins/wpmu-dev-dashboard-plugin-instructions/#the-wpmu-dev-dashboard-plugin-settings',
+		);
 		$this->external_support_url = $this->remote_site . 'hub/support/';
 		$this->community_url        = $this->remote_site . 'hub/community/';
 		$this->academy_url          = $this->remote_site . 'academy/';

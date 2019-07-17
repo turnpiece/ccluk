@@ -17,6 +17,10 @@ class Disable_Xml_Rpc extends Rule {
 		$this->renderPartial( 'rules/disable-xml-rpc' );
 	}
 
+	function getSubDescription() {
+		return __( "XML-RPC is currently enabled.", wp_defender()->domain );
+	}
+
 	/**
 	 * @return bool
 	 */

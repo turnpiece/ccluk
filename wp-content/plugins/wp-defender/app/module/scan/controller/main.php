@@ -491,7 +491,7 @@ class Main extends \WP_Defender\Controller {
 				//from dashboard
 				$data['url'] = network_admin_url( 'admin.php?page=wp-defender' );
 			}
-			$this->sendEmailReport( true );
+			$this->sendEmailReport();
 			$this->submitStatsToDev();
 			wp_send_json_success( $data );
 		} else {
@@ -559,10 +559,10 @@ class Main extends \WP_Defender\Controller {
 			wp_enqueue_style( 'wpmudev-sui' );
 
 			wp_enqueue_script( 'defender' );
-			wp_enqueue_script( 'highlight.js', wp_defender()->getPluginUrl() . 'app/module/scan/js/highlight.pack.js' );
-			wp_enqueue_script( 'highlight-linenumbers.js', wp_defender()->getPluginUrl() . 'app/module/scan/js/highlightjs-line-numbers.js' );
+			wp_enqueue_script( 'prism', wp_defender()->getPluginUrl() . 'app/module/scan/js/prism.js' );
 			wp_enqueue_style( 'defender' );
 			wp_enqueue_script( 'scan', wp_defender()->getPluginUrl() . 'app/module/scan/js/script.js' );
+			wp_enqueue_style( 'prism', wp_defender()->getPluginUrl() . 'app/module/scan/js/prism.css' );
 			wp_localize_script( 'scan', 'scan', $data );
 		} else {
 			wp_enqueue_script( 'scan', wp_defender()->getPluginUrl() . 'app/module/scan/js/script.js' );
@@ -770,26 +770,38 @@ class Main extends \WP_Defender\Controller {
 
 	public function sendEmailReport( $force = false ) {
 		$settings = Settings::instance();
-		if ( $settings->notification == false && $force != true ) {
-			return false;
-		}
 
 		$model = Scan_Api::getLastScan();
 		if ( ! is_object( $model ) ) {
 			return;
 		}
+
+		if ( $settings->notification == false && $force != true ) {
+			return false;
+		}
+
 		$count = $model->countAll( Result_Item::STATUS_ISSUE );
 
 		//Check one instead of validating both conditions
 		if ( $model->logs == 'report' ) {
+			if ( $settings->report == false ) {
+				return;
+			}
+
 			if ( $settings->always_send == false && $count == 0 ) {
 				return;
 			}
+
 			$recipients = $settings->receipts;
 		} else {
+			if ( $settings->notification == false ) {
+				return;
+			}
+
 			if ( $settings->alwaysSendNotification == false && $count == 0 ) {
 				return;
 			}
+
 			$recipients = $settings->receiptsNotification;
 		}
 

@@ -92,136 +92,136 @@ msgid "The Gutenberg plugin has been deactivated, as the features are now includ
 msgstr "古腾堡插件已被禁用，其功能已被包含在WordPress %1$s之中。如果您仍想继续测试WordPress编辑体验的新发展，请%2$s重新激活古腾堡插件%3$s。"
 
 #. Translators: Use this to specify the CSS font family for the default font
-#: wp-admin/edit-form-blocks.php:178
+#: wp-admin/edit-form-blocks.php:182
 msgctxt "CSS Font Family for Editor Font"
 msgid "Noto Serif"
 msgstr "Noto Serif"
 
-#: wp-admin/about.php:475
+#: wp-admin/about.php:457
 msgid "The Classic Editor plugin restores the previous WordPress editor and the Edit Post screen. It lets you keep using plugins that extend it, add old-style meta boxes, or otherwise depend on the previous editor. To install, visit your plugins page and click the &#8220;Install Now&#8221; button next to &#8220;Classic Editor&#8221;. After the plugin finishes installing, click &#8220;Activate&#8221;. That’s it!"
 msgstr "传统编辑器插件会将WordPress编辑器和“编辑文章”页恢复为旧版，且能让您继续使用那些扩展了旧版编辑器功能、使用了旧式的meta box或其他依赖旧版编辑器的插件。要安装，请访问您的插件页面并点击“传统编辑器”旁的“现在安装”按钮。在安装完成后，点击“激活”即可！"
 
-#: wp-admin/about.php:476
+#: wp-admin/about.php:458
 msgid "Note to users of assistive technology: if you experience usability issues with the block editor, we recommend you continue to use the Classic Editor."
 msgstr "对于使用辅助功能的用户：如果您在使用区块编辑器时遇到了可用性问题，我们推荐您继续使用传统编辑器。"
 
-#: wp-admin/about.php:444
+#: wp-admin/about.php:426
 msgid "The new block paradigm opens up a path of exploration and imagination when it comes to solving user needs. With the unified block insertion flow, it&#8217;s easier for your clients and customers to find and use blocks for all types of content. Developers can focus on executing their vision and providing rich editing experiences, rather than fussing with difficult APIs."
 msgstr "新的区块范式为解决用户所需开辟了一条全新的探索和想象之路。通过统一的区块插入工作流，您的客户和用户能够更轻松地找到并使用适合各种内容的区块。开发者则可专注于愿景及改良编辑体验，而不用与难以使用的API战斗。"
 
-#: wp-admin/about.php:450
+#: wp-admin/about.php:432
 msgid "Learn how to get started"
 msgstr "学习从何开始"
 
-#: wp-admin/about.php:459
+#: wp-admin/about.php:441
 msgid "Keep it Classic"
 msgstr "保持经典"
 
-#: wp-admin/about.php:474
+#: wp-admin/about.php:456
 msgid "Prefer to stick with the familiar Classic Editor? No problem! Support for the Classic Editor plugin will remain in WordPress through 2021."
 msgstr "想继续使用熟悉的经典编辑器？我们会支持经典编辑器插件直到2021年。"
 
-#: wp-admin/about.php:436
+#: wp-admin/about.php:418
 msgid "Take advantage of a wide collection of APIs and interface components to easily create blocks with intuitive controls for your clients. Utilizing these components not only speeds up development work but also provide a more consistent, usable, and accessible interface to all users."
 msgstr "使用多种多样的API和界面组件来轻松地创建包含直观控制的区块。使用这些组件不仅能加速开发工作，还能向所有用户提供更一致、更可用也更容易接近的界面。"
 
-#: wp-admin/about.php:428
+#: wp-admin/about.php:410
 msgid "Blocks provide a comfortable way for users to change content directly, while also ensuring the content structure cannot be easily disturbed by accidental code edits. This allows the developer to control the output, building polished and semantic markup that is preserved through edits and not easily broken."
 msgstr "区块能让用户舒服地进行内容修改，同时也确保了内容结构不会被无心的代码编辑破坏。这能让开发者来控制输出，构建优雅且符合语义的标记，且让它们在编辑时更健壮而不易损坏。"
 
-#: wp-admin/about.php:435
+#: wp-admin/about.php:417
 msgid "Compose"
 msgstr "撰写"
 
-#: wp-admin/about.php:427
+#: wp-admin/about.php:409
 msgid "Protect"
 msgstr "保护"
 
-#: wp-admin/about.php:401
+#: wp-admin/about.php:383
 msgid "Twenty Nineteen is designed to work for a wide variety of use cases. Whether you’re running a photo blog, launching a new business, or supporting a non-profit, Twenty Nineteen is flexible enough to fit your needs."
 msgstr "二〇一九被设计用于许多使用场景。不管您是在运作图片博客、开展新业务还是支持一项慈善事业，二〇一九都有足够的灵活性来满足您的要求。"
 
-#: wp-admin/about.php:408
+#: wp-admin/about.php:390
 msgid "Give Twenty Nineteen a try"
 msgstr "来试试二〇一九"
 
-#: wp-admin/about.php:396
+#: wp-admin/about.php:378
 msgid "Featuring ample whitespace, and modern sans-serif headlines paired with classic serif body text, Twenty Nineteen is built to be beautiful on the go. It uses system fonts to increase loading speed. No more long waits on slow networks!"
 msgstr "二〇一九包含了充足的空白，现代的无衬线标题和传统的衬线正文，从开箱即美丽。该主题使用了系统字体来加快载入速度，不再等待缓慢的网络！"
 
-#: wp-admin/about.php:400
+#: wp-admin/about.php:382
 msgid "Versatile design for all sites"
 msgstr "适用于多种站点的全功能设计"
 
-#: wp-admin/about.php:388
+#: wp-admin/about.php:370
 msgid "Twenty Nineteen features custom styles for the blocks available by default in 5.0. It makes extensive use of editor styles throughout the theme. That way, what you create in your content editor is what you see on the front of your site."
 msgstr "二〇一九包含了为5.0中预设的区块所设计的自定义样式。该主题在整个网站大量使用了编辑器样式，这样您在内容编辑器中看到的，就是您会在网站前端所看到的。"
 
-#: wp-admin/about.php:395
+#: wp-admin/about.php:377
 msgid "Simple, type-driven layout"
 msgstr "简单而类型驱动的版式"
 
-#: wp-admin/about.php:377
+#: wp-admin/about.php:359
 msgid "Introducing Twenty Nineteen, a new default theme that shows off the power of the new editor."
 msgstr "向您介绍二〇一九，一份全新的默认主题来为您展示新编辑器的强大。"
 
-#: wp-admin/about.php:387
+#: wp-admin/about.php:369
 msgid "Designed for the block editor"
 msgstr "为区块编辑器而设计"
 
-#: wp-admin/about.php:336
+#: wp-admin/about.php:318
 msgid "This new editing experience provides a more consistent treatment of design as well as content. If you&#8217;re building client sites, you can create reusable blocks. This lets your clients add new content anytime, while still maintaining a consistent look and feel."
 msgstr "全新的编辑体验能更一致地对待您的设计和内容。如果您在构建客户网站，您可以创建可重用区块。它可以让您的客户随时添加新内容，同时维持一致的观感。"
 
-#: wp-admin/about.php:348
+#: wp-admin/about.php:330
 msgid "Build your first post"
 msgstr "构建您的第一篇文章"
 
-#: wp-admin/about.php:358
+#: wp-admin/about.php:340
 msgid "A Stunning New Default Theme"
 msgstr "惊艳的新默认主题"
 
-#: wp-admin/about.php:371
+#: wp-admin/about.php:353
 msgid "The front-end of Twenty Nineteen on the left, and how it looks in the editor on the right."
 msgstr "左边为二〇一九的前端，右边为编辑器的样子。"
 
-#: wp-admin/about.php:182
+#: wp-admin/about.php:164
 msgid "We have tons of blocks available by default, and more get added by the community every day. Here are a few of the blocks to help you get started:"
 msgstr "我们已经为您准备了许多区块，我们的社群也每天都在为您带来更多。下面是一些能让您起步的区块："
 
-#: wp-admin/about.php:335
+#: wp-admin/about.php:317
 msgid "Freedom to Build, Freedom to Write"
 msgstr "自由构建，自由写作"
 
-#: wp-admin/about.php:180 wp-admin/about.php:340
+#: wp-admin/about.php:162 wp-admin/about.php:322
 msgid "Your browser doesn&#8217;t support HTML5 video. Here is a %1$slink to the video%2$s instead."
 msgstr "您的浏览器不支持HTML5视频，请使用%1$s视频的链接%2$s。"
 
-#: wp-admin/about.php:176
+#: wp-admin/about.php:158
 msgid "The new block-based editor won&#8217;t change the way any of your content looks to your visitors. What it will do is let you insert any type of multimedia in a snap and rearrange to your heart&#8217;s content. Each piece of content will be in its own block; a distinct wrapper for easy maneuvering. If you&#8217;re more of an HTML and CSS sort of person, then the blocks won&#8217;t stand in your way. WordPress is here to simplify the process, not the outcome."
 msgstr "全新的区块编辑器不会让您的访客看到的内容发生变化。它能让您随时插入任何类型的多媒体，并随意重新排列。每部分内容都会在独立的区块之内，而区块会成为方便操作的独立包装。如果您更倾向于使用HTML和CSS，区块也不会阻住您的去路。WordPress希望为您简化流程，而不是简化结果。"
 
-#: wp-admin/about.php:141
+#: wp-admin/about.php:123
 msgid "Do more with fewer plugins."
 msgstr "用更少的插件来做更多"
 
-#: wp-admin/about.php:150
+#: wp-admin/about.php:132
 msgid "Create modern, multimedia-heavy layouts."
 msgstr "创建现代化的富媒体布局。"
 
-#: wp-admin/about.php:159
+#: wp-admin/about.php:141
 msgid "Work across all screen sizes and devices."
 msgstr "在所有屏幕尺寸和设备上工作。"
 
-#: wp-admin/about.php:168
+#: wp-admin/about.php:150
 msgid "Trust that your editor looks like your website."
 msgstr "让您信赖编辑器所见即为网站所得。"
 
-#: wp-admin/about.php:175
+#: wp-admin/about.php:157
 msgid "Building with Blocks"
 msgstr "用区块来构建"
 
-#: wp-admin/about.php:130
+#: wp-admin/about.php:112
 msgid "You&#8217;ve successfully upgraded to WordPress 5.0! We’ve made some big changes to the editor. Our new block-based editor is the first step toward an exciting new future with a streamlined editing experience across your site. You’ll have more flexibility with how content is displayed, whether you are building your first site, revamping your blog, or write code for a living."
 msgstr "您已经成功更新到WordPress 5.0！我们为编辑器做出了许多改进。我们全新的区块编辑器是为您在全站提供流畅的编辑体验的第一步。不管您是在建立您的第一个站点、翻新您的博客还是编写代码为业，您都将有更多的灵活性来决定如何展示您的站点内容。"
 
@@ -238,7 +238,7 @@ msgstr "欢迎使用WordPress。这是您的第一篇文章。编辑或删除它
 msgid "Learn how to keep using the old editor."
 msgstr "了解关于如何继续使用旧编辑器的方法。"
 
-#: wp-admin/about.php:115
+#: wp-admin/about.php:97
 msgid "Say Hello to the New Editor"
 msgstr "向新编辑器说你好"
 
@@ -304,7 +304,7 @@ msgstr[0] "已更新%s个区块。"
 msgid "<strong>ERROR</strong>: \"Table Prefix\" must not be empty."
 msgstr "<strong>错误</strong>：“表前缀”不能为空。"
 
-#: wp-admin/edit-form-blocks.php:157
+#: wp-admin/edit-form-blocks.php:161
 msgid "Default template"
 msgstr "默认模板"
 
@@ -330,7 +330,7 @@ msgstr "关于"
 msgid "Privacy Policy"
 msgstr "隐私政策"
 
-#: wp-admin/about.php:479
+#: wp-admin/about.php:461
 msgid "Install the Classic Editor"
 msgstr "安装传统编辑器"
 
@@ -1302,7 +1302,7 @@ msgstr "如果您想<a href=\"%s\">让您的站点主页与WordPress安装目录
 msgid "https://codex.wordpress.org/Giving_WordPress_Its_Own_Directory"
 msgstr "https://codex.wordpress.org/Giving_WordPress_Its_Own_Directory"
 
-#: wp-admin/about.php:417
+#: wp-admin/about.php:399
 msgid "Developer Happiness"
 msgstr "开发者的小确幸"
 
@@ -2712,7 +2712,7 @@ msgid "(Currently set to: %s)"
 msgstr "（当前设置为：%s）"
 
 #. translators: %s: WordPress version number
-#: wp-admin/about.php:608
+#: wp-admin/about.php:590
 msgid "<strong>Version %s</strong> addressed one security issue."
 msgstr "<strong>版本%s</strong>修正了一个安全问题。"
 
@@ -2734,15 +2734,15 @@ msgstr "https://cn.gravatar.com/"
 msgid "Profile Picture"
 msgstr "资料图片"
 
-#: wp-admin/about.php:599
+#: wp-admin/about.php:581
 msgid "Maintenance Releases"
 msgstr "维护更新"
 
-#: wp-admin/about.php:602
+#: wp-admin/about.php:584
 msgid "Security Releases"
 msgstr "安全更新"
 
-#: wp-admin/about.php:64 wp-admin/about.php:605
+#: wp-admin/about.php:64 wp-admin/about.php:587
 msgid "Maintenance and Security Releases"
 msgstr "维护和安全更新"
 
@@ -5206,15 +5206,15 @@ msgstr "要在修订版本间移动，请<strong>将滑块向左右拖动</stron
 msgid "Loading&hellip;"
 msgstr "载入中&hellip;"
 
-#: wp-admin/post.php:221
+#: wp-admin/post.php:220
 msgid "The item you are trying to move to the Trash no longer exists."
 msgstr "您试图移动到回收站的项目已不存在。"
 
-#: wp-admin/post.php:244
+#: wp-admin/post.php:243
 msgid "The item you are trying to restore from the Trash no longer exists."
 msgstr "您试图从回收站恢复的项目已不存在。"
 
-#: wp-admin/post.php:262
+#: wp-admin/post.php:261
 msgid "This item has already been deleted."
 msgstr "此项目已被删除。"
 
@@ -5455,7 +5455,7 @@ msgstr "草稿在%2$s于%1$s创建"
 msgid "%s has taken over and is currently editing."
 msgstr "%s已接管并正在编辑。"
 
-#: wp-admin/post.php:231
+#: wp-admin/post.php:230
 msgid "You cannot move this item to the Trash. %s is currently editing."
 msgstr "您不能移动此项目到回收站。%s正在编辑。"
 
@@ -6482,27 +6482,26 @@ msgid "Show Toolbar when viewing site"
 msgstr "在浏览站点时显示工具栏"
 
 #. translators: %s: Codex URL
-#: wp-admin/about.php:80 wp-admin/about.php:98 wp-admin/about.php:108
-#: wp-admin/about.php:625
+#: wp-admin/about.php:80 wp-admin/about.php:90 wp-admin/about.php:607
 msgid "For more information, see <a href=\"%s\">the release notes</a>."
 msgstr "欲了解更多，参见<a href=\"%s\">发行注记</a>。"
 
 #. translators: 1: WordPress version number, 2: plural number of bugs.
-#: wp-admin/about.php:69 wp-admin/about.php:87 wp-admin/about.php:613
+#: wp-admin/about.php:69 wp-admin/about.php:595
 msgid "<strong>Version %1$s</strong> addressed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed %2$s bugs."
 msgstr[0] "<strong>%1$s版本</strong>修复了%2$s个问题。"
 
 #. translators: 1: WordPress version number, 2: plural number of bugs. More
 #. than one security issue.
-#: wp-admin/about.php:621
+#: wp-admin/about.php:603
 msgid "<strong>Version %1$s</strong> addressed some security issues and fixed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed some security issues and fixed %2$s bugs."
 msgstr[0] "<strong>%1$s版本</strong>修补了安全漏洞、修正了%2$s个问题。"
 
 #. translators: 1: WordPress version number, 2: plural number of bugs. Singular
 #. security issue.
-#: wp-admin/about.php:617
+#: wp-admin/about.php:599
 msgid "<strong>Version %1$s</strong> addressed a security issue and fixed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed a security issue and fixed %2$s bugs."
 msgstr[0] "<strong>%1$s版本</strong>修补了安全漏洞、修正了%2$s个问题。"
@@ -6515,20 +6514,20 @@ msgstr "欢迎访问WordPress仪表盘！在您每次登录站点后，您都会
 msgid "What&#8217;s New"
 msgstr "更新内容"
 
-#: wp-admin/about.php:598
+#: wp-admin/about.php:580
 msgid "Maintenance Release"
 msgstr "维护更新"
 
-#: wp-admin/about.php:601
+#: wp-admin/about.php:583
 msgid "Security Release"
 msgstr "安全更新"
 
-#: wp-admin/about.php:604
+#: wp-admin/about.php:586
 msgid "Maintenance and Security Release"
 msgstr "维护和安全更新"
 
 #. translators: %s: WordPress version number
-#: wp-admin/about.php:104 wp-admin/about.php:610
+#: wp-admin/about.php:86 wp-admin/about.php:592
 msgid "<strong>Version %s</strong> addressed some security issues."
 msgstr "<strong>版本%s</strong>修正了一些安全问题。"
 
@@ -6536,7 +6535,7 @@ msgstr "<strong>版本%s</strong>修正了一些安全问题。"
 msgid "This screen allows you to choose your permalink structure. You can choose from common settings or create custom URL structures."
 msgstr "这个画面可以让您选择您的永久链接结构。您可以选择常见的设置或建立自定义URL结构。"
 
-#: wp-admin/about.php:491
+#: wp-admin/about.php:473
 msgid "Return to Updates"
 msgstr "返回“更新”"
 
@@ -6812,11 +6811,11 @@ msgstr "由于当前多站点功能已经开启，您可以直接通过输入用
 msgid "Welcome to WordPress %s"
 msgstr "欢迎使用WordPress %s"
 
-#: wp-admin/about.php:491
+#: wp-admin/about.php:473
 msgid "Return to Dashboard &rarr; Updates"
 msgstr "返回“仪表盘” &rarr; “更新”"
 
-#: wp-admin/about.php:494
+#: wp-admin/about.php:476
 msgid "Go to Dashboard &rarr; Home"
 msgstr "前往“仪表盘” &rarr; “首页”"
 
@@ -8368,16 +8367,16 @@ msgstr "不要，不用再提示我了"
 msgid "Your chosen password."
 msgstr "您设定的密码。"
 
-#: wp-admin/post.php:273 wp-admin/post.php:276 wp-admin/upload.php:164
+#: wp-admin/post.php:272 wp-admin/post.php:275 wp-admin/upload.php:164
 #: wp-admin/edit.php:144 wp-admin/edit.php:147
 msgid "Error in deleting."
 msgstr "删除时发生错误。"
 
-#: wp-admin/post.php:235 wp-admin/upload.php:140 wp-admin/edit.php:114
+#: wp-admin/post.php:234 wp-admin/upload.php:140 wp-admin/edit.php:114
 msgid "Error in moving to Trash."
 msgstr "移动到回收站时发生错误。"
 
-#: wp-admin/post.php:253 wp-admin/upload.php:152 wp-admin/edit.php:128
+#: wp-admin/post.php:252 wp-admin/upload.php:152 wp-admin/edit.php:128
 msgid "Error in restoring from Trash."
 msgstr "从回收站恢复时发生错误。"
 
@@ -8393,11 +8392,11 @@ msgid "%s comment restored from the Trash"
 msgid_plural "%s comments restored from the Trash"
 msgstr[0] "%s条评论已从回收站中恢复"
 
-#: wp-admin/post.php:227 wp-admin/upload.php:137 wp-admin/edit.php:106
+#: wp-admin/post.php:226 wp-admin/upload.php:137 wp-admin/edit.php:106
 msgid "Sorry, you are not allowed to move this item to the Trash."
 msgstr "抱歉，您不能移动此项目到回收站。"
 
-#: wp-admin/post.php:250 wp-admin/upload.php:149 wp-admin/edit.php:125
+#: wp-admin/post.php:249 wp-admin/upload.php:149 wp-admin/edit.php:125
 msgid "Sorry, you are not allowed to restore this item from the Trash."
 msgstr "抱歉，您不能从回收站还原此项目。"
 
@@ -8614,7 +8613,7 @@ msgstr "查看所有"
 msgid "Please enter a valid menu name."
 msgstr "请输入有效的菜单名称。"
 
-#: wp-admin/about.php:494
+#: wp-admin/about.php:476
 msgid "Go to Dashboard"
 msgstr "前往“仪表盘”"
 
@@ -8994,7 +8993,7 @@ msgstr "常规"
 msgid "Visit"
 msgstr "访问"
 
-#: wp-admin/about.php:328
+#: wp-admin/about.php:310
 msgid "More"
 msgstr "更多"
 
@@ -11616,7 +11615,7 @@ msgstr "%1$s%2$s"
 msgid "Visit site"
 msgstr "访问站点"
 
-#: wp-admin/edit-tags.php:100 wp-admin/post.php:268 wp-admin/themes.php:43
+#: wp-admin/edit-tags.php:100 wp-admin/post.php:267 wp-admin/themes.php:43
 #: wp-admin/upload.php:161 wp-admin/edit.php:140
 msgid "Sorry, you are not allowed to delete this item."
 msgstr "抱歉，您不能删除此项目。"

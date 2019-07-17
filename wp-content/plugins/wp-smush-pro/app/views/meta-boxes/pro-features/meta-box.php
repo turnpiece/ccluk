@@ -16,7 +16,7 @@ if ( ! defined( 'WPINC' ) ) {
 <ul class="smush-pro-features">
 	<li class="smush-pro-feature-row">
 		<div class="smush-pro-feature-title">
-			<?php esc_html_e( 'Super-smush lossy compression', 'wp-smushit' ); ?></div>
+			<?php esc_html_e( 'Super-Smush lossy compression', 'wp-smushit' ); ?></div>
 		<div class="smush-pro-feature-desc">
 			<?php
 			esc_html_e(

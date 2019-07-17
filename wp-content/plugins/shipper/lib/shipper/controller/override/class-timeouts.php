@@ -22,7 +22,7 @@ class Shipper_Controller_Override_Timeouts extends Shipper_Controller_Override {
 		}
 		if ( $this->get_constants()->is_defined( 'SHIPPER_MAX_EXEC_TIME' ) ) {
 			add_filter(
-				'shipper_max_exec_time',
+				'shipper_max_exec_time_capped',
 				array( $this, 'apply_max_exec_time' )
 			);
 		}

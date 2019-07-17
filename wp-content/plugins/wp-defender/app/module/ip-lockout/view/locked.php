@@ -67,8 +67,10 @@
 <body>
 <div class="wp-defender">
     <div class="container">
-        <div class="image">
-        </div>
+		<?php if ( strlen( wp_defender()->heroImage ) == 0 ): ?>
+            <div class="image">
+            </div>
+		<?php endif; ?>
         <p><?php echo $message ?></p>
     </div>
     <div class="powered"><?php esc_html_e( "Powered by", wp_defender()->domain ) ?>

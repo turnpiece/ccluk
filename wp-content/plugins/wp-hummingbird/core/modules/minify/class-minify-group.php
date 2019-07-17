@@ -1058,7 +1058,7 @@ class WP_Hummingbird_Module_Minify_Group {
 				// $minification_module->errors_controller->clear_handle_error( $handle, $this->type );
 				$files_data[] = array(
 					'handle'  => $handle,
-					'content' => $content,
+					'content' => apply_filters( 'wphb_minify_file_content', $content ),
 					'minify'  => $this->should_do_handle( $handle, 'minify' ),
 				);
 			}
@@ -1147,7 +1147,7 @@ class WP_Hummingbird_Module_Minify_Group {
 				'post_title'   => $post_title,
 				'post_status'  => 'publish',
 				'post_type'    => 'wphb_minify_group',
-				'post_content' => $post_content,
+				'post_content' => wp_slash( $post_content ),
 			)
 		);
 

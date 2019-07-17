@@ -22,7 +22,8 @@ class Shipper_Task_Api_Info_Creds extends Shipper_Task_Api {
 
 		$token = $this->get_token( $domain );
 		if ( empty( $token ) ) {
-			$this->add_error(
+			$this->record_non_success(
+				'info-token',
 				self::ERR_SERVICE,
 				__( 'Service error: unable to acquire mediation token', 'shipper' )
 			);
@@ -82,7 +83,8 @@ class Shipper_Task_Api_Info_Creds extends Shipper_Task_Api {
 		));
 
 		if ( empty( $status['success'] ) ) {
-			$this->add_error(
+			$this->record_non_success(
+				'info-creds',
 				self::ERR_SERVICE,
 				sprintf(
 					__( 'Service error: %s', 'shipper' ),
@@ -97,6 +99,9 @@ class Shipper_Task_Api_Info_Creds extends Shipper_Task_Api {
 			: array()
 		;
 
+		if ( ! empty( $data ) ) {
+			$this->record_success( 'info-creds' );
+		}
 		return $data;
 	}
 

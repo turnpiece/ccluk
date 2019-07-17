@@ -28,6 +28,7 @@ class Shipper_Task_Api_Destinations_Ping extends Shipper_Task_Api {
 		;
 
 		if ( empty( $domain ) ) {
+			$this->clear_cached_api_response( 'destinations-ping' );
 			$this->add_error(
 				self::ERR_REQFORMAT,
 				__( 'Missing domain to check', 'shipper' )
@@ -40,7 +41,8 @@ class Shipper_Task_Api_Destinations_Ping extends Shipper_Task_Api {
 		));
 
 		if ( empty( $status['success'] ) ) {
-			$this->add_error(
+			$this->record_non_success(
+				'destinations-ping',
 				self::ERR_SERVICE,
 				sprintf(
 					__( 'Domain %s is not Hub-accessible', 'shipper' ),
@@ -50,6 +52,7 @@ class Shipper_Task_Api_Destinations_Ping extends Shipper_Task_Api {
 			return false;
 		}
 
+		$this->record_success( 'destinations-ping' );
 		return true;
 	}
 

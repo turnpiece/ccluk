@@ -1,5 +1,5 @@
-# Translation of WordPress - 5.1.x - Development - Administration - Network Admin in Polish
-# This file is distributed under the same license as the WordPress - 5.1.x - Development - Administration - Network Admin package.
+# Translation of WordPress - 5.2.x - Development - Administration - Network Admin in Polish
+# This file is distributed under the same license as the WordPress - 5.2.x - Development - Administration - Network Admin package.
 msgid ""
 msgstr ""
 "PO-Revision-Date: 2019-02-01 08:04:40+0000\n"
@@ -9,7 +9,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: pl\n"
-"Project-Id-Version: WordPress - 5.1.x - Development - Administration - Network Admin\n"
+"Project-Id-Version: WordPress - 5.2.x - Development - Administration - Network Admin\n"
 
 #. translators: %s: DO_NOT_UPGRADE_GLOBAL_TABLES
 #: wp-admin/includes/network.php:113
@@ -44,10 +44,6 @@ msgstr "Instalacja podkatalogowa"
 #: wp-admin/includes/class-wp-ms-themes-list-table.php:671
 msgid "Active Child Theme"
 msgstr "Aktywny motyw potomny"
-
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:666
-msgid "Active Theme"
-msgstr "Aktywny motyw"
 
 #: wp-admin/network/site-info.php:192
 msgid "Attributes"
@@ -193,24 +189,24 @@ msgstr "Upewnij się, że moduł %s Apache'a jest zainstalowany, ponieważ będz
 msgid "You cannot use port numbers such as %s."
 msgstr "Nie możesz używać portów takich jak %s."
 
-#: wp-admin/includes/class-wp-ms-users-list-table.php:173
+#: wp-admin/includes/class-wp-ms-users-list-table.php:171
 msgctxt "user"
 msgid "Registered"
 msgstr "Zarejestrowano"
 
-#: wp-admin/includes/class-wp-ms-users-list-table.php:144
+#: wp-admin/includes/class-wp-ms-users-list-table.php:142
 msgid "Super Admin <span class=\"count\">(%s)</span>"
 msgid_plural "Super Admins <span class=\"count\">(%s)</span>"
 msgstr[0] "Super administrator <span class=\"count\">(%s)</span>"
 msgstr[1] "Super administratorzy <span class=\"count\">(%s)</span>"
 msgstr[2] "Super administratorzy <span class=\"count\">(%s)</span>"
 
-#: wp-admin/includes/class-wp-ms-users-list-table.php:118
+#: wp-admin/includes/class-wp-ms-users-list-table.php:116
 msgctxt "user"
 msgid "Not Spam"
 msgstr "To nie jest spam"
 
-#: wp-admin/includes/class-wp-ms-users-list-table.php:117
+#: wp-admin/includes/class-wp-ms-users-list-table.php:115
 msgctxt "user"
 msgid "Mark as Spam"
 msgstr "Oznacz jako spam"
@@ -497,7 +493,7 @@ msgid "<a href=\"https://codex.wordpress.org/Network_Admin_Settings_Screen\">Doc
 msgstr "<a href=\"https://codex.wordpress.org/Network_Admin_Settings_Screen\">Dokumentacja na temat Ustawień Sieci Witryn</a>"
 
 #. translators: 1: site url, 2: server error message
-#: wp-admin/network/upgrade.php:96
+#: wp-admin/network/upgrade.php:97
 msgid "Warning! Problem updating %1$s. Your server may not be able to connect to sites running on it. Error message: %2$s"
 msgstr "Uwaga! Wystąpił problem z aktualizacją %1$s. Twój serwer prawdopodobnie nie może połączyć się z docelową witryną. Błąd: %2$s"
 
@@ -627,7 +623,7 @@ msgstr "Stąd możesz:"
 msgid "Welcome to your Network Admin. This area of the Administration Screens is used for managing all aspects of your Multisite Network."
 msgstr "Witaj w Administracji Siecią Witryn. Znajdujesz się w miejscu z którego możesz zarządzać całą swoją siecią witryn."
 
-#: wp-admin/network/upgrade.php:137
+#: wp-admin/network/upgrade.php:138
 msgid "WordPress has been updated! Before we send you on your way, we need to individually upgrade the sites in your network."
 msgstr "Zaktualizowano WordPressa! Zanim jednak skończysz, trzeba zaktualizować witryny w sieci."
 
@@ -636,7 +632,7 @@ msgid "Only use this screen once you have updated to a new version of WordPress 
 msgstr "Proszę nie używać aktualizacji sieci witryn więcej niż raz po każdej aktualizacji WordPressa. Klikając w \"Aktualizuj Sieć Witryn\" uruchomiona zostanie aktualizacja witryn w sieci. Za każdym razem zostanie użyte tylko pięć witryn, żeby wdrożyć w nich wszystkie zmiany."
 
 #: wp-admin/network/upgrade.php:15 wp-admin/network/upgrade.php:42
-#: wp-admin/network/upgrade.php:141 wp-admin/network/menu.php:34
+#: wp-admin/network/upgrade.php:142 wp-admin/network/menu.php:34
 msgid "Upgrade Network"
 msgstr "Aktualizuj Sieć Witryn"
 
@@ -930,6 +926,10 @@ msgstr "Jeśli chcesz używać funkcjonalności serwera wirtualnego (subdomen), 
 msgid "You cannot install a network of sites with your server address."
 msgstr "Nie możesz zainstalować sieci witryn z twoim adresem serwera."
 
+#: wp-admin/includes/network.php:189
+msgid "Note:"
+msgstr "Uwaga:"
+
 #: wp-admin/includes/network.php:177
 msgid "Fill in the information below and you&#8217;ll be on your way to creating a network of WordPress sites. We will create configuration files in the next step."
 msgstr "Wypełnij poniższe pola, by móc rozpocząć tworzenie sieci witryn WordPressa. W następnym kroku stworzymy pliki konfiguracyjne."
@@ -1086,7 +1086,7 @@ msgstr "Ustawienia dla nowych witryn są domyślnymi ustawieniami, nadawanymi no
 msgid "The following words are reserved for use by WordPress functions and cannot be used as blog names: %s"
 msgstr "Następujące słowa są zarezerwowane do użytku przez funkcje WordPressa i nie mogą zostać użyte jako nazwy blogów: %s"
 
-#: wp-admin/network/upgrade.php:121
+#: wp-admin/network/upgrade.php:122
 msgid "If your browser doesn&#8217;t start loading the next page automatically, click this link:"
 msgstr "Jeśli Twoja przeglądarka nie rozpocznie automatycznego wczytywania kolejnej strony, kliknij ten odnośnik:"
 
@@ -1190,7 +1190,7 @@ msgstr "Treść pierwszego wpisu na nowej witrynie."
 msgid "The author of the first comment on a new site."
 msgstr "Autor pierwszego komentarza na nowej witrynie."
 
-#: wp-admin/network/upgrade.php:72
+#: wp-admin/network/upgrade.php:73
 msgid "All done!"
 msgstr "Gotowe!"
 
@@ -1238,7 +1238,7 @@ msgstr "Adres email nie został podany."
 msgid "Missing or invalid site address."
 msgstr "Brak lub nieprawidłowy adres witryny."
 
-#: wp-admin/network/upgrade.php:121
+#: wp-admin/network/upgrade.php:122
 msgid "Next Sites"
 msgstr "Następne witryny"
 

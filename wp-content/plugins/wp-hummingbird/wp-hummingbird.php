@@ -1,7 +1,7 @@
 <?php
 /**
 Plugin Name: Hummingbird Pro
-Version:     2.0.0.1
+Version:     2.0.1
 Plugin URI:  https://premium.wpmudev.org/project/wp-hummingbird/
 Description: Hummingbird zips through your site finding new ways to make it load faster, from file compression and minification to browser caching – because when it comes to pagespeed, every millisecond counts.
 Author:      WPMU DEV
@@ -34,11 +34,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 */
 
 if ( ! defined( 'WPHB_VERSION' ) ) {
-	define( 'WPHB_VERSION', '2.0.0.1' );
+	define( 'WPHB_VERSION', '2.0.1' );
 }
 
 if ( ! defined( 'WPHB_SUI_VERSION' ) ) {
-	define( 'WPHB_SUI_VERSION', 'sui-2-3-22' );
+	define( 'WPHB_SUI_VERSION', 'sui-2-3-29' );
 }
 
 if ( ! defined( 'WPHB_DIR_PATH' ) ) {
@@ -52,37 +52,6 @@ if ( ! defined( 'WPHB_DIR_URL' ) ) {
 if ( file_exists( trailingslashit( plugin_dir_path( __FILE__ ) ) . 'free-mods.php' ) ) {
 	/* @noinspection PhpIncludeInspection */
 	include_once 'free-mods.php';
-}
-
-if ( defined( 'WPHB_WPORG' ) && WPHB_WPORG && 'wp-hummingbird/wp-hummingbird.php' !== plugin_basename( __FILE__ ) ) {
-	// Add notice to rate the free version.
-	$free_installation = get_site_option( 'wphb-free-install-date' );
-	if ( empty( $free_installation ) ) {
-		update_site_option( 'wphb-notice-free-rated-show', 'yes' );
-		update_site_option( 'wphb-free-install-date', current_time( 'timestamp' ) );
-	}
-
-	// This plugin is the free version so if the Pro version is activated we need to deactivate this one.
-	if ( ! function_exists( 'is_plugin_active' ) ) {
-		include_once ABSPATH . 'wp-admin/includes/plugin.php';
-	}
-
-	$pro_installed = false;
-	if ( file_exists( WP_PLUGIN_DIR . '/wp-hummingbird/wp-hummingbird.php' ) ) {
-		$pro_installed = true;
-	}
-
-	// Check if the pro version exists and is activated.
-	if ( is_plugin_active( 'wp-hummingbird/wp-hummingbird.php' ) ) {
-		// Pro is activated, deactivate this one.
-		deactivate_plugins( plugin_basename( __FILE__ ) );
-		update_site_option( 'wphb-notice-free-deactivated-show', 'yes' );
-		return;
-	} elseif ( $pro_installed ) {
-		// Pro is installed but not activated, let's activate it.
-		deactivate_plugins( plugin_basename( __FILE__ ) );
-		activate_plugin( 'wp-hummingbird/wp-hummingbird.php' );
-	}
 }
 
 if ( ! class_exists( 'WP_Hummingbird' ) ) {
@@ -149,6 +118,8 @@ if ( ! class_exists( 'WP_Hummingbird' ) ) {
 		 * WP_Hummingbird constructor.
 		 */
 		public function __construct() {
+			$this->maybe_disable_free_version();
+
 			$this->includes();
 
 			$this->init();
@@ -279,11 +250,20 @@ if ( ! class_exists( 'WP_Hummingbird' ) ) {
 			 * @var WP_Hummingbird_Module $module
 			 */
 			foreach ( $hummingbird->core->modules as $module ) {
-				if ( ! $remove_data ) {
+				if ( ! $module->is_active() ) {
 					continue;
 				}
 
-				if ( ! $module->is_active() ) {
+				if ( 'page_cache' === $module->get_slug() ) {
+					/**
+					 * Page caching module. Remove page cache files.
+					 *
+					 * @var WP_Hummingbird_Module_Page_Cache $module
+					 */
+					$module->toggle_service( false );
+				}
+
+				if ( ! $remove_data ) {
 					continue;
 				}
 
@@ -295,11 +275,6 @@ if ( ! class_exists( 'WP_Hummingbird' ) ) {
 					 */
 					$module->clear_cache( false );
 					continue;
-				}
-
-				if ( 'page_cache' === $module->get_slug() ) {
-					// Remove page cache files.
-					$module->toggle_service( false );
 				}
 
 				$module->clear_cache();
@@ -429,9 +404,59 @@ if ( ! class_exists( 'WP_Hummingbird' ) ) {
 				delete_plugins( array( 'hummingbird-performance/wp-hummingbird.php' ) );
 			}
 		}
+
+		/**
+		 * Moved from above to class.
+		 *
+		 * Checks if HB has both the free and Pro versions installed and disables the Free version.
+		 *
+		 * @since 2.0.1
+		 */
+		private function maybe_disable_free_version() {
+			// Free is not installed - exit check.
+			if ( ! self::is_free_installed() ) {
+				return;
+			}
+
+			// Add notice to rate the free version.
+			$free_installation = get_site_option( 'wphb-free-install-date' );
+			if ( empty( $free_installation ) ) {
+				update_site_option( 'wphb-notice-free-rated-show', 'yes' );
+				update_site_option( 'wphb-free-install-date', current_time( 'timestamp' ) );
+			}
+
+			// This plugin is the free version so if the Pro version is activated we need to deactivate this one.
+			if ( ! function_exists( 'is_plugin_active' ) ) {
+				/* @noinspection PhpIncludeInspection */
+				include_once ABSPATH . 'wp-admin/includes/plugin.php';
+			}
+
+			$pro_installed = false;
+			if ( file_exists( WP_PLUGIN_DIR . '/wp-hummingbird/wp-hummingbird.php' ) ) {
+				$pro_installed = true;
+			}
+
+			if ( ! defined( 'WPHB_SWITCHING_VERSION' ) ) {
+				define( 'WPHB_SWITCHING_VERSION', true );
+			}
+
+			// Check if the pro version exists and is activated.
+			if ( is_plugin_active( 'wp-hummingbird/wp-hummingbird.php' ) ) {
+				// Pro is activated, deactivate this one.
+				deactivate_plugins( plugin_basename( __FILE__ ) );
+				update_site_option( 'wphb-notice-free-deactivated-show', 'yes' );
+				return;
+			} elseif ( $pro_installed ) {
+				// Pro is installed but not activated, let's activate it.
+				deactivate_plugins( plugin_basename( __FILE__ ) );
+				activate_plugin( 'wp-hummingbird/wp-hummingbird.php' );
+			}
+		}
 	}
 }
 
+/* @noinspection PhpIncludeInspection */
+require_once WPHB_DIR_PATH . 'core/class-installer.php';
 register_activation_hook( 'core/class-installer.php', array( 'WP_Hummingbird_Installer', 'activate' ) );
 register_deactivation_hook( __FILE__, array( 'WP_Hummingbird_Installer', 'deactivate' ) );
 

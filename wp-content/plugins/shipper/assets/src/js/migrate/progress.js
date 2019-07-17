@@ -12,6 +12,15 @@
 	 */
 	function show_page( page ) {
 		$('.shipper-migration-content').hide();
+		if ( 'done' === page ) {
+			$( '.shipper-actions' )
+				.find( ' .shipper-actions-left' ).hide().end()
+				.find( ' .shipper-actions-right' ).show().end();
+		} else {
+			$( '.shipper-actions' )
+				.find( ' .shipper-actions-left' ).show().end()
+				.find( ' .shipper-actions-right' ).hide().end();
+		}
 		$('.shipper-migration-' + page + '-content').show();
 	}
 

@@ -67,7 +67,7 @@ class Shipper_Task_Check_Files extends Shipper_Task_Check {
 	 * @return object Shipper_Model_Check instance
 	 */
 	public function are_file_sizes_valid( $storage ) {
-		$check = new Shipper_Model_Check( __( 'Large Files', 'shipper' ) );
+		$check = new Shipper_Model_Check( __( 'Large files', 'shipper' ) );
 		$status = Shipper_Model_Check::STATUS_OK;
 
 		$threshold = Shipper_Model_Stored_Migration::get_file_size_threshold();
@@ -120,6 +120,10 @@ class Shipper_Task_Check_Files extends Shipper_Task_Check {
 		$check->set( 'check_type', 'file_sizes' );
 		$check->set( 'count', $total_count );
 
+		if ( $total_count > 0 ) {
+			$check->set( 'title', __( 'Large files found', 'shipper' ) );
+		}
+
 		return $check->complete( $status );
 	}
 
@@ -131,7 +135,7 @@ class Shipper_Task_Check_Files extends Shipper_Task_Check {
 	 * @return object Shipper_Model_Check instance
 	 */
 	public function are_file_names_valid( $storage ) {
-		$check = new Shipper_Model_Check( __( 'Filenames', 'shipper' ) );
+		$check = new Shipper_Model_Check( __( 'Files with large names', 'shipper' ) );
 		$status = Shipper_Model_Check::STATUS_OK;
 
 		$threshold = 256; // For Win32.
@@ -163,6 +167,10 @@ class Shipper_Task_Check_Files extends Shipper_Task_Check {
 		}
 		$check->set( 'check_type', 'file_names' );
 		$check->set( 'count', $total_count );
+
+		if ( $total_count > 0 ) {
+			$check->set( 'title', __( 'Files with large names found', 'shipper' ) );
+		}
 
 		return $check->complete( $status );
 	}
@@ -217,6 +225,7 @@ class Shipper_Task_Check_Files extends Shipper_Task_Check {
 		$package_size = $this->get_updated_package_size();
 
 		if ( $package_size > $threshold ) {
+			$check->set( 'title', __( 'Package size is large', 'shipper' ) );
 			$status = Shipper_Model_Check::STATUS_WARNING;
 		}
 		$check->set( 'check_type', 'package_size' );
@@ -299,6 +308,9 @@ class Shipper_Task_Check_Files extends Shipper_Task_Check {
 
 		$storage->clear();
 		$storage->save();
+		if ( isset( $this->_fs ) ) {
+			$this->_fs->clear()->save();
+		}
 
 		return true;
 	}

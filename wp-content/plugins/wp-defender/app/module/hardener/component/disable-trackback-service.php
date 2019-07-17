@@ -61,13 +61,13 @@ class Disable_Trackback_Service extends Rule_Service implements IRule_Service {
 	private function handle_change( $revert = false, $handle_posts = false ) {
 		global $wpdb;
 		if ( is_multisite() ) {
-
-			$blogs = $wpdb->get_results( "SELECT blog_id FROM {$wpdb->blogs} WHERE
+			
+			$blogs = $wpdb->get_results( "SELECT blog_id FROM {$wpdb->blogs} WHERE 
 						site_id = '{$wpdb->siteid}'
         				AND spam = '0'
         				AND deleted = '0'
         				AND archived = '0'
-        				AND mature = '0'
+        				AND mature = '0' 
         				AND public = '1'
     				" );
 			foreach ( $blogs as $blog ) {
@@ -102,7 +102,7 @@ class Disable_Trackback_Service extends Rule_Service implements IRule_Service {
 			$wpdb->set_blog_id( $blog_id );
 			$wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->posts} SET `ping_status` = %s WHERE `post_status` != %s AND `post_type` NOT IN(%s)", $ping_status, 'inherit', $defender_post_types ) );
 		} else {
-
+			
 			$wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->posts} SET `ping_status` = %s WHERE `post_status` != %s AND `post_type` NOT IN(%s)", $ping_status, 'inherit', $defender_post_types ) );
 		}
 	}

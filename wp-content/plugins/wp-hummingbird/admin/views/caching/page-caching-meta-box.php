@@ -97,8 +97,8 @@
 		</span>
 	</div>
 	<div class="sui-box-settings-col-2">
+		<input type="hidden" name="logged-in" value="0">
 		<label class="sui-toggle">
-			<input type="hidden" name="logged-in" value="0">
 			<input type="checkbox" name="settings[logged-in]" value="1" id="logged-in" <?php checked( $settings['settings']['logged_in'] ); ?>>
 			<span class="sui-toggle-slider"></span>
 		</label>
@@ -108,8 +108,8 @@
 		</span>
 		<div class="clear mline"></div>
 
+		<input type="hidden" name="url-queries" value="0">
 		<label class="sui-toggle">
-			<input type="hidden" name="url-queries" value="0">
 			<input type="checkbox" name="settings[url-queries]" value="1" id="url-queries" <?php checked( $settings['settings']['url_queries'] ); ?>>
 			<span class="sui-toggle-slider"></span>
 		</label>
@@ -119,8 +119,8 @@
 		</span>
 		<div class="clear mline"></div>
 
+		<input type="hidden" name="cache-404" value="0">
 		<label class="sui-toggle">
-			<input type="hidden" name="cache-404" value="0">
 			<input type="checkbox" class="toggle-checkbox" name="settings[cache-404]" value="1" id="cache-404" <?php checked( $settings['settings']['cache_404'] ); ?>>
 			<span class="sui-toggle-slider"></span>
 		</label>
@@ -130,8 +130,8 @@
 		</span>
 		<div class="clear mline"></div>
 
+		<input type="hidden" name="clear-update" value="0">
 		<label class="sui-toggle">
-			<input type="hidden" name="clear-update" value="0">
 			<input type="checkbox" name="settings[clear-update]" value="1" id="clear-update" <?php checked( $settings['settings']['clear_update'] ); ?>>
 			<span class="sui-toggle-slider"></span>
 		</label>
@@ -141,8 +141,8 @@
 		</span>
 		<div class="clear mline"></div>
 
+		<input type="hidden" name="debug-log" value="0">
 		<label class="sui-toggle">
-			<input type="hidden" name="debug-log" value="0">
 			<input type="checkbox" name="settings[debug-log]" value="1" id="debug-log" <?php checked( $settings['settings']['debug_log'] ); ?>>
 			<span class="sui-toggle-slider"></span>
 		</label>
@@ -175,8 +175,10 @@
 			<?php endif; ?>
 		</div>
 		<div class="clear mline"></div>
+
+		<input type="hidden" name="cache-identifier" value="0">
 		<label class="sui-toggle">
-			<input type="hidden" name="cache-identifier" value="0">
+
 			<input
 				type="checkbox"
 				name="settings[cache-identifier]"
@@ -202,8 +204,8 @@
 			<span class="sui-settings-label"><?php esc_html_e( 'Subsites', 'wphb' ); ?></span>
 		</div>
 		<div class="sui-box-settings-col-2">
+			<input type="hidden" name="admins_disable_caching" value="0">
 			<label class="sui-toggle">
-				<input type="hidden" name="admins_disable_caching" value="0">
 				<input type="checkbox" class="toggle-checkbox" name="settings[admins_disable_caching]" value="1" id="admins_disable_caching" <?php checked( $admins_can_disable ); ?>>
 				<span class="sui-toggle-slider"></span>
 			</label>

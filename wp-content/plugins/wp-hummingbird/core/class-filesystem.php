@@ -196,7 +196,7 @@ if ( ! class_exists( 'WP_Hummingbird_Filesystem' ) ) {
 			$dir = @opendir( $path );
 
 			while ( false !== ( $file = readdir( $dir ) ) ) {
-				if ( ( '.' == $file ) || ( '..' == $file ) ) {
+				if ( '.' === $file || '..' === $file ) {
 					return false;
 				}
 
@@ -221,7 +221,8 @@ if ( ! class_exists( 'WP_Hummingbird_Filesystem' ) ) {
 		 * @since  1.7.2  Added if $this->fs_api check.
 		 * @since  1.9    Added $ao_module. If set to true will use the $dir path without $this->basedir
 		 *
-		 * @param  string $dir  Directory in wp-content/wphb-cache/ to purge file from.
+		 * @param  string $dir        Directory in wp-content/wphb-cache/ to purge file from.
+		 * @param  bool   $ao_module  Asset Optimization module.
 		 *
 		 * @return bool
 		 */
@@ -270,7 +271,11 @@ if ( ! class_exists( 'WP_Hummingbird_Filesystem' ) ) {
 
 			// Use WP_Filesystem API to delete files.
 			if ( $this->fs_api ) {
-				/* @var WP_Filesystem_Base $wp_filesystem */
+				/**
+				 * WP_Filesystem global.
+				 *
+				 * @var WP_Filesystem_Base $wp_filesystem
+				 */
 				global $wp_filesystem;
 
 				// Delete all content inside the directory.
@@ -309,7 +314,11 @@ if ( ! class_exists( 'WP_Hummingbird_Filesystem' ) ) {
 
 			// Use WP_Filesystem API.
 			if ( $this->fs_api ) {
-				/* @var WP_Filesystem_Base $wp_filesystem */
+				/**
+				 * WP_Filesystem global.
+				 *
+				 * @var WP_Filesystem_Base $wp_filesystem
+				 */
 				global $wp_filesystem;
 
 				if ( ! $wp_filesystem->delete( $this->basedir, true ) ) {
@@ -350,7 +359,11 @@ if ( ! class_exists( 'WP_Hummingbird_Filesystem' ) ) {
 
 			// Use WP_Filesystem API.
 			if ( $this->fs_api ) {
-				/* @var WP_Filesystem_Base $wp_filesystem */
+				/**
+				 * WP_Filesystem global.
+				 *
+				 * @var WP_Filesystem_Base $wp_filesystem
+				 */
 				global $wp_filesystem;
 				return $wp_filesystem->exists( $path . $file );
 			} else {
@@ -395,7 +408,11 @@ if ( ! class_exists( 'WP_Hummingbird_Filesystem' ) ) {
 
 			// Use WP_Filesystem API.
 			if ( $this->fs_api ) {
-				/* @var WP_Filesystem_Base $wp_filesystem */
+				/**
+				 * WP_Filesystem global.
+				 *
+				 * @var WP_Filesystem_Base $wp_filesystem
+				 */
 				global $wp_filesystem;
 
 				// Check if cache folder exists. If not - create it.
@@ -453,7 +470,7 @@ if ( ! class_exists( 'WP_Hummingbird_Filesystem' ) ) {
 				} elseif ( $file ) {
 					fclose( $file );
 				}
-			} // End if().
+			}
 
 			return true;
 		}
@@ -556,7 +573,7 @@ if ( ! class_exists( 'WP_Hummingbird_Filesystem' ) ) {
 				);
 			}
 
-			$ifp = @ fopen( $new_file, 'wb' );
+			$ifp = @fopen( $new_file, 'wb' );
 			if ( ! $ifp ) {
 				return array(
 					/* translators: %s: file name with path */
@@ -569,10 +586,10 @@ if ( ! class_exists( 'WP_Hummingbird_Filesystem' ) ) {
 			clearstatcache();
 
 			// Set correct file permissions.
-			$stat  = @ stat( dirname( $new_file ) );
+			$stat  = @stat( dirname( $new_file ) );
 			$perms = $stat['mode'] & 0007777;
 			$perms = $perms & 0000666;
-			@ chmod( $new_file, $perms );
+			@chmod( $new_file, $perms );
 			clearstatcache();
 
 			// Compute the URL.
@@ -587,4 +604,4 @@ if ( ! class_exists( 'WP_Hummingbird_Filesystem' ) ) {
 		}
 
 	}
-} // End if().
+}

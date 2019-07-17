@@ -21,12 +21,18 @@ if ( $is_remote_import_error ) {
 	;
 }
 $errors = ! empty( $errors ) ? $errors : array();
+
+$migration = new Shipper_Model_Stored_Migration;
+$ignored_warnings = (int) $migration->get( 'preflight_warnings', 0 );
 ?>
 
 <div class="shipper-migration-error">
 	<div class="shipper-page-header">
 		<i class="sui-icon-warning-alert" aria-hidden="true"></i>
 		<h2><?php esc_html_e( 'Migration failed', 'shipper' ); ?></h2>
+		<?php
+			$this->render( 'tags/domains-tag' );
+		?>
 	</div>
 
 <?php foreach ( $errors as $error ) { ?>
@@ -61,26 +67,29 @@ $errors = ! empty( $errors ) ? $errors : array();
 	<div class="shipper-migration-debug-tips">
 		<h3><?php esc_html_e( 'Troubleshooting Tips', 'shipper' ); ?></h3>
 
+	<?php if ( ! empty( $ignored_warnings ) ) { ?>
 		<p>
 			<i class="sui-icon-warning-alert shipper-warning" aria-hidden="true"></i>
-			<?php esc_html_e( 'You ignored few warnings in your destination server and files during the pre-flight check. Resolve those warnings and try migration again.', 'shipper' ); ?>
+			<?php esc_html_e( 'You have ignored some warnings in your pre-flight check which might be causing your migration to fail. You can try to resolve those warnings and rerun the migration.', 'shipper' ); ?>
 		</p>
 		<p>
 			<i class="sui-icon-warning-alert shipper-warning" aria-hidden="true"></i>
 			<?php esc_html_e( 'You’re migrating between two different hosts and this could be the reason for failed migration. You can try to contact support for this.', 'shipper' ); ?>
 		</p>
+	<?php } ?>
+
 	<?php if ( Shipper_Helper_Assets::has_docs_links() ) { ?>
 		<p>
 			<i class="sui-icon-warning-alert" aria-hidden="true"></i>
 			<?php printf(
-				__( 'For more common migration issues, check our detailed migration <a href="%s" target="_blank">troubleshooting guide</a>. ', 'shipper' ),
+				__( 'Refer to our <a href="%s" target="_blank">troubleshooting guide</a> to fix some common migration problems. ', 'shipper' ),
 				esc_url( 'https://premium.wpmudev.org/docs/migration-troubleshooting' )
 			); ?>
 		</p>
 		<p>
 			<i class="sui-icon-warning-alert" aria-hidden="true"></i>
 			<?php printf(
-				__( 'Still not able to migrate your site! Follow our <a href="%s" target="_blank">manual migration guide</a> to migrate your website manually.', 'shipper' ),
+				__( 'Still not able to make Shipper work for this migration? Follow our <a href="%s" target="_blank">manual migration guide</a> to migrate your website manually.', 'shipper' ),
 				esc_url( 'https://premium.wpmudev.org/docs/manual-migration' )
 			); ?>
 		</p>

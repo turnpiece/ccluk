@@ -30,24 +30,17 @@ class Shipper_Controller_Heartbeat_Preflight extends Shipper_Controller_Heartbea
 			return $response;
 		}
 
-		$ctrl = Shipper_Controller_Runner_Preflight::get();
-
-		$preflight = $ctrl->get_status();
-		$data = $preflight->get_data();
-		if ( empty( $data ) ) {
-			$migration = new Shipper_Model_Stored_Migration;
-			$ctrl->start( $migration->get_destination() );
+		$preflight = Shipper_Controller_Runner_Preflight::get()->get_status();
+		if ( ! $preflight->get( Shipper_Model_Stored_Preflight::KEY_DONE ) ) {
+			$this->check_locks();
 			$data = $preflight->get_data();
 		}
 
 		$system_checks = $preflight->get_check( Shipper_Model_Stored_Preflight::KEY_CHECKS_SYSTEM );
 		$remote_checks = $preflight->get_check( Shipper_Model_Stored_Preflight::KEY_CHECKS_REMOTE );
-		$files_checks = $preflight->get_check( Shipper_Model_Stored_Preflight::KEY_CHECKS_FILES );
 		$all_done = $preflight->get( Shipper_Model_Stored_Preflight::KEY_DONE );
 
-		$response['shipper-preflight'] = array(
-			'is_done' => $all_done,
-			'sections' => array(
+		$sections = array(
 				'system_checks' => array(
 					'title' => __( 'Checking <b>Source Server\'s configurations</b>...', 'shipper' ),
 					'checks' => $system_checks,
@@ -58,14 +51,45 @@ class Shipper_Controller_Heartbeat_Preflight extends Shipper_Controller_Heartbea
 					'checks' => $remote_checks,
 					'is_done' => ! empty( $remote_checks ),
 				),
-				'files_checks' => array(
-					'title' => __( 'Checking <b>files</b>...', 'shipper' ),
-					'checks' => $files_checks,
-					'is_done' => $all_done,
-				),
-			)
+		);
+		
+		$migration = new Shipper_Model_Stored_Migration;
+		if ( Shipper_Model_Stored_Migration::TYPE_IMPORT === $migration->get_type() ) {
+			$checks = $preflight->get_check( Shipper_Model_Stored_Preflight::KEY_CHECKS_RPKG );
+		} else {
+			$checks = $preflight->get_check( Shipper_Model_Stored_Preflight::KEY_CHECKS_FILES );
+		}
+		$sections['files_check'] = array(
+			'title' => __( 'Checking <b>files</b>...', 'shipper' ),
+			'checks' => $checks,
+			'is_done' => $all_done,
 		);
 
+		$response['shipper-preflight'] = array(
+			'is_done' => $all_done,
+			'sections' => $sections,
+		);
+		$response['heartbeat_interval'] = Shipper_Helper_Assets::get_update_interval();
+
 		return $response;
+	}
+
+	/**
+	 * Start or ping, depending on lock state
+	 *
+	 * @uses Shipper_Controller_Runner_Preflight
+	 * @uses Shipper_Helper_Locks
+	 * @since v1.0.3
+	 */
+	public function check_locks() {
+		$locks = new Shipper_Helper_Locks;
+		$ctrl = Shipper_Controller_Runner_Preflight::get();
+		$process = $ctrl->get_process_lock();
+
+		if ( $locks->has_lock( $process ) && $locks->is_old_lock( $process ) ) {
+			return $ctrl->ping();
+		}
+
+		return $ctrl->start();
 	}
 }

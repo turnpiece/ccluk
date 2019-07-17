@@ -39,108 +39,33 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 				<?php include AI1WM_TEMPLATES_PATH . '/common/report-problem.php'; ?>
 
-				<form action="" method="post" id="ai1wm-backups-form" class="ai1wm-clear">
+				<?php if ( is_readable( AI1WM_BACKUPS_PATH ) && is_writable( AI1WM_BACKUPS_PATH ) ) : ?>
+					<div id="ai1wm-backups-list">
+						<?php include AI1WM_TEMPLATES_PATH . '/backups/backups-list.php'; ?>
+					</div>
 
-					<?php if ( is_readable( AI1WM_BACKUPS_PATH ) && is_writable( AI1WM_BACKUPS_PATH ) ) : ?>
-						<?php if ( $backups ) : ?>
-							<table class="ai1wm-backups">
-								<thead>
-									<tr>
-										<th class="ai1wm-column-name"><?php _e( 'Name', AI1WM_PLUGIN_NAME ); ?></th>
-										<th class="ai1wm-column-date"><?php _e( 'Date', AI1WM_PLUGIN_NAME ); ?></th>
-										<th class="ai1wm-column-size"><?php _e( 'Size', AI1WM_PLUGIN_NAME ); ?></th>
-										<th class="ai1wm-column-actions"></th>
-									</tr>
-								</thead>
-								<tbody>
-									<?php foreach ( $backups as $backup ) : ?>
-									<tr>
-										<td class="ai1wm-column-name">
-											<?php if ( $backup['path'] ) : ?>
-												<i class="ai1wm-icon-folder"></i>
-												<?php echo esc_html( $backup['path'] ); ?>
-												<br />
-											<?php endif; ?>
-											<i class="ai1wm-icon-file-zip"></i>
-											<span class="ai1wm-backup-filename">
-												<?php echo esc_html( basename( $backup['filename'] ) ); ?>
-											</span>
-											<?php if ( isset( $backups_labels[ basename( $backup['filename'] ) ] ) ) : ?>
-												<span class="ai1wm-backup-label">
-													<br />
-													<span class="ai1wm-backup-label-colored">
-														<?php echo esc_html( $backups_labels[ basename( $backup['filename'] ) ] ); ?>
-													</span>
-													<i class="ai1wm-icon-edit-pencil"></i>
-												</span>
-											<?php else : ?>
-												<span class="ai1wm-add-description">
-													<br />
-													<?php _e( 'Click to set a label for this backup', AI1WM_PLUGIN_NAME ); ?>
-													<i class="ai1wm-icon-edit-pencil"></i>
-												</span>
-											<?php endif; ?>
-										</td>
-										<td class="ai1wm-column-date">
-											<?php echo esc_html( sprintf( __( '%s ago', AI1WM_PLUGIN_NAME ), human_time_diff( $backup['mtime'] ) ) ); ?>
-										</td>
-										<td class="ai1wm-column-size">
-											<?php if ( is_null( $backup['size'] ) ) : ?>
-												<?php _e( '2GB+', AI1WM_PLUGIN_NAME ); ?>
-											<?php else : ?>
-												<?php echo size_format( $backup['size'], 2 ); ?>
-											<?php endif; ?>
-										</td>
-										<td class="ai1wm-column-actions ai1wm-backup-actions">
-											<a href="<?php echo ai1wm_backup_url( array( 'archive' => esc_attr( $backup['filename'] ) ) ); ?>" class="ai1wm-button-green ai1wm-backup-download" download="<?php echo esc_attr( $backup['filename'] ); ?>" aria-label="<?php _e( 'Download backup', AI1WM_PLUGIN_NAME ); ?>">
-												<i class="ai1wm-icon-arrow-down"></i>
-												<span><?php _e( 'Download', AI1WM_PLUGIN_NAME ); ?></span>
-											</a>
-											<a href="#" data-archive="<?php echo esc_attr( $backup['filename'] ); ?>" class="ai1wm-button-gray ai1wm-backup-restore" aria-label="<?php _e( 'Restore backup', AI1WM_PLUGIN_NAME ); ?>">
-												<i class="ai1wm-icon-cloud-upload"></i>
-												<span><?php _e( 'Restore', AI1WM_PLUGIN_NAME ); ?></span>
-											</a>
-											<a href="#" data-archive="<?php echo esc_attr( $backup['filename'] ); ?>" class="ai1wm-button-red ai1wm-backup-delete" aria-label="<?php _e( 'Delete backup', AI1WM_PLUGIN_NAME ); ?>">
-												<i class="ai1wm-icon-close"></i>
-												<span><?php _e( 'Delete', AI1WM_PLUGIN_NAME ); ?></span>
-											</a>
-										</td>
-									</tr>
-									<?php endforeach; ?>
-								</tbody>
-							</table>
-						<?php endif; ?>
+					<form action="" method="post" id="ai1wm-export-form" class="ai1wm-clear">
 						<div class="ai1wm-backups-create">
-							<p class="ai1wm-backups-empty <?php echo $backups ? 'ai1wm-hide' : null; ?>">
+							<p class="ai1wm-backups-empty <?php echo empty( $backups ) ? null : 'ai1wm-hide'; ?>">
 								<?php _e( 'There are no backups available at this time, why not create a new one?', AI1WM_PLUGIN_NAME ); ?>
 							</p>
 							<p>
-								<a href="<?php echo esc_url( network_admin_url( 'admin.php?page=ai1wm_export' ) ); ?>" class="ai1wm-button-green">
+								<a href="#" id="ai1wm-create-backup" class="ai1wm-button-green">
 									<i class="ai1wm-icon-export"></i>
 									<?php _e( 'Create backup', AI1WM_PLUGIN_NAME ); ?>
 								</a>
 							</p>
 						</div>
-					<?php else : ?>
-						<div class="ai1wm-clear ai1wm-message ai1wm-red-message">
-							<?php
-							printf(
-								__(
-									'<h3>Site could not create backups!</h3>' .
-									'<p>Please make sure that storage directory <strong>%s</strong> has read and write permissions.</p>',
-									AI1WM_PLUGIN_NAME
-								),
-								AI1WM_STORAGE_PATH
-							);
-							?>
-						</div>
-					<?php endif; ?>
+						<input type="hidden" name="ai1wm_manual_export" value="1" />
+					</form>
 
 					<?php do_action( 'ai1wm_backups_left_end' ); ?>
 
-					<input type="hidden" name="ai1wm_manual_restore" value="1" />
+				<?php else : ?>
 
-				</form>
+					<?php include AI1WM_TEMPLATES_PATH . '/backups/backups-permissions.php'; ?>
+
+				<?php endif; ?>
 			</div>
 		</div>
 		<div class="ai1wm-right">

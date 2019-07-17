@@ -13,7 +13,7 @@ $has_service_errors = ! empty( $checks['errors'] );
 
 <?php if ( $has_issues ) { ?>
 	<?php if ( $has_breaking_issues ) { ?>
-		<div class="sui-notice sui-notice-error">
+		<div class="sui-notice sui-notice-error shipper-service-error">
 		<?php if ( $has_service_errors ) { ?>
 			<?php foreach( $checks['errors'] as $error ) { ?>
 				<p><?php echo esc_html( sprintf( __( 'Error: %s', 'shipper' ), $error ) ); ?></p>

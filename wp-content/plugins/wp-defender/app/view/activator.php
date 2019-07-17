@@ -132,8 +132,10 @@
                     </div>
                 </div>
             </form>
-            <img src="<?php echo wp_defender()->getPluginUrl() . '/assets/img/defender-activator.svg' ?>"
-                 class="sui-image sui-image-center"/>
+			<?php if ( strlen( wp_defender()->heroImage ) == 0 ): ?>
+                <img src="<?php echo wp_defender()->getPluginUrl() . '/assets/img/defender-activator.svg' ?>"
+                     class="sui-image sui-image-center"/>
+			<?php endif; ?>
         </div>
         <div class="sui-box activate-progress wd-hide">
             <div class="sui-box-body">

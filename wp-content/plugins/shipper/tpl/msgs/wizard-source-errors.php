@@ -5,8 +5,8 @@
  * @package shipper
  */
 
-$checks = $result['checks']['local'];
-$has_issues = (bool) $checks['errors_count'];
+$checks              = $result['checks']['local'];
+$has_issues          = (bool) $checks['errors_count'];
 $has_breaking_issues = (bool) $checks['breaking_errors_count'];
 ?>
 

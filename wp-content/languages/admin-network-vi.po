@@ -1,5 +1,5 @@
-# Translation of WordPress - 5.1.x - Development - Administration - Network Admin in Vietnamese
-# This file is distributed under the same license as the WordPress - 5.1.x - Development - Administration - Network Admin package.
+# Translation of WordPress - 5.2.x - Development - Administration - Network Admin in Vietnamese
+# This file is distributed under the same license as the WordPress - 5.2.x - Development - Administration - Network Admin package.
 msgid ""
 msgstr ""
 "PO-Revision-Date: 2019-02-21 02:14:36+0000\n"
@@ -9,7 +9,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: vi_VN\n"
-"Project-Id-Version: WordPress - 5.1.x - Development - Administration - Network Admin\n"
+"Project-Id-Version: WordPress - 5.2.x - Development - Administration - Network Admin\n"
 
 #. translators: %s: DO_NOT_UPGRADE_GLOBAL_TABLES
 #: wp-admin/includes/network.php:113
@@ -36,10 +36,6 @@ msgstr "Có một yêu cầu thay đổi email quản trị trang mạng thành 
 #: wp-admin/includes/network.php:326
 msgid "Sub-domain Installation"
 msgstr "Cài đặt tên miền con"
-
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:666
-msgid "Active Theme"
-msgstr "Theme đang hoạt động"
 
 #: wp-admin/includes/class-wp-ms-themes-list-table.php:671
 msgid "Active Child Theme"
@@ -229,12 +225,12 @@ msgctxt "site"
 msgid "Not Spam"
 msgstr "Không Phải Rác"
 
-#: wp-admin/includes/class-wp-ms-users-list-table.php:118
+#: wp-admin/includes/class-wp-ms-users-list-table.php:116
 msgctxt "user"
 msgid "Not Spam"
 msgstr "Không Phải Tài Khoản Rác"
 
-#: wp-admin/includes/class-wp-ms-users-list-table.php:117
+#: wp-admin/includes/class-wp-ms-users-list-table.php:115
 msgctxt "user"
 msgid "Mark as Spam"
 msgstr "Đây Là Tài Khoản Rác"
@@ -244,7 +240,7 @@ msgctxt "site"
 msgid "Mark as Spam"
 msgstr "Đây Là Trang Mạng Rác"
 
-#: wp-admin/includes/class-wp-ms-users-list-table.php:144
+#: wp-admin/includes/class-wp-ms-users-list-table.php:142
 msgid "Super Admin <span class=\"count\">(%s)</span>"
 msgid_plural "Super Admins <span class=\"count\">(%s)</span>"
 msgstr[0] "Quản Trị Viên Cấp Cao <span class=\"count\">(%s)</span>"
@@ -271,7 +267,7 @@ msgctxt "site"
 msgid "Registered"
 msgstr "Đã đăng ký"
 
-#: wp-admin/includes/class-wp-ms-users-list-table.php:173
+#: wp-admin/includes/class-wp-ms-users-list-table.php:171
 msgctxt "user"
 msgid "Registered"
 msgstr "Đã đăng ký"
@@ -487,7 +483,7 @@ msgid "<a href=\"https://codex.wordpress.org/Network_Admin_Settings_Screen\">Doc
 msgstr "<a href=\"https://codex.wordpress.org/Network_Admin_Settings_Screen\" target=\"_blank\">Tài liệu về Cài đặt Mạng lưới</a>"
 
 #. translators: 1: site url, 2: server error message
-#: wp-admin/network/upgrade.php:96
+#: wp-admin/network/upgrade.php:97
 msgid "Warning! Problem updating %1$s. Your server may not be able to connect to sites running on it. Error message: %2$s"
 msgstr "Cảnh báo! Vấn đề cập nhật %1$s. Máy chủ của bạn có thể không có khả năng kết nối với các trang web mà nó đang chạy. Thông báo lỗi: %2$s"
 
@@ -612,7 +608,7 @@ msgid "Quick Tasks"
 msgstr "Thao tác nhanh"
 
 #: wp-admin/network/upgrade.php:15 wp-admin/network/upgrade.php:42
-#: wp-admin/network/upgrade.php:141 wp-admin/network/menu.php:34
+#: wp-admin/network/upgrade.php:142 wp-admin/network/menu.php:34
 msgid "Upgrade Network"
 msgstr "Nâng cấp mạng lưới"
 
@@ -620,7 +616,7 @@ msgstr "Nâng cấp mạng lưới"
 msgid "Only use this screen once you have updated to a new version of WordPress through Updates/Available Updates (via the Network Administration navigation menu or the Toolbar). Clicking the Upgrade Network button will step through each site in the network, five at a time, and make sure any database updates are applied."
 msgstr "Chỉ sử dụng màn hình này khi bạn đã nâng cấp WordPress lên phiên bản mới hơn từ màn hình Nâng cấp/Nâng cấp khả thi (thông qua thực đơn Quản trị Mạng lưới hoặc Thanh công cụ). Bấm nút Nâng cấp Mạng lưới sẽ kiểm tra tất cả trang mạng, năm trang một lần, để đảm bảo cơ sở dữ liệu đã được nâng cấp hợp lệ."
 
-#: wp-admin/network/upgrade.php:137
+#: wp-admin/network/upgrade.php:138
 msgid "WordPress has been updated! Before we send you on your way, we need to individually upgrade the sites in your network."
 msgstr "WordPress đã được nâng cấp! Tiếp theo, bạn cần nâng cấp lần lượt các trang mạng trong mạng lưới của bạn."
 
@@ -842,6 +838,10 @@ msgstr "Hoàn thành các bước dưới đây để bật các tính năng cho
 #: wp-admin/includes/network.php:177
 msgid "Fill in the information below and you&#8217;ll be on your way to creating a network of WordPress sites. We will create configuration files in the next step."
 msgstr "Điền thông tin phía dưới và bạn sẽ sẵn sàng tạo ra một mạng lưới các trang mạng WordPress. Chúng tôi sẽ tạo các tập tin cấu hình trong bước tiếp theo."
+
+#: wp-admin/includes/network.php:189
+msgid "Note:"
+msgstr "Lưu ý:"
 
 #: wp-admin/includes/network.php:137
 msgid "You cannot install a network of sites with your server address."
@@ -1082,7 +1082,7 @@ msgstr "Nếu bạn muốn cấm đăng ký trang mạng cho tên miền nào đ
 msgid "Can&#8217;t create an empty site."
 msgstr "Không thể tạo một trang mạng rỗng."
 
-#: wp-admin/network/upgrade.php:121
+#: wp-admin/network/upgrade.php:122
 msgid "If your browser doesn&#8217;t start loading the next page automatically, click this link:"
 msgstr "Nếu trình duyệt của bạn không tự động tải trang tiếp theo, bấm vào liên kết này:"
 
@@ -1174,7 +1174,7 @@ msgstr "Bình luận đầu tiên trên một trang mạng mới."
 msgid "The URL for the first comment on a new site."
 msgstr "Liên kết cho bình luận đầu tiên trên một trang mạng mới."
 
-#: wp-admin/network/upgrade.php:72
+#: wp-admin/network/upgrade.php:73
 msgid "All done!"
 msgstr "Hoàn tất!"
 
@@ -1243,7 +1243,7 @@ msgstr "Dung lượng lưu trữ tập tin tải lên"
 msgid "Users are not allowed to register these sites. Separate names by spaces."
 msgstr "Người dùng không được phép đăng ký những trang mạng này. Phân tách tên bằng khoảng trống."
 
-#: wp-admin/network/upgrade.php:121
+#: wp-admin/network/upgrade.php:122
 msgid "Next Sites"
 msgstr "Những Trang Mạng Tiếp Theo"
 

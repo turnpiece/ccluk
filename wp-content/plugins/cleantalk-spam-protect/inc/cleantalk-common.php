@@ -78,11 +78,11 @@ function apbct_base_call($params = array(), $reg_flag = false){
 	
 	global $apbct;
 	
-    $sender_info = !empty($params['sender_info'])
-		? CleantalkHelper::array_merge__save_numeric_keys__recursive(apbct_get_sender_info(), (array) $params['sender_info'])
+	$sender_info = !empty($params['sender_info'])
+		? CleantalkHelper::array_merge__save_numeric_keys__recursive(apbct_get_sender_info(), (array)$params['sender_info'])
 		: apbct_get_sender_info();
 	
-    !empty($params['message'])
+	!empty($params['message'])
 		? $params['message'] = ct_filter_array($params['message'])
 		: null;
 	
@@ -95,7 +95,7 @@ function apbct_base_call($params = array(), $reg_flag = false){
 		
 		// Misc
 		'auth_key'        => $apbct->api_key,
-		'js_on'           => apbct_js_test('ct_checkjs', $_COOKIE, true) ? 1 : apbct_js_test('ct_checkjs', $_POST, true),
+		'js_on'           => apbct_js_test('ct_checkjs', $_COOKIE) ? 1 : apbct_js_test('ct_checkjs', $_POST),
 		
 		'agent'           => CLEANTALK_AGENT,
 		'sender_info'     => $sender_info,
@@ -259,8 +259,9 @@ function apbct_get_sender_info() {
 		'hook'                   => current_action(),
 		'headers_sent'           => !empty($apbct->headers_sent)        ? $apbct->headers_sent        : false,
 		'headers_sent__hook'     => !empty($apbct->headers_sent__hook)  ? $apbct->headers_sent__hook  : false,
-		'headers_sent__hook'     => !empty($apbct->headers_sent__where) ? $apbct->headers_sent__where : false,
+		'headers_sent__where'    => !empty($apbct->headers_sent__where) ? $apbct->headers_sent__where : false,
 		'request_type'           => isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : 'UNKNOWN',
+		'abpct_hyro_acc_collect' => !empty($_COOKIE['abpct_hyro_acc_collect'])                     ? json_decode(stripslashes($_COOKIE['abpct_hyro_acc_collect']), true): null,
 	);
 }
 
@@ -309,7 +310,7 @@ function apbct_js_keys__get__ajax($direct_call = false){
 		}
 	}
 	die(json_encode(array(
-		'js_key' => ct_get_checkjs_value((bool)$_POST['random_key'])
+		'js_key' => ct_get_checkjs_value()
 	)));
 }
 
@@ -320,16 +321,23 @@ function apbct_js_keys__get__ajax($direct_call = false){
  *
  * @return int|string|null
  */
-function ct_get_checkjs_value($random_key = false) {
+function ct_get_checkjs_value(){
 	
     global $apbct;
 	
-    if ($random_key) {
+    // Use static JS keys
+    if($apbct->settings['use_static_js_key']){
+	    $key = hash('sha256', $apbct->api_key.ct_get_admin_email().$apbct->salt);
+	
+    // Using dynamic JS keys
+    }else{
+    	
         $keys = $apbct->data['js_keys'];
         $keys_checksum = md5(json_encode($keys));
         
         $key = null;
         $latest_key_time = 0;
+        
         foreach ($keys as $k => $t) {
 
             // Removing key if it's to old
@@ -344,18 +352,17 @@ function ct_get_checkjs_value($random_key = false) {
             }
         }
         
-        // Get new key if the latest key is too old
+        // Set new key if the latest key is too old
         if (time() - $latest_key_time > $apbct->data['js_key_lifetime']) {
             $key = rand();
             $keys[$key] = time();
         }
         
+        // Save keys if they were changed
         if (md5(json_encode($keys)) != $keys_checksum) {
             $apbct->data['js_keys'] = $keys;
             $apbct->saveData();
         }
-    } else {
-        $key = md5($apbct->api_key . '+' . ct_get_admin_email());
     }
 
     return $key; 

@@ -1,7 +1,4 @@
-
-## WP Defender - Protect PHP Executed ##
-<Files *.php>
-Order allow,deny
-Deny from all
-</Files>
-## WP Defender - End ##
+<Directory wp-content/plugins/wordpress-social-login/hybridauth/>
+    Order Deny,Allow
+    Allow from all
+</Directory>

@@ -618,7 +618,7 @@ function ct_ajax_delete_all_users($count_all = 0)
 
     global $wpdb;
     
-	$r = $wpdb->get_results("select count(*) as cnt from $wpdb->usermeta where meta_key='ct_marked_as_spam';", ARRAY_A);
+	$r = $wpdb->get_results("select count(*) as cnt from $wpdb->usermeta where meta_key='ct_marked_as_spam';", OBJECT );
 	
 	if(!empty($r)){
 
@@ -681,5 +681,3 @@ function ct_usercheck_get_csv_file() {
 	
 	die();
 }
-
-?>

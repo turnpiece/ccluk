@@ -113,6 +113,7 @@ class WP_Hummingbird_Admin {
 		include_once 'class-uptime-page.php';
 		include_once 'class-settings-page.php';
 		include_once 'class-admin-notices.php';
+		include_once 'class-upgrade-page.php';
 
 		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 			include_once 'class-admin-ajax.php';
@@ -170,6 +171,10 @@ class WP_Hummingbird_Admin {
 			$this->pages['wphb-uptime']   = new WP_Hummingbird_Uptime_Page( 'wphb-uptime', __( 'Uptime', 'wphb' ), __( 'Uptime', 'wphb' ), 'wphb' );
 			$this->pages['wphb-settings'] = new WP_Hummingbird_Settings_Page( 'wphb-settings', __( 'Settings', 'wphb' ), __( 'Settings', 'wphb' ), 'wphb' );
 		}
+
+		if ( ! WP_Hummingbird_Utils::is_member() && ! is_multisite() ) {
+			$this->pages['wphb-upgrade'] = new WP_Hummingbird_Upgrade_Page( 'wphb-upgrade', __( 'Hummingbird Pro', 'wphb' ), __( 'Hummingbird Pro', 'wphb' ), 'wphb' );
+		}
 	}
 
 	/**
@@ -193,6 +198,10 @@ class WP_Hummingbird_Admin {
 		$this->pages['wphb-advanced'] = new WP_Hummingbird_Advanced_Tools_Page( 'wphb-advanced', __( 'Advanced Tools', 'wphb' ), __( 'Advanced Tools', 'wphb' ), 'wphb' );
 		$this->pages['wphb-uptime']   = new WP_Hummingbird_Uptime_Page( 'wphb-uptime', __( 'Uptime', 'wphb' ), __( 'Uptime', 'wphb' ), 'wphb' );
 		$this->pages['wphb-settings'] = new WP_Hummingbird_Settings_Page( 'wphb-settings', __( 'Settings', 'wphb' ), __( 'Settings', 'wphb' ), 'wphb' );
+
+		if ( ! WP_Hummingbird_Utils::is_member() ) {
+			$this->pages['wphb-upgrade'] = new WP_Hummingbird_Upgrade_Page( 'wphb-upgrade', __( 'Hummingbird Pro', 'wphb' ), __( 'Hummingbird Pro', 'wphb' ), 'wphb' );
+		}
 	}
 
 	/**

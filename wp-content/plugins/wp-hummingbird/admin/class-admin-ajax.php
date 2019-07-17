@@ -346,7 +346,7 @@ class WP_Hummingbird_Admin_AJAX {
 		parse_str( sanitize_text_field( wp_unslash( $_POST['data'] ) ), $data ); // Input var ok.
 
 		// This option can only be updated on network admin.
-		if ( ! is_multisite() || ( is_multisite() && $data['network_admin'] ) ) {
+		if ( ! is_multisite() || ( is_multisite() && isset( $data['network_admin'] ) && $data['network_admin'] ) ) {
 			// I don't like the way this is duplicated in three different modules. This needs to be extracted.
 			$options['subsite_tests'] = isset( $data['subsite-tests'] ) && 'super-admins' !== $data['subsite-tests'] ? (bool) $data['subsite-tests'] : 'super-admins';
 
@@ -1271,14 +1271,14 @@ class WP_Hummingbird_Admin_AJAX {
 		wp_parse_str( sanitize_text_field( wp_unslash( $_POST['settings'] ) ), $form );
 
 		if ( isset( $form['enabled'] ) && 'super-admins' !== $form['enabled'] ) {
-			$form['enabled'] = boolval( $form['enabled'] );
+			$form['enabled'] = (bool) $form['enabled'];
 		}
 
 		$minify  = WP_Hummingbird_Utils::get_module( 'minify' );
 		$options = $minify->get_options();
 
-		$options['use_cdn'] = isset( $form['use_cdn'] ) ? boolval( $form['use_cdn'] ) : false;
-		$options['log']     = isset( $form['log'] ) ? boolval( $form['log'] ) : false;
+		$options['use_cdn'] = isset( $form['use_cdn'] ) ? (bool) $form['use_cdn'] : false;
+		$options['log']     = isset( $form['log'] ) ? (bool) $form['log'] : false;
 
 		$minify->update_options( $options );
 		if ( ! isset( $form['network'] ) ) {

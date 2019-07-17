@@ -513,7 +513,8 @@
 								display: false
 							},
 							ticks: {
-								min: 0
+								min: 0,
+								suggestedMax:''
 							}
 						}]
 					}
@@ -660,6 +661,12 @@
 				chartConfig = $.extend(true,{},configTime); //copy not by reference;
 			} else {
 				chartConfig = $.extend(true,{},configNum); //copy not by reference;
+
+				//Set YAxis max value for proper curve
+				var yAxisData 	 = all_data[$type].data.map( ( data ) => data.y ),
+				yAxisDataMax = Math.max.apply(null, yAxisData);
+				chartConfig.options.scales.yAxes[0].ticks.suggestedMax = yAxisDataMax + Math.round( 0.1 * yAxisDataMax );
+
 			}
 
 			chartConfig.data.datasets[0].label = all_data[$type].label;
@@ -699,7 +706,6 @@
 
 			// if all values for this chart are null, show empty message
 			var chart_empty = true;
-			console.log(all_data[$type].data);
 			$.each(all_data[$type].data, function( key, item ) {
 				if ( item.y !== null ) {
 					chart_empty = false;

@@ -1,5 +1,5 @@
-# Translation of Plugins - GDPR Cookie Consent Banner - Development (trunk) in French (France)
-# This file is distributed under the same license as the Plugins - GDPR Cookie Consent Banner - Development (trunk) package.
+# Translation of Plugins - GDPR Cookie Consent Banner | Termly - Stable (latest release) in French (France)
+# This file is distributed under the same license as the Plugins - GDPR Cookie Consent Banner | Termly - Stable (latest release) package.
 msgid ""
 msgstr ""
 "PO-Revision-Date: 2018-12-23 14:26:31+0000\n"
@@ -9,7 +9,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: fr\n"
-"Project-Id-Version: Plugins - GDPR Cookie Consent Banner - Development (trunk)\n"
+"Project-Id-Version: Plugins - GDPR Cookie Consent Banner | Termly - Stable (latest release)\n"
 
 #: admin/class-ctcc-admin.php:729 admin/class-ctcc-admin.php:734
 #: admin/class-ctcc-admin.php:739 admin/class-ctcc-admin.php:744
@@ -19,6 +19,14 @@ msgstr "Besoin d’une politique de confidentialité ? Créez-en une gratuiteme
 #. Author of the plugin
 msgid "termly"
 msgstr "termly"
+
+#. Description of the plugin
+msgid "Termly's easy to use cookie consent plugin can assist in your GDPR and ePrivacy Directive compliance efforts."
+msgstr "L’usage de l’extension cookie consent peut vous aider dans votre mise en conformité avec le RGPD et la directive ePrivacy."
+
+#. Plugin Name of the plugin
+msgid "GDPR Cookie Consent Banner | Termly"
+msgstr "GDPR Cookie Consent Banner | Termly"
 
 #. Author URI of the plugin
 msgid "https://termly.io/"
@@ -136,13 +144,13 @@ msgstr "Bouton plat"
 msgid "Deselect to float button to right."
 msgstr "Désélectionner pour positionner le bouton à droite."
 
-#: public/customizer.php:122 admin/class-ctcc-admin.php:310
-msgid "Display Button With Text"
-msgstr "Afficher le bouton avec du texte"
-
 #: admin/class-ctcc-admin.php:667
 msgid "Display the confirmation button with notification text"
 msgstr "Afficher le bouton de confirmation avec le texte de notification."
+
+#: public/customizer.php:122 admin/class-ctcc-admin.php:310
+msgid "Display Button With Text"
+msgstr "Afficher le bouton avec du texte"
 
 #: admin/class-ctcc-admin.php:785
 msgid "Reset plugin defaults"
@@ -477,7 +485,7 @@ msgstr "Ce site utilise des cookies - de petits fichiers texte qui sont placés 
 msgid "Cookie Policy"
 msgstr "Politique de cookie"
 
-#: public/customizer.php:17 admin/class-ctcc-metafield.php:35
-#: admin/class-ctcc-admin.php:68 admin/class-ctcc-admin.php:759
+#: public/customizer.php:17 admin/class-ctcc-admin.php:68
+#: admin/class-ctcc-admin.php:759 admin/class-ctcc-metafield.php:35
 msgid "Cookie Consent"
 msgstr "Cookie Consent"

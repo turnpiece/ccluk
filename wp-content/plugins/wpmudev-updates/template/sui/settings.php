@@ -19,7 +19,8 @@
 
 // Render the page header section.
 $page_title = __( 'Settings', 'wpmudev' );
-$this->render_sui_header( $page_title );
+$page_slug  = 'settings';
+$this->render_sui_header( $page_title, $page_slug );
 
 /** @var WPMUDEV_Dashboard_Sui $this */
 /** @var WPMUDEV_Dashboard_Sui_Page_Urls $urls */
@@ -203,6 +204,35 @@ if ( WPMUDEV_LIMIT_TO_USER ) {
 
 					</div>
 
+				</div>
+
+				<div class="sui-box-settings-row">
+
+					<div class="sui-box-settings-col-1">
+
+						<span class="sui-settings-label"><?php esc_html_e( 'Single Sign-on', 'wpmudev' ); ?></span>
+
+						<span class="sui-description"><?php esc_html_e( 'Tired of logging in to your WP Admin area? Enable this setting to be automatically logged in when you visit this site from The Hub.', 'wpmudev' ); ?></span>
+
+					</div>
+
+					<div class="sui-box-settings-col-2">
+
+						<label class="sui-toggle">
+							<input
+								type="checkbox"
+								name="enable_sso"
+								value="1"
+								id="enable_sso"
+								<?php checked( $enable_sso ); ?>
+							/>
+							<span class="sui-toggle-slider"></span>
+						</label>
+						<div class="enable_sso_label">
+							<label for="enable_sso"><?php esc_html_e( 'Enable Single Sign-on for this website', 'wpmudev' ); ?></label>
+							<div class="sui-notice"><p><?php printf( esc_html__( 'Note: You need to stay logged into %1$1s The Hub%2$2s to use this feature.', 'wpmudev' ), '<a href="https://premium.wpmudev.org/hub/my-websites/">', '</a>' ); ?></p></div>
+						</div>
+					</div>
 				</div>
 
 			</div>
@@ -447,7 +477,7 @@ if ( WPMUDEV_LIMIT_TO_USER ) {
 
 				<div class="sui-box-body sui-box-body-slim sui-block-content-center">
 
-					<p id="dialogDescription" class="sui-description"><?php esc_html_e( 'Add as many administrators as you like. Only these specific users will be see the WPMU DEV menu.', 'wpmudev' ); ?></p>
+					<p id="dialogDescription" class="sui-description"><?php esc_html_e( 'Add as many administrators as you like. Only these specific users will see the WPMU DEV menu.', 'wpmudev' ); ?></p>
 
 					<div class="sui-form-field">
 						<label class="sui-label" for="searchuser"><?php echo esc_html__('Search users', 'wpmudev'); ?></label>

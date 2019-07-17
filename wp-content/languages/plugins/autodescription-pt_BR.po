@@ -96,7 +96,7 @@ msgstr "Nota: Outro plugin do Twitter Card foi detectado. Essas tags podem entra
 msgid "Note: Another Open Graph plugin has been detected. These tags might conflict."
 msgstr "Nota: Outro plugin do Open Graph foi detectado. Essas tags podem entrar em conflito."
 
-#: inc/views/metaboxes/sitemaps-metabox.php:275
+#: inc/views/metaboxes/sitemaps-metabox.php:276
 msgid "Note: Changes might not appear to have effect directly because the stylesheet is cached in the browser for 30 minutes."
 msgstr "Nota: As alterações podem não parecer ter efeito diretamente porque a folha de estilo é armazenada em cache no navegador por 30 minutos."
 
@@ -268,8 +268,8 @@ msgstr "Isso informa ao mecanismo de pesquisa que não siga links neste termo."
 msgid "This tells search engines not to show this term in their search results."
 msgstr "Isso informa ao mecanismo de pesquisa para não mostrar esse termo nos resultados da pesquisa."
 
-#: inc/views/metaboxes/homepage-metabox.php:556
 #: inc/views/inpost/seo-settings-singular.php:458
+#: inc/views/metaboxes/homepage-metabox.php:556
 msgid "Social Image URL"
 msgstr "URL da imagem social"
 
@@ -277,8 +277,8 @@ msgstr "URL da imagem social"
 msgid "301 Redirect URL"
 msgstr "URL do redirecionamento 301"
 
-#: inc/views/metaboxes/homepage-metabox.php:339
 #: inc/views/inpost/seo-settings-singular.php:178
+#: inc/views/metaboxes/homepage-metabox.php:339
 msgid "Warning: No public site should ever disable indexing or following for the homepage."
 msgstr "Atenção: Nenhum site público deve desativar a indexação ou acompanhamento da página inicial."
 
@@ -294,15 +294,15 @@ msgstr "Use isso quando quiser reorganizar as partes do título manualmente."
 msgid "Remove the blogname?"
 msgstr "Remover o nome do blog?"
 
-#: inc/views/metaboxes/homepage-metabox.php:118
 #: inc/views/inpost/seo-settings-singular.php:66
 #: inc/views/inpost/seo-settings-tt.php:89
+#: inc/views/metaboxes/homepage-metabox.php:118
 msgid "The meta title can be used to determine the title used on search engine result pages."
 msgstr "O meta título pode ser usado para determinar o título usado nas páginas de resultados do mecanismo de pesquisa."
 
-#: inc/views/metaboxes/homepage-metabox.php:115
 #: inc/views/inpost/seo-settings-singular.php:62
 #: inc/views/inpost/seo-settings-tt.php:85
+#: inc/views/metaboxes/homepage-metabox.php:115
 msgid "Meta Title"
 msgstr "Meta título"
 
@@ -408,23 +408,23 @@ msgstr "Não há conteúdo."
 msgid "These settings do not affect sharing behavior with the social networks."
 msgstr "Essas configurações não afetam o comportamento de compartilhamento com as redes sociais."
 
-#: inc/views/metaboxes/homepage-metabox.php:503
 #: inc/views/inpost/seo-settings-singular.php:430
+#: inc/views/metaboxes/homepage-metabox.php:503
 msgid "Twitter Description"
 msgstr "Descrição do Twitter"
 
-#: inc/views/metaboxes/homepage-metabox.php:479
 #: inc/views/inpost/seo-settings-singular.php:407
+#: inc/views/metaboxes/homepage-metabox.php:479
 msgid "Twitter Title"
 msgstr "Título do Twitter"
 
-#: inc/views/metaboxes/homepage-metabox.php:451
 #: inc/views/inpost/seo-settings-singular.php:386
+#: inc/views/metaboxes/homepage-metabox.php:451
 msgid "Open Graph Description"
 msgstr "Descrição do Open Graph"
 
-#: inc/views/metaboxes/homepage-metabox.php:427
 #: inc/views/inpost/seo-settings-singular.php:363
+#: inc/views/metaboxes/homepage-metabox.php:427
 msgid "Open Graph Title"
 msgstr "Título do Open Graph"
 
@@ -498,8 +498,8 @@ msgstr "Habilitar Sitelinks Searchbox?"
 msgid "Learn how this data is used."
 msgstr "Saiba como estes dados são utilizados."
 
-#: inc/views/metaboxes/title-metabox.php:149
 #: inc/views/metaboxes/homepage-metabox.php:235
+#: inc/views/metaboxes/title-metabox.php:149
 msgid "This setting determines which side the added title text will go on."
 msgstr "Essas configurações determinam em qual lado o texto do título adicionado irá continuar."
 
@@ -757,8 +757,8 @@ msgstr "URL de reserva da imagem social"
 msgid "A social image can be displayed when your website is shared. It is a great way to grab attention."
 msgstr "Uma imagem social pode ser exibida quando seu site é compartilhado. É uma ótima maneira de chamar a atenção."
 
-#: inc/views/metaboxes/social-metabox.php:116
 #: inc/views/metaboxes/homepage-metabox.php:525
+#: inc/views/metaboxes/social-metabox.php:116
 msgid "Social Image Settings"
 msgstr "Configurações de Imagem Social"
 
@@ -794,43 +794,43 @@ msgstr "Este é um Sitemap XML gerado, destinado a ser consumido por mecanismos 
 msgid "XML Sitemap"
 msgstr "Sitemap XML"
 
-#: inc/views/metaboxes/sitemaps-metabox.php:325
+#: inc/views/metaboxes/sitemaps-metabox.php:326
 msgid "Sitemap title and lines color"
 msgstr "Cores dos títulos e linhas no Sitemap"
 
-#: inc/views/metaboxes/sitemaps-metabox.php:316
+#: inc/views/metaboxes/sitemaps-metabox.php:317
 msgid "Sitemap header background color"
 msgstr "Cor do fundo no cabeçalho do Sitemap"
 
-#: inc/views/metaboxes/sitemaps-metabox.php:303
+#: inc/views/metaboxes/sitemaps-metabox.php:304
 msgid "The logo is set in Customizer."
 msgstr "O logo é definido no personalizador"
 
-#: inc/views/metaboxes/sitemaps-metabox.php:303
+#: inc/views/metaboxes/sitemaps-metabox.php:304
 msgid "Add site logo?"
 msgstr "Adicionar logo do site?"
 
-#: inc/views/metaboxes/sitemaps-metabox.php:295
+#: inc/views/metaboxes/sitemaps-metabox.php:296
 msgid "Style configuration"
 msgstr "Configurações de estilo"
 
-#: inc/views/metaboxes/sitemaps-metabox.php:286
+#: inc/views/metaboxes/sitemaps-metabox.php:287
 msgid "This makes the sitemap more readable for humans."
 msgstr "Deixa o sitemap mais legível para humanos"
 
-#: inc/views/metaboxes/sitemaps-metabox.php:286
+#: inc/views/metaboxes/sitemaps-metabox.php:287
 msgid "Style Sitemap?"
 msgstr "Estilizar Sitemap?"
 
-#: inc/views/metaboxes/sitemaps-metabox.php:279
+#: inc/views/metaboxes/sitemaps-metabox.php:280
 msgid "Enable styling"
 msgstr "Ativar estilo"
 
-#: inc/views/metaboxes/sitemaps-metabox.php:274
+#: inc/views/metaboxes/sitemaps-metabox.php:275
 msgid "You can style the sitemap to give it a more personal look. Styling the sitemap has no SEO value whatsoever."
 msgstr "Você pode estilizar o sitemap para que tenha um visual mais pessoal. A estilização do sitemap não tem nenhum valor de SEO."
 
-#: inc/views/metaboxes/sitemaps-metabox.php:272
+#: inc/views/metaboxes/sitemaps-metabox.php:273
 msgid "Sitemap Styling Settings"
 msgstr "Configurações de Estilização do Sitemap"
 
@@ -1194,8 +1194,8 @@ msgstr "Categoria de exemplo"
 msgid "Prefixes"
 msgstr "Prefixos"
 
-#: inc/views/metaboxes/title-metabox.php:71
 #: inc/views/metaboxes/homepage-metabox.php:39
+#: inc/views/metaboxes/title-metabox.php:71
 msgid "Additions"
 msgstr "Adicionais"
 
@@ -1383,7 +1383,7 @@ msgid "The SEO Framework"
 msgstr "The SEO Framework"
 
 #. translators: %s = Google
-#: inc/views/metaboxes/sitemaps-metabox.php:262
+#: inc/views/metaboxes/sitemaps-metabox.php:263
 msgid "Notify %s about sitemap changes?"
 msgstr "Notificar %s sobre alterações no sitemap?"
 
@@ -1716,11 +1716,11 @@ msgstr "Acompanhar"
 msgid "Indexing"
 msgstr "Indexar"
 
-#: inc/classes/inpost.class.php:288 inc/views/metaboxes/social-metabox.php:29
-#: inc/views/metaboxes/title-metabox.php:66
-#: inc/views/metaboxes/homepage-metabox.php:34
+#: inc/classes/inpost.class.php:288 inc/views/metaboxes/robots-metabox.php:61
 #: inc/views/metaboxes/sitemaps-metabox.php:29
-#: inc/views/metaboxes/robots-metabox.php:61
+#: inc/views/metaboxes/homepage-metabox.php:34
+#: inc/views/metaboxes/social-metabox.php:29
+#: inc/views/metaboxes/title-metabox.php:66
 msgid "General"
 msgstr "Geral"
 
@@ -1760,8 +1760,8 @@ msgstr "Author"
 msgid "Tag"
 msgstr "Tag"
 
-#: inc/views/metaboxes/title-metabox.php:220
 #: inc/views/metaboxes/robots-metabox.php:16
+#: inc/views/metaboxes/title-metabox.php:220
 msgid "Category"
 msgstr "Categoria"
 
@@ -1769,13 +1769,13 @@ msgstr "Categoria"
 msgid "The Home Page has a specific option."
 msgstr "A Página Inicial tem uma opção específica."
 
-#: inc/views/metaboxes/title-metabox.php:162
 #: inc/views/metaboxes/homepage-metabox.php:252
+#: inc/views/metaboxes/title-metabox.php:162
 msgid "Right:"
 msgstr "Direita:"
 
-#: inc/views/metaboxes/title-metabox.php:155
 #: inc/views/metaboxes/homepage-metabox.php:242
+#: inc/views/metaboxes/title-metabox.php:155
 msgid "Left:"
 msgstr "Esquerda:"
 
@@ -2106,9 +2106,9 @@ msgid "Webmaster Meta Settings"
 msgstr "Configurações meta de webmaster"
 
 #: inc/classes/admin-pages.class.php:284
-#: inc/views/metaboxes/homepage-metabox.php:302
 #: inc/views/inpost/seo-settings-singular.php:171
 #: inc/views/inpost/seo-settings-tt.php:135
+#: inc/views/metaboxes/homepage-metabox.php:302
 msgid "Robots Meta Settings"
 msgstr "Configurações de Meta Robots"
 

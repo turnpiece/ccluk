@@ -1,5 +1,5 @@
-# Translation of WordPress - 5.1.x - Development - Administration - Network Admin in Thai
-# This file is distributed under the same license as the WordPress - 5.1.x - Development - Administration - Network Admin package.
+# Translation of WordPress - 5.2.x - Development - Administration - Network Admin in Thai
+# This file is distributed under the same license as the WordPress - 5.2.x - Development - Administration - Network Admin package.
 msgid ""
 msgstr ""
 "PO-Revision-Date: 2019-02-13 03:04:55+0000\n"
@@ -9,7 +9,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: th\n"
-"Project-Id-Version: WordPress - 5.1.x - Development - Administration - Network Admin\n"
+"Project-Id-Version: WordPress - 5.2.x - Development - Administration - Network Admin\n"
 
 #. translators: %s: DO_NOT_UPGRADE_GLOBAL_TABLES
 #: wp-admin/includes/network.php:113
@@ -46,10 +46,6 @@ msgstr "การติดตั้งไดเรกทอรีย่อย"
 #: wp-admin/includes/class-wp-ms-themes-list-table.php:671
 msgid "Active Child Theme"
 msgstr "ธีมลูกที่เปิดใช้งาน"
-
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:666
-msgid "Active Theme"
-msgstr "ธีมที่เปิดใช้งาน"
 
 #: wp-admin/network/site-info.php:192
 msgid "Attributes"
@@ -195,22 +191,22 @@ msgstr "โปรดแน่ใจว่า Apache โมดูล %s ติด
 msgid "You cannot use port numbers such as %s."
 msgstr "คุณไม่สามารถใช้ port numbers เช่น %s"
 
-#: wp-admin/includes/class-wp-ms-users-list-table.php:173
+#: wp-admin/includes/class-wp-ms-users-list-table.php:171
 msgctxt "user"
 msgid "Registered"
 msgstr "ลงทะเบียนแล้ว"
 
-#: wp-admin/includes/class-wp-ms-users-list-table.php:144
+#: wp-admin/includes/class-wp-ms-users-list-table.php:142
 msgid "Super Admin <span class=\"count\">(%s)</span>"
 msgid_plural "Super Admins <span class=\"count\">(%s)</span>"
 msgstr[0] "ผู้ควบคุมขั้นสูง <span class=\"count\">(%s)</span>"
 
-#: wp-admin/includes/class-wp-ms-users-list-table.php:118
+#: wp-admin/includes/class-wp-ms-users-list-table.php:116
 msgctxt "user"
 msgid "Not Spam"
 msgstr "ผู้ใช้นี้ไม่ใช่สแปม"
 
-#: wp-admin/includes/class-wp-ms-users-list-table.php:117
+#: wp-admin/includes/class-wp-ms-users-list-table.php:115
 msgctxt "user"
 msgid "Mark as Spam"
 msgstr "บันทึกผู้ใช้นี้เป็นสแปม"
@@ -489,7 +485,7 @@ msgid "<a href=\"https://codex.wordpress.org/Network_Admin_Settings_Screen\">Doc
 msgstr "<a href=\"https://codex.wordpress.org/Network_Admin_Settings_Screen\">คู่มือการตั้งค่าเครือข่าย</a>"
 
 #. translators: 1: site url, 2: server error message
-#: wp-admin/network/upgrade.php:96
+#: wp-admin/network/upgrade.php:97
 msgid "Warning! Problem updating %1$s. Your server may not be able to connect to sites running on it. Error message: %2$s"
 msgstr "คำเตือน ปัญหารการอัปเดต %1$s เซิร์ฟเวอร์ของคุณอาจจะไม่ได้เชื่อมต่อกับเว็บที่กำลังทำงานอยู่  ข้อความผิดพลาด: %2$s"
 
@@ -613,7 +609,7 @@ msgstr "จากที่นี่คุณสามารถ:"
 msgid "Welcome to your Network Admin. This area of the Administration Screens is used for managing all aspects of your Multisite Network."
 msgstr "ยินดีต้อนรับสู่หน้าควบคุมเครือข่ายของคุณ  พื้นที่นี้ของหน้าจอควบคุมถูกใช้สำหรับการจัดการรูปแบบต่าง ๆ ของเครือข่ายหลายเว็บไซต์ของคุณ"
 
-#: wp-admin/network/upgrade.php:137
+#: wp-admin/network/upgrade.php:138
 msgid "WordPress has been updated! Before we send you on your way, we need to individually upgrade the sites in your network."
 msgstr "อัปเดตเวิร์ดเพรสแล้ว  ก่อนที่คุณจะทำสิ่งอื่น  เราต้องการการอัปเกรดทีละเว็บไซต์ในเครือข่ายของคุณ"
 
@@ -622,7 +618,7 @@ msgid "Only use this screen once you have updated to a new version of WordPress 
 msgstr "เฉพาะการใช้หน้าจอนี้  คุณจะอัปเดตไปยังรุ่นใหม่ล่าสุดของเวิร์ดเพรสผ่านทาง อัปเดต/การอัปเดตที่ใช้ได้ (ผ่านเมนูควบคุมเครือข่าย หรือ แถบเครื่องมือ)  การกดที่ปุ่มอัปเกรดเครือข่ายจะทำการอัปเดตทีละเว็บในเครือข่าย  ครั้งละห้าเว็บไซต์  และทำให้แน่ใจว่าการอัปเดตฐานข้อมูลใด ๆ นั้นได้อัปเดตด้วย"
 
 #: wp-admin/network/upgrade.php:15 wp-admin/network/upgrade.php:42
-#: wp-admin/network/upgrade.php:141 wp-admin/network/menu.php:34
+#: wp-admin/network/upgrade.php:142 wp-admin/network/menu.php:34
 msgid "Upgrade Network"
 msgstr "อัปเกรดเครือข่าย"
 
@@ -916,6 +912,10 @@ msgstr "คุณต้องใช้ค่า wildcard DNS ถ้าคุณ�
 msgid "You cannot install a network of sites with your server address."
 msgstr "คุณไม่สามารถติดตั้งเครือข่ายของเว็บด้วยที่อยู่เซิร์ฟเวอร์ของคุณ"
 
+#: wp-admin/includes/network.php:189
+msgid "Note:"
+msgstr "บันทึก:"
+
 #: wp-admin/includes/network.php:177
 msgid "Fill in the information below and you&#8217;ll be on your way to creating a network of WordPress sites. We will create configuration files in the next step."
 msgstr "กรอกข้อมูลด้านล่างแล้วคุณจะเข้าสู่การสร้างเครือข่ายของเว็บเวิร์ดเพรส  เราจะสร้างไฟล์ปรับแต่งในขั้นตอนต่อไป"
@@ -1072,7 +1072,7 @@ msgstr "การตั้งค่าเว็บใหม่นั้นเป
 msgid "The following words are reserved for use by WordPress functions and cannot be used as blog names: %s"
 msgstr "คำต่อไปนี้สงวนการใช้โดยคำสั่งของเวิร์ดเพรสและไม่สามารถใช้เป็นชื่อบล็อกได้: %s"
 
-#: wp-admin/network/upgrade.php:121
+#: wp-admin/network/upgrade.php:122
 msgid "If your browser doesn&#8217;t start loading the next page automatically, click this link:"
 msgstr "ถ้าเบราว์เซอร์ของคุณไม่โหลดหน้าต่อไปโดยอัตโนมัติ  โปรดกดที่ลิงก์นี้:"
 
@@ -1176,7 +1176,7 @@ msgstr "เรื่องแรกบนเว็บใหม่"
 msgid "The author of the first comment on a new site."
 msgstr "ผู้เขียนความเห็นแรกบนเว็บไซต์ใหม่"
 
-#: wp-admin/network/upgrade.php:72
+#: wp-admin/network/upgrade.php:73
 msgid "All done!"
 msgstr "ทุกอย่างเสร็จแล้ว"
 
@@ -1224,7 +1224,7 @@ msgstr "ที่อยู่อีเมลหายไป"
 msgid "Missing or invalid site address."
 msgstr "ที่อยู่เว็บหายไปหรือใช้งานไม่ได้"
 
-#: wp-admin/network/upgrade.php:121
+#: wp-admin/network/upgrade.php:122
 msgid "Next Sites"
 msgstr "เว็บต่อไป"
 

@@ -31,7 +31,7 @@ if ( ! defined( 'WPINC' ) ) {
 	<?php endif; ?>
 	<div class="sui-message-content">
 		<p class="wp-smush-no-images-content">
-			<?php esc_html_e( 'In addition to smushing your media uploads, you may want to smush images that are outside of your uploads directory. Get started by adding files and folders you wish to optimize.', 'wp-smushit' ); ?>
+			<?php esc_html_e( 'In addition to smushing your media uploads, you may want to smush non WordPress images that are outside of your uploads directory. Get started by adding files and folders you wish to optimize.', 'wp-smushit' ); ?>
 		</p>
 
 		<button type="button" class="sui-button sui-button-blue wp-smush-browse tc" data-a11y-dialog-show="wp-smush-list-dialog">

@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - LiteSpeed Cache - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2019-01-29 07:19:37+0000\n"
+"PO-Revision-Date: 2019-06-17 22:22:45+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,46 @@ msgstr ""
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: el_GR\n"
 "Project-Id-Version: Plugins - LiteSpeed Cache - Stable (latest release)\n"
+
+#: admin/tpl/inc/banner_promo.php:116
+msgid "PageSpeed Score"
+msgstr "Βαθμολογία ταχύτητας σελίδας"
+
+#: admin/tpl/inc/banner_promo.php:103 admin/tpl/inc/banner_promo.php:142
+msgid "Improved by"
+msgstr "Βελτιώθηκε από"
+
+#: admin/tpl/inc/banner_promo.php:93 admin/tpl/inc/banner_promo.php:132
+msgid "After"
+msgstr "Μετά"
+
+#: admin/tpl/inc/banner_promo.php:82 admin/tpl/inc/banner_promo.php:122
+msgid "Before"
+msgstr "Πριν"
+
+#: admin/tpl/inc/banner_promo.php:76
+msgid "Page Load Time"
+msgstr "Χρόνος φόρτωσης σελίδας"
+
+#: admin/tpl/inc/check_cache_disabled.php:9
+msgid "To use the caching functions you must have a LiteSpeed web server or be using QUIC.cloud CDN."
+msgstr "Για να χρησιμοποιήσετε τις λειτουργίες προσωρινής αποθήκευσης, πρέπει να έχετε ένα διακομιστή Web LiteSpeed ή να χρησιμοποιείτε το QUIC. cloud CDN."
+
+#: admin/tpl/setting/settings_media.php:224
+msgid "Preserve EXIF/XMP data"
+msgstr "Διατήρηση δεδομένων για EXIF/XMP"
+
+#: admin/tpl/setting/settings_inc.cache_mobile.php:15
+msgid "Only enable for AMP or mobile-specific design/content, not for responsive sites."
+msgstr "Ενεργοποιήσετε μόνο για AMP ή κινητή συγκεκριμένη σχεδίαση/περιεχόμενο, όχι για responsive ιστοσελίδες."
+
+#: admin/tpl/setting/settings_inc.cache_mobile.php:14
+msgid "Cache mobile views separately."
+msgstr "Προσωρινή αποθήκευση προβολών φορητών συσκευών ξεχωριστά."
+
+#: admin/tpl/debug_log.php:20
+msgid "Try GitHub Version"
+msgstr "Δοκιμάστε την έκδοση GitHub"
 
 #: admin/tpl/setting/settings_cdn.php:112
 msgid "If you turn any of the above settings OFF, please remove the related file types from the %s box."
@@ -43,7 +83,7 @@ msgstr "Ίσως αργότερα"
 msgid "Turn On Auto Upgrade"
 msgstr "Ενεργοποίηση αυτόματης αναβάθμισης"
 
-#: admin/tpl/inc/banner_promo.new_version.php:68
+#: admin/tpl/debug_log.php:26 admin/tpl/inc/banner_promo.new_version.php:68
 msgid "Upgrade"
 msgstr "Αναβάθμιση"
 
@@ -71,18 +111,18 @@ msgstr "Σίγουρα θα ήθελα πολύ να γράψω κριτική!"
 msgid "Thank You for Using the LiteSpeed Cache Plugin!"
 msgstr "Ευχαριστούμε για τη χρήση του LiteSpeed cache plugin!"
 
-#: includes/litespeed-cache-activation.class.php:368
-#: inc/activation.class.php:368
+#: includes/litespeed-cache-activation.class.php:394
+#: inc/activation.class.php:394
 msgid "Upgraded successfully."
 msgstr "Αναβάθμιση με επιτυχία."
 
-#: includes/litespeed-cache-activation.class.php:359
-#: includes/litespeed-cache-activation.class.php:364
-#: inc/activation.class.php:359 inc/activation.class.php:364
+#: includes/litespeed-cache-activation.class.php:385
+#: includes/litespeed-cache-activation.class.php:390
+#: inc/activation.class.php:385 inc/activation.class.php:390
 msgid "Failed to upgrade."
 msgstr "Απέτυχε η αναβάθμιση."
 
-#: includes/litespeed-cache-config.class.php:768 inc/config.class.php:768
+#: includes/litespeed-cache-config.class.php:776 inc/config.class.php:776
 msgid "Changed setting successfully."
 msgstr "Η ρύθμιση άλλαξε με επιτυχία."
 
@@ -240,10 +280,6 @@ msgstr "Παρακαλώ ενεργοποιήστε το  Litespeed cache  στ�
 msgid "Please enable the LSCache Module at the server level, or ask your hosting provider."
 msgstr "Παρακαλώ ενεργοποιήστε την ενότητα LSCache σε επίπεδο διακομιστή, ή ρωτήστε τον πάροχο φιλοξενίας σας."
 
-#: admin/tpl/inc/check_cache_disabled.php:9
-msgid "Caching with a non-LiteSpeed server (i.e. Apache or nginx) is not currently supported."
-msgstr "Η προσωρινή αποθήκευση (caching) με έναν μη Litespeed διακομιστή (δηλ. Apache ή Nginx) δεν υποστηρίζεται αυτήν τη στιγμή."
-
 #: admin/admin-api.class.php:450
 msgid "Failed to post via WordPress"
 msgstr "Μη επιτυχής δημοσίευση μέσω WordPress"
@@ -260,31 +296,31 @@ msgstr "Inline Lazy Load φόρτωση εικόνων βιβλιοθήκης"
 msgid "High-performance page caching and site optimization from LiteSpeed"
 msgstr "Υψηλής απόδοσης σελίδα προσωρινής αποθήκευσης και βελτιστοποίησης site από Litespeed"
 
-#: admin/tpl/import_export.php:61 inc/media.class.php:241
+#: admin/tpl/import_export.php:61 inc/media.class.php:312
 msgid "Reset"
 msgstr "Επαναφορά"
 
-#: inc/media.class.php:222
+#: inc/media.class.php:293
 msgid "Click to Switch To Optimized File"
 msgstr "Κάντε κλικ για να μεταβείτε σε βελτιστοποιημένο αρχείο"
 
-#: inc/media.class.php:217
+#: inc/media.class.php:288
 msgid "Click to Restore Original File"
 msgstr "Κάντε κλικ για να επαναφέρετε το αρχικό αρχείο"
 
-#: inc/media.class.php:185
+#: inc/media.class.php:256
 msgid "Click to Enable WebP"
 msgstr "Κάντε κλικ για να ενεργοποιήσετε WebP"
 
-#: inc/media.class.php:180
+#: inc/media.class.php:251
 msgid "Click to Disable WebP"
 msgstr "Κάντε κλικ για να απενεργοποιήσετε WebP"
 
-#: inc/img_optm.class.php:2045
+#: inc/img_optm.class.php:2063
 msgid "Reset the optimized data successfully."
 msgstr "Επαναφέρετε τα βελτιστοποιημένα δεδομένα με επιτυχία."
 
-#: inc/img_optm.class.php:1028
+#: inc/img_optm.class.php:1030
 msgid "LSCWP %1$s has simplified the image pulling process. Please %2$s, or resend the pull notification this one time only. After that, the process will be automated."
 msgstr "LSCWP%1$s έχει απλοποιήσει τη διαδικασία έλξης εικόνας. Παρακαλώ%2$s, ή να στείλετε ξανά την ειδοποίηση έλξης αυτή μόνο μία φορά. Μετά από αυτό, η διαδικασία θα είναι αυτοματοποιημένη."
 
@@ -421,7 +457,7 @@ msgstr "Καλά νέα από LiteSpeed  διακομιστή"
 msgid "Quic Cloud User Panel"
 msgstr "Quic Cloud User Panel"
 
-#: inc/img_optm.class.php:1925
+#: inc/img_optm.class.php:1947
 msgid "Switched images successfully."
 msgstr "Εναλλαγή εικόνων  έγινε με επιτυχία."
 
@@ -561,15 +597,15 @@ msgstr "Απενεργοποιήστε το WordPress hearbeat για να απ�
 msgid "Disable WordPress heartbeat to prevent AJAX calls from breaking debug logging."
 msgstr "Απενεργοποιήστε το WordPress hearbeat για να αποτρέψετε τις κλήσεις AJAX από την διακοπή   καταγραφής εντοπισμού σφαλμάτων."
 
-#: includes/litespeed-cache-utility.class.php:235 inc/utility.class.php:235
+#: includes/litespeed-cache-utility.class.php:239 inc/utility.class.php:239
 msgid "right now"
 msgstr "μόλις"
 
-#: includes/litespeed-cache-utility.class.php:235 inc/utility.class.php:235
+#: includes/litespeed-cache-utility.class.php:239 inc/utility.class.php:239
 msgid "just now"
 msgstr "μόλις τώρα"
 
-#: inc/img_optm.class.php:1730
+#: inc/img_optm.class.php:1754
 msgid "Removed %1$s images and saved %2$s successfully."
 msgstr "Καταργήθηκε %1$s εικόνες και αποθηκεύτηκε %2$s. με επιτυχία."
 
@@ -708,7 +744,7 @@ msgstr "Opcode Cache"
 msgid "CSS/JS Cache"
 msgstr "CSS / JS Cache"
 
-#: inc/img_optm.class.php:1340
+#: inc/img_optm.class.php:1349
 msgid "Destroy unfinished data successfully."
 msgstr "Καταστροφή μη ολοκληρωμένων δεδομένων."
 
@@ -732,7 +768,7 @@ msgstr "Καθαρισμός στα μη ολοκληρωμένα δεδομέν
 msgid "Images with wrong meta"
 msgstr "Εικόνες με λάθος meta"
 
-#: inc/img_optm.class.php:223
+#: inc/img_optm.class.php:226
 msgid "Requested successfully."
 msgstr "Ζήτηθηκε με επιτυχία."
 
@@ -756,11 +792,11 @@ msgstr "Γίνετε μέλος της Κοινότητας του %s."
 msgid "Want to connect with other LiteSpeed users?"
 msgstr "Θέλετε να συνδεθείτε με άλλους χρήστες LiteSpeed?"
 
-#: inc/img_optm.class.php:300
+#: inc/img_optm.class.php:303
 msgid "Pushed %1$s to LiteSpeed optimization server, accepted %2$s."
 msgstr "Προωθήθηκε %1$s  LiteSpeed βελτιστοποίηση διακομιστή, αποδεκτή %2$s."
 
-#: inc/img_optm.class.php:243
+#: inc/img_optm.class.php:246
 msgid "Optimized successfully."
 msgstr "Βελτιστοποιηθεί με επιτυχία."
 
@@ -1374,8 +1410,8 @@ msgstr "Ενεργοποιήστε αυτήν την επιλογή εάν χρ�
 msgid "Improve HTTP/HTTPS Compatibility"
 msgstr "Βελτιώστε τη συμβατότητα HTTP / HTTPS"
 
-#: inc/img_optm.class.php:167 inc/img_optm.class.php:1451
-#: inc/img_optm.class.php:1516
+#: inc/img_optm.class.php:170 inc/img_optm.class.php:1478
+#: inc/img_optm.class.php:1543
 msgid "No image found."
 msgstr "Δεν βρέθηκε εικόνα."
 
@@ -1395,7 +1431,7 @@ msgstr "Σάρωση για τυχόν νέα μη βελτιστοποιημέ�
 msgid "Send New Thumbnail Requests"
 msgstr "Αποστολή νέων αιτημάτων μικρογραφίας"
 
-#: inc/img_optm.class.php:195
+#: inc/img_optm.class.php:198
 msgid "Number of images in one image group (%s) exceeds the credit (%s)"
 msgstr "Ο αριθμός των εικόνων ομάδας (%s) υπερβαίνει την πίστωση(credits) (%s)"
 
@@ -1407,11 +1443,7 @@ msgstr "Αυτό θα αυξήσει το μέγεθος των βελτιστο
 msgid "Preserve EXIF data (copyright, GPS, comments, keywords, etc) when optimizing."
 msgstr "Διατηρεί τα δεδομένα EXIF (copyright, GPS, περιγραφές, ετικέτες, κλπ) κατά τη βελτιστοποίηση."
 
-#: admin/tpl/setting/settings_media.php:224
-msgid "Preserve EXIF data"
-msgstr "Διατήρηση των δεδομένα EXIF"
-
-#: admin/tpl/debug_log.php:30
+#: admin/tpl/debug_log.php:42
 msgid "Clear Log"
 msgstr "Καθαρισμός καταγραφής"
 
@@ -1419,19 +1451,19 @@ msgstr "Καθαρισμός καταγραφής"
 msgid "Failed to communicate with LiteSpeed image server"
 msgstr "Αποτυχία  επικοινωνίας με το διακομιστή LiteSpeed για εικόνες"
 
-#: thirdparty/lscwp-3rd-woocommerce.cls.php:867
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:869
 msgid "To test the cart, visit the <a %s>FAQ</a>."
 msgstr "Για να ελέγξετε το καλάθι, επισκεφτείτε το <a %s>FAQ</a>."
 
-#: includes/litespeed-cache-utility.class.php:238 inc/utility.class.php:238
+#: includes/litespeed-cache-utility.class.php:242 inc/utility.class.php:242
 msgid " %s ago"
 msgstr " %s πριν"
 
-#: inc/media.class.php:206
+#: inc/media.class.php:277
 msgid "Original saved %s"
 msgstr "Αποθηκεύτηκε σε %s πρωτότυπο"
 
-#: inc/media.class.php:173
+#: inc/media.class.php:244
 msgid "WebP saved %s"
 msgstr "WebP Αποθηκεύτηκε %s"
 
@@ -1528,15 +1560,15 @@ msgstr "Αριθμός της αναφοράς"
 msgid "LiteSpeed Report Number"
 msgstr "Αριθμός της αναφοράς Litespeed"
 
-#: thirdparty/lscwp-3rd-woocommerce.cls.php:858
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:860
 msgid "Privately cache cart when not empty."
 msgstr "Ιδιωτικό cache cart  όταν δεν είναι άδειο."
 
-#: thirdparty/lscwp-3rd-woocommerce.cls.php:854
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:856
 msgid "Privately Cache Cart"
 msgstr "Privately Cache Cart"
 
-#: inc/media.class.php:147
+#: inc/media.class.php:217
 msgid "LiteSpeed Optimization"
 msgstr "LiteSpeed βελτιστοποίηση"
 
@@ -1616,19 +1648,19 @@ msgstr "Εικόνες που δεν έχουν ακόμη ζητηθεί"
 msgid "Images total"
 msgstr "Εικόνες σύνολο"
 
-#: inc/img_optm.class.php:1985
+#: inc/img_optm.class.php:2005
 msgid "Switched to optimized file successfully."
 msgstr "Η μετάβαση στο  βελτιστοποιημένο αρχείο έγινε με επιτυχία."
 
-#: inc/img_optm.class.php:1978
+#: inc/img_optm.class.php:1998
 msgid "Restored original file successfully."
 msgstr "Επιτυχής επαναφορά  του αρχικού αρχείου."
 
-#: inc/img_optm.class.php:1962
+#: inc/img_optm.class.php:1982
 msgid "Enabled WebP file successfully."
 msgstr "Ενεργοποίηση του WebP με επιτυχία."
 
-#: inc/img_optm.class.php:1956
+#: inc/img_optm.class.php:1976
 msgid "Disabled WebP file successfully."
 msgstr "Απενεργοποιήθηκε το WebP με επιτυχία."
 
@@ -1660,11 +1692,11 @@ msgstr "Προσαρμοσμένη εργασία Cron για LiteSpeed Cache Cr
 msgid "LiteSpeed Cache Custom Cron Common"
 msgstr "Προσαρμοσμένη εργασία Cron για LiteSpeed Cache"
 
-#: inc/img_optm.class.php:1554
+#: inc/img_optm.class.php:1581
 msgid "Pushed %1$s groups with %2$s images to LiteSpeed optimization server, accepted %3$s groups with %4$s images."
 msgstr "Εγινε ώθηση %1$s των ομάδων με %2$s εικόνες sto  LiteSpeed  διακομιστή βελτιστοποίησης, αποδεκτές %3$s των ομάδων με %4$s εικόνες."
 
-#: inc/img_optm.class.php:687
+#: inc/img_optm.class.php:696
 msgid "Failed to parse data from LiteSpeed IAPI server: %s"
 msgstr "Απέτυχε η ανάλυση δεδομένων από LiteSpeed διακομιστή: %s"
 
@@ -1762,7 +1794,7 @@ msgstr "Βελτιστοποίηση εικόνας LiteSpeed Cache"
 msgid "Image Optimization"
 msgstr "Βελτιστοποίηση εικόνας"
 
-#: inc/img_optm.class.php:114
+#: inc/img_optm.class.php:117
 msgid "Communicated with LiteSpeed Image Optimization Server successfully."
 msgstr "Επικοινωνία με LiteSpeed για βελτιστοποίηση εικόνας έγινε με επιτυχία."
 
@@ -2510,11 +2542,11 @@ msgstr "ESI σάς επιτρέπει να ορίσετε τμήματα της 
 msgid "With ESI (Edge Side Includes), pages may be served from cache for logged-in users."
 msgstr "Με το ESI (Edge Side Includes), οι σελίδες μπορούν να εμφανιστούν από τη μνήμη cache για τους συνδεδεμένους χρήστες."
 
-#: admin/tpl/esi_widget_edit.php:48
+#: admin/tpl/esi_widget_edit.php:44
 msgid "Private"
 msgstr "Ιδιωτική"
 
-#: admin/tpl/esi_widget_edit.php:40
+#: admin/tpl/esi_widget_edit.php:43
 msgid "Public"
 msgstr "Δημόσια"
 
@@ -2604,7 +2636,7 @@ msgstr "Καθαρισμός"
 msgid "Cache"
 msgstr "Cache"
 
-#: thirdparty/lscwp-3rd-woocommerce.cls.php:799
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:801
 msgid "WooCommerce"
 msgstr "WooCommerce(ηλεκτρονικό κατάστημα)"
 
@@ -2679,7 +2711,7 @@ msgstr "Καθορίστε το μέγιστο μέγεθος του αρχεί�
 msgid "MB"
 msgstr "MB"
 
-#: admin/tpl/debug_log.php:9
+#: admin/tpl/debug_log.php:8
 msgid "LiteSpeed Cache Debug Log Viewer"
 msgstr "LiteSpeed ​​Cache Debug Log Viewer"
 
@@ -2715,19 +2747,19 @@ msgstr "Έλεγχος  προηγμένης Cache"
 msgid "ESI Settings"
 msgstr "Ρυθμίσεις ESI"
 
-#: admin/tpl/esi_widget_edit.php:73
+#: admin/tpl/esi_widget_edit.php:71
 msgid "A TTL of 0 indicates do not cache."
 msgstr "Μια τιμή TTL ίση με 0 δηλώνει να μην γίνει  cache."
 
-#: admin/tpl/esi_widget_edit.php:72
+#: admin/tpl/esi_widget_edit.php:70
 msgid "Recommended value: 28800 seconds (8 hours)."
 msgstr "Συνιστώμενη τιμή: 28800 δευτερόλεπτα (8 ώρες)."
 
-#: admin/tpl/esi_widget_edit.php:66
+#: admin/tpl/esi_widget_edit.php:60
 msgid "Widget Cache TTL:"
 msgstr "Μνήμη Cache για πρόσθετο TTL:"
 
-#: admin/tpl/esi_widget_edit.php:30 admin/tpl/setting/settings_esi.php:43
+#: admin/tpl/esi_widget_edit.php:34 admin/tpl/setting/settings_esi.php:43
 msgid "Enable ESI"
 msgstr "Ενεργοποίηση ESI"
 
@@ -2838,11 +2870,11 @@ msgstr "Σταματήθηκε λόγω υπερβολικά καθορισμέ�
 msgid "Oh look, there is already another LiteSpeed crawler running!"
 msgstr "Ελέγξτε, υπάρχει ήδη σε λειτουργία  ένα άλλο crawler LiteSpeed!"
 
-#: includes/litespeed-cache.class.php:347 inc/litespeed-cache.class.php:347
+#: includes/litespeed-cache.class.php:337 inc/litespeed-cache.class.php:337
 msgid "Notified LiteSpeed Web Server to purge the list."
 msgstr "Ενημερώθηκε ο  διακομιστής Web LiteSpeed ​​για να καθαρίσει τη λίστα."
 
-#: includes/litespeed-cache.class.php:326 inc/litespeed-cache.class.php:326
+#: includes/litespeed-cache.class.php:316 inc/litespeed-cache.class.php:316
 msgid "Crawler blacklist is saved."
 msgstr "Η μαύρη λίστα (black list) Crawler αποθηκεύτηκε."
 
@@ -3150,7 +3182,7 @@ msgstr "Ενημερώθηκε ο  διακομιστής Web LiteSpeed ​​γ
 msgid "Purged the tags!"
 msgstr "Μηδενισμός στις ετικέτες!"
 
-#: thirdparty/lscwp-3rd-woocommerce.cls.php:812
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:814
 msgid "For example, if the homepage for the site is located at %1$s, the shop page may be located at %2$s."
 msgstr "Για παράδειγμα, εάν η αρχική σελίδα για τον ιστότοπο βρίσκεται στο%1$s, η σελίδα του καταστήματος μπορεί να βρίσκεται στο%2$s."
 
@@ -3308,7 +3340,7 @@ msgstr "Εάν πρέπει να καθαρίσετε (Purge) μόνο τον ι
 msgid "A LiteSpeed server (OLS, LSWS, WebADC) and its LSCache module must be installed and enabled."
 msgstr "Πρέπει να εγκατασταθεί και να ενεργοποιηθεί ένας διακομιστής LiteSpeed ​​(OLS, LSWS, WebADC) και η ενότητα LSCache του."
 
-#: includes/litespeed-cache.class.php:337 inc/litespeed-cache.class.php:337
+#: includes/litespeed-cache.class.php:327 inc/litespeed-cache.class.php:327
 msgid "Notified LiteSpeed Web Server to purge everything."
 msgstr "Εγινε ενημέρωση Web Server LiteSpeed ​​για να καθαρίσει τα πάντα."
 
@@ -3450,7 +3482,7 @@ msgid "LiteSpeed Cache is a page cache built into LiteSpeed Web Server."
 msgstr "LiteSpeed ​​Cache είναι μια προσωρινή μνήμη σελίδων που είναι ενσωματωμένη στο LiteSpeed ​​Web Server."
 
 #: admin/tpl/setting/settings_purge.php:53
-#: thirdparty/lscwp-3rd-woocommerce.cls.php:864
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:866
 msgid "Note"
 msgstr "Σημείωση"
 
@@ -3462,7 +3494,7 @@ msgstr "Ο διακομιστής θα καθορίσει εάν ο χρήστη
 msgid "List in WordPress database is: %s"
 msgstr "Η λίστα στη βάση δεδομένων του WordPress είναι:%s"
 
-#: thirdparty/lscwp-3rd-woocommerce.cls.php:866
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:868
 msgid "After verifying that the cache works in general, please test the cart."
 msgstr "Αφού επαληθεύσετε ότι η μνήμη cache λειτουργεί γενικά, δοκιμάστε το καλάθι."
 
@@ -3478,43 +3510,43 @@ msgstr "Καθαρισμός όλων(purge) στην αναβάθμιση"
 msgid "File editing is disabled in configuration."
 msgstr "Η επεξεργασία αρχείων είναι απενεργοποιημένη στη διαμόρφωση."
 
-#: thirdparty/lscwp-3rd-woocommerce.cls.php:847
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:849
 msgid "Use Front Page TTL for the Shop Page"
 msgstr "Χρησιμοποιήστε τo TTL της  πρώτης σελίδας  για τη σελίδα του καταστήματος"
 
-#: thirdparty/lscwp-3rd-woocommerce.cls.php:840
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:842
 msgid "Product Update Interval"
 msgstr "Διάρκεια ενημέρωσης προϊόντος"
 
-#: thirdparty/lscwp-3rd-woocommerce.cls.php:811
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:813
 msgid "Checking this option will force the shop page to use the front page TTL setting."
 msgstr "Ο έλεγχος αυτής της επιλογής θα αναγκάσει τη σελίδα του καταστήματος να χρησιμοποιήσει τη ρύθμιση TTL της πρώτης σελίδας."
 
-#: thirdparty/lscwp-3rd-woocommerce.cls.php:810
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:812
 msgid "Determines how changes in product quantity and product stock status affect product pages and their associated category pages."
 msgstr "Καθορίζει τον τρόπο με τον οποίο οι αλλαγές στην ποσότητα του προϊόντος και του αποθέματος προϊόντος επηρεάζουν τις σελίδες προϊόντων και τις σχετικές σελίδες κατηγοριών τους."
 
-#: thirdparty/lscwp-3rd-woocommerce.cls.php:807
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:809
 msgid "Always purge both product and categories on changes to the quantity or stock status."
 msgstr "Πάντα να κάνετε Purge  τόσο το προϊόν όσο και τις κατηγορίες για αλλαγές στην κατάσταση της ποσότητας ή του αποθέματος."
 
-#: thirdparty/lscwp-3rd-woocommerce.cls.php:806
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:808
 msgid "Do not purge categories on changes to the quantity or stock status."
 msgstr "Μην καθαρίζετε(purge) κατηγορίες για αλλαγές στην κατάσταση της ποσότητας ή του αποθέματος."
 
-#: thirdparty/lscwp-3rd-woocommerce.cls.php:805
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:807
 msgid "Purge product only when the stock status changes."
 msgstr "Καθαρίστε(purge) το προϊόν μόνο όταν αλλάζει η κατάσταση του αποθέματος."
 
-#: thirdparty/lscwp-3rd-woocommerce.cls.php:804
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:806
 msgid "Purge product and categories only when the stock status changes."
 msgstr "Καθαρίστε (purge) το προϊόν και τις κατηγορίες μόνο όταν αλλάζει η κατάσταση του αποθέματος."
 
-#: thirdparty/lscwp-3rd-woocommerce.cls.php:803
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:805
 msgid "Purge categories only when stock status changes."
 msgstr "Καθαρίστε(purge) τις κατηγορίες μόνο όταν αλλάζει η κατάσταση αποθεμάτων."
 
-#: thirdparty/lscwp-3rd-woocommerce.cls.php:802
+#: thirdparty/lscwp-3rd-woocommerce.cls.php:804
 msgid "Purge product on changes to the quantity or stock status."
 msgstr "Καθαρίστε (purge) το προϊόν για αλλαγές στην κατάσταση της ποσότητας ή του αποθέματος."
 
@@ -3884,14 +3916,6 @@ msgstr "Τα κενά πρέπει να έχουν backsplash  πριν από �
 msgid "SYNTAX: Each entry should be separated with a bar, %s."
 msgstr "ΣΥΝΤΑΞΗ: Κάθε εγγραφή θα πρέπει να χωρίζεται με μια μπάρα, %s."
 
-#: admin/tpl/setting/settings_inc.cache_mobile.php:15
-msgid "A site built with responsive design does not need to check this."
-msgstr "Ένας ιστότοπος που έχει σχεδιαστεί responsive δεν χρειάζεται να το επιλέξει."
-
-#: admin/tpl/setting/settings_inc.cache_mobile.php:14
-msgid "When enabled, mobile views will be cached separately."
-msgstr "Όταν είναι ενεργοποιημένη, οι προβολές για κινητά θα αποθηκευτούν χωριστά."
-
 #: admin/litespeed-cache-admin-error.class.php:200
 msgid "Failed to put contents into %s"
 msgstr "Αποτυχία εισαγωγής περιεχομένου σε%s"
@@ -3979,7 +4003,7 @@ msgstr "Σημειώσεις"
 msgid "Use Network Admin Setting"
 msgstr "Χρήση ρύθμισης διαχειριστή δικτύου"
 
-#: admin/tpl/crawler.php:84 admin/tpl/esi_widget_edit.php:56
+#: admin/tpl/crawler.php:84 admin/tpl/esi_widget_edit.php:45
 #: admin/tpl/setting/settings_general.php:30
 msgid "Disable"
 msgstr "Απενεργοποιήστε την"
@@ -4099,7 +4123,7 @@ msgstr "Κανόνες αυτόματης εκκαθάρισης για δημο
 msgid "Default Public Cache TTL"
 msgstr "Προεπιλεγμένη δημόσια cache TTL"
 
-#: admin/tpl/esi_widget_edit.php:69
+#: admin/tpl/esi_widget_edit.php:67
 #: admin/tpl/setting/settings_inc.cache_browser.php:24
 #: admin/tpl/setting/settings_general.php:65
 #: admin/tpl/setting/settings_general.php:77

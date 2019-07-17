@@ -12,7 +12,8 @@
 }
 
 /* Meta boxes on the left */
-.wpmud div[class^="box-dashboard-performance"] .sui-box-title {
+.wpmud div[class^="box-dashboard-performance"] .sui-box-title,
+.wpmud div[class^="box-dashboard-welcome-upsell"] .sui-box-title {
     @include icon(before, 'hummingbird');
 }
 .wpmud div[class^="box-dashboard-caching-page"] .sui-box-title {
@@ -250,6 +251,23 @@
 
     & > span {
         @include background-2x( "#{$image--path}/plugins-crawl-icon", 'png', 50px, 50px, center center, no-repeat );
+    }
+}
+
+/* Upsell meta box */
+.wpmud .box-dashboard-welcome-upsell {
+    ul > li {
+        font-weight: 500;
+        color: #333333;
+    }
+
+    .sui-icon-check {
+        vertical-align: sub;
+
+        &:before {
+            color: #8D00B1;
+            margin-right: 10px;
+        }
     }
 }
 

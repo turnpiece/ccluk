@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - BuddyPress - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2019-03-02 20:46:49+0000\n"
+"PO-Revision-Date: 2019-03-17 21:42:21+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -101,6 +101,51 @@ msgstr "Bekleyen arkadaş istekleri (Alınan)"
 #: bp-friends/bp-friends-functions.php:946
 msgid "Initiated By Me"
 msgstr "Benim başlattıklarım"
+
+#: bp-settings/bp-settings-functions.php:145
+msgid "Receive email when a member mentions you in an update?"
+msgstr "Bir güncelleme sizden bahsettiğinde e-posta alınsın mı?"
+
+#: bp-settings/bp-settings-functions.php:149
+msgid "Receive email when a member replies to an update or comment you've posted?"
+msgstr "Bir üye gönderdiğiniz bir güncellemeyi veya yorumu yanıtladığında e-posta alınsın mı?"
+
+#: bp-settings/bp-settings-functions.php:156
+msgid "Receive email when a member sends you a new message?"
+msgstr "Bir üye size yeni bir mesaj gönderidğinde e-posta alınsın mı?"
+
+#: bp-settings/bp-settings-functions.php:163
+msgid "Receive email when a member invites you to join a group?"
+msgstr "Bir üye sizi bir gruba katılmaya davet ettiğinde e-posta alınsın mı?"
+
+#: bp-settings/bp-settings-functions.php:170
+msgid "Receive email when group information is updated?"
+msgstr "Grup bilgisi güncellendiğinde e-posta alınsın mı?"
+
+#: bp-settings/bp-settings-functions.php:174
+msgid "Receive email when you are promoted to a group administrator or moderator?"
+msgstr "Bir grup yöneticisine veya görevlisine terfi ettirildiğinizde e-posta alınsın mı?"
+
+#: bp-settings/bp-settings-functions.php:178
+msgid "Receive email when a member requests to join a private group for which you are an admin?"
+msgstr "Bir üye, yönetici olduğunuz özel bir gruba katılmak istediğinde e-posta alınsın mı?"
+
+#: bp-settings/bp-settings-functions.php:182
+msgid "Receive email when your request to join a group has been approved or denied?"
+msgstr "Bir gruba katılma isteğiniz onaylandığında veya reddedildiğinde e-posta alınsın mı?"
+
+#: bp-settings/bp-settings-functions.php:201
+msgid "Receive group invitations from my friends only?"
+msgstr "Yalnızca arkadaşlardan grup daveti alınsın mı?"
+
+#: bp-templates/bp-legacy/buddypress-functions.php:1555
+msgid "Error accepting invitation"
+msgstr "Davetiye kabul edilirken hata oluştu"
+
+#. Translators: %s is used to output the link to the Gravatar site
+#: bp-templates/bp-nouveau/buddypress/members/single/profile/change-avatar.php:21
+msgid "Your profile photo will be used on your profile and throughout the site. If there is a %s associated with your account email we will use that, or you can upload an image from your computer."
+msgstr "Profil fotoğrafınız, profilinizde ve site genelinde kullanılacak. Hesap e-postanızla ilişkili bir %s varsa bunu kullanırız veya bilgisayarınızdan bir görsel yükleyebilirsiniz."
 
 #: bp-xprofile/bp-xprofile-filters.php:640
 msgid "BuddyPress Extended Profile Data"
@@ -308,6 +353,11 @@ msgstr "Gizlilik politikasını okuduğunuzu ve kabul ettiğinizi belirtmelisini
 #: bp-messages/bp-messages-functions.php:709
 msgid "Thread URL"
 msgstr "Konu bağlantısı"
+
+#. translators: link to Privacy Policy
+#: bp-templates/bp-nouveau/includes/template-tags.php:2482
+msgid "I have read and agree to this site's %s."
+msgstr "Bu sitenin %s bölümünü okudum ve kabul ettim."
 
 #: bp-core/classes/class-bp-admin.php:656
 msgid "BuddyPress 3.0 introduced a new set of default templates, which we call \"Nouveau\". In 4.0, we've fixed bugs and smoothed the edges in these templates, including more accessible markup and improved appearance on mobile devices."

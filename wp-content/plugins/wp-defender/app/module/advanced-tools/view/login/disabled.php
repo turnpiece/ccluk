@@ -52,10 +52,7 @@
                     <div class="line"></div>
                     <p><strong><?php _e( "2. Scan the barcode", wp_defender()->domain ) ?></strong></p>
                     <p><?php _e( "Open the Google Authenticator app you just downloaded, tap the “+” symbol and then use your phone’s camera to scan the barcode below.", wp_defender()->domain ) ?></p>
-                    <!--                    <img class="barcode"-->
-                    <!--                         src="-->
-					<?php //echo \WP_Defender\Module\Advanced_Tools\Component\Auth_API::generateQRCode( urlencode( get_bloginfo( 'name' ) ) . ':' . $email, $secretKey, 149, 149, urlencode( get_bloginfo( 'name' ) ) ) ?><!--"/>-->
-					<?php echo \WP_Defender\Module\Advanced_Tools\Component\Auth_API::generateQRCode( urlencode( get_bloginfo( 'name' ) ) , $email, $secretKey, 149, 149, urlencode( get_bloginfo( 'name' ) ) ) ?>
+					<?php echo \WP_Defender\Module\Advanced_Tools\Component\Auth_API::generateQRCode( urlencode( get_bloginfo( 'name' ) ), $email, $secretKey, 149, 149, urlencode( get_bloginfo( 'name' ) ) ) ?>
                     <div class="line"></div>
                     <p><strong><?php _e( "3. Enter passcode", wp_defender()->domain ) ?></strong></p>
                     <p>
@@ -75,6 +72,8 @@
     </tr>
     </tbody>
 </table>
+<script type="text/javascript"
+        src="<?php echo wp_defender()->getPluginUrl() . 'app/module/advanced-tools/js/qrcode.min.js' ?>"></script>
 <script type="text/javascript">
     jQuery(function ($) {
         $('#def2qr').hide();
@@ -144,8 +143,9 @@
 </script>
 <?php if ( $settings->forceAuth ): ?>
     <script type="text/javascript">
-        if (!window.location.hash) {
-            window.location.hash = '#show2AuthActivator';
-        }
+        jQuery(function ($) {
+            $('html, body').animate({scrollTop: $("#show2AuthActivator").offset().top}, 1000);
+        });
     </script>
 <?php endif; ?>
+
