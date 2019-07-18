@@ -30,6 +30,7 @@ class Shipper_Model_System_Php extends Shipper_Model {
 		// Call this first, to fill out the static vars.
 		$this->has_conflicting_dependencies();
 
+		Shipper_Helper_System::optimize(); // Give it our best shot at optimization first.
 		$this->populate();
 	}
 
@@ -134,15 +135,12 @@ class Shipper_Model_System_Php extends Shipper_Model {
 	 * @return bool
 	 */
 	public function get_aws_support_level() {
-		if ( $this->get( self::HAS_SUHOSIN ) ) {
-			// Yeah, we might be erroring out here.
+		if ( version_compare( phpversion(), '5.5.0', '<' ) ) {
+			// Too old PHP.
 			return false;
 		}
-		if ( $this->has_conflicting_dependencies() ) {
-			// Yeah, so this won't work either.
-			return false;
-		}
-		return $this->has_proper_aws_sdk_version() && $this->has_aws_s3_client();
+		return $this->has_proper_aws_sdk_version() &&
+			$this->has_aws_s3_client();
 	}
 
 	/**
@@ -152,14 +150,12 @@ class Shipper_Model_System_Php extends Shipper_Model {
 	 * Uses static variables and is being called right from the constructor.
 	 * This is because the dependencies can get loaded already (by us) in other checks.
 	 *
+	 * @deprecated since v1.0.3 - not needed anymore since we're not using Phar
+	 *
 	 * @return bool
 	 */
 	public function has_conflicting_dependencies() {
-		static $has_conflicts;
-		if ( ! isset( $has_conflicts ) ) {
-			$has_conflicts = is_callable( 'guzzlehttp\\uri_template' );
-		}
-		return $has_conflicts;
+		return false;
 	}
 
 	/**
@@ -190,7 +186,7 @@ class Shipper_Model_System_Php extends Shipper_Model {
 	public function has_aws_s3_client() {
 		if ( ! class_exists( 'Aws\S3\S3Client' ) ) {
 			// Require external SDK just in time for this.
-			require_once( dirname( SHIPPER_PLUGIN_FILE ) . '/lib/aws/sdk-v3.phar' );
+			require_once( dirname( SHIPPER_PLUGIN_FILE ) . '/lib/external/autoload.php' );
 		}
 
 		$client = false;

@@ -16,8 +16,8 @@
 
                 <div class="sui-box-settings-col-2">
                     <div class="sui-form-field">
+                        <input type="hidden" name="scan_core" value="0"/>
                         <label class="sui-toggle">
-                            <input type="hidden" name="scan_core" value="0"/>
                             <input role="presentation" type="checkbox" name="scan_core" class="toggle-checkbox"
                                    id="core-scan" value="1"
 								<?php checked( true, $setting->scan_core ) ?>/>

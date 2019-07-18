@@ -22,6 +22,10 @@ class Prevent_Php extends Rule {
 		$this->renderPartial( 'rules/prevent-php-executed' );
 	}
 
+	function getSubDescription() {
+		return __( "PHP execution is currently allowed in all directories.", wp_defender()->domain );
+	}
+
 	/**
 	 * @return bool|false|mixed|null
 	 */

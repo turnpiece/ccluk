@@ -43,8 +43,8 @@
 
                 <div class="sui-box-settings-col-2">
                     <div class="sui-form-field">
+                        <input type="hidden" name="usage_tracking" value="0"/>
                         <label class="sui-toggle">
-                            <input type="hidden" name="usage_tracking" value="0"/>
                             <input role="presentation" type="checkbox" name="usage_tracking" class="toggle-checkbox"
                                    id="usage_tracking" <?php checked( 1, $settings->usage_tracking ) ?> value="1"
                             />

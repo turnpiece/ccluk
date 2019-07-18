@@ -28,9 +28,8 @@ class WP_Smush_JS_Composer extends WP_Smush_Integration {
 	 * @since 3.2.1
 	 */
 	public function __construct() {
-		$this->module   = 'js_builder';
-		$this->class    = 'free';
-		$this->priority = 10;
+		$this->module = 'js_builder';
+		$this->class  = 'free';
 
 		$this->check_for_js_builder();
 

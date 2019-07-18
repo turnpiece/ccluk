@@ -18,15 +18,15 @@
 
                 <div class="sui-box-settings-col-2">
                     <div class="sui-form-field">
+                        <input type="hidden" name="report" value="0"/>
                         <label class="sui-toggle">
-                            <input type="hidden" name="report" value="0"/>
                             <input role="presentation" type="checkbox" name="report"
                                    class="toggle-checkbox"
                                    id="report" value="1"
 								<?php checked( true, $settings->report ) ?>/>
                             <span class="sui-toggle-slider"></span>
                         </label>
-                        <label for="login_lockout_notification" class="sui-toggle-label">
+                        <label for="report" class="sui-toggle-label">
 							<?php esc_html_e( "Send regular email report", wp_defender()->domain ) ?>
                         </label>
                         <div class="sui-border-frame sui-toggle-content">

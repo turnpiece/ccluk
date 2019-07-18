@@ -29,6 +29,10 @@ class Hide_Error extends Rule {
 		return $stat;
 	}
 
+	function getSubDescription() {
+		return __( "Error debugging is currently allowed.", wp_defender()->domain );
+	}
+
 	public function getTitle() {
 		return __( "Hide error reporting", wp_defender()->domain );
 	}

@@ -80,7 +80,7 @@
 		<li><?php esc_html_e( 'Combine non-critical styles, compress your stylesheets, and move them into the footer.', 'wphb' ); ?></li>
 	</ol>
 	<?php if ( $url = WP_Hummingbird_Utils::get_admin_menu_url( 'minification' ) ) : ?>
-		<a href="<?php echo esc_url( $url ); ?>" class="wphb-button-link">
+		<a href="<?php echo esc_url( $url . '&enable-advanced-settings=true' ); ?>" class="wphb-button-link">
 			<?php esc_html_e( 'Configure Asset Optimization', 'wphb' ); ?>
 		</a>
 	<?php endif; ?>

@@ -5,15 +5,16 @@
                 <h1 class="sui-header-title">
 					<?php _e( "Settings", wp_defender()->domain ) ?>
                 </h1>
-	            <?php if ( wp_defender()->hideDocLinks === false ): ?>
+				<?php if ( wp_defender()->hideDocLinks === false ): ?>
                     <div class="sui-actions-right">
                         <div class="sui-actions-right">
-                            <a href="https://premium.wpmudev.org/docs/wpmu-dev-plugins/defender/" target="_blank" class="sui-button sui-button-ghost">
+                            <a href="https://premium.wpmudev.org/docs/wpmu-dev-plugins/defender/" target="_blank"
+                               class="sui-button sui-button-ghost">
                                 <i class="sui-icon-academy"></i> <?php _e( "View Documentation", wp_defender()->domain ) ?>
                             </a>
                         </div>
                     </div>
-	            <?php endif; ?>
+				<?php endif; ?>
             </div>
             <div class="sui-row-with-sidenav">
                 <div class="sui-sidenav">
@@ -37,7 +38,13 @@
                     <div class="sui-sidenav-hide-lg">
                         <select class="sui-mobile-nav" style="display: none;">
                             <option <?php selected( '', \Hammer\Helper\HTTP_Helper::retrieve_get( 'view' ) ) ?>
-                                    value="<?php echo network_admin_url( 'admin.php?page=wdf-advanced-tools' ) ?>">
+                                    value="<?php echo network_admin_url( 'admin.php?page=wdf-setting' ) ?>">
+		                        <?php _e( "General", wp_defender()->domain ) ?></option>
+                            <option <?php selected( 'data', \Hammer\Helper\HTTP_Helper::retrieve_get( 'view' ) ) ?>
+                                    value="<?php echo network_admin_url( 'admin.php?page=wdf-setting&view=data' ) ?>">
+		                        <?php _e( "Data & Settings", wp_defender()->domain ) ?></option>
+                            <option <?php selected( 'accessibility', \Hammer\Helper\HTTP_Helper::retrieve_get( 'view' ) ) ?>
+                                    value="<?php echo network_admin_url( 'admin.php?page=wdf-setting&view=accessibility' ) ?>">
 								<?php _e( "Accessibility", wp_defender()->domain ) ?></option>
                         </select>
                     </div>
@@ -90,13 +97,13 @@
             </div>
 
         </div>
-	    <?php if ( wp_defender()->changeFooter && ! empty( wp_defender()->footerText ) ): ?>
+		<?php if ( wp_defender()->changeFooter ): ?>
             <div class="sui-footer"><?php echo wp_defender()->footerText ?></div>
-	    <?php else: ?>
+		<?php else: ?>
             <div class="sui-footer">Made with <i class="sui-icon-heart"></i> by WPMU DEV</div>
-	    <?php endif; ?>
-	    <?php if ( wp_defender()->hideDocLinks == false ): ?>
-		    <?php if ( wp_defender()->isFree ): ?>
+		<?php endif; ?>
+		<?php if ( wp_defender()->hideDocLinks == false ): ?>
+			<?php if ( wp_defender()->isFree ): ?>
                 <ul class="sui-footer-nav">
                     <li><a href="https://profiles.wordpress.org/wpmudev#content-plugins" target="_blank">Free
                             Plugins</a>
@@ -110,7 +117,7 @@
                     </li>
                     <li><a href="https://incsub.com/privacy-policy/" target="_blank">Privacy Policy</a></li>
                 </ul>
-		    <?php else: ?>
+			<?php else: ?>
                 <ul class="sui-footer-nav">
                     <li><a href="https://premium.wpmudev.org/hub/" target="_blank">The Hub</a></li>
                     <li><a href="https://premium.wpmudev.org/projects/category/plugins/" target="_blank">Plugins</a>
@@ -123,7 +130,7 @@
                     </li>
                     <li><a href="https://incsub.com/privacy-policy/" target="_blank">Privacy Policy</a></li>
                 </ul>
-		    <?php endif; ?>
+			<?php endif; ?>
             <ul class="sui-footer-social">
                 <li><a href="https://www.facebook.com/wpmudev" target="_blank">
                         <i class="sui-icon-social-facebook" aria-hidden="true"></i>
@@ -138,6 +145,6 @@
                         <span class="sui-screen-reader-text">Instagram</span>
                     </a></li>
             </ul>
-	    <?php endif; ?>
+		<?php endif; ?>
     </div>
 </div>

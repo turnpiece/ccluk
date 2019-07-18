@@ -56,17 +56,19 @@ $checked = $controller->check();
                     </p>
 				<?php endif; ?>
             </div>
-            <div class="sui-box-footer">
-                <div class="sui-actions-left">
-					<?php $controller->showIgnoreForm() ?>
+			<?php if ( ! $checked ): ?>
+                <div class="sui-box-footer">
+                    <div class="sui-actions-left">
+						<?php $controller->showIgnoreForm() ?>
+                    </div>
+                    <div class="sui-actions-right">
+                        <a href="<?php echo network_admin_url( 'update-core.php' ) ?>"
+                           class="sui-button sui-button-ghost">
+							<?php esc_html_e( "Update WordPress", wp_defender()->domain ) ?>
+                        </a>
+                    </div>
                 </div>
-                <div class="sui-actions-right">
-                    <a href="<?php echo network_admin_url( 'update-core.php' ) ?>"
-                       class="sui-button sui-button-ghost">
-						<?php esc_html_e( "Update WordPress", wp_defender()->domain ) ?>
-                    </a>
-                </div>
-            </div>
+			<?php endif; ?>
         </div>
     </div>
 </div>

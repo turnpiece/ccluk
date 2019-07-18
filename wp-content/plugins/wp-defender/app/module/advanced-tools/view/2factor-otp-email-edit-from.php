@@ -20,7 +20,7 @@ $body    = ! empty( $settings->email_body ) ? $settings->email_body : $settings-
                 </div>
             </div>
             <form method="post">
-	            <?php wp_nonce_field( 'twoFactorOPTEmail' ) ?>
+				<?php wp_nonce_field( 'twoFactorOPTEmail' ) ?>
                 <div class="sui-box-body">
                     <p id="dialogDescription">
 						<?php _e( "This email sends a temporary passcode when the user can’t access their phone.", wp_defender()->domain ) ?>
@@ -50,7 +50,7 @@ $body    = ! empty( $settings->email_body ) ? $settings->email_body : $settings-
 								<?php _e( "Body", wp_defender()->domain ) ?>
                             </label>
                             <textarea class="sui-form-control" name="body" rows="8"
-                                      id="email_body"><?php echo $body; ?></textarea>
+                                      id="email_body"><?php echo stripslashes( $body ); ?></textarea>
                         </div>
                     </div>
                     <div class="sui-row">

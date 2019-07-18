@@ -300,7 +300,7 @@ function give_process_form_login() {
 	give_log_user_in( $user_data['user_id'], $user_data['user_login'], $user_data['user_pass'] );
 
 	if ( $is_ajax ) {
-		$message = Give()->notices->print_frontend_notice(
+		$message = Give_Notices::print_frontend_notice(
 			sprintf(
 				/* translators: %s: user first name */
 				esc_html__( 'Welcome %s! You have successfully logged into your account.', 'give' ),
@@ -847,7 +847,7 @@ function give_donation_form_validate_new_user() {
 
 	// Validate user creation nonce.
 	if ( ! wp_verify_nonce( $nonce, "give_form_create_user_nonce_{$form_id}" ) ) {
-		give_set_error( 'invalid_nonce', __( 'Nonce verification has failed.', 'give' ) );
+		give_set_error( 'invalid_nonce', __( 'We\'re unable to recognize your session. Please refresh the screen to try again; otherwise contact your website administrator for assistance.', 'give' ) );
 	}
 
 	$registering_new_user = false;

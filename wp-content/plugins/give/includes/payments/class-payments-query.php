@@ -96,6 +96,10 @@ class Give_Payments_Query extends Give_Stats {
 			'count'           => false,
 		);
 
+		// We do not want WordPress to handle meta cache because WordPress stores in under `post_meta` key and cache object while we want it under `donation_meta`.
+		// Similar for term cache
+		$args['update_post_meta_cache'] = false;
+
 		$this->args = $this->_args = wp_parse_args( $args, $defaults );
 
 		$this->init();
@@ -152,6 +156,9 @@ class Give_Payments_Query extends Give_Stats {
 		// Reset param to apply filters.
 		// While set filters $args will get override and multiple get_payments call will not work.
 		$this->args = $this->_args;
+
+		// Whitelist order.
+		$this->args['order'] = in_array( strtoupper( $this->args['order'] ), array( 'ASC', 'DESC' ) ) ? $this->args['order'] : 'DESC' ;
 
 		$this->date_filter_pre();
 		$this->orderby();
@@ -214,6 +221,8 @@ class Give_Payments_Query extends Give_Stats {
 	public function get_payments() {
 		global $post;
 
+		$results        = array();
+		$this->payments = array();
 		$cache_key      = Give_Cache::get_key( 'give_payment_query', $this->args, false );
 		$this->payments = Give_Cache::get_db_query( $cache_key );
 
@@ -226,45 +235,58 @@ class Give_Payments_Query extends Give_Stats {
 		// Modify the query/query arguments before we retrieve payments.
 		$this->set_filters();
 
-		$query          = new WP_Query( $this->args );
-		$this->payments = array();
+		/* @var WP_Query $query */
+		$query = new WP_Query( $this->args );
 
 		$custom_output = array(
 			'payments',
 			'give_payments',
 		);
 
-		if ( ! in_array( $this->args['output'], $custom_output ) ) {
-			return $query->posts;
-		}
-
 		if ( $query->have_posts() ) {
-			$previous_post = $post;
 
-			while ( $query->have_posts() ) {
-				$query->the_post();
-
-				$payment_id = get_post()->ID;
-				$payment    = new Give_Payment( $payment_id );
-
-				$this->payments[] = apply_filters( 'give_payment', $payment, $payment_id, $this );
+			// Update meta cache only if query is not for all donations.
+			// @see https://github.com/impress-org/give/issues/4104
+			if (
+				( isset( $this->args['nopaging'] ) && true !== (bool) $this->args['nopaging'] )
+				|| ( isset( $this->args['posts_per_page'] ) && 0 < $this->args['posts_per_page'] )
+			) {
+				self::update_meta_cache( wp_list_pluck( $query->posts, 'ID' ) );
 			}
 
-			wp_reset_postdata();
+			if ( ! in_array( $this->args['output'], $custom_output ) ) {
+				$results = $query->posts;
 
-			// Prevent nest loop from producing unexpected results.
-			if( $previous_post instanceof WP_Post ) {
-				$post = $previous_post;
-				setup_postdata( $post );
+			} else{
+				$previous_post = $post;
+
+				while ( $query->have_posts() ) {
+					$query->the_post();
+
+					$payment_id = get_post()->ID;
+					$payment    = new Give_Payment( $payment_id );
+
+					$this->payments[] = apply_filters( 'give_payment', $payment, $payment_id, $this );
+				}
+
+				wp_reset_postdata();
+
+				// Prevent nest loop from producing unexpected results.
+				if ( $previous_post instanceof WP_Post ) {
+					$post = $previous_post;
+					setup_postdata( $post );
+				}
+
+				$results = $this->payments;
 			}
 		}
 
-		Give_Cache::set_db_query( $cache_key, $this->payments );
+		Give_Cache::set_db_query( $cache_key, $results );
 
 		// Remove query filters after we retrieve payments.
 		$this->unset_filters();
 
-		return $this->payments;
+		return $results;
 	}
 
 	/**
@@ -531,7 +553,7 @@ class Give_Payments_Query extends Give_Stats {
 			);
 		}
 
-		$this->__set( 'meta_query',$args );
+		$this->__set( 'meta_query', $args );
 	}
 
 	/**
@@ -633,6 +655,7 @@ class Give_Payments_Query extends Give_Stats {
 
 		} else if ( ! empty( $search ) ) {
 			$search_parts = preg_split( '/\s+/', $search );
+
 			if ( is_array( $search_parts ) && 2 === count( $search_parts ) ) {
 				$search_meta = array(
 					'relation' => 'AND',
@@ -662,6 +685,7 @@ class Give_Payments_Query extends Give_Stats {
 					),
 				);
 			}
+
 			$this->__set( 'meta_query', $search_meta );
 
 			$this->__unset( 's' );
@@ -766,11 +790,9 @@ class Give_Payments_Query extends Give_Stats {
 
 		$this->__set(
 			'meta_query', array(
-				array(
-					'key'     => '_give_payment_gateway',
-					'value'   => $this->args['gateway'],
-					'compare' => $compare,
-				),
+				'key'     => '_give_payment_gateway',
+				'value'   => $this->args['gateway'],
+				'compare' => $compare,
 			)
 		);
 
@@ -793,10 +815,30 @@ class Give_Payments_Query extends Give_Stats {
 	private function get_sql() {
 		global $wpdb;
 
+		$allowed_keys = array(
+			'post_name',
+			'post_author',
+			'post_date',
+			'post_title',
+			'post_status',
+			'post_modified',
+			'post_parent',
+			'post_type',
+			'menu_order',
+			'comment_count',
+		);
+
+		$this->args['orderby'] = 'post_parent__in';
+
+		// Whitelist orderby.
+		if( ! in_array( $this->args['orderby'], $allowed_keys ) ) {
+			$this->args['orderby'] = 'ID';
+		}
+
 		$where = "WHERE {$wpdb->posts}.post_type = 'give_payment'";
 		$where .= " AND {$wpdb->posts}.post_status IN ('" . implode( "','", $this->args['post_status'] ) . "')";
 
-		if( is_numeric( $this->args['post_parent'] ) ) {
+		if ( is_numeric( $this->args['post_parent'] ) ) {
 			$where .= " AND {$wpdb->posts}.post_parent={$this->args['post_parent']}";
 		}
 
@@ -876,4 +918,20 @@ class Give_Payments_Query extends Give_Stats {
 		return $sql;
 	}
 
+	/**
+	 * Update donations meta cache
+	 *
+	 * @since  2.5.0
+	 * @access private
+	 *
+	 * @param $donation_ids
+	 */
+	public static function update_meta_cache( $donation_ids ) {
+		// Exit.
+		if ( empty( $donation_ids ) ) {
+			return;
+		}
+
+		update_meta_cache( Give()->payment_meta->get_meta_type(), $donation_ids );
+	}
 }

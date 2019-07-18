@@ -1089,6 +1089,11 @@
 				} )
 			;
 
+			$( '.shipper-files-count', $root )
+				.text( $rows.length )
+					.closest( '.sui-pagination-results' )
+				.show();
+
 			$paginations.show();
 		}
 
@@ -1218,11 +1223,13 @@
 			} );
 			$( '.shipper-filelist :checkbox[name="shipper-bulk-all"]', $root )
 				.attr( 'checked', true );
+			toggle_bulk_actions_disabled();
 		}
 
 		function select( $row ) {
 			$row.find( ':checkbox[name="shipper-bulk"]' )
 				.attr( 'checked', true );
+			toggle_bulk_actions_disabled();
 		}
 
 		function unselect_all() {
@@ -1232,12 +1239,22 @@
 			} );
 			$( '.shipper-filelist :checkbox[name="shipper-bulk-all"]', $root )
 				.attr( 'checked', false );
+			toggle_bulk_actions_disabled();
 		}
 
 		function unselect( $row ) {
 			$row.find( ':checkbox[name="shipper-bulk"]' )
 				.attr( 'checked', false );
+			toggle_bulk_actions_disabled();
 		}
+
+		function toggle_bulk_actions_disabled_raw() {
+			var $rows = $( '.shipper-filelist tr.shipper-paginated-visible' )
+				.find( ':checkbox[name="shipper-bulk"]:checked' );
+			$( '.shipper-bulk-actions-field select, .shipper-bulk-actions-field button' )
+				.attr( 'disabled', ! $rows.length );
+		}
+		var toggle_bulk_actions_disabled = _.debounce( toggle_bulk_actions_disabled_raw, 100 );
 
 		function handle_filter_area_toggle( e ) {
 			var $el = $( this ),
@@ -1262,9 +1279,7 @@
 			var $me = $( '.shipper-bulk-actions-field', $root ),
 				$els = $( ':checkbox[name="shipper-bulk"]:checked', $root ),
 				action = $( this ).closest( '.sui-form-field' ).find( 'select' ).val(),
-				counter = 1,
-				wrapper_promises = [],
-				promises = []
+				els = []
 			;
 			var $msgroot = $('.shipper-toggle-success'),
 				hide_warning = function () {
@@ -1294,17 +1309,14 @@
 					// Already included, carry on.
 					return true;
 				}
-				dfr.done( function() {
-					promises.push( exclude_file( $el ) );
+				els.push({
+					path: $el.attr( 'data-path' ),
+					_wpnonce: $el.find( '[data-wpnonce]' ).attr( 'data-wpnonce' )
 				} );
-				wrapper_promises.push( dfr.promise() );
-				
-				setTimeout( dfr.resolve, Math.floor( Math.random() * 100 ) + 50 * counter );
-				counter++;
 			} );
 
-			$.when.apply( $, wrapper_promises ).then( function () {
-				$.when.apply( $, promises ).then( function () {
+			$.post( ajaxurl, { action: 'shipper_bulk_process_paths', apply: action, paths: els } )
+				.done( function ( data ) {
 					$me
 						.find( 'button' ).attr( 'disabled', false ).end()
 						.find( 'select' ).attr( 'disabled', false ).end()
@@ -1314,13 +1326,15 @@
 					clearTimeout($msgroot.data('shipper-timeout'));
 					$msgroot
 						.find(cls)
-							.find('.shipper-toggle-count').text(wrapper_promises.length).end()
+							.find('.shipper-toggle-count').text(els.length).end()
 							.show().end()
 						.show()
 					;
 					var tmout = setTimeout(hide_warning, 3000);
 					$msgroot.data('shipper-timeout', tmout);
-				});
+					update_exclusions( ( data || {} ).data );
+					update_file_item_rows();
+					update_package_size_message();
 			});
 		}
 
@@ -1332,6 +1346,7 @@
 		}
 
 		function toggle_files_top_level_warning() {
+			/*
 			var $notice = $( '.shipper-wizard-files .sui-notice.sui-notice-warning' ),
 				$warn_statuses = $( '.shipper-wizard-files .shipper-check-status .sui-tag-warning' )
 			;
@@ -1343,10 +1358,11 @@
 			} else {
 				$notice.hide();
 			}
+			*/
 		}
 
 		function update_package_size_message() {
-			var $package_size = $( '.shipper-wizard-files tr.sui-accordion-item:last .shipper-check-status' );
+			var $package_size = $( '#shipper-preflight-results [data-section="files"] div.sui-accordion-item:last .shipper-check-status' );
 
 			if ( ! $package_size.find( 'i.sui-loading' ).length ) {
 				$package_size.append(
@@ -1367,39 +1383,29 @@
 						return false;
 					}
 
-					var $target = $( '.shipper-wizard-files tr.sui-accordion-item:last' ),
+					var $target = $( '#shipper-preflight-results [data-section="files"] div.sui-accordion-item:last' ),
 						$msg = $( '.shipper-package-size-summary' ),
-						$file_items = $( '.shipper-wizard-files .shipper-filelist tbody tr' ),
-						$status = $target.find( 'td.shipper-check-status span.sui-tag' )
+						$file_items = $( '#shipper-preflight-results .shipper-filelist tbody tr' ),
+						$status = $target.find( 'div.shipper-check-status .sui-tag' ),
+						$title_status = $target.find( '.sui-accordion-item-title i' )
 					;
-
-					// Change all statuses here, then readjust the package below.
-					/*
-					if ( excluded >= $file_items.length ) {
-						$( '.shipper-wizard-files .shipper-check-status .sui-tag:not(.shipper-zero)' )
-							.removeClass( 'sui-tag-warning' )
-							.addClass( 'sui-tag-success' )
-						;
-					} else {
-						$( '.shipper-wizard-files .shipper-check-status .sui-tag:not(.shipper-zero)' )
-							.removeClass( 'sui-tag-success' )
-							.addClass( 'sui-tag-warning' )
-						;
-					}
-					*/
 
 					if ( !! oversized ) {
 						$status
 							.removeClass( 'sui-tag-success' )
 							.addClass( 'sui-tag-warning' )
-							.text( package_size )
-						;
+							.text( package_size );
+						$title_status
+							.removeClass( 'sui-success' )
+							.addClass( 'sui-warning' );
 					} else {
 						$status
 							.removeClass( 'sui-tag-warning' )
 							.addClass( 'sui-tag-success' )
-							.text( package_size )
-						;
+							.text( package_size );
+						$title_status
+							.removeClass( 'sui-warning' )
+							.addClass( 'sui-success' );
 					}
 					$msg.each( function () {
 						$( this ).replaceWith( markup );
@@ -1416,10 +1422,11 @@
 		var debounced_msg_update = _.debounce( update_package_size_message, 1000 );
 
 		function update_file_item_check_row( row_cls ) {
-			var $root = $( '.shipper-wizard-tab.shipper-wizard-files'),
-				$row = $root.find( 'tr.sui-accordion-item' + row_cls ),
-				$cnt_row = $root.find( 'tr.sui-accordion-item-content' + row_cls ),
+			var $root = $( '#shipper-preflight-results [data-section="files"]'),
+				$row = $root.find( 'div.sui-accordion-item' + row_cls ),
+				$cnt_row = $row.find( 'div.sui-accordion-item-body' ),
 				$status = $row.find( '.sui-tag' ),
+				$title_status = $row.find( '.sui-accordion-item-title i' )
 				ex = $cnt_row.find( 'tbody .shipper-paginated:not(.shipper-file-excluded)' ).length
 			;
 
@@ -1430,13 +1437,17 @@
 			if ( ex ) {
 				$status
 					.removeClass( 'sui-tag-success' )
-					.addClass( 'sui-tag-warning' )
-				;
+					.addClass( 'sui-tag-warning' );
+				$title_status
+					.removeClass( 'sui-success' )
+					.addClass( 'sui-warning' );
 			} else {
 				$status
 					.removeClass( 'sui-tag-warning' )
-					.addClass( 'sui-tag-success' )
-				;
+					.addClass( 'sui-tag-success' );
+				$title_status
+					.removeClass( 'sui-warning' )
+					.addClass( 'sui-success' );
 			}
 
 			// Update the status messages.
@@ -1454,43 +1465,10 @@
 		}
 
 		function update_files_tab_status() {
-			var $status = $( '#shipper-tab-files .shipper-check-status i' ),
-				$warnings = $( '.shipper-wizard-files .shipper-check-status .sui-tag-warning' );
-
-			if ( $warnings.length ) {
-				$status
-					.removeClass( 'sui-icon-check-tick sui-success' )
-					.addClass( 'sui-icon-warning-alert sui-warning' );
-			} else {
-				$status
-					.removeClass( 'sui-icon-warning-alert sui-warning' )
-					.addClass( 'sui-icon-check-tick sui-success' );
-			}
-
-			update_overall_tab_status();
-		}
-
-		function update_overall_tab_status() {
-			var $status = $( '#shipper-tab-overall .shipper-check-status i' ),
-				$body = $( '.shipper-preflight-result-overall' ),
-				$issues = $( '.shipper-preflight-done-tab:not( #shipper-tab-overall )' )
-					.find( '.shipper-check-status i:not(.sui-success)' );
-
-			if ( $issues.length ) {
-				$status
-					.removeClass( 'sui-icon-check-tick sui-success' )
-					.addClass( 'sui-icon-warning-alert sui-warning' );
-				$body
-					.filter( '.shipper-has-warnings' ).show().end()
-					.filter( '.shipper-no-warnings' ).hide().end();
-			} else {
-				$status
-					.removeClass( 'sui-icon-warning-alert sui-warning' )
-					.addClass( 'sui-icon-check-tick sui-success' );
-				$body
-					.filter( '.shipper-has-warnings' ).hide().end()
-					.filter( '.shipper-no-warnings' ).show().end();
-			}
+			$( document ).trigger(
+				'shipper:preflight-files:status',
+				[ $( '.shipper-wizard-files .shipper-check-status .sui-tag-warning' ).length ]
+			);
 		}
 
 		function exclude_file( $el ) {
@@ -1531,11 +1509,14 @@
 					var exs = (resp || {}).data || {};
 					update_exclusions( exs );
 					update_file_item_rows();
+					$( document ).trigger( 'shipper:preflight-files:status' );
 				})
 			;
 		}
 
 		function boot() {
+			$( '.shipper-filelist tr.shipper-paginated-visible :checkbox[name="shipper-bulk"]', $root )
+				.on( 'change', toggle_bulk_actions_disabled );
 			$( '.shipper-filelist :checkbox[name="shipper-bulk-all"]', $root )
 				.off( 'change' )
 				.on( 'change', toggle_all_selection_visible )
@@ -1579,6 +1560,7 @@
 			update_files_tab_status();
 			load_exclusions();
 			toggle_files_top_level_warning();
+			toggle_bulk_actions_disabled();
 		}
 
 		boot();
@@ -1608,20 +1590,6 @@
 		$( '.shipper-wizard-result-files' ).each( function() {
 			_areas.push( new PaginatedFilterArea( $( this ) ) );
 		} );
-		// Work around the sui-tabs not really working well issue.
-		$( '.shipper-wizard-tab a[href*="#shipper-tab-"]' ).click( function( e ) {
-			var url = $( this ).attr( 'href' ),
-				hash = url.substring( url.indexOf('#') + 1 ),
-				$tab = $( '#' + hash );
-			if ( $tab.length ) {
-				$tab.click();
-				return stop_prop( e )
-			} else {
-				setTimeout( function() {
-					window.location.reload();
-				} );
-			}
-		} );
 	}
 
 	$( window ).on('load', function() {
@@ -1630,6 +1598,405 @@
 		}
 	});
 } )( jQuery );
+
+
+/***/ }),
+
+/***/ "./assets/src/js/migrate/preflight.js":
+/*!********************************************!*\
+  !*** ./assets/src/js/migrate/preflight.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+;(function( $ ) {
+
+	var _ticker;
+
+	function stop_prop( e ) {
+		if ( e && e.preventDefault ) e.preventDefault();
+		if ( e && e.stopPropagation ) e.stopPropagation();
+		return false;
+	}
+
+	function get_modals_class() {
+		return '.shipper-preflight';
+	}
+
+	function get_modal( modal ) {
+		var modal_class = modal ? [ get_modals_class(), modal ].join( '-' ) : get_modals_class(),
+			$modal = $( modal_class );
+		return $modal;
+	}
+
+	function open_modal( modal ) {
+		var $modal = get_modal( modal );
+		if ( ! $modal.length ) {
+			console.log( 'No such modal', modal );
+			return false;
+		}
+
+		$( get_modals_class() ).attr( 'aria-hidden', true );
+		$modal.attr( 'aria-hidden', false );
+	}
+
+	/**
+	 * Starts listening to heartbeat ticks
+	 */
+	function start_receiving() {
+		_ticker.start(heartbeat_request, heartbeat_response);
+	}
+
+	/**
+	 * Stop listening to heartbeat ticks
+	 */
+	function stop_receiving() {
+		_ticker.stop();
+	}
+
+	/**
+	 * Adds Shipper flag to heartbeat request
+	 */
+	function heartbeat_request( event, data ) {
+		data['shipper-preflight'] = true;
+	}
+
+	/**
+	 * Deals with heartbeat response from the back-end
+	 */
+	function heartbeat_response( event, data ) {
+		var preflight = ( data || {} )['shipper-preflight'] || {};
+
+		if ( preflight.is_done ) {
+			stop_receiving();
+			window.location.reload();
+			return false;
+		}
+
+		update_preflight_state( preflight );
+	}
+
+	function update_preflight_state( data ) {
+		var $preflight = get_modal( 'loading' ),
+			sum = function( a, b ) { return a + b; },
+			local_done = !! ( ( ( data || {} ).sections || {} ).system_checks || {} ).is_done,
+			remote_done = !! ( ( ( data || {} ).sections || {} ).remote_checks || {} ).is_done,
+			files_done = !! ( ( ( data || {} ).sections || {} ).files_check || {} ).is_done,
+			percentage = [ local_done, remote_done, files_done ].reduce( sum ) * 33,
+			activate_preflight_step = function( step ) {
+				var $current = $preflight.find( '.shipper-step-active' ),
+					$loader = $current.find( 'i' ),
+					$next = $preflight.find( '[data-step="' + step + '"]' ),
+					domain = $next.attr( 'data-domain' );
+				$preflight.find( '.sui-progress-state .shipper-preflight-target' ).text( domain );
+				$current.removeClass( 'shipper-step-active' );
+				$next.addClass( 'shipper-step-active' ).append( $loader );
+			};
+
+		$preflight
+			.find( '.sui-progress-bar span' ).width( percentage + '%' ).end()
+			.find( '.sui-progress-text' ).text( percentage + '%' ).end();
+
+		if ( local_done ) return activate_preflight_step( 'remote' );
+		if ( remote_done ) return activate_preflight_step( 'sysdiff' );
+	}
+
+	function update_section_status( section ) {
+		var sect_select = !! section ? '[data-section="' + section + '"]' : '[data-section]',
+			$sections = $( sect_select );
+		$sections.each( function () {
+			var $s = $( this );
+			if ( $s.find( '[data-section]' ).length ) {
+				return update_parent_section( $s );
+			} else {
+				return update_normal_section( $s );
+			}
+		} );
+		if ( $( '[data-section] i.sui-error, [data-section] .sui-tag-error' ).length ) {
+			disable_migration_start();
+		} else {
+			enable_migration_start();
+		}
+	}
+
+	function update_normal_section( $section ) {
+		var $titles = $section.find( '.sui-accordion-item-title' ),
+			warnings = $titles.find( 'i.sui-warning' ).length,
+			errors = $titles.find( 'i.sui-error' ).length,
+			service_errors = $section.find( '.shipper-service-error.sui-notice-error' ).length,
+			issues = warnings + errors + service_errors,
+			kind_class = !! ( service_errors + errors ) ? 'error' : ( warnings ? 'warning' : 'success' );
+
+		$section.find( '.sui-accordion-item-title .sui-tag' )
+			.removeClass( 'sui-tag-success sui-tag-warning sui-tag-error' )
+			.addClass( 'sui-tag-' + kind_class )
+			.text( issues );
+
+		if ( issues ) {
+			$section
+				.addClass( 'shipper-has-issues' )
+				.removeClass( 'shipper-no-issues' )
+				.find( '>.sui-accordion-item-header' )
+					.find( '.sui-accordion-item-title .sui-tag' ).show().end()
+					.find( '.sui-accordion-item-title>.sui-icon-check-tick' ).hide();
+		} else {
+			$section
+				.removeClass( 'shipper-has-issues' )
+				.addClass( 'shipper-no-issues' )
+				.find( '>.sui-accordion-item-header' )
+					.find( '.sui-accordion-item-title .sui-tag' ).hide().end()
+					.find( '.sui-accordion-item-title>.sui-icon-check-tick' ).show();
+		}
+		$section.find( '.shipper-rechecked-success .sui-icon-check-tick' ).show();
+	}
+
+	function update_parent_section( $parent ) {
+		var $working = $parent.clone();
+		$working.find( '[data-section]' ).each( function() {
+			update_normal_section( $( this ) );
+			$( this ).remove();
+		} );
+		var $own_titles = $working.find( '.sui-accordion-item-title' ),
+			$all_titles = $parent.find( '.sui-accordion-item-title' ),
+			own_warnings = $own_titles.find( 'i.sui-warning' ).length,
+			all_warnings = $all_titles.find( 'i.sui-warning' ).length,
+			own_errors = $own_titles.find( 'i.sui-error' ).length,
+			all_errors = $all_titles.find( 'i.sui-error' ).length,
+			own_ses = $working.find( '.shipper-service-error.sui-notice-error' ).length,
+			all_ses = $parent.find( '.shipper-service-error.sui-notice-error' ).length,
+			own_issues = own_errors + own_warnings + own_ses,
+			all_issues = all_errors + all_warnings + all_ses,
+			kind_class = !! ( all_ses + all_errors ) ? 'error' : ( all_warnings ? 'warning' : 'success' );
+
+		$parent.find( '.sui-accordion-item-title .sui-tag' )
+			.removeClass( 'sui-tag-success sui-tag-warning sui-tag-error' )
+			.addClass( 'sui-tag-' + kind_class )
+			.text( all_issues );
+
+		if ( all_issues ) {
+			$parent
+				.addClass( 'shipper-has-issues' )
+				.removeClass( 'shipper-no-issues' )
+				.find( '>.sui-accordion-item-header' )
+					.find( '.sui-accordion-item-title .sui-tag' ).show().end()
+					.find( '.sui-accordion-item-title>.sui-icon-check-tick' ).hide()
+		} else {
+			$parent
+				.removeClass( 'shipper-has-issues' )
+				.addClass( 'shipper-no-issues' )
+				.find( '>.sui-accordion-item-header' )
+					.find( '.sui-accordion-item-title .sui-tag' ).hide().end()
+					.find( '.sui-accordion-item-title>.sui-icon-check-tick' ).show()
+		}
+
+		if ( own_issues ) {
+			$parent.find( '.sui-accordion-item-body>.sui-accordion>.sui-accordion-item' )
+				.find( '.sui-accordion-item-title .sui-tag' ).show().end()
+				.find( '.sui-accordion-item-title>.sui-icon-check-tick' ).hide();
+		} else {
+			$parent.find( '.sui-accordion-item-body>.sui-accordion>.sui-accordion-item' )
+				.find( '.sui-accordion-item-title .sui-tag' ).hide().end()
+				.find( '.sui-accordion-item-title>.sui-icon-check-tick' ).show();
+		}
+		$parent.find( '.shipper-rechecked-success .sui-icon-check-tick' ).show();
+	}
+
+	function disable_migration_start() {
+		var $start = get_modal( 'results' ).find( '.shipper-migration-start' ),
+			href = $start.attr( 'data-start' );
+		$start
+			.attr( 'href', '#start' )
+			.addClass( 'shipper-disabled shipper-tooltip' )
+			.on( 'click', stop_prop );
+	}
+
+	function enable_migration_start() {
+		var $start = get_modal( 'results' ).find( '.shipper-migration-start' ),
+			href = $start.attr( 'data-start' );
+		$start
+			.attr( 'href', href )
+			.removeClass( 'shipper-disabled sui-tooltip' )
+			.off( 'click', stop_prop );
+	}
+
+	function show_results() {
+		open_modal( 'results' );
+		setTimeout( update_section_status, 300 );
+	}
+
+	function track_preflight_progress() {
+		if ( ! get_modal( 'loading' ).is( ':visible' ) ) {
+			open_modal( 'loading' );
+		}
+		start_receiving();
+	}
+
+	function handle_reset_preflight( e ) {
+		var $me = $( this ),
+			section = $me.attr( 'data-section' );
+		$.post( ajaxurl, {
+			action: 'shipper_preflight_restart',
+			section: section
+		}, function () {
+			window.location.reload();
+		} );
+		return stop_prop( e );
+	}
+
+	function handle_individual_check_reset( e ) {
+		var $me = $( this ),
+			content = $me.html(),
+			check_id = $me.attr( 'data-check' ),
+			$section = $me.closest( '[data-section]' ),
+			$check = $me.closest( '[data-check_item="' + check_id + '"]' ),
+			section = $section.attr( 'data-section' ),
+			debounce_timeout = 'local' === section ? 3 : parseInt( _shipper.update_interval, 10 ),
+			update_preflight = _.debounce( function() {
+				$.post(
+					ajaxurl,
+					{ action: 'shipper_preflight_get_results_markup' },
+					function ( resp ) {
+						var status = ( resp || {} ).success,
+							msg = ( resp || {} ).data;
+						if ( ! status ) {
+							return update_preflight();
+						}
+
+						var $new_section = $( msg ).find( '[data-section="' + section + '"]' );
+						if ( check_id && $check.length ) {
+							var $new_check = $new_section
+									.find( '[data-check_item="' + check_id + '"]' ),
+								$notification = $new_check
+									.find( '.shipper-recheck-unsuccessful' ).clone();
+							if ( $new_check.length ) {
+								// Issue is still present
+								$check.replaceWith( $new_check );
+								SUI.suiTabs();
+								if ( $notification.length ) {
+									get_modal( 'results' )
+										.find( '.shipper-recheck-active' ).remove().end()
+										.append(
+											$notification
+												.removeClass( 'shipper-recheck-unsuccessful' )
+												.addClass( 'shipper-recheck-active' )
+										);
+									$notification.show();
+									setTimeout( function() {
+										$notification.remove();
+									}, 5000 );
+								}
+							} else {
+								// We could not find this check - it's done now.
+								$check
+									.addClass( 'shipper-rechecked-success' )
+									.find( '.sui-accordion-item-title i' )
+										.removeClass( 'sui-icon-warning-alert' )
+										.removeClass( 'sui-error sui-warning' )
+										.addClass( 'sui-icon-check-tick' )
+										.addClass( 'sui-success' )
+										.end()
+									.find( '.sui-accordion-open-indicator' ).remove().end()
+									.find( '.sui-accordion-item-body' )
+										.remove()
+								;
+							}
+							update_section_status( section );
+							$section.addClass( 'shipper-rechecked' );
+						} else if ( $section.length ) {
+							var $goods = $new_section
+								.find( '>.sui-accordion-item-body>.sui-accordion' )
+									.find( '.shipper-rechecked-success' );
+							if ( $goods.length > 1 ) {
+								// This is so we don't show tons of new successes.
+								$goods.remove();
+							}
+							$section.replaceWith( $new_section );
+							update_section_status();
+							$section.addClass( 'shipper-rechecked' );
+							SUI.suiTabs();
+						} else {
+							window.location.reload();
+						}
+
+						$me.html( content ).removeClass( 'sui-button-onload' );
+						$( document ).on(
+							'click',
+							'.shipper-check-result a[href="#reload"]',
+							handle_individual_check_reset
+						);
+						$( '.shipper-check-result a[href="#reload"]' ).attr( 'disabled', false );
+				});
+			}, debounce_timeout * 1000, true ); // #1 - do this immediately
+
+		$me.html(
+			'<i class="sui-icon-loader sui-loading"></i>&nbsp;'
+		).addClass( 'sui-button-onload' );
+		$( document ).off(
+			'click',
+			'.shipper-check-result a[href="#reload"]',
+			handle_individual_check_reset
+		);
+		$( '.shipper-check-result a[href="#reload"]' ).attr( 'disabled', true );
+
+		$.post( ajaxurl, {
+			action: 'shipper_preflight_restart',
+			section: section
+		}, function ( resp ) {
+			var status = ( resp || {} ).success,
+				msg = ( resp || {} ).data;
+
+			setTimeout( update_preflight, 3000 ); // #2 - BUT, wait a bit before we do this initially
+
+		} );
+
+		return stop_prop( e );
+	}
+
+	function handle_preflight_cancel( e ) {
+		$.post( ajaxurl, { action: 'shipper_preflight_cancel' }, function () {
+			window.location.search = '?page=shipper';
+		} );
+		return stop_prop( e );
+	}
+
+	function show_error( msg ) {
+		msg = msg || 'Error!';
+		console.log( msg );
+	}
+
+	function init() {
+		if ( ! $( '.sui-box.shipper-select-check' ).length ) {
+			return false;
+		}
+		_ticker = new window._shipper.Ticker( 'shipper-preflight' );
+
+		$( '.shipper-reset-preflight' )
+			.off( 'click' )
+			.on( 'click', handle_reset_preflight );
+		$( document ).on(
+			'click',
+			'.shipper-check-result a[href="#reload"]',
+			handle_individual_check_reset
+		);
+		$( document ).on( 
+			'shipper:preflight-files:status',
+			function () { update_section_status(); }
+		);
+
+		$( '.shipper-preflight .sui-dialog-close' ).on( 'click', handle_preflight_cancel );
+		$( document ).on(
+			'click',
+			'.shipper-preflight .shipper-progress button',
+			handle_preflight_cancel
+		);
+
+		var callback = $( '.shipper-content.shipper-select-check-done' ).length
+			? show_results
+			: track_preflight_progress;
+		setTimeout( callback );
+	}
+	$( init );
+})( jQuery );
 
 
 /***/ }),
@@ -1655,6 +2022,15 @@
 	 */
 	function show_page( page ) {
 		$('.shipper-migration-content').hide();
+		if ( 'done' === page ) {
+			$( '.shipper-actions' )
+				.find( ' .shipper-actions-left' ).hide().end()
+				.find( ' .shipper-actions-right' ).show().end();
+		} else {
+			$( '.shipper-actions' )
+				.find( ' .shipper-actions-left' ).show().end()
+				.find( ' .shipper-actions-right' ).hide().end();
+		}
 		$('.shipper-migration-' + page + '-content').show();
 	}
 
@@ -1925,6 +2301,213 @@
 	$(boot);
 
 })(jQuery);
+
+
+/***/ }),
+
+/***/ "./assets/src/js/migrate/site-selection.js":
+/*!*************************************************!*\
+  !*** ./assets/src/js/migrate/site-selection.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+;(function( $ ) {
+
+	function handle( callback ) {
+		return function( e ) {
+			if ( e && e.preventDefault ) e.preventDefault();
+			if ( e && e.stopPropagation ) e.stopPropagation();
+
+			callback();
+
+			return false;
+		}
+	}
+
+	function get_modals_class() {
+		return '.shipper-site_selection';
+	}
+
+	function get_modal( modal ) {
+		var modal_class = [ get_modals_class(), modal ].join( '-' ),
+			$modal = $( modal_class );
+		return $modal;
+	}
+
+	function open_modal( modal ) {
+		var $modal = get_modal( modal );
+		if ( ! $modal.length ) {
+			console.log( 'No such modal', modal );
+			return false;
+		}
+
+		$( get_modals_class() ).attr( 'aria-hidden', true );
+		$modal.attr( 'aria-hidden', false );
+	}
+
+	function send_request( act ) {
+		var selection = get_modal( 'destination' ).find( '[name="site"] :selected' ),
+			promise = $.post(
+				ajaxurl,
+				{
+					action: act,
+					_wpnonce: get_modal( 'destination' ).find( ':hidden[name="_wpnonce"]' ).val(),
+					site: selection.val(),
+					domain: selection.text()
+				},
+				function () {}
+			);
+		promise.fail( show_install_fail )
+		return promise;
+	}
+
+	function activate_prepare_step( step ) {
+		var $modal = get_modal( 'prepare' ),
+			$steps = $modal.find( '.shipper-progress-steps [data-step]' ),
+			$target = $steps.filter( '[data-step="' + step + '"]' ),
+			$previous = $target.prevAll( '[data-step]' ),
+			progress = parseInt( ( ( $previous.length + 1 ) / $steps.length ) * 100, 10 );
+
+		$steps
+			.filter( '.shipper-step-active' )
+				.removeClass( 'shipper-step-active' )
+				.find( 'i' ).remove();
+		$target
+			.addClass( 'shipper-step-active' )
+			.append( '<i class="sui-icon-loader sui-loading"></i>' );
+
+		$modal
+			.find( '.sui-progress-text' )
+				.text( progress + '%' )
+			.end()
+			.find( '.sui-progress-bar span' )
+				.width( progress + '%' )
+			.end()
+		;
+	}
+
+	function show_site_prepare() {
+		var destination = get_modal( 'destination' ).find( '[name="site"]' ).val();
+		set_site_urls_in_modal( 'prepare' );
+		open_modal( 'prepare' );
+
+		activate_prepare_step( 'install' );
+		send_request( 'shipper_install_activate' )
+			.done( function ( resp ) {
+				activate_prepare_step( 'activate' );
+				setTimeout( function() {
+					activate_prepare_step( 'add-to-api' );
+					send_request( 'shipper_add_to_api' )
+						.done( function( resp ) {
+							if ( !! ( resp || {} ).success ) {
+								move_to_preflight( destination );
+							} else {
+								show_install_fail();
+							}
+						} )
+					;
+				}, 1000 );
+			} )
+		;
+	}
+
+	function set_site_urls_in_modal( modal, domain ) {
+		var dmn = domain || get_modal( 'destination' ).find( '[name="site"] :selected' ).text(),
+			$modal = get_modal( modal ),
+			$targets = $modal.find( '.shipper-site-domain' );
+		$targets.text( dmn );
+	}
+
+	function show_install_fail() {
+		set_site_urls_in_modal( 'install-fail' );
+		open_modal( 'install-fail' );
+	}
+
+	function move_to_preflight( site_id ) {
+		window.location.search += '&site=' + site_id;
+		return false;
+	}
+
+	function prepare_selected_site() {
+		var destination = get_modal( 'destination' ).find( '[name="site"]' ).val(),
+			$button = get_modal( 'destination' ).find( 'button[type="submit"]' ),
+			button = $button.html();
+		if ( ! destination ) {
+			return false;
+		}
+		$button
+			.addClass( 'sui-button-onload' )
+			.html(
+				'<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>'
+			);
+		send_request( 'shipper_is_shippable' )
+			.done( function ( resp ) {
+				var status = ( resp || {} ).success;
+				if ( status ) {
+					return move_to_preflight( destination );
+				} else {
+					return show_site_prepare();
+				}
+			} )
+			.always( function () {
+				$button.html( button ).removeClass( 'sui-button-onload' );
+			} )
+		;
+	}
+
+	function show_hub_sites( resp ) {
+		open_modal( 'destination' );
+		var $target = get_modal( 'destination' ).find( '.shipper-selection.select-name' ),
+			success = !! ( resp || {} ).success,
+			sites = ( resp || {} ).data || [],
+			content = '';
+		if ( success ) {
+			$.each( sites, function( idx, site ) {
+				content += '<option value="' + idx + '">' + site + '</option>';
+			} );
+			$target.html(
+				'<select name="site" class="sui-select">' + content + '</select>'
+			);
+			get_modal( 'destination' )
+				.find( '[href="#refresh-locations"]' )
+					.off( 'click' )
+					.on( 'click', handle( load_hub_sites ) )
+					.end()
+				.find( 'button[type="submit"]' )
+					.off( 'click' )
+					.on( 'click', handle( prepare_selected_site ) )
+					.end()
+				.find( 'select[name="site"]' ).SUIselect2({dropdownCssClass: 'sui-select-dropdown'})
+			;
+		} else {
+			open_modal( 'loading-error' );
+		}
+	}
+
+	function load_hub_sites() {
+		open_modal( 'loading' );
+		$.post( ajaxurl, {
+			action: 'shipper_list_hub_sites',
+			_wpnonce: get_modal( 'loading' ).find( '[name="_wpnonce"]' ).val()
+		} )
+			.done( function( data ) {
+				show_hub_sites( data );
+			} )
+			.error( function() {
+				show_hub_sites();
+			} );
+	}
+
+	function init() {
+		if ( ! $( '.sui-box.shipper-select-site' ).length ) {
+			return false;
+		}
+		setTimeout( load_hub_sites );
+	}
+	$( init );
+
+})( jQuery );
 
 
 /***/ }),
@@ -2362,6 +2945,173 @@
 
 /***/ }),
 
+/***/ "./assets/src/js/settings/permissions.js":
+/*!***********************************************!*\
+  !*** ./assets/src/js/settings/permissions.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+;(function( $, undefined ) {
+
+	var MSG_TIMEOUT = 3000;
+
+
+	function stop_prop( e ) {
+		if ( e && e.preventDefault ) { e.preventDefault(); }
+		if ( e && e.stopPropagation ) { e.stopPropagation(); }
+
+		return false;
+	}
+
+	function reveal_add( e ) {
+		$( '#shipper-add-user' ).attr( 'aria-hidden', false );
+		return stop_prop( e );
+	}
+
+	function hide_add( e ) {
+		var $me = $( '#shipper-add-user' ),
+			$ins = $me.find( ':input' );
+
+		$me.attr( 'aria-hidden', true );
+		$ins.val( '' );
+
+		return stop_prop( e );
+	}
+
+	function handle_verify_user( e ) {
+		var $me = $( '#shipper-add-user' ),
+			$input = $me.find( '#shipper-permissions-add' ),
+			$nonce = $me.find( 'button.shipper-add' );
+
+		$.post( ajaxurl, {
+			action: 'shipper_permissions_verify',
+			user_id: $input.val(),
+			_wpnonce: $nonce.attr( 'data-add' )
+		} ).done( function( rsp ) {
+			var status = ! ! (rsp || {}).success,
+				msg = (rsp || {}).data || '';
+
+			hide_add();
+			if ( ! status ) {
+				return show_error( msg );
+			}
+
+			if ( msg ) {
+				add_user_row( msg );
+			}
+		} );
+
+		return stop_prop( e );
+	}
+
+	function remove_user( e ) {
+		$( e.target ).closest( '.shipper-user-item' ).remove();
+		return stop_prop( e );
+	}
+
+	function enter_to_verify_user ( e ) {
+		var key = e.which;
+		if ( 13 === key ) {
+			handle_verify_user( e );
+		}
+	}
+
+	function show_error( msg ) {
+		var $error = $( '.shipper-permissions-notice.sui-notice-error' ),
+			msg = msg || $error.find( 'p' ).text();
+		$( '.shipper-permissions-notice' ).hide();
+		$error
+			.find( 'p' ).text( msg ).end()
+			.show();
+		setTimeout(function() {
+			$error.hide();
+		}, MSG_TIMEOUT);
+	}
+
+	function show_success( username ) {
+		username = username || 'User';
+		var $success = $( '.shipper-permissions-notice.sui-notice-success' ),
+			msg = $success.find( 'p' ).text();
+		$( '.shipper-permissions-notice' ).hide();
+		$success
+			.find( 'p' ).text( msg.replace( /\{\{USER\}\}/g, username ) ).end()
+			.show();
+		setTimeout(function() {
+			$success.hide();
+		}, MSG_TIMEOUT);
+	}
+
+	function add_user_row( row_html ) {
+		var $me = $( '.shipper-page-settings-permissions .shipper-users-list' )
+			$row = $( row_html ),
+			user_id = $row.find( ':hidden' ).val(),
+			username = $row.find( '.shipper-user' ).text();
+		if ( ! user_id ) {
+			return false;
+		}
+		if ( $me.find( ':hidden[value="' + user_id + '"]' ).length ) {
+			return false;
+		}
+		$me.append( row_html );
+		show_success( username );
+	}
+
+	function init() {
+		if ( ! $( '.shipper-page-settings-permissions' ).length ) {
+			return false;
+		}
+
+
+		var $add = $( '#shipper-permissions-add' ),
+			wpnonce = $add.attr( 'data-wpnonce' );
+
+		$add.SUIselect2({
+			allowClear: true,
+			dropdownCssClass: 'sui-select-dropdown',
+			dropdownParent: $('#shipper-add-user'),
+			ajax: {
+				url: window.ajaxurl,
+				type: "POST",
+				data: function (params) {
+					return {
+						action: 'wdp-usersearch',
+						hash: wpnonce,
+						q: params.term,
+					};
+				},
+				processResults: function (data) {
+					return {
+						results: data.data
+					};
+				},
+			},
+			templateResult: function (result) {
+				if (typeof result.id !== 'undefined' && typeof result.label !== 'undefined') {
+					return $(result.label);
+				}
+				return result.text;
+			},
+			templateSelection: function (result) {
+				return result.display || result.text;
+			},
+		});
+
+		$( document ).on( 'click', 'button.shipper-reveal-add', reveal_add );
+		$( document ).on( 'click', '#shipper-add-user a[href="#close"]', hide_add );
+		$( document ).on( 'click', '#shipper-add-user .shipper-cancel', hide_add );
+
+		$( document ).on( 'click', '#shipper-add-user button.shipper-add', handle_verify_user );
+		$( document ).on( 'keydown', '#shipper-add-user input', enter_to_verify_user );
+
+		$( document ).on( 'click', '.shipper-user-item a.shipper-rmv', remove_user );
+	}
+	$( init );
+} )( jQuery );
+
+
+/***/ }),
+
 /***/ "./assets/src/js/settings/settings.js":
 /*!********************************************!*\
   !*** ./assets/src/js/settings/settings.js ***!
@@ -2491,14 +3241,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _settings_settings_js__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_settings_settings_js__WEBPACK_IMPORTED_MODULE_11__);
 /* harmony import */ var _settings_notifications_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./settings/notifications.js */ "./assets/src/js/settings/notifications.js");
 /* harmony import */ var _settings_notifications_js__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_settings_notifications_js__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var _migrate_preflight_files_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./migrate/preflight-files.js */ "./assets/src/js/migrate/preflight-files.js");
-/* harmony import */ var _migrate_preflight_files_js__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_migrate_preflight_files_js__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _settings_permissions_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./settings/permissions.js */ "./assets/src/js/settings/permissions.js");
+/* harmony import */ var _settings_permissions_js__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_settings_permissions_js__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _migrate_preflight_files_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./migrate/preflight-files.js */ "./assets/src/js/migrate/preflight-files.js");
+/* harmony import */ var _migrate_preflight_files_js__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_migrate_preflight_files_js__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var _migrate_site_selection_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./migrate/site-selection.js */ "./assets/src/js/migrate/site-selection.js");
+/* harmony import */ var _migrate_site_selection_js__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_migrate_site_selection_js__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var _migrate_preflight_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./migrate/preflight.js */ "./assets/src/js/migrate/preflight.js");
+/* harmony import */ var _migrate_preflight_js__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(_migrate_preflight_js__WEBPACK_IMPORTED_MODULE_16__);
 // Everything and the kitchen sink.
 
 
 
 
 
+ // @deprecated
+ // @deprecated?
+
+ // @deprecated
 
 
 
@@ -2600,426 +3360,426 @@ var shipper_sui_version = __webpack_require__(/*! @wpmudev/shared-ui/package.jso
 /* global NodeList, Element, define */
 
 (function (global) {
-  'use strict';
+    'use strict';
 
-  var FOCUSABLE_ELEMENTS = ['a[href]', 'area[href]', 'input:not([disabled])', 'select:not([disabled])', 'textarea:not([disabled])', 'button:not([disabled])', 'iframe', 'object', 'embed', '[contenteditable]', '[tabindex]:not([tabindex^="-"])'];
-  var TAB_KEY = 9;
-  var ESCAPE_KEY = 27;
-  var focusedBeforeDialog;
+    var FOCUSABLE_ELEMENTS = ['a[href]', 'area[href]', 'input:not([disabled])', 'select:not([disabled])', 'textarea:not([disabled])', 'button:not([disabled])', 'iframe', 'object', 'embed', '[contenteditable]', '[tabindex]:not([tabindex^="-"])'];
+    var TAB_KEY = 9;
+    var ESCAPE_KEY = 27;
+    var focusedBeforeDialog;
 
-  /**
-   * Define the constructor to instantiate a dialog
-   *
-   * @constructor
-   * @param {Element} node
-   * @param {(NodeList | Element | string)} targets
-   */
-  function A11yDialog (node, targets) {
-    // Prebind the functions that will be bound in addEventListener and
-    // removeEventListener to avoid losing references
-    this._show = this.show.bind(this);
-    this._hide = this.hide.bind(this);
-    this._maintainFocus = this._maintainFocus.bind(this);
-    this._bindKeypress = this._bindKeypress.bind(this);
+    /**
+     * Define the constructor to instantiate a dialog
+     *
+     * @constructor
+     * @param {Element} node
+     * @param {(NodeList | Element | string)} targets
+     */
+    function A11yDialog(node, targets) {
+        // Prebind the functions that will be bound in addEventListener and
+        // removeEventListener to avoid losing references
+        this._show = this.show.bind(this);
+        this._hide = this.hide.bind(this);
+        // this._maintainFocus = this._maintainFocus.bind(this);
+        this._bindKeypress = this._bindKeypress.bind(this);
 
-    // Keep a reference of the node on the instance
-    this.node = node;
+        // Keep a reference of the node on the instance
+        this.node = node;
 
-    // Keep an object of listener types mapped to callback functions
-    this._listeners = {};
+        // Keep an object of listener types mapped to callback functions
+        this._listeners = {};
 
-    // Initialise everything needed for the dialog to work properly
-    this.create(targets);
-  }
-
-  /**
-   * Set up everything necessary for the dialog to be functioning
-   *
-   * @param {(NodeList | Element | string)} targets
-   * @return {this}
-   */
-  A11yDialog.prototype.create = function (targets) {
-    // Keep a collection of nodes to disable/enable when toggling the dialog
-    this._targets = this._targets || collect(targets) || getSiblings(this.node);
-
-    // Make sure the dialog element is disabled on load, and that the `shown`
-    // property is synced with its value
-    this.node.setAttribute('aria-hidden', true);
-    this.shown = false;
-
-    // Keep a collection of dialog openers, each of which will be bound a click
-    // event listener to open the dialog
-    this._openers = $$('[data-a11y-dialog-show="' + this.node.id + '"]');
-    this._openers.forEach(function (opener) {
-      opener.addEventListener('click', this._show);
-    }.bind(this));
-
-    // Keep a collection of dialog closers, each of which will be bound a click
-    // event listener to close the dialog
-    this._closers = $$('[data-a11y-dialog-hide]', this.node)
-      .concat($$('[data-a11y-dialog-hide="' + this.node.id + '"]'));
-    this._closers.forEach(function (closer) {
-      closer.addEventListener('click', this._hide);
-    }.bind(this));
-
-    // Execute all callbacks registered for the `create` event
-    this._fire('create');
-
-    return this;
-  };
-
-  /**
-   * Show the dialog element, disable all the targets (siblings), trap the
-   * current focus within it, listen for some specific key presses and fire all
-   * registered callbacks for `show` event
-   *
-   * @param {Event} event
-   * @return {this}
-   */
-  A11yDialog.prototype.show = function (event) {
-    // If the dialog is already open, abort
-    if (this.shown) {
-      return this;
+        // Initialise everything needed for the dialog to work properly
+        this.create(targets);
     }
 
-    var overlay = this.node.getElementsByClassName('sui-dialog-overlay');
-    var content = this.node.getElementsByClassName('sui-dialog-content');
-    content[0].className = 'sui-dialog-content sui-bounce-in';
-    overlay[0].className = 'sui-dialog-overlay sui-fade-in';
+    /**
+     * Set up everything necessary for the dialog to be functioning
+     *
+     * @param {(NodeList | Element | string)} targets
+     * @return {this}
+     */
+    A11yDialog.prototype.create = function (targets) {
+        // Keep a collection of nodes to disable/enable when toggling the dialog
+        this._targets = this._targets || collect(targets) || getSiblings(this.node);
 
-    this.shown = true;
-    this.node.removeAttribute('aria-hidden');
+        // Make sure the dialog element is disabled on load, and that the `shown`
+        // property is synced with its value
+        this.node.setAttribute('aria-hidden', true);
+        this.shown = false;
 
-    // Iterate over the targets to disable them by setting their `aria-hidden`
-    // attribute to `true`; in case they already have this attribute, keep a
-    // reference of their original value to be able to restore it later
-    this._targets.forEach(function (target) {
-      var original = target.getAttribute('aria-hidden');
+        // Keep a collection of dialog openers, each of which will be bound a click
+        // event listener to open the dialog
+        this._openers = $$('[data-a11y-dialog-show="' + this.node.id + '"]');
+        this._openers.forEach(function (opener) {
+            opener.addEventListener('click', this._show);
+        }.bind(this));
 
-      if (original) {
-        target.setAttribute('data-a11y-dialog-original', original);
-      }
+        // Keep a collection of dialog closers, each of which will be bound a click
+        // event listener to close the dialog
+        this._closers = $$('[data-a11y-dialog-hide]', this.node)
+            .concat($$('[data-a11y-dialog-hide="' + this.node.id + '"]'));
+        this._closers.forEach(function (closer) {
+            closer.addEventListener('click', this._hide);
+        }.bind(this));
 
-      target.setAttribute('aria-hidden', 'true');
-    });
+        // Execute all callbacks registered for the `create` event
+        this._fire('create');
 
-    // Keep a reference to the currently focused element to be able to restore
-    // it later, then set the focus to the first focusable child of the dialog
-    // element
-    focusedBeforeDialog = document.activeElement;
-    setFocusToFirstItem(this.node);
+        return this;
+    };
 
-    // Bind a focus event listener to the body element to make sure the focus
-    // stays trapped inside the dialog while open, and start listening for some
-    // specific key presses (TAB and ESC)
-    document.body.addEventListener('focus', this._maintainFocus, true);
-    document.addEventListener('keydown', this._bindKeypress);
+    /**
+     * Show the dialog element, disable all the targets (siblings), trap the
+     * current focus within it, listen for some specific key presses and fire all
+     * registered callbacks for `show` event
+     *
+     * @param {Event} event
+     * @return {this}
+     */
+    A11yDialog.prototype.show = function (event) {
+        // If the dialog is already open, abort
+        if (this.shown) {
+            return this;
+        }
 
-    // Add overlay class to document body.
-    document.getElementsByTagName( 'html' )[0].classList.add( 'sui-has-overlay' );
+        this.node.classList.add('sui-fade-in');
+        this.node.classList.remove('sui-fade-out');
+        var content = this.node.getElementsByClassName('sui-dialog-content');
+        content[0].className = 'sui-dialog-content sui-content-fade-in';
 
-    // Execute all callbacks registered for the `show` event
-    this._fire('show', event);
+        // Execute all callbacks registered for the `show` event
+        this._fire('show', event);
 
-    return this;
-  };
+        this.shown = true;
+        this.node.removeAttribute('aria-hidden');
 
-  /**
-   * Hide the dialog element, enable all the targets (siblings), restore the
-   * focus to the previously active element, stop listening for some specific
-   * key presses and fire all registered callbacks for `hide` event
-   *
-   * @param {Event} event
-   * @return {this}
-   */
-  A11yDialog.prototype.hide = function (event) {
-    // If the dialog is already closed, abort
-    if (!this.shown) {
-      return this;
+        // Iterate over the targets to disable them by setting their `aria-hidden`
+        // attribute to `true`; in case they already have this attribute, keep a
+        // reference of their original value to be able to restore it later
+        this._targets.forEach(function (target) {
+            var original = target.getAttribute('aria-hidden');
+
+            if (original) {
+                target.setAttribute('data-a11y-dialog-original', original);
+            }
+
+            target.setAttribute('aria-hidden', 'true');
+        });
+
+        // Keep a reference to the currently focused element to be able to restore
+        // it later, then set the focus to the first focusable child of the dialog
+        // element
+        focusedBeforeDialog = document.activeElement;
+        setFocusToFirstItem(this.node);
+
+        // Bind a focus event listener to the body element to make sure the focus
+        // stays trapped inside the dialog while open, and start listening for some
+        // specific key presses (TAB and ESC)
+        // document.body.addEventListener('focus', this._maintainFocus, true);
+        document.addEventListener('keydown', this._bindKeypress);
+
+        // Add overlay class to document body.
+        document.getElementsByTagName('html')[0].classList.add('sui-has-overlay');
+
+
+        return this;
+    };
+
+    /**
+     * Hide the dialog element, enable all the targets (siblings), restore the
+     * focus to the previously active element, stop listening for some specific
+     * key presses and fire all registered callbacks for `hide` event
+     *
+     * @param {Event} event
+     * @return {this}
+     */
+    A11yDialog.prototype.hide = function (event) {
+        // If the dialog is already closed, abort
+        if (!this.shown) {
+            return this;
+        }
+
+
+        var content = this.node.getElementsByClassName('sui-dialog-content');
+
+        content[0].className = 'sui-dialog-content sui-content-fade-out';
+        this.node.classList.add('sui-fade-out');
+        this.node.classList.remove('sui-fade-in');
+
+        // Execute all callbacks registered for the `hide` event
+        this._fire('hide', event);
+
+        this.shown = false;
+        // This has been set so there is enough time for the animation to show
+        var timeout_node = this.node;
+        setTimeout(function () {
+            timeout_node.setAttribute('aria-hidden', 'true');
+        }, 300);
+
+        // Iterate over the targets to enable them by remove their `aria-hidden`
+        // attribute or resetting them to their initial value
+        this._targets.forEach(function (target) {
+            var original = target.getAttribute('data-a11y-dialog-original');
+
+
+            if (original) {
+                target.setAttribute('aria-hidden', original);
+                target.removeAttribute('data-a11y-dialog-original');
+            } else {
+                target.removeAttribute('aria-hidden');
+            }
+        });
+
+        // If their was a focused element before the dialog was opened, restore the
+        // focus back to it
+        if (focusedBeforeDialog) {
+            focusedBeforeDialog.focus();
+        }
+
+        // Remove the focus event listener to the body element and stop listening
+        // for specific key presses
+        // document.body.removeEventListener('focus', this._maintainFocus, true);
+        document.removeEventListener('keydown', this._bindKeypress);
+
+        // Remove overlay class to document body.
+        document.getElementsByTagName('html')[0].classList.remove('sui-has-overlay');
+
+
+        return this;
+    };
+
+    /**
+     * Destroy the current instance (after making sure the dialog has been hidden)
+     * and remove all associated listeners from dialog openers and closers
+     *
+     * @return {this}
+     */
+    A11yDialog.prototype.destroy = function () {
+        // Hide the dialog to avoid destroying an open instance
+        this.hide();
+
+        // Remove the click event listener from all dialog openers
+        this._openers.forEach(function (opener) {
+            opener.removeEventListener('click', this._show);
+        }.bind(this));
+
+        // Remove the click event listener from all dialog closers
+        this._closers.forEach(function (closer) {
+            closer.removeEventListener('click', this._hide);
+        }.bind(this));
+
+        // Execute all callbacks registered for the `destroy` event
+        this._fire('destroy');
+
+        // Keep an object of listener types mapped to callback functions
+        this._listeners = {};
+
+        return this;
+    };
+
+    /**
+     * Register a new callback for the given event type
+     *
+     * @param {string} type
+     * @param {Function} handler
+     */
+    A11yDialog.prototype.on = function (type, handler) {
+        if (typeof this._listeners[type] === 'undefined') {
+            this._listeners[type] = [];
+        }
+
+        this._listeners[type].push(handler);
+
+        return this;
+    };
+
+    /**
+     * Unregister an existing callback for the given event type
+     *
+     * @param {string} type
+     * @param {Function} handler
+     */
+    A11yDialog.prototype.off = function (type, handler) {
+        var index = this._listeners[type].indexOf(handler);
+
+        if (index > -1) {
+            this._listeners[type].splice(index, 1);
+        }
+
+        return this;
+    };
+
+    /**
+     * Iterate over all registered handlers for given type and call them all with
+     * the dialog element as first argument, event as second argument (if any).
+     *
+     * @access private
+     * @param {string} type
+     * @param {Event} event
+     */
+    A11yDialog.prototype._fire = function (type, event) {
+        var listeners = this._listeners[type] || [];
+
+        listeners.forEach(function (listener) {
+            listener(this.node, event);
+        }.bind(this));
+    };
+
+    /**
+     * Private event handler used when listening to some specific key presses
+     * (namely ESCAPE and TAB)
+     *
+     * @access private
+     * @param {Event} event
+     */
+    A11yDialog.prototype._bindKeypress = function (event) {
+        // If the dialog is shown and the ESCAPE key is being pressed, prevent any
+        // further effects from the ESCAPE key and hide the dialog
+        if (this.shown && event.which === ESCAPE_KEY) {
+            event.preventDefault();
+            this.hide();
+        }
+
+        // If the dialog is shown and the TAB key is being pressed, make sure the
+        // focus stays trapped within the dialog element
+        if (this.shown && event.which === TAB_KEY) {
+            trapTabKey(this.node, event);
+        }
+    };
+
+    /**
+     * Private event handler used when making sure the focus stays within the
+     * currently open dialog
+     *
+     * @access private
+     * @param {Event} event
+     */
+    A11yDialog.prototype._maintainFocus = function (event) {
+        // If the dialog is shown and the focus is not within the dialog element,
+        // move it back to its first focusable child
+        if (this.shown && !this.node.contains(event.target)) {
+            setFocusToFirstItem(this.node);
+        }
+    };
+
+    /**
+     * Convert a NodeList into an array
+     *
+     * @param {NodeList} collection
+     * @return {Array<Element>}
+     */
+    function toArray(collection) {
+        return Array.prototype.slice.call(collection);
     }
 
-
-    var overlay = this.node.getElementsByClassName('sui-dialog-overlay');
-
-    var content = this.node.getElementsByClassName('sui-dialog-content');
-
-    content[0].className = 'sui-dialog-content sui-bounce-out';
-
-    overlay[0].className = 'sui-dialog-overlay sui-fade-out';
-
-    this.shown = false;
-    // This has been set so there is enough time for the animation to show
-    var timeout_node = this.node;
-    setTimeout(function () {
-		timeout_node.setAttribute('aria-hidden', 'true');
-	}, 300);
-
-    // Iterate over the targets to enable them by remove their `aria-hidden`
-    // attribute or resetting them to their initial value
-    this._targets.forEach(function (target) {
-      var original = target.getAttribute('data-a11y-dialog-original');
-
-
-      if (original) {
-        target.setAttribute('aria-hidden', original);
-        target.removeAttribute('data-a11y-dialog-original');
-      } else {
-        target.removeAttribute('aria-hidden');
-      }
-    });
-
-    // If their was a focused element before the dialog was opened, restore the
-    // focus back to it
-    if (focusedBeforeDialog) {
-      focusedBeforeDialog.focus();
+    /**
+     * Query the DOM for nodes matching the given selector, scoped to context (or
+     * the whole document)
+     *
+     * @param {String} selector
+     * @param {Element} [context = document]
+     * @return {Array<Element>}
+     */
+    function $$(selector, context) {
+        return toArray((context || document).querySelectorAll(selector));
     }
 
-    // Remove the focus event listener to the body element and stop listening
-    // for specific key presses
-    document.body.removeEventListener('focus', this._maintainFocus, true);
-    document.removeEventListener('keydown', this._bindKeypress);
+    /**
+     * Return an array of Element based on given argument (NodeList, Element or
+     * string representing a selector)
+     *
+     * @param {(NodeList | Element | string)} target
+     * @return {Array<Element>}
+     */
+    function collect(target) {
+        if (NodeList.prototype.isPrototypeOf(target)) {
+            return toArray(target);
+        }
 
-    // Remove overlay class to document body.
-    document.getElementsByTagName( 'html' )[0].classList.remove( 'sui-has-overlay' );
+        if (Element.prototype.isPrototypeOf(target)) {
+            return [target];
+        }
 
-    // Execute all callbacks registered for the `hide` event
-    this._fire('hide', event);
-
-    return this;
-  };
-
-  /**
-   * Destroy the current instance (after making sure the dialog has been hidden)
-   * and remove all associated listeners from dialog openers and closers
-   *
-   * @return {this}
-   */
-  A11yDialog.prototype.destroy = function () {
-    // Hide the dialog to avoid destroying an open instance
-    this.hide();
-
-    // Remove the click event listener from all dialog openers
-    this._openers.forEach(function (opener) {
-      opener.removeEventListener('click', this._show);
-    }.bind(this));
-
-    // Remove the click event listener from all dialog closers
-    this._closers.forEach(function (closer) {
-      closer.removeEventListener('click', this._hide);
-    }.bind(this));
-
-    // Execute all callbacks registered for the `destroy` event
-    this._fire('destroy');
-
-    // Keep an object of listener types mapped to callback functions
-    this._listeners = {};
-
-    return this;
-  };
-
-  /**
-   * Register a new callback for the given event type
-   *
-   * @param {string} type
-   * @param {Function} handler
-   */
-  A11yDialog.prototype.on = function (type, handler) {
-    if (typeof this._listeners[type] === 'undefined') {
-      this._listeners[type] = [];
+        if (typeof target === 'string') {
+            return $$(target);
+        }
     }
 
-    this._listeners[type].push(handler);
+    /**
+     * Set the focus to the first focusable child of the given element
+     *
+     * @param {Element} node
+     */
+    function setFocusToFirstItem(node) {
+        var focusableChildren = getFocusableChildren(node);
 
-    return this;
-  };
-
-  /**
-   * Unregister an existing callback for the given event type
-   *
-   * @param {string} type
-   * @param {Function} handler
-   */
-  A11yDialog.prototype.off = function (type, handler) {
-    var index = this._listeners[type].indexOf(handler);
-
-    if (index > -1) {
-      this._listeners[type].splice(index, 1);
+        if (focusableChildren.length) {
+            focusableChildren[0].focus();
+        }
     }
 
-    return this;
-  };
-
-  /**
-   * Iterate over all registered handlers for given type and call them all with
-   * the dialog element as first argument, event as second argument (if any).
-   *
-   * @access private
-   * @param {string} type
-   * @param {Event} event
-   */
-  A11yDialog.prototype._fire = function (type, event) {
-    var listeners = this._listeners[type] || [];
-
-    listeners.forEach(function (listener) {
-      listener(this.node, event);
-    }.bind(this));
-  };
-
-  /**
-   * Private event handler used when listening to some specific key presses
-   * (namely ESCAPE and TAB)
-   *
-   * @access private
-   * @param {Event} event
-   */
-  A11yDialog.prototype._bindKeypress = function (event) {
-    // If the dialog is shown and the ESCAPE key is being pressed, prevent any
-    // further effects from the ESCAPE key and hide the dialog
-    if (this.shown && event.which === ESCAPE_KEY) {
-      event.preventDefault();
-      this.hide();
+    /**
+     * Get the focusable children of the given element
+     *
+     * @param {Element} node
+     * @return {Array<Element>}
+     */
+    function getFocusableChildren(node) {
+        return $$(FOCUSABLE_ELEMENTS.join(','), node).filter(function (child) {
+            return !!(child.offsetWidth || child.offsetHeight || child.getClientRects().length);
+        });
     }
 
-    // If the dialog is shown and the TAB key is being pressed, make sure the
-    // focus stays trapped within the dialog element
-    if (this.shown && event.which === TAB_KEY) {
-      trapTabKey(this.node, event);
-    }
-  };
+    /**
+     * Trap the focus inside the given element
+     *
+     * @param {Element} node
+     * @param {Event} event
+     */
+    function trapTabKey(node, event) {
+        var focusableChildren = getFocusableChildren(node);
+        var focusedItemIndex = focusableChildren.indexOf(document.activeElement);
 
-  /**
-   * Private event handler used when making sure the focus stays within the
-   * currently open dialog
-   *
-   * @access private
-   * @param {Event} event
-   */
-  A11yDialog.prototype._maintainFocus = function (event) {
-    // If the dialog is shown and the focus is not within the dialog element,
-    // move it back to its first focusable child
-    if (this.shown && !this.node.contains(event.target)) {
-      setFocusToFirstItem(this.node);
-    }
-  };
-
-  /**
-   * Convert a NodeList into an array
-   *
-   * @param {NodeList} collection
-   * @return {Array<Element>}
-   */
-  function toArray (collection) {
-    return Array.prototype.slice.call(collection);
-  }
-
-  /**
-   * Query the DOM for nodes matching the given selector, scoped to context (or
-   * the whole document)
-   *
-   * @param {String} selector
-   * @param {Element} [context = document]
-   * @return {Array<Element>}
-   */
-  function $$ (selector, context) {
-    return toArray((context || document).querySelectorAll(selector));
-  }
-
-  /**
-   * Return an array of Element based on given argument (NodeList, Element or
-   * string representing a selector)
-   *
-   * @param {(NodeList | Element | string)} target
-   * @return {Array<Element>}
-   */
-  function collect (target) {
-    if (NodeList.prototype.isPrototypeOf(target)) {
-      return toArray(target);
+        // If the SHIFT key is being pressed while tabbing (moving backwards) and
+        // the currently focused item is the first one, move the focus to the last
+        // focusable item from the dialog element
+        if (event.shiftKey && focusedItemIndex === 0) {
+            focusableChildren[focusableChildren.length - 1].focus();
+            event.preventDefault();
+            // If the SHIFT key is not being pressed (moving forwards) and the currently
+            // focused item is the last one, move the focus to the first focusable item
+            // from the dialog element
+        } else if (!event.shiftKey && focusedItemIndex === focusableChildren.length - 1) {
+            focusableChildren[0].focus();
+            event.preventDefault();
+        }
     }
 
-    if (Element.prototype.isPrototypeOf(target)) {
-      return [target];
+    /**
+     * Retrieve siblings from given element
+     *
+     * @param {Element} node
+     * @return {Array<Element>}
+     */
+    function getSiblings(node) {
+        var nodes = toArray(node.parentNode.childNodes);
+        var siblings = nodes.filter(function (node) {
+            return node.nodeType === 1;
+        });
+
+        siblings.splice(siblings.indexOf(node), 1);
+
+        return siblings;
     }
 
-    if (typeof target === 'string') {
-      return $$(target);
-    }
-  }
-
-  /**
-   * Set the focus to the first focusable child of the given element
-   *
-   * @param {Element} node
-   */
-  function setFocusToFirstItem (node) {
-    var focusableChildren = getFocusableChildren(node);
-
-    if (focusableChildren.length) {
-      focusableChildren[0].focus();
-    }
-  }
-
-  /**
-   * Get the focusable children of the given element
-   *
-   * @param {Element} node
-   * @return {Array<Element>}
-   */
-  function getFocusableChildren (node) {
-    return $$(FOCUSABLE_ELEMENTS.join(','), node).filter(function (child) {
-      return !!(child.offsetWidth || child.offsetHeight || child.getClientRects().length);
-    });
-  }
-
-  /**
-   * Trap the focus inside the given element
-   *
-   * @param {Element} node
-   * @param {Event} event
-   */
-  function trapTabKey (node, event) {
-    var focusableChildren = getFocusableChildren(node);
-    var focusedItemIndex = focusableChildren.indexOf(document.activeElement);
-
-    // If the SHIFT key is being pressed while tabbing (moving backwards) and
-    // the currently focused item is the first one, move the focus to the last
-    // focusable item from the dialog element
-    if (event.shiftKey && focusedItemIndex === 0) {
-      focusableChildren[focusableChildren.length - 1].focus();
-      event.preventDefault();
-    // If the SHIFT key is not being pressed (moving forwards) and the currently
-    // focused item is the last one, move the focus to the first focusable item
-    // from the dialog element
-    } else if (!event.shiftKey && focusedItemIndex === focusableChildren.length - 1) {
-      focusableChildren[0].focus();
-      event.preventDefault();
-    }
-  }
-
-  /**
-   * Retrieve siblings from given element
-   *
-   * @param {Element} node
-   * @return {Array<Element>}
-   */
-  function getSiblings (node) {
-    var nodes = toArray(node.parentNode.childNodes);
-    var siblings = nodes.filter(function (node) {
-      return node.nodeType === 1;
-    });
-
-    siblings.splice(siblings.indexOf(node), 1);
-
-    return siblings;
-  }
-
-  if ( true && typeof module.exports !== 'undefined') {
-    module.exports = A11yDialog;
-  } else if (true) {
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
-      return A11yDialog;
-    }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+    if ( true && typeof module.exports !== 'undefined') {
+        module.exports = A11yDialog;
+    } else if (true) {
+        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
+            return A11yDialog;
+        }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-  } else {}
+    } else {}
 }(typeof global !== 'undefined' ? global : window));
 
 ( function( $ ) {
@@ -3162,9 +3922,9 @@ var shipper_sui_version = __webpack_require__(/*! @wpmudev/shared-ui/package.jso
 		return this;
 	};
 
-	if ( 0 !== $( '.sui-2-3-15 .sui-accordion' ).length ) {
+	if ( 0 !== $( '.sui-2-3-27 .sui-accordion' ).length ) {
 
-		$( '.sui-2-3-15 .sui-accordion' ).each( function() {
+		$( '.sui-2-3-27 .sui-accordion' ).each( function() {
 			SUI.suiAccordion( this );
 		});
 	}
@@ -4216,7 +4976,7 @@ var shipper_sui_version = __webpack_require__(/*! @wpmudev/shared-ui/package.jso
     SUI.suiCodeSnippet = function( ) {
 
         // Convert all code snippet.
-        $( '.sui-2-3-15 .sui-code-snippet:not(.sui-no-copy)' ).each( function() {
+        $( '.sui-2-3-27 .sui-code-snippet:not(.sui-no-copy)' ).each( function() {
 
             // backward compat of instantiate new accordion
             $( this ).SUICodeSnippet({});
@@ -4240,11 +5000,370 @@ var shipper_sui_version = __webpack_require__(/*! @wpmudev/shared-ui/package.jso
 		window.SUI = {};
 	}
 
+	SUI.sliderBack = function( el ) {
+
+		var slider = $( el ),
+			dialog = slider.closest( '.sui-dialog' ),
+			slides = slider.find( '.sui-slider-content > li' )
+			;
+
+		var navigation = slider.find( '.sui-slider-navigation' ),
+			navButtons = navigation.find( 'button' ),
+			btnBack    = navigation.find( '.sui-prev' ),
+			btnNext    = navigation.find( '.sui-next' )
+			;
+
+		if ( ! dialog.hasClass( 'sui-dialog-onboard' ) ) {
+			return;
+		}
+
+		function init() {
+
+			var currSlide = slider.find( '.sui-slider-content > li.sui-current' ),
+				prevSlide = currSlide.prev()
+				;
+
+			if ( ! prevSlide.length ) {
+
+				if ( slider.hasClass( 'sui-infinite' ) ) {
+
+					prevSlide = slider.find( '.sui-slider-content > li:last' );
+
+					currSlide.removeClass( 'sui-current' );
+					currSlide.removeClass( 'sui-loaded' );
+
+					prevSlide.addClass( 'sui-current' );
+					prevSlide.addClass( 'fadeInLeft' );
+
+					navButtons.prop( 'disabled', true );
+
+					setTimeout( function() {
+						prevSlide.addClass( 'sui-loaded' );
+						prevSlide.removeClass( 'fadeInLeft' );
+					}, 600 );
+
+					setTimeout( function() {
+						navButtons.prop( 'disabled', false );
+					}, 650 );
+				}
+
+			} else {
+
+				currSlide.removeClass( 'sui-current' );
+				currSlide.removeClass( 'sui-loaded' );
+
+				prevSlide.addClass( 'sui-current' );
+				prevSlide.addClass( 'fadeInLeft' );
+
+				navButtons.prop( 'disabled', true );
+
+				if ( ! slider.hasClass( 'sui-infinite' ) ) {
+
+					btnNext.removeClass( 'sui-hidden' );
+
+					if ( slides.first().data( 'slide' ) === prevSlide.data( 'slide' ) ) {
+						btnBack.addClass( 'sui-hidden' );
+					}
+				}
+
+				setTimeout( function() {
+					prevSlide.addClass( 'sui-loaded' );
+					prevSlide.removeClass( 'fadeInLeft' );
+				}, 600 );
+
+				setTimeout( function() {
+					navButtons.prop( 'disabled', false );
+				}, 650 );
+			}
+		}
+
+		init();
+
+		return this;
+	};
+
+	SUI.sliderNext = function( el ) {
+
+		var slider = $( el ),
+			dialog = slider.closest( '.sui-dialog' ),
+			slides = slider.find( '.sui-slider-content > li' )
+			;
+
+		var navigation = slider.find( '.sui-slider-navigation' ),
+			navButtons = navigation.find( 'button' ),
+			btnBack    = navigation.find( '.sui-prev' ),
+			btnNext    = navigation.find( '.sui-next' )
+			;
+
+		if ( ! dialog.hasClass( 'sui-dialog-onboard' ) ) {
+			return;
+		}
+
+		function init() {
+
+			var currSlide = slider.find( '.sui-slider-content > li.sui-current' ),
+				nextSlide = currSlide.next()
+				;
+
+			if ( ! nextSlide.length ) {
+
+				if ( slider.hasClass( 'sui-infinite' ) ) {
+
+					nextSlide = slider.find( '.sui-slider-content > li:first' );
+
+					currSlide.removeClass( 'sui-current' );
+					currSlide.removeClass( 'sui-loaded' );
+
+					nextSlide.addClass( 'sui-current' );
+					nextSlide.addClass( 'fadeInRight' );
+
+					navButtons.prop( 'disabled', true );
+
+					setTimeout( function() {
+						nextSlide.addClass( 'sui-loaded' );
+						nextSlide.removeClass( 'fadeInRight' );
+					}, 600 );
+
+					setTimeout( function() {
+						navButtons.prop( 'disabled', false );
+					}, 650 );
+
+				}
+
+			} else {
+
+				currSlide.removeClass( 'sui-current' );
+				currSlide.removeClass( 'sui-loaded' );
+
+				nextSlide.addClass( 'sui-current' );
+				nextSlide.addClass( 'fadeInRight' );
+
+				navButtons.prop( 'disabled', true );
+
+				if ( ! slider.hasClass( 'sui-infinite' ) ) {
+
+					btnBack.removeClass( 'sui-hidden' );
+
+					if ( slides.length === nextSlide.data( 'slide' ) ) {
+						btnNext.addClass( 'sui-hidden' );
+					}
+				}
+
+				setTimeout( function() {
+					nextSlide.addClass( 'sui-loaded' );
+					nextSlide.removeClass( 'fadeInRight' );
+				}, 600 );
+
+				setTimeout( function() {
+					navButtons.prop( 'disabled', false );
+				}, 650 );
+
+			}
+		}
+
+		init();
+
+		return this;
+	};
+
+	SUI.sliderStep = function( el ) {
+
+		var slider = $( el ),
+			dialog = slider.closest( '.sui-dialog' )
+			;
+
+		var slides = slider.find( '.sui-slider-content' ),
+			slide  = slides.find( '> li' )
+			;
+
+		var steps  = slider.find( '.sui-slider-steps' ),
+			step   = steps.find( 'li' ),
+			button = step.find( 'button' )
+			;
+
+		var navigation = slider.find( '.sui-slider-navigation' ),
+			navButtons = navigation.find( 'button' ),
+			navBack    = navigation.find( '.sui-prev' ),
+			navNext    = navigation.find( '.sui-next' )
+			;
+
+		if ( ! dialog.hasClass( 'sui-dialog-onboard' ) && ! steps.hasClass( 'sui-clickable' ) ) {
+			return;
+		}
+
+		function reset() {
+
+			// Remove current class
+			slide.removeClass( 'sui-current' );
+
+			// Remove loaded state
+			slide.removeClass( 'sui-loaded' );
+
+		}
+
+		function load( element ) {
+
+			var button  = $( element ),
+				index   = button.data( 'slide' )
+				;
+
+			var curSlide = button.closest( 'li[data-slide]' ),
+				newSlide  = slides.find( '> li[data-slide="' + index + '"]' )
+				;
+
+			newSlide.addClass( 'sui-current' );
+
+			if ( curSlide.data( 'slide' ) < newSlide.data( 'slide' ) ) {
+				newSlide.addClass( 'fadeInRight' );
+			} else {
+				newSlide.addClass( 'fadeInLeft' );
+			}
+
+			navButtons.prop( 'disabled', true );
+
+			if ( ! slider.hasClass( 'sui-infinite' ) ) {
+
+				if ( 1 === newSlide.data( 'slide' ) ) {
+					navBack.addClass( 'sui-hidden' );
+					navNext.removeClass( 'sui-hidden' );
+				}
+
+				if ( slide.length === newSlide.data( 'slide' ) ) {
+					navBack.removeClass( 'sui-hidden' );
+					navNext.addClass( 'sui-hidden' );
+				}
+			}
+
+			setTimeout( function() {
+
+				newSlide.addClass( 'sui-loaded' );
+
+				if ( curSlide.data( 'slide' ) < newSlide.data( 'slide' ) ) {
+					newSlide.removeClass( 'fadeInRight' );
+				} else {
+					newSlide.removeClass( 'fadeInLeft' );
+				}
+			}, 600 );
+
+			setTimeout( function() {
+				navButtons.prop( 'disabled', false );
+			}, 650 );
+		}
+
+		function init() {
+
+			if ( button.length ) {
+
+				button.on( 'click', function( e ) {
+
+					reset();
+
+					load( this );
+
+					e.preventDefault();
+					e.stopPropagation();
+
+				});
+			}
+		}
+
+		init();
+
+		return this;
+	};
+
+	SUI.dialogSlider = function( el ) {
+
+		var slider   = $( el ),
+			dialog   = slider.closest( '.sui-dialog' ),
+			btnBack  = slider.find( '.sui-slider-navigation .sui-prev' ),
+			btnNext  = slider.find( '.sui-slider-navigation .sui-next' ),
+			tourBack = slider.find( '*[data-a11y-dialog-tour-back]' ),
+			tourNext = slider.find( '*[data-a11y-dialog-tour-next]' ),
+			steps    = slider.find( '.sui-slider-steps' )
+			;
+
+		if ( ! dialog.hasClass( 'sui-dialog-onboard' ) || slider.hasClass( 'sui-slider-off' ) ) {
+			return;
+		}
+
+		function init() {
+
+			if ( btnBack.length ) {
+
+				btnBack.on( 'click', function( e ) {
+
+					SUI.sliderBack( slider );
+
+					e.preventDefault();
+
+				});
+			}
+
+			if ( tourBack.length ) {
+
+				tourBack.on( 'click', function( e ) {
+
+					SUI.sliderBack( slider );
+
+					e.preventDefault();
+
+				});
+			}
+
+			if ( btnNext.length ) {
+
+				btnNext.on( 'click', function( e ) {
+
+					SUI.sliderNext( slider );
+
+					e.preventDefault();
+
+				});
+			}
+
+			if ( tourNext.length ) {
+
+				tourNext.on( 'click', function( e ) {
+
+					SUI.sliderNext( slider );
+
+					e.preventDefault();
+
+				});
+			}
+
+			if ( steps.length ) {
+				SUI.sliderStep( slider );
+			}
+		}
+
+		init();
+
+		return this;
+	};
+
+	$( '.sui-2-3-27 .sui-slider' ).each( function() {
+		SUI.dialogSlider( this );
+	});
+
+}( jQuery ) );
+
+( function( $ ) {
+
+	// Enable strict mode.
+	'use strict';
+
+	// Define global SUI object if it doesn't exist.
+	if ( 'object' !== typeof window.SUI ) {
+		window.SUI = {};
+	}
+
 	SUI.linkDropdown = function() {
 
 		function closeAllDropdowns( $except ) {
 
-			var $dropdowns = $( '.sui-2-3-15 .sui-dropdown' );
+			var $dropdowns = $( '.sui-2-3-27 .sui-dropdown' );
 
 			if ( $except ) {
 				$dropdowns = $dropdowns.not( $except );
@@ -4271,7 +5390,7 @@ var shipper_sui_version = __webpack_require__(/*! @wpmudev/shared-ui/package.jso
 
 		$( 'body' ).mouseup( function( e ) {
 
-			var $anchor = $( '.sui-2-3-15 .sui-dropdown-anchor' );
+			var $anchor = $( '.sui-2-3-27 .sui-dropdown-anchor' );
 
 			if ( ( ! $anchor.is( e.target ) ) && ( 0 === $anchor.has( e.target ).length ) ) {
 				closeAllDropdowns();
@@ -4282,6 +5401,20 @@ var shipper_sui_version = __webpack_require__(/*! @wpmudev/shared-ui/package.jso
 	};
 
 	SUI.linkDropdown();
+
+}( jQuery ) );
+
+// This file is to be used for fixing up issues with IE11.
+
+( function( $ ) {
+
+    var colorpickers = $( '.sui-colorpicker-wrap' );
+
+    // If IE11 remove SUI colorpicker styles.
+    if ( !! navigator.userAgent.match( /Trident\/7\./ ) && colorpickers[0]) {
+        colorpickers.find( '.sui-colorpicker' ).hide();
+        colorpickers.removeClass( 'sui-colorpicker-wrap' );
+    }
 
 }( jQuery ) );
 
@@ -4311,9 +5444,9 @@ var shipper_sui_version = __webpack_require__(/*! @wpmudev/shared-ui/package.jso
 ( function( $ ) {
 
 	// This will auto hide the top notice if the classes .sui-can-dismiss or .sui-cant-dismiss aren't present.
-	$( '.sui-2-3-15 .sui-notice-top:not(.sui-can-dismiss, .sui-cant-dismiss)' ).delay( 3000 ).slideUp( 'slow' );
+	$( '.sui-2-3-27 .sui-notice-top:not(.sui-can-dismiss, .sui-cant-dismiss)' ).delay( 3000 ).slideUp( 'slow' );
 
-	$( '.sui-2-3-15 .sui-notice-dismiss' ).click( function( e ) {
+	$( '.sui-2-3-27 .sui-notice-dismiss' ).click( function( e ) {
 		e.preventDefault();
 
         $( this ).parent().stop().slideUp( 'slow' );
@@ -4335,13 +5468,13 @@ var shipper_sui_version = __webpack_require__(/*! @wpmudev/shared-ui/package.jso
 
 	SUI.showHidePassword = function() {
 
-		$( '.sui-2-3-15 .sui-form-field' ).each( function() {
+		$( '.sui-2-3-27 .sui-form-field' ).each( function() {
 
 			var $this = $( this );
 
 			if ( 0 !== $this.find( 'input[type="password"]' ).length ) {
 
-				$this.find( '[class*="sui-button"], .sui-password-toggle' ).on( 'click', function() {
+				$this.find( '[class*="sui-button"], .sui-password-toggle' ).off( 'click.toggle-password' ).on( 'click.toggle-password', function() {
 
 					var $button = $( this ),
 						$input  = $button.parent().find( 'input' ),
@@ -4373,6 +5506,27 @@ var shipper_sui_version = __webpack_require__(/*! @wpmudev/shared-ui/package.jso
 
 ( function( $ ) {
 
+    var endpoint = 'https://api.reviews.co.uk/merchant/reviews?store=wpmudev-org';
+
+    // Update the reviews with the live stats.
+    $( '.sui-2-3-27 .sui-reviews' ).each( function() {
+        var review = $( this );
+        $.get( endpoint, function( data ) {
+            var stars = Math.round( data.stats.average_rating );
+            var starsBlock = review.find( '.sui-reviews__stars' )[ 0 ];
+            var i;
+            for ( i = 0; i < stars; i++ ) {
+                starsBlock.innerHTML += '<i class="sui-icon-star" aria-hidden="true"></i> ';
+            }
+            review.find( '.sui-reviews-rating' )[ 0 ].innerHTML = data.stats.average_rating;
+            review.find( '.sui-reviews-customer-count' )[ 0 ].innerHTML = data.stats.total_reviews;
+        });
+    });
+
+}( jQuery ) );
+
+( function( $ ) {
+
     // Enable strict mode.
     'use strict';
 
@@ -4399,7 +5553,7 @@ var shipper_sui_version = __webpack_require__(/*! @wpmudev/shared-ui/package.jso
 		$( el ).prepend( svg ).addClass( 'loaded' ).find( 'circle:last-child' ).css( 'animation', 'sui' + score + ' 3s forwards' );
 	};
 
-	$( '.sui-2-3-15 .sui-circle-score' ).each( function() {
+	$( '.sui-2-3-27 .sui-circle-score' ).each( function() {
 		SUI.loadCircleScore( this );
 	});
 
@@ -4617,7 +5771,7 @@ var shipper_sui_version = __webpack_require__(/*! @wpmudev/shared-ui/package.jso
 	};
 
 	// Convert all select lists to fancy sui Select lists.
-	$( '.sui-2-3-15 select' ).each( function() {
+	$( '.sui-2-3-27 select:not([multiple])' ).each( function() {
 		SUI.suiSelect( this );
 	});
 
@@ -11153,6 +12307,51 @@ var shipper_sui_version = __webpack_require__(/*! @wpmudev/shared-ui/package.jso
 
 ( function( $ ) {
 
+	// Enable strict mode
+	'use strict';
+
+	// Define global SUI object if it doesn't exist
+	if ( 'object' !== typeof window.SUI ) {
+		window.SUI = {};
+	}
+
+	SUI.sideTabs = function( element ) {
+
+		var $this 	   = $( element ),
+			$label     = $this.parent( 'label' ),
+			$data      = $this.data( 'tab-menu' ),
+			$wrapper   = $this.closest( '.sui-side-tabs' ),
+			$alllabels = $wrapper.find( '>.sui-tabs-menu .sui-tab-item' ),
+			$allinputs = $alllabels.find( 'input' ),
+			newContent
+			;
+
+		$this.on( 'click', function( e ) {
+
+			$alllabels.removeClass( 'active' );
+			$allinputs.removeAttr( 'checked' );
+			$wrapper.find( '.sui-tabs-content>div[data-tab-content]' ).removeClass( 'active' );
+
+			$label.addClass( 'active' );
+			$this.attr( 'checked', 'checked' );
+
+			newContent = $wrapper.find( '.sui-tabs-content div[data-tab-content="' + $data + '"]' );
+
+			if ( newContent.length ) {
+				newContent.addClass( 'active' );
+			}
+		});
+
+	};
+
+	$( '.sui-2-3-27 .sui-side-tabs label.sui-tab-item input' ).each( function() {
+		SUI.sideTabs( this );
+	});
+
+}( jQuery ) );
+
+( function( $ ) {
+
 	// Enable strict mode.
 	'use strict';
 
@@ -11347,9 +12546,409 @@ var shipper_sui_version = __webpack_require__(/*! @wpmudev/shared-ui/package.jso
     };
 
 
-    if ( 0 !== $( '.sui-2-3-15 .sui-tabs' ).length ) {
+    if ( 0 !== $( '.sui-2-3-27 .sui-tabs' ).length ) {
         SUI.suiTabs();
     }
+
+}( jQuery ) );
+
+( function( $ ) {
+
+	// Enable strict mode.
+	'use strict';
+
+	// Define global SUI object if it doesn't exist.
+	if ( 'object' !== typeof window.SUI ) {
+        window.SUI = {};
+	}
+
+	SUI.treeOnLoad = function( element ) {
+
+		var tree     = $( element ),
+			leaf     = tree.find( 'li[role="treeitem"]' ),
+			node     = leaf.find( '> .sui-tree-node' ),
+			checkbox = node. find( '> .sui-node-checkbox input' ),
+			branch   = leaf.find( '> ul[role="group"]' )
+			;
+
+		// Hide sub-groups
+		branch.slideUp();
+
+		// Uncheck item
+		if ( 0 !== checkbox.length ) {
+			checkbox.prop( 'checked', false );
+		}
+
+		leaf.each( function() {
+
+			var leaf       = $( this ),
+				openLeaf   = leaf.attr( 'aria-expanded' ),
+				checkLeaf  = leaf.attr( 'aria-selected' ),
+				node       = leaf.find( '> .sui-tree-node' ),
+				checkbox   = node.find( '> .sui-node-checkbox' ),
+				button     = node.find( '> span[role="button"], > button' ),
+				icon       = node.find( '> span[aria-hidden]' ),
+				branch     = leaf.find( '> ul[role="group"]' ),
+				innerLeaf  = branch.find( '> li[role="treeitem"]' ),
+				innerCheck = innerLeaf.find( '> .sui-tree-node > .sui-node-checkbox' )
+				;
+
+			// FIX: Remove unnecessary elements for leafs
+			if ( ( 'selector' === tree.data( 'tree' ) || 'selector' === tree.attr( 'data-tree' ) ) && 0 !== icon.length ) {
+				button.remove();
+			}
+
+			if ( typeof undefined !== typeof openLeaf && false !== openLeaf ) {
+
+				// Open sub-groups
+				if ( 'true' === openLeaf ) {
+					branch.slideDown();
+				}
+			} else {
+
+				if ( 0 !== branch.length ) {
+					leaf.attr( 'aria-expanded', 'false' );
+				} else {
+
+					// FIX: Remove unnecessary elements for leafs
+					if ( 0 !== button.length ) {
+						button.remove();
+					}
+				}
+			}
+
+			if ( typeof undefined !== typeof checkLeaf && false !== checkLeaf ) {
+
+				// Checked leafs
+				if ( 'true' === checkLeaf && 0 < branch.length ) {
+
+					innerLeaf.attr( 'aria-selected', 'true' );
+
+					if ( 0 !== checkbox.length && checkbox.is( 'label' ) ) {
+						checkbox.find( 'input' ).prop( 'checked', true );
+					}
+
+					if ( 0 !== innerCheck.length && innerCheck.is( 'label' ) ) {
+						innerCheck.find( 'input' ).prop( 'checked', true );
+					}
+				}
+			} else {
+
+				// Unchecked leafs
+				leaf.attr( 'aria-selected', 'false' );
+
+				if ( 0 !== checkbox.length && checkbox.is( 'label' ) ) {
+					checkbox.find( 'input' ).prop( 'checked', false );
+				}
+			}
+		});
+	};
+
+	SUI.treeButton = function( element ) {
+
+		var button = $( element );
+
+		button.on( 'click', function( e ) {
+
+			var button = $( this ),
+				leaf   = button.closest( 'li[role="treeitem"]' ),
+				branch = leaf.find( '> ul[role="group"]' )
+				;
+
+			if ( 0 !== branch.length ) {
+
+				branch.slideToggle( 250 );
+
+				if ( 'true' === leaf.attr( 'aria-expanded' ) ) {
+					leaf.attr( 'aria-expanded', 'false' );
+				} else {
+					leaf.attr( 'aria-expanded', 'true' );
+				}
+			}
+
+			e.preventDefault();
+
+		});
+	};
+
+	SUI.treeCheckbox = function( element ) {
+
+		var checkbox = $( element );
+
+		checkbox.on( 'click', function() {
+
+			var checkbox  = $( this ),
+				leaf      = checkbox.closest( 'li[role="treeitem"]' ),
+				branches  = leaf.find( 'ul[role="group"]' ),
+				leafs     = branches.find( '> li[role="treeitem"]' ),
+				checks    = leafs.find( '> .sui-tree-node > .sui-node-checkbox input' ),
+				topBranch = leaf.parent( 'ul' ),
+				topLeaf   = topBranch.parent( 'li' )
+				;
+
+			var	countIndex = 0,
+				countTopBranches = ( topLeaf.parents( 'ul' ).length - 1 )
+				;
+
+			if ( 'true' === leaf.attr( 'aria-selected' ) ) {
+
+				// Unselect current leaf
+				leaf.attr( 'aria-selected', 'false' );
+
+				// Unselect current checkbox
+				if ( checkbox.is( 'input' ) ) {
+					checkbox.prop( 'checked', false );
+				}
+
+				// Unselect child leafs
+				if ( 0 !== branches.length ) {
+					leafs.attr( 'aria-selected', 'false' );
+				}
+
+				// Unselect child checkboxes
+				if ( 0 !== checks.length ) {
+					checks.prop( 'checked', false );
+				}
+
+				// Unselect branch(es) when not all leafs are selected
+				if ( leaf.parent().is( 'ul' ) && 'group' === leaf.parent().attr( 'role' ) ) {
+
+					leaf.parents( 'ul' ).each( function() {
+
+						var branch = $( this ),
+							leaf   = branch.parent( 'li' ),
+							check  = leaf.find( '> .sui-tree-node > .sui-node-checkbox input' )
+							;
+
+						if ( 'treeitem' === leaf.attr( 'role' ) ) {
+
+							leaf.attr( 'aria-selected', 'false' );
+
+							if ( 0 !== check.length ) {
+								check.prop( 'checked', false );
+							}
+						}
+					});
+				}
+			} else {
+
+				// Select current leaf
+				leaf.attr( 'aria-selected', 'true' );
+
+				// Select current checkbox
+				if ( checkbox.is( 'input' ) ) {
+					checkbox.prop( 'checked', true );
+				}
+
+				// Select child leafs
+				if ( 0 !== branches.length ) {
+					leafs.attr( 'aria-selected', 'true' );
+				}
+
+				// Select child checkboxes
+				if ( 0 !== checks.length ) {
+					checks.prop( 'checked', true );
+				}
+
+				// Select top branch(es) when all leafs are selected
+				if ( 0 === topLeaf.find( 'li[aria-selected="false"]' ).length ) {
+
+					topLeaf.attr( 'aria-selected', 'true' );
+
+					for ( countIndex = 0; countTopBranches >= countIndex; countIndex++ ) {
+
+						topLeaf.parent( 'ul' ).eq( countIndex ).each( function() {
+
+							var branch     = $( this ),
+								leafFalse  = branch.find( '> li[aria-selected="false"]' )
+								;
+
+							if ( 0 === leafFalse.length ) {
+								branch.parent( 'li' ).attr( 'aria-selected', 'true' );
+								branch.parent( 'li' ).find( '> .sui-tree-node > .sui-node-checkbox input' ).prop( 'checked', true );
+							}
+						});
+					}
+				}
+			}
+		});
+	};
+
+	SUI.treeForm = function( element ) {
+
+		var button = $( element );
+
+		if ( 'add' === button.attr( 'data-button' ) ) {
+
+			button.on( 'click', function() {
+
+				var button  = $( this ),
+					leaf    = button.closest( 'li[role="treeitem"]' ),
+					node    = leaf.find( '> .sui-tree-node' ),
+					expand  = node.find( 'span[data-button="expander"]' ),
+					branch  = leaf.find( '> ul[role="group"]' ),
+					content = branch.find( '> span[role="contentinfo"]' )
+					;
+
+				if ( 0 !== content.length ) {
+
+					// Hide button
+					button.hide();
+					button.removeAttr( 'tabindex' );
+					button.attr( 'aria-hidden', 'true' );
+
+					// Show content
+					content.addClass( 'sui-show' );
+					content.removeAttr( 'aria-hidden' );
+
+					// FIX: Open tree if it's closed
+					if ( 'true' !== leaf.attr( 'aria-expanded' ) ) {
+						expand.click();
+					}
+
+					// Focus content
+					content.focus();
+					content.attr( 'tabindex', '-1' );
+
+				}
+			});
+		}
+
+		if ( 'remove' === button.attr( 'data-button' ) ) {
+
+			button.on( 'click', function() {
+
+				var button  = $( this ),
+					content = button.closest( 'span[role="contentinfo"]' ),
+					leaf    = content.closest( 'li[role="treeitem"]' ),
+					node    = leaf.find( '> .sui-tree-node' ),
+					btnAdd  = node.find( '> span[data-button="add"]' )
+					;
+
+				// Hide content
+				content.removeClass( 'sui-show' );
+				content.removeAttr( 'tabindex' );
+				content.attr( 'aria-hidden', 'true' );
+
+				// Show button
+				btnAdd.show();
+				btnAdd.removeAttr( 'aria-hidden' );
+				btnAdd.focus();
+				btnAdd.attr( 'tabindex', '-1' );
+
+			});
+		}
+	};
+
+	SUI.suiTree = function( element, dynamic ) {
+
+		var tree = $( element );
+
+		if ( ! tree.hasClass( 'sui-tree' ) || typeof undefined === tree.attr( 'data-tree' ) ) {
+			return;
+		}
+
+		function button() {
+
+			var leaf   = tree.find( 'li[role="treeitem"]' ),
+				node   = leaf.find( '> .sui-tree-node' ),
+				button = node.find( '> [data-button="expander"]' ),
+				label  = node.find( '> span.sui-node-text' )
+				;
+
+			button.each( function() {
+				var button = $( this );
+				SUI.treeButton( button );
+			});
+
+			label.each( function() {
+				var label = $( this );
+				SUI.treeButton( label );
+			});
+		}
+
+		function checkbox() {
+
+			var leaf     = tree.find( 'li[role="treeitem"]' ),
+				node     = leaf.find( '> .sui-tree-node' ),
+				checkbox = node.find( '> .sui-node-checkbox' )
+				;
+
+			checkbox.each( function() {
+
+				var checkbox = ( $( this ).is( 'label' ) ) ? $( this ).find( 'input' ) : $( this );
+
+				SUI.treeCheckbox( checkbox );
+
+			});
+		}
+
+		function add() {
+
+			var leaf   = tree.find( 'li[role="treeitem"]' ),
+				node   = leaf.find( '> .sui-tree-node' ),
+				button = node.find( '> [data-button="add"]' )
+				;
+
+			button.each( function() {
+
+				var button = $( this );
+
+				SUI.treeForm( button );
+
+			});
+		}
+
+		function remove() {
+
+			var button = tree.find( '[data-button="remove"]' );
+
+			button.each( function() {
+
+				var button = $( this );
+
+				SUI.treeForm( button );
+
+			});
+		}
+
+		function init() {
+
+			if (
+				'selector' === tree.data( 'tree' ) ||
+				'directory' === tree.data( 'tree' ) ||
+				'selector' === tree.attr( 'data-tree' ) ||
+				'directory' === tree.atrr( 'data-tree' )
+			) {
+
+				// Initial setup
+				SUI.treeOnLoad( tree );
+
+				// Expand action
+				button();
+
+				// Select action
+				checkbox();
+
+				// Add folder action
+				if ( true === dynamic || 'true' === dynamic ) {
+					add();
+					remove();
+				}
+			}
+		}
+
+		init();
+
+		return this;
+	};
+
+	if ( 0 !== $( '.sui-2-3-27 .sui-tree' ).length ) {
+
+		$( '.sui-2-3-27 .sui-tree' ).each( function() {
+			SUI.suiTree( $( this ), true );
+		});
+	}
 
 }( jQuery ) );
 
@@ -11365,7 +12964,7 @@ var shipper_sui_version = __webpack_require__(/*! @wpmudev/shared-ui/package.jso
 
 	SUI.upload = function() {
 
-		$( '.sui-2-3-15 .sui-upload-group input[type="file"]' ).on( 'change', function( e ) {
+		$( '.sui-2-3-27 .sui-upload-group input[type="file"]' ).on( 'change', function( e ) {
 			var file = $( this )[0].files[0],
 				message = $( this ).find( '~ .sui-upload-message' );
 
@@ -11538,426 +13137,426 @@ ace.define( 'ace/theme/sui', [], function( require, exports, module ) {
 /* WEBPACK VAR INJECTION */(function(global) {var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* global NodeList, Element, define */
 
 (function (global) {
-  'use strict';
+    'use strict';
 
-  var FOCUSABLE_ELEMENTS = ['a[href]', 'area[href]', 'input:not([disabled])', 'select:not([disabled])', 'textarea:not([disabled])', 'button:not([disabled])', 'iframe', 'object', 'embed', '[contenteditable]', '[tabindex]:not([tabindex^="-"])'];
-  var TAB_KEY = 9;
-  var ESCAPE_KEY = 27;
-  var focusedBeforeDialog;
+    var FOCUSABLE_ELEMENTS = ['a[href]', 'area[href]', 'input:not([disabled])', 'select:not([disabled])', 'textarea:not([disabled])', 'button:not([disabled])', 'iframe', 'object', 'embed', '[contenteditable]', '[tabindex]:not([tabindex^="-"])'];
+    var TAB_KEY = 9;
+    var ESCAPE_KEY = 27;
+    var focusedBeforeDialog;
 
-  /**
-   * Define the constructor to instantiate a dialog
-   *
-   * @constructor
-   * @param {Element} node
-   * @param {(NodeList | Element | string)} targets
-   */
-  function A11yDialog (node, targets) {
-    // Prebind the functions that will be bound in addEventListener and
-    // removeEventListener to avoid losing references
-    this._show = this.show.bind(this);
-    this._hide = this.hide.bind(this);
-    this._maintainFocus = this._maintainFocus.bind(this);
-    this._bindKeypress = this._bindKeypress.bind(this);
+    /**
+     * Define the constructor to instantiate a dialog
+     *
+     * @constructor
+     * @param {Element} node
+     * @param {(NodeList | Element | string)} targets
+     */
+    function A11yDialog(node, targets) {
+        // Prebind the functions that will be bound in addEventListener and
+        // removeEventListener to avoid losing references
+        this._show = this.show.bind(this);
+        this._hide = this.hide.bind(this);
+        // this._maintainFocus = this._maintainFocus.bind(this);
+        this._bindKeypress = this._bindKeypress.bind(this);
 
-    // Keep a reference of the node on the instance
-    this.node = node;
+        // Keep a reference of the node on the instance
+        this.node = node;
 
-    // Keep an object of listener types mapped to callback functions
-    this._listeners = {};
+        // Keep an object of listener types mapped to callback functions
+        this._listeners = {};
 
-    // Initialise everything needed for the dialog to work properly
-    this.create(targets);
-  }
-
-  /**
-   * Set up everything necessary for the dialog to be functioning
-   *
-   * @param {(NodeList | Element | string)} targets
-   * @return {this}
-   */
-  A11yDialog.prototype.create = function (targets) {
-    // Keep a collection of nodes to disable/enable when toggling the dialog
-    this._targets = this._targets || collect(targets) || getSiblings(this.node);
-
-    // Make sure the dialog element is disabled on load, and that the `shown`
-    // property is synced with its value
-    this.node.setAttribute('aria-hidden', true);
-    this.shown = false;
-
-    // Keep a collection of dialog openers, each of which will be bound a click
-    // event listener to open the dialog
-    this._openers = $$('[data-a11y-dialog-show="' + this.node.id + '"]');
-    this._openers.forEach(function (opener) {
-      opener.addEventListener('click', this._show);
-    }.bind(this));
-
-    // Keep a collection of dialog closers, each of which will be bound a click
-    // event listener to close the dialog
-    this._closers = $$('[data-a11y-dialog-hide]', this.node)
-      .concat($$('[data-a11y-dialog-hide="' + this.node.id + '"]'));
-    this._closers.forEach(function (closer) {
-      closer.addEventListener('click', this._hide);
-    }.bind(this));
-
-    // Execute all callbacks registered for the `create` event
-    this._fire('create');
-
-    return this;
-  };
-
-  /**
-   * Show the dialog element, disable all the targets (siblings), trap the
-   * current focus within it, listen for some specific key presses and fire all
-   * registered callbacks for `show` event
-   *
-   * @param {Event} event
-   * @return {this}
-   */
-  A11yDialog.prototype.show = function (event) {
-    // If the dialog is already open, abort
-    if (this.shown) {
-      return this;
+        // Initialise everything needed for the dialog to work properly
+        this.create(targets);
     }
 
-    var overlay = this.node.getElementsByClassName('sui-dialog-overlay');
-    var content = this.node.getElementsByClassName('sui-dialog-content');
-    content[0].className = 'sui-dialog-content sui-bounce-in';
-    overlay[0].className = 'sui-dialog-overlay sui-fade-in';
+    /**
+     * Set up everything necessary for the dialog to be functioning
+     *
+     * @param {(NodeList | Element | string)} targets
+     * @return {this}
+     */
+    A11yDialog.prototype.create = function (targets) {
+        // Keep a collection of nodes to disable/enable when toggling the dialog
+        this._targets = this._targets || collect(targets) || getSiblings(this.node);
 
-    this.shown = true;
-    this.node.removeAttribute('aria-hidden');
+        // Make sure the dialog element is disabled on load, and that the `shown`
+        // property is synced with its value
+        this.node.setAttribute('aria-hidden', true);
+        this.shown = false;
 
-    // Iterate over the targets to disable them by setting their `aria-hidden`
-    // attribute to `true`; in case they already have this attribute, keep a
-    // reference of their original value to be able to restore it later
-    this._targets.forEach(function (target) {
-      var original = target.getAttribute('aria-hidden');
+        // Keep a collection of dialog openers, each of which will be bound a click
+        // event listener to open the dialog
+        this._openers = $$('[data-a11y-dialog-show="' + this.node.id + '"]');
+        this._openers.forEach(function (opener) {
+            opener.addEventListener('click', this._show);
+        }.bind(this));
 
-      if (original) {
-        target.setAttribute('data-a11y-dialog-original', original);
-      }
+        // Keep a collection of dialog closers, each of which will be bound a click
+        // event listener to close the dialog
+        this._closers = $$('[data-a11y-dialog-hide]', this.node)
+            .concat($$('[data-a11y-dialog-hide="' + this.node.id + '"]'));
+        this._closers.forEach(function (closer) {
+            closer.addEventListener('click', this._hide);
+        }.bind(this));
 
-      target.setAttribute('aria-hidden', 'true');
-    });
+        // Execute all callbacks registered for the `create` event
+        this._fire('create');
 
-    // Keep a reference to the currently focused element to be able to restore
-    // it later, then set the focus to the first focusable child of the dialog
-    // element
-    focusedBeforeDialog = document.activeElement;
-    setFocusToFirstItem(this.node);
+        return this;
+    };
 
-    // Bind a focus event listener to the body element to make sure the focus
-    // stays trapped inside the dialog while open, and start listening for some
-    // specific key presses (TAB and ESC)
-    document.body.addEventListener('focus', this._maintainFocus, true);
-    document.addEventListener('keydown', this._bindKeypress);
+    /**
+     * Show the dialog element, disable all the targets (siblings), trap the
+     * current focus within it, listen for some specific key presses and fire all
+     * registered callbacks for `show` event
+     *
+     * @param {Event} event
+     * @return {this}
+     */
+    A11yDialog.prototype.show = function (event) {
+        // If the dialog is already open, abort
+        if (this.shown) {
+            return this;
+        }
 
-    // Add overlay class to document body.
-    document.getElementsByTagName( 'html' )[0].classList.add( 'sui-has-overlay' );
+        this.node.classList.add('sui-fade-in');
+        this.node.classList.remove('sui-fade-out');
+        var content = this.node.getElementsByClassName('sui-dialog-content');
+        content[0].className = 'sui-dialog-content sui-content-fade-in';
 
-    // Execute all callbacks registered for the `show` event
-    this._fire('show', event);
+        // Execute all callbacks registered for the `show` event
+        this._fire('show', event);
 
-    return this;
-  };
+        this.shown = true;
+        this.node.removeAttribute('aria-hidden');
 
-  /**
-   * Hide the dialog element, enable all the targets (siblings), restore the
-   * focus to the previously active element, stop listening for some specific
-   * key presses and fire all registered callbacks for `hide` event
-   *
-   * @param {Event} event
-   * @return {this}
-   */
-  A11yDialog.prototype.hide = function (event) {
-    // If the dialog is already closed, abort
-    if (!this.shown) {
-      return this;
+        // Iterate over the targets to disable them by setting their `aria-hidden`
+        // attribute to `true`; in case they already have this attribute, keep a
+        // reference of their original value to be able to restore it later
+        this._targets.forEach(function (target) {
+            var original = target.getAttribute('aria-hidden');
+
+            if (original) {
+                target.setAttribute('data-a11y-dialog-original', original);
+            }
+
+            target.setAttribute('aria-hidden', 'true');
+        });
+
+        // Keep a reference to the currently focused element to be able to restore
+        // it later, then set the focus to the first focusable child of the dialog
+        // element
+        focusedBeforeDialog = document.activeElement;
+        setFocusToFirstItem(this.node);
+
+        // Bind a focus event listener to the body element to make sure the focus
+        // stays trapped inside the dialog while open, and start listening for some
+        // specific key presses (TAB and ESC)
+        // document.body.addEventListener('focus', this._maintainFocus, true);
+        document.addEventListener('keydown', this._bindKeypress);
+
+        // Add overlay class to document body.
+        document.getElementsByTagName('html')[0].classList.add('sui-has-overlay');
+
+
+        return this;
+    };
+
+    /**
+     * Hide the dialog element, enable all the targets (siblings), restore the
+     * focus to the previously active element, stop listening for some specific
+     * key presses and fire all registered callbacks for `hide` event
+     *
+     * @param {Event} event
+     * @return {this}
+     */
+    A11yDialog.prototype.hide = function (event) {
+        // If the dialog is already closed, abort
+        if (!this.shown) {
+            return this;
+        }
+
+
+        var content = this.node.getElementsByClassName('sui-dialog-content');
+
+        content[0].className = 'sui-dialog-content sui-content-fade-out';
+        this.node.classList.add('sui-fade-out');
+        this.node.classList.remove('sui-fade-in');
+
+        // Execute all callbacks registered for the `hide` event
+        this._fire('hide', event);
+
+        this.shown = false;
+        // This has been set so there is enough time for the animation to show
+        var timeout_node = this.node;
+        setTimeout(function () {
+            timeout_node.setAttribute('aria-hidden', 'true');
+        }, 300);
+
+        // Iterate over the targets to enable them by remove their `aria-hidden`
+        // attribute or resetting them to their initial value
+        this._targets.forEach(function (target) {
+            var original = target.getAttribute('data-a11y-dialog-original');
+
+
+            if (original) {
+                target.setAttribute('aria-hidden', original);
+                target.removeAttribute('data-a11y-dialog-original');
+            } else {
+                target.removeAttribute('aria-hidden');
+            }
+        });
+
+        // If their was a focused element before the dialog was opened, restore the
+        // focus back to it
+        if (focusedBeforeDialog) {
+            focusedBeforeDialog.focus();
+        }
+
+        // Remove the focus event listener to the body element and stop listening
+        // for specific key presses
+        // document.body.removeEventListener('focus', this._maintainFocus, true);
+        document.removeEventListener('keydown', this._bindKeypress);
+
+        // Remove overlay class to document body.
+        document.getElementsByTagName('html')[0].classList.remove('sui-has-overlay');
+
+
+        return this;
+    };
+
+    /**
+     * Destroy the current instance (after making sure the dialog has been hidden)
+     * and remove all associated listeners from dialog openers and closers
+     *
+     * @return {this}
+     */
+    A11yDialog.prototype.destroy = function () {
+        // Hide the dialog to avoid destroying an open instance
+        this.hide();
+
+        // Remove the click event listener from all dialog openers
+        this._openers.forEach(function (opener) {
+            opener.removeEventListener('click', this._show);
+        }.bind(this));
+
+        // Remove the click event listener from all dialog closers
+        this._closers.forEach(function (closer) {
+            closer.removeEventListener('click', this._hide);
+        }.bind(this));
+
+        // Execute all callbacks registered for the `destroy` event
+        this._fire('destroy');
+
+        // Keep an object of listener types mapped to callback functions
+        this._listeners = {};
+
+        return this;
+    };
+
+    /**
+     * Register a new callback for the given event type
+     *
+     * @param {string} type
+     * @param {Function} handler
+     */
+    A11yDialog.prototype.on = function (type, handler) {
+        if (typeof this._listeners[type] === 'undefined') {
+            this._listeners[type] = [];
+        }
+
+        this._listeners[type].push(handler);
+
+        return this;
+    };
+
+    /**
+     * Unregister an existing callback for the given event type
+     *
+     * @param {string} type
+     * @param {Function} handler
+     */
+    A11yDialog.prototype.off = function (type, handler) {
+        var index = this._listeners[type].indexOf(handler);
+
+        if (index > -1) {
+            this._listeners[type].splice(index, 1);
+        }
+
+        return this;
+    };
+
+    /**
+     * Iterate over all registered handlers for given type and call them all with
+     * the dialog element as first argument, event as second argument (if any).
+     *
+     * @access private
+     * @param {string} type
+     * @param {Event} event
+     */
+    A11yDialog.prototype._fire = function (type, event) {
+        var listeners = this._listeners[type] || [];
+
+        listeners.forEach(function (listener) {
+            listener(this.node, event);
+        }.bind(this));
+    };
+
+    /**
+     * Private event handler used when listening to some specific key presses
+     * (namely ESCAPE and TAB)
+     *
+     * @access private
+     * @param {Event} event
+     */
+    A11yDialog.prototype._bindKeypress = function (event) {
+        // If the dialog is shown and the ESCAPE key is being pressed, prevent any
+        // further effects from the ESCAPE key and hide the dialog
+        if (this.shown && event.which === ESCAPE_KEY) {
+            event.preventDefault();
+            this.hide();
+        }
+
+        // If the dialog is shown and the TAB key is being pressed, make sure the
+        // focus stays trapped within the dialog element
+        if (this.shown && event.which === TAB_KEY) {
+            trapTabKey(this.node, event);
+        }
+    };
+
+    /**
+     * Private event handler used when making sure the focus stays within the
+     * currently open dialog
+     *
+     * @access private
+     * @param {Event} event
+     */
+    A11yDialog.prototype._maintainFocus = function (event) {
+        // If the dialog is shown and the focus is not within the dialog element,
+        // move it back to its first focusable child
+        if (this.shown && !this.node.contains(event.target)) {
+            setFocusToFirstItem(this.node);
+        }
+    };
+
+    /**
+     * Convert a NodeList into an array
+     *
+     * @param {NodeList} collection
+     * @return {Array<Element>}
+     */
+    function toArray(collection) {
+        return Array.prototype.slice.call(collection);
     }
 
-
-    var overlay = this.node.getElementsByClassName('sui-dialog-overlay');
-
-    var content = this.node.getElementsByClassName('sui-dialog-content');
-
-    content[0].className = 'sui-dialog-content sui-bounce-out';
-
-    overlay[0].className = 'sui-dialog-overlay sui-fade-out';
-
-    this.shown = false;
-    // This has been set so there is enough time for the animation to show
-    var timeout_node = this.node;
-    setTimeout(function () {
-		timeout_node.setAttribute('aria-hidden', 'true');
-	}, 300);
-
-    // Iterate over the targets to enable them by remove their `aria-hidden`
-    // attribute or resetting them to their initial value
-    this._targets.forEach(function (target) {
-      var original = target.getAttribute('data-a11y-dialog-original');
-
-
-      if (original) {
-        target.setAttribute('aria-hidden', original);
-        target.removeAttribute('data-a11y-dialog-original');
-      } else {
-        target.removeAttribute('aria-hidden');
-      }
-    });
-
-    // If their was a focused element before the dialog was opened, restore the
-    // focus back to it
-    if (focusedBeforeDialog) {
-      focusedBeforeDialog.focus();
+    /**
+     * Query the DOM for nodes matching the given selector, scoped to context (or
+     * the whole document)
+     *
+     * @param {String} selector
+     * @param {Element} [context = document]
+     * @return {Array<Element>}
+     */
+    function $$(selector, context) {
+        return toArray((context || document).querySelectorAll(selector));
     }
 
-    // Remove the focus event listener to the body element and stop listening
-    // for specific key presses
-    document.body.removeEventListener('focus', this._maintainFocus, true);
-    document.removeEventListener('keydown', this._bindKeypress);
+    /**
+     * Return an array of Element based on given argument (NodeList, Element or
+     * string representing a selector)
+     *
+     * @param {(NodeList | Element | string)} target
+     * @return {Array<Element>}
+     */
+    function collect(target) {
+        if (NodeList.prototype.isPrototypeOf(target)) {
+            return toArray(target);
+        }
 
-    // Remove overlay class to document body.
-    document.getElementsByTagName( 'html' )[0].classList.remove( 'sui-has-overlay' );
+        if (Element.prototype.isPrototypeOf(target)) {
+            return [target];
+        }
 
-    // Execute all callbacks registered for the `hide` event
-    this._fire('hide', event);
-
-    return this;
-  };
-
-  /**
-   * Destroy the current instance (after making sure the dialog has been hidden)
-   * and remove all associated listeners from dialog openers and closers
-   *
-   * @return {this}
-   */
-  A11yDialog.prototype.destroy = function () {
-    // Hide the dialog to avoid destroying an open instance
-    this.hide();
-
-    // Remove the click event listener from all dialog openers
-    this._openers.forEach(function (opener) {
-      opener.removeEventListener('click', this._show);
-    }.bind(this));
-
-    // Remove the click event listener from all dialog closers
-    this._closers.forEach(function (closer) {
-      closer.removeEventListener('click', this._hide);
-    }.bind(this));
-
-    // Execute all callbacks registered for the `destroy` event
-    this._fire('destroy');
-
-    // Keep an object of listener types mapped to callback functions
-    this._listeners = {};
-
-    return this;
-  };
-
-  /**
-   * Register a new callback for the given event type
-   *
-   * @param {string} type
-   * @param {Function} handler
-   */
-  A11yDialog.prototype.on = function (type, handler) {
-    if (typeof this._listeners[type] === 'undefined') {
-      this._listeners[type] = [];
+        if (typeof target === 'string') {
+            return $$(target);
+        }
     }
 
-    this._listeners[type].push(handler);
+    /**
+     * Set the focus to the first focusable child of the given element
+     *
+     * @param {Element} node
+     */
+    function setFocusToFirstItem(node) {
+        var focusableChildren = getFocusableChildren(node);
 
-    return this;
-  };
-
-  /**
-   * Unregister an existing callback for the given event type
-   *
-   * @param {string} type
-   * @param {Function} handler
-   */
-  A11yDialog.prototype.off = function (type, handler) {
-    var index = this._listeners[type].indexOf(handler);
-
-    if (index > -1) {
-      this._listeners[type].splice(index, 1);
+        if (focusableChildren.length) {
+            focusableChildren[0].focus();
+        }
     }
 
-    return this;
-  };
-
-  /**
-   * Iterate over all registered handlers for given type and call them all with
-   * the dialog element as first argument, event as second argument (if any).
-   *
-   * @access private
-   * @param {string} type
-   * @param {Event} event
-   */
-  A11yDialog.prototype._fire = function (type, event) {
-    var listeners = this._listeners[type] || [];
-
-    listeners.forEach(function (listener) {
-      listener(this.node, event);
-    }.bind(this));
-  };
-
-  /**
-   * Private event handler used when listening to some specific key presses
-   * (namely ESCAPE and TAB)
-   *
-   * @access private
-   * @param {Event} event
-   */
-  A11yDialog.prototype._bindKeypress = function (event) {
-    // If the dialog is shown and the ESCAPE key is being pressed, prevent any
-    // further effects from the ESCAPE key and hide the dialog
-    if (this.shown && event.which === ESCAPE_KEY) {
-      event.preventDefault();
-      this.hide();
+    /**
+     * Get the focusable children of the given element
+     *
+     * @param {Element} node
+     * @return {Array<Element>}
+     */
+    function getFocusableChildren(node) {
+        return $$(FOCUSABLE_ELEMENTS.join(','), node).filter(function (child) {
+            return !!(child.offsetWidth || child.offsetHeight || child.getClientRects().length);
+        });
     }
 
-    // If the dialog is shown and the TAB key is being pressed, make sure the
-    // focus stays trapped within the dialog element
-    if (this.shown && event.which === TAB_KEY) {
-      trapTabKey(this.node, event);
-    }
-  };
+    /**
+     * Trap the focus inside the given element
+     *
+     * @param {Element} node
+     * @param {Event} event
+     */
+    function trapTabKey(node, event) {
+        var focusableChildren = getFocusableChildren(node);
+        var focusedItemIndex = focusableChildren.indexOf(document.activeElement);
 
-  /**
-   * Private event handler used when making sure the focus stays within the
-   * currently open dialog
-   *
-   * @access private
-   * @param {Event} event
-   */
-  A11yDialog.prototype._maintainFocus = function (event) {
-    // If the dialog is shown and the focus is not within the dialog element,
-    // move it back to its first focusable child
-    if (this.shown && !this.node.contains(event.target)) {
-      setFocusToFirstItem(this.node);
-    }
-  };
-
-  /**
-   * Convert a NodeList into an array
-   *
-   * @param {NodeList} collection
-   * @return {Array<Element>}
-   */
-  function toArray (collection) {
-    return Array.prototype.slice.call(collection);
-  }
-
-  /**
-   * Query the DOM for nodes matching the given selector, scoped to context (or
-   * the whole document)
-   *
-   * @param {String} selector
-   * @param {Element} [context = document]
-   * @return {Array<Element>}
-   */
-  function $$ (selector, context) {
-    return toArray((context || document).querySelectorAll(selector));
-  }
-
-  /**
-   * Return an array of Element based on given argument (NodeList, Element or
-   * string representing a selector)
-   *
-   * @param {(NodeList | Element | string)} target
-   * @return {Array<Element>}
-   */
-  function collect (target) {
-    if (NodeList.prototype.isPrototypeOf(target)) {
-      return toArray(target);
+        // If the SHIFT key is being pressed while tabbing (moving backwards) and
+        // the currently focused item is the first one, move the focus to the last
+        // focusable item from the dialog element
+        if (event.shiftKey && focusedItemIndex === 0) {
+            focusableChildren[focusableChildren.length - 1].focus();
+            event.preventDefault();
+            // If the SHIFT key is not being pressed (moving forwards) and the currently
+            // focused item is the last one, move the focus to the first focusable item
+            // from the dialog element
+        } else if (!event.shiftKey && focusedItemIndex === focusableChildren.length - 1) {
+            focusableChildren[0].focus();
+            event.preventDefault();
+        }
     }
 
-    if (Element.prototype.isPrototypeOf(target)) {
-      return [target];
+    /**
+     * Retrieve siblings from given element
+     *
+     * @param {Element} node
+     * @return {Array<Element>}
+     */
+    function getSiblings(node) {
+        var nodes = toArray(node.parentNode.childNodes);
+        var siblings = nodes.filter(function (node) {
+            return node.nodeType === 1;
+        });
+
+        siblings.splice(siblings.indexOf(node), 1);
+
+        return siblings;
     }
 
-    if (typeof target === 'string') {
-      return $$(target);
-    }
-  }
-
-  /**
-   * Set the focus to the first focusable child of the given element
-   *
-   * @param {Element} node
-   */
-  function setFocusToFirstItem (node) {
-    var focusableChildren = getFocusableChildren(node);
-
-    if (focusableChildren.length) {
-      focusableChildren[0].focus();
-    }
-  }
-
-  /**
-   * Get the focusable children of the given element
-   *
-   * @param {Element} node
-   * @return {Array<Element>}
-   */
-  function getFocusableChildren (node) {
-    return $$(FOCUSABLE_ELEMENTS.join(','), node).filter(function (child) {
-      return !!(child.offsetWidth || child.offsetHeight || child.getClientRects().length);
-    });
-  }
-
-  /**
-   * Trap the focus inside the given element
-   *
-   * @param {Element} node
-   * @param {Event} event
-   */
-  function trapTabKey (node, event) {
-    var focusableChildren = getFocusableChildren(node);
-    var focusedItemIndex = focusableChildren.indexOf(document.activeElement);
-
-    // If the SHIFT key is being pressed while tabbing (moving backwards) and
-    // the currently focused item is the first one, move the focus to the last
-    // focusable item from the dialog element
-    if (event.shiftKey && focusedItemIndex === 0) {
-      focusableChildren[focusableChildren.length - 1].focus();
-      event.preventDefault();
-    // If the SHIFT key is not being pressed (moving forwards) and the currently
-    // focused item is the last one, move the focus to the first focusable item
-    // from the dialog element
-    } else if (!event.shiftKey && focusedItemIndex === focusableChildren.length - 1) {
-      focusableChildren[0].focus();
-      event.preventDefault();
-    }
-  }
-
-  /**
-   * Retrieve siblings from given element
-   *
-   * @param {Element} node
-   * @return {Array<Element>}
-   */
-  function getSiblings (node) {
-    var nodes = toArray(node.parentNode.childNodes);
-    var siblings = nodes.filter(function (node) {
-      return node.nodeType === 1;
-    });
-
-    siblings.splice(siblings.indexOf(node), 1);
-
-    return siblings;
-  }
-
-  if ( true && typeof module.exports !== 'undefined') {
-    module.exports = A11yDialog;
-  } else if (true) {
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
-      return A11yDialog;
-    }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+    if ( true && typeof module.exports !== 'undefined') {
+        module.exports = A11yDialog;
+    } else if (true) {
+        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
+            return A11yDialog;
+        }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-  } else {}
+    } else {}
 }(typeof global !== 'undefined' ? global : window));
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
@@ -12900,7 +14499,7 @@ ace.define( 'ace/theme/sui', [], function( require, exports, module ) {
 /*! exports provided: _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _shasum, _spec, _where, author, browserslist, bugs, bundleDependencies, deprecated, description, devDependencies, eslintConfig, eslintIgnore, files, homepage, license, main, name, repository, sass, scripts, style, version, default */
 /***/ (function(module) {
 
-module.exports = {"_from":"@wpmudev/shared-ui@2.3.15","_id":"@wpmudev/shared-ui@2.3.15","_inBundle":false,"_integrity":"sha512-dOBio17DMl/7JZFKidiALQXx7VVm7a7mqgkJ1l/IkVaDLXvRoPFwrLu4g3oFHf3UIeVcMEOmxXKwp7wV+sAt6w==","_location":"/@wpmudev/shared-ui","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"@wpmudev/shared-ui@2.3.15","name":"@wpmudev/shared-ui","escapedName":"@wpmudev%2fshared-ui","scope":"@wpmudev","rawSpec":"2.3.15","saveSpec":null,"fetchSpec":"2.3.15"},"_requiredBy":["#DEV:/"],"_resolved":"https://registry.npmjs.org/@wpmudev/shared-ui/-/shared-ui-2.3.15.tgz","_shasum":"9805f7cf4c49ff1d5764d30cdc260a7d11d112ed","_spec":"@wpmudev/shared-ui@2.3.15","_where":"/data/Environments/wpd/projects/plugins/shipper","author":{"name":"WPMU DEV"},"browserslist":["> 1%","Last 2 versions","not ie <= 8"],"bugs":{"url":"https://github.com/wpmudev/shared-ui/issues"},"bundleDependencies":false,"deprecated":false,"description":"For internal use in WPMU DEV plugins","devDependencies":{"browser-sync":"^2.26.3","chalk":"^2.4.1","eslint-config-wordpress":"^2.0.0","fs":"0.0.1-security","gulp":"^3.9.1","gulp-autoprefixer":"^6.0.0","gulp-clean-css":"^3.10.0","gulp-concat":"^2.6.1","gulp-eslint":"^5.0.0","gulp-header":"^2.0.5","gulp-rename":"^1.4.0","gulp-replace":"^1.0.0","gulp-sass":"^4.0.2","gulp-uglify":"^3.0.1","gulp-watch":"^5.0.1","natives":"^1.1.6","pump":"^3.0.0"},"eslintConfig":{"extends":"wordpress"},"eslintIgnore":["a11y-dialog.js","clipboard.js","gulpfile.js","select2.full.js","ace.js","mode-css.js","sticky-box.js","mode-html.js","worker-css.js"],"files":["dist/","js/","scss/"],"homepage":"https://wpmudev.github.io/shared-ui/","license":"GPL-2.0","main":"dist/js/shared-ui","name":"@wpmudev/shared-ui","repository":{"type":"git","url":"git://github.com/wpmudev/shared-ui.git"},"sass":"scss/shared-ui.scss","scripts":{"changelog":" ./changelog.sh","dev":"gulp dev","release:major":"npm version major --no-git-tag-version && gulp update-versions:build && git add -A && git commit -m \":package:\" && npm publish","release:minor":"npm version minor --no-git-tag-version && gulp update-versions:build && git add -A && git commit -m \":package:\" && npm publish","release:patch":"npm version patch --no-git-tag-version && gulp update-versions:build && git add -A && git commit -m \":package:\" && npm publish"},"style":"dist/css/shared-ui.css","version":"2.3.15"};
+module.exports = {"_from":"@wpmudev/shared-ui@2.3.27","_id":"@wpmudev/shared-ui@2.3.27","_inBundle":false,"_integrity":"sha512-tJIiF9kznyo2DDd9i5t7+wuhYUG9TgXauterYrx47dIWvL5p+yDPmz/7Eu9X4kpq8P/7zBSGO8T1BLyBcElirA==","_location":"/@wpmudev/shared-ui","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"@wpmudev/shared-ui@2.3.27","name":"@wpmudev/shared-ui","escapedName":"@wpmudev%2fshared-ui","scope":"@wpmudev","rawSpec":"2.3.27","saveSpec":null,"fetchSpec":"2.3.27"},"_requiredBy":["#DEV:/"],"_resolved":"https://registry.npmjs.org/@wpmudev/shared-ui/-/shared-ui-2.3.27.tgz","_shasum":"789612323804819a52a814a7d4f94d2be6ee5074","_spec":"@wpmudev/shared-ui@2.3.27","_where":"/Users/hoang/Work/incsub/wp-content/plugins/shipper","author":{"name":"WPMU DEV"},"browserslist":["> 1%","Last 2 versions","not ie <= 8"],"bugs":{"url":"https://github.com/wpmudev/shared-ui/issues"},"bundleDependencies":false,"deprecated":false,"description":"For internal use in WPMU DEV plugins","devDependencies":{"browser-sync":"^2.26.3","chalk":"^2.4.1","eslint-config-wordpress":"^2.0.0","fs":"0.0.1-security","gulp":"^3.9.1","gulp-autoprefixer":"^6.0.0","gulp-clean-css":"^3.10.0","gulp-concat":"^2.6.1","gulp-eslint":"^5.0.0","gulp-header":"^2.0.5","gulp-rename":"^1.4.0","gulp-replace":"^1.0.0","gulp-sass":"^4.0.2","gulp-uglify":"^3.0.1","gulp-watch":"^5.0.1","natives":"^1.1.6","pump":"^3.0.0"},"eslintConfig":{"extends":"wordpress"},"eslintIgnore":["a11y-dialog.js","clipboard.js","gulpfile.js","select2.full.js","ace.js","mode-css.js","sticky-box.js","mode-html.js","worker-css.js"],"files":["dist/","js/","scss/"],"homepage":"https://wpmudev.github.io/shared-ui/","license":"GPL-2.0","main":"dist/js/shared-ui","name":"@wpmudev/shared-ui","repository":{"type":"git","url":"git://github.com/wpmudev/shared-ui.git"},"sass":"scss/shared-ui.scss","scripts":{"changelog":" ./changelog.sh","dev":"gulp dev","release:major":"npm version major --no-git-tag-version && gulp update-versions:build && git add -A && git commit -m \":package:\" && npm publish","release:minor":"npm version minor --no-git-tag-version && gulp update-versions:build && git add -A && git commit -m \":package:\" && npm publish","release:patch":"npm version patch --no-git-tag-version && gulp update-versions:build && git add -A && git commit -m \":package:\" && npm publish"},"style":"dist/css/shared-ui.css","version":"2.3.27"};
 
 /***/ }),
 

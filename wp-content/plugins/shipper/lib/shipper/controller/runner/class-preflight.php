@@ -31,23 +31,27 @@ class Shipper_Controller_Runner_Preflight extends Shipper_Controller_Runner {
 	 */
 	public function process_cancel() {
 		$system_task = new Shipper_Task_Check_System;
-		$remote_task = new Shipper_Task_Check_Sysdiff;
+		$remote_task = new Shipper_Task_Check_Rsystem;
+		$sysdiff_task = new Shipper_Task_Check_Sysdiff;
 		$files_task = new Shipper_Task_Check_Files;
+		$rpkg_task = new Shipper_Task_Check_Rpkg;
 		$system_task->restart();
 		$remote_task->restart();
+		$sysdiff_task->restart();
 		$files_task->restart();
+		$rpkg_task->restart();
 
 		Shipper_Helper_Log::write( __( 'Preflight check cancel', 'shipper' ) );
 
 		$this->clear();
+
+		return true;
 	}
 
 	/**
 	 * Starts actual preflight
-	 *
-	 * @param string $target Remote domain.
 	 */
-	public function start( $target ) {
+	public function start() {
 		shipper_flush_cache();
 		$preflight = $this->get_status();
 		$data = $preflight->get_data();
@@ -57,32 +61,81 @@ class Shipper_Controller_Runner_Preflight extends Shipper_Controller_Runner {
 
 		$locks = new Shipper_Helper_Locks;
 
-		if ( $locks->has_lock( Shipper_Helper_Locks::LOCK_PREFLIGHT ) ) {
+		if ( $locks->has_lock( $this->get_process_lock() ) ) {
 			return false;
 		}
 
-		$system_task = new Shipper_Task_Check_System;
-		$remote_task = new Shipper_Task_Check_Sysdiff;
 		$files_task = new Shipper_Task_Check_Files;
-		$system_task->restart();
-		$remote_task->restart();
+		$rpkg_task = new Shipper_Task_Check_Rpkg;
 		$files_task->restart();
+		$rpkg_task->restart();
 
-		$system = array();
-		$remote = array();
-
-		$all_done = true;
-		$errors = array();
-
-		$model = new Shipper_Model_System;
+		$api_model = new Shipper_Model_Api;
+		$api_model->clear_cached_api_response( 'info-get' );
+		$api_model->clear_cached_api_response( 'info-preflight' );
 
 		Shipper_Helper_Log::write( __( 'Preflight check start', 'shipper' ) );
 
+		$preflight = $this->get_status()
+			->start( false )
+			->save();
+
+		$this->process_system(); // Do this on start because it's fast.
+
+		$this->ping();
+	}
+
+	/**
+	 * Performs the (local) system check
+	 *
+	 * @since v1.0.3
+	 *
+	 * @return bool Whether to continue with processing (opposite of all done)
+	 */
+	public function process_system() {
+		$system_task = new Shipper_Task_Check_System;
+		$system_task->restart();
+		$system = array();
+
+		$model = new Shipper_Model_System;
 		$system_task->apply( $model->get_data() );
-		$all_done = $all_done && $system_task->is_done();
 		foreach ( $system_task->get_checks() as $check ) {
 			$system[] = $check->get_data();
 		}
+
+		$preflight = $this->get_status()
+			->set_check( Shipper_Model_Stored_Preflight::KEY_CHECKS_SYSTEM, $system )
+			->add_errors(
+				Shipper_Model_Stored_Preflight::KEY_CHECKS_SYSTEM,
+				$system_task->get_errors()
+			)
+			->save();
+
+		return ! $this->maybe_complete();
+	}
+
+	/**
+	 * Performs the remote system checks
+	 *
+	 * This does both the remote system check, as well as remote vs local
+	 * system difference one. This is because both are done on the same data,
+	 * provided by the info-get endpoint.
+	 *
+	 * @since v1.0.3
+	 *
+	 * @return bool Whether to continue with processing (opposite of all done)
+	 */
+	public function process_remote() {
+		$remote_task = new Shipper_Task_Check_Rsystem;
+		$remote_task->restart();
+		$sysdiff_task = new Shipper_Task_Check_Sysdiff;
+		$sysdiff_task->restart();
+		$remote = array();
+		$sysdiff = array();
+		$errors = array();
+
+		$migration = new Shipper_Model_Stored_Migration;
+		$target = $migration->get_destination();
 
 		$request = new Shipper_Task_Api_Info_Get( array( 'domain' => $target ) );
 		$info = $request->apply();
@@ -90,18 +143,19 @@ class Shipper_Controller_Runner_Preflight extends Shipper_Controller_Runner {
 			$errors = array_merge( $errors, $request->get_errors() );
 		}
 		$remote_task->apply( $info );
-		$all_done = $all_done && $remote_task->is_done();
 		foreach ( $remote_task->get_checks() as $check ) {
 			$remote[] = $check->get_data();
 		}
+		$sysdiff_task->apply( $info );
+		foreach ( $sysdiff_task->get_checks() as $check ) {
+			$sysdiff[] = $check->get_data();
+		}
 
-		$preflight = $this->get_status();
-		$preflight
-			->start( $all_done )
-			->set_check( Shipper_Model_Stored_Preflight::KEY_CHECKS_SYSTEM, $system )
+		$preflight = $this->get_status()
+			->set_check( Shipper_Model_Stored_Preflight::KEY_CHECKS_SYSDIFF, $sysdiff )
 			->add_errors(
-				Shipper_Model_Stored_Preflight::KEY_CHECKS_SYSTEM,
-				$system_task->get_errors()
+				Shipper_Model_Stored_Preflight::KEY_CHECKS_SYSDIFF,
+				array_merge( $errors, $sysdiff_task->get_errors() )
 			)
 			->set_check( Shipper_Model_Stored_Preflight::KEY_CHECKS_REMOTE, $remote )
 			->add_errors(
@@ -110,11 +164,7 @@ class Shipper_Controller_Runner_Preflight extends Shipper_Controller_Runner {
 			)
 			->save();
 
-		$call = $this->process_tick();
-
-		if ( $call ) {
-			$this->ping();
-		}
+		return ! $this->maybe_complete();
 	}
 
 	/**
@@ -123,6 +173,147 @@ class Shipper_Controller_Runner_Preflight extends Shipper_Controller_Runner {
 	 * @return bool Whether to continue with processing
 	 */
 	public function process_tick() {
+		$preflight = $this->get_status();
+
+		$system = $preflight->get_check( Shipper_Model_Stored_Preflight::KEY_CHECKS_SYSTEM );
+		$system_errors = $preflight->get_check_errors(
+			Shipper_Model_Stored_Preflight::KEY_CHECKS_SYSTEM
+		);
+		if ( empty( $system ) && empty( $system_errors ) ) {
+			return $this->process_system();
+		}
+
+		$remote = $preflight->get_check( Shipper_Model_Stored_Preflight::KEY_CHECKS_REMOTE );
+		$remote_errors = $preflight->get_check_errors(
+			Shipper_Model_Stored_Preflight::KEY_CHECKS_REMOTE
+		);
+		if ( empty( $remote ) && empty( $remote_errors ) ) {
+			return $this->process_remote();
+		}
+
+		if ( ! $this->has_package_or_files() ) {
+			return $this->process_package_or_files();
+		}
+
+		return ! $preflight->get( Shipper_Model_Stored_Preflight::KEY_DONE );
+	}
+
+	/**
+	 * Checks whether we have completed package size check
+	 *
+	 * The corresponding remote package size/local files package size will be checked.
+	 *
+	 * @since v1.0.3
+	 *
+	 * @return bool
+	 */
+	public function has_package_or_files() {
+		$migration = new Shipper_Model_Stored_Migration;
+		$key = Shipper_Model_Stored_Migration::TYPE_IMPORT === $migration->get_type()
+			? Shipper_Model_Stored_Preflight::KEY_CHECKS_RPKG
+			: Shipper_Model_Stored_Preflight::KEY_CHECKS_FILES;
+		$stored = $this->get_status()->get( $key );
+		return ! empty( $stored['is_done'] );
+	}
+
+	/**
+	 * Performs the package size check
+	 *
+	 * The corresponding remote package size/local files package size will be run.
+	 *
+	 * @since v1.0.3
+	 *
+	 * @return bool Whether to continue with processing (opposite of all done)
+	 */
+	public function process_package_or_files() {
+		$migration = new Shipper_Model_Stored_Migration;
+		if ( Shipper_Model_Stored_Migration::TYPE_IMPORT === $migration->get_type() ) {
+			return $this->process_remote_package();
+		}
+
+		return $this->process_files();
+	}
+
+	/**
+	 * Performs the remote package size check
+	 *
+	 * This is done for import migrations.
+	 *
+	 * @since v1.0.3
+	 *
+	 * @return bool Whether to continue with processing (opposite of all done)
+	 */
+	public function process_remote_package() {
+		$task = new Shipper_Task_Api_Info_Preflight;
+		$result = $task->apply();
+
+		$preflight = $this->get_status();
+
+		if ( $task->has_errors() || ! isset( $result['estimated_package_size'] ) ) {
+			$result['is_done'] = true; // We're done eiter way.
+			// OK, so we haven't been able to check for remote package size.
+			// However, the export might have still gone through from the remote site.
+			// If so, we will be able to continue the migration.
+			// So, let's check for this explicitly, before erroring out.
+			$domain = Shipper_Model_Stored_Destinations::get_current_domain();
+			$remote = new Shipper_Helper_Fs_Remote;
+			$is_error = $task->has_errors();
+			try {
+				if ( $remote->exists( $domain ) ) {
+					// The remote site exported something for us.
+					// Let's use that.
+					$is_error = false;
+					$result = array(
+						'is_done' => true,
+						'estimated_package_size' => 0,
+						'existing_export' => true,
+					);
+				}
+			} catch ( Exception $e ) {
+				$is_error = true;
+			}
+
+			if ( $is_error ) {
+				Shipper_Helper_Log::write( 'Errors in remote preflight!' );
+				$preflight
+					->set_check(
+						Shipper_Model_Stored_Preflight::KEY_CHECKS_RPKG, $result
+					)
+					->add_errors(
+						Shipper_Model_Stored_Preflight::KEY_CHECKS_RPKG, $task->get_errors()
+					)
+					->save();
+				return ! $this->maybe_complete();
+			}
+		}
+
+		$rpkg_task = new Shipper_Task_Check_Rpkg;
+		$rpkg_task->apply( $result );
+		$data = array();
+		foreach( $rpkg_task->get_checks() as $check ) {
+			$data[] = $check->get_data();
+		}
+		$preflight->set_check( Shipper_Model_Stored_Preflight::KEY_CHECKS_RPKG, $data );
+		$preflight->save();
+
+		if ( empty( $result['is_done'] ) ) {
+			$has_lock = shipper_await_cancel( Shipper_Model_Stored_Migration::TYPE_IMPORT );
+			if ( $has_lock ) { return true; }
+		} else {
+			$this->maybe_complete();
+		}
+
+		return empty( $result['is_done'] );
+	}
+
+	/**
+	 * Performs the local files and package size check
+	 *
+	 * This is done for export migrations.
+	 *
+	 * @return bool Whether to continue with processing (opposite of all done)
+	 */
+	public function process_files() {
 		$preflight = $this->get_status();
 		$data = $preflight->get_data();
 		if ( empty( $data ) ) {
@@ -139,22 +330,61 @@ class Shipper_Controller_Runner_Preflight extends Shipper_Controller_Runner {
 		foreach ( $files_task->get_checks() as $check ) {
 			$files[] = $check->get_data();
 		}
+		$files['is_done'] = $is_done;
 
 		$preflight->set_check( Shipper_Model_Stored_Preflight::KEY_CHECKS_FILES, $files );
 		$preflight->add_errors(
 			Shipper_Model_Stored_Preflight::KEY_CHECKS_FILES,
 			$files_task->get_errors()
 		);
-		$preflight->set( Shipper_Model_Stored_Preflight::KEY_DONE, $is_done );
 
 		$preflight->save();
 
 		if ( ! $is_done ) {
 			return true;
 		} else {
+			$this->maybe_complete();
 			$this->log_errors();
 			return false;
 		}
+	}
+
+	/**
+	 * Updates the preflight model final done state
+	 *
+	 * If all of the tasks are done, sets the final preflight model state to done.
+	 *
+	 * @since v1.0.3
+	 *
+	 * @return bool All done or not
+	 */
+	public function maybe_complete() {
+		$preflight = $this->get_status();
+		$is_done = $preflight->get( Shipper_Model_Stored_Preflight::KEY_DONE );
+		if ( $is_done ) {
+			return true;
+		}
+
+		$is_done = true;
+
+		foreach( $preflight->get_check_types() as $check_type ) {
+			$check = $preflight->get_check( $check_type );
+			$errors = $preflight->get_check_errors( $check_type );
+			$check_done = isset( $check['is_done'] )
+				? (bool) $check['is_done']
+				: ! empty( $check ) || ! empty( $errors );
+
+			if ( ! $check_done ) {
+				$is_done = false;
+				break;
+			}
+		}
+
+		if ( $is_done ) {
+			$preflight->set( Shipper_Model_Stored_Preflight::KEY_DONE, true )->save();
+		}
+
+		return $is_done;
 	}
 
 	/**
@@ -186,7 +416,7 @@ class Shipper_Controller_Runner_Preflight extends Shipper_Controller_Runner {
 	/**
 	 * Gets preflight status this far
 	 *
-	 * @return array
+	 * @return Shipper_Model_Stored_Preflight
 	 */
 	public function get_status() {
 		if ( ! isset( $this->_model ) ) {

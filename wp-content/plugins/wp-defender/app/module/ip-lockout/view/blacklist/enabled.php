@@ -15,30 +15,33 @@
                         <?php _e( "IP Addresses", wp_defender()->domain ) ?>
                     </span>
                     <span class="sui-description">
-                    <?php _e( "Add IP addresses you want to permanently ban from, or always allow access to your website.", wp_defender()->domain ) ?>
+                    <?php _e( "Add IP addresses you want to permanently ban from, or always allow access to your website. ", wp_defender()->domain ) ?>
                     </span>
                 </div>
                 <div class="sui-box-settings-col-2">
                     <strong><?php _e( "Blacklist", wp_defender()->domain ) ?></strong>
                     <p class="sui-description">
-						<?php _e( "Any IPs addresses you list here will be completely blocked from accessing your website, including admins.", wp_defender()->domain ) ?>
+						<?php _e( "Any IP addresses you list here will be completely blocked from accessing your website, including admins.", wp_defender()->domain ) ?>
                     </p>
                     <div class="sui-border-frame">
                         <label class="sui-label"><?php _e( "Banned IPs", wp_defender()->domain ) ?></label>
                         <textarea class="sui-form-control"
                                   id="ip_blacklist" name="ip_blacklist"
-                                  placeholder="<?php esc_attr_e( "Add blacklisted IPs here, one per line", wp_defender()->domain ) ?>"
+                                  placeholder="<?php esc_attr_e( "Add IP addresses here, one per line", wp_defender()->domain ) ?>"
                                   rows="8"><?php echo $settings->ip_blacklist ?></textarea>
                         <span class="sui-description">
                             <?php _e( "Both IPv4 and IPv6 are supported. IP ranges are also accepted in format xxx.xxx.xxx.xxx-xxx.xxx.xxx.xxx.", wp_defender()->domain ) ?>
                         </span>
                     </div>
                     <strong><?php _e( "Whitelist", wp_defender()->domain ) ?></strong>
+                    <p class="sui-description">
+						<?php _e( "Any IP addresses you list here will be exempt any existing or new ban rules outlined in login protection, 404 detection or IP ban lists.", wp_defender()->domain ) ?>
+                    </p>
                     <div class="sui-border-frame">
                         <label class="sui-label"><?php _e( "Allowed IPs", wp_defender()->domain ) ?></label>
                         <textarea class="sui-form-control"
                                   id="ip_whitelist" name="ip_whitelist"
-                                  placeholder="<?php esc_attr_e( "Add whitelisted IPs here, one per line", wp_defender()->domain ) ?>"
+                                  placeholder="<?php esc_attr_e( "Add IP addresses here, one per line", wp_defender()->domain ) ?>"
                                   rows="8"><?php echo $settings->ip_whitelist ?></textarea>
                         <span class="sui-description">
                             <?php _e( "One IP address per line. Both IPv4 and IPv6 are supported. IP ranges are also accepted in format xxx.xxx.xxx.xxx-xxx.xxx.xxx.xxx.", wp_defender()->domain ) ?>
@@ -87,7 +90,7 @@
 						<?php else: ?>
                             <strong><?php _e( "Blacklist", wp_defender()->domain ) ?></strong>
                             <p class="sui-description no-margin-bottom">
-								<?php _e( "Any countries you select will not being able to access any area of your website.", wp_defender()->domain ) ?>
+								<?php _e( "Any countries you select will not be able to access any area of your website.", wp_defender()->domain ) ?>
                             </p>
                             <div class="sui-border-frame">
                                 <div class="sui-control-with-icon">

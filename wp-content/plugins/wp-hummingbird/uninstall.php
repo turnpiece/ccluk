@@ -25,30 +25,8 @@ if ( ! class_exists( 'WP_Hummingbird_Settings' ) ) {
 $settings = WP_Hummingbird_Settings::get_settings( 'settings' );
 
 if ( $settings['remove_settings'] ) {
-	global $wpdb;
-
 	delete_option( 'wphb_styles_collection' );
 	delete_option( 'wphb_scripts_collection' );
-
-	$option_names = $wpdb->get_col(
-		$wpdb->prepare(
-			"SELECT option_name FROM $wpdb->options
-					WHERE option_name LIKE %s
-					OR option_name LIKE %s
-					OR option_name LIKE %s
-					OR option_name LIKE %s
-					OR option_name LIKE %s",
-			'%wphb-min-scripts%',
-			'%wphb-scripts%',
-			'%wphb-min-styles%',
-			'%wphb-styles%',
-			'%wphb-last-report%'
-		)
-	); // Db call ok; no-cache ok.
-
-	foreach ( $option_names as $name ) {
-		delete_option( $name );
-	}
 
 	delete_option( 'wphb_process_queue' );
 	delete_transient( 'wphb-minification-errors' );
@@ -74,6 +52,7 @@ if ( $settings['remove_settings'] ) {
 	delete_site_option( 'wphb-cloudflare-dash-notice' ); // network wide.
 	delete_site_option( 'wphb-cloudflare-dash-notice' );
 	delete_site_option( 'wphb-notice-free-deactivated-dismissed' );
+	delete_site_option( 'wphb-notice-free-deactivated-show' );
 	// Asset optimization notices.
 	delete_option( 'wphb-notice-http2-info-show' );
 	delete_option( 'wphb-notice-minification-optimized-show' );
@@ -90,16 +69,37 @@ if ( $settings['remove_settings'] ) {
 
 
 if ( $settings['remove_data'] ) {
+	global $wpdb;
+
+	$option_names = $wpdb->get_col(
+		$wpdb->prepare(
+			"SELECT option_name FROM $wpdb->options
+					WHERE option_name LIKE %s
+					OR option_name LIKE %s
+					OR option_name LIKE %s
+					OR option_name LIKE %s
+					OR option_name LIKE %s",
+			'%wphb-min-scripts%',
+			'%wphb-scripts%',
+			'%wphb-min-styles%',
+			'%wphb-styles%',
+			'%wphb-last-report%'
+		)
+	); // Db call ok; no-cache ok.
+
+	foreach ( $option_names as $name ) {
+		delete_option( $name );
+	}
+
 	// Reports & data.
-	delete_site_option( 'wphb-last-report' );
 	delete_site_option( 'wphb-caching-data' );
 	delete_site_option( 'wphb-gzip-data' );
-
 
 	if ( ! class_exists( 'WP_Hummingbird_Filesystem' ) ) {
 		/* @noinspection PhpIncludeInspection */
 		include_once plugin_dir_path( __FILE__ ) . '/core/class-filesystem.php';
 	}
+
 	$fs = WP_Hummingbird_Filesystem::instance();
 	if ( ! is_wp_error( $fs->status ) ) {
 		$fs->clean_up();

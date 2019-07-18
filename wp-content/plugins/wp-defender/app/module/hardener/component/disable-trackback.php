@@ -17,6 +17,10 @@ class Disable_Trackback extends Rule {
 		$this->renderPartial( 'rules/disable-trackback' );
 	}
 
+	function getSubDescription() {
+		return __( "Trackbacks and pingbacks are currently enabled.", wp_defender()->domain );
+	}
+
 	/**
 	 * @return bool
 	 */
@@ -66,8 +70,8 @@ class Disable_Trackback extends Rule {
 		if ( ! $this->verifyNonce() ) {
 			return;
 		}
-		$process_posts                      = HTTP_Helper::retrieve_post( 'updatePosts' );
-		$this->getService()->process_posts 	= $process_posts;
+		$process_posts                     = HTTP_Helper::retrieve_post( 'updatePosts' );
+		$this->getService()->process_posts = $process_posts;
 
 		$ret = $this->getService()->process();
 		if ( ! is_wp_error( $ret ) ) {

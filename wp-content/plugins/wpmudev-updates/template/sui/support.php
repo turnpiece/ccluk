@@ -21,7 +21,8 @@ global $wp_version;
 
 // Render the page header section.
 $page_title = __( 'Support', 'wpmudev' );
-$this->render_sui_header( $page_title );
+$page_slug  = 'support';
+$this->render_sui_header( $page_title, $page_slug );
 
 /** @var WPMUDEV_Dashboard_Sui $this */
 /** @var WPMUDEV_Dashboard_Sui_Page_Urls $urls */

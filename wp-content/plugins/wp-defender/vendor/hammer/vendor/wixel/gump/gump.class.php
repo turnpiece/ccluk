@@ -630,7 +630,7 @@ class GUMP
                     $param = self::$fields[$e['param']];
                 }
             }
-
+            
             // Messages
             if (isset($messages[$e['rule']])) {
                 // Show first validation error and don't allow to be overwritten
@@ -1741,7 +1741,7 @@ class GUMP
     /**
      * Determine if the provided input is a valid date (ISO 8601)
      * or specify a custom format.
-     *
+     * 
      * Usage: '<index>' => 'date'
      *
      * @param string $field

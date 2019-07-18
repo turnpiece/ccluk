@@ -25,8 +25,8 @@ class Mask_Api extends Component {
 			$requestUri = $_SERVER['REQUEST_URI'];
 		}
 		//
-		$requestUri = '/' . ltrim( $requestUri, '/' );
-		$prefix = parse_url( self::site_url(), PHP_URL_PATH );;
+		$requestUri  = '/' . ltrim( $requestUri, '/' );
+		$prefix      = parse_url( self::site_url(), PHP_URL_PATH );
 		$requestPath = parse_url( $requestUri, PHP_URL_PATH );
 		//clean it a bit
 		if ( Utils::instance()->isActivatedSingle() == false
@@ -42,8 +42,11 @@ class Mask_Api extends Component {
 				$requestPath = substr( $requestPath, strlen( $path ) );
 				$requestPath = '/' . ltrim( $requestPath, '/' );
 			}
+		} elseif ( self::get_home_url() != self::site_url() && strpos( $requestPath, (string) $prefix . '/' ) !== 0 ) {
+			//this case when a wp install inside a sub folder and domain changed into that subfolder
+			$prefix = parse_url( self::get_home_url(), PHP_URL_PATH );
 		}
-		if ( strpos( $requestPath, $prefix ) === 0 ) {
+		if ( strlen( $prefix ) && strpos( $requestPath, (string) $prefix ) === 0 ) {
 			$requestPath = substr( $requestPath, strlen( $prefix ) );
 		}
 		$requestPath = untrailingslashit( $requestPath );
@@ -105,12 +108,51 @@ class Mask_Api extends Component {
 	}
 
 	/**
+	 * clone from get_home_url function without the filter
+	 *
+	 * @param null $blog_id
+	 * @param string $path
+	 * @param null $scheme
+	 *
+	 * @return mixed|void
+	 */
+	private static function get_home_url( $blog_id = null, $path = '', $scheme = null ) {
+		global $pagenow;
+
+		$orig_scheme = $scheme;
+
+		if ( empty( $blog_id ) || ! is_multisite() ) {
+			$url = get_option( 'home' );
+		} else {
+			switch_to_blog( $blog_id );
+			$url = get_option( 'home' );
+			restore_current_blog();
+		}
+
+		if ( ! in_array( $scheme, array( 'http', 'https', 'relative' ) ) ) {
+			if ( is_ssl() && ! is_admin() && 'wp-login.php' !== $pagenow ) {
+				$scheme = 'https';
+			} else {
+				$scheme = parse_url( $url, PHP_URL_SCHEME );
+			}
+		}
+
+		$url = set_url_scheme( $url, $scheme );
+
+		if ( $path && is_string( $path ) ) {
+			$url .= '/' . ltrim( $path, '/' );
+		}
+
+		return $url;
+	}
+
+	/**
 	 * @return string
 	 */
 	public static function getRedirectUrl() {
 		$settings = Mask_Settings::instance();
 
-		return untrailingslashit( network_site_url() ) . '/' . ltrim( $settings->redirectTrafficUrl, '/' );
+		return untrailingslashit( get_home_url( get_current_blog_id() ) ) . '/' . ltrim( $settings->redirectTrafficUrl, '/' );
 	}
 
 	/**
@@ -119,7 +161,7 @@ class Mask_Api extends Component {
 	public static function getNewLoginUrl( $domain = null ) {
 		$settings = Mask_Settings::instance();
 		if ( $domain == null ) {
-			$domain = site_url();
+			$domain = self::site_url();
 		}
 
 		return untrailingslashit( $domain . '/' . ltrim( $settings->maskUrl, '/' ) );
@@ -145,7 +187,7 @@ class Mask_Api extends Component {
 		}
 		//if context is login, we will check for exists page
 		if ( $context == 'login' ) {
-			if ( in_array( $slug, array( 'admin', 'backend', 'wp-login', 'wp-login.php' ) ) ) {
+			if ( in_array( $slug, array( 'admin', 'backend', 'wp-login', 'wp-login.php', 'login' ) ) ) {
 				return new \WP_Error( Error_Code::VALIDATE, __( "A page already exists at this URL, please pick a unique page for your new login area.", wp_defender()->domain ) );
 			}
 

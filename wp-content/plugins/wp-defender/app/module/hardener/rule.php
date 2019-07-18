@@ -29,6 +29,12 @@ abstract class Rule extends Component {
 	abstract function getDescription();
 
 	/**
+	 * Return this rule reason
+	 * @return mixed
+	 */
+	abstract function getSubDescription();
+
+	/**
 	 * @return mixed
 	 */
 	abstract function check();
@@ -130,15 +136,15 @@ abstract class Rule extends Component {
                 <div class="sui-accordion-item-header">
                     <div class="sui-accordion-item-title">
                         <i aria-hidden="true" class="sui-icon-eye-hide"></i>
-	                    <?php echo $this->getTitle(); ?>
+						<?php echo $this->getTitle(); ?>
                         <div class="sui-actions-right">
                             <form method="post" class="float-r hardener-frm rule-process">
-		                        <?php $this->createNonceField(); ?>
+								<?php $this->createNonceField(); ?>
                                 <input type="hidden" name="action" value="restoreHardener"/>
                                 <input type="hidden" name="slug" value="<?php echo static::$slug ?>"/>
                                 <button type="submit" class="sui-button sui-button-ghost">
                                     <i class="sui-icon-update" aria-hidden="true"></i>
-			                        <?php _e( "Restore", wp_defender()->domain ) ?>
+									<?php _e( "Restore", wp_defender()->domain ) ?>
                                 </button>
                             </form>
                         </div>

@@ -70,7 +70,6 @@ class Auth_API extends Component {
 		$secret = $base32->decode( $secret );
 		//timestep fixed at 30
 		if ( is_null( $counter ) ) {
-
 			$counter = time();
 		}
 		$input = floor( $counter / 30 );

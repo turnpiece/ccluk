@@ -27,6 +27,8 @@ class Shipper_Model_Stored_Options extends Shipper_Model_Stored {
 
 	const KEY_PER_PAGE = 'entries_per_page';
 
+	const KEY_USER_ACCESS = 'allow_user_ids';
+
 	/**
 	 * Constructor
 	 *

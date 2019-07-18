@@ -57,27 +57,29 @@ $checked = $controller->check();
                     </p>
 				<?php endif; ?>
             </div>
-			<?php if ( WP_DEBUG == true && ( ! defined( 'WP_DEBUG_DISPLAY' ) || WP_DEBUG_DISPLAY != false ) ): ?>
-                <div class="sui-box-footer">
-                    <div class="sui-actions-left">
-						<?php $controller->showIgnoreForm() ?>
+			<?php if ( !$checked ): ?>
+				<?php if ( WP_DEBUG == true && ( ! defined( 'WP_DEBUG_DISPLAY' ) || WP_DEBUG_DISPLAY != false ) ): ?>
+                    <div class="sui-box-footer">
+                        <div class="sui-actions-left">
+							<?php $controller->showIgnoreForm() ?>
+                        </div>
+                        <div class="sui-actions-right">
+                            <form method="post" class="hardener-frm rule-process hardener-frm-process-xml-rpc">
+								<?php $controller->createNonceField(); ?>
+                                <input type="hidden" name="action" value="processHardener"/>
+                                <input type="hidden" name="slug" value="<?php echo $controller::$slug ?>"/>
+                                <button class="sui-button sui-button-blue" type="submit">
+									<?php _e( "Disable error debugging", wp_defender()->domain ) ?></button>
+                            </form>
+                        </div>
                     </div>
-                    <div class="sui-actions-right">
-                        <form method="post" class="hardener-frm rule-process hardener-frm-process-xml-rpc">
-							<?php $controller->createNonceField(); ?>
-                            <input type="hidden" name="action" value="processHardener"/>
-                            <input type="hidden" name="slug" value="<?php echo $controller::$slug ?>"/>
-                            <button class="sui-button sui-button-blue" type="submit">
-								<?php _e( "Disable error debugging", wp_defender()->domain ) ?></button>
-                        </form>
+				<?php else: ?>
+                    <div class="sui-box-footer">
+                        <div class="sui-actions-left">
+							<?php $controller->showIgnoreForm() ?>
+                        </div>
                     </div>
-                </div>
-			<?php else: ?>
-                <div class="sui-box-footer">
-                    <div class="sui-actions-left">
-						<?php $controller->showIgnoreForm() ?>
-                    </div>
-                </div>
+				<?php endif; ?>
 			<?php endif; ?>
         </div>
     </div>

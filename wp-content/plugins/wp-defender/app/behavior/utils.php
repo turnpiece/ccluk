@@ -861,7 +861,7 @@ class Utils extends Behavior {
 					'reports'               => array(
 						'file_scanning' => array(
 							'active'    => true,
-							'enabled'   => \WP_Defender\Module\Scan\Model\Settings::instance()->notification,
+							'enabled'   => \WP_Defender\Module\Scan\Model\Settings::instance()->report,
 							//Report enabled Bool
 							'frequency' => array(
 								'frequency' => \WP_Defender\Module\Scan\Model\Settings::instance()->frequency,
@@ -926,11 +926,11 @@ class Utils extends Behavior {
 	public function checkRequirement( &$result = null ) {
 		$meet = true;
 
-		if ( version_compare( $this->getPHPVersion(), '5.3', '>=' ) == false ) {
+		if ( version_compare( $this->getPHPVersion(), '5.6', '>=' ) == false ) {
 			$meet          = false;
 			$result['php'] = array(
 				'status'  => $this->getPHPVersion(),
-				'message' => __( "Please upgrade to 5.3 or later", wp_defender()->domain )
+				'message' => __( "Please upgrade to 5.6 or later", wp_defender()->domain )
 			);
 		}
 

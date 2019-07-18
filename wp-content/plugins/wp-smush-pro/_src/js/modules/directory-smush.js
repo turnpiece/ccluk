@@ -18,7 +18,7 @@ import Scanner from '../smush/directory-scanner';
 		init: function () {
 			const self = this;
 
-			let progress_dialog = $( '#wp-smush-progress-dialog'),
+			let progress_dialog = $('#wp-smush-progress-dialog'),
 				totalSteps = 0,
 				currentScanStep = 0;
 
@@ -72,7 +72,7 @@ import Scanner from '../smush/directory-scanner';
 			$( 'body' ).on( 'click', 'a.wp-smush-dir-link', function ( e ) {
 				if ( $( 'div.sui-wrap button.wp-smush-browse' ).length > 0 ) {
 					e.preventDefault();
-					SUI.dialogs["wp-smush-list-dialog"].show();
+					self.showSmushDialog();
 					//Display File tree for Directory Smush
 					self.initFileTree();
 				}
@@ -117,8 +117,7 @@ import Scanner from '../smush/directory-scanner';
 				};
 
 				$.get( ajaxurl, param, function ( response ) {
-					// Close the dialog.
-					SUI.dialogs['wp-smush-list-dialog'].hide();
+					self.hideSmushDialog();
 
 					// TODO: check for errors.
 					self.scanner = new Scanner( response.data, 0 );
@@ -134,7 +133,7 @@ import Scanner from '../smush/directory-scanner';
 				$( '.wp-smush-browse' ).removeAttr( 'disabled' );
 
 				// Close the dialog.
-				SUI.dialogs['wp-smush-list-dialog'].hide();
+				self.hideSmushDialog();
 
 				$( '.wp-smush-select-dir, button.wp-smush-browse, a.wp-smush-dir-link' ).removeAttr( 'disabled' );
 
@@ -211,8 +210,24 @@ import Scanner from '../smush/directory-scanner';
 		 */
 		showSmushDialog: function () {
 			// Shows the available directories.
-			SUI.dialogs['wp-smush-list-dialog'].show();
+			const el = document.getElementById('wp-smush-list-dialog');
+			const dialog = new A11yDialog(el);
+			dialog.show();
+
 			$( '.wp-smush-list-dialog div.close' ).focus();
+		},
+
+		/**
+		 * Hide directory list popup.
+		 * @since 3.2.2
+		 */
+		hideSmushDialog: function() {
+			const el = document.getElementById('wp-smush-list-dialog');
+			const dialog = new A11yDialog(el);
+			dialog.hide();
+
+			const progressDialog = new A11yDialog(document.getElementById('wp-smush-progress-dialog'));
+			progressDialog.hide();
 		},
 
 		/**
@@ -223,7 +238,11 @@ import Scanner from '../smush/directory-scanner';
 		showProgressDialog: function ( items ) {
 			// Update items status and show the progress dialog..
 			$( '.wp-smush-progress-dialog .sui-progress-state-text' ).html( '0/' + items + ' ' + self.wp_smush_msgs.progress_smushed );
-			SUI.dialogs['wp-smush-progress-dialog'].show();
+
+			const el = document.getElementById('wp-smush-progress-dialog');
+			const dialog = new A11yDialog(el);
+			dialog.show();
+
 			$( '.wp-smush-progress-dialog div.close' ).focus();
 		},
 

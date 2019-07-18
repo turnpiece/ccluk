@@ -89,7 +89,7 @@ class CleantalkSFW_Base
 				FROM ".$this->data_table."
 				WHERE network = ".sprintf("%u", ip2long($current_ip))." & mask;";
 			
-			$this->db->query($query)->fetch();
+			$this->db->set_query($query)->fetch();
 			
 			if($this->db->result['cnt']){
 				$this->pass = false;
@@ -140,7 +140,7 @@ class CleantalkSFW_Base
 			blocked_entries = blocked_entries".strval($blocked).",
 			entries_timestamp = '".intval($time)."'";
 
-		$this->db->query($query, true);
+		$this->db->execute($query);
 	}
 	
 	/*
@@ -152,7 +152,7 @@ class CleantalkSFW_Base
 		
 		//Getting logs
 		$query = "SELECT * FROM ".$this->log_table.";";
-		$this->db->query($query)->fetch_all();
+		$this->db->set_query($query)->fetch_all();
 		
 		if(count($this->db->result)){
 			
@@ -169,7 +169,7 @@ class CleantalkSFW_Base
 			//Checking answer and deleting all lines from the table
 			if(empty($result['error'])){
 				if($result['rows'] == count($data)){
-					$this->db->query("DELETE FROM ".$this->log_table.";", true);
+					$this->db->execute("DELETE FROM ".$this->log_table.";");
 					return $result;
 				}
 			}else{
@@ -230,7 +230,7 @@ class CleantalkSFW_Base
 						
 						if(!gzeof($gf)){
 							
-							$this->db->query("DELETE FROM ".$this->data_table.";", true);
+							$this->db->execute("DELETE FROM ".$this->data_table.";");
 							
 							for($count_result = 0; !gzeof($gf); ){
 	
@@ -256,7 +256,7 @@ class CleantalkSFW_Base
 								
 								if(!empty($values)){
 									$query = sprintf($query, implode(',', $values).';');
-									$this->db->query($query, true);
+									$this->db->execute($query);
 								}
 								
 							}

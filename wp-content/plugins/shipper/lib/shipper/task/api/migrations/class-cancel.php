@@ -24,6 +24,7 @@ class Shipper_Task_Api_Migrations_Cancel extends Shipper_Task_Api {
 		;
 
 		if ( empty( $source ) ) {
+			$this->clear_cached_api_response( 'migration-cancel' );
 			$this->add_error(
 				self::ERR_REQFORMAT,
 				__( 'Missing domain to cancel migration', 'shipper' )
@@ -37,7 +38,8 @@ class Shipper_Task_Api_Migrations_Cancel extends Shipper_Task_Api {
 		));
 
 		if ( empty( $status['status'] ) ) {
-			$this->add_error(
+			$this->record_non_success(
+				'migration-cancel',
 				self::ERR_SERVICE,
 				sprintf(
 					__( 'Service error: %s', 'shipper' ),
@@ -47,6 +49,7 @@ class Shipper_Task_Api_Migrations_Cancel extends Shipper_Task_Api {
 			return false;
 		}
 
+		$this->record_success( 'migration-cancel' );
 		return true;
 	}
 

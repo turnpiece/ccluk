@@ -41,8 +41,8 @@ if ( 'performance' === $module ) {
 			</span>
 		</div>
 		<div class="sui-box-settings-col-2">
+			<input type="hidden" name="scheduled-reports" value="0"/>
 			<label class="sui-toggle">
-				<input type="hidden" name="scheduled-reports" value="0"/>
 				<input type="checkbox" name="scheduled-reports" value="1" id="chk1" <?php checked( 1, $enabled ); ?>/>
 				<span class="sui-toggle-slider"></span>
 			</label>

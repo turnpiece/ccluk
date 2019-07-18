@@ -42,7 +42,6 @@ class Audit_API extends Component {
 		$response = Utils::instance()->devCall( 'https://' . self::$end_point . '/logs', $data, array(
 			'method'  => 'GET',
 			'timeout' => 20,
-			//'sslverify' => false,
 			'headers' => array(
 				'apikey' => Utils::instance()->getAPIKey()
 			)
@@ -90,7 +89,6 @@ class Audit_API extends Component {
 			$response          = Utils::instance()->devCall( 'https://' . self::$end_point . '/logs', $data, array(
 				'method'  => 'GET',
 				'timeout' => 20,
-				//'sslverify' => false,
 				'headers' => array(
 					'apikey' => Utils::instance()->getAPIKey()
 				)
@@ -113,7 +111,6 @@ class Audit_API extends Component {
 			$response = Utils::instance()->devCall( 'http://' . self::$end_point . '/logs/summary', $data, array(
 				'method'  => 'GET',
 				'timeout' => 20,
-				//'sslverify' => false,
 				'headers' => array(
 					'apikey' => Utils::instance()->getAPIKey()
 				)
@@ -242,7 +239,6 @@ class Audit_API extends Component {
 	public static function curlToAPI( $data ) {
 		Utils::instance()->devCall( 'http://' . self::$end_point . '/logs/add_multiple', $data, array(
 			'method'  => 'POST',
-			//'sslverify' => false,
 			'timeout' => 3,
 			'headers' => array(
 				'apikey' => Utils::instance()->getAPIKey()

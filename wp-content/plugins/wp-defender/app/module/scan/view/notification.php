@@ -32,8 +32,8 @@
                                     <p class="sui-p-small">
 										<?php _e( "By default, we will only notify the recipients below when there is an issue from your file scan. Enable this option to send emails even when no issues are detected. ", wp_defender()->domain ) ?>
                                     </p>
+                                    <input type="hidden" name="always_send" value="0"/>
                                     <label class="sui-toggle">
-                                        <input type="hidden" name="always_send" value="0"/>
                                         <input role="presentation" type="checkbox" name="alwaysSendNotification"
                                                class="toggle-checkbox"
                                                id="alwaysSendNotification" value="1"
@@ -118,6 +118,19 @@
                         <div class="sui-row">
                             <div class="sui-col">
                                 <div class="sui-form-field">
+                                    <label class="sui-label">
+					                    <?php _e( "Subject", wp_defender()->domain ) ?>
+                                    </label>
+                                    <input type="text" class="sui-form-control" name="email_subject" value="<?php echo $setting->email_subject ?>">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sui-row">
+                            <div class="sui-col">
+                                <div class="sui-form-field">
+                                    <label class="sui-label">
+										<?php _e( "Body", wp_defender()->domain ) ?>
+                                    </label>
                                     <textarea rows="12" class="sui-form-control"
                                               name="email_all_ok"><?php echo $setting->email_all_ok ?></textarea>
                                 </div>
@@ -178,6 +191,19 @@
                         <div class="sui-row">
                             <div class="sui-col">
                                 <div class="sui-form-field">
+                                    <label class="sui-label">
+					                    <?php _e( "Subject", wp_defender()->domain ) ?>
+                                    </label>
+                                    <input type="text" class="sui-form-control" name="email_subject" value="<?php echo $setting->email_subject ?>">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sui-row">
+                            <div class="sui-col">
+                                <div class="sui-form-field">
+                                    <label class="sui-label">
+	                                    <?php _e( "Subject", wp_defender()->domain ) ?>
+                                    </label>
                                     <textarea rows="12" class="sui-form-control"
                                               name="email_has_issue"><?php echo $setting->email_has_issue ?></textarea>
                                 </div>

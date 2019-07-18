@@ -16,6 +16,10 @@ class Disable_File_Editor extends Rule {
 		$this->renderPartial( 'rules/disable-file-editor' );
 	}
 
+	function getSubDescription() {
+		return __( "The file editor is currently enabled.", wp_defender()->domain );
+	}
+
 	function check() {
 		return $this->getService()->check();
 	}
@@ -94,7 +98,7 @@ class Disable_File_Editor extends Rule {
 			wp_die('<p>'.__('Sorry, you are not allowed to edit plugins for this site.').'</p>');
 		}
 	}
-
+	
 	/**
 	 * Remove the edit in the admin menu
 	 */
@@ -104,7 +108,7 @@ class Disable_File_Editor extends Rule {
 	}
 
 	/**
-	 * Remove any edit links from the plugin list
+	 * Remove any edit links from the plugin list 
 	 *
 	 */
 	function action_links( $actions, $plugin_file, $plugin_data, $context) {

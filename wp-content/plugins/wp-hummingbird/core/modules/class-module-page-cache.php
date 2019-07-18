@@ -51,6 +51,13 @@ class WP_Hummingbird_Module_Page_Cache extends WP_Hummingbird_Module {
 		$this->check_plugin_compatibility();
 		$this->check_minification_queue();
 
+		add_filter( 'wphb_page_cache_custom_terms', 'page_cache_custom_terms' );
+		function page_cache_custom_terms( $terms ) {
+			$terms[] = 'product_cat';
+
+			return $terms;
+		}
+
 		/**
 		 * Trigger a cache clear.
 		 *
@@ -576,12 +583,10 @@ class WP_Hummingbird_Module_Page_Cache extends WP_Hummingbird_Module {
 			return false;
 		}
 
-		$agent         = isset( $_SERVER['HTTP_USER_AGENT'] ) ? stripslashes( $_SERVER['HTTP_USER_AGENT'] ) : ''; // Input var ok.
-		$agent_pattern = implode( '|', $agent_pattern );
+		$agent = isset( $_SERVER['HTTP_USER_AGENT'] ) ? stripslashes( $_SERVER['HTTP_USER_AGENT'] ) : ''; // Input var ok.
 
 		// In case no user agent or agent is in exclude list, we do not cache the page.
-		// TODO: maybe in_array() will be better here?
-		if ( empty( $agent ) || preg_match( "/{$agent_pattern}/i", $agent ) ) {
+		if ( empty( $agent ) || in_array( $agent, $agent_pattern, true ) ) {
 			return true;
 		}
 
@@ -643,6 +648,26 @@ class WP_Hummingbird_Module_Page_Cache extends WP_Hummingbird_Module {
 		foreach ( (array) $_COOKIE as $key => $value ) { // Input var ok.
 			// Check logged in user.
 			if ( preg_match( '/^wordpress_logged_in_/', $key ) ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Check if wp_woocommerce_session* is present. It will be present once user adds something to cart.
+	 *
+	 * @since 1.9.3
+	 *
+	 * @see https://docs.woocommerce.com/document/woocommerce-social-login/
+	 *
+	 * @return bool
+	 */
+	private static function has_woo_cookie() {
+		foreach ( (array) $_COOKIE as $key => $value ) { // Input var ok.
+			// Check logged in user.
+			if ( preg_match( '/^wp_woocommerce_session_/', $key ) ) {
 				return true;
 			}
 		}
@@ -936,6 +961,9 @@ class WP_Hummingbird_Module_Page_Cache extends WP_Hummingbird_Module {
 		} elseif ( self::skip_user_agent() ) {
 			self::log_msg( 'Do not cache page. User-Agent is empty or excluded in settings.' );
 			return false;
+		} elseif ( self::has_woo_cookie() ) {
+			self::log_msg( 'Do not cache page. wp_woocommerce_session* cookie found.' );
+			return false;
 		} elseif ( ! isset( $_SERVER['HTTP_HOST'] ) ) { // Input var ok.
 			self::log_msg( 'Page can not be cached, no HTTP_HOST set.' );
 			return false;
@@ -1164,7 +1192,8 @@ class WP_Hummingbird_Module_Page_Cache extends WP_Hummingbird_Module {
 
 		// For multisite we need to set this to null.
 		if ( is_multisite() && ! $is_network_admin && 'cache' === $directory ) {
-			$directory = null;
+			$current_blog = get_site( get_current_blog_id() );
+			$directory = $current_blog->path;
 		}
 
 		// Purge cache directory.
@@ -1177,7 +1206,7 @@ class WP_Hummingbird_Module_Page_Cache extends WP_Hummingbird_Module {
 		}
 
 		// Purge specific folder.
-		$http_host = htmlentities( wp_unslash( $_SERVER['HTTP_HOST'] ) ); // Input var ok.
+		$http_host = isset( $_SERVER['HTTP_HOST'] ) ? htmlentities( wp_unslash( $_SERVER['HTTP_HOST'] ) ) : ''; // Input var ok.
 
 		$directory = $http_host . $directory;
 		$full_path = $wphb_fs->cache_dir . $directory;
@@ -1258,11 +1287,13 @@ class WP_Hummingbird_Module_Page_Cache extends WP_Hummingbird_Module {
 		}
 
 		// Author page.
-		$author_link = trailingslashit( str_replace( get_option( 'home' ), $replacement, get_author_posts_url( $post->post_author ) ) );
-		if ( $author_link ) {
-			$this->clear_cache( $author_link );
-			self::log_msg( "Cache has been purged for author page: $author_link" );
-		}
+        if ( isset( $post->post_author ) && 0 !== $post->post_author ) {
+	        $author_link = trailingslashit( str_replace( get_option( 'home' ), $replacement, get_author_posts_url( $post->post_author ) ) );
+	        if ( $author_link ) {
+		        $this->clear_cache( $author_link );
+		        self::log_msg( "Cache has been purged for author page: $author_link" );
+	        }
+        }
 
 		/**
 		 * Support for custom terms.
@@ -1282,17 +1313,17 @@ class WP_Hummingbird_Module_Page_Cache extends WP_Hummingbird_Module {
 					continue;
 				}
 
-				$meta_link = str_replace( get_option( 'home' ), '', get_term_link( $meta->term_id, $term ) );
+				$meta_link = str_replace( get_option( 'home' ), $replacement, get_term_link( $meta->term_id, $term ) );
 				$this->clear_cache( $meta_link );
-				self::log_msg( "Cache has been purged for {$meta_name}: {$meta->name}" );
+				self::log_msg( "Cache has been purged for {$term}: {$meta->name}" );
 
 				if ( ( ! isset( $meta->parent ) || 0 === $meta->parent ) && ! is_wp_error( $meta ) ) {
 					continue;
 				}
 
-				$meta_link = str_replace( get_option( 'home' ), '', get_term_link( $meta->parent, $term ) );
+				$meta_link = str_replace( get_option( 'home' ), $replacement, get_term_link( $meta->parent, $term ) );
 				$this->clear_cache( $meta_link );
-				self::log_msg( "Cache has been purged for {$meta_name}: {$meta->name}" );
+				self::log_msg( "Cache has been purged for {$term}: {$meta->name}" );
 			}
 		}
 	}

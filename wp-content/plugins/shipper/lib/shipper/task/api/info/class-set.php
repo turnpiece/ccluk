@@ -10,19 +10,18 @@
  */
 class Shipper_Task_Api_Info_Set extends Shipper_Task_Api {
 
+	public function get_api_cache_ttl() {
+		return 180;
+	}
+
 	/**
 	 * Sets Hub API info for the current system
 	 *
-	 * @param array $args Domain info.
+	 * @param array $args Not used.
 	 *
 	 * @return bool
 	 */
 	public function apply( $args = array() ) {
-		$last_set = (int) get_site_option( 'shipper-storage-task-info-set', 0 );
-		if ( time() - 180 < $last_set ) {
-			return true;
-		}
-
 		$migration = new Shipper_Model_Stored_Migration;
 
 		$status = $this->get_response( 'info-set', self::METHOD_POST, array(
@@ -32,7 +31,8 @@ class Shipper_Task_Api_Info_Set extends Shipper_Task_Api {
 		));
 
 		if ( empty( $status['status'] ) && empty( $status['success'] ) ) {
-			$this->add_error(
+			$this->record_non_success(
+				'info-set',
 				self::ERR_SERVICE,
 				sprintf(
 					__( 'Service error: %s', 'shipper' ),
@@ -42,7 +42,7 @@ class Shipper_Task_Api_Info_Set extends Shipper_Task_Api {
 			return false;
 		}
 
-		update_site_option( 'shipper-storage-task-info-set', time() );
+		$this->record_success( 'info-set' );
 		return true;
 	}
 

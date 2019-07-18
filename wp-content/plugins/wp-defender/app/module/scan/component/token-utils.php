@@ -13,6 +13,7 @@ class Token_Utils extends Component {
 	 * @var array
 	 */
 	static $tokens = array();
+	static $code;
 
 	/**
 	 * @param $token
@@ -24,6 +25,45 @@ class Token_Utils extends Component {
 	public static function findPrevious( $token, $from, $end = null ) {
 		for ( $i = $from; $i >= $end; $i -- ) {
 			if ( isset( self::$tokens[ $i ] ) && self::$tokens[ $i ]['code'] == $token ) {
+				return $i;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Find the first token it met, can skip things dont need
+	 *
+	 * @param $from
+	 * @param null $end
+	 * @param array $skips
+	 *
+	 * @return bool|mixed
+	 */
+	public static function findFirstPrevious( $from, $end = 0, $skips = array() ) {
+		for ( $i = $from; $i >= $end; $i -- ) {
+			if ( isset( self::$tokens[ $i ] ) && ! in_array( self::$tokens[ $i ]['code'], $skips ) ) {
+				return $i;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * @param $from
+	 * @param null $end
+	 * @param array $skips
+	 *
+	 * @return bool
+	 */
+	public static function findFirstNext( $from, $end = null, $skips = array() ) {
+		if ( $end == null ) {
+			$end = count( self::$tokens ) - 1;
+		}
+		for ( $i = $from; $i <= $end; $i ++ ) {
+			if ( isset( self::$tokens[ $i ] ) && ! in_array( self::$tokens[ $i ]['code'], $skips ) ) {
 				return $i;
 			}
 		}
@@ -47,7 +87,7 @@ class Token_Utils extends Component {
 			$token = array( $token );
 		}
 
-		for ( $i = $from; $i < $end; $i ++ ) {
+		for ( $i = $from; $i <= $end; $i ++ ) {
 			if ( ! isset( self::$tokens[ $i ] ) ) {
 				return false;
 			}
@@ -84,15 +124,56 @@ class Token_Utils extends Component {
 	 * @param $start
 	 * @param $end
 	 *
+	 * @return string
+	 */
+	public static function getTokensAsStringByIndex( $start, $end ) {
+		$str = '';
+		for ( $i = $start; $i < $end; $i ++ ) {
+			$str .= self::$tokens[ $i ]['content'];
+		}
+
+		return $str;
+	}
+
+	/**
+	 * @param $start
+	 * @param $end
+	 *
 	 * @return array
 	 */
 	public static function findParams( $start, $end ) {
 		$params = array();
 		for ( $i = $start; $i < $end; $i ++ ) {
-			$params[] = self::$tokens[ $i ];
+			$params[ $i ] = self::$tokens[ $i ];
 		}
 
 		return $params;
+	}
+
+	public static function prepareParams() {
+		$results = array();
+		foreach ( self::$tokens as $index => $token ) {
+			if ( $token['code'] == T_VARIABLE ) {
+				$next = self::findFirstNext( $index + 1, null, array( T_WHITESPACE ) );
+				//this should be the =
+				$params = array();
+				if ( self::$tokens[ $next ]['code'] == T_EQUAL ) {
+					//capture this
+					$end    = self::findNext( T_SEMICOLON, $index + 2 );
+					$params = self::findParams( $index + 2, $end );
+
+				} elseif ( self::$tokens[ $next ]['code'] == T_OPEN_PARENTHESIS ) {
+					//a variable function
+				}
+
+				$results[] = array(
+					'variable' => $token['content'],
+					'args'     => $params
+				);
+			}
+		}
+
+		return $results;
 	}
 
 	/**
@@ -100,13 +181,175 @@ class Token_Utils extends Component {
 	 *
 	 * @return bool
 	 */
-	public static function isUserInput( $token ) {
+	public static function isUserInput(
+		$token
+	) {
 		if ( $token['code'] == T_VARIABLE
 		     && preg_match( '/\$\{?_(GET|POST|REQUEST|COOKIE|SERVER|FILES|ENV)/', $token['content'] ) ) {
 			return true;
 		}
 
 		return false;
+	}
+
+	/**
+	 * Borrow from https://github.com/FloeDesignTechnologies/phpcs-security-audit/blob/master/Security/Sniffs/Utils.php
+	 * @return array
+	 */
+	public static function getFilesystemFunctions() {
+		return array(
+			// From http://www.php.net/manual/en/book.filesystem.php
+			'chgrp',
+			'chown',
+			'clearstatcache',
+			'copy',
+			'delete',
+			'disk_free_space',
+			'disk_total_space',
+			'diskfreespace',
+			'fclose',
+			'feof',
+			'fflush',
+			'fgetc',
+			'fgetcsv',
+			'fgets',
+			'fgetss',
+			'file_get_contents',
+			'file_put_contents',
+			'file',
+			'fileatime',
+			'filectime',
+			'filegroup',
+			'fileinode',
+			'filemtime',
+			'fileowner',
+			'fileperms',
+			'filesize',
+			'filetype',
+			'flock',
+			'fopen',
+			'fpassthru',
+			'fputcsv',
+			'fputs',
+			'ftruncate',
+			'fwrite',
+			'glob',
+			'is_executable',
+			'is_readable',
+			'is_uploaded_file',
+			'is_writable',
+			'is_writeable',
+			'lchgrp',
+			'lchown',
+			'link',
+			'linkinfo',
+			'lstat',
+			'mkdir',
+			'move_uploaded_file',
+			'parse_ini_file',
+			'parse_ini_string',
+			'readfile',
+			'readlink',
+			'realpath_cache_get',
+			'realpath_cache_size',
+			//'realpath',
+			'rename',
+			'rewind',
+			'rmdir',
+			'set_file_buffer',
+			'stat',
+			'symlink',
+			'tempnam',
+			'tmpfile',
+			'touch',
+			'umask',
+			'unlink',
+			// From http://www.php.net/manual/en/ref.dir.php except function that use directory handle as parameter
+			'chdir',
+			'chroot',
+			'dir',
+			'opendir',
+			'scandir',
+			// From http://ca2.php.net/manual/en/function.mime-content-type.php
+			'finfo_open',
+			// From http://ca2.php.net/manual/en/book.xattr.php
+			'xattr_get',
+			'xattr_list',
+			'xattr_remove',
+			'xattr_set',
+			'xattr_supported',
+			// From http://www.php.net/manual/en/function.readgzfile.php
+			'readgzfile',
+			'gzopen',
+			'gzfile',
+			// From http://www.php.net/manual/en/ref.image.php
+			'getimagesize',
+			'imagecreatefromgd2',
+			'imagecreatefromgd2part',
+			'imagecreatefromgd',
+			'imagecreatefromgif',
+			'imagecreatefromjpeg',
+			'imagecreatefrompng',
+			'imagecreatefromwbmp',
+			'imagecreatefromwebp',
+			'imagecreatefromxbm',
+			'imagecreatefromxpm',
+			'imagepsloadfont',
+			'jpeg2wbmp',
+			'png2wbmp',
+			// 2nd params only, maybe make it standalone and check just the second param?
+			'image2wbmp',
+			'imagegd2',
+			'imagegd',
+			'imagegif',
+			'imagejpeg',
+			'imagepng',
+			'imagewbmp',
+			'imagewebp',
+			'imagexbm',
+			// From http://www.php.net/manual/en/ref.exif.php
+			'exif_imagetype',
+			'exif_read_data',
+			'exif_thumbnail',
+			'read_exif_data',
+			// From http://www.php.net/manual/en/ref.hash.php
+			'hash_file',
+			'hash_hmac_file',
+			'hash_update_file',
+			// From http://www.php.net/manual/en/ref.misc.php
+			'highlight_file',
+			'php_check_syntax',
+			'php_strip_whitespace',
+			'show_source',
+			// Various functions that open/read files
+			'get_meta_tags',
+			'hash_file',
+			'hash_hmac_file',
+			'hash_update_file',
+			'md5_file',
+			'sha1_file',
+			'bzopen',
+//Curl Functions
+			'curl_exec',
+			'curl_multi_exec',
+		);
+	}
+
+//Borrow from https://github.com/FloeDesignTechnologies/phpcs-security-audit/blob/master/Security/Sniffs/Utils.php
+	public static function getSystemexecFunctions() {
+		return array(
+			'exec',
+			'passthru',
+			'proc_open',
+			'popen',
+			'shell_exec',
+			'system',
+			'pcntl_exec'
+		);
+	}
+
+	public static function getInclutions() {
+		return array( 'include', 'include_once', 'require', 'require_once' );
 	}
 
 	//Borrow from https://github.com/FloeDesignTechnologies/phpcs-security-audit/blob/master/Security/Sniffs/Utils.php
@@ -116,10 +359,10 @@ class Token_Utils extends Component {
 			'ob_start',
 			'array_diff_uassoc',
 			'array_diff_ukey',
-			'array_filter',
+			//'array_filter',
 			'array_intersect_uassoc',
 			'array_intersect_ukey',
-			'array_map',
+			//'array_map',
 			'array_reduce',
 			'array_udiff_assoc',
 			'array_udiff_uassoc',
@@ -130,9 +373,6 @@ class Token_Utils extends Component {
 			'array_walk_recursive',
 			'array_walk',
 			'assert_options',
-			'uasort',
-			'uksort',
-			'usort',
 			'preg_replace_callback',
 			'spl_autoload_register',
 			'iterator_apply',
@@ -166,11 +406,15 @@ class Token_Utils extends Component {
 	 * @return array
 	 */
 	public static function getsuspiciousFunctions() {
-		return array_merge( self::getCryptoFunctions(), array(
+		return array_merge( self::getDangeriousFunction(), self::getFilesystemFunctions() );
+	}
+
+	public static function getDangeriousFunction() {
+		return array(
 			'assert',
 			'eval',
 			'gzinflate'
-		) );
+		);
 	}
 
 	/**
@@ -328,6 +572,53 @@ class Token_Utils extends Component {
 			'encipher',
 			'decipher',
 			'crc32',
+		);
+	}
+
+	/**
+	 * @return array
+	 */
+	public static function getSanitizeFunctions() {
+		return array(
+			'sanitize_email',
+			'sanitize_file_name',
+			'sanitize_html_class',
+			'sanitize_key',
+			'sanitize_meta',
+			'sanitize_mime_type',
+			'sanitize_option',
+			'sanitize_sql_orderby',
+			'sanitize_text_field',
+			'sanitize_textarea_field',
+			'sanitize_title',
+			'sanitize_title_for_query',
+			'sanitize_title_with_dashes',
+			'sanitize_user',
+			'intval',
+			'floatval'
+		);
+	}
+
+	public static function getOutputFunctions() {
+		return array(
+			'echo',
+			'print'
+		);
+	}
+
+	public static function getEscapeFunction() {
+		return array(
+			'esc_html',
+			'esc_html_',
+			'esc_html_e',
+			'esc_html_x',
+			'esc_url',
+			'esc_js',
+			'esc_attr',
+			'esc_attr_',
+			'esc_attr_e',
+			'esc_attr_x',
+			'esc_textarea'
 		);
 	}
 }

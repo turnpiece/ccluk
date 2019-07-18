@@ -26,7 +26,9 @@ class WP_Hummingbird_Pro_Admin {
 		add_action( 'wphb_admin_do_meta_boxes_wphb', array( $this, 'register_dashboard_do_meta_boxes' ), 10 );
 
 		// Advanced tools.
-		add_action( 'wphb_admin_do_meta_boxes_wphb-advanced', array( $this, 'register_advanced_tools_meta_boxes' ), 10 );
+		if ( is_multisite() && is_network_admin() || ! is_multisite() ) {
+			add_action( 'wphb_admin_do_meta_boxes_wphb-advanced', array( $this, 'register_advanced_tools_meta_boxes' ), 10 );
+		}
 
 		// Advanced tools.
 		add_action( 'wphb_admin_do_meta_boxes_wphb-uptime', array( $this, 'register_uptime_meta_boxes' ), 10 );

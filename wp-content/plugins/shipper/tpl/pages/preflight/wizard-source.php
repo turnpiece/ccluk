@@ -6,6 +6,7 @@
  */
 
 $checks = $result['checks']['local'];
+$migration = new Shipper_Model_Stored_Migration;
 ?>
 
 <div class="shipper-wizard-tab">
@@ -25,6 +26,7 @@ $checks = $result['checks']['local'];
 		</thead>
 		<tbody>
 		<?php foreach ( $checks['checks'] as $check ) { ?>
+			<?php if ( 'ok' === $check['status'] ) { continue; } ?>
 			<tr class="sui-accordion-item">
 				<td class="sui-table-item-title">
 					<?php echo esc_html( $check['title'] ); ?>
@@ -85,5 +87,16 @@ $checks = $result['checks']['local'];
 		<?php } ?>
 		</tbody>
 	</table>
+<?php if ( Shipper_Model_Stored_Migration::TYPE_EXPORT === $migration->get_type()  && ! empty( $result['checks']['files'] ) ) { ?>
+	<div>
+		<?php $this->render( 'pages/preflight/wizard-files', array(
+			'result' => $result,
+			'has_issues' => $has_issues,
+			'has_errors' => $has_errors,
+			'issues_count' => $issues_count,
+			'shipper_url' => $shipper_url,
+		) ); ?>
+	</div>
+<?php } ?>
 </div>
 

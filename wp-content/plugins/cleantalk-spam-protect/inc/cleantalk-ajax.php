@@ -146,10 +146,10 @@ function ct_validate_email_ajaxlogin($email=null, $is_ajax=true){
 	
 	if(class_exists('AjaxLogin')&&isset($_POST['action'])&&$_POST['action']=='validate_email'){
 		
-		$checkjs = apbct_js_test('ct_checkjs', $_POST, true);
+		$checkjs = apbct_js_test('ct_checkjs', $_POST);
 	    $sender_info['post_checkjs_passed'] = $checkjs;
 		if ($checkjs === null){
-			$checkjs = apbct_js_test('ct_checkjs', $_COOKIE, true);
+			$checkjs = apbct_js_test('ct_checkjs', $_COOKIE);
 			$sender_info['cookie_checkjs_passed'] = $checkjs;
 		}
 		
@@ -197,10 +197,10 @@ function ct_user_register_ajaxlogin($user_id)
 	if(class_exists('AjaxLogin')&&isset($_POST['action'])&&$_POST['action']=='register_submit')
 	{
 	    
-		$checkjs = apbct_js_test('ct_checkjs', $_POST, true);
+		$checkjs = apbct_js_test('ct_checkjs', $_POST);
 	    $sender_info['post_checkjs_passed'] = $checkjs;
 		if ($checkjs === null){
-			$checkjs = apbct_js_test('ct_checkjs', $_COOKIE, true);
+			$checkjs = apbct_js_test('ct_checkjs', $_COOKIE);
 			$sender_info['cookie_checkjs_passed'] = $checkjs;
 		}
 		
@@ -276,11 +276,15 @@ function ct_ajax_hook($message_obj = false, $additional = false)
 		'acf/validate_save_post', //ACF validate post admin
 		'admin:saveThemeOptions', //Ait-theme admin checking
 		'save_tourmaster_option', //Tourmaster admin save
+	    'validate_register_email', // Service id #313320
+	    'elementor_pro_forms_send_form', //Elementor Pro
+	    'phone-orders-for-woocommerce', //Phone orders for woocommerce backend
     );
 	
     // Skip test if
     if( !$apbct->settings['general_contact_forms_test'] || // Test disabled
         !ct_is_user_enable() || // User is admin, editor, author
+	    (function_exists('get_current_user_id') && get_current_user_id() != 0) || // Check with default wp_* function if it's admin
 	    ($apbct->settings['protect_logged_in'] && (isset($current_user->ID) && $current_user->ID !== 0 )) || // Logged in user
         check_url_exclusions() || // url exclusions
         (isset($_POST['action']) && in_array($_POST['action'], $skip_post)) || // Special params
@@ -299,7 +303,7 @@ function ct_ajax_hook($message_obj = false, $additional = false)
  
 	//General post_info for all ajax calls
 	$post_info = array('comment_type' => 'feedback_ajax');
-	$checkjs = apbct_js_test('ct_checkjs', $_COOKIE, true);
+	$checkjs = apbct_js_test('ct_checkjs', $_COOKIE);
 		
     if(isset($_POST['user_login']))
 		$sender_nickname = $_POST['user_login'];
@@ -345,6 +349,22 @@ function ct_ajax_hook($message_obj = false, $additional = false)
 	if(isset($_POST['action']) && $_POST['action']=='woocommerce_checkout'){
 		$post_info['comment_type'] = 'order';
 	}
+	//Easy Forms for Mailchimp
+	if( isset($_POST['action']) && $_POST['action']=='process_form_submission' ){
+		$post_info['comment_type'] = 'contact_enquire_wordpress_easy_forms_for_mailchimp';
+		if( isset($_POST['form_data']) ) {
+			$form_data = explode( '&', $_POST['form_data'] );
+			$form_data_arr = array();
+			foreach ( $form_data as $val ) {
+				$form_data_element = explode( '=', $val );
+				$form_data_arr[$form_data_element[0]] = @$form_data_element[1];
+			}
+			if( isset( $form_data_arr['EMAIL'] ) ) {
+				$ct_post_temp['email'] = $form_data_arr['EMAIL'];
+			}
+		}
+	}
+
 	$ct_temp_msg_data = isset($ct_post_temp)
 		? ct_get_fields_any($ct_post_temp)
 		: ct_get_fields_any($_POST);
@@ -658,6 +678,15 @@ function ct_ajax_hook($message_obj = false, $additional = false)
 			);
 			print json_encode($result);
 			die();
+		}
+		//Easy Forms for Mailchimp
+		elseif( isset($_POST['action']) && $_POST['action']=='process_form_submission' ) {
+			wp_send_json_error(
+				array(
+					'error'    => 1,
+					'response' => $ct_result->comment
+				)
+			);
 		}
 		else
 		{

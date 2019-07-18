@@ -90,7 +90,7 @@ if ( 0 === absint( $core->total_count ) ) {
 					<?php
 					printf(
 						/* translators: %1$s: opening a tag, %2$s: closing a tag */
-						esc_html__( 'Enable %1$sSuper-smush%2$s for advanced lossy compression to optimize images further with almost no visible drop in quality.', 'wp-smushit' ),
+						esc_html__( 'Enable %1$sSuper-Smush%2$s for advanced lossy compression to optimize images further with almost no visible drop in quality.', 'wp-smushit' ),
 						'<a href="#" class="wp-smush-lossy-enable">',
 						'</a>'
 					);
@@ -167,7 +167,7 @@ if ( 0 === absint( $core->total_count ) ) {
 if ( $is_pro && $lossy_enabled ) {
 	?>
 	<p class="wp-smush-enable-lossy tc sui-hidden">
-		<?php esc_html_e( 'Tip: Enable Super-smush in the Settings area to get even more savings with almost no visible drop in quality.', 'wp-smushit' ); ?>
+		<?php esc_html_e( 'Tip: Enable Super-Smush in the Settings area to get even more savings with almost no visible drop in quality.', 'wp-smushit' ); ?>
 	</p>
 	<?php
 } elseif ( ! $is_pro ) {

@@ -146,13 +146,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 										<?php if ( 'both' === $params['DEVICE'] || 'desktop' === $params['DEVICE'] ) : ?>
 											<td class="report-list-item-info" style="border-collapse: collapse !important;color: #888888;font-family: Arial, sans-serif;font-size: 13px;font-weight: normal;line-height: 22px;margin: 0;padding: 10px 0;text-align: right;vertical-align: top">
 												<span style="color: inherit; display: inline; font-size: inherit; font-family: inherit; line-height: inherit; vertical-align: middle;letter-spacing: -0.25px"><?php echo esc_html( $metric->displayValue ); ?></span>
-												<img src="<?php echo esc_url( WPHB_DIR_URL . 'core/pro/modules/reporting/templates/images/icon-' . WP_Hummingbird_Module_Performance::get_impact_class( $metric->score ) . '.png' ); ?>" alt="<?php echo esc_attr( WP_Hummingbird_Module_Performance::get_impact_class( $metric->score ) ); ?>" style="-ms-interpolation-mode: bicubic; border: none; clear: both; float: right; display: inline-block; margin: 2px 0 0 10px; height: 16px; outline: none; text-decoration: none; width: auto; vertical-align: middle;">
+												<img src="<?php echo esc_url( WPHB_DIR_URL . 'core/pro/modules/reporting/templates/images/icon-' . WP_Hummingbird_Module_Performance::get_impact_class( $metric->score * 100 ) . '.png' ); ?>" alt="<?php echo esc_attr( WP_Hummingbird_Module_Performance::get_impact_class( $metric->score ) ); ?>" style="-ms-interpolation-mode: bicubic; border: none; clear: both; float: right; display: inline-block; margin: 2px 0 0 10px; height: 16px; outline: none; text-decoration: none; width: auto; vertical-align: middle;">
 											</td>
 										<?php endif; ?>
 										<?php if ( 'both' === $params['DEVICE'] || 'mobile' === $params['DEVICE'] ) : ?>
 											<td class="report-list-item-result ok" style="border-collapse: collapse !important;color: #888888;font-family: Arial, sans-serif;font-size: 13px;font-weight: normal;line-height: 22px;margin: 0;min-width: 65px;padding: 10px 0;text-align: right;vertical-align: top">
 												<span style="color: inherit; display: inline; font-size: inherit; font-family: inherit; line-height: inherit; vertical-align: middle;letter-spacing: -0.25px"><?php echo esc_html( $last_test->mobile->metrics->{$index}->displayValue ); ?></span>
-												<img src="<?php echo esc_url( WPHB_DIR_URL . 'core/pro/modules/reporting/templates/images/icon-' . WP_Hummingbird_Module_Performance::get_impact_class( $last_test->mobile->metrics->{$index}->score ) . '.png' ); ?>" alt="<?php echo esc_attr( WP_Hummingbird_Module_Performance::get_impact_class( $last_test->mobile->metrics->{$index}->score ) ); ?>" style="-ms-interpolation-mode: bicubic; border: none; clear: both; float: right; display: inline-block; margin: 2px 0 0 10px; height: 16px; outline: none; text-decoration: none; width: auto; vertical-align: middle;">
+												<img src="<?php echo esc_url( WPHB_DIR_URL . 'core/pro/modules/reporting/templates/images/icon-' . WP_Hummingbird_Module_Performance::get_impact_class( $last_test->mobile->metrics->{$index}->score * 100 ) . '.png' ); ?>" alt="<?php echo esc_attr( WP_Hummingbird_Module_Performance::get_impact_class( $last_test->mobile->metrics->{$index}->score ) ); ?>" style="-ms-interpolation-mode: bicubic; border: none; clear: both; float: right; display: inline-block; margin: 2px 0 0 10px; height: 16px; outline: none; text-decoration: none; width: auto; vertical-align: middle;">
 											</td>
 										<?php endif; ?>
 									</tr>
@@ -202,8 +202,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 											} elseif ( 'warning' === $class ) {
 												$color = '#FECF2F';
 											}
+											$opportunities = ! is_null( $last_test->desktop->audits->opportunities ) ? count( get_object_vars( $last_test->desktop->audits->opportunities ) ) : '-';
 											?>
-											<span style="color: inherit; display: inline-block; font-size: inherit; font-family: inherit; line-height: inherit; vertical-align: middle;letter-spacing: -0.25px;background-color: <?php echo esc_attr( $color ); ?>;width: 39px;height: 26px;border-radius: 13px;text-align: center;"><?php echo count( get_object_vars( $last_test->desktop->audits->opportunities ) ); ?></span>
+											<span style="color: inherit; display: inline-block; font-size: inherit; font-family: inherit; line-height: inherit; vertical-align: middle;letter-spacing: -0.25px;background-color: <?php echo esc_attr( $color ); ?>;width: 39px;height: 26px;border-radius: 13px;text-align: center;"><?php echo $opportunities; ?></span>
 										</td>
 									<?php endif; ?>
 									<?php if ( 'both' === $params['DEVICE'] || 'mobile' === $params['DEVICE'] ) : ?>
@@ -216,8 +217,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 											} elseif ( 'warning' === $class ) {
 												$color = '#FECF2F';
 											}
+											$opportunities = ! is_null( $last_test->mobile->audits->opportunities ) ? count( get_object_vars( $last_test->mobile->audits->opportunities ) ) : '-';
 											?>
-											<span style="color: inherit; display: inline-block; font-size: inherit; font-family: inherit; line-height: inherit; vertical-align: middle;letter-spacing: -0.25px;background-color: <?php echo esc_attr( $color ); ?>;width: 39px;height: 26px;border-radius: 13px;text-align: center;"><?php echo count( get_object_vars( $last_test->mobile->audits->opportunities ) ); ?></span>
+											<span style="color: inherit; display: inline-block; font-size: inherit; font-family: inherit; line-height: inherit; vertical-align: middle;letter-spacing: -0.25px;background-color: <?php echo esc_attr( $color ); ?>;width: 39px;height: 26px;border-radius: 13px;text-align: center;"><?php echo $opportunities; ?></span>
 										</td>
 									<?php endif; ?>
 								</tr>
@@ -235,8 +237,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 											} elseif ( 'warning' === $class ) {
 												$color = '#FECF2F';
 											}
+											$diagnostics = ! is_null( $last_test->desktop->audits->diagnostics ) ? count( get_object_vars( $last_test->desktop->audits->diagnostics ) ) : '-';
 											?>
-											<span style="color: inherit; display: inline-block; font-size: inherit; font-family: inherit; line-height: inherit; vertical-align: middle;letter-spacing: -0.25px;background-color: <?php echo esc_attr( $color ); ?>;width: 39px;height: 26px;border-radius: 13px;text-align: center;"><?php echo count( get_object_vars( $last_test->desktop->audits->diagnostics ) ); ?></span>
+											<span style="color: inherit; display: inline-block; font-size: inherit; font-family: inherit; line-height: inherit; vertical-align: middle;letter-spacing: -0.25px;background-color: <?php echo esc_attr( $color ); ?>;width: 39px;height: 26px;border-radius: 13px;text-align: center;"><?php echo $diagnostics; ?></span>
 										</td>
 									<?php endif; ?>
 									<?php if ( 'both' === $params['DEVICE'] || 'mobile' === $params['DEVICE'] ) : ?>
@@ -249,8 +252,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 											} elseif ( 'warning' === $class ) {
 												$color = '#FECF2F';
 											}
+											$diagnostics = ! is_null( $last_test->mobile->audits->diagnostics ) ? count( get_object_vars( $last_test->mobile->audits->diagnostics ) ) : '-';
 											?>
-											<span style="color: inherit; display: inline-block; font-size: inherit; font-family: inherit; line-height: inherit; vertical-align: middle;letter-spacing: -0.25px;background-color: <?php echo esc_attr( $color ); ?>;width: 39px;height: 26px;border-radius: 13px;text-align: center;"><?php echo count( get_object_vars( $last_test->mobile->audits->diagnostics ) ); ?></span>
+											<span style="color: inherit; display: inline-block; font-size: inherit; font-family: inherit; line-height: inherit; vertical-align: middle;letter-spacing: -0.25px;background-color: <?php echo esc_attr( $color ); ?>;width: 39px;height: 26px;border-radius: 13px;text-align: center;"><?php echo $diagnostics; ?></span>
 										</td>
 									<?php endif; ?>
 								</tr>
@@ -259,13 +263,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 										<span style="color: inherit; display: inline; font-size: inherit; font-family: inherit; line-height: inherit; vertical-align: middle; letter-spacing: -0.25px;"><?php esc_html_e( 'Passed Audits', 'wphb' ); ?></span>
 									</td>
 									<?php if ( 'both' === $params['DEVICE'] || 'desktop' === $params['DEVICE'] ) : ?>
+                                        <?php $passed = ! is_null( $last_test->desktop->audits->passed ) ? count( get_object_vars( $last_test->desktop->audits->passed ) ) : '-'; ?>
 										<td class="report-list-item-info" style="border-collapse: collapse !important;color: #ffffff;font-family: Arial, sans-serif;font-size: 12px;font-weight: normal;line-height: 27px;margin: 0;padding: 10px 0;text-align: right;vertical-align: top">
-											<span style="color: inherit; display: inline-block; font-size: inherit; font-family: inherit; line-height: inherit; vertical-align: middle;letter-spacing: -0.25px;background-color: #1ABC9C;width: 39px;height: 26px;border-radius: 13px;text-align: center;"><?php echo count( get_object_vars( $last_test->desktop->audits->passed ) ); ?></span>
+											<span style="color: inherit; display: inline-block; font-size: inherit; font-family: inherit; line-height: inherit; vertical-align: middle;letter-spacing: -0.25px;background-color: #1ABC9C;width: 39px;height: 26px;border-radius: 13px;text-align: center;"><?php echo $passed; ?></span>
 										</td>
 									<?php endif; ?>
 									<?php if ( 'both' === $params['DEVICE'] || 'mobile' === $params['DEVICE'] ) : ?>
+										<?php $passed = ! is_null( $last_test->mobile->audits->passed ) ? count( get_object_vars( $last_test->mobile->audits->passed ) ) : '-'; ?>
 										<td class="report-list-item-info" style="border-collapse: collapse !important;color: #ffffff;font-family: Arial, sans-serif;font-size: 12px;font-weight: normal;line-height: 27px;margin: 0;padding: 10px 0;text-align: right;vertical-align: top">
-											<span style="color: inherit; display: inline-block; font-size: inherit; font-family: inherit; line-height: inherit; vertical-align: middle;letter-spacing: -0.25px;background-color: #1ABC9C;width: 39px;height: 26px;border-radius: 13px;text-align: center;"><?php echo count( get_object_vars( $last_test->mobile->audits->passed ) ); ?></span>
+											<span style="color: inherit; display: inline-block; font-size: inherit; font-family: inherit; line-height: inherit; vertical-align: middle;letter-spacing: -0.25px;background-color: #1ABC9C;width: 39px;height: 26px;border-radius: 13px;text-align: center;"><?php echo $passed; ?></span>
 										</td>
 									<?php endif; ?>
 								</tr>

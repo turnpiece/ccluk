@@ -1,5 +1,5 @@
 <p>
-	<?php _e( "We can’t automatically action this fix, but follow the instructions below to patch this up.
+	<?php _e( "We can’t automatically action this fix, but follow the instructions below to patch this up. 
 First, add any exceptions to files you want to allow PHP to be executed from, then follow the instructions below.", wp_defender()->domain ) ?>
 </p>
 <div class="sui-form-field margin-top-30">

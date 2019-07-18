@@ -56,7 +56,7 @@ class Login_Protection_Api extends Component {
 		$model->attempt = $attempt;
 		if ( $model->attempt >= $settings->login_protection_login_attempt || $force == true ) {
 			$model->status       = IP_Model::STATUS_BLOCKED;
-			$model->release_time = strtotime( '+ ' . $settings->login_protection_lockout_duration . ' seconds' );
+			$model->release_time = strtotime( '+ ' . $settings->login_protection_lockout_duration . ' ' . $settings->login_protection_lockout_duration_unit );
 			if ( $blacklist && $force ) {
 				$model->lockout_message = esc_html__( "You have been locked out by the administrator for attempting to login with a banned username", wp_defender()->domain );
 			} else {
@@ -143,7 +143,7 @@ class Login_Protection_Api extends Component {
 		if ( count( $logs ) >= $settings->detect_404_threshold ) {
 			//we need to check the extension
 			$model->status          = IP_Model::STATUS_BLOCKED;
-			$model->release_time    = strtotime( '+ ' . $settings->detect_404_lockout_duration . ' seconds' );
+			$model->release_time    = strtotime( '+ ' . $settings->detect_404_lockout_duration . ' ' . $settings->detect_404_lockout_duration_unit );
 			$model->lockout_message = $settings->detect_404_lockout_message;
 			$model->lock_time_404   = time();
 			$model->save();
@@ -168,8 +168,8 @@ class Login_Protection_Api extends Component {
 	/**
 	 * @param null $time - unix timestamp
 	 *
-	 * @deprecated
 	 * @return int
+	 * @deprecated
 	 */
 	public static function get404Lockouts( $time = null ) {
 		$logs = Log_Model::count( array(
@@ -186,8 +186,8 @@ class Login_Protection_Api extends Component {
 	/**
 	 * @param null $time - unix timestamp
 	 *
-	 * @deprecated
 	 * @return int
+	 * @deprecated
 	 */
 	public static function getLoginLockouts( $time = null ) {
 		$logs = Log_Model::count( array(
@@ -204,8 +204,8 @@ class Login_Protection_Api extends Component {
 	/**
 	 * @param null $time - unix timestamp
 	 *
-	 * @deprecated
 	 * @return int
+	 * @deprecated
 	 */
 	public static function getAllLockouts( $time = null ) {
 		$logs = Log_Model::count( array(

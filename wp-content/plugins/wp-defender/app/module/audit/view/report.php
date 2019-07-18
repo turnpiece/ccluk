@@ -12,8 +12,8 @@
                     <span class="sui-description"><?php esc_html_e( "Schedule Defender to automatically email you a summary of all your website events.", wp_defender()->domain ) ?></span>
                 </div>
                 <div class="sui-box-settings-col-2">
+                    <input type="hidden" name="notification" value="0"/>
                     <label class="sui-toggle">
-                        <input type="hidden" name="notification" value="0"/>
                         <input type="checkbox" <?php checked( 1, $setting->notification ) ?> name="notification"
                                value="1" id="toggle_notification"/>
                         <span class="sui-toggle-slider"></span>

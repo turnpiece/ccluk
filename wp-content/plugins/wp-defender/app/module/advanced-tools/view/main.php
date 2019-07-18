@@ -87,8 +87,8 @@
                 </div>
                 <div class="sui-box-settings-col-2">
                     <div class="sui-form-field">
+                        <input type="hidden" name="lostPhone" value="0"/>
                         <label class="sui-toggle">
-                            <input type="hidden" name="lostPhone" value="0"/>
                             <input role="presentation" type="checkbox" name="lostPhone" class="toggle-checkbox"
                                    id="lostPhone" value="1"
 								<?php checked( true, $settings->lostPhone ) ?>/>
@@ -111,8 +111,8 @@
                 </div>
                 <div class="sui-box-settings-col-2">
                     <div class="sui-form-field">
+                        <input type="hidden" name="forceAuth" value="0"/>
                         <label class="sui-toggle">
-                            <input type="hidden" name="forceAuth" value="0"/>
                             <input role="presentation" type="checkbox" name="forceAuth" class="toggle-checkbox"
                                    id="forceAuth" value="1"
 								<?php checked( true, $settings->forceAuth ) ?>/>
@@ -163,8 +163,8 @@
                     </span>
                 </div>
                 <div class="sui-box-settings-col-2">
+                    <input type="hidden" name="customGraphic" value="0"/>
                     <label class="sui-toggle">
-                        <input type="hidden" name="customGraphic" value="0"/>
                         <input role="presentation" type="checkbox" name="customGraphic" class="toggle-checkbox"
                                id="customGraphic" value="1"
 							<?php checked( true, $settings->customGraphic ) ?>/>
@@ -238,7 +238,7 @@
                         <?php _e( "App Download", wp_defender()->domain ) ?>
                     </span>
                     <span class="sui-description">
-                        <?php _e( 'Need the app? Here’s links to the official Google Authenticator apps.', wp_defender()->domain ); ?>
+                        <?php _e( 'Need the app? Here’s links to the official Google Authenticator iOS and Android apps.', wp_defender()->domain ); ?>
                     </span>
                 </div>
                 <div class="sui-box-settings-col-2">
@@ -256,7 +256,7 @@
                         <?php _e( "Active Users", wp_defender()->domain ) ?>
                     </span>
                     <span class="sui-description">
-                        <?php _e( "Here’s a quick link to see which of your users have enabled two-factor verification.", wp_defender()->domain ) ?>
+                        <?php _e( "Here’s a quick link to see which of your users have enabled two-factor authentication.", wp_defender()->domain ) ?>
                     </span>
                 </div>
                 <div class="sui-box-settings-col-2">

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Post Type Switcher
  *
@@ -16,7 +15,7 @@
  * License:     GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Description: Allow switching of a post type while editing a post (in post publish section)
- * Version:     3.1.0
+ * Version:     3.2.0
  * Text Domain: post-type-switcher
  * Domain Path: /assets/lang/
  */
@@ -38,7 +37,7 @@ final class Post_Type_Switcher {
 	 *
 	 * @var int
 	 */
-	private $asset_version = 201609170001;
+	private $asset_version = 201904300001;
 
 	/**
 	 * Hook in the basic early actions
@@ -74,21 +73,30 @@ final class Post_Type_Switcher {
 		}
 
 		// Add column for quick-edit support
-		add_action( 'manage_posts_columns',        array( $this, 'add_column'    ) );
-		add_action( 'manage_pages_columns',        array( $this, 'add_column'    ) );
-		add_action( 'manage_posts_custom_column',  array( $this, 'manage_column' ), 10,  2 );
-		add_action( 'manage_pages_custom_column',  array( $this, 'manage_column' ), 10,  2 );
+		$post_type_names = $this->get_post_types( 'names' );
+
+		// Add filters if post-types are switchable
+		if ( ! empty( $post_type_names ) ) {
+			foreach ( $post_type_names as $name ) {
+				add_filter( "manage_{$name}_posts_columns",       array( $this, 'add_column'    )        );
+				add_action( "manage_{$name}_posts_custom_column", array( $this, 'manage_column' ), 10, 2 );
+			}
+		}
 
 		// Add UI to "Publish" metabox
-		add_action( 'admin_head',                  array( $this, 'admin_head'        ) );
-		add_action( 'post_submitbox_misc_actions', array( $this, 'metabox'           ) );
-		add_action( 'quick_edit_custom_box',       array( $this, 'quick_edit'        ) );
-		add_action( 'bulk_edit_custom_box',        array( $this, 'quick_edit_bulk'   ) );
-		add_action( 'admin_enqueue_scripts',       array( $this, 'quick_edit_script' ) );
+		add_action( 'admin_head',                  array( $this, 'admin_head'          ) );
+		add_action( 'post_submitbox_misc_actions', array( $this, 'metabox'             ) );
+		add_action( 'quick_edit_custom_box',       array( $this, 'quick_edit'          ) );
+		add_action( 'bulk_edit_custom_box',        array( $this, 'quick_edit_bulk'     ) );
+		add_action( 'admin_enqueue_scripts',       array( $this, 'quick_edit_script'   ) );
+
+		// Add UI to the block editor
+		add_action( 'enqueue_block_editor_assets', array( $this, 'block_editor_assets' ) );
 
 		// Override
-		add_filter( 'wp_insert_attachment_data', array( $this, 'override_type' ), 10, 2 );
-		add_filter( 'wp_insert_post_data',       array( $this, 'override_type' ), 10, 2 );
+		add_action( 'wp_ajax_post_type_switcher', array( $this, 'handle_ajax' ) );
+		add_filter( 'wp_insert_attachment_data',  array( $this, 'override_type' ), 10, 2 );
+		add_filter( 'wp_insert_post_data',        array( $this, 'override_type' ), 10, 2 );
 
 		// Pass object into an action
 		do_action( 'post_type_switcher', $this );
@@ -102,8 +110,8 @@ final class Post_Type_Switcher {
 	public function metabox() {
 
 		// Post types
+		$post_types = $this->get_post_types();
 		$post_type  = get_post_type();
-		$post_types = get_post_types( $this->get_post_type_args(), 'objects' );
 		$cpt_object = get_post_type_object( $post_type );
 
 		// Bail if object does not exist or produces an error
@@ -115,11 +123,6 @@ final class Post_Type_Switcher {
 		// https://wordpress.org/support/topic/dont-show-for-non-public-post-types?replies=4#post-5849287
 		if ( ! in_array( $cpt_object, $post_types, true ) ) {
 			$post_types[ $post_type ] = $cpt_object;
-		}
-
-		// Unset attachment types, since support seems to be broken
-		if ( isset( $post_types['attachment'] ) ) {
-			unset( $post_types['attachment'] );
 		}
 
 		?><div class="misc-pub-section misc-pub-section-last post-type-switcher">
@@ -160,8 +163,10 @@ final class Post_Type_Switcher {
 	 * Adds the post type column
 	 *
 	 * @since 1.2.0
+	 *
+	 * @param array $columns Array of registered columns
 	 */
-	public function add_column( $columns ) {
+	public function add_column( $columns = array() ) {
 		return array_merge( $columns, array( 'post_type' => esc_html__( 'Type', 'post-type-switcher' ) ) );
 	}
 
@@ -169,23 +174,31 @@ final class Post_Type_Switcher {
 	 * Manages the post type column
 	 *
 	 * @since 1.1.1
+	 *
+	 * @param string $column_name Name of column
+	 * @param int    $post_id     ID of post
 	 */
-	public function manage_column( $column, $post_id ) {
-		switch( $column ) {
-			case 'post_type' :
-				$post_type = get_post_type_object( get_post_type( $post_id ) ); ?>
+	public function manage_column( $column_name = '', $post_id = 0 ) {
 
-				<span data-post-type="<?php echo esc_attr( $post_type->name ); ?>"><?php echo esc_html( $post_type->labels->singular_name ); ?></span>
-
-				<?php
-				break;
+		// Bail if not the post_type column
+		if ( 'post_type' !== $column_name ) {
+			return;
 		}
+
+		// Get the post type object to get the names from it
+		$post_type = get_post_type_object( get_post_type( $post_id ) ); ?>
+
+		<span data-post-type="<?php echo esc_attr( $post_type->name ); ?>"><?php echo esc_html( $post_type->labels->singular_name ); ?></span>
+
+		<?php
 	}
 
 	/**
-	 * Adds quickedit button for bulk-editing post types
+	 * Adds quick-edit button for bulk-editing post types
 	 *
 	 * @since 1.2.0
+	 *
+	 * @param string $column_name Name of column
 	 */
 	public function quick_edit( $column_name = '' ) {
 
@@ -209,9 +222,11 @@ final class Post_Type_Switcher {
 	}
 
 	/**
-	 * Adds quickedit button for bulk-editing post types
+	 * Adds quick-edit button for bulk-editing post types
 	 *
 	 * @since 1.2.0
+	 *
+	 * @param string $column_name Name of column
 	 */
 	public function quick_edit_bulk( $column_name = '' ) {
 
@@ -233,7 +248,7 @@ final class Post_Type_Switcher {
 	}
 
 	/**
-	 * Adds quickedit script for getting values into quickedit box
+	 * Adds quick-edit script for getting values into quick-edit box
 	 *
 	 * @since 1.2
 	 */
@@ -249,6 +264,77 @@ final class Post_Type_Switcher {
 	}
 
 	/**
+	 * Enqueues modifications to the block editor.
+	 *
+	 * @since 3.2.0
+	 */
+	public function block_editor_assets() {
+
+		// Bail if current user cannot publish the current post type
+		$current_post_type        = get_post_type();
+		$current_post_type_object = get_post_type_object( $current_post_type );
+		if ( ! current_user_can( $current_post_type_object->cap->publish_posts ) ) {
+			return;
+		}
+
+		// Get all switchable types
+		$switchable_types = $this->get_post_types();
+
+		// Bail if no switchable types
+		if ( empty( $switchable_types ) ) {
+			return;
+		}
+
+		// Default empty available types array
+		$available_post_types = array();
+
+		// Loop through switchable types
+		foreach ( $switchable_types as $post_type ) {
+
+			// Skip if user cannot switch to
+			if ( ! current_user_can( $post_type->cap->publish_posts ) ) {
+				continue;
+			}
+
+			// Setup value/label to be localized below
+			$available_post_types[] = array(
+				'value' => $post_type->name,
+				'label' => $post_type->labels->singular_name,
+			);
+		}
+
+		// Setup the AJAX URL used to send the change request to
+		$change_url = add_query_arg(
+			array(
+				'action'           => 'post_type_switcher',
+				'pts-nonce-select' => wp_create_nonce( 'post-type-selector' ),
+				'post_id'          => get_the_ID(),
+			),
+			admin_url( 'admin-ajax.php' )
+		);
+
+		// Enqueue the block editor script
+		wp_enqueue_script(
+			'pts_blockeditor',
+			plugin_dir_url( __FILE__ ) . 'assets/js/block.js',
+			array( 'wp-components', 'wp-edit-post', 'wp-element', 'wp-i18n', 'wp-plugins' ),
+			$this->asset_version
+		);
+
+		// Localize the block editor script variables
+		wp_localize_script(
+			'pts_blockeditor',
+			'ptsBlockEditor',
+			array(
+				'availablePostTypes'   => $available_post_types,
+				'currentPostType'      => $current_post_type,
+				'currentPostTypeLabel' => $current_post_type_object->labels->singular_name,
+				'changeUrl'            => $change_url
+			)
+		);
+	}
+
+	/**
 	 * Output a post-type dropdown
 	 *
 	 * @since 1.2
@@ -256,15 +342,9 @@ final class Post_Type_Switcher {
 	public function select_box( $bulk = false ) {
 
 		// Get post type specific data
-		$args       = $this->get_post_type_args();
-		$post_types = get_post_types( $args, 'objects' );
+		$post_types = $this->get_post_types();
 		$post_type  = get_post_type();
 		$selected   = '';
-
-		// Unset attachment types, since support seems to be broken
-		if ( isset( $post_types['attachment'] ) ) {
-			unset( $post_types['attachment'] );
-		}
 
 		// Start an output buffer
 		ob_start();
@@ -299,6 +379,44 @@ final class Post_Type_Switcher {
 
 		// Output the current buffer
 		echo ob_get_clean();
+	}
+
+	/**
+	 * Handles an admin-ajax request to change post types.
+	 *
+	 * Note that these use $_GET values specifically, to avoid collisions with
+	 * upstream requests.
+	 *
+	 * @since 3.2.0
+	 */
+	public function handle_ajax() {
+
+		// Bail if missing data
+		if (
+			   empty( $_GET['pts_post_type'] )
+			|| empty( $_GET['pts-nonce-select'] )
+			|| empty( $_GET['post_id'] )
+		) {
+			return wp_die( esc_html__( 'Missing data.', 'post-type-switcher' ) );
+		}
+
+		// Post type information
+		$post_id          = absint( $_GET['post_id'] );
+		$post_type        = sanitize_key( $_GET['pts_post_type'] );
+		$post_type_object = get_post_type_object( $post_type );
+
+		// Bail if user isn't capable or nonce fails
+		if ( ! current_user_can( $post_type_object->cap->publish_posts )
+			|| ! wp_verify_nonce( $_GET['pts-nonce-select'], 'post-type-selector' ) ) {
+			return wp_die( esc_html__( 'Sorry, you cannot do this.', 'post-type-switcher' ) );
+		}
+
+		// Update the post type
+		set_post_type( $post_id, $post_type );
+
+		// Redirect
+		wp_safe_redirect( get_edit_post_link( $post_id, 'raw' ) );
+		exit;
 	}
 
 	/**
@@ -458,6 +576,9 @@ final class Post_Type_Switcher {
 				text-decoration: none !important;
 				color: #888;
 			}
+			.wp-list-table .column-post_type {
+				width: 10%;
+			}
 		</style>
 
 	<?php
@@ -472,14 +593,32 @@ final class Post_Type_Switcher {
 	 */
 	private static function is_allowed_page() {
 
-		// Only for admin area
-		if ( is_blog_admin() || ( defined( 'DOING_AJAX' ) && DOING_AJAX && ( ! empty( $_REQUEST['action'] ) && ( 'inline-save' === $_REQUEST['action'] ) ) ) ) {
+		if (
+			// Only for admin area
+			is_blog_admin()
+
+			// OR
+			||
+
+			// AJAX with correct action value
+			(
+				defined( 'DOING_AJAX' ) && DOING_AJAX
+				&&
+				(
+					! empty( $_REQUEST['action'] )
+					&&
+					(
+						in_array( $_REQUEST['action'], array( 'inline-save', 'post_type_switcher' ), true )
+					)
+				)
+			)
+		) {
 
 			// Allowed admin pages
 			$pages = apply_filters( 'pts_allowed_pages', array(
 				'post.php',
 				'edit.php',
-				'admin-ajax.php'
+				'admin-ajax.php' // Block Editor
 			) );
 
 			// Only show switcher when editing
@@ -491,8 +630,30 @@ final class Post_Type_Switcher {
 	}
 
 	/**
-	 * Allow types to be filtered, just incase you really need to switch between
-	 * crazy types of posts.
+	 * Get switchable post type objects, based on post-type arguments.
+	 *
+	 * @since 3.2.0
+	 *
+	 * @param string $output objects|names
+	 * @return array
+	 */
+	private function get_post_types( $output = 'objects' ) {
+
+		// Get switchable types
+		$types = get_post_types( $this->get_post_type_args(), $output );
+
+		// Unset attachment types, since support seems to be broken
+		if ( isset( $types['attachment'] ) ) {
+			unset( $types['attachment'] );
+		}
+
+		// Return switchable types
+		return $types;
+	}
+
+	/**
+	 * Returns the array of arguments used to narrow down the switchable post
+	 * types from the globally registered $wp_post_types array.
 	 *
 	 * @since 2.0.0
 	 *

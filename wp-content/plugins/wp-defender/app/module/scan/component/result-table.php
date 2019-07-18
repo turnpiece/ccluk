@@ -103,25 +103,29 @@ class Result_Table extends \WP_List_Table {
 	function prepare_items() {
 		$model        = Scan_Api::getLastScan();
 		$itemsPerPage = 40;
-		$totalItems   = $model->countAll( $this->type );
 
-		$this->set_pagination_args( array(
-			'total_items' => $totalItems,
-			'total_pages' => ceil( $totalItems / $itemsPerPage ),
-			'per_page'    => $itemsPerPage
-		) );
 		$offset                = ( $this->get_pagenum() - 1 ) * $itemsPerPage;
 		$this->_column_headers = array( $this->get_columns(), array(), $this->get_sortable_columns() );
 		$issueType             = HTTP_Helper::retrieve_get( 'type', null );
 		if ( ! in_array( $issueType, array(
 			'core',
 			'vuln',
-			'code'
+			'content'
 		) ) ) {
 			$issueType = null;
 		}
 
 		$this->items = $model->getItems( $offset . ',' . $itemsPerPage, $this->type, $issueType );
+		$totalItems = Result_Item::count( [
+			'type'   => $issueType,
+			'status' => $this->type
+		] );
+
+		$this->set_pagination_args( array(
+			'total_items' => $totalItems,
+			'total_pages' => ceil( $totalItems / $itemsPerPage ),
+			'per_page'    => $itemsPerPage
+		) );
 	}
 
 	/**
@@ -203,8 +207,8 @@ class Result_Table extends \WP_List_Table {
                     <input type="hidden" name="action" value="scanBulkAction"/>
 					<?php wp_nonce_field( 'scanBulkAction' ) ?>
                     <div class="bulk-action-bar">
-                        <label class="sui-checkbox apply-all">
-                            <input type="checkbox" id="apply-all"/>
+                        <label class="sui-checkbox">
+                            <input type="checkbox" class="apply-all"/>
                             <span aria-hidden="true"></span>
                         </label>
                         <select name="bulk" class="sui-select-sm bulk-action">
@@ -239,10 +243,11 @@ class Result_Table extends \WP_List_Table {
 	/**
 	 * Generates content for a single row of the table
 	 *
+	 * @param object $item The current item
+	 *
 	 * @since 3.1.0
 	 * @access public
 	 *
-	 * @param object $item The current item
 	 */
 	public function single_row( $item ) {
 		echo '<tr id="mid-' . $item->id . '" class="sui-accordion-item sui-error">';
@@ -320,9 +325,10 @@ class Result_Table extends \WP_List_Table {
 	/**
 	 * Generates the columns for a single row of the table
 	 *
+	 * @param object $item The current item
+	 *
 	 * @since 3.1.0
 	 *
-	 * @param object $item The current item
 	 */
 	protected function single_row_columns( $item ) {
 		list( $columns, $hidden, $sortable, $primary ) = $this->get_column_info();

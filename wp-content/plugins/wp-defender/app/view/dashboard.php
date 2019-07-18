@@ -9,15 +9,16 @@ $countAll = $hCount + $sCount;
                 <h1 class="sui-header-title">
 					<?php _e( "Dashboard", wp_defender()->domain ) ?>
                 </h1>
-	            <?php if ( wp_defender()->hideDocLinks === false ): ?>
+				<?php if ( wp_defender()->hideDocLinks === false ): ?>
                     <div class="sui-actions-right">
                         <div class="sui-actions-right">
-                            <a href="https://premium.wpmudev.org/docs/wpmu-dev-plugins/defender/" target="_blank" class="sui-button sui-button-ghost">
+                            <a href="https://premium.wpmudev.org/docs/wpmu-dev-plugins/defender/" target="_blank"
+                               class="sui-button sui-button-ghost">
                                 <i class="sui-icon-academy"></i> <?php _e( "View Documentation", wp_defender()->domain ) ?>
                             </a>
                         </div>
                     </div>
-	            <?php endif; ?>
+				<?php endif; ?>
             </div>
             <div class="sui-box sui-summary <?php echo \WP_Defender\Behavior\Utils::instance()->getSummaryClass() ?>">
                 <div class="sui-summary-image-space" aria-hidden="true"></div>
@@ -25,9 +26,35 @@ $countAll = $hCount + $sCount;
                     <div class="sui-summary-details">
                         <span class="sui-summary-large"><?php echo $countAll ?></span>
 						<?php if ( $countAll > 0 ): ?>
-                            <i aria-hidden="true" class="sui-icon-info sui-error"></i>
+							<?php
+							$tooltips = "";
+							if ( $hCount == 1 && $sCount == 0 ) {
+								$tooltips = __( "You have one security tweak left to do. We recommend you action it, or ignore it if it's irrelevant.", wp_defender()->domain );
+							} elseif ( $hCount == 0 && $sCount == 1 ) {
+								$tooltips = __( "We've detected a potential security risk in your file system. We recommend you take a look and action a fix, or ignore the file if it's harmless.", wp_defender()->domain );
+							} elseif ( $hCount == 1 && $sCount == 1 ) {
+								$tooltips = __( "You have one security tweak left to do, and one potential security risk in your file system. We recommend you take a look and action fixes, or ignore the issues if they are harmless.", wp_defender()->domain );
+							} elseif ( $hCount == 1 && $sCount > 1 ) {
+								$tooltips = sprintf( __( "You have one security tweak left to do, and %s potential security risks in your file system. We recommend you take a look and action fixes, or ignore the issues if they are harmless", wp_defender()->domain ), $sCount );
+							} elseif ( $hCount > 1 && $sCount == 1 ) {
+								$tooltips = sprintf( __( "You have %s security tweaks left to do, and one potential security risk in your file system. We recommend you take a look and action fixes, or ignore the issues if they are harmless.", wp_defender()->domain ), $hCount );
+							} elseif ( $hCount > 1 && $sCount > 1 ) {
+								$tooltips = sprintf( __( "You have %s security tweaks left to do, and %s potential security risks in your file system. We recommend you take a look and action fixes, or ignore the issues if they are harmless.", wp_defender()->domain ), $hCount, $sCount );
+							} elseif ( $hCount > 1 && $sCount == 0 ) {
+								$tooltips = sprintf( __( "You have %d security tweaks left to do. We recommend you action it, or ignore it if it's irrelevant.", wp_defender()->domain ), $hCount );
+							} elseif ( $hCount == 0 && $sCount > 1 ) {
+								$tooltips = sprintf( __( "We've detected %d potential security risks in your file system. We recommend you take a look and action a fix, or ignore the file if it's harmless.", wp_defender()->domain ), $sCount );
+							}
+							?>
+                            <span class="sui-tooltip sui-tooltip-top-left sui-tooltip-constrained"
+                                  data-tooltip="<?php echo $tooltips ?>">
+                            <i aria-hidden="true" class="sui-icon-info sui-warning"></i>
+                        </span>
 						<?php else: ?>
+                            <span class="sui-tooltip sui-tooltip-top-left sui-tooltip-constrained"
+                                  data-tooltip="<?php esc_attr_e( "You don't have any outstanding security issues, nice work!", wp_defender()->domain ) ?>">
                             <i class="sui-icon-check-tick sui-success" aria-hidden="true"></i>
+                            </span>
 						<?php endif; ?>
                         <span class="sui-summary-sub"><?php _e( "Security issues", wp_defender()->domain ) ?></span>
                     </div>
@@ -174,7 +201,7 @@ $countAll = $hCount + $sCount;
 
             </div>
 		<?php endif; ?>
-		<?php if ( wp_defender()->changeFooter && ! empty( wp_defender()->footerText ) ): ?>
+		<?php if ( wp_defender()->changeFooter ): ?>
             <div class="sui-footer"><?php echo wp_defender()->footerText ?></div>
 		<?php else: ?>
             <div class="sui-footer">Made with <i class="sui-icon-heart"></i> by WPMU DEV</div>
@@ -225,3 +252,4 @@ $countAll = $hCount + $sCount;
 		<?php endif; ?>
     </div>
 </div>
+

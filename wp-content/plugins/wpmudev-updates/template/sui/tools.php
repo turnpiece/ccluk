@@ -17,7 +17,8 @@
 
 // Render the page header section.
 $page_title = __( 'Tools', 'wpmudev' );
-$this->render_sui_header( $page_title );
+$page_slug  = 'tools';
+$this->render_sui_header( $page_title, $page_slug );
 
 /** @var WPMUDEV_Dashboard_Sui $this */
 /** @var WPMUDEV_Dashboard_Sui_Page_Urls $urls */
@@ -528,7 +529,7 @@ $this->render_sui_header( $page_title );
 
 						<div class="sui-box-settings-col-1">
 							<span class="sui-settings-label"><?php esc_html_e( 'Documentation Links', 'wpmudev' ); ?></span>
-							<span class="sui-description"><?php esc_html_e( 'Remove or replace the default WPMU DEV footer text from all plugin screens.', 'wpmudev' ); ?></span>
+							<span class="sui-description"><?php esc_html_e( 'Remove the Documentations button from the top of WPMU DEV plugin settings screens.', 'wpmudev' ); ?></span>
 						</div>
 
 						<div class="sui-box-settings-col-2">

@@ -659,4 +659,3 @@ function ct_comment_check_approve_comment(){
 
 	die();
 }
-?>

@@ -10,6 +10,7 @@
  * @var bool   $is_member     Member status.
  * @var bool   $logging       Logging status.
  * @var string $logs_link     Link to log file.
+ * @var string $path_url      URL to the log file.
  */
 
 ?>
@@ -166,8 +167,8 @@
 				</a>
 			</div>
 
-			<?php if ( $logs_link ) : ?>
-				<a href="<?php echo esc_url( $logs_link ); ?>" target="_blank"><?php echo esc_url( $logs_link ); ?></a>
+			<?php if ( $path_url ) : ?>
+				<a href="<?php echo esc_url( $path_url ); ?>" target="_blank"><?php echo esc_url( $path_url ); ?></a>
 			<?php endif; ?>
 		</div>
 	</div>

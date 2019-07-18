@@ -18,7 +18,7 @@ if ( ! defined( 'WPINC' ) ) {
 			<div class="sui-box-header">
 				<h3 class="sui-box-title"><?php esc_html_e( 'Choose Directory', 'wp-smushit' ); ?></h3>
 				<div class="sui-actions-right">
-					<button class="sui-dialog-close" aria-label="<?php esc_attr_e( 'Close', 'wp-smushit' ); ?>"></button>
+					<button class="sui-dialog-close" aria-label="<?php esc_attr_e( 'Close', 'wp-smushit' ); ?>" data-a11y-dialog-hide></button>
 				</div>
 			</div>
 
@@ -91,7 +91,7 @@ if ( ! defined( 'WPINC' ) ) {
 			<div class="sui-box-footer">
 				<div class="sui-actions-right">
 					<span class="add-dir-loader"></span>
-					<button class="sui-modal-close sui-button wp-smush-cancel-dir">
+					<button class="sui-modal-close sui-button wp-smush-cancel-dir" data-a11y-dialog-hide>
 						<?php esc_html_e( 'CANCEL', 'wp-smushit' ); ?>
 					</button>
 				</div>

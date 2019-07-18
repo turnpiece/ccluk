@@ -6,6 +6,7 @@
  *
  * @var string $activate_pro_url  URL to activate Pro version.
  * @var string $activate_url      URL to activate Free version.
+ * @var bool   $can_activate      Can the user activate Smush.
  * @var bool   $is_active         Activation status.
  * @var bool   $is_installed      Installation status.
  * @var bool   $is_pro            Pro status.
@@ -32,7 +33,7 @@
 		</a>
 
 	<!-- Plugin is installed but not active -->
-	<?php elseif ( $is_installed && ! $is_active ) : ?>
+	<?php elseif ( $is_installed && ! $is_active && $can_activate ) : ?>
 		<div class="sui-notice sui-notice-warning">
 			<p><?php esc_html_e( 'WP Smush is installed but not activated! Activate and set up now to reduce page load time.', 'wphb' ); ?></p>
 		</div>

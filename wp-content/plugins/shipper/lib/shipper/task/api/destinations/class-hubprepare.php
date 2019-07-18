@@ -24,6 +24,7 @@ class Shipper_Task_Api_Destinations_Hubprepare extends Shipper_Task_Api {
 		));
 
 		if ( empty( $status['success'] ) ) {
+			$this->clear_cached_api_response( 'destinations-prepare' );
 			Shipper_Helper_Log::write(
 				sprintf(
 					__( 'Error preparing site %s: %s', 'shipper' ),
@@ -33,6 +34,7 @@ class Shipper_Task_Api_Destinations_Hubprepare extends Shipper_Task_Api {
 			return false;
 		}
 
+		$this->record_success( 'destinations-prepare' );
 		return true;
 	}
 }

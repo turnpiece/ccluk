@@ -4,16 +4,20 @@ import './navbar.js';
 
 import './migrate/shared-actions.js';
 import './migrate/tick.js';
-import './migrate/initial.js';
-import './migrate/check-hub.js';
+import './migrate/initial.js'; // @deprecated
+import './migrate/check-hub.js'; // @deprecated?
 import './migrate/check-system.js';
-import './migrate/check.js';
+import './migrate/check.js'; // @deprecated
 import './migrate/progress.js';
 import './tools/tools.js';
 import './tools/sysinfo.js';
 import './settings/settings.js';
 import './settings/notifications.js';
+import './settings/permissions.js';
 import './migrate/preflight-files.js';
+
+import './migrate/site-selection.js';
+import './migrate/preflight.js';
 
 var shipper_sui_version = require('@wpmudev/shared-ui/package.json').version;
 ;(function($) {

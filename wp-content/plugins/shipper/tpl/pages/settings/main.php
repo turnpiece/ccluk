@@ -11,6 +11,7 @@ $tools = array(
 	'data' => __( 'Data', 'shipper' ),
 	'notifications' => __( 'Notifications', 'shipper' ),
 	'pagination' => __( 'Pagination', 'shipper' ),
+	'permissions' => __( 'Permissions', 'shipper' ),
 );
 ?>
 <div class="<?php echo esc_attr( Shipper_Helper_Assets::get_page_class( 'settings' ) ); ?>" >

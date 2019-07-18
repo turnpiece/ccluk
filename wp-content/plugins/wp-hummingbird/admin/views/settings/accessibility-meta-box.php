@@ -17,8 +17,8 @@
 			</span>
 		</div><!-- end col-third -->
 		<div class="sui-box-settings-col-2">
+			<input type="hidden" name="accessible_colors" value="0" />
 			<label class="sui-toggle">
-				<input type="hidden" name="accessible_colors" value="0" />
 				<input type="checkbox" name="accessible_colors" value="1"
 					   id="color_accessible" <?php checked( 1, $settings['accessible_colors'] ); ?> />
 				<span class="sui-toggle-slider"></span>

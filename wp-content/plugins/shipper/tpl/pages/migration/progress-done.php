@@ -5,21 +5,35 @@
  * @package shipper
  */
 
-$target = $destinations->get_by_site_id( $site );
-$ping = new Shipper_Task_Api_Destinations_Ping;
-
-$is_reachable = $ping->apply(array(
-	'domain' => $target['domain'],
-));
-
-$domain = $target['domain'];
+$is_reachable = true;
+$domain = Shipper_Model_Stored_Destinations::get_current_domain();
+$migration = new Shipper_Model_Stored_Migration;
 $action_url = esc_url( $domain );
+
+$target = $destinations->get_by_domain(
+	$migration->get_destination()
+);
+
+if ( Shipper_Model_Stored_Migration::TYPE_EXPORT === $type ) {
+	if ( empty( $target ) ) {
+		$target = $destinations->get_current();
+		$is_reachable = false;
+	} else {
+		$ping = new Shipper_Task_Api_Destinations_Ping;
+		$is_reachable = $ping->apply(array(
+			'domain' => $target['domain'],
+		));
+		$domain = $target['domain'];
+	}
+}
+
 if ( ! $is_reachable ) {
 	$current = $destinations->get_current();
 	$action_url = trailingslashit( esc_url( $target['admin_url'] ) ) .
 		'admin.php?page=shipper&type=import&site=' . $current['site_id']
 	;
 }
+
 ?>
 
 <div class="shipper-migration-content shipper-migration-done-content" style="display:none">
@@ -36,6 +50,9 @@ if ( ! $is_reachable ) {
 			<?php esc_html_e( 'Import complete!', 'shipper' ); ?>
 		<?php } ?>
 		</h2>
+		<?php
+			$this->render( 'tags/domains-tag' );
+		?>
 	</div>
 
 	<p>

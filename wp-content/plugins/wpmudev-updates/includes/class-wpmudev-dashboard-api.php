@@ -13,6 +13,12 @@
 class WPMUDEV_Dashboard_Api {
 
 	/**
+	 * Expiry time of the token used for Single SignOn, in seconds.
+	 * If the token returned from the DEV site is older than that, the user won't be logged in.
+	 */
+	const SSO_TOKEN_EXPIRY_TIME = 30.0;
+
+	/**
 	 * The WPMUDEV API server.
 	 *
 	 * @var string (URL)
@@ -1042,6 +1048,7 @@ class WPMUDEV_Dashboard_Api {
 			'projects'     => $projects,
 			'admin_url'    => $this->network_admin_url(),
 			'home_url'     => $this->network_home_url(),
+			'sso_status'   => WPMUDEV_Dashboard::$site->get_option( 'enable_sso' ),
 			'repo_updates' => $repo_updates,
 			'packages'     => $packages,
 			'auth_cookies' => $auth_cookies,
@@ -1161,8 +1168,12 @@ class WPMUDEV_Dashboard_Api {
 			if ( is_array( $response ) && ! empty( $body ) ) {
 				$data = json_decode( $body, true );
 			}
-			if ( isset( $data['code'] ) && 'limit_exceeded' === $data['code'] ) {
-				$res['limit_exceeded'] = true;
+			if ( isset( $data['code'] ) ) {
+				if ( 'limit_exceeded_no_hosting_sites' === $data['code'] ) {
+					$res['limit_exceeded_no_hosting_sites'] = true;
+				} else if ( 'limit_exceeded_with_hosting_sites' === $data['code'] ) {
+					$res['limit_exceeded_with_hosting_sites'] = true;
+				}
 			}
 
 			/*
@@ -1836,6 +1847,191 @@ class WPMUDEV_Dashboard_Api {
 				default:
 					wp_die( 'This is an invalid access token. Please ask the user to grant access.' );
 			}
+		}
+	}
+
+	/**
+	 * Listener for SSO through the Hub - 1st step.
+	 * This step will check if the Dashboard user is logged in and the SSO is enabled.
+	 * If so, it will redirect to the auth endpoint in the Hub to try the first hmac verification.
+	 *
+	 * @param string $redirect Where to redirect after a successful SSO.
+	 * @param string $nonce Nonce coming from the DEV site, to later check if user is logged in.
+	 *
+	 * @since    4.7.3
+	 * @internal Ajax handler
+	 */
+	public function authenticate_sso_access_step1( $redirect, $nonce ) {
+		// If user is already logged in, let's bypass the whole auth process.
+		if ( is_user_logged_in() ) {
+			$redirect = urldecode( $redirect );
+			wp_safe_redirect( $redirect );
+			exit;
+		}
+
+		if ( WPMUDEV_DISABLE_SSO ) {
+			wp_die( 'Error: Single Signon is disabled in wp-config' );
+		}
+
+		$access = WPMUDEV_Dashboard::$site->get_option( 'enable_sso' );
+		$user 	= $this->refresh_profile();
+
+		/**
+		 * Checking if user is logged in.
+		 * This could have been checked by
+		 * just checking if api key is present
+		 * but an extra layer has been added here
+		 * to check if the api key can actually
+		 * fetch proper data
+		 */
+		$logged = ! empty( $user ) && $this->has_key();
+
+		$error = false;
+		if ( ! $access ) {
+			$error = 'sso_disabled';
+		} else if ( ! $logged ){
+			$error = 'no_logged_in_dashboard_user';
+		}
+
+		if ( ! $error ) {
+			/* SSO is enabled and Dashboard user is logged in. */
+
+			$token    = uniqid() . '-' . microtime( true );
+			WPMUDEV_Dashboard::$site->set_option( 'active_sso_token', $token );
+
+			// Create state session cookie.
+			$api_key  = $this->get_key();
+			$pre_sso_state = uniqid( '', true );
+			setcookie( 'wdp-pre-sso-state', $pre_sso_state );
+			$hashed_pre_sso_state = hash_hmac( 'sha256', $pre_sso_state, $api_key );
+
+			// Build hmac for OAuth.
+			$domain   = $this->network_site_url();
+			$profile  = $this->get_profile();
+			$outgoing_hmac = hash_hmac( 'sha256', $token . $hashed_pre_sso_state . $redirect . $domain, $api_key );
+
+			$auth_endpoint = $this->rest_url( 'sso-hub' );
+			$auth_endpoint = add_query_arg( 
+				array(
+					'domain'        => $domain,
+					'hmac'          => $outgoing_hmac,
+					'token'         => $token,
+					'pre_sso_state' => $hashed_pre_sso_state,
+					'redirect'      => $redirect,
+					'email'         => $profile['profile']['user_name'],
+					'_wpnonce'		=> $nonce,
+				),
+				$auth_endpoint
+			);
+
+			wp_redirect( $auth_endpoint );
+			exit;
+
+		} else {
+			// There was an error. Display the error message.
+			switch ( $error ) {
+				case 'sso_disabled':
+					$redirect_upon_failure = add_query_arg(
+						array(
+							'wdp_sso_fail' => 'sso_disabled'
+						),
+						wp_login_url( urldecode( $redirect ) )
+					);
+
+					wp_redirect( $redirect_upon_failure );
+					exit;
+
+				case 'no_logged_in_dashboard_user':
+					$redirect_upon_failure = add_query_arg(
+						array(
+							'wdp_sso_fail' => 'no_logged_in_dashboard_user'
+						),
+						wp_login_url( urldecode( $redirect ) )
+					);
+
+					wp_redirect( $redirect_upon_failure );
+					exit;
+
+			}
+		}
+	}
+
+	/**
+	 * Listener for SSO through the Hub - 2nd step.
+	 * This step will verify the hmac coming from the Hub.
+	 * If the verification works, it should log in the user and redirect him.
+	 *
+	 * @param string $incoming_hmac The hmac coming from the Hub.
+	 * @param string $token The one-time passcode to prevent replay attacks.
+	 * @param string $pre_sso_state The state value that has been saved in a session cookie, in the previous step.
+	 * @param string $redirect The URL that the user needs to be redirected to.
+	 *
+	 * @since    4.7.3
+	 * @internal Ajax handler
+	 */
+	public function authenticate_sso_access_step2( $incoming_hmac, $token, $pre_sso_state, $redirect ) {
+		if ( WPMUDEV_DISABLE_SSO ) {
+			wp_die( 'Error: Single Signon is disabled in wp-config' );
+		}
+
+		$api_key  = $this->get_key();
+		$verifying_hmac = hash_hmac( 'sha256', $token . $pre_sso_state . $redirect, $api_key );
+		$redirect = urldecode( $redirect );
+
+		$userid = WPMUDEV_Dashboard::$site->get_option( 'sso_userid' );
+		$user 	= $this->refresh_profile();
+
+		$is_valid = hash_equals( $incoming_hmac, $verifying_hmac );
+
+		if ( $is_valid && ! empty( $user ) ) {
+
+			list( $req_id, $token_timestamp ) = explode( '-', $token );
+			$token_timestamp_float = floatval( $token_timestamp );
+
+			// Check if the token has expired.
+			$current_time = microtime( true );
+			if ( number_format( floatval( $current_time ) - $token_timestamp_float, 2) > self::SSO_TOKEN_EXPIRY_TIME ) {
+				wp_die( 'The SSO token has expired.' );
+			}
+			
+			// Check if the session cookie of the state value exists in the user's browser.
+			if ( isset( $_COOKIE['wdp-pre-sso-state'] ) ) {
+				//Check that the state value is the same with what was passed through the endpoint.
+				$hmac_state_value = hash_hmac( 'sha256', $_COOKIE['wdp-pre-sso-state'], $api_key );
+
+				if ( hash_equals( $hmac_state_value, $pre_sso_state ) ) {
+
+					// Check if the token has been used in the past, to prevent replay attacks.
+					$previous_sso_token = WPMUDEV_Dashboard::$site->get_option( 'previous_sso_token', true, 0 );
+					if ( $token_timestamp_float > $previous_sso_token ) {
+						WPMUDEV_Dashboard::$site->set_option( 'previous_sso_token', $token_timestamp_float );
+					} else {
+						wp_die( 'The SSO token has been used in the past.' );
+					}
+
+					// Finally, check if the passed token is the same that was saved in the first place. 
+					$active_sso_token = WPMUDEV_Dashboard::$site->get_option( 'active_sso_token' );
+					if ( $token !== $active_sso_token) {
+						wp_die( 'The SSO token could not be verified.' );
+					} else {
+						WPMUDEV_Dashboard::$site->set_option( 'active_sso_token', uniqid() );
+					}
+
+					// If everything checks out, log in the user.
+					wp_clear_auth_cookie();
+					wp_set_auth_cookie( $userid, false );
+					wp_set_current_user( $userid );
+		
+					wp_safe_redirect( $redirect );
+					exit;
+				} else {
+					wp_die( 'Passed state value does not match with the session cookie.' );
+				}
+			} else {
+				wp_die( 'Session cookie of the state value does not exist.' );
+			}
+		} else {
+			wp_die( 'Key mismatch.' );
 		}
 	}
 

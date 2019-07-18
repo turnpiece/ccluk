@@ -140,6 +140,7 @@ class WP_Hummingbird_Module_Performance extends WP_Hummingbird_Module {
 	 */
 	public static function refresh_report( $url = false ) {
 		self::set_doing_report( false );
+		self::dismiss_report( false );
 		$api     = WP_Hummingbird_Utils::get_api();
 		$results = $api->performance->results( $url );
 

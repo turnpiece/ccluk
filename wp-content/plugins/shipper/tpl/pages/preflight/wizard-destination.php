@@ -7,6 +7,7 @@
 
 $checks = $result['checks']['remote'];
 $has_service_errors = ! empty( $checks['errors'] );
+$migration = new Shipper_Model_Stored_Migration;
 ?>
 
 <div class="shipper-wizard-tab">
@@ -27,6 +28,7 @@ $has_service_errors = ! empty( $checks['errors'] );
 		</thead>
 		<tbody>
 		<?php foreach ( $checks['checks'] as $check ) { ?>
+			<?php if ( 'ok' === $check['status'] ) { continue; } ?>
 			<tr class="sui-accordion-item">
 				<td class="sui-table-item-title">
 					<?php echo esc_html( $check['title'] ); ?>
@@ -89,5 +91,16 @@ $has_service_errors = ! empty( $checks['errors'] );
 		</tbody>
 	</table>
 	<?php } // if has service issues ?>
+<?php if ( Shipper_Model_Stored_Migration::TYPE_IMPORT === $migration->get_type()  && ! empty( $result['checks']['remote_package'] ) ) { ?>
+	<div>
+		<?php $this->render( 'pages/preflight/wizard-rpkg', array(
+			'result' => $result,
+			'has_issues' => $has_issues,
+			'has_errors' => $has_errors,
+			'issues_count' => $issues_count,
+			'shipper_url' => $shipper_url,
+		) ); ?>
+	</div>
+<?php } ?>
 </div>
 

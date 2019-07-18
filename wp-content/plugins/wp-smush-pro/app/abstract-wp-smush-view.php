@@ -156,7 +156,7 @@ abstract class WP_Smush_View {
 		}
 
 		// Return if notice is already dismissed.
-		if ( get_option( 'wp-smush-hide_upgrade_notice' ) || get_site_option( 'wp-smush-hide_upgrade_notice' ) ) {
+		if ( get_site_option( WP_SMUSH_PREFIX . 'hide_upgrade_notice' ) ) {
 			return;
 		}
 
@@ -402,8 +402,7 @@ abstract class WP_Smush_View {
 		$this->view(
 			'tabs',
 			array(
-				'tabs'      => $this->get_tabs(),
-				'is_hidden' => is_network_admin() && ! $this->settings->is_network_enabled(),
+				'tabs' => $this->get_tabs(),
 			)
 		);
 	}
@@ -554,7 +553,7 @@ abstract class WP_Smush_View {
 	 */
 	private function get_recheck_message() {
 		// Return if not multisite, or on network settings page, Netowrkwide settings is disabled.
-		if ( ! is_multisite() || is_network_admin() || ! $this->settings->is_network_enabled() ) {
+		if ( ! is_multisite() || is_network_admin() || ! WP_Smush_Settings::can_access( 'bulk' ) ) {
 			return;
 		}
 
@@ -632,7 +631,7 @@ abstract class WP_Smush_View {
 	 */
 	private function settings_updated() {
 		// Check if network-wide settings are enabled, do not show settings updated message.
-		if ( is_multisite() && $this->settings->is_network_enabled() && ! is_network_admin() ) {
+		if ( is_multisite() && ! is_network_admin() && ! WP_Smush_Settings::can_access( 'bulk' ) ) {
 			return;
 		}
 
@@ -720,6 +719,42 @@ abstract class WP_Smush_View {
 	 */
 	public function hide_wpmudev_doc_link() {
 		return apply_filters( 'wpmudev_branding_hide_doc_link', false );
+	}
+
+	/**
+	 * Check if the page should be rendered.
+	 *
+	 * @since 3.2.2
+	 *
+	 * @return bool
+	 */
+	public function should_render() {
+		// Render all pages on single site installs.
+		if ( ! is_multisite() ) {
+			return true;
+		}
+
+		$access = get_site_option( WP_SMUSH_PREFIX . 'networkwide' );
+
+		if ( ! $access ) {
+			return is_network_admin() ? true : false;
+		}
+
+		if ( '1' === $access ) {
+			return is_network_admin() ? false : true;
+		}
+
+		if ( is_array( $access ) ) {
+			if ( is_network_admin() && ! in_array( $this->get_current_tab(), $access, true ) ) {
+				return true;
+			}
+
+			if ( ! is_network_admin() && in_array( $this->get_current_tab(), $access, true ) ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 }

@@ -92,7 +92,6 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 			null,
 			'summary',
 			array(
-				'box_class'         => '',
 				'box_content_class' => 'sui-box sui-summary',
 			)
 		);

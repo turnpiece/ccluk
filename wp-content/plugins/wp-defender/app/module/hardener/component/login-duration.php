@@ -32,6 +32,12 @@ class Login_Duration extends Rule {
 		$this->renderPartial( 'rules/login-duration' );
 	}
 
+	function getSubDescription() {
+		$days = $this->getService()->getDuration();
+
+		return sprintf( __( "Your current login duration is the default %d days.", wp_defender()->domain ), $days );
+	}
+
 	/**
 	 * @return string
 	 */
@@ -53,7 +59,7 @@ class Login_Duration extends Rule {
 		if ( $this->check() ) {
 			$this->add_filter( 'auth_cookie_expiration', 'cookie_duration', 10, 3 );
 			$this->add_filter( 'login_message', 'login_message' );
-			$this->add_action( 'wp_loaded', 'check_login' );
+			//$this->add_action( 'wp_loaded', 'check_login' );
 		}
 
 	}
@@ -113,6 +119,8 @@ class Login_Duration extends Rule {
 
 	/**
 	 * Check login of users
+	 * @deprecated since 2.1.3
+	 * We just need to alter the cookies time so wordpress will do the rest
 	 */
 	function check_login() {
 		$defender_logout = HTTP_Helper::retrieve_get( 'defender_logout', false );
@@ -127,7 +135,7 @@ class Login_Duration extends Rule {
 					$current_time    = strtotime( $current_time );
 					$last_login_time = strtotime( $last_login_time );
 					$diff            = $current_time - $last_login_time;
-					//Check if the current and login times are not the same
+					//Check if the current and login times are not the same 
 					//so we dont kick out someone who set it to 0
 					if ( ( $current_time != $last_login_time ) && $diff > $login_period ) {
 						$current_url          = Utils::instance()->currentPageURL();
@@ -212,13 +220,17 @@ class Login_Duration extends Rule {
 	 * @return Integer $duration
 	 */
 	function cookie_duration( $duration, $user_id, $remember ) {
-		if ( $remember ) {
-			$duration = $this->getService()->getDuration( true );
+		$dur = $this->getService()->getDuration( true );
+		if ( $dur < 2 ) {
+			//duration set smaller than 2 days, use the custom for both remember & non remeber
+			return $dur;
+		} elseif ( $remember ) {
+			//this case only
+			return $dur;
 		}
 
+		//return default
 		return $duration;
 	}
 
 }
-
-?>

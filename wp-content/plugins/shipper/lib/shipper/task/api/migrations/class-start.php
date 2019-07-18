@@ -24,6 +24,7 @@ class Shipper_Task_Api_Migrations_Start extends Shipper_Task_Api {
 		;
 
 		if ( empty( $source ) ) {
+			$this->clear_cached_api_response( 'migration-start' );
 			$this->add_error(
 				self::ERR_REQFORMAT,
 				__( 'Missing domain to attempt migration from', 'shipper' )
@@ -37,6 +38,7 @@ class Shipper_Task_Api_Migrations_Start extends Shipper_Task_Api {
 		;
 
 		if ( empty( $target ) ) {
+			$this->clear_cached_api_response( 'migration-start' );
 			$this->add_error(
 				self::ERR_REQFORMAT,
 				__( 'Missing domain to attempt migration to', 'shipper' )
@@ -50,6 +52,7 @@ class Shipper_Task_Api_Migrations_Start extends Shipper_Task_Api {
 		;
 
 		if ( empty( $type ) ) {
+			$this->clear_cached_api_response( 'migration-start' );
 			$this->add_error(
 				self::ERR_REQFORMAT,
 				__( 'Missing migration type to attempt', 'shipper' )
@@ -71,7 +74,8 @@ class Shipper_Task_Api_Migrations_Start extends Shipper_Task_Api {
 			}
 			$msg[] = $this->get_formatted_error( $status );
 
-			$this->add_error(
+			$this->record_non_success(
+				'migration-start',
 				self::ERR_SERVICE,
 				sprintf(
 					__( 'Service error: %s', 'shipper' ),
@@ -81,6 +85,7 @@ class Shipper_Task_Api_Migrations_Start extends Shipper_Task_Api {
 			return false;
 		}
 
+		$this->record_success( 'migration-start' );
 		return true;
 	}
 

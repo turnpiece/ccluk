@@ -65,7 +65,12 @@ class Shipper_Task_Import_Remote extends Shipper_Task_Import {
 	 */
 	public function get_work_description() {
 		if ( $this->is_tracking() ) {
-			return __( 'Export remote system', 'shipper' );
+			return ! empty( $this->_percentage_exported )
+				? sprintf(
+					__( 'Export remote system ( %d%% done )', 'shipper' ),
+					$this->_percentage_exported
+				)
+				: __( 'Export remote system', 'shipper' );
 		}
 		return __( 'Check remote system export status', 'shipper' );
 	}

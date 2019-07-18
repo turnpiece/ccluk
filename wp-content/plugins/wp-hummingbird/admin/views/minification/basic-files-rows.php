@@ -106,7 +106,7 @@
 			   id="wphb-minification-minify-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>" <?php checked( in_array( $item['handle'], $options['minify'][ $type ], true ) ); ?>
 			   aria-label="<?php esc_attr_e( 'Compress', 'wphb' ); ?>">
 		<label for="wphb-minification-minify-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>"
-			   class="toggle-label sui-tooltip sui-tooltip-top-left sui-tooltip-constrained"
+			   class="toggle-label sui-tooltip sui-tooltip-top-right sui-tooltip-constrained"
 			   data-tooltip="<?php echo esc_attr( $tooltip ); ?>">
 			<span class="sui-icon-arrows-in" aria-hidden="true"></span>
 		</label>

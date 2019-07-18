@@ -15,6 +15,7 @@
 $register_url      = 'https://premium.wpmudev.org/#trial';
 $reset_url         = 'https://premium.wpmudev.org/wp-login.php?action=lostpassword';
 $account_url       = 'https://premium.wpmudev.org/hub/account/';
+$hosting_url       = 'https://premium.wpmudev.org/hub/hosting/';
 $trial_info_url    = 'https://premium.wpmudev.org/manuals/how-free-trials-work/';
 $websites_url      = 'https://premium.wpmudev.org/hub/my-websites/';
 $security_info_url = 'https://premium.wpmudev.org/manuals/hub-security/';
@@ -130,10 +131,18 @@ if ( isset( $_GET['api_error'] ) ) { // wpcs csrf ok.
 } elseif ( $site_limit_exceeded ) {
 	// Variable `$site_limit_exceeded` is set by the UI function `render_dashboard`.
 	$login_errors[] = sprintf( __( 'You have already reached your plans limit of 1 site, not hosted with us, connected to The Hub. <a target="_blank" href="%1$s">Upgrade to unlimited sites</a> or <a target="_blank" href="%2$s">remove a site</a> before adding another. <a target="_blank" href="%3$s">Contact support</a> for assistance.', 'wpmudev' ), $account_url, $websites_url, $support_modal_url );
+} elseif ( $non_hosting_site_limit_exceeded ) {
+	// Variable `$non_hosting_site_limit_exceeded` is set by the UI function `render_dashboard`.
+	$login_errors[] = sprintf( __( 'You have already reached your plans limit of 1 site, not hosted with us, connected to The Hub. <a target="_blank" href="%1$s">Upgrade to unlimited sites</a> or <a target="_blank" href="%2$s">remove a site</a> before adding another. <a target="_blank" href="%3$s">Contact support</a> for assistance.</br><strong>Note:</strong> You still have 1 site <a target="_blank" href="%4$s">hosted with us</a> available.', 'wpmudev' ), $account_url, $websites_url, $support_modal_url, $hosting_url );
 }
 
 // Get the login URL.
 $form_action = WPMUDEV_Dashboard::$api->rest_url( 'authenticate' );
+
+// Nonce to store sso setting.
+$sso_nonce 		= wp_create_nonce( 'sso-status' );
+//check if SSO and status was set previously and show the checkbox accordingly.
+$enable_sso     = WPMUDEV_Dashboard::$site->get_option( 'enable_sso', true, 1 );
 
 // Detect Free Plugins
 $installed_free_projects        = WPMUDEV_Dashboard::$site->get_installed_free_projects();
@@ -217,16 +226,33 @@ if ( $installed_free_projects_names ) {
 						<p><?php echo $login_error; // wpcs xss ok. ?></p>
 					</div>
 				<?php endforeach; ?>
+				<div clas="dashui-login-button-wrap">
+					<div class="dashui-sso-checkbox">
+						<label for="enable-sso" class="sui-checkbox">
+							<input
+							type="checkbox"
+							id="enable-sso"
+							name="enable-sso"
+							data-nonce="<?php echo esc_attr( $sso_nonce ); ?>"
+							data-userid="<?php echo absint( get_current_user_id() ); ?>"
+							<?php checked( $enable_sso ); ?>
+							value="1">
+							<span aria-hidden="true"></span>
+							<span class="enable-sso-label" ><?php esc_html_e( 'Enable SSO', 'wpmudev' ); ?></span>
+							<button class="sui-button-icon sui-tooltip sui-tooltip-top sui-tooltip-constrained" data-tooltip="<?php esc_html_e( 'We will automatically log you in when you visit this site from The Hub.', 'wpmudev' ); ?>">
+								<i class="sui-icon-info" aria-hidden="true"></i>
+							</button>
+						</label>
+					</div>
+					<div class="dashui-login-button">
 
-				<div class="dashui-login-button">
+						<button class="sui-button sui-button-blue js-login-form-submit-button" type="submit">
+							<span class="sui-loading-text"><?php esc_html_e( 'Connect', 'wpmudev' ); ?>&nbsp;&nbsp;<i class="sui-icon-arrow-right" aria-hidden="true"></i></span>
+							<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
+						</button>
 
-					<button class="sui-button sui-button-blue js-login-form-submit-button" type="submit">
-						<span class="sui-loading-text"><?php esc_html_e( 'Connect', 'wpmudev' ); ?>&nbsp;&nbsp;<i class="sui-icon-arrow-right" aria-hidden="true"></i></span>
-						<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
-					</button>
-
+					</div>
 				</div>
-
 				<input type="hidden" name="redirect_url" value="<?php echo esc_url( $login_url ); ?>">
 				<input type="hidden" name="domain" value="<?php echo esc_url( WPMUDEV_Dashboard::$api->network_site_url() ); ?>">
 			</form>

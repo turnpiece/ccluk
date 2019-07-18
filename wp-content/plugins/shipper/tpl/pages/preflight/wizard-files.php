@@ -42,6 +42,7 @@ $has_issues = (bool) $checks['errors_count'];
 		</thead>
 		<tbody>
 		<?php foreach ( $checks['checks'] as $check_type => $check ) { ?>
+			<?php if ( 'is_done' === $check_type ) { continue; } ?>
 			<tr class="sui-accordion-item shipper-<?php echo esc_attr( $check['check_type'] ); ?>">
 				<td class="sui-table-item-title">
 					<?php echo esc_html( $check['title'] ); ?>

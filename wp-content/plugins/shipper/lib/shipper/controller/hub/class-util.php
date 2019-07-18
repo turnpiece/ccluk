@@ -68,19 +68,50 @@ class Shipper_Controller_Hub_Util extends Shipper_Controller_Hub {
 			);
 		}
 
+		$migration = new Shipper_Model_Stored_Migration;
+		if ( $migration->is_active() ) {
+			return $this->send_response_error(
+				new WP_Error(
+					$phase,
+					'There is a migration already running'
+				),
+				$request
+			);
+		}
+
+		$migration->prepare(
+			Shipper_Model_Stored_Destinations::get_current_domain(),
+			$params->domain,
+			Shipper_Model_Stored_Migration::TYPE_EXPORT,
+			true
+		);
+
 		$ctrl = Shipper_Controller_Runner_Preflight::get();
 		$preflight = $ctrl->get_status();
 		$data = $preflight->get_data();
+		$result = array(
+			'is_done' => false,
+			'estimated_package_size' => 0,
+		);
 
 		if ( empty( $data ) ) {
-			$ctrl->start( $params->domain );
-			$data = $preflight->get_data();
+			$ctrl->start();
+		} else {
+			$ctrl->ping();
 		}
-		$result = $ctrl->get_proxied_results();
 
 		if ( $preflight->get( Shipper_Model_Stored_Preflight::KEY_DONE ) ) {
+			$result['is_done'] = true;
+
+			$estimate = new Shipper_Model_Stored_Estimate;
+			$result['estimated_package_size'] = $estimate->get( 'package_size' );
+
 			// One and done. Restart next time.
-			$ctrl->clear();
+			$ctrl->get_status()
+				->set_check( Shipper_Model_Stored_Preflight::KEY_CHECKS_FILES, false )
+				->clear_check_errors( Shipper_Model_Stored_Preflight::KEY_CHECKS_FILES )
+				->save();
+			$migration->clear()->save();
 		}
 
 		return $this->send_response_success( $result, $request );

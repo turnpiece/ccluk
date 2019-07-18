@@ -17,7 +17,7 @@
 
 			<div class="sui-box-header">
 				<h3 class="sui-box-title" id="upgradeMembership">
-					<?php esc_html_e( 'Upgrade Membership', 'wphb' ); ?>
+					<?php esc_html_e( 'Upgrade to PRO', 'wphb' ); ?>
 				</h3>
 				<div class="sui-actions-right">
 					<button data-a11y-dialog-hide class="sui-dialog-close" aria-label="Close this dialog window"></button>
@@ -49,9 +49,9 @@
 				<p class="sui-block-content-center"><?php esc_html_e( 'Get all of this, plus heaps more as part of a WPMU DEV membership.', 'wphb' ); ?></p>
 
 				<div class="sui-block-content-center">
-					<a target="_blank" class="sui-button sui-button-green sui-button-lg"
+					<a target="_blank" class="sui-button sui-button-green"
 						href="<?php echo esc_url( WP_Hummingbird_Utils::get_link( 'plugin', 'hummingbird_footer_upgrade_button' ) ); ?>" >
-						<?php esc_html_e( 'Upgrade Membership', 'wphb' ); ?>
+						<?php esc_html_e( 'Upgrade to PRO', 'wphb' ); ?>
 					</a>
 				</div>
 			</div>

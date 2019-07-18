@@ -49,7 +49,7 @@ class WD_Requirement {
                     <tr>
                         <td><?php _e( "PHP version", wp_defender()->domain ) ?></td>
                         <td>
-                            <span class="def-tag tag-yellow"><?php echo phpversion() ?></span>&nbsp;&nbsp;<?php _e( "Please upgrade to 5.3 or later.", wp_defender()->domain ) ?>
+                            <?php _e( "Please upgrade to 5.6 or later.", wp_defender()->domain ) ?>
                         </td>
                     </tr>
                     </tbody>

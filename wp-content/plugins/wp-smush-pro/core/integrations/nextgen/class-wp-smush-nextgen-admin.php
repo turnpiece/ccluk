@@ -379,7 +379,7 @@ class WP_Smush_Nextgen_Admin extends WP_Smush_Nextgen {
 		// Get the absolute path for original image.
 		$image = $this->get_nextgen_image_from_id( $image_id );
 
-		// Image Meta data.
+		// Image Metadata.
 		$metadata = ! empty( $image ) ? $image->meta_data : '';
 
 		$smush_stats = ! empty( $metadata['wp_smush'] ) ? $metadata['wp_smush'] : '';

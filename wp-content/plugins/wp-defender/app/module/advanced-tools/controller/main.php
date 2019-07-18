@@ -113,7 +113,7 @@ class Main extends Controller {
 
 		$screen = get_current_screen();
 		if ( $screen->id != 'profile' ) {
-			wp_redirect( admin_url( 'profile.php' ) . '#show2AuthActivator' );
+			wp_safe_redirect( admin_url( 'profile.php' ) . '#show2AuthActivator' );
 			exit;
 		}
 	}
@@ -404,7 +404,7 @@ class Main extends Controller {
 					wp_set_current_user( $user->ID, $user->user_login );
 					wp_set_auth_cookie( $user->ID, true );
 					$redirect = apply_filters( 'login_redirect', $redirect, isset( $_REQUEST['redirect_to'] ) ? $_REQUEST['redirect_to'] : '', $user );
-					wp_redirect( $redirect );
+					wp_safe_redirect( $redirect );
 					exit;
 				} else {
 					$backupCode = get_user_meta( $user->ID, 'defenderBackupCode', true );
@@ -414,7 +414,7 @@ class Main extends Controller {
 						wp_set_current_user( $user->ID, $user->user_login );
 						wp_set_auth_cookie( $user->ID, true );
 						$redirect = apply_filters( 'login_redirect', $redirect, isset( $_REQUEST['redirect_to'] ) ? $_REQUEST['redirect_to'] : '', $user );
-						wp_redirect( $redirect );
+						wp_safe_redirect( $redirect );
 						exit;
 					} else {
 						$params['error'] = new \WP_Error( 'opt_fail', __( "Whoops, the passcode you entered was incorrect or expired.", wp_defender()->domain ) );
@@ -595,7 +595,7 @@ class Main extends Controller {
 		}
 		$email_settings['email_subject'] = $subject;
 		$email_settings['email_sender']  = $sender;
-		$email_settings['email_body']    = $body;
+		$email_settings['email_body']    = wp_kses_post( $body );
 
 		$setting = Auth_Settings::instance();
 		$setting->import( $email_settings );

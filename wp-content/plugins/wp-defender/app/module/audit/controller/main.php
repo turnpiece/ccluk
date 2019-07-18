@@ -233,8 +233,9 @@ class Main extends \WP_Defender\Controller {
 			return;
 		} else {
 			$params = $this->prepareAuditParams();
-			$data   = Audit_API::pullLogs( $params );
-			$table  = $this->_renderTable( $data );
+			error_log( var_export( $params, true ) );
+			$data  = Audit_API::pullLogs( $params );
+			$table = $this->_renderTable( $data );
 			if ( ! is_wp_error( $data ) ) {
 				wp_send_json_success( array(
 					'html'       => $table,
@@ -619,15 +620,16 @@ class Main extends \WP_Defender\Controller {
 				}
 			} elseif ( $att == 'user_id' ) {
 				$term = HTTP_Helper::retrieve_get( 'term' );
-				$term = explode( ',', $term );
-				$ids  = array();
-				foreach ( $term as $uname ) {
-					$u = get_user_by( 'username', $uname );
+				if ( filter_var( $term, FILTER_VALIDATE_INT ) ) {
+					$params['user_id'] = $term;
+				} elseif ( strlen( $term ) > 0 ) {
+					$u = get_user_by( 'username', $term );
 					if ( is_object( $u ) ) {
-						$ids[] = $u->ID;
+						$params['user_id'] = $u->ID;
+					} else {
+						$params['user_id'] = 0;
 					}
 				}
-				$params['user_id'] = $ids;
 			} elseif ( $att == 'date_range' && in_array( $value, array( 1, 7, 30 ) ) ) {
 				$params['date_from'] = date( 'Y-m-d', strtotime( '-' . $value . ' days', current_time( 'timestamp' ) ) );
 			}
@@ -635,16 +637,7 @@ class Main extends \WP_Defender\Controller {
 
 		$params['date_to']   = trim( $params['date_to'] . ' 23:59:59' );
 		$params['date_from'] = trim( $params['date_from'] . ' 00:00:00' );
-		if ( ! empty( $params['user_id'] ) ) {
-			if ( ! filter_var( $params['user_id'], FILTER_VALIDATE_INT ) ) {
-				$user_id = username_exists( $params['user_id'] );
-				if ( $user_id == false ) {
-					$params['user_id'] = null;
-				} else {
-					$params['user_id'] = $user_id;
-				}
-			}
-		}
+
 		if ( HTTP_Helper::retrieve_get( 'all_type' ) == 1 ) {
 			$params['event_type'] = Audit_API::get_event_type();
 		}

@@ -1,7 +1,7 @@
 <?php
 $checked = $controller->check();
 global $wpdb;
-$prefix = uniqid();
+$prefix = 'wp_' . uniqid();
 ?>
 <div id="db_prefix" class="sui-accordion-item <?php echo $controller->getCssClass() ?>">
     <div class="sui-accordion-item-header">
@@ -20,10 +20,10 @@ $prefix = uniqid();
         <div class="sui-box">
             <div class="sui-box-body">
                 <strong>
-		            <?php _e( "Overview", wp_defender()->domain ) ?>
+					<?php _e( "Overview", wp_defender()->domain ) ?>
                 </strong>
                 <p>
-		            <?php _e( "When you first install WordPress on a new database, the default settings start with wp_ as the prefix to anything that gets stored in the tables. This makes it easier for hackers to perform SQL injection attacks if they find a code vulnerability. ", wp_defender()->domain ) ?>
+					<?php _e( "When you first install WordPress on a new database, the default settings start with wp_ as the prefix to anything that gets stored in the tables. This makes it easier for hackers to perform SQL injection attacks if they find a code vulnerability. ", wp_defender()->domain ) ?>
                 </p>
 				<?php if ( $checked ): ?>
                     <div class="sui-notice sui-notice-success">
@@ -50,21 +50,22 @@ $prefix = uniqid();
                     <div class="sui-border-frame">
                         <div class="sui-form-field ">
                             <label class="sui-label"><?php _e( "New database prefix", wp_defender()->domain ) ?></label>
-                            <input type="text" value="<?php echo $prefix ?>" name="dbprefix" id="dbprefix" class="sui-form-control"/>
+                            <input type="text" value="<?php echo $prefix ?>" name="dbprefix" id="dbprefix"
+                                   class="sui-form-control"/>
                         </div>
                     </div>
 				<?php endif; ?>
             </div>
             <div class="sui-box-footer">
 				<?php if ( $checked ): ?>
-<!--                    <form method="post" class="hardener-frm rule-process">-->
-<!--						--><?php //$controller->createNonceField(); ?>
-<!--                        <input type="hidden" name="action" value="processRevert"/>-->
-<!--                        <input type="hidden" name="slug" value="--><?php //echo $controller::$slug ?><!--"/>-->
-<!--                        <button class="sui-button" type="submit">-->
-<!--                            <i class="sui-icon-undo" aria-hidden="true"></i>-->
-<!--							--><?php //_e( "Revert", wp_defender()->domain ) ?><!--</button>-->
-<!--                    </form>-->
+                    <!--                    <form method="post" class="hardener-frm rule-process">-->
+                    <!--						--><?php //$controller->createNonceField(); ?>
+                    <!--                        <input type="hidden" name="action" value="processRevert"/>-->
+                    <!--                        <input type="hidden" name="slug" value="--><?php //echo $controller::$slug ?><!--"/>-->
+                    <!--                        <button class="sui-button" type="submit">-->
+                    <!--                            <i class="sui-icon-undo" aria-hidden="true"></i>-->
+                    <!--							--><?php //_e( "Revert", wp_defender()->domain ) ?><!--</button>-->
+                    <!--                    </form>-->
 				<?php else: ?>
                     <div class="sui-actions-left">
 						<?php $controller->showIgnoreForm() ?>

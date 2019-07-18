@@ -279,7 +279,7 @@ jQuery( function ( $ ) {
 				}
 				// If content is received, Prepend it.
 				if ( 'undefined' !== typeof r.data.content ) {
-					$( '.bulk-smush-wrapper .sui-box-body p:first-of-type' ).after( r.data.content );
+					$( '.bulk-smush-wrapper .sui-box-body > p:first-of-type' ).after( r.data.content );
 				}
 				// If we have any notice to show.
 				if ( 'undefined' !== typeof r.data.notice ) {
@@ -851,15 +851,6 @@ jQuery( function ( $ ) {
 			settings_wrap.show();
 		} else {
 			settings_wrap.hide();
-		}
-	} );
-
-	//Handle, Change event in Enable Networkwide settings
-	$( '#wp-smush-networkwide' ).on( 'click', function ( e ) {
-		if ( $( this ).is( ':checked' ) ) {
-			$( '.network-settings-wrapper' ).show();
-		} else {
-			$( '.network-settings-wrapper' ).hide();
 		}
 	} );
 

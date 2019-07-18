@@ -24,6 +24,9 @@
 	</div>
 	<div class="sui-col">
 		<div class="sui-pagination-wrap">
+			<span class="sui-pagination-results" style="display:none">
+				<span class="shipper-files-count"></span> results
+			</span>
 			<ul class="sui-pagination">
 				<li>
 					<a href="#first">

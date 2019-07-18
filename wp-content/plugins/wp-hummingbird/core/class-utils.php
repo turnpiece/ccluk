@@ -1015,22 +1015,22 @@ class WP_Hummingbird_Utils {
 		switch ( $page ) {
 			case 'wphb-performance':
 				if ( 'reports' === $view ) {
-					$anchor = '#chapter-7';
+					$anchor = '#reports-pro';
 				} else {
-					$anchor = '#chapter-1';
+					$anchor = '#performance-report';
 				}
 				break;
 			case 'wphb-caching':
-				$anchor = '#chapter-2';
+				$anchor = '#caching';
 				break;
 			case 'wphb-gzip':
-				$anchor = '#chapter-3';
+				$anchor = '#gzip-compression';
 				break;
 			case 'wphb-minification':
-				$anchor = '#chapter-4';
+				$anchor = '#minification';
 				break;
 			case 'wphb-uptime':
-				$anchor = '#chapter-6';
+				$anchor = '#uptime-monitoring-pro';
 				break;
 			default:
 				$anchor = '';

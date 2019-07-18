@@ -85,7 +85,7 @@
 		<li><?php esc_html_e( 'Move critical scripts to the footer and defer the non-critical scripts using the option "Force load this file after the page has loaded".', 'wphb' ); ?></li>
 	</ol>
 	<?php if ( $url = WP_Hummingbird_Utils::get_admin_menu_url( 'minification' ) ) : ?>
-		<a href="<?php echo esc_url( $url ); ?>" class="sui-button">
+		<a href="<?php echo esc_url( $url . '&enable-advanced-settings=true' ); ?>" class="sui-button">
 			<?php esc_html_e( 'Configure Asset Optimization', 'wphb' ); ?>
 		</a>
 	<?php endif; ?>

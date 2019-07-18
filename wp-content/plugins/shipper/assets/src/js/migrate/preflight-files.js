@@ -147,6 +147,11 @@
 				} )
 			;
 
+			$( '.shipper-files-count', $root )
+				.text( $rows.length )
+					.closest( '.sui-pagination-results' )
+				.show();
+
 			$paginations.show();
 		}
 
@@ -276,11 +281,13 @@
 			} );
 			$( '.shipper-filelist :checkbox[name="shipper-bulk-all"]', $root )
 				.attr( 'checked', true );
+			toggle_bulk_actions_disabled();
 		}
 
 		function select( $row ) {
 			$row.find( ':checkbox[name="shipper-bulk"]' )
 				.attr( 'checked', true );
+			toggle_bulk_actions_disabled();
 		}
 
 		function unselect_all() {
@@ -290,12 +297,22 @@
 			} );
 			$( '.shipper-filelist :checkbox[name="shipper-bulk-all"]', $root )
 				.attr( 'checked', false );
+			toggle_bulk_actions_disabled();
 		}
 
 		function unselect( $row ) {
 			$row.find( ':checkbox[name="shipper-bulk"]' )
 				.attr( 'checked', false );
+			toggle_bulk_actions_disabled();
 		}
+
+		function toggle_bulk_actions_disabled_raw() {
+			var $rows = $( '.shipper-filelist tr.shipper-paginated-visible' )
+				.find( ':checkbox[name="shipper-bulk"]:checked' );
+			$( '.shipper-bulk-actions-field select, .shipper-bulk-actions-field button' )
+				.attr( 'disabled', ! $rows.length );
+		}
+		var toggle_bulk_actions_disabled = _.debounce( toggle_bulk_actions_disabled_raw, 100 );
 
 		function handle_filter_area_toggle( e ) {
 			var $el = $( this ),
@@ -320,9 +337,7 @@
 			var $me = $( '.shipper-bulk-actions-field', $root ),
 				$els = $( ':checkbox[name="shipper-bulk"]:checked', $root ),
 				action = $( this ).closest( '.sui-form-field' ).find( 'select' ).val(),
-				counter = 1,
-				wrapper_promises = [],
-				promises = []
+				els = []
 			;
 			var $msgroot = $('.shipper-toggle-success'),
 				hide_warning = function () {
@@ -352,17 +367,14 @@
 					// Already included, carry on.
 					return true;
 				}
-				dfr.done( function() {
-					promises.push( exclude_file( $el ) );
+				els.push({
+					path: $el.attr( 'data-path' ),
+					_wpnonce: $el.find( '[data-wpnonce]' ).attr( 'data-wpnonce' )
 				} );
-				wrapper_promises.push( dfr.promise() );
-				
-				setTimeout( dfr.resolve, Math.floor( Math.random() * 100 ) + 50 * counter );
-				counter++;
 			} );
 
-			$.when.apply( $, wrapper_promises ).then( function () {
-				$.when.apply( $, promises ).then( function () {
+			$.post( ajaxurl, { action: 'shipper_bulk_process_paths', apply: action, paths: els } )
+				.done( function ( data ) {
 					$me
 						.find( 'button' ).attr( 'disabled', false ).end()
 						.find( 'select' ).attr( 'disabled', false ).end()
@@ -372,13 +384,15 @@
 					clearTimeout($msgroot.data('shipper-timeout'));
 					$msgroot
 						.find(cls)
-							.find('.shipper-toggle-count').text(wrapper_promises.length).end()
+							.find('.shipper-toggle-count').text(els.length).end()
 							.show().end()
 						.show()
 					;
 					var tmout = setTimeout(hide_warning, 3000);
 					$msgroot.data('shipper-timeout', tmout);
-				});
+					update_exclusions( ( data || {} ).data );
+					update_file_item_rows();
+					update_package_size_message();
 			});
 		}
 
@@ -390,6 +404,7 @@
 		}
 
 		function toggle_files_top_level_warning() {
+			/*
 			var $notice = $( '.shipper-wizard-files .sui-notice.sui-notice-warning' ),
 				$warn_statuses = $( '.shipper-wizard-files .shipper-check-status .sui-tag-warning' )
 			;
@@ -401,10 +416,11 @@
 			} else {
 				$notice.hide();
 			}
+			*/
 		}
 
 		function update_package_size_message() {
-			var $package_size = $( '.shipper-wizard-files tr.sui-accordion-item:last .shipper-check-status' );
+			var $package_size = $( '#shipper-preflight-results [data-section="files"] div.sui-accordion-item:last .shipper-check-status' );
 
 			if ( ! $package_size.find( 'i.sui-loading' ).length ) {
 				$package_size.append(
@@ -425,39 +441,29 @@
 						return false;
 					}
 
-					var $target = $( '.shipper-wizard-files tr.sui-accordion-item:last' ),
+					var $target = $( '#shipper-preflight-results [data-section="files"] div.sui-accordion-item:last' ),
 						$msg = $( '.shipper-package-size-summary' ),
-						$file_items = $( '.shipper-wizard-files .shipper-filelist tbody tr' ),
-						$status = $target.find( 'td.shipper-check-status span.sui-tag' )
+						$file_items = $( '#shipper-preflight-results .shipper-filelist tbody tr' ),
+						$status = $target.find( 'div.shipper-check-status .sui-tag' ),
+						$title_status = $target.find( '.sui-accordion-item-title i' )
 					;
-
-					// Change all statuses here, then readjust the package below.
-					/*
-					if ( excluded >= $file_items.length ) {
-						$( '.shipper-wizard-files .shipper-check-status .sui-tag:not(.shipper-zero)' )
-							.removeClass( 'sui-tag-warning' )
-							.addClass( 'sui-tag-success' )
-						;
-					} else {
-						$( '.shipper-wizard-files .shipper-check-status .sui-tag:not(.shipper-zero)' )
-							.removeClass( 'sui-tag-success' )
-							.addClass( 'sui-tag-warning' )
-						;
-					}
-					*/
 
 					if ( !! oversized ) {
 						$status
 							.removeClass( 'sui-tag-success' )
 							.addClass( 'sui-tag-warning' )
-							.text( package_size )
-						;
+							.text( package_size );
+						$title_status
+							.removeClass( 'sui-success' )
+							.addClass( 'sui-warning' );
 					} else {
 						$status
 							.removeClass( 'sui-tag-warning' )
 							.addClass( 'sui-tag-success' )
-							.text( package_size )
-						;
+							.text( package_size );
+						$title_status
+							.removeClass( 'sui-warning' )
+							.addClass( 'sui-success' );
 					}
 					$msg.each( function () {
 						$( this ).replaceWith( markup );
@@ -474,10 +480,11 @@
 		var debounced_msg_update = _.debounce( update_package_size_message, 1000 );
 
 		function update_file_item_check_row( row_cls ) {
-			var $root = $( '.shipper-wizard-tab.shipper-wizard-files'),
-				$row = $root.find( 'tr.sui-accordion-item' + row_cls ),
-				$cnt_row = $root.find( 'tr.sui-accordion-item-content' + row_cls ),
+			var $root = $( '#shipper-preflight-results [data-section="files"]'),
+				$row = $root.find( 'div.sui-accordion-item' + row_cls ),
+				$cnt_row = $row.find( 'div.sui-accordion-item-body' ),
 				$status = $row.find( '.sui-tag' ),
+				$title_status = $row.find( '.sui-accordion-item-title i' )
 				ex = $cnt_row.find( 'tbody .shipper-paginated:not(.shipper-file-excluded)' ).length
 			;
 
@@ -488,13 +495,17 @@
 			if ( ex ) {
 				$status
 					.removeClass( 'sui-tag-success' )
-					.addClass( 'sui-tag-warning' )
-				;
+					.addClass( 'sui-tag-warning' );
+				$title_status
+					.removeClass( 'sui-success' )
+					.addClass( 'sui-warning' );
 			} else {
 				$status
 					.removeClass( 'sui-tag-warning' )
-					.addClass( 'sui-tag-success' )
-				;
+					.addClass( 'sui-tag-success' );
+				$title_status
+					.removeClass( 'sui-warning' )
+					.addClass( 'sui-success' );
 			}
 
 			// Update the status messages.
@@ -512,43 +523,10 @@
 		}
 
 		function update_files_tab_status() {
-			var $status = $( '#shipper-tab-files .shipper-check-status i' ),
-				$warnings = $( '.shipper-wizard-files .shipper-check-status .sui-tag-warning' );
-
-			if ( $warnings.length ) {
-				$status
-					.removeClass( 'sui-icon-check-tick sui-success' )
-					.addClass( 'sui-icon-warning-alert sui-warning' );
-			} else {
-				$status
-					.removeClass( 'sui-icon-warning-alert sui-warning' )
-					.addClass( 'sui-icon-check-tick sui-success' );
-			}
-
-			update_overall_tab_status();
-		}
-
-		function update_overall_tab_status() {
-			var $status = $( '#shipper-tab-overall .shipper-check-status i' ),
-				$body = $( '.shipper-preflight-result-overall' ),
-				$issues = $( '.shipper-preflight-done-tab:not( #shipper-tab-overall )' )
-					.find( '.shipper-check-status i:not(.sui-success)' );
-
-			if ( $issues.length ) {
-				$status
-					.removeClass( 'sui-icon-check-tick sui-success' )
-					.addClass( 'sui-icon-warning-alert sui-warning' );
-				$body
-					.filter( '.shipper-has-warnings' ).show().end()
-					.filter( '.shipper-no-warnings' ).hide().end();
-			} else {
-				$status
-					.removeClass( 'sui-icon-warning-alert sui-warning' )
-					.addClass( 'sui-icon-check-tick sui-success' );
-				$body
-					.filter( '.shipper-has-warnings' ).hide().end()
-					.filter( '.shipper-no-warnings' ).show().end();
-			}
+			$( document ).trigger(
+				'shipper:preflight-files:status',
+				[ $( '.shipper-wizard-files .shipper-check-status .sui-tag-warning' ).length ]
+			);
 		}
 
 		function exclude_file( $el ) {
@@ -589,11 +567,14 @@
 					var exs = (resp || {}).data || {};
 					update_exclusions( exs );
 					update_file_item_rows();
+					$( document ).trigger( 'shipper:preflight-files:status' );
 				})
 			;
 		}
 
 		function boot() {
+			$( '.shipper-filelist tr.shipper-paginated-visible :checkbox[name="shipper-bulk"]', $root )
+				.on( 'change', toggle_bulk_actions_disabled );
 			$( '.shipper-filelist :checkbox[name="shipper-bulk-all"]', $root )
 				.off( 'change' )
 				.on( 'change', toggle_all_selection_visible )
@@ -637,6 +618,7 @@
 			update_files_tab_status();
 			load_exclusions();
 			toggle_files_top_level_warning();
+			toggle_bulk_actions_disabled();
 		}
 
 		boot();
@@ -665,20 +647,6 @@
 	function bootstrap() {
 		$( '.shipper-wizard-result-files' ).each( function() {
 			_areas.push( new PaginatedFilterArea( $( this ) ) );
-		} );
-		// Work around the sui-tabs not really working well issue.
-		$( '.shipper-wizard-tab a[href*="#shipper-tab-"]' ).click( function( e ) {
-			var url = $( this ).attr( 'href' ),
-				hash = url.substring( url.indexOf('#') + 1 ),
-				$tab = $( '#' + hash );
-			if ( $tab.length ) {
-				$tab.click();
-				return stop_prop( e )
-			} else {
-				setTimeout( function() {
-					window.location.reload();
-				} );
-			}
 		} );
 	}
 

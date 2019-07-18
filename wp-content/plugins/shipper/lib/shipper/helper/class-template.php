@@ -11,6 +11,42 @@
 class Shipper_Helper_Template {
 
 	/**
+	 * Holds constants instance
+	 *
+	 * @var Shipper_Model_Constants_Shipper
+	 */
+	private $_constants;
+
+	/**
+	 * Sets internal constants instance
+	 *
+	 * Used in tests.
+	 *
+	 * @since v1.0.3
+	 *
+	 * @param object $obj Shipper_Model_Constants instance.
+	 */
+	public function set_constants( Shipper_Model_Constants $obj ) {
+		$this->_constants = $obj;
+	}
+
+	/**
+	 * Gets internal constants instance.
+	 *
+	 * Instantiates one if there's not one already set.
+	 *
+	 * @since v1.0.3
+	 *
+	 * @return object Shipper_Model_Constants instance
+	 */
+	public function get_constants() {
+		if ( ! empty( $this->_constants ) ) {
+			return $this->_constants;
+		}
+		return new Shipper_Model_Constants_Shipper;
+	}
+
+	/**
 	 * Resolves relative template path to an actual absolute path
 	 *
 	 * @param string $relpath Relative template path.
@@ -39,9 +75,21 @@ class Shipper_Helper_Template {
 		$template = $this->get_template_path( $relpath );
 		if ( empty( $template ) ) { return false; }
 
+		$constants = $this->get_constants();
+		if ( $constants->get( 'DEBUG_TEMPLATE' ) ) {
+			echo '<div class="shipper-debug shipper-debug-template">';
+			echo '<span class="shipper-debug-template-name"><code>' .
+				esc_html( $relpath ) . '</code></span>';
+		}
+
 		// @codingStandardsIgnoreLine Using extract for templating
 		if ( ! empty( $args ) ) { extract( $args, EXTR_PREFIX_SAME, 'view_' ); }
 		include( $template );
+
+		if ( $constants->get( 'DEBUG_TEMPLATE' ) ) {
+			echo '</div>';
+		}
+
 		return true;
 	}
 

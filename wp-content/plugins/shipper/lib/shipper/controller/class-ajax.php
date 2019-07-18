@@ -32,13 +32,14 @@ abstract class Shipper_Controller_Ajax extends Shipper_Controller {
 			$request = self::TYPE_POST === $type ? $_POST : $_GET;
 			if (
 				! isset( $request['_wpnonce'] ) ||
-				! wp_verify_nonce( $request['_wpnonce'], $action )
+				! wp_verify_nonce( $request['_wpnonce'], $action ) ||
+				! shipper_user_can_ship()
 			) {
 				Shipper_Helper_Log::write( sprintf(
-					__( 'Direct %s access attempt', 'shipper' ), $action
+					__( 'Direct or unauthorized %s access attempt', 'shipper' ), $action
 				) );
 				return wp_send_json_error(
-					__( 'You are not wanted here, leave.', 'shipper' )
+					__( 'You are not authorized to perform this action.', 'shipper' )
 				);
 			}
 		}
@@ -48,7 +49,7 @@ abstract class Shipper_Controller_Ajax extends Shipper_Controller {
 			return true;
 		}
 		return wp_send_json_error(
-			__( 'How did you get here?', 'shipper' )
+			__( 'You are not authorized to perform this action.', 'shipper' )
 		);
 	}
 

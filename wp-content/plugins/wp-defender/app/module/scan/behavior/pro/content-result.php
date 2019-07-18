@@ -60,18 +60,29 @@ class Content_Result extends \Hammer\Base\Behavior {
         <div class="sui-box issue-content">
             <div class="sui-box-body">
                 <p>
-	                <?php printf( __( " There’s some suspicious looking code in the file %s. If you know the code is harmless you can ignore this warning. Otherwise, you can choose to delete this file. Before deleting any files from your site directory, we recommend backing up your website.", wp_defender()->domain ), $this->getSubtitle() ) ?>
+					<?php printf( __( "We've identified some code in <strong>%s</strong> that could be a potential security weakness. We recommend you take a look to be sure everything is OK and contact your developer if you need help fixing the issue.
+Sometimes these checks are false positives, so if you know the code is harmless you can ignore this warning. Alternately you can choose delete this file, but be sure to perform a backup and double-check the file isn't required by a plugin or theme to run correctly.", wp_defender()->domain ), esc_html( pathinfo( $this->getSubtitle(), PATHINFO_BASENAME ) ) ) ?>
+                </p>
+                <p>
+                    <strong><?php _e( "File Location:" ) ?></strong> <?php echo esc_html( $this->getSubtitle() ) ?>
+                </p>
+                <p>
+                    <strong><?php printf( __( "Found %s issues.", wp_defender()->domain ), count( $raw['meta'] ) ) ?></strong>
                 </p>
                 <div>
-                    <strong><?php printf( __( "Found %s issues.", wp_defender()->domain ), count( $raw['meta'] ) ) ?></strong>
-                    <button class="sui-button" id="next_issue"><?php _e( "Show", wp_defender()->domain ) ?></button>
+					<?php foreach ( $raw['meta'] as $issue ): ?>
+                        <p><a class="nav-issue" data-line="<?php echo esc_attr( $issue['line'] ) ?>"
+                              data-offset="<?php echo esc_attr( $issue['offset'] ) ?>"
+                              data-col="<?php echo esc_attr( $issue['column'] ) ?>"
+                              href="#"><?php echo $issue['text'] ?></a></p>
+					<?php endforeach; ?>
                 </div>
                 <div class="source-code">
                     <i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
-		            <?php _e( "Pulling source file...", wp_defender()->domain ) ?>
+					<?php _e( "Pulling source file...", wp_defender()->domain ) ?>
                     <form method="post" class="float-l pull-src scan-frm">
                         <input type="hidden" name="action" value="pullSrcFile">
-			            <?php wp_nonce_field( 'pullSrcFile' ) ?>
+						<?php wp_nonce_field( 'pullSrcFile' ) ?>
                         <input type="hidden" name="id" value="<?php echo $this->getOwner()->id ?>"/>
                     </form>
                 </div>
@@ -80,29 +91,29 @@ class Content_Result extends \Hammer\Base\Behavior {
                 <div class="sui-actions-left">
                     <form method="post" class="float-l ignore-item scan-frm">
                         <input type="hidden" name="action" value="ignoreItem">
-				        <?php wp_nonce_field( 'ignoreItem' ) ?>
+						<?php wp_nonce_field( 'ignoreItem' ) ?>
                         <input type="hidden" name="id" value="<?php echo $this->getOwner()->id ?>"/>
                         <button type="submit" class="sui-button sui-button-ghost">
                             <i class="sui-icon-eye-hide" aria-hidden="true"></i>
-					        <?php _e( "Ignore", wp_defender()->domain ) ?></button>
+							<?php _e( "Ignore", wp_defender()->domain ) ?></button>
                     </form>
                 </div>
                 <div class="sui-actions-right">
                     <form method="post" class="scan-frm delete-item float-r">
                         <input type="hidden" name="action" value="deleteItem"/>
                         <input type="hidden" name="id" value="<?php echo $this->getOwner()->id ?>"/>
-		                <?php wp_nonce_field( 'deleteItem' ) ?>
+						<?php wp_nonce_field( 'deleteItem' ) ?>
                         <button type="button" class="sui-button sui-button-red delete-mitem">
                             <i class="sui-icon-trash" aria-hidden="true"></i>
-			                <?php _e( "Delete", wp_defender()->domain ) ?></button>
+							<?php _e( "Delete", wp_defender()->domain ) ?></button>
                         <div class="confirm-box wd-hide">
                             <span><?php _e( "This will permanently remove the selected file/folder. Are you sure you want to continue?", wp_defender()->domain ) ?></span>
                             <div>
                                 <button type="submit" class="sui-button sui-button-red">
-					                <?php _e( "Yes", wp_defender()->domain ) ?>
+									<?php _e( "Yes", wp_defender()->domain ) ?>
                                 </button>
                                 <button type="button" class="sui-button sui-button-ghost">
-					                <?php _e( "No", wp_defender()->domain ) ?>
+									<?php _e( "No", wp_defender()->domain ) ?>
                                 </button>
                             </div>
                         </div>
@@ -110,113 +121,6 @@ class Content_Result extends \Hammer\Base\Behavior {
                 </div>
             </div>
         </div>
-		<?php
-		return ob_get_clean();
-	}
-
-	/**
-	 * @return string
-	 * @deprecated 2.1
-	 */
-	public function renderDialog() {
-		$raw = $this->getRaw();
-		ob_start()
-		?>
-        <dialog class="scan-item-dialog" title="<?php esc_attr_e( "Issue Details", wp_defender()->domain ) ?>"
-                id="dia_<?php echo $this->getOwner()->id ?>">
-            <div class="wpmud">
-                <div class="wp-defender">
-                    <div class="scan-dialog">
-                        <div class="well mline">
-                            <ul class="dev-list item-detail">
-                                <li>
-                                    <div>
-                                        <span class="list-label"><?php _e( "Location", wp_defender()->domain ) ?></span>
-                                        <span class="list-detail">
-                                            <?php echo $this->getSubTitle() ?>
-                                        </span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>
-                                        <span class="list-label"><?php _e( "Date Added", wp_defender()->domain ) ?></span>
-                                        <span class="list-detail">
-                                           <?php
-                                           $filemtime = filemtime( $this->getSubtitle() );
-                                           if ( $filemtime ) {
-	                                           echo $this->getOwner()->formatDateTime( $filemtime );
-                                           } else {
-	                                           echo 'N/A';
-                                           }
-                                           ?>
-                                        </span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="mline">
-                            <?php printf( __( " There’s some suspicious looking code in the file %s. If you know the code is harmless you can ignore this warning. Otherwise, you can choose to delete this file. Before deleting any files from your site directory, we recommend backing up your website.", wp_defender()->domain ), $this->getSubtitle() ) ?>
-                        </div>
-                        <div>
-                            <strong><?php printf( __( "Found %s issues.", wp_defender()->domain ), count( $raw['meta'] ) ) ?></strong>
-                            <button class="button button-small button-secondary"
-                                    id="next_issue"><?php _e( "Show", wp_defender()->domain ) ?></button>
-                        </div>
-                        <div class="mline source-code">
-                            <img src="<?php echo wp_defender()->getPluginUrl() ?>assets/img/loading.gif" width="18"
-                                 height="18"/>
-							<?php _e( "Pulling source file...", wp_defender()->domain ) ?>
-                            <form method="post" class="float-l pull-src scan-frm">
-                                <input type="hidden" name="action" value="pullSrcFile">
-								<?php wp_nonce_field( 'pullSrcFile' ) ?>
-                                <input type="hidden" name="id" value="<?php echo $this->getOwner()->id ?>"/>
-                            </form>
-                        </div>
-                        <div class="well well-small">
-                            <form method="post" class="float-l ignore-item scan-frm">
-                                <input type="hidden" name="action" value="ignoreItem">
-								<?php wp_nonce_field( 'ignoreItem' ) ?>
-                                <input type="hidden" name="id" value="<?php echo $this->getOwner()->id ?>"/>
-                                <button type="submit" class="button button-secondary button-small">
-									<?php _e( "Ignore", wp_defender()->domain ) ?></button>
-                            </form>
-							<?php
-							$file     = $this->getSubtitle();
-							$tooltips = '';
-							if ( strpos( $file, WP_CONTENT_DIR . DIRECTORY_SEPARATOR . 'plugins' ) === 0 ) {
-								$loc      = 'plugin';
-								$tooltips = ( __( "This will permanent delete the whole plugin containing this file, do you want to do this?", wp_defender()->domain ) );
-							} elseif ( strpos( $file, WP_CONTENT_DIR . DIRECTORY_SEPARATOR . 'themes' ) === 0 ) {
-								$loc      = 'theme';
-								$tooltips = ( __( "This will permanent delete the whole theme containing this file, do you want to do this?", wp_defender()->domain ) );
-							} else {
-								$loc      = 'standalone';
-								$tooltips = ( __( "This will permanent delete this file, do you want to do this?", wp_defender()->domain ) );
-							}
-							?>
-                            <form method="post" class="scan-frm float-r delete-item">
-                                <input type="hidden" name="id" value="<?php echo $this->getOwner()->id ?>"/>
-                                <input type="hidden" name="action" value="deleteItem"/>
-								<?php wp_nonce_field( 'deleteItem' ) ?>
-                                <button type="button" class="button button-small delete-mitem button-grey">
-									<?php _e( "Delete", wp_defender()->domain ) ?></button>
-                                <div class="confirm-box wd-hide">
-									<?php echo $tooltips; ?>
-                                    &nbsp;
-                                    <button type="submit" class="button button-small button-grey">
-										<?php _e( "Yes", wp_defender()->domain ) ?>
-                                    </button>
-                                    <button type="button" class="button button-small button-secondary">
-										<?php _e( "No", wp_defender()->domain ) ?>
-                                    </button>
-                                </div>
-                            </form>
-                            <div class="clear"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </dialog>
 		<?php
 		return ob_get_clean();
 	}
@@ -236,55 +140,32 @@ class Content_Result extends \Hammer\Base\Behavior {
 			return $this->_getSrcCode();
 		}
 
-		$content         = file_get_contents( $raw['file'] );
-		$originalContent = $content;
+		$content = file_get_contents( $raw['file'] );
+
+		//debug
+		$plus = 0;
 		foreach ( $raw['meta'] as $meta ) {
-			//cause this will changing after we inject new dell so just find it by the content
-			$c       = substr( $originalContent, $meta['offset'] - 1, $meta['length'] );
-			$start   = strpos( $content, $c );
-			$openTag = '[[del data-tooltip="' . esc_attr( $meta['text'] ) . '"]]';
-			$end     = $start + strlen( $c ) + strlen( $openTag );
-			$content = substr_replace( $content, $openTag, $start, 0 );
-			$content = substr_replace( $content, '[[/del]]', $end, 0 );
+			$offset = $meta['offset'];
+			//move to new index, cause we have to add the length of <mark></mark>
+			$offset  = $offset + $plus;
+			$content = substr_replace( $content, '<mark>', $offset, 0 );
+			$plus    += strlen( '<mark>' );
+			$content = substr_replace( $content, '</mark>', $offset + $meta['length'] + strlen( '<mark>' ), 0 );
+			$plus    += strlen( '</mark>' );
 		}
 
-		if ( function_exists( 'mb_convert_encoding' ) ) {
-			$content = mb_convert_encoding( $content, 'UTF-8', 'ASCII' );
-		}
-		$entities = htmlentities( $content, null, 'UTF-8', false );
-		$entities = preg_replace( '/\[\[del\s*(data-tooltip=".*\n?"|)\]\]/', '<del $1>', $entities );
-		$entities = str_replace( '[[/del]]', '</del>', $entities );
+		$entities = htmlentities( $content, ENT_QUOTES . ENT_HTML5, 'UTF-8' );
+		$entities = str_replace( '&lt;mark&gt;', '<mark>', $entities, $count );
+		$entities = str_replace( '&lt;/mark&gt;', '</mark>', $entities, $count );
 
-		return '<pre class="inner-sourcecode"><code class="html">' . $entities . '</code></pre>';
+		return '<pre class="line-numbers inner-sourcecode"><code class="language-php">' . $entities . '</code></pre>';
 	}
 
 	/**
 	 * @return string
 	 */
 	public function _getSrcCode() {
-		$raw        = $this->getRaw();
-		$contentRaw = file_get_contents( $raw['file'] );
-		$content    = explode( PHP_EOL, $contentRaw );
-		foreach ( $raw['meta'] as $meta ) {
-			$line = $meta['lineFrom'];
-			if ( ! isset( $content[ $line - 1 ] ) ) {
-				continue;
-			}
-			$colFrom = $meta['columnFrom'];
-			$colTo   = $meta['columnTo'];
-
-			$content[ $line - 1 ]           = substr_replace( $content[ $line - 1 ], '[[del]]', $colFrom - 1, 0 );
-			$content[ $meta['lineTo'] - 1 ] = substr_replace( $content[ $meta['lineTo'] - 1 ], '[[/del]]', $colTo + 1, 0 );
-		}
-		$content = implode( PHP_EOL, $content );
-		if ( function_exists( 'mb_convert_encoding' ) ) {
-			$content = mb_convert_encoding( $content, 'UTF-8', 'ASCII' );
-		}
-		$entities = htmlentities( $content, null, 'UTF-8', false );
-		$entities = str_replace( '[[del]]', '<del>', $entities );
-		$entities = str_replace( '[[/del]]', '</del>', $entities );
-
-		return '<pre class="inner-sourcecode"><code class="html">' . $entities . '</code></pre>';
+		return null;
 	}
 
 	public function purge() {

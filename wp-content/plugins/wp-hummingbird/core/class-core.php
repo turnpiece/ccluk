@@ -196,7 +196,7 @@ class WP_Hummingbird_Core {
 	public function admin_bar_menu( $admin_bar ) {
 		$menu_args = array(
 			'id'    => 'wphb',
-			'title' => 'Hummingbird',
+			'title' => __( 'Hummingbird', 'wphb' ),
 			'href'  => admin_url( 'admin.php?page=wphb' ),
 		);
 

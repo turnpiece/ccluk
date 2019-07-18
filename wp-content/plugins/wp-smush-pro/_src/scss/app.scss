@@ -33,6 +33,10 @@
 @import "~@wpmudev/shared-ui/scss/utility";
 @import "~@wpmudev/shared-ui/scss/wp-admin-notices";
 @import "~@wpmudev/shared-ui/scss/tables";
+// Used on lazy loading page (since 3.2.2).
+@import "~@wpmudev/shared-ui/scss/box-selectors";
+@import "~@wpmudev/shared-ui/scss/upload";
+@import "~@wpmudev/shared-ui/scss/_colorpickers.scss";
 
 // App styles
 @import "modules/admin";

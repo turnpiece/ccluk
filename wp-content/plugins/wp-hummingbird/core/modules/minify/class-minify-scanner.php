@@ -46,6 +46,7 @@ class WP_Hummingbird_Module_Minify_Scanner {
 	const CURRENT_STEP        = 'wphb-minification-scan-step';
 	const MINIFICATION_NOTICE = 'wphb-notice-minification-optimized-show';
 	const HTTP2_NOTICE        = 'wphb-notice-http2-info-show';
+	const CLEAR_CACHE_NOTICE  = 'wphb-notice-cache-cleaned-show';
 
 	/**
 	 * Refresh status variables
@@ -88,6 +89,7 @@ class WP_Hummingbird_Module_Minify_Scanner {
 		delete_transient( self::IS_SCANNING_SLUG );
 		delete_option( self::IS_SCANNED_SLUG );
 		delete_option( self::CURRENT_STEP );
+		delete_option( self::CLEAR_CACHE_NOTICE );
 		$this->refresh_status();
 	}
 

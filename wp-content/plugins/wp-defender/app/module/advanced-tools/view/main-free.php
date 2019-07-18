@@ -89,8 +89,8 @@
                 </div>
                 <div class="sui-box-settings-col-2">
                     <div class="sui-form-field">
+                        <input type="hidden" name="lostPhone" value="0"/>
                         <label class="sui-toggle">
-                            <input type="hidden" name="lostPhone" value="0"/>
                             <input role="presentation" type="checkbox" name="lostPhone" class="toggle-checkbox"
                                    id="lostPhone" value="1"
 								<?php checked( true, $settings->lostPhone ) ?>/>
@@ -113,8 +113,8 @@
                 </div>
                 <div class="sui-box-settings-col-2">
                     <div class="sui-form-field">
+                        <input type="hidden" name="forceAuth" value="0"/>
                         <label class="sui-toggle">
-                            <input type="hidden" name="forceAuth" value="0"/>
                             <input role="presentation" type="checkbox" name="forceAuth" class="toggle-checkbox"
                                    id="forceAuth" value="1"
 								<?php checked( true, $settings->forceAuth ) ?>/>
@@ -266,3 +266,4 @@
 	$controller->renderPartial( $view, $settings );
 	?>
 </div>
+

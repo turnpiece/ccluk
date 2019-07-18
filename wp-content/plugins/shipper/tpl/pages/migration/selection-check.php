@@ -15,16 +15,16 @@ $done = $ctrl->is_done() ? ' shipper-select-check-done' : '';
 				<span><?php esc_html_e( 'Go back', 'shipper' ); ?></span>
 			</a>
 		</div>
-		<div class="shipper-content<?php echo esc_attr($done); ?>">
+		<div class="shipper-content <?php echo esc_attr($done); ?>">
 
 			<?php
 				$this->render(
-					'modals/check/preflight',
-					array(
-						'destinations' => $destinations,
-						'site' => $site,
-						'ctrl' => $ctrl,
-					)
+					'modals/preflight',
+					array( 'modal' => 'loading' )
+				);
+				$this->render(
+					'modals/preflight',
+					array( 'modal' => 'results' )
 				);
 			?>
 

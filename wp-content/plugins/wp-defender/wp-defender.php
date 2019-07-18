@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Defender Pro
  * Plugin URI: https://premium.wpmudev.org/project/wp-defender/
- * Version:     2.1.2
+ * Version:     2.1.4
  * Description: Get regular security scans, vulnerability reports, safety recommendations and customized hardening for your site in just a few clicks. Defender is the analyst and enforcer who never sleeps.
  * Author:      WPMU DEV
  * Author URI:  http://premium.wpmudev.org/
@@ -138,7 +138,7 @@ class WP_Defender {
 	}
 
 	public function adminBodyClasses( $classes ) {
-		$classes .= ' sui-2-3-20 ';
+		$classes .= ' sui-2-3-22 ';
 
 		return $classes;
 	}
@@ -149,6 +149,10 @@ class WP_Defender {
 	private function includeVendors() {
 		$phpVersion = phpversion();
 		if ( version_compare( $phpVersion, '5.3', '>=' ) && ! function_exists( 'initCacheEngine' ) ) {
+			//if current theme is Avanda, turn off wp defender object cache as avanda agressive flush cache when any cpt save
+			if ( function_exists( 'Avada' ) ) {
+				define( 'WD_NO_OBJECT_CACHE', 1 );
+			}
 			include_once $this->plugin_path . 'vendor' . DIRECTORY_SEPARATOR . 'hammer' . DIRECTORY_SEPARATOR . 'bootstrap.php';
 		}
 
@@ -269,7 +273,7 @@ if ( ! function_exists( 'wp_defender' ) ) {
 		wp_clear_scheduled_hook( 'auditReportCron' );
 		wp_clear_scheduled_hook( 'cleanUpOldLog' );
 		wp_clear_scheduled_hook( 'scanReportCron' );
-		wp_clear_scheduled_hook('tweaksSendNotification');
+		wp_clear_scheduled_hook( 'tweaksSendNotification' );
 	}
 
 	function wp_defender_activate() {

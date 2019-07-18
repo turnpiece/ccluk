@@ -419,3 +419,58 @@ function shipper_glob_all( $path ) {
 function shipper_array_keys_exist( $keys, $array ) {
 	return count( $keys ) === count( array_intersect( $keys, array_keys( $array ) ) );
 }
+
+/**
+ * Gets a list of users allowed to access WPMU DEV Dashboard
+ *
+ * @since v1.0.3
+ *
+ * @return array A list of user IDs
+ */
+function shipper_get_dashboard_users() {
+	$dash_users = array();
+	if (
+		class_exists( 'WPMUDEV_Dashboard' ) &&
+		! empty( WPMUDEV_Dashboard::$site ) &&
+		is_callable( array( WPMUDEV_Dashboard::$site, 'get_allowed_users' ) )
+	) {
+		$dash_users = WPMUDEV_Dashboard::$site->get_allowed_users( true );
+	}
+
+	$dash_users = ! empty( $dash_users ) && is_array( $dash_users )
+		? $dash_users
+		: array();
+
+	/**
+	 * List of users allowed to access WPMU DEV Dashboard
+	 *
+	 * Used in tests.
+	 *
+	 * @since v1.0.3
+	 *
+	 * @param array $dash_users A list of users allowed to access WPMU DEV Dashboard.
+	 *
+	 * @return array A list of user IDs
+	 */
+	return (array) apply_filters(
+		'shipper_dashboard_users',
+		$dash_users
+	);
+}
+
+/**
+ * Returns a list of users allowed to access Shipper pages.
+ *
+ * If none set, defaults to users allowed to access WPMU DEV Dashboard.
+ *
+ * @since v1.0.3
+ *
+ * @return array A list of user IDs.
+ */
+function shipper_get_allowed_users() {
+	$opts = new Shipper_Model_Stored_Options;
+	return $opts->get(
+		Shipper_Model_Stored_Options::KEY_USER_ACCESS,
+		shipper_get_dashboard_users()
+	);
+}

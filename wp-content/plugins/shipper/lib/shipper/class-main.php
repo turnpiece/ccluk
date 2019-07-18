@@ -26,18 +26,21 @@ class Shipper_Main extends Shipper_Helper_Singleton {
 			'override_tables',
 			'override_timeouts',
 			'admin',
+			'admin_migrate',
+			'admin_tools',
+			'admin_settings',
 			'ajax_admin',
 			'ajax_hub',
 			'ajax_migration',
 			'ajax_preflight',
 			'ajax_notifications',
+			'ajax_permissions',
 			'ajax_settings',
 			'hub_migration',
 			'hub_destination',
 			'hub_util',
 			'notifications',
 			'updates',
-			'maintenance',
 			'data',
 		);
 		foreach ( $controllers as $ctrl ) {
@@ -46,26 +49,6 @@ class Shipper_Main extends Shipper_Helper_Singleton {
 				$controller = call_user_func( array( $cname, 'get' ) );
 				$controller->boot();
 			}
-		}
-
-		/**
-		 * Local API mock mode querying.
-		 *
-		 * In local API mock mode, all API requests will be handled
-		 * by Shipper internal stubs subsystem.
-		 *
-		 * Useful for demos and local testing.
-		 *
-		 * @param bool $is_local_testing Whether to go into local API mock querying mode.
-		 *
-		 * @return bool
-		 */
-		$is_local_testing = apply_filters(
-			'shipper_api_mock_local',
-			false
-		);
-		if ( ! ! $is_local_testing ) {
-			Shipper_Stub_Main::get()->boot();
 		}
 	}
 

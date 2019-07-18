@@ -50,7 +50,9 @@
                     <div class="sui-col-md-3">
                         <div class="sui-form-field">
                             <label class="sui-label"><?php _e( "IP Address", wp_defender()->domain ) ?></label>
-                            <input type="text" data-name="ip" name="ip" id="ip" placeholder="E.g. 192.168.1.1"
+                            <input type="text" data-name="ip"
+                                   value="<?php echo esc_attr( \Hammer\Helper\HTTP_Helper::retrieve_get( 'ip' ) ) ?>"
+                                   name="ip" id="ip" placeholder="E.g. 192.168.1.1"
                                    class="sui-form-control"/>
                         </div>
                     </div>

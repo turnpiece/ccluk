@@ -19,9 +19,9 @@
                     </span>
                 </div>
                 <div class="sui-box-settings-col-2">
+                    <input type="hidden" name="high_contrast_mode" value="0"/>
                     <div class="sui-form-field">
                         <label class="sui-toggle">
-                            <input type="hidden" name="high_contrast_mode" value="0"/>
                             <input role="presentation" type="checkbox" name="high_contrast_mode" class="toggle-checkbox"
                                    id="high_contrast_mode" <?php checked( 1, $settings->high_contrast_mode ) ?> value="1"
                             />

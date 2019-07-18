@@ -310,6 +310,7 @@ class Main extends Controller {
 	 * Determine if an ip get lockout or not
 	 */
 	public function maybeLockouts() {
+		do_action('wd_before_lockout');
 		$settings = Settings::instance();
 		$isTest   = HTTP_Helper::retrieve_get( 'def-lockout-demo', false ) == 1;
 		if ( $isTest ) {
@@ -618,7 +619,7 @@ class Main extends Controller {
 			$ext               = trim( $ext );
 			$model             = new Log_Model();
 			$model->ip         = $this->getUserIp();
-			$model->user_agent = $_SERVER['HTTP_USER_AGENT'];
+			$model->user_agent = isset( $_SERVER['HTTP_USER_AGENT'] ) ? $_SERVER['HTTP_USER_AGENT'] : null;
 			$model->log        = esc_url( $uri );
 			$model->date       = time();
 			if ( strlen( $ext ) > 0 && in_array( $ext, $settings->get404Ignorelist() ) ) {
@@ -667,7 +668,7 @@ class Main extends Controller {
 	public function recordFailLogin( $username ) {
 		$model             = new Log_Model();
 		$model->ip         = $this->getUserIp();
-		$model->user_agent = $_SERVER['HTTP_USER_AGENT'];
+		$model->user_agent = isset( $_SERVER['HTTP_USER_AGENT'] ) ? $_SERVER['HTTP_USER_AGENT'] : null;
 		$model->log        = sprintf( esc_html__( "Failed login attempt with username %s", wp_defender()->domain ), $username );
 		$model->date       = time();
 		$model->type       = 'auth_fail';

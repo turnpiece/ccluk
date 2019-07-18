@@ -21,12 +21,20 @@ class Shipper_Controller_Ajax_Preflight extends Shipper_Controller_Ajax {
 			array( $this, 'json_restart_preflight' )
 		);
 		add_action(
+			'wp_ajax_shipper_preflight_get_results_markup',
+			array( $this, 'json_get_results_markup' )
+		);
+		add_action(
 			'wp_ajax_shipper_preflight_cancel',
 			array( $this, 'json_cancel_preflight' )
 		);
 		add_action(
 			'wp_ajax_shipper_toggle_path_exclusion',
 			array( $this, 'json_toggle_path_exclusion' )
+		);
+		add_action(
+			'wp_ajax_shipper_bulk_process_paths',
+			array( $this, 'json_bulk_process_paths' )
 		);
 		add_action(
 			'wp_ajax_shipper_get_path_exclusions',
@@ -112,29 +120,153 @@ class Shipper_Controller_Ajax_Preflight extends Shipper_Controller_Ajax {
 	}
 
 	/**
+	 * Bulk path actions processing method
+	 *
+	 * @since v1.0.3
+	 */
+	public function json_bulk_process_paths() {
+		$this->do_request_sanity_check();
+		// @codingStandardsIgnoreLine Nonce already checked in `do_request_sanity_check`
+		$data = stripslashes_deep( $_POST );
+		$data_paths = ! empty( $data['paths'] ) && is_array( $data['paths' ] )
+			? $data['paths']
+			: array();
+
+		if ( empty( $data['apply'] ) ) {
+			return wp_send_json_error();
+		}
+		$action = 'exclude' === $data['apply'] ? 'exclude' : 'include';
+		$exclusions = new Shipper_Model_Stored_Exclusions;
+		$paths = $exclusions->get_data();
+		$root_rx = preg_quote(
+			realpath( ABSPATH ),
+			'/'
+		);
+
+		foreach ( $data_paths as $path_item ) {
+			if ( empty( $path_item['path'] ) || empty( $path_item['_wpnonce'] ) ) {
+				continue;
+			}
+			$path = wp_normalize_path( realpath ( $path_item['path'] ) );
+			$path_windows = realpath( $path_item['path'] );
+			if ( ! empty( $path ) ) {
+				// Check if this is a sub-path of root.
+				if ( ! preg_match( "/^{$root_rx}/", $path ) && ! preg_match( "/^{$root_rx}/", $path_windows ) ) {
+					$path = false;
+				}
+			}
+			if ( empty( $path ) ) { continue; }
+
+			if ( 'exclude' === $action && ! in_array( $path, array_keys( $paths ), true ) ) {
+					$exclusions->set( $path, md5( $path ) );
+			}
+			if ( 'include' === $action && in_array( $path, array_keys( $paths ), true ) ) {
+					$exclusions->remove( $path );
+			}
+		}
+
+		$exclusions->save();
+		wp_send_json_success( $exclusions->get_data() );
+	}
+
+	/**
 	 * Restarts preflight checks
 	 */
 	public function json_restart_preflight() {
 		$this->do_request_sanity_check();
-		$task = new Shipper_Task_Check_System;
-		$task->restart();
-
-		$task = new Shipper_Task_Check_Files;
-		$task->restart();
-
-		$task = new Shipper_Task_Check_Sysdiff;
-		$task->restart();
 
 		$ctrl = Shipper_Controller_Runner_Preflight::get();
-		$ctrl->clear();
-
-		$tpl = new Shipper_Helper_Template;
-		$response = array();
-		foreach ( $ctrl->get_status()->get_check_types() as $type ) {
-			$response[ $type ] = $tpl->get('modals/check/preflight-row', array(
-				'type' => $type,
-			));
+		if ( ! $ctrl->get_status()->get( Shipper_Model_Stored_Preflight::KEY_DONE ) ) {
+			wp_send_json_error( __( 'Preflight still running', 'shipper' ) );
 		}
+
+		$data = stripslashes_deep( $_POST );
+		$section = ! empty( $data['section'] )
+			? $data['section']
+			: false;
+		if ( 'sysdiff' === $section ) {
+			// System differences are processed on remote parsing.
+			$section = 'remote';
+		}
+
+		if ( 'local' === $section || empty( $section ) ) {
+			$task = new Shipper_Task_Check_System;
+			$task->restart();
+		}
+
+		if ( 'remote' === $section || empty( $section ) ) {
+			$task = new Shipper_Task_Check_RSystem;
+			$task->restart();
+
+			$task = new Shipper_Task_Check_Sysdiff;
+			$task->restart();
+		}
+
+		if ( 'files' === $section || empty( $section ) ) {
+			$task = new Shipper_Task_Check_Files;
+			$task->restart();
+
+			$task = new Shipper_Task_Check_Rpkg;
+			$task->restart();
+		}
+
+		if ( empty( $section ) ) {
+			$ctrl->clear();
+			$ctrl->ping();
+		} else {
+			$key = false;
+			if ( 'local' === $section ) {
+				$key = Shipper_Model_Stored_Preflight::KEY_CHECKS_SYSTEM;
+			} else if ( 'remote' === $section ) {
+				$key = Shipper_Model_Stored_Preflight::KEY_CHECKS_REMOTE;
+			}
+
+			$changed = false;
+			if ( $key ) {
+				$changed = true;
+				$ctrl->get_status()
+					->set_check( $key, false )
+					->clear_check_errors( $key )
+					->set( Shipper_Model_Stored_Preflight::KEY_DONE, false )
+					->save();
+			} else if ( 'files' === $section ) {
+				$changed = true;
+				$ctrl->get_status()
+					->set_check( Shipper_Model_Stored_Preflight::KEY_CHECKS_FILES, false )
+					->clear_check_errors( Shipper_Model_Stored_Preflight::KEY_CHECKS_FILES )
+					->set_check( Shipper_Model_Stored_Preflight::KEY_CHECKS_RPKG, false )
+					->clear_check_errors( Shipper_Model_Stored_Preflight::KEY_CHECKS_RPKG )
+					->set( Shipper_Model_Stored_Preflight::KEY_DONE, false )
+					->save();
+			}
+
+			if ( $changed ) {
+				$ctrl->ping();
+			}
+		}
+
+		return wp_send_json_success();
+	}
+
+	/**
+	 * Sends preflight results markup gathered this far
+	 *
+	 * @since v1.0.3
+	 */
+	public function json_get_results_markup() {
+		$this->do_request_sanity_check();
+		$ctrl = Shipper_Controller_Runner_Preflight::get();
+		if ( ! $ctrl->get_status()->get( Shipper_Model_Stored_Preflight::KEY_DONE ) ) {
+			return wp_send_json_error(); // Not done yet.
+		}
+		$tpl = new Shipper_Helper_Template;
+		$response = $tpl->get(
+			'modals/preflight',
+			array(
+				'modal' => 'results',
+				'is_recheck' => true,
+			)
+		);
 		return wp_send_json_success( $response );
 	}
 
@@ -150,7 +282,7 @@ class Shipper_Controller_Ajax_Preflight extends Shipper_Controller_Ajax {
 		$data = $preflight->get_data();
 		$ctrl->clear();
 
-		return ! empty( $data )
+		return empty( $data )
 			? wp_send_json_success()
 			: wp_send_json_error();
 	}

@@ -22,6 +22,13 @@ class DB_Prefix extends Rule {
 		return $this->getService()->check();
 	}
 
+	/**
+	 * @return mixed
+	 */
+	function getSubDescription() {
+		return __( "Your database prefix is the default wp_ prefix.", wp_defender()->domain );
+	}
+
 	function addHooks() {
 		$this->add_action( 'processingHardener' . self::$slug, 'process' );
 		$this->add_action( 'processRevert' . self::$slug, 'revert' );
@@ -31,13 +38,15 @@ class DB_Prefix extends Rule {
 		if ( ! $this->verifyNonce() ) {
 			return;
 		}
-		$ret = $this->getService()->revert();
-		if ( ! is_wp_error( $ret ) ) {
-			Settings::instance()->addToIssues( self::$slug );
-		} else {
-			wp_send_json_error( array(
-				'message' => $ret->get_error_message()
-			) );
+		if ( Settings::instance()->is_prefix_changed == true ) {
+			$ret = $this->getService()->revert();
+			if ( ! is_wp_error( $ret ) ) {
+				Settings::instance()->addToIssues( self::$slug );
+			} else {
+				wp_send_json_error( array(
+					'message' => $ret->get_error_message()
+				) );
+			}
 		}
 	}
 
@@ -49,15 +58,16 @@ class DB_Prefix extends Rule {
 		if ( ! $this->verifyNonce() ) {
 			return;
 		}
-		$dbprefix                       = HTTP_Helper::retrieve_post( 'dbprefix' );
-		$this->getService()->new_prefix = $dbprefix;
-		$ret                            = $this->getService()->process();
-
+		$dbprefix                               = HTTP_Helper::retrieve_post( 'dbprefix' );
+		$this->getService()->new_prefix         = $dbprefix;
+		$ret                                    = $this->getService()->process();
+		Settings::instance()->is_prefix_changed = true;
+		Settings::instance()->save();
 		if ( is_wp_error( $ret ) ) {
 			wp_send_json_error( array(
 				'message' => $ret->get_error_message()
 			) );
-		} ;
+		};
 	}
 
 	/**

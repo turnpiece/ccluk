@@ -44,11 +44,11 @@
 						<strong><?php echo esc_html( $rule_result->title ); ?></strong>
 					</td>
 					<td>
-						<div class="sui-circle-score sui-grade-<?php echo esc_attr( WP_Hummingbird_Module_Performance::get_impact_class( $score * 100 ) ); ?> sui-tooltip" data-tooltip="<?php echo absint( $score * 100 ); ?>/100" data-score="<?php echo absint( $score * 100 ); ?>"></div>
+						<div class="sui-circle-score sui-grade-<?php echo esc_attr( WP_Hummingbird_Module_Performance::get_impact_class( absint( $score * 100 ) ) ); ?> sui-tooltip" data-tooltip="<?php echo absint( $score * 100 ); ?>/100" data-score="<?php echo absint( $score * 100 ); ?>"></div>
 					</td>
 					<td>
 						<span><?php echo isset( $rule_result->displayValue ) ? esc_html( $rule_result->displayValue ) : esc_html__( 'N/A', 'wphb' ); ?></span>
-						<i aria-hidden="true" class="sui-icon-<?php echo esc_attr( WP_Hummingbird_Module_Performance::get_impact_class( $score * 100, 'icon' ) ); ?> sui-<?php echo esc_attr( WP_Hummingbird_Module_Performance::get_impact_class( $score * 100 ) ); ?> sui-md"></i>
+						<i aria-hidden="true" class="sui-icon-<?php echo esc_attr( WP_Hummingbird_Module_Performance::get_impact_class( absint( $score * 100 ), 'icon' ) ); ?> sui-<?php echo esc_attr( WP_Hummingbird_Module_Performance::get_impact_class( absint( $score * 100 ) ) ); ?> sui-md"></i>
 					</td>
 				</tr>
 			<?php endforeach; ?>

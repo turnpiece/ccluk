@@ -135,11 +135,8 @@ jQuery(function ($) {
             current_issue = null;
             var parent = form.closest('.source-code');
             parent.html(data.data.html);
-
-            // hljs.highlightBlock(parent.find('pre code'));
             parent.find('pre code').each(function (i, block) {
-                hljs.highlightBlock(block);
-                hljs.lineNumbersBlock(block);
+                Prism.highlightElement(block);
             });
         } else {
             Defender.showNotification('error', data.data.message);
@@ -190,7 +187,7 @@ jQuery(function ($) {
     }).change();
 
     //bulk
-    $('#apply-all').click(function () {
+    $('.apply-all').click(function () {
         $('.scan-chk').prop('checked', $(this).prop('checked'));
     });
     $('select[name="bulk"]').change(function () {
@@ -261,10 +258,10 @@ WDScan.formHandler = function () {
 }
 
 WDScan.formatCode = function () {
-    jQuery('pre code').each(function (i, block) {
-        hljs.highlightBlock(block);
-        hljs.lineNumbersBlock(block);
-    });
+    // jQuery('pre code').each(function (i, block) {
+    //     hljs.highlightBlock(block);
+    //     hljs.lineNumbersBlock(block);
+    // });
 }
 
 //Refresh file issues counts
@@ -292,22 +289,14 @@ WDScan.initAppear = function () {
 }
 
 WDScan.showNextIssue = function () {
-    jQuery('body').on('click', '#next_issue', function () {
+    jQuery('body').on('click', '.nav-issue', function (e) {
+        e.preventDefault();
+        var line = jQuery(this).data('line');
         var parent = jQuery(this).closest('.sui-box').find('.inner-sourcecode').first();
-        var issues = parent.find('del');
-        if (issues.size() == 0) {
-            return;
-        }
-        if (current_issue === null) {
-            current_issue = 0;
-        } else {
-            current_issue = current_issue + 1;
-            if (issues[current_issue] === undefined) {
-                current_issue = 0;
-            }
-        }
-        var pos = jQuery(issues[current_issue]).position();
-        parent.scrollTop(pos.top);
+        var curr = jQuery(Prism.plugins.lineNumbers.getLine(parent.get(0), line));
+        curr.get(0).scrollIntoView({
+            block: 'center'
+        });
     })
 }
 

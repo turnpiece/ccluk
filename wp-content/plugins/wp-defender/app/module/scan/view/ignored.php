@@ -17,7 +17,7 @@
 		} else {
 			?>
             <div class="sui-notice sui-notice-info">
-                <p> <?php _e( "You haven't ignored any suspicious files yet. Ignored files appear here and can be restored at any times.", wp_defender()->domain ) ?> </p>
+                <p> <?php _e( "You haven't chosen to ignore any suspicious files yet. Ignored files appear here and can be restored at any time", wp_defender()->domain ) ?> </p>
             </div>
 			<?php
 		}

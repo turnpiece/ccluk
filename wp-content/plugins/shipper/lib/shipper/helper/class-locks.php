@@ -50,8 +50,7 @@ class Shipper_Helper_Locks {
 		 * This is how we decide whether to clear stale locks.
 		 * We are doing this because clearing "stale" locks messes up the
 		 * import process if set_time_limit *actually* does what it's supposed
-		 * to do. This affects the import process on WPMU DEV hosting, so let's
-		 * do the stupid thing here and check for it explicitly.
+		 * to do, which might not always be the case :(
 		 *
 		 * @param bool $forbid_cleanup If true, stale locks will not be cleared.
 		 *

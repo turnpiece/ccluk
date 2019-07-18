@@ -39,22 +39,29 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 				<?php include AI1WM_TEMPLATES_PATH . '/common/report-problem.php'; ?>
 
-				<form action="" method="post" id="ai1wm-export-form" class="ai1wm-clear">
+				<?php if ( is_readable( AI1WM_STORAGE_PATH ) && is_writable( AI1WM_STORAGE_PATH ) ) : ?>
 
-					<?php include AI1WM_TEMPLATES_PATH . '/export/find-replace.php'; ?>
+					<form action="" method="post" id="ai1wm-export-form" class="ai1wm-clear">
 
-					<?php do_action( 'ai1wm_export_left_options' ); ?>
+						<?php include AI1WM_TEMPLATES_PATH . '/export/find-replace.php'; ?>
 
-					<?php include AI1WM_TEMPLATES_PATH . '/export/advanced-settings.php'; ?>
+						<?php do_action( 'ai1wm_export_left_options' ); ?>
 
-					<?php include AI1WM_TEMPLATES_PATH . '/export/export-buttons.php'; ?>
+						<?php include AI1WM_TEMPLATES_PATH . '/export/advanced-settings.php'; ?>
 
-					<input type="hidden" name="ai1wm_manual_export" value="1" />
+						<?php include AI1WM_TEMPLATES_PATH . '/export/export-buttons.php'; ?>
 
-				</form>
+						<input type="hidden" name="ai1wm_manual_export" value="1" />
 
-				<?php do_action( 'ai1wm_export_left_end' ); ?>
+					</form>
 
+					<?php do_action( 'ai1wm_export_left_end' ); ?>
+
+				<?php else : ?>
+
+					<?php include AI1WM_TEMPLATES_PATH . '/export/export-permissions.php'; ?>
+
+				<?php endif; ?>
 			</div>
 		</div>
 		<div class="ai1wm-right">

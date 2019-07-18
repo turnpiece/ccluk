@@ -284,7 +284,7 @@ class DB_Model extends Model {
 					), array_merge( array( $sql ), $attribute ) );
 					$condition[] = $sql;
 				}
-			} elseif ( strpos( '%', $attribute ) === 0 ) {
+			} elseif ( strlen( $attribute ) && strpos( '%', (string) $attribute ) === 0 ) {
 				$condition[] = $wpdb->prepare( $key . ' LIKE %s', $attribute );
 			} else {
 				$condition[] = $wpdb->prepare( $key . ' = %s', $attribute );

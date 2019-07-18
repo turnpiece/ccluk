@@ -151,6 +151,7 @@ class WPMUDEV_Dashboard_Site {
 			'wdp-project-delete',
 			'wdp-hub-sync',
 			'wdp-project-upgrade-free',
+			'wdp-sso-status',
 		);
 		foreach ( $ajax_actions as $action ) {
 			add_action( "wp_ajax_$action", array( $this, 'process_ajax' ) );
@@ -163,6 +164,8 @@ class WPMUDEV_Dashboard_Site {
 
 		$nopriv_ajax_actions = array(
 			'wdpunauth',
+			'wdpsso_step1',
+			'wdpsso_step2',
 		);
 		foreach ( $nopriv_ajax_actions as $action ) {
 			add_action( "wp_ajax_$action", array( $this, 'nopriv_process_ajax' ) );
@@ -285,6 +288,9 @@ class WPMUDEV_Dashboard_Site {
 
 		// Tracking code for analytics module
 		add_action( 'wp_footer', array( $this, 'analytics_tracking_code' ) );
+
+		// Show friendly error in the login screen, if SSO is disabled or user is not logged in the Dashboard.
+		add_filter( 'login_message', array( $this, 'show_sso_friendly_error' ) );
 
 		/**
 		 * Run custom initialization code for the Site module.
@@ -418,6 +424,9 @@ class WPMUDEV_Dashboard_Site {
 	 *     request from the remote dashboard. True means: The request is
 	 *     authorized and will be processed.
 	 *
+	 * - WPMUDEV_DISABLE_SSO .. Default: false
+	 *     Set to true to disable SSO from the Hub.
+	 *
 	 *     To disable all remote calls add this in wp-config (not recommended):
 	 *     define( 'WPMUDEV_IS_REMOTE', false );
 	 *
@@ -438,6 +447,7 @@ class WPMUDEV_Dashboard_Site {
 			'WPMUDEV_API_AUTHORIZATION'     => false,
 			'WPMUDEV_API_DEBUG'             => false,
 			'WPMUDEV_API_DEBUG_ALL'         => false,
+			'WPMUDEV_DISABLE_SSO'           => false,
 		);
 
 		foreach ( $flags as $flag => $default_val ) {
@@ -737,6 +747,23 @@ class WPMUDEV_Dashboard_Site {
 					case 'settings':
 						$auto_update = isset( $_REQUEST['autoupdate_dashboard'] ) ? filter_var( $_REQUEST['autoupdate_dashboard'], FILTER_VALIDATE_BOOLEAN ) : false;
 						$this->set_option( 'autoupdate_dashboard', $auto_update );
+
+						$enable_sso = isset( $_REQUEST['enable_sso'] ) ? absint( $_REQUEST['enable_sso'] ) : 0;
+						$previous_sso = $this->get_option( 'enable_sso', true );
+
+						// Register the user to be logged in for SSO, only if the SSO was just enabled.
+						if ( $enable_sso && ! $previous_sso ) {
+							$sso_userid = get_current_user_id();
+							$this->set_option( 'sso_userid', $sso_userid );
+						}
+
+						$this->set_option( 'enable_sso', $enable_sso );
+
+						if ( ( $enable_sso && ! $previous_sso ) || ( ! $enable_sso && $previous_sso ) ) {
+							// Also, force a hub-sync, since the SSO setting changed.
+							WPMUDEV_Dashboard::$api->hub_sync( false, true );
+						}
+
 						$success = true;
 						break;
 					default:
@@ -1119,11 +1146,26 @@ class WPMUDEV_Dashboard_Site {
 				case 'hub-sync':
 					if ( ! empty( $_REQUEST['key'] ) ) {
 						$key = trim( $_REQUEST['key'] );
+						$sso = false;
 						WPMUDEV_Dashboard::$api->set_key( $key );
+
+						// When we auto install, we will also have the hub_sso_status param available to enable/disable SSO.
+						if( isset( $_REQUEST['hub_sso_status'] ) && ! is_null( $_REQUEST['hub_sso_status'] ) ){
+							$sso_org = $this->get_option( 'enable_sso', true, 0 );
+							$this->set_option( 'enable_sso', absint( $_REQUEST['hub_sso_status'] ) );
+							$sso = true;
+						}
+
 						$result = WPMUDEV_Dashboard::$api->hub_sync( false, true );
 						if ( ! $result || empty( $result['membership'] ) ) {
 
 							WPMUDEV_Dashboard::$api->set_key( '' );
+
+							//restore the sso status if api is not validated
+							if ( $sso ) {
+								$this->set_option( 'enable_sso', absint( $sso_org ) );
+							}
+
 							if ( false === $result ) {
 								$this->send_json_error(
 									array(
@@ -1135,11 +1177,22 @@ class WPMUDEV_Dashboard_Site {
 								);
 							}
 
-							if ( isset( $result['limit_exceeded'] ) && $result['limit_exceeded'] ) {
+							if ( isset( $result['limit_exceeded_with_hosting_sites'] ) && $result['limit_exceeded_with_hosting_sites'] ) {
 								$this->send_json_error(
 									array(
 										'redirect' => add_query_arg(
 											array( 'site_limit_exceeded' => '1' ),
+											WPMUDEV_Dashboard::$ui->page_urls->dashboard_url
+										),
+									)
+								);
+							}
+
+							if ( isset( $result['limit_exceeded_no_hosting_sites'] ) && $result['limit_exceeded_no_hosting_sites'] ) {
+								$this->send_json_error(
+									array(
+										'redirect' => add_query_arg(
+											array( 'non_hosting_site_limit_exceeded' => '1' ),
 											WPMUDEV_Dashboard::$ui->page_urls->dashboard_url
 										),
 									)
@@ -1155,12 +1208,16 @@ class WPMUDEV_Dashboard_Site {
 								)
 							);
 
-
 						} else {
 							// valid key
 							global $current_user;
 							WPMUDEV_Dashboard::$site->set_option( 'limit_to_user', $current_user->ID );
 							WPMUDEV_Dashboard::$api->refresh_profile();
+
+							if ( $sso ) {
+								// Since we auto install, we need to associate SSO with the correct user.
+								WPMUDEV_Dashboard::$site->set_option( 'sso_userid', $current_user->ID );
+							}
 						}
 						$this->send_json_success(
 							array(
@@ -1178,6 +1235,14 @@ class WPMUDEV_Dashboard_Site {
 						if ( $this->maybe_replace_free_with_pro( $pid ) ) {
 							$this->send_json_success();
 						}
+					}
+					break;
+
+				case 'sso-status':
+					if ( ! is_null( $_REQUEST['sso'] ) && ! empty( $_REQUEST['ssoUserId'] ) ) {
+						WPMUDEV_Dashboard::$site->set_option( 'enable_sso', absint( $_REQUEST['sso'] ) );
+						WPMUDEV_Dashboard::$site->set_option( 'sso_userid', absint( $_REQUEST['ssoUserId'] ) );
+						$this->send_json_success();
 					}
 					break;
 
@@ -1204,6 +1269,21 @@ class WPMUDEV_Dashboard_Site {
 					 * - staff    .. Name of the user who loggs in.
 					 */
 					WPMUDEV_Dashboard::$api->authenticate_remote_access();
+					break;
+
+				case 'wdpsso_step1':
+					$redirect = isset( $_REQUEST['redirect'] ) ? urlencode( $_REQUEST['redirect'] ) : '';
+					$nonce = isset( $_REQUEST['nonce'] ) ? $_REQUEST['nonce'] : '';
+					WPMUDEV_Dashboard::$api->authenticate_sso_access_step1( $redirect, $nonce );
+					break;
+
+				case 'wdpsso_step2':
+					$incoming_hmac = isset( $_REQUEST['outgoing_hmac'] ) ? $_REQUEST['outgoing_hmac'] : '';
+					$token         = isset( $_REQUEST['token'] ) ? $_REQUEST['token'] : '';
+					$pre_sso_state = isset( $_REQUEST['pre_sso_state'] ) ? $_REQUEST['pre_sso_state'] : '';
+					$redirect      = isset( $_REQUEST['redirect'] ) ? $_REQUEST['redirect'] : '';
+
+					WPMUDEV_Dashboard::$api->authenticate_sso_access_step2( $incoming_hmac, $token, $pre_sso_state, $redirect );
 					break;
 
 				default:
@@ -1300,19 +1380,20 @@ class WPMUDEV_Dashboard_Site {
 	 *
 	 * @since  4.0.0
 	 *
-	 * @param  string $name   The option name.
-	 * @param  bool   $prefix Optional. Set to false to not prefix the name.
+	 * @param  string $name    The option name.
+	 * @param  bool   $prefix  Optional. Set to false to not prefix the name.
+	 * @param  mixed  $default Optional. Set value to return if option not found.
 	 *
 	 * @return mixed The option value.
 	 */
-	public function get_option( $name, $prefix = true ) {
+	public function get_option( $name, $prefix = true, $default = false ) {
 		if ( $prefix ) {
 			$key = 'wdp_un_' . $name;
 		} else {
 			$key = $name;
 		}
 
-		return get_site_option( $key );
+		return get_site_option( $key, $default );
 	}
 
 	/**
@@ -3727,17 +3808,16 @@ class WPMUDEV_Dashboard_Site {
 			$is_pro_success_installed = true;
 		}
 
-		$orig_active_blog    = false;
-		$orig_active_network = false;
+		// first thing first, DEACTIVATE
+		// save current state for next usage
+		$orig_active_blog    = is_plugin_active( $free_filename );
+		$orig_active_network = is_multisite() && is_plugin_active_for_network( $free_filename );
 
-		if ( $is_free_installed ) {
-			// first thing first, DEACTIVATE
-			// save current state for next usage
-			$orig_active_blog    = is_plugin_active( $free_filename );
-			$orig_active_network = is_multisite() && is_plugin_active_for_network( $free_filename );
-			if ( $orig_active_blog || $orig_active_network ) {
-				deactivate_plugins( $free_filename, true, $orig_active_network );
-			}
+		// some plugins has their own method of upgrading itself to PRO version
+		// free version can be already deleted/uninstalled
+		// but somehow free plugins has active status here, so force deactivate free plugin when needed
+		if ( $orig_active_blog || $orig_active_network ) {
+			deactivate_plugins( $free_filename, true, $orig_active_network );
 		}
 
 		// clear local cache, because we need if fresh data
@@ -3941,6 +4021,25 @@ class WPMUDEV_Dashboard_Site {
 			)
 		);
 
+	}
+
+	/**
+	 * Hooks into the login_message filter to show friendly error in the login screen, when SSO is disabled or user is logged out of Dashboard.
+	 *
+	 * @since    4.7.3
+	 *
+	 * @return string Modified log in message.
+	 */
+	public function show_sso_friendly_error( $message ) {
+		if ( isset( $_GET['wdp_sso_fail'] ) ) {
+			if ( 'sso_disabled' === $_GET['wdp_sso_fail'] ) {
+				$message = '<div id="login_error">Couldn\'t log in with the Hub SSO because SSO is disabled in the WPMU DEV Dashboard.</div>';
+			} else if ( 'no_logged_in_dashboard_user' === $_GET['wdp_sso_fail'] ) {
+				$message = '<div id="login_error">Couldn\'t log in with the Hub SSO because you are not logged into the WPMU DEV Dashboard.</div>';
+			}
+		}
+
+		return $message;
 	}
 }
 

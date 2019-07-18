@@ -15,16 +15,19 @@ $include_msg = __( 'Reinclude file', 'shipper' );
 <table class="sui-table shipper-filelist">
 	<thead>
 		<tr>
-			<th>
+			<th class="shipper-filelist-filename">
 				<label class="sui-checkbox sui-checkbox-sm">
 					<input type="checkbox" name="shipper-bulk-all" />
 					<span></span>
 				</label>
 				<?php esc_html_e( 'Filename', 'shipper' ); ?>
 			</th>
-			<th width="15%"><?php esc_html_e( 'Size', 'shipper' ); ?></th>
-			<th width="10%"><?php esc_html_e( 'Type', 'shipper' ); ?></th>
-			<th width="20%"><?php esc_html_e( 'Include/Exclude', 'shipper' ); ?></th>
+			<th class="shipper-filelist-filesize" width="15%">
+				<?php esc_html_e( 'Size', 'shipper' ); ?></th>
+			<th class="shipper-filelist-filetype" width="10%">
+				<?php esc_html_e( 'Type', 'shipper' ); ?></th>
+			<th class="shipper-filelist-actions" width="20%">
+				<?php esc_html_e( 'Include/Exclude', 'shipper' ); ?></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -48,7 +51,7 @@ $include_msg = __( 'Reinclude file', 'shipper' );
 		data-type="<?php echo esc_attr( $extension ); ?>"
 		data-path="<?php echo esc_attr( $file['path'] ); ?>"
 	>
-			<td>
+			<td class="shipper-filelist-filename">
 				<label class="sui-checkbox sui-checkbox-sm">
 					<input type="checkbox"
 						name="shipper-bulk" value="<?php echo esc_attr( $file['path'] ); ?> " />
@@ -57,18 +60,20 @@ $include_msg = __( 'Reinclude file', 'shipper' );
 				<b
 					title="<?php echo esc_attr( $file['path'] ); ?>"
 					data-tooltip="<?php echo esc_attr( $file['path'] ); ?>"
-					class="sui-tooltip"><?php echo esc_html( basename( $file['path'] ) ); ?></b>
+					style="--tooltip-width: 370px;"
+					class="sui-tooltip">
+						<span><?php echo esc_html( basename( $file['path'] ) ); ?></span></b>
 			</td>
 
-			<td>
+			<td class="shipper-filelist-filesize">
 				<?php echo esc_html( size_format( $file['size'] ) ); ?>
 			</td>
 
-			<td>
+			<td class="shipper-filelist-filetype">
 				<?php echo esc_html( $extension ); ?>
 			</td>
 
-			<td>
+			<td class="shipper-filelist-actions">
 				<a data-tooltip="<?php echo esc_attr( $exclude_msg ); ?>" title="<?php echo esc_attr( $exclude_msg ); ?>" data-path="<?php echo esc_attr( $file['path'] ); ?>" href="#exclude" data-wpnonce="{{shipper-nonce-placeholder}}" class="sui-tooltip">
 					<i class="sui-icon-close" aria-hidden="true"></i>
 					<span><?php esc_attr_e( 'Exclude', 'shipper' ); ?></span>

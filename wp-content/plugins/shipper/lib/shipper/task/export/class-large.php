@@ -40,8 +40,8 @@ class Shipper_Task_Export_Large extends Shipper_Task_Export {
 			Shipper_Helper_Log::write(
 				sprintf( 'File unreadable: %s', $path )
 			);
-			$shipper_pos += 1;
-			return $this->set_initialized_position( $shipper_pos );
+			$this->set_initialized_position( $shipper_pos + 1 );
+			return false;
 		}
 
 		$filesize = filesize( $path );
@@ -56,25 +56,25 @@ class Shipper_Task_Export_Large extends Shipper_Task_Export {
 				trailingslashit( $dest_root ) . $data['destination']
 			);
 		} catch ( Exception $e ) {
-			$this->add_error(
-				self::ERR_TRANSFER,
+			Shipper_Helper_Log::write(
 				sprintf(
 					__( 'Unable to upload %1$s: %2$s', 'shipper' ),
 					$path, $e->getMessage()
 				)
 			);
-			return true;
+			$this->set_initialized_position( $shipper_pos + 1 );
+			return false;
 		}
 
 		if ( $progress->has_error() ) {
-			$this->add_error(
-				self::ERR_TRANSFER,
+			Shipper_Helper_Log::write(
 				sprintf(
 					__( 'Unable to upload %1$s: %2$s', 'shipper' ),
 					$path, $progress->get_error()
 				)
 			);
-			return true;
+			$this->set_initialized_position( $shipper_pos + 1 );
+			return false;
 		}
 
 		if ( $progress->is_done() ) {
