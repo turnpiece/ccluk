@@ -4,7 +4,7 @@
 # http://ironco.de/bare-minimum-git/
 # ver 20150227
 #
-# This file is tailored for a WordPress project 
+# This file is tailored for a WordPress project
 # using the default directory structure
 #
 # This file specifies intentionally untracked files to ignore
@@ -32,7 +32,7 @@
 
 # ignore everything in the root except the "wp-content" directory.
 /*
-!wp-content/
+!/wp-content/
 
 # ignore all files starting with .
 .*
@@ -85,22 +85,22 @@ Thumbs.db
 # "mu-plugins" directory
 # "plugins" directory
 # "themes" directory
-wp-content/*
-!wp-content/mu-plugins/
-!wp-content/plugins/
-!wp-content/themes/
+/wp-content/*
+!/wp-content/mu-plugins/
+!/wp-content/plugins/
+!/wp-content/themes/
 
 # ignore these plugins from the core
-wp-content/plugins/hello.php
-wp-content/plugins/akismet/
+/wp-content/plugins/hello.php
+/wp-content/plugins/akismet/
 
 # ignore specific themes
-wp-content/themes/twenty*/
+/wp-content/themes/twenty*/
 
 # ignore node/grunt dependency directories
-node_modules/
+/node_modules/
 
 .sassbuilder-config
 .libsass.json
 .sassbuilder-config.json
-wp-content/themes/onesocial
+/wp-content/themes/onesocial
