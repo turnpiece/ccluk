@@ -163,13 +163,6 @@ body.page #comments {
   width: 80%;
 }
 
-.header-inner-wrap {
-  /*    left: 0;
-      padding-right: 28.75%;
-      position: absolute;
-      width: 100%;*/
-}
-
 .header-inner-center {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1733,180 +1726,6 @@ body.search h1.entry-title {
 /*--------------------------------------------------------------
 1.2 - Custom media queries (desktops and laptops)
 --------------------------------------------------------------*/
-/*--------------------------------------------------------------
-1.2.1 - Basic Structure
---------------------------------------------------------------*/
-
-/*--------------------------------------------------------------
-1.2.2 - Header
---------------------------------------------------------------*/
-
-@media screen and (min-width: 1221px) {
-  .main-navigation {
-    /* width: 96%; */
-  }
-}
-
-@media screen and (max-width: 1220px) {
-  .header-inner-center {}
-}
-
-@media screen and (min-width: 1040px) {
-  /*--------------------------------------------------------------
-  1.2.1 - Basic Structure
-  --------------------------------------------------------------*/
-
-  /*--------------------------------------------------------------
-  1.2.3 - Widgets
-  --------------------------------------------------------------*/
-  /* Search Widget */
-  .widget-area {
-    .widget_search {
-      label {
-        display: block;
-        font-size: 13px;
-        line-height: 1.8;
-      }
-      /* overflow: hidden; */
-    }
-    .widget_display_search {
-      /* overflow: hidden; */
-    }
-    .widget_search input[type="submit"], .widget_display_search input[type="submit"] {
-      min-width: 25%;
-      height: 35px;
-      line-height: 35px;
-      padding: 0 5%;
-      float: left;
-    }
-  }
-  /*--------------------------------------------------------------
-  1.2.4 - Footer
-  --------------------------------------------------------------*/
-  div {
-    &.footer-inner div {
-      &#footer-links {
-        -webkit-box-flex: 1;
-        -webkit-flex: 1 1 0;
-        -ms-flex: 1 1 0;
-        flex: 1 1 0;
-        float: left;
-        text-align: left;
-        min-width: 1px;
-        /* Firefox-34-ignoring-max-width-for-flexbox */
-      }
-      &#footer-icons {
-        float: right;
-      }
-    }
-    &.footer-inner-bottom ul.social-icons {
-      margin: 0 0 0 40px;
-    }
-  }
-  #switch-mode {
-    float: right;
-    height: 44px;
-    line-height: 44px;
-    margin-left: 20px;
-    margin-top: 0;
-  }
-}
-
-/*--------------------------------------------------------------
-1.2.5 - Basic Layout
---------------------------------------------------------------*/
-
-@media screen and (max-width: 900px) {
-  .main-navigation {
-    /*width: calc(90% - 140px);*/
-  }
-  #secondary.widget-area {
-    border-left: none;
-  }
-  body.single-item.groups .site #main {
-    /*margin-right: -30px;*/
-  }
-  .single-item.groups #buddypress div#item-body {
-    /*padding-right: 30px;*/
-  }
-  .bb-has-sidebar #main {
-    /*        -webkit-box-orient: vertical;
-            -webkit-box-direction: normal;
-            -webkit-flex-direction: column;
-            -ms-flex-direction: column;
-            flex-direction: column;*/
-    -webkit-flex-wrap: wrap;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-  }
-  .sidebar-left {
-    #main, .search-content-wrap, .buddypress-content-wrap {
-      /*        -webkit-box-orient: vertical;
-              -webkit-box-direction: normal;
-              -webkit-flex-direction: column;
-              -ms-flex-direction: column;
-              flex-direction: column;*/
-      -webkit-flex-wrap: wrap;
-      -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-    }
-  }
-  .search-content-wrap, .buddypress-content-wrap {
-    /*        -webkit-box-orient: vertical;
-            -webkit-box-direction: normal;
-            -webkit-flex-direction: column;
-            -ms-flex-direction: column;
-            flex-direction: column;*/
-    -webkit-flex-wrap: wrap;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-  }
-  .bb-has-sidebar {
-    .search-content, .buddypress-content {
-      max-width: 100%;
-    }
-  }
-  #secondary {
-    width: 100%;
-    margin: 0;
-    max-width: 100%;
-  }
-  .sidebar-left #secondary, .sidebar-right #secondary {
-    margin: 0;
-  }
-  .site-content #secondary {
-    padding: 0;
-  }
-  .bb-has-sidebar #trigger-sidebar {
-    display: none;
-  }
-  .home-inner-wrap #secondary {
-    display: block !important;
-  }
-  .blog:not(.bp-user) .site-content {
-    max-width: 100%;
-  }
-  .archive {
-    &.tag .site-content, &.date .site-content, &.author .site-content, &.category .site-content {
-      max-width: 100%;
-    }
-  }
-  #buddypress #whats-new-header-content {
-    max-width: 560px;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .main-navigation {
-    /*width: calc(80% - 140px);*/
-  }
-}
-
-@media screen and (min-width: 900px) {
-  .home-inner-wrap #secondary .widget:first-child {
-    padding-top: 30px;
-  }
-}
 
 /*----------------------------------------------------------------
 >>> BUDDYPRESS
@@ -1919,7 +1738,7 @@ body.search h1.entry-title {
 --------------------------------------------------------------*/
 
 .directory .page-right-sidebar #primary {
-  padding-right: 30px;
+    padding-right: 30px;
 }
 
 /*---------------------------------------------------------------
@@ -3419,92 +3238,6 @@ form#group-settings-form {
   }
 }
 
-/*--------------------------------------------------------------
-1.1.14 - Item Lists
---------------------------------------------------------------*/
-/* #buddypress ul.item-list li div.item-meta {
-    margin-left: 60px;
-}
-#buddypress ul.item-list li div.item-desc {
-    margin-left: 60px;
-    width: 50%;
-}
-body.directory #buddypress ul.item-list li div.item-desc {
-    margin: 5px 0 0 85px;
-} */
-/*--------------------------------------------------------------
-1.2 - Custom media queries
---------------------------------------------------------------*/
-@media screen and (min-width: 1040px) {
-  /*--------------------------------------------------------------
-  1.2.1 - Item List Tabs
-  --------------------------------------------------------------*/
-  #buddypress {
-    div {
-      &#subnav.item-list-tabs ul li, &:not(#item-nav) > .item-list-tabs ul li {
-        margin-right: 9px;
-        margin-bottom: 4px;
-      }
-    }
-    > div[role="navigation"].item-list-tabs ul li, .dir-form div.item-list-tabs ul li {
-      margin-right: 9px;
-      margin-bottom: 4px;
-    }
-  }
-  .bp-legacy div#item-body div.item-list-tabs ul li {
-    margin-right: 9px;
-    margin-bottom: 4px;
-  }
-  /*--------------------------------------------------------------
-  1.2.2 - Sitewide Notices
-  --------------------------------------------------------------*/
-  div#sitewide-notice {
-    padding: 0 30px;
-    #message.info p {
-      -webkit-border-radius: 0 0 3px 3px;
-      -moz-border-radius: 0 0 3px 3px;
-      border-radius: 0 0 3px 3px;
-      margin-bottom: 0;
-    }
-  }
-  /* remove border radius on homepage, to match slideshow square style */
-  body.home-page div#sitewide-notice #message.info p {
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
-  }
-}
-
-/*--------------------------------------------------------------
-1.2.3 - Messages
---------------------------------------------------------------*/
-@media screen and (max-width: 880px) {
-  #message-threads {
-    .thread-options {
-      width: 12%;
-    }
-    .thread-from {
-      width: 35%;
-    }
-  }
-}
-
-/*--------------------------------------------------------------
-1.2.3 - Profile
---------------------------------------------------------------*/
-/* @media screen and (max-width: 1100px) {
-    #item-posts .entry-post-thumbnail.category-thumb {
-        height: 150px;
-    }
-} */
-/*--------------------------------------------------------------
-1.2.4 - Profile
---------------------------------------------------------------*/
-/* @media screen and (max-width: 1100px) {
-    #item-posts .entry-post-thumbnail.category-thumb {
-        height: 150px;
-    }
-} */
 /*----------------------------------------------------------------
 >>> PLUGINS
 ----------------------------------------------------------------*/
@@ -3526,8 +3259,6 @@ body.articles #buddypress div#item-body {
 --------------------------------------------------------------*/
 
 #buddyboss-media-add-photo {
-  /* position: absolute; */
-  /* right: 0; */
   margin-top: 27px;
 }
 
@@ -3586,7 +3317,7 @@ body.articles #buddypress div#item-body {
 }
 
 #whats-new-content.active {
-  padding-bottom: 70px !important;
+    padding-bottom: 70px !important;
 }
 
 .sap-widget .buddyboss-select-inner {
@@ -3594,11 +3325,5 @@ body.articles #buddypress div#item-body {
   &:after {
     border: 0;
     border-left: 1px solid #e1e1e1;
-  }
-}
-
-@media screen and (max-width: 520px) {
-  .site .buddyboss-media-photos-wrap-container {
-    max-width: 400px;
   }
 }

@@ -791,9 +791,6 @@ input[type="radio"] + span:before, input[type="radio"] + label:before, input[typ
   border: 5px solid #fff;
   padding: 0px;
   border-radius: 15px;
-  -webkit-box-shadow: 0px 0px 0px 2px #54ae68;
-  -moz-box-shadow: 0px 0px 0px 2px #54ae68;
-  box-shadow: 0px 0px 0px 2px #54ae68;
   top: 6px;
   left: -21px;
   z-index: 0;
@@ -803,9 +800,6 @@ input[type="radio"] + span:before, input[type="radio"] + label:before, input[typ
 input[type="checkbox"] + span:before, input[type="checkbox"] + label:before, input[type="checkbox"] + strong:before {
   content: '';
   position: absolute;
-  -webkit-box-shadow: 0px 0px 0px 2px #54ae68;
-  -moz-box-shadow: 0px 0px 0px 2px #54ae68;
-  box-shadow: 0px 0px 0px 2px #54ae68;
   top: 6px;
   left: -21px;
   z-index: 0;

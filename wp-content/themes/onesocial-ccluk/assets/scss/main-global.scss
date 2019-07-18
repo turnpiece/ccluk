@@ -845,9 +845,6 @@ input {
       border: 5px solid #fff;
       padding: 0px;
       border-radius: 15px;
-      -webkit-box-shadow: 0px 0px 0px 2px #54ae68;
-      -moz-box-shadow: 0px 0px 0px 2px #54ae68;
-      box-shadow: 0px 0px 0px 2px #54ae68;
       top: 6px;
       left: -21px;
       z-index: 0;
@@ -859,9 +856,6 @@ input {
       span:before, label:before, strong:before {
         content: '';
         position: absolute;
-        -webkit-box-shadow: 0px 0px 0px 2px #54ae68;
-        -moz-box-shadow: 0px 0px 0px 2px #54ae68;
-        box-shadow: 0px 0px 0px 2px #54ae68;
         top: 6px;
         left: -21px;
         z-index: 0;
@@ -913,7 +907,7 @@ button[disabled], input[disabled] {
 /* Default state */
 
 button {
-  background-color: #54ae68;
+  background-color: $green;
   border: none;
   color: #fff;
   cursor: pointer;

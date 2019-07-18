@@ -43,3 +43,57 @@
 
     @include mobile-styles();
 }
+
+#secondary.widget-area {
+    border-left: none;
+}
+.bb-has-sidebar #main {
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+.sidebar-left {
+    #main, .search-content-wrap, .buddypress-content-wrap {
+          -webkit-flex-wrap: wrap;
+          -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+    }
+}
+.search-content-wrap, .buddypress-content-wrap {
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+.bb-has-sidebar {
+    .search-content, .buddypress-content {
+        max-width: 100%;
+    }
+}
+#secondary {
+    width: 100%;
+    margin: 0;
+    max-width: 100%;
+}
+.sidebar-left #secondary, .sidebar-right #secondary {
+    margin: 0;
+}
+.site-content #secondary {
+    padding: 0;
+}
+.bb-has-sidebar #trigger-sidebar {
+    display: none;
+}
+.home-inner-wrap #secondary {
+    display: block !important;
+}
+.blog:not(.bp-user) .site-content {
+    max-width: 100%;
+}
+.archive {
+    &.tag .site-content, &.date .site-content, &.author .site-content, &.category .site-content {
+        max-width: 100%;
+    }
+}
+#buddypress #whats-new-header-content {
+    max-width: 560px;
+}

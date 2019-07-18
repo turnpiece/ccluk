@@ -41,6 +41,63 @@ body.archive.post-type-archive-ccluk_news {
     }
 }
 
+/* Search Widget */
+.widget-area {
+  .widget_search {
+    label {
+      display: block;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+    /* overflow: hidden; */
+  }
+  .widget_display_search {
+    /* overflow: hidden; */
+  }
+  .widget_search input[type="submit"], .widget_display_search input[type="submit"] {
+    min-width: 25%;
+    height: 35px;
+    line-height: 35px;
+    padding: 0 5%;
+    float: left;
+  }
+}
+/*--------------------------------------------------------------
+Footer
+--------------------------------------------------------------*/
+div {
+  &.footer-inner div {
+    &#footer-links {
+      -webkit-box-flex: 1;
+      -webkit-flex: 1 1 0;
+      -ms-flex: 1 1 0;
+      flex: 1 1 0;
+      float: left;
+      text-align: left;
+      min-width: 1px;
+      /* Firefox-34-ignoring-max-width-for-flexbox */
+    }
+    &#footer-icons {
+      float: right;
+    }
+  }
+  &.footer-inner-bottom ul.social-icons {
+    margin: 0 0 0 40px;
+  }
+}
+
+#switch-mode {
+  float: right;
+  height: 44px;
+  line-height: 44px;
+  margin-left: 20px;
+  margin-top: 0;
+}
+
+.home-inner-wrap #secondary .widget:first-child {
+  padding-top: 30px;
+}
+
 #buddypress {
     div#register-page {
 
@@ -67,4 +124,43 @@ body.archive.post-type-archive-ccluk_news {
             min-height: 150px;
         }
     }
+
+    /*--------------------------------------------------------------
+    1.2.1 - Item List Tabs
+    --------------------------------------------------------------*/
+
+    div {
+      &#subnav.item-list-tabs ul li, &:not(#item-nav) > .item-list-tabs ul li {
+        margin-right: 9px;
+        margin-bottom: 4px;
+      }
+    }
+    > div[role="navigation"].item-list-tabs ul li, .dir-form div.item-list-tabs ul li {
+      margin-right: 9px;
+      margin-bottom: 4px;
+    }
+}
+
+.bp-legacy div#item-body div.item-list-tabs ul li {
+  margin-right: 9px;
+  margin-bottom: 4px;
+}
+/*--------------------------------------------------------------
+1.2.2 - Sitewide Notices
+--------------------------------------------------------------*/
+div#sitewide-notice {
+  padding: 0 30px;
+  #message.info p {
+    -webkit-border-radius: 0 0 3px 3px;
+    -moz-border-radius: 0 0 3px 3px;
+    border-radius: 0 0 3px 3px;
+    margin-bottom: 0;
+  }
+}
+
+/* remove border radius on homepage, to match slideshow square style */
+body.home-page div#sitewide-notice #message.info p {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
 }
