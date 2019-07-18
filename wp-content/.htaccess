@@ -1,4 +1,0 @@
-<Directory wp-content/plugins/wordpress-social-login/hybridauth/>
-    Order Deny,Allow
-    Allow from all
-</Directory>
