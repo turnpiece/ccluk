@@ -1,3 +1,14 @@
+
+.bb-group-members .avatar {
+  border-radius: 100%;
+  margin-bottom: 15px;
+  max-width: 185px;
+}
+
+.bb-invite-list h4 {
+  font-size: 14px;
+}
+
 #bbpress-forums {
 	div.bbp-the-content-wrapper {
 		textarea.bbp-the-content {
@@ -5,15 +16,15 @@
 		}
 	}
 
-  	#favorite-toggle .is-favorite .favorite-toggle:before, 
-  	#subscription-toggle .is-subscribed .subscription-toggle:before, 
-  	#favorite-toggle .is-favorite .favorite-toggle:after, 
+  	#favorite-toggle .is-favorite .favorite-toggle:before,
+  	#subscription-toggle .is-subscribed .subscription-toggle:before,
+  	#favorite-toggle .is-favorite .favorite-toggle:after,
   	#subscription-toggle .is-subscribed .subscription-toggle:after {
     	background-color: $green;
   	}
 
 	#bbp-your-profile fieldset {
-		input, 
+		input,
 		textarea {
 			background-color: $secondary_bg;
 		}
@@ -23,7 +34,7 @@
 	    input,
 	    textarea {
 	        @include input-field();
-	    } 
+	    }
 	}
 
 	#bbp-search-index-form input#bbp_search {

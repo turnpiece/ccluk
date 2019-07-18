@@ -1,5 +1,3 @@
-/* Buddypress */
-
 body.buddypress {
 
 	&.group-home {
@@ -16,6 +14,127 @@ body.buddypress {
 	}
 
 	#buddypress {
+
+		.bb-comment-author {
+		  float: left;
+		  font-family: inherit;
+		  font-size: 14px;
+		  font-weight: 600;
+		  padding: 10px 0;
+		}
+		ul.item-list {
+		  li .activity-avatar div {
+			line-height: 1;
+			margin-bottom: 7px;
+			font-weight: 400;
+			&.nice-name {
+			  color: $green;
+			  font-size: 80%;
+			}
+		  }
+		  &:not(.bb-group-members) li #item-content {
+			width: 75%;
+			float: left;
+		  }
+		  li {
+			#item-content h5 {
+			  margin: 0;
+			}
+			h4, span.activity {
+			  width: 75%;
+			  float: left;
+			  margin: 0;
+			}
+			div.item-title {
+			  font-weight: 600;
+			  font-size: 17px;
+			  width: 70%;
+			  margin: 0 0 4px;
+			  line-height: 1.3;
+			}
+		  }
+		}
+		.widget ul.item-list div.item-title {
+		  font-size: inherit;
+		  font-weight: inherit;
+		  width: 100%;
+		}
+		ul.item-list li {
+		  div {
+			&.item-title span {
+			  color: #999;
+			}
+			&.item-desc p:last-child {
+			  margin-bottom: 0;
+			}
+			&.meta {
+			  color: #888;
+			  margin-top: 8px;
+			}
+		  }
+		  h5 span.small {
+			float: right;
+			font-size: 80%;
+			font-weight: 400;
+		  }
+		}
+		div {
+		  &.item-list-tabs {
+			background: transparent;
+			clear: left;
+			ul {
+			  overflow: hidden;
+			  position: relative;
+			  top: 1px;
+			  margin: 0;
+			  &:after {
+				clear: both;
+				content: '';
+				display: table;
+			  }
+			}
+		  }
+		  &#filter.item-list-tabs ul li {
+			margin: 0;
+			list-style: none;
+		  }
+		  &#group-create-tabs {
+			margin-bottom: 20px;
+			text-align: center;
+		  }
+		}
+		#admins-list div.action a, #mods-list div.action a, #members-list div.action a, #groups-list div.action a, #friend-list div.action a {
+		  margin: 0 0 10px;
+		  display: inline-block;
+		}
+
+		ul {
+			&#member-list.bb-group-members li span.activity {
+			  display: block;
+			  float: none;
+			  margin-top: 10px;
+			  width: 100%;
+			}
+			&.item-list.bb-invite-list {
+			  li {
+				#item-content {
+				  width: auto;
+				}
+				h4, span.activity {
+				  border: 0;
+				  float: none;
+				  margin: 0;
+				  padding: 0;
+				  width: auto;
+				}
+			  }
+			  .action {
+				float: right;
+				margin-bottom: 0;
+			  }
+			}
+		}
+
 		#group-settings-form,
 		#create-group-form {
 			input[type="submit"] {
