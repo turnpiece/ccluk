@@ -84,12 +84,6 @@ body.register {
                     label.option-label {
                         font-size: $font-size-sm;
                     }
-
-                    input[type="checkbox"]+span,
-                    input[type="checkbox"]+label,
-                    input[type="checkbox"]+strong {
-                        margin-right: 10px;
-                    }
                 }
             }
         }

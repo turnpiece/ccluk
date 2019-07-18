@@ -29,9 +29,9 @@ body.buddypress {
 		}
 
 		.standard-form {
-			.datebox, 
-			input[type=text], 
-			input[type=email], 
+			.datebox,
+			input[type=text],
+			input[type=email],
 			input[type=password],
 			textarea {
 				border: 1px solid $green;
@@ -42,6 +42,7 @@ body.buddypress {
 		div.dir-search,
 		.groups-members-search {
 			input[type=text] {
+				border-color: $blue;
 		    	@include input-field();
 		    }
 		}
@@ -133,7 +134,7 @@ body.buddypress {
 				}
 			}
 
-			label, 
+			label,
 			legend {
                 @include form-label();
             }
@@ -153,7 +154,7 @@ body.buddypress {
 		}
 
 	    div {
-	      &#subnav.item-list-tabs ul li a span, 
+	      &#subnav.item-list-tabs ul li a span,
 	      &:not(#item-nav) > .item-list-tabs ul li a span {
 	        color: $green;
 	      }
@@ -175,7 +176,7 @@ body.buddypress {
 		}
 
 		table#message-threads {
-		    input[type="checkbox"]:checked + strong:after, 
+		    input[type="checkbox"]:checked + strong:after,
 		    tr td.thread-info p a:hover {
 		      color: $green;
 		    }
@@ -287,7 +288,7 @@ body.buddypress {
 		}
 
 		#buddypress {
-			#mobile-item-nav-wrap, 
+			#mobile-item-nav-wrap,
 			ul#activity-stream li.activity-item {
 				background: transparent;
 			}
@@ -295,7 +296,7 @@ body.buddypress {
 
 		&.has-activity {
 			#buddypress {
-				div.item-list-tabs, 
+				div.item-list-tabs,
 				form#whats-new-form {
 					background: transparent;
 				}
@@ -312,7 +313,7 @@ body.buddypress {
 					h4 > span {
 						font-size: $font-size-std;
 					}
-					
+
 					table.calendar-view {
 						line-height: 1.5;
 						width: auto;
@@ -342,7 +343,7 @@ body.buddypress {
 							}
 						}
 					}
-					
+
 					.standard-form {
 						label {
 							input {

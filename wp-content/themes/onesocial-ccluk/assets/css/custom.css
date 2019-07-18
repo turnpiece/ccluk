@@ -1390,12 +1390,6 @@ body.register div#register-page .register-section#profile-details-section .input
   font-size: 15px;
 }
 
-body.register div#register-page .register-section#profile-details-section .input-options input[type="checkbox"] + span,
-body.register div#register-page .register-section#profile-details-section .input-options input[type="checkbox"] + label,
-body.register div#register-page .register-section#profile-details-section .input-options input[type="checkbox"] + strong {
-  margin-right: 10px;
-}
-
 body.register div#register-page .mc4wp-checkbox {
   text-align: center;
 }
@@ -1464,7 +1458,14 @@ a.button {
   background-color: #22a7f0;
 }
 
-#secondary div.generic-button a, #buddypress .comment-reply-link, .select2-container--default .select2-results__option--highlighted[aria-selected], .entry-header .entry-title a.button, a.bp-title-button, #search-members-form > label:after, #messages-bulk-manage, .boss-search-wrapper label:after, .groups-members-search label:after {
+#secondary div.generic-button a,
+#buddypress .comment-reply-link,
+.select2-container--default .select2-results__option--highlighted[aria-selected],
+.entry-header .entry-title a.button, a.bp-title-button,
+#search-members-form > label:after,
+#messages-bulk-manage,
+.boss-search-wrapper label:after,
+.groups-members-search label:after {
   background-color: #22a7f0;
 }
 
@@ -2069,6 +2070,7 @@ body.buddypress #buddypress .standard-form textarea {
 body.buddypress #buddypress #search-message-form input[type=text],
 body.buddypress #buddypress div.dir-search input[type=text],
 body.buddypress #buddypress .groups-members-search input[type=text] {
+  border-color: #22a7f0;
   padding: 6px 12px;
   padding: 0.6rem 1.2rem;
 }

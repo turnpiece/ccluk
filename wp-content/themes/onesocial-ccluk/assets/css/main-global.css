@@ -780,6 +780,7 @@ input[type="radio"] + span, input[type="radio"] + label, input[type="radio"] + s
 input[type="checkbox"] + span, input[type="checkbox"] + label, input[type="checkbox"] + strong {
   position: relative;
   left: 10px;
+  margin-right: 10px;
   z-index: 0;
   font-weight: 400;
   line-height: 17px;
@@ -5115,7 +5116,7 @@ body #buddypress div.activity-comments form#frm_buddypress-edit-activity .ac-tex
 --------------------------------------------------------------*/
 .group-join, .author-follow {
   /*padding-top: 23px;*/
-  /* background-color: #fff; */
+  /* background-color: $white; */
   padding-bottom: 10px;
   -webkit-transition: all .7s;
   -o-transition: all .7s;
@@ -7802,7 +7803,8 @@ body.activity-permalink #buddypress ul.item-list li.activity-item {
 }
 
 #buddypress ul.item-list li .activity-avatar div.nice-name {
-  color: #333;
+  color: #54ae68;
+  font-size: 80%;
 }
 
 #buddypress ul.item-list:not(.bb-group-members) li #item-content {
@@ -12477,7 +12479,7 @@ body.logged-in + #incom_wrapper .incom-comments-wrapper #respond .comment-form-c
 }
 
 .mfp-preloader a:hover {
-  color: #FFF;
+  color: #fff;
 }
 
 .mfp-s-error .mfp-content, .mfp-s-ready .mfp-preloader {
@@ -12515,7 +12517,7 @@ button::-moz-focus-inner {
   opacity: .65;
   filter: alpha(opacity=65);
   padding: 0 0 18px 10px;
-  color: #FFF;
+  color: #fff;
   font-style: normal;
   font-size: 28px;
   font-family: Arial,Baskerville,monospace;
@@ -12535,7 +12537,7 @@ button::-moz-focus-inner {
 }
 
 .mfp-iframe-holder .mfp-close, .mfp-image-holder .mfp-close {
-  color: #FFF;
+  color: #fff;
   right: -6px;
   text-align: right;
   padding-right: 6px;
@@ -12603,7 +12605,7 @@ button::-moz-focus-inner {
 }
 
 .mfp-arrow-left .mfp-a, .mfp-arrow-left:after {
-  border-right: 17px solid #FFF;
+  border-right: 17px solid #fff;
   margin-left: 31px;
 }
 
@@ -12617,7 +12619,7 @@ button::-moz-focus-inner {
 }
 
 .mfp-arrow-right .mfp-a, .mfp-arrow-right:after {
-  border-left: 17px solid #FFF;
+  border-left: 17px solid #fff;
   margin-left: 39px;
 }
 
@@ -13647,22 +13649,22 @@ body.register .page-full-width .entry-title {
 }
 
 .growl.growl-default {
-  color: #FFF;
+  color: #fff;
   background: #7f8c8d;
 }
 
 .growl.growl-error {
-  color: #FFF;
+  color: #fff;
   background: #C0392B;
 }
 
 .growl.growl-notice {
-  color: #FFF;
+  color: #fff;
   background: #2ECC71;
 }
 
 .growl.growl-warning {
-  color: #FFF;
+  color: #fff;
   background: #F39C12;
 }
 

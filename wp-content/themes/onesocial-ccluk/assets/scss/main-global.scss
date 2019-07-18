@@ -474,7 +474,7 @@ html {
  */
 
 body {
-  background: #fff;
+  background: $white;
   /* [1] */
   margin: 0;
   /* [2] */
@@ -833,6 +833,7 @@ input {
     span, label, strong {
       position: relative;
       left: 10px;
+      margin-right: 10px;
       z-index: 0;
       font-weight: 400;
       line-height: 17px;
@@ -842,7 +843,7 @@ input {
     span:before, label:before, strong:before {
       content: '';
       position: absolute;
-      border: 5px solid #fff;
+      border: 5px solid $white;
       padding: 0px;
       border-radius: 15px;
       top: 6px;
@@ -877,7 +878,7 @@ input {
   }
   &[type="radio"]:checked + {
     span:before, label:before, strong:before {
-      border: 2px solid #fff;
+      border: 2px solid $white;
       padding: 3px;
       background-color: #333;
     }
@@ -909,7 +910,7 @@ button[disabled], input[disabled] {
 button {
   background-color: $green;
   border: none;
-  color: #fff;
+  color: $white;
   cursor: pointer;
   font-size: 12px;
   line-height: 20px;
@@ -928,9 +929,9 @@ button {
 
 input {
   &[type="button"], &[type="reset"] {
-    background-color: #54ae68;
+    background-color: $green;
     border: none;
-    color: #fff;
+    color: $white;
     cursor: pointer;
     font-size: 12px;
     line-height: 20px;
@@ -949,9 +950,9 @@ input {
 }
 
 article.post-password-required input[type=submit], li.bypostauthor cite span, a.button {
-  background-color: #54ae68;
+  background-color: $green;
   border: none;
-  color: #fff;
+  color: $white;
   cursor: pointer;
   font-size: 12px;
   line-height: 20px;
@@ -970,9 +971,9 @@ article.post-password-required input[type=submit], li.bypostauthor cite span, a.
 
 #buddypress {
   ul.button-nav li a, div.generic-button a {
-    background-color: #54ae68;
+    background-color: $green;
     border: none;
-    color: #fff;
+    color: $white;
     cursor: pointer;
     font-size: 12px;
     line-height: 20px;
@@ -991,9 +992,9 @@ article.post-password-required input[type=submit], li.bypostauthor cite span, a.
 }
 
 #secondary div.generic-button a, #buddypress .comment-reply-link, .entry-header .entry-title a.button, a.bp-title-button {
-  background-color: #54ae68;
+  background-color: $green;
   border: none;
-  color: #fff;
+  color: $white;
   cursor: pointer;
   font-size: 12px;
   line-height: 20px;
@@ -1014,7 +1015,7 @@ article.post-password-required input[type=submit], li.bypostauthor cite span, a.
 
 button:hover {
   outline: none;
-  color: #fff;
+  color: $white;
   text-decoration: none;
   /* Darken */
   -moz-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
@@ -1025,7 +1026,7 @@ button:hover {
 input {
   &[type="button"]:hover, &[type="reset"]:hover {
     outline: none;
-    color: #fff;
+    color: $white;
     text-decoration: none;
     /* Darken */
     -moz-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
@@ -1036,7 +1037,7 @@ input {
 
 article.post-password-required input[type=submit]:hover, a.button:hover {
   outline: none;
-  color: #fff;
+  color: $white;
   text-decoration: none;
   /* Darken */
   -moz-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
@@ -1048,7 +1049,7 @@ article.post-password-required input[type=submit]:hover, a.button:hover {
   ul.button-nav li {
     a:hover, &.current a {
       outline: none;
-      color: #fff;
+      color: $white;
       text-decoration: none;
       /* Darken */
       -moz-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
@@ -1058,7 +1059,7 @@ article.post-password-required input[type=submit]:hover, a.button:hover {
   }
   div.generic-button a:hover {
     outline: none;
-    color: #fff;
+    color: $white;
     text-decoration: none;
     /* Darken */
     -moz-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
@@ -1069,7 +1070,7 @@ article.post-password-required input[type=submit]:hover, a.button:hover {
 
 #secondary div.generic-button a:hover, #buddypress .comment-reply-link:hover, .entry-header .entry-title a.button:hover, a.bp-title-button:hover {
   outline: none;
-  color: #fff;
+  color: $white;
   text-decoration: none;
   /* Darken */
   -moz-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
@@ -1122,8 +1123,8 @@ article.post-password-required input[type=submit]:active, a.button:active {
 
 #save_as_draft, .entry-meta a.read-more, input[type="submit"] {
   border: none;
-  color: #54ae68;
-  border-top: 1px solid #54ae68;
+  color: $green;
+  border-top: 1px solid $green;
   padding: 0;
   padding-top: 20px;
   background-color: transparent;
@@ -1146,7 +1147,7 @@ article.post-password-required input[type=submit]:active, a.button:active {
 }
 
 li.bypostauthor cite span {
-  color: #fff;
+  color: $white;
   background-color: #497EA8;
   display: inline-block;
   -moz-border-radius: 2px;
@@ -1157,13 +1158,13 @@ li.bypostauthor cite span {
 /* Loader */
 
 .loader {
-  background-color: #54ae68;
+  background-color: $green;
   -webkit-animation: load1 1s infinite ease-in-out;
   animation: load1 1s infinite ease-in-out;
   width: 1em;
   height: 4em;
   &:before, &:after {
-    background-color: #54ae68;
+    background-color: $green;
     -webkit-animation: load1 1s infinite ease-in-out;
     animation: load1 1s infinite ease-in-out;
     width: 1em;
@@ -1199,12 +1200,12 @@ li.bypostauthor cite span {
   0%,
     80%,
     100% {
-    box-shadow: 0 0 #54ae68;
+    box-shadow: 0 0 $green;
     height: 4em;
   }
 
   40% {
-    box-shadow: 0 -2em #54ae68;
+    box-shadow: 0 -2em $green;
     height: 5em;
   }
 }
@@ -1214,12 +1215,12 @@ li.bypostauthor cite span {
   0%,
     80%,
     100% {
-    box-shadow: 0 0 #54ae68;
+    box-shadow: 0 0 $green;
     height: 4em;
   }
 
   40% {
-    box-shadow: 0 -2em #54ae68;
+    box-shadow: 0 -2em $green;
     height: 5em;
   }
 }
@@ -1399,7 +1400,7 @@ img.wp-smiley, .rsswidget img {
 .pagination {
   span, a {
     background-color: #dee4e4;
-    color: #fff;
+    color: $white;
     display: inline-block;
     line-height: 1;
     margin: 0 1px;
@@ -1412,7 +1413,7 @@ img.wp-smiley, .rsswidget img {
 .bbp-pagination-links {
   span, a {
     background-color: #dee4e4;
-    color: #fff;
+    color: $white;
     display: inline-block;
     line-height: 1;
     margin: 0 1px;
@@ -1423,14 +1424,14 @@ img.wp-smiley, .rsswidget img {
 }
 
 .pagination a:hover, .bbp-pagination-links a:hover {
-  color: #fff;
+  color: $white;
   background-color: #b6bdbd;
   text-decoration: none;
 }
 
 .pagination .current, .bbp-pagination-links span {
-  background-color: #54ae68;
-  color: #fff;
+  background-color: $green;
+  color: $white;
   font-weight: 600;
 }
 
@@ -1545,7 +1546,7 @@ img.wp-smiley, .rsswidget img {
   &:after {
     background-color: #333;
     border-radius: 2px;
-    color: #fff;
+    color: $white;
     content: attr(data-tooltip);
     display: table;
     font-size: 13px;
@@ -1976,7 +1977,7 @@ section[role="banner"] {
     padding: 5px 10px;
     letter-spacing: normal;
     margin-bottom: 10px;
-    background-color: #fff;
+    background-color: $white;
     &:hover {
       color: #333;
       border: 1px solid #333;
@@ -2122,7 +2123,7 @@ section[role="banner"] {
 }
 
 .widget_search #searchform button i:before {
-  color: #54ae68;
+  color: $green;
   vertical-align: bottom;
 }
 
@@ -2333,7 +2334,7 @@ div.footer-inner ul.footer-menu li {
   input[type="submit"] {
     float: left;
     background-color: #e7753f;
-    color: #fff;
+    color: $white;
     padding: 10px;
     /* margin-top: -28px; */
     display: inline-block;
@@ -2600,14 +2601,14 @@ div {
 
 .widget_mc4wp_form_widget form p input[type="email"] {
   width: 100%;
-  background-color: #fff;
+  background-color: $white;
   border: 1px solid rgba(0, 0, 0, 0.11);
 }
 
 .widget.widget_newsletterwidget form {
   p input[type="email"], div input[type="email"] {
     width: 100%;
-    background-color: #fff;
+    background-color: $white;
     border: 1px solid rgba(0, 0, 0, 0.11);
   }
 }
@@ -2631,8 +2632,8 @@ div {
   width: 46px;
   height: 46px;
   line-height: 1;
-  background-color: #54ae68;
-  color: #fff;
+  background-color: $green;
+  color: $white;
   /* font-size: 0; */
   font-family: FontAwesome;
   text-rendering: auto;
@@ -2647,8 +2648,8 @@ div {
     width: 46px;
     height: 46px;
     line-height: 1;
-    background-color: #54ae68;
-    color: #fff;
+    background-color: $green;
+    color: $white;
     /* font-size: 0; */
     font-family: FontAwesome;
     text-rendering: auto;
@@ -2750,18 +2751,18 @@ div {
   -webkit-transform: rotate(180deg);
   -ms-transform: rotate(180deg);
   transform: rotate(180deg);
-  background: #54ae68;
+  background: $green;
   &:before {
     top: 0;
     transform: translateX(0) translateY(0) rotate(-45deg);
     width: 50%;
-    background: #54ae68;
+    background: $green;
   }
   &:after {
     bottom: 0;
     transform: translateX(0) translateY(0) rotate(45deg);
     width: 50%;
-    background: #54ae68;
+    background: $green;
   }
 }
 
@@ -2790,7 +2791,7 @@ div {
     text-decoration: none;
     color: #333;
     &:hover {
-      color: #54ae68;
+      color: $green;
     }
     &.post-edit-link {
       color: inherit;
@@ -2942,13 +2943,13 @@ article.sticky .featured-post {
     }
   }
   blockquote .author {
-    color: #54ae68;
+    color: $green;
     font-size: 18px;
   }
 }
 
 .comment-content blockquote .author {
-  color: #54ae68;
+  color: $green;
   font-size: 18px;
 }
 
@@ -3071,7 +3072,7 @@ single .entry-post-thumbnail:not(.category-thumb) img {
   }
   .load-more-posts.active .bb-icon-bars-f:before {
     content: 'A';
-    color: #54ae68;
+    color: $green;
     -ms-transform: rotate(180deg);
     -webkit-transform: rotate(180deg);
     transform: rotate(180deg);
@@ -3123,8 +3124,8 @@ single .entry-post-thumbnail:not(.category-thumb) img {
     line-height: 30px;
     text-align: center;
     border-radius: 50%;
-    background-color: #54ae68;
-    color: #fff;
+    background-color: $green;
+    color: $white;
     font-family: "onesocial" !important;
     font-style: normal !important;
     font-weight: normal !important;
@@ -3137,9 +3138,9 @@ single .entry-post-thumbnail:not(.category-thumb) img {
   }
   div.generic-button a:after {
     background-color: #000;
-    border: 2px solid #fff;
+    border: 2px solid $white;
     border-radius: 100%;
-    color: #fff;
+    color: $white;
     content: "+";
     display: block;
     font-family: inherit;
@@ -3172,7 +3173,7 @@ body #buddypress .group-join div.generic-button a:after {
 
 .author-follow div.generic-button {
   &.pending_friend:not(.add) + span, a.remove + span, &.following + span {
-    color: #54ae68;
+    color: $green;
   }
 }
 
@@ -3189,8 +3190,8 @@ body #buddypress .group-join div.generic-button a:after {
 }
 
 .entry-meta a.read-more {
-  color: #54ae68;
-  border-top: 1px solid #54ae68;
+  color: $green;
+  border-top: 1px solid $green;
   padding-top: 26px;
   display: inline-block;
   font-weight: 400;
@@ -3225,7 +3226,7 @@ body #buddypress .group-join div.generic-button a:after {
   }
   .inner {
     display: none;
-    background-color: #fff;
+    background-color: $white;
   }
   ul {
     list-style: none;
@@ -3252,8 +3253,8 @@ body #buddypress .group-join div.generic-button a:after {
       time div {
         width: 35px;
         &:first-child {
-          background-color: #54ae68;
-          color: #fff;
+          background-color: $green;
+          color: $white;
           font-size: 9px;
           font-weight: 400;
           padding: 4px 0 2px;
@@ -3261,20 +3262,20 @@ body #buddypress .group-join div.generic-button a:after {
           position: relative;
           &:after {
             content: '';
-            border: 1px solid #fff;
+            border: 1px solid $white;
             display: block;
             width: 4px;
-            background-color: #54ae68;
+            background-color: $green;
             height: 5px;
             position: absolute;
             top: -3px;
           }
           &:before {
             content: '';
-            border: 1px solid #fff;
+            border: 1px solid $white;
             display: block;
             width: 4px;
-            background-color: #54ae68;
+            background-color: $green;
             height: 5px;
             position: absolute;
             top: -3px;
@@ -3286,7 +3287,7 @@ body #buddypress .group-join div.generic-button a:after {
         }
         &:nth-child(2) {
           background-color: #333;
-          color: #fff;
+          color: $white;
           font-size: 19px;
           font-weight: 700;
           line-height: 1.4;
@@ -3427,7 +3428,7 @@ article.format-aside {
     display: inline-block;
     font-weight: 700;
     &:hover {
-      color: #54ae68;
+      color: $green;
     }
   }
   .author-bio {
@@ -3440,7 +3441,7 @@ article.format-aside {
     font-size: 12px;
     display: block;
     a:not(.entry-date) {
-      color: #54ae68;
+      color: $green;
     }
   }
   .author-follow {
@@ -3486,7 +3487,7 @@ article.format-aside {
     }
   }
   .entry-header.has-image h1 {
-    color: #fff;
+    color: $white;
     font-size: 55px;
     line-height: 1.4;
     margin: 0;
@@ -3767,7 +3768,7 @@ article {
       }
     }
     cite a {
-      color: #54ae68;
+      color: $green;
       font-weight: 400;
       margin-right: 3px;
     }
@@ -3778,7 +3779,7 @@ article {
       padding: 6px 12px;
       font-size: 12px;
       font-weight: 400;
-      color: #fff;
+      color: $white;
       background-color: #0088d0;
       background-repeat: repeat-x;
       background-image: -moz-linear-gradient(top, #009cee, #0088d0);
@@ -4122,7 +4123,7 @@ body article.error404 .entry-header {
       color: #333;
       line-height: 1;
       &:hover {
-        color: #54ae68;
+        color: $green;
       }
     }
   }
@@ -4154,7 +4155,7 @@ body article.error404 .entry-header {
       margin-right: 25px;
     }
     a {
-      color: #54ae68;
+      color: $green;
       &:hover {
         color: #333;
       }
@@ -4241,7 +4242,7 @@ body article.error404 .entry-header {
   li form.ac-form {
     clear: both;
     margin-top: 0;
-    border-top: 1px solid #fff;
+    border-top: 1px solid $white;
   }
   div#message {
     margin-top: 15px;
@@ -4249,7 +4250,7 @@ body article.error404 .entry-header {
   }
   form {
     .ac-textarea {
-      background-color: #fff;
+      background-color: $white;
       border: 1px solid rgba(0, 0, 0, 0.1);
       margin-bottom: 20px;
       padding: 8px;
@@ -4630,7 +4631,7 @@ body article.error404 .entry-header {
 */
 
 #primary #buddypress #activity-stream div.activity-meta a:hover:before {
-  color: #54ae68;
+  color: $green;
 }
 
 #buddypress #activity-stream {
@@ -4786,7 +4787,7 @@ form#whats-new-form {
     top: 50%;
     left: 0;
     right: 0;
-    background-color: #fff;
+    background-color: $white;
   }
 }
 
@@ -4801,7 +4802,7 @@ form#whats-new-form {
 
 #whats-new-form {
   .whats-author {
-    color: #54ae68;
+    color: $green;
     font-weight: 400;
     line-height: 48px;
   }
@@ -4972,8 +4973,8 @@ body #buddypress form#whats-new-form #whats-new-submit {
   #whats-new-submit input[type="submit"] {
     padding: 25px 0 0;
     background-color: transparent;
-    color: #54ae68;
-    border-top: 1px solid #54ae68;
+    color: $green;
+    border-top: 1px solid $green;
     font-size: 14px;
     margin-right: 30px;
     &:hover {
@@ -5065,7 +5066,7 @@ body.no-js #buddypress #whats-new-options {
 }
 
 .boss-insert-buttons-show {
-  background: #fff;
+  background: $white;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 100%;
   color: #aaa;
@@ -5161,7 +5162,7 @@ body #buddypress div.activity-comments form#frm_buddypress-edit-activity .ac-tex
 
 .group-join, .author-follow {
   /*padding-top: 23px;*/
-  /* background-color: #fff; */
+  /* background-color: $white; */
   padding-bottom: 10px;
   -webkit-transition: all .7s;
   -o-transition: all .7s;
@@ -5269,8 +5270,8 @@ body #buddypress div.activity-comments form#frm_buddypress-edit-activity .ac-tex
   margin: 0;
   padding-right: 42px;
   &:after {
-    background: #54ae68;
-    color: #fff;
+    background: $green;
+    color: $white;
     content: "c";
     font-family: "onesocial";
     font-size: 20px;
@@ -5284,8 +5285,8 @@ body #buddypress div.activity-comments form#frm_buddypress-edit-activity .ac-tex
 }
 
 .boss-search-wrapper label:after {
-  background: #54ae68;
-  color: #fff;
+  background: $green;
+  color: $white;
   content: "c";
   font-family: "onesocial";
   font-size: 20px;
@@ -5416,7 +5417,7 @@ body #buddypress div.activity-comments form#frm_buddypress-edit-activity .ac-tex
     margin: 0 0 10px 10px;
   }
   #group-create-nav .group-create {
-    color: #fff;
+    color: $white;
     &:hover {
       -webkit-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
       box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
@@ -5458,7 +5459,7 @@ body #buddypress div.activity-comments form#frm_buddypress-edit-activity .ac-tex
 --------------------------------------------------------------*/
 
 #create-group-form.standard-form label span.highlight {
-  color: #54ae68;
+  color: $green;
   font-size: 100%;
   font-weight: normal;
 }
@@ -5477,7 +5478,7 @@ body #buddypress div.activity-comments form#frm_buddypress-edit-activity .ac-tex
 }
 
 #create-group-form #invite-list strong {
-  color: #54ae68;
+  color: $green;
 }
 
 .boss-group-invite-friend-list .avatar, #create-group-form #invite-list li img {
@@ -5701,7 +5702,7 @@ label[for="groupblog-create-new-no"] {
   a {
     color: #333333;
     &:hover {
-      color: #54ae68;
+      color: $green;
     }
   }
 }
@@ -5760,7 +5761,7 @@ label[for="groupblog-create-new-no"] {
   width: auto;
   z-index: 2;
   .generic-button a {
-    background-color: #fff;
+    background-color: $white;
     border: 1px solid rgba(0, 0, 0, 0.1);
     clear: both;
     color: #333;
@@ -5814,7 +5815,7 @@ label[for="groupblog-create-new-no"] {
 #page #main {
   .author-follow div.generic-button.loading a:before, .inner-avatar-wrap .generic-button.loading a:not(.group-sub):not(.group-subscription-close):before {
     content: "H";
-    color: #fff;
+    color: $white;
     font-family: 'onesocial';
     -webkit-animation: spin 2s infinite linear;
     -moz-animation: spin 2s infinite linear;
@@ -5833,7 +5834,7 @@ label[for="groupblog-create-new-no"] {
 .author-follow div.generic-button a:before {
   background: #50A9E5;
   border-radius: 100%;
-  color: #fff;
+  color: $white;
   content: "q";
   font-family: 'onesocial';
   font-size: 13px;
@@ -5859,7 +5860,7 @@ label[for="groupblog-create-new-no"] {
   .generic-button a:not(.group-sub):not(.group-subscription-close):before {
     background: #50A9E5;
     border-radius: 100%;
-    color: #fff;
+    color: $white;
     content: "q";
     font-family: 'onesocial';
     font-size: 13px;
@@ -5921,7 +5922,7 @@ label[for="groupblog-create-new-no"] {
   }
   .generic-button a {
     &.is_friend.remove:before, &.leave-group:before {
-      background: #54ae68;
+      background: $green;
       content: '\f00c';
       font-family: "fontawesome";
       font-weight: 400;
@@ -5934,9 +5935,9 @@ label[for="groupblog-create-new-no"] {
 .author-follow div.generic-button a:after {
   -moz-osx-font-smoothing: grayscale;
   background-color: #e33d41;
-  border: 2px solid #fff;
+  border: 2px solid $white;
   border-radius: 100%;
-  color: #fff;
+  color: $white;
   content: "b";
   display: block;
   font-family: "onesocial";
@@ -5957,9 +5958,9 @@ label[for="groupblog-create-new-no"] {
   div.generic-button a:not(.group-sub):not(.group-subscription-close):after, .awaiting_response_friend a:after, .pending_friend:not(.add) a:after {
     -moz-osx-font-smoothing: grayscale;
     background-color: #e33d41;
-    border: 2px solid #fff;
+    border: 2px solid $white;
     border-radius: 100%;
-    color: #fff;
+    color: $white;
     content: "b";
     display: block;
     font-family: "onesocial";
@@ -5980,9 +5981,9 @@ label[for="groupblog-create-new-no"] {
 #primary .author-follow .pending_friend:not(.add) a:after {
   -moz-osx-font-smoothing: grayscale;
   background-color: #e33d41;
-  border: 2px solid #fff;
+  border: 2px solid $white;
   border-radius: 100%;
-  color: #fff;
+  color: $white;
   content: "b";
   display: block;
   font-family: "onesocial";
@@ -6003,9 +6004,9 @@ label[for="groupblog-create-new-no"] {
   .generic-button a.remove:after, .membership-requested a:after, .group-button.membership-requested:after {
     -moz-osx-font-smoothing: grayscale;
     background-color: #e33d41;
-    border: 2px solid #fff;
+    border: 2px solid $white;
     border-radius: 100%;
-    color: #fff;
+    color: $white;
     content: "b";
     display: block;
     font-family: "onesocial";
@@ -6025,9 +6026,9 @@ label[for="groupblog-create-new-no"] {
     &.is_friend.remove:after, &.leave-group:after {
       -moz-osx-font-smoothing: grayscale;
       background-color: #e33d41;
-      border: 2px solid #fff;
+      border: 2px solid $white;
       border-radius: 100%;
-      color: #fff;
+      color: $white;
       content: "b";
       display: block;
       font-family: "onesocial";
@@ -6080,7 +6081,7 @@ label[for="groupblog-create-new-no"] {
     margin: 0;
   }
   .bb-count {
-    color: #54ae68;
+    color: $green;
     float: left;
     margin-right: 20px;
   }
@@ -6108,7 +6109,7 @@ label[for="groupblog-create-new-no"] {
 }
 
 .bb-icon.bb-icon {
-  background: #fff;
+  background: $white;
   border: 2px solid #ddd;
   border-radius: 100%;
   float: left;
@@ -6345,7 +6346,7 @@ div#sitewide-notice div#message.error p {
   .standard-form#signup_form div div.error {
     background-color: #e41717;
     border-radius: 3px;
-    color: #fff;
+    color: $white;
     margin: 0 0 10px 0;
     padding: 6px;
     text-align: center;
@@ -6556,11 +6557,11 @@ input#save_as_draft {
 #save_as_draft {
   margin-right: 15px;
   background-color: transparent;
-  color: #54ae68;
+  color: $green;
   font-size: 14px;
   font-weight: 400;
   padding: 22px 0 2px;
-  border-top: 1px solid #54ae68;
+  border-top: 1px solid $green;
   margin-top: 20px;
 }
 
@@ -6568,11 +6569,11 @@ input#save_as_draft {
   #group-settings-form input[type="submit"], .standard-form div.submit input {
     margin-right: 15px;
     background-color: transparent;
-    color: #54ae68;
+    color: $green;
     font-size: 14px;
     font-weight: 400;
     padding: 22px 0 2px;
-    border-top: 1px solid #54ae68;
+    border-top: 1px solid $green;
     margin-top: 20px;
   }
   #create-group-form input[type="submit"] {
@@ -6596,7 +6597,7 @@ input#save_as_draft {
       -moz-box-shadow: none;
       -webkit-box-shadow: none;
       box-shadow: none;
-      color: #54ae68;
+      color: $green;
     }
     i:before {
       -ms-transform: rotate(180deg);
@@ -6724,7 +6725,7 @@ input#save_as_draft {
   content: "\f110";
   font-size: 14px;
   -webkit-font-smoothing: antialiased;
-  color: #fff;
+  color: $white;
   text-decoration: none;
   margin-left: 8px;
   padding: 0;
@@ -6747,7 +6748,7 @@ input#save_as_draft {
     content: "\f110";
     font-size: 14px;
     -webkit-font-smoothing: antialiased;
-    color: #fff;
+    color: $white;
     text-decoration: none;
     margin-left: 8px;
     padding: 0;
@@ -6777,20 +6778,20 @@ input#save_as_draft {
   }
   input {
     &[type="submit"]:hover.pending, &[type="button"]:hover.pending, &[type="reset"]:hover.pending, &[type="submit"]:hover.disabled, &[type="button"]:hover.disabled, &[type="reset"]:hover.disabled {
-      background: #fff;
+      background: $white;
       border-color: #eee;
       color: #bbb;
     }
   }
   button {
     &.pending:hover, &.disabled:hover {
-      background: #fff;
+      background: $white;
       border-color: #eee;
       color: #bbb;
     }
   }
   div.pending a:hover, a.disabled:hover {
-    background: #fff;
+    background: $white;
     border-color: #eee;
     color: #bbb;
   }
@@ -7159,7 +7160,7 @@ input#save_as_draft {
         width: 42px;
       }
       .yes input:checked + label, .no input:checked + label {
-        color: #fff;
+        color: $white;
       }
       .yes input:checked + label {
         background-color: #57ad68;
@@ -7174,7 +7175,7 @@ input#save_as_draft {
           border: 1px solid rgba(0, 0, 0, 0.1);
           margin: 0;
           line-height: 1;
-          background-color: #fff;
+          background-color: $white;
           font-size: 12px;
           font-weight: 300;
           left: 0;
@@ -7184,7 +7185,7 @@ input#save_as_draft {
         border: 1px solid rgba(0, 0, 0, 0.1);
         margin: 0;
         line-height: 1;
-        background-color: #fff;
+        background-color: $white;
         font-size: 12px;
         font-weight: 300;
         left: 0;
@@ -7395,7 +7396,7 @@ p#item-desc {
       -moz-border-radius: 3px;
       -webkit-border-radius: 3px;
       border-radius: 3px;
-      color: #fff;
+      color: $white;
       cursor: pointer;
       font-weight: 600;
       font-size: 85%;
@@ -7489,7 +7490,7 @@ p#item-desc {
 #main .btn-group.social a {
   color: #333;
   &:hover {
-    color: #54ae68;
+    color: $green;
   }
   &:not(:last-child):after {
     content: '/';
@@ -7557,7 +7558,7 @@ p#item-desc {
     vertical-align: middle;
     width: 30px;
     &.active:before {
-      border: 1px solid #54ae68;
+      border: 1px solid $green;
     }
   }
 }
@@ -7583,8 +7584,8 @@ p#item-desc {
 }
 
 .info-group .members-list-filter {
-  background: #fff;
-  border: 1px solid #54ae68;
+  background: $white;
+  border: 1px solid $green;
   display: none;
   left: 100%;
   margin-left: -1px;
@@ -7612,7 +7613,7 @@ p#item-desc {
 .info-group {
   .members-list-filter li a {
     &:hover, &.selected {
-      color: #54ae68;
+      color: $green;
     }
   }
   .members-list-results {
@@ -7702,8 +7703,8 @@ ul.horiz-gallery li img, .bp-user #main ul.horiz-gallery li img {
 
 #main ul.horiz-gallery {
   .see-more a {
-    color: #fff;
-    background-color: #54ae68;
+    color: $white;
+    background-color: $green;
     font-size: 14px;
     width: 46px;
     height: 46px;
@@ -7741,7 +7742,7 @@ ul.horiz-gallery li img, .bp-user #main ul.horiz-gallery li img {
       overflow: visible;
     }
     .group-admin-name {
-      color: #fff;
+      color: $white;
       display: block;
       font-size: 12px;
       margin: 3px auto;
@@ -7849,7 +7850,8 @@ body.activity-permalink #buddypress ul.item-list {
       margin-bottom: 7px;
       font-weight: 400;
       &.nice-name {
-        color: #333;
+        color: $green;
+        font-size: 80%;
       }
     }
     &:not(.bb-group-members) li #item-content {
@@ -8045,7 +8047,7 @@ body {
     padding: 5px 9px;
     line-height: 1.7;
     text-decoration: none;
-    color: #fff;
+    color: $white;
     font-weight: 500;
     background-color: #333;
     border: 1px solid rgba(0, 0, 0, 0.1);
@@ -8063,7 +8065,7 @@ body {
   padding: 5px 9px;
   line-height: 1.7;
   text-decoration: none;
-  color: #fff;
+  color: $white;
   font-weight: 500;
   background-color: #333;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -8416,7 +8418,7 @@ ul.acfb-holder li.friend-tab {
       margin-bottom: 5px;
       display: inline-block;
       &:hover {
-        color: #54ae68;
+        color: $green;
       }
     }
     &.unread td {
@@ -8557,7 +8559,7 @@ body #buddypress table#message-threads tr td:first-child {
         position: absolute;
         top: -2px;
         left: -25px;
-        color: #54ae68;
+        color: $green;
         line-height: 1;
       }
     }
@@ -8708,7 +8710,7 @@ body #buddypress table#message-threads tr td:first-child {
     border: none;
     height: auto;
     line-height: 18px;
-    color: #54ae68;
+    color: $green;
     font-size: 10px;
     right: 8px;
   }
@@ -8914,12 +8916,12 @@ body.register #buddypress div.page ul {
     height: 10px;
     position: absolute;
     z-index: 12;
-    background: #54ae68;
+    background: $green;
     span {
       width: 1%;
       display: block;
       height: 100%;
-      background: #54ae68;
+      background: $green;
       /* For Safari 3.1 to 6.0 */
       -webkit-transition: width 2s;
       transition: width 2s;
@@ -8954,7 +8956,7 @@ body.register #buddypress div.page ul {
   .update-cover-photo {
     i {
       &.bb-icon-camera, &.fa-camera, &.fa-refresh, &.fa-times {
-        color: #fff;
+        color: $white;
         font-size: 18px;
         left: 6px;
         opacity: 0.7;
@@ -8966,10 +8968,10 @@ body.register #buddypress div.page ul {
     }
     div {
       -webkit-background-clip: padding-box;
-      background-color: #54ae68;
-      border: 1px solid #fff;
+      background-color: $green;
+      border: 1px solid $white;
       -webkit-border-radius: 2px;
-      color: #fff;
+      color: $white;
       display: inline-block;
       opacity: 0;
       overflow: hidden;
@@ -9042,7 +9044,7 @@ html:not(.svgclippaths) .single-item.groups #buddypress div#item-header #item-he
     margin-top: 0;
     margin-bottom: 0;
     line-height: 1.2;
-    color: #fff;
+    color: $white;
     display: inline-block;
     vertical-align: middle;
     font-size: 30px;
@@ -9082,9 +9084,9 @@ html:not(.svgclippaths) .single-item.groups #buddypress div#item-header #item-he
 }
 
 #buddypress #item-title-area .highlight {
-  background-color: #54ae68;
+  background-color: $green;
   border-radius: 2px;
-  color: #fff;
+  color: $white;
   text-transform: lowercase;
   padding: 0px 6px 2px;
   display: inline-block;
@@ -9096,7 +9098,7 @@ html:not(.svgclippaths) .single-item.groups #buddypress div#item-header #item-he
 
 .single-item.groups #buddypress {
   #item-header span.activity {
-    color: #fff;
+    color: $white;
     margin-top: 6px;
     display: block;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
@@ -9169,13 +9171,13 @@ html:not(.svgclippaths) .single-item.groups #buddypress div#item-header #item-he
     text-transform: none;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: #54ae68;
+    color: $green;
     font-size: 14px;
     margin-right: 6px;
   }
   &:hover {
     background-color: transparent;
-    color: #54ae68;
+    color: $green;
   }
 }
 
@@ -9893,7 +9895,7 @@ li {
 .bbp-header {
   li {
     &.bbp-forum-info, &.bbp-topic-title {
-      border-bottom: 2px solid #54ae68;
+      border-bottom: 2px solid $green;
     }
   }
   ul {
@@ -9943,7 +9945,7 @@ li {
     -moz-osx-font-smoothing: grayscale;
     margin-right: 15px;
     font-size: 18px;
-    color: #54ae68;
+    color: $green;
     position: relative;
     top: 2px;
   }
@@ -10157,7 +10159,7 @@ div {
       color: #333;
       font-weight: 700;
       &:hover {
-        color: #54ae68;
+        color: $green;
       }
     }
     span {
@@ -10249,7 +10251,7 @@ div.bbp-topic-tags a {
   width: 8px;
   height: 8px;
   display: block;
-  background-color: #fff;
+  background-color: $white;
   border-radius: 2px;
   -ms-transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
@@ -10275,7 +10277,7 @@ div.bbp-topic-tags a {
 
 #onesocial-recommended-by .title {
   font-size: 14px;
-  color: #54ae68;
+  color: $green;
   margin-bottom: 2px;
   font-weight: 400;
 }
@@ -10283,7 +10285,7 @@ div.bbp-topic-tags a {
 .bbp-forum-data {
   .post-num {
     font-size: 14px;
-    color: #54ae68;
+    color: $green;
     margin-bottom: 2px;
     font-weight: 400;
   }
@@ -10298,7 +10300,7 @@ div.bbp-topic-tags a {
     a {
       color: #9b9b9b;
       &:hover {
-        color: #54ae68;
+        color: $green;
       }
     }
     img {
@@ -10354,7 +10356,7 @@ div.bbp-topic-tags a {
   border-radius: 50%;
   text-align: center;
   background-color: #e1e1e1;
-  color: #fff;
+  color: $white;
   font-size: 20px;
   font-family: "onesocial" !important;
   font-style: normal !important;
@@ -10378,7 +10380,7 @@ div.bbp-topic-tags a {
     border-radius: 50%;
     text-align: center;
     background-color: #e1e1e1;
-    color: #fff;
+    color: $white;
     font-size: 20px;
     font-family: "onesocial" !important;
     font-style: normal !important;
@@ -10425,7 +10427,7 @@ div.bbp-topic-tags a {
     right: -2px;
   }
   #favorite-toggle .is-favorite .favorite-toggle:before, #subscription-toggle .is-subscribed .subscription-toggle:before, #favorite-toggle .is-favorite .favorite-toggle:after, #subscription-toggle .is-subscribed .subscription-toggle:after {
-    background: #54ae68;
+    background: $green;
   }
 }
 
@@ -10551,9 +10553,9 @@ td {
     }
     span.is-subscribed a {
       background-color: #e33d41;
-      border: 2px solid #fff;
+      border: 2px solid $white;
       border-radius: 100%;
-      color: #fff;
+      color: $white;
       display: inline-block;
       height: 20px;
       line-height: 16px;
@@ -10815,7 +10817,7 @@ p.form-allowed-tags {
       margin: 0;
       padding: 0;
       line-height: 0;
-      background-color: #fff;
+      background-color: $white;
     }
     &.bbp-the-content-wrapper td.mceStatusbar {
       line-height: 16px;
@@ -11653,7 +11655,7 @@ form#places-form #new-place-content input {
 #buddypress {
   #whats-new-submit input[type="submit"].disabled {
     cursor: default;
-    color: #fff;
+    color: $white;
     background-color: #cecece;
   }
   .dir-list ul.item-list.albums-list > li {
@@ -11696,7 +11698,7 @@ body .bb-global-search-ac {
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-top: 0;
     padding: 0 30px;
-    background: #fff;
+    background: $white;
     max-height: 100%;
   }
   li.bbls-category {
@@ -11736,7 +11738,7 @@ body .bb-global-search-ac {
 
 .bb-global-search-ac.ui-menu .bbls-view_all_type-type a {
   &:hover:after {
-    color: #54ae68;
+    color: $green;
   }
   &:after {
     right: 30px;
@@ -11745,7 +11747,7 @@ body .bb-global-search-ac {
 
 body .bb-global-search-ac {
   li.bbls-category:hover a:after {
-    color: #54ae68;
+    color: $green;
   }
   &.ui-menu .ui-menu-item {
     &.ui-state-hover, &:hover {
@@ -11786,7 +11788,7 @@ body .bb-global-search-ac {
 
 .bboss_ajax_search_item .item .item-title {
   font-weight: 700;
-  color: #54ae68;
+  color: $green;
   font-size: 15px;
 }
 
@@ -11989,7 +11991,7 @@ body .bb-global-search-ac {
   border: 1px solid rgba(0, 0, 0, 0.1);
   margin-bottom: 24px;
   position: relative;
-  background-color: #fff;
+  background-color: $white;
 }
 
 .header-area:hover .formatted-box {
@@ -12041,7 +12043,7 @@ body {
   position: absolute;
   width: 100%;
   margin-left: 0;
-  background-color: #fff;
+  background-color: $white;
   height: auto;
   margin-top: -10px;
   z-index: 4;
@@ -12055,7 +12057,7 @@ body {
     position: absolute;
     width: 100%;
     margin-left: 0;
-    background-color: #fff;
+    background-color: $white;
     height: auto;
     margin-top: -10px;
     z-index: 4;
@@ -12574,7 +12576,7 @@ body.logged-in + #incom_wrapper .incom-comments-wrapper #respond .comment-form-c
   a {
     color: #CCC;
     &:hover {
-      color: #FFF;
+      color: $white;
     }
   }
 }
@@ -12615,7 +12617,7 @@ button {
   opacity: .65;
   filter: alpha(opacity = 65);
   padding: 0 0 18px 10px;
-  color: #FFF;
+  color: $white;
   font-style: normal;
   font-size: 28px;
   font-family: Arial,Baskerville,monospace;
@@ -12633,7 +12635,7 @@ button {
 }
 
 .mfp-iframe-holder .mfp-close, .mfp-image-holder .mfp-close {
-  color: #FFF;
+  color: $white;
   right: -6px;
   text-align: right;
   padding-right: 6px;
@@ -12694,7 +12696,7 @@ button {
 .mfp-arrow-left {
   left: 0;
   .mfp-a, &:after {
-    border-right: 17px solid #FFF;
+    border-right: 17px solid $white;
     margin-left: 31px;
   }
   .mfp-b, &:before {
@@ -12706,7 +12708,7 @@ button {
 .mfp-arrow-right {
   right: 0;
   .mfp-a, &:after {
-    border-left: 17px solid #FFF;
+    border-left: 17px solid $white;
     margin-left: 39px;
   }
   .mfp-b, &:before {
@@ -13035,7 +13037,7 @@ Message error
   line-height: 15px;
   margin-bottom: 27px;
   &.error p, p {
-    color: #fff;
+    color: $white;
     margin: 0;
   }
   a {
@@ -13047,7 +13049,7 @@ Message error
   }
   &.error {
     background: #e64c54;
-    color: #fff;
+    color: $white;
   }
 }
 
@@ -13263,7 +13265,7 @@ input#user_login {
 
 .popup-content .button:not(.ed_button), .wp-social-login-provider-list.wp-social-login-provider-list a {
   border-radius: 40px;
-  color: #fff;
+  color: $white;
   display: block;
   font-size: 14px;
   font-weight: 600;
@@ -13724,19 +13726,19 @@ body.register .page-full-width {
     margin: 15px;
   }
   &.growl-default {
-    color: #FFF;
+    color: $white;
     background: #7f8c8d;
   }
   &.growl-error {
-    color: #FFF;
+    color: $white;
     background: #C0392B;
   }
   &.growl-notice {
-    color: #FFF;
+    color: $white;
     background: #2ECC71;
   }
   &.growl-warning {
-    color: #FFF;
+    color: $white;
     background: #F39C12;
   }
   .growl-close {
@@ -13821,7 +13823,7 @@ body {
   }
   .selectionSharer a.action:before, #selectionSharerPopunder-inner a.action:before {
     content: ' ';
-    color: #fff;
+    color: $white;
     display: inline-block;
     font-size: 20px;
     font-family: FontAwesome;
@@ -16442,7 +16444,7 @@ body .fancybox-inner {
   top: 0;
   width: 32px;
   &:before {
-    color: #fff;
+    color: $white;
     content: "b";
     display: inline-block;
     font-family: "onesocial";
@@ -16512,14 +16514,14 @@ body .fancybox-inner {
 }
 
 .sap-container-wrapper .sap-story-publish {
-  background: #fff;
+  background: $white;
   border-top: 1px solid;
   box-sizing: border-box;
   float: none;
   font-size: 14px;
   padding: 12px 0 0;
   &:hover {
-    background: #fff;
+    background: $white;
     box-shadow: none;
   }
 }
@@ -16579,7 +16581,7 @@ a.liked {
   position: relative;
   vertical-align: top;
   &:before {
-    background-color: #fff;
+    background-color: $white;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 2px;
     content: "";
@@ -16619,7 +16621,7 @@ a.liked {
   line-height: 1.1;
   color: #9b9b9b;
   &:before {
-    background-color: #fff;
+    background-color: $white;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 2px;
     content: "";
@@ -16850,7 +16852,7 @@ body {
 /** Colored area **/
 
 .colored-area h3 {
-  color: #fff;
+  color: $white;
 }
 
 .page-template-homepage .diff-text {
@@ -16908,7 +16910,7 @@ body {
     }
     .entry-date {
       font-size: 14px;
-      background-color: #fff;
+      background-color: $white;
       display: inline-block;
       padding-right: 9px;
       time {
