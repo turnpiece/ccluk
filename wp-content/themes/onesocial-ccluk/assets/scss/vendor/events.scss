@@ -6,7 +6,7 @@
 
 	#wpmudevevents-wrapper {
 		div.wpmudevevents-buttons {
-			a.wpmudevevents-yes-submit, 
+			a.wpmudevevents-yes-submit,
 			a.wpmudevevents-maybe-submit,
 			a.wpmudevevents-no-submit,
 			input.wpmudevevents-yes-submit,
@@ -22,8 +22,8 @@
 		}
 
 		#wpmudevevents-rsvps {
-			#wpmudevevents-hide-rsvps, 
-			#wpmudevevents-load-rsvps, 
+			#wpmudevevents-hide-rsvps,
+			#wpmudevevents-load-rsvps,
 			a.wpmudevevents-login_link-cancel {
 				@include button();
 				@include padding( 0.3, 0.6 );
@@ -39,5 +39,4 @@
 			}
 		}
 	}
-
 }
