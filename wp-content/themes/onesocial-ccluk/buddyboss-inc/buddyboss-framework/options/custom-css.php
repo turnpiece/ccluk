@@ -90,7 +90,7 @@ if ( !function_exists( 'boss_generate_option_css' ) ) {
 			.bbp-topics ul.sticky div.bbp-topic-title-content:before,
 			.bbp-forum-content ul.sticky:before,
 			.bbp-forum-data .last-activity a:hover,
-			#onesocial-recommended-by .title, .bbp-forum-data .post-num,
+			.bbp-forum-data .post-num,
 			div.bbp-breadcrumb a:hover,
 			li.bbp-forum-info a.bbp-forum-title:before,
 			li.bbp-topic-title a.bbp-topic-permalink:before,
@@ -377,7 +377,7 @@ if ( !function_exists( 'boss_generate_option_css' ) ) {
 			.header-account-login .pop,
 			#whats-new-header:after,
 			a.to-top,
-			#onesocial-recommended-by:before, .bbp-forum-data:before {
+			.bbp-forum-data:before {
 				background-color: <?php echo $primary_color; ?>;
 			}
 
@@ -385,7 +385,7 @@ if ( !function_exists( 'boss_generate_option_css' ) ) {
 				border-bottom-color: <?php echo $primary_color; ?>;
 			}
 
-			#onesocial-recommended-by:after, .bbp-forum-data:after {
+			.bbp-forum-data:after {
 				border-color: transparent <?php echo $primary_color; ?>; transparent transparent;
 			}
 

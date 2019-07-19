@@ -94,6 +94,7 @@ This is the Mobile stylesheet, served to phones and tablets.
 ----------------------------------------------------------------*/
 
 @import "partials/variables";
+@import "partials/mixins";
 
 /*--------------------------------------------------------------
 1.0 - All mobile devices
@@ -153,7 +154,7 @@ body {
   &:not(.buddypress) #content article, &.buddypress #content article.error404 {
     clear: left;
     overflow: hidden;
-    background-color: #fff;
+    background-color: $white;
     padding: 15px 0;
     overflow: hidden;
     margin: 0;
@@ -165,7 +166,7 @@ body {
   nav.nav-single, #comments {
     clear: left;
     overflow: hidden;
-    background-color: #fff;
+    background-color: $white;
     padding: 15px 0;
     overflow: hidden;
     margin: 0;
@@ -176,7 +177,7 @@ body {
 .bp-legacy div#item-body {
   clear: left;
   overflow: hidden;
-  background-color: #fff;
+  background-color: $white;
   padding: 15px 0;
   overflow: hidden;
   margin: 0;
@@ -226,12 +227,6 @@ html.mfp-helper {
   display: none;
 }
 
-@media screen and (max-width: 782px) {
-  html.js {
-    margin-top: 0 !important;
-  }
-}
-
 .entry-header {
   margin-bottom: 15px;
 }
@@ -255,12 +250,12 @@ h1, h2, h3, h4, h5, h6 {
 
 input {
   &[type="text"], &[type="email"], &[type="password"], &[type="email"], &[type="number"] {
-    background-color: #fff;
+    background-color: $white;
   }
 }
 
 textarea {
-  background-color: #fff;
+  background-color: $white;
 }
 
 /*--------------------------------------------------------------
@@ -279,7 +274,6 @@ header#masthead {
 
 #mobile-header {
   height: 55px;
-  background-color: #54ae68;
   position: fixed;
   top: 0;
   right: 0;
@@ -296,9 +290,9 @@ header#masthead {
     text-overflow: ellipsis;
     white-space: nowrap;
     margin: 0 60px;
-    color: #fff;
+    color: $white;
     a {
-      color: #fff;
+      color: $white;
       text-decoration: none;
     }
   }
@@ -419,7 +413,7 @@ body .buddyboss-select {
   font-size: 13px;
   position: relative;
   margin: 0 10px 10px 0;
-  background-color: #fff;
+  background-color: $white;
   float: left;
   border: 1px solid rgba(0, 0, 0, 0.1);
   &:after {
@@ -523,13 +517,13 @@ body .buddyboss-select {
     }
     input {
       &[type="text"], &[type="password"], &[type="number"] {
-        background-color: #fff;
+        background-color: $white;
         height: auto;
         padding: 12px;
       }
     }
     textarea {
-      background-color: #fff;
+      background-color: $white;
       height: auto;
       padding: 12px;
     }
@@ -743,7 +737,7 @@ body {
     clear: left;
     margin: 0 0 15px;
     padding: 15px;
-    background-color: #fff;
+    background-color: $white;
     overflow: hidden;
   }
 }
@@ -860,7 +854,7 @@ body {
       padding: 2%;
       /*width: 95.5%;*/
       height: 75px !important;
-      background-color: #fff;
+      background-color: $white;
     }
     #whats-new-submit {
       float: none;
@@ -1025,7 +1019,7 @@ body.activity-permalink #buddypress .activity-list li .activity-content {
   }
   div#item-header div#item-header-content span.highlight {
     background-color: #77a076;
-    color: #fff;
+    color: $white;
     font-size: 12px;
     padding: 4px 7px;
     margin-right: 5px;
@@ -1230,7 +1224,7 @@ body.activity-permalink #buddypress ul#activity-stream {
   }
   a.bp-primary-action span, #reply-title small a span {
     background-color: #999;
-    color: #fff;
+    color: $white;
     margin-left: 2px;
     padding: 0 5px;
     -webkit-border-radius: 3px;
@@ -1239,7 +1233,7 @@ body.activity-permalink #buddypress ul#activity-stream {
   }
   a.bp-primary-action:hover span, #reply-title small a:hover span {
     background-color: #555;
-    color: #fff;
+    color: $white;
   }
   div.activity-comments {
     width: auto;
@@ -1324,7 +1318,7 @@ body.activity-permalink #buddypress .activity-list li.mini .activity-comments {
     }
     li form.ac-form {
       clear: both;
-      border-top: 2px solid #fff;
+      border-top: 2px solid $white;
     }
     form {
       &.ac-form {
@@ -1583,7 +1577,7 @@ body.activity-permalink #buddypress .activity-list li.mini .activity-comments {
   display: block;
   background-color: #54ae68;
   border: none;
-  color: #fff;
+  color: $white;
   cursor: pointer;
   font-size: 14px;
   font-weight: 600;
@@ -1601,7 +1595,7 @@ body.activity-permalink #buddypress .activity-list li.mini .activity-comments {
     display: block;
     background-color: #54ae68;
     border: none;
-    color: #fff;
+    color: $white;
     cursor: pointer;
     font-size: 14px;
     font-weight: 600;
@@ -1616,7 +1610,7 @@ body.activity-permalink #buddypress .activity-list li.mini .activity-comments {
 
 .button-load-more-posts:hover {
   outline: none;
-  color: #fff;
+  color: $white;
   text-decoration: none;
   /* Darken */
   -moz-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
@@ -1627,7 +1621,7 @@ body.activity-permalink #buddypress .activity-list li.mini .activity-comments {
 #buddypress .activity-list li {
   &.load-more a:hover, &.load-newest a:hover {
     outline: none;
-    color: #fff;
+    color: $white;
     text-decoration: none;
     /* Darken */
     -moz-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
@@ -1637,12 +1631,12 @@ body.activity-permalink #buddypress .activity-list li.mini .activity-comments {
 }
 
 .button-load-more-posts.loadig:after {
-  color: #fff;
+  color: $white;
 }
 
 #buddypress .activity-list li {
   &.load-more.loading a:after, &.load-newest.loading a:after {
-    color: #fff;
+    color: $white;
   }
 }
 
@@ -2218,7 +2212,7 @@ body.directory #buddypress ul.item-list li div.item-desc {
     -webkit-font-smoothing: antialiased;
     vertical-align: middle;
     text-align: center;
-    color: #fff;
+    color: $white;
   }
   &#activity-personal-li:before {
     font-family: 'FontAwesome';
@@ -3556,6 +3550,18 @@ body, .left-btn, .right-btn {
   /*z-index: 2;*/
   z-index: 2001;
   /*Increase due to cover image*/
+
+  #mobile-logo {
+    text-align: center;
+    img {
+      max-height: 40px;
+      max-width: 200px;
+      height: auto;
+      width: auto;
+      margin: 8px auto;
+      display: block;
+    }
+  }
 }
 
 #main-wrap {
@@ -3565,18 +3571,6 @@ body, .left-btn, .right-btn {
 #colophon {
   position: relative;
   z-index: 1;
-}
-
-#mobile-header #mobile-logo {
-  text-align: center;
-  img {
-    max-height: 40px;
-    max-width: 200px;
-    height: auto;
-    width: auto;
-    margin: 8px auto;
-    display: block;
-  }
 }
 
 /*--------------------------------------------------------------
@@ -3613,7 +3607,7 @@ body.open-left .left-btn {
   -webkit-font-smoothing: antialiased;
   font-size: 26px;
   line-height: 55px;
-  color: #fff;
+  color: $white;
   float: left;
 }
 
@@ -3659,12 +3653,12 @@ div#wpadminbar {
       padding: 8px 25px;
       line-height: 1.6;
       font-size: 15px;
-      color: #fff;
+      color: $white;
       text-decoration: none;
       display: block;
-      color: #fff;
+      color: $white;
       &:active, &:hover {
-        color: #fff;
+        color: $white;
       }
     }
   }
@@ -3767,7 +3761,7 @@ div#wpadminbar li#wp-admin-bar-mycred-account {
     margin-bottom: 5px;
   }
   .ab-item.ab-empty-item {
-    color: #fff;
+    color: $white;
     padding: 6px 25px;
   }
 }
@@ -3791,7 +3785,7 @@ div#wpadminbar li#wp-admin-bar-mycred-account {
   }
   div.ab-sub-wrapper li a span.count {
     background-color: #717176;
-    color: #fff;
+    color: $white;
     font-size: 12px;
     line-height: 1;
     padding: 1px 6px;
@@ -3804,7 +3798,7 @@ div#wpadminbar li#wp-admin-bar-mycred-account {
 
 .left-btn #ab-pending-notifications {
   background-color: #717176;
-  color: #fff;
+  color: $white;
   font-size: 12px;
   line-height: 1;
   padding: 1px 6px;
@@ -3869,7 +3863,7 @@ body.open-right .right-btn {
   font-size: 28px;
   line-height: 55px;
   margin-top: 2px;
-  color: #fff;
+  color: $white;
   float: right;
 }
 
@@ -4020,7 +4014,7 @@ body.open-right #mobile-right-panel {
       padding: 14px 25px;
       line-height: 1.6;
       font-size: 15px;
-      color: #fff;
+      color: $white;
       text-decoration: none;
       display: block;
       color: rgba(255, 255, 255, 0.75);
@@ -4555,7 +4549,7 @@ body.articles #buddypress ul.nav-tabs {
   font-weight: 400;
   font-size: 13px;
   text-decoration: none;
-  background-color: #fff;
+  background-color: $white;
   color: $blue;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -4814,80 +4808,111 @@ div.footer-inner-bottom .footer-inner {
 }
 
 @media screen and (min-width: 500px) {
-  #wp-calendar {
-    max-width: 500px;
-  }
-}
-
-@media screen and (max-width: 782px) {
-  html.js {
-    margin-top: 0 !important;
-  }
+    #wp-calendar {
+      max-width: 500px;
+    }
 }
 
 /*--------------------------------------------------------------
-1.2.4 - Create Group
+Responsive media queries (mobile styles)
 --------------------------------------------------------------*/
-@media screen and (max-width: 600px) {
-  .group-avatar #group-create-body {
-    .left-menu {
-      position: relative;
-      margin-bottom: 22px;
+
+@media screen and (min-width: 481px) and (max-width: 900px) {
+  div.footer-inner.widget-area {
+    -webkit-flex-flow: row wrap;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+  }
+  .footer-widget.footer-widget {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 50%;
+    -ms-flex: 1 1 50%;
+    flex: 1 1 50%;
+  }
+}
+
+@media screen and (max-width: 630px) {
+  #buddypress .dir-list ul.item-list > li {
+    width: 50%;
+  }
+  div.footer-inner.widget-area {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+  #header-aside-inner {
+    > .header-notifications {
+      display: none;
     }
-    .main-column {
-      margin-left: 0;
+    #all-notificatios + .header-button {
+      border-left: 1px solid rgba(0, 0, 0, 0.1);
     }
   }
 }
 
-/*--------------------------------------------------------------
-1.2.4 - Messages
---------------------------------------------------------------*/
-@media screen and (max-width: 620px) {
-  #buddypress table#message-threads tr td.thread-info {
-    width: 40%;
-  }
-  .bb-group-avatar-wrap-mobile.bb-group-avatar-wrap-mobile {
-    float: none;
-    text-align: center;
-    margin-right: 0;
-  }
-  #buddypress div#item-header div#item-meta {
-    text-shadow: 0 0 0;
-  }
-  #item-title-area h1, .single-item.groups #buddypress #item-header span.activity {
-    color: inherit;
-    text-shadow: 0 0 0;
-  }
-  .col.col {
-    clear: both;
-    width: 100%;
+@media screen and (min-width: 400px) and (max-width: 622px) {
+  .wp-social-login-provider-list a:before {
+    padding-right: 4%;
+    padding-left: 0;
   }
 }
 
 @media screen and (max-width: 480px) {
-  #message-threads .thread-from {
-    .table-cell {
-      width: 100%;
-      display: block;
-      text-align: center;
-      &:first-child {
-        width: 100%;
-        display: block;
-        text-align: center;
-      }
-    }
-    img {
-      margin: 0 0 10px 0;
-    }
-  }
-  .item-header-mobile {
-    margin-top: 40px;
+  .register.page .wp-social-login-provider-list.wp-social-login-provider-list a {
+    width: 100%;
   }
 }
 
-@media screen and (max-width: 360px) {
-  #leftcolumn {
-    margin-top: 15px;
-  }
+
+@import "partials/mobile";
+
+/*--------------------------------------------------------------
+MAXIMUM width of 1024 pixels (tablets)
+--------------------------------------------------------------*/
+@media screen and (max-width: 1024px) {
+
+	@import "partials/max-width-1024px";
+
+}
+
+
+/*--------------------------------------------------------------
+MAXIMUM width of 768 pixels (vertical tablets & large phones)
+--------------------------------------------------------------*/
+@media screen and (max-width: 768px) {
+
+	@import "partials/max-width-768px";
+
+}
+
+
+/*--------------------------------------------------------------
+MAXIMUM width of 520 pixels (large phones and smaller)
+--------------------------------------------------------------*/
+@media screen and (max-width: 520px) {
+
+	@import "partials/max-width-520px";
+
+}
+
+
+/*--------------------------------------------------------------
+MAXIMUM width of 480 pixels (phones)
+--------------------------------------------------------------*/
+@media screen and (max-width: 480px) {
+
+	@import "partials/max-width-480px";
+
+}
+
+
+/*--------------------------------------------------------------
+MAXIMUM width of 320 pixels (small phones)
+--------------------------------------------------------------*/
+@media screen and (max-width: 480px) {
+
+	@import "partials/max-width-320px";
+
 }

@@ -1,0 +1,221 @@
+/*--------------------------------------------------------------
+18.0 - BuddyPress User Blog
+--------------------------------------------------------------*/
+
+.boss-editor-area-wrapper {
+  margin: 0;
+  position: relative;
+}
+
+.boss-post-author-wrap .avatar {
+  border-radius: 100%;
+  float: left;
+  max-width: 49px;
+}
+
+.boss-greeting {
+  color: rgba(0, 0, 0, 0.3);
+  font-size: 18px;
+  transform: translateY(0);
+  transition: transform 0.15s ease 0s, opacity 0.15s ease 0s;
+}
+
+.boss-author-name {
+  font-size: 18px;
+  transform: translateY(0);
+  transition: transform 0.15s ease 0s, opacity 0.15s ease 0s;
+  margin: 0;
+  opacity: 0;
+  text-transform: capitalize;
+}
+
+.boss-create-post-container {
+  .boss-author-name {
+    opacity: 1;
+  }
+  .sap-editable-area {
+    position: relative;
+  }
+  .medium-insert-buttons {}
+}
+
+.boss-editor-area-container {
+  .medium-insert-buttons {}
+  max-height: 0;
+  opacity: 0;
+  transition: all 0.15s ease 0s;
+  > div {
+    display: none;
+  }
+}
+
+.isCollapsed {
+  .boss-author-name {
+    opacity: 1;
+    transform: translateY(-56px);
+  }
+  .boss-greeting {
+    transform: translateY(-36px);
+    opacity: 0;
+  }
+  .boss-editor-area-container {
+    margin-top: 30px;
+    max-height: 100%;
+    opacity: 1;
+    > div {
+      display: block;
+      width: 100%;
+    }
+  }
+}
+
+.boss-editor-area-container .sap-publish-popup {
+  border: 0;
+  display: block;
+  overflow: visible;
+  padding: 0;
+  width: 100%;
+}
+
+.boss-create-post-wrapper .sap-editor-publish-wrapper {
+  float: none;
+}
+
+.boss-editor-area-container {
+  .sap-publish-popup {
+    .buddyboss-select, .sap-story-publish {
+      width: auto;
+    }
+    .buddyboss-select {
+      /*border: 1px solid #e1e1e1;*/
+      margin: -5px 0 0;
+    }
+  }
+  .buddyboss-select-inner {
+    padding-left: 10px;
+    &:after {
+      border: 0;
+    }
+  }
+}
+
+.boss-author-info {
+  max-height: 50px;
+  overflow: hidden;
+  padding-left: 30px;
+  padding-top: 10px;
+}
+
+#content .boss-create-post-wrapper {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 70px;
+  min-height: 0;
+}
+
+.bp-user.blog #content .boss-create-post-wrapper {
+  padding-bottom: 60px;
+}
+
+.sap-editor-toolbar {
+  margin-bottom: 20px;
+  &.boss-create-post {
+    margin: 0;
+  }
+}
+
+.sap-editor-area-wrapper {
+  .sap-editable-title {
+    border: 0;
+    clear: both;
+    font-size: 30px;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    padding: 0;
+    position: relative;
+    &:focus {
+      /*border: 1px dashed rgba(0, 0, 0, 0.2);*/
+    }
+  }
+  .sap-editable-area:focus {
+    /*border: 1px dashed rgba(0, 0, 0, 0.2);*/
+  }
+  .sap-editable-title p:last-child, .sap-editable-area p:nth-last-child(2) {
+    margin-bottom: 0;
+  }
+}
+
+.boss-editor-area-container .sap-editor-area-wrapper {
+  .sap-editable-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  .sap-editable-area {
+    font-size: 15px;
+    margin-bottom: 10px;
+    padding: 5px 0;
+    position: relative;
+  }
+}
+
+.sap-editor-area-wrapper.sap-editor-area-wrapper .medium-editor-insert-plugin .medium-insert-buttons .medium-insert-buttons-show {
+  /*padding: 0 0 2px;*/
+}
+
+.boss-close-create-post {
+  color: #9b9b9b;
+  display: inline-block;
+  margin: 31px 20px 0;
+  &:hover {
+    color: #000;
+  }
+}
+
+.boss-create-post {
+  .buddyboss-select {
+    float: right;
+    position: relative;
+    top: 22px;
+  }
+  .sap-story-publish {
+    border-top: 1px solid;
+    padding-top: 20px;
+  }
+}
+
+.formatted-box {
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 24px;
+  position: relative;
+  background-color: $white;
+}
+
+.header-area:hover .formatted-box {
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+}
+
+.sap-blog-post-wrapper .header-area:hover .entry-post-thumbnail {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.formatted-content {
+  color: rgba(0, 0, 0, 0.3);
+  display: block;
+  font-size: 17px;
+  height: 100%;
+  left: 0;
+  line-height: 1.5;
+  overflow: auto;
+  padding: 35px 32px;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  p {
+    margin-bottom: 0;
+  }
+}
+
+.formatted-box img {
+  background: none;
+}

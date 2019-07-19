@@ -215,12 +215,6 @@ html.mfp-helper body {
   display: none;
 }
 
-@media screen and (max-width: 782px) {
-  html.js {
-    margin-top: 0 !important;
-  }
-}
-
 .entry-header {
   margin-bottom: 15px;
 }
@@ -260,7 +254,6 @@ header#masthead #header-aside, header#masthead #logo-area {
 --------------------------------------------------------------*/
 #mobile-header {
   height: 55px;
-  background-color: #54ae68;
   position: fixed;
   top: 0;
   right: 0;
@@ -3443,15 +3436,6 @@ body, .left-btn, .right-btn {
   /*Increase due to cover image*/
 }
 
-#main-wrap {
-  z-index: 2;
-}
-
-#colophon {
-  position: relative;
-  z-index: 1;
-}
-
 #mobile-header #mobile-logo {
   text-align: center;
 }
@@ -3463,6 +3447,15 @@ body, .left-btn, .right-btn {
   width: auto;
   margin: 8px auto;
   display: block;
+}
+
+#main-wrap {
+  z-index: 2;
+}
+
+#colophon {
+  position: relative;
+  z-index: 1;
 }
 
 /*--------------------------------------------------------------
@@ -4602,29 +4595,424 @@ div.footer-inner-bottom .footer-inner {
   }
 }
 
-@media screen and (max-width: 782px) {
+/*--------------------------------------------------------------
+Responsive media queries (mobile styles)
+--------------------------------------------------------------*/
+@media screen and (min-width: 481px) and (max-width: 900px) {
+  div.footer-inner.widget-area {
+    -webkit-flex-flow: row wrap;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+  }
+  .footer-widget.footer-widget {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 50%;
+    -ms-flex: 1 1 50%;
+    flex: 1 1 50%;
+  }
+}
+
+@media screen and (max-width: 630px) {
+  #buddypress .dir-list ul.item-list > li {
+    width: 50%;
+  }
+  div.footer-inner.widget-area {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+  #header-aside-inner > .header-notifications {
+    display: none;
+  }
+  #header-aside-inner #all-notificatios + .header-button {
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+  }
+}
+
+@media screen and (min-width: 400px) and (max-width: 622px) {
+  .wp-social-login-provider-list a:before {
+    padding-right: 4%;
+    padding-left: 0;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .register.page .wp-social-login-provider-list.wp-social-login-provider-list a {
+    width: 100%;
+  }
+}
+
+/*--------------------------------------------------------------
+Mobile Header
+--------------------------------------------------------------*/
+#mobile-header {
+  background-color: #fff !important;
+  padding-top: 8px;
+  height: 70px;
+}
+
+#mobile-header h1 {
+  color: #000;
+}
+
+#mobile-header h1 a {
+  color: #000;
+}
+
+#mobile-header .left-btn,
+#mobile-header .right-btn {
+  padding-top: 8px;
+}
+
+#mobile-header .left-btn:before,
+#mobile-header .right-btn:before {
+  color: #333;
+  font-size: 21px;
+}
+
+#mobile-header .left-btn {
+  left: 21px;
+}
+
+#mobile-header .right-btn {
+  right: 21px;
+}
+
+#mobile-header #mobile-logo img {
+  max-height: 70px;
+  max-width: 300px;
+  margin: 5px auto;
+}
+
+/*--------------------------------------------------------------
+Mobile Menu
+--------------------------------------------------------------*/
+#mobile-right-panel li {
+  width: 100%;
+}
+
+#mobile-right-panel li a {
+  color: #22a7f0;
+  font-weight: 700;
+}
+
+#mobile-right-panel li a:hover {
+  color: #54ae68;
+}
+
+#mobile-right-panel li.current-menu-item {
+  background-color: #fff;
+}
+
+#mobile-right-panel li.current-menu-item a {
+  color: #54ae68;
+}
+
+#mobile-right-panel .sub-menu li a {
+  font-weight: 400;
+  background: rgba(0, 0, 0, 0.9);
+  padding-left: 40px;
+}
+
+#mobile-right-panel .submenu-btn {
+  color: #22a7f0;
+  right: 20px;
+}
+
+#mobile-right-panel .submenu-btn:hover {
+  color: #54ae68;
+}
+
+/*--------------------------------------------------------------
+Is mobile
+--------------------------------------------------------------*/
+body.is-mobile.single #primary,
+body.is-mobile.single #secondary,
+body.is-mobile.single .site-content, body.is-mobile.archive #primary,
+body.is-mobile.archive #secondary,
+body.is-mobile.archive .site-content, body.is-mobile.page:not(.home-page) #primary,
+body.is-mobile.page:not(.home-page) #secondary,
+body.is-mobile.page:not(.home-page) .site-content, body.is-mobile.blog:not(.bp-user) #primary,
+body.is-mobile.blog:not(.bp-user) #secondary,
+body.is-mobile.blog:not(.bp-user) .site-content {
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+body.is-mobile.single.page.page-sidebar-active #secondary, body.is-mobile.archive.page.page-sidebar-active #secondary, body.is-mobile.page:not(.home-page).page.page-sidebar-active #secondary, body.is-mobile.blog:not(.bp-user).page.page-sidebar-active #secondary {
+  margin-top: 20px;
+  margin-top: 2rem;
+}
+
+body.is-mobile.single.page.page-sidebar-active #secondary .widget, body.is-mobile.archive.page.page-sidebar-active #secondary .widget, body.is-mobile.page:not(.home-page).page.page-sidebar-active #secondary .widget, body.is-mobile.blog:not(.bp-user).page.page-sidebar-active #secondary .widget {
+  margin-bottom: 30px;
+  margin-bottom: 3rem;
+}
+
+body.is-mobile #main-wrap {
+  padding-top: 70px;
+}
+
+/*--------------------------------------------------------------
+MAXIMUM width of 1024 pixels (tablets)
+--------------------------------------------------------------*/
+@media screen and (max-width: 1024px) {
+  body {
+    /*
+           .bb-group-avatar-wrap-mobile,
+           .bb-group-mobile-content {
+               display: block;
+           }
+
+           .bb-group-avatar-wrap-desktop {
+               display: none;
+           }
+       */
+  }
+  body .single-item.groups #buddypress .dir-list.group_members ul.item-list > li,
+  body .single #buddypress .dir-list ul.item-list > li,
+  body .bp-user #buddypress .dir-list ul.item-list > li,
+  body .page-right-sidebar #buddypress .dir-list ul.item-list > li {
+    width: 50%;
+  }
+  body #buddypress .dir-list ul.item-list > li {
+    width: 33.33333%;
+  }
+  body #buddypress #groups-directory-form .item-list-tabs {
+    max-width: 100%;
+  }
+  body .entry-content #buddypress #blogs-directory-form .item-list-tabs {
+    max-width: 100%;
+  }
+  body #buddypress #members-directory-form .item-list-tabs, body #buddypress .dir-search.boss-search-wrapper {
+    max-width: 100%;
+  }
+  body .single-item.groups #secondary {
+    margin-top: 0;
+  }
+  body div.footer-inner-bottom .footer-inner {
+    -webkit-flex-flow: column nowrap;
+    -ms-flex-flow: column nowrap;
+    flex-flow: column nowrap;
+  }
+  body .item-header-mobile {
+    display: block;
+  }
+  body .item-header-sidebar {
+    display: none;
+  }
+  body .bb-group-avatar-wrap-mobile.bb-group-avatar-wrap-mobile {
+    /*        margin-top: 80px;*/
+    margin-right: 30px;
+    float: left;
+  }
+  body .groups .bb-group-avatar-wrap-mobile div#item-header-avatar {
+    margin-right: 20px;
+    width: auto;
+  }
+  body .bb-group-avatar-wrap-mobile #item-header-content {
+    padding-top: 120px;
+    position: relative;
+  }
+  body .single-item.groups .bb-group-avatar-wrap-mobile + #item-header {
+    margin-top: 0;
+  }
+  body .single-item #buddypress #item-title-area {
+    display: block;
+    height: auto;
+  }
+  body .single-item.groups #buddypress #item-nav {
+    clear: both;
+  }
+  body .boss-group-header #item-actions::after {
+    clear: both;
+    content: "";
+    display: table;
+  }
+  body #buddypress div#item-header .group-admin-name {
+    color: inherit;
+    text-shadow: 0 0 0;
+  }
+  body .boss-group-header .group-header-content {
+    max-height: 160px;
+  }
+  body #item-title-area h1 {
+    font-size: 26px;
+    margin: 0;
+  }
+  body #item-title-area .group-header-wrap {
+    /*        display: -webkit-box;
+                 display: -webkit-flex;
+                 display: -ms-flexbox;
+                 display: flex;*/
+  }
+  body .bb-group-mobile-content {
+    display: block;
+    overflow: hidden;
+  }
+  body .boss-group-header .group-header-content {
+    margin-top: 80px;
+    margin-bottom: 20px;
+  }
+  body .bb-group-mobile-content {
+    width: -moz-calc(100% - 221px);
+    width: -webkit-calc(100% - 221px);
+    width: -o-calc(100% - 221px);
+    width: calc(100% - 221px);
+    float: right;
+  }
+  body .boss-group-header .group-header-content {
+    width: -moz-calc(100% - 221px);
+    width: -webkit-calc(100% - 221px);
+    width: -o-calc(100% - 221px);
+    width: calc(100% - 221px);
+    float: right;
+  }
+  body .boss-group-header .group-header-content h1 {
+    width: 100%;
+  }
+  body .boss-group-header #item-actions {
+    overflow: hidden;
+    width: 100%;
+  }
+  body .bb-group-avatar-wrap-mobile.bb-group-avatar-wrap-mobile {
+    display: block;
+    margin-top: 80px;
+  }
+  body .entry-title,
+  body h2 {
+    font-size: 24px;
+  }
+  body.page #secondary.widget-area {
+    margin: 20px auto;
+    margin: 2rem auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: flex-start;
+  }
+  body.page #secondary.widget-area .widget {
+    width: 320px;
+    padding: 0 15px;
+    border-bottom: none;
+  }
+  body.page.buddypress #buddypress .item-header-mobile {
+    display: block;
+  }
+  body.page.buddypress #buddypress .item-header-sidebar {
+    display: none;
+  }
+  body.register div#register-page p {
+    font-size: 15px;
+  }
+  body.single #primary,
+  body.single #secondary,
+  body.single .site-content, body.archive #primary,
+  body.archive #secondary,
+  body.archive .site-content, body.page:not(.home-page) #primary,
+  body.page:not(.home-page) #secondary,
+  body.page:not(.home-page) .site-content, body.blog:not(.bp-user) #primary,
+  body.blog:not(.bp-user) #secondary,
+  body.blog:not(.bp-user) .site-content {
+    max-width: 750px;
+    margin: 0 auto;
+  }
+  body.single.page.page-sidebar-active #secondary, body.archive.page.page-sidebar-active #secondary, body.page:not(.home-page).page.page-sidebar-active #secondary, body.blog:not(.bp-user).page.page-sidebar-active #secondary {
+    margin-top: 20px;
+    margin-top: 2rem;
+  }
+  body.single.page.page-sidebar-active #secondary .widget, body.archive.page.page-sidebar-active #secondary .widget, body.page:not(.home-page).page.page-sidebar-active #secondary .widget, body.blog:not(.bp-user).page.page-sidebar-active #secondary .widget {
+    margin-bottom: 30px;
+    margin-bottom: 3rem;
+  }
+  body #main-wrap {
+    padding-top: 70px;
+  }
+  #secondary.widget-area {
+    border-left: none;
+  }
+  .bb-has-sidebar #main {
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+  .sidebar-left #main, .sidebar-left .search-content-wrap, .sidebar-left .buddypress-content-wrap {
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+  .search-content-wrap, .buddypress-content-wrap {
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+  .bb-has-sidebar .search-content, .bb-has-sidebar .buddypress-content {
+    max-width: 100%;
+  }
+  #secondary {
+    width: 100%;
+    margin: 0;
+    max-width: 100%;
+  }
+  .sidebar-left #secondary, .sidebar-right #secondary {
+    margin: 0;
+  }
+  .site-content #secondary {
+    padding: 0;
+  }
+  .bb-has-sidebar #trigger-sidebar {
+    display: none;
+  }
+  .home-inner-wrap #secondary {
+    display: block !important;
+  }
+  .blog:not(.bp-user) .site-content {
+    max-width: 100%;
+  }
+  .archive.tag .site-content, .archive.date .site-content, .archive.author .site-content, .archive.category .site-content {
+    max-width: 100%;
+  }
+  #buddypress #whats-new-header-content {
+    max-width: 560px;
+  }
+}
+
+/*--------------------------------------------------------------
+MAXIMUM width of 768 pixels (vertical tablets & large phones)
+--------------------------------------------------------------*/
+@media screen and (max-width: 768px) {
+  body.page-template-homepage #main .section.banner {
+    min-height: 260px;
+  }
+  body.page-template-homepage #main .section.banner.text-left .section-content, body.page-template-homepage #main .section.banner.text-right .section-content {
+    display: none;
+  }
+  body.page-template-homepage #main .section.banner.text-left .section-title-container, body.page-template-homepage #main .section.banner.text-right .section-title-container {
+    width: 100%;
+    min-height: auto;
+    float: none;
+  }
+  body.page-template-homepage #main .section.banner.text-left .section-title-container > .section-title, body.page-template-homepage #main .section.banner.text-right .section-title-container > .section-title {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  body.page-template-homepage #main .section.banner.text-left .section-title-container > .section-title h2,
+  body.page-template-homepage #main .section.banner.text-left .section-title-container > .section-title p, body.page-template-homepage #main .section.banner.text-right .section-title-container > .section-title h2,
+  body.page-template-homepage #main .section.banner.text-right .section-title-container > .section-title p {
+    text-align: center;
+  }
   html.js {
     margin-top: 0 !important;
   }
-}
-
-/*--------------------------------------------------------------
-1.2.4 - Create Group
---------------------------------------------------------------*/
-@media screen and (max-width: 600px) {
-  .group-avatar #group-create-body .left-menu {
-    position: relative;
-    margin-bottom: 22px;
+  #message-threads .thread-options {
+    width: 12%;
   }
-  .group-avatar #group-create-body .main-column {
-    margin-left: 0;
+  #message-threads .thread-from {
+    width: 35%;
   }
-}
-
-/*--------------------------------------------------------------
-1.2.4 - Messages
---------------------------------------------------------------*/
-@media screen and (max-width: 620px) {
   #buddypress table#message-threads tr td.thread-info {
     width: 40%;
   }
@@ -4644,9 +5032,106 @@ div.footer-inner-bottom .footer-inner {
     clear: both;
     width: 100%;
   }
+  .bp-user-blog #header-aside-inner > .header-notifications {
+    display: none;
+  }
 }
 
+/*--------------------------------------------------------------
+MAXIMUM width of 520 pixels (large phones and smaller)
+--------------------------------------------------------------*/
+@media screen and (max-width: 520px) {
+  .single-ccluk_news .entry-header.has-image h1 {
+    font-size: 36px;
+    max-height: 200px;
+    overflow: auto;
+    padding: 0;
+  }
+  .post-author-info .author-follow {
+    right: 0;
+  }
+  .dir-header {
+    font-size: 36px;
+  }
+  .single-item.groups #buddypress #item-header span.activity {
+    text-shadow: none;
+  }
+  .bb-has-sidebar #buddypress .dir-list.mygroups ul.item-list > li, .single-item.groups #buddypress .dir-list.group_members ul.item-list > li, .single #buddypress .dir-list ul.item-list > li, .bp-user #buddypress .dir-list ul.item-list > li, .page-right-sidebar #buddypress .dir-list ul.item-list > li {
+    width: 100%;
+  }
+  /*
+    .single-post .entry-post-thumbnail {
+        height: 340px;
+    }
+*/
+  .single-post .entry-header.has-image h1 {
+    font-size: 35px;
+  }
+  body.buddypress #buddypress ul.item-list li .activity-avatar div {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  body.buddypress .group-avatar #group-create-body .left-menu {
+    position: relative;
+    margin-bottom: 22px;
+  }
+  body.buddypress .group-avatar #group-create-body .main-column {
+    margin-left: 0;
+  }
+  body.page-template-homepage #main .section.banner.background-box .section-title-container {
+    padding: 20px;
+  }
+  body.page-template-homepage #main .section.banner.background-box .section-title-container .section-title h2 {
+    font-size: 24px;
+  }
+  body.page-template-homepage #main .section.banner.background-box .section-title-container .section-title p {
+    font-size: 15px;
+  }
+  .site .buddyboss-media-photos-wrap-container {
+    max-width: 400px;
+  }
+}
+
+/*--------------------------------------------------------------
+MAXIMUM width of 480 pixels (phones)
+--------------------------------------------------------------*/
 @media screen and (max-width: 480px) {
+  body {
+    background-color: #fff;
+  }
+  body.single-ccluk_news .entry-header.has-image h1 {
+    font-size: 24px;
+  }
+  body.archive .listing .article-outher .post-author {
+    display: none;
+  }
+  body #mobile-header #mobile-logo img {
+    max-height: 44px;
+    max-width: 200px;
+    margin: 10px auto;
+  }
+  body #mobile-header .right-btn:before {
+    font-size: 15px;
+  }
+  body .bb-slider-container {
+    top: 0;
+    margin-bottom: 0;
+  }
+  body .bb-slider-container .title {
+    font-size: 21px !important;
+  }
+  body h1, body h2, body h3, body h4, body h5, body h6 {
+    color: inherit;
+  }
+  body a.cta {
+    padding-right: 68px;
+    padding-right: 6.8rem;
+  }
+  body .entry-content blockquote img {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+  }
   #message-threads .thread-from .table-cell {
     width: 100%;
     display: block;
@@ -4663,9 +5148,47 @@ div.footer-inner-bottom .footer-inner {
   .item-header-mobile {
     margin-top: 40px;
   }
+  #buddypress .dir-form div.item-list-tabs ul li a span,
+  #buddypress div#subnav.item-list-tabs ul li a span,
+  #buddypress div:not(#item-nav) > .item-list-tabs ul li a span,
+  #buddypress > div[role=navigation].item-list-tabs ul li a span,
+  .bp-legacy div#item-body div.item-list-tabs ul li a span {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+  }
+  #buddypress .dir-list ul.item-list > li {
+    width: 100%;
+  }
+  body.admin-bar.admin-bar.admin-bar {
+    margin-top: 0 !important;
+  }
+  #item-title-area .group-header-wrap {
+    display: block;
+  }
+  .bb-cover-photo {
+    height: 280px;
+  }
+  .single-item.groups #buddypress #item-header span.activity, #item-title-area h1 {
+    color: inherit;
+    text-shadow: 0 0 0;
+  }
+  .bb-group-avatar-wrap-mobile.bb-group-avatar-wrap-mobile {
+    margin-bottom: 10px;
+    margin-right: 0;
+  }
+  .boss-group-header .group-header-content {
+    max-height: none;
+  }
 }
 
-@media screen and (max-width: 360px) {
+/*--------------------------------------------------------------
+MAXIMUM width of 320 pixels (small phones)
+--------------------------------------------------------------*/
+@media screen and (max-width: 480px) {
+  #mobile-header #mobile-logo img {
+    max-width: 200px;
+  }
   #leftcolumn {
     margin-top: 15px;
   }

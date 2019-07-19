@@ -148,8 +148,8 @@ function buddyboss_onesocial_scripts_styles() {
 		wp_enqueue_style( 'fontawesome' );
 	}
 
-	$css_dest = ( is_rtl() ) ? '/css-rtl' : '/css';
-	$css_compressed_dest = ( is_rtl() ) ? '/css-rtl-compressed' : '/css-compressed';
+	$css_dest = '/css';
+	$css_compressed_dest = '/css-compressed';
 	$assets_dir = get_stylesheet_directory_uri() . '/assets';
 
 	$CSS_URL = $assets_dir . ( onesocial_get_option( 'boss_minified_css' ) && !CCLUK_DEBUGGING ? $css_compressed_dest : $css_dest );

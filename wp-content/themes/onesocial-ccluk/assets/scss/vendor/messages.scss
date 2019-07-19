@@ -1,0 +1,257 @@
+/*--------------------------------------------------------------
+Private Messaging Threads
+--------------------------------------------------------------*/
+
+#messages-layout {
+  float: right;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 0;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0;
+  min-width: 1px;
+  /* Firefox-34-ignoring-max-width-for-flexbox */
+  width: calc(100% - 200px);
+  /* IE11 */
+  #pag-bottom {
+    padding-bottom: 0;
+  }
+}
+
+.single #messages-layout {
+  margin-bottom: 60px;
+}
+
+#messages-bulk-management {
+  margin-bottom: 40px;
+}
+
+.messages-container {
+  @include display-flex( stretch, flex-start );
+  @include flex-row-wrap();
+}
+
+#leftcolumn {
+  float: left;
+  width: 200px;
+  position: relative;
+  padding-right: 30px;
+}
+
+#buddypress .messages #message.info {
+  margin-top: 60px;
+}
+
+#messages-layout #message.info {
+  float: left;
+  width: 100%;
+}
+
+#send_message_form ul.acfb-holder li {
+  float: none;
+  margin: 0 0 20px;
+}
+
+ul.acfb-holder li.friend-tab {
+  margin-top: 7px;
+}
+
+#send_message_form {
+  textarea, input[type="text"] {
+    margin-bottom: 60px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+  }
+}
+
+#message-subject {
+  margin-top: 0;
+}
+
+.notices #buddypress table#message-threads tr td:last-child {
+  text-align: right;
+  vertical-align: top;
+}
+
+.thread-star .bp-screen-reader-text {
+  display: none;
+}
+
+/* CSS only for Firefox */
+@-moz-document url-prefix() {
+  #buddypress table#message-threads tr.unread td {
+    border: 0 !important;
+  }
+  #message-threads .unread {
+    position: relative;
+    + .unread:after {
+      border-top: 0;
+    }
+    &:after {
+      border: 2px solid #e1e1e1;
+      content: "";
+      height: 100%;
+      left: 36px;
+      position: absolute;
+      width: calc(100% - 36px);
+    }
+  }
+  @media screen and (max-width: 321px) {
+    #message-threads .unread:after {
+      left: 24px;
+      width: calc(100% - 24px);
+    }
+  }
+  #buddypress table#message-threads tr.unread td {
+    * {
+      position: relative;
+      z-index: 5;
+    }
+    &.thread-from {
+      &:before, &:after {
+        z-index: 5;
+      }
+    }
+  }
+}
+
+body #buddypress table#message-threads tr td:first-child {
+  border-top: none;
+  border-bottom: none;
+  background-color: transparent;
+}
+
+#message-threads .thread-checkbox {
+  text-align: left;
+  width: 38px;
+}
+
+#buddypress table#message-threads .thread-from {
+  text-align: left;
+  width: 25%;
+  position: relative;
+  font-size: 14px;
+  padding-right: 5px;
+}
+
+#message-threads {
+  .thread-from .table-cell {
+    &:first-child {
+      width: 65px;
+    }
+    &:nth-child(2) {
+      line-height: 1.2;
+    }
+  }
+  .read .thread-from:before {
+    /* content: ''; */
+    height: 100%;
+    width: 2px;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.1);
+    top: 0;
+    left: 35px;
+  }
+  .thread-from img {
+    vertical-align: middle;
+    border-radius: 45px;
+    width: 45px;
+    height: 45px;
+    border: 3px solid #ebebeb;
+    display: inline-block;
+    margin-right: 16px;
+    position: relative;
+    z-index: 1;
+  }
+  .thread-options {
+    text-align: left;
+    width: 14%;
+    span {
+      color: #333;
+      font-weight: 800;
+    }
+  }
+}
+
+.message-action-star span.icon:before {
+  content: "\f154";
+}
+
+.message-action-unstar span.icon:before {
+  content: "\f155";
+}
+
+.message-action-star span.icon:before, .message-action-unstar span.icon:before {
+  font-family: dashicons;
+  font-size: 16px;
+}
+
+#buddypress div#message-thread img.avatar {
+  float: left;
+  margin: 0 10px 0 0;
+  vertical-align: middle;
+  box-shadow: none;
+}
+
+.thread-checkbox .bp-screen-reader-text, #buddypress div.message-search label {
+  display: none;
+}
+
+.messages #content {
+  /* margin-top: 20px; */
+}
+
+#buddypress div.messages-options-nav {
+  float: left;
+  margin: 0 0 25px;
+  text-align: right;
+}
+
+#delete_drafts_messages, #messages-bulk-manage {
+  border: 0;
+  color: white;
+  font-size: 12px;
+  padding: 6px 10px;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+/* Notices */
+
+.my-messages.notices {
+  #buddypress #message-threads {
+    tr:first-child td {
+      padding-top: 0;
+    }
+    &.messages-notices tr td:nth-child(1) {
+      display: none;
+    }
+    td:nth-child(2) {
+      width: 36% !important;
+      padding-left: 0;
+    }
+  }
+  #message-threads {
+    &:not(.messages-notices) td:nth-child(3) {
+      width: 19% !important;
+    }
+    td:nth-child(4) {
+      width: 14% !important;
+      text-align: right;
+      a {
+        display: inline-block;
+        &:first-child {
+          margin-bottom: 2px;
+        }
+      }
+    }
+  }
+}
+
+div.message-metadata .message-star-actions {
+  display: inline-block;
+  float: right;
+}
+
+.starred #contentcolumn > h3 {
+  display: none;
+}

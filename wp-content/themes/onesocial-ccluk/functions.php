@@ -137,14 +137,20 @@ function ccluk_theme_scripts_styles()
    * http://codex.wordpress.org/Function_Reference/wp_deregister_style
    **/
 
+   $css = get_stylesheet_directory_uri() . '/assets/' . ( CCLUK_DEBUGGING ? 'css' : 'css-compressed' );
+
   /*
    * Styles
    *
    * need to ensure this stylesheet loads after the parent stylesheets
    *
    */
-   wp_enqueue_style( 'ccluk-custom', get_stylesheet_directory_uri() . '/assets/css/custom.'.(CCLUK_DEBUGGING ? '' : 'min.').'css', array( 'onesocial-main-global' ) );
+   wp_enqueue_style( 'ccluk-custom', $css.'/custom.css', array( 'onesocial-main-global' ) );
 
+   if (is_user_logged_in()) {
+       wp_enqueue_style( 'ccluk-members', $css.'/members.css', array( 'ccluk-custom' ) );
+   }
+    
   /*
    * Scripts
    *

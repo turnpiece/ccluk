@@ -5,7 +5,6 @@
 @import "partials/variables";
 @import "partials/mixins";
 @import "partials/general";
-@import "partials/mobile";
 @import "partials/navigation";
 @import "partials/single";
 @import "partials/page";
@@ -18,65 +17,8 @@
 
 /** Styles for plugins etc. **/
 
-@import "vendor/visual-composer";
-@import "vendor/buddypress";
-@import "vendor/bbpress";
 @import "vendor/events";
 @import "vendor/give";
-
-
-/*--------------------------------------------------------------
-Responsive media queries (mobile styles)
---------------------------------------------------------------*/
-
-/*--------------------------------------------------------------
-MAXIMUM width of 1024 pixels (tablets)
---------------------------------------------------------------*/
-@media screen and (max-width: 1024px) {
-
-	@import "partials/max-width-1024px";
-
-}
-
-
-/*--------------------------------------------------------------
-MAXIMUM width of 768 pixels (vertical tablets & large phones)
---------------------------------------------------------------*/
-@media screen and (max-width: 768px) {
-
-	@import "partials/max-width-768px";
-
-}
-
-
-/*--------------------------------------------------------------
-MAXIMUM width of 520 pixels (large phones and smaller)
---------------------------------------------------------------*/
-@media screen and (max-width: 520px) {
-
-	@import "partials/max-width-520px";
-
-}
-
-
-/*--------------------------------------------------------------
-MAXIMUM width of 480 pixels (phones)
---------------------------------------------------------------*/
-@media screen and (max-width: 480px) {
-
-	@import "partials/max-width-480px";
-
-}
-
-
-/*--------------------------------------------------------------
-MAXIMUM width of 320 pixels (small phones)
---------------------------------------------------------------*/
-@media screen and (max-width: 480px) {
-
-	@import "partials/max-width-320px";
-
-}
 
 
 /*--------------------------------------------------------------

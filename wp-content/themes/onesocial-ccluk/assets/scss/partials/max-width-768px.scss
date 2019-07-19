@@ -1,5 +1,6 @@
  body {
-    &.page-template-homepage {
+
+     &.page-template-homepage {
         #main {
             .section.banner {
                 min-height: 260px;
@@ -27,6 +28,10 @@
     }
 }
 
+html.js {
+  margin-top: 0 !important;
+}
+
 #message-threads {
   .thread-options {
     width: 12%;
@@ -34,4 +39,28 @@
   .thread-from {
     width: 35%;
   }
+}
+
+#buddypress table#message-threads tr td.thread-info {
+  width: 40%;
+}
+.bb-group-avatar-wrap-mobile.bb-group-avatar-wrap-mobile {
+  float: none;
+  text-align: center;
+  margin-right: 0;
+}
+#buddypress div#item-header div#item-meta {
+  text-shadow: 0 0 0;
+}
+#item-title-area h1, .single-item.groups #buddypress #item-header span.activity {
+  color: inherit;
+  text-shadow: 0 0 0;
+}
+.col.col {
+  clear: both;
+  width: 100%;
+}
+
+.bp-user-blog #header-aside-inner > .header-notifications {
+  display: none;
 }
