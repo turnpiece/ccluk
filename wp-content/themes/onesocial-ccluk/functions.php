@@ -413,7 +413,7 @@ add_action( 'bp_before_registration_submit_buttons', function() {
         <a href="/privacy-policy"><?php _e( 'We respect your privacy.', 'onesocial' ) ?></a>
     </p>
 <?php } );
-
+/*
 // remove wordpress authentication
 remove_filter( 'authenticate', 'wp_authenticate_username_password', 20 );
 add_filter( 'authenticate', 'ccluk_authenticate', 10, 3 );
@@ -459,3 +459,4 @@ function ccluk_authenticate($user, $email, $password){
         }
     }
 }
+*/
