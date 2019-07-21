@@ -4918,6 +4918,246 @@ form#places-form #new-place-content input[type="text"], form#places-form #new-pl
   box-shadow: none;
 }
 
+.boss-modal-close .fa:before {
+  content: "b";
+  font-family: 'onesocial';
+  opacity: 0.6;
+}
+
+.popup-content {
+  background: transparent;
+  margin: 0 auto;
+  max-width: 620px;
+  padding: 20px;
+}
+
+.popup-content .row {
+  margin: 0;
+}
+
+.modal-with-social-login #siteRegisterBox-step-2, .modal-without-social-login {
+  margin: 0 auto;
+  max-width: 400px;
+}
+
+.col.with-plugin {
+  padding-right: 60px;
+}
+
+.col.with-email {
+  float: right;
+}
+
+.boss-modal-form .with-email {
+  text-align: left;
+}
+
+.editfield.bwe-username {
+  margin-top: -8px;
+}
+
+.boss-modal-form.popup-content .popup_title {
+  background-color: transparent;
+  border-bottom: 0;
+  font-size: 24px;
+  line-height: 1;
+  margin: 0 0 12px;
+  padding: 15px 30px;
+  text-align: center;
+}
+
+.boss-modal-form.popup-content .title {
+  margin-bottom: 40px;
+  letter-spacing: 1px;
+}
+
+.boss-modal-form .info {
+  margin-bottom: 40px;
+  color: #999;
+  font-size: 15px;
+}
+
+input#user_login {
+  margin-top: 0;
+}
+
+.popup-content .description {
+  color: #9b9b9b;
+  font-size: 18px;
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+.boss-modal-form .field-visibility-settings ul {
+  list-style: none;
+}
+
+.boss-modal-form .wp-social-login-provider-list {
+  padding: 0;
+}
+
+.boss-modal-form .field-visibility-settings .field-visibility-text {
+  font-size: 14px;
+}
+
+.boss-modal-form a.field-visibility-settings-close {
+  display: inline-block;
+  margin-bottom: 30px;
+}
+
+.boss-modal-form .field_type_checkbox > div.checkbox {
+  margin-bottom: 20px;
+}
+
+.boss-modal-form .field_type_radio label strong, .boss-modal-form .field_type_checkbox label strong {
+  margin-right: 10px;
+}
+
+.boss-modal-form a.clear-value {
+  display: inline-block;
+  margin: 20px 0;
+}
+
+.popup-content input:not([type="checkbox"]):not([type="radio"]):not([type="button"]), .popup-content .input:not([type="checkbox"]):not([type="radio"]):not([type="button"]) {
+  background: transparent;
+  border-color: rgba(0, 0, 0, 0.1);
+  border-width: 0 0 1px;
+  box-sizing: border-box;
+  font-size: 14px;
+  height: auto;
+  margin-bottom: 20px;
+  margin-top: 5px;
+  padding: 10px 0 15px;
+  width: 100%;
+}
+
+.popup-content .editfield:not(.field_type_datebox) .buddyboss-select {
+  width: 100%;
+}
+
+.boss-modal-form.popup-content label {
+  font-size: 16px;
+  color: #333;
+  display: block;
+  font-weight: 600;
+  margin: 0;
+}
+
+.boss-modal-form.popup-content .password-wrap {
+  margin-bottom: 25px;
+}
+
+#frm_siteRegisterBox .editfield p {
+  color: #ccc;
+}
+
+#frm_siteRegisterBox .editfield .description {
+  text-align: left;
+  font-size: 14px;
+  color: #333;
+  margin-top: -15px;
+}
+
+.popup-content .input::-webkit-input-placeholder {
+  color: #9b9b9b;
+}
+
+.popup-content .input:-moz-placeholder {
+  /* Firefox 18- */
+  color: #9b9b9b;
+}
+
+.popup-content .input::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #9b9b9b;
+}
+
+.popup-content .input:-ms-input-placeholder {
+  text-transform: uppercase;
+  font-size: 13px;
+  color: #9b9b9b;
+}
+
+.popup-content .email-wrap, .popup-content .password-wrap, .popup-content .username-wrap {
+  position: relative;
+}
+
+.popup-content .options-wrap {
+  overflow: hidden;
+}
+
+.popup-content .email-wrap, .popup-content .username-wrap, .popup-content .password-wrap {
+  margin-bottom: 15px;
+}
+
+.popup-content .submit button:not(#searchsubmit):not(.update-cover-photo) {
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+
+.boss-modal-form .wp-social-login-provider-list {
+  display: block;
+}
+
+.popup-content .button:not(.ed_button), .wp-social-login-provider-list.wp-social-login-provider-list a {
+  border-radius: 40px;
+  color: #fff;
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  padding: 12px 3px;
+  text-align: center;
+  text-transform: uppercase;
+  width: 100%;
+}
+
+.register.page .wp-social-login-provider-list.wp-social-login-provider-list a {
+  display: inline-block;
+  padding: 12px 20px;
+  width: auto;
+}
+
+.boss-modal-form .button.ed_button {
+  width: auto;
+}
+
+.datebox {
+  -webkit-box-align: end;
+  -webkit-align-items: flex-end;
+  -ms-flex-align: end;
+  align-items: flex-end;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.datebox .buddyboss-select:first-child, .datebox .buddyboss-select:nth-child(2) {
+  margin-right: 15px;
+}
+
+.popup-content .wp-editor-wrap, .popup-content .datebox {
+  display: block;
+  margin-bottom: 15px;
+}
+
+p.description:empty {
+  display: none;
+}
+
+.boss-modal-form.popup-content .datebox label {
+  margin-bottom: 15px;
+}
+
+.boss-modal-form.popup-content .datebox select {
+  margin: 0 25px 0 0;
+}
+
+.boss-modal-form.popup-content .datebox select:last-child {
+  margin: 0;
+}
+
 .wp-social-login-provider-list a:before {
   display: inline-block;
   font-family: "FontAwesome";
@@ -5104,6 +5344,18 @@ form#places-form #new-place-content input[type="text"], form#places-form #new-pl
   background: #2e9fff;
 }
 
+.wp-social-login-provider-facebook {
+  background-color: #3b5998;
+}
+
+.wp-social-login-provider-google {
+  background-color: #d34836;
+}
+
+.wp-social-login-provider-twitter {
+  background-color: #55acee;
+}
+
 .wp-social-login-provider-list {
   padding: 0;
 }
@@ -5121,18 +5373,6 @@ form#places-form #new-place-content input[type="text"], form#places-form #new-pl
   font-size: 14px;
   text-transform: none;
   font-weight: 300;
-}
-
-.wp-social-login-provider-facebook {
-  background-color: #3b5998;
-}
-
-.wp-social-login-provider-google {
-  background-color: #d34836;
-}
-
-.wp-social-login-provider-twitter {
-  background-color: #55acee;
 }
 
 .popup-content .login-message {
