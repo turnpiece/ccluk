@@ -28,7 +28,7 @@ if ( !is_user_logged_in() ) {
 } else {
 
 	$user_link = function_exists( 'bp_core_get_user_domain' ) ? bp_core_get_user_domain( get_current_user_id() ) : '#';
-    
+
     if(function_exists( 'is_buddypress' )) {
 	?>
 	<div class="header-account-login header-button">
@@ -39,10 +39,10 @@ if ( !is_user_logged_in() ) {
 
 		<div class="pop">
 			<?php
-			if ( onesocial_get_option( 'boss_dashboard' ) && ( current_user_can( 'level_10' ) || ( function_exists( 'bp_get_member_type' ) && bp_get_member_type( get_current_user_id() )) == 'teacher' || ( function_exists( 'bp_get_member_type' ) && bp_get_member_type( get_current_user_id() )) == 'group_leader') ) {
+			if ( onesocial_get_option( 'boss_dashboard' ) && ( current_user_can( 'edit_posts' ) || ( function_exists( 'bp_get_member_type' ) && bp_get_member_type( get_current_user_id() )) == 'teacher' || ( function_exists( 'bp_get_member_type' ) && bp_get_member_type( get_current_user_id() )) == 'group_leader') ) {
 				get_template_part( 'template-parts/header-dashboard-links' );
 			}
-			
+
 			$class = function_exists( 'is_buddypress' ) ? 'bp-active' : 'bp-inactive';
 			?>
 

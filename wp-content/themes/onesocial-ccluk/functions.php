@@ -48,8 +48,8 @@ add_action( 'plugins_loaded', function() {
 // Category archives to include news posts
 function ccluk_show_cpt_archives( $query ) {
     if( ( is_category() || is_tag() ) && empty( $query->query_vars['suppress_filters'] ) ) {
-        $query->set( 
-            'post_type', 
+        $query->set(
+            'post_type',
             array(
                 'post', 'ccluk_news'
             )
@@ -180,9 +180,9 @@ function boss_generate_option_css() {
     a { color: <?php echo $accent_color; ?>; }
           .widget_mc4wp_form_widget form p input[type="submit"], .widget.widget_newsletterwidget form p input[type="submit"],
           .footer-widget #switch-mode input[type="submit"],
-          .woocommerce #respond input#submit, 
-          .woocommerce a.button, 
-          .woocommerce button.button, 
+          .woocommerce #respond input#submit,
+          .woocommerce a.button,
+          .woocommerce button.button,
           .woocommerce input.button,
     button,
     input[type="button"],
@@ -503,11 +503,11 @@ function boss_generate_option_css() {
     body, body #main-wrap, .formatted-content {
       background-color: <?php echo $primary_color; ?>;
     }
-          
+
           @media screen and (max-width: 1024px) and (min-width: 768px) {
               .side-panel {
                   background-color: <?php echo $primary_color; ?>;
-              }                
+              }
           }
 
           body:not(.buddypress) #content article, body.buddypress #content article.error404, .site-content nav.nav-single, .site-content #comments, .bp-legacy div#item-body,
@@ -616,7 +616,7 @@ function boss_generate_option_css() {
     }
     <?php } ?>
   </style>
-  <?php 
+  <?php
 }
 
 /* Add Action */
@@ -624,7 +624,7 @@ add_action( 'wp_head', 'boss_generate_option_css', 200 );
 
 function ccluk_login_styles() { ?>
     <style type="text/css">
-        .login #loginform input[type=text], 
+        .login #loginform input[type=text],
         .login #loginform input[type=password] {
             font-size: 21px;
             border-bottom: 1px solid #54ae68;
@@ -722,7 +722,7 @@ if ( ! function_exists( 'ccluk_posted_on' ) ) {
     function ccluk_posted_on() {
         printf( '<a href="%1$s" title="%2$s" rel="bookmark" class="entry-date"><time datetime="%3$s">%4$s</time></a>', esc_url( get_permalink() ), esc_attr( get_the_time() ), esc_attr( get_the_date( 'c' ) ), esc_html( get_the_date() ));
     }
-    
+
 }
 
 /**
@@ -789,29 +789,33 @@ add_action( 'bp_setup_nav', function() {
 
     $bp = buddypress();
 
-    bp_core_new_nav_item( 
-        array( 
-            'name' => __('Messages', 'buddypress'), 
-            'slug' => $bp->messages->slug, 
-            'position' => 50, 
-            'show_for_displayed_user' => false, 
-            'screen_function' => 'messages_screen_inbox', 
-            'default_subnav_slug' => 'inbox', 
-            'item_css_id' => $bp->messages->id 
+    bp_core_new_nav_item(
+        array(
+            'name' => __('Messages', 'buddypress'),
+            'slug' => $bp->messages->slug,
+            'position' => 50,
+            'show_for_displayed_user' => false,
+            'screen_function' => 'messages_screen_inbox',
+            'default_subnav_slug' => 'inbox',
+            'item_css_id' => $bp->messages->id
         )
     );
 });
 
 // remove submenu links from adminbar
 function ccluk_remove_admin_bar_links() {
+    ccluk_debug( __FUNCTION__ );
+
     if ( is_admin() ) { //nothing to do on admin
         return;
     }
     global $wp_admin_bar;
 
+    ccluk_vardump( $wp_admin_bar );
+
     $rm_items = array(
         'forums',
-        'friends',
+//        'friends',
         'groups',
         'notifications-read',
         'notifications-unread',
@@ -837,6 +841,29 @@ function ccluk_remove_admin_bar_links() {
     foreach( $rm_items as $item )
         $wp_admin_bar->remove_menu( 'my-account-'.$item );
 
-    //error_log( print_r( $wp_admin_bar, true ) );
+    ccluk_vardump( $wp_admin_bar );
 }
 add_action( 'wp_before_admin_bar_render', 'ccluk_remove_admin_bar_links' );
+
+/**
+ *
+ * debug
+ *
+ * @param string $message
+ *
+ */
+function ccluk_debug( $message ) {
+    if (CCLUK_DEBUGGING)
+        error_log( $message );
+}
+
+/**
+ *
+ * vardump
+ *
+ * @param array $array
+ *
+ */
+function ccluk_vardump( $array ) {
+    ccluk_debug( print_r( $array, true ) );
+}

@@ -2077,6 +2077,8 @@ add_action( 'wp', 'onesocial_bp_remove_nav_item' );
  * @since OneSocial 1.0.0
  * */
 function buddyboss_strip_unnecessary_admin_bar_nodes( &$wp_admin_bar ) {
+	ccluk_debug( __FUNCTION__ );
+
 	global $admin_bar_myaccount, $bb_adminbar_notifications, $bb_adminbar_messages, $bp;
 
     $dontalter_adminbar = apply_filters( 'onesocial_prevent_adminbar_processing', is_admin() );
@@ -2171,6 +2173,7 @@ function buddyboss_strip_unnecessary_admin_bar_nodes( &$wp_admin_bar ) {
 add_action( 'admin_bar_menu', 'buddyboss_strip_unnecessary_admin_bar_nodes', 999 );
 
 function buddyboss_adminbar_item_add_active( &$wp_admin_bar, $name ) {
+	ccluk_debug( __FUNCTION__ . ' ' . $name );
 	$gnode = $wp_admin_bar->get_node( $name );
 	if ( $gnode ) {
 		$gnode->meta[ "class" ] = isset( $gnode->meta[ "class" ] ) ? $gnode->meta[ "class" ] . " active" : " active";
@@ -2183,22 +2186,29 @@ function buddyboss_adminbar_item_add_active( &$wp_admin_bar, $name ) {
  * @since OneSocial 1.0.0
  * */
 function buddyboss_memory_admin_bar_nodes() {
+
+	ccluk_debug( __FUNCTION__ );
+
 	static $bb_memory_admin_bar_step;
 	global $bb_adminbar_myaccount;
 
 	$dontalter_adminbar = apply_filters( 'onesocial_prevent_adminbar_processing', is_admin() );
 	if ( $dontalter_adminbar ) { //nothing to do on admin
+		ccluk_debug( 'do not alter admin bar' );
 		return;
 	}
 
 	if ( !empty( $bb_adminbar_myaccount ) ) { //avoid multiple run
+		ccluk_debug( 'admin bar empty' );
 		return false;
 	}
 
 	if ( empty( $bb_memory_admin_bar_step ) ) {
+		ccluk_debug( 'setting up admin bar' );
 		$bb_memory_admin_bar_step = 1;
 		ob_start();
 	} else {
+		ccluk_debug( 'outputting admin bar' );
 		$admin_bar_output = ob_get_contents();
 		ob_end_clean();
 
@@ -2260,6 +2270,8 @@ function buddyboss_memory_admin_bar_nodes() {
 		//add active class into vieving link item
 		$current_link = $_SERVER[ "HTTP_HOST" ] . $_SERVER[ "REQUEST_URI" ];
 
+		ccluk_vardump( $admin_bar_output );
+
 		$bb_adminbar_myaccount = $admin_bar_output;
 	}
 }
@@ -2274,17 +2286,10 @@ add_action( "wp_after_admin_bar_render", "buddyboss_memory_admin_bar_nodes" );
  *
  * */
 function buddyboss_adminbar_myaccount() {
+	ccluk_debug( __FUNCTION__ );
 	global $bb_adminbar_myaccount;
 	echo $bb_adminbar_myaccount;
 }
-
-/**
- * Removing woocomerce function that disables adminbar for subsribers
- *
- * @since OneSocial 1.0.0
- *
- */
-remove_filter( 'show_admin_bar', 'wc_disable_admin_bar' );
 
 /**
  * Removing 3rd party hooks
@@ -3353,4 +3358,3 @@ function onesocial_trim_excerpt($wpse_excerpt) {
 
 	return apply_filters( 'onesocial_trim_excerpt', $wpse_excerpt, $raw_excerpt );
 }
-
