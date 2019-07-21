@@ -69,11 +69,45 @@ div#register-page {
   }
 }
 
-#buddypress div#register-page .register-section h4 {
-  color: #000;
-  margin-bottom: 40px;
-  margin-top: 10px;
-  padding-bottom: 15px;
+#buddypress {
+    .standard-form {
+        #signup_form {
+            div div.error {
+              background-color: #e41717;
+              border-radius: 3px;
+              color: $white;
+              margin: 0 0 10px 0;
+              padding: 6px;
+              text-align: center;
+            }
+            .buddyboss-select label {
+              margin-top: 0;
+            }
+            div.submit {
+              float: right;
+            }
+        }
+
+          p.description {
+            color: #888;
+            font-size: 80%;
+            margin: 5px 0;
+          }
+          div.submit {
+            clear: both;
+            padding: 5px 0 0 0;
+          }
+
+        div#signup-avatar img {
+          margin: 0 15px 10px 0;
+        }
+    }
+    div#register-page .register-section h4 {
+      color: #000;
+      margin-bottom: 40px;
+      margin-top: 10px;
+      padding-bottom: 15px;
+    }
 }
 
 div#register-page #basic-details-section input {
@@ -195,14 +229,6 @@ body.register {
                 .field-visibility-settings-notoggle {
                     font-size: $font-size-sm;
                     color: $green;
-                }
-
-                .input-options {
-                    padding: 10px 0;
-
-                    label.option-label {
-                        font-size: $font-size-sm;
-                    }
                 }
             }
         }

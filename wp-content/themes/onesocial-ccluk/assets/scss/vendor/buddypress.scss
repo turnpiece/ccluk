@@ -1839,14 +1839,6 @@ div#sitewide-notice div#message.error p {
 }
 
 #buddypress {
-  .standard-form#signup_form div div.error {
-    background-color: #e41717;
-    border-radius: 3px;
-    color: $white;
-    margin: 0 0 10px 0;
-    padding: 6px;
-    text-align: center;
-  }
   div {
     &.accept, &.reject {
       float: left;
@@ -4765,9 +4757,6 @@ body.articles #buddypress div#item-body {
 
 
 #buddypress {
-  .standard-form#signup_form .buddyboss-select label {
-    margin-top: 0;
-  }
   .form-allowed-tags {
     width: 90%;
   }
@@ -4775,12 +4764,6 @@ body.articles #buddypress div#item-body {
     input[type="text"], textarea {
       width: 90%;
     }
-  }
-  .standard-form#signup_form div.submit {
-    float: right;
-  }
-  div#signup-avatar img {
-    margin: 0 15px 10px 0;
   }
   .standard-form textarea {
     width: 100%;
@@ -4798,17 +4781,6 @@ body.articles #buddypress div#item-body {
     margin-bottom: 20px;
     padding: 10px 0;
     width: 100%;
-  }
-  .standard-form {
-    p.description {
-      color: #888;
-      font-size: 80%;
-      margin: 5px 0;
-    }
-    div.submit {
-      clear: both;
-      padding: 5px 0 0 0;
-    }
   }
 }
 

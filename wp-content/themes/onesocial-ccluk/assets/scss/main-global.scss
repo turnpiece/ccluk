@@ -4193,7 +4193,9 @@ h2.entry-title .button.bp-title-button {
   overflow: hidden;
 }
 
-#buddypress .standard-form .editfield, #buddyboss-media-album-create-form > div, #buddypress #create-group-form .editfield {
+#buddypress .standard-form .editfield,
+#buddyboss-media-album-create-form > div,
+#buddypress #create-group-form .editfield {
   margin-bottom: 30px;
 }
 
@@ -4201,8 +4203,22 @@ h2.entry-title .button.bp-title-button {
   width: auto;
 }
 
+input#save_as_draft {
+  float: right;
+}
+
+.register #buddypress .standard-form #blog-details-section input#signup_blog_url,
+select[multiple="multiple"] {
+  width: 100%;
+}
+
+.register #buddypress .standard-form #blog-details-section [type="text"] {
+  margin-bottom: 16px;
+}
+
 #buddypress {
-  &.album-wrapper .standard-form textarea, #group-settings-form textarea {
+  &.album-wrapper .standard-form textarea,
+  #group-settings-form textarea {
     height: 90px;
     margin: 0;
   }
@@ -4218,42 +4234,42 @@ h2.entry-title .button.bp-title-button {
       width: 15em;
       margin-bottom: 0;
     }
-  }
-}
-
-input#save_as_draft {
-  float: right;
-}
-
-#buddypress .standard-form {
-  &#sidebar-login-form input {
-    &[type="text"], &[type="password"] {
-      padding: 4px;
-      width: 95%;
+    p.description {
+        font-size: $font-size-sm;
     }
-  }
-  #basic-details-section input[type="password"], #blog-details-section input#signup_blog_url {
-    width: 35%;
-  }
-}
+    .input-options {
+        padding: 10px 0;
 
-.register #buddypress .standard-form #blog-details-section input#signup_blog_url, select[multiple="multiple"] {
-  width: 100%;
-}
-
-#buddypress .standard-form#signup_form {
-  input {
-    &[type="email"], &[type="text"] {
-      width: 100%;
+        label.option-label {
+            font-size: $font-size-sm;
+            display: block;
+        }
     }
-  }
-  textarea {
-    width: 100%;
-  }
-}
 
-.register #buddypress .standard-form #blog-details-section [type="text"] {
-  margin-bottom: 16px;
+      &#sidebar-login-form input {
+        &[type="text"], &[type="password"] {
+          padding: 4px;
+          width: 95%;
+        }
+      }
+      #basic-details-section input[type="password"],
+      #blog-details-section input#signup_blog_url {
+        width: 35%;
+      }
+  }
+
+
+    .standard-form#signup_form {
+      input {
+        &[type="email"],
+        &[type="text"] {
+          width: 100%;
+        }
+      }
+      textarea {
+        width: 100%;
+      }
+    }
 }
 
 #save_as_draft {
@@ -4267,16 +4283,13 @@ input#save_as_draft {
   margin-top: 20px;
 }
 
-.sap-story-publish:hover, #save_as_draft:hover, #buddypress .standard-form div.submit input:hover {
+.sap-story-publish:hover, #save_as_draft:hover,
+#buddypress .standard-form div.submit input:hover {
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
   box-shadow: none;
   color: #333;
 }
-
-/*--------------------------------------------------------------
-6.1 - Post Form
---------------------------------------------------------------*/
 
 /*--------------------------------------------------------------
 7.0 - Ajax Loading
