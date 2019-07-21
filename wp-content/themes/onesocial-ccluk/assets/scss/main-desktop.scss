@@ -56,6 +56,10 @@ This is the Desktop stylesheet, served to laptops and desktop devices.
 1.1.1 - Basic Structure
 --------------------------------------------------------------*/
 
+@import "partials/variables";
+@import "partials/mixins";
+
+
 html, body {
   background-color: #fff;
   height: 100%;
@@ -1711,4 +1715,18 @@ body .buddyboss-select {
 body.search h1.entry-title {
   margin: 20px 0 50px;
   font-size: 70px;
+}
+
+
+/*--------------------------------------------------------------
+Media queries
+--------------------------------------------------------------*/
+
+
+@media screen and (min-width: 1025px) {
+    @import 'partials/min-width-1025px';
+}
+
+@media screen and (min-width: 1200px) {
+    @import 'partials/min-width-1200px';
 }

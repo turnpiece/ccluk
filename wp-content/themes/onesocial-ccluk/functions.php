@@ -150,7 +150,7 @@ function ccluk_theme_scripts_styles()
    if (is_user_logged_in()) {
        wp_enqueue_style( 'ccluk-members', $css.'/members.css', array( 'ccluk-custom' ) );
    }
-    
+
   /*
    * Scripts
    *
@@ -171,7 +171,7 @@ add_action( 'wp_enqueue_scripts', 'ccluk_theme_scripts_styles', 9999 );
 // Add your own custom functions here
 
 /* Add Action */
-add_action( 'wp_head', 'boss_generate_option_css', 200 );
+//add_action( 'wp_head', 'boss_generate_option_css', 200 );
 
 function ccluk_login_styles() { ?>
     <style type="text/css">

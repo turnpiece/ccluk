@@ -1273,6 +1273,38 @@ div#register-page .security-question-section input#bp-security-check {
   margin-right: 20px;
 }
 
+#buddypress .standard-form #signup_form div div.error {
+  background-color: #e41717;
+  border-radius: 3px;
+  color: #fff;
+  margin: 0 0 10px 0;
+  padding: 6px;
+  text-align: center;
+}
+
+#buddypress .standard-form #signup_form .buddyboss-select label {
+  margin-top: 0;
+}
+
+#buddypress .standard-form #signup_form div.submit {
+  float: right;
+}
+
+#buddypress .standard-form p.description {
+  color: #888;
+  font-size: 80%;
+  margin: 5px 0;
+}
+
+#buddypress .standard-form div.submit {
+  clear: both;
+  padding: 5px 0 0 0;
+}
+
+#buddypress .standard-form div#signup-avatar img {
+  margin: 0 15px 10px 0;
+}
+
 #buddypress div#register-page .register-section h4 {
   color: #000;
   margin-bottom: 40px;
@@ -1297,6 +1329,7 @@ div#register-page #signup_form.standard-form div.submit input {
   margin: 0;
   padding: 17px 22px;
   font-size: 20px;
+  color: #fff;
 }
 
 .bb-group-avatar-wrap-mobile, .bb-group-mobile-content, .item-header-mobile {
@@ -1392,14 +1425,6 @@ body.register div#register-page .register-section#profile-details-section .field
 body.register div#register-page .register-section#profile-details-section .field-visibility-settings-notoggle {
   font-size: 15px;
   color: #54ae68;
-}
-
-body.register div#register-page .register-section#profile-details-section .input-options {
-  padding: 10px 0;
-}
-
-body.register div#register-page .register-section#profile-details-section .input-options label.option-label {
-  font-size: 15px;
 }
 
 body.register div#register-page .mc4wp-checkbox {

@@ -4646,6 +4646,176 @@ body.articles #buddypress div#item-body {
   border-left: 1px solid #e1e1e1;
 }
 
+#buddypress .standard-form#signup_form .buddyboss-select label {
+  margin-top: 0;
+}
+
+#buddypress .form-allowed-tags {
+  width: 90%;
+}
+
+#buddypress #commentform input[type="text"], #buddypress #commentform textarea {
+  width: 90%;
+}
+
+#buddypress .standard-form#signup_form div.submit {
+  float: right;
+}
+
+#buddypress div#signup-avatar img {
+  margin: 0 15px 10px 0;
+}
+
+#buddypress .standard-form textarea {
+  width: 100%;
+  height: 120px;
+  margin-bottom: 45px;
+}
+
+#buddypress #group-desc {
+  margin-bottom: 0;
+}
+
+#buddypress .standard-form textarea#message_content {
+  height: 140px;
+}
+
+#buddypress #send-reply.standard-form textarea {
+  height: 100px;
+  margin-bottom: 20px;
+  padding: 10px 0;
+  width: 100%;
+}
+
+#buddypress .standard-form p.description {
+  color: #888;
+  font-size: 80%;
+  margin: 5px 0;
+}
+
+#buddypress .standard-form div.submit {
+  clear: both;
+  padding: 5px 0 0 0;
+}
+
+.settings #buddypress .standard-form div.submit {
+  padding: 22px 0 0 0;
+}
+
+#buddypress .standard-form p.submit {
+  margin-bottom: 0;
+  padding: 15px 0 0 0;
+}
+
+#buddypress .standard-form div.submit a.prev {
+  margin-right: 15px;
+  background-color: transparent;
+  color: #333;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 22px 0 0;
+  border-top: 1px solid #333;
+  display: inline-block;
+}
+
+#buddypress .standard-form div.submit a.prev:hover {
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: #54ae68;
+}
+
+#buddypress .standard-form div.submit a.prev i:before {
+  -ms-transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+  display: inline-block;
+}
+
+#buddypress .standard-form div.radio ul {
+  margin: 20px 0 30px 30px;
+  list-style: disc;
+  font-weight: normal;
+}
+
+#buddypress .standard-form div.radio ul li {
+  margin-bottom: 5px;
+  color: #333;
+  margin-left: 36px;
+}
+
+#buddypress .standard-form div.radio > label {
+  font-size: 15px;
+  line-height: 22px;
+}
+
+#buddypress .standard-form div.radio > label strong {
+  font-weight: 600;
+}
+
+#buddypress .standard-form a.clear-value {
+  display: block;
+  margin-top: 5px;
+  outline: none;
+}
+
+#buddypress .standard-form #basic-details-section, #buddypress .standard-form #blog-details-section, #buddypress .standard-form #profile-details-section, #buddypress .standard-form .security-question-section {
+  float: left;
+  width: 48%;
+}
+
+#buddypress .standard-form #blog-details-section {
+  clear: left;
+}
+
+#buddypress .standard-form:not(.send-invite-form) h4 {
+  font-family: inherit;
+  font-size: 14px;
+  text-transform: uppercase;
+  padding-bottom: 25px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+  margin-top: 20px;
+}
+
+#buddypress .standard-form .field-group {
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+#buddypress form#settings-form input[type="email"] {
+  width: 100%;
+}
+
+#buddypress form#settings-form input[type="text"], #buddypress form#settings-form input[type="email"], #buddypress form#settings-form input[type="password"], #buddypress form#settings-form input[type="email"], #buddypress form#settings-form input[type="number"] {
+  margin-bottom: 40px;
+}
+
+#buddypress form#settings-form textarea {
+  margin-bottom: 40px;
+}
+
+#buddypress form#send-invite-form {
+  margin-top: 20px;
+}
+
+#buddypress div#invite-list ul {
+  margin: 0;
+}
+
+#buddypress div#invite-list ul li {
+  margin: 0;
+  list-style-type: none;
+}
+
+#buddypress div.ac-reply-content a.ac-reply-cancel.desktop {
+  display: inline;
+}
+
+#buddypress div.ac-reply-content a.ac-reply-cancel.mobile {
+  display: none;
+}
+
 /* CUSTOM CCL UK */
 body.buddypress {
   /*--------------------------------------------------------------
@@ -7945,4 +8115,265 @@ body.bbp-search #bbp-search-index-form {
     width: 113px;
     top: -27px;
   }
+}
+
+/*--------------------------------------------------------------
+Private Messaging Threads
+--------------------------------------------------------------*/
+#messages-layout {
+  float: right;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 0;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0;
+  min-width: 1px;
+  /* Firefox-34-ignoring-max-width-for-flexbox */
+  width: calc(100% - 200px);
+  /* IE11 */
+}
+
+#messages-layout #pag-bottom {
+  padding-bottom: 0;
+}
+
+.single #messages-layout {
+  margin-bottom: 60px;
+}
+
+#messages-bulk-management {
+  margin-bottom: 40px;
+}
+
+.messages-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  -webkit-align-items: stretch;
+  align-items: stretch;
+  justify-content: flex-start;
+  -webkit-flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+}
+
+#leftcolumn {
+  float: left;
+  width: 200px;
+  position: relative;
+  padding-right: 30px;
+}
+
+#buddypress .messages #message.info {
+  margin-top: 60px;
+}
+
+#messages-layout #message.info {
+  float: left;
+  width: 100%;
+}
+
+#send_message_form ul.acfb-holder li {
+  float: none;
+  margin: 0 0 20px;
+}
+
+ul.acfb-holder li.friend-tab {
+  margin-top: 7px;
+}
+
+#send_message_form textarea, #send_message_form input[type="text"] {
+  margin-bottom: 60px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+#message-subject {
+  margin-top: 0;
+}
+
+.notices #buddypress table#message-threads tr td:last-child {
+  text-align: right;
+  vertical-align: top;
+}
+
+.thread-star .bp-screen-reader-text {
+  display: none;
+}
+
+/* CSS only for Firefox */
+@-moz-document url-prefix() {
+  #buddypress table#message-threads tr.unread td {
+    border: 0 !important;
+  }
+  #message-threads .unread {
+    position: relative;
+  }
+  #message-threads .unread + .unread:after {
+    border-top: 0;
+  }
+  #message-threads .unread:after {
+    border: 2px solid #e1e1e1;
+    content: "";
+    height: 100%;
+    left: 36px;
+    position: absolute;
+    width: calc(100% - 36px);
+  }
+  @media screen and (max-width: 321px) {
+    #message-threads .unread:after {
+      left: 24px;
+      width: calc(100% - 24px);
+    }
+  }
+  #buddypress table#message-threads tr.unread td * {
+    position: relative;
+    z-index: 5;
+  }
+  #buddypress table#message-threads tr.unread td.thread-from:before, #buddypress table#message-threads tr.unread td.thread-from:after {
+    z-index: 5;
+  }
+}
+
+body #buddypress table#message-threads tr td:first-child {
+  border-top: none;
+  border-bottom: none;
+  background-color: transparent;
+}
+
+#message-threads .thread-checkbox {
+  text-align: left;
+  width: 38px;
+}
+
+#buddypress table#message-threads .thread-from {
+  text-align: left;
+  width: 25%;
+  position: relative;
+  font-size: 14px;
+  padding-right: 5px;
+}
+
+#message-threads .thread-from .table-cell:first-child {
+  width: 65px;
+}
+
+#message-threads .thread-from .table-cell:nth-child(2) {
+  line-height: 1.2;
+}
+
+#message-threads .read .thread-from:before {
+  /* content: ''; */
+  height: 100%;
+  width: 2px;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.1);
+  top: 0;
+  left: 35px;
+}
+
+#message-threads .thread-from img {
+  vertical-align: middle;
+  border-radius: 45px;
+  width: 45px;
+  height: 45px;
+  border: 3px solid #ebebeb;
+  display: inline-block;
+  margin-right: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+#message-threads .thread-options {
+  text-align: left;
+  width: 14%;
+}
+
+#message-threads .thread-options span {
+  color: #333;
+  font-weight: 800;
+}
+
+.message-action-star span.icon:before {
+  content: "\f154";
+}
+
+.message-action-unstar span.icon:before {
+  content: "\f155";
+}
+
+.message-action-star span.icon:before, .message-action-unstar span.icon:before {
+  font-family: dashicons;
+  font-size: 16px;
+}
+
+#buddypress div#message-thread img.avatar {
+  float: left;
+  margin: 0 10px 0 0;
+  vertical-align: middle;
+  box-shadow: none;
+}
+
+.thread-checkbox .bp-screen-reader-text, #buddypress div.message-search label {
+  display: none;
+}
+
+.messages #content {
+  /* margin-top: 20px; */
+}
+
+#buddypress div.messages-options-nav {
+  float: left;
+  margin: 0 0 25px;
+  text-align: right;
+}
+
+#delete_drafts_messages, #messages-bulk-manage {
+  border: 0;
+  color: white;
+  font-size: 12px;
+  padding: 6px 10px;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+/* Notices */
+.my-messages.notices #buddypress #message-threads tr:first-child td {
+  padding-top: 0;
+}
+
+.my-messages.notices #buddypress #message-threads.messages-notices tr td:nth-child(1) {
+  display: none;
+}
+
+.my-messages.notices #buddypress #message-threads td:nth-child(2) {
+  width: 36% !important;
+  padding-left: 0;
+}
+
+.my-messages.notices #message-threads:not(.messages-notices) td:nth-child(3) {
+  width: 19% !important;
+}
+
+.my-messages.notices #message-threads td:nth-child(4) {
+  width: 14% !important;
+  text-align: right;
+}
+
+.my-messages.notices #message-threads td:nth-child(4) a {
+  display: inline-block;
+}
+
+.my-messages.notices #message-threads td:nth-child(4) a:first-child {
+  margin-bottom: 2px;
+}
+
+div.message-metadata .message-star-actions {
+  display: inline-block;
+  float: right;
+}
+
+.starred #contentcolumn > h3 {
+  display: none;
 }

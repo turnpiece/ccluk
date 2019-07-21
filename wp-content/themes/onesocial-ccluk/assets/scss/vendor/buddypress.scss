@@ -1839,14 +1839,6 @@ div#sitewide-notice div#message.error p {
 }
 
 #buddypress {
-  .standard-form#signup_form div div.error {
-    background-color: #e41717;
-    border-radius: 3px;
-    color: $white;
-    margin: 0 0 10px 0;
-    padding: 6px;
-    text-align: center;
-  }
   div {
     &.accept, &.reject {
       float: left;
@@ -4762,6 +4754,151 @@ body.articles #buddypress div#item-body {
     border-left: 1px solid #e1e1e1;
   }
 }
+
+
+#buddypress {
+  .form-allowed-tags {
+    width: 90%;
+  }
+  #commentform {
+    input[type="text"], textarea {
+      width: 90%;
+    }
+  }
+  .standard-form textarea {
+    width: 100%;
+    height: 120px;
+    margin-bottom: 45px;
+  }
+  #group-desc {
+    margin-bottom: 0;
+  }
+  .standard-form textarea#message_content {
+    height: 140px;
+  }
+  #send-reply.standard-form textarea {
+    height: 100px;
+    margin-bottom: 20px;
+    padding: 10px 0;
+    width: 100%;
+  }
+}
+
+.settings #buddypress .standard-form div.submit {
+  padding: 22px 0 0 0;
+}
+
+#buddypress .standard-form p.submit {
+  margin-bottom: 0;
+  padding: 15px 0 0 0;
+}
+
+#buddypress {
+  .standard-form div.submit a.prev {
+    margin-right: 15px;
+    background-color: transparent;
+    color: #333;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 22px 0 0;
+    border-top: 1px solid #333;
+    display: inline-block;
+    &:hover {
+      -moz-box-shadow: none;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+      color: $green;
+    }
+    i:before {
+      -ms-transform: rotate(180deg);
+      -webkit-transform: rotate(180deg);
+      transform: rotate(180deg);
+      display: inline-block;
+    }
+  }
+
+  .standard-form {
+    div.radio {
+      ul {
+        margin: 20px 0 30px 30px;
+        list-style: disc;
+        font-weight: normal;
+        li {
+          margin-bottom: 5px;
+          color: #333;
+          margin-left: 36px;
+        }
+      }
+      > label {
+        font-size: 15px;
+        line-height: 22px;
+        strong {
+          font-weight: 600;
+        }
+      }
+    }
+    a.clear-value {
+      display: block;
+      margin-top: 5px;
+      outline: none;
+    }
+    #basic-details-section, #blog-details-section, #profile-details-section, .security-question-section {
+      float: left;
+      width: 48%;
+    }
+    #blog-details-section {
+      clear: left;
+    }
+    &:not(.send-invite-form) h4 {
+      font-family: inherit;
+      font-size: 14px;
+      text-transform: uppercase;
+      padding-bottom: 25px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      margin-bottom: 15px;
+      margin-top: 20px;
+    }
+    .field-group {
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+  }
+  form {
+    &#settings-form {
+      input {
+        &[type="email"] {
+          width: 100%;
+        }
+        &[type="text"], &[type="email"], &[type="password"], &[type="email"], &[type="number"] {
+          margin-bottom: 40px;
+        }
+      }
+      textarea {
+        margin-bottom: 40px;
+      }
+    }
+    &#send-invite-form {
+      margin-top: 20px;
+    }
+  }
+  div#invite-list ul {
+    margin: 0;
+    li {
+      margin: 0;
+      list-style-type: none;
+    }
+  }
+
+  div.ac-reply-content a.ac-reply-cancel {
+    &.desktop {
+      display: inline;
+    }
+    &.mobile {
+      display: none;
+    }
+  }
+}
+
 
 
 /* CUSTOM CCL UK */
