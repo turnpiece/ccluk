@@ -5,7 +5,6 @@
 	<div class="buddypress-content-wrap">
 
 		<section class="buddypress-content">
-
 			<?php if ( !(bp_is_user_settings() || bp_is_user_messages()) ) : ?>
 				<div id="item-header" class="item-header-mobile" role="complementary">
 					<?php bp_get_template_part( 'members/single/member-header' ) ?>
@@ -38,7 +37,12 @@
 				<?php
 				do_action( 'bp_before_member_body' );
 
-				if ( bp_is_user_activity() || !bp_current_component() ) :
+				bp_get_template_part( 'members/single/profile' );
+/*
+				if ( bp_is_user_profile() || !bp_current_component() ) :
+					bp_get_template_part( 'members/single/profile' );
+
+				elseif ( bp_is_user_activity() ) :
 					bp_get_template_part( 'members/single/activity' );
 
 				elseif ( bp_is_user_blogs() ) :
@@ -52,9 +56,6 @@
 
 				elseif ( bp_is_user_messages() ) :
 					bp_get_template_part( 'members/single/messages' );
-
-				elseif ( bp_is_user_profile() ) :
-					bp_get_template_part( 'members/single/profile' );
 
 				elseif ( bp_is_user_forums() ) :
 					bp_get_template_part( 'members/single/forums' );
@@ -70,7 +71,7 @@
 					bp_get_template_part( 'members/single/plugins' );
 
 				endif;
-
+*/
 				do_action( 'bp_after_member_body' );
 				?>
 

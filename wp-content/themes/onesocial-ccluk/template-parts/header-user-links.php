@@ -38,7 +38,7 @@ if ( !is_user_logged_in() ) {
 
 		<div class="pop">
 			<?php
-			if ( onesocial_get_option( 'boss_dashboard' ) && ( current_user_can( 'level_10' ) || ( function_exists( 'bp_get_member_type' ) && bp_get_member_type( get_current_user_id() )) == 'teacher' || ( function_exists( 'bp_get_member_type' ) && bp_get_member_type( get_current_user_id() )) == 'group_leader') ) {
+			if ( onesocial_get_option( 'boss_dashboard' ) && ( current_user_can( 'edit_posts' ) || ( function_exists( 'bp_get_member_type' ) && bp_get_member_type( get_current_user_id() )) == 'teacher' || ( function_exists( 'bp_get_member_type' ) && bp_get_member_type( get_current_user_id() )) == 'group_leader') ) {
 				get_template_part( 'template-parts/header-dashboard-links' );
 			}
 
