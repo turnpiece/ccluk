@@ -41,7 +41,7 @@ class Google_0814_Service_Fusiontables extends Google_0814_Service
   public $style;
   public $table;
   public $template;
-
+  
 
   /**
    * Constructs the internal representation of the Fusiontables service.

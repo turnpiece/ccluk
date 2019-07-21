@@ -1,5 +1,3 @@
-/* Home page */
-
 body.page-template-homepage {
 
 	#main {
@@ -109,40 +107,27 @@ body.page-template-homepage {
 
 				position: relative;
 				padding: 0;
+				min-height: 400px;
+				max-height: 600px;
+				overflow: hidden;
 
 				.section-content {
-					max-width: 100%;
 					min-height: 400px;
-					background-color: $black;
-
 					> img {
 						display: block;
 						object-fit: cover;
-						min-width: 100%;
-						min-height: 100%;
-						opacity: 0.5;
-						margin: auto;
 					}
 				}
 
 				.section-title-container {
 					display: flex;
-					position: absolute;
-					left: 0;
-					top: 0;
-					bottom: 0;
 					padding: 0;
-					text-align: center;
 					z-index: 5;
-					width: 100%;
-					height: 100%;
 
 					> .section-title {
-						align-self: center;
 						position: relative;
-						max-width: 650px;
 
-						h2, 
+						h2,
 						p {
 							color: $white;
 						}
@@ -153,6 +138,104 @@ body.page-template-homepage {
 							text-transform: uppercase;
 							margin: 10px;
 						}
+					}
+				}
+
+				&.background,
+				&.background-box {
+					.section-content {
+						max-width: 100%;
+						background-color: $black;
+
+						> img {
+							min-width: 100%;
+							min-height: 100%;
+							margin: auto;
+						}
+					}
+
+					.section-title-container {
+						display: flex;
+						position: absolute;
+						left: 0;
+						top: 0;
+						bottom: 0;
+						padding: 0;
+						text-align: center;
+						z-index: 5;
+						width: 100%;
+						height: 100%;
+						background-color: $green_bg;
+						color: $white;
+
+						> .section-title {
+							align-self: center;
+							position: relative;
+							max-width: 650px;
+						}
+					}
+				}
+
+				&.text-left,
+				&.text-right {
+					.section-title-container {
+						background-color: $green;
+						color: $white;
+					}
+				}
+
+				&.background {
+					.section-content img {
+						opacity: 0.5;
+					}
+				}
+
+				&.background-box {
+					.section-title-container {
+						width: auto;
+						max-width: 650px;
+						top: 50%;
+    					left: 50%;
+						bottom: auto;
+					    margin-right: -50%;
+					    transform: translate(-50%, -50%);
+						height: auto;
+						max-height: 95%;
+						padding: 30px;
+					}
+				}
+
+				&.text-left,
+				&.text-right {
+					.section-content {
+						float: right;
+						width: 50%;
+						> img {
+							width: 100%;
+							height: 100%;
+						}
+					}
+					.section-title-container {
+						width: 50%;
+						min-height: 400px;
+						float: left;
+
+						> .section-title {
+							margin: 50px 8%;
+							h2,
+							p {
+								text-align: left;
+							}
+						}
+					}
+				}
+
+				&.text-right {
+					.section-content {
+						float: left;
+					}
+					.section-title-container {
+						float: right;
 					}
 				}
 			}
@@ -168,7 +251,7 @@ body.page-template-homepage {
 						.list-item {
 							width: auto;
 							margin: 0;
-						
+
 							&.entry-image {
 								max-width: 580px;
 							}
@@ -195,7 +278,6 @@ body.page-template-homepage {
 
 					.list-item {
 						padding: 30px;
-						@include border-radius(10px);
 						background-color: $green;
 						color: $white;
 						font-size: 130%;
@@ -212,7 +294,7 @@ body.page-template-homepage {
 			}
 
 			&.posts {
-				
+
 				.section-content {
 					max-width: 1020px;
 					text-align: center;
@@ -225,18 +307,18 @@ body.page-template-homepage {
 						float: none;
 						display: none;
 						text-align: center;
-						width: 100%;	
+						width: 100%;
 						border-bottom: 0;
 
 						a {
 							float: none;
 							margin: 0 auto;
 							width: 420px;
-						}	
+						}
 
 						.ctf-header-user {
 							font-size: $font-size-std;
-						}	
+						}
 					}
 
 					.ctf-tweets {
@@ -261,9 +343,9 @@ body.page-template-homepage {
 					}
 
 					&.ctf-styles {
-						.ctf-author-screenname, 
-						.ctf-context, 
-						.ctf-twitterlink, 
+						.ctf-author-screenname,
+						.ctf-context,
+						.ctf-twitterlink,
 						.ctf-tweet-meta {
 							font-size: 11px;
 						}
@@ -303,7 +385,7 @@ body.page-template-homepage {
 								opacity: 1;
 							}
 						}
-						
+
 						&.form {
 							form.mc4wp-form {
 								label {
@@ -440,7 +522,7 @@ body.page-template-homepage {
 		padding-bottom: 0;
 	}
 
-	.bb-slider-container .readmore a, 
+	.bb-slider-container .readmore a,
 	.slide-content .button {
 	    text-transform: uppercase;
 	    border-radius: 5px;
@@ -486,7 +568,7 @@ body.page-template-homepage {
 				float: left;
 				clear: right;
 				margin-right: 3%;
-			
+
 				> a > img {
 					clear: both;
 				}

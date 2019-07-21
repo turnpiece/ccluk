@@ -74,9 +74,8 @@ class Shipper_Task_Check_System extends Shipper_Task_Check {
 		if ( ! empty( $value ) ) {
 			$status = Shipper_Model_Check::STATUS_ERROR;
 			$msg = join(' ', array(
-				__( 'Password protection detected.', 'shipper' ),
-				__( 'This can prevent migration from working properly.', 'shipper' ),
-				__( 'Please, make sure you disable password protection.', 'shipper' ),
+				__( 'Your site is password protected which can prevent migration from working correctly.', 'shipper' ),
+				__( 'Please disable the password protection during migration, and you can enable it again once the migration is complete.', 'shipper' ),
 			));
 		}
 
@@ -99,9 +98,8 @@ class Shipper_Task_Check_System extends Shipper_Task_Check {
 		if ( $value ) {
 			$status = Shipper_Model_Check::STATUS_ERROR;
 			$check->set('message', '<p>' . join(' ', array(
-				__( '<b>Suhosin extension loaded!</b>', 'shipper' ),
-				__( 'This can prevent us from loading our AWS PHP SDK.', 'shipper' ),
-				__( 'Please, make sure you either disable it, or add phar to its whitelist.', 'shipper' ),
+				__( 'Your site has Suhosin extension enabled which can prevent Shipper from loading AWS SDK and hence prevent migration from working correctly.', 'shipper' ),
+				__( 'You can either disable the Suhosin extension or add "phar" to its whitelist to ensure migration works. ', 'shipper' ),
 			)) . '</p>');
 		} else {
 			$check = $this->set_check_message(
@@ -127,8 +125,8 @@ class Shipper_Task_Check_System extends Shipper_Task_Check {
 		if ( ! $value ) {
 			$status = Shipper_Model_Check::STATUS_ERROR;
 			$check->set('message', '<p>' . join(' ', array(
-				__( '<b>Detected a problem with AWS PHP SDK!</b>', 'shipper' ),
-				__( 'Either there is a conflicting version present, or we were not able to load our version.', 'shipper' ),
+				__( 'Shipper has detected a problem with AWS PHP SDK.', 'shipper' ),
+				__( 'If you have any other plugin installed which uses AWS PHP SDK, you can try to disable that plugin and rerun the pre-flight check.', 'shipper' ),
 			)) . '</p>');
 		} else {
 			$check = $this->set_check_message(
@@ -154,8 +152,8 @@ class Shipper_Task_Check_System extends Shipper_Task_Check {
 		if ( ! $value ) {
 			$status = Shipper_Model_Check::STATUS_ERROR;
 			$check->set('message', '<p>' . join(' ', array(
-				__( '<b>No built-in ZIP support detected!</b>', 'shipper' ),
-				__( 'PHP\'s built-in <code>ZipArchive</code> class seems to be missing. We will not be able to proceed without that.', 'shipper' ),
+				__( 'Shipper requires PHP\'s built-in ZipArchive class on this host to run migration successfully.', 'shipper' ),
+				__( 'If you are not sure how to enable the zip support, please contact your system admin or hosting support team.', 'shipper' ),
 			)) . '</p>');
 		} else {
 			$check = $this->set_check_message(
@@ -182,9 +180,8 @@ class Shipper_Task_Check_System extends Shipper_Task_Check {
 			$status = Shipper_Model_Check::STATUS_ERROR;
 			$check->set( 'title', __( 'Ancient PHP detected', 'shipper' ) );
 			$check->set('message', '<p>' . join(' ', array(
-				__( '<b>This is a very important security issue!</b>', 'shipper' ),
-				sprintf( __( 'PHP 5.2 did not have a release for over %d years now, which makes it very insecure.', 'shipper' ), ( (int) date( 'Y' ) - 2011 ) ),
-				__( 'Not only that we will not be progressing further, but you shouldn\'t be either - addressing this issue should be a priority.', 'shipper' ),
+				sprintf( __( 'You are using PHP 5.2 which hasn\'t got any release for %d years making it vulnerable and insecure to use.', 'shipper' ), ( (int) date( 'Y' ) - 2011 ) ),
+				__( 'We highly recommend updating your PHP version asap and rerun the pre-flight check.', 'shipper' ),
 			)) . '</p>');
 		}
 
@@ -205,8 +202,8 @@ class Shipper_Task_Check_System extends Shipper_Task_Check {
 		if ( version_compare( $value, '5.5', 'lt' ) ) {
 			$status = Shipper_Model_Check::STATUS_ERROR;
 			$check->set('message', '<p>' . join(' ', array(
-				sprintf( __( 'Your PHP version is %s.', 'shipper' ), $value ),
-				__( 'Minimum recommended PHP version is PHP 5.5', 'shipper' ),
+				sprintf( __( 'You\'re using PHP %s and Shipper requires PHP 5.5 or higher to migrate your sites.', 'shipper' ), $value ),
+				__( 'Please upgrade to a PHP 5.5 or higher and rerun the pre-flight check.', 'shipper' ),
 			)) . '</p>');
 		} else {
 			$check = $this->set_check_message(
@@ -276,8 +273,8 @@ class Shipper_Task_Check_System extends Shipper_Task_Check {
 				: Shipper_Model_Check::STATUS_ERROR;
 
 			$check->set('message', '<p>' . join(' ', array(
-				__( 'It appears that <b>open_basedir</b> rule is in effect.', 'shipper' ),
-				__( 'We will likely not be able to do what we need to with this PHP setting enabled', 'shipper' ),
+				__( 'Shipper has detected open_basedir restriction which can prevent migration from working correctly.', 'shipper' ),
+				__( 'We recommend disabling the open_basedir rule during migration.', 'shipper' ),
 			)) . '</p>');
 		}
 
@@ -408,8 +405,8 @@ class Shipper_Task_Check_System extends Shipper_Task_Check {
 		$check->set(
 			'message',
 			'<p>' . join(' ', array(
-				'<b>' . __( 'This directory has to be writable.', 'shipper' ) . '</b>',
-				__( 'However, we were not able to write to it.', 'shipper' ),
+				__( 'Shipper is unable to write to this directory.', 'shipper' ),
+				__( 'Please ensure that this directory is writable and rerun the pre-flight check.', 'shipper' ),
 			)) . '</p>'
 		);
 		return $check->complete( Shipper_Model_Check::STATUS_ERROR );

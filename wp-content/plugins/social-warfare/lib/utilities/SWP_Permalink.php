@@ -173,9 +173,21 @@ class SWP_Permalink {
 				$url = apply_filters( 'post_link', $permalink, $post, $leavename );
 
 				// Ignore all filters and just start with the site url on the home page
-				if( is_front_page() ):
+				if( is_front_page() ) :
 					$url = get_site_url();
 				endif;
+
+		        // The URL is missing any kind of protocol.
+				if ( false === strpos( $url, '//' ) || 0 == strpos( $url, '//') ) {
+					$protocol = is_ssl() ? 'https' : 'http';
+
+					// For shared load servers. See https://codex.wordpress.org/Function_Reference/is_ssl
+					if ('http' == $protocol && isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') {
+			            $protocol = 'https';
+					}
+
+					$url = $protocol . $url;
+				}
 
 				// Check if they're using cross domain recovery
 				$current_domain = SWP_Utility::get_option( 'current_domain' );
@@ -186,6 +198,7 @@ class SWP_Permalink {
 
 				// Filter the Protocol
 				$protocol = SWP_Utility::get_option( 'recovery_protocol' );
+
 				if ( $protocol == 'https' && strpos( $url,'https' ) === false ) :
 					$url = str_replace( 'http','https',$url );
 				elseif ( $protocol == 'http' && strpos( $url,'https' ) !== false ) :

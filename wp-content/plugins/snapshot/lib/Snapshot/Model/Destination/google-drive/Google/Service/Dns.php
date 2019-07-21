@@ -42,7 +42,7 @@ class Google_0814_Service_Dns extends Google_0814_Service
   public $managedZones;
   public $projects;
   public $resourceRecordSets;
-
+  
 
   /**
    * Constructs the internal representation of the Dns service.

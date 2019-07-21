@@ -50,7 +50,7 @@ class HTTP_OAuth_Provider_Request extends HTTP_OAuth_Message
 
     /**
      * Method used in the incoming request
-     *
+     * 
      * @var string Method used in the incoming request
      */
     protected $method = '';
@@ -83,7 +83,7 @@ class HTTP_OAuth_Provider_Request extends HTTP_OAuth_Message
         } else if (is_array($this->peclHttpHeaders())) {
             $this->debug('Using pecl_http to get request headers');
             $this->headers = $this->peclHttpHeaders();
-        } else {
+        } else { 
             $this->debug('Using $_SERVER to get request headers');
             foreach ($_SERVER as $name => $value) {
                 if (substr($name, 0, 5) == 'HTTP_') {
@@ -139,8 +139,8 @@ class HTTP_OAuth_Provider_Request extends HTTP_OAuth_Message
     // @codeCoverageIgnoreEnd
 
     /**
-     * Set parameters from the incoming request
-     *
+     * Set parameters from the incoming request 
+     * 
      * @return void
      */
     public function setParametersFromRequest()
@@ -311,8 +311,8 @@ class HTTP_OAuth_Provider_Request extends HTTP_OAuth_Message
     }
 
     /**
-     * getHeaders
-     *
+     * getHeaders 
+     * 
      * @access public
      * @return void
      */

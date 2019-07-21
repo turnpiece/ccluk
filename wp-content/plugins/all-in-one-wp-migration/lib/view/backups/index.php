@@ -92,15 +92,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 											<?php endif; ?>
 										</td>
 										<td class="ai1wm-column-actions ai1wm-backup-actions">
-											<a href="<?php echo ai1wm_backup_url( array( 'archive' => esc_attr( $backup['filename'] ) ) ); ?>" class="ai1wm-button-green ai1wm-backup-download" download="<?php echo esc_attr( $backup['filename'] ); ?>">
+											<a href="<?php echo ai1wm_backup_url( array( 'archive' => esc_attr( $backup['filename'] ) ) ); ?>" class="ai1wm-button-green ai1wm-backup-download" download="<?php echo esc_attr( $backup['filename'] ); ?>" aria-label="<?php _e( 'Download backup', AI1WM_PLUGIN_NAME ); ?>">
 												<i class="ai1wm-icon-arrow-down"></i>
 												<span><?php _e( 'Download', AI1WM_PLUGIN_NAME ); ?></span>
 											</a>
-											<a href="#" data-archive="<?php echo esc_attr( $backup['filename'] ); ?>" class="ai1wm-button-gray ai1wm-backup-restore">
+											<a href="#" data-archive="<?php echo esc_attr( $backup['filename'] ); ?>" class="ai1wm-button-gray ai1wm-backup-restore" aria-label="<?php _e( 'Restore backup', AI1WM_PLUGIN_NAME ); ?>">
 												<i class="ai1wm-icon-cloud-upload"></i>
 												<span><?php _e( 'Restore', AI1WM_PLUGIN_NAME ); ?></span>
 											</a>
-											<a href="#" data-archive="<?php echo esc_attr( $backup['filename'] ); ?>" class="ai1wm-button-red ai1wm-backup-delete">
+											<a href="#" data-archive="<?php echo esc_attr( $backup['filename'] ); ?>" class="ai1wm-button-red ai1wm-backup-delete" aria-label="<?php _e( 'Delete backup', AI1WM_PLUGIN_NAME ); ?>">
 												<i class="ai1wm-icon-close"></i>
 												<span><?php _e( 'Delete', AI1WM_PLUGIN_NAME ); ?></span>
 											</a>

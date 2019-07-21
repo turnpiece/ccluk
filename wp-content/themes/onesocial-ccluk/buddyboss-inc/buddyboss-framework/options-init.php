@@ -440,18 +440,6 @@ if ( !class_exists( 'onesocial_Redux_Framework_config' ) ) {
 				'default'	 => 'left'
 			);
 
-			$woocommerce_sidebar_array = array(
-				'id'		 => 'woocommerce_sidebar',
-				'type'		 => 'button_set',
-				'title'		 => __( 'WooCommerce &rarr; Shop Sidebar', 'onesocial' ),
-				'subtitle'	 => __( 'Select the woocommerce sidebar alignment.', 'onesocial' ),
-				'options'	 => array(
-					'left'	 => 'Left',
-					'right'	 => 'Right'
-				),
-				'default'	 => 'right'
-			);
-
 			$search_sidebar_array = array(
 				'id'		 => 'search_sidebar',
 				'type'		 => 'button_set',
@@ -477,7 +465,6 @@ if ( !class_exists( 'onesocial_Redux_Framework_config' ) ) {
 					$activity_sidebar_array,
 					$forums_sidebar_array,
 					$blogs_sidebar_array,
-					$woocommerce_sidebar_array,
 					$search_sidebar_array,
 				)
 			);
@@ -680,7 +667,7 @@ if ( !class_exists( 'onesocial_Redux_Framework_config' ) ) {
 						'font-family'	 => 'Lato',
 						'font-weight'	 => '400',
 					),
-					'output'		 => array( 'html, #profile-nav span, #wp-admin-bar-shortcode-secondary .alert, .header-notifications a.notification-link span, .site-header #wp-admin-bar-shortcode-secondary .alert, .header-notifications a.notification-link span, .entry-meta .comments-link a, .entry-meta, .activity, .item-list-tabs, #whats-new-options, #item-header-content, #buddypress div#message, #buddypress ul.item-list li div.item-desc, .generic-button, .bb-meta, #item-photos, .forum-titles, .sap-container, .bb-search-forums-label, .woocommerce-page.woocommerce-page .entry-content, .footer-style-2 .footer-inner-top, .footer-style-2 .footer-widget a' ),
+					'output'		 => array( 'html, #profile-nav span, #wp-admin-bar-shortcode-secondary .alert, .header-notifications a.notification-link span, .site-header #wp-admin-bar-shortcode-secondary .alert, .header-notifications a.notification-link span, .entry-meta .comments-link a, .entry-meta, .activity, .item-list-tabs, #whats-new-options, #item-header-content, #buddypress div#message, #buddypress ul.item-list li div.item-desc, .generic-button, .bb-meta, #item-photos, .forum-titles, .sap-container, .bb-search-forums-label, .footer-style-2 .footer-inner-top, .footer-style-2 .footer-widget a' ),
 				),
 				array(
 					'id'			 => 'boss_h1_font_options',
@@ -892,7 +879,7 @@ if ( !class_exists( 'onesocial_Redux_Framework_config' ) ) {
 				array( 'slug' => 'admin_screen_text_color', 'title' => 'Login Screen Text', 'subtitle' => 'Links and text such as "Remember Me".', 'desc' => '', 'type' => 'color', 'default' => '#333333' ),
 				array( 'slug' => 'admin_screen_button_color', 'title' => 'Login Screen Button', 'subtitle' => 'Submit button on login screen.', 'desc' => '', 'type' => 'color', 'default' => '#54ae68' ),
 			);
-			
+
 			$color_scheme_elements = apply_filters( 'onesocial_color_element_options', $style_elements );
 
 			$style_fields = array();
@@ -1089,7 +1076,7 @@ if ( !class_exists( 'onesocial_Redux_Framework_config' ) ) {
 						'id'		 => 'boss_login_message',
 						'title'		 => __( 'Social Login Message', 'onesocial' ),
 						'type'		 => 'editor',
-						'default'	 => __( 'We will never post to Twitter or Facebook without your permission.', 'onesocial' ),
+						'default'	 => '',
 						'args'		 => array(
 							'teeny'			 => true,
 							'media_buttons'	 => false,

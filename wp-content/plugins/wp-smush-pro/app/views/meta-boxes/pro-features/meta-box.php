@@ -29,6 +29,18 @@ if ( ! defined( 'WPINC' ) ) {
 	</li>
 	<li class="smush-pro-feature-row">
 		<div class="smush-pro-feature-title">
+			<?php esc_html_e( 'WPMU DEV CDN with WebP Support', 'wp-smushit' ); ?></div>
+		<div class="smush-pro-feature-desc">
+			<?php
+			esc_html_e(
+				'Serve your images from our CDN from 45 blazing fast servers around the world. Enable automatic image sizing and WebP support and your website will be absolutely flying.',
+				'wp-smushit'
+			);
+			?>
+		</div>
+	</li>
+	<li class="smush-pro-feature-row">
+		<div class="smush-pro-feature-title">
 			<?php esc_html_e( 'Smush my original full size images', 'wp-smushit' ); ?></div>
 		<div class="smush-pro-feature-desc">
 			<?php

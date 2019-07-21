@@ -75,6 +75,7 @@ class Shipper_Task_Check_Files extends Shipper_Task_Check {
 		$files = isset( $this->_fs ) ? $this->_fs->get_files() : array();
 
 		$oversized = $storage->get( 'oversized', array() );
+		$total_count = $storage->get( 'oversized_count', 0 );
 
 		foreach ( $files as $file ) {
 			if ( ! is_array( $file ) ) { continue; }
@@ -88,13 +89,16 @@ class Shipper_Task_Check_Files extends Shipper_Task_Check {
 			}
 			if ( $file['size'] > $threshold ) {
 				$oversized[] = $file;
+				$total_count++;
 			}
 		}
 
 		$storage->set( 'oversized', $oversized );
+		$storage->set( 'oversized_count', $total_count );
 		$storage->save();
 
 		if ( ! empty( $oversized ) ) {
+			/*
 			$ex_model = new Shipper_Model_Stored_Exclusions;
 			$exclusions = array_keys( $ex_model->get_data() );
 			foreach ( $oversized as $oversized_item ) {
@@ -103,6 +107,10 @@ class Shipper_Task_Check_Files extends Shipper_Task_Check {
 					break;
 				}
 			}
+			 */
+			if ( ! empty( $total_count ) ) {
+				$status = Shipper_Model_Check::STATUS_WARNING;
+			}
 			$tpl = new Shipper_Helper_Template;
 			$markup = $tpl->get('modals/check/preflight-row-files', array(
 				'files' => $oversized,
@@ -110,6 +118,7 @@ class Shipper_Task_Check_Files extends Shipper_Task_Check {
 			$check->set( 'message', $markup );
 		}
 		$check->set( 'check_type', 'file_sizes' );
+		$check->set( 'count', $total_count );
 
 		return $check->complete( $status );
 	}
@@ -130,15 +139,18 @@ class Shipper_Task_Check_Files extends Shipper_Task_Check {
 		$files = isset( $this->_fs ) ? $this->_fs->get_files() : array();
 
 		$invalid = $storage->get( 'invalid', array() );
+		$total_count = $storage->get( 'invalid_count', 0 );
 
 		foreach ( $files as $file ) {
 			if ( ! is_array( $file ) ) { continue; }
 			if ( strlen( $file['path'] ) > $threshold && count( $invalid ) < 100 ) {
 				$invalid[] = $file;
+				$total_count++;
 			}
 		}
 
 		$storage->set( 'invalid', $invalid );
+		$storage->set( 'invalid_count', $total_count );
 		$storage->save();
 
 		if ( ! empty( $invalid ) ) {
@@ -150,6 +162,7 @@ class Shipper_Task_Check_Files extends Shipper_Task_Check {
 			$check->set( 'message', $markup );
 		}
 		$check->set( 'check_type', 'file_names' );
+		$check->set( 'count', $total_count );
 
 		return $check->complete( $status );
 	}
@@ -199,17 +212,9 @@ class Shipper_Task_Check_Files extends Shipper_Task_Check {
 	public function get_package_size_check() {
 		$check = new Shipper_Model_Check( __( 'Package size', 'shipper' ) );
 		$status = Shipper_Model_Check::STATUS_OK;
-		$estimate = new Shipper_Model_Stored_Estimate;
-		$package_size = $estimate->get( 'raw_package_size', 0 );
 
 		$threshold = Shipper_Model_Stored_Migration::get_package_size_threshold();
-
-		$exclusions_model = new Shipper_Model_Stored_Exclusions;
-		$exclusions = array_keys( $exclusions_model->get_data() );
-		foreach ( $exclusions as $exc ) {
-			$package_size -= filesize( $exc );
-		}
-		$estimate->set( 'package_size', $package_size )->save();
+		$package_size = $this->get_updated_package_size();
 
 		if ( $package_size > $threshold ) {
 			$status = Shipper_Model_Check::STATUS_WARNING;
@@ -233,6 +238,27 @@ class Shipper_Task_Check_Files extends Shipper_Task_Check {
 		);
 
 		return $check->complete( $status );
+	}
+
+	/**
+	 * Updates the actual package size estimate
+	 *
+	 * Applies the current exclusions state sizes reduction to raw package size.
+	 *
+	 * @return int
+	 */
+	public function get_updated_package_size() {
+		$estimate = new Shipper_Model_Stored_Estimate;
+		$package_size = $estimate->get( 'raw_package_size', 0 );
+
+		$exclusions_model = new Shipper_Model_Stored_Exclusions;
+		$exclusions = array_keys( $exclusions_model->get_data() );
+		foreach ( $exclusions as $exc ) {
+			$package_size -= filesize( $exc );
+		}
+		$estimate->set( 'package_size', $package_size )->save();
+
+		return $package_size;
 	}
 
 	/**

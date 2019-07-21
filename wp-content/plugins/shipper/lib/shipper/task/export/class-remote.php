@@ -35,6 +35,42 @@ class Shipper_Task_Export_Remote extends Shipper_Task_Export {
 	}
 
 	/**
+	 * Proxies the API call in a cached model
+	 *
+	 * Do not call API more than absolutely necessary.
+	 *
+	 * @param string $remote_site Remote site to proxy the call for.
+	 *
+	 * @return array
+	 */
+	public function get_cached_result( $remote_site ) {
+		$model = new Shipper_Model_Stored_Apicache_Mgrget;
+		$data = array();
+		$errors = array();
+
+		if ( ! $model->is_expired() ) {
+			$data = $model->get_data();
+		}
+
+		if ( empty( $data ) ) {
+			$task = new Shipper_Task_Api_Migrations_Get;
+			$data = $task->apply( array(
+				'domain' => $remote_site,
+			));
+			if ( $task->has_errors() ) {
+				$errors = $task->get_errors();
+			}
+			$model->set_data( $data );
+			$model->set_timestamp( time() );
+			$model->save();
+		}
+		return array(
+			'mgr' => $data,
+			'errors' => $errors,
+		);
+	}
+
+	/**
 	 * Actually triggers the remote import
 	 *
 	 * @uses shipper_await_cancel
@@ -51,12 +87,15 @@ class Shipper_Task_Export_Remote extends Shipper_Task_Export {
 		$this_site = $migration->get_source();
 		$remote_site = $migration->get_destination();
 
-		$task = new Shipper_Task_Api_Migrations_Get;
-		$mgr = $task->apply( array(
-			'domain' => $remote_site,
-		));
+		$result = $this->get_cached_result( $remote_site );
+		$errors = ! empty( $result['errors'] )
+			? $result['errors']
+			: array();
+		$mgr = ! empty( $result['mgr'] )
+			? $result['mgr']
+			: array();
 
-		if ( $task->has_errors() ) {
+		if ( ! empty( $errors ) ) {
 			// We're not done, not sure how to proceed - let's try again in a bit.
 			$status = Shipper_Model_Env::is_phpunit_test(); // True - bail out if tests.
 		} else {
@@ -115,6 +154,9 @@ class Shipper_Task_Export_Remote extends Shipper_Task_Export {
 	 * @return bool Whether we're done with the task
 	 */
 	public function attempt_remote_import_start( $this_site, $remote_site ) {
+		$model = new Shipper_Model_Stored_Apicache_Mgrget;
+		$model->clear()->save();
+
 		// Assume we're not done yet at first.
 		$status = false;
 		$task = new Shipper_Task_Api_Destinations_Ping;

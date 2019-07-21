@@ -240,7 +240,7 @@ class ConfigurationProvider
                 return self::reject("'$profile' not found in config file");
             }
             if (!isset($data[$profile]['csm_enabled'])) {
-                return self::reject("Required CSM config values not present in
+                return self::reject("Required CSM config values not present in 
                     INI profile '{$profile}' ({$filename})");
             }
 
@@ -301,7 +301,7 @@ class ConfigurationProvider
 
     /**
      * Reject promise with standardized exception.
-     *
+     * 
      * @param $msg
      * @return Promise\RejectedPromise
      */

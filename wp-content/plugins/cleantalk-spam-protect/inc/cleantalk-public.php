@@ -67,6 +67,11 @@ function apbct_init() {
 		ct_ajax_hook();
 	}
 	
+	/**hooks for cm answers pro */
+	if(defined('CMA_PLUGIN_FILE')){
+		add_action( 'wp', 'ct_ajax_hook',1 );
+	}
+	
 	//hook for Anonymous Post
     if($apbct->settings['general_postdata_test'] == 1 && empty($_POST['ct_checkjs_cf7']))
     	add_action('wp','ct_contact_form_validate_postdata',1);
@@ -539,6 +544,63 @@ function apbct_integration__buddyPres__private_msg_check( $bp_message_obj){
 
     if ($ct_result->allow == 0)
 		wp_die("<h1>".__('Spam protection by CleanTalk', 'cleantalk')."</h1><h2>".$ct_result->comment."</h2>", '', array('response' => 403, "back_link" => true, "text_direction" => 'ltr'));
+}
+
+/**
+ * Adds hiden filed to deafualt serach form
+ *
+ * @param $form string
+ * @return string
+ */
+function apbct_forms__search__addField( $form ){
+	global $apbct;
+	if($apbct->settings['search_test'] == 1){
+		$js_filed = ct_add_hidden_fields(true, 'ct_checkjs_search_default', true, false, false, false);
+		$form = str_replace('</form>', $js_filed, $form);
+	}
+	return $form;
+}
+
+/**
+ * Test default search string for spam
+ *
+ * @param $search string
+ * @return string
+ */
+function apbct_forms__search__testSpam( $search ){
+
+	global $apbct, $cleantalk_executed;
+
+	if(
+		empty($search) ||
+		$cleantalk_executed ||
+		$apbct->settings['search_test'] == 0 ||
+		$apbct->settings['protect_logged_in'] != 1 && is_user_logged_in() // Skip processing for logged in users.
+	){
+		return $search;
+	}
+
+	if(apbct_is_user_logged_in())
+		$user = wp_get_current_user();
+
+	$base_call_result = apbct_base_call(
+		array(
+			'message'         => $search,
+			'sender_email'    => !empty($user) ? $user->user_email : null,
+			'sender_nickname' => !empty($user) ? $user->user_login : null,
+			'post_info'       => array('comment_type' => 'site_search_wordpress'),
+			//'js_on'           => apbct_js_test('ct_checkjs_search_default', $_GET, true),
+		)
+	);
+	$ct_result = $base_call_result['ct_result'];
+
+	$cleantalk_executed = true;
+
+	if ($ct_result->allow == 0){
+		die($ct_result->comment);
+	}
+
+	return $search;
 }
 
 /**
@@ -1241,6 +1303,11 @@ function ct_die_extended($comment_body) {
 /**
  * Validates JavaScript anti-spam test
  *
+ * @param string $field_name
+ * @param null   $data
+ * @param bool   $random_key
+ *
+ * @return int|null
  */
 function apbct_js_test($field_name = 'ct_checkjs', $data = null, $random_key = false) {
     
@@ -1256,7 +1323,6 @@ function apbct_js_test($field_name = 'ct_checkjs', $data = null, $random_key = f
 			
 			// Random key check
 			if ($random_key) {
-				$k = $apbct->js_keys;
 				$out = array_key_exists($js_key, $apbct->js_keys) ? 1 : 0;
 			} else {
 				$ct_challenge = ct_get_checkjs_value();
@@ -1401,7 +1467,7 @@ function ct_register_form() {
 }
 
 function apbct_login__scripts(){
-	echo '<script src="'.APBCT_URL_PATH.'/js/apbct-public.js"></script>';
+	echo '<script src="'.APBCT_URL_PATH.'/js/apbct-public.min.js"></script>';
 }
 
 /**
@@ -1552,7 +1618,7 @@ function ct_test_registration($nickname, $email, $ip){
  */
 function ct_registration_errors($errors, $sanitized_user_login = null, $user_email = null) {
 	
-    global $ct_checkjs_register_form, $apbct_cookie_request_id_label, $apbct_cookie_register_ok_label, $bp, $ct_signup_done, $ct_negative_comment, $apbct, $ct_registration_error_comment;
+    global $ct_checkjs_register_form, $apbct_cookie_request_id_label, $apbct_cookie_register_ok_label, $bp, $ct_signup_done, $ct_negative_comment, $apbct, $ct_registration_error_comment, $cleantalk_executed;
     
     // Go out if a registrered user action
     if (ct_is_user_enable() === false) {
@@ -1634,6 +1700,8 @@ function ct_registration_errors($errors, $sanitized_user_login = null, $user_ema
 
     $ct_result = ct_change_plugin_resonse($ct_result, $checkjs);
     
+	$cleantalk_executed = true;
+	
     if ($ct_result->inactive != 0) {
         ct_send_error_notice($ct_result->comment);
         return $errors;
@@ -1881,13 +1949,17 @@ function apbct_form__contactForm7__addField($html) {
  * @param type $tags
  * @return type
  */
-function apbct_form__contactForm7__tesSpam__before_validate($result, $tags) {
+function apbct_form__contactForm7__tesSpam__before_validate($result = null, $tags = null) {
 	global $apbct;
-	$invalid_fields = $result->get_invalid_fields();
-	if(!empty($invalid_fields) && is_array($invalid_fields)){
-		$apbct->validation_error = $invalid_fields[key($invalid_fields)]['reason'];
-		apbct_form__contactForm7__testSpam(false);
+
+	if ($result && method_exists($result, 'get_invalid_fields')){
+		$invalid_fields = $result->get_invalid_fields();
+		if(!empty($invalid_fields) && is_array($invalid_fields)){
+			$apbct->validation_error = $invalid_fields[key($invalid_fields)]['reason'];
+			apbct_form__contactForm7__testSpam(false);
+		}		
 	}
+
 	return $result;
 }
 
@@ -2585,7 +2657,8 @@ function ct_contact_form_validate() {
 		(strpos($_SERVER['REQUEST_URI'],'researcher-log-in')!==false ) || // Skip login form
 		(strpos($_SERVER['REQUEST_URI'],'admin_aspcms/_system/AspCms_SiteSetting.asp?action=saves')!==false ) || // Skip admin save callback
 		(strpos($_SERVER['REQUEST_URI'],'?profile_tab=postjobs')!==false ) || // Skip post vacancies
-		(isset($_POST['btn_insert_post_type_hotel']) && $_POST['btn_insert_post_type_hotel'] == 'SUBMIT HOTEL') // Skip adding hotel
+		(isset($_POST['btn_insert_post_type_hotel']) && $_POST['btn_insert_post_type_hotel'] == 'SUBMIT HOTEL') || // Skip adding hotel
+		(isset($_POST['action']) && $_POST['action'] == 'updraft_savesettings') // Updraft save settings
 		) {
         return null;
     }
@@ -2776,7 +2849,8 @@ function ct_contact_form_validate_postdata() {
 		(isset($_POST['woocommerce-login-nonce'], $_POST['login'], $_POST['password'], $_POST['_wp_http_referer'])) || //WooCommerce login form
 		(isset($_POST['provider'], $_POST['authcode']) && $_POST['provider'] == 'Two_Factor_Totp') || //TwoFactor authorization
 		(isset($_GET['wc-ajax']) && $_GET['wc-ajax'] == 'sa_wc_buy_now_get_ajax_buy_now_button') || //BuyNow add to cart
-		strpos($_SERVER['REQUEST_URI'],'/wp-json/wpstatistics/v1/hit')!==false //WPStatistics
+		strpos($_SERVER['REQUEST_URI'],'/wp-json/wpstatistics/v1/hit')!==false || //WPStatistics
+		(isset($_POST['ihcaction']) && $_POST['ihcaction'] == 'login') //Skip login form
         ) {
         return null;
     }
@@ -2908,7 +2982,7 @@ function ct_enqueue_scripts_public($hook){
 	if($apbct->settings['registrations_test'] || $apbct->settings['comments_test'] || $apbct->settings['contact_forms_test'] || $apbct->settings['general_contact_forms_test'] || $apbct->settings['wc_checkout_test'] || $apbct->settings['check_external'] || $apbct->settings['check_internal'] || $apbct->settings['bp_private_messages'] || $apbct->settings['general_postdata_test']){
 		
 		// Differnt JS params
-		wp_enqueue_script('ct_public',      APBCT_URL_PATH.'/js/apbct-public.js',       array('jquery'), APBCT_VERSION, false /*in header*/);
+		wp_enqueue_script('ct_public',      APBCT_URL_PATH.'/js/apbct-public.min.js',       array('jquery'), APBCT_VERSION, false /*in header*/);
 		
 		wp_localize_script('ct_public', 'ctPublic', array(
 			'_ajax_nonce' => wp_create_nonce('ct_secret_stuff'),
@@ -2918,7 +2992,7 @@ function ct_enqueue_scripts_public($hook){
 		// GDPR script
 		if($apbct->settings['gdpr_enabled']){
 			
-			wp_enqueue_script('ct_public_gdpr', APBCT_URL_PATH.'/js/apbct-public--gdpr.js', array('jquery', 'ct_public'), APBCT_VERSION, false /*in header*/);
+			wp_enqueue_script('ct_public_gdpr', APBCT_URL_PATH.'/js/apbct-public--gdpr.min.js', array('jquery', 'ct_public'), APBCT_VERSION, false /*in header*/);
 		
 			wp_localize_script('ct_public_gdpr', 'ctPublicGDPR', array(
 				'gdpr_forms' => array(),
@@ -2935,7 +3009,7 @@ function ct_enqueue_scripts_public($hook){
 				// Use AJAX for JavaScript check
 				if($apbct->settings['use_ajax']){
 					
-					wp_enqueue_script('ct_nocache',  plugins_url('/cleantalk-spam-protect/inc/cleantalk_nocache.js'),  array(),         APBCT_VERSION, false /*in header*/);
+					wp_enqueue_script('ct_nocache',  plugins_url('/cleantalk-spam-protect/js/cleantalk_nocache.min.js'),  array(),         APBCT_VERSION, false /*in header*/);
 					
 					wp_localize_script('ct_nocache', 'ctNocache', array(
 						'ajaxurl'                  => admin_url('admin-ajax.php'),
@@ -2947,11 +3021,11 @@ function ct_enqueue_scripts_public($hook){
 				
 				// External forms check
 				if($apbct->settings['check_external'])
-					wp_enqueue_script('ct_external',  plugins_url('/cleantalk-spam-protect/js/cleantalk_external.js'), array('jquery'), APBCT_VERSION, false /*in header*/);
+					wp_enqueue_script('ct_external',  plugins_url('/cleantalk-spam-protect/js/cleantalk_external.min.js'), array('jquery'), APBCT_VERSION, false /*in header*/);
 				
 				// Internal forms check
 				if($apbct->settings['check_internal'])
-					wp_enqueue_script('ct_internal',  plugins_url('/cleantalk-spam-protect/js/cleantalk_internal.js'), array('jquery'), APBCT_VERSION, false /*in header*/);
+					wp_enqueue_script('ct_internal',  plugins_url('/cleantalk-spam-protect/js/cleantalk_internal.min.js'), array('jquery'), APBCT_VERSION, false /*in header*/);
 				
 			}
 		}
@@ -2964,8 +3038,8 @@ function ct_enqueue_scripts_public($hook){
 		
 			$ajax_nonce = wp_create_nonce( "ct_secret_nonce" );
 			
-			wp_enqueue_style ('ct_public_admin_css', plugins_url('/cleantalk-spam-protect/css/cleantalk-public-admin.css'), array(),         APBCT_VERSION, 'all');
-			wp_enqueue_script('ct_public_admin_js',  plugins_url('/cleantalk-spam-protect/js/cleantalk-public-admin.js'),   array('jquery'), APBCT_VERSION, false /*in header*/);
+			wp_enqueue_style ('ct_public_admin_css', plugins_url('/cleantalk-spam-protect/css/cleantalk-public-admin.min.css'), array(),         APBCT_VERSION, 'all');
+			wp_enqueue_script('ct_public_admin_js',  plugins_url('/cleantalk-spam-protect/js/cleantalk-public-admin.min.js'),   array('jquery'), APBCT_VERSION, false /*in header*/);
 			
 			wp_localize_script('ct_public_admin_js', 'ctPublicAdmin', array(
 				'ct_ajax_nonce'               => $ajax_nonce,
@@ -2980,7 +3054,7 @@ function ct_enqueue_scripts_public($hook){
 	
 	// Debug
 	if($apbct->settings['debug_ajax']){
-		wp_enqueue_script('ct_debug_js',  plugins_url('/cleantalk-spam-protect/js/cleantalk-debug-ajax.js'), array('jquery'), APBCT_VERSION, false /*in header*/);
+		wp_enqueue_script('ct_debug_js',  plugins_url('/cleantalk-spam-protect/js/cleantalk-debug-ajax.min.js'), array('jquery'), APBCT_VERSION, false /*in header*/);
 		
 		wp_localize_script('ct_debug_js', 'apbctDebug', array(
 			'reload'                  => false,

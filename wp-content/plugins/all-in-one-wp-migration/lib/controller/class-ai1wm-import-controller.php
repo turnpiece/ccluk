@@ -123,7 +123,7 @@ class Ai1wm_Import_Controller {
 						}
 
 						wp_remote_post( apply_filters( 'ai1wm_http_import_url', admin_url( 'admin-ajax.php?action=ai1wm_import' ) ), array(
-							'timeout'   => apply_filters( 'ai1wm_http_import_timeout', 5 ),
+							'timeout'   => apply_filters( 'ai1wm_http_import_timeout', 10 ),
 							'blocking'  => apply_filters( 'ai1wm_http_import_blocking', false ),
 							'sslverify' => apply_filters( 'ai1wm_http_import_sslverify', false ),
 							'headers'   => apply_filters( 'ai1wm_http_import_headers', array() ),
@@ -136,6 +136,7 @@ class Ai1wm_Import_Controller {
 				next( $filters );
 			}
 		}
+
 		return $params;
 	}
 

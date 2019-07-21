@@ -35,7 +35,7 @@ class Google_0814_Service_Admin extends Google_0814_Service
   const EMAIL_MIGRATION = "https://www.googleapis.com/auth/email.migration";
 
   public $mail;
-
+  
 
   /**
    * Constructs the internal representation of the Admin service.

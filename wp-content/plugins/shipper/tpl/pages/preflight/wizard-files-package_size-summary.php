@@ -5,11 +5,13 @@
  * @package shipper
  */
 
+echo '<span class="shipper-package-size-summary">';
 echo Shipper_Model_Stored_Estimate::get_estimated_migration_time_msg();
 if ( $package_size > $threshold ) {
 	echo '&nbsp;';
 	esc_html_e(
-		'You can try excluding the large files to reduce the overall package size for a faster migration.',
+		'If you haven’t already, you can try excluding larger files to speed up migration.',
 		'shipper'
 	);
 }
+echo '</span>';

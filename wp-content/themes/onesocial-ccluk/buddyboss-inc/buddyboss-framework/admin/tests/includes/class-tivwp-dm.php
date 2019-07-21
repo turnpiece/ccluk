@@ -176,7 +176,6 @@ class TIVWP_DM {
      * $all_plugins = array(
      *    'query-monitor'    => 'query-monitor/query-monitor.php',
      *    'debug-bar'        => 'debug-bar/debug-bar.php',
-     *    'woocommerce'      => 'woocommerce/woocommerce.php'
      *    );
      * and then we make the array of the values, keeping only those that are in the $development_plugins
      * @example

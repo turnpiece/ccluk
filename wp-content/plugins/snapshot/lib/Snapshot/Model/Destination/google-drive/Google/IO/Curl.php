@@ -55,7 +55,7 @@ class Google_0814_IO_Curl extends Google_0814_IO_Abstract
     }
 
     curl_setopt($curl, CURLOPT_URL, $request->getUrl());
-
+    
     curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $request->getRequestMethod());
     curl_setopt($curl, CURLOPT_USERAGENT, $request->getUserAgent());
 

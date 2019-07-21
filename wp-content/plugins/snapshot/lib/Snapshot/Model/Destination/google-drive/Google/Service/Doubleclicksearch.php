@@ -37,7 +37,7 @@ class Google_0814_Service_Doubleclicksearch extends Google_0814_Service
   public $conversion;
   public $reports;
   public $savedColumns;
-
+  
 
   /**
    * Constructs the internal representation of the Doubleclicksearch service.

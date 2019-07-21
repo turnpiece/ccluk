@@ -39,7 +39,7 @@ class Google_0814_Service_YouTubeAnalytics extends Google_0814_Service
   public $batchReportDefinitions;
   public $batchReports;
   public $reports;
-
+  
 
   /**
    * Constructs the internal representation of the YouTubeAnalytics service.

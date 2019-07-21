@@ -3,7 +3,7 @@ Contributors: safronik
 Tags: spam, antispam, protection, comments, firewall 
 Requires at least: 3.0
 Tested up to: 5.2
-Stable tag: 5.118.3
+Stable tag: 5.120.1
 License: GPLv2
 
 Spam protection, antispam, all-in-one, premium plugin. No spam comments & users, no spam contact form & WooCommerce anti-spam.
@@ -439,6 +439,8 @@ Use special IP 10.10.10.10 in URL to test Spam FireWall. For example,
 
     https://cleantalk.org/blog/?sfw_test_ip=10.10.10.10
 
+Attention! The incognito mode should be enabled in your browser when you do a test. To enable incognito mode press Ctrl+Shift+N for Chrome, Opera и Safari browsers; press Ctrl+Shift+P for Firefox, Internet Explorer and Microsoft Edge. A full guide to enable Incognito mode is here: https://www.wikihow.com/Activate-Incognito-Mode
+
 = How can I enter access key in WPMU version? =
 To set up global CleanTalk access key for all websites in WPMU, define constant in your wp-config.php file before defining database constants:
 
@@ -558,6 +560,42 @@ If your website has forms that send data to external sources, you can enable opt
 10. Website's options.
 
 == Changelog ==
+= 5.120.1 June 6 2019 =
+  * Mod: Description for Search form protection.
+  * Fix: CSS and JS attachment.
+  * Fix: Undefined index error.
+
+= 5.120 June 5 2019 =
+  * Fix: bbPress false positives.
+  * Fix: SpamFireWall check condition.
+  * Fix: SpamFireWall block page.
+  * Fix: Catch admin action via search form test.
+  * Fix: Catch admin action (AJAX).
+  * Mod: Using minified version of JS and CSS.
+  * Mod: Date format in statistics.
+
+= 5.119.1 May 30 2019 =
+  * Fix: Helper class error.
+
+= 5.119 May 30 2019 =
+  * Fix: No more second request after registration.
+  * Fix: Activation hook.
+  * Fix: Alternative sessions. Clear table.
+  * Fix: Stop capchuring AJAX requests in admin area.
+  * Fix: Spelling.
+  * Fix: Registration cookies set.
+  * Mod: SFW exdtended die page when testing.
+  * Mod: User-agent modified.
+  * New: Test search queries for spam.
+  * New: Gathering and output statistics.
+
+= 5.118.4 May 13 2019 =
+  * Fix: SFW cookie. Set correct domain for subdomains.
+  * Fix: SFW update.
+  * Fix: IP detection.
+  * Fix: Triggering AJAX check in backend.
+  * Fix: Zero submit time on few forms.
+
 = 5.118.3 April 29 2019 =
   * Fix: Spam statistics in dashboard widget.
   * Fix: IP detection.
@@ -1871,6 +1909,43 @@ If your website has forms that send data to external sources, you can enable opt
   * First version
   
 == Upgrade Notice ==
+= 5.120.1 June 6 2019 =
+  * Mod: Description for Search form protection.
+  * Fix: CSS and JS attachment.
+  * Fix: Undefined index error.
+
+= 5.120 June 5 2019 =
+  * Fix: bbPress false positives.
+  * Fix: SpamFireWall check condition.
+  * Fix: SpamFireWall block page.
+  * Fix: Catch admin action via search form test.
+  * Fix: Catch admin action (AJAX).
+  * Mod: Using minified version of JS and CSS.
+  * Mod: Date format in statistics.
+
+
+= 5.119.1 May 30 2019 =
+  * Fix: Helper class error.
+
+= 5.119 May 30 2019 =
+  * Fix: No more second request after registration.
+  * Fix: Activation hook.
+  * Fix: Alternative sessions. Clear table.
+  * Fix: Stop capchuring AJAX requests in admin area.
+  * Fix: Spelling.
+  * Fix: Registration cookies set.
+  * Mod: SFW exdtended die page when testing.
+  * Mod: User-agent modified.
+  * New: Test search queries for spam.
+  * New: Gathering and output statistics.
+
+= 5.118.4 May 13 2019 =
+  * Fix: SFW cookie. Set correct domain for subdomains.
+  * Fix: SFW update.
+  * Fix: IP detection.
+  * Fix: Triggering AJAX check in backend.
+  * Fix: Zero submit time on few forms.
+
 = 5.118.3 April 29 2019 =
   * Fix: Spam statistics in dashboard widget.
   * Fix: IP detection.

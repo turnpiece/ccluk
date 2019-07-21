@@ -6,18 +6,10 @@
  */
 
 $checks = $result['checks']['local'];
-$has_issues = (bool) $checks['errors_count'];
 ?>
 
 <div class="shipper-wizard-tab">
-	<p>
-		<?php if ( $has_issues ) { ?>
-			<?php esc_html_e( 'Your source server configuration check is complete and you have got a few warnings which you might wanna check before migration.', 'shipper' ); ?>
-		<?php } else { //has issues ?>
-			<?php esc_html_e( 'Your source server configuration check is complete.', 'shipper' ); ?>
-		<?php } ?>
-	</p>
-
+	<?php $this->render( 'msgs/wizard-source-errors', array( 'result' => $result ) ); ?>
 	<table class="sui-table sui-table-flushed sui-accordion">
 		<colgroup>
 			<col class="shipper-result-col-1" />
@@ -37,7 +29,7 @@ $has_issues = (bool) $checks['errors_count'];
 				<td class="sui-table-item-title">
 					<?php echo esc_html( $check['title'] ); ?>
 				</td>
-
+				
 				<td class="shipper-check-status">
 				<?php
 					$icon_type = 'ok' === $check['status']
@@ -52,7 +44,7 @@ $has_issues = (bool) $checks['errors_count'];
 					<i aria-hidden="true"
 						class="sui-icon-<?php echo $icon_type; ?> sui-<?php echo $icon_kind; ?>"></i>
 				</td>
-
+				
 				<td>
 					<div class="shipper-check-message">
 					<?php
@@ -77,6 +69,14 @@ $has_issues = (bool) $checks['errors_count'];
 					<div class="sui-box">
 						<div class="sui-box-body">
 							<?php echo $check['message']; ?>
+							<?php if ( 'ok' !== $check['status'] ) { ?>
+								<p>
+									<a href="#reload" class="sui-button">
+										<i class="sui-icon-update" aria-hidden="true"></i>
+										<?php esc_html_e( 'Re-check', 'shipper' ); ?>
+									</a>
+								</p>
+							<?php } ?>
 						</div>
 					</div>
 				</td>
@@ -86,3 +86,4 @@ $has_issues = (bool) $checks['errors_count'];
 		</tbody>
 	</table>
 </div>
+

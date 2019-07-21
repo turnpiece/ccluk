@@ -11,7 +11,7 @@ try {
                 'key' => $this->destination_info['awskey'],
                 'secret' => $this->destination_info['secretkey'],
             ),
-        )
+        ) 
     );
 } catch (Exception $e) {
     $status = false;
@@ -21,7 +21,7 @@ try {
         array(
             'Bucket' => $this->destination_info['bucket'],
         )
-    );
+    );	
     $status = true;
 } catch (Exception $e) {
     $status = false;

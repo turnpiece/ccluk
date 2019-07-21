@@ -13,7 +13,7 @@
  * Plugin Name:       Smush Pro
  * Plugin URI:        http://premium.wpmudev.org/projects/wp-smush-pro/
  * Description:       Reduce image file sizes, improve performance and boost your SEO using the free <a href="https://premium.wpmudev.org/">WPMU DEV</a> WordPress Smush API.
- * Version:           3.2.0.2
+ * Version:           3.2.1
  * Author:            WPMU DEV
  * Author URI:        https://premium.wpmudev.org/
  * License:           GPLv2
@@ -47,11 +47,11 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 if ( ! defined( 'WP_SMUSH_VERSION' ) ) {
-	define( 'WP_SMUSH_VERSION', '3.2.0.2' );
+	define( 'WP_SMUSH_VERSION', '3.2.1' );
 }
 // Used to define body class.
 if ( ! defined( 'WP_SHARED_UI_VERSION' ) ) {
-	define( 'WP_SHARED_UI_VERSION', 'sui-2-3-16' );
+	define( 'WP_SHARED_UI_VERSION', 'sui-2-3-29' );
 }
 if ( ! defined( 'WP_SMUSH_BASENAME' ) ) {
 	define( 'WP_SMUSH_BASENAME', plugin_basename( __FILE__ ) );
@@ -69,7 +69,7 @@ if ( ! defined( 'WP_SMUSH_URL' ) ) {
 	define( 'WP_SMUSH_URL', plugin_dir_url( __FILE__ ) );
 }
 if ( ! defined( 'WP_SMUSH_MAX_BYTES' ) ) {
-	define( 'WP_SMUSH_MAX_BYTES', 1000000 );
+	define( 'WP_SMUSH_MAX_BYTES', 5000000 );
 }
 if ( ! defined( 'WP_SMUSH_PREMIUM_MAX_BYTES' ) ) {
 	define( 'WP_SMUSH_PREMIUM_MAX_BYTES', 32000000 );
@@ -422,8 +422,6 @@ if ( ! class_exists( 'WP_Smush' ) ) {
 				'name'    => 'WP Smush Pro',
 				'screens' => array(
 					'upload',
-					'toplevel_page_smush',
-					'toplevel_page_smush-network',
 				),
 			);
 
@@ -559,7 +557,7 @@ if ( ! class_exists( 'WP_Smush' ) ) {
 		 * @since 3.1.1
 		 */
 		private function maybe_upgrade_to_pro() {
-			if ( 'wp-smush-pro/wp-smush.php' === plugin_basename( __FILE__ ) ) {
+			if ( 'wp-smush-pro/wp-smush.php' === WP_SMUSH_BASENAME ) {
 				return;
 			}
 
@@ -568,7 +566,7 @@ if ( ! class_exists( 'WP_Smush' ) ) {
 				return;
 			}
 
-			if ( ! is_object( WPMUDEV_Dashboard::$api ) ) {
+			if ( ! is_object( WPMUDEV_Dashboard::$api ) || is_null( WPMUDEV_Dashboard::$api ) ) {
 				return;
 			}
 
@@ -583,6 +581,10 @@ if ( ! class_exists( 'WP_Smush' ) ) {
 
 			// Check permissions and configuration.
 			if ( ! WPMUDEV_Dashboard::$upgrader->can_auto_install( self::$project_id ) ) {
+				return;
+			}
+
+			if ( ! method_exists( WPMUDEV_Dashboard::$api, 'get_project_data' ) ) {
 				return;
 			}
 

@@ -46,7 +46,7 @@ class Google_0814_Service_Gmail extends Google_0814_Service
   public $users_messages;
   public $users_messages_attachments;
   public $users_threads;
-
+  
 
   /**
    * Constructs the internal representation of the Gmail service.

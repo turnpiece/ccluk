@@ -22,12 +22,14 @@ if ( ! empty( $visible ) ) {
 			'Higher traffic or a slow host can slow down the migration process.',
 			'shipper'
 		); ?>
+<?php if ( Shipper_Helper_Assets::has_docs_links() ) { ?>
 		<a href="https://premium.wpmudev.org/docs/wpmu-dev-plugins/shipper/#migrationnotice" target="_blank">
 			<?php esc_html_e(
 				'Learn more',
 				'shipper'
 			); ?>
 		</a>
+<?php } ?>
 		</p>
 	</div>
 	<span class="sui-notice-dismiss">

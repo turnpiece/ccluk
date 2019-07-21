@@ -55,7 +55,7 @@ class DropboxFile
      * @var bool
      */
     private $isStream = false;
-
+    
     /**
      * Create a new DropboxFile instance
      *
@@ -75,8 +75,8 @@ class DropboxFile
     {
         $this->close();
     }
-
-
+    
+    
     /**
      * Create a new DropboxFile instance using a file stream
      *
@@ -149,7 +149,7 @@ class DropboxFile
     {
         $this->maxLength = $maxLength;
     }
-
+    
     /**
      * Manually set the stream for this DropboxFile instance
      *
@@ -210,7 +210,7 @@ class DropboxFile
         if ($this->stream && $this->isStream === true) {
             return;
         }
-
+        
         if (!$this->isRemoteFile($this->path)) {
             if (self::MODE_READ === $this->mode && !is_readable($this->path)) {
                 throw new DropboxClientException('Failed to create DropboxFile instance. Unable to read resource: ' . $this->path . '.');

@@ -31,7 +31,7 @@ abstract class Shipper_Stub_Api extends Shipper_Controller {
 	 * @return string
 	 */
 	public function get_api_nopriv( $path ) {
-		return trailingslashit( 'wp_ajax_nopriv_shipper_stub_api_' ) . $path;	   	 	    	 		     	 
+		return trailingslashit( 'wp_ajax_nopriv_shipper_stub_api_' ) . $path;
 	}
 
 }

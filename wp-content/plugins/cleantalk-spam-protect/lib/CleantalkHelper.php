@@ -29,6 +29,20 @@ class CleantalkHelper
 		),
 	);
 	
+	public static $cleantalks_servers = array(
+		// MODERATE
+		'moderate1.cleantalk.org' => '162.243.144.175',
+		'moderate2.cleantalk.org' => '159.203.121.181',
+		'moderate3.cleantalk.org' => '88.198.153.60',
+		'moderate4.cleantalk.org' => '159.69.51.30',
+		'moderate5.cleantalk.org' => '95.216.200.119',
+		'moderate6.cleantalk.org' => '138.68.234.8',
+		// APIX
+		'apix1.cleantalk.org' => '35.158.52.161',
+		'apix2.cleantalk.org' => '18.206.49.217',
+		'apix3.cleantalk.org' => '3.18.23.246',
+	);
+	
 	/*
 	*	Getting arrays of IP (REMOTE_ADDR, X-Forwarded-For, X-Real-Ip, Cf_Connecting_Ip)
 	*	reutrns array('remote_addr' => 'val', ['x_forwarded_for' => 'val', ['x_real_ip' => 'val', ['cloud_flare' => 'val']]])
@@ -72,11 +86,12 @@ class CleantalkHelper
 		
 		// Cloud Flare
 		if(isset($ips['cloud_flare'])){
-			if(isset($headers['Cf-Connecting-Ip'], $headers['Cf-Ipcountry'], $headers['Cf-Ray'])){
-				$ip_type = self::ip__validate($_SERVER['REMOTE_ADDR']);
+			if(isset($headers['CF-Connecting-IP'], $headers['CF-IPCountry'], $headers['CF-RAY']) || isset($headers['Cf-Connecting-Ip'], $headers['Cf-Ipcountry'], $headers['Cf-Ray'])){
+				$tmp = isset($headers['CF-Connecting-IP']) ? $headers['CF-Connecting-IP'] : $headers['Cf-Connecting-Ip'];
+				$tmp = strpos($tmp, ',') !== false ? explode(',', $tmp) : (array)$tmp;
+				$ip_type = self::ip__validate(trim($tmp[0]));
 				if($ip_type){
-//					if(self::ip__mask_match($ips['remote_addr'], self::$cdn_pool['cloud_flare']['ipv4'])){
-						$ips['cloud_flare'] = $headers['Cf-Connecting-Ip'];
+						$ips['real'] = $ip_type == 'v6' ? self::ip__v6_normalize(trim($tmp[0])) : trim($tmp[0]);
 				}
 			}
 		}
@@ -90,10 +105,12 @@ class CleantalkHelper
 				$ips['real'] = $ip_type == 'v6' ? self::ip__v6_normalize($_SERVER['REMOTE_ADDR']) : $_SERVER['REMOTE_ADDR'];
 			
 			// Cloud Flare
-			if(isset($headers['Cf-Connecting-Ip'], $headers['Cf-Ipcountry'], $headers['Cf-Ray'])){
-				$ip_type = self::ip__validate($headers['Cf-Connecting-Ip']);
+			if(isset($headers['CF-Connecting-IP'], $headers['CF-IPCountry'], $headers['CF-RAY']) || isset($headers['Cf-Connecting-Ip'], $headers['Cf-Ipcountry'], $headers['Cf-Ray'])){
+				$tmp = isset($headers['CF-Connecting-IP']) ? $headers['CF-Connecting-IP'] : $headers['Cf-Connecting-Ip'];
+				$tmp = strpos($tmp, ',') !== false ? explode(',', $tmp) : (array)$tmp;
+				$ip_type = self::ip__validate(trim($tmp[0]));
 				if($ip_type)
-					$ips['real'] = $ip_type == 'v6' ? self::ip__v6_normalize($headers['Cf-Connecting-Ip']) : $headers['Cf-Connecting-Ip'];
+					$ips['real'] = $ip_type == 'v6' ? self::ip__v6_normalize(trim($tmp[0])) : trim($tmp[0]);
 				
 			// Sucury
 			}elseif(isset($headers['X-Sucuri-Clientip'], $headers['X-Sucuri-Country'])){
@@ -115,11 +132,11 @@ class CleantalkHelper
 			}
 			
 			// Is private network
-			if($ip_type === false || ($ip_type && (self::ip__is_private_network($ips['real'], $ip_type)) || (self::ip__mask_match($ips['real'], filter_input(INPUT_SERVER, 'SERVER_ADDR').'/24', $ip_type)))){
+			if($ip_type === false || ($ip_type && (self::ip__is_private_network($ips['real'], $ip_type) || self::ip__mask_match($ips['real'], filter_input(INPUT_SERVER, 'SERVER_ADDR').'/24', $ip_type)))){
 				
 				// X-Forwarded-For
 				if(isset($headers['X-Forwarded-For'])){
-					$tmp = explode(",", trim($headers['X-Forwarded-For']));
+					$tmp = explode(',', trim($headers['X-Forwarded-For']));
 					$tmp = trim($tmp[0]);
 					$ip_type = self::ip__validate($tmp);
 					if($ip_type)
@@ -127,7 +144,7 @@ class CleantalkHelper
 				
 				// X-Real-Ip
 				}elseif(isset($headers['X-Real-Ip'])){
-					$tmp = explode(",", trim($headers['X-Real-Ip']));
+					$tmp = explode(',', trim($headers['X-Real-Ip']));
 					$tmp = trim($tmp[0]);
 					$ip_type = self::ip__validate($tmp);
 					if($ip_type)
@@ -154,7 +171,7 @@ class CleantalkHelper
 	}
 	
 	static function ip__is_private_network($ip, $ip_type = 'v4'){
-		return self::ip__mask_match($ip, self::$private_networks[$ip_type]);
+		return self::ip__mask_match($ip, self::$private_networks[$ip_type], $ip_type);
 	}
 	
 	/*
@@ -167,7 +184,7 @@ class CleantalkHelper
 	 * @param cird mixed (string|array of strings)
 	*/
 	static public function ip__mask_match($ip, $cidr, $ip_type = 'v4', $xtet_count = 0)
-	{		
+	{
 		if(is_array($cidr)){
 			foreach($cidr as $curr_mask){
 				if(self::ip__mask_match($ip, $curr_mask, $ip_type)){
@@ -215,6 +232,16 @@ class CleantalkHelper
 		
 		return $result;
 		
+	}
+	
+	/**
+	 * Converts long mask like 4294967295 to number like 32
+	 * 
+	 * @param type $long_mask
+	 */
+	static function ip__mask__long_to_number($long_mask){
+		$num_mask = strpos((string)decbin($long_mask), '0');
+		return $num_mask === false ? 32 : $num_mask;
 	}
 	
 	/*
@@ -270,6 +297,47 @@ class CleantalkHelper
 		return $ip;
 	}
 	
+	static public function ip__resolve__cleantalks($ip){
+		if(CleantalkHelper::ip__validate($ip)){
+			$url = array_search($ip, self::$cleantalks_servers);
+			return $url
+				? $url
+				: self::ip__resolve($ip);
+		}else
+			return $ip;
+	}
+	
+	static public function ip__resolve($ip){
+		if(CleantalkHelper::ip__validate($ip)){
+			$url  = gethostbyaddr($ip);
+			if($url)
+				return $url;
+		}
+		return $ip;
+	}
+	
+	static public function dns__resolve($host, $out = false){
+		
+		// Get DNS records about URL
+        if(function_exists('dns_get_record')){
+            $records = dns_get_record($host, DNS_A);
+            if($records !== false) {
+                $out = $records[0]['ip'];
+            }
+        }
+
+		// Another try if first failed
+        if(!$out && function_exists('gethostbynamel')){
+            $records = gethostbynamel($host);
+            if($records !== false){
+                $out = $records[0];
+            }
+        }
+		
+		return $out;
+		
+	}
+	
 	/**
 	 * Function sends raw http request
 	 *
@@ -299,7 +367,7 @@ class CleantalkHelper
 					CURLOPT_RETURNTRANSFER    => true,
 					CURLOPT_CONNECTTIMEOUT_MS => 3000,
 					CURLOPT_FORBID_REUSE      => true,
-					CURLOPT_USERAGENT         => 'APBCT('.(defined('CLEANTALK_AGENT') ? CLEANTALK_AGENT : 'UNKNOWN_AGENT').')',
+					CURLOPT_USERAGENT         => 'APBCT-wordpress/'.(defined('APBCT_VERSION') ? APBCT_VERSION : 'unknown').'; '.get_bloginfo('url'),
 					CURLOPT_POST              => true,
 					CURLOPT_POSTFIELDS        => str_replace("&amp;", "&", http_build_query($data)),
 					CURLOPT_SSL_VERIFYPEER    => false,
@@ -467,7 +535,7 @@ class CleantalkHelper
 				$encoding = mb_detect_encoding($obj);
 				$encoding = $encoding ? $encoding : $data_codepage;
 				if ($encoding)
-					$obj = mb_convert_encoding($str, 'UTF-8', $encoding);
+					$obj = mb_convert_encoding($obj, 'UTF-8', $encoding);
 			}
 		}
 		return $obj;
@@ -504,5 +572,18 @@ class CleantalkHelper
 	static public function is_json($string)
 	{
 		return is_string($string) && is_array(json_decode($string, true)) ? true : false;
+	}
+	
+	// Escapes MySQL params
+	public static function db__prepare_param($param, $quotes = '\''){
+		if(is_array($param)){
+			foreach($param as &$par){
+				$par = self::db__prepare_param($par);
+			}
+		}
+		global $wpdb;
+		if(is_numeric($param)) $param = intval($param);
+		if(is_string($param))  $param = $quotes.$wpdb->_real_escape($param).$quotes;
+		return $param;
 	}
 }

@@ -128,7 +128,7 @@ if ( is_multisite() ) {
 				delete_metadata( $meta_type, null, 'wp-smush-lossy', '', $delete_all );
 				delete_metadata( $meta_type, null, 'wp-smush-resize_savings', '', $delete_all );
 				delete_metadata( $meta_type, null, 'wp-smush-original_file', '', $delete_all );
-				delete_metadata( $meta_type, null, 'wp-smush-pngjpg_savings', '', $delete_all );				 	          			 
+				delete_metadata( $meta_type, null, 'wp-smush-pngjpg_savings', '', $delete_all );
 
 				foreach ( $smushit_keys as $key ) {
 					$key = 'wp-smush-' . $key;

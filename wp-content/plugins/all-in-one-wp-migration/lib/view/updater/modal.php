@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 
 <div id="ai1wm-modal-dialog-<?php echo esc_attr( $modal ); ?>" class="ai1wm-modal-dialog">
-	<div class="ai1wm-modal-container">
+	<div class="ai1wm-modal-container" role="dialog">
 		<h2><?php _e( 'Enter your Purchase ID', AI1WM_PLUGIN_NAME ); ?></h2>
 		<p><?php _e( 'To update your plugin/extension to the latest version, please fill your Purchase ID below.', AI1WM_PLUGIN_NAME ); ?></p>
 		<p class="ai1wm-modal-error"></p>

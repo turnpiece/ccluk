@@ -71,7 +71,7 @@ $plugin->save_config();
 					</div>
 
 					<div class="row">
-						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">				
 							<div class="wps-welcome-message-pro">
 								<h3><?php esc_html_e('Snapshots', SNAPSHOT_I18N_DOMAIN); ?></h3>
 								<p><small><?php esc_html_e('With Snapshots you can backup and migrate bits and pieces of your website. You can choose what files, plugins/themes and database tables to backup and then store them on third party destinations. To get started, let’s add your first destination.', SNAPSHOT_I18N_DOMAIN); ?></small></p>
@@ -88,7 +88,7 @@ $plugin->save_config();
 				<?php if ( ! $aws_sdk_compatible ) : ?>
 					<?php if ( ! ( $is_client && ! $has_snapshot_key ) ) : ?>
 						<div class="row">
-							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">	
 								<div class="wps-welcome-sdk-incomp">
 
 									<p><?php echo wp_kses_post( sprintf( __( 'Amazon S3 requires PHP 5.5 or later and your host is using an older version of PHP (%s). Contact your host to upgrade your PHP version if you wish to use Amazon S3 as a destination.', SNAPSHOT_I18N_DOMAIN ), PHP_VERSION ) ); ?></p>

@@ -8,6 +8,12 @@
 ?>
 <div class="sui-box shipper-select-site">
 	<div class="sui-box-body">
+		<div>
+			<a href="<?php echo esc_url( remove_query_arg( 'type' ) ); ?>" class="shipper-button-back shipper-work-activator">
+				<i class="sui-icon-arrow-left" aria-hidden="true"></i>
+				<span><?php esc_html_e( 'Go back', 'shipper' ); ?></span>
+			</a>
+		</div>
 		<div class="shipper-content">
 
 			<div class="shipper-header">
@@ -40,6 +46,15 @@
 						</a>
 					</div>
 					<div class="shipper-form-bit shipper-selection">
+						<div class="sui-notice sui-notice-info shipper-page-notice" style="display:none">
+							<p>
+								<?php esc_html_e( 'Want to add a new destination?', 'shipper' ); ?>
+								<a href="#" class="shipper-add-website">
+									<?php esc_html_e( 'Click here', 'shipper' ); ?>
+								</a>
+								<?php esc_html_e( 'to add a destination', 'shipper' ); ?>
+							</p>
+						</div>
 						<select name="site">
 						<?php foreach ( $destinations->get_data() as $item ) { ?>
 							<?php if ( $destinations->is_current( $item ) ) { continue; } ?>
@@ -60,26 +75,17 @@
 
 			</form>
 
-			<div>
-				<a href="<?php echo esc_url( remove_query_arg( 'type' ) ); ?>" class="shipper-button-back shipper-work-activator">
-					<i class="sui-icon-arrow-left" aria-hidden="true"></i>
-					<span><?php esc_html_e( 'Go back', 'shipper' ); ?></span>
-				</a>
-			</div>
-
+		<?php if ( 'export' !== $type ) { ?>
 			<div class="sui-notice sui-notice-info shipper-page-notice">
 				<p>
-				<?php if ( 'export' === $type ) { ?>
-					<?php esc_html_e( 'Want to add a new destination?', 'shipper' ); ?>
-					<?php esc_html_e( 'Tap &quot;Add destination&quot; at the top of this page.', 'shipper' ); ?>
-				<?php } else { ?>
 					<?php esc_html_e( 'Note, Shipper can\'t import local development sites.', 'shipper' ); ?>
 					<?php esc_html_e( 'To migrate a local site to a staging or live server, initiate the migration from the local site itself.', 'shipper' ); ?>
 
-				<?php } ?>
 				</p>
 			</div>
+		<?php } ?>
 
+			<?php echo Shipper_Helper_Assets::get_custom_hero_image_markup(); ?>
 		</div><?php // .shipper-content ?>
 	</div><?php // .sui-box-body ?>
 </div><?php // .sui-box ?>

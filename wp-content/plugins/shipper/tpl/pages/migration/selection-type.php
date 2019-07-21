@@ -43,6 +43,7 @@
 				</li>
 			</ul>
 
+			<?php echo Shipper_Helper_Assets::get_custom_hero_image_markup(); ?>
 		</div><?php // .shipper-content ?>
 	</div><?php // .sui-box-body ?>
 </div><?php // .sui-box ?>

@@ -1,7 +1,4 @@
-/*--------------------------------------------------------------
-Custom stylesheet.
-
-*/
+// Custom stylesheet.
 
 /** Import partials **/
 
@@ -43,6 +40,16 @@ MAXIMUM width of 1024 pixels (tablets)
 
 
 /*--------------------------------------------------------------
+MAXIMUM width of 768 pixels (vertical tablets & large phones)
+--------------------------------------------------------------*/
+@media screen and (max-width: 768px) {
+
+	@import "partials/max-width-768px";
+
+}
+
+
+/*--------------------------------------------------------------
 MAXIMUM width of 520 pixels (large phones and smaller)
 --------------------------------------------------------------*/
 @media screen and (max-width: 520px) {
@@ -78,7 +85,7 @@ MINIMUM width of 481 pixels (phones and larger)
 @media screen and (min-width: 481px)  {
 
 	@import "partials/min-width-481px";
-	
+
 }
 
 

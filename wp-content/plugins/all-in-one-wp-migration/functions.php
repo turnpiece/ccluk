@@ -1409,3 +1409,24 @@ function ai1wm_setup_environment() {
 	// Set shutdown handler
 	@register_shutdown_function( 'Ai1wm_Handler::shutdown' );
 }
+
+/**
+ * Get WordPress time zone string
+ *
+ * @return string
+ */
+function ai1wm_get_timezone_string() {
+	if ( ( $timezone_string = get_option( 'timezone_string' ) ) ) {
+		return $timezone_string;
+	}
+
+	if ( ( $gmt_offset = get_option( 'gmt_offset' ) ) ) {
+		if ( $gmt_offset > 0 ) {
+			return sprintf( 'UTC+%s', abs( $gmt_offset ) );
+		} elseif ( $gmt_offset < 0 ) {
+			return sprintf( 'UTC-%s', abs( $gmt_offset ) );
+		}
+	}
+
+	return 'UTC';
+}

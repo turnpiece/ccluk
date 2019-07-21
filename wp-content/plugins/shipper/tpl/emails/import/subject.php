@@ -6,7 +6,7 @@
  */
 
 if ( ! ! $status ) {
-	echo esc_html(
+	echo esc_html( 
 		sprintf(
 			__('Shipper successfully Imported your site to %s', 'shipper' ),
 			$migration->get_source()

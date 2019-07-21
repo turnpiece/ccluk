@@ -1135,6 +1135,17 @@ class WPMUDEV_Dashboard_Site {
 								);
 							}
 
+							if ( isset( $result['limit_exceeded'] ) && $result['limit_exceeded'] ) {
+								$this->send_json_error(
+									array(
+										'redirect' => add_query_arg(
+											array( 'site_limit_exceeded' => '1' ),
+											WPMUDEV_Dashboard::$ui->page_urls->dashboard_url
+										),
+									)
+								);
+							}
+
 							$this->send_json_error(
 								array(
 									'redirect' => add_query_arg(

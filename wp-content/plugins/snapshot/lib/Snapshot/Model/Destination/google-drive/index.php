@@ -236,13 +236,8 @@ if ( ! class_exists( 'SnapshotDestinationGoogleDrive' ) && version_compare( phpv
 						if ( $this->client->isAccessTokenExpired() ) {
 							echo "access_token2 has expired #2<br />";
 						} else {
-							//echo "access_token2 NOT expired<br />";
-							//return true;
-							assert(true); // Nothing to see here.
 						}
 					} else {
-						//echo "access_token1 NOT expired<br />";
-						assert(true); // Nothing to see here.
 					}
 				}
 
@@ -415,7 +410,7 @@ if ( ! class_exists( 'SnapshotDestinationGoogleDrive' ) && version_compare( phpv
 
 						$this->progress_of_files( array( 'file_offset' => $chunk_parts_sum ) );
 					}
-
+					
 					fclose( $handle ); // phpcs:ignore
 
 					$httpResultCode = $media->getHttpResultCode();
@@ -551,8 +546,8 @@ if ( ! class_exists( 'SnapshotDestinationGoogleDrive' ) && version_compare( phpv
 						array(
 							'step' => $form_step,
 							'snapshot-action' => 'edit'
-						)
-                    )
+						) 
+                    ) 
                 );
 			}
 
@@ -588,7 +583,7 @@ if ( ! class_exists( 'SnapshotDestinationGoogleDrive' ) && version_compare( phpv
 						<?php
 						if ( isset( $item['type'] ) ) {
 							echo ' snapshot-row-filter-type-' . esc_attr( $item['type'] );
-						}
+						} 
                         ?>
                         ">
 							<td class="snapshot-col-delete">
@@ -609,14 +604,14 @@ if ( ! class_exists( 'SnapshotDestinationGoogleDrive' ) && version_compare( phpv
                             <?php
 								if ( isset( $item['clientid'] ) ) {
 									echo esc_html( $item['clientid'] );
-								}
+								} 
                                 ?>
                                 </td>
 							<td class="snapshot-col-directory">
                             <?php
 								if ( isset( $item['directory'] ) ) {
 									echo esc_html( $item['directory'] );
-								}
+								} 
                                 ?>
                                 </td>
 							<td class="snapshot-col-used"><?php Snapshot_Model_Destination::show_destination_item_count( $idx ); ?></td>
@@ -628,7 +623,7 @@ if ( ! class_exists( 'SnapshotDestinationGoogleDrive' ) && version_compare( phpv
 					<tr class="form-field">
 					<td colspan="4">
                     <?php
-						echo sprintf( esc_html__( 'No %s Destinations', SNAPSHOT_I18N_DOMAIN ), esc_html( $this->name_display ) );
+						echo sprintf( esc_html__( 'No %s Destinations', SNAPSHOT_I18N_DOMAIN ), esc_html( $this->name_display ) ); 
                         ?>
                         </td>
 					</tr>
@@ -685,10 +680,10 @@ if ( ! class_exists( 'SnapshotDestinationGoogleDrive' ) && version_compare( phpv
 						$form_step = 1;
 						?>
 						<p><?php esc_html_e( 'Step 1: Define a name for this Destination', SNAPSHOT_I18N_DOMAIN ); ?>
-							<?php
+							<?php 
 	                        if ( $form_step > 1 ) {
 									echo ' - ' . wp_kses_post( __( '<strong>COMPLETE</strong>' ) );
-							}
+							} 
 	                        ?>
 						</p>
 						<?php
@@ -709,26 +704,26 @@ if ( ! class_exists( 'SnapshotDestinationGoogleDrive' ) && version_compare( phpv
 								<?php if ( 1 === $form_step ) { ?>
 									<input type="text" name="snapshot-destination[name]" id="snapshot-destination-name"
 										   value="
-                                           <?php
+                                           <?php 
                                            if ( isset( $item['name'] ) ) {
 											   echo esc_attr( stripslashes( sanitize_text_field( $item['name'] ) ) );
-										   }
+										   } 
                                            ?>
                                            "/>
-								<?php
+								<?php 
                                 } else if ( $form_step > 1 ) {
 									echo esc_attr( stripslashes( sanitize_text_field( $item['name'] ) ) );
 									?>
                                     <input type="hidden" name="snapshot-destination[name]"
 											 id="snapshot-destination-name" value="
-                                             <?php
+                                             <?php 
                                              if ( isset( $item['name'] ) ) {
 										echo esc_attr( stripslashes( sanitize_text_field( $item['name'] ) ) );
-									}
+									} 
                                     ?>
                                     " />
                                     <?php
-								}
+								} 
                                 ?>
 							</td>
 						</tr>
@@ -739,10 +734,10 @@ if ( ! class_exists( 'SnapshotDestinationGoogleDrive' ) && version_compare( phpv
 							<td style="width:40%"><input type="text" name="snapshot-destination[directory]"
 														 id="snapshot-destination-directory"
 														 value="
-                                                         <?php
+                                                         <?php 
                                                          if ( isset( $item['directory'] ) ) {
 															 echo esc_attr( $item['directory'] );
-														 }
+														 } 
                                                          ?>
                                                          "/><br/>
 
@@ -762,10 +757,10 @@ if ( ! class_exists( 'SnapshotDestinationGoogleDrive' ) && version_compare( phpv
 					if ( $form_step > 1 ) {
 						?>
 						<p><?php esc_html_e( 'Step 2: Google Drive Access Credentials', SNAPSHOT_I18N_DOMAIN ); ?>
-							<?php
+							<?php 
                         	if ( $form_step > 2 ) {
 								echo ' - ' . esc_html__( '<strong>COMPLETE</strong>' );
-							}
+							} 
                             ?>
                         </p>
 						<table class="form-table">
@@ -776,10 +771,10 @@ if ( ! class_exists( 'SnapshotDestinationGoogleDrive' ) && version_compare( phpv
 								<td style="width:40%"><input type="text" name="snapshot-destination[clientid]"
 															 id="snapshot-destination-clientid"
 															 value="
-                                                             <?php
+                                                             <?php 
                                                              if ( isset( $item['clientid'] ) ) {
 																 echo esc_attr( sanitize_text_field( $item['clientid'] ) );
-															 }
+															 } 
                                                              ?>
                                                              "/></td>
 								<td rowspan="3" style="width: 50%">
@@ -800,10 +795,10 @@ if ( ! class_exists( 'SnapshotDestinationGoogleDrive' ) && version_compare( phpv
 								<td><input type="password" name="snapshot-destination[clientsecret]"
 										   id="snapshot-destination-clientsecret"
 										   value="
-                                           <?php
+                                           <?php 
                                            if ( isset( $item['clientsecret'] ) ) {
 											   echo esc_attr( sanitize_text_field( $item['clientsecret'] ) );
-										   }
+										   } 
                                            ?>
                                            "/></td>
 							</tr>
@@ -856,10 +851,10 @@ if ( ! class_exists( 'SnapshotDestinationGoogleDrive' ) && version_compare( phpv
 					if ( $form_step > 2 ) {
 						?>
 						<p><?php esc_html_e( 'Step 3: Google Authorize', SNAPSHOT_I18N_DOMAIN ); ?>
-							<?php
+							<?php 
                         	if ( $form_step > 3 ) {
 								echo ' - ' . wp_kses_post( __( '<strong>COMPLETE</strong>' ) );
-							}
+							} 
                             ?>
                         </p>
 						<table class="form-table">

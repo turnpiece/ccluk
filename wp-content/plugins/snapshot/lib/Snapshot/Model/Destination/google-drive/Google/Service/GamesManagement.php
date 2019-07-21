@@ -44,7 +44,7 @@ class Google_0814_Service_GamesManagement extends Google_0814_Service
   public $rooms;
   public $scores;
   public $turnBasedMatches;
-
+  
 
   /**
    * Constructs the internal representation of the GamesManagement service.

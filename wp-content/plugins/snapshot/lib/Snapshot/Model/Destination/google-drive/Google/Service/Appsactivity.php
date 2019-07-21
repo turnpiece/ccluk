@@ -41,7 +41,7 @@ class Google_0814_Service_Appsactivity extends Google_0814_Service
   const DRIVE_READONLY = "https://www.googleapis.com/auth/drive.readonly";
 
   public $activities;
-
+  
 
   /**
    * Constructs the internal representation of the Appsactivity service.

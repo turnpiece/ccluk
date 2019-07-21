@@ -8,7 +8,7 @@ select#snapshot-destination-bucket-list {
 #snapshot-ajax-destination-test-result,
 #snapshot-ajax-destination-bucket-error {
     display: block;
-    padding: 5px 10px;
+    padding: 5px 10px;    
     background-color: #FFFFFF;
     border-color: #DFDFDF;
 	width: 60%
@@ -19,6 +19,3 @@ select#snapshot-destination-bucket-list {
 	background: url("../img/snapshot-test-connection-loader.gif") no-repeat scroll 0 0 transparent;
 	height: 25px;
 }
-
-
-/* 87274-1554644954-au */

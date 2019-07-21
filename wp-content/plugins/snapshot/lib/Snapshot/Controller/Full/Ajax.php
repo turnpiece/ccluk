@@ -665,7 +665,7 @@ class Snapshot_Controller_Full_Ajax extends Snapshot_Controller_Full {
 	 */
 	public function json_finish_backup() {
 		check_ajax_referer( 'snapshot-ajax-nonce', 'security' );
-
+		
 		$data = stripslashes_deep( $_POST );
 		$idx = ! empty( $data['idx'] ) ? $data['idx'] : $this->_get_backup_type();
 

@@ -198,52 +198,52 @@ if ( ! class_exists( 'Snapshot_Helper_UI' ) ) {
 			}
 			?>
 			<div class="wpmud-box-gray">
-
+				
 				<div class="radio-destination">
-
+					
 						<?php foreach ( $destinations['row1'] as $destination ) : ?>
-
+						
 						<div class="wps-input--item <?php echo ( !$aws_sdk_compatible && 'aws' === $destination['type'] ) ? 'destination-disabled' : ''; ?>">
-
+							
 							<div class="wps-input--radio">
-
+								
 								<input data-destination-type="<?php echo esc_attr( $destination['type'] ); ?>" <?php echo ( $destination['key'] === $selected_destination ) ? "checked" : ""; ?> type="radio" name="snapshot-destination" id="snap-<?php echo esc_attr( $destination['key'] ); ?>" value="<?php echo esc_attr( $destination['key'] ); ?>" <?php echo ( !$aws_sdk_compatible && 'aws' === $destination['type'] ) ? 'disabled' : ''; ?> />
-
+								
 								<label for="snap-<?php echo esc_attr( $destination['key'] ); ?>"></label>
-
+								
 					    </div>
-
+							
 							<label for="snap-<?php echo esc_attr( $destination['key'] ); ?>"><span><?php echo esc_html( $destination['name'] ); ?></span><i class="wps-typecon <?php echo esc_attr( $destination['type'] ); ?>"></i></label>
-
+							
 					</div>
-
+						
 					<?php endforeach; ?>
-
+					
 						<?php foreach ( $destinations['row2'] as $destination ) : ?>
 
 						<div class="wps-input--item <?php echo ( !$aws_sdk_compatible && 'aws' === $destination['type'] ) ? 'destination-disabled' : ''; ?>">
-
+							
 							<div class="wps-input--radio">
-
+								
 								<input data-destination-type="<?php echo esc_attr( $destination['type'] ); ?>" <?php echo ( $destination['key'] === $selected_destination ) ? "checked" : ""; ?> type="radio" name="snapshot-destination" id="snap-<?php echo esc_attr( $destination['key'] ); ?>" value="<?php echo esc_attr( $destination['key'] ); ?>" <?php echo ( !$aws_sdk_compatible && 'aws' === $destination['type'] ) ? 'disabled' : ''; ?> />
-
+								
 								<label for="snap-<?php echo esc_attr( $destination['key'] ); ?>"></label>
-
+								
 						</div>
-
+							
 							<label for="snap-<?php echo esc_attr( $destination['key'] ); ?>"><span><?php echo esc_html( $destination['name'] ); ?></span><i class="wps-typecon <?php echo esc_attr( $destination['type'] ); ?>"></i></label>
-
+							
 					</div>
-
+						
 					<?php endforeach; ?>
-
+					
 				</div>
 				<?php if( count( $all_destinations ) < 2 ) : ?>
 				<div class="wps-notice"><p><?php echo wp_kses_post( sprintf( __( "You haven't added any third party destinations yet. It's much safer to store your snapshots off-site so we recommend you add <a href='%s'>another destination</a>.", SNAPSHOT_I18N_DOMAIN ), WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url('snapshots-newui-destinations') ) ); ?></p></div>
 				<?php endif; ?>
 			</div>
 			<?php
-		}
+		}	
 
 		/**
 		 *
@@ -261,7 +261,7 @@ if ( ! class_exists( 'Snapshot_Helper_UI' ) ) {
 		}
 
 		public static function table_pagination($total = 1, $echo = true){
-			// We need to remove the message parameter in order to make the pagination work,
+			// We need to remove the message parameter in order to make the pagination work, 
 			// in case the user has deleted a snapshot
 			add_filter( 'paginate_links', array( 'Snapshot_Helper_UI', 'remove_delete_message' ) );
 
@@ -275,9 +275,9 @@ if ( ! class_exists( 'Snapshot_Helper_UI' ) ) {
 				}
 			}
 			$paged = ( !isset( $_GET['paged'] ) ) ? 1 : intval( $_GET['paged'] );
-			$old_base = ( strpos( get_pagenum_link( $big, false ), '&message=') !== false ?
+			$old_base = ( strpos( get_pagenum_link( $big, false ), '&message=') !== false ? 
 				remove_query_arg( 'message', get_pagenum_link( $big, false ) )
-				:
+				: 
 				get_pagenum_link( $big )
 			);
 
@@ -311,11 +311,11 @@ if ( ! class_exists( 'Snapshot_Helper_UI' ) ) {
 					echo wp_kses( $pagination, array(
 						'li' => array( 'class' => array() ),
 						'a' => array( 'href' => array(),
-							'class' => array()
+							'class' => array() 
 						),
 						'span' => array( 'aria-current' => array(),
-							'class' => array()
-						)
+							'class' => array() 
+						) 
 					) );
 				} else {
 					return $pagination;
@@ -324,7 +324,7 @@ if ( ! class_exists( 'Snapshot_Helper_UI' ) ) {
 		}
 
 		public static function remove_delete_message( $link ) {
-				return
+				return  
 				isset( $_REQUEST['message'] ) // phpcs:ignore
 				? remove_query_arg( 'message', $link )
 				: $link;
@@ -340,14 +340,14 @@ if ( ! class_exists( 'Snapshot_Helper_UI' ) ) {
 		 */
 		public static function snapshot_aws_compatibility_notices( $local_type = '', $local_message = '' ) {
 			$model = new Snapshot_Model_Full_Backup();
-
+		
 			$is_dashboard_active = $model->is_dashboard_active();
 			$is_dashboard_installed = $is_dashboard_active
 				? true
 				: $model->is_dashboard_installed()
 			;
 			$has_dashboard_key = $model->has_dashboard_key();
-
+		
 			$is_client = $is_dashboard_installed && $is_dashboard_active && $has_dashboard_key;
 
 			$class = 'notice notice-error snapshot-three snapshot-aws-combat is-dismissible';
@@ -357,7 +357,7 @@ if ( ! class_exists( 'Snapshot_Helper_UI' ) ) {
 				$message = sprintf( __( '<strong>Managed Backups</strong> and <strong>Amazon S3 Snapshot</strong> require PHP 5.5 or later and your host is using an older version of PHP (%s). Contact your host to upgrade your PHP version if you wish to use any of these features. Your scheduled S3 snapshots have been disabled.', SNAPSHOT_I18N_DOMAIN ), PHP_VERSION );
 			}
 
-			printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), wp_kses_post( $message ) );
+			printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), wp_kses_post( $message ) ); 
 
 		}
 	}

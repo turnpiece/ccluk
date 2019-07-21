@@ -78,11 +78,8 @@ class Shipper_Model_Stored_Estimate extends Shipper_Model_Stored {
 			return '';
 		}
 
-		$threshold = Shipper_Model_Stored_Migration::get_package_size_threshold();
 		$package_size = $this->get( 'package_size', 0 );
-		$msg = $package_size > $threshold
-			?  __( 'Your site is quite large (%1$s) and <b>it could take %2$dh - %3$dh to migrate</b> because we are migrating one-file-at-a-time via a super-secure API to ensure 100%% effective, secure, safe and foolproof migrations.', 'shipper' )
-			:  __( 'Your site is reasonably small (%1$s) but <b>it could still take around %2$dh - %3$dh to migrate</b> because we are migrating one-file-at-a-time via a super-secure API to ensure 100%% effective, secure, safe and foolproof migrations.', 'shipper' );
+		$msg =  __( 'Your website is %1$s in size which <b>could take %2$d to %3$d hours to migrate</b> as we are using our advanced API to make sure the process is as stable as possible.', 'shipper' );
 
 		return sprintf(
 			$msg,

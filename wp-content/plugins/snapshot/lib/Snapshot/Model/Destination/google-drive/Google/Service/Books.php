@@ -51,7 +51,7 @@ class Google_0814_Service_Books extends Google_0814_Service
   public $volumes_mybooks;
   public $volumes_recommended;
   public $volumes_useruploaded;
-
+  
 
   /**
    * Constructs the internal representation of the Books service.

@@ -353,8 +353,8 @@ class CCLUK_Customizer {
 
     	$section = 'homepage_banner';
 
-		$this->add_homepage_panel( 
-			$section, 
+		$this->add_homepage_panel(
+			$section,
 			esc_html__( 'Homepage: Banner', 'onesocial' ),
 			esc_html__( 'Set the banner image and content', 'onesocial' ),
 			$priority
@@ -362,10 +362,28 @@ class CCLUK_Customizer {
 
 	    $this->standard_settings( $section, 'banner' );
 
+	    $this->customize->add_setting( $section.'_layout', array(
+		  	'capability' => 'edit_theme_options',
+		  	'default' => 'background',
+		  	'sanitize_callback' => array( $this, 'sanitize_text' ),
+		) );
+
+		$this->customize->add_control( $section.'_layout', array(
+		  	'type' => 'radio',
+		  	'section' => $section.'_settings',
+		  	'label' => __( 'Layout', 'onesocial' ),
+		  	'choices' => array(
+		    	'text-left' => __( 'Text on left, image on right', 'onesocial' ),
+		    	'text-right' => __( 'Text on right, image on left', 'onesocial' ),
+		    	'background' => __( 'Centred text over darkened background image', 'onesocial' ),
+				'background-box' => __( 'Centred text box over background image', 'onesocial' ),
+		  	),
+		) );
+
 		$this->add_content_section( $section );
 
-		$this->add_setting( 
-			$section.'_heading', 
+		$this->add_setting(
+			$section.'_heading',
 			'sanitize_text'
 		);
 
@@ -378,8 +396,8 @@ class CCLUK_Customizer {
 			)
 		));
 
-		$this->add_setting( 
-			$section.'_text', 
+		$this->add_setting(
+			$section.'_text',
 			'sanitize_text'
 		);
 
@@ -405,7 +423,19 @@ class CCLUK_Customizer {
 				'choices'       => $this->option_pages,
 				'description'   => esc_html__('Select the page you want to link to.', 'onesocial'),
 			)
-		);	
+		);
+
+		// Image
+		$this->add_setting( $section.'_image', 'sanitize_number' );
+
+		$this->customize->add_control( new WP_Customize_Image_Control(
+			$this->customize,
+			$section.'_image',
+			array(
+	        'label'             => __('Image', 'onesocial'),
+	        'section'           => $section.'_content',
+	        'settings'          => $section.'_image',
+	    )));
 
 		// Buttons
 		for( $i = 1; $i <= 2; $i++ ) {
@@ -420,10 +450,10 @@ class CCLUK_Customizer {
 					'choices'       => $this->option_pages,
 					'description'   => esc_html__('Select the page you want the button to link to.', 'onesocial'),
 				)
-			);	
+			);
 
-			$this->add_setting( 
-				$section.'_button_'.$i.'_text', 
+			$this->add_setting(
+				$section.'_button_'.$i.'_text',
 				'sanitize_text'
 			);
 
@@ -442,17 +472,17 @@ class CCLUK_Customizer {
 
 		$section = 'homepage_join';
 
-	    $this->add_homepage_panel( 
-	    	$section, 
-	    	esc_html__( 'Homepage: Join', 'onesocial' ), 
-	    	esc_html__( 'The join CCL UK section on the homepage', 'onesocial' ), 
-	    	$priority 
+	    $this->add_homepage_panel(
+	    	$section,
+	    	esc_html__( 'Homepage: Join', 'onesocial' ),
+	    	esc_html__( 'The join CCL UK section on the homepage', 'onesocial' ),
+	    	$priority
 	    );
 
 	    $this->standard_settings( $section, 'join' );
 
 		// Title
-		$this->add_setting( 
+		$this->add_setting(
 			$section.'_title',
 			'sanitize_text_field',
 			sprintf( __('Join %s', 'onesocial'), get_bloginfo('name') )
@@ -467,7 +497,7 @@ class CCLUK_Customizer {
 		);
 
 		// Source page settings
-		$this->add_setting( 
+		$this->add_setting(
 			$section.'_source_page',
 			'sanitize_number'
 		);
@@ -506,8 +536,8 @@ class CCLUK_Customizer {
 
     	$section = 'homepage_newsletter';
 
-		$this->add_homepage_panel( 
-			$section, 
+		$this->add_homepage_panel(
+			$section,
 			esc_html__( 'Homepage: Newsletter', 'onesocial' ),
 			esc_html__( 'The newsletter section on the homepage', 'onesocial' ),
 			$priority
@@ -517,9 +547,9 @@ class CCLUK_Customizer {
 
 		$this->add_content_section( $section );
 
-		$this->add_setting( 
-			$section.'_text', 
-			'sanitize_text', 
+		$this->add_setting(
+			$section.'_text',
+			'sanitize_text',
 			__( 'If you want to know what we\'re up to, signup for our newsletter.', 'onesocial' )
 		);
 
@@ -533,10 +563,10 @@ class CCLUK_Customizer {
 			)
 		));
 
-		$this->add_setting( 
-			$section.'_privacy_text', 
-			'sanitize_text', 
-			__( 'We respect your privacy.', 'onesocial' ) 
+		$this->add_setting(
+			$section.'_privacy_text',
+			'sanitize_text',
+			__( 'We respect your privacy.', 'onesocial' )
 		);
 
 		$this->customize->add_control( new CCLUK_Editor_Custom_Control(
@@ -554,8 +584,8 @@ class CCLUK_Customizer {
 
     	$section = 'homepage_embed';
 
-		$this->add_homepage_panel( 
-			$section, 
+		$this->add_homepage_panel(
+			$section,
 			esc_html__( 'Homepage: Embed HTML', 'onesocial' ),
 			esc_html__( 'Embed some HTML code such as for a mailing list signup form', 'onesocial' ),
 			$priority
@@ -564,8 +594,8 @@ class CCLUK_Customizer {
 	    $this->standard_settings( $section, 'embed' );
 
 		// Title
-		$this->add_setting( 
-			$section.'_title', 
+		$this->add_setting(
+			$section.'_title',
 			'sanitize_text'
 		);
 
@@ -579,8 +609,8 @@ class CCLUK_Customizer {
 
 		$this->add_content_section( $section );
 
-		$this->add_setting( 
-			$section.'_text', 
+		$this->add_setting(
+			$section.'_text',
 			'sanitize_text'
 		);
 
@@ -606,8 +636,8 @@ class CCLUK_Customizer {
 			)
 		));
 
-		$this->add_setting( 
-			$section.'_link_text', 
+		$this->add_setting(
+			$section.'_link_text',
 			'sanitize_text'
 		);
 
@@ -633,14 +663,14 @@ class CCLUK_Customizer {
 				'choices'       => $this->option_pages,
 				'description'   => esc_html__('Select the page you want to link to. If you\'ve pasted in HTML code for a newsletter signup form then you\'ll need to link to the page your privacy policy is on.', 'onesocial'),
 			)
-		);		
+		);
 	}
 
 	private function homepage_about( $priority = 180 ) {
 
     	$section = 'homepage_about';
 
-	    $this->add_homepage_panel( 
+	    $this->add_homepage_panel(
 	    	$section,
 			esc_html__( 'Homepage: About', 'onesocial' ),
 			'',
@@ -650,7 +680,7 @@ class CCLUK_Customizer {
 	    $this->standard_settings( $section, 'about' );
 
 		// Title
-		$this->add_setting( 
+		$this->add_setting(
 			$section.'_title',
 			'sanitize_text_field',
 			esc_html__('About Us', 'onesocial')
@@ -726,7 +756,7 @@ class CCLUK_Customizer {
 
 		$section = 'homepage_contact';
 
-	    $this->add_homepage_panel( 
+	    $this->add_homepage_panel(
 	    	$section,
 	    	esc_html__( 'Homepage: Contact', 'onesocial' ),
 	    	'',
@@ -736,7 +766,7 @@ class CCLUK_Customizer {
 		$this->standard_settings( $section, 'contact' );
 
 		// Title
-		$this->add_setting( 
+		$this->add_setting(
 			$section.'_title',
 			array( $this, 'sanitize_text_field' ),
 			esc_html__('Get in touch', 'onesocial')
@@ -833,7 +863,7 @@ class CCLUK_Customizer {
 		));
 
 		// Address Box
-		$this->add_setting( 
+		$this->add_setting(
 			$section.'_address_title',
 			'sanitize_text_field'
 		);
@@ -847,7 +877,7 @@ class CCLUK_Customizer {
 		);
 
 		// Contact Text
-		$this->add_setting( 
+		$this->add_setting(
 			$section.'_address',
 			array( $this, 'sanitize_text' )
 		);
@@ -861,7 +891,7 @@ class CCLUK_Customizer {
 		);
 
 		// Contact Phone
-		$this->add_setting( 
+		$this->add_setting(
 			$section.'_phone',
 			array( $this, 'sanitize_text' )
 		);
@@ -875,7 +905,7 @@ class CCLUK_Customizer {
 		);
 
 		// Contact Email
-		$this->add_setting( 
+		$this->add_setting(
 			$section.'_email',
 			'sanitize_email'
 		);
@@ -889,7 +919,7 @@ class CCLUK_Customizer {
 		);
 
 		// Contact Fax
-		$this->add_setting( 
+		$this->add_setting(
 			$section.'_fax',
 			array( $this, 'sanitize_text' )
 		);

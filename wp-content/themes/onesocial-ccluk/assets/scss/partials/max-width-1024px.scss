@@ -1,4 +1,10 @@
  body {
+
+     .entry-title,
+     h2 {
+         font-size: $font-size-mid;
+     }
+
     &.page {
         #secondary.widget-area {
             @include centred-margin( 2 );
@@ -23,6 +29,14 @@
                 .item-header-sidebar {
                     display: none;
                 }
+            }
+        }
+    }
+
+    &.register {
+        div#register-page {
+            p {
+                font-size: $font-size-sm;
             }
         }
     }

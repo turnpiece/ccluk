@@ -8,9 +8,10 @@
 ?>
 <footer class="shipper-footer">
 	<div class="sui-footer">
-		Made with <i class="sui-icon-heart"></i> by WPMU DEV
+		<?php echo Shipper_Helper_Assets::get_footer_text(); ?>
 	</div>
 
+<?php if ( ! Shipper_Helper_Assets::has_custom_footer() ) { ?>
 	<ul class="sui-footer-nav">
 		<li><a href="https://premium.wpmudev.org/hub/" target="_blank">The Hub</a></li>
 		<li><a href="https://premium.wpmudev.org/projects/category/plugins/" target="_blank">Plugins</a></li>
@@ -37,4 +38,5 @@
 			<span class="sui-screen-reader-text">Instagram</span>
 		</a></li>
 	</ul>
+<?php } ?>
 </footer>

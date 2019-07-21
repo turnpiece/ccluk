@@ -198,10 +198,21 @@ class Shipper_Model_Database_Table_Import extends Shipper_Model_Database_Table {
 				$tables[] = pathinfo( $file, PATHINFO_FILENAME );
 			}
 
-			// Resolve table dependencies!
+			// Resolve table dependencies and options tables.
 			$dependencies = array();
+			$options = array();
 			$matcher = '(' . join( '|', $tables ) . ')';
 			foreach ( $tables as $tidx => $table ) {
+
+				// Check if we're dealing with an options-like table first.
+				if ( preg_match( '/(options|sitemeta)$/', $table ) ) {
+					// We do.
+					$options[] = $table;
+					unset( $tables[ $tidx ] );
+					// We'll be pushing that last anyway, so carry on.
+					continue;
+				}
+
 				$model = new Shipper_Model_Database_Table_Import( $table );
 				$statements = $model->get_statements( 1, 1 );
 				if ( empty( $statements ) ) { continue; }
@@ -220,6 +231,12 @@ class Shipper_Model_Database_Table_Import extends Shipper_Model_Database_Table {
 			}
 			foreach ( $dependencies as $dep ) {
 				$tables[] = $dep;
+			}
+
+			if ( ! empty( $options ) ) {
+				foreach( $options as $options_like_table ) {
+					$tables[] = $options_like_table;
+				}
 			}
 		}
 

@@ -69,6 +69,7 @@ $errors = ! empty( $errors ) ? $errors : array();
 			<i class="sui-icon-warning-alert shipper-warning" aria-hidden="true"></i>
 			<?php esc_html_e( 'You’re migrating between two different hosts and this could be the reason for failed migration. You can try to contact support for this.', 'shipper' ); ?>
 		</p>
+	<?php if ( Shipper_Helper_Assets::has_docs_links() ) { ?>
 		<p>
 			<i class="sui-icon-warning-alert" aria-hidden="true"></i>
 			<?php printf(
@@ -89,6 +90,7 @@ $errors = ! empty( $errors ) ? $errors : array();
 				esc_url( 'https://premium.wpmudev.org/hub/support/' )
 			); ?>
 		</p>
+	<?php } ?>
 	</div>
 
 </div> <?php // .shipper-migration-error ?>

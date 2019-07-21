@@ -53,9 +53,9 @@ if ( ! defined( 'WPINC' ) ) {
 			<# } else if ( 'strip_exif' === data.slide ) { #>
 			<?php esc_html_e( 'Whenever you take a photo, your camera stores metadata, such as focal length, date, time and location, within the image. Removing this data will reduce your image sizes.', 'wp-smushit' ); ?>
 			<# } else if ( 'original' === data.slide ) { #>
-			<?php esc_html_e( 'Choose to also compress your original image uploads - helpful if your theme serve full size images.', 'wp-smushit' ); ?>
+			<?php esc_html_e( 'You can also have Smush compress your original images - helpful if your theme loads full size images', 'wp-smushit' ); ?>
 			<# } else if ( 'usage' === data.slide ) { #>
-			<?php esc_html_e( 'Help us improve Smush by letting our product designers gain insight into what features need improvement. We don’t track any personalised data, it’s all basic stuff.', 'wp-smushit' ); ?>
+			<?php esc_html_e( 'Help us improve Smush by letting our product designers gain insight into what features need improvement. We don’t track any personalized data, it’s all basic stuff.', 'wp-smushit' ); ?>
 			<# } #>
 		</p>
 

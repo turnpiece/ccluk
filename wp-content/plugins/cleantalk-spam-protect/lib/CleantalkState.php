@@ -30,7 +30,8 @@ class CleantalkState
         'comments_test'              => 1, 
         'contact_forms_test'         => 1, 
         'general_contact_forms_test' => 1, // Antispam test for unsupported and untested contact forms 
-		'wc_checkout_test'           => 0, //WooCommerce checkout default test => OFF
+		'wc_checkout_test'           => 0, // WooCommerce checkout default test => OFF
+		'search_test'                => 1, // Test deafult Wordpress form
 		'check_external'             => 0,
         'check_internal'             => 0,
 //        'validate_email_existence'   => 1,
@@ -171,11 +172,42 @@ class CleantalkState
 		'update_plugin' => array(
 			'last_call' => 0,
 		),
+		'install_plugin' => array(
+			'last_call' => 0,
+		),
+		'uninstall_plugin' => array(
+			'last_call' => 0,
+		),
 		'update_settings' => array(
 			'last_call' => 0,
 		),
 	);
-	
+
+	public $def_stats = array(
+		'sfw' => array(
+			'last_send_time'   => 0,
+			'last_send_amount' => 0,
+			'last_update_time' => 0,
+			'entries'          => 0,
+		),
+		'last_sfw_block' => array(
+			'time' => 0,
+			'ip'   => '',
+		),
+		'last_request' => array(
+			'time'   => 0,
+			'server' => '',
+		),
+		'requests' => array(
+			'0' => array(
+				'amount' => 1,
+				'average_time' => 0,
+			),
+		)
+	);
+
+
+
 	public function __construct($option_prefix, $options = array('settings'), $wpms = false)
 	{
 		$this->option_prefix = $option_prefix;
@@ -208,6 +240,11 @@ class CleantalkState
 			// Default remote calls
 			if($this->option_prefix.'_'.$option_name === 'cleantalk_remote_calls'){
 				$option = is_array($option) ? array_merge($this->def_remote_calls, $option) : $this->def_remote_calls;
+			}
+
+			// Default statistics
+			if($this->option_prefix.'_'.$option_name === 'cleantalk_stats'){
+				$option = is_array($option) ? array_merge($this->def_stats, $option) : $this->def_stats;
 			}
 			
 			$this->$option_name = is_array($option) ? new ArrayObject($option) : $option;

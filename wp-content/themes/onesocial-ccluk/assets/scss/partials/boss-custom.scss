@@ -3,7 +3,7 @@
 }
 
 .widget.widget_newsletterwidget form {
-  div input[type="submit"], 
+  div input[type="submit"],
   p input[type="submit"] {
     background-color: $blue;
   }
@@ -13,25 +13,19 @@
   background-color: $blue;
 }
 
-.woocommerce {
-  #respond input#submit, a.button, button.button, input.button {
-    background-color: $blue;
-  }
-}
-
 button {
   background-color: $green;
 }
 
 input {
-  &[type="button"], 
+  &[type="button"],
   &[type="reset"] {
     background-color: $blue;
   }
 }
 
-article.post-password-required input[type=submit], 
-i.bypostauthor cite span, 
+article.post-password-required input[type=submit],
+i.bypostauthor cite span,
 a.button {
   background-color: $blue;
 }
@@ -47,7 +41,7 @@ a.button {
 }
 
 #buddypress {
-  #group-create-nav .group-create, 
+  #group-create-nav .group-create,
   div#item-nav .item-list-tabs ul li .bb-menu-button {
     background-color: $green;
   }
@@ -59,7 +53,7 @@ a.button {
   }
 }
 
-#buddyboss-bbpress-media-attach, #buddyboss-comment-media-attach, .woocommerce .site-content nav.woocommerce-pagination ul li .current {
+#buddyboss-bbpress-media-attach, #buddyboss-comment-media-attach {
   background-color: $green;
 }
 
@@ -72,10 +66,6 @@ a.button {
 
 .header-account-login .count, .header-notifications a.header-button span b, #aw-whats-new-submit-bbmedia {
   background-color: $green;
-}
-
-.woocommerce span.onsale, .boss-modal-form .button {
-  background: $green;
 }
 
 .bb-sidebar-on .bb-side-icon {
@@ -97,20 +87,6 @@ a.button {
 
 body #selectionSharerPopunder-inner a.action:hover {
   background: $green;
-}
-
-.woocommerce {
-  ul.products li.product .price {
-    color: $green;
-  }
-  div.product {
-    p.price, span.price {
-      color: $green;
-    }
-  }
-  [type='checkbox']:checked + span {
-    color: $green;
-  }
 }
 
 .header-account-login .pop {
@@ -221,15 +197,15 @@ li {
 }
 
 .widget {
-  #bbp-search-index-form button i:before, .woocommerce-product-search button i:before {
+  #bbp-search-index-form button i:before {
     color: $green;
   }
 }
 
-.entry-meta a.read-more, 
-.settings #buddypress div#subnav.item-list-tabs ul li.current a, 
-.bb-user-notifications .avatar + a, 
-#main #buddypress .bb-member-quick-link-wrapper .action .generic-button a:hover, 
+.entry-meta a.read-more,
+.settings #buddypress div#subnav.item-list-tabs ul li.current a,
+.bb-user-notifications .avatar + a,
+#main #buddypress .bb-member-quick-link-wrapper .action .generic-button a:hover,
 #main-wrap #page #main #buddypress div.item-list-tabs li.hideshow ul a:hover {
   color: $green;
 }
@@ -387,18 +363,18 @@ li {
 }
 
 #buddypress {
-  #group-settings-form input[type="submit"], 
-  .standard-form div.submit input, 
+  #group-settings-form input[type="submit"],
+  .standard-form div.submit input,
   form#whats-new-form #whats-new-submit input[type="submit"] {
     border-color: $blue;
   }
 }
 
-.entry-meta a.read-more, 
-#buddypress #group-create-nav .group-create, 
-.sap-publish-popup.sap-publish-popup .sap-action-button, 
-.sap-container-wrapper .sap-story-publish, 
-#main #buddypress div.item-list-tabs li.hideshow > ul, 
+.entry-meta a.read-more,
+#buddypress #group-create-nav .group-create,
+.sap-publish-popup.sap-publish-popup .sap-action-button,
+.sap-container-wrapper .sap-story-publish,
+#main #buddypress div.item-list-tabs li.hideshow > ul,
 input[type="submit"] {
   border-color: $blue;
 }
@@ -433,12 +409,6 @@ input {
       box-shadow: 0px 0px 0px 2px $green;
     }
   }
-}
-
-.woocommerce-checkout [type='checkbox']:checked + span:before {
-  -webkit-box-shadow: 0px 0px 0px 1px $green;
-  -moz-box-shadow: 0px 0px 0px 1px $green;
-  box-shadow: 0px 0px 0px 1px $green;
 }
 
 /********** Desktop  *************/
@@ -479,11 +449,11 @@ input {
 
 .is-desktop {
   #buddypress div#item-nav .item-list-tabs ul li {
-    &:hover > a, 
-    &.selected > a, 
+    &:hover > a,
+    &.selected > a,
     &.current > a,
-    &:hover a:after, 
-    &.selected a:after, 
+    &:hover a:after,
+    &.selected a:after,
     &.current a:after {
       color: $green;
     }
@@ -514,8 +484,8 @@ input {
 
 .is-desktop {
   #buddypress div#item-nav .item-list-tabs ul li {
-    &:hover a:before, 
-    &.selected a:before, 
+    &:hover a:before,
+    &.selected a:before,
     &.current a:before {
       color: $green;
     }
@@ -658,7 +628,7 @@ body {
   }
 }
 
-.is-mobile #buddypress div.activity-comments form.root, 
+.is-mobile #buddypress div.activity-comments form.root,
 .is-desktop #buddypress div.buddyboss-media-form-wrapper form {
   background-color: $secondary_bg;
 }

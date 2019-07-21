@@ -502,12 +502,18 @@ class SWP_Utility {
 	 */
 	static function get_image_id_by_url( $image_url ) {
 		global $wpdb;
-		$attachment = $wpdb->get_col($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE guid='%s';", $image_url ));
 
-		if ( !is_array( $attachment ) || !is_numeric( $attachment[0] ) ) {
-			return false;
+		$prepared_statement = $wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE guid='%s';", $image_url );
+		$attachment = $wpdb->get_col( $prepared_statement );
+
+		if ( is_object( $attachment ) && is_numeric( $attachment->ID ) ) {
+			return $attachment->ID;
 		}
 
-		return $attachment[0];
+		if ( is_array( $attachment ) && isset( $attachment['ID'] ) ) {
+            return $attachment['ID'];
+		}
+
+		return false;
 	}
 }

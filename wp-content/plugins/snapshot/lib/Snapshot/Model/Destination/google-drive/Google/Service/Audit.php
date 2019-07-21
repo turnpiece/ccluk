@@ -34,7 +34,7 @@ class Google_0814_Service_Audit extends Google_0814_Service
 
 
   public $activities;
-
+  
 
   /**
    * Constructs the internal representation of the Audit service.

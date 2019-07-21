@@ -104,7 +104,7 @@ if ( version_compare(PHP_VERSION, '5.5.0', '<') ) {
 							<th><?php esc_html_e( 'Filename', SNAPSHOT_I18N_DOMAIN ); ?></th>
 							<td>
 								<p>
-									<?php
+									<?php 
                                     if ( isset( $item['data_item']['timestamp'] ) ) {
 
 										printf(
@@ -115,15 +115,15 @@ if ( version_compare(PHP_VERSION, '5.5.0', '<') ) {
 														'snapshot-action' => 'download-archive',
 														'snapshot-item' => $item['timestamp'],
 														'snapshot-data-item' => $item['data_item']['timestamp'],
-													)
-                                                )
+													) 
+                                                ) 
                                             ),
 											esc_attr__( 'Download the snapshot archive', SNAPSHOT_I18N_DOMAIN ),
 											esc_html( $item['data_item']['filename'] )
 										);
 									} else {
 										echo esc_html( $item['data_item']['filename'] );
-									}
+									} 
                                     ?>
 								</p>
 							</td>
@@ -221,7 +221,7 @@ if ( version_compare(PHP_VERSION, '5.5.0', '<') ) {
 										echo esc_html( $file_size );
 									} else {
 										echo "-";
-									}
+									} 
                                     ?>
 								</p>
 							</td>
@@ -231,7 +231,7 @@ if ( version_compare(PHP_VERSION, '5.5.0', '<') ) {
 							<th><?php esc_html_e( 'Files', SNAPSHOT_I18N_DOMAIN ); ?></th>
 							<td>
 								<p>
-                                <?php
+                                <?php 
                                 if ( isset( $item['files-option'] ) ) {
 										if ( 'none' === $item['files-option'] ) {
 											esc_html_e( 'None', SNAPSHOT_I18N_DOMAIN );
@@ -342,7 +342,7 @@ if ( version_compare(PHP_VERSION, '5.5.0', '<') ) {
 													'snapshot-data-item' => $item['data_item']['timestamp'],
 													'snapshot-noonce-field' => wp_create_nonce  ( 'snapshot-nonce' ),
 												), WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url( 'snapshots-newui-snapshots' )
-											);
+											); 
                                     ?>
 									<a class="button button-blue" href="<?php echo esc_url( $restore_button ); ?>">
 										<?php esc_html_e( 'Restore', SNAPSHOT_I18N_DOMAIN ); ?>

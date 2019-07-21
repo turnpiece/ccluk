@@ -82,6 +82,21 @@ class Shipper_Model_Env {
 	 * @return bool
 	 */
 	static public function is_flywheel() {
-		return defined( 'FLYWHEEL_PLUGIN_DIR' );
+
+		/**
+		 * Whether or not we're dealing with Flywheel environment
+		 *
+		 * Used in tests.
+		 *
+		 * @since v1.0.2
+		 *
+		 * @param bool $is_flywheel Flywheel environment detected.
+		 *
+		 * @return bool
+		 */
+		return (bool) apply_filters(
+			'shipper_env_is_flywheel',
+			defined( 'FLYWHEEL_PLUGIN_DIR' )
+		);
 	}
 }

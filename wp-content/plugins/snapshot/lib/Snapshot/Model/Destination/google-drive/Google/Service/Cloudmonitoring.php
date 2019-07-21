@@ -37,7 +37,7 @@ class Google_0814_Service_Cloudmonitoring extends Google_0814_Service
   public $metricDescriptors;
   public $timeseries;
   public $timeseriesDescriptors;
-
+  
 
   /**
    * Constructs the internal representation of the Cloudmonitoring service.

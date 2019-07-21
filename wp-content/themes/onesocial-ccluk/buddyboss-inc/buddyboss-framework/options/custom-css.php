@@ -33,10 +33,6 @@ if ( !function_exists( 'boss_generate_option_css' ) ) {
             .widget_mc4wp_form_widget form p input[type="submit"], .widget.widget_newsletterwidget form div input[type="submit"],
 			.widget.widget_newsletterwidget form p input[type="submit"],
             .footer-widget #switch-mode input[type="submit"],
-            .woocommerce #respond input#submit,
-            .woocommerce a.button,
-            .woocommerce button.button,
-            .woocommerce input.button,
 			button,
 			input[type="button"],
 			input[type="reset"],
@@ -61,7 +57,6 @@ if ( !function_exists( 'boss_generate_option_css' ) ) {
 			.is-mobile #buddypress #mobile-item-nav ul li.selected,
 			#buddyboss-bbpress-media-attach,
 			#buddyboss-comment-media-attach,
-			.woocommerce .site-content nav.woocommerce-pagination ul li .current,
 			#trigger-sidebar:hover .bb-side-icon,
 			#trigger-sidebar:hover .bb-side-icon:before,
 			#trigger-sidebar:hover .bb-side-icon:after,
@@ -71,7 +66,6 @@ if ( !function_exists( 'boss_generate_option_css' ) ) {
 				background-color: <?php echo $accent_color; ?>;
 			}
 
-			.woocommerce span.onsale,
 			.boss-modal-form .button,
 			.bb-sidebar-on .bb-side-icon,
 			.bb-sidebar-on .bb-side-icon:after,
@@ -86,10 +80,6 @@ if ( !function_exists( 'boss_generate_option_css' ) ) {
 				background: <?php echo $accent_color; ?>;
 			}
 
-			.woocommerce ul.products li.product .price,
-			.woocommerce div.product p.price,
-			.woocommerce div.product span.price,
-			.woocommerce [type='checkbox']:checked + span,
 			.header-account-login .pop .boss-logout,
 			.header-account-login .pop a:hover,
 			.bboss_ajax_search_item .item .item-title,
@@ -143,7 +133,6 @@ if ( !function_exists( 'boss_generate_option_css' ) ) {
 			.entry-header .entry-title a:hover,
 			.widget_search #searchform button i:before,
 			.widget #bbp-search-index-form button i:before,
-			.widget .woocommerce-product-search button i:before,
 			.entry-meta a.read-more,
 			.settings #buddypress div#subnav.item-list-tabs ul li.current a,
 			.bb-user-notifications .avatar + a,
@@ -284,12 +273,6 @@ if ( !function_exists( 'boss_generate_option_css' ) ) {
 				-webkit-box-shadow: 0px 0px 0px 2px <?php echo $accent_color; ?>;
 				-moz-box-shadow: 0px 0px 0px 2px <?php echo $accent_color; ?>;
 				box-shadow: 0px 0px 0px 2px <?php echo $accent_color; ?>;
-			}
-
-			.woocommerce-checkout [type='checkbox']:checked + span:before {
-				-webkit-box-shadow: 0px 0px 0px 1px <?php echo $accent_color; ?>;
-				-moz-box-shadow: 0px 0px 0px 1px <?php echo $accent_color; ?>;
-				box-shadow: 0px 0px 0px 1px <?php echo $accent_color; ?>;
 			}
 
 			/********** Desktop  *************/

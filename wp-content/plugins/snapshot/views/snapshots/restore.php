@@ -139,9 +139,9 @@ $warning = $requirements_test['warning'];
 													<p><?php esc_html_e( 'Restore Note: URL mismatch! The Snapshot archive does not appear made from the current WordPress system. Every attempt will be made to replace the source URL with the URL from the destination.', SNAPSHOT_I18N_DOMAIN ); ?></p>
 												</div>
 
-											<?php
+											<?php 
                                             }
-										}
+										} 
                                         ?>
 
 										<div class="wps-restore-row">
@@ -179,7 +179,7 @@ $warning = $requirements_test['warning'];
 
 																	echo esc_html(
 	                                                                     ! $item['blog-id'] && isset( $item[ $key ] ) ?
-																		$item['IMPORT'][ $key ] : $item['MANIFEST'][ $key ]
+																		$item['IMPORT'][ $key ] : $item['MANIFEST'][ $key ] 
 	                                                                    );
 
 																?>
@@ -207,7 +207,7 @@ $warning = $requirements_test['warning'];
                                                             	<?php
 																echo esc_html(
                                                                     $item['blog-id'] && ! isset( $item['IMPORT'] ) ?
-																	$item['MANIFEST']['WP_BLOG_ID'] : ''
+																	$item['MANIFEST']['WP_BLOG_ID'] : '' 
                                                                 );
 																?>
                                                             </td>
@@ -272,16 +272,16 @@ $warning = $requirements_test['warning'];
 																		$site_part = str_replace( untrailingslashit( network_site_url() ), '', untrailingslashit( $item_siteurl ) );
 																		$site_part = ltrim( $site_part, '/\\' );
 
-																	}
+																	} 
                                                                     ?>
 
 																	<input type="text" style="width: 50%; display: inline-block;" name="snapshot-blog-id-search" id="snapshot-blog-id-search"
 																	       value="<?php echo esc_attr( $site_part ); ?>">
 
-																	<?php
+																	<?php 
                                                                     if ( is_subdomain_install() ) {
 																		printf( '.%s', esc_html( $site_domain ) );
-																	}
+																	} 
                                                                     ?>
 
 																	<p class="description"><small style="white-space: normal;">
@@ -401,7 +401,7 @@ $warning = $requirements_test['warning'];
 											// Fixes: https://app.asana.com/0/11140230629075/503490790609676/f .
 											//$data_items = array_slice( $data_items, 0, 6, true );
 
-											foreach ( $data_items as $data_key => $data_item ) :
+											foreach ( $data_items as $data_key => $data_item ) : 
                                             ?>
 
 												<div class="wps-input--item">
@@ -410,11 +410,11 @@ $warning = $requirements_test['warning'];
 
 														<input type="radio" name="snapshot-restore-file" class="snapshot-restore-file"
 														       id="snapshot-restore-<?php echo esc_attr( $data_item['timestamp'] ); ?>"
-														       value="<?php echo esc_attr( $data_item['timestamp'] ); ?>"
+														       value="<?php echo esc_attr( $data_item['timestamp'] ); ?>" 
                                                         <?php
 														if ( ( isset( $_GET['snapshot-data-item'] ) ) && ( intval( $_GET['snapshot-data-item'] ) === $data_item['timestamp'] ) ) {
 															echo ' checked="checked" ';
-														}
+														} 
                                                         ?>
                                                         />
 
@@ -603,7 +603,7 @@ $warning = $requirements_test['warning'];
 								}
 							}
 
-							if ( ( isset( $data_item['tables-sections'] ) ) && ( ! empty( $data_item['tables-sections'] ) ) ) :
+							if ( ( isset( $data_item['tables-sections'] ) ) && ( ! empty( $data_item['tables-sections'] ) ) ) : 
                             ?>
 
 								<div id="wps-restore-database" class="row">
@@ -689,7 +689,7 @@ $warning = $requirements_test['warning'];
 
 										<div id="snapshot-selected-tables-container" class="wpmud-box-gray" style="display: none;">
 
-											<?php
+											<?php 
                                             $tables_sets_idx = array(
 												'global' => __( "WordPress Global Tables", SNAPSHOT_I18N_DOMAIN ),
 												'wp' => __( "WordPress Blog Tables", SNAPSHOT_I18N_DOMAIN ),
@@ -705,7 +705,7 @@ $warning = $requirements_test['warning'];
 													$display_set = 'block';
 												} else {
 													$display_set = 'none';
-												}
+												} 
                                                 ?>
 
 											<div id="snapshot-tables-<?php echo esc_attr( $table_set_key ); ?>-set" class="snapshot-tables-set" style="display: <?php echo esc_attr( $display_set ); ?>">
@@ -731,15 +731,15 @@ $warning = $requirements_test['warning'];
 
 												<?php } ?>
 
-												<?php
+												<?php 
                                                 if ( ( isset( $item['data'][ $data_item_key ]['tables-sections'][ $table_set_key ] ) ) && ( count( $item['data'][ $data_item_key ]['tables-sections'][ $table_set_key ] ) ) ) {
 
-													$tables = $item['data'][ $data_item_key ]['tables-sections'][ $table_set_key ];
+													$tables = $item['data'][ $data_item_key ]['tables-sections'][ $table_set_key ]; 
                                                     ?>
 
 													<ul class="snapshot-table-list" id="snapshot-table-list-<?php echo esc_attr( $table_set_key ); ?>">
 
-														<?php
+														<?php 
                                                         foreach ( $tables as $table_key => $table_name ) {
 
 															if ( "global" !== $table_set_key ) {
@@ -750,7 +750,7 @@ $warning = $requirements_test['warning'];
 																} else {
 																	$checked = ' checked="checked" ';
 																}
-															}
+															} 
                                                             ?>
 
 															<li class="wps-input--item">
@@ -854,9 +854,9 @@ $warning = $requirements_test['warning'];
 
 										?>
 
-										<?php
+										<?php 
                                         if ( $themes ) :
-											foreach ( $themes as $theme_key => $theme_name ) :
+											foreach ( $themes as $theme_key => $theme_name ) : 
 												?>
 												<div class="wps-input--item">
 

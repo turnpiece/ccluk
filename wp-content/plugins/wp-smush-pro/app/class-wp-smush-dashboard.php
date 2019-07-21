@@ -54,11 +54,12 @@ class WP_Smush_Dashboard extends WP_Smush_View {
 		parent::add_action_hooks();
 
 		add_action( 'smush_setting_column_right_inside', array( $this, 'settings_desc' ), 10, 2 );
+		add_action( 'smush_setting_column_right_inside', array( $this, 'auto_smush' ), 15, 2 );
 		add_action( 'smush_setting_column_right_inside', array( $this, 'image_sizes' ), 15, 2 );
 		add_action( 'smush_setting_column_right_inside', array( $this, 'resize_settings' ), 20, 2 );
 		add_action( 'smush_setting_column_right_inside', array( $this, 'usage_settings' ), 25, 2 );
+		add_action( 'smush_setting_column_right_inside', array( $this, 'detection_settings' ), 10, 2 );
 		add_action( 'smush_setting_column_right_outside', array( $this, 'full_size_options' ), 20, 2 );
-		add_action( 'smush_setting_column_right_outside', array( $this, 'detect_size_options' ), 25, 2 );
 
 		// Add stats to stats box.
 		add_action( 'stats_ui_after_resize_savings', array( $this, 'pro_savings_stats' ), 15 );
@@ -89,8 +90,9 @@ class WP_Smush_Dashboard extends WP_Smush_View {
 				'bulk'         => __( 'Bulk Smush', 'wp-smushit' ),
 				'directory'    => __( 'Directory Smush', 'wp-smushit' ),
 				'integrations' => __( 'Integrations', 'wp-smushit' ),
+				'lazy_load'    => __( 'Lazy Load', 'wp-smushit' ),
 				'cdn'          => __( 'CDN', 'wp-smushit' ),
-				'lazy_load'    => __( 'Lazyload', 'wp-smushit' ),
+				'tools'        => __( 'Tools', 'wp-smushit' ),
 				'settings'     => __( 'Settings', 'wp-smushit' ),
 			)
 		);
@@ -105,6 +107,13 @@ class WP_Smush_Dashboard extends WP_Smush_View {
 		// Tabs that can be shown in subsites if networkwide (bulk and directory).
 		if ( is_multisite() && $networkwide && ! is_network_admin() ) {
 			unset( $this->tabs['integrations'] );
+			unset( $this->tabs['lazy_load'] );
+			unset( $this->tabs['tools'] );
+		}
+
+		// Disabled on all subsites.
+		if ( is_multisite() && ! is_network_admin() ) {
+			unset( $this->tabs['settings'] );
 		}
 	}
 
@@ -167,7 +176,10 @@ class WP_Smush_Dashboard extends WP_Smush_View {
 					array( $this, 'directory_smush_metabox' ),
 					null,
 					null,
-					'directory'
+					'directory',
+					array(
+						'box_class' => 'sui-box sui-message sui-no-padding',
+					)
 				);
 
 				break;
@@ -278,7 +290,7 @@ class WP_Smush_Dashboard extends WP_Smush_View {
 				if ( ! $this->settings->get( 'lazy_load' ) ) {
 					$this->add_meta_box(
 						'meta-boxes/lazyload/disabled',
-						__( 'Lazyload', 'wp-smushit' ),
+						__( 'Lazy Load', 'wp-smushit' ),
 						null,
 						array( $this, 'lazyload_metabox_header' ),
 						null,
@@ -290,7 +302,7 @@ class WP_Smush_Dashboard extends WP_Smush_View {
 				} else {
 					$this->add_meta_box(
 						'meta-boxes/lazyload',
-						__( 'Lazyload', 'wp-smushit' ),
+						__( 'Lazy Load', 'wp-smushit' ),
 						array( $this, 'lazyload_metabox' ),
 						array( $this, 'lazyload_metabox_header' ),
 						array( $this, 'common_metabox_footer' ),
@@ -298,6 +310,17 @@ class WP_Smush_Dashboard extends WP_Smush_View {
 					);
 				}
 
+				break;
+
+			case 'tools':
+				$this->add_meta_box(
+					'meta-boxes/tools',
+					__( 'Tools', 'wp-smushit' ),
+					array( $this, 'tools_metabox' ),
+					null,
+					array( $this, 'common_metabox_footer' ),
+					'tools'
+				);
 				break;
 
 			case 'settings':
@@ -327,24 +350,13 @@ class WP_Smush_Dashboard extends WP_Smush_View {
 				echo '<i class="sui-icon-check-tick sui-success" aria-hidden="true"></i>';
 			}
 		} elseif ( 'cdn' === $tab ) {
-			$status = $this->settings->get_setting( WP_SMUSH_PREFIX . 'cdn_status' );
-			$cdn    = $this->settings->get( 'cdn' );
-
-			if ( isset( $status->bandwidth ) && $status->bandwidth / 1073741824 > $status->bandwidth_plan ) {
+			$status = WP_Smush::get_instance()->core()->mod->cdn->status();
+			if ( 'overcap' === $status ) {
 				echo '<i class="sui-icon-warning-alert sui-error" aria-hidden="true"></i>';
-				return;
-			}
-
-			if ( $cdn && isset( $status->cdn_enabled ) && $status->cdn_enabled ) {
-				if ( WP_Smush::get_instance()->core()->mod->cdn->get_status() ) {
-					echo '<i class="sui-icon-check-tick sui-info" aria-hidden="true"></i>';
-				} else {
-					echo '<i class="sui-icon-warning-alert sui-error" aria-hidden="true"></i>';
-				}
-			}
-
-			if ( $cdn && isset( $status->cdn_enabled ) && ! $status->cdn_enabled ) {
-				echo '<i class="sui-icon-check-tick sui-warning" aria-hidden="true"></i>';
+			} elseif ( 'upgrade' === $status || 'activating' === $status ) {
+				echo '<i class="sui-icon-warning-alert sui-warning" aria-hidden="true"></i>';
+			} elseif ( 'enabled' === $status ) {
+				echo '<i class="sui-icon-check-tick sui-info" aria-hidden="true"></i>';
 			}
 		} elseif ( 'lazy_load' === $tab && $this->settings->get( 'lazy_load' ) ) {
 			echo '<i class="sui-icon-check-tick sui-info" aria-hidden="true"></i>';
@@ -459,6 +471,66 @@ class WP_Smush_Dashboard extends WP_Smush_View {
 			<?php
 			esc_html_e( 'Note: Usage tracking is completely anonymous. We are only tracking what features you are/aren’t using to make our feature decisions more informed.', 'wp-smushit' );
 			?>
+		</span>
+		<?php
+	}
+
+	/**
+	 * Display a description in Tools - Image Resize Detection.
+	 *
+	 * @since 3.2.1
+	 *
+	 * @param string $name  Setting name.
+	 */
+	public function detection_settings( $name ) {
+		// Add only to full size settings.
+		if ( 'detection' !== $name ) {
+			return;
+		}
+		?>
+
+		<span class="sui-description sui-toggle-description">
+			<?php
+			esc_html_e( 'Note: The highlighting will only be visible to administrators – visitors won’t see the highlighting.', 'wp-smushit' );
+			?>
+			<?php if ( $this->settings->get( 'detection' ) ) : ?>
+				<?php if ( $this->settings->get( 'cdn' ) && $this->settings->get( 'auto_resize' ) ) : ?>
+					<div class="sui-notice smush-notice-sm smush-highlighting-notice">
+						<p>
+							<?php
+							esc_html_e(
+								'Note: Images served via the Smush CDN are automatically resized to fit their containers, these will be skipped.',
+								'wp-smushit'
+							);
+							?>
+						</p>
+					</div>
+				<?php else : ?>
+					<div class="sui-notice sui-notice-info smush-notice-sm smush-highlighting-notice">
+						<p>
+							<?php
+							printf(
+								/* translators: %1$s: opening a tag, %2$s: closing a tag */
+								esc_html__(
+									'Incorrect image size highlighting is active. %1$sView the frontend%2$s of your website to see which images aren\'t the correct size for their containers.',
+									'wp-smushit'
+								),
+								'<a href="' . esc_url( home_url() ) . '" target="_blank">',
+								'</a>'
+							);
+							?>
+						</p>
+					</div>
+				<?php endif; ?>
+			<?php elseif ( 'detection' === $name ) : ?>
+				<div class="sui-notice sui-notice-warning smush-notice-sm smush-highlighting-warning sui-hidden">
+					<p>
+						<?php
+						esc_html_e( 'Almost there! To finish activating this feature you must save your settings.', 'wp-smushit' );
+						?>
+					</p>
+				</div>
+			<?php endif; ?>
 		</span>
 		<?php
 	}
@@ -583,6 +655,7 @@ class WP_Smush_Dashboard extends WP_Smush_View {
 			<div class="sui-box-settings-col-1">
 				<span class="sui-settings-label <?php echo 'gutenberg' === $name ? 'sui-settings-label-with-tag' : ''; ?>">
 					<?php echo esc_html( $label ); ?>
+					<?php do_action( 'smush_setting_column_tag', $name ); ?>
 				</span>
 
 				<span class="sui-description">
@@ -591,13 +664,15 @@ class WP_Smush_Dashboard extends WP_Smush_View {
 			</div>
 			<div class="sui-box-settings-col-2" id="column-<?php echo esc_attr( $setting_m_key ); ?>">
 				<div class="sui-form-field">
-					<label class="sui-toggle">
-						<input type="checkbox" aria-describedby="<?php echo esc_attr( $setting_m_key . '-desc' ); ?>" id="<?php echo esc_attr( $setting_m_key ); ?>" name="<?php echo esc_attr( $setting_m_key ); ?>" <?php checked( $setting_val, 1, true ); ?> value="1" <?php disabled( $disable ); ?>>
-						<span class="sui-toggle-slider"></span>
-					</label>
-					<label for="<?php echo esc_attr( $setting_m_key ); ?>">
-						<?php echo esc_html( WP_Smush::get_instance()->core()->settings[ $name ]['label'] ); ?>
-					</label>
+					<?php if ( isset( WP_Smush::get_instance()->core()->settings[ $name ]['label'] ) ) : ?>
+						<label class="sui-toggle">
+							<input type="checkbox" aria-describedby="<?php echo esc_attr( $setting_m_key . '-desc' ); ?>" id="<?php echo esc_attr( $setting_m_key ); ?>" name="<?php echo esc_attr( $setting_m_key ); ?>" <?php checked( $setting_val, 1, true ); ?> value="1" <?php disabled( $disable ); ?>>
+							<span class="sui-toggle-slider"></span>
+						</label>
+						<label for="<?php echo esc_attr( $setting_m_key ); ?>">
+							<?php echo esc_html( WP_Smush::get_instance()->core()->settings[ $name ]['label'] ); ?>
+						</label>
+					<?php endif; ?>
 					<!-- Print/Perform action in right setting column -->
 					<?php do_action( 'smush_setting_column_right_inside', $name ); ?>
 				</div>
@@ -676,6 +751,30 @@ class WP_Smush_Dashboard extends WP_Smush_View {
 	}
 
 	/**
+	 * Prints notice after auto compress settings.
+	 *
+	 * @since 3.2.1
+	 *
+	 * @param string $name  Setting key.
+	 */
+	public function auto_smush( $name = '' ) {
+		// Add only to auto smush settings.
+		if ( 'auto' !== $name ) {
+			return;
+		}
+
+		$setting_status = $this->settings->get( 'auto' );
+
+		?>
+		<div class="sui-notice smush-notice-sm auto-smush-notice <?php echo $setting_status ? '' : ' sui-hidden'; ?>">
+			<p>
+				<?php esc_html_e( 'Note: We will only automatically compress the image sizes selected above.', 'wp-smushit' ); ?>
+			</p>
+		</div>
+		<?php
+	}
+
+	/**
 	 * Prints all the registered image sizes, to be selected/unselected for smushing.
 	 *
 	 * @param string $name Setting key.
@@ -683,78 +782,65 @@ class WP_Smush_Dashboard extends WP_Smush_View {
 	 * @return void
 	 */
 	public function image_sizes( $name = '' ) {
-		// Add only to auto smush settings.
-		if ( 'auto' !== $name ) {
+		// Add only to bulk smush settings.
+		if ( 'bulk' !== $name ) {
 			return;
 		}
 
-		// Additional Image sizes.
+		// Additional image sizes.
 		$image_sizes = $this->settings->get_setting( WP_SMUSH_PREFIX . 'image_sizes', false );
 		$sizes       = WP_Smush::get_instance()->core()->image_dimensions();
 
-		/**
-		 * Add an additional item for full size.
-		 * Do not use intermediate_image_sizes filter.
-		 */
-		$sizes['full'] = array();
-
-		$is_pro   = WP_Smush::is_pro();
-		$disabled = '';
-
-		$setting_status = $this->settings->get( 'auto' );
-
-		if ( ! empty( $sizes ) ) {
-			?>
-			<!-- List of image sizes recognised by WP Smush -->
-			<div class="wp-smush-image-size-list <?php echo $setting_status ? '' : ' sui-hidden'; ?>">
-				<p class="sui-description">
-					<?php
-					esc_html_e(
-						'Every time you upload an image to your site, WordPress generates a
-					resized version of that image for every default and/or custom image size that your theme has
-					registered. This means there are multiple versions of your images in your media library. Choose
-					the images sizes below that you would like optimized:',
-						'wp-smushit'
-					);
-					?>
-				</p>
-				<?php
-				foreach ( $sizes as $size_k => $size ) {
-					// If image sizes array isn't set, mark all checked ( Default Values ).
-					if ( false === $image_sizes ) {
-						$checked = true;
-					} else {
-						// WPMDUDEV hosting support: cast $size_k to string to properly work with object cache.
-						$checked = is_array( $image_sizes ) ? in_array( (string) $size_k, $image_sizes, true ) : false;
-					}
-					// For free users, remove full size option.
-					if ( 'full' === $size_k ) {
-						continue;
-					}
-					?>
-					<label class="sui-checkbox sui-checkbox-stacked sui-checkbox-sm">
-						<input type="checkbox" id="wp-smush-size-<?php echo esc_attr( $size_k ); ?>" <?php checked( $checked, true ); ?> name="wp-smush-image_sizes[]" value="<?php echo esc_attr( $size_k ); ?>" <?php echo esc_attr( $disabled ); ?>>
-						<span aria-hidden="true"></span>
-						<?php if ( isset( $size['width'], $size['height'] ) ) : ?>
-							<span class="sui-description">
-								<?php echo esc_html( $size_k . ' (' . $size['width'] . 'x' . $size['height'] . ') ' ); ?>
-							</span>
-						<?php else : ?>
-							<span><?php echo esc_attr( $size_k ); ?>
-								<?php if ( ! $is_pro ) : ?>
-									<span class="sui-tag sui-tag-pro sui-tooltip sui-tooltip-constrained" data-tooltip="<?php esc_html_e( 'Join WPMU DEV to unlock multi-pass lossy compression', 'wp-smushit' ); ?>">
-										<?php esc_html_e( 'PRO', 'wp-smushit' ); ?>
-									</span>
-								<?php endif; ?>
-							</span>
-						<?php endif; ?>
+		$all_selected = false === $image_sizes || count( $image_sizes ) === count( $sizes );
+		?>
+		<?php if ( ! empty( $sizes ) ) : ?>
+			<div class="sui-side-tabs sui-tabs">
+				<div data-tabs="">
+					<label for="all-image-sizes" class="sui-tab-item <?php echo $all_selected ? 'active' : ''; ?>">
+						<input type="radio" name="auto-image-sizes" value="all" id="all-image-sizes" <?php checked( $all_selected ); ?>>
+						<?php esc_html_e( 'All', 'wp-smushit' ); ?>
 					</label>
-					<?php
-				}
-				?>
+					<label for="custom-image-sizes" class="sui-tab-item <?php echo $all_selected ? '' : 'active'; ?>">
+						<input type="radio" name="auto-image-sizes" value="custom" id="custom-image-sizes" <?php checked( $all_selected, false ); ?>>
+						<?php esc_html_e( 'Custom', 'wp-smushit' ); ?>
+					</label>
+				</div><!-- end data-tabs -->
+				<div data-panes>
+					<div class="sui-tab-boxed <?php echo $all_selected ? 'active' : ''; ?>" style="display:none"></div>
+					<div class="sui-tab-boxed <?php echo $all_selected ? '' : 'active'; ?>">
+						<span class="sui-label"><?php esc_html_e( 'Included image sizes', 'wp-smushit' ); ?></span>
+						<?php
+						foreach ( $sizes as $size_k => $size ) {
+							// If image sizes array isn't set, mark all checked ( Default Values ).
+							if ( false === $image_sizes ) {
+								$checked = true;
+							} else {
+								// WPMDUDEV hosting support: cast $size_k to string to properly work with object cache.
+								$checked = is_array( $image_sizes ) ? in_array( (string) $size_k, $image_sizes, true ) : false;
+							}
+							?>
+							<label class="sui-checkbox sui-checkbox-stacked sui-checkbox-sm">
+								<input type="checkbox" <?php checked( $checked, true ); ?>
+										id="wp-smush-size-<?php echo esc_attr( $size_k ); ?>"
+										name="wp-smush-image_sizes[]"
+										value="<?php echo esc_attr( $size_k ); ?>">
+								<span aria-hidden="true">&nbsp;</span>
+								<span>
+									<?php if ( isset( $size['width'], $size['height'] ) ) : ?>
+										<?php echo esc_html( $size_k . ' (' . $size['width'] . 'x' . $size['height'] . ') ' ); ?>
+									<?php else : ?>
+										<?php echo esc_attr( $size_k ); ?>
+									<?php endif; ?>
+								</span>
+							</label>
+							<?php
+						}
+						?>
+					</div>
+				</div>
 			</div>
-			<?php
-		}
+		<?php endif; ?>
+		<?php
 	}
 
 	/**
@@ -783,82 +869,6 @@ class WP_Smush_Dashboard extends WP_Smush_View {
 				</label>
 				<span class="sui-description sui-toggle-description">
 					<?php echo esc_html( WP_Smush::get_instance()->core()->settings[ $name ]['desc'] ); ?>
-				</span>
-			</div>
-			<?php
-		}
-	}
-
-	/**
-	 * Prints front end image size detection option.
-	 *
-	 * @param string $name  Name of the current setting being processed.
-	 */
-	public function detect_size_options( $name ) {
-		// Only add to resize setting.
-		if ( 'resize' !== $name ) {
-			return;
-		}
-
-		foreach ( $this->resize_group as $name ) {
-			$setting_val = $this->settings->get( $name );
-			$setting_key = WP_SMUSH_PREFIX . $name;
-			?>
-			<div class="sui-form-field">
-				<label class="sui-toggle">
-					<input type="checkbox" aria-describedby="<?php echo esc_attr( $setting_key ); ?>-desc" id="<?php echo esc_attr( $setting_key ); ?>" name="<?php echo esc_attr( $setting_key ); ?>" <?php checked( $setting_val, 1, true ); ?> value="1">
-					<span class="sui-toggle-slider"></span>
-					<label class="toggle-label <?php echo esc_attr( $setting_key . '-label' ); ?>" for="<?php echo esc_attr( $setting_key ); ?>" aria-hidden="true"></label>
-				</label>
-				<label for="<?php echo esc_attr( $setting_key ); ?>">
-					<?php echo esc_html( WP_Smush::get_instance()->core()->settings[ $name ]['label'] ); ?>
-				</label>
-				<span class="sui-description sui-toggle-description">
-					<?php echo esc_html( WP_Smush::get_instance()->core()->settings[ $name ]['desc'] ); ?>
-					<?php if ( 'detection' === $name && $setting_val ) : ?>
-						<?php if ( $this->settings->get( 'cdn' ) && $this->settings->get( 'auto_resize' ) ) : ?>
-							<div class="sui-notice smush-notice-sm smush-highlighting-notice">
-								<p>
-									<?php
-									esc_html_e(
-										'Note: Images served via the Smush CDN are automatically resized to fit their containers, these will be skipped.',
-										'wp-smushit'
-									);
-									?>
-								</p>
-							</div>
-						<?php else : ?>
-							<div class="sui-notice sui-notice-info smush-notice-sm smush-highlighting-notice">
-								<p>
-									<?php
-									printf(
-										/* translators: %1$s: opening a tag, %2$s: closing a tag */
-										esc_html__(
-											'Incorrect image size highlighting is active. %1$sView the
-										frontend%2$s of your website to see which images aren\'t the correct size
-										for their containers.',
-											'wp-smushit'
-										),
-										'<a href="' . esc_url( home_url() ) . '" target="_blank">',
-										'</a>'
-									);
-									?>
-								</p>
-							</div>
-						<?php endif; ?>
-					<?php elseif ( 'detection' === $name ) : ?>
-						<div class="sui-notice sui-notice-warning smush-notice-sm smush-highlighting-warning sui-hidden">
-							<p>
-								<?php
-								esc_html_e(
-									'Almost there! To finish activating this feature you must
-								save your settings.',
-									'wp-smushit'
-								);
-								?>
-							</p>
-						</div>
-					<?php endif; ?>
 				</span>
 			</div>
 			<?php
@@ -993,7 +1003,7 @@ class WP_Smush_Dashboard extends WP_Smush_View {
 		$this->view(
 			'meta-boxes/bulk/meta-box',
 			array(
-				'all_done'         => $core->smushed_count + $core->skipped_count === $core->total_count && empty( $core->resmush_ids ),
+				'all_done'         => absint( $core->smushed_count ) + absint( $core->skipped_count ) === absint( $core->total_count ) && empty( $core->resmush_ids ),
 				'bulk_upgrade_url' => $bulk_upgrade_url,
 				'core'             => $core,
 				'hide_pagespeed'   => get_site_option( WP_SMUSH_PREFIX . 'hide_pagespeed_suggestion' ),
@@ -1185,51 +1195,56 @@ class WP_Smush_Dashboard extends WP_Smush_View {
 	 * @since 3.0
 	 */
 	public function cdn_metabox() {
+		$status = WP_Smush::get_instance()->core()->mod->cdn->status();
+
 		// Available values: warning (inactive), success (active) or error (expired).
 		$status_msg = array(
-			'warning' => __( 'CDN is not yet active. Configure your settings below and click Activate.', 'wp-smushit' ),
-			'notice'  => __(
+			'enabled'    => __(
+				'Your media is currently being served from the WPMU DEV CDN. Bulk and Directory smush features are treated separately and will continue to run independently.',
+				'wp-smushit'
+			),
+			'disabled'   => __( 'CDN is not yet active. Configure your settings below and click Activate.', 'wp-smushit' ),
+			'activating' => __(
 				'Your settings have been saved and changes are now propagating to the CDN. Changes can take up to 30
 				minutes to take effect but your images will continue to be served in the mean time, please be patient.',
 				'wp-smushit'
 			),
-			'info'    => __(
-				'Your media is currently being served from the WPMU DEV CDN. Serving images from CDN is only possible
-				on publicly available domains.',
-				'wp-smushit'
+			'upgrade'    => sprintf(
+				__(
+					/* translators: %1$s - starting a tag, %2$s - closing a tag */
+					"You're almost through your CDN bandwidth limit. Please contact your administrator to upgrade your Smush CDN plan to ensure you don't lose this service. %1\$sUpgrade now%2\$s",
+					'wp-smushit'
+				),
+				'<a href="https://premium.wpmudev.org/hub/account/" target="_blank">',
+				'</a>'
 			),
-			'error'   => __(
-				'CDN is inactive. You have gone over your 30 day cap so we’ve stopped serving your images.
-					Upgrade your plan now to reactivate this service.',
-				'wp-smushit'
+			'overcap'    => sprintf(
+				__(
+					/* translators: %1$s - starting a tag, %2$s - closing a tag */
+					"You've gone through your CDN bandwidth limit, so we’ve stopped serving your images via the CDN. Contact your administrator to upgrade your Smush CDN plan to reactivate this service. %1\$sUpgrade now%2\$s",
+					'wp-smushit'
+				),
+				'<a href="https://premium.wpmudev.org/hub/account/" target="_blank">',
+				'</a>'
 			),
 		);
 
-		$cdn_status = 'warning';
-
-		$cdn = $this->settings->get_setting( WP_SMUSH_PREFIX . 'cdn_status' );
-		if ( isset( $cdn->cdn_enabled ) && $cdn->cdn_enabled && WP_Smush::get_instance()->core()->mod->cdn->get_status() ) {
-			// 1073741824 = 1024 (kb) * 1024 (mb) * 1024 (gb).
-			$cdn_status = 'info';
-		}
-
-		if ( isset( $cdn->cdn_enabling ) && $cdn->cdn_enabling ) {
-			$cdn_status = 'notice';
-		}
-
-		if ( isset( $cdn->bandwidth ) && $cdn->bandwidth / 1073741824 > $cdn->bandwidth_plan ) {
-			$cdn_status = 'error';
-		}
+		$status_color = array(
+			'enabled'    => 'info',
+			'disabled'   => 'error',
+			'activating' => 'warning',
+			'upgrade'    => 'warning',
+			'overcap'    => 'error',
+		);
 
 		$this->view(
 			'meta-boxes/cdn/meta-box',
 			array(
-				'cdn'           => $cdn,
 				'cdn_group'     => $this->cdn_group,
 				'settings'      => $this->settings->get(),
 				'settings_data' => WP_Smush::get_instance()->core()->settings,
-				'status'        => $cdn_status,
-				'status_msg'    => $status_msg,
+				'status_msg'    => $status_msg[ $status ],
+				'class'         => $status_color[ $status ],
 			)
 		);
 	}
@@ -1288,8 +1303,8 @@ class WP_Smush_Dashboard extends WP_Smush_View {
 		$this->view(
 			'meta-boxes/lazyload/meta-box-header',
 			array(
-				'title'   => __( 'Lazyload', 'wp-smushit' ),
-				'tooltip' => __( 'This feature is likely to work without issue, however lazyload is in beta stage and some issues are still present', 'wp-smushit' ),
+				'title'   => __( 'Lazy Load', 'wp-smushit' ),
+				'tooltip' => __( 'This feature is likely to work without issue, however lazy load is in beta stage and some issues are still present', 'wp-smushit' ),
 			)
 		);
 	}
@@ -1315,6 +1330,23 @@ class WP_Smush_Dashboard extends WP_Smush_View {
 	 */
 	public function common_metabox_footer() {
 		$this->view( 'common/meta-box-footer', array() );
+	}
+
+	/**
+	 * Tools meta box.
+	 *
+	 * @since 3.2.1
+	 */
+	public function tools_metabox() {
+		$this->view(
+			'meta-boxes/tools/meta-box',
+			array(
+				'grouped_settings'    => $this->resize_group,
+				'opt_networkwide_val' => $this->settings->is_network_enabled(),
+				'settings'            => $this->settings->get(),
+				'settings_data'       => WP_Smush::get_instance()->core()->settings,
+			)
+		);
 	}
 
 }

@@ -211,7 +211,7 @@ class Ai1wm_Import_Done {
 		// Set progress
 		Ai1wm_Status::done(
 			__(
-				'☺ Your site has been imported successfully!',
+				'Your site has been imported successfully!',
 				AI1WM_PLUGIN_NAME
 			),
 			sprintf(

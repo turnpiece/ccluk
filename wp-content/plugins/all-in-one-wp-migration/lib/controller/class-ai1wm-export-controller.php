@@ -115,7 +115,7 @@ class Ai1wm_Export_Controller {
 						}
 
 						wp_remote_post( apply_filters( 'ai1wm_http_export_url', admin_url( 'admin-ajax.php?action=ai1wm_export' ) ), array(
-							'timeout'   => apply_filters( 'ai1wm_http_export_timeout', 5 ),
+							'timeout'   => apply_filters( 'ai1wm_http_export_timeout', 10 ),
 							'blocking'  => apply_filters( 'ai1wm_http_export_blocking', false ),
 							'sslverify' => apply_filters( 'ai1wm_http_export_sslverify', false ),
 							'headers'   => apply_filters( 'ai1wm_http_export_headers', array() ),
@@ -128,6 +128,7 @@ class Ai1wm_Export_Controller {
 				next( $filters );
 			}
 		}
+
 		return $params;
 	}
 
@@ -169,32 +170,18 @@ class Ai1wm_Export_Controller {
 		// Exclude index.php
 		$iterator = new Ai1wm_Recursive_Exclude_Filter( $iterator, array( 'index.php' ) );
 
-		// Recursively iterate over content directory
-		$iterator = new Ai1wm_Recursive_Iterator_Iterator( $iterator, RecursiveIteratorIterator::CHILD_FIRST, RecursiveIteratorIterator::CATCH_GET_CHILD );
-
-		// We can't delete in the main loop since deletion updates mtime for parent folders
-		$files = $folders = array();
+		// Loop over folders and files
 		foreach ( $iterator as $item ) {
 			try {
-				if ( $item->getMTime() < time() - 23 * 60 * 60 ) {
-					if ( $item->isFile() ) {
-						$files[] = $item->getPathname();
-					} elseif ( $item->isDir() ) {
-						$folders[] = $item->getPathname();
+				if ( $item->getMTime() < ( time() - AI1WM_MAX_STORAGE_CLEANUP ) ) {
+					if ( $item->isDir() ) {
+						Ai1wm_Directory::delete( $item->getPathname() );
+					} else {
+						Ai1wm_File::delete( $item->getPathname() );
 					}
 				}
 			} catch ( Exception $e ) {
 			}
-		}
-
-		// Delete outdated files
-		foreach ( $files as $file ) {
-			@unlink( $file );
-		}
-
-		// Delete outdated folders
-		foreach ( $folders as $folder ) {
-			Ai1wm_Directory::delete( $folder );
 		}
 	}
 }

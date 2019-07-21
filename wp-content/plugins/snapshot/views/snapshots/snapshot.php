@@ -35,13 +35,13 @@ if ( version_compare(PHP_VERSION, '5.5.0', '<') ) {
 	<h1><?php esc_html_e( 'Snapshots', SNAPSHOT_I18N_DOMAIN ); ?></h1>
 </section>
 
-<?php
+<?php 
 $this->render(
 	'snapshots/partials/create-snapshot-progress', false, array(
 		'item' => $item,
 		'time_key' => $time_key
-	), false, false
-);
+	), false, false 
+); 
 ?>
 
 <form id="snapshot-add-update" method="post" action="<?php echo esc_url( WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url( 'snapshots-newui-snapshots' ) ); ?>">
@@ -142,7 +142,7 @@ $this->render(
 													} else {
 														esc_html_e( 'Unknown Blog', SNAPSHOT_I18N_DOMAIN );
 													}
-												} else {
+												} else { 
                                                 ?>
 
 
@@ -166,7 +166,7 @@ $this->render(
 
 														if ( ! is_subdomain_install() ) {
 															echo esc_html( trailingslashit( site_url() ) );
-														}
+														} 
                                                         ?>
 
 														<input name="snapshot-blog-id-search" id="snapshot-blog-id-search" value="" style="width: 20%;">
@@ -178,14 +178,14 @@ $this->render(
 															$blog_path = preg_replace( '/(http|https):\/\/|/', '', $blog_path );
 
 															printf( '.%s', esc_html( $blog_path ) );
-														}
+														} 
                                                         ?>
 
 														<span class="wps-spinner" style="display: none;"></span>
 
 														<p class="description">
 															<small>
-																<?php
+																<?php 
                                                                 if ( is_subdomain_install() ) {
 																	esc_html_e( 'Enter the blog subdomain prefix (e.g. site1), blog ID (e.g. 22), or mapped domain, or leave blank for the primary site.', SNAPSHOT_I18N_DOMAIN );
 																} else {
@@ -243,8 +243,8 @@ $this->render(
 											sprintf(
 												__( 'Choose where to send this snapshot. Add new destinations via the <a href="%s">Destinations</a> tab.', SNAPSHOT_I18N_DOMAIN ),
 												esc_url( WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url( 'snapshots-newui-destinations' ) )
-												)
-											);
+												) 
+											); 
 										?>
 										</label>
 
@@ -332,7 +332,7 @@ $this->render(
 
 										if ( ! isset( $item['files-sections'] ) ) {
 											$item['files-sections'] = array();
-										}
+										} 
                                         ?>
 
 										<div class="wps-input--group">
@@ -352,10 +352,10 @@ $this->render(
 
 											</div>
 
-											<?php
+											<?php 
                                             $blog_upload_path = Snapshot_Helper_Utility::get_blog_upload_path( $item['blog-id'] );
 
-											if ( ! empty( $blog_upload_path ) ) {
+											if ( ! empty( $blog_upload_path ) ) { 
                                             ?>
 
 												<div class="wps-input--item">
@@ -371,10 +371,10 @@ $this->render(
 													<label for="snapshot-files-option-all">
 														<?php esc_html_e( 'Include common files', SNAPSHOT_I18N_DOMAIN ); ?>:
 														<span class="snapshot-backup-files-sections-main-only"
-                                                        <?php
+                                                        <?php 
                                                         if ( ! is_main_site( $item['blog-id'] ) ) {
 															echo ' style="display:none" ';
-														}
+														} 
                                                         ?>
                                                         >
 														<?php esc_html_e( 'themes, plugins,', SNAPSHOT_I18N_DOMAIN ); ?>
@@ -399,10 +399,10 @@ $this->render(
 											</div>
 
 											<div id="snapshot-selected-files-container"
-                                            <?php
+                                            <?php 
                                             if ( 'none' === $item['files-option'] || 'all' === $item['files-option'] ) {
 												echo ' class="hidden"';
-											}
+											} 
                                             ?>
                                             >
 
@@ -412,11 +412,11 @@ $this->render(
 
 														<div class="wps-input--checkbox">
 
-															<input type="checkbox" class="snapshot-backup-sub-options"
-                                                            <?php
+															<input type="checkbox" class="snapshot-backup-sub-options" 
+                                                            <?php 
                                                             if ( array_search( 'themes', $item['files-sections'], true ) !== false ) {
 																echo ' checked="checked" ';
-															}
+															} 
                                                             ?>
                                                              id="snapshot-files-option-themes" value="themes" name="snapshot-files-sections[themes]">
 
@@ -432,11 +432,11 @@ $this->render(
 
 														<div class="wps-input--checkbox">
 
-															<input type="checkbox" class="snapshot-backup-sub-options"
-                                                            <?php
+															<input type="checkbox" class="snapshot-backup-sub-options" 
+                                                            <?php 
                                                             if ( array_search( 'plugins', $item['files-sections'], true ) !== false ) {
 																echo ' checked="checked" ';
-															}
+															} 
                                                             ?>
                                                              id="snapshot-files-option-plugins" value="plugins" name="snapshot-files-sections[plugins]">
 
@@ -454,11 +454,11 @@ $this->render(
 
 															<div class="wps-input--checkbox">
 
-																<input type="checkbox" class="snapshot-backup-sub-options"
-                                                                <?php
+																<input type="checkbox" class="snapshot-backup-sub-options" 
+                                                                <?php 
                                                                 if ( array_search( 'plugins', $item['files-sections'], true ) !== false ) {
 																	echo ' checked="checked" ';
-																}
+																} 
                                                                 ?>
                                                                  id="snapshot-files-option-mu-plugins" value="mu-plugins" name="snapshot-files-sections[mu-plugins]">
 
@@ -476,11 +476,11 @@ $this->render(
 
 														<div class="wps-input--checkbox">
 
-															<input type="checkbox" class="snapshot-backup-sub-options"
-                                                            <?php
+															<input type="checkbox" class="snapshot-backup-sub-options" 
+                                                            <?php 
                                                             if ( array_search( 'media', $item['files-sections'], true ) !== false ) {
 																echo ' checked="checked" ';
-															}
+															} 
                                                             ?>
                                                              id="snapshot-files-option-media" value="media" name="snapshot-files-sections[media]">
 
@@ -497,11 +497,11 @@ $this->render(
 
 														<div class="wps-input--checkbox">
 
-															<input type="checkbox" class="snapshot-backup-sub-options"
-                                                            <?php
+															<input type="checkbox" class="snapshot-backup-sub-options" 
+                                                            <?php 
                                                             if ( array_search( 'config', $item['files-sections'], true ) !== false ) {
 																echo ' checked="checked" ';
-															}
+															} 
                                                             ?>
                                                              id="snapshot-files-option-config" value="config" name="snapshot-files-sections[config]">
 
@@ -517,11 +517,11 @@ $this->render(
 
 														<div class="wps-input--checkbox">
 
-															<input type="checkbox" class="snapshot-backup-sub-options"
-                                                            <?php
+															<input type="checkbox" class="snapshot-backup-sub-options" 
+                                                            <?php 
                                                             if ( array_search( 'htaccess', $item['files-sections'], true ) !== false ) {
 																echo ' checked="checked" ';
-															}
+															} 
                                                             ?>
                                                              id="snapshot-files-option-htaccess" value="htaccess" name="snapshot-files-sections[htaccess]">
 
@@ -537,10 +537,10 @@ $this->render(
 
 											</div>
 
-											<?php
+											<?php 
                                             if ( ! isset( $item['destination-sync'] ) ) {
 												$item['destination-sync'] = "archive";
-											}
+											} 
                                             ?>
 
 											<?php if ( Snapshot_Helper_Utility::is_pro() ) { ?>
@@ -551,7 +551,7 @@ $this->render(
 
 													<ul class="wpmud-box-gray wps-input--group">
 
-														<?php
+														<?php 
                                                         $_is_mirror_disabled = ' disabled="disabled" ';
 
 														if ( isset( $item['destination'] ) ) {
@@ -577,11 +577,11 @@ $this->render(
 
 															<div class="wps-input--radio">
 
-																<input type="radio" name="snapshot-destination-sync" id="snapshot-destination-sync-archive" value="archive" class="snapshot-destination-sync"
-                                                                <?php
+																<input type="radio" name="snapshot-destination-sync" id="snapshot-destination-sync-archive" value="archive" class="snapshot-destination-sync" 
+                                                                <?php 
                                                                 if ( "archive" === $item['destination-sync'] ) {
 																	echo ' checked="checked" ';
-																}
+																} 
                                                                 ?>
                                                                  />
 
@@ -597,11 +597,11 @@ $this->render(
 
 															<div class="wps-input--radio">
 
-																<input type="radio" <?php echo esc_attr( $_is_mirror_disabled ); ?> name="snapshot-destination-sync" id="snapshot-destination-sync-mirror" value="mirror" class="snapshot-destination-sync"
-																<?php
+																<input type="radio" <?php echo esc_attr( $_is_mirror_disabled ); ?> name="snapshot-destination-sync" id="snapshot-destination-sync-mirror" value="mirror" class="snapshot-destination-sync" 
+																<?php 
                                                                 if ( "mirror" === $item['destination-sync'] ) {
 																	echo ' checked="checked" ';
-																}
+																} 
                                                                 ?>
                                                                 />
 
@@ -617,19 +617,19 @@ $this->render(
 
 												</div>
 
-											<?php
+											<?php 
                                             } else {
 
 												$message = sprintf( __( '<p>Additional options are available for the \'Dropbox\' destination.</p><p>Destinations are available to you in Snapshot Pro from WPMU Dev: <a href="%s">Upgrade Now</a></p>', SNAPSHOT_I18N_DOMAIN ), esc_url( 'https://premium.wpmudev.org/project/snapshot' ) );
 
 												echo wp_kses_post( $message );
 
-											}
+											} 
                                             ?>
 
 											<label class="label-title"><?php esc_html_e( 'Add any custom URLs you want to not include in this snapshot.', SNAPSHOT_I18N_DOMAIN ); ?></label>
 
-											<?php
+											<?php 
 											if ( ( isset( $item['files-ignore'] ) ) && ( count( $item['files-ignore'] ) ) ) {
 												$snapshot_files_ignore = ( implode( "\n", $item['files-ignore'] ) );
 											} else {
@@ -641,7 +641,7 @@ $this->render(
 											<p>
 												<small>
 													<?php
-													echo wp_kses_post( __( 'URLs can be files and must be listed one per line. The exclude feature uses pattern matching, so typing twentyten will exclude the twentyten folder, as well as any filters with twentyten in the filename.', SNAPSHOT_I18N_DOMAIN ) );
+													echo wp_kses_post( __( 'URLs can be files and must be listed one per line. The exclude feature uses pattern matching, so typing twentyten will exclude the twentyten folder, as well as any filters with twentyten in the filename.', SNAPSHOT_I18N_DOMAIN ) ); 
                                                     ?>
 												</small>
 											</p>
@@ -671,7 +671,7 @@ $this->render(
 
 									<div class="wpmud-box-mask">
 
-										<?php
+										<?php 
                                         if ( ! isset( $item['blog-id'] ) ) {
 											$item['blog-id'] = $wpdb->blogid;
 										}
@@ -692,7 +692,7 @@ $this->render(
 
 											$item['tables-option'] = "all";
 
-										}
+										} 
                                         ?>
 
 										<label class="label-title"><?php esc_html_e( 'Select which database tables you want to include.', SNAPSHOT_I18N_DOMAIN ); ?></label>
@@ -703,11 +703,11 @@ $this->render(
 
 												<div class="wps-input--radio">
 
-													<input type="radio" class="snapshot-tables-option" id="snapshot-tables-option-none" value="none"
-                                                    <?php
+													<input type="radio" class="snapshot-tables-option" id="snapshot-tables-option-none" value="none" 
+                                                    <?php 
                                                     if ( "none" === $item['tables-option'] ) {
 														echo ' checked="checked" ';
-													}
+													} 
                                                     ?>
                                                      name="snapshot-tables-option">
 
@@ -723,11 +723,11 @@ $this->render(
 
 												<div class="wps-input--radio">
 
-													<input type="radio" class="snapshot-tables-option" id="snapshot-tables-option-all" value="all"
-                                                    <?php
+													<input type="radio" class="snapshot-tables-option" id="snapshot-tables-option-all" value="all" 
+                                                    <?php 
                                                     if ( "all" === $item['tables-option'] ) {
 														echo ' checked="checked" ';
-													}
+													} 
                                                     ?>
                                                      name="snapshot-tables-option">
 
@@ -743,11 +743,11 @@ $this->render(
 
 												<div class="wps-input--radio">
 
-													<input type="radio" class="snapshot-tables-option" id="snapshot-tables-option-selected" value="selected"
-                                                    <?php
+													<input type="radio" class="snapshot-tables-option" id="snapshot-tables-option-selected" value="selected" 
+                                                    <?php 
                                                     if ( "selected" === $item['tables-option'] ) {
 														echo ' checked="checked" ';
-													}
+													} 
                                                     ?>
                                                      name="snapshot-tables-option">
 
@@ -761,11 +761,11 @@ $this->render(
 
 										</div>
 
-										<div id="snapshot-selected-tables-container" class="wpmud-box-gray" style="
-                                        <?php
+										<div id="snapshot-selected-tables-container" class="wpmud-box-gray" style=" 
+                                        <?php 
                                         if ( ( "none" === $item['tables-option'] ) || ( "all" === $item['tables-option'] ) ) {
 											echo ' display:none; ';
-										}
+										} 
                                         ?>
                                         ">
 
@@ -788,7 +788,7 @@ $this->render(
 
 													$display_set = 'none';
 
-												}
+												} 
                                                 ?>
 
 												<div id="snapshot-tables-<?php echo esc_attr( $table_set_key ); ?>-set" style="display: <?php echo esc_attr( $display_set ); ?>">
@@ -805,7 +805,7 @@ $this->render(
 
 													<ul class="snapshot-table-list" id="snapshot-table-list-<?php echo esc_attr( $table_set_key ); ?>">
 
-														<?php
+														<?php 
 														check_admin_referer( 'snapshot-nonce', 'snapshot-noonce-field');
                                                         if ( ( isset( $table_sets[ $table_set_key ] ) ) && ( count( $table_sets[ $table_set_key ] ) ) ) {
 
@@ -815,13 +815,13 @@ $this->render(
 
 																$is_checked = '';
 
-																if ( 'error' === $table_set_key ) {
+																if ( 'error' === $table_set_key ) { 
                                                                 ?>
 
 																	<li style="clear:both"><?php echo wp_kses_post( $table_name['name'] ); ?>
 																		&ndash; <?php echo wp_kses_post( $table_name['reason'] ); ?></li>
 
-																<?php
+																<?php 
                                                                 } else {
 
 																	if ( isset( $_REQUEST['backup-tables'] ) ) {
@@ -854,7 +854,7 @@ $this->render(
 																			}
 																		}
 
-																	}
+																	} 
                                                                     ?>
 
 																	<li class="wps-input--item">
@@ -871,12 +871,12 @@ $this->render(
 
 																	</li>
 
-																<?php
+																<?php 
                                                                 }
 
 															}
 
-														} else {
+														} else { 
                                                         ?>
 
 															<li><?php esc_html_e( 'No Tables', SNAPSHOT_I18N_DOMAIN ); ?></li>
@@ -918,7 +918,7 @@ $this->render(
 
 													<input id="frequency-once" type="radio" name="frequency" value="once"
                                                     <?php
-													checked( ! $update || isset( $item['interval'] ) && 'immediate' === $item['interval'] );
+													checked( ! $update || isset( $item['interval'] ) && 'immediate' === $item['interval'] ); 
                                                     ?>
                                                     >
 
@@ -936,7 +936,7 @@ $this->render(
 
 													<input id="frequency-daily" type="radio" name="frequency" value="schedule"
                                                     <?php
-													checked( $update && isset( $item['interval'] ) && 'immediate' !== $item['interval'] );
+													checked( $update && isset( $item['interval'] ) && 'immediate' !== $item['interval'] ); 
                                                     ?>
                                                     >
 
@@ -960,7 +960,7 @@ $this->render(
 
 												<select name="snapshot-interval" id="snapshot-interval">
 
-													<?php
+													<?php 
                                                     if ( isset( $item['interval'] ) ) {
 														$item_interval = $item['interval'];
 													} else {
@@ -991,13 +991,13 @@ $this->render(
 												?>
 
 												<div id="interval-offset">
-													<div class="interval-offset-daily"
+													<div class="interval-offset-daily" 
                                                     <?php
 													if ( ( "snapshot-daily" === $item_interval ) || ( "snapshot-twicedaily" === $item_interval ) ) {
 														echo ' style="display: inline-flex;" ';
 													} else {
 														echo ' style="display: none;" ';
-													}
+													} 
                                                     ?>
                                                      >
 														<span class="inbetween"><?php esc_html_e( 'at', SNAPSHOT_I18N_DOMAIN ); ?></span>
@@ -1017,13 +1017,13 @@ $this->render(
 															?>
 														</select>&nbsp;&nbsp;
 													</div>
-													<div class="interval-offset-weekly"
+													<div class="interval-offset-weekly" 
                                                     <?php
 													if ( ( "snapshot-weekly" === $item_interval ) || ( "snapshot-twiceweekly" === $item_interval ) ) {
 														echo ' style="display: inline-flex;" ';
 													} else {
 														echo ' style="display: none;" ';
-													}
+													} 
                                                     ?>
                                                      >
 														<span class="inbetween"><?php esc_html_e( 'on', SNAPSHOT_I18N_DOMAIN ); ?></span>
@@ -1051,13 +1051,13 @@ $this->render(
 															?>
 														</select>&nbsp;&nbsp;
 													</div>
-													<div class="interval-offset-monthly"
+													<div class="interval-offset-monthly" 
                                                     <?php
 													if ( ( "snapshot-monthly" === $item_interval ) || ( "snapshot-twicemonthly" === $item_interval ) ) {
 														echo ' style="display: inline-flex;" ';
 													} else {
 														echo ' style="display: none;" ';
-													}
+													} 
                                                     ?>
                                                      >
 
@@ -1087,13 +1087,17 @@ $this->render(
 													</div>
 												</div>
 
+												<p class="spread-snapshot-schedules">
+													<small><?php esc_html_e( 'Note: If you have multiple websites hosted on the same server which all have the same backups schedule, you could run into issues. We recommend spreading your backup schedules over different days, or at at least different times of the day.', SNAPSHOT_I18N_DOMAIN ); ?></small>
+												</p>
+
 											<?php // } ?>
 
 											</div>
 
 											<div id="clean-remote-count" class="clean-storage-limits" >
 												<h3><?php esc_html_e( 'Remote Destination Storage Limit', SNAPSHOT_I18N_DOMAIN ); ?></h3>
-
+												
 												<p>
 													<small><?php esc_html_e( 'Choose the number of snapshots to keep on the remote destination.', SNAPSHOT_I18N_DOMAIN ); ?></small>
 												</p>
@@ -1104,7 +1108,7 @@ $this->render(
 
 														<div class="wps-input--radio">
 
-															<input type="radio" name="snapshot-clean-remote" class="snapshot-clean-remote-no" id="snapshot-clean-remote-no" value="0"
+															<input type="radio" name="snapshot-clean-remote" class="snapshot-clean-remote-no" id="snapshot-clean-remote-no" value="0" 
 															<?php
 															if ( ! isset( $item['transitioned-purging'] ) && isset( $item['clean-remote'] ) ) {
 																echo ( empty( $item['clean-remote'] ) || empty( $item['archive-count'] ) ) ? ' checked="checked" ' : '';
@@ -1126,8 +1130,8 @@ $this->render(
 
 														<div class="wps-input--radio">
 
-															<input type="radio" name="snapshot-clean-remote" class="snapshot-clean-remote-yes" id="snapshot-clean-remote-yes" value="1"
-															<?php
+															<input type="radio" name="snapshot-clean-remote" class="snapshot-clean-remote-yes" id="snapshot-clean-remote-yes" value="1" 
+															<?php 
 															if ( ! isset( $item['transitioned-purging'] ) && isset( $item['clean-remote'] ) ) {
 																echo ! ( empty( $item['clean-remote'] ) || empty( $item['archive-count'] ) ) ? ' checked="checked" ' : '';
 															} else if ( isset( $item['transitioned-purging'] ) && isset( $item['clean-remote'] ) && $item['clean-remote'] ) {
@@ -1170,7 +1174,7 @@ $this->render(
 													</p>
 
 												</div>
-
+												
 											</div>
 
 											<div id="clean-local-count" class="clean-storage-limits" >
@@ -1186,8 +1190,8 @@ $this->render(
 
 														<div class="wps-input--radio">
 
-															<input type="radio" name="snapshot-clean-local" class="snapshot-clean-local-no" id="snapshot-clean-local-no" value="0"
-															<?php
+															<input type="radio" name="snapshot-clean-local" class="snapshot-clean-local-no" id="snapshot-clean-local-no" value="0" 
+															<?php 
 															if ( ! isset( $item['transitioned-purging'] ) ) {
 																if ( ! isset( $item['archive-count'] ) || ! intval( $item['archive-count'] ) ) {
 																	echo ' checked="checked" ';
@@ -1200,7 +1204,7 @@ $this->render(
 
 															<label for="snapshot-clean-local-no"></label>
 
-														</div>
+														</div>														
 
 														<label for="snapshot-clean-local-no"><?php esc_html_e( 'Keep a local copy of all the snapshots', SNAPSHOT_I18N_DOMAIN ); ?></label>
 
@@ -1210,8 +1214,8 @@ $this->render(
 
 														<div class="wps-input--radio">
 
-															<input type="radio" name="snapshot-clean-local" class="snapshot-clean-local-yes" id="snapshot-clean-local-yes" value="1"
-															<?php
+															<input type="radio" name="snapshot-clean-local" class="snapshot-clean-local-yes" id="snapshot-clean-local-yes" value="1" 
+															<?php 
 															if ( ! isset( $item['transitioned-purging'] ) ) {
 																if ( isset( $item['archive-count'] ) && intval( $item['archive-count'] ) ) {
 																	echo ' checked="checked" ';

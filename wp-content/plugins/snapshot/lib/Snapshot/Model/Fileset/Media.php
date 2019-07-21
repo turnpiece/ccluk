@@ -7,7 +7,7 @@ class Snapshot_Model_Fileset_Media extends Snapshot_Model_Fileset {
 	public function get_base () {
 		return Snapshot_Helper_Utility::get_blog_upload_path($this->get_blog_id());
 	}
-
+	
 	public function get_files ($chunk = false) {
 		$path = $this->get_root();
 		if (empty($path)) return array();

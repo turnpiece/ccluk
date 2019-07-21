@@ -16,7 +16,7 @@
 
 			$is_client = $model->is_dashboard_active() && $model->has_dashboard_key();
 			$has_snapshot_key = $is_client && Snapshot_Model_Full_Remote_Api::get()->get_token() !== false && ! empty( $apiKey );
-
+			
 			if ( version_compare(PHP_VERSION, '5.5.0', '<') ) {
 				$aws_sdk_compatible = false;
 			} else {
@@ -50,7 +50,12 @@
 			<?php
 
 			$this->render( 'boxes/dashboard/widget-snapshots', false, array(), false, false );
-			$this->render( 'boxes/dashboard/widget-backups', false, $data, false, false );
+
+			if ( Snapshot_Helper_Utility::is_wpmu_hosting() ) {
+				$this->render( 'boxes/dashboard/widget-hosting-backups', false, $data, false, false );
+			} else {
+				$this->render( 'boxes/dashboard/widget-backups', false, $data, false, false );
+			}
 
 			?>
 
@@ -76,5 +81,10 @@
 
 <?php
 
-$this->render( 'boxes/modals/popup-welcome', false, $data, false, false );
+if( Snapshot_Helper_Utility::is_wpmu_hosting() ) {
+	$this->render( 'boxes/modals/popup-hosting', false, array(), false, false );
+}else {
+	$this->render( 'boxes/modals/popup-welcome', false, $data, false, false );
+}
+
 $this->render( 'boxes/modals/popup-snapshot', false, $data, false, false );

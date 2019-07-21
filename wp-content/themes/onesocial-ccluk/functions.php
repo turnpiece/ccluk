@@ -143,7 +143,7 @@ function ccluk_theme_scripts_styles()
    * need to ensure this stylesheet loads after the parent stylesheets
    *
    */
-  wp_enqueue_style( 'ccluk-custom', get_stylesheet_directory_uri() . '/assets/css/custom.'.(CCLUK_DEBUGGING ? '' : 'min.').'css', array( 'onesocial-main-global' ) );
+   wp_enqueue_style( 'ccluk-custom', get_stylesheet_directory_uri() . '/assets/css/custom.'.(CCLUK_DEBUGGING ? '' : 'min.').'css', array( 'onesocial-main-global' ) );
 
   /*
    * Scripts
@@ -151,10 +151,10 @@ function ccluk_theme_scripts_styles()
    * need to ensure this script loads after the parent scripts
    *
    */
-    wp_enqueue_script( 'ccluk-menu-js', get_stylesheet_directory_uri() . '/assets/js/menu.'.(CCLUK_DEBUGGING ? '' : 'min.').'js', array( 'jquery' ) );
+   wp_enqueue_script( 'ccluk-menu-js', get_stylesheet_directory_uri() . '/assets/js/menu.'.(CCLUK_DEBUGGING ? '' : 'min.').'js', array( 'jquery' ) );
 
-    // Google Analytics tracking
-    wp_enqueue_script( 'ccluk-ga-tracking-js', get_stylesheet_directory_uri() . '/assets/js/ga-tracking.'.(CCLUK_DEBUGGING ? '' : 'min.').'js', array( 'jquery' ) );
+   // Google Analytics tracking
+   wp_enqueue_script( 'ccluk-ga-tracking-js', get_stylesheet_directory_uri() . '/assets/js/ga-tracking.'.(CCLUK_DEBUGGING ? '' : 'min.').'js', array( 'jquery' ) );
 
 }
 add_action( 'wp_enqueue_scripts', 'ccluk_theme_scripts_styles', 9999 );
@@ -180,10 +180,6 @@ function boss_generate_option_css() {
     a { color: <?php echo $accent_color; ?>; }
           .widget_mc4wp_form_widget form p input[type="submit"], .widget.widget_newsletterwidget form p input[type="submit"],
           .footer-widget #switch-mode input[type="submit"],
-          .woocommerce #respond input#submit,
-          .woocommerce a.button,
-          .woocommerce button.button,
-          .woocommerce input.button,
     button,
     input[type="button"],
     input[type="reset"],
@@ -209,7 +205,6 @@ function boss_generate_option_css() {
     .is-mobile #buddypress #mobile-item-nav ul li.selected,
     #buddyboss-bbpress-media-attach,
     #buddyboss-comment-media-attach,
-    .woocommerce .site-content nav.woocommerce-pagination ul li .current,
     #trigger-sidebar:hover .bb-side-icon,
     #trigger-sidebar:hover .bb-side-icon:before,
     #trigger-sidebar:hover .bb-side-icon:after,
@@ -219,7 +214,6 @@ function boss_generate_option_css() {
       background-color: <?php echo $accent_color; ?>;
     }
 
-    .woocommerce span.onsale,
     .boss-modal-form .button,
     .bb-sidebar-on .bb-side-icon,
     .bb-sidebar-on .bb-side-icon:after,
@@ -234,10 +228,6 @@ function boss_generate_option_css() {
       background: <?php echo $accent_color; ?>;
     }
 
-    .woocommerce ul.products li.product .price,
-    .woocommerce div.product p.price,
-    .woocommerce div.product span.price,
-    .woocommerce [type='checkbox']:checked + span,
     .header-account-login .pop .boss-logout,
     .header-account-login .pop a:hover,
     .bboss_ajax_search_item .item .item-title,
@@ -425,12 +415,6 @@ function boss_generate_option_css() {
       -webkit-box-shadow: 0px 0px 0px 2px <?php echo $accent_color; ?>;
       -moz-box-shadow: 0px 0px 0px 2px <?php echo $accent_color; ?>;
       box-shadow: 0px 0px 0px 2px <?php echo $accent_color; ?>;
-    }
-
-    .woocommerce-checkout [type='checkbox']:checked + span:before {
-      -webkit-box-shadow: 0px 0px 0px 1px <?php echo $accent_color; ?>;
-      -moz-box-shadow: 0px 0px 0px 1px <?php echo $accent_color; ?>;
-      box-shadow: 0px 0px 0px 1px <?php echo $accent_color; ?>;
     }
 
     /********** Desktop  *************/
@@ -804,18 +788,14 @@ add_action( 'bp_setup_nav', function() {
 
 // remove submenu links from adminbar
 function ccluk_remove_admin_bar_links() {
-    ccluk_debug( __FUNCTION__ );
-
     if ( is_admin() ) { //nothing to do on admin
         return;
     }
     global $wp_admin_bar;
 
-    ccluk_vardump( $wp_admin_bar );
-
     $rm_items = array(
         'forums',
-//        'friends',
+        'friends',
         'groups',
         'notifications-read',
         'notifications-unread',
@@ -841,29 +821,28 @@ function ccluk_remove_admin_bar_links() {
     foreach( $rm_items as $item )
         $wp_admin_bar->remove_menu( 'my-account-'.$item );
 
-    ccluk_vardump( $wp_admin_bar );
+    //error_log( print_r( $wp_admin_bar, true ) );
 }
 add_action( 'wp_before_admin_bar_render', 'ccluk_remove_admin_bar_links' );
 
-/**
- *
- * debug
- *
- * @param string $message
- *
- */
-function ccluk_debug( $message ) {
-    if (CCLUK_DEBUGGING)
-        error_log( $message );
-}
+// WordPress social login
+add_action( 'bp_after_registration_submit_buttons', function() {
+    if ( 'registration-disabled' != bp_get_current_signup_step() )
+        do_action( 'wordpress_social_login' );
+} );
 
-/**
- *
- * vardump
- *
- * @param array $array
- *
- */
-function ccluk_vardump( $array ) {
-    ccluk_debug( print_r( $array, true ) );
-}
+// output privacy policy link
+add_action( 'bp_before_registration_submit_buttons', function() {
+    // get MailChimp integration options
+    $options = get_option('mc4wp_integrations');
+
+    // bail if implicit option is not set as then we'll
+    // be displaying a checkbox and text
+    if (empty($options['buddypress']['implicit']))
+        return;
+
+    ?>
+    <p class="privacy-text">
+        <a href="/privacy-policy"><?php _e( 'We respect your privacy.', 'onesocial' ) ?></a>
+    </p>
+<?php } );

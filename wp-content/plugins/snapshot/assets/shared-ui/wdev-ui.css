@@ -1059,7 +1059,7 @@
 	border: 0;
 	box-shadow: none;
 }
-.wpmud button:not(.wph-button):not(#collapse-button),
+.wpmud button:not(.wph-button):not(#collapse-button):not(.wp-auth-check-close),
 .wpmud .button {
 	font: 500 15px/20px 'Roboto';
 	background: #00ACCA;
@@ -2587,6 +2587,3 @@
 	overflow: hidden;
 	animation: collapse 0.5s linear;
 }
-
-
-/* 87274-1554644954-au */

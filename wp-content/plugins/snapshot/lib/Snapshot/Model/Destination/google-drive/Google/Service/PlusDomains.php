@@ -58,7 +58,7 @@ class Google_0814_Service_PlusDomains extends Google_0814_Service
   public $comments;
   public $media;
   public $people;
-
+  
 
   /**
    * Constructs the internal representation of the PlusDomains service.

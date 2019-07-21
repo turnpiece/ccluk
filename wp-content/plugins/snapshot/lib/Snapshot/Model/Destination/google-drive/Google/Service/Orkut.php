@@ -52,7 +52,7 @@ class Google_0814_Service_Orkut extends Google_0814_Service
   public $communityTopics;
   public $counters;
   public $scraps;
-
+  
 
   /**
    * Constructs the internal representation of the Orkut service.

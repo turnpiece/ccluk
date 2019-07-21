@@ -46,7 +46,7 @@ function ccluk_site_logo(){
     } else {
         $classes['desc'] = 'no-desc';
     }
-    
+
     echo '<div class="site-brand-inner '.esc_attr( join( ' ', $classes ) ).'">'.$html.'</div>';
 }
 
@@ -343,8 +343,7 @@ if ( ! function_exists( 'ccluk_custom_inline_style' ) ) {
                 {
                     color: #<?php echo $primary; ?>;
                 }
-                input[type="reset"], input[type="submit"], input[type="submit"], .nav-links a:hover, .btn-theme-primary, .btn-theme-primary-outline:hover, .card-theme-primary,
-				.woocommerce #respond input#submit, .woocommerce a.button, .woocommerce button.button, .woocommerce input.button, .woocommerce button.button.alt
+                input[type="reset"], input[type="submit"], input[type="submit"], .nav-links a:hover, .btn-theme-primary, .btn-theme-primary-outline:hover, .card-theme-primary
                 {
                     background: #<?php echo $primary; ?>;
                 }

@@ -118,11 +118,22 @@ function apbct_base_call($params = array(), $reg_flag = false){
 	$ct->work_url       = preg_match('/http:\/\/.+/', $config['ct_work_url']) ? $config['ct_work_url'] : null;
 	$ct->server_ttl     = $config['ct_server_ttl'];
 	$ct->server_changed = $config['ct_server_changed'];
-	
+
+	$start = microtime(true);
 	$ct_result = $reg_flag
 		? @$ct->isAllowUser($ct_request)
 		: @$ct->isAllowMessage($ct_request);
-	
+	$exec_time = microtime(true) - $start;
+
+	// Statistics
+	// Average request time
+	apbct_statistics__rotate($exec_time);
+	// Last request
+	$apbct->stats['last_request']['time'] = time();
+	$apbct->stats['last_request']['server'] = $ct->work_url;
+	$apbct->save('stats');
+
+	// Connection reports
 	if ($ct_result->errno === 0 && empty($ct_result->errstr))
         $apbct->data['connection_reports']['success']++;
     else
@@ -134,15 +145,15 @@ function apbct_base_call($params = array(), $reg_flag = false){
 			'lib_report' => $ct_result->errstr,
 			'work_url' => $ct->work_url,
 		);
-		
+
 		if(count($apbct->data['connection_reports']['negative_report']) > 20)
 			$apbct->data['connection_reports']['negative_report'] = array_slice($apbct->data['connection_reports']['negative_report'], -20, 20);
-		
+
     }
-	
+
     if ($ct->server_change) {
 		update_option(
-			'cleantalk_server', 
+			'cleantalk_server',
 			array(
 				'ct_work_url'       => $ct->work_url,
 				'ct_server_ttl'     => $ct->server_ttl,
@@ -150,9 +161,9 @@ function apbct_base_call($params = array(), $reg_flag = false){
 			)
 		);
     }
-    
+
     $ct_result = ct_change_plugin_resonse($ct_result, $ct_request->js_on);
-	
+
 	// Restart submit form counter for failed requests
     if ($ct_result->allow == 0){
 		apbct_cookie(); // Setting page timer and cookies
@@ -160,6 +171,10 @@ function apbct_base_call($params = array(), $reg_flag = false){
     }else{
        	ct_add_event('yes');
     }
+	
+	// Set cookies if it's not.
+	if(empty($apbct->flags__cookies_setuped))
+		apbct_cookie();
 	
     return array('ct' => $ct, 'ct_result' => $ct_result);
 	
@@ -241,6 +256,11 @@ function apbct_get_sender_info() {
 		'source_url'             => !empty($urls)                                                  ? json_encode($urls)                                                : null,
 		// Debug stuff
 		'amp_detected'           => $amp_detected,
+		'hook'                   => current_action(),
+		'headers_sent'           => !empty($apbct->headers_sent)        ? $apbct->headers_sent        : false,
+		'headers_sent__hook'     => !empty($apbct->headers_sent__hook)  ? $apbct->headers_sent__hook  : false,
+		'headers_sent__hook'     => !empty($apbct->headers_sent__where) ? $apbct->headers_sent__where : false,
+		'request_type'           => isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : 'UNKNOWN',
 	);
 }
 
@@ -294,8 +314,11 @@ function apbct_js_keys__get__ajax($direct_call = false){
 }
 
 /**
- * Get ct_get_checkjs_value 
- * @return string
+ * Get ct_get_checkjs_value
+ *
+ * @param bool $random_key
+ *
+ * @return int|string|null
  */
 function ct_get_checkjs_value($random_key = false) {
 	
@@ -854,6 +877,8 @@ function cleantalk_debug($key,$value)
 * @return object
 */ 
 function ct_change_plugin_resonse($ct_result = null, $checkjs = null) {
+	
+	global $apbct;
 	
     if (!$ct_result) {
         return $ct_result;

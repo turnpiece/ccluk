@@ -200,6 +200,12 @@ class Shipper_Controller_Runner_Migration extends Shipper_Controller_Runner {
 			unlink( $filelist_manifest );
 		}
 
+		$files = new Shipper_Model_Dumped_Largelist;
+		$filelist_manifest = $files->get_file_path();
+		if ( file_exists( $filelist_manifest ) ) {
+			unlink( $filelist_manifest );
+		}
+
 		$model = new Shipper_Model_Stored_Multipart_Uploads;
 		$model->clear()->save();
 		$model = new Shipper_Model_Stored_Multipart_Downloads;

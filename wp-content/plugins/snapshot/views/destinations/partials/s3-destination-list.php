@@ -38,7 +38,7 @@
                                 'destination-noonce-field' => wp_create_nonce( 'snapshot-destination' ),
                             ),
                             WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url( 'snapshots-newui-destinations' )
-                        );
+                        ); 
                     ?>
                     <a href="<?php echo esc_url( $destination_link ); ?>"><?php echo esc_html( $destination['name'] ); ?></a>
 
@@ -64,7 +64,7 @@
                                 'destination-noonce-field' => wp_create_nonce( 'snapshot-destination' ),
                             ),
                             WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url( 'snapshots-newui-destinations' )
-                        );
+                        ); 
                     ?>
                     <a class="button button-small button-outline button-gray" href="<?php echo esc_url( $destination_config ); ?>"><?php esc_html_e( 'Configure', SNAPSHOT_I18N_DOMAIN ); ?></a>
 

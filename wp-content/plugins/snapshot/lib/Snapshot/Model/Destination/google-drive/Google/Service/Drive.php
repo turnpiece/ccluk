@@ -59,7 +59,7 @@ class Google_0814_Service_Drive extends Google_0814_Service
   public $realtime;
   public $replies;
   public $revisions;
-
+  
 
   /**
    * Constructs the internal representation of the Drive service.

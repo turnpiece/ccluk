@@ -600,25 +600,29 @@ class Shipper_Helper_Fs_Remote {
 	 * @return object S3 SDK instance
 	 */
 	public function get_remote_storage_handler() {
-		if ( ! class_exists( 'Aws\S3\S3Client' ) ) {
-			// Require external SDK just in time for this.
-			require_once( dirname( SHIPPER_PLUGIN_FILE ) . '/lib/aws/sdk-v3.phar' );
-		}
-		$creds = $this->get_creds();
-		$ca = trailingslashit( ABSPATH . WPINC ) . 'certificates/ca-bundle.crt';
+		static $storage_handler;
+		if ( empty( $storage_handler ) ) {
+			if ( ! class_exists( 'Aws\S3\S3Client' ) ) {
+				// Require external SDK just in time for this.
+				require_once( dirname( SHIPPER_PLUGIN_FILE ) . '/lib/aws/sdk-v3.phar' );
+			}
+			$creds = $this->get_creds();
+			$ca = trailingslashit( ABSPATH . WPINC ) . 'certificates/ca-bundle.crt';
 
-		return new Aws\S3\S3Client(array(
-			'version' => '2006-03-01',
-			'region' => 'us-east-1',
-			'credentials' => array(
-				'key' => $creds->get( Shipper_Model_Stored_Creds::KEY_ID ),
-				'secret' => $creds->get( Shipper_Model_Stored_Creds::KEY_SECRET ),
-				'token' => $creds->get( Shipper_Model_Stored_Creds::KEY_TOKEN ),
-			),
-			'http' => array(
-				'verify' => $ca,
-			),
-		));
+			$storage_handler = new Aws\S3\S3Client(array(
+				'version' => '2006-03-01',
+				'region' => 'us-east-1',
+				'credentials' => array(
+					'key' => $creds->get( Shipper_Model_Stored_Creds::KEY_ID ),
+					'secret' => $creds->get( Shipper_Model_Stored_Creds::KEY_SECRET ),
+					'token' => $creds->get( Shipper_Model_Stored_Creds::KEY_TOKEN ),
+				),
+				'http' => array(
+					'verify' => $ca,
+				),
+			));
+		}
+		return $storage_handler;
 	}
 
 	/**

@@ -39,3 +39,4 @@ if ( ! $task->apply() ) {
 		$this->render( 'modals/welcome' );
 	}
 }
+

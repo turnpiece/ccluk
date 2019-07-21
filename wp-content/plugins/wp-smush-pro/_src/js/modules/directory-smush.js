@@ -162,42 +162,22 @@ import Scanner from '../smush/directory-scanner';
 		},
 
 		/**
-		 * Get directory list using Ajax.
-		 *
-		 * @param {string} node  Node for which to get the directory list.
-		 *
-		 * @returns {string}
-		 */
-		getDirectoryList: function ( node = '' ) {
-			let res = '';
-
-			$.ajax( {
-				type: "GET",
-				url: ajaxurl,
-				data: {
-					action: 'smush_get_directory_list',
-					list_nonce: jQuery( 'input[name="list_nonce"]' ).val(),
-					dir: node
-				},
-				success: function ( response ) {
-					res = response.data;
-				},
-				async: false
-			} );
-
-			// Update the button text.
-			$( 'button.wp-smush-select-dir' ).html( self.wp_smush_msgs.add_dir );
-
-			return res;
-		},
-
-		/**
 		 * Init fileTree.
 		 */
 		initFileTree: function () {
 			const self = this;
 
 			let smushButton = $( 'button.wp-smush-select-dir' );
+
+			let ajaxSettings = {
+				type: "GET",
+				url: ajaxurl,
+				data: {
+					action: 'smush_get_directory_list',
+					list_nonce: $( 'input[name="list_nonce"]' ).val()
+				},
+				cache: false
+			};
 
 			self.tree = createTree('.wp-smush-list-dialog .content', {
 				autoCollapse: true, // Automatically collapse all siblings, when a node is expanded
@@ -208,8 +188,18 @@ import Scanner from '../smush/directory-scanner';
 				tabindex: '0',      // Whole tree behaves as one single control
 				keyboard: true,     // Support keyboard navigation
 				quicksearch: true,  // Navigate to next node by typing the first letters
-				source: self.getDirectoryList,
-				lazyLoad: ( event, data ) => data.result = self.getDirectoryList( data.node.key ),
+				source: ajaxSettings,
+				lazyLoad: ( event, data ) => {
+					data.result = new Promise(function( resolve, reject ) {
+						ajaxSettings.data.dir = data.node.key;
+						$.ajax( ajaxSettings )
+							.done( response => resolve( response ) )
+							.fail( reject );
+					});
+
+					// Update the button text.
+					data.result.then( smushButton.html( self.wp_smush_msgs.add_dir ) );
+				},
 				loadChildren: ( event, data ) => data.node.fixSelection3AfterClick(), // Apply parent's state to new child nodes:
 				select: () => smushButton.attr( 'disabled', !+self.tree.getSelectedNodes().length ),
 				init: () => smushButton.attr( 'disabled', true ),

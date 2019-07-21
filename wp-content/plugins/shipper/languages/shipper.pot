@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Shipper package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Shipper 1.0.1.1\n"
+"Project-Id-Version: Shipper 1.0.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/shipper\n"
-"POT-Creation-Date: 2019-03-22 02:54:59+00:00\n"
+"POT-Creation-Date: 2019-05-14 03:27:18+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -38,15 +38,15 @@ msgid "Unable to delete email %s"
 msgstr ""
 
 #: lib/shipper/controller/class-admin.php:150
-#: lib/shipper/controller/class-admin.php:172
-#: lib/shipper/controller/class-admin.php:193
-#: lib/shipper/controller/class-admin.php:329
-#: lib/shipper/controller/class-admin.php:344
-#: lib/shipper/controller/class-admin.php:359
+#: lib/shipper/controller/class-admin.php:177
+#: lib/shipper/controller/class-admin.php:198
+#: lib/shipper/controller/class-admin.php:345
+#: lib/shipper/controller/class-admin.php:360
+#: lib/shipper/controller/class-admin.php:375
 msgid "Nope."
 msgstr ""
 
-#: lib/shipper/controller/class-admin.php:318
+#: lib/shipper/controller/class-admin.php:315
 msgid "Destination error: %s"
 msgstr ""
 
@@ -102,27 +102,27 @@ msgstr ""
 msgid "Migration complete"
 msgstr ""
 
-#: lib/shipper/controller/runner/class-migration.php:234
+#: lib/shipper/controller/runner/class-migration.php:240
 msgid "Migration inactive"
 msgstr ""
 
-#: lib/shipper/controller/runner/class-migration.php:238
+#: lib/shipper/controller/runner/class-migration.php:244
 msgid "Attempting to cancel %s migration"
 msgstr ""
 
-#: lib/shipper/controller/runner/class-migration.php:263
+#: lib/shipper/controller/runner/class-migration.php:269
 msgid "Attempting cancel on %s migration"
 msgstr ""
 
-#: lib/shipper/controller/runner/class-migration.php:271
+#: lib/shipper/controller/runner/class-migration.php:277
 msgid "Canceling remote migration failed"
 msgstr ""
 
-#: lib/shipper/controller/runner/class-migration.php:279
+#: lib/shipper/controller/runner/class-migration.php:285
 msgid "This is Hub-initiated migration, no remote to cancel"
 msgstr ""
 
-#: lib/shipper/controller/runner/class-migration.php:284
+#: lib/shipper/controller/runner/class-migration.php:290
 msgid "Migration cancelled"
 msgstr ""
 
@@ -140,6 +140,10 @@ msgstr ""
 
 #: lib/shipper/controller/runner/class-preflight.php:180
 msgid "Preflight check error: %s"
+msgstr ""
+
+#: lib/shipper/helper/class-assets.php:249
+msgid "Made with %s by WPMU DEV"
 msgstr ""
 
 #: lib/shipper/helper/class-log.php:178
@@ -253,44 +257,36 @@ msgstr ""
 msgid "Unable to extract the statements to import for %1$s from position %2$d"
 msgstr ""
 
-#: lib/shipper/model/database/table/class-import.php:391
+#: lib/shipper/model/database/table/class-import.php:408
 msgid "Fatal error processing %1$s at position [%2$d][%3$d]: %4$s"
 msgstr ""
 
-#: lib/shipper/model/database/table/class-import.php:392
+#: lib/shipper/model/database/table/class-import.php:409
 msgid "Ignored issue processing %1$s at position [%2$d][%3$d]: %4$s"
 msgstr ""
 
-#: lib/shipper/model/database/table/class-import.php:459
-#: lib/shipper/model/database/table/class-import.php:505
+#: lib/shipper/model/database/table/class-import.php:476
+#: lib/shipper/model/database/table/class-import.php:522
 msgid "Error in statement %1$s: The database said: %2$s"
 msgstr ""
 
-#: lib/shipper/model/database/table/class-import.php:595
+#: lib/shipper/model/database/table/class-import.php:612
 msgid "Unable to find primary key for %1$s (%2$s)."
 msgstr ""
 
-#: lib/shipper/model/database/table/class-import.php:613
+#: lib/shipper/model/database/table/class-import.php:630
 msgid "Error processing statement in %1$s - empty resultset for %2$d"
 msgstr ""
 
-#: lib/shipper/model/database/table/class-import.php:655
+#: lib/shipper/model/database/table/class-import.php:672
 msgid "Error updating row %1$d - %2$s"
 msgstr ""
 
-#: lib/shipper/model/stored/class-estimate.php:84
+#: lib/shipper/model/stored/class-estimate.php:82
 msgid ""
-"Your site is quite large (%1$s) and <b>it could take %2$dh - %3$dh to "
-"migrate</b> because we are migrating one-file-at-a-time via a super-secure "
-"API to ensure 100%% effective, secure, safe and foolproof migrations."
-msgstr ""
-
-#: lib/shipper/model/stored/class-estimate.php:85
-msgid ""
-"Your site is reasonably small (%1$s) but <b>it could still take around "
-"%2$dh - %3$dh to migrate</b> because we are migrating one-file-at-a-time "
-"via a super-secure API to ensure 100%% effective, secure, safe and "
-"foolproof migrations."
+"Your website is %1$s in size which <b>could take %2$d to %3$d hours to "
+"migrate</b> as we are using our advanced API to make sure the process is as "
+"stable as possible."
 msgstr ""
 
 #: lib/shipper/model/stored/class-migration.php:220
@@ -420,11 +416,11 @@ msgstr ""
 msgid "Large Files"
 msgstr ""
 
-#: lib/shipper/task/check/class-files.php:125
+#: lib/shipper/task/check/class-files.php:134
 msgid "Filenames"
 msgstr ""
 
-#: lib/shipper/task/check/class-files.php:200
+#: lib/shipper/task/check/class-files.php:213
 msgid "Package size"
 msgstr ""
 
@@ -453,17 +449,15 @@ msgid "Destination is password protected."
 msgstr ""
 
 #: lib/shipper/task/check/class-sysdiff.php:102
-#: lib/shipper/task/check/class-system.php:78
 msgid "This can prevent migration from working properly."
 msgstr ""
 
 #: lib/shipper/task/check/class-sysdiff.php:103
-#: lib/shipper/task/check/class-system.php:79
 msgid "Please, make sure you disable password protection."
 msgstr ""
 
 #: lib/shipper/task/check/class-sysdiff.php:120
-#: lib/shipper/task/check/class-system.php:202
+#: lib/shipper/task/check/class-system.php:199
 msgid "PHP Version"
 msgstr ""
 
@@ -619,9 +613,9 @@ msgstr ""
 
 #: lib/shipper/task/check/class-sysdiff.php:346
 msgid ""
-"Your source network is following the %1$s addresses while the destination "
-"network is following %2$s addresses. Both should have the same address "
-"pattern for the migration to be successful"
+"Your source network is using the %1$s addresses while the destination "
+"network is using %2$s address pattern. Shipper requires both the networks "
+"to use the same address pattern."
 msgstr ""
 
 #: lib/shipper/task/check/class-sysdiff.php:354
@@ -647,206 +641,216 @@ msgid "No password protection detected."
 msgstr ""
 
 #: lib/shipper/task/check/class-system.php:77
-msgid "Password protection detected."
+msgid ""
+"Your site is password protected which can prevent migration from working "
+"correctly."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:96
+#: lib/shipper/task/check/class-system.php:78
+msgid ""
+"Please disable the password protection during migration, and you can enable "
+"it again once the migration is complete."
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:95
 msgid "Suhosin"
 msgstr ""
 
+#: lib/shipper/task/check/class-system.php:101
+msgid ""
+"Your site has Suhosin extension enabled which can prevent Shipper from "
+"loading AWS SDK and hence prevent migration from working correctly."
+msgstr ""
+
 #: lib/shipper/task/check/class-system.php:102
-msgid "<b>Suhosin extension loaded!</b>"
+msgid ""
+"You can either disable the Suhosin extension or add \"phar\" to its "
+"whitelist to ensure migration works. "
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:103
-msgid "This can prevent us from loading our AWS PHP SDK."
-msgstr ""
-
-#: lib/shipper/task/check/class-system.php:104
-msgid "Please, make sure you either disable it, or add phar to its whitelist."
-msgstr ""
-
-#: lib/shipper/task/check/class-system.php:109
+#: lib/shipper/task/check/class-system.php:107
 msgid "Suhosin extension is not loaded."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:124
+#: lib/shipper/task/check/class-system.php:122
 msgid "AWS Support"
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:130
-msgid "<b>Detected a problem with AWS PHP SDK!</b>"
+#: lib/shipper/task/check/class-system.php:128
+msgid "Shipper has detected a problem with AWS PHP SDK."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:131
+#: lib/shipper/task/check/class-system.php:129
 msgid ""
-"Either there is a conflicting version present, or we were not able to load "
-"our version."
+"If you have any other plugin installed which uses AWS PHP SDK, you can try "
+"to disable that plugin and rerun the pre-flight check."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:136
+#: lib/shipper/task/check/class-system.php:134
 msgid "No AWS PHP SDK conflict detected."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:151
+#: lib/shipper/task/check/class-system.php:149
 msgid "ZIP Support"
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:157
-msgid "<b>No built-in ZIP support detected!</b>"
-msgstr ""
-
-#: lib/shipper/task/check/class-system.php:158
+#: lib/shipper/task/check/class-system.php:155
 msgid ""
-"PHP's built-in <code>ZipArchive</code> class seems to be missing. We will "
-"not be able to proceed without that."
+"Shipper requires PHP's built-in ZipArchive class on this host to run "
+"migration successfully."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:163
+#: lib/shipper/task/check/class-system.php:156
+msgid ""
+"If you are not sure how to enable the zip support, please contact your "
+"system admin or hosting support team."
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:161
 msgid "Built-in PHP archiving detected."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:178
+#: lib/shipper/task/check/class-system.php:176
 msgid "Basic Sanity"
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:183
+#: lib/shipper/task/check/class-system.php:181
 msgid "Ancient PHP detected"
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:185
-msgid "<b>This is a very important security issue!</b>"
-msgstr ""
-
-#: lib/shipper/task/check/class-system.php:186
+#: lib/shipper/task/check/class-system.php:183
 msgid ""
-"PHP 5.2 did not have a release for over %d years now, which makes it very "
-"insecure."
+"You are using PHP 5.2 which hasn't got any release for %d years making it "
+"vulnerable and insecure to use."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:187
+#: lib/shipper/task/check/class-system.php:184
 msgid ""
-"Not only that we will not be progressing further, but you shouldn't be "
-"either - addressing this issue should be a priority."
+"We highly recommend updating your PHP version asap and rerun the pre-flight "
+"check."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:208
-msgid "Your PHP version is %s."
+#: lib/shipper/task/check/class-system.php:205
+msgid ""
+"You're using PHP %s and Shipper requires PHP 5.5 or higher to migrate your "
+"sites."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:209
-msgid "Minimum recommended PHP version is PHP 5.5"
+#: lib/shipper/task/check/class-system.php:206
+msgid "Please upgrade to a PHP 5.5 or higher and rerun the pre-flight check."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:215
+#: lib/shipper/task/check/class-system.php:212
 msgid "Your PHP version is %s, which meets our requirements."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:233
+#: lib/shipper/task/check/class-system.php:230
 msgid "Max Execution Time"
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:239
+#: lib/shipper/task/check/class-system.php:236
 msgid "<b>Your current max PHP execution time is set to %d seconds.</b>"
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:240
+#: lib/shipper/task/check/class-system.php:237
 msgid ""
 "For small websites this will work in most cases, however for large sites we "
 "recommend increasing your <b>max_execution_time</b> to 150s"
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:246
+#: lib/shipper/task/check/class-system.php:243
 msgid "Your max execution time is set to %s."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:263
+#: lib/shipper/task/check/class-system.php:260
 msgid "Open Basedir"
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:279
-msgid "It appears that <b>open_basedir</b> rule is in effect."
-msgstr ""
-
-#: lib/shipper/task/check/class-system.php:280
+#: lib/shipper/task/check/class-system.php:276
 msgid ""
-"We will likely not be able to do what we need to with this PHP setting "
-"enabled"
+"Shipper has detected open_basedir restriction which can prevent migration "
+"from working correctly."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:295
+#: lib/shipper/task/check/class-system.php:277
+msgid "We recommend disabling the open_basedir rule during migration."
+msgstr ""
+
+#: lib/shipper/task/check/class-system.php:292
 msgid "Working directory writable"
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:309
+#: lib/shipper/task/check/class-system.php:306
 msgid "Log directory writable"
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:324
+#: lib/shipper/task/check/class-system.php:321
 msgid "Working directory not web-visible"
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:338
+#: lib/shipper/task/check/class-system.php:335
 msgid "Working directory not publicly accessible"
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:352
+#: lib/shipper/task/check/class-system.php:349
 msgid "Storage directory not web-visible"
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:366
+#: lib/shipper/task/check/class-system.php:363
 msgid "Storage directory not publicly accessible"
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:380
+#: lib/shipper/task/check/class-system.php:377
 msgid "Temp directory not web-visible"
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:394
+#: lib/shipper/task/check/class-system.php:391
 msgid "Temp directory not publicly accessible"
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:411
-msgid "This directory has to be writable."
+#: lib/shipper/task/check/class-system.php:408
+msgid "Shipper is unable to write to this directory."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:412
-msgid "However, we were not able to write to it."
+#: lib/shipper/task/check/class-system.php:409
+msgid ""
+"Please ensure that this directory is writable and rerun the pre-flight "
+"check."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:428
+#: lib/shipper/task/check/class-system.php:425
 msgid "We are able to write to this directory"
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:444
+#: lib/shipper/task/check/class-system.php:441
 msgid "This directory may be exposed publicly."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:445
+#: lib/shipper/task/check/class-system.php:442
 msgid "We will do our best to try to prevent access to it, though."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:461
+#: lib/shipper/task/check/class-system.php:458
 msgid "Directory is not visible from the web."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:477
+#: lib/shipper/task/check/class-system.php:474
 msgid "This directory is to be private."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:478
+#: lib/shipper/task/check/class-system.php:475
 msgid "However, we were able to access it externally."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:479
+#: lib/shipper/task/check/class-system.php:476
 msgid "This means that the whole internet can, too."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:480
+#: lib/shipper/task/check/class-system.php:477
 msgid "This may expose sensitive info about your setup during migration."
 msgstr ""
 
-#: lib/shipper/task/check/class-system.php:496
+#: lib/shipper/task/check/class-system.php:493
 msgid "Directory can't be accessed from the outside web."
 msgstr ""
 
@@ -933,23 +937,23 @@ msgstr ""
 msgid "Gather and pack migration meta information"
 msgstr ""
 
-#: lib/shipper/task/export/class-remote.php:147
+#: lib/shipper/task/export/class-remote.php:189
 msgid ""
 "Unable to remotely import on %1$s. Please visit %1$s and start import there "
 "manually."
 msgstr ""
 
-#: lib/shipper/task/export/class-remote.php:159
+#: lib/shipper/task/export/class-remote.php:201
 msgid ""
 "Error starting import on %1$s. Please visit %1$s and start import there "
 "manually."
 msgstr ""
 
-#: lib/shipper/task/export/class-remote.php:222
+#: lib/shipper/task/export/class-remote.php:264
 msgid "Trigger remote import"
 msgstr ""
 
-#: lib/shipper/task/export/class-remote.php:229
+#: lib/shipper/task/export/class-remote.php:271
 msgid "Import to remote location ( at %d%% )"
 msgstr ""
 
@@ -1318,7 +1322,7 @@ msgstr ""
 msgid "Remote server"
 msgstr ""
 
-#: tpl/modals/check/preflight-row.php:19 tpl/pages/preflight/wizard.php:70
+#: tpl/modals/check/preflight-row.php:19 tpl/pages/preflight/wizard.php:71
 msgid "Files"
 msgstr ""
 
@@ -1330,35 +1334,25 @@ msgstr ""
 msgid "Requirements failed"
 msgstr ""
 
-#: tpl/modals/check/system.php:43
-msgid "Whoops, we found a few issues that may cause migrations to fail"
-msgstr ""
-
-#: tpl/modals/check/system.php:50
+#: tpl/modals/check/system.php:44
 msgid ""
-"Your system check found <span class=\"shipper-issues-count\">%d</span> "
-"issue."
-msgid_plural ""
-"Your system check found <span class=\"shipper-issues-count\">%d</span> "
-"issues."
-msgstr[0] ""
-msgstr[1] ""
-
-#: tpl/modals/check/system.php:63
-msgid "We recommend fixing them up and <a href=\"#recheck\">trying again</a>."
+"%s, we’ve uncovered a few potential issues that may cause the migration to "
+"fail. Please fix the following errors to continue using the plugin."
 msgstr ""
 
-#: tpl/modals/check/system.php:97
+#: tpl/modals/check/system.php:74
 msgid "Documentation"
 msgstr ""
 
-#: tpl/modals/check/system.php:103 tpl/modals/check/system.php:119
-#: tpl/modals/destination-fail.php:28 tpl/pages/preflight/wizard-ready.php:40
+#: tpl/modals/check/system.php:80 tpl/modals/check/system.php:94
+#: tpl/modals/destination-fail.php:28 tpl/msgs/wizard-destination-errors.php:42
+#: tpl/msgs/wizard-destination-errors.php:54
+#: tpl/msgs/wizard-source-errors.php:22 tpl/msgs/wizard-source-errors.php:34
+#: tpl/pages/preflight/wizard-destination.php:79
+#: tpl/pages/preflight/wizard-files.php:22
+#: tpl/pages/preflight/wizard-ready.php:27
+#: tpl/pages/preflight/wizard-source.php:76
 msgid "Re-check"
-msgstr ""
-
-#: tpl/modals/check/system.php:124
-msgid "Continue anyway"
 msgstr ""
 
 #: tpl/modals/destination-add.php:11 tpl/modals/destination-connect.php:17
@@ -1393,7 +1387,7 @@ msgstr ""
 #: tpl/modals/destination-hub.php:13 tpl/modals/destination-prepare.php:15
 #: tpl/modals/migration-cancel.php:27 tpl/modals/preflight-cancel.php:30
 #: tpl/pages/migration/selection-check.php:15
-#: tpl/pages/migration/selection-site.php:66
+#: tpl/pages/migration/selection-site.php:14
 msgid "Go back"
 msgstr ""
 
@@ -1483,27 +1477,27 @@ msgstr ""
 msgid "Looking for your new websites, please wait..."
 msgstr ""
 
-#: tpl/modals/destination.php:46
+#: tpl/modals/destination.php:75
 msgid "Site successfully added as destination."
 msgstr ""
 
-#: tpl/modals/destination.php:47
+#: tpl/modals/destination.php:76
 msgid "You can now migrate to and from it using Shipper!"
 msgstr ""
 
-#: tpl/modals/destination.php:58
+#: tpl/modals/destination.php:87
 msgid "Refresh complete."
 msgstr ""
 
-#: tpl/modals/destination.php:59
+#: tpl/modals/destination.php:88
 msgid "You should now see your website in the list below."
 msgstr ""
 
-#: tpl/modals/destination.php:60
+#: tpl/modals/destination.php:89
 msgid "Select it and click the button to proceed."
 msgstr ""
 
-#: tpl/modals/destination.php:71
+#: tpl/modals/destination.php:100
 msgid "We encountered an error adding site as destination."
 msgstr ""
 
@@ -1588,7 +1582,7 @@ msgstr ""
 msgid "Let's import your website!"
 msgstr ""
 
-#: tpl/modals/migration-ready.php:54 tpl/pages/preflight/wizard-ready.php:29
+#: tpl/modals/migration-ready.php:54 tpl/msgs/wizard-ready-all-good.php:10
 msgid "You're ready to go!"
 msgstr ""
 
@@ -1608,7 +1602,7 @@ msgid ""
 "easily restore it if needed."
 msgstr ""
 
-#: tpl/modals/migration-ready.php:64 tpl/pages/preflight/wizard-ready.php:46
+#: tpl/modals/migration-ready.php:64 tpl/pages/preflight/wizard-ready.php:33
 msgid "Begin migration"
 msgstr ""
 
@@ -1652,11 +1646,15 @@ msgstr ""
 msgid "Continue"
 msgstr ""
 
-#: tpl/modals/welcome.php:34
+#: tpl/modals/welcome.php:27
+msgid "<b>%s</b> has been added as a destination and is ready for migrating!"
+msgstr ""
+
+#: tpl/modals/welcome.php:53
 msgid "Welcome to Shipper - the easiest migration tool for WordPress."
 msgstr ""
 
-#: tpl/modals/welcome.php:49
+#: tpl/modals/welcome.php:72
 msgid "I've done this step"
 msgstr ""
 
@@ -1672,8 +1670,146 @@ msgstr ""
 msgid "Higher traffic or a slow host can slow down the migration process."
 msgstr ""
 
-#: tpl/msgs/migration-slow-notice.php:26
+#: tpl/msgs/migration-slow-notice.php:27
 msgid "Learn more"
+msgstr ""
+
+#: tpl/msgs/welcome-dash-not-active.php:12
+msgid ""
+"Whoops, it appears you still haven't activated the WPMU DEV Dashboard "
+"plugin. Click <a href=\"%s\">here</a> to activate the plugin and then login "
+"with your WPMU DEV account details."
+msgstr ""
+
+#: tpl/msgs/welcome-dash-not-logged.php:12
+msgid ""
+"Whoops, it appears you still haven't logged into the WPMU DEV Dashboard. "
+"Click <a href=\"%s\">here</a> to log in with your WPMU DEV account details."
+msgstr ""
+
+#: tpl/msgs/welcome-dash-not-present.php:12
+msgid ""
+"Whoops, it appears you still haven't installed the WPMU DEV Dashboard "
+"plugin. Click <a href=\"%s\" target=\"_blank\">here</a> to download the "
+"plugin."
+msgstr ""
+
+#: tpl/msgs/wizard-destination-errors.php:19
+msgid "Error: %s"
+msgstr ""
+
+#: tpl/msgs/wizard-destination-errors.php:21
+msgid "Shipper was unable to receive or process your destination’s system info."
+msgstr ""
+
+#: tpl/msgs/wizard-destination-errors.php:22
+msgid "You can try the following to troubleshoot this:"
+msgstr ""
+
+#: tpl/msgs/wizard-destination-errors.php:24
+msgid ""
+"1. Make sure the Shipper plugin is installed on your destination website, "
+"and you're logged in to the WPMU DEV Dashboard."
+msgstr ""
+
+#: tpl/msgs/wizard-destination-errors.php:25
+msgid ""
+"2. Make sure that both your source and destination sites are using the same "
+"version of Shipper and preferably the latest version."
+msgstr ""
+
+#: tpl/msgs/wizard-destination-errors.php:26
+msgid ""
+"3. Try to deactivate and activate the Shipper plugin on your destination. "
+"This will force the Shipper API to fetch system info."
+msgstr ""
+
+#: tpl/msgs/wizard-destination-errors.php:29
+msgid ""
+"4. Still not able to resolve the issue? <a href=\"%s\" "
+"target=\"_blank\">Contact support.</a>"
+msgstr ""
+
+#: tpl/msgs/wizard-destination-errors.php:36
+#: tpl/msgs/wizard-source-errors.php:17
+msgid ""
+"The errors and warnings highlighted below are likely to cause migrations to "
+"fail. We highly recommend fixing the issues and re-running the pre-flight "
+"check before continuing."
+msgstr ""
+
+#: tpl/msgs/wizard-destination-errors.php:49
+#: tpl/msgs/wizard-source-errors.php:29
+msgid ""
+"You have got a few warnings which you may want to fix before starting the "
+"migration."
+msgstr ""
+
+#: tpl/msgs/wizard-destination-errors.php:60
+msgid "Your destination server configuration check is complete."
+msgstr ""
+
+#: tpl/msgs/wizard-ready-all-good.php:11
+#: tpl/msgs/wizard-ready-has-warnings.php:15
+msgid ""
+"Note that Shipper overwrites any existing files or database tables on your "
+"destination website."
+msgstr ""
+
+#: tpl/msgs/wizard-ready-all-good.php:12
+#: tpl/msgs/wizard-ready-has-warnings.php:16
+msgid "Please make sure you have a backup."
+msgstr ""
+
+#: tpl/msgs/wizard-ready-has-errors.php:19
+msgid ""
+"We've encountered potential migration issues with your <a "
+"href=\"#shipper-tab-source\">source</a> website."
+msgstr ""
+
+#: tpl/msgs/wizard-ready-has-errors.php:22
+msgid ""
+"We've encountered potential migration issues with your <a "
+"href=\"#shipper-tab-destination\">destination</a> website."
+msgstr ""
+
+#: tpl/msgs/wizard-ready-has-errors.php:25
+msgid ""
+"We've encountered potential migration issues with both your <a "
+"href=\"#shipper-tab-source\">source</a> and <a "
+"href=\"#shipper-tab-destination\">destination</a> website."
+msgstr ""
+
+#: tpl/msgs/wizard-ready-has-errors.php:28
+msgid "We've encountered potential migration issues."
+msgstr ""
+
+#: tpl/msgs/wizard-ready-has-errors.php:31
+msgid "Take a look at what we've picked up and adjust as necessary."
+msgstr ""
+
+#: tpl/msgs/wizard-ready-has-errors.php:32
+msgid ""
+"When you're ready, re-run the pre-flight check to see if you've fixed the "
+"issues."
+msgstr ""
+
+#: tpl/msgs/wizard-ready-has-warnings.php:10
+msgid "You have a few warnings, please check the sections above for more info."
+msgstr ""
+
+#: tpl/msgs/wizard-ready-has-warnings.php:13
+msgid "Don't worry!"
+msgstr ""
+
+#: tpl/msgs/wizard-ready-has-warnings.php:14
+msgid ""
+"You can try to resolve these warnings or begin the migration right away "
+"ignoring these warnings."
+msgstr ""
+
+#: tpl/msgs/wizard-source-errors.php:40
+msgid "Your source server configuration check is complete."
 msgstr ""
 
 #: tpl/pages/maintenance.php:35
@@ -1808,27 +1944,27 @@ msgid ""
 "for failed migration. You can try to contact support for this."
 msgstr ""
 
-#: tpl/pages/migration/progress-errors.php:75
+#: tpl/pages/migration/progress-errors.php:76
 msgid ""
 "For more common migration issues, check our detailed migration <a "
 "href=\"%s\" target=\"_blank\">troubleshooting guide</a>. "
 msgstr ""
 
-#: tpl/pages/migration/progress-errors.php:82
+#: tpl/pages/migration/progress-errors.php:83
 msgid ""
 "Still not able to migrate your site! Follow our <a href=\"%s\" "
 "target=\"_blank\">manual migration guide</a> to migrate your website "
 "manually."
 msgstr ""
 
-#: tpl/pages/migration/progress-errors.php:88
+#: tpl/pages/migration/progress-errors.php:89
 msgid ""
 "Need help or have some questions? <a href=\"%s\" target=\"_blank\">Contact "
 "Support</a>"
 msgstr ""
 
 #: tpl/pages/migration/progress.php:12
-#: tpl/pages/migration/selection-site.php:56
+#: tpl/pages/migration/selection-site.php:71
 #: tpl/pages/migration/selection.php:11
 msgid "Migrate"
 msgstr ""
@@ -1855,42 +1991,46 @@ msgstr ""
 msgid "<a href=\"%s\">Refresh this page</a> to see it here."
 msgstr ""
 
-#: tpl/pages/migration/selection-site.php:15
+#: tpl/pages/migration/selection-site.php:21
 #: tpl/pages/migration/selection-type.php:23
 msgid "Ready to ship it, %s?"
 msgstr ""
 
-#: tpl/pages/migration/selection-site.php:21
+#: tpl/pages/migration/selection-site.php:27
 msgid "Great, where would you like to migrate this website to?"
 msgstr ""
 
-#: tpl/pages/migration/selection-site.php:23
+#: tpl/pages/migration/selection-site.php:29
 msgid "Great, what website would you like to import?"
 msgstr ""
 
-#: tpl/pages/migration/selection-site.php:25
+#: tpl/pages/migration/selection-site.php:31
 msgid ""
 "If you don't see your website in the list, make sure you've got both "
 "Shipper and the WPMU DEV Dashboard installed on your source website."
 msgstr ""
 
-#: tpl/pages/migration/selection-site.php:37
+#: tpl/pages/migration/selection-site.php:43
 msgid "Reload list"
 msgstr ""
 
-#: tpl/pages/migration/selection-site.php:73
+#: tpl/pages/migration/selection-site.php:51
 msgid "Want to add a new destination?"
 msgstr ""
 
-#: tpl/pages/migration/selection-site.php:74
-msgid "Tap &quot;Add destination&quot; at the top of this page."
+#: tpl/pages/migration/selection-site.php:53
+msgid "Click here"
 msgstr ""
 
-#: tpl/pages/migration/selection-site.php:76
+#: tpl/pages/migration/selection-site.php:55
+msgid "to add a destination"
+msgstr ""
+
+#: tpl/pages/migration/selection-site.php:81
 msgid "Note, Shipper can't import local development sites."
 msgstr ""
 
-#: tpl/pages/migration/selection-site.php:77
+#: tpl/pages/migration/selection-site.php:82
 msgid ""
 "To migrate a local site to a staging or live server, initiate the migration "
 "from the local site itself."
@@ -1910,12 +2050,12 @@ msgstr ""
 msgid "Import"
 msgstr ""
 
-#: tpl/pages/migration/view-docs-destinations.php:16
-#: tpl/pages/migration/view-docs.php:12
+#: tpl/pages/migration/view-docs-destinations.php:17
+#: tpl/pages/migration/view-docs.php:13
 msgid "View documentation"
 msgstr ""
 
-#: tpl/pages/preflight/progress-bar.php:17 tpl/pages/preflight/wizard.php:12
+#: tpl/pages/preflight/progress-bar.php:17 tpl/pages/preflight/wizard.php:13
 msgid "Pre-flight Check"
 msgstr ""
 
@@ -1939,60 +2079,40 @@ msgstr ""
 msgid "Preparing for the pre-flight check..."
 msgstr ""
 
-#: tpl/pages/preflight/wizard-destination.php:17
-msgid ""
-"Your destination server configuration check is complete, but you have an "
-"error which prevents the migration."
-msgstr ""
-
-#: tpl/pages/preflight/wizard-destination.php:19
-msgid ""
-"Your destination server configuration check is complete and you have got a "
-"few warnings which you might wanna check before migration."
-msgstr ""
-
-#: tpl/pages/preflight/wizard-destination.php:22
-#: tpl/pages/preflight/wizard-source.php:17
-msgid "Your source server configuration check is complete."
-msgstr ""
-
-#: tpl/pages/preflight/wizard-destination.php:28
-msgid "Please, try re-running the preflight."
-msgstr ""
-
-#: tpl/pages/preflight/wizard-destination.php:47
-#: tpl/pages/preflight/wizard-source.php:29
+#: tpl/pages/preflight/wizard-destination.php:23
+#: tpl/pages/preflight/wizard-source.php:21
 msgid "Configuration"
 msgstr ""
 
-#: tpl/pages/preflight/wizard-destination.php:48
-#: tpl/pages/preflight/wizard-files.php:31
-#: tpl/pages/preflight/wizard-source.php:30
+#: tpl/pages/preflight/wizard-destination.php:24
+#: tpl/pages/preflight/wizard-files.php:39
+#: tpl/pages/preflight/wizard-source.php:22
 msgid "Status"
 msgstr ""
 
-#: tpl/pages/preflight/wizard-destination.php:49
-#: tpl/pages/preflight/wizard-files.php:32
-#: tpl/pages/preflight/wizard-source.php:31
+#: tpl/pages/preflight/wizard-destination.php:25
+#: tpl/pages/preflight/wizard-files.php:40
+#: tpl/pages/preflight/wizard-source.php:23
 msgid "Details"
 msgstr ""
 
-#: tpl/pages/preflight/wizard-destination.php:79
-#: tpl/pages/preflight/wizard-files.php:59
-#: tpl/pages/preflight/wizard-source.php:59
+#: tpl/pages/preflight/wizard-destination.php:55
+#: tpl/pages/preflight/wizard-files.php:101
+#: tpl/pages/preflight/wizard-source.php:51
 msgid "No issues found"
 msgstr ""
 
 #: tpl/pages/preflight/wizard-files-package_size-full.php:18
 msgid ""
-"Note: The actual migration time may vary depending on a lot of other "
-"factors."
+"Also, please note that the time your site takes to migrate may vary "
+"considerably depending on many other factors (such as the speed of your "
+"current host!)."
 msgstr ""
 
-#: tpl/pages/preflight/wizard-files-package_size-summary.php:11
+#: tpl/pages/preflight/wizard-files-package_size-summary.php:12
 msgid ""
-"You can try excluding the large files to reduce the overall package size "
-"for a faster migration."
+"If you haven’t already, you can try excluding larger files to speed up "
+"migration."
 msgstr ""
 
 #: tpl/pages/preflight/wizard-files-result-pagination.php:15
@@ -2066,79 +2186,43 @@ msgstr ""
 msgid "Size:"
 msgstr ""
 
-#: tpl/pages/preflight/wizard-files.php:15
+#: tpl/pages/preflight/wizard-files.php:16
 msgid "Files check is complete and you have a few warnings with your files."
 msgstr ""
 
-#: tpl/pages/preflight/wizard-files.php:16
+#: tpl/pages/preflight/wizard-files.php:17
 msgid "You can try to resolve these warnings before the migration process begins."
 msgstr ""
 
-#: tpl/pages/preflight/wizard-files.php:18
+#: tpl/pages/preflight/wizard-files.php:27
 msgid "Your source files check is complete."
 msgstr ""
 
-#: tpl/pages/preflight/wizard-files.php:30
+#: tpl/pages/preflight/wizard-files.php:38
 msgid "Issue"
 msgstr ""
 
-#: tpl/pages/preflight/wizard-files.php:63
+#: tpl/pages/preflight/wizard-files.php:103
 msgid "We detected some issues with %s"
 msgstr ""
 
-#: tpl/pages/preflight/wizard-files.php:112
+#: tpl/pages/preflight/wizard-files.php:169
 msgid "files excluded from migration successfully."
 msgstr ""
 
-#: tpl/pages/preflight/wizard-files.php:118
+#: tpl/pages/preflight/wizard-files.php:175
 msgid "files included to migration successfully."
 msgstr ""
 
-#: tpl/pages/preflight/wizard-ready.php:14
-msgid "You have a few errors, please check the sections above for more info."
-msgstr ""
-
-#: tpl/pages/preflight/wizard-ready.php:18
-msgid "You have a few warnings, please check the sections above for more info."
-msgstr ""
-
-#: tpl/pages/preflight/wizard-ready.php:21
-msgid "Don't worry!"
-msgstr ""
-
-#: tpl/pages/preflight/wizard-ready.php:22
-msgid ""
-"You can try to resolve these warnings or begin the migration right away "
-"ignoring these warnings."
-msgstr ""
-
-#: tpl/pages/preflight/wizard-ready.php:23
-#: tpl/pages/preflight/wizard-ready.php:30
-msgid ""
-"Note that Shipper overwrites any existing files or database tables on your "
-"destination website."
-msgstr ""
-
-#: tpl/pages/preflight/wizard-ready.php:24
-#: tpl/pages/preflight/wizard-ready.php:31
-msgid "Please make sure you have a backup."
-msgstr ""
-
-#: tpl/pages/preflight/wizard-source.php:15
-msgid ""
-"Your source server configuration check is complete and you have got a few "
-"warnings which you might wanna check before migration."
-msgstr ""
-
-#: tpl/pages/preflight/wizard.php:28
+#: tpl/pages/preflight/wizard.php:29
 msgid "Source"
 msgstr ""
 
-#: tpl/pages/preflight/wizard.php:49
+#: tpl/pages/preflight/wizard.php:50
 msgid "Destination"
 msgstr ""
 
-#: tpl/pages/preflight/wizard.php:91
+#: tpl/pages/preflight/wizard.php:92
 msgid "Ready to sail"
 msgstr ""
 

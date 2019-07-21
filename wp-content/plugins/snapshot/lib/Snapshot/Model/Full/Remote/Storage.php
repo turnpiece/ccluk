@@ -708,7 +708,7 @@ class Snapshot_Model_Full_Remote_Storage extends Snapshot_Model_Full {
 					$automate_initiated, $this->get_max_automate_backups_limit()
 				), 'Remote'
 			);
-
+	
 			return true;
 		}
 
@@ -877,7 +877,7 @@ class Snapshot_Model_Full_Remote_Storage extends Snapshot_Model_Full {
 
 			if ( false === $download) {
 				$this->_set_error( __( 'Could not initialize the backup file download', SNAPSHOT_I18N_DOMAIN ) );
-				Snapshot_Helper_Log::warn( "Could not initialize the backup file download", "Remote" );
+				Snapshot_Helper_Log::warn( "Could not initialize the backup file download", "Remote" );				
 				return false;
 			}
 

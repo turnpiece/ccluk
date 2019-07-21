@@ -14,19 +14,19 @@ class ComposerStaticInit774f96b7e9a4ebb012b98aa49e23914e
     );
 
     public static $prefixLengthsPsr4 = array (
-        'P' =>
+        'P' => 
         array (
             'Psr\\Http\\Message\\' => 17,
         ),
-        'K' =>
+        'K' => 
         array (
             'Kunnu\\Dropbox\\' => 14,
         ),
-        'I' =>
+        'I' => 
         array (
             'Illuminate\\' => 11,
         ),
-        'G' =>
+        'G' => 
         array (
             'GuzzleHttp\\Psr7\\' => 16,
             'GuzzleHttp\\Promise\\' => 19,
@@ -35,27 +35,27 @@ class ComposerStaticInit774f96b7e9a4ebb012b98aa49e23914e
     );
 
     public static $prefixDirsPsr4 = array (
-        'Psr\\Http\\Message\\' =>
+        'Psr\\Http\\Message\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
-        'Kunnu\\Dropbox\\' =>
+        'Kunnu\\Dropbox\\' => 
         array (
             0 => __DIR__ . '/..' . '/kunalvarma05/dropbox-php-sdk/src/Dropbox',
         ),
-        'Illuminate\\' =>
+        'Illuminate\\' => 
         array (
             0 => __DIR__ . '/..' . '/tightenco/collect/src/Illuminate',
         ),
-        'GuzzleHttp\\Psr7\\' =>
+        'GuzzleHttp\\Psr7\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
         ),
-        'GuzzleHttp\\Promise\\' =>
+        'GuzzleHttp\\Promise\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/promises/src',
         ),
-        'GuzzleHttp\\' =>
+        'GuzzleHttp\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
         ),

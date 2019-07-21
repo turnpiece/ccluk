@@ -1757,4 +1757,18 @@
 		})
 	});
 
+	//Update flag value
+	$(document).on('click', 'a.wps-dismiss-hosting-backups', function (e) {
+		e.preventDefault();
+		jQuery.ajax({
+			type: 'POST',
+			url: ajaxurl,
+			data: {
+				'action': 'dismiss_hosting_backups_notice'
+			}
+		});
+		$(this).parents(".wps-popup-modal").removeClass('show');
+		$("body").removeClass("wps-popup-modal-active");
+    });
+
 }(jQuery));

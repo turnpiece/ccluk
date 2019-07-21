@@ -4,7 +4,7 @@
 $model = new Snapshot_Model_Full_Backup();
 $is_client = $model->is_dashboard_active() && $model->has_dashboard_key();
 $api_key = $model->get_config( 'secret-key', '' );
-if ( $is_client && false !== Snapshot_Model_Full_Remote_Api::get()->get_token() && ! empty( $api_key ) ) {
+if ( Snapshot_Helper_Utility::is_wpmu_hosting() || ( $is_client && false !== Snapshot_Model_Full_Remote_Api::get()->get_token() && ! empty( $api_key ) ) ) {
 	return;
 }
 

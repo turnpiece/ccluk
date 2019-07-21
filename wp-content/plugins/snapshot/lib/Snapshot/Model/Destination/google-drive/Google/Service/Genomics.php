@@ -48,7 +48,7 @@ class Google_0814_Service_Genomics extends Google_0814_Service
   public $reads;
   public $readsets;
   public $variants;
-
+  
 
   /**
    * Constructs the internal representation of the Genomics service.

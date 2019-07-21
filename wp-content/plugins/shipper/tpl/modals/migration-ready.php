@@ -67,6 +67,7 @@ $cancel_url = remove_query_arg(array(
 						<?php } ?>
 						</a>
 					</p>
+					<?php echo Shipper_Helper_Assets::get_custom_hero_image_markup(); ?>
 				</div>
 
 			</div><?php // .sui-box-body ?>

@@ -58,6 +58,23 @@ class Snapshot_Helper_Backup {
 	 */
 	private $_timestamp;
 
+
+	/**
+	 * Filesize of zip before validation for error
+	 *
+	 * @var int
+	 */
+	private $_existing_zip_size = 0;
+
+
+	/**
+	 * Number of processed files before validation
+	 *
+	 * @var int
+	 *
+	 */
+	private $_num_processed_files = 0;
+
 	/**
 	 * Creates the backup helper instance
 	 */
@@ -192,6 +209,10 @@ class Snapshot_Helper_Backup {
 			$session->data['total_estimate'] = $this->_estimate;
 		}
 
+		//To track the zip size error
+		$session->data['num_processed_files'] = $this->_num_processed_files;
+		$session->data['existing_zip_size'] = $this->_existing_zip_size;
+
 		return $session->save_session();
 	}
 
@@ -245,6 +266,14 @@ class Snapshot_Helper_Backup {
 			? (int) $session->data['total_estimate']
 			: 0
 		;
+
+		$me->_num_processed_files =  ! empty( $session->data['num_processed_files'] ) && is_numeric( $session->data['num_processed_files'] )
+			? (int) $session->data['num_processed_files']
+			: 0;
+
+		$me->_existing_zip_size =  ! empty( $session->data['existing_zip_size'] ) && is_numeric( $session->data['existing_zip_size'] )
+			? (int) $session->data['existing_zip_size']
+			: 0;
 
 		return $me;
 	}
@@ -568,6 +597,17 @@ class Snapshot_Helper_Backup {
 		foreach ( $queues as $queue ) {
 			if ( $queue->is_done() ) {
 				continue;
+			}
+
+			/**
+			 * Validates Zip file size
+			 */
+			if( $queue instanceof Snapshot_Model_Queue_Fileset ) {
+				$backup_validation = $this->validate_backup_zip_size( $queue, $path );
+				if (empty($backup_validation)) {
+					return $this->_set_error( __( 'New backup zip size is smaller than the existing zip size', SNAPSHOT_I18N_DOMAIN ) );
+
+				}
 			}
 
 			$current_source = $queue->get_current_source();
@@ -947,6 +987,78 @@ class Snapshot_Helper_Backup {
 	private function _set_error( $string ) {
 		$this->_errors[] = $string;
 		return false;
+	}
+
+	/**
+	 * Validates the Backup Zip file size for any corruption
+	 *
+	 * @param $queue
+	 * @param $path
+	 *
+	 * @return bool|null
+	 */
+	public function validate_backup_zip_size( $queue, $path ) {
+
+		if ( ! $queue || ! $path ) {
+			return true;
+		}
+
+		/**
+		 * Constant: SNAPSHOT_DISABLE_ZIP_VALIDATION
+		 * Allows to disable zip size validation while creating Backup zip
+		 *
+		 */
+		if( defined('SNAPSHOT_DISABLE_ZIP_VALIDATION') && SNAPSHOT_DISABLE_ZIP_VALIDATION ) {
+			return true;
+		}
+
+		$chunk_size = $queue->get_chunk_size();
+
+		//Number of files processed since last step
+		$count = ( $this->_current_step * $chunk_size ) - $this->_num_processed_files ;
+
+		$file_count = 1000;
+
+		/**
+		 * Constant: SNAPSHOT_ZIP_VALIDATION_FILE_COUNT
+		 * Allows to change the file count interval, after which zip file is validated for size corruption.
+		 *  Greater the better.
+		 *
+		 */
+
+		if( defined('SNAPSHOT_ZIP_VALIDATION_FILE_COUNT') && SNAPSHOT_ZIP_VALIDATION_FILE_COUNT  ) {
+			$file_count = SNAPSHOT_ZIP_VALIDATION_FILE_COUNT;
+		}
+
+		//If we have at least n files processed ->
+		// Compare zip size with previous size and increase count of total files processed
+		if ( $count >= $file_count && file_exists( $path ) ) {
+
+			$current_zip_size = filesize( $path );
+
+			$zip_corrupt = $current_zip_size < $this->_existing_zip_size;
+
+			/**
+			 * Filter: snapshot_zip_file_corrupt
+			 * Allows to imitate zip file size getting corrupted after new files are added to it
+			 *
+			 */
+			$zip_corrupt = apply_filters( 'snapshot_zip_file_corrupt', $zip_corrupt );
+
+			//Error Out if new zip size is smaller than existing zip
+			if ( $zip_corrupt ) {
+				Snapshot_Helper_Log::warn( "The backup zip got corrupted between steps." );
+
+				return false;
+			}
+
+			$this->_existing_zip_size = $current_zip_size;
+			//Total number of files processed, increase only after every >1000 files processed
+			$this->_num_processed_files = $this->_current_step * $chunk_size;
+
+		}
+
+		return true;
 	}
 
 }

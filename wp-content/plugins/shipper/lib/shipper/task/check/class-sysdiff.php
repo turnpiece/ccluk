@@ -133,7 +133,7 @@ class Shipper_Task_Check_Sysdiff extends Shipper_Task_Check {
 		} else {
 			$check->set(
 				'message',
-				'<p>' .
+				'<p>' . 
 					__('Major PHP versions on your source and destination servers do not differ significantly.', 'shipper') .
 				'</p>'
 			);
@@ -343,7 +343,7 @@ class Shipper_Task_Check_Sysdiff extends Shipper_Task_Check {
 			$check = $this->set_check_message(
 				$check,
 				sprintf(
-					__('Your source network is following the %1$s addresses while the destination network is following %2$s addresses. Both should have the same address pattern for the migration to be successful', 'shipper'),
+					__('Your source network is using the %1$s addresses while the destination network is using %2$s address pattern. Shipper requires both the networks to use the same address pattern.', 'shipper'),
 					$type, $other_type
 				)
 			);

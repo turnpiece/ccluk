@@ -54,10 +54,10 @@ abstract class HTTP_OAuth_Signature_Common extends HTTP_OAuth
         if (array_key_exists('oauth_signature', $params)) {
             unset($params['oauth_signature']);
         }
-
+        
 		$reset_item = explode('?', $url);
         $croppedUrl = reset($reset_item);
-
+        
         $parts = array($method, $croppedUrl,
             HTTP_OAuth::buildHTTPQuery($params));
         $base  = implode('&', HTTP_OAuth::urlencode($parts));
@@ -96,4 +96,5 @@ abstract class HTTP_OAuth_Signature_Common extends HTTP_OAuth
         $consumerSecret, $tokenSecret = ''
     );
 }
+
 

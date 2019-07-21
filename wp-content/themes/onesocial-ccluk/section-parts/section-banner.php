@@ -3,8 +3,8 @@
 $slug       = 'homepage_banner';
 $audience   = get_theme_mod( $slug.'_audience', 'all' );
 
-if ($audience == 'none' || 
-    $audience == 'logged_in' && !is_user_logged_in() || 
+if ($audience == 'none' ||
+    $audience == 'logged_in' && !is_user_logged_in() ||
     $audience == 'logged_out' && is_user_logged_in())
     return;
 
@@ -15,7 +15,11 @@ if ($audience == 'none' ||
     $id = get_theme_mod( $slug.'_id', esc_html__('banner', 'onesocial') );
     $heading = get_theme_mod( $slug.'_heading' );
     $text = get_theme_mod( $slug.'_text' );
-    $image = get_the_post_thumbnail( $page, 'full' );
+    $image_id = get_theme_mod( $slug.'_image' );
+
+    $layout = get_theme_mod( $slug.'_layout', 'background' );
+
+    $image = !empty($image_id) ? '<img src="'.$image_id.'" alt="'.$heading.'" />' : get_the_post_thumbnail( $page, 'full' );
 
     $button_1_page = get_theme_mod( $slug.'_button_1_page' );
     $button_1_text = get_theme_mod( $slug.'_button_1_text' );
@@ -30,8 +34,8 @@ if ($audience == 'none' ||
 
     if (!empty($image)) :
 ?>
-<section id="<?php echo $id ?>" class="section site-content banner">
-    
+<section id="<?php echo $id ?>" class="section site-content banner <?php echo $layout ?>">
+
     <?php if (!empty($heading)) : ?>
     <header class="section-title-container">
         <div class="section-title">
@@ -43,7 +47,7 @@ if ($audience == 'none' ||
             </a>
 
             <div class="buttons">
-                <?php for( $i=1; $i<=2; $i++ ) : 
+                <?php for( $i=1; $i<=2; $i++ ) :
                     $button_page = get_theme_mod( $slug.'_button_'.$i.'_page' );
                     $button_text = get_theme_mod( $slug.'_button_'.$i.'_text' );
 

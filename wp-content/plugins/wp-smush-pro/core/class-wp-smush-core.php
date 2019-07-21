@@ -84,6 +84,7 @@ class WP_Smush_Core {
 	 */
 	public static $basic_features = array(
 		'networkwide',
+		'bulk',
 		'auto',
 		'strip_exif',
 		'resize',
@@ -326,6 +327,10 @@ class WP_Smush_Core {
 		// Load Nextgen lib, and initialize wp smush async class.
 		$this->load_nextgen();
 		$this->load_gutenberg();
+
+		/* @noinspection PhpIncludeInspection */
+		require_once WP_SMUSH_DIR . 'core/integrations/class-wp-smush-js-composer.php';
+		new WP_Smush_JS_Composer();
 	}
 
 	/**
@@ -407,10 +412,14 @@ class WP_Smush_Core {
 				'short_label' => esc_html__( 'Multisite Control', 'wp-smushit' ),
 				'desc'        => esc_html__( 'Choose whether you want to use network settings for all sub-sites or whether sub-site admins can control Smush’s settings.', 'wp-smushit' ),
 			),
+			'bulk'              => array(
+				'short_label' => esc_html__( 'Image Sizes', 'wp-smushit' ),
+				'desc'        => esc_html__( 'WordPress generates multiple image thumbnails for each image you upload. Choose which of those thumbnail sizes you want to include when bulk smushing.', 'wp-smushit' ),
+			),
 			'auto'              => array(
 				'label'       => esc_html__( 'Automatically smush my images on upload', 'wp-smushit' ),
-				'short_label' => esc_html__( 'Automatic Smush', 'wp-smushit' ),
-				'desc'        => esc_html__( 'When you upload images to your site, Smush will automatically optimize and compress them for you.', 'wp-smushit' ),
+				'short_label' => esc_html__( 'Automatic compression', 'wp-smushit' ),
+				'desc'        => esc_html__( 'When you upload images to your site, we can automatically optimize and compress them for you without you needing to do it yourself.', 'wp-smushit' ),
 			),
 			'lossy'             => array(
 				'label'       => esc_html__( 'Super-smush my images', 'wp-smushit' ),
@@ -429,8 +438,8 @@ class WP_Smush_Core {
 			),
 			'detection'         => array(
 				'label'       => esc_html__( 'Detect and show incorrectly sized images', 'wp-smushit' ),
-				'short_label' => esc_html__( 'Image resizing', 'wp-smushit' ),
-				'desc'        => esc_html__( 'This will add functionality to your website that highlights images that are either too large or too small for their containers. Note: The highlighting will only be visible to administrators – visitors won’t see the highlighting.', 'wp-smushit' ),
+				'short_label' => esc_html__( 'Image Resize Detection', 'wp-smushit' ),
+				'desc'        => esc_html__( 'This will add functionality to your website that highlights images that are either too large or too small for their containers.', 'wp-smushit' ),
 			),
 			'original'          => array(
 				'label'       => esc_html__( 'Smush my original full size images', 'wp-smushit' ),
@@ -514,9 +523,10 @@ class WP_Smush_Core {
 			// Progress bar text.
 			'progress_smushed'        => esc_html__( 'images optimized', 'wp-smushit' ),
 			'directory_url'           => admin_url( 'admin.php?page=smush&view=directory' ),
+			'add_dir'                 => esc_html__( 'Choose directory', 'wp-smushit' ),
 			'bulk_resume'             => esc_html__( 'Resume scan', 'wp-smushit' ),
 			'bulk_stop'               => esc_html__( 'Stop current bulk smush process.', 'wp-smushit' ),
-			'smush_url'               => admin_url( 'admin.php?page=smush' ),
+			'smush_url'               => network_admin_url( 'admin.php?page=smush' ),
 			// Errors.
 			'error_ignore'            => esc_html__( 'Ignore this image from bulk smushing', 'wp-smushit' ),
 		);
@@ -652,6 +662,8 @@ class WP_Smush_Core {
 
 	/**
 	 * Get registered image sizes with dimension
+	 *
+	 * @return array
 	 */
 	public function image_dimensions() {
 		global $_wp_additional_image_sizes;
@@ -933,7 +945,7 @@ class WP_Smush_Core {
 		// Check if the resmush count is equal to remaining count.
 		$resmush_count   = count( $this->resmush_ids );
 		$remaining_count = $this->total_count - $this->smushed_count - $this->skipped_count;
-		if ( $resmush_count > 0 && $resmush_count === $this->smushed_count ) {
+		if ( $resmush_count > 0 && $resmush_count !== $this->smushed_count ) {
 			return $resmush_count + $remaining_count;
 		}
 

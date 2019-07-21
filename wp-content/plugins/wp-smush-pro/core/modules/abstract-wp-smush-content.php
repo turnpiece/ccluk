@@ -28,7 +28,7 @@ abstract class WP_Smush_Content extends WP_Smush_Module {
 	protected function get_images_from_content( $content ) {
 		$images = array();
 
-		if ( preg_match_all( '/(?:<img[^>]*?\s+?src=["|\'](?P<img_url>[^\s]+?)["|\'].*?>){1}?/is', $content, $images ) ) {
+		if ( preg_match_all( '/(?:<img[^>]*?\s+?src=["|\'](?P<img_url>[^\s]+?)["|\'].*?>){1}/is', $content, $images ) ) {
 			foreach ( $images as $key => $unused ) {
 				// Simplify the output as much as possible, mostly for confirming test results.
 				if ( is_numeric( $key ) && $key > 0 ) {

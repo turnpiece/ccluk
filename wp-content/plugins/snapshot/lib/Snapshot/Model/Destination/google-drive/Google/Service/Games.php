@@ -53,7 +53,7 @@ class Google_0814_Service_Games extends Google_0814_Service
   public $scores;
   public $snapshots;
   public $turnBasedMatches;
-
+  
 
   /**
    * Constructs the internal representation of the Games service.

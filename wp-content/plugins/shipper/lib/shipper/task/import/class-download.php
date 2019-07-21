@@ -50,7 +50,7 @@ class Shipper_Task_Import_Download extends Shipper_Task_Import {
 		$metas = array(
 			$files->get_file_name(),
 			$large->get_file_name(),
-			'migration_manifest.json'
+			'migration_manifest.json' 
 		);
 
 		$remote = new Shipper_Helper_Fs_Remote;

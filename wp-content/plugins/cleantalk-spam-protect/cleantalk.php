@@ -3,7 +3,7 @@
   Plugin Name: Anti-Spam by CleanTalk
   Plugin URI: http://cleantalk.org
   Description: Max power, all-in-one, no Captcha, premium anti-spam plugin. No comment spam, no registration spam, no contact spam, protects any WordPress forms.
-  Version: 5.118.3
+  Version: 5.120.1
   Author: СleanTalk <welcome@cleantalk.org>
   Author URI: http://cleantalk.org
 */
@@ -60,7 +60,7 @@ if(!defined('CLEANTALK_PLUGIN_DIR')){
 	
 	// Global ArrayObject with settings and other global varables
 	global $apbct;
-	$apbct = new CleantalkState('cleantalk', array('settings', 'data', 'debug', 'errors', 'remote_calls'), is_multisite());
+	$apbct = new CleantalkState('cleantalk', array('settings', 'data', 'debug', 'errors', 'remote_calls', 'stats'), is_multisite());
 	
 	$apbct->white_label = defined('APBCT_WHITELABEL') && APBCT_WHITELABEL == true ? true : false;
 	
@@ -128,12 +128,14 @@ if(!defined('CLEANTALK_PLUGIN_DIR')){
 	add_action('wp_logout', 'apbct__hook__wp_logout__delete_trial_notice_cookie');
 	
 	// Set cookie only for public pages and for non-AJAX requests
-	if (!is_admin() && !apbct_is_ajax() && !defined('DOING_CRON') && !headers_sent()
+	if (!is_admin() && !apbct_is_ajax() && !defined('DOING_CRON')
 		&& empty($_POST['ct_checkjs_register_form']) // Buddy press registration fix
+		&& empty($_GET['ct_checkjs_search_default']) // Search form fix
+		&& empty($_POST['action']) //bbPress
 	){
-		add_action('wp','apbct_cookie', 2);
-		add_action('wp','apbct_store__urls', 2);
-		if (empty($_POST) && empty($_GET['action'])){
+		add_action('template_redirect','apbct_cookie', 2);
+		add_action('template_redirect','apbct_store__urls', 2);
+		if (empty($_POST) && empty($_GET)){
 			apbct_cookie();
 			apbct_store__urls();
 		}
@@ -163,19 +165,28 @@ if(!defined('CLEANTALK_PLUGIN_DIR')){
 	add_action( 'wp_ajax_nf_ajax_submit',                 'apbct_form__ninjaForms__testSpam', 1);
 	add_action( 'ninja_forms_process',                    'apbct_form__ninjaForms__testSpam', 1); // Depricated ?
 	
-	if(!is_admin() && !defined('DOING_AJAX')){
+	// Public actions
+	if(!is_admin() && !apbct_is_ajax()){
+		
+		// Default search
+		//add_filter( 'get_search_form',  'apbct_forms__search__addField' );
+		add_filter( 'get_search_query', 'apbct_forms__search__testSpam' );
 		
 		// Remote calls
 		if(isset($_GET['spbc_remote_call_token'], $_GET['spbc_remote_call_action'], $_GET['plugin_name']) && in_array($_GET['plugin_name'], array('antispam','anti-spam', 'apbct'))){
 			apbct_remote_call__perform();
 		}
+		
+		// SpamFireWall check
+		if( $apbct->plugin_version == APBCT_VERSION && // Do not call with first start
+			$apbct->settings['spam_firewall'] == 1 &&
+		    $_SERVER["REQUEST_METHOD"] == 'GET')
+		{
+			apbct_sfw__check();
+	    }
+		
 	}
 		
-	// SpamFireWall check
-	if( $apbct->plugin_version == APBCT_VERSION && // Do not call with first start
-		$apbct->settings['spam_firewall'] == 1 && !is_admin() || $apbct->settings['spam_firewall'] ==1 && defined( 'DOING_AJAX' ) && DOING_AJAX && $_SERVER["REQUEST_METHOD"] == 'GET'){
-		apbct_sfw__check();
-    }
 		
     // Activation/deactivation functions must be in main plugin file.
     // http://codex.wordpress.org/Function_Reference/register_activation_hook
@@ -318,9 +329,11 @@ if(!defined('CLEANTALK_PLUGIN_DIR')){
 		add_filter('wp_die_handler', 'apbct_comment__sanitize_data__before_wp_die', 1); // Check comments after validation
 
 		// Registrations
-		add_action('login_enqueue_scripts', 'apbct_login__scripts');
-		add_action('login_form_register', 'apbct_cookie');
-		add_action('login_form_register', 'apbct_store__urls');
+	    if(!isset($_POST['wp-submit'])){
+		    add_action('login_form_register', 'apbct_cookie');
+		    add_action('login_form_register', 'apbct_store__urls');
+	    }
+	    add_action('login_enqueue_scripts', 'apbct_login__scripts');
 		add_action('register_form',       'ct_register_form');
 		add_filter('registration_errors', 'ct_registration_errors', 1, 3);
 		add_filter('registration_errors', 'ct_check_registration_erros', 999999, 3);
@@ -398,7 +411,7 @@ function apbct_remote_call__perform()
 				
 				// SFW send logs
 					case 'sfw_send_logs':
-						$rc_result = ct_sfw_send_logs();
+						$result = ct_sfw_send_logs();
 						die(empty($result['error']) ? 'OK' : 'FAIL '.json_encode(array('error' => $result['error_string'])));
 						break;
 					
@@ -406,7 +419,17 @@ function apbct_remote_call__perform()
 					case 'update_plugin':
 						add_action('wp', 'apbct_update', 1);
 						break;
-				
+					
+				// Install plugin
+					case 'install_plugin':
+						add_action('wp', 'apbct_install_plugin', 1);
+						break;
+						
+				// Uninstall plugin
+					case 'uninstall_plugin':
+						add_action('plugins_loaded', 'apbct_uninstall_plugin', 1);
+						break;
+						
 				// Update settins
 					case 'update_settings':
 						$result = apbct_rc__update_settings($_GET);
@@ -457,6 +480,7 @@ function apbct_sfw__check()
 	$sfw = new CleantalkSFW();
 	$sfw->ip_array = (array)$sfw->ip__get(array('real'), true);
 	
+	// Skip by cookie
 	foreach($sfw->ip_array as $ct_cur_ip){
 		if(isset($_COOKIE['ct_sfw_pass_key']) && $_COOKIE['ct_sfw_pass_key'] == md5($ct_cur_ip.$apbct->api_key)){
 			$is_sfw_check=false;
@@ -469,7 +493,7 @@ function apbct_sfw__check()
 			}
 			break;
 		}else{
-			$is_sfw_check=true;
+			$is_sfw_check = true;
 		}
 	}
 	
@@ -486,25 +510,36 @@ function apbct_sfw__check()
 	}
 	
 	if($is_sfw_check){
+		
 		$sfw->ip_check();
-		if($sfw->result){
+		
+		// Pass remote calls
+		if($sfw->pass === false){
 			if(isset($_GET['spbc_remote_call_token'], $_GET['spbc_remote_call_action'], $_GET['plugin_name'])){
-				$resolved = gethostbyaddr($sfw->blocked_ip);				
-				if($resolved && preg_match('/cleantalk\.org/', $resolved) === 1 || $resolved === 'back'){
-					$sfw->result = false;
-					$sfw->passed_ip = $sfw->blocked_ip;
-				}
+				foreach($sfw->blocked_ips as $ip){
+					$resolved = CleantalkHelper::ip__resolve($ip['ip']);
+					if($resolved && preg_match('/cleantalk\.org/', $resolved) === 1 || $resolved === 'back'){
+						$sfw->pass = true;
+					}
+				} unset($ip);
 			}
 		}
 		
-		if($sfw->result){
-			$sfw->logs__update($sfw->blocked_ip, 'blocked');
+		if($sfw->test){
+			$sfw->sfw_die($apbct->api_key, '', parse_url(get_option('siteurl'),PHP_URL_HOST), 'test');
+		}
+		
+		if($sfw->pass === false){
+			foreach($sfw->blocked_ips as $ip){
+				$sfw->logs__update($ip['ip'], 'blocked');
+			}
 			$apbct->data['sfw_counter']['blocked']++;
 			$apbct->saveData();
-			$sfw->sfw_die($apbct->api_key);
+			$sfw->sfw_die($apbct->api_key, '', parse_url(get_option('siteurl'),PHP_URL_HOST));
 		}else{
-			if(!empty($apbct->settings['set_cookies']) && !headers_sent())
-				setcookie ('ct_sfw_pass_key', md5($sfw->passed_ip.$apbct->api_key), time()+86400*30, '/', parse_url(get_option('siteurl'),PHP_URL_HOST) ,false, true);
+			reset($sfw->passed_ips);
+			if(!empty($apbct->settings['set_cookies']) && !headers_sent() && key($sfw->passed_ips))
+				setcookie ('ct_sfw_pass_key', md5($sfw->passed_ips[key($sfw->passed_ips)]['ip'].$apbct->api_key), time()+86400*30, '/', parse_url(get_option('siteurl'),PHP_URL_HOST) ,false, true);
 		}
 	}
 	unset($is_sfw_check, $sfw, $sfw_ip, $ct_cur_ip);
@@ -536,10 +571,10 @@ function apbct_activation( $network = false ) {
 	// Sessions
 	$sqls[] = 'CREATE TABLE IF NOT EXISTS `%scleantalk_sessions` (
 		`id` VARCHAR(64) NOT NULL,
-		`name` TEXT NOT NULL,
+		`name` VARCHAR(40) NOT NULL,
 		`value` TEXT NULL DEFAULT NULL,
 		`last_update` DATETIME NULL DEFAULT NULL,
-		PRIMARY KEY (`id`, `name`(10)))
+		PRIMARY KEY (`name`(40), `id`(64)))
 		ENGINE = MYISAM;';
 		
 	if($network && !defined('CLEANTALK_ACCESS_KEY')){
@@ -595,7 +630,7 @@ function apbct_activation__create_tables($sqls) {
 }
 
 function apbct_activation__new_blog($blog_id, $user_id, $domain, $path, $site_id, $meta) {
-    if (apbct_is_plugin_active_for_network('security-malware-firewall/security-malware-firewall.php')){
+    if (apbct_is_plugin_active_for_network('cleantalk-spam-protect/cleantalk.php')){
 		
         switch_to_blog($blog_id);
 		
@@ -623,7 +658,7 @@ function apbct_activation__new_blog($blog_id, $user_id, $domain, $path, $site_id
 			`name` TEXT NOT NULL,
 			`value` TEXT NULL DEFAULT NULL,
 			`last_update` DATETIME NULL DEFAULT NULL,
-			PRIMARY KEY (`id`, `name`(10)))
+			PRIMARY KEY (`id`(64), `name`(64)))
 			ENGINE = MYISAM;';
 		
 		// Cron tasks
@@ -743,7 +778,13 @@ function ct_sfw_update($immediate = false){
 		
 		$file_url = isset($_GET['file_url']) ? $_GET['file_url'] : null;
 		$result = $sfw->sfw_update($apbct->api_key, $file_url, $immediate);
-		unset($sfw);
+
+		if(empty($result['error'])){
+			$apbct->stats['sfw']['last_update_time'] = time();
+			$apbct->stats['sfw']['entries'] = $result;
+			$apbct->save('stats');
+		}
+
 		return $result;
 	}
 	
@@ -762,12 +803,91 @@ function ct_sfw_send_logs()
 		
 		$sfw = new CleantalkSFW();
 		$result = $sfw->logs__send($apbct->api_key);
-		unset($sfw);
+		
+		if(empty($result['error'])){
+			$apbct->stats['sfw']['last_send_time'] = time();
+			$apbct->stats['sfw']['last_send_amount'] = $result['rows'];
+			$apbct->save('stats');
+		}
+
 		return $result;
 		
 	}
 	
 	return array('error' => true, 'error_string' => 'SFW_DISABLED');	
+}
+
+/**
+ * Install plugin from wordpress catalog
+ *
+ * @param null $plugin_name
+ */
+function apbct_install_plugin($plugin_name = null){
+	
+	global $apbct;
+	
+	$plugin_name = $plugin_name ? $plugin_name : (isset($_GET['plugin_name']) ? $_GET['plugin_name'] : null);
+	
+	require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+	include_once( ABSPATH . 'wp-admin/includes/class-wp-upgrader.php' );
+	include_once( ABSPATH . 'wp-admin/includes/file.php' );
+	include_once( ABSPATH . 'wp-admin/includes/misc.php' );
+	include_once( CLEANTALK_PLUGIN_DIR . 'lib/CleantalkUpgrader.php' );
+	include_once( CLEANTALK_PLUGIN_DIR . 'lib/CleantalkUpgraderSkin.php' );
+	
+	if($plugin_name){
+		$installer= new CleantalkUpgrader( new CleantalkUpgraderSkin() );
+		$installer->install($plugin_name);
+		
+		if($installer->apbct_result === 'OK'){
+			die('OK');
+		}else
+			die('FAIL '. json_encode(array('error' => $installer->apbct_result)));
+		
+	}else
+		die('FAIL '. json_encode(array('error' => 'PLUGIN_NAME_IS_UNSET')));
+}
+
+/**
+ * Install plugin from wordpress catalog
+ *
+ * @param null $plugin_name
+ */
+function apbct_uninstall_plugin($plugin_name = null){
+	
+	global $apbct;
+	
+	$plugin_name = $plugin_name ? $plugin_name : (isset($_GET['plugin_name']) ? $_GET['plugin_name'] : null);
+	
+	if($plugin_name){
+		
+		// Hook to set flag if the plugin is deactivated
+		add_action( 'deactivate_'.$plugin_name, 'apbct_uninstall_plugin__check_deactivate' );
+		deactivate_plugins($plugin_name, false, is_multisite() ? true : false);
+		
+		if($apbct->plugin_deactivated){
+			
+			// Hook to set flag if the plugin is uninstalled
+			add_action( 'uninstall_'.$plugin_name,  'apbct_uninstall_plugin__check_uninstall' );
+			uninstall_plugin($plugin_name);
+			
+			if($apbct->plugin_uninstalled){
+				die('OK');
+			}else
+				die('FAIL '. json_encode(array('error' => 'PLUGIN_STILL_EXISTS')));
+		}else
+			die('FAIL '. json_encode(array('error' => 'PLUGIN_STILL_ACTIVE')));
+	}else
+		die('FAIL '. json_encode(array('error' => 'PLUGIN_NAME_IS_UNSET')));
+}
+
+function apbct_uninstall_plugin__check_deactivate(){
+	global $apbct;
+	$apbct->plugin_deactivated = true;
+}
+function apbct_uninstall_plugin__check_uninstall(){
+	global $apbct;
+	$apbct->plugin_uninstalled = true;
 }
 
 function apbct_update(){
@@ -874,8 +994,8 @@ function apbct_alt_session__id__get(){
 	$id = CleantalkHelper::ip__get(array('real'))
 		.filter_input(INPUT_SERVER, 'HTTP_USER_AGENT')
 		//.filter_input(INPUT_SERVER, 'HTTP_ACCEPT') // Could be different. Broke session id
-		.filter_input(INPUT_SERVER, 'HTTP_ACCEPT_LANGUAGE')
-		.filter_input(INPUT_SERVER, 'HTTP_ACCEPT_ENCODING');
+		.filter_input(INPUT_SERVER, 'HTTP_ACCEPT_LANGUAGE');
+		//.filter_input(INPUT_SERVER, 'HTTP_ACCEPT_ENCODING'); // Could be different. Broke session id
 	return hash('sha256', $id);
 }
 
@@ -936,7 +1056,7 @@ function apbct_store__urls(){
 	
     global $apbct;
 	
-	if($apbct->settings['store_urls'] && empty($apbct->flags__url_stored)){
+	if($apbct->settings['store_urls'] && empty($apbct->flags__url_stored) && !headers_sent()){
 		
 		// URLs HISTORY
 		// Get current url
@@ -993,9 +1113,21 @@ function apbct_cookie(){
 	
 	if(
 		empty($apbct->settings['set_cookies']) || // Do not set cookies if option is disabled (for Varnish cache).
-		!empty($apbct->flags__cookies_setuped)    // Cookies already set
+		!empty($apbct->flags__cookies_setuped) || // Cookies already set
+		!empty($apbct->headers_sent)              // Headers sent
 	)
 		return false;
+	
+	// Prevent headers sent error
+	if(headers_sent($file, $line)){
+		$apbct->headers_sent = true;
+		$apbct->headers_sent__hook  = current_action();
+		$apbct->headers_sent__where = $file.':'.$line;
+		return false;
+	}
+	
+	if($apbct->settings['store_urls__sessions'])
+		apbct_alt_sessions__remove_old();
 	
 // Cookie names to validate
 	$cookie_test_value = array(
@@ -1125,10 +1257,6 @@ function apbct_get_submit_time()
 	return apbct_cookies_test() == 1 ? time() - (int)$apbct_timestamp : null;
 }
 
-function apbct_is_user_logged_in(){
-	return count($_COOKIE) && defined('LOGGED_IN_COOKIE') && isset($_COOKIE[LOGGED_IN_COOKIE]);
-}
-
 /*
  * Inner function - Account status check
  * Scheduled in 1800 seconds for default!
@@ -1171,6 +1299,8 @@ function ct_account_status_check($api_key = null, $process_errors = true){
 		
 		if($apbct->data['notice_show'] == 0)
 			CleantalkCron::updateTask('check_account_status', 'ct_account_status_check',  86400);
+		
+		$apbct->data['key_is_ok'] = true;
 		
 		$apbct->saveData();
 		$apbct->error_delete('account_check', 'save');
@@ -1231,6 +1361,8 @@ function ct_mail_send_connection_report() {
 //* Write $message to the plugin's debug option
 function apbct_log($message = 'empty', $func = null, $params = array())
 {
+	global $apbct;
+
 	$debug = get_option( APBCT_DEBUG );
 	
 	$function = $func                         ? $func : '';
@@ -1263,6 +1395,15 @@ function apbct_sfw__delete_tables( $blog_id, $drop ) {
 }
 
 /**
+ * Checks if the user is logged in
+ *
+ * @return bool
+ */
+function apbct_is_user_logged_in(){
+	return count($_COOKIE) && defined('LOGGED_IN_COOKIE') && isset($_COOKIE[LOGGED_IN_COOKIE]);
+}
+
+/**
  * Checks if the current user has role
  *  
  * @param array $roles
@@ -1285,6 +1426,188 @@ function apbct_is_user_role_in( $roles, $user = false ){
 	return false;
 }
 
+function apbct_wp_get_current_user(){
+	
+	global $current_user;
+	
+	if(!(defined('XMLRPC_REQUEST') && XMLRPC_REQUEST)){
+		
+		if(!empty($current_user)){
+			$user_id = is_object($current_user) && isset($current_user->ID) && !($current_user instanceof WP_User)
+				? $current_user->ID
+				: null;
+		}else{
+			$user_id = empty($user_id) && !empty($_COOKIE[LOGGED_IN_COOKIE])
+				? apbct_wp_validate_auth_cookie($_COOKIE[LOGGED_IN_COOKIE], 'logged_in')
+				: null;
+		}
+		
+		if($user_id){
+			$current_user = new WP_User($user_id);
+		}
+		
+	}
+	
+	return $current_user;
+}
+
+function apbct_wp_set_current_user($user = null){
+	global $current_user;
+	if($user instanceof WP_User)
+		$current_user = $user;
+	else
+		return false;
+	return true;
+}
+
+/**
+ * Validates authentication cookie.
+ *
+ * The checks include making sure that the authentication cookie is set and
+ * pulling in the contents (if $cookie is not used).
+ *
+ * Makes sure the cookie is not expired. Verifies the hash in cookie is what is
+ * should be and compares the two.
+ *
+ * @param string $cookie Optional. If used, will validate contents instead of cookie's
+ * @param string $scheme Optional. The cookie scheme to use: auth, secure_auth, or logged_in
+ *
+ * @return false|int False if invalid cookie, User ID if valid.
+ * @global int   $login_grace_period
+ *
+ */
+function apbct_wp_validate_auth_cookie( $cookie = '', $scheme = '' ) {
+	
+	$cookie_elements = apbct_wp_parse_auth_cookie($cookie, $scheme);
+	
+	$scheme = $cookie_elements['scheme'];
+	$username = $cookie_elements['username'];
+	$hmac = $cookie_elements['hmac'];
+	$token = $cookie_elements['token'];
+	$expiration = $cookie_elements['expiration'];
+	
+	// Allow a grace period for POST and Ajax requests
+	$expired = apbct_is_ajax() || 'POST' == $_SERVER['REQUEST_METHOD']
+		? $expiration + HOUR_IN_SECONDS
+		: $cookie_elements['expiration'];
+	
+	// Quick check to see if an honest cookie has expired
+	if($expired >= time()){
+		$user = apbct_wp_get_user_by('login', $username);
+		if($user){
+			$pass_frag = substr($user->user_pass, 8, 4);
+			$key = apbct_wp_hash($username . '|' . $pass_frag . '|' . $expiration . '|' . $token, $scheme);
+			// If ext/hash is not present, compat.php's hash_hmac() does not support sha256.
+			$algo = function_exists('hash') ? 'sha256' : 'sha1';
+			$hash = hash_hmac($algo, $username . '|' . $expiration . '|' . $token, $key);
+			if(hash_equals($hash, $hmac)){
+				$sessions = get_user_meta($user->ID, 'session_tokens', true);
+				$sessions = current($sessions);
+				if(is_array($sessions)){
+					if(is_int($sessions['expiration']) && $sessions['expiration'] > time()){
+						return $user->ID;
+					}else
+						return false;
+				}else
+					return false;
+			}else
+				return false;
+		}else
+			return false;
+	}else
+		return false;
+}
+
+function apbct_wp_get_user_by($field, $value){
+	
+	$userdata = WP_User::get_data_by($field, $value);
+	
+	if(!$userdata)
+		return false;
+	
+	$user = new WP_User;
+	$user->init($userdata);
+	
+	return $user;
+}
+
+/**
+ * Get hash of given string.
+ *
+ * @param string $data   Plain text to hash
+ * @param string $scheme Authentication scheme (auth, secure_auth, logged_in, nonce)
+ * @return string Hash of $data
+ */
+function apbct_wp_hash( $data, $scheme = 'auth' ) {
+
+	$values = array(
+		'key'  => '',
+		'salt' => '',
+	);
+
+	foreach(array('key', 'salt') as $type){
+		$const = strtoupper( "{$scheme}_{$type}");
+		if ( defined($const) && constant($const)){
+			$values[$type] = constant($const);
+		}elseif(!$values[$type]){
+			$values[$type] = get_site_option( "{$scheme}_{$type}");
+			if (!$values[$type]){
+				$values[$type] = '';
+			}
+		}
+	}
+
+	$salt = $values['key'] . $values['salt'];
+
+	return hash_hmac('md5', $data, $salt);
+}
+
+/**
+ * Parse a cookie into its components
+ *
+ * @param string $cookie
+ * @param string $scheme Optional. The cookie scheme to use: auth, secure_auth, or logged_in
+ *
+ * @return array|false Authentication cookie components
+ *
+ */
+function apbct_wp_parse_auth_cookie($cookie = '', $scheme = '')
+{
+	$cookie_elements = explode('|', $cookie);
+	if(count($cookie_elements) !== 4){
+		return false;
+	}
+	
+	list($username, $expiration, $token, $hmac) = $cookie_elements;
+	
+	return compact('username', 'expiration', 'token', 'hmac', 'scheme');
+}
+
+/**
+ * Update and rotate statistics with requests exection time
+ *
+ * @param $exec_time
+ */
+function apbct_statistics__rotate($exec_time){
+	
+	global $apbct;
+	
+	// Delete old stats
+	if(min(array_keys($apbct->stats['requests'])) < time() - (86400 * 7))
+		unset($apbct->stats['requests'][min(array_keys($apbct->stats['requests']))]);
+
+	// Create new if newest older than 1 day
+	if(empty($apbct->stats['requests']) ||  max(array_keys($apbct->stats['requests'])) < time() - (86400 * 1))
+		$apbct->stats['requests'][time()] = array('amount' => 0, 'average_time' => 0);
+	
+	// Update all existing stats
+	foreach($apbct->stats['requests'] as &$weak_stat){
+		$weak_stat['average_time'] = ($weak_stat['average_time'] * $weak_stat['amount'] + $exec_time) / ++$weak_stat['amount'];
+	}
+	
+	$apbct->save('stats');
+}
+
 /**
  * Checks if the request is AJAX
  * 
@@ -1299,7 +1622,7 @@ function apbct_is_ajax() {
 	
 }
 
-function apbct_is_plugin_active_for_network(){
+function apbct_is_plugin_active_for_network( $plugin ){
 	if ( ! APBCT_WPMS )
 		return false;
 	$plugins = get_site_option( 'active_sitewide_plugins' );

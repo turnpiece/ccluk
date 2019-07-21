@@ -21,7 +21,7 @@ class Snapshot_Model_Fileset_Htaccess extends Snapshot_Model_Fileset {
 			if (file_exists($file))
 				$files[] = $file;
 		}
-
+		
 		return $this->_process_file_list($files, $chunk);
 	}
 }

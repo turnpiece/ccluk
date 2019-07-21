@@ -25,3 +25,7 @@ $has_backups = !empty( $backups );
 
 	?>
 </div>
+<?php
+if( Snapshot_Helper_Utility::is_wpmu_hosting() ) {
+	$this->render( 'boxes/modals/popup-hosting', false, array(), false, false );
+}

@@ -5,7 +5,7 @@ Tags: donation, donations, donation plugin, wordpress donation plugin, givewp, g
 Requires at least: 4.8
 Tested up to: 5.2
 Requires PHP: 5.6
-Stable tag: 2.4.6
+Stable tag: 2.4.7
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -204,6 +204,9 @@ Use Give for donations, and let WooCommerce or WP eCommerce or the like handle y
 11. Give has a dedicated support team to help answer any questions you may have and help you through stumbling blocks.
 
 == Changelog ==
+
+= 2.4.7: May 14th, 2019 =
+* Fix: Added additional escaping to ensure certain donor input is secure when being viewed as records in wp-admin.
 
 = 2.4.6: May 7th, 2019 =
 * Fix: Resolved an issue displaying donations in WP-Admin made when the WordPress install's date format is set to "d/m/Y". [#4088](https://github.com/impress-org/give/issues/4088)

@@ -33,6 +33,7 @@
 		if (e && e.preventDefault) e.preventDefault();
 
 		hide_messages();
+		$( '.select-container' ).removeClass( 'active' );
 
 		return false;
 	}
@@ -43,11 +44,17 @@
 	 * @param {Object} e Event object
 	 */
 	function handle_show_click( e ) {
-		if (e && e.preventDefault) e.preventDefault();
+		if ( e && e.preventDefault ) e.preventDefault();
+
+		var $dialog = $( '.shipper-destination-add.sui-dialog' ),
+			initial_state = $dialog.data( 'shipper-initial-state' ) || 'add'
+		;
 
 		handle_dismiss_notice();
-		$('.shipper-destination-add.sui-dialog').attr('aria-hidden', false);
-		show_state('add');
+		$dialog.attr( 'aria-hidden', false );
+		if ( 'add' === initial_state ) {
+			show_state( 'add' );
+		} else handle_connect_click();
 
 		return false;
 	}
@@ -60,7 +67,14 @@
 	function handle_back_click( e ) {
 		if (e && e.preventDefault) e.preventDefault();
 
-		show_state('add');
+		var $dialog = $( '.shipper-destination-add.sui-dialog' ),
+			initial_state = $dialog.data( 'shipper-initial-state' ) || 'add'
+		;
+		if ( 'add' === initial_state ) {
+			show_state( 'add' );
+		} else {
+			show_state('connect');
+		}
 
 		return false;
 	}
@@ -260,12 +274,33 @@
 		return dfr.promise();
 	}
 
+	/**
+	 * Moves the export screen "Add destination" notification
+	 * into the site selection dropdown.
+	 */
+	function boot_selection_message_placement() {
+		var $root = $( '.shipper-page-migrate .shipper-selection' ),
+			$msg = $root.find( '.shipper-page-notice' ),
+			$dropdown = $root.find( '.list-results' );
+
+		if ( ! $msg.length ) {
+			return false;
+		}
+
+		$dropdown
+			.prepend( '<li class="shipper-moved-msg" />' ).end()
+			.find( 'li.shipper-moved-msg' )
+			.append( $msg );
+		$msg.show();
+	}
+
 
 	/**
 	 * Injects destination selection items with removal markup
 	 * and sets up the callbacks
 	 */
 	function boot_destinations_selection() {
+		boot_selection_message_placement();
 		var $root = $( '.shipper-page-migrate .shipper-selection' ),
 			$items = $root.find( 'ul.list-results li' ),
 			$selected = $root.find( '.list-value' ),
@@ -301,7 +336,9 @@
 			}
 		;
 		$items.each( function() {
-			$( this )
+			var $me = $( this );
+			if ( $me.is( '.shipper-moved-msg' ) ) { return true; }
+			$me
 				.append(
 					'<i class="sui-icon-trash" aria-hidden="true"></i>'
 				)

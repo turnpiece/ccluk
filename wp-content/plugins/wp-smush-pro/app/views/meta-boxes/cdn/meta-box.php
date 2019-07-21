@@ -5,12 +5,11 @@
  * @since 3.0
  * @package WP_Smush
  *
- * @var stdClass $cdn            CDN data object.
  * @var array    $cdn_group      CDN settings keys.
+ * @var string   $class          CDN status class (for icon color).
  * @var array    $settings       Settings.
  * @var array    $settings_data  Settings data (titles, descriptions, fields).
- * @var string   $status         CDN status: warning (inactive), success (active) or error (expired).
- * @var array    $status_msg     Array of CDN status messages.
+ * @var string   $status_msg     CDN status messages.
  */
 
 if ( ! defined( 'WPINC' ) ) {
@@ -32,74 +31,15 @@ if ( ! defined( 'WPINC' ) ) {
 		?>
 	</p>
 
-	<div class="sui-notice sui-notice-<?php echo esc_attr( $status ); ?> smush-notice-sm">
-		<p><?php echo esc_html( $status_msg[ $status ] ); ?></p>
-		<?php if ( 'info' === $status ) : ?>
-			<p><?php echo esc_html( 'Note: Bulk and Directory smush features are treated separately and will continue to run independently.', 'wp-smushit' ); ?></p>
-		<?php endif; ?>
-
-		<?php if ( 'error' === $status ) : ?>
+	<div class="sui-notice sui-notice-<?php echo esc_attr( $class ); ?> smush-notice-sm">
+		<p><?php echo $status_msg; ?></p>
+		<?php if ( 'error' === $class ) : ?>
 			<div class="sui-notice-buttons">
 				<a href="https://premium.wpmudev.org/hub/account/" target="_blank" class="sui-button">
 					<?php esc_html_e( 'Upgrade Plan', 'wp-smushit' ); ?>
 				</a>
 			</div>
 		<?php endif; ?>
-	</div>
-
-	<div class="sui-box-settings-row">
-		<div class="sui-box-settings-col-1">
-			<span class="sui-settings-label">
-				<?php esc_html_e( 'Quota & Bandwidth', 'wp-smushit' ); ?>
-			</span>
-			<span class="sui-description">
-				<?php
-				esc_html_e(
-					'Monitor how much your websites are using the CDN. If you reach a cap it’s easy to
-				upgrade to grab more bandwidth.',
-					'wp-smushit'
-				);
-				?>
-			</span>
-		</div>
-		<div class="sui-box-settings-col-2">
-			<div class="smush-cdn-quota-boxes">
-				<div class="sui-border-frame">
-					<span>
-						<?php
-						echo isset( $cdn->bandwidth ) ? esc_html( WP_Smush_Helper::format_bytes( $cdn->bandwidth, 2 ) ) : 0;
-						?>
-					</span>
-					<span class="sui-description">
-						<?php esc_html_e( 'Bandwidth', 'wp-smushit' ); ?>
-					</span>
-				</div>
-
-				<div class="sui-border-frame sui-left">
-					<span><?php echo isset( $cdn->hits ) ? absint( $cdn->hits ) : 0; ?></span>
-					<span class="sui-description">
-						<?php esc_html_e( 'Requests', 'wp-smushit' ); ?>
-					</span>
-				</div>
-			</div>
-
-			<span class="sui-description">
-				<?php
-				$limit = isset( $cdn->bandwidth_plan ) ? $cdn->bandwidth_plan : 10;
-				printf(
-					/* translators: %1$s: GB of bandwidth, %2$s: opening A (href) tag, %3$s; closing A (href) tag. */
-					esc_html__(
-						'Note: Your current plan includes %1$s GB bandwidth to use over 30 days.
-					%2$sUpgrade Plan%3$s for more bandwidth. Stats are updated every 24 hours.',
-						'wp-smushit'
-					),
-					absint( $limit ),
-					'<a href="https://premium.wpmudev.org/hub/account/" target="_blank">',
-					'</a>'
-				);
-				?>
-			</span>
-		</div>
 	</div>
 
 	<div class="sui-box-settings-row">

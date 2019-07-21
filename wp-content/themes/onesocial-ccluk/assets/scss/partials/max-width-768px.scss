@@ -1,0 +1,28 @@
+ body {
+    &.page-template-homepage {
+        #main {
+            .section.banner {
+                min-height: 260px;
+                &.text-left,
+                &.text-right {
+                    .section-content {
+                        display: none;
+                    }
+                    .section-title-container {
+                        width: 100%;
+                        min-height: auto;
+                        float: none;
+                        > .section-title {
+                            margin-left: auto;
+                            margin-right: auto;
+                            h2, 
+                            p {
+                                text-align: center;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -36,7 +36,7 @@ class Google_0814_Service_Translate extends Google_0814_Service
   public $detections;
   public $languages;
   public $translations;
-
+  
 
   /**
    * Constructs the internal representation of the Translate service.

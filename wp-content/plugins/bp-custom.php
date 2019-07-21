@@ -23,8 +23,64 @@ class CCLUK_BP_Custom {
 	);
 
 	public function __construct() {
-		add_action('xprofile_data_after_save', array( $this, 'profile_location' ));
-		add_action('bp_after_profile_field_content', array( $this, 'user_location_fields' ) );
+		add_action( 'xprofile_data_after_save', array( $this, 'profile_location' ));
+		add_action( 'bp_after_profile_field_content', array( $this, 'user_location_fields' ) );
+		add_action( 'bp_core_activated_user', array( $this, 'join_group_on_signup' ) );
+
+		// sync BP/mailchimp user data
+		add_filter( 'mc4wp_user_merge_vars', array( $this, 'mailchimp_user_sync' ), 10, 2 );
+		add_filter( 'mailchimp_sync_user_data', array( $this, 'mailchimp_user_sync' ), 10, 2 );
+	}
+
+	// join members group on signup
+	public function join_group_on_signup( $user_id ){
+
+		if ($group_id = $this->get_members_group_id())
+	    	groups_join_group( $group_id, $user_id );
+	}
+
+	/**
+	 * Add custom BuddyPress registration fields to MailChimp.
+	 */
+	public function mailchimp_user_sync( $data, $user ) {
+
+	    if ($postcode = xprofile_get_field_data( 2 , $user->id )) {
+	        $data['POSTCODE'] = $postcode;
+
+			if ($location = get_user_meta( $user->id, 'location', true )) {
+				if (isset($location['parliamentary_constituency']))
+					$data['CONSTITUEN'] = $location['parliamentary_constituency'];
+			}
+
+			if ($mp = (array) get_user_meta($user->id, 'mp', true)) {
+				self::debug( print_r( $mp, true ) );
+				if (isset($mp['full_name']))
+					$data['MP'] = $mp['full_name'];
+			}
+	    }
+		self::debug( print_r( $data, true ) );
+	    return $data;
+	}
+
+	/**
+	 *
+	 * profile location
+	 *
+	 * @param object $obj
+	 *
+	 */
+	public function profile_location( $obj ) {
+
+		//$postcode_id = $this->get_field_id( 'postcode' );
+		$postcode_id = xprofile_get_field_id_from_name( 'postcode' );
+
+		if ($obj->field_id == $postcode_id) {
+			// get location data
+			$this->postcode_lookup( $obj->user_id, $obj->value );
+
+			// get MP
+			$this->get_mp( $obj->user_id, $obj->value );
+		}
 	}
 
 	public function user_location_fields( $user_id = false ) {
@@ -32,10 +88,10 @@ class CCLUK_BP_Custom {
 
 	    if( !$user_id )
 	        $user_id = bp_displayed_user_id();
-	    
-	    /* field will only shown on base. 
-	     * so if in case we are on somewhere else then skip it ! 
-	     * 
+
+	    /* field will only shown on base.
+	     * so if in case we are on somewhere else then skip it !
+	     *
 	     * It's safe enough to assume that 'base' profile group will always be there and its id will be 1,
 	     * since there's no apparent way of deleting this field group.
 	     */
@@ -44,7 +100,7 @@ class CCLUK_BP_Custom {
 	    }
 
 	    $location = (array) get_user_meta($user_id, 'location', true);
-	    
+
 	    //Profile > View > display user's location
 	    if ( 'public' == $bp->current_action ) {
 	        if( $this->array_not_all_empty($location) ) {
@@ -95,31 +151,10 @@ class CCLUK_BP_Custom {
         				<?php if (!empty($mp['party'])) : ?>
         					(<?php echo $mp['party'] ?>)
         				<?php endif; ?>
-        			</a>	
+        			</a>
         		</td>
 			</tr>
 		<?php endif;
-	}
-
-	/**
-	 *
-	 * profile location
-	 *
-	 * @param object $obj
-	 *
-	 */
-	function profile_location( $obj ) {
-
-		//$postcode_id = $this->get_field_id( 'postcode' );
-		$postcode_id = xprofile_get_field_id_from_name( 'postcode' );
-
-		if ($obj->field_id == $postcode_id) {
-			// get location data
-			$this->postcode_lookup( $obj->user_id, $obj->value );
-
-			// get MP
-			$this->get_mp( $obj->user_id, $obj->value );
-		}
 	}
 
 	/**
@@ -152,6 +187,15 @@ class CCLUK_BP_Custom {
 		}
 	}
 
+	/**
+	 *
+	 * get MP
+	 *
+	 * @param int $user_id
+	 * @param string $postcode
+	 * @return array
+	 *
+	 */
 	private function get_mp( $user_id, $postcode ) {
 		// get MP
 		$MPAPI = new CCLUK_Parliament_API();
@@ -169,7 +213,8 @@ class CCLUK_BP_Custom {
 		}
 
 		update_user_meta( $user_id, 'mp', $mp );
-		
+
+		return $mp;
 	}
 
 	/**
@@ -198,6 +243,14 @@ class CCLUK_BP_Custom {
 		return $response;
 	}
 
+	private function get_members_group_id() {
+		global $wpdb;
+
+		$bp = buddypress();
+
+		return $wpdb->get_var( "SELECT `id` FROM `{$bp->groups->table_name}` WHERE `status` = 'public' AND `parent_id` = 0 AND `slug` LIKE '%all-members'" );
+	}
+
 	protected function debug( $message ) {
 		if (self::DEBUGGING)
 			error_log( __CLASS__ . ' :: ' . $message );
@@ -213,7 +266,7 @@ new CCLUK_BP_Custom;
 class CCLUK_Postcode_API extends CCLUK_BP_Custom {
 
 	const URL = 'https://api.postcodes.io';
-	
+
 	public function lookup($postcode){
 		$jsonurl = self::URL.'/postcodes/'.$postcode;
 		$json = $this->request($jsonurl);
@@ -237,7 +290,7 @@ class CCLUK_Postcode_API extends CCLUK_BP_Custom {
 		        'Content-Type: application/json',
 		        'Content-Length: ' . strlen($data_string))
 		);
-		
+
 		$result = curl_exec($ch);
 		curl_close($ch);
 		$decoded = json_decode($result);
@@ -253,7 +306,7 @@ class CCLUK_Postcode_API extends CCLUK_BP_Custom {
 	public function nearestPostcodesFromLongLat($longitude, $latitude){
 		$jsonurl = self::URL.'/postcodes?lon='.$longitude.'&lat='.$latitude;
 		$json = $this->request($jsonurl);
-		
+
 		$decoded = json_decode($json);
 		if($decoded->status == 200){
 			return $decoded->result;
@@ -266,7 +319,7 @@ class CCLUK_Postcode_API extends CCLUK_BP_Custom {
 
 	public function bulkReverseGeocoding($geolocations){
 		$data_string = json_encode(array('geolocations' => $geolocations));
-		
+
 		$ch = curl_init(self::URL.'/postcodes');
 		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
@@ -275,7 +328,7 @@ class CCLUK_Postcode_API extends CCLUK_BP_Custom {
 		        'Content-Type: application/json',
 		        'Content-Length: ' . strlen($data_string))
 		);
-		
+
 		$result = curl_exec($ch);
 		curl_close($ch);
 		$decoded = json_decode($result);
@@ -291,7 +344,7 @@ class CCLUK_Postcode_API extends CCLUK_BP_Custom {
 	public function random(){
 		$jsonurl = self::URL.'/random/postcodes/';
 		$json = $this->request($jsonurl);
-		
+
 		$decoded = json_decode($json);
 		if($decoded->status == 200){
 			return $decoded->result;
@@ -305,11 +358,11 @@ class CCLUK_Postcode_API extends CCLUK_BP_Custom {
 	public function validate($postcode){
 		$jsonurl = self::URL.'/postcodes/'.$postcode.'/validate';
 		$json = $this->request($jsonurl);
-		
+
 		$decoded = json_decode($json);
 		if($decoded->status == 200){
 			if($decoded->result == 1){
-				return true;	
+				return true;
 			}
 			else{
 				return false;
@@ -324,7 +377,7 @@ class CCLUK_Postcode_API extends CCLUK_BP_Custom {
 	public function nearest($postcode){
 		$jsonurl = self::URL.'/postcodes/'.$postcode.'/nearest';
 		$json = $this->request($jsonurl);
-		
+
 		$decoded = json_decode($json);
 		if($decoded->status == 200){
 			return $decoded->result;
@@ -338,7 +391,7 @@ class CCLUK_Postcode_API extends CCLUK_BP_Custom {
 	public function partial($postcode){
 		$jsonurl = self::URL.'/postcodes/'.$postcode.'/autocomplete';
 		$json = $this->request($jsonurl);
-		
+
 		$decoded = json_decode($json);
 		if($decoded->status == 200){
 			return $decoded->result;
@@ -352,7 +405,7 @@ class CCLUK_Postcode_API extends CCLUK_BP_Custom {
 	public function query($postcode){
 		$jsonurl = self::URL.'/postcodes?q='.$postcode;
 		$json = $this->request($jsonurl);
-		
+
 		$decoded = json_decode($json);
 		if($decoded->status == 200){
 			return $decoded->result;
@@ -366,7 +419,7 @@ class CCLUK_Postcode_API extends CCLUK_BP_Custom {
 	public function lookupTerminated($postcode){
 		$jsonurl = self::URL.'/terminated_postcodes/'.$postcode;
 		$json = $this->request($jsonurl);
-		
+
 		$decoded = json_decode($json);
 		if($decoded->status == 200){
 			return $decoded->result;
@@ -380,7 +433,7 @@ class CCLUK_Postcode_API extends CCLUK_BP_Custom {
 	public function lookupOutwardCode($code){
 		$jsonurl = self::URL.'/outcodes/'.$code;
 		$json = $this->request($jsonurl);
-		
+
 		$decoded = json_decode($json);
 		if($decoded->status == 200){
 			return $decoded->result;
@@ -394,7 +447,7 @@ class CCLUK_Postcode_API extends CCLUK_BP_Custom {
 	public function nearestOutwardCode($code){
 		$jsonurl = self::URL.'/outcodes/'.$code.'/nearest';
 		$json = $this->request($jsonurl);
-		
+
 		$decoded = json_decode($json);
 		if($decoded->status == 200){
 			return $decoded->result;
@@ -408,7 +461,7 @@ class CCLUK_Postcode_API extends CCLUK_BP_Custom {
 	public function nearestOutwardCodeFromLongLat($longitude, $latitude){
 		$jsonurl = self::URL.'/outcodes?lon='.$longitude.'&lat='.$latitude;
 		$json = $this->request($jsonurl);
-		
+
 		$decoded = json_decode($json);
 		if($decoded->status == 200){
 			return $decoded->result;
@@ -429,25 +482,25 @@ class CCLUK_Postcode_API extends CCLUK_BP_Custom {
 		*/
 		$postcode1 = $this->lookup($postcode1);
 		$postcode2 = $this->lookup($postcode2);
-		
+
 		if($postcode1 == null || $postcode2 == null){
 			return false;
 		}
-		
+
 		$theta = $postcode1->longitude - $postcode2->longitude;
 		$dist = sin(deg2rad($postcode1->latitude)) * sin(deg2rad($postcode2->latitude)) +  cos(deg2rad($postcode1->latitude)) * cos(deg2rad($postcode2->latitude)) * cos(deg2rad($theta));
 		$dist = acos($dist);
 		$dist = rad2deg($dist);
 		$miles = $dist * 60 * 1.1515;
 		$unit = strtoupper($unit);
-		
+
 		if ($unit == "K") {
 		    return ($miles * 1.609344);
 		} else if ($unit == "N") {
 		    return ($miles * 0.8684);
 		} else {
 		    return $miles;
-		}	
+		}
 	}
 }
 

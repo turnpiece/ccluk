@@ -37,7 +37,7 @@ class Google_0814_Service_Datastore extends Google_0814_Service
   const USERINFO_EMAIL = "https://www.googleapis.com/auth/userinfo.email";
 
   public $datasets;
-
+  
 
   /**
    * Constructs the internal representation of the Datastore service.

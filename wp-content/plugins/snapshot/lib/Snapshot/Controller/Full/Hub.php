@@ -15,6 +15,7 @@ class Snapshot_Controller_Full_Hub extends Snapshot_Controller_Full {
 	const ACTION_DELETE_BACKUP = 'delete_backup';
 	const ACTION_RESTORE_BACKUP = 'restore_backup';
 	const ACTION_DEACTIVATE_BACKUPS = 'deactivate_backups';
+	const ACTION_CHECK_IF_ACTIVATED = 'check_if_activated';
 
 	const OPTIONS_FLAG = 'snapshot-automate-run';
 
@@ -112,6 +113,7 @@ class Snapshot_Controller_Full_Hub extends Snapshot_Controller_Full {
 			self::ACTION_DELETE_BACKUP,
 			self::ACTION_RESTORE_BACKUP,
 			self::ACTION_DEACTIVATE_BACKUPS,
+			self::ACTION_CHECK_IF_ACTIVATED,
 		);
 		return $known;
 	}
@@ -310,6 +312,28 @@ class Snapshot_Controller_Full_Hub extends Snapshot_Controller_Full {
 	}
 
 	/**
+	 * Check if backups are activated
+	 *
+	 * @param object $params Parameters passed in json body
+	 * @param string $action The action name that was called
+	 * @param object $request Optional WPMUDEV_Dashboard_Remote object
+	 *
+	 * @return void
+	 */
+	public function json_check_if_activated ($params, $action, $request = false) {
+		$result = array();
+
+		$model = new Snapshot_Model_Full_Backup();
+		$is_client = $model->is_dashboard_active() && $model->has_dashboard_key();
+		$apiKey = $model->get_config( 'secret-key', '' );
+
+		$backups_activated = $is_client && Snapshot_Model_Full_Remote_Api::get()->get_token() !== false && ! empty( $apiKey );
+
+		$result['backups_activated'] = $backups_activated;
+		$result = (object) $result;
+		return $this->send_response_success($result, $request);	}
+
+	/**
 	 * Validates the params passed to schedule backups action
 	 *
 	 * @param object $params API-passed params
@@ -354,8 +378,8 @@ class Snapshot_Controller_Full_Hub extends Snapshot_Controller_Full {
 		if (!empty($status) && !is_wp_error($status)) {
 			Snapshot_Helper_Log::info("Reschedule params are all valid", "Remote");
 
-			// If the crons are temporarily enabled by Automate, make them permanently enabled.
-			if ( $this->_model->get_config( 'temporarily_enable_cron', false ) ){
+			// If the crons are temporarily enabled by Automate, make them permanently enabled. 
+			if ( $this->_model->get_config( 'temporarily_enable_cron', false ) ){ 
 				$this->_model->set_config('temporarily_enable_cron', false);
 			}
 		} else {
@@ -507,6 +531,14 @@ class Snapshot_Controller_Full_Hub extends Snapshot_Controller_Full {
 	 * @return WP_Error|bool Status
 	 */
 	public function start_backup ($params = false) {
+		/**
+		 * Check for stop.
+		 * @since 3.2.1
+		 */
+		$stop = apply_filters( 'snapshot_maybe_should_it_stop', false );
+		if ( $stop || Snapshot_Helper_Utility::is_wpmu_hosting() ) {
+			return;
+		}
 		$cron = Snapshot_Controller_Full_Cron::get();
 		$via_automate = true;
 

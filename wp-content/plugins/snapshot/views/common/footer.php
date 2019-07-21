@@ -1,6 +1,3 @@
-<?php
-assert(true);
-?>
 <div class="footer">
 	<?php echo WPMUDEVSnapshot::instance()->get_wpmudev_footer_text( 'Made with <i class="wdv-icon wdv-icon-heart" aria-hidden="true"></i> by WPMU DEV' );// phpcs:ignore ?>
 </div>

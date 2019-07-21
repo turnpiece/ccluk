@@ -232,7 +232,7 @@ class Ai1wm_Main_Controller {
 		add_filter( 'plugin_row_meta', 'Ai1wm_Updater_Controller::plugin_row_meta', 10, 2 );
 
 		// Add storage folder daily cleanup cron
-		add_action( 'ai1wm_cleanup_cron', 'Ai1wm_Export_Controller::cleanup' );
+		add_action( 'ai1wm_storage_cleanup', 'Ai1wm_Export_Controller::cleanup' );
 	}
 
 	/**
@@ -301,9 +301,14 @@ class Ai1wm_Main_Controller {
 	 * @return void
 	 */
 	public function schedule_crons() {
-		// Check if storage cleanup cron is scheduled
-		if ( ! wp_next_scheduled( 'ai1wm_cleanup_cron' ) ) {
-			Ai1wm_Cron::add( 'ai1wm_cleanup_cron', 'daily' );
+		// Delete old cleanup cronjob
+		if ( Ai1wm_Cron::exists( 'ai1wm_cleanup_cron' ) ) {
+			Ai1wm_Cron::clear( 'ai1wm_cleanup_cron' );
+		}
+
+		// Schedule a new daily cleanup
+		if ( ! Ai1wm_Cron::exists( 'ai1wm_storage_cleanup' ) ) {
+			Ai1wm_Cron::add( 'ai1wm_storage_cleanup', 'daily', time() );
 		}
 	}
 

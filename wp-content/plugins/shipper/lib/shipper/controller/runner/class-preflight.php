@@ -222,16 +222,25 @@ class Shipper_Controller_Runner_Preflight extends Shipper_Controller_Runner {
 			'warnings' => 0,
 		);
 		$check_types = $preflight->get_check_types();
+//$file_errs = array_sum( wp_list_pluck( $result['checks']['files']['checks'], 'count' ) );
 
+		$file_warnings = 0;
+		$other_warnings = 0;
 		foreach ( $check_types as $type ) {
 			$checks = $preflight->get_check( $type );
 			$error_messages = $preflight->get_check_errors( $type );
 			$errors = count( $error_messages );
 			$warnings = 0;
 			foreach ( $checks as $chk ) {
-				if ( Shipper_Model_Check::STATUS_WARNING === $chk['status'] ) {
-					$warnings++;
+				if ( 'files' !== $type || empty( $chk['count'] ) ) {
+					if ( Shipper_Model_Check::STATUS_WARNING === $chk['status'] ) {
+						$warnings++; $other_warnings++;
+					}
+				} else {
+					$warnings += $chk['count'];
+					$file_warnings += $chk['count'];
 				}
+
 				if ( Shipper_Model_Check::STATUS_ERROR === $chk['status'] ) {
 					$errors++;
 				}
@@ -247,6 +256,20 @@ class Shipper_Controller_Runner_Preflight extends Shipper_Controller_Runner {
 				'checks' => $checks,
 				'is_done' => $result['is_done'],
 			);
+		}
+
+		if ( $file_warnings ) {
+			$exclusions = new Shipper_Model_Stored_Exclusions;
+			$cnt = count( $exclusions->get_data() );
+			if ( empty( $other_warnings ) ) {
+				$result['warnings'] -= min( $result['warnings'], $cnt );
+				foreach( $result['checks']['files']['checks'] as $idx => $check ) {
+					if ( isset( $check['count'] ) && $check['count'] >= $cnt ) {
+						$check['count'] -= $file_warnings;
+					}
+					$result['checks']['files']['checks'][ $idx ] = $check;
+				}
+			}
 		}
 
 		return $result;

@@ -5,7 +5,7 @@ class Snapshot_Model_Fileset_Full extends Snapshot_Model_Fileset {
 	public function get_base () {
 		return '';
 	}
-
+	
 	public function get_files ($chunk = false) {
 		$path = $this->get_root();
 		if (empty($path)) return array();

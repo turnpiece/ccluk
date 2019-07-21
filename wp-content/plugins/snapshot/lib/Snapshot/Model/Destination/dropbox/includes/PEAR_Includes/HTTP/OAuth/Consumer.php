@@ -103,7 +103,7 @@ class HTTP_OAuth_Consumer extends HTTP_OAuth
 
     /**
      * Instance of HTTP_OAuth_Consumer_Request
-     *
+     * 
      * @see accept()
      * @see getOAuthConsumerRequest()
      * @var HTTP_OAuth_Consumer_Request
@@ -119,7 +119,7 @@ class HTTP_OAuth_Consumer extends HTTP_OAuth
 
     /**
      * Instance of the last response received
-     *
+     * 
      * @var HTTP_OAuth_Consumer_Response
      */
     protected $lastResponse =null;
@@ -360,9 +360,9 @@ class HTTP_OAuth_Consumer extends HTTP_OAuth
 
     /**
      * Accepts a custom instance of HTTP_OAuth_Consumer_Request.
-     *
+     * 
      * @param HTTP_OAuth_Consumer_Request $object Custom instance
-     *
+     * 
      * @see getOAuthConsumerRequest()
      * @return void
      */
@@ -393,7 +393,7 @@ class HTTP_OAuth_Consumer extends HTTP_OAuth
     {
         if (!$this->consumerRequest instanceof HTTP_OAuth_Consumer_Request) {
             $this->consumerRequest = new HTTP_OAuth_Consumer_Request;
-        }
+        } 
         return $this->consumerRequest;
     }
 
@@ -410,7 +410,7 @@ class HTTP_OAuth_Consumer extends HTTP_OAuth
 
     /**
      * Gets the most recent HTTP_OAuth_Consumer_Response object
-     *
+     * 
      * @return HTTP_OAuth_Consumer_Response|null
      */
     public function getLastResponse()

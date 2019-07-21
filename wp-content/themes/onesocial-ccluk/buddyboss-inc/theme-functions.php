@@ -37,12 +37,6 @@ function onesocial_setup() {
 	 */
 	add_theme_support( 'title-tag' );
 
-	// Declare theme support for WooCommerce
-	add_theme_support( 'woocommerce' );
-	add_theme_support( 'wc-product-gallery-zoom' );
-	add_theme_support( 'wc-product-gallery-lightbox' );
-	add_theme_support( 'wc-product-gallery-slider' );
-
 	// Adds wp_nav_menu() in two locations with BuddyPress deactivated.
 	register_nav_menus( array(
 		'primary-menu'		 => __( 'Titlebar', 'onesocial' ),
@@ -130,6 +124,8 @@ function buddyboss_onesocial_scripts_styles() {
 
 	global $bp, $onesocial, $buddyboss_js_params;
 
+	$ext = 'css';
+
 	// Used in js file to detect if we are using only mobile layout
 	$only_mobile = false;
 
@@ -154,8 +150,9 @@ function buddyboss_onesocial_scripts_styles() {
 
 	$css_dest = ( is_rtl() ) ? '/css-rtl' : '/css';
 	$css_compressed_dest = ( is_rtl() ) ? '/css-rtl-compressed' : '/css-compressed';
+	$assets_dir = get_stylesheet_directory_uri() . '/assets';
 
-	$CSS_URL = onesocial_get_option( 'boss_minified_css' ) ? get_stylesheet_directory_uri() . $css_compressed_dest : get_stylesheet_directory_uri() . $css_dest;
+	$CSS_URL = $assets_dir . ( onesocial_get_option( 'boss_minified_css' ) && !CCLUK_DEBUGGING ? $css_compressed_dest : $css_dest );
 
 	// OneSocial icon fonts.
 	wp_register_style( 'icons', $CSS_URL . '/onesocial-icons.css', array(), $onesocial_version, 'all' );
@@ -170,18 +167,18 @@ function buddyboss_onesocial_scripts_styles() {
 	// Switch between mobile and desktop
 	if ( isset( $_COOKIE[ 'switch_mode' ] ) && (onesocial_get_option( 'boss_layout_switcher' )) ) {
 		if ( $_COOKIE[ 'switch_mode' ] == 'mobile' ) {
-			wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.css', array( 'icons' ), $onesocial_version, 'all' );
+			wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.'.$ext, array( 'icons' ), $onesocial_version, 'all' );
 			$only_mobile = true;
 		} else {
 			wp_enqueue_style( 'onesocial-main-desktop', $CSS_URL . '/main-desktop.css', array( 'icons' ), $onesocial_version, 'screen and (min-width: 1025px)' );
 			// Activate our own Fixed or Floating (defaults to Fixed) adminbar stylesheet. Load DashIcons and GoogleFonts first.
 			wp_enqueue_style( 'buddyboss-wp-adminbar-desktop-' . $adminbar_layout, $CSS_URL . '/adminbar-desktop-' . $adminbar_layout . '.css', array( 'dashicons' ), $onesocial_version, 'screen and (min-width: 1025px)' );
-			wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.css', array( 'icons' ), $onesocial_version, 'screen and (max-width: 1024px)' );
+			wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.'.$ext, array( 'icons' ), $onesocial_version, 'screen and (max-width: 1024px)' );
 		}
 		// Defaults
 	} else {
 		if ( is_phone() ) {
-			wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.css', array( 'icons' ), $onesocial_version, 'all' );
+			wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.'.$ext, array( 'icons' ), $onesocial_version, 'all' );
 			$only_mobile = true;
 		} elseif ( wp_is_mobile() ) {
 			if ( onesocial_get_option( 'boss_layout_tablet' ) == 'desktop' ) {
@@ -189,12 +186,12 @@ function buddyboss_onesocial_scripts_styles() {
 				// Activate our own Fixed or Floating (defaults to Fixed) adminbar stylesheet. Load DashIcons and GoogleFonts first.
 				wp_enqueue_style( 'buddyboss-wp-adminbar-desktop-' . $adminbar_layout, $CSS_URL . '/adminbar-desktop-' . $adminbar_layout . '.css', array( 'dashicons' ), $onesocial_version, 'all' );
 			} else {
-				wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.css', array( 'icons' ), $onesocial_version, 'all' );
+				wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.'.$ext, array( 'icons' ), $onesocial_version, 'all' );
 				$only_mobile = true;
 			}
 		} else {
 			if ( onesocial_get_option( 'boss_layout_desktop' ) == 'mobile' ) {
-				wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.css', array( 'icons' ), $onesocial_version, 'all' );
+				wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.'.$ext, array( 'icons' ), $onesocial_version, 'all' );
 				$only_mobile = true;
 			} else {
 				wp_enqueue_style( 'onesocial-main-desktop', $CSS_URL . '/main-desktop.css', array( 'icons' ), $onesocial_version, 'screen and (min-width: 1025px)' );
@@ -205,7 +202,7 @@ function buddyboss_onesocial_scripts_styles() {
 
 		// Media query fallback
 		if ( !wp_script_is( 'onesocial-main-mobile', 'enqueued' ) ) {
-			wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.css', array( 'icons' ), $onesocial_version, 'screen and (max-width: 1024px)' );
+			wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.'.$ext, array( 'icons' ), $onesocial_version, 'screen and (max-width: 1024px)' );
 		}
 	}
 
@@ -325,6 +322,10 @@ function buddyboss_onesocial_scripts_styles() {
 		wp_localize_script( 'onesocial-main-min', 'BuddyBossOptions', $buddyboss_js_vars );
 		wp_enqueue_script( 'onesocial-main-min' );
 
+		/* Custom CCL javascript */
+		wp_register_script( 'onesocial-custom', get_stylesheet_directory_uri() . '/assets/js/custom.min.js', array( 'jquery' ), $onesocial_version, true );
+		wp_enqueue_script( 'onesocial-custom' );
+
 	} else {
 
 		/* Modernizr */
@@ -407,6 +408,10 @@ function buddyboss_onesocial_scripts_styles() {
 		wp_localize_script( 'onesocial-main', 'BuddyBossOptions', $buddyboss_js_vars );
 		wp_localize_script( 'onesocial-main', 'translation', $translation_array );
 		wp_enqueue_script( 'onesocial-main' );
+
+		/* Custom CCL javascript */
+		wp_register_script( 'onesocial-custom', get_stylesheet_directory_uri() . '/assets/js/custom.js', array( 'jquery' ), $onesocial_version, true );
+		wp_enqueue_script( 'onesocial-custom' );
 	}
 
 	/**
@@ -736,19 +741,7 @@ function buddyboss_widgets_init() {
 		'before_title'	 => '<h4 class="widgettitle">',
 		'after_title'	 => '</h4>'
 	) );
-	global $woocommerce;
-	if ( $woocommerce ) {
-		// Area 17, dedicated sidebar for WooCommerce
-		register_sidebar( array(
-			'name'			 => 'WooCommerce',
-			'id'			 => 'woo_sidebar',
-			'description'	 => 'The widget area on WooCommerce shop index and Category pages.',
-			'before_widget'	 => '<aside id="%1$s" class="widget %2$s">',
-			'after_widget'	 => '</aside>',
-			'before_title'	 => '<h4 class="widgettitle">',
-			'after_title'	 => '</h4>',
-		) );
-	}
+
 
 // Area 12, located in the Footer column 1. Only appears if widgets are added.
 	register_sidebar( array(
@@ -907,20 +900,6 @@ if ( !function_exists( 'buddyboss_post_content' ) ) :
 endif;
 
 /**
- * Check if we are on some of WC pages
- * */
-function onesocial_is_woocommerce() {
-
-	if ( function_exists( 'is_woocommerce' ) ) {
-		return (is_woocommerce() || is_shop() || is_product_tag() || is_product_category() || is_product()
-		//  || is_cart()
-		//  || is_checkout()
-		//  || is_account_page()
-		);
-	}
-}
-
-/**
  * Extends the default WordPress body classes.
  *
  * @since OneSocial 1.0.0
@@ -978,12 +957,6 @@ function buddyboss_body_class( $classes ) {
 			}
 			$classes[] = 'is-desktop';
 		}
-	}
-
-	// WooCommerce sidebar
-	if ( is_active_sidebar( 'woo_sidebar' ) && onesocial_is_woocommerce() ) {
-		$woocommerce_sidebar_alignment	 = onesocial_get_option( 'woocommerce_sidebar' );
-		$classes[]						 = 'woo-sidebar-active bb-has-sidebar sidebar-' . $woocommerce_sidebar_alignment;
 	}
 
 	// Search sidebar
@@ -2940,20 +2913,6 @@ if ( !function_exists( 'buddyboss_comment' ) ) {
 		return false;
 	}
 
-	/**
-	 * Woocommerce remove sidebar
-	 */
-	remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar', 10 );
-
-	/* --------------------------------
-	 * Woocommerce pages markup
-	  -------------------------------- */
-	remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10 );
-	remove_action( 'woocommerce_after_main_content', 'woocommerce_output_content_wrapper_end', 10 );
-
-	add_action( 'woocommerce_before_main_content', 'onesocial_theme_wrapper_start', 10 );
-	add_action( 'woocommerce_after_main_content', 'onesocial_theme_wrapper_end', 10 );
-
 	function onesocial_theme_wrapper_start() {
 		// Fixed - Sidebar moved to the bottom of shop page (Not needed)
 		//		if ( is_active_sidebar( 'woo_sidebar' ) ) {
@@ -3188,29 +3147,6 @@ if ( !function_exists( 'buddyboss_comment' ) ) {
 	add_action( 'onesocial_custom_slider', 'onesocial_execute_slider_shortcode' );
 
 	global $BUDDYBOSS_BM;
-
-	if ( $BUDDYBOSS_BM ) {
-		if ( !function_exists( 'woocommerce_get_product_thumbnail' ) ) {
-
-			/**
-			 * Override woocommerce product loop thumbnail
-			 * @param  [[Type]] [$size = 'bm-product-archive'] [[Description]]
-			 * @param  [[Type]] [$deprecated1 = 0]             [[Description]]
-			 * @param  [[Type]] [$deprecated2 = 0]             [[Description]]
-			 * @return [[Type]] [[Description]]
-			 */
-			function woocommerce_get_product_thumbnail( $size = 'bm-product-archive', $deprecated1 = 0, $deprecated2 = 0 ) {
-				global $post;
-
-				if ( has_post_thumbnail() ) {
-					return get_the_post_thumbnail( $post->ID, $size );
-				} elseif ( wc_placeholder_img_src() ) {
-					return wc_placeholder_img( $size );
-				}
-			}
-
-		}
-	}
 
 	function onesocial_userblog_is_network_activated() {
 		$network_activated = '';

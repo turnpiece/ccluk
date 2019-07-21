@@ -459,7 +459,7 @@ if ( ! class_exists( 'SnapshotDestinationDropbox' )
                  array(
 					'files_count' => $file_counter_item,
 					'files_total' => $file_counter_total,
-				)
+				) 
             );
 
 			foreach ( $sync_files['included'] as $section => $section_files ) {

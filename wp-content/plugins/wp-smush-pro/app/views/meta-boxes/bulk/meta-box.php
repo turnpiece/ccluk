@@ -19,18 +19,26 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
+?>
+
+<?php if ( 0 !== absint( $core->total_count ) ) : ?>
+<p><?php esc_html_e( 'Bulk smush detects images that can be optimized and allows you to compress them in bulk.', 'wp-smushit' ); ?></p>
+<?php endif; ?>
+
+<?php
 // Show re-smush notice.
 WP_Smush::get_instance()->admin()->bulk_resmush_content();
 
 // If there are no images in media library.
-if ( 0 >= $core->total_count ) : ?>
+if ( 0 === absint( $core->total_count ) ) {
+	?>
 	<?php if ( ! $this->hide_wpmudev_branding() ) : ?>
 		<span class="wp-smush-no-image tc">
 			<img src="<?php echo esc_url( WP_SMUSH_URL . 'app/assets/images/smush-no-media.png' ); ?>"
-			     alt="<?php esc_attr_e( 'No attachments found - Upload some images', 'wp-smushit' ); ?>">
+				alt="<?php esc_attr_e( 'No attachments found - Upload some images', 'wp-smushit' ); ?>">
 		</span>
 	<?php endif; ?>
-	<p class="wp-smush-no-images-content tc roboto-regular">
+	<p class="wp-smush-no-images-content tc">
 		<?php esc_html_e( 'We haven’t found any images in your media library yet so there’s no smushing to be done!', 'wp-smushit' ); ?><br>
 		<?php esc_html_e( 'Once you upload images, reload this page and start playing!', 'wp-smushit' ); ?>
 	</p>
@@ -41,21 +49,14 @@ if ( 0 >= $core->total_count ) : ?>
 	</span>
 	<?php
 	return;
-endif;
+}
 ?>
 
 <div class="sui-notice sui-notice-success wp-smush-all-done <?php echo $all_done ? '' : 'sui-hidden'; ?>" tabindex="0">
 	<p><?php esc_html_e( 'All attachments have been smushed. Awesome!', 'wp-smushit' ); ?></p>
 </div>
 
-<?php
-$this->view(
-	'blocks/progress-bar',
-	array(
-		'count' => $core,
-	)
-);
-?>
+<?php $this->view( 'blocks/progress-bar', array( 'count' => $core ) ); ?>
 
 <div class="smush-final-log sui-hidden">
 	<div class="smush-bulk-errors"></div>
@@ -89,7 +90,7 @@ $this->view(
 					<?php
 					printf(
 						/* translators: %1$s: opening a tag, %2$s: closing a tag */
-						esc_html__( 'Enable %1$sSuper-smush%2$s for advanced lossy compression to optimise images further with almost no visible drop in quality.', 'wp-smushit' ),
+						esc_html__( 'Enable %1$sSuper-smush%2$s for advanced lossy compression to optimize images further with almost no visible drop in quality.', 'wp-smushit' ),
 						'<a href="#" class="wp-smush-lossy-enable">',
 						'</a>'
 					);

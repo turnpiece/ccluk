@@ -40,33 +40,10 @@ if ( ! empty( $status ) && empty( $errors ) ) {
 
 				<div class="shipper-system-title">
 					<h3 class="shipper-dialog-title"><?php esc_html_e( 'Requirements failed', 'shipper' ); ?></h3>
-					<p><?php esc_html_e( 'Whoops, we found a few issues that may cause migrations to fail', 'shipper' ); ?></p>
-					<div class="sui-box-body">
-						<div class="sui-notice sui-notice-warning">
-							<p>
-								<?php
-									echo wp_kses(
-										sprintf(
-											_n(
-												'Your system check found <span class="shipper-issues-count">%d</span> issue.',
-												'Your system check found <span class="shipper-issues-count">%d</span> issues.',
-												$errors,
-												'shipper'
-											),
-											$errors
-										),
-										array( 'span' => array( 'class' => array() ) )
-									);
-								?>
-								<?php
-									echo wp_kses(
-										__( 'We recommend fixing them up and <a href="#recheck">trying again</a>.', 'shipper' ),
-										array( 'a' => array( 'href' => array() ) )
-									);
-								?>
-							</p>
-						</div>
-					</div>
+					<p><?php echo wp_kses_post( sprintf(
+						__( '%s, we’ve uncovered a few potential issues that may cause the migration to fail. Please fix the following errors to continue using the plugin.', 'shipper' ),
+						shipper_get_user_name()
+					) ); ?></p>
 				</div>
 
 				<table class="sui-table sui-accordion shipper-system-checks-list">
@@ -112,19 +89,10 @@ if ( ! empty( $status ) && empty( $errors ) ) {
 				</table>
 
 				<div class="shipper-system-footer">
-					<div class="sui-row">
-						<div class="sui-col">
-							<a href="#recheck" type="button" class="sui-button sui-button-ghost">
-								<i class="sui-icon-update" aria-hidden="true"></i>
-								<?php esc_attr_e( 'Re-check', 'shipper' ); ?>
-							</a>
-						</div>
-						<div class="sui-col">
-							<a href="#override" type="button" class="sui-button">
-								<?php esc_attr_e( 'Continue anyway', 'shipper' ); ?>
-							</a>
-						</div>
-					</div>
+					<a href="#recheck" type="button" class="sui-button sui-button-ghost">
+						<i class="sui-icon-update" aria-hidden="true"></i>
+						<?php esc_attr_e( 'Re-check', 'shipper' ); ?>
+					</a>
 				</div>
 
 			</div><?php // .sui-box-body ?>

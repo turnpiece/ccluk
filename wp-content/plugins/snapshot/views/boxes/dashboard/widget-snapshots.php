@@ -95,7 +95,7 @@ $snapshots = array_slice( $snapshots, 0, 3 );
 
 								}
 
-							}
+							} 
                             ?>
 
 							<tr>
@@ -108,24 +108,24 @@ $snapshots = array_slice( $snapshots, 0, 3 );
 
 										<a href="<?php echo esc_url( WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url( 'snapshots-newui-snapshots' ) ); ?>&amp;snapshot-action=view&amp;item=<?php echo esc_attr( $snapshot['timestamp'] ); ?>&amp;snapshot-noonce-field=<?php echo esc_attr( wp_create_nonce  ( 'snapshot-nonce' ) ); ?>"><?php echo esc_html( stripslashes( $snapshot['name'] ) ); ?></a>
 
-										<?php
+										<?php 
                                         if ( ( isset( $snapshot['data'] ) ) && ( count( $snapshot['data'] ) ) ) {
 
 											$data_item = Snapshot_Helper_Utility::latest_data_item( $snapshot['data'] );
 
 											if ( isset( $data_item ) ) {
 
-												if ( isset( $data_item['file_size'] ) ) {
+												if ( isset( $data_item['file_size'] ) ) { 
                                                 ?>
 
 													<small><?php echo esc_html( size_format( $data_item['file_size'] ) ); ?></small>
 
-												<?php
+												<?php 
                                                 }
 
 											}
 
-										}
+										} 
                                         ?>
 
 									</p>
@@ -134,7 +134,7 @@ $snapshots = array_slice( $snapshots, 0, 3 );
 
 								<td class="wss-date">
 
-									<?php
+									<?php 
                                     if ( ( isset( $snapshot['data'] ) ) && ( count( $snapshot['data'] ) ) ) {
 
 										$data_item = Snapshot_Helper_Utility::latest_data_item( $snapshot['data'] );
@@ -149,7 +149,7 @@ $snapshots = array_slice( $snapshots, 0, 3 );
 
 										}
 
-									}
+									} 
                                     ?>
 
 								</td>

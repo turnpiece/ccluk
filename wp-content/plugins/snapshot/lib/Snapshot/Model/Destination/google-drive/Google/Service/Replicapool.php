@@ -44,7 +44,7 @@ class Google_0814_Service_Replicapool extends Google_0814_Service
 
   public $pools;
   public $replicas;
-
+  
 
   /**
    * Constructs the internal representation of the Replicapool service.

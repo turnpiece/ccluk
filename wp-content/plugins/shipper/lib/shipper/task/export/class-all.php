@@ -84,7 +84,7 @@ class Shipper_Task_Export_All extends Shipper_Task_Export {
 					sprintf(
 						__( '%1$s - at %2$d%% (step %3$d of %4$d) - total progress: %5$d%% %6$s', 'shipper' ),
 						$task->get_work_description(),
-						$task->get_status_percentage(),
+						$task->get_status_percentage(), 
 						$task->get_current_step(),
 						$task->get_total_steps(),
 						$this->get_status_percentage(),

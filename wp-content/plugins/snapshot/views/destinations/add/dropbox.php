@@ -6,7 +6,7 @@ $item = array_merge(
 	array(
 		'name' => '',
 		'directory' => '',
-	), $item
+	), $item 
 );
 
 ?>
@@ -103,9 +103,9 @@ $item = array_merge(
 					}
 					?>
 
-					<?php
+					<?php 
                     if ( ! $auth_error ) {
-						if ( empty( $item['directory'] ) && isset( $item['tokens']['access']['access_token'] ) && ! empty( $item['tokens']['access']['access_token'] ) ) {
+						if ( empty( $item['directory'] ) && isset( $item['tokens']['access']['access_token'] ) && ! empty( $item['tokens']['access']['access_token'] ) ) { 
                         ?>
 						<div class="wps-auth-message wps-notice">
 							<p><?php esc_html_e( "You've authenticated this Dropbox destination. To finish adding this destination, please specify a folder to store the snapshots in and click Save Destination.", SNAPSHOT_I18N_DOMAIN ); ?></p>
@@ -263,7 +263,7 @@ $item = array_merge(
 
 			<input type="hidden" name="snapshot-destination[directory]" id="snapshot-destination-directory" value="
 				<?php
-				echo esc_attr( stripslashes( $item['directory'] ) );
+				echo esc_attr( stripslashes( $item['directory'] ) ); 
                 ?>
                 ">
 
@@ -306,23 +306,23 @@ $item = array_merge(
 	<?php
 
 	// Store the Token - Access as hidden fields
-	if ( isset( $item['tokens']['access']['token'] ) ) {
+	if ( isset( $item['tokens']['access']['token'] ) ) { 
     ?>
 
 		<input type="hidden" name="snapshot-destination[tokens][access][token]" value="<?php echo esc_attr( $item['tokens']['access']['token'] ); ?>">
 
-	<?php
+	<?php 
     }
 
-	if ( isset( $item['tokens']['access']['token_secret'] ) ) {
+	if ( isset( $item['tokens']['access']['token_secret'] ) ) { 
     ?>
 
 		<input type="hidden" name="snapshot-destination[tokens][access][token_secret]" value="<?php echo esc_attr( $item['tokens']['access']['token_secret'] ); ?>">
 
-	<?php
+	<?php 
     }
 
-	if ( isset( $item['tokens']['access']['access_token'] ) ) {
+	if ( isset( $item['tokens']['access']['access_token'] ) ) { 
     ?>
 
 		<input type="hidden" name="snapshot-destination[tokens][access][access_token]" value="<?php echo esc_attr( $item['tokens']['access']['access_token'] ); ?>">
@@ -332,3 +332,4 @@ $item = array_merge(
 	<input type="hidden" name="snapshot-destination[type]" id="snapshot-destination-type" value="<?php echo esc_attr( $item['type'] ); ?>">
 
 </div>
+

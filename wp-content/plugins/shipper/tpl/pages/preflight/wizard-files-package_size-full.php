@@ -16,7 +16,7 @@
 </p>
 <p>
 	<?php esc_html_e(
-		'Note: The actual migration time may vary depending on a lot of other factors.',
+		'Also, please note that the time your site takes to migrate may vary considerably depending on many other factors (such as the speed of your current host!).',
 		'shipper'
 	); ?>
 </p>

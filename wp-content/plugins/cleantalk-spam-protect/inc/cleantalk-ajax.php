@@ -121,9 +121,6 @@ $cleantalk_hooked_actions[]='tmpl_ajax_check_user_email';
 $cleantalk_hooked_actions[]='tevolution_submit_from_preview';
 $cleantalk_hooked_actions[]='submit_form_recaptcha_validation';
 
-/**hooks for cm answers pro */
-add_action( 'wp', 'ct_ajax_hook',1 );
-
 /* hooks for contact forms by web settler ajax*/
 add_action( 'wp_ajax_nopriv_smuzform-storage', 'ct_ajax_hook',1  );
 $cleantalk_hooked_actions[]='smuzform_form_submit';
@@ -249,35 +246,22 @@ function ct_mc4wp_ajax_hook( array $errors )
 function ct_ajax_hook($message_obj = false, $additional = false)
 {	
 	require_once(CLEANTALK_PLUGIN_DIR . 'inc/cleantalk-public.php');
-	global $apbct;
+	
+	global $apbct, $current_user;
 	
 	$message_obj = (array)$message_obj;
 	
-    //
-    // Skip test if Custom contact forms is disabled.
-    //
-    if (!$apbct->settings['general_contact_forms_test']) {
-        return false;
-    }
-
-    //
-    // Go out because we call it on backend.
-    //
-    if(	ct_is_user_enable() === false || (function_exists('get_current_user_id') && get_current_user_id() != 0)){
-		if(strval(current_action()) != 'et_pre_insert_answer' && (isset($message_obj['author']) && intval($message_obj['author']) == 0) || (isset($message_obj['post_author']) && intval($message_obj['post_author']) == 0)) //QAEngine Theme fix
-		{
-			return false;
-		}
+	// Get current_user and set it globaly
+	if(!($current_user instanceof WP_User)){
+		apbct_wp_set_current_user(apbct_wp_get_current_user());
 	}
 	
-    //
-    // Go out because of not spam data 
-    //
+    // Go out because of not spam data
     $skip_post = array(
         'gmaps_display_info_window',  // Geo My WP pop-up windows.
         'gmw_ps_display_info_window',  // Geo My WP pop-up windows.
         'the_champ_user_auth',  // Super Socializer
-        'simbatfa-init-otp', //Two-Factor Auth 
+        'simbatfa-init-otp', //Two-Factor Auth
         'wppb_msf_check_required_fields', //ProfileBuilder skip step checking
         'boss_we_login', //Login form
         'sidebar_login_process', // Login CF7
@@ -287,23 +271,36 @@ function ct_ajax_hook($message_obj = false, $additional = false)
 		'upload-attachment', // Skip ulpload attachments
 		'iwj_update_profile', //Skip profile page checker
 		'st_partner_create_service', //Skip add hotel via admin
+		'vp_ajax_vpt_option_save', // https://themeforest.net/item/motor-vehicles-parts-equipments-accessories-wordpress-woocommerce-theme/16829946
+		'mailster_send_test', //Mailster send test admin
+		'acf/validate_save_post', //ACF validate post admin
+		'admin:saveThemeOptions', //Ait-theme admin checking
+		'save_tourmaster_option', //Tourmaster admin save
     );
 	
-	//General post_info for all ajax calls
-	$post_info = array('comment_type' => 'feedback_ajax');
-		
-	// Use exclusions
-	if(check_url_exclusions()){
-		return false;
-	}
-	
-	$checkjs = apbct_js_test('ct_checkjs', $_COOKIE, true);
-    if ($checkjs && // Spammers usually fail the JS test
-        (isset($_POST['action']) && in_array($_POST['action'], $skip_post))
-	) {
+    // Skip test if
+    if( !$apbct->settings['general_contact_forms_test'] || // Test disabled
+        !ct_is_user_enable() || // User is admin, editor, author
+	    ($apbct->settings['protect_logged_in'] && (isset($current_user->ID) && $current_user->ID !== 0 )) || // Logged in user
+        check_url_exclusions() || // url exclusions
+        (isset($_POST['action']) && in_array($_POST['action'], $skip_post)) || // Special params
+	    (isset($_GET['action'])  && in_array($_GET['action'], $skip_post)) ||  // Special params
+        // QAEngine Theme fix
+        ( strval(current_action()) != 'et_pre_insert_answer' &&
+	        (
+		        (isset($message_obj['author']) && intval($message_obj['author']) == 0) ||
+		        (isset($message_obj['post_author']) && intval($message_obj['post_author']) == 0)
+	        )
+        )
+    )
+    {
         return false;
     }
-	
+ 
+	//General post_info for all ajax calls
+	$post_info = array('comment_type' => 'feedback_ajax');
+	$checkjs = apbct_js_test('ct_checkjs', $_COOKIE, true);
+		
     if(isset($_POST['user_login']))
 		$sender_nickname = $_POST['user_login'];
 	else

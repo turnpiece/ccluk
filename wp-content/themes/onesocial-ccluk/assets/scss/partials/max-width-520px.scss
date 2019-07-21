@@ -25,7 +25,27 @@
 	}
 }
 
-#buddypress ul.item-list li .activity-avatar div {
-	font-size: 14px;
-	line-height: 1.4;
+body.buddypress {
+    #buddypress ul.item-list li .activity-avatar div {
+    	font-size: 14px;
+    	line-height: 1.4;
+    }
+}
+
+body.page-template-homepage {
+    #main {
+        .section.banner.background-box {
+            .section-title-container {
+                padding: 20px;
+                .section-title {
+                    h2 {
+                        font-size: $font-size-mid;
+                    }
+                    p {
+                        font-size: $font-size-sm;
+                    }
+                }
+            }
+        }
+    }
 }

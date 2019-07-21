@@ -38,7 +38,7 @@ class Google_0814_Service_Tasks extends Google_0814_Service
 
   public $tasklists;
   public $tasks;
-
+  
 
   /**
    * Constructs the internal representation of the Tasks service.

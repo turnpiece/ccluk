@@ -1,29 +1,28 @@
 <?php
 if ( !is_user_logged_in() ) {
 
-	if ( onesocial_get_option( 'user_login_option' ) ) {
+	if ( onesocial_get_option( 'user_login_option' ) ) { ?>
+
+		<a href="#" class="login header-button animatedClick" data-target="LoginBox" title="<?php _e( 'Login', 'onesocial' ); ?>"><?php _e( 'Login', 'onesocial' ) ?></a><?php
+		//get_template_part( 'template-parts/site-login' );
 
 		if ( buddyboss_is_bp_active() && bp_get_signup_allowed() ) {
 			?>
 
-			<a href="<?php echo bp_get_signup_page(); ?>" class="header-button animatedClick boss-tooltip" data-target="RegisterBox" data-tooltip="<?php _e( 'Join', 'onesocial' ); ?>"><i class="bb-icon-pencil-square-o"></i></a><?php
+			<a href="<?php echo bp_get_signup_page(); ?>" class="header-button animatedClick" title="<?php _e( 'Join', 'onesocial' ); ?>"><?php _e( 'Join', 'onesocial' ); ?></a><?php
 			//get_template_part( 'template-parts/site-register' );
 		}
 
-		?>
+	} else { ?>
 
-		<a href="#" class="login header-button animatedClick boss-tooltip" data-target="LoginBox" data-tooltip="<?php _e( 'Login', 'onesocial' ); ?>"><i class="bb-icon-exit"></i></a><?php
-		//get_template_part( 'template-parts/site-login' );
-	} else {
-
-		if ( buddyboss_is_bp_active() && bp_get_signup_allowed() ) {
-			?>
-			<a href="<?php echo bp_get_signup_page(); ?>" class="header-button boss-tooltip" data-tooltip="<?php _e( 'Register', 'onesocial' ); ?>"><i class="bb-icon-pencil-square-o"></i></a>
-		<?php } ?>
-
-		<a href="<?php echo wp_login_url(); ?>" class="header-button boss-tooltip" data-tooltip="<?php _e( 'Login', 'onesocial' ); ?>"><i class="bb-icon-exit"></i></a>
+		<a href="<?php echo wp_login_url(); ?>" class="header-button" title="<?php _e( 'Login', 'onesocial' ); ?>"><?php _e( 'Login', 'onesocial' ) ?></a>
 
 		<?php
+		if ( buddyboss_is_bp_active() && bp_get_signup_allowed() ) {
+			?>
+			<a href="<?php echo bp_get_signup_page(); ?>" class="header-button" title="<?php _e( 'Join', 'onesocial' ); ?>"><?php _e( 'Join', 'onesocial' ) ?></a>
+		<?php }
+
 	}
 } else {
 

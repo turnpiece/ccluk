@@ -19,15 +19,24 @@ class CleantalkSFW_Base
 	public $ip_str = '';
 	public $ip_array = Array();
 	public $ip_str_array = Array();
+	public $results = array();
 	public $blocked_ip = '';
 	public $passed_ip = '';
 	public $result = false;
+	public $pass = true;
 	
-	public $is_test = false;
-	
+	public $test = false;
+
+	public $all_ips = array();
+	public $passed_ips = array();
+	public $blocked_ips = array();
+
+	// Database
+	protected $db;
 	protected $data_table;
 	protected $log_table;
 	
+	//Debug
 	public $debug;
 	public $debug_data = '';
 	public $debug_networks = array();
@@ -44,12 +53,7 @@ class CleantalkSFW_Base
 	*/
 	public function __construct()
 	{
-		// Creating database object
-		$this->db = new ClentalkDB();
-		
-		// Use default tables if not specified
-		$this->data_table = $this->db->table_prefix . 'cleantalk_sfw';
-		$this->log_table  = $this->db->table_prefix . 'cleantalk_sfw_logs';
+		$this->debug = isset($_GET['debug']) && intval($_GET['debug']) === 1 ? true : false;
 	}
 	
 	/*
@@ -58,14 +62,14 @@ class CleantalkSFW_Base
 	*/
 	public function ip__get($ips_input = array('real', 'remote_addr', 'x_forwarded_for', 'x_real_ip', 'cloud_flare'), $v4_only = true){
 		
-		$result = (array)CleantalkHelper::ip__get($ips_input, $v4_only);
+		$result = CleantalkHelper::ip__get($ips_input, $v4_only);
 		
-		$result = !empty($result) ? $result : array();
+		$result = !empty($result) ? array('real' => $result) : array();
 		
 		if(isset($_GET['sfw_test_ip'])){
 			if(CleantalkHelper::ip__validate($_GET['sfw_test_ip']) !== false){
 				$result['sfw_test'] = $_GET['sfw_test_ip'];
-				$this->is_test = true;
+				$this->test = true;
 			}
 		}
 		
@@ -76,23 +80,39 @@ class CleantalkSFW_Base
 	/*
 	*	Checks IP via Database
 	*/
-	public function ip_check(){
-		
-		foreach($this->ip_array as $current_ip){
-		
+	public function ip_check()
+	{
+		foreach($this->ip_array as $origin => $current_ip){
+			
 			$query = "SELECT 
 				COUNT(network) AS cnt, network, mask
 				FROM ".$this->data_table."
 				WHERE network = ".sprintf("%u", ip2long($current_ip))." & mask;";
-			$this->db->query($query)->fetch();
-			if($this->db->result['cnt']){
-				$this->result = true;
-				$this->blocked_ip = $current_ip;
-				$this->debug_networks[] = $this->db->result['network'].'/'.$this->db->result['mask'];
-			}else{
-				$this->passed_ip = $current_ip;
-			}
 			
+			$this->db->query($query)->fetch();
+			
+			if($this->db->result['cnt']){
+				$this->pass = false;
+				$this->blocked_ips[$origin] = array(
+					'ip'      => $current_ip,
+					'network' => long2ip($this->db->result['network']),
+					'mask'    => CleantalkHelper::ip__mask__long_to_number($this->db->result['mask']),
+				);
+				$this->all_ips[$origin] = array(
+					'ip'      => $current_ip,
+					'network' => long2ip($this->db->result['network']),
+					'mask'    => CleantalkHelper::ip__mask__long_to_number($this->db->result['mask']),
+					'status'  => -1,
+				);
+			}else{
+				$this->passed_ips[$origin] = array(
+					'ip'     => $current_ip,
+				);
+				$this->all_ips[$origin] = array(
+					'ip'     => $current_ip,
+					'status' => 1,
+				);
+			}		
 		}
 	}
 		
@@ -150,7 +170,7 @@ class CleantalkSFW_Base
 			if(empty($result['error'])){
 				if($result['rows'] == count($data)){
 					$this->db->query("DELETE FROM ".$this->log_table.";", true);
-					return true;
+					return $result;
 				}
 			}else{
 				return $result;
@@ -202,45 +222,54 @@ class CleantalkSFW_Base
 						
 			if(CleantalkHelper::http__request($file_url, array(), 'get_code') === 200){ // Check if it's there
 				
-				$gf = gzopen($file_url, 'rb');
-				
-				if($gf){
+				if(ini_get('allow_url_fopen')){
 					
-					$this->db->query("DELETE FROM ".$this->data_table.";", true);
+					$gf = gzopen($file_url, 'rb');
 					
-					for($count_result = 0; !gzeof($gf); ){
+					if($gf){
 						
-						
-						$query = "INSERT INTO ".$this->data_table." VALUES %s";
-						
-						for($i=0, $values = array(); APBCT_WRITE_LIMIT !== $i && !gzeof($gf); $i++, $count_result++){
+						if(!gzeof($gf)){
 							
-							$entry = trim(gzgets($gf, 1024));
+							$this->db->query("DELETE FROM ".$this->data_table.";", true);
 							
-							if(empty($entry)) continue;
+							for($count_result = 0; !gzeof($gf); ){
+	
+								$query = "INSERT INTO ".$this->data_table." VALUES %s";
+	
+								for($i=0, $values = array(); APBCT_WRITE_LIMIT !== $i && !gzeof($gf); $i++, $count_result++){
+	
+									$entry = trim(gzgets($gf, 1024));
+	
+									if(empty($entry)) continue;
+	
+									$entry = explode(',', $entry);
+	
+									// Cast result to int
+									$ip   = preg_replace('/[^\d]*/', '', $entry[0]);
+									$mask = preg_replace('/[^\d]*/', '', $entry[1]);
+	
+									if(!$ip || !$mask) continue;
+	
+									$values[] = '('. $ip .','. $mask .')';
+	
+								}
+								
+								if(!empty($values)){
+									$query = sprintf($query, implode(',', $values).';');
+									$this->db->query($query, true);
+								}
+								
+							}
 							
-							$entry = explode(',', $entry);
+							gzclose($gf);
+							return $count_result;
 							
-							// Cast result to int
-							$ip   = preg_replace('/[^\d]*/', '', $entry[0]);
-							$mask = preg_replace('/[^\d]*/', '', $entry[1]);
-							
-							if(!$ip || !$mask) continue;
-							
-							$values[] = '('. $ip .','. $mask .')';
-							
-						}
-						
-						$query = sprintf($query, implode(',', $values).';');
-						$this->db->query($query, true);
-												
-					}
-					
-					gzclose($gf);
-					return $count_result;
-					
+						}else
+							return array('error' => true, 'error_string' => 'ERROR_GZ_EMPTY');
+					}else
+						return array('error' => true, 'error_string' => 'ERROR_OPEN_GZ_FILE');
 				}else
-					return array('error' => true, 'error_string' => 'ERROR_OPEN_GZ_FILE');
+					return array('error' => true, 'error_string' => 'ERROR_ALLOW_URL_FOPEN_DISABLED');
 			}else
 				return array('error' => true, 'error_string' => 'NO_REMOTE_FILE_FOUND');
 		}			

@@ -38,7 +38,7 @@ class Google_0814_Service_Pubsub extends Google_0814_Service
 
   public $subscriptions;
   public $topics;
-
+  
 
   /**
    * Constructs the internal representation of the Pubsub service.

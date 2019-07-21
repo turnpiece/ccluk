@@ -473,6 +473,38 @@ class WP_Smush_Ajax extends WP_Smush_Module {
 						$should_resmush = true;
 					}
 
+					// Check if new sizes have been selected.
+					$image_sizes = $this->settings->get_setting( WP_SMUSH_PREFIX . 'image_sizes' );
+					/**
+					 * This is a too complicated way to check if the attachment needs a resmush.
+					 * Basically, smaller images might not have all the image sizes. And if, let's say, image does not
+					 * have a large attachment size, but user selects large to be compressed - do not trigger the
+					 * $show_resmush action for such an image.
+					 *
+					 * 1. Check if the selected image size is not already compressed.
+					 * 2. Check if the image has the defined size so it can be compressed.
+					 *
+					 * @since 3.2.1
+					 */
+					if ( is_array( $image_sizes ) && count( $image_sizes ) > count( $smush_data['sizes'] ) ) {
+						// Move this inside an if statement.
+						$attachment_data = wp_get_attachment_metadata( $attachment );
+						if ( count( $attachment_data['sizes'] ) !== count( $smush_data['sizes'] ) ) {
+							foreach ( $image_sizes as $image_size ) {
+								// Already compressed.
+								if ( isset( $smush_data['sizes'][ $image_size ] ) ) {
+									continue;
+								}
+
+								// If image has the size that can be compressed.
+								if ( isset( $attachment_data['sizes'][ $image_size ] ) ) {
+									$should_resmush = true;
+									break;
+								}
+							}
+						}
+					}
+
 					// If Image needs to be resized.
 					if ( ! $should_resmush ) {
 						$should_resmush = $core->mod->resize->should_resize( $attachment );
@@ -726,9 +758,8 @@ class WP_Smush_Ajax extends WP_Smush_Module {
 		if ( ! WP_Smush::is_pro() && ! WP_Smush_Core::check_bulk_limit() ) {
 			wp_send_json_error(
 				array(
-					'error'         => 'limit_exceeded',
-					'error_message' => sprintf( esc_html__( "You've reached the %1\$d attachment limit for bulk smushing in the free version. Upgrade to Pro to smush unlimited images, or click resume to smush another %2\$d attachments.", 'wp-smushit' ), WP_Smush_Core::$max_free_bulk, WP_Smush_Core::$max_free_bulk ),
-					'continue'      => false,
+					'error'    => 'limit_exceeded',
+					'continue' => false,
 				)
 			);
 		}

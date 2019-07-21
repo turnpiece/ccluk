@@ -171,7 +171,7 @@ class Smush {
 	enable_button() {
 		this.button.prop( 'disabled', false );
 		// For bulk process, enable other buttons.
-		jQuery( 'button.wp-smush-all' ).removeAttr( 'disabled' );
+		jQuery( '.wp-smush-all' ).removeAttr( 'disabled' );
 		jQuery( 'button.wp-smush-scan, a.wp-smush-lossy-enable, button.wp-smush-resize-enable, button#wp-smush-save-settings' ).removeAttr( 'disabled' );
 	};
 
@@ -265,7 +265,7 @@ class Smush {
 				Smush.update_image_stats( response.data.new_size );
 			}
 			self.enable_button();
-		} ).error( function ( response ) {
+		} ).fail( function ( response ) {
 			self.status.html( response.data );
 			self.status.addClass( 'error' );
 			self.enable_button();
@@ -518,15 +518,14 @@ class Smush {
 	 * Free Smush limit exceeded.
 	 */
 	free_exceeded() {
-		if ( this.ids.length > 0 ) {
-			const progress = jQuery( '.wp-smush-bulk-progress-bar-wrapper' );
-			progress.addClass( 'wp-smush-exceed-limit' );
-			progress.find( '.sui-progress-block .wp-smush-cancel-bulk' ).addClass('sui-hidden');
-			progress.find( '.sui-progress-block .wp-smush-all' ).removeClass('sui-hidden');
-			progress.find( '.sui-box-body.sui-no-padding-right' ).removeClass('sui-hidden');
-		} else {
-			jQuery( '.wp-smush-notice.wp-smush-all-done, .wp-smush-pagespeed-recommendation' ).show();
-		}
+		const progress = jQuery( '.wp-smush-bulk-progress-bar-wrapper' );
+		progress.addClass( 'wp-smush-exceed-limit' );
+		progress.find( '.sui-progress-block .wp-smush-cancel-bulk' ).addClass('sui-hidden');
+		progress.find( '.sui-progress-block .wp-smush-all' ).removeClass('sui-hidden');
+
+		progress.find('i.sui-icon-loader').addClass('sui-icon-info')
+			.removeClass('sui-icon-loader')
+			.removeClass('sui-loading');
 	};
 
 	/**
@@ -693,7 +692,7 @@ class Smush {
 		if ( ! this.is_bulk && ! this.is_bulk_resmush ) return;
 
 		// Progress bar label.
-		jQuery( 'span.wp-smush-images-percent' ).html( width );
+		jQuery( 'span.wp-smush-images-percent' ).html( width + '%' );
 		// Progress bar.
 		jQuery( '.bulk-smush-wrapper .wp-smush-progress-inner' ).css( 'width', width + '%' );
 
@@ -777,7 +776,6 @@ class Smush {
 						// Print the error on screen.
 						self.log.find( '.smush-bulk-errors' ).append( error_msg );
 					}
-
 				} else if ( 'undefined' !== typeof res.success && res.success ) {
 					// Increment the smushed count if image smushed without errors.
 					self.increment_smushed( self.current_id );
@@ -792,19 +790,17 @@ class Smush {
 				 */
 				if ( 'undefined' !== typeof res.data && 'limit_exceeded' === res.data.error && ! self.is_resolved() ) {
 					// Show error message.
-					const bulk_error_message = jQuery( '.wp-smush-bulk-progress-bar-wrapper' );
-					/** @var {string} res.data.error_message */
-					bulk_error_message.find( '.sui-notice-warning' )
-						.html( '<p>' + res.data.error_message + '</p>' )
-						.show();
+					const bulkWarning = document.getElementById('bulk_smush_warning');
+					bulkWarning.classList.remove('sui-hidden');
 
 					// Add a data attribute to the Smush button, to stop sending ajax.
 					self.button.attr( 'continue_smush', false );
 
-					self.free_exceeded();
-
 					// Reinsert the current ID.
 					wp_smushit_data.unsmushed.unshift( self.current_id );
+					self.ids.unshift( self.current_id );
+
+					self.free_exceeded();
 				} else if ( self.is_bulk ) {
 					self.update_progress( res );
 				} else if ( 0 === self.ids.length ) {
@@ -814,7 +810,7 @@ class Smush {
 
 				self.single_done();
 			} )
-			.complete( function () {
+			.always( function () {
 				if ( ! self.continue() || ! self.is_bulk ) {
 					// Calls deferred.done()
 					self.deferred.resolve();
@@ -854,7 +850,7 @@ class Smush {
 		if ( 'media' === type ) {
 			tableDiv = tableDiv +
 				'<div class="smush-bulk-image-actions">' +
-					'<button type="button" class="sui-button-icon sui-tooltip sui-tooltip-constrained sui-tooltip-top-left smush-ignore-image" data-tooltip="' + wp_smush_msgs.error_ignore + '" data-id="' + id + '">' +
+					'<button type="button" class="sui-button-icon sui-tooltip sui-tooltip-constrained sui-tooltip-top-right smush-ignore-image" data-tooltip="' + wp_smush_msgs.error_ignore + '" data-id="' + id + '">' +
 						'<i class="sui-icon-eye-hide" aria-hidden="true"></i>' +
 					'</button>' +
 				'</div>';

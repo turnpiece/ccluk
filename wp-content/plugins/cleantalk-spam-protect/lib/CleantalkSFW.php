@@ -21,8 +21,9 @@ class CleantalkSFW extends CleantalkSFW_Base
 		// Use default tables if not specified
 		$this->data_table = defined('APBCT_TBL_FIREWALL_DATA') ? APBCT_TBL_FIREWALL_DATA : $this->db->prefix . 'cleantalk_sfw';
 		$this->log_table  = defined('APBCT_TBL_FIREWALL_LOG')  ? APBCT_TBL_FIREWALL_LOG  : $this->db->prefix . 'cleantalk_sfw_logs';
+
+		parent::__construct();
 		
-		$this->debug = isset($_GET['show_debug']) && intval($_GET['show_debug']) === 1 ? true : false;
 	}
 	
 	/*
@@ -30,17 +31,24 @@ class CleantalkSFW extends CleantalkSFW_Base
 	* 
 	* Stops script executing
 	*/	
-	public function sfw_die($api_key, $cookie_prefix = '', $cookie_domain = ''){
+	public function sfw_die($api_key, $cookie_prefix = '', $cookie_domain = '', $test = false){
 		
 		global $apbct;
-		
+
+		// Statistics
+		if(!empty($this->blocked_ips)){
+			$apbct->stats['last_sfw_block']['time'] = time();
+			$apbct->stats['last_sfw_block']['ip'] =  $this->blocked_ips[key($this->blocked_ips)]['ip'];
+			$apbct->save('stats');
+		}
+
 		// File exists?
 		if(file_exists(CLEANTALK_PLUGIN_DIR . "inc/sfw_die_page.html")){
 			$sfw_die_page = file_get_contents(CLEANTALK_PLUGIN_DIR . "inc/sfw_die_page.html");
 		}else{
 			wp_die("IP BLACKLISTED", "Blacklisted", Array('response'=>403), true);
 		}
-		
+
 		// Translation
 		$request_uri = $_SERVER['REQUEST_URI'];
 		$sfw_die_page = str_replace('{SFW_DIE_NOTICE_IP}',              __('SpamFireWall is activated for your IP ', 'cleantalk'), $sfw_die_page);
@@ -48,20 +56,37 @@ class CleantalkSFW extends CleantalkSFW_Base
 		$sfw_die_page = str_replace('{SFW_DIE_CLICK_TO_PASS}',          __('Please click below to pass protection,', 'cleantalk'), $sfw_die_page);
 		$sfw_die_page = str_replace('{SFW_DIE_YOU_WILL_BE_REDIRECTED}', sprintf(__('Or you will be automatically redirected to the requested page after %d seconds.', 'cleantalk'), 1), $sfw_die_page);
 		$sfw_die_page = str_replace('{CLEANTALK_TITLE}',                __('Antispam by CleanTalk', 'cleantalk'), $sfw_die_page);
-		$sfw_die_page = str_replace('{TEST_TITLE}',                     ($this->is_test ? __('This is the testing page for SpamFireWall', 'cleantalk') : ''), $sfw_die_page);
+		$sfw_die_page = str_replace('{TEST_TITLE}',                     ($this->test ? __('This is the testing page for SpamFireWall', 'cleantalk') : ''), $sfw_die_page);
+
+		if($this->test){
+			$sfw_die_page = str_replace('{REAL_IP__HEADER}', 'Real IP:', $sfw_die_page);
+			$sfw_die_page = str_replace('{TEST_IP__HEADER}', 'Test IP:', $sfw_die_page);
+			$sfw_die_page = str_replace('{TEST_IP}', $this->all_ips['sfw_test']['ip'], $sfw_die_page);
+			$sfw_die_page = str_replace('{REAL_IP}', $this->all_ips['real']['ip'],     $sfw_die_page);
+			$sfw_die_page = str_replace('{TEST_IP_BLOCKED}', $this->all_ips['sfw_test']['status'] == 1 ? 'Passed' : 'Blocked', $sfw_die_page);
+			$sfw_die_page = str_replace('{REAL_IP_BLOCKED}', $this->all_ips['real']['status'] == 1 ? 'Passed' : 'Blocked',     $sfw_die_page);
+		}else{
+			$sfw_die_page = str_replace('{REAL_IP__HEADER}', '', $sfw_die_page);
+			$sfw_die_page = str_replace('{TEST_IP__HEADER}', '', $sfw_die_page);
+			$sfw_die_page = str_replace('{TEST_IP}', '', $sfw_die_page);
+			$sfw_die_page = str_replace('{REAL_IP}', '', $sfw_die_page);
+			$sfw_die_page = str_replace('{TEST_IP_BLOCKED}', '', $sfw_die_page);
+			$sfw_die_page = str_replace('{REAL_IP_BLOCKED}', '', $sfw_die_page);
+		}
+
+		$sfw_die_page = str_replace('{REMOTE_ADDRESS}', $this->blocked_ips ? $this->blocked_ips[key($this->blocked_ips)]['ip'] : '', $sfw_die_page);
 		
 		// Service info
-		$sfw_die_page = str_replace('{REMOTE_ADDRESS}', $this->blocked_ip,               $sfw_die_page);
 		$sfw_die_page = str_replace('{REQUEST_URI}',    $request_uri,                    $sfw_die_page);
 		$sfw_die_page = str_replace('{COOKIE_PREFIX}',  $cookie_prefix,                  $sfw_die_page);
 		$sfw_die_page = str_replace('{COOKIE_DOMAIN}',  $cookie_domain,                  $sfw_die_page);
-		$sfw_die_page = str_replace('{SFW_COOKIE}',     md5($this->blocked_ip.$api_key), $sfw_die_page);
-		$sfw_die_page = str_replace( "{SERVICE_ID}",    $apbct->data['service_id'],      $sfw_die_page );
-		$sfw_die_page = str_replace( "{HOST}",          $_SERVER['HTTP_HOST'],           $sfw_die_page );
+		$sfw_die_page = str_replace('{SFW_COOKIE}',     md5(current(end($this->blocked_ips)).$api_key), $sfw_die_page);
+		$sfw_die_page = str_replace('{SERVICE_ID}',     $apbct->data['service_id'],      $sfw_die_page);
+		$sfw_die_page = str_replace('{HOST}',           $_SERVER['HTTP_HOST'],           $sfw_die_page);
 				
 		if($this->debug){
-			$debug = '<h1>Networks</h1>'
-				. var_export($this->debug_networks, true)
+			$debug = '<h1>IP and Networks</h1>'
+				. var_export($this->all_ips, true)
 				. '<h1>Headers</h1>'
 				. var_export(apache_request_headers(), true)
 				. '<h1>REMOTE_ADDR</h1>'

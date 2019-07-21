@@ -25,3 +25,4 @@ $shipper_url = remove_query_arg(array('type', 'site'));
 
 	</div>
 </div>
+<?php echo Shipper_Helper_Assets::get_custom_hero_image_markup(); ?>
