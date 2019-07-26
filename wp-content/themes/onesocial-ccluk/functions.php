@@ -152,6 +152,8 @@ function ccluk_theme_scripts_styles()
        wp_enqueue_style( 'ccluk-members', $css.'/members.css', array( 'ccluk-custom' ) );
    }
 
+   wp_enqueue_style( 'ccluk-open-sans', 'https://fonts.googleapis.com/css?family=Open+Sans&display=swap' );
+
   /*
    * Scripts
    *
@@ -170,9 +172,6 @@ add_action( 'wp_enqueue_scripts', 'ccluk_theme_scripts_styles', 9999 );
 /****************************** CUSTOM FUNCTIONS ******************************/
 
 // Add your own custom functions here
-
-/* Add Action */
-//add_action( 'wp_head', 'boss_generate_option_css', 200 );
 
 function ccluk_login_styles() { ?>
     <style type="text/css">

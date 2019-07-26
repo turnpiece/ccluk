@@ -89,7 +89,7 @@ a:hover,
   padding: 6px 10px;
   padding: 0.6rem 1rem;
   color: #fff !important;
-  font-family: "Open Sans";
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
   height: auto;
   line-height: 1;
 }
@@ -1048,7 +1048,7 @@ body.page-template-homepage #main .section.join .section-content .list-item.form
 body.page-template-homepage #main .section.join.embed .section-content .list-item.form #mc_embed_signup, body.page-template-homepage #main .section.join.newsletter .section-content .list-item.form #mc_embed_signup, body.page-template-homepage #main .section.newsletter.embed .section-content .list-item.form #mc_embed_signup, body.page-template-homepage #main .section.newsletter.newsletter .section-content .list-item.form #mc_embed_signup, body.page-template-homepage #main .section.embed.embed .section-content .list-item.form #mc_embed_signup, body.page-template-homepage #main .section.embed.newsletter .section-content .list-item.form #mc_embed_signup {
   background: transparent;
   color: #fff;
-  font-family: "Open Sans";
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
   font-size: 21px;
 }
 
@@ -1076,7 +1076,7 @@ body.page-template-homepage #main .section.join.embed .section-content .list-ite
   padding: 6px 10px;
   padding: 0.6rem 1rem;
   color: #fff !important;
-  font-family: "Open Sans";
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
   height: auto;
   line-height: 1;
   float: right;

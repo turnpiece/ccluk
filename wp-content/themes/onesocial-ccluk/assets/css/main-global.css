@@ -133,7 +133,7 @@ This is the Global stylesheet, served to all devices.
  * Correct `block` display not defined for `main` in IE 11.
  */
 html, body {
-  font-family: "Open Sans";
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
 }
 
 article, aside, details, figcaption, figure, footer, header, main, menu, nav, section, summary {
