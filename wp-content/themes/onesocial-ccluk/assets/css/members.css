@@ -6275,6 +6275,28 @@ body.buddypress.members #buddypress #members-directory-form.dir-form div.item-li
   color: #fff;
 }
 
+/*--------------------------------------------------------------
+9.4 - Object Items
+--------------------------------------------------------------*/
+body.bp-user .page-right-sidebar .entry-header, body.single-item.groups .page-right-sidebar .entry-header {
+  width: 75%;
+}
+
+body.bp-user .entry-header {
+  margin-bottom: 0;
+}
+
+body.single-item.groups .entry-header {
+  margin-bottom: 15px;
+}
+
+body.activity-permalink .entry-header {
+  float: none;
+  width: 100%;
+  margin-bottom: 24px;
+  display: none;
+}
+
 /*----------------------------------------------------------------
 >>> BBPRESS
 ----------------------------------------------------------------*/
