@@ -148,6 +148,7 @@ function ccluk_theme_scripts_styles()
    wp_enqueue_style( 'ccluk-custom', $css.'/custom.css', array( 'onesocial-main-global' ) );
 
    if (is_user_logged_in()) {
+       // styles for logged in members
        wp_enqueue_style( 'ccluk-members', $css.'/members.css', array( 'ccluk-custom' ) );
    }
 
