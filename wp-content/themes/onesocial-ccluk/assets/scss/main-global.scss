@@ -635,6 +635,17 @@ td:last-child {
 /**
  * Paragraphs
  */
+
+.single-post .entry-content,
+.archive .entry-content,
+.default-page .entry-content,
+.entry-summary,
+.comment-content,
+#respond form textarea,
+.bb-comment-author {
+     font-size: 20px;
+}
+
 /**
  * Not strictly a paragraph, but probably doesn't need its own section.
  */
