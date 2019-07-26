@@ -1,0 +1,9 @@
+.tooltips-pro-how-to-each-bar{cursor:pointer}
+.postbox.tooltips-pro-how-to-each-bar{margin-bottom:0!important}
+.tooltips-pro-how-to-each-bar span
+{
+font-size:32px;color:#056;display:inline-block;position:relative;left:0;top:2px;margin-right:12px;margin-left:8px;float:left
+}
+.tooltips-pro-how-to-each-bar .hndle,
+.tooltips-pro-how-to-each-bar .hndle
+{border-bottom:0 solid #eee!important}

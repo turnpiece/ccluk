@@ -1,0 +1,50 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: plugin = buddypress-members-only/buddypress-members-only.php\n"
+"Report-Msgid-Bugs-To: contact@tomas.zhu.bz\n"
+"POT-Creation-Date: 2016-10-07T06:34:42+00:00\n"
+"PO-Revision-Date: 2016-10-07T06:34:42+00:00\n"
+"Last-Translator: <contact@tomas.zhu.bz>\n"
+"Language-Team: <contact@tomas.zhu.bz>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1\n"
+"X-Poedit-Language: en_US\n"
+"X-Poedit-Country: en_US\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: buddypress-members-only.php:46  buddypress-members-only.php:47
+#, php-format
+msgid "Buddypress Members Only"
+msgstr ""
+
+#: buddypress-members-only.php:77
+#, php-format
+msgid "Your changes has been saved."
+msgstr ""
+
+#: buddypress-members-only.php:101
+#, php-format
+msgid "Option Panel:"
+msgstr ""
+
+#: buddypress-members-only.php:112
+#, php-format
+msgid "Register Page URL:"
+msgstr ""
+
+#: buddypress-members-only.php:123
+#, php-format
+msgid "Opened Page URLs:"
+msgstr ""
+
+#: buddypress-members-only.php:131
+#, php-format
+msgid "Enter one URL per line please."
+msgstr "Enter one URL per line please"
+
+#: buddypress-members-only.php:132
+#, php-format
+msgid "These pages will opened for guest and guest will not be directed to register page."
+msgstr ""
