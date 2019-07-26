@@ -139,6 +139,10 @@ This is the Global stylesheet, served to all devices.
  * Correct `block` display not defined for `main` in IE 11.
  */
 
+ html, body {
+     font-family: $font-default;
+ }
+
 article, aside, details, figcaption, figure, footer, header, main, menu, nav, section, summary {
   display: block;
 }
@@ -4540,28 +4544,6 @@ p#item-desc {
 #secondary div.generic-button {
   margin: 10px 10px 0 0;
   display: inline-block;
-}
-
-/*--------------------------------------------------------------
-9.4 - Object Items
---------------------------------------------------------------*/
-
-body {
-  &.bp-user .page-right-sidebar .entry-header, &.single-item.groups .page-right-sidebar .entry-header {
-    width: 75%;
-  }
-  &.bp-user .entry-header {
-    margin-bottom: 0;
-  }
-  &.single-item.groups .entry-header {
-    margin-bottom: 15px;
-  }
-  &.activity-permalink .entry-header {
-    float: none;
-    width: 100%;
-    margin-bottom: 24px;
-    display: none;
-  }
 }
 
 /*--------------------------------------------------------------

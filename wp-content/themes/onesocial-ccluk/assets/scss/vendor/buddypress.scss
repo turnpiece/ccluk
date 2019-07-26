@@ -6363,3 +6363,25 @@ body.buddypress {
 		}
 	}
 }
+
+/*--------------------------------------------------------------
+9.4 - Object Items
+--------------------------------------------------------------*/
+
+body {
+  &.bp-user .page-right-sidebar .entry-header, &.single-item.groups .page-right-sidebar .entry-header {
+    width: 75%;
+  }
+  &.bp-user .entry-header {
+    margin-bottom: 0;
+  }
+  &.single-item.groups .entry-header {
+    margin-bottom: 15px;
+  }
+  &.activity-permalink .entry-header {
+    float: none;
+    width: 100%;
+    margin-bottom: 24px;
+    display: none;
+  }
+}
