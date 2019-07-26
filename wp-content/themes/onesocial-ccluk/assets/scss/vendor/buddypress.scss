@@ -1543,6 +1543,10 @@ label[for="groupblog-create-new-no"] {
   }
 }
 
+#main #buddypress .bb-member-quick-link-wrapper .action .generic-button a:hover {
+  box-shadow: none;
+}
+
 #buddypress .inner-avatar-wrap div {
   &.generic-button a {
     &.add:after, &.request-membership:after {
@@ -1552,30 +1556,17 @@ label[for="groupblog-create-new-no"] {
   &.group-button .join-group:after, &.generic-button.not_friends a.add:after {
     display: none;
   }
-}
 
-#main #buddypress .bb-member-quick-link-wrapper .action .generic-button a:hover {
-  box-shadow: none;
-}
-
-#buddypress {
   .group-members-results, .member-friends-results {
     clear: both;
     margin-top: 10px;
   }
+  .dir-list ul.item-list .item-title a:hover {
+    color: $green;
+  }
 }
 
 .dir-header {
-  font-size: 70px;
-  margin-bottom: 60px;
-  /*margin-top: 70px;*/
-  text-align: center;
-  span, h1 {
-    display: inline-block;
-    font-size: inherit;
-    line-height: 1.3;
-    margin: 0;
-  }
   .bb-count {
     color: $green;
     float: left;
@@ -1602,6 +1593,17 @@ label[for="groupblog-create-new-no"] {
   top: 44px;
   width: 32px;
   z-index: 2;
+
+  > span {
+      color: rgba(0, 0, 0, 0.3);
+      font-size: 10px;
+      padding-left: 42px;
+      text-transform: uppercase;
+      visibility: hidden;
+  }
+  &:hover > span {
+      visibility: visible;
+  }
 }
 
 .bb-icon.bb-icon {
@@ -1613,19 +1615,6 @@ label[for="groupblog-create-new-no"] {
   line-height: 28px;
   position: absolute;
   width: 32px;
-}
-
-.bb-meta {
-  > span {
-    color: rgba(0, 0, 0, 0.3);
-    font-size: 10px;
-    padding-left: 42px;
-    text-transform: uppercase;
-    visibility: hidden;
-  }
-  &:hover > span {
-    visibility: visible;
-  }
 }
 
 .bb-order-by {
@@ -1731,15 +1720,19 @@ div#sitewide-notice #message.info {
   clear: both;
 }
 
-#buddypress div#message.updated, div#sitewide-notice div#message.updated {
-  clear: both;
-}
-
-#buddypress div#message p, div#sitewide-notice div#message p {
-  display: block;
-  font-size: 12px;
-  font-weight: 400;
-  padding: 8px 10px;
+#buddypress,
+div#sitewide-notice {
+     div#message {
+         &.updated {
+             clear: both;
+         }
+         p {
+             display: block;
+             font-size: 12px;
+             font-weight: 400;
+             padding: 8px 10px;
+         }
+     }
 }
 
 /* Default alert-message */
