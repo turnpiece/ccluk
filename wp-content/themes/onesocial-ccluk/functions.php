@@ -415,6 +415,33 @@ add_action( 'bp_before_registration_submit_buttons', function() {
     </p>
 <?php } );
 
+function ccluk_the_user_link( $author_id ) {
+    echo ccluk_get_user_link( $author_id );
+}
+
+/**
+ *
+ * get user link
+ *
+ * @param int $author_id
+ * @return $string
+ *
+ */
+function ccluk_get_user_link( $author_id ) {
+
+    if ( is_user_logged_in() ) {
+        if ( function_exists( 'bp_core_get_userlink' ) ) {
+            $user_link = bp_core_get_userlink( $author_id, false, true );
+            if (function_exists( 'buddyboss_sap' ) )
+                return $user_link . 'blog';
+            else
+                return $user_link;
+        }
+    }
+
+    return get_author_posts_url( $author_id );
+}
+
 /**
  *
  * debug

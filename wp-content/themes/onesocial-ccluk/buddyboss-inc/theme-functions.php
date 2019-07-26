@@ -2396,15 +2396,8 @@ add_filter( 'heartbeat_received', 'buddyboss_notification_count_heartbeat', 10, 
 add_action( 'comment_form_logged_in_after', 'post_comment_form_avatar' );
 
 function post_comment_form_avatar() {
-	$user_link = get_author_posts_url( get_current_user_id() );
 
-	if ( function_exists( 'bp_core_get_userlink' ) && !function_exists( 'buddyboss_sap' ) ) {
-		$user_link = bp_core_get_userlink( get_current_user_id(), false, true );
-	}
-
-	if ( function_exists( 'bp_core_get_userlink' ) && function_exists( 'buddyboss_sap' ) ) {
-		$user_link = bp_core_get_userlink( get_current_user_id(), false, true ) . 'blog';
-	}
+	$user_link = ccluk_get_user_link( get_current_user_id() );
 
 	printf( '<span class="comment-avatar authors-avatar vcard"><a class="url fn n" href="%1$s" title="%2$s" rel="author">%3$s</a></span>', $user_link, esc_attr( sprintf( __( 'View all posts by %s', 'onesocial' ), get_the_author() ) ), get_avatar( get_current_user_id(), 85, '', get_the_author() ) );
 }
@@ -2825,15 +2818,7 @@ if ( !function_exists( 'buddyboss_comment' ) ) {
 						<header class="comment-meta comment-author vcard">
 							<?php
 							$author_id	 = $comment->user_id;
-							$user_link	 = get_author_posts_url( $author_id );
-
-							if ( function_exists( 'bp_core_get_userlink' ) && !function_exists( 'buddyboss_sap' ) ) {
-								$user_link = bp_core_get_userlink( $author_id, false, true );
-							}
-
-							if ( function_exists( 'bp_core_get_userlink' ) && function_exists( 'buddyboss_sap' ) ) {
-								$user_link = bp_core_get_userlink( $author_id, false, true ) . 'blog';
-							}
+							$user_link	 = ccluk_get_user_link( $author_id );
 
 							printf( '<span class="authors-avatar vcard"><a class="url fn n" href="%1$s" title="%2$s" rel="author">%3$s</a></span>', $user_link, esc_attr( sprintf( __( 'View all posts by %s', 'onesocial' ), get_the_author() ) ), get_avatar( $author_id, 85, '', get_the_author() ) );
 
