@@ -35,15 +35,7 @@
 
 					$author_name = get_the_author_meta( 'display_name', $author_id );
 
-					$user_link = get_author_posts_url( $author_id );
-
-					if ( function_exists( 'bp_core_get_userlink' ) && !function_exists( 'buddyboss_sap' ) ) {
-						$user_link = bp_core_get_userlink( $author_id, false, true );
-					}
-
-					if ( function_exists( 'bp_core_get_userlink' ) && function_exists( 'buddyboss_sap' ) ) {
-						$user_link = bp_core_get_userlink( $author_id, false, true ) . 'blog';
-					}
+					$user_link = ccluk_get_user_link( $author_id );
 
 					printf( '<span class="authors-avatar vcard table-cell"><a class="url fn n" href="%1$s" title="%2$s" rel="author">%3$s</a></span>', $user_link, esc_attr( sprintf( __( 'View all posts by %s', 'onesocial' ), $author_name ) ), get_avatar( $author_id, 85, '', $author_name ) );
 

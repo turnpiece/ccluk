@@ -15,19 +15,7 @@
 
 			<div class="author vcard">
 
-				<?php
-				$user_link = get_author_posts_url( get_the_author_meta( 'ID' ) );
-				
-				if( function_exists('bp_core_get_userlink') && !function_exists( 'buddyboss_sap' ) ) {
-					$user_link = bp_core_get_userlink( get_the_author_meta( 'ID' ), false, true );
-				}
-				
-				if( function_exists('bp_core_get_userlink') && function_exists( 'buddyboss_sap' ) ) {
-					$user_link = bp_core_get_userlink( get_the_author_meta( 'ID' ), false, true ) . 'blog';
-				}
-				?>
-
-				<a class="url fn n" href="<?php echo $user_link; ?>" title="<?php echo get_the_author(); ?>" rel="author">
+				<a class="url fn n" href="<?php ccluk_the_user_link( get_the_author_meta( 'ID' ) ) ?>" title="<?php echo get_the_author(); ?>" rel="author">
 					<?php echo get_avatar( get_the_author_meta( 'ID' ), 200, '', get_the_author() ); ?>
 					<span class="name"><?php echo get_the_author(); ?></span>
 				</a>
@@ -37,7 +25,7 @@
 						<time datetime="<?php echo get_the_date( 'c' ); ?>"><?php echo get_the_date( 'M j' ); ?></time>
 					</a>
 				</span>
-				
+
 				<div class="load-more-posts">
 					<i class="bb-icon-bars-f"></i>
 					<a href="<?php echo get_the_author_meta( 'ID' ); ?>" data-sort="recommended" data-target="target-<?php the_ID(); ?>" data-sequence="500"><?php _e( 'Most recommended stories', 'onesocial' ); ?></a>
@@ -50,7 +38,7 @@
 			<?php
 			if ( buddyboss_is_bp_active() ):
 				global $bp;
-				
+
 				$bio_field = onesocial_get_option( 'boss_bio_field' );
 				if ( $bio_field && function_exists( 'bp_get_profile_field_data' ) ) {
 					$bio = bp_get_profile_field_data( array( 'field' => $bio_field, 'user_id' => get_the_author_meta( 'ID' ) ) );
