@@ -1422,7 +1422,11 @@ img.wp-smiley, .rsswidget img {
 --------------------------------------------------------------*/
 
 .author .archive-header {
-  margin-bottom: 24px;
+    margin-bottom: 24px;
+
+    .author-avatar {
+        float: left;
+    }
 }
 
 .author-info {
@@ -3009,10 +3013,10 @@ single .entry-post-thumbnail:not(.category-thumb) img {
   }
   .entry-date {
     margin-top: 8px;
-    font-size: 11px;
-    color: #9b9b9b;
+    font-size: 12px;
+    color: $green;
     &:hover {
-      color: #666;
+      color: $blue;
     }
   }
   .load-more-posts.active .bb-icon-bars-f:before {

@@ -54,6 +54,12 @@ a:hover,
   background-color: #54ae68;
 }
 
+.avatar {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+
 .widget-area .widget h3.widgettitle,
 .widget-area .widget p,
 .widget-area .widget li,

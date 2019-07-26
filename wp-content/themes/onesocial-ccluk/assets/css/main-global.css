@@ -1342,6 +1342,10 @@ img.wp-smiley, .rsswidget img {
   margin-bottom: 24px;
 }
 
+.author .archive-header .author-avatar {
+  float: left;
+}
+
 .author-info {
   border-top: 1px solid #ededed;
   margin: 24px 0;
@@ -2916,12 +2920,12 @@ single .entry-post-thumbnail:not(.category-thumb) img {
 
 .post-author .entry-date {
   margin-top: 8px;
-  font-size: 11px;
-  color: #9b9b9b;
+  font-size: 12px;
+  color: #54ae68;
 }
 
 .post-author .entry-date:hover {
-  color: #666;
+  color: #22a7f0;
 }
 
 .post-author .load-more-posts.active .bb-icon-bars-f:before {
