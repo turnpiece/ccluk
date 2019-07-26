@@ -546,6 +546,10 @@ h1, h2, h3, h4, h5, h6, ul, ol, dd, table, p, address, pre, hr, figure, video {
     #HEADINGS
 \*------------------------------------*/
 
+h1, h2, h3, h4, h5, h6 {
+    font-family: $font-heading;
+}
+
 h1 {
   font-size: 30px;
   line-height: 1.85714;

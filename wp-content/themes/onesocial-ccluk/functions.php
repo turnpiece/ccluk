@@ -152,7 +152,9 @@ function ccluk_theme_scripts_styles()
        wp_enqueue_style( 'ccluk-members', $css.'/members.css', array( 'ccluk-custom' ) );
    }
 
+   // load fonts
    wp_enqueue_style( 'ccluk-open-sans', 'https://fonts.googleapis.com/css?family=Open+Sans&display=swap' );
+   wp_enqueue_style( 'ccluk-ubuntu', 'https://fonts.googleapis.com/css?family=Ubuntu&display=swap' );
 
   /*
    * Scripts
