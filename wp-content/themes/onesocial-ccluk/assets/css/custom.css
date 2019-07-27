@@ -63,6 +63,7 @@ a:hover,
 }
 
 .widget-area .widget h3.widgettitle {
+  font-family: Ubuntu, Arial, Helvetica, sans-serif;
   font-weight: 700;
 }
 
