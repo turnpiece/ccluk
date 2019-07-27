@@ -516,7 +516,9 @@ body .buddyboss-select {
       font-size: 14px;
     }
     input {
-      &[type="text"], &[type="password"], &[type="number"] {
+      &[type="text"],
+      &[type="password"],
+      &[type="number"] {
         background-color: $white;
         height: auto;
         padding: 12px;
@@ -528,11 +530,14 @@ body .buddyboss-select {
       padding: 12px;
     }
   }
-  .widget_search input[type="text"], .widget_display_search input[type="text"] {
-    background: transparent;
+  .widget_search,
+  .widget_display_search  {
+    input[type="text"] {
+        background: transparent;
+    }
   }
   .widget input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0 50px #fff inset;
+    -webkit-box-shadow: 0 0 0 50px $white inset;
   }
 }
 
@@ -1018,9 +1023,9 @@ body.activity-permalink #buddypress .activity-list li .activity-content {
     text-decoration: none;
   }
   div#item-header div#item-header-content span.highlight {
-    background-color: #77a076;
+    background-color: $green_bg;
     color: $white;
-    font-size: 12px;
+    font-size: $font-size-tiny;
     padding: 4px 7px;
     margin-right: 5px;
     text-decoration: none;
@@ -2010,7 +2015,7 @@ body #buddypress #activity-stream .acomment-content p {
 #buddypress ul.item-list li div.item-title {
   width: 100%;
   span {
-    font-size: 12px;
+    font-size: $font-size-tiny;
     font-weight: 400;
     font-style: italic;
     &.activity-read-more {
@@ -2108,7 +2113,7 @@ body.directory #buddypress ul.item-list li div.item-desc {
         text-align: center;
         height: 35px;
         line-height: 14px;
-        font-size: 12px;
+        font-size: $font-size-tiny;
         position: absolute;
       }
       &:active, &.current, &.selected {
@@ -2385,7 +2390,7 @@ body.bp-user a.button.sap-new-post-btn {
     }
   }
   &#whats-new-post-in-box {
-    font-size: 12px;
+    font-size: $font-size-tiny;
     line-height: 38px;
     width: 100%;
     display: -webkit-box;
@@ -2629,7 +2634,7 @@ div#whats-new-post-in-box {
 
 #buddypress div.messages-options-nav {
   text-align: left;
-  font-size: 12px;
+  font-size: $font-size-tiny;
   overflow: hidden;
   .buddyboss-select {
     float: left;
@@ -2747,7 +2752,7 @@ h1.big, .group-create .create-group-title {
 /* Group Settings */
 
 body.group-settings #buddypress #item-body {
-  font-size: 12px;
+  font-size: $font-size-tiny;
   form#group-settings-form {
     ul {
       padding: 15px 0 15px 37px;
@@ -2887,7 +2892,7 @@ body.group-settings #buddypress #item-body {
       &#members-list a.show-options {
         float: right;
         color: #999;
-        font-size: 12px;
+        font-size: $font-size-tiny;
         &:after {
           font-family: 'FontAwesome';
           font-weight: normal;
@@ -3300,7 +3305,7 @@ div {
   }
   &.bbp-topic-header, &.bbp-reply-header, &.bbp-forum-header {
     padding: 10px 20px;
-    font-size: 12px;
+    font-size: $font-size-tiny;
   }
 }
 
@@ -3377,7 +3382,7 @@ li.bbp-body .bb-reply-author {
 span.bbp-admin-links {
   float: left;
   a {
-    font-size: 12px;
+    font-size: $font-size-tiny;
   }
 }
 
@@ -3786,7 +3791,7 @@ div#wpadminbar li#wp-admin-bar-mycred-account {
   div.ab-sub-wrapper li a span.count {
     background-color: #717176;
     color: $white;
-    font-size: 12px;
+    font-size: $font-size-tiny;
     line-height: 1;
     padding: 1px 6px;
     margin-left: 1px;
@@ -3799,7 +3804,7 @@ div#wpadminbar li#wp-admin-bar-mycred-account {
 .left-btn #ab-pending-notifications {
   background-color: #717176;
   color: $white;
-  font-size: 12px;
+  font-size: $font-size-tiny;
   line-height: 1;
   padding: 1px 6px;
   margin-left: 1px;

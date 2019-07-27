@@ -421,7 +421,6 @@ body.template-front-page .site-content, body.single-attachment .site-content, bo
 .header-notifications .pop {
   background-color: #fff;
   border-top: 2px solid;
-  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
   font-size: 13px;
   left: 0;
   opacity: 0;
@@ -569,7 +568,8 @@ body.template-front-page .site-content, body.single-attachment .site-content, bo
   top: 2px;
 }
 
-#masthead .header-notifications a#user-messages:hover span.count:before, #masthead .header-notifications a:hover span.pending-count:before {
+#masthead .header-notifications a#user-messages:hover span.count:before,
+#masthead .header-notifications a:hover span.pending-count:before {
   color: #fff;
 }
 
@@ -599,7 +599,7 @@ body.template-front-page .site-content, body.single-attachment .site-content, bo
 }
 
 .site-header {
-  background-color: #fbfbfb;
+  background-color: #f9f9f9;
   position: relative;
   /*border-bottom: 1px solid rgba(0, 0, 0, 0.1);*/
 }
@@ -613,7 +613,10 @@ body.template-front-page .site-content, body.single-attachment .site-content, bo
   width: 100%;
 }
 
-.site-header #wp-admin-bar-root-default, .site-header #wp-admin-bar-search, .site-header #wp-admin-bar-my-account > a, .site-header #wp-admin-bar-bp-notifications {
+.site-header #wp-admin-bar-root-default,
+.site-header #wp-admin-bar-search,
+.site-header #wp-admin-bar-my-account > a,
+.site-header #wp-admin-bar-bp-notifications {
   display: none;
 }
 
@@ -699,7 +702,8 @@ body.template-front-page .site-content, body.single-attachment .site-content, bo
   content: "\f078";
 }
 
-header-aside, #logo-area {
+header-aside,
+#logo-area {
   display: table-cell;
   vertical-align: middle;
 }
@@ -910,7 +914,6 @@ header-aside, #logo-area {
 .header-account-login .pop {
   background-color: #fff;
   border-top: 2px solid;
-  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
   right: 0;
   opacity: 0;
   position: absolute;
@@ -1543,13 +1546,13 @@ article:hover a.to-top {
 }
 
 .group-join, .author-follow {
-  /* background: #fff; */
+  /* background: $white; */
   z-index: 2;
   position: relative;
 }
 
 .author-details .author-top {
-  /* background: #fff; */
+  /* background: $white; */
   z-index: 2;
   position: relative;
 }

@@ -510,7 +510,8 @@ body .buddyboss-select {
   padding: 12px;
 }
 
-.widget-area .widget_search input[type="text"], .widget-area .widget_display_search input[type="text"] {
+.widget-area .widget_search input[type="text"],
+.widget-area .widget_display_search input[type="text"] {
   background: transparent;
 }
 
@@ -1001,7 +1002,7 @@ body.activity-permalink #buddypress .activity-list li .activity-content {
 }
 
 #buddypress div#item-header div#item-header-content span.highlight {
-  background-color: #77a076;
+  background-color: rgba(84, 174, 104, 0.9);
   color: #fff;
   font-size: 12px;
   padding: 4px 7px;
