@@ -33,8 +33,6 @@
 				<?php
 				do_action( 'bp_before_member_body' );
 
-				bp_get_template_part( 'members/single/profile' );
-
 				if ( bp_is_user_profile() || !bp_current_component() ) :
 					bp_get_template_part( 'members/single/profile' );
 
