@@ -149,12 +149,12 @@ function ccluk_theme_scripts_styles()
    wp_enqueue_style( 'ccluk-custom', $css.'/custom.css', array( 'onesocial-main-global' ) );
 
    if (is_user_logged_in()) {
+       // styles for logged in members
        wp_enqueue_style( 'ccluk-members', $css.'/members.css', array( 'ccluk-custom' ) );
    }
 
    // load fonts
-   wp_enqueue_style( 'ccluk-open-sans', 'https://fonts.googleapis.com/css?family=Open+Sans&display=swap' );
-   wp_enqueue_style( 'ccluk-ubuntu', 'https://fonts.googleapis.com/css?family=Ubuntu:700&display=swap' );
+   wp_enqueue_style( 'ccluk-fonts', 'https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i|Ubuntu:700&display=swap' );
 
   /*
    * Scripts
@@ -416,48 +416,52 @@ add_action( 'bp_before_registration_submit_buttons', function() {
     </p>
 <?php } );
 
-// remove wordpress authentication
-remove_filter( 'authenticate', 'wp_authenticate_username_password', 20 );
-add_filter( 'authenticate', 'ccluk_authenticate', 10, 3 );
+function ccluk_the_user_link( $author_id ) {
+    echo ccluk_get_user_link( $author_id );
+}
 
-// custom authentication
-function ccluk_authenticate($user, $email, $password){
+/**
+ *
+ * get user link
+ *
+ * @param int $author_id
+ * @return $string
+ *
+ */
+function ccluk_get_user_link( $author_id ) {
 
-    //Check for empty fields
-    if(empty($email) || empty ($password)){
-        //create new error object and add errors to it.
-        $error = new WP_Error();
-
-        if(empty($email)){ //No email
-            $error->add('empty_username', __('<strong>ERROR</strong>: Email field is empty.'));
-        }
-        else if(!filter_var($email, FILTER_VALIDATE_EMAIL)){ //Invalid Email
-            $error->add('invalid_username', __('<strong>ERROR</strong>: Email is invalid.'));
-        }
-
-        if(empty($password)){ //No password
-            $error->add('empty_password', __('<strong>ERROR</strong>: Password field is empty.'));
-        }
-
-        return $error;
-    }
-
-    //Check if user exists in WordPress database
-    $user = get_user_by('email', $email);
-
-    //bad email
-    if(!$user){
-        $error = new WP_Error();
-        $error->add('invalid', __('<strong>ERROR</strong>: Either the email or password you entered is invalid.'));
-        return $error;
-    }
-    else{ //check password
-        if(!wp_check_password($password, $user->user_pass, $user->ID)){ //bad password
-            $error = new WP_Error();
-            $error->add('invalid', __('<strong>ERROR</strong>: Either the email or password you entered is invalid.'));
-            return $error;
-        }else{
-            return $user; //passed
+    if ( is_user_logged_in() ) {
+        if ( function_exists( 'bp_core_get_userlink' ) ) {
+            $user_link = bp_core_get_userlink( $author_id, false, true );
+            if (function_exists( 'buddyboss_sap' ) )
+                return $user_link . 'blog';
+            else
+                return $user_link;
         }
     }
+
+    return get_author_posts_url( $author_id );
+}
+
+/**
+ *
+ * debug
+ *
+ * @param string $message
+ *
+ */
+function ccluk_debug( $message ) {
+    if (CCLUK_DEBUGGING)
+        error_log( $message );
+}
+
+/**
+ *
+ * vardump
+ *
+ * @param array $array
+ *
+ */
+function ccluk_vardump( $array ) {
+    ccluk_debug( print_r( $array, true ) );
 }
