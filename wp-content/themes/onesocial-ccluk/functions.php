@@ -154,8 +154,7 @@ function ccluk_theme_scripts_styles()
    }
 
    // load fonts
-   wp_enqueue_style( 'ccluk-open-sans', 'https://fonts.googleapis.com/css?family=Open+Sans&display=swap' );
-   wp_enqueue_style( 'ccluk-ubuntu', 'https://fonts.googleapis.com/css?family=Ubuntu:700&display=swap' );
+   wp_enqueue_style( 'ccluk-fonts', 'https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i|Ubuntu:700&display=swap' );
 
   /*
    * Scripts
