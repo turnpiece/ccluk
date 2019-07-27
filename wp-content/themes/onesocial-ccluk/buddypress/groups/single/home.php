@@ -4,8 +4,10 @@
 <?php if ( bp_has_groups() ) : while ( bp_groups() ) : bp_the_group(); ?>
 
 			<?php
-			//output cover photo.
-			echo buddyboss_cover_photo( "group", bp_get_group_id() );
+			if (CCLUK_BB_COVER_PHOTO) {
+				//output cover photo.
+				echo buddyboss_cover_photo( "group", bp_get_group_id() );
+			}
 			?>
 
 			<div class="buddypress-content-wrap">

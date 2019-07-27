@@ -34,21 +34,10 @@
      .item-header-mobile {
        display: block;
      }
-       /*
-           .bb-group-avatar-wrap-mobile,
-           .bb-group-mobile-content {
-               display: block;
-           }
-
-           .bb-group-avatar-wrap-desktop {
-               display: none;
-           }
-       */
      .item-header-sidebar {
        display: none;
      }
-     .bb-group-avatar-wrap-mobile.bb-group-avatar-wrap-mobile {
-       /*        margin-top: 80px;*/
+     .bb-group-avatar-wrap-mobile {
        margin-right: 30px;
        float: left;
      }
@@ -81,36 +70,25 @@
        color: inherit;
        text-shadow: 0 0 0;
      }
-     .boss-group-header .group-header-content {
-       max-height: 160px;
-     }
      #item-title-area {
        h1 {
          font-size: 26px;
          margin: 0;
        }
-       .group-header-wrap {
-         /*        display: -webkit-box;
-                 display: -webkit-flex;
-                 display: -ms-flexbox;
-                 display: flex;*/
-       }
-     }
-
-     .bb-group-mobile-content {
-       display: block;
-       overflow: hidden;
-     }
-     .boss-group-header .group-header-content {
-       margin-top: 80px;
-       margin-bottom: 20px;
      }
      .bb-group-mobile-content {
-       width: -moz-calc(100% - 221px);
-       width: -webkit-calc(100% - 221px);
-       width: -o-calc(100% - 221px);
-       width: calc(100% - 221px);
-       float: right;
+         display: block;
+         overflow: hidden;
+         width: -moz-calc(100% - 221px);
+         width: -webkit-calc(100% - 221px);
+         width: -o-calc(100% - 221px);
+         width: calc(100% - 221px);
+         float: right;
+         #item-meta {
+             p {
+                 color: $green;
+             }
+         }
      }
      .boss-group-header {
        .group-header-content {
@@ -128,11 +106,10 @@
          width: 100%;
        }
      }
-     .bb-group-avatar-wrap-mobile.bb-group-avatar-wrap-mobile {
+     .bb-group-avatar-wrap-mobile {
        display: block;
-       margin-top: 80px;
      }
-     
+
      .entry-title,
      h2 {
          font-size: $font-size-mid;

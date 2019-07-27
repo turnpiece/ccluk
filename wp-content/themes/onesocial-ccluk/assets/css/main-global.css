@@ -488,11 +488,18 @@ img {
   opacity: 1;
 }
 
-#main-wrap #buddyboss-media-preview-inner img, #main-wrap .buddyboss-comment-media-preview-inner img, #main-wrap .sap-editor-area-wrapper img {
+#main-wrap #buddyboss-media-preview-inner img,
+#main-wrap .buddyboss-comment-media-preview-inner img,
+#main-wrap .sap-editor-area-wrapper img {
   opacity: 1;
 }
 
-#buddyboss-bbpress-media-bulk-uploader-wrapper img, #buddyboss-comment-media-bulk-uploader-wrapper img, #buddyboss-media-bulk-uploader-wrapper img, #buddyboss-media-preview-inner img, .buddyboss-bbpress-media-preview-inner img, .buddyboss-comment-media-preview-inner img {
+#buddyboss-bbpress-media-bulk-uploader-wrapper img,
+#buddyboss-comment-media-bulk-uploader-wrapper img,
+#buddyboss-media-bulk-uploader-wrapper img,
+#buddyboss-media-preview-inner img,
+.buddyboss-bbpress-media-preview-inner img,
+.buddyboss-comment-media-preview-inner img {
   margin-bottom: 5px;
 }
 
@@ -504,44 +511,106 @@ h1, h2, h3, h4, h5, h6, ul, ol, dd, table, p, address, pre, hr, figure, video {
   padding: 0;
 }
 
-/**
- * Headings
- */
+html,
+#profile-nav span,
+#wp-admin-bar-shortcode-secondary .alert,
+.header-notifications a.notification-link span,
+.site-header #wp-admin-bar-shortcode-secondary .alert,
+.header-notifications a.notification-link span,
+.entry-meta .comments-link a,
+.entry-meta, .activity,
+.item-list-tabs,
+#whats-new-options,
+#item-header-content,
+#buddypress div#message,
+#buddypress ul.item-list li div.item-desc,
+.generic-button, .bb-meta,
+#item-photos,
+.forum-titles,
+.sap-container,
+.bb-search-forums-label,
+.woocommerce-page.woocommerce-page .entry-content,
+.footer-style-2 .footer-inner-top,
+.footer-style-2 .footer-widget a {
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 17px;
+}
+
 /*------------------------------------*\
     #HEADINGS
 \*------------------------------------*/
-h1, h2, h3, h4, h5, h6 {
-  font-family: "Ubuntu", Arial, Helvetica, sans-serif;
+h1, h2, h3, h4, .site-header .site-title {
+  font-family: Ubuntu, Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-style: normal;
 }
 
 h1 {
-  font-size: 30px;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 36px;
   line-height: 1.85714;
 }
 
-h2 {
-  font-size: 26px;
+h2,
+.sap-editor-area-wrapper .sap-editable-title {
+  font-family: Ubuntu, Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 30px;
   line-height: 1.3;
 }
 
 h3 {
-  font-size: 22px;
+  font-size: 26px;
   line-height: 1.08333;
 }
 
 h4 {
-  font-size: 18px;
+  font-size: 24px;
   line-height: 1.3;
 }
 
 h5 {
-  font-size: 16px;
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 20px;
   line-height: 1.44444;
 }
 
 h6 {
-  font-size: 14px;
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 18px;
   line-height: 1.625;
+}
+
+.site-header .site-title {
+  font-size: 28px;
+}
+
+.post-author-info .author-name a {
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 20px;
+}
+
+.single-post .entry-content,
+.archive .entry-content,
+.default-page .entry-content,
+.entry-summary,
+.comment-content,
+#respond form textarea,
+.bb-comment-author {
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
 }
 
 /**
@@ -593,6 +662,16 @@ td:last-child {
 /**
  * Paragraphs
  */
+.single-post .entry-content,
+.archive .entry-content,
+.default-page .entry-content,
+.entry-summary,
+.comment-content,
+#respond form textarea,
+.bb-comment-author {
+  font-size: 20px;
+}
+
 /**
  * Not strictly a paragraph, but probably doesn't need its own section.
  */
@@ -3315,7 +3394,7 @@ article.format-aside blockquote:last-child, article.format-aside p:last-child {
 }
 
 .post-author-info .entry-meta {
-  color: #929292;
+  color: #838383;
   font-size: 12px;
   display: block;
 }
@@ -3415,7 +3494,8 @@ article.format-aside blockquote:last-child, article.format-aside p:last-child {
   position: relative;
 }
 
-.a2a_dd.addtoany_no_icon:before, .helper-links .bb-helper-icon {
+.a2a_dd.addtoany_no_icon:before,
+.helper-links .bb-helper-icon {
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 50%;
   color: #333;
@@ -3443,12 +3523,12 @@ article.format-aside blockquote:last-child, article.format-aside p:last-child {
 .helper-links span {
   color: #9b9b9b;
   display: block;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .a2a_mini_services a.a2a_i {
   color: rgba(0, 0, 0, 0.5) !important;
-  font-size: 13px;
+  font-size: 12px;
   width: 42%;
 }
 
@@ -4055,7 +4135,7 @@ body article.error404 .entry-header {
 }
 
 #posts-carousel footer small a {
-  color: #929292;
+  color: #838383;
 }
 
 /*----------------------------------------------------------------
@@ -4065,7 +4145,7 @@ body article.error404 .entry-header {
   /*width: 100%;*/
 }
 
-.search #buddypress div:not(#item-nav) > .dir-form div.item-list-tabs {
+.search #buddypress div:not(#item-nav):not(#mobile-item-nav) > .dir-form div.item-list-tabs {
   margin-bottom: 90px;
 }
 
@@ -4741,7 +4821,7 @@ We need to hide these elements from displaying on non-legacy pages. */
   border: 1px solid rgba(0, 0, 0, 0.1);
   margin-left: 10px;
   padding: 4px 10px;
-  color: #929292;
+  color: #838383;
   display: inline-block;
 }
 
@@ -5616,38 +5696,8 @@ img {
   visibility: hidden;
 }
 
-@media screen and (max-width: 622px) {
-  .popup-content .col {
-    float: none;
-    padding: 0;
-    float: none;
-    clear: both;
-    width: 100%;
-  }
-  .popup-content .col.with-plugin {
-    padding-right: 0;
-    padding-top: 40px;
-  }
-  .bb-group-avatar-wrap-mobile.bb-group-avatar-wrap-mobile {
-    float: none;
-    text-align: center;
-    margin-right: 0;
-  }
-  .boss-group-header .group-header-content {
-    margin-top: 20px;
-    width: 100%;
-    margin-bottom: 0;
-  }
-  .bb-group-mobile-content {
-    width: 100%;
-  }
-  #item-title-area h1, .single-item.groups #buddypress #item-header span.activity {
-    color: inherit;
-    text-shadow: 0 0 0;
-  }
-}
-
-.ac-reply-content .buddyboss-bbpress-media-add-photo-button, .ac-reply-content .buddyboss-comment-media-add-photo-button {
+.ac-reply-content .buddyboss-bbpress-media-add-photo-button,
+.ac-reply-content .buddyboss-comment-media-add-photo-button {
   padding-top: 7px;
   padding-bottom: 4px;
 }
@@ -5974,10 +6024,6 @@ a.liked:hover, a.liked:active, a.liked:focus, a.liked span.sl-count {
   border-width: 4px;
   border-style: solid;
   border-color: #ecf073;
-}
-
-.is-mobile:not(.bm-vendor-shop) #sitewide-notice {
-  padding-top: 55px;
 }
 
 #sitewide-notice:empty {

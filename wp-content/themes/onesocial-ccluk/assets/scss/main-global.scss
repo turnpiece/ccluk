@@ -453,7 +453,7 @@ html {
   /* [5] */
   -webkit-text-size-adjust: 100%;
   /* [5] */
-  color: #333;
+  color: $dark;
   /* [additional] */
 }
 
@@ -521,13 +521,24 @@ img {
 }
 
 #main-wrap {
-  #buddyboss-media-preview-inner img, .buddyboss-comment-media-preview-inner img, .sap-editor-area-wrapper img {
-    opacity: 1;
+  #buddyboss-media-preview-inner,
+  .buddyboss-comment-media-preview-inner,
+  .sap-editor-area-wrapper {
+      img {
+          opacity: 1;
+      }
   }
 }
 
-#buddyboss-bbpress-media-bulk-uploader-wrapper img, #buddyboss-comment-media-bulk-uploader-wrapper img, #buddyboss-media-bulk-uploader-wrapper img, #buddyboss-media-preview-inner img, .buddyboss-bbpress-media-preview-inner img, .buddyboss-comment-media-preview-inner img {
-  margin-bottom: 5px;
+#buddyboss-bbpress-media-bulk-uploader-wrapper,
+#buddyboss-comment-media-bulk-uploader-wrapper,
+#buddyboss-media-bulk-uploader-wrapper,
+#buddyboss-media-preview-inner,
+.buddyboss-bbpress-media-preview-inner,
+.buddyboss-comment-media-preview-inner {
+    img {
+        margin-bottom: 5px;
+    }
 }
 
 /*--------------------------------------------------------------
@@ -539,45 +550,102 @@ h1, h2, h3, h4, h5, h6, ul, ol, dd, table, p, address, pre, hr, figure, video {
   padding: 0;
 }
 
-/**
- * Headings
- */
+html,
+#profile-nav span,
+#wp-admin-bar-shortcode-secondary .alert,
+.header-notifications a.notification-link span,
+.site-header #wp-admin-bar-shortcode-secondary .alert,
+.header-notifications a.notification-link span,
+.entry-meta .comments-link a,
+.entry-meta, .activity,
+.item-list-tabs,
+#whats-new-options,
+#item-header-content,
+#buddypress div#message,
+#buddypress ul.item-list li div.item-desc,
+.generic-button, .bb-meta,
+#item-photos,
+.forum-titles,
+.sap-container,
+.bb-search-forums-label,
+.woocommerce-page.woocommerce-page .entry-content,
+.footer-style-2 .footer-inner-top,
+.footer-style-2 .footer-widget a{
+    font-family: $font-default;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 17px;
+}
+
 /*------------------------------------*\
     #HEADINGS
 \*------------------------------------*/
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, .site-header .site-title {
     font-family: $font-heading;
+    font-weight: 700;
+    font-style: normal;
 }
 
-h1 {
-  font-size: 30px;
-  line-height: 1.85714;
+h1{
+    font-weight: 700;
+    font-style:normal;
+    font-size: 36px;
+    line-height: 1.85714;
+}
+h2,
+.sap-editor-area-wrapper .sap-editable-title{
+    font-family: $font-heading;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 30px;
+    line-height: 1.3;
+}
+h3{
+    font-size: 26px;
+    line-height: 1.08333;
+}
+h4{
+    font-size: 24px;
+    line-height: 1.3;
+}
+h5{
+    font-family: $font-default;
+    font-weight: 700;
+    font-style:normal;
+    font-size: 20px;
+    line-height: 1.44444;
+}
+h6{
+    font-family: $font-default;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 18px;
+    line-height: 1.625;
 }
 
-h2 {
-  font-size: 26px;
-  line-height: 1.3;
+.site-header .site-title{
+    font-size: 28px;
 }
 
-h3 {
-  font-size: 22px;
-  line-height: 1.08333;
+.post-author-info .author-name a {
+    font-family: $font-default;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 20px;
 }
 
-h4 {
-  font-size: 18px;
-  line-height: 1.3;
-}
-
-h5 {
-  font-size: 16px;
-  line-height: 1.44444;
-}
-
-h6 {
-  font-size: 14px;
-  line-height: 1.625;
+.single-post .entry-content,
+.archive .entry-content,
+.default-page .entry-content,
+.entry-summary,
+.comment-content,
+#respond form textarea,
+.bb-comment-author{
+    font-family: $font-default;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 20px;
 }
 
 /**
@@ -635,6 +703,17 @@ td:last-child {
 /**
  * Paragraphs
  */
+
+.single-post .entry-content,
+.archive .entry-content,
+.default-page .entry-content,
+.entry-summary,
+.comment-content,
+#respond form textarea,
+.bb-comment-author {
+     font-size: 20px;
+}
+
 /**
  * Not strictly a paragraph, but probably doesn't need its own section.
  */
@@ -888,7 +967,7 @@ input {
     span:before, label:before, strong:before {
       border: 2px solid $white;
       padding: 3px;
-      background-color: #333;
+      background-color: $dark;
     }
   }
 }
@@ -920,7 +999,7 @@ button {
   border: none;
   color: $white;
   cursor: pointer;
-  font-size: 12px;
+  font-size: $font-size-tiny;
   line-height: 20px;
   text-align: center;
   text-decoration: none;
@@ -941,7 +1020,7 @@ input {
     border: none;
     color: $white;
     cursor: pointer;
-    font-size: 12px;
+    font-size: $font-size-tiny;
     line-height: 20px;
     text-align: center;
     text-decoration: none;
@@ -962,7 +1041,7 @@ article.post-password-required input[type=submit], li.bypostauthor cite span, a.
   border: none;
   color: $white;
   cursor: pointer;
-  font-size: 12px;
+  font-size: $font-size-tiny;
   line-height: 20px;
   text-align: center;
   text-decoration: none;
@@ -985,7 +1064,7 @@ a.bp-title-button {
   border: none;
   color: $white;
   cursor: pointer;
-  font-size: 12px;
+  font-size: $font-size-tiny;
   line-height: 20px;
   text-align: center;
   text-decoration: none;
@@ -1236,7 +1315,7 @@ embed, iframe, object, video {
   padding: 4px;
   .wp-caption-text {
     font-style: italic;
-    font-size: 12px;
+    font-size: $font-size-tiny;
     line-height: 2;
     color: #757575;
   }
@@ -1244,7 +1323,7 @@ embed, iframe, object, video {
 
 .gallery-caption, .entry-caption {
   font-style: italic;
-  font-size: 12px;
+  font-size: $font-size-tiny;
   line-height: 2;
   color: #757575;
 }
@@ -1500,7 +1579,7 @@ img.wp-smiley, .rsswidget img {
     content: "";
   }
   &:after {
-    background-color: #333;
+    background-color: $dark;
     border-radius: 2px;
     color: $white;
     content: attr(data-tooltip);
@@ -1564,7 +1643,7 @@ img.wp-smiley, .rsswidget img {
     }
     &:before {
       border-bottom-color: transparent;
-      border-top-color: #333;
+      border-top-color: $dark;
       left: 3px;
       margin-top: 0;
       top: -1px;
@@ -1579,7 +1658,7 @@ img.wp-smiley, .rsswidget img {
     margin-top: -12px;
     margin-bottom: 0;
     border-top-color: transparent;
-    border-bottom-color: #333;
+    border-bottom-color: $dark;
   }
   &:hover {
     &:before, &:after {
@@ -1887,7 +1966,7 @@ section[role="banner"] {
 
 .widget .item-meta {
   color: #999;
-  font-size: 12px;
+  font-size: $font-size-tiny;
   margin-top: 3px;
   overflow: hidden;
 }
@@ -1936,8 +2015,8 @@ section[role="banner"] {
     margin-bottom: 10px;
     background-color: $white;
     &:hover {
-      color: #333;
-      border: 1px solid #333;
+      color: $dark;
+      border: 1px solid $dark;
     }
   }
 }
@@ -2194,7 +2273,7 @@ section[role="banner"] {
 
 footer[role="contentinfo"] {
   clear: both;
-  font-size: 12px;
+  font-size: $font-size-tiny;
   line-height: 2;
   width: 100%;
   margin-left: auto;
@@ -2253,7 +2332,7 @@ div {
     }
   }
   .widget .item-options a {
-    font-size: 12px;
+    font-size: $font-size-tiny;
     margin-right: 4px;
     padding: 4px 8px;
   }
@@ -2454,7 +2533,7 @@ div {
 
 .widget span.activity {
   color: rgba(0, 0, 0, 0.3);
-  font-size: 12px;
+  font-size: $font-size-tiny;
 }
 
 .footer-inner .item-title {
@@ -2515,7 +2594,7 @@ div {
         margin-right: 17px;
         display: inline-block;
         text-align: center;
-        color: #333;
+        color: $dark;
       }
       i {
         font-style: normal;
@@ -2670,7 +2749,7 @@ div {
 --------------------------------------------------------------*/
 
 .bb-side-icon {
-  background: #333;
+  background: $dark;
   display: block;
   height: 2px;
   position: relative;
@@ -2683,7 +2762,7 @@ div {
     left: 0;
     width: 100%;
     height: 2px;
-    background-color: #333;
+    background-color: $dark;
     content: ' ';
   }
   &:before {
@@ -2746,7 +2825,7 @@ div {
 .entry-header {
   .entry-title a {
     text-decoration: none;
-    color: #333;
+    color: $dark;
     &:hover {
       color: $green;
     }
@@ -2765,7 +2844,7 @@ div {
     }
   }
   &.has-image .entry-title a.post-edit-link {
-    font-size: 12px;
+    font-size: $font-size-tiny;
   }
   .entry-title a.post-edit-link:hover {
     color: inherit;
@@ -3039,7 +3118,7 @@ single .entry-post-thumbnail:not(.category-thumb) img {
 
 .author-details {
   .author-middle .author-bio {
-    color: #333;
+    color: $dark;
     font-size: 14px;
     font-weight: 400;
     line-height: 1.3;
@@ -3060,7 +3139,7 @@ single .entry-post-thumbnail:not(.category-thumb) img {
       }
     }
     li span {
-      color: #333;
+      color: $dark;
       margin-right: 7px;
       font-size: 14px;
     }
@@ -3101,7 +3180,7 @@ single .entry-post-thumbnail:not(.category-thumb) img {
     content: "+";
     display: block;
     font-family: inherit;
-    font-size: 12px;
+    font-size: $font-size-tiny;
     font-weight: 700;
     height: 14px;
     line-height: 9px;
@@ -3129,7 +3208,7 @@ single .entry-post-thumbnail:not(.category-thumb) img {
 
 .archive-meta {
   color: #757575;
-  font-size: 12px;
+  font-size: $font-size-tiny;
   line-height: 2;
   margin-top: 22px;
 }
@@ -3147,7 +3226,7 @@ single .entry-post-thumbnail:not(.category-thumb) img {
 }
 
 .entry-meta a.read-more:hover {
-  color: #333;
+  color: $dark;
 }
 
 .sep {
@@ -3231,7 +3310,7 @@ single .entry-post-thumbnail:not(.category-thumb) img {
           }
         }
         &:nth-child(2) {
-          background-color: #333;
+          background-color: $dark;
           color: $white;
           font-size: 19px;
           font-weight: 700;
@@ -3367,7 +3446,7 @@ article.format-aside {
     position: relative;
   }
   .author-name a {
-    color: #333;
+    color: $dark;
     font-size: 18px;
     margin-bottom: 6px;
     display: inline-block;
@@ -3377,13 +3456,13 @@ article.format-aside {
     }
   }
   .author-bio {
-    color: #333;
+    color: $dark;
     font-size: 15px;
     margin-bottom: 15px;
   }
   .entry-meta {
-    color: #929292;
-    font-size: 12px;
+    color: $gray;
+    font-size: $font-size-tiny;
     display: block;
     a:not(.entry-date) {
       color: $green;
@@ -3474,10 +3553,11 @@ article.format-aside {
   position: relative;
 }
 
-.a2a_dd.addtoany_no_icon:before, .helper-links .bb-helper-icon {
+.a2a_dd.addtoany_no_icon:before,
+.helper-links .bb-helper-icon {
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 50%;
-  color: #333;
+  color: $dark;
   display: inline-block;
   font-size: 21px;
   height: 44px;
@@ -3502,12 +3582,12 @@ article.format-aside {
 .helper-links span {
   color: #9b9b9b;
   display: block;
-  font-size: 10px;
+  font-size: $font-size-tiny;
 }
 
 .a2a_mini_services a.a2a_i {
   color: rgba(0, 0, 0, 0.5) !important;
-  font-size: 13px;
+  font-size: $font-size-tiny;
   width: 42%;
 }
 
@@ -3612,7 +3692,7 @@ article {
     margin: 0;
   }
   h2 {
-    font-size: 12px;
+    font-size: $font-size-tiny;
     font-weight: 400;
     line-height: 2;
     margin: 0;
@@ -3680,14 +3760,14 @@ article {
     time {
       line-height: 1.7;
       text-decoration: none;
-      font-size: 12px;
+      font-size: $font-size-tiny;
       color: #999;
     }
     a {
       text-decoration: none;
       color: #5e5e5e;
       &:hover {
-        color: #333;
+        color: $dark;
       }
     }
     cite a {
@@ -3700,7 +3780,7 @@ article {
       top: 0;
       right: 0;
       padding: 6px 12px;
-      font-size: 12px;
+      font-size: $font-size-tiny;
       font-weight: 400;
       color: $white;
       background-color: #0088d0;
@@ -3796,7 +3876,7 @@ a {
   }
   #cancel-comment-reply-link {
     color: #f14e56;
-    font-size: 12px;
+    font-size: $font-size-tiny;
     font-weight: 400;
     position: relative;
     z-index: 2;
@@ -3825,20 +3905,20 @@ a {
       line-height: 1.71429;
     }
     input[type="text"] {
-      font-size: 12px;
+      font-size: $font-size-tiny;
       line-height: 1.7;
       padding: 10px;
       width: 100%;
     }
     textarea {
-      font-size: 12px;
+      font-size: $font-size-tiny;
       line-height: 1.7;
       padding: 10px;
       width: 100%;
       padding: 15px 0;
       border: none;
       font-size: 18px;
-      color: #333;
+      color: $dark;
       min-height: 30px;
       margin: 5px 0 0;
       resize: none;
@@ -3867,7 +3947,7 @@ body.logged-in #respond .comment-form-comment {
 
 #respond form p.form-allowed-tags {
   margin: 0;
-  font-size: 12px;
+  font-size: $font-size-tiny;
   line-height: 2;
   color: #5e5e5e;
 }
@@ -3972,7 +4052,7 @@ body article.error404 .entry-header {
   .entry-header p {
     font-size: 19px;
     font-weight: 700;
-    color: #333;
+    color: $dark;
     text-align: center;
     padding: 0 24px;
   }
@@ -4015,8 +4095,8 @@ body article.error404 .entry-header {
     line-height: 1;
     margin-top: -3px;
     a {
-      font-size: 12px;
-      color: #333;
+      font-size: $font-size-tiny;
+      color: $dark;
       text-align: right;
       margin-left: 10px;
     }
@@ -4037,7 +4117,7 @@ body article.error404 .entry-header {
     margin-top: 0;
     a {
       font-size: 26px;
-      color: #333;
+      color: $dark;
       line-height: 1;
       &:hover {
         color: $green;
@@ -4074,14 +4154,14 @@ body article.error404 .entry-header {
     a {
       color: $green;
       &:hover {
-        color: #333;
+        color: $dark;
       }
     }
     small {
       display: block;
       margin-top: 10px;
       a {
-        color: #929292;
+        color: $gray;
       }
     }
   }
@@ -4095,7 +4175,7 @@ body article.error404 .entry-header {
   .site-content {
     /*width: 100%;*/
   }
-  #buddypress div:not(#item-nav) > .dir-form div.item-list-tabs {
+  #buddypress div:not(#item-nav):not(#mobile-item-nav) > .dir-form div.item-list-tabs {
     margin-bottom: 90px;
   }
 }
@@ -4300,7 +4380,7 @@ select[multiple="multiple"] {
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
   box-shadow: none;
-  color: #333;
+  color: $dark;
 }
 
 /*--------------------------------------------------------------
@@ -4587,7 +4667,7 @@ p#item-desc {
         text-decoration: none;
         color: $white;
         font-weight: 500;
-        background-color: #333;
+        background-color: $dark;
         border: 1px solid rgba(0, 0, 0, 0.1);
         border-radius: 0;
         font-size: 10px;
@@ -4652,7 +4732,7 @@ p#item-desc {
     text-decoration: none;
     color: $white;
     font-weight: 500;
-    background-color: #333;
+    background-color: $dark;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 0;
     font-size: 10px;
@@ -4781,7 +4861,7 @@ We need to hide these elements from displaying on non-legacy pages. */
   h3 {
     margin-bottom: 40px;
     font-family: inherit;
-    font-size: 12px;
+    font-size: $font-size-tiny;
   }
   a {
     text-transform: none;
@@ -4789,7 +4869,7 @@ We need to hide these elements from displaying on non-legacy pages. */
     border: 1px solid rgba(0, 0, 0, 0.1);
     margin-left: 10px;
     padding: 4px 10px;
-    color: #929292;
+    color: $gray;
     display: inline-block;
   }
 }
@@ -5089,7 +5169,7 @@ input#user_login {
 .boss-modal-form.popup-content {
   label {
     font-size: 16px;
-    color: #333;
+    color: $dark;
     display: block;
     font-weight: 600;
     margin: 0;
@@ -5106,7 +5186,7 @@ input#user_login {
   .description {
     text-align: left;
     font-size: 14px;
-    color: #333;
+    color: $dark;
     margin-top: -15px;
   }
 }
@@ -5552,11 +5632,11 @@ body #buddypress div.buddyboss-wall-form-wrapper #form_buddyboss-wall-privacy {
 
 body {
   #selectionSharerPopover:after {
-    background: #333;
+    background: $dark;
     box-shadow: none;
   }
   #selectionSharerPopover-inner {
-    background: #333;
+    background: $dark;
     box-shadow: none;
     border-radius: 3px;
   }
@@ -5669,39 +5749,9 @@ img {
   }
 }
 
-@media screen and (max-width: 622px) {
-  .popup-content .col {
-    float: none;
-    padding: 0;
-    float: none;
-    clear: both;
-    width: 100%;
-    &.with-plugin {
-      padding-right: 0;
-      padding-top: 40px;
-    }
-  }
-  .bb-group-avatar-wrap-mobile.bb-group-avatar-wrap-mobile {
-    float: none;
-    text-align: center;
-    margin-right: 0;
-  }
-  .boss-group-header .group-header-content {
-    margin-top: 20px;
-    width: 100%;
-    margin-bottom: 0;
-  }
-  .bb-group-mobile-content {
-    width: 100%;
-  }
-  #item-title-area h1, .single-item.groups #buddypress #item-header span.activity {
-    color: inherit;
-    text-shadow: 0 0 0;
-  }
-}
-
 .ac-reply-content {
-  .buddyboss-bbpress-media-add-photo-button, .buddyboss-comment-media-add-photo-button {
+  .buddyboss-bbpress-media-add-photo-button,
+  .buddyboss-comment-media-add-photo-button {
     padding-top: 7px;
     padding-bottom: 4px;
   }
@@ -5842,7 +5892,7 @@ a.liked {
 .sl-icon {
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 50%;
-  color: #333;
+  color: $dark;
   display: inline-block;
   font-size: 20px;
   height: 44px;
@@ -5889,7 +5939,7 @@ a.liked {
   padding: 4px 20px;
   position: relative;
   vertical-align: middle;
-  font-size: 12px;
+  font-size: $font-size-tiny;
   line-height: 1.1;
   color: #9b9b9b;
   &:before {
@@ -5927,7 +5977,7 @@ a.liked {
 }
 
 .count-num {
-  color: #333;
+  color: $dark;
 }
 
 .sl-wrapper {
@@ -5980,7 +6030,7 @@ a.liked {
         font-weight: 300;
         line-height: 1.4;
         position: relative;
-        color: #333;
+        color: $dark;
       }
       &.active-test {
         opacity: 1;
@@ -6018,10 +6068,6 @@ a.liked {
       }
     }
   }
-}
-
-.is-mobile:not(.bm-vendor-shop) #sitewide-notice {
-  padding-top: 55px;
 }
 
 #sitewide-notice:empty {

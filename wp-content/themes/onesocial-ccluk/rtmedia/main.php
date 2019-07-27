@@ -23,12 +23,13 @@ if ( !empty( $_SERVER[ 'HTTP_X_REQUESTED_WITH' ] ) && strtolower( $_SERVER[ 'HTT
 		if ( bp_has_groups() ) {
 			while ( bp_groups() ) {
 				bp_the_group();
-				echo buddyboss_cover_photo( "group", bp_get_group_id() );
+				if (CCLUK_BB_COVER_PHOTO)
+					echo buddyboss_cover_photo( "group", bp_get_group_id() );
 			}
 		}
 	}
 	?>
-	
+
 	<?php if ( ! $rt_ajax_request ): ?>
 	    <div class="buddypress-content-wrap">
 			<section class="buddypress-content">
@@ -163,7 +164,7 @@ if ( !empty( $_SERVER[ 'HTTP_X_REQUESTED_WITH' ] ) && strtolower( $_SERVER[ 'HTT
 				}
 			}
 			?>
-								
+
 		<?php if ( ! $rt_ajax_request ): ?>
 			</section>
 		<?php endif; ?>
@@ -177,7 +178,7 @@ if ( !empty( $_SERVER[ 'HTTP_X_REQUESTED_WITH' ] ) && strtolower( $_SERVER[ 'HTT
 						<?php bp_get_template_part( 'members/single/member-header' ) ?>
 					</div><?php
 				}
-				
+
 				if( bp_is_group() ) { ?>
 					<div class="bb-group-avatar-wrap-desktop">
 
@@ -229,7 +230,7 @@ if ( !empty( $_SERVER[ 'HTTP_X_REQUESTED_WITH' ] ) && strtolower( $_SERVER[ 'HTT
 							<?php do_action( 'bp_group_header_actions' ); ?>
 
 						</div><!-- #item-buttons -->
-				
+
 					</div><?php
 				}
 
@@ -253,7 +254,7 @@ if ( !empty( $_SERVER[ 'HTTP_X_REQUESTED_WITH' ] ) && strtolower( $_SERVER[ 'HTT
 			</div>
 
 		<?php endif; ?>
-	
+
 	<?php if ( ! $rt_ajax_request ): ?>
 		</div>
 	<?php endif; ?>

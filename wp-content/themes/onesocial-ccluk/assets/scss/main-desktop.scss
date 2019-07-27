@@ -61,7 +61,7 @@ This is the Desktop stylesheet, served to laptops and desktop devices.
 
 
 html, body {
-  background-color: #fff;
+  background-color: $white;
   height: 100%;
   /* sticky footer */
 }
@@ -252,7 +252,7 @@ body {
 }
 
 .breadcrumb-wrapper {
-  color: #838383;
+  color: $gray;
   font-size: 13px;
   padding: 90px 15px 15px;
   text-align: center;
@@ -439,9 +439,9 @@ body {
   display: inline-block;
   position: relative;
   .pop {
-    background-color: #fff;
+    background-color: $white;
     border-top: 2px solid;
-    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+
     font-size: 13px;
     left: 0;
     opacity: 0;
@@ -459,9 +459,9 @@ body {
       display: block;
       text-align: left;
       line-height: 1.2;
-      color: #333;
+      color: $dark;
       &:hover {
-        color: #54ae68;
+        color: $green;
       }
     }
   }
@@ -515,10 +515,12 @@ body {
     &.group_invite:before {
       content: "\f2b6";
     }
-    &.membership_request_accepted:before, &.new_membership_request:before {
+    &.membership_request_accepted:before,
+    &.new_membership_request:before {
       content: "\f2c2";
     }
-    &.member_promoted_to_mod:before, &.member_promoted_to_admin:before {
+    &.member_promoted_to_mod:before,
+    &.member_promoted_to_admin:before {
       content: "\f21b";
     }
     &.buddyboss_wall_like_notifier:before {
@@ -558,7 +560,7 @@ body {
       content: 'J';
     }
     &#user-messages span.count:before, span.pending-count:before {
-      color: #54ae68;
+      color: $green;
     }
   }
   > a span:before {
@@ -579,8 +581,9 @@ body {
 }
 
 #masthead .header-notifications a {
-  &#user-messages:hover span.count:before, &:hover span.pending-count:before {
-    color: #fff;
+  &#user-messages:hover span.count:before,
+  &:hover span.pending-count:before {
+    color: $white;
   }
 }
 
@@ -610,7 +613,7 @@ body {
 }
 
 .site-header {
-  background-color: #fbfbfb;
+  background-color: $secondary_bg;
   position: relative;
   /*border-bottom: 1px solid rgba(0, 0, 0, 0.1);*/
   &:after {
@@ -621,7 +624,10 @@ body {
     position: absolute;
     width: 100%;
   }
-  #wp-admin-bar-root-default, #wp-admin-bar-search, #wp-admin-bar-my-account > a, #wp-admin-bar-bp-notifications {
+  #wp-admin-bar-root-default,
+  #wp-admin-bar-search,
+  #wp-admin-bar-my-account > a,
+  #wp-admin-bar-bp-notifications {
     display: none;
   }
 }
@@ -707,7 +713,8 @@ body {
   content: "\f078";
 }
 
-header-aside, #logo-area {
+header-aside,
+#logo-area {
   display: table-cell;
   vertical-align: middle;
 }
@@ -729,7 +736,7 @@ header-aside, #logo-area {
     display: none;
     z-index: 32;
     /* Should be greater than 31 */
-    background-color: #fff;
+    background-color: $white;
     /* border-left: 1px solid rgba(0,0,0,0.1); */
   }
 }
@@ -768,7 +775,7 @@ header-aside, #logo-area {
     width: 64px;
     border-radius: 0;
     background-color: transparent;
-    color: #333;
+    color: $dark;
     z-index: 1;
     line-height: 70px;
     padding: 0;
@@ -778,7 +785,10 @@ header-aside, #logo-area {
 }
 
 .search-wrap input {
-  &::-webkit-input-placeholder, &::-moz-placeholder, &:-ms-input-placeholder, &:-moz-placeholder {
+  &::-webkit-input-placeholder,
+  &::-moz-placeholder,
+  &:-ms-input-placeholder,
+  &:-moz-placeholder {
     color: rgba(0, 0, 0, 0.3);
   }
 }
@@ -804,10 +814,10 @@ header-aside, #logo-area {
     right: 0;
     height: 12px;
     width: 12px;
-    background-color: #b94545;
+    background-color: $dark_red;
     padding: 0;
     line-height: 13px;
-    color: #fff;
+    color: $white;
     font-size: 6px;
     z-index: 2;
     border-radius: 0;
@@ -841,7 +851,7 @@ header-aside, #logo-area {
   width: 66px;
   border-left: 1px solid rgba(0, 0, 0, 0.1);
   text-align: center;
-  color: #333;
+  color: $dark;
   display: inline-block;
   font-size: 15px;
   text-transform: uppercase;
@@ -856,14 +866,14 @@ header-aside, #logo-area {
   &.underlined {
     /*border-bottom: 1px solid;*/
     /*font-size: 20px;*/
-    box-shadow: 0 -1px 0 #54ae68 inset;
+    box-shadow: 0 -1px 0 $green inset;
     .bb-icon-code {
       font-size: 26px;
     }
   }
   &:hover {
-    color: #fff;
-    background-color: #54ae68;
+    color: $white;
+    background-color: $green;
   }
   #search-open {
       font-size: 18px;
@@ -874,9 +884,9 @@ header-aside, #logo-area {
 }
 
 .header-notifications a.header-button span > b {
-  background: #54ae68;
+  background: $green;
   border-radius: 100%;
-  color: #fff !important;
+  color: $white !important;
   font-size: 11px;
   line-height: 1;
   padding: 3px 5px;
@@ -898,11 +908,11 @@ header-aside, #logo-area {
 }
 
 .header-account-login .count {
-  background: #54ae68;
+  background: $green;
   border-radius: 100%;
-  color: #fff !important;
+  color: $white !important;
   display: inline-block;
-  font-size: 12px;
+  font-size: $font-size-tiny;
   margin: 0 0 0 6px;
   padding: 2px 5px;
   position: absolute;
@@ -913,9 +923,8 @@ header-aside, #logo-area {
 }
 
 .header-account-login .pop {
-  background-color: #fff;
+  background-color: $white;
   border-top: 2px solid;
-  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
   right: 0;
   opacity: 0;
   position: absolute;
@@ -948,7 +957,7 @@ header-aside, #logo-area {
   }
   .pop {
     a, .ab-item {
-      color: #333;
+      color: $dark;
       display: block;
       font-size: 13px;
       line-height: 1;
@@ -1025,7 +1034,7 @@ header-aside, #logo-area {
 
 .header-account-login .pop {
   .bp_components .menupop:not(#wp-admin-bar-my-account) > .ab-sub-wrapper, .links li > .sub-menu {
-    background-color: #fff;
+    background-color: $white;
     box-shadow: 0 1px 4px 0 rgba(50, 50, 50, 0.2);
     display: none;
     left: -187px;
@@ -1039,7 +1048,7 @@ header-aside, #logo-area {
     display: block;
   }
   .bp_components .menupop:not(#wp-admin-bar-my-account) > .ab-sub-wrapper:before, .links li > .sub-menu:before {
-    background-color: #fff;
+    background-color: $white;
     box-shadow: 2px -2px 2px -1px rgba(0, 0, 0, 0.1);
     content: "";
     display: block;
@@ -1114,12 +1123,12 @@ header-aside, #logo-area {
       padding: 32px 0 25px;
     }
     &:hover > a {
-      box-shadow: 0 -2px 0 #54ae68 inset;
+      box-shadow: 0 -2px 0 $green inset;
     }
   }
   li {
     &.current_menu_item, &.current_page_item, a:hover {
-      color: #333;
+      color: $dark;
     }
     margin: 0;
     float: left;
@@ -1133,7 +1142,7 @@ header-aside, #logo-area {
       position: absolute;
       top: 100%;
       z-index: 1000;
-      background-color: #fff;
+      background-color: $white;
       border-width: 0 1px 1px;
       border-style: solid;
       border-color: #cdcdcd;
@@ -1152,7 +1161,7 @@ header-aside, #logo-area {
         top: -1px;
         left: 100%;
         border-width: 1px;
-        background-color: #fff;
+        background-color: $white;
       }
     }
   }
@@ -1191,8 +1200,8 @@ header-aside, #logo-area {
   div > ul {
     > {
       .current-menu-item > a, .current-menu-ancestor > a {
-        color: #333;
-        box-shadow: 0 -2px 0 #54ae68 inset;
+        color: $dark;
+        box-shadow: 0 -2px 0 $green inset;
         /* darken */
       }
     }
@@ -1317,7 +1326,7 @@ body:not(.settings) #buddypress div#item-nav #object-nav.item-list-tabs > ul > l
 
 #buddypress div#item-nav .item-list-tabs ul li {
   .bb-menu-button {
-    color: #fff;
+    color: $white;
     font-size: 8px;
     height: 25px;
     line-height: 23px;
@@ -1327,12 +1336,12 @@ body:not(.settings) #buddypress div#item-nav #object-nav.item-list-tabs > ul > l
     width: 25px;
   }
   &:hover .bb-menu-button {
-    color: #fff !important;
+    color: $white !important;
   }
 }
 
 #main #buddypress div.item-list-tabs li.hideshow > ul {
-  background-color: #fff;
+  background-color: $white;
   border-radius: 0;
   border-top: 2px solid;
   box-shadow: 0 1px 4px 0 rgba(50, 50, 50, 0.2);
@@ -1448,11 +1457,11 @@ li.hideshow > ul li {
     a {
       text-transform: uppercase;
       font-size: 10px;
-      color: #333;
+      color: $dark;
       clear: both;
       display: inline-block;
       width: auto;
-      background-color: #fff;
+      background-color: $white;
       padding: 4px 6px 4px;
       border: 1px solid rgba(0, 0, 0, 0.1);
       opacity: 0;
@@ -1474,11 +1483,11 @@ li.hideshow > ul li {
         top: -1px;
       }
       &:hover {
-        color: #54ae68;
+        color: $green;
       }
     }
     &:hover {
-      color: #54ae68;
+      color: $green;
     }
   }
 }
@@ -1530,12 +1539,12 @@ a.to-top {
   border: 1px solid rgba(0, 0, 0, 0.1);
   text-align: center;
   z-index: 1;
-  background-color: #fff;
+  background-color: $white;
   opacity: 0;
   -webkit-transition: all .3s;
   -o-transition: all .3s;
   transition: all .3s;
-  color: #333;
+  color: $dark;
   font-size: 11px;
 }
 
@@ -1548,14 +1557,14 @@ article:hover a.to-top {
 }
 
 .group-join, .author-follow {
-  /* background: #fff; */
+  /* background: $white; */
   z-index: 2;
   position: relative;
 }
 
 .author-details {
   .author-top {
-    /* background: #fff; */
+    /* background: $white; */
     z-index: 2;
     position: relative;
   }
@@ -1587,7 +1596,7 @@ article:hover a.to-top {
 }
 
 .posts-stream {
-  background-color: #fff;
+  background-color: $white;
   position: relative;
   /*z-index: 1;*/
   z-index: 0;
@@ -1673,7 +1682,7 @@ body .buddyboss-select {
     padding: 0px 11px;
     height: 30px;
     line-height: 30px;
-    color: #333;
+    color: $dark;
     font-size: 6px;
     font-family: "onesocial" !important;
     font-style: normal !important;
@@ -1697,7 +1706,7 @@ body .buddyboss-select {
     z-index: 1;
   }
   span {
-    color: #54ae68;
+    color: $green;
     font-size: 10px;
     text-transform: uppercase;
   }

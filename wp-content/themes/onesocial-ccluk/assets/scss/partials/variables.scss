@@ -3,12 +3,15 @@
 
 $white: #fff;
 $black: #000;
+$light: #aaa;
 $dark: #333;
+$gray: #838383;
 $green: #54ae68;
 $dark_green: #217B35;
 $blue: #22a7f0;
 $dark_blue: #00418A;
 $red: #e85c41;
+$dark_red: #b94545;
 $blue_bg: rgba(0, 152, 218, 0.85);
 $green_bg: rgba(84, 174, 104, 0.9);
 $white_bg: rgba(255, 255, 255, 0.9);
@@ -22,4 +25,5 @@ $font-size-lg: 36px;
 $font-size-big: 48px;
 $font-size-vlg: 70px;
 $font-default: 'Open Sans', Arial, Helvetica, sans-serif;
-$font-heading: 'Ubuntu', Arial, Helvetica, sans-serif;
+$font-heading: Ubuntu, Arial, Helvetica, sans-serif;
+$std_pad: $font-size-tiny;

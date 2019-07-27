@@ -6,6 +6,7 @@
  */
 
 define( 'CCLUK_DEBUGGING', false );
+define( 'CCLUK_BB_COVER_PHOTO', false ); // use group cover photos?
 
 /**
  * To view theme functions, navigate to /buddyboss-inc/theme.php

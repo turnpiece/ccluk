@@ -48,10 +48,6 @@ a,
     background-color: $green;
 }
 
-.avatar {
-    @include border-radius( 50% );
-}
-
 .widget-area {
     .widget {
         h3.widgettitle,
@@ -186,10 +182,6 @@ input[type=submit] {
     display: none;
 }
 
-.single-item.groups #buddypress #item-header span.activity {
-    text-shadow: 1px 1px 1px rgba(0,0,0,.7);
-}
-
 .entry-caption,
 .gallery-caption,
 .wp-caption .wp-caption-text {
@@ -221,10 +213,7 @@ a.cta {
     }
 }
 
-.mfp-bg {
+.mfp-bg.onesocial-popup {
     background: $white;
-}
-
-body .mfp-bg {
-    background: $white_bg;
+    opacity: 0.97;
 }
