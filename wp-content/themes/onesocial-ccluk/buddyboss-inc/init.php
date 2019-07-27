@@ -170,7 +170,8 @@ Class BuddyBoss_Theme {
 		}
 
 		// Cover Photo Support
-		require_once( $this->inc_dir . '/cover-photo.php' );
+		if (CCLUK_BB_COVER_PHOTO)
+			require_once( $this->inc_dir . '/cover-photo.php' );
 
 		// Login popup
 		require_once( $this->inc_dir . "/popup/user_email_verify.php" );

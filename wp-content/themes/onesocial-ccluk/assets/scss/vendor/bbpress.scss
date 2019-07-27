@@ -27,6 +27,9 @@
           display: none;
       }
   }
+  > h3 {
+      text-align: left;
+  }
 }
 
 div {
@@ -324,12 +327,12 @@ body.bbpress #bbp-search-index-form button#bbp_search_submit:hover, #buddypress 
     &.bbp-header {
       font-weight: 600;
       text-align: left;
-      font-size: 13px;
+      font-size: $font-size-tiny;
     }
     &.bbp-footer {
       font-weight: 600;
       text-align: left;
-      font-size: 13px;
+      font-size: $font-size-tiny;
       display: none;
       /* it's usually empty and looks odd */
     }
@@ -345,7 +348,7 @@ body.bbpress #bbp-search-index-form button#bbp_search_submit:hover, #buddypress 
   .bbp-forums-list {
     margin: 4px 0 4px 5px;
     padding-left: 15px;
-    border-left: 1px solid #ddd;
+    border-left: 1px solid $green;
     li {
       display: inline;
       font-size: $font-size-tiny;
@@ -355,16 +358,27 @@ body.bbpress #bbp-search-index-form button#bbp_search_submit:hover, #buddypress 
     margin: 0;
     line-height: 1em;
   }
-  .bbp-topic-content img, .bbp-reply-content img {
-    max-width: 100%;
+  .bbp-topic-content,
+  .bbp-reply-content {
+      img {
+          max-width: 100%;
+      }
   }
-  .bbp-topic-content ul, .bbp-reply-content ul, .bbp-topic-content ol, .bbp-reply-content ol {
-    padding-left: 25px;
+
+  .bbp-topic-content,
+  .bbp-reply-content {
+      ul, ol {
+          padding-left: 25px;
+      }
   }
-  .bbp-topic-content ul li, .bbp-reply-content ul li {
-    list-style-type: disc;
+  .bbp-topic-content,
+  .bbp-reply-content {
+      ul li {
+          list-style-type: disc;
+      }
   }
-  .bbp-topic-content ol li, .bbp-reply-content ol li {
+  .bbp-topic-content ol li,
+  .bbp-reply-content ol li {
     list-style-type: decimal;
   }
   .bbp-forum-content p {
@@ -373,50 +387,47 @@ body.bbpress #bbp-search-index-form button#bbp_search_submit:hover, #buddypress 
   }
 }
 
-.bbp-header ul li {
-  font-size: $font-size-sm;
-  text-transform: uppercase;
-  color: $dark;
-  padding-bottom: 27px;
-  padding-top: 0;
-}
-
-li {
-  &.bbp-forum-info,
-  &.bbp-topic-title {
-    float: left;
-    text-align: left;
-    width: 49%;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  }
+.bbp-body {
+    ul {
+      display: table;
+    }
+    li {
+        border-bottom: 1px solid $green;
+        text-align: center;
+        &.bbp-forum-info,
+        &.bbp-topic-title {
+            text-align: left;
+        }
+    }
+    ul li {
+      display: table-cell;
+      float: none;
+      padding: 35px 0;
+      /*vertical-align: middle;*/
+      vertical-align: top;
+    }
 }
 
 .bbp-header {
   li {
-    &.bbp-forum-info, &.bbp-topic-title {
-      border-bottom: 2px solid $green;
-    }
+      &.bbp-forum-info,
+      &.bbp-topic-title {
+        text-align: left;
+        border-bottom: 2px solid $green;
+      }
   }
   ul {
     display: table;
   }
-}
-
-.bbp-body ul {
-  display: table;
-}
-
-.bbp-header ul li {
-  display: table-cell;
-  float: none;
-}
-
-.bbp-body ul li {
-  display: table-cell;
-  float: none;
-  padding: 35px 0;
-  /*vertical-align: middle;*/
-  vertical-align: top;
+  ul li {
+    font-size: $font-size-sm;
+    text-transform: uppercase;
+    color: $green;
+    padding-bottom: 27px;
+    padding-top: 0;
+    display: table-cell;
+    float: none;
+  }
 }
 
 .bbp-header ul li:nth-child(2),
@@ -426,11 +437,12 @@ li {
 }
 
 li {
-  &.bbp-forum-info a.bbp-forum-title, &.bbp-topic-title a.bbp-topic-permalink {
+  &.bbp-forum-info a.bbp-forum-title,
+  &.bbp-topic-title a.bbp-topic-permalink {
     font-weight: 700;
     font-size: 20px;
     line-height: 1.3;
-    color: $dark;
+    color: $blue;
   }
   &.bbp-forum-info a.bbp-forum-title:before,
   &.bbp-topic-title a.bbp-topic-permalink:before {
@@ -446,7 +458,7 @@ li {
     -moz-osx-font-smoothing: grayscale;
     margin-right: 15px;
     font-size: 18px;
-    color: $green;
+    color: $blue;
     position: relative;
     top: 2px;
   }
@@ -467,7 +479,7 @@ li {
   &.bbp-topic-voice-count,
   &.bbp-forum-reply-count,
   &.bbp-topic-reply-count {
-    border-bottom: 2px solid $dark;
+    border-bottom: 2px solid $green;
   }
 }
 
@@ -479,14 +491,13 @@ li {
     &.bbp-topic-reply-count {
       font-size: $font-size-sm;
       font-weight: 700;
-      color: $dark;
+      color: $green;
       text-align: left;
     }
   }
   &.bbp-forum-freshness,
   &.bbp-topic-freshness {
     text-align: left;
-    float: left;
     width: 23%;
   }
 }
@@ -507,7 +518,7 @@ li {
   clear: both;
   display: block;
   a {
-    color: $gray;
+    color: $blue;
     font-size: $font-size-tiny;
     font-weight: 300;
     /* padding-left: 10px; */
@@ -554,12 +565,14 @@ li {
 
 li.bbp-header div {
   &.bbp-topic-content span {
-    &#subscription-toggle, &#favorite-toggle {
+    &#subscription-toggle,
+    &#favorite-toggle {
       float: right;
     }
   }
   &.bbp-reply-content span {
-    &#subscription-toggle, &#favorite-toggle {
+    &#subscription-toggle,
+    &#favorite-toggle {
       float: right;
     }
   }
@@ -567,26 +580,30 @@ li.bbp-header div {
 
 #bbpress-forums {
   div {
-    &.bbp-topic-author, &.bbp-reply-author {
+    &.bbp-topic-author,
+    &.bbp-reply-author {
       /* float: left; */
       text-align: left;
       width: 240px;
       margin-bottom: 8px;
       display: table-cell;
     }
-    &.bbp-topic-author .bbp-author-avatar, &.bbp-reply-author .bbp-author-avatar {
+    &.bbp-topic-author .bbp-author-avatar,
+    &.bbp-reply-author .bbp-author-avatar {
       float: left;
       margin-right: 12%;
       margin-top: 8px;
     }
-    &.bbp-topic-author img.avatar, &.bbp-reply-author img.avatar {
+    &.bbp-topic-author img.avatar,
+    &.bbp-reply-author img.avatar {
       max-width: 50px;
       height: auto;
       padding: 0;
       margin: 1px auto 12px auto;
       float: none;
     }
-    &.bbp-topic-author a.bbp-author-name, &.bbp-reply-author a.bbp-author-name {
+    &.bbp-topic-author a.bbp-author-name,
+    &.bbp-reply-author a.bbp-author-name {
       clear: both;
       line-height: 1;
       text-align: center;
@@ -617,18 +634,24 @@ li.bbp-header div {
     }
     &.bbp-topic-content blockquote,
     &.bbp-reply-content blockquote {
-      border: 1px solid $gray;
+      border: 1px solid $green;
       @include border-radius(0);
     }
   }
   li {
-    &.bbp-header .bbp-topic-author, &.bbp-footer .bbp-topic-author, &.bbp-header .bbp-reply-author, &.bbp-footer .bbp-reply-author {
+    &.bbp-header .bbp-topic-author,
+    &.bbp-footer .bbp-topic-author,
+    &.bbp-header .bbp-reply-author,
+    &.bbp-footer .bbp-reply-author {
       float: left;
       margin: 0;
       padding: 0;
       width: 120px;
     }
-    &.bbp-header .bbp-topic-content, &.bbp-footer .bbp-topic-content, &.bbp-header .bbp-reply-content, &.bbp-footer .bbp-reply-content {
+    &.bbp-header .bbp-topic-content,
+    &.bbp-footer .bbp-topic-content,
+    &.bbp-header .bbp-reply-content,
+    &.bbp-footer .bbp-reply-content {
       margin-left: 140px;
       padding: 0;
       text-align: left;
@@ -637,7 +660,9 @@ li.bbp-header div {
 }
 
 div {
-  &.bbp-topic-header, &.bbp-reply-header, &.bbp-forum-header {
+  &.bbp-topic-header,
+  &.bbp-reply-header,
+  &.bbp-forum-header {
     margin-bottom: 0;
     overflow: hidden;
     padding: 8px 12px;
@@ -650,13 +675,13 @@ div {
 span.bbp-author-ip {
   font-size: $font-size-tiny;
   font-weight: 600;
-  color: #aaa;
+  color: $light;
 }
 
 #bbpress-forums {
 	div.bbp-the-content-wrapper {
 		textarea.bbp-the-content {
-			font-size: 16px;
+			font-size: $font-size-sm;
 		}
 	}
 
@@ -727,12 +752,16 @@ span.bbp-author-ip {
 We need to hide the sidebar on all legacy user and group pages. */
 
 body {
-  &.bp-user #secondary.bp-legacy, &.single-item #secondary.bp-legacy {
+  &.bp-user #secondary.bp-legacy,
+  &.single-item #secondary.bp-legacy {
     display: none;
   }
   &.bbpress {
-    #bbpress-forums fieldset.bbp-form p > input[type="checkbox"], fieldset.bbp-form p > input[type="checkbox"] {
-      margin-left: 4px;
+    #bbpress-forums fieldset.bbp-form,
+    fieldset.bbp-form {
+        p > input[type="checkbox"] {
+            margin-left: 4px;
+        }
     }
   }
   &.forum-search #post-0 {
@@ -764,7 +793,7 @@ body {
     color: $dark;
     text-align: left;
     a {
-      color: $gray;
+      color: $blue;
       &:hover {
         color: $green;
       }
@@ -967,7 +996,7 @@ td {
       color: $blue;
       background-color: $secondary_bg;
       font-weight: 600;
-      font-size: 13px;
+      font-size: $font-size-tiny;
       &:hover {
         color: $green;
       }
@@ -1037,15 +1066,15 @@ td {
   float: left;
   width: 100%;
   margin-bottom: 15px;
+  font-size: $font-size-tiny;
 }
 
 .bbp-pagination-count {
-  float: left;
+    float: left;
 }
 
 .bbp-pagination-links {
   float: right;
-  font-size: $font-size-tiny;
   line-height: 13px;
 }
 
@@ -1057,7 +1086,8 @@ td {
     font-size: $font-size-tiny;
     line-height: 10px;
     padding: 1px 3px;
-    border: 1px solid $gray;
+    color: $blue;
+    border: 1px solid $blue;
     text-decoration: none;
   }
 }
@@ -1080,11 +1110,11 @@ td {
 #bbpress-forums fieldset.bbp-form {
   legend {
     padding: 0 0 12px;
-    font-size: 16px;
+    font-size: $font-size-std;
     font-weight: 600;
     width: 100%;
     word-break: break-all;
-    color: $dark;
+    color: $green;
   }
   label {
     margin: 0;
@@ -1107,7 +1137,7 @@ td {
     }
   }
   .wp-editor-wrap {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid $green_bg;
     margin-bottom: 20px;
   }
   fieldset.bbp-form {
@@ -1159,7 +1189,7 @@ body {
       div.avatar img {
         margin-right: 0;
         padding: 10px;
-        border: 1px solid $gray;
+        border: 1px solid $green;
         line-height: 0;
         background-color: $secondary_bg;
     }
@@ -1169,7 +1199,7 @@ body {
     .bbp-topic-form code {
       font-size: $font-size-tiny;
       background-color: $secondary_bg;
-      border: 1px solid #e4e4e4;
+      border: 1px solid $green;
       display: block;
       padding: 8px;
       margin-top: 5px;
@@ -1205,7 +1235,7 @@ div.bbp-submit-wrapper {
   clear: both;
   button {
     padding: 8px 20px;
-    font-size: 13px;
+    font-size: $font-size-tiny;
   }
 }
 
@@ -1356,7 +1386,7 @@ div {
   &.bbp-template-notice, &.indicator-hint {
     padding: 10px 14px;
     margin: 5px 0 15px;
-    font-size: 13px;
+    font-size: $font-size-tiny;
     clear: both;
     background-color: $secondary_bg;
     -moz-border-radius: 3px;
@@ -1620,7 +1650,7 @@ fieldset div.avatar {
     }
     ul {
       &.bbp-lead-topic,
-      &.bbp-topics, 
+      &.bbp-topics,
       &.bbp-forums,
       &.bbp-replies {
         clear: none;

@@ -130,7 +130,7 @@ div {
     --------------------------------------------------------------*/
 
     div {
-      &#subnav.item-list-tabs ul li, &:not(#item-nav) > .item-list-tabs ul li {
+      &#subnav.item-list-tabs ul li, &:not(#item-nav):not(#mobile-item-nav) > .item-list-tabs ul li {
         margin-right: 9px;
         margin-bottom: 4px;
       }

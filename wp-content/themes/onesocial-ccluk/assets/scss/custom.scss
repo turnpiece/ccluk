@@ -12,7 +12,7 @@
 @import "partials/register";
 @import "partials/find-your-mp";
 @import "partials/boss-custom";
-
+@import "partials/login-popups";
 
 
 /** Styles for plugins etc. **/
@@ -28,16 +28,6 @@ MINIMUM width of 481 pixels (phones and larger)
 
 	@import "partials/min-width-481px";
 
-}
-
-
-/*--------------------------------------------------------------
-MINIMUM width of 721 pixels (tablets and larger)
---------------------------------------------------------------*/
-@media screen and (min-width: 721px)  {
-/*
-	@import "partials/min-width-721px";
-*/
 }
 
 

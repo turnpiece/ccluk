@@ -65,7 +65,7 @@ div.bbp-forum-title,
     color: inherit;
     display: inline-block;
     float: none;
-    font-size: 11px;
+    font-size: $font-size-tiny;
     line-height: 1;
     padding: 0;
     vertical-align: middle;
@@ -3059,7 +3059,7 @@ body {
   height: auto;
   margin-top: -10px;
   z-index: 4;
-  font-size: 11px;
+  font-size: $font-size-tiny;
   line-height: 1.2;
   box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.11);
 }
@@ -3073,7 +3073,7 @@ body {
     height: auto;
     margin-top: -10px;
     z-index: 4;
-    font-size: 11px;
+    font-size: $font-size-tiny;
     line-height: 1.2;
     box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.11);
   }
@@ -3184,7 +3184,7 @@ div#item-header-avatar {
 
 .groups div#item-header-avatar {
   /*width: 100%;*/
-  text-align: center;
+  text-align: left;
 }
 
 .bb-group-avatar-wrap {
@@ -3362,13 +3362,15 @@ body:not(.settings) #buddypress div#item-nav .item-list-tabs > ul > li {
         color: #54ae68;
       }
     }
-    &#subnav.item-list-tabs, &:not(#item-nav) > .item-list-tabs {
+    &#subnav.item-list-tabs,
+    &:not(#item-nav):not(#mobile-item-nav) .item-list-tabs {
       margin: 24px 0;
       padding: 0;
       position: relative;
     }
   }
-  > div[role="navigation"].item-list-tabs, .dir-form div.item-list-tabs {
+  > div[role="navigation"].item-list-tabs,
+  .dir-form div.item-list-tabs {
     margin: 24px 0;
     padding: 0;
     position: relative;
@@ -3386,7 +3388,8 @@ body:not(.settings) #buddypress div#item-nav .item-list-tabs > ul > li {
 }
 
 body:not(.group-members) #buddypress div {
-  &#subnav.item-list-tabs ul, &:not(#item-nav) > .item-list-tabs ul {
+  &#subnav.item-list-tabs ul,
+  &:not(#item-nav):not(#mobile-item-nav) > .item-list-tabs ul {
     margin: 0;
     padding: 0;
     overflow: visible;
@@ -3417,7 +3420,7 @@ body:not(.group-members) #buddypress div {
 
 #buddypress {
   div {
-    &#subnav.item-list-tabs ul li, &:not(#item-nav) > .item-list-tabs ul li {
+    &#subnav.item-list-tabs ul li, &:not(#item-nav):not(#mobile-item-nav) > .item-list-tabs ul li {
       margin: 0 9px 4px 0;
       display: inline-block;
       margin-right: 9px;
@@ -3449,7 +3452,7 @@ body:not(.group-members) #buddypress div {
 
 #buddypress {
   div {
-    &#subnav.item-list-tabs ul li.last, &:not(#item-nav) > .item-list-tabs ul li.last {
+    &#subnav.item-list-tabs ul li.last, &:not(#item-nav):not(#mobile-item-nav) > .item-list-tabs ul li.last {
       float: right;
       margin: 0;
     }
@@ -3467,7 +3470,7 @@ body:not(.group-members) #buddypress div {
 
 #buddypress {
   div {
-    &#subnav.item-list-tabs ul li.last select, &:not(#item-nav) > .item-list-tabs ul li.last select {
+    &#subnav.item-list-tabs ul li.last select, &:not(#item-nav):not(#mobile-item-nav) > .item-list-tabs ul li.last select {
       max-width: 175px;
     }
   }
@@ -3482,7 +3485,7 @@ body:not(.group-members) #buddypress div {
 
 #buddypress {
   div {
-    &#subnav.item-list-tabs ul li#activity-filter-select, &:not(#item-nav) > .item-list-tabs ul li#activity-filter-select {
+    &#subnav.item-list-tabs ul li#activity-filter-select, &:not(#item-nav):not(#mobile-item-nav) > .item-list-tabs ul li#activity-filter-select {
       border-bottom: none;
     }
   }
@@ -3517,7 +3520,7 @@ body:not(.group-members) #buddypress div {
 
 #buddypress {
   div {
-    &#subnav.item-list-tabs ul li a, &:not(#item-nav) > .item-list-tabs ul li a {
+    &#subnav.item-list-tabs ul li a, &:not(#item-nav):not(#mobile-item-nav) > .item-list-tabs ul li a {
       display: block;
       padding: 6px 10px;
       line-height: 1.7;
@@ -3580,7 +3583,7 @@ body:not(.group-members) #buddypress div {
 
 #buddypress {
   div {
-    &#subnav.item-list-tabs ul li a span, &:not(#item-nav) > .item-list-tabs ul li a span {
+    &#subnav.item-list-tabs ul li a span, &:not(#item-nav):not(#mobile-item-nav) > .item-list-tabs ul li a span {
       background-color: #54ae68;
       color: $white;
       display: inline;
@@ -3627,7 +3630,7 @@ body:not(.group-members) #buddypress div {
 
 #buddypress {
   div {
-    &#subnav.item-list-tabs ul li a:hover, &:not(#item-nav) > .item-list-tabs ul li a:hover {
+    &#subnav.item-list-tabs ul li a:hover, &:not(#item-nav):not(#mobile-item-nav) > .item-list-tabs ul li a:hover {
       background-color: #333;
       color: $white;
     }
@@ -3656,30 +3659,23 @@ body:not(.group-members) #buddypress div {
     &#subnav.item-list-tabs ul li {
       &.selected a, &.current a {
         color: $white;
-        background-color: #333;
-        border-color: #333;
-      }
-    }
-    &:not(#item-nav) > .item-list-tabs ul li {
-      &.selected a, &.current a {
-        color: $white;
-        background-color: #333;
-        border-color: #333;
+        background-color: $green;
+        border-color: $green;
       }
     }
   }
   > div[role="navigation"].item-list-tabs ul li {
     &.selected a, &.current a {
       color: $white;
-      background-color: #333;
-      border-color: #333;
+      background-color: $green;
+      border-color: $green;
     }
   }
   .dir-form div.item-list-tabs ul li {
     &.selected a, &.current a {
       color: $white;
-      background-color: #333;
-      border-color: #333;
+      background-color: $green;
+      border-color: $green;
     }
   }
 }
@@ -3687,14 +3683,14 @@ body:not(.group-members) #buddypress div {
 .bp-legacy div#item-body div.item-list-tabs ul li {
   &.selected a, &.current a {
     color: $white;
-    background-color: #333;
-    border-color: #333;
+    background-color: $green;
+    border-color: $green;
   }
 }
 
 #buddypress {
   div {
-    &#subnav.item-list-tabs ul li li, &:not(#item-nav) > .item-list-tabs ul li li {
+    &#subnav.item-list-tabs ul li li, &:not(#item-nav):not(#mobile-item-nav) > .item-list-tabs ul li li {
       float: left;
       margin-top: 0;
     }
@@ -3925,7 +3921,7 @@ body.activity-permalink #buddypress .activity-list li .activity-content {
   div#item-header div#item-header-content span.highlight {
     background-color: $green_bg;
     color: $white;
-    font-size: 11px;
+    font-size: $font-size-tiny;
     padding: 4px 6px;
     margin-right: 5px;
     text-decoration: none;
@@ -4307,7 +4303,7 @@ div {
   }
 }
 
-.search #buddypress div:not(#item-nav) > .dir-form div.item-list-tabs ul {
+.search #buddypress div:not(#item-nav):not(#mobile-item-nav) > .dir-form div.item-list-tabs ul {
   text-align: center;
   li {
     display: inline-block;
@@ -4332,17 +4328,17 @@ div {
   }
 }
 
-.search #buddypress div:not(#item-nav) > .dir-form div.item-list-tabs ul li {
+.search #buddypress div:not(#item-nav):not(#mobile-item-nav) > .dir-form div.item-list-tabs ul li {
   margin-right: 0;
 }
 
 .settings.bp-user #buddypress div {
-  &#subnav.item-list-tabs ul li, &:not(#item-nav) > .item-list-tabs ul li {
+  &#subnav.item-list-tabs ul li, &:not(#item-nav):not(#mobile-item-nav) > .item-list-tabs ul li {
     margin-right: 0;
   }
 }
 
-.search #buddypress div:not(#item-nav) > .dir-form div.item-list-tabs ul li a {
+.search #buddypress div:not(#item-nav):not(#mobile-item-nav) > .dir-form div.item-list-tabs ul li a {
   background-color: transparent;
   font-size: 14px;
   color: #333;
@@ -4351,7 +4347,7 @@ div {
 }
 
 .settings.bp-user #buddypress div {
-  &#subnav.item-list-tabs ul li a, &:not(#item-nav) > .item-list-tabs ul li a {
+  &#subnav.item-list-tabs ul li a, &:not(#item-nav):not(#mobile-item-nav) > .item-list-tabs ul li a {
     background-color: transparent;
     font-size: 14px;
     color: #333;
@@ -4360,19 +4356,19 @@ div {
   }
 }
 
-.search #buddypress div:not(#item-nav) > .dir-form div.item-list-tabs ul li {
+.search #buddypress div:not(#item-nav):not(#mobile-item-nav) > .dir-form div.item-list-tabs ul li {
   &.active a, &:hover a {
     color: #54ae68;
   }
 }
 
 .settings.bp-user #buddypress div {
-  &#subnav.item-list-tabs ul li:hover a, &:not(#item-nav) > .item-list-tabs ul li:hover a {
+  &#subnav.item-list-tabs ul li:hover a, &:not(#item-nav):not(#mobile-item-nav) > .item-list-tabs ul li:hover a {
     color: #54ae68;
   }
 }
 
-.search #buddypress div:not(#item-nav) > .dir-form div.item-list-tabs ul li:not(:last-child):after {
+.search #buddypress div:not(#item-nav):not(#mobile-item-nav) > .dir-form div.item-list-tabs ul li:not(:last-child):after {
   content: '.';
   display: inline-block;
   vertical-align: text-bottom;
@@ -4380,7 +4376,7 @@ div {
 }
 
 .settings.bp-user #buddypress div {
-  &#subnav.item-list-tabs ul li:not(:last-child):after, &:not(#item-nav) > .item-list-tabs ul li:not(:last-child):after {
+  &#subnav.item-list-tabs ul li:not(:last-child):after, &:not(#item-nav):not(#mobile-item-nav) > .item-list-tabs ul li:not(:last-child):after {
     content: '.';
     display: inline-block;
     vertical-align: text-bottom;
@@ -4388,7 +4384,7 @@ div {
   }
 }
 
-.search #buddypress div:not(#item-nav) > .dir-form div.item-list-tabs ul li a span {
+.search #buddypress div:not(#item-nav):not(#mobile-item-nav) > .dir-form div.item-list-tabs ul li a span {
   background: transparent;
   color: #54ae68;
   font-size: inherit;
@@ -4621,7 +4617,7 @@ form#group-settings-form {
       transition: all 0.2s ease-in-out 0s;
       &:before {
         background-color: $white;
-        color: #$green;
+        color: $green;
         content: counter(groupNum, decimal);
         display: inline-block;
         transition: all 0.15s ease-in-out 0s;
@@ -4910,8 +4906,6 @@ body.articles #buddypress div#item-body {
 
 body.buddypress {
 
-
-
 	#buddypress {
 	  ul.button-nav li a,
 	  div.generic-button a {
@@ -5044,7 +5038,7 @@ body.buddypress {
 	    color: #999;
 	    &.buddyboss_edit_activity_comment {
 	      color: inherit;
-	      font-size: 11px;
+	      font-size: $font-size-tiny;
 	      font-weight: 600;
 	    }
 	    &:hover {
@@ -5190,111 +5184,11 @@ body.buddypress {
 	  height: 30px;
 	}
 
-	.single-item.groups .site-content {
+	&.single-item.groups .site-content {
 	  margin-top: 0;
 	}
 
-	.bb-cover-photo {
-	  background-color: #3c7a90;
-	  .progress {
-	    background-color: #3c7a90;
-	  }
-	  width: 100%;
-	  float: right;
-	  height: 342px;
-	  position: relative;
-	  .holder {
-	    width: 100%;
-	    height: 100%;
-	    -webkit-background-size: cover;
-	    background-size: cover;
-	    background-position: center;
-	    background-repeat: no-repeat;
-	  }
-	  .progress {
-	    display: none;
-	    width: 100%;
-	    height: 10px;
-	    position: absolute;
-	    z-index: 12;
-	    background: $green;
-	    span {
-	      width: 1%;
-	      display: block;
-	      height: 100%;
-	      background: $green;
-	      /* For Safari 3.1 to 6.0 */
-	      -webkit-transition: width 2s;
-	      transition: width 2s;
-	    }
-	  }
-	  button.update-cover-photo {
-	    display: block;
-	    background: transparent !important;
-	    color: transparent;
-	    border-radius: 4px;
-	    border: none;
-	    line-height: 22px;
-	    cursor: pointer;
-	    text-shadow: none;
-	    padding: 0px;
-	    width: auto;
-	    min-width: 0;
-	    text-align: center;
-	    font-size: $font-size-tiny;
-	    letter-spacing: 1.2px;
-	    margin-top: 16px;
-	    margin-left: 20px;
-	    -webkit-border-radius: 3px;
-	    border-radius: 3px;
-	    position: absolute;
-	    z-index: 11 !important;
-	    font-weight: normal;
-	    -webkit-box-shadow: none;
-	    box-shadow: none;
-	    outline: none;
-	  }
-	  .update-cover-photo {
-	    i {
-	      &.bb-icon-camera, &.fa-camera, &.fa-refresh, &.fa-times {
-	        color: $white;
-	        font-size: 18px;
-	        left: 6px;
-	        opacity: 0.7;
-	        position: absolute;
-	        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
-	        top: 9px;
-	        z-index: 1;
-	      }
-	    }
-	    div {
-	      -webkit-background-clip: padding-box;
-	      background-color: $green;
-	      border: 1px solid $white;
-	      -webkit-border-radius: 2px;
-	      color: $white;
-	      display: inline-block;
-	      opacity: 0;
-	      overflow: hidden;
-	      padding: 3px 12px 1px 26px;
-	      position: relative;
-	      top: 3px;
-	      left: 0;
-	      -webkit-transition: opacity .3s ease-in-out, width .3s linear;
-	      white-space: nowrap;
-	      width: 34px;
-	      word-wrap: normal;
-	      float: left;
-	    }
-	    &:hover div {
-	      opacity: 1;
-	      width: 100%;
-	      -webkit-transition: opacity .3s ease-in-out, width .3s linear;
-	    }
-	  }
-	}
-
-	.single-item.groups #buddypress div#item-header {
+	&.single-item.groups #buddypress div#item-header {
 	  div#item-header-avatar {
 	    width: 185px;
 	  }
@@ -5304,35 +5198,19 @@ body.buddypress {
 	  }
 	}
 
-	/* .single-item.groups #buddypress div#item-header #item-header-desc {
-	    padding-left: 40px;
-	    padding-right: 28px;
-	} */
-
-	.bb-cover-photo button.update-cover-photo.refresh-cover-photo {
-	  margin-top: 45px;
-	}
-
-	/* fallback */
-
-	html:not(.svgclippaths) .single-item.groups #buddypress div#item-header #item-header-avatar img.avatar {
-	  border-radius: 50%;
-	}
-
-	.single-item.groups {
-	  #item-header {
-	    float: left;
-	    width: 100%;
-	    position: relative;
-	    margin-top: -180px;
-	  }
+	&.single-item.groups {
 	  #secondary {
-	    margin-top: -105px;
 	    #item-header-content {
 	      padding-top: 10px;
 	      + .widget {
 	        padding-top: 4px;
 	      }
+          #item-meta {
+              p {
+                  color: $green;
+                  font-size: $font-size-tiny;
+              }
+          }
 	    }
 	  }
 	  #buddypress form#send-invite-form #invite-list {
@@ -5344,13 +5222,11 @@ body.buddypress {
 	  h1 {
 	    margin-top: 0;
 	    margin-bottom: 0;
-	    line-height: 1.2;
-	    color: $white;
+	    color: $green;
+        font-family: $font-heading;
 	    display: inline-block;
 	    vertical-align: middle;
-	    font-size: 30px;
 	    margin-right: 8%;
-	    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 	  }
 	  > div {
 	    vertical-align: top;
@@ -5370,15 +5246,9 @@ body.buddypress {
 	  -webkit-justify-content: space-between;
 	  -ms-flex-pack: justify;
 	  justify-content: space-between;
-	  height: 160px;
 	}
 
 	.boss-group-header {
-	  .group-header-content {
-	    max-height: 180px;
-	    overflow: auto;
-	    float: left;
-	  }
 	  #item-actions {
 	    margin-bottom: 5px;
 	  }
@@ -5386,23 +5256,22 @@ body.buddypress {
 
 	#buddypress #item-title-area .highlight {
 	  background-color: $green;
-	  border-radius: 2px;
+	  @include border-radius( 3px );
 	  color: $white;
 	  text-transform: lowercase;
 	  padding: 0px 6px 2px;
 	  display: inline-block;
 	  vertical-align: middle;
-	  font-size: 11px;
+	  font-size: $font-size-tiny;
 	  margin-top: 5px;
 	  margin-left: 0;
 	}
 
-	.single-item.groups #buddypress {
+	&.single-item.groups #buddypress {
 	  #item-header span.activity {
 	    color: $white;
 	    margin-top: 6px;
 	    display: block;
-	    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 	  }
 	  #activity-stream {
 	    margin-bottom: 0;
@@ -5416,14 +5285,18 @@ body.buddypress {
 
 	#buddypress div#item-header div#item-meta {
 	  margin-top: 20px;
-	  color: #333;
+	  color: $green;
+
+      p {
+          font-size: $font-size-sm;
+      }
 	}
 
 	#main #buddypress div#item-meta.author-header-meta {
 	  margin-bottom: 40px;
 	}
 
-	.single-item {
+	&.single-item {
 	  &.groups #buddypress #item-nav {
 	    position: relative;
 	    margin-bottom: 26px;
@@ -5453,7 +5326,7 @@ body.buddypress {
 	#buddypress div#subnav.item-list-tabs ul li.feed a {
 	  padding: 0;
 	  text-transform: uppercase;
-	  font-size: 11px;
+	  font-size: $font-size-tiny;
 	  font-weight: 600;
 	  border: none;
 	  line-height: 30px;
@@ -6023,16 +5896,6 @@ body.buddypress {
 			}
 		}
 
-		.bb-cover-photo {
-			background-color: $dark_blue;
-			#header-cover-image {
-				opacity: 0.5;
-			}
-			.progress {
-				background-color: $dark_blue;
-			}
-		}
-
 		div#message p {
 			background-color: $green;
 			color: $white;
@@ -6082,7 +5945,7 @@ body.buddypress {
 
 	    div {
 	      &#subnav.item-list-tabs ul li a span,
-	      &:not(#item-nav) > .item-list-tabs ul li a span {
+	      &:not(#item-nav):not(#mobile-item-nav) > .item-list-tabs ul li a span {
 	        color: $green;
 	      }
 	    }
@@ -6180,7 +6043,7 @@ body.buddypress {
 		#buddypress {
 			.dir-form div,
 			div#subnav,
-			div:not(#item-nav)>.item-list-tabs,
+			div:not(#item-nav):not(#mobile-item-nav)>.item-list-tabs,
 			>div[role=navigation] {
 				&.item-list-tabs {
 					@include bp-item-list-tabs();
@@ -6204,7 +6067,7 @@ body.buddypress {
 				}
 			}
 
-			div:not(#item-nav) > .item-list-tabs.item-list-tabs,
+			div:not(#item-nav):not(#mobile-item-nav) > .item-list-tabs.item-list-tabs,
 			div#subnav.item-list-tabs {
 				ul li {
 					&.current,
@@ -6396,4 +6259,10 @@ body {
     margin-bottom: 24px;
     display: none;
   }
+}
+
+/* fallback */
+
+html:not(.svgclippaths) .single-item.groups #buddypress div#item-header #item-header-avatar img.avatar {
+  border-radius: 50%;
 }

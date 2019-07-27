@@ -2,14 +2,14 @@
     padding-top: 0;
 }
 
-input[type="text"], 
-input[type="tel"], 
-input[type="email"], 
-input[type="password"], 
-input[type="email"], 
-input[type="number"], 
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
 textarea,
-.popup-content .input:not([type=checkbox]):not([type=radio]):not([type=button]), 
+.popup-content .input:not([type=checkbox]):not([type=radio]):not([type=button]),
 .popup-content input:not([type=checkbox]):not([type=radio]):not([type=button]) {
     background-color: $white;
     border-width: 1px 1px 1px 1px;
@@ -51,8 +51,8 @@ a,
 .widget-area {
     .widget {
         h3.widgettitle,
-        p, 
-        li, 
+        p,
+        li,
         .textwidget {
             color: $green;
             font-size: $font-size-sm;
@@ -74,7 +74,7 @@ a,
                         height: auto;
                         line-height: 1;
                     }
-                
+
                     div.response {
                         line-height: 1.5;
                     }
@@ -105,10 +105,10 @@ a,
     }
 
     #main {
-    
+
         max-width: 100%;
         display: block;
-        
+
         article {
             padding-top: 0 !important;
         }
@@ -162,8 +162,8 @@ a,
     }
 }
 
-#save_as_draft, 
-.popup-content .button:not(.ed_button), 
+#save_as_draft,
+.popup-content .button:not(.ed_button),
 #buddypress form#whats-new-form #whats-new-submit input[type=submit],
 input[type=submit] {
     border: none;
@@ -182,12 +182,8 @@ input[type=submit] {
     display: none;
 }
 
-.single-item.groups #buddypress #item-header span.activity {
-    text-shadow: 1px 1px 1px rgba(0,0,0,.7);
-}
-
-.entry-caption, 
-.gallery-caption, 
+.entry-caption,
+.gallery-caption,
 .wp-caption .wp-caption-text {
     font-size: 14px;
     line-height: 1.6;
@@ -217,10 +213,7 @@ a.cta {
     }
 }
 
-.mfp-bg {
+.mfp-bg.onesocial-popup {
     background: $white;
-}
-
-body .mfp-bg {
-    background: $white_bg;
+    opacity: 0.97;
 }

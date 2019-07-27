@@ -4141,7 +4141,7 @@ body article.error404 .entry-header {
   /*width: 100%;*/
 }
 
-.search #buddypress div:not(#item-nav) > .dir-form div.item-list-tabs {
+.search #buddypress div:not(#item-nav):not(#mobile-item-nav) > .dir-form div.item-list-tabs {
   margin-bottom: 90px;
 }
 
@@ -5692,38 +5692,8 @@ img {
   visibility: hidden;
 }
 
-@media screen and (max-width: 622px) {
-  .popup-content .col {
-    float: none;
-    padding: 0;
-    float: none;
-    clear: both;
-    width: 100%;
-  }
-  .popup-content .col.with-plugin {
-    padding-right: 0;
-    padding-top: 40px;
-  }
-  .bb-group-avatar-wrap-mobile.bb-group-avatar-wrap-mobile {
-    float: none;
-    text-align: center;
-    margin-right: 0;
-  }
-  .boss-group-header .group-header-content {
-    margin-top: 20px;
-    width: 100%;
-    margin-bottom: 0;
-  }
-  .bb-group-mobile-content {
-    width: 100%;
-  }
-  #item-title-area h1, .single-item.groups #buddypress #item-header span.activity {
-    color: inherit;
-    text-shadow: 0 0 0;
-  }
-}
-
-.ac-reply-content .buddyboss-bbpress-media-add-photo-button, .ac-reply-content .buddyboss-comment-media-add-photo-button {
+.ac-reply-content .buddyboss-bbpress-media-add-photo-button,
+.ac-reply-content .buddyboss-comment-media-add-photo-button {
   padding-top: 7px;
   padding-bottom: 4px;
 }
@@ -6050,10 +6020,6 @@ a.liked:hover, a.liked:active, a.liked:focus, a.liked span.sl-count {
   border-width: 4px;
   border-style: solid;
   border-color: #ecf073;
-}
-
-.is-mobile:not(.bm-vendor-shop) #sitewide-notice {
-  padding-top: 55px;
 }
 
 #sitewide-notice:empty {
