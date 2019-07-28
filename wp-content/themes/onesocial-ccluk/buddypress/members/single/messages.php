@@ -62,11 +62,11 @@
 	<div id="messages-layout">
 
 		<?php do_action( 'template_notices' ); ?>
-
+<?php /*
 		<?php if ( bp_is_messages_inbox() || bp_is_messages_sentbox() ) : ?>
 			<div class="message-search"><?php bp_message_search_form(); ?></div>
 		<?php endif; ?>
-
+*/ ?>
 		<?php
 		switch ( bp_current_action() ) :
 

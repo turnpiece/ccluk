@@ -2001,13 +2001,6 @@ div#sitewide-notice div#message.error p {
       }
     }
   }
-  .messages-notices td p, table tr td.thread-info p.thread-excerpt {
-    color: #888;
-    margin-top: 3px;
-  }
-  .messages-notices td p {
-    margin-bottom: 0;
-  }
   table {
     &.forum td {
       text-align: left;
@@ -2795,10 +2788,6 @@ body.activity-permalink #buddypress ul.item-list {
 
 #wpadminbar {
   text-align: left;
-}
-
-.messages.bp-user #buddypress div#item-body {
-  width: 100%;
 }
 
 .settings.bp-user {
@@ -4433,72 +4422,6 @@ h1.big {
   margin-bottom: 50px;
 }
 
-/*--------------------------------------------------------------
-1.1.10 - Messaging
---------------------------------------------------------------*/
-
-.bp-user.messages #buddypress div#subnav.item-list-tabs {
-  margin: 0;
-  ul {
-    /*width: 166px;*/
-    li {
-      float: none;
-      width: 100%;
-      margin: 0;
-      a {
-        border: none;
-        font-size: 14px;
-        text-transform: none;
-        padding: 0;
-        background-color: transparent;
-        font-weight: 600;
-        strong, span {
-          float: right;
-          background: transparent;
-          color: #54ae68;
-          padding: 0;
-          line-height: 25px;
-          font-size: 14px;
-        }
-      }
-      &:hover a, &.selected a, &.current a {
-        color: #54ae68;
-      }
-      &#compose-personal-li {
-        padding-bottom: 22px;
-        border-bottom: 2px solid #54ae68;
-        margin-bottom: 22px;
-        margin-top: 2px;
-        a {
-          text-transform: uppercase;
-          span {
-            font-size: 16px;
-          }
-        }
-      }
-      float: none;
-      width: 100%;
-      margin: 0 0 10px 0;
-    }
-  }
-}
-
-#buddypress#buddypress {
-  div.message-search {
-    float: right;
-    margin: -1px 0 -36px;
-  }
-  form#send_message_form {
-    input#send-notice {
-      clear: left;
-      float: left;
-    }
-    label span.text {
-      font-size: 14px;
-      margin-left: 5px;
-    }
-  }
-}
 
 /* Compose */
 
@@ -5184,40 +5107,57 @@ body.buddypress {
 	  height: 30px;
 	}
 
-	&.single-item.groups .site-content {
+	&.single-item.groups {
+        .site-content {
 	  margin-top: 0;
 	}
 
-	&.single-item.groups #buddypress div#item-header {
-	  div#item-header-avatar {
-	    width: 185px;
-	  }
-	  #item-header-avatar img.avatar {
-	    width: 185px;
-	    height: 185px;
-	  }
-	}
+    	#buddypress div#item-header {
+    	  div#item-header-avatar {
+    	    width: 185px;
+    	  }
+    	  #item-header-avatar img.avatar {
+    	    width: 185px;
+    	    height: 185px;
+    	  }
+    	}
 
-	&.single-item.groups {
-	  #secondary {
-	    #item-header-content {
-	      padding-top: 10px;
-	      + .widget {
-	        padding-top: 4px;
-	      }
-          #item-meta {
-              p {
-                  color: $green;
-                  font-size: $font-size-tiny;
+
+        #secondary {
+            #item-header-content {
+              padding-top: 10px;
+              + .widget {
+                padding-top: 4px;
               }
-          }
-	    }
-	  }
-	  #buddypress form#send-invite-form #invite-list {
-	    margin-bottom: 50px;
-	  }
-	}
+              #item-meta {
+                  p {
+                      color: $green;
+                      font-size: $font-size-tiny;
+                  }
+              }
+            }
+        }
+        #buddypress {
+            form#send-invite-form #invite-list {
+                margin-bottom: 50px;
+            }
 
+
+    	  #item-header span.activity {
+    	    color: $white;
+    	    margin-top: 6px;
+    	    display: block;
+    	  }
+    	  #activity-stream {
+    	    margin-bottom: 0;
+    	  }
+    	  div#item-body {
+    	    margin-bottom: 70px;
+    	    float: right;
+    	    width: 100%;
+    	  }
+        }
+    }
 	#item-title-area {
 	  h1 {
 	    margin-top: 0;
@@ -5265,22 +5205,6 @@ body.buddypress {
 	  font-size: $font-size-tiny;
 	  margin-top: 5px;
 	  margin-left: 0;
-	}
-
-	&.single-item.groups #buddypress {
-	  #item-header span.activity {
-	    color: $white;
-	    margin-top: 6px;
-	    display: block;
-	  }
-	  #activity-stream {
-	    margin-bottom: 0;
-	  }
-	  div#item-body {
-	    margin-bottom: 70px;
-	    float: right;
-	    width: 100%;
-	  }
 	}
 
 	#buddypress div#item-header div#item-meta {
@@ -5408,259 +5332,6 @@ body.buddypress {
 	      box-shadow: none;
 	    }
 
-		#send_message_form.standard-form label {
-		  margin-bottom: 0;
-		  line-height: 1.2;
-		  &[for='subject'] {
-		    margin-top: 50px;
-		  }
-		  &[for='send-to-input'] {
-		    margin-bottom: 12px;
-		    margin-top: 4px;
-		  }
-		}
-
-		table#message-threads {
-		  tr td {
-		    vertical-align: middle;
-		    border: none;
-		  }
-		  &.messages-notices tr td {
-		    border-left: none;
-		    border-right: none;
-		    border-top: none;
-		    border-bottom: 2px solid #e1e1e1;
-		    display: table-cell;
-		    float: none;
-		  }
-
-	      &.messages-notices tr td:last-child {
-	        > div {
-	          margin-bottom: 14px;
-	          overflow: hidden;
-	        }
-	        a {
-	          margin-bottom: 2px;
-	        }
-	      }
-	      tr td.thread-info p {
-	        font-size: 14px;
-	      }
-
-		  tr {
-		    td.thread-info p a {
-		  	color: #333;
-		  	font-weight: 600;
-		  	margin-bottom: 5px;
-		  	display: inline-block;
-		  	&:hover {
-		  	  color: $green;
-		  	}
-		    }
-		    &.unread td {
-		  	background-color: #f9f9f9;
-		  	border-top: 2px solid #e1e1e1;
-		  	border-bottom: 2px solid #e1e1e1;
-		  	&.thread-from {
-		  	  border-left: 2px solid #e1e1e1;
-		  	  position: relative;
-		  	}
-		    }
-		  }
-
-		  tr.unread td.thread-from {
-			&:before {
-			  right: 100%;
-			  top: 50%;
-			  border: solid transparent;
-			  /*margin-right: 2px;*/
-			  content: " ";
-			  height: 0;
-			  width: 0;
-			  position: absolute;
-			  pointer-events: none;
-			}
-			&:after {
-			  right: 100%;
-			  top: 50%;
-			  border: solid transparent;
-			  /*margin-right: 2px;*/
-			  content: " ";
-			  height: 0;
-			  width: 0;
-			  position: absolute;
-			  pointer-events: none;
-			  border-color: rgba(255, 255, 255, 0);
-			  border-right-color: #f9f9f9;
-			  border-width: 7px;
-			  margin-top: -7px;
-			}
-			&:before {
-			  border-color: rgba(225, 225, 225, 0);
-			  border-right-color: #e1e1e1;
-			  border-width: 10px;
-			  margin-top: -10px;
-			}
-		  }
-		  &:not(.messages-notices) tr td:last-child {
-			padding-right: 15px;
-			width: 50px;
-		  }
-		  tr.unread td:last-child {
-			border-right: 2px solid rgba(0, 0, 0, 0.1);
-		  }
-
-		  input[type="checkbox"] {
-			height: 18px;
-			opacity: 0;
-			position: relative;
-			width: 18px;
-			z-index: 1;
-			margin: 0;
-			+ strong {
-			  position: relative;
-			  color: rgba(0, 0, 0, 0.4);
-			  left: 10px;
-			  margin-right: 10px;
-			  z-index: 0;
-			  &:before {
-				content: '';
-				position: absolute;
-				box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.2);
-				top: -1px;
-				left: -26px;
-				z-index: 0;
-				width: 14px;
-				height: 14px;
-				line-height: 1;
-			  }
-			}
-			&:checked + strong:after {
-			  content: "\2713";
-			  font-size: 16px;
-			  position: absolute;
-			  top: -2px;
-			  left: -25px;
-			  color: $green;
-			  line-height: 1;
-			}
-		  }
-		  th input[type="checkbox"] + strong {
-			top: 2px;
-		  }
-		  tr {
-			th:first-child, td:first-child {
-			  padding-left: 0;
-			}
-		  }
-		  margin: 0;
-		  clear: left;
-		  border-bottom: 0;
-		  th {
-			border-top: 2px solid #333;
-			border-bottom: 0;
-			font-size: 14px;
-			text-transform: uppercase;
-			color: #333;
-			/*border-bottom: 2px solid #e1e1e1;*/
-			border-bottom: 0;
-		  }
-		  tbody tr.read:first-child {
-			border-top: 2px solid #e1e1e1;
-		  }
-
-		  td, th {
-			padding: 18px 0 18px 12px;
-		  }
-	    }
-
-		th.thread-checkbox {
-	      text-align: left;
-	    }
-
-	    .messages-notices td strong {
-	      color: #333;
-	      font-weight: 600;
-	      margin-bottom: 5px;
-	      display: inline-block;
-	    }
-
-		div.messages-options-nav .buddyboss-select-inner {
-		  select {
-		    height: auto;
-		    line-height: 1;
-		  }
-		  height: auto;
-		  line-height: 1;
-		  span {
-		    font-size: 14px;
-		    text-transform: none;
-		    font-weight: 600;
-		    color: #333;
-		    line-height: 1.3;
-		  }
-		  &:after {
-		    border: none;
-		    height: auto;
-		    line-height: 18px;
-		    color: $green;
-		    font-size: 10px;
-		    right: 8px;
-		  }
-		}
-
-		/* Single Thread */
-
-		div#message-thread {
-		  div {
-		    &.message-box {
-		      margin: 0;
-		      padding: 15px;
-		    }
-		    &.alt {
-		      background-color: #f4f4f4;
-		    }
-		  }
-		  p#message-recipients {
-		    margin: 10px 0 20px 0;
-		  }
-		  img.avatar {
-		    float: left;
-		    margin: 0 10px 0 0;
-		    vertical-align: middle;
-		    box-shadow: none;
-		  }
-		  strong {
-		    font-size: 100%;
-		    margin: 3px;
-		    vertical-align: middle;
-		    a {
-		      text-decoration: none;
-		    }
-		    span.activity {
-		      margin: 4px 0 0 10px;
-		    }
-		  }
-		  div.message-metadata {
-		    overflow: hidden;
-		  }
-
-			div {
-			  &.message-metadata .activity {
-			    vertical-align: middle;
-			  }
-			  &.message-content {
-			    margin-left: 45px;
-			    .submit {
-			      margin-bottom: 30px;
-			    }
-			  }
-			  &.message-options {
-			    text-align: right;
-			  }
-			}
-		}
-
 		div.profile h4 {
 	      border-bottom: 1px solid #e1e1e1;
 	      font-size: 19px;
@@ -5784,9 +5455,15 @@ body.buddypress {
 			text-align: center;
 		  }
 		}
-		#admins-list div.action a, #mods-list div.action a, #members-list div.action a, #groups-list div.action a, #friend-list div.action a {
-		  margin: 0 0 10px;
-		  display: inline-block;
+		#admins-list,
+        #mods-list,
+        #members-list,
+        #groups-list,
+        #friend-list  {
+            div.action a {
+		        margin: 0 0 10px;
+		        display: inline-block;
+            }
 		}
 
 		ul {
@@ -5910,37 +5587,6 @@ body.buddypress {
 
 		#secondary {
 			margin-top: 0;
-		}
-
-		#send_message_form.standard-form {
-			ul.acfb-holder {
-				li.friend-tab {
-					background-color: transparent;
-					border: none;
-
-					img.avatar {
-						margin-right: 5px;
-					}
-				}
-			}
-
-			label,
-			legend {
-                @include form-label();
-            }
-
-            input[type="text"] {
-            	@include form-input();
-            }
-
-            input[type="text"],
-            textarea {
-            	margin-bottom: 20px;
-            }
-
-            label[for=subject] {
-            	margin-top: 10px;
-            }
 		}
 
 	    div {

@@ -250,7 +250,8 @@ a {
 }
 
 .is-mobile #main-wrap #page #buddypress div.item-list-tabs:not(#object-nav) ul li {
-  &.current a, &.selected a {
+  &.current a,
+  &.selected a {
     color: $green;
   }
 }
@@ -438,14 +439,10 @@ input {
   }
 }
 
-.bp-user.messages.is-desktop #buddypress div#subnav.item-list-tabs ul li {
-  &:hover a, &.selected a, &.current a, a span {
-    color: $green;
-  }
-}
-
 .search.is-desktop #buddypress div:not(#item-nav):not(#mobile-item-nav) > .dir-form div.item-list-tabs ul li {
-  a span, &.active a, &:hover a {
+  a span,
+  &.active a,
+  &:hover a {
     color: $green;
   }
 }

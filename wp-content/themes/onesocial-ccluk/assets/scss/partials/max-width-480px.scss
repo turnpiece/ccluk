@@ -57,25 +57,6 @@ body {
 	}
 }
 
-#message-threads .thread-from {
-  .table-cell {
-	width: 100%;
-	display: block;
-	text-align: center;
-	&:first-child {
-	  width: 100%;
-	  display: block;
-	  text-align: center;
-	}
-  }
-  img {
-	margin: 0 0 10px 0;
-  }
-}
-.item-header-mobile {
-  margin-top: 40px;
-}
-
 #buddypress .dir-form div.item-list-tabs ul li a span,
 #buddypress div#subnav.item-list-tabs ul li a span,
 #buddypress div:not(#item-nav):not(#mobile-item-nav)>.item-list-tabs ul li a span,

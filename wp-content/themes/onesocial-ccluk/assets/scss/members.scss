@@ -4,10 +4,11 @@
 
 @import "partials/variables";
 @import "partials/mixins";
+@import "partials/boss-custom";
+@import "partials/messages";
 
 /** Styles for plugins etc. **/
 
 @import "vendor/buddypress";
 @import "vendor/bbpress";
-@import "vendor/messages";
 @import "vendor/boss-inbox";
