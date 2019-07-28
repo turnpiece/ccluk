@@ -5,7 +5,7 @@
 	<div class="buddypress-content-wrap">
 
 		<section class="buddypress-content">
-			<?php if ( !(bp_is_user_settings() || bp_is_user_messages()) ) : ?>
+			<?php if ( !bp_is_user_messages() ) : ?>
 				<div id="item-header" class="item-header-mobile" role="complementary">
 					<?php bp_get_template_part( 'members/single/member-header' ) ?>
 				</div>
@@ -28,17 +28,11 @@
 				</div><!-- #item-nav -->
 			<?php endif; ?>
 
-			<?php if ( bp_is_user_settings() ) : ?>
-				<h1 class="title big"><?php _e( 'Settings', 'onesocial' ); ?></h1>
-			<?php endif; ?>
-
 			<div id="item-body" role="main">
 
 				<?php
 				do_action( 'bp_before_member_body' );
 
-				bp_get_template_part( 'members/single/profile' );
-/*
 				if ( bp_is_user_profile() || !bp_current_component() ) :
 					bp_get_template_part( 'members/single/profile' );
 
@@ -57,6 +51,9 @@
 				elseif ( bp_is_user_messages() ) :
 					bp_get_template_part( 'members/single/messages' );
 
+				elseif ( bp_is_user_profile() ) :
+					bp_get_template_part( 'members/single/profile' );
+
 				elseif ( bp_is_user_forums() ) :
 					bp_get_template_part( 'members/single/forums' );
 
@@ -71,7 +68,7 @@
 					bp_get_template_part( 'members/single/plugins' );
 
 				endif;
-*/
+
 				do_action( 'bp_after_member_body' );
 				?>
 
@@ -80,7 +77,7 @@
 		</section>
 
 		<?php if ( !(bp_is_user_settings() || bp_is_user_messages()) ) : ?>
-		
+
 			<div id="secondary" class="widget-area" role="complementary">
 
 				<div id="item-header" class="item-header-sidebar" role="complementary">
