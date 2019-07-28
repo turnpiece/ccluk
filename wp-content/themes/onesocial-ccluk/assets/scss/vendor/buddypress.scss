@@ -2790,10 +2790,6 @@ body.activity-permalink #buddypress ul.item-list {
   text-align: left;
 }
 
-.messages.bp-user #buddypress div#item-body {
-  width: 100%;
-}
-
 .settings.bp-user {
   #buddypress div {
     &#item-posts, &#item-body {
@@ -4426,72 +4422,6 @@ h1.big {
   margin-bottom: 50px;
 }
 
-/*--------------------------------------------------------------
-1.1.10 - Messaging
---------------------------------------------------------------*/
-
-.bp-user.messages #buddypress div#subnav.item-list-tabs {
-  margin: 0;
-  ul {
-    /*width: 166px;*/
-    li {
-      float: none;
-      width: 100%;
-      margin: 0;
-      a {
-        border: none;
-        font-size: 14px;
-        text-transform: none;
-        padding: 0;
-        background-color: transparent;
-        font-weight: 600;
-        strong, span {
-          float: right;
-          background: transparent;
-          color: #54ae68;
-          padding: 0;
-          line-height: 25px;
-          font-size: 14px;
-        }
-      }
-      &:hover a, &.selected a, &.current a {
-        color: #54ae68;
-      }
-      &#compose-personal-li {
-        padding-bottom: 22px;
-        border-bottom: 2px solid #54ae68;
-        margin-bottom: 22px;
-        margin-top: 2px;
-        a {
-          text-transform: uppercase;
-          span {
-            font-size: 16px;
-          }
-        }
-      }
-      float: none;
-      width: 100%;
-      margin: 0 0 10px 0;
-    }
-  }
-}
-
-#buddypress#buddypress {
-  div.message-search {
-    float: right;
-    margin: -1px 0 -36px;
-  }
-  form#send_message_form {
-    input#send-notice {
-      clear: left;
-      float: left;
-    }
-    label span.text {
-      font-size: 14px;
-      margin-left: 5px;
-    }
-  }
-}
 
 /* Compose */
 
@@ -5177,40 +5107,57 @@ body.buddypress {
 	  height: 30px;
 	}
 
-	&.single-item.groups .site-content {
+	&.single-item.groups {
+        .site-content {
 	  margin-top: 0;
 	}
 
-	&.single-item.groups #buddypress div#item-header {
-	  div#item-header-avatar {
-	    width: 185px;
-	  }
-	  #item-header-avatar img.avatar {
-	    width: 185px;
-	    height: 185px;
-	  }
-	}
+    	#buddypress div#item-header {
+    	  div#item-header-avatar {
+    	    width: 185px;
+    	  }
+    	  #item-header-avatar img.avatar {
+    	    width: 185px;
+    	    height: 185px;
+    	  }
+    	}
 
-	&.single-item.groups {
-	  #secondary {
-	    #item-header-content {
-	      padding-top: 10px;
-	      + .widget {
-	        padding-top: 4px;
-	      }
-          #item-meta {
-              p {
-                  color: $green;
-                  font-size: $font-size-tiny;
+
+        #secondary {
+            #item-header-content {
+              padding-top: 10px;
+              + .widget {
+                padding-top: 4px;
               }
-          }
-	    }
-	  }
-	  #buddypress form#send-invite-form #invite-list {
-	    margin-bottom: 50px;
-	  }
-	}
+              #item-meta {
+                  p {
+                      color: $green;
+                      font-size: $font-size-tiny;
+                  }
+              }
+            }
+        }
+        #buddypress {
+            form#send-invite-form #invite-list {
+                margin-bottom: 50px;
+            }
 
+
+    	  #item-header span.activity {
+    	    color: $white;
+    	    margin-top: 6px;
+    	    display: block;
+    	  }
+    	  #activity-stream {
+    	    margin-bottom: 0;
+    	  }
+    	  div#item-body {
+    	    margin-bottom: 70px;
+    	    float: right;
+    	    width: 100%;
+    	  }
+        }
+    }
 	#item-title-area {
 	  h1 {
 	    margin-top: 0;
@@ -5258,22 +5205,6 @@ body.buddypress {
 	  font-size: $font-size-tiny;
 	  margin-top: 5px;
 	  margin-left: 0;
-	}
-
-	&.single-item.groups #buddypress {
-	  #item-header span.activity {
-	    color: $white;
-	    margin-top: 6px;
-	    display: block;
-	  }
-	  #activity-stream {
-	    margin-bottom: 0;
-	  }
-	  div#item-body {
-	    margin-bottom: 70px;
-	    float: right;
-	    width: 100%;
-	  }
 	}
 
 	#buddypress div#item-header div#item-meta {
@@ -5524,9 +5455,15 @@ body.buddypress {
 			text-align: center;
 		  }
 		}
-		#admins-list div.action a, #mods-list div.action a, #members-list div.action a, #groups-list div.action a, #friend-list div.action a {
-		  margin: 0 0 10px;
-		  display: inline-block;
+		#admins-list,
+        #mods-list,
+        #members-list,
+        #groups-list,
+        #friend-list  {
+            div.action a {
+		        margin: 0 0 10px;
+		        display: inline-block;
+            }
 		}
 
 		ul {
@@ -5650,37 +5587,6 @@ body.buddypress {
 
 		#secondary {
 			margin-top: 0;
-		}
-
-		#send_message_form.standard-form {
-			ul.acfb-holder {
-				li.friend-tab {
-					background-color: transparent;
-					border: none;
-
-					img.avatar {
-						margin-right: 5px;
-					}
-				}
-			}
-
-			label,
-			legend {
-                @include form-label();
-            }
-
-            input[type="text"] {
-            	@include form-input();
-            }
-
-            input[type="text"],
-            textarea {
-            	margin-bottom: 20px;
-            }
-
-            label[for=subject] {
-            	margin-top: 10px;
-            }
 		}
 
 	    div {
