@@ -5,18 +5,18 @@
 	<?php do_action( 'bp_before_member_messages_threads' ); ?>
 
 	<form action="<?php echo bp_loggedin_user_domain() . bp_get_messages_slug() . '/' . bp_current_action() ?>/bulk-manage/" method="post" id="messages-bulk-management">
-	
+	<?php /*
 		<div class="messages-options-nav">
 			<?php bp_messages_bulk_management_dropdown(); ?>
 		</div><!-- .messages-options-nav -->
 
 		<?php wp_nonce_field( 'messages_bulk_nonce', 'messages_bulk_nonce' ); ?>
-		
+	*/ ?>
 		<table id="message-threads" class="messages-table">
-		
+
 			<thead>
 				<tr>
-                    <th scope="col" class="thread-checkbox"><input id="select-all-messages" type="checkbox"><strong></strong></th>
+                    <?php /* <th scope="col" class="thread-checkbox"><input id="select-all-messages" type="checkbox"><strong></strong></th> */ ?>
 					<th scope="col" class="thread-from"><?php _e( 'From', 'onesocial' ); ?></th>
 					<th scope="col" class="thread-info"><?php _e( 'Subject', 'onesocial' ); ?></th>
 					<th scope="col" class="thread-date"><?php _e( 'Date', 'onesocial' ); ?></th>
@@ -38,15 +38,15 @@
 					<?php endif; ?>
 				</tr>
 			</thead>
-			
+
 			<tbody>
-    
+
 				<?php while ( bp_message_threads() ) : bp_message_thread(); ?>
 
 					<tr id="m-<?php bp_message_thread_id(); ?>" class="<?php bp_message_css_class(); ?><?php if ( bp_message_thread_has_unread() ) : ?> unread<?php else: ?> read<?php endif; ?>">
-						<td>
+						<?php /* <td>
                             <input type="checkbox" name="message_ids[]" class="message-check" value="<?php bp_message_thread_id(); ?>" /><strong></strong>
-						</td>
+						</td> */ ?>
 
 						<?php if ( 'sentbox' != bp_current_action() ) : ?>
 							<td class="thread-from">
@@ -117,7 +117,7 @@
 	</form>
 
 	<?php do_action( 'bp_after_member_messages_threads' ); ?>
-	
+
 	<!--<div class="pagination no-ajax" id="user-pag">-->
 	<div id="pag-bottom" class="pagination no-ajax">
 
