@@ -625,6 +625,7 @@ body.bp-user.messages.is-desktop #buddypress .messages-container #leftcolumn > d
   color: #22a7f0;
   padding: 0;
   border: none;
+  float: right;
 }
 
 body.bp-user.messages.is-desktop #buddypress .messages-container #leftcolumn > div#subnav.item-list-tabs > ul > li > a:hover {
