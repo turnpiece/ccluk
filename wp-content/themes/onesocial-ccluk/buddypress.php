@@ -90,8 +90,8 @@ get_header();
 				echo $custom_title;
 				?>
 			</h1>
-			<div id="members-nav">
-				<ul id="nav-bar-filter" class="item-list-tabs horizontal-responsive-menu">
+			<div id="members-nav" class="item-list-tabs" role="navigation">
+				<ul id="nav-bar-filter" class="horizontal-responsive-menu">
 					<li>
 						<a href="<?php echo site_url() ?>/activity/" class="<?php echo $activity_dir ? 'current' : '' ?>"><?php _e( "Activity", 'onesocial' ) ?></a>
 					</li>
