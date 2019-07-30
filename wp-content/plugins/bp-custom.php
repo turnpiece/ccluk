@@ -30,6 +30,26 @@ class CCLUK_BP_Custom {
 		// sync BP/mailchimp user data
 		add_filter( 'mc4wp_user_merge_vars', array( $this, 'mailchimp_user_sync' ), 10, 2 );
 		add_filter( 'mailchimp_sync_user_data', array( $this, 'mailchimp_user_sync' ), 10, 2 );
+
+		// add BuddyPress menu items for logged in users
+		add_filter( 'wp_nav_menu_items', array( $this, 'buddypress_menu' ), 10, 2 );
+	}
+
+	public function buddypress_menu( $items, $args ) {
+		if( is_user_logged_in() && $args->theme_location == 'primary-menu' ) {
+			$slugs = array(
+				'groups' => bp_get_groups_root_slug(),
+				'members' => bp_get_members_root_slug(),
+				'activity' => bp_get_activity_root_slug(),
+			);
+
+			$items .= '<li class="menu-item menu-item-has-children"><a href="'.site_url() . '/' . $slugs['groups'] . '/">'.__( 'Groups' ).'</a>';
+			$items .= '<ul class="sub-menu">';
+			$items .= '<li class="menu-item"><a href="'.site_url() . '/' . $slugs['members'] .'/">'.__( 'Members' ).'</a></li>';
+			$items .= '<li class="menu-item"><a href="'.site_url() . '/' . $slugs['activity'] .'/">'.__( 'Activity' ).'</a></li>';
+			$items .= '</ul></li>';
+		}
+		return $items;
 	}
 
 	// join members group on signup

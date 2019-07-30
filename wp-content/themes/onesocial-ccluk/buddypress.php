@@ -90,21 +90,7 @@ get_header();
 				echo $custom_title;
 				?>
 			</h1>
-			<div id="members-nav" class="item-list-tabs" role="navigation">
-				<ul id="nav-bar-filter" class="horizontal-responsive-menu">
-					<li>
-						<a href="<?php echo site_url() ?>/activity/" class="<?php echo $activity_dir ? 'current' : '' ?>"><?php _e( "Activity", 'onesocial' ) ?></a>
-					</li>
-					<li>
-						<a href="<?php echo site_url() ?>/members/" class="<?php echo $members_dir ? 'current' : '' ?>"><?php _e( "Members", 'onesocial' ) ?></a>
-					</li>
-					<li>
-						<a href="<?php echo site_url() ?>/groups/" class="<?php echo $groups_dir ? 'current' : '' ?>"><?php _e( "Groups", 'onesocial' ) ?></a>
-					</li>
-				</ul>
-			</div>
 		</header>
-
 
 		<div id="content" role="main" class="buddypress-content-wrap">
 
