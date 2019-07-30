@@ -171,7 +171,7 @@ class Ai1wm_Updater {
 			if ( $file === $extension['basename'] ) {
 
 				// Get updater URL
-				$updater_url = add_query_arg( array( 'ai1wm_updater' => 1 ), network_admin_url( 'plugins.php' ) );
+				$updater_url = add_query_arg( array( 'ai1wm_check_for_updates' => 1, 'ai1wm_nonce' => wp_create_nonce( 'ai1wm_check_for_updates' ) ), network_admin_url( 'plugins.php' ) );
 
 				// Check Purchase ID
 				if ( get_option( $extension['key'] ) ) {

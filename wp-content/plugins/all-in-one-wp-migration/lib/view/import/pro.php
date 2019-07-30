@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 
 <p class="max-upload-size">
-	<?php printf( __( 'Maximum upload file size: <strong>%s</strong>.', AI1WM_PLUGIN_NAME ), esc_html( size_format( wp_max_upload_size() ) ) ); ?>
+	<?php printf( __( 'Maximum upload file size: <strong>%s</strong>.', AI1WM_PLUGIN_NAME ), esc_html( ai1wm_size_format( wp_max_upload_size() ) ) ); ?>
 </p>
 <p>
 	<a href="https://help.servmask.com/2018/10/27/how-to-increase-maximum-upload-file-size-in-wordpress/" target="_blank"><?php _e( 'How-to: Increase maximum upload file size', AI1WM_PLUGIN_NAME ); ?></a>

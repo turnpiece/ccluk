@@ -136,6 +136,12 @@ $cleantalk_hooked_actions[]='ninja_forms_ajax_submit';
 $cleantalk_hooked_actions[]='nf_ajax_submit';
 $cleantalk_hooked_actions[]='ninja_forms_process'; // Depricated ?
 
+/* Follow-Up Emails */
+$cleantalk_hooked_actions[] = 'fue_wc_set_cart_email';  // Don't check email via this plugin
+
+/* Follow-Up Emails */
+$cleantalk_hooked_actions[] = 'fue_wc_set_cart_email';  // Don't check email via this plugin
+
 function ct_validate_email_ajaxlogin($email=null, $is_ajax=true){
 	
 	require_once(CLEANTALK_PLUGIN_DIR . 'cleantalk-public.php');
@@ -252,9 +258,7 @@ function ct_ajax_hook($message_obj = false, $additional = false)
 	$message_obj = (array)$message_obj;
 	
 	// Get current_user and set it globaly
-	if(!($current_user instanceof WP_User)){
-		apbct_wp_set_current_user(apbct_wp_get_current_user());
-	}
+	apbct_wp_set_current_user($current_user instanceof WP_User ? $current_user	: apbct_wp_get_current_user() );
 	
     // Go out because of not spam data
     $skip_post = array(
@@ -279,13 +283,15 @@ function ct_ajax_hook($message_obj = false, $additional = false)
 	    'validate_register_email', // Service id #313320
 	    'elementor_pro_forms_send_form', //Elementor Pro
 	    'phone-orders-for-woocommerce', //Phone orders for woocommerce backend
+	    'ihc_check_reg_field_ajax', //Ajax check required fields
+	    'OSTC_lostPassword', //Lost password ajax form
     );
 	
     // Skip test if
     if( !$apbct->settings['general_contact_forms_test'] || // Test disabled
-        !ct_is_user_enable() || // User is admin, editor, author
-	    (function_exists('get_current_user_id') && get_current_user_id() != 0) || // Check with default wp_* function if it's admin
-	    ($apbct->settings['protect_logged_in'] && (isset($current_user->ID) && $current_user->ID !== 0 )) || // Logged in user
+        !apbct_is_user_enable($apbct->user) || // User is admin, editor, author
+	    // (function_exists('get_current_user_id') && get_current_user_id() != 0) || // Check with default wp_* function if it's admin
+	    ($apbct->settings['protect_logged_in'] && ($apbct->user instanceof WP_User) && $apbct->user->ID !== 0 ) || // Logged in user
         check_url_exclusions() || // url exclusions
         (isset($_POST['action']) && in_array($_POST['action'], $skip_post)) || // Special params
 	    (isset($_GET['action'])  && in_array($_GET['action'], $skip_post)) ||  // Special params

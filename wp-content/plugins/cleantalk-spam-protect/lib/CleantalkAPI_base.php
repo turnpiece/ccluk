@@ -105,6 +105,7 @@ class CleantalkAPI_base
 	 *
 	 * @param string api_key      API key
 	 * @param string $path_to_cms Path to website
+	 *
 	 * @return type
 	 */
 	static public function method__notice_paid_till($api_key, $path_to_cms, $do_check = true)
@@ -336,9 +337,12 @@ class CleantalkAPI_base
 	/**
 	 * Function gets spam domains report
 	 *
-	 * @param string api key
-	 * @param integer report days
-	 * @return type
+	 * @param string             $api_key
+	 * @param array|string|mixed $data
+	 * @param string             $date
+	 * @param bool do_check
+	 *
+	 * @return array|bool|mixed
 	 */
 	static public function method__backlinks_check_cms($api_key, $data, $date = null, $do_check = true)
 	{
@@ -362,7 +366,7 @@ class CleantalkAPI_base
 	 * @param string api_key
 	 * @param array logs
 	 * @param bool do_check
-	 * @return type
+	 * @return array|bool|mixed
 	 */
 	static public function method__security_backend_logs($api_key, $logs, $do_check = true)
 	{
@@ -381,15 +385,16 @@ class CleantalkAPI_base
 	
 	/**
 	 * Sends data about auto repairs
-	 * 
-	 * @param type $api_key
-	 * @param type $repair_result
-	 * @param type $repair_comment
-	 * @param type $repaired_processed_files
-	 * @param type $repaired_total_files_proccessed
-	 * @param type $backup_id
-	 * @param type $do_check
-	 * @return type
+	 *
+	 * @param string $api_key
+	 * @param      $repair_result
+	 * @param      $repair_comment
+	 * @param      $repaired_processed_files
+	 * @param      $repaired_total_files_proccessed
+	 * @param      $backup_id
+	 * @param bool $do_check
+	 *
+	 * @return array|bool|mixed
 	 */
 	static public function method__security_mscan_repairs($api_key, $repair_result, $repair_comment, $repaired_processed_files, $repaired_total_files_proccessed, $backup_id, $do_check = true)
 	{
@@ -412,10 +417,11 @@ class CleantalkAPI_base
 	/**
 	 * Force server to update checksums for specific plugin\theme
 	 * 
-	 * @param type $api_key
-	 * @param type $plugins_and_themes_to_refresh
-	 * @param type $do_check
-	 * @return type
+	 * @param string $api_key
+	 * @param string $plugins_and_themes_to_refresh
+	 * @param bool $do_check
+	 *
+	 * @return array|bool|mixed
 	 */
 	static public function method__request_checksums($api_key, $plugins_and_themes_to_refresh, $do_check = true)
 	{
@@ -434,11 +440,11 @@ class CleantalkAPI_base
 	/**
 	 * Function sends raw request to API server
 	 *
-	 * @param string url of API server
-	 * @param array data to send
-	 * @param boolean is data have to be JSON encoded or not
-	 * @param integer connect timeout
-	 * @return type
+	 * @param array $data to send
+	 * @param string $url of API server
+	 * @param integer $timeout timeout in seconds
+	 * @param boolean $ssl use ssl on not
+	 * @return array|bool
 	 */
 	static public function send_request($data, $url = self::URL, $timeout = 5, $ssl = false)
 	{
@@ -524,8 +530,8 @@ class CleantalkAPI_base
 	/**
 	 * Function checks server response
 	 *
-	 * @param string result
-	 * @param string request_method
+	 * @param string $result
+	 * @param string $method_name
 	 * @return mixed (array || array('error' => true))
 	 */
 	static public function check_response($result, $method_name = null)
@@ -558,7 +564,6 @@ class CleantalkAPI_base
 			);
 		}
 		
-		$out = array();
 		// Pathces for different methods			
 		switch ($method_name) {
 			

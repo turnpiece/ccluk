@@ -280,7 +280,7 @@ function ai1wm_multisite_bytes( $params ) {
  * @return string
  */
 function ai1wm_archive_size( $params ) {
-	return size_format( filesize( ai1wm_archive_path( $params ) ) );
+	return ai1wm_size_format( filesize( ai1wm_archive_path( $params ) ) );
 }
 
 /**
@@ -290,7 +290,7 @@ function ai1wm_archive_size( $params ) {
  * @return string
  */
 function ai1wm_backup_size( $params ) {
-	return size_format( filesize( ai1wm_backup_path( $params ) ) );
+	return ai1wm_size_format( filesize( ai1wm_backup_path( $params ) ) );
 }
 
 /**
@@ -314,6 +314,23 @@ function ai1wm_parse_size( $size, $default = null ) {
 	}
 
 	return $default;
+}
+
+/**
+ * Format file size into human-readable string
+ *
+ * Fixes the WP size_format bug: size_format( '0' ) => false
+ *
+ * @param  int|string   $bytes            Number of bytes. Note max integer size for integers.
+ * @param  int          $decimals         Optional. Precision of number of decimal places. Default 0.
+ * @return string|false False on failure. Number string on success.
+ */
+function ai1wm_size_format( $bytes, $decimals = 0 ) {
+	if ( strval( $bytes ) === '0' ) {
+		return size_format( 0, $decimals );
+	}
+
+	return size_format( $bytes, $decimals );
 }
 
 /**

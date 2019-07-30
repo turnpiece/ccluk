@@ -234,7 +234,7 @@ function apbct_settings__add_page() {
 					'childrens'   => array('set_cookies__sessions'),
 				),
 				'set_cookies__sessions' => array(
-					'title'       => __('Use alternative mechanism for cookies.', 'cleantalk'),
+					'title'       => __('Use alternative mechanism for cookies', 'cleantalk'),
 					'description' => __('Doesn\'t use cookie or PHP sessions. Collect data for all types of bots.', 'cleantalk'),
 					'parent'      => 'set_cookies',
 					'class'       => 'apbct_settings-field_wrapper--sub',
@@ -728,7 +728,7 @@ function apbct_settings__field__api_key(){
 						echo '<input checked type="checkbox" id="license_agreed" onclick="apbctSettingsDependencies(\'get_key_auto\');"/>';
 						echo '<label for="spbc_license_agreed">';
 							printf(
-								__('I agree with of %sLicense Agreement%s.', 'security-malware-firewall'),
+								__('I accept %sLicense Agreement%s.', 'security-malware-firewall'),
 								'<a href="https://cleantalk.org/publicoffer"         target="_blank" style="color:#66b;">', '</a>'
 							);
 						echo "</label>";
