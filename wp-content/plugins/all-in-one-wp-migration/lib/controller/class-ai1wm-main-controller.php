@@ -795,7 +795,7 @@ class Ai1wm_Main_Controller {
 					'Your file exceeds the maximum upload size for this site: <strong>%s</strong><br />%s%s',
 					AI1WM_PLUGIN_NAME
 				),
-				esc_html( size_format( wp_max_upload_size() ) ),
+				esc_html( ai1wm_size_format( wp_max_upload_size() ) ),
 				__(
 					'<a href="https://help.servmask.com/2018/10/27/how-to-increase-maximum-upload-file-size-in-wordpress/" target="_blank">How-to: Increase maximum upload file size</a> or ',
 					AI1WM_PLUGIN_NAME
@@ -970,7 +970,7 @@ class Ai1wm_Main_Controller {
 
 		wp_localize_script( 'ai1wm_updater', 'ai1wm_updater', array(
 			'ajax' => array(
-				'url' => wp_make_link_relative( admin_url( 'admin-ajax.php?action=ai1wm_updater' ) ),
+				'url' => wp_make_link_relative( add_query_arg( array( 'ai1wm_nonce' => wp_create_nonce( 'ai1wm_updater' ) ), admin_url( 'admin-ajax.php?action=ai1wm_updater' ) ) ),
 			),
 		) );
 
@@ -1012,9 +1012,11 @@ class Ai1wm_Main_Controller {
 		}
 
 		// Check for updates
-		if ( isset( $_GET['ai1wm_updater'] ) ) {
-			if ( current_user_can( 'update_plugins' ) ) {
-				Ai1wm_Updater::check_for_updates();
+		if ( isset( $_GET['ai1wm_check_for_updates'] ) ) {
+			if ( check_admin_referer( 'ai1wm_check_for_updates', 'ai1wm_nonce' ) ) {
+				if ( current_user_can( 'update_plugins' ) ) {
+					Ai1wm_Updater::check_for_updates();
+				}
 			}
 		}
 	}
@@ -1032,6 +1034,8 @@ class Ai1wm_Main_Controller {
 		add_action( 'wp_ajax_nopriv_ai1wm_backups', 'Ai1wm_Backups_Controller::delete' );
 		add_action( 'wp_ajax_nopriv_ai1wm_feedback', 'Ai1wm_Feedback_Controller::feedback' );
 		add_action( 'wp_ajax_nopriv_ai1wm_report', 'Ai1wm_Report_Controller::report' );
+		add_action( 'wp_ajax_nopriv_ai1wm_add_backup_label', 'Ai1wm_Backups_Controller::add_label' );
+		add_action( 'wp_ajax_nopriv_ai1wm_backup_list', 'Ai1wm_Backups_Controller::backup_list' );
 
 		// Private actions
 		add_action( 'wp_ajax_ai1wm_export', 'Ai1wm_Export_Controller::export' );

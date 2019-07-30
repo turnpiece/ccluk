@@ -41,9 +41,10 @@ class WP_Smush_Installer {
 			define( 'WP_SMUSH_ACTIVATING', true );
 		}
 
-		$version  = get_site_option( WP_SMUSH_PREFIX . 'version' );
+		$version = get_site_option( WP_SMUSH_PREFIX . 'version' );
+
+		WP_Smush_Settings::get_instance()->init();
 		$settings = WP_Smush_Settings::get_instance()->get();
-		$settings = ! empty( $settings ) ? $settings : WP_Smush_Settings::get_instance()->init();
 
 		// If the version is not saved or if the version is not same as the current version,.
 		if ( ! $version || WP_SMUSH_VERSION !== $version ) {
@@ -110,6 +111,10 @@ class WP_Smush_Installer {
 
 			if ( version_compare( $version, '3.2.2', '<' ) ) {
 				self::upgrade_3_2_2();
+			}
+
+			if ( version_compare( $version, '3.2.2.1', '<' ) ) {
+				self::upgrade_3_2_2_1();
 			}
 
 			// Create/upgrade directory smush table.
@@ -283,6 +288,24 @@ class WP_Smush_Installer {
 		$lazy['animation'] = $animation;
 
 		WP_Smush_Settings::get_instance()->set_setting( WP_SMUSH_PREFIX . 'lazy_load', $lazy );
+	}
+
+	/**
+	 * Upgrade to 3.2.2.1
+	 *
+	 * Fix the network wide access upgrade.
+	 *
+	 * @since 3.2.2.1
+	 */
+	private static function upgrade_3_2_2_1() {
+		if ( ! is_multisite() ) {
+			return;
+		}
+
+		wp_cache_flush();
+		$network_enabled = get_site_option( WP_SMUSH_PREFIX . 'networkwide' );
+		update_site_option( WP_SMUSH_PREFIX . 'networkwide', ! ( '1' === $network_enabled ) );
+		wp_cache_flush();
 	}
 
 }

@@ -3,7 +3,7 @@ Contributors: safronik
 Tags: spam, antispam, protection, comments, firewall 
 Requires at least: 3.0
 Tested up to: 5.3
-Stable tag: 5.122
+Stable tag: 5.123
 License: GPLv2
 
 Spam protection, antispam, all-in-one, premium plugin. No spam comments & users, no spam contact form & WooCommerce anti-spam.
@@ -575,6 +575,15 @@ If your website has forms that send data to external sources, you can enable opt
 10. Website's options.
 
 == Changelog ==
+= 5.123 July 25 2019 =
+  * Fix: Plenty of minor fixes.
+  * Fix: wpDiscuz integration.
+  * Fix: Integration with bbPress.
+  * Fix: New comment email notification.
+  * New: Follow-Up Emails integration.
+  * Fix: Woocommerce integration.
+  * Fix: Spelling.
+
 = 5.122 July 10 2019 =
   * Spam Protection improved.
   * Fix: Error while checking account status.
@@ -1947,6 +1956,15 @@ If your website has forms that send data to external sources, you can enable opt
   * First version
   
 == Upgrade Notice ==
+= 5.123 July 25 2019 =
+  * Fix: Plenty of minor fixes.
+  * Fix: wpDiscuz integration.
+  * Fix: Integration with bbPress.
+  * Fix: New comment email notification.
+  * New: Follow-Up Emails integration.
+  * Fix: Woocommerce integration.
+  * Fix: Spelling.
+
 = 5.122 July 10 2019 =
   * Spam Protection improved.
   * Fix: Error while checking account status.

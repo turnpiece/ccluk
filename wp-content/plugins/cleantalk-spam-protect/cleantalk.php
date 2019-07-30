@@ -3,12 +3,12 @@
   Plugin Name: Anti-Spam by CleanTalk
   Plugin URI: http://cleantalk.org
   Description: Max power, all-in-one, no Captcha, premium anti-spam plugin. No comment spam, no registration spam, no contact spam, protects any WordPress forms.
-  Version: 5.122
+  Version: 5.123
   Author: СleanTalk <welcome@cleantalk.org>
   Author URI: http://cleantalk.org
   Text Domain: cleantalk
   Domain Path: /i18n
-*/
+*/+
 
 $cleantalk_executed = false;
 
@@ -49,16 +49,18 @@ if(!defined('CLEANTALK_PLUGIN_DIR')){
     
     require_once( CLEANTALK_PLUGIN_DIR . 'lib/CleantalkDB_Wordpress.php'); // Database class
 	
-	require_once( CLEANTALK_PLUGIN_DIR . 'lib/cleantalk-php-patch.php'); // Pathces fpr different functions which not exists
-	require_once( CLEANTALK_PLUGIN_DIR . 'lib/CleantalkHelper.php');     // Helper class. Different useful functions
-	require_once( CLEANTALK_PLUGIN_DIR . 'lib/CleantalkAPI_base.php');   // API.
-	require_once( CLEANTALK_PLUGIN_DIR . 'lib/CleantalkAPI.php');        // API extension for Wordpress
-	require_once( CLEANTALK_PLUGIN_DIR . 'lib/Cleantalk.php');           // Main class for request
-	require_once( CLEANTALK_PLUGIN_DIR . 'lib/CleantalkRequest.php');    // Holds request data
-	require_once( CLEANTALK_PLUGIN_DIR . 'lib/CleantalkResponse.php');   // Holds response data
-	require_once( CLEANTALK_PLUGIN_DIR . 'lib/CleantalkCron.php');       // Cron handling
-    require_once( CLEANTALK_PLUGIN_DIR . 'lib/CleantalkState.php');      // State class
-    require_once( CLEANTALK_PLUGIN_DIR . 'inc/cleantalk-common.php');	
+	require_once( CLEANTALK_PLUGIN_DIR . 'lib/cleantalk-php-patch.php');  // Pathces fpr different functions which not exists
+	require_once( CLEANTALK_PLUGIN_DIR . 'lib/CleantalkHelper.php');      // Helper class. Different useful functions
+	require_once( CLEANTALK_PLUGIN_DIR . 'lib/CleantalkAPI_base.php');    // API.
+	require_once( CLEANTALK_PLUGIN_DIR . 'lib/CleantalkAPI.php');         // API extension for Wordpress
+	require_once( CLEANTALK_PLUGIN_DIR . 'lib/Cleantalk.php');            // Main class for request
+	require_once( CLEANTALK_PLUGIN_DIR . 'lib/CleantalkRequest.php');     // Holds request data
+	require_once( CLEANTALK_PLUGIN_DIR . 'lib/CleantalkResponse.php');    // Holds response data
+	require_once( CLEANTALK_PLUGIN_DIR . 'lib/CleantalkCron.php');        // Cron handling
+    require_once( CLEANTALK_PLUGIN_DIR . 'lib/CleantalkState.php');       // State class
+    // require_once( CLEANTALK_PLUGIN_DIR . 'lib/CleantalkIntegration.php'); // Integrations
+    require_once( CLEANTALK_PLUGIN_DIR . 'inc/cleantalk-pluggable.php');  // Pluggable functions
+    require_once( CLEANTALK_PLUGIN_DIR . 'inc/cleantalk-common.php');
 	
 	// Global ArrayObject with settings and other global varables
 	global $apbct;
@@ -150,7 +152,7 @@ if(!defined('CLEANTALK_PLUGIN_DIR')){
 		&& !empty($_POST['FB_userdata'])
 	){
 		require_once(CLEANTALK_PLUGIN_DIR . 'inc/cleantalk-public.php');
-		if (ct_is_user_enable()){
+		if (apbct_is_user_enable()){
 			$ct_check_post_result=false;
 			ct_registration_errors(null);
 		}
@@ -1403,192 +1405,47 @@ function apbct_sfw__delete_tables( $blog_id, $drop ) {
 }
 
 /**
- * Checks if the user is logged in
+ * Is enable for user group
  *
- * @return bool
+ * @param WP_User $user
+ *
+ * @return boolean
  */
-function apbct_is_user_logged_in(){
-	return count($_COOKIE) && defined('LOGGED_IN_COOKIE') && isset($_COOKIE[LOGGED_IN_COOKIE]);
+function apbct_is_user_enable($user = null) {
+	
+	global $current_user;
+	
+	$user = !empty($user) ? $user : $current_user;
+	
+	return apbct_is_user_role_in(array('administrator', 'editor', 'author'), $user)
+		? false
+		: true;
 }
 
 /**
  * Checks if the current user has role
  *  
- * @param array $roles
- * @param int $user User ID to check
+ * @param array $roles array of strings
+ * @param int|string|WP_User|mixed $user User ID to check|user_login|WP_User
+ *
  * @return boolean Does the user has this role|roles
  */
 function apbct_is_user_role_in( $roles, $user = false ){
 	
-	if( is_numeric($user) ) $user = get_userdata( $user );
-	if( ! $user )           $user = wp_get_current_user();
-
+	if( is_numeric($user) && function_exists('get_userdata'))        $user = get_userdata( $user );
+	if( is_string($user)  && function_exists('get_user_by'))         $user = get_user_by('login', $user );
+	if( ! $user           && function_exists('wp_get_current_user')) $user = wp_get_current_user();
+	if( ! $user )                                                                 $user = apbct_wp_get_current_user();
+	
 	if( empty($user->ID) )
 		return false;
-
+	
 	foreach( (array) $roles as $role ){
-		if( isset($user->caps[ $role ]) || in_array($role, $user->roles) )
+		if( isset($user->caps[ strtolower($role) ]) || in_array(strtolower($role), $user->roles) )
 			return true;
 	}
 	
 	return false;
-}
-
-function apbct_wp_get_current_user(){
-	
-	global $current_user;
-	
-	if(!(defined('XMLRPC_REQUEST') && XMLRPC_REQUEST)){
-		
-		if(!empty($current_user)){
-			$user_id = is_object($current_user) && isset($current_user->ID) && !($current_user instanceof WP_User)
-				? $current_user->ID
-				: null;
-		}else{
-			$user_id = empty($user_id) && !empty($_COOKIE[LOGGED_IN_COOKIE])
-				? apbct_wp_validate_auth_cookie($_COOKIE[LOGGED_IN_COOKIE], 'logged_in')
-				: null;
-		}
-		
-		if($user_id){
-			$current_user = new WP_User($user_id);
-		}
-		
-	}
-	
-	return $current_user;
-}
-
-function apbct_wp_set_current_user($user = null){
-	global $current_user;
-	if($user instanceof WP_User)
-		$current_user = $user;
-	else
-		return false;
-	return true;
-}
-
-/**
- * Validates authentication cookie.
- *
- * The checks include making sure that the authentication cookie is set and
- * pulling in the contents (if $cookie is not used).
- *
- * Makes sure the cookie is not expired. Verifies the hash in cookie is what is
- * should be and compares the two.
- *
- * @param string $cookie Optional. If used, will validate contents instead of cookie's
- * @param string $scheme Optional. The cookie scheme to use: auth, secure_auth, or logged_in
- *
- * @return false|int False if invalid cookie, User ID if valid.
- * @global int   $login_grace_period
- *
- */
-function apbct_wp_validate_auth_cookie( $cookie = '', $scheme = '' ) {
-	
-	$cookie_elements = apbct_wp_parse_auth_cookie($cookie, $scheme);
-	
-	$scheme = $cookie_elements['scheme'];
-	$username = $cookie_elements['username'];
-	$hmac = $cookie_elements['hmac'];
-	$token = $cookie_elements['token'];
-	$expiration = $cookie_elements['expiration'];
-	
-	// Allow a grace period for POST and Ajax requests
-	$expired = apbct_is_ajax() || 'POST' == $_SERVER['REQUEST_METHOD']
-		? $expiration + HOUR_IN_SECONDS
-		: $cookie_elements['expiration'];
-	
-	// Quick check to see if an honest cookie has expired
-	if($expired >= time()){
-		$user = apbct_wp_get_user_by('login', $username);
-		if($user){
-			$pass_frag = substr($user->user_pass, 8, 4);
-			$key = apbct_wp_hash($username . '|' . $pass_frag . '|' . $expiration . '|' . $token, $scheme);
-			// If ext/hash is not present, compat.php's hash_hmac() does not support sha256.
-			$algo = function_exists('hash') ? 'sha256' : 'sha1';
-			$hash = hash_hmac($algo, $username . '|' . $expiration . '|' . $token, $key);
-			if(hash_equals($hash, $hmac)){
-				$sessions = get_user_meta($user->ID, 'session_tokens', true);
-				$sessions = current($sessions);
-				if(is_array($sessions)){
-					if(is_int($sessions['expiration']) && $sessions['expiration'] > time()){
-						return $user->ID;
-					}else
-						return false;
-				}else
-					return false;
-			}else
-				return false;
-		}else
-			return false;
-	}else
-		return false;
-}
-
-function apbct_wp_get_user_by($field, $value){
-	
-	$userdata = WP_User::get_data_by($field, $value);
-	
-	if(!$userdata)
-		return false;
-	
-	$user = new WP_User;
-	$user->init($userdata);
-	
-	return $user;
-}
-
-/**
- * Get hash of given string.
- *
- * @param string $data   Plain text to hash
- * @param string $scheme Authentication scheme (auth, secure_auth, logged_in, nonce)
- * @return string Hash of $data
- */
-function apbct_wp_hash( $data, $scheme = 'auth' ) {
-
-	$values = array(
-		'key'  => '',
-		'salt' => '',
-	);
-
-	foreach(array('key', 'salt') as $type){
-		$const = strtoupper( "{$scheme}_{$type}");
-		if ( defined($const) && constant($const)){
-			$values[$type] = constant($const);
-		}elseif(!$values[$type]){
-			$values[$type] = get_site_option( "{$scheme}_{$type}");
-			if (!$values[$type]){
-				$values[$type] = '';
-			}
-		}
-	}
-
-	$salt = $values['key'] . $values['salt'];
-
-	return hash_hmac('md5', $data, $salt);
-}
-
-/**
- * Parse a cookie into its components
- *
- * @param string $cookie
- * @param string $scheme Optional. The cookie scheme to use: auth, secure_auth, or logged_in
- *
- * @return array|false Authentication cookie components
- *
- */
-function apbct_wp_parse_auth_cookie($cookie = '', $scheme = '')
-{
-	$cookie_elements = explode('|', $cookie);
-	if(count($cookie_elements) !== 4){
-		return false;
-	}
-	
-	list($username, $expiration, $token, $hmac) = $cookie_elements;
-	
-	return compact('username', 'expiration', 'token', 'hmac', 'scheme');
 }
 
 /**
@@ -1614,29 +1471,6 @@ function apbct_statistics__rotate($exec_time){
 	}
 	
 	$apbct->save('stats');
-}
-
-/**
- * Checks if the request is AJAX
- * 
- * @return boolean
- */
-function apbct_is_ajax() {
-	
-	return 
-		(defined( 'DOING_AJAX' ) && DOING_AJAX) || // by standart WP functions
-		(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') || // by Request type
-		!empty($_POST['quform_ajax']); // special. QForms
-	
-}
-
-function apbct_is_plugin_active_for_network( $plugin ){
-	if ( ! APBCT_WPMS )
-		return false;
-	$plugins = get_site_option( 'active_sitewide_plugins' );
-	return isset( $plugins[ $plugin ] ) 
-		? true
-		: false;
 }
 
 /**

@@ -1,8 +1,5 @@
 <?php
 
-// File with integrations
-//require_once('cleantalk-integrations.php');
-
 /**
  * Init functions 
  * @return 	mixed[] Array of options
@@ -150,11 +147,8 @@ function apbct_init() {
 		}
 		
     // Formidable
-	if(class_exists('FrmSettings')){
-		//add_action('frm_validate_entry', 'ct_frm_validate_entry', 1, 2);
 		add_filter( 'frm_entries_before_create', 'ct_frm_validate_entry', 10, 2 );
-		add_action('frm_entries_footer_scripts', 'ct_frm_entries_footer_scripts', 20, 2);
-	}
+		add_action( 'frm_entries_footer_scripts', 'ct_frm_entries_footer_scripts', 20, 2 );
 
     // BuddyPress
 		if(class_exists('BuddyPress')){
@@ -213,7 +207,7 @@ function apbct_init() {
     }
 	
 	// Wilcity theme registration validation fix
-	add_filter( 'wilcity/filter/wiloke-listing-tools/validate-before-insert-account', 'wilcity_reg_validation', 10, 2 );
+	add_filter( 'wilcity/filter/wiloke-listing-tools/validate-before-insert-account', 'apbct_wilcity_reg_validation', 10, 2 );
    
     
     // Gravity forms
@@ -250,11 +244,11 @@ function apbct_init() {
         ct_contact_form_validate();
     }
 
-    if (ct_is_user_enable()) {
+    if (apbct_is_user_enable()) {
 
         if ($apbct->settings['general_contact_forms_test'] == 1 && !isset($_POST['comment_post_ID']) && !isset($_GET['for'])){
         	$ct_check_post_result=false;
-            ct_contact_form_validate();
+            add_action( 'wp', 'ct_contact_form_validate', 999 );
         }
         if(isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST' && 
 			$apbct->settings['general_postdata_test'] == 1 && 
@@ -660,7 +654,7 @@ function ct_comment_form($post_id){
 	
     global $apbct;
 
-    if (ct_is_user_enable() === false) {
+    if (apbct_is_user_enable() === false) {
         return false;
     }
 
@@ -761,27 +755,6 @@ function ct_add_hidden_fields($field_name = 'ct_checkjs', $return_string = false
     } else {
         echo $html;
     } 
-}
-
-/**
- * Is enable for user group
- * @return boolean
- */
-function ct_is_user_enable() {
-    global $current_user;
-
-    if (!isset($current_user->roles)) {
-        return true; 
-    }
-
-    $disable_roles = array('administrator', 'editor', 'author');
-    foreach ($current_user->roles as $k => $v) {
-        if (in_array($v, $disable_roles))
-            return false;
-    }
-
-    return true;
-    //return !current_user_can('publish_posts');
 }
 
 /**
@@ -894,8 +867,8 @@ function ct_bbp_get_topic($topic){
  */
 function ct_bbp_new_pre_content ($comment) {
 	
-    global $apbct, $current_user, $ct_bbp_topic;
-    
+    global $apbct, $current_user;
+
     if ( !$apbct->settings['comments_test']) {
         return $comment;
     }
@@ -910,18 +883,21 @@ function ct_bbp_new_pre_content ($comment) {
 		: apbct_js_test('ct_checkjs', $_POST);
 	
     $post_info['comment_type'] = 'bbpress_comment'; 
-    $post_info['post_url'] = bbp_get_topic_permalink(); 
-	
-	if(isset($ct_bbp_topic))
-		$message = $ct_bbp_topic." ".$comment;
-	else
-		$message = $comment;
-	
+    $post_info['post_url'] = bbp_get_topic_permalink();
+
+	if( is_user_logged_in() ) {
+		$sender_email    = $current_user->user_email;
+		$sender_nickname = $current_user->display_name;
+	} else {
+		$sender_email    = isset($_POST['bbp_anonymous_email']) ? $_POST['bbp_anonymous_email'] : null;
+		$sender_nickname = isset($_POST['bbp_anonymous_name'])  ? $_POST['bbp_anonymous_name']  : null;
+	}
+
     $base_call_result = apbct_base_call(
 		array(
 			'message'         => $comment,
-			'sender_email'    => isset($_POST['bbp_anonymous_email']) ? $_POST['bbp_anonymous_email'] : null, 
-			'sender_nickname' => isset($_POST['bbp_anonymous_name']) ? $_POST['bbp_anonymous_name'] : null, 
+			'sender_email'    => $sender_email,
+			'sender_nickname' => $sender_nickname,
 			'post_info'       => $post_info,
 			'js_on'           => $checkjs,
 			'sender_info'     => array('sender_url' => isset($_POST['bbp_anonymous_website']) ? $_POST['bbp_anonymous_website'] : null),
@@ -1043,7 +1019,7 @@ function ct_preprocess_comment($comment) {
     if (
 		($comment['comment_type']!='trackback') &&
 		(
-			ct_is_user_enable() === false || 
+			apbct_is_user_enable() === false ||
 			$apbct->settings['comments_test'] == 0 ||
 			$ct_comment_done ||
 			(isset($_SERVER['HTTP_REFERER']) && stripos($_SERVER['HTTP_REFERER'],'page=wysija_campaigns&action=editTemplate')!==false) || 
@@ -1192,9 +1168,7 @@ function ct_preprocess_comment($comment) {
 	}
 	
 	// Change mail notification if license is out of date
-	if($apbct->data['moderate'] == 0 && 
-		($ct_result->fast_submit == 1 || $ct_result->blacklisted == 1 || $ct_result->js_disabled == 1)
-	){
+	if($apbct->data['moderate'] == 0){
 		$apbct->sender_email = $comment['comment_author_email'];
 		$apbct->sender_ip    = CleantalkHelper::ip__get(array('real'));
 		add_filter('comment_moderation_text',   'apbct_comment__Wordpress__changeMailNotification', 100, 2); // Comment sent to moderation
@@ -1256,10 +1230,10 @@ function apbct_comment__Wordpress__changeMailNotification($notify_message, $comm
 	
 	$notify_message = 
 		PHP_EOL
-		.__('CleanTalk AntiSpam: This message is spam.', 'cleantalk')
+		.__('CleanTalk AntiSpam: This message is possible spam.', 'cleantalk')
 		."\n".__('You could check it in CleanTalk\'s anti-spam database:', 'cleantalk')
-		."\n".'IP: https://cleantalk.org/blacklists/' . $apbct->sender_ip    . '?utm_source=newsletter&utm_medium=email&utm_campaign=wp_spam_comment_activate_antispam'
-		."\n".'Email: https://cleantalk.org/blacklists/' . $apbct->sender_email . '?utm_source=newsletter&utm_medium=email&utm_campaign=wp_spam_comment_activate_antispam'
+		."\n".'IP: https://cleantalk.org/blacklists/' . $apbct->sender_ip
+		."\n".'Email: https://cleantalk.org/blacklists/' . $apbct->sender_email
 		."\n".PHP_EOL . sprintf(
 			__('Activate protection in your Anti-Spam Dashboard: %s.', 'clentalk'),
 			'https://cleantalk.org/my/?cp_mode=antispam&utm_source=newsletter&utm_medium=email&utm_campaign=wp_spam_comment_passed'
@@ -1628,7 +1602,7 @@ function ct_registration_errors($errors, $sanitized_user_login = null, $user_ema
     global $ct_checkjs_register_form, $apbct_cookie_request_id_label, $apbct_cookie_register_ok_label, $bp, $ct_signup_done, $ct_negative_comment, $apbct, $ct_registration_error_comment, $cleantalk_executed;
     
     // Go out if a registrered user action
-    if (ct_is_user_enable() === false) {
+    if (apbct_is_user_enable() === false) {
         return $errors;
     }
 	
@@ -2641,7 +2615,8 @@ function ct_contact_form_validate() {
 		strpos($_SERVER['REQUEST_URI'],'?provider=facebook&')!==false ||
         (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'],'/wp-admin/') !== false) ||
         strpos($_SERVER['REQUEST_URI'],'/login/')!==false ||
-        strpos($_SERVER['REQUEST_URI'], '/my-account/edit-account/')!==false ||
+        strpos($_SERVER['REQUEST_URI'], '/my-account/edit-account/')!==false ||          //WooCommerce edit account page
+        (isset($_POST['action']) && $_POST['action'] == 'save_account_details') ||       //WooCommerce edit account action
         strpos($_SERVER['REQUEST_URI'], '/peepsoajax/profilefieldsajax.validate_register')!== false ||
         isset($_GET['ptype']) && $_GET['ptype']=='login' ||
         check_url_exclusions() ||
@@ -2660,7 +2635,7 @@ function ct_contact_form_validate() {
         isset($_GET['for']) ||
 		(isset($_POST['log'], $_POST['pwd'])) || //WooCommerce Sensei login form fix
 		(isset($_POST['wc_reset_password'], $_POST['_wpnonce'], $_POST['_wp_http_referer'])) || // WooCommerce recovery password form
-		(isset($_POST['woocommerce-login-nonce'], $_POST['login'], $_POST['password'], $_POST['_wp_http_referer'])) || // WooCommerce login form
+		((isset($_POST['woocommerce-login-nonce']) || isset($_POST['_wpnonce'])) && isset($_POST['login'], $_POST['password'], $_POST['_wp_http_referer'])) || // WooCommerce login form
 		(isset($_POST['wc-api']) && strtolower($_POST['wc-api']) == 'wc_gateway_systempay') || // Woo Systempay payment plugin
         (isset($_POST['_wpcf7'], $_POST['_wpcf7_version'], $_POST['_wpcf7_locale'])) || //CF7 fix) 
 		(isset($_POST['hash'], $_POST['device_unique_id'], $_POST['device_name'])) ||//Mobile Assistant Connector fix
@@ -2705,7 +2680,7 @@ function ct_contact_form_validate() {
 	){
 		$post_info['comment_type'] = 'order';
 		if($apbct->settings['wc_checkout_test'] == 0){
-			if ( $apbct->settings['wc_register_from_order'] == 1 ) {
+			if ( $apbct->settings['wc_register_from_order'] == 1 && ! is_user_logged_in() ) {
 				$post_info['comment_type'] = 'wc_register_from_order';
 			} else {
 				remove_filter('woocommerce_register_post', 'ct_register_post', 1 );
@@ -2859,6 +2834,21 @@ function ct_contact_form_validate_postdata() {
         (isset($pagenow) && $pagenow == 'wp-login.php') || // WordPress log in form
         (isset($pagenow) && $pagenow == 'wp-login.php' && isset($_GET['action']) && $_GET['action']=='lostpassword') ||
         strpos($_SERVER['REQUEST_URI'],'/checkout/')!==false ||
+		/* WooCommerce Service Requests - skip them */
+        isset($_GET['wc-ajax']) && (
+	        $_GET['wc-ajax']=='checkout' ||
+	        $_GET['wc-ajax']=='get_refreshed_fragments' ||
+	        $_GET['wc-ajax']=='apply_coupon' ||
+	        $_GET['wc-ajax']=='remove_coupon' ||
+	        $_GET['wc-ajax']=='update_shipping_method' ||
+	        $_GET['wc-ajax']=='get_cart_totals' ||
+	        $_GET['wc-ajax']=='update_order_review' ||
+	        $_GET['wc-ajax']=='add_to_cart' ||
+	        $_GET['wc-ajax']=='remove_from_cart' ||
+	        $_GET['wc-ajax']=='get_variation' ||
+	        $_GET['wc-ajax']=='get_customer_location'
+        ) ||
+        /* END: WooCommerce Service Requests  */
         strpos($_SERVER['REQUEST_URI'],'/wp-admin/')!==false ||
         strpos($_SERVER['REQUEST_URI'],'wp-login.php')!==false||
         strpos($_SERVER['REQUEST_URI'],'wp-comments-post.php')!==false ||
@@ -2882,7 +2872,8 @@ function ct_contact_form_validate_postdata() {
 		(isset($_POST['provider'], $_POST['authcode']) && $_POST['provider'] == 'Two_Factor_Totp') || //TwoFactor authorization
 		(isset($_GET['wc-ajax']) && $_GET['wc-ajax'] == 'sa_wc_buy_now_get_ajax_buy_now_button') || //BuyNow add to cart
 		strpos($_SERVER['REQUEST_URI'],'/wp-json/wpstatistics/v1/hit')!==false || //WPStatistics
-		(isset($_POST['ihcaction']) && $_POST['ihcaction'] == 'login') //Skip login form
+		(isset($_POST['ihcaction']) && $_POST['ihcaction'] == 'login') || //Skip login form
+		(isset($_POST['action']) && $_POST['action'] == 'infinite_scroll') //Scroll
         ) {
         return null;
     }
@@ -3189,7 +3180,7 @@ function apbct_shrotcode_handler__GDPR_public_notice__form( $attrs ){
  * @param $data       array            ['username'] ['password'] ['email']
  * @return            array            array( 'status' => 'error' ) or array( 'status' => 'success' ) by default
  */
-function wilcity_reg_validation( $success, $data ) {
+function apbct_wilcity_reg_validation( $success, $data ) {
 	$check = ct_test_registration( $data['username'], $data['email'], '' );
 	if( $check['allow'] == 0 ) {
 		return array( 'status' => 'error' );

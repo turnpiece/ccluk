@@ -14,7 +14,8 @@
  */
 
 class CleantalkState
-{	
+{
+	public $user = null;
 	public $option_prefix = 'cleantalk';
 	public $storage = array();
 	public $integrations = array();

@@ -75,7 +75,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<?php if ( is_null( $backup['size'] ) ) : ?>
 							<?php _e( '2GB+', AI1WM_PLUGIN_NAME ); ?>
 						<?php else : ?>
-							<?php echo size_format( $backup['size'], 2 ); ?>
+							<?php echo ai1wm_size_format( $backup['size'], 2 ); ?>
 						<?php endif; ?>
 					</td>
 					<td class="ai1wm-column-actions ai1wm-backup-actions">

@@ -57,30 +57,32 @@ class Ai1wm_Updater_Controller {
 	}
 
 	public static function updater( $params = array() ) {
-		ai1wm_setup_environment();
+		if ( check_ajax_referer( 'ai1wm_updater', 'ai1wm_nonce' ) ) {
+			ai1wm_setup_environment();
 
-		// Set params
-		if ( empty( $params ) ) {
-			$params = stripslashes_deep( $_POST );
-		}
+			// Set params
+			if ( empty( $params ) ) {
+				$params = stripslashes_deep( $_POST );
+			}
 
-		// Set uuid
-		$uuid = null;
-		if ( isset( $params['ai1wm_uuid'] ) ) {
-			$uuid = trim( $params['ai1wm_uuid'] );
-		}
+			// Set uuid
+			$uuid = null;
+			if ( isset( $params['ai1wm_uuid'] ) ) {
+				$uuid = trim( $params['ai1wm_uuid'] );
+			}
 
-		// Set extension
-		$extension = null;
-		if ( isset( $params['ai1wm_extension'] ) ) {
-			$extension = trim( $params['ai1wm_extension'] );
-		}
+			// Set extension
+			$extension = null;
+			if ( isset( $params['ai1wm_extension'] ) ) {
+				$extension = trim( $params['ai1wm_extension'] );
+			}
 
-		$extensions = Ai1wm_Extensions::get();
+			$extensions = Ai1wm_Extensions::get();
 
-		// Verify whether extension exists
-		if ( isset( $extensions[ $extension ] ) ) {
-			update_option( $extensions[ $extension ]['key'], $uuid );
+			// Verify whether extension exists
+			if ( isset( $extensions[ $extension ] ) ) {
+				update_option( $extensions[ $extension ]['key'], $uuid );
+			}
 		}
 	}
 }
