@@ -66,7 +66,7 @@ do_action( 'bp_before_profile_loop_content' ); ?>
 	<?php endwhile; ?>
 
 	<?php if ($fields <= 1) : ?>
-		<div class="message">
+		<div id="message" class="info">
 			<?php if (bp_displayed_user_id() === bp_loggedin_user_id()) : ?>
 				<p><?php _e( "You haven't filled out your profile yet. Please tell us a bit about yourself.", 'onesocial' ) ?></p>
 			<?php else : ?>
