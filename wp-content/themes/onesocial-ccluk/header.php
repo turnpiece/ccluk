@@ -57,12 +57,6 @@
 
 			<div id="inner-wrap">
 
-				<?php
-				if ( function_exists( 'yoast_breadcrumb' ) && !is_home() && !is_front_page() ) {
-					yoast_breadcrumb( '<div class="breadcrumb-wrapper"><p id="breadcrumbs">', '</p></div>' );
-				}
-				?>
-
 				<?php do_action( 'buddyboss_inside_wrapper' ); ?>
 
 				<?php global $post; ?>

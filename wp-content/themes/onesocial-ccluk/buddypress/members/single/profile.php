@@ -22,19 +22,19 @@
 	<?php
 		// Profile Edit
 		if ( bp_is_current_action( 'edit' ) )
-			locate_template( array( 'members/single/profile/edit.php' ), true );
+			bp_get_template_part( 'members/single/profile/edit' );
 
 		// Change Avatar
 		elseif ( bp_is_current_action( 'change-avatar' ) )
-			locate_template( array( 'members/single/profile/change-avatar.php' ), true );
+			bp_get_template_part( 'members/single/profile/change-avatar' );
 
 		// Display XProfile
 		elseif ( bp_is_active( 'xprofile' ) )
-			locate_template( array( 'members/single/profile/profile-loop.php' ), true );
+			bp_get_template_part( 'members/single/profile/profile-loop' );
 
 		// Display WordPress profile (fallback)
 		else
-			locate_template( array( 'members/single/profile/profile-wp.php' ), true );
+			bp_get_template_part( 'members/single/profile/profile-wp' );
 	?>
 
 </div><!-- .profile -->

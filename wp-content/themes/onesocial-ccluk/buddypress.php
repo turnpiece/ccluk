@@ -11,7 +11,6 @@ get_header();
 
 <div id="primary" class="site-content">
 
-
 	<?php
 	/**
 	 * The template used for displaying page content in page.php
@@ -72,11 +71,11 @@ get_header();
 	}
 	?>
 
-	<?php $activity_dir	 = ( bp_is_current_component( 'activity' ) && !bp_is_user() ) ? true : false; ?>
-	<?php $members_dir	 = ( bp_is_current_component( 'members' ) && !bp_is_user() ) ? true : false; ?>
-	<?php $blogs_dir		 = ( bp_is_blogs_component() ) ? true : false; ?>
-	<?php $groups_dir		 = ( bp_is_current_component( 'groups' ) && !bp_is_group() && !bp_is_user() ) ? true : false; ?>
-	<?php $blog_create	 = (is_multisite() && bp_is_blogs_component() && bp_is_current_action( 'create' )); ?>
+	<?php $activity_dir	= ( bp_is_current_component( 'activity' ) && !bp_is_user() ) ? true : false; ?>
+	<?php $members_dir	= ( bp_is_current_component( 'members' ) && !bp_is_user() ) ? true : false; ?>
+	<?php $blogs_dir	= ( bp_is_blogs_component() ) ? true : false; ?>
+	<?php $groups_dir	= ( bp_is_current_component( 'groups' ) && !bp_is_group() && !bp_is_user() ) ? true : false; ?>
+	<?php $blog_create	= (is_multisite() && bp_is_blogs_component() && bp_is_current_action( 'create' )); ?>
 
 	<?php if ( !bp_is_group() && !bp_is_user() && !$blog_create ): ?>
 		<header class="entry-header buddypress <?php echo ($members_dir) ? 'members-dir-header dir-header' : ''; ?><?php echo ($groups_dir) ? 'groups-dir-header dir-header' : ''; ?><?php echo ($activity_dir) ? 'activity-dir-header dir-header' : ''; ?><?php echo ($blogs_dir) ? 'blogs-dir-header dir-header' : ''; ?>">
@@ -92,7 +91,6 @@ get_header();
 				?>
 			</h1>
 		</header>
-
 
 		<div id="content" role="main" class="buddypress-content-wrap">
 
