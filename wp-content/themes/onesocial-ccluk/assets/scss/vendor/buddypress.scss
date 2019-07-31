@@ -2851,40 +2851,6 @@ body.activity-permalink #buddypress ul.item-list {
 }
 
 
-
-/*--------------------------------------------------------------
-Extended Profiles
---------------------------------------------------------------*/
-
-body.no-js #buddypress {
-  .field-visibility-settings-toggle,
-  .field-visibility-settings-close {
-    display: none;
-  }
-}
-
-#buddypress .field-visibility-settings {
-  display: none;
-  margin-top: 10px;
-}
-
-body.no-js #buddypress .field-visibility-settings {
-  display: block;
-}
-
-#buddypress {
-  .current-visibility-level {
-    font-weight: 600;
-    font-style: normal;
-  }
-  .field-visibility-settings, .field-visibility-settings-toggle, .field-visibility-settings-notoggle {
-    color: #888;
-  }
-  .field-visibility-settings-toggle a, .field-visibility-settings a {
-    font-size: 80%;
-  }
-}
-
 /*--------------------------------------------------------------
 Activity Comments
 --------------------------------------------------------------*/
@@ -4737,13 +4703,6 @@ body.articles #buddypress div#item-body {
   }
 }
 
-#buddypress .standard-form {
-  .field-visibility-settings-notoggle, .field-visibility-settings-toggle {
-    margin: 10px 0 40px;
-    opacity: 0.7;
-  }
-}
-
 #whats-new-content.active {
     padding-bottom: 70px !important;
 }
@@ -5864,9 +5823,6 @@ body.buddypress {
 				}
 			}
 			.standard-form {
-				.field-visibility-settings-notoggle {
-					display: none;
-				}
 				fieldset {
 					margin: 0;
 					padding: 0;

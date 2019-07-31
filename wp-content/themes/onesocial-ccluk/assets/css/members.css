@@ -2840,36 +2840,6 @@ body.activity-permalink #buddypress ul.item-list li.activity-item {
 }
 
 /*--------------------------------------------------------------
-Extended Profiles
---------------------------------------------------------------*/
-body.no-js #buddypress .field-visibility-settings-toggle,
-body.no-js #buddypress .field-visibility-settings-close {
-  display: none;
-}
-
-#buddypress .field-visibility-settings {
-  display: none;
-  margin-top: 10px;
-}
-
-body.no-js #buddypress .field-visibility-settings {
-  display: block;
-}
-
-#buddypress .current-visibility-level {
-  font-weight: 600;
-  font-style: normal;
-}
-
-#buddypress .field-visibility-settings, #buddypress .field-visibility-settings-toggle, #buddypress .field-visibility-settings-notoggle {
-  color: #888;
-}
-
-#buddypress .field-visibility-settings-toggle a, #buddypress .field-visibility-settings a {
-  font-size: 80%;
-}
-
-/*--------------------------------------------------------------
 Activity Comments
 --------------------------------------------------------------*/
 #page #buddypress .activity .activity-comments div.ac-reply-avatar img {
@@ -4622,11 +4592,6 @@ body.articles #buddypress div#item-body {
   min-width: 60%;
 }
 
-#buddypress .standard-form .field-visibility-settings-notoggle, #buddypress .standard-form .field-visibility-settings-toggle {
-  margin: 10px 0 40px;
-  opacity: 0.7;
-}
-
 #whats-new-content.active {
   padding-bottom: 70px !important;
 }
@@ -5803,10 +5768,6 @@ body.buddypress #buddypress .profile table.profile-fields .label {
 
 body.buddypress #buddypress .profile table.profile-fields .data {
   font-weight: 600;
-}
-
-body.buddypress #buddypress .profile .standard-form .field-visibility-settings-notoggle {
-  display: none;
 }
 
 body.buddypress #buddypress .profile .standard-form fieldset {

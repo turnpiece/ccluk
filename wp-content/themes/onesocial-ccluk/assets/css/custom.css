@@ -1408,15 +1408,6 @@ body.register div#register-page .register-section#profile-details-section .editf
   line-height: 1;
 }
 
-body.register div#register-page .register-section#profile-details-section .field-visibility-settings-toggle {
-  display: none;
-}
-
-body.register div#register-page .register-section#profile-details-section .field-visibility-settings-notoggle {
-  font-size: 15px;
-  color: #54ae68;
-}
-
 body.register div#register-page .mc4wp-checkbox {
   text-align: center;
 }
