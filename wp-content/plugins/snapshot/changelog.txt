@@ -5,6 +5,19 @@ Change Log:
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
 
+3.2.1.2
+----------------------------------------------------------------------
+- Improvement: Enhance the managed backup's restore UX
+- Improvement: Enhanced Managed Backup UX to facilitate activation when sites cannot connect normally to WPMU Dev
+- Fix: Managed Backup restore issue when the Snapshot key was reset after the backup was taken
+- Fix: When restore is cancelled in the db stage files are not restored
+- Improvement: Change "Nightly" to "Daily" for Hosting Backups schedule
+- Fix: Managed backup restore issue when user cancels restore and the restore continues on the backend
+- Improvement: Add Day of the Week to snapshot schedule frequency display
+- Fix: When incorrect destination ID is entered alert icon is improperly aligned
+- Fix: Redirect following bulk action returns to wrong page
+- Fix: When a backup is created with one version of Snapshot and restored with another
+
 3.2.1.1
 ----------------------------------------------------------------------
 - Improvement: Display in the Hub when managed backups are deactivated

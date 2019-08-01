@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Snapshot Pro
-Version: 3.2.1.1
+Version: 3.2.1.2
 Description: This plugin allows you to take quick on-demand backup snapshots of your working WordPress database. You can select from the default WordPress tables as well as custom plugin tables within the database structure. All snapshots are logged, and you can restore the snapshot as needed.
 Author: WPMU DEV
 Author URI: https://premium.wpmudev.org/
@@ -38,7 +38,7 @@ WDP ID: 257
  *
  */
 
-define('SNAPSHOT_VERSION', '3.2.1.1');
+define('SNAPSHOT_VERSION', '3.2.1.2');
 
 if ( ! defined( 'SNAPSHOT_I18N_DOMAIN' ) ) {
 	define( 'SNAPSHOT_I18N_DOMAIN', 'snapshot' );
@@ -820,17 +820,32 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
                 );
 
 			wp_localize_script(
-                 'snapshot-pro-admin', 'snapshot_messages', array(
-				'snapshot_key' => esc_html__( 'Snapshot Key', SNAPSHOT_I18N_DOMAIN ),
-				'snapshot_failed' => esc_html__( 'An unknown response returned from Snapshot backup attempt. Aborting. Double check Snapshot settings.', SNAPSHOT_I18N_DOMAIN ),
-				'no_files_selected' => esc_html__( 'You must select at least one Files backup option.', SNAPSHOT_I18N_DOMAIN ),
-				'no_tables_selected' => esc_html__( 'You must select at least one database table to include.', SNAPSHOT_I18N_DOMAIN ),
-				'no_files_tables' => esc_html__( "You haven't included any files or database tables in this Snapshot. Please select what to include and try again.", SNAPSHOT_I18N_DOMAIN ),
-				'loading' => esc_html__( 'Loading...', SNAPSHOT_I18N_DOMAIN ),
-				'working' => esc_html__( 'Working...', SNAPSHOT_I18N_DOMAIN ),
-				'snapshot_aborted' => esc_html__( 'Snapshot backup aborted', SNAPSHOT_I18N_DOMAIN ),
-				'restore_aborted' => esc_html__( 'Snapshot restore aborted', SNAPSHOT_I18N_DOMAIN ),
-				'missing_timekey' => esc_html__( 'ERROR: The Snapshot timekey is not set. Try reloading the page', SNAPSHOT_I18N_DOMAIN ),
+				'snapshot-pro-admin', 'snapshot_messages', array(
+					'snapshot_key'           => esc_html__( 'Snapshot Key', SNAPSHOT_I18N_DOMAIN ),
+					'snapshot_failed'        => esc_html__( 'An unknown response returned from Snapshot backup attempt. Aborting. Double check Snapshot settings.', SNAPSHOT_I18N_DOMAIN ),
+					'no_files_selected'      => esc_html__( 'You must select at least one Files backup option.', SNAPSHOT_I18N_DOMAIN ),
+					'no_tables_selected'     => esc_html__( 'You must select at least one database table to include.', SNAPSHOT_I18N_DOMAIN ),
+					'no_files_tables'        => esc_html__( "You haven't included any files or database tables in this Snapshot. Please select what to include and try again.", SNAPSHOT_I18N_DOMAIN ),
+					'loading'                => esc_html__( 'Loading...', SNAPSHOT_I18N_DOMAIN ),
+					'working'                => esc_html__( 'Working...', SNAPSHOT_I18N_DOMAIN ),
+					'snapshot_aborted'       => esc_html__( 'Snapshot backup aborted', SNAPSHOT_I18N_DOMAIN ),
+					'restore_aborted'        => esc_html__( 'Snapshot restore aborted', SNAPSHOT_I18N_DOMAIN ),
+					'restore_backup_aborted' => esc_html__( 'Backup aborted. Please try restoring again.', SNAPSHOT_I18N_DOMAIN ),
+					'missing_timekey'        => esc_html__( 'ERROR: The Snapshot timekey is not set. Try reloading the page', SNAPSHOT_I18N_DOMAIN ),
+					'determine'              => esc_html__( 'Determine tables & files', SNAPSHOT_I18N_DOMAIN ),
+					'determining'            => esc_html__( 'Determining tables & files to restore', SNAPSHOT_I18N_DOMAIN ),
+					'determined'             => esc_html__( 'Determined', SNAPSHOT_I18N_DOMAIN ),
+					'restoring_files'        => esc_html__( 'Restoring files', SNAPSHOT_I18N_DOMAIN ),
+					'files_restored'         => esc_html__( 'Files restored', SNAPSHOT_I18N_DOMAIN ),
+					'restoring_database'     => esc_html__( 'Restoring database', SNAPSHOT_I18N_DOMAIN ),
+					'database_restored'      => esc_html__( 'Database restored', SNAPSHOT_I18N_DOMAIN ),
+					'finalizing_restoration' => esc_html__( 'Finalizing restoration', SNAPSHOT_I18N_DOMAIN ),
+					'finalized_restoration'  => esc_html__( 'Finalized restoration', SNAPSHOT_I18N_DOMAIN ),
+					'hide_full_log'          => esc_html__( 'Hide full log', SNAPSHOT_I18N_DOMAIN ),
+					'show_full_log'          => esc_html__( 'Show full log', SNAPSHOT_I18N_DOMAIN ),
+					'restore_fail'           => esc_html__( 'Error restoring backup', SNAPSHOT_I18N_DOMAIN ),
+					'fail_restore_start'     => esc_html__( 'Your backup failed to restore while', SNAPSHOT_I18N_DOMAIN ),
+					'fail_restore_end'       => sprintf( __( 'Please try again, and if the issue persist, you can <a href="%s" target="_blank">contact our support</a> for help.', SNAPSHOT_I18N_DOMAIN ), 'https://premium.wpmudev.org/get-support/' ),
 				)
 			);
 		}

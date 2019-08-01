@@ -200,7 +200,11 @@ if ( version_compare(PHP_VERSION, '5.5.0', '<') ) {
 
 									if ( $interval_text ) {
 										$running_timestamp = wp_next_scheduled( 'snapshot_backup_cron', array( intval( $item['timestamp'] ) ) );
+										$duration = Snapshot_Helper_Utility::show_duration( $item['interval'], $item['interval-offset'] );
 										echo wp_kses_post( $interval_text ), wp_kses_post( _x( ' @ ', 'interval and time separator', SNAPSHOT_I18N_DOMAIN ) );
+										if( ! empty( $duration ) ) {
+										    echo wp_kses_post( $duration ) . ', ';
+                                        }
 										echo wp_kses_post( Snapshot_Helper_Utility::show_date_time( $running_timestamp, get_option( 'time_format' ) ) );
 									} else {
 										esc_html_e( 'Once off', SNAPSHOT_I18N_DOMAIN );

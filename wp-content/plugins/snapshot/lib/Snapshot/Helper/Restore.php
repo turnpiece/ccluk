@@ -197,22 +197,32 @@ class Snapshot_Helper_Restore {
 		return true;
 	}
 
-	public function clear() {
-		Snapshot_Helper_Log::info( 'Starting post-restoration cleanup' );
+	public function clear( $post_cleanup = true) {
+		if ( $post_cleanup ) {
+			Snapshot_Helper_Log::info( 'Starting post-restoration cleanup' );
+		} else {
+			Snapshot_Helper_Log::info( 'Starting pre-restoration cleanup' );
+		}
 
 		if ( $this->_session ) {
 			$this->_session->data = array();
 			$this->_session->save_session();
 		}
 
-		if ( defined( 'SNAPSHOT_MB_BREADTH_FIRST' ) && SNAPSHOT_MB_BREADTH_FIRST ) {
-			$lister = new Snapshot_Model_Bflister( new Snapshot_Model_Storage_Session( $this->get_bhf_namespace() ) );
-			$lister->reset();
+		if ( $post_cleanup ) {
+			if ( defined( 'SNAPSHOT_MB_BREADTH_FIRST' ) && SNAPSHOT_MB_BREADTH_FIRST ) {
+				$lister = new Snapshot_Model_Bflister( new Snapshot_Model_Storage_Session( $this->get_bhf_namespace() ) );
+				$lister->reset();
+			}
+
+			Snapshot_Helper_Utility::recursive_rmdir( $this->get_intermediate_destination() );
 		}
 
-		Snapshot_Helper_Utility::recursive_rmdir( $this->get_intermediate_destination() );
-
-		Snapshot_Helper_Log::info( 'Post-restoration cleanup complete' );
+		if ( $post_cleanup ) {
+			Snapshot_Helper_Log::info( 'Post-restoration cleanup complete' );
+		} else {
+			Snapshot_Helper_Log::info( 'Pre-restoration cleanup complete' );
+		}
 
 		return true;
 	}
@@ -220,15 +230,17 @@ class Snapshot_Helper_Restore {
 	/**
 	 * Process the entire files queue, working directly with archive
 	 *
-	 * @return bool
+	 * @return array
 	 */
 	public function process_files() {
 		$zip = Snapshot_Helper_Zip::get( $this->_archive );
 		$queues = is_array( $this->_queues ) ? $this->_queues : array();
-		$files = array();
+		$action = '';
 		$status = false;
+		$result = array();
 
 		foreach ( $queues as $type => $queue ) {
+			$action = $type;
 			if ( $this->_queue_done( $type ) ) {
 				continue;
 			}
@@ -242,7 +254,8 @@ class Snapshot_Helper_Restore {
 				continue;
 			}
 
-			$status = call_user_func_array( array( $this, $method ), array( $queue ) );
+			$result = call_user_func_array( array( $this, $method ), array( $queue ) );
+			$status = $result['status'];
 			break;
 		}
 
@@ -254,7 +267,12 @@ class Snapshot_Helper_Restore {
 			Snapshot_Helper_Log::info( 'Restoration from queues complete' );
 		}
 
-		return $status;
+		$response = array(
+			'status'   => $status,
+			'action'   => $action,
+			'progress' => isset( $result['progress'] ) ? $result['progress'] : 0,
+		);
+		return $response;
 	}
 
 	/**
@@ -273,7 +291,7 @@ class Snapshot_Helper_Restore {
 	 *
 	 * @param object $q Queue.
 	 *
-	 * @return bool Status
+	 * @return array Status
 	 */
 	private function _process_bhfileset_queue( $q ) {
 		$prefix = $q->get_prefix();
@@ -289,7 +307,17 @@ class Snapshot_Helper_Restore {
 
 		$done = $lister->is_done();
 		if ( ! ! $done ) {
-			return true;
+			Snapshot_Helper_Log::info( 'Fileset restoration complete' );
+			$this->_set_session_value( 'fileset', 'done', true );
+			$lister->reset();
+			$progress = 100;
+
+			$response = array(
+				'status' => true,
+				'progress' => $progress,
+			);
+	
+			return $response;
 		}
 
 		$file_items = $lister->get_files();
@@ -298,11 +326,17 @@ class Snapshot_Helper_Restore {
 			$path = trim( wp_normalize_path( dirname( $filepath ) ), '/' );
 			$fullpath = trailingslashit( wp_normalize_path( "{$destination}{$path}" ) );
 
+			// Make sure we don't restore the actual Snapshot plugin, to prevent issues during the restore.
+			if ( strpos( $fullpath, "plugins/snapshot" ) !== false ) {
+				$status = true;
+				continue;
+			}
 			if ( ! is_dir( $fullpath ) ) {
 				wp_mkdir_p( $fullpath );
 			}
 
 			// Attempt regular copy first.
+			$status = false;
 			if ( ! copy( $item, $fullpath . basename( $item ) ) ) {
 				$status = false;
 				global $wp_filesystem;
@@ -316,6 +350,8 @@ class Snapshot_Helper_Restore {
 				if ( ! $status ) {
 					Snapshot_Helper_Log::error( 'Error copying file: ' . basename( $item ) );
 				}
+			} else {
+				$status = true;
 			}
 			// error_log("Restoring file from {$item} to: " . var_export($fullpath . basename($item),1));
 		}
@@ -326,13 +362,21 @@ class Snapshot_Helper_Restore {
 
 		if ( ! $done ) {
 			$this->_set_session_value( 'fileset', 'estimate', $lister->get_total_steps() );
+			$progress = 50;
 		} else {
 			Snapshot_Helper_Log::info( 'Fileset restoration complete' );
 			$this->_set_session_value( 'fileset', 'done', true );
 			$lister->reset();
+			$progress = 100;
 		}
+		$status = apply_filters( 'snapshot_manage_backup_file_restore', $status );
 
-		return $done;
+		$response = array(
+			'status' => $status,
+			'progress' => $progress,
+		);
+
+		return $response;
 	}
 
 
@@ -342,6 +386,7 @@ class Snapshot_Helper_Restore {
 		$start = $chunk * $chunk_size;
 
 		$status = true;
+		$progress_size = 0;
 
 		$prefix = $q->get_prefix();
 		$source = untrailingslashit( $this->get_intermediate_destination() . $prefix );
@@ -349,53 +394,50 @@ class Snapshot_Helper_Restore {
 
 		$all_files = $this->_get_files_list( $prefix );
 		if ( empty( $all_files ) ) {
-			return false;
-		}
+			$response = array(
+				'status' => false,
+				'progress' => 0,
+			);
+			return $response;
+		} else {
+			$files         = array_slice( $all_files, $start, $chunk_size );
+			$progress_size = ( $start * 100 ) / count( $all_files );
+			foreach ( $files as $file ) {
+				$filepath = preg_replace( '/^' . preg_quote( $source, '/' ) . '/i', '', $file );
+				$path     = trim( wp_normalize_path( dirname( $filepath ) ), '/' );
+				$fullpath = trailingslashit( wp_normalize_path( "{$destination}{$path}" ) );
 
-		/*
-        * // Enable for debugging
-        $max = count($all_files) / $chunk_size;
-        $chunk++;
-        error_log("Restored fileset chunk {$chunk}");
-        $this->_set_session_value('fileset', 'chunk', $chunk);
-        $done = $chunk >= $max;
-        if ($done) error_log("Fileset restoration complete");
-        $this->_set_session_value('fileset', 'done', $done);
-        return true;
-		*/
+				// Make sure we don't restore the actual Snapshot plugin, to prevent issues during the restore.
+				if ( strpos( $fullpath, "plugins/snapshot" ) !== false ) {
+					continue;
+				}
+				if ( ! is_dir( $fullpath ) ) {
+					wp_mkdir_p( $fullpath );
+				}
 
-		$files = array_slice( $all_files, $start, $chunk_size );
-		foreach ( $files as $file ) {
-			$filepath = preg_replace( '/^' . preg_quote( $source, '/' ) . '/i', '', $file );
-			$path = trim( wp_normalize_path( dirname( $filepath ) ), '/' );
-			$fullpath = trailingslashit( wp_normalize_path( "{$destination}{$path}" ) );
+				$this->copyWarningNumber = null;
+				$this->copyWarningString = null;
 
-			if ( ! is_dir( $fullpath ) ) {
-				wp_mkdir_p( $fullpath );
-			}
+				// We use set_error_handler() as logging code and not debug code.
+				// phpcs:ignore
+				set_error_handler( array( $this, 'copyWarning' ) );
 
-			$this->copyWarningNumber = null;
-			$this->copyWarningString = null;
-
-			// We use set_error_handler() as logging code and not debug code.
-			// phpcs:ignore
-			set_error_handler(array($this, 'copyWarning'));
-
-			// Attempt regular copy first.
-			if ( ! copy( $file, $fullpath . basename( $file ) ) ) {
-				$status = false;
-				global $wp_filesystem;
-				// Fall back to WP stuff.
-				if ( is_callable( array( $wp_filesystem, 'copy' ) ) ) {
-					$res = $wp_filesystem->copy( $file, $fullpath . basename( $file ) );
-					if ( $res ) {
-						$status = true;
+				// Attempt regular copy first.
+				if ( ! copy( $file, $fullpath . basename( $file ) ) ) {
+					$status = false;
+					global $wp_filesystem;
+					// Fall back to WP stuff.
+					if ( is_callable( array( $wp_filesystem, 'copy' ) ) ) {
+						$res = $wp_filesystem->copy( $file, $fullpath . basename( $file ) );
+						if ( $res ) {
+							$status = true;
+						}
 					}
 				}
-			}
-			restore_error_handler();
-			if ( $this->get_copy_warning() && ! $status) {
-				break;
+				restore_error_handler();
+				if ( $this->get_copy_warning() && ! $status ) {
+					break;
+				}
 			}
 		}
 
@@ -419,7 +461,22 @@ class Snapshot_Helper_Restore {
 			}
 		}
 
-		return $status;
+		/**
+		 * Filter Manage file restore
+		 *
+		 * @since 3.2.1.2
+		 *
+		 * @param bool $response
+		 */
+
+		$status = apply_filters( 'snapshot_manage_backup_file_restore', $status );
+
+		$response = array(
+			'status' => $status,
+			'progress' => is_numeric( $progress_size ) ? round( $progress_size )  : 0,
+		);
+
+		return $response;
 	}
 
 	private function _get_files_list( $pfx = '' ) {
@@ -442,7 +499,12 @@ class Snapshot_Helper_Restore {
 			if ( 0 !== strlen( $filepath ) ) {
 				continue; // Not top level... not interested.
 			}
-			$all_tables[] = $file;
+			$is_usermeta = strpos($file, '_usermeta' );
+			if ( $is_usermeta === false ) {
+				$all_tables[] = $file;
+			} else {
+				array_unshift( $all_tables, $file );
+			}
 		}
 
 		return $all_tables;
@@ -453,15 +515,18 @@ class Snapshot_Helper_Restore {
 		if ( ! is_array( $tables ) ) {
 			$tables = array();
 		}
-		$source = untrailingslashit( $this->get_intermediate_destination() );
-
-		$all_tables = $this->_get_tables_list();
+		$source        = untrailingslashit( $this->get_intermediate_destination() );
+		$all_tables    = $this->_get_tables_list();
 		if ( empty( $all_tables ) ) {
-			return true; // No sqls found.
+			$response = array(
+				'status' => false,
+				'progress' => 0,
+			);
+			return $response; // No sqls found.
 		}
-		$status = true;
-		$db = new Snapshot_Model_Database_Backup();
-
+		$status        = true;
+		$db            = new Snapshot_Model_Database_Backup();
+		$progress_size = ( count( $tables ) * 100 ) / count( $all_tables );
 		/*
         * // Enable for debugging
         $tables[] = array_shift($all_tables);
@@ -478,7 +543,6 @@ class Snapshot_Helper_Restore {
 		do_action( 'snapshot_full_backups_restore_tables', $all_tables, $tables );
 
 		// global $wp_filesystem;
-
 		foreach ( $all_tables as $table_file ) {
 			$table = basename( $table_file );
 			if ( in_array( $table, $tables, true ) ) {
@@ -511,7 +575,22 @@ class Snapshot_Helper_Restore {
 			break; // Do one table at the time.
 		}
 
-		return $status;
+		/**
+		 * Filter Manage backup table restore
+		 *
+		 * @since 3.2.1.2
+		 *
+		 * @param bool $response
+		 */
+
+		$status = apply_filters( 'snapshot_manage_backup_table_restore', $status );
+
+		$response = array(
+			'status' => $status,
+			'progress' => is_numeric( $progress_size ) ? round( $progress_size ) : 0,
+		);
+
+		return $response;
 
 	}
 

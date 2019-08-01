@@ -496,7 +496,7 @@ class Snapshot_Controller_Hosting {
 			$backups[ $key ]['tooltip'] = $this->get_backup_tooltip( $backup, $dashboard );
 			
 			$backups[ $key ]['type']    = $this->get_backup_type( $backup );
-			$backups[ $key ]['context'] = isset( $backups[ $key ]['context'] ) ? str_replace( array( 'Manual', 'Nightly' ), array( 'Once', 'Nightly, @ ' . esc_attr( Snapshot_Helper_Utility::get_hosting_backup_local_time() ) ), $backups[ $key ]['context'] ) : '-';
+			$backups[ $key ]['context'] = isset( $backups[ $key ]['context'] ) ? str_replace( array( 'Manual', 'Nightly' ), array( 'Once', 'Daily, @ ' . esc_attr( Snapshot_Helper_Utility::get_hosting_backup_local_time() ) ), $backups[ $key ]['context'] ) : '-';
 
 			if ( ! $dashboard ) {
 				$backups[ $key ]['menu'] = $backup_menu;

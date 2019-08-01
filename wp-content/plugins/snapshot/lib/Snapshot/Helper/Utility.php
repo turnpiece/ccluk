@@ -492,6 +492,25 @@ if ( ! class_exists( 'Snapshot_Helper_Utility' ) ) {
 		}
 
 		/**
+		 * Utility function to build the duration of a snapshots.
+		 *
+		 * @param $interval
+		 * @param $interval_offset
+		 *
+		 * @return false|string
+		 */
+		public static function show_duration( $interval, $interval_offset ) {
+
+			if ( ! empty( $interval ) && ! empty( $interval_offset ) ) {
+				if ( isset( $interval_offset[ $interval ]['tm_wday'] ) ) {
+					return date( 'l', strtotime( 'Sunday + ' . $interval_offset[ $interval ]['tm_wday'] . ' Days' ) );
+				}
+			}
+
+			return '';
+		}
+
+		/**
 		 * Utility function recursively scan a folder and build an array of it's contents
 		 *
 		 * @since 1.0.2

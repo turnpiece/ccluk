@@ -98,7 +98,7 @@ $latest_snapshot = Snapshot_Helper_Utility::latest_backup( $snapshot );
 						<th><?php esc_html_e( 'Backups Schedule', SNAPSHOT_I18N_DOMAIN ); ?></th>
 
 						<td>
-							<?php esc_html_e( 'Nightly', SNAPSHOT_I18N_DOMAIN ); ?>
+							<?php esc_html_e( 'Daily', SNAPSHOT_I18N_DOMAIN ); ?>
 							<span class="wps-hosting-backups-schedule-dashboard"><?php esc_html_e( 'at', SNAPSHOT_I18N_DOMAIN ); ?> <?php echo esc_html( Snapshot_Helper_Utility::get_hosting_backup_local_time() ); ?></span>
 						</td>
 					</tr>

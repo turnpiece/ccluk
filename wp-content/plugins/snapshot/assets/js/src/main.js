@@ -46,6 +46,77 @@ window.SS_PAGES = {};
 			$("body").addClass("wps-popup-modal-active");
 		}
 
+		// Events for the specific Activate Managed Backups button the Backups page and the retry text.
+		$('#view-snapshot-key-automatic,#wps-error-connecting a').on('click', function (e) {
+			e.preventDefault();
+			// Hide the notice again, in case we have hit the retry option.
+			$("#wps-snapshot-key-notice").removeClass("show");
+			$("#view-snapshot-key-automatic").removeClass("hidden");
+			var $me = $('#view-snapshot-key-automatic'),
+				content = $me.html(),
+				working = ((window.snapshot_messages || {}).working) || content
+			;
+
+			$me.html(working);
+
+			$.post(ajaxurl, {
+				action: "snapshot-full_backup-exchange_key"
+			})
+				.done(function (r) {
+					if (!(r || {}).success) return show_key_notice((r || {}).data);
+					return window.location.reload();
+				})
+				.error(show_key_notice)
+				.always(function () {
+					$me.html(content);
+				})
+			;
+		});
+
+		function show_key_notice () {
+			$("#wps-snapshot-key-notice").addClass("show");
+			$("#wps-snapshot-key-notice .wps-automatic-try.error").removeClass("hidden");
+			$("#view-snapshot-key-automatic").addClass("hidden");
+		}
+
+		$('#secret-key-notice form').on('submit', function (e) {
+			e.preventDefault();
+			var data = $(this).serializeArray();
+			data.push({name: 'action', value: 'snapshot_save_key'});
+			data.push({name: 'security', value: $(this).data('security')});
+			$('#get-snapshot-key-notice').addClass('disabled-get-key');
+			$('#secret-key-notice').addClass('wps-processing');
+			$('#wps-snapshot-key-notice .wps-automatic-try.error').addClass('hidden');
+
+			// Prevent the disabled Save Key button from being clicked on. Needs separate styling.
+			$('.disabled-get-key').on('click', function (e) {
+				e.preventDefault();
+			});
+
+			jQuery.ajax({
+				type: 'POST',
+				url: ajaxurl,
+				data: data,
+				dataType: 'json',
+				success: function (result) {
+					$('#secret-key-notice').removeClass('wps-processing');
+					if (!result.success) {
+						$('.wps-get-snapshot-key').addClass('hidden');
+						$('#secret-key-notice form button[type="submit"]').html("Try Again");
+						$("#wps-snapshot-key-notice .wps-manual-try.error").removeClass("hidden");
+					} else {
+						window.location.reload(false);
+					}
+				},
+				error: function () {
+					$('#secret-key-notice').removeClass('wps-processing');
+					$('.wps-get-snapshot-key').addClass('hidden');
+					$('#secret-key-notice form button[type="submit"]').html("Try Again");
+					$("#wps-snapshot-key-notice .wps-manual-try.error").removeClass("hidden");
+				}
+			});
+		});
+
 		$('.wps-icon.i-close').on('click', function (e) {
 			$("#wps-snapshot-key").removeClass("show");
 			$("body").removeClass("wps-popup-modal-active");

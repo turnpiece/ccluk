@@ -26,12 +26,12 @@ $user_name = !empty( $current_user->user_firstname ) ? $current_user->user_first
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 						<h2><?php esc_html_e('Hey, you\'re hosting with us!', SNAPSHOT_I18N_DOMAIN); ?></h2>
 						<?php if ( ! empty( $old_backups ) ): ?>
-							<p class="no-margin-bottom"><?php printf( esc_html__( "%s, we've detected you're hosting this website with us. Great! Snapshot is now using our even more reliable (and super fast) server-side nightly backup method included with your hosting package.", SNAPSHOT_I18N_DOMAIN ), esc_html( $user_name ) ); ?></p>
+							<p class="no-margin-bottom"><?php printf( esc_html__( "%s, we've detected you're hosting this website with us. Great! Snapshot is now using our even more reliable (and super fast) server-side daily backup method included with your hosting package.", SNAPSHOT_I18N_DOMAIN ), esc_html( $user_name ) ); ?></p>
 							<p><?php esc_html_e( "We'll keep your old Managed Backups until they expire, you can view both types in your Backups list.", SNAPSHOT_I18N_DOMAIN ); ?></p>
 						<?php
 						else:
 						?>
-							<p><?php printf( esc_html__( "%s, your hosting backups are already running on a nightly schedule which is all you need. However you can still use Snapshot to create additional backups to third-party destinations.", SNAPSHOT_I18N_DOMAIN ), esc_html( $user_name ) ); ?></p>
+							<p><?php printf( esc_html__( "%s, your hosting backups are already running on a daily schedule which is all you need. However you can still use Snapshot to create additional backups to third-party destinations.", SNAPSHOT_I18N_DOMAIN ), esc_html( $user_name ) ); ?></p>
 						<?php
 						endif;
 						?>
