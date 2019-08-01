@@ -413,13 +413,26 @@ class Snapshot_Controller_Full_Ajax extends Snapshot_Controller_Full {
 
 		$archive_path = $this->_model->get_backup( $archive );
 
-		// If we don't have the full archive path yet, we're still fetching the file.
-		if ( ! file_exists( $archive_path ) ) {
-			wp_send_json(array(
-				'task' => 'fetching',
-				'error' => ! ! $this->_model->has_errors(),
-				'status' => false,
-			));
+		if ( isset( $data['initial_callback'] ) && $data['initial_callback'] ) {
+			// If we don't have the full archive path yet, we're still fetching the file.
+			if ( ! file_exists( $archive_path ) ) {
+				$error = ( ( ! ! $this->_model->has_errors() ) ) ? true : false;
+				$error = apply_filters( 'snapshot_manage_backup_init_error_restore', $error );
+				wp_send_json(array(
+					'task' => 'fetching',
+					'action' => 'init',
+					'errors' => $error,
+					'status' => false,
+				));
+			} else {
+				$error = apply_filters( 'snapshot_manage_backup_init_error_restore', false );
+				$initial_response = array(
+					'task' => 'fetching',
+					'action' => 'init',
+					'errors' => $error,
+					'status' => true,
+				);
+			}
 		}
 
 		$restore = Snapshot_Helper_Restore::from( $archive_path );
@@ -434,19 +447,33 @@ class Snapshot_Controller_Full_Ajax extends Snapshot_Controller_Full {
 
 		$restore->to( $restore_path );
 
+		// If it's the first time coming into this restore processing method, make sure to delete all session residuals.
+		if ( isset( $data['initial_callback'] ) && $data['initial_callback'] ) {
+			$post_cleanup = false;
+			$restore->clear( $post_cleanup );
+
+			wp_send_json($initial_response);
+		}
+
 		$task = $restore->is_done()
 			? 'clearing'
 			: 'restoring'
 		;
 
-		$status = 'clearing' === $task
-			? $restore->clear()
-			: $restore->process_files();
+		if ( 'clearing' === $task ) {
+			$status = $restore->clear();
+			$process_file['action'] = 'finalize';
+			$process_file['progress'] = '50';
+		} else {
+			$process_file = $restore->process_files();
+			$status = $process_file['status'];
+		}
 
 		if ( ! $status && $restore->get_copy_warning() ) {
 			wp_send_json(array(
 				'task' => 'clearing',
 				'status' => false,
+				'action' => $process_file['action'],
 			));
 		}
 
@@ -457,10 +484,23 @@ class Snapshot_Controller_Full_Ajax extends Snapshot_Controller_Full {
 
 		Snapshot_Model_Full_Remote_Storage::get()->purge_backups_cache();
 
-		wp_send_json(array(
-			'task' => $task,
-			'status' => $status,
-		));
+		$response = array(
+			'task'     => $task,
+			'status'   => $status,
+			'action'   => $process_file['action'],
+			'progress' => $process_file['progress'],
+		);
+
+		/**
+		 * Filter Manage backup restore
+		 *
+		 * @since 3.2.1.2
+		 *
+		 * @param array $response
+		 */
+		$response = apply_filters('snapshot_manage_backup_restore', $response );
+
+		wp_send_json( $response );
 	}
 
 	/**

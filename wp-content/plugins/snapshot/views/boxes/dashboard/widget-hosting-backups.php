@@ -55,7 +55,7 @@
 
 					<div class="wps-image img-snappie-two"></div>
 
-					<p><?php esc_html_e('We backup your site nightly and retain backups for 30 days as part of your hosting plan. Your first backup will show here within 24 hours, or you can start it now!' , SNAPSHOT_I18N_DOMAIN); ?></p>
+					<p><?php esc_html_e('We backup your site daily and retain backups for 30 days as part of your hosting plan. Your first backup will show here within 24 hours, or you can start it now!' , SNAPSHOT_I18N_DOMAIN); ?></p>
 
 					<p><a href="<?php echo esc_url( WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url('snapshots-newui-hosting-backups') ); ?>" class="button button-blue <?php echo ( ! $aws_sdk_compatible ) ? 'disabled': ''; ?>"><?php esc_html_e( 'Run Backup' , SNAPSHOT_I18N_DOMAIN ); ?></a></p>
 
@@ -96,7 +96,7 @@
 
 										<p>
 											<small>
-												<?php printf( esc_html__( 'Backups are running Nightly/%s', SNAPSHOT_I18N_DOMAIN ),  esc_html( Snapshot_Helper_Utility::get_hosting_backup_local_time() ) ); ?>
+												<?php printf( esc_html__( 'Backups are running Daily/%s', SNAPSHOT_I18N_DOMAIN ),  esc_html( Snapshot_Helper_Utility::get_hosting_backup_local_time() ) ); ?>
                                             </small>
 										</p>
 

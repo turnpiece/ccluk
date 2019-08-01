@@ -97,7 +97,7 @@ check_admin_referer( 'snapshot-full_backups', 'snapshot-full_backups-noonce-fiel
 
 									</div>
 
-									<p><small><?php esc_html_e( 'You need to enter the full path to the directory you want to restore your website to. Note: this will be the new root directory for your site.', SNAPSHOT_I18N_DOMAIN ); ?></small></p>
+									<p><small><?php esc_html_e( 'You need to enter the full path to the directory you want to restore your website to. This will be the new root directory for your site. Note: We won\'t restore the Snapshot plugin to prevent any possible issues during the restoration.', SNAPSHOT_I18N_DOMAIN ); ?></small></p>
 
 								</div>
 

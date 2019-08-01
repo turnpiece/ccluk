@@ -59,7 +59,7 @@ if ( ! $show_managed_backup_notice || ( isset( $plugin->config_data['managed_bac
 								<?php esc_html_e( 'Backups Schedule', SNAPSHOT_I18N_DOMAIN ); ?>
 							</th>
 							<td>
-								<?php esc_html_e( 'Nightly', SNAPSHOT_I18N_DOMAIN ); ?>
+								<?php esc_html_e( 'Daily', SNAPSHOT_I18N_DOMAIN ); ?>
 								<span><?php esc_html_e( 'at', SNAPSHOT_I18N_DOMAIN ); ?> <?php echo esc_html( Snapshot_Helper_Utility::get_hosting_backup_local_time() ); ?></span>
 							</td>
 						</tr>
@@ -242,7 +242,7 @@ if ( ! $show_managed_backup_notice || ( isset( $plugin->config_data['managed_bac
 
 								<div class="wps-no-hosting-managed-backups">
 									<p>
-									<?php esc_html_e( 'We backup your site nightly, and retain backups for 30 days as part of your hosting plan. Your first backup will show here within 24 hours, or you can start it now!', SNAPSHOT_I18N_DOMAIN ); ?>
+									<?php esc_html_e( 'We backup your site daily, and retain backups for 30 days as part of your hosting plan. Your first backup will show here within 24 hours, or you can start it now!', SNAPSHOT_I18N_DOMAIN ); ?>
 									</p>
 									<input type="submit" id="start_first_hosting_backup" name="start_first_hosting_backup" class="button button-small button-blue" value="<?php esc_html_e( 'Run Backup', SNAPSHOT_I18N_DOMAIN ); ?>" />
 								</div>
@@ -312,7 +312,7 @@ if ( ! $show_managed_backup_notice || ( isset( $plugin->config_data['managed_bac
 									<label><?php esc_html_e( 'Schedule', SNAPSHOT_I18N_DOMAIN ); ?></label>
 
 									<p>
-										<small><?php esc_html_e( 'Backups performed on our hosting platform are performed incrementally on a nightly basis.', SNAPSHOT_I18N_DOMAIN ); ?></small>
+										<small><?php esc_html_e( 'Backups performed on our hosting platform are performed incrementally on a daily basis.', SNAPSHOT_I18N_DOMAIN ); ?></small>
 									</p>
 
 								</div>
@@ -320,7 +320,7 @@ if ( ! $show_managed_backup_notice || ( isset( $plugin->config_data['managed_bac
 								<div class="col-right">
 
 									<input type="text" name="schedule" id="snapshot-schedule"
-										value="<?php echo esc_html__( 'Nightly', SNAPSHOT_I18N_DOMAIN ) . '/ ' . esc_html( Snapshot_Helper_Utility::get_hosting_backup_local_time() ); ?>" disabled="disabled">
+										value="<?php echo esc_html__( 'Daily', SNAPSHOT_I18N_DOMAIN ) . '/ ' . esc_html( Snapshot_Helper_Utility::get_hosting_backup_local_time() ); ?>" disabled="disabled">
 
 									<p><small><?php esc_html_e( 'This is the schedule for your backups.', SNAPSHOT_I18N_DOMAIN ); ?></small></p>
 
