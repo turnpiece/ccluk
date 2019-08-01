@@ -37,13 +37,25 @@ class CCLUK_BP_Custom {
 	// use name as username
 	public function signup_pre_validate() {
 	    if (empty($_POST['signup_username'])) {
+			// username field was empty
 			$field = xprofile_get_field_id_from_name( 'name' );
 
-			if (!empty($field) && !empty($_POST[$field]))
-	        	$_POST['signup_username'] = sanitize_user( str_replace( ' ', '_', $_POST[$field] ) );
+			if (!empty($field) && !empty($_POST[$field])) {
+				// create username from name
+	        	$_POST['signup_username'] = $this->get_unique_username(
+					sanitize_user(
+						str_replace( ' ', '-', $_POST[$field] )
+					 )
+				);
+			}
 	    }
 
+		// check if they entered a password
 		if (empty($_POST['signup_password'])) {
+			// disable notification email
+			remove_action( 'register_new_user', 'wp_send_new_user_notifications' );
+
+			// generate random password
 			$_POST['signup_password'] = wp_generate_password();
 		}
 	}
@@ -154,6 +166,21 @@ class CCLUK_BP_Custom {
 	            <?php
 	        }
 	    }
+	}
+
+	/**
+	 * get unique username
+	 *
+	 * @param string $username
+	 * @return string
+	 *
+	 */
+	private function get_unique_username( $username ) {
+		$i = 0;
+		while ( username_exists($username) && $i++ ) {
+			$username = sprintf( '%s-%s', $username, $i );
+		}
+		return $username;
 	}
 
 	private function output_mp( $user_id ) {
