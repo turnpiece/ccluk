@@ -6596,15 +6596,6 @@ input#save_as_draft {
   outline: none;
 }
 
-#buddypress .standard-form #basic-details-section, #buddypress .standard-form #blog-details-section, #buddypress .standard-form #profile-details-section, #buddypress .standard-form .security-question-section {
-  float: left;
-  width: 48%;
-}
-
-#buddypress .standard-form #blog-details-section {
-  clear: left;
-}
-
 #buddypress .standard-form:not(.send-invite-form) h4 {
   font-family: inherit;
   font-size: 14px;
@@ -9170,83 +9161,6 @@ body.registration .wp-social-login-connect-with {
 
 body.registration .wp-social-login-provider-list {
   margin-bottom: 40px;
-}
-
-div#register-page p {
-  font-size: 15px;
-  margin: 10px auto 24px;
-  max-width: 400px;
-}
-
-div#register-page .register-section p, div#register-page .security-question-section p {
-  font-size: inherit;
-  margin: 0 0 24px;
-  width: auto;
-}
-
-div#register-page .register-section h4, div#register-page .security-question-section h4 {
-  font-size: 21px;
-  margin: 0 0 30px;
-  padding: 0 0 10px;
-}
-
-div#register-page .register-section, div#register-page .security-question-section {
-  font-weight: 400;
-  margin: 0 auto 25px !important;
-  padding: 24px;
-  padding-top: 0;
-  text-align: left;
-  max-width: 400px;
-  width: auto !important;
-  clear: both;
-  border: 0;
-  float: none !important;
-}
-
-div#register-page .security-question-section {
-  text-align: center;
-  width: 200px;
-}
-
-div#register-page .security-question-section h4 {
-  margin: 20px auto;
-}
-
-div#register-page .security-question-section label {
-  width: 80px;
-  margin-left: 20px;
-  display: inline;
-}
-
-div#register-page .security-question-section input#bp-security-check {
-  width: 80px;
-  margin-right: 20px;
-}
-
-#buddypress div#register-page .register-section h4 {
-  color: #000;
-  margin-bottom: 40px;
-  margin-top: 10px;
-  padding-bottom: 15px;
-}
-
-div#register-page #basic-details-section input {
-  margin-bottom: 30px;
-}
-
-#buddypress div#register-page #basic-details-section input.password-entry, #buddypress div#register-page #basic-details-section input.password-entry-confirm {
-  width: 100%;
-}
-
-div#register-page #signup_form.standard-form div.submit {
-  float: none !important;
-  margin: 0 auto;
-}
-
-div#register-page #signup_form.standard-form div.submit input {
-  margin: 0;
-  padding: 17px 22px;
-  font-size: 20px;
 }
 
 .bb-group-avatar-wrap-mobile, .bb-group-mobile-content, .item-header-mobile {

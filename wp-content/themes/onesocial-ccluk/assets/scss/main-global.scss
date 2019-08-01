@@ -6651,13 +6651,6 @@ input#save_as_draft {
       margin-top: 5px;
       outline: none;
     }
-    #basic-details-section, #blog-details-section, #profile-details-section, .security-question-section {
-      float: left;
-      width: 48%;
-    }
-    #blog-details-section {
-      clear: left;
-    }
     &:not(.send-invite-form) h4 {
       font-family: inherit;
       font-size: 14px;
@@ -9209,83 +9202,6 @@ body.registration {
   }
   .wp-social-login-provider-list {
     margin-bottom: 40px;
-  }
-}
-
-div#register-page {
-  p {
-    font-size: 15px;
-    margin: 10px auto 24px;
-    max-width: 400px;
-  }
-  .register-section p, .security-question-section p {
-    font-size: inherit;
-    margin: 0 0 24px;
-    width: auto;
-  }
-  .register-section h4, .security-question-section h4 {
-    font-size: 21px;
-    margin: 0 0 30px;
-    padding: 0 0 10px;
-  }
-  .register-section, .security-question-section {
-    font-weight: 400;
-    margin: 0 auto 25px !important;
-    padding: 24px;
-    padding-top: 0;
-    text-align: left;
-    max-width: 400px;
-    width: auto !important;
-    clear: both;
-    border: 0;
-    float: none !important;
-  }
-
-  .security-question-section {
-    text-align: center;
-    width: 200px;
-
-    h4 {
-      margin: 20px auto;
-    }
-
-    label {
-        width: 80px;
-        margin-left: 20px;
-        display: inline;
-    }
-
-    input#bp-security-check {
-        width: 80px;
-        margin-right: 20px;
-    }
-  }
-}
-
-#buddypress div#register-page .register-section h4 {
-  color: #000;
-  margin-bottom: 40px;
-  margin-top: 10px;
-  padding-bottom: 15px;
-}
-
-div#register-page #basic-details-section input {
-  margin-bottom: 30px;
-}
-
-#buddypress div#register-page #basic-details-section input {
-  &.password-entry, &.password-entry-confirm {
-    width: 100%;
-  }
-}
-
-div#register-page #signup_form.standard-form div.submit {
-  float: none !important;
-  margin: 0 auto;
-  input {
-    margin: 0;
-    padding: 17px 22px;
-    font-size: 20px;
   }
 }
 

@@ -45,19 +45,19 @@ body.archive.post-type-archive-ccluk_news {
     div#register-page {
 
         .register-section {
-            width: 46% !important;
-            max-width: 46% !important;
-            margin: 30px 0 30px 0 !important;
+            width: 46%;
+            max-width: 46%;
+            margin: 30px 0 30px 0;
             padding: 0;
 
             &#basic-details-section {
-                float: left !important;
-                clear: left !important;
+                float: right;
+                clear: right;
             }
 
             &#profile-details-section {
-                float: right !important;
-                clear: right !important;
+                float: left;
+                clear: left;
             }
         }
     }

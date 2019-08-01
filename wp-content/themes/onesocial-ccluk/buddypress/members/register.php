@@ -71,6 +71,64 @@ add_filter( 'bp_get_the_profile_field_required_label', function( $text ) {
 
 			<p><?php echo get_theme_mod( 'ccluk_join_intro', __( 'Become part of a growing movement lobbying for effective action on climate change. Just fill in the fields below.', 'onesocial' ) ) ?></p>
 
+			<?php /***** Extra Profile Details ******/ ?>
+
+			<?php if ( bp_is_active( 'xprofile' ) ) : ?>
+
+				<?php
+
+				/**
+				 * Fires before the display of member registration xprofile fields.
+				 *
+				 * @since 1.2.4
+				 */
+				do_action( 'bp_before_signup_profile_fields' ); ?>
+
+				<div class="register-section" id="profile-details-section">
+
+					<h2><?php _e( 'Personal details', 'buddypress' ); ?></h2>
+
+					<?php /* Use the profile field loop to render input fields for the 'base' profile field group */ ?>
+					<?php if ( bp_is_active( 'xprofile' ) ) : if ( bp_has_profile( array( 'profile_group_id' => 1, 'fetch_field_data' => false ) ) ) : while ( bp_profile_groups() ) : bp_the_profile_group(); ?>
+
+					<?php while ( bp_profile_fields() ) : bp_the_profile_field(); ?>
+
+						<div<?php bp_field_css_class( 'editfield' ); ?>>
+							<fieldset>
+
+							<?php
+							$field_type = bp_xprofile_create_field_type( bp_get_the_profile_field_type() );
+							$field_type->edit_field_html();
+
+							/**
+							 * Fires after the display of the visibility options for xprofile fields.
+							 *
+							 * @since 1.1.0
+							 */
+							do_action( 'bp_custom_profile_edit_fields' ); ?>
+
+							</fieldset>
+						</div>
+
+					<?php endwhile; ?>
+
+					<input type="hidden" name="signup_profile_field_ids" id="signup_profile_field_ids" value="<?php bp_the_profile_field_ids(); ?>" />
+
+					<?php endwhile; endif; endif; ?>
+
+					<?php
+
+					/**
+					 * Fires and displays any extra member registration xprofile fields.
+					 *
+					 * @since 1.9.0
+					 */
+					do_action( 'bp_signup_profile_fields' ); ?>
+
+				</div><!-- #profile-details-section -->
+
+			<?php endif; ?>
+
 			<?php
 
 			/**
@@ -84,7 +142,7 @@ add_filter( 'bp_get_the_profile_field_required_label', function( $text ) {
 
 				<?php /***** Basic Account Details ******/ ?>
 
-				<h2><?php _e( 'Account Details', 'buddypress' ); ?></h2>
+				<h2><?php _e( 'Contact details', 'buddypress' ); ?></h2>
 
 				<label for="signup_email"><?php _e( 'Email Address', 'buddypress' ); ?> </label>
 				<?php
@@ -139,76 +197,6 @@ add_filter( 'bp_get_the_profile_field_required_label', function( $text ) {
 			 * @since 1.1.0
 			 */
 			do_action( 'bp_after_account_details_fields' ); ?>
-
-			<?php /***** Extra Profile Details ******/ ?>
-
-			<?php if ( bp_is_active( 'xprofile' ) ) : ?>
-
-				<?php
-
-				/**
-				 * Fires before the display of member registration xprofile fields.
-				 *
-				 * @since 1.2.4
-				 */
-				do_action( 'bp_before_signup_profile_fields' ); ?>
-
-				<div class="register-section" id="profile-details-section">
-
-					<h2><?php _e( 'Personal Details', 'buddypress' ); ?></h2>
-
-					<?php /* Use the profile field loop to render input fields for the 'base' profile field group */ ?>
-					<?php if ( bp_is_active( 'xprofile' ) ) : if ( bp_has_profile( array( 'profile_group_id' => 1, 'fetch_field_data' => false ) ) ) : while ( bp_profile_groups() ) : bp_the_profile_group(); ?>
-
-					<?php while ( bp_profile_fields() ) : bp_the_profile_field(); ?>
-
-						<div<?php bp_field_css_class( 'editfield' ); ?>>
-							<fieldset>
-
-							<?php
-							$field_type = bp_xprofile_create_field_type( bp_get_the_profile_field_type() );
-							$field_type->edit_field_html();
-
-							/**
-							 * Fires after the display of the visibility options for xprofile fields.
-							 *
-							 * @since 1.1.0
-							 */
-							do_action( 'bp_custom_profile_edit_fields' ); ?>
-
-							</fieldset>
-						</div>
-
-					<?php endwhile; ?>
-
-					<input type="hidden" name="signup_profile_field_ids" id="signup_profile_field_ids" value="<?php bp_the_profile_field_ids(); ?>" />
-
-					<?php endwhile; endif; endif; ?>
-
-					<?php
-
-					/**
-					 * Fires and displays any extra member registration xprofile fields.
-					 *
-					 * @since 1.9.0
-					 */
-					do_action( 'bp_signup_profile_fields' ); ?>
-
-				</div><!-- #profile-details-section -->
-
-				<div class="after-signup-fields clearfix">
-					<?php
-
-					/**
-					 * Fires after the display of member registration xprofile fields.
-					 *
-					 * @since 1.1.0
-					 */
-					do_action( 'bp_after_signup_profile_fields' ); ?>
-
-				</div>
-
-			<?php endif; ?>
 
 			<?php
 

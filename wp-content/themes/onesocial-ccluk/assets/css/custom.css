@@ -1341,6 +1341,82 @@ body.register div#register-page .security-question-section {
   border: none;
 }
 
+body.register div#register-page p {
+  margin: 10px auto 24px;
+  max-width: 400px;
+}
+
+body.register div#register-page .register-section p,
+body.register div#register-page .security-question-section p {
+  margin: 0 0 24px;
+  width: auto;
+}
+
+body.register div#register-page .register-section h4,
+body.register div#register-page .security-question-section h4 {
+  font-size: 21px;
+  margin: 0 0 30px;
+  padding: 0 0 10px;
+}
+
+body.register div#register-page .register-section,
+body.register div#register-page .security-question-section {
+  font-weight: 400;
+  padding: 24px;
+  padding-top: 0;
+  text-align: left;
+  max-width: 400px;
+  clear: both;
+  border: 0;
+}
+
+body.register div#register-page .security-question-section {
+  width: auto !important;
+  float: none !important;
+  text-align: center;
+  width: 200px;
+}
+
+body.register div#register-page .security-question-section h4 {
+  margin: 20px auto;
+}
+
+body.register div#register-page .security-question-section label {
+  width: 80px;
+  margin-left: 20px;
+  display: inline;
+}
+
+body.register div#register-page .security-question-section input#bp-security-check {
+  width: 80px;
+  margin-right: 20px;
+}
+
+body.register #buddypress div#register-page .register-section h4 {
+  margin-bottom: 40px;
+  margin-top: 10px;
+  padding-bottom: 15px;
+}
+
+body.register div#register-page #basic-details-section input {
+  margin-bottom: 30px;
+}
+
+body.register #buddypress div#register-page #basic-details-section input.password-entry, body.register #buddypress div#register-page #basic-details-section input.password-entry-confirm {
+  width: 100%;
+}
+
+body.register div#register-page #signup_form.standard-form div.submit {
+  float: none !important;
+  margin: 0 auto;
+}
+
+body.register div#register-page #signup_form.standard-form div.submit input {
+  margin: 0;
+  padding: 17px 22px;
+  font-size: 20px;
+}
+
 body.register .popup-content {
   background: rgba(255, 255, 255, 0.8);
 }
@@ -2891,18 +2967,18 @@ MINIMUM width of 1025 pixels (desktops)
     font-size: 36px;
   }
   #buddypress div#register-page .register-section {
-    width: 46% !important;
-    max-width: 46% !important;
-    margin: 30px 0 30px 0 !important;
+    width: 46%;
+    max-width: 46%;
+    margin: 30px 0 30px 0;
     padding: 0;
   }
   #buddypress div#register-page .register-section#basic-details-section {
-    float: left !important;
-    clear: left !important;
+    float: right;
+    clear: right;
   }
   #buddypress div#register-page .register-section#profile-details-section {
-    float: right !important;
-    clear: right !important;
+    float: left;
+    clear: left;
   }
   #buddypress #groups-list .boss-group-content {
     min-height: 150px;
