@@ -1348,6 +1348,82 @@ body.register div#register-page .security-question-section {
   border: none;
 }
 
+body.register div#register-page p {
+  margin: 10px auto 24px;
+  max-width: 400px;
+}
+
+body.register div#register-page .register-section p,
+body.register div#register-page .security-question-section p {
+  margin: 0 0 24px;
+  width: auto;
+}
+
+body.register div#register-page .register-section h4,
+body.register div#register-page .security-question-section h4 {
+  font-size: 21px;
+  margin: 0 0 30px;
+  padding: 0 0 10px;
+}
+
+body.register div#register-page .register-section,
+body.register div#register-page .security-question-section {
+  font-weight: 400;
+  padding: 24px;
+  padding-top: 0;
+  text-align: left;
+  max-width: 400px;
+  clear: both;
+  border: 0;
+}
+
+body.register div#register-page .security-question-section {
+  width: auto !important;
+  float: none !important;
+  text-align: center;
+  width: 200px;
+}
+
+body.register div#register-page .security-question-section h4 {
+  margin: 20px auto;
+}
+
+body.register div#register-page .security-question-section label {
+  width: 80px;
+  margin-left: 20px;
+  display: inline;
+}
+
+body.register div#register-page .security-question-section input#bp-security-check {
+  width: 80px;
+  margin-right: 20px;
+}
+
+body.register #buddypress div#register-page .register-section h4 {
+  margin-bottom: 40px;
+  margin-top: 10px;
+  padding-bottom: 15px;
+}
+
+body.register div#register-page #basic-details-section input {
+  margin-bottom: 30px;
+}
+
+body.register #buddypress div#register-page #basic-details-section input.password-entry, body.register #buddypress div#register-page #basic-details-section input.password-entry-confirm {
+  width: 100%;
+}
+
+body.register div#register-page #signup_form.standard-form div.submit {
+  float: none !important;
+  margin: 0 auto;
+}
+
+body.register div#register-page #signup_form.standard-form div.submit input {
+  margin: 0;
+  padding: 17px 22px;
+  font-size: 20px;
+}
+
 body.register .popup-content {
   background: rgba(255, 255, 255, 0.8);
 }
@@ -1663,7 +1739,8 @@ a.comment-reply-link:hover, a.comment-edit-link:hover {
   color: #54ae68;
 }
 
-.is-mobile #main-wrap #page #buddypress div.item-list-tabs:not(#object-nav) ul li.current a, .is-mobile #main-wrap #page #buddypress div.item-list-tabs:not(#object-nav) ul li.selected a {
+.is-mobile #main-wrap #page #buddypress div.item-list-tabs:not(#object-nav) ul li.current a,
+.is-mobile #main-wrap #page #buddypress div.item-list-tabs:not(#object-nav) ul li.selected a {
   color: #54ae68;
 }
 
@@ -1821,11 +1898,9 @@ input[type="radio"] + span:before, input[type="radio"] + label:before, input[typ
   color: #54ae68;
 }
 
-.bp-user.messages.is-desktop #buddypress div#subnav.item-list-tabs ul li:hover a, .bp-user.messages.is-desktop #buddypress div#subnav.item-list-tabs ul li.selected a, .bp-user.messages.is-desktop #buddypress div#subnav.item-list-tabs ul li.current a, .bp-user.messages.is-desktop #buddypress div#subnav.item-list-tabs ul li a span {
-  color: #54ae68;
-}
-
-.search.is-desktop #buddypress div:not(#item-nav):not(#mobile-item-nav) > .dir-form div.item-list-tabs ul li a span, .search.is-desktop #buddypress div:not(#item-nav):not(#mobile-item-nav) > .dir-form div.item-list-tabs ul li.active a, .search.is-desktop #buddypress div:not(#item-nav):not(#mobile-item-nav) > .dir-form div.item-list-tabs ul li:hover a {
+.search.is-desktop #buddypress div:not(#item-nav):not(#mobile-item-nav) > .dir-form div.item-list-tabs ul li a span,
+.search.is-desktop #buddypress div:not(#item-nav):not(#mobile-item-nav) > .dir-form div.item-list-tabs ul li.active a,
+.search.is-desktop #buddypress div:not(#item-nav):not(#mobile-item-nav) > .dir-form div.item-list-tabs ul li:hover a {
   color: #54ae68;
 }
 
@@ -2652,7 +2727,7 @@ MINIMUM width of 1025 pixels (desktops)
     margin: 2.4rem 0rem;
   }
   body.page #primary article > .entry-header h1.entry-title {
-    font-size: 48px;
+    font-size: 70px;
   }
   body.archive.post-type-archive-ccluk_news .post-author .entry-date {
     font-size: 20px;
@@ -2666,108 +2741,22 @@ MINIMUM width of 1025 pixels (desktops)
   .single-post .entry-header h1 {
     font-size: 36px;
   }
-  /* Search Widget */
-  .widget-area .widget_search {
-    /* overflow: hidden; */
-  }
-  .widget-area .widget_search label {
-    display: block;
-    font-size: 13px;
-    line-height: 1.8;
-  }
-  .widget-area .widget_display_search {
-    /* overflow: hidden; */
-  }
-  .widget-area .widget_search input[type="submit"], .widget-area .widget_display_search input[type="submit"] {
-    min-width: 25%;
-    height: 35px;
-    line-height: 35px;
-    padding: 0 5%;
-    float: left;
-  }
-  /*--------------------------------------------------------------
-Footer
---------------------------------------------------------------*/
-  div.footer-inner div#footer-links {
-    -webkit-box-flex: 1;
-    -webkit-flex: 1 1 0;
-    -ms-flex: 1 1 0;
-    flex: 1 1 0;
-    float: left;
-    text-align: left;
-    min-width: 1px;
-    /* Firefox-34-ignoring-max-width-for-flexbox */
-  }
-  div.footer-inner div#footer-icons {
-    float: right;
-  }
-  div.footer-inner-bottom ul.social-icons {
-    margin: 0 0 0 40px;
-  }
-  #switch-mode {
-    float: right;
-    height: 44px;
-    line-height: 44px;
-    margin-left: 20px;
-    margin-top: 0;
-  }
-  .home-inner-wrap #secondary .widget:first-child {
-    padding-top: 30px;
-  }
-  #buddypress {
-    /*--------------------------------------------------------------
-    1.2.1 - Item List Tabs
-    --------------------------------------------------------------*/
-  }
   #buddypress div#register-page .register-section {
-    width: 46% !important;
-    max-width: 46% !important;
-    margin: 30px 0 30px 0 !important;
+    width: 46%;
+    max-width: 46%;
+    margin: 30px 0 30px 0;
     padding: 0;
   }
   #buddypress div#register-page .register-section#basic-details-section {
-    float: left !important;
-    clear: left !important;
+    float: right;
+    clear: right;
   }
   #buddypress div#register-page .register-section#profile-details-section {
-    float: right !important;
-    clear: right !important;
+    float: left;
+    clear: left;
   }
   #buddypress #groups-list .boss-group-content {
     min-height: 150px;
-  }
-  #buddypress div#subnav.item-list-tabs ul li, #buddypress div:not(#item-nav):not(#mobile-item-nav) > .item-list-tabs ul li {
-    margin-right: 9px;
-    margin-bottom: 4px;
-  }
-  #buddypress > div[role="navigation"].item-list-tabs ul li, #buddypress .dir-form div.item-list-tabs ul li {
-    margin-right: 9px;
-    margin-bottom: 4px;
-  }
-  #buddypress .item-header-mobile {
-    display: none;
-  }
-  .bp-legacy div#item-body div.item-list-tabs ul li {
-    margin-right: 9px;
-    margin-bottom: 4px;
-  }
-  /*--------------------------------------------------------------
-1.2.2 - Sitewide Notices
---------------------------------------------------------------*/
-  div#sitewide-notice {
-    padding: 0 30px;
-  }
-  div#sitewide-notice #message.info p {
-    -webkit-border-radius: 0 0 3px 3px;
-    -moz-border-radius: 0 0 3px 3px;
-    border-radius: 0 0 3px 3px;
-    margin-bottom: 0;
-  }
-  /* remove border radius on homepage, to match slideshow square style */
-  body.home-page div#sitewide-notice #message.info p {
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
   }
 }
 
