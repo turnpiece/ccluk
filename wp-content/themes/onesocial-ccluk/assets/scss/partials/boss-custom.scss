@@ -203,7 +203,6 @@ li {
 }
 
 .entry-meta a.read-more,
-.settings #buddypress div#subnav.item-list-tabs ul li.current a,
 .bb-user-notifications .avatar + a,
 #main #buddypress .bb-member-quick-link-wrapper .action .generic-button a:hover,
 #main-wrap #page #main #buddypress div.item-list-tabs li.hideshow ul a:hover {
@@ -216,7 +215,10 @@ a {
   }
 }
 
-.bb-user-name, .dir-header .bb-count, .boss-author-name, .posts-stream ul li h3 a:hover {
+.bb-user-name,
+.dir-header .bb-count,
+.boss-author-name,
+.posts-stream ul li h3 a:hover {
   color: $green;
 }
 
@@ -441,12 +443,6 @@ input {
   }
 }
 
-.settings.bp-user.is-desktop #buddypress div {
-  &#subnav.item-list-tabs ul li:hover a, &:not(#item-nav) > .item-list-tabs ul li:hover a {
-    color: $green;
-  }
-}
-
 .is-desktop {
   #buddypress div#item-nav .item-list-tabs ul li {
     &:hover > a,
@@ -579,11 +575,8 @@ body {
   background-color: $white;
 }
 
-.settings.bp-user #item-nav .item-list-tabs > ul:after {
-  border-bottom-color: $white;
-}
-
-#onesocial-recommended-by:after, .bbp-forum-data:after {
+#onesocial-recommended-by:after,
+.bbp-forum-data:after {
   border-color: transparent $white transparent transparent;
 }
 
@@ -592,7 +585,8 @@ body {
 }
 
 div {
-  &.bbp-template-notice, &.indicator-hint {
+  &.bbp-template-notice,
+  &.indicator-hint {
     background-color: $secondary_bg;
   }
 }

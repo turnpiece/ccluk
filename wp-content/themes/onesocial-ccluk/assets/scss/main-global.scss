@@ -6550,10 +6550,6 @@ input#save_as_draft {
   }
 }
 
-.settings #buddypress .standard-form div.submit {
-  padding: 22px 0 0 0;
-}
-
 #buddypress .standard-form p.submit {
   margin-bottom: 0;
   padding: 15px 0 0 0;
@@ -6571,7 +6567,8 @@ input#save_as_draft {
 }
 
 #buddypress {
-  #group-settings-form input[type="submit"], .standard-form div.submit input {
+  #group-settings-form input[type="submit"],
+  .standard-form div.submit input {
     margin-right: 15px;
     background-color: transparent;
     color: #54ae68;
@@ -8241,7 +8238,8 @@ body {
 
 .settings.bp-user {
   #buddypress div {
-    &#item-posts, &#item-body {
+    &#item-posts,
+    &#item-body {
       width: 100%;
     }
   }

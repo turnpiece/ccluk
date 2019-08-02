@@ -53,6 +53,7 @@ This is the Desktop stylesheet, served to laptops and desktop devices.
 /*--------------------------------------------------------------
 1.1.1 - Basic Structure
 --------------------------------------------------------------*/
+/** Variables **/
 html, body {
   background-color: #fff;
   height: 100%;
@@ -1308,10 +1309,6 @@ div.footer-inner.widget-area {
   overflow: visible;
 }
 
-body:not(.settings) #buddypress div#item-nav #object-nav.item-list-tabs > ul > li {
-  float: left;
-}
-
 #page#page #content #buddypress div.item-list-tabs li.hideshow {
   float: right;
   padding-bottom: 30px;
@@ -1549,13 +1546,13 @@ article:hover a.to-top {
 }
 
 .group-join, .author-follow {
-  /* background: #fff; */
+  /* background: $white; */
   z-index: 2;
   position: relative;
 }
 
 .author-details .author-top {
-  /* background: #fff; */
+  /* background: $white; */
   z-index: 2;
   position: relative;
 }
@@ -1974,14 +1971,6 @@ body.single-item.groups .entry-header .entry-title {
   clear: none;
 }
 
-.settings.bp-user #buddypress div#item-nav {
-  display: inline-block !important;
-}
-
-body.bp-user:not(.settings) #buddypress div#item-nav {
-  margin-bottom: 50px;
-}
-
 #mobile-item-nav-wrap {
   /* Item Nav Holder, In Mobile */
   display: none;
@@ -2047,7 +2036,7 @@ body.bp-user:not(.settings) #buddypress div#item-nav {
   display: table;
 }
 
-body:not(.settings) #buddypress div#item-nav .item-list-tabs > ul > li {
+body #buddypress div#item-nav .item-list-tabs > ul > li {
   margin: 0;
   list-style: none;
   line-height: 1.7;
@@ -2076,23 +2065,6 @@ body:not(.settings) #buddypress div#item-nav .item-list-tabs > ul > li {
   padding-top: 10px;
   display: block;
   position: relative;
-}
-
-.settings #buddypress div#item-nav .item-list-tabs ul li a {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  line-height: 1.8;
-}
-
-.settings #buddypress div#item-nav .item-list-tabs ul li a span {
-  height: 15px;
-  margin-top: 6px;
 }
 
 #buddypress div#item-nav .item-list-tabs ul li:hover a:before, #buddypress div#item-nav .item-list-tabs ul li.selected a:before, #buddypress div#item-nav .item-list-tabs ul li.current a:before {
@@ -2150,7 +2122,8 @@ body:not(.group-members) #buddypress div#subnav.item-list-tabs ul, body:not(.gro
   /* Fix for whitespaces between LI. Reset font-size in LI */
 }
 
-#buddypress > div[role="navigation"].item-list-tabs ul, #buddypress .dir-form div.item-list-tabs ul {
+#buddypress > div[role="navigation"].item-list-tabs ul,
+#buddypress .dir-form div.item-list-tabs ul {
   margin: 0;
   padding: 0;
   overflow: visible;
@@ -2176,7 +2149,8 @@ body:not(.group-members) #buddypress div#subnav.item-list-tabs ul, body:not(.gro
   /* Required to reset font size */
 }
 
-#buddypress > div[role="navigation"].item-list-tabs ul li, #buddypress .dir-form div.item-list-tabs ul li {
+#buddypress > div[role="navigation"].item-list-tabs ul li,
+#buddypress .dir-form div.item-list-tabs ul li {
   margin: 0 9px 4px 0;
   display: inline-block;
   margin-right: 9px;
@@ -2305,10 +2279,6 @@ body:not(.group-members) #buddypress div#subnav.item-list-tabs ul, body:not(.gro
   border-radius: 0;
   font-size: 10px;
   text-transform: uppercase;
-}
-
-.settings #buddypress div#subnav.item-list-tabs ul li.current a {
-  color: #54ae68;
 }
 
 /* Number icon */
@@ -2924,75 +2894,6 @@ div#mobile-check {
   color: rgba(0, 0, 0, 0.1);
 }
 
-.settings.bp-user #buddypress div#item-nav {
-  position: relative;
-  width: 210px;
-  display: inline-block;
-  float: none;
-  margin-top: 30px;
-}
-
-.settings.bp-user #item-nav .item-list-tabs {
-  position: absolute;
-  opacity: 0;
-  -webkit-transition: all 0.3s;
-  -o-transition: all 0.3s;
-  transition: all 0.3s;
-  padding-top: 0;
-  width: 100%;
-  z-index: 1;
-  visibility: hidden;
-}
-
-.settings.bp-user #item-nav:hover .item-list-tabs {
-  opacity: 1;
-  padding-top: 15px;
-  visibility: visible;
-}
-
-.settings.bp-user #buddypress div#item-nav .item-list-tabs > ul {
-  border: 2px solid #e1e1e1;
-  border-radius: 2px;
-  background-color: #fff;
-  padding: 24px 30px;
-  width: 100%;
-  position: relative;
-  overflow: visible;
-  float: left;
-}
-
-.settings.bp-user #item-nav .item-list-tabs > ul:before, .settings.bp-user #item-nav .item-list-tabs > ul:after {
-  bottom: 100%;
-  left: 50%;
-  border: solid transparent;
-  content: " ";
-  height: 0;
-  width: 0;
-  position: absolute;
-  pointer-events: none;
-}
-
-.settings.bp-user #item-nav .item-list-tabs > ul:before {
-  border-color: rgba(225, 225, 225, 0);
-  border-bottom-color: #e1e1e1;
-  border-width: 12px;
-  margin-left: -12px;
-}
-
-.settings.bp-user #item-nav .item-list-tabs > ul:after {
-  border-color: rgba(255, 255, 255, 0);
-  border-bottom-color: #fff;
-  border-width: 9px;
-  margin-left: -9px;
-}
-
-.settings.bp-user #buddypress div#item-nav .item-list-tabs ul li {
-  margin-right: 0;
-  clear: both;
-  width: 100%;
-  text-align: left;
-}
-
 .search #buddypress div:not(#item-nav) > .dir-form div.item-list-tabs ul {
   text-align: center;
 }
@@ -3008,22 +2909,7 @@ div#mobile-check {
   padding-top: 0;
 }
 
-.settings.bp-user #buddypress div#item-nav .item-list-tabs ul li a {
-  padding-bottom: 2px;
-  font-size: 14px;
-  font-weight: 700;
-  padding-top: 0;
-}
-
-.settings.bp-user #item-nav .item-list-tabs ul li a:before {
-  display: none !important;
-}
-
 .search #buddypress div:not(#item-nav) > .dir-form div.item-list-tabs ul li {
-  margin-right: 0;
-}
-
-.settings.bp-user #buddypress div#subnav.item-list-tabs ul li, .settings.bp-user #buddypress div:not(#item-nav) > .item-list-tabs ul li {
   margin-right: 0;
 }
 
@@ -3035,30 +2921,11 @@ div#mobile-check {
   display: inline-block;
 }
 
-.settings.bp-user #buddypress div#subnav.item-list-tabs ul li a, .settings.bp-user #buddypress div:not(#item-nav) > .item-list-tabs ul li a {
-  background-color: transparent;
-  font-size: 14px;
-  color: #333;
-  border: none;
-  display: inline-block;
-}
-
 .search #buddypress div:not(#item-nav) > .dir-form div.item-list-tabs ul li.active a, .search #buddypress div:not(#item-nav) > .dir-form div.item-list-tabs ul li:hover a {
   color: #54ae68;
 }
 
-.settings.bp-user #buddypress div#subnav.item-list-tabs ul li:hover a, .settings.bp-user #buddypress div:not(#item-nav) > .item-list-tabs ul li:hover a {
-  color: #54ae68;
-}
-
 .search #buddypress div:not(#item-nav) > .dir-form div.item-list-tabs ul li:not(:last-child):after {
-  content: '.';
-  display: inline-block;
-  vertical-align: text-bottom;
-  font-size: 16px;
-}
-
-.settings.bp-user #buddypress div#subnav.item-list-tabs ul li:not(:last-child):after, .settings.bp-user #buddypress div:not(#item-nav) > .item-list-tabs ul li:not(:last-child):after {
   content: '.';
   display: inline-block;
   vertical-align: text-bottom;
@@ -3096,7 +2963,8 @@ h1.big {
   margin: 45px 0 54px;
 }
 
-.settings.bp-user.profile #settings-form, .settings.bp-user.general #settings-form {
+.settings.bp-user.profile #settings-form,
+.settings.bp-user.general #settings-form {
   max-width: 380px;
 }
 

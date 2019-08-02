@@ -6491,10 +6491,6 @@ input#save_as_draft {
   padding: 5px 0 0 0;
 }
 
-.settings #buddypress .standard-form div.submit {
-  padding: 22px 0 0 0;
-}
-
 #buddypress .standard-form p.submit {
   margin-bottom: 0;
   padding: 15px 0 0 0;
@@ -6511,7 +6507,8 @@ input#save_as_draft {
   margin-top: 20px;
 }
 
-#buddypress #group-settings-form input[type="submit"], #buddypress .standard-form div.submit input {
+#buddypress #group-settings-form input[type="submit"],
+#buddypress .standard-form div.submit input {
   margin-right: 15px;
   background-color: transparent;
   color: #54ae68;
