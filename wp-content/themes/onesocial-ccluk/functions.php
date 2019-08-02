@@ -282,7 +282,6 @@ function boss_generate_option_css() {
     .widget_search #searchform button i:before,
     .widget #bbp-search-index-form button i:before,
     .entry-meta a.read-more,
-    .settings #buddypress div#subnav.item-list-tabs ul li.current a,
     .bb-user-notifications .avatar + a,
     #main #buddypress .bb-member-quick-link-wrapper .action .generic-button a:hover,
     #main-wrap #page #main #buddypress div.item-list-tabs li.hideshow ul a:hover,
@@ -433,8 +432,6 @@ function boss_generate_option_css() {
     .search.is-desktop #buddypress div:not(#item-nav) > .dir-form div.item-list-tabs ul li a span,
     .search.is-desktop #buddypress div:not(#item-nav) > .dir-form div.item-list-tabs ul li.active a,
     .search.is-desktop #buddypress div:not(#item-nav) > .dir-form div.item-list-tabs ul li:hover a,
-    .settings.bp-user.is-desktop #buddypress div#subnav.item-list-tabs ul li:hover a,
-    .settings.bp-user.is-desktop #buddypress div:not(#item-nav) > .item-list-tabs ul li:hover a,
     .is-desktop #buddypress div#item-nav .item-list-tabs ul li:hover > a,
     .is-desktop #buddypress div#item-nav .item-list-tabs ul li.selected > a,
     .is-desktop #buddypress div#item-nav .item-list-tabs ul li.current > a,
@@ -510,7 +507,6 @@ function boss_generate_option_css() {
     .main-navigation li ul ul,
     .main-navigation li ul,
     #main #buddypress div.item-list-tabs li.hideshow > ul,
-    .settings.bp-user #buddypress div#item-nav .item-list-tabs > ul,
     .header-account-login .pop .bp_components .menupop:not(#wp-admin-bar-my-account) > .ab-sub-wrapper,
     .header-account-login .pop .links li > .sub-menu,
     .header-account-login .pop .bp_components .menupop:not(#wp-admin-bar-my-account) > .ab-sub-wrapper:before,
@@ -521,10 +517,6 @@ function boss_generate_option_css() {
     a.to-top,
     #onesocial-recommended-by:before, .bbp-forum-data:before {
       background-color: <?php echo $primary_color; ?>;
-    }
-
-    .settings.bp-user #item-nav .item-list-tabs > ul:after {
-      border-bottom-color: <?php echo $primary_color; ?>;
     }
 
     #onesocial-recommended-by:after, .bbp-forum-data:after {

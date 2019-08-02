@@ -1,7 +1,11 @@
-/* Buddypress */
-
 body.buddypress {
 
+	.bp-legacy {
+		div#item-body {
+			margin: 40px 0 0;
+		}
+	}
+	
 	&.group-home {
 		#buddypress {
 			.buddypress-content {
@@ -29,9 +33,9 @@ body.buddypress {
 		}
 
 		.standard-form {
-			.datebox, 
-			input[type=text], 
-			input[type=email], 
+			.datebox,
+			input[type=text],
+			input[type=email],
 			input[type=password],
 			textarea {
 				border: 1px solid $green;
@@ -54,12 +58,26 @@ body.buddypress {
 		}
 
 		.profile {
-			table.profile-fields {
+			.profile-fields {
 				.label {
 					font-weight: 100;
 				}
 				.data {
 					font-weight: 600;
+				}
+			}
+			ul.profile-fields {
+				margin: 0;
+				list-style-type: none;
+
+				.label {
+					font-size: $font-size-sm;
+					font-style: italic;
+				}
+
+				.data {
+					font-weight: normal;
+					max-width: 450px;
 				}
 			}
 			.standard-form {
@@ -133,7 +151,7 @@ body.buddypress {
 				}
 			}
 
-			label, 
+			label,
 			legend {
                 @include form-label();
             }
@@ -153,7 +171,7 @@ body.buddypress {
 		}
 
 	    div {
-	      &#subnav.item-list-tabs ul li a span, 
+	      &#subnav.item-list-tabs ul li a span,
 	      &:not(#item-nav) > .item-list-tabs ul li a span {
 	        color: $green;
 	      }
@@ -175,7 +193,7 @@ body.buddypress {
 		}
 
 		table#message-threads {
-		    input[type="checkbox"]:checked + strong:after, 
+		    input[type="checkbox"]:checked + strong:after,
 		    tr td.thread-info p a:hover {
 		      color: $green;
 		    }
@@ -229,7 +247,7 @@ body.buddypress {
 		}
 	}
 
-	.bp-user a.button.sap-new-post-btn{
+	&.bp-user a.button.sap-new-post-btn{
 		font-size: $font-size-sm;
 		&:hover {
 			background-color: $green;
@@ -287,7 +305,7 @@ body.buddypress {
 		}
 
 		#buddypress {
-			#mobile-item-nav-wrap, 
+			#mobile-item-nav-wrap,
 			ul#activity-stream li.activity-item {
 				background: transparent;
 			}
@@ -295,7 +313,7 @@ body.buddypress {
 
 		&.has-activity {
 			#buddypress {
-				div.item-list-tabs, 
+				div.item-list-tabs,
 				form#whats-new-form {
 					background: transparent;
 				}
@@ -312,7 +330,7 @@ body.buddypress {
 					h4 > span {
 						font-size: $font-size-std;
 					}
-					
+
 					table.calendar-view {
 						line-height: 1.5;
 						width: auto;
@@ -342,7 +360,7 @@ body.buddypress {
 							}
 						}
 					}
-					
+
 					.standard-form {
 						label {
 							input {
@@ -432,6 +450,16 @@ body.buddypress {
 						color: $white;
 					}
 				}
+			}
+		}
+	}
+
+	&.settings {
+		#item-nav {
+			> .item-list-tabs {
+				max-width: 450px;
+				margin-left: auto;
+				margin-right: auto;
 			}
 		}
 	}
