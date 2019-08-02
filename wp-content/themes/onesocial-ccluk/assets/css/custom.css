@@ -1538,6 +1538,10 @@ body.register div#register-page .submit {
   background-color: #22a7f0;
 }
 
+button {
+  background-color: #54ae68;
+}
+
 input[type="button"], input[type="reset"] {
   background-color: #22a7f0;
 }
@@ -1552,14 +1556,7 @@ a.button {
   background-color: #22a7f0;
 }
 
-#secondary div.generic-button a,
-#buddypress .comment-reply-link,
-.select2-container--default .select2-results__option--highlighted[aria-selected],
-.entry-header .entry-title a.button, a.bp-title-button,
-#search-members-form > label:after,
-#messages-bulk-manage,
-.boss-search-wrapper label:after,
-.groups-members-search label:after {
+#secondary div.generic-button a, #buddypress .comment-reply-link, .select2-container--default .select2-results__option--highlighted[aria-selected], .entry-header .entry-title a.button, a.bp-title-button, #search-members-form > label:after, #messages-bulk-manage, .boss-search-wrapper label:after, .groups-members-search label:after {
   background-color: #22a7f0;
 }
 
@@ -1640,18 +1637,7 @@ li.bbp-forum-info a.bbp-forum-title:before, li.bbp-topic-title a.bbp-topic-perma
   color: #54ae68;
 }
 
-.dir-header {
-  font-size: 70px;
-  margin-bottom: 60px;
-  /*margin-top: 70px;*/
-  text-align: center;
-}
-
-.dir-header span, .dir-header h1 {
-  display: inline-block;
-  font-size: inherit;
-  line-height: 1.3;
-  margin: 0;
+.dir-header span, #buddypress .dir-list ul.item-list .item-title a:hover {
   color: #54ae68;
 }
 
@@ -1708,7 +1694,6 @@ li.bbp-forum-info a.bbp-forum-title:before, li.bbp-topic-title a.bbp-topic-perma
 }
 
 .entry-meta a.read-more,
-.settings #buddypress div#subnav.item-list-tabs ul li.current a,
 .bb-user-notifications .avatar + a,
 #main #buddypress .bb-member-quick-link-wrapper .action .generic-button a:hover,
 #main-wrap #page #main #buddypress div.item-list-tabs li.hideshow ul a:hover {
@@ -1719,7 +1704,10 @@ a.comment-reply-link:hover, a.comment-edit-link:hover {
   color: #54ae68;
 }
 
-.bb-user-name, .dir-header .bb-count, .boss-author-name, .posts-stream ul li h3 a:hover {
+.bb-user-name,
+.dir-header .bb-count,
+.boss-author-name,
+.posts-stream ul li h3 a:hover {
   color: #54ae68;
 }
 
@@ -1739,8 +1727,7 @@ a.comment-reply-link:hover, a.comment-edit-link:hover {
   color: #54ae68;
 }
 
-.is-mobile #main-wrap #page #buddypress div.item-list-tabs:not(#object-nav) ul li.current a,
-.is-mobile #main-wrap #page #buddypress div.item-list-tabs:not(#object-nav) ul li.selected a {
+.is-mobile #main-wrap #page #buddypress div.item-list-tabs:not(#object-nav) ul li.current a, .is-mobile #main-wrap #page #buddypress div.item-list-tabs:not(#object-nav) ul li.selected a {
   color: #54ae68;
 }
 
@@ -1762,6 +1749,10 @@ li.bbp-forum-info a.bbp-forum-title:hover, li.bbp-topic-title a.bbp-topic-permal
 
 .recommend-title, .liked .fa-heart, .bookmarked .bb-helper-icon.fa-bookmark, .fa.bb-helper-icon.fa-spinner.fa-spin, .os-loader i, .breadcrumb-wrapper a:hover, .sap-container-wrapper .sap-author-name.sap-author-name, .sap-publish-popup.sap-publish-popup .sap-action-button, #send-private-message.generic-button a:before {
   color: #54ae68;
+}
+
+#mobile-header {
+  background-color: #54ae68;
 }
 
 #onesocial_recommend:after, #onesocial_recommend:before {
@@ -1898,13 +1889,11 @@ input[type="radio"] + span:before, input[type="radio"] + label:before, input[typ
   color: #54ae68;
 }
 
-.search.is-desktop #buddypress div:not(#item-nav):not(#mobile-item-nav) > .dir-form div.item-list-tabs ul li a span,
-.search.is-desktop #buddypress div:not(#item-nav):not(#mobile-item-nav) > .dir-form div.item-list-tabs ul li.active a,
-.search.is-desktop #buddypress div:not(#item-nav):not(#mobile-item-nav) > .dir-form div.item-list-tabs ul li:hover a {
+.bp-user.messages.is-desktop #buddypress div#subnav.item-list-tabs ul li:hover a, .bp-user.messages.is-desktop #buddypress div#subnav.item-list-tabs ul li.selected a, .bp-user.messages.is-desktop #buddypress div#subnav.item-list-tabs ul li.current a, .bp-user.messages.is-desktop #buddypress div#subnav.item-list-tabs ul li a span {
   color: #54ae68;
 }
 
-.settings.bp-user.is-desktop #buddypress div#subnav.item-list-tabs ul li:hover a, .settings.bp-user.is-desktop #buddypress div:not(#item-nav):not(#mobile-item-nav) > .item-list-tabs ul li:hover a {
+.search.is-desktop #buddypress div:not(#item-nav) > .dir-form div.item-list-tabs ul li a span, .search.is-desktop #buddypress div:not(#item-nav) > .dir-form div.item-list-tabs ul li.active a, .search.is-desktop #buddypress div:not(#item-nav) > .dir-form div.item-list-tabs ul li:hover a {
   color: #54ae68;
 }
 
@@ -2025,11 +2014,8 @@ body:not(.buddypress) #content article, body.buddypress #content article.error40
   background-color: #fff;
 }
 
-.settings.bp-user #item-nav .item-list-tabs > ul:after {
-  border-bottom-color: #fff;
-}
-
-#onesocial-recommended-by:after, .bbp-forum-data:after {
+#onesocial-recommended-by:after,
+.bbp-forum-data:after {
   border-color: transparent #fff transparent transparent;
 }
 

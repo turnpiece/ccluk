@@ -1726,7 +1726,7 @@ Media queries
     margin: 2.4rem 0rem;
   }
   body.page #primary article > .entry-header h1.entry-title {
-    font-size: 48px;
+    font-size: 70px;
   }
   body.archive.post-type-archive-ccluk_news .post-author .entry-date {
     font-size: 20px;
@@ -1740,108 +1740,22 @@ Media queries
   .single-post .entry-header h1 {
     font-size: 36px;
   }
-  /* Search Widget */
-  .widget-area .widget_search {
-    /* overflow: hidden; */
-  }
-  .widget-area .widget_search label {
-    display: block;
-    font-size: 13px;
-    line-height: 1.8;
-  }
-  .widget-area .widget_display_search {
-    /* overflow: hidden; */
-  }
-  .widget-area .widget_search input[type="submit"], .widget-area .widget_display_search input[type="submit"] {
-    min-width: 25%;
-    height: 35px;
-    line-height: 35px;
-    padding: 0 5%;
-    float: left;
-  }
-  /*--------------------------------------------------------------
-Footer
---------------------------------------------------------------*/
-  div.footer-inner div#footer-links {
-    -webkit-box-flex: 1;
-    -webkit-flex: 1 1 0;
-    -ms-flex: 1 1 0;
-    flex: 1 1 0;
-    float: left;
-    text-align: left;
-    min-width: 1px;
-    /* Firefox-34-ignoring-max-width-for-flexbox */
-  }
-  div.footer-inner div#footer-icons {
-    float: right;
-  }
-  div.footer-inner-bottom ul.social-icons {
-    margin: 0 0 0 40px;
-  }
-  #switch-mode {
-    float: right;
-    height: 44px;
-    line-height: 44px;
-    margin-left: 20px;
-    margin-top: 0;
-  }
-  .home-inner-wrap #secondary .widget:first-child {
-    padding-top: 30px;
-  }
-  #buddypress {
-    /*--------------------------------------------------------------
-    1.2.1 - Item List Tabs
-    --------------------------------------------------------------*/
-  }
   #buddypress div#register-page .register-section {
-    width: 46% !important;
-    max-width: 46% !important;
-    margin: 30px 0 30px 0 !important;
+    width: 46%;
+    max-width: 46%;
+    margin: 30px 0 30px 0;
     padding: 0;
   }
   #buddypress div#register-page .register-section#basic-details-section {
-    float: left !important;
-    clear: left !important;
+    float: right;
+    clear: right;
   }
   #buddypress div#register-page .register-section#profile-details-section {
-    float: right !important;
-    clear: right !important;
+    float: left;
+    clear: left;
   }
   #buddypress #groups-list .boss-group-content {
     min-height: 150px;
-  }
-  #buddypress div#subnav.item-list-tabs ul li, #buddypress div:not(#item-nav):not(#mobile-item-nav) > .item-list-tabs ul li {
-    margin-right: 9px;
-    margin-bottom: 4px;
-  }
-  #buddypress > div[role="navigation"].item-list-tabs ul li, #buddypress .dir-form div.item-list-tabs ul li {
-    margin-right: 9px;
-    margin-bottom: 4px;
-  }
-  #buddypress .item-header-mobile {
-    display: none;
-  }
-  .bp-legacy div#item-body div.item-list-tabs ul li {
-    margin-right: 9px;
-    margin-bottom: 4px;
-  }
-  /*--------------------------------------------------------------
-1.2.2 - Sitewide Notices
---------------------------------------------------------------*/
-  div#sitewide-notice {
-    padding: 0 30px;
-  }
-  div#sitewide-notice #message.info p {
-    -webkit-border-radius: 0 0 3px 3px;
-    -moz-border-radius: 0 0 3px 3px;
-    border-radius: 0 0 3px 3px;
-    margin-bottom: 0;
-  }
-  /* remove border radius on homepage, to match slideshow square style */
-  body.home-page div#sitewide-notice #message.info p {
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
   }
 }
 

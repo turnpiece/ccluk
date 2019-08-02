@@ -25,6 +25,46 @@ do_action( 'bp_before_profile_loop_content' ); ?>
 
 				<h2><?php bp_the_profile_group_name(); ?></h2>
 
+				<?php
+					switch( bp_get_the_profile_group_slug() ) :
+
+						case 'about' :
+				?>
+
+				<ul class="profile-fields">
+
+					<?php while ( bp_profile_fields() ) : bp_the_profile_field(); ?>
+
+						<?php if ( bp_field_has_data() ) : $fields++; ?>
+
+							<li<?php bp_field_css_class(); ?>>
+
+								<h5 class="label"><?php bp_the_profile_field_name(); ?></h5>
+
+								<div class="data"><?php bp_the_profile_field_value(); ?></div>
+
+							</li>
+
+						<?php endif; ?>
+
+						<?php
+
+						/**
+						 * Fires after the display of a field table row for profile data.
+						 *
+						 * @since 1.1.0
+						 */
+						do_action( 'bp_profile_field_item' ); ?>
+
+					<?php endwhile; ?>
+
+				</ul>
+
+				<?php
+							break;
+
+						default :
+				?>
 				<table class="profile-fields">
 
 					<?php while ( bp_profile_fields() ) : bp_the_profile_field(); ?>
@@ -54,6 +94,11 @@ do_action( 'bp_before_profile_loop_content' ); ?>
 
 				</table>
 
+				<?php
+							break;
+
+					endswitch;
+				?>
 			</div>
 
 			<?php
@@ -73,6 +118,7 @@ do_action( 'bp_before_profile_loop_content' ); ?>
 				<p><?php _e( 'This member has not filled out their profile.', 'onesocial' ) ?></p>
 			<?php endif; ?>
 		</div>
+
 	<?php endif; ?>
 
 	<?php

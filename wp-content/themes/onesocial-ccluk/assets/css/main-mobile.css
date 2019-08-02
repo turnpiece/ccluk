@@ -164,7 +164,6 @@ body:not(.buddypress) #content article, body.buddypress #content article.error40
   background-color: #fff;
   padding: 15px 0;
   overflow: hidden;
-  margin: 0;
   border-bottom: 1px solid #eee;
 }
 
@@ -5026,22 +5025,6 @@ MAXIMUM width of 480 pixels (phones)
     margin-left: 0;
     margin-right: 0;
     width: 100%;
-  }
-  #message-threads .thread-from .table-cell {
-    width: 100%;
-    display: block;
-    text-align: center;
-  }
-  #message-threads .thread-from .table-cell:first-child {
-    width: 100%;
-    display: block;
-    text-align: center;
-  }
-  #message-threads .thread-from img {
-    margin: 0 0 10px 0;
-  }
-  .item-header-mobile {
-    margin-top: 40px;
   }
   #buddypress .dir-form div.item-list-tabs ul li a span,
   #buddypress div#subnav.item-list-tabs ul li a span,

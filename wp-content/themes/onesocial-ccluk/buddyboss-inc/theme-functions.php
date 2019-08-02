@@ -1994,37 +1994,6 @@ function buddyboss_add_handle() {
 
 add_action( 'bbp_theme_after_reply_author_details', 'buddyboss_add_handle' );
 
-/**
- * Remove "Nav" items from profile navigation
- *
- * @since Creative 1.0.0
- * @since 1.1.2 Updated
- */
-function buddyboss_remove_settings_nav() {
-    /**
-     * Don't hide it if bp-reorder-tabs plugin is trying to list nav items
-     */
-    if( isset( $_GET['secret'] ) && $_GET['secret']=='yuYmn_erin2356UY' ){
-        return;
-    }
-
-    $bp = buddypress();
-
-    if ( version_compare( BP_VERSION, '2.6', '<' ) ){
-        //legacy code
-        unset( $bp->bp_nav[ 'settings' ] );
-        unset( $bp->bp_nav[ 'messages' ] );
-        unset( $bp->bp_nav[ 'notifications' ] );
-    } else {
-        //new navigation apis
-        $to_hide = array( 'settings', 'messages', 'notifications' );
-        foreach( $to_hide as $nav ){
-            add_filter( 'bp_get_displayed_user_nav_' . $nav, '__return_false' );
-        }
-    }
-}
-
-add_action( 'bp_setup_nav', 'buddyboss_remove_settings_nav', 15 );
 
 /**
  * Remove "Submenu" from profile navigation

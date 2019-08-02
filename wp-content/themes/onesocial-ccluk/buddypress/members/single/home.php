@@ -11,22 +11,17 @@
 				</div>
 			<?php endif; ?>
 
-			<?php if ( !bp_is_user_messages() ) : ?>
-				<div id="item-nav">
-					<?php if ( bp_is_user_settings() ) : ?>
-						<div id="show-nav" class="bb-icon-more"></div>
-					<?php endif; ?>
-					<div class="item-list-tabs no-ajax" id="object-nav" role="navigation">
-						<ul id="nav-bar-filter">
+			<div id="item-nav">
+				<div class="item-list-tabs no-ajax" id="object-nav" role="navigation">
+					<ul id="nav-bar-filter">
 
-							<?php bp_get_displayed_user_nav(); ?>
+						<?php bp_get_displayed_user_nav(); ?>
 
-							<?php do_action( 'bp_member_options_nav' ); ?>
+						<?php do_action( 'bp_member_options_nav' ); ?>
 
-						</ul>
-					</div>
-				</div><!-- #item-nav -->
-			<?php endif; ?>
+					</ul>
+				</div>
+			</div><!-- #item-nav -->
 
 			<div id="item-body" role="main">
 
