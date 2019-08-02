@@ -5,7 +5,7 @@
 	<div class="buddypress-content-wrap">
 
 		<section class="buddypress-content">
-			<?php if ( !bp_is_user_messages() ) : ?>
+			<?php if ( !bp_is_user_messages() && !bp_is_user_settings() ) : ?>
 				<div id="item-header" class="item-header-mobile" role="complementary">
 					<?php bp_get_template_part( 'members/single/member-header' ) ?>
 				</div>

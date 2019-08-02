@@ -44,58 +44,12 @@ body.bp-user.messages {
                     width: 200px;
                     position: relative;
                     padding-right: 30px;
-
-                    > div#subnav.item-list-tabs {
-                        > ul > li {
-                             > a {
-                                border: none;
-                                color: $blue;
-                                > span {
-                                    background: transparent;
-                                    font-size: 100%;
-                                    color: $blue;
-                                    padding: 0;
-                                    border: none;
-                                    float: right;
-                                }
-                                &:hover {
-                                    color: $green;
-                                    background: transparent;
-                                    > span {
-                                        color: $green;
-                                    }
-                                }
-                            }
-                            &:hover,
-                            &.selected,
-                            &.current {
-                                > a {
-                                    color: $green;
-                                    background: transparent;
-                                    > span {
-                                        color: $green;
-                                    }
-                                }
-                            }
-                        }
-                    }
                 }
             }
         }
     }
 
     #buddypress {
-
-        div#subnav.item-list-tabs ul li {
-            a {
-                color: $blue;
-            }
-            &:hover a,
-            &.selected a,
-            &.current a{
-                color: $green;
-            }
-        }
 
         div.message-search {
             float: right;

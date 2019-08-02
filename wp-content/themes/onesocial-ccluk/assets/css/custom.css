@@ -2002,10 +2002,6 @@ body:not(.buddypress) #content article, body.buddypress #content article.error40
   background-color: #fff;
 }
 
-#main #buddypress div.item-list-tabs li.hideshow > ul, .settings.bp-user #buddypress div#item-nav .item-list-tabs > ul {
-  background-color: #fff;
-}
-
 .header-account-login .pop .bp_components .menupop:not(#wp-admin-bar-my-account) > .ab-sub-wrapper, .header-account-login .pop .links li > .sub-menu, .header-account-login .pop .bp_components .menupop:not(#wp-admin-bar-my-account) > .ab-sub-wrapper:before, .header-account-login .pop .links li > .sub-menu:before {
   background-color: #fff;
 }
