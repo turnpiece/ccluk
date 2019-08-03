@@ -1723,19 +1723,13 @@ a.comment-reply-link:hover, a.comment-edit-link:hover {
   color: #54ae68;
 }
 
-#buddypress .bboss_search_page a.loading:after, .header-account-login .pop .count {
+#buddypress .bboss_search_page a.loading:after,
+.header-account-login .pop .count {
   color: #54ae68;
 }
 
-.is-mobile #main-wrap #page #buddypress div.item-list-tabs:not(#object-nav) ul li.current a, .is-mobile #main-wrap #page #buddypress div.item-list-tabs:not(#object-nav) ul li.selected a {
-  color: #54ae68;
-}
-
-li.bbp-forum-info a.bbp-forum-title:hover, li.bbp-topic-title a.bbp-topic-permalink:hover {
-  color: #54ae68;
-}
-
-.footer-inner-top a:hover, .boss-group-invite-friend-list strong {
+.footer-inner-top a:hover,
+.boss-group-invite-friend-list strong {
   color: #54ae68;
 }
 
@@ -1910,11 +1904,13 @@ input[type="radio"] + span:before, input[type="radio"] + label:before, input[typ
   color: #54ae68;
 }
 
-.is-desktop .post-author .load-more-posts:hover, .is-desktop .post-author .load-more-posts a:hover {
+.is-desktop .post-author .load-more-posts:hover,
+.is-desktop .post-author .load-more-posts a:hover {
   color: #54ae68;
 }
 
-.is-desktop .header-notifications a#user-messages span.count:before, .is-desktop .header-notifications a span.pending-count:before {
+.is-desktop .header-notifications a#user-messages span.count:before,
+.is-desktop .header-notifications a span.pending-count:before {
   color: #54ae68;
 }
 
@@ -1936,14 +1932,6 @@ input[type="radio"] + span:before, input[type="radio"] + label:before, input[typ
   background-color: #54ae68;
 }
 
-body {
-  background-color: #fff;
-}
-
-body #main-wrap {
-  background-color: #fff;
-}
-
 .formatted-content {
   background-color: #fff;
 }
@@ -1954,7 +1942,8 @@ body #main-wrap {
   }
 }
 
-body:not(.buddypress) #content article, body.buddypress #content article.error404 {
+body:not(.buddypress) #content article,
+body.buddypress #content article.error404 {
   background-color: #fff;
 }
 

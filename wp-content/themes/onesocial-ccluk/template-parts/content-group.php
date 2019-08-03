@@ -1,8 +1,8 @@
-     
+
 <article class="list-item">
     <header class="entry-header">
-        <a href="<?php bp_group_permalink() ?>"><?php bp_group_avatar( 'width=300&height=300' ) ?></a>
-    
+        <a href="<?php bp_group_permalink() ?>"><?php bp_group_avatar( 'width=100&height=100' ) ?></a>
+
         <a href="<?php bp_group_permalink() ?>">
             <h2 class="entry-title"><?php bp_group_name() ?></h2>
         </a>

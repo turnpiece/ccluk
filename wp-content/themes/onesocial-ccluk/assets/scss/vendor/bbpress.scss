@@ -30,6 +30,13 @@
   > h3 {
       text-align: left;
   }
+  li {
+    &.bbp-forum-info
+    a.bbp-forum-title:hover,
+    &.bbp-topic-title a.bbp-topic-permalink:hover {
+      color: $green;
+    }
+  }
 }
 
 div {

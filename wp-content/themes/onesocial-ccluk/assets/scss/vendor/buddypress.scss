@@ -94,14 +94,14 @@ div.bbp-forum-title,
     div.acomment-options a.acomment-reply:before {
       background-color: transparent;
       color: $blue;
-      font-size: 14px;
+      font-size: $font-size-sm;
       line-height: 1;
     }
     .acomment-options {
       .bp-secondary-action:before, .delete-activity-single:before, .delete-activity:before {
         background-color: transparent;
         color: $blue;
-        font-size: 14px;
+        font-size: $font-size-sm;
         line-height: 1;
       }
     }
@@ -110,7 +110,7 @@ div.bbp-forum-title,
     &.delete-activity, &.acomment-reply, &.unfav, &.fav {
       background-color: transparent;
       color: $blue;
-      font-size: 14px;
+      font-size: $font-size-sm;
       line-height: 1;
     }
   }
@@ -118,7 +118,7 @@ div.bbp-forum-title,
     .bp-secondary-action:before, .delete-activity-single:before, .delete-activity:before {
       background-color: transparent;
       color: $blue;
-      font-size: 14px;
+      font-size: $font-size-sm;
       line-height: 1;
     }
   }
@@ -206,7 +206,7 @@ div.bbp-forum-title,
 
 .buddyboss_privacy_filter:before {
   content: 'd';
-  font-size: 14px;
+  font-size: $font-size-sm;
 }
 
 .bp-secondary-action.buddyboss_edit_activity:before {
@@ -395,7 +395,7 @@ body {
     width: 46px;
     margin-bottom: 10px;
     img {
-      border-radius: 50%;
+      @include border-radius( 50% );
       max-width: 48px;
     }
   }
@@ -469,7 +469,7 @@ body #buddypress form#whats-new-form #whats-new-submit {
     background-color: transparent;
     color: $green;
     border-top: 1px solid $green;
-    font-size: 14px;
+    font-size: $font-size-sm;
     margin-right: 30px;
     &:hover {
       -moz-box-shadow: none;
@@ -831,7 +831,7 @@ body #buddypress div.activity-comments form#frm_buddypress-edit-activity .ac-tex
   }
   .groups-members-search input[type='text'] {
     border-width: 1px;
-    font-size: 14px;
+    font-size: $font-size-sm;
     height: 36px;
     padding: 0;
     width: 100%;
@@ -982,19 +982,19 @@ body #buddypress div.activity-comments form#frm_buddypress-edit-activity .ac-tex
 
 .boss-group-invite-friend-list .avatar, #create-group-form #invite-list li img {
   vertical-align: middle;
-  border-radius: 50%;
+  @include border-radius( 50% );
   margin-right: 20px;
   margin-left: 20px;
 }
 
 .group-avatar #group-create-body .main-column p {
-  font-size: 14px;
+  font-size: $font-size-sm;
   line-height: 1.6;
   font-weight: 600;
 }
 
 .group-create.forum .standard-form h4 + p {
-  font-size: 14px;
+  font-size: $font-size-sm;
   line-height: 1.6;
   font-weight: 600;
   margin-bottom: 50px;
@@ -1191,7 +1191,7 @@ label[for="groupblog-create-new-no"] {
 }
 
 .dir-list .inner-avatar-wrap img.avatar {
-  border-radius: 50%;
+  @include border-radius( 50% );
 }
 
 #buddypress .dir-list ul.item-list .item-title {
@@ -1227,7 +1227,7 @@ label[for="groupblog-create-new-no"] {
 #buddypress {
   .dir-list ul.item-list .item-title .bb-icon-bars-f {
     color: rgba(0, 0, 0, 0.2);
-    font-size: 14px;
+    font-size: $font-size-sm;
     margin-left: 10px;
   }
   ul.item-list li div.item-desc {
@@ -1639,7 +1639,7 @@ label[for="groupblog-create-new-no"] {
 /* fallback */
 
 html:not(.svgclippaths) #buddypress #groups-dir-list ul.item-list .inner-avatar-wrap img.avatar {
-  border-radius: 50%;
+  @include border-radius( 50% );
 }
 
 #groups-dir-list {
@@ -1942,7 +1942,7 @@ div#sitewide-notice div#message.error p {
         /* padding: 8px 12px; */
         vertical-align: middle;
         text-transform: none;
-        font-size: 14px;
+        font-size: $font-size-sm;
       }
     }
   }
@@ -2036,7 +2036,7 @@ div#sitewide-notice div#message.error p {
       margin: 10px 0 20px;
     }
     input:not(.auto) {
-      font-size: 14px;
+      font-size: $font-size-sm;
       width: 100%;
     }
   }
@@ -2302,12 +2302,12 @@ label[for='select-all-notifications'] {
   span {
     &.activity {
       display: inline-block;
-      color: #aaa;
+      color: $green;
       font-size: $font-size-tiny;
       padding: 0;
     }
     &.user-nicename {
-      color: #777;
+      color: $green;
       display: block;
       font-size: 120%;
       font-weight: 600;
@@ -2319,7 +2319,7 @@ label[for='select-all-notifications'] {
     text-decoration: none;
   }
   ul.item-list li div.item-desc p {
-    font-size: 15px;
+    font-size: $font-size-sm;
     margin-bottom: 34px;
     font-weight: lighter;
   }
@@ -2642,7 +2642,7 @@ ul.horiz-gallery li img, .bp-user #main ul.horiz-gallery li img {
   .see-more a {
     color: $white;
     background-color: $green;
-    font-size: 14px;
+    font-size: $font-size-sm;
     width: 46px;
     height: 46px;
     line-height: 46px;
@@ -3134,7 +3134,7 @@ div#item-header-avatar img.avatar {
   box-shadow: none;
   vertical-align: bottom;
   max-width: 140px;
-  border-radius: 50%;
+  @include border-radius( 50% );
 }
 
 .bp-user #item-header {
@@ -3422,8 +3422,6 @@ body:not(.group-members) #buddypress div {
       padding: 6px 10px;
       line-height: 1.7;
       text-decoration: none;
-      background-color: $blue;
-      color: $white;
       text-transform: uppercase;
     }
   }
@@ -3433,8 +3431,6 @@ body:not(.group-members) #buddypress div {
     padding: 6px 10px;
     line-height: 1.7;
     text-decoration: none;
-    background-color: $blue;
-    color: $white;
     text-transform: uppercase;
   }
 }
@@ -3444,8 +3440,6 @@ body:not(.group-members) #buddypress div {
   padding: 6px 10px;
   line-height: 1.7;
   text-decoration: none;
-  background-color: $blue;
-  color: $white;
   text-transform: uppercase;
 }
 
@@ -3455,23 +3449,17 @@ body:not(.group-members) #buddypress div {
   div {
     &#subnav.item-list-tabs ul li a span,
     &:not(#item-nav):not(#mobile-item-nav) > .item-list-tabs ul li a span {
-      background-color: $blue;
-      color: $white;
       display: inline;
       font-size: 80%;
       margin-left: 3px;
       padding: 2px 5px;
       text-align: center;
       vertical-align: middle;
-      -moz-border-radius: 2px;
-      -webkit-border-radius: 2px;
-      border-radius: 2px;
+      @include border-radius( 2px );
     }
   }
   > div[role="navigation"].item-list-tabs ul li a span,
   .dir-form div.item-list-tabs ul li a span {
-    background-color: $green;
-    color: $white;
     display: inline;
     font-size: 80%;
     margin-left: 3px;
@@ -3482,8 +3470,6 @@ body:not(.group-members) #buddypress div {
 }
 
 .bp-legacy div#item-body div.item-list-tabs ul li a span {
-  background-color: $green;
-  color: $white;
   display: inline;
   font-size: 80%;
   margin-left: 3px;
@@ -3493,7 +3479,7 @@ body:not(.group-members) #buddypress div {
 }
 
 /* Hover state */
-
+/*
 #buddypress {
   div {
     &#subnav.item-list-tabs ul li a:hover,
@@ -3510,7 +3496,7 @@ body:not(.group-members) #buddypress div {
 .bp-legacy div#item-body div.item-list-tabs ul li a:hover {
   background-color: $green;
 }
-
+*/
 /* Active-Current state */
 
 .bp-user a.button.sap-new-post-btn:hover {
@@ -4088,7 +4074,7 @@ div {
     display: inline-block;
     a {
       padding-bottom: 2px;
-      font-size: 14px;
+      font-size: $font-size-sm;
       font-weight: 700;
       padding-top: 0;
     }
@@ -4109,14 +4095,12 @@ div {
 
                 a {
                     background-color: transparent;
-                    font-size: 14px;
-                    color: $blue;
+                    font-size: $font-size-sm;
                     border: none;
                     display: inline-block;
 
                     span {
                         background: transparent;
-                        color: $green;
                         font-size: inherit;
                         padding: 0;
                         line-height: inherit;
@@ -4124,10 +4108,6 @@ div {
                         margin-left: 7px;
                         float: right;
                     }
-                }
-
-                &.active a, &:hover a {
-                    color: $green;
                 }
             }
         }
@@ -4468,7 +4448,7 @@ body.articles #buddypress div#item-body {
     margin-right: 15px;
     background-color: transparent;
     color: $blue;
-    font-size: 14px;
+    font-size: $font-size-sm;
     font-weight: 400;
     padding: 22px 0 0;
     border-top: 1px solid $blue;
@@ -4521,7 +4501,7 @@ body.articles #buddypress div#item-body {
     }
     &:not(.send-invite-form) h4 {
       font-family: inherit;
-      font-size: 14px;
+      font-size: $font-size-sm;
       text-transform: uppercase;
       padding-bottom: 25px;
       border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -4539,7 +4519,11 @@ body.articles #buddypress div#item-body {
         &[type="email"] {
           width: 100%;
         }
-        &[type="text"], &[type="email"], &[type="password"], &[type="email"], &[type="number"] {
+        &[type="text"],
+        &[type="email"],
+        &[type="password"],
+        &[type="email"],
+        &[type="number"] {
           margin-bottom: 40px;
         }
       }
@@ -5006,7 +4990,7 @@ body.buddypress {
 	    -webkit-font-smoothing: antialiased;
 	    -moz-osx-font-smoothing: grayscale;
 	    color: $green;
-	    font-size: 14px;
+	    font-size: $font-size-sm;
 	    margin-right: 6px;
 	  }
 	  &:hover {
@@ -5045,7 +5029,7 @@ body.buddypress {
 	      margin-right: 15px;
 	      background-color: transparent;
 	      color: $green;
-	      font-size: 14px;
+	      font-size: $font-size-sm;
 	      font-weight: 400;
 	      padding: 22px 0 2px;
 	      border-top: 1px solid $green;
@@ -5106,7 +5090,7 @@ body.buddypress {
 		.bb-comment-author {
 		  float: left;
 		  font-family: inherit;
-		  font-size: 14px;
+		  font-size: $font-size-sm;
 		  font-weight: 600;
 		  padding: 10px 0;
 		}
@@ -5339,31 +5323,6 @@ body.buddypress {
 			margin-top: 0;
 		}
 
-	    div {
-	      &#subnav.item-list-tabs ul li a span,
-	      &:not(#item-nav):not(#mobile-item-nav) > .item-list-tabs ul li a span {
-	        color: $white;
-            background: $blue;
-	      }
-	    }
-
-	    > div[role="navigation"].item-list-tabs ul li a span {
-            color: $white;
-            background: $blue;
-	    }
-
-		div {
-		    &#subnav.item-list-tabs ul li.feed a {
-		      &:hover,
-              &:before {
-		        color: $green;
-		      }
-		    }
-		    &.messages-options-nav .buddyboss-select-inner:after {
-		      color: $green;
-		    }
-		}
-
 		table#message-threads {
 		    input[type="checkbox"]:checked + strong:after,
 		    tr td.thread-info p a:hover {
@@ -5377,16 +5336,6 @@ body.buddypress {
 
 		ul.item-list:not(.bb-group-members) li img.avatar {
 			@include border-radius( 50% );
-		}
-
-		div#item-header {
-			.user-nicename {
-				padding-left: 15px;
-			}
-
-			#group-admins {
-				display: none;
-			}
 		}
 
 		.dir-list ul.item-list {
@@ -5457,41 +5406,24 @@ body.buddypress {
         }
     }
 
-	&.is-desktop {
-		#buddypress {
-			.dir-form div,
-			div#subnav,
-			div:not(#item-nav):not(#mobile-item-nav)>.item-list-tabs,
-            .messages-container div#subnav.item-list-tabs,
-			>div[role=navigation] {
-				&.item-list-tabs {
-					@include bp-item-list-tabs();
-				}
+	#buddypress {
+		.dir-form div,
+		div#subnav,
+		div:not(#mobile-item-nav) > div,
+        .messages-container div#subnav,
+		> div[role=navigation] {
+			&.item-list-tabs {
+				@include bp-item-list-tabs();
 			}
 		}
 	}
 
+    @media screen and (max-width: 1024px) {
+        @import "buddypress/mobile";
+    }
+
 	&.is-mobile {
-		.mobile-item-nav-wrapper {
-			margin-left: auto;
-			margin-right: auto;
-		}
-
-		#buddypress {
-			#mobile-item-nav-wrap,
-			ul#activity-stream li.activity-item {
-				background: transparent;
-			}
-		}
-
-		&.has-activity {
-			#buddypress {
-				div.item-list-tabs,
-				form#whats-new-form {
-					background: transparent;
-				}
-			}
-		}
+        @import "buddypress/mobile";
 	}
 
 	&.calendar {
@@ -5626,6 +5558,18 @@ body.buddypress {
 			}
 		}
 	}
+
+    &.home-page {
+        .section.groups {
+            .section-content {
+                .list-item {
+                    .entry-header > a {
+                        padding: 0 100px;
+                    }
+                }
+            }
+        }
+    }
 }
 
 /*--------------------------------------------------------------
@@ -5654,5 +5598,5 @@ body {
 /* fallback */
 
 html:not(.svgclippaths) .single-item.groups #buddypress div#item-header #item-header-avatar img.avatar {
-  border-radius: 50%;
+  @include border-radius( 50% );
 }

@@ -143,13 +143,6 @@ This is the Global stylesheet, served to all devices.
      font-family: $font-default;
  }
 
-body {
-    background-color: $white;
-    #main-wrap {
-        background-color: $white;
-    }
-}
-
 article, aside, details, figcaption, figure, footer, header, main, menu, nav, section, summary {
   display: block;
 }
@@ -372,6 +365,10 @@ input {
   }
 }
 
+input, textarea {
+    @include placeholder-colour();
+}
+
 /**
  * Address Firefox 4+ setting `line-height` on `input` using `!important` in
  * the UA stylesheet.
@@ -407,7 +404,7 @@ input {
  */
 
 fieldset {
-  border: 1px solid #ddd;
+  border: 1px solid $green;
   margin: 0 0 26px;
   padding: 15px 20px 0;
 }
@@ -492,6 +489,10 @@ body {
   &.mce-content-body {
     font-family: inherit;
     margin: 15px;
+  }
+
+  #main-wrap {
+      background-color: $white;
   }
 }
 
@@ -1920,6 +1921,10 @@ section[role="banner"] {
 /* Inputs */
 
 /* Text Widget */
+
+img.avatar {
+    @include border-radius(50%);
+}
 
 .widget img.avatar {
   box-shadow: none;
@@ -4616,11 +4621,11 @@ select[multiple="multiple"] {
   line-height: 1.2;
   font-size: 15px;
   margin: 0px 0 26px;
-  color: #666;
+  color: $green;
 }
 
 #secondary .user-nicename a {
-  color: #777;
+  color: $blue;
   text-decoration: none;
 }
 
@@ -5165,22 +5170,10 @@ input#user_login {
 
 .popup-content {
   .input {
-    &::-webkit-input-placeholder {
-      color: #9b9b9b;
-    }
-    &:-moz-placeholder {
-      /* Firefox 18- */
-      color: #9b9b9b;
-    }
-    &::-moz-placeholder {
-      /* Firefox 19+ */
-      color: #9b9b9b;
-    }
-    &:-ms-input-placeholder {
-      text-transform: uppercase;
-      font-size: 13px;
-      color: #9b9b9b;
-    }
+      @include placeholder-colour();
+      &:-ms-input-placeholder {
+          font-size: $font-size-sm;
+      }
   }
   .email-wrap, .password-wrap, .username-wrap {
     position: relative;

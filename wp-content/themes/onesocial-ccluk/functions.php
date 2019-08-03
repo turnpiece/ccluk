@@ -108,7 +108,7 @@ function ccluk_theme_setup()
             return $classes;
         });
     }
-
+/*
     if (onesocial_get_option( 'boss_layout_switcher' )) {
         global $onesocial_options;
 
@@ -116,9 +116,11 @@ function ccluk_theme_setup()
 
         update_option( 'onesocial_options', $onesocial_options );
     }
-
-    // disable public messaging
-    add_filter('bp_get_send_public_message_button', '__return_false');
+*/
+    // include functions for logged in users
+    if (is_user_logged_in()) {
+        require_once 'inc/members-functions.php';
+    }
 }
 add_action( 'after_setup_theme', 'ccluk_theme_setup' );
 
@@ -304,95 +306,6 @@ add_action( 'ccluk_section_before_inner', function( $arg ) {
 
     }
 }, 10, 1 );
-
-
-// Fix for deprecation BP function called by OneSocial theme
-
-if (!function_exists('bp_is_user_forums')) :
-
-    function bp_is_user_forums() {
-        return false;
-    }
-
-endif;
-
-
-// Customize user menu
-// remove forums, groups and friends tabs
-function ccluk_remove_forums_from_profile()
-{
-    bp_core_remove_nav_item('forums');
-}
-add_action('bp_forums_setup_nav','ccluk_remove_forums_from_profile');
-
-function ccluk_remove_groups_from_profile()
-{
-    bp_core_remove_nav_item('groups');
-}
-add_action('bp_groups_setup_nav','ccluk_remove_groups_from_profile');
-
-function ccluk_remove_friends_from_profile()
-{
-    bp_core_remove_nav_item('friends');
-}
-add_action('bp_friends_setup_nav','ccluk_remove_friends_from_profile');
-
-// add messages to nav
-add_action( 'bp_setup_nav', function() {
-
-    $bp = buddypress();
-
-    bp_core_new_nav_item(
-        array(
-            'name' => __('Messages', 'buddypress'),
-            'slug' => $bp->messages->slug,
-            'position' => 50,
-            'show_for_displayed_user' => false,
-            'screen_function' => 'messages_screen_inbox',
-            'default_subnav_slug' => 'inbox',
-            'item_css_id' => $bp->messages->id
-        )
-    );
-});
-
-// remove submenu links from adminbar
-function ccluk_remove_admin_bar_links() {
-    if ( is_admin() ) { //nothing to do on admin
-        return;
-    }
-    global $wp_admin_bar;
-
-    $rm_items = array(
-        'forums',
-        'friends',
-        'groups',
-        'notifications-read',
-        'notifications-unread',
-        'settings-general',
-        'settings-notifications',
-        'settings-profile',
-        'settings-delete-account',
-        'messages-inbox',
-        'messages-starred',
-        'messages-sentbox',
-        'messages-compose',
-        'messages-notices',
-        'xprofile-public',
-        'xprofile-edit',
-        'xprofile-change-avatar',
-        'activity-personal',
-        'activity-friends',
-        'activity-groups',
-        'activity-favorites',
-        'activity-mentions'
-    );
-
-    foreach( $rm_items as $item )
-        $wp_admin_bar->remove_menu( 'my-account-'.$item );
-
-    //error_log( print_r( $wp_admin_bar, true ) );
-}
-add_action( 'wp_before_admin_bar_render', 'ccluk_remove_admin_bar_links' );
 
 // WordPress social login
 add_action( 'bp_after_registration_submit_buttons', function() {

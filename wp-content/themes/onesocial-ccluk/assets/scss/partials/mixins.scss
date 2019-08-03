@@ -75,6 +75,7 @@
 		}
       }
       &:hover,
+	  &:active,
       &.current,
       &.selected {
         a {
@@ -232,4 +233,13 @@
 	border-color: $blue;
 	color: $blue;
 	font-weight: 600;
+}
+
+@mixin placeholder-colour() {
+	&::-webkit-input-placeholder,
+	&:-ms-input-placeholder,
+	&::-ms-input-placeholder,
+	&::placeholder {
+		color: $green;
+	}
 }

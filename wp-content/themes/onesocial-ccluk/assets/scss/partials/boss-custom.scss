@@ -234,23 +234,13 @@ a {
   }
 }
 
-#buddypress .bboss_search_page a.loading:after, .header-account-login .pop .count {
+#buddypress .bboss_search_page a.loading:after,
+.header-account-login .pop .count {
   color: $green;
 }
 
-.is-mobile #main-wrap #page #buddypress div.item-list-tabs:not(#object-nav) ul li {
-  &.current a, &.selected a {
-    color: $green;
-  }
-}
-
-li {
-  &.bbp-forum-info a.bbp-forum-title:hover, &.bbp-topic-title a.bbp-topic-permalink:hover {
-    color: $green;
-  }
-}
-
-.footer-inner-top a:hover, .boss-group-invite-friend-list strong {
+.footer-inner-top a:hover,
+.boss-group-invite-friend-list strong {
   color: $green;
 }
 

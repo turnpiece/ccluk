@@ -21,7 +21,9 @@ $logo	 = ( $show && $logo_id ) ? wp_get_attachment_image( $logo_id, 'medium', ''
 				<a class="bb-user-login-link" href="<?php echo wp_login_url( home_url() ); ?>" title="<?php _e( 'Login', 'onesocial' ); ?>"><?php _e( 'Login', 'onesocial' ); ?></a><?php
 			}
 			?>
-			<a href="#" id="user-nav" class="left-btn onesocial-mobile-button" data-position="left"></a>
+			<a href="#" id="user-nav" class="left-btn onesocial-mobile-button" data-position="left">
+                <?php echo get_avatar( get_current_user_id(), 55 ); ?>
+            </a>
 		<?php endif; ?>
 
         <!-- Right button -->
@@ -42,5 +44,5 @@ $logo	 = ( $show && $logo_id ) ? wp_get_attachment_image( $logo_id, 'medium', ''
 		</div>
 
 	<?php } ?>
-	
+
 </div><!-- #mobile-header -->

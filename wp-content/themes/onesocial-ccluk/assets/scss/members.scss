@@ -12,3 +12,7 @@
 @import "vendor/buddypress";
 @import "vendor/bbpress";
 @import "vendor/boss-inbox";
+
+@media screen and (max-width: 1024px)  {
+    @import "partials/adminbar";
+}

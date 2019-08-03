@@ -28,6 +28,10 @@ body.bp-user.messages {
         #messages-layout {
             margin-bottom: 60px;
         }
+
+        .ac-over {
+            background-color: $blue;
+        }
     }
 
     &.is-desktop {
@@ -83,6 +87,7 @@ body.bp-user.messages {
 
         #send_message_form.standard-form {
         	ul.acfb-holder {
+                @include display-flex( left, left );
         		li.friend-tab {
         			background-color: transparent;
         			border: none;
@@ -403,11 +408,6 @@ body.bp-user.messages {
   width: 100%;
 }
 
-#send_message_form ul.acfb-holder li {
-  float: none;
-  margin: 0 0 20px;
-}
-
 ul.acfb-holder li.friend-tab {
   margin-top: 7px;
 }
@@ -418,6 +418,42 @@ ul.acfb-holder li.friend-tab {
     padding-bottom: 10px;
     padding-top: 10px;
   }
+
+  ul.acfb-holder li {
+    float: none;
+    margin: 0 0 20px;
+
+    span > .avatar {
+        @include border-radius( 50% );
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+    #buddypress {
+      form#send_message_form {
+        ul li.friend-tab {
+          margin-bottom: 10px;
+          padding: 7px 15px;
+          width: auto;
+        }
+        li.friend-tab {
+            a, span {
+              img {
+                margin-right: 5px;
+                margin-top: 3px;
+              }
+          }
+          a {
+            padding: 2px 0 0 5px;
+            position: relative;
+          }
+        }
+      }
+      div#message {
+        margin: 15px;
+      }
+    }
 }
 
 #message-subject {

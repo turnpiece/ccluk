@@ -136,14 +136,6 @@ html, body {
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
 }
 
-body {
-  background-color: #fff;
-}
-
-body #main-wrap {
-  background-color: #fff;
-}
-
 article, aside, details, figcaption, figure, footer, header, main, menu, nav, section, summary {
   display: block;
 }
@@ -351,6 +343,10 @@ input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webki
   -webkit-appearance: none;
 }
 
+input::-webkit-input-placeholder, input:-ms-input-placeholder, input::-ms-input-placeholder, input::placeholder, textarea::-webkit-input-placeholder, textarea:-ms-input-placeholder, textarea::-ms-input-placeholder, textarea::placeholder {
+  color: #54ae68;
+}
+
 /**
  * Address Firefox 4+ setting `line-height` on `input` using `!important` in
  * the UA stylesheet.
@@ -380,7 +376,7 @@ input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webki
  * Define consistent border, margin, and padding.
  */
 fieldset {
-  border: 1px solid #ddd;
+  border: 1px solid #54ae68;
   margin: 0 0 26px;
   padding: 15px 20px 0;
 }
@@ -463,6 +459,10 @@ body {
 body.mce-content-body {
   font-family: inherit;
   margin: 15px;
+}
+
+body #main-wrap {
+  background-color: #fff;
 }
 
 /**
@@ -1825,6 +1825,12 @@ section[role="banner"] {
 
 /* Inputs */
 /* Text Widget */
+img.avatar {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+
 .widget img.avatar {
   box-shadow: none;
   max-width: 50px;
@@ -4573,11 +4579,11 @@ select[multiple="multiple"] {
   line-height: 1.2;
   font-size: 15px;
   margin: 0px 0 26px;
-  color: #666;
+  color: #54ae68;
 }
 
 #secondary .user-nicename a {
-  color: #777;
+  color: #22a7f0;
   text-decoration: none;
 }
 
@@ -5102,24 +5108,12 @@ input#user_login {
   margin-top: -15px;
 }
 
-.popup-content .input::-webkit-input-placeholder {
-  color: #9b9b9b;
-}
-
-.popup-content .input:-moz-placeholder {
-  /* Firefox 18- */
-  color: #9b9b9b;
-}
-
-.popup-content .input::-moz-placeholder {
-  /* Firefox 19+ */
-  color: #9b9b9b;
+.popup-content .input::-webkit-input-placeholder, .popup-content .input:-ms-input-placeholder, .popup-content .input::-ms-input-placeholder, .popup-content .input::placeholder {
+  color: #54ae68;
 }
 
 .popup-content .input:-ms-input-placeholder {
-  text-transform: uppercase;
-  font-size: 13px;
-  color: #9b9b9b;
+  font-size: 15px;
 }
 
 .popup-content .email-wrap, .popup-content .password-wrap, .popup-content .username-wrap {
