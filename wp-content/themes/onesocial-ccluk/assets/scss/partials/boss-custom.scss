@@ -458,13 +458,15 @@ input {
     color: $green;
   }
   .post-author .load-more-posts {
-    &:hover, a:hover {
+    &:hover,
+    a:hover {
       color: $green;
     }
   }
   .header-notifications {
     a {
-      &#user-messages span.count:before, span.pending-count:before {
+      &#user-messages span.count:before,
+      span.pending-count:before {
         color: $green;
       }
     }
@@ -491,13 +493,6 @@ input {
   }
 }
 
-body {
-  background-color: $white;
-  #main-wrap {
-    background-color: $white;
-  }
-}
-
 .formatted-content {
   background-color: $white;
 }
@@ -509,7 +504,8 @@ body {
 }
 
 body {
-  &:not(.buddypress) #content article, &.buddypress #content article.error404 {
+  &:not(.buddypress) #content article,
+  &.buddypress #content article.error404 {
     background-color: $white;
   }
 }

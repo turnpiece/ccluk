@@ -136,6 +136,14 @@ html, body {
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
 }
 
+body {
+  background-color: #fff;
+}
+
+body #main-wrap {
+  background-color: #fff;
+}
+
 article, aside, details, figcaption, figure, footer, header, main, menu, nav, section, summary {
   display: block;
 }
@@ -637,20 +645,21 @@ table {
 }
 
 th, td {
-  border-bottom: 1px solid #E1E1E1;
+  border-bottom: 1px solid #54ae68;
   padding: 13px;
   text-align: left;
 }
 
-/*th:first-child,
+th:first-child,
 td:first-child {
-    padding-left: 0;
+  padding-left: 0;
 }
 
 th:last-child,
 td:last-child {
-    padding-right: 0;
-}*/
+  padding-right: 0;
+}
+
 .rthd-comment-content th, .rthd-comment-content td {
   vertical-align: top;
 }
@@ -834,8 +843,8 @@ input:-webkit-autofill {
 
 input[type="checkbox"], input[type="radio"], input[type="file"], input[type="hidden"], input[type="image"], input[type="color"] {
   border: 0;
-  -moz-border-radius: 0;
   -webkit-border-radius: 0;
+  -moz-border-radius: 0;
   border-radius: 0;
   padding: 0;
 }
@@ -1898,7 +1907,7 @@ section[role="banner"] {
 
 .widget_recent_entries .post-date, .widget_rss .rss-date {
   color: #aaa;
-  font-size: 11px;
+  font-size: 12px;
   margin-left: 12px;
 }
 
@@ -1908,7 +1917,7 @@ section[role="banner"] {
 }
 
 .widget .tagcloud a {
-  font-size: 13px !important;
+  font-size: 12px !important;
   color: #999;
   border: 1px solid rgba(0, 0, 0, 0.1);
   display: inline-block;

@@ -1917,7 +1917,8 @@ div#sitewide-notice div#message.error p {
   padding-bottom: 0;
 }
 
-.buddypress-content-wrap #buddypress div.pagination, #buddypress .buddypress-content-wrap div.pagination {
+.buddypress-content-wrap #buddypress div.pagination,
+#buddypress .buddypress-content-wrap div.pagination {
   padding-bottom: 10px;
 }
 
@@ -4743,7 +4744,7 @@ body.buddypress {
 	    float: left;
 	    width: 100%;
 	    padding: 10px 0 70px;
-	    color: #888;
+	    color: $green;
 	    text-align: center;
 	  }
 	  #pag-bottom {
@@ -4760,24 +4761,17 @@ body.buddypress {
 	      margin-top: 40px;
 	    }
 	    .pagination-links {
-	      display: -webkit-box;
-	      display: -webkit-flex;
-	      display: -ms-flexbox;
-	      display: flex;
-	      -webkit-box-pack: center;
-	      -webkit-justify-content: center;
-	      -ms-flex-pack: center;
-	      justify-content: center;
-	      span {
-	        padding: 16px 18px;
-	      }
-	      a {
-	        padding: 16px 18px;
-	        &:hover {
-	          font-weight: 600;
+            @include display-flex();
+            span {
+	            padding: 16px 18px;
+            }
+            a {
+                padding: 16px 18px;
+	            &:hover {
+	               font-weight: 600;
+	            }
 	        }
-	      }
-	    }
+	     }
 	  }
 	  noscript div.pagination {
 	    margin-bottom: 15px;

@@ -71,7 +71,7 @@
 
 		> span {
 			float: right;
-			@include inactive-tab();
+			@include inactive-tab(0);
 		}
       }
       &:hover,
@@ -226,8 +226,10 @@
 	border-color: $green;
 }
 
-@mixin inactive-tab() {
-	background-color: $blue;
+@mixin inactive-tab( $border-size: 1px ) {
+	background-color: $white;
+	border: $border-size solid;
 	border-color: $blue;
-	color: $white;
+	color: $blue;
+	font-weight: 600;
 }

@@ -109,10 +109,7 @@ body.bp-user.messages {
 
         	label {
         	    margin-bottom: 0;
-        	    line-height: 1.2;
-        	    &[for='subject'] {
-        	        margin-top: 50px;
-        	    }
+        	    line-height: 1.5;
         	    &[for='send-to-input'] {
         	        margin-bottom: 12px;
         	        margin-top: 4px;

@@ -143,6 +143,13 @@ This is the Global stylesheet, served to all devices.
      font-family: $font-default;
  }
 
+body {
+    background-color: $white;
+    #main-wrap {
+        background-color: $white;
+    }
+}
+
 article, aside, details, figcaption, figure, footer, header, main, menu, nav, section, summary {
   display: block;
 }
@@ -676,12 +683,12 @@ table {
 }
 
 th, td {
-  border-bottom: 1px solid #E1E1E1;
+  border-bottom: 1px solid $green;
   padding: 13px;
   text-align: left;
 }
 
-/*th:first-child,
+th:first-child,
 td:first-child {
     padding-left: 0;
 }
@@ -689,7 +696,7 @@ td:first-child {
 th:last-child,
 td:last-child {
     padding-right: 0;
-}*/
+}
 
 .rthd-comment-content {
   th, td {
@@ -887,9 +894,7 @@ input {
   }
   &[type="checkbox"], &[type="radio"], &[type="file"], &[type="hidden"], &[type="image"], &[type="color"] {
     border: 0;
-    -moz-border-radius: 0;
-    -webkit-border-radius: 0;
-    border-radius: 0;
+    @include border-radius(0);
     padding: 0;
   }
   &[type="checkbox"]:not(.styled), &[type="radio"]:not(.styled) {
@@ -1996,7 +2001,7 @@ section[role="banner"] {
 
 .widget_recent_entries .post-date, .widget_rss .rss-date {
   color: #aaa;
-  font-size: 11px;
+  font-size: $font-size-tiny;
   margin-left: 12px;
 }
 
@@ -2005,7 +2010,7 @@ section[role="banner"] {
 .widget .tagcloud {
   /*letter-spacing: 12px;*/
   a {
-    font-size: 13px !important;
+    font-size: $font-size-tiny !important;
     color: #999;
     border: 1px solid rgba(0, 0, 0, 0.1);
     display: inline-block;
