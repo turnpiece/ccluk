@@ -411,18 +411,8 @@ input {
   }
 }
 
-.bp-user.messages.is-desktop #buddypress div#subnav.item-list-tabs ul li#compose-personal-li {
-  border: none;
-}
-
 .is-desktop #buddypress div#group-create-tabs ul li {
   a, &:before {
-    color: $green;
-  }
-}
-
-.bp-user.messages.is-desktop #buddypress div#subnav.item-list-tabs ul li {
-  &:hover a, &.selected a, &.current a, a span {
     color: $green;
   }
 }

@@ -11,7 +11,7 @@
 				</div>
 			<?php endif; ?>
 
-			<div id="item-nav">
+			<div id="item-nav" class="profile-nav">
 				<div class="item-list-tabs no-ajax" id="object-nav" role="navigation">
 					<ul id="nav-bar-filter">
 

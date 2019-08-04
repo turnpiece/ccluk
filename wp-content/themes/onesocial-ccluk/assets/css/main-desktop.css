@@ -110,14 +110,6 @@ body.page #comments {
   padding-top: 0;
 }
 
-.bp-user .site {
-  padding-top: 30px;
-}
-
-.bp-user.messages .site {
-  padding-top: 40px;
-}
-
 .site-content.default-page {
   padding-bottom: 50px;
 }

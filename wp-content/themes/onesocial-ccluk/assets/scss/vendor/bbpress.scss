@@ -12,6 +12,19 @@
   font-size: $font-size-sm;
 }
 
+.bbp-pagination-links {
+  span, a {
+    background-color: #dee4e4;
+    color: $white;
+    display: inline-block;
+    line-height: 1;
+    margin: 0 1px;
+    padding: 16px 18px;
+    text-decoration: none;
+    width: auto;
+  }
+}
+
 /*--------------------------------------------------------------
 1.0 - Forums
 --------------------------------------------------------------*/

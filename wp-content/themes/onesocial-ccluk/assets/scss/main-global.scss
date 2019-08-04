@@ -1447,19 +1447,6 @@ img.wp-smiley, .rsswidget img {
   }
 }
 
-.bbp-pagination-links {
-  span, a {
-    background-color: #dee4e4;
-    color: $white;
-    display: inline-block;
-    line-height: 1;
-    margin: 0 1px;
-    padding: 16px 18px;
-    text-decoration: none;
-    width: auto;
-  }
-}
-
 .pagination a:hover, .bbp-pagination-links a:hover {
   color: $white;
   background-color: #b6bdbd;
@@ -1470,10 +1457,6 @@ img.wp-smiley, .rsswidget img {
   background-color: $green;
   color: $white;
   font-weight: 600;
-}
-
-.messages #user-pag.pagination {
-  display: none;
 }
 
 /*--------------------------------------------------------------

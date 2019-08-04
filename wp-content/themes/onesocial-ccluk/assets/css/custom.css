@@ -1875,15 +1875,7 @@ input[type="radio"] + span:before, input[type="radio"] + label:before, input[typ
   border-color: #54ae68;
 }
 
-.bp-user.messages.is-desktop #buddypress div#subnav.item-list-tabs ul li#compose-personal-li {
-  border: none;
-}
-
 .is-desktop #buddypress div#group-create-tabs ul li a, .is-desktop #buddypress div#group-create-tabs ul li:before {
-  color: #54ae68;
-}
-
-.bp-user.messages.is-desktop #buddypress div#subnav.item-list-tabs ul li:hover a, .bp-user.messages.is-desktop #buddypress div#subnav.item-list-tabs ul li.selected a, .bp-user.messages.is-desktop #buddypress div#subnav.item-list-tabs ul li.current a, .bp-user.messages.is-desktop #buddypress div#subnav.item-list-tabs ul li a span {
   color: #54ae68;
 }
 

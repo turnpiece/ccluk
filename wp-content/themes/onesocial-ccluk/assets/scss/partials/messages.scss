@@ -5,6 +5,30 @@
 
 body.bp-user.messages {
 
+    &.is-desktop {
+        #buddypress {
+            div#subnav.item-list-tabs ul li{
+                &#compose-personal-li {
+                    border: none;
+                }
+            }
+        }
+
+        #buddypress {
+            #item-nav {
+                margin-left: 200px;
+            }
+        }
+    }
+
+    .site {
+        padding-top: 40px;
+    }
+
+    #user-pag.pagination {
+        display: none;
+    }
+
     /*--------------------------------------------------------------
     Private Messaging Threads
     --------------------------------------------------------------*/
@@ -572,7 +596,8 @@ body #buddypress table#message-threads tr td:first-child {
   content: "\f155";
 }
 
-.message-action-star span.icon:before, .message-action-unstar span.icon:before {
+.message-action-star span.icon:before,
+.message-action-unstar span.icon:before {
   font-family: dashicons;
   font-size: 16px;
 }
@@ -584,7 +609,8 @@ body #buddypress table#message-threads tr td:first-child {
   box-shadow: none;
 }
 
-.thread-checkbox .bp-screen-reader-text, #buddypress div.message-search label {
+.thread-checkbox .bp-screen-reader-text,
+#buddypress div.message-search label {
   display: none;
 }
 
