@@ -1621,7 +1621,8 @@ body #selectionSharerPopunder-inner a.action:hover {
   color: #54ae68;
 }
 
-li.bbp-forum-info a.bbp-forum-title:before, li.bbp-topic-title a.bbp-topic-permalink:before {
+li.bbp-forum-info a.bbp-forum-title:before,
+li.bbp-topic-title a.bbp-topic-permalink:before {
   color: #54ae68;
 }
 
@@ -2690,7 +2691,7 @@ MINIMUM width of 1025 pixels (desktops)
     margin: 2.4rem 0rem;
   }
   body.page #primary article > .entry-header h1.entry-title {
-    font-size: 70px;
+    font-size: 48px;
   }
   body.archive.post-type-archive-ccluk_news .post-author .entry-date {
     font-size: 20px;

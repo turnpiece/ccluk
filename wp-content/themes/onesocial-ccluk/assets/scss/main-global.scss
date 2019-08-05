@@ -2277,7 +2277,7 @@ footer[role="contentinfo"] {
 }
 
 .footer-inner-top {
-  background-color: #f9f9f9;
+  background-color: $secondary_bg;
   border-top: 1px solid rgba(0, 0, 0, 0.06);
   padding: 80px 0 60px;
   clear: left;
@@ -2302,20 +2302,11 @@ div {
     padding: 0 15px;
     width: 100%;
   }
-  &.footer-inner-bottom .footer-inner {
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: justify;
-    -webkit-justify-content: space-between;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-  }
+    &.footer-inner-bottom .footer-inner {
+        @include display-flex( center, space-between );
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+    }
 }
 
 .footer-widget {
@@ -4478,7 +4469,7 @@ select[multiple="multiple"] {
       padding: 15px;
       position: relative;
       &.alt {
-        background-color: #F9F9F9;
+        background-color: $secondary_bg;
       }
       div {
         &.poster-meta {
@@ -4523,7 +4514,7 @@ select[multiple="multiple"] {
   table {
     width: 100%;
     thead tr {
-      /* background-color: #f9f9f9; */
+      /* background-color: $secondary_bg; */
     }
   }
 }
@@ -6079,13 +6070,13 @@ div#rtm-modal-container p {
 /* Hover Effect */
 
 .bookmark-it:hover .bb-helper-icon {
-  background-color: #f9f9f9;
+  background-color: $secondary_bg;
 }
 
 .sl-button:hover .sl-count {
-  background-color: #f9f9f9;
+  background-color: $secondary_bg;
   &:before, &:after {
-    background-color: #f9f9f9;
+    background-color: $secondary_bg;
   }
 }
 

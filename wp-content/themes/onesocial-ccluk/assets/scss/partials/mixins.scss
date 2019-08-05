@@ -95,7 +95,9 @@
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-	flex-wrap: wrap;
+	-webkit-flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+	flex-wrap: row wrap;
   	@include align-items( $align );
   	justify-content: $justify;
 }
@@ -241,5 +243,13 @@
 	&::-ms-input-placeholder,
 	&::placeholder {
 		color: $green;
+	}
+}
+
+@mixin entry-header() {
+	@include margin( 2.4, 0 );
+
+	h1.entry-title {
+		font-size: $font-size-big;
 	}
 }

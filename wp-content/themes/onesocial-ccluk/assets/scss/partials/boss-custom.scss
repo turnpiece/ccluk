@@ -110,20 +110,24 @@ body #selectionSharerPopunder-inner a.action:hover {
 }
 
 li {
-  &.bbp-forum-info a.bbp-forum-title:before, &.bbp-topic-title a.bbp-topic-permalink:before {
-    color: $green;
-  }
+    &.bbp-forum-info a.bbp-forum-title,
+    &.bbp-topic-title a.bbp-topic-permalink {
+        &:before {
+            color: $green;
+        }
+    }
 }
 
 .info-group {
-  .members-list-filter li a {
-    &:hover, &.selected {
-      color: $green;
+    .members-list-filter li a {
+        &:hover,
+        &.selected {
+            color: $green;
+        }
     }
-  }
-  .bb-follow-title span {
-    color: $green;
-  }
+    .bb-follow-title span {
+        color: $green;
+    }
 }
 
 #buddypress {
@@ -219,7 +223,7 @@ a {
 .dir-header .bb-count,
 .boss-author-name,
 .posts-stream ul li h3 a:hover {
-  color: $green;
+    color: $green;
 }
 
 #main #buddypress {

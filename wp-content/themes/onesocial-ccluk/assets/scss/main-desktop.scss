@@ -1644,8 +1644,9 @@ body.single-post #page {
 1.1.8 - Sliding Panels
 --------------------------------------------------------------*/
 
-#mobile-header, li#bb-custom-notification-area {
-  display: none;
+#mobile-header,
+li#bb-custom-notification-area {
+    display: none;
 }
 
 /*--------------------------------------------------------------
@@ -1697,14 +1698,14 @@ body .buddyboss-select {
     z-index: 1;
   }
   span {
-    color: $green;
-    font-size: 10px;
-    text-transform: uppercase;
+      color: $green;
+      font-size: $font-size-tiny;
+      text-transform: uppercase;
   }
 }
 
 .directory.activity #activity-filter-select .buddyboss-select label {
-  display: none;
+    display: none;
 }
 
 /*--------------------------------------------------------------
@@ -1712,8 +1713,8 @@ body .buddyboss-select {
 --------------------------------------------------------------*/
 
 body.search h1.entry-title {
-  margin: 20px 0 50px;
-  font-size: 70px;
+    margin: 20px 0 50px;
+    font-size: $font-size-big;
 }
 
 

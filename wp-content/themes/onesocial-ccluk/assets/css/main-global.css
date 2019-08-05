@@ -2218,18 +2218,16 @@ div.footer-inner {
 }
 
 div.footer-inner-bottom .footer-inner {
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
+  flex-wrap: wrap;
+  -webkit-align-items: center;
+  align-items: center;
   justify-content: space-between;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
 }
 
 .footer-widget .widget_calendar td, .footer-widget .widget_calendar th {
@@ -4447,7 +4445,7 @@ select[multiple="multiple"] {
 }
 
 #buddypress ul#topic-post-list li.alt {
-  background-color: #F9F9F9;
+  background-color: #f9f9f9;
 }
 
 #buddypress ul#topic-post-list li div.poster-meta {
@@ -4497,7 +4495,7 @@ select[multiple="multiple"] {
 }
 
 #buddypress table thead tr {
-  /* background-color: #f9f9f9; */
+  /* background-color: $secondary_bg; */
 }
 
 @-moz-keyframes spin {
