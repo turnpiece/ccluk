@@ -555,23 +555,25 @@ body.no-js #buddypress #whats-new-options {
 }
 
 .boss-insert-buttons {
-  left: -65px;
-  position: absolute;
-  top: 0;
-  width: 50px;
+    display: none;
+    left: -65px;
+    position: absolute;
+    top: 0;
+    width: 50px;
 }
 
 .isCollapsed {
-  #whats-new-content, .boss-insert-buttons {
-    display: none;
-  }
+    #whats-new-content,
+    .boss-insert-buttons {
+        display: none;
+    }
 }
 
 .boss-insert-buttons-show {
   background: $white;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 100%;
-  color: #aaa;
+  color: $blue;
   cursor: pointer;
   display: block;
   font-size: 26px;

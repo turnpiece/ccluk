@@ -1745,13 +1745,15 @@ body.no-js #buddypress #whats-new-options {
 }
 
 .boss-insert-buttons {
+  display: none;
   left: -65px;
   position: absolute;
   top: 0;
   width: 50px;
 }
 
-.isCollapsed #whats-new-content, .isCollapsed .boss-insert-buttons {
+.isCollapsed #whats-new-content,
+.isCollapsed .boss-insert-buttons {
   display: none;
 }
 
@@ -1759,7 +1761,7 @@ body.no-js #buddypress #whats-new-options {
   background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 100%;
-  color: #aaa;
+  color: #22a7f0;
   cursor: pointer;
   display: block;
   font-size: 26px;
