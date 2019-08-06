@@ -169,9 +169,14 @@ a,
 input[type=submit] {
     border: none;
     padding: 10px 20px 10px 20px;
-    background-color: $green;
+    background-color: $blue;
     color: $white;
     @include border-radius(3px);
+
+    &:hover,
+    &:active {
+        background-color: $green;
+    }
 }
 
 .formatted-content {

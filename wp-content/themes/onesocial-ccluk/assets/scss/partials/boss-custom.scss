@@ -36,7 +36,13 @@ a.button {
   }
 }
 
-#secondary div.generic-button a, #buddypress .comment-reply-link, .select2-container--default .select2-results__option--highlighted[aria-selected], .entry-header .entry-title a.button, a.bp-title-button, #search-members-form > label:after, #messages-bulk-manage, .boss-search-wrapper label:after, .groups-members-search label:after {
+#secondary div.generic-button a,
+#buddypress .comment-reply-link,
+.select2-container--default .select2-results__option--highlighted[aria-selected],
+.entry-header .entry-title a.button, a.bp-title-button,
+#search-members-form > label:after,
+#messages-bulk-manage, .boss-search-wrapper label:after,
+.groups-members-search label:after {
   background-color: $blue;
 }
 

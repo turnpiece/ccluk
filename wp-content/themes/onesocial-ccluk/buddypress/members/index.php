@@ -6,7 +6,7 @@
 
 	<?php do_action( 'bp_before_directory_members_content' ); ?>
 
-	<?php bp_get_template_part( 'common/search/dir-search-form' ); ?>
+	<?php //bp_get_template_part( 'common/search/dir-search-form' ); ?>
 
 	<?php do_action( 'bp_before_directory_members_tabs' ); ?>
 

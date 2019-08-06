@@ -62,32 +62,33 @@
 }
 
 @mixin bp-item-list-tabs() {
-  ul {
-    li {
-      a {
-        font-size: $font-size-sm;
-		@include inactive-tab();
-        @include border-radius(5px);
+	ul {
+		@include display-flex();
+    	li {
+	      	a {
+	        	font-size: $font-size-sm;
+				@include inactive-tab();
+	        	@include border-radius(0);
 
-		> span {
-			float: right;
-			@include inactive-tab(0);
-		}
-      }
-      &:hover,
-	  &:active,
-      &.current,
-      &.selected {
-        a {
-          @include active-tab();
+				> span {
+					float: right;
+					@include inactive-tab(0);
+				}
+	      	}
+			&:hover,
+			&:active,
+			&.current,
+			&.selected {
+	        	a {
+	          		@include active-tab();
 
-		  > span {
-			  @include active-tab();
-		  }
-        }
-      }
-    }
-  }
+			  		> span {
+				  		@include active-tab();
+			  		}
+	        	}
+	      	}
+    	}
+  	}
 }
 
 @mixin display-flex( $align: center, $justify: center ) {
@@ -232,7 +233,7 @@
 @mixin inactive-tab( $border-size: 1px ) {
 	background-color: $white;
 	border: $border-size solid;
-	border-color: $blue;
+	border-color: $white;
 	color: $blue;
 	font-weight: 600;
 }

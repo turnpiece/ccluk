@@ -6,8 +6,8 @@
 
 	<?php do_action( 'bp_before_directory_groups_content' ); ?>
 
-	<?php bp_get_template_part( 'common/search/dir-search-form' ); ?>
-	
+	<?php //bp_get_template_part( 'common/search/dir-search-form' ); ?>
+
 	<form action="" method="post" id="groups-directory-form" class="dir-form">
 
 		<?php do_action( 'template_notices' ); ?>
@@ -43,7 +43,7 @@
 
 
 		<?php if ( bp_get_current_group_directory_type() ) : ?>
-			
+
 			<?php bp_current_group_directory_type_message() ?>
 
 		<?php endif; ?>

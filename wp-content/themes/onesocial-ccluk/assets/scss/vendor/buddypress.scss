@@ -345,8 +345,11 @@ form#whats-new-form {
 }
 
 body {
-  &.single-item.groups.photos #buddypress div#subnav.item-list-tabs, &.bp-user.my-account.photos #buddypress div#subnav.item-list-tabs {
-    margin-bottom: 40px;
+  &.single-item.groups,
+  &.bp-user.my-account {
+      &.photos #buddypress div#subnav.item-list-tabs {
+          margin-bottom: 40px;
+      }
   }
   &.single-item.groups.photos form#whats-new-form {
     border: 0;
@@ -375,18 +378,23 @@ body {
 }
 
 body {
-  &.single-item.groups.photos #whats-new-content, &.bp-user.my-account.photos #whats-new-content {
-    display: block;
-  }
-  &.single-item.groups.photos #buddypress #whats-new-textarea, &.bp-user.my-account.photos #buddypress #whats-new-textarea {
-    opacity: 1;
-  }
-  &.single-item.groups.photos #buddypress form#whats-new-form #whats-new-content, &.bp-user.my-account.photos #buddypress form#whats-new-form #whats-new-content {
-    margin-top: 0;
-    padding: 0;
-  }
-  &.single-item.groups.photos #buddypress #whats-new-options, &.bp-user.my-account.photos #buddypress #whats-new-options {
-    display: none !important;
+  &.single-item.groups.photos,
+  &.bp-user.my-account.photos {
+      #whats-new-content {
+          display: block;
+      }
+      #buddypress {
+          #whats-new-textarea {
+              opacity: 1;
+          }
+          form#whats-new-form #whats-new-content {
+              margin-top: 0;
+              padding: 0;
+          }
+          #whats-new-options {
+              display: none !important;
+          }
+      }
   }
 }
 
@@ -744,7 +752,8 @@ body #buddypress div.activity-comments form#frm_buddypress-edit-activity .ac-tex
 }
 
 #buddypress {
-  .groups-members-search, .dir-search.boss-search-wrapper {
+  .groups-members-search,
+  .dir-search.boss-search-wrapper {
     margin: 0 auto;
     max-width: 66%;
     overflow: hidden;
@@ -752,59 +761,48 @@ body #buddypress div.activity-comments form#frm_buddypress-edit-activity .ac-tex
   }
 }
 
-.groups-members-search label, .boss-search-wrapper label {
+.groups-members-search label,
+.boss-search-wrapper label {
   margin-bottom: 40px;
   padding-right: 60px;
   position: relative;
   width: 100%;
 }
 
-.groups-members-search label {
-  float: left;
-  margin: 0;
-  padding-right: 42px;
-  &:after {
-    background: $green;
-    color: $white;
-    content: "c";
-    font-family: "onesocial";
-    font-size: 20px;
-    height: 52px;
-    line-height: 52px;
-    position: absolute;
-    right: 0;
-    text-align: center;
-    width: 60px;
-  }
-}
+.boss-search-wrapper,
+.groups-members-search {
+    label {
+        float: left;
+        margin: 0;
+        padding-right: 42px;
 
-.boss-search-wrapper label:after {
-  background: $green;
-  color: $white;
-  content: "c";
-  font-family: "onesocial";
-  font-size: 20px;
-  height: 52px;
-  line-height: 52px;
-  position: absolute;
-  right: 0;
-  text-align: center;
-  width: 60px;
+        &:after {
+            background: $blue;
+            color: $white;
+            content: "c";
+            font-family: "onesocial";
+            position: absolute;
+            right: 0;
+            text-align: center;
+            float: left;
+            font-size: $font-size-sm;
+            height: 36px;
+            line-height: 36px;
+            width: 42px;
+        }
+    }
 }
 
 .groups-members-search label:after {
-  float: left;
-  font-size: 15px;
-  height: 36px;
-  line-height: 36px;
-  width: 42px;
+
 }
 
 #main #buddypress {
-  .groups-members-search input[type='submit'], .boss-search-wrapper input[type='submit'] {
-    background: transparent;
+  .groups-members-search input[type='submit'],
+  .boss-search-wrapper input[type='submit'] {
+    background-color: $blue;
     border: 0;
-    color: white;
+    color: $white;
     float: right;
     font-size: 0;
     height: 52px;
@@ -821,13 +819,11 @@ body #buddypress div.activity-comments form#frm_buddypress-edit-activity .ac-tex
     top: 0;
     width: 42px;
     &:hover {
-      -webkit-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.2);
-      box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.2);
+      background-color: $green;
     }
   }
   .boss-search-wrapper input[type='submit']:hover {
-    -webkit-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.2);
-    box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.2);
+    background-color: $green;
   }
   .groups-members-search input[type='text'] {
     border-width: 1px;
@@ -872,17 +868,22 @@ body #buddypress div.activity-comments form#frm_buddypress-edit-activity .ac-tex
   }
 }
 
-.entry-content #buddypress #blogs-directory-form .item-list-tabs, #buddypress #members-directory-form .item-list-tabs {
+.entry-content #buddypress #blogs-directory-form .item-list-tabs,
+#buddypress #members-directory-form .item-list-tabs {
   margin: 0 auto 60px;
   max-width: 66%;
 }
 
-#groups-order-select .buddyboss-select, #blogs-directory-form .buddyboss-select, #members-order-select .buddyboss-select {
+#groups-order-select .buddyboss-select,
+#blogs-directory-form .buddyboss-select,
+#members-order-select .buddyboss-select {
   margin-top: 0;
 }
 
 #buddypress {
-  #groups-directory-form .item-list-tabs:after, #blogs-directory-form .item-list-tabs:after, #members-directory-form .item-list-tabs:after {
+  #groups-directory-form .item-list-tabs:after,
+  #blogs-directory-form .item-list-tabs:after,
+  #members-directory-form .item-list-tabs:after {
     clear: both;
     content: ' ';
     display: table;
@@ -916,11 +917,7 @@ body #buddypress div.activity-comments form#frm_buddypress-edit-activity .ac-tex
     margin: 0 0 10px 10px;
   }
   #group-create-nav .group-create {
-    color: $white;
-    &:hover {
-      -webkit-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
-      box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
-    }
+      @include button();
   }
 }
 
@@ -1107,7 +1104,10 @@ label[for="groupblog-create-new-no"] {
   }
 }
 
-.single-item.groups #buddypress .dir-list.group_members ul.item-list > li, .single #buddypress .dir-list ul.item-list > li, .bp-user #buddypress .dir-list ul.item-list > li, .page-right-sidebar #buddypress .dir-list ul.item-list > li {
+.single-item.groups #buddypress .dir-list.group_members ul.item-list > li,
+.single #buddypress .dir-list ul.item-list > li,
+.bp-user #buddypress .dir-list ul.item-list > li,
+.page-right-sidebar #buddypress .dir-list ul.item-list > li {
   width: 33.33333%;
 }
 
@@ -1130,15 +1130,16 @@ label[for="groupblog-create-new-no"] {
 }
 
 .boss-avatar-container {
-  background: #eee;
   border-radius: 100%;
   display: inline-block;
 }
 
-#secondary .inner-avatar-wrap div.generic-button, #buddypress div#item-header .inner-avatar-wrap div.generic-button {
-  line-height: 32px;
-  margin: 0;
-  z-index: 2;
+#secondary .inner-avatar-wrap div.generic-button,
+#buddypress div#item-header .inner-avatar-wrap div.generic-button {
+    @include button();
+    line-height: 32px;
+    margin: 0;
+    z-index: 2;
 }
 
 #primary .author-follow .generic-button {
@@ -1202,8 +1203,9 @@ label[for="groupblog-create-new-no"] {
 #buddypress .dir-list ul.item-list {
     .item-title {
         width: 100%;
-        font-size: 20px;
+        font-size: $font-size-sm;
         margin-bottom: 20px;
+        text-align: center;
         a {
             color: $blue;
             &:hover {
@@ -1211,10 +1213,12 @@ label[for="groupblog-create-new-no"] {
             }
         }
     }
-    .boss-group-content {
-        .item-title,
-        .item-desc {
-            text-align: left;
+    &#groups-list {
+        .item {
+            .item-title,
+            .item-desc {
+                text-align: left;
+            }
         }
     }
 }
@@ -1425,7 +1429,8 @@ label[for="groupblog-create-new-no"] {
 }
 
 .inner-avatar-wrap {
-  .group-button.membership-requested:before, .membership-requested a:before {
+  .group-button.membership-requested:before,
+  .membership-requested a:before {
     background: $blue;
     content: '\f017';
     font-family: 'fontawesome';
@@ -1434,7 +1439,8 @@ label[for="groupblog-create-new-no"] {
     line-height: 30px;
   }
   .generic-button a {
-    &.is_friend.remove:before, &.leave-group:before {
+    &.is_friend.remove:before,
+    &.leave-group:before {
       background: $green;
       content: '\f00c';
       font-family: "fontawesome";
@@ -1467,30 +1473,6 @@ label[for="groupblog-create-new-no"] {
   text-transform: none;
 }
 
-.inner-avatar-wrap {
-  div.generic-button a:not(.group-sub):not(.group-subscription-close):after, .awaiting_response_friend a:after, .pending_friend:not(.add) a:after {
-    -moz-osx-font-smoothing: grayscale;
-    background-color: #e33d41;
-    border: 2px solid $white;
-    border-radius: 100%;
-    color: $white;
-    content: "b";
-    display: block;
-    font-family: "onesocial";
-    font-size: 5px;
-    font-weight: 700;
-    height: 15px;
-    left: 20px;
-    line-height: 12px;
-    position: absolute;
-    text-align: center;
-    top: -3px;
-    width: 15px;
-    visibility: visible;
-    text-transform: none;
-  }
-}
-
 #primary .author-follow .pending_friend:not(.add) a:after {
   -moz-osx-font-smoothing: grayscale;
   background-color: #e33d41;
@@ -1514,7 +1496,9 @@ label[for="groupblog-create-new-no"] {
 }
 
 .inner-avatar-wrap {
-  .generic-button a.remove:after, .membership-requested a:after, .group-button.membership-requested:after {
+  .generic-button a.remove:after,
+  .membership-requested a:after,
+  .group-button.membership-requested:after {
     -moz-osx-font-smoothing: grayscale;
     background-color: #e33d41;
     border: 2px solid $white;
@@ -1536,7 +1520,8 @@ label[for="groupblog-create-new-no"] {
     text-transform: none;
   }
   .generic-button a {
-    &.is_friend.remove:after, &.leave-group:after {
+    &.is_friend.remove:after,
+    &.leave-group:after {
       -moz-osx-font-smoothing: grayscale;
       background-color: #e33d41;
       border: 2px solid $white;
@@ -1566,11 +1551,13 @@ label[for="groupblog-create-new-no"] {
 
 #buddypress .inner-avatar-wrap div {
     &.generic-button a {
-        &.add:after, &.request-membership:after {
+        &.add:after,
+        &.request-membership:after {
             display: none;
         }
     }
-    &.group-button .join-group:after, &.generic-button.not_friends a.add:after {
+    &.group-button .join-group:after,
+    &.generic-button.not_friends a.add:after {
         display: none;
     }
 
@@ -3084,24 +3071,24 @@ body {
 
 
 
-#buddypress #object-nav .sub-menu {
-  display: none;
-  width: 0;
-  height: 0;
-  li {
-    width: 0;
-    height: 0;
-  }
-}
-
-#buddypress form#send_message_form label.send-notice-label {
-  margin-bottom: 60px;
-}
-
 #buddypress {
-  .filters .buddyboss-select label, div#subnav.item-list-tabs ul li.last label {
-    display: none;
-  }
+    #object-nav .sub-menu {
+      display: none;
+      width: 0;
+      height: 0;
+      li {
+        width: 0;
+        height: 0;
+      }
+    }
+
+    form#send_message_form label.send-notice-label {
+      margin-bottom: 60px;
+    }
+
+    .filters .buddyboss-select label, div#subnav.item-list-tabs ul li.last label {
+        display: none;
+    }
 }
 
 #activity-filter-select .buddyboss-select {
@@ -3635,8 +3622,6 @@ body.activity-permalink #buddypress .activity-list > li:first-child {
   padding-top: 0;
 }
 
-#buddypress .activity-list
-
 body.activity-permalink #buddypress li.mini .activity-meta {
   margin-top: 4px;
 }
@@ -3720,9 +3705,7 @@ body.activity-permalink #buddypress .activity-list li .activity-content {
     padding: 4px 6px;
     margin-right: 5px;
     text-decoration: none;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
+    @include border-radius( 2px );
   }
   .activity-list {
     .activity-content {
@@ -3777,7 +3760,8 @@ body.activity-permalink #buddypress .activity-content {
 }
 
 #main #buddypress .activity-list li {
-  &.load-more, &.load-newest {
+  &.load-more,
+  &.load-newest {
     text-align: center;
     margin: 45px 0 25px;
     padding: 0;
@@ -4852,37 +4836,30 @@ body.buddypress {
 	}
 
 	#buddypress #item-title-area {
-	  -webkit-box-align: end;
-	  -webkit-align-items: flex-end;
-	  -ms-flex-align: end;
-	  align-items: flex-end;
-	  display: -webkit-box;
-	  display: -webkit-flex;
-	  display: -ms-flexbox;
-	  display: flex;
-	  -webkit-box-pack: justify;
-	  -webkit-justify-content: space-between;
-	  -ms-flex-pack: justify;
-	  justify-content: space-between;
+        @include display-flex( flex-end, space-between );
+	    -webkit-box-align: end;
+        -ms-flex-align: end;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+
+        .highlight {
+    	  background-color: $green;
+    	  @include border-radius( 3px );
+    	  color: $white;
+    	  text-transform: lowercase;
+    	  padding: 0px 6px 2px;
+    	  display: inline-block;
+    	  vertical-align: middle;
+    	  font-size: $font-size-tiny;
+    	  margin-top: 5px;
+    	  margin-left: 0;
+    	}
 	}
 
 	.boss-group-header {
 	  #item-actions {
 	    margin-bottom: 5px;
 	  }
-	}
-
-	#buddypress #item-title-area .highlight {
-	  background-color: $green;
-	  @include border-radius( 3px );
-	  color: $white;
-	  text-transform: lowercase;
-	  padding: 0px 6px 2px;
-	  display: inline-block;
-	  vertical-align: middle;
-	  font-size: $font-size-tiny;
-	  margin-top: 5px;
-	  margin-left: 0;
 	}
 
 	#buddypress div#item-header div#item-meta {
@@ -4959,7 +4936,10 @@ body.buddypress {
 
 	/* Search Fields */
 
-	.groups-members-search input[type="text"], #buddypress div.dir-search input[type="text"], #bbpress-forums #bbp-search-index-form input#bbp_search, #buddypress #search-message-form input[type="text"] {
+	.groups-members-search input[type="text"],
+    #buddypress div.dir-search input[type="text"],
+    #bbpress-forums #bbp-search-index-form input#bbp_search,
+    #buddypress #search-message-form input[type="text"] {
 	  padding: 7px 0;
 	}
 
@@ -5320,8 +5300,13 @@ body.buddypress {
 		}
 
 		#buddypress {
-			div#subnav.item-list-tabs {
-				display: none;
+            .item-list-tabs {
+			    &div#subnav {
+				    display: none;
+                }
+                &.activity-type-tabs {
+                    @include bp-item-list-tabs();
+                }
 			}
 		}
 	}
@@ -5383,14 +5368,6 @@ body.buddypress {
             text-transform: none;
           }
         }
-	}
-
-    @media screen and (max-width: 1024px) {
-        @import "buddypress/mobile";
-    }
-
-	&.is-mobile {
-        @import "buddypress/mobile";
 	}
 
 	&.calendar {
@@ -5517,11 +5494,19 @@ body.buddypress {
 	&.members {
 		#buddypress {
 			#members-directory-form.dir-form {
-				div.item-list-tabs {
-					ul li a span {
-						color: $white;
-					}
-				}
+                ul.item-list {
+                    .item {
+                        .item-title {
+                            width: 100%;
+                            font-size: $font-size-sm;
+                        }
+                    }
+                    .item-avatar {
+                        .inner-avatar-wrap {
+                            margin-bottom: 10px;
+                        }
+                    }
+                }
 			}
 		}
 	}
@@ -5537,29 +5522,36 @@ body.buddypress {
             }
         }
     }
-}
 
-/*--------------------------------------------------------------
-9.4 - Object Items
---------------------------------------------------------------*/
+    /*--------------------------------------------------------------
+    9.4 - Object Items
+    --------------------------------------------------------------*/
 
-body {
-  &.bp-user .page-right-sidebar .entry-header,
-  &.single-item.groups .page-right-sidebar .entry-header {
-    width: 75%;
-  }
-  &.bp-user .entry-header {
-    margin-bottom: 0;
-  }
-  &.single-item.groups .entry-header {
-    margin-bottom: 15px;
-  }
-  &.activity-permalink .entry-header {
-    float: none;
-    width: 100%;
-    margin-bottom: 24px;
-    display: none;
-  }
+    &.bp-user .page-right-sidebar .entry-header,
+    &.single-item.groups .page-right-sidebar .entry-header {
+        width: 75%;
+    }
+    &.bp-user .entry-header {
+        margin-bottom: 0;
+    }
+    &.single-item.groups .entry-header {
+        margin-bottom: 15px;
+    }
+    &.activity-permalink .entry-header {
+        float: none;
+        width: 100%;
+        margin-bottom: 24px;
+        display: none;
+    }
+
+    @media screen and (max-width: 1024px) {
+        @import "buddypress/mobile";
+    }
+
+	&.is-mobile {
+        @import "buddypress/mobile";
+	}
+
 }
 
 /* fallback */

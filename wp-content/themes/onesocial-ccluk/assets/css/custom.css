@@ -183,11 +183,21 @@ a:hover,
 input[type=submit] {
   border: none;
   padding: 10px 20px 10px 20px;
-  background-color: #54ae68;
+  background-color: #22a7f0;
   color: #fff;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
+}
+
+#save_as_draft:hover, #save_as_draft:active,
+.popup-content .button:not(.ed_button):hover,
+.popup-content .button:not(.ed_button):active,
+#buddypress form#whats-new-form #whats-new-submit input[type=submit]:hover,
+#buddypress form#whats-new-form #whats-new-submit input[type=submit]:active,
+input[type=submit]:hover,
+input[type=submit]:active {
+  background-color: #54ae68;
 }
 
 .formatted-content {
@@ -634,7 +644,9 @@ body.page-template-homepage #main .section .section-content {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: row wrap;
   -webkit-align-items: flex-start;
   align-items: flex-start;
   justify-content: center;
@@ -852,7 +864,9 @@ body.page-template-homepage #main .section.feature .section-content article {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: row wrap;
   -webkit-align-items: flex-start;
   align-items: flex-start;
   justify-content: center;
@@ -931,7 +945,9 @@ body.page-template-homepage #main .section.twitter #ctf .ctf-tweets {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: row wrap;
   -webkit-align-items: center;
   align-items: center;
   justify-content: space-evenly;
@@ -1556,7 +1572,13 @@ a.button {
   background-color: #22a7f0;
 }
 
-#secondary div.generic-button a, #buddypress .comment-reply-link, .select2-container--default .select2-results__option--highlighted[aria-selected], .entry-header .entry-title a.button, a.bp-title-button, #search-members-form > label:after, #messages-bulk-manage, .boss-search-wrapper label:after, .groups-members-search label:after {
+#secondary div.generic-button a,
+#buddypress .comment-reply-link,
+.select2-container--default .select2-results__option--highlighted[aria-selected],
+.entry-header .entry-title a.button, a.bp-title-button,
+#search-members-form > label:after,
+#messages-bulk-manage, .boss-search-wrapper label:after,
+.groups-members-search label:after {
   background-color: #22a7f0;
 }
 

@@ -343,7 +343,8 @@ input {
     padding: 0;
   }
   line-height: normal;
-  &[type="checkbox"], &[type="radio"] {
+  &[type="checkbox"],
+  &[type="radio"] {
     box-sizing: border-box;
     /* 1 */
     padding: 0;
@@ -1042,8 +1043,10 @@ input {
   }
 }
 
-article.post-password-required input[type=submit], li.bypostauthor cite span, a.button {
-  background-color: $green;
+article.post-password-required input[type=submit],
+li.bypostauthor cite span,
+a.button {
+  background-color: $blue;
   border: none;
   color: $white;
   cursor: pointer;
@@ -1066,7 +1069,7 @@ article.post-password-required input[type=submit], li.bypostauthor cite span, a.
 #buddypress .comment-reply-link,
 .entry-header .entry-title a.button,
 a.bp-title-button {
-  background-color: $green;
+  background-color: $blue;
   border: none;
   color: $white;
   cursor: pointer;
@@ -1090,58 +1093,48 @@ a.bp-title-button {
 button:hover {
   outline: none;
   color: $white;
+  background-color: $green;
   text-decoration: none;
-  /* Darken */
-  -moz-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
-  -webkit-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
-  box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
 }
 
 input {
-  &[type="button"]:hover, &[type="reset"]:hover {
+  &[type="button"]:hover,
+  &[type="reset"]:hover {
     outline: none;
     color: $white;
+    background-color: $green;
     text-decoration: none;
-    /* Darken */
-    -moz-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
-    -webkit-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
-    box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
   }
 }
 
-article.post-password-required input[type=submit]:hover, a.button:hover {
+article.post-password-required input[type=submit]:hover,
+a.button:hover {
   outline: none;
   color: $white;
   text-decoration: none;
-  /* Darken */
-  -moz-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
-  -webkit-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
-  box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
+  background-color: $green;
 }
 
-#secondary div.generic-button a:hover, #buddypress .comment-reply-link:hover, .entry-header .entry-title a.button:hover, a.bp-title-button:hover {
+#secondary div.generic-button a:hover,
+#buddypress .comment-reply-link:hover,
+.entry-header .entry-title a.button:hover,
+a.bp-title-button:hover {
   outline: none;
   color: $white;
   text-decoration: none;
-  /* Darken */
-  -moz-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
-  -webkit-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
-  box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
+  background-color: $green;
 }
 
 /* Active state */
 
 button:active {
-  /* Darken */
-  -moz-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
-  -webkit-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
-  box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
+  background-color: $green;
 }
 
 input {
-  &[type="button"]:active, &[type="reset"]:active {
-    /* Darken */
-    @include darken();
+  &[type="button"]:active,
+  &[type="reset"]:active {
+      background-color: $green;
   }
 }
 
@@ -1152,13 +1145,14 @@ a.button:active,
 .entry-header .entry-title a.button:active,
 a.bp-title-button:active,
 #buddypress div.activity-comments form input[disabled]:active {
-  /* Darken */
-  @include darken();
+  background-color: $green;
 }
 
 /* All buttons (mostly submit) without background */
 
-#save_as_draft, .entry-meta a.read-more, input[type="submit"] {
+#save_as_draft,
+.entry-meta a.read-more,
+input[type="submit"] {
   border: none;
   color: $green;
   border-top: 1px solid $green;
@@ -1200,7 +1194,8 @@ li.bypostauthor cite span {
   animation: load1 1s infinite ease-in-out;
   width: 1em;
   height: 4em;
-  &:before, &:after {
+  &:before,
+  &:after {
     background-color: $green;
     -webkit-animation: load1 1s infinite ease-in-out;
     animation: load1 1s infinite ease-in-out;
@@ -1273,11 +1268,15 @@ li.bypostauthor cite span {
 }
 
 img {
-  &[class*="align"], &[class*="wp-image-"], &[class*="attachment-"] {
+  &[class*="align"],
+  &[class*="wp-image-"],
+  &[class*="attachment-"] {
     height: auto;
     /* Make sure images with WordPress-added height and width attributes are scaled correctly */
   }
-  &.size-full, &.size-large, &.wp-post-image {
+  &.size-full,
+  &.size-large,
+  &.wp-post-image {
     max-width: 100%;
     height: auto;
     /* Make sure images with WordPress-added height and width attributes are scaled correctly */
@@ -1436,7 +1435,7 @@ img.wp-smiley, .rsswidget img {
 
 .pagination {
   span, a {
-    background-color: #dee4e4;
+    background-color: $blue;
     color: $white;
     display: inline-block;
     line-height: 1;
@@ -1447,13 +1446,15 @@ img.wp-smiley, .rsswidget img {
   }
 }
 
-.pagination a:hover, .bbp-pagination-links a:hover {
+.pagination a:hover,
+.bbp-pagination-links a:hover {
   color: $white;
-  background-color: #b6bdbd;
+  background-color: $green;
   text-decoration: none;
 }
 
-.pagination .current, .bbp-pagination-links span {
+.pagination .current,
+.bbp-pagination-links span {
   background-color: $green;
   color: $white;
   font-weight: 600;
