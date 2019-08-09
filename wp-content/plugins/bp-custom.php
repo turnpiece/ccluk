@@ -57,6 +57,7 @@ class CCLUK_BP_Custom {
 
 			// generate random password
 			$_POST['signup_password'] = wp_generate_password();
+			$_POST['signup_password_confirm'] = $_POST['signup_password'];
 		}
 	}
 
