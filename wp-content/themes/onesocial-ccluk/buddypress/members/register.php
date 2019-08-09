@@ -244,10 +244,14 @@ add_filter( 'bp_get_the_profile_field_required_label', function( $text ) {
 			do_action( 'bp_before_registration_confirmed' ); ?>
 
 			<div id="template-notices" role="alert" aria-atomic="true">
-				<?php if ( bp_registration_needs_activation() ) : ?>
-					<p><?php _e( "You have successfully joined Citizens' Climate Lobby! To begin using this site you will need to activate your account via the email we've just sent you.", 'onesocial' ); ?></p>
+				<?php
+				$admin_email = get_option( 'admin_email' );
+				if ( bp_registration_needs_activation() ) : ?>
+					<p><?php _e( "You have successfully joined Citizens' Climate Lobby. To begin using this site you will need to activate your account via the email we've just sent you.", 'onesocial' ); ?></p>
+					<p><?php printf( __( "If you don't see the email from us, please check your junk mail folder. If you still don't see it, email us at <a href=\"mailto:%s\">%s</a>, or if you have any questions or comments, please don't hesitate to get in touch." ), $admin_email, $admin_email ) ?></p>
 				<?php else : ?>
-					<p><?php _e( "You have successfully joined Citizens' Climate Lobby! Please log in using the username and password you just created.", 'onesocial' ); ?></p>
+					<p><?php _e( "You have successfully joined Citizens' Climate Lobby. Please log in using the username and password you just created.", 'onesocial' ); ?></p>
+					<p><?php printf( __( "If you have any trouble logging in to or using this site, you can email us at <a href=\"mailto:%s\">%s</a>. Also, if you have any questions or comments, please don't hesitate to get in touch." ), $admin_email, $admin_email ) ?></p>
 				<?php endif; ?>
 			</div>
 
@@ -273,10 +277,6 @@ add_filter( 'bp_get_the_profile_field_required_label', function( $text ) {
 
 		</form>
 
-	</div>
-
-	<div class="manual-registration">
-		<p>If you'd rather speak to someone before signing up, please <a href="/contact-us/">get in touch</a>.</p>
 	</div>
 
 	<?php

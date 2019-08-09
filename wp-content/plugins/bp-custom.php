@@ -28,6 +28,7 @@ class CCLUK_BP_Custom {
 		add_action( 'bp_core_activated_user', array( $this, 'join_group_on_signup' ) );
 		add_action( 'bp_signup_pre_validate', array( $this, 'signup_pre_validate' ) );
 		add_action( 'bp_account_details_fields', array( $this, 'password_optional_notice' ) );
+		add_action( 'bp_after_registration_submit_buttons', array( $this, 'manual_signup_notice') );
 
 		// sync BP/mailchimp user data
 		add_filter( 'mc4wp_user_merge_vars', array( $this, 'mailchimp_user_sync' ), 10, 2 );
@@ -35,6 +36,10 @@ class CCLUK_BP_Custom {
 
 		// add BuddyPress menu items for logged in users
 		add_filter( 'wp_nav_menu_items', array( $this, 'buddypress_menu' ), 10, 2 );
+		add_action( 'bp_signup_validate', function() {
+			global $bp;
+			self::vardump( $bp->signup->errors );
+		});
 	}
 
 	public function buddypress_menu( $items, $args ) {
@@ -53,20 +58,36 @@ class CCLUK_BP_Custom {
 		}
 		return $items;
 	}
+	// text at bottom of registration page
+	public function manual_signup_notice() { ?>
+		<div class="manual-registration">
+			<p><?php printf( __( "If you'd rather speak to someone before signing up, please <a href=\"%s\">get in touch</a>." ), '/contact-us/' ) ?></p>
+		</div>
+	<?php }
 
 	// use name as username
 	public function signup_pre_validate() {
+
+		self::vardump( $_POST );
+
 	    if (empty($_POST['signup_username'])) {
 			// username field was empty
+			self::debug( 'generating username from name' );
+
 			$field = xprofile_get_field_id_from_name( 'name' );
 
-			if (!empty($field) && !empty($_POST[$field])) {
+			self::debug( 'using name field '.$field.' => '.$_POST['field_'.$field] );
+
+			if (!empty($field) && !empty($_POST['field_'.$field])) {
 				// create username from name
 	        	$_POST['signup_username'] = $this->get_unique_username(
 					sanitize_user(
-						str_replace( ' ', '-', $_POST[$field] )
+						str_replace( ' ', '-', $_POST['field_'.$field] ),
+						true
 					 )
 				);
+
+				self::debug( 'generated username = '.$_POST['signup_username'] );
 			}
 	    }
 
@@ -77,6 +98,9 @@ class CCLUK_BP_Custom {
 
 			// generate random password
 			$_POST['signup_password'] = wp_generate_password();
+			$_POST['signup_password_confirm'] = $_POST['signup_password'];
+
+			self::debug( 'auto-generated password' );
 		}
 	}
 
@@ -110,7 +134,9 @@ class CCLUK_BP_Custom {
 					$data['MP'] = $mp['full_name'];
 			}
 	    }
-		self::debug( print_r( $data, true ) );
+
+		self::vardump( $data );
+
 	    return $data;
 	}
 
@@ -246,7 +272,7 @@ class CCLUK_BP_Custom {
 				$location[ $field ] = $result->{ $field };
 			}
 
-			$this->debug( print_r( $mp_data, true ) );
+			$this->vardump( $mp_data );
 
 			update_user_meta( $user_id, 'location', $location );
 
@@ -318,9 +344,13 @@ class CCLUK_BP_Custom {
 		return $wpdb->get_var( "SELECT `id` FROM `{$bp->groups->table_name}` WHERE `status` = 'public' AND `parent_id` = 0 AND `slug` LIKE '%all-members'" );
 	}
 
-	protected function debug( $message ) {
+	protected static function debug( $message ) {
 		if (self::DEBUGGING)
 			error_log( __CLASS__ . ' :: ' . $message );
+	}
+
+	protected static function vardump( $array ) {
+		self::debug( print_r( $array, true ) );
 	}
 }
 
