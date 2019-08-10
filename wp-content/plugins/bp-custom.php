@@ -125,7 +125,7 @@ class CCLUK_BP_Custom {
 
 			if ($location = get_user_meta( $user->id, 'location', true )) {
 				if (isset($location['parliamentary_constituency']))
-					$data['CONSTITUEN'] = $location['parliamentary_constituency'];
+					$data['MMERGE13'] = $location['parliamentary_constituency'];
 			}
 
 			if ($mp = (array) get_user_meta($user->id, 'mp', true)) {
