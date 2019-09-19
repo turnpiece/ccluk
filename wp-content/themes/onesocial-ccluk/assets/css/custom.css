@@ -2690,10 +2690,10 @@ MINIMUM width of 481 pixels (phones and larger)
 --------------------------------------------------------------*/
 @media screen and (min-width: 481px) {
   .site-header .site-title {
-    width: 360px;
+    width: 300px;
   }
   #logo-area {
-    width: 380px;
+    width: 320px;
   }
   #buddypress .activity-list .activity-content .activity-inner,
   #buddypress .activity-list .activity-content blockquote {
