@@ -847,3 +847,12 @@ add_action( 'bp_before_registration_submit_buttons', function() {
         <a href="/privacy-policy"><?php _e( 'We respect your privacy.', 'onesocial' ) ?></a>
     </p>
 <?php } );
+
+function ccluk_debug( $message ) {
+  if (CCLUK_DEBUGGING)
+    error_log( $message );
+}
+
+function ccluk_vardump( $array ) {
+  ccluk_debug( print_r( $array, true ) );
+}
