@@ -1,675 +1,661 @@
-
 /*--------------------------------------------------------------
 1.1.10 - Messaging
 --------------------------------------------------------------*/
 
 body.bp-user.messages {
 
-    &.is-desktop {
-        #buddypress {
-            div#subnav.item-list-tabs ul li{
-                &#compose-personal-li {
-                    border: none;
-                }
-            }
-        }
+  /*--------------------------------------------------------------
+  Private Messaging Threads
+  --------------------------------------------------------------*/
 
-        #buddypress {
-            #item-nav {
-                margin-left: 200px;
-            }
-        }
+  #messages-layout {
+    float: right;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 0;
+    -ms-flex: 1 1 0;
+    flex: 1 1 0;
+    min-width: 1px;
+    /* Firefox-34-ignoring-max-width-for-flexbox */
+    width: calc(100% - 200px);
+    /* IE11 */
+    #pag-bottom {
+      padding-bottom: 0;
     }
+  }
 
-    .site {
-        padding-top: 40px;
-    }
-
-    #user-pag.pagination {
-        display: none;
-    }
-
-    /*--------------------------------------------------------------
-    Private Messaging Threads
-    --------------------------------------------------------------*/
-
-    #messages-layout {
-      float: right;
-      -webkit-box-flex: 1;
-      -webkit-flex: 1 1 0;
-      -ms-flex: 1 1 0;
-      flex: 1 1 0;
-      min-width: 1px;
-      /* Firefox-34-ignoring-max-width-for-flexbox */
-      width: calc(100% - 200px);
-      /* IE11 */
-      #pag-bottom {
-        padding-bottom: 0;
+  &.single {
+      #messages-layout {
+          margin-bottom: 60px;
       }
-    }
+  }
 
-    &.single {
-        #messages-layout {
-            margin-bottom: 60px;
-        }
+  &.is-desktop {
+      #buddypress {
+          div#subnav.item-list-tabs ul li {
+              width: 100%;
+          }
+          .messages-container {
+              @include display-flex( stretch, flex-start );
+              @include flex-row-wrap();
 
-        .ac-over {
-            background-color: $blue;
-        }
-    }
+              #leftcolumn {
+                  float: left;
+                  width: 200px;
+                  position: relative;
+                  padding-right: 30px;
 
-    &.is-desktop {
-        #buddypress {
-            div#subnav.item-list-tabs ul li {
-                width: 100%;
-            }
-            .messages-container {
-                @include display-flex( stretch, flex-start );
-                @include flex-row-wrap();
+                  > div#subnav.item-list-tabs {
+                      > ul > li {
+                           > a {
+                              border: none;
+                              color: $blue;
+                              > span {
+                                  background: transparent;
+                                  font-size: 100%;
+                                  color: $blue;
+                                  padding: 0;
+                                  border: none;
+                                  float: right;
+                              }
+                              &:hover {
+                                  color: $green;
+                                  background: transparent;
+                                  > span {
+                                      color: $green;
+                                  }
+                              }
+                          }
+                          &:hover,
+                          &.selected,
+                          &.current {
+                              > a {
+                                  color: $green;
+                                  background: transparent;
+                                  > span {
+                                      color: $green;
+                                  }
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+      }
+  }
 
-                #leftcolumn {
-                    float: left;
-                    width: 200px;
-                    position: relative;
-                    padding-right: 30px;
-                }
-            }
-        }
-    }
+  #buddypress {
 
-    #buddypress {
+      div#subnav.item-list-tabs ul li {
+          a {
+              color: $blue;
+          }
+          &:hover a,
+          &.selected a,
+          &.current a{
+              color: $green;
+          }
+      }
 
-        div.message-search {
-            float: right;
-            margin: -1px 0 -36px;
-        }
-        form#send_message_form {
-            input#send-notice {
-              clear: left;
-              float: left;
-            }
-            label span.text {
-              font-size: $font-size-sm;
-              margin-left: 5px;
-            }
-        }
+      div.message-search {
+          float: right;
+          margin: -1px 0 -36px;
+      }
+      form#send_message_form {
+          input#send-notice {
+            clear: left;
+            float: left;
+          }
+          label span.text {
+            font-size: $font-size-sm;
+            margin-left: 5px;
+          }
+      }
 
-        div#item-body {
-          width: 100%;
-        }
-        .messages-notices td p,
-        table tr td.thread-info p.thread-excerpt {
-            color: $gray;
-            margin-top: 3px;
-        }
-        .messages-notices td p {
-            margin-bottom: 0;
-        }
-        .messages #message.info {
-            margin-top: 60px;
-        }
+      div#item-body {
+        width: 100%;
+      }
+      .messages-notices td p,
+      table tr td.thread-info p.thread-excerpt {
+          color: $gray;
+          margin-top: 3px;
+      }
+      .messages-notices td p {
+          margin-bottom: 0;
+      }
+      .messages #message.info {
+          margin-top: 60px;
+      }
 
-        #send_message_form.standard-form {
-        	ul.acfb-holder {
-                @include display-flex( left, left );
-        		li.friend-tab {
-        			background-color: transparent;
-        			border: none;
+      #send_message_form.standard-form {
+        ul.acfb-holder {
+          li.friend-tab {
+            background-color: transparent;
+            border: none;
 
-        			img.avatar {
-        				margin-right: 5px;
-        			}
-        		}
-        	}
-
-        	label,
-        	legend {
-                @include form-label();
-            }
-
-            input[type="text"] {
-            	@include form-input();
-            }
-
-            input[type="text"],
-            textarea {
-            	margin-bottom: 20px;
-            }
-
-        	label {
-        	    margin-bottom: 0;
-        	    line-height: 1.5;
-        	    &[for='send-to-input'] {
-        	        margin-bottom: 12px;
-        	        margin-top: 4px;
-        	    }
-        	}
-        }
-
-    	table#message-threads {
-            tr td {
-                vertical-align: top;
-                border: none;
-            }
-            &.messages-notices tr td {
-                border-left: none;
-                border-right: none;
-                border-top: none;
-                border-bottom: 2px solid $green;
-                display: table-cell;
-                float: none;
-            }
-
-            &.messages-notices tr td:last-child {
-                > div {
-                  margin-bottom: $font-size-sm;
-                  overflow: hidden;
-                }
-                a {
-                  margin-bottom: 2px;
-                }
-            }
-            tr td.thread-info p {
-                font-size: $font-size-sm;
-            }
-
-            tr {
-                td.thread-info p a {
-                  	color: $blue;
-                  	font-weight: 600;
-                  	margin-bottom: 5px;
-                  	display: inline-block;
-                  	&:hover {
-                  	  color: $green;
-                  	}
-                }
-
-                &.unread td {
-                  	background-color: #f9f9f9;
-                  	border-top: 2px solid #e1e1e1;
-                  	border-bottom: 2px solid #e1e1e1;
-                  	&.thread-from {
-                  	  border-left: 2px solid #e1e1e1;
-                  	  position: relative;
-
-                		&:before {
-                		  right: 100%;
-                		  top: 50%;
-                		  border: solid transparent;
-                		  /*margin-right: 2px;*/
-                		  content: " ";
-                		  height: 0;
-                		  width: 0;
-                		  position: absolute;
-                		  pointer-events: none;
-                		}
-                		&:after {
-                		  right: 100%;
-                		  top: 50%;
-                		  border: solid transparent;
-                		  /*margin-right: 2px;*/
-                		  content: " ";
-                		  height: 0;
-                		  width: 0;
-                		  position: absolute;
-                		  pointer-events: none;
-                		  border-color: rgba(255, 255, 255, 0);
-                		  border-right-color: #f9f9f9;
-                		  border-width: 7px;
-                		  margin-top: -7px;
-                		}
-                		&:before {
-                		  border-color: $green;
-                		  border-right-color: #e1e1e1;
-                		  border-width: 10px;
-                		  margin-top: -10px;
-                		}
-                	  }
-                }
-            }
-
-    	    &:not(.messages-notices) tr td:last-child {
-        		padding-right: 15px;
-        		width: 50px;
-    	    }
-        	tr.unread td:last-child {
-        		border-right: 2px solid rgba(0, 0, 0, 0.1);
-        	}
-
-        	input[type="checkbox"] {
-        		height: 18px;
-        		opacity: 0;
-        		position: relative;
-        		width: 18px;
-        		z-index: 1;
-        		margin: 0;
-        		+ strong {
-        		  position: relative;
-        		  color: rgba(0, 0, 0, 0.4);
-        		  left: 10px;
-        		  margin-right: 10px;
-        		  z-index: 0;
-        		  &:before {
-        			content: '';
-        			position: absolute;
-        			top: -1px;
-        			left: -26px;
-        			z-index: 0;
-        			width: 14px;
-        			height: 14px;
-        			line-height: 1;
-        		  }
-        		}
-        		&:checked + strong:after {
-        		  content: "\2713";
-        		  font-size: 16px;
-        		  position: absolute;
-        		  top: -2px;
-        		  left: -25px;
-        		  color: $green;
-        		  line-height: 1;
-        		}
-        	}
-        	th input[type="checkbox"] + strong {
-        		top: 2px;
-        	}
-        	tr {
-        		th:first-child,
-                td:first-child {
-        		  padding-left: 0;
-        		}
-        	}
-        	margin: 0;
-        	clear: left;
-        	border-bottom: 0;
-        	th {
-        		border-top: 2px solid $green;
-        		border-bottom: 0;
-        		font-size: 14px;
-        		text-transform: uppercase;
-        		color: $green;
-        		/*border-bottom: 2px solid #e1e1e1;*/
-        		border-bottom: 0;
-        	}
-        	tbody tr.read:first-child {
-        		border-top: 2px solid #e1e1e1;
-        	}
-
-        	td, th {
-        		padding: 18px 0 18px 12px;
-        	}
-        }
-
-    	th.thread-checkbox {
-            text-align: left;
-        }
-
-        .messages-notices td strong {
-            color: $green;
-            font-weight: 600;
-            margin-bottom: 5px;
-            display: inline-block;
-        }
-
-    	div.messages-options-nav .buddyboss-select-inner {
-    	    select {
-    	           height: auto;
-    	              line-height: 1;
-    	    }
-    	    height: auto;
-    	    line-height: 1;
-    	    span {
-        	    font-size: $font-size-sm;
-        	    text-transform: none;
-        	    font-weight: 600;
-        	    color: $green;
-        	    line-height: 1.3;
-    	    }
-    	    &:after {
-        	    border: none;
-        	    height: auto;
-        	    line-height: 18px;
-        	    color: $green;
-        	    font-size: 10px;
-        	    right: 8px;
-    	    }
-    	}
-
-    	/* Single Thread */
-
-    	div#message-thread {
-            div {
-                &.message-box {
-                    margin: 0;
-                    padding: 15px;
-                }
-                &.alt {
-                    background-color: #f4f4f4;
-                }
-            }
-            p#message-recipients {
-                margin: 10px 0 20px 0;
-            }
             img.avatar {
-                float: left;
-                margin: 0 10px 0 0;
-                vertical-align: middle;
-                box-shadow: none;
+              margin-right: 5px;
             }
-            strong {
-                font-size: 100%;
-                margin: 3px;
-                vertical-align: middle;
-                a {
-                    text-decoration: none;
-                }
-                span.activity {
-                    margin: 4px 0 0 10px;
-                }
-            }
-            div.message-metadata {
-                overflow: hidden;
-            }
-
-            div {
-                &.message-metadata .activity {
-                    vertical-align: middle;
-                }
-                &.message-content {
-                    margin-left: 45px;
-                    .submit {
-                      margin-bottom: 30px;
-                    }
-                }
-                &.message-options {
-                    text-align: right;
-                }
-            }
-    	}
-
-        @media screen and (max-width: 1024px) {
-            .messages-container {
-                #messages-layout,
-                #leftcolumn {
-                    float: none;
-                    width: 100%;
-                    margin-top: 30px;
-                    padding-right: 0;
-                }
-                table#message-threads {
-                    tr td {
-                        font-size: $font-size-tiny;
-                    }
-                }
-            }
+          }
         }
 
-        @media screen and (max-width: 768px) {
-            #message-threads .thread-from {
-              .table-cell {
-            	width: 100%;
-            	display: block;
-            	text-align: center;
-            	&:first-child {
-            	  width: 100%;
-            	  display: block;
-            	  text-align: center;
-            	}
-              }
-              img {
-                  margin: 0 0 10px 0;
-              }
+        label,
+        legend {
+              @include form-label();
+          }
+
+          input[type="text"] {
+            @include form-input();
+          }
+
+          input[type="text"],
+          textarea {
+            margin-bottom: 20px;
+          }
+
+        label {
+            margin-bottom: 0;
+            line-height: 1.2;
+            &[for='subject'] {
+                margin-top: 50px;
             }
-            .item-header-mobile {
-                margin-top: 40px;
+            &[for='send-to-input'] {
+                margin-bottom: 12px;
+                margin-top: 4px;
             }
+        }
+      }
+
+    table#message-threads {
+          tr td {
+              vertical-align: top;
+              border: none;
+          }
+          &.messages-notices tr td {
+              border-left: none;
+              border-right: none;
+              border-top: none;
+              border-bottom: 2px solid $green;
+              display: table-cell;
+              float: none;
+          }
+
+          &.messages-notices tr td:last-child {
+              > div {
+                margin-bottom: $font-size-sm;
+                overflow: hidden;
+              }
+              a {
+                margin-bottom: 2px;
+              }
+          }
+          tr td.thread-info p {
+              font-size: $font-size-sm;
+          }
+
+          tr {
+              td.thread-info p a {
+                  color: $blue;
+                  font-weight: 600;
+                  margin-bottom: 5px;
+                  display: inline-block;
+                  &:hover {
+                    color: $green;
+                  }
+              }
+
+              &.unread td {
+                  background-color: #f9f9f9;
+                  border-top: 2px solid #e1e1e1;
+                  border-bottom: 2px solid #e1e1e1;
+                  &.thread-from {
+                    border-left: 2px solid #e1e1e1;
+                    position: relative;
+
+                  &:before {
+                    right: 100%;
+                    top: 50%;
+                    border: solid transparent;
+                    /*margin-right: 2px;*/
+                    content: " ";
+                    height: 0;
+                    width: 0;
+                    position: absolute;
+                    pointer-events: none;
+                  }
+                  &:after {
+                    right: 100%;
+                    top: 50%;
+                    border: solid transparent;
+                    /*margin-right: 2px;*/
+                    content: " ";
+                    height: 0;
+                    width: 0;
+                    position: absolute;
+                    pointer-events: none;
+                    border-color: rgba(255, 255, 255, 0);
+                    border-right-color: #f9f9f9;
+                    border-width: 7px;
+                    margin-top: -7px;
+                  }
+                  &:before {
+                    border-color: $green;
+                    border-right-color: #e1e1e1;
+                    border-width: 10px;
+                    margin-top: -10px;
+                  }
+                  }
+              }
+          }
+
+        &:not(.messages-notices) tr td:last-child {
+          padding-right: 15px;
+          width: 50px;
+        }
+        tr.unread td:last-child {
+          border-right: 2px solid rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="checkbox"] {
+          height: 18px;
+          opacity: 0;
+          position: relative;
+          width: 18px;
+          z-index: 1;
+          margin: 0;
+          + strong {
+            position: relative;
+            color: rgba(0, 0, 0, 0.4);
+            left: 10px;
+            margin-right: 10px;
+            z-index: 0;
+            &:before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -26px;
+            z-index: 0;
+            width: 14px;
+            height: 14px;
+            line-height: 1;
+            }
+          }
+          &:checked + strong:after {
+            content: "\2713";
+            font-size: 16px;
+            position: absolute;
+            top: -2px;
+            left: -25px;
+            color: $green;
+            line-height: 1;
+          }
+        }
+        th input[type="checkbox"] + strong {
+          top: 2px;
+        }
+        tr {
+          th:first-child,
+              td:first-child {
+            padding-left: 0;
+          }
+        }
+        margin: 0;
+        clear: left;
+        border-bottom: 0;
+        th {
+          border-top: 2px solid $green;
+          border-bottom: 0;
+          font-size: 14px;
+          text-transform: uppercase;
+          color: $green;
+          /*border-bottom: 2px solid #e1e1e1;*/
+          border-bottom: 0;
+        }
+        tbody tr.read:first-child {
+          border-top: 2px solid #e1e1e1;
+        }
+
+        td, th {
+          padding: 18px 0 18px 12px;
+        }
+      }
+
+    th.thread-checkbox {
+          text-align: left;
+      }
+
+      .messages-notices td strong {
+          color: $green;
+          font-weight: 600;
+          margin-bottom: 5px;
+          display: inline-block;
+      }
+
+    div.messages-options-nav .buddyboss-select-inner {
+        select {
+               height: auto;
+                  line-height: 1;
+        }
+        height: auto;
+        line-height: 1;
+        span {
+            font-size: $font-size-sm;
+            text-transform: none;
+            font-weight: 600;
+            color: $green;
+            line-height: 1.3;
+        }
+        &:after {
+            border: none;
+            height: auto;
+            line-height: 18px;
+            color: $green;
+            font-size: 10px;
+            right: 8px;
         }
     }
+
+    /* Single Thread */
+
+    div#message-thread {
+          div {
+              &.message-box {
+                  margin: 0;
+                  padding: 15px;
+              }
+              &.alt {
+                  background-color: #f4f4f4;
+              }
+          }
+          p#message-recipients {
+              margin: 10px 0 20px 0;
+          }
+          img.avatar {
+              float: left;
+              margin: 0 10px 0 0;
+              vertical-align: middle;
+              box-shadow: none;
+          }
+          strong {
+              font-size: 100%;
+              margin: 3px;
+              vertical-align: middle;
+              a {
+                  text-decoration: none;
+              }
+              span.activity {
+                  margin: 4px 0 0 10px;
+              }
+          }
+          div.message-metadata {
+              overflow: hidden;
+          }
+
+          div {
+              &.message-metadata .activity {
+                  vertical-align: middle;
+              }
+              &.message-content {
+                  margin-left: 45px;
+                  .submit {
+                    margin-bottom: 30px;
+                  }
+              }
+              &.message-options {
+                  text-align: right;
+              }
+          }
+    }
+
+      @media screen and (max-width: 1024px) {
+          .messages-container {
+              #messages-layout,
+              #leftcolumn {
+                  float: none;
+                  width: 100%;
+                  margin-top: 30px;
+                  padding-right: 0;
+              }
+              table#message-threads {
+                  tr td {
+                      font-size: $font-size-tiny;
+                  }
+              }
+          }
+      }
+
+      @media screen and (max-width: 768px) {
+          #message-threads .thread-from {
+            .table-cell {
+            width: 100%;
+            display: block;
+            text-align: center;
+            &:first-child {
+              width: 100%;
+              display: block;
+              text-align: center;
+            }
+            }
+            img {
+                margin: 0 0 10px 0;
+            }
+          }
+          .item-header-mobile {
+              margin-top: 40px;
+          }
+      }
+  }
 }
 
 #messages-layout #message.info {
-  float: left;
-  width: 100%;
+float: left;
+width: 100%;
+}
+
+#send_message_form ul.acfb-holder li {
+float: none;
+margin: 0 0 20px;
 }
 
 ul.acfb-holder li.friend-tab {
-  margin-top: 7px;
+margin-top: 7px;
 }
 
 #send_message_form {
-  textarea, input[type="text"] {
-    margin-bottom: 60px;
-    padding-bottom: 10px;
-    padding-top: 10px;
-  }
-
-  ul.acfb-holder li {
-    float: none;
-    margin: 0 0 20px;
-
-    span > .avatar {
-        @include border-radius( 50% );
-    }
-  }
+textarea, input[type="text"] {
+  margin-bottom: 60px;
+  padding-bottom: 10px;
+  padding-top: 10px;
 }
-
-@media screen and (max-width: 1024px) {
-    #buddypress {
-      form#send_message_form {
-        ul li.friend-tab {
-          margin-bottom: 10px;
-          padding: 7px 15px;
-          width: auto;
-        }
-        li.friend-tab {
-            a, span {
-              img {
-                margin-right: 5px;
-                margin-top: 3px;
-              }
-          }
-          a {
-            padding: 2px 0 0 5px;
-            position: relative;
-          }
-        }
-      }
-      div#message {
-        margin: 15px;
-      }
-    }
 }
 
 #message-subject {
-  margin-top: 0;
+margin-top: 0;
 }
 
 .notices #buddypress table#message-threads tr td:last-child {
-  text-align: right;
-  vertical-align: top;
+text-align: right;
+vertical-align: top;
 }
 
 .thread-star .bp-screen-reader-text {
-  display: none;
+display: none;
 }
 
 /* CSS only for Firefox */
 @-moz-document url-prefix() {
-  #buddypress table#message-threads tr.unread td {
-    border: 0 !important;
+#buddypress table#message-threads tr.unread td {
+  border: 0 !important;
+}
+#message-threads .unread {
+  position: relative;
+  + .unread:after {
+    border-top: 0;
   }
-  #message-threads .unread {
+  &:after {
+    border: 2px solid #e1e1e1;
+    content: "";
+    height: 100%;
+    left: 36px;
+    position: absolute;
+    width: calc(100% - 36px);
+  }
+}
+@media screen and (max-width: 321px) {
+  #message-threads .unread:after {
+    left: 24px;
+    width: calc(100% - 24px);
+  }
+}
+#buddypress table#message-threads tr.unread td {
+  * {
     position: relative;
-    + .unread:after {
-      border-top: 0;
-    }
-    &:after {
-      border: 2px solid #e1e1e1;
-      content: "";
-      height: 100%;
-      left: 36px;
-      position: absolute;
-      width: calc(100% - 36px);
-    }
+    z-index: 5;
   }
-  @media screen and (max-width: 321px) {
-    #message-threads .unread:after {
-      left: 24px;
-      width: calc(100% - 24px);
-    }
-  }
-  #buddypress table#message-threads tr.unread td {
-    * {
-      position: relative;
+  &.thread-from {
+    &:before, &:after {
       z-index: 5;
     }
-    &.thread-from {
-      &:before, &:after {
-        z-index: 5;
-      }
-    }
   }
+}
 }
 
 body #buddypress table#message-threads tr td:first-child {
-  border-top: none;
-  border-bottom: none;
-  background-color: transparent;
+border-top: none;
+border-bottom: none;
+background-color: transparent;
 }
 
 #message-threads .thread-checkbox {
-  text-align: left;
-  width: 38px;
+text-align: left;
+width: 38px;
 }
 
 #buddypress table#message-threads .thread-from {
-  text-align: left;
-  width: 25%;
-  position: relative;
-  font-size: $font-size-sm;
-  padding-right: 5px;
+text-align: left;
+width: 25%;
+position: relative;
+font-size: $font-size-sm;
+padding-right: 5px;
 }
 
 #message-threads {
-  .thread-from .table-cell {
-    &:first-child {
-      width: 65px;
-    }
-    &:nth-child(2) {
-      line-height: 1.2;
-    }
+.thread-from .table-cell {
+  &:first-child {
+    width: 65px;
   }
-  .read .thread-from:before {
-    /* content: ''; */
-    height: 100%;
-    width: 2px;
-    position: absolute;
-    background-color: rgba(0, 0, 0, 0.1);
-    top: 0;
-    left: 35px;
+  &:nth-child(2) {
+    line-height: 1.2;
   }
-  .thread-from img {
-    vertical-align: middle;
-    border-radius: 45px;
-    width: 45px;
-    height: 45px;
-    display: inline-block;
-    margin-right: 16px;
-    position: relative;
-    z-index: 1;
+}
+.read .thread-from:before {
+  /* content: ''; */
+  height: 100%;
+  width: 2px;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.1);
+  top: 0;
+  left: 35px;
+}
+.thread-from img {
+  vertical-align: middle;
+  border-radius: 45px;
+  width: 45px;
+  height: 45px;
+  display: inline-block;
+  margin-right: 16px;
+  position: relative;
+  z-index: 1;
+}
+.thread-options {
+  text-align: left;
+  width: 14%;
+  span {
+    color: $green;
+    font-weight: 800;
   }
-  .thread-options {
-    text-align: left;
-    width: 14%;
-    span {
-      color: $green;
-      font-weight: 800;
-    }
-  }
+}
 }
 
 .message-action-star span.icon:before {
-  content: "\f154";
+content: "\f154";
 }
 
 .message-action-unstar span.icon:before {
-  content: "\f155";
+content: "\f155";
 }
 
-.message-action-star span.icon:before,
-.message-action-unstar span.icon:before {
-  font-family: dashicons;
-  font-size: 16px;
+.message-action-star span.icon:before, .message-action-unstar span.icon:before {
+font-family: dashicons;
+font-size: 16px;
 }
 
 #buddypress div#message-thread img.avatar {
-  float: left;
-  margin: 0 10px 0 0;
-  vertical-align: middle;
-  box-shadow: none;
+float: left;
+margin: 0 10px 0 0;
+vertical-align: middle;
+box-shadow: none;
 }
 
-.thread-checkbox .bp-screen-reader-text,
-#buddypress div.message-search label {
-  display: none;
+.thread-checkbox .bp-screen-reader-text, #buddypress div.message-search label {
+display: none;
 }
 
 .messages #content {
-  /* margin-top: 20px; */
+/* margin-top: 20px; */
 }
 
 #buddypress div.messages-options-nav {
-  float: left;
-  margin: 0 0 25px;
-  text-align: right;
+float: left;
+margin: 0 0 25px;
+text-align: right;
 }
 
 #delete_drafts_messages, #messages-bulk-manage {
-  border: 0;
-  color: white;
-  font-size: 12px;
-  padding: 6px 10px;
-  text-transform: uppercase;
-  line-height: 1.1;
+border: 0;
+color: white;
+font-size: 12px;
+padding: 6px 10px;
+text-transform: uppercase;
+line-height: 1.1;
 }
 
 /* Notices */
 
 .my-messages.notices {
-  #buddypress #message-threads {
-    tr:first-child td {
-      padding-top: 0;
-    }
-    &.messages-notices tr td:nth-child(1) {
-      display: none;
-    }
-    td:nth-child(2) {
-      width: 36% !important;
-      padding-left: 0;
-    }
+#buddypress #message-threads {
+  tr:first-child td {
+    padding-top: 0;
   }
-  #message-threads {
-    &:not(.messages-notices) td:nth-child(3) {
-      width: 19% !important;
-    }
-    td:nth-child(4) {
-      width: 14% !important;
-      text-align: right;
-      a {
-        display: inline-block;
-        &:first-child {
-          margin-bottom: 2px;
-        }
+  &.messages-notices tr td:nth-child(1) {
+    display: none;
+  }
+  td:nth-child(2) {
+    width: 36% !important;
+    padding-left: 0;
+  }
+}
+#message-threads {
+  &:not(.messages-notices) td:nth-child(3) {
+    width: 19% !important;
+  }
+  td:nth-child(4) {
+    width: 14% !important;
+    text-align: right;
+    a {
+      display: inline-block;
+      &:first-child {
+        margin-bottom: 2px;
       }
     }
   }
 }
+}
 
 div.message-metadata .message-star-actions {
-  display: inline-block;
-  float: right;
+display: inline-block;
+float: right;
 }
 
 .starred #contentcolumn > h3 {
-  display: none;
+display: none;
 }

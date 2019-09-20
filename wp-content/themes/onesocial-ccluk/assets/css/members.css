@@ -540,24 +540,8 @@ body.photos.is-mobile #buddypress form#whats-new-form {
 --------------------------------------------------------------*/
 body.bp-user.messages {
   /*--------------------------------------------------------------
-    Private Messaging Threads
-    --------------------------------------------------------------*/
-}
-
-body.bp-user.messages.is-desktop #buddypress div#subnav.item-list-tabs ul li#compose-personal-li {
-  border: none;
-}
-
-body.bp-user.messages.is-desktop #buddypress #item-nav {
-  margin-left: 200px;
-}
-
-body.bp-user.messages .site {
-  padding-top: 40px;
-}
-
-body.bp-user.messages #user-pag.pagination {
-  display: none;
+  Private Messaging Threads
+  --------------------------------------------------------------*/
 }
 
 body.bp-user.messages #messages-layout {
@@ -577,10 +561,6 @@ body.bp-user.messages #messages-layout #pag-bottom {
 
 body.bp-user.messages.single #messages-layout {
   margin-bottom: 60px;
-}
-
-body.bp-user.messages.single .ac-over {
-  background-color: #22a7f0;
 }
 
 body.bp-user.messages.is-desktop #buddypress div#subnav.item-list-tabs ul li {
@@ -612,8 +592,50 @@ body.bp-user.messages.is-desktop #buddypress .messages-container #leftcolumn {
   padding-right: 30px;
 }
 
+body.bp-user.messages.is-desktop #buddypress .messages-container #leftcolumn > div#subnav.item-list-tabs > ul > li > a {
+  border: none;
+  color: #22a7f0;
+}
+
+body.bp-user.messages.is-desktop #buddypress .messages-container #leftcolumn > div#subnav.item-list-tabs > ul > li > a > span {
+  background: transparent;
+  font-size: 100%;
+  color: #22a7f0;
+  padding: 0;
+  border: none;
+  float: right;
+}
+
+body.bp-user.messages.is-desktop #buddypress .messages-container #leftcolumn > div#subnav.item-list-tabs > ul > li > a:hover {
+  color: #54ae68;
+  background: transparent;
+}
+
+body.bp-user.messages.is-desktop #buddypress .messages-container #leftcolumn > div#subnav.item-list-tabs > ul > li > a:hover > span {
+  color: #54ae68;
+}
+
+body.bp-user.messages.is-desktop #buddypress .messages-container #leftcolumn > div#subnav.item-list-tabs > ul > li:hover > a, body.bp-user.messages.is-desktop #buddypress .messages-container #leftcolumn > div#subnav.item-list-tabs > ul > li.selected > a, body.bp-user.messages.is-desktop #buddypress .messages-container #leftcolumn > div#subnav.item-list-tabs > ul > li.current > a {
+  color: #54ae68;
+  background: transparent;
+}
+
+body.bp-user.messages.is-desktop #buddypress .messages-container #leftcolumn > div#subnav.item-list-tabs > ul > li:hover > a > span, body.bp-user.messages.is-desktop #buddypress .messages-container #leftcolumn > div#subnav.item-list-tabs > ul > li.selected > a > span, body.bp-user.messages.is-desktop #buddypress .messages-container #leftcolumn > div#subnav.item-list-tabs > ul > li.current > a > span {
+  color: #54ae68;
+}
+
 body.bp-user.messages #buddypress {
   /* Single Thread */
+}
+
+body.bp-user.messages #buddypress div#subnav.item-list-tabs ul li a {
+  color: #22a7f0;
+}
+
+body.bp-user.messages #buddypress div#subnav.item-list-tabs ul li:hover a,
+body.bp-user.messages #buddypress div#subnav.item-list-tabs ul li.selected a,
+body.bp-user.messages #buddypress div#subnav.item-list-tabs ul li.current a {
+  color: #54ae68;
 }
 
 body.bp-user.messages #buddypress div.message-search {
@@ -649,20 +671,6 @@ body.bp-user.messages #buddypress .messages #message.info {
   margin-top: 60px;
 }
 
-body.bp-user.messages #buddypress #send_message_form.standard-form ul.acfb-holder {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-  flex-wrap: row wrap;
-  -webkit-box-align: left;
-      -ms-flex-align: left;
-          align-items: left;
-  -webkit-box-pack: left;
-      -ms-flex-pack: left;
-          justify-content: left;
-}
-
 body.bp-user.messages #buddypress #send_message_form.standard-form ul.acfb-holder li.friend-tab {
   background-color: transparent;
   border: none;
@@ -690,7 +698,11 @@ body.bp-user.messages #buddypress #send_message_form.standard-form textarea {
 
 body.bp-user.messages #buddypress #send_message_form.standard-form label {
   margin-bottom: 0;
-  line-height: 1.5;
+  line-height: 1.2;
+}
+
+body.bp-user.messages #buddypress #send_message_form.standard-form label[for='subject'] {
+  margin-top: 50px;
 }
 
 body.bp-user.messages #buddypress #send_message_form.standard-form label[for='send-to-input'] {
@@ -992,6 +1004,11 @@ body.bp-user.messages #buddypress div#message-thread div.message-options {
   width: 100%;
 }
 
+#send_message_form ul.acfb-holder li {
+  float: none;
+  margin: 0 0 20px;
+}
+
 ul.acfb-holder li.friend-tab {
   margin-top: 7px;
 }
@@ -1000,34 +1017,6 @@ ul.acfb-holder li.friend-tab {
   margin-bottom: 60px;
   padding-bottom: 10px;
   padding-top: 10px;
-}
-
-#send_message_form ul.acfb-holder li {
-  float: none;
-  margin: 0 0 20px;
-}
-
-#send_message_form ul.acfb-holder li span > .avatar {
-  border-radius: 50%;
-}
-
-@media screen and (max-width: 1024px) {
-  #buddypress form#send_message_form ul li.friend-tab {
-    margin-bottom: 10px;
-    padding: 7px 15px;
-    width: auto;
-  }
-  #buddypress form#send_message_form li.friend-tab a img, #buddypress form#send_message_form li.friend-tab span img {
-    margin-right: 5px;
-    margin-top: 3px;
-  }
-  #buddypress form#send_message_form li.friend-tab a {
-    padding: 2px 0 0 5px;
-    position: relative;
-  }
-  #buddypress div#message {
-    margin: 15px;
-  }
 }
 
 #message-subject {
@@ -1143,8 +1132,7 @@ body #buddypress table#message-threads tr td:first-child {
   content: "\f155";
 }
 
-.message-action-star span.icon:before,
-.message-action-unstar span.icon:before {
+.message-action-star span.icon:before, .message-action-unstar span.icon:before {
   font-family: dashicons;
   font-size: 16px;
 }
@@ -1157,8 +1145,7 @@ body #buddypress table#message-threads tr td:first-child {
           box-shadow: none;
 }
 
-.thread-checkbox .bp-screen-reader-text,
-#buddypress div.message-search label {
+.thread-checkbox .bp-screen-reader-text, #buddypress div.message-search label {
   display: none;
 }
 
