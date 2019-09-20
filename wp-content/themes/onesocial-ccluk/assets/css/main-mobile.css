@@ -429,6 +429,7 @@ body .buddyboss-select {
   position: absolute;
   left: 0;
   top: 0;
+  z-index: 5;
 }
 
 .buddyboss-select-inner span {
@@ -3332,4 +3333,3 @@ MAXIMUM width of 320 pixels (small phones)
     margin-top: 15px;
   }
 }
-/*# sourceMappingURL=main-mobile.css.map */

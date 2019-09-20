@@ -2024,8 +2024,24 @@ div#sitewide-notice div#message.error p {
     }
     &.notifications {
       clear: both;
-      tr th.title {
-        width: 50%;
+      tr th {
+        vertical-align: top;
+        &.title {
+          width: 50%;
+        }
+      }
+      th.bulk-select-all {
+        position: relative;
+        input[type="checkbox"] {
+          position: absolute;
+        }
+      }
+      td.bulk-select-check {
+        input[type="checkbox"] {
+          position: absolute;
+          top: 0;
+          left: -21px;
+        }
       }
     }
   }
@@ -2210,6 +2226,7 @@ label[for='select-all-notifications'] {
 #select-all-notifications {
   float: left;
   margin-top: 4px;
+  margin-left: -11px;
   + strong {
     float: left;
     margin-left: 0;
@@ -3583,11 +3600,16 @@ body:not(.group-members) #buddypress div {
       display: inline-block;
     }
   }
-  .notifications-options-nav .bp-screen-reader-text, .messages-options-nav .bp-screen-reader-text {
-    display: none;
-  }
-  .notifications-options-nav .buddyboss-select, .messages-options-nav .buddyboss-select {
-    float: left;
+  .notifications-options-nav, 
+  .messages-options-nav {
+    .bp-screen-reader-text {
+      display: none;
+    }
+    .buddyboss-select {
+      float: left;
+      min-width: 150px;
+      text-align: right;
+    }
   }
   .notifications-options-nav #notification-bulk-manage {
     float: left;

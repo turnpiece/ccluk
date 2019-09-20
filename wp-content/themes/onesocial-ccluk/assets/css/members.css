@@ -3232,8 +3232,26 @@ div#sitewide-notice div#message.error p {
   clear: both;
 }
 
+#buddypress table.notifications tr th {
+  vertical-align: top;
+}
+
 #buddypress table.notifications tr th.title {
   width: 50%;
+}
+
+#buddypress table.notifications th.bulk-select-all {
+  position: relative;
+}
+
+#buddypress table.notifications th.bulk-select-all input[type="checkbox"] {
+  position: absolute;
+}
+
+#buddypress table.notifications td.bulk-select-check input[type="checkbox"] {
+  position: absolute;
+  top: 0;
+  left: -21px;
 }
 
 #buddypress #groups-notification-settings {
@@ -3426,6 +3444,7 @@ label[for='select-all-notifications'] {
 #select-all-notifications {
   float: left;
   margin-top: 4px;
+  margin-left: -11px;
 }
 
 #select-all-notifications + strong {
@@ -4750,12 +4769,16 @@ body:not(.group-members) #buddypress div:not(#item-nav):not(#mobile-item-nav) > 
   display: inline-block;
 }
 
-#buddypress .notifications-options-nav .bp-screen-reader-text, #buddypress .messages-options-nav .bp-screen-reader-text {
+#buddypress .notifications-options-nav .bp-screen-reader-text,
+#buddypress .messages-options-nav .bp-screen-reader-text {
   display: none;
 }
 
-#buddypress .notifications-options-nav .buddyboss-select, #buddypress .messages-options-nav .buddyboss-select {
+#buddypress .notifications-options-nav .buddyboss-select,
+#buddypress .messages-options-nav .buddyboss-select {
   float: left;
+  min-width: 150px;
+  text-align: right;
 }
 
 #buddypress .notifications-options-nav #notification-bulk-manage {
