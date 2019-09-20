@@ -2772,38 +2772,48 @@ body.activity-permalink #buddypress ul.item-list {
 9.5.1 - Profile Settins Page
 --------------------------------------------------------------*/
 
-.settings.bp-user .site-content {
-  text-align: center;
-}
-
 #wpadminbar {
   text-align: left;
 }
 
-.settings.bp-user {
-  #buddypress div {
-    &#item-posts,
-    &#item-body {
-      width: 100%;
+body.buddypress {
+  &.settings.bp-user {
+    .site-content {
+      text-align: center;
     }
-  }
-  #settings-form {
-    text-align: left;
-    margin: 80px auto 70px;
-  }
-  #account-capabilities-form,
-  #account-delete-form {
-    margin: 80px auto 70px;
-    max-width: 360px;
-    text-align: left;
-  }
-  &.notifications #settings-form > p {
-    font-style: italic;
-    color: $gray;
-    padding-bottom: 25px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    /*margin-bottom: 43px;*/
-    font-size: $font-size-sm;
+    #buddypress {
+      div {
+        &#item-posts,
+        &#item-body {
+          width: 100%;
+        }
+      }
+      form#settings-form {
+        float: none;
+        text-align: left;
+        margin: 80px auto 70px;
+
+        input[type="password"] {
+          width: 100%;
+          display: block;
+          margin-bottom: 30px;
+        }
+      }
+    }
+    #account-capabilities-form,
+    #account-delete-form {
+      margin: 80px auto 70px;
+      max-width: 360px;
+      text-align: left;
+    }
+    &.notifications #settings-form > p {
+      font-style: italic;
+      color: $gray;
+      padding-bottom: 25px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      /*margin-bottom: 43px;*/
+      font-size: $font-size-sm;
+    }
   }
 }
 
