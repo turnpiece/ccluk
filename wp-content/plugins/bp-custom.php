@@ -33,8 +33,12 @@ class CCLUK_BP_Custom {
 		// sync BP/mailchimp user data
 		add_filter( 'mc4wp_user_merge_vars', array( $this, 'mailchimp_user_sync' ), 10, 2 );
 		add_filter( 'mailchimp_sync_user_data', array( $this, 'mailchimp_user_sync' ), 10, 2 );
+
 		// add BuddyPress menu items for logged in users
 		add_filter( 'wp_nav_menu_items', array( $this, 'buddypress_menu' ), 10, 2 );
+
+		// disable data export
+		add_filter( 'bp_settings_show_user_data_page', '__return_false' );
 	}
 
 	public function buddypress_menu( $items, $args ) {
