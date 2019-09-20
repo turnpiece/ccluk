@@ -45,38 +45,42 @@ body.bp-user.messages {
                   padding-right: 30px;
 
                   > div#subnav.item-list-tabs {
-                      > ul > li {
-                           > a {
-                              border: none;
-                              color: $blue;
-                              > span {
-                                  background: transparent;
-                                  font-size: 100%;
-                                  color: $blue;
-                                  padding: 0;
-                                  border: none;
-                                  float: right;
-                              }
-                              &:hover {
-                                  color: $green;
-                                  background: transparent;
-                                  > span {
-                                      color: $green;
-                                  }
-                              }
+                    > ul {
+                      display: block;
+                      > li {
+                          > a {
+                            display: block;
+                            border: none;
+                            color: $blue;
+                            > span {
+                                background: transparent;
+                                font-size: 100%;
+                                color: $blue;
+                                padding: 0;
+                                border: none;
+                                float: right;
+                            }
+                            &:hover {
+                                color: $green;
+                                background: transparent;
+                                > span {
+                                    color: $green;
+                                }
+                            }
+                        }
+                        &:hover,
+                        &.selected,
+                        &.current {
+                          > a {
+                            color: $green;
+                            background: transparent;
+                            > span {
+                                color: $green;
+                            }
                           }
-                          &:hover,
-                          &.selected,
-                          &.current {
-                              > a {
-                                  color: $green;
-                                  background: transparent;
-                                  > span {
-                                      color: $green;
-                                  }
-                              }
-                          }
+                        }
                       }
+                    }
                   }
               }
           }
@@ -165,7 +169,7 @@ body.bp-user.messages {
         }
       }
 
-    table#message-threads {
+      table#message-threads {
           tr td {
               vertical-align: top;
               border: none;
@@ -319,7 +323,7 @@ body.bp-user.messages {
         }
       }
 
-    th.thread-checkbox {
+      th.thread-checkbox {
           text-align: left;
       }
 
@@ -330,7 +334,7 @@ body.bp-user.messages {
           display: inline-block;
       }
 
-    div.messages-options-nav .buddyboss-select-inner {
+      div.messages-options-nav .buddyboss-select-inner {
         select {
                height: auto;
                   line-height: 1;
@@ -406,43 +410,50 @@ body.bp-user.messages {
           }
     }
 
-      @media screen and (max-width: 1024px) {
-          .messages-container {
-              #messages-layout,
-              #leftcolumn {
-                  float: none;
-                  width: 100%;
-                  margin-top: 30px;
-                  padding-right: 0;
-              }
-              table#message-threads {
-                  tr td {
-                      font-size: $font-size-tiny;
-                  }
-              }
-          }
-      }
+    @media screen and (max-width: 1024px) {
+        .messages-container {
+            #messages-layout,
+            #leftcolumn {
+                float: none;
+                width: 100%;
+                margin-top: 30px;
+                padding-right: 0;
+            }
+            table#message-threads {
+                tr td {
+                    font-size: $font-size-tiny;
+                }
+            }
+        }
+    }
 
-      @media screen and (max-width: 768px) {
-          #message-threads .thread-from {
-            .table-cell {
+    @media screen and (max-width: 768px) {
+        #message-threads .thread-from {
+          .table-cell {
+          width: 100%;
+          display: block;
+          text-align: center;
+          &:first-child {
             width: 100%;
             display: block;
             text-align: center;
-            &:first-child {
-              width: 100%;
-              display: block;
-              text-align: center;
-            }
-            }
-            img {
-                margin: 0 0 10px 0;
-            }
           }
-          .item-header-mobile {
-              margin-top: 40px;
           }
-      }
+          img {
+              margin: 0 0 10px 0;
+          }
+        }
+        .item-header-mobile {
+            margin-top: 40px;
+        }
+        .messages-container {
+          div#subnav.item-list-tabs > ul > li > a > span {
+            position: absolute;
+            top: -10px;
+            right: -5px;
+          }
+        }
+    }
   }
 }
 
