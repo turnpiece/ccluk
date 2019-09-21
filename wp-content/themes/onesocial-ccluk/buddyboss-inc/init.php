@@ -135,12 +135,12 @@ Class BuddyBoss_Theme {
 		// Theme setup
 		require_once( $this->inc_dir . '/theme-functions.php' );
 		require_once( $this->inc_dir . '/extra-functions.php' );
-
+/*
 		if ( class_exists( 'WPBakeryVisualComposerAbstract' ) ) {
 			// VC setup
 			require_once( $this->inc_dir . '/vc-functions.php' );
 		}
-
+*/
 		// Ajax file
 		require_once( $this->inc_dir . '/ajax-load-posts.php' );
 
@@ -148,7 +148,7 @@ Class BuddyBoss_Theme {
 		if ( ! function_exists( 'buddyboss_sap' ) ) {
 			require_once( $this->inc_dir . '/recommend-posts.php' );
 		}
-
+/*
 		// Add Redux Framework
 		if ( $this->backend_should_load() ) {
 			require_once( $this->inc_dir . '/buddyboss-framework/admin-init.php' );
@@ -157,7 +157,7 @@ Class BuddyBoss_Theme {
         if(!is_admin()) {
         	add_action( 'wp_head', array( $this, 'output_typography_css' ), 150 );
         }
-
+*/
 		// Option settings
 		require_once( $this->inc_dir . '/buddyboss-framework/options/setting-options.php' );
 
@@ -177,10 +177,10 @@ Class BuddyBoss_Theme {
 		require_once( $this->inc_dir . "/popup/user_email_verify.php" );
 		require_once( $this->inc_dir . "/popup/ajax_login.php" );
 		require_once( $this->inc_dir . "/popup/ajax_register.php" );
-
+/*
 		// Debug functions
 		require_once( $this->inc_dir . '/debug.php' );
-
+*/
 		// BuddyPress Modules
 		if ( class_exists( 'BP_Component' ) ) {
 			// Widgets
@@ -192,10 +192,11 @@ Class BuddyBoss_Theme {
 
 		//Cache update hook
 		require_once( $this->inc_dir . '/cache-update-hook.php' );
-
+/*
 		// Allow automatic updates via the WordPress dashboard
 		require_once( $this->inc_dir . '/buddyboss-theme-updater.php' );
 		//new buddyboss_updater_theme( 'http://update.buddyboss.com/theme', basename( get_template_directory() ), 170 );
+*/
 	}
 
 	function backend_should_load() {
@@ -216,7 +217,7 @@ Class BuddyBoss_Theme {
     /**
      * Output the theme typography css
      *
-     */
+     *
     public function output_typography_css() {
 
         $onesocial_typography = get_transient("onesocial_typography");
@@ -245,7 +246,7 @@ Class BuddyBoss_Theme {
         echo '<style type="text/css" title="dynamic-css" class="options-output">' . $outputCSS . '</style>';
 
     }
-
+	*/
 	/**
 	 * Actions and filters
 	 */

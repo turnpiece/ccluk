@@ -594,207 +594,7 @@ if ( !class_exists( 'onesocial_Redux_Framework_config' ) ) {
 					)
 				)
 			);
-/*
-			$font_options = array(
-				array(
-					'id'			 => 'boss_site_title_font_family',
-					'type'			 => 'typography',
-					'title'			 => __( 'Site Title', 'onesocial' ),
-					'subtitle'		 => __( 'Specify the site title properties.', 'onesocial' ),
-					'google'		 => true,
-					'line-height'	 => false,
-					'text-align'	 => false,
-					'subsets'		 => true,
-					'color'			 => false,
-					'default'		 => array(
-						'font-size'		 => '28px',
-						'google'		 => 'true',
-						'font-family'	 => 'Merriweather',
-						'font-weight'	 => '900',
-					),
-					'output'		 => array( '.site-header .site-title' ),
-				),
-				array(
-					'id'			 => 'boss_body_font_family',
-					'type'			 => 'typography',
-					'title'			 => __( 'Body Font', 'onesocial' ),
-					'subtitle'		 => __( 'Specify the body font properties.', 'onesocial' ),
-					'google'		 => true,
-					'line-height'	 => false,
-					'text-align'	 => false,
-					'subsets'		 => true,
-					'color'			 => false,
-					'default'		 => array(
-						'font-size'		 => '14px',
-						'font-family'	 => 'Lato',
-						'font-weight'	 => '400',
-					),
-					'output'		 => array( 'html, #profile-nav span, #wp-admin-bar-shortcode-secondary .alert, .header-notifications a.notification-link span, .site-header #wp-admin-bar-shortcode-secondary .alert, .header-notifications a.notification-link span, .entry-meta .comments-link a, .entry-meta, .activity, .item-list-tabs, #whats-new-options, #item-header-content, #buddypress div#message, #buddypress ul.item-list li div.item-desc, .generic-button, .bb-meta, #item-photos, .forum-titles, .sap-container, .bb-search-forums-label, .footer-style-2 .footer-inner-top, .footer-style-2 .footer-widget a' ),
-				),
-				array(
-					'id'			 => 'boss_h1_font_options',
-					'type'			 => 'typography',
-					'title'			 => __( 'H1 Font', 'onesocial' ),
-					'subtitle'		 => __( 'Specify the H1 tag font properties.', 'onesocial' ),
-					'google'		 => true,
-					'font-size'		 => true,
-					'line-height'	 => false,
-					'text-align'	 => false,
-					'subsets'		 => true,
-					'color'			 => false,
-					'default'		 => array(
-						'font-family'	 => 'Merriweather',
-						'font-size'		 => '36px',
-						'font-weight'	 => '700',
-					),
-					'output'		 => array( 'h1' ),
-				),
-				array(
-					'id'			 => 'boss_h2_font_options',
-					'type'			 => 'typography',
-					'title'			 => __( 'H2 Font', 'onesocial' ),
-					'subtitle'		 => __( 'Specify the H2 tag font properties.', 'onesocial' ),
-					'google'		 => true,
-					'font-size'		 => true,
-					'line-height'	 => false,
-					'text-align'	 => false,
-					'subsets'		 => true,
-					'color'			 => false,
-					'default'		 => array(
-						'font-family'	 => 'Merriweather',
-						'font-size'		 => '30px',
-						'font-weight'	 => '700',
-					),
-					'output'		 => array( 'h2, .sap-editor-area-wrapper .sap-editable-title' ),
-				),
-				array(
-					'id'			 => 'boss_h3_font_options',
-					'type'			 => 'typography',
-					'title'			 => __( 'H3 Font', 'onesocial' ),
-					'subtitle'		 => __( 'Specify the H3 tag font properties.', 'onesocial' ),
-					'google'		 => true,
-					'font-size'		 => true,
-					'line-height'	 => false,
-					'text-align'	 => false,
-					'subsets'		 => true,
-					'color'			 => false,
-					'default'		 => array(
-						'font-family'	 => 'Merriweather',
-						'font-size'		 => '24px',
-						'font-weight'	 => '700',
-					),
-					'output'		 => array( 'h3' ),
-				),
-				array(
-					'id'			 => 'boss_h4_font_options',
-					'type'			 => 'typography',
-					'title'			 => __( 'H4 Font', 'onesocial' ),
-					'subtitle'		 => __( 'Specify the H4 tag font properties.', 'onesocial' ),
-					'google'		 => true,
-					'font-size'		 => true,
-					'line-height'	 => false,
-					'text-align'	 => false,
-					'subsets'		 => true,
-					'color'			 => false,
-					'default'		 => array(
-						'font-family'	 => 'Merriweather',
-						'font-size'		 => '18px',
-						'font-weight'	 => '700',
-					),
-					'output'		 => array( 'h4' ),
-				),
-				array(
-					'id'			 => 'boss_h5_font_options',
-					'type'			 => 'typography',
-					'title'			 => __( 'H5 Font', 'onesocial' ),
-					'subtitle'		 => __( 'Specify the H5 tag font properties.', 'onesocial' ),
-					'google'		 => true,
-					'font-size'		 => true,
-					'line-height'	 => false,
-					'text-align'	 => false,
-					'subsets'		 => true,
-					'color'			 => false,
-					'default'		 => array(
-						'font-family'	 => 'Merriweather',
-						'font-size'		 => '14px',
-						'font-weight'	 => '700',
-					),
-					'output'		 => array( 'h5' ),
-				),
-				array(
-					'id'			 => 'boss_h6_font_options',
-					'type'			 => 'typography',
-					'title'			 => __( 'H6 Font', 'onesocial' ),
-					'subtitle'		 => __( 'Specify the H6 tag font properties.', 'onesocial' ),
-					'google'		 => true,
-					'font-size'		 => true,
-					'line-height'	 => false,
-					'text-align'	 => false,
-					'subsets'		 => true,
-					'color'			 => false,
-					'default'		 => array(
-						'font-family'	 => 'Merriweather',
-						'font-size'		 => '12px',
-						'font-weight'	 => '700',
-					),
-					'output'		 => array( 'h6' ),
-				),
-				array(
-					'id'			 => 'boss_additional_title_options',
-					'type'			 => 'typography',
-					'title'			 => __( 'Titles', 'onesocial' ),
-					'subtitle'		 => __( 'Specify the members/groups title font properties.', 'onesocial' ),
-					'google'		 => true,
-					'font-size'		 => true,
-					'line-height'	 => false,
-					'text-align'	 => false,
-					'subsets'		 => true,
-					'color'			 => false,
-					'default'		 => array(
-						'font-family'	 => 'Merriweather',
-						'font-size'		 => '20px',
-						'font-weight'	 => '700',
-					),
-					'output'		 => array( '#buddypress .dir-list ul.item-list .item-title, .post-author-info .author-name a, div.bbp-forum-title, .bb-group-title' ),
-				),
-				array(
-					'id'			 => 'boss_excerpt_content_font',
-					'type'			 => 'typography',
-					'title'			 => __( 'Excerpt Content', 'onesocial' ),
-					'subtitle'		 => __( 'Specify the post excerpt font properties.', 'onesocial' ),
-					'google'		 => true,
-					'font-size'		 => true,
-					'line-height'	 => false,
-					'text-align'	 => false,
-					'subsets'		 => true,
-					'color'			 => false,
-					'default'		 => array(
-						'font-family'	 => 'Georgia, serif',
-						'font-size'		 => '18px',
-						'font-weight'	 => '400',
-					),
-					'output'		 => array( '.single-post .entry-content, .archive .entry-content, .default-page .entry-content, .entry-summary, .comment-content, #respond form textarea, .bb-comment-author' ),
-				),
-				array(
-					'id'			 => 'boss_create_group_font_family',
-					'type'			 => 'typography',
-					'title'			 => __( 'Create Group Numbers', 'onesocial' ),
-					'subtitle'		 => __( 'Specify the create group numbers font properties.', 'onesocial' ),
-					'google'		 => true,
-					'line-height'	 => false,
-					'text-align'	 => false,
-					'subsets'		 => true,
-					'color'			 => false,
-					'default'		 => array(
-						'font-size'		 => '50px',
-						'font-family'	 => 'Lato',
-						'font-weight'	 => '300',
-					),
-					'output'		 => array( '#buddypress div#group-create-tabs ul li:before' ),
-				),
 
-			);
-*/
 			// Array of social options
 			$social_options = array(
 				'facebook'		 => '',
@@ -885,7 +685,7 @@ if ( !class_exists( 'onesocial_Redux_Framework_config' ) ) {
 			if ( get_option( 'users_can_register' ) ) {
 				$login_description .= __( ' or create an account', 'onesocial' );
 			}
-
+/*
 			// Login/Register
 			$this->sections[] = array(
 				'title'		 => __( 'Register/Login', 'onesocial' ),
@@ -1024,7 +824,7 @@ if ( !class_exists( 'onesocial_Redux_Framework_config' ) ) {
 						'default'		 => array(
 							'font-size'		 => '28px',
 							'google'		 => 'true',
-							'font-family'	 => 'Merriweather',
+							'font-family'	 => 'Open Sans',
 							'font-weight'	 => '900',
 						)
 					),
@@ -1046,7 +846,7 @@ if ( !class_exists( 'onesocial_Redux_Framework_config' ) ) {
 					),
 				)
 			);
-
+*/
 			// Codes Settings
 			$this->sections[] = array(
 				'title'		 => __( 'Custom Codes', 'onesocial' ),
@@ -1275,7 +1075,7 @@ if ( !class_exists( 'onesocial_Redux_Framework_config' ) ) {
 				// Please visit: https://developers.google.com/fonts/docs/developer_api#Auth
 				'google_api_key'	 => 'AIzaSyARjtGd3aZFBZ_8kJty6BwgRsCurPFvFeg', // https://console.developers.google.com/project/ Must be defined to add google fonts to the typography module
 				'async_typography'	 => false, // Use a asynchronous font on the front end or font string
-				//'disable_google_fonts_link' => true,                    // Disable this in case you want to create your own google fonts loader
+				'disable_google_fonts_link' => true,                    // Disable this in case you want to create your own google fonts loader
 				'admin_bar'			 => false, // Show the panel pages on the admin bar
 				'global_variable'	 => '', // Set a different name for your global variable other than the opt_name
 				'dev_mode'			 => false, // Show the time the page took to load, etc

@@ -2,7 +2,7 @@
 
 /**
  * Register BuddyBoss Menu Page
- */
+ *
 if ( !function_exists( 'register_buddyboss_menu_page' ) ) {
 
 	function register_buddyboss_menu_page() {
@@ -15,7 +15,7 @@ if ( !function_exists( 'register_buddyboss_menu_page' ) ) {
 
 	add_action( 'admin_menu', 'register_buddyboss_menu_page' );
 }
-
+*/
 /**
  * Load extensions - MUST be loaded before your options are set
  */
