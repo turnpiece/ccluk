@@ -867,7 +867,6 @@ body.bp-user.messages #buddypress table#message-threads th {
   font-size: 14px;
   text-transform: uppercase;
   color: #54ae68;
-  /*border-bottom: 2px solid #e1e1e1;*/
   border-bottom: 0;
 }
 
@@ -3662,6 +3661,15 @@ label[for='select-all-notifications'] {
 
 #send-private-message.generic-button a:after {
   display: none;
+}
+
+.bp-legacy div#item-body {
+  clear: left;
+  overflow: hidden;
+  background-color: #fff;
+  padding: 15px 0;
+  overflow: hidden;
+  border-bottom: 1px solid #aaa;
 }
 
 /*--------------------------------------------------------------
@@ -7599,7 +7607,7 @@ body.bbpress #bbp-search-index-form button#bbp_search_submit {
   }
   body.buddypress #buddypress form#group-settings-form ul.item-list li {
     margin-bottom: 10px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #aaa;
     padding: 10px 5% 10px 5%;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -8948,7 +8956,7 @@ body.buddypress.is-mobile #buddypress form#group-settings-form ul.item-list {
 
 body.buddypress.is-mobile #buddypress form#group-settings-form ul.item-list li {
   margin-bottom: 10px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #aaa;
   padding: 10px 5% 10px 5%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -11383,7 +11391,7 @@ body.bbp-search #bbp-search-index-form {
     padding-left: 0;
   }
   .bb-inbox #buddypress table#message-threads tbody tr {
-    border-bottom: 2px solid #e1e1e1;
+    border-bottom: 2px solid #aaa;
     padding-bottom: 30px;
     display: block;
     overflow: hidden;

@@ -1717,6 +1717,13 @@ Media queries
     width: 100px;
     margin-left: -50px;
   }
+  body.archive #primary .archive-header {
+    margin: 24px 0px;
+    margin: 2.4rem 0rem;
+  }
+  body.archive #primary .archive-header h1.entry-title {
+    font-size: 48px;
+  }
   .single .entry-header h1,
   .single-post .entry-header h1 {
     font-size: 36px;
