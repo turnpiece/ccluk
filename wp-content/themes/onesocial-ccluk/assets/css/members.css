@@ -4062,23 +4062,6 @@ body.buddypress.settings.bp-user.notifications #settings-form > p {
   font-size: 15px;
 }
 
-#pass-strength-result {
-  margin-top: -25px;
-  float: right;
-}
-
-#pass-strength-result.bad, #pass-strength-result.short {
-  color: #f25d65;
-}
-
-#pass-strength-result.good {
-  color: #f8d750;
-}
-
-#pass-strength-result.strong {
-  color: #2ac987;
-}
-
 #buddypress .current-password-wrapper label {
   float: left;
 }

@@ -2834,21 +2834,6 @@ body.buddypress {
   }
 }
 
-#pass-strength-result {
-    margin-top: -25px;
-    float: right;
-
-  &.bad, &.short {
-    color: #f25d65;
-  }
-  &.good {
-    color: #f8d750;
-  }
-  &.strong {
-    color: #2ac987;
-  }
-}
-
 #buddypress .current-password-wrapper label {
   float: left;
 }

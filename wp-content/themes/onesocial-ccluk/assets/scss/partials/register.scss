@@ -47,7 +47,6 @@ div#register-page {
     border: 0;
     float: none !important;
   }
-
   .security-question-section {
     text-align: center;
     width: 200px;
@@ -67,13 +66,16 @@ div#register-page {
         margin-right: 20px;
     }
   }
+  .manual-registration {
+    margin-top: 40px;
+  }
 }
 
 #buddypress {
     .standard-form {
         #signup_form {
             div div.error {
-              background-color: #e41717;
+              background-color: $red;
               border-radius: 3px;
               color: $white;
               margin: 0 0 10px 0;
@@ -89,7 +91,7 @@ div#register-page {
         }
 
           p.description {
-            color: #888;
+            color: $gray;
             font-size: 80%;
             margin: 5px 0;
           }
@@ -103,7 +105,7 @@ div#register-page {
         }
     }
     div#register-page .register-section h4 {
-      color: #000;
+      color: $black;
       margin-bottom: 40px;
       margin-top: 10px;
       padding-bottom: 15px;
@@ -156,9 +158,12 @@ body.register {
     }
 
     div#register-page {
+      text-align: left;
+
       p {
         margin: 10px auto 24px;
         max-width: 400px;
+        font-size: $font-size-std;
       }
       .register-section p,
       .security-question-section p {
@@ -181,7 +186,6 @@ body.register {
         clear: both;
         border: 0;
       }
-
       .security-question-section {
         width: auto !important;
         float: none !important;
@@ -203,125 +207,120 @@ body.register {
             margin-right: 20px;
         }
       }
-    }
-
-    #buddypress div#register-page .register-section h4 {
-      margin-bottom: 40px;
-      margin-top: 10px;
-      padding-bottom: 15px;
-    }
-
-    div#register-page #basic-details-section input {
-      margin-bottom: 30px;
-    }
-
-    #buddypress div#register-page #basic-details-section input {
-      &.password-entry,
-      &.password-entry-confirm {
-        width: 100%;
+      #basic-details-section input {
+        margin-bottom: 30px;
       }
+      .wp-social-login-widget {
+          text-align: center;
+      }
+      .register-section {
+
+          label, legend {
+              @include form-label();
+          }
+
+          h2 {
+              color: $green;
+              font-weight: normal;
+          }
+
+          box-shadow: none;
+
+          &#basic-details-section {
+              input {
+                  padding: 12px;
+                  height: auto;
+              }
+          }
+
+          &#profile-details-section {
+              .editfield {
+                  padding: 0;
+
+                  fieldset {
+                      border: none;
+                      margin: 0;
+                      padding: 0;
+
+                      legend {
+                          margin-bottom: 10px;
+                          line-height: 1;
+                      }
+                  }
+              }
+          }
+      }
+
+      /* newsletter sighup checkbox */
+      .mc4wp-checkbox {
+
+          text-align: center;
+          label {
+              strong {
+                  margin-right: 12px;
+              }
+              span {
+                  color: $green;
+                  font-size: 18px;
+                  line-height: 1.5;
+              }
+          }
+      }
+
+      .privacy-text {
+          text-align: center;
+          font-size: $font-size-sm;
+      }
+
+      .submit {
+          margin: 10px auto 24px;
+          max-width: 400px;
+          text-align: center;
+      }
+
+      #signup_form.standard-form div.submit {
+        float: none !important;
+        margin: 0 auto;
+        input {
+          margin: 0;
+          padding: 17px 22px;
+          font-size: 20px;
+        }
+      }
+
+      #pass-strength-result {
+        text-align: right;
+      }      
     }
 
-    div#register-page #signup_form.standard-form div.submit {
-      float: none !important;
-      margin: 0 auto;
-      input {
-        margin: 0;
-        padding: 17px 22px;
-        font-size: 20px;
+    #buddypress {
+      div#register-page {
+        .register-section h4 {
+          margin-bottom: 40px;
+          margin-top: 10px;
+          padding-bottom: 15px;
+        }
+        #basic-details-section input {
+          &.password-entry,
+          &.password-entry-confirm {
+            width: 100%;
+          }
+        }
       }
     }
 
     .popup-content {
     	background: rgba( 255, 255, 255, 0.8 );
-    }
 
-    .popup-content input:not([type="checkbox"]):not([type="radio"]):not([type="button"]),
-    .popup-content .input:not([type="checkbox"]):not([type="radio"]):not([type="button"]) {
-    	font-size: 18px;
+      input:not([type="checkbox"]):not([type="radio"]):not([type="button"]),
+      .input:not([type="checkbox"]):not([type="radio"]):not([type="button"]) {
+        font-size: $font-size-min;
+      }
     }
 
     .entry-header {
         h1.entry-title {
             color: $blue;
-        }
-    }
-
-    div#register-page {
-
-        text-align: left;
-
-        p {
-            font-size: $font-size-std;
-        }
-
-        .wp-social-login-widget {
-            text-align: center;
-        }
-
-        .register-section {
-
-            label, legend {
-                @include form-label();
-            }
-
-            h2 {
-                color: $green;
-                font-weight: normal;
-            }
-
-            box-shadow: none;
-
-            &#basic-details-section {
-                input {
-                    padding: 12px;
-                    height: auto;
-                }
-            }
-
-            &#profile-details-section {
-                .editfield {
-                    padding: 0;
-
-                    fieldset {
-                        border: none;
-                        margin: 0;
-                        padding: 0;
-
-                        legend {
-                            margin-bottom: 10px;
-                            line-height: 1;
-                        }
-                    }
-                }
-            }
-        }
-
-        /* newsletter sighup checkbox */
-        .mc4wp-checkbox {
-
-            text-align: center;
-            label {
-                strong {
-                    margin-right: 12px;
-                }
-                span {
-                    color: $green;
-                    font-size: 18px;
-                    line-height: 1.5;
-                }
-            }
-        }
-
-        .privacy-text {
-            text-align: center;
-            font-size: $font-size-sm;
-        }
-
-        .submit {
-            margin: 10px auto 24px;
-            max-width: 400px;
-            text-align: center;
         }
     }
 }
