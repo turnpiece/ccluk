@@ -1915,11 +1915,11 @@ body, .left-btn, .right-btn {
 --------------------------------------------------------------*/
 .left-btn {
   position: absolute;
-  height: 55px;
-  width: 55px;
+  height: 35px;
+  width: 35px;
   padding: 0;
-  top: 0;
-  left: 0;
+  top: 5px;
+  left: 10px;
   cursor: pointer;
   display: block;
   -webkit-tap-highlight-color: transparent;
@@ -2842,14 +2842,6 @@ Mobile Header
   font-size: 21px;
 }
 
-#mobile-header .left-btn {
-  left: 21px;
-}
-
-#mobile-header .right-btn {
-  right: 21px;
-}
-
 #mobile-header #mobile-logo img {
   max-height: 70px;
   max-width: 300px;
@@ -3258,7 +3250,12 @@ MAXIMUM width of 480 pixels (phones)
     max-width: 200px;
     margin: 10px auto;
   }
+  body #mobile-header .left-btn {
+    height: 35px;
+    width: 35px;
+  }
   body #mobile-header .right-btn:before {
+    line-height: 35px;
     font-size: 15px;
   }
   body .bb-slider-container {

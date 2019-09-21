@@ -1242,7 +1242,7 @@ body.registration .site {
   text-align: center;
   -webkit-box-shadow: none;
           box-shadow: none;
-  padding: 70px 0;
+  padding: 10px 0 70px;
 }
 
 body.registration .wp-social-login-connect-with {

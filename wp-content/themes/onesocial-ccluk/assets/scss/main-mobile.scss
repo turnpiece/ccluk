@@ -1986,11 +1986,11 @@ body, .left-btn, .right-btn {
 
 .left-btn {
   position: absolute;
-  height: 55px;
-  width: 55px;
+  height: 35px;
+  width: 35px;
   padding: 0;
-  top: 0;
-  left: 0;
+  top: 5px;
+  left: 10px;
   cursor: pointer;
   display: block;
   -webkit-tap-highlight-color: transparent;
