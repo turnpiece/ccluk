@@ -1678,6 +1678,17 @@ img.wp-smiley, .rsswidget img {
 --------------------------------------------------------------*/
 
 body {
+  &.no-adminbar,
+  &:not(.logged-in).no-adminbar, 
+  &.logged-in.no-adminbar {
+    #wpadminbar {
+      display: none !important;
+    }
+  }
+  &:not(.logged-in):not(.no-adminbar).is-desktop.admin-bar, 
+  &.logged-in.is-desktop.admin-bar:not(.no-adminbar) {
+    margin-top: 32px !important;
+  }
   &.logged-in.is-mobile.admin-bar {
     margin-top: 0 !important;
   }
@@ -2304,7 +2315,7 @@ div {
     width: 100%;
   }
     &.footer-inner-bottom .footer-inner {
-        @include display-flex( center, space-between );
+        @include display-flex-box( center, space-between );
         -webkit-box-pack: justify;
         -ms-flex-pack: justify;
     }
@@ -4312,7 +4323,7 @@ select[multiple="multiple"] {
       margin-bottom: 0;
     }
     p.description {
-        font-size: $font-size-sm;
+      font-size: $font-size-sm;
     }
     .input-options {
         padding: 10px 0;
@@ -5137,7 +5148,7 @@ input#user_login {
   }
   .description {
     text-align: left;
-    font-size: 14px;
+    font-size: $font-size-sm;
     color: $dark;
     margin-top: -15px;
   }

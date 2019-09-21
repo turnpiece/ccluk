@@ -70,17 +70,6 @@ html.js {
   margin-top: 0 !important;
 }
 
-/*not logged*/
-
-body {
-  &:not(.logged-in).no-adminbar #wpadminbar, &.logged-in.no-adminbar #wpadminbar {
-    display: none !important;
-  }
-  &:not(.logged-in):not(.no-adminbar).is-desktop.admin-bar, &.logged-in.is-desktop.admin-bar:not(.no-adminbar) {
-    margin-top: 32px !important;
-  }
-}
-
 /*logged*/
 
 /*not logged*/
@@ -606,7 +595,6 @@ body {
 .site-header {
   background-color: $secondary_bg;
   position: relative;
-  /*border-bottom: 1px solid rgba(0, 0, 0, 0.1);*/
   &:after {
     background: rgba(0, 0, 0, 0.1);
     bottom: 0;

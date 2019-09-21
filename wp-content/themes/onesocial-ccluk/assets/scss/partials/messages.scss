@@ -35,7 +35,7 @@ body.bp-user.messages {
               width: 100%;
           }
           .messages-container {
-              @include display-flex( stretch, flex-start );
+              @include display-flex-box( stretch, flex-start );
               @include flex-row-wrap();
 
               #leftcolumn {
@@ -311,7 +311,6 @@ body.bp-user.messages {
           font-size: 14px;
           text-transform: uppercase;
           color: $green;
-          /*border-bottom: 2px solid #e1e1e1;*/
           border-bottom: 0;
         }
         tbody tr.read:first-child {

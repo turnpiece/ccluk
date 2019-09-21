@@ -18,7 +18,7 @@ body.page-template-homepage {
 			.section-content {
 				max-width: 1170px;
 				margin: 0 auto;
-				@include display-flex( flex-start );
+				@include display-flex-box( flex-start );
 
 				.list-item {
 					width: 300px;
@@ -245,7 +245,7 @@ body.page-template-homepage {
 					max-width: 580px;
 
 					article {
-						@include display-flex( flex-start );
+						@include display-flex-box( flex-start );
 						@include padding( 2, 0 );
 
 						.list-item {
@@ -322,7 +322,7 @@ body.page-template-homepage {
 					}
 
 					.ctf-tweets {
-						@include display-flex( center, space-evenly );
+						@include display-flex-box( center, space-evenly );
 						flex-direction: row column;
 						width: 100%;
 						padding: 30px 2%;

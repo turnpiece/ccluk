@@ -748,7 +748,7 @@ span.bbp-author-ip {
 }
 
 #bb-activity-stream {
-    @include display-flex( stretch, flex-start );
+    @include display-flex-box( stretch, flex-start );
     -webkit-flex-flow: row wrap;
     -ms-flex-flow: row wrap;
     flex-flow: row wrap;
