@@ -107,7 +107,7 @@
 }
 
 #content .boss-create-post-wrapper {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid $light;
   margin-bottom: 70px;
   min-height: 0;
 }
@@ -157,10 +157,6 @@
   }
 }
 
-.sap-editor-area-wrapper.sap-editor-area-wrapper .medium-editor-insert-plugin .medium-insert-buttons .medium-insert-buttons-show {
-  /*padding: 0 0 2px;*/
-}
-
 .boss-close-create-post {
   color: #9b9b9b;
   display: inline-block;
@@ -183,15 +179,15 @@
 }
 
 .formatted-box {
-  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 3px 0 $light;
+  border: 1px solid $light;
   margin-bottom: 24px;
   position: relative;
   background-color: $white;
 }
 
 .header-area:hover .formatted-box {
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 20px 0 $light;
 }
 
 .sap-blog-post-wrapper .header-area:hover .entry-post-thumbnail {

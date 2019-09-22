@@ -138,14 +138,15 @@ body:not(.single-post) footer.entry-meta {
 }
 
 /* Page Content */
-body:not(.buddypress) #content article, body.buddypress #content article.error404 {
+body:not(.buddypress) #content article,
+body.buddypress #content article.error404 {
   clear: left;
   overflow: hidden;
   background-color: #fff;
   padding: 15px 0;
   overflow: hidden;
   margin: 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #aaa;
 }
 
 .site-content nav.nav-single, .site-content #comments {
@@ -155,16 +156,7 @@ body:not(.buddypress) #content article, body.buddypress #content article.error40
   padding: 15px 0;
   overflow: hidden;
   margin: 0;
-  border-bottom: 1px solid #eee;
-}
-
-.bp-legacy div#item-body {
-  clear: left;
-  overflow: hidden;
-  background-color: #fff;
-  padding: 15px 0;
-  overflow: hidden;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #aaa;
 }
 
 .site-content #comments article.comment {
@@ -397,7 +389,7 @@ body .buddyboss-select {
   margin: 0 10px 10px 0;
   background-color: #fff;
   float: left;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid #aaa;
 }
 
 .buddyboss-select-inner:after {
@@ -544,7 +536,7 @@ div.footer-inner ul.footer-menu li {
 1.1.8 - Home Template
 ----------------------------------------------------------------*/
 .article-outher {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid #aaa;
   margin-bottom: 30px;
 }
 
@@ -638,7 +630,7 @@ body:not(.buddypress) #content article {
 }
 
 body #content article.boss-create-post-wrapper {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #aaa;
   margin-bottom: 20px;
   padding: 20px 0;
 }
@@ -1034,7 +1026,7 @@ body.activity-permalink #buddypress .activity-content .activity-inner, body.acti
 }
 
 #buddypress .activity-list .activity-content img.thumbnail {
-  border: 2px solid #eee;
+  border: 2px solid #aaa;
   float: left;
   margin: 0 10px 5px 0;
 }
@@ -1158,7 +1150,7 @@ form#whats-new-form.isCollapsed {
 }
 
 #buddypress ul#activity-stream li.activity-item div.activity-meta a:active {
-  background-color: #eee;
+  background-color: #aaa;
 }
 
 body.activity-permalink #buddypress ul#activity-stream {
@@ -1923,11 +1915,11 @@ body, .left-btn, .right-btn {
 --------------------------------------------------------------*/
 .left-btn {
   position: absolute;
-  height: 55px;
-  width: 55px;
+  height: 35px;
+  width: 35px;
   padding: 0;
-  top: 0;
-  left: 0;
+  top: 5px;
+  left: 10px;
   cursor: pointer;
   display: block;
   -webkit-tap-highlight-color: transparent;
@@ -2770,7 +2762,7 @@ Responsive media queries (mobile styles)
     display: none;
   }
   #header-aside-inner #all-notificatios + .header-button {
-    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    border-left: 1px solid #aaa;
   }
 }
 
@@ -2848,14 +2840,6 @@ Mobile Header
 #mobile-header .right-btn:before {
   color: #333;
   font-size: 21px;
-}
-
-#mobile-header .left-btn {
-  left: 21px;
-}
-
-#mobile-header .right-btn {
-  right: 21px;
 }
 
 #mobile-header #mobile-logo img {
@@ -3266,7 +3250,12 @@ MAXIMUM width of 480 pixels (phones)
     max-width: 200px;
     margin: 10px auto;
   }
+  body #mobile-header .left-btn {
+    height: 35px;
+    width: 35px;
+  }
   body #mobile-header .right-btn:before {
+    line-height: 35px;
     font-size: 15px;
   }
   body .bb-slider-container {

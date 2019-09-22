@@ -867,7 +867,6 @@ body.bp-user.messages #buddypress table#message-threads th {
   font-size: 14px;
   text-transform: uppercase;
   color: #54ae68;
-  /*border-bottom: 2px solid #e1e1e1;*/
   border-bottom: 0;
 }
 
@@ -3664,6 +3663,15 @@ label[for='select-all-notifications'] {
   display: none;
 }
 
+.bp-legacy div#item-body {
+  clear: left;
+  overflow: hidden;
+  background-color: #fff;
+  padding: 15px 0;
+  overflow: hidden;
+  border-bottom: 1px solid #aaa;
+}
+
 /*--------------------------------------------------------------
 9.3 - Profile
 --------------------------------------------------------------*/
@@ -4060,23 +4068,6 @@ body.buddypress.settings.bp-user.notifications #settings-form > p {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   /*margin-bottom: 43px;*/
   font-size: 15px;
-}
-
-#pass-strength-result {
-  margin-top: -25px;
-  float: right;
-}
-
-#pass-strength-result.bad, #pass-strength-result.short {
-  color: #f25d65;
-}
-
-#pass-strength-result.good {
-  color: #f8d750;
-}
-
-#pass-strength-result.strong {
-  color: #2ac987;
 }
 
 #buddypress .current-password-wrapper label {
@@ -7616,7 +7607,7 @@ body.bbpress #bbp-search-index-form button#bbp_search_submit {
   }
   body.buddypress #buddypress form#group-settings-form ul.item-list li {
     margin-bottom: 10px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #aaa;
     padding: 10px 5% 10px 5%;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -8965,7 +8956,7 @@ body.buddypress.is-mobile #buddypress form#group-settings-form ul.item-list {
 
 body.buddypress.is-mobile #buddypress form#group-settings-form ul.item-list li {
   margin-bottom: 10px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #aaa;
   padding: 10px 5% 10px 5%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -11400,7 +11391,7 @@ body.bbp-search #bbp-search-index-form {
     padding-left: 0;
   }
   .bb-inbox #buddypress table#message-threads tbody tr {
-    border-bottom: 2px solid #e1e1e1;
+    border-bottom: 2px solid #aaa;
     padding-bottom: 30px;
     display: block;
     overflow: hidden;

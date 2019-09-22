@@ -2436,6 +2436,15 @@ label[for='select-all-notifications'] {
   display: none;
 }
 
+.bp-legacy div#item-body {
+  clear: left;
+  overflow: hidden;
+  background-color: $white;
+  padding: 15px 0;
+  overflow: hidden;
+  border-bottom: 1px solid $light;
+}
+
 
 /*--------------------------------------------------------------
 9.3 - Profile
@@ -2614,7 +2623,7 @@ ul.horiz-gallery li img, .bp-user #main ul.horiz-gallery li img {
 }
 
 #main ul.horiz-gallery {
-    @include display-flex( center, initial );
+    @include display-flex-box( center, initial );
     @include flex-row-wrap();
     img {
         vertical-align: bottom;
@@ -2831,21 +2840,6 @@ body.buddypress {
       /*margin-bottom: 43px;*/
       font-size: $font-size-sm;
     }
-  }
-}
-
-#pass-strength-result {
-    margin-top: -25px;
-    float: right;
-
-  &.bad, &.short {
-    color: #f25d65;
-  }
-  &.good {
-    color: #f8d750;
-  }
-  &.strong {
-    color: #2ac987;
   }
 }
 
@@ -4721,7 +4715,7 @@ body.buddypress {
 	      margin-top: 40px;
 	    }
 	    .pagination-links {
-            @include display-flex();
+            @include display-flex-box();
             span {
 	            padding: 16px 18px;
             }
@@ -4870,7 +4864,7 @@ body.buddypress {
 	}
 
 	#buddypress #item-title-area {
-        @include display-flex( flex-end, space-between );
+        @include display-flex-box( flex-end, space-between );
 	    -webkit-box-align: end;
         -ms-flex-align: end;
         -webkit-box-pack: justify;
@@ -5117,9 +5111,9 @@ body.buddypress {
 			}
 		  }
 		  h5 span.small {
-			float: right;
-			font-size: 80%;
-			font-weight: 400;
+        float: right;
+        font-size: 80%;
+        font-weight: 400;
 		  }
 		}
 		div {
@@ -5370,7 +5364,7 @@ body.buddypress {
         &.settings {
             #buddypress {
                 #item-nav {
-                    @include display-flex();
+                    @include display-flex-box();
                     max-width: $content_w;
                     margin-left: auto;
                     margin-right: auto;

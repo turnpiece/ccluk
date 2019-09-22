@@ -64,15 +64,6 @@ html.js {
   margin-top: 0 !important;
 }
 
-/*not logged*/
-body:not(.logged-in).no-adminbar #wpadminbar, body.logged-in.no-adminbar #wpadminbar {
-  display: none !important;
-}
-
-body:not(.logged-in):not(.no-adminbar).is-desktop.admin-bar, body.logged-in.is-desktop.admin-bar:not(.no-adminbar) {
-  margin-top: 32px !important;
-}
-
 /*logged*/
 /*not logged*/
 /*logged*/
@@ -589,7 +580,6 @@ body.template-front-page .site-content, body.single-attachment .site-content, bo
 .site-header {
   background-color: #f9f9f9;
   position: relative;
-  /*border-bottom: 1px solid rgba(0, 0, 0, 0.1);*/
 }
 
 .site-header:after {
@@ -1726,6 +1716,13 @@ Media queries
   body.archive.post-type-archive-ccluk_news .post-author .entry-date time {
     width: 100px;
     margin-left: -50px;
+  }
+  body.archive #primary .archive-header {
+    margin: 24px 0px;
+    margin: 2.4rem 0rem;
+  }
+  body.archive #primary .archive-header h1.entry-title {
+    font-size: 48px;
   }
   .single .entry-header h1,
   .single-post .entry-header h1 {

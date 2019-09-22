@@ -63,7 +63,7 @@
 
 @mixin bp-item-list-tabs() {
 	ul {
-		@include display-flex();
+		@include display-flex-box();
     	li {
 	      	a {
 	        	font-size: $font-size-sm;
@@ -91,16 +91,20 @@
   	}
 }
 
-@mixin display-flex( $align: center, $justify: center ) {
-	display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
+@mixin display-flex-box( $align: center, $justify: center ) {
+  @include display-flex();
 	-webkit-flex-wrap: wrap;
 	-ms-flex-wrap: wrap;
 	flex-wrap: row wrap;
-  	@include align-items( $align );
-  	justify-content: $justify;
+  @include align-items( $align );
+  justify-content: $justify;
+}
+
+@mixin display-flex() {
+	display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 @mixin flex-row-wrap() {

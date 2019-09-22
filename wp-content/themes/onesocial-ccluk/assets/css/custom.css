@@ -21,6 +21,23 @@ textarea,
   padding: 0.6rem 1.2rem;
 }
 
+#pass-strength-result {
+  margin-top: -25px;
+  float: right;
+}
+
+#pass-strength-result.bad, #pass-strength-result.short {
+  color: #f25d65;
+}
+
+#pass-strength-result.good {
+  color: #f8d750;
+}
+
+#pass-strength-result.strong {
+  color: #2ac987;
+}
+
 h1, h2, h3, h4, h5, h6, ul, ol, dd, table, p, address, pre, hr, figure, video {
   margin-bottom: 16px;
 }
@@ -1225,7 +1242,7 @@ body.registration .site {
   text-align: center;
   -webkit-box-shadow: none;
           box-shadow: none;
-  padding: 70px 0;
+  padding: 10px 0 70px;
 }
 
 body.registration .wp-social-login-connect-with {
@@ -1288,8 +1305,12 @@ div#register-page .security-question-section input#bp-security-check {
   margin-right: 20px;
 }
 
+div#register-page .manual-registration {
+  margin-top: 40px;
+}
+
 #buddypress .standard-form #signup_form div div.error {
-  background-color: #e41717;
+  background-color: #e85c41;
   border-radius: 3px;
   color: #fff;
   margin: 0 0 10px 0;
@@ -1306,8 +1327,7 @@ div#register-page .security-question-section input#bp-security-check {
 }
 
 #buddypress .standard-form p.description {
-  color: #888;
-  font-size: 80%;
+  color: #838383;
   margin: 5px 0;
 }
 
@@ -1369,9 +1389,15 @@ body.register div#register-page .security-question-section {
   border: none;
 }
 
+body.register div#register-page {
+  text-align: left;
+  /* newsletter sighup checkbox */
+}
+
 body.register div#register-page p {
   margin: 10px auto 24px;
   max-width: 400px;
+  font-size: 21px;
 }
 
 body.register div#register-page .register-section p,
@@ -1420,51 +1446,8 @@ body.register div#register-page .security-question-section input#bp-security-che
   margin-right: 20px;
 }
 
-body.register #buddypress div#register-page .register-section h4 {
-  margin-bottom: 40px;
-  margin-top: 10px;
-  padding-bottom: 15px;
-}
-
 body.register div#register-page #basic-details-section input {
   margin-bottom: 30px;
-}
-
-body.register #buddypress div#register-page #basic-details-section input.password-entry, body.register #buddypress div#register-page #basic-details-section input.password-entry-confirm {
-  width: 100%;
-}
-
-body.register div#register-page #signup_form.standard-form div.submit {
-  float: none !important;
-  margin: 0 auto;
-}
-
-body.register div#register-page #signup_form.standard-form div.submit input {
-  margin: 0;
-  padding: 17px 22px;
-  font-size: 20px;
-}
-
-body.register .popup-content {
-  background: rgba(255, 255, 255, 0.8);
-}
-
-body.register .popup-content input:not([type="checkbox"]):not([type="radio"]):not([type="button"]),
-body.register .popup-content .input:not([type="checkbox"]):not([type="radio"]):not([type="button"]) {
-  font-size: 18px;
-}
-
-body.register .entry-header h1.entry-title {
-  color: #22a7f0;
-}
-
-body.register div#register-page {
-  text-align: left;
-  /* newsletter sighup checkbox */
-}
-
-body.register div#register-page p {
-  font-size: 21px;
 }
 
 body.register div#register-page .wp-social-login-widget {
@@ -1529,6 +1512,44 @@ body.register div#register-page .submit {
   margin: 10px auto 24px;
   max-width: 400px;
   text-align: center;
+}
+
+body.register div#register-page #signup_form.standard-form div.submit {
+  float: none !important;
+  margin: 0 auto;
+}
+
+body.register div#register-page #signup_form.standard-form div.submit input {
+  margin: 0;
+  padding: 17px 22px;
+  font-size: 20px;
+}
+
+body.register div#register-page #pass-strength-result {
+  text-align: right;
+}
+
+body.register #buddypress div#register-page .register-section h4 {
+  margin-bottom: 40px;
+  margin-top: 10px;
+  padding-bottom: 15px;
+}
+
+body.register #buddypress div#register-page #basic-details-section input.password-entry, body.register #buddypress div#register-page #basic-details-section input.password-entry-confirm {
+  width: 100%;
+}
+
+body.register .popup-content {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+body.register .popup-content input:not([type="checkbox"]):not([type="radio"]):not([type="button"]),
+body.register .popup-content .input:not([type="checkbox"]):not([type="radio"]):not([type="button"]) {
+  font-size: 18px;
+}
+
+body.register .entry-header h1.entry-title {
+  color: #22a7f0;
 }
 
 #findYourMP form {
@@ -2727,6 +2748,13 @@ MINIMUM width of 1025 pixels (desktops)
   body.archive.post-type-archive-ccluk_news .post-author .entry-date time {
     width: 100px;
     margin-left: -50px;
+  }
+  body.archive #primary .archive-header {
+    margin: 24px 0px;
+    margin: 2.4rem 0rem;
+  }
+  body.archive #primary .archive-header h1.entry-title {
+    font-size: 48px;
   }
   .single .entry-header h1,
   .single-post .entry-header h1 {
