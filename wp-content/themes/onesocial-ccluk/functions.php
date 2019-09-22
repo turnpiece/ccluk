@@ -173,6 +173,23 @@ add_action( 'wp_enqueue_scripts', 'ccluk_theme_scripts_styles', 9999 );
 
 // Add your own custom functions here
 
+/**
+* Redirect buddypress and bbpress pages to registration page
+*/
+function ccluk_page_template_redirect()
+{
+    //if not logged in and on a bp page except registration or activation
+    if( ! is_user_logged_in() &&
+        ( ( ! bp_is_blog_page() && ! bp_is_activation_page() && ! bp_is_register_page() ) || 
+        function_exists( 'is_bbpress' ) && is_bbpress() )
+    )
+    {
+        wp_redirect( home_url( '/join/' ) );
+        exit();
+    }
+}
+add_action( 'template_redirect', 'ccluk_page_template_redirect' );
+
 function ccluk_login_styles() { ?>
     <style type="text/css">
         .login #loginform input[type=text],
