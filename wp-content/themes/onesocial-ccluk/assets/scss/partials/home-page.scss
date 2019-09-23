@@ -302,54 +302,9 @@ body.page-template-homepage {
 			}
 
 			&.twitter {
-				#ctf {
-					.ctf-header {
-						float: none;
-						display: none;
-						text-align: center;
-						width: 100%;
-						border-bottom: 0;
-
-						a {
-							float: none;
-							margin: 0 auto;
-							width: 420px;
-						}
-
-						.ctf-header-user {
-							font-size: $font-size-std;
-						}
-					}
-
-					.ctf-tweets {
-						@include display-flex-box( center, space-evenly );
-						flex-direction: row column;
-						width: 100%;
-						padding: 30px 2%;
-
-						.ctf-item {
-							width: 300px;
-							padding-right: 15px;
-							padding-left: 15px;
-							align-self: flex-start;
-							border-top: 0;
-							@include margin( 1, 1 );
-							font-size: $font-size-sm;
-						}
-					}
-
-					.ctf-more {
-						display: none;
-					}
-
-					&.ctf-styles {
-						.ctf-author-screenname,
-						.ctf-context,
-						.ctf-twitterlink,
-						.ctf-tweet-meta {
-							font-size: 11px;
-						}
-					}
+				.section-content {
+					max-width: 400px;
+					@include centred-margin();
 				}
 			}
 

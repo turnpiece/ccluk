@@ -943,65 +943,10 @@ body.page-template-homepage #main .section.posts .section-content {
   text-align: center;
 }
 
-body.page-template-homepage #main .section.twitter #ctf .ctf-header {
-  float: none;
-  display: none;
-  text-align: center;
-  width: 100%;
-  border-bottom: 0;
-}
-
-body.page-template-homepage #main .section.twitter #ctf .ctf-header a {
-  float: none;
-  margin: 0 auto;
-  width: 420px;
-}
-
-body.page-template-homepage #main .section.twitter #ctf .ctf-header .ctf-header-user {
-  font-size: 21px;
-}
-
-body.page-template-homepage #main .section.twitter #ctf .ctf-tweets {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-  flex-wrap: row wrap;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row column;
-          flex-direction: row column;
-  width: 100%;
-  padding: 30px 2%;
-}
-
-body.page-template-homepage #main .section.twitter #ctf .ctf-tweets .ctf-item {
-  width: 300px;
-  padding-right: 15px;
-  padding-left: 15px;
-  -ms-flex-item-align: start;
-      align-self: flex-start;
-  border-top: 0;
-  margin: 10px 10px;
-  margin: 1rem 1rem;
-  font-size: 15px;
-}
-
-body.page-template-homepage #main .section.twitter #ctf .ctf-more {
-  display: none;
-}
-
-body.page-template-homepage #main .section.twitter #ctf.ctf-styles .ctf-author-screenname,
-body.page-template-homepage #main .section.twitter #ctf.ctf-styles .ctf-context,
-body.page-template-homepage #main .section.twitter #ctf.ctf-styles .ctf-twitterlink,
-body.page-template-homepage #main .section.twitter #ctf.ctf-styles .ctf-tweet-meta {
-  font-size: 11px;
+body.page-template-homepage #main .section.twitter .section-content {
+  max-width: 400px;
+  margin: 15px auto;
+  margin: 1.5rem auto;
 }
 
 body.page-template-homepage #main .section.join .section-content, body.page-template-homepage #main .section.newsletter .section-content, body.page-template-homepage #main .section.embed .section-content {
