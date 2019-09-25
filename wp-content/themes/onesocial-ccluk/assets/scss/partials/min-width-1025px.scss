@@ -16,21 +16,24 @@ body.page {
     }
 }
 
-body.archive {
-    &.post-type-archive-ccluk_news {
-        .post-author .entry-date {
-            font-size: 20px;
-            text-align: right;
+body {
+    &.archive,
+    &.blog {
+        &.post-type-archive-ccluk_news {
+            .post-author .entry-date {
+                font-size: 20px;
+                text-align: right;
 
-            time {
-                width: 100px;
-                margin-left: -50px;
+                time {
+                    width: 100px;
+                    margin-left: -50px;
+                }
             }
         }
-    }
-    #primary {
-        .archive-header {
-            @include entry-header();
+        #primary {
+            .archive-header {
+                @include entry-header();
+            }
         }
     }
 }

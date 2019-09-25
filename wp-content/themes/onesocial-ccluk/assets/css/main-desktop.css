@@ -1709,19 +1709,19 @@ Media queries
   body.page #primary article > .entry-header h1.entry-title {
     font-size: 48px;
   }
-  body.archive.post-type-archive-ccluk_news .post-author .entry-date {
+  body.archive.post-type-archive-ccluk_news .post-author .entry-date, body.blog.post-type-archive-ccluk_news .post-author .entry-date {
     font-size: 20px;
     text-align: right;
   }
-  body.archive.post-type-archive-ccluk_news .post-author .entry-date time {
+  body.archive.post-type-archive-ccluk_news .post-author .entry-date time, body.blog.post-type-archive-ccluk_news .post-author .entry-date time {
     width: 100px;
     margin-left: -50px;
   }
-  body.archive #primary .archive-header {
+  body.archive #primary .archive-header, body.blog #primary .archive-header {
     margin: 24px 0px;
     margin: 2.4rem 0rem;
   }
-  body.archive #primary .archive-header h1.entry-title {
+  body.archive #primary .archive-header h1.entry-title, body.blog #primary .archive-header h1.entry-title {
     font-size: 48px;
   }
   .single .entry-header h1,
