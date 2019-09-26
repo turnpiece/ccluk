@@ -5092,11 +5092,12 @@ form#places-form #new-place-content input {
     .popup_title {
       background-color: transparent;
       border-bottom: 0;
-      font-size: 24px;
+      font-size: $font-size-lg;
       line-height: 1;
       margin: 0 0 12px;
       padding: 15px 30px;
       text-align: center;
+      color: $green;
     }
     .title {
       margin-bottom: 40px;

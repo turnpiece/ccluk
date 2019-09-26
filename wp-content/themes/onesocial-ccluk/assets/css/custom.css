@@ -1933,6 +1933,10 @@ body.photos.is-mobile #buddypress form#whats-new-form {
 }
 
 /* Login Popups */
+.onesocial-popup .messages-output .error > p {
+  color: #e85c41;
+}
+
 .onesocial-popup.mfp-bg {
   top: 0;
   left: 0;
@@ -2086,7 +2090,7 @@ button::-moz-focus-inner {
   line-height: 44px;
   position: absolute;
   right: 0;
-  top: 0;
+  top: 10px;
   text-decoration: none;
   text-align: center;
   opacity: .65;

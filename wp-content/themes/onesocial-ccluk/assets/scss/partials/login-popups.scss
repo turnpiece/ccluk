@@ -2,6 +2,12 @@
 /* Login Popups */
 
 .onesocial-popup {
+    .messages-output {
+      .error > p {
+        color: $red;
+      }
+    }
+
     &.mfp-bg {
       top: 0;
       left: 0;
@@ -157,7 +163,7 @@ button {
   line-height: 44px;
   position: absolute;
   right: 0;
-  top: 0;
+  top: 10px;
   text-decoration: none;
   text-align: center;
   opacity: .65;

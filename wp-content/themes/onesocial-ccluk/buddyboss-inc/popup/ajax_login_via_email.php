@@ -11,7 +11,7 @@ function func_ajax_login() {
 		
 		if (!isset( $_POST['ajax-login-security'] ) || ! wp_verify_nonce( $_POST['ajax-login-security'], 'ajax-login-security' )) { //Security check etc.
 			
-		  $txt = __("Sorry security didn't verified, refresh page and try again.",'onesocial');
+		  $txt = __("Sorry, something went wrong. Please reload the page and try again.",'onesocial');
 		  echo '
 		  jQuery("#ajax_login_messages").html("<div class=\"ctmessage error\"><p>'.escapeJavaScriptText($txt).'</p></div>");
 		  ';	
@@ -25,7 +25,7 @@ function func_ajax_login() {
 		
 		
 		if(empty($username)) {
-		$txt = __("Enter an Username / Email.",'onesocial');
+		$txt = __("Please enter your email address.",'onesocial');
 		echo '
 		jQuery("#ajax_login_messages").html("<div class=\"ctmessage error\"><p>'.escapeJavaScriptText($txt).'</p></div>");
 		jQuery("#login_username").focus();
@@ -37,7 +37,7 @@ function func_ajax_login() {
 		if(filter_var($username, FILTER_VALIDATE_EMAIL)) { //let convert it into username
 			$username = get_user_by('email',$username);
 			if(empty($username)) {
-				$txt = __("Enter email is not registered with us.",'onesocial');
+				$txt = __("The email you entered is not registered with us.",'onesocial');
 				echo '
 				jQuery("#ajax_login_messages").html("<div class=\"ctmessage error\"><p>'.escapeJavaScriptText($txt).'</p></div>");
 				jQuery("#login_username").focus();
@@ -60,7 +60,7 @@ function func_ajax_login() {
 		}
                 
 		if(empty($password)) {
-		$txt = __("Enter an Password.",'onesocial');
+		$txt = __("Please enter your password.",'onesocial');
 		echo '
 		jQuery("#ajax_login_messages").html("<div class=\"ctmessage error\"><p>'.escapeJavaScriptText($txt).'</p></div>");
 		jQuery("#login_password").focus();
