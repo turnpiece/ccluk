@@ -268,7 +268,10 @@ body.single-item.groups #main {
   max-width: 780px;
 }
 
-.archive.tag .site-content, .archive.date .site-content, .archive.author .site-content, .archive.category .site-content {
+.archive.tag .site-content,
+.archive.date .site-content,
+.archive.author .site-content,
+.archive.category .site-content {
   max-width: 780px;
 }
 
@@ -351,10 +354,6 @@ body.template-front-page .site-content, body.single-attachment .site-content, bo
 
 #secondary .widget.profile_widget, #secondary .widget:first-child {
   padding-top: 0;
-}
-
-.bp-user #secondary #item-header {
-  /* padding-top: 25px; */
 }
 
 #secondary .widget:last-child {

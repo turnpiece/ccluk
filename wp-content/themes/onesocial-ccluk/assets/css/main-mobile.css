@@ -342,10 +342,6 @@ header#masthead #header-aside, header#masthead #logo-area {
   padding: 10px 0 20px;
 }
 
-.archive-header, .page-header {
-  padding: 20px;
-}
-
 body:not(.buddypress).archive #content article.type-post {
   padding: 35px 20px 40px 20px;
 }
@@ -3114,6 +3110,9 @@ MAXIMUM width of 1024 pixels (tablets)
   }
   .archive.tag .site-content, .archive.date .site-content, .archive.author .site-content, .archive.category .site-content {
     max-width: 100%;
+  }
+  .archive.author .archive-header .author-avatar {
+    top: 0;
   }
   #buddypress #whats-new-header-content {
     max-width: 560px;

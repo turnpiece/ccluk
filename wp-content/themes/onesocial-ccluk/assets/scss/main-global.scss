@@ -1499,11 +1499,17 @@ img.wp-smiley, .rsswidget img {
 --------------------------------------------------------------*/
 
 .author .archive-header {
-    margin-bottom: 24px;
+  position: relative;
 
-    .author-avatar {
-        float: left;
-    }
+  .author-avatar {
+      position: absolute;
+      top: -25px;
+      left: 0;
+  }
+
+  > h1 {
+    padding-left: 100px;
+  }
 }
 
 .author-info {

@@ -285,7 +285,10 @@ body.single-item.groups #main {
 }
 
 .archive {
-  &.tag .site-content, &.date .site-content, &.author .site-content, &.category .site-content {
+  &.tag .site-content, 
+  &.date .site-content, 
+  &.author .site-content, 
+  &.category .site-content {
     max-width: 780px;
   }
 }
@@ -372,10 +375,6 @@ body {
   &.profile_widget, &:first-child {
     padding-top: 0;
   }
-}
-
-.bp-user #secondary #item-header {
-  /* padding-top: 25px; */
 }
 
 #secondary .widget:last-child {

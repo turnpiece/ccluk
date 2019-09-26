@@ -1416,11 +1416,17 @@ img.wp-smiley, .rsswidget img {
 2.10 - Author Profiles
 --------------------------------------------------------------*/
 .author .archive-header {
-  margin-bottom: 24px;
+  position: relative;
 }
 
 .author .archive-header .author-avatar {
-  float: left;
+  position: absolute;
+  top: -25px;
+  left: 0;
+}
+
+.author .archive-header > h1 {
+  padding-left: 100px;
 }
 
 .author-info {
