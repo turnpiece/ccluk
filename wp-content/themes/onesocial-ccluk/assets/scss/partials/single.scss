@@ -35,50 +35,6 @@
         margin-right: auto;
     }
 
-    .entry-header,
-    .entry-header.has-image,
-    .entry-header.not-image {
-
-        position: static;
-        @include centred-margin(0);
-        text-align: left;  
-        max-width: $content_w;
-
-        h1 {
-            color: $black;
-            text-shadow: none;
-            @include padding(.5, 0);
-            line-height: 1.4;
-            max-height: auto;  
-            text-align: left;
-            font-size: 32px;
-        }
-
-        .post-author-info {
-            border-top: none;
-
-            .details {
-                padding-top: 20px;
-            }
-            .authors-avatar {
-                padding: 0 0 15px;
-            }
-            .author-follow {
-                top: 20px;
-            }
-            .entry-meta {
-                font-size: 16px;
-                padding-top: 0;
-            }
-            .entry-meta,
-            .author-name {
-                a {
-                    color: $green;
-                }
-            }
-        }
-    }
-
     .entry-tags {
         h3 {
             @include margin-bottom( 1.2 );

@@ -2118,7 +2118,7 @@ body.open-right #mobile-right-panel {
 #mobile-right-panel .submenu-btn {
   color: rgba(255, 255, 255, 0.75);
   font-size: 18px;
-  font-weight: bold;
+  font-weight: 600;
   height: 52px;
   line-height: 52px;
   position: absolute;
@@ -2133,28 +2133,6 @@ body.open-right #mobile-right-panel {
 1.1.4.5 - Right Menu (Page) Content
 --------------------------------------------------------------*/
 /* Current Page */
-.main-navigation div.nav-inner li.current-menu-item > a {
-  background-color: #3f4448;
-}
-
-.main-navigation div.nav-inner > div ul > li > ul.sub-menu li a:before {
-  font-family: 'FontAwesome';
-  font-weight: normal;
-  font-style: normal;
-  text-rendering: auto;
-  text-decoration: inherit;
-  speak: none;
-  display: inline-block;
-  line-height: 1;
-  content: "\f111";
-  -webkit-font-smoothing: antialiased;
-  color: #575757;
-  margin-right: 7px;
-  font-size: 10px;
-  vertical-align: middle;
-  opacity: 0.6;
-}
-
 .main-navigation ul {
   margin: 0;
 }
@@ -2851,9 +2829,12 @@ Mobile Menu
   width: 100%;
 }
 
+#mobile-right-panel li > a {
+  font-weight: 600;
+}
+
 #mobile-right-panel li a {
   color: #22a7f0;
-  font-weight: 700;
 }
 
 #mobile-right-panel li a:hover {
@@ -2864,7 +2845,7 @@ Mobile Menu
   background-color: #fff;
 }
 
-#mobile-right-panel li.current-menu-item a {
+#mobile-right-panel li.current-menu-item > a {
   color: #54ae68;
 }
 
@@ -3237,9 +3218,6 @@ MAXIMUM width of 480 pixels (phones)
 @media screen and (max-width: 480px) {
   body {
     background-color: #fff;
-  }
-  body.single-ccluk_news .entry-header.has-image h1 {
-    font-size: 24px;
   }
   body.archive .listing .article-outher .post-author {
     display: none;

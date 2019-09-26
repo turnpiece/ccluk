@@ -252,10 +252,13 @@
 }
 
 @mixin entry-header() {
-	@include margin( 2.4, 0 );
+  @include centred-margin( 2.4 );
+  margin-bottom: 16px;
+  margin-bottom: 1rem;
 
 	h1.entry-title {
-		font-size: $font-size-big;
+    font-size: $font-size-big;
+    line-height: 1.4;
 	}
 }
 

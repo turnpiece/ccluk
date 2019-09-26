@@ -2806,13 +2806,6 @@ div {
   }
 }
 
-.entry-header {
-  margin-bottom: 15px;
-  img.wp-post-image {
-    margin-bottom: 24px;
-  }
-}
-
 .entry-title {
   font-size: 30px;
   font-weight: 900;
@@ -2827,6 +2820,11 @@ div {
 }
 
 .entry-header {
+  margin-bottom: 15px;
+  img.wp-post-image {
+    margin-bottom: 24px;
+  }
+
   .entry-title a {
     text-decoration: none;
     color: $dark;
@@ -2844,7 +2842,6 @@ div {
       font-weight: 400;
       vertical-align: middle;
       margin-left: 10px;
-      /*font-family: 'Lato', sans-serif;*/
     }
   }
   &.has-image .entry-title a.post-edit-link {
@@ -2858,11 +2855,9 @@ div {
     font-weight: 400;
   }
   .entry-meta {
-    color: #999;
+    color: $gray;
     clear: left;
-    padding: 24px 0 0;
-    font-size: 14px;
-    margin: 2px 0 35px;
+    font-size: $font-size-sm;
   }
 }
 
@@ -3490,7 +3485,8 @@ article.format-aside {
   }
 }
 
-.single-post {
+.single-post,
+.single-ccluk_news {
   .entry-content {
     margin-bottom: 20px;
   }
@@ -3509,12 +3505,41 @@ article.format-aside {
   #content {
     margin-bottom: 40px;
   }
-  .entry-header.has-image {
-    text-align: center;
-    position: absolute;
-    width: 100%;
-    top: 0;
-    height: 100%;
+  .entry-header {
+    @include entry-header();
+    text-align: left;  
+    max-width: $content_w;
+    margin-left: auto;
+    margin-right: auto;
+
+    h1 {
+      color: $black;
+      text-align: left;
+    }
+
+    .post-author-info {
+      border-top: none;
+
+      .details {
+          padding-top: 20px;
+      }
+      .authors-avatar {
+          padding: 0 0 15px;
+      }
+      .author-follow {
+          top: 20px;
+      }
+      .entry-meta {
+          font-size: 16px;
+          padding-top: 0;
+      }
+      .entry-meta,
+      .author-name {
+        a {
+            color: $green;
+        }
+      }
+    }
   }
   .header-area {
     position: relative;
@@ -3523,15 +3548,6 @@ article.format-aside {
       height: 100%;
       width: 100%;
     }
-  }
-  .entry-header.has-image h1 {
-    color: $white;
-    font-size: 55px;
-    line-height: 1.4;
-    margin: 0;
-    padding: 0 70px;
-    text-align: center;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
   }
 }
 
@@ -4672,26 +4688,25 @@ p#item-desc {
     display: none;
   }
   h3 {
-        display: inline-block;
-        padding: 5px 9px;
-        line-height: 1.7;
-        text-decoration: none;
-        color: $white;
-        font-weight: 500;
-        background-color: $dark;
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        border-radius: 0;
-        font-size: 10px;
-        font-family: inherit;
-        text-transform: uppercase;
-        margin: 0 10px 0 0;
-        vertical-align: top;
+    display: inline-block;
+    padding: 5px 9px;
+    line-height: 1.7;
+    text-decoration: none;
+    color: $white;
+    font-weight: 500;
+    background-color: $dark;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 0;
+    font-size: 10px;
+    font-family: inherit;
+    text-transform: uppercase;
+    margin: 0 10px 0 0;
+    vertical-align: top;
 
-
-      span {
-        margin-left: 3px;
-        color: #57ad68;
-      }
+    span {
+      margin-left: 3px;
+      color: #57ad68;
+    }
   }
 
   .inner {
@@ -4702,11 +4717,7 @@ p#item-desc {
     overflow: hidden;
     clear: both;
     display: block;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
+    @include display-flex();
     -webkit-flex-flow: row wrap;
     -ms-flex-flow: row wrap;
     flex-flow: row wrap;
