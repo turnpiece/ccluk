@@ -2767,10 +2767,7 @@ body.register .page-full-width {
 }
 
 .datebox {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+@include display-flex();
   .buddyboss-select {
     &:nth-child(2), &:nth-child(3) {
       padding-top: 25px;
@@ -2794,11 +2791,7 @@ div#register-page {
 #buddypress {
   #blogs-list {
     > li {
-      display: -webkit-box;
-      display: -moz-box;
-      display: -ms-flexbox;
-      display: -webkit-flex;
-      display: flex;
+      @include display-flex();
       .blog-details {
         -webkit-box-flex: 1;
         -webkit-flex: 1;
@@ -2862,8 +2855,13 @@ div#register-page {
 }
 
 .archive {
-  &.tag .site-content, &.date .site-content, &.author .site-content, &.category .site-content {
-    max-width: 100%;
+  &.tag, 
+  &.date, 
+  &.author, 
+  &.category {
+    .site-content {
+      max-width: 100%;
+    }
   }
 }
 

@@ -268,10 +268,7 @@ form#whats-new-form {
   overflow: hidden;
   width: 100%;
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+@include display-flex();
   &:after {
     display: none;
     content: '';
@@ -4207,10 +4204,7 @@ form#group-settings-form {
 }
 
 #group-settings-form .bp-widget .single-line li {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+@include display-flex();
 }
 
 /*--------------------------------------------------------------

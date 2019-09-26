@@ -113,14 +113,6 @@ body.page #comments {
   padding-bottom: 50px;
 }
 
-.home:not(.groups) .site, .blog:not(.bp-user) .site {
-  /*    padding-top: 70px;*/
-}
-
-.archive-sidebar-active #secondary {
-  /*padding-top: 70px;*/
-}
-
 .archive-header {
   .page-title, .archive-title {
     line-height: 1;
@@ -147,10 +139,7 @@ body.page #comments {
 }
 
 .header-inner-center {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+@include display-flex();
   -webkit-box-align: center;
   -webkit-align-items: center;
   -ms-flex-align: center;
@@ -205,20 +194,14 @@ body {
 }
 
 .home-inner-wrap {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+@include display-flex();
   -webkit-flex-flow: row wrap;
   -ms-flex-flow: row wrap;
   flex-flow: row wrap;
 }
 
 #main {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+@include display-flex();
   -webkit-flex-flow: row wrap;
   -ms-flex-flow: row wrap;
   flex-flow: row wrap;
@@ -280,19 +263,6 @@ body.single-item.groups #main {
   margin-left: 70px;
 }
 
-.blog:not(.bp-user) .site-content {
-  max-width: 780px;
-}
-
-.archive {
-  &.tag .site-content, 
-  &.date .site-content, 
-  &.author .site-content, 
-  &.category .site-content {
-    max-width: 780px;
-  }
-}
-
 #primary {
   /*height: 100%;*/
   margin-right: 0;
@@ -318,10 +288,7 @@ body.single-item.groups #main {
 }
 
 .search-content-wrap, .buddypress-content-wrap {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+@include display-flex();
   /* This is added to fix search layout issue after load more */
   -ms-flex-flow: row wrap;
   flex-flow: row wrap;
@@ -814,10 +781,7 @@ header-aside,
 #header-aside-inner {
   float: right;
   display: table;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+@include display-flex();
   > div:first-child {
     /*box-shadow: -1px 0 0 rgba(0, 0, 0, 0.1);*/
   }
@@ -1266,10 +1230,7 @@ header-aside,
 }
 
 div.footer-inner.widget-area {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+@include display-flex();
   padding: 0;
 }
 
@@ -1481,10 +1442,7 @@ li.hideshow > ul li {
 }
 
 .article-outher {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+@include display-flex();
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   &:nth-last-child(2) {
     .to-top, &:after {

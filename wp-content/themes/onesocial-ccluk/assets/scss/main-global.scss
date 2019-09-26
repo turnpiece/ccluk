@@ -1724,8 +1724,10 @@ a {
 }
 
 body.search {
-  .page-title, .type-page > .entry-header .entry-title {
-    text-align: center;
+  #primary {
+    .page-header {
+      @include page-header();
+    }
   }
 }
 
@@ -3338,6 +3340,9 @@ single .entry-post-thumbnail:not(.category-thumb) img {
 }
 
 /* Standard blog */
+.blog:not(.bp-user) .site-content {
+  max-width: 780px;
+}
 
 .archive {
   .site-content {
@@ -3350,6 +3355,13 @@ single .entry-post-thumbnail:not(.category-thumb) img {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     padding: 70px 0;
     position: relative;
+  }
+
+  &.tag .site-content, 
+  &.date .site-content, 
+  &.author .site-content, 
+  &.category .site-content {
+    max-width: 780px;
   }
 }
 
@@ -4237,10 +4249,7 @@ body article.error404 .entry-header {
 }
 
 .bb-search-result-group {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+@include display-flex();
   .item-avatar {
     padding-right: 40px;
     width: 20%;
@@ -5214,10 +5223,7 @@ input#user_login {
   -webkit-align-items: flex-end;
   -ms-flex-align: end;
   align-items: flex-end;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+@include display-flex();
   .buddyboss-select {
     &:first-child, &:nth-child(2) {
       margin-right: 15px;

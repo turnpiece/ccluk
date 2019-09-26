@@ -660,10 +660,7 @@ div#whats-new-post-in-box {
 }
 
 #search-members-form {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+@include display-flex();
   label {
     -webkit-box-flex: 1;
     -webkit-flex: 1 1 0;

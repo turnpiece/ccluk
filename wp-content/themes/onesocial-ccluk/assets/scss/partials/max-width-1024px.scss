@@ -200,22 +200,22 @@
     max-width: 100%;
 }
 .archive {
-    &.tag, 
-    &.date, 
-    &.author, 
-    &.category {
-      .site-content {
-        max-width: 100%;
-      }
+  &.tag, 
+  &.date, 
+  &.author, 
+  &.category {
+    .site-content {
+      max-width: 100%;
     }
+  }
 
-    &.author {
-      .archive-header {
-        .author-avatar {
-          top: 0;
-        }
+  &.author {
+    .archive-header {
+      .author-avatar {
+        top: 0;
       }
     }
+  }
 }
 #buddypress #whats-new-header-content {
     max-width: 560px;

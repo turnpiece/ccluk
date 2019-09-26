@@ -258,3 +258,10 @@
 		font-size: $font-size-big;
 	}
 }
+
+@mixin ease-in-out() {
+  -webkit-transition: all .15s ease-in-out;
+  -moz-transition: all .15s ease-in-out;
+  -o-transition: all .15s ease-in-out;
+  transition: all .15s ease-in-out;
+}

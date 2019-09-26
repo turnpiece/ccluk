@@ -105,14 +105,6 @@ body.page #comments {
   padding-bottom: 50px;
 }
 
-.home:not(.groups) .site, .blog:not(.bp-user) .site {
-  /*    padding-top: 70px;*/
-}
-
-.archive-sidebar-active #secondary {
-  /*padding-top: 70px;*/
-}
-
 .archive-header .page-title, .archive-header .archive-title {
   line-height: 1;
 }
@@ -262,17 +254,6 @@ body.single-item.groups #main {
 
 .sidebar-right #secondary {
   margin-left: 70px;
-}
-
-.blog:not(.bp-user) .site-content {
-  max-width: 780px;
-}
-
-.archive.tag .site-content,
-.archive.date .site-content,
-.archive.author .site-content,
-.archive.category .site-content {
-  max-width: 780px;
 }
 
 #primary {

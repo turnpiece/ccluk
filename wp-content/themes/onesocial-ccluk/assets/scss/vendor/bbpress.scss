@@ -1847,10 +1847,7 @@ body.bbp-search #bbp-search-index-form {
 }
 
 .results-group-members #members-stream > li {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+@include display-flex();
 }
 
 #main #buddypress ul.item-list li.bboss_search_item_member .item {
