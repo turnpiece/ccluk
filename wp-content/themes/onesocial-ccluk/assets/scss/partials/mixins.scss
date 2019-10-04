@@ -168,7 +168,7 @@
   }
 }
 
-@mixin page-header( $font-size: $font-size-lg ) {
+@mixin page-header( $font-size: $font-size-big ) {
   @include margin( 1.2, 0 );
   border-bottom: 1px solid $green;
 
@@ -181,14 +181,14 @@
   }
 }
 
-@mixin page-title( $font-size: $font-size-lg ) {
+@mixin page-title( $font-size: $font-size-big ) {
   font-size: $font-size;
   padding-bottom: 15px;
   color: $green;
 }
 
 @mixin form-label() {
-  font-size: 18px;
+  font-size: $font-size-min;
   color: $green;
 }
 

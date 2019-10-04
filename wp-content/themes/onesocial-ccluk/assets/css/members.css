@@ -7869,9 +7869,6 @@ body.bbpress #bbp-search-index-form button#bbp_search_submit {
   body.buddypress .bbp-topic-form, body.buddypress .bbp-reply-form, body.buddypress .bbp-topic-tag-form {
     border-radius: 0;
   }
-  body.buddypress input[type=text]:not(.ed_button), body.buddypress input[type=textarea]:not(.ed_button) {
-    /*width: 91%;*/
-  }
   body.buddypress #bbpress-forums ul.bbp-threaded-replies {
     /*margin-left: 0;*/
     /* indent threaded replies less on mobile */
@@ -8041,6 +8038,30 @@ body.bbpress #bbp-search-index-form button#bbp_search_submit {
   body.buddypress .bp-user.my-account.photos #buddypress #whats-new-selects {
     float: none;
     width: auto;
+  }
+}
+
+@media screen and (max-width: 1024px) and (max-width: 520px) {
+  body.buddypress body.buddypress #buddypress ul.item-list li .activity-avatar div {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  body.buddypress body.buddypress .group-avatar #group-create-body .left-menu {
+    position: relative;
+    margin-bottom: 22px;
+  }
+  body.buddypress body.buddypress .group-avatar #group-create-body .main-column {
+    margin-left: 0;
+  }
+  body.buddypress .single-item.groups #buddypress #item-header span.activity {
+    text-shadow: none;
+  }
+  body.buddypress .bb-has-sidebar #buddypress .dir-list.mygroups ul.item-list > li,
+  body.buddypress .single-item.groups #buddypress .dir-list.group_members ul.item-list > li,
+  body.buddypress .single #buddypress .dir-list ul.item-list > li,
+  body.buddypress .bp-user #buddypress .dir-list ul.item-list > li,
+  body.buddypress .page-right-sidebar #buddypress .dir-list ul.item-list > li {
+    width: 100%;
   }
 }
 

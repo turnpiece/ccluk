@@ -441,7 +441,7 @@ body.page #primary article > .entry-header {
 }
 
 body.page #primary article > .entry-header h1.entry-title {
-  font-size: 36px;
+  font-size: 48px;
   padding-bottom: 15px;
   color: #54ae68;
 }
@@ -467,12 +467,12 @@ body.page.page-sidebar-active.page-template #secondary {
   margin-top: 5rem;
 }
 
-body.page.page-template-page-nosidebar #main {
-  max-width: 750px;
+body.page.page-sidebar-active #main #primary article > .entry-header {
+  text-align: left;
 }
 
-body.page.page-template-page-nosidebar #main #primary article > .entry-header {
-  text-align: center;
+body.page.page-template-page-nosidebar #main {
+  max-width: 750px;
 }
 
 body.page.page-template-page-nosidebar #secondary {
@@ -1872,7 +1872,7 @@ img.mfp-img {
 }
 
 .single-incsub_event .entry-header h1.entry-title {
-  font-size: 36px;
+  font-size: 48px;
   padding-bottom: 15px;
   color: #54ae68;
 }
@@ -1971,7 +1971,7 @@ body.single-give_forms #main #content .header-area > .entry-header {
 }
 
 body.single-give_forms #main #content .header-area > .entry-header h1.entry-title {
-  font-size: 36px;
+  font-size: 48px;
   padding-bottom: 15px;
   color: #54ae68;
 }

@@ -13,41 +13,8 @@
 	font-size: $font-size-lg;
 }
 
-.single-item.groups {
-	#buddypress {
-		#item-header span.activity {
-			text-shadow: none;
-		}
-	}
-}
-
-.bb-has-sidebar #buddypress .dir-list.mygroups ul.item-list > li, .single-item.groups #buddypress .dir-list.group_members ul.item-list > li, .single #buddypress .dir-list ul.item-list > li, .bp-user #buddypress .dir-list ul.item-list > li, .page-right-sidebar #buddypress .dir-list ul.item-list > li {
-  width: 100%;
-}
-/*
-    .single-post .entry-post-thumbnail {
-        height: 340px;
-    }
-*/
 .single-post .entry-header.has-image h1 {
-  font-size: 35px;
-}
-
-body.buddypress {
-    #buddypress ul.item-list li .activity-avatar div {
-    	font-size: 14px;
-    	line-height: 1.4;
-    }
-
-    .group-avatar #group-create-body {
-      .left-menu {
-        position: relative;
-        margin-bottom: 22px;
-      }
-      .main-column {
-        margin-left: 0;
-      }
-    }
+    font-size: $font-size-lg;
 }
 
 body.page-template-homepage {

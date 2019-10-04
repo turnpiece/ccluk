@@ -1294,10 +1294,6 @@ body.activity-permalink #buddypress .activity-list li.mini .activity-comments {
   margin-top: 10px;
 }
 
-.dir-header .entry-title {
-  /*padding: 40px 0 20px;*/
-}
-
 /*  Search Input Fields */
 #buddypress div.dir-search, #buddypress div.message-search {
   width: 100%;
@@ -3121,30 +3117,8 @@ MAXIMUM width of 520 pixels (large phones and smaller)
   .dir-header {
     font-size: 36px;
   }
-  .single-item.groups #buddypress #item-header span.activity {
-    text-shadow: none;
-  }
-  .bb-has-sidebar #buddypress .dir-list.mygroups ul.item-list > li, .single-item.groups #buddypress .dir-list.group_members ul.item-list > li, .single #buddypress .dir-list ul.item-list > li, .bp-user #buddypress .dir-list ul.item-list > li, .page-right-sidebar #buddypress .dir-list ul.item-list > li {
-    width: 100%;
-  }
-  /*
-    .single-post .entry-post-thumbnail {
-        height: 340px;
-    }
-*/
   .single-post .entry-header.has-image h1 {
-    font-size: 35px;
-  }
-  body.buddypress #buddypress ul.item-list li .activity-avatar div {
-    font-size: 14px;
-    line-height: 1.4;
-  }
-  body.buddypress .group-avatar #group-create-body .left-menu {
-    position: relative;
-    margin-bottom: 22px;
-  }
-  body.buddypress .group-avatar #group-create-body .main-column {
-    margin-left: 0;
+    font-size: 36px;
   }
   body.page-template-homepage #main .section.banner.background-box .section-title-container {
     padding: 20px;

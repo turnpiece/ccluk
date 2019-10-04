@@ -599,15 +599,16 @@ h1, h2, h3, h4, .site-header .site-title {
 h1{
     font-weight: 700;
     font-style:normal;
-    font-size: 36px;
+    font-size: $font-size-big;
     line-height: 1.85714;
+    text-align: center;
 }
 h2,
 .sap-editor-area-wrapper .sap-editable-title{
     font-family: $font-heading;
     font-weight: 700;
     font-style: normal;
-    font-size: 30px;
+    font-size: $font-size-lg;
     line-height: 1.3;
 }
 h3{
@@ -615,21 +616,21 @@ h3{
     line-height: 1.08333;
 }
 h4{
-    font-size: 24px;
+    font-size: $font-size-mid;
     line-height: 1.3;
 }
 h5{
     font-family: $font-default;
     font-weight: 700;
     font-style:normal;
-    font-size: 20px;
+    font-size: $font-size-std;
     line-height: 1.44444;
 }
 h6{
     font-family: $font-default;
     font-weight: 700;
     font-style: normal;
-    font-size: 18px;
+    font-size: $font-size-min;
     line-height: 1.625;
 }
 
