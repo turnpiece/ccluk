@@ -1622,7 +1622,7 @@ body .buddyboss-select {
 
 .buddyboss-select-inner:after {
   content: "P";
-  border: 1px solid #e1e1e1;
+  border: 1px solid #f9f9f9;
   position: absolute;
   right: 0;
   padding: 0px 11px;

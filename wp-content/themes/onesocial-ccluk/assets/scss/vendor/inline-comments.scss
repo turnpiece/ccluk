@@ -266,18 +266,18 @@ body.logged-in + #incom_wrapper .incom-comments-wrapper #respond .comment-form-c
 }
 
 .sap-widget .selectize-input {
-  border: 1px solid #e1e1e1;
+  border: 1px solid $secondary_bg;
   border-radius: 0;
   box-shadow: none;
   &:focus {
-    border: 1px solid #e1e1e1;
+    border: 1px solid $secondary_bg;
     border-radius: 0;
     box-shadow: none;
   }
 }
 
 .sap-arrow-dropdown.sap-arrow-dropdown {
-  border-left: 1px solid #e1e1e1;
+  border-left: 1px solid $secondary_bg;
   font-size: 13px;
   line-height: 1.4;
   margin-left: 5px;
@@ -302,7 +302,7 @@ body.logged-in + #incom_wrapper .incom-comments-wrapper #respond .comment-form-c
 }
 
 .expand-to-fullscreen {
-  color: #e1e1e1;
+  color: $secondary_bg;
   float: right;
   font-size: 20px;
   line-height: 1;
@@ -319,7 +319,7 @@ body.logged-in + #incom_wrapper .incom-comments-wrapper #respond .comment-form-c
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
   box-shadow: none;
-  color: #e1e1e1;
+  color: $secondary_bg;
 }
 
 /* Comment Attachment */

@@ -67,26 +67,27 @@
     	li {
 	      	a {
 	        	font-size: $font-size-sm;
-				@include inactive-tab();
+				    @include inactive-tab();
 	        	@include border-radius(0);
 
-				> span {
-					float: right;
-					@include inactive-tab(0);
-				}
+            > span {
+              float: right;
+              margin-top: -5px;
+              @include inactive-tab(0);
+            }
 	      	}
-			&:hover,
-			&:active,
-			&.current,
-			&.selected {
-	        	a {
-	          		@include active-tab();
+        &:hover,
+        &:active,
+        &.current,
+        &.selected {
+	        a {
+	          @include active-tab();
 
 			  		> span {
 				  		@include active-tab();
 			  		}
-	        	}
-	      	}
+	        }
+	      }
     	}
   	}
 }
@@ -126,10 +127,10 @@
   text-shadow: none;
   box-shadow: none;
   @include padding( .6, 1 );
-  color: $white !important;
+  color: $white;
   &:hover {
-    color: $hover_color !important;
-    background-color: $hover_bg !important;
+    color: $hover_color;
+    background-color: $hover_bg;
   }
 }
 

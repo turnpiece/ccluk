@@ -1611,7 +1611,7 @@ body .buddyboss-select {
   line-height: 30px;
   &:after {
     content: "P";
-    border: 1px solid #e1e1e1;
+    border: 1px solid $secondary_bg;
     position: absolute;
     right: 0;
     padding: 0px 11px;

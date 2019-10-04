@@ -81,12 +81,15 @@ a.button {
   }
 }
 
-#primary .author-follow div.generic-button a:before, #buddypress div#item-header .inner-avatar-wrap div.generic-button a:before, #secondary .inner-avatar-wrap div.generic-button a:before, body .selectionSharer a.action:hover {
+#primary .author-follow div.generic-button a:before, 
+#buddypress div#item-header .inner-avatar-wrap div.generic-button a:before, 
+#secondary .inner-avatar-wrap div.generic-button a:before, body .selectionSharer a.action:hover {
   background: $green;
 }
 
 #page #main {
-  .author-follow div.generic-button.loading a:before, #buddypress .inner-avatar-wrap .generic-button.loading a:before {
+  .author-follow div.generic-button.loading a:before, 
+  #buddypress .inner-avatar-wrap .generic-button.loading a:before {
     background: $green;
   }
 }

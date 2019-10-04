@@ -785,7 +785,6 @@ body:not(.has-activity) .entry-content > #buddypress > #item-body {
 /* Body Content on Activity pages */
 #item-body {
   clear: both;
-  /*padding: 0 15px;*/
 }
 
 /*--------------------------------------------------------------
@@ -1006,53 +1005,6 @@ body.activity-permalink #buddypress .activity-list li .activity-content {
 #buddypress .activity-list .activity-content blockquote {
   margin: 0 10px 0 0;
   overflow: hidden;
-}
-
-body.activity-permalink #buddypress .activity-content .activity-inner, body.activity-permalink #buddypress .activity-content blockquote {
-  margin-left: 0;
-  margin-top: 5px;
-}
-
-#buddypress .activity-inner > p {
-  word-wrap: break-word;
-}
-
-#buddypress .activity-inner > .activity-inner, #buddypress .activity-inner > blockquote {
-  margin: 0;
-}
-
-#buddypress .activity-list .activity-content img.thumbnail {
-  border: 2px solid #aaa;
-  float: left;
-  margin: 0 10px 5px 0;
-}
-
-#buddypress .activity-read-more {
-  margin-left: 1em;
-  white-space: nowrap;
-}
-
-#activity-visibility {
-  margin-right: 0;
-}
-
-#whats-new-header:after {
-  display: none;
-}
-
-#buddypress #whats-new-selects {
-  clear: both;
-  display: block;
-  float: right;
-  margin-top: -40px;
-  overflow: hidden;
-  padding-top: 0;
-  width: calc(100% - 75px);
-}
-
-.bp-user.my-account.photos #buddypress #whats-new-selects {
-  float: none;
-  width: auto;
 }
 
 .boss-insert-buttons {

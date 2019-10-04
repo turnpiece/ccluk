@@ -858,7 +858,7 @@ body {
     line-height: 46px;
     @include border-radius( 50% );
     text-align: center;
-    background-color: #e1e1e1;
+    background-color: $secondary_bg;
     color: $white;
     font-size: 20px;
     font-family: "onesocial" !important;
@@ -882,7 +882,7 @@ body {
     width: 8px;
     height: 8px;
     border-radius: 2px;
-    background-color: #e1e1e1;
+    background-color: $secondary_bg;
     -ms-transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
     transform: rotate(45deg);
@@ -1184,6 +1184,11 @@ textarea {
     max-width: 200px;
     /* Fix for too-long forum names, usually from conversion */
   }
+  &.bbp-form {
+    label[for="bbp_topic_subscription"] {
+      font-size: $font-size-tiny;
+    }
+  }
 }
 
 .bbp-topic-form,
@@ -1246,11 +1251,10 @@ body {
 }
 
 div.bbp-submit-wrapper {
-  /*float: right;*/
   clear: both;
   button {
     padding: 8px 20px;
-    font-size: $font-size-tiny;
+    font-size: $font-size-min;
   }
 }
 
@@ -1791,7 +1795,7 @@ body.bbp-search #bbp-search-index-form {
 }
 
 #bbp-search-results .bbp-body li {
-  border-bottom: 1px solid #e1e1e1;
+  border-bottom: 1px solid $secondary_bg;
 }
 
 #bbpress-forums ul#bbp-search-results {
@@ -1819,7 +1823,7 @@ body.bbp-search #bbp-search-index-form {
     display: none;
   }
   .topic-author {
-    border-bottom: 1px solid #e1e1e1;
+    border-bottom: 1px solid $secondary_bg;
     display: table;
     height: auto;
     padding-bottom: 10px;

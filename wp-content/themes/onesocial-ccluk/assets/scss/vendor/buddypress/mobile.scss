@@ -635,7 +635,6 @@ div#whats-new-post-in-box {
 --------------------------------------------------------------*/
 
 #item-posts {
-  /* float: left; */
   clear: both;
 }
 
@@ -684,7 +683,6 @@ div#whats-new-post-in-box {
 
 #contentcolumn {
   margin-left: 0;
-  /*padding: 0 15px;*/
 }
 
 #message-threads {
@@ -1408,6 +1406,56 @@ span.bbp-admin-links {
     margin-bottom: 0;
     float: left;
   }
+}
+
+body.activity-permalink #buddypress .activity-content {
+  .activity-inner, blockquote {
+    margin-left: 0;
+    margin-top: 5px;
+  }
+}
+
+#buddypress {
+  .activity-inner > {
+    p {
+      word-wrap: break-word;
+    }
+    .activity-inner, blockquote {
+      margin: 0;
+    }
+  }
+  .activity-list .activity-content img.thumbnail {
+    border: 2px solid $light;
+    float: left;
+    margin: 0 10px 5px 0;
+  }
+  .activity-read-more {
+    margin-left: 1em;
+    white-space: nowrap;
+  }
+}
+
+#activity-visibility {
+  margin-right: 0;
+}
+
+#whats-new-header:after {
+  display: none;
+}
+
+#buddypress #whats-new-selects {
+  clear: both;
+  display: block;
+  float: right;
+  margin-top: -40px;
+  overflow: hidden;
+  padding-top: 0;
+  width: calc(100% - 75px);
+}
+
+.bp-user.my-account.photos #buddypress #whats-new-selects {
+  float: none;
+  width: auto;
 }
 
 

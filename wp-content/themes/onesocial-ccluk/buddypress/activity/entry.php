@@ -19,8 +19,8 @@
 			<?php bp_activity_avatar( 'type=thumb&width=60&height=60' ); ?>
 			<?php
 			$member_id = bp_get_activity_user_id();
-			echo '<div class="name">' . bp_core_get_user_displayname( $member_id ) . '</div>';
-			echo '<div class="nice-name">@' . bp_core_get_username( $member_id ) . '</div>';
+			//echo '<div class="name">' . bp_core_get_user_displayname( $member_id ) . '</div>';
+			//echo '<div class="nice-name">@' . bp_core_get_username( $member_id ) . '</div>';
 			?>
 		</a>
 	</div>

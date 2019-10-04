@@ -99,15 +99,15 @@ a:hover,
           box-shadow: none;
   padding: 6px 10px;
   padding: 0.6rem 1rem;
-  color: #fff !important;
+  color: #fff;
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
   height: auto;
   line-height: 1;
 }
 
 .widget-area .widget.widget_ccluk-newsletter-signup #mc_embed_signup form #mc-embedded-subscribe.button:hover, .widget-area .widget.widget_custom_html #mc_embed_signup form #mc-embedded-subscribe.button:hover {
-  color: #fff !important;
-  background-color: #54ae68 !important;
+  color: #fff;
+  background-color: #54ae68;
 }
 
 .widget-area .widget.widget_ccluk-newsletter-signup #mc_embed_signup form div.response, .widget-area .widget.widget_custom_html #mc_embed_signup form div.response {
@@ -243,12 +243,12 @@ a.button {
           box-shadow: none;
   padding: 6px 10px;
   padding: 0.6rem 1rem;
-  color: #fff !important;
+  color: #fff;
 }
 
 a.button:hover {
-  color: #fff !important;
-  background-color: #54ae68 !important;
+  color: #fff;
+  background-color: #54ae68;
 }
 
 a.cta {
@@ -896,13 +896,13 @@ body.page-template-homepage #main .section.join .section-content .list-item.form
           box-shadow: none;
   padding: 6px 10px;
   padding: 0.6rem 1rem;
-  color: #fff !important;
+  color: #fff;
   float: right;
 }
 
 body.page-template-homepage #main .section.join .section-content .list-item.form form.mc4wp-form input[type="submit"]:hover, body.page-template-homepage #main .section.newsletter .section-content .list-item.form form.mc4wp-form input[type="submit"]:hover, body.page-template-homepage #main .section.embed .section-content .list-item.form form.mc4wp-form input[type="submit"]:hover {
-  color: #54ae68 !important;
-  background-color: #fff !important;
+  color: #54ae68;
+  background-color: #fff;
 }
 
 body.page-template-homepage #main .section.join.embed .section-content .list-item.form #mc_embed_signup, body.page-template-homepage #main .section.join.newsletter .section-content .list-item.form #mc_embed_signup, body.page-template-homepage #main .section.newsletter.embed .section-content .list-item.form #mc_embed_signup, body.page-template-homepage #main .section.newsletter.newsletter .section-content .list-item.form #mc_embed_signup, body.page-template-homepage #main .section.embed.embed .section-content .list-item.form #mc_embed_signup, body.page-template-homepage #main .section.embed.newsletter .section-content .list-item.form #mc_embed_signup {
@@ -934,7 +934,7 @@ body.page-template-homepage #main .section.join.embed .section-content .list-ite
           box-shadow: none;
   padding: 6px 10px;
   padding: 0.6rem 1rem;
-  color: #fff !important;
+  color: #fff;
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
   height: auto;
   line-height: 1;
@@ -942,8 +942,8 @@ body.page-template-homepage #main .section.join.embed .section-content .list-ite
 }
 
 body.page-template-homepage #main .section.join.embed .section-content .list-item.form #mc_embed_signup .button:hover, body.page-template-homepage #main .section.join.newsletter .section-content .list-item.form #mc_embed_signup .button:hover, body.page-template-homepage #main .section.newsletter.embed .section-content .list-item.form #mc_embed_signup .button:hover, body.page-template-homepage #main .section.newsletter.newsletter .section-content .list-item.form #mc_embed_signup .button:hover, body.page-template-homepage #main .section.embed.embed .section-content .list-item.form #mc_embed_signup .button:hover, body.page-template-homepage #main .section.embed.newsletter .section-content .list-item.form #mc_embed_signup .button:hover {
-  color: #54ae68 !important;
-  background-color: #fff !important;
+  color: #54ae68;
+  background-color: #fff;
 }
 
 body.page-template-homepage #main .section.join.embed .section-content .list-item.form #mc_embed_signup #mc-embedded-subscribe-form input.mce_inline_error, body.page-template-homepage #main .section.join.newsletter .section-content .list-item.form #mc_embed_signup #mc-embedded-subscribe-form input.mce_inline_error, body.page-template-homepage #main .section.newsletter.embed .section-content .list-item.form #mc_embed_signup #mc-embedded-subscribe-form input.mce_inline_error, body.page-template-homepage #main .section.newsletter.newsletter .section-content .list-item.form #mc_embed_signup #mc-embedded-subscribe-form input.mce_inline_error, body.page-template-homepage #main .section.embed.embed .section-content .list-item.form #mc_embed_signup #mc-embedded-subscribe-form input.mce_inline_error, body.page-template-homepage #main .section.embed.newsletter .section-content .list-item.form #mc_embed_signup #mc-embedded-subscribe-form input.mce_inline_error {
@@ -1019,12 +1019,12 @@ body.page-template-homepage .homepage-section-title > h4 {
           box-shadow: none;
   padding: 6px 10px;
   padding: 0.6rem 1rem;
-  color: #fff !important;
+  color: #fff;
 }
 
 body.page-template-homepage .homepage-section-title > h4:hover {
-  color: #fff !important;
-  background-color: #54ae68 !important;
+  color: #fff;
+  background-color: #54ae68;
 }
 
 body.page-template-homepage .site {
@@ -1896,7 +1896,7 @@ img.mfp-img {
           box-shadow: none;
   padding: 6px 10px;
   padding: 0.6rem 1rem;
-  color: #fff !important;
+  color: #fff;
   padding: 3px 6px;
   padding: 0.3rem 0.6rem;
 }
@@ -1907,8 +1907,8 @@ img.mfp-img {
 .single-incsub_event #wpmudevevents-wrapper div.wpmudevevents-buttons input.wpmudevevents-yes-submit:hover,
 .single-incsub_event #wpmudevevents-wrapper div.wpmudevevents-buttons input.wpmudevevents-maybe-submit:hover,
 .single-incsub_event #wpmudevevents-wrapper div.wpmudevevents-buttons input.wpmudevevents-no-submit:hover {
-  color: #fff !important;
-  background-color: #54ae68 !important;
+  color: #fff;
+  background-color: #54ae68;
 }
 
 .single-incsub_event #wpmudevevents-wrapper div.wpmudevevents-buttons a.wpmudevevents-yes-submit.current,
@@ -1932,7 +1932,7 @@ img.mfp-img {
           box-shadow: none;
   padding: 6px 10px;
   padding: 0.6rem 1rem;
-  color: #fff !important;
+  color: #fff;
   padding: 3px 6px;
   padding: 0.3rem 0.6rem;
 }
@@ -1940,8 +1940,8 @@ img.mfp-img {
 .single-incsub_event #wpmudevevents-wrapper #wpmudevevents-rsvps #wpmudevevents-hide-rsvps:hover,
 .single-incsub_event #wpmudevevents-wrapper #wpmudevevents-rsvps #wpmudevevents-load-rsvps:hover,
 .single-incsub_event #wpmudevevents-wrapper #wpmudevevents-rsvps a.wpmudevevents-login_link-cancel:hover {
-  color: #fff !important;
-  background-color: #54ae68 !important;
+  color: #fff;
+  background-color: #54ae68;
 }
 
 .single-incsub_event #wpmudevevents-wrapper div.message {
@@ -1995,13 +1995,13 @@ body.single-give_forms #secondary {
           box-shadow: none;
   padding: 6px 10px;
   padding: 0.6rem 1rem;
-  color: #fff !important;
+  color: #fff;
 }
 
 .give-form .give-donation-submit input[type=submit].give-btn:hover,
 .give-form button.give-btn:hover {
-  color: #fff !important;
-  background-color: #54ae68 !important;
+  color: #fff;
+  background-color: #54ae68;
 }
 
 /*--------------------------------------------------------------

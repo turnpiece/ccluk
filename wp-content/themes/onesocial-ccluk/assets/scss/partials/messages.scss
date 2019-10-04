@@ -209,10 +209,10 @@ body.bp-user.messages {
 
               &.unread td {
                   
-                  border-top: 2px solid #e1e1e1;
-                  border-bottom: 2px solid #e1e1e1;
+                  border-top: 2px solid $secondary_bg;
+                  border-bottom: 2px solid $secondary_bg;
                   &.thread-from {
-                    border-left: 2px solid #e1e1e1;
+                    border-left: 2px solid $secondary_bg;
                     position: relative;
 
                   &:before {
@@ -237,13 +237,13 @@ body.bp-user.messages {
                     position: absolute;
                     pointer-events: none;
                     border-color: rgba(255, 255, 255, 0);
-                    border-right-color: #f9f9f9;
+                    border-right-color: $secondary_bg;
                     border-width: 7px;
                     margin-top: -7px;
                   }
                   &:before {
                     border-color: $green;
-                    border-right-color: #e1e1e1;
+                    border-right-color: $secondary_bg;
                     border-width: 10px;
                     margin-top: -10px;
                   }
@@ -314,7 +314,7 @@ body.bp-user.messages {
           border-bottom: 0;
         }
         tbody tr.read:first-child {
-          border-top: 2px solid #e1e1e1;
+          border-top: 2px solid $secondary_bg;
         }
 
         td, th {
@@ -502,7 +502,7 @@ display: none;
     border-top: 0;
   }
   &:after {
-    border: 2px solid #e1e1e1;
+    border: 2px solid $secondary_bg;
     content: "";
     height: 100%;
     left: 36px;

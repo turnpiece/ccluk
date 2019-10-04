@@ -112,6 +112,10 @@ div.bbp-forum-title,
       color: $blue;
       font-size: $font-size-sm;
       line-height: 1;
+
+      &:hover {
+        color: $green;
+      }
     }
   }
   #activity-stream .activity-meta {
@@ -120,12 +124,12 @@ div.bbp-forum-title,
       color: $blue;
       font-size: $font-size-sm;
       line-height: 1;
+
+      &:hover {
+        color: $green;
+      }
     }
   }
-}
-
-#primary #buddypress #activity-stream div.activity-meta a:hover:before {
-  color: $green;
 }
 
 #buddypress #activity-stream {
@@ -137,7 +141,8 @@ div.bbp-forum-title,
       content: "C";
     }
   }
-  .acomment-options .acomment-like.fav-comment:before, .activity-meta .fav.bp-secondary-action:before {
+  .acomment-options .acomment-like.fav-comment:before, 
+  .activity-meta .fav.bp-secondary-action:before {
     content: "G";
     font-family: 'onesocial';
   }
@@ -268,7 +273,7 @@ form#whats-new-form {
   overflow: hidden;
   width: 100%;
   position: relative;
-@include display-flex();
+  @include display-flex();
   &:after {
     display: none;
     content: '';
@@ -522,14 +527,22 @@ body.no-js #buddypress #whats-new-options {
 
 body.buddypress {
   #buddypress #activity-stream {
-    .activity-inner > p {
-      word-wrap: break-word;
-      font-size: $font-size-sm;
-      font-weight: 300;
-      color: $green;
+    li img.avatar {
+      float: right;
+      margin-right: 30%;
+    }
+    .activity-inner {
+      max-width: 450px;
+      margin-left: 15%;
+      > p {
+        word-wrap: break-word;
+        font-size: $font-size-sm;
+        font-weight: 300;
+        color: $green;
+      }
     }
     .acomment-content p {
-      font-size: 18px;
+      font-size: $font-size-min;
       font-weight: 300;
     }
   }
@@ -931,7 +944,7 @@ body #buddypress div.activity-comments form#frm_buddypress-edit-activity .ac-tex
     margin-bottom: 12px;
   }
   #buddypress #blogs-list li {
-    border-bottom: 1px solid #e1e1e1;
+    border-bottom: 1px solid $secondary_bg;
     margin-bottom: 30px;
   }
   .blog-details {
@@ -2424,7 +2437,7 @@ label[for='select-all-notifications'] {
 
 #main #buddypress #send-private-message.generic-button a:before {
   background: $white !important;
-  border: 2px solid #e1e1e1;
+  border: 2px solid $secondary_bg;
   content: '\f0e0';
   font-family: "fontawesome";
   font-size: $font-size-tiny;
@@ -2437,9 +2450,7 @@ label[for='select-all-notifications'] {
 
 .bp-legacy div#item-body {
   clear: left;
-  overflow: hidden;
-  background-color: $white;
-  padding: 15px 0;
+  padding: 0 0 15px;
   overflow: hidden;
 }
 
@@ -2528,7 +2539,7 @@ label[for='select-all-notifications'] {
 
 .trigger-filter:before {
     content: "P";
-    border: 1px solid #e1e1e1;
+    border: 1px solid $secondary_bg;
     position: absolute;
     right: 0;
     padding: 0px 11px;
@@ -2761,8 +2772,8 @@ body.activity-permalink #buddypress ul.item-list {
         float: left;
         margin: 0 13% 0 0;
         box-shadow: none;
-        width: 46px;
-        height: 46px;
+        width: 60px;
+        height: 60px;
       }
       &.invites li img.avatar {
         margin-top: 5px;
@@ -3267,14 +3278,14 @@ body.buddypress.is-desktop {
       }
 
       &#subnav.item-list-tabs {
-        margin: 24px 0;
+        margin: 24px 0 48px;
         padding: 0;
         position: relative;
       }
     }
     > div[role="navigation"].item-list-tabs,
     .dir-form div.item-list-tabs {
-      margin: 24px 0;
+      margin: 24px 0 48px;
       padding: 0;
       position: relative;
     }
@@ -3286,7 +3297,7 @@ body.buddypress.is-desktop {
 --------------------------------------------------------------*/
 
 .bp-legacy div#item-body div.item-list-tabs {
-  margin: 24px 0;
+  margin: 24px 0 48px;
   padding: 0;
   position: relative;
 }
@@ -3323,7 +3334,8 @@ body:not(.group-members) #buddypress div {
       max-width: 175px;
     }
   }
-  > div[role="navigation"].item-list-tabs ul li.last, .dir-form div.item-list-tabs ul li.last {
+  > div[role="navigation"].item-list-tabs ul li.last, 
+  .dir-form div.item-list-tabs ul li.last {
     float: right;
     margin: 0;
   }
@@ -3336,63 +3348,63 @@ body:not(.group-members) #buddypress div {
 
 .bp-legacy {
     div#item-body div.item-list-tabs {
-        ul {
-          margin: 0;
-          padding: 0;
-          overflow: visible;
-          font-size: 0;
-          /* Fix for whitespaces between LI. Reset font-size in LI */
+      ul {
+        margin: 0;
+        padding: 0;
+        overflow: visible;
+        font-size: 0;
+        /* Fix for whitespaces between LI. Reset font-size in LI */
 
-          li {
-            margin: 0 9px 4px 0;
-            display: inline-block;
-            margin-right: 9px;
-            list-style: none;
-            font-size: $font-size-sm;
-            /* Required to reset font size */
+        li {
+          margin: 0 9px 4px 0;
+          display: inline-block;
+          margin-right: 9px;
+          list-style: none;
+          font-size: $font-size-sm;
+          /* Required to reset font size */
 
-            &.last {
-              float: right;
-              margin: 0;
+          &.last {
+            float: right;
+            margin: 0;
 
-              select {
-                max-width: 175px;
-              }
-            }
-
-            &#activity-filter-select {
-              border-bottom: none;
-            }
-
-            a {
-              display: block;
-              padding: 6px 10px;
-              line-height: 1.7;
-              text-decoration: none;
-              text-transform: uppercase;
-
-              span {
-                display: inline;
-                font-size: 80%;
-                margin-left: 3px;
-                padding: 2px 5px;
-                text-align: center;
-                vertical-align: middle;
-              }
-            }
-
-            &:hover,
-            &:active,
-            &.selected a,
-            &.current a {
-              @include active-tab();
-            }
-
-            li {
-              float: left;
-              margin-top: 0;
+            select {
+              max-width: 175px;
             }
           }
+
+          &#activity-filter-select {
+            border-bottom: none;
+          }
+
+          a {
+            display: block;
+            padding: 6px 10px;
+            line-height: 1.7;
+            text-decoration: none;
+            text-transform: uppercase;
+
+            span {
+              display: inline;
+              font-size: 80%;
+              margin-left: 3px;
+              padding: 2px 5px;
+              text-align: center;
+              vertical-align: middle;
+            }
+          }
+
+          &:hover,
+          &:active,
+          &.selected a,
+          &.current a {
+            @include active-tab();
+          }
+
+          li {
+            float: left;
+            margin-top: 0;
+          }
+        }
       }
   }
 }
@@ -3458,7 +3470,7 @@ body:not(.group-members) #buddypress div {
     &#subnav.item-list-tabs ul li a span,
     &:not(#item-nav):not(#mobile-item-nav) > .item-list-tabs ul li a span {
       display: inline;
-      font-size: 80%;
+      font-size: 90%;
       margin-left: 3px;
       padding: 2px 5px;
       text-align: center;
@@ -3469,7 +3481,7 @@ body:not(.group-members) #buddypress div {
   > div[role="navigation"].item-list-tabs ul li a span,
   .dir-form div.item-list-tabs ul li a span {
     display: inline;
-    font-size: 80%;
+    font-size: 90%;
     margin-left: 3px;
     padding: 2px 5px;
     text-align: center;
@@ -3513,17 +3525,14 @@ body:not(.group-members) #buddypress div {
     margin-top: 0;
   }
 
-    div.item-list-tabs ul .button, .bp-legacy div#item-body div.item-list-tabs ul .button {
+    div.item-list-tabs ul .button, 
+    .bp-legacy div#item-body div.item-list-tabs ul .button {
         margin: 8px 0 0 8px;
         float: right;
         font-weight: 400;
     }
 
     ul.item-list li div.action {
-        /* position: absolute; */
-        /* top: 15px; */
-        /* right: 0; */
-        /* text-align: right; */
         margin-bottom: 40px;
     }
     #blogs-list.item-list li div {
@@ -3541,7 +3550,7 @@ body:not(.group-members) #buddypress div {
 
 .blog-details {
   overflow: hidden;
-  border-bottom: 1px solid #e1e1e1;
+  border-bottom: 1px solid $secondary_bg;
   padding-bottom: 30px;
 }
 
@@ -3612,7 +3621,7 @@ body:not(.group-members) #buddypress div {
   }
   .activity-list .activity-avatar {
     float: left;
-    width: 30%;
+    width: 15%;
   }
 }
 
@@ -3694,7 +3703,7 @@ body.activity-permalink #buddypress .activity-list .activity-comments {
 
 #buddypress .activity-list .activity-content,
 .search #buddypress .results-group .activity-list .activity-content {
-  margin: 0 0 0 30%;
+  margin: 0 0 0 15%;
 }
 
 body.activity-permalink #buddypress .activity-list li .activity-content {
@@ -3743,7 +3752,7 @@ body.activity-permalink #buddypress .activity-list li .activity-content {
     }
     .has-comments .activity-content .activity-inner {
       padding-bottom: 27px;
-      border-bottom: 1px solid #e1e1e1;
+      border-bottom: 1px solid $secondary_bg;
     }
     .activity-content .activity-inner .button {
       padding: 3px 7px;
@@ -3900,11 +3909,11 @@ body.activity-permalink #buddypress div.activity-meta {
     ul li {
       padding: 40px 0 15px;
       &:not(.activity-like-count) {
-        border-top: 1px solid #e1e1e1;
+        border-top: 1px solid $secondary_bg;
       }
     }
     form.ac-form {
-      border-top: 1px solid #e1e1e1;
+      border-top: 1px solid $secondary_bg;
     }
     > ul > li:first-child {
       border-top: none;
@@ -4361,7 +4370,7 @@ body.articles #buddypress div#item-body {
   padding-left: 10px;
   &:after {
     border: 0;
-    border-left: 1px solid #e1e1e1;
+    border-left: 1px solid $secondary_bg;
   }
 }
 
@@ -5011,7 +5020,7 @@ body.buddypress {
 	    }
 
 		div.profile h4 {
-	      border-bottom: 1px solid #e1e1e1;
+	      border-bottom: 1px solid $secondary_bg;
 	      font-size: 19px;
 	      font-weight: 600;
 	      margin: 0;
@@ -5320,13 +5329,13 @@ body.buddypress {
 		}
 
 		#buddypress {
-            .item-list-tabs {
-			    &div#subnav {
-				    display: none;
-                }
-                &.activity-type-tabs {
-                    @include bp-item-list-tabs();
-                }
+      .item-list-tabs {
+			  &div#subnav {
+				  display: none;
+        }
+        &.activity-type-tabs {
+          @include bp-item-list-tabs();
+        }
 			}
 		}
 	}

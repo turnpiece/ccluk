@@ -19,7 +19,7 @@
       border-width: 0;
     }
     #buddypress table#message-threads tr.unread {
-      background-color: #f9f9f9;
+      background-color: $secondary_bg;
       td.thread-from {
         border-left: 0;
       }
