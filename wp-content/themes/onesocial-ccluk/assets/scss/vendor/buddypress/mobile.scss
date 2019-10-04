@@ -62,16 +62,12 @@ body {
 
 #buddypress div {
   &#item-header div#item-actions {
-    background-color: #EAF6FE;
     float: left;
     margin: 0 0 15px;
     padding: 5px 0;
     width: 100%;
     position: relative;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
     h3 {
       float: left;
       font-size: 14px;
@@ -122,7 +118,7 @@ body {
   ul#activity-stream li.activity-item {
     clear: both;
     padding: 0;
-    background-color: #f9f9f9;
+    
     margin-bottom: 15px;
   }
 }
@@ -131,14 +127,13 @@ body {
   div.item-list-tabs, form#whats-new-form {
     clear: both;
     padding: 0;
-    background-color: #f9f9f9;
     margin-bottom: 15px;
   }
 }
 &.photos #buddypress form#whats-new-form {
   clear: both;
   padding: 0;
-  background-color: #f9f9f9;
+  
   margin-bottom: 15px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -319,7 +314,7 @@ body {
             background-color: $green;
 
             a {
-                color: $green;
+              color: $green;
             }
           }
         }
@@ -445,9 +440,6 @@ body {
       border: none;
       padding: 0;
       background-color: transparent;
-      -webkit-box-shadow: none;
-      -moz-box-shadow: none;
-      box-shadow: none;
     }
     &#filter ul {
       margin: 0;
@@ -495,10 +487,7 @@ body {
       font-size: $font-size-tiny;
       line-height: 38px;
       width: 100%;
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: -ms-flexbox;
-      display: flex;
+      @include display-flex();
     }
   }
 }
@@ -1016,9 +1005,6 @@ h1.big,
       margin-bottom: 20px;
     }
   }
-  #item-header {
-    /*margin-top: -238px;*/
-  }
 }
 
 /** --- **/
@@ -1044,7 +1030,7 @@ h1.big,
       width: -webkit-calc(100% - 221px);
       width: -o-calc(100% - 221px);
       width: calc(100% - 221px);
-      float: right;
+      float: left;
       h1 {
         width: 100%;
       }

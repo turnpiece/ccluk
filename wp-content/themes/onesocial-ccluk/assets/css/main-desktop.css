@@ -1158,9 +1158,6 @@ header-aside,
 
 .main-navigation div > ul > .current-menu-item > a, .main-navigation div > ul > .current-menu-ancestor > a {
   color: #333;
-  -webkit-box-shadow: 0 -2px 0 #54ae68 inset;
-          box-shadow: 0 -2px 0 #54ae68 inset;
-  /* darken */
 }
 
 .main-navigation div > ul ul > .current-menu-item > a {

@@ -1143,8 +1143,6 @@ header-aside,
     > {
       .current-menu-item > a, .current-menu-ancestor > a {
         color: $dark;
-        box-shadow: 0 -2px 0 $green inset;
-        /* darken */
       }
     }
     ul > .current-menu-item > a {

@@ -520,16 +520,18 @@ body.no-js #buddypress #whats-new-options {
   height: auto;
 }
 
-#buddypress #activity-stream {
-  .activity-inner > p {
-    word-wrap: break-word;
-    font-size: 18px;
-    font-weight: 300;
-    color: $dark;
-  }
-  .acomment-content p {
-    font-size: 18px;
-    font-weight: 300;
+body.buddypress {
+  #buddypress #activity-stream {
+    .activity-inner > p {
+      word-wrap: break-word;
+      font-size: $font-size-sm;
+      font-weight: 300;
+      color: $green;
+    }
+    .acomment-content p {
+      font-size: 18px;
+      font-weight: 300;
+    }
   }
 }
 
@@ -1776,8 +1778,8 @@ div#sitewide-notice div#message p a {
 /* Sitewide Notice */
 
 div#sitewide-notice div#message p {
-  background-color: #f9f9f9;
-  color: #666;
+  
+  color: $green;
   position: relative;
   padding-right: 70px;
   /* leaves room for #close-notice */
@@ -2439,7 +2441,6 @@ label[for='select-all-notifications'] {
   background-color: $white;
   padding: 15px 0;
   overflow: hidden;
-  border-bottom: 1px solid $light;
 }
 
 
@@ -2692,12 +2693,13 @@ ul.horiz-gallery li img, .bp-user #main ul.horiz-gallery li img {
     }
     .group-admin-name {
       color: $white;
+      background-color: $green;
       display: block;
       font-size: $font-size-tiny;
       margin: 3px auto;
+      padding: 3px;
       opacity: 0;
       position: absolute;
-      text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
       white-space: nowrap;
       z-index: 1;
     }
@@ -3213,70 +3215,70 @@ body #buddypress div#item-nav .item-list-tabs > ul > li {
   margin-left: 0;
 }
 
-body.bp-user.is-desktop {
-    #buddypress {
-      div {
-        &#item-nav.profile-nav .item-list-tabs ul li {
-            &.last select {
-              max-width: 175px;
-            }
-            > a {
-              font-size: $font-size-tiny;
-              font-weight: 700;
-              text-transform: uppercase;
-              color: $blue;
-              padding-bottom: 36px;
-              padding-top: 10px;
-              display: block;
-              position: relative;
-              border: none;
-              @include border-radius(0);
-              background: transparent;
+body.buddypress.is-desktop {
+  #buddypress {
+    div {
+      &#item-nav > div#object-nav.item-list-tabs ul li {
+          &.last select {
+            max-width: 175px;
+          }
+          > a {
+            font-size: $font-size-tiny;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: $blue;
+            padding-bottom: 36px;
+            padding-top: 10px;
+            display: block;
+            position: relative;
+            border: none;
+            @include border-radius(0);
+            background: transparent;
 
-              span {
-                  color: inherit;
-                  background: transparent;
-                  display: inline-block;
-                  margin-left: 4px;
-                  line-height: 1;
+            span {
+                color: inherit;
+                background: transparent;
+                display: inline-block;
+                margin-left: 4px;
+                line-height: 1;
+            }
+          }
+          &:hover,
+          &.selected,
+          &.current {
+              > a:before {
+                  content: '';
+                  width: 100%;
+                  display: block;
+                  position: absolute;
+                  bottom: 0;
+                  left: 0;
+                  height: 2px;
+                  color: $green;
               }
-            }
-            &:hover,
-            &.selected,
-            &.current {
-                > a:before {
-                    content: '';
-                    width: 100%;
-                    display: block;
-                    position: absolute;
-                    bottom: 0;
-                    left: 0;
-                    height: 2px;
-                    color: $green;
-                }
-                > a:after {
-                    color: $green;
-                }
-                > a {
-                    color: $green;
-                    border-bottom: 1px solid;
-                }
-            }
-        }
-        &#subnav.item-list-tabs,
-        &:not(#item-nav):not(#mobile-item-nav) .item-list-tabs {
-          margin: 24px 0;
-          padding: 0;
-          position: relative;
-        }
+              > a:after {
+                  color: $green;
+              }
+              > a {
+                  color: $green;
+                  border-bottom: 1px solid;
+              }
+          }
       }
-      > div[role="navigation"].item-list-tabs,
-      .dir-form div.item-list-tabs {
+
+      &#subnav.item-list-tabs {
         margin: 24px 0;
         padding: 0;
         position: relative;
       }
     }
+    > div[role="navigation"].item-list-tabs,
+    .dir-form div.item-list-tabs {
+      margin: 24px 0;
+      padding: 0;
+      position: relative;
+    }
+  }
 }
 
 /*--------------------------------------------------------------
@@ -3889,7 +3891,7 @@ body.activity-permalink #buddypress div.activity-meta {
       }
       clear: both;
       margin: 0;
-      /*background-color: #f9f9f9;*/
+      /**/
       position: relative;
     }
     form.ac-form {
@@ -4318,7 +4320,7 @@ body.articles #buddypress div#item-body {
 }
 
 #buddypress div.buddyboss-media-form-wrapper form {
-  background-color: #f9f9f9;
+  
   padding: 10px;
   margin: 18px 0 0;
   #message {
@@ -4330,13 +4332,11 @@ body.articles #buddypress div#item-body {
     font-style: normal;
     text-rendering: auto;
     text-decoration: inherit;
-    speak: none;
     display: inline-block;
     line-height: 1;
     content: "\f0d8";
     font-size: 30px;
     -webkit-font-smoothing: antialiased;
-    color: #f9f9f9;
     position: absolute;
     top: 0;
     left: 0.5em;
@@ -4797,65 +4797,66 @@ body.buddypress {
 	  margin-top: 0;
 	}
 
-    	#buddypress div#item-header {
-    	  div#item-header-avatar {
-    	    width: 185px;
-    	  }
-    	  #item-header-avatar img.avatar {
-    	    width: 185px;
-    	    height: 185px;
-    	  }
-    	}
-
-        #secondary {
-            #item-header-content {
-              padding-top: 10px;
-              + .widget {
-                padding-top: 4px;
-              }
-              #item-meta {
-                  p {
-                      color: $green;
-                      font-size: $font-size-tiny;
-                  }
-              }
-            }
-        }
-        #buddypress {
-            form#send-invite-form #invite-list {
-                margin-bottom: 50px;
-            }
-
-
-    	  #item-header span.activity {
-    	    color: $white;
-    	    margin-top: 6px;
-    	    display: block;
-    	  }
-    	  #activity-stream {
-    	    margin-bottom: 0;
-    	  }
-    	  div#item-body {
-    	    margin-bottom: 70px;
-    	    float: right;
-    	    width: 100%;
-    	  }
-        }
+  #buddypress div#item-header {
+    div#item-header-avatar {
+      width: 185px;
     }
-	#item-title-area {
-	  h1 {
-	    margin-top: 0;
-	    margin-bottom: 0;
-	    color: $green;
-        font-family: $font-heading;
-	    display: inline-block;
-	    vertical-align: middle;
-	    margin-right: 8%;
-	  }
-	  > div {
-	    vertical-align: top;
-	  }
-	}
+    #item-header-avatar img.avatar {
+      width: 185px;
+      height: 185px;
+    }
+  }
+
+  #secondary {
+      #item-header-content {
+        padding-top: 10px;
+        + .widget {
+          padding-top: 4px;
+        }
+        #item-meta {
+            p {
+                color: $green;
+                font-size: $font-size-sm;
+            }
+        }
+      }
+  }
+  #buddypress {
+      form#send-invite-form #invite-list {
+          margin-bottom: 50px;
+      }
+
+
+  #item-header span.activity {
+    color: $white;
+    margin-top: 6px;
+    display: block;
+  }
+  #activity-stream {
+    margin-bottom: 0;
+  }
+  div#item-body {
+    margin-bottom: 70px;
+    float: right;
+    width: 100%;
+  }
+  }
+}
+
+#item-title-area {
+  h1 {
+    margin-top: 0;
+    margin-bottom: 0;
+    color: $green;
+      font-family: $font-heading;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 8%;
+  }
+  > div {
+    vertical-align: top;
+  }
+}
 
 	#buddypress #item-title-area {
         @include display-flex-box( flex-end, space-between );
@@ -4900,18 +4901,15 @@ body.buddypress {
 	&.single-item {
 	  &.groups #buddypress #item-nav {
 	    position: relative;
-	    margin-bottom: 26px;
-	    margin-top: 44px;
+	    margin-bottom: 10px;
+	    margin-top: 24px;
 	  }
 	  #buddypress div#item-nav .item-list-tabs {
-	    /*border-bottom: 0;*/
 	    margin-bottom: 50px;
 	  }
 	  &.groups #buddypress div#subnav.item-list-tabs {
 	    margin-top: 0;
 	    margin-bottom: 50px;
-	    /*    padding-bottom: 25px;*/
-	    /*border-bottom: 1px solid rgba(0,0,0,0.1);*/
 	  }
 	}
 
@@ -5567,13 +5565,12 @@ body.buddypress {
     }
 
     @media screen and (max-width: 1024px) {
-        @import "buddypress/mobile";
+      @import "buddypress/mobile";
     }
-
-	&.is-mobile {
-        @import "buddypress/mobile";
-	}
-
+    
+    @media screen and (min-width: 1025px) {
+      @import "buddypress/desktop";
+    }
 }
 
 /* fallback */

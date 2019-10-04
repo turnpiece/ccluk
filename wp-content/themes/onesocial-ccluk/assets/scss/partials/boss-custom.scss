@@ -587,15 +587,9 @@ div#sitewide-notice div#message p {
 
 /***************** Mobile ******************/
 
-.is-mobile #buddypress {
-  #mobile-item-nav-wrap, ul#activity-stream li.activity-item {
-    background-color: $secondary_bg;
-  }
-}
-
 body {
   &.has-activity.is-mobile #buddypress {
-    div.item-list-tabs, form#whats-new-form {
+    form#whats-new-form {
       background-color: $secondary_bg;
     }
   }

@@ -4551,10 +4551,6 @@ select[multiple="multiple"] {
   width: 100%;
 }
 
-#buddypress table thead tr {
-  /* background-color: $secondary_bg; */
-}
-
 @-webkit-keyframes spin {
   0% {
     -webkit-transform: rotate(0deg);

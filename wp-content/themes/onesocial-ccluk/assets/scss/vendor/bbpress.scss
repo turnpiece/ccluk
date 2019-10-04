@@ -699,18 +699,13 @@ span.bbp-author-ip {
 }
 
 #bbpress-forums {
-	div.bbp-the-content-wrapper {
-		textarea.bbp-the-content {
-			font-size: $font-size-sm;
-		}
-	}
 
-  	#favorite-toggle .is-favorite .favorite-toggle:before,
-  	#subscription-toggle .is-subscribed .subscription-toggle:before,
-  	#favorite-toggle .is-favorite .favorite-toggle:after,
-  	#subscription-toggle .is-subscribed .subscription-toggle:after {
-    	background-color: $green;
-  	}
+  #favorite-toggle .is-favorite .favorite-toggle:before,
+  #subscription-toggle .is-subscribed .subscription-toggle:before,
+  #favorite-toggle .is-favorite .favorite-toggle:after,
+  #subscription-toggle .is-subscribed .subscription-toggle:after {
+    background-color: $green;
+  }
 
 	#bbp-your-profile fieldset {
 		input,
@@ -1274,7 +1269,8 @@ p.form-allowed-tags {
       textarea.bbp-the-content {
         width: 100%;
         margin: 0;
-        font-size: $font-size-tiny;
+        font-size: $font-size-min;
+        padding: $font-size-min;
       }
       table, tbody, tr, td {
         border: none;

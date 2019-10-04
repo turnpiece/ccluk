@@ -63,7 +63,7 @@
 					</div><!-- #item-header-content -->
 
 				</div>
-
+<?php /*
 				<div id="item-actions">
 
 					<?php if ( bp_group_is_visible() ) : ?>
@@ -88,7 +88,7 @@
 					?>
 
 				</div><!-- #item-actions -->
-
+*/ ?>
             </div><!-- /.table-cell -->
 
         </div>
