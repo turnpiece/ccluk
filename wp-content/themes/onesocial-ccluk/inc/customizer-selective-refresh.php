@@ -99,7 +99,6 @@ function ccluk_customizer_partials( $wp_customize ) {
             'selector' => '.section-gallery',
             'settings' => array(
                 'ccluk_gallery_source',
-
                 'ccluk_gallery_title',
                 'ccluk_gallery_subtitle',
                 'ccluk_gallery_desc',
@@ -208,37 +207,6 @@ function ccluk_customizer_partials( $wp_customize ) {
             'render_callback' => 'ccluk_selective_refresh_render_section_content',
         ));
     }
-/*
-    $wp_customize->get_setting( 'blogname' )->transport = 'postMessage';
-    $wp_customize->get_setting( 'blogdescription' )->transport = 'postMessage';
-    $wp_customize->get_setting( 'ccluk_hide_sitetitle' )->transport = 'postMessage';
-    $wp_customize->get_setting( 'ccluk_hide_tagline' )->transport = 'postMessage';
-    $wp_customize->selective_refresh->add_partial( 'header_brand', array(
-        'selector' => '.site-header .site-branding',
-        'settings' => array( 'blogname', 'blogdescription', 'ccluk_hide_sitetitle', 'ccluk_hide_tagline' ),
-        'render_callback' => 'ccluk_site_logo',
-    ) );
-
-    // Footer social heading
-    $wp_customize->selective_refresh->add_partial( 'ccluk_social_footer_title', array(
-        'selector' => '.footer-social .follow-heading',
-        'settings' => array( 'ccluk_social_footer_title' ),
-        'render_callback' => 'ccluk_selective_refresh_social_footer_title',
-    ) );
-    // Footer social icons
-    $wp_customize->selective_refresh->add_partial( 'ccluk_social_profiles', array(
-        'selector' => '.footer-social .footer-social-icons',
-        'settings' => array( 'ccluk_social_profiles' ),
-        'render_callback' =>  'ccluk_get_social_profiles',
-    ) );
-
-    // Footer New letter heading
-    $wp_customize->selective_refresh->add_partial( 'ccluk_newsletter_title', array(
-        'selector' => '.footer-subscribe .follow-heading',
-        'settings' => array( 'ccluk_newsletter_title' ),
-        'render_callback' => 'ccluk_selective_refresh_newsletter_title',
-    ) );
-*/
 }
 add_action( 'customize_register', 'ccluk_customizer_partials', 50 );
 

@@ -1019,14 +1019,6 @@ header-aside,
 /*--------------------------------------------------------------
 1.1.5 - Navigation
 --------------------------------------------------------------*/
-.nav-inner {
-  /*padding-top: 29px;*/
-}
-
-.bp-user .main-navigation {
-  /* width: 50%; */
-}
-
 .main-navigation ul.nav-menu, .main-navigation div.nav-menu > ul {
   text-align: left;
   width: 100%;
@@ -1035,6 +1027,22 @@ header-aside,
 .main-navigation ul {
   margin: 0;
   text-indent: 0;
+}
+
+.main-navigation li a {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.main-navigation .nav-menu > li:hover, .main-navigation .nav-menu > li.current-menu-item, .main-navigation .nav-menu > li.current-menu-ancestor {
+  background-color: #54ae68;
+}
+
+.main-navigation .nav-menu > li:hover > a, .main-navigation .nav-menu > li.current-menu-item > a, .main-navigation .nav-menu > li.current-menu-ancestor > a {
+  color: #fff;
+}
+
+.main-navigation .nav-menu.horizontal-responsive-menu {
+  width: 120%;
 }
 
 .onsocial-primary-menu {
@@ -1156,13 +1164,15 @@ header-aside,
   line-height: 1;
 }
 
-.main-navigation div > ul > .current-menu-item > a, .main-navigation div > ul > .current-menu-ancestor > a {
-  color: #333;
+.main-navigation div > ul > .current-menu-item > a,
+.main-navigation div > ul > .current-menu-ancestor > a {
+  color: #fff;
+  background-color: #54ae68;
 }
 
 .main-navigation div > ul ul > .current-menu-item > a {
-  /* darken */
-  background-color: rgba(0, 0, 0, 0.05);
+  color: #fff;
+  background-color: #54ae68;
 }
 
 .main-navigation li.hideshow ul {

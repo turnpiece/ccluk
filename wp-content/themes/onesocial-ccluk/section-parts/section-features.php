@@ -6,7 +6,41 @@ $subtitle = get_theme_mod( 'ccluk_features_subtitle', esc_html__('Why choose Us'
 if ( ccluk_is_selective_refresh() ) {
     $disable = false;
 }
+
+if ( ! function_exists( 'ccluk_get_features_data' ) ) {
+    /**
+     * Get features data
+     *
+     * @since 1.1.4
+     * @return array
+     */
+    function ccluk_get_features_data()
+    {
+        $array = get_theme_mod('ccluk_features_boxes');
+        if (is_string($array)) {
+            $array = json_decode($array, true);
+        }
+        if (!empty($array) && is_array($array)) {
+            foreach ($array as $k => $v) {
+                $array[$k] = wp_parse_args($v, array(
+                    'icon' => 'gg',
+                    'title' => '',
+                    'desc' => '',
+                    'link' => '',
+                ));
+
+                //Get/Set social icons
+                $array[$k]['icon'] = trim($array[$k]['icon']);
+                if ($array[$k]['icon'] != '' && strpos($array[$k]['icon'], 'fa-') !== 0) {
+                    $array[$k]['icon'] = 'fa-' . $array[$k]['icon'];
+                }
+            }
+        }
+        return $array;
+    }
+}
 $data  = ccluk_get_features_data();
+
 if ( !$disable && !empty( $data ) ) {
     $desc = get_theme_mod( 'ccluk_features_desc' );
 ?>

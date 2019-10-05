@@ -8,7 +8,26 @@ if ( ccluk_is_selective_refresh() ) {
 }
 
 // Get counter data
+if ( ! function_exists( 'ccluk_get_section_counter_data' ) ) {
+    /**
+     * Get counter data
+     *
+     * @return array
+     */
+    function ccluk_get_section_counter_data()
+    {
+        $boxes = get_theme_mod('ccluk_counter_boxes');
+        if (is_string($boxes)) {
+            $boxes = json_decode($boxes, true);
+        }
+        if (empty($boxes) || !is_array($boxes)) {
+            $boxes = array();
+        }
+        return $boxes;
+    }
+}
 $boxes = ccluk_get_section_counter_data();
+
 if ( ! empty ( $boxes ) ) {
     $desc = wp_kses_post( get_theme_mod( 'ccluk_counter_desc' ) );
     ?>

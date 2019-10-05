@@ -49,10 +49,29 @@ class CCLUK_BP_Custom {
 				'activity' => bp_get_activity_root_slug(),
 			);
 
-			$items .= '<li class="menu-item menu-item-has-children"><a href="'.site_url() . '/' . $slugs['groups'] . '/">'.__( 'Groups' ).'</a>';
+			$class['groups'] = "menu-item menu-item-has-children";
+			$class['members'] = $class['activity'] = "menu-item";
+
+			if (bp_is_groups_component() || bp_is_activity_component() || bp_is_members_component()) {
+				$class['groups'] .= ' current-menu-ancestor';
+
+				if (bp_is_groups_component())
+					$class['groups'] .= ' current-menu-item';
+
+				if (bp_is_activity_component())
+					$class['activity'] .= ' current-menu-item';
+
+				if (bp_is_members_component())
+					$class['members'] .= ' current-menu-item';
+			}
+
+			$items .= '<li class="'.$class['groups'].'"><a href="'.site_url() . '/' . $slugs['groups'] . '/">'.__( 'Groups' ).'</a>';
 			$items .= '<ul class="sub-menu">';
-			$items .= '<li class="menu-item"><a href="'.site_url() . '/' . $slugs['members'] .'/">'.__( 'Members' ).'</a></li>';
-			$items .= '<li class="menu-item"><a href="'.site_url() . '/' . $slugs['activity'] .'/">'.__( 'Activity' ).'</a></li>';
+			foreach( array( 
+				'members' => __( 'Members' ), 
+				'activity' => __( 'Activity' )) as $id => $title )
+				$items .= '<li class="'.$class[$id].'"><a href="'.site_url() . '/' . $slugs[$id] .'/">'.$title.'</a></li>';
+				
 			$items .= '</ul></li>';
 		}
 		return $items;

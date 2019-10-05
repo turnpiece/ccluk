@@ -301,22 +301,6 @@ a.cta:hover {
   opacity: 0.97;
 }
 
-/** Navigation **/
-@media screen and (min-width: 481px) {
-  #masthead .main-navigation li a {
-    color: rgba(0, 0, 0, 0.7);
-  }
-  #masthead .main-navigation .nav-menu > li:hover, #masthead .main-navigation .nav-menu > li.current-menu-item, #masthead .main-navigation .nav-menu > li.current-menu-ancestor {
-    background-color: #54ae68;
-  }
-  #masthead .main-navigation .nav-menu > li:hover > a, #masthead .main-navigation .nav-menu > li.current-menu-item > a, #masthead .main-navigation .nav-menu > li.current-menu-ancestor > a {
-    color: #fff;
-  }
-  #masthead .main-navigation .nav-menu.horizontal-responsive-menu {
-    width: 120%;
-  }
-}
-
 .single .header-area,
 .single-post .header-area,
 .single-give_forms .header-area {
@@ -467,7 +451,7 @@ body.page.page-sidebar-active.page-template #secondary {
   margin-top: 5rem;
 }
 
-body.page.page-sidebar-active #main #primary article > .entry-header {
+body.page.page-sidebar-active #main #primary article > .entry-header > .entry-title {
   text-align: left;
 }
 

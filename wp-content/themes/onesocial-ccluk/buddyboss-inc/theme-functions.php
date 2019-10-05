@@ -520,15 +520,6 @@ function buddyboss_remove_nojs_body_class() {
 
 add_action( 'buddyboss_before_header', 'buddyboss_remove_nojs_body_class' );
 
-/**
- * Determines if the currently logged in user is an admin
- * TODO: This should check in a better way, by capability not role title and
- * this function probably belongs in a functions.php file or utility.php
- */
-function buddyboss_is_admin() {
-	return is_user_logged_in() && current_user_can( 'administrator' );
-}
-
 function buddyboss_members_latest_update_filter( $latest ) {
 	$latest = str_replace( array( '- &quot;', '&quot;' ), '', $latest );
 

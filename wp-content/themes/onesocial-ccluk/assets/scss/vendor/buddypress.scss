@@ -2597,34 +2597,41 @@ label[for='select-all-notifications'] {
 }
 
 #buddypress {
-  .group-members-results ul.horiz-gallery,
-  .member-friends-results ul.horiz-gallery,
-  div#item-header ul.horiz-gallery {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-flow: row wrap;
-    -ms-flex-flow: row wrap;
-    flex-flow: row wrap;
-    font-size: 6px;
-    margin-left: 0;
-    overflow: visible;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
+  .group-members-results ,
+  .member-friends-results,
+  div#item-header {
+    ul.horiz-gallery {
+      @include display-flex();
+      -webkit-flex-flow: row wrap;
+      -ms-flex-flow: row wrap;
+      flex-flow: row wrap;
+      font-size: 6px;
+      margin-left: 0;
+      overflow: visible;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+
+      li img.avatar {
+        width: 50px;
+        height: 50px;
+      }
+    }
   }
 }
 
 #buddypress {
-  .group-members-results ul.horiz-gallery img, .member-friends-results ul.horiz-gallery img {
-    vertical-align: bottom;
+  .group-members-results, 
+  .member-friends-results {
+    ul.horiz-gallery img {
+      vertical-align: bottom;
+    }
   }
 }
 
-ul.horiz-gallery li img, .bp-user #main ul.horiz-gallery li img {
+ul.horiz-gallery li img, 
+.bp-user #main ul.horiz-gallery li img {
   width: 46px;
   height: auto;
   border-radius: 0;
@@ -2772,8 +2779,8 @@ body.activity-permalink #buddypress ul.item-list {
         float: left;
         margin: 0 13% 0 0;
         box-shadow: none;
-        width: 60px;
-        height: 60px;
+        width: 50px;
+        height: 50px;
       }
       &.invites li img.avatar {
         margin-top: 5px;

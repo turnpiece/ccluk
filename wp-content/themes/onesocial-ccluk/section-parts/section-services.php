@@ -4,6 +4,38 @@ $disable  = get_theme_mod( 'ccluk_services_disable' ) == 1 ? true : false;
 $title    = get_theme_mod( 'ccluk_services_title', esc_html__('Our Services', 'onesocial' ));
 $subtitle = get_theme_mod( 'ccluk_services_subtitle', esc_html__('Section subtitle', 'onesocial' ));
 // Get data
+if ( ! function_exists( 'ccluk_get_section_services_data' ) ) {
+    /**
+     * Get services data
+     * @return array
+     */
+    function ccluk_get_section_services_data()
+    {
+        $services = get_theme_mod('ccluk_services');
+        if (is_string($services)) {
+            $services = json_decode($services, true);
+        }
+        $page_ids = array();
+        if (!empty($services) && is_array($services)) {
+            foreach ($services as $k => $v) {
+                if (isset ($v['content_page'])) {
+                    $v['content_page'] = absint($v['content_page']);
+                    if ($v['content_page'] > 0) {
+                        $page_ids[] = wp_parse_args($v, array(
+                            'icon_type' => 'icon',
+                            'image' => '',
+                            'icon' => 'gg',
+                            'enable_link' => 0
+                        ));
+                    }
+                }
+            }
+        }
+        // if still empty data then get some page for demo
+        return $page_ids;
+    }
+}
+
 $page_ids =  ccluk_get_section_services_data();
 if ( ccluk_is_selective_refresh() ) {
     $disable = false;

@@ -1008,16 +1008,6 @@ header-aside,
 1.1.5 - Navigation
 --------------------------------------------------------------*/
 
-.main-navigation {}
-
-.nav-inner {
-  /*padding-top: 29px;*/
-}
-
-.bp-user .main-navigation {
-  /* width: 50%; */
-}
-
 .main-navigation {
   ul.nav-menu, div.nav-menu > ul {
     text-align: left;
@@ -1026,6 +1016,28 @@ header-aside,
   ul {
     margin: 0;
     text-indent: 0;
+  }
+
+  li {
+    a {
+      color: rgba(0, 0, 0, 0.7);
+    }
+  }
+  .nav-menu {
+    > li {
+      &:hover,
+      &.current-menu-item,
+      &.current-menu-ancestor {
+        background-color: $green;
+
+        > a {
+          color: $white;
+        }
+      }
+    }
+    &.horizontal-responsive-menu {
+      width: 120%;
+    }
   }
 }
 
@@ -1141,13 +1153,15 @@ header-aside,
   }
   div > ul {
     > {
-      .current-menu-item > a, .current-menu-ancestor > a {
-        color: $dark;
+      .current-menu-item > a, 
+      .current-menu-ancestor > a {
+        color: $white;
+        background-color: $green;
       }
     }
     ul > .current-menu-item > a {
-      /* darken */
-      background-color: rgba(0, 0, 0, 0.05);
+      color: $white;
+      background-color: $green;
     }
   }
   li.hideshow ul {

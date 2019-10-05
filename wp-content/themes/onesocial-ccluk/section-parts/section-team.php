@@ -7,7 +7,28 @@ $layout   = intval( get_theme_mod( 'ccluk_team_layout', 3 ) );
 if ( $layout <= 0 ){
     $layout = 3;
 }
+
+if ( ! function_exists( 'ccluk_get_section_team_data' ) ) {
+    /**
+     * Get team members
+     *
+     * @return array
+     */
+    function ccluk_get_section_team_data()
+    {
+        $members = get_theme_mod('ccluk_team_members');
+        if (is_string($members)) {
+            $members = json_decode($members, true);
+        }
+        if (!is_array($members)) {
+            $members = array();
+        }
+        return $members;
+    }
+}
+
 $user_ids = ccluk_get_section_team_data();
+
 if ( ccluk_is_selective_refresh() ) {
     $disable = false;
 }
