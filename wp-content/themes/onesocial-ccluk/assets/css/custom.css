@@ -1848,6 +1848,423 @@ img.mfp-img {
   padding-top: 0;
 }
 
+.widget_mc4wp_form_widget form p input[type="submit"] {
+  background-color: #22a7f0;
+}
+
+.widget.widget_newsletterwidget form div input[type="submit"],
+.widget.widget_newsletterwidget form p input[type="submit"] {
+  background-color: #22a7f0;
+}
+
+.footer-widget #switch-mode input[type="submit"] {
+  background-color: #22a7f0;
+}
+
+button {
+  background-color: #54ae68;
+}
+
+input[type="button"], input[type="reset"] {
+  background-color: #22a7f0;
+}
+
+article.post-password-required input[type=submit],
+i.bypostauthor cite span,
+a.button {
+  background-color: #22a7f0;
+}
+
+#secondary div.generic-button a,
+#buddypress .comment-reply-link,
+.select2-container--default .select2-results__option--highlighted[aria-selected],
+.entry-header .entry-title a.button, a.bp-title-button,
+#search-members-form > label:after,
+#messages-bulk-manage, .boss-search-wrapper label:after,
+.groups-members-search label:after {
+  background-color: #22a7f0;
+}
+
+#buddyboss-bbpress-media-attach, #buddyboss-comment-media-attach {
+  background-color: #54ae68;
+}
+
+#trigger-sidebar:hover .bb-side-icon {
+  background-color: #54ae68;
+}
+
+#trigger-sidebar:hover .bb-side-icon:before, #trigger-sidebar:hover .bb-side-icon:after {
+  background-color: #54ae68;
+}
+
+.header-account-login .count, .header-notifications a.header-button span b, #aw-whats-new-submit-bbmedia {
+  background-color: #54ae68;
+}
+
+.bb-sidebar-on .bb-side-icon {
+  background: #54ae68;
+}
+
+.bb-sidebar-on .bb-side-icon:after, .bb-sidebar-on .bb-side-icon:before {
+  background: #54ae68;
+}
+
+#primary .author-follow div.generic-button a:before,
+#buddypress div#item-header .inner-avatar-wrap div.generic-button a:before,
+#secondary .inner-avatar-wrap div.generic-button a:before, body .selectionSharer a.action:hover {
+  background: #54ae68;
+}
+
+#page #main .author-follow div.generic-button.loading a:before,
+#page #main #buddypress .inner-avatar-wrap .generic-button.loading a:before {
+  background: #54ae68;
+}
+
+body #selectionSharerPopunder-inner a.action:hover {
+  background: #54ae68;
+}
+
+.header-account-login .pop .boss-logout, .header-account-login .pop a:hover {
+  color: #54ae68;
+}
+
+.bboss_ajax_search_item .item .item-title, body .bb-global-search-ac li.bbls-category:hover a:after, .bb-global-search-ac.ui-menu .bbls-view_all_type-type a:hover:after, .bbp-topics-front ul.super-sticky div.bbp-topic-title-content:before {
+  color: #54ae68;
+}
+
+.bbp-topics ul.super-sticky div.bbp-topic-title-content:before, .bbp-topics ul.sticky div.bbp-topic-title-content:before {
+  color: #54ae68;
+}
+
+.bbp-forum-content ul.sticky:before, .bbp-forum-data .last-activity a:hover, #onesocial-recommended-by .title, .bbp-forum-data .post-num, div.bbp-breadcrumb a:hover {
+  color: #54ae68;
+}
+
+li.bbp-forum-info a.bbp-forum-title:before,
+li.bbp-topic-title a.bbp-topic-permalink:before {
+  color: #54ae68;
+}
+
+.info-group .members-list-filter li a:hover, .info-group .members-list-filter li a.selected {
+  color: #54ae68;
+}
+
+.info-group .bb-follow-title span {
+  color: #54ae68;
+}
+
+.dir-header span, #buddypress .dir-list ul.item-list .item-title a:hover {
+  color: #54ae68;
+}
+
+#posts-carousel footer a, #posts-carousel h3 a:hover {
+  color: #54ae68;
+}
+
+.comments-area article header cite a {
+  color: #54ae68;
+}
+
+.post-author-info .entry-meta a:not(.entry-date), .post-author-info .author-name a:hover {
+  color: #54ae68;
+}
+
+.posts-stream ul li h2 a:hover, .entry-meta a.read-more, .bb-comment-author {
+  color: #54ae68;
+}
+
+.author-follow div.generic-button.pending_friend + span, .author-follow div.generic-button.following + span {
+  color: #54ae68;
+}
+
+.post-author .load-more-posts.active .bb-icon-bars-f:before, .entry-content blockquote .author, .comment-content blockquote .author, .entry-header .entry-title a:hover, .widget_search #searchform button i:before {
+  color: #54ae68;
+}
+
+.widget #bbp-search-index-form button i:before {
+  color: #54ae68;
+}
+
+.entry-meta a.read-more,
+.bb-user-notifications .avatar + a,
+#main #buddypress .bb-member-quick-link-wrapper .action .generic-button a:hover,
+#main-wrap #page #main #buddypress div.item-list-tabs li.hideshow ul a:hover {
+  color: #54ae68;
+}
+
+a.comment-reply-link:hover, a.comment-edit-link:hover {
+  color: #54ae68;
+}
+
+.bb-user-name,
+.dir-header .bb-count,
+.boss-author-name,
+.posts-stream ul li h3 a:hover {
+  color: #54ae68;
+}
+
+#buddypress .bboss_search_page a.loading:after,
+.header-account-login .pop .count {
+  color: #54ae68;
+}
+
+.footer-inner-top a:hover,
+.boss-group-invite-friend-list strong {
+  color: #54ae68;
+}
+
+.sap-container-wrapper .sap-story-publish {
+  color: #54ae68;
+}
+
+.sap-container-wrapper .sap-story-publish:hover {
+  color: #54ae68;
+}
+
+.recommend-title, .liked .fa-heart, .bookmarked .bb-helper-icon.fa-bookmark, .fa.bb-helper-icon.fa-spinner.fa-spin, .os-loader i, .breadcrumb-wrapper a:hover, .sap-container-wrapper .sap-author-name.sap-author-name, .sap-publish-popup.sap-publish-popup .sap-action-button, #send-private-message.generic-button a:before {
+  color: #54ae68;
+}
+
+#mobile-header {
+  background-color: #54ae68;
+}
+
+#onesocial_recommend:after, #onesocial_recommend:before {
+  background-color: #54ae68;
+}
+
+.posts-stream ul li time div:first-child {
+  background-color: #54ae68;
+}
+
+.posts-stream ul li time div:first-child:after, .posts-stream ul li time div:first-child:before {
+  background-color: #54ae68;
+}
+
+.group-join a:before, .author-follow a:before, .pagination .current, .bbp-pagination-links span {
+  background-color: #54ae68;
+}
+
+.loader {
+  background-color: #54ae68;
+}
+
+.loader:before, .loader:after {
+  background-color: #54ae68;
+}
+
+.sap-load-more-posts, .button-load-more-posts {
+  background-color: #54ae68;
+}
+
+#fwslider .readmore a, #fwslider .progress {
+  background-color: #54ae68;
+}
+
+.toggle-sap-widgets:hover .cls-1 {
+  fill: #54ae68;
+}
+
+@-webkit-keyframes load1 {
+  0%,
+  80%,
+  100% {
+    -webkit-box-shadow: 0 0 green;
+            box-shadow: 0 0 green;
+    height: 4em;
+  }
+  40% {
+    -webkit-box-shadow: 0 -2em green;
+            box-shadow: 0 -2em green;
+    height: 5em;
+  }
+}
+
+@keyframes load1 {
+  0%,
+  80%,
+  100% {
+    -webkit-box-shadow: 0 0 green;
+            box-shadow: 0 0 green;
+    height: 4em;
+  }
+  40% {
+    -webkit-box-shadow: 0 -2em green;
+            box-shadow: 0 -2em green;
+    height: 5em;
+  }
+}
+
+.header-notifications .pop, .header-account-login .pop {
+  border-color: #54ae68;
+}
+
+.bbp-header li.bbp-forum-info, .bbp-header li.bbp-topic-title {
+  border-color: #54ae68;
+}
+
+.info-group .members-list-filter, .info-group .trigger-filter.active:before {
+  border-color: #54ae68;
+}
+
+.entry-meta a.read-more,
+#buddypress #group-create-nav .group-create,
+.sap-publish-popup.sap-publish-popup .sap-action-button,
+.sap-container-wrapper .sap-story-publish,
+#main #buddypress div.item-list-tabs li.hideshow > ul,
+input[type="submit"] {
+  border-color: #22a7f0;
+}
+
+.main-navigation .nav-menu > li:hover > a {
+  -webkit-box-shadow: 0 -2px 0 #54ae68 inset;
+          box-shadow: 0 -2px 0 #54ae68 inset;
+}
+
+.main-navigation div > ul > .current-menu-item > a, .main-navigation div > ul > .current-menu-ancestor > a {
+  -webkit-box-shadow: 0 -2px 0 #54ae68 inset;
+          box-shadow: 0 -2px 0 #54ae68 inset;
+}
+
+.header-button.underlined {
+  -webkit-box-shadow: 0 -1px 0 #54ae68 inset;
+          box-shadow: 0 -1px 0 #54ae68 inset;
+}
+
+input[type="checkbox"] + span:before, input[type="checkbox"] + label:before, input[type="checkbox"] + strong:before {
+  -webkit-box-shadow: 0px 0px 0px 2px #54ae68;
+  box-shadow: 0px 0px 0px 2px #54ae68;
+}
+
+input[type="radio"] + span:before, input[type="radio"] + label:before, input[type="radio"] + strong:before {
+  -webkit-box-shadow: 0px 0px 0px 2px #54ae68;
+  box-shadow: 0px 0px 0px 2px #54ae68;
+}
+
+/********** Desktop  *************/
+.is-desktop .buddyboss-select-inner span {
+  color: #54ae68;
+}
+
+.is-desktop .post-author .load-more-posts:hover,
+.is-desktop .post-author .load-more-posts a:hover {
+  color: #54ae68;
+}
+
+.is-desktop .header-notifications a#user-messages span.count:before,
+.is-desktop .header-notifications a span.pending-count:before {
+  color: #54ae68;
+}
+
+.is-desktop .header-notifications .pop a:hover {
+  color: #54ae68;
+}
+
+.bp-legacy div#item-body div.item-list-tabs ul li a span {
+  color: #54ae68;
+}
+
+.is-desktop .header-button:hover {
+  background-color: #54ae68;
+}
+
+.formatted-content {
+  background-color: #fff;
+}
+
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+  .side-panel {
+    background-color: #fff;
+  }
+}
+
+body:not(.buddypress) #content article,
+body.buddypress #content article.error404 {
+  background-color: #fff;
+}
+
+.site-content nav.nav-single, .site-content #comments {
+  background-color: #fff;
+}
+
+.bp-legacy div#item-body, .os-loader, .medium-editor-insert-plugin .medium-insert-buttons .medium-insert-buttons-addons li, .sap-publish-popup {
+  background-color: #fff;
+}
+
+.posts-stream {
+  background-color: #fff;
+}
+
+.posts-stream .inner {
+  background-color: #fff;
+}
+
+.sl-count:after, .sl-count:before {
+  background-color: #fff;
+}
+
+.sl-icon:after, .sl-icon:before {
+  background-color: #fff;
+}
+
+.sap-editor-wrap .sap-story-publish {
+  background-color: #fff;
+}
+
+.sap-editor-wrap .sap-story-publish:hover {
+  background-color: #fff;
+}
+
+.main-navigation li ul {
+  background-color: #fff;
+}
+
+.main-navigation li ul ul {
+  background-color: #fff;
+}
+
+.header-account-login .pop .bp_components .menupop:not(#wp-admin-bar-my-account) > .ab-sub-wrapper, .header-account-login .pop .links li > .sub-menu, .header-account-login .pop .bp_components .menupop:not(#wp-admin-bar-my-account) > .ab-sub-wrapper:before, .header-account-login .pop .links li > .sub-menu:before {
+  background-color: #fff;
+}
+
+.header-notifications .pop, .header-account-login .pop, #whats-new-header:after, a.to-top, #onesocial-recommended-by:before, .bbp-forum-data:before {
+  background-color: #fff;
+}
+
+#onesocial-recommended-by:after,
+.bbp-forum-data:after {
+  border-color: transparent #fff transparent transparent;
+}
+
+.incom-bubble-style:before {
+  border-color: #fff transparent transparent transparent;
+}
+
+div.bbp-template-notice, div.indicator-hint {
+  background-color: #f9f9f9;
+}
+
+div#sitewide-notice div#message p {
+  background-color: #f9f9f9;
+}
+
+#header-search form, .site-header {
+  background-color: #fff;
+}
+
+.buddyboss-select-inner span {
+  font-size: 15px;
+}
+
+/***************** Desktop ******************/
+.footer-inner-top {
+  background-color: #f9f9f9;
+}
+
+.footer-inner-bottom {
+  background-color: #333;
+}
+
 /** Styles for plugins etc. **/
 .single-incsub_event .entry-header {
   margin: 12px 0px;

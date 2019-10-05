@@ -30,12 +30,6 @@ a.button {
   background-color: $blue;
 }
 
-#buddypress {
-  ul.button-nav li a, div.generic-button a {
-    background-color: $blue;
-  }
-}
-
 #secondary div.generic-button a,
 #buddypress .comment-reply-link,
 .select2-container--default .select2-results__option--highlighted[aria-selected],
@@ -44,19 +38,6 @@ a.button {
 #messages-bulk-manage, .boss-search-wrapper label:after,
 .groups-members-search label:after {
   background-color: $blue;
-}
-
-#buddypress {
-  #group-create-nav .group-create,
-  div#item-nav .item-list-tabs ul li .bb-menu-button {
-    background-color: $green;
-  }
-}
-
-.is-mobile #buddypress #mobile-item-nav ul li {
-  &:active, &.current, &.selected {
-    background-color: $green;
-  }
 }
 
 #buddyboss-bbpress-media-attach, #buddyboss-comment-media-attach {
@@ -139,44 +120,8 @@ li {
     }
 }
 
-#buddypress {
-  .btn-group.social a:hover, .standard-form div.submit a.prev:hover, #group-settings-form input[type="submit"], .standard-form div.submit input {
-    color: $green;
-  }
-}
-
 .dir-header span, #buddypress .dir-list ul.item-list .item-title a:hover {
   color: $green;
-}
-
-#create-group-form {
-  #invite-list strong, &.standard-form label span.highlight {
-    color: $green;
-  }
-}
-
-#buddypress form#whats-new-form #whats-new-submit input[type="submit"] {
-  color: $white;
-}
-
-#whats-new-form .whats-author {
-  color: $green;
-}
-
-#buddypress #activity-stream {
-  .acomment-options .acomment-like.unfav-comment:before, .activity-meta .unfav.bp-secondary-action:before {
-    color: $green;
-  }
-}
-
-#primary #buddypress #activity-stream div.activity-meta a:hover:before {
-  color: $green;
-}
-
-#buddypress {
-  div.activity-comments div.acomment-meta a:not(.activity-time-since):hover, .activity-header a:hover {
-    color: $green;
-  }
 }
 
 #posts-carousel {
@@ -235,18 +180,6 @@ a {
     color: $green;
 }
 
-#main #buddypress {
-  .button.bp-secondary-action.loading:after, .acomment-like.bp-secondary-action.loading:after {
-    color: $green;
-  }
-  .activity-comments .acomment-options a:hover {
-    color: $green;
-    &:after, &:before {
-      color: $green;
-    }
-  }
-}
-
 #buddypress .bboss_search_page a.loading:after,
 .header-account-login .pop .count {
   color: $green;
@@ -278,10 +211,6 @@ a {
   }
 }
 
-#buddypress #item-title-area .highlight, .bb-cover-photo .update-cover-photo div, #main ul.horiz-gallery .see-more a {
-  background-color: $green;
-}
-
 .posts-stream ul li time div:first-child {
   &:after, &:before {
     background-color: $green;
@@ -302,12 +231,6 @@ a {
 
 .sap-load-more-posts, .button-load-more-posts {
   background-color: $green;
-}
-
-#buddypress .activity-list li {
-  &.load-more a, &.load-newest a {
-    background-color: $green;
-  }
 }
 
 #fwslider {
@@ -367,14 +290,6 @@ a {
   }
 }
 
-#buddypress {
-  #group-settings-form input[type="submit"],
-  .standard-form div.submit input,
-  form#whats-new-form #whats-new-submit input[type="submit"] {
-    border-color: $blue;
-  }
-}
-
 .entry-meta a.read-more,
 #buddypress #group-create-nav .group-create,
 .sap-publish-popup.sap-publish-popup .sap-action-button,
@@ -418,35 +333,7 @@ input {
 
 /********** Desktop  *************/
 
-.is-desktop #buddypress div#group-create-tabs ul li {
-  &.current a, &:hover a {
-    border-color: $green;
-  }
-}
-
-.is-desktop #buddypress div#group-create-tabs ul li {
-  a, &:before {
-    color: $green;
-  }
-}
-
-.search.is-desktop #buddypress div:not(#item-nav) > .dir-form div.item-list-tabs ul li {
-  a span, &.active a, &:hover a {
-    color: $green;
-  }
-}
-
 .is-desktop {
-  #buddypress div#item-nav .item-list-tabs ul li {
-    &:hover > a,
-    &.selected > a,
-    &.current > a,
-    &:hover a:after,
-    &.selected a:after,
-    &.current a:after {
-      color: $green;
-    }
-  }
   .buddyboss-select-inner span {
     color: $green;
   }
@@ -474,13 +361,6 @@ input {
 }
 
 .is-desktop {
-  #buddypress div#item-nav .item-list-tabs ul li {
-    &:hover a:before,
-    &.selected a:before,
-    &.current a:before {
-      color: $green;
-    }
-  }
   .header-button:hover {
     background-color: $green;
   }
@@ -530,10 +410,6 @@ body {
   &:after, &:before {
     background-color: $white;
   }
-}
-
-#buddypress div#group-create-tabs ul li:before {
-  background-color: $white;
 }
 
 .sap-editor-wrap .sap-story-publish {
@@ -588,31 +464,7 @@ div#sitewide-notice div#message p {
   font-size: $font-size-sm;
 }
 
-/***************** Mobile ******************/
-
-body {
-  &.has-activity.is-mobile #buddypress {
-    form#whats-new-form {
-      background-color: $secondary_bg;
-    }
-  }
-  &.photos.is-mobile #buddypress form#whats-new-form {
-    background-color: $secondary_bg;
-  }
-}
-
-.is-mobile #buddypress div.activity-comments form.root,
-.is-desktop #buddypress div.buddyboss-media-form-wrapper form {
-  background-color: $secondary_bg;
-}
-
-/***************** End Mobile ******************/
-
 /***************** Desktop ******************/
-
-.is-desktop #buddypress div.buddyboss-media-form-wrapper form {
-  background-color: $secondary_bg;
-}
 
 .footer-inner-top {
   background-color: $secondary_bg;

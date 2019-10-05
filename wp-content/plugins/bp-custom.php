@@ -49,7 +49,7 @@ class CCLUK_BP_Custom {
 				'activity' => bp_get_activity_root_slug(),
 			);
 
-			$class['groups'] = "menu-item menu-item-has-children";
+			$class['groups'] = "menu-item menu-item-has-children members-area";
 			$class['members'] = $class['activity'] = "menu-item";
 
 			if (bp_is_groups_component() || bp_is_activity_component() || bp_is_members_component()) {

@@ -1606,13 +1606,6 @@ body.single-item #buddypress div#item-header span.activity {
   display: block;
 }
 
-/* Header Content */
-body.bp-user #buddypress #item-header-content {
-  /*padding: 15px;*/
-  margin-top: 8px;
-  min-height: 74px;
-}
-
 div#item-header-avatar {
   margin: 10px auto 20px;
   display: inline-block;
@@ -1695,7 +1688,8 @@ div#item-header-avatar img.avatar {
 }
 
 /* Specify Swiper's Size: */
-.mobile-item-nav-container.fixed, #mobile-item-nav.fixed {
+.mobile-item-nav-container.fixed,
+#mobile-item-nav.fixed {
   width: 852px !important;
   height: auto;
 }
@@ -1740,13 +1734,6 @@ div#item-header-avatar img.avatar {
 --------------------------------------------------------------*/
 body.open-left, body.open-right {
   cursor: pointer;
-}
-
-body.open-left #mobile-header .mobile-site-title,
-body.open-right #mobile-header .mobile-site-title,
-body.open-left #main-wrap *,
-body.open-right #main-wrap * {
-  /*pointer-events: none;*/
 }
 
 /** Modern browsers will ignore click events when menus are open **/
@@ -1912,54 +1899,6 @@ body.open-right .right-btn:before {
 
 #ab-pending-notifications + #ab-pending-notifications {
   display: none;
-}
-
-/* Show the menu when animating or visible */
-#main-wrap, #colophon {
-  /*    transform: translate( 0, 0);  X, Y, Z
-      -webkit-transform: translate( 0, 0 );*/
-}
-
-/***
- * If the animating class is present then apply
- * the CSS transition to #main-wrap over 250ms.
- */
-.animating-left #main-wrap, .animating-left #colophon {
-  /*    transition: transform .25s ease-in-out;
-        -webkit-transition: -webkit-transform .25s ease-in-out;*/
-}
-
-.animating-right #main-wrap, .animating-right #colophon {
-  /*    transition: transform .25s ease-in-out;
-        -webkit-transition: -webkit-transform .25s ease-in-out;*/
-}
-
-.animating-right.left #main-wrap, .animating-right.left #colophon {
-  /*    transform: translate( -240px, 0 );
-          -webkit-transform: translate( -240px, 0);*/
-}
-
-/***
- * If the left class is present then transform
- * the #main-wrap element 240px to the left.
- */
-.animating-left.left #main-wrap, .animating-left.left #colophon {
-  /*    transform: translate( 240px, 0 );
-        -webkit-transform: translate( 240px, 0 );*/
-}
-
-/***
- * If the right class is present then transform
- * the #main-wrap element 240px to the right.
- */
-.animating-right.right #main-wrap, .animating-right.right #colophon {
-  /*    transform: translate( 240px, 0 );
-        -webkit-transform: translate( 240px, 0 );*/
-}
-
-.animating-left.right #main-wrap, .animating-left.right #colophon {
-  /*    transform: translate( -240px, 0 );
-        -webkit-transform: translate( -240px, 0 );*/
 }
 
 /***
@@ -2785,17 +2724,20 @@ Mobile Menu
   color: #54ae68;
 }
 
-#mobile-right-panel li.current-menu-item {
+#mobile-right-panel li.current-menu-item, #mobile-right-panel li:hover {
   background-color: #fff;
 }
 
-#mobile-right-panel li.current-menu-item > a {
+#mobile-right-panel li.current-menu-item > a, #mobile-right-panel li:hover > a {
   color: #54ae68;
+}
+
+#mobile-right-panel li.current-menu-item .sub-menu, #mobile-right-panel li:hover .sub-menu {
+  background-color: #333;
 }
 
 #mobile-right-panel .sub-menu li a {
   font-weight: 400;
-  background: rgba(0, 0, 0, 0.9);
   padding-left: 40px;
 }
 
@@ -3176,37 +3118,24 @@ MAXIMUM width of 480 pixels (phones)
     margin-right: 0;
     width: 100%;
   }
-  #buddypress .dir-form div.item-list-tabs ul li a span,
-  #buddypress div#subnav.item-list-tabs ul li a span,
-  #buddypress div:not(#item-nav):not(#mobile-item-nav) > .item-list-tabs ul li a span,
-  #buddypress > div[role=navigation].item-list-tabs ul li a span,
-  .bp-legacy div#item-body div.item-list-tabs ul li a span {
-    border-radius: 5px;
-  }
-  #buddypress ul.item-list li .activity-avatar div {
-    display: none;
-  }
-  #buddypress .dir-list ul.item-list > li {
-    width: 100%;
-  }
   body.admin-bar.admin-bar.admin-bar {
     margin-top: 0 !important;
   }
-  #item-title-area .group-header-wrap {
-    display: block;
+  .single-post .header-area {
+    clear: both;
+    overflow: hidden;
+    position: relative;
   }
-  .bb-cover-photo {
-    height: 280px;
+  .single-post .entry-header.has-image {
+    padding-top: 55px;
   }
-  .single-item.groups #buddypress #item-header span.activity, #item-title-area h1 {
-    color: inherit;
+  .single-post .entry-header.has-image h1 {
+    font-size: 24px;
   }
-  .bb-group-avatar-wrap-mobile.bb-group-avatar-wrap-mobile {
-    margin-bottom: 10px;
-    margin-right: 0;
-  }
-  .boss-group-header .group-header-content {
-    max-height: none;
+  .single-attachment .entry-header,
+  .single-post .entry-header:not(.has-image) {
+    margin: 90px auto 10px;
+    padding: 0 15px;
   }
 }
 

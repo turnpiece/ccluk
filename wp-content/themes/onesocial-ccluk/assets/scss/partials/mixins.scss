@@ -269,3 +269,13 @@
   -o-transition: all .15s ease-in-out;
   transition: all .15s ease-in-out;
 }
+
+@mixin subnav-item() {
+  color: $white;
+  background-color: $green;
+}
+
+@mixin subnav-item-selected() {
+  color: $green;
+  background-color: $white;
+}

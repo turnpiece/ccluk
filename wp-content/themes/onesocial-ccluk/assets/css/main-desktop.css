@@ -272,10 +272,6 @@ body.single-item.groups #main {
   margin: 0 auto;
 }
 
-#buddypress .groups-members-search {
-  width: 55%;
-}
-
 .single:not(.bp-user):not(.bbpress) #primary {
   max-width: 780px;
 }
@@ -299,18 +295,14 @@ body.single-item.groups #main {
   /* Firefox-34-ignoring-max-width-for-flexbox */
 }
 
-.bb-has-sidebar .search-content, .bb-has-sidebar .buddypress-content {
+.bb-has-sidebar .search-content,
+.bb-has-sidebar .buddypress-content {
   max-width: 750px;
 }
 
 #secondary {
   padding: 0 15px;
   width: 320px;
-}
-
-.buddypress-content-wrap #secondary {
-  padding-left: 0;
-  padding-right: 0;
 }
 
 /* Full Width (no sidebar) */
@@ -806,13 +798,6 @@ header-aside,
   top: 2px;
 }
 
-.header-button.underlined {
-  /*border-bottom: 1px solid;*/
-  /*font-size: 20px;*/
-  -webkit-box-shadow: 0 -1px 0 #54ae68 inset;
-          box-shadow: 0 -1px 0 #54ae68 inset;
-}
-
 .header-button.underlined .bb-icon-code {
   font-size: 26px;
 }
@@ -1030,7 +1015,7 @@ header-aside,
 }
 
 .main-navigation li a {
-  color: rgba(0, 0, 0, 0.7);
+  color: #22a7f0;
 }
 
 .main-navigation .nav-menu > li:hover, .main-navigation .nav-menu > li.current-menu-item, .main-navigation .nav-menu > li.current-menu-ancestor {
@@ -1043,16 +1028,6 @@ header-aside,
 
 .main-navigation .nav-menu.horizontal-responsive-menu {
   width: 120%;
-}
-
-.onsocial-primary-menu {
-  height: 70px;
-  overflow: hidden;
-  /* It is necessary for nice load */
-}
-
-.boss-page-loaded .onsocial-primary-menu {
-  overflow: visible;
 }
 
 .main-navigation .nav-inner div > ul.open {
@@ -1082,11 +1057,6 @@ header-aside,
   padding: 32px 0 25px;
 }
 
-.main-navigation .nav-menu > li:hover > a {
-  -webkit-box-shadow: 0 -2px 0 #54ae68 inset;
-          box-shadow: 0 -2px 0 #54ae68 inset;
-}
-
 .main-navigation li {
   margin: 0;
   float: left;
@@ -1095,7 +1065,8 @@ header-aside,
   position: relative;
 }
 
-.main-navigation li.current_menu_item, .main-navigation li.current_page_item, .main-navigation li a:hover {
+.main-navigation li.current_menu_item, .main-navigation li.current_page_item,
+.main-navigation li a:hover {
   color: #333;
 }
 
@@ -1107,11 +1078,9 @@ header-aside,
   top: 100%;
   z-index: 1000;
   background-color: #fff;
-  border-width: 0 1px 1px;
+  border-width: 0 1px 1px 1px;
   border-style: solid;
-  border-color: #cdcdcd;
-  -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+  border-color: #54ae68;
 }
 
 .main-navigation li ul.sub-menu:before {
@@ -1131,26 +1100,35 @@ header-aside,
 }
 
 .main-navigation ul li:hover > ul {
-  border-left: 0;
   display: block;
 }
 
-.main-navigation li ul li a {
+.main-navigation li ul.sub-menu {
+  border: 1px solid #54ae68;
+}
+
+.main-navigation li ul.sub-menu li a {
   border: none;
   display: block;
   line-height: 1.4;
-  padding: 8px 10px 8px 15px;
-  width: 180px;
+  padding: 12px 10px 12px 15px;
+  width: 220px;
   white-space: normal;
-  color: #777;
+  color: #fff;
+  background-color: #54ae68;
 }
 
-.main-navigation li ul li a:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-  color: #444;
+.main-navigation li ul.sub-menu li a:hover {
+  color: #54ae68;
+  background-color: #fff;
 }
 
-.main-navigation li ul li.menu-item-has-children > a:after {
+.main-navigation li ul.sub-menu li.current-menu-item > a {
+  color: #54ae68;
+  background-color: #fff;
+}
+
+.main-navigation li ul.sub-menu li.menu-item-has-children > a:after {
   font-family: 'FontAwesome';
   font-weight: normal;
   font-style: normal;
@@ -1164,20 +1142,28 @@ header-aside,
   line-height: 1;
 }
 
-.main-navigation div > ul > .current-menu-item > a,
-.main-navigation div > ul > .current-menu-ancestor > a {
+.main-navigation li ul.sub-menu div > ul > .current-menu-item > a,
+.main-navigation li ul.sub-menu div > ul > .current-menu-ancestor > a {
   color: #fff;
-  background-color: #54ae68;
 }
 
-.main-navigation div > ul ul > .current-menu-item > a {
+.main-navigation li ul.sub-menu div > ul ul > .current-menu-item > a {
   color: #fff;
-  background-color: #54ae68;
 }
 
-.main-navigation li.hideshow ul {
+.main-navigation li ul.sub-menu li.hideshow ul {
   border: 0;
   padding: 5px 0;
+}
+
+.onsocial-primary-menu {
+  height: 70px;
+  overflow: hidden;
+  /* It is necessary for nice load */
+}
+
+.boss-page-loaded .onsocial-primary-menu {
+  overflow: visible;
 }
 
 #site-navigation .hideshow li {
@@ -1256,85 +1242,6 @@ div.footer-inner.widget-area {
   padding: 0;
 }
 
-/*--------------------------------------------------------------
-1.0.5 - (...) Menu
---------------------------------------------------------------*/
-#buddypress div#item-nav #object-nav.item-list-tabs {
-  overflow: hidden;
-  height: 67px;
-  white-space: nowrap;
-  text-align: left;
-}
-
-.single-item.groups #buddypress div#item-nav #object-nav.item-list-tabs {
-  text-align: left;
-}
-
-.boss-page-loaded #buddypress div#item-nav #object-nav.item-list-tabs {
-  overflow: visible;
-}
-
-body #buddypress div#item-nav #object-nav.item-list-tabs > ul > li {
-  float: left;
-}
-
-#page#page #content #buddypress div.item-list-tabs li.hideshow {
-  float: right;
-  padding-bottom: 30px;
-  position: relative;
-}
-
-#buddypress div#item-nav .item-list-tabs ul li .bb-menu-button {
-  color: #fff;
-  font-size: 8px;
-  height: 25px;
-  line-height: 23px;
-  margin: 7px 0 0;
-  padding: 0;
-  text-align: center;
-  width: 25px;
-}
-
-#buddypress div#item-nav .item-list-tabs ul li:hover .bb-menu-button {
-  color: #fff !important;
-}
-
-#main #buddypress div.item-list-tabs li.hideshow > ul {
-  background-color: #fff;
-  border-radius: 0;
-  border-top: 2px solid;
-  -webkit-box-shadow: 0 1px 4px 0 rgba(50, 50, 50, 0.2);
-          box-shadow: 0 1px 4px 0 rgba(50, 50, 50, 0.2);
-  display: none;
-  height: auto;
-  margin-top: 2px;
-  min-width: 140px;
-  padding: 10px 20px;
-  position: absolute;
-  right: 0;
-  top: 100%;
-  z-index: 10;
-}
-
-#main-wrap #page #main #buddypress div.item-list-tabs li.hideshow:hover a {
-  color: inherit;
-}
-
-#main-wrap #buddypress div.item-list-tabs li.hideshow > ul li {
-  width: 100%;
-  text-align: left;
-  position: relative;
-  margin: 0;
-}
-
-#main-wrap #buddypress div.item-list-tabs li.hideshow > ul li a {
-  padding: 6px 0;
-}
-
-#main-wrap #buddypress div.item-list-tabs li.hideshow > ul li a:before {
-  display: none !important;
-}
-
 li.hideshow > ul li:not(:last-child) {
   margin-bottom: 10px;
 }
@@ -1343,16 +1250,11 @@ li.hideshow > ul li a {
   padding: 0px;
 }
 
-#buddypress div#item-nav .item-list-tabs ul li.hideshow a span {
-  display: inline-block;
-  float: none;
-  margin-top: -3px;
-}
-
 /*--------------------------------------------------------------
 1.1.6 - Blog
 --------------------------------------------------------------*/
-.blog .post-author, .search_results .post-author {
+.blog .post-author,
+.search_results .post-author {
   -webkit-box-ordinal-group: 1;
   -ms-flex-order: 0;
   order: 0;
@@ -1364,7 +1266,8 @@ li.hideshow > ul li a {
   padding-bottom: 10px;
 }
 
-.blog .post-author .author img, #main #buddypress .search_results .post-author .author img {
+.blog .post-author .author img,
+#main #buddypress .search_results .post-author .author img {
   width: 50px;
   height: 50px;
   margin-right: 23px;

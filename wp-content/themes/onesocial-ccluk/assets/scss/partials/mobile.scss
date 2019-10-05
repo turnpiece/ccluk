@@ -51,10 +51,15 @@ Mobile Menu
 				color: $green;
 			}
 		}
-		&.current-menu-item {
+		&.current-menu-item,
+		&:hover {
 			background-color: $white;
 			> a {
 				color: $green;
+			}
+
+			.sub-menu {
+				background-color: $dark;
 			}
 		}
 	}
@@ -63,7 +68,6 @@ Mobile Menu
 		li {
 			a {
 				font-weight: 400;
-				background: rgba(0, 0, 0, .9);
 				padding-left: 40px;
 			}
 		}

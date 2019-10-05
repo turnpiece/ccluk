@@ -1656,17 +1656,6 @@ body.single-item #buddypress div#item-header span.activity {
   }
 }
 
-/* Header Content */
-
-body {
-
-  &.bp-user #buddypress #item-header-content {
-    /*padding: 15px;*/
-    margin-top: 8px;
-    min-height: 74px;
-  }
-}
-
 div#item-header-avatar {
   margin: 10px auto 20px;
   display: inline-block;
@@ -1751,9 +1740,12 @@ div#item-header-avatar img.avatar {
 
 /* Specify Swiper's Size: */
 
-.mobile-item-nav-container.fixed, #mobile-item-nav.fixed {
-  width: 852px !important;
-  height: auto;
+.mobile-item-nav-container, 
+#mobile-item-nav {
+  &.fixed {
+    width: 852px !important;
+    height: auto;
+  }
 }
 
 .mobile-item-nav-scroll-container {
@@ -1804,12 +1796,6 @@ body {
   &.open-left,
   &.open-right {
     cursor: pointer;
-  }
-  &.open-left #mobile-header .mobile-site-title,
-  &.open-right #mobile-header .mobile-site-title,
-  &.open-left #main-wrap *,
-  &.open-right #main-wrap * {
-    /*pointer-events: none;*/
   }
 }
 
@@ -1982,69 +1968,6 @@ body.open-right .right-btn:before {
 
 #ab-pending-notifications + #ab-pending-notifications {
   display: none;
-}
-
-/* Show the menu when animating or visible */
-
-#main-wrap, #colophon {
-  /*    transform: translate( 0, 0);  X, Y, Z
-      -webkit-transform: translate( 0, 0 );*/
-}
-
-/***
- * If the animating class is present then apply
- * the CSS transition to #main-wrap over 250ms.
- */
-
-.animating-left {
-  #main-wrap, #colophon {
-    /*    transition: transform .25s ease-in-out;
-        -webkit-transition: -webkit-transform .25s ease-in-out;*/
-  }
-}
-
-.animating-right {
-  #main-wrap, #colophon {
-    /*    transition: transform .25s ease-in-out;
-        -webkit-transition: -webkit-transform .25s ease-in-out;*/
-  }
-  &.left {
-    #main-wrap, #colophon {
-      /*    transform: translate( -240px, 0 );
-          -webkit-transform: translate( -240px, 0);*/
-    }
-  }
-}
-
-/***
- * If the left class is present then transform
- * the #main-wrap element 240px to the left.
- */
-
-.animating-left.left {
-  #main-wrap, #colophon {
-    /*    transform: translate( 240px, 0 );
-        -webkit-transform: translate( 240px, 0 );*/
-  }
-}
-
-/***
- * If the right class is present then transform
- * the #main-wrap element 240px to the right.
- */
-
-.animating-right.right {
-  #main-wrap, #colophon {
-    /*    transform: translate( 240px, 0 );
-        -webkit-transform: translate( 240px, 0 );*/
-  }
-}
-
-.animating-left.right {
-  #main-wrap, #colophon {
-    /*    transform: translate( -240px, 0 );
-        -webkit-transform: translate( -240px, 0 );*/
-  }
 }
 
 /***
