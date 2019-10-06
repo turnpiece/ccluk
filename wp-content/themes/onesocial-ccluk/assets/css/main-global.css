@@ -1580,6 +1580,113 @@ img.wp-smiley, .rsswidget img {
 }
 
 /*--------------------------------------------------------------
+2.11 - Insert buttons
+--------------------------------------------------------------*/
+.boss-insert-buttons {
+  display: none;
+  left: -65px;
+  position: absolute;
+  top: 0;
+  width: 50px;
+}
+
+.isCollapsed #whats-new-content,
+.isCollapsed .boss-insert-buttons {
+  display: none;
+}
+
+.boss-insert-buttons-show {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 100%;
+  color: #22a7f0;
+  cursor: pointer;
+  display: block;
+  font-size: 26px;
+  height: 38px;
+  line-height: 34px;
+  margin-top: -5px;
+  text-align: center;
+  text-decoration: none;
+  -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+  -webkit-transition: -webkit-transform 100ms ease 0s;
+  transition: -webkit-transform 100ms ease 0s;
+  transition: transform 100ms ease 0s;
+  transition: transform 100ms ease 0s, -webkit-transform 100ms ease 0s;
+  width: 38px;
+}
+
+.boss-insert-buttons-show:hover {
+  border-color: rgba(0, 0, 0, 0.3);
+  color: #888;
+}
+
+.boss-show-buttons .boss-insert-buttons-show {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  -webkit-transition: -webkit-transform 250ms ease 0s;
+  transition: -webkit-transform 250ms ease 0s;
+  transition: transform 250ms ease 0s;
+  transition: transform 250ms ease 0s, -webkit-transform 250ms ease 0s;
+}
+
+.boss-insert-buttons-addons {
+  left: 55px;
+  list-style: outside none none;
+  margin: 0;
+  min-width: 120px;
+  opacity: 0;
+  padding: 0;
+  position: relative;
+  top: -39px;
+  -webkit-transition: visibility 0s ease 0s, opacity 600ms ease 0s;
+  transition: visibility 0s ease 0s, opacity 600ms ease 0s;
+  visibility: hidden;
+  z-index: 2;
+}
+
+.boss-show-buttons .boss-insert-buttons-addons {
+  opacity: 1;
+  visibility: visible;
+}
+
+.boss-show-buttons #whats-new {
+  opacity: 0;
+}
+
+.boss-insert-buttons-addons li {
+  display: inline-block;
+}
+
+.boss-insert-buttons-addons li a {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 100%;
+  color: rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  display: inline-block;
+  font-size: 16px;
+  height: 38px;
+  line-height: 42px;
+  margin: 0 5px;
+  text-align: center;
+  width: 38px;
+}
+
+.boss-insert-buttons-addons li a:hover {
+  border-color: rgba(0, 0, 0, 0.3);
+}
+
+.boss-insert-buttons-addons li .boss-insert-video {
+  font-size: 15px;
+  text-indent: 3px;
+}
+
+.buddyboss-comment-media-add-photo {
+  margin-right: 15px;
+}
+
+/*--------------------------------------------------------------
 3.0 - Basic structure
 --------------------------------------------------------------*/
 /*--------------------------------------------------------------

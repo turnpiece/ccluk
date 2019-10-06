@@ -64,15 +64,7 @@ html.js {
   margin-top: 0 !important;
 }
 
-/*logged*/
-/*not logged*/
-/*logged*/
-#inner-wrap {
-  /*padding-top: 1px;*/
-}
-
 #colophon {
-  /*    min-height: 104px; */
   /* '.push' must be the same height as 'footer' */
   min-height: 80px;
 }

@@ -28,30 +28,26 @@ if ( post_password_required() )
 			$user			 = wp_get_current_user();
 			$user_identity	 = $user->exists() ? $user->display_name : '';
 
-			$buttons = '<div class="boss-insert-buttons">
-				<a class="boss-insert-buttons-show" href="#">+</a>
-				<ul class="boss-insert-buttons-addons">
-					<li><a class="boss-insert-image"><i class="bb-icon-camera"></i></a></li>
-					<li><a data-placeholder="' . __( 'Write a response...', 'onesocial' ) . '" class="boss-insert-text"><i class="bb-icon-pencil-square-o"></i></a></li>
-				</ul>
-			</div>';
 			?>
 
-			<h3 class="comments-title"><?php _e( 'Responses', 'onesocial' ); ?></h3>
+			<?php if ( have_comments() ) : ?>
+				<h3 class="comments-title"><?php _e( 'Responses', 'onesocial' ); ?></h3>
+			<?php endif; ?>
 
 			<?php
 			$args	 = array(
 				'title_reply'			 => '',
 				'logged_in_as'			 => '',
 				'comment_notes_after'	 => '',
-				'comment_field'			 => '<div class="comment-form-comment">' . $buttons . '<span class="bb-user-name">' . $user_identity . '</span><textarea id="comment" name="comment" cols="45" rows="2" aria-required="true" required="required" placeholder="' . __( 'Write a response...', 'onesocial' ) . '"></textarea></div>',
+				'comment_field'			 => '<div class="comment-form-comment"><span class="bb-user-name">' . $user_identity . '</span><textarea id="comment" name="comment" cols="45" rows="2" aria-required="true" required="required" placeholder="' . __( 'Write a response...', 'onesocial' ) . '"></textarea></div>',
 				'label_submit'			 => __( 'Comment', 'onesocial' )
 			);
 			?>
+
 			<?php
-			//if ( is_user_logged_in() ) {
+			if ( is_user_logged_in() ) {
 				comment_form( $args );
-			//}
+			}
 			?>
 
 			<?php if ( have_comments() ) : ?>

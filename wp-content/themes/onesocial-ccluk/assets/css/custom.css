@@ -382,12 +382,6 @@ a.cta:hover {
   padding: 1rem 1rem;
 }
 
-.single .comments-area #respond form p,
-.single-post .comments-area #respond form p,
-.single-give_forms .comments-area #respond form p {
-  text-align: right;
-}
-
 .single .comments-area #respond form p input[type=submit],
 .single-post .comments-area #respond form p input[type=submit],
 .single-give_forms .comments-area #respond form p input[type=submit] {
