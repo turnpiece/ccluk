@@ -291,7 +291,7 @@ body.logged-in + #incom_wrapper .incom-comments-wrapper #respond .comment-form-c
 
 .page-template-sap-post-create-template .boss-create-post-container {
   margin: 50px auto;
-  max-width: 750px;
+  max-width: $content_w;
   padding: 0 15px;
   position: relative;
   width: 100%;

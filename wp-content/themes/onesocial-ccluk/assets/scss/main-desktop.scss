@@ -291,7 +291,7 @@ body.single-item.groups #main {
 .bb-has-sidebar {
   .search-content, 
   .buddypress-content {
-    max-width: 750px;
+    max-width: $content_w;
   }
 }
 
@@ -1453,7 +1453,7 @@ article:hover a.to-top {
 .search-content {
   margin: 0 auto;
   width: 100%;
-  max-width: 750px;
+  max-width: $content_w;
   .hentry {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     padding: 70px 0;

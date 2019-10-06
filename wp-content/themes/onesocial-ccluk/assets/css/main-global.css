@@ -2893,7 +2893,7 @@ div.footer-inner ul.social-icons li span:before {
 }
 
 .entry-meta {
-  color: #9b9b9b;
+  color: #54ae68;
 }
 
 .entry-header .entry-meta .meta-item {
@@ -3541,7 +3541,8 @@ article.format-aside blockquote:last-child, article.format-aside p:last-child {
 
 .single-post .entry-content,
 .single-ccluk_news .entry-content {
-  margin-bottom: 20px;
+  margin-bottom: 25px;
+  margin-bottom: 2.5rem;
 }
 
 .single-post .entry-main .entry-meta,
@@ -6010,9 +6011,9 @@ a.liked:hover, a.liked:active, a.liked:focus, a.liked span.sl-count {
 }
 
 .sl-wrapper {
-  display: inline-block;
   margin-bottom: 20px;
   position: relative;
+  float: right;
 }
 
 /** Testimonials */

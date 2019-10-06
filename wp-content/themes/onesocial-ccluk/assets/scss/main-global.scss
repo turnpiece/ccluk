@@ -2962,7 +2962,7 @@ div {
 }
 
 .entry-meta {
-  color: #9b9b9b;
+  color: $green;
 }
 
 .entry-header .entry-meta .meta-item {
@@ -3588,7 +3588,7 @@ article.format-aside {
 .single-post,
 .single-ccluk_news {
   .entry-content {
-    margin-bottom: 20px;
+    @include margin-bottom( 2.5 );
   }
   .entry-main .entry-meta {
     margin-top: 0;
@@ -4311,7 +4311,7 @@ body article.error404 .entry-header {
 }
 
 .search_results {
-  max-width: 750px;
+  max-width: $content_w;
   margin: 0 auto;
 }
 
@@ -6053,9 +6053,9 @@ a.liked {
 }
 
 .sl-wrapper {
-  display: inline-block;
   margin-bottom: 20px;
   position: relative;
+  float: right;
 }
 
 /** Testimonials */
