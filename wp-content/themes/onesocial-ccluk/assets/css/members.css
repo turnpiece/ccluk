@@ -206,7 +206,6 @@ body.bp-user.messages #buddypress #send_message_form.standard-form textarea {
 }
 
 body.bp-user.messages #buddypress #send_message_form.standard-form label {
-  margin-bottom: 0;
   line-height: 1.2;
 }
 
@@ -3894,7 +3893,7 @@ body.buddypress.is-desktop #buddypress div#item-nav > div#object-nav.item-list-t
 
 body.buddypress.is-desktop #buddypress div#item-nav > div#object-nav.item-list-tabs ul li:hover > a, body.buddypress.is-desktop #buddypress div#item-nav > div#object-nav.item-list-tabs ul li.selected > a, body.buddypress.is-desktop #buddypress div#item-nav > div#object-nav.item-list-tabs ul li.current > a {
   color: #54ae68;
-  border-bottom: 1px solid;
+  border-bottom: 1px solid #54ae68;
 }
 
 body.buddypress.is-desktop #buddypress div#subnav.item-list-tabs {
