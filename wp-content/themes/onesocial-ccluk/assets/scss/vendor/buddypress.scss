@@ -1758,6 +1758,11 @@ div#sitewide-notice div#message.error p {
 }
 
 #buddypress {
+  &.album-wrapper .standard-form textarea,
+  #group-settings-form textarea {
+    height: 90px;
+    margin: 0;
+  }
   div {
     &.accept, &.reject {
       float: left;
@@ -1820,16 +1825,23 @@ div#sitewide-notice div#message.error p {
         /*margin-bottom: 10px;*/
       }
     }
+    &.album-create-form textarea {
+      height: 90px;
+      margin: 0;
+    }
+    label[for="album_privacy"] {
+      margin-bottom: 20px;
+    }
+    input.send-to-input {
+      width: 15em;
+      margin-bottom: 0;
+    }
   }
 }
 
 /*--------------------------------------------------------------
 8.0 - Forums (Legacy), Tables and Topics
 --------------------------------------------------------------*/
-
-.bp-user.profile .buddypress-content-wrap .profile {
-  /*padding-bottom: 40px;*/
-}
 
 .buddypress-content-wrap {
   padding-bottom: 60px;
@@ -1964,9 +1976,6 @@ div#sitewide-notice div#message.error p {
         }
       }
     }
-  }
-  #groups-notification-settings {
-    /*margin-bottom: 0;*/
   }
   .boss-general-settings {
     label {

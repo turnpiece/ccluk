@@ -4436,59 +4436,42 @@ select[multiple="multiple"] {
 }
 
 #buddypress {
-  &.album-wrapper .standard-form textarea,
-  #group-settings-form textarea {
-    height: 90px;
-    margin: 0;
-  }
   .standard-form {
-    &.album-create-form textarea {
-      height: 90px;
-      margin: 0;
-    }
-    label[for="album_privacy"] {
-      margin-bottom: 20px;
-    }
-    input.send-to-input {
-      width: 15em;
-      margin-bottom: 0;
-    }
     p.description {
       font-size: $font-size-sm;
     }
     .input-options {
-        padding: 10px 0;
+      padding: 10px 0;
 
-        label.option-label {
-            font-size: $font-size-sm;
-            display: block;
-        }
+      label.option-label {
+          font-size: $font-size-sm;
+          display: block;
+      }
     }
 
-      &#sidebar-login-form input {
-        &[type="text"], &[type="password"] {
-          padding: 4px;
-          width: 95%;
-        }
+    &#sidebar-login-form input {
+      &[type="text"], &[type="password"] {
+        padding: 4px;
+        width: 95%;
       }
-      #basic-details-section input[type="password"],
-      #blog-details-section input#signup_blog_url {
-        width: 35%;
-      }
+    }
+    #basic-details-section input[type="password"],
+    #blog-details-section input#signup_blog_url {
+      width: 35%;
+    }
   }
 
-
-    .standard-form#signup_form {
-      input {
-        &[type="email"],
-        &[type="text"] {
-          width: 100%;
-        }
-      }
-      textarea {
+  .standard-form#signup_form {
+    input {
+      &[type="email"],
+      &[type="text"] {
         width: 100%;
       }
     }
+    textarea {
+      width: 100%;
+    }
+  }
 }
 
 #save_as_draft {
@@ -4504,9 +4487,7 @@ select[multiple="multiple"] {
 
 .sap-story-publish:hover, #save_as_draft:hover,
 #buddypress .standard-form div.submit input:hover {
-  -moz-box-shadow: none;
-  -webkit-box-shadow: none;
-  box-shadow: none;
+  @include box-shadow( none );
   color: $dark;
 }
 
@@ -4514,7 +4495,10 @@ select[multiple="multiple"] {
 7.0 - Ajax Loading
 --------------------------------------------------------------*/
 
-.sap-load-more-posts.loading:after, .button-load-more-posts.loading:after, #buddypress a.loading:after, .footer-widget a.loading:after {
+.sap-load-more-posts.loading:after, 
+.button-load-more-posts.loading:after, 
+#buddypress a.loading:after, 
+.footer-widget a.loading:after {
   font-family: 'fontawesome';
   font-weight: normal;
   font-style: normal;
@@ -4537,7 +4521,8 @@ select[multiple="multiple"] {
 }
 
 #buddypress {
-  button.loading:after, ul li.loading a:after {
+  button.loading:after, 
+  ul li.loading a:after {
     font-family: 'fontawesome';
     font-weight: normal;
     font-style: normal;
@@ -4559,47 +4544,60 @@ select[multiple="multiple"] {
     animation: spin 2s infinite linear;
   }
   input {
-    &[type="submit"].pending, &[type="button"].pending, &[type="reset"].pending, &[type="submit"].disabled, &[type="button"].disabled, &[type="reset"].disabled {
-      border-color: #eee;
-      color: #bbb;
-      cursor: disabled;
+    &[type="submit"], 
+    &[type="button"], 
+    &[type="reset"] {
+      &.pending, 
+      &.disabled {
+        @include button-colours();
+        cursor: disabled;
+      }
     }
   }
   button {
-    &.pending, &.disabled {
-      border-color: #eee;
-      color: #bbb;
+    &.pending, 
+    &.disabled {
+      @include button-colours();
       cursor: disabled;
     }
   }
-  div.pending a, a.disabled {
-    border-color: #eee;
-    color: #bbb;
+  div.pending a, 
+  a.disabled {
+    @include button-colours();
     cursor: disabled;
   }
   input {
-    &[type="submit"]:hover.pending, &[type="button"]:hover.pending, &[type="reset"]:hover.pending, &[type="submit"]:hover.disabled, &[type="button"]:hover.disabled, &[type="reset"]:hover.disabled {
-      background: $white;
-      border-color: #eee;
-      color: #bbb;
+    &[type="submit"], 
+    &[type="button"], 
+    &[type="reset"] {
+      &:hover {
+        &.pending,
+        &.disabled {
+          background: $white;
+          @include button-colours();
+        }
+      }
     }
   }
   button {
-    &.pending:hover, &.disabled:hover {
-      background: $white;
-      border-color: #eee;
-      color: #bbb;
+    &.pending, 
+    &.disabled {
+      &:hover {
+        background: $white;
+        @include button-colours();
+      }
     }
   }
-  div.pending a:hover, a.disabled:hover {
-    background: $white;
-    border-color: #eee;
-    color: #bbb;
+  div.pending a, 
+  a.disabled {
+    &:hover {
+      background: $white;
+      @include button-colours();
+    }
   }
   div.submit {
     input.loading {
-      background-color: #eee;
-      color: #bbb;
+      @include button-colours();
     }
     #send_reply_button {
       background: transparent;

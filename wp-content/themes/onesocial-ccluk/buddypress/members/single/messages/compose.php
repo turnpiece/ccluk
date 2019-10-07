@@ -2,13 +2,15 @@
 
 	<?php do_action( 'bp_before_messages_compose_content' ); ?>
 
-	<label for="send-to-input"><?php _e("To", 'onesocial' ); ?></label>
-	<ul class="first acfb-holder">
-		<li>
-			<?php bp_message_get_recipient_tabs(); ?>
-			<input type="text" name="send-to-input" class="send-to-input" id="send-to-input" placeholder="Start typing a name" />
-		</li>
-	</ul>
+	<div class="send-to-container">
+		<label for="send-to-input"><?php _e("To", 'onesocial' ); ?></label>
+		<ul class="first acfb-holder">
+			<li>
+				<?php bp_message_get_recipient_tabs(); ?>
+				<input type="text" name="send-to-input" class="send-to-input" id="send-to-input" placeholder="Start typing a name" />
+			</li>
+		</ul>
+	</div>
 
 	<label for="subject"><?php _e( 'Subject', 'onesocial' ); ?></label>
 	<input type="text" name="subject" id="subject" value="<?php bp_messages_subject_value(); ?>" />

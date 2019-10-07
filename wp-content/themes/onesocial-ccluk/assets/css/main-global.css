@@ -4443,26 +4443,6 @@ select[multiple="multiple"] {
   margin-bottom: 16px;
 }
 
-#buddypress.album-wrapper .standard-form textarea,
-#buddypress #group-settings-form textarea {
-  height: 90px;
-  margin: 0;
-}
-
-#buddypress .standard-form.album-create-form textarea {
-  height: 90px;
-  margin: 0;
-}
-
-#buddypress .standard-form label[for="album_privacy"] {
-  margin-bottom: 20px;
-}
-
-#buddypress .standard-form input.send-to-input {
-  width: 15em;
-  margin-bottom: 0;
-}
-
 #buddypress .standard-form p.description {
   font-size: 15px;
 }
@@ -4515,7 +4495,10 @@ select[multiple="multiple"] {
 /*--------------------------------------------------------------
 7.0 - Ajax Loading
 --------------------------------------------------------------*/
-.sap-load-more-posts.loading:after, .button-load-more-posts.loading:after, #buddypress a.loading:after, .footer-widget a.loading:after {
+.sap-load-more-posts.loading:after,
+.button-load-more-posts.loading:after,
+#buddypress a.loading:after,
+.footer-widget a.loading:after {
   font-family: 'fontawesome';
   font-weight: normal;
   font-style: normal;
@@ -4535,7 +4518,8 @@ select[multiple="multiple"] {
   animation: spin 2s infinite linear;
 }
 
-#buddypress button.loading:after, #buddypress ul li.loading a:after {
+#buddypress button.loading:after,
+#buddypress ul li.loading a:after {
   font-family: 'fontawesome';
   font-weight: normal;
   font-style: normal;
@@ -4555,7 +4539,7 @@ select[multiple="multiple"] {
   animation: spin 2s infinite linear;
 }
 
-#buddypress input[type="submit"].pending, #buddypress input[type="button"].pending, #buddypress input[type="reset"].pending, #buddypress input[type="submit"].disabled, #buddypress input[type="button"].disabled, #buddypress input[type="reset"].disabled {
+#buddypress input[type="submit"].pending, #buddypress input[type="submit"].disabled, #buddypress input[type="button"].pending, #buddypress input[type="button"].disabled, #buddypress input[type="reset"].pending, #buddypress input[type="reset"].disabled {
   border-color: #eee;
   color: #bbb;
   cursor: disabled;
@@ -4567,13 +4551,14 @@ select[multiple="multiple"] {
   cursor: disabled;
 }
 
-#buddypress div.pending a, #buddypress a.disabled {
+#buddypress div.pending a,
+#buddypress a.disabled {
   border-color: #eee;
   color: #bbb;
   cursor: disabled;
 }
 
-#buddypress input[type="submit"]:hover.pending, #buddypress input[type="button"]:hover.pending, #buddypress input[type="reset"]:hover.pending, #buddypress input[type="submit"]:hover.disabled, #buddypress input[type="button"]:hover.disabled, #buddypress input[type="reset"]:hover.disabled {
+#buddypress input[type="submit"]:hover.pending, #buddypress input[type="submit"]:hover.disabled, #buddypress input[type="button"]:hover.pending, #buddypress input[type="button"]:hover.disabled, #buddypress input[type="reset"]:hover.pending, #buddypress input[type="reset"]:hover.disabled {
   background: #fff;
   border-color: #eee;
   color: #bbb;
@@ -4585,14 +4570,15 @@ select[multiple="multiple"] {
   color: #bbb;
 }
 
-#buddypress div.pending a:hover, #buddypress a.disabled:hover {
+#buddypress div.pending a:hover,
+#buddypress a.disabled:hover {
   background: #fff;
   border-color: #eee;
   color: #bbb;
 }
 
 #buddypress div.submit input.loading {
-  background-color: #eee;
+  border-color: #eee;
   color: #bbb;
 }
 

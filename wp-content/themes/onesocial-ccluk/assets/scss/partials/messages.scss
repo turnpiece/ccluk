@@ -131,7 +131,41 @@ body.bp-user.messages {
       }
 
       #send_message_form.standard-form {
+        
+        textarea, 
+        input[type="text"] {
+          margin-bottom: 60px;
+          padding-bottom: 10px;
+          padding-top: 10px;
+        }
+        
+        div.send-to-container {
+          position: relative;
+          width: 100%;
+
+          > label {
+            max-width: 50px;
+            position: absolute;
+            top: 0;
+            left: 0;
+          }
+
+          > ul.acfb-holder {
+            margin-left: 60px;
+
+            li {
+              float: none;
+              margin: 0 0 20px;
+
+              &.friend-tab {
+                margin-top: 7px;
+              }
+            }
+          }
+        }
+
         ul.acfb-holder {
+          position: relative;
           li.friend-tab {
             background-color: transparent;
             border: none;
@@ -144,17 +178,17 @@ body.bp-user.messages {
 
         label,
         legend {
-              @include form-label();
-          }
+          @include form-label();
+        }
 
-          input[type="text"] {
-            @include form-input();
-          }
+        input[type="text"] {
+          @include form-input();
+        }
 
-          input[type="text"],
-          textarea {
-            margin-bottom: 20px;
-          }
+        input[type="text"],
+        textarea {
+          margin-bottom: 20px;
+        }
 
         label {
             margin-bottom: 0;
@@ -170,86 +204,86 @@ body.bp-user.messages {
       }
 
       table#message-threads {
-          tr td {
-              vertical-align: top;
-              border: none;
-          }
-          &.messages-notices tr td {
-              border-left: none;
-              border-right: none;
-              border-top: none;
-              border-bottom: 2px solid $green;
-              display: table-cell;
-              float: none;
-          }
+        tr td {
+            vertical-align: top;
+            border: none;
+        }
+        &.messages-notices tr td {
+            border-left: none;
+            border-right: none;
+            border-top: none;
+            border-bottom: 2px solid $green;
+            display: table-cell;
+            float: none;
+        }
 
-          &.messages-notices tr td:last-child {
-              > div {
-                margin-bottom: $font-size-sm;
-                overflow: hidden;
-              }
-              a {
-                margin-bottom: 2px;
-              }
-          }
-          tr td.thread-info p {
-              font-size: $font-size-sm;
-          }
+        &.messages-notices tr td:last-child {
+            > div {
+              margin-bottom: $font-size-sm;
+              overflow: hidden;
+            }
+            a {
+              margin-bottom: 2px;
+            }
+        }
+        tr td.thread-info p {
+            font-size: $font-size-sm;
+        }
 
-          tr {
-              td.thread-info p a {
-                  color: $blue;
-                  font-weight: 600;
-                  margin-bottom: 5px;
-                  display: inline-block;
-                  &:hover {
-                    color: $green;
-                  }
-              }
+        tr {
+            td.thread-info p a {
+                color: $blue;
+                font-weight: 600;
+                margin-bottom: 5px;
+                display: inline-block;
+                &:hover {
+                  color: $green;
+                }
+            }
 
-              &.unread td {
-                  
-                  border-top: 2px solid $secondary_bg;
-                  border-bottom: 2px solid $secondary_bg;
-                  &.thread-from {
-                    border-left: 2px solid $secondary_bg;
-                    position: relative;
+            &.unread td {
+                
+                border-top: 2px solid $secondary_bg;
+                border-bottom: 2px solid $secondary_bg;
+                &.thread-from {
+                  border-left: 2px solid $secondary_bg;
+                  position: relative;
 
-                  &:before {
-                    right: 100%;
-                    top: 50%;
-                    border: solid transparent;
-                    /*margin-right: 2px;*/
-                    content: " ";
-                    height: 0;
-                    width: 0;
-                    position: absolute;
-                    pointer-events: none;
-                  }
-                  &:after {
-                    right: 100%;
-                    top: 50%;
-                    border: solid transparent;
-                    /*margin-right: 2px;*/
-                    content: " ";
-                    height: 0;
-                    width: 0;
-                    position: absolute;
-                    pointer-events: none;
-                    border-color: rgba(255, 255, 255, 0);
-                    border-right-color: $secondary_bg;
-                    border-width: 7px;
-                    margin-top: -7px;
-                  }
-                  &:before {
-                    border-color: $green;
-                    border-right-color: $secondary_bg;
-                    border-width: 10px;
-                    margin-top: -10px;
-                  }
-                  }
-              }
-          }
+                &:before {
+                  right: 100%;
+                  top: 50%;
+                  border: solid transparent;
+                  /*margin-right: 2px;*/
+                  content: " ";
+                  height: 0;
+                  width: 0;
+                  position: absolute;
+                  pointer-events: none;
+                }
+                &:after {
+                  right: 100%;
+                  top: 50%;
+                  border: solid transparent;
+                  /*margin-right: 2px;*/
+                  content: " ";
+                  height: 0;
+                  width: 0;
+                  position: absolute;
+                  pointer-events: none;
+                  border-color: rgba(255, 255, 255, 0);
+                  border-right-color: $secondary_bg;
+                  border-width: 7px;
+                  margin-top: -7px;
+                }
+                &:before {
+                  border-color: $green;
+                  border-right-color: $secondary_bg;
+                  border-width: 10px;
+                  margin-top: -10px;
+                }
+                }
+            }
+        }
 
         &:not(.messages-notices) tr td:last-child {
           padding-right: 15px;
@@ -456,35 +490,8 @@ body.bp-user.messages {
 }
 
 #messages-layout #message.info {
-float: left;
-width: 100%;
-}
-
-#send_message_form ul.acfb-holder li {
-  float: none;
-  margin: 0 0 20px;
-}
-
-ul.acfb-holder li.friend-tab {
-margin-top: 7px;
-}
-
-#send_message_form {
-  position: relative;
-  textarea, 
-  input[type="text"] {
-    margin-bottom: 60px;
-    padding-bottom: 10px;
-    padding-top: 10px;
-
-    &#send-to-input {
-      position: absolute;
-      top: 20px;
-      right: 0;
-      min-width: 200px;
-      max-width: 50%;
-    }
-  }
+  float: left;
+  width: 100%;
 }
 
 #message-subject {

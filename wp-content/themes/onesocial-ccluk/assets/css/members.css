@@ -144,6 +144,42 @@ body.bp-user.messages #buddypress .messages #message.info {
   margin-top: 60px;
 }
 
+body.bp-user.messages #buddypress #send_message_form.standard-form textarea,
+body.bp-user.messages #buddypress #send_message_form.standard-form input[type="text"] {
+  margin-bottom: 60px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+body.bp-user.messages #buddypress #send_message_form.standard-form div.send-to-container {
+  position: relative;
+  width: 100%;
+}
+
+body.bp-user.messages #buddypress #send_message_form.standard-form div.send-to-container > label {
+  max-width: 50px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+body.bp-user.messages #buddypress #send_message_form.standard-form div.send-to-container > ul.acfb-holder {
+  margin-left: 60px;
+}
+
+body.bp-user.messages #buddypress #send_message_form.standard-form div.send-to-container > ul.acfb-holder li {
+  float: none;
+  margin: 0 0 20px;
+}
+
+body.bp-user.messages #buddypress #send_message_form.standard-form div.send-to-container > ul.acfb-holder li.friend-tab {
+  margin-top: 7px;
+}
+
+body.bp-user.messages #buddypress #send_message_form.standard-form ul.acfb-holder {
+  position: relative;
+}
+
 body.bp-user.messages #buddypress #send_message_form.standard-form ul.acfb-holder li.friend-tab {
   background-color: transparent;
   border: none;
@@ -476,35 +512,6 @@ body.bp-user.messages #buddypress div#message-thread div.message-options {
 #messages-layout #message.info {
   float: left;
   width: 100%;
-}
-
-#send_message_form ul.acfb-holder li {
-  float: none;
-  margin: 0 0 20px;
-}
-
-ul.acfb-holder li.friend-tab {
-  margin-top: 7px;
-}
-
-#send_message_form {
-  position: relative;
-}
-
-#send_message_form textarea,
-#send_message_form input[type="text"] {
-  margin-bottom: 60px;
-  padding-bottom: 10px;
-  padding-top: 10px;
-}
-
-#send_message_form textarea#send-to-input,
-#send_message_form input[type="text"]#send-to-input {
-  position: absolute;
-  top: 20px;
-  right: 0;
-  min-width: 200px;
-  max-width: 50%;
 }
 
 #message-subject {
@@ -2422,6 +2429,12 @@ div#sitewide-notice div#message.error p {
   content: "\f057";
 }
 
+#buddypress.album-wrapper .standard-form textarea,
+#buddypress #group-settings-form textarea {
+  height: 90px;
+  margin: 0;
+}
+
 #buddypress div.accept, #buddypress div.reject {
   float: left;
   margin: 10px 10px 0 0;
@@ -2490,13 +2503,23 @@ div#sitewide-notice div#message.error p {
   /*margin-bottom: 10px;*/
 }
 
+#buddypress .standard-form.album-create-form textarea {
+  height: 90px;
+  margin: 0;
+}
+
+#buddypress .standard-form label[for="album_privacy"] {
+  margin-bottom: 20px;
+}
+
+#buddypress .standard-form input.send-to-input {
+  width: 15em;
+  margin-bottom: 0;
+}
+
 /*--------------------------------------------------------------
 8.0 - Forums (Legacy), Tables and Topics
 --------------------------------------------------------------*/
-.bp-user.profile .buddypress-content-wrap .profile {
-  /*padding-bottom: 40px;*/
-}
-
 .buddypress-content-wrap {
   padding-bottom: 60px;
 }
@@ -2635,10 +2658,6 @@ div#sitewide-notice div#message.error p {
   position: absolute;
   top: 0;
   left: -21px;
-}
-
-#buddypress #groups-notification-settings {
-  /*margin-bottom: 0;*/
 }
 
 #buddypress .boss-general-settings label {
