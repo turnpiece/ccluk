@@ -346,6 +346,12 @@ form#whats-new-form {
   }
 }
 
+.directory.activity #buddypress > div[role="navigation"].item-list-tabs, 
+.bp-user #buddypress div#subnav.item-list-tabs {
+  margin-top: 0;
+  margin-bottom: 65px;
+}
+
 body {
   &.single-item.groups,
   &.bp-user.my-account {
@@ -661,6 +667,12 @@ body #buddypress div.activity-comments form#frm_buddypress-edit-activity .ac-tex
 4.1 - Search Forms
 --------------------------------------------------------------*/
 
+.search {
+  #buddypress div:not(#item-nav):not(#mobile-item-nav) > .dir-form div.item-list-tabs {
+    margin-bottom: 90px;
+  }
+}
+
 #bbpress-forums #bbp-search-index-form input#bbp_search {
   float: left;
   height: 35px;
@@ -789,25 +801,31 @@ body #buddypress div.activity-comments form#frm_buddypress-edit-activity .ac-tex
   }
 }
 
-.entry-content #buddypress #blogs-directory-form .item-list-tabs,
-#buddypress #members-directory-form .item-list-tabs {
-  margin: 0 auto 60px;
-  max-width: 66%;
+.entry-content #buddypress #blogs-directory-form,
+#buddypress #members-directory-form  {
+  .item-list-tabs {
+    margin: 0 auto 60px;
+    max-width: 66%;
+  }
 }
 
-#groups-order-select .buddyboss-select,
-#blogs-directory-form .buddyboss-select,
-#members-order-select .buddyboss-select {
-  margin-top: 0;
+#groups-order-select,
+#blogs-directory-form,
+#members-order-select {
+  .buddyboss-select {
+    margin-top: 0;
+  }
 }
 
 #buddypress {
-  #groups-directory-form .item-list-tabs:after,
-  #blogs-directory-form .item-list-tabs:after,
-  #members-directory-form .item-list-tabs:after {
-    clear: both;
-    content: ' ';
-    display: table;
+  #groups-directory-form,
+  #blogs-directory-form,
+  #members-directory-form {
+    .item-list-tabs:after {
+      clear: both;
+      content: ' ';
+      display: table;
+    }
   }
   #groups-directory-form .item-list-tabs li {
     float: right;
@@ -3184,7 +3202,7 @@ body.buddypress.is-desktop {
             max-width: 175px;
           }
           > a {
-            font-size: $font-size-tiny;
+            font-size: $font-size-sm;
             font-weight: 700;
             text-transform: uppercase;
             color: $blue;
@@ -3222,7 +3240,7 @@ body.buddypress.is-desktop {
               }
               > a {
                   color: $green;
-                  border-bottom: 1px solid $green;
+                  border-bottom: 1px solid $green !important;
               }
           }
       }

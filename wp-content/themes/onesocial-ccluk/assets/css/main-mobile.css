@@ -2269,22 +2269,26 @@ input#bpfb_link_preview_url, input#bpfb_video_url {
 /*--------------------------------------------------------------
 2.1.3 - Invite Anyone
 --------------------------------------------------------------*/
-.invite-anyone form#send-invite-form .left-menu, .group-create form#send-invite-form .left-menu {
+.invite-anyone form#send-invite-form .left-menu,
+.group-create form#send-invite-form .left-menu {
   width: 100%;
   float: none;
 }
 
-.invite-anyone form#send-invite-form #invite-anyone-member-list, .group-create form#send-invite-form #invite-anyone-member-list {
+.invite-anyone form#send-invite-form #invite-anyone-member-list,
+.group-create form#send-invite-form #invite-anyone-member-list {
   width: 97%;
 }
 
-.invite-anyone form#send-invite-form .main-column, .group-create form#send-invite-form .main-column {
+.invite-anyone form#send-invite-form .main-column,
+.group-create form#send-invite-form .main-column {
   width: 100%;
   float: none;
   clear: left;
 }
 
-.invite-anyone form#send-invite-form #invite-anyone-invite-list img.avatar, .group-create form#send-invite-form #invite-anyone-invite-list img.avatar {
+.invite-anyone form#send-invite-form #invite-anyone-invite-list img.avatar,
+.group-create form#send-invite-form #invite-anyone-invite-list img.avatar {
   position: relative;
   left: 0;
   top: 0;

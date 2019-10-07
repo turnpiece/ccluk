@@ -1,5 +1,36 @@
 // Members stylesheet.
 
+/*--------------------------------------------------------------
+# Typography
+--------------------------------------------------------------*/
+
+#profile-nav span,
+#wp-admin-bar-shortcode-secondary .alert,
+#whats-new-options,
+#item-header-content,
+#buddypress div#message,
+#buddypress ul.item-list li div.item-desc,
+.forum-titles,
+.sap-container,
+.bb-search-forums-label{
+    font-family: $font-default;
+    font-weight: 400;
+    font-style: normal;
+    font-size: $font-size-min;
+}
+
+#buddyboss-bbpress-media-bulk-uploader-wrapper,
+#buddyboss-comment-media-bulk-uploader-wrapper,
+#buddyboss-media-bulk-uploader-wrapper,
+#buddyboss-media-preview-inner,
+.buddyboss-bbpress-media-preview-inner,
+.buddyboss-comment-media-preview-inner {
+    img {
+        margin-bottom: 5px;
+    }
+}
+
+
 /** Import partials **/
 
 @import "partials/variables";

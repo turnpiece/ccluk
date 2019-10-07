@@ -539,17 +539,6 @@ img {
   }
 }
 
-#buddyboss-bbpress-media-bulk-uploader-wrapper,
-#buddyboss-comment-media-bulk-uploader-wrapper,
-#buddyboss-media-bulk-uploader-wrapper,
-#buddyboss-media-preview-inner,
-.buddyboss-bbpress-media-preview-inner,
-.buddyboss-comment-media-preview-inner {
-    img {
-        margin-bottom: 5px;
-    }
-}
-
 /*--------------------------------------------------------------
 # Typography
 --------------------------------------------------------------*/
@@ -560,30 +549,19 @@ h1, h2, h3, h4, h5, h6, ul, ol, dd, table, p, address, pre, hr, figure, video {
 }
 
 html,
-#profile-nav span,
-#wp-admin-bar-shortcode-secondary .alert,
 .header-notifications a.notification-link span,
 .site-header #wp-admin-bar-shortcode-secondary .alert,
 .header-notifications a.notification-link span,
 .entry-meta .comments-link a,
 .entry-meta, .activity,
-.item-list-tabs,
-#whats-new-options,
-#item-header-content,
-#buddypress div#message,
-#buddypress ul.item-list li div.item-desc,
 .generic-button, .bb-meta,
 #item-photos,
-.forum-titles,
-.sap-container,
-.bb-search-forums-label,
-.woocommerce-page.woocommerce-page .entry-content,
 .footer-style-2 .footer-inner-top,
 .footer-style-2 .footer-widget a{
     font-family: $font-default;
     font-weight: 400;
     font-style: normal;
-    font-size: 17px;
+    font-size: $font-size-min;
 }
 
 /*------------------------------------*\
@@ -1911,25 +1889,9 @@ strong, b {
   }
 }
 
-.site {
-  /*	min-height: 500px;*/
-}
-
 #primary {
   padding-left: 24px;
   padding-right: 24px;
-}
-
-body.single-item.groups #primary {
-  padding-left: 0;
-  padding-right: 0;
-  width: 100%;
-}
-
-.single-item.groups .buddypress-content-wrap {
-  max-width: 1170px;
-  margin: 0 auto;
-  padding: 0 15px;
 }
 
 .is-sticky .site-header {
@@ -4301,15 +4263,6 @@ body article.error404 .entry-header {
 12.0 - Search template
 ----------------------------------------------------------------*/
 
-.search {
-  .site-content {
-    /*width: 100%;*/
-  }
-  #buddypress div:not(#item-nav):not(#mobile-item-nav) > .dir-form div.item-list-tabs {
-    margin-bottom: 90px;
-  }
-}
-
 .search_results {
   max-width: $content_w;
   margin: 0 auto;
@@ -4321,7 +4274,8 @@ body article.error404 .entry-header {
   padding: 0;
 }
 
-.bb-search-result-group .horiz-gallery, #buddypress ul.item-list li .bb-search-result-group div.item-desc {
+.bb-search-result-group .horiz-gallery, 
+#buddypress ul.item-list li .bb-search-result-group div.item-desc {
   margin: 0;
 }
 
@@ -4862,11 +4816,6 @@ p#item-desc {
       color: #57ad68;
     }
   }
-}
-
-.directory.activity #buddypress > div[role="navigation"].item-list-tabs, .bp-user #buddypress div#subnav.item-list-tabs {
-  margin-top: 0;
-  margin-bottom: 65px;
 }
 
 .boss-member-meta {
