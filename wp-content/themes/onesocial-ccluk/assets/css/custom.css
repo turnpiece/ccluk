@@ -2303,30 +2303,29 @@ div#sitewide-notice div#message p {
   margin: 0.2rem 0rem;
   -webkit-box-shadow: none;
   box-shadow: none;
-  border-color: #22a7f0;
+  border: none;
+  color: #fff;
+  background-color: #22a7f0;
+  border-radius: 5px;
 }
 
 .single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_ical:hover,
 .single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_gcal:hover {
-  border-color: #54ae68;
+  background-color: #54ae68;
 }
 
-.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_ical:before, .single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_ical:after,
+.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_ical:before,
 .single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_ical > span,
 .single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_gcal:before,
-.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_gcal:after,
 .single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_gcal > span {
-  color: #22a7f0;
-  border-color: #22a7f0;
+  color: #fff;
+  border-color: #fff;
 }
 
-.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_ical:before:hover, .single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_ical:after:hover,
-.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_ical > span:hover,
-.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_gcal:before:hover,
-.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_gcal:after:hover,
-.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_gcal > span:hover {
-  color: #54ae68;
-  border-color: #54ae68;
+.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_ical:after,
+.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_gcal:after {
+  color: #fff;
+  border-color: #fff transparent;
 }
 
 .single-incsub_event #wpmudevevents-wrapper #wpmudevevents-rsvps,
