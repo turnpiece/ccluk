@@ -2260,83 +2260,79 @@ div#sitewide-notice div#message p {
 }
 
 /** Styles for plugins etc. **/
-.single-incsub_event .entry-header {
+.single-incsub_event .header-area {
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.single-incsub_event .header-area .entry-header {
   margin: 12px 0px;
   margin: 1.2rem 0rem;
   border-bottom: 1px solid #54ae68;
 }
 
-.single-incsub_event .entry-header h1.entry-title {
+.single-incsub_event .header-area .entry-header h1.entry-title {
   font-size: 48px;
   padding-bottom: 15px;
   color: #54ae68;
 }
 
-.single-incsub_event .entry-header a > .entry-title {
+.single-incsub_event .header-area .entry-header a > .entry-title {
   color: #22a7f0;
 }
 
-.single-incsub_event #wpmudevevents-wrapper div.wpmudevevents-buttons a.wpmudevevents-yes-submit,
-.single-incsub_event #wpmudevevents-wrapper div.wpmudevevents-buttons a.wpmudevevents-maybe-submit,
-.single-incsub_event #wpmudevevents-wrapper div.wpmudevevents-buttons a.wpmudevevents-no-submit,
-.single-incsub_event #wpmudevevents-wrapper div.wpmudevevents-buttons input.wpmudevevents-yes-submit,
-.single-incsub_event #wpmudevevents-wrapper div.wpmudevevents-buttons input.wpmudevevents-maybe-submit,
-.single-incsub_event #wpmudevevents-wrapper div.wpmudevevents-buttons input.wpmudevevents-no-submit {
-  border-radius: 5px;
-  background-image: none;
-  background-color: #22a7f0;
-  border: none;
-  text-shadow: none;
+.single-incsub_event #wpmudevevents-wrapper {
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+}
+
+.single-incsub_event #wpmudevevents-wrapper h3,
+.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta,
+.single-incsub_event #wpmudevevents-wrapper #event-bread-crumbs .current {
+  color: #54ae68;
+}
+
+.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta {
+  margin: 12px 0px;
+  margin: 1.2rem 0rem;
+}
+
+.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_ical,
+.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_gcal {
+  float: right;
+  margin: 2px 0px;
+  margin: 0.2rem 0rem;
   -webkit-box-shadow: none;
-          box-shadow: none;
-  padding: 6px 10px;
-  padding: 0.6rem 1rem;
-  color: #fff;
-  padding: 3px 6px;
-  padding: 0.3rem 0.6rem;
+  box-shadow: none;
+  border-color: #22a7f0;
 }
 
-.single-incsub_event #wpmudevevents-wrapper div.wpmudevevents-buttons a.wpmudevevents-yes-submit:hover,
-.single-incsub_event #wpmudevevents-wrapper div.wpmudevevents-buttons a.wpmudevevents-maybe-submit:hover,
-.single-incsub_event #wpmudevevents-wrapper div.wpmudevevents-buttons a.wpmudevevents-no-submit:hover,
-.single-incsub_event #wpmudevevents-wrapper div.wpmudevevents-buttons input.wpmudevevents-yes-submit:hover,
-.single-incsub_event #wpmudevevents-wrapper div.wpmudevevents-buttons input.wpmudevevents-maybe-submit:hover,
-.single-incsub_event #wpmudevevents-wrapper div.wpmudevevents-buttons input.wpmudevevents-no-submit:hover {
-  color: #fff;
-  background-color: #54ae68;
+.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_ical:hover,
+.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_gcal:hover {
+  border-color: #54ae68;
 }
 
-.single-incsub_event #wpmudevevents-wrapper div.wpmudevevents-buttons a.wpmudevevents-yes-submit.current,
-.single-incsub_event #wpmudevevents-wrapper div.wpmudevevents-buttons a.wpmudevevents-maybe-submit.current,
-.single-incsub_event #wpmudevevents-wrapper div.wpmudevevents-buttons a.wpmudevevents-no-submit.current,
-.single-incsub_event #wpmudevevents-wrapper div.wpmudevevents-buttons input.wpmudevevents-yes-submit.current,
-.single-incsub_event #wpmudevevents-wrapper div.wpmudevevents-buttons input.wpmudevevents-maybe-submit.current,
-.single-incsub_event #wpmudevevents-wrapper div.wpmudevevents-buttons input.wpmudevevents-no-submit.current {
-  background-color: #54ae68;
+.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_ical:before, .single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_ical:after,
+.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_ical > span,
+.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_gcal:before,
+.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_gcal:after,
+.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_gcal > span {
+  color: #22a7f0;
+  border-color: #22a7f0;
 }
 
-.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-rsvps #wpmudevevents-hide-rsvps,
-.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-rsvps #wpmudevevents-load-rsvps,
-.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-rsvps a.wpmudevevents-login_link-cancel {
-  border-radius: 5px;
-  background-image: none;
-  background-color: #22a7f0;
-  border: none;
-  text-shadow: none;
-  -webkit-box-shadow: none;
-          box-shadow: none;
-  padding: 6px 10px;
-  padding: 0.6rem 1rem;
-  color: #fff;
-  padding: 3px 6px;
-  padding: 0.3rem 0.6rem;
+.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_ical:before:hover, .single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_ical:after:hover,
+.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_ical > span:hover,
+.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_gcal:before:hover,
+.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_gcal:after:hover,
+.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_gcal > span:hover {
+  color: #54ae68;
+  border-color: #54ae68;
 }
 
-.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-rsvps #wpmudevevents-hide-rsvps:hover,
-.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-rsvps #wpmudevevents-load-rsvps:hover,
-.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-rsvps a.wpmudevevents-login_link-cancel:hover {
-  color: #fff;
-  background-color: #54ae68;
+.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-rsvps,
+.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-buttons,
+.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-user {
+  display: none;
 }
 
 .single-incsub_event #wpmudevevents-wrapper div.message {

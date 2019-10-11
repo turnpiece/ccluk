@@ -1,33 +1,56 @@
 .single-incsub_event {
 
-	.entry-header {
-		@include page-header();
+	.header-area {
+		max-width: $content_w;
+		@include centred-margin( 0 );
+
+		.entry-header {
+			@include page-header();
+		}
 	}
 
 	#wpmudevevents-wrapper {
-		div.wpmudevevents-buttons {
-			a.wpmudevevents-yes-submit,
-			a.wpmudevevents-maybe-submit,
-			a.wpmudevevents-no-submit,
-			input.wpmudevevents-yes-submit,
-			input.wpmudevevents-maybe-submit,
-			input.wpmudevevents-no-submit {
-				@include button();
-				@include padding( 0.3, 0.6 );
 
-				&.current {
-					background-color: $green;
+		font-family: $font-default;
+
+		h3,
+		#wpmudevevents-contentmeta,
+		#event-bread-crumbs .current {
+			color: $green;
+		}
+
+		#wpmudevevents-contentmeta {
+			@include margin( 1.2, 0 );
+
+			a.export_to_ical, 
+			a.export_to_gcal {
+				float: right;
+				@include margin( 0.2, 0 );
+				@include box-shadow( none );
+				border-color: $blue;
+
+				&:hover {
+					border-color: $green;
+				}
+
+				&:before,
+				&:after,
+				> span {
+					color: $blue;
+					border-color: $blue;
+
+					&:hover {
+						color: $green;
+						border-color: $green;
+					}
 				}
 			}
 		}
 
-		#wpmudevevents-rsvps {
-			#wpmudevevents-hide-rsvps,
-			#wpmudevevents-load-rsvps,
-			a.wpmudevevents-login_link-cancel {
-				@include button();
-				@include padding( 0.3, 0.6 );
-			}
+		#wpmudevevents-rsvps,
+		#wpmudevevents-buttons,
+		#wpmudevevents-user {
+			display: none;
 		}
 
 		div.message {
