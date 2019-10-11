@@ -27,22 +27,24 @@
 				float: right;
 				@include margin( 0.2, 0 );
 				@include box-shadow( none );
-				border-color: $blue;
+				border: none;
+				color: $white;
+				background-color: $blue;
+				border-radius: 5px;
 
 				&:hover {
-					border-color: $green;
+					background-color: $green;
 				}
 
 				&:before,
-				&:after,
 				> span {
-					color: $blue;
-					border-color: $blue;
+					color: $white;
+					border-color: $white;
+				}
 
-					&:hover {
-						color: $green;
-						border-color: $green;
-					}
+				&:after {
+					color: $white;
+					border-color: $white transparent;
 				}
 			}
 		}
