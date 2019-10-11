@@ -6,6 +6,8 @@ class CCLUK_BP_Custom {
 
 	const TWFY_URL = 'https://www.theyworkforyou.com';
 
+	const POSTCODE_FIELD_ID = 2;
+
 	private $location = array(
 		'parliamentary_constituency',
 		'region',
@@ -138,7 +140,7 @@ class CCLUK_BP_Custom {
 	 */
 	public function mailchimp_user_sync( $data, $user ) {
 
-	    if ($postcode = xprofile_get_field_data( 2 , $user->id )) {
+	    if ($postcode = xprofile_get_field_data( self::POSTCODE_FIELD_ID , $user->id )) {
 	        $data['POSTCODE'] = $postcode;
 
 			if ($location = get_user_meta( $user->id, 'location', true )) {
