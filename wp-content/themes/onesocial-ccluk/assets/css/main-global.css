@@ -92,7 +92,7 @@ This is the Global stylesheet, served to all devices.
 >>> PLUGINS
 ----------------------------------------------------------------
 1.0 - WordPress Stats
-2.0 - Gravity Forms
+2.0 - WP Forms
 3.0 - Subscribe to Comments
 4.0 - BuddyPress Tweet
 5.0 - BuddyPress Group Documents
@@ -668,7 +668,7 @@ td:last-child {
 .comment-content,
 #respond form textarea,
 .bb-comment-author {
-  font-size: 20px;
+  font-size: 18px;
 }
 
 /**
@@ -678,8 +678,9 @@ td:last-child {
  * CODE
  */
 pre {
-  background: #f5f5f5;
-  border: 1px solid #ddd;
+  color: #fff;
+  background: #54ae68;
+  border: 1px solid #000;
   font-size: 0.85rem;
   max-width: 100%;
   overflow: auto;
@@ -711,11 +712,11 @@ code {
   padding: 0.125rem 0.375rem;
   margin: 0 0.1875rem;
   font-size: 80%;
-  background: #f5f5f5;
-  border: 1px solid #ddd;
+  color: #fff;
+  background: #54ae68;
+  border: 1px solid #000;
   border-radius: 3px;
   font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
-  /* [1] */
 }
 
 /**
@@ -4859,10 +4860,10 @@ img#wpstats {
 }
 
 /*--------------------------------------------------------------
-2.0 - Gravity Forms
+2.0 - WP Forms
 --------------------------------------------------------------*/
-.gform_wrapper li, .gform_wrapper form li {
-  margin: 0;
+.wpforms-container .wpforms-required-label {
+  display: none;
 }
 
 /*--------------------------------------------------------------
