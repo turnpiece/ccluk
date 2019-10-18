@@ -10,15 +10,11 @@ use WP_Defender\Module\Hardener\Model\Settings;
 use WP_Defender\Module\Hardener\Rule;
 
 class Disable_Xml_Rpc extends Rule {
-	static $slug = 'disable_xml_rpc';
+	static $slug = 'disable-xml-rpc';
 	static $service;
 
 	function getDescription() {
 		$this->renderPartial( 'rules/disable-xml-rpc' );
-	}
-
-	function getSubDescription() {
-		return __( "XML-RPC is currently enabled.", wp_defender()->domain );
 	}
 
 	/**
@@ -33,11 +29,11 @@ class Disable_Xml_Rpc extends Rule {
 	}
 
 	function addHooks() {
-		$this->add_action( 'processingHardener' . self::$slug, 'process' );
-		$this->add_action( 'processRevert' . self::$slug, 'revert' );
+		$this->addAction( 'processingHardener' . self::$slug, 'process' );
+		$this->addAction( 'processRevert' . self::$slug, 'revert' );
 		if ( in_array( self::$slug, Settings::instance()->fixed ) ) {
-			$this->add_filter( 'xmlrpc_enabled', 'return_false' );
-			$this->add_filter( 'xmlrpc_methods', 'block_xmlrpc_attacks' );
+			$this->addFilter( 'xmlrpc_enabled', 'return_false' );
+			$this->addFilter( 'xmlrpc_methods', 'block_xmlrpc_attacks' );
 		}
 	}
 
@@ -48,14 +44,11 @@ class Disable_Xml_Rpc extends Rule {
 	function block_xmlrpc_attacks( $methods ) {
 		unset( $methods['pingback.ping'] );
 		unset( $methods['pingback.extensions.getPingbacks'] );
+
 		return $methods;
 	}
 
 	function revert() {
-		if ( ! $this->verifyNonce() ) {
-			return;
-		}
-
 		$ret = $this->getService()->revert();
 		if ( ! is_wp_error( $ret ) ) {
 			Settings::instance()->addToIssues( self::$slug );
@@ -67,10 +60,6 @@ class Disable_Xml_Rpc extends Rule {
 	}
 
 	function process() {
-		if ( ! $this->verifyNonce() ) {
-			return;
-		}
-
 		$ret = $this->getService()->process();
 		if ( ! is_wp_error( $ret ) ) {
 			Settings::instance()->addToResolved( self::$slug );
@@ -82,13 +71,30 @@ class Disable_Xml_Rpc extends Rule {
 	}
 
 	/**
-	 * @return Disable_Trackback_Service
+	 * @return Disable_Xml_Rpc_Service
 	 */
 	public function getService() {
 		if ( self::$service == null ) {
-			self::$service = new Disable_Trackback_Service();
+			self::$service = new Disable_Xml_Rpc_Service();
 		}
 
 		return self::$service;
+	}
+
+	/**
+	 * This will return the short summary why this rule show up as issue
+	 *
+	 * @return string
+	 */
+	function getErrorReason() {
+		return __( "XML-RPC is currently enabled.", wp_defender()->domain );
+	}
+
+	/**
+	 * This will return a short summary to show why this rule works
+	 * @return mixed
+	 */
+	function getSuccessReason() {
+		return __( "XML-RPC is disabled.", wp_defender()->domain );
 	}
 }

@@ -2,9 +2,6 @@
 
 namespace MC4WP\Sync;
 
-use MC4WP\Sync\CLI\CommandProvider;
-use MC4WP\Sync\Webhook;
-
 final class Plugin {
 
 	/**
@@ -78,7 +75,7 @@ final class Plugin {
 		$options['double_optin'] = (int) $options['double_optin'];
 
 		/**
-		 * Filters MailChimp Sync options
+		 * Filters Mailchimp Sync options
 		 *
 		 * @param array $options
 		 */

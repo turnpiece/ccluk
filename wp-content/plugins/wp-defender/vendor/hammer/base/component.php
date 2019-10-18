@@ -208,7 +208,6 @@ class Component extends HObject {
 		}
 
 		$this->ensureBehaviors();
-
 		foreach ( $this->_behaviors as $key => $behavior ) {
 			$refClass = new \ReflectionClass( $behavior );
 			if ( $refClass->hasMethod( $name ) ) {

@@ -39,12 +39,16 @@ window.tsfPTGB = function( $ ) {
 	/**
 	 * Data property injected by WordPress l10n handler.
 	 *
-	 * @since 3.2.0
-	 * @access private
+	 * @since 4.0.0
+	 * @access public
 	 * @type {(Object<string, *>)|boolean|null} l10n Localized strings
 	 */
-	var l10n = 'undefined' !== typeof tsfPTL10n && tsfPTL10n;
+	const l10n = 'undefined' !== typeof tsfPTL10n && tsfPTL10n;
 
+	/**
+	 * @since 3.2.0
+	 * @access private
+	 */
 	const { addFilter } = wp.hooks;
 	const { createElement, Fragment } = wp.element;
 	const { SelectControl } = wp.components;
@@ -52,6 +56,10 @@ window.tsfPTGB = function( $ ) {
 	const apiFetch = wp.apiFetch;
 	const { invoke } = lodash;
 
+	/**
+	 * @since 3.2.0
+	 * @access private
+	 */
 	const DEFAULT_QUERY = {
 		per_page: -1,
 		orderby:  'id',
@@ -62,12 +70,15 @@ window.tsfPTGB = function( $ ) {
 	/**
 	 * Initializes primary term selection for gutenberg.
 	 *
+	 * @since 3.2.0
+	 * @access private
+	 *
 	 * @function
 	 * @return {undefined}
 	 */
 	const _initPrimaryTerm = () => {
 
-		if ( ! tsf.hasInput || ! Object.keys( l10n.taxonomies ).length )
+		if ( ! Object.keys( l10n.taxonomies ).length )
 			return;
 
 		let taxonomies = l10n.taxonomies,
@@ -99,13 +110,6 @@ window.tsfPTGB = function( $ ) {
 				}
 			}
 		}
-
-		// Hook data handles.
-		(()=>{
-			for ( let taxonomy in taxonomies ) {
-				addDataInput( taxonomy );
-			}
-		})();
 
 		var dataStores = {};
 		class DataStore {
@@ -254,7 +258,7 @@ window.tsfPTGB = function( $ ) {
 					options: this.getSelectOptions(),
 					value:   setPrimaryTermID( this.props.slug, value )
 				} );
-				tsf.registerChange();
+				tsfAys && tsfAys.registerChange();
 			}
 
 			isDisabled() {
@@ -311,16 +315,22 @@ window.tsfPTGB = function( $ ) {
 			}
 		}
 
-		addFilter(
-			'editor.PostTaxonomyType',
-			'tsf/pt',
-			primaryTermSelectorFilter,
-			20
-		);
+		const _init = () => {
+			for ( let taxonomy in taxonomies ) {
+				addDataInput( taxonomy );
+			}
+
+			addFilter(
+				'editor.PostTaxonomyType',
+				'tsf/pt',
+				primaryTermSelectorFilter,
+				20
+			);
+		}
+		_init();
 	}
 
-	//? IE11 Object.assign() alternative.
-	return $.extend( {
+	return Object.assign( {
 		/**
 		 * Initialises all aspects of the scripts.
 		 * You shouldn't call this.
@@ -331,9 +341,11 @@ window.tsfPTGB = function( $ ) {
 		 * @function
 		 * @return {undefined}
 		 */
-		load: function() {
+		load: () => {
 			$( document.body ).on( 'tsf-onload', _initPrimaryTerm );
 		}
-	}, {} );
+	}, {}, {
+		l10n
+	} );
 }( jQuery );
 jQuery( window.tsfPTGB.load );

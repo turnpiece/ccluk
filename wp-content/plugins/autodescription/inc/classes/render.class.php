@@ -1,7 +1,9 @@
 <?php
 /**
- * @package The_SEO_Framework\Classes
+ * @package The_SEO_Framework\Classes\Facade\Render
+ * @subpackage The_SEO_Framework\Front
  */
+
 namespace The_SEO_Framework;
 
 defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
@@ -45,9 +47,10 @@ class Render extends Admin_Init {
 	 * @return string The document title
 	 */
 	public function get_document_title( $title = '' ) {
-		if ( $this->is_feed() || $this->is_post_type_disabled() ) {
+
+		if ( ! $this->query_supports_seo() )
 			return $title;
-		}
+
 		/**
 		 * @since 3.1.0
 		 * @param string $title The generated title.
@@ -69,15 +72,17 @@ class Render extends Admin_Init {
 	 * Use the_seo_framework()->get_title() instead.
 	 *
 	 * @since 3.1.0
+	 * @since 4.0.0 Removed extraneous, unused parameters.
 	 * @see $this->get_title()
 	 *
-	 * @param string $title The filterable title.
+	 * @param string $title       The filterable title.
 	 * @return string $title
 	 */
-	public function get_wp_title( $title = '', $sep = '', $seplocation = '' ) {
-		if ( $this->is_feed() || $this->is_post_type_disabled() ) {
+	public function get_wp_title( $title = '' ) {
+
+		if ( ! $this->query_supports_seo() )
 			return $title;
-		}
+
 		/**
 		 * @since 3.1.0
 		 * @param string $title The generated title.
@@ -94,19 +99,25 @@ class Render extends Admin_Init {
 
 	/**
 	 * Caches current Image URL in static variable.
-	 * Must be called inside the loop.
+	 * To be used on the front-end only.
 	 *
 	 * @since 2.2.2
 	 * @since 2.7.0 $get_id parameter has been added.
+	 * @since 4.0.0 Now uses the new image generator.
 	 * @staticvar string $cache
 	 *
 	 * @return string The image URL.
 	 */
 	public function get_image_from_cache() {
 
-		static $cache = null;
+		$url = '';
 
-		return isset( $cache ) ? $cache : $cache = $this->get_social_image( [], true );
+		foreach ( $this->get_image_details_from_cache() as $image ) {
+			$url = $image['url'];
+			if ( $url ) break;
+		}
+
+		return $url;
 	}
 
 	/**
@@ -288,96 +299,26 @@ class Render extends Admin_Init {
 	 */
 	public function og_image() {
 
-		if ( ! $this->use_og_tags() )
-			return '';
-
-		$id = $this->get_the_real_ID();
-
-		/**
-		 * @NOTE: Use of this might cause incorrect meta since other functions
-		 * depend on the image from cache.
-		 * @since 2.3.0
-		 * @since 2.7.0 Added output within filter.
-		 * @param string $image The social image URL.
-		 * @param int    $id    The page or term ID.
-		 */
-		$image = \apply_filters_ref_array(
-			'the_seo_framework_ogimage_output',
-			[
-				$this->get_image_from_cache(),
-				$id,
-			]
-		);
+		if ( ! $this->use_og_tags() ) return '';
 
 		$output = '';
 
-		/**
-		 * Now returns empty string on false.
-		 * @since 2.6.0
-		 */
-		if ( $image ) {
+		$multi = (bool) $this->get_option( 'multi_og_image' );
 
-			$image = (string) $image;
+		foreach ( $this->get_image_details_from_cache() as $image ) {
+			$output .= '<meta property="og:image" content="' . \esc_attr( $image['url'] ) . '" />' . "\r\n";
 
-			/**
-			 * Always output
-			 * @since 2.1.1
-			 */
-			$output .= '<meta property="og:image" content="' . \esc_attr( $image ) . '" />' . "\r\n";
-
-			if ( $image ) {
-				if ( ! empty( $this->image_dimensions[ $id ]['width'] ) && ! empty( $this->image_dimensions[ $id ]['height'] ) ) {
-					$output .= '<meta property="og:image:width" content="' . \esc_attr( $this->image_dimensions[ $id ]['width'] ) . '" />' . "\r\n";
-					$output .= '<meta property="og:image:height" content="' . \esc_attr( $this->image_dimensions[ $id ]['height'] ) . '" />' . "\r\n";
-				}
+			if ( $image['height'] && $image['width'] ) {
+				$output .= '<meta property="og:image:width" content="' . \esc_attr( $image['width'] ) . '" />' . "\r\n";
+				$output .= '<meta property="og:image:height" content="' . \esc_attr( $image['height'] ) . '" />' . "\r\n";
 			}
-		}
 
-		return $output . $this->render_woocommerce_product_og_image();
-	}
-
-	/**
-	 * Renders WooCommerce Product Gallery OG images.
-	 *
-	 * @since 2.6.0
-	 * @since 2.7.0 : Added image dimensions if found.
-	 * @since 2.8.0 : Checks for featured ID internally, rather than using a far-off cache.
-	 * @TODO move this to wc compat file.
-	 *
-	 * @return string The rendered OG Image.
-	 */
-	public function render_woocommerce_product_og_image() {
-
-		$output = '';
-
-		if ( $this->is_wc_product() ) {
-
-			$images = $this->get_image_from_woocommerce_gallery();
-
-			if ( $images && is_array( $images ) ) {
-
-				$post_id = $this->get_the_real_ID();
-				$post_manual_og = $this->get_custom_field( '_social_image_id', $post_id );
-				$featured_id = $post_manual_og ? (int) $post_manual_og : (int) \get_post_thumbnail_id( $post_id );
-
-				foreach ( $images as $id ) {
-
-					if ( $id === $featured_id )
-						continue;
-
-					//* Parse 4096px url.
-					$img = $this->parse_og_image( $id, [], true );
-
-					if ( $img ) {
-						$output .= '<meta property="og:image" content="' . \esc_attr( $img ) . '" />' . "\r\n";
-
-						if ( ! empty( $this->image_dimensions[ $id ]['width'] ) && ! empty( $this->image_dimensions[ $id ]['height'] ) ) {
-							$output .= '<meta property="og:image:width" content="' . \esc_attr( $this->image_dimensions[ $id ]['width'] ) . '" />' . "\r\n";
-							$output .= '<meta property="og:image:height" content="' . \esc_attr( $this->image_dimensions[ $id ]['height'] ) . '" />' . "\r\n";
-						}
-					}
-				}
+			if ( $image['alt'] ) {
+				$output .= '<meta property="og:image:alt" content="' . \esc_attr( $image['alt'] ) . '" />' . "\r\n";
 			}
+
+			if ( ! $multi )
+				break;
 		}
 
 		return $output;
@@ -393,8 +334,7 @@ class Render extends Admin_Init {
 	 */
 	public function og_sitename() {
 
-		if ( ! $this->use_og_tags() )
-			return '';
+		if ( ! $this->use_og_tags() ) return '';
 
 		/**
 		 * @since 2.3.0
@@ -613,34 +553,24 @@ class Render extends Admin_Init {
 	 */
 	public function twitter_image() {
 
-		if ( ! $this->use_twitter_tags() )
-			return '';
-
-		$id = $this->get_the_real_ID();
-
-		/**
-		 * @since 2.3.0
-		 * @since 2.7.0 Added output within filter.
-		 * @param string $image The generated Twitter image URL.
-		 * @param int    $id    The current page or term ID.
-		 */
-		$image = (string) \apply_filters_ref_array(
-			'the_seo_framework_twitterimage_output',
-			[
-				$this->get_image_from_cache(),
-				$id,
-			]
-		);
+		if ( ! $this->use_twitter_tags() ) return '';
 
 		$output = '';
 
-		if ( $image ) {
-			$output = '<meta name="twitter:image" content="' . \esc_attr( $image ) . '" />' . "\r\n";
+		foreach ( $this->get_image_details_from_cache() as $image ) {
+			$output .= '<meta name="twitter:image" content="' . \esc_attr( $image['url'] ) . '" />' . "\r\n";
 
-			if ( ! empty( $this->image_dimensions[ $id ]['width'] ) && ! empty( $this->image_dimensions[ $id ]['height'] ) ) {
-				$output .= '<meta name="twitter:image:width" content="' . \esc_attr( $this->image_dimensions[ $id ]['width'] ) . '" />' . "\r\n";
-				$output .= '<meta name="twitter:image:height" content="' . \esc_attr( $this->image_dimensions[ $id ]['height'] ) . '" />' . "\r\n";
+			if ( $image['height'] && $image['width'] ) {
+				$output .= '<meta name="twitter:image:width" content="' . \esc_attr( $image['width'] ) . '" />' . "\r\n";
+				$output .= '<meta name="twitter:image:height" content="' . \esc_attr( $image['height'] ) . '" />' . "\r\n";
 			}
+
+			if ( $image['alt'] ) {
+				$output .= '<meta name="twitter:image:alt" content="' . \esc_attr( $image['alt'] ) . '" />' . "\r\n";
+			}
+
+			// Only grab a single image. Twitter grabs the final (less favorable) image otherwise.
+			break;
 		}
 
 		return $output;
@@ -678,7 +608,7 @@ class Render extends Admin_Init {
 		);
 
 		if ( $facebook_page )
-			return '<meta property="article:author" content="' . \esc_attr( \esc_url_raw( $facebook_page, [ 'http', 'https' ] ) ) . '" />' . "\r\n";
+			return '<meta property="article:author" content="' . \esc_attr( \esc_url_raw( $facebook_page, [ 'https', 'http' ] ) ) . '" />' . "\r\n";
 
 		return '';
 	}
@@ -714,7 +644,7 @@ class Render extends Admin_Init {
 		);
 
 		if ( $publisher )
-			return '<meta property="article:publisher" content="' . \esc_attr( \esc_url_raw( $publisher, [ 'http', 'https' ] ) ) . '" />' . "\r\n";
+			return '<meta property="article:publisher" content="' . \esc_attr( \esc_url_raw( $publisher, [ 'https', 'http' ] ) ) . '" />' . "\r\n";
 
 		return '';
 	}
@@ -814,7 +744,7 @@ class Render extends Admin_Init {
 
 		$id = $this->get_the_real_ID();
 
-		$post = \get_post( $id );
+		$post              = \get_post( $id );
 		$post_modified_gmt = $post->post_modified_gmt;
 
 		if ( '0000-00-00 00:00:00' === $post_modified_gmt )
@@ -1031,6 +961,7 @@ class Render extends Admin_Init {
 	 * Returns early if blog isn't public. WordPress Core will then output the meta tags.
 	 *
 	 * @since 2.0.0
+	 * @since 4.0.2 Thanks to special tags, output escaping has been added precautionarily.
 	 *
 	 * @return string The Robots meta tags.
 	 */
@@ -1045,7 +976,7 @@ class Render extends Admin_Init {
 		if ( empty( $meta ) )
 			return '';
 
-		return sprintf( '<meta name="robots" content="%s" />' . PHP_EOL, implode( ',', $meta ) );
+		return sprintf( '<meta name="robots" content="%s" />' . PHP_EOL, \esc_attr( implode( ',', $meta ) ) );
 	}
 
 	/**
@@ -1155,63 +1086,62 @@ class Render extends Admin_Init {
 	 * Returns the plugin hidden HTML indicators.
 	 *
 	 * @since 2.9.2
+	 * @since 4.0.0 Added boot timers.
+	 * @staticvar array $cache
 	 *
-	 * @param string $where Determines the position of the indicator.
-	 *               Accepts 'before' for before, anything else for after.
-	 * @param int $timing Determines when the output started.
+	 * @param string $where  Determines the position of the indicator.
+	 *                       Accepts 'before' for before, anything else for after.
+	 * @param int    $timing Determines when the output started.
 	 * @return string The SEO Framework's HTML plugin indicator.
 	 */
 	public function get_plugin_indicator( $where = 'before', $timing = 0 ) {
 
-		static $run, $_cache;
+		static $cache;
 
-		if ( ! isset( $run ) ) {
-			/**
-			 * @since 2.0.0
-			 * @param bool $run Whether to run and show the plugin indicator.
-			 */
-			$run = (bool) \apply_filters( 'the_seo_framework_indicator', true );
+		if ( ! $cache ) {
+			$cache = [
+				/**
+				 * @since 2.0.0
+				 * @param bool $run Whether to run and show the plugin indicator.
+				 */
+				'run'        => (bool) \apply_filters( 'the_seo_framework_indicator', true ),
+				/**
+				 * @since 2.4.0
+				 * @param bool $sybre Whether to show the author name in the indicator.
+				 */
+				// phpcs:ignore, WordPress.NamingConventions.ValidHookName -- Easter egg.
+				'author'     => (bool) \apply_filters( 'sybre_waaijer_<3', true ) ? \esc_html__( 'by Sybre Waaijer', 'autodescription' ) : '',
+				/**
+				 * @since 2.4.0
+				 * @param bool $show_timer Whether to show the generation time in the indicator.
+				 */
+				'show_timer' => (bool) \apply_filters( 'the_seo_framework_indicator_timing', true ),
+			];
 		}
 
-		if ( false === $run )
+		if ( false === $cache['run'] )
 			return '';
 
-		if ( ! isset( $_cache ) ) {
-			$_cache = [];
-			/**
-			 * @since 2.4.0
-			 * @param bool $sybre Whether to show the author name in the indicator.
-			 */
-			$sybre = (bool) \apply_filters( 'sybre_waaijer_<3', true );
-
-			// Plugin name can't be translated. Yay.
-			$tsf = 'The SEO Framework';
-
-			/**
-			 * @since 2.4.0
-			 * @param bool $show_timer Whether to show the generation time in the indicator.
-			 */
-			$_cache['show_timer'] = (bool) \apply_filters( 'the_seo_framework_indicator_timing', true );
-
-			/* translators: %s = 'The SEO Framework' */
-			$_cache['start'] = sprintf( \esc_html__( 'Start %s', 'autodescription' ), $tsf );
-			/* translators: %s = 'The SEO Framework' */
-			$_cache['end'] = sprintf( \esc_html__( 'End %s', 'autodescription' ), $tsf );
-			$_cache['author'] = $sybre ? ' ' . \esc_html__( 'by Sybre Waaijer', 'autodescription' ) : '';
-		}
-
 		if ( 'before' === $where ) {
-			$output = $_cache['start'] . $_cache['author'];
-		} else {
-			if ( $_cache['show_timer'] && $timing ) {
-				$timer = ' | ' . number_format( microtime( true ) - $timing, 5 ) . 's';
-			} else {
-				$timer = '';
-			}
-			$output = $_cache['end'] . $_cache['author'] . $timer;
-		}
+			/* translators: 1 = The SEO Framework, 2 = 'by Sybre Waaijer */
+			$output = sprintf( '%1$s %2$s', 'The SEO Framework', $cache['author'] );
 
-		return sprintf( '<!-- %s -->', $output ) . PHP_EOL;
+			return sprintf( '<!-- %s -->', trim( $output ) ) . PHP_EOL;
+		} else {
+			if ( $cache['show_timer'] && $timing ) {
+				$timers = sprintf(
+					' | %s meta | %s boot',
+					number_format( ( microtime( true ) - $timing ) * 1e3, 2 ) . 'ms',
+					number_format( _bootstrap_timer() * 1e3, 2 ) . 'ms'
+				);
+			} else {
+				$timers = '';
+			}
+			/* translators: 1 = The SEO Framework, 2 = 'by Sybre Waaijer */
+			$output = sprintf( '%1$s %2$s', 'The SEO Framework', $cache['author'] ) . $timers;
+
+			return sprintf( '<!-- / %s -->', trim( $output ) ) . PHP_EOL;
+		}
 	}
 
 	/**
@@ -1241,7 +1171,7 @@ class Render extends Admin_Init {
 	public function output_published_time() {
 
 		if ( 'article' !== $this->get_og_type() )
-			return $cache = false;
+			return false;
 
 		return (bool) $this->get_option( 'post_publish_time' );
 	}

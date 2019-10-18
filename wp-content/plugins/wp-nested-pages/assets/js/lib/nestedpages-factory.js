@@ -31,6 +31,7 @@ NestedPages.selectors = {
 	syncCheckbox : '.np-sync-menu', // Sync menu checkbox
 	syncForm: '.np-sync-menu-cont', // The form/container for the sync menu element
 	ajaxError : '[data-nestedpages-error]', // AJAX error notification
+	trashWithChildrenButton : '[data-nestedpages-trash-children]',
 
 	// Responsive Toggle
 	toggleEditButtons : '.np-toggle-edit', // Button that toggles responsive buttons
@@ -54,8 +55,6 @@ NestedPages.selectors = {
 	quickEditLoadingIndicator : '.np-qe-loading', // Loading indicator in Quick Edit
 	quickEditErrorDiv : '.np-quickedit-error', // Error Div in Quick Edit
 	quickEditCancel : '.np-cancel-quickedit', // Cancel button in quick edit
-	quickEditToggleTaxonomies : '.np-toggle-taxonomies', // Toggle Taxonomies in Quick Edit
-	quickEditToggleMenuOptions : '.np-toggle-menuoptions', // Toggle Menu Options in Quick Edit
 
 	// Quick Edit - Links
 	quickEditButtonLink : '.np-quick-edit-redirect', // Button to open link quick edit
@@ -163,7 +162,8 @@ NestedPages.formActions = {
 	wpmlTranslations : 'npWpmlTranslations',
 	resetSettings : 'npresetSettings',
 	resetUserPrefs : 'npresetUserPreferences',
-	resetAdminMenuSettings : 'npresetAdminMenuSettings'
+	resetAdminMenuSettings : 'npresetAdminMenuSettings',
+	trashWithChildren : 'nptrashWithChildren'
 }
 
 
@@ -196,6 +196,7 @@ NestedPages.Factory = function()
 	plugin.postSearch = new NestedPages.PostSearch;
 	plugin.postMove = new NestedPages.MovePost;
 	plugin.wpml = new NestedPages.Wpml;
+	plugin.trashWithChildren = new NestedPages.TrashWithChildren;
 
 	plugin.init = function()
 	{

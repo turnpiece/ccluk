@@ -23,6 +23,7 @@ class Protect_Information_Service extends Rule_Service implements IRule_Service 
 			$ssl_verify = apply_filters( 'defender_ssl_verify', true ); //most hosts dont really have valid ssl or ssl still pending
 			$status     = wp_remote_head( $url, array(
 				'user-agent' => $_SERVER['HTTP_USER_AGENT'],
+				'timeout'    => 3,
 				'sslverify'  => $ssl_verify
 			) );
 			if ( 200 == wp_remote_retrieve_response_code( $status ) ) {
@@ -102,6 +103,38 @@ class Protect_Information_Service extends Rule_Service implements IRule_Service 
 			//Other servers we cant revert
 			return new \WP_Error( Error_Code::INVALID, __( "Revert is not possible on your current server", wp_defender()->domain ) );
 		}
+	}
+
+	public function getNginxRules() {
+		if ( DIRECTORY_SEPARATOR == '\\' ) {
+			//Windows
+			$wp_includes = str_replace( ABSPATH, '', WPINC );
+			$wp_content  = str_replace( ABSPATH, '', WP_CONTENT_DIR );
+		} else {
+			$wp_includes = str_replace( $_SERVER['DOCUMENT_ROOT'], '', ABSPATH . WPINC );
+			$wp_content  = str_replace( $_SERVER['DOCUMENT_ROOT'], '', WP_CONTENT_DIR );
+		}
+
+		$rules = "# Turn off directory indexing
+autoindex off;
+
+# Deny access to htaccess and other hidden files
+location ~ /\. {
+  deny  all;
+}
+
+# Deny access to wp-config.php file
+location = /wp-config.php {
+  deny all;
+}
+
+# Deny access to revealing or potentially dangerous files in the /wp-content/ directory (including sub-folders)
+location ~* ^$wp_content/.*\.(txt|md|exe|sh|bak|inc|pot|po|mo|log|sql)$ {
+  deny all;
+}
+";
+
+		return $rules;
 	}
 
 	/**

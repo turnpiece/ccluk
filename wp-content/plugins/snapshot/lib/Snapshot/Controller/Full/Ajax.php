@@ -369,14 +369,10 @@ class Snapshot_Controller_Full_Ajax extends Snapshot_Controller_Full {
 			: false
 		;
 
-		if ( strpos( strtolower( trim( $data['restore'] ) ), 'phar://' ) === 0 ) {
-			throw new Exception('phar handler not allowed when looking for the restore folder');
+		if ( stripos( $data['restore'], 'phar://' ) !== false ) {
+			throw new \Exception('Potential Phar PHP Object Injection detected.');
 		}
-
-		$restore_path = ! empty( $data['restore'] ) && file_exists( $data['restore'] )
-			? $data['restore']
-			: false
-		;
+		$restore_path = ! empty( $data['restore'] ) && file_exists( $data['restore'] ) ? $data['restore'] : false;
 
 		$credentials = ! empty( $data['credentials'] )
 			? stripslashes_deep( $data['credentials'] )
@@ -705,7 +701,7 @@ class Snapshot_Controller_Full_Ajax extends Snapshot_Controller_Full {
 	 */
 	public function json_finish_backup() {
 		check_ajax_referer( 'snapshot-ajax-nonce', 'security' );
-		
+
 		$data = stripslashes_deep( $_POST );
 		$idx = ! empty( $data['idx'] ) ? $data['idx'] : $this->_get_backup_type();
 

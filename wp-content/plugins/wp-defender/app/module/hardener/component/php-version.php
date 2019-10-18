@@ -9,17 +9,40 @@ use WP_Defender\Module\Hardener\Model\Settings;
 use WP_Defender\Module\Hardener\Rule;
 
 class PHP_Version extends Rule {
-	static $slug = 'php_version';
+	static $slug = 'php-version';
 	static $service;
 
 	function getDescription() {
 		$this->renderPartial( 'rules/php-version' );
 	}
 
-	function getSubDescription() {
+	/**
+	 * This will return the short summary why this rule show up as issue
+	 *
+	 * @return string
+	 */
+	function getErrorReason() {
 		$settings = Settings::instance();
 
 		return sprintf( __( "PHP versions older than %s are no longer supported. For security and stability we strongly recommend you upgrade your PHP version to version %s or newer as soon as possible. ", wp_defender()->domain ), $settings->min_php_version, $settings->min_php_version );
+	}
+
+	/**
+	 * This will return a short summary to show why this rule works
+	 * @return mixed
+	 */
+	function getSuccessReason() {
+		return __( "You have the latest version of PHP installed, good stuff!", wp_defender()->domain );
+	}
+
+	public function getMiscData() {
+		$settings = Settings::instance();
+
+		return [
+			'min_php_version'    => $settings->min_php_version,
+			'stable_php_version' => $settings->stable_php_version,
+			'php_version'        => phpversion()
+		];
 	}
 
 	/**

@@ -1168,12 +1168,12 @@ class WPMUDEV_Dashboard_Api {
 			if ( is_array( $response ) && ! empty( $body ) ) {
 				$data = json_decode( $body, true );
 			}
+
 			if ( isset( $data['code'] ) ) {
 				if ( 'limit_exceeded_no_hosting_sites' === $data['code'] ) {
 					$res['limit_exceeded_no_hosting_sites'] = true;
-				} else if ( 'limit_exceeded_with_hosting_sites' === $data['code'] ) {
-					$res['limit_exceeded_with_hosting_sites'] = true;
 				}
+				$res['limit_data'] = $data['data'];
 			}
 
 			/*
@@ -1911,14 +1911,14 @@ class WPMUDEV_Dashboard_Api {
 			$outgoing_hmac = hash_hmac( 'sha256', $token . $hashed_pre_sso_state . $redirect . $domain, $api_key );
 
 			$auth_endpoint = $this->rest_url( 'sso-hub' );
-			$auth_endpoint = add_query_arg( 
+			$auth_endpoint = add_query_arg(
 				array(
 					'domain'        => $domain,
 					'hmac'          => $outgoing_hmac,
 					'token'         => $token,
 					'pre_sso_state' => $hashed_pre_sso_state,
 					'redirect'      => $redirect,
-					'email'         => $profile['profile']['user_name'],
+					'email'         => rawurlencode( $profile['profile']['user_name'] ),
 					'_wpnonce'		=> $nonce,
 				),
 				$auth_endpoint
@@ -1993,7 +1993,7 @@ class WPMUDEV_Dashboard_Api {
 			if ( number_format( floatval( $current_time ) - $token_timestamp_float, 2) > self::SSO_TOKEN_EXPIRY_TIME ) {
 				wp_die( 'The SSO token has expired.' );
 			}
-			
+
 			// Check if the session cookie of the state value exists in the user's browser.
 			if ( isset( $_COOKIE['wdp-pre-sso-state'] ) ) {
 				//Check that the state value is the same with what was passed through the endpoint.
@@ -2009,7 +2009,7 @@ class WPMUDEV_Dashboard_Api {
 						wp_die( 'The SSO token has been used in the past.' );
 					}
 
-					// Finally, check if the passed token is the same that was saved in the first place. 
+					// Finally, check if the passed token is the same that was saved in the first place.
 					$active_sso_token = WPMUDEV_Dashboard::$site->get_option( 'active_sso_token' );
 					if ( $token !== $active_sso_token) {
 						wp_die( 'The SSO token could not be verified.' );
@@ -2021,7 +2021,7 @@ class WPMUDEV_Dashboard_Api {
 					wp_clear_auth_cookie();
 					wp_set_auth_cookie( $userid, false );
 					wp_set_current_user( $userid );
-		
+
 					wp_safe_redirect( $redirect );
 					exit;
 				} else {

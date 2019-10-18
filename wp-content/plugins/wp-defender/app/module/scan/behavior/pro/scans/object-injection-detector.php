@@ -24,7 +24,7 @@ class Object_Injection_Detector extends Detector_Abstract {
 							if ( in_array( $param['content'], $this->getPredefinedVariables() ) ) {
 								return array(
 									'type'   => 'object_injection',
-									'text'   => 'The function ' . $this->token['content'] . ' line ' . $this->token['line'] . ' column ' . $this->token['column'] . ' unserialize an user inputs ',
+									'text'   => sprintf( __( 'The function %s line %d column %d unserialize an user inputs ', wp_defender()->domain ), $this->token['content'], $this->token['line'], $this->token['column'] ),
 									'offset' => $this->getCodeOffset(),
 									'length' => strlen( $this->getCode() ),
 									'line'   => $this->token['line'],

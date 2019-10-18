@@ -415,7 +415,7 @@ class Snapshot_Helper_Backup {
 
 		// Next up, create the new filename.
 		$destination = $this->get_destination_path();
-		if ( file_exists( $destination ) ) {
+		if ( empty( $destination ) || file_exists( $destination ) ) {
 			return false;
 		}
 
@@ -438,7 +438,7 @@ class Snapshot_Helper_Backup {
 	/**
 	 * Gets the final destination filename.
 	 *
-	 * @return string
+	 * @return mixed (string)Destination filename if sanity check successful, (bool)false on if sanity check unsuccessful
 	 */
 	public function get_destination_filename() {
 		static $filename;
@@ -449,6 +449,11 @@ class Snapshot_Helper_Backup {
 				? 'automated'
 				: $this->_idx
 			;
+
+			if ( preg_match( '/[^A-Za-z-\w]/', $type ) ) {
+				return false;
+			}
+
 			$filename = self::FINAL_PREFIX . '-' . $this->get_timestamp() . '-' . $type . '-' . Snapshot_Helper_Utility::get_file_checksum( $intermediate_path ) . '.zip';
 		}
 
@@ -462,6 +467,9 @@ class Snapshot_Helper_Backup {
 	 */
 	public function get_destination_path() {
 		$filename = $this->get_destination_filename();
+		if ( empty( $filename ) ) {
+			return false;
+		}
 		$destination = trailingslashit( WPMUDEVSnapshot::instance()->get_setting( 'backupBaseFolderFull' ) );
 		return "{$destination}{$filename}";
 	}
@@ -721,7 +729,7 @@ class Snapshot_Helper_Backup {
 			return false;
 		}
 
-		$backup_path = $this->get_path( $this->_idx );
+		$backup_path = escapeshellarg( $this->get_path( $this->_idx ) );
 		$db_name = escapeshellcmd( DB_NAME );
 		$db_user = escapeshellcmd( DB_USER );
 		$db_pass = escapeshellcmd( DB_PASSWORD );
@@ -819,9 +827,9 @@ class Snapshot_Helper_Backup {
 		$find_path = Snapshot_Helper_System::get_command( 'find' );
 		$has_find = ! empty( $find_path ) && ! (defined( 'SNAPSHOT_SYSTEM_ZIP_ONLY' ) && SNAPSHOT_SYSTEM_ZIP_ONLY);
 
-		$backup_path = $this->get_path( $this->_idx );
-		$source_root = $source->get_root();
-		$target_prefix = $queue->get_prefix();
+		$backup_path = escapeshellarg( $this->get_path( $this->_idx ) );
+		$source_root = escapeshellarg( $source->get_root() );
+		$target_prefix = escapeshellarg( $queue->get_prefix() );
 		$archive = $this->get_archive_name();
 		$exclusions = $this->get_system_exclusion_paths( $source, $has_find );
 

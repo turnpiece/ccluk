@@ -23,8 +23,8 @@ class Logs_Table extends \WP_List_Table {
 		), $args ) );
 
 		$date_format = 'm/d/Y';
-		$this->from  = Http_Helper::retrieve_get( 'date_from', date( $date_format, strtotime( 'today midnight', strtotime( '-14 days', current_time( 'timestamp' ) ) ) ) );
-		$this->to    = Http_Helper::retrieve_get( 'date_to', date( $date_format, current_time( 'timestamp' ) ) );
+		$this->from  = Http_Helper::retrieveGet( 'date_from', date( $date_format, strtotime( 'today midnight', strtotime( '-14 days', current_time( 'timestamp' ) ) ) ) );
+		$this->to    = Http_Helper::retrieveGet( 'date_to', date( $date_format, current_time( 'timestamp' ) ) );
 	}
 
 	/**
@@ -74,16 +74,16 @@ class Logs_Table extends \WP_List_Table {
 			)
 		);
 
-		if ( ( $filter = Http_Helper::retrieve_get( 'type', null ) ) != null ) {
+		if ( ( $filter = Http_Helper::retrieveGet( 'type', null ) ) != null ) {
 			$params['type'] = $filter;
 		}
-		if ( ( $ip = Http_Helper::retrieve_get( 'ip_address', null ) ) != null ) {
+		if ( ( $ip = Http_Helper::retrieveGet( 'ip_address', null ) ) != null ) {
 			$params['ip'] = $ip;
 		}
 
 		$logs = Log_Model::findAll( $params,
-			HTTP_Helper::retrieve_get( 'orderby', 'id' ),
-			HTTP_Helper::retrieve_get( 'order', 'desc' ),
+			HTTP_Helper::retrieveGet( 'orderby', 'id' ),
+			HTTP_Helper::retrieveGet( 'order', 'desc' ),
 			$offset . ',' . $per_page
 		);
 
@@ -179,14 +179,14 @@ class Logs_Table extends \WP_List_Table {
                                         </label>
                                         <select name="type">
                                             <option value=""><?php esc_html_e( "All", wp_defender()->domain ) ?></option>
-                                            <option <?php selected( \WP_Defender\Module\IP_Lockout\Model\Log_Model::AUTH_FAIL, \Hammer\Helper\HTTP_Helper::retrieve_get( 'filter' ) ) ?>
+                                            <option <?php selected( \WP_Defender\Module\IP_Lockout\Model\Log_Model::AUTH_FAIL, \Hammer\Helper\HTTP_Helper::retrieveGet( 'filter' ) ) ?>
                                                     value="<?php echo \WP_Defender\Module\IP_Lockout\Model\Log_Model::AUTH_FAIL ?>">
 												<?php esc_html_e( "Failed login attempts", wp_defender()->domain ) ?></option>
-                                            <option <?php selected( \WP_Defender\Module\IP_Lockout\Model\Log_Model::AUTH_LOCK, \Hammer\Helper\HTTP_Helper::retrieve_get( 'filter' ) ) ?>
+                                            <option <?php selected( \WP_Defender\Module\IP_Lockout\Model\Log_Model::AUTH_LOCK, \Hammer\Helper\HTTP_Helper::retrieveGet( 'filter' ) ) ?>
                                                     value="<?php echo \WP_Defender\Module\IP_Lockout\Model\Log_Model::AUTH_LOCK ?>"><?php esc_html_e( "Login lockout", wp_defender()->domain ) ?></option>
-                                            <option <?php selected( \WP_Defender\Module\IP_Lockout\Model\Log_Model::ERROR_404, \Hammer\Helper\HTTP_Helper::retrieve_get( 'filter' ) ) ?>
+                                            <option <?php selected( \WP_Defender\Module\IP_Lockout\Model\Log_Model::ERROR_404, \Hammer\Helper\HTTP_Helper::retrieveGet( 'filter' ) ) ?>
                                                     value="<?php echo \WP_Defender\Module\IP_Lockout\Model\Log_Model::ERROR_404 ?>"><?php esc_html_e( "404 error", wp_defender()->domain ) ?></option>
-                                            <option <?php selected( \WP_Defender\Module\IP_Lockout\Model\Log_Model::LOCKOUT_404, \Hammer\Helper\HTTP_Helper::retrieve_get( 'filter' ) ) ?>
+                                            <option <?php selected( \WP_Defender\Module\IP_Lockout\Model\Log_Model::LOCKOUT_404, \Hammer\Helper\HTTP_Helper::retrieveGet( 'filter' ) ) ?>
                                                     value="<?php echo \WP_Defender\Module\IP_Lockout\Model\Log_Model::LOCKOUT_404 ?>"><?php esc_html_e( "404 lockout", wp_defender()->domain ) ?></option>
                                         </select>
                                     </div>

@@ -1,6 +1,6 @@
 <dialog class="dev-team" id="pro-feature" title="<?php _e( "Defender Pro Features", wp_defender()->domain ) ?>">
     <div class="wp-defender">
-        <p class=""><?php _e( "Here’s what you’ll get by upgrading to Defender Pro:", wp_defender()->domain ) ?></p>
+        <p class=""><?php _e( "Here's what you'll get by upgrading to Defender Pro:", wp_defender()->domain ) ?></p>
         <div class="well well-blank with-cap">
             <i class="def-icon icon-tick fill-blue" aria-hidden="true"></i>
             <strong><?php _e( "Automatic Full File Scans & Notifications", wp_defender()->domain ) ?></strong>
@@ -21,14 +21,14 @@
             <i class="def-icon icon-tick fill-blue" aria-hidden="true"></i>
             <strong><?php _e( "Audit Logging", wp_defender()->domain ) ?></strong>
             <p class="sub">
-				<?php _e( "Track and log each and every event when changes are made to your website and get detailed reports on what’s going on behind the scenes, including any hacking attempts on your site.", wp_defender()->domain ) ?>
+				<?php _e( "Track and log each and every event when changes are made to your website and get detailed reports on what's going on behind the scenes, including any hacking attempts on your site.", wp_defender()->domain ) ?>
             </p>
         </div>
         <div class="well well-blank with-cap mline">
             <i class="def-icon icon-tick fill-blue" aria-hidden="true"></i>
             <strong><?php _e( "Tailored Reporting", wp_defender()->domain ) ?></strong>
             <p class="sub">
-				<?php _e( "Get tailored security reports for File Scanning, Audit Logging and IP Lockouts delivered to your inbox so you don’t have to worry about checking in.", wp_defender()->domain ) ?>
+				<?php _e( "Get tailored security reports for File Scanning, Audit Logging and IP Lockouts delivered to your inbox so you don't have to worry about checking in.", wp_defender()->domain ) ?>
             </p>
         </div>
         <div class="tc">

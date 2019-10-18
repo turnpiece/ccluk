@@ -34,7 +34,7 @@ class Ai1wm_Backups {
 	 *
 	 * @return array
 	 */
-	public function get_files() {
+	public static function get_files() {
 		$backups = array();
 
 		try {
@@ -77,7 +77,7 @@ class Ai1wm_Backups {
 			}
 
 			// Sort backups modified date
-			usort( $backups, array( $this, 'compare' ) );
+			usort( $backups, 'Ai1wm_Backups::compare' );
 
 		} catch ( Exception $e ) {
 		}
@@ -86,15 +86,53 @@ class Ai1wm_Backups {
 	}
 
 	/**
-	 * Delete file
+	 * Delete backup file
 	 *
 	 * @param  string  $file File name
 	 * @return boolean
 	 */
-	public function delete_file( $file ) {
+	public static function delete_file( $file ) {
 		if ( validate_file( $file ) === 0 ) {
 			return @unlink( ai1wm_backup_path( array( 'archive' => $file ) ) );
 		}
+	}
+
+	/**
+	 * Get all backup labels
+	 *
+	 * @return array
+	 */
+	public static function get_labels() {
+		return get_option( AI1WM_BACKUPS_LABELS, array() );
+	}
+
+	/**
+	 * Set backup label
+	 *
+	 * @param  string  $file  File name
+	 * @param  string  $label File label
+	 * @return boolean
+	 */
+	public static function set_label( $file, $label ) {
+		if ( ( $labels = get_option( AI1WM_BACKUPS_LABELS, array() ) ) !== false ) {
+			$labels[ $file ] = $label;
+		}
+
+		return update_option( AI1WM_BACKUPS_LABELS, $labels );
+	}
+
+	/**
+	 * Delete backup label
+	 *
+	 * @param  string  $file File name
+	 * @return boolean
+	 */
+	public static function delete_label( $file ) {
+		if ( ( $labels = get_option( AI1WM_BACKUPS_LABELS, array() ) ) !== false ) {
+			unset( $labels[ $file ] );
+		}
+
+		return update_option( AI1WM_BACKUPS_LABELS, $labels );
 	}
 
 	/**
@@ -104,7 +142,7 @@ class Ai1wm_Backups {
 	 * @param  array $b File item B
 	 * @return integer
 	 */
-	public function compare( $a, $b ) {
+	public static function compare( $a, $b ) {
 		if ( $a['mtime'] === $b['mtime'] ) {
 			return 0;
 		}

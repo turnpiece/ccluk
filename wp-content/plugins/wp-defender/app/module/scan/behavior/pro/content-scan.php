@@ -110,9 +110,12 @@ class Content_Scan extends Behavior {
 
 //		ini_set('xdebug.max_nesting_level',9999);
 
-		$whitelist = array(
-			'91a64bb27cea9ce52a34703d740bc261'
-		);
+		$whitelist = apply_filters( 'wd_scan_whitelist_has', [
+			'91a64bb27cea9ce52a34703d740bc261',
+			'7cb627f0f74088a8cf9aaea342f46d57'
+		] );
+
+
 		if ( in_array( md5_file( $file ), $whitelist ) ) {
 			return true;
 		}

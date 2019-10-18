@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Snapshot Pro
-Version: 3.2.1.2
+Version: 3.2.1.3
 Description: This plugin allows you to take quick on-demand backup snapshots of your working WordPress database. You can select from the default WordPress tables as well as custom plugin tables within the database structure. All snapshots are logged, and you can restore the snapshot as needed.
 Author: WPMU DEV
 Author URI: https://premium.wpmudev.org/
@@ -38,7 +38,7 @@ WDP ID: 257
  *
  */
 
-define('SNAPSHOT_VERSION', '3.2.1.2');
+define('SNAPSHOT_VERSION', '3.2.1.3');
 
 if ( ! defined( 'SNAPSHOT_I18N_DOMAIN' ) ) {
 	define( 'SNAPSHOT_I18N_DOMAIN', 'snapshot' );
@@ -250,6 +250,9 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 			 */
 			add_filter( 'snapshot_maybe_should_it_stop', array( $this, 'maybe_should_it_stop' ) );
 
+			// Allow WP Heartbeat API on WP Engine for Snapshot pages
+			add_filter( 'wpe_heartbeat_allowed_pages', array( $this, 'wpe_allow_heartbeat' ) );
+
 			require_once dirname( __FILE__ ) . '/lib/Snapshot/Helper/Privacy.php';
 			Snapshot_Gdpr::serve();
 
@@ -306,7 +309,7 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 
 			} else {
 				global $current_site, $current_blog;
-				if ( $current_site->blog_id === $current_blog->blog_id ) {
+				if ( $current_site->blog_id == $current_blog->blog_id ) {
 
 					$this->load_config();
 					$this->set_backup_folder();
@@ -331,7 +334,7 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 					$model->set_config( 'schedule_time', false );
 					$model->set_config( 'disable_cron', true );
 					Snapshot_Controller_Full_Cron::get()->stop();
-	
+
 					// Let the service know
 					$model->update_remote_schedule();
 				}
@@ -4262,6 +4265,7 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 				if ( ! $filename_prefix ) {
 					$filename_prefix = 'snapshot';
 				}
+				// See also $prepared in Snapshot_Model_Destination::purge_remote_items()
 				$backup_zip_filename = sprintf( '%s-%s-%s-%s.zip', $filename_prefix, $item_key, $date_key, $checksum );
 
 				$data_item['filename'] = $backup_zip_filename;
@@ -5654,7 +5658,7 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 			}
 			flush_rewrite_rules();
 
-			
+
 			Snapshot_Helper_Utility::remove_sql_files( $this->_session->data['restoreFolder'] );
 			Snapshot_Helper_Utility::remove_manifest( $this->_session->data['restoreFolder'] );
 
@@ -7419,7 +7423,20 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 
 				if (!is_callable(array($destination_object, 'purge_remote_items'))) return false;
 
-				$filename_prefix = sanitize_file_name( strtolower( $item['name'] ) );
+				// Add destination directory (same as in method `process_item_send_archive()`)
+				if ( ! empty( $item['destination'] ) ) {
+					$destination_key = $item['destination'];
+					if ( ! empty ( $this->config_data['destinations'][ $destination_key ] ) ) {
+						$destination = $this->config_data['destinations'][ $destination_key ];
+						$directory = $this->snapshot_get_item_destination_path( $item );
+						if ( ! empty( $destination ) && ! empty( $directory ) ) {
+							$destination['directory'] = $directory;
+							$destination_object->load_class_destination( $destination );
+						}
+					}
+				}
+
+				$filename_prefix = sanitize_file_name( strtolower( $item['name'] ) . '-' . $item['timestamp'] );
 				$destination_object->purge_remote_items($filename_prefix, $archive_count);
 
 				return true;
@@ -8516,7 +8533,7 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 				wp_add_inline_style(
 					'snapshot-pro-admin-stylesheet',
 					'
-					.wpmud #container.snapshot-three .wps-backups-status .wpmud-box-content:before, 
+					.wpmud #container.snapshot-three .wps-backups-status .wpmud-box-content:before,
 					.wpmud #container.snapshot-three .try-managed-backups-box .wpmud-box-content:before {
 						display: none;
 					}
@@ -8537,11 +8554,11 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 					'snapshot-pro-admin-stylesheet',
 					sprintf(
 						'
-						.wpmud #container.snapshot-three .wps-backups-status .wpmud-box-content, 
+						.wpmud #container.snapshot-three .wps-backups-status .wpmud-box-content,
 						.wpmud #container.snapshot-three .try-managed-backups-box .wpmud-box-content {
 							padding-top: 0px;
 						}
-						.wpmud #container.snapshot-three .wps-backups-status .wpmud-box-content:before, 
+						.wpmud #container.snapshot-three .wps-backups-status .wpmud-box-content:before,
 						.wpmud #container.snapshot-three .try-managed-backups-box .wpmud-box-content:before {
 							background-image: url(%s);
 							background-size: contain;
@@ -8554,11 +8571,11 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 							-flex: 0 0 222px;
 						}
 						@media screen and (max-width: 1020px) {
-							.wpmud #container.snapshot-three .wps-backups-status .wpmud-box-content, 
+							.wpmud #container.snapshot-three .wps-backups-status .wpmud-box-content,
 							.wpmud #container.snapshot-three .try-managed-backups-box .wpmud-box-content {
 								padding-top: 15px;
 							}
-							.wpmud #container.snapshot-three .wps-backups-status .wpmud-box-content:before, 
+							.wpmud #container.snapshot-three .wps-backups-status .wpmud-box-content:before,
 							.wpmud #container.snapshot-three .try-managed-backups-box .wpmud-box-content:before {
 								display:none;
 							}
@@ -8677,10 +8694,10 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 
 		public function snapshot_remove_managed_page ( $submenu_file ) {
 			$hidden_submenu = 'snapshot_pro_managed_backups';
-		
+
 			// Hide the submenu.
 			remove_submenu_page( 'snapshot_pro_dashboard', $hidden_submenu );
-		
+
 			return $submenu_file;
 		}
 
@@ -8701,7 +8718,7 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 						$url = $this->snapshot_get_pagehook_url( 'snapshots-newui-hosting-backups' );
 						wp_safe_redirect( $url );
 						exit;
-					}	
+					}
 				} else {
 					$url = $this->snapshot_get_pagehook_url( 'snapshots-newui-hosting-backups' );
 					wp_safe_redirect( $url );
@@ -8751,6 +8768,13 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 				'not_wpmudev_hosting' => true,
 				)
 			);
+		}
+
+		public function wpe_allow_heartbeat( $heartbeat_allowed_pages ) {
+			if ( 'snapshot_pro_managed_backups' === filter_input( INPUT_GET, 'page', FILTER_SANITIZE_STRING ) ) {
+				array_push( $heartbeat_allowed_pages, 'admin.php' );
+			}
+			return array_unique( $heartbeat_allowed_pages );
 		}
 
 	}

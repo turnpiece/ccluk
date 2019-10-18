@@ -1,6 +1,6 @@
 <?php
 
-// Check for MailChimp for WordPress v3.1+ (because of use of Queue class)
+// Check for Mailchimp for WordPress v3.1+ (because of use of Queue class)
 if( defined( 'MC4WP_VERSION' ) && version_compare( MC4WP_VERSION, '3.1', '>=' ) ) {
 	return true;
 }
@@ -17,7 +17,7 @@ add_action( 'admin_notices', function() {
 
 	?>
 	<div class="notice notice-warning is-dismissible">
-		<p><?php printf( __( 'Please install or update <a href="%s" class="thickbox">%s</a> %s in order to use %s.', 'mailchimp-sync' ), $url, '<strong>MailChimp for WordPress</strong>', '(version 3.1 or higher)', 'MailChimp User Sync' ); ?></p>
+		<p><?php printf( __( 'Please install or update <a href="%s" class="thickbox">%s</a> %s in order to use %s.', 'mailchimp-sync' ), $url, '<strong>Mailchimp for WordPress</strong>', '(version 3.1 or higher)', 'Mailchimp User Sync' ); ?></p>
 	</div>
 <?php
 } );

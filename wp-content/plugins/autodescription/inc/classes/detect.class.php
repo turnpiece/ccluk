@@ -1,7 +1,9 @@
 <?php
 /**
- * @package The_SEO_Framework\Classes
+ * @package The_SEO_Framework\Classes\Facade\Detect
+ * @subpackage The_SEO_Framework\Compatibility
  */
+
 namespace The_SEO_Framework;
 
 defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
@@ -33,58 +35,11 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
 class Detect extends Render {
 
 	/**
-	 * Determines if we're doing ajax.
-	 *
-	 * @todo use wp_doing_ajax() in a future version. Requires WP 4.7+.
-	 * @since 2.9.0
-	 * @staticvar bool $cache
-	 *
-	 * @return bool True if AJAX
-	 */
-	public function doing_ajax() {
-		static $cache = null;
-
-		return isset( $cache ) ? $cache : $cache = defined( 'DOING_AJAX' ) && DOING_AJAX;
-	}
-
-	/**
-	 * Tests if input URL matches current domain.
-	 *
-	 * @since 2.9.4
-	 *
-	 * @param string $url The URL to test. Required.
-	 * @return bool true on match, false otherwise.
-	 */
-	public function matches_this_domain( $url ) {
-
-		if ( ! $url )
-			return false;
-
-		static $home_domain;
-
-		if ( ! $home_domain ) {
-			$home_domain = \esc_url_raw( \get_home_url(), [ 'http', 'https' ] );
-			//= Simply convert to HTTPS/HTTP based on is_ssl()
-			$home_domain = $this->set_url_scheme( $home_domain );
-		}
-
-		$url = \esc_url_raw( $url, [ 'http', 'https' ] );
-		//= Simply convert to HTTPS/HTTP based on is_ssl()
-		$url = $this->set_url_scheme( $url );
-
-		//= If they start with the same, we can assume it's the same domain.
-		if ( 0 === stripos( $url, $home_domain ) )
-			return true;
-
-		return false;
-	}
-
-	/**
 	 * Returns list of active plugins.
 	 *
 	 * @since 2.6.1
 	 * @staticvar array $active_plugins
-	 * @credits JetPack for most code.
+	 * @credits Jetpack for most code.
 	 *
 	 * @return array List of active plugins.
 	 */
@@ -115,7 +70,7 @@ class Detect extends Render {
 	 * Filterable list of conflicting plugins.
 	 *
 	 * @since 2.6.0
-	 * @credits JetPack for most code.
+	 * @credits Jetpack for most code.
 	 *
 	 * @return array List of conflicting plugins.
 	 */
@@ -198,7 +153,6 @@ class Detect extends Render {
 			foreach ( $plugins['globals'] as $name ) {
 				if ( isset( $GLOBALS[ $name ] ) ) {
 					return true;
-					break;
 				}
 			}
 		}
@@ -208,7 +162,6 @@ class Detect extends Render {
 			foreach ( $plugins['constants'] as $name ) {
 				if ( defined( $name ) ) {
 					return true;
-					break;
 				}
 			}
 		}
@@ -218,7 +171,6 @@ class Detect extends Render {
 			foreach ( $plugins['functions'] as $name ) {
 				if ( function_exists( $name ) ) {
 					return true;
-					break;
 				}
 			}
 		}
@@ -228,7 +180,6 @@ class Detect extends Render {
 			foreach ( $plugins['classes'] as $name ) {
 				if ( class_exists( $name ) ) {
 					return true;
-					break;
 				}
 			}
 		}
@@ -245,9 +196,9 @@ class Detect extends Render {
 	 * @staticvar array $cache
 	 * @uses $this->detect_plugin_multi()
 	 *
-	 * @param array $plugins Array of array for globals, constants, classes
-	 *              and/or functions to check for plugin existence.
-	 * @param bool $use_cache Bypasses cache if false
+	 * @param array $plugins   Array of array for globals, constants, classes
+	 *                         and/or functions to check for plugin existence.
+	 * @param bool  $use_cache Bypasses cache if false
 	 */
 	public function can_i_use( array $plugins = [], $use_cache = true ) {
 
@@ -264,6 +215,7 @@ class Detect extends Render {
 				return false; // doing it wrong...
 
 			//* Sort alphanumeric by value, put values back after sorting.
+			// TODO Use asort or usort instead???
 			$func = array_flip( $func );
 			ksort( $func );
 			$func = array_flip( $func );
@@ -273,7 +225,8 @@ class Detect extends Render {
 		}
 
 		ksort( $mapped );
-		$key = serialize( $mapped ); // phpcs:ignore -- No objects are inserted, nor is this ever unserialized.
+		// phpcs:ignore, WordPress.PHP.DiscouragedPHPFunctions -- No objects are inserted, nor is this ever unserialized.
+		$key = serialize( $mapped );
 
 		if ( isset( $cache[ $key ] ) )
 			return $cache[ $key ];
@@ -297,7 +250,6 @@ class Detect extends Render {
 			foreach ( $plugins['classes'] as $name ) {
 				if ( ! class_exists( $name ) ) {
 					return false;
-					break;
 				}
 			}
 		}
@@ -307,7 +259,6 @@ class Detect extends Render {
 			foreach ( $plugins['functions'] as $name ) {
 				if ( ! function_exists( $name ) ) {
 					return false;
-					break;
 				}
 			}
 		}
@@ -317,7 +268,6 @@ class Detect extends Render {
 			foreach ( $plugins['constants'] as $name ) {
 				if ( ! defined( $name ) ) {
 					return false;
-					break;
 				}
 			}
 		}
@@ -353,7 +303,6 @@ class Detect extends Render {
 				$theme = strtolower( $theme );
 				if ( $theme === $theme_parent || $theme === $theme_name ) {
 					return true;
-					break;
 				}
 			}
 		}
@@ -424,8 +373,8 @@ class Detect extends Render {
 			return $detected;
 
 		//* Detect SEO plugins beforehand.
-		if ( $detected = $this->detect_seo_plugins() )
-			return $detected;
+		if ( $this->detect_seo_plugins() )
+			return $detected = true;
 
 		$active_plugins = $this->active_plugins();
 
@@ -474,8 +423,8 @@ class Detect extends Render {
 			return $detected;
 
 		//* Detect SEO plugins beforehand.
-		if ( $detected = $this->detect_seo_plugins() )
-			return $detected;
+		if ( $this->detect_seo_plugins() )
+			return $detected = true;
 
 		$active_plugins = $this->active_plugins();
 
@@ -540,8 +489,8 @@ class Detect extends Render {
 			return $detected;
 
 		//* Detect SEO plugins beforehand.
-		if ( $detected = $this->detect_seo_plugins() )
-			return $detected;
+		if ( $this->detect_seo_plugins() )
+			return $detected = true;
 
 		$active_plugins = $this->active_plugins();
 
@@ -573,6 +522,36 @@ class Detect extends Render {
 	}
 
 	/**
+	 * Detects presence of a page builder.
+	 *
+	 * Detects the following builders:
+	 * - Elementor by Elementor LTD
+	 * - Divi Builder by Elegant Themes
+	 * - Visual Composer by WPBakery
+	 * - Page Builder by SiteOrigin
+	 * - Beaver Builder by Fastline Media
+	 *
+	 * @since 4.0.0
+	 * @staticvar bool $detected
+	 *
+	 * @return bool
+	 */
+	public function detect_page_builder() {
+
+		static $detected = null;
+
+		return isset( $detected ) ? $detected : $detected = $this->detect_plugin( [
+			'constants' => [
+				'ELEMENTOR_VERSION',
+				'ET_BUILDER_VERSION',
+				'WPB_VC_VERSION',
+				'SITEORIGIN_PANELS_VERSION',
+				'FL_BUILDER_VERSION',
+			],
+		] );
+	}
+
+	/**
 	 * Determines whether to add a line within robots based by plugin detection, or sitemap output option.
 	 *
 	 * @since 2.6.0
@@ -581,6 +560,8 @@ class Detect extends Render {
 	 * @since 2.9.2 Now also checks for permalinks.
 	 * @since 2.9.3 Now also checks for sitemap_robots option.
 	 * @since 3.1.0 Removed Jetpack's sitemap check -- it's no longer valid.
+	 * @since 4.0.0 : 1. Now uses has_robots_txt()
+	 *              : 2. Now uses the get_robots_txt_url() to determine validity.
 	 *
 	 * @param bool $check_option Whether to check for sitemap option.
 	 * @return bool True when no conflicting plugins are detected or when The SEO Framework's Sitemaps are output.
@@ -588,23 +569,19 @@ class Detect extends Render {
 	public function can_do_sitemap_robots( $check_option = true ) {
 
 		if ( $check_option ) {
-			if ( ! $this->get_option( 'sitemaps_output' ) || ! $this->get_option( 'sitemaps_robots' ) )
+			if ( ! $this->get_option( 'sitemaps_output' )
+			|| ! $this->get_option( 'sitemaps_robots' ) )
 				return false;
 		}
 
-		if ( $this->is_subdirectory_installation() )
-			return false;
-
-		if ( ! $this->pretty_permalinks )
-			return false;
-
-		return true;
+		return ! $this->has_robots_txt() && strlen( $this->get_robots_txt_url() );
 	}
 
 	/**
 	 * Detects presence of robots.txt in root folder.
 	 *
 	 * @since 2.5.2
+	 * @since 4.0.0 Now tries to load `wp-admin/includes/file.php` to prevent a fatal error.
 	 * @staticvar $has_robots
 	 *
 	 * @return bool Whether the robots.txt file exists.
@@ -616,6 +593,9 @@ class Detect extends Render {
 		if ( isset( $has_robots ) )
 			return $has_robots;
 
+		// Ensure get_home_path() is declared.
+		require_once ABSPATH . 'wp-admin/includes/file.php';
+
 		$path = \get_home_path() . 'robots.txt';
 
 		return $has_robots = file_exists( $path );
@@ -625,6 +605,7 @@ class Detect extends Render {
 	 * Detects presence of sitemap.xml in root folder.
 	 *
 	 * @since 2.5.2
+	 * @since 4.0.0 Now tries to load `wp-admin/includes/file.php` to prevent a fatal error.
 	 * @staticvar bool $has_map
 	 *
 	 * @return bool Whether the sitemap.xml file exists.
@@ -635,6 +616,9 @@ class Detect extends Render {
 
 		if ( isset( $has_map ) )
 			return $has_map;
+
+		// Ensure get_home_path() is declared.
+		require_once ABSPATH . 'wp-admin/includes/file.php';
 
 		$path = \get_home_path() . 'sitemap.xml';
 
@@ -685,24 +669,11 @@ class Detect extends Render {
 		foreach ( (array) $features as $feature ) {
 			if ( \current_theme_supports( $feature ) ) {
 				return true;
-				break;
 			}
 			continue;
 		}
 
 		return false;
-	}
-
-	/**
-	 * Checks a theme's support for title-tag.
-	 *
-	 * @since 2.6.0
-	 * @since 3.1.0 Removed caching
-	 *
-	 * @return bool
-	 */
-	public function current_theme_supports_title_tag() {
-		return $this->detect_theme_support( 'title-tag' );
 	}
 
 	/**
@@ -726,7 +697,6 @@ class Detect extends Render {
 		foreach ( $post_page as $screen ) {
 			if ( $type === $screen ) {
 				return $is_page[ $type ] = true;
-				break;
 			}
 		}
 
@@ -734,99 +704,75 @@ class Detect extends Render {
 	}
 
 	/**
-	 * Detect WordPress language.
-	 * Considers en_UK, en_US, en, etc.
+	 * Determines whether the main query supports custom SEO.
 	 *
-	 * @since 2.6.0
-	 * @since 3.1.0 Removed caching.
+	 * @since 4.0.0
+	 * @since 4.0.2 Now tests for an existing post/term ID when on singular/term pages.
 	 *
-	 * @param string $locale Required, the locale.
-	 * @return bool Whether the input $locale is in the current WordPress locale.
+	 * @return bool
 	 */
-	public function check_wp_locale( $locale = '' ) {
-		return false !== strpos( \get_locale(), $locale );
+	public function query_supports_seo() {
+
+		static $cache;
+
+		if ( isset( $cache ) ) return $cache;
+
+		switch ( true ) :
+			case $this->is_feed():
+				$supported = false;
+				break;
+
+			case $this->is_singular():
+				$supported = $this->is_post_type_supported() && $this->get_the_real_ID();
+				break;
+
+			case \is_post_type_archive():
+				$supported = $this->is_post_type_supported();
+				break;
+
+			case $this->is_term_meta_capable():
+				$supported = $this->is_post_type_supported() && $this->get_the_real_ID();
+				break;
+
+			default:
+				$supported = true;
+				break;
+		endswitch;
+
+		/**
+		 * @since 4.0.0
+		 * @param bool $supported Whether the query supports SEO.
+		 */
+		return $cache = (bool) \apply_filters( 'the_seo_framework_query_supports_seo', $supported );
 	}
 
 	/**
-	 * Determines if the post type is disabled from SEO all optimization.
+	 * Detects if the current or inputted post type is supported and not disabled.
 	 *
 	 * @since 3.1.0
-	 * @since 3.1.2 Now is fiterable.
 	 *
-	 * @param string $post_type The post type, optional. Leave empty to autodetermine type.
-	 * @return bool True if disabled, false otherwise.
+	 * @param string $post_type Optional. The post type to check.
+	 * @return bool
 	 */
-	public function is_post_type_disabled( $post_type = '' ) {
+	public function is_post_type_supported( $post_type = '' ) {
 
 		$post_type = $post_type ?: \get_post_type() ?: $this->get_admin_post_type();
 
 		/**
-		 * @since 3.1.2
-		 * @param bool   $disabled
-		 * @param string $post_type
+		 * @since 2.6.2
+		 * @since 3.1.0 The first parameter is always a boolean now.
+		 * @param bool   $supported           Whether the post type is supported.
+		 * @param string $post_type_evaluated The evaluated post type.
 		 */
-		return \apply_filters( 'the_seo_framework_post_type_disabled',
-			isset(
-				$this->get_option( 'disabled_post_types' )[ $post_type ]
-			),
-			$post_type
+		return (bool) \apply_filters_ref_array(
+			'the_seo_framework_supported_post_type',
+			[
+				$post_type
+					&& ! $this->is_post_type_disabled( $post_type )
+					&& in_array( $post_type, $this->get_rewritable_post_types(), true ),
+				$post_type,
+			]
 		);
-	}
-
-	/**
-	 * Determines if the post type is compatible with The SEO Framework inpost metabox.
-	 *
-	 * @since 2.3.5
-	 * @since 3.1.0 1. The first parameter is now required.
-	 *              2. Added caching.
-	 * @staticvar bool $has_filter
-	 *
-	 * @param string $post_type
-	 * @return bool True if post type is supported.
-	 */
-	public function post_type_supports_inpost( $post_type ) {
-
-		if ( ! $post_type ) return false;
-
-		static $has_filter = null;
-
-		if ( is_null( $has_filter ) )
-			$has_filter = \has_filter( 'the_seo_framework_custom_post_type_support' );
-
-		if ( $has_filter ) {
-			/**
-			 * Determines the required post type features before TSF supports it.
-			 * @since 2.3.5
-			 * @since 3.0.4 Default parameter now is `[]` instead of `['title','editor']`.
-			 * @param array $supports The required post type support, like 'title', 'editor'.
-			 */
-			$supports = (array) \apply_filters( 'the_seo_framework_custom_post_type_support', [] );
-
-			foreach ( $supports as $support ) {
-				if ( ! \post_type_supports( $post_type, $support ) ) {
-					return false;
-					break;
-				}
-				continue;
-			}
-		}
-
-		return true;
-	}
-
-	/**
-	 * Determines if post type supports The SEO Framework.
-	 *
-	 * @since 2.3.9
-	 * @since 3.1.0 1. Removed caching.
-	 *              2. Now works in admin.
-	 *
-	 * @param string $post_type The current post type.
-	 * @return bool true of post type is supported.
-	 */
-	public function post_type_supports_custom_seo( $post_type = '' ) {
-		$post_type = $post_type ?: \get_post_type() ?: $this->get_admin_post_type();
-		return $post_type && $this->is_post_type_supported( $post_type ) && $this->post_type_supports_inpost( $post_type );
 	}
 
 	/**
@@ -835,53 +781,28 @@ class Detect extends Render {
 	 * Checks if at least one taxonomy objects post type supports The SEO Framework,
 	 * and wether the taxonomy is public and rewritable.
 	 *
-	 * @since 3.1.0
+	 * @since 4.0.0
 	 *
-	 * @param string $taxonomy The taxonomy name.
+	 * @param string $taxonomy Optional. The taxonomy name.
 	 * @return bool True if at least one post type in taxonomy isn't disabled.
 	 */
-	public function taxonomy_supports_custom_seo( $taxonomy = '' ) {
+	public function is_taxonomy_supported( $taxonomy = '' ) {
 
 		$taxonomy = $taxonomy ?: $this->get_current_taxonomy();
-		if ( ! $taxonomy ) return false;
 
 		/**
 		 * @since 3.1.0
+		 * @since 4.0.0 Now returns only returns false when all post types in the taxonomy aren't supported.
 		 * @param bool   $post_type Whether the post type is supported
 		 * @param string $post_type_evaluated The evaluated post type.
 		 */
-		return (bool) \apply_filters_ref_array( 'the_seo_framework_supported_taxonomy',
+		return (bool) \apply_filters_ref_array(
+			'the_seo_framework_supported_taxonomy',
 			[
 				$taxonomy
 					&& ! $this->is_taxonomy_disabled( $taxonomy )
 					&& $this->is_taxonomy_public( $taxonomy ),
 				$taxonomy,
-			]
-		);
-	}
-
-	/**
-	 * Detects if the current or inputted post type is supported and not disabled.
-	 *
-	 * @since 3.1.0
-	 *
-	 * @param bool $post_type
-	 * @return bool
-	 */
-	public function is_post_type_supported( $post_type = '' ) {
-		$post_type = $post_type ?: \get_post_type() ?: $this->get_admin_post_type();
-		/**
-		 * @since 2.6.2
-		 * @since 3.1.0 The first parameter is always a boolean now.
-		 * @param bool   $supported           Whether the post type is supported.
-		 * @param string $post_type_evaluated The evaluated post type.
-		 */
-		return (bool) \apply_filters_ref_array( 'the_seo_framework_supported_post_type',
-			[
-				$post_type
-					&& ! $this->is_post_type_disabled( $post_type )
-					&& in_array( $post_type, $this->get_rewritable_post_types(), true ),
-				$post_type,
 			]
 		);
 	}
@@ -941,11 +862,13 @@ class Detect extends Render {
 	 * @return array The post types with rewrite capabilities.
 	 */
 	protected function get_rewritable_post_types() {
+
 		static $cache = null;
-		//? array_values() because get_post_types() gives a sequential array.
+
 		return isset( $cache ) ? $cache : $cache = array_unique(
 			array_merge(
 				$this->get_forced_supported_post_types(),
+				//? array_values() because get_post_types() gives a sequential array.
 				array_values( (array) \get_post_types( [
 					'public'  => true,
 					'rewrite' => true,
@@ -978,27 +901,48 @@ class Detect extends Render {
 		);
 	}
 
+
+	/**
+	 * Determines if the post type is disabled from SEO all optimization.
+	 *
+	 * @since 3.1.0
+	 * @since 3.1.2 Now is fiterable.
+	 *
+	 * @param string $post_type Optional. The post type to check.
+	 * @return bool True if disabled, false otherwise.
+	 */
+	public function is_post_type_disabled( $post_type = '' ) {
+
+		$post_type = $post_type ?: \get_post_type() ?: $this->get_admin_post_type();
+
+		/**
+		 * @since 3.1.2
+		 * @param bool   $disabled
+		 * @param string $post_type
+		 */
+		return \apply_filters( 'the_seo_framework_post_type_disabled',
+			isset(
+				$this->get_option( 'disabled_post_types' )[ $post_type ]
+			),
+			$post_type
+		);
+	}
+
 	/**
 	 * Checks if at least one taxonomy objects post type supports The SEO Framework.
 	 *
 	 * @since 3.1.0
+	 * @since 4.0.0 1. Now returns true if at least one post type for the taxonomy is supported.
+	 *              2. Now uses `is_post_type_supported()` instead of `is_post_type_disabled()`.
 	 *
 	 * @param string $taxonomy The taxonomy name.
 	 * @return bool True if at least one post type in taxonomy is supported.
 	 */
 	public function is_taxonomy_disabled( $taxonomy = '' ) {
 
-		$taxonomy = $taxonomy ?: $this->get_current_taxonomy();
-		if ( ! $taxonomy ) return true;
-
-		$tax = \get_taxonomy( $taxonomy );
-
-		if ( false === $tax ) return true;
-
-		if ( ! empty( $tax->object_type ) ) {
-			foreach ( $tax->object_type as $type ) {
-				if ( ! $this->is_post_type_disabled( $type ) )
-					return false;
+		foreach ( $this->get_post_types_from_taxonomy( $taxonomy ) as $type ) {
+			if ( $this->is_post_type_supported( $type ) ) {
+				return false;
 			}
 		}
 
@@ -1058,16 +1002,42 @@ class Detect extends Render {
 	}
 
 	/**
-	 * Determines if the current theme supports the custom logo addition.
+	 * Determines whether we can output sitemap or not based on options and blog status.
 	 *
-	 * @since 2.8.0
-	 * @since 3.1.0: 1. No longer checks for WP version 4.5+.
-	 *               2. No longer uses caching.
+	 * @since 2.6.0
+	 * @since 2.9.2 No longer checks for plain and ugly permalinks.
+	 * @since 4.0.0 Removed caching.
 	 *
 	 * @return bool
 	 */
-	public function can_use_logo() {
-		return $this->detect_theme_support( 'custom-logo' );
+	public function can_run_sitemap() {
+		return $this->get_option( 'sitemaps_output' ) && ! $this->current_blog_is_spam_or_deleted();
+	}
+
+	/**
+	 * Returns the robots.txt location URL.
+	 * Only allows root domains.
+	 *
+	 * @since 2.9.2
+	 * @since 4.0.2 Now uses the preferred URL scheme.
+	 * @global \WP_Rewrite $wp_rewrite
+	 *
+	 * @return string URL location of robots.txt. Unescaped.
+	 */
+	public function get_robots_txt_url() {
+		global $wp_rewrite;
+
+		if ( $wp_rewrite->using_permalinks() && ! $this->is_subdirectory_installation() ) {
+			$home = \trailingslashit( $this->set_preferred_url_scheme( $this->get_home_host() ) );
+			$path = "{$home}robots.txt";
+		} elseif ( $this->has_robots_txt() ) {
+			$home = \trailingslashit( $this->set_preferred_url_scheme( \get_option( 'home' ) ) );
+			$path = "{$home}robots.txt";
+		} else {
+			$path = '';
+		}
+
+		return $path;
 	}
 
 	/**
@@ -1085,7 +1055,7 @@ class Detect extends Render {
 		if ( isset( $cache ) )
 			return $cache;
 
-		$parsed_url = \wp_parse_url( \get_option( 'home' ) );
+		$parsed_url = parse_url( \get_option( 'home' ) );
 
 		return $cache = ! empty( $parsed_url['path'] ) && ltrim( $parsed_url['path'], ' \\/' );
 	}

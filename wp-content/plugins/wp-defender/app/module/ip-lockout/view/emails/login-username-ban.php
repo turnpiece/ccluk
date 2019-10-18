@@ -461,7 +461,7 @@
 														printf( __( "We've just locked out the host <strong>%s</strong> from %s due to attempting to login with a banned username. They have been banned permanently.", wp_defender()->domain ), $ip, network_site_url() ) ?>
                                                     </p>
                                                     <p style="Margin: 0; Margin-bottom: 0; color: #555555; font-family: Helvetica, Arial, sans-serif; font-size: 15px; font-weight: normal; line-height: 26px; margin: 0; margin-bottom: 0; padding: 0 0 24px; text-align: left;">
-														<?php printf( __( "You can view the full lockout logs <a href=\"%s\">here</a>", wp_defender()->domain ), network_admin_url( "admin.php?page=wdf-ip-lockout&view=logs" ) ) ?>
+														<?php printf( __( "You can view the full lockout logs <a href=\"%s\">here</a>", wp_defender()->domain ), apply_filters( 'wp_defeder/iplockout/email_report_link', network_admin_url( "admin.php?page=wdf-ip-lockout&view=logs" ) ) ) ?>
                                                         .</p>
                                                 </td>
                                             </tr>
@@ -572,30 +572,31 @@
                             <!-- end related -->
 
                             <!-- Preferences -->
-							<table class="email-preferences" align="center" valign="middle"
-							       style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0; text-align: left; vertical-align: top; width: 100%;">
-								<tbody>
-									<tr style="padding: 0; text-align: center; vertical-align: top;">
-										<td class="email-preferences-inner"
-									        style="-moz-hyphens: auto; -webkit-hyphens: auto; Margin: 0; border-collapse: collapse !important; border-top: 2px solid #e9ebe7; color: #555555; font-family: Helvetica, Arial, sans-serif; font-size: 15px; font-weight: normal; hyphens: auto; line-height: 26px; margin: 0; padding: 40px; text-align: left; vertical-align: top; word-wrap: break-word;">
-											<table class="email-preferences-content row collapse" align="center" valign="top"
-										       style="border-collapse: collapse; border-spacing: 0; display: table; padding: 0; position: relative; text-align: center; vertical-align: top; width: 100%;">
-												<tbody>
-													<tr style="padding: 0; text-align: center; vertical-align: top;">
-														<th class="small-12 large-8 columns first copy" align="center"
-															style="Margin: 0 auto; color: #707070; font-family: Helvetica, Arial, sans-serif; font-size: 12px; font-weight: normal; line-height: 20px; margin: 0 auto; padding: 0; padding-bottom: 0; padding-left: 0; padding-right: 0; text-align: left; width: 394.66667px;">
-																<p style="Margin: 0; Margin-bottom: 0; color: #707070; font-family: Helvetica, Arial, sans-serif; font-size: 12px; font-weight: normal; line-height: 20px; margin: 0; margin-bottom: 0; padding: 0; text-align: center;">
-																	<?php printf( __( "<a href=\"%s\">Configure reporting preferences</a>", wp_defender()->domain ), network_admin_url( "admin.php?page=wdf-ip-lockout&view=reporting" ) ) ?>
-																</p>
-														</th>
-													</tr>
-												</tbody>
-											</table>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-							<!-- End Preferences -->
+                            <table class="email-preferences" align="center" valign="middle"
+                                   style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0; text-align: left; vertical-align: top; width: 100%;">
+                                <tbody>
+                                <tr style="padding: 0; text-align: center; vertical-align: top;">
+                                    <td class="email-preferences-inner"
+                                        style="-moz-hyphens: auto; -webkit-hyphens: auto; Margin: 0; border-collapse: collapse !important; border-top: 2px solid #e9ebe7; color: #555555; font-family: Helvetica, Arial, sans-serif; font-size: 15px; font-weight: normal; hyphens: auto; line-height: 26px; margin: 0; padding: 40px; text-align: left; vertical-align: top; word-wrap: break-word;">
+                                        <table class="email-preferences-content row collapse" align="center"
+                                               valign="top"
+                                               style="border-collapse: collapse; border-spacing: 0; display: table; padding: 0; position: relative; text-align: center; vertical-align: top; width: 100%;">
+                                            <tbody>
+                                            <tr style="padding: 0; text-align: center; vertical-align: top;">
+                                                <th class="small-12 large-8 columns first copy" align="center"
+                                                    style="Margin: 0 auto; color: #707070; font-family: Helvetica, Arial, sans-serif; font-size: 12px; font-weight: normal; line-height: 20px; margin: 0 auto; padding: 0; padding-bottom: 0; padding-left: 0; padding-right: 0; text-align: left; width: 394.66667px;">
+                                                    <p style="Margin: 0; Margin-bottom: 0; color: #707070; font-family: Helvetica, Arial, sans-serif; font-size: 12px; font-weight: normal; line-height: 20px; margin: 0; margin-bottom: 0; padding: 0; text-align: center;">
+														<?php printf( __( "<a href=\"%s\">Configure reporting preferences</a>", wp_defender()->domain ), $report_url ) ?>
+                                                    </p>
+                                                </th>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <!-- End Preferences -->
 
                             <table class="company-info" align="left" valign="middle"
                                    style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0; text-align: left; vertical-align: top; width: 100%;">

@@ -26,7 +26,7 @@ class Mask_Api extends Component {
 		}
 		//
 		$requestUri  = '/' . ltrim( $requestUri, '/' );
-		$prefix      = parse_url( self::site_url(), PHP_URL_PATH );
+		$prefix      = parse_url( self::siteUrl(), PHP_URL_PATH );
 		$requestPath = parse_url( $requestUri, PHP_URL_PATH );
 		//clean it a bit
 		if ( Utils::instance()->isActivatedSingle() == false
@@ -34,7 +34,7 @@ class Mask_Api extends Component {
 		     && constant( 'SUBDOMAIN_INSTALL' ) == false
 		     && get_current_blog_id() != 1
 		) {
-			$prefix = parse_url( self::network_site_url(), PHP_URL_PATH );
+			$prefix = parse_url( self::networkSiteUrl(), PHP_URL_PATH );
 			//get the prefix
 			$siteInfo = get_blog_details();
 			$path     = $siteInfo->path;
@@ -42,9 +42,9 @@ class Mask_Api extends Component {
 				$requestPath = substr( $requestPath, strlen( $path ) );
 				$requestPath = '/' . ltrim( $requestPath, '/' );
 			}
-		} elseif ( self::get_home_url() != self::site_url() && strpos( $requestPath, (string) $prefix . '/' ) !== 0 ) {
+		} elseif ( self::getHomeUrl() != self::siteUrl() && strpos( $requestPath, (string) $prefix . '/' ) !== 0 ) {
 			//this case when a wp install inside a sub folder and domain changed into that subfolder
-			$prefix = parse_url( self::get_home_url(), PHP_URL_PATH );
+			$prefix = parse_url( self::getHomeUrl(), PHP_URL_PATH );
 		}
 		if ( strlen( $prefix ) && strpos( $requestPath, (string) $prefix ) === 0 ) {
 			$requestPath = substr( $requestPath, strlen( $prefix ) );
@@ -65,7 +65,7 @@ class Mask_Api extends Component {
 	 *
 	 * @return string
 	 */
-	private static function site_url( $path = '', $scheme = null ) {
+	private static function siteUrl( $path = '', $scheme = null ) {
 		if ( empty( $blog_id ) || ! is_multisite() ) {
 			$url = get_option( 'siteurl' );
 		} else {
@@ -84,6 +84,73 @@ class Mask_Api extends Component {
 	}
 
 	/**
+	 * Generate a random unique onetime pass and store in user meta
+	 * Laterly we can use it to by pass the mask admin
+	 * @return bool
+	 */
+	public static function generateTicket() {
+		$otp                    = wp_generate_password( 12, false );
+		$settings               = Mask_Settings::instance();
+		$settings->otps[ $otp ] = [
+			'otp'     => $otp,
+			'bind_to' => null,
+			'expiry'  => strtotime( '+3 day' ),
+			'used'    => 0
+		];
+		$settings->save();
+
+		return $otp;
+	}
+
+	/**
+	 * @param $ticket
+	 *
+	 * @return bool
+	 */
+	public static function redeemTicket( $ticket ) {
+		$settings = Mask_Settings::instance();
+		$detail   = isset( $settings->otps[ $ticket ] ) ? $settings->otps[ $ticket ] : false;
+		if ( $detail === false ) {
+			return false;
+		}
+
+		/**
+		 * ticket expired
+		 */
+		if ( $detail['expiry'] < time() ) {
+			unset( $settings->otps[ $ticket ] );
+			$settings->save();
+
+			return false;
+		}
+
+		$userIP = Utils::instance()->getUserIp();
+		if ( $detail['bind_to'] !== null && $detail['bind_to'] != $userIP ) {
+			//this is binded to an IP but current IP not the same, not allow
+			return false;
+		}
+
+		if ( $detail['bind_to'] === null ) {
+			$detail['bind_to'] = $userIP;
+		}
+		$detail['used']            += 1;
+		$settings->otps[ $ticket ] = $detail;
+		$settings->save();
+
+		return true;
+	}
+
+	/**
+	 * @param $url
+	 * @param $user_id
+	 *
+	 * @return string
+	 */
+	public static function maybeAppendTicketToUrl( $url ) {
+		return add_query_arg( 'ticket', self::generateTicket(), $url );
+	}
+
+	/**
 	 * A clone of network_site_url but remove the filter
 	 *
 	 * @param string $path
@@ -91,7 +158,7 @@ class Mask_Api extends Component {
 	 *
 	 * @return string
 	 */
-	private static function network_site_url( $path = '', $scheme = null ) {
+	private static function networkSiteUrl( $path = '', $scheme = null ) {
 		$current_network = get_network();
 
 		if ( 'relative' == $scheme ) {
@@ -116,7 +183,7 @@ class Mask_Api extends Component {
 	 *
 	 * @return mixed|void
 	 */
-	private static function get_home_url( $blog_id = null, $path = '', $scheme = null ) {
+	private static function getHomeUrl( $blog_id = null, $path = '', $scheme = null ) {
 		global $pagenow;
 
 		$orig_scheme = $scheme;
@@ -152,7 +219,7 @@ class Mask_Api extends Component {
 	public static function getRedirectUrl() {
 		$settings = Mask_Settings::instance();
 
-		return untrailingslashit( get_home_url( get_current_blog_id() ) ) . '/' . ltrim( $settings->redirectTrafficUrl, '/' );
+		return untrailingslashit( get_home_url( get_current_blog_id() ) ) . '/' . ltrim( $settings->redirect_traffic_url, '/' );
 	}
 
 	/**
@@ -161,10 +228,10 @@ class Mask_Api extends Component {
 	public static function getNewLoginUrl( $domain = null ) {
 		$settings = Mask_Settings::instance();
 		if ( $domain == null ) {
-			$domain = self::site_url();
+			$domain = site_url();
 		}
 
-		return untrailingslashit( $domain . '/' . ltrim( $settings->maskUrl, '/' ) );
+		return untrailingslashit( $domain . '/' . ltrim( $settings->mask_url, '/' ) );
 	}
 
 	/**
@@ -228,7 +295,7 @@ class Mask_Api extends Component {
 	 * @return bool
 	 */
 	public static function verifyOTP( $otp ) {
-		$key    = HTTP_Helper::retrieve_get( 'otp' );
+		$key    = HTTP_Helper::retrieveGet( 'otp' );
 		$secret = Auth_API::getUserSecret();
 		$key    = md5( $key . $secret );
 		$check  = get_site_transient( $key );

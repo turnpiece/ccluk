@@ -51,7 +51,7 @@ function ct_dashboard_statistics_widget_output( $post, $callback_args ) {
 	}elseif(!empty($apbct->data['brief_data']['error'])){
 		echo '<div class="ct_widget_block">'
 			.'<h2 class="ct_widget_activate_header">'
-				.sprintf(__('Something went wrong! Error: "%s".', 'cleantalk'), "<u>{$apbct->brief_data['error_string']}</u>")
+				.sprintf(__('Something went wrong! Error: "%s".', 'cleantalk'), "<u>{$apbct->brief_data['error']}</u>")
 			.'</h2>';
 			if($apbct->user_token && !$apbct->white_label){
 				echo '<h2 class="ct_widget_activate_header">'
@@ -140,23 +140,24 @@ function apbct_admin__init(){
 	}
 	
 	// Getting key like hoster. Only once!
-	if($apbct->white_label && empty($apbct->data['white_label_data']['is_key_recieved']) && !is_network_admin()){
+	if(!is_main_site() && $apbct->white_label && empty($apbct->api_key)){
 		
 		$_POST['submit'] = 'get_key_auto';
-		
 		$settings = apbct_settings__validate(array());
-		
 		unset($_POST['submit']);
-		$apbct->data['white_label_data']['is_key_recieved'] = true;
-		$apbct->saveData();
 		
 		if(!empty($settings['apikey'])){
 			$apbct->settings['apikey'] = $settings['apikey'];
 			$apbct->api_key = $settings['apikey'];
-			$apbct->saveSettings();			
+			$apbct->saveSettings();
 		}
 		
 	}
+	
+	// AJAX actions
+ 
+	// Settings
+	add_action('wp_ajax_apbct_settings__get__long_description', 'apbct_settings__get__long_description'); // Long description
 }
 
 /**
@@ -224,16 +225,19 @@ function apbct_admin__enqueue_scripts($hook){
 	wp_enqueue_style ('ct_admin_css',        plugins_url('/cleantalk-spam-protect/css/cleantalk-admin.min.css'), array(), APBCT_VERSION, 'all');
 	
 	wp_localize_script( 'jquery', 'ctAdminCommon', array(
+		'_ajax_nonce'         => wp_create_nonce( 'ct_secret_nonce' ),
+		'_ajax_url'           => admin_url( 'admin-ajax.php' ),
 		'plugin_name'        => $apbct->plugin_name,
-		'logo'               => '<img src="' . $apbct->logo                 . '" alt=""  height="" style="width: 17px; vertical-align: text-bottom;" />',
-		'logo_small'         => '<img src="' . $apbct->logo__small          . '" alt=""  height="" style="width: 17px; vertical-align: text-bottom;" />',
+		'logo'               => '<img src="' . $apbct->logo . '" alt=""  height="" style="width: 17px; vertical-align: text-bottom;" />',
+		'logo_small'         => '<img src="' . $apbct->logo__small . '" alt=""  height="" style="width: 17px; vertical-align: text-bottom;" />',
 		'logo_small_colored' => '<img src="' . $apbct->logo__small__colored . '" alt=""  height="" style="width: 17px; vertical-align: text-bottom;" />',
-		));
-		
+	) );
+	
 	// DASHBOARD page JavaScript and CSS
 	if($hook == 'index.php' && apbct_is_user_role_in(array('administrator'))){
 		
 		wp_enqueue_style('ct_admin_css_widget_dashboard',     plugins_url('/cleantalk-spam-protect/css/cleantalk-dashboard-widget.min.css'), array(), APBCT_VERSION, 'all');
+	    wp_enqueue_style ('ct_icons',                         plugins_url('/cleantalk-spam-protect/css/cleantalk-icons.min.css'), array(),            APBCT_VERSION, 'all');
 		
 		wp_enqueue_script('ct_gstatic_charts_loader',         plugins_url('/cleantalk-spam-protect/js/cleantalk-dashboard-widget--google-charts.min.js'), array(),              APBCT_VERSION);
 		wp_enqueue_script('ct_admin_js_widget_dashboard', 	  plugins_url('/cleantalk-spam-protect/js/cleantalk-dashboard-widget.min.js'),   array('ct_gstatic_charts_loader'), APBCT_VERSION);
@@ -264,10 +268,9 @@ function apbct_admin__enqueue_scripts($hook){
 		
 		wp_enqueue_script('cleantalk_admin_js_settings_page', plugins_url('/cleantalk-spam-protect/js/cleantalk-admin-settings-page.min.js'),   array(),     APBCT_VERSION);
 		wp_enqueue_style('cleantalk_admin_css_settings_page', plugins_url('/cleantalk-spam-protect/css/cleantalk-admin-settings-page.min.css'), array(),     APBCT_VERSION, 'all');
+	    wp_enqueue_style ('ct_icons',                         plugins_url('/cleantalk-spam-protect/css/cleantalk-icons.min.css'), array(),                   APBCT_VERSION, 'all');
 		
-		$ajax_nonce = wp_create_nonce( "ct_secret_nonce" );
 		wp_localize_script( 'jquery', 'ctSettingsPage', array(
-			'ct_ajax_nonce' => $ajax_nonce,
 			'ct_subtitle'   => $apbct->ip_license ? __('Hosting AntiSpam', 'cleantalk') : '',
 			'ip_license'    => $apbct->ip_license ? true : false,
 		));

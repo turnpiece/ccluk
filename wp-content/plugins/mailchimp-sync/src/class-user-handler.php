@@ -3,10 +3,7 @@
 namespace MC4WP\Sync;
 
 use Exception;
-use MC4WP_API;
-use MC4WP_MailChimp;
-use MC4WP_MailChimp_Subscriber_Data;
-use WP_User;
+
 
 class UserHandler {
 
@@ -19,6 +16,8 @@ class UserHandler {
 	 * @var string
 	 */
 	public $error = '';
+
+	private $users;
 
 	/**
 	 * @var array
@@ -93,7 +92,7 @@ class UserHandler {
 	}
 
 	/**
-	 * Subscribes a user to the selected MailChimp list, stores a meta field with the subscriber uid
+	 * Subscribes a user to the selected Mailchimp list, stores a meta field with the subscriber uid
 	 *
 	 * @param int $user_id
 	 * @return bool
@@ -146,7 +145,7 @@ class UserHandler {
 	}
 
 	/**
-	 * Delete the subscriber uid from the MailChimp list
+	 * Delete the subscriber uid from the Mailchimp list
 	 *
 	 * @param int $user_id
 	 * @param string $email_address

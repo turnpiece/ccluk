@@ -115,8 +115,28 @@ class Scan extends Model {
 	}
 
 	/**
+	 * @param int $offset
+	 * @param string $status
+	 * @param null $type
+	 *
+	 * @return array
+	 */
+	public function getItemsAsJson( $offset = 0, $status = Result_Item::STATUS_ISSUE, $type = null ) {
+		$items   = $this->getItems( false, $status, $type );
+		$results = [];
+
+		foreach ( $items as $item ) {
+			if ( $item->hasMethod( 'getInfo' ) ) {
+				$results[] = $item->getInfo();
+			}
+		}
+
+		return $results;
+	}
+
+	/**
 	 * @param $offset int
-	 * @param $type string issues|cleaned|ignored
+	 * @param $type string core|content|vuln
 	 *
 	 * @return Result_Item[]
 	 */

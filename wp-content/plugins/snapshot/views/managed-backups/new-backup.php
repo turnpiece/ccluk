@@ -23,13 +23,13 @@ $cron_disabled = $model->get_config( 'disable_cron', false );
 	<h1><?php esc_html_e( 'Managed Backups', SNAPSHOT_I18N_DOMAIN ); ?></h1>
 </section>
 
-<?php 
+<?php
 $this->render(
 	"managed-backups/partials/create-backup-progress", false, array(
 		'item' => $item,
 		'time_key' => $time_key
-	), false, false 
-); 
+	), false, false
+);
 ?>
 
 <div id="snapshot-ajax-out">
@@ -78,14 +78,14 @@ $this->render(
 							<div id="wps-check-notice" class="row">
 
 								<div class="col-xs-12">
-                                    <?php 
+                                    <?php
                                     if ( ! $all_good ) {
 										$wps_auth_message = 'error';
 									} else if ( $warning ) {
 										$wps_auth_message = 'warning';
 									} else {
 										$wps_auth_message = 'success';
-									} 
+									}
                                     ?>
 									<div class="wps-auth-message <?php echo esc_attr( $wps_auth_message ); ?>">
 										<?php if ( ! $all_good ) { ?>
@@ -120,7 +120,7 @@ $this->render(
 													__( "Managed backups can only be stored on WPMU DEV's cloud servers. You have <strong>%1\$s</strong> of your %2\$s storage remaining.", SNAPSHOT_I18N_DOMAIN ),
 													size_format( $storage->get_free_remote_space() ),
 													size_format( $storage->get_total_remote_space() )
-												); 
+												);
 										?>
 										<label class="label-title"><?php echo wp_kses_post( $label_title ); ?></label>
 
@@ -185,7 +185,7 @@ $this->render(
 												<div class="wps-input--radio">
 													<input id="frequency-daily" type="radio" name="frequency" value="schedule"
 	                                                    <?php
-														checked( ! $model->get_config( 'disable_cron', false ) ); 
+														checked( ! $model->get_config( 'disable_cron', false ) );
 	                                                    ?>
                                                     >
 
@@ -337,7 +337,7 @@ $this->render(
 											?>
 											<div class="wps-notice">
 												<p><?php esc_html_e( "No file exclusions have been defined, so the backup will include all the files.", SNAPSHOT_I18N_DOMAIN ); ?></p>
-											</div>	
+											</div>
 											<?php
 										}
 										?>

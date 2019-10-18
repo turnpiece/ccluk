@@ -9,7 +9,7 @@ use WP_Defender\Controller;
 
 class GDPR extends Controller {
 	public function __construct() {
-		$this->add_filter( 'wp_get_default_privacy_policy_content', 'addPolicy' );
+		$this->addFilter( 'wp_get_default_privacy_policy_content', 'addPolicy' );
 	}
 
 	public function addPolicy( $content ) {

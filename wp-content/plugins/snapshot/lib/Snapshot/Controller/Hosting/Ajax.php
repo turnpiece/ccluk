@@ -82,7 +82,7 @@ class Snapshot_Controller_Hosting_Ajax extends Snapshot_Controller_Hosting {
 	 * Add timestamp key to managed backups array
 	 *
 	 * @param array $backups
-	 * 
+	 *
 	 * @return array
 	 */
 	private function update_date_values( $backups = array() ) {
@@ -98,7 +98,7 @@ class Snapshot_Controller_Hosting_Ajax extends Snapshot_Controller_Hosting {
 	 *
 	 * @param array $array1
 	 * @param array $array2
-	 * 
+	 *
 	 * @return array
 	 */
 	private function order_backups( $array1, $array2 ) {
@@ -211,7 +211,7 @@ class Snapshot_Controller_Hosting_Ajax extends Snapshot_Controller_Hosting {
 			$error_message = wp_kses_post( sprintf( __( 'We couldn\'t send the backup to your email address. Please <a class="%1$s" href="#" data-backup-id="%2$s">try again</a>, and if the issue persist, you can <a href="%3$s" target="_blank">contact our support</a> for help.', SNAPSHOT_I18N_DOMAIN ), 'snapshot-hosting-backup-export', $backup_id, 'https://premium.wpmudev.org/hub/support/#get-support' ) );
 			wp_send_json_error( $error_message );
 		}
-		
+
 		$success_message = wp_kses_post( sprintf( __( 'We\'re preparing your backup for <strong>%s.wpmudev.host</strong>, we\'ll email you when it\'s finished and ready.', SNAPSHOT_I18N_DOMAIN ), $this->get_site_id() ) );
 		wp_send_json_success( $success_message );
 	}

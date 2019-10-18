@@ -25,14 +25,29 @@ abstract class Rule extends Component {
 	 * Return this rule content, we will try to use renderPartial
 	 *
 	 * @return mixed
+     * @deprecated since 2.2
 	 */
 	abstract function getDescription();
 
 	/**
-	 * Return this rule reason
+	 * This will return the short summary why this rule show up as issue
+	 *
+	 * @return string
+	 */
+	abstract function getErrorReason();
+
+	/**
+	 * This will return a short summary to show why this rule works
 	 * @return mixed
 	 */
-	abstract function getSubDescription();
+	abstract function getSuccessReason();
+
+	/**
+	 * @return array
+	 */
+	public function getMiscData() {
+		return array();
+	}
 
 	/**
 	 * @return mixed
@@ -99,25 +114,9 @@ abstract class Rule extends Component {
 			return false;
 		}
 
-		$nonce = HTTP_Helper::retrieve_post( '_wdnonce' );
+		$nonce = HTTP_Helper::retrievePost( '_wdnonce' );
 
 		return wp_verify_nonce( $nonce, self::$slug );
-	}
-
-	/**
-	 * Show ignore form
-	 */
-	public function showIgnoreForm() {
-		?>
-        <form method="post" class="hardener-frm ignore-frm rule-process">
-			<?php $this->createNonceField(); ?>
-            <input type="hidden" name="action" value="ignoreHardener"/>
-            <input type="hidden" name="slug" value="<?php echo static::$slug ?>"/>
-            <button type="submit" name="ignore" value="ignore" class="sui-button sui-button-ghost">
-                <i class="sui-icon-eye-hide" aria-hidden="true"></i> <?php _e( "Ignore", wp_defender()->domain ) ?>
-            </button>
-        </form>
-		<?php
 	}
 
 	/**
@@ -127,33 +126,6 @@ abstract class Rule extends Component {
 		$ignored = Settings::instance()->ignore;
 
 		return in_array( static::$slug, $ignored );
-	}
-
-	public function showRestoreForm() {
-		?>
-        <div class="sui-accordion sui-accordion-flushed">
-            <div class="sui-accordion-item accordion-ignore">
-                <div class="sui-accordion-item-header">
-                    <div class="sui-accordion-item-title">
-                        <i aria-hidden="true" class="sui-icon-eye-hide"></i>
-						<?php echo $this->getTitle(); ?>
-                        <div class="sui-actions-right">
-                            <form method="post" class="float-r hardener-frm rule-process">
-								<?php $this->createNonceField(); ?>
-                                <input type="hidden" name="action" value="restoreHardener"/>
-                                <input type="hidden" name="slug" value="<?php echo static::$slug ?>"/>
-                                <button type="submit" class="sui-button sui-button-ghost">
-                                    <i class="sui-icon-update" aria-hidden="true"></i>
-									<?php _e( "Restore", wp_defender()->domain ) ?>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-		<?php
 	}
 
 	/**
@@ -178,5 +150,28 @@ abstract class Rule extends Component {
 		return array(
 			'utils' => '\WP_Defender\Behavior\Utils'
 		);
+	}
+
+	/**
+	 * A helper for tweak with security header, we need to check if the header is out or not
+	 *
+	 * @param $header
+	 * @param $somewhere
+	 *
+	 * @return bool
+	 */
+	protected function maybeSubmitHeader( $header, $somewhere ) {
+		if ( $somewhere == false ) {
+			return true;
+		}
+		$list  = headers_list();
+		$match = false;
+		foreach ( $list as $item ) {
+			if ( stristr( $item, $header ) ) {
+				$match = true;
+			}
+		}
+
+		return $match;
 	}
 }

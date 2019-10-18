@@ -7,6 +7,7 @@
 namespace WP_Defender\Module\IP_Lockout\Model;
 
 use Hammer\Base\DB_Model;
+use WP_Defender\Behavior\Utils;
 
 class IP_Model extends DB_Model {
 	const STATUS_BLOCKED = 'blocked', STATUS_NORMAL = 'normal';
@@ -45,6 +46,23 @@ class IP_Model extends DB_Model {
 	}
 
 	/**
+	 * Initiaize IP model if not exist, else return the current
+	 * @return IP_Model|null
+	 */
+	public static function init() {
+		$model = self::findOne( [ 'ip' => Utils::instance()->getUserIp() ] );
+		if ( ! is_object( $model ) ) {
+			$model = new IP_Model();
+			//create new
+			$model->ip     = Utils::instance()->getUserIp();
+			$model->status = IP_Model::STATUS_NORMAL;
+			$model->save();
+		}
+
+		return $model;
+	}
+
+	/**
 	 * @param $key
 	 * @param null $default
 	 *
@@ -65,6 +83,26 @@ class IP_Model extends DB_Model {
 		}
 
 		return $default;
+	}
+
+	/**
+	 * @param $ip
+	 * @param $paged
+	 *
+	 * @return array
+	 */
+	public static function queryLockedIp() {
+		$params = array(
+			'status' => IP_Model::STATUS_BLOCKED
+		);
+
+		$results = IP_Model::findAllOnlyColumns( $params, [
+			'id',
+			'ip',
+			'status'
+		], 'lock_time', 'DESC' );
+
+		return $results;
 	}
 
 	/**

@@ -10,7 +10,7 @@ class Snapshot_Controller_Hosting {
 	const REQUEST_POST = 'POST';
 	const OPTIONS_BACKUP_FLAG = 'snapshot_current_hosting_backup_run';
 	const HUB_BACKUP_URL = 'https://premium.wpmudev.org/hub/hosting/?view=site&site_id=%s&tab=backups';
-	
+
 	/**
 	 * Singleton instance
 	 *
@@ -27,7 +27,7 @@ class Snapshot_Controller_Hosting {
 
 	/**
 	 * Full Backup Model
-	 * 
+	 *
 	 * @var object Snapshot_Model_Full_Backup;
 	 */
 	protected $_managed_model;
@@ -236,7 +236,7 @@ class Snapshot_Controller_Hosting {
 
 	/**
 	 * Gets data about currently running backup/restore
-	 * 
+	 *
 	 * @param string $action_id Action ID.
 	 *
 	 * @return array
@@ -255,7 +255,7 @@ class Snapshot_Controller_Hosting {
 
 	/**
 	 * Gets a list of backups
-	 * 
+	 *
 	 * @return array A list of full backup items
 	 */
 	protected function get_backups_list() {
@@ -320,7 +320,7 @@ class Snapshot_Controller_Hosting {
 			);
 		}
 
-		return json_decode( wp_remote_retrieve_body( $result ), true );		
+		return json_decode( wp_remote_retrieve_body( $result ), true );
 	}
 
 	/**
@@ -339,7 +339,7 @@ class Snapshot_Controller_Hosting {
 
 	/**
 	 * Builds the arguments for any backup restore AJAX calls
-	 * 
+	 *
 	 * @param string $backup_id Backup ID
 	 * @param array $current_restore Current restore state
 	 */
@@ -352,7 +352,7 @@ class Snapshot_Controller_Hosting {
 				'is_done' => false,
 				'error' => true,
 			);
-		} else {		
+		} else {
 			if ( ! empty( $status['action_id'] )  ) {
 				if ( ! empty( $status['completed_at'] ) ) {
 					// The restore completed on the first go, so we need to set it complete.
@@ -405,14 +405,14 @@ class Snapshot_Controller_Hosting {
 				// phpcs:ignore
 				if ( ! get_site_option( self::OPTIONS_BACKUP_FLAG ) && ( ! isset( $_POST['older_backup'] ) || false === $_POST['older_backup'] ) ){
 					$status = $this->_start_backup();
-	
+
 					if ( ! $status || ! is_array( $status ) || is_wp_error( $status ) ) {
 						// The API call wasnt successful.
 						$args = array(
 							'is_done' => false,
 							'error' => true,
 						);
-					} else {		
+					} else {
 						if ( ! empty( $status['action_id'] )  ) {
 							if ( ! empty( $status['completed_at'] ) ) {
 								// The backup completed on the first go, so we need to set it complete.
@@ -443,7 +443,7 @@ class Snapshot_Controller_Hosting {
 							'older_backup' => true,
 						);
 					}
-				}	
+				}
 			} else {
 				$args = array();
 			}
@@ -477,7 +477,7 @@ class Snapshot_Controller_Hosting {
 			} else {
 				// Managed Backup
 				$backup_link = $this->_managed_model->remote()->get_backup_link( $backup['timestamp'] );
-	
+
 				/* If there is no remote URL, build a local download link */
 				if ( ! $backup_link ) {
 					$backup_link = network_admin_url('admin.php?page=snapshot_pro_hosting_backups');
@@ -494,7 +494,7 @@ class Snapshot_Controller_Hosting {
 
 			$backups[ $key ]['icon']    = $this->get_backup_icon( $backup );
 			$backups[ $key ]['tooltip'] = $this->get_backup_tooltip( $backup, $dashboard );
-			
+
 			$backups[ $key ]['type']    = $this->get_backup_type( $backup );
 			$backups[ $key ]['context'] = isset( $backups[ $key ]['context'] ) ? str_replace( array( 'Manual', 'Nightly' ), array( 'Once', 'Daily, @ ' . esc_attr( Snapshot_Helper_Utility::get_hosting_backup_local_time() ) ), $backups[ $key ]['context'] ) : '-';
 
@@ -527,7 +527,7 @@ class Snapshot_Controller_Hosting {
 			}
 
 		}
-		
+
 		return $backups;
 	}
 
@@ -554,9 +554,9 @@ class Snapshot_Controller_Hosting {
 
 	/**
 	 * Return hosting icon
-	 * 
+	 *
 	 * @param array $backup
-	 * 
+	 *
 	 * @return string
 	 */
 	private function get_backup_icon( $backup ) {
@@ -585,9 +585,9 @@ class Snapshot_Controller_Hosting {
 
 	/**
 	 * Return backup type
-	 * 
+	 *
 	 * @param array $backup
-	 * 
+	 *
 	 * @return string
 	 */
 	private function get_backup_type( $backup ) {
@@ -598,21 +598,35 @@ class Snapshot_Controller_Hosting {
 				return esc_html__( 'Automated', SNAPSHOT_I18N_DOMAIN );
 			} else {
 				return esc_html__( 'Managed', SNAPSHOT_I18N_DOMAIN );
-			}			
+			}
 		}
 	}
 
 	/**
 	 * Return backup menu
-	 * 
+	 *
 	 * @param array $backup
 	 * @param bool $hosting_backup
-	 * 
+	 *
 	 * @return string
 	 */
 	private function get_backup_menu( $backups, $key, $backup, $hosting_backup ) {
 		if ( $hosting_backup ) {
-			$backup_menu = 
+			$is_staging = strpos( $_SERVER['HTTP_HOST'], '.staging.wpmudev.host' ) !== false;
+			if ( $is_staging ) {
+				$restore_item =
+				'<li class="snapshot-hosting-backup-restore sui-tooltip sui-constrained sui-tooltip-left" data-tooltip="You can\'t restore the backup, because you\'re on staging. Please log in to your regular account and try again.">
+					<a style="opacity: .5; pointer-events: none;" href="#" data-backup-id="' . esc_attr( $backups[ $key ]['id'] ) . '">' . esc_html__( 'Restore', SNAPSHOT_I18N_DOMAIN ) . '</a>
+				</li>
+				';
+			} else {
+				$restore_item =
+				'<li>
+					<a href="#" class="snapshot-hosting-backup-restore" data-backup-id="' . esc_attr( $backups[ $key ]['id'] ) . '">' . esc_html__( 'Restore', SNAPSHOT_I18N_DOMAIN ) . '</a>
+				</li>
+				';
+			}
+			$backup_menu =
 '<div class="wps-menu">
 
 	<div class="wps-menu-dots">
@@ -632,11 +646,7 @@ class Snapshot_Controller_Hosting {
 			<li class="wps-menu-list-title">' . esc_html__( 'Options', SNAPSHOT_I18N_DOMAIN ) . '</li>
 			<li>
 				<a href="' . esc_url( sprintf( self::HUB_BACKUP_URL, $this->get_site_id() ) ) . '" target="_blank" >' . esc_html__( 'Info', SNAPSHOT_I18N_DOMAIN ) . '</a>
-			</li>
-			<li>
-				<a href="#" class="snapshot-hosting-backup-restore" data-backup-id="' . esc_attr( $backups[ $key ]['id'] ) . '">' . esc_html__( 'Restore', SNAPSHOT_I18N_DOMAIN ) . '</a>
-			</li>
-
+			</li>' . $restore_item . '
 		</ul>
 
 	</div>
@@ -662,7 +672,7 @@ class Snapshot_Controller_Hosting {
 				network_admin_url('admin.php?page=snapshot_pro_hosting_backups')
 			);
 
-			$backup_menu = 
+			$backup_menu =
 '<div class="wps-menu">
 
 	<div class="wps-menu-dots">

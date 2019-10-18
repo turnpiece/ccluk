@@ -30,6 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Ai1wm_Report_Controller {
 
 	public static function report( $params = array() ) {
+		ai1wm_setup_environment();
 
 		// Set params
 		if ( empty( $params ) ) {
@@ -67,12 +68,14 @@ class Ai1wm_Report_Controller {
 			exit;
 		}
 
-		$model = new Ai1wm_Report;
+		try {
+			Ai1wm_Report::add( $email, $message, $terms );
+		} catch ( Ai1wm_Report_Exception $e ) {
+			echo json_encode( array( 'errors' => array( $e->getMessage() ) ) );
+			exit;
+		}
 
-		// Send report
-		$errors = $model->add( $email, $message, $terms );
-
-		echo json_encode( array( 'errors' => $errors ) );
+		echo json_encode( array( 'errors' => array() ) );
 		exit;
 	}
 }

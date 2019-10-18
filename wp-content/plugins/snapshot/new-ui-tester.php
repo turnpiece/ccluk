@@ -25,7 +25,7 @@ class WPMUDEVSnapshot_New_Ui_Tester {
 						'snapshots/snapshot', false, array(
 						'action' => 'add',
 						'item' => array()
-						) 
+						)
 				);
 				return;
 			}
@@ -53,7 +53,7 @@ class WPMUDEVSnapshot_New_Ui_Tester {
 							'action' => 'update',
 							'item' => $item,
 							'force_backup' => $force_backup
-							) 
+							)
                         );
 					break;
 
@@ -64,7 +64,7 @@ class WPMUDEVSnapshot_New_Ui_Tester {
                              'snapshots/restore', false, array(
 								'item' => $item,
 								'data_item_key' => $data_item_key
-								) 
+								)
                             );
 					} else {
 						$this->render( 'snapshots/item', false, array( 'item' => $item ) );
@@ -123,7 +123,7 @@ class WPMUDEVSnapshot_New_Ui_Tester {
 			}
 			if ( ! wp_verify_nonce( $_REQUEST['destination-noonce-field'], 'snapshot-destination' ) ) {
 				return;
-			}			
+			}
 			$snapshot_action = sanitize_text_field( $_REQUEST['snapshot-action'] );
 		}
 

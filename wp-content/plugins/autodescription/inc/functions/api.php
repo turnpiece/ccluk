@@ -1,7 +1,6 @@
 <?php
 /**
- * @package The_SEO_Framework
- * @subpackage The_SEO_Framework\API
+ * @package The_SEO_Framework\API
  */
 
 namespace {
@@ -45,7 +44,7 @@ namespace {
 	 * Returns the database version of TSF.
 	 *
 	 * @since 3.1.0
-	 * @since 3.1.2 Now forces a string.
+	 * @since 3.1.2 Now casts to string.
 	 *
 	 * @return string The database version. '0' if version isn't found.
 	 */
@@ -110,7 +109,6 @@ namespace The_SEO_Framework {
 	 * @uses THE_SEO_FRAMEWORK_DIR_PATH_TRAIT
 	 * @access private
 	 * @staticvar array $loaded
-	 * @TODO use this.
 	 *
 	 * @param string $file Where the trait is for. Must be lowercase.
 	 * @return bool True if loaded, false otherwise.
@@ -142,5 +140,20 @@ namespace The_SEO_Framework {
 		static $cache = [];
 
 		return isset( $cache[ $caller ] ) ?: ( ( $cache[ $caller ] = true ) && false );
+	}
+
+	/**
+	 * Adds and returns-to the bootstrap timer.
+	 *
+	 * @since 4.0.0
+	 * @access private
+	 * @staticvar $time The estimated total time for bootstrapping.
+	 *
+	 * @param int $add The time to add.
+	 * @return int The accumulated time, roughly.
+	 */
+	function _bootstrap_timer( $add = 0 ) {
+		static $time  = 0;
+		return $time += $add;
 	}
 }

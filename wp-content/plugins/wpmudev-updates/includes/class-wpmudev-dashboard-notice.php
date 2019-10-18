@@ -80,7 +80,7 @@ class WPMUDEV_Dashboard_Message {
 				999
 			);
 
-			// Used on all WPMU DEV Dashboard pages.
+			//Used on all WPMU DEV Dashboard pages.
 			add_filter(
 				'wpmudev-admin-notice',
 				array( $this, 'get_global_message' )
@@ -371,13 +371,36 @@ class WPMUDEV_Dashboard_Message {
 	 * @since  4.0.0
 	 */
 	public function setup_message() {
-		$msg = $this->choose_message();
+
+		//message details.
+		$msg 	= $this->choose_message();
+
 		if ( ! $msg ) { return; }
 
-		WDEV_Plugin_Ui::render_dev_notification(
-			WPMUDEV_Dashboard::$site->plugin_url . 'shared-ui/',
-			$msg
-		);
+		//flag to show notice
+		$show_notice = apply_filters( 'wpmudev_show_notice', true, $msg );
+		if ( ! $show_notice ) { return; }
+
+		//filter to select template
+		$sui_template = apply_filters( 'wpmudev_notice_template', true, $msg );
+
+		if( true === $sui_template ){
+			WDEV_Plugin_Ui::render_dev_notification(
+				WPMUDEV_Dashboard::$site->plugin_url . 'shared-ui/',
+				$msg
+			);
+		} else {
+			WPMUDEV_Dashboard::$ui->load_sui_template(
+				'wpmudev_default_notice',
+				array(
+					'module_url'=> WPMUDEV_Dashboard::$site->plugin_url . 'assets/js/',
+					'msg'		=> $msg,
+					'type'  	=> apply_filters( 'wpmudev_default_notice_type', 'info', $msg ), //use this filter to set notice types. Default is info.
+				),
+				true
+			);
+		}
+
 	}
 
 	/**

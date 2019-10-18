@@ -40,12 +40,12 @@ class Settings extends \Hammer\WP\Settings {
 	 * Receipts to sending notification
 	 * @var array
 	 */
-	public $receipts = array();
+	public $recipients = array();
 
 	/**
 	 * @var array
 	 */
-	public $receiptsNotification = array();
+	public $recipients_notification = array();
 
 	/**
 	 * Toggle notification on or off
@@ -67,7 +67,7 @@ class Settings extends \Hammer\WP\Settings {
 	/**
 	 * @var bool
 	 */
-	public $alwaysSendNotification = false;
+	public $always_send_notification = false;
 
 	/**
 	 * Maximum filesize to scan, only apply for content scan
@@ -99,9 +99,12 @@ class Settings extends \Hammer\WP\Settings {
 	/**
 	 * @var string
 	 */
-	public $time = '0:00';
+	public $time = '4:00';
 
-	public $lastReportSent;
+	/**
+	 * @var
+	 */
+	public $last_report_sent;
 
 	/**
 	 * @return array
@@ -145,28 +148,40 @@ Official WPMU DEV Superhero', wp_defender()->domain );
 		if ( ( is_admin() || is_network_admin() ) && current_user_can( 'manage_options' ) ) {
 			$user = wp_get_current_user();
 			if ( is_object( $user ) ) {
-				$this->receipts[]             = array(
+				$this->recipients[]              = array(
 					'first_name' => $user->display_name,
 					'email'      => $user->user_email
 				);
-				$this->receiptsNotification[] = array(
+				$this->recipients_notification[] = array(
 					'first_name' => $user->display_name,
 					'email'      => $user->user_email
 				);
 			}
 
 			//default is weekly
-			$this->day = date( 'l' );
-			$hour      = date( 'H', current_time( 'timestamp' ) );
-			if ( $hour == '00' ) {
-				$hour = 0;
-			} else {
-				$hour = ltrim( $hour, '0' );
-			}
-			$this->time = $hour . ':0';
+			$this->day  = strtolower( date( 'l' ) );
+			$this->time = '4:00';
 		}
-
 		parent::__construct( $id, $is_multi );
+		$this->notification = ! ! $this->notification;
+		$this->report       = ! ! $this->report;
+		$this->scan_content = ! ! $this->scan_content;
+		$this->scan_core    = ! ! $this->scan_core;
+		$this->scan_vuln    = ! ! $this->scan_vuln;
+
+		if ( ! is_array( $this->recipients ) ) {
+			$this->recipients = [];
+		}
+		$this->recipients = array_values( $this->recipients );
+		if ( ! is_array( $this->recipients_notification ) ) {
+			$this->recipients_notification = [];
+		}
+		$this->recipients_notification = array_values( $this->recipients_notification );
+
+		$times = Utils::instance()->getTimes();
+		if ( ! isset( $times[ $this->time ] ) ) {
+			$this->time = '4:00';
+		}
 	}
 
 	/**
@@ -283,25 +298,61 @@ Official WPMU DEV Superhero', wp_defender()->domain );
 					function () use ( $that ) {
 						//need to turn off notification or report off if no recipients
 						$keys = array(
-							'receipts'             => 'report',
-							'receiptsNotification' => 'notification'
+							'recipients'              => 'report',
+							'recipients_notification' => 'notification'
 						);
 						foreach ( $keys as $key => $attr ) {
-							if ( isset( $_POST[ $key ] ) ) {
-								$recipients = $_POST[ $key ];
-								foreach ( $recipients as &$recipient ) {
-									$recipient = array_map( 'wp_strip_all_tags', $recipient );
+							$recipients = $this->$key;
+							$recipients = ! is_array( $recipients ) ? [] : $recipients;
+							foreach ( $recipients as $k => &$recipient ) {
+								$recipient = array_map( 'sanitize_text_field', $recipient );
+								if ( ! filter_var( $recipient['email'], FILTER_VALIDATE_EMAIL ) ) {
+									unset( $recipients[ $k ] );
 								}
-								$this->$key = $recipients;
 							}
+							$this->$key = $recipients;
 							$this->$key = array_filter( $this->$key );
 							if ( count( $this->$key ) == 0 ) {
-								$this->$attr = 0;
+								$this->$attr = false;
 							}
 						}
+
 					}
 				)
 			)
 		);
+	}
+
+	/**
+	 * Define labels for settings key, we will use it for HUB
+	 *
+	 * @param null $key
+	 *
+	 * @return array|mixed
+	 */
+	public function labels( $key = null ) {
+		$labels = [
+			'scan_core'                => __( "Scan Types: WordPress Core", wp_defender()->domain ),
+			'scan_vuln'                => __( "Scan Types: Plugins & Themes", wp_defender()->domain ),
+			'scan_content'             => __( "Scan Types: Suspicious Code", wp_defender()->domain ),
+			'max_filesize'             => __( "Maximum included file size", wp_defender()->domain ),
+			'report'                   => __( "Report", wp_defender()->domain ),
+			'always_send'              => __( "Also send report when no issues are detected.", wp_defender()->domain ),
+			'recipients'               => __( "Recipients for report", wp_defender()->domain ),
+			'day'                      => __( "Day of the week", wp_defender()->domain ),
+			'time'                     => __( "Time of day", wp_defender()->domain ),
+			'frequency'                => __( "Frequency", wp_defender()->domain ),
+			'notification'             => __( "Notification", wp_defender()->domain ),
+			'always_send_notification' => __( "Also send notification when no issues are detected.", wp_defender()->domain ),
+			'recipients_notification'  => __( "Recipients for notification", wp_defender()->domain ),
+			'email_subject'            => __( "Email Subject", wp_defender()->domain ),
+			'email_all_ok'             => __( "When no issues are found", wp_defender()->domain ),
+			'email_has_issue'          => __( "When an issue is found", wp_defender()->domain )
+		];
+		if ( $key != null ) {
+			return isset( $labels[ $key ] ) ? $labels[ $key ] : null;
+		}
+
+		return $labels;
 	}
 }

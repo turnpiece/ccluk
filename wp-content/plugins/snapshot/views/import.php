@@ -180,7 +180,7 @@ class Snapshot_Process_Import_Archives {
 		if ( ! wp_verify_nonce( $_POST['snapshot-noonce-field'], 'snapshot-import' ) ) {
 			return;
 		}
-		
+
 		/* If no URL or directory is specified, check the local directory */
 		if ( empty( $_POST['snapshot-import-archive-remote-url'] ) ) {
 			$this->process_local_archives();

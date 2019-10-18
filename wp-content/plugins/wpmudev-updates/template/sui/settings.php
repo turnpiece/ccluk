@@ -9,7 +9,7 @@
  * - $member          = WPMUDEV_Dashboard::$api->get_profile();
  * - $urls            = $this->page_urls;
  * - $allowed_users   = WPMUDEV_Dashboard::$site->get_allowed_users();
- * - $auto_update     = WPMUDEV_Dashboard::$site->get_option( 'autoupdate_dashboard' );
+ * - $auto_update     = WPMUDEV_Dashboard::$site->get_option( 'autoupdate_dashboard' );	 	 	 	 	 		    	
  * - $membership_type = WPMUDEV_Dashboard::$api->get_membership_type( $single_id );
  * - $single_id (int. ID of the single-license project)
  *

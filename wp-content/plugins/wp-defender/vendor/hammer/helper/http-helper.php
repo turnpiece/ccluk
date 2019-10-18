@@ -12,8 +12,10 @@ class HTTP_Helper {
 	 *
 	 * @return null
 	 */
-	public static function retrieve_get( $key, $default = null ) {
-		return Array_Helper::getValue( $_GET, $key, $default );
+	public static function retrieveGet( $key, $default = null ) {
+		$value = Array_Helper::getValue( $_GET, $key, $default );
+
+		return $value;
 	}
 
 	/**
@@ -22,7 +24,7 @@ class HTTP_Helper {
 	 *
 	 * @return null
 	 */
-	public static function retrieve_post( $key, $default = null ) {
+	public static function retrievePost( $key, $default = null ) {
 		return Array_Helper::getValue( $_POST, $key, $default );
 	}
 }

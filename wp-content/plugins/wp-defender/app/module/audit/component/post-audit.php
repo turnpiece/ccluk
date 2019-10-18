@@ -28,7 +28,7 @@ class Post_Audit extends Event_Abstract {
 	 */
 
 	public function __construct() {
-		$this->add_action( 'post_updated', 'cache_post_updated', 10, 3 );
+		$this->addAction( 'post_updated', 'cache_post_updated', 10, 3 );
 	}
 
 	public function cache_post_updated( $post_id, $after, $before ) {
@@ -278,16 +278,20 @@ class Post_Audit extends Event_Abstract {
 				unset( $post_before['post_modified_gmt'] );
 				unset( $post_before['post_status'] );
 				if ( serialize( $post_before ) != serialize( $post_after ) ) {
+					$text = sprintf( esc_html__( '%s updated %s "%s"', wp_defender()->domain ), Utils::instance()->getDisplayName( get_current_user_id() ), $post_type->labels->singular_name, $post_after['post_title'] );
+
 					return array(
-						sprintf( esc_html__( "%s updated %s \"%s\"", wp_defender()->domain ), Utils::instance()->getDisplayName( get_current_user_id() ), $post_type->labels->singular_name, $post_after['post_title'] ),
+						$text,
 						$post_type->labels->singular_name
 					);
 				}
 			}
 		} else {
 			if ( is_null( $post_before ) ) {
+				$text = sprintf( esc_html__( '%s added new %s "%s"', wp_defender()->domain ), Utils::instance()->getDisplayName( get_current_user_id() ), $post_type->labels->singular_name, $post->post_title );
+
 				return array(
-					sprintf( esc_html__( "%s added new %s \"%s\"", wp_defender()->domain ), Utils::instance()->getDisplayName( get_current_user_id() ), $post_type->labels->singular_name, $post->post_title ),
+					$text,
 					$post_type->labels->singular_name
 				);
 			}

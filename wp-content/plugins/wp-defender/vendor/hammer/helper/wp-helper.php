@@ -19,11 +19,7 @@ class WP_Helper {
 	 * @return bool
 	 */
 	public static function is_network_activate( $slug ) {
-		if ( ! function_exists( 'is_plugin_active_for_network' ) ) {
-			require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
-		}
-
-		return is_plugin_active_for_network( $slug );
+		return is_multisite();
 	}
 
 	/**

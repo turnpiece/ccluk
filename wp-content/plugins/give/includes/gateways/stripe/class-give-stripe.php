@@ -17,6 +17,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! class_exists( 'Give_Stripe' ) ) {
 
+	/**
+	 * Class Give_Stripe
+	 */
 	class Give_Stripe {
 
 		/**
@@ -57,29 +60,121 @@ if ( ! class_exists( 'Give_Stripe' ) ) {
 		 */
 		public function includes() {
 
-			require_once GIVE_PLUGIN_DIR . 'vendor/autoload.php';
+			// Include files which are necessary to load in admin but not in context of `is_admin`.
+			$this->include_admin_files();
 
-			// Include admin files.
-			require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/admin/admin-actions.php';
-			require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/admin/admin-filters.php';
-			require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php';
-			require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/admin/class-give-stripe-logs.php';
+			// Load files which are necessary for front as well as admin end.
+			require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/give-stripe-helpers.php';
+
+			// Bailout, if any of the Stripe gateways are not active.
+			if ( ! give_stripe_is_any_payment_method_active() ) {
+
+				// Hardcoded recurring plugin basename to show notice even when recurring addon is deactivated.
+				$recurring_plugin_basename = 'give-recurring/give-recurring.php';
+				$recurring_file_path       = WP_CONTENT_DIR . '/plugins/' . $recurring_plugin_basename;
+
+				// If recurring donations add-on exists.
+				if ( file_exists( $recurring_file_path ) ) {
+
+					// If `get_plugin_data` fn not exists then include the file.
+					if ( ! function_exists( 'get_plugin_data' ) ) {
+						require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+					}
+
+					$recurring_plugin_data = get_plugin_data($recurring_file_path);
+
+					// Avoid fatal error for smooth update for customers.
+					if (
+						isset( $recurring_plugin_data['Version'] ) &&
+						version_compare( '1.9.3', $recurring_plugin_data['Version'], '>=' )
+					) {
+
+						// Load Stripe SDK.
+						give_stripe_load_stripe_sdk();
+
+						// Include frontend files.
+						$this->include_frontend_files();
+
+						add_action('admin_notices', function() {
+
+							// Register error notice.
+							Give()->notices->register_notice(
+								array(
+									'id'          => 'give-recurring-fatal-error',
+									'type'        => 'error',
+									'description' => sprintf(
+										__( '<strong>Action Needed:</strong> Please update the Recurring Donations add-on to version <strong>1.9.4+</strong> in order to be compatible with GiveWP <strong>2.5.5+</strong>. If you are experiencing any issues please rollback GiveWP to 2.5.4 or below using the <a href="%s" target="_blank">WP Rollback</a> plugin and <a href="%s" target="_blank">contact support</a> for prompt assistance.', 'give'),
+										'https://wordpress.org/plugins/wp-rollback/',
+										'https://givewp.com/support/'
+									),
+									'show'        => true,
+								)
+							);
+						});
+					}
+				}
+
+				return;
+			}
+
+			// Load Stripe SDK.
+			give_stripe_load_stripe_sdk();
 
 			// Include frontend files.
-			require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/give-stripe-helpers.php';
+			$this->include_frontend_files();
+		}
+
+		/**
+		 * This function is used to include admin files.
+		 *
+		 * @since  2.6.0
+		 * @access public
+		 *
+		 * @return void
+		 */
+		public function include_admin_files() {
+			require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/admin/admin-helpers.php';
+			require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/admin/admin-actions.php';
+			require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/admin/admin-filters.php';
+
+			// Load these files when accessed from admin.
+			if ( is_admin() ) {
+				require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php';
+				require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/admin/class-give-stripe-logs.php';
+			}
+		}
+
+		/**
+		 * This function will be used to load frontend files.
+		 *
+		 * @since  2.6.0
+		 * @access public
+		 *
+		 * @return void
+		 */
+		public function include_frontend_files() {
+
+			// General.
 			require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/actions.php';
+			require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/give-stripe-scripts.php';
+
+			// Classes.
 			require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/class-give-stripe-logger.php';
 			require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/class-give-stripe-invoice.php';
 			require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/class-give-stripe-customer.php';
 			require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/class-give-stripe-payment-intent.php';
 			require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/class-give-stripe-payment-method.php';
+			require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/class-give-stripe-checkout-session.php';
 			require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/class-give-stripe-gateway.php';
 			require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/class-give-stripe-webhooks.php';
+
+			// Payment Methods.
 			require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/payment-methods/class-give-stripe-card.php';
-			require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/give-stripe-scripts.php';
+			require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/payment-methods/class-give-stripe-checkout.php';
+
+			// Deprecations.
 			require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/deprecated/deprecated-functions.php';
 			require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/deprecated/deprecated-filters.php';
-
 		}
 
 		/**
@@ -94,8 +189,15 @@ if ( ! class_exists( 'Give_Stripe' ) ) {
 		 */
 		public function register_gateway( $gateways ) {
 
+			// Stripe - On page credit card.
 			$gateways['stripe'] = array(
 				'admin_label'    => __( 'Stripe - Credit Card', 'give' ),
+				'checkout_label' => __( 'Credit Card', 'give' ),
+			);
+
+			// Stripe - Off page credit card (also known as Checkout).
+			$gateways['stripe_checkout'] = array(
+				'admin_label'    => __( 'Stripe - Checkout', 'give' ),
 				'checkout_label' => __( 'Credit Card', 'give' ),
 			);
 

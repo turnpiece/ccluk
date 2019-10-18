@@ -7,6 +7,7 @@
 namespace WP_Defender\Module\IP_Lockout\Model;
 
 use Hammer\Base\DB_Model;
+use Hammer\Helper\Array_Helper;
 use WP_Defender\Behavior\Utils;
 use WP_Defender\Module\IP_Lockout\Component\Login_Protection_Api;
 
@@ -24,7 +25,18 @@ class Log_Model extends DB_Model {
 	public $tried;
 
 	/**
+	 * A helper attribute for storing status text to output to frontend
+	 * This wont be save into db
+	 * @var
+	 */
+	public $ip_status;
+	public $is_mine;
+	public $statusText;
+	public $actionText;
+
+	/**
 	 * @return string
+	 * @deprecated 2.2
 	 */
 	public function get_ip() {
 		return esc_html( $this->ip );
@@ -32,6 +44,7 @@ class Log_Model extends DB_Model {
 
 	/**
 	 * @return string
+	 * @deprecated 2.2
 	 */
 	public function get_log_text( $format = false ) {
 		if ( ! $format ) {
@@ -52,13 +65,28 @@ class Log_Model extends DB_Model {
 	}
 
 	/**
+	 * Get current status of this ip due to whitelist/blacklist data
+	 * @return string
+	 */
+	public function blackOrWhite() {
+		$settings = Settings::instance();
+		if ( in_array( $this->ip, $settings->getIpWhitelist() ) ) {
+			return 'whitelist';
+		} elseif ( in_array( $this->ip, $settings->getIpBlacklist() ) ) {
+			return 'blacklist';
+		}
+
+		return 'na';
+	}
+
+	/**
 	 * @return string
 	 */
 	public function get_date() {
 		if ( strtotime( '-24 hours' ) > $this->date ) {
 			return Utils::instance()->formatDateTime( date( 'Y-m-d H:i:s', $this->date ) );
 		} else {
-			return Login_Protection_Api::time_since( $this->date );
+			return Login_Protection_Api::time_since( $this->date ) . ' ' . __( "ago", wp_defender()->domain );
 		}
 	}
 
@@ -79,6 +107,122 @@ class Log_Model extends DB_Model {
 		}
 
 		return null;
+	}
+
+	/**
+	 * Return summary data
+	 * @return array
+	 */
+	public static function getSummary() {
+		$lockouts = Log_Model::findAll( array(
+			'type' => array(
+				Log_Model::LOCKOUT_404,
+				Log_Model::AUTH_LOCK
+			),
+			'date' => array(
+				'compare' => '>=',
+				'value'   => strtotime( '-30 days', current_time( 'timestamp' ) )
+			)
+		), 'id', 'DESC' );
+
+		if ( count( $lockouts ) == 0 ) {
+			$data = array(
+				'lastLockout'          => __( "Never", wp_defender()->domain ),
+				'lockoutToday'         => 0,
+				'lockoutThisMonth'     => 0,
+				'loginLockoutToday'    => 0,
+				'loginLockoutThisWeek' => 0,
+				'lockout404Today'      => 0,
+				'lockout404ThisWeek'   => 0,
+			);
+
+			return $data;
+		}
+
+		//init params
+		$lastLockout          = '';
+		$lockoutToday         = 0;
+		$lockoutThisMonth     = count( $lockouts );
+		$loginLockoutToday    = 0;
+		$loginLockoutThisWeek = 0;
+		$lockout404ThisWeek   = 0;
+		$lockout404Today      = 0;
+		//time
+		$todayMidnight = strtotime( '-24 hours', current_time( 'timestamp' ) );
+		$firstThisWeek = strtotime( '-7 days', current_time( 'timestamp' ) );
+		foreach ( $lockouts as $k => $log ) {
+			//the other as DESC, so first will be last lockout
+			if ( $k == 0 ) {
+				$lastLockout = Utils::instance()->formatDateTime( date( 'Y-m-d H:i:s', $log->date ) );
+			}
+
+			if ( $log->date > $todayMidnight ) {
+				$lockoutToday ++;
+				if ( $log->type == self::LOCKOUT_404 ) {
+					$lockout404Today += 1;
+				} else {
+					$loginLockoutToday += 1;
+				}
+			}
+
+			if ( $log->type == Log_Model::AUTH_LOCK && $log->date > $firstThisWeek ) {
+				$loginLockoutThisWeek ++;
+			} elseif ( $log->type == Log_Model::LOCKOUT_404 && $log->date > $firstThisWeek ) {
+				$lockout404ThisWeek ++;
+			}
+		}
+
+		$data = array(
+			'lastLockout'          => $lastLockout,
+			'lockoutToday'         => $lockoutToday,
+			'lockoutThisMonth'     => $lockoutThisMonth,
+			'loginLockoutToday'    => $loginLockoutToday,
+			'loginLockoutThisWeek' => $loginLockoutThisWeek,
+			'lockout404ThisWeek'   => $lockout404ThisWeek,
+			'lockout404Today'      => $lockout404Today
+		);
+
+		return $data;
+	}
+
+	/**
+	 * Pulling the logs data, use in Logs tab
+	 * $filters will have those params
+	 *  -date_from
+	 *  -date_to
+	 * == Defaults is 7 days and always require
+	 *  -type: optional
+	 *  -ip: optional
+	 *
+	 * @param array $filters
+	 * @param int $paged
+	 * @param string $orderBy
+	 * @param string $order
+	 * @param int $pageSize
+	 *
+	 * @return Log_Model[]
+	 */
+	public static function queryLogs( $filters = array(), $paged = 1, $orderBy = 'id', $order = 'DESC', $pageSize = 20 ) {
+		$params = [
+			'date' => [
+				'compare' => 'between',
+				'from'    => Array_Helper::getValue( $filters, 'dateFrom', strtotime( '-7 days midnight' ) ),
+				'to'      => Array_Helper::getValue( $filters, 'dateTo', strtotime( 'tomorrow' ) )
+			],
+		];
+
+		if ( ( $filter = Array_Helper::getValue( $filters, 'type', null ) ) != null ) {
+			$params['type'] = $filter;
+		}
+		if ( ( $ip = Array_Helper::getValue( $filters, 'ip', null ) ) != null ) {
+			$params['ip'] = $ip;
+		}
+
+		$offset = ( $paged - 1 ) * $pageSize;
+		$models = Log_Model::findAll( $params, $orderBy, $order, "$offset,$pageSize" );
+		$count  = Log_Model::count( $params );
+
+		return [ $models, $count ];
 	}
 
 	/**
@@ -103,5 +247,12 @@ class Log_Model extends DB_Model {
 				)
 			)
 		);
+	}
+
+	/**
+	 * @return array
+	 */
+	public function notSaveFields() {
+		return array( 'statusText', 'actionText', 'ip_status', 'is_mine' );
 	}
 }

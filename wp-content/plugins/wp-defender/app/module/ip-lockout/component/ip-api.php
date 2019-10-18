@@ -156,9 +156,16 @@ class IP_API extends Component {
 		return false;
 	}
 
+	/**
+	 * @return array|bool
+	 * @throws \MaxMind\Db\Reader\InvalidDatabaseException
+	 */
 	public static function getCurrentCountry() {
 		$settings = Settings::instance();
 		if ( ! $settings->isGeoDBDownloaded() ) {
+			return false;
+		}
+		if ( php_sapi_name() === 'cli' ) {
 			return false;
 		}
 		$geoIP   = new GeoIp( $settings->geoIP_db );

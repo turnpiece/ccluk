@@ -11,10 +11,10 @@ class Settings extends \Hammer\WP\Settings {
 	private static $_instance;
 
 	public $translate;
-	public $usage_tracking = 0;
+	public $usage_tracking = false;
 	public $uninstall_data = 'remove';
 	public $uninstall_settings = 'reset';
-	public $high_contrast_mode = 0;
+	public $high_contrast_mode = false;
 
 	public function behaviors() {
 		return array(
@@ -35,6 +35,8 @@ class Settings extends \Hammer\WP\Settings {
 		$this->translate = $site_language;
 
 		parent::__construct( $id, $is_multi );
+		$this->high_contrast_mode = ! ! $this->high_contrast_mode;
+		$this->usage_tracking     = ! ! $this->usage_tracking;
 	}
 
 	/**
@@ -47,5 +49,21 @@ class Settings extends \Hammer\WP\Settings {
 		}
 
 		return self::$_instance;
+	}
+
+	public function labels( $key = null ) {
+		$labels = [
+			'translate'          => __( 'Translations', wp_defender()->domain ),
+			'usage_tracking'     => __( "Usage Tracking", wp_defender()->domain ),
+			'uninstall_data'     => __( 'Uninstall data', wp_defender()->domain ),
+			'uninstall_settings' => __( "Uninstall Settings", wp_defender()->domain ),
+			'high_contrast_mode' => __( "High Contrast Mode", wp_defender()->domain ),
+		];
+
+		if ( $key != null ) {
+			return isset( $labels[ $key ] ) ? $labels[ $key ] : null;
+		}
+
+		return $labels;
 	}
 }

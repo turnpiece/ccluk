@@ -41,7 +41,7 @@ class Eval_Detector extends Detector_Abstract {
 
 			return array(
 				'type'   => 'eval',
-				'text'   => 'The function eval called at line ' . $this->token['line'] . ' column ' . $this->token['column'] . ', which should be avoided whenever possible.',
+				'text'   => sprintf( __( 'The function eval called at line %d column %d, which should be avoided whenever possible.', wp_defender()->domain ), $this->token['line'], $this->token['column'] ),
 				'offset' => $this->getCodeOffset(),
 				'length' => strlen( $this->getCode() ),
 				'line'   => $this->token['line'],

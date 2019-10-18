@@ -42,7 +42,7 @@ class Xss_Detector extends Detector_Abstract {
 					}
 					$results = array(
 						'type'   => 'xxs',
-						'text'   => 'The function ' . $this->token['content'] . ' line ' . $this->token['line'] . ' column ' . $this->token['column'] . ' execute using unescape user inputs',
+						'text'   => sprintf( __( 'The function %s line %d column %d execute using unescape user inputs', wp_defender()->domain ), $this->token['content'], $this->token['line'], $this->token['column'] ),
 						'offset' => $this->getCodeOffset(),
 						'length' => strlen( $this->getCode() ),
 						'line'   => $this->token['line'],

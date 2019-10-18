@@ -1,195 +1,328 @@
-=== Google Analytics ===
-Author: WPMUDEV
-Lead developer: Mariusz Misiek
-Contributors: Ivan Shaovchev, Andrey Shipilov
+Plugin Name: Beehive Pro
+Author: Mariusz Misiek, Joel James
+
+Change Log:
+
+= 3.2.0 (2019-06-27) =
+**📦 New:**
+
+- Upgraded UI to SUI.
+- Renamed to Beehive Analytics.
+- Added new stats data to widgets.
+- Added Members & User Role Editor integrations.
+- Added role-based report restriction.
+- Added unit tests.
+- Added Onboarding setup.
+
+**👌 Improvements:**
+
+- Upgraded Google Analytics API.
+- Upgraded Google API Client library.
+- Removed obsolete custom table.
+
+= 3.1.7.2 (2018-10-22) =
+**🐛 Bug Fixes:**
+
+- Fixed undefined index notice issue.
+
+= 3.1.7.1 (2018-05-24) =
+**🐛 Bug Fixes:**
+
+- Fixed backward compatibility
+
+= 3.1.7 (2018-05-23) =
+**📦 New:**
+
+- Added ability to force IP Anonymization on sub-sites tracking.
+- Added "ga_load_tracking" filter to be able to disabled tracking on demand.
+- Added "gaplus_track" JS function to be able to turn on tracking when it has been disabled.
+- Added privacy guide support.
+
+**👌 Improvements:**
+
+- Improved accessibility.
+- Removed deprecated Google authorization code.
+- Removed old tracking method.
+- Removed domain mapping option.
+- Other small improvements.
+
+ = 3.1.6 (2017-09-04) =
+**🐛 Bug Fixes:**
+
+- Use async loading for Google visualization API.
+- Only draw visitors table if we have actual data.
 
 
-== Changelog ==
+= 3.1.5.6 (2017-07-06) =
+**🐛 Bug Fixes:**
 
-= 3.1.7.2 =
-* Fixed undefined index notice issue
+- Fixed Google Analytics API compatibility issue.
 
-= 3.1.7.1 =
-* Fixed backward compatibility
+= 3.1.5.5 (2016-12-16) =
+**📦 New:**
 
-= 3.1.7 =
-* Added ability to force IP Anonymization on sub-sites tracking
-* Added "ga_load_tracking" filter to be able to disabled tracking on demand
-* Added "gaplus_track" JS function to be able to turn on tracking when it has been disabled
-* Added privacy guide support
-* Improved accessibility
-* Removed deprecated Google authorization code
-* Removed old tracking method
-* Removed domain mapping option
-* Other small improvements
+- Added IP Anonymization option.
 
- = 3.1.6 =
+**👌 Improvements:**
 
-* Fix: use async loading for Google visualization API
+- Improved dashboard stats precission.
+- Improved Google API error handling.
 
-* Fix: only draw visitors table if we have actual data
+**🐛 Bug Fixes:**
 
+- Fixed tracking code issue when using "both" method on site.
 
-= 3.1.5.6 =
-* Fixed Google Analytics API compatibility issue
+= 3.1.5.1 (2015-09-22) =
+**🐛 Bug Fixes:**
 
-= 3.1.5.5 =
-* Added IP Anonymization option
-* Improved dashboard stats precission
-* Improved Google API error handling
-* Fixed tracking code issue when using "both" method on site
+- Fixed Google App compatibility issues.
+- Fixed widget notice.
 
-= 3.1.5.1 =
-* Fixed Google App compatibility issues
-* Fixed widget notice
+= 3.1.5 (2015-06-15) =
+**📦 New:**
 
-= 3.1.5 =
-* Added "Most popular posts(beta)" widget
+- Added "Most popular posts(beta)" widget.
 
-= 3.1.4.1 =
-* Fixed problem with profiles list not being visible after logging in on fresh GA+ install
+= 3.1.4.1 (2015-04-10) =
+**🐛 Bug Fixes:**
 
-= 3.1.4 =
-* Added compatibility with new Google login method. IMPORTANT: reauthentication will be needed so dashboard stats can continue to work in future
+- Fixed problem with profiles list not being visible after logging in on fresh GA+ install.
+
+= 3.1.4 (2015-04-09) =
+**📦 New:**
+
+- Added compatibility with new Google login method. IMPORTANT: reauthentication will be needed so dashboard stats can continue to work in future.
 
 = 3.1.3.1 =
-* Fixed compatibility with WPMUDEV Domain Mapping plugin
+**🐛 Bug Fixes:**
 
-= 3.1.3 =
-* Added support for display advertising in universal analytics
-* Improved error handling
-* Improved multisite page path filtering
-* Decreased number of requests to improve speed
+- Fixed compatibility with WPMUDEV Domain Mapping plugin.
 
-= 3.1.2 =
-* Improved stats accuracy
-* Decreased cache time for logged in users
-* Fixed post stats widget not displaying for custom capability type
-* Fixed loading image
-* Other Improvements
+= 3.1.3 (2015-01-09) =
+**📦 New:**
 
-= 3.1.1.2 =
-* Added ability for site admins to overwrite minimum capability to view stats
-* Improved support for domain mapping
-* Fixed stats widget not displaying for proper user level
-* Fixed displaying statistics page when not connected to Google
-* Fixed admin tracking for universal analytics
-* Removed admin page tracking for individual tracking codes when enabled in network settings
+- Added support for display advertising in universal analytics.
 
-= 3.1.1.1 =
-* Fixed include error
+**👌 Improvements:**
 
-= 3.1.1 =
-* Added ability to set minimal role or capability to view statistics
-* Added automatic detection of use of subdomains in multisite
-* Fixed missing translation strings
-* Fixed possible problem with domain mapping
-* Fixed possible problems for single site
-* Fixed incorrect links on network statistics page
+- Improved error handling.
+- Improved multisite page path filtering.
+- Decreased number of requests to improve speed.
 
-= 3.1.0.1 =
-* Fixed missing translation strings
-* Small improvements to error reporting
+= 3.1.2 (2014-05-06) =
+**👌 Improvements:**
 
-= 3.1 =
-* Added dedicated page with full statistics
-* Simplified dashboard widget with statistics
-* Decreased risk of timeouts when requesting statistics
-* Removed possibility of adding unnecessary code to header
-* improved UI
+- Improved stats accuracy.
+- Decreased cache time for logged in users.
+- Other Improvements.
 
-= 3 =
-* Added ability to display network, site, post and page statistics inside WordPress dashboard
-* Added Google login button to automatically detect correct Google Analytics settings
-* Added support for "Universal Analytics"
-* Added better integration with Pro Sites
-* Added single site compatibility
-* Improved UI
-* Removed option to track page time (depreciated by Google Analytics)
+**🐛 Bug Fixes:**
 
-= 2.1.1 =
-* Added option to support display advertising 
-* Improved and fixed option pages
+- Fixed post stats widget not displaying for custom capability type.
+- Fixed loading image.
 
-= 2.1 =
-* Now compatible with https websites
-* Mapped domain tracking is now supported
+= 3.1.1.2 (2014-02-28) =
+**📦 New:**
 
-= 2.0.4 =
-* Fixed: Multisite Analytics not tracking network
+- Added ability for site admins to overwrite minimum capability to view stats.
 
-= 2.0.3 =
-* Fixed notice;
+**👌 Improvements:**
 
-= 2.0.2 =
-* Fixed problem with CSS;
+- Improved support for domain mapping.
 
-= 2.0.1 =
-* Fixed conflict with some JS;
-* Fixed conflict with some themes;
-* Changed save TableID;
-* Added more information text;
-* Fixed broken links;
+**🐛 Bug Fixes:**
 
-= 2.0.0 =
-* Added Google Analytics Data Export with next features:
-* display reports on pages;
-* create\edit your reports(feeds);
-* there are several default reports;
-* show\hide reports;
+- Fixed stats widget not displaying for proper user level.
+- Fixed displaying statistics page when not connected to Google.
+- Fixed admin tracking for universal analytics.
+- Removed admin page tracking for individual tracking codes when enabled in network settings.
 
-= 1.2.1 =
-* Added status text when saving settings;  
+= 3.1.1.1 (2014-02-13) =
+**🐛 Bug Fixes:**
 
-= 1.2.0 =
-* Add "Page load times" tracking
-* Remove backward compatibility for 1.1.0; 
+- Fixed include error.
 
-= 1.1.9 =
-* Fix bug with "www" in domain constant - credits Scott;
+= 3.1.1 (2014-02-13) =
+**📦 New:**
 
-= 1.1.8 =
-* Fix bug with site tracking code - credits Shawn @ 12pointdesign.com; 
-* Admin menus architecture changed
-* Current version is not backward compatible with WP 3.0
+- Added ability to set minimal role or capability to view statistics.
+- Added automatic detection of use of subdomains in multisite.
 
-= 1.1.7 =
-* Fix bug with localization; 
+**🐛 Bug Fixes:**
 
-= 1.1.6 =
-* Fix bug with additional tracking code - credits Nick Daugherty @ skyrocket.me
+- Fixed missing translation strings.
+- Fixed possible problem with domain mapping.
+- Fixed possible problems for single site.
+- Fixed incorrect links on network statistics page.
 
-= 1.1.5 =
-* WordPress 3.1 menu regression bug fix
+= 3.1.0.1 (2014-01-29) =
+**👌 Improvements:**
 
-= 1.1.4 =
-* Update notification notice added
+- Small improvements to error reporting.
 
-= 1.1.3 =
-* Internal architecture changes
-* Compatibility update for WordPress 3.1;
+**🐛 Bug Fixes:**
+
+- Fixed missing translation strings.
+
+= 3.1 (2014-01-27) =
+**📦 New:**
+
+- Added dedicated page with full statistics.
+
+**👌 Improvements:**
+
+- Simplified dashboard widget with statistics.
+- Decreased risk of timeouts when requesting statistics.
+- Removed possibility of adding unnecessary code to header.
+- Improved UI.
+
+= 3.0 (2014-01-14) =
+**📦 New:**
+
+- Added ability to display network, site, post and page statistics inside WordPress dashboard.
+- Added Google login button to automatically detect correct Google Analytics settings.
+- Added support for "Universal Analytics".
+- Added better integration with Pro Sites.
+- Added single site compatibility.
+
+**👌 Improvements:**
+
+- Improved UI.
+- Removed option to track page time (depreciated by Google Analytics).
+
+= 2.1.1 (2013-10-22) =
+**📦 New:**
+
+- Added option to support display advertising.
+
+**👌 Improvements:**
+
+- Improved and fixed option pages.
+
+= 2.1 (2013-09-06) =
+**📦 New:**
+
+- Now compatible with https websites.
+- Mapped domain tracking is now supported.
+
+= 2.0.4 (2012-05-19) =
+**🐛 Bug Fixes:**
+
+- Multisite Analytics not tracking network.
+
+= 2.0.3 (2011-12-22) =
+**🐛 Bug Fixes:**
+
+- Fixed notice.
+
+= 2.0.2 (2011-12-21) =
+**🐛 Bug Fixes:**
+
+- Fixed problem with CSS.
+
+= 2.0.1 (2011-12-21) =
+**👌 Improvements:**
+
+- Changed save TableID.
+- Added more information text.
+
+**🐛 Bug Fixes:**
+
+- Fixed conflict with some JS.
+- Fixed conflict with some themes.
+- Fixed broken links.
+
+= 2.0.0 (2011-12-04) =
+**👌 Improvements:**
+
+- Added Google Analytics Data Export with next features.
+- Display reports on pages.
+- Create\edit your reports(feeds).
+- There are several default reports.
+- Show\hide reports.
+
+= 1.2.1 (2011-05-31) =
+**👌 Improvements:**
+
+- Added status text when saving settings.
+
+= 1.2.0 (2011-05-06) =
+**👌 Improvements:**
+
+- Add "Page load times" tracking.
+- Remove backward compatibility for 1.1.0.
+
+= 1.1.9 (2011-03-09) =
+**🐛 Bug Fixes:**
+
+- Fix bug with "www" in domain constant - credits Scott.
+
+= 1.1.8 (2011-03-08) =
+**🐛 Bug Fixes:**
+
+- Fix bug with site tracking code - credits Shawn @ 12pointdesign.com.
+- Admin menus architecture changed.
+- Current version is not backward compatible with WP 3.0.
+
+= 1.1.7 (2011-03-01) =
+**🐛 Bug Fixes:**
+
+- Fix bug with localization.
+
+= 1.1.6 (2011-02-18) =
+**🐛 Bug Fixes:**
+
+- Fix bug with additional tracking code - credits Nick Daugherty @ skyrocket.me.
+
+= 1.1.5 (2011-01-11) =
+**🐛 Bug Fixes:**
+
+- WordPress 3.1 menu regression bug fix.
+
+= 1.1.4 (2011-01-11) =
+**📦 New:**
+
+- Update notification notice added.
+
+= 1.1.3 (2011-01-11) =
+**👌 Improvements:**
+
+- Internal architecture changes.
+- Compatibility update for WordPress 3.1.
 
 = 1.1.2 =
-* Added localization;
-* Plugin architecture changed;
-* Added function which handles migration of data from deprecated DB options;
-* Code improvements;
+**📦 New:**
+
+- Added localization.
+
+**👌 Improvements:**
+
+- Plugin architecture changed.
+- Added function which handles migration of data from deprecated DB options.
+- Code improvements.
 
 = 1.1.1 =
-* Bug fixes
+**🐛 Bug Fixes:**
+
+- Small bug fixes.
 
 = 1.1.0 =
-* Plugin updated with the new asynchronous Google Analytics tracking code;
-* Cross-Domain Tracking;
-* Admin Pages Tracking.
-* Code improvements;
+**📦 New:**
 
-= 1.0.1 =
-* WP 3.0 Multi-Site compatibility;
+- Plugin updated with the new asynchronous Google Analytics tracking code.
+- Cross-Domain Tracking.
+- Admin Pages Tracking.
+- Code improvements.
 
-= 1.0.0 =
-* WPMU 2.7 Compatible
+= 1.0.1 (2010-06-17) =
+**👌 Improvements:**
+
+- WP 3.0 Multi-Site compatibility.
+
+= 1.0.0 (2009-04-01) =
+**📦 New:**
+
+- WPMU 2.7 Compatible.
 
 
-
-87274-1541874300-au
+87274-1571425175-au

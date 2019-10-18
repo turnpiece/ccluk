@@ -7,12 +7,14 @@ namespace WP_Defender\Module\Hardener\Component;
 
 use Hammer\Helper\HTTP_Helper;
 use Hammer\Helper\WP_Helper;
+use WP_Defender\Behavior\Endpoint;
 use WP_Defender\Behavior\Utils;
+use WP_Defender\Module\Hardener;
 use WP_Defender\Module\Hardener\Model\Settings;
 use WP_Defender\Module\Hardener\Rule;
 
 class Security_Key extends Rule {
-	static $slug = 'security_key';
+	static $slug = 'security-key';
 	static $service;
 
 	function getDescription() {
@@ -34,8 +36,42 @@ class Security_Key extends Rule {
 		) );
 	}
 
-	function getSubDescription() {
-		return sprintf( __( "Your current security keys are %s days old. Time to update them!", wp_defender()->domain ), $this->check() );
+	private function calculateDaysApplied() {
+		$settings = Settings::instance();
+		$time     = $settings->getDValues( Security_Key_Service::CACHE_KEY );
+		$interval = $settings->getDValues( 'securityReminderDuration' );
+		if ( ! $interval ) {
+			$interval = Security_Key_Service::DEFAULT_DAYS;
+		}
+		if ( $time ) {
+			$daysAgo = ( time() - $time ) / ( 60 * 60 * 24 );
+		} else {
+			$daysAgo = __( "unknown", wp_defender()->domain );
+		}
+
+		$daysAgo = round( $daysAgo );
+		if ( $daysAgo == 0 ) {
+			$daysAgo = 1;
+		}
+
+		return $daysAgo;
+	}
+
+	/**
+	 * This will return the short summary why this rule show up as issue
+	 *
+	 * @return string
+	 */
+	function getErrorReason() {
+		return sprintf( __( "Your current security keys are %s days old. Time to update them!", wp_defender()->domain ), $this->calculateDaysApplied() );
+	}
+
+	/**
+	 * This will return a short summary to show why this rule works
+	 * @return mixed
+	 */
+	function getSuccessReason() {
+		return sprintf( __( "Your security keys are less than %s days old, nice work.", wp_defender()->domain ), $this->calculateDaysApplied() );
 	}
 
 	/**
@@ -50,8 +86,22 @@ class Security_Key extends Rule {
 	}
 
 	function addHooks() {
-		$this->add_action( 'processingHardener' . self::$slug, 'process' );
-		$this->add_ajax_action( 'updateSecurityReminder', 'updateSecurityReminder' );
+		$this->addAction( 'processingHardener' . self::$slug, 'process' );
+		$namespace = 'wp-defender/v1';
+		$namespace .= '/tweaks';
+		$routes    = [
+			$namespace . '/updateSecurityReminder' => 'updateSecurityReminder',
+		];
+		$this->registerEndpoints( $routes, Hardener::getClassName() );
+	}
+
+	public function getMiscData() {
+		$settings = Settings::instance();
+		$reminder = $settings->getDValues( 'securityReminderDuration' );
+
+		return [
+			'reminder' => $reminder
+		];
 	}
 
 	public function updateSecurityReminder() {
@@ -59,12 +109,12 @@ class Security_Key extends Rule {
 			return;
 		}
 
-		$reminder = HTTP_Helper::retrieve_post( 'remind_date', null );
+		$reminder = HTTP_Helper::retrievePost( 'remind_date', null );
+
 		if ( $reminder ) {
 			$settings = Settings::instance();
 			$settings->setDValues( 'securityReminderDuration', $reminder );
 			$settings->setDValues( 'securityReminderDate', strtotime( '+' . $reminder, current_time( 'timestamp' ) ) );
-			die;
 		}
 	}
 
@@ -73,9 +123,6 @@ class Security_Key extends Rule {
 	}
 
 	function process() {
-		if ( ! $this->verifyNonce() ) {
-			return;
-		}
 		$ret = $this->getService()->process();
 		if ( is_wp_error( $ret ) ) {
 			wp_send_json_error( array(

@@ -1,8 +1,9 @@
 'use strict';
 
-var logger = require('./logger.js');
-var User = require('./user.js');
-var started = false,
+const m = require('mithril');
+const logger = require('./logger.js');
+const User = require('./user.js');
+let started = false,
 	running = false,
 	done = false,
 	userCount = 0,
@@ -21,7 +22,7 @@ function controller() {
 }
 
 function askToStart() {
-	var sure = confirm( "Are you sure you want to start synchronising all of your users? This can take a while if you have many users, please don't close your browser window." );
+	const sure = confirm( "Are you sure you want to start synchronising all of your users? This can take a while if you have many users, please don't close your browser window." );
 	if( sure ) {
 		start();
 	}
@@ -51,53 +52,35 @@ function finish() {
 }
 
 function fetchTotalUserCount() {
-	return new Promise(function(resolve, reject) {
-			m.request({ 
-			method: "GET", 
-			url: ajaxurl, 
-			data: { 
-				action : 'mcs_wizard', 
-				mcs_action: 'get_user_count' 
-			} 
-		}).then(function(data) {
-			logger.log("Found " + data + " users.");
-			userCount = data;
-			resolve();
-		}, function(error) {
-			logger.log( "Error fetching user count. Error: " + error );
-			reject();
-		});
+	return m.request({
+		method: "GET",
+		url: `${ajaxurl}?action=mcs_wizard&mcs_action=get_user_count`,
+	}).then(data => {
+		logger.log("Found " + data + " users.");
+		userCount = data;
+	}).catch(err => {
+		logger.log( "Error fetching user count. Error: " + err.code );
 	});
 }
 
 function prepareBatch() {
-	return new Promise((resolve, reject) => {
-			m.request({
-			method: "GET",
-			url: ajaxurl,
-			data: {
-				action: 'mcs_wizard',
-				mcs_action: 'get_users',
-				offset: usersProcessed,
-				limit: 100
-			},
-			type: User
-		}).then(function(data) {
-			userBatch = data;
-			logger.log("Fetched " + userBatch.length + " users.");
 
-			// finish if we didn't get any users
-			if( userBatch.length == 0 ) {
-				finish();
-			}
+	const url = ajaxurl + `?action=mcs_wizard&mcs_action=get_users&offset=${usersProcessed}&limit=100`;
+	return m.request({
+		method: "GET",
+		url: url,
+		type: User
+	}).then(data => {
+		userBatch = data;
+		logger.log("Fetched " + userBatch.length + " users.");
 
-			// otherwise, fill batch and move on.
-			resolve();
-		}, function( error ) {
-			logger.log( "Error fetching users. Error: " + error );
-			reject();
-		});
-	})
+		// finish if we didn't get any users
+		if( userBatch.length === 0 ) {
+			finish();
+		}
+	}).catch(err  => {
+		logger.log( "Error fetching users. Error: " + err.code );
+	});
 }
 
 function subscribeFromBatch() {
@@ -116,24 +99,17 @@ function subscribeFromBatch() {
 	// Add line to log
 	logger.log("Handling <strong> #" + user.id + " " + user.username + " &lt;" + user.email + "&gt;</strong>" );
 
-	// Perform subscribe request
-	var data = {
-		action: "mcs_wizard",
-		mcs_action: "handle_user",
-		user_id: user.id
-	};
-
 	m.request({
 		method: "GET",
-		data: data,
-		url: ajaxurl
-	}).then(function( response ) {
-		usersProcessed++;
+		url: `${ajaxurl}?action=mcs_wizard&mcs_action=handle_user&user_id=${user.id}`,
+	}).then(response => {
 		response.success ? logger.success( response.message ) : logger.error( response.message );
-	}, function(e) {
+	}).catch(err => {
+		logger.error("Request error: " + err.code);
+	}).finally(() => {
 		usersProcessed++;
-		logger.error(e);
-	}).then(updateProgress).then(subscribeFromBatch);
+	}).then(updateProgress)
+	  .then(subscribeFromBatch);
 }
 
 // calculate new progress & update progress bar.

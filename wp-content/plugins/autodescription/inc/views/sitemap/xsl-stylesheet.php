@@ -1,10 +1,15 @@
 <?php
 /**
  * @package The_SEO_Framework\Views\Sitemap
+ * @subpackage The_SEO_Framework\Sitemap
  */
+
 namespace The_SEO_Framework;
 
 defined( 'THE_SEO_FRAMEWORK_PRESENT' ) and $_this = \the_seo_framework_class() and $this instanceof $_this or die;
+
+//* Adds site icon tags to the sitemap stylesheet.
+\add_action( 'the_seo_framework_xsl_head', 'wp_site_icon', 99 );
 
 \add_action( 'the_seo_framework_xsl_head', __NAMESPACE__ . '\\_print_xsl_global_variables', 0 );
 /**
@@ -13,7 +18,7 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) and $_this = \the_seo_framework_class() a
  * @since 3.1.0
  * @access private
  * @TODO move this to a dedicated sitemap "module" (a system that loads everything sitemap related).
- * @param \The_SEO_Framework\Load $tsf
+ * @param \The_SEO_Framework\Load $tsf the_seo_framework() object.
  */
 function _print_xsl_global_variables( $tsf ) {
 
@@ -25,7 +30,7 @@ function _print_xsl_global_variables( $tsf ) {
 
 	$colors = $tsf->get_sitemap_colors();
 
-	//= Styles colors.
+	// phpcs:disable, WordPress.Security.EscapeOutput.OutputNotEscaped -- s_color_hex() escapes.
 	printf(
 		'<xsl:variable name="colorMain" select="\'%s\'"/>',
 		'#' . $tsf->s_color_hex(
@@ -36,7 +41,7 @@ function _print_xsl_global_variables( $tsf ) {
 			 */
 			\apply_filters( 'the_seo_framework_sitemap_color_main', $colors['main'] )
 		)
-	); // xss ok.
+	);
 	printf(
 		'<xsl:variable name="colorAccent" select="\'%s\'"/>',
 		'#' . $tsf->s_color_hex(
@@ -47,7 +52,7 @@ function _print_xsl_global_variables( $tsf ) {
 			 */
 			\apply_filters( 'the_seo_framework_sitemap_color_accent', $colors['accent'] )
 		)
-	); // xss ok.
+	);
 	printf(
 		'<xsl:variable name="relativeFontColor" select="\'%s\'"/>',
 		'#' . $tsf->s_color_hex(
@@ -60,7 +65,8 @@ function _print_xsl_global_variables( $tsf ) {
 				$tsf->get_relative_fontcolor( $colors['main'] )
 			)
 		)
-	); // xss ok.
+	);
+	// phpcs:enable, WordPress.Security.EscapeOutput.OutputNotEscaped
 }
 
 \add_action( 'the_seo_framework_xsl_head', __NAMESPACE__ . '\\_print_xsl_title' );
@@ -68,18 +74,20 @@ function _print_xsl_global_variables( $tsf ) {
  * Prints XSL title.
  *
  * @since 3.1.0
+ * @since 4.0.0 Now uses a consistent titling scheme.
  * @access private
  * @TODO move this to a dedicated sitemap "module" (a system that loads everything sitemap related).
- * @param \The_SEO_Framework\Load $tsf
+ * @param \The_SEO_Framework\Load $tsf the_seo_framework() object.
  */
 function _print_xsl_title( $tsf ) {
-	$title = \__( 'XML Sitemap', 'autodescription' );
-	//? Trick the system into thinking (your CPU is a rock that's tricked doing this) it's not a real page, by feeding a signed int.
-	$tsf->use_title_branding( [ 'id' => -1 ] ) and $tsf->merge_title_branding( $title, [ 'id' => -1 ] );
+
+	$title    = \__( 'XML Sitemap', 'autodescription' );
+	$addition = $tsf->get_blogname();
+	$sep      = $tsf->get_title_separator();
 
 	printf(
 		'<title>%s</title>',
-		\esc_html( \ent2ncr( $title ) )
+		\esc_html( \ent2ncr( "$title $sep $addition" ) )
 	);
 }
 
@@ -90,7 +98,7 @@ function _print_xsl_title( $tsf ) {
  * @since 3.1.0
  * @access private
  * @TODO move this to a dedicated sitemap "module" (a system that loads everything sitemap related).
- * @param \The_SEO_Framework\Load $tsf
+ * @param \The_SEO_Framework\Load $tsf the_seo_framework() object.
  */
 function _print_xsl_styles( $tsf ) {
 
@@ -163,11 +171,16 @@ function _print_xsl_styles( $tsf ) {
 		border-bottom: none;
 	}
 STYLES;
-	/**
-	 * @since 3.1.0
-	 * @param string $styles The sitemap XHTML styles.
-	 */
-	printf( '<style style="text/css">%s</style>', \apply_filters( 'the_seo_framework_sitemap_styles', $styles ) ); // xss ok.
+	// phpcs:disable, WordPress.Security.EscapeOutput
+	printf(
+		'<style style="text/css">%s</style>',
+		/**
+		 * @since 3.1.0
+		 * @param string $styles The sitemap XHTML styles. Must be escaped.
+		 */
+		\apply_filters( 'the_seo_framework_sitemap_styles', $styles )
+	);
+	// phpcs:enable, WordPress.Security.EscapeOutput
 }
 
 \add_action( 'the_seo_framework_xsl_description', __NAMESPACE__ . '\\_print_xsl_description' );
@@ -177,20 +190,22 @@ STYLES;
  * @since 3.1.0
  * @access private
  * @TODO move this to a dedicated sitemap "module" (a system that loads everything sitemap related).
- * @param \The_SEO_Framework\Load $tsf
+ * @param \The_SEO_Framework\Load $tsf the_seo_framework() object.
  */
 function _print_xsl_description( $tsf ) {
 
 	$logo = '';
 	if ( $tsf->get_option( 'sitemap_logo' ) ) {
 
-		$_src = $tsf->can_use_logo() ? \wp_get_attachment_image_src( \get_theme_mod( 'custom_logo' ), [ 29, 29 ] ) : [];
+		$id = \get_theme_mod( 'custom_logo' ) ?: 0;
+
+		$_src = $id ? \wp_get_attachment_image_src( $id, [ 29, 29 ] ) : [];
 		/**
 		 * @since 2.8.0
-		 * @param array $_src The logo: {
+		 * @param array $_src An empty array, or the logo details: {
 		 *    0 => The image URL,
-		 *    1 => width in px,
-		 *    2 => height in px,
+		 *    1 => The width in px,
+		 *    2 => The height in px,
 		 * }
 		 */
 		$_src = (array) \apply_filters( 'the_seo_framework_sitemap_logo', $_src );
@@ -203,15 +218,15 @@ function _print_xsl_description( $tsf ) {
 	echo \wp_kses(
 		sprintf(
 			'<a href="%s"><h1>%s%s</h1></a>',
-			\esc_url( \ent2ncr( \get_home_url() ), [ 'http', 'https' ] ),
+			\esc_url( \ent2ncr( \get_home_url() ), [ 'https', 'http' ] ),
 			$logo,
 			\esc_html( \ent2ncr(
 				$tsf->get_blogname() . ' &mdash; ' . \__( 'XML Sitemap', 'autodescription' )
 			) )
 		),
 		[
-			'h1' => true,
-			'a' => [
+			'h1'  => true,
+			'a'   => [
 				'href' => true,
 			],
 			'img' => [
@@ -253,9 +268,9 @@ function _print_xsl_description( $tsf ) {
 			),
 			[
 				'a' => [
-					'href' => true,
+					'href'   => true,
 					'target' => true,
-					'rel' => true,
+					'rel'    => true,
 				],
 			]
 		)
@@ -269,7 +284,7 @@ function _print_xsl_description( $tsf ) {
  * @since 3.1.0
  * @access private
  * @TODO move this to a dedicated sitemap "module" (a system that loads everything sitemap related).
- * @param \The_SEO_Framework\Load $tsf
+ * @param \The_SEO_Framework\Load $tsf the_seo_framework() object.
  */
 function _print_xsl_content( $tsf ) {
 
@@ -307,7 +322,8 @@ function _print_xsl_content( $tsf ) {
 
 	$vars = implode( $vars );
 
-	$content = <<<CONTENT
+	// phpcs:disable, WordPress.Security.EscapeOutput, output is escaped.
+	echo <<<CONTENT
 <table>
 	<tr>
 		{$url['th']}
@@ -324,8 +340,7 @@ function _print_xsl_content( $tsf ) {
 	</xsl:for-each>
 </table>
 CONTENT;
-
-	echo $content; // xss OK.
+	// phpcs:enable, WordPress.Security.EscapeOutput
 }
 
 \add_action( 'the_seo_framework_xsl_footer', __NAMESPACE__ . '\\_print_xsl_footer' );
@@ -335,7 +350,7 @@ CONTENT;
  * @since 3.1.0
  * @access private
  * @TODO move this to a dedicated sitemap "module" (a system that loads everything sitemap related).
- * @param \The_SEO_Framework\Load $tsf
+ * @param \The_SEO_Framework\Load $tsf the_seo_framework() object.
  */
 function _print_xsl_footer( $tsf ) {
 
@@ -370,33 +385,37 @@ function _print_xsl_footer( $tsf ) {
  *
  * @since 3.1.4
  *
- * @param array $meta_tags Site Icon meta elements.
+ * @param array $tags Site Icon meta elements.
  * @return array The converted meta tags.
  */
 function _convert_site_icon_meta_tags( $tags ) {
 
 	foreach ( $tags as &$tag ) {
 		$tag = \force_balance_tags( $tag );
-		$tag = \wp_kses( $tag, [
-			'link' => [
-				'charset'  => [],
-				'rel'      => [],
-				'sizes'    => [],
-				'href'     => [],
-				'hreflang' => [],
-				'media'    => [],
-				'rev'      => [],
-				'target'   => [],
-				'type'     => [],
+		$tag = \wp_kses(
+			$tag,
+			[
+				'link' => [
+					'charset'  => [],
+					'rel'      => [],
+					'sizes'    => [],
+					'href'     => [],
+					'hreflang' => [],
+					'media'    => [],
+					'rev'      => [],
+					'target'   => [],
+					'type'     => [],
+				],
+				'meta' => [
+					'content'    => [],
+					'property'   => [],
+					'http-equiv' => [],
+					'name'       => [],
+					'scheme'     => [],
+				],
 			],
-			'meta' => [
-				'content'    => [],
-				'property'   => [],
-				'http-equiv' => [],
-				'name'       => [],
-				'scheme'     => [],
-			],
-		], [] );
+			[]
+		);
 	}
 
 	return $tags;

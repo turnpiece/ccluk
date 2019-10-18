@@ -662,12 +662,15 @@ function ai1wm_table_prefix( $blog_id = null ) {
  * @return array
  */
 function ai1wm_content_filters( $filters = array() ) {
-	return array_merge( $filters, array(
-		AI1WM_BACKUPS_NAME,
-		AI1WM_PACKAGE_NAME,
-		AI1WM_MULTISITE_NAME,
-		AI1WM_DATABASE_NAME,
-	) );
+	return array_merge(
+		$filters,
+		array(
+			AI1WM_BACKUPS_NAME,
+			AI1WM_PACKAGE_NAME,
+			AI1WM_MULTISITE_NAME,
+			AI1WM_DATABASE_NAME,
+		)
+	);
 }
 
 /**
@@ -710,6 +713,13 @@ function ai1wm_plugin_filters( $filters = array() ) {
 		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . dirname( AI1WMIE_PLUGIN_BASENAME );
 	} else {
 		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . 'all-in-one-wp-migration-digitalocean-extension';
+	}
+
+	// Direct Extension
+	if ( defined( 'AI1WMXE_PLUGIN_BASENAME' ) ) {
+		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . dirname( AI1WMXE_PLUGIN_BASENAME );
+	} else {
+		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . 'all-in-one-wp-migration-direct-extension';
 	}
 
 	// Dropbox Extension
@@ -849,6 +859,11 @@ function ai1wm_active_servmask_plugins( $plugins = array() ) {
 	// DigitalOcean Spaces Extension
 	if ( defined( 'AI1WMIE_PLUGIN_BASENAME' ) ) {
 		$plugins[] = AI1WMIE_PLUGIN_BASENAME;
+	}
+
+	// Direct Extension
+	if ( defined( 'AI1WMXE_PLUGIN_BASENAME' ) ) {
+		$plugins[] = AI1WMXE_PLUGIN_BASENAME;
 	}
 
 	// Dropbox Extension
@@ -1088,6 +1103,82 @@ function ai1wm_deactivate_jetpack_modules( $modules ) {
 }
 
 /**
+ * Deactivate sitewide Revolution Slider
+ *
+ * @param  string  $basename Plugin basename
+ * @return boolean
+ */
+function ai1wm_deactivate_sitewide_revolution_slider( $basename ) {
+	global $wp_version;
+
+	// Do not deactivate Revolution Slider (WordPress >= 5.2)
+	if ( version_compare( $wp_version, '5.2', '>=' ) ) {
+		return false;
+	}
+
+	// Deactivate Revolution Slider
+	if ( ( $plugins = get_plugins() ) ) {
+		if ( isset( $plugins[ $basename ]['Version'] ) && ( $version = $plugins[ $basename ]['Version'] ) ) {
+			if ( version_compare( PHP_VERSION, '7.3', '>=' ) && version_compare( $version, '5.4.8.3', '<' ) ) {
+				return ai1wm_deactivate_sitewide_plugins( array( $basename ) );
+			}
+
+			if ( version_compare( PHP_VERSION, '7.2', '>=' ) && version_compare( $version, '5.4.6', '<' ) ) {
+				return ai1wm_deactivate_sitewide_plugins( array( $basename ) );
+			}
+
+			if ( version_compare( PHP_VERSION, '7.1', '>=' ) && version_compare( $version, '5.4.1', '<' ) ) {
+				return ai1wm_deactivate_sitewide_plugins( array( $basename ) );
+			}
+
+			if ( version_compare( PHP_VERSION, '7.0', '>=' ) && version_compare( $version, '4.6.5', '<' ) ) {
+				return ai1wm_deactivate_sitewide_plugins( array( $basename ) );
+			}
+		}
+	}
+
+	return false;
+}
+
+/**
+ * Deactivate Revolution Slider
+ *
+ * @param  string  $basename Plugin basename
+ * @return boolean
+ */
+function ai1wm_deactivate_revolution_slider( $basename ) {
+	global $wp_version;
+
+	// Do not deactivate Revolution Slider (WordPress >= 5.2)
+	if ( version_compare( $wp_version, '5.2', '>=' ) ) {
+		return false;
+	}
+
+	// Deactivate Revolution Slider
+	if ( ( $plugins = get_plugins() ) ) {
+		if ( isset( $plugins[ $basename ]['Version'] ) && ( $version = $plugins[ $basename ]['Version'] ) ) {
+			if ( version_compare( PHP_VERSION, '7.3', '>=' ) && version_compare( $version, '5.4.8.3', '<' ) ) {
+				return ai1wm_deactivate_plugins( array( $basename ) );
+			}
+
+			if ( version_compare( PHP_VERSION, '7.2', '>=' ) && version_compare( $version, '5.4.6', '<' ) ) {
+				return ai1wm_deactivate_plugins( array( $basename ) );
+			}
+
+			if ( version_compare( PHP_VERSION, '7.1', '>=' ) && version_compare( $version, '5.4.1', '<' ) ) {
+				return ai1wm_deactivate_plugins( array( $basename ) );
+			}
+
+			if ( version_compare( PHP_VERSION, '7.0', '>=' ) && version_compare( $version, '4.6.5', '<' ) ) {
+				return ai1wm_deactivate_plugins( array( $basename ) );
+			}
+		}
+	}
+
+	return false;
+}
+
+/**
  * Discover plugin basename
  *
  * @param  string $basename Plugin basename
@@ -1166,6 +1257,17 @@ function ai1wm_cache_flush() {
 	// Remove WP filters
 	remove_all_filters( 'sanitize_option_siteurl' );
 	remove_all_filters( 'sanitize_option_home' );
+}
+
+/**
+ * Flush Elementor cache
+ *
+ * @return void
+ */
+function ai1wm_elementor_cache_flush() {
+	delete_post_meta_by_key( '_elementor_css' );
+	delete_option( '_elementor_global_css' );
+	delete_option( 'elementor-custom-breakpoints-files' );
 }
 
 /**
@@ -1420,6 +1522,11 @@ function ai1wm_setup_environment() {
 		@mb_internal_encoding( 'ISO-8859-1' );
 	}
 
+	// Clean (erase) the output buffer and turn off output buffering
+	if ( @ob_get_length() ) {
+		@ob_end_clean();
+	}
+
 	// Set error handler
 	@set_error_handler( 'Ai1wm_Handler::error' );
 
@@ -1446,4 +1553,51 @@ function ai1wm_get_timezone_string() {
 	}
 
 	return 'UTC';
+}
+
+/**
+ * Get WordPress filter hooks
+ *
+ * @param  string $tag The name of the filter hook
+ * @return array
+ */
+function ai1wm_get_filters( $tag ) {
+	global $wp_filter;
+
+	// Get WordPress filter hooks
+	$filters = array();
+	if ( isset( $wp_filter[ $tag ] ) ) {
+		if ( ( $filters = $wp_filter[ $tag ] ) ) {
+			// WordPress 4.7 introduces new class for working with filters/actions called WP_Hook
+			// which adds another level of abstraction and we need to address it.
+			if ( isset( $filters->callbacks ) ) {
+				$filters = $filters->callbacks;
+			}
+		}
+
+		ksort( $filters );
+	}
+
+	return $filters;
+}
+
+/**
+ * i18n friendly version of basename()
+ *
+ * @param  string $path   File path
+ * @param  string $suffix If the filename ends in suffix this will also be cut off
+ * @return string
+ */
+function ai1wm_basename( $path, $suffix = '' ) {
+	return urldecode( basename( str_replace( array( '%2F', '%5C' ), '/', urlencode( $path ) ), $suffix ) );
+}
+
+/**
+ * i18n friendly version of dirname()
+ *
+ * @param  string $path File path
+ * @return string
+ */
+function ai1wm_dirname( $path ) {
+	return urldecode( dirname( str_replace( array( '%2F', '%5C' ), '/', urlencode( $path ) ) ) );
 }

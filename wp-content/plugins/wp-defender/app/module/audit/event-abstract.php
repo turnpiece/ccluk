@@ -7,6 +7,7 @@ namespace WP_Defender\Module\Audit;
 
 use WP_Defender\Behavior\Utils;
 use WP_Defender\Module\Audit\Component\Audit_API;
+use WP_Defender\Module\Audit\Model\Settings;
 
 abstract class Event_Abstract extends \Hammer\WP\Component {
 	const LOG_LEVEL_DEBUG = 0,
@@ -251,6 +252,7 @@ abstract class Event_Abstract extends \Hammer\WP\Component {
 				$hook_name,
 				$params
 			) );
+
 			if ( is_array( $ret ) && count( $ret ) == 2 ) {
 				list( $text, $context ) = $ret;
 			} elseif ( is_array( $ret ) && count( $ret ) == 3 ) {
@@ -335,8 +337,10 @@ abstract class Event_Abstract extends \Hammer\WP\Component {
 			'context'     => $context,
 			'ip'          => Utils::instance()->getUserIp(),
 			'msg'         => esc_html( $text ),
-			'blog_id'     => get_current_blog_id()
+			'blog_id'     => get_current_blog_id(),
+			'ttl'         => strtotime( '+ ' . Settings::instance()->storage_days, time() )
 		);
+
 		//WD_Audit_API::submit_to_api( $post );
 		Audit_API::queueEventsData( $post );
 	}

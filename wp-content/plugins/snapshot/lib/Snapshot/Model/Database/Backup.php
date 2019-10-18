@@ -181,7 +181,7 @@ if ( ! class_exists( 'Snapshot_Model_Database_Backup' ) ) {
 			$total_rows = 0;
 			// Use of esc_sql() instead of $wpdb->prepare() because of backticks in query.
 			$table_structure = $wpdb->get_results( esc_sql( "DESCRIBE `{$table}`" ) );
-			
+
 			if ( ! $table_structure ) {
 				$this->error( __( 'Error getting table details', SNAPSHOT_I18N_DOMAIN ) . ": $table" );
 
@@ -192,7 +192,7 @@ if ( ! class_exists( 'Snapshot_Model_Database_Backup' ) ) {
 				// eg. when a plugin creates a new column in a table and the older backup doesn't contain that column.
 				$insert_into_columns = '(';
 				foreach ( $table_structure as $table_columns ) {
-					$insert_into_columns .= $table_columns->Field . ', ';
+					$insert_into_columns .= $this->backquote( $table_columns->Field ) . ', ';
 				}
 				$insert_into_columns = trim( $insert_into_columns, ', ' );
 				$insert_into_columns .= ')';
@@ -493,7 +493,7 @@ if ( ! class_exists( 'Snapshot_Model_Database_Backup' ) ) {
 						$wpdb->query( 'SET foreign_key_checks = 0' );
 
 						$ret_db = $wpdb->query( $sql ); // phpcs:ignore
-						
+
 						if ( ( false === $ret_db ) && ( (bool) preg_match( '/^create table/i', $sql ) ) ) {
 							$last_error = $wpdb->last_error;
 							// Failed on create statement, this could be down to FK checks.
@@ -514,7 +514,7 @@ if ( ! class_exists( 'Snapshot_Model_Database_Backup' ) ) {
 									if ( false !== $ret_db ) {
 										$log[] = 'Table creation for the ' . $source_table_name . ' table succeeded after dropping the original table first';
 									}
-									
+
 								}
 							}
 

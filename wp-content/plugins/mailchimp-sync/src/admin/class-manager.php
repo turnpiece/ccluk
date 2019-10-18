@@ -36,6 +36,11 @@ class Manager {
 	 */
 	private $flash;
 
+    /**
+     * @var string
+     */
+	private $plugin_slug;
+
 	/**
 	 * Constructor
 	 *
@@ -58,6 +63,7 @@ class Manager {
 		add_action( 'admin_init', array( $this, 'init' ) );
 		add_filter( 'mc4wp_admin_menu_items', array( $this, 'add_menu_items' ) );
 		add_action( 'mc4wp_admin_process_user_sync_queue', array( $this, 'process_queue' ) );
+		add_action( 'mc4wp_admin_empty_user_sync_queue', array($this, 'empty_queue'));
 		add_action( 'admin_footer_text', array( $this, 'footer_text' ), 11 );
 	}
 
@@ -89,6 +95,13 @@ class Manager {
 	 */
 	public function show_notices() {
 
+        // show info
+        foreach( $this->flash->get('info') as $message ) {
+            echo '<div class="notice notice-info">';
+            echo '<p>' . $message . '</p>';
+            echo '</div>';
+        }
+
 		// show warnings
 		foreach( $this->flash->get('warning') as $message ) {
 			echo '<div class="notice notice-warning">';
@@ -113,7 +126,7 @@ class Manager {
 	 */
 	public function add_menu_items( $items ) {
 		$item = array(
-			'title' => __( 'MailChimp User Sync', 'mailchimp-sync' ),
+			'title' => __( 'Mailchimp User Sync', 'mailchimp-sync' ),
 			'text' => __( 'User Sync', 'mailchimp-sync' ),
 			'slug' => 'sync',
 			'callback' => array( $this, 'show_settings_page' )
@@ -146,7 +159,7 @@ class Manager {
 			return $links;
 		}
 
-		$links[] = sprintf( __( 'An add-on for %s', 'mailchimp-sync' ), '<a href="https://mc4wp.com/#utm_source=wp-plugin&utm_medium=mailchimp-user-sync&utm_campaign=plugins-page">MailChimp for WordPress</a>' );
+		$links[] = sprintf( __( 'An add-on for %s', 'mailchimp-sync' ), '<a href="https://mc4wp.com/#utm_source=wp-plugin&utm_medium=mailchimp-user-sync&utm_campaign=plugins-page">Mailchimp for WordPress</a>' );
 		return $links;
 	}
 
@@ -175,12 +188,13 @@ class Manager {
 	 */
 	public function show_settings_page() {
 
-		$lists = $this->get_mailchimp_lists();
+        $mailchimp = new MC4WP_MailChimp();
+        $lists = $mailchimp->get_lists();
 		$queue = $this->queue;
 
-		if( $this->options['list'] !== '' && isset( $lists[ $this->options['list'] ] ) ) {
-			$selected_list = $lists[ $this->options['list'] ];
-			$available_mailchimp_fields = array_diff_key( $selected_list->merge_vars, array( 'EMAIL' ) );
+		if( $this->options['list'] !== '' ) {
+			$selected_list = $mailchimp->get_list($this->options['list']);
+			$available_mailchimp_fields = $mailchimp->get_list_merge_fields($this->options['list']);
 		}
 
 		$this->options['field_mappers'] = array_values( $this->options['field_mappers'] );
@@ -258,19 +272,6 @@ class Manager {
 	}
 
 	/**
-	 * Helper function to retrieve MailChimp lists through MailChimp for WordPress
-	 *
-	 * Will try v3.0+ first, then fallback to older versions.
-	 *
-	 * @return array
-	 */
-	protected function get_mailchimp_lists() {
-		$mailchimp = new MC4WP_MailChimp();
-		return $mailchimp->get_lists();
-
-	}
-
-	/**
 	 * Ask for a plugin review in the WP Admin footer, if this is one of the plugin pages.
 	 *
 	 * @param $text
@@ -280,7 +281,7 @@ class Manager {
 	public function footer_text( $text ) {
 
 		if( ( isset( $_GET['page'] ) && strpos( $_GET['page'], 'mailchimp-for-wp-sync' ) === 0 ) ) {
-			$text = sprintf( 'If you enjoy using <strong>MailChimp Sync</strong>, please leave us a <a href="%s" target="_blank">★★★★★</a> rating. A <strong style="text-decoration: underline;">huge</strong> thank you in advance!', 'https://wordpress.org/support/view/plugin-reviews/mailchimp-sync?rate=5#postform' );
+			$text = sprintf( 'If you enjoy using <strong>Mailchimp Sync</strong>, please leave us a <a href="%s" target="_blank">★★★★★</a> rating. A <strong style="text-decoration: underline;">huge</strong> thank you in advance!', 'https://wordpress.org/support/view/plugin-reviews/mailchimp-sync?rate=5#postform' );
 		}
 
 		return $text;
@@ -319,5 +320,11 @@ class Manager {
 		do_action( 'mailchimp_user_sync_run' );	
 	}
 
+	public function empty_queue()
+    {
+        $this->queue->reset();
+        $this->queue->save();
+        $this->flash->add('info', __( 'Queue successfully emptied.', 'mailchimp-sync'));
+    }
 
 }

@@ -43,7 +43,7 @@ class UserSubscriberAPIv3 implements UserSubscriber {
     $subscriber->status = $double_optin ? 'pending' : 'subscribed';
 
     /**
-    * Filter data that is sent to MailChimp
+    * Filter data that is sent to Mailchimp
     *
     * @param MC4WP_MailChimp_Subscriber $subscriber
     * @param WP_User $user
@@ -57,7 +57,7 @@ class UserSubscriberAPIv3 implements UserSubscriber {
   * @param int $user_id
   * @param array $args 
   *
-  * @return bool Whether user was already subscribed to the MailChimp list.
+  * @return bool Whether user was already subscribed to the Mailchimp list.
   *
   * @throws \Exception
   */
@@ -146,7 +146,7 @@ class UserSubscriberAPIv3 implements UserSubscriber {
   * @param $user_id
   * @param array $args
   *
-  * @return bool Whether user was already subscribed to the MailChimp list.
+  * @return bool Whether user was already subscribed to the Mailchimp list.
   *
   * @throws \Exception
   */
@@ -162,7 +162,7 @@ class UserSubscriberAPIv3 implements UserSubscriber {
   * @param null $send_notification       (unused)
   * @param null $delete_member           (unused)
   *
-  * @return bool Whether user was subscribed to the MailChimp list.
+  * @return bool Whether user was subscribed to the Mailchimp list.
   */
   public function unsubscribe( $user_id, $email_address, $subscriber_uid = null, $send_goodbye = null, $send_notification = null, $delete_member = null ) {
 

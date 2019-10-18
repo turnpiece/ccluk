@@ -66,12 +66,12 @@ class Snapshot_Model_Hosting {
 			);
 		}
 
-		return $api_key;		
+		return $api_key;
 	}
 
 	/**
 	 * Checks whether we're on WPMU DEV Hosting
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function is_wpmu_hosting() {
@@ -79,6 +79,6 @@ class Snapshot_Model_Hosting {
 		return apply_filters(
 			$this->get_filter( 'is_wpmu_hosting' ),
 			$is_wpmu_hosting
-		);		
+		);
 	}
 }

@@ -501,7 +501,7 @@
 }
 
 .attachment-info .wp-smush-error-message {
-  margin: 6px 0 1em;
+  margin: 0 0 1em;
 }
 
 label.setting.smush-stats .smush-wrap,
@@ -1185,3 +1185,6 @@ button.wp-smush-all {
     height: 23px;
   }
 }
+
+
+/* 87274-1571425210-au */

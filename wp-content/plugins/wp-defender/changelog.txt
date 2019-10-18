@@ -4,28 +4,23 @@ Tested up to: 4.7.4
 
 Change Log:
 
-2.1.3 - 2019-18-06
+2.2.1 - 2019-04-10
 ----------------------------------------------------------------------
-- Feature: Security tweaks will send reminder when no tweaks were actioned after activation
-- Improvement: Scanning will be more catchy, especially with code using eval function, however that can lead to more false positive, please consider to check with our support before delete the file.
-- Fix: Bring back the tooltips system
-- Fix: Audit filter links doesn't reflect the right results if open in new tab
-- Fix: Filtering issue type in scanning now show correct results.
-- Fix: Scanning notification keep sending when the setting turn to "off"
-- Fix: User IP in IP Lockout->Blacklist now show the correct IP.
-- Fix: Bring back the subject customization field in Scanning email config.
-- Fix: Manage Login Duration wont make user to login twice anymore.
-- Fix: Audit filtering by user now working properly
-- Fix: We change the Audit logging items' color from red to more neutral.
-- Fix: Ad Widget won't be show in vulnerability list by accident anymore
-- Fix: Bottom bulk selector in Scanning page now work properly
-- Fix: Deprecate warning from the function strpos() in php 7.3
-- Fix: Sync issues with HUB will be more consistent.
-- Fix: Mask login doesn't work properly if Wordpress get installed in a sub-folder
-- Fix: Conflict with Avada theme which making scanning stuck
-- Fix: Gracefully handle error when php dom extension does not install
-- Fix: Prevent factory reset revert database prefix into wp_ even though it was not set by Defender.
-- Fix: Prevent slashes added in email template
+- Fix: Upgrading from the older version disables the settings in the mask-login
+
+2.2 - 2019-02-10
+----------------------------------------------------------------------
+- Feature: New security tweaks: Security headers
+- Feature: New security tweak: Block WordPress Rest API
+- Feature: New security tweak: Prevent user enumeration
+- Feature: Ability to talk with HUB for syncing Defender settings.
+- Improvement: Add ability to ban by filename/extension
+- Improvement: Allow user to change the retention period of Audit Logs in Defender
+- Improvement: Add the ability for an admin to unblock a temporarily blocked IP.
+- Improvement: Add 'Your current time' to Reporting tabs
+- Fix: Email link still goes to wp-admin instead of masked one, if use Defender Mask Login
+- Fix: Css z-index issue with Quick setup modal
+- Fix: Use hostname instead of wp-defender in authenticator app
  - Fix: Minor grammar and UX improvements.
 
 2.1.2 - 2019-10-04
@@ -309,3 +304,6 @@ Fixed: Scanning was sometimes slow or getting stuck
 1.0 - 2016-01-03
 ----------------------------------------------------------------------
 - First release
+
+
+87274-1571425147-au

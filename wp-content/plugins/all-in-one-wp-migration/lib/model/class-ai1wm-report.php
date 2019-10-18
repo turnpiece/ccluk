@@ -38,33 +38,37 @@ class Ai1wm_Report {
 	 *
 	 * @return array
 	 */
-	public function add( $email, $message, $terms ) {
-		$errors = array();
-
-		// Submit report to ServMask
-		if ( ! filter_var( $email, FILTER_VALIDATE_EMAIL ) ) {
-			$errors[] = __( 'Your email is not valid.', AI1WM_PLUGIN_NAME );
-		} elseif ( empty( $message ) ) {
-			$errors[] = __( 'Please enter comments in the text area.', AI1WM_PLUGIN_NAME );
-		} elseif ( empty( $terms ) ) {
-			$errors[] = __( 'Please accept report term conditions.', AI1WM_PLUGIN_NAME );
-		} else {
-			$response = wp_remote_post(
-				AI1WM_REPORT_URL,
-				array(
-					'timeout' => 15,
-					'body'    => array(
-						'email'   => $email,
-						'message' => $message,
-					),
-				)
-			);
-
-			if ( is_wp_error( $response ) ) {
-				$errors[] = sprintf( __( 'Something went wrong: %s', AI1WM_PLUGIN_NAME ), $response->get_error_message() );
-			}
+	public static function add( $email, $message, $terms ) {
+		// Validate email
+		if ( filter_var( $email, FILTER_VALIDATE_EMAIL ) === false ) {
+			throw new Ai1wm_Report_Exception( __( 'Your email is not valid.', AI1WM_PLUGIN_NAME ) );
 		}
 
-		return $errors;
+		// Validate message
+		if ( empty( $message ) ) {
+			throw new Ai1wm_Report_Exception( __( 'Please enter comments in the text area.', AI1WM_PLUGIN_NAME ) );
+		}
+
+		// Validate terms
+		if ( empty( $terms ) ) {
+			throw new Ai1wm_Report_Exception( __( 'Please accept report term conditions.', AI1WM_PLUGIN_NAME ) );
+		}
+
+		$response = wp_remote_post(
+			AI1WM_REPORT_URL,
+			array(
+				'timeout' => 15,
+				'body'    => array(
+					'email'   => $email,
+					'message' => $message,
+				),
+			)
+		);
+
+		if ( is_wp_error( $response ) ) {
+			throw new Ai1wm_Report_Exception( sprintf( __( 'Something went wrong: %s', AI1WM_PLUGIN_NAME ), $response->get_error_message() ) );
+		}
+
+		return $response;
 	}
 }

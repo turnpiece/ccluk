@@ -8,6 +8,7 @@ namespace WP_Defender\Module;
 use Hammer\Base\Module;
 use WP_Defender\Module\Audit\Controller\Main;
 use WP_Defender\Module\Audit\Controller\Main_Free;
+use WP_Defender\Module\Audit\Controller\Rest;
 
 class Audit extends Module {
 	public function __construct() {
@@ -18,6 +19,7 @@ class Audit extends Module {
 			new Main_Free();
 		} else {
 			new Main();
+			new Rest();
 		}
 	}
 }

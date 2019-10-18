@@ -11,6 +11,16 @@ use WP_Defender\Module\Scan\Component\Theme_Upgrader_Skin;
 class Vuln_Result extends \Hammer\Base\Behavior {
 	private $hasFix;
 
+	public function getInfo() {
+		return [
+			'id'         => $this->getOwner()->id,
+			'type'       => 'vuln',
+			'file_name'  => $this->getTitle(),
+			'short_desc' => $this->getIssueSummary(),
+			'detail'     => $this->getIssueDetail()
+		];
+	}
+
 	/**
 	 * @return string
 	 */
@@ -188,7 +198,7 @@ class Vuln_Result extends \Hammer\Base\Behavior {
                         </div>
 						<?php if ( $this->hasFix ): ?>
                             <div class="mline">
-								<?php _e( "There’s a newer version available that fixes this issue. We recommend updating to the latest release.", wp_defender()->domain ) ?>
+								<?php _e( "There's a newer version available that fixes this issue. We recommend updating to the latest release.", wp_defender()->domain ) ?>
                             </div>
                             <div class="clear"></div>
                             <div class="well">

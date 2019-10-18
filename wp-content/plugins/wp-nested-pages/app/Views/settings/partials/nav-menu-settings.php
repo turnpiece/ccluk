@@ -6,8 +6,7 @@ $c = 1;
 foreach ( $this->admin_menu_settings->roles as $role ) :
 	$menu = $this->admin_menu_settings->np_menu_original;
 	$menu = ( isset($menu[$role['name']]) ) ? $menu[$role['name']] : $menu['default'];
-	$role_capabilities = $this->user_repo->getSingleRole($role['name']);
-	$role_capabilities = $role_capabilities['capabilities'];
+	$role_capabilities = $this->user_repo->getSingleRoleCapabilities($role['name']);
 	$hidden = $this->settings->adminMenuHidden($role['name']);
 	if ( !$hidden ) $hidden = [];
 	?>
@@ -44,7 +43,7 @@ foreach ( $this->admin_menu_settings->roles as $role ) :
 					?>
 					<button class="button button-small details-button" data-np-remove-separator-button><?php _e('Remove', 'wp-nested-pages'); ?></button>
 					<?php else : ?>
-					<input type="text" name="nestedpages_admin[nav_menu_options][<?php echo $role['name']; ?>][<?php echo $item_data['id']; ?>][label]" value="<?php if ( $item_data['custom_label'] ) echo $item_data['custom_label']; ?>" placeholder="<?php echo esc_html($item_data['original_text']); ?>" class="menu-title-field" />
+					<input type="text" name="nestedpages_admin[nav_menu_options][<?php echo $role['name']; ?>][<?php echo $item_data['id']; ?>][label]" value="<?php if ( $item_data['custom_label'] ) echo $item_data['custom_label']; ?>" placeholder="<?php echo esc_html__($item_data['original_text']); ?>" class="menu-title-field" />
 					<button class="button button-small details-button" data-np-extra-options-button><?php _e('Details', 'wp-nested-pages');?></button>
 					<?php endif; ?>
 				</p>

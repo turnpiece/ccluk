@@ -1,64 +1,64 @@
-=== MailChimp User Sync ===
+=== MC4WP: Mailchimp User Sync ===
 Contributors: Ibericode, DvanKooten, hchouhan, lapzor
 Donate link: https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mailchimp-sync&utm_campaign=donate-link
 Tags: mailchimp,users,sync,mailchimp list,synchronize,zapier,woocommerce,mc4wp
 Requires at least: 4.1
-Tested up to: 5.2
-Stable tag: 1.7.7
+Tested up to: 4.9.8
+Stable tag: 1.8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Requires PHP: 5.3
 
-Synchronize your WordPress Users with a MailChimp list.
+Synchronize your WordPress Users with a Mailchimp list.
 
 == Description ==
 
-= MailChimp User Sync =
+= User Sync for Mailchimp =
 
-Synchronize your registered WordPress users with a MailChimp list of your choice.
+Synchronize your registered WordPress users with a Mailchimp list of your choice.
 
-> To use MailChimp User Sync, please install either the free or premium version of the [MailChimp for WordPress plugin](https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mailchimp-sync&utm_campaign=info).
+> To use Mailchimp User Sync, please install either the free or premium version of the [Mailchimp for WordPress plugin](https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mailchimp-sync&utm_campaign=info).
 
-= MailChimp User Sync, at a glance.. =
+= MC4WP: User Sync, at a glance.. =
 
-MailChimp User Sync will monitor your WordPress user base and automatically synchronize any changes with a selected MailChimp list. This allows you to keep a MailChimp list of subscribers
+Mailchimp User Sync will monitor your WordPress user base and automatically synchronize any changes with a selected Mailchimp list. This allows you to keep a Mailchimp list of subscribers
 that is an exact mirror of your WordPress user base.
 
-- Automatically subscribe new users to your MailChimp list.
-- Sync all profile changes with MailChimp, even when a user's email address changes.
-- When a user is deleted, the associated MailChimp subscriber will be unsubscribed as well.
+- Automatically subscribe new users to your Mailchimp list.
+- Sync all profile changes with Mailchimp, even when a user's email address changes.
+- When a user is deleted, the associated Mailchimp subscriber will be unsubscribed as well.
 - Synchronize all user roles or a specific one, eg all users with the "customer" role.
 - Synchronize all existing users
 - Choose whether you want to use double opt-in and send a welcome email to new subscribers.
 - WP CLI commands to synchronize a large amount of WordPress users at once.
 
-After activation, the plugin will listen to all changes in your WordPress users and make sure everything stays in sync with the selected MailChimp list.
+After activation, the plugin will listen to all changes in your WordPress users and make sure everything stays in sync with the selected Mailchimp list.
 
-= Development of MailChimp User Sync =
+= Development of Mailchimp User Sync =
 
-Bug reports (and Pull Requests) for [MailChimp User Sync are welcomed on GitHub](https://github.com/ibericode/mailchimp-user-sync). Please note that GitHub is _not_ a support forum.
+Bug reports (and Pull Requests) for [Mailchimp User Sync are welcomed on GitHub](https://github.com/ibericode/mailchimp-user-sync). Please note that GitHub is _not_ a support forum.
 
 **More information**
 
-- [MailChimp for WordPress](https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mailchimp-sync&utm_campaign=more-info-link)
-- Other [add-ons for MailChimp for WordPress](https://mc4wp.com/add-ons/#utm_source=wp-plugin-repo&utm_medium=mailchimp-sync&utm_campaign=more-info-link)
-- Developers; follow or contribute to the [MailChimp User Sync plugin on GitHub](https://github.com/ibericode/mailchimp-user-sync)
+- [Mailchimp for WordPress](https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mailchimp-sync&utm_campaign=more-info-link)
+- Other [add-ons for Mailchimp for WordPress](https://mc4wp.com/add-ons/#utm_source=wp-plugin-repo&utm_medium=mailchimp-sync&utm_campaign=more-info-link)
+- Developers; follow or contribute to the [Mailchimp User Sync plugin on GitHub](https://github.com/ibericode/mailchimp-user-sync)
 - Other [WordPress plugins](https://dannyvankooten.com/wordpress-plugins/#utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=more-info-link) by [Danny van Kooten](https://dannyvankooten.com#utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=more-info-link)
 
 == Installation ==
 
-= MailChimp for WordPress =
+= Mailchimp for WordPress =
 
-Since this plugin depends on the [MailChimp for WordPress plugin](https://wordpress.org/plugins/mailchimp-for-wp/), you will need to install that first.
+Since this plugin depends on the [Mailchimp for WordPress plugin](https://wordpress.org/plugins/mailchimp-for-wp/), you will need to install that first.
 
-= Installing MailChimp User Sync =
+= Installing Mailchimp User Sync =
 
-1. Make sure [MailChimp for WordPress](https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mailchimp-sync&utm_campaign=info/) is installed (free or premium).
-1. In your WordPress admin panel, go to *Plugins > New Plugin*, search for **MailChimp User Sync** and click "*Install now*"
+1. Make sure [Mailchimp for WordPress](https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mailchimp-sync&utm_campaign=info/) is installed (free or premium).
+1. In your WordPress admin panel, go to *Plugins > New Plugin*, search for **Mailchimp User Sync** and click "*Install now*"
 1. Alternatively, download the plugin and upload the contents of `mailchimp-sync.zip` to your plugins directory, which usually is `/wp-content/plugins/`.
 1. Activate the plugin
-1. Set [your MailChimp API key](https://admin.mailchimp.com/account/api) in **MailChimp for WP > MailChimp Settings**.
-1. Select a list to sync with in **MailChimp for WP > Sync**.]
+1. Set [your Mailchimp API key](https://admin.mailchimp.com/account/api) in **Mailchimp for WP > Mailchimp Settings**.
+1. Select a list to sync with in **Mailchimp for WP > Sync**.]
 1. (optional) Select a specific user role to synchronize.
 1. (optional) synchronize your existing users.
 
@@ -72,9 +72,9 @@ Please report it on [GitHub issues](https://github.com/ibericode/mailchimp-user-
 
 Please open a topic on the [WordPress.org plugin support forums](https://wordpress.org/support/plugin/mailchimp-sync).
 
-= Send additional fields to MailChimp =
+= Send additional fields to Mailchimp =
 
-Since version 1.1, you can specify which additional user fields to send to MailChimp by mapping your fields on the settings page of the plugin.
+Since version 1.1, you can specify which additional user fields to send to Mailchimp by mapping your fields on the settings page of the plugin.
 
 If you need to send more complex data you can use the `mailchimp_sync_user_data` filter.
 
@@ -115,9 +115,9 @@ wp mailchimp-sync user $user_id	 			# synchronize the user specified by the give
 
 This is especially useful for synchronising a huge amount of users.
 
-= Does this plugin synchronize data back from MailChimp? =
+= Does this plugin synchronize data back from Mailchimp? =
 
-Not by default, but you can enable this by [configuring a webhook in your MailChimp account](https://mc4wp.com/kb/configure-webhook-for-2-way-synchronizing/).
+Not by default, but you can enable this by [configuring a webhook in your Mailchimp account](https://mc4wp.com/kb/configure-webhook-for-2-way-synchronizing/).
 
 == Screenshots ==
 
@@ -127,19 +127,23 @@ Not by default, but you can enable this by [configuring a webhook in your MailCh
 == Changelog ==
 
 
-### 1.7.7 - May 10, 2019
+#### 1.8.1 - Oct 15, 2019
 
-**Fixes**
+**Improvements**
 
-- Fix webhook listener creating a new user.
+- Add button to delete all pending background jobs.
 
+
+#### 1.8.0 - Oct 7, 2019
+
+Compatibility with [Mailchimp for WordPress](https://wordpress.org/plugins/mailchimp-for-wp/) version 4.6.
 
 
 ### 1.7.6 - Dec 3, 2018
 
 **Improvements**
 
-- Add warning text to settings that may cause subscribers to be removed from the connected MailChimp list.
+- Add warning text to settings that may cause subscribers to be removed from the connected Mailchimp list.
 
 
 ### 1.7.5 - July 4, 2018
@@ -158,7 +162,7 @@ Not by default, but you can enable this by [configuring a webhook in your MailCh
 
 **Additions**
 
-- Added mailchimp_sync_delete_subscribers filter, will [delete subscribers from the MailChimp list](https://github.com/ibericode/mc4wp-snippets/blob/master/add-ons/user-sync/really-delete-subscribers-from-list.php) if filter returns true (instead of updating their status).
+- Added mailchimp_sync_delete_subscribers filter, will [delete subscribers from the Mailchimp list](https://github.com/ibericode/mc4wp-snippets/blob/master/add-ons/user-sync/really-delete-subscribers-from-list.php) if filter returns true (instead of updating their status).
 
 
 ### 1.7.3 - April 30, 2018
@@ -169,7 +173,7 @@ Not by default, but you can enable this by [configuring a webhook in your MailCh
 - Better (more privacy friendly) default settings.
 - Add warning text to settings that may affect GDPR compliance.
 - CLI commands shows a list of errors now (if any).
-- More detailed error messages when MailChimp API returns an error.
+- More detailed error messages when Mailchimp API returns an error.
 
 
 ### 1.7.2 - March 14, 2018
@@ -243,7 +247,7 @@ Not by default, but you can enable this by [configuring a webhook in your MailCh
 
 **Additions**
 
-- Added setting that allows users to opt-out from selected MailChimp list via their profile page.
+- Added setting that allows users to opt-out from selected Mailchimp list via their profile page.
 
 **Improvements**
 
@@ -273,7 +277,7 @@ Not by default, but you can enable this by [configuring a webhook in your MailCh
 
 **Improvements**
 
-- Plugin can now update email addresses in MailChimp without creating a separate (new) subscriber. Thanks to [Maymay](https://maymay.net/) for the great help.
+- Plugin can now update email addresses in Mailchimp without creating a separate (new) subscriber. Thanks to [Maymay](https://maymay.net/) for the great help.
 - Now showing pending background jobs on settings page.
 - Background queue improvements for long-lived processes
 - Errors in background jobs will now be logged to the [debug log](https://mc4wp.com/kb/how-to-enable-log-debugging/).
@@ -302,7 +306,7 @@ Not by default, but you can enable this by [configuring a webhook in your MailCh
 
 **Improvements**
 
-- Only send user fields to MailChimp when not empty, to prevent overriding existing data when webhook is not configured.
+- Only send user fields to Mailchimp when not empty, to prevent overriding existing data when webhook is not configured.
 - Ask for confirmation before changing webhook secret.
 
 
@@ -310,7 +314,7 @@ Not by default, but you can enable this by [configuring a webhook in your MailCh
 
 **Improvements**
 
-- Forward compatibility with upcoming [MailChimp for WordPress 4.0 release](https://mc4wp.com/kb/upgrading-to-4-0/).
+- Forward compatibility with upcoming [Mailchimp for WordPress 4.0 release](https://mc4wp.com/kb/upgrading-to-4-0/).
 - Use correct WP function for updating user email address from webhook.
 
 
@@ -336,7 +340,7 @@ Not by default, but you can enable this by [configuring a webhook in your MailCh
 
 - Added webhook settings to settings page.
 - Added "secret key" option to webhook, to further secure webhook endpoint.
-- Preparations for MailChimp API v3.
+- Preparations for Mailchimp API v3.
 
 
 #### 1.4.5 - May 25, 2016
@@ -350,7 +354,7 @@ Not by default, but you can enable this by [configuring a webhook in your MailCh
 
 **Fixes**
 
-- Only add MailChimp status to user profile when user matches criteria.
+- Only add Mailchimp status to user profile when user matches criteria.
 - CLI command now defaults to role selected on settings page when no role argument given.
 
 **Improvements**
@@ -366,14 +370,14 @@ Not by default, but you can enable this by [configuring a webhook in your MailCh
 
 **Improvements**
 
-- When user switches role or no longer matches custom conditions (using the `mailchimp_sync_should_sync_user` filter) he will now be unsubscribed from the selected MailChimp list.
-- User fields which are an array of values are now automatically converted to a comma-separated string before they are sent to MailChimp.
+- When user switches role or no longer matches custom conditions (using the `mailchimp_sync_should_sync_user` filter) he will now be unsubscribed from the selected Mailchimp list.
+- User fields which are an array of values are now automatically converted to a comma-separated string before they are sent to Mailchimp.
 
 #### 1.4.2 - March 14, 2016
 
 **Fixes**
 
-- Re-run subscribe method if email isn't found on MailChimp list (because of an invalid email, for example)
+- Re-run subscribe method if email isn't found on Mailchimp list (because of an invalid email, for example)
 
 **Improvements**
 
@@ -386,7 +390,7 @@ Not by default, but you can enable this by [configuring a webhook in your MailCh
 
 **Fixes**
 
-- Webhook verification not working when setting up webhook in MailChimp.
+- Webhook verification not working when setting up webhook in Mailchimp.
 
 **Improvements**
 
@@ -394,7 +398,7 @@ Not by default, but you can enable this by [configuring a webhook in your MailCh
 
 #### 1.4 - January 26, 2016
 
-This update requires you to update [MailChimp for WordPress](https://wordpress.org/plugins/mailchimp-for-wp/) to version 3.1 first.
+This update requires you to update [Mailchimp for WordPress](https://wordpress.org/plugins/mailchimp-for-wp/) to version 3.1 first.
 
 **Fixes**
 
@@ -402,7 +406,7 @@ This update requires you to update [MailChimp for WordPress](https://wordpress.o
 
 **Improvements**
 
-- Use new Queue class from MailChimp for WordPress 3.1 for improved background processing.
+- Use new Queue class from Mailchimp for WordPress 3.1 for improved background processing.
 - [Use new debug log for easier debugging](https://mc4wp.com/kb/how-to-enable-log-debugging/).
 - Add HTTP status codes to Webhook listener.
 - Miscellaneous code improvements
@@ -430,22 +434,22 @@ This update requires you to update [MailChimp for WordPress](https://wordpress.o
 
 **Improvements**
 
-- Check for correct request parameters before processing [MailChimp webhook](https://mc4wp.com/kb/configure-webhook-for-2-way-synchronizing/).
-- Change plugin name to "MailChimp User Sync"
+- Check for correct request parameters before processing [Mailchimp webhook](https://mc4wp.com/kb/configure-webhook-for-2-way-synchronizing/).
+- Change plugin name to "Mailchimp User Sync"
 - Document all WP CLI commands.
 - Better mobile responsiveness for settings pages.
 - Use Browserify to handle script dependencies.
-- Improved compatibility with [MailChimp for WordPress v3.0](https://mc4wp.com/blog/the-big-three-o-release/)
+- Improved compatibility with [Mailchimp for WordPress v3.0](https://mc4wp.com/blog/the-big-three-o-release/)
 
 #### 1.3.1 - November 13, 2015
 
 **Improvements**
 
-- Compatibility fixes for [the upcoming MailChimp for WordPress 3.0 release](https://mc4wp.com/blog/breaking-backwards-compatibility-in-version-3-0/).
+- Compatibility fixes for [the upcoming Mailchimp for WordPress 3.0 release](https://mc4wp.com/blog/breaking-backwards-compatibility-in-version-3-0/).
 
 **Additions**
 
-- Added `mailchimp_sync_get_user_field` filter to get user fields from a custom source and sync those to MailChimp.
+- Added `mailchimp_sync_get_user_field` filter to get user fields from a custom source and sync those to Mailchimp.
 
 #### 1.3 - October 17, 2015
 
@@ -456,7 +460,7 @@ This update requires you to update [MailChimp for WordPress](https://wordpress.o
 
 **Improvements**
 
-- Changes are now sent to MailChimp **after** all changes are applied, at the end of the request.
+- Changes are now sent to Mailchimp **after** all changes are applied, at the end of the request.
 - Individual changes in `user_meta` will now be taken into account as well.
 
 #### 1.2.3 - October 12, 2015
@@ -475,7 +479,7 @@ This update requires you to update [MailChimp for WordPress](https://wordpress.o
 
 **Additions**
 
-- Introduced 2 new filters (`mailchimp_sync_webhook_user` and `mailchimp_sync_webhook_no_user`) which allow you to hook into the MailChimp webhook listener to specify the WP user or do something when there is no user for the MailChimp subscriber. [Here is a code example that creates a new user when the subscriber has no user account](https://gist.github.com/dannyvankooten/79fe429daaef611b6aa5).
+- Introduced 2 new filters (`mailchimp_sync_webhook_user` and `mailchimp_sync_webhook_no_user`) which allow you to hook into the Mailchimp webhook listener to specify the WP user or do something when there is no user for the Mailchimp subscriber. [Here is a code example that creates a new user when the subscriber has no user account](https://gist.github.com/dannyvankooten/79fe429daaef611b6aa5).
 
 #### 1.2.1 - October 1, 2015
 
@@ -492,7 +496,7 @@ This update requires you to update [MailChimp for WordPress](https://wordpress.o
 
 **Additions**
 
-- Added support for MailChimp webhooks, so data can be synchronized from MailChimp to WordPress as well.  To enable this, you need to [configure a webhook in your MailChimp account](https://mc4wp.com/kb/configure-webhook-for-2-way-synchronizing/).
+- Added support for Mailchimp webhooks, so data can be synchronized from Mailchimp to WordPress as well.  To enable this, you need to [configure a webhook in your Mailchimp account](https://mc4wp.com/kb/configure-webhook-for-2-way-synchronizing/).
 
 #### 1.1.3 - September 9, 2015
 
@@ -513,8 +517,8 @@ This update requires you to update [MailChimp for WordPress](https://wordpress.o
 
 **Improvements**
 
-- Field rules will now clear when changing the MailChimp list to subscribe to.
-- Make it more clear that settings should be saved after choosing a MailChimp list.
+- Field rules will now clear when changing the Mailchimp list to subscribe to.
+- Make it more clear that settings should be saved after choosing a Mailchimp list.
 
 #### 1.1.1 - August 28, 2015
 
@@ -558,9 +562,9 @@ This update requires you to update [MailChimp for WordPress](https://wordpress.o
 - Enable & disable auto-syncing
 - Choose a user role to synchronize.
 - [WP CLI](https://wp-cli.org/) commands: `wp mailchimp-sync sync-all` and `wp mailchimp-sync sync-user $user_id`.
-- Filter: `mailchimp_sync_user_data` to modify user data before it's sent to MailChimp.
+- Filter: `mailchimp_sync_user_data` to modify user data before it's sent to Mailchimp.
 
-For more detailed usage info on the introduced features, have a look at the [MailChimp User Sync FAQ](https://wordpress.org/plugins/mailchimp-sync/faq/).
+For more detailed usage info on the introduced features, have a look at the [Mailchimp User Sync FAQ](https://wordpress.org/plugins/mailchimp-sync/faq/).
 
 #### 0.1.2 - March 17, 2015
 
@@ -596,4 +600,4 @@ Initial release.
 == Upgrade Notice ==
 
 = 1.2 =
-Add support for MailChimp webhooks to enable 2-way synchronizing.
+Add support for Mailchimp webhooks to enable 2-way synchronizing.

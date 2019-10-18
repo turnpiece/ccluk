@@ -145,7 +145,7 @@ abstract class Ai1wm_Database {
 		// Check Microsoft SQL Server support
 		if ( is_resource( $this->wpdb->dbh ) ) {
 			if ( get_resource_type( $this->wpdb->dbh ) === 'SQL Server Connection' ) {
-				throw new Exception(
+				throw new Ai1wm_Database_Exception(
 					'Your WordPress installation uses Microsoft SQL Server. ' .
 					'In order to use All in One WP Migration, please change your installation to MySQL and try again. ' .
 					'<a href="https://help.servmask.com/knowledgebase/microsoft-sql-server/" target="_blank">Technical details</a>'
@@ -849,6 +849,16 @@ abstract class Ai1wm_Database {
 								// Run SQL query
 								$this->query( $query );
 							}
+
+							// Replace table row format (MyISAM and InnoDB)
+							if ( $this->errno() === 1071 || $this->errno() === 1709 ) {
+
+								// Replace table row format
+								$query = $this->replace_table_row_format( $query );
+
+								// Run SQL query
+								$this->query( $query );
+							}
 						}
 
 						// Set query offset
@@ -1429,6 +1439,26 @@ abstract class Ai1wm_Database {
 		$replace = array(
 			'ENGINE=InnoDB',
 			'ENGINE=InnoDB',
+		);
+
+		return str_ireplace( $search, $replace, $input );
+	}
+
+	/**
+	 * Replace table row format
+	 *
+	 * @param  string $input SQL statement
+	 * @return string
+	 */
+	protected function replace_table_row_format( $input ) {
+		// Set table replace row format
+		$search  = array(
+			'ENGINE=InnoDB',
+			'ENGINE=MyISAM',
+		);
+		$replace = array(
+			'ENGINE=InnoDB ROW_FORMAT=DYNAMIC',
+			'ENGINE=MyISAM ROW_FORMAT=DYNAMIC',
 		);
 
 		return str_ireplace( $search, $replace, $input );

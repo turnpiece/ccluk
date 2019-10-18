@@ -223,7 +223,7 @@ do_action( 'login_header' );
     <form method="post"
           action="<?php echo esc_url( add_query_arg( 'action', 'defenderVerifyOTP', site_url( 'wp-login.php', 'login_post' ) ) ); ?>">
         <p><?php _e( "Open the Google Authenticator app and enter the 6 digit passcode.", wp_defender()->domain ) ?></p>
-        <input type="text" value="" autocomplete="off" name="otp">
+        <input type="text" autofocus value="" autocomplete="off" name="otp">
         <button class="button button-primary float-r"
                 type="submit"><?php _e( "Authenticate", wp_defender()->domain ) ?></button>
         <input type="hidden" name="login_token" value="<?php echo $loginToken ?>"/>
@@ -233,17 +233,17 @@ do_action( 'login_header' );
 	<?php
 	$settings = \WP_Defender\Module\Advanced_Tools\Model\Auth_Settings::instance();
 
-	if ( wp_defender()->isFree == false && $settings->customGraphic ) {
+	if ( wp_defender()->isFree == false && $settings->custom_graphic ) {
 		?>
         <style type="text/css">
             body.login div#login h1 a {
-                background-image: url("<?php echo $settings->customGraphicURL ?>");
+                background-image: url("<?php echo $settings->custom_graphic_url ?>");
             }
         </style>
 		<?php
 	}
 	?>
-	<?php if ( \WP_Defender\Module\Advanced_Tools\Model\Auth_Settings::instance()->lostPhone ): ?>
+	<?php if ( \WP_Defender\Module\Advanced_Tools\Model\Auth_Settings::instance()->lost_phone ): ?>
         <p id="nav">
             <a id="lostPhone"
                href="<?php echo admin_url( 'admin-ajax.php?action=defRetrieveOTP&token=' . $loginToken . '&nonce=' . wp_create_nonce( 'defRetrieveOTP' ) ) ?>">

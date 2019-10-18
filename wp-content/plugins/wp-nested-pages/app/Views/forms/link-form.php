@@ -6,7 +6,7 @@ $post_type_object = get_post_type_object( 'page' );
 $can_publish = current_user_can( $post_type_object->cap->publish_posts );
 ?>
 <div class="nestedpages-modal-backdrop" data-nestedpages-modal="np-link-modal"></div>
-<div class="nestedpages-modal-content <?php if ( $this->integrations->plugins->dark_mode->installed ) echo 'np-dark-mode'; ?>" id="np-link-modal" data-nestedpages-modal="np-link-modal">
+<div class="nestedpages-modal-content np-link-modal-content <?php if ( $this->integrations->plugins->dark_mode->installed ) echo 'np-dark-mode'; ?>" id="np-link-modal" data-nestedpages-modal="np-link-modal">
 
 	<div class="modal-content">
 		
@@ -23,7 +23,7 @@ $can_publish = current_user_can( $post_type_object->cap->publish_posts );
 							foreach ( $this->listing_repo->postTypes() as $name => $type ) {
 								$recent_posts = $this->listing_repo->recentPosts($name);
 								if ( !$recent_posts ) continue;
-								$out = '<li><a href="#" data-np-menu-accordion-item>' . esc_html($type->labels->name) . '</a>';
+								$out = '<li><a href="#" data-np-menu-accordion-item>' . esc_html__($type->labels->name) . '</a>';
 								$out .= '<ul>';
 								$out .= '<li class="np-menu-search"><input type="text" data-np-menu-search data-search-type="post_type" data-search-object="' . esc_attr($name) . '" placeholder="' . __('Search', 'wp-nested-pages') . ' ' . esc_attr($type->labels->name) . '" />';
 								$out .= '<div class="np-default-loading np-menu-search-loading">';
@@ -34,7 +34,7 @@ $can_publish = current_user_can( $post_type_object->cap->publish_posts );
 								$out .= '</div>';
 								$out .= '<div class="np-menu-search-noresults">' . __('No Results', 'wp-nested-pages') . '</div></li>';
 								foreach ( $recent_posts as $post ){
-									$out .= '<li data-default-result><a href="#" data-np-menu-object="' . esc_attr($name) . '" data-np-menu-type="post_type" data-np-menu-objectid="' . esc_attr($post->ID) . '" data-np-permalink="' . get_the_permalink($post->ID) . '" data-np-object-name="' . esc_attr($type->labels->singular_name) . '" data-np-menu-selection>' . esc_html($post->post_title) . '</a></li>';
+									$out .= '<li data-default-result><a href="#" data-np-menu-object="' . esc_attr($name) . '" data-np-menu-type="post_type" data-np-menu-objectid="' . esc_attr($post->ID) . '" data-np-permalink="' . get_the_permalink($post->ID) . '" data-np-object-name="' . esc_attr($type->labels->singular_name) . '" data-np-menu-selection>' . esc_html__($post->post_title) . '</a></li>';
 								}
 								$out .= '</ul>';
 								$out .= '</li>';
@@ -47,11 +47,11 @@ $can_publish = current_user_can( $post_type_object->cap->publish_posts );
 							foreach ( $this->listing_repo->taxonomies() as $name => $taxonomy ) {
 								$terms = $this->listing_repo->terms($name);
 								if ( !$terms ) continue;
-								$out = '<li><a href="#" data-np-menu-accordion-item>' . esc_html($taxonomy->labels->name) . '</a>';
+								$out = '<li><a href="#" data-np-menu-accordion-item>' . esc_html__($taxonomy->labels->name) . '</a>';
 								$out .= '<ul>';
 								$out .= '<li class="np-menu-search"><input type="text" data-np-menu-search data-search-type="taxonomy" data-search-object="' . esc_attr($name) . '" placeholder="' . __('Search', 'wp-nested-pages') . ' ' . esc_attr($taxonomy->labels->name) . '" /><div class="np-menu-search-loading"></div><div class="np-menu-search-noresults">' . __('No Results', 'wp-nested-pages') . '</div></li>';
 								foreach ( $terms as $term ){
-									$out .= '<li data-default-result><a href="#" data-np-menu-object="' . esc_attr($name) . '" data-np-menu-type="taxonomy" data-np-menu-objectid="' . esc_attr($term->term_id) . '" data-np-permalink="' . esc_attr(get_term_link($term)) . '" data-np-object-name="' . esc_attr($taxonomy->labels->name) . '" data-np-menu-selection>' . esc_html($term->name) . '</a></li>';
+									$out .= '<li data-default-result><a href="#" data-np-menu-object="' . esc_attr($name) . '" data-np-menu-type="taxonomy" data-np-menu-objectid="' . esc_attr($term->term_id) . '" data-np-permalink="' . esc_attr(get_term_link($term)) . '" data-np-object-name="' . esc_attr($taxonomy->labels->name) . '" data-np-menu-selection>' . esc_html__($term->name) . '</a></li>';
 								}
 								$out .= '</ul>';
 								$out .= '</li>';
@@ -100,23 +100,26 @@ $can_publish = current_user_can( $post_type_object->cap->publish_posts );
 			</div><!-- .modal-body -->
 
 			<div class="modal-footer">
-				<input type="hidden" name="menuTitle" data-np-menu-title value="">
-				<input type="hidden" name="objectType" data-np-menu-object-input value="">
-				<input type="hidden" name="objectId" data-np-menu-objectid-input value="">
-				<input type="hidden" name="menuType" data-np-menu-type-input value="">
-				<input type="hidden" name="parent_id" class="parent_id" value="">
-				<button type="button" class="button modal-close" data-nestedpages-modal-close>
-					<?php _e('Cancel', 'wp-nested-pages'); ?>
-				</button>
+				<div class="footer-inner">
+					<input type="hidden" name="menuTitle" data-np-menu-title value="">
+					<input type="hidden" name="objectType" data-np-menu-object-input value="">
+					<input type="hidden" name="objectId" data-np-menu-objectid-input value="">
+					<input type="hidden" name="menuType" data-np-menu-type-input value="">
+					<input type="hidden" name="parent_id" class="parent_id" value="">
+					<input type="hidden" name="parent_post_type" class="parent-post-type" value="<?php echo $this->post_type->name; ?>" data-np-menu-parent-post-type>
+					<button type="button" class="button modal-close" data-nestedpages-modal-close>
+						<?php _e('Cancel', 'wp-nested-pages'); ?>
+					</button>
 
-				<a accesskey="s" class="button-primary" data-np-save-link style="display:none;float:right;">
-					<?php _e( 'Add', 'wp-nested-pages' ); ?>
-				</a>
-				<div class="np-qe-loading">
-					<?php include( NestedPages\Helpers::asset('images/spinner.svg') ); ?>
-				</div>
-
+					<a accesskey="s" class="button-primary" data-np-save-link style="display:none;float:right;">
+						<?php _e( 'Add', 'wp-nested-pages' ); ?>
+					</a>
+					<div class="np-qe-loading">
+						<?php include( NestedPages\Helpers::asset('images/spinner.svg') ); ?>
+					</div>
+				</div><!-- .footer-inner -->
 			</div><!-- .modal-footer -->
+			
 			</form>
 		</div><!-- #npmenuitems -->
 		

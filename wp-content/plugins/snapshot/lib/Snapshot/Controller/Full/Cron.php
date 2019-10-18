@@ -696,7 +696,7 @@ class Snapshot_Controller_Full_Cron extends Snapshot_Controller_Full {
 
 		if ($now > $next_event) {
 			// Local time of next event is in the past, move to future.
-			$next_event += DAY_IN_SECONDS; 
+			$next_event += DAY_IN_SECONDS;
 		}
 
 		// @since 3.1.7-beta-1
@@ -1006,14 +1006,14 @@ class Snapshot_Controller_Full_Cron extends Snapshot_Controller_Full {
 		// The scheduling will also disperse the start time within the hour.
 		$this->_schedule_backup_starting();
 	}
-	
+
 	/**
 	 * Restore cron configuration as it was before Automate kicked in.
-	 * 
+	 *
 	 * @since 3.1.9.2-beta.1
-	 * 
+	 *
 	 */
-	private function _restore_previous_cron_config () {	
+	private function _restore_previous_cron_config () {
 		$is_automated = Snapshot_Controller_Full_Hub::get()->is_doing_automated_backup();
 		if ( $is_automated ){
 			if ( $this->_model->get_config('temporarily_enable_cron', false) ) {
@@ -1025,7 +1025,7 @@ class Snapshot_Controller_Full_Cron extends Snapshot_Controller_Full {
 
 				// Let the service know
 				$this->_model->update_remote_schedule();
-	
+
 				// Toggle back the configuration as it was before the automated backup.
 				$this->_model->set_config('temporarily_enable_cron', false);
 			}

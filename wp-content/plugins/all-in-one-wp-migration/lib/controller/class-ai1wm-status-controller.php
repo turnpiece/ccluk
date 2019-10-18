@@ -30,6 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Ai1wm_Status_Controller {
 
 	public static function status( $params = array() ) {
+		ai1wm_setup_environment();
 
 		// Set params
 		if ( empty( $params ) ) {

@@ -16,7 +16,7 @@ class Controller extends Component {
 	 * @return bool
 	 */
 	protected function isInPage() {
-		return HTTP_Helper::retrieve_get( 'page' ) == $this->slug;
+		return HTTP_Helper::retrieveGet( 'page' ) == $this->slug;
 	}
 
 	/**
@@ -25,14 +25,14 @@ class Controller extends Component {
 	 * @return bool
 	 */
 	public function isView( $view ) {
-		return HTTP_Helper::retrieve_get( 'view' ) == $view;
+		return HTTP_Helper::retrieveGet( 'view' ) == $view;
 	}
 
 	/**
 	 * @return bool
 	 */
 	public function isDashboard() {
-		return HTTP_Helper::retrieve_get( 'page' ) == 'wp-defender';
+		return HTTP_Helper::retrieveGet( 'page' ) == 'wp-defender';
 	}
 
 	/**

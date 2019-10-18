@@ -219,7 +219,7 @@ class WPMUDEV_Dashboard_Upgrader {
 		$project = $data['projects'][ $project_id ];
 
 		if ( ! $only_license ) {
-			if ( ! WPMUDEV_Dashboard::$site->allowed_user() ) {
+			if ( ! WPMUDEV_Dashboard::$site->allowed_user() && ! current_user_can( 'edit_plugins' ) ) {
 				return false;
 			}
 			//if ( ! $this->can_auto_install( $project['type'] ) ) { return false; }

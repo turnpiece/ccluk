@@ -24,13 +24,19 @@ class Controller extends Component {
 	 */
 	public function render( $viewFile, $params = array(), $echo = true ) {
 		$base_path = $this->getBasePath();
-
-		$view = new View( $base_path . 'view' );
+		$view      = new View( $base_path . 'view' );
 		//assign controller to this
 		if ( ! isset( $params['controller'] ) ) {
 			$params['controller'] = $this;
 		}
-		$content = $view->render( $viewFile, $params );
+		if ( is_array( $viewFile ) ) {
+			$content = "";
+			foreach ( $viewFile as $vf ) {
+				$content .= $view->render( $vf, $params );
+			}
+		} else {
+			$content = $view->render( $viewFile, $params );
+		}
 
 		if ( ! empty( $this->layout ) ) {
 			$template = new View( $base_path . 'view' . DIRECTORY_SEPARATOR . 'layouts' );
@@ -73,11 +79,20 @@ class Controller extends Component {
 	 */
 	public function renderPartial( $viewFile, $params = array(), $echo = true ) {
 		$base_path = $this->getBasePath();
+
 		if ( ! isset( $params['controller'] ) ) {
 			$params['controller'] = $this;
 		}
+
 		$view    = new View( $base_path . 'view' );
-		$content = $view->render( $viewFile, $params );
+		if ( is_array( $viewFile ) ) {
+			$content = "";
+			foreach ( $viewFile as $vf ) {
+				$content .= $view->render( $vf, $params );
+			}
+		} else {
+			$content = $view->render( $viewFile, $params );
+		}
 		if ( $echo == true ) {
 			echo $content;
 		}

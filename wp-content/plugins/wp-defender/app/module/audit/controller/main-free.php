@@ -8,23 +8,40 @@ namespace WP_Defender\Module\Audit\Controller;
 use Hammer\Helper\HTTP_Helper;
 use Hammer\Helper\Log_Helper;
 use Hammer\Helper\WP_Helper;
+use WP_Defender\Behavior\Utils;
 use WP_Defender\Module\Audit\Component\Audit_API;
 use WP_Defender\Module\Audit\Component\Audit_Table;
 use WP_Defender\Module\Audit\Model\Settings;
-use WP_Defender\Vendor\Email_Search;
 
 class Main_Free extends \WP_Defender\Controller {
 	protected $slug = 'wdf-logging';
 
+	/**
+	 * Declaring behaviors
+	 * @return array
+	 */
+	/**
+	 * @return array
+	 */
+	public function behaviors() {
+		$behaviors = [
+			'utils'     => '\WP_Defender\Behavior\Utils',
+			'endpoints' => '\WP_Defender\Behavior\Endpoint',
+			'wpmudev'   => '\WP_Defender\Behavior\WPMUDEV'
+		];
+
+		return $behaviors;
+	}
+
 	public function __construct() {
-		if ( $this->is_network_activate( wp_defender()->plugin_slug ) ) {
-			$this->add_action( 'network_admin_menu', 'adminMenu' );
+		if ( $this->isNetworkActivate( wp_defender()->plugin_slug ) ) {
+			$this->addAction( 'network_admin_menu', 'adminMenu' );
 		} else {
-			$this->add_action( 'admin_menu', 'adminMenu' );
+			$this->addAction( 'admin_menu', 'adminMenu' );
 		}
 
 		if ( $this->isInPage() || $this->isDashboard() ) {
-			$this->add_action( 'defender_enqueue_assets', 'scripts', 11 );
+			$this->addAction( 'defender_enqueue_assets', 'scripts', 11 );
 		}
 	}
 
@@ -41,14 +58,25 @@ class Main_Free extends \WP_Defender\Controller {
 
 	public function scripts() {
 		if ( $this->isInPage() ) {
-			wp_enqueue_script( 'wpmudev-sui' );
-			wp_enqueue_style( 'wpmudev-sui' );
-			//wp_enqueue_script( 'defender' );
-			wp_enqueue_style( 'defender' );
+			if ( $this->isInPage() ) {
+				wp_enqueue_style( 'wpmudev-sui' );
+				wp_enqueue_style( 'defender' );
+
+				wp_register_script( 'defender-audit', wp_defender()->getPluginUrl() . 'assets/app/audit.js', array(
+					'vue',
+					'defender',
+					'wp-i18n'
+				), wp_defender()->version, true );
+				Utils::instance()->createTranslationJson( 'defender-audit' );
+				wp_set_script_translations( 'defender-audit', 'wpdef', wp_defender()->getPluginPath() . 'languages' );
+				wp_localize_script( 'defender-audit', 'auditData', [] );
+				wp_enqueue_script( 'defender-audit' );
+				wp_enqueue_script( 'wpmudev-sui' );
+			}
 		}
 	}
 
 	public function actionIndex() {
-		$this->renderPartial( 'free' );
+		$this->renderPartial( 'main-free' );
 	}
 }

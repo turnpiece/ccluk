@@ -226,7 +226,7 @@ class Users {
 		}
 
 		/**
-		 * Filters whether a user should be synchronized with MailChimp or not.
+		 * Filters whether a user should be synchronized with Mailchimp or not.
 		 *
 		 * @param boolean $sync
 		 * @param WP_User $user

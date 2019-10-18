@@ -1,8 +1,8 @@
 <?php
 /**
- * @package The_SEO_Framework
- * @subpackage Bootstrapp
+ * @package The_SEO_Framework\Bootstrap\Install
  */
+
 namespace The_SEO_Framework\Bootstrap;
 
 defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
@@ -85,6 +85,11 @@ function _previous_db_version() {
  *              8. Now tries to increase memory limit. This probably isn't needed.
  *              9. Now runs on the front-end, too, via `init`, instead of `admin_init`.
  * @since 3.1.4 Now flushes object cache before the upgrade settings are called.
+ * @since 4.0.0 1. Removed rewrite flushing; unless upgrading from <3300 to 3300
+ *              2. Added time limit.
+ *              3. No longer runs during AJAX.
+ *              4. Added an upgrading lock. Preventing upgrades running simultaneously.
+ *                 While this lock is active, the SEO Settings can't be accessed, either.
  */
 function _do_upgrade() {
 
@@ -92,20 +97,34 @@ function _do_upgrade() {
 
 	if ( ! $tsf->loaded ) return;
 
+	if ( \wp_doing_ajax() ) return;
+
 	if ( $tsf->is_seo_settings_page( false ) ) {
-		\wp_redirect( \self_admin_url() ); // phpcs:ignore -- self_admin_url() is safe.
+		// phpcs:ignore, WordPress.Security.SafeRedirect -- self_admin_url() is safe.
+		\wp_redirect( \self_admin_url() );
 		exit;
 	}
 
+	// Check if upgrade is locked. Otherwise, lock it.
+	if ( \get_transient( 'tsf_upgrade_lock' ) ) return;
+	\set_transient( 'tsf_upgrade_lock', true, 300 );
+
+	// Register this AFTER the transient is set. Otherwise, it may clear the transient in another thread.
+	register_shutdown_function( __NAMESPACE__ . '\\_release_upgrade_lock' );
+
 	\wp_raise_memory_limit( 'tsf_upgrade' );
 
+	// phpcs:ignore, WordPress.PHP.NoSilencedErrors -- Feature may be disabled.
+	@set_time_limit( 300 );
+
 	/**
-	 * From WordPress' .../update-core.php
+	 * Clear the cache to prevent an update_option() from saving a stale database version to the cache.
+	 * Not all caching plugins recognize 'flush', so delete the options cache too, just to be safe.
+	 *
+	 * @see WordPress' `.../update-core.php`
 	 * @since 3.1.4
 	 */
-	// Clear the cache to prevent an update_option() from saving a stale database version to the cache
 	\wp_cache_flush();
-	// (Not all cache back ends listen to 'flush')
 	\wp_cache_delete( 'alloptions', 'options' );
 
 	$version = _previous_db_version();
@@ -147,15 +166,33 @@ function _do_upgrade() {
 
 	//! From here, the upgrade procedures should be backward compatible.
 	//? This means no data may be erased for at least 1 major version, or 1 year, whichever is later.
+	//? We must manually delete settings that are no longer used; we merge them otherwise.
 	if ( $version < '3103' ) {
 		_do_upgrade_3103();
 		$version = '3103';
+	}
+
+	if ( $version < '3300' ) {
+		_do_upgrade_3300();
+		$version = '3300';
 	}
 
 	/**
 	 * @since 2.7.0
 	 */
 	\do_action( 'the_seo_framework_upgraded' );
+}
+
+/**
+ * Releases the upgrade lock on shutdown.
+ *
+ * When the upgrader halts, timeouts, or crashes for any reason, this will run.
+ *
+ * @since 4.0.0
+ * @TODO add cache flush? @see _upgrade_to_current()
+ */
+function _release_upgrade_lock() {
+	\delete_transient( 'tsf_upgrade_lock' );
 }
 
 \add_action( 'the_seo_framework_upgraded', __NAMESPACE__ . '\\_upgrade_to_current' );
@@ -174,26 +211,73 @@ function _upgrade_to_current() {
 	\update_option( 'the_seo_framework_upgraded_db_version', THE_SEO_FRAMEWORK_DB_VERSION );
 
 	/**
-	 * From WordPress' .../update-core.php
+	 * Clear the cache to prevent a get_option() from retrieving a stale database version to the cache.
+	 * Not all caching plugins recognize 'flush', so delete the options cache too, just to be safe.
+	 *
+	 * @see WordPress' `.../update-core.php`
 	 * @since 3.1.4
 	 */
-	// Clear the cache to prevent a get_option() from retrieving a stale database version to the cache
 	\wp_cache_flush();
-	// (Not all cache back ends listen to 'flush')
 	\wp_cache_delete( 'alloptions', 'options' );
 }
 
-\add_action( 'the_seo_framework_upgraded', __NAMESPACE__ . '\\_upgrade_reinitialize_rewrite', 99 );
+\add_action( 'the_seo_framework_upgraded', __NAMESPACE__ . '\\_prepare_upgrade_notice', 99 );
 /**
- * Reinitializes the rewrite cache.
+ * Prepares a notice when the upgrade is completed.
  *
- * This happens after the plugin's upgraded, because it's not critical, and when
- * this fails, the upgrader won't be locked.
- *
- * @since 3.1.2
+ * @since 4.0.0
  */
-function _upgrade_reinitialize_rewrite() {
-	\the_seo_framework()->reinitialize_rewrite();
+function _prepare_upgrade_notice() {
+	\add_action( 'admin_notices', __NAMESPACE__ . '\\_do_upgrade_notice' );
+}
+
+/**
+ * Outputs "your site has been upgraded" notification to applicable plugin users on upgrade.
+ *
+ * @since 3.0.6
+ */
+function _do_upgrade_notice() {
+
+	if ( ! \current_user_can( 'update_plugins' ) ) return;
+
+	$tsf = \the_seo_framework();
+
+	if ( _previous_db_version() ) {
+		$tsf->do_dismissible_notice(
+			$tsf->convert_markdown(
+				sprintf(
+					/* translators: %s = Version number, surrounded in markdown-backticks. */
+					\esc_html__( 'Thank you for updating The SEO Framework! Your website has been upgraded successfully to use The SEO Framework at database version `%s`.', 'autodescription' ),
+					\esc_html( THE_SEO_FRAMEWORK_DB_VERSION )
+				),
+				[ 'code' ]
+			),
+			'updated',
+			true,
+			false
+		);
+	} else {
+		$tsf->do_dismissible_notice(
+			\esc_html__( 'Thank you for installing The SEO Framework! Your website is now optimized for SEO, automatically. We hope you enjoy our free plugin. Good luck with your site!', 'autodescription' ),
+			'updated',
+			false,
+			false
+		);
+		$tsf->do_dismissible_notice(
+			$tsf->convert_markdown(
+				sprintf(
+					/* translators: %s = Link, markdown. */
+					\esc_html__( "The SEO Framework only identifies itself rarely during plugin upgrades. We'd like to use this opportunity to highlight our [plugin setup guide](%s).", 'autodescription' ),
+					'https://theseoframework.com/docs/seo-plugin-setup/' // Use https://tsf.fyi/docs/setup ? Needless redirection...
+				),
+				[ 'a' ],
+				[ 'a_internal' => false ]
+			),
+			'updated',
+			false,
+			false
+		);
+	}
 }
 
 \add_action( 'the_seo_framework_upgraded', __NAMESPACE__ . '\\_prepare_upgrade_suggestion', 100 );
@@ -208,17 +292,22 @@ function _upgrade_reinitialize_rewrite() {
  * @return void Early when already enqueued
  */
 function _prepare_upgrade_suggestion() {
-	static $run = false;
-	if ( $run ) return;
+	if ( ! \is_admin() ) return;
+	if ( ! _previous_db_version() ) return;
 
-	if ( \is_admin() ) {
-		\add_action( 'admin_init', function() {
-			if ( ! _previous_db_version() ) return;
-			require THE_SEO_FRAMEWORK_DIR_PATH_FUNCT . 'upgrade-suggestion.php';
-		}, 20 );
-	}
+	\add_action( 'admin_init', __NAMESPACE__ . '\\_include_upgrade_suggestion', 20 );
+}
 
-	$run = true;
+/**
+ * Loads plugin suggestion file
+ *
+ * @since 4.0.0
+ */
+function _include_upgrade_suggestion() {
+
+	if ( \The_SEO_Framework\_has_run( __METHOD__ ) ) return;
+
+	require THE_SEO_FRAMEWORK_DIR_PATH_FUNCT . 'upgrade-suggestion.php';
 }
 
 /**
@@ -228,7 +317,7 @@ function _prepare_upgrade_suggestion() {
  * @staticvar array $cache The cached notice strings.
  *
  * @param string $notice The upgrade notice.
- * @param bool $get Whether to return the upgrade notices.
+ * @param bool   $get    Whether to return the upgrade notices.
  * @return array|void The notices when $get is true.
  */
 function _add_upgrade_notice( $notice = '', $get = false ) {
@@ -285,7 +374,7 @@ function _do_upgrade_2701() {
 			\add_term_meta( $term_id, THE_SEO_FRAMEWORK_TERM_OPTIONS, $meta, true );
 		}
 
-		//= Rudimentary test for remaining ~300 users of the past passed, set initial version to 2600.
+		//= Rudimentary test for remaining ~300 users of earlier versions passed, set initial version to 2600.
 		\update_option( 'the_seo_framework_initial_db_version', '2600', 'no' );
 	}
 
@@ -294,7 +383,6 @@ function _do_upgrade_2701() {
 
 /**
  * Removes term metadata for version 2802.
- * Reinitializes rewrite data for for sitemap stylesheet.
  *
  * @since 2.8.0
  */
@@ -394,8 +482,6 @@ function _do_upgrade_3060() {
  * Migrates `attachment_nofollow` option to post type settings.
  * Migrates `attachment_noarchive` option to post type settings.
  *
- * Loads suggestion for TSFEM.
- *
  * @since 3.1.0
  */
 function _do_upgrade_3103() {
@@ -411,14 +497,14 @@ function _do_upgrade_3103() {
 
 		// Transport title separator.
 		if ( isset( $defaults['title_separator'] ) )
-			$tsf->update_option( 'title_separator', $tsf->get_option( 'title_seperator' ) ?: $defaults['title_separator'] );
+			$tsf->update_option( 'title_separator', $tsf->get_option( 'title_seperator', false ) ?: $defaults['title_separator'] );
 
 		// Transport attachment_noindex, attachment_nofollow, and attachment_noarchive settings.
 		foreach ( [ 'noindex', 'nofollow', 'noarchive' ] as $r ) {
 			$_option = $tsf->get_robots_post_type_option_id( $r );
 			if ( isset( $defaults[ $_option ] ) ) {
-				$_value = (array) ( $tsf->get_option( $_option ) ?: $defaults[ $_option ] );
-				$_value['attachment'] = (int) (bool) $tsf->get_option( "attachment_$r" );
+				$_value               = (array) ( $tsf->get_option( $_option, false ) ?: $defaults[ $_option ] );
+				$_value['attachment'] = (int) (bool) $tsf->get_option( "attachment_$r", false );
 				$tsf->update_option( $_option, $_value );
 			}
 		}
@@ -441,4 +527,62 @@ function _do_upgrade_3103() {
 	}
 
 	\update_option( 'the_seo_framework_upgraded_db_version', '3103' );
+}
+
+/**
+ * Flushes rewrite rules for one last time.
+ * Converts title separator's dash option to ndash.
+ * Enables pinging via cron.
+ * Flips the home_title_location option from left to right, and vice versa.
+ *
+ * Annotated as 3300, because 4.0 was supposed to be the 3.3 update before we
+ * refactored the whole API.
+ *
+ * @since 4.0.0
+ */
+function _do_upgrade_3300() {
+
+	$tsf = \the_seo_framework();
+
+	if ( \get_option( 'the_seo_framework_initial_db_version' ) < '3300' ) {
+		// Remove old rewrite rules.
+		unset(
+			$GLOBALS['wp_rewrite']->extra_rules_top['sitemap\.xml$'],
+			$GLOBALS['wp_rewrite']->extra_rules_top['sitemap\.xsl$']
+		); // redundant?
+		\add_action( 'shutdown', 'flush_rewrite_rules' );
+
+		$defaults = _upgrade_default_site_options();
+
+		// Convert 'dash' title option to 'ndash', silently. Nothing really changes for the user.
+		if ( 'dash' === $tsf->get_option( 'title_separator', false ) )
+			$tsf->update_option( 'title_separator', 'ndash' );
+
+		// Add default cron pinging option.
+		if ( isset( $defaults['ping_use_cron'] ) ) {
+			$tsf->update_option( 'ping_use_cron', $defaults['ping_use_cron'] );
+
+			if ( $defaults['ping_use_cron'] ) {
+				if ( $tsf->get_option( 'ping_google', false ) || $tsf->get_option( 'ping_bing', false ) ) {
+					_add_upgrade_notice(
+						\esc_html__( 'A cronjob is now used to ping search engines, and it alerts them to changes in your sitemap.', 'autodescription' )
+					);
+				}
+			}
+		}
+
+		// Flip the homepage title location to make it in line with all other titles.
+		$home_title_location = $tsf->get_option( 'home_title_location', false );
+		if ( 'left' === $home_title_location ) {
+			$tsf->update_option( 'home_title_location', 'right' );
+		} else {
+			$tsf->update_option( 'home_title_location', 'left' );
+		}
+
+		_add_upgrade_notice(
+			\esc_html__( 'The positions in the "Meta Title Additions Location" setting for the homepage have been reversed, left to right, but the output has not been changed. If you must downgrade for some reason, remember to switch the location back again.', 'autodescription' )
+		);
+	}
+
+	\update_option( 'the_seo_framework_upgraded_db_version', '3300' );
 }

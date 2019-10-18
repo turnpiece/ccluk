@@ -7,11 +7,13 @@ namespace WP_Defender\Module;
 
 use Hammer\Base\Module;
 use WP_Defender\Module\IP_Lockout\Controller\Main;
+use WP_Defender\Module\IP_Lockout\Controller\Rest;
 
 class IP_Lockout extends Module {
 	public function __construct() {
 		$this->register_post_type();
 		new Main();
+		new Rest();
 	}
 
 	public function register_post_type() {

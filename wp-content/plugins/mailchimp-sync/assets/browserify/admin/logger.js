@@ -1,17 +1,18 @@
 'use strict';
 
-var items = [];
+const m = require('mithril');
+let items = [];
 
 function error(msg) {
-	log("Error: " + msg);
+	log("Error: " + msg.toString());
 }
 
 function success(msg) {
-	log("Success: " + msg);
+	log("Success: " + msg.toString());
 }
 
 function log(msg) {
-	var line = {
+	let line = {
 		time: new Date(),
 		text: msg
 	};
@@ -27,8 +28,7 @@ function scroll(element, initialized, context) {
 function render() {
 	return m("div.log", { config: scroll }, [
 		items.map( function( item ) {
-
-			var timeString =
+			let timeString =
 				("0" + item.time.getHours()).slice(-2)   + ":" +
 				("0" + item.time.getMinutes()).slice(-2) + ":" +
 				("0" + item.time.getSeconds()).slice(-2);

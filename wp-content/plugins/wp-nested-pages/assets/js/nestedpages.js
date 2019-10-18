@@ -60,6 +60,32 @@ NestedPages.Formatter = function()
 	// Adjust nested margins based on how deep the list is nested
 	plugin.setNestedMargins = function()
 	{
+		plugin.setIndent();
+	}
+
+	plugin.setIndent = function()
+	{
+		var amount = ( nestedpages.non_indent === '1' ) ? 20 : 30;
+		var indent_element = ( nestedpages.non_indent === '1' ) ? '.row-inner' : '.child-toggle';
+		$.each($(NestedPages.selectors.lists), function(i, v){
+			var parent_count = $(this).parents(NestedPages.selectors.lists).length;
+			var padding = 0;
+			if ( !NestedPages.jsData.sortable ) padding = 10;
+			if ( parent_count > 0 ){
+				var padding = ( parent_count * amount ) + padding;
+				$(this).find(indent_element).css('padding-left', padding + 'px');
+				return;
+			}
+			if ( !NestedPages.jsData.sortable || $(this).hasClass('no-sort') ){
+				$(this).find('.row-inner').css('padding-left', '10px');	
+				return;
+			}
+			$(this).find('.row-inner').css('padding-left', '0px');
+		});
+	}
+
+	plugin.setClassicIndent = function()
+	{
 		$.each($(NestedPages.selectors.lists), function(i, v){
 			var parent_count = $(this).parents(NestedPages.selectors.lists).length;
 			var padding = 0;
@@ -1191,6 +1217,12 @@ NestedPages.NewPost = function()
 			e.preventDefault();
 			plugin.openQuickEdit($(this));
 		});
+		$(document).on('keydown', function(e){
+			if ( e.keyCode === 27 ) {
+				plugin.cancelNewPage();
+				$(document).click(); // Close Dropdown
+			}
+		});
 	}
 
 	// Open the form modal
@@ -1520,14 +1552,6 @@ NestedPages.QuickEditPost = function()
 			e.preventDefault();
 			plugin.formatter.removeQuickEdit();
 		});
-		$(document).on('click', NestedPages.selectors.quickEditToggleTaxonomies, function(e){
-			e.preventDefault();
-			$(this).parents('form').find('.np-taxonomies').toggle();
-		});
-		$(document).on('click', NestedPages.selectors.quickEditToggleMenuOptions, function(e){
-			e.preventDefault();
-			$(this).parents('form').find('.np-menuoptions').toggle();
-		});
 		$(document).on('change', '.keep_private', function(){
 			if ( this.checked ){
 				$('.post_password').val('').prop('readonly', true);
@@ -1853,11 +1877,13 @@ NestedPages.QuickEditPost = function()
 		
 		var status = $(plugin.row).find('.status');
 		if ( (plugin.newData._status !== 'publish') && (plugin.newData._status !== 'future') ){
-			$(status).text('(' + plugin.newData._status + ')');
-		} else if (plugin.newData.keep_private === 'private') {
-			$(status).text('(' + plugin.newData.keep_private + ')');
+			var newStatus = nestedpages.post_statuses[plugin.newData._status].label;
+			$(status).text('(' + newStatus + ')');
 		} else {
 			$(status).text('');
+		}
+		if ( plugin.newData.keep_private === 'private' ){
+			$(status).text(nestedpages.private);
 		}
 
 		// Password Lock Icon
@@ -2345,47 +2371,69 @@ NestedPages.Clone = function()
 
 	return plugin.bindEvents();
 }
-var NestedPages = NestedPages || {};
-
 /**
-* Tab functionality
-* @package Nested Pages
-* @author Kyle Phillips - https://github.com/kylephillips/wp-nested-pages
+* Tabs
+* 
+* @author Kyle Phillips
+* 
+* To use, include links with a data-tab-toggle attribute which matches the tab pane's data-tab-pane attribute
+* The tabs and panes should all the same data-tab-group attribute value
+* Add a CSS selector of .tab-pane to panes to hide them
 */
+var NestedPages = NestedPages || {};
 NestedPages.Tabs = function()
 {
-	var plugin = this;
+	var self = this;
 	var $ = jQuery;
 
-	plugin.activeContent = '';
-	plugin.activeButton = '';
-
-	plugin.init = function()
-	{
-		plugin.bindEvents();
+	self.selectors = {
+		tabToggle : 'data-np-tab-toggle',
+		tabPane : 'data-np-tab-pane',
+		tabGroup : 'data-np-tab-group'
 	}
 
-
-	plugin.bindEvents = function()
+	self.bindEvents = function()
 	{
-		$(document).on('click', NestedPages.selectors.tabButton, function(e){
+		$(document).on('click', '[' + self.selectors.tabToggle + ']', function(e){
 			e.preventDefault();
-			plugin.activeButton = $(this);
-			plugin.toggleTabs();
+			self.toggleTabs($(this));
 		});
 	}
 
-
-	plugin.toggleTabs = function()
+	/**
+	* Toggle the Tabs
+	*/
+	self.toggleTabs = function(tab)
 	{
-		plugin.activeContent = $(plugin.activeButton).attr('href');
-		$(NestedPages.selectors.tabContent).hide();
-		$(plugin.activeContent).show();
-		$(plugin.activeButton).parents(NestedPages.selectors.tabButtonParent).find(NestedPages.selectors.tabButton).removeClass('active');
-		$(plugin.activeButton).addClass('active');
+		var tabGroup = $(tab).attr(self.selectors.tabGroup);
+		var tabPanes = $('*[' + self.selectors.tabGroup + '=' + tabGroup + '][' + self.selectors.tabPane + ']');
+		var activeTab = $(tab).attr(self.selectors.tabToggle);
+		var buttons = $('*[' + self.selectors.tabGroup + '=' + tabGroup + '][' + self.selectors.tabToggle + ']');
+		var listItems = [];
+
+		for ( var i = 0; i < buttons.length; i++ ){
+			listItems[i] = $(buttons[i]).parent('li')[0];
+		}
+
+		$(tabPanes).hide();
+		$(buttons).removeClass('active');
+		$(listItems).removeClass('active');
+
+		$.each(tabPanes, function(){
+			if ( $(this).attr(self.selectors.tabPane) == activeTab ) $(this).show();
+		});
+
+		$.each(buttons, function(){
+			if ( $(this).attr(self.selectors.tabToggle) == activeTab ) {
+				$(this).addClass('active');
+				$(this).parent('li').addClass('active');
+			}
+		});
+
+		$(document).trigger('tabs-changed', [activeTab, tabGroup, tab]);
 	}
 
-	return plugin.init();
+	return self.bindEvents();
 }
 /**
 * Primary Nested Pages Initialization
@@ -2420,6 +2468,7 @@ NestedPages.selectors = {
 	syncCheckbox : '.np-sync-menu', // Sync menu checkbox
 	syncForm: '.np-sync-menu-cont', // The form/container for the sync menu element
 	ajaxError : '[data-nestedpages-error]', // AJAX error notification
+	trashWithChildrenButton : '[data-nestedpages-trash-children]',
 
 	// Responsive Toggle
 	toggleEditButtons : '.np-toggle-edit', // Button that toggles responsive buttons
@@ -2443,8 +2492,6 @@ NestedPages.selectors = {
 	quickEditLoadingIndicator : '.np-qe-loading', // Loading indicator in Quick Edit
 	quickEditErrorDiv : '.np-quickedit-error', // Error Div in Quick Edit
 	quickEditCancel : '.np-cancel-quickedit', // Cancel button in quick edit
-	quickEditToggleTaxonomies : '.np-toggle-taxonomies', // Toggle Taxonomies in Quick Edit
-	quickEditToggleMenuOptions : '.np-toggle-menuoptions', // Toggle Menu Options in Quick Edit
 
 	// Quick Edit - Links
 	quickEditButtonLink : '.np-quick-edit-redirect', // Button to open link quick edit
@@ -2552,7 +2599,8 @@ NestedPages.formActions = {
 	wpmlTranslations : 'npWpmlTranslations',
 	resetSettings : 'npresetSettings',
 	resetUserPrefs : 'npresetUserPreferences',
-	resetAdminMenuSettings : 'npresetAdminMenuSettings'
+	resetAdminMenuSettings : 'npresetAdminMenuSettings',
+	trashWithChildren : 'nptrashWithChildren'
 }
 
 
@@ -2585,6 +2633,7 @@ NestedPages.Factory = function()
 	plugin.postSearch = new NestedPages.PostSearch;
 	plugin.postMove = new NestedPages.MovePost;
 	plugin.wpml = new NestedPages.Wpml;
+	plugin.trashWithChildren = new NestedPages.TrashWithChildren;
 
 	plugin.init = function()
 	{
@@ -2702,15 +2751,11 @@ NestedPages.MenuLinks = function()
 		cssClasses : '[data-np-menu-css-classes]',
 		npStatus : '[data-np-menu-np-status]',
 		linkTarget : '[data-np-menu-link-target]',
-		menuTitle : '[data-np-menu-title]'
+		menuTitle : '[data-np-menu-title]',
+		parentPostType : '[data-np-menu-parent-post-type]'
 	}
 
 	plugin.search = new NestedPages.MenuSearch;
-
-	plugin.init = function()
-	{
-		plugin.bindEvents();
-	}
 
 	plugin.bindEvents = function()
 	{
@@ -2813,7 +2858,7 @@ NestedPages.MenuLinks = function()
 		$(plugin.selectors.saveButton).hide();
 		$(plugin.selectors.formDetails).hide();
 		$(plugin.selectors.formPlaceholder).show();
-		$(plugin.selectors.form).find('input').not('.parent_id').val('');
+		$(plugin.selectors.form).find('input').not('.parent_id').not('.parent-post-type').val('');
 		$(plugin.selectors.form).find(plugin.fields.linkTarget).val('_blank');
 		$(plugin.selectors.form).find('input[type="checkbox"]').attr('checked', false);
 		$(plugin.selectors.typeSelect).removeClass('active');
@@ -2933,7 +2978,7 @@ NestedPages.MenuLinks = function()
 		$(plugin.selectors.saveButton).attr('disabled', false);
 	}
 
-	return plugin.init();
+	return plugin.bindEvents();
 }
 var NestedPages = NestedPages || {};
 
@@ -3511,6 +3556,51 @@ NestedPages.MovePost = function()
 			$(this).find('[' + plugin.selectors.moveToBottom + ']').removeClass('disabled');
 			var last = $(this).find(NestedPages.selectors.rows).last();
 			$(last).find('[' + plugin.selectors.moveToBottom + ']').addClass('disabled');
+		});
+	}
+
+	return plugin.bindEvents();
+}
+var NestedPages = NestedPages || {};
+
+/**
+* Trash post with all children
+* @package Nested Pages
+* @author Kyle Phillips - https://github.com/kylephillips/wp-nested-pages
+*/
+NestedPages.TrashWithChildren = function()
+{
+	var plugin = this;
+	var $ = jQuery;
+
+	plugin.post_id = ''; // The parent/source post ID
+
+	plugin.bindEvents = function()
+	{
+		$(document).on('click', NestedPages.selectors.trashWithChildrenButton, function(e){
+			e.preventDefault();
+			plugin.post_id = $(this).attr('data-post-id');
+			plugin.trash();
+		});
+	}
+
+	// Trash the posts
+	plugin.trash = function()
+	{
+		$.ajax({
+			url : NestedPages.jsData.ajaxurl,
+			type : 'post',
+			data : {
+				action : NestedPages.formActions.trashWithChildren,
+				nonce : NestedPages.jsData.nonce,
+				post_id : plugin.post_id,
+				screen : nestedpages.current_page
+			},
+			success : function(data){
+				window.location.replace(data.redirect);
+			}, error : function(data){
+				console.log(data);
+			}
 		});
 	}
 

@@ -29,7 +29,9 @@ class Hide_Error_Service extends Rule_Service implements IRule_Service {
 			$url      = site_url( 'wp-includes/theme-compat/embed.php', array(
 				'user-agent' => 'Defender self check'
 			) );
-			$response = wp_remote_get( $url );
+			$response = wp_remote_get( $url, [
+				'timeout' => 3
+			] );
 			$body     = wp_remote_retrieve_body( $response );
 			if ( $isLog == 1 ) {
 				ini_set( 'log_errors', 1 );

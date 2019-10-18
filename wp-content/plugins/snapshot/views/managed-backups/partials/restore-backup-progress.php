@@ -97,7 +97,7 @@
 
                             <p>
                                 <a href="<?php echo esc_url( get_admin_url() ); ?>" class="button button-gray"><?php esc_html_e('WP ADMIN', SNAPSHOT_I18N_DOMAIN); ?></a>
-                                <a href="<?php echo esc_url( get_site_url() ); ?>"  class="button button-gray"><?php esc_html_e('View Backup', SNAPSHOT_I18N_DOMAIN); ?></a>
+                                <a href="<?php echo esc_url( WPMUDEVSnapshot::instance()->snapshot_get_pagehook_url('snapshots-newui-managed-backups') ); ?>"  class="button button-gray"><?php esc_html_e('View Backup', SNAPSHOT_I18N_DOMAIN); ?></a>
                             </p>
 
                         </div>
@@ -365,4 +365,3 @@
     </section>
 
 </div>
-

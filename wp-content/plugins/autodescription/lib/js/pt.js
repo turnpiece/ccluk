@@ -40,11 +40,11 @@ window.tsfPT = function( $ ) {
 	/**
 	 * Data property injected by WordPress l10n handler.
 	 *
-	 * @since 3.1.0
-	 * @access private
+	 * @since 4.0.0
+	 * @access public
 	 * @type {(Object<string, *>)|boolean|null} l10n Localized strings
 	 */
-	let l10n = 'undefined' !== typeof tsfPTL10n && tsfPTL10n;
+	const l10n = 'undefined' !== typeof tsfPTL10n && tsfPTL10n;
 
 	/**
 	 * Initializes primary term selection.
@@ -58,16 +58,15 @@ window.tsfPT = function( $ ) {
 	 */
 	const _initPrimaryTerm = () => {
 
-		if ( ! tsf.hasInput || ! Object.keys( l10n.taxonomies ).length )
-			return;
+		if ( ! Object.keys( l10n.taxonomies ).length ) return;
 
-		let taxonomies = l10n.taxonomies,
+		let taxonomies    = l10n.taxonomies,
 			inputTemplate = wp.template( 'tsf-primary-term-selector' ),
-			helpTemplate = wp.template( 'tsf-primary-term-selector-help' );
+			helpTemplate  = wp.template( 'tsf-primary-term-selector-help' );
 
 		let termSelector = document.createElement( 'span' );
-		termSelector.classList.add( 'tsf-primary-term-selector' );
-		termSelector.classList.add( 'tsf-set-primary-term' ); // newline for IE11 compat.
+
+		termSelector.classList.add( 'tsf-primary-term-selector', 'tsf-set-primary-term' );
 
 		(() => {
 			let radio = document.createElement( 'input' );
@@ -75,23 +74,29 @@ window.tsfPT = function( $ ) {
 			termSelector.appendChild( radio );
 		})();
 
-		let input$ = {},
-			checked$ = {},
+		let input$         = {},
+			checked$       = {},
 			uniqueChecked$ = {},
-			box$ = {},
-			primaries = {};
+			box$           = {},
+			primaries      = {};
 
 		const nsAction = ( action, taxonomy ) => action + '.tsfShowPrimary' + taxonomy;
 
 		const addInput = ( taxonomy ) => {
-			let $wrap = $( '#' + taxonomy + 'div' ),
+			let $wrap    = $( '#' + taxonomy + 'div' ),
 				template = inputTemplate( { 'taxonomy' : taxonomies[ taxonomy ] } );
 			$wrap.append( template );
 		}
 		const addHelp = ( taxonomy ) => {
-			let $wrap = $( '#taxonomy-' + taxonomy ),
-				template = helpTemplate( { 'taxonomy' : taxonomies[ taxonomy ] } );
-			$wrap.append( template );
+			let $wrap    = $( '#taxonomy-' + taxonomy ),
+				template = helpTemplate( { 'taxonomy' : taxonomies[ taxonomy ] } ),
+				$ulChild  = $wrap.children( 'ul:first' );
+
+			if ( $ulChild.length ) {
+				$( template ).insertAfter( $ulChild ); // Maintain tab order.
+			} else {
+				$wrap.prepend( template );
+			}
 			tsfTT.triggerReset();
 			fixHelpPos( taxonomy );
 		}
@@ -102,17 +107,17 @@ window.tsfPT = function( $ ) {
 			let $postbox = $( wrap ).closest( '.postbox' );
 			if ( $postbox.length && $postbox.hasClass( 'closed' ) ) return;
 
-			let tab = Array.prototype.slice.call( tabs ).filter( ( el ) => {
+			let tab = [].slice.call( tabs ).filter( ( el ) => {
 				return el.offsetWidth > 0 || el.offsetHeight > 0 || el.getClientRects().length > 0;
 			} )[0];
 
 			if ( ! tab ) return;
 
 			let offset = tab.scrollHeight > tab.clientHeight
-			           ? tab.offsetWidth - tab.clientWidth + 25 - 2 // 2px is padding or something?
-			           : 25;
+					   ? tab.offsetWidth - tab.clientWidth + 25 - 2 // 2px is padding or something?
+					   : 25;
 
-			if ( tsf.states.isRTL ) {
+			if ( tsf.l10n.states.isRTL ) {
 				wrap.querySelector( '.tsf-primary-term-selector-help-wrap' ).style.left = offset + 'px';
 			} else {
 				wrap.querySelector( '.tsf-primary-term-selector-help-wrap' ).style.right = offset + 'px';
@@ -243,11 +248,11 @@ window.tsfPT = function( $ ) {
 			} );
 		}
 		const addCheckedNode = ( taxonomy, element ) => {
-			checked$[ taxonomy ] = checked$[ taxonomy ].add( '[value="' + element.value + '"]' );
+			checked$[ taxonomy ]       = checked$[ taxonomy ].add( '[value="' + element.value + '"]' );
 			uniqueChecked$[ taxonomy ] = uniqueChecked$[ taxonomy ].add( element );
 		}
 		const removeCheckedNode = ( taxonomy, element ) => {
-			checked$[ taxonomy ] = checked$[ taxonomy ].not( '[value="' + element.value + '"]' );
+			checked$[ taxonomy ]       = checked$[ taxonomy ].not( '[value="' + element.value + '"]' );
 			uniqueChecked$[ taxonomy ] = uniqueChecked$[ taxonomy ].not( '[value="' + element.value + '"]' );
 		}
 		const togglePostbox = ( event, postbox ) => {
@@ -257,7 +262,7 @@ window.tsfPT = function( $ ) {
 		const initVars = function( taxonomy ) {
 			let $box = getBox( taxonomy, 1 );
 
-			input$[ taxonomy ] = $box.find( 'input[type=checkbox]' );
+			input$[ taxonomy ]   = $box.find( 'input[type=checkbox]' );
 			checked$[ taxonomy ] = $box.find( 'input[type=checkbox]:checked' );
 
 			let found = {}, val;
@@ -280,10 +285,10 @@ window.tsfPT = function( $ ) {
 			}
 		}
 		const initActions = ( taxonomy ) => {
-			let data = { 'taxonomy': taxonomy },
-				$box = getBox( taxonomy ),
-				$div = $( '#' + taxonomy + 'div' ),
-				$tabs = $( '#' + taxonomy + '-tabs' ),
+			let data      = { 'taxonomy': taxonomy },
+				$box     = getBox( taxonomy ),
+				$div     = $( '#' + taxonomy + 'div' ),
+				$tabs    = $( '#' + taxonomy + '-tabs' ),
 				$postbox = $box.closest( '.postbox' );
 
 			let defaultClickAction = nsAction( 'click', taxonomy );
@@ -330,6 +335,7 @@ window.tsfPT = function( $ ) {
 			}
 		}
 
+		// Hook data handles, don't overwrite vars.
 		const init = () => {
 			for ( let taxonomy in taxonomies ) {
 				if ( getBox( taxonomy ).length ) {
@@ -344,8 +350,7 @@ window.tsfPT = function( $ ) {
 		init();
 	}
 
-	//? IE11 Object.assign() alternative.
-	return $.extend( {
+	return Object.assign( {
 		/**
 		 * Initialises all aspects of the scripts.
 		 * You shouldn't call this.
@@ -356,9 +361,13 @@ window.tsfPT = function( $ ) {
 		 * @function
 		 * @return {undefined}
 		 */
-		load: function() {
+		load: () => {
 			$( document.body ).on( 'tsf-onload', _initPrimaryTerm );
 		}
-	}, {} );
+	}, {
+
+	}, {
+		l10n
+	} );
 }( jQuery );
 jQuery( window.tsfPT.load );

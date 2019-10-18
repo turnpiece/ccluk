@@ -1,0 +1,80 @@
+.defender-dashboard {
+  $summary-image: '../img/dashboard-defender.svg';
+  @media (min-width: 783px) {
+    .sui-summary:not(.sui-unbranded) {
+      background-image: url($summary-image);
+      background-repeat: no-repeat;
+      background-size: 192px 182px;
+      background-position: 30px bottom;
+
+      .sui-summary-image-space {
+        width: 222px;
+        display: block;
+      }
+
+      .sui-summary-segment {
+        overflow: visible;
+
+        .sui-summary-details {
+          span.sui-tooltip {
+            position: relative;
+            top: -22px;
+
+            i {
+              top: 0;
+              left: 0
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .sui-field-list {
+    .sui-field-list-body {
+      .sui-field-list-item {
+        .sui-field-list-item-label {
+          strong {
+            color: #333;
+            font-size: 13px;
+          }
+        }
+
+        span {
+          font-size: 13px;
+        }
+      }
+    }
+  }
+
+  .advanced-tools {
+    strong {
+      color: #333
+    }
+  }
+
+  .sui-cross-sell-modules .sui-cross-1 {
+    background-image: url("../img/plugins-smush.jpg");
+
+    span {
+      background-image: url("../img/plugins-smush-icon.png");
+    }
+  }
+
+  .sui-cross-sell-modules .sui-cross-2 {
+    background-image: url("../img/plugins-hummingbird.jpg");
+
+    span {
+      background-image: url("../img/plugins-hummingbird-icon.png");
+    }
+  }
+
+
+  .sui-cross-sell-modules .sui-cross-3 {
+    background-image: url("../img/plugins-smartcrawl.jpg");
+
+    span {
+      background-image: url("../img/plugins-smartcrawl-icon.png");
+    }
+  }
+}

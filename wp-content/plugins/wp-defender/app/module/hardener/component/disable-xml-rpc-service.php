@@ -20,6 +20,7 @@ class Disable_Xml_Rpc_Service extends Rule_Service implements IRule_Service {
 	public function process() {
 		//first need to cache the status
 		Settings::instance()->setDValues( self::CACHE_KEY, 1 );
+
 		return true;
 	}
 
@@ -28,6 +29,7 @@ class Disable_Xml_Rpc_Service extends Rule_Service implements IRule_Service {
 	 */
 	public function revert() {
 		Settings::instance()->setDValues( self::CACHE_KEY, 0 );
+
 		return true;
 	}
 

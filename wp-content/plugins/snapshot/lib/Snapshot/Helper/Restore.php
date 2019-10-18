@@ -316,7 +316,7 @@ class Snapshot_Helper_Restore {
 				'status' => true,
 				'progress' => $progress,
 			);
-	
+
 			return $response;
 		}
 

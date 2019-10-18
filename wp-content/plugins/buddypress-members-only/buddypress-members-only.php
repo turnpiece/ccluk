@@ -3,7 +3,7 @@
 Plugin Name: BuddyPress Members only
 Plugin URI: https://membersonly.top/features/
 Description: Only registered users can view your site, non members can only see a login/home page with no registration options. More amazing features? Login and Logout auto redirect to Referer page or Certain page based on user roles,  Restricts your BP standard Components and customized  Components to users,enable page level members only protect, only protect your buddypress and open all other WP area to users... etc, Get <a href='https://membersonly.top' target='blank'>BP Members Only Pro</a> now.  
-Version: 2.1.1
+Version: 2.2.1
 Author: Tomas Zhu: <a href='http://membersonly.top' target='_blank'>BP Members Only Pro</a>
 Author URI: https://membersonly.top/features/
 Text Domain: bp-members-only
@@ -38,6 +38,14 @@ function bp_members_only_option_menu()
    add_submenu_page('bpmemberonly', __('Buddypress Members Only','bp-members-only'), __('Buddypress Members Only','bp-members-only'), 'manage_options', 'bpmemberonly', 'buddypress_members_only_setting');
    add_submenu_page('bpmemberonly',__('Knowledge Base','bp-members-only'), __('Knowledge Base','bp-members-only'),"manage_options", 'membersonlyfaq','membersOnlyFreeFAQ');
 }
+
+//!!!start
+$bpdisableallfeature = get_option('bpdisableallfeature');
+if ('yes' == $bpdisableallfeature)
+{
+	return;
+}
+//!!!end
 
 function buddypress_members_only_setting()
 {
@@ -98,6 +106,31 @@ function buddypress_members_only_setting()
 			
 			$bpmoMessageString =  __( 'Your changes has been saved.', 'bp-members-only' );
 			buddypress_members_only_message($bpmoMessageString);
+			
+			
+			if (isset($_POST['bpdisableallfeature']))
+			{
+				$bpdisableallfeature = sanitize_text_field($_POST['bpdisableallfeature']);
+				update_option('bpdisableallfeature',$bpdisableallfeature);
+			}
+			else
+			{
+				delete_option('bpdisableallfeature');
+			}
+			
+			$bpdisableallfeature = get_option('bpdisableallfeature');
+			
+			if (isset ( $_POST ['bpenablepagelevelprotect'] )) 
+			{
+				$m_bpenablepagelevelprotect = $_POST ['bpenablepagelevelprotect'];
+				update_option ( 'bpenablepagelevelprotect', $m_bpenablepagelevelprotect );
+			} 
+			else 
+			{
+				delete_option ( 'bpenablepagelevelprotect' );
+			}
+			$bpenablepagelevelprotect = get_option ( 'bpenablepagelevelprotect' );
+			
 		}
 		echo "<br />";
 
@@ -178,8 +211,6 @@ function buddypress_members_only_setting()
 										<p><font color="Gray"><i><?php echo  __( 'If you did not install buddypress, this option will be ignored.', 'bp-members-only' ); ?></i></p>					
 										</td>
 										</tr>				
-<?php //!!!start ?>
-
 										<tr style="margin-top:30px;">
 										<td width="100%" style="padding: 20px;">
 										<p>
@@ -222,7 +253,85 @@ function buddypress_members_only_setting()
 												</p>
 										</td>
 										</tr>
-<?php //!!!end ?>						
+
+										<tr style="margin-top:30px;">
+										<td width="100%" style="padding: 20px;">
+										<p>
+										<?php 
+											echo  __( 'Temporarily Turn Off All Featrures:', 'bp-members-only' );
+										?>
+										</p>
+										<p>
+										<?php
+										$bpdisableallfeature = get_option('bpdisableallfeature');
+										if (!(empty($bpdisableallfeature)))
+										{
+											echo '<input type="checkbox" id="bpdisableallfeature" name="bpdisableallfeature"  style="" value="yes"  checked="checked"> Temporarily Turn Off All Featrures Of BuddyPress Members Only ';
+ 
+										}
+										else 
+										{
+											echo '<input type="checkbox" id="bpdisableallfeature" name="bpdisableallfeature"  style="" value="yes" > Temporarily Turn Off All Featrures Of BuddyPress Members Only ';
+										}
+										?>
+										</p>
+										<p><font color="Gray"><i>
+										<?php 
+										echo  __( '# If you enabled this option, all features of buddypress members only will be disabled, you site will open to all users', 'bp-members-only') ;
+										?></i></p>
+										</td>
+										</tr>
+										
+<?php //!!!start ?>
+										<tr style="margin-top:30px;">
+										<td width="100%" style="padding: 20px;">
+										<p>										
+										<?php
+	echo __ ( 'Enable Page Level Protect:', 'bp-members-only' );
+	?>
+										</p>
+										<p>
+										<?php
+	$bpenablepagelevelprotect = get_option ( 'bpenablepagelevelprotect' );
+	if (! (empty ( $bpenablepagelevelprotect ))) {
+	} else {
+		$bpenablepagelevelprotect = '';
+	}
+	?>
+										<?php
+	if (! (empty ( $bpenablepagelevelprotect ))) {
+		echo '<input type="checkbox" id="bpenablepagelevelprotect" name="bpenablepagelevelprotect"  style="" value="yes"  checked="checked"> Enable Page Level Protect Settings ';
+	} else {
+		echo '<input type="checkbox" id="bpenablepagelevelprotect" name="bpenablepagelevelprotect"  style="" value="yes" > Enable Page Level Protect Settings ';
+	}
+	?>
+										
+										<p>
+													<font color="Gray"><i>
+										<?php
+	echo __ ( '# If you enabled this option,  in ', 'bp-members-only' );
+	echo "<a style='color:#4e8c9e;' href='" . get_option ( 'siteurl' ) . "/wp-admin/post-new.php' target='_blank'>page / post  editor</a>";
+	echo __ ( ', you will find "Members only for this page?" meta box at the right top of the wordpress standard editor.', 'bp-members-only in ' );
+	?>
+										</i>
+												
+												</p>
+												<p>
+													<font color="Gray"><i><?php echo  __( '# If you checked "Allow everyone to access the page" checkbox in meta box, the post will be opened to all guest users', 'bp-members-only' ); ?></i>
+												
+												</p>
+												<p>
+													<font color="Gray"><i>
+										<?php
+	echo __ ( '# By this way, you do not need enter page URLs to ', 'bp-members-only' );
+	echo "<a  style='color:#4e8c9e;' href='" . get_option ( 'siteurl' ) . "/wp-admin/admin.php?page=bpmemberonly' target='_blank'>Opened Pages Panel</a>";
+	echo __ ( ' always.', 'bp-members-only' );
+	
+	?></i>
+												</p>
+											</td>
+										</tr>
+<?php //!!!end ?>
 										</table>
 										<br />
 										<input type="submit" id="bpmosubmitnew" name="bpmosubmitnew" value=" Submit " style="margin:1px 20px;">
@@ -231,6 +340,14 @@ function buddypress_members_only_setting()
 										<br />
 									</div>
 								</div>
+								<div>
+								<a class="" style="font-size:16px;vertical-align: super;color: #b73955;" target="_blank" href="https://paypal.me/sunpayment">
+								<img src='<?php echo get_option('siteurl');  ?>/wp-content/plugins/buddypress-members-only/images/buymeacoffee.png' style="width:14px;height:14px;margin-left: 10px;">
+								<span>
+								Buy me a coffee?
+								</span>
+								</a>
+								</div>								
 							</div>
 						</div>
 					</div>
@@ -261,11 +378,11 @@ else
 						<div id="dashboard-widgets-main-content">
 							<div class="postbox-container" style="width:90%;">
 							
-							
+
 								<div class="postbox">
 									<h3 class='hndle' style='padding: 10px 0px; !important'>
 									<span>
-									<a class="" target="_blank" href="https://membersonly.top/features/">Members Only Pro Features</a>
+									<a class="" style="font-size:28px;" target="_blank" href="https://membersonly.top/features/">Members Only Pro Features</a>
 									</span>
 									</h3>
 								
@@ -273,19 +390,25 @@ else
 							<div class="inside">
 									<ul>
 									<li>
-										* Fine-grained access control, build a privacy site quickly, just a few clicks, you can restricts each buddypress componets, all wordpress pages(even home page or site rss), based on approved members / approved user roles, you can decide which section of your site open / close to specific user roles. <b>more feature can be found at: <a class="" target="_blank" href="https://membersonly.top/features/">https://membersonly.top/features/</a></b>
+										* Fine-grained access control, you can restricts each buddypress componets, control each menu visibility, control each user role's profile visibility, restricts each wordpress pages(even home page or site rss), based on approved members / approved user roles, you can decide which section of your site open / close to specific user roles. <b>more feature can be found at: <a class="" target="_blank" href="https://membersonly.top/features/">https://membersonly.top/features/</a></b>
 									</li>
 									<li>
-										* Restricts BP standard components / customization components to users based on user roles, for example, you can disable BP components pages to guest, open members component page to subscriber user roles, open profile component page to paid user roles only…
-									</li>
-									<li>
-										* Menu Visibility Control by User Roles, for example, you can only allow customer user role to see download menu, subscriber & customer user role can see product menu... and so on, so you do not need make a long menu lists to all users
+										* Super easy to use, just a few clicks, build a membership buddypress network or build a privacy site quickly, with detailed guide.  
 									</li>									
+									<li>
+										* <a href='https://membersonly.top/features/' target='_blank'>Restricts BP standard components / customization components to users based on user roles</a>, for example, you can disable BP components pages to guest, open members component page to subscriber user roles, open profile component page to paid user roles only…
+									</li>
+									<li>
+										* <a href='https://membersonly.top/buddypress-menu-visibility-by-user-roles-demo/' target='_blank'>Menu Visibility Control by User Roles</a>, for example, you can only allow customer user role to see download menu, subscriber & customer user role can see product menu... and so on, so you do not need make a long menu lists to all users
+									</li>
+									<li>
+										* <a href='https://membersonly.top/buddypress-membership-plugin-4-0-2-released-buddypress-profile-field-visibility-control-by-user-roles-addon-support-hide-buddypress-profile-fields/' target='_blank'>Members profile field visibility control by user roles</a>, for example, you can settings to only paid members can show their profile fileds publicly, and profile fields of subscriber user role will be hidden... and so on
+									</li>																
 									<li>
 										* One click to add / remove 10 buddypress membership Levels, edit name of default membership levels, for example: Bronze, Silver, Gold… and so on
 									</li>
 									<li>
-										* Charge Membership Fees via membership levels with [BuddyPress Membership WooCmmerce Payment Gateway Plugin](https://membersonly.top/features-of-buddypress-woocommerce-payment-gateway-plugin/)
+										* Just a simple clicks to charge membership fee via membership levels with [BuddyPress Membership WooCmmerce Payment Gateway Plugin](<a href='https://membersonly.top/features-of-buddypress-woocommerce-payment-gateway-plugin/' target='_blank'>https://membersonly.top/features-of-buddypress-woocommerce-payment-gateway-plugin/</a>)
 									</li>									
 									<li>
 										* Approved Users Only, after enabled this option, when users register as members, they need awaiting administrator approve their account manually, only approved users can login your site, Admin user can approve or unapprove any users again at anytime.
@@ -445,6 +568,19 @@ function buddypress_only_for_members()
 	$saved_register_page_url = str_ireplace('https://','',$saved_register_page_url);
 	$saved_register_page_url = str_ireplace('ws://','',$saved_register_page_url);
 	$saved_register_page_url = str_ireplace('www.','',$saved_register_page_url);
+	
+	//!!!start
+	$current_page_id = get_the_ID ();
+	$bpenablepagelevelprotect = get_option ( 'bpenablepagelevelprotect' );
+	if (! (empty ( $bpenablepagelevelprotect ))) 
+	{
+		$get_post_meta_value_for_this_page = get_post_meta ( $current_page_id, 'bp_members_only_access_to_this_page', true );
+		if (strtolower ( $get_post_meta_value_for_this_page ) == 'yes') 
+		{
+			return;
+		}
+	}	
+	//!!!end	
 	
 	$bprestrictsbuddypresssection = get_option ( 'bprestrictsbuddypresssection' );
 	if (function_exists ( 'bp_current_component' )) {
@@ -670,3 +806,49 @@ function members_onlt_free_admin_css()
 	}
 }
 add_action('admin_head', 'members_onlt_free_admin_css');
+
+//!!!start
+$bpenablepagelevelprotect = get_option ( 'bpenablepagelevelprotect' );
+if (! (empty ( $bpenablepagelevelprotect ))) {
+	add_action ( 'add_meta_boxes', 'add_bp_members_only_control_meta_box' );
+	add_action ( 'save_post', 'save_wp_members_only_control_meta_box', 10, 3 );
+}
+
+function bp_members_only_control_meta_box() {
+	$current_page_id = get_the_ID ();
+	$get_post_meta_value_for_this_page = get_post_meta ( $current_page_id, 'bp_members_only_access_to_this_page', true );
+	global $wpdb;
+
+	?>
+<table cellspacing="2" cellpadding="5" style="width: 100%;"
+	class="form-table">
+	<tbody>
+		<tr class="form-field">
+			<td><input name="bp_members_only_access_to_this_page" type="checkbox"
+				value="yes"
+				<?php  if(esc_attr( $get_post_meta_value_for_this_page ) == 'yes' ) {echo 'checked="checked"';} ?>><label><?php _e('Allow everyone to access the page', 'admin-tools') ?></label>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<?php
+}
+function add_bp_members_only_control_meta_box() {
+	add_meta_box ( "bp_members_only_control_meta_box_id", __ ( 'Members only for this page?', 'bp-members-only' ), 'bp_members_only_control_meta_box', null, "side", "high", null );
+}
+function save_wp_members_only_control_meta_box($post_id, $post, $update) {
+	$current_page_id = get_the_ID ();
+	$meta_box_checkbox_value = '';
+	
+	if (isset ( $_POST ['bp_members_only_access_to_this_page'] ) != "") {
+		$meta_box_checkbox_value = $_POST ['bp_members_only_access_to_this_page'];
+		$get_post_meta_value_for_this_page = get_post_meta ( $current_page_id, 'bp_members_only_access_to_this_page', true );
+	}
+	
+	if (isset ( $_POST ['bp_members_only_access_to_this_page'] ) != "") {
+		update_post_meta ( $current_page_id, 'bp_members_only_access_to_this_page', $meta_box_checkbox_value );
+	} else {
+		update_post_meta ( $current_page_id, 'bp_members_only_access_to_this_page', '' );
+	}
+}
+//!!!end

@@ -9,15 +9,29 @@ use WP_Defender\Module\Hardener\Model\Settings;
 use WP_Defender\Module\Hardener\Rule;
 
 class Disable_File_Editor extends Rule {
-	static $slug = 'disable_file_editor';
+	static $slug = 'disable-file-editor';
+
+	/**
+	 * This will return the short summary why this rule show up as issue
+	 *
+	 * @return string
+	 */
+	function getErrorReason() {
+		return __( "The file editor is currently enabled.", wp_defender()->domain );
+	}
+
+	/**
+	 * This will return a short summary to show why this rule works
+	 * @return mixed
+	 */
+	function getSuccessReason() {
+		return __( "You've disabled the file editor, winning.", wp_defender()->domain );
+	}
+
 	static $service;
 
 	function getDescription() {
 		$this->renderPartial( 'rules/disable-file-editor' );
-	}
-
-	function getSubDescription() {
-		return __( "The file editor is currently enabled.", wp_defender()->domain );
 	}
 
 	function check() {
@@ -29,26 +43,23 @@ class Disable_File_Editor extends Rule {
 	}
 
 	function addHooks() {
-		$this->add_action( 'processingHardener' . self::$slug, 'process' );
-		$this->add_action( 'processRevert' . self::$slug, 'revert' );
+		$this->addAction( 'processingHardener' . self::$slug, 'process' );
+		$this->addAction( 'processRevert' . self::$slug, 'revert' );
 		//Extra hardener actions incase setup is messed
 		if ( $this->check() ) {
-			$this->add_action( 'current_screen', 'current_screen' );
+			$this->addAction( 'current_screen', 'current_screen' );
 			if ( is_network_admin() ) {
-				$this->add_action( 'network_admin_menu', 'editor_admin_menu', 999 );
+				$this->addAction( 'network_admin_menu', 'editor_admin_menu', 999 );
 			} elseif ( is_user_admin() ) {
-				$this->add_action( 'user_admin_menu', 'editor_admin_menu', 999 );
+				$this->addAction( 'user_admin_menu', 'editor_admin_menu', 999 );
 			} else {
-				$this->add_action( 'admin_menu', 'editor_admin_menu', 999 );
+				$this->addAction( 'admin_menu', 'editor_admin_menu', 999 );
 			}
-			$this->add_filter( 'plugin_action_links', 'action_links', 10, 4 );
+			$this->addFilter( 'plugin_action_links', 'action_links', 10, 4 );
 		}
 	}
 
 	function revert() {
-		if ( ! $this->verifyNonce() ) {
-			return;
-		}
 		$ret = $this->getService()->revert();
 		if ( ! is_wp_error( $ret ) ) {
 			Settings::instance()->addToIssues( self::$slug );
@@ -60,10 +71,6 @@ class Disable_File_Editor extends Rule {
 	}
 
 	function process() {
-		if ( ! $this->verifyNonce() ) {
-			return;
-		}
-
 		$ret = $this->getService()->process();
 		if ( ! is_wp_error( $ret ) ) {
 			Settings::instance()->addToResolved( self::$slug );
@@ -91,29 +98,31 @@ class Disable_File_Editor extends Rule {
 	 */
 	function current_screen() {
 		$current_screen = get_current_screen();
-		if( $current_screen->id == 'theme-editor-network' || $current_screen->id == 'theme-editor' ){
-			wp_die('<p>'.__('Sorry, you are not allowed to edit templates for this site.').'</p>');
+		if ( $current_screen->id == 'theme-editor-network' || $current_screen->id == 'theme-editor' ) {
+			wp_die( '<p>' . __( 'Sorry, you are not allowed to edit templates for this site.' ) . '</p>' );
 		}
-		if( $current_screen->id == 'plugin-editor-network' || $current_screen->id == 'plugin-editor' ){
-			wp_die('<p>'.__('Sorry, you are not allowed to edit plugins for this site.').'</p>');
+		if ( $current_screen->id == 'plugin-editor-network' || $current_screen->id == 'plugin-editor' ) {
+			wp_die( '<p>' . __( 'Sorry, you are not allowed to edit plugins for this site.' ) . '</p>' );
 		}
 	}
-	
+
 	/**
 	 * Remove the edit in the admin menu
 	 */
 	function editor_admin_menu() {
-		remove_submenu_page( 'themes.php','theme-editor.php' );
-		remove_submenu_page( 'plugins.php','plugin-editor.php' );
+		remove_submenu_page( 'themes.php', 'theme-editor.php' );
+		remove_submenu_page( 'plugins.php', 'plugin-editor.php' );
 	}
 
 	/**
-	 * Remove any edit links from the plugin list 
+	 * Remove any edit links from the plugin list
 	 *
 	 */
-	function action_links( $actions, $plugin_file, $plugin_data, $context) {
-		if ( isset( $actions['edit'] ) )
+	function action_links( $actions, $plugin_file, $plugin_data, $context ) {
+		if ( isset( $actions['edit'] ) ) {
 			unset( $actions['edit'] );
+		}
+
 		return $actions;
 	}
 }

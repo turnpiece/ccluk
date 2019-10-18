@@ -1,17 +1,17 @@
 [
     {
         "name": "composer/installers",
-        "version": "v1.6.0",
-        "version_normalized": "1.6.0.0",
+        "version": "v1.7.0",
+        "version_normalized": "1.7.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/composer/installers.git",
-            "reference": "cfcca6b1b60bc4974324efb5783c13dca6932b5b"
+            "reference": "141b272484481432cda342727a427dc1e206bfa0"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/composer/installers/zipball/cfcca6b1b60bc4974324efb5783c13dca6932b5b",
-            "reference": "cfcca6b1b60bc4974324efb5783c13dca6932b5b",
+            "url": "https://api.github.com/repos/composer/installers/zipball/141b272484481432cda342727a427dc1e206bfa0",
+            "reference": "141b272484481432cda342727a427dc1e206bfa0",
             "shasum": ""
         },
         "require": {
@@ -25,7 +25,7 @@
             "composer/composer": "1.0.*@dev",
             "phpunit/phpunit": "^4.8.36"
         },
-        "time": "2018-08-27T06:10:37+00:00",
+        "time": "2019-08-12T15:00:31+00:00",
         "type": "composer-plugin",
         "extra": {
             "class": "Composer\\Installers\\Plugin",
@@ -69,6 +69,7 @@
             "RadPHP",
             "SMF",
             "Thelia",
+            "Whmcs",
             "WolfCMS",
             "agl",
             "aimeos",
@@ -91,6 +92,7 @@
             "installer",
             "itop",
             "joomla",
+            "known",
             "kohana",
             "laravel",
             "lavalite",
@@ -123,17 +125,17 @@
     },
     {
         "name": "stripe/stripe-php",
-        "version": "v6.34.5",
-        "version_normalized": "6.34.5.0",
+        "version": "v6.43.0",
+        "version_normalized": "6.43.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/stripe/stripe-php.git",
-            "reference": "124fafb57c287cf6e13830bcf329cac160a6afe8"
+            "reference": "c06eb0da0e73750cab75948dd9ca4a15cf829e68"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/stripe/stripe-php/zipball/124fafb57c287cf6e13830bcf329cac160a6afe8",
-            "reference": "124fafb57c287cf6e13830bcf329cac160a6afe8",
+            "url": "https://api.github.com/repos/stripe/stripe-php/zipball/c06eb0da0e73750cab75948dd9ca4a15cf829e68",
+            "reference": "c06eb0da0e73750cab75948dd9ca4a15cf829e68",
             "shasum": ""
         },
         "require": {
@@ -148,7 +150,7 @@
             "squizlabs/php_codesniffer": "~2.0",
             "symfony/process": "~2.8"
         },
-        "time": "2019-05-07T00:56:15+00:00",
+        "time": "2019-08-09T20:54:08+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -298,17 +300,17 @@
     },
     {
         "name": "wimg/php-compatibility",
-        "version": "9.1.1",
-        "version_normalized": "9.1.1.0",
+        "version": "9.2.0",
+        "version_normalized": "9.2.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/PHPCompatibility/PHPCompatibility.git",
-            "reference": "2b63c5d284ab8857f7b1d5c240ddb507a6b2293c"
+            "reference": "3db1bf1e28123fd574a4ae2e9a84072826d51b5e"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/PHPCompatibility/PHPCompatibility/zipball/2b63c5d284ab8857f7b1d5c240ddb507a6b2293c",
-            "reference": "2b63c5d284ab8857f7b1d5c240ddb507a6b2293c",
+            "url": "https://api.github.com/repos/PHPCompatibility/PHPCompatibility/zipball/3db1bf1e28123fd574a4ae2e9a84072826d51b5e",
+            "reference": "3db1bf1e28123fd574a4ae2e9a84072826d51b5e",
             "shasum": ""
         },
         "require": {
@@ -322,10 +324,10 @@
             "phpunit/phpunit": "~4.5 || ^5.0 || ^6.0 || ^7.0"
         },
         "suggest": {
-            "dealerdirect/phpcodesniffer-composer-installer": "^0.4.3 || This Composer plugin will sort out the PHPCS 'installed_paths' automatically.",
+            "dealerdirect/phpcodesniffer-composer-installer": "^0.5 || This Composer plugin will sort out the PHPCS 'installed_paths' automatically.",
             "roave/security-advisories": "dev-master || Helps prevent installing dependencies with known security issues."
         },
-        "time": "2018-12-30T23:16:27+00:00",
+        "time": "2019-06-27T19:58:56+00:00",
         "type": "phpcodesniffer-standard",
         "installation-source": "dist",
         "notification-url": "https://packagist.org/downloads/",
@@ -339,13 +341,13 @@
             },
             {
                 "name": "Wim Godden",
-                "homepage": "https://github.com/wimg",
-                "role": "lead"
+                "role": "lead",
+                "homepage": "https://github.com/wimg"
             },
             {
                 "name": "Juliette Reinders Folmer",
-                "homepage": "https://github.com/jrfnl",
-                "role": "lead"
+                "role": "lead",
+                "homepage": "https://github.com/jrfnl"
             }
         ],
         "description": "A set of sniffs for PHP_CodeSniffer that checks for PHP cross-version compatibility.",
@@ -359,17 +361,17 @@
     },
     {
         "name": "wp-coding-standards/wpcs",
-        "version": "2.1.0",
-        "version_normalized": "2.1.0.0",
+        "version": "2.1.1",
+        "version_normalized": "2.1.1.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards.git",
-            "reference": "8c7a2e7682de9ef5955251874b639deda51ef470"
+            "url": "https://github.com/WordPress/WordPress-Coding-Standards.git",
+            "reference": "bd9c33152115e6741e3510ff7189605b35167908"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/WordPress-Coding-Standards/WordPress-Coding-Standards/zipball/8c7a2e7682de9ef5955251874b639deda51ef470",
-            "reference": "8c7a2e7682de9ef5955251874b639deda51ef470",
+            "url": "https://api.github.com/repos/WordPress/WordPress-Coding-Standards/zipball/bd9c33152115e6741e3510ff7189605b35167908",
+            "reference": "bd9c33152115e6741e3510ff7189605b35167908",
             "shasum": ""
         },
         "require": {
@@ -384,7 +386,7 @@
         "suggest": {
             "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0 || This Composer plugin will sort out the PHPCS 'installed_paths' automatically."
         },
-        "time": "2019-04-08T10:53:57+00:00",
+        "time": "2019-05-21T02:50:00+00:00",
         "type": "phpcodesniffer-standard",
         "installation-source": "dist",
         "notification-url": "https://packagist.org/downloads/",

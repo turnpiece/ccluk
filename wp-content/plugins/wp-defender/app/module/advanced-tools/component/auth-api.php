@@ -5,13 +5,7 @@
 
 namespace WP_Defender\Module\Advanced_Tools\Component;
 
-use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
-use BaconQrCode\Renderer\Image\SvgImageBackEnd;
-use BaconQrCode\Renderer\ImageRenderer;
-use BaconQrCode\Renderer\RendererStyle\RendererStyle;
-use BaconQrCode\Writer;
 use Hammer\Base\Component;
-use PragmaRX\Google2FA\Google2FA;
 use WP_Defender\Behavior\Utils;
 use WP_Defender\Module\Advanced_Tools\Model\Auth_Settings;
 
@@ -46,7 +40,7 @@ class Auth_API extends Component {
 			$chl .= ( '&issuer=' . rawurlencode( $title ) );
 		}
 		//manually include the autoload
-		require_once wp_defender()->getPluginPath() . 'vendor/phpqrcode/qrlib.php';
+		require_once wp_defender()->getPluginPath() . 'vendor/phpqrcode/phpqrcode.php';
 
 		$code = \QRcode::svg( $chl, false, QR_ECLEVEL_L, 4 );
 
@@ -166,7 +160,10 @@ class Auth_API extends Component {
 		}
 
 		if ( Utils::instance()->isActivatedSingle() ) {
-			$allowedForThisRole = array_intersect( $settings->userRoles, $user->roles );
+			$allowedForThisRole = array_intersect( $settings->user_roles, $user->roles );
+			if ( ! is_array( $allowedForThisRole ) ) {
+				$allowedForThisRole = [];
+			}
 
 			return count( $allowedForThisRole ) > 0;
 		} else {
@@ -177,7 +174,7 @@ class Auth_API extends Component {
 				$u         = new \WP_User( $user->ID, '', $blog->userblog_id );
 				$userRoles = array_merge( $u->roles, $userRoles );
 			}
-			$allowedForThisRole = array_intersect( $settings->userRoles, $userRoles );
+			$allowedForThisRole = array_intersect( $settings->user_roles, $userRoles );
 
 			return count( $allowedForThisRole ) > 0;
 		}
@@ -202,7 +199,7 @@ class Auth_API extends Component {
 		}
 
 		if ( Utils::instance()->isActivatedSingle() ) {
-			$isForced = array_intersect( $settings->forceAuthRoles, $user->roles );
+			$isForced = array_intersect( $settings->force_auth_roles, $user->roles );
 
 			return count( $isForced ) > 0;
 		} else {
@@ -213,7 +210,7 @@ class Auth_API extends Component {
 				$u         = new \WP_User( $user->ID, '', $blog->userblog_id );
 				$userRoles = array_merge( $u->roles, $userRoles );
 			}
-			$isForced = array_intersect( $settings->forceAuthRoles, $userRoles );
+			$isForced = array_intersect( $settings->force_auth_roles, $userRoles );
 
 			return count( $isForced ) > 0;
 		}

@@ -1,8 +1,9 @@
 <?php
 /**
- * @package The_SEO_Framework\Classes\Builders
- * @subpackage The_SEO_Framework\Builders
+ * @package The_SEO_Framework\Classes\Builders\Scripts
+ * @subpackage The_SEO_Framework\Scripts
  */
+
 namespace The_SEO_Framework\Builders;
 
 /**
@@ -27,6 +28,7 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
 /**
  * Sets up class loader as file is loaded.
  * This is done asynchronously, because static calls are handled prior and after.
+ *
  * @see EOF. Because of the autoloader and (future) trait calling, we can't do it before the class is read.
  * @link https://bugs.php.net/bug.php?id=75771
  */
@@ -35,48 +37,56 @@ $_load_scripts_class = function() {
 };
 
 /**
- * Registers and outputs inpost GUI scripts. Auto-invokes everything the moment
+ * Registers and outputs admin GUI scripts. Auto-invokes everything the moment
  * this file is required.
  * Relies on \WP_Dependencies to prevent duplicate loading, and autoloading.
  *
  * This handles admin-ONLY scripts for now.
  *
  * @since 3.1.0
- * @see the_seo_framework()->Scripts()
  * @see \WP_Styles
  * @see \WP_Scripts
  * @see \WP_Dependencies
+ * @see \The_SEO_Framework\Bridges\Scripts
  * @access private
- *         Use `the_seo_framework()->Scripts()` instead.
  * @final Can't be extended.
  */
 final class Scripts {
+	use \The_SEO_Framework\Traits\Enclose_Stray_Private;
 
 	/**
 	 * Codes to maintain the internal state of the scripts. This state might not reflect
 	 * the actual load state. See \WP_Dependencies instead.
+	 *
 	 * @since 3.1.0
 	 * @internal
-	 * @param int <bit 1>  REGISTERED
-	 * @param int <bit 10> LOADED     (enqueued)
+	 * @var int <bit 01>  REGISTERED
+	 * @var int <bit 10>  LOADED     (rather, enqueued)
 	 */
-	const REGISTERED = 0b1;
+	const REGISTERED = 0b01;
 	const LOADED     = 0b10;
 
 	/**
 	 * @since 3.1.0
-	 * @param array $scripts    The registered scripts.
-	 * @param array $templates  The registered templates.
-	 * @param array $queue      The queued scripts state.
+	 * @var array $scripts   The registered scripts.
 	 */
-	private static $scripts   = [];
-	private static $templates = [];
-	private static $queue     = [];
+	private static $scripts = [];
 
 	/**
-	 * The internal singleton object holder.
 	 * @since 3.1.0
-	 * @param The_SEO_Framework\Builders\Scripts $instance The instance.
+	 * @var array $templates The registered templates.
+	 */
+	private static $templates = [];
+
+	/**
+	 * @since 3.1.0
+	 * @var array $queue     The queued scripts state.
+	 */
+	private static $queue = [];
+
+	/**
+	 * @since 3.1.0
+	 * @var \The_SEO_Framework\Builders\Scripts $instance The instance.
 	 */
 	private static $instance;
 
@@ -84,7 +94,7 @@ final class Scripts {
 	 * @since 3.1.0
 	 * @since 3.2.2 Is now a private variable.
 	 * @see static::verify()
-	 * @param string|null $include_secret The inclusion secret generated on tab load.
+	 * @var string|null $include_secret The inclusion secret generated on tab load.
 	 */
 	private static $include_secret;
 
@@ -105,6 +115,7 @@ final class Scripts {
 	 *
 	 * @since 3.1.0
 	 * @access private
+	 * @staticvar int $count Enforces singleton.
 	 * @internal
 	 */
 	public function __construct() {
@@ -114,8 +125,37 @@ final class Scripts {
 
 		static::$instance = &$this;
 
+		\add_filter( 'admin_body_class', [ $this, '_add_body_class' ] );
+		\add_action( 'in_admin_header', [ $this, '_print_tsfjs_script' ] );
+
 		\add_action( 'admin_enqueue_scripts', [ $this, '_prepare_admin_scripts' ], 1 );
 		\add_action( 'admin_footer', [ $this, '_output_templates' ], 999 );
+	}
+
+	/**
+	 * Adds admin-body classes.
+	 *
+	 * @since 4.0.0
+	 * @access private
+	 * @internal
+	 *
+	 * @param string $classes Space-separated list of CSS classes.
+	 * @return string
+	 */
+	public function _add_body_class( $classes ) {
+		// Add spaces at both sides, because who knows what others do.
+		return ' tsf-no-js ' . $classes;
+	}
+
+	/**
+	 * Prints the TSF no-js transform script, using ES2015 (ECMA-262).
+	 *
+	 * @since 4.0.0
+	 * @access private
+	 * @internal
+	 */
+	public function _print_tsfjs_script() {
+		echo "<script>(()=>{document.body.classList.replace('tsf-no-js','tsf-js');const a=0;})()</script>";
 	}
 
 	/**
@@ -124,10 +164,8 @@ final class Scripts {
 	 * @since 3.1.0
 	 * @access private
 	 * @internal
-	 *
-	 * @param string $hook The current admin hook.
 	 */
-	public function _prepare_admin_scripts( $hook = '' ) {
+	public function _prepare_admin_scripts() {
 		$this->forward_known_scripts();
 		$this->autoload_known_scripts();
 	}
@@ -296,7 +334,7 @@ final class Scripts {
 	 * @see static::enqueue_known_script();
 	 * @augments static::$queue
 	 * @uses $this->generate_file_url()
-	 * @uses $this->get_inline_css()
+	 * @uses $this->create_inline_css()
 	 * @uses $this->register_template()
 	 *
 	 * @param array $s The script.
@@ -310,7 +348,7 @@ final class Scripts {
 			case 'css':
 				\wp_register_style( $s['id'], $instance->generate_file_url( $s, 'css' ), $s['deps'], $s['ver'], 'all' );
 				isset( $s['inline'] )
-					and \wp_add_inline_style( $s['id'], $instance->get_inline_css( $s['inline'] ) );
+					and \wp_add_inline_style( $s['id'], $instance->create_inline_css( $s['inline'] ) );
 				$registered = true;
 				break;
 			case 'js':
@@ -319,13 +357,15 @@ final class Scripts {
 					and \wp_localize_script( $s['id'], $s['l10n']['name'], $s['l10n']['data'] );
 				isset( $s['tmpl'] )
 					and $instance->register_template( $s['id'], $s['tmpl'] );
+				isset( $s['inline'] )
+					and \wp_add_inline_script( $s['id'], $instance->create_inline_js( $s['inline'] ) );
 				$registered = true;
 				break;
 		}
 		if ( $registered ) {
 			isset( static::$queue[ $s['type'] ][ $s['id'] ] )
 				and static::$queue[ $s['type'] ][ $s['id'] ] |= static::REGISTERED
-				 or static::$queue[ $s['type'] ][ $s['id'] ]  = static::REGISTERED; // Precision alignment ok.
+				 or static::$queue[ $s['type'] ][ $s['id'] ]  = static::REGISTERED; // phpcs:ignore, WordPress.WhiteSpace
 		}
 	}
 
@@ -356,7 +396,7 @@ final class Scripts {
 		if ( $loaded ) {
 			isset( static::$queue[ $type ][ $id ] )
 				and static::$queue[ $type ][ $id ] |= static::LOADED
-				 or static::$queue[ $type ][ $id ]  = static::LOADED; // Precision alignment ok.
+				 or static::$queue[ $type ][ $id ]  = static::LOADED; // phpcs:ignore, WordPress.WhiteSpace
 		}
 	}
 
@@ -395,15 +435,35 @@ final class Scripts {
 	 * - {{$color_accent}}
 	 *
 	 * @since 3.1.0
+	 * @uses $this->convert_color_css()
 	 *
-	 * @param array $colors The color CSS.
-	 * @return array $css
+	 * @param array $styles The styles to add.
+	 * @return string
 	 */
-	private function get_inline_css( array $styles ) {
+	private function create_inline_css( array $styles ) {
 
 		$out = '';
 		foreach ( $styles as $selector => $css ) {
 			$out .= $selector . '{' . implode( ';', $this->convert_color_css( $css ) ) . '}';
+		}
+
+		return $out;
+	}
+
+
+	/**
+	 * Concatenates inline JS.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @param array $scripts The scripts to add.
+	 * @return string
+	 */
+	private function create_inline_js( array $scripts ) {
+
+		$out = '';
+		foreach ( $scripts as $script ) {
+			$out .= ";$script";
 		}
 
 		return $out;
@@ -416,7 +476,7 @@ final class Scripts {
 	 * @staticvar array $c_ck Color keys.
 	 * @staticvar array $c_cv Color values.
 	 *
-	 * @param array $css
+	 * @param array $css The CSS to convert.
 	 * @return array $css
 	 */
 	private function convert_color_css( array $css ) {
@@ -430,7 +490,7 @@ final class Scripts {
 			$tsf = \the_seo_framework();
 
 			if (
-			   ! isset( $_colors[ $_scheme ]->colors ) // Precision alignment OK.
+			   ! isset( $_colors[ $_scheme ]->colors ) // phpcs:ignore, WordPress.WhiteSpace
 			|| ! is_array( $_colors[ $_scheme ]->colors )
 			|| count( $_colors[ $_scheme ]->colors ) < 4
 			) {
@@ -460,7 +520,7 @@ final class Scripts {
 				'{{$bg_accent}}'        => $_bg_accent,
 				'{{$rel_bg_accent}}'    => $_rel_bg_accent,
 				'{{$color}}'            => $_color,
-				'{{$rel_color}}'        => $_color,
+				'{{$rel_color}}'        => $_rel_color,
 				'{{$color_accent}}'     => $_color_accent,
 				'{{$rel_color_accent}}' => $_rel_color_accent,
 			];
@@ -479,8 +539,8 @@ final class Scripts {
 	 *
 	 * @since 3.1.0
 	 *
-	 * @param string $id, the related script handle/ID.
-	 * @param array $templates, associative-&-singul-, or sequential-&-multi-dimensional : {
+	 * @param string $id        The related script handle/ID.
+	 * @param array  $templates Associative-&-singul-, or sequential-&-multi-dimensional : {
 	 *   'file' => string $file. The full file location,
 	 *   'args' => array $args. Optional,
 	 * }
@@ -527,6 +587,7 @@ final class Scripts {
 	 *
 	 * There's a secret key generated on each tab load. This key can be accessed
 	 * in the view through `$_secret`, and be sent back to this class.
+	 *
 	 * @see static::verify( $secret )
 	 *
 	 * @since 3.1.0
@@ -542,7 +603,8 @@ final class Scripts {
 			$$_key = $_val;
 		unset( $_key, $_val, $args );
 
-		//= Prevent private includes hijacking.
+		//= Prevents private-includes hijacking.
+		// phpcs:ignore, VariableAnalysis.CodeAnalysis.VariableAnalysis -- Read the include?
 		static::$include_secret = $_secret = mt_rand() . uniqid( '', true );
 		include $file;
 		static::$include_secret = null;

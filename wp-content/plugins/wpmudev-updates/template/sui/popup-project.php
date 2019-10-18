@@ -639,4 +639,3 @@ foreach ( $res->tags as $tid => $plugin_tag ) {
 
 </div>
 
-

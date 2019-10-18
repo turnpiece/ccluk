@@ -305,12 +305,21 @@ abstract class Snapshot_Model_Destination {
 		}
 		$items = $this->list_remote_items($root);
 
-		$initial_count = count($items);
-		$to_remove = $initial_count - $keep_count;
+		$name_prefix = preg_quote( $root, '/' );
+		$prepared    = array_filter(
+			$this->get_prepared_items( $items ),
+			function ( $item ) use ( $name_prefix ) {
+				// Accurate file name checking
+				// See $backup_zip_filename in WPMUDEVSnapshot::snapshot_ajax_backup_finish (snapshot.php)
+				return preg_match( "/$name_prefix\-\d{6}\-\d{6}\-[\da-f]{8}\.zip$/ui", $item['title'] );
+			}
+		);
+
+		$initial_count = count( $prepared );
+		$to_remove     = $initial_count - $keep_count;
 
 		if ($to_remove <= 0) return 0; // Nothing to do here
 
-		$prepared = $this->get_prepared_items($items);
 		ksort($prepared);
 
 		$removed = 0;

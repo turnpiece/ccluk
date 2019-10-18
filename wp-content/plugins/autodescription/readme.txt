@@ -1,295 +1,303 @@
 === The SEO Framework ===
 Contributors: Cybr
-Donate link: https://theseoframework.com/donate/
 Tags: SEO, XML Sitemap, Google, Open Graph, Schema.org, Twitter
-Requires at least: 4.6.0
-Tested up to: 5.1.1
-Requires PHP: 5.4.0
-Stable tag: 3.2.4
+Requires at least: 4.9.0
+Tested up to: 5.2
+Requires PHP: 5.6.0
+Stable tag: 4.0.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-The SEO Framework plugin provides an automated and advanced SEO solution for your WordPress website.
+Purely professional, feature-complete, and the ad-free WordPress SEO plugin. Secure, fast, automated, and white-hat SEO. Do less; get better results.
 
 == Description ==
 
-**The complete SEO solution for your WordPress website.**
+**The only feature-complete SEO plugin that follows the white-hat guidelines and rules imposed by WordPress and search engines.**
 
-The SEO Framework is a reliable, accessible, unbranded, fully automated, and rigorously optimized SEO plugin for your website.
+Start using proven methods to optimize your website for SEO. Simple, dedicated, extensible, unrestricted, ad-free, and no strings attached.
 
-Without ads, distractions, and nonsensical functionality, this plugin delivers a time-saving SEO solution that truly helps your website rank.
+To top it off, this is the fastest full-featured SEO plugin, and it blends right into your WordPress website, without leaving you in the dark.
 
-[Migrate](https://theseoframework.com/?p=511) | [Setup](https://theseoframework.com/?p=2428) | [Improve](https://theseoframework.com/?p=2663) | [Extensions](https://theseoframework.com/extensions/) | [API](https://theseoframework.com/?p=82) | [Privacy](https://theseoframework.com/privacy-policy/#pluginprivacyinformation)
+It's easy to get started. Activate this plugin, and your site's already protected against prominent SEO attacks. The SEO Framework will also prefill all critical meta tags for you. A real time-saver. Ingenious.
 
-= This plugin: =
+[Migrate](https://theseoframework.com/?p=511) | [Setup](https://theseoframework.com/?p=2428) | [Improve](https://theseoframework.com/?p=2663) | [Extensions](https://theseoframework.com/extensions/) | [API](https://theseoframework.com/?p=82) | [Privacy](https://theseoframework.com/?p=1701#pluginprivacyinformation)
 
-* **Comes preconfigured**
-The SEO Framework provides a suitable starting point for most websites via its AI. It also comes with over a hundred settings for you to tweak; learn how to manage this in our [Setup guide](https://theseoframework.com/?p=2428).
+= We poured over 16,000 hours into this plugin. Here are the results: =
 
-* **Is smarter than all others**
-The SEO Framework has an AI built in that listens to all that WordPress gives to automatically optimize your pages. This saves you a lot of time and makes it very easy to use.
+* **It is brilliant.**
+The SEO Framework is an [expert system](https://en.wikipedia.org/wiki/Expert_system) for SEO. It is the only solution that can intelligently generate critical SEO meta tags in any language by reading your WordPress environment. This automation saves you a considerable amount of time that could be used to write more content or focus on other tasks. It also removes the need for advanced SEO knowledge.
 
-* **Has exceptional support**
-We don't outsource our support. Instead, the developer of this plugin, with extensive knowledge of hosting, SEO, WordPress, theming, and plugin development is here for you. Over a thousand inquiries have been answered personally within 72 hours in the past four years.
+* **It comes preconfigured.**
+With The SEO Framework, we provide an excellent starting point for your website by rationally optimizing all your pages. Naturally, you can also tweak it however you like. If you're not an SEO expert, learn what you may wish to optimize in our [Setup guide](https://theseoframework.com/?p=2428).
 
-* **Leaves no room for errors**
-We focus on quality rather than selling you useless features. This means that this plugin performs faster, is more accurate, has fewer bugs, and is more sustainable than others. The added benefit is that your site is unlikely to get penalized by search engines.
+* **It helps you optimize your metadata.**
+We made the only SEO plugin that follows Google's webmaster guidelines to the letter. It took years of research and tweaking to translate this well inside your WordPress interface. Finally, you can freely optimize your pages without having to worry about making critical mistakes.
 
-* **Is cleaner than all others**
-The SEO Framework is built for the small to large corporations and enterprises. The interface seamlessly integrates within WordPress, and interacting with it feels natural.
+* **It creates a beautiful overview.**
+On your post overview pages, you'll find color-coded guidelines. They suggest you how to improve your pages as you hover over them with your mouse. For example, when your titles are unbranded or when WordPress blocks indexing. Instinctively, touch-and keyboard navigation is also supported.
 
-* **Improves search presence**
-The SEO Framework ranks your website distinctively by enabling breadcrumbs for Google Search, and by automatically generating titles and descriptions according to Google's guidelines. It also notifies Google, Bing, Yandex, and all connected search networks automatically of your website's changes with its built-in sitemap.
+* **It includes exceptional support.**
+We don't outsource our support. We're here for you. Feel free to drop by [our support forums](https://wordpress.org/support/plugin/autodescription/) at any time to ask a question. More than 1400 inquiries have been answered personally, typically within 48 hours in the past five years.
 
-* **Improves social sharing**
-The SEO Framework automatically supports the Open Graph and Twitter Cards protocols, this helps your posts stand out when shared on various social networks.
+* **It leaves no room for errors.**
+We focus on the quality of features you need over the quantity on features you don't. This trait makes this plugin unique, faster, more accurate, nearly bug-free, and more sustainable. The added benefit is that your site is unlikely to get penalized by search engines. We won't steer you into writing unnatural content or allow you to trick search engines.
 
-* **Helps you optimize your metadata**
-The SEO Framework is the only plugin that literally has pixel-perfect guidelines for Google Search. It took years of research to get this right, and this means you can manually optimize your pages without making critical mistakes.
+* **It remains genuine and pure.**
+We built The SEO Framework for small to large corporations and enterprises. The interface is entirely accessible and seamlessly integrates within your dashboard. Therefore, interacting with this plugin feels natural. It might feel dull, but your WordPress dashboard shouldn't be a billboard for our branding. We won't ever change this.
 
-* **Creates a beautiful overview**
-On your post overview pages, you'll find color-coded guidelines. They tell you how to improve when hovering over it with your mouse.
+* **It improves search presence.**
+The SEO Framework ranks your website distinctively by enabling breadcrumbs for Google Search, and by automatically generating titles and descriptions according to Google's guidelines. It also notifies Google, Bing, and all connected search networks automatically of your website's changes with its built-in sitemap.
 
-* **Is completely accessible**
-We handpicked our color scheme so that people with any type of color-vision deficiency can distinguish these. Full keyboard-navigation support is also implemented.
+* **It makes social sharing easy.**
+The SEO Framework automatically supports and allows you to further tailor the Open Graph, Facebook, and Twitter Cards protocols. It helps your posts stand out when they're shared on various social networks, including Pinterest, Discord, and Whatsapp.
 
-* **Is always doing it right**
-The SEO Framework steers you from making significant and common SEO mistakes. It also leaves little room for you to mess up because the plugin already does everything for you. It also automatically prevents duplicated content mistakes by enforcing strict canonical URL rules, which is something many other plugins don't do.
+* **It feels more than accessible.**
+We handpicked our color scheme so that people with any medically recognized color-vision deficiency can distinguish the guidelines set by search engines. We also implemented full keyboard-navigation and screen-reader support.
 
-* **Follows best-practices and beyond**
-We built the plugin according to all WordPress coding guidelines. This means it neatly integrates with everything else made according to it, like bbPress and WooCommerce. This also means that the plugin is secure (there's no record of exploits) and extensible.
+* **It protects you from mistakes.**
+The SEO Framework steers you from making significant and common SEO mistakes. It leaves little room for you to mess up because the plugin already does everything SEO for you. For example, it automatically prevents duplicated content mistakes by enforcing strict canonical rules.
 
-* **Is built with developers in mind**
-We encourage other developers to add functionality to this plugin. We've done so ourselves, already, with our [extensions](https://theseoframework.com/extensions/). Feel free to join in on our efforts!
+* **It follows best-practices and beyond.**
+The biggest problems with WordPress plugins are security and compatibility. As part-time security researchers, we focus on making this plugin impenetrable. The SEO Framework also uses WordPress' API whenever possible, making this plugin integrate neatly with every other plugin written with that in mind.
 
-* **Respects your privacy**
-Unlike others, this plugin has no links that cloak your information, and it doesn't automatically share your email address with third parties. Learn more from our strictly adhered-to [privacy policy](https://theseoframework.com/privacy-policy/#pluginprivacyinformation).
+* **It has developers at heart.**
+We encourage other developers to enhance and add functionality to this plugin. We've done so ourselves, already, with our [extensions](https://theseoframework.com/extensions/). Check out [our API](https://theseoframework.com/?p=82), and feel free to [contribute](https://tsf.fyi/contributing)!
+
+* **It respects your privacy.**
+The SEO Framework sends us no information and does not create cookies. Learn more from our strictly adhered-to [privacy policy](https://theseoframework.com/?p=1701#pluginprivacyinformation).
 
 = Getting started =
 
-* Used another plugin? Easily [migrate your SEO Data](https://theseoframework.com/?p=511).
-* Lost in the sea of settings? Don't worry! Read our [quick setup guide](https://theseoframework.com/?p=2428).
+* Used another plugin? Easily [migrate your SEO data](https://theseoframework.com/?p=511).
+* Need a helping hand getting started? Read our [quick setup guide](https://theseoframework.com/?p=2428).
 * Want to improve your pages? Learn how to [optimize your metadata](https://theseoframework.com/?p=2663).
 
 = Do more with extensions =
-For more advanced SEO tools and output, check out our free companion plugin [Extension Manager](https://theseoframework.com/?p=2760). Many Premium, Essentials, and Free extensions are included, among others are:
 
-* **[Focus](https://theseoframework.com/?p=2305)** helps you write targeted content with **focus keywords**, their inflections, and their synonyms. It is an indispensable addition for bloggers and businesses alike.
-* **[Local](https://theseoframework.com/?p=2306)** helps you set up local SEO business information. This could expand your business' "Knowledge Graph" card for local search listings.
-* **[Title Fix](https://theseoframework.com/?p=2298)** fixes incorrect titles that are rendered by old themes.
+For additional functionality, check out our free companion plugin [Extension Manager](https://theseoframework.com/?p=2760). It provides numerous free and paid extensions, such as:
 
-Visit our [Extensions overview page](https://theseoframework.com/extensions/) for more information.
+* [Local](https://theseoframework.com/?p=2306) lets you set up **important local business information** for search engines to consume.
+* [Focus](https://theseoframework.com/?p=2305) guides you through the process of writing targeted content that ranks with **focus keywords**, and for Premium users also their inflections and synonyms.
+* [Articles](https://theseoframework.com/?p=2303) **enhances your published posts** by automatically adding important Structured Data.
+* [Honeypot](https://theseoframework.com/?p=2300) **catches comment spammers** through four lightweight yet powerful ways.
+* [AMP](https://theseoframework.com/?p=2304) **binds The SEO Framework to the AMP plugin** for AMP supported articles and pages.
+* [Monitor](https://theseoframework.com/?p=2302) **keeps track of your website's SEO** optimizations and statistics.
+* [Incognito](https://theseoframework.com/?p=2301) **hides all development-comments** from The SEO Framework.
+* [Origin](https://theseoframework.com/?p=2299) **redirects attachment-page visitors** back to the parent post.
+* [Title Fix](https://theseoframework.com/?p=2298) makes sure your **title output is as configured**. Even if your theme is doing it wrong.
 
-= Unbranded, Free and for the Professional =
-The SEO Framework is unbranded! This means that we don't even put the name "The SEO Framework" anywhere within the WordPress interface, aside from the plugin activation page. This plugin makes excellent use of the default WordPress interface elements, like as if this plugin is part of WordPress. No ads, no nags. The small and hidden HTML comments can easily be disabled with the use of a filter or extension.
+Visit our [extensions overview page](https://theseoframework.com/extensions/) for more information.
 
-Nobody has to know about the tools you've used to create your or someone else's website. A clean interface, for everyone.
+= Unbranded, free and for the professionals =
 
-**The SEO Framework goes further, behind the screens it:**
+The SEO Framework is a uniquely white label plugin that blends seamlessly into your WordPress dashboard. This means that we don't even put the name "The SEO Framework" anywhere within your WordPress interface. No ads, no nags. Nobody has to know about the tools you've used to create your website. Note that we output standardized development-comments distinguishing the plugin output in source code. You can remove these with our free [Incognito extension](https://theseoframework.com/?p=2301).
 
-* Prevents canonical errors with categories, pages, subdomains, and Multisite domain mapping.
-* Stops SEO attacks that are caused by pagination exploits in WordPress.
-* Discourages 404 pages and empty categories from being indexed, even if they don't send a 404 response.
-* Automatically notifies Google, Bing, and Yandex on website updates when sitemaps are enabled.
+= Behind the screens =
 
-= Generously personal =
-**The SEO Framework allows you to manually set various values for each post, page, public CPT, and term.**
+The SEO Framework works on many things without notifying you, because the best software should save you precious time. Here are a few things it does behind the screens.
 
-**And, this plugin allows you to adjust over 100 site settings, including:**
-
-* Automated title output options; they encourage you to follow the guidelines.
-* Automated description output options.
-* Schema.org structured data output options.
-* Various robots meta output options.
-* Many home page specific options.
-* Facebook, Twitter, and Pinterest social integration options.
-* Google, Bing, Pinterest and Yandex webmaster verification codes.
-* Sitemap integration with personalization.
-* Robots.txt sitemap integration.
-* Feed anti-scraper options.
-* And many, many more settings.
-
-= Openly pluggable =
-The SEO Framework has been built to go further than just itself.
-Take a look at the API documentation located at [The SEO Framework API Docs](https://theseoframework.com/?p=82).
-
-= The SEO Bar =
-**The SEO Framework helps you to create better content, at a glance. By showing you:**
-
-* If the title is too long, too short, duplicated, and/or automatically generated.
-* If the description is too long, too short, has too many repeated words and/or automatically generated.
-* If the page is indexed, redirected, followed and/or archived, while looking at other WordPress settings.
-
-We call this the SEO Bar. Check out the screenshots below to see how it helps you!
-
-= Hardcore caching =
-The code in The SEO Framework is highly optimized on PHP-level and uses variable, object and transient caching. This means that there's little extra page load time from this plugin, even with more meta tags used.
-
-A caching plugin isn't even needed for this plugin as you won't notice a difference; however, it's supported wherever best suited.
+* It prevents canonical errors for categories, pages, subdomains, and WordPress Multisite domain mapping.
+* It stops SEO attacks that are caused by pagination exploits in WordPress by telling the search engine to look at the existing last page instead.
+* It discourages 404 pages and empty categories from being indexed, even when they don't send a 404 response.
+* It automatically notifies Google and the Bing network on website updates when sitemaps are enabled.
+* It discourages search engines from indexing feeds and the sitemap. This doesn't mean they won't use them, they only won't show them in their search results.
+* It directs search engines from the comment pages back to the post holding those comments.
 
 = Compatibility =
+
 **The SEO Framework supports:**
 
-* PHP 5.4 and greater.
-* WordPress 4.6 and greater.
+* PHP 5.6 and higher.
+* WordPress 4.9 and higher.
 * Internationalization through WordPress.org.
-* UTF-8 character calculation and rendering, including Emoji and CJK.
+* UTF-8 character recognition and rendering, including Emoji and CJK.
 * Right to Left (RTL) languages, through its interface and generation.
-* Extended color vision deficiency accessibility.
-* Screen reader accessibility and keyboard navigation.
-* Multisite setups, this plugin is in fact built upon one.
+* Extended color-vision deficiency accessibility.
+* Better screen-reader accessibility via ARIA labels and title attributes.
+* Full keyboard navigation.
+* WordPress Multisite setups, this plugin is in fact built upon one.
 * Detection of robots.txt and sitemap.xml files.
-* Both current and old themes.
+* Output of structured data via Schema.org JSON-LD scripts.
 * Detection of various other SEO tools to help you switch graciously.
 * Translation plugins like WPML, Polylang, WPGlobus, and MultilingualPress.
-* WooCommerce, for free, in all its glory.
+* Ecommerce plugins, like WooCommerce and EDD.
 
-= An additional sitemap =
-The sitemap generated with The SEO Framework is more than sufficient for search engines to find posts, pages and supported custom post types throughout your website. It also listens to the `noindex` settings on each of the items and works great with various translation plugins.
+= Copyright legislation notice =
 
-Via structured data, like what's brought with the [Articles extension](https://theseoframework.com/extensions/articles/), advanced sitemaps are no longer needed.
+In a few words: The SEO Framework allows search engines to do what they've been doing for the past 20 years.
 
-However, if you require a more expanded sitemap, feel free to activate a dedicated Sitemap plugin. The SEO Framework will automatically deactivate its Sitemap functionality when another (known) sitemap plugin is found.
+When you activate The SEO Framework on any site, you automatically grant rights to content aggregators, among which are Google, Bing, and Yandex, to obtain information from the site, including written work, images, audio, and video. You can control these rights via the robots-meta settings brought by this plugin. Your rights and the effectiveness of these settings are subject to the region and language of your website, and the physical or virtual origin of the platform and their potential users through which your website's information is obtained and shared. It is up to the aggregator to honor your rights and the requests brought via The SEO Framework.
 
-= Hidden breadcrumbs =
-The Breadcrumb script generated by this plugin on Posts will also make sure Google easily finds related categories which aren't included in the Sitemap of this plugin.
+If you wish to learn more, please refer to the website of the [EU commission on copyright](https://ec.europa.eu/digital-single-market/en/modernisation-eu-copyright-rules). These rulings may propagate its effects through regions outside the EU.
 
 == Installation ==
 
 = This plugin requires: =
 
-* PHP 5.4 or greater.
-* WordPress 4.6 or greater.
+* PHP 5.6 or higher.
+* WordPress 4.9 or higher.
+* Any modern browser for administration.
 
 = Installation instructions: =
 
-1. Install **The SEO Framework** either via the WordPress.org plugin directory or by uploading the files to your server.
-1. Either Network Activate this plugin or activate it on a single site.
-1. That's it!
+1. Install **The SEO Framework** either via your WordPress dashboard using search or by uploading the files to your server.
+1. Either network-activate this plugin or activate it on a single site.
+1. That's it! The plugin now optimizes your website for SEO. It also protects your website against SEO attacks.
 
-= This plugin auto-configures its global settings, but: =
+= This plugin auto-configures its global settings =
 
-You should read up on our [plugin setup guide](https://theseoframework.com/docs/seo-plugin-setup/) to get the most out of The SEO Framework.
+However, it would be best if you read up on our [plugin setup guide](https://theseoframework.com/?p=2428) to get the most out of The SEO Framework.
 
-= This plugin auto-configures SEO meta settings, and: =
+= This plugin auto-configures SEO meta settings =
 
-* You can fine-tune each page with the provided meta box.
+However, you may want to read up on our [page improvement guide](https://theseoframework.com/?p=2663) to learn how you can optimize your pages.
 
 = Get more SEO power =
 
-* Optionally, also install the [Extension Manager](https://theseoframework.com/?p=2760) for additional SEO solutions.
+Optionally, also install our free [Extension Manager](https://theseoframework.com/?p=2760) plugin for additional SEO solutions.
 
 == Screenshots ==
 
-1. The SEO Framework shows you what you can improve, at a glance. With complete color vision deficiency support.
-2. Hover over any of the SEO Bar's items to see how you can improve the page's SEO. Red requires attention, orange is okay, green is good. Blue is informational.
-3. The dynamic Post/Page SEO settings meta box. Another version of this box is also implemented for terms, like categories and tags.
-4. The dynamic Post/Page SEO settings meta box also fits neatly in the sidebar. For when you want to work faster.
-5. The SEO Settings Page. With over 100 settings, you are in full control.
+1. The SEO Framework shows you how your site is performing, at a glance. These are what we call the SEO Bar.
+2. Hover over, tap on, or focus any SEO Bar item and it will tell you what's asserted from your environment.
+3. The SEO meta box is displayed on all pages. It's everything you need. Here you can see the pixel counters.
+4. These SEO settings are shown on the term edit screen. It seamlessly blends into your WordPress interface.
+5. The SEO settings page of The SEO Framework. Every setting is explained thoroughly. You're in full control.
 
 == Frequently Asked Questions ==
 
-= Is The SEO Framework Free? =
+= Is The SEO Framework free? =
 
 Absolutely! It will stay free as well, without ads or nags!
-This plugin is all-inclusive without upsells.
+This plugin is all-inclusive. It's 100% freeware; not crippleware.
 
-= Is there more? =
+= Is there a premium version? =
 
-For more advanced SEO options and output, we offer the free plugin [Extension Manager](https://theseoframework.com/?p=2760).
+No.
 
-= I have a feature request, I've found a bug, a plugin is incompatible... =
+However, we do offer many free and paid extensions that help support this free plugin. We provide these via our free [Extension Manager plugin](https://theseoframework.com/?p=2760).
+
+= I have a feature request, a question, or found a bug. =
 
 Please visit [the support forums](https://wordpress.org/support/plugin/autodescription) and kindly tell us about it.
-We'll try to get back to you within 72 hours. :)
+
+We'll try to get back to you within 72 hours. Typically, we reply within a day.
 
 = I am a developer; how can I help? =
 
 Any input is much appreciated, and everything will be considered.
 Please visit the [GitHub project page](https://github.com/sybrew/the-seo-framework) to submit issues or even pull requests.
 
-= I want to modify how The SEO Framework works. =
+Feel free to [contribute](https://tsf.fyi/contributing)!
 
-The SEO Framework is extensible. Please refer to the [API documentation](https://theseoframework.com/docs/api/).
+= What do the colors tell me? =
 
-= The sitemap doesn't contain categories, images, news, etc. is this OK? =
+We use different colors to convey messages. Red is an error that you must resolve. Yellow is a non-critical warning that you may want to address. Green is good. Blue is informational and situational.
 
-This is not an issue. Search engines love crawling WordPress because its structure is consistent and well known.
+= The sitemap doesn't contain categories, images, et al. =
+
+Not having every single page listed is not an issue. Search engines love crawling WordPress because its structure is consistent and well known.
+
 If a visitor can't find a page, then why would a search engine? Don't rely on your sitemap, but on your content and website's usability.
 
-Check out our [Extension Manager](https://theseoframework.com/?p=2760).
-It brings extensions, like Articles, that fill in the gaps with newer and better techniques.
+Check out our [Extension Manager](https://theseoframework.com/?p=2760). It brings extensions, like [Articles](https://theseoframework.com/?p=2303), that fill in the gaps via modern and more robust means.
 
 = The sitemap contains unwanted links. =
 
 The SEO Framework takes all publicly queryable posts, pages, and CPT and puts them in the sitemap.
 
-If you don't want a page in the sitemap, consider enabling the `noindex` option. This will also remove the page from search engine result pages.
+If you don't want a page in the sitemap, consider enabling the `noindex` option for it. This will also remove the page from search engine result pages.
 
 If the link shouldn't be in the sitemap because it's meant for structural reasons, then inform the plugin or theme author that created them.
 You should tell the author to check out the "`public` and `rewrite` post type arguments." The plugin or theme author should know what that means.
 
+In the meantime, you can disable SEO for the unwanted entries via the "General SEO Settings," under "Post Types."
+
 = What do the application/ld+json scripts do? =
 
-The JSON-LD scripts are search engine helpers which tell search engines how to connect and index the site.
-They can tell the search engine if your site contains an internal search engine, what sites you're socially connected to and what page structure you're using.
-This is also referred to as **structured data**.
+The JSON-LD scripts are search engine helpers which tell search engines how to connect and index the site. We do this via the Schema.org standard.
 
-= The metadata is not being updated, and I'm using a caching plugin. =
+They can tell the search engine if your site contains an internal search engine, which social sites you're connected to, and what page structure you're using. This is also referred to as **structured data**.
 
-The SEO Framework's metadata is put into WordPress' object cache when a caching plugin is available.
-Please be sure to clear your cache or adjust the plugin's caching settings if deemed necessary.
+= I don't see the breadcrumbs! =
+
+The SEO Framework does not provide the display of breadcrumbs. This is theme-territory. This plugin only annotates them for search engines via a JSON-LD script.
+
+If you wish to display breadcrumbs, then your theme should provide this. Alternatively, there are [other plugins](https://wordpress.org/plugins/search/breadcrumbs/) that help you do this.
 
 == Changelog ==
 
-= 3.2.4 =
+= 4.0.2 =
 
-In this minor update, we bring you the most advanced description generation yet. The generator is now context-sensitive, so you can expect the descriptions to be even more natural; a real time-saver!
+France recently amended its [copyright laws](https://www.legifrance.gouv.fr/eli/loi/2019/7/24/MICX1902858L/jo/texte). In short, in France, it's now forbidden for content aggregators to display excerpts and previews of your content when no consent is given.
 
-Oh, we also [fixed some bugs](https://theseoframework.com/?p=3130), and we've implemented some improvements in preparation for version 3.3.0.
+To accommodate those laws, [Google will soon look for new directives](https://france.googleblog.com/2019/09/comment-nous-respectons-le-droit-dauteur.html), and we added new site-wide options to output those. These new options are disabled (unspecified) by default when you update The SEO Framework, but they are enabled (some access) by default when you install The SEO Framework on a new site. Please see [this issue](https://github.com/sybrew/the-seo-framework/issues/480) for our take on this.
 
-= 3.2.3 =
+In this update, we also fixed a few bugs and added [various improvements](https://theseoframework.com/?p=3344#detailed).
 
-This minor update fixes some old, [leftover bugs](https://theseoframework.com/?p=3105). We've also removed the sitemap pinging options for Yandex, as they no longer allow this.
+= 4.0.1 =
 
-= 3.2.2 =
+Thank you for trusting us by upgrading to TSF 4.0.0 earlier! We've received many warm and welcoming responses, and we're very grateful.
 
-This minor update brings [major bug fixes](https://theseoframework.com/?p=3022). Most notoriously, the home page settings now predict the metadata perfectly in the admin screens. Bloggers will love this update, too, because Facebook and Twitter metadata for the home blog page is now always correct.
+Even though we churned 40% of the code, we only confirmed two bugs in that update. This minor update [addresses those bugs](https://theseoframework.com/?p=3308).
 
-For developers, please note that the upcoming major release (3.3.0) will introduce new taxonomical settings. Because the image-rendering integration isn't suited for this, it'll be overhauled. For more information, see [this issue](https://github.com/sybrew/the-seo-framework/issues/403).
+Our users reported some admin scripting issues when updating from v3.2.4 to v4.0. These issues are out of our reach, and we provided several solutions [in this post](https://wordpress.org/support/topic/4-0-admin-interface-not-loading-correctly/).
 
-Also, for developers, note that some API changes better suited for a major release were also brought into this minor release; these were required to fix some bugs.
+= 4.0.0 - Multiplex =
 
-= 3.2.1 =
-
-This minor update [fixes script load-order issues](https://theseoframework.com/?p=2982) which can occur when other plugins try to interact with the new WordPress editor.
-
-= 3.2.0 - Horizon =
-
-*What is right to be done cannot be done too soon. - Jane Austen*
+*It is our choices, Harry, that show what we truly are, far more than our abilities. - [J.K. Rowling](https://www.jkrowling.com/book/harry-potter-chamber-secrets/)*
 
 **Release date**
 
-* December 4th, 2018
+* September 9th, 2019
+
+**Foreword**
+
+We wrote a [foreword on 4.0](https://theseoframework.com/about/an-introduction-to-a-thousand-changes/). It's a story on our efforts making this update, and why we're exhilarated bringing you this update... finally.
 
 **Release highlights**
 
-* A new editor (codename Gutenberg) will launch [in just two days](https://make.wordpress.org/core/2018/12/04/new-5-0-target-date/) with WordPress 5.0. This release makes the plugin fully compatible with it.
-* Description prefixes have been removed. Descriptions aren't used a ranking factor anymore, and gaming the system by repeating the title isn't beneficial.
+* We completely refactored the plugin without losing features. This is the fastest full-featured SEO plugin for WordPress... by far.
+* You can now use quick & bulk editing options. They blend perfectly into the interface of WordPress.
+* Now, there are more term options, including redirects and canonical URLs.
+* Want to enable indexing for just one page? Now you can, with qubit robots options.
+* The SEO Bar is completely rewritten. It now lists the issues found so you can easily see what requires attention.
+* The sitemap is also new. It lists your pages more intelligently, making it easier for search engines to find your latest updates.
+* There's a new and improved API for all the JavaScript, SEO Bar, sitemaps, tooltips, term-and post meta, and more!
+* The character and pixel guidelines can now change depending on your site language.
+* Full keyboard navigation support is now possible for tooltips. The tooltips now also adjust their size intelligently, so they won't ever fall out of your browser window.
+* ...and more than 1000 other noteworthy changes, found in the [detailed log](https://theseoframework.com/?p=3268#detailed).
 
-**Did you know?**
+**Environment upgrade notes**
 
-* We recently relaunched a plugin for The SEO Framework. [Learn more](https://theseoframework.com/?p=2760).
+* PHP 5.4 and PHP 5.5 support has been dropped. Here's why:
+	* PHP 5.5 hasn't received updates for [over 3 years](https://www.php.net/eol.php) and using it brings a significant security risk to your website.
+	* Using PHP 5.6 lowers our time spent on maintenance, and it increases our productivity; so, we can focus on faster, better, and more useful solutions.
+	* WordPress no longer supports PHP versions lower than 5.6 since WordPress 5.2. They, too, finally realize we need to move on.
+	* Learn more about [Upgrading PHP](https://wordpress.org/support/update-php/).
+* WordPress 4.6 through 4.8 support has been dropped. Here's why:
+	* [More than 75% of all WordPress sites](https://wordpress.org/about/stats/) are using version 4.9 or later.
+	* The API changes between WordPress versions are massive. We can't support older versions reliably.
+	* Although we wanted to move to WordPress 5.0 or later, many users have opted out because of conflicting interests--to put it lightly. Keep your site updated, and use the [Classic Editor plugin](https://wordpress.org/plugins/classic-editor/) if you really can't stand the block editor.
+
+_If, for any reason, you still wish to use PHP 5.4/5.5 and/or WordPress 4.6/4.7/4.8, [The SEO Framework 3.2.4](https://downloads.wordpress.org/plugin/autodescription.3.2.4.zip) still supports them._
+
+**Share your love!**
+
+We hope you'll love this update as much as we do. Please consider sharing it with the world, by giving us [an awesome review](https://wordpress.org/support/plugin/autodescription/reviews/#new-topic-0)! We read every one of them. Thanks!
 
 **Detailed log**
 
-Happy Holidays! [(╯°□°)╯︵ ┻┻](https://theseoframework.com/?p=2957)
+Let's go the extra mile; or [1,609.347 meters](https://theseoframework.com/?p=3268#detailed).
 
 = Full changelog =
 
 * **The full changelog can be found [here](http://theseoframework.com/?cat=2).**
 
 == Upgrade Notice ==
+
+= 4.0.0 =
+The v4.0.0 update brings a major upgrade. Make a backup of your database before updating. WordPress v4.9 (or higher) and PHP v5.6 (or higher) are now required. If you use the Extension Manager, update it to v2.1.0 (or higher) before updating this plugin. Downgrading to v3.2.4 is possible, however with the caveat that the homepage title may flip its output order back.
 
 = 3.1.1 =
 This is a major upgrade. Make a backup of your database before upgrading. WordPress v4.6 (or greater) and PHP v5.4 (or greater) are now required. If you use the Extension Manager, update it to v1.5.2 (or greater) before upgrading this plugin. Downgrading to v3.0.6 possible.

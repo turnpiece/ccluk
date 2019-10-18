@@ -133,6 +133,8 @@ class Snapshot_Controller_Full_Admin extends Snapshot_Controller_Full {
 			return false;
 		}
 
+		$only_local = (bool) $data->value( 'only-local' );
+
 		$to_remove = $data->value( 'delete-bulk' );
 		if ( empty( $to_remove ) || ! is_array( $to_remove ) ) {
 			return false;
@@ -145,7 +147,11 @@ class Snapshot_Controller_Full_Admin extends Snapshot_Controller_Full {
 				continue;
 			} // Not a valid timestamp
 
-			$status = $this->_model->delete_backup( $timestamp );
+			if ( $only_local ) {
+				$status = $this->_model->local()->delete_backup( $timestamp );
+			} else {
+				$status = $this->_model->delete_backup( $timestamp );
+			}
 			if ( ! $status ) {
 				break;
 			}
@@ -284,7 +290,7 @@ class Snapshot_Controller_Full_Admin extends Snapshot_Controller_Full {
 			return false;
 		}
 
-		// If the crons are temporarily enabled by Automate, make them permanently enabled. 
+		// If the crons are temporarily enabled by Automate, make them permanently enabled.
 		if ( $this->_model->get_config( 'temporarily_enable_cron', false ) ){
 			$this->_model->set_config('temporarily_enable_cron', false);
 		}
@@ -358,7 +364,7 @@ class Snapshot_Controller_Full_Admin extends Snapshot_Controller_Full {
 							$files_ignore[ $idx ] = $file_ignore;
 						}
 					}
-	
+
 					WPMUDEVSnapshot::instance()->config_data['config']['filesManagedIgnore'] = $files_ignore;
 				}
 			}

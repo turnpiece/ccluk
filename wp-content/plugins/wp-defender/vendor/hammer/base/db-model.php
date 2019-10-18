@@ -13,11 +13,20 @@ class DB_Model extends Model {
 	protected static $tableName = '';
 
 	public function save() {
+		$this->doFilters();
 		if ( $this->id ) {
 			$this->update();
 		} else {
 			$this->insert();
 		}
+	}
+
+	/**
+	 * We will exclude those fields from saving to db
+	 * @return array
+	 */
+	public function notSaveFields() {
+		return array();
 	}
 
 	/**
@@ -29,7 +38,7 @@ class DB_Model extends Model {
 		}
 
 		$this->trigger( self::EVENT_BEFORE_INSERT );
-		$data = $this->export();
+		$data = $this->export( $this->notSaveFields() );
 		if ( isset( $data['id'] ) && ! empty( $data['id'] ) ) {
 			return new \WP_Error( 'db_error', "This id already exists!" );
 		}
@@ -54,7 +63,7 @@ class DB_Model extends Model {
 			return new \WP_Error( 'db_error', 'No table specific' );
 		}
 		$this->trigger( self::EVENT_BEFORE_UPDATE );
-		$data  = $this->export();
+		$data  = $this->export( $this->notSaveFields() );
 		$check = self::findByID( $data['id'] );
 		if ( is_null( $check ) ) {
 			return new \WP_Error( 'db_error', "This record doesn't exists" );
@@ -128,8 +137,50 @@ class DB_Model extends Model {
 	 * @return array
 	 */
 	public static function findAll( $attributes = array(), $orderBy = null, $order = 'ASC', $limit = null ) {
-		$fields   = self::buildFields();
-		$where    = self::buildWhere( $attributes );
+		$fields = self::buildFields();
+		$where  = self::buildWhere( $attributes );
+
+		$sqlOrder = null;
+		if ( ! empty( $orderBy ) && in_array( $orderBy, $fields ) ) {
+			if ( ! in_array( strtolower( $order ), array( 'asc', 'desc' ) ) ) {
+				$order = 'ASC';
+			}
+			$sqlOrder = ' ORDER BY ' . $orderBy . ' ' . $order;
+		}
+
+		$sql = 'SELECT ' . implode( ', ', $fields ) . ' FROM ' . self::getTable() .
+		       ' WHERE ' . implode( ' AND ', $where ) . $sqlOrder;
+
+		if ( $limit ) {
+			$sql = $sql . ' LIMIT ' . $limit;
+		}
+		$data    = self::getWPDB()->get_results( $sql, ARRAY_A );
+		$results = array();
+		if ( is_array( $data ) && count( $data ) ) {
+			foreach ( $data as $row ) {
+				$results[] = self::bind( $row );
+			}
+		}
+
+		return $results;
+	}
+
+	/**
+	 * Similar with the findAll, except we only get the columns we need
+	 *
+	 * @param array $attributes
+	 * @param $columns
+	 * @param null $orderBy
+	 * @param string $order
+	 * @param null $limit
+	 *
+	 * @return array
+	 */
+	public static function findAllOnlyColumns( $attributes = array(), $columns = array(), $orderBy = null, $order = 'ASC', $limit = null ) {
+		$fields = self::buildFields();
+		$fields = array_intersect( $fields, $columns );
+		$where  = self::buildWhere( $attributes );
+
 		$sqlOrder = null;
 		if ( ! empty( $orderBy ) && in_array( $orderBy, $fields ) ) {
 			if ( ! in_array( strtolower( $order ), array( 'asc', 'desc' ) ) ) {
@@ -241,7 +292,7 @@ class DB_Model extends Model {
 	private static function buildFields() {
 		$class  = get_called_class();
 		$obj    = new $class;
-		$data   = $obj->export();
+		$data   = $obj->export( $obj->notSaveFields() );
 		$fields = array_keys( $data );
 
 		return $fields;
@@ -264,6 +315,7 @@ class DB_Model extends Model {
 				//this condition is not supported
 				continue;
 			}
+
 			if ( is_array( $attribute ) ) {
 				if ( isset( $attribute['compare'] ) ) {
 					if ( $attribute['compare'] == 'between' ) {
@@ -284,7 +336,7 @@ class DB_Model extends Model {
 					), array_merge( array( $sql ), $attribute ) );
 					$condition[] = $sql;
 				}
-			} elseif ( strlen( $attribute ) && strpos( '%', (string) $attribute ) === 0 ) {
+			} elseif ( strlen( $attribute ) && strpos( (string) $attribute, '%' ) === 0 ) {
 				$condition[] = $wpdb->prepare( $key . ' LIKE %s', $attribute );
 			} else {
 				$condition[] = $wpdb->prepare( $key . ' = %s', $attribute );

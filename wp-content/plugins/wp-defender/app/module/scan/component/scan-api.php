@@ -53,6 +53,7 @@ class Scan_Api extends Component {
 	}
 
 	/**
+	 * Get the current scan on going
 	 * @return null|Scan
 	 */
 	public static function getActiveScan() {
@@ -108,21 +109,22 @@ class Scan_Api extends Component {
 
 		$settings        = Settings::instance();
 		$firstLevelFiles = File_Helper::findFiles( ABSPATH, true, true, array(
-			'dir'  => array(
+			'dir'      => array(
 				ABSPATH . 'wp-content',
 				ABSPATH . 'wp-admin',
 				ABSPATH . 'wp-includes'
 			),
-			'path' => array(
-				ABSPATH . 'wp-config.php'
+			'filename' => array(
+				'wp-config.php'
 			)
-		), array(), false, $settings->max_filesize );
-		$coreFiles       = File_Helper::findFiles( ABSPATH, true, false, array(), array(
+		), array(), false );
+
+		$coreFiles = File_Helper::findFiles( ABSPATH, true, false, array(), array(
 			'dir' => array(
 				ABSPATH . 'wp-admin',
 				ABSPATH . 'wp-includes',
 			)
-		), true, $settings->max_filesize );
+		), true );
 		$cache->set( self::CACHE_CORE, array_merge( $firstLevelFiles, $coreFiles ), 0 );
 
 		return array_merge( $firstLevelFiles, $coreFiles );
@@ -141,9 +143,6 @@ class Scan_Api extends Component {
 		$files    = File_Helper::findFiles( WP_CONTENT_DIR, true, false, array(), array(
 			'ext' => array( 'php' )
 		), true, $settings->max_filesize, true );
-//		$files    = File_Helper::findFiles( ABSPATH . 'wp-content/randomly/a', true, false, array(), array(
-//			'ext' => array( 'php' )
-//		), true, $settings->max_filesize );
 		//include wp-config.php here
 		$files[] = ABSPATH . 'wp-config.php';
 
@@ -306,7 +305,7 @@ class Scan_Api extends Component {
 			$model->status = Scan::STATUS_FINISH;
 			$model->save();
 			if ( $model->logs == 'report' ) {
-				$settings->lastReportSent = time();
+				$settings->last_report_sent = time();
 				$settings->save();
 			}
 			self::flushCache();
@@ -422,10 +421,23 @@ class Scan_Api extends Component {
 	}
 
 	/**
-	 * Get current percent of scan in decimal
-	 * @return float
+	 * Get current percent, if $getFromCache set to true, we will get the last cached value
+	 *
+	 * @param bool $getFromCache
+	 *
+	 * @return float|int
 	 */
-	public static function getScanProgress() {
+	public static function getScanProgress( $getFromCache = false ) {
+		$cache = WP_Helper::getCache();
+		if ( $getFromCache ) {
+			$cache = $cache->get( 'defenderScanPercent' );
+			if ( $cache == false ) {
+				return 0;
+			}
+
+			return $cache;
+		}
+
 		$settings     = Settings::instance();
 		$steps        = $settings->getScansAvailable();
 		$total        = 0;
@@ -444,12 +456,13 @@ class Scan_Api extends Component {
 		if ( php_sapi_name() == "cli" ) {
 			echo $total . PHP_EOL;
 		}
-
+		$percent = 0;
 		if ( $total > 0 ) {
-			return round( ( $currentIndex / $total ) * 100, 2 );
-		} else {
-			return ( 0 );
+			$percent = round( ( $currentIndex / $total ) * 100, 2 );
 		}
+		$cache->set( 'defenderScanPercent', $percent, 3600 );
+
+		return $percent;
 	}
 
 	/**
@@ -474,8 +487,11 @@ class Scan_Api extends Component {
 		delete_site_option( self::SCAN_PATTERN );
 		$cache->delete( 'filestried' );
 		$cache->delete( self::CACHE_CHECKSUMS );
+		$cache->delete( 'defenderScanPercent' );
 		$altCache = WP_Helper::getArrayCache();
 		$altCache->delete( 'lastScan' );
+		$altCache->delete( 'activeScan' );
+		Scan_Api::releaseLock();
 		File_Helper::deleteFolder( Utils::instance()->getDefUploadDir() . '/md5-scan' );
 	}
 

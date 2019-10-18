@@ -312,7 +312,7 @@ class Ai1wm_Import_Database {
 					if ( ! isset( $config['NoEmailReplace'] ) ) {
 						if ( ! in_array( sprintf( '@%s', $old_domain ), $old_replace_values ) ) {
 							$old_replace_values[] = sprintf( '@%s', $old_domain );
-							$new_replace_values[] = sprintf( '@%s', $new_domain );
+							$new_replace_values[] = str_ireplace( '@www.', '@', sprintf( '@%s', $new_domain ) );
 						}
 					}
 				}
@@ -410,7 +410,7 @@ class Ai1wm_Import_Database {
 					if ( ! isset( $config['NoEmailReplace'] ) ) {
 						if ( ! in_array( sprintf( '@%s', $old_domain ), $old_replace_values ) ) {
 							$old_replace_values[] = sprintf( '@%s', $old_domain );
-							$new_replace_values[] = sprintf( '@%s', $new_domain );
+							$new_replace_values[] = str_ireplace( '@www.', '@', sprintf( '@%s', $new_domain ) );
 						}
 					}
 				}
@@ -509,7 +509,7 @@ class Ai1wm_Import_Database {
 				if ( ! isset( $config['NoEmailReplace'] ) ) {
 					if ( ! in_array( sprintf( '@%s', $old_domain ), $old_replace_values ) ) {
 						$old_replace_values[] = sprintf( '@%s', $old_domain );
-						$new_replace_values[] = sprintf( '@%s', $new_domain );
+						$new_replace_values[] = str_ireplace( '@www.', '@', sprintf( '@%s', $new_domain ) );
 					}
 				}
 			}
@@ -607,7 +607,7 @@ class Ai1wm_Import_Database {
 				if ( ! isset( $config['NoEmailReplace'] ) ) {
 					if ( ! in_array( sprintf( '@%s', $old_domain ), $old_replace_values ) ) {
 						$old_replace_values[] = sprintf( '@%s', $old_domain );
-						$new_replace_values[] = sprintf( '@%s', $new_domain );
+						$new_replace_values[] = str_ireplace( '@www.', '@', sprintf( '@%s', $new_domain ) );
 					}
 				}
 			}
@@ -690,6 +690,9 @@ class Ai1wm_Import_Database {
 
 		// Get backups labels
 		$backups_labels = get_option( AI1WM_BACKUPS_LABELS, array() );
+
+		// Get sites links
+		$sites_links = get_option( AI1WM_SITES_LINKS, array() );
 
 		$old_table_prefixes = array();
 		$new_table_prefixes = array();
@@ -820,6 +823,9 @@ class Ai1wm_Import_Database {
 
 		// Set the new backups labels
 		update_option( AI1WM_BACKUPS_LABELS, $backups_labels );
+
+		// Set the new sites links
+		update_option( AI1WM_SITES_LINKS, $sites_links );
 
 		return $params;
 	}

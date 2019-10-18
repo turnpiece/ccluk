@@ -11,7 +11,7 @@
 					<?php _e( "Configure your two-factor authentication settings. Our recommendations are enabled by default.", wp_defender()->domain ) ?>
                 </p>
 				<?php
-				$enabledRoles = $settings->userRoles;
+				$enabledRoles = $settings->user_roles;
 				$allRoles     = get_editable_roles();
 				?>
 				<?php if ( isset( wp_defender()->global['compatibility'] ) ): ?>
@@ -93,7 +93,7 @@
                         <label class="sui-toggle">
                             <input role="presentation" type="checkbox" name="lostPhone" class="toggle-checkbox"
                                    id="lostPhone" value="1"
-								<?php checked( true, $settings->lostPhone ) ?>/>
+								<?php checked( true, $settings->lost_phone ) ?>/>
                             <span class="sui-toggle-slider"></span>
                         </label>
                         <label for="lostPhone" class="sui-toggle-label">
@@ -117,7 +117,7 @@
                         <label class="sui-toggle">
                             <input role="presentation" type="checkbox" name="forceAuth" class="toggle-checkbox"
                                    id="forceAuth" value="1"
-								<?php checked( true, $settings->forceAuth ) ?>/>
+								<?php checked( true, $settings->force_auth ) ?>/>
                             <span class="sui-toggle-slider"></span>
                         </label>
                         <label for="forceAuth" class="sui-toggle-label">
@@ -127,11 +127,11 @@
                             <?php _e( "Note: Users will be forced to set up two-factor when they next login.", wp_defender()->domain ) ?>
                         </span>
                         <div id="forceAuthRoles" class="sui-border-frame sui-toggle-content"
-                             aria-hidden="<?php echo ! $settings->forceAuth ?>">
+                             aria-hidden="<?php echo ! $settings->force_auth ?>">
                             <strong><?php _e( "User Roles", wp_defender()->domain ) ?></strong>
                             <ul>
 								<?php
-								$forceAuthRoles = $settings->forceAuthRoles;
+								$forceAuthRoles = $settings->force_auth_roles;
 								foreach ( $allRoles as $role => $detail ):
 									?>
                                     <li>
@@ -147,7 +147,7 @@
                             </ul>
                             <strong><?php _e( "Custom warning message", wp_defender()->domain ) ?></strong>
                             <textarea class="sui-form-control"
-                                      name="forceAuthMess"><?php echo $settings->forceAuthMess ?></textarea>
+                                      name="forceAuthMess"><?php echo $settings->force_auth_mess ?></textarea>
                             <span class="sui-description">
                             <?php _e( "Note: This is shown in the users Profile area indicating they must use two-factor authentication.", wp_defender()->domain ) ?>
                         </span>
@@ -266,4 +266,3 @@
 	$controller->renderPartial( $view, $settings );
 	?>
 </div>
-

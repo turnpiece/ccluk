@@ -149,7 +149,7 @@ class Give_Cache {
 		if ( $enabled && ! in_array( 'give', $settings, true ) ) {
 			?>
 			<div class="error">
-				<p><?php echo wp_kses_post( sprintf( __( 'In order for <strong>database caching</strong> to work with Give you must add %1$s to the "Ignored query stems" option in <a href="%2$s">W3 Total Cache settings</a>.', 'give' ), '<code>give</code>', esc_url( admin_url( 'admin.php?page=w3tc_dbcache#dbcache_reject_sql' ) ) ) ); ?></p>
+				<p><?php echo wp_kses_post( sprintf( __( 'In order for <strong>database caching</strong> to work with GiveWP you must add %1$s to the "Ignored query stems" option in <a href="%2$s">W3 Total Cache settings</a>.', 'give' ), '<code>give</code>', esc_url( admin_url( 'admin.php?page=w3tc_dbcache#dbcache_reject_sql' ) ) ) ); ?></p>
 			</div>
 			<?php
 		}
@@ -597,26 +597,7 @@ class Give_Cache {
 			return;
 		}
 
-		$donation_query = new Give_Payments_Query(
-			array(
-				'number'     => - 1,
-				'give_forms' => $form_id,
-				'output'     => '',
-				'fields'     => 'ids',
-			)
-		);
-
-		$donations = $donation_query->get_payments();
-
-		if ( ! empty( $donations ) ) {
-			/* @var Give_Payment $donation */
-			foreach ( $donations as $donation_id ) {
-				wp_cache_delete( $donation_id, $this->filter_group_name( 'give-donations' ) );
-				wp_cache_delete( give_get_payment_donor_id( $donation_id ), $this->filter_group_name( 'give-donors' ) );
-			}
-		}
-
-		self::$instance->get_incrementer( true );
+		self::flush_cache(true );
 	}
 
 	/**

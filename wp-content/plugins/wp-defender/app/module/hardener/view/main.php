@@ -1,4 +1,2 @@
-<?php
-/**
- * Author: Hoang Ngo
- */
+<?php do_action('tweaks_footer'); ?>
+<div id="defender"></div>

@@ -22,8 +22,21 @@ class Prevent_Php extends Rule {
 		$this->renderPartial( 'rules/prevent-php-executed' );
 	}
 
-	function getSubDescription() {
+	/**
+	 * This will return the short summary why this rule show up as issue
+	 *
+	 * @return string
+	 */
+	function getErrorReason() {
 		return __( "PHP execution is currently allowed in all directories.", wp_defender()->domain );
+	}
+
+	/**
+	 * This will return a short summary to show why this rule works
+	 * @return mixed
+	 */
+	function getSuccessReason() {
+		return __( "You've disabled PHP execution, good stuff.", wp_defender()->domain );
 	}
 
 	/**
@@ -31,6 +44,16 @@ class Prevent_Php extends Rule {
 	 */
 	function check() {
 		return $this->getService()->check();
+	}
+
+	public function getMiscData() {
+		$settings = Settings::instance();
+
+		return [
+			'active_server'  => $settings->active_server,
+			'nginx_rules'    => $this->getService()->getNginxRules(),
+			'wp_content_dir' => WP_CONTENT_DIR
+		];
 	}
 
 	/**
@@ -70,22 +93,19 @@ class Prevent_Php extends Rule {
 	}
 
 	function addHooks() {
-		$this->add_action( 'processingHardener' . self::$slug, 'process', 10, 2 );
-		$this->add_action( 'processRevert' . self::$slug, 'revert' );
-		$this->add_action( 'processUpdate' . self::$slug, 'update', 10, 2 );
+		$this->addAction( 'processingHardener' . self::$slug, 'process', 10, 2 );
+		$this->addAction( 'processRevert' . self::$slug, 'revert' );
+		$this->addAction( 'processUpdate' . self::$slug, 'update', 10, 2 );
 	}
 
 	function process() {
-		if ( ! $this->verifyNonce() ) {
-			return;
-		}
-		$file_paths = HTTP_Helper::retrieve_post( 'file_paths' ); //File paths to ignore. Apache and litespeed mainly
+		$file_paths = HTTP_Helper::retrievePost( 'file_paths' ); //File paths to ignore. Apache and litespeed mainly
 		if ( $file_paths ) {
 			$file_paths = sanitize_textarea_field( $file_paths );
 		} else {
 			$file_paths = '';
 		}
-		$server = HTTP_Helper::retrieve_post( 'current_server' ); //Current server
+		$server = HTTP_Helper::retrievePost( 'current_server' ); //Current server
 
 		if ( in_array( $server, array( 'apache', 'litespeed' ) ) ) {
 			$service = $this->getApacheService();
@@ -117,14 +137,14 @@ class Prevent_Php extends Rule {
 		}
 		$settings = Settings::instance();
 
-		$file_paths = HTTP_Helper::retrieve_post( 'file_paths' ); //File paths to ignore. Apache and litespeed mainly
+		$file_paths = HTTP_Helper::retrievePost( 'file_paths' ); //File paths to ignore. Apache and litespeed mainly
 		if ( $file_paths ) {
 			$file_paths = sanitize_textarea_field( $file_paths );
 		} else {
 			$file_paths = '';
 		}
 
-		$server = HTTP_Helper::retrieve_post( 'current_server' ); //Current server
+		$server = HTTP_Helper::retrievePost( 'current_server' ); //Current server
 
 		if ( in_array( $server, array( 'apache', 'litespeed' ) ) ) {
 			$service = $this->getApacheService();

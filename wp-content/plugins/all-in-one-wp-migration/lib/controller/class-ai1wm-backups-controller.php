@@ -30,21 +30,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Ai1wm_Backups_Controller {
 
 	public static function index() {
-		$model = new Ai1wm_Backups;
-
 		Ai1wm_Template::render(
 			'backups/index',
 			array(
-				'backups'        => $model->get_files(),
-				'backups_labels' => get_option( AI1WM_BACKUPS_LABELS, array() ),
-				'username'       => get_option( AI1WM_AUTH_USER ),
-				'password'       => get_option( AI1WM_AUTH_PASSWORD ),
+				'backups'  => Ai1wm_Backups::get_files(),
+				'labels'   => Ai1wm_Backups::get_labels(),
+				'username' => get_option( AI1WM_AUTH_USER ),
+				'password' => get_option( AI1WM_AUTH_PASSWORD ),
 			)
 		);
 	}
 
 	public static function delete( $params = array() ) {
-		$errors = array();
+		ai1wm_setup_environment();
 
 		// Set params
 		if ( empty( $params ) ) {
@@ -70,29 +68,22 @@ class Ai1wm_Backups_Controller {
 			exit;
 		}
 
-		$model = new Ai1wm_Backups;
-
 		try {
-			// Delete file
-			$model->delete_file( $archive );
-
-			$backups_labels = get_option( AI1WM_BACKUPS_LABELS, array() );
-
-			if ( isset( $backups_labels[ $params['archive'] ] ) ) {
-				unset( $backups_labels[ $params['archive'] ] );
-				update_option( AI1WM_BACKUPS_LABELS, $backups_labels );
-			}
-		} catch ( Exception $e ) {
-			$errors[] = $e->getMessage();
+			Ai1wm_Backups::delete_file( $archive );
+			Ai1wm_Backups::delete_label( $archive );
+		} catch ( Ai1wm_Backups_Exception $e ) {
+			echo json_encode( array( 'errors' => array( $e->getMessage() ) ) );
+			exit;
 		}
 
-		echo json_encode( array( 'errors' => $errors ) );
+		echo json_encode( array( 'errors' => array() ) );
 		exit;
 	}
 
 	public static function add_label( $params = array() ) {
 		ai1wm_setup_environment();
 
+		// Set params
 		if ( empty( $params ) ) {
 			$params = stripslashes_deep( $_POST );
 		}
@@ -103,42 +94,40 @@ class Ai1wm_Backups_Controller {
 			$secret_key = trim( $params['secret_key'] );
 		}
 
+		// Set archive
+		$archive = null;
+		if ( isset( $params['archive'] ) ) {
+			$archive = trim( $params['archive'] );
+		}
+
+		// Set backup label
+		$label = null;
+		if ( isset( $params['label'] ) ) {
+			$label = trim( $params['label'] );
+		}
+
 		try {
-			// Ensure that unauthorized people cannot access add_label action
+			// Ensure that unauthorized people cannot access add label action
 			ai1wm_verify_secret_key( $secret_key );
 		} catch ( Ai1wm_Not_Valid_Secret_Key_Exception $e ) {
 			exit;
 		}
 
-		$backups_labels = get_option( AI1WM_BACKUPS_LABELS, array() );
-
-		if ( empty( $params['backup_label'] ) ) {
-			unset( $backups_labels[ trim( $params['backup_name'] ) ] );
-
-			echo json_encode(
-				array(
-					'success' => update_option( AI1WM_BACKUPS_LABELS, $backups_labels ),
-					'label'   => esc_html( $params['backup_label'] ),
-				)
-			);
+		try {
+			Ai1wm_Backups::set_label( $archive, $label );
+		} catch ( Ai1wm_Backups_Exception $e ) {
+			echo json_encode( array( 'errors' => array( $e->getMessage() ) ) );
 			exit;
 		}
 
-		echo json_encode(
-			array(
-				'success' => update_option(
-					AI1WM_BACKUPS_LABELS,
-					array_merge( $backups_labels, array( trim( $params['backup_name'] ) => trim( $params['backup_label'] ) ) )
-				),
-				'label'   => esc_html( $params['backup_label'] ),
-			)
-		);
+		echo json_encode( array( 'errors' => array() ) );
 		exit;
 	}
 
 	public static function backup_list( $params = array() ) {
 		ai1wm_setup_environment();
 
+		// Set params
 		if ( empty( $params ) ) {
 			$params = stripslashes_deep( $_GET );
 		}
@@ -150,19 +139,17 @@ class Ai1wm_Backups_Controller {
 		}
 
 		try {
-			// Ensure that unauthorized people cannot access backup_list action
+			// Ensure that unauthorized people cannot access backups list action
 			ai1wm_verify_secret_key( $secret_key );
 		} catch ( Ai1wm_Not_Valid_Secret_Key_Exception $e ) {
 			exit;
 		}
 
-		$model = new Ai1wm_Backups;
-
 		Ai1wm_Template::render(
 			'backups/backups-list',
 			array(
-				'backups'        => $model->get_files(),
-				'backups_labels' => get_option( AI1WM_BACKUPS_LABELS, array() ),
+				'backups' => Ai1wm_Backups::get_files(),
+				'labels'  => Ai1wm_Backups::get_labels(),
 			)
 		);
 		exit;

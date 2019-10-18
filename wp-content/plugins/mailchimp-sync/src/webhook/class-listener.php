@@ -10,7 +10,7 @@ use MC4WP_Debug_Log;
 /**
  * Class Listener
  *
- * This class listens on your-site.com/mc4wp-sync-api/webhook-listener for MailChimp webhook events.
+ * This class listens on your-site.com/mc4wp-sync-api/webhook-listener for Mailchimp webhook events.
  *
  * Once triggered, it will look for the corresponding WP user and update it using the field map defined in the settings of the Sync plugin.
  *
@@ -91,7 +91,7 @@ class Listener {
 		$log = $this->get_log();
 		define( 'MC4WP_SYNC_DOING_WEBHOOK', true );
 
-		// no parameters = MailChimp webhook validator
+		// no parameters = Mailchimp webhook validator
 		if( empty( $_POST['data'] ) || empty( $_POST['type'] ) ) {
 			echo "Listening..";
 			status_header( 200 );
@@ -102,7 +102,7 @@ class Listener {
 		$type = (string) $_REQUEST['type'];
 
         /**
-         * Filter webhook data that is received by MailChimp.
+         * Filter webhook data that is received by Mailchimp.
          *
          * @param array $data
          * @param string $type
@@ -115,7 +115,7 @@ class Listener {
 			return false;
 		}
 
-		// find WP user by List_ID + MailChimp unique email ID
+		// find WP user by List_ID + Mailchimp unique email ID
 		$user = $this->users->get_user_by_mailchimp_id( $data['id'] );
 
 		// No user found? Try "web_id", which was used in API v2.
@@ -133,7 +133,7 @@ class Listener {
 
 		if( ! $user instanceof WP_User ) {
 			// log a warning
-			$log->info( sprintf( "Webhook: No user found for MailChimp ID: %s", $data['id'] ) );
+			$log->info( sprintf( "Webhook: No user found for Mailchimp ID: %s", $data['id'] ) );
 
 			// fire event when no user is found
 			do_action( 'mailchimp_sync_webhook_no_user', $data );

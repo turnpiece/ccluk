@@ -35,7 +35,7 @@ if ( $wpml && $current_lang ) $searchLabel .= ' (' . $this->integrations->plugin
 		<li class="np-trash-links">
 			 |
 			<a href="<?php echo esc_url($this->post_type_repo->trashLink($this->post_type->name)); ?>"><?php _e('Trash', 'wp-nested-pages'); ?> </a>
-			<span class="count">(<a href="#" class="np-empty-trash" data-posttype="<?php echo esc_attr($this->post_type->name); ?>" data-nestedpages-modal-toggle="np-trash-modal"><?php _e('Empty', 'wp-nested-pages'); ?></a> <?php echo absint($trashedCount); ?>)</span>
+			<span class="count"><a href="#" class="np-empty-trash" data-posttype="<?php echo esc_attr($this->post_type->name); ?>" data-nestedpages-modal-toggle="np-trash-modal"><?php echo sprintf(__('Empty (%s)', 'wp-nested-pages'), absint($trashedCount)); ?></a></span>
 		</li>
 		<?php endif; ?>
 
@@ -43,7 +43,7 @@ if ( $wpml && $current_lang ) $searchLabel .= ' (' . $this->integrations->plugin
 		<li>
 			 |
 			<a href="<?php echo NestedPages\Helpers::defaultPagesLink($this->post_type->name); ?>">
-				<?php _e('Default', 'wp-nested-pages'); ?> <?php _e($this->post_type->labels->name); ?>
+				<?php echo apply_filters('nestedpages_default_submenu_text', sprintf(__('Default %s', 'wp-nested-pages'),$this->post_type->labels->name), $this->post_type); ?>
 			</a>
 		</li>
 		<?php endif; ?>
@@ -67,7 +67,7 @@ if ( $wpml && $current_lang ) $searchLabel .= ' (' . $this->integrations->plugin
 						foreach( $users as $user ){
 							$out .= '<option value="' . $user->ID . '"';
 							if ( isset($_GET['author']) && ($_GET['author'] == $user->ID) ) $out .= ' selected';
-							$out .= '>' . esc_html($user->display_name) . '</option>';
+							$out .= '>' . esc_html__($user->display_name) . '</option>';
 						}
 						echo $out;
 					?>
@@ -92,7 +92,7 @@ if ( $wpml && $current_lang ) $searchLabel .= ' (' . $this->integrations->plugin
 							$out .= '<option value="' . $key . '"';
 							if ( $default_order_by && $default_order_by == $key ) $out .= ' selected';
 							if ( isset($_GET['orderby']) && ($_GET['orderby'] == $key) ) $out .= ' selected';
-							$out .= '>' . esc_html($option) . '</option>';
+							$out .= '>' . esc_html__($option) . '</option>';
 						}
 						echo $out;
 					?>
@@ -116,7 +116,7 @@ if ( $wpml && $current_lang ) $searchLabel .= ' (' . $this->integrations->plugin
 							$out .= '<option value="' . esc_attr($key) . '"';
 							if ( $default_order && $default_order == $key ) $out .= ' selected';
 							if ( isset($_GET['order']) && ($_GET['order'] == $key) ) $out .= ' selected';
-							$out .= '>' . esc_html($option) . '</option>';
+							$out .= '>' . esc_html__($option) . '</option>';
 						}
 						echo $out;
 					?>
@@ -161,12 +161,12 @@ if ( $wpml && $current_lang ) $searchLabel .= ' (' . $this->integrations->plugin
 				<select id="np_category" name="np_category" class="nestedpages-sort">
 					<?php
 						$tax = get_taxonomy('category');
-						$out = '<option value="all">' . __('All ', 'wp-nested-pages') . esc_html($tax->labels->name) . '</option>';
+						$out = '<option value="all">' . __('All ', 'wp-nested-pages') . esc_html__($tax->labels->name) . '</option>';
 						$terms = get_terms('category');
 						foreach( $terms as $term ){
 							$out .= '<option value="' . esc_attr($term->term_id) . '"';
 							if ( isset($_GET['category']) && ($_GET['category'] == $term->term_id) ) $out .= ' selected';
-							$out .= '>' . esc_html($term->name) . '</option>';
+							$out .= '>' . esc_html__($term->name) . '</option>';
 						}
 						echo $out;
 					?>

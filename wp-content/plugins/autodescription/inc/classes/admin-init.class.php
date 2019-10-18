@@ -1,7 +1,9 @@
 <?php
 /**
- * @package The_SEO_Framework\Classes
+ * @package The_SEO_Framework\Classes\Facade\Admin_Init
+ * @subpackage The_SEO_Framework\Admin
  */
+
 namespace The_SEO_Framework;
 
 defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
@@ -34,9 +36,60 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
 class Admin_Init extends Init {
 
 	/**
+	 * Initializes SEO Bar tables.
+	 *
+	 * @since 4.0.0
+	 * @access private
+	 */
+	public function _init_seo_bar_tables() {
+
+		if ( $this->get_option( 'display_seo_bar_tables' ) ) {
+			new Bridges\SeoBar;
+		}
+	}
+
+	/**
+	 * Initializes List Edit tables.
+	 *
+	 * @since 4.0.0
+	 * @access private
+	 */
+	public function _init_list_edit() {
+		new Bridges\ListEdit;
+	}
+
+	/**
+	 * Adds post states in post/page edit.php query
+	 *
+	 * @since 4.0.0
+	 *
+	 * @param array    $states The current post states array
+	 * @param \WP_Post $post The Post Object.
+	 * @return array Adjusted $states
+	 */
+	public function _add_post_state( $states = [], $post ) {
+
+		$post_id = isset( $post->ID ) ? $post->ID : false;
+
+		if ( $post_id ) {
+			$search_exclude  = $this->get_option( 'alter_search_query' ) && $this->get_post_meta_item( 'exclude_local_search', $post_id );
+			$archive_exclude = $this->get_option( 'alter_archive_query' ) && $this->get_post_meta_item( 'exclude_from_archive', $post_id );
+
+			if ( $search_exclude )
+				$states[] = \esc_html__( 'No Search', 'autodescription' );
+
+			if ( $archive_exclude )
+				$states[] = \esc_html__( 'No Archive', 'autodescription' );
+		}
+
+		return $states;
+	}
+
+	/**
 	 * Prepares scripts in the admin area.
 	 *
 	 * @since 3.1.0
+	 * @since 4.0.0 Now discerns autoloading between taxonomies and singular types.
 	 * @access private
 	 *
 	 * @param string|null $hook The current page hook.
@@ -47,41 +100,43 @@ class Admin_Init extends Init {
 
 		if ( $this->is_seo_settings_page() ) {
 			$autoenqueue = true;
-		} else {
-			$enqueue_hooks = [
-				'edit.php',
-				'post.php',
-				'post-new.php',
-				'edit-tags.php',
-				'term.php',
-			];
+		} elseif ( $hook ) {
 
-			if ( ! $this->get_option( 'display_seo_bar_tables' ) ) {
-				$enqueue_hooks = array_diff( $enqueue_hooks, [ 'edit.php', 'edit-tags.php' ] );
+			$enqueue_hooks = [];
+
+			if ( $this->is_archive_admin() ) {
+				$prepare_edit_screen = $this->is_taxonomy_supported();
+			} elseif ( $this->is_singular_admin() ) {
+				$prepare_edit_screen = $this->is_post_type_supported();
+			} else {
+				$prepare_edit_screen = false;
 			}
 
-			if ( isset( $hook ) && $hook && in_array( $hook, $enqueue_hooks, true ) ) {
-				if ( $this->post_type_supports_custom_seo() )
-					$autoenqueue = true;
+			if ( $prepare_edit_screen ) {
+				$enqueue_hooks = [
+					'edit.php',
+					'post.php',
+					'post-new.php',
+					'edit-tags.php',
+					'term.php',
+				];
+
+				if ( ! $this->get_option( 'display_seo_bar_tables' ) ) {
+					$enqueue_hooks = array_diff(
+						$enqueue_hooks,
+						[
+							'edit.php',
+							'edit-tags.php',
+						]
+					);
+				}
 			}
+
+			if ( in_array( $hook, $enqueue_hooks, true ) )
+				$autoenqueue = true;
 		}
 
 		$autoenqueue and $this->init_admin_scripts();
-	}
-
-	/**
-	 * Returns the static scripts class object.
-	 *
-	 * The first letter of the method is capitalized, to indicate it's a class caller.
-	 *
-	 * @since 3.1.0
-	 * @builder
-	 *
-	 * @return string The scripts class name.
-	 */
-	public function Scripts() {
-		// return Builder\Scripts::class; //= PHP 5.5+
-		return '\\The_SEO_Framework\\Builders\\Scripts';
 	}
 
 	/**
@@ -89,610 +144,103 @@ class Admin_Init extends Init {
 	 *
 	 * @since 2.6.0
 	 * @since 3.1.0 First parameter is now deprecated.
-	 *
-	 * @param bool|null $dpr Deprecated.
-	 * @return void Early if already enqueued.
-	 */
-	public function init_admin_scripts( $dpr = null ) {
-
-		if ( null !== $dpr ) $this->_doing_it_wrong( __METHOD__, 'The first argument is deprecated. Use <code>the_seo_framework()->Scripts()::enqueue()</code> after calling this instead.', '3.1.0' );
-
-		if ( _has_run( __METHOD__ ) ) return;
-
-		//! PHP 5.4 compat: put in var.
-		$scripts = $this->Scripts();
-		$scripts::register( $this->get_default_scripts() );
-
-		if ( $this->is_post_edit() ) {
-			$this->enqueue_media_scripts();
-			$this->enqueue_primaryterm_scripts();
-
-			if ( $this->is_gutenberg_page() ) {
-				$this->enqueue_gutenberg_compat_scripts();
-			}
-		} elseif ( $this->is_seo_settings_page() ) {
-			$this->enqueue_media_scripts();
-			\wp_enqueue_style( 'wp-color-picker' );
-			\wp_enqueue_script( 'wp-color-picker' );
-		}
-	}
-
-	/**
-	 * Returns a filterable sequential array of default scripts.
-	 *
-	 * @since 3.2.2
-	 *
-	 * @return array
-	 */
-	public function get_default_scripts() {
-		/**
-		 * @since 3.1.0
-		 * @param array  $scripts The default CSS and JS loader settings.
-		 * @param string $scripts The \The_SEO_Framework\Builders\Scripts builder class name.
-		 */
-		return (array) \apply_filters_ref_array( 'the_seo_framework_scripts', [
-			[
-				[
-					'id'       => 'tsf',
-					'type'     => 'css',
-					'deps'     => [ 'tsf-tt' ],
-					'autoload' => true,
-					'hasrtl'   => true,
-					'name'     => 'tsf',
-					'base'     => THE_SEO_FRAMEWORK_DIR_URL . 'lib/css/',
-					'ver'      => THE_SEO_FRAMEWORK_VERSION,
-					'inline'   => [
-						'.tsf-flex-nav-tab .tsf-flex-nav-tab-radio:checked + .tsf-flex-nav-tab-label' => [
-							'box-shadow:0 -2px 0 0 {{$color_accent}} inset, 0 0 0 0 {{$color_accent}} inset',
-						],
-						'.tsf-flex-nav-tab .tsf-flex-nav-tab-radio:focus + .tsf-flex-nav-tab-label:not(.tsf-no-focus-ring)' => [
-							'box-shadow:0 -2px 0 0 {{$color_accent}} inset, 0 0 0 1px {{$color_accent}} inset',
-						],
-					],
-				],
-				[
-					'id'       => 'tsf',
-					'type'     => 'js',
-					'deps'     => [ 'jquery', 'tsf-tt' ],
-					'autoload' => true,
-					'name'     => 'tsf',
-					'base'     => THE_SEO_FRAMEWORK_DIR_URL . 'lib/js/',
-					'ver'      => THE_SEO_FRAMEWORK_VERSION,
-					'l10n'     => [
-						'name' => 'tsfL10n',
-						'data' => $this->get_javascript_l10n(),
-					],
-				],
-				[
-					'id'       => 'tsf-tt',
-					'type'     => 'css',
-					'deps'     => [],
-					'autoload' => true,
-					'hasrtl'   => false,
-					'name'     => 'tt',
-					'base'     => THE_SEO_FRAMEWORK_DIR_URL . 'lib/css/',
-					'ver'      => THE_SEO_FRAMEWORK_VERSION,
-					'inline'   => [
-						'.tsf-tooltip-text-wrap' => [
-							'background-color:{{$bg_accent}}',
-							'color:{{$rel_bg_accent}}',
-						],
-						'.tsf-tooltip-arrow:after' => [
-							'border-top-color:{{$bg_accent}}',
-						],
-						'.tsf-tooltip-down .tsf-tooltip-arrow:after' => [
-							'border-bottom-color:{{$bg_accent}}',
-						],
-						'.tsf-tooltip-text' => [
-							\is_rtl() ? 'direction:rtl' : '',
-						],
-					],
-				],
-				[
-					'id'       => 'tsf-tt',
-					'type'     => 'js',
-					'deps'     => [ 'jquery' ],
-					'autoload' => true,
-					'name'     => 'tt',
-					'base'     => THE_SEO_FRAMEWORK_DIR_URL . 'lib/js/',
-					'ver'      => THE_SEO_FRAMEWORK_VERSION,
-				],
-			],
-			$this->Scripts(),
-		] );
-	}
-
-	/**
-	 * Enqueues Media Upload and Cropping scripts.
-	 *
-	 * @since 3.2.0
-	 * @staticvar bool|null $registered Prevents duplicate calls.
-	 */
-	public function enqueue_gutenberg_compat_scripts() {
-
-		if ( _has_run( __METHOD__ ) ) return;
-
-		$scripts = $this->Scripts();
-		$scripts::register( [
-			[
-				'id'       => 'tsf-gbc',
-				'type'     => 'js',
-				'deps'     => [ 'jquery', 'tsf', 'wp-editor', 'wp-data', 'lodash', 'react' ],
-				'autoload' => true,
-				'name'     => 'tsf-gbc',
-				'base'     => THE_SEO_FRAMEWORK_DIR_URL . 'lib/js/',
-				'ver'      => THE_SEO_FRAMEWORK_VERSION,
-				'l10n'     => [
-					'name' => 'tsfGBCL10n',
-					'data' => [],
-				],
-			],
-		] );
-	}
-
-	/**
-	 * Enqueues Media Upload and Cropping scripts.
-	 *
-	 * @since 3.1.0
-	 */
-	public function enqueue_media_scripts() {
-
-		if ( _has_run( __METHOD__ ) ) return;
-
-		$args = [];
-		if ( $this->is_post_edit() ) {
-			$args['post'] = $this->get_the_real_admin_ID();
-		}
-		\wp_enqueue_media( $args );
-
-		//! PHP 5.4 compat: put in var.
-		$scripts = $this->Scripts();
-		$scripts::register( [
-			'id'       => 'tsf-media',
-			'type'     => 'js',
-			'deps'     => [ 'jquery', 'tsf' ],
-			'autoload' => true,
-			'name'     => 'media',
-			'base'     => THE_SEO_FRAMEWORK_DIR_URL . 'lib/js/',
-			'ver'      => THE_SEO_FRAMEWORK_VERSION,
-			'l10n'     => [
-				'name' => 'tsfMediaL10n',
-				'data' => [
-					'labels' => [
-						'social' => [
-							'imgSelect'      => \esc_attr__( 'Select Image', 'autodescription' ),
-							'imgSelectTitle' => \esc_attr_x( 'Select social image', 'Button hover', 'autodescription' ),
-							'imgChange'      => \esc_attr__( 'Change Image', 'autodescription' ),
-							'imgRemove'      => \esc_attr__( 'Remove Image', 'autodescription' ),
-							'imgRemoveTitle' => \esc_attr__( 'Remove selected social image', 'autodescription' ),
-							'imgFrameTitle'  => \esc_attr_x( 'Select Social Image', 'Frame title', 'autodescription' ),
-							'imgFrameButton' => \esc_attr__( 'Use this image', 'autodescription' ),
-						],
-						'logo'   => [
-							'imgSelect'      => \esc_attr__( 'Select Logo', 'autodescription' ),
-							'imgSelectTitle' => '',
-							'imgChange'      => \esc_attr__( 'Change Logo', 'autodescription' ),
-							'imgRemove'      => \esc_attr__( 'Remove Logo', 'autodescription' ),
-							'imgRemoveTitle' => \esc_attr__( 'Unset selected logo', 'autodescription' ),
-							'imgFrameTitle'  => \esc_attr_x( 'Select Logo', 'Frame title', 'autodescription' ),
-							'imgFrameButton' => \esc_attr__( 'Use this image', 'autodescription' ),
-						],
-					],
-				],
-			],
-		] );
-	}
-
-	/**
-	 * Enqueues Primary Term Selection scripts.
-	 *
-	 * @since 3.1.0
+	 * @since 4.0.0 First parameter is now removed.
 	 *
 	 * @return void Early if already enqueued.
 	 */
-	public function enqueue_primaryterm_scripts() {
+	public function init_admin_scripts() {
 
 		if ( _has_run( __METHOD__ ) ) return;
 
-		$id = $this->get_the_real_admin_ID();
-
-		$post_type   = \get_post_type( $id );
-		$_taxonomies = $post_type ? $this->get_hierarchical_taxonomies_as( 'objects', $post_type ) : [];
-		$taxonomies  = [];
-
-		$gutenberg = $this->is_gutenberg_page();
-
-		foreach ( $_taxonomies as $_t ) {
-			$singular_name = $this->get_tax_type_label( $_t->name );
-
-			$taxonomies[ $_t->name ] = [
-				'name'    => $_t->name,
-				'primary' => $this->get_primary_term_id( $id, $_t->name ) ?: 0,
-			] + (
-				$gutenberg ? [
-					'i18n' => [
-						/* translators: %s = term name */
-						'selectPrimary' => sprintf( \esc_html__( 'Select Primary %s', 'autodescription' ), $singular_name ),
-					],
-				] : [
-					'i18n' => [
-						/* translators: %s = term name */
-						'makePrimary' => sprintf( \esc_html__( 'Make primary %s', 'autodescription' ), strtolower( $singular_name ) ),
-						/* translators: %s = term name */
-						'primary'     => sprintf( \esc_html__( 'Primary %s', 'autodescription' ), strtolower( $singular_name ) ),
-						'name'        => strtolower( $singular_name ),
-					],
-				]
-			);
-		}
-
-		$inline_css = [];
-		if ( \is_rtl() ) {
-			$inline_css = [
-				'.tsf-primary-term-selector' => [
-					'float:left;',
-				],
-				'.tsf-primary-term-selector-help-wrap' => [
-					'left:25px;',
-					'right:initial;',
-				],
-			];
-		}
-
-		if ( $gutenberg ) {
-			$vars = [
-				'id'   => 'tsf-pt-gb',
-				'name' => 'pt-gb',
-			];
-			$deps = [ 'jquery', 'tsf', 'wp-hooks', 'wp-element', 'wp-components', 'wp-url', 'wp-api-fetch', 'lodash', 'react' ];
-		} else {
-			$vars = [
-				'id'   => 'tsf-pt',
-				'name' => 'pt',
-			];
-			$deps = [ 'jquery', 'tsf', 'tsf-tt' ];
-		}
-
-		//! PHP 5.4 compat: put in var.
-		$scripts = $this->Scripts();
-		$scripts::register( [
-			[
-				'id'       => $vars['id'],
-				'type'     => 'js',
-				'deps'     => $deps,
-				'autoload' => true,
-				'name'     => $vars['name'],
-				'base'     => THE_SEO_FRAMEWORK_DIR_URL . 'lib/js/',
-				'ver'      => THE_SEO_FRAMEWORK_VERSION,
-				'l10n'     => [
-					'name' => 'tsfPTL10n',
-					'data' => [
-						'taxonomies' => $taxonomies,
-					],
-				],
-				'tmpl'     => [
-					'file' => $this->get_view_location( 'templates/inpost/primary-term-selector' ),
-				],
-			],
-			[
-				'id'       => 'tsf-pt',
-				'type'     => 'css',
-				'deps'     => [ 'tsf-tt' ],
-				'autoload' => true,
-				'hasrtl'   => false,
-				'name'     => 'pt',
-				'base'     => THE_SEO_FRAMEWORK_DIR_URL . 'lib/css/',
-				'ver'      => THE_SEO_FRAMEWORK_VERSION,
-				'inline'   => $inline_css,
-			],
-		] );
-	}
-
-	/**
-	 * Generate Javascript Localization.
-	 *
-	 * @TODO rewrite, it's slow and a mess.
-	 *
-	 * @since 2.6.0
-	 * @staticvar array $strings : The l10n strings.
-	 * @since 2.7.0 Added AJAX nonce: 'autodescription-ajax-nonce'
-	 * @since 2.8.0 1 : Added input detection: 'hasInput'
-	 *              2 : Reworked output.
-	 *              3 : Removed unused caching.
-	 *              4 : Added dynamic output control.
-	 * @since 2.9.0 Added boolean $returnValue['states']['isSettingsPage']
-	 * @since 3.0.4 `descPixelGuideline` has been increased from "920 and 820" to "1820 and 1720" respectively.
-	 * @since 3.2.2 Added string $returnValue['nonces']['manage_options']
-	 *
-	 * @return array $strings The l10n strings.
-	 */
-	protected function get_javascript_l10n() {
-
-		$id = $this->get_the_real_ID();
-
-		$default_title   = '';
-		$title_additions = '';
-
-		$use_title_additions = $this->use_title_branding();
-		$home_tagline        = $this->get_option( 'homepage_title_tagline' );
-		$title_location      = $this->get_option( 'title_location' );
-		$title_separator     = \esc_html( $this->get_separator( 'title' ) );
-
-		$is_home          = false;
-		$is_settings_page = $this->is_seo_settings_page();
-		$page_on_front    = $this->has_page_on_front();
-		$is_post_edit     = $this->is_post_edit();
-		$is_term_edit     = $this->is_term_edit();
-		$has_input        = $is_settings_page || $is_post_edit || $is_term_edit;
-
-		$_decode_flags = ENT_QUOTES | ENT_COMPAT;
-
-		if ( $is_settings_page ) {
-			// We're on our SEO settings pages.
-			if ( $page_on_front ) {
-				// Home is a page.
-				$id           = (int) \get_option( 'page_on_front' );
-				$inpost_title = $this->get_custom_field( '_genesis_title', $id );
-			} else {
-				// Home is a blog.
-				$inpost_title = '';
-			}
-			$default_title   = $inpost_title ?: $this->get_blogname();
-			$title_additions = $this->get_home_page_tagline();
-
-			$use_title_additions = (bool) $this->get_option( 'homepage_tagline' );
-		} else {
-			// We're somewhere within default WordPress pages.
-			if ( $is_term_edit ) {
-				//* Category or Tag.
-				if ( $this->get_current_taxonomy() && $id ) {
-					// DEBUG: Use get_generated_archive_title() instead...? use_generated_archive_prefix() is in the way.
-					$default_title   = $this->get_generated_single_term_title( $this->fetch_the_term( $id ) );
-					$title_additions = $this->get_blogname();
-				}
-			} elseif ( $this->is_static_frontpage( $id ) ) { // implies $is_post_edit or $is_settings_page
-				$default_title  = $this->get_option( 'homepage_title' ) ?: $this->get_blogname();
-				$title_location = $this->get_option( 'home_title_location' );
-
-				$is_home = true;
-
-				$use_title_additions = (bool) $this->get_option( 'homepage_tagline' );
-				$title_additions     = $this->get_home_page_tagline();
-			} elseif ( $is_post_edit ) {
-				$default_title   = $this->get_raw_generated_title( [ 'id' => $id ] );
-				$title_additions = $this->get_blogname();
-			} else {
-				//* We're in a special place.
-				// Can't fetch title.
-				$default_title   = '';
-				$title_additions = $this->get_blogname();
-			}
-		}
-
-		$this->set_js_nonces( [
-			/**
-			 * Use $this->get_settings_capability() ?... might conflict with other nonces.
-			 * @augments tsfMedia 'upload_files'
-			 */
-			'manage_options' => \current_user_can( 'manage_options' ) ? \wp_create_nonce( 'tsf-ajax-manage_options' ) : false,
-			'upload_files'   => \current_user_can( 'upload_files' ) ? \wp_create_nonce( 'tsf-ajax-upload_files' ) : false,
-			'edit_posts'     => \current_user_can( 'edit_posts' ) ? \wp_create_nonce( 'tsf-ajax-edit_posts' ) : false,
-		] );
-
-		$term_name       = '';
-		$use_term_prefix = false;
-		if ( $is_term_edit ) {
-			$term_name       = $this->get_tax_type_label( $this->get_current_taxonomy(), true );
-			$use_term_prefix = $this->use_generated_archive_prefix();
-		}
-
-		$social_settings_locks = [];
-
-		if ( $page_on_front ) {
-			if ( $is_settings_page ) {
-				// PH = placeholder
-				$social_settings_locks = [
-					'ogTitlePHLock'       => (bool) $this->get_custom_field( '_open_graph_title', $id ),
-					'ogDescriptionPHLock' => (bool) $this->get_custom_field( '_open_graph_description', $id ),
-					'twTitlePHLock'       => (bool) $this->get_custom_field( '_twitter_title', $id ),
-					'twDescriptionPHLock' => (bool) $this->get_custom_field( '_twitter_description', $id ),
-				];
-			} elseif ( $is_home ) {
-				$social_settings_locks = [
-					'refTitleLock'       => (bool) $this->get_option( 'homepage_title' ),
-					'refDescriptionLock' => (bool) $this->get_option( 'homepage_description' ),
-					'ogTitleLock'        => (bool) $this->get_option( 'homepage_og_title' ),
-					'ogDescriptionLock'  => (bool) $this->get_option( 'homepage_og_description' ),
-					'twTitleLock'        => (bool) $this->get_option( 'homepage_twitter_title' ),
-					'twDescriptionLock'  => (bool) $this->get_option( 'homepage_twitter_description' ),
-				];
-			}
-		}
-
-		$social_settings_placeholders = [];
-
-		if ( $is_post_edit || $is_settings_page ) {
-			if ( $is_settings_page ) {
-				if ( $page_on_front ) {
-					$social_settings_placeholders = [
-						'ogDesc' => $this->get_custom_field( '_genesis_description', $id ) ?: $this->get_generated_open_graph_description( [ 'id' => $id ] ),
-						'twDesc' => $this->get_custom_field( '_genesis_description', $id ) ?: $this->get_generated_twitter_description( [ 'id' => $id ] ),
-					];
-				} else {
-					$social_settings_placeholders = [
-						'ogDesc' => $this->get_generated_open_graph_description( [ 'id' => $id ] ),
-						'twDesc' => $this->get_generated_twitter_description( [ 'id' => $id ] ),
-					];
-				}
-			} elseif ( $is_home ) {
-				$social_settings_placeholders = [
-					'ogDesc' => $this->get_option( 'homepage_description' ) ?: $this->get_generated_open_graph_description( [ 'id' => $id ] ),
-					'twDesc' => $this->get_option( 'homepage_description' ) ?: $this->get_generated_twitter_description( [ 'id' => $id ] ),
-				];
-			} else {
-				$social_settings_placeholders = [
-					'ogDesc' => $this->get_generated_open_graph_description( [ 'id' => $id ] ),
-					'twDesc' => $this->get_generated_twitter_description( [ 'id' => $id ] ),
-				];
-			}
-
-			foreach ( $social_settings_placeholders as &$v ) {
-				$v = html_entity_decode( $v, $_decode_flags, 'UTF-8' );
-			}
-		}
-
-		$input_guidelines      = [];
-		$input_guidelines_i18n = [];
-		if ( $has_input ) {
-			$input_guidelines      = $this->get_input_guidelines();
-			$input_guidelines_i18n = $this->get_input_guidelines_i18n();
-		}
-
-		$l10n = [
-			'nonces' => $this->get_js_nonces(),
-			'states' => [
-				'isRTL'               => (bool) \is_rtl(),
-				'isHome'              => $is_home,
-				'hasInput'            => $has_input,
-				'counterType'         => \absint( $this->get_user_option( 0, 'counter_type', 3 ) ),
-				'useTagline'          => $use_title_additions,
-				'taglineLocked'       => (bool) $this->get_option( 'title_rem_additions' ),
-				'useTermPrefix'       => $use_term_prefix,
-				'isSettingsPage'      => $is_settings_page,
-				'isPostEdit'          => $is_post_edit,
-				'isTermEdit'          => $is_term_edit,
-				'postType'            => $is_post_edit ? \get_post_type( $id ) : false,
-				'isPrivate'           => $has_input && $is_post_edit && $id && $this->is_private( $id ),
-				'isPasswordProtected' => $has_input && $is_post_edit && $id && $this->is_password_protected( $id ),
-				'debug'               => $this->script_debug,
-				'homeLocks'           => $social_settings_locks,
-				'stripTitleTags'      => (bool) $this->get_option( 'title_strip_tags' ),
-				'isGutenbergPage'     => $this->is_gutenberg_page(),
-			],
-			'i18n'   => [
-				'saveAlert'       => \__( 'The changes you made will be lost if you navigate away from this page.', 'autodescription' ),
-				'confirmReset'    => \__( 'Are you sure you want to reset all SEO settings to their defaults?', 'autodescription' ),
-				// phpcs:ignore -- WordPress doesn't have a comment, either.
-				'privateTitle'    => $has_input && $id ? trim( str_replace( '%s', '', \__( 'Private: %s', 'default' ) ) ) : '',
-				// phpcs:ignore -- WordPress doesn't have a comment, either.
-				'protectedTitle'  => $has_input && $id ? trim( str_replace( '%s', '', \__( 'Protected: %s', 'default' ) ) ) : '',
-				/* translators: Pixel counter. 1: width, 2: guideline */
-				'pixelsUsed'      => $has_input ? \__( '%1$d out of %2$d pixels are used.', 'autodescription' ) : '',
-				'inputGuidelines' => $input_guidelines_i18n,
-			],
-			'params' => [
-				'objectTitle'        => $this->s_title_raw( $default_title ),
-				'defaultTitle'       => $this->s_title_raw( $default_title ),
-				'titleAdditions'     => $this->s_title_raw( $title_additions ),
-				'blogDescription'    => $this->s_title_raw( $this->get_blogdescription() ),
-				'termName'           => $this->s_title_raw( $term_name ),
-				'untitledTitle'      => $this->s_title_raw( $this->get_static_untitled_title() ),
-				'titleSeparator'     => $title_separator,
-				'titleLocation'      => $title_location,
-				'inputGuidelines'    => $input_guidelines,
-				'socialPlaceholders' => $social_settings_placeholders,
-			],
-		];
-
-		foreach ( [ 'i18n', 'params' ] as $key ) {
-			foreach ( $l10n[ $key ] as &$v ) {
-				if ( is_scalar( $v ) )
-					$v = html_entity_decode( $v, $_decode_flags, 'UTF-8' );
-			}
-		}
-
-		/**
-		 * @since 3.0.0
-		 * @param array $l10n The JS l10n values.
-		 */
-		return (array) \apply_filters( 'the_seo_framework_js_l10n', $l10n );
-	}
-
-	/**
-	 * Sets up additional JS l10n values for nonces.
-	 *
-	 * They are put under object 'tsfemL10n.nonces[ $key ] = $val'.
-	 *
-	 * @since 2.9.0
-	 * @access private
-	 *
-	 * @param string|array $key Required. The object key or array of keys and values. Requires escape.
-	 * @param mixed $val The object value if $key is string. Requires escape.
-	 */
-	public function set_js_nonces( $key, $val = null ) {
-		$this->get_js_nonces( $key, $val, false );
-	}
-
-	/**
-	 * Maintains and Returns additional JS l10n.
-	 *
-	 * They are put under object 'tsfemL10n.nonces[ $key ] = $val'.
-	 *
-	 * If $key is an array, $val is ignored and $key's values are used instead.
-	 *
-	 * @since 2.9.0
-	 * @access private
-	 * @staticvar object $nonces The cached nonces object.
-	 *
-	 * @param string|array $key The object key or array of keys and values. Requires escape.
-	 * @param mixed $val The object value if $key is string. Requires escape.
-	 * @param bool $get Whether to return the cached nonces.
-	 * @return object Early when $get is true
-	 */
-	public function get_js_nonces( $key = null, $val = null, $get = true ) {
-
-		static $nonces = null;
-
-		if ( null === $nonces )
-			$nonces = new \stdClass();
-
-		if ( $get )
-			return $nonces;
-
-		if ( is_string( $key ) ) {
-			$nonces->$key = $val;
-		} elseif ( is_array( $key ) ) {
-			foreach ( $key as $k => $v ) {
-				$nonces->$k = $v;
-			}
-		}
+		Bridges\Scripts::_init();
 	}
 
 	/**
 	 * Returns the title and description input guideline table, for
 	 * (Google) search, Open Graph, and Twitter.
 	 *
+	 * NB: Some scripts have wide characters. These are recognized by Google, and have been adjusted for in the chactacter
+	 * guidelines. German is a special Case, where we account for the Capitalization of Nouns.
+	 *
+	 * NB: Although the Arabic & Farsi scripts are much smaller in width, Google seems to be using the 160 & 70 char limits
+	 * strictly... As such, we stricten the guidelines for pixels instead.
+	 *
 	 * @since 3.1.0
+	 * @since 4.0.0 1. Now gives different values for various WordPress locales.
+	 *              2. Added $locale input parameter.
 	 * @staticvar array $guidelines
 	 * @TODO Consider splitting up search into Google, Bing, etc., as we might
 	 *       want users to set their preferred search engine. Now, these engines
 	 *       are barely any different.
+	 * TODO move this to another object?
 	 *
+	 * @param string|null $locale The locale to test. If empty, it will be auto-determined.
 	 * @return array
 	 */
-	public function get_input_guidelines() {
-		static $guidelines;
+	public function get_input_guidelines( $locale = null ) {
+
+		static $guidelines = [];
+
+		$locale = $locale ?: \get_locale();
+
+		// Strip the "_formal" and other suffixes. 5 length: xx_YY
+		$locale = substr( $locale, 0, 5 );
+
+		if ( isset( $guidelines[ $locale ] ) )
+			return $guidelines[ $locale ];
+
+		// phpcs:disable, WordPress.WhiteSpace.OperatorSpacing.SpacingAfter
+		$character_adjustments = [
+			'as'    => 148 / 160, // Assamese (অসমীয়া)
+			'de_AT' => 158 / 160, // Austrian German (Österreichisch Deutsch)
+			'de_CH' => 158 / 160, // Swiss German (Schweiz Deutsch)
+			'de_DE' => 158 / 160, // German (Deutsch)
+			'gu'    => 148 / 160, // Gujarati (ગુજરાતી)
+			'ml_IN' => 100 / 160, // Malayalam (മലയാളം)
+			'ja'    =>  70 / 160, // Japanese (日本語)
+			'ko_KR' =>  82 / 160, // Korean (한국어)
+			'ta_IN' => 120 / 160, // Talim (தமிழ்)
+			'zh_TW' =>  70 / 160, // Taiwanese Mandarin (Traditional Chinese) (繁體中文)
+			'zh_HK' =>  70 / 160, // Hong Kong (Chinese version) (香港中文版)
+			'zh_CN' =>  70 / 160, // Mandarin (Simplified Chinese) (简体中文)
+		];
+		// phpcs:enable, WordPress.WhiteSpace.OperatorSpacing.SpacingAfter
+
+		$c_adjust = isset( $character_adjustments[ $locale ] ) ? $character_adjustments[ $locale ] : 1;
+
+		$pixel_adjustments = [
+			'ar'    => 760 / 910, // Arabic (العربية)
+			'ary'   => 760 / 910, // Moroccan Arabic (العربية المغربية)
+			'azb'   => 760 / 910, // South Azerbaijani (گؤنئی آذربایجان)
+			'fa_IR' => 760 / 910, // Iran Farsi (فارسی)
+			'haz'   => 760 / 910, // Hazaragi (هزاره گی)
+			'ckb'   => 760 / 910, // Central Kurdish (كوردی)
+		];
+
+		$p_adjust = isset( $pixel_adjustments[ $locale ] ) ? $pixel_adjustments[ $locale ] : 1;
+
+		// phpcs:disable, WordPress.Arrays.MultipleStatementAlignment.DoubleArrowNotAligned
 		/**
 		 * @since 3.1.0
 		 * @param array $guidelines The title and description guidelines.
 		 *              Don't alter the format. Only change the numeric values.
 		 */
-		return isset( $guidelines ) ? $guidelines : $guidelines = (array) \apply_filters(
+		return $guidelines[ $locale ] = (array) \apply_filters(
 			'the_seo_framework_input_guidelines',
 			[
 				'title' => [
 					'search' => [
 						'chars'  => [
-							'lower'     => 25,
-							'goodLower' => 35,
-							'goodUpper' => 65,
-							'upper'     => 75,
+							'lower'     => (int) ( 25 * $c_adjust ),
+							'goodLower' => (int) ( 35 * $c_adjust ),
+							'goodUpper' => (int) ( 65 * $c_adjust ),
+							'upper'     => (int) ( 75 * $c_adjust ),
 						],
 						'pixels' => [
-							'lower'     => 200,
-							'goodLower' => 280,
-							'goodUpper' => 520,
-							'upper'     => 600,
+							'lower'     => (int) ( 200 * $p_adjust ),
+							'goodLower' => (int) ( 280 * $p_adjust ),
+							'goodUpper' => (int) ( 520 * $p_adjust ),
+							'upper'     => (int) ( 600 * $p_adjust ),
 						],
 					],
 					'opengraph' => [
@@ -717,16 +265,16 @@ class Admin_Init extends Init {
 				'description' => [
 					'search' => [
 						'chars'  => [
-							'lower'     => 45,
-							'goodLower' => 80,
-							'goodUpper' => 160,
-							'upper'     => 320,
+							'lower'     => (int) ( 45 * $c_adjust ),
+							'goodLower' => (int) ( 80 * $c_adjust ),
+							'goodUpper' => (int) ( 160 * $c_adjust ),
+							'upper'     => (int) ( 320 * $c_adjust ),
 						],
 						'pixels' => [
-							'lower'     => 256,
-							'goodLower' => 455,
-							'goodUpper' => 910,
-							'upper'     => 1820,
+							'lower'     => (int) ( 256 * $p_adjust ),
+							'goodLower' => (int) ( 455 * $p_adjust ),
+							'goodUpper' => (int) ( 910 * $p_adjust ),
+							'upper'     => (int) ( 1820 * $p_adjust ),
 						],
 					],
 					'opengraph' => [
@@ -750,6 +298,7 @@ class Admin_Init extends Init {
 				],
 			]
 		);
+		// phpcs:enable, WordPress.Arrays.MultipleStatementAlignment.DoubleArrowNotAligned
 	}
 
 	/**
@@ -758,12 +307,13 @@ class Admin_Init extends Init {
 	 * Already attribute-escaped.
 	 *
 	 * @since 3.1.0
+	 * @since 4.0.0 Now added a short leading-dot version for ARIA labels.
 	 *
 	 * @return array
 	 */
 	public function get_input_guidelines_i18n() {
 		return [
-			'long' => [
+			'long'     => [
 				'empty'       => \esc_attr__( "There's no content.", 'autodescription' ),
 				'farTooShort' => \esc_attr__( "It's too short and it should have more information.", 'autodescription' ),
 				'tooShort'    => \esc_attr__( "It's short and it could have more information.", 'autodescription' ),
@@ -771,13 +321,21 @@ class Admin_Init extends Init {
 				'farTooLong'  => \esc_attr__( "It's too long and it will get truncated in search.", 'autodescription' ),
 				'good'        => \esc_attr__( 'Length is good.', 'autodescription' ),
 			],
-			'short' => [
+			'short'    => [
 				'empty'       => \esc_attr_x( 'Empty', 'The string is empty', 'autodescription' ),
 				'farTooShort' => \esc_attr__( 'Far too short', 'autodescription' ),
 				'tooShort'    => \esc_attr__( 'Too short', 'autodescription' ),
 				'tooLong'     => \esc_attr__( 'Too long', 'autodescription' ),
 				'farTooLong'  => \esc_attr__( 'Far too long', 'autodescription' ),
 				'good'        => \esc_attr__( 'Good', 'autodescription' ),
+			],
+			'shortdot' => [
+				'empty'       => \esc_attr_x( 'Empty.', 'The string is empty', 'autodescription' ),
+				'farTooShort' => \esc_attr__( 'Far too short.', 'autodescription' ),
+				'tooShort'    => \esc_attr__( 'Too short.', 'autodescription' ),
+				'tooLong'     => \esc_attr__( 'Too long.', 'autodescription' ),
+				'farTooLong'  => \esc_attr__( 'Far too long.', 'autodescription' ),
+				'good'        => \esc_attr__( 'Good.', 'autodescription' ),
 			],
 		];
 	}
@@ -793,30 +351,13 @@ class Admin_Init extends Init {
 	 * @uses WP Core check_ajax_referer()
 	 * @see @link https://developer.wordpress.org/reference/functions/check_ajax_referer/
 	 *
+	 * @param string $capability The capability that was required for the nonce check to be created.
 	 * @return false|int False if the nonce is invalid, 1 if the nonce is valid
 	 *                   and generated between 0-12 hours ago, 2 if the nonce is
 	 *                   valid and generated between 12-24 hours ago.
 	 */
 	public function _check_tsf_ajax_referer( $capability ) {
 		return \check_ajax_referer( 'tsf-ajax-' . $capability, 'nonce', true );
-	}
-
-	/**
-	 * Adds removable query args to WordPress query arg handler.
-	 *
-	 * @since 2.8.0
-	 *
-	 * @param array $removable_query_args
-	 * @return array The adjusted removable query args.
-	 */
-	public function add_removable_query_args( $removable_query_args = [] ) {
-
-		if ( is_array( $removable_query_args ) ) {
-			$removable_query_args[] = 'tsf-settings-reset';
-			$removable_query_args[] = 'tsf-settings-updated';
-		}
-
-		return $removable_query_args;
 	}
 
 	/**
@@ -846,7 +387,7 @@ class Admin_Init extends Init {
 		}
 
 		$target = \add_query_arg( $query_args, $url );
-		$target = \esc_url_raw( $target, [ 'http', 'https' ] );
+		$target = \esc_url_raw( $target, [ 'https', 'http' ] );
 
 		//* Predict white screen:
 		$headers_sent = headers_sent();
@@ -877,8 +418,7 @@ class Admin_Init extends Init {
 	 */
 	protected function handle_admin_redirect_error( $target = '' ) {
 
-		if ( empty( $target ) )
-			return;
+		if ( ! $target ) return;
 
 		$headers_list = headers_list();
 		$location     = sprintf( 'Location: %s', \wp_sanitize_redirect( $target ) );
@@ -887,17 +427,19 @@ class Admin_Init extends Init {
 		if ( in_array( $location, $headers_list, true ) )
 			return;
 
+		// phpcs:disable, WordPress.Security.EscapeOutput -- convert_markdown escapes. Added esc_url() for sanity.
 		printf( '<p><strong>%s</strong></p>',
 			$this->convert_markdown(
 				sprintf(
 					/* translators: %s = Redirect URL markdown */
 					\esc_html__( 'There has been an error redirecting. Refresh the page or follow [this link](%s).', 'autodescription' ),
-					$target
+					\esc_url( $target )
 				),
 				[ 'a' ],
 				[ 'a_internal' => true ]
 			)
 		);
+		// phpcs:enable, WordPress.Security.EscapeOutput
 	}
 
 	/**
@@ -909,42 +451,155 @@ class Admin_Init extends Init {
 	 */
 	public function _wp_ajax_update_counter_type() {
 
-		if ( $this->is_admin() && $this->doing_ajax() ) :
-			$this->_check_tsf_ajax_referer( 'edit_posts' );
+		// phpcs:disable, WordPress.Security.NonceVerification -- _check_tsf_ajax_referer() does this.
+		$this->_check_tsf_ajax_referer( 'edit_posts' );
 
-			//* Remove output buffer.
-			$this->clean_response_header();
+		//* Remove output buffer.
+		$this->clean_response_header();
 
-			//* If current user isn't allowed to edit posts, don't do anything and kill PHP.
-			if ( ! \current_user_can( 'edit_posts' ) ) {
-				//* Encode and echo results. Requires JSON decode within JS.
-				\wp_send_json( [
-					'type'  => 'failure',
-					'value' => '',
-				] );
-			}
-
-			/**
-			 * Count up, reset to 0 if needed. We have 4 options: 0, 1, 2, 3
-			 * $_POST['val'] already contains updated number.
-			 */
-			$value = isset( $_POST['val'] ) ? intval( $_POST['val'] ) : $this->get_user_option( 0, 'counter_type', 3 ) + 1; // input var ok
-			$value = \absint( $value );
-
-			if ( $value > 3 )
-				$value = 0;
-
-			//* Update the option and get results of action.
-			$type = $this->update_user_option( 0, 'counter_type', $value ) ? 'success' : 'error';
-
-			$results = [
-				'type'  => $type,
-				'value' => $value,
-			];
-
+		//* If current user isn't allowed to edit posts, don't do anything and kill PHP.
+		if ( ! \current_user_can( 'edit_posts' ) ) {
 			//* Encode and echo results. Requires JSON decode within JS.
-			\wp_send_json( $results );
-		endif;
+			\wp_send_json( [
+				'type'  => 'failure',
+				'value' => '',
+			] );
+		}
+
+		/**
+		 * Count up, reset to 0 if needed. We have 4 options: 0, 1, 2, 3
+		 * $_POST['val'] already contains updated number.
+		 */
+		if ( isset( $_POST['val'] ) ) {
+			$value = (int) $_POST['val'];
+		} else {
+			$value = $this->get_user_option( 0, 'counter_type', 3 ) + 1;
+		}
+		$value = \absint( $value );
+
+		if ( $value > 3 )
+			$value = 0;
+
+		//* Update the option and get results of action.
+		$type = $this->update_user_option( 0, 'counter_type', $value ) ? 'success' : 'error';
+
+		$results = [
+			'type'  => $type,
+			'value' => $value,
+		];
+
+		//* Encode and echo results. Requires JSON decode within JS.
+		\wp_send_json( $results );
+
+		// phpcs:enable, WordPress.Security.NonceVerification
+	}
+
+	/**
+	 * Gets an SEO Bar for AJAX during edit-post.
+	 *
+	 * @since 4.0.0
+	 * @access private
+	 */
+	public function _wp_ajax_get_post_data() {
+
+		// phpcs:disable, WordPress.Security.NonceVerification -- _check_tsf_ajax_referer() does this.
+		$this->_check_tsf_ajax_referer( 'edit_posts' );
+
+		// CLear output buffer.
+		$this->clean_response_header();
+
+		$post_id = \absint( $_POST['post_id'] );
+
+		if ( ! $post_id || ! \current_user_can( 'edit_post', $post_id ) ) {
+			\wp_send_json( [
+				'type' => 'failure',
+				'data' => [],
+			] );
+		}
+
+		$_get_defaults = [
+			'seobar'          => false,
+			'metadescription' => false,
+			'ogdescription'   => false,
+			'twdescription'   => false,
+			'imageurl'        => false,
+		];
+
+		// Only get what's indexed in the defaults and set as "true".
+		$get = array_keys(
+			array_filter(
+				array_intersect_key(
+					array_merge(
+						$_get_defaults,
+						(array) ( isset( $_POST['get'] ) ? $_POST['get'] : [] )
+					),
+					$_get_defaults
+				)
+			)
+		);
+
+		$_generator_args = [
+			'id'       => $post_id,
+			'taxonomy' => '',
+		];
+
+		$data = [];
+
+		foreach ( $get as $g ) :
+			switch ( $g ) {
+				case 'seobar':
+					$data[ $g ] = $this->get_generated_seo_bar( $_generator_args );
+					break;
+
+				case 'metadescription':
+				case 'ogdescription':
+				case 'twdescription':
+					switch ( $g ) {
+						case 'metadescription':
+							if ( $this->is_static_frontpage( $post_id ) ) {
+								// phpcs:disable, WordPress.WhiteSpace.PrecisionAlignment
+								$data[ $g ] = $this->get_option( 'homepage_description' )
+										   ?: $this->get_generated_description( $_generator_args, false );
+								// phpcs:enable, WordPress.WhiteSpace.PrecisionAlignment
+							} else {
+								$data[ $g ] = $this->get_generated_description( $_generator_args, false );
+							}
+							break;
+						case 'ogdescription':
+							// phpcs:ignore, VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable -- Smart loop.
+							$_social_ph = isset( $_social_ph ) ? $_social_ph : $this->_get_social_placeholders( $_generator_args );
+							$data[ $g ] = $_social_ph['description']['og'];
+							break;
+						case 'twdescription':
+							// phpcs:ignore, VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable -- Smart loop.
+							$_social_ph = isset( $_social_ph ) ? $_social_ph : $this->_get_social_placeholders( $_generator_args );
+							$data[ $g ] = $_social_ph['description']['twitter'];
+							break;
+					}
+
+					$data[ $g ] = Bridges\Scripts::decode_entities( $this->s_description( $data[ $g ] ) );
+					break;
+
+				case 'imageurl':
+					if ( $this->is_static_frontpage( $post_id ) && $this->get_option( 'homepage_social_image_url' ) ) {
+						$image_details = current( $this->get_image_details( $_generator_args, true, 'social', true ) );
+						$data[ $g ]    = isset( $image_details['url'] ) ? $image_details['url'] : '';
+					} else {
+						$image_details = current( $this->get_generated_image_details( $_generator_args, true, 'social', true ) );
+						$data[ $g ]    = isset( $image_details['url'] ) ? $image_details['url'] : '';
+					}
+					break;
+
+				default:
+					break;
+			}
+		endforeach;
+
+		\wp_send_json( [
+			'type'      => 'success',
+			'data'      => $data,
+			'processed' => $get,
+		] );
 	}
 
 	/**
@@ -952,6 +607,9 @@ class Admin_Init extends Init {
 	 *
 	 * Copied from WordPress Core wp_ajax_crop_image.
 	 * Adjusted: 1. It accepts capability 'upload_files', instead of 'customize'.
+	 *               - This was set to 'edit_post' in WP 4.7? trac ticket got lost, probably for (invalid) security reasons.
+	 *                 In any case, that's still incorrect, and I gave up on communicating this;
+	 *                 We're not editing the image, we're creating a new one!
 	 *           2. It now only accepts TSF own AJAX nonces.
 	 *           3. It now only accepts context 'tsf-image'
 	 *           4. It no longer accepts a default context.
@@ -962,18 +620,18 @@ class Admin_Init extends Init {
 	 */
 	public function _wp_ajax_crop_image() {
 
+		// This checks the nonce, re:to all 'WordPress.Security.NonceVerification' below
+		// phpcs:disable, WordPress.Security.NonceVerification -- _check_tsf_ajax_referer does this.
 		$this->_check_tsf_ajax_referer( 'upload_files' );
-		if (
-		   ! \current_user_can( 'upload_files' ) // precision alignment ok.
-		|| ! isset( $_POST['id'], $_POST['context'], $_POST['cropDetails'] ) // input var ok.
-		) {
+
+		if ( ! \current_user_can( 'upload_files' ) || ! isset( $_POST['id'], $_POST['context'], $_POST['cropDetails'] ) ) {
 			\wp_send_json_error();
 		}
 
-		$attachment_id = \absint( $_POST['id'] ); // input var ok.
+		$attachment_id = \absint( $_POST['id'] );
 
-		$context = str_replace( '_', '-', \sanitize_key( $_POST['context'] ) ); // input var ok.
-		$data    = array_map( 'absint', $_POST['cropDetails'] ); // input var ok.
+		$context = str_replace( '_', '-', \sanitize_key( $_POST['context'] ) );
+		$data    = array_map( 'absint', $_POST['cropDetails'] );
 		$cropped = \wp_crop_image( $attachment_id, $data['x1'], $data['y1'], $data['width'], $data['height'], $data['dst_width'], $data['dst_height'] );
 
 		if ( ! $cropped || \is_wp_error( $cropped ) )
@@ -1000,7 +658,8 @@ class Admin_Init extends Init {
 				$parent_url = \wp_get_attachment_url( $attachment_id );
 				$url        = str_replace( basename( $parent_url ), basename( $cropped ), $parent_url );
 
-				$size       = @getimagesize( $cropped ); // phpcs:ignore -- Feature might not be enabled.
+				// phpcs:ignore, WordPress.PHP.NoSilencedErrors -- Feature may be disabled.
+				$size       = @getimagesize( $cropped );
 				$image_type = ( $size ) ? $size['mime'] : 'image/jpeg';
 
 				$object = [
@@ -1042,5 +701,7 @@ class Admin_Init extends Init {
 		endswitch;
 
 		\wp_send_json_success( \wp_prepare_attachment_for_js( $attachment_id ) );
+
+		// phpcs:enable, WordPress.Security.NonceVerification
 	}
 }

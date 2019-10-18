@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) or exit;
 
 	<p class="breadcrumbs">
 		<span class="prefix"><?php echo __( 'You are here: ', 'mailchimp-for-wp' ); ?></span>
-		<a href="<?php echo admin_url( 'admin.php?page=mailchimp-for-wp' ); ?>">MailChimp for WordPress</a> &rsaquo;
+		<a href="<?php echo admin_url( 'admin.php?page=mailchimp-for-wp' ); ?>">Mailchimp for WordPress</a> &rsaquo;
 		<span class="current-crumb"><strong>User Sync</strong></span>
 	</p>
 
@@ -21,7 +21,7 @@ defined( 'ABSPATH' ) or exit;
 
 		<!-- Main Content -->
 		<div class="main-content col col-4 col-sm-6">
-			<h1 class="page-title">MailChimp User Sync</h1>
+			<h1 class="page-title">Mailchimp User Sync</h1>
 
 			<form method="post" action="<?php echo admin_url( 'options.php' ); ?>" id="settings-form">
 
@@ -37,7 +37,7 @@ defined( 'ABSPATH' ) or exit;
 						<td class="nowrap">
 							<label><input type="radio" name="<?php echo $this->name_attr( 'enabled' ); ?>" value="1" <?php checked( $this->options['enabled'], 1 ); ?> /> <?php _e( 'Yes' ); ?></label> <br />
 							<label><input type="radio" name="<?php echo $this->name_attr( 'enabled' ); ?>" value="0" <?php checked( $this->options['enabled'], 0 ); ?> /> <?php _e( 'No' ); ?></label>
-							<p  class="help"><?php _e( 'Select "yes" if you want the plugin to "listen" to all changes in your WordPress user base and auto-sync them with the selected MailChimp list.', 'mailchimp-sync' ); ?></p>
+							<p  class="help"><?php _e( 'Select "yes" if you want the plugin to "listen" to all changes in your WordPress user base and auto-sync them with the selected Mailchimp list.', 'mailchimp-sync' ); ?></p>
 						</td>
 					</tr>
 
@@ -45,7 +45,7 @@ defined( 'ABSPATH' ) or exit;
 						<th scope="row"><?php _e( 'Sync users with this list', 'mailchimp-sync' ); ?></th>
 						<td>
 							<?php if( empty( $lists ) ) {
-								printf( __( 'No lists found, <a href="%s">are you connected to MailChimp</a>?', 'mailchimp-for-wp' ), admin_url( 'admin.php?page=mailchimp-for-wp' ) ); ?>
+								printf( __( 'No lists found, <a href="%s">are you connected to Mailchimp</a>?', 'mailchimp-for-wp' ), admin_url( 'admin.php?page=mailchimp-for-wp' ) ); ?>
 							<?php } else { ?>
 
 							<select name="<?php echo $this->name_attr( 'list' ); ?>" class="widefat">
@@ -124,7 +124,7 @@ defined( 'ABSPATH' ) or exit;
 							<?php
 
 							if( ! isset( $selected_list ) ) {
-								echo '<p class="help">' . __( 'Please select a MailChimp list first (and then save your settings).', 'mailchimp-sync' ) . '</p>';
+								echo '<p class="help">' . __( 'Please select a Mailchimp list first (and then save your settings).', 'mailchimp-sync' ) . '</p>';
 							} else {
 
 								foreach( $this->options['field_mappers'] as $index => $rule ) {
@@ -135,8 +135,9 @@ defined( 'ABSPATH' ) or exit;
 									&nbsp; <?php _e( 'to', 'mailchimp-sync' ); ?> &nbsp;
 
 									<select name="<?php echo $this->name_attr( '[field_mappers]['.$index.'][mailchimp_field]' ); ?>" class="mailchimp-field">
-										<option disabled <?php selected( $rule['mailchimp_field'], '' ); ?>><?php esc_html_e( 'MailChimp field', 'mailchimp-sync' ); ?></option>
+										<option disabled <?php selected( $rule['mailchimp_field'], '' ); ?>><?php esc_html_e( 'Mailchimp field', 'mailchimp-sync' ); ?></option>
 										<?php foreach( $available_mailchimp_fields as $field ) { ?>
+                                            <?php if ($field->tag === 'EMAIL') { continue; } ?>
 											<option value="<?php echo esc_attr( $field->tag ); ?>" <?php selected( $field->tag, $rule['mailchimp_field'] ); ?>>
 												<?php echo strip_tags( $field->name ); ?>
 											</option>
@@ -155,7 +156,7 @@ defined( 'ABSPATH' ) or exit;
 								<p><input type="button" class="button add-row" value="&plus; <?php esc_attr_e( 'Add line', 'mailchimp-sync' ); ?>" style="margin-left:0; "/></p>
 
 								<p class="help">
-									<?php printf( __( '<strong>Advanced:</strong> This allows you to <a href="%s">synchronise %s with specific MailChimp fields</a>.', 'mailchimp-sync' ), 'https://mc4wp.com/kb/syncing-custom-user-fields-mailchimp/#utm_source=wp-plugin&utm_medium=mailchimp-sync&utm_campaign=settings-page', '"user meta"' ); ?>
+									<?php printf( __( '<strong>Advanced:</strong> This allows you to <a href="%s">synchronise %s with specific Mailchimp fields</a>.', 'mailchimp-sync' ), 'https://mc4wp.com/kb/syncing-custom-user-fields-mailchimp/#utm_source=wp-plugin&utm_medium=mailchimp-sync&utm_campaign=settings-page', '"user meta"' ); ?>
 								</p>
 
 							<?php } ?>
@@ -234,14 +235,14 @@ defined( 'ABSPATH' ) or exit;
 				<?php 
 				if( $this->options['enabled'] ) { 
 					echo '<h2>' . __( 'Background processing', 'mailchimp-sync' ) . '</h2>';
-					echo '<p>' . __( 'The plugin is currently listening to changes in your users and will automatically keep your userbase synced with the selected MailChimp list.', 'mailchimp-sync' ) . '</p>';
+					echo '<p>' . __( 'The plugin is currently listening to changes in your users and will automatically keep your userbase synced with the selected Mailchimp list.', 'mailchimp-sync' ) . '</p>';
                
                if( $this->queue instanceof \MC4WP_Queue ) {
                	$number_of_pending_jobs = count( $this->queue->all() );
                   echo '<p>' . sprintf( __( 'There are <strong>%d</strong> background jobs waiting to be processed.', 'mailchimp-sync' ), $number_of_pending_jobs ) . '</p>';
                		
                	if( $number_of_pending_jobs > 0 ) {
-               		echo '<p><a class="button" href="' . add_query_arg( array( '_mc4wp_action' => 'process_user_sync_queue' ) ) . '">' . __( 'Process', 'mailchimp-sync' ) . '</a></p>';
+               		echo '<p><a class="button" href="' . add_query_arg( array( '_mc4wp_action' => 'process_user_sync_queue' ) ) . '">' . __( 'Process jobs', 'mailchimp-sync' ) . '</a> &nbsp; '. __( 'or', 'mailchimp-sync') .'&nbsp; <a class="button" href="' . add_query_arg( array( '_mc4wp_action' => 'empty_user_sync_queue' ) ) . '">' . __( 'Empty queue', 'mailchimp-sync' ) . '</a></p>';
                	}
                	
                } 
@@ -265,7 +266,7 @@ defined( 'ABSPATH' ) or exit;
 				<hr style="margin: 50px 0;" />
 
 				<h2><?php _e( 'Webhook', 'mailchimp-sync' ); ?></h2>
-				<p>If you want to synchronize changes in your MailChimp list back to your WordPress database then you will have to <a href="https://mc4wp.com/kb/configure-webhook-for-2-way-synchronizing/">configure a webhook in your MailChimp account</a>.</p>
+				<p>If you want to synchronize changes in your Mailchimp list back to your WordPress database then you will have to <a href="https://mc4wp.com/kb/configure-webhook-for-2-way-synchronizing/">configure a webhook in your Mailchimp account</a>.</p>
 
 				<table class="form-table">
 					<tr valign="top">

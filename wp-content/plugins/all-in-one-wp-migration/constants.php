@@ -35,7 +35,7 @@ define( 'AI1WM_DEBUG', false );
 // ==================
 // = Plugin Version =
 // ==================
-define( 'AI1WM_VERSION', '7.3' );
+define( 'AI1WM_VERSION', '7.8' );
 
 // ===============
 // = Plugin Name =
@@ -172,6 +172,11 @@ define( 'AI1WM_MUPLUGINS_NAME', 'mu-plugins' );
 // =============================
 define( 'AI1WM_LESS_CACHE_NAME', '.less.cache' );
 
+// ============================
+// = Elementor CSS Cache Name =
+// ============================
+define( 'AI1WM_ELEMENTOR_CSS_NAME', 'uploads' . DIRECTORY_SEPARATOR . 'elementor' . DIRECTORY_SEPARATOR . 'css' );
+
 // =============================
 // = Endurance Page Cache Name =
 // =============================
@@ -276,6 +281,11 @@ define( 'AI1WM_ACTIVE_STYLESHEET', 'stylesheet' );
 // = Backups Labels  =
 // ===================
 define( 'AI1WM_BACKUPS_LABELS', 'ai1wm_backups_labels' );
+
+// ===============
+// = Sites Links =
+// ===============
+define( 'AI1WM_SITES_LINKS', 'ai1wm_sites_links' );
 
 // ============
 // = Cron Key =
@@ -539,6 +549,39 @@ if ( ! defined( 'AI1WMIE_PLUGIN_KEY' ) ) {
 // =======================================
 if ( ! defined( 'AI1WMIE_PLUGIN_SHORT' ) ) {
 	define( 'AI1WMIE_PLUGIN_SHORT', 'digitalocean' );
+}
+
+// =============================
+// = Direct Extension Base Dir =
+// =============================
+if ( defined( 'AI1WMXE_PLUGIN_BASENAME' ) ) {
+	define( 'AI1WMXE_PLUGIN_BASEDIR', dirname( AI1WMXE_PLUGIN_BASENAME ) );
+} else {
+	define( 'AI1WMXE_PLUGIN_BASEDIR', 'all-in-one-wp-migration-direct-extension' );
+}
+// ==========================
+// = Direct Extension Title =
+// ==========================
+if ( ! defined( 'AI1WMXE_PLUGIN_TITLE' ) ) {
+	define( 'AI1WMXE_PLUGIN_TITLE', 'Direct Extension' );
+}
+// ==========================
+// = Direct Extension About =
+// ==========================
+if ( ! defined( 'AI1WMXE_PLUGIN_ABOUT' ) ) {
+	define( 'AI1WMXE_PLUGIN_ABOUT', 'https://servmask.com/products/direct-extension/about' );
+}
+// ========================
+// = Direct Extension Key =
+// ========================
+if ( ! defined( 'AI1WMXE_PLUGIN_KEY' ) ) {
+	define( 'AI1WMXE_PLUGIN_KEY', 'ai1wmxe_plugin_key' );
+}
+// ==========================
+// = Direct Extension Short =
+// ==========================
+if ( ! defined( 'AI1WMXE_PLUGIN_SHORT' ) ) {
+	define( 'AI1WMXE_PLUGIN_SHORT', 'direct' );
 }
 
 // ==============================

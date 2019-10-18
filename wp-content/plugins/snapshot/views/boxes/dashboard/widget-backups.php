@@ -30,9 +30,9 @@
 	<div class="wpmud-box-title<?php echo esc_attr( $wpmu_box_title ); ?>">
 
 		<h3
-        <?php 
+        <?php
         if ( $has_backups && $has_snapshot_key ) {
-			echo ' class="has-count"'; } 
+			echo ' class="has-count"'; }
 		?>
 		>
 			<?php esc_html_e('Managed Backups', SNAPSHOT_I18N_DOMAIN); ?>
@@ -44,9 +44,9 @@
 
 		<?php if ( true === $is_client ) { ?>
 
-			<?php 
+			<?php
             if ( true === $has_snapshot_key ) {
-			} 
+			}
 ?>
 
 		<?php } else { ?>
@@ -76,10 +76,10 @@
 
 			<div class="col-xs-12">
 
-				<?php 
+				<?php
                 if ( true === $has_snapshot_key ) :
 
-					if ( true === $has_backups ) : 
+					if ( true === $has_backups ) :
                     ?>
 
 						<p><?php echo wp_kses_post( sprintf( __( 'Backup your entire WordPress installation and store it securely in the <a href="%s">Hub</a> for simple site migration and one-click restoration.', SNAPSHOT_I18N_DOMAIN ), 'https://premium.wpmudev.org/hub/' ) ); ?></p>
@@ -172,9 +172,9 @@
 															__( 'Backups are running %1$s at %2$s', SNAPSHOT_I18N_DOMAIN ),
 															$frequencies[ $model->get_frequency() ],
 															$schedule_times[ $model->get_schedule_time() ]
-														) 
+														)
 													);
-												} 
+												}
                                                 ?>
                                                 </small>
 										</p>

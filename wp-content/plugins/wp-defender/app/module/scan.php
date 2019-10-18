@@ -7,11 +7,13 @@ namespace WP_Defender\Module;
 
 use Hammer\Base\Module;
 use WP_Defender\Module\Scan\Controller\Main;
+use WP_Defender\Module\Scan\Controller\Rest;
 
 class Scan extends Module {
 	public function __construct() {
 		$this->_registerPostTpe();
 		$main = new Main();
+		$rest = new Rest();
 	}
 
 	private function _registerPostTpe() {

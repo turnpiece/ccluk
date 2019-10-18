@@ -40,10 +40,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</tr>
 			</thead>
 			<tbody>
+				<tr class="ai1wm-backups-list-spinner-holder ai1wm-hide">
+					<td colspan="4" class="ai1wm-backups-list-spinner">
+						<span class="spinner"></span>
+						<?php _e( 'Refreshing backup list...', AI1WM_PLUGIN_NAME ); ?>
+					</td>
+				</tr>
+
 				<?php foreach ( $backups as $backup ) : ?>
 				<tr>
 					<td class="ai1wm-column-name">
-						<?php if ( $backup['path'] ) : ?>
+						<?php if ( ! empty( $backup['path'] ) ) : ?>
 							<i class="ai1wm-icon-folder"></i>
 							<?php echo esc_html( $backup['path'] ); ?>
 							<br />
@@ -52,34 +59,37 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<span class="ai1wm-backup-filename">
 							<?php echo esc_html( basename( $backup['filename'] ) ); ?>
 						</span>
-						<?php if ( isset( $backups_labels[ basename( $backup['filename'] ) ] ) ) : ?>
-							<span class="ai1wm-backup-label">
-								<br />
-								<span class="ai1wm-backup-label-colored">
-									<?php echo esc_html( $backups_labels[ basename( $backup['filename'] ) ] ); ?>
-								</span>
-								<i class="ai1wm-icon-edit-pencil"></i>
+						<span class="ai1wm-backup-label-description ai1wm-hide <?php echo empty( $labels[ $backup['filename'] ] ) ? null : 'ai1wm-backup-label-selected'; ?>">
+							<br />
+							<?php _e( 'Click to set a label for this backup', AI1WM_PLUGIN_NAME ); ?>
+							<i class="ai1wm-icon-edit-pencil ai1wm-hide"></i>
+						</span>
+						<span class="ai1wm-backup-label-text <?php echo empty( $labels[ $backup['filename'] ] ) ? 'ai1wm-hide' : null; ?>">
+							<br />
+							<span class="ai1wm-backup-label-colored">
+								<?php if ( ! empty( $labels[ $backup['filename'] ] ) ) : ?>
+									<?php echo esc_html( $labels[ $backup['filename'] ] ); ?>
+								<?php endif; ?>
 							</span>
-						<?php else : ?>
-							<span class="ai1wm-add-description">
-								<br />
-								<?php _e( 'Click to set a label for this backup', AI1WM_PLUGIN_NAME ); ?>
-								<i class="ai1wm-icon-edit-pencil"></i>
-							</span>
-						<?php endif; ?>
+							<i class="ai1wm-icon-edit-pencil ai1wm-hide"></i>
+						</span>
+						<span class="ai1wm-backup-label-holder ai1wm-hide">
+							<br />
+							<input type="text" class="ai1wm-backup-label-field" data-archive="<?php echo esc_attr( $backup['filename'] ); ?>" data-value="<?php echo empty( $labels[ $backup['filename'] ] ) ? null : esc_attr( $labels[ $backup['filename'] ] ); ?>" value="<?php echo empty( $labels[ $backup['filename'] ] ) ? null : esc_attr( $labels[ $backup['filename'] ] ); ?>" />
+						</span>
 					</td>
 					<td class="ai1wm-column-date">
 						<?php echo esc_html( sprintf( __( '%s ago', AI1WM_PLUGIN_NAME ), human_time_diff( $backup['mtime'] ) ) ); ?>
 					</td>
 					<td class="ai1wm-column-size">
-						<?php if ( is_null( $backup['size'] ) ) : ?>
-							<?php _e( '2GB+', AI1WM_PLUGIN_NAME ); ?>
-						<?php else : ?>
+						<?php if ( ! is_null( $backup['size'] ) ) : ?>
 							<?php echo ai1wm_size_format( $backup['size'], 2 ); ?>
+						<?php else : ?>
+							<?php _e( '2GB+', AI1WM_PLUGIN_NAME ); ?>
 						<?php endif; ?>
 					</td>
 					<td class="ai1wm-column-actions ai1wm-backup-actions">
-						<a href="<?php echo ai1wm_backup_url( array( 'archive' => esc_attr( $backup['filename'] ) ) ); ?>" class="ai1wm-button-green ai1wm-backup-download" download="<?php echo esc_attr( $backup['filename'] ); ?>" aria-label="<?php _e( 'Download backup', AI1WM_PLUGIN_NAME ); ?>">
+						<a href="<?php echo esc_url( ai1wm_backup_url( array( 'archive' => $backup['filename'] ) ) ); ?>" class="ai1wm-button-green ai1wm-backup-download" download="<?php echo esc_attr( $backup['filename'] ); ?>" aria-label="<?php _e( 'Download backup', AI1WM_PLUGIN_NAME ); ?>">
 							<i class="ai1wm-icon-arrow-down"></i>
 							<span><?php _e( 'Download', AI1WM_PLUGIN_NAME ); ?></span>
 						</a>

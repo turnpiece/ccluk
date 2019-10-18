@@ -93,10 +93,37 @@ class Model extends Component {
 	}
 
 	/**
+	 * Filter all the string using FILTER_SANITIZE_STRING flag
+	 */
+	public function doFilters() {
+		$keys = array_keys( $this->export() );
+		foreach ( $keys as $attribute ) {
+			if ( $this->hasProperty( $attribute ) ) {
+				$value = $this->$attribute;
+				if ( is_string( $value ) ) {
+					$this->$attribute = sanitize_textarea_field( $this->$attribute );
+				}
+			}
+		}
+//		foreach ( $this->filters() as $attribute ) {
+//			if ( $this->hasProperty( $attribute ) ) {
+//				$this->$attribute = sanitize_textarea_field( $this->$attribute );
+//			}
+//		}
+	}
+
+	/**
 	 *
 	 * @return array
 	 */
 	public function rules() {
+		return array();
+	}
+
+	/**
+	 * @return array
+	 */
+	public function filters() {
 		return array();
 	}
 
@@ -156,13 +183,46 @@ class Model extends Component {
 
 	/**
 	 * Export all public attribute of this model
+	 *
+	 * @param array $excludes
+	 *
 	 * @return array
+	 * @throws \ReflectionException
 	 */
-	public function export() {
+	public function export( $excludes = array() ) {
 		$reflection = new \ReflectionClass( $this );
 		$props      = $reflection->getProperties( \ReflectionProperty::IS_PUBLIC );
 		$values     = array();
 		foreach ( $props as $prop ) {
+			if ( in_array( $prop->getName(), $excludes ) ) {
+				continue;
+			}
+			$value = $prop->getValue( $this );
+			if ( is_null( $value ) ) {
+				$value = '';
+			}
+			$values[ $prop->getName() ] = $value;
+		}
+
+		return $values;
+	}
+
+	/**
+	 * Export the class properties if the key match
+	 *
+	 * @param $keys
+	 *
+	 * @return array
+	 * @throws \ReflectionException
+	 */
+	public function exportByKeys( $keys ) {
+		$reflection = new \ReflectionClass( $this );
+		$props      = $reflection->getProperties( \ReflectionProperty::IS_PUBLIC );
+		$values     = array();
+		foreach ( $props as $prop ) {
+			if ( ! in_array( $prop->getName(), $keys ) ) {
+				continue;
+			}
 			$value = $prop->getValue( $this );
 			if ( is_null( $value ) ) {
 				$value = '';
@@ -181,6 +241,9 @@ class Model extends Component {
 	public function import( $data ) {
 		foreach ( $data as $key => $val ) {
 			if ( $this->hasProperty( $key ) ) {
+				if ( $val === 'true' || $val === 'false' ) {
+					$val = filter_var( $val, FILTER_VALIDATE_BOOLEAN );
+				}
 				$this->$key = $val;
 			}
 		}

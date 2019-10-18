@@ -1,7 +1,9 @@
 <?php
 /**
  * @package The_SEO_Framework\Compat\Theme\Genesis
+ * @subpackage The_SEO_Framework\Compatibility
  */
+
 namespace The_SEO_Framework;
 
 defined( 'THE_SEO_FRAMEWORK_PRESENT' ) and $_this = \the_seo_framework_class() and $this instanceof $_this or die;
@@ -14,9 +16,9 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) and $_this = \the_seo_framework_class() a
  * @since 2.8.0
  * @access private
  *
- * @param array $plugins, overwritten as this filter will fire the
- * detection, regardless of other SEO plugins.
- * @return array Plugins to detect.
+ * @param array $plugins The plugins to detect. Overwritten as this filter will fire the
+ *                       detection, regardless of other SEO plugins.
+ * @return array
  */
 function _disable_genesis_seo( $plugins ) {
 
@@ -42,9 +44,9 @@ function _disable_genesis_seo( $plugins ) {
  * @since 2.8.0
  * @since 3.1.0 Now filters empty fields.
  *
- * @param array $data The current term meta.
- * @param int $term_id The current term ID.
- * @return array The Genesis Term meta.
+ * @param array $data    The current term meta.
+ * @param int   $term_id The current term ID.
+ * @return array The updated term meta.
  */
 function _genesis_get_term_meta( $data = [], $term_id = 0 ) {
 

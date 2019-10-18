@@ -5,7 +5,7 @@ Tags: pages, admin, nested, tree view, page tree, sort, quick edit, structure
 Requires at least: 3.8
 Tested up to: 5.2
 Requires PHP: 5.4
-Stable tag: 3.1.0
+Stable tag: 3.1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -104,6 +104,34 @@ No. The menu synchronization currently only works within the pages post type.
 9. The Nested Pages interface can be enabled on a per-post-type basis, with customizable options for each type.
 
 == Changelog ==
+
+= 3.1.7 =
+* Updates quick edit interface.
+* Adds filters for "Sticky" text indicator in post rows. 
+
+= 3.1.6 =
+* Adds filters for making "Make Sticky" quick edit form field available for any post type. 
+* Adds filter for customizing the "Make Sticky" label text.
+* Bug fixes in submenu display when using the admin customization feature.
+* Adds new feature to hierarchical post types that allow trashing of pages and all children.
+* Fixes bug where adding/appending a child post/page was not saving the correct menu order
+
+= 3.1.5 =
+* Removes link item in dropdown from non-page hierarchical post types, replaces with filterable boolean
+* Enhances modal UI when deleting an item
+
+= 3.1.4 =
+* Adds support for custom statuses, configurable by post type. To enable statuses for a specific post type, visit the plugin settings: Settings > Nested Pages > Post Types. Toggle the post type. If there are custom statuses available, a field titled "Enable Custom Statuses" will be available to select statuses.
+* Updates edit target for "link" row items to link to edit post screen where applicable.
+* Updates modal UI for adding multiple pages and adding links
+
+= 3.1.3 =
+* Updates nesting interface to use an indented style. To revert to the previous format, visit Settings > Nested Pages and select the checkbox titled "Use the classic (non-indented) hierarchy display."
+* Fixes bug where submenus were being removed after saving a new admin menu customization and reordering the item.
+* Enhances translation capabilities by replacing hardcoded strings with proper I18n functions.
+
+= 3.1.2 =
+* Adds filter to role capabilities (for adding items to customized admin menus with custom capabilities).
 
 = 3.1.1 =
 * Removes ability to hide Settings and Nested Pages menus from administrators within the admin customization interface (removing items hides links to necessary admin sections).

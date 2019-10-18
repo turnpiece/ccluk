@@ -1,7 +1,9 @@
 <?php
 /**
- * @package The_SEO_Framework\Classes
+ * @package The_SEO_Framework\Classes\Facade\Feed
+ * @subpackage The_SEO_Framework\Feed
  */
+
 namespace The_SEO_Framework;
 
 defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
@@ -34,27 +36,6 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
 class Feed extends Cache {
 
 	/**
-	 * Initializes feed actions and hooks.
-	 *
-	 * @since 2.9.0
-	 * @access private
-	 *
-	 * @return void Early if this request isn't for a feed.
-	 */
-	public function _init_feed_output() {
-
-		if ( ! $this->is_feed() )
-			return;
-
-		\add_filter( 'the_content_feed', [ $this, 'the_content_feed' ], 10, 2 );
-
-		//* Only add the feed link to the excerpt if we're only building excerpts.
-		if ( $this->rss_uses_excerpt() )
-			\add_filter( 'the_excerpt_rss', [ $this, 'the_content_feed' ], 10, 1 );
-
-	}
-
-	/**
 	 * Determines whether the WordPress excerpt RSS feed option is used.
 	 *
 	 * @since 2.6.0
@@ -73,14 +54,13 @@ class Feed extends Cache {
 	 *
 	 * @since 2.5.2
 	 *
-	 * @param $content The feed's content.
-	 * @param $feed_type The feed type (not used in excerpted content)
+	 * @param string      $content   The feed's content.
+	 * @param null|string $feed_type The feed type (not used in excerpted content)
 	 * @return string The modified feed entry.
 	 */
 	public function the_content_feed( $content = '', $feed_type = null ) {
 
-		if ( ! $content )
-			return '';
+		if ( ! $content ) return '';
 
 		/**
 		 * Don't alter already-excerpts or descriptions.
@@ -101,14 +81,14 @@ class Feed extends Cache {
 	 * Converts feed content to excerpt.
 	 *
 	 * @since 2.9.0
+	 * @since 4.0.0 No longer uses mbstring for html tagging, it was redundant as we were looking for ASCII characters.
 	 *
 	 * @param string $content The full feed entry content.
 	 * @return string The excerpted feed.
 	 */
 	protected function convert_feed_entry_to_excerpt( $content = '' ) {
 
-		if ( ! $content )
-			return '';
+		if ( ! $content ) return '';
 
 		//* Strip all code and lines.
 		$excerpt = $this->s_excerpt_raw( $content, false );
@@ -126,20 +106,19 @@ class Feed extends Cache {
 
 		if ( 0 === strpos( $content, '<h2>' ) ) {
 			//* Add the h2 title back
-			$h2_end = mb_strpos( $content, '</h2>' );
+			$h2_end = strpos( $content, '</h2>' );
 
 			if ( false !== $h2_end ) {
-				//* Start of content, plus <h2>
-				$h2_start = 4;
+				//* Start of content, plus strlen( '<h2>' )
+				$h2_start = strlen( '<h2>' );
 				//* Remove the length of <h2>, again.
 				$h2_end = $h2_end - $h2_start;
 
 				//* Fetch h2 content.
-				$h2_content = mb_substr( $content, $h2_start, $h2_end );
+				$h2_content = substr( $content, $h2_start, $h2_end );
 
 				//* Remove the H2 content from the excerpt.
-				$count = 1;
-				$excerpt = str_replace( $h2_content, '', $excerpt, $count );
+				$excerpt = str_replace( $h2_content, '', $excerpt );
 
 				//* Wrap h2 content in h2 tags.
 				$h2_output = '<h2>' . $h2_content . '</h2>' . PHP_EOL;
@@ -169,8 +148,11 @@ class Feed extends Cache {
 			'the_seo_framework_feed_source_link_text',
 			\_x( 'Source', 'The content source', 'autodescription' )
 		);
-		$content = '<p><a href="' . \esc_url( \get_permalink() ) . '" rel="nofollow">' . \esc_html( $source_i18n ) . '</a></p>';
 
-		return $content;
+		return sprintf(
+			'<p><a href="%s" rel="nofollow">%s</a></p>',
+			\esc_url( \get_permalink() ),
+			\esc_html( $source_i18n )
+		);
 	}
 }

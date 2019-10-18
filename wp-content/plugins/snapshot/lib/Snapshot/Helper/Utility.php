@@ -998,7 +998,7 @@ if ( ! class_exists( 'Snapshot_Helper_Utility' ) ) {
 
 			if ( ! file_exists( trailingslashit( $folder ) . "CACHEDIR.TAG" ) ) {
 				global $wp_filesystem;
-				
+
 				if( self::connect_fs() ) {
 					$wp_filesystem->put_contents( trailingslashit( $folder ) . "CACHEDIR.TAG", "", FS_CHMOD_FILE );
 				} else {
@@ -2080,7 +2080,7 @@ if ( ! class_exists( 'Snapshot_Helper_Utility' ) ) {
 
 		/**
 		 * Connect to the filesystem
-		 * 
+		 *
 		 * @param $url
 		 * @param $method
 		 * @param $context
@@ -2096,7 +2096,7 @@ if ( ! class_exists( 'Snapshot_Helper_Utility' ) ) {
 			}
 
 			//check if credentials are correct or not.
-			if( ! WP_Filesystem( $credentials ) ) 
+			if( ! WP_Filesystem( $credentials ) )
 			{
 				request_filesystem_credentials( $url, $method, true, $context );
 				return false;
@@ -2107,7 +2107,7 @@ if ( ! class_exists( 'Snapshot_Helper_Utility' ) ) {
 
 		/**
 		 * Checks whether we're on WPMU DEV Hosting
-		 * 
+		 *
 		 * @return bool
 		 */
 		public static function is_wpmu_hosting() {
@@ -2116,7 +2116,7 @@ if ( ! class_exists( 'Snapshot_Helper_Utility' ) ) {
 
 		/**
 		 * Checks whether we're on WPEngine
-		 * 
+		 *
 		 * @return bool
 		 */
 		public static function is_wpengine_hosting() {
@@ -2140,9 +2140,9 @@ if ( ! class_exists( 'Snapshot_Helper_Utility' ) ) {
 
 		/**
 		 * Checks whether the S3 request handler is properly spawned.
-		 * 
+		 *
 		 * @param $s3
-		 * 
+		 *
 		 * @return bool
 		 */
 		public static function spawned_S3_handler( $s3 ) {

@@ -25,25 +25,12 @@ class File_Inclusion_Detector extends Detector_Abstract {
 					//it include from a global variable, catch
 					return array(
 						'type'   => 'rfi',
-						'text'   => 'The function ' . $this->token['content'] . ' line ' . $this->token['line'] . ' include an unsanitize user input ' . $curr['content'],
+						'text'   => sprintf( __( 'The function %s line %d include an unsanitize user input %s', wp_defender()->domain ), $this->token['content'], $this->token['line'], $curr['content'] ),
 						'offset' => $this->getCodeOffset(),
 						'length' => strlen( $this->getCode() ),
 						'line'   => $this->token['line'],
 						'column' => $this->token['column']
 					);
-				} elseif ( $curr['code'] == T_CONSTANT_ENCAPSED_STRING ) {
-					//some case, this can be hex/oct encode, need to check first
-					$pattern = '\\\([0-9\/]{3})((?s).)?';
-					if ( preg_match_all( '/' . $pattern . '/i', $curr['content'], $matches ) ) {
-						return array(
-							'type'   => 'rfi',
-							'text'   => 'The function ' . $this->token['content'] . ' line ' . $this->token['line'] . ' include an obfuscated path',
-							'offset' => $this->getCodeOffset(),
-							'length' => strlen( $this->getCode() ),
-							'line'   => $this->token['line'],
-							'column' => $this->token['column']
-						);
-					}
 				}
 			}
 		}

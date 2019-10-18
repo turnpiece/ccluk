@@ -17,14 +17,17 @@ class Activator_Free extends Behavior {
 			return;
 		}
 
-		if ( ! wp_verify_nonce( HTTP_Helper::retrieve_post( '_wpnonce' ), 'activateModule' ) ) {
+		if ( ! wp_verify_nonce( HTTP_Helper::retrieveGet( '_wpnonce' ), 'activateModule' ) ) {
 			return;
 		}
 
-		$activator = HTTP_Helper::retrieve_post( 'activator' );
+		$activator = $_POST;
 		$activated = array();
 		if ( count( $activator ) ) {
-			foreach ( $activator as $item ) {
+			foreach ( $activator as $item => $status ) {
+				if ( $status != true ) {
+					continue;
+				}
 				switch ( $item ) {
 					case 'activate_scan':
 						//start a new scan
@@ -33,8 +36,8 @@ class Activator_Free extends Behavior {
 						break;
 					case 'activate_lockout':
 						$settings                   = \WP_Defender\Module\IP_Lockout\Model\Settings::instance();
-						$settings->detect_404       = 1;
-						$settings->login_protection = 1;
+						$settings->detect_404       = true;
+						$settings->login_protection = true;
 						$activated[]                = $item;
 						$settings->save();
 						break;
@@ -46,11 +49,11 @@ class Activator_Free extends Behavior {
 			}
 		}
 
-		$cache = WP_Helper::getCache();
-		$cache->set( 'wdf_isActivated', 1, 0 );
+		set_site_transient( 'wp_defender_free_is_activated', 1 );
 
 		wp_send_json_success( array(
-			'activated' => $activated
+			'activated' => $activated,
+			//'message'   => __( "" )
 		) );
 	}
 
@@ -61,13 +64,26 @@ class Activator_Free extends Behavior {
 	public function isShowActivator() {
 		$cache = WP_Helper::getCache();
 		if ( $cache->get( 'wdf_isActivated', false ) == 1 ) {
-			return false;
+			return 0;
 		}
-		//alread has data, just return
-		if ( get_site_option( 'wp_defender' ) != false ) {
-			return false;
+		if ( get_site_transient( 'wp_defender_free_is_activated' ) == 1 ) {
+			return 0;
+		}
+		$keys = [
+			'wp_defender',
+			'wd_scan_settings',
+			'wd_hardener_settings',
+			'wd_audit_settings',
+			'wd_2auth_settings',
+			'wd_masking_login_settings'
+		];
+		foreach ( $keys as $key ) {
+			$option = get_site_option( $key );
+			if ( is_array( $option ) ) {
+				return 0;
+			}
 		}
 
-		return true;
+		return 1;
 	}
 }

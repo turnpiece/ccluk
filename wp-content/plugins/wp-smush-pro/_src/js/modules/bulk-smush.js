@@ -29,6 +29,9 @@ import Smush from '../smush/smush';
 				progress.removeClass( 'wp-smush-exceed-limit' );
 				progress.find( '.sui-progress-block .wp-smush-all' ).addClass('sui-hidden');
 				progress.find( '.sui-progress-block .wp-smush-cancel-bulk' ).removeClass('sui-hidden');
+				if ( bulkWarning ) {
+					document.getElementById( 'bulk-smush-resume-button' ).classList.add( 'sui-hidden' );
+				}
 
 				// Disable re-Smush and scan button.
 				// TODO: refine what is disabled.

@@ -19,11 +19,16 @@ class Security_Key_Service extends Rule_Service implements IRule_Service {
 	 * @return bool
 	 */
 	public function check() {
-		$last = Settings::instance()->getDValues( self::CACHE_KEY );
+		$last     = Settings::instance()->getDValues( self::CACHE_KEY );
 		$reminder = Settings::instance()->getDValues( 'securityReminderDate' );
+		$interval = Settings::instance()->getDValues( 'securityReminderDuration' );
+		if ( $interval == null ) {
+			$interval = self::DEFAULT_DAYS;
+		}
+
 		if ( $last ) {
 			if ( $reminder == null ) {
-				$reminder = strtotime( '+' . self::DEFAULT_DAYS, $last );
+				$reminder = strtotime( '+' . $interval, $last );
 			}
 			if ( $reminder < time() ) {
 				return false;
@@ -32,6 +37,12 @@ class Security_Key_Service extends Rule_Service implements IRule_Service {
 			return true;
 		} elseif ( $reminder != null && $reminder < time() ) {
 			return true;
+		} else {
+			//no data, we have to guess the date wp install
+			$timestamp = filemtime( ABSPATH . '/' . WPINC . '/general-template.php' );
+			if ( $timestamp !== false && strtotime( '+' . $interval, $timestamp ) > time() ) {
+				return true;
+			}
 		}
 
 		return false;

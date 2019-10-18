@@ -16,6 +16,8 @@ class Login_Protection_Api extends Component {
 	const COUNT_TOTAL = 'wdCountTotals';
 
 	/**
+	 * This function will be called when
+	 *
 	 * @param Log_Model $log
 	 * @param bool $force
 	 */
@@ -308,7 +310,6 @@ class Login_Protection_Api extends Component {
 		$fp   = fopen( $file, 'r' );
 		$data = array();
 		while ( ( $line = fgetcsv( $fp ) ) !== false ) {
-
 			if ( count( $line ) != 2 ) {
 				return false;
 			}
@@ -318,7 +319,7 @@ class Login_Protection_Api extends Component {
 			}
 
 			if ( Settings::instance()->validateIp( $line[0] ) == false ) {
-				return false;
+				continue;
 			}
 
 			$data[] = $line;
@@ -563,6 +564,15 @@ CREATE TABLE `{$tableName2}` (
 	}
 
 	/**
+	 * @return array
+	 */
+	public static function getIpsLocked() {
+		return IP_Model::findAll( array(
+			'status' => IP_Model::STATUS_BLOCKED
+		) );
+	}
+
+	/**
 	 * @param $ip
 	 *
 	 * @return string|void
@@ -602,5 +612,32 @@ CREATE TABLE `{$tableName2}` (
 		}
 
 		return true;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public static function downloadGeoIP() {
+		$url = "http://geolite.maxmind.com/download/geoip/database/GeoLite2-Country.tar.gz";
+		if ( ! function_exists( 'download_url' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/file.php';
+		}
+		$tmp = download_url( $url );
+		if ( ! is_wp_error( $tmp ) ) {
+			$phar    = new \PharData( $tmp );
+			$defPath = Utils::instance()->getDefUploadDir();
+			$path    = $defPath . DIRECTORY_SEPARATOR . 'maxmind';
+			if ( ! is_dir( $path ) ) {
+				mkdir( $path );
+			}
+			$phar->extractTo( $path, null, true );
+			$settings           = Settings::instance();
+			$settings->geoIP_db = $path . DIRECTORY_SEPARATOR . $phar->current()->getFileName() . DIRECTORY_SEPARATOR . 'GeoLite2-Country.mmdb';
+			$settings->save();
+
+			return true;
+		}
+
+		return false;
 	}
 }

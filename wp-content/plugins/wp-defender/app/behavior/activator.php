@@ -17,19 +17,22 @@ class Activator extends Behavior {
 			return;
 		}
 
-		if ( ! wp_verify_nonce( HTTP_Helper::retrieve_post( '_wpnonce' ), 'activateModule' ) ) {
+		if ( ! wp_verify_nonce( HTTP_Helper::retrieveGet( '_wpnonce' ), 'activateModule' ) ) {
 			return;
 		}
 
-		$activator = HTTP_Helper::retrieve_post( 'activator' );
+		$activator = $_POST;
 		$activated = array();
 		if ( count( $activator ) ) {
-			foreach ( $activator as $item ) {
+			foreach ( $activator as $item => $status ) {
+				if ( $status != true ) {
+					continue;
+				}
 				switch ( $item ) {
 					case 'activate_scan':
 						$settings               = Settings::instance();
-						$settings->notification = 1;
-						$settings->time         = '4:0';
+						$settings->notification = true;
+						$settings->time         = '4:00';
 						$settings->day          = 'monday';
 						$settings->frequency    = 7;
 						$cronTime               = Utils::instance()->reportCronTimestamp( $settings->time, 'scanReportCron' );
@@ -41,9 +44,9 @@ class Activator extends Behavior {
 						break;
 					case 'activate_audit':
 						$settings               = \WP_Defender\Module\Audit\Model\Settings::instance();
-						$settings->enabled      = 1;
-						$settings->notification = 1;
-						$settings->time         = '4:0';
+						$settings->enabled      = true;
+						$settings->notification = true;
+						$settings->time         = '4:00';
 						$settings->day          = 'monday';
 						$settings->frequency    = 7;
 						$cronTime               = Utils::instance()->reportCronTimestamp( $settings->time, 'auditReportCron' );
@@ -57,12 +60,12 @@ class Activator extends Behavior {
 						break;
 					case 'activate_lockout':
 						$settings                   = \WP_Defender\Module\IP_Lockout\Model\Settings::instance();
-						$settings->detect_404       = 1;
-						$settings->login_protection = 1;
-						$settings->report           = 1;
+						$settings->detect_404       = true;
+						$settings->login_protection = true;
+						$settings->report           = true;
 						$settings->report_frequency = 7;
 						$settings->report_day       = 'monday';
-						$settings->report_time      = '4:0';
+						$settings->report_time      = '4:00';
 						$cronTime                   = Utils::instance()->reportCronTimestamp( $settings->report_time, 'lockoutReportCron' );
 						wp_schedule_event( $cronTime, 'daily', 'lockoutReportCron' );
 						$activated[] = $item;
@@ -76,11 +79,10 @@ class Activator extends Behavior {
 			}
 		}
 
-		$cache = WP_Helper::getCache();
-		$cache->set( 'isActivated', 1, 0 );
-
+		set_site_transient( 'wp_defender_is_activated', 1 );
 		wp_send_json_success( array(
-			'activated' => $activated
+			'activated' => $activated,
+			//'message'   => __( "" )
 		) );
 	}
 
@@ -90,20 +92,38 @@ class Activator extends Behavior {
 	 */
 	public function isShowActivator() {
 		$cache = WP_Helper::getCache();
+
 		if ( $cache->get( 'isActivated', false ) == 1 ) {
-			return false;
+			return 0;
+		}
+
+		if ( get_site_transient( 'wp_defender_is_activated' ) == 1 ) {
+			return 0;
 		}
 
 		if ( $cache->get( 'wdf_isActivated', false ) == 1 ) {
 			//this mean user just upgraded from the free
-			return true;
+			return 1;
 		}
 
-		//alread has data, just return
-		if ( get_site_option( 'wp_defender' ) != false ) {
-			return false;
+		if ( get_site_transient( 'wp_defender_is_free_activated' ) == 1 ) {
+			return 1;
+		}
+		$keys = [
+			'wp_defender',
+			'wd_scan_settings',
+			'wd_hardener_settings',
+			'wd_audit_settings',
+			'wd_2auth_settings',
+			'wd_masking_login_settings'
+		];
+		foreach ( $keys as $key ) {
+			$option = get_site_option( $key );
+			if ( is_array( $option ) ) {
+				return 0;
+			}
 		}
 
-		return true;
+		return 1;
 	}
 }

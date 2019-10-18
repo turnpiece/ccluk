@@ -784,7 +784,7 @@ $time_format = get_option( 'time_format' );
 
 			<div class="sui-box-body">
 
-				<p id="dialogDescription"><?php esc_html_e( 'When you click the "Grant Access" button a random 64 character access token is generated that is only good for 96 hours (5 days) and saved in your Database. This token is sent to the WPMU DEV API over an SSL encrypted connection to prevent eavesdropping, and stored on our secure servers. This access token is in no way related to your password, and can only be used from our closed WPMU DEV API system for temporary access to this site.', 'wpmudev' ); ?></p>
+				<p id="dialogDescription"><?php esc_html_e( 'When you click the "Grant Access" button a random 64 character access token is generated that is only good for 120 hours (5 days) and saved in your Database. This token is sent to the WPMU DEV API over an SSL encrypted connection to prevent eavesdropping, and stored on our secure servers. This access token is in no way related to your password, and can only be used from our closed WPMU DEV API system for temporary access to this site.', 'wpmudev' ); ?></p>
 
 				<p><?php echo wp_kses_post( __( '<b>Only current WPMU DEV support staff can use this token</b> to login as your user account by submitting a special form that only they have access to. This will give them 1 hour of admin access to this site before their login cookie expires. Every support staff login during the 5 day period is logged locally and you can view the details on this page.', 'wpmudev' ) ); ?></p>
 

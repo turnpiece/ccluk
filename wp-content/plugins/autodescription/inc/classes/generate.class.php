@@ -1,7 +1,9 @@
 <?php
 /**
- * @package The_SEO_Framework\Classes
+ * @package The_SEO_Framework\Classes\Facade\Generate
+ * @subpackage The_SEO_Framework\Getters
  */
+
 namespace The_SEO_Framework;
 
 defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
@@ -42,10 +44,13 @@ class Generate extends User_Data {
 	 */
 	protected function fix_generation_args( &$args ) {
 		if ( is_array( $args ) ) {
-			$args = array_merge( [
-				'id'       => 0,
-				'taxonomy' => '',
-			], $args );
+			$args = array_merge(
+				[
+					'id'       => 0,
+					'taxonomy' => '',
+				],
+				$args
+			);
 		} elseif ( is_numeric( $args ) ) {
 			$args = [
 				'id'       => (int) $args,
@@ -68,110 +73,443 @@ class Generate extends User_Data {
 	 * @since 3.1.0 1. Simplified statements, often (not always) speeding things up.
 	 *              2. Now checks for wc_shop and blog types for pagination.
 	 *              3. Removed noydir.
+	 * @since 4.0.0 1. Now tests for qubit metadata.
+	 *              2. Added custom query support.
+	 *              3. Added two parameters.
+	 * @since 4.0.2 1. Added new copyright directive tags.
+	 *              2. Now strictly parses the validity of robots directives via a boolean check.
 	 * @global \WP_Query $wp_query
 	 *
-	 * @return array|null robots
+	 * @param array|null $args   The query arguments. Accepts 'id' and 'taxonomy'.
+	 * @param int <bit>  $ignore The ignore level. {
+	 *    0 = 0b00: Ignore nothing.
+	 *    1 = 0b01: Ignore protection. (\The_SEO_Framework\ROBOTS_IGNORE_PROTECTION)
+	 *    2 = 0b10: Ignore post/term setting. (\The_SEO_Framework\ROBOTS_IGNORE_SETTINGS)
+	 *    3 = 0b11: Ignore protection and post/term setting.
+	 * }
+	 * @return array {
+	 *    string index : string value
+	 * }
 	 */
-	public function robots_meta() {
+	public function robots_meta( $args = null, $ignore = 0b00 ) {
 
-		//* Defaults
+		if ( null === $args ) {
+			$_meta = $this->get_robots_meta_by_query( $ignore );
+		} else {
+			$this->fix_generation_args( $args );
+			$_meta = $this->get_robots_meta_by_args( $args, $ignore );
+		}
+
 		$meta = [
-			'noindex'   => $this->get_option( 'site_noindex' ) ? 'noindex' : '',
-			'nofollow'  => $this->get_option( 'site_nofollow' ) ? 'nofollow' : '',
-			'noarchive' => $this->get_option( 'site_noarchive' ) ? 'noarchive' : '',
+			'noindex'            => '',
+			'nofollow'           => '',
+			'noarchive'          => '',
+			'max_snippet_length' => '',
+			'max_image_preview'  => '',
+			'max_video_preview'  => '',
 		];
+
+		foreach (
+			array_intersect_key( $_meta, array_flip( [ 'noindex', 'nofollow', 'noarchive' ] ) )
+			as $k => $v
+		) $v and $meta[ $k ] = $k;
+
+		foreach (
+			array_intersect_key( $_meta, array_flip( [ 'max_snippet_length', 'max_image_preview', 'max_video_preview' ] ) )
+			as $k => $v
+		) false !== $v and $meta[ $k ] = str_replace( '_', '-', $k ) . "=$v";
+
+		/**
+		 * Filters the front-end robots array, and strips empty indexes thereafter.
+		 *
+		 * @since 2.6.0
+		 * @since 4.0.0 Added two parameters ($args and $ignore).
+		 *
+		 * @param array      $meta The current robots meta.
+		 * @param array|null $args The query arguments. Contains 'id' and 'taxonomy'.
+		 *                         Is null when query is autodetermined.
+		 * @param int <bit>  $ignore The ignore level. {
+		 *    0 = 0b00: Ignore nothing.
+		 *    1 = 0b01: Ignore protection. (\The_SEO_Framework\ROBOTS_IGNORE_PROTECTION)
+		 *    2 = 0b10: Ignore post/term setting. (\The_SEO_Framework\ROBOTS_IGNORE_SETTINGS)
+		 *    3 = 0b11: Ignore protection and post/term setting.
+		 * }
+		 */
+		return array_filter(
+			(array) \apply_filters_ref_array(
+				'the_seo_framework_robots_meta_array',
+				[
+					$meta,
+					$args,
+					$ignore,
+				]
+			)
+		);
+	}
+
+	/**
+	 * Generates the `noindex`, `nofollow`, `noarchive` robots meta code array from query.
+	 *
+	 * @since 4.0.0
+	 * @since 4.0.2 Added new copyright directive tags.
+	 * @global \WP_Query $wp_query
+	 *
+	 * @param int <bit> $ignore The ignore level. {
+	 *    0 = 0b00: Ignore nothing.
+	 *    1 = 0b01: Ignore protection. (\The_SEO_Framework\ROBOTS_IGNORE_PROTECTION)
+	 *    2 = 0b10: Ignore post/term setting. (\The_SEO_Framework\ROBOTS_IGNORE_SETTINGS)
+	 *    3 = 0b11: Ignore protection and post/term setting.
+	 * }
+	 * @return array|null robots : {
+	 *    bool              'noindex'
+	 *    bool              'nofollow'
+	 *    bool              'noarchive'
+	 *    false|int <R>=-1> 'max_snippet_length'
+	 *    false|string      'max_image_preview'
+	 *    fasle|int <R>=-1> 'max_video_preview'
+	 * }
+	 */
+	protected function get_robots_meta_by_query( $ignore = 0b00 ) {
+
+		$noindex   = (bool) $this->get_option( 'site_noindex' );
+		$nofollow  = (bool) $this->get_option( 'site_nofollow' );
+		$noarchive = (bool) $this->get_option( 'site_noarchive' );
+
+		$max_snippet_length = $max_image_preview = $max_video_preview = false;
+
+		if ( $this->get_option( 'set_copyright_directives' ) ) {
+			$max_snippet_length = $this->get_option( 'max_snippet_length' );
+			$max_image_preview  = $this->get_option( 'max_image_preview' );
+			$max_video_preview  = $this->get_option( 'max_video_preview' );
+		}
 
 		//* Check homepage SEO settings, set noindex, nofollow and noarchive
 		if ( $this->is_real_front_page() ) {
-			$meta['noindex']   = $this->get_option( 'homepage_noindex' ) ? 'noindex' : $meta['noindex'];
-			$meta['nofollow']  = $this->get_option( 'homepage_nofollow' ) ? 'nofollow' : $meta['nofollow'];
-			$meta['noarchive'] = $this->get_option( 'homepage_noarchive' ) ? 'noarchive' : $meta['noarchive'];
+			$noindex   = $noindex || $this->get_option( 'homepage_noindex' );
+			$nofollow  = $nofollow || $this->get_option( 'homepage_nofollow' );
+			$noarchive = $noarchive || $this->get_option( 'homepage_noarchive' );
 
-			if ( $this->get_option( 'home_paged_noindex' ) && ( $this->page() > 1 || $this->paged() > 1 ) ) {
-				$meta['noindex'] = 'noindex';
-			}
+			if ( ! ( $ignore & ROBOTS_IGNORE_PROTECTION ) ) :
+				$noindex = $noindex
+						|| ( $this->get_option( 'home_paged_noindex' ) && ( $this->page() > 1 || $this->paged() > 1 ) );
+			endif;
 		} else {
 			global $wp_query;
 
 			/**
 			 * Check for 404, or if archive is empty: set noindex for those.
 			 * Don't check this on the homepage. The homepage is sacred in this regard,
-			 * because page builders and templates likely take over.
-			 * @since 2.2.8
+			 * because page builders and templates can and will take over.
 			 *
-			 * @todo maybe create option
-			 * @priority so low... 3.0.0+
+			 * Don't use empty(), null is regarded as indexable.
 			 */
-			if ( isset( $wp_query->post_count ) && 0 === $wp_query->post_count )
-				$meta['noindex'] = 'noindex';
+			if ( isset( $wp_query->post_count ) && ! $wp_query->post_count )
+				$noindex = true;
 
-			$is_archive = $this->is_archive();
-
-			if ( $this->get_option( 'paged_noindex' ) && $this->paged() > 1 ) {
-				if ( $is_archive || $this->is_singular_archive() )
-					$meta['noindex'] = $this->get_option( 'paged_noindex' ) ? 'noindex' : $meta['noindex'];
+			if (
+				! $noindex
+				&& $this->get_option( 'paged_noindex' )
+				&& ( $this->is_archive() || $this->is_singular_archive() )
+				&& $this->paged() > 1
+			) {
+				$noindex = true;
 			}
 
-			if ( $is_archive ) {
-				$term_data = $this->get_current_term_meta();
-
-				if ( $term_data ) {
-					$meta['noindex']   = ! empty( $term_data['noindex'] ) ? 'noindex' : $meta['noindex'];
-					$meta['nofollow']  = ! empty( $term_data['nofollow'] ) ? 'nofollow' : $meta['nofollow'];
-					$meta['noarchive'] = ! empty( $term_data['noarchive'] ) ? 'noarchive' : $meta['noarchive'];
-				}
-
+			if ( $this->is_archive() ) {
 				//* If on custom Taxonomy page, but not a category or tag, then should've received specific term SEO settings.
 				if ( $this->is_category() ) {
-					$meta['noindex']   = $this->get_option( 'category_noindex' ) ? 'noindex' : $meta['noindex'];
-					$meta['nofollow']  = $this->get_option( 'category_nofollow' ) ? 'nofollow' : $meta['nofollow'];
-					$meta['noarchive'] = $this->get_option( 'category_noindex' ) ? 'noarchive' : $meta['noarchive'];
+					$noindex   = $noindex || $this->get_option( 'category_noindex' );
+					$nofollow  = $nofollow || $this->get_option( 'category_nofollow' );
+					$noarchive = $noarchive || $this->get_option( 'category_noarchive' );
 				} elseif ( $this->is_tag() ) {
-					$meta['noindex']   = $this->get_option( 'tag_noindex' ) ? 'noindex' : $meta['noindex'];
-					$meta['nofollow']  = $this->get_option( 'tag_nofollow' ) ? 'nofollow' : $meta['nofollow'];
-					$meta['noarchive'] = $this->get_option( 'tag_noindex' ) ? 'noarchive' : $meta['noarchive'];
+					$noindex   = $noindex || $this->get_option( 'tag_noindex' );
+					$nofollow  = $nofollow || $this->get_option( 'tag_nofollow' );
+					$noarchive = $noarchive || $this->get_option( 'tag_noarchive' );
 				} elseif ( $this->is_author() ) {
-					$meta['noindex']   = $this->get_option( 'author_noindex' ) ? 'noindex' : $meta['noindex'];
-					$meta['nofollow']  = $this->get_option( 'author_nofollow' ) ? 'nofollow' : $meta['nofollow'];
-					$meta['noarchive'] = $this->get_option( 'author_noarchive' ) ? 'noarchive' : $meta['noarchive'];
+					$noindex   = $noindex || $this->get_option( 'author_noindex' );
+					$nofollow  = $nofollow || $this->get_option( 'author_nofollow' );
+					$noarchive = $noarchive || $this->get_option( 'author_noarchive' );
 				} elseif ( $this->is_date() ) {
-					$meta['noindex']   = $this->get_option( 'date_noindex' ) ? 'noindex' : $meta['noindex'];
-					$meta['nofollow']  = $this->get_option( 'date_nofollow' ) ? 'nofollow' : $meta['nofollow'];
-					$meta['noarchive'] = $this->get_option( 'date_noarchive' ) ? 'noarchive' : $meta['noarchive'];
+					$noindex   = $noindex || $this->get_option( 'date_noindex' );
+					$nofollow  = $nofollow || $this->get_option( 'date_nofollow' );
+					$noarchive = $noarchive || $this->get_option( 'date_noarchive' );
 				}
 			} elseif ( $this->is_search() ) {
-				$meta['noindex']   = $this->get_option( 'search_noindex' ) ? 'noindex' : $meta['noindex'];
-				$meta['nofollow']  = $this->get_option( 'search_nofollow' ) ? 'nofollow' : $meta['nofollow'];
-				$meta['noarchive'] = $this->get_option( 'search_noarchive' ) ? 'noarchive' : $meta['noarchive'];
+				$noindex   = $noindex || $this->get_option( 'search_noindex' );
+				$nofollow  = $nofollow || $this->get_option( 'search_nofollow' );
+				$noarchive = $noarchive || $this->get_option( 'search_noarchive' );
 			}
 		}
 
-		if ( $this->is_singular() ) {
-			$meta['noindex']   = $this->get_custom_field( '_genesis_noindex' ) ? 'noindex' : $meta['noindex'];
-			$meta['nofollow']  = $this->get_custom_field( '_genesis_nofollow' ) ? 'nofollow' : $meta['nofollow'];
-			$meta['noarchive'] = $this->get_custom_field( '_genesis_noarchive' ) ? 'noarchive' : $meta['noarchive'];
+		if ( $this->is_archive() ) {
+			$_post_type_meta = [];
+			// Store values from each post type bound to the taxonomy.
+			foreach ( $this->get_post_types_from_taxonomy() as $post_type ) {
+				foreach ( [ 'noindex', 'nofollow', 'noarchive' ] as $r ) {
+					// SECURITY: Put in array to circumvent GLOBALS injection.
+					$_post_type_meta[ $r ][] = $this->is_post_type_robots_set( $r, $post_type );
+				}
+			}
+			// Only enable if all post types have the value ticked.
+			foreach ( $_post_type_meta as $_type => $_values ) {
+				$$_type = $$_type || ! in_array( false, $_values, true );
+			}
 
-			if ( $this->is_protected( $this->get_the_real_ID() ) ) {
-				$meta['noindex'] = 'noindex';
+			if ( ! ( $ignore & ROBOTS_IGNORE_SETTINGS ) ) :
+				$term_meta = $this->get_current_term_meta();
+
+				foreach ( [ 'noindex', 'nofollow', 'noarchive' ] as $r ) {
+					if ( isset( $term_meta[ $r ] ) ) {
+						// Test qubit
+						$$r = ( $$r | (int) $term_meta[ $r ] ) > .33;
+					}
+				}
+			endif;
+		} elseif ( $this->is_singular() ) {
+
+			$post_type = \get_post_type() ?: $this->get_admin_post_type();
+			foreach ( [ 'noindex', 'nofollow', 'noarchive' ] as $r ) {
+				$$r = $$r || $this->is_post_type_robots_set( $r, $post_type );
+			}
+
+			if ( ! ( $ignore & ROBOTS_IGNORE_SETTINGS ) ) :
+				$post_meta = [
+					'noindex'   => $this->get_post_meta_item( '_genesis_noindex' ),
+					'nofollow'  => $this->get_post_meta_item( '_genesis_nofollow' ),
+					'noarchive' => $this->get_post_meta_item( '_genesis_noarchive' ),
+				];
+
+				foreach ( [ 'noindex', 'nofollow', 'noarchive' ] as $r ) {
+					// Test qubit
+					$$r = ( $$r | (int) $post_meta[ $r ] ) > .33;
+				}
+			endif;
+
+			// Overwrite and ignore the user's settings, regardless; unless ignore is set.
+			if ( ! ( $ignore & ROBOTS_IGNORE_PROTECTION ) ) :
+				if ( $this->is_protected( $this->get_the_real_ID() ) ) {
+					$noindex = true;
+				}
+			endif;
+
+			/**
+			 * Noindex on comment pagination.
+			 * Overwrites and ignores the user's settings, always.
+			 *
+			 * N.B. WordPress protects this query variable with options 'page_comments'
+			 * and 'default_comments_page' via `redirect_canonical()`, so we don't have to.
+			 * For reference, it fires `remove_query_arg( 'cpage', $redirect['query'] )`;
+			 */
+			if ( (int) \get_query_var( 'cpage', 0 ) > 0 ) {
+				$noindex = true;
 			}
 		}
 
-		$post_type = \get_post_type();
-		foreach ( [ 'noindex', 'nofollow', 'noarchive' ] as $r ) {
-			$o = $this->get_option( $this->get_robots_post_type_option_id( $r ) );
-			if ( ! empty( $o[ $post_type ] ) ) {
-				$meta[ $r ] = $r;
+		return compact( 'noindex', 'nofollow', 'noarchive', 'max_snippet_length', 'max_image_preview', 'max_video_preview' );
+	}
+
+	/**
+	 * Generates the `noindex`, `nofollow`, `noarchive` robots meta code array from arguments.
+	 *
+	 * Note that the home-as-blog page can be used for this method.
+	 *
+	 * @since 4.0.0
+	 * @since 4.0.2 Added new copyright directive tags.
+	 *
+	 * @param array|null $args   The query arguments. Accepts 'id' and 'taxonomy'.
+	 * @param int <bit>  $ignore The ignore level. {
+	 *    0 = 0b00: Ignore nothing.
+	 *    1 = 0b01: Ignore protection. (\The_SEO_Framework\ROBOTS_IGNORE_PROTECTION)
+	 *    2 = 0b10: Ignore post/term setting. (\The_SEO_Framework\ROBOTS_IGNORE_SETTINGS)
+	 *    3 = 0b11: Ignore protection and post/term setting.
+	 * }
+	 * @return array|null robots : {
+	 *    bool              'noindex'
+	 *    bool              'nofollow'
+	 *    bool              'noarchive'
+	 *    false|int <R>=-1> 'max_snippet_length'
+	 *    false|string      'max_image_preview'
+	 *    fasle|int <R>=-1> 'max_video_preview'
+	 * }
+	 */
+	protected function get_robots_meta_by_args( $args, $ignore = 0b00 ) {
+
+		$noindex   = (bool) $this->get_option( 'site_noindex' );
+		$nofollow  = (bool) $this->get_option( 'site_nofollow' );
+		$noarchive = (bool) $this->get_option( 'site_noarchive' );
+
+		$max_snippet_length = $max_image_preview = $max_video_preview = false;
+
+		if ( $this->get_option( 'set_copyright_directives' ) ) {
+			$max_snippet_length = $this->get_option( 'max_snippet_length' );
+			$max_image_preview  = $this->get_option( 'max_image_preview' );
+			$max_video_preview  = $this->get_option( 'max_video_preview' );
+		}
+
+		if ( $args['taxonomy'] ) {
+			if ( 'category' === $args['taxonomy'] ) {
+				$noindex   = $noindex || $this->get_option( 'category_noindex' );
+				$nofollow  = $nofollow || $this->get_option( 'category_nofollow' );
+				$noarchive = $noarchive || $this->get_option( 'category_noarchive' );
+			} elseif ( 'post_tag' === $args['taxonomy'] ) {
+				$noindex   = $noindex || $this->get_option( 'tag_noindex' );
+				$nofollow  = $nofollow || $this->get_option( 'tag_nofollow' );
+				$noarchive = $noarchive || $this->get_option( 'tag_noarchive' );
+			}
+		} else {
+			if ( $this->is_real_front_page_by_id( $args['id'] ) ) {
+				$noindex   = $noindex || $this->get_option( 'homepage_noindex' );
+				$nofollow  = $nofollow || $this->get_option( 'homepage_nofollow' );
+				$noarchive = $noarchive || $this->get_option( 'homepage_noarchive' );
 			}
 		}
 
-		/**
-		 * Filters the front-end robots array, and strips empty indexes thereafter.
-		 *
-		 * @since 2.6.0
-		 *
-		 * @param array $meta The current term meta.
-		 */
-		return array_filter( (array) \apply_filters( 'the_seo_framework_robots_meta_array', $meta ) );
+		if ( $args['taxonomy'] ) {
+			$term = \get_term( $args['id'], $args['taxonomy'] );
+			/**
+			 * Check if archive is empty: set noindex for those.
+			 */
+			if ( empty( $term->count ) )
+				$noindex = true;
+
+			$_post_type_meta = [];
+			// Store values from each post type bound to the taxonomy.
+			foreach ( $this->get_post_types_from_taxonomy( $args['taxonomy'] ) as $post_type ) {
+				foreach ( [ 'noindex', 'nofollow', 'noarchive' ] as $r ) {
+					// SECURITY: Put in array to circumvent GLOBALS injection.
+					$_post_type_meta[ $r ][] = $this->is_post_type_robots_set( $r, $post_type );
+				}
+			}
+			// Only enable if all post types have the value ticked.
+			foreach ( $_post_type_meta as $_type => $_values ) {
+				$$_type = $$_type || ! in_array( false, $_values, true );
+			}
+
+			if ( ! ( $ignore & ROBOTS_IGNORE_SETTINGS ) ) :
+				$term_meta = $this->get_term_meta( $args['id'] );
+
+				foreach ( [ 'noindex', 'nofollow', 'noarchive' ] as $r ) {
+					if ( isset( $term_meta[ $r ] ) ) {
+						// Test qubit
+						$$r = ( $$r | (int) $term_meta[ $r ] ) > .33;
+					}
+				}
+			endif;
+		} elseif ( $args['id'] ) {
+			$post_type = \get_post_type( $args['id'] );
+			foreach ( [ 'noindex', 'nofollow', 'noarchive' ] as $r ) {
+				$$r = $$r || $this->is_post_type_robots_set( $r, $post_type );
+			}
+
+			if ( ! ( $ignore & ROBOTS_IGNORE_SETTINGS ) ) :
+				$post_meta = [
+					'noindex'   => $this->get_post_meta_item( '_genesis_noindex', $args['id'] ),
+					'nofollow'  => $this->get_post_meta_item( '_genesis_nofollow', $args['id'] ),
+					'noarchive' => $this->get_post_meta_item( '_genesis_noarchive', $args['id'] ),
+				];
+
+				foreach ( [ 'noindex', 'nofollow', 'noarchive' ] as $r ) {
+					// Test qubit
+					$$r = ( $$r | (int) $post_meta[ $r ] ) > .33;
+				}
+			endif;
+
+			// Overwrite and ignore the user's settings, regardless; unless ignore is set.
+			if ( ! ( $ignore & ROBOTS_IGNORE_PROTECTION ) ) :
+				if ( $this->is_protected( $args['id'] ) ) {
+					$noindex = true;
+				}
+			endif;
+		}
+
+		return compact( 'noindex', 'nofollow', 'noarchive', 'max_snippet_length', 'max_image_preview', 'max_video_preview' );
+	}
+
+	/**
+	 * Generates the `noindex` robots meta code array from arguments.
+	 *
+	 * This method is tailor-made for everything that relies on the noindex-state, as it's
+	 * a very controlling and powerful feature.
+	 *
+	 * Note that the home-as-blog page can be used for this method.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @param array|null $args   The query arguments. Accepts 'id' and 'taxonomy'.
+	 * @param int <bit>  $ignore The ignore level. {
+	 *    0 = 0b00: Ignore nothing.
+	 *    1 = 0b01: Ignore protection. (\The_SEO_Framework\ROBOTS_IGNORE_PROTECTION)
+	 *    2 = 0b10: Ignore post/term setting. (\The_SEO_Framework\ROBOTS_IGNORE_SETTINGS)
+	 *    3 = 0b11: Ignore protection and post/term setting.
+	 * }
+	 * @return bool Whether noindex is set or not
+	 */
+	public function is_robots_meta_noindex_set_by_args( $args, $ignore = 0b00 ) {
+
+		$this->fix_generation_args( $args );
+
+		$noindex = (bool) $this->get_option( 'site_noindex' );
+
+		if ( $args['taxonomy'] ) {
+			if ( 'category' === $args['taxonomy'] ) {
+				$noindex = $noindex || $this->get_option( 'category_noindex' );
+			} elseif ( 'post_tag' === $args['taxonomy'] ) {
+				$noindex = $noindex || $this->get_option( 'tag_noindex' );
+			}
+		} else {
+			if ( $this->is_real_front_page_by_id( $args['id'] ) ) {
+				$noindex = $noindex || $this->get_option( 'homepage_noindex' );
+			}
+		}
+
+		if ( $args['taxonomy'] ) {
+			$term = \get_term( $args['id'], $args['taxonomy'] );
+			/**
+			 * Check if archive is empty: set noindex for those.
+			 */
+			if ( empty( $term->count ) )
+				$noindex = true;
+
+			$_post_type_meta = [];
+			// Store values from each post type bound to the taxonomy.
+			foreach ( $this->get_post_types_from_taxonomy( $args['taxonomy'] ) as $post_type ) {
+				// SECURITY: Put in array to circumvent GLOBALS injection.
+				$_post_type_meta['noindex'][] = $this->is_post_type_robots_set( 'noindex', $post_type );
+			}
+			// Only enable if all post types have the value ticked.
+			foreach ( $_post_type_meta as $_type => $_values ) {
+				$$_type = $$_type || ! in_array( false, $_values, true );
+			}
+
+			if ( ! ( $ignore & ROBOTS_IGNORE_SETTINGS ) ) :
+				$term_meta = $this->get_term_meta( $args['id'] );
+
+				if ( isset( $term_meta['noindex'] ) ) {
+					// Test qubit
+					$noindex = ( $noindex | (int) $term_meta['noindex'] ) > .33;
+				}
+			endif;
+		} elseif ( $args['id'] ) {
+			$post_type = \get_post_type( $args['id'] );
+			$noindex   = $noindex || $this->is_post_type_robots_set( 'noindex', $post_type );
+
+			if ( ! ( $ignore & ROBOTS_IGNORE_SETTINGS ) ) :
+				$post_meta = [
+					'noindex' => $this->get_post_meta_item( '_genesis_noindex', $args['id'] ),
+				];
+				// Test qubit
+				$noindex = ( $noindex | (int) $post_meta['noindex'] ) > .33;
+			endif;
+
+			// Overwrite and ignore the user's settings, regardless; unless ignore is set.
+			if ( ! ( $ignore & ROBOTS_IGNORE_PROTECTION ) ) :
+				if ( $this->is_protected( $args['id'] ) ) {
+					$noindex = true;
+				}
+			endif;
+		}
+
+		return $noindex;
 	}
 
 	/**
@@ -181,7 +519,7 @@ class Generate extends User_Data {
 	 *
 	 * @param string $type      Accepts 'noindex', 'nofollow', 'noarchive'.
 	 * @param string $post_type The post type, optional. Leave empty to autodetermine type.
-	 * @return bool True if disabled, false otherwise.
+	 * @return bool True if noindex, nofollow, or noarchive is set; false otherwise.
 	 */
 	public function is_post_type_robots_set( $type, $post_type = '' ) {
 		return isset(
@@ -197,6 +535,7 @@ class Generate extends User_Data {
 	 * @since 2.3.9
 	 * @since 3.1.0 : 1. Removed caching.
 	 *                2. Removed escaping parameter.
+	 * @since 4.0.0 No longer converts the `dash` separator option.
 	 *
 	 * @param string $type The separator type. Used to fetch option.
 	 * @return string The separator.
@@ -207,8 +546,6 @@ class Generate extends User_Data {
 
 		if ( 'pipe' === $sep_option ) {
 			$sep = '|';
-		} elseif ( 'dash' === $sep_option ) {
-			$sep = '-';
 		} elseif ( '' !== $sep_option ) {
 			//* Encapsulate within html entities.
 			$sep = '&' . $sep_option . ';';
@@ -226,10 +563,12 @@ class Generate extends User_Data {
 	 * @since 2.5.2
 	 * @staticvar string $blogname
 	 *
-	 * @return string $blogname The trimmed and sanitized blogname.
+	 * @return string $blogname The escaped and sanitized blogname.
 	 */
 	public function get_blogname() {
+
 		static $blogname = null;
+
 		return isset( $blogname ) ? $blogname : $blogname = trim( \get_bloginfo( 'name', 'display' ) );
 	}
 
@@ -240,18 +579,13 @@ class Generate extends User_Data {
 	 * @since 3.0.0 No longer returns untitled when empty, instead, it just returns an empty string.
 	 * @staticvar string $description
 	 *
-	 * @return string $blogname The trimmed and sanitized blog description.
+	 * @return string $blogname The escaped and sanitized blog description.
 	 */
 	public function get_blogdescription() {
 
 		static $description = null;
 
-		if ( isset( $description ) )
-			return $description;
-
-		$description = trim( \get_bloginfo( 'description', 'display' ) );
-
-		return $description = $description ?: '';
+		return isset( $description ) ? $description : $description = trim( \get_bloginfo( 'description', 'display' ) );
 	}
 
 	/**
@@ -260,49 +594,49 @@ class Generate extends User_Data {
 	 *
 	 * @since 2.5.2
 	 *
-	 * @param $match the locale to match. Defaults to WordPress locale.
+	 * @param string $match the locale to match. Defaults to WordPress locale.
 	 * @return string Facebook acceptable OG locale.
 	 */
 	public function fetch_locale( $match = '' ) {
 
-		if ( empty( $match ) )
+		if ( ! $match )
 			$match = \get_locale();
 
-		$match_len = strlen( $match );
-		$valid_locales = (array) $this->fb_locales();
-		$default = 'en_US';
+		$match_len     = strlen( $match );
+		$valid_locales = $this->fb_locales();
 
 		if ( $match_len > 5 ) {
-			//* More than full is used. Make it just full.
-			$match = substr( $match, 0, 5 );
 			$match_len = 5;
+			// More than standard-full locale ID is used. Make it just full.
+			$match = substr( $match, 0, $match_len );
 		}
 
 		if ( 5 === $match_len ) {
-			//* Full locale is used.
+			// Full locale is used.
 
-			//* Return the match if found.
 			if ( in_array( $match, $valid_locales, true ) )
 				return $match;
 
-			//* Convert to only language portion.
-			$match = substr( $match, 0, 2 );
+			// Convert to only language portion.
 			$match_len = 2;
+			$match     = substr( $match, 0, $match_len );
 		}
 
 		if ( 2 === $match_len ) {
-			//* Language key is provided.
+			// Only a language key is provided.
 
 			$locale_keys = (array) $this->language_keys();
 
-			//* No need to do for each loop. Just match the keys.
-			if ( $key = array_search( $match, $locale_keys, true ) ) {
-				//* Fetch the corresponding value from key within the language array.
+			// Find first matching key.
+			$key = array_search( $match, $locale_keys, true );
+
+			if ( $key ) {
 				return $valid_locales[ $key ];
 			}
 		}
 
-		return $default;
+		// Return default locale.
+		return 'en_US';
 	}
 
 	/**
@@ -346,6 +680,7 @@ class Generate extends User_Data {
 		 * @since 2.3.0
 		 * @since 2.7.0 Added output within filter.
 		 * @param string $type The OG type.
+		 * @param int    $id   The page/term/object ID.
 		 */
 		return $type = (string) \apply_filters_ref_array(
 			'the_seo_framework_ogtype_output',
@@ -360,29 +695,25 @@ class Generate extends User_Data {
 	 * @since 3.1.0
 	 * @TODO use this
 	 * @see get_available_twitter_cards
+	 * @ignore
 	 */
 	public function get_available_open_graph_types() { }
 
 	/**
 	 * Generates the Twitter Card type.
 	 *
-	 * When there's an image found, it will take the said option.
-	 * Otherwise, it will return 'summary' or ''.
-	 *
 	 * @since 2.7.0
 	 * @since 2.8.2 Now considers description output.
 	 * @since 2.9.0 Now listens to $this->get_available_twitter_cards().
 	 * @since 3.1.0 Now inherits filter `the_seo_framework_twittercard_output`.
 	 *
-	 * @return string The Twitter Card type.
+	 * @return string The Twitter Card type. When no social title is found, an empty string will be returned.
 	 */
 	public function generate_twitter_card_type() {
 
 		$available_cards = $this->get_available_twitter_cards();
 
-		//* No valid Twitter cards have been found.
-		if ( false === $available_cards )
-			return '';
+		if ( ! $available_cards ) return '';
 
 		$option = $this->get_option( 'twitter_card' );
 		$option = trim( \esc_attr( $option ) );
@@ -417,9 +748,11 @@ class Generate extends User_Data {
 	 * Determines which Twitter cards can be used.
 	 *
 	 * @since 2.9.0
+	 * @since 4.0.0 1. Now only asserts the social titles as required.
+	 *              2. Now always returns an array, instead of a boolean (false) on failure.
 	 * @staticvar bool|array $cache
 	 *
-	 * @return bool|array False when it shouldn't be used. Array of available cards otherwise.
+	 * @return array False when it shouldn't be used. Array of available cards otherwise.
 	 */
 	public function get_available_twitter_cards() {
 
@@ -428,20 +761,19 @@ class Generate extends User_Data {
 		if ( isset( $cache ) )
 			return $cache;
 
-		if ( ! $this->get_twitter_description() || ! $this->get_twitter_title() ) {
+		if ( ! $this->get_twitter_title() ) {
 			$retval = [];
 		} else {
-			$retval = $this->get_image_from_cache() ? [ 'summary_large_image', 'summary' ] : [ 'summary' ];
+			$retval = [ 'summary_large_image', 'summary' ];
 		}
 
 		/**
-		 * Filters the available Twitter cards on the front end.
 		 * @since 2.9.0
-		 * @param array $retval Use empty array to invalidate Twitter card.
+		 * @param array $retval The available Twitter cards. Use empty array to invalidate Twitter card.
 		 */
 		$retval = (array) \apply_filters( 'the_seo_framework_available_twitter_cards', $retval );
 
-		return $cache = $retval ?: false;
+		return $cache = $retval ?: [];
 	}
 
 	/**
@@ -449,21 +781,22 @@ class Generate extends User_Data {
 	 *
 	 * @since 2.6.0
 	 * @since 3.1.0 Is now filterable.
+	 * @since 4.0.0 Removed the dash key.
 	 *
 	 * @return array Title separators.
 	 */
 	public function get_separator_list() {
 		/**
 		 * @since 3.1.0
+		 * @since 4.0.0 Removed the dash key.
 		 * @param array $list The separator list in { option_name > display_value } format.
 		 *                    The option name should be translatable within `&...;` tags.
-		 *                    'pipe' and 'dash' are excluded from this rule.
+		 *                    'pipe' is excluded from this rule.
 		 */
 		return (array) \apply_filters(
 			'the_seo_framework_separator_list',
 			[
 				'pipe'   => '|',
-				'dash'   => '-',
 				'ndash'  => '&ndash;',
 				'mdash'  => '&mdash;',
 				'bull'   => '&bull;',

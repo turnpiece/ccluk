@@ -7,9 +7,11 @@ namespace WP_Defender\Module;
 
 use Hammer\Base\Module;
 use WP_Defender\Module\Setting\Controller\Main;
+use WP_Defender\Module\Setting\Controller\Rest;
 
 class Setting extends Module {
 	public function __construct() {
 		new Main();
+		new Rest();
 	}
 }

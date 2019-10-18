@@ -74,7 +74,7 @@ $latest_snapshot = Snapshot_Helper_Utility::latest_backup( $snapshot );
 											esc_html__( 'at %s', SNAPSHOT_I18N_DOMAIN ),
 											Snapshot_Helper_Utility::show_date_time( $latest_snapshot['timestamp'], 'g:ia' )
 									)
-								); 
+								);
 							?>
 							</span>
 						</td>
@@ -136,7 +136,7 @@ $latest_snapshot = Snapshot_Helper_Utility::latest_backup( $snapshot );
 											sprintf(
 													esc_html__( 'at %s', SNAPSHOT_I18N_DOMAIN ),
 													$schedule_times[$model->get_schedule_time()]
-											) 
+											)
 										);
 
 									?>

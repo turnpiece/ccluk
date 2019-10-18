@@ -29,6 +29,7 @@ abstract class Model extends \Hammer\Base\Model {
 	 * @return Model|\WP_Error
 	 */
 	public function save() {
+		$this->doFilters();
 		if ( $this->id == null ) {
 			return $this->insert();
 		} else {

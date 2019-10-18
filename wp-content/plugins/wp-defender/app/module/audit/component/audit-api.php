@@ -25,7 +25,7 @@ class Audit_API extends Component {
 	 * @return array|mixed|object|\WP_Error
 	 */
 	public static function pullLogs( $filter = array(), $order_by = 'timestamp', $order = 'desc', $nopaging = false ) {
-		$data             = $filter;
+		$data = $filter;
 		$data['site_url'] = network_site_url();
 		$data['order_by'] = $order_by;
 		$data['order']    = $order;
@@ -39,6 +39,7 @@ class Audit_API extends Component {
 			$data['date_to']   = $dateTo;
 			$data['timezone']  = '0';
 		}
+
 		$response = Utils::instance()->devCall( 'https://' . self::$end_point . '/logs', $data, array(
 			'method'  => 'GET',
 			'timeout' => 20,
@@ -73,7 +74,7 @@ class Audit_API extends Component {
 	 */
 	public static function pullLogsSummary( $filter = array() ) {
 		$data             = $filter;
-		$data['site_url'] = network_site_url();
+		$data['site_url']  = network_site_url();
 		$data['timezone'] = get_option( 'gmt_offset' );
 		if ( $data['timezone'] == '9.5' ) {
 			//little case for 9.5 timezone
@@ -160,25 +161,7 @@ class Audit_API extends Component {
 		);
 	}
 
-	public static function liveable_audit_log( $text ) {
-		//first need to get the site id
-		$site_id = 1;
-		//rip out any html if any
-		$text = esc_html( $text );
-
-		$text = str_replace( '; ', '<br/>', $text );
-
-		/**
-		 * we continue to check anything with ID, usually it will be
-		 * comment ID
-		 * file URL
-		 */
-
-		return $text;
-		//we got the site ID.
-	}
-
-	public static function get_event_type() {
+	public static function getEventType() {
 		return WP_Helper::getArrayCache()->get( 'event_types', array() );
 	}
 

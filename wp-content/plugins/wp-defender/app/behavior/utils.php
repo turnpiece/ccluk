@@ -5,9 +5,11 @@
 
 namespace WP_Defender\Behavior;
 
+use Gettext\Extractors\PhpArray;
 use Hammer\Base\Behavior;
 use Hammer\Helper\Log_Helper;
 use Hammer\Helper\WP_Helper;
+use WP_Defender\Component\Error_Code;
 use WP_Defender\Module\Advanced_Tools\Component\Mask_Api;
 use WP_Defender\Module\Advanced_Tools\Model\Auth_Settings;
 use WP_Defender\Module\Advanced_Tools\Model\Mask_Settings;
@@ -52,9 +54,11 @@ class Utils extends Behavior {
 			$post_vars['headers'] = array_merge( $headers, array(
 				'Authorization' => 'Basic ' . $api_key
 			) );
-			$response             = wp_remote_request( $endPoint,
+
+			$response = wp_remote_request( $endPoint,
 				apply_filters( 'wd_wpmudev_call_request_args',
 					$post_vars ) );
+
 			if ( is_wp_error( $response ) ) {
 				return $response;
 			}
@@ -135,19 +139,6 @@ class Utils extends Behavior {
 	}
 
 	/**
-	 * @return string|null
-	 */
-	public function getSummaryClass() {
-		if ( wp_defender()->hideHeroImage && strlen( wp_defender()->heroImage ) == 0 ) {
-			return 'sui-unbranded';
-		} elseif ( wp_defender()->hideHeroImage && strlen( wp_defender()->heroImage ) > 0 ) {
-			return 'sui-rebranded';
-		}
-
-		return null;
-	}
-
-	/**
 	 * Check if WPMUDEV Dashboard installed, return version, else return false
 	 * @return bool|string
 	 */
@@ -197,11 +188,18 @@ class Utils extends Behavior {
 	}
 
 	/**
+	 * Get user display name if logged in, or Guest instead
+	 *
 	 * @param null $user_id
 	 *
 	 * @return string
 	 */
 	public function getDisplayName( $user_id = null ) {
+		$cache     = WP_Helper::getArrayCache();
+		$cache_key = 'user_id_' . $user_id;
+		if ( $cache->exists( $cache_key ) ) {
+			return $cache->get( $cache_key );
+		}
 		if ( ! is_user_logged_in() && is_null( $user_id ) ) {
 			return esc_html__( "Guest", wp_defender()->domain );
 		}
@@ -219,32 +217,10 @@ class Utils extends Behavior {
 		if ( empty( $fullname ) ) {
 			$fullname = $userdata->display_name;
 		}
+		$cache->set( 'hit', intval( $cache->get( 'hit' ) ) + 1 );
+		$cache->set( $cache_key, $fullname );
 
 		return $fullname;
-	}
-
-	/**
-	 * @return array
-	 */
-	public function allowedHtml() {
-		return array(
-			'p'      => array(),
-			'i'      => array(
-				'class' => 'wd-text-warning wdv-icon wdv-icon-fw wdv-icon-exclamation-sign'
-			),
-			'strong' => array(),
-			'span'   => array(
-				'class' => array(
-					'wd-suspicious-strong',
-					'wd-suspicious-light',
-					'wd-suspicious-medium'
-				)
-			),
-			'img'    => array(
-				'class' => 'text-warning',
-				'src'   => wp_defender()->getPluginUrl() . 'assets/img/robot.png'
-			)
-		);
 	}
 
 	/**
@@ -305,6 +281,58 @@ class Utils extends Behavior {
 		$time     = new \DateTime( $timestring, $timezone );
 
 		return $time->getTimestamp();
+	}
+
+	/**
+	 * Convert PHP date format into momentjs format
+	 *
+	 * @param $format
+	 *
+	 * @return string
+	 */
+	public function convertPHPToMomentFormat( $format ) {
+		$replacements = [
+			'd' => 'DD',
+			'D' => 'ddd',
+			'j' => 'D',
+			'l' => 'dddd',
+			'N' => 'E',
+			'S' => 'o',
+			'w' => 'e',
+			'z' => 'DDD',
+			'W' => 'W',
+			'F' => 'MMMM',
+			'm' => 'MM',
+			'M' => 'MMM',
+			'n' => 'M',
+			't' => '', // no equivalent
+			'L' => '', // no equivalent
+			'o' => 'YYYY',
+			'Y' => 'YYYY',
+			'y' => 'YY',
+			'a' => 'a',
+			'A' => 'A',
+			'B' => '', // no equivalent
+			'g' => 'h',
+			'G' => 'H',
+			'h' => 'hh',
+			'H' => 'HH',
+			'i' => 'mm',
+			's' => 'ss',
+			'u' => 'SSS',
+			'e' => 'zz', // deprecated since version 1.6.0 of moment.js
+			'I' => '', // no equivalent
+			'O' => '', // no equivalent
+			'P' => '', // no equivalent
+			'T' => '', // no equivalent
+			'Z' => '', // no equivalent
+			'c' => '', // no equivalent
+			'r' => '', // no equivalent
+			'U' => 'X',
+		];
+		$momentFormat = strtr( $format, $replacements );
+
+		return $momentFormat;
 	}
 
 	/**
@@ -557,7 +585,7 @@ class Utils extends Behavior {
 		for ( $i = 0; $i < 24; $i ++ ) {
 			foreach ( apply_filters( 'wd_scan_get_times_interval', array( '00', '30' ) ) as $min ) {
 				$time          = $i . ':' . $min;
-				$data[ $time ] = apply_filters( 'wd_scan_get_times_hour_min', $time );
+				$data[ $time ] = apply_filters( 'wd_scan_get_times_hour_min', strftime( '%I:%M %p', strtotime( $time ) ) );
 			}
 		}
 
@@ -620,8 +648,9 @@ class Utils extends Behavior {
 			$server = 'iis';
 		}
 
-		if ( is_null( $server ) ) {
+		if ( is_null( $server ) && ( php_sapi_name() !== 'cli' ) ) {
 			//if fall in here, means there is st unknowed.
+			//we need to check there is not cli evn
 			$request = wp_remote_head( $url, array(
 				'user-agent' => $_SERVER['HTTP_USER_AGENT'],
 				'sslverify'  => $ssl_verify
@@ -682,6 +711,7 @@ class Utils extends Behavior {
 	}
 
 	/**
+	 * Return /wp-content/uploads/wp-defender dir, and create if not any
 	 * @return string
 	 */
 	public function getDefUploadDir() {
@@ -700,7 +730,7 @@ class Utils extends Behavior {
 	}
 
 	/**
-	 * Generate Stats
+	 * Generate Stats for HUB
 	 *
 	 * @return array
 	 */
@@ -851,7 +881,7 @@ class Utils extends Behavior {
 					'advanced'              => array(
 						'multi_factors_auth' => array(
 							'active'  => Auth_Settings::instance()->enabled,
-							'enabled' => ! empty( Auth_Settings::instance()->userRoles ),
+							'enabled' => ! empty( Auth_Settings::instance()->user_roles ),
 						),
 						'mask_login'         => array(
 							'activate'   => Mask_Settings::instance()->isEnabled(),
@@ -897,6 +927,9 @@ class Utils extends Behavior {
 		return $data;
 	}
 
+	/**
+	 * Submit the stats to DEV
+	 */
 	public function _submitStatsToDev() {
 		$data      = $this->generateStats();
 		$end_point = "https://premium.wpmudev.org/api/defender/v1/scan-results";
@@ -906,6 +939,7 @@ class Utils extends Behavior {
 	}
 
 	/**
+	 * Queue the submit task to next refresh
 	 * @return array|void
 	 */
 	public function submitStatsToDev() {
@@ -938,16 +972,10 @@ class Utils extends Behavior {
 	}
 
 	/**
-	 * @return string
-	 */
-	public function maybeHighContrast() {
-		return \WP_Defender\Module\Setting\Model\Settings::instance()->high_contrast_mode == 0 ? '' : 'sui-color-accessible';
-	}
-
-	/**
 	 * @param $freq
 	 *
 	 * @return string
+	 * @deprecated
 	 */
 	public function frequencyToText( $freq ) {
 		$text = '';
@@ -1017,6 +1045,23 @@ class Utils extends Behavior {
 	}
 
 	/**
+	 * Convert true/false to 1/0 and viceversa
+	 *
+	 * @param $data
+	 *
+	 * @return mixed
+	 */
+	public function convertBoolean( $data ) {
+		foreach ( $data as $key => $val ) {
+			if ( filter_var( $val, FILTER_VALIDATE_BOOLEAN ) ) {
+				$data[ $key ] = (int) $val;
+			}
+		}
+
+		return $data;
+	}
+
+	/**
 	 * @param $campaign
 	 *
 	 * @return string
@@ -1025,6 +1070,33 @@ class Utils extends Behavior {
 		$url = "https://premium.wpmudev.org/project/wp-defender/?utm_source=defender&utm_medium=plugin&utm_campaign=" . $campaign;
 
 		return $url;
+	}
+
+	/**
+	 * We will need to convert mo translate into json for frontend can read
+	 *
+	 * @param $handle
+	 */
+	public function createTranslationJson( $handle ) {
+		$locale    = determine_locale();
+		$mo_file   = "wpdef-{$locale}.mo";
+		$mo_path   = wp_defender()->getPluginPath() . 'languages/' . $mo_file;
+		$json_path = wp_defender()->getPluginPath() . 'languages/' . "wpdef-{$locale}-{$handle}.json";
+		if ( file_exists( $json_path ) ) {
+			//already there
+			return;
+		}
+		if ( ! file_exists( $mo_path ) ) {
+			//no translation found
+			return;
+		}
+		//import from mo
+		$translations = new \Gettext\Translations();
+		\Gettext\Extractors\Mo::fromFile( $mo_path, $translations );
+		$translations->setDomain( 'messages' );
+		$translations->setLanguage( get_locale() );
+		//export to json
+		\Gettext\Generators\Jed::toFile( $translations, $json_path );
 	}
 
 	/**
@@ -1300,5 +1372,45 @@ class Utils extends Behavior {
 		);
 
 		return $country_array;
+	}
+
+	public function debug( $log ) {
+		if ( ! defined( 'DEFENDER_DEBUG' ) ) {
+			return;
+		}
+
+		$dir  = $this->getDefUploadDir();
+		$path = $dir . '/defender.log';
+		file_put_contents( $path, $log . PHP_EOL, FILE_APPEND );
+	}
+
+	/**
+	 * @param $dir
+	 *
+	 * @return bool|void|\WP_Error
+	 */
+	public function removeDir( $dir ) {
+		if ( ! is_dir( $dir ) ) {
+			return;
+		}
+		$it    = new \RecursiveDirectoryIterator( $dir, \RecursiveDirectoryIterator::SKIP_DOTS );
+		$files = new \RecursiveIteratorIterator( $it,
+			\RecursiveIteratorIterator::CHILD_FIRST );
+		foreach ( $files as $file ) {
+			if ( $file->isDir() ) {
+				$res = @rmdir( $file->getRealPath() );
+			} else {
+				$res = @unlink( $file->getRealPath() );
+			}
+			if ( $res == false ) {
+				return new \WP_Error( Error_Code::NOT_WRITEABLE, __( "Defender doesn't have enough permission to remove this file", wp_defender()->domain ) );
+			}
+		}
+		$res = @rmdir( $dir );
+		if ( $res == false ) {
+			return new \WP_Error( Error_Code::NOT_WRITEABLE, __( "Defender doesn't have enough permission to remove this file", wp_defender()->domain ) );
+		}
+
+		return true;
 	}
 }

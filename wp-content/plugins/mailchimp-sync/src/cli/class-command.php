@@ -20,9 +20,9 @@ class Command extends WP_CLI_Command {
 	protected $users;
 
 	/**
-	 * @var UserSubscriber
+	 * @var UserHandler
 	 */
-	protected $user_subscriber;
+	protected $user_handler;
 
 	/**
 	 * Constructor

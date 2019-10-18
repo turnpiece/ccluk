@@ -2,6 +2,7 @@
 /**
  * Author: Hoang Ngo
  */
+
 namespace WP_Defender\Module\Hardener\Component;
 
 use WP_Defender\Component\Error_Code;
@@ -73,6 +74,7 @@ class Change_Admin_Service extends Rule_Service implements IRule_Service {
 			}
 		}
 		clean_user_cache( $admin_data->ID );
+		$this->store( 'fixed', Change_Admin::$slug );
 
 		return true;
 	}

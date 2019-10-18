@@ -1,8 +1,9 @@
 <?php
 /**
- * @package The_SEO_Framework\Classes
- * @subpackage Classes\Deprecated
+ * @package The_SEO_Framework\Classes\Deprecated
+ * @subpackage The_SEO_Framework\Debug\Deprecated
  */
+
 namespace The_SEO_Framework;
 
 defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
@@ -31,6 +32,7 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
  *
  * @since 2.8.0
  * @since 3.1.0: Removed all methods deprecated in 3.0.0.
+ * @since 4.0.0: Removed all methods deprecated in 3.1.0.
  * @ignore
  */
 final class Deprecated {
@@ -41,628 +43,824 @@ final class Deprecated {
 	public function __construct() { }
 
 	/**
-	 * Returns the TSF meta output Object cache key.
+	 * Returns a filterable sequential array of default scripts.
 	 *
-	 * @since 2.8.0
-	 * @since 3.1.0 Deprecated.
+	 * @since 3.2.2
+	 * @since 4.0.0 Deprecated.
 	 * @deprecated
-	 * @uses THE_SEO_FRAMEWORK_DB_VERSION as cache key buster.
-	 * @see $this->get_meta_output_cache_key_by_type();
 	 *
-	 * @param int $id The ID. Defaults to $this->get_the_real_ID();
-	 * @return string The TSF meta output cache key.
+	 * @return array
 	 */
-	public function get_meta_output_cache_key( $id = 0 ) {
+	public function get_default_scripts() {
 
 		$tsf = \the_seo_framework();
-		$tsf->_deprecated_function( 'the_seo_framework()->get_meta_output_cache_key()', '3.1.0', 'the_seo_framework()->get_meta_output_cache_key_by_query()' );
+		$tsf->_deprecated_function( 'the_seo_framework()->get_default_scripts()', '4.0.0' );
 
-		/**
-		 * Cache key buster.
-		 * Busts cache on each new db version.
-		 */
-		$key = $tsf->generate_cache_key( $id ) . '_' . THE_SEO_FRAMEWORK_DB_VERSION;
-
-		/**
-		 * Give each paged pages/archives a different cache key.
-		 * @since 2.2.6
-		 */
-		$page = (string) $tsf->page();
-		$paged = (string) $tsf->paged();
-
-		return $cache_key = 'seo_framework_output_' . $key . '_' . $paged . '_' . $page;
-	}
-
-	/**
-	 * Alias of $this->get_preferred_scheme().
-	 * Typo.
-	 *
-	 * @since 2.8.0
-	 * @since 2.9.2 Added filter usage cache.
-	 * @since 3.0.0 Silently deprecated.
-	 * @since 3.1.0 Hard deprecated.
-	 * @deprecated
-	 * @staticvar string $scheme
-	 *
-	 * @return string The preferred URl scheme.
-	 */
-	public function get_prefered_scheme() {
-		$tsf = \the_seo_framework();
-		$tsf->_deprecated_function( 'the_seo_framework()->get_prefered_scheme()', '3.1.0', 'the_seo_framework()->get_preferred_scheme()' );
-		return $tsf->get_preferred_scheme();
-	}
-
-	/**
-	 * Cache description in static variable
-	 * Must be called inside the loop
-	 *
-	 * @since 2.2.2
-	 * @deprecated
-	 * @since 3.0.6 Silently deprecated.
-	 * @since 3.1.0 1. Hard deprecated.
-	 *              2. Removed caching, this is done at a deeper level.
-	 *
-	 * @param bool $social Determines whether the description is social.
-	 * @return string The description
-	 */
-	public function description_from_cache( $social = false ) {
-		$tsf = \the_seo_framework();
-		$tsf->_deprecated_function( 'the_seo_framework()->description_from_cache()', '3.1.0', 'the_seo_framework()->get_description()' );
-		return $tsf->generate_description( '', array( 'social' => $social ) );
-	}
-
-	/**
-	 * Gets the title. Main function.
-	 * Always use this function for the title unless you're absolutely sure what you're doing.
-	 *
-	 * This function is used for all these: Taxonomies and Terms, Posts, Pages, Blog, front page, front-end, back-end.
-	 *
-	 * @since 1.0.0
-	 * @since 3.1.0 Deprecated
-	 * @deprecated
-	 *
-	 * Params required wp_title filter :
-	 * @param string $title The Title to return
-	 * @param string $sep The Title sepeartor
-	 * @param string $seplocation The Title sepeartor location ( accepts 'left' or 'right' )
-	 *
-	 * @since 2.4.0:
-	 * @param array $args : accepted args : {
-	 *    @param int term_id The Taxonomy Term ID when taxonomy is also filled in. Else post ID.
-	 *    @param string taxonomy The Taxonomy name.
-	 *    @param bool page_on_front Page on front condition for example generation.
-	 *    @param bool placeholder Generate placeholder, ignoring options.
-	 *    @param bool notagline Generate title without tagline.
-	 *    @param bool meta Ignore doing_it_wrong. Used in og:title/twitter:title
-	 *    @param bool get_custom_field Do not fetch custom title when false.
-	 *    @param bool description_title Fetch title for description.
-	 *    @param bool is_front_page Fetch front page title.
-	 * }
-	 * @param string $method The invoked method. @internal
-	 * @return string $title Title
-	 */
-	public function title( $title = '', $sep = '', $seplocation = '', $args = [], $method = 'title' ) {
-
-		$tsf = \the_seo_framework();
-		$tsf->_deprecated_function(
-			'the_seo_framework()->' . \esc_html( $method ) . '()',
-			'3.1.0',
-			'the_seo_framework()->get_title()'
-		);
-
-		if ( isset( $args['term_id'] ) ) {
-			$new_args = [];
-			$new_args['id'] = $args['term_id'];
-		}
-		if ( isset( $args['taxonomy'] ) ) {
-			$new_args = isset( $new_args ) ? $new_args : [];
-			$new_args['taxonomy'] = $args['taxonomy'];
-		}
-		if ( ! empty( $args['is_front_page'] ) || ! empty( $args['page_on_front'] ) ) {
-			//= Overwrite args.
-			$new_args = [ 'id' => $tsf->get_the_front_page_ID() ];
-		}
-
-		return $tsf->get_title( empty( $new_args ) ? null : $new_args );
-	}
-
-	/**
-	 * Builds the title based on input and query status.
-	 *
-	 * @since 2.4.0
-	 * @since 3.1.0 Deprecated
-	 * @deprecated
-	 *
-	 * @param string $title The Title to return
-	 * @param string $seplocation The Title sepeartor location ( accepts 'left' or 'right' )
-	 * @param array $args : accepted args : {
-	 *    @param int    term_id The Taxonomy Term ID
-	 *    @param string taxonomy The Taxonomy name
-	 *    @param bool   page_on_front Page on front condition for example generation
-	 *    @param bool   placeholder Generate placeholder, ignoring options.
-	 *    @param bool   get_custom_field Do not fetch custom title when false.
-	 *    @param bool   is_front_page Fetch front page title.
-	 * }
-	 * @return string $title Title
-	 */
-	public function build_title( $title = '', $seplocation = '', $args = [] ) {
-		return $this->title( $title, '', $seplocation, $args, 'build_title' );
-	}
-
-	/**
-	 * Generate the title based on conditions for the home page.
-	 *
-	 * @since 2.3.4
-	 * @since 2.3.8 Now checks tagline option.
-	 * @since 3.1.0 Deprecated.
-	 * @deprecated
-	 *
-	 * @param bool $get_custom_field Fetch Title from Custom Fields.
-	 * @param string $seplocation The separator location
-	 * @param string $deprecated Deprecated: The Home Page separator location
-	 * @param bool $escape Parse Title through saninitation calls.
-	 * @param bool $get_option Whether to fetch the SEO Settings option.
-	 * @return array {
-	 *    'title'       => (string) $title : The Generated "Title"
-	 *    'blogname'    => (string) $blogname : The Generated "Blogname"
-	 *    'add_tagline' => (bool) $add_tagline : Whether to add the tagline
-	 *    'seplocation' => (string) $seplocation : The Separator Location
-	 * }
-	 */
-	public function generate_home_title() {
-		$tsf = \the_seo_framework();
-		$tsf->_deprecated_function( 'the_seo_framework()->generate_home_title()', '3.1.0', 'the_seo_framework()->get_title(...)' );
-		return array(
-			'title'       => $tsf->get_raw_generated_title( array( 'id' => $tsf->get_the_front_page_ID() ) ),
-			'blogname'    => $tsf->get_home_page_tagline(),
-			'add_tagline' => $tsf->use_home_page_title_tagline(),
-			'seplocation' => $tsf->get_title_seplocation(),
+		return array_merge(
+			\The_SEO_Framework\Bridges\Scripts::get_tsf_scripts(),
+			\The_SEO_Framework\Bridges\Scripts::get_tt_scripts()
 		);
 	}
 
 	/**
-	 * Gets the archive Title, including filter. Also works in admin.
+	 * Enqueues Gutenberg-related scripts.
 	 *
-	 * @NOTE Taken from WordPress core. Altered to work for metadata.
-	 * @see WP Core get_the_archive_title()
-	 *
-	 * @since 2.6.0
-	 * @since 2.9.2 : Added WordPress core filter 'get_the_archive_title'
-	 * @since 3.0.4 : 1. Removed WordPress core filter 'get_the_archive_title'
-	 *                2. Added filter 'the_seo_framework_generated_archive_title'
-	 * @since 3.1.0 Deprecated.
+	 * @since 3.2.0
+	 * @since 4.0.0 Deprecated.
 	 * @deprecated
 	 *
-	 * @param \WP_Term|null $term The Term object.
-	 * @param array $args The Title arguments.
-	 * @return string The Archive Title, not escaped.
+	 * @return void Early if already enqueued.
 	 */
-	public function get_the_real_archive_title( $term = null, $args = array() ) {
+	public function enqueue_gutenberg_compat_scripts() {
+
 		$tsf = \the_seo_framework();
-		$tsf->_deprecated_function( 'the_seo_framework()->get_the_real_archive_title()', '3.1.0', 'the_seo_framework()->get_generated_archive_title()' );
-		return $tsf->get_generated_archive_title( $term );
+		$tsf->_deprecated_function( 'the_seo_framework()->enqueue_gutenberg_compat_scripts()', '4.0.0' );
+
+		if ( \The_SEO_Framework\_has_run( __METHOD__ ) ) return;
+
+		\The_SEO_Framework\Builders\Scripts::register(
+			\The_SEO_Framework\Bridges\Scripts::get_gutenberg_compat_scripts()
+		);
 	}
 
 	/**
-	 * Determines whether to use a title prefix or not.
+	 * Enqueues Media Upload and Cropping scripts.
 	 *
-	 * @since 2.6.0
-	 * @since 3.0.0 Removed second parameter.
-	 * @since 3.1.0 Deprecated.
+	 * @since 3.1.0
+	 * @since 4.0.0 Deprecated.
 	 * @deprecated
 	 *
-	 * @return bool
+	 * @return void Early if already enqueued.
 	 */
-	public function use_archive_prefix() {
-		$tsf = \the_seo_framework();
-		$tsf->_deprecated_function( 'the_seo_framework()->use_archive_prefix()', '3.1.0', 'the_seo_framework()->use_generated_archive_prefix()' );
-		return $tsf->use_generated_archive_prefix();
-	}
-
-	/**
-	 * Returns untitled title.
-	 *
-	 * @since 2.6.0
-	 * @since 3.1.0 Deprecated
-	 * @deprecated
-	 *
-	 * @return string The untitled title.
-	 */
-	public function untitled() {
-		$tsf = \the_seo_framework();
-		$tsf->_deprecated_function( 'the_seo_framework()->untitled()', '3.1.0', 'the_seo_framework()->get_static_untitled_title()' );
-		return $tsf->get_static_untitled_title();
-	}
-
-	/**
-	 * Adds title pagination, if paginated.
-	 *
-	 * @since 2.6.0
-	 * @since 3.1.0 Deprecated.
-	 * @deprecated
-	 *
-	 * @param string $title The current Title.
-	 * @return string Title with maybe pagination added.
-	 */
-	public function add_title_pagination( $title ) {
+	public function enqueue_media_scripts() {
 
 		$tsf = \the_seo_framework();
-		$tsf->_deprecated_function( 'the_seo_framework()->add_title_pagination()', '3.1.0', 'the_seo_framework()->merge_title_pagination()' );
+		$tsf->_deprecated_function( 'the_seo_framework()->enqueue_media_scripts()', '4.0.0' );
 
-		if ( $this->is_404() || $this->is_admin() || $this->is_preview() )
-			return $title;
-		$page = $this->page();
-		$paged = $this->paged();
-		if ( $page && $paged ) {
-			/**
-			 * @since 2.4.3
-			 * Adds page numbering within the title.
-			 */
-			if ( $paged >= 2 || $page >= 2 ) {
-				$sep = $this->get_title_separator();
-				$page_number = max( $paged, $page );
-				/**
-				 * @since 2.9.4
-				 * @param string $pagination  The pagination addition.
-				 * @param string $title       The old title.
-				 * @param int    $page_number The page number.
-				 * @param string $sep         The separator used.
-				 */
-				$pagination = \apply_filters_ref_array(
-					'the_seo_framework_title_pagination',
-					array(
-						/* translators: %d = page number. Front-end output. */
-						" $sep " . sprintf( \__( 'Page %d', 'autodescription' ), $page_number ),
-						$title,
-						$page_number,
-						$sep,
-					)
-				);
-				$title .= $pagination;
-			}
+		if ( \The_SEO_Framework\_has_run( __METHOD__ ) ) return;
+
+		$args = [];
+		if ( $tsf->is_post_edit() ) {
+			$args['post'] = $tsf->get_the_real_admin_ID();
 		}
-		return $title;
+		\wp_enqueue_media( $args );
+
+		\The_SEO_Framework\Builders\Scripts::register(
+			\The_SEO_Framework\Bridges\Scripts::get_media_scripts()
+		);
 	}
 
 	/**
-	 * Adds the title additions to the title.
+	 * Enqueues Primary Term Selection scripts.
 	 *
-	 * @since 2.6.0
-	 * @since 3.1.0 Deprecated.
+	 * @since 3.1.0
+	 * @since 4.0.0 Deprecated.
 	 * @deprecated
 	 *
-	 * @param string $title The tite.
-	 * @param string $blogname The blogname.
-	 * @param string $seplocation The separator location.
-	 * @return string Title with possible additions.
+	 * @return void Early if already enqueued.
 	 */
-	public function process_title_additions( $title = '', $blogname = '', $seplocation = '' ) {
+	public function enqueue_primaryterm_scripts() {
 
 		$tsf = \the_seo_framework();
-		$tsf->_deprecated_function( 'the_seo_framework()->process_title_additions()', '3.1.0', 'the_seo_framework()->merge_title_branding()' );
+		$tsf->_deprecated_function( 'the_seo_framework()->enqueue_primaryterm_scripts()', '4.0.0' );
 
-		$sep = $tsf->get_title_separator();
+		if ( \The_SEO_Framework\_has_run( __METHOD__ ) ) return;
 
-		$title = trim( $title );
-		$blogname = trim( $blogname );
-
-		if ( $blogname && $title ) {
-			if ( 'left' === $seplocation ) {
-				$title = $blogname . " $sep " . $title;
-			} else {
-				$title = $title . " $sep " . $blogname;
-			}
-		}
-
-		return $title;
+		\The_SEO_Framework\Builders\Scripts::register(
+			\The_SEO_Framework\Bridges\Scripts::get_primaryterm_scripts()
+		);
 	}
 
 	/**
-	 * Cache current Title in static variable
-	 * Must be called inside the loop
+	 * Includes the necessary sortable metabox scripts.
 	 *
 	 * @since 2.2.2
-	 * @since 2.4.0 : If the theme is doing it right, override cache parameters to speed things up.
-	 * @staticvar array $title_cache
-	 *
-	 * @param string $title The Title to return
-	 * @param string $sep The Title sepeartor
-	 * @param string $seplocation The Title sepeartor location, accepts 'left' or 'right'.
-	 * @param bool $meta Ignore theme doing it wrong.
-	 * @return string The title
+	 * @since 4.0.0 Deprecated.
+	 * @deprecated
 	 */
-	public function title_from_cache( $title = '', $sep = '', $seplocation = '', $meta = false ) {
-		$tsf = \the_seo_framework();
-		$tsf->_deprecated_function( 'the_seo_framework()->title_from_cache()', '3.1.0', 'the_seo_framework()->get_title(...)' );
-		return $meta ? $tsf->get_open_graph_title() : $tsf->get_title();
+	public function metabox_scripts() {
+		\the_seo_framework()->_deprecated_function( 'the_seo_framework()->metabox_scripts()', '4.0.0', '\The_SEO_Framework\Bridges\Scripts::prepare_metabox_scripts()' );
+		\The_SEO_Framework\Bridges\Scripts::prepare_metabox_scripts();
 	}
 
 	/**
-	 * Fetches single term title.
+	 * Returns the SEO Bar.
 	 *
-	 * @since 2.6.0
-	 * @since 3.1.0 Deprecated.
+	 * @since 3.0.4
+	 * @since 4.0.0 Deprecated
+	 * @staticvar string $type
 	 * @deprecated
 	 *
-	 * @param string $depr Deprecated.
-	 * @param bool   $depr Deprecated.
-	 * @param \WP_Term|null $term The WP_Term object.
-	 * @return string Single term title.
+	 * @param string $column the current column : If it's a taxonomy, this is empty
+	 * @param int    $post_id the post id       : If it's a taxonomy, this is the column name
+	 * @param string $tax_id this is empty      : If it's a taxonomy, this is the taxonomy id
 	 */
-	public function single_term_title( $depr = '', $_depr = true, $term = null ) {
+	public function get_seo_bar( $column, $post_id, $tax_id ) {
+
 		$tsf = \the_seo_framework();
-		$tsf->_deprecated_function( 'the_seo_framework()->single_term_title()', '3.1.0', 'the_seo_framework()->get_generated_single_term_title()' );
-		return $tsf->get_generated_single_term_title( $term );
+		$tsf->_deprecated_function( 'the_seo_framework()->post_status()', '4.0.0', 'the_seo_framework()->get_generated_seo_bar()' );
+
+		$type = \get_post_type( $post_id );
+
+		if ( false === $type || '' !== $tax_id ) {
+			$type = $tsf->get_current_taxonomy();
+		}
+
+		if ( '' !== $tax_id ) {
+			$column  = $post_id;
+			$post_id = $tax_id;
+		}
+
+		return $tsf->post_status( $post_id, $type );
 	}
 
 	/**
-	 * Returns Post Title from ID.
+	 * Renders post status. Caches the output.
 	 *
-	 * @since 2.6.0
-	 * @since 3.1.0 Deprecated.
+	 * @since 2.1.9
+	 * @staticvar string $post_i18n The post type slug.
+	 * @staticvar bool $is_term If we're dealing with TT pages.
+	 * @since 2.8.0 Third parameter `$echo` has been put into effect.
+	 * @since 4.0.0 Deprecated.
 	 * @deprecated
 	 *
-	 * @param int $id The Post ID.
-	 * @param string $title Optional. The current/fallback Title.
-	 * @return string Post Title
+	 * @param int    $post_id The Post ID or taxonomy ID.
+	 * @param string $type The content type.
+	 * @param bool   $echo Whether to echo the value. Does not eliminate return.
+	 * @return string|void $content The post SEO status. Void if $echo is true.
 	 */
-	public function post_title_from_ID( $id = 0, $title = '' ) { // phpcs:ignore -- ID is capitalized because WordPress does that too: get_the_ID().
+	public function post_status( $post_id, $type = '', $echo = false ) {
+
 		$tsf = \the_seo_framework();
-		$tsf->_deprecated_function( 'the_seo_framework()->post_title_from_ID()', '3.1.0', 'the_seo_framework()->get_raw_generated_title( [ \'id\' => $id ] )' );
 
-		if ( $tsf->is_archive() )
-			return $title;
+		$tsf->_deprecated_function( 'the_seo_framework()->post_status()', '4.0.0', 'the_seo_framework()->get_generated_seo_bar()' );
 
-		return $tsf->get_raw_generated_title( [ 'id' => $id ] ) ?: $title;
-	}
+		if ( ! $post_id )
+			$post_id = $tsf->get_the_real_ID();
 
-	/**
-	 * Gets the title from custom field
-	 *
-	 * @since 2.2.8
-	 * @since 3.1.0 Deprecated.
-	 * @deprecated
-	 *
-	 * @param string $title the fallback title.
-	 * @param bool $escape Parse Title through saninitation calls.
-	 * @param int $id The Post ID.
-	 * @param string $taxonomy The term name.
-	 * @return string The Title.
-	 */
-	public function title_from_custom_field( $title = '', $escape = false, $id = null, $taxonomy = null ) {
-		$tsf = \the_seo_framework();
-		$tsf->_deprecated_function( 'the_seo_framework()->title_from_custom_field()', '3.1.0', 'the_seo_framework()->get_raw_custom_field_title()' );
+		if ( 'inpost' === $type || ! $type ) {
+			$type = \get_post_type( $post_id );
+		}
 
-		$id = isset( $id ) ? $id : $tsf->get_the_real_ID();
+		if ( $tsf->is_post_type_page( $type ) ) {
+			$post_type = $type;
+		} else {
+			$taxonomy  = $tsf->get_current_taxonomy();
+			$post_type = $tsf->get_admin_post_type();
+		}
 
-		$title = $tsf->get_raw_custom_field_title( [
-			'id'       => $id,
-			'taxonomy' => $taxonomy,
+		$bar = $tsf->get_generated_seo_bar( [
+			'id'        => $post_id,
+			'post_type' => $post_type,
+			'taxonomy'  => $taxonomy,
 		] );
 
-		return $escape ? $tsf->escape_title( $title, false ) : (string) $title;
+		if ( $echo ) {
+			// phpcs:ignore, WordPress.Security.EscapeOutput -- the SEO Bar is escaped.
+			echo $bar;
+		} else {
+			return $bar;
+		}
 	}
 
 	/**
-	 * Fetch Tax labels
+	 * Returns the static scripts class object.
 	 *
-	 * @since 2.3.1
-	 * @since 3.1.0 Deprecated
+	 * The first letter of the method is capitalized, to indicate it's a class caller.
+	 *
+	 * @since 3.1.0
+	 * @since 4.0.0 Deprecated.
 	 * @deprecated
-	 * @staticvar object $labels
 	 *
-	 * @param string $tax_type the Taxonomy type.
-	 * @return object|null with all the labels as member variables
+	 * @return string The scripts class name.
 	 */
-	public function get_tax_labels( $tax_type ) {
-
-		\the_seo_framework()->_deprecated_function( 'the_seo_framework()->get_tax_labels()', '3.1.0' );
-
-		static $labels = null;
-
-		if ( isset( $labels ) )
-			return $labels;
-
-		$tax_object = \get_taxonomy( $tax_type );
-
-		if ( is_object( $tax_object ) )
-			return $labels = (object) $tax_object->labels;
-
-		//* Nothing found.
-		return null;
+	public function Scripts() { // phpcs:ignore, WordPress.NamingConventions.ValidFunctionName
+		\the_seo_framework()->_deprecated_function( 'the_seo_framework()->Scripts()', '4.0.0', '\The_SEO_Framework\Builders\Scripts::class' );
+		return \The_SEO_Framework\Builders\Scripts::class;
 	}
 
 	/**
-	 * Checks (current) Post Type for if this plugin may use it for customizable SEO.
+	 * Determines if we're doing ajax.
+	 *
+	 * @since 2.9.0
+	 * @since 4.0.0 1. Now uses wp_doing_ajax()
+	 *              2. Deprecated.
+	 * @deprecated
+	 *
+	 * @return bool True if AJAX
+	 */
+	public function doing_ajax() {
+		\the_seo_framework()->_deprecated_function( 'the_seo_framework()->doing_ajax()', '4.0.0', 'wp_doing_ajax' );
+		return \wp_doing_ajax();
+	}
+
+	/**
+	 * Whether to lowercase the noun or keep it UCfirst.
+	 * Depending if language is German.
 	 *
 	 * @since 2.6.0
-	 * @since 2.9.3 : Improved caching structure. i.e. it's faster now when no $post_type is supplied.
-	 * @staticvar array $cache
-	 * @since 3.1.0 1. Deprecated
-	 *              2. First parameter is implied.
-	 * @global \WP_Screen $current_screen
+	 * @since 4.0.0 Deprecated
+	 * @deprecated
+	 * @staticvar array $lowercase Contains nouns.
 	 *
-	 * @param bool $public Whether to only get Public Post types.
-	 * @param string $post_type Optional. The post type to check.
-	 * @return bool|string The allowed Post Type. False if it's not supported.
+	 * @param string $noun The noun to lowercase.
+	 * @return string The maybe lowercase noun.
 	 */
-	public function get_supported_post_type( $public = true, $post_type = '' ) {
-		$tsf = \the_seo_framework();
-		$tsf->_deprecated_function( 'the_seo_framework()->get_supported_post_type()', '3.1.0', 'the_seo_framework()->is_post_type_supported()' );
-		return $tsf->is_post_type_supported( $post_type ) ? $post_type : false;
+	public function maybe_lowercase_noun( $noun ) {
+
+		\the_seo_framework()->_deprecated_function( 'the_seo_framework()->maybe_lowercase_noun()', '4.0.0' );
+
+		static $lowercase = [];
+
+		if ( isset( $lowercase[ $noun ] ) )
+			return $lowercase[ $noun ];
+
+		return $lowercase[ $noun ] = \the_seo_framework()->check_wp_locale( 'de' ) ? $noun : strtolower( $noun );
 	}
 
 	/**
-	 * Returns the special URL of a paged post.
+	 * Detect WordPress language.
+	 * Considers en_UK, en_US, en, etc.
 	 *
-	 * Taken from _wp_link_page() in WordPress core, but instead of anchor markup, just return the URL.
+	 * @since 2.6.0
+	 * @since 3.1.0 Removed caching.
+	 * @since 4.0.0 Deprecated.
+	 * @deprecated
 	 *
-	 * @since 2.2.4
-	 * @since 3.0.0 Now uses WordPress permalinks.
-	 * @since 3.1.0 Deprecated.
-	 *
-	 * @param int $i The page number to generate the URL from.
-	 * @param int $post_id The post ID.
-	 * @param string $pos Which url to get, accepts next|prev.
-	 * @return string The unescaped paged URL.
+	 * @param string $locale Required, the locale.
+	 * @return bool Whether the input $locale is in the current WordPress locale.
 	 */
-	public function get_paged_post_url( $i, $post_id = 0, $pos = 'prev' ) {
+	public function check_wp_locale( $locale = '' ) {
+		\the_seo_framework()->_deprecated_function( 'the_seo_framework()->check_wp_locale()', '4.0.0' );
+		return false !== strpos( \get_locale(), $locale );
+	}
+
+	/**
+	 * Initializes term meta data filters and functions.
+	 *
+	 * @since 2.7.0
+	 * @since 3.0.0 No longer checks for admin query.
+	 * @since 4.0.0 Deprecated.
+	 * @deprecated
+	 */
+	public function initialize_term_meta() {
+		\the_seo_framework()->_deprecated_function( 'the_seo_framework()->initialize_term_meta()', '4.0.0', '\the_seo_framework()->init_term_meta()' );
+		\the_seo_framework()->init_term_meta();
+	}
+
+	/**
+	 * Ping search engines on post publish.
+	 *
+	 * @since 2.2.9
+	 * @since 2.8.0 Only worked when the blog was not public...
+	 * @since 3.1.0 Now allows one ping per language.
+	 *              @uses $this->add_cache_key_suffix()
+	 * @since 3.2.3 1. Now works as intended again.
+	 *              2. Removed Easter egg.
+	 * @since 4.0.0 Deprecated.
+	 * @deprecated
+	 *
+	 * @return void Early if blog is not public.
+	 */
+	public static function ping_searchengines() {
+		\the_seo_framework()->_deprecated_function( 'the_seo_framework()->ping_searchengines()', '4.0.0', '\The_SEO_Framework\Bridges\Ping::ping_search_engines()' );
+		\The_SEO_Framework\Bridges\Ping::ping_search_engines();
+	}
+
+	/**
+	 * Pings the sitemap location to Google.
+	 *
+	 * @since 2.2.9
+	 * @since 3.1.0 Updated ping URL. Old one still worked, too.
+	 * @since 4.0.0 Deprecated.
+	 * @deprecated
+	 * @link https://support.google.com/webmasters/answer/6065812?hl=en
+	 */
+	public static function ping_google() {
+		\the_seo_framework()->_deprecated_function( 'the_seo_framework()->ping_google()', '4.0.0', '\The_SEO_Framework\Bridges\Ping::ping_google()' );
+		\The_SEO_Framework\Bridges\Ping::ping_google();
+	}
+
+	/**
+	 * Pings the sitemap location to Bing.
+	 *
+	 * @since 2.2.9
+	 * @since 3.2.3 Updated ping URL. Old one still worked, too.
+	 * @since 4.0.0 Deprecated.
+	 * @deprecated
+	 * @link https://www.bing.com/webmaster/help/how-to-submit-sitemaps-82a15bd4
+	 */
+	public static function ping_bing() {
+		\the_seo_framework()->_deprecated_function( 'the_seo_framework()->ping_bing()', '4.0.0', '\The_SEO_Framework\Bridges\Ping::ping_bing()' );
+		\The_SEO_Framework\Bridges\Ping::ping_bing();
+	}
+
+	/**
+	 * Returns the stylesheet XSL location URL.
+	 *
+	 * @since 2.8.0
+	 * @since 3.0.0 1: No longer uses home URL from cache. But now uses `get_home_url()`.
+	 *              2: Now takes query parameters (if any) and restores them correctly.
+	 * @since 4.0.0 Deprecated.
+	 * @deprecated
+	 * @global \WP_Rewrite $wp_rewrite
+	 *
+	 * @return string URL location of the XSL stylesheet. Unescaped.
+	 */
+	public function get_sitemap_xsl_url() {
+		\the_seo_framework()->_deprecated_function( 'the_seo_framework()->get_sitemap_xsl_url()', '4.0.0', '\The_SEO_Framework\Bridges\Sitemap::get_instance()->get_expected_sitemap_endpoint_url(\'xsl-stylesheet\')' );
+		return \The_SEO_Framework\Bridges\Sitemap::get_instance()->get_expected_sitemap_endpoint_url( 'xsl-stylesheet' );
+	}
+
+	/**
+	 * Returns the sitemap XML location URL.
+	 *
+	 * @since 2.9.2
+	 * @since 3.0.0 1: No longer uses home URL from cache. But now uses `get_home_url()`.
+	 *              2: Now takes query parameters (if any) and restores them correctly.
+	 * @since 4.0.0 Deprecated.
+	 * @deprecated
+	 * @global \WP_Rewrite $wp_rewrite
+	 *
+	 * @return string URL location of the XML sitemap. Unescaped.
+	 */
+	public function get_sitemap_xml_url() {
+		\the_seo_framework()->_deprecated_function( 'the_seo_framework()->get_sitemap_xml_url()', '4.0.0', '\The_SEO_Framework\Bridges\Sitemap::get_instance()->get_expected_sitemap_endpoint_url()' );
+		return \The_SEO_Framework\Bridges\Sitemap::get_instance()->get_expected_sitemap_endpoint_url();
+	}
+
+	/**
+	 * Sitemap XSL stylesheet output.
+	 *
+	 * @since 2.8.0
+	 * @since 3.1.0 1. Now outputs 200-response code.
+	 *              2. Now outputs robots tag, preventing indexing.
+	 *              3. Now overrides other header tags.
+	 * @since 4.0.0 Deprecated.
+	 * @deprecated
+	 */
+	public function output_sitemap_xsl_stylesheet() {
+		\the_seo_framework()->_deprecated_function( 'the_seo_framework()->output_sitemap_xsl_stylesheet()', '4.0.0' );
+		return \The_SEO_Framework\Bridges\Sitemap::get_instance()->output_stylesheet();
+	}
+
+	/**
+	 * Determines if post type supports The SEO Framework.
+	 *
+	 * @since 2.3.9
+	 * @since 3.1.0 1. Removed caching.
+	 *              2. Now works in admin.
+	 * @since 4.0.0 Deprecated.
+	 * @deprecated
+	 *
+	 * @param string $post_type Optional. The post type to check.
+	 * @return bool true of post type is supported.
+	 */
+	public function post_type_supports_custom_seo( $post_type = '' ) {
+		\the_seo_framework()->_deprecated_function( 'the_seo_framework()->post_type_supports_custom_seo()', '4.0.0', 'the_seo_framework()->is_post_type_supported()' );
+		return \the_seo_framework()->is_post_type_supported( $post_type );
+	}
+
+	/**
+	 * Determines if the taxonomy supports The SEO Framework.
+	 *
+	 * Checks if at least one taxonomy objects post type supports The SEO Framework,
+	 * and wether the taxonomy is public and rewritable.
+	 *
+	 * @since 3.1.0
+	 * @since 4.0.0 1. Now goes over all post types for the taxonomy.
+	 *              2. Can now return true if at least one post type for the taxonomy is supported.
+	 *              3. Deprecated.
+	 * @deprecated
+	 *
+	 * @param string $taxonomy Optional. The taxonomy name.
+	 * @return bool True if at least one post type in taxonomy isn't disabled.
+	 */
+	public function taxonomy_supports_custom_seo( $taxonomy = '' ) {
+		\the_seo_framework()->_deprecated_function( 'the_seo_framework()->taxonomy_supports_custom_seo()', '4.0.0', 'the_seo_framework()->is_taxonomy_supported()' );
+		return \the_seo_framework()->is_taxonomy_supported( $taxonomy );
+	}
+
+	/**
+	 * Returns taxonomical canonical URL.
+	 * Automatically adds pagination if the ID matches the query.
+	 *
+	 * @since 3.0.0
+	 * @since 4.0.0 Deprecated
+	 * @deprecated
+	 *
+	 * @param int    $term_id The term ID.
+	 * @param string $taxonomy The taxonomy.
+	 * @return string The taxonomical canonical URL, if any.
+	 */
+	public function get_taxonomial_canonical_url( $term_id, $taxonomy ) {
+		\the_seo_framework()->_deprecated_function( 'the_seo_framework()->get_taxonomial_canonical_url()', '4.0.0', 'the_seo_framework()->get_taxonomical_canonical_url()' );
+		return \the_seo_framework()->get_taxonomical_canonical_url( $term_id, $taxonomy );
+	}
+
+	/**
+	 * Tries to fetch a term by $id from query.
+	 *
+	 * @since 2.6.0
+	 * @since 3.0.0 Can now get custom post type objects.
+	 * @since 4.0.0 Deprecated.
+	 * @deprecated
+	 *
+	 * @param int $id The possible taxonomy Term ID.
+	 * @return false|object The Term object.
+	 */
+	public function fetch_the_term( $id = '' ) {
+
 		$tsf = \the_seo_framework();
-		$tsf->_deprecated_function( 'the_seo_framework()->get_paged_post_url()', '3.1.0', 'the_seo_framework()->get_paged_url()' );
+
+		$tsf->_deprecated_function( 'the_seo_framework()->fetch_the_term()', '4.0.0' );
+
+		static $term = [];
+
+		if ( isset( $term[ $id ] ) )
+			return $term[ $id ];
+
+		//* Return null if no term can be detected.
+		if ( false === $tsf->is_archive() )
+			return false;
+
+		if ( \is_admin() ) {
+			$taxonomy = $tsf->get_current_taxonomy();
+			if ( $taxonomy ) {
+				$term_id     = $id ?: $tsf->get_the_real_admin_ID();
+				$term[ $id ] = \get_term( $term_id, $taxonomy );
+			}
+		} else {
+			if ( $tsf->is_category() || $tsf->is_tag() ) {
+				$term[ $id ] = \get_queried_object();
+			} elseif ( $tsf->is_tax() ) {
+				$term[ $id ] = \get_term_by( 'slug', \get_query_var( 'term' ), \get_query_var( 'taxonomy' ) );
+			} elseif ( \is_post_type_archive() ) {
+				$post_type = \get_query_var( 'post_type' );
+				$post_type = is_array( $post_type ) ? reset( $post_type ) : $post_type;
+
+				$term[ $id ] = \get_post_type_object( $post_type );
+			}
+		}
+
+		if ( isset( $term[ $id ] ) )
+			return $term[ $id ];
+
+		return $term[ $id ] = false;
+	}
+
+	/**
+	 * Return custom field post meta data.
+	 *
+	 * Return only the first value of custom field. Return false if field is
+	 * blank or not set.
+	 *
+	 * @since 2.0.0
+	 * @since 4.0.0 Deprecated
+	 * @deprecated
+	 * @staticvar array $field_cache
+	 *
+	 * @param string $field     Custom field key.
+	 * @param int    $post_id   The post ID.
+	 * @return mixed|boolean Return value or false on failure.
+	 */
+	public function get_custom_field( $field, $post_id = null ) {
+
+		$tsf = \the_seo_framework();
+
+		$tsf->_deprecated_function( 'the_seo_framework()->get_custom_field()', '4.0.0', 'the_seo_framework()->get_post_meta_item()' );
+
+		//* If field is falsesque, get_post_meta() will return an array.
+		if ( ! $field )
+			return false;
+
+		static $field_cache = [];
+
+		if ( isset( $field_cache[ $field ][ $post_id ] ) )
+			return $field_cache[ $field ][ $post_id ];
 
 		if ( empty( $post_id ) )
 			$post_id = $tsf->get_the_real_ID();
 
-		if ( 1 === $i ) :
-			$url = \get_permalink( $post_id );
-		else :
-			$post = \get_post( $post_id );
-			$url  = \get_permalink( $post_id );
+		$custom_field = \get_post_meta( $post_id, $field, true );
 
-			if ( $i >= 2 ) {
-				//* Fix adding pagination url.
+		//* If custom field is empty, empty cache..
+		if ( empty( $custom_field ) )
+			$field_cache[ $field ][ $post_id ] = '';
 
-				//* Parse query arg, put in var and remove from current URL.
-				$query_arg = parse_url( $url, PHP_URL_QUERY );
-				if ( isset( $query_arg ) )
-					$url = str_replace( '?' . $query_arg, '', $url );
+		//* Render custom field, slashes stripped, sanitized if string
+		$field_cache[ $field ][ $post_id ] = is_array( $custom_field ) ? \stripslashes_deep( $custom_field ) : stripslashes( $custom_field );
 
-				//* Continue if still bigger than or equal to 2.
-				if ( $i >= 2 ) {
-					// Calculate current page number.
-					$_current = 'next' === $pos ? (string) ( $i - 1 ) : (string) ( $i + 1 );
-
-					//* We're adding a page.
-					$_last_occurrence = strrpos( $url, '/' . $_current . '/' );
-
-					if ( false !== $_last_occurrence )
-						$url = substr_replace( $url, '/', $_last_occurrence, strlen( '/' . $_current . '/' ) );
-				}
-			}
-
-			if ( ! $tsf->pretty_permalinks || $tsf->is_draft( $post ) ) {
-
-				//* Put removed query arg back prior to adding pagination.
-				if ( isset( $query_arg ) )
-					$url = $url . '?' . $query_arg;
-
-				$url = \add_query_arg( 'page', $i, $url );
-			} elseif ( $tsf->is_static_frontpage( $post_id ) ) {
-				global $wp_rewrite;
-
-				$url = \trailingslashit( $url ) . \user_trailingslashit( $wp_rewrite->pagination_base . '/' . $i, 'single_paged' );
-
-				//* Add back query arg if removed.
-				if ( isset( $query_arg ) )
-					$url = $url . '?' . $query_arg;
-			} else {
-				$url = \trailingslashit( $url ) . \user_trailingslashit( $i, 'single_paged' );
-
-				//* Add back query arg if removed.
-				if ( isset( $query_arg ) )
-					$url = $url . '?' . $query_arg;
-			}
-		endif;
-
-		return $url;
+		return $field_cache[ $field ][ $post_id ];
 	}
 
 	/**
-	 * Checks if the string input is exactly '1'.
+	 * Returns image URL suitable for Schema items.
+	 *
+	 * These are images that are strictly assigned to the Post or Page, fallbacks are omitted.
+	 * Themes should compliment these. If not, then Open Graph should at least
+	 * compliment these.
+	 * If that's not even true, then I don't know what happens. But then you're
+	 * in a grey area... @TODO make images optional for Schema?
+	 *
+	 * @since 2.9.3
+	 * @since 3.2.2 No longer relies on the query.
+	 * @since 4.0.0 Deprecated.
+	 * @deprecated
+	 *
+	 * @param int|string $id       The page, post, product or term ID.
+	 * @param bool       $singular Whether the ID is singular or archival.
+	 * @return string|array $url The Schema.org safe image.
+	 */
+	public function get_schema_image( $id = 0, $singular = false ) {
+
+		$tsf = \the_seo_framework();
+
+		$tsf->_deprecated_function( 'the_seo_framework()->get_schema_image()', '4.0.0', 'the_seo_framework()->get_safe_schema_image()' );
+
+		if ( ! $singular ) return '';
+
+		return $tsf->get_safe_schema_image( $id ?: null, false );
+	}
+
+	/**
+	 * Returns social image URL.
+	 *
+	 * @since 2.9.0
+	 * @since 3.0.6 Added attachment page compatibility.
+	 * @since 3.2.2 Now skips the singular meta images on archives.
+	 * @since 4.0.0 Deprecated.
+	 * @deprecated
+	 *
+	 * @param array $args The image arguments.
+	 * @return string The social image.
+	 */
+	public function get_social_image( $args = [] ) {
+
+		$tsf = \the_seo_framework();
+
+		$tsf->_deprecated_function( 'the_seo_framework()->get_social_image()', '4.0.0', 'the_seo_framework()->get_image_from_cache()' );
+
+		if ( isset( $args['post_id'] ) && $args['post_id'] ) {
+			$image = current( $tsf->get_image_details( [ 'id' => $args['post_id'] ], true ) );
+		} else {
+			$image = current( $tsf->get_image_details( null, true ) );
+		}
+
+		return isset( $image['url'] ) ? $image['url'] : '';
+	}
+
+	/**
+	 * Returns unescaped HomePage settings image URL from post ID input.
+	 *
+	 * @since 2.9.0
+	 * @since 2.9.4 Now converts URL scheme.
+	 * @since 4.0.0 Deprecated.
+	 * @deprecated
+	 *
+	 * @param int $id The post ID.
+	 * @return string The unescaped HomePage social image URL.
+	 */
+	public function get_social_image_url_from_home_meta( $id = 0 ) {
+
+		$tsf = \the_seo_framework();
+
+		$tsf->_deprecated_function( 'the_seo_framework()->get_social_image_url_from_home_meta()', '4.0.0', "the_seo_framework()->get_option( 'homepage_social_image_url' )" );
+
+		if ( false === $tsf->is_front_page_by_id( $id ) )
+			return '';
+
+		$src = $tsf->get_option( 'homepage_social_image_url' );
+
+		if ( ! $src )
+			return '';
+
+		if ( $src && $tsf->matches_this_domain( $src ) )
+			$src = $tsf->set_preferred_url_scheme( $src );
+
+		return $src;
+	}
+
+	/**
+	 * Returns unescaped Post settings image URL from post ID input.
+	 *
+	 * @since 2.8.0
+	 * @since 2.9.0 1. The second parameter now works.
+	 *              2. Fallback image ID has been removed.
+	 * @since 2.9.4 Now converts URL scheme.
+	 * @since 4.0.0 Deprecated.
+	 * @deprecated
+	 *
+	 * @param int $id The post ID. Required.
+	 * @return string The unescaped social image URL.
+	 */
+	public function get_social_image_url_from_post_meta( $id ) {
+
+		$tsf = \the_seo_framework();
+
+		$tsf->_deprecated_function( 'the_seo_framework()->get_social_image_url_from_post_meta()', '4.0.0', "the_seo_framework()->get_post_meta_item( '_social_image_url' )" );
+
+		$src = $id ? $tsf->get_post_meta_item( '_social_image_url', $id ) : '';
+
+		if ( ! $src )
+			return '';
+
+		if ( $src && $tsf->matches_this_domain( $src ) )
+			$src = $tsf->set_preferred_url_scheme( $src );
+
+		return $src;
+	}
+
+	/**
+	 * Returns unescaped URL from options input.
+	 *
+	 * @since 2.8.2
+	 * @since 2.9.4 1: Now converts URL scheme.
+	 *              2: $set_og_dimensions now works.
+	 * @since 4.0.0 Deprecated
+	 * @deprecated
+	 *
+	 * @return string The unescaped social image fallback URL.
+	 */
+	public function get_social_image_url_from_seo_settings() {
+
+		$tsf = \the_seo_framework();
+
+		$tsf->_deprecated_function( 'the_seo_framework()->get_social_image_url_from_seo_settings()', '4.0.0', "the_seo_framework()->get_option( 'social_image_fb_url' )" );
+
+		$src = $tsf->get_option( 'social_image_fb_url' );
+
+		if ( $src && $tsf->matches_this_domain( $src ) )
+			$src = $tsf->set_preferred_url_scheme( $src );
+
+		return $src;
+	}
+
+	/**
+	 * Fetches image from post thumbnail.
+	 *
+	 * @since 2.9.0
+	 * @since 2.9.3 Now supports 4K.
+	 * @since 2.9.4 Now converts URL scheme.
+	 * @since 4.0.0 Deprecated.
+	 * @deprecated
+	 *
+	 * @param int $id The post ID. Required.
+	 * @return string The social image URL.
+	 */
+	public function get_social_image_url_from_post_thumbnail( $id ) {
+		\the_seo_framework()->_deprecated_function( 'the_seo_framework()->get_social_image_url_from_post_thumbnail()', '4.0.0' );
+		return \The_SEO_Framework\Builders\Images::get_featured_image_details(
+			[
+				'id'       => $id,
+				'taxonomy' => '',
+			]
+		)->current()['url'];
+	}
+
+	/**
+	 * Returns the social image URL from an attachment page.
+	 *
+	 * @since 3.0.6
+	 * @since 4.0.0 Deprecated.
+	 * @deprecated
+	 *
+	 * @param int $id The post ID. Required.
+	 * @return string The attachment URL.
+	 */
+	public function get_social_image_url_from_attachment( $id ) {
+		\the_seo_framework()->_deprecated_function( 'the_seo_framework()->get_social_image_url_from_attachment()', '4.0.0' );
+		return \The_SEO_Framework\Builders\Images::get_attachment_image_details(
+			[
+				'id'       => $id,
+				'taxonomy' => '',
+			]
+		)->current()['url'];
+	}
+
+	/**
+	 * Fetches images id's from WooCommerce gallery
+	 *
+	 * @since 2.5.0
+	 * @since 4.0.0 Deprecated.
+	 * @deprecated
+	 *
+	 * @return array The image URL's.
+	 */
+	public function get_image_from_woocommerce_gallery() {
+		\the_seo_framework()->_deprecated_function( 'the_seo_framework()->get_image_from_woocommerce_gallery()', '4.0.0' );
+
+		$ids = [];
+
+		if ( function_exists( '\\The_SEO_Framework\\_get_product_gallery_image_details' ) ) {
+			foreach ( \The_SEO_Framework\_get_product_gallery_image_details() as $details ) {
+				$ids[] = $details['id'];
+			}
+		}
+
+		return $ids;
+	}
+
+	/**
+	 * Returns header image URL.
+	 * Also sets image dimensions. Falls back to current post ID for index.
+	 *
+	 * @since 2.7.0
+	 * @since 3.0.0 Now sets preferred canonical URL scheme.
+	 * @since 4.0.0 Deprecated.
+	 * @deprecated
+	 *
+	 * @return string The header image URL, not escaped.
+	 */
+	public function get_header_image() {
+		\the_seo_framework()->_deprecated_function( 'the_seo_framework()->get_header_image()', '4.0.0' );
+		return \The_SEO_Framework\Builders\Images::get_theme_header_image_details()->current()['url'];
+	}
+
+	/**
+	 * Fetches site icon brought in WordPress 4.3
+	 *
+	 * @since 2.8.0
+	 * @since 3.0.0 : Now sets preferred canonical URL scheme.
+	 * @since 4.0.0 Deprecated.
+	 * @deprecated
+	 *
+	 * @param string|int $size The icon size, accepts 'full' and pixel values.
+	 * @return string URL site icon, not escaped.
+	 */
+	public function get_site_icon( $size = 'full' ) {
+
+		\the_seo_framework()->_deprecated_function( 'the_seo_framework()->get_site_icon()', '4.0.0' );
+
+		$size = is_string( $size ) ? $size : 'full';
+
+		return \The_SEO_Framework\Builders\Images::get_site_icon_image_details( null, $size )->current()['url'];
+	}
+
+	/**
+	 * Fetches site logo brought in WordPress 4.5
+	 *
+	 * @since 2.8.0
+	 * @since 3.0.0 Now sets preferred canonical URL scheme.
+	 * @since 3.1.2 Now returns empty when it's deemed too small, and OG images are set.
+	 * @since 4.0.0 Deprecated.
+	 * @deprecated
+	 *
+	 * @return string URL site logo, not escaped.
+	 */
+	public function get_site_logo() {
+		\the_seo_framework()->_deprecated_function( 'the_seo_framework()->get_site_logo()', '4.0.0' );
+		return \The_SEO_Framework\Builders\Images::get_site_logo_image_details()->current()['url'];
+	}
+
+	/**
+	 * Sanitizeses ID. Mainly removing spaces and coding characters.
+	 *
+	 * Unlike sanitize_key(), it doesn't alter the case nor applies filters.
+	 * It also maintains the '@' character.
+	 *
+	 * @see WordPress Core sanitize_key()
+	 * @since 3.1.0
+	 * @since 4.0.0 1. Now allows square brackets.
+	 *              2. Deprecated.
+	 * @deprecated
+	 *
+	 * @param string $id The unsanitized ID.
+	 * @return string The sanitized ID.
+	 */
+	public function sanitize_field_id( $id ) {
+		\the_seo_framework()->_deprecated_function( 'the_seo_framework()->sanitize_field_id()', '4.0.0', 'the_seo_framework()->s_field_id()' );
+		return preg_replace( '/[^a-zA-Z0-9\[\]_\-@]/', '', $id );
+	}
+
+	/**
+	 * Checks a theme's support for title-tag.
 	 *
 	 * @since 2.6.0
-	 * @since 3.1.0 Deprecated.
+	 * @since 3.1.0 Removed caching
+	 * @since 4.0.0 Deprecated.
+	 * @deprecated
 	 *
-	 * @param string $value The value to check.
-	 * @return bool true if value is '1'
+	 * @return bool
 	 */
-	public function is_checked( $value ) {
-		$tsf = \the_seo_framework();
-		$tsf->_deprecated_function( 'the_seo_framework()->is_checked()', '3.1.0' );
-		return (bool) $value;
+	public function current_theme_supports_title_tag() {
+		\the_seo_framework()->_deprecated_function( 'the_seo_framework()->sanitize_field_id()', '4.0.0' );
+		return \the_seo_framework()->detect_theme_support( 'title-tag' );
 	}
 
 	/**
-	 * Checks if the option is used and checked.
+	 * Determines if the current theme supports the custom logo addition.
 	 *
-	 * @since 2.6.0
-	 * @since 3.1.0 Deprecated.
+	 * @since 2.8.0
+	 * @since 3.1.0: 1. No longer checks for WP version 4.5+.
+	 *               2. No longer uses caching.
+	 * @since 4.0.0 Deprecated.
+	 * @deprecated
 	 *
-	 * @param string $option The option name.
-	 * @return bool Option is checked.
+	 * @return bool
 	 */
-	public function is_option_checked( $option ) {
-		$tsf = \the_seo_framework();
-		$tsf->_deprecated_function( 'the_seo_framework()->is_option_checked()', '3.1.0' );
-		return (bool) $tsf->get_option( $option );
-	}
-
-	/**
-	 * Returns the custom user-inputted description.
-	 *
-	 * @since 1.0.0
-	 * @since 2.9.0 Added two filters.
-	 * @since 3.0.6 Silently deprecated.
-	 * @since 3.1.0 Deprecated.
-	 * @deprecated Use `get_description()` instead.
-	 * @deprecated Use `get_generated_description()` instead.
-	 *
-	 * @param array|null $args   An array of 'id' and 'taxonomy' values.
-	 *                           Accepts int values for backward compatibility.
-	 * @param bool       $escape Whether to escape the description.
-	 * @return string The description
-	 */
-	public function generate_description( $description = '', $args = null, $escape ) {
-		$tsf = \the_seo_framework();
-		$tsf->_deprecated_function( 'the_seo_framework()->generate_description()', '3.1.0', 'the_seo_framework()->get_description()' );
-		return $tsf->get_description( $args, $escape ) ?: $description;
-	}
-
-	/**
-	 * Creates description from custom fields.
-	 *
-	 * @since 2.4.1
-	 * @since 3.0.6 Silently deprecated.
-	 * @since 3.1.0 Deprecated.
-	 * @deprecated Use `get_description_from_custom_field()` instead.
-	 *
-	 * @param array $args description args : {
-	 *    @param int $id the term or page id.
-	 *    @param string $taxonomy taxonomy name.
-	 *    @param bool $is_home We're generating for the home page.
-	 * }
-	 * @param bool  $escape Escape the output if true.
-	 * @return string|mixed The description.
-	 */
-	public function description_from_custom_field( $args = null, $escape = true ) {
-		$tsf = \the_seo_framework();
-		$tsf->_deprecated_function( 'the_seo_framework()->description_from_custom_field()', '3.1.0', 'the_seo_framework()->get_description_from_custom_field()' );
-		return $tsf->get_description_from_custom_field( $args, $escape );
-	}
-
-	/**
-	 * Generates description from content while parsing filters.
-	 *
-	 * @since 2.3.3
-	 * @since 3.0.0 No longer checks for protected posts.
-	 *              Check is moved to $this->generate_the_description().
-	 * @since 3.0.6 Silently deprecated.
-	 * @since 3.1.0 Now listens to the `auto_description` option.
-	 * @deprecated Use `get_generated_description()` instead.
-	 *
-	 * @param array $args description args : {
-	 *    @param int $id the term or page id.
-	 *    @param string $taxonomy taxonomy name.
-	 *    @param bool $is_home Whether we're generating for the home page.
-	 *    @param bool $get_custom_field Do not fetch custom title when false.
-	 *    @param bool $social Generate Social Description when true.
-	 * }
-	 * @param bool $escape Escape output when true.
-	 * @return string $output The description.
-	 */
-	public function generate_description_from_id( $args = null, $escape = true ) {
-		$tsf = \the_seo_framework();
-		$tsf->_deprecated_function( 'the_seo_framework()->generate_description_from_id()', '3.1.0', 'the_seo_framework()->get_generated_description()' );
-		return $tsf->get_generated_description( $args, $escape );
+	public function can_use_logo() {
+		\the_seo_framework()->_deprecated_function( 'the_seo_framework()->can_use_logo()', '4.0.0' );
+		return \the_seo_framework()->detect_theme_support( 'custom-logo' );
 	}
 }

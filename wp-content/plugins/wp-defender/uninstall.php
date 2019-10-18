@@ -64,4 +64,8 @@ if ( $settings->uninstall_settings == 'reset' ) {
 	delete_option( 'wp_defender' );
 	delete_option( 'wd_db_version' );
 	delete_site_option( 'wd_db_version' );
+	delete_site_transient( 'wp_defender_free_is_activated' );
+	delete_site_transient( 'wp_defender_is_activated' );
+	delete_transient( 'wp_defender_free_is_activated' );
+	delete_transient( 'wp_defender_is_activated' );
 }

@@ -363,7 +363,8 @@ class WPMUDEV_Dashboard_Ui {
 				$url_action = $this->page_urls->dashboard_url;
 				$row_text   =
 					__( 'There is a new version of %1$s available on WPMU DEV. <a href="%2$s" class="thickbox" title="%3$s">View version %4$s details</a> or <a href="%5$s" target="_blank" title="Setup your WPMU DEV account to update">login to update</a>.',
-					    'wpmudev' );
+					'wpmudev'
+					);
 			} else {
 				// User is logged in but apparently no license for the plugin.
 				$url_action = apply_filters(
@@ -1232,11 +1233,14 @@ class WPMUDEV_Dashboard_Ui {
 	 * @internal Menu callback
 	 */
 	public function render_dashboard() {
+
 		// These two variables are used in template login.php.
 		$connection_error                = false;
 		$key_valid                       = true;
 		$site_limit_exceeded             = false;
 		$non_hosting_site_limit_exceeded = false;
+		$site_limit_num = 0;
+		$available_hosting_sites = 0;
 
 		if ( ! current_user_can( 'manage_options' ) ) {
 			$this->load_sui_template( 'no_access' );
@@ -1263,8 +1267,13 @@ class WPMUDEV_Dashboard_Ui {
 			$connection_error = true;
 		} elseif ( ! empty( $_REQUEST['site_limit_exceeded'] ) ) {
 			$site_limit_exceeded = true;
-		} elseif ( ! empty( $_REQUEST['non_hosting_site_limit_exceeded'] ) ) {
-			$non_hosting_site_limit_exceeded = true;
+			if( ! empty( $_REQUEST['site_limit'] ) ){
+				$site_limit_num = absint( $_REQUEST['site_limit'] );
+			}
+			if( ! empty( $_REQUEST['available_hosting_sites'] ) ){
+				$available_hosting_sites = absint( $_REQUEST['available_hosting_sites'] );
+			}
+
 		}
 
 		$is_logged_in = WPMUDEV_Dashboard::$api->has_key();
@@ -1272,7 +1281,7 @@ class WPMUDEV_Dashboard_Ui {
 
 		if ( ! $is_logged_in ) {
 			// User did not log in to WPMUDEV -> Show login page!
-			$this->load_sui_template( 'login', compact( 'key_valid', 'connection_error', 'site_limit_exceeded', 'non_hosting_site_limit_exceeded', 'urls' ) );
+			$this->load_sui_template( 'login', compact( 'key_valid', 'connection_error', 'site_limit_exceeded', 'non_hosting_site_limit_exceeded', 'urls', 'site_limit_num', 'available_hosting_sites' ) );
 		} elseif ( ! WPMUDEV_Dashboard::$site->allowed_user() ) {
 			// User has no permission to view the page.
 			$this->load_sui_template( 'no_access' );

@@ -1,7 +1,7 @@
-MailChimp Sync
+Mailchimp Sync
 ==============
 
-A WordPress plugin that synchronizes your WordPress Users with a selected MailChimp list. 
+A WordPress plugin that synchronizes your WordPress Users with a selected Mailchimp list. 
 
 Installation
 ------------
@@ -12,10 +12,10 @@ If you want to run the latest development version, you have two options:
 * You can download the repository .zip file: [mailchimp-sync.zip](https://github.com/ibericode/mailchimp-user-sync/archive/master.zip)
 * You can clone the GitHub repository using Git
 
-This will download the latest development version of the MailChimp Sync plugin. While this version is usually stable,
+This will download the latest development version of the Mailchimp Sync plugin. While this version is usually stable,
 it is not recommended for use in a production environment.
 
-Note that this plugin depends on [MailChimp for WordPress](https://mc4wp.com/) (free or premium) to work, so you will need to install that plugin first.
+Note that this plugin depends on [Mailchimp for WordPress](https://mc4wp.com/) (free or premium) to work, so you will need to install that plugin first.
 
 
 Bugs
@@ -24,10 +24,10 @@ If you think you've found a bug, [please raise an issue here](https://github.com
 
 Support
 -------
-This is a developer's portal for the MailChimp Sync plugin and should not be used for support. Please visit the
-[MailChimp Sync support forum on WordPress.org](https://wordpress.org/support/plugin/mailchimp-sync).
+This is a developer's portal for the Mailchimp Sync plugin and should not be used for support. Please visit the
+[Mailchimp Sync support forum on WordPress.org](https://wordpress.org/support/plugin/mailchimp-sync).
 
-If you need priority support, please upgrade to [MailChimp for WordPress Pro](https://mc4wp.com/).
+If you need priority support, please upgrade to [Mailchimp for WordPress Pro](https://mc4wp.com/).
 
 Contributions
 -------------

@@ -142,14 +142,16 @@ class AdminMenuItems extends AdminCustomizationBase
 		
 			if ( !isset($menu_option['original_link']) ) continue;
 			if ( !isset($menu_option['submenu']) || !$menu_option['submenu'] ){
+				if ( !isset($np_submenu_original[$menu_option['original_link']]) ) continue;
 				$submenu[$menu_option['link']] = $np_submenu_original[$menu_option['original_link']];
-				return;
+				continue;
 			}
 			$new_submenu = [];
 			foreach ( $menu_option['submenu'] as $key => $menu ){
 				$index = ($key + 1) * 10;
 				
 				// Items saved that no longer exist
+				if ( !isset($np_submenu_original[$menu_option['link']]) ) continue;
 				if ( !$this->submenuExists($np_submenu_original[$menu_option['link']], $menu['link'], $menu_option) ) continue;
 
 				$np_submenu_original[$index][0] = $menu['label'];
@@ -298,10 +300,10 @@ class AdminMenuItems extends AdminCustomizationBase
 		
 		// Set each role's menu order
 		$user_roles = $this->user_repo->allRoles([]);
+
 		foreach( $user_roles as $role ){
 
-			$role_capabilities = $this->user_repo->getSingleRole($role['name']);
-			$role_capabilities = $role_capabilities['capabilities'];
+			$role_capabilities = $this->user_repo->getSingleRoleCapabilities($role['name']);
 
 			foreach ( $np_menu_original as $menu_item ){
 				
@@ -321,7 +323,7 @@ class AdminMenuItems extends AdminCustomizationBase
 					continue;
 				}
 
-				if ( !array_key_exists($menu_item[1], $role_capabilities) || !$role_capabilities[$menu_item[1]] ) continue;
+				if ( $menu_item[1] === '' || !array_key_exists($menu_item[1], $role_capabilities) || !$role_capabilities[$menu_item[1]] ) continue;
 				if ( isset($menu_item[5]) && $menu_item[5] == 'menu-links' ) continue;
 				if ( $role['name'] == 'subscriber' && $menu_item[2] == 'separator2') continue;
 				if ( isset($np_submenu_original[$menu_item[2]]) ) $menu_item['submenu'] = $np_submenu_original[$menu_item[2]];

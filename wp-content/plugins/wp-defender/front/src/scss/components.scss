@@ -1,0 +1,14 @@
+.wd-calendar {
+  .ranges {
+    width: 100% !important;
+
+    ul {
+      list-style-type: none;
+      display: flex;
+      justify-content: center;
+      width: 100% !important;
+    }
+  }
+
+  width: 530px !important;
+}

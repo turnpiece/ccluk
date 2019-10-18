@@ -1,17 +1,17 @@
 <?php
 /*
-Plugin Name: MailChimp User Sync
+Plugin Name: MC4WP: Mailchimp User Sync
 Plugin URI: https://mc4wp.com/#utm_source=wp-plugin&utm_medium=mailchimp-sync&utm_campaign=plugins-page
-Description: Synchronize your WordPress Users with a MailChimp list.
-Version: 1.7.7
+Description: Synchronize your WordPress Users with a Mailchimp list.
+Version: 1.8.1
 Author: ibericode
 Author URI: https://ibericode.com/
 Text Domain: mailchimp-sync
 Domain Path: /languages
 License: GPL v3
 
-MailChimp Sync
-Copyright (C) 2015-2018, Danny van Kooten, hi@dannyvankooten.com
+Mailchimp Sync
+Copyright (C) 2015-2019, Danny van Kooten, hi@dannyvankooten.com
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -39,7 +39,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 /**
- * Load the MailChimp Sync plugin
+ * Load the Mailchimp Sync plugin
  *
  * Only runs when PHP is at version 5.3 or higher
  *
@@ -49,7 +49,7 @@ function _load_mailchimp_sync() {
 
 	define( 'MAILCHIMP_SYNC_FILE', __FILE__ );
 	define( 'MAILCHIMP_SYNC_DIR', __DIR__ );
-	define('MAILCHIMP_SYNC_VERSION' ,'1.7.7');
+	define('MAILCHIMP_SYNC_VERSION', '1.8.1');
 
 	// Test whether dependencies were met
 	$ready = include dirname( __FILE__ )  .'/dependencies.php';
@@ -73,7 +73,7 @@ if( version_compare( PHP_VERSION, '5.3', '<' ) ) {
 }
 
 /**
- * Sets up the schedule to run MailChimp User Sync hourly
+ * Sets up the schedule to run Mailchimp User Sync hourly
  *
  * @hooked plugin activation
  */
@@ -86,10 +86,11 @@ function mc4wp_sync_setup_schedule() {
 }
 
 /**
- * Clears the schedule to run MailChimp User Sync every hour
+ * Clears the schedule to run Mailchimp User Sync every hour
  *
  * @hooked plugin deactivation
  */
 function mc4wp_sync_clear_schedule() {
 	wp_clear_scheduled_hook( 'mailchimp_user_sync_run' );
 }
+

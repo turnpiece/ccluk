@@ -378,8 +378,8 @@ class Snapshot_Controller_Full_Hub extends Snapshot_Controller_Full {
 		if (!empty($status) && !is_wp_error($status)) {
 			Snapshot_Helper_Log::info("Reschedule params are all valid", "Remote");
 
-			// If the crons are temporarily enabled by Automate, make them permanently enabled. 
-			if ( $this->_model->get_config( 'temporarily_enable_cron', false ) ){ 
+			// If the crons are temporarily enabled by Automate, make them permanently enabled.
+			if ( $this->_model->get_config( 'temporarily_enable_cron', false ) ){
 				$this->_model->set_config('temporarily_enable_cron', false);
 			}
 		} else {

@@ -17,6 +17,18 @@ class SettingsRepository
 	}
 
 	/**
+	* Is the Classic (non-indented) display option enabled
+	* @return boolean
+	*/
+	public function nonIndentEnabled()
+	{
+		$option = get_option('nestedpages_ui', false);
+		if ( $option && isset($option['non_indent']) && $option['non_indent'] == 'true' ) return true;
+		return false;
+	}
+	
+
+	/**
 	* Is the Menu Sync Option Visible
 	*/
 	public function hideMenuSync()
@@ -197,5 +209,17 @@ class SettingsRepository
 		foreach($options as $option){
 			delete_option($option);
 		}
+	}
+
+	/**
+	* Get the Menu Name
+	* @return term obj
+	*/
+	public function getMenuTerm()
+	{
+		$menu_id = get_option('nestedpages_menu');
+		if ( !$menu_id ) return false;
+		$term = ( is_numeric($menu_id) ) ? get_term_by('id', $menu_id, 'nav_menu') : false;
+		return $term;
 	}
 }

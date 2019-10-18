@@ -220,10 +220,15 @@ class Listing
 	/**
 	* Get the Post States
 	*/
-	private function postStates()
+	private function postStates($assigned_pt)
 	{
 		$out = '';
-		$post_states = apply_filters('display_post_states', [], $this->post);
+		$post_states = [];
+		if ( !$assigned_pt ) {
+			if ( $this->post->id == get_option('page_on_front') ) $post_states['page_on_front'] = __('Front Page', 'wp-nested-pages');
+			if ( $this->post->id == get_option('page_for_posts') ) $post_states['page_for_posts'] = __('Posts Page', 'wp-nested-pages');
+		}
+		$post_states = apply_filters('display_post_states', $post_states, $this->post);
 		if ( empty($post_states) ) return $out;
 		$state_count = count($post_states);
 		$i = 0;
@@ -302,6 +307,7 @@ class Listing
 		if ( $this->integrations->plugins->wpml->installed && $this->integrations->plugins->wpml->getCurrentLanguage() == 'all' ) $list_classes .= ' no-sort';
 		if ( $this->integrations->plugins->yoast->installed ) $list_classes .= ' has-yoast';
 		if ( $this->listing_repo->isSearch() ) $list_classes .= ' np-search-results';
+		if ( $this->settings->nonIndentEnabled() ) $list_classes .= ' non-indent';
 
 		// Primary List
 		if ( $count == 0 ) {

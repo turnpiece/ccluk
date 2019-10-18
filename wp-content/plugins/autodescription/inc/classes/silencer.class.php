@@ -1,7 +1,9 @@
 <?php
 /**
- * @package The_SEO_Framework
+ * @package The_SEO_Framework\Classes\Silencer
+ * @subpackage The_SEO_Framework\Classes\Facade
  */
+
 namespace The_SEO_Framework;
 
 defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
@@ -44,7 +46,7 @@ final class Silencer {
 	}
 
 	public function __set( $name, $value ) {
-		return;
+		return $value;
 	}
 
 	public function __isset( $name ) {

@@ -72,7 +72,7 @@ function give_stripe_connect_deauthorize() {
 		$class   = 'notice notice-warning give-stripe-disconnect-message';
 		$message = sprintf(
 			/* translators: %s Error Message */
-			__( '<strong>Error:</strong> Give could not disconnect from the Stripe API. Reason: %s', 'give' ),
+			__( '<strong>Error:</strong> GiveWP could not disconnect from the Stripe API. Reason: %s', 'give' ),
 			esc_html( $get_vars['error_message'] )
 		);
 
@@ -293,7 +293,7 @@ function give_stripe_show_connect_banner() {
 
 	$message = sprintf(
 		/* translators: 1. Main Text, 2. Connect Link */
-		__( '<strong>Stripe Connect:</strong> %1$s %2$s', 'give' ),
+        __( '<p><strong>Stripe Connect:</strong> %1$s </p>%2$s', 'give' ),
 		$main_text,
 		$connect_link
 	);

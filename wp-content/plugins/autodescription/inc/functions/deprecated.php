@@ -1,7 +1,7 @@
 <?php
 /**
- * @package The_SEO_Framework
- * @subpackage Deprecated
+ * @package The_SEO_Framework\API
+ * @subpackage The_SEO_Framework\Debug\Deprecated
  */
 
 /**
@@ -25,6 +25,7 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
 
 /**
  * This file contains most functions that have been deprecated.
+ * We don't want to rush removing these, as missing functions cause fatal errors.
  *
  * @ignore
  *
@@ -75,7 +76,7 @@ function the_seo_framework_version() {
  * @since 3.1.0 Deprecated
  * @deprecated
  *
- * @param string version The two dot version: x.v
+ * @param string $version The two dot version: x.v
  * @return bool False plugin inactive or version compare yields negative results.
  */
 function the_seo_framework_dot_version( $version = '2.4' ) {

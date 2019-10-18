@@ -164,7 +164,10 @@ abstract class Snapshot_Model_Fileset {
 			$exclusion[] = trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/mu-plugin.php';
 			$exclusion[] = trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/slt-force-strong-passwords.php';
 			$exclusion[] = trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/stop-long-comments.php';
+			$exclusion[] = trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/wpengine-security-auditor.php';
 		}
+
+		$exclusion[] = trailingslashit( ABSPATH ) . '.well-known/acme-challenge';
 
 		if ( $format ) {
 			// Check for unreadable files

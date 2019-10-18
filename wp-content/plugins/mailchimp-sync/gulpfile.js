@@ -28,9 +28,7 @@ gulp.task('browserify', function () {
 	return browserify({ entries: [ './assets/browserify/admin.js'] })
 		.on('error', console.log)
 		.transform("babelify", {
-			presets: [
-				["@babel/preset-env", { "targets": "> 0.25%, not dead", "forceAllTransforms": true }]
-			],
+			presets: ["@babel/preset-env"]
 		})
 		.bundle()
 		.pipe(source('admin.js'))

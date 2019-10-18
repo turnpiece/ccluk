@@ -63,7 +63,7 @@
 
 				<div class="wps-hosting-backup-list" style="display: none;">
 
-					<input type="hidden" name="snapshot-ajax-nonce" id="snapshot-ajax-nonce" value="<?php echo esc_attr( wp_create_nonce( 'snapshot-ajax-nonce' ) ); ?>" />	
+					<input type="hidden" name="snapshot-ajax-nonce" id="snapshot-ajax-nonce" value="<?php echo esc_attr( wp_create_nonce( 'snapshot-ajax-nonce' ) ); ?>" />
 
 					<div class="my-backups-content sui-component-snapshot">
 

@@ -45,7 +45,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 					</div>
 
 					<form action="" method="post" id="ai1wm-export-form" class="ai1wm-clear">
-						<div class="ai1wm-backups-create">
+						<div id="ai1wm-backups-create">
+							<p class="ai1wm-backups-empty-spinner-holder ai1wm-hide">
+								<span class="spinner"></span>
+								<?php _e( 'Refreshing backup list...', AI1WM_PLUGIN_NAME ); ?>
+							</p>
 							<p class="ai1wm-backups-empty <?php echo empty( $backups ) ? null : 'ai1wm-hide'; ?>">
 								<?php _e( 'There are no backups available at this time, why not create a new one?', AI1WM_PLUGIN_NAME ); ?>
 							</p>

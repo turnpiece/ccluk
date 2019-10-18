@@ -16,7 +16,7 @@
 
 			$is_client = $model->is_dashboard_active() && $model->has_dashboard_key();
 			$has_snapshot_key = $is_client && Snapshot_Model_Full_Remote_Api::get()->get_token() !== false && ! empty( $apiKey );
-			
+
 			if ( version_compare(PHP_VERSION, '5.5.0', '<') ) {
 				$aws_sdk_compatible = false;
 			} else {

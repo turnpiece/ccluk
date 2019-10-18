@@ -6,7 +6,7 @@ button#snapshot-destination-test-connection {
     display: block;
     float: left;
     margin-left: 20px;
-    padding: 5px 10px;    
+    padding: 5px 10px;
     background-color: #FFFFFF;
     border-color: #DFDFDF;
 	width: 60%
@@ -16,3 +16,6 @@ button#snapshot-destination-test-connection {
 	background: url("../img/snapshot-test-connection-loader.gif") no-repeat scroll 0 0 transparent;
 	height: 25px;
 }
+
+
+/* 87274-1571425218-au */

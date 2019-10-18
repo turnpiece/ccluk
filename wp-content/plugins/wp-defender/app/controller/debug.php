@@ -7,19 +7,20 @@ namespace WP_Defender\Controller;
 
 use Hammer\Helper\HTTP_Helper;
 use WP_Defender\Controller;
+use WP_Defender\Module\Scan\Component\Scan_Api;
 
 class Debug extends Controller {
 	protected $slug = 'wdf-debug';
 
 	public function __construct() {
-		if ( HTTP_Helper::retrieve_get( 'page' ) != 'wdf-debug' ) {
+		if ( HTTP_Helper::retrieveGet( 'page' ) != 'wdf-debug' ) {
 			return;
 		}
 
-		if ( $this->is_network_activate( wp_defender()->plugin_slug ) ) {
-			$this->add_action( 'network_admin_menu', 'adminMenu' );
+		if ( $this->isNetworkActivate( wp_defender()->plugin_slug ) ) {
+			$this->addAction( 'network_admin_menu', 'adminMenu' );
 		} else {
-			$this->add_action( 'admin_menu', 'adminMenu' );
+			$this->addAction( 'admin_menu', 'adminMenu' );
 		}
 	}
 

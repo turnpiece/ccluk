@@ -5,6 +5,21 @@ Change Log:
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
 
+
+3.2.1.3
+----------------------------------------------------------------------
+- [Fix] Resolve issues reported by RIPS
+- [Fix] After a backup restore the View Backup button is opening the home page
+- [Fix] The remote snapshots purging issues when multiple snapshots are at the same remote directory
+- [Fix] The managed backup restore issues with the WPEngine
+- [Improvement] Disable the backup restore on the WPMU DEV staging sites
+- [Fix] The managed backup restore issues with the Modern Events Calendar Lite table
+- [Fix] The snapshots are not getting cleared out in the S3 bucket when located at an S3 subdirectory
+- [Fix] An uneditable file in the WPEngine breaks the restore
+- [Fix] Deleting a local managed backup deletes the remote copy as well
+- [Fix] The restoration issues with the .acme-challenge folder
+- [Fix] The managed backups could not be activated in the WP v4.6.15 (Multisite)
+
 3.2.1.2
 ----------------------------------------------------------------------
 - Improvement: Enhance the managed backup's restore UX
@@ -611,3 +626,6 @@ http://premium.wpmudev.org/forums/topic/need-to-turn-off-zlib-compression-for-it
 1.0.0 - 2012-02-09
 ----------------------------------------------------------------------
 - Initial stable release
+
+
+87274-1571425218-au

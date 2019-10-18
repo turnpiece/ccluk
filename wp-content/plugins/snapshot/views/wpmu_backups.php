@@ -105,10 +105,10 @@ if ( ! $show_managed_backup_notice || ( isset( $plugin->config_data['managed_bac
 			<div class="wps-managed-backups-pages">
 
 				<section class="wpmud-box wps-managed-backups-list wps-widget-available_backups
-                <?php 
+                <?php
                 if ( 'backups' !== $backup_menu ) {
 					echo ' hidden';
-				} 
+				}
                 ?>
                 ">
 
@@ -256,10 +256,10 @@ if ( ! $show_managed_backup_notice || ( isset( $plugin->config_data['managed_bac
 				</section><?php // .wps-widget-available_backups ?>
 
 				<section class="wpmud-box wps-managed-backups-configs wps-widget-backups_settings
-                <?php 
+                <?php
                 if ( 'settings' !== $backup_menu ) {
 					echo ' hidden';
-				} 
+				}
                 ?>
                 ">
 
@@ -280,7 +280,7 @@ if ( ! $show_managed_backup_notice || ( isset( $plugin->config_data['managed_bac
 							<input type="hidden" id="snapshot-action" name="snapshot-action" value="update-managed-backup-setting"/>
 							<input type="hidden" name="snapshot-ajax-nonce" id="snapshot-ajax-nonce" value="<?php echo esc_attr( wp_create_nonce( 'snapshot-ajax-nonce' ) ); ?>" />
 							<?php wp_nonce_field( 'snapshot-full_backups', 'snapshot-full_backups-noonce-field' ); ?>
-						
+
 							<div id="wps-hosting-backups-settings-storage" class="row-inner">
 
 								<div class="col-left">

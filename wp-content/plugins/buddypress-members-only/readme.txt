@@ -1,11 +1,11 @@
 ﻿=== BuddyPress Members Only ===
 Contributors: zhuyi
-Author URI: http://tomas.zhu.bz/
-Donate link: https://membersonly.top/features/
+Author URI: https://membersonly.top/features/
+Donate link: https://paypal.me/sunpayment/
 Tags:buddypress,wordpress,restricts,membership,private,protected,member,bbpress,permissions,login access control,restrict access,components,redirect,profile,restricts RSS Feed
 Requires at least: 2.0
-Tested up to: 5.2.2
-Stable tag: 2.1.1
+Tested up to: 5.2.3
+Stable tag: 2.2.1
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -105,6 +105,18 @@ That's all, when non member view your buddypress site they will be redirect to l
 6. Announcement on Buddypress Members Only register page
 
 == Changelog ==
+= Version 2.2.1 =
+Support Page Level Protect
+Added "Enable Page Level Protect Settings" option in "Buddypress Members Only Setting" option 
+If you enabled this option, in page / post editor, you will find "Members only for this page?" meta box at the right top of the wordpress standard editor.
+If you checked "Allow everyone to access the page" checkbox in meta box, the post will be opened to all guest users
+By this way, you do not need enter page URLs to Opened Pages Panel always.
+
+
+= Version 2.1.5 =
+Added new option "Temporarily Turn Off All Featrures Of BuddyPress Members Only", If you enabled this option, all features of buddypress members only will be disabled, you site will open to all users
+Updated description of buddypress members only settings panel
+
 = Version 2.1.1 =
 In setting panel, options to only protect your buddypress pages, so other section on your wordpress site will be open to the guest users.
 

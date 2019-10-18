@@ -8,11 +8,32 @@ namespace WP_Defender\Module\Scan\Behavior;
 use Hammer\Base\Behavior;
 use Hammer\Helper\File_Helper;
 use Hammer\Helper\Log_Helper;
+use WP_Defender\Behavior\Utils;
 use WP_Defender\Component\Error_Code;
 use WP_Defender\Module\Scan\Component\Scan_Api;
 use WP_Defender\Module\Scan\Model\Result_Item;
 
 class Core_Result extends Behavior {
+
+	/**
+	 * Query all the info to show up on frontend
+	 * @return array
+	 */
+	public function getInfo() {
+		$full_path = $this->getRaw()['file'];
+
+		return [
+			'id'         => $this->getOwner()->id,
+			'type'       => 'core',
+			'file_name'  => pathinfo( $full_path, PATHINFO_FILENAME ),
+			'full_path'  => $full_path,
+			'date_added' => Utils::instance()->formatDateTime( filemtime( $full_path ) ),
+			'size'       => Utils::instance()->makeReadable( filesize( $full_path ) ),
+			'scenario'   => $this->getRaw()['type'],
+			'short_desc' => $this->getIssueDetail()
+		];
+	}
+
 	/**
 	 * @return string
 	 */
@@ -42,13 +63,6 @@ class Core_Result extends Behavior {
 	}
 
 	/**
-	 * @return bool
-	 */
-	public function check() {
-
-	}
-
-	/**
 	 * @return string
 	 */
 	public function getIssueDetail() {
@@ -63,7 +77,7 @@ class Core_Result extends Behavior {
 		if ( $raw['type'] == 'unknown' ) {
 			return esc_html__( "Unknown file in WordPress core", wp_defender()->domain );
 		} elseif ( $raw['type'] == 'dir' ) {
-			return esc_html__( "This directory doesn't belong to WordPress core", wp_defender()->domain );
+			return esc_html__( "This directory does not belong to WordPress core", wp_defender()->domain );
 		} elseif ( $raw['type'] == 'modified' ) {
 			return esc_html__( "This WordPress core file appears modified", wp_defender()->domain );
 		}
@@ -119,352 +133,31 @@ class Core_Result extends Behavior {
 	}
 
 	/**
-	 * Render current issue content
-	 * @return false|string
-	 */
-	public function renderIssueContent() {
-		$raw    = $this->getRaw();
-		$string = $raw['type'] == 'unknown' ? __( "Defender found this stray file in your WordPress site directory. The current version of WordPress doesn't require it and as far as we can tell it's harmless (maybe even from an older WordPress install), so you can delete it or ignore it. Before deleting any files, be sure to back up your website." ) :
-			( $raw['type'] == 'modified' ? __( "Compare your file with the original file in the WordPress repository. Pieces highlighted in red will be removed when you patch the file, and pieces highlighted in green will be added.", wp_defender()->domain ) :
-				__( "We found this folder in your WordPress file list. Your current version of WordPress doesn’t use this folder so it might belong to another application. If you don’t recognize it, you can delete this folder (don’t forget to back up your website first!) or get in touch with the WPMU DEV support team for more information", wp_defender()->domain ) );
-		ob_start();
-		?>
-        <div class="sui-box issue-content">
-            <div class="sui-box-body">
-                <strong><?php _e( "Issue Details", wp_defender()->domain ) ?></strong>
-                <div>
-					<?php echo $string ?>
-                </div>
-				<?php echo $this->getSrcCode() ?>
-                <table class="sui-table">
-                    <tbody>
-                    <tr>
-                        <td>
-                            <i class="sui-icon-folder-open"
-                               aria-hidden="true"></i><strong><?php _e( "Location", wp_defender()->domain ) ?></strong>
-                        </td>
-                        <td>
-							<?php echo $this->getSubtitle() ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <i class="sui-icon-download-cloud" aria-hidden="true"></i>
-                            <strong>
-								<?php _e( "Size", wp_defender()->domain ) ?>
-                            </strong>
-                        </td>
-                        <td>
-							<?php
-							$bytes = filesize( $this->getSubtitle() );
-							if ( $bytes ) {
-								echo $this->getOwner()->makeReadable( $bytes );
-							} else {
-								echo 'N/A';
-							}
-							?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <i class="sui-icon-calendar" aria-hidden="true"></i>
-                            <strong>
-								<?php _e( "Date added", wp_defender()->domain ) ?>
-                            </strong>
-                        </td>
-                        <td>
-							<?php
-							$filemtime = filemtime( $this->getSubtitle() );
-							if ( $filemtime ) {
-								echo $this->getOwner()->formatDateTime( $filemtime );
-							} else {
-								echo 'N/A';
-							}
-							?>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="sui-box-footer">
-                <div class="sui-actions-left">
-                    <form method="post" class="float-l ignore-item scan-frm">
-                        <input type="hidden" name="action" value="ignoreItem">
-						<?php wp_nonce_field( 'ignoreItem' ) ?>
-                        <input type="hidden" name="id" value="<?php echo $this->getOwner()->id ?>"/>
-                        <button type="submit" class="sui-button sui-button-ghost">
-                            <i class="sui-icon-eye-hide" aria-hidden="true"></i>
-							<?php _e( "Ignore", wp_defender()->domain ) ?></button>
-                    </form>
-                </div>
-                <div class="sui-actions-right">
-					<?php if ( $raw['type'] == 'unknown' || $raw['type'] == 'dir' ): ?>
-                        <form method="post" class="scan-frm delete-item float-r">
-                            <input type="hidden" name="action" value="deleteItem"/>
-                            <input type="hidden" name="id" value="<?php echo $this->getOwner()->id ?>"/>
-							<?php wp_nonce_field( 'deleteItem' ) ?>
-                            <button type="button" class="sui-button sui-button-red delete-mitem">
-                                <i class="sui-icon-trash" aria-hidden="true"></i>
-								<?php _e( "Delete", wp_defender()->domain ) ?></button>
-                            <div class="confirm-box wd-hide">
-                                <span><?php _e( "This will permanently remove the selected file/folder. Are you sure you want to continue?", wp_defender()->domain ) ?></span>
-                                <div>
-                                    <button type="submit" class="sui-button sui-button-red">
-										<?php _e( "Yes", wp_defender()->domain ) ?>
-                                    </button>
-                                    <button type="button" class="sui-button sui-button-ghost">
-										<?php _e( "No", wp_defender()->domain ) ?>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-					<?php elseif ( $raw['type'] == 'modified' ): ?>
-                        <form method="post" class="scan-frm float-r resolve-item">
-                            <input type="hidden" name="id" value="<?php echo $this->getOwner()->id ?>"/>
-                            <input type="hidden" name="action" value="resolveItem"/>
-							<?php wp_nonce_field( 'resolveItem' ) ?>
-                            <button type="submit" class="sui-button sui-button-blue">
-								<?php _e( "Restore to Original", wp_defender()->domain ) ?>
-                            </button>
-                        </form>
-					<?php endif; ?>
-                </div>
-            </div>
-        </div>
-		<?php
-		return ob_get_clean();
-	}
-
-	/**
-	 * Each item should have an dialog to show about itself description
-	 * return string
-	 * @deprecated 2.1
-	 */
-	public function renderDialog() {
-		ob_start();
-		$raw = $this->getRaw();
-		?>
-        <dialog title="<?php esc_attr_e( "Issue Details", wp_defender()->domain ) ?>"
-                id="dia_<?php echo $this->getOwner()->id ?>">
-            <div class="wpmud">
-                <div class="wp-defender">
-                    <div class="scan-dialog">
-                        <div class="well mline">
-                            <ul class="dev-list item-detail">
-                                <li>
-                                    <div>
-                                    <span class="list-label">
-                                        <strong><?php _e( "Location", wp_defender()->domain ) ?></strong>
-                                    </span>
-                                        <span class="list-detail">
-                                        <?php echo $this->getSubtitle(); ?>
-                                    </span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>
-                                    <span class="list-label">
-                                        <strong><?php _e( "Size", wp_defender()->domain ) ?></strong>
-                                    </span>
-                                        <span class="list-detail">
-                                        <?php
-                                        $bytes = filesize( $this->getSubtitle() );
-                                        if ( $bytes ) {
-	                                        echo $this->getOwner()->makeReadable( $bytes );
-                                        } else {
-	                                        echo 'N/A';
-                                        }
-                                        ?>
-                                    </span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>
-                                    <span class="list-label">
-                                        <strong><?php _e( "Date Added", wp_defender()->domain ) ?></strong>
-                                    </span>
-                                        <span class="list-detail">
-                                        <?php
-                                        $filemtime = filemtime( $this->getSubtitle() );
-                                        if ( $filemtime ) {
-	                                        echo $this->getOwner()->formatDateTime( $filemtime );
-                                        } else {
-	                                        echo 'N/A';
-                                        }
-                                        ?>
-                                    </span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-						<?php if ( $raw['type'] == 'unknown' ) {
-							$this->_dialogContentForAdded();
-						} elseif ( $raw['type'] == 'modified' ) {
-							$this->_dialogContentForModified();
-						} elseif ( $raw['type'] == 'dir' ) {
-							$this->_dialogContentForDir();
-						} ?>
-
-                        <div class="well well-small">
-                            <form method="post" class="float-l ignore-item scan-frm">
-                                <input type="hidden" name="action" value="ignoreItem">
-								<?php wp_nonce_field( 'ignoreItem' ) ?>
-                                <input type="hidden" name="id" value="<?php echo $this->getOwner()->id ?>"/>
-                                <button type="submit" class="button button-secondary button-small">
-									<?php _e( "Ignore", wp_defender()->domain ) ?></button>
-                            </form>
-							<?php if ( $raw['type'] == 'unknown' || $raw['type'] == 'dir' ): ?>
-                                <form method="post" class="scan-frm delete-item float-r">
-                                    <input type="hidden" name="action" value="deleteItem"/>
-                                    <input type="hidden" name="id" value="<?php echo $this->getOwner()->id ?>"/>
-									<?php wp_nonce_field( 'deleteItem' ) ?>
-                                    <button type="button" class="button button-small delete-mitem button-grey">
-										<?php _e( "Delete", wp_defender()->domain ) ?></button>
-                                    <div class="confirm-box wd-hide">
-                                        <span><?php _e( "This will permanently remove the selected file/folder. Are you sure you want to continue?", wp_defender()->domain ) ?></span>
-                                        <div>
-                                            <button type="submit" class="button button-small button-grey">
-												<?php _e( "Yes", wp_defender()->domain ) ?>
-                                            </button>
-                                            <button type="button" class="button button-small button-secondary">
-												<?php _e( "No", wp_defender()->domain ) ?>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-							<?php elseif ( $raw['type'] == 'modified' ): ?>
-                                <form method="post" class="scan-frm float-r resolve-item">
-                                    <input type="hidden" name="id" value="<?php echo $this->getOwner()->id ?>"/>
-                                    <input type="hidden" name="action" value="resolveItem"/>
-									<?php wp_nonce_field( 'resolveItem' ) ?>
-                                    <button type="submit" class="button button-small">
-										<?php _e( "Restore to Original", wp_defender()->domain ) ?>
-                                    </button>
-                                </form>
-							<?php endif; ?>
-                            <div class="clear"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </dialog>
-		<?php
-		return ob_get_clean();
-	}
-
-	/**
 	 * @return string
 	 */
 	public function getSrcCode() {
 		if ( is_file( $this->getSubtitle() ) || is_dir( $this->getSubtitle() ) ) {
 			$raw = $this->getRaw();
 			if ( $raw['type'] == 'unknown' ) {
-				$ext     = pathinfo( $this->getSubtitle(), PATHINFO_EXTENSION );
-				$ext     = strtolower( $ext );
-				$allowed = wp_get_ext_types();
-				$allowed = array_merge( $allowed['code'], array(
-					'sql',
-					'text',
-					'log'
-				) );
-				if ( in_array( $ext, $allowed ) ) {
-					$content = file_get_contents( $this->getSubtitle() );
-					if ( function_exists( 'mb_convert_encoding' ) ) {
-						$content = mb_convert_encoding( $content, 'UTF-8', 'ASCII' );
-					}
-
-					$entities = htmlentities( $content, null, 'UTF-8', false );
-
-					return '<div><strong>' . __( "Current code", wp_defender()->domain ) . '</strong><pre><code class="html">' . $entities . '</code></pre></div>';
+				$content = file_get_contents( $this->getSubtitle() );
+				if ( function_exists( 'mb_convert_encoding' ) ) {
+					$content = mb_convert_encoding( $content, 'UTF-8', 'ASCII' );
 				}
+				$entities = htmlentities( $content, null, 'UTF-8', false );
+
+				return $entities;
 			} elseif ( $raw['type'] == 'modified' ) {
 				$original = $this->getOriginalSource();
 				$current  = file_get_contents( $this->getSubtitle() );
 				$diff     = $this->textDiff( $original, $current );
 
-				return '<div><strong>' . __( "Current code", wp_defender()->domain ) . '</strong><pre><code class="html">' . $diff . '</code></pre></div>';
+				return $diff;
 			} elseif ( $raw['type'] == 'dir' ) {
 				$files = File_Helper::findFiles( $raw['file'], true, false );
 
-				return '<div><strong>' . __( "Current code", wp_defender()->domain ) . '</strong><pre><code class="html">' . implode( PHP_EOL, $files ) . '</code></pre></div>';
+				return implode( PHP_EOL, $files );
 			}
 		}
-	}
-
-	/**
-	 * Show more detail about unknown file
-	 */
-	private function _dialogContentForAdded() {
-		?>
-        <p class="line">
-			<?php _e( "A stray file has been found in your site directory, which your version of WordPress doesn't need. As far as we can tell, the file is harmless (and maybe even from an older WordPress install) so it's safe to ignore it. If you choose to delete the file, we recommend backing up your website beforehand", wp_defender()->domain ) ?>
-        </p>
-		<?php
-		$ext     = pathinfo( $this->getSubtitle(), PATHINFO_EXTENSION );
-		$ext     = strtolower( $ext );
-		$allowed = wp_get_ext_types();
-		$allowed = array_merge( $allowed['code'], array(
-			'sql',
-			'text',
-			'log'
-		) );
-		if ( in_array( $ext, $allowed ) ) {
-			?>
-            <div class="mline source-code">
-                <img src="<?php echo wp_defender()->getPluginUrl() ?>assets/img/loading.gif" width="18"
-                     height="18"/>
-				<?php _e( "Pulling source file...", wp_defender()->domain ) ?>
-                <form method="post" class="float-l pull-src scan-frm">
-                    <input type="hidden" name="action" value="pullSrcFile">
-					<?php wp_nonce_field( 'pullSrcFile' ) ?>
-                    <input type="hidden" name="id" value="<?php echo $this->getOwner()->id ?>"/>
-                </form>
-            </div>
-			<?php
-		}
-	}
-
-	/**
-	 *
-	 */
-	private function _dialogContentForModified() {
-		?>
-        <p class="line">
-			<?php _e( "Compare your file with the original file in the WordPress repository. Pieces highlighted in red will be removed when you patch the file, and pieces highlighted in green will be added.", wp_defender()->domain ) ?>
-        </p>
-        <div class="mline source-code">
-            <img src="<?php echo wp_defender()->getPluginUrl() ?>assets/img/loading.gif" width="18"
-                 height="18"/>
-			<?php _e( "Pulling source file...", wp_defender()->domain ) ?>
-            <form method="post" class="float-l pull-src scan-frm">
-                <input type="hidden" name="action" value="pullSrcFile">
-				<?php wp_nonce_field( 'pullSrcFile' ) ?>
-                <input type="hidden" name="id" value="<?php echo $this->getOwner()->id ?>"/>
-            </form>
-        </div>
-		<?php
-
-	}
-
-	/**
-	 * Show more detail about modified file
-	 */
-	private function _dialogContentForDir() {
-		?>
-        <p>
-			<?php _e( "We found this folder in your WordPress file list. Your current version of WordPress doesn’t use this folder so it might belong to another application. If you don’t recognize it, you can delete this folder (don’t forget to back up your website first!) or get in touch with the WPMU DEV support team for more information.", wp_defender()->domain ) ?>
-        </p>
-        <div class="mline source-code">
-            <img src="<?php echo wp_defender()->getPluginUrl() ?>assets/img/loading.gif" width="18"
-                 height="18"/>
-			<?php _e( "Pulling source file...", wp_defender()->domain ) ?>
-            <form method="post" class="float-l pull-src scan-frm">
-                <input type="hidden" name="action" value="pullSrcFile">
-				<?php wp_nonce_field( 'pullSrcFile' ) ?>
-                <input type="hidden" name="id" value="<?php echo $this->getOwner()->id ?>"/>
-            </form>
-        </div>
-		<?php
 	}
 
 	/**

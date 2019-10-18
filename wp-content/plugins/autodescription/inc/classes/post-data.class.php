@@ -1,7 +1,9 @@
 <?php
 /**
- * @package The_SEO_Framework\Classes
+ * @package The_SEO_Framework\Classes\Facade\Post_Data
+ * @subpackage The_SEO_Framework\Data
  */
+
 namespace The_SEO_Framework;
 
 defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
@@ -33,281 +35,477 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
 class Post_Data extends Detect {
 
 	/**
-	 * Return custom field post meta data.
-	 *
-	 * Return only the first value of custom field. Return false if field is
-	 * blank or not set.
-	 *
-	 * @since 2.0.0
-	 * @staticvar array $field_cache
-	 *
-	 * @param string $field Custom field key.
-	 * @param int $post_id The post ID
-	 * @return string|boolean Return value or false on failure.
+	 * @since 2.7.0
+	 * @since 3.2.0 Added '_nonce' suffix.
+	 * @var string The inpost nonce name.
 	 */
-	public function get_custom_field( $field, $post_id = null ) {
+	public $inpost_nonce_name = 'tsf_inpost_seo_settings_nonce';
 
-		//* If field is falsesque, get_post_meta() will return an array.
-		if ( ! $field )
-			return false;
+	/**
+	 * @since 2.7.0
+	 * @var string The inpost nonce field.
+	 */
+	public $inpost_nonce_field = 'tsf_inpost_nonce';
 
-		static $field_cache = [];
+	/**
+	 * Returns a post SEO meta item by key.
+	 *
+	 * Unlike other post meta calls, no \WP_Post object is accepted as an input value,
+	 * this is done for performance reasons, so we can cache here, instead of relying on
+	 * WordPress' cache, where they cast many filters and redundantly sanitize the object.
+	 *
+	 * When we'll be moving to PHP 7 and later, we'll enforce type hinting.
+	 *
+	 * @since 4.0.0
+	 * @since 4.0.1 Now obtains the real ID when none is supplied.
+	 *
+	 * @param string $item      The item to get.
+	 * @param int    $post_id   The post ID.
+	 * @param bool   $use_cache Whether to use caching.
+	 */
+	public function get_post_meta_item( $item, $post_id = 0, $use_cache = true ) {
 
-		if ( isset( $field_cache[ $field ][ $post_id ] ) )
-			return $field_cache[ $field ][ $post_id ];
+		$meta = $this->get_post_meta( $post_id ?: $this->get_the_real_ID(), $use_cache );
 
-		if ( empty( $post_id ) )
-			$post_id = $this->get_the_real_ID();
-
-		$custom_field = \get_post_meta( $post_id, $field, true );
-
-		//* If custom field is empty, empty cache..
-		if ( empty( $custom_field ) )
-			$field_cache[ $field ][ $post_id ] = '';
-
-		//* Render custom field, slashes stripped, sanitized if string
-		$field_cache[ $field ][ $post_id ] = is_array( $custom_field ) ? \stripslashes_deep( $custom_field ) : stripslashes( $custom_field );
-
-		return $field_cache[ $field ][ $post_id ];
+		return isset( $meta[ $item ] ) ? $meta[ $item ] : null;
 	}
 
 	/**
-	 * Saves the SEO settings when we save an attachment.
+	 * Returns all registered custom SEO fields for a post.
 	 *
-	 * This is a passthrough method for `inpost_seo_save()`.
-	 * Sanity check is handled at `save_custom_fields()`, which `inpost_seo_save()` uses.
+	 * Unlike other post meta calls, no \WP_Post object is accepted as an input value,
+	 * this is done for performance reasons, so we can cache here, instead of relying on
+	 * WordPress' cache, where they cast many filters and redundantly sanitize the object.
 	 *
-	 * @since 3.0.6
-	 * @uses $this->inpost_seo_save()
-	 * @access private
+	 * When we'll be moving to PHP 7 and later, we'll enforce type hinting.
 	 *
-	 * @param integer $post_id Post ID.
-	 * @return void
+	 * @since 4.0.0
+	 * @since 4.0.2 Now tests for valid post ID in the post object.
+	 * @staticvar array $cache
+	 *
+	 * @param int  $post_id   The post ID.
+	 * @param bool $use_cache Whether to use caching.
+	 * @return array The post meta.
 	 */
-	public function inattachment_seo_save( $post_id ) {
-		$this->inpost_seo_save( $post_id, \get_post( $post_id ) );
+	public function get_post_meta( $post_id, $use_cache = true ) {
+
+		if ( $use_cache ) {
+			static $cache = [];
+
+			if ( isset( $cache[ $post_id ] ) )
+				return $cache[ $post_id ];
+		}
+
+		// get_post_meta() requires a valid post ID. Make sure that post exists.
+		$post = \get_post( $post_id );
+
+		if ( empty( $post->ID ) )
+			return $cache[ $post_id ] = [];
+
+		/**
+		 * We can't trust the filter to always contain the expected keys.
+		 * However, it may contain more keys than we anticipated. Merge them.
+		 */
+		$defaults = array_merge(
+			$this->get_unfiltered_post_meta_defaults(),
+			$this->get_post_meta_defaults( $post->ID )
+		);
+
+		// Filter the post meta items based on defaults' keys.
+		$meta = array_intersect_key(
+			\get_post_meta( $post->ID ), // Gets all post meta. This is a discrepancy with get_term_meta()!
+			$defaults
+		);
+
+		// WP converts all entries to arrays, because we got ALL entries. Disarray!
+		foreach ( $meta as $key => $value ) {
+			$meta[ $key ] = $value[0];
+		}
+
+		return $cache[ $post_id ] = array_merge( $defaults, $meta );
 	}
 
 	/**
-	 * Saves the SEO settings when we save a post or page.
-	 * Some values get sanitized, the rest are pulled from identically named subkeys in the $_POST['autodescription'] array.
+	 * Returns the post meta defaults.
 	 *
-	 * @since 2.0.0
-	 * @since 2.9.3 : Added 'exclude_from_archive'.
-	 * @securitycheck 3.0.0 OK. NOTE: Check is done at save_custom_fields().
-	 * @uses $this->save_custom_fields() : Perform security checks and saves post meta / custom field data to a post or page.
-	 * @access private
+	 * Unlike other post meta calls, no \WP_Post object is accepted as an input value,
+	 * this is done for performance reasons, so we can cache here, instead of relying on
+	 * WordPress' cache, where they cast many filters and redundantly sanitize the object.
 	 *
-	 * @param integer  $post_id Post ID.
-	 * @param \WP_Post $post    Post object.
-	 * @return void
+	 * When we'll be moving to PHP 7 and later, we'll enforce type hinting.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @param int $post_id The post ID.
+	 * @return array The default post meta.
 	 */
-	public function inpost_seo_save( $post_id, $post ) {
-
-		if ( empty( $_POST['autodescription'] ) ) // CSRF ok, this is an early test to improve performance.
-			return;
-
+	public function get_post_meta_defaults( $post_id = 0 ) {
 		/**
 		 * @since 3.1.0
 		 * @param array    $defaults
 		 * @param integer  $post_id Post ID.
 		 * @param \WP_Post $post    Post object.
 		 */
-		$defaults = (array) \apply_filters_ref_array( 'the_seo_framework_inpost_seo_save_defaults', [
+		return (array) \apply_filters_ref_array(
+			'the_seo_framework_inpost_seo_save_defaults', // TODO rename to the_seo_framework_post_meta_defaults
 			[
-				'_genesis_title'          => '',
-				'_tsf_title_no_blogname'  => 0, //? The prefix I should've used from the start...
-				'_genesis_description'    => '',
-				'_genesis_canonical_uri'  => '',
-				'redirect'                => '', //! Will be displayed in custom fields when set...
-				'_social_image_url'       => '',
-				'_social_image_id'        => 0,
-				'_genesis_noindex'        => 0,
-				'_genesis_nofollow'       => 0,
-				'_genesis_noarchive'      => 0,
-				'exclude_local_search'    => 0, //! Will be displayed in custom fields when set...
-				'exclude_from_archive'    => 0, //! Will be displayed in custom fields when set...
-				'_open_graph_title'       => '',
-				'_open_graph_description' => '',
-				'_twitter_title'          => '',
-				'_twitter_description'    => '',
-			],
-			$post_id,
-			$post,
-		] );
-
-		/**
-		 * Merge user submitted options with fallback defaults
-		 * Passes through nonce at the end of the function.
-		 */
-		// phpcs:ignore -- wp_unslash() is nonsense.
-		$data = (array) \wp_parse_args( $_POST['autodescription'], $defaults );
-
-		foreach ( $data as $key => &$value ) :
-			switch ( $key ) :
-				case '_genesis_title':
-				case '_open_graph_title':
-				case '_twitter_title':
-					$value = $this->s_title_raw( $value );
-					continue 2;
-
-				case '_genesis_description':
-				case '_open_graph_description':
-				case '_twitter_description':
-					$value = $this->s_description_raw( $value );
-					continue 2;
-
-				case '_genesis_canonical_uri':
-				case '_social_image_url':
-					/**
-					 * Remove unwanted query parameters. They're allowed by Google, but very much rather not.
-					 * Also, they will only cause bugs.
-					 * Query parameters are also only used when no pretty permalinks are used. Which is bad.
-					 */
-					$value = $this->s_url_query( $value );
-					continue 2;
-
-				case '_social_image_id':
-					//* Bound to _social_image_url.
-					$value = $data['_social_image_url'] ? $this->s_absint( $value ) : 0;
-					continue 2;
-
-				case 'redirect':
-					//* Let's keep this as the output really is.
-					$value = $this->s_redirect_url( $value );
-					continue 2;
-
-				case '_tsf_title_no_blogname':
-				case '_genesis_noindex':
-				case '_genesis_nofollow':
-				case '_genesis_noarchive':
-				case 'exclude_local_search':
-				case 'exclude_from_archive':
-					$value = $this->s_one_zero( $value );
-					continue 2;
-
-				default:
-					// Don't process extraneous data for third party support.
-					//* TODO set a filterable list of "allowed" option keys? -> Option Generator
-					break;
-			endswitch;
-		endforeach;
-
-		//* Perform nonce check and save fields.
-		$this->save_custom_fields( $data, $this->inpost_nonce_field, $this->inpost_nonce_name, $post );
+				$this->get_unfiltered_post_meta_defaults(),
+				$post_id,
+				\get_post( $post_id ),
+			]
+		);
 	}
 
 	/**
-	 * Save post meta / custom field data for a post or page.
+	 * Returns the unfiltered post meta defaults.
 	 *
-	 * It verifies the nonce, then checks we're not doing autosave, ajax or a future post request. It then checks the
-	 * current user's permissions, before finally* either updating the post meta, or deleting the field if the value was not
-	 * truthy.
+	 * @since 4.0.0
 	 *
-	 * By passing an array of fields => values from the same metabox (and therefore same nonce) into the $data argument,
-	 * repeated checks against the nonce, request and permissions are avoided.
-	 *
-	 * @since 2.0.0
-	 * @securitycheck 3.0.0 OK.
-	 *
-	 * @thanks StudioPress (http://www.studiopress.com/) for some code.
-	 *
-	 * @param array    $data         Key/Value pairs of data to save in '_field_name' => 'value' format.
-	 * @param string   $nonce_action Nonce action for use with wp_verify_nonce().
-	 * @param string   $nonce_name   Name of the nonce to check for permissions.
-	 * @param \WP_Post|integer $post Post object or ID.
-	 * @return mixed Return null if permissions incorrect, doing autosave, ajax or future post, false if update or delete
-	 *               failed, and true on success.
+	 * @return array The default, unfiltered, post meta.
 	 */
-	public function save_custom_fields( array $data, $nonce_action, $nonce_name, $post ) {
+	protected function get_unfiltered_post_meta_defaults() {
+		return [
+			'_genesis_title'          => '',
+			'_tsf_title_no_blogname'  => 0, //? The prefix I should've used from the start...
+			'_genesis_description'    => '',
+			'_genesis_canonical_uri'  => '',
+			'redirect'                => '', //! Will be displayed in custom fields when set...
+			'_social_image_url'       => '',
+			'_social_image_id'        => 0,
+			'_genesis_noindex'        => 0,
+			'_genesis_nofollow'       => 0,
+			'_genesis_noarchive'      => 0,
+			'exclude_local_search'    => 0, //! Will be displayed in custom fields when set...
+			'exclude_from_archive'    => 0, //! Will be displayed in custom fields when set...
+			'_open_graph_title'       => '',
+			'_open_graph_description' => '',
+			'_twitter_title'          => '',
+			'_twitter_description'    => '',
+		];
+	}
 
-		//* Verify the nonce
-		// phpcs:ignore -- wp_unslash() is nonsense.
-		if ( ! isset( $_POST[ $nonce_name ] ) || ! \wp_verify_nonce( $_POST[ $nonce_name ], $nonce_action ) )
-			return;
+	/**
+	 * Updates single post meta value.
+	 *
+	 * Note that this method can be more resource intensive than you intend it to be,
+	 * as it reprocesses all post meta.
+	 *
+	 * @since 4.0.0
+	 * @uses $this->save_post_meta() to process all data.
+	 *
+	 * @param string           $item  The item to update.
+	 * @param mixed            $value The value the item should be at.
+	 * @param \WP_Post|integer $post  The post object or post ID.
+	 */
+	public function update_single_post_meta_item( $item, $value, $post ) {
 
-		/**
-		 * Don't try to save the data under autosave, ajax, or future post.
-		 * @TODO find a way to maintain revisions:
-		 * @link https://github.com/sybrew/the-seo-framework/issues/48
-		 * @link https://johnblackbourn.com/post-meta-revisions-wordpress
-		 */
-		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
-			return;
-		if ( $this->doing_ajax() )
-			return;
-		if ( defined( 'DOING_CRON' ) && DOING_CRON )
-			return;
-
-		//* Grab the post object
 		$post = \get_post( $post );
 
-		/**
-		 * Don't save if WP is creating a revision (same as DOING_AUTOSAVE?)
-		 * @todo @see wp_is_post_revision(), which also returns the post revision ID...
-		 */
-		if ( 'revision' === \get_post_type( $post ) )
-			return;
+		if ( ! $post ) return;
 
-		//* Check that the user is allowed to edit the post
-		if ( ! \current_user_can( 'edit_post', $post->ID ) )
-			return;
+		$meta          = $this->get_post_meta( $post->ID, false );
+		$meta[ $item ] = $value;
+
+		$this->save_post_meta( $post->ID, $meta );
+	}
+
+	/**
+	 * Save post meta / custom field data for a singular post type.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @param \WP_Post|integer $post The post object or post ID.
+	 * @param array            $data The post meta fields, will be merged with the defaults.
+	 */
+	public function save_post_meta( $post, array $data ) {
+
+		$post = \get_post( $post );
+
+		if ( ! $post ) return;
+
+		$data = (array) \wp_parse_args( $data, $this->get_post_meta_defaults( $post->ID ) );
+		$data = $this->s_post_meta( $data );
+
+		if ( \has_filter( 'the_seo_framework_save_custom_fields' ) ) {
+			$this->_deprecated_filter( 'the_seo_framework_save_custom_fields', '4.0.0', 'the_seo_framework_save_post_meta' );
+			/**
+			 * @since 3.1.0
+			 * @since 4.0.0 Deprecated.
+			 * @deprecated
+			 * @param array    $data The data that's going to be saved.
+			 * @param \WP_Post $post The post object.
+			 */
+			$data = (array) \apply_filters_ref_array(
+				'the_seo_framework_save_custom_fields',
+				[
+					$data,
+					$post,
+				]
+			);
+		}
 
 		/**
-		 * @since 3.1.0
+		 * @since 4.0.0
 		 * @param array    $data The data that's going to be saved.
 		 * @param \WP_Post $post The post object.
 		 */
-		$data = (array) \apply_filters_ref_array( 'the_seo_framework_save_custom_fields', [
-			$data,
-			$post,
-		] );
+		$data = (array) \apply_filters_ref_array(
+			'the_seo_framework_save_post_meta',
+			[
+				$data,
+				$post,
+			]
+		);
 
 		//* Cycle through $data, insert value or delete field
 		foreach ( (array) $data as $field => $value ) {
-			//* Save $value, or delete if the $value is empty
+			//* Save $value, or delete if the $value is empty.
 			if ( $value ) {
 				\update_post_meta( $post->ID, $field, $value );
 			} else {
+				// This is fine for as long as we merge the getter values with the defaults.
 				\delete_post_meta( $post->ID, $field );
 			}
 		}
 	}
 
 	/**
+	 * Saves the SEO settings when we save an attachment.
+	 *
+	 * This is a passthrough method for `_update_post_meta()`.
+	 * Sanity checks are handled deeper.
+	 *
+	 * @since 3.0.6
+	 * @since 4.0.0 Renamed from `inattachment_seo_save`
+	 * @uses $this->_update_post_meta()
+	 * @access private
+	 *
+	 * @param int $post_id The post ID.
+	 * @return void
+	 */
+	public function _update_attachment_meta( $post_id ) {
+		$this->_update_post_meta( $post_id, \get_post( $post_id ) );
+	}
+
+	/**
+	 * Saves the Post SEO Meta settings on quick-edit, bulk-edit, or post-edit.
+	 *
+	 * @since 2.0.0
+	 * @since 2.9.3 Added 'exclude_from_archive'.
+	 * @since 4.0.0 1. Renamed from `inpost_seo_save`
+	 *              2. Now allows updating during `WP_CRON`.
+	 *              3. Now allows updating during `WP_AJAX`.
+	 * @access private
+	 *
+	 * @param int      $post_id The post ID. Unused, but sent through filter.
+	 * @param \WP_Post $post    The post object.
+	 */
+	public function _update_post_meta( $post_id, $post ) {
+		// phpcs:disable, WordPress.Security.NonceVerification
+
+		if ( ! empty( $_POST['autodescription-quick'] ) ) {
+			$this->update_quick_edit_post_meta( $post_id, $post );
+		} elseif ( ! empty( $_REQUEST['autodescription-bulk'] ) ) {
+			// This is sent via GET. Keep using $_REQUEST for future-compatibility.
+			$this->update_bulk_edit_post_meta( $post_id, $post );
+		} elseif ( ! empty( $_POST['autodescription'] ) ) {
+			$this->update_post_edit_post_meta( $post_id, $post );
+		}
+
+		// phpcs:enable, WordPress.Security.NonceVerification
+	}
+
+	/**
+	 * Overwrites all of the post meta on post-edit.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @param int      $post_id The post ID. Unused.
+	 * @param \WP_Post $post    The post object.
+	 * @return void
+	 */
+	protected function update_post_edit_post_meta( $post_id, $post ) {
+
+		$post = \get_post( $post );
+
+		if ( ! $post ) return;
+
+		/**
+		 * Don't try to save the data prior autosave, or revision post (is_preview).
+		 *
+		 * @TODO find a way to maintain revisions:
+		 * @link https://github.com/sybrew/the-seo-framework/issues/48
+		 * @link https://johnblackbourn.com/post-meta-revisions-wordpress
+		 */
+		if ( \wp_is_post_autosave( $post ) ) return;
+		if ( \wp_is_post_revision( $post ) ) return;
+
+		$nonce_name   = $this->inpost_nonce_name;
+		$nonce_action = $this->inpost_nonce_field;
+
+		//* Check that the user is allowed to edit the post
+		if ( ! \current_user_can( 'edit_post', $post->ID ) ) return;
+		if ( ! isset( $_POST[ $nonce_name ] ) ) return;
+		if ( ! \wp_verify_nonce( \stripslashes_from_strings_only( $_POST[ $nonce_name ] ), $nonce_action ) ) return;
+
+		$data = (array) $_POST['autodescription'];
+
+		//* Perform nonce check and save fields.
+		$this->save_post_meta( $post, $data );
+	}
+
+	/**
+	 * Overwrites a part of the post meta on quick-edit.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @param int      $post_id The post ID. Unused.
+	 * @param \WP_Post $post    The post object.
+	 * @return void
+	 */
+	protected function update_quick_edit_post_meta( $post_id, $post ) {
+
+		$post = \get_post( $post );
+
+		if ( empty( $post->ID ) ) return;
+
+		//* Check again against ambiguous injection...
+		// Note, however: function wp_ajax_inline_save() already performs all these checks for us before firing this callback's action.
+		if ( ! \current_user_can( 'edit_post', $post->ID ) ) return;
+		if ( ! \check_ajax_referer( 'inlineeditnonce', '_inline_edit', false ) ) return;
+
+		$new_data = [];
+
+		foreach ( (array) $_POST['autodescription-quick'] as $key => $value ) :
+			switch ( $key ) :
+				case 'noindex':
+				case 'nofollow':
+				case 'noarchive':
+					$new_data[ "_genesis_$key" ] = $value;
+					break;
+
+				case 'redirect':
+					$new_data[ $key ] = $value;
+					break;
+
+				case 'canonical':
+					$new_data['_genesis_canonical_uri'] = $value;
+					break;
+
+				default:
+					break;
+			endswitch;
+		endforeach;
+
+		// Unlike the post-edit saving, we don't reset the data, just overwrite what's given.
+		// This is because we only update a portion of the meta.
+		$data = array_merge(
+			$this->get_post_meta( $post->ID, false ),
+			$new_data
+		);
+
+		$this->save_post_meta( $post, $data );
+	}
+
+	/**
+	 * Overwrites a park of the post meta on bulk-edit.
+	 *
+	 * @since 4.0.0
+	 * @staticvar bool $verified_referer Will hold true after the first update passes.
+	 *
+	 * @param int      $post_id The post ID. Unused.
+	 * @param \WP_Post $post    The post object.
+	 * @return void
+	 */
+	protected function update_bulk_edit_post_meta( $post_id, $post ) {
+
+		$post = \get_post( $post );
+
+		if ( empty( $post->ID ) ) return;
+
+		//* Check again against ambiguous injection...
+		// Note, however: function bulk_edit_posts() already performs all these checks for us before firing this callback's action.
+		if ( ! \current_user_can( 'edit_post', $post->ID ) ) return;
+
+		static $verified_referer = false;
+		if ( ! $verified_referer ) {
+			\check_admin_referer( 'bulk-posts' );
+			$verified_referer = true;
+		}
+
+		static $new_data = null;
+
+		if ( ! isset( $new_data ) ) {
+			$new_data = [];
+
+			// This is sent via GET. Keep using $_REQUEST for future-compatibility.
+			foreach ( (array) $_REQUEST['autodescription-bulk'] as $key => $value ) :
+				if ( 'nochange' === $value ) continue;
+
+				switch ( $key ) :
+					case 'noindex':
+					case 'nofollow':
+					case 'noarchive':
+						$new_data[ "_genesis_$key" ] = $value;
+						break;
+
+					default:
+						break;
+				endswitch;
+			endforeach;
+		}
+
+		// Unlike the post-edit saving, we don't reset the data, just overwrite what's given.
+		// This is because we only update a portion of the meta.
+		$data = array_merge(
+			$this->get_post_meta( $post->ID, false ),
+			$new_data
+		);
+
+		$this->save_post_meta( $post, $data );
+	}
+
+	/**
 	 * Saves primary term data for posts.
 	 *
 	 * @since 3.0.0
+	 * @since 4.0.0 1. Now allows updating during `WP_CRON`.
+	 *              2. Now allows updating during `WP_AJAX`.
 	 * @securitycheck 3.0.0 OK.
 	 *
-	 * @param integer  $post_id Post ID.
-	 * @param \WP_Post $post    Post object.
+	 * @param int      $post_id The post ID. Unused, but sent through filter.
+	 * @param \WP_Post $post    The post object.
 	 * @return void
 	 */
 	public function _save_inpost_primary_term( $post_id, $post ) {
 
-		//* Nonce is done at the end of this function.
-		if ( empty( $_POST['autodescription'] ) )
-			return;
+		// The 'autodescription' index should only be used when using the editor.
+		// Quick and bulk-edit should be halted here.
+		if ( empty( $_POST['autodescription'] ) ) return;
 
-		$post_type = \get_post_type( $post_id ) ?: false;
+		$post = \get_post( $post );
 
-		if ( ! $post_type )
-			return;
+		if ( empty( $post->ID ) ) return;
 
 		/**
-		 * Don't save if WP is creating a revision (same as DOING_AUTOSAVE?)
-		 * @todo @see wp_is_post_revision(), which also returns the post revision ID...
+		 * Don't try to save the data prior autosave, or revision post (is_preview).
+		 *
+		 * @TODO find a way to maintain revisions:
+		 * @link https://github.com/sybrew/the-seo-framework/issues/48
+		 * @link https://johnblackbourn.com/post-meta-revisions-wordpress
 		 */
-		if ( 'revision' === $post_type )
-			return;
+		if ( \wp_is_post_autosave( $post ) ) return;
+		if ( \wp_is_post_revision( $post ) ) return;
 
-		//* Check that the user is allowed to edit the post
-		if ( ! \current_user_can( 'edit_post', $post_id ) )
-			return;
+		//* Check that the user is allowed to edit the post. Nonce checks are done in bulk later.
+		if ( ! \current_user_can( 'edit_post', $post->ID ) ) return;
+
+		$post_type = \get_post_type( $post->ID ) ?: false;
+		// Can this even fail?
+		if ( ! $post_type ) return;
 
 		$_taxonomies = $this->get_hierarchical_taxonomies_as( 'names', $post_type );
-		$values = [];
+		$values      = [];
 
 		foreach ( $_taxonomies as $_taxonomy ) {
 			$_post_key = '_primary_term_' . $_taxonomy;
@@ -320,72 +518,11 @@ class Post_Data extends Detect {
 		}
 
 		foreach ( $values as $t => $v ) {
-			if ( \wp_verify_nonce( $v['name'], $v['action'] ) ) {
-				$this->update_primary_term_id( $post_id, $t, $v['value'] );
+			if ( ! isset( $_POST[ $v['name'] ] ) ) continue;
+			if ( \wp_verify_nonce( \stripslashes_from_strings_only( $_POST[ $v['name'] ] ), $v['action'] ) ) {
+				$this->update_primary_term_id( $post->ID, $t, $v['value'] );
 			}
 		}
-	}
-
-	/**
-	 * Fetches or parses the excerpt of the post.
-	 *
-	 * @since 1.0.0
-	 * @since 2.8.2 : Added 4th parameter for escaping.
-	 * @since 3.1.0 1. No longer returns anything for terms.
-	 *              2. Now strips plausible embeds URLs.
-	 *
-	 * @param string $excerpt the Excerpt.
-	 * @param int    $the_id The Post ID.
-	 * @param null   $deprecated No longer used.
-	 * @param bool   $escape Whether to escape the excerpt.
-	 * @return string The trimmed excerpt.
-	 */
-	public function get_excerpt_by_id( $excerpt = '', $id = '', $deprecated = null, $escape = true ) {
-
-		if ( empty( $excerpt ) )
-			$excerpt = $this->fetch_excerpt( $id );
-
-		//* No need to parse an empty excerpt.
-		if ( ! $excerpt ) return '';
-
-		return $escape ? $this->s_excerpt( $excerpt ) : $this->s_excerpt_raw( $excerpt );
-	}
-
-	/**
-	 * Fetches excerpt from post excerpt or fetches the full post content.
-	 * Determines if a page builder is used to return an empty string.
-	 * Does not sanitize output.
-	 *
-	 * @since 2.5.2
-	 * @since 2.6.6 Detects Page builders.
-	 * @since 3.1.0 1. No longer returns anything for terms.
-	 *              2. Now strips plausible embeds URLs.
-	 *
-	 * @param \WP_Post|int|null $post The Post or Post ID. Leave null to automatically get.
-	 * @return string The excerpt.
-	 */
-	public function fetch_excerpt( $post = null ) {
-
-		$post = \get_post( $post );
-
-		/**
-		 * Fetch custom excerpt, if not empty, from the post_excerpt field.
-		 * @since 2.5.2
-		 */
-		if ( ! empty( $post->post_excerpt ) ) {
-			$excerpt = $post->post_excerpt;
-		} elseif ( isset( $post->post_content ) ) {
-			$excerpt = $this->uses_page_builder( $post->ID ) ? '' : $post->post_content;
-
-			if ( $excerpt ) {
-				$excerpt = $this->strip_newline_urls( $excerpt );
-				$excerpt = $this->strip_paragraph_urls( $excerpt );
-			}
-		} else {
-			$excerpt = '';
-		}
-
-		return $excerpt;
 	}
 
 	/**
@@ -449,8 +586,9 @@ class Post_Data extends Detect {
 	 *
 	 * @since 2.6.6
 	 * @since 3.1.0 Added Elementor detection
+	 * @since 4.0.0 Now detects page builders before looping over the meta.
 	 *
-	 * @param int $post_id
+	 * @param int $post_id The post ID to check.
 	 * @return boolean
 	 */
 	public function uses_page_builder( $post_id ) {
@@ -458,7 +596,6 @@ class Post_Data extends Detect {
 		$meta = \get_post_meta( $post_id );
 
 		/**
-		 * Determines whether a page builder has been detected.
 		 * @since 2.6.6
 		 * @since 3.1.0 1: Now defaults to `null`
 		 *              2: Now, when a boolean (either true or false) is defined, it'll short-circuit this function.
@@ -470,6 +607,9 @@ class Post_Data extends Detect {
 
 		if ( is_bool( $detected ) )
 			return $detected;
+
+		if ( ! $this->detect_page_builder() )
+			return false;
 
 		if ( empty( $meta ) )
 			return false;
@@ -542,7 +682,7 @@ class Post_Data extends Detect {
 	 *
 	 * @since 3.1.0
 	 *
-	 * @param int|null|\WP_Post The post ID or WP Post object.
+	 * @param int|null|\WP_Post $post The post ID or WP Post object.
 	 * @return bool True if draft, false otherwise.
 	 */
 	public function is_draft( $post = null ) {
@@ -604,10 +744,9 @@ class Post_Data extends Detect {
 
 		$primary_id = $this->get_primary_term_id( $post_id, $taxonomy );
 
-		if ( ! $primary_id )
-			return false;
+		if ( ! $primary_id ) return false;
 
-		$terms = \get_the_terms( $post_id, $taxonomy );
+		$terms        = \get_the_terms( $post_id, $taxonomy );
 		$primary_term = false;
 
 		foreach ( $terms as $term ) {
@@ -630,7 +769,7 @@ class Post_Data extends Detect {
 	 * @return int     The primary term ID. 0 if not set.
 	 */
 	public function get_primary_term_id( $post_id = null, $taxonomy = '' ) {
-		return (int) $this->get_custom_field( '_primary_term_' . $taxonomy, $post_id ) ?: 0;
+		return (int) \get_post_meta( $post_id, '_primary_term_' . $taxonomy, true ) ?: 0;
 	}
 
 	/**

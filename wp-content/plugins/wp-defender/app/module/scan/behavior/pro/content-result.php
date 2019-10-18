@@ -11,6 +11,51 @@ use WP_Defender\Component\Error_Code;
 use WP_Defender\Module\Scan\Model\Result_Item;
 
 class Content_Result extends \Hammer\Base\Behavior {
+	public function getInfo() {
+		$full_path = $this->getRaw()['file'];
+		$tracer    = [];
+		foreach ( $this->getRaw()['meta'] as $item ) {
+			$tracer[] = [
+				'text'   => $item['text'],
+				'line'   => $item['line'],
+				'offset' => $item['offset'],
+				'column' => $item['length'],
+				'code'   => $this->getCodeBlock( $item )
+			];
+		}
+
+		return [
+			'id'         => $this->getOwner()->id,
+			'type'       => 'content',
+			'file_name'  => pathinfo( $full_path, PATHINFO_FILENAME ),
+			'full_path'  => $full_path,
+			'date_added' => file_exists( $full_path ) ? Utils::instance()->formatDateTime( filemtime( $full_path ) ) : 'N/A',
+			'size'       => file_exists( $full_path ) ? Utils::instance()->makeReadable( filesize( $full_path ) ) : 'N/A',
+			'short_desc' => $this->getIssueDetail(),
+			'tracer'     => $tracer
+		];
+	}
+
+	private function getCodeBlock( $item ) {
+		if ( ! file_exists( $this->getRaw()['file'] ) ) {
+			return __( "File not exists!", wp_defender()->domain );
+		}
+		$line   = $item['line'] - 1;
+		$offset = $item['offset'];
+		$column = $item['length'];
+		$code   = file( $this->getRaw()['file'] );
+		//we'll get lines +-1
+		$lines[]  = isset( $code[ $line - 1 ] ) ? $code[ $line - 1 ] : null;
+		$lines[]  = $code[ $line ];
+		$lines[]  = isset( $code[ $line - 1 ] ) ? $code[ $line - 1 ] : null;
+		$lines    = array_filter( $lines );
+		$entities = htmlentities( implode( '', $lines ), ENT_QUOTES . ENT_HTML5, 'UTF-8' );
+		$entities = str_replace( '&lt;mark&gt;', '<mark>', $entities, $count );
+		$entities = str_replace( '&lt;/mark&gt;', '</mark>', $entities, $count );
+
+		return $entities;
+	}
+
 	/**
 	 * @return string
 	 */
@@ -53,78 +98,6 @@ class Content_Result extends \Hammer\Base\Behavior {
 		return __( "Suspicious function found", wp_defender()->domain );
 	}
 
-	public function renderIssueContent() {
-		$raw = $this->getRaw();
-		ob_start();
-		?>
-        <div class="sui-box issue-content">
-            <div class="sui-box-body">
-                <p>
-					<?php printf( __( "We've identified some code in <strong>%s</strong> that could be a potential security weakness. We recommend you take a look to be sure everything is OK and contact your developer if you need help fixing the issue.
-Sometimes these checks are false positives, so if you know the code is harmless you can ignore this warning. Alternately you can choose delete this file, but be sure to perform a backup and double-check the file isn't required by a plugin or theme to run correctly.", wp_defender()->domain ), esc_html( pathinfo( $this->getSubtitle(), PATHINFO_BASENAME ) ) ) ?>
-                </p>
-                <p>
-                    <strong><?php _e( "File Location:" ) ?></strong> <?php echo esc_html( $this->getSubtitle() ) ?>
-                </p>
-                <p>
-                    <strong><?php printf( __( "Found %s issues.", wp_defender()->domain ), count( $raw['meta'] ) ) ?></strong>
-                </p>
-                <div>
-					<?php foreach ( $raw['meta'] as $issue ): ?>
-                        <p><a class="nav-issue" data-line="<?php echo esc_attr( $issue['line'] ) ?>"
-                              data-offset="<?php echo esc_attr( $issue['offset'] ) ?>"
-                              data-col="<?php echo esc_attr( $issue['column'] ) ?>"
-                              href="#"><?php echo $issue['text'] ?></a></p>
-					<?php endforeach; ?>
-                </div>
-                <div class="source-code">
-                    <i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
-					<?php _e( "Pulling source file...", wp_defender()->domain ) ?>
-                    <form method="post" class="float-l pull-src scan-frm">
-                        <input type="hidden" name="action" value="pullSrcFile">
-						<?php wp_nonce_field( 'pullSrcFile' ) ?>
-                        <input type="hidden" name="id" value="<?php echo $this->getOwner()->id ?>"/>
-                    </form>
-                </div>
-            </div>
-            <div class="sui-box-footer">
-                <div class="sui-actions-left">
-                    <form method="post" class="float-l ignore-item scan-frm">
-                        <input type="hidden" name="action" value="ignoreItem">
-						<?php wp_nonce_field( 'ignoreItem' ) ?>
-                        <input type="hidden" name="id" value="<?php echo $this->getOwner()->id ?>"/>
-                        <button type="submit" class="sui-button sui-button-ghost">
-                            <i class="sui-icon-eye-hide" aria-hidden="true"></i>
-							<?php _e( "Ignore", wp_defender()->domain ) ?></button>
-                    </form>
-                </div>
-                <div class="sui-actions-right">
-                    <form method="post" class="scan-frm delete-item float-r">
-                        <input type="hidden" name="action" value="deleteItem"/>
-                        <input type="hidden" name="id" value="<?php echo $this->getOwner()->id ?>"/>
-						<?php wp_nonce_field( 'deleteItem' ) ?>
-                        <button type="button" class="sui-button sui-button-red delete-mitem">
-                            <i class="sui-icon-trash" aria-hidden="true"></i>
-							<?php _e( "Delete", wp_defender()->domain ) ?></button>
-                        <div class="confirm-box wd-hide">
-                            <span><?php _e( "This will permanently remove the selected file/folder. Are you sure you want to continue?", wp_defender()->domain ) ?></span>
-                            <div>
-                                <button type="submit" class="sui-button sui-button-red">
-									<?php _e( "Yes", wp_defender()->domain ) ?>
-                                </button>
-                                <button type="button" class="sui-button sui-button-ghost">
-									<?php _e( "No", wp_defender()->domain ) ?>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-		<?php
-		return ob_get_clean();
-	}
-
 	public function getSrcCode() {
 		$raw = $this->getRaw();
 		//do a dry check first
@@ -158,7 +131,8 @@ Sometimes these checks are false positives, so if you know the code is harmless 
 		$entities = str_replace( '&lt;mark&gt;', '<mark>', $entities, $count );
 		$entities = str_replace( '&lt;/mark&gt;', '</mark>', $entities, $count );
 
-		return '<pre class="line-numbers inner-sourcecode"><code class="language-php">' . $entities . '</code></pre>';
+		return $entities;
+		//return '<pre class="line-numbers inner-sourcecode"><code class="language-php">' . $entities . '</code></pre>';
 	}
 
 	/**

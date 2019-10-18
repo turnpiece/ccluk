@@ -51,4 +51,3 @@ class Snapshot_Model_Storage_Session extends Snapshot_Model_Storage {
 		return $this->_session->save_session();
 	}
 }
-

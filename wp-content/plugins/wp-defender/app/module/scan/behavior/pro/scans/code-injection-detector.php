@@ -5,6 +5,7 @@
 
 namespace WP_Defender\Module\Scan\Behavior\Pro\Scans;
 
+use WP_Defender\Behavior\Utils;
 use WP_Defender\Module\Scan\Component\Token_Utils;
 
 class Code_Injection_Detector extends Detector_Abstract {
@@ -31,8 +32,11 @@ class Code_Injection_Detector extends Detector_Abstract {
 			if ( $next['code'] == T_OPEN_PARENTHESIS ) {
 				$params = Token_Utils::findParams( $next['parenthesis_opener'] + 1, $next['parenthesis_closer'] );
 				//loop to find the userinput
+				$url_pattern = "/((https?|ftp):\/\/(\S*?\.\S*?))([\s)\[\]{},;\"\':<]|\.\s|$)/i";
 				foreach ( $params as $i => $param ) {
-					if ( $param['code'] == T_VARIABLE && in_array( $param['content'], $this->getPredefinedVariables() ) ) {
+					if ( ( $param['code'] == T_VARIABLE || $param['code'] == T_CONSTANT_ENCAPSED_STRING ) &&
+					     ( in_array( $param['content'], $this->getPredefinedVariables() )
+					       || preg_match( $url_pattern, $param['content'] ) ) ) {
 						//gotcha
 						//we will move back a bit to see what's wrapper this one
 						$caller = Token_Utils::findFirstPrevious( $i - 1, 0, array(
@@ -60,7 +64,7 @@ class Code_Injection_Detector extends Detector_Abstract {
 						}
 						$results = array(
 							'type'   => 'code_injection',
-							'text'   => 'The function ' . $this->token['content'] . ' line ' . $this->token['line'] . ' column ' . $this->token['column'] . ' execute using unsanitize user inputs',
+							'text'   => sprintf( __( "The function %s line %d column %d execute using unsanitize user inputs", wp_defender()->domain ), $this->token['content'], $this->token['line'], $this->token['column'] ),
 							'offset' => $this->getCodeOffset(),
 							'length' => strlen( $this->getCode() ),
 							'line'   => $this->token['line'],

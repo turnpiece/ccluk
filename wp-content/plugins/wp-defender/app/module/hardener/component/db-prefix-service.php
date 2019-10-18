@@ -11,6 +11,7 @@ use Hammer\Helper\WP_Helper;
 use WP_Defender\Behavior\Utils;
 use WP_Defender\Component\Error_Code;
 use WP_Defender\Module\Hardener\IRule_Service;
+use WP_Defender\Module\Hardener\Model\Settings;
 use WP_Defender\Module\Hardener\Rule_Service;
 
 class DB_Prefix_Service extends Rule_Service implements IRule_Service {
@@ -51,6 +52,10 @@ class DB_Prefix_Service extends Rule_Service implements IRule_Service {
 		if ( is_wp_error( $is_valid = $this->validatePrefix() ) ) {
 			return $is_valid;
 		}
+
+		//mark this here
+		Settings::instance()->is_prefix_changed = true;
+		Settings::instance()->save();
 
 		$prefix = $this->new_prefix;
 		set_time_limit( - 1 );
@@ -104,8 +109,8 @@ class DB_Prefix_Service extends Rule_Service implements IRule_Service {
 	 */
 	private function updateData() {
 		global $wpdb;
-		$prefix            = $this->new_prefix;
-		$old_prefix        = $this->old_prefix;
+		$prefix     = $this->new_prefix;
+		$old_prefix = $this->old_prefix;
 		if ( is_multisite() ) {
 			/**
 			 * case multiste
@@ -219,8 +224,29 @@ class DB_Prefix_Service extends Rule_Service implements IRule_Service {
 
 	public function revert() {
 		$this->new_prefix = 'wp_';
+		if ( Settings::instance()->is_prefix_changed == true ) {
+			set_time_limit( - 1 );
+			global $wpdb;
+			$wpdb->query( 'BEGIN' );
+			//run a query to change db prefix
+			if ( is_wp_error( ( $err = $this->changeDBPrefix() ) ) ) {
+				return $err;
+			}
+			//update data
+			if ( is_wp_error( ( $err = $this->updateData() ) ) ) {
+				return $err;
+			}
+			//almost there, now just need to update wpconfig
+			if ( is_wp_error( ( $err = $this->writeToWpConfig() ) ) ) {
+				$wpdb->query( 'ROLLBACK' );
 
-		return $this->process();
+				return $err;
+			}
+			//all good
+			$wpdb->query( 'COMMIT' );
+
+			return true;
+		}
 	}
 
 	public function listen() {

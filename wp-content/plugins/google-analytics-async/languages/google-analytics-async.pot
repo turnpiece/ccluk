@@ -1,0 +1,1377 @@
+# Copyright (C) 2019 WPMU DEV
+# This file is distributed under the GNU General Public License (Version 2 - GPLv2).
+msgid ""
+msgstr ""
+"Project-Id-Version: Beehive Pro 3.2.0\n"
+"Report-Msgid-Bugs-To: https://wpmudev.org\n"
+"POT-Creation-Date: 2019-10-11 06:26:54+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2019-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"X-Generator: grunt-wp-i18n 1.0.3\n"
+
+#: app/templates/modals/google/logout.php:23
+#: app/templates/modals/google/logout.php:47
+#: app/templates/settings/google/account.php:61
+msgid "Log out"
+msgstr ""
+
+#: app/templates/modals/google/logout.php:26
+#: app/templates/modals/google/switch.php:26
+#: app/templates/modals/onboarding/google/account.php:32
+#: app/templates/modals/onboarding/google/single-setup.php:33
+#: app/templates/modals/onboarding/pro-sites.php:30
+#: app/templates/modals/onboarding/setup.php:69
+#: app/templates/modals/onboarding/setup.php:143
+#: app/templates/modals/onboarding/setup.php:185
+msgid "Close this dialog window"
+msgstr ""
+
+#: app/templates/modals/google/logout.php:34
+msgid "Logging out will remove analytics from your Dashboard."
+msgstr ""
+
+#: app/templates/modals/google/logout.php:35
+msgid "Are you sure you want to logout?"
+msgstr ""
+
+#: app/templates/modals/google/logout.php:42
+#: app/templates/modals/google/switch.php:42
+msgid "Cancel"
+msgstr ""
+
+#: app/templates/modals/google/switch.php:23
+#: app/templates/modals/google/switch.php:47
+msgid "Switch profile"
+msgstr ""
+
+#: app/templates/modals/google/switch.php:34
+msgid ""
+"When you switch your profile, you will be logged out and analytics will be "
+"removed from Dashboard."
+msgstr ""
+
+#: app/templates/modals/google/switch.php:35
+msgid "Are you sure you want to switch?"
+msgstr ""
+
+#: app/templates/modals/onboarding/google/account.php:26
+msgid "Set up your account"
+msgstr ""
+
+#: app/templates/modals/onboarding/google/account.php:29
+msgid ""
+"We have successfully connected your Google account. The next step is to "
+"choose your Analytics View to get data feeding."
+msgstr ""
+
+#: app/templates/modals/onboarding/google/account.php:41
+#: app/templates/settings/google/account.php:80
+msgid "Choose your analytics view (profile)"
+msgstr ""
+
+#: app/templates/modals/onboarding/google/account.php:44
+#: app/templates/settings/google/account.php:83
+msgid "No website information"
+msgstr ""
+
+#: app/templates/modals/onboarding/google/account.php:58
+#: app/templates/settings/google/account.php:96
+msgid ""
+"You don't have any Google Analytics profile connected to your account. To "
+"get going, just <a href=\"%s\" target=\"_blank\">sign up for Google "
+"Analytics</a>."
+msgstr ""
+
+#: app/templates/modals/onboarding/google/account.php:70
+#: app/templates/settings/google/account.php:109
+msgid ""
+"Automatically add the Google Analytics tracking code to the <head> of my "
+"site"
+msgstr ""
+
+#: app/templates/modals/onboarding/google/account.php:78
+msgid "Display Analytics statistics to:"
+msgstr ""
+
+#: app/templates/modals/onboarding/google/account.php:95
+#: app/templates/settings/tabs/permissions.php:50
+msgid "Allow site admins to overwrite this setting"
+msgstr ""
+
+#: app/templates/modals/onboarding/google/account.php:100
+#: app/templates/modals/onboarding/pro-sites.php:65
+msgid "Continue"
+msgstr ""
+
+#: app/templates/modals/onboarding/google/network-setup.php:24
+#: app/templates/modals/onboarding/google/single-setup.php:24
+#: app/templates/modals/onboarding/google/subsite-setup.php:27
+msgid "Welcome to %s"
+msgstr ""
+
+#: app/templates/modals/onboarding/google/network-setup.php:28
+#: app/templates/modals/onboarding/google/single-setup.php:28
+#: app/templates/modals/onboarding/google/subsite-setup.php:31
+msgid ""
+"%s, welcome to the hottest Google Analytics plugin for WordPress. Let's get "
+"started by connecting your Google Analytics account so that we can feed "
+"your analytics data.  If you only want to enable tracking without reports, "
+"you can paste your analytics code via the link below."
+msgstr ""
+
+#: app/templates/modals/onboarding/google/network-setup.php:44
+#: app/templates/modals/onboarding/google/network-setup.php:58
+#: app/templates/modals/onboarding/google/single-setup.php:44
+#: app/templates/modals/onboarding/google/single-setup.php:58
+#: app/templates/modals/onboarding/google/subsite-setup.php:51
+#: app/templates/modals/onboarding/google/subsite-setup.php:69
+#: app/templates/modals/onboarding/google/subsite-setup.php:84
+#: app/templates/settings/google/network-setup.php:29
+#: app/templates/settings/google/network-setup.php:42
+#: app/templates/settings/google/single-setup.php:29
+#: app/templates/settings/google/single-setup.php:43
+#: app/templates/settings/google/subsite-setup.php:39
+#: app/templates/settings/google/subsite-setup.php:51
+#: app/templates/settings/google/subsite-setup.php:66
+msgid "Connect with Google"
+msgstr ""
+
+#: app/templates/modals/onboarding/google/network-setup.php:45
+#: app/templates/modals/onboarding/google/single-setup.php:45
+#: app/templates/modals/onboarding/google/subsite-setup.php:70
+#: app/templates/settings/google/network-setup.php:30
+#: app/templates/settings/google/single-setup.php:30
+#: app/templates/settings/google/subsite-setup.php:52
+msgid "Set up API Project"
+msgstr ""
+
+#: app/templates/modals/onboarding/google/network-setup.php:52
+#: app/templates/modals/onboarding/google/single-setup.php:52
+#: app/templates/modals/onboarding/google/subsite-setup.php:78
+#: app/templates/settings/google/network-setup.php:36
+#: app/templates/settings/google/single-setup.php:37
+#: app/templates/settings/google/subsite-setup.php:60
+msgid ""
+"Easily connect with Google by clicking the “Connect with Google” button and "
+"pasting the access code below. Please note, we only retrieve analytics "
+"information and no personally identifiable data."
+msgstr ""
+
+#: app/templates/modals/onboarding/google/network-setup.php:63
+#: app/templates/modals/onboarding/google/single-setup.php:63
+#: app/templates/modals/onboarding/google/subsite-setup.php:95
+#: app/templates/settings/google/network-setup.php:47
+#: app/templates/settings/google/single-setup.php:48
+#: app/templates/settings/google/subsite-setup.php:71
+msgid "Access Code"
+msgstr ""
+
+#: app/templates/modals/onboarding/google/network-setup.php:64
+#: app/templates/modals/onboarding/google/single-setup.php:64
+#: app/templates/modals/onboarding/google/subsite-setup.php:96
+#: app/templates/settings/google/network-setup.php:48
+#: app/templates/settings/google/single-setup.php:49
+#: app/templates/settings/google/subsite-setup.php:72
+msgid "Place access code here"
+msgstr ""
+
+#: app/templates/modals/onboarding/google/network-setup.php:70
+#: app/templates/modals/onboarding/google/network-setup.php:96
+#: app/templates/modals/onboarding/google/single-setup.php:70
+#: app/templates/modals/onboarding/google/single-setup.php:96
+#: app/templates/modals/onboarding/google/subsite-setup.php:102
+#: app/templates/modals/onboarding/google/subsite-setup.php:128
+#: app/templates/settings/google/network-setup.php:54
+#: app/templates/settings/google/network-setup.php:79
+#: app/templates/settings/google/single-setup.php:55
+#: app/templates/settings/google/single-setup.php:81
+#: app/templates/settings/google/subsite-setup.php:78
+#: app/templates/settings/google/subsite-setup.php:104
+msgid "Authorize"
+msgstr ""
+
+#: app/templates/modals/onboarding/google/network-setup.php:79
+#: app/templates/modals/onboarding/google/single-setup.php:79
+#: app/templates/modals/onboarding/google/subsite-setup.php:111
+#: app/templates/settings/google/network-setup.php:62
+#: app/templates/settings/google/single-setup.php:64
+#: app/templates/settings/google/subsite-setup.php:87
+msgid ""
+"We recommend to set up API project, as it results in smoother experience "
+"for site admins. You can check the documentation on how to set up API "
+"project <a href=\"%s\" target=\"_blank\">here</a>."
+msgstr ""
+
+#: app/templates/modals/onboarding/google/network-setup.php:83
+#: app/templates/modals/onboarding/google/single-setup.php:83
+#: app/templates/modals/onboarding/google/subsite-setup.php:115
+#: app/templates/settings/google/network-setup.php:66
+#: app/templates/settings/google/single-setup.php:68
+#: app/templates/settings/google/subsite-setup.php:91
+msgid "Google Client ID"
+msgstr ""
+
+#: app/templates/modals/onboarding/google/network-setup.php:84
+#: app/templates/modals/onboarding/google/single-setup.php:84
+#: app/templates/modals/onboarding/google/subsite-setup.php:116
+#: app/templates/settings/google/network-setup.php:67
+#: app/templates/settings/google/single-setup.php:69
+#: app/templates/settings/google/subsite-setup.php:92
+msgid "Place Google Client ID here"
+msgstr ""
+
+#: app/templates/modals/onboarding/google/network-setup.php:89
+#: app/templates/modals/onboarding/google/single-setup.php:89
+#: app/templates/modals/onboarding/google/subsite-setup.php:121
+#: app/templates/settings/google/network-setup.php:72
+#: app/templates/settings/google/single-setup.php:74
+#: app/templates/settings/google/subsite-setup.php:97
+msgid "Google Client Secret"
+msgstr ""
+
+#: app/templates/modals/onboarding/google/network-setup.php:90
+#: app/templates/modals/onboarding/google/single-setup.php:90
+#: app/templates/modals/onboarding/google/subsite-setup.php:122
+#: app/templates/settings/google/network-setup.php:73
+#: app/templates/settings/google/single-setup.php:75
+#: app/templates/settings/google/subsite-setup.php:98
+msgid "Place Google Client Secret here"
+msgstr ""
+
+#: app/templates/modals/onboarding/google/network-setup.php:107
+#: app/templates/modals/onboarding/google/single-setup.php:107
+#: app/templates/modals/onboarding/google/subsite-setup.php:144
+msgid "Add Google Analytics tracking ID"
+msgstr ""
+
+#: app/templates/modals/onboarding/google/subsite-setup.php:54
+#: app/templates/modals/onboarding/google/subsite-setup.php:87
+msgid "Why to connect wth Google?"
+msgstr ""
+
+#: app/templates/modals/onboarding/google/subsite-setup.php:55
+#: app/templates/modals/onboarding/google/subsite-setup.php:88
+msgid ""
+"We need to authenticate your account with Google to ensure you actually own "
+"the analytics data. We only retrieve analytics information and no "
+"personally identifiable data."
+msgstr ""
+
+#: app/templates/modals/onboarding/pro-sites.php:24
+#: app/templates/settings/tabs/general.php:116
+msgid "Pro Site Permissions"
+msgstr ""
+
+#: app/templates/modals/onboarding/pro-sites.php:27
+#: app/templates/settings/tabs/general.php:117
+msgid ""
+"We see you have Pro Sites active. Choose which levels you want to access "
+"analytics."
+msgstr ""
+
+#: app/templates/modals/onboarding/pro-sites.php:38
+#: app/templates/settings/tabs/general.php:121
+msgid "Google Analytics Settings"
+msgstr ""
+
+#: app/templates/modals/onboarding/pro-sites.php:39
+#: app/templates/settings/tabs/general.php:122
+msgid "Choose which Pro Site levels can configure analytics settings."
+msgstr ""
+
+#: app/templates/modals/onboarding/pro-sites.php:52
+#: app/templates/settings/tabs/general.php:133
+msgid "Dashboard Analytics"
+msgstr ""
+
+#: app/templates/modals/onboarding/pro-sites.php:53
+#: app/templates/settings/tabs/general.php:134
+msgid ""
+"Choose which Pro Site levels can view analytics in their WP Admin "
+"Dashboard's."
+msgstr ""
+
+#: app/templates/modals/onboarding/setup.php:41
+#: app/templates/modals/onboarding/setup.php:97
+#: app/templates/modals/onboarding/setup.php:118
+#: app/templates/modals/onboarding/setup.php:164
+msgid "Skip this"
+msgstr ""
+
+#: app/templates/modals/onboarding/setup.php:57
+msgid "Add Tracking ID"
+msgstr ""
+
+#: app/templates/modals/onboarding/setup.php:61
+msgid ""
+"Paste your Google Analytics tracking ID in the field below to enable "
+"analytics tracking for the whole network. You can get your ID <a "
+"href=\"%s\" target=\"_blank\">here</a>."
+msgstr ""
+
+#: app/templates/modals/onboarding/setup.php:63
+msgid ""
+"Paste your Google Analytics tracking ID in the field below to enable "
+"analytics tracking. You can get your ID <a href=\"%s\" "
+"target=\"_blank\">here</a>."
+msgstr ""
+
+#: app/templates/modals/onboarding/setup.php:67
+#: app/templates/modals/onboarding/setup.php:141
+msgid "Go to previous slide"
+msgstr ""
+
+#: app/templates/modals/onboarding/setup.php:78
+msgid "Network-wide Tracking ID"
+msgstr ""
+
+#: app/templates/modals/onboarding/setup.php:80
+#: app/templates/settings/tabs/tracking.php:58
+#: app/templates/settings/tabs/tracking.php:69
+#: core/helpers/class-template.php:29
+msgid "Tracking ID"
+msgstr ""
+
+#: app/templates/modals/onboarding/setup.php:83
+#: app/templates/settings/tabs/tracking.php:75
+msgid "E.g: UA-XXXXXXXXX-X"
+msgstr ""
+
+#: app/templates/modals/onboarding/setup.php:88
+msgid "Save Code"
+msgstr ""
+
+#: app/templates/modals/onboarding/setup.php:135
+#: app/templates/settings/tabs/general.php:44
+msgid "Admin pages tracking"
+msgstr ""
+
+#: app/templates/modals/onboarding/setup.php:138
+#: app/templates/settings/tabs/general.php:45
+msgid "When enabled, you will get statistics from all admin pages."
+msgstr ""
+
+#: app/templates/modals/onboarding/setup.php:154
+#: app/templates/settings/tabs/general.php:53
+msgid "Enable Admin pages tracking"
+msgstr ""
+
+#: app/templates/modals/onboarding/setup.php:157
+msgid "Finish"
+msgstr ""
+
+#: app/templates/modals/onboarding/setup.php:181
+msgid "Finishing Setup..."
+msgstr ""
+
+#: app/templates/modals/onboarding/setup.php:186
+msgid "Skip"
+msgstr ""
+
+#: app/templates/modals/onboarding/setup.php:195
+msgid ""
+"Please wait a few moments while we set up your account. Note that data can "
+"take up to 24 hours to display."
+msgstr ""
+
+#: app/templates/settings/common/footer.php:19
+msgid "Made with"
+msgstr ""
+
+#: app/templates/settings/common/footer.php:20
+msgid "by WPMU DEV"
+msgstr ""
+
+#: app/templates/settings/common/footer.php:26
+#: app/templates/settings/common/footer.php:69
+msgid "The Hub"
+msgstr ""
+
+#: app/templates/settings/common/footer.php:28
+msgid "Plugins"
+msgstr ""
+
+#: app/templates/settings/common/footer.php:31
+#: app/templates/settings/common/footer.php:61
+#: core/controllers/class-admin.php:200
+msgid "Roadmap"
+msgstr ""
+
+#: app/templates/settings/common/footer.php:34
+#: app/templates/settings/common/footer.php:64
+#: core/controllers/class-admin.php:197
+msgid "Support"
+msgstr ""
+
+#: app/templates/settings/common/footer.php:37
+#: app/templates/settings/common/footer.php:67
+#: core/controllers/class-admin.php:153
+msgid "Docs"
+msgstr ""
+
+#: app/templates/settings/common/footer.php:39
+msgid "Community"
+msgstr ""
+
+#: app/templates/settings/common/footer.php:42
+msgid "Academy"
+msgstr ""
+
+#: app/templates/settings/common/footer.php:45
+#: app/templates/settings/common/footer.php:72
+msgid "Terms of Service"
+msgstr ""
+
+#: app/templates/settings/common/footer.php:48
+#: app/templates/settings/common/footer.php:75
+msgid "Privacy Policy"
+msgstr ""
+
+#: app/templates/settings/common/footer.php:55
+msgid "Free Plugins"
+msgstr ""
+
+#: app/templates/settings/common/footer.php:58
+msgid "Membership"
+msgstr ""
+
+#: app/templates/settings/common/footer.php:82
+msgid "Facebook"
+msgstr ""
+
+#: app/templates/settings/common/footer.php:85
+msgid "Twitter"
+msgstr ""
+
+#: app/templates/settings/common/footer.php:88
+msgid "Instagram"
+msgstr ""
+
+#: app/templates/settings/common/header.php:26
+#: app/templates/settings/settings.php:33 core/controllers/class-admin.php:127
+#: core/controllers/class-admin.php:152 core/helpers/class-template.php:28
+msgid "Settings"
+msgstr ""
+
+#: app/templates/settings/common/header.php:29
+msgid "View Documentation"
+msgstr ""
+
+#: app/templates/settings/common/notice.php:22
+msgid "Dismiss"
+msgstr ""
+
+#: app/templates/settings/google/account.php:25
+msgid "Connected Google Account"
+msgstr ""
+
+#: app/templates/settings/google/account.php:41
+msgid "No account information"
+msgstr ""
+
+#: app/templates/settings/google/account.php:49
+msgid "Open options"
+msgstr ""
+
+#: app/templates/settings/google/account.php:55
+msgid "Switch user"
+msgstr ""
+
+#: app/templates/settings/google/account.php:77
+msgid "Select your website profile for displaying analytics"
+msgstr ""
+
+#: app/templates/settings/google/subsite-setup.php:33
+msgid ""
+"To connect with Google, you need to get an authorization from your account. "
+"Connect with Google and paste the access code below. Note, we only retrieve "
+"analytics information and no personally identifiable data."
+msgstr ""
+
+#: app/templates/settings/settings.php:52
+msgid "Save Changes"
+msgstr ""
+
+#: app/templates/settings/tabs/general.php:20
+msgid "Account"
+msgstr ""
+
+#: app/templates/settings/tabs/general.php:21
+msgid ""
+"Google API project is suitable for high traffic websites and will result in "
+"smoother experience for site admins."
+msgstr ""
+
+#: app/templates/settings/tabs/general.php:63
+msgid "IP Anonymization"
+msgstr ""
+
+#: app/templates/settings/tabs/general.php:64
+msgid "When enabled, visitor IP address will be anonymized."
+msgstr ""
+
+#: app/templates/settings/tabs/general.php:72
+msgid "Enable IP Anonymization"
+msgstr ""
+
+#: app/templates/settings/tabs/general.php:77
+msgid "Whole network tracking"
+msgstr ""
+
+#: app/templates/settings/tabs/general.php:81
+msgid "Force on sub-sites tracking"
+msgstr ""
+
+#: app/templates/settings/tabs/general.php:94
+msgid "Display Advertising"
+msgstr ""
+
+#: app/templates/settings/tabs/general.php:95
+msgid ""
+"Enable support for Google's Display Advertising and get additional "
+"demographic and interests reports. You can read more about it <a "
+"href=\"%s\" target=\"_blank\">here</a>."
+msgstr ""
+
+#: app/templates/settings/tabs/general.php:103
+msgid "Enable Display Advertising Support"
+msgstr ""
+
+#: app/templates/settings/tabs/general.php:106
+msgid ""
+"Note: Enabling this feature requires <a href=\"%s\" "
+"target=\"_blank\">updating your privacy policy</a>."
+msgstr ""
+
+#: app/templates/settings/tabs/permissions.php:19
+msgid "Roles or Capabilities"
+msgstr ""
+
+#: app/templates/settings/tabs/permissions.php:20
+msgid ""
+"Choose which user roles or specific capabilities can see analytics in their "
+"WordPress Dashboard. User roles that don't match these won't see your "
+"analytics."
+msgstr ""
+
+#: app/templates/settings/tabs/permissions.php:27
+msgid "Roles"
+msgstr ""
+
+#: app/templates/settings/tabs/permissions.php:28
+msgid "Capabilities"
+msgstr ""
+
+#: app/templates/settings/tabs/permissions.php:33
+msgid "Select minimum role"
+msgstr ""
+
+#: app/templates/settings/tabs/permissions.php:59
+msgid "Custom Capability"
+msgstr ""
+
+#: app/templates/settings/tabs/permissions.php:60
+msgid "Set custom capability"
+msgstr ""
+
+#: app/templates/settings/tabs/permissions.php:61
+msgid ""
+"Specify a custom capability that, if a user role matches it, can see "
+"analytics. You can view default capabilities <a href=\"%s\" "
+"target=\"_blank\">here</a>."
+msgstr ""
+
+#: app/templates/settings/tabs/reports.php:26
+msgid "Analytics Reports"
+msgstr ""
+
+#: app/templates/settings/tabs/reports.php:27
+msgid ""
+"Pick and choose the specific types of analytics to include in the Dashboard "
+"widgets."
+msgstr ""
+
+#: app/templates/settings/tabs/reports.php:35
+msgid "No roles are selected in Permissions settings."
+msgstr ""
+
+#: app/templates/settings/tabs/reports.php:60
+msgid ""
+"You have allowed only administrator to have access to dashboard widgets. "
+"You can configure it in <a href=\"%s\">Permissions tab</a>."
+msgstr ""
+
+#: app/templates/settings/tabs/reports.php:64
+msgid "You have allowed only administrator to have access to dashboard widgets."
+msgstr ""
+
+#: app/templates/settings/tabs/reports.php:72
+msgid "Select which statistics you want to display according to roles"
+msgstr ""
+
+#: app/templates/settings/tabs/reports.php:74
+msgid "Dashboard Widget"
+msgstr ""
+
+#: app/templates/settings/tabs/reports.php:99
+msgid "Open or close this item"
+msgstr ""
+
+#: app/templates/settings/tabs/reports.php:142
+msgid "All Statistics"
+msgstr ""
+
+#: app/templates/settings/tabs/tracking.php:26
+msgid "Network Tracking"
+msgstr ""
+
+#: app/templates/settings/tabs/tracking.php:27
+msgid ""
+"Copy and paste your Google Analytics tracking ID to add it to your website. "
+"Note: This tracking code will track your whole network. To track subsites, "
+"you need to add the tracking code separately for each one."
+msgstr ""
+
+#: app/templates/settings/tabs/tracking.php:28
+#: app/templates/settings/tabs/tracking.php:36
+#: app/templates/settings/tabs/tracking.php:41
+msgid ""
+"Having trouble finding your tracking code? You can grab it <a href=\"%s\" "
+"target=\"_blank\">here</a>."
+msgstr ""
+
+#: app/templates/settings/tabs/tracking.php:30
+msgid "Subsite Tracking"
+msgstr ""
+
+#: app/templates/settings/tabs/tracking.php:31
+#: app/templates/settings/tabs/tracking.php:40
+msgid "Copy and paste your Google Analytics tracking ID to add it to your website."
+msgstr ""
+
+#: app/templates/settings/tabs/tracking.php:34
+msgid ""
+"Note: Currently your statistics are provided from network wide tracking "
+"code. You can increase stats accuracy by <a href=\"%s\">logging in</a> and "
+"configuring your own profile."
+msgstr ""
+
+#: app/templates/settings/tabs/tracking.php:39
+msgid "Tracking Statistics"
+msgstr ""
+
+#: app/templates/settings/tabs/tracking.php:59
+#: app/templates/settings/tabs/tracking.php:70
+msgid ""
+"Note: This will only feed data to Google, to view analytics in your "
+"Dashboard you'll need to authenticate your account on the Settings tab."
+msgstr ""
+
+#: app/templates/settings/tabs/tracking.php:60
+msgid "Use a different tracking ID"
+msgstr ""
+
+#: app/templates/settings/tabs/tracking.php:63
+msgid "We have automatically got your tracking code from your connected profile."
+msgstr ""
+
+#: app/templates/settings/tabs/tracking.php:72
+msgid "Add tracking ID connected to the account"
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/elements/chart-options.php:26
+#: app/templates/stats/google/post-metabox/metabox.php:31
+#: app/templates/stats/google/stats-page/metaboxes/visitors.php:35
+#: core/modules/google-analytics/views/class-settings.php:40
+#: core/modules/google-analytics/views/class-stats.php:251
+msgid "Sessions"
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/elements/chart-options.php:27
+#: app/templates/stats/google/post-metabox/metabox.php:32
+msgid ""
+"Total number of Sessions within the date range. A session is the period of "
+"time user is actively engaged with your website, app, etc."
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/elements/chart-options.php:30
+#: app/templates/stats/google/post-metabox/metabox.php:19
+#: app/templates/stats/google/stats-page/metaboxes/visitors.php:39
+#: app/templates/stats/google/stats-page/metaboxes/visitors.php:177
+#: core/modules/google-analytics/views/class-settings.php:41
+#: core/modules/google-analytics/views/class-stats.php:257
+msgid "Users"
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/elements/chart-options.php:31
+#: app/templates/stats/google/post-metabox/metabox.php:20
+msgid "Users who have initiated at least one session during the date range."
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/elements/chart-options.php:34
+#: app/templates/stats/google/dashboard-widget/tabs/tab-general.php:96
+#: app/templates/stats/google/dashboard-widget/tabs/tab-traffic.php:84
+#: app/templates/stats/google/post-metabox/metabox.php:25
+#: app/templates/stats/google/stats-page/metaboxes/countries.php:47
+#: app/templates/stats/google/stats-page/metaboxes/visitors.php:43
+#: app/templates/stats/google/stats-page/metaboxes/visitors.php:181
+#: core/modules/google-analytics/views/class-settings.php:42
+#: core/modules/google-analytics/views/class-stats.php:254
+msgid "Pageviews"
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/elements/chart-options.php:35
+#: app/templates/stats/google/post-metabox/metabox.php:26
+msgid ""
+"Pageviews is the total number of pages viewed. Repeated views of a single "
+"page are counted."
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/elements/chart-options.php:38
+#: app/templates/stats/google/post-metabox/metabox.php:40
+#: app/templates/stats/google/stats-page/metaboxes/visitors.php:47
+msgid "Pages/Sessions"
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/elements/chart-options.php:39
+#: app/templates/stats/google/post-metabox/metabox.php:41
+msgid ""
+"Pages/Sessions (Average Page Depth) is the average number of pages viewed "
+"during a session. Repeated views of a single page are counted."
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/elements/chart-options.php:42
+#: app/templates/stats/google/dashboard-widget/tabs/tab-pages.php:38
+#: app/templates/stats/google/stats-page/metaboxes/pages.php:37
+#: app/templates/stats/google/stats-page/metaboxes/visitors.php:51
+#: core/modules/google-analytics/views/class-settings.php:44
+#: core/modules/google-analytics/views/class-stats.php:253
+msgid "Avg. time"
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/elements/chart-options.php:43
+#: app/templates/stats/google/post-metabox/metabox.php:47
+msgid "The average length of a session."
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/elements/chart-options.php:46
+#: app/templates/stats/google/post-metabox/metabox.php:52
+#: app/templates/stats/google/stats-page/metaboxes/visitors.php:55
+#: core/modules/google-analytics/views/class-stats.php:259
+msgid "Bounce Rate"
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/elements/chart-options.php:47
+#: app/templates/stats/google/post-metabox/metabox.php:53
+msgid ""
+"The percentage of single-page sessions in which there was no interaction "
+"with the page. A bounced session has a duration of 0 seconds."
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/elements/chart-options.php:63
+#: app/templates/stats/google/dashboard-widget/elements/chart-options.php:79
+#: app/templates/stats/google/stats-page/metaboxes/visitors.php:32
+#: app/templates/stats/google/stats-page/metaboxes/visitors.php:36
+#: app/templates/stats/google/stats-page/metaboxes/visitors.php:40
+#: app/templates/stats/google/stats-page/metaboxes/visitors.php:44
+#: app/templates/stats/google/stats-page/metaboxes/visitors.php:48
+#: app/templates/stats/google/stats-page/metaboxes/visitors.php:52
+#: app/templates/stats/google/stats-page/metaboxes/visitors.php:56
+msgid "Stats are being loaded"
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/elements/notice.php:45
+msgid "Dismiss this notice"
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/elements/table.php:75
+#: app/templates/stats/google/stats-page/metaboxes/referrals.php:34
+#: core/modules/google-analytics/views/class-stats.php:246
+msgid "No information"
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/elements/table.php:75
+msgid "Table content is being loaded."
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/elements/widget-header.php:29
+msgid "See all stats"
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/elements/widget-header.php:32
+msgid "Go to Settings"
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/elements/widget-header.php:42
+#: app/templates/stats/google/stats-page/stats.php:33
+msgid "Custom"
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/elements/widget-header.php:50
+#: app/templates/stats/google/stats-page/stats.php:48
+msgid "From"
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/elements/widget-header.php:55
+#: app/templates/stats/google/stats-page/stats.php:53
+msgid "To"
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/elements/widget-header.php:60
+#: app/templates/stats/google/stats-page/stats.php:58
+msgid "Reset"
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/elements/widget-header.php:61
+#: app/templates/stats/google/stats-page/stats.php:59
+msgid "Apply"
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/tabs/tab-audience.php:36
+#: app/templates/stats/google/dashboard-widget/tabs/tab-audience.php:53
+#: app/templates/stats/google/stats-page/metaboxes/visitors.php:66
+#: app/templates/stats/google/stats-page/metaboxes/visitors.php:91
+#: app/templates/stats/google/stats-page/metaboxes/visitors.php:105
+#: app/templates/stats/google/stats-page/metaboxes/visitors.php:119
+#: app/templates/stats/google/stats-page/metaboxes/visitors.php:133
+#: app/templates/stats/google/stats-page/metaboxes/visitors.php:147
+#: app/templates/stats/google/stats-page/metaboxes/visitors.php:161
+msgid "Empty chart draw"
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/tabs/tab-audience.php:40
+#: app/templates/stats/google/dashboard-widget/tabs/tab-audience.php:57
+#: app/templates/stats/google/dashboard-widget/tabs/tab-traffic.php:57
+#: app/templates/stats/google/stats-page/metaboxes/visitors.php:70
+#: app/templates/stats/google/stats-page/metaboxes/visitors.php:95
+#: app/templates/stats/google/stats-page/metaboxes/visitors.php:109
+#: app/templates/stats/google/stats-page/metaboxes/visitors.php:123
+#: app/templates/stats/google/stats-page/metaboxes/visitors.php:137
+#: app/templates/stats/google/stats-page/metaboxes/visitors.php:151
+#: app/templates/stats/google/stats-page/metaboxes/visitors.php:165
+msgid "Fetching latest data..."
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/tabs/tab-audience.php:112
+#: app/templates/stats/google/dashboard-widget/tabs/tab-general.php:25
+#: app/templates/stats/google/dashboard-widget/tabs/tab-pages.php:21
+#: app/templates/stats/google/dashboard-widget/tabs/tab-traffic.php:27
+msgid "Please, <a href=\"%s\">authorize your account</a> to see the statistics."
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/tabs/tab-audience.php:120
+msgid "We haven't collected enough data. Please check back soon."
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/tabs/tab-audience.php:132
+msgid "No data for this period of time"
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/tabs/tab-audience.php:134
+msgid "%s returning visitors"
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/tabs/tab-audience.php:136
+msgid "%s new visitors"
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/tabs/tab-general.php:34
+#: app/templates/stats/google/dashboard-widget/tabs/tab-traffic.php:35
+#: app/templates/stats/google/stats-page/metaboxes/visitors.php:80
+msgid ""
+"It may take up to 24 hours for data to begin feeding. Please check back "
+"soon."
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/tabs/tab-general.php:64
+#: app/templates/stats/google/dashboard-widget/tabs/tab-pages.php:30
+msgid "Top 5 visited pages."
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/tabs/tab-general.php:68
+#: app/templates/stats/google/stats-page/metaboxes/pages.php:17
+#: core/modules/google-analytics/views/class-settings.php:33
+#: core/modules/google-analytics/views/class-settings.php:82
+#: core/modules/google-analytics/views/class-stats.php:247
+msgid "Top Pages"
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/tabs/tab-general.php:72
+#: core/modules/google-analytics/views/class-stats.php:248
+msgid "Visits"
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/tabs/tab-general.php:88
+msgid "Top 5 countries visiting your website."
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/tabs/tab-general.php:92
+#: app/templates/stats/google/stats-page/metaboxes/countries.php:17
+#: app/templates/stats/google/stats-page/metaboxes/countries.php:43
+#: core/modules/google-analytics/views/class-settings.php:34
+#: core/modules/google-analytics/views/class-settings.php:54
+#: core/modules/google-analytics/views/class-settings.php:83
+#: core/modules/google-analytics/views/class-stats.php:250
+msgid "Top Countries"
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/tabs/tab-pages.php:34
+#: app/templates/stats/google/stats-page/metaboxes/pages.php:33
+msgid "Top Pages/most visited"
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/tabs/tab-pages.php:42
+#: app/templates/stats/google/stats-page/metaboxes/pages.php:41
+#: core/modules/google-analytics/views/class-stats.php:249
+msgid "Views"
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/tabs/tab-pages.php:46
+#: app/templates/stats/google/stats-page/metaboxes/pages.php:45
+#: core/modules/google-analytics/views/class-stats.php:252
+msgid "Trend"
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/tabs/tab-traffic.php:53
+msgid "Map without stats."
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/tabs/tab-traffic.php:76
+msgid "List of all countries visiting your website."
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/tabs/tab-traffic.php:80
+msgid "Countries"
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/widget.php:48
+#: core/modules/google-analytics/views/class-settings.php:30
+msgid "General Stats"
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/widget.php:54
+#: core/modules/google-analytics/views/class-settings.php:38
+msgid "Audience"
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/widget.php:60
+#: core/modules/google-analytics/views/class-settings.php:49
+msgid "Top Pages & Views"
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/widget.php:66
+#: core/modules/google-analytics/views/class-settings.php:52
+msgid "Traffic"
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/widget.php:153
+msgid ""
+"No analytics type has been chosen to be displayed here. <a href=\"%s\">Go "
+"to settings</a> and select which statistics you want to show."
+msgstr ""
+
+#: app/templates/stats/google/dashboard-widget/widget.php:157
+msgid "No analytics type has been chosen to be displayed here."
+msgstr ""
+
+#: app/templates/stats/google/popular-widget/admin.php:17
+msgid "Title"
+msgstr ""
+
+#: app/templates/stats/google/popular-widget/admin.php:21
+msgid "Maximum number of posts to show:"
+msgstr ""
+
+#: app/templates/stats/google/post-metabox/metabox.php:22
+#. translators: %1$s - Value, %2$s - Date.
+msgid "%1$s users who have initiated at least one session between %2$s."
+msgstr ""
+
+#: app/templates/stats/google/post-metabox/metabox.php:28
+#. translators: %1$s - Value, %2$s - Date.
+msgid "%1$s views of this page between %2$s."
+msgstr ""
+
+#: app/templates/stats/google/post-metabox/metabox.php:34
+#. translators: %1$s - Value, %2$s - Date.
+msgid "%1$s number of sessions within %2$s."
+msgstr ""
+
+#: app/templates/stats/google/post-metabox/metabox.php:43
+#. translators: %1$s - Value, %2$s - Date.
+msgid "%1$s page sessions between %2$s."
+msgstr ""
+
+#: app/templates/stats/google/post-metabox/metabox.php:46
+msgid "Avg. Time"
+msgstr ""
+
+#: app/templates/stats/google/post-metabox/metabox.php:49
+#. translators: %1$s - Value, %2$s - Date.
+msgid "This page has been viewed for about %1$s between %2$s."
+msgstr ""
+
+#: app/templates/stats/google/post-metabox/metabox.php:55
+#. translators: %1$s - Value, %2$s - Date.
+msgid "%1$s of single-page sessions without interaction between %2$s."
+msgstr ""
+
+#: app/templates/stats/google/stats-page/metaboxes/countries.php:39
+msgid "List of top 7 countries visiting your website."
+msgstr ""
+
+#: app/templates/stats/google/stats-page/metaboxes/pages.php:29
+msgid "Top 10 visited pages."
+msgstr ""
+
+#: app/templates/stats/google/stats-page/metaboxes/referrals.php:17
+#: core/modules/google-analytics/views/class-settings.php:84
+msgid "Referrals"
+msgstr ""
+
+#: app/templates/stats/google/stats-page/metaboxes/visitors.php:19
+#: core/modules/google-analytics/class-analytics.php:119
+#: core/modules/google-analytics/views/class-settings.php:81
+msgid "Visitors"
+msgstr ""
+
+#: app/templates/stats/google/stats-page/metaboxes/visitors.php:31
+msgid "Overview"
+msgstr ""
+
+#: app/templates/stats/google/stats-page/stats.php:25
+#: core/modules/google-analytics/class-analytics.php:171
+msgid "Statistics"
+msgstr ""
+
+#: app/templates/stats/google/stats-page/stats.php:38
+msgid "Compare to previous period"
+msgstr ""
+
+#: core/controllers/class-admin.php:126
+msgid "Beehive Settings"
+msgstr ""
+
+#: core/controllers/class-admin.php:153
+msgid "Documentation"
+msgstr ""
+
+#: core/controllers/class-admin.php:161
+msgid "Upgrade to Beehive Pro"
+msgstr ""
+
+#: core/controllers/class-admin.php:161
+msgid "Upgrade"
+msgstr ""
+
+#: core/controllers/class-admin.php:163
+msgid "Renew Your Membership"
+msgstr ""
+
+#: core/controllers/class-admin.php:163
+msgid "Renew Membership"
+msgstr ""
+
+#: core/controllers/class-admin.php:194
+msgid "Get Premium Support"
+msgstr ""
+
+#: core/controllers/class-admin.php:194
+msgid "Premium Support"
+msgstr ""
+
+#: core/controllers/class-admin.php:196
+msgid "Rate Beehive"
+msgstr ""
+
+#: core/controllers/class-admin.php:197
+msgid "Get Support"
+msgstr ""
+
+#: core/controllers/class-admin.php:200
+msgid "View our Public Roadmap"
+msgstr ""
+
+#: core/controllers/class-ajax.php:106
+msgid "Could not finish onboarding due to an unknown error. Please try again."
+msgstr ""
+
+#: core/controllers/class-assets.php:135
+msgid "This field is required."
+msgstr ""
+
+#: core/controllers/class-assets.php:136
+msgid "Please input valid Client ID"
+msgstr ""
+
+#: core/controllers/class-assets.php:137
+msgid "Please input valid Client Secret"
+msgstr ""
+
+#: core/controllers/class-assets.php:138
+msgid "Please input valid Access Code"
+msgstr ""
+
+#: core/controllers/class-assets.php:139
+msgid "Please input valid Tracking ID"
+msgstr ""
+
+#: core/controllers/class-assets.php:140
+msgid ""
+"Whoops, looks like that's an invalid tracking ID. Double check you have "
+"your <a href=\"%s\" target=\"_blank\">Google tracking ID</a> and try again."
+msgstr ""
+
+#: core/controllers/class-compatibility.php:50
+msgid "Manage Settings"
+msgstr ""
+
+#: core/controllers/class-compatibility.php:56
+msgid "View Analytics"
+msgstr ""
+
+#: core/controllers/class-gdpr.php:45
+msgid ""
+"This website uses Google Analytics to track website traffic. Collected data "
+"is processed in such a way that visitors cannot be identified."
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Beehive Pro"
+msgstr ""
+
+#: core/helpers/class-general.php:58
+msgid "Beehive"
+msgstr ""
+
+#: core/helpers/class-general.php:158
+msgid "User"
+msgstr ""
+
+#: core/helpers/class-template.php:30
+msgid "Permissions"
+msgstr ""
+
+#: core/helpers/class-template.php:40
+msgid "Reports"
+msgstr ""
+
+#: core/modules/google-analytics/class-analytics.php:140
+msgid "Statistics for last 30 days"
+msgstr ""
+
+#: core/modules/google-analytics/class-analytics.php:170
+#: core/modules/google-analytics/class-analytics.php:181
+msgid "All statistics"
+msgstr ""
+
+#: core/modules/google-analytics/stats/class-format.php:235
+msgid "Other"
+msgstr ""
+
+#: core/modules/google-analytics/views/class-settings.php:32
+msgid "Summary"
+msgstr ""
+
+#: core/modules/google-analytics/views/class-settings.php:43
+#: core/modules/google-analytics/views/class-stats.php:258
+msgid "Pages/Session"
+msgstr ""
+
+#: core/modules/google-analytics/views/class-settings.php:45
+#: core/modules/google-analytics/views/class-stats.php:260
+msgid "Bounce Rates"
+msgstr ""
+
+#: core/modules/google-analytics/views/class-settings.php:55
+#: core/modules/google-analytics/views/class-stats.php:262
+msgid "Mediums"
+msgstr ""
+
+#: core/modules/google-analytics/views/class-settings.php:56
+#: core/modules/google-analytics/views/class-stats.php:264
+msgid "Search Engines"
+msgstr ""
+
+#: core/modules/google-analytics/views/class-settings.php:57
+#: core/modules/google-analytics/views/class-stats.php:263
+msgid "Social Networks"
+msgstr ""
+
+#: core/modules/google-analytics/views/class-stats.php:255
+msgid "Returning visitors"
+msgstr ""
+
+#: core/modules/google-analytics/views/class-stats.php:256
+msgid "New visitors"
+msgstr ""
+
+#: core/modules/google-analytics/views/class-stats.php:261
+msgid "Country"
+msgstr ""
+
+#: core/modules/google-analytics/views/class-stats.php:265
+msgid "Select an option below to print chart data."
+msgstr ""
+
+#: core/modules/google-analytics/views/class-stats.php:266
+msgid "has"
+msgstr ""
+
+#: core/modules/google-analytics/views/class-stats.php:298
+msgid "Today"
+msgstr ""
+
+#: core/modules/google-analytics/views/class-stats.php:302
+msgid "Yesterday"
+msgstr ""
+
+#: core/modules/google-analytics/views/class-stats.php:306
+msgid "Last 7 days"
+msgstr ""
+
+#: core/modules/google-analytics/views/class-stats.php:310
+msgid "Last 30 days"
+msgstr ""
+
+#: core/modules/google-analytics/views/class-stats.php:314
+msgid "Last 90 days"
+msgstr ""
+
+#: core/modules/google-analytics/views/class-stats.php:318
+msgid "Last year"
+msgstr ""
+
+#: core/modules/google-analytics/views/class-stats.php:322
+msgid "Last 3 years"
+msgstr ""
+
+#: core/modules/google-analytics/widgets/class-popular.php:41
+#: core/modules/google-analytics/widgets/class-popular.php:105
+msgid "Most popular posts"
+msgstr ""
+
+#: core/modules/google-analytics/widgets/class-popular.php:42
+msgid "Your site's most popular posts."
+msgstr ""
+
+#: core/modules/google-analytics/widgets/class-popular.php:159
+msgid "Loading..."
+msgstr ""
+
+#: core/modules/google-analytics/widgets/class-popular.php:222
+msgid "No data yet."
+msgstr ""
+
+#: core/modules/google-auth/class-ajax.php:110
+msgid ""
+"It appears the access code you used was invalid. Please get your access "
+"code again by clicking the “Connect with Google” button below and pasting "
+"it again. If you run into further issues you can <a href=\"%s\" "
+"target=\"_blank\">contact our Support</a> team for help."
+msgstr ""
+
+#: core/modules/google-auth/views/class-settings.php:186
+msgid ""
+"It appears the connection with your Google Analytics account has been "
+"broken. Re-authenticate with Google to continue viewing analytics in your "
+"Dashboard."
+msgstr ""
+
+#: core/modules/google-auth/views/class-settings.php:215
+msgid ""
+"It appears the connection with your Google Analytics account has been "
+"broken. Re-authenticate with Google in %s’s settings to continue viewing "
+"analytics in your Dashboard."
+msgstr ""
+
+#: core/modules/google-auth/views/class-settings.php:217
+msgid "Re-Authenticate Account"
+msgstr ""
+
+#: core/modules/google-auth/views/class-settings.php:246
+msgid ""
+"It appears you haven’t finished linking up your Google Analytics account "
+"with %s. Finish the setup to view analytics in your Dashboard."
+msgstr ""
+
+#: core/modules/google-auth/views/class-settings.php:248
+msgid "Connect Account"
+msgstr ""
+
+#: core/modules/google-auth/views/class-settings.php:274
+msgid ""
+"We authorized your account successfully. Choose your website below for "
+"displaying analytics."
+msgstr ""
+
+#: core/modules/google-auth/views/class-settings.php:277
+msgid ""
+"We couldn't connect your Google account. Please try reconnecting with the "
+"\"Connect\" button below. Alternately, you can set up a <a href=\"%s\" "
+"target=\"_blank\">new API project</a> with Google and use that instead. If "
+"you're still stuck you can <a href=\"%s\" target=\"_blank\">contact "
+"support</a> for assistance."
+msgstr ""
+
+#: core/modules/google-auth/views/class-settings.php:283
+msgid ""
+"We couldn't authorize your Google account. Please fill in your API "
+"information again, or connect with Google using the button below in side "
+"tab. If you're still stuck, please <a href=\"%s\" target=\"_blank\">contact "
+"support</a> for assistance."
+msgstr ""
+
+#: core/utils/abstracts/class-admin-ajax.php:45
+msgid "Security check failed."
+msgstr ""
+
+#: core/utils/abstracts/class-admin-ajax.php:74
+msgid "Sorry. You are not allowed to do this."
+msgstr ""
+
+#: core/utils/abstracts/class-admin-ajax.php:98
+msgid "Required values are not set. "
+msgstr ""
+
+#: core/utils/autoloader.php:8
+msgid ""
+"Autoloader is missing. Please run composer install if you are on "
+"development version."
+msgstr ""
+
+#: core/utils/autoloader.php:75
+msgid "The file attempting to be loaded at %s does not exist."
+msgstr ""
+
+#: core/views/class-settings.php:208
+msgid "Tracking ID updated successfully."
+msgstr ""
+
+#: core/views/class-settings.php:211
+msgid "Changes were saved successfully."
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid ""
+"http://premium.wpmudev.org/project/google-analytics-for-wordpress-mu-"
+"sitewide-and-single-blog-solution/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Enables Google Analytics for your site with statistics inside WordPress "
+"admin panel. Single and multi site compatible!"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "WPMU DEV"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://premium.wpmudev.org"
+msgstr ""

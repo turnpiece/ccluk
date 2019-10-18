@@ -2,7 +2,7 @@
 @font-face {
   font-family: "wpmudev-plugin-icons";
   src: url(../fonts/wpmudev-plugin-icons.eot);
-  src: url(../fonts/wpmudev-plugin-icons.eot) format("embedded-opentype"),url(../fonts/wpmudev-plugin-icons.ttf) format("truetype"),url(../fonts/wpmudev-plugin-icons.woff) format("woff"),url(../fonts/wpmudev-plugin-icons.woff2) format("woff2"),url(../fonts/wpmudev-plugin-icons.svg) format("svg");
+  src: url(../fonts/wpmudev-plugin-icons.eot) format("embedded-opentype"),url(../fonts/wpmudev-plugin-icons.ttf) format("truetype"),url(../fonts/wpmudev-plugin-icons.woff) format("woff"),url(../fonts/wpmudev-plugin-icons.woff2) format("woff2"),url(../fonts/wpmudev-plugin-icons.svg) format("svg");				 	          			 
   font-weight: 400;
   font-style: normal;
 }
@@ -321,3 +321,6 @@
     color: #333;
   }
 }
+
+
+/* 87274-1571425210-au */

@@ -8,8 +8,6 @@
  *    - Deprecated
  *       |-> Final
  *    - Debug
- *       |-> Interface:
- *          -  Debug_Interface
  *       |-> Final
  *
  * ## Failsafe:
@@ -18,7 +16,6 @@
  *
  * ## Façade (bottom is called first):
  *    -  | Core
- *       | Compat
  *       | Query
  *       | Init
  *       | Admin_Init
@@ -33,20 +30,13 @@
  *       | Generate_Url
  *       | Generate_Image
  *       | Generate_Ldjson
- *       | Doing_It_Right
  *       | Profile
- *       | Inpost
  *       | Admin_Pages
  *       | Sanitize
  *       | Site_Options
- *       | Metaboxes
- *       | Sitemaps
  *       | Cache
  *       | Feed
  *       | Load
- *          |-> Interface:
- *             - Debug_Interface
  *          |-> Final
- *          |-> Instance
- *
+ *          |-> Instanced in function `the_seo_framework()`
  */

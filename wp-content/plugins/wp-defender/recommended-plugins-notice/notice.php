@@ -174,7 +174,7 @@ if ( ! class_exists( 'WPMUDEV_Recommended_Plugins_Notice_Registered_Plugin' ) ) 
 			 *
 			 * @return string
 			 */
-			$seconds_after_registered = apply_filters( "wpmudev-recommended-plugin-{$this->basename}-notice-display-seconds-after-registered", $seconds_after_registered, $active_screen );
+			$seconds_after_registered = apply_filters( "wpmudev-recommended-plugin-{$this->basename}-notice-display-seconds-after-registered", $seconds_after_registered, $active_screen );	   			 	 		  		  	 	
 
 			$now = time();
 

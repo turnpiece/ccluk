@@ -15,12 +15,20 @@ use WP_Defender\Module\Hardener\Component\Disable_Xml_Rpc;
 use WP_Defender\Module\Hardener\Component\Hide_Error;
 use WP_Defender\Module\Hardener\Component\Login_Duration;
 use WP_Defender\Module\Hardener\Component\PHP_Version;
+use WP_Defender\Module\Hardener\Component\Prevent_Enum_Users;
 use WP_Defender\Module\Hardener\Component\Prevent_Php;
 use WP_Defender\Module\Hardener\Component\Protect_Information;
 use WP_Defender\Module\Hardener\Component\Security_Key;
+use WP_Defender\Module\Hardener\Component\Sh_Content_Security;
+use WP_Defender\Module\Hardener\Component\Sh_Content_Type_Options;
+use WP_Defender\Module\Hardener\Component\Sh_Feature_Policy;
+use WP_Defender\Module\Hardener\Component\Sh_Referrer_Policy;
+use WP_Defender\Module\Hardener\Component\Sh_Strict_Transport;
+use WP_Defender\Module\Hardener\Component\Sh_X_Frame;
+use WP_Defender\Module\Hardener\Component\Sh_XSS_Protection;
+use WP_Defender\Module\Hardener\Component\WP_Rest_Api;
 use WP_Defender\Module\Hardener\Component\WP_Version;
 use WP_Defender\Module\Hardener\Rule;
-use WP_Defender\Module\Hardener\Rule_Service;
 
 class Settings extends \Hammer\WP\Settings {
 	private static $_instance;
@@ -65,7 +73,7 @@ class Settings extends \Hammer\WP\Settings {
 	public $notification_repeat = false;
 
 	/**
-	 * Holding receipts info
+	 * Holding recipients info
 	 * @var array
 	 */
 	public $receipts = array();
@@ -97,10 +105,15 @@ class Settings extends \Hammer\WP\Settings {
 	public $active_server = 'apache';
 
 	/**
+	 * Last time visit into the hardener page
+	 *
 	 * @var integer
 	 */
 	public $last_seen;
+
 	/**
+	 * Last notification sent out
+	 *
 	 * @var integer
 	 */
 	public $last_sent;
@@ -114,6 +127,11 @@ class Settings extends \Hammer\WP\Settings {
 	 */
 	public $stable_php_version = '';
 
+	/**
+	 * We have to flag if the db prefix changed by us or not
+	 *
+	 * @var bool
+	 */
 	public $is_prefix_changed = false;
 
 	/**
@@ -133,9 +151,20 @@ class Settings extends \Hammer\WP\Settings {
 				);
 			}
 		}
+		$this->active_server = Utils::instance()->determineServer();
+		$this->active_server = Utils::instance()->determineServer();
 		parent::__construct( $id, $is_multi );
+		$this->notification = ! ! $this->notification;
+		if ( ! is_array( $this->receipts ) ) {
+			$this->receipts = [];
+		}
+		$this->receipts = array_values( $this->receipts );
 	}
 
+	/**
+	 * @param $slug
+	 * @param bool $devPush
+	 */
 	public function addToIssues( $slug, $devPush = true ) {
 		$this->addToList( 'issues', $slug, $devPush );
 	}
@@ -198,7 +227,10 @@ class Settings extends \Hammer\WP\Settings {
 	/**
 	 * @return Settings
 	 */
-	public static function instance() {
+	public static function instance( $refresh = false ) {
+		if ( $refresh == true ) {
+			self::$_instance = null;
+		}
 		if ( is_null( self::$_instance ) ) {
 			self::$_instance = new Settings( 'wd_hardener_settings', WP_Helper::is_network_activate( wp_defender()->plugin_slug ) );
 		}
@@ -229,6 +261,7 @@ class Settings extends \Hammer\WP\Settings {
 	}
 
 	/**
+	 * Get Issues tweaks as object
 	 * @return Rule[]
 	 */
 	public function getIssues() {
@@ -241,6 +274,40 @@ class Settings extends \Hammer\WP\Settings {
 		}
 
 		return $issues;
+	}
+
+	/**
+	 * Filter the tweaks and return data as array
+	 *
+	 *
+	 * @param $type
+	 *
+	 * @return array
+	 */
+	public function getTweaksAsArray( $type, $sort = false ) {
+		$rules = $this->getDefinedRules( true );
+
+		$arr  = $this->$type;
+		$data = array();
+		foreach ( $arr as $tweak ) {
+			if ( isset( $rules[ $tweak ] ) ) {
+				$curr                 = $rules[ $tweak ];
+				$data[ $curr::$slug ] = array(
+					'slug'          => $curr::$slug,
+					'title'         => $curr->getTitle(),
+					'errorReason'   => $curr->getErrorReason(),
+					'successReason' => $curr->getSuccessReason(),
+					'status'        => $type,
+					'misc'          => $curr->getMiscData()
+				);
+			}
+		}
+
+		if ( $sort ) {
+			ksort( $data );
+		}
+
+		return $data;
 	}
 
 	/**
@@ -293,18 +360,28 @@ class Settings extends \Hammer\WP\Settings {
 	 */
 	public function getDefinedRules( $init = false ) {
 		return array(
-			Disable_Trackback::$slug   => $init == true ? new Disable_Trackback() : Disable_Trackback::getClassName(),
-			WP_Version::$slug          => $init == true ? new WP_Version() : WP_Version::getClassName(),
-			PHP_Version::$slug         => $init == true ? new PHP_Version() : PHP_Version::getClassName(),
-			Change_Admin::$slug        => $init == true ? new Change_Admin() : Change_Admin::getClassName(),
-			DB_Prefix::$slug           => $init == true ? new DB_Prefix() : DB_Prefix::getClassName(),
-			Disable_File_Editor::$slug => $init == true ? new Disable_File_Editor() : Disable_File_Editor::getClassName(),
-			Hide_Error::$slug          => $init == true ? new Hide_Error() : Hide_Error::getClassName(),
-			Security_Key::$slug        => $init == true ? new Security_Key() : Security_Key::getClassName(),
-			Protect_Information::$slug => $init == true ? new Protect_Information() : Protect_Information::getClassName(),
-			Prevent_Php::$slug         => $init == true ? new Prevent_Php() : Prevent_Php::getClassName(),
-			Login_Duration::$slug      => $init == true ? new Login_Duration() : Login_Duration::getClassName(),
-			Disable_Xml_Rpc::$slug     => $init == true ? new Disable_Xml_Rpc() : Disable_Xml_Rpc::getClassName(),
+			Disable_Trackback::$slug       => $init == true ? new Disable_Trackback() : Disable_Trackback::getClassName(),
+			WP_Version::$slug              => $init == true ? new WP_Version() : WP_Version::getClassName(),
+			PHP_Version::$slug             => $init == true ? new PHP_Version() : PHP_Version::getClassName(),
+			Change_Admin::$slug            => $init == true ? new Change_Admin() : Change_Admin::getClassName(),
+			DB_Prefix::$slug               => $init == true ? new DB_Prefix() : DB_Prefix::getClassName(),
+			Disable_File_Editor::$slug     => $init == true ? new Disable_File_Editor() : Disable_File_Editor::getClassName(),
+			Hide_Error::$slug              => $init == true ? new Hide_Error() : Hide_Error::getClassName(),
+			Prevent_Enum_Users::$slug      => $init == true ? new Prevent_Enum_Users() : Prevent_Enum_Users::getClassName(),
+			Security_Key::$slug            => $init == true ? new Security_Key() : Security_Key::getClassName(),
+			Protect_Information::$slug     => $init == true ? new Protect_Information() : Protect_Information::getClassName(),
+			Prevent_Php::$slug             => $init == true ? new Prevent_Php() : Prevent_Php::getClassName(),
+			Login_Duration::$slug          => $init == true ? new Login_Duration() : Login_Duration::getClassName(),
+			Disable_Xml_Rpc::$slug         => $init == true ? new Disable_Xml_Rpc() : Disable_Xml_Rpc::getClassName(),
+			WP_Rest_Api::$slug             => $init == true ? new WP_Rest_Api() : WP_Rest_Api::getClassName(),
+			//============SECURITY HEADERS===================
+			Sh_X_Frame::$slug              => $init == true ? new Sh_X_Frame() : Sh_X_Frame::getClassName(),
+			Sh_XSS_Protection::$slug       => $init == true ? new Sh_XSS_Protection() : Sh_XSS_Protection::getClassName(),
+			Sh_Feature_Policy::$slug       => $init == true ? new Sh_Feature_Policy() : Sh_Feature_Policy::getClassName(),
+			Sh_Referrer_Policy::$slug      => $init == true ? new Sh_Referrer_Policy() : Sh_Referrer_Policy::getClassName(),
+			Sh_Strict_Transport::$slug     => $init == true ? new Sh_Strict_Transport() : Sh_Strict_Transport::getClassName(),
+			Sh_Content_Type_Options::$slug => $init == true ? new Sh_Content_Type_Options() : Sh_Content_Type_Options::getClassName(),
+			//Sh_Content_Security::$slug     => $init == true ? new Sh_Content_Security() : Sh_Content_Security::getClassName(),
 		);
 	}
 
@@ -379,34 +456,49 @@ class Settings extends \Hammer\WP\Settings {
 		$this->active_server = $server;
 	}
 
+	/**
+	 * @return array
+	 */
 	public function events() {
-		$that = $this;
-
 		return array(
 			self::EVENT_BEFORE_SAVE => array(
 				array(
-					function () use ( $that ) {
+					function () {
 						//need to turn off notification or report off if no recipients
-						$keys = array(
-							'receipts' => 'notification',
-						);
-						foreach ( $keys as $key => $attr ) {
-							if ( isset( $_POST[ $key ] ) ) {
-								$recipients = $_POST[ $key ];
-								$recipients = array_filter( $recipients );
-								foreach ( $recipients as &$recipient ) {
-									$recipient = array_map( 'wp_strip_all_tags', $recipient );
-								}
-								$this->$key = $recipients;
-							}
-							$this->$key = array_filter( $this->$key );
-							if ( count( $this->$key ) == 0 ) {
-								$this->$attr = 0;
+						if ( empty( $this->receipts ) ) {
+							$this->notification = false;
+						}
+						//sanitize
+						foreach ( $this->receipts as $key => &$receipt ) {
+							$receipt = array_map( 'sanitize_text_field', $receipt );
+							if ( ! filter_var( $receipt['email'], FILTER_VALIDATE_EMAIL ) ) {
+								unset( $this->receipts[ $key ] );
 							}
 						}
 					}
 				)
 			)
 		);
+	}
+
+	/**
+	 * Define labels for settings key, we will use it for HUB
+	 *
+	 * @param null $key
+	 *
+	 * @return array|mixed
+	 */
+	public function labels( $key = null ) {
+		$labels = [
+			'notification'        => __( 'Notification', wp_defender()->domain ),
+			'receipts'            => __( 'Recipients', wp_defender()->domain ),
+			'notification_repeat' => __( "Send reminders", wp_defender()->domain )
+		];
+
+		if ( $key != null ) {
+			return isset( $labels[ $key ] ) ? $labels[ $key ] : null;
+		}
+
+		return $labels;
 	}
 }

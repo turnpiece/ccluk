@@ -1,8 +1,9 @@
 <?php
 /**
- * @see ./index.php
- * @package The_SEO_Framework\Classes
+ * @package The_SEO_Framework\Classes\Facade\Core
+ * @see ./index.php for facade details.
  */
+
 namespace The_SEO_Framework;
 
 defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
@@ -32,6 +33,7 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
  * @since 2.8.0
  */
 class Core {
+	use Traits\Enclose_Core_Final;
 
 	/**
 	 * Tells if this plugin is loaded.
@@ -41,7 +43,7 @@ class Core {
 	 * @since 3.1.0
 	 * @access protected
 	 *         Don't alter this variable!!!
-	 * @var true $loaded
+	 * @var boolean $loaded
 	 */
 	public $loaded = false;
 
@@ -49,16 +51,6 @@ class Core {
 	 * Calling any top file without __construct() is forbidden.
 	 */
 	private function __construct() { }
-
-	/**
-	 * Unserializing instances of this object is forbidden.
-	 */
-	final protected function __wakeup() { }
-
-	/**
-	 * Cloning of this object is forbidden.
-	 */
-	final protected function __clone() { }
 
 	/**
 	 * Handles unapproachable invoked properties.
@@ -69,8 +61,8 @@ class Core {
 	 * @since 2.8.0
 	 * @since 3.2.2 This method no longer allows to overwrite protected or private variables.
 	 *
-	 * @param string $name The property name.
-	 * @param mixed $value The property value.
+	 * @param string $name  The property name.
+	 * @param mixed  $value The property value.
 	 */
 	final public function __set( $name, $value ) {
 		/**
@@ -97,7 +89,6 @@ class Core {
 	 */
 	final public function __get( $name ) {
 		$this->_inaccessible_p_or_m( 'the_seo_framework()->' . $name, 'unknown' );
-		return;
 	}
 
 	/**
@@ -105,9 +96,9 @@ class Core {
 	 *
 	 * @since 2.7.0
 	 *
-	 * @param string $name The method name.
-	 * @param array $arguments The method arguments.
-	 * @return void
+	 * @param string $name      The method name.
+	 * @param array  $arguments The method arguments.
+	 * @return mixed|void
 	 */
 	final public function __call( $name, $arguments ) {
 
@@ -121,23 +112,23 @@ class Core {
 		}
 
 		\the_seo_framework()->_inaccessible_p_or_m( 'the_seo_framework()->' . $name . '()' );
-		return;
 	}
 
 	/**
 	 * Destroys output buffer, if any. To be used with AJAX and XML to clear any PHP errors or dumps.
 	 *
 	 * @since 2.8.0
-	 * @since 2.9.0 : Now flushes all levels rather than just the latest one.
+	 * @since 2.9.0 Now flushes all levels rather than just the latest one.
+	 * @since 4.0.0 Is now public.
 	 *
 	 * @return bool True on clear. False otherwise.
 	 */
-	protected function clean_response_header() {
+	public function clean_response_header() {
 
-		if ( $level = ob_get_level() ) {
-			while ( $level-- ) {
-				ob_end_clean();
-			}
+		$level = ob_get_level();
+
+		if ( $level ) {
+			while ( $level-- ) ob_end_clean();
 			return true;
 		}
 
@@ -152,9 +143,9 @@ class Core {
 	 * @access private
 	 * @credits Akismet For some code.
 	 *
-	 * @param string $view The file name.
-	 * @param array $args The arguments to be supplied within the file name.
-	 *              Each array key is converted to a variable with its value attached.
+	 * @param string $view     The file name.
+	 * @param array  $__args   The arguments to be supplied within the file name.
+	 *                         Each array key is converted to a variable with its value attached.
 	 * @param string $instance The instance suffix to call back upon.
 	 */
 	public function get_view( $view, array $__args = [], $instance = 'main' ) {
@@ -179,7 +170,7 @@ class Core {
 	}
 
 	/**
-	 * Fetches view instance for switch.
+	 * Fetches view instance for view-switch statements.
 	 *
 	 * @since 2.7.0
 	 *
@@ -197,7 +188,7 @@ class Core {
 	 *
 	 * @since 2.6.0
 	 *
-	 * @param int $i The dimension to resize.
+	 * @param int $i  The dimension to resize.
 	 * @param int $r1 The deminsion that determines the ratio.
 	 * @param int $r2 The dimension to proportionate to.
 	 * @return int The proportional dimension, rounded.
@@ -206,8 +197,8 @@ class Core {
 
 		//* Get aspect ratio.
 		$ar = $r1 / $r2;
+		$i  = $i / $ar;
 
-		$i = $i / $ar;
 		return round( $i );
 	}
 
@@ -231,7 +222,7 @@ class Core {
 
 		$tsf_links['about'] = sprintf(
 			'<a href="https://theseoframework.com/about-us/" rel="noreferrer noopener nofollow" target="_blank">%s</a>',
-			\esc_html__( 'About', 'autodescription' )
+			\esc_html_x( 'About', 'About us', 'autodescription' )
 		);
 		$tsf_links['tsfem'] = sprintf(
 			'<a href="%s" rel="noreferrer noopener" target="_blank">%s</a>',
@@ -259,29 +250,73 @@ class Core {
 		if ( THE_SEO_FRAMEWORK_PLUGIN_BASENAME !== $plugin_file )
 			return $plugin_meta;
 
-		return array_merge( $plugin_meta, [
-			'docs' => vsprintf(
-				'<a href="%s" rel="noreferrer noopener nofollow" target="_blank">%s</a>',
-				[
-					'https://theseoframework.com/?p=80',
-					\esc_html__( 'View documentation', 'autodescription' ),
-				]
-			),
-			'API' => vsprintf(
-				'<a href="%s" rel="noreferrer noopener nofollow" target="_blank">%s</a>',
-				[
-					'https://theseoframework.com/?p=82',
-					\esc_html__( 'View API docs', 'autodescription' ),
-				]
-			),
-			'EM'  => vsprintf(
-				'<a href="%s" rel="noreferrer noopener nofollow" target="_blank">%s</a>',
-				[
-					'https://theseoframework.com/?p=2760',
-					\esc_html_x( 'Get the Extension Manager', 'Extension Manager is a product name; do not translate', 'autodescription' ),
-				]
-			),
-		] );
+		$plugins = \get_plugins();
+		$_get_em = empty( $plugins['the-seo-framework-extension-manager/the-seo-framework-extension-manager.php'] );
+
+		return array_merge(
+			$plugin_meta,
+			[
+				'docs' => vsprintf(
+					'<a href="%s" rel="noreferrer noopener nofollow" target="_blank">%s</a>',
+					[
+						'https://tsf.fyi/docs',
+						\esc_html__( 'View documentation', 'autodescription' ),
+					]
+				),
+				'API'  => vsprintf(
+					'<a href="%s" rel="noreferrer noopener nofollow" target="_blank">%s</a>',
+					[
+						'https://tsf.fyi/docs/api',
+						\esc_html__( 'View API docs', 'autodescription' ),
+					]
+				),
+				'EM'   => vsprintf(
+					'<a href="%s" rel="noreferrer noopener nofollow" target="_blank">%s</a>',
+					[
+						'https://tsf.fyi/extension-manager',
+						$_get_em ? \esc_html_x( 'Get the Extension Manager', 'Extension Manager is a product name; do not translate it.', 'autodescription' ) : 'Extension Manager',
+					]
+				),
+			]
+		);
+	}
+
+	/**
+	 * Returns an array of hierarchical post types.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @return array The public hierarchical post types with rewrite.
+	 */
+	public function get_hierarchical_post_types() {
+		static $types;
+		return $types ?: $types = \get_post_types(
+			[
+				'hierarchical' => true,
+				'public'       => true,
+				'rewrite'      => true,
+			],
+			'names'
+		);
+	}
+
+	/**
+	 * Returns an array of nonhierarchical post types.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @return array The public nonhierarchical post types with rewrite.
+	 */
+	public function get_nonhierarchical_post_types() {
+		static $types;
+		return $types ?: $types = \get_post_types(
+			[
+				'hierarchical' => false,
+				'public'       => true,
+				'rewrite'      => true,
+			],
+			'names'
+		);
 	}
 
 	/**
@@ -351,25 +386,6 @@ class Core {
 	}
 
 	/**
-	 * Whether to lowercase the noun or keep it UCfirst.
-	 * Depending if language is German.
-	 *
-	 * @since 2.6.0
-	 * @staticvar array $lowercase Contains nouns.
-	 *
-	 * @return string The maybe lowercase noun.
-	 */
-	public function maybe_lowercase_noun( $noun ) {
-
-		static $lowercase = [];
-
-		if ( isset( $lowercase[ $noun ] ) )
-			return $lowercase[ $noun ];
-
-		return $lowercase[ $noun ] = $this->check_wp_locale( 'de' ) ? $noun : strtolower( $noun );
-	}
-
-	/**
 	 * Returns the minimum role required to adjust settings.
 	 *
 	 * @since 3.0.0
@@ -410,7 +426,7 @@ class Core {
 
 			$url = html_entity_decode( \menu_page_url( $this->seo_settings_page_slug, false ) );
 
-			return \esc_url( $url, [ 'http', 'https' ] );
+			return \esc_url( $url, [ 'https', 'http' ] );
 		}
 
 		return '';
@@ -444,22 +460,15 @@ class Core {
 	 * Fetches the Timezone String from given offset.
 	 *
 	 * @since 2.6.0
+	 * @since 4.0.0 Removed PHP <5.6 support.
 	 *
 	 * @param int $offset The GMT offzet.
 	 * @return string PHP Timezone String.
 	 */
 	protected function get_tzstring_from_offset( $offset = 0 ) {
 
-		$seconds = round( $offset * HOUR_IN_SECONDS );
-
-		//* Try Daylight savings.
+		$seconds  = round( $offset * HOUR_IN_SECONDS );
 		$tzstring = timezone_name_from_abbr( '', $seconds, 1 );
-		/**
-		 * PHP bug workaround. Disable the DST check.
-		 * @link https://bugs.php.net/bug.php?id=44780
-		 */
-		if ( false === $tzstring )
-			$tzstring = timezone_name_from_abbr( '', $seconds, 0 );
 
 		return $tzstring;
 	}
@@ -474,8 +483,8 @@ class Core {
 	 * @since 3.0.6 Now uses the old timezone string when a new one can't be generated.
 	 *
 	 * @param string $tzstring Optional. The PHP Timezone string. Best to leave empty to always get a correct one.
-	 * @link http://php.net/manual/en/timezones.php
-	 * @param bool $reset Whether to reset to default. Ignoring first parameter.
+	 *               @link http://php.net/manual/en/timezones.php
+	 * @param bool   $reset Whether to reset to default. Ignoring first parameter.
 	 * @return bool True on success. False on failure.
 	 */
 	public function set_timezone( $tzstring = '', $reset = false ) {
@@ -540,7 +549,7 @@ class Core {
 	 * @return string The timestamp format used in PHP date.
 	 */
 	public function get_timestamp_format() {
-		return '1' === $this->get_option( 'timestamps_format' ) ? 'Y-m-d\TH:iP' : 'Y-m-d';
+		return $this->uses_time_in_timestamp_format() ? 'Y-m-d\TH:iP' : 'Y-m-d';
 	}
 
 	/**
@@ -582,57 +591,43 @@ class Core {
 	 * @since 2.7.0
 	 * @since 3.1.0 This method now uses PHP 5.4+ encoding, capable of UTF-8 interpreting,
 	 *              instead of relying on PHP's incomplete encoding table.
-	 *              This does mean that the functionality is crippled* when the PHP
+	 *              This does mean that the functionality is crippled when the PHP
 	 *              installation isn't unicode compatible; this is unlikely.
-	 * @staticvar bool $utf8_pcre Determines whether pcre supports UTF-8.
-	 *
-	 * *Crippled as in skipping every non-latin and diacritic character.
+	 * @since 4.0.0 1. Now expects PCRE UTF-8 encoding support.
+	 *              2. Moved filter outside of this function.
+	 *              3. Short length now works as intended, instead of comparing as less, it compares as less or equal to.
+	 * @staticvar bool   $use_mb Determines whether we can use mb_* functions.
 	 *
 	 * @param string $string Required. The string to count words in.
-	 * @param int $amount Minimum amount of words to encounter in the string.
-	 *            Set to 0 to count all words longer than $bother_length.
-	 * @param int $amount_bother Minimum amount of words to encounter in the string
-	 *            that fall under the $bother_length. Set to 0 to count all words
-	 *            shorter than $bother_length.
-	 * @param int $bother_length The maximum string length of a word to pass for
-	 *            $amount_bother instead of $amount. Set to 0 to pass all words
-	 *            through $amount_bother
+	 * @param int    $dupe_count Minimum amount of words to encounter in the string.
+	 *                      Set to 0 to count all words longer than $short_length.
+	 * @param int    $dupe_short Minimum amount of words to encounter in the string that fall under the
+	 *                           $short_length. Set to 0 to consider all words with $amount.
+	 * @param int    $short_length The maximum string length of a word to pass for $dupe_short
+	 *                             instead of $count. Set to 0 to ignore $count, and use $dupe_short only.
 	 * @return array Containing arrays of words with their count.
 	 */
-	public function get_word_count( $string, $amount = 3, $amount_bother = 5, $bother_length = 3 ) {
+	public function get_word_count( $string, $dupe_count = 3, $dupe_short = 5, $short_length = 3 ) {
 
 		$string = html_entity_decode( $string );
+		$string = \wp_check_invalid_utf8( $string );
 
-		static $utf8_pcre = null;
-		if ( ! isset( $utf8_pcre ) )
-			$utf8_pcre = @preg_match( '/^./u', 'a' );
+		if ( ! $string ) return [];
 
-		if ( $utf8_pcre ) {
-			$string = \wp_check_invalid_utf8( $string, true );
-			$word_list = preg_split(
-				'/\W+/mu',
-				function_exists( 'mb_strtolower' ) ? mb_strtolower( $string ) : strtolower( $string ),
-				-1,
-				PREG_SPLIT_OFFSET_CAPTURE | PREG_SPLIT_NO_EMPTY
-			);
-		} else {
-			$word_list = preg_split(
-				'/\W+/m',
-				strtolower( $string ),
-				-1,
-				PREG_SPLIT_OFFSET_CAPTURE | PREG_SPLIT_NO_EMPTY
-			);
-		}
+		static $use_mb;
+
+		isset( $use_mb ) or $use_mb = extension_loaded( 'mbstring' );
+
+		$word_list = preg_split(
+			'/[^\p{L}\p{M}\p{N}\p{Pc}\p{Cc}]+/mu',
+			$use_mb ? mb_strtolower( $string ) : strtolower( $string ),
+			-1,
+			PREG_SPLIT_OFFSET_CAPTURE | PREG_SPLIT_NO_EMPTY
+		);
 
 		$words_too_many = [];
 
 		if ( count( $word_list ) ) :
-			/**
-			 * @since 2.6.0
-			 * @param int $bother_length Min Character length to bother you with.
-			 */
-			$bother_length = (int) \apply_filters( 'the_seo_framework_bother_me_desc_length', $bother_length );
-
 			$words = [];
 			foreach ( $word_list as $wli ) {
 				//= { $words[ int Offset ] => string Word }
@@ -641,31 +636,27 @@ class Core {
 
 			$word_count = array_count_values( $words );
 
-			//* Parse word counting.
-			if ( is_array( $word_count ) ) {
-				//* We're going to fetch words based on position, and then flip it to become the key.
-				$word_keys = array_flip( array_reverse( $words, true ) );
+			// We're going to fetch words based on position, and then flip it to become the key.
+			$word_keys = array_flip( array_reverse( $words, true ) );
 
-				foreach ( $word_count as $word => $count ) {
-					if ( mb_strlen( $word ) < $bother_length ) {
-						$run = $count >= $amount_bother;
-					} else {
-						$run = $count >= $amount;
-					}
+			foreach ( $word_count as $word => $count ) {
+				if ( ( $use_mb ? mb_strlen( $word ) : strlen( $word ) ) <= $short_length ) {
+					$run = $count >= $dupe_short;
+				} else {
+					$run = $count >= $dupe_count;
+				}
 
-					if ( $run ) {
-						//* The encoded word is longer or equal to the bother length.
+				if ( $run ) {
+					//! Don't use mb_* here. preg_split's offset is in bytes, NOT multibytes.
+					$args = [
+						'pos' => $word_keys[ $word ],
+						'len' => strlen( $word ),
+					];
 
-						//! Don't use mb_* here. preg_split's offset is in bytes, NOT unicode.
-						$args = [
-							'pos' => $word_keys[ $word ],
-							'len' => strlen( $word ),
-						];
-						$first_encountered_word = substr( $string, $args['pos'], $args['len'] );
+					$first_encountered_word = substr( $string, $args['pos'], $args['len'] );
 
-						//* Found words that are used too frequently.
-						$words_too_many[] = [ $first_encountered_word => $count ];
-					}
+					//* Found words that are used too frequently.
+					$words_too_many[] = [ $first_encountered_word => $count ];
 				}
 			}
 		endif;
@@ -683,7 +674,7 @@ class Core {
 	 * @link https://www.w3.org/TR/2008/REC-WCAG20-20081211/#visual-audio-contrast-contrast
 	 * @link https://www.w3.org/WAI/GL/wiki/Relative_luminance
 	 *
-	 * @param string $hex The 3 to 6 character RGB hex. '#' prefix is supported.
+	 * @param string $hex The 3 to 6 character RGB hex. The '#' prefix may be added.
 	 * @return string The hexadecimal RGB relative font color, without '#' prefix.
 	 */
 	public function get_relative_fontcolor( $hex = '' ) {
@@ -706,7 +697,7 @@ class Core {
 			$v /= 255;
 
 			if ( $v > .03928 ) {
-				$lum = pow( ( $v + .055 ) / 1.055, 2.4 );
+				$lum = ( ( $v + .055 ) / 1.055 ) ** 2.4;
 			} else {
 				$lum = $v / 12.92;
 			}
@@ -742,6 +733,38 @@ class Core {
 	}
 
 	/**
+	 * Returns sitemap color scheme.
+	 *
+	 * @since 2.8.0
+	 *
+	 * @param bool $get_defaults Whether to get the default colors.
+	 * @return array The sitemap colors.
+	 */
+	public function get_sitemap_colors( $get_defaults = false ) {
+
+		if ( $get_defaults ) {
+			$colors = [
+				'main'   => '#333',
+				'accent' => '#00cd98',
+			];
+		} else {
+			$main   = $this->s_color_hex( $this->get_option( 'sitemap_color_main' ) );
+			$accent = $this->s_color_hex( $this->get_option( 'sitemap_color_accent' ) );
+
+			$options = [
+				'main'   => $main ? '#' . $main : '',
+				'accent' => $accent ? '#' . $accent : '',
+			];
+
+			$options = array_filter( $options );
+
+			$colors = array_merge( $this->get_sitemap_colors( true ), $options );
+		}
+
+		return $colors;
+	}
+
+	/**
 	 * Converts markdown text into HMTL.
 	 * Does not support list or block elements. Only inline statements.
 	 *
@@ -754,10 +777,10 @@ class Core {
 	 * @since 2.9.3 : Added $args parameter.
 	 * @link https://wordpress.org/plugins/about/readme.txt
 	 *
-	 * @param string $text The text that might contain markdown. Expected to be escaped.
-	 * @param array $convert The markdown style types wished to be converted.
-	 *              If left empty, it will convert all.
-	 * @param array $args The function arguments.
+	 * @param string $text    The text that might contain markdown. Expected to be escaped.
+	 * @param array  $convert The markdown style types wished to be converted.
+	 *                        If left empty, it will convert all.
+	 * @param array  $args    The function arguments.
 	 * @return string The markdown converted text.
 	 */
 	public function convert_markdown( $text, $convert = [], $args = [] ) {
@@ -768,13 +791,12 @@ class Core {
 			$text = trim( $text );
 		}
 
-		if ( '' === $text )
+		// You need 3 chars to make a markdown: *m*
+		if ( strlen( $text ) < 3 )
 			return '';
 
 		// Merge defaults with $args.
-		$args = array_merge( [
-			'a_internal' => false,
-		], $args );
+		$args = array_merge( [ 'a_internal' => false ], $args );
 
 		/**
 		 * The conversion list's keys are per reference only.
@@ -861,7 +883,7 @@ class Core {
 					for ( $i = 0; $i < $count; $i++ ) {
 						$text = str_replace(
 							$matches[0][ $i ],
-							sprintf( $_string, \esc_url( $matches[2][ $i ], [ 'http', 'https' ] ), \esc_html( $matches[1][ $i ] ) ),
+							sprintf( $_string, \esc_url( $matches[2][ $i ], [ 'https', 'http' ] ), \esc_html( $matches[1][ $i ] ) ),
 							$text
 						);
 					}

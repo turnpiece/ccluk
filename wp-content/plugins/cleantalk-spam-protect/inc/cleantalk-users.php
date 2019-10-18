@@ -76,20 +76,23 @@ function ct_show_users_page(){
 		<div class="ct_to_hide" id="ct_check_params_wrapper">
 			<button class="button ct_check_params_elem" id="ct_check_spam_button" <?php echo !$apbct->data['moderate'] ? 'disabled="disabled"' : ''; ?>><?php _e("Start check", 'cleantalk'); ?></button>
 			<?php if(!empty($_COOKIE['ct_paused_users_check'])) { ?><button class="button ct_check_params_elem" id="ct_proceed_check_button"><?php _e("Continue check", 'cleantalk'); ?></button><?php } ?>
-			<p class="ct_check_params_desc"><?php _e("The plugin will check all comments against blacklists database and show you senders that have spam activity on other websites.", 'cleantalk'); ?></p>
+			<p class="ct_check_params_desc"><?php _e("The plugin will check all users against blacklists database and show you senders that have spam activity on other websites.", 'cleantalk'); ?></p>
 			<br />
 			<div class="ct_check_params_elem ct_check_params_elem_sub">
 				<input id="ct_accurate_check" type="checkbox" value="1" /><b><label for="ct_accurate_check"><?php _e("Accurate check", 'cleantalk'); ?></b></label>
 			</div>
-			<p class="ct_check_params_desc"><?php _e("Allows to use comment's dates to perform more accurate check. Could seriously slow down the check.", 'cleantalk'); ?></p>
+			<p class="ct_check_params_desc"><?php _e("Allows to use user's dates to perform more accurate check. Could seriously slow down the check.", 'cleantalk'); ?></p>
 			<br />
 			<div class="ct_check_params_elem ct_check_params_elem_sub">
 				<input id="ct_allow_date_range" type="checkbox" value="1" /><label for="ct_allow_date_range"><b><?php _e("Specify date range", 'cleantalk'); ?></b></label>
 			</div>
 			<div class="ct_check_params_desc">
-				<input class="ct_date" type="text" id="ct_date_range_from" value="<?php echo isset($_GET['from']) ? $_GET['from'] : ''; ?>" disabled readonly />
-				<input class="ct_date" type="text" id="ct_date_range_till" value="<?php echo isset($_GET['till']) ? $_GET['till'] : ''; ?>" disabled readonly />
+				<input class="ct_date" type="text" id="ct_date_range_from" value="<?php echo ct_last_checked_user_register(); ?>" disabled readonly />
+				<input class="ct_date" type="text" id="ct_date_range_till" value="<?php echo date( "M j Y"); ?>" disabled readonly />
 			</div>
+            <div class="ct_check_params_desc">
+               <p>Begin/end dates of creation user to check. If no date is specified, the plugin uses the last users check date.</p>
+            </div>
 			<br>
 			<?php apbct_admin__badge__get_premium(); ?>
 		</div>
@@ -289,6 +292,10 @@ function ct_ajax_check_users(){
 	
 	check_ajax_referer('ct_secret_nonce', 'security');
 	
+	$amount = !empty($_POST['amount']) && intval($_POST['amount'])
+        ? intval($_POST['amount'])
+        : 100;
+	
 	global $apbct;
     
     $skip_roles = array(
@@ -315,7 +322,7 @@ function ct_ajax_check_users(){
 		),
 		'orderby' => 'registered',
 		'order' => 'ASC',
-		'number' => 100
+		'number' => $amount,
 	);
 	
 	if(isset($_POST['from'], $_POST['till'])){
@@ -404,12 +411,14 @@ function ct_ajax_check_users(){
 				
 				// Opening CSV file
 				$current_user = wp_get_current_user();
-				$filename = WP_PLUGIN_DIR."/cleantalk-spam-protect/check-results/user_check_by_{$current_user->user_login}.csv";
-				$text = "";
+				if(!is_dir(APBCT_DIR_PATH .'/check-results/'))
+				    mkdir(APBCT_DIR_PATH .'/check-results');
+				$filename = APBCT_DIR_PATH ."/check-results/user_check_by_{$current_user->user_nicename}.csv";
+				$text = '';
 				
 				if(isset($_POST['new_check']) && $_POST['new_check'] == 'true'){
 					$file_desc = fopen($filename, 'w');
-					$text .= "login,email,ip".PHP_EOL;
+					$text .= 'login,email,ip'.PHP_EOL;
 				}else
 					$file_desc = fopen($filename, 'a+');
 				// End of Opening CSV			
@@ -448,12 +457,14 @@ function ct_ajax_check_users(){
 					}
 							
 				}
-				fwrite($file_desc, $text);
-				fclose($file_desc);
+				if($file_desc){
+                    fwrite($file_desc, $text);
+                    fclose($file_desc);
+                }
 				print json_encode($check_result);
 		}else{
 			$check_result['error'] = 1;
-			$check_result['error_message'] = $result['error_string'];
+			$check_result['error_message'] = $result['error'];
 			echo json_encode($check_result);
 		}
 	}else{
@@ -467,62 +478,53 @@ function ct_ajax_info_users($direct_call = false)
 {
     if (!$direct_call)
 	    check_ajax_referer( 'ct_secret_nonce', 'security' );
-	
-	// Checking dates value
-	if(isset($_POST['from'], $_POST['till'])){
-		
-		$from_date = date('Y-m-d', intval(strtotime($_POST['from'])));
-		$till_date = date('Y-m-d', intval(strtotime($_POST['till'])));
-	}
 
 	// Total users
-	$params = array(
+	$params_total = array(
 		'fields' => 'ID',
 		'count'=>true,
+        'orderby' => 'user_registered'
 	);
-	if(isset($from_date, $till_date)) $params['date_query'] = array('column' => 'user_registered', 'after' => $from_date, 'before' => $till_date, 'inclusive' => true);
-	$tmp = new WP_User_Query($params);
-	$cnt = $tmp->get_total();
+	$total_users = new WP_User_Query($params_total);
+	$cnt = $total_users->get_total();
 
-	// Checked users
-	$params = array(
+    // Checked users
+	$params_checked = array(
 		'fields' => 'ID',
 		'meta_key' => 'ct_checked',
 		'count_total' => true,
+        'orderby' => 'ct_checked'
 	);
-	if(isset($from_date, $till_date)) $params['date_query'] = array('column' => 'user_registered', 'after' => $from_date, 'before' => $till_date, 'inclusive' => true);
-	$tmp = new WP_User_Query($params);
-	$cnt_checked = $tmp->get_total();
-	
+	$checked_users = new WP_User_Query($params_checked);
+	$cnt_checked = $checked_users->get_total();
+
 	// Spam users
-	$params = array(
+	$params_spam = array(
 		'fields' => 'ID',
 		'meta_key' => 'ct_marked_as_spam',
 		'count_total' => true,
 	);
-	if(isset($from_date, $till_date)) $params['date_query'] = array('column' => 'user_registered', 'after' => $from_date, 'before' => $till_date, 'inclusive' => true);
-	$tmp = new WP_User_Query($params);
-	$cnt_spam = $tmp->get_total();
+	$spam_users = new WP_User_Query($params_spam);
+	$cnt_spam = $spam_users->get_total();
 	
 	// Bad users (without IP and Email)
-	$params = array(
+	$params_bad = array(
 		'fields' => 'ID',
 		'meta_key' => 'ct_bad',
 		'count_total' => true,
 	);
-	if(isset($from_date, $till_date)) $params['date_query'] = array('column' => 'user_registered', 'after' => $from_date, 'before' => $till_date, 'inclusive' => true);
-	$tmp = new WP_User_Query($params);
-	$cnt_bad = $tmp->get_total();
+	$bad_users = new WP_User_Query($params_bad);
+	$cnt_bad = $bad_users->get_total();
 	
 	$return = array(
-		'message' => '',
-		'total' => $cnt,
-		'spam' => $cnt_spam,
-		'checked' => $cnt_checked,
-		'bad' => $cnt_bad,
+		'message'  => '',
+		'total'    => $cnt,
+		'spam'     => $cnt_spam,
+		'checked'  => $cnt_checked,
+		'bad'      => $cnt_bad,
 	);
 	
-	$return['message'] .= sprintf (__("Total users %s, checked %s, found %s spam users and %s bad users (without IP or email)", 'cleantalk'), $cnt, $cnt_checked, $cnt_spam, $cnt_bad);
+	$return['message'] .= sprintf (__("Total users %s, checked %s, last check %s, found %s spam users and %s bad users (without IP or email)", 'cleantalk'), $cnt, $cnt_checked, ct_get_last_check_date(), $cnt_spam, $cnt_bad);
 	
     $backup_notice = '&nbsp;';
     if ($cnt_spam > 0) {
@@ -645,10 +647,24 @@ function ct_ajax_delete_all_users($count_all = 0)
 
 function ct_ajax_clear_users()
 {
-	check_ajax_referer( 'ct_secret_nonce', 'security' );
-	global $wpdb;
-	$wpdb->query("DELETE FROM {$wpdb->usermeta} WHERE meta_key IN ('ct_checked', 'ct_marked_as_spam', 'ct_bad');");
-	die();
+    check_ajax_referer( 'ct_secret_nonce', 'security' );
+
+    if ( isset($_POST['from']) && isset($_POST['till']) ) {
+        if ( preg_match('/[a-zA-Z]{3}\s{1}\d{1,2}\s{1}\d{4}/', $_POST['from'] ) && preg_match('/[a-zA-Z]{3}\s{1}\d{1,2}\s{1}\d{4}/', $_POST['till'] ) ) {
+
+            $from = date('Y-m-d', intval(strtotime($_POST['from']))) . ' 00:00:00';
+            $till = date('Y-m-d', intval(strtotime($_POST['till']))) . ' 23:59:59';
+
+            global $wpdb;
+            $query_result = $wpdb->query("DELETE FROM {$wpdb->usermeta} WHERE 
+            meta_key IN ('ct_checked', 'ct_marked_as_spam', 'ct_bad') 
+            AND meta_value >= '{$from}' 
+            AND meta_value <= '{$till}';");
+
+            die();
+
+        }
+    }
 }
 
 /**
@@ -680,4 +696,86 @@ function ct_usercheck_get_csv_file() {
 	echo $output;
 	
 	die();
+}
+
+/**
+ * Get date user registered
+ *
+ * @param $user_id
+ * @return string Date format"M j Y"
+ */
+function ct_get_user_register($user_id ) {
+
+    $user_data = get_userdata( $user_id );
+    $registered = $user_data->user_registered;
+
+    return date( "M j Y", strtotime( $registered ) );
+
+}
+
+/**
+ * Get date last checked user or date first registered user
+ *
+ * @return string   date "M j Y"
+ */
+function ct_last_checked_user_register() {
+
+    // Checked users
+    $params = array(
+        'fields' => 'ID',
+        'meta_key' => 'ct_checked',
+        'count_total' => true,
+        'orderby' => 'ct_checked'
+    );
+    $tmp = new WP_User_Query($params);
+    $cnt_checked = $tmp->get_total();
+
+    if( $cnt_checked > 0 ) {
+
+        // If we have checked users return last user reg date
+        $users = $tmp->get_results();
+        return ct_get_user_register( end( $users ) );
+
+    } else {
+
+        // If we have not any checked users return first user registered date
+        $params = array(
+            'fields' => 'ID',
+            'number' => 1,
+            'orderby' => 'user_registered'
+        );
+        $tmp = new WP_User_Query($params);
+
+        return ct_get_user_register( current( $tmp->get_results() ) );
+
+    }
+
+}
+
+/**
+ * Get last users check date.
+ *
+ * @return string|null   Date format"M j Y"  or datetime format or null
+ */
+function ct_get_last_check_date( $timestamp = false ) {
+
+    // Checked users
+    $params = array(
+        'fields' => 'ID',
+        'meta_key' => 'ct_checked',
+        'count_total' => true,
+        'orderby' => 'ct_checked'
+    );
+    $tmp = new WP_User_Query($params);
+    $cnt_checked = $tmp->get_total();
+    $last_check = null;
+
+    if( $cnt_checked > 0 ) {
+
+        $users = $tmp->get_results();
+        $last_check = $timestamp ? get_user_meta( end( $users ), 'ct_checked', true ) : date( "M j Y", strtotime( get_user_meta( end( $users ), 'ct_checked', true ) ) );
+    }
+
+    return $last_check;
+
 }

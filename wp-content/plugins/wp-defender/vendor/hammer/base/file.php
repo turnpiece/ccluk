@@ -5,6 +5,8 @@
 
 namespace Hammer\Base;
 
+use WP_Defender\Behavior\Utils;
+
 class File extends HObject {
 	const ENGINE_SPL = 'spl', ENGINE_SCANDIR = 'scan_dir', ENGINE_OPENDIR = 'open_dir';
 	/**
@@ -81,7 +83,7 @@ class File extends HObject {
 		$this->include        = $include;
 		$this->exclude        = $exclude;
 		$this->is_recursive   = $is_recursive;
-		$this->engine         = self::ENGINE_SCANDIR;
+		$this->engine         = self::ENGINE_SPL;
 		$this->include_hidden = $include_hidden;
 //		if ( function_exists( 'scandir' ) && stristr( PHP_OS, 'win' ) == false ) {
 //			$this->engine = self::ENGINE_SCANDIR;
@@ -142,7 +144,7 @@ class File extends HObject {
 			$real_path = $file->getRealPath();
 
 			$is_hidden = explode( DIRECTORY_SEPARATOR . '.', $real_path );
-			if ( count( $is_hidden ) > 1 && $this->include_hidden == false) {
+			if ( count( $is_hidden ) > 1 && $this->include_hidden == false ) {
 				continue;
 			}
 			if ( $this->is_recursive == false ) {
@@ -329,7 +331,7 @@ class File extends HObject {
 		$dir_include = isset( $include['dir'] ) ? $include['dir'] : array();
 		$dir_exclude = isset( $exclude['dir'] ) ? $exclude['dir'] : array();
 
-		if ( is_null( $filetype ) ) {
+		if ( ! is_null( $filetype ) ) {
 			$type = $filetype;
 		} else {
 			$type = filetype( $path );
@@ -407,7 +409,7 @@ class File extends HObject {
 	private function _filter_exclude( $path, $filetype = null ) {
 		$exclude = $this->exclude;
 		//first filer dir, or file inside dir
-		if ( is_null( $filetype ) ) {
+		if ( ! is_null( $filetype ) ) {
 			$type = $filetype;
 		} else {
 			$type = filetype( $path );

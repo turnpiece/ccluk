@@ -29,7 +29,7 @@ class UserSubscriberAPIv2 implements UserSubscriber {
      * @param int $user_id
      * @param array $args
      *
-     * @return bool Whether user was already subscribed to the MailChimp list.
+     * @return bool Whether user was already subscribed to the Mailchimp list.
      *
      * @throws \Exception
      */
@@ -71,7 +71,7 @@ class UserSubscriberAPIv2 implements UserSubscriber {
      * @param int $user_id
      * @param array $args
      *
-     * @return bool Whether user was already subscribed to the MailChimp list.
+     * @return bool Whether user was already subscribed to the Mailchimp list.
      *
      * @throws \Exception
      */
