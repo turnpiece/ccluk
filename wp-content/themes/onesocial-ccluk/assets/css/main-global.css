@@ -769,8 +769,12 @@ hr {
 /*--------------------------------------------------------------
 2.2 - Form fields, general styles first
 --------------------------------------------------------------*/
+label {
+  color: #54ae68;
+}
+
 input[type="text"], input[type="tel"], input[type="email"], input[type="password"], input[type="email"], input[type="number"] {
-  font-size: 14px;
+  font-size: 18px;
   border: none;
   font-family: inherit;
   font-weight: 300;
@@ -778,21 +782,17 @@ input[type="text"], input[type="tel"], input[type="email"], input[type="password
   -webkit-appearance: none;
   padding-bottom: 18px;
   padding-top: 4px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  /*color: #9b9b9b;*/
   background-color: transparent;
 }
 
 textarea {
-  font-size: 14px;
+  font-size: 18px;
   border: none;
   font-family: inherit;
   font-weight: 300;
-  font-size: inherit;
   -webkit-appearance: none;
   padding-bottom: 18px;
   padding-top: 4px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   /*color: #9b9b9b;*/
   background-color: transparent;
 }
@@ -910,13 +910,6 @@ input[type="radio"]:checked + span:before, input[type="radio"]:checked + label:b
 }
 
 /*--------------------------------------------------------------
-2.3 - Non-text input types
---------------------------------------------------------------*/
-.gform_wrapper ul.gfield_checkbox li label, .gform_wrapper ul.gfield_radio li label {
-  line-height: 1.2;
-}
-
-/*--------------------------------------------------------------
 2.4 - Buttons
 --------------------------------------------------------------*/
 /* Disabled state */
@@ -926,13 +919,14 @@ button[disabled], input[disabled] {
 }
 
 /* Default state */
+input[type="button"],
+input[type="reset"],
 button {
   background-color: #54ae68;
   border: none;
   color: #fff;
   cursor: pointer;
-  font-size: 12px;
-  line-height: 20px;
+  font-size: 18px;
   text-align: center;
   text-decoration: none;
   padding: 6px 14px;
@@ -946,24 +940,15 @@ button {
   font-family: inherit;
 }
 
-input[type="button"], input[type="reset"] {
-  background-color: #54ae68;
-  border: none;
+input[type="button"]:hover, input[type="button"]:active,
+input[type="reset"]:hover,
+input[type="reset"]:active,
+button:hover,
+button:active {
+  outline: none;
   color: #fff;
-  cursor: pointer;
-  font-size: 12px;
-  line-height: 20px;
-  text-align: center;
+  background-color: #22a7f0;
   text-decoration: none;
-  padding: 6px 14px;
-  appearance: none;
-  -moz-appearance: none;
-  /* Firefox */
-  -webkit-appearance: none;
-  /* Safari and Chrome */
-  display: inline-block;
-  font-weight: 300;
-  font-family: inherit;
 }
 
 article.post-password-required input[type=submit],
@@ -1012,55 +997,21 @@ a.bp-title-button {
 }
 
 /* Hover state */
-button:hover {
-  outline: none;
-  color: #fff;
-  background-color: #54ae68;
-  text-decoration: none;
-}
-
-input[type="button"]:hover, input[type="reset"]:hover {
-  outline: none;
-  color: #fff;
-  background-color: #54ae68;
-  text-decoration: none;
-}
-
-article.post-password-required input[type=submit]:hover,
-a.button:hover {
-  outline: none;
-  color: #fff;
-  text-decoration: none;
-  background-color: #54ae68;
-}
-
-#secondary div.generic-button a:hover,
-#buddypress .comment-reply-link:hover,
-.entry-header .entry-title a.button:hover,
-a.bp-title-button:hover {
-  outline: none;
-  color: #fff;
-  text-decoration: none;
-  background-color: #54ae68;
-}
-
-/* Active state */
-button:active {
-  background-color: #54ae68;
-}
-
-input[type="button"]:active, input[type="reset"]:active {
-  background-color: #54ae68;
-}
-
-article.post-password-required input[type=submit]:active,
+article.post-password-required input[type=submit]:hover, article.post-password-required input[type=submit]:active,
+a.button:hover,
 a.button:active,
+#secondary div.generic-button a:hover,
 #secondary div.generic-button a:active,
+#buddypress .comment-reply-link:hover,
 #buddypress .comment-reply-link:active,
+.entry-header .entry-title a.button:hover,
 .entry-header .entry-title a.button:active,
-a.bp-title-button:active,
-#buddypress div.activity-comments form input[disabled]:active {
-  background-color: #54ae68;
+a.bp-title-button:hover,
+a.bp-title-button:active {
+  outline: none;
+  color: #fff;
+  text-decoration: none;
+  background-color: #22a7f0;
 }
 
 /* All buttons (mostly submit) without background */
