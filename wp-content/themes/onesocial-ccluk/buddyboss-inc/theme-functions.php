@@ -294,33 +294,42 @@ function buddyboss_onesocial_scripts_styles() {
 		'eh_url_path' => home_url()
 	);
 
-	if ( onesocial_get_option( 'boss_minified_js' ) ) {
+	if ( defined( 'CCLUK_DEBUGGING' ) && ! CCLUK_DEBUGGING ) {
 
-		wp_register_script( 'onesocial-main-min', get_stylesheet_directory_uri() . '/js/compressed/onesocial-main-min.js', array( 'jquery', 'jquery-form' ), $onesocial_version, true );
-		wp_localize_script( 'onesocial-main-min', 'translation', $translation_array );
-		wp_localize_script( 'onesocial-main-min', 'transport', $transport_array );
-		wp_localize_script( 'onesocial-main-min', 'ajaxposts', array(
+		wp_register_script( 'ccluk-main-min', get_stylesheet_directory_uri() . '/js/compressed/ccluk-combined.min.js', array( 'jquery', 'jquery-form' ), $onesocial_version, true );
+		wp_localize_script( 'ccluk-main-min', 'translation', $translation_array );
+		wp_localize_script( 'ccluk-main-min', 'transport', $transport_array );
+		wp_localize_script( 'ccluk-main-min', 'ajaxposts', array(
 			'ajaxurl'	 => admin_url( 'admin-ajax.php' ),
 			'postsNonce' => wp_create_nonce( 'ajax-posts-nonce' )
 		) );
 
-		wp_localize_script( 'onesocial-main-min', 'ajaxfriends', array(
-			'ajaxurl'		 => admin_url( 'admin-ajax.php' ),
-			'friendsNonce'	 => wp_create_nonce( 'ajax-friends-nonce' )
-		) );
+		wp_localize_script( 'ccluk-main-min', 'BuddyBossOptions', $buddyboss_js_vars );
+		wp_enqueue_script( 'ccluk-main-min' );
 
-		wp_localize_script( 'onesocial-main-min', 'ajaxmembers', array(
-			'ajaxurl'		 => admin_url( 'admin-ajax.php' ),
-			'membersNonce'	 => wp_create_nonce( 'ajax-members-nonce' )
-		) );
+		if (is_user_logged_in()) {
+			// Ajax script for friends load
+			wp_enqueue_script( 'ajax-friends', get_stylesheet_directory_uri() . '/js/ajax-friends.js', array( 'jquery' ), $onesocial_version, true );
+			wp_localize_script( 'ajax-friends', 'ajaxfriends', array(
+				'ajaxurl'		 => admin_url( 'admin-ajax.php' ),
+				'friendsNonce'	 => wp_create_nonce( 'ajax-friends-nonce' )
+			) );
 
-		wp_localize_script( 'onesocial-main-min', 'ajaxfollow', array(
-			'ajaxurl'		 => admin_url( 'admin-ajax.php' ),
-			'followNonce'	 => wp_create_nonce( 'ajax-follow-nonce' )
-		) );
+			// Ajax script for group members load
+			wp_enqueue_script( 'ajax-group-members', get_stylesheet_directory_uri() . '/js/ajax-group-members.js', array( 'jquery' ), $onesocial_version, true );
+			wp_localize_script( 'ajax-group-members', 'ajaxmembers', array(
+				'ajaxurl'		 => admin_url( 'admin-ajax.php' ),
+				'membersNonce'	 => wp_create_nonce( 'ajax-members-nonce' )
+			) );
 
-		wp_localize_script( 'onesocial-main-min', 'BuddyBossOptions', $buddyboss_js_vars );
-		wp_enqueue_script( 'onesocial-main-min' );
+			// Ajax script for folowing/followers load
+			wp_enqueue_script( 'ajax-follow', get_stylesheet_directory_uri() . '/js/ajax-follow.js', array( 'jquery' ), $onesocial_version, true );
+			wp_localize_script( 'ajax-follow', 'ajaxfollow', array(
+				'ajaxurl'		 => admin_url( 'admin-ajax.php' ),
+				'followNonce'	 => wp_create_nonce( 'ajax-follow-nonce' )
+			) );
+
+		}
 
 		/* Custom CCL javascript */
 		wp_register_script( 'onesocial-custom', get_stylesheet_directory_uri() . '/assets/js/custom.min.js', array( 'jquery' ), $onesocial_version, true );
