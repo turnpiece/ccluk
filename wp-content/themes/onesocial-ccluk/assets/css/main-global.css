@@ -4837,18 +4837,6 @@ We need to hide these elements from displaying on non-legacy pages. */
   padding: 4px 11px;
 }
 
-/* Subscribe to Forum */
-#onesocial-recommended-by, .bbp-forum-data {
-  padding: 4px 20px;
-  border-radius: 23px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  display: inline-block;
-  vertical-align: middle;
-  position: relative;
-  margin-left: 5px;
-  min-height: 46px;
-}
-
 /*----------------------------------------------------------------
 >>> PLUGINS
 ----------------------------------------------------------------*/

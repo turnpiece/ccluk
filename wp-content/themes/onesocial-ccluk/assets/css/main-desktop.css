@@ -1527,17 +1527,17 @@ body .buddyboss-select {
 
 .buddyboss-select-inner:after {
   content: "P";
-  border: 1px solid #f9f9f9;
+  border: 1px solid #54ae68;
   position: absolute;
   right: 0;
   padding: 0px 11px;
   height: 30px;
   line-height: 30px;
-  color: #333;
-  font-size: 6px;
+  color: #54ae68;
+  font-size: 10px;
   font-family: "onesocial" !important;
   font-style: normal !important;
-  font-weight: normal !important;
+  font-weight: 700;
   font-variant: normal !important;
   text-transform: none !important;
   speak: none;
