@@ -1521,17 +1521,17 @@ body .buddyboss-select {
   line-height: 30px;
   &:after {
     content: "P";
-    border: 1px solid $secondary_bg;
+    border: 1px solid $green;
     position: absolute;
     right: 0;
     padding: 0px 11px;
     height: 30px;
     line-height: 30px;
-    color: $dark;
-    font-size: 6px;
+    color: $green;
+    font-size: 10px;
     font-family: "onesocial" !important;
     font-style: normal !important;
-    font-weight: normal !important;
+    font-weight: 700;
     font-variant: normal !important;
     text-transform: none !important;
     speak: none;
