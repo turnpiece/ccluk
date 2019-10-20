@@ -1164,28 +1164,45 @@ h1.big,
 
 .bbp-body ul li {
   height: auto;
+  border-bottom: none;
 }
 
 .type-topic h1.big, .type-forum h1.big {
   margin-top: 0;
 }
 
-.bbp-header ul li, .bbp-body ul li {
-  display: block;
-}
-
 li {
   &.bbp-body li {
-    &.bbp-forum-topic-count, &.bbp-topic-voice-count, &.bbp-forum-reply-count, &.bbp-topic-reply-count {
+    &.bbp-forum-topic-count, 
+    &.bbp-topic-voice-count, 
+    &.bbp-forum-reply-count, 
+    &.bbp-topic-reply-count {
       display: none;
     }
   }
-  &.bbp-forum-info, &.bbp-topic-title {
+  &.bbp-forum-info, 
+  &.bbp-topic-title {
     border-bottom: none;
+  }
+
+  &.bbp-forum-info, 
+  &.bbp-topic-title {
+    width: 30%;
+  }
+  &.bbp-forum-freshness, 
+  &.bbp-topic-freshness {
+    width: 24%;
+  }
+  &.bbp-forum-topic-count, 
+  &.bbp-topic-voice-count, 
+  &.bbp-forum-reply-count, 
+  &.bbp-topic-reply-count {
+    width: 20%;
   }
 }
 
-p.form-allowed-tags, div.bbp-submit-wrapper {
+p.form-allowed-tags, 
+div.bbp-submit-wrapper {
   width: 100%;
 }
 

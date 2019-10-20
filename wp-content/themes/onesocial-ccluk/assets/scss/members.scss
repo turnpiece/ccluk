@@ -1,5 +1,17 @@
 // Members stylesheet.
 
+/** Import partials **/
+
+@import "partials/variables";
+@import "partials/mixins";
+@import "partials/messages";
+
+/** Styles for plugins etc. **/
+
+@import "vendor/buddypress.scss";
+@import "vendor/bbpress";
+@import "vendor/boss-inbox";
+
 /*--------------------------------------------------------------
 # Typography
 --------------------------------------------------------------*/
@@ -29,19 +41,6 @@
         margin-bottom: 5px;
     }
 }
-
-
-/** Import partials **/
-
-@import "partials/variables";
-@import "partials/mixins";
-@import "partials/messages";
-
-/** Styles for plugins etc. **/
-
-@import "vendor/buddypress.scss";
-@import "vendor/bbpress";
-@import "vendor/boss-inbox";
 
 @media screen and (max-width: 1024px)  {
     @import "partials/adminbar";
