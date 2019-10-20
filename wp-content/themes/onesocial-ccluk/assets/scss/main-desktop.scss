@@ -316,7 +316,7 @@ body {
 }
 
 #secondary .widget {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid $divider_color;
   margin-bottom: 0;
   padding: 70px 0;
   position: relative;
@@ -543,7 +543,7 @@ body {
   background-color: $secondary_bg;
   position: relative;
   &:after {
-    background: rgba(0, 0, 0, 0.1);
+    background: $divider_color;
     bottom: 0;
     content: ' ';
     height: 1px;
@@ -649,7 +649,7 @@ header-aside,
   display: inline-block;
   position: relative;
   &:last-child {
-    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    border-right: 1px solid $divider_color;
   }
   form {
     > div {
@@ -680,9 +680,9 @@ header-aside,
     padding: 20px 80px 20px 30px;
     font-size: 18px;
     font-weight: 300;
-    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    border-left: 1px solid $divider_color;
     border-radius: 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid $divider_color;
   }
   .search-wrap:before {
     /*  content: '';
@@ -772,7 +772,7 @@ header-aside,
   height: 70px;
   line-height: 70px;
   width: 66px;
-  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  border-left: 1px solid $divider_color;
   text-align: center;
   color: $dark;
   display: inline-block;
@@ -900,7 +900,7 @@ header-aside,
 }
 
 .boss-logout:before {
-  background: rgba(0, 0, 0, 0.1);
+  background: $divider_color;
   content: ' ';
   height: 1px;
   position: absolute;
@@ -913,7 +913,7 @@ header-aside,
   padding: 0 0 12px;
   position: relative;
   &:before {
-    background: rgba(0, 0, 0, 0.1);
+    background: $divider_color;
     bottom: 0;
     content: ' ';
     display: block;
@@ -969,7 +969,7 @@ header-aside,
   }
   .bp_components .menupop:not(#wp-admin-bar-my-account) > .ab-sub-wrapper:before, .links li > .sub-menu:before {
     background-color: $white;
-    box-shadow: 2px -2px 2px -1px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px -2px 2px -1px $divider_color;
     content: "";
     display: block;
     height: 12px;
@@ -1279,7 +1279,7 @@ li.hideshow > ul li {
     padding-bottom: 25px;
     width: 50px;
     display: inline-block;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid $divider_color;
   }
   .load-more-posts {
     color: rgba(0, 0, 0, 0.2);
@@ -1310,7 +1310,7 @@ li.hideshow > ul li {
       width: auto;
       background-color: $white;
       padding: 4px 6px 4px;
-      border: 1px solid rgba(0, 0, 0, 0.1);
+      border: 1px solid $divider_color;
       opacity: 0;
       visibility: hidden;
       min-width: 90px;
@@ -1351,7 +1351,7 @@ li.hideshow > ul li {
 
 .article-outher {
   @include display-flex();
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid $divider_color;
   &:nth-last-child(2) {
     .to-top, &:after {
       display: none;
@@ -1380,7 +1380,7 @@ a.to-top {
   width: 28px;
   display: block;
   border-radius: 50%;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid $divider_color;
   text-align: center;
   z-index: 1;
   background-color: $white;
@@ -1429,7 +1429,7 @@ article:hover a.to-top {
     margin-bottom: 10px;
   }
   .author-middle .author-bio:after {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: $divider_color;
     bottom: 0;
     content: ' ';
     height: 1px;
@@ -1455,7 +1455,7 @@ article:hover a.to-top {
   width: 100%;
   max-width: $content_w;
   .hentry {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid $divider_color;
     padding: 70px 0;
     position: relative;
   }
@@ -1484,7 +1484,7 @@ body.single-post #page {
     padding: 0 15px;
   }
   #comments .inner {
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: 1px solid $divider_color;
     /*margin-top: 30px;*/
   }
 }

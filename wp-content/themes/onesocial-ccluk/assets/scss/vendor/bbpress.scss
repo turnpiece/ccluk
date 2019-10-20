@@ -88,7 +88,7 @@ div {
 div.bbp-topic-tags a {
   text-transform: none;
   font-weight: 300;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid $divider_color;
   margin-left: 10px;
   padding: 4px 10px;
   color: $gray;
@@ -126,7 +126,7 @@ div.bbp-topic-tags a {
   }
   #bbp-search-index-form {
     overflow: hidden;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    border: 1px solid $divider_color;
     margin: 0 auto;
     position: relative;
   }
@@ -134,13 +134,13 @@ div.bbp-topic-tags a {
 
 #buddypress div.message-search {
   overflow: hidden;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid $divider_color;
   margin: 0 auto;
   position: relative;
 }
 
 #bbpress-forums #bbp-search-index-form {
-  border: 2px solid rgba(0, 0, 0, 0.1);
+  border: 2px solid $divider_color;
   width: 65%;
 }
 
@@ -178,7 +178,8 @@ div.bbp-topic-tags a {
   border: none;
 }
 
-#bbpress-forums #bbp-search-index-form input#bbp_search, #buddypress #search-message-form input[type="text"] {
+#bbpress-forums #bbp-search-index-form input#bbp_search, 
+#buddypress #search-message-form input[type="text"] {
   height: 100%;
   width: 100%;
   padding: 20px 80px 20px 30px;
@@ -259,13 +260,13 @@ body.bbpress #bbp-search-index-form button#bbp_search_submit:hover, #buddypress 
   div {
     &.bbp-topic-header, &.bbp-reply-header {
       padding: 0 0 20px 0;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      border-bottom: 1px solid $divider_color;
       margin-bottom: 25px;
     }
   }
   .bbp-forum-header {
     padding: 0 0 20px 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid $divider_color;
     margin-bottom: 25px;
   }
 }
@@ -275,13 +276,13 @@ body.bbpress #bbp-search-index-form button#bbp_search_submit:hover, #buddypress 
     div {
       &.bbp-topic-header, &.bbp-reply-header {
         padding: 0 0 20px 0;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        border-bottom: 1px solid $divider_color;
         margin-bottom: 25px;
       }
     }
     .bbp-forum-header {
       padding: 0 0 20px 0;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      border-bottom: 1px solid $divider_color;
       margin-bottom: 25px;
     }
     div {
@@ -1334,7 +1335,7 @@ p.form-allowed-tags {
     }
     input:focus, textarea:focus {
       border: 1px solid $blue;
-      box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.1);
+      box-shadow: inset 1px 1px 1px $divider_color;
       outline-color: rgba(240, 255, 240, 0.1);
     }
     &.bbp-form input.checkbox {

@@ -289,7 +289,7 @@ body.bp-user.messages {
           width: 50px;
         }
         tr.unread td:last-child {
-          border-right: 2px solid rgba(0, 0, 0, 0.1);
+          border-right: 2px solid $divider_color;
         }
 
         input[type="checkbox"] {
@@ -577,7 +577,7 @@ padding-right: 5px;
   height: 100%;
   width: 2px;
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: $divider_color;
   top: 0;
   left: 35px;
 }

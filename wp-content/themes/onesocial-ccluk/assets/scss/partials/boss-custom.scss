@@ -150,7 +150,11 @@ li {
   }
 }
 
-.post-author .load-more-posts.active .bb-icon-bars-f:before, .entry-content blockquote .author, .comment-content blockquote .author, .entry-header .entry-title a:hover, .widget_search #searchform button i:before {
+.post-author .load-more-posts.active .bb-icon-bars-f:before, 
+.entry-content blockquote .author, 
+.comment-content blockquote .author, 
+.entry-header .entry-title a:hover, 
+.widget_search #searchform button i:before {
   color: $green;
 }
 
@@ -168,7 +172,8 @@ li {
 }
 
 a {
-  &.comment-reply-link:hover, &.comment-edit-link:hover {
+  &.comment-reply-link:hover, 
+  &.comment-edit-link:hover {
     color: $green;
   }
 }
