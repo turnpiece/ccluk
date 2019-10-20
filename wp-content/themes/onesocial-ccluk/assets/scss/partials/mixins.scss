@@ -114,6 +114,12 @@
 	flex-flow: row wrap;
 }
 
+@mixin flex-column-nowrap() {
+  -webkit-flex-flow: column nowrap;
+  -ms-flex-flow: column nowrap;
+  flex-flow: column nowrap;
+}
+
 @mixin align-items( $align: center ) {
 	-webkit-align-items: $align;
   	align-items: $align;
@@ -137,6 +143,33 @@
 @mixin button-small( $hover_bg: $green, $hover_color: $white ) {
   @include button( $hover_bg, $hover_color );
   @include padding( .35, 1 );
+}
+
+@mixin button-load-more() {
+  margin: 0;
+  display: block;
+  background-color: $green;
+  border: none;
+  color: $white;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  padding: 10px 14px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+
+  &:hover {
+    outline: none;
+    color: $white;
+    text-decoration: none;
+    /* Darken */
+    -moz-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
+    -webkit-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
+    box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
+  }
 }
 
 @mixin cta() {

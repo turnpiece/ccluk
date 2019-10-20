@@ -1218,7 +1218,7 @@ label[for="groupblog-create-new-no"] {
   z-index: 2;
   .generic-button a {
     background-color: $white;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    border: 1px solid $divider_color;
     clear: both;
     color: $blue;
     display: block;
@@ -2018,7 +2018,7 @@ div#sitewide-notice div#message.error p {
       }
     }
     &.profile-settings th, &.notification-settings th {
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      border-bottom: 1px solid $divider_color;
       border-top: medium none;
       color: $dark;
       font-size: 16px;
@@ -2116,7 +2116,7 @@ div#sitewide-notice div#message.error p {
           border-color: $dark_red;
         }
         label {
-          border: 1px solid rgba(0, 0, 0, 0.1);
+          border: 1px solid $divider_color;
           margin: 0;
           line-height: 1;
           background-color: $white;
@@ -2126,7 +2126,7 @@ div#sitewide-notice div#message.error p {
         }
       }
       .yes label {
-        border: 1px solid rgba(0, 0, 0, 0.1);
+        border: 1px solid $divider_color;
         margin: 0;
         line-height: 1;
         background-color: $white;
@@ -2281,7 +2281,7 @@ label[for='select-all-notifications'] {
   }
 
   div#item-header h2 a {
-    color: #777;
+    color: $blue;
     text-decoration: none;
   }
   ul.item-list li div.item-desc p {
@@ -2814,7 +2814,7 @@ body.buddypress {
       font-style: italic;
       color: $gray;
       padding-bottom: 25px;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      border-bottom: 1px solid $divider_color;
       /*margin-bottom: 43px;*/
       font-size: $font-size-sm;
     }
@@ -3163,7 +3163,7 @@ body.bp-user #buddypress div#item-nav {
 
 #buddypress div#item-nav .item-list-tabs {
   margin-top: 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid $divider_color;
   ul {
     margin: 0;
     padding: 0;
@@ -3402,7 +3402,7 @@ body:not(.group-members) #buddypress div {
   background-color: transparent;
   border-width: 1px;
   border-style: solid;
-  border-color: rgba(0, 0, 0, 0.1);
+  border-color: $divider_color;
   -webkit-border-radius: 3px 3px 0 0;
   -moz-border-radius: 3px 3px 0 0;
   border-radius: 0;
@@ -3949,8 +3949,8 @@ body.activity-permalink #buddypress div.activity-comments ul li > ul {
   }
   .activity.activity {
     div.activity-comments form.root {
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-      border-top: 1px solid rgba(0, 0, 0, 0.1);
+      border-bottom: 1px solid $divider_color;
+      border-top: 1px solid $divider_color;
       clear: both;
       margin: 30px 0 20px;
       padding: 30px 0;
@@ -4443,7 +4443,7 @@ body.articles #buddypress div#item-body {
       font-size: $font-size-sm;
       text-transform: uppercase;
       padding-bottom: 25px;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      border-bottom: 1px solid $divider_color;
       margin-bottom: 15px;
       margin-top: 20px;
     }
@@ -4590,7 +4590,7 @@ body.buddypress {
 	    form {
 	      .ac-textarea {
 	        background-color: $white;
-	        border: 1px solid rgba(0, 0, 0, 0.1);
+	        border: 1px solid $divider_color;
 	        margin-bottom: 20px;
 	        padding: 8px;
 	      }
@@ -4729,7 +4729,7 @@ body.buddypress {
 	  }
 	  .activity-list .activity-content .activity-header {
 	    overflow: hidden;
-	    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	    border-bottom: 1px solid $divider_color;
 	    padding-bottom: 18px;
 	    display: table;
 	    width: 100%;
@@ -4796,24 +4796,23 @@ body.buddypress {
       }
   }
   #buddypress {
-      form#send-invite-form #invite-list {
-          margin-bottom: 50px;
-      }
+    form#send-invite-form #invite-list {
+        margin-bottom: 50px;
+    }
 
-
-  #item-header span.activity {
-    color: $white;
-    margin-top: 6px;
-    display: block;
-  }
-  #activity-stream {
-    margin-bottom: 0;
-  }
-  div#item-body {
-    margin-bottom: 70px;
-    float: right;
-    width: 100%;
-  }
+    #item-header span.activity {
+      color: $green;
+      margin-top: 6px;
+      display: block;
+    }
+    #activity-stream {
+      margin-bottom: 0;
+    }
+    div#item-body {
+      margin-bottom: 70px;
+      float: right;
+      width: 100%;
+    }
   }
 }
 
