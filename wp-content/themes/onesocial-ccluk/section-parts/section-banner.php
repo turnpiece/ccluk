@@ -71,6 +71,17 @@ if ($audience == 'none' ||
                     $content.find('img').height( $content.height() );
                 }
             })
+
+        <?php if (empty($heading)) : ?>
+            $('#<?php echo $id ?>').on({
+                hover: function() {
+                    $('#<?php echo $id ?>').css('cursor', 'pointer');
+                },
+                click: function() {
+                    window.location.href = '<?php echo get_permalink( $page ) ?>';
+                }
+            })
+        <?php endif; ?>
         })
     </script>
 
