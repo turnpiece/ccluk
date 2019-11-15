@@ -41,7 +41,7 @@ if (!function_exists('bp_is_user_forums')) :
 
 endif;
 
-
+/*
 // Customize user menu
 // remove forums, groups and friends tabs
 function ccluk_remove_forums_from_profile()
@@ -61,7 +61,7 @@ function ccluk_remove_friends_from_profile()
     bp_core_remove_nav_item('friends');
 }
 add_action('bp_friends_setup_nav','ccluk_remove_friends_from_profile');
-
+*/
 // add messages to nav
 add_action( 'bp_setup_nav', function() {
 
@@ -117,4 +117,4 @@ function ccluk_remove_admin_bar_links() {
 
     //error_log( print_r( $wp_admin_bar, true ) );
 }
-add_action( 'wp_before_admin_bar_render', 'ccluk_remove_admin_bar_links' );
+//add_action( 'wp_before_admin_bar_render', 'ccluk_remove_admin_bar_links' );
