@@ -134,13 +134,8 @@ Class BuddyBoss_Theme {
 	public function includes() {
 		// Theme setup
 		require_once( $this->inc_dir . '/theme-functions.php' );
-		require_once( $this->inc_dir . '/extra-functions.php' );
-/*
-		if ( class_exists( 'WPBakeryVisualComposerAbstract' ) ) {
-			// VC setup
-			require_once( $this->inc_dir . '/vc-functions.php' );
-		}
-*/
+		//require_once( $this->inc_dir . '/extra-functions.php' );
+
 		// Ajax file
 		require_once( $this->inc_dir . '/ajax-load-posts.php' );
 
@@ -163,12 +158,12 @@ Class BuddyBoss_Theme {
 
 		// User Options & Settings
 		require_once( $this->inc_dir . '/users-options.php' );
-
+/*
 		// BuddyPress legacy plugin support
 		if ( function_exists( 'bp_is_active' ) ) {
 			require_once( $this->inc_dir . '/buddyboss-bp-legacy/bp-legacy-loader.php' );
 		}
-
+*/
 		// Cover Photo Support
 		if (CCLUK_BB_COVER_PHOTO)
 			require_once( $this->inc_dir . '/cover-photo.php' );
@@ -177,10 +172,13 @@ Class BuddyBoss_Theme {
 		require_once( $this->inc_dir . "/popup/user_email_verify.php" );
 		require_once( $this->inc_dir . "/popup/ajax_login.php" );
 		require_once( $this->inc_dir . "/popup/ajax_register.php" );
-/*
+
 		// Debug functions
 		require_once( $this->inc_dir . '/debug.php' );
-*/
+
+		if (BUDDYBOSS_DEBUG)
+			require_once( $this->inc_dir . '/bp-debug.php' );
+/*
 		// BuddyPress Modules
 		if ( class_exists( 'BP_Component' ) ) {
 			// Widgets
@@ -189,14 +187,10 @@ Class BuddyBoss_Theme {
 
 		// Custom Widgets
 		require_once( $this->inc_dir . '/buddyboss-widgets/custom-widgets.php' );
-
+*/
 		//Cache update hook
 		require_once( $this->inc_dir . '/cache-update-hook.php' );
-/*
-		// Allow automatic updates via the WordPress dashboard
-		require_once( $this->inc_dir . '/buddyboss-theme-updater.php' );
-		//new buddyboss_updater_theme( 'http://update.buddyboss.com/theme', basename( get_template_directory() ), 170 );
-*/
+
 	}
 
 	function backend_should_load() {
@@ -214,39 +208,6 @@ Class BuddyBoss_Theme {
 		return false;
 	}
 
-    /**
-     * Output the theme typography css
-     *
-     *
-    public function output_typography_css() {
-
-        $onesocial_typography = get_transient("onesocial_typography");
-
-        if(empty($onesocial_typography)) {
-
-        	global $reduxConfig;
-
-        	$reduxFramework = $reduxConfig->ReduxFramework;
-	        $protocol           = ( ! empty ( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443 ) ? "https:" : "http:";
-	        $typography         = new ReduxFramework_typography ( null, null, $reduxFramework );
-	        $google_fontlink    = $protocol.$typography->makeGoogleWebfontLink( $reduxFramework->typography );
-
-	  		$onesocial_typography["google_font_link"] = $google_fontlink;
-	  		$onesocial_typography["css"] = $reduxFramework->outputCSS;
-
-		    set_transient( 'onesocial_typography', $onesocial_typography );
-
-        }
-
-        $google_fontlink    = $onesocial_typography["google_font_link"];
-        $outputCSS          = $onesocial_typography["css"];
-
-	    wp_enqueue_style( 'redux-google-fonts-onesocial-options', $google_fontlink, array(), '1.0' );
-
-        echo '<style type="text/css" title="dynamic-css" class="options-output">' . $outputCSS . '</style>';
-
-    }
-	*/
 	/**
 	 * Actions and filters
 	 */
