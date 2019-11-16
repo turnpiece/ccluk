@@ -916,7 +916,8 @@ body #buddypress div.activity-comments form#frm_buddypress-edit-activity .ac-tex
   color: $green;
 }
 
-.boss-group-invite-friend-list .avatar, #create-group-form #invite-list li img {
+.boss-group-invite-friend-list .avatar, 
+#create-group-form #invite-list li img {
   vertical-align: middle;
   @include border-radius( 50% );
   margin-right: 20px;
@@ -3530,6 +3531,13 @@ body:not(.group-members) #buddypress div {
           right: 0;
           width: 180px;
         }
+      }
+    }
+    &#members-list {
+      li div.item-title {
+        width: 90%;
+        margin: 0 5%;
+        text-align: center;
       }
     }
   }
