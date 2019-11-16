@@ -42,6 +42,24 @@
     }
 }
 
+/*--------------------------------------------------------------
+# Header
+--------------------------------------------------------------*/
+
+.header-account-login {
+    .avatar,
+    img {
+      border-radius: 100%;
+      max-width: 46px;
+      position: relative;
+      top: -2px;
+    }
+  }
+  
+  .header-style-2 .header-account-login .avatar {
+    margin-right: -2px;
+  }
+
 @media screen and (max-width: 1024px)  {
     @import "partials/adminbar";
 }

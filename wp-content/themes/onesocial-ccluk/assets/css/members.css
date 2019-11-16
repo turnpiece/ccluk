@@ -10456,6 +10456,21 @@ Message error
   margin-bottom: 5px;
 }
 
+/*--------------------------------------------------------------
+# Header
+--------------------------------------------------------------*/
+.header-account-login .avatar,
+.header-account-login img {
+  border-radius: 100%;
+  max-width: 46px;
+  position: relative;
+  top: -2px;
+}
+
+.header-style-2 .header-account-login .avatar {
+  margin-right: -2px;
+}
+
 @media screen and (max-width: 1024px) {
   body.open-left .left-btn {
     /* Click anywhere in header to close it */

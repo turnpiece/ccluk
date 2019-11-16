@@ -949,18 +949,6 @@ header-aside,
   display: none;
 }
 
-.header-account-login .avatar,
-.header-account-login img {
-  border-radius: 100%;
-  max-width: 46px;
-  position: relative;
-  top: -2px;
-}
-
-.header-style-2 .header-account-login .avatar {
-  margin-right: -2px;
-}
-
 .header-account-login .pop .bp_components .menupop:not(#wp-admin-bar-my-account) > .ab-sub-wrapper,
 .header-account-login .pop .links li > .sub-menu {
   background-color: #fff;
