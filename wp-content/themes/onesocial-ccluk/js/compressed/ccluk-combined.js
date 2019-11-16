@@ -4646,11 +4646,6 @@ var BuddyBossMain = ( function ( $, window, undefined ) {
 
         function mobile_carousel() {
             if ( is_mobile && has_item_nav ) {
-                /* Remove submenu if there is any */
-                if ( $( '#mobile-item-nav #nav-bar-filter .hideshow ul' ).length > 0 ) {
-                    $( '#mobile-item-nav #nav-bar-filter' ).append( $( '#mobile-item-nav #nav-bar-filter .hideshow ul' ).html() );
-                    $( '#mobile-item-nav #nav-bar-filter .hideshow' ).remove();
-                }
 
                 if ( !swiper ) {
                     // console.log( 'Setting up mobile nav swiper' );
@@ -4841,15 +4836,6 @@ var BuddyBossMain = ( function ( $, window, undefined ) {
                 $( '.boss-insert-video' ).show();
             }
         } ).find( 'textarea#whats-new' ).change();
-
-        /*--------------------------------------------------------------------------------------------------------
-         3.21 - Responsive Menus (...)
-         --------------------------------------------------------------------------------------------------------*/
-
-        if ( !is_mobile ) {
-            $( "body:not(.settings) #item-nav" ).find( "#nav-bar-filter" ).jRMenuMore( 60 );
-            $( "#site-navigation .nav-menu" ).jRMenuMore( 120 );
-        }
 
         /*------------------------------------------------------------------------------------------------------
          3.1 - Members (Group Admin)
@@ -5836,75 +5822,6 @@ var BuddyBossMain = ( function ( $, window, undefined ) {
  * Inline Plugins
  */
 
-
-/**
- * jRMenuMore to allow menu to have a More option for responsiveness
- * Credit to http://blog.sodhanalibrary.com/2014/02/jrmenumore-jquery-plugin-for-responsive.html
- *
- * uses resize.js for better resizing
- *
- **/
-( function ( $ ) {
-    $.fn.jRMenuMore = function ( widthfix ) {
-        $( this ).each( function () {
-            $( this ).addClass( "horizontal-responsive-menu" );
-            alignMenu( this );
-            var robj = this;
-
-            $( '#main-wrap' ).resize( function () {
-                $( robj ).append( $( $( $( robj ).children( "li.hideshow" ) ).children( "ul" ) ).html() );
-                $( robj ).children( "li.hideshow" ).remove();
-                alignMenu( robj );
-            } );
-
-            function alignMenu( obj ) {
-                var w = 0;
-                var mw = $( obj ).width() - widthfix;
-                var i = -1;
-                var menuhtml = '';
-                jQuery.each( $( obj ).children(), function () {
-                    i++;
-                    w += $( this ).outerWidth( true );
-                    if ( mw < w ) {
-                        menuhtml += $( '<div>' ).append( $( this ).clone() ).html();
-                        $( this ).remove();
-                    }
-                } );
-
-                $( obj ).append(
-                    '<li class="hideshow">' +
-                    '<a class="bb-menu-button" href="#"><i class="fa"></i></a><ul>' +
-                    menuhtml + '</ul></li>' );
-                $( obj ).children( "li.hideshow ul" ).css( "top",
-                    $( obj ).children( "li.hideshow" ).outerHeight( true ) + "px" );
-
-                $( obj ).find( "li.hideshow > a" ).click( function ( e ) {
-                    e.preventDefault();
-                    $( this ).parent( 'li.hideshow' ).children( "ul" ).toggle();
-                    $( this ).parent( 'li.hideshow' ).parent( "ul" ).toggleClass( 'open' );
-                } );
-
-                $( document ).mouseup( function ( e ) {
-                    var container = $( 'li.hideshow' );
-
-                    if ( !container.is( e.target ) && container.has( e.target ).length === 0 ) {
-                        container.children( "ul" ).hide();
-                        container.parent( "ul" ).removeClass( 'open' );
-                    }
-                } );
-
-                if ( $( obj ).find( "li.hideshow" ).find( "li" ).length > 0 ) {
-                    $( obj ).find( "li.hideshow" ).show();
-                } else {
-                    $( obj ).find( "li.hideshow" ).hide();
-                }
-            }
-
-        } );
-
-    }
-
-}( jQuery ) );
 
 /*------------------------------------------------------------------------------------------------------
  Inline Plugins
