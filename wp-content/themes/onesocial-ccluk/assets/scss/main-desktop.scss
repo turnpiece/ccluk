@@ -941,11 +941,14 @@ header-aside,
   display: none;
 }
 
-.header-account-login .avatar {
-  border-radius: 100%;
-  max-width: 46px;
-  position: relative;
-  top: -2px;
+.header-account-login {
+  .avatar,
+  img {
+    border-radius: 100%;
+    max-width: 46px;
+    position: relative;
+    top: -2px;
+  }
 }
 
 .header-style-2 .header-account-login .avatar {
@@ -953,7 +956,8 @@ header-aside,
 }
 
 .header-account-login .pop {
-  .bp_components .menupop:not(#wp-admin-bar-my-account) > .ab-sub-wrapper, .links li > .sub-menu {
+  .bp_components .menupop:not(#wp-admin-bar-my-account) > .ab-sub-wrapper, 
+  .links li > .sub-menu {
     background-color: $white;
     box-shadow: 0 1px 4px 0 rgba(50, 50, 50, 0.2);
     display: none;
@@ -964,10 +968,12 @@ header-aside,
     top: 0;
     width: 187px;
   }
-  .bp_components .menupop:hover:not(#wp-admin-bar-my-account) > .ab-sub-wrapper, .links li:hover > .sub-menu {
+  .bp_components .menupop:hover:not(#wp-admin-bar-my-account) > .ab-sub-wrapper, 
+  .links li:hover > .sub-menu {
     display: block;
   }
-  .bp_components .menupop:not(#wp-admin-bar-my-account) > .ab-sub-wrapper:before, .links li > .sub-menu:before {
+  .bp_components .menupop:not(#wp-admin-bar-my-account) > .ab-sub-wrapper:before, 
+  .links li > .sub-menu:before {
     background-color: $white;
     box-shadow: 2px -2px 2px -1px $divider_color;
     content: "";

@@ -949,7 +949,8 @@ header-aside,
   display: none;
 }
 
-.header-account-login .avatar {
+.header-account-login .avatar,
+.header-account-login img {
   border-radius: 100%;
   max-width: 46px;
   position: relative;
@@ -960,7 +961,8 @@ header-aside,
   margin-right: -2px;
 }
 
-.header-account-login .pop .bp_components .menupop:not(#wp-admin-bar-my-account) > .ab-sub-wrapper, .header-account-login .pop .links li > .sub-menu {
+.header-account-login .pop .bp_components .menupop:not(#wp-admin-bar-my-account) > .ab-sub-wrapper,
+.header-account-login .pop .links li > .sub-menu {
   background-color: #fff;
   -webkit-box-shadow: 0 1px 4px 0 rgba(50, 50, 50, 0.2);
           box-shadow: 0 1px 4px 0 rgba(50, 50, 50, 0.2);
@@ -973,11 +975,13 @@ header-aside,
   width: 187px;
 }
 
-.header-account-login .pop .bp_components .menupop:hover:not(#wp-admin-bar-my-account) > .ab-sub-wrapper, .header-account-login .pop .links li:hover > .sub-menu {
+.header-account-login .pop .bp_components .menupop:hover:not(#wp-admin-bar-my-account) > .ab-sub-wrapper,
+.header-account-login .pop .links li:hover > .sub-menu {
   display: block;
 }
 
-.header-account-login .pop .bp_components .menupop:not(#wp-admin-bar-my-account) > .ab-sub-wrapper:before, .header-account-login .pop .links li > .sub-menu:before {
+.header-account-login .pop .bp_components .menupop:not(#wp-admin-bar-my-account) > .ab-sub-wrapper:before,
+.header-account-login .pop .links li > .sub-menu:before {
   background-color: #fff;
   -webkit-box-shadow: 2px -2px 2px -1px rgba(0, 0, 0, 0.1);
           box-shadow: 2px -2px 2px -1px rgba(0, 0, 0, 0.1);
