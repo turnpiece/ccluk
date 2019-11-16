@@ -3202,7 +3202,10 @@ body.buddypress.is-desktop {
             max-width: 175px;
           }
           > a {
-            font-size: $font-size-sm;
+            font-size: $font-size-tiny;
+            @media screen and (min-width: 1200px) {
+              font-size: $font-size-sm;
+            }
             font-weight: 700;
             text-transform: uppercase;
             color: $blue;
@@ -5524,7 +5527,11 @@ body.buddypress {
 
 				#item-header-content {
 					margin-left: 200px;
-					text-align: left;
+          text-align: left;
+          
+          > h1 {
+            text-align: left;
+          }
 
 					.btn-group-social {
 						.generic-button a {

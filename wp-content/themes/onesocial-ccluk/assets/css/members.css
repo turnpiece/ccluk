@@ -3865,7 +3865,7 @@ body.buddypress.is-desktop #buddypress div#item-nav > div#object-nav.item-list-t
 }
 
 body.buddypress.is-desktop #buddypress div#item-nav > div#object-nav.item-list-tabs ul li > a {
-  font-size: 15px;
+  font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
   color: #22a7f0;
@@ -3876,6 +3876,12 @@ body.buddypress.is-desktop #buddypress div#item-nav > div#object-nav.item-list-t
   border: none;
   border-radius: 0;
   background: transparent;
+}
+
+@media screen and (min-width: 1200px) {
+  body.buddypress.is-desktop #buddypress div#item-nav > div#object-nav.item-list-tabs ul li > a {
+    font-size: 15px;
+  }
 }
 
 body.buddypress.is-desktop #buddypress div#item-nav > div#object-nav.item-list-tabs ul li > a span {
@@ -6287,6 +6293,10 @@ body.buddypress #main #buddypress .item-header-mobile #item-header-avatar {
 
 body.buddypress #main #buddypress .item-header-mobile #item-header-content {
   margin-left: 200px;
+  text-align: left;
+}
+
+body.buddypress #main #buddypress .item-header-mobile #item-header-content > h1 {
   text-align: left;
 }
 
