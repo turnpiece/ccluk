@@ -2720,25 +2720,25 @@ body.activity-permalink #buddypress ul.item-list {
     }
   }
 
-  ul.item-list > li {
-    padding: 15px 0;
-    margin: 0;
-    position: relative;
-    list-style: none;
-    overflow: hidden;
-  }
-
   ul {
-    &.item-list > li:first-child {
-      padding-top: 0;
-    }
     &.single-line li {
       border: none;
     }
     &.item-list {
+      > li {
+        padding: 15px 0;
+        margin: 0;
+        position: relative;
+        list-style: none;
+        overflow: hidden;
+
+        &:first-child {
+          padding-top: 0;
+        }
+      }
       &:not(.bb-group-members) li img.avatar {
         float: left;
-        margin: 0 13% 0 0;
+        margin: 0 10px 0 0;
         box-shadow: none;
         width: 50px;
         height: 50px;
@@ -3496,17 +3496,19 @@ body:not(.group-members) #buddypress div {
     margin-top: 0;
   }
 
-    div.item-list-tabs ul .button, 
-    .bp-legacy div#item-body div.item-list-tabs ul .button {
-        margin: 8px 0 0 8px;
-        float: right;
-        font-weight: 400;
-    }
+  div.item-list-tabs ul .button, 
+  .bp-legacy div#item-body div.item-list-tabs ul .button {
+    margin: 8px 0 0 8px;
+    float: right;
+    font-weight: 400;
+  }
 
-    ul.item-list li div.action {
-        margin-bottom: 40px;
+  ul.item-list {
+    li div.action {
+      margin-bottom: 40px;
     }
-    #blogs-list.item-list li div {
+    &#blogs-list {
+      li div {
         &.action {
           position: absolute;
           top: 15px;
@@ -3516,7 +3518,21 @@ body:not(.group-members) #buddypress div {
         &.meta {
           display: none;
         }
+      }
     }
+    &#friend-list {
+      li {
+        position: relative;
+        
+        div.action {
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 180px;
+        }
+      }
+    }
+  }
 }
 
 .blog-details {
@@ -5122,14 +5138,14 @@ body.buddypress {
 		  }
 		}
 		#admins-list,
-        #mods-list,
-        #members-list,
-        #groups-list,
-        #friend-list  {
-            div.action a {
-		        margin: 0 0 10px;
-		        display: inline-block;
-            }
+    #mods-list,
+    #members-list,
+    #groups-list,
+    #friend-list  {
+      div.action a {
+        margin: 0 0 10px;
+        display: inline-block;
+      }
 		}
 
 		ul {
@@ -5153,8 +5169,8 @@ body.buddypress {
 				}
 			  }
 			  .action {
-				float: right;
-				margin-bottom: 0;
+          float: right;
+          margin-bottom: 0;
 			  }
 			}
 		}

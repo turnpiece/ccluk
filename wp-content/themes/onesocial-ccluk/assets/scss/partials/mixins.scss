@@ -64,32 +64,33 @@
 @mixin bp-item-list-tabs() {
 	ul {
 		@include display-flex-box();
-    	li {
-	      	a {
-	        	font-size: $font-size-sm;
-				    @include inactive-tab();
-	        	@include border-radius(0);
+    li {
+      position: relative;
+      a {
+        font-size: $font-size-sm;
+        @include inactive-tab();
+        @include border-radius(0);
 
-            > span {
-              float: right;
-              margin-top: -5px;
-              @include inactive-tab(0);
-            }
-	      	}
-        &:hover,
-        &:active,
-        &.current,
-        &.selected {
-	        a {
-	          @include active-tab();
+        > span {
+          position: absolute;
+          top: 0;
+          @include inactive-tab(0);
+        }
+      }
+      &:hover,
+      &:active,
+      &.current,
+      &.selected {
+        a {
+          @include active-tab();
 
-			  		> span {
-				  		@include active-tab();
-			  		}
-	        }
-	      }
-    	}
-  	}
+          > span {
+            @include active-tab();
+          }
+        }
+      }
+    }
+  }
 }
 
 @mixin display-flex-box( $align: center, $justify: center ) {
