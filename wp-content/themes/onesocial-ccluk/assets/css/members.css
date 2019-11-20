@@ -7027,7 +7027,7 @@ MAXIMUM width of 380 pixels (phones portrait)
   }
   body.buddypress #buddypress #mobile-item-nav-wrap {
     margin-bottom: 15px;
-    height: 110px;
+    min-height: 110px;
     min-width: calc(100% + 30px);
   }
   body.buddypress #buddypress #mobile-item-nav-wrap div.item-list-tabs {
@@ -7036,8 +7036,18 @@ MAXIMUM width of 380 pixels (phones portrait)
     padding: 0;
   }
   body.buddypress #buddypress #mobile-item-nav ul {
-    height: 90px;
-    display: block;
+    min-height: 90px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: row wrap;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
     padding-top: 0;
     margin: 0 !important;
   }
@@ -7047,8 +7057,7 @@ MAXIMUM width of 380 pixels (phones portrait)
   body.buddypress #buddypress #mobile-item-nav > div.item-list-tabs > ul li {
     height: 60px;
     width: 80px;
-    float: left !important;
-    margin: 0 5px;
+    margin: 0 5px 20px;
     padding: 0;
     border: none;
     background-color: rgba(0, 152, 218, 0.85);

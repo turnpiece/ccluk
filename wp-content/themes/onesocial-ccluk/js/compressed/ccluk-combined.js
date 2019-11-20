@@ -4455,7 +4455,7 @@ var BuddyBossMain = ( function ( $, window, undefined ) {
                     $left_logout_link.appendTo( $left_account_panel );
                 }
             }
-
+            
             // Runs once, first time we experience a mobile resolution
             if ( is_mobile && has_item_nav && !mobile_modified ) {
                 mobile_modified = true;
@@ -4464,7 +4464,7 @@ var BuddyBossMain = ( function ( $, window, undefined ) {
                 $mobile_item_nav = $( '<div id="mobile-item-nav" class="mobile-item-nav">' ).appendTo( $mobile_item_wrap );
                 $mobile_item_nav.append( $item_nav.html() );
 
-                $mobile_item_nav.css( 'width', ( $item_nav.find( 'li' ).length * 94 ) );
+                //$mobile_item_nav.css( 'width', ( $item_nav.find( 'li' ).length * 94 ) );
                 $mobile_nav_wrap.insertBefore( $item_nav ).show();
                 $( '#mobile-item-nav-wrap, .mobile-item-nav-scroll-container, .mobile-item-nav-container' ).addClass( 'fixed' );
                 $item_nav.css( { display: 'none' } );
@@ -4478,16 +4478,12 @@ var BuddyBossMain = ( function ( $, window, undefined ) {
             // Resized back to mobile resolution
             else if ( is_mobile && has_item_nav && mobile_modified ) {
                 $mobile_nav_wrap.css( {
-                    display: 'block',
-                    width: carousel_width
-                } );
-
-                $mobile_item_nav.css( {
-                    width: carousel_width
+                    display: 'block'
                 } );
 
                 $item_nav.css( { display: 'none' } );
             }
+
 
             // Update select drop-downs
             if ( typeof Selects !== 'undefined' ) {
@@ -4507,7 +4503,6 @@ var BuddyBossMain = ( function ( $, window, undefined ) {
             check_is_mobile();
             check_has_item_nav();
             render_layout();
-            mobile_carousel();
         }
 
         /*------------------------------------------------------------------------------------------------------
@@ -4643,7 +4638,7 @@ var BuddyBossMain = ( function ( $, window, undefined ) {
         /*------------------------------------------------------------------------------------------------------
          2.1 - Mobile/Tablet Carousels
          --------------------------------------------------------------------------------------------------------*/
-
+/*
         function mobile_carousel() {
             if ( is_mobile && has_item_nav ) {
 
@@ -4658,7 +4653,7 @@ var BuddyBossMain = ( function ( $, window, undefined ) {
                 }
             }
         }
-
+*/
         /*------------------------------------------------------------------------------------------------------
          2.2 - Responsive Dropdowns
          -------------------------------------------------------------------------------------------------------*/

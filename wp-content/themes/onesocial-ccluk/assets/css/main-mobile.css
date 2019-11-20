@@ -1120,10 +1120,6 @@ body.activity-permalink #buddypress .activity-list li .activity-content {
   transition-timing-function: ease;
 }
 
-#mobile-item-nav {
-  float: left;
-}
-
 /* IE10 Windows Phone 8 Fixes */
 .swiper-wp8-horizontal {
   -ms-touch-action: pan-y;
@@ -1181,7 +1177,10 @@ body.open-left, body.open-right {
 
 /** Modern browsers will ignore click events when menus are open **/
 /** Fallback to JS transitions **/
-html.buddyboss-js-transitions body #mobile-header, html.buddyboss-js-transitions body #main-wrap, html.buddyboss-js-transitions body #masthead, html.buddyboss-js-transitions body #wpadminbar {
+html.buddyboss-js-transitions body #mobile-header,
+html.buddyboss-js-transitions body #main-wrap,
+html.buddyboss-js-transitions body #masthead,
+html.buddyboss-js-transitions body #wpadminbar {
   /* modern browsers */
   -webkit-transform: none !important;
   transform: none !important;
@@ -1191,26 +1190,17 @@ html.buddyboss-js-transitions body #mobile-header, html.buddyboss-js-transitions
 }
 
 /** Discourage mobile touch/tap highlights **/
-body, .left-btn, .right-btn {
-  -webkit-tap-highlight-color: transparent;
+body, .left-btn, .right-btn, #main-wrap {
   -webkit-tap-highlight-color: transparent;
   /* For some Androids */
 }
 
 #mobile-header {
   -webkit-tap-highlight-color: transparent;
-  -webkit-tap-highlight-color: transparent;
   /* For some Androids */
 }
 
 #mobile-header .mobile-site-title {
-  -webkit-tap-highlight-color: transparent;
-  -webkit-tap-highlight-color: transparent;
-  /* For some Androids */
-}
-
-#main-wrap {
-  -webkit-tap-highlight-color: transparent;
   -webkit-tap-highlight-color: transparent;
   /* For some Androids */
 }
@@ -1222,7 +1212,6 @@ body, .left-btn, .right-btn {
 
 /** Swipe helper **/
 #buddyboss-swipe-area {
-  -webkit-tap-highlight-color: transparent;
   -webkit-tap-highlight-color: transparent;
   /* For some Androids */
   -ms-touch-action: none;
@@ -1293,8 +1282,11 @@ body, .left-btn, .right-btn {
   cursor: pointer;
   display: block;
   -webkit-tap-highlight-color: transparent;
-  -webkit-tap-highlight-color: transparent;
   /* For some Androids */
+}
+
+.left-btn > img {
+  border-radius: 50%;
 }
 
 /*--------------------------------------------------------------
@@ -1312,7 +1304,6 @@ body, .left-btn, .right-btn {
   right: 0;
   cursor: pointer;
   display: block;
-  -webkit-tap-highlight-color: transparent;
   -webkit-tap-highlight-color: transparent;
   /* For some Androids */
 }

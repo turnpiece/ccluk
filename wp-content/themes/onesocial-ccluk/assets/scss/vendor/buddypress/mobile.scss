@@ -715,7 +715,7 @@ body {
 #buddypress {
   #mobile-item-nav-wrap {
     margin-bottom: 15px;
-    height: 110px;
+    min-height: 110px;
     min-width: calc(100% + 30px);
     div.item-list-tabs {
       border: none;
@@ -725,8 +725,8 @@ body {
   }
   #mobile-item-nav {
     ul {
-      height: 90px;
-      display: block;
+      min-height: 90px;
+      @include display-flex-box();
       padding-top: 0;
       margin: 0 !important;
     }
@@ -735,8 +735,7 @@ body {
         > ul li {
           height: 60px;
           width: 80px;
-          float: left !important;
-          margin: 0 5px;
+          margin: 0 5px 20px;
           padding: 0;
           border: none;
           background-color: $blue_bg;
@@ -781,74 +780,76 @@ body {
 }
 
 
-#mobile-item-nav ul#nav-bar-filter > li {
-  span {
-    display: none;
-  }
-  &:before {
-    font-family: 'FontAwesome';
-    content: "\f006";
-    font-weight: normal;
-    font-style: normal;
-    text-rendering: auto;
-    text-decoration: inherit;
-    speak: none;
-    display: inline-block;
-    width: 80px;
-    line-height: 60px;
-    font-size: 38px;
-    -webkit-font-smoothing: antialiased;
-    vertical-align: middle;
-    text-align: center;
-    color: $white;
-  }
-  &#activity-personal-li:before {
-    font-family: 'FontAwesome';
-    content: "\f14b";
-  }
-  &#xprofile-personal-li:before {
-    font-family: 'FontAwesome';
-    content: "\f007";
-  }
-  &#blogs-personal-li:before {
-    font-family: 'FontAwesome';
-    content: "\f02c";
-  }
-  &#notifications-personal-li:before {
-    font-family: 'FontAwesome';
-    content: "\f0a2";
-  }
-  &#messages-personal-li:before {
-    font-family: 'FontAwesome';
-    content: "\f003";
-  }
-  &#friends-personal-li:before,
-  &#members-groups-li:before {
-    font-family: 'FontAwesome';
-    content: "\f0c0";
-  }
-  &#groups-personal-li:before,
-  &#home-groups-li:before {
-    font-family: 'FontAwesome';
-    content: "\f0ac";
-  }
-  &#invite-groups-li:before {
-    font-family: 'FontAwesome';
-    content: "\f055";
-  }
-  &#forums-personal-li:before,
-  &#nav-forum-groups-li:before {
-    font-family: 'FontAwesome';
-    content: "\f0e5";
-  }
-  &#photos-personal-li:before {
-    font-family: 'FontAwesome';
-    content: "\f030";
-  }
-  &#settings-personal-li:before,
-  &#admin-groups-li:before {
-    font-family: 'FontAwesome';
-    content: "\f013";
+#mobile-item-nav ul#nav-bar-filter {
+  > li {
+    span {
+      display: none;
+    }
+    &:before {
+      font-family: 'FontAwesome';
+      content: "\f006";
+      font-weight: normal;
+      font-style: normal;
+      text-rendering: auto;
+      text-decoration: inherit;
+      speak: none;
+      display: inline-block;
+      width: 80px;
+      line-height: 60px;
+      font-size: 38px;
+      -webkit-font-smoothing: antialiased;
+      vertical-align: middle;
+      text-align: center;
+      color: $white;
+    }
+    &#activity-personal-li:before {
+      font-family: 'FontAwesome';
+      content: "\f14b";
+    }
+    &#xprofile-personal-li:before {
+      font-family: 'FontAwesome';
+      content: "\f007";
+    }
+    &#blogs-personal-li:before {
+      font-family: 'FontAwesome';
+      content: "\f02c";
+    }
+    &#notifications-personal-li:before {
+      font-family: 'FontAwesome';
+      content: "\f0a2";
+    }
+    &#messages-personal-li:before {
+      font-family: 'FontAwesome';
+      content: "\f003";
+    }
+    &#friends-personal-li:before,
+    &#members-groups-li:before {
+      font-family: 'FontAwesome';
+      content: "\f0c0";
+    }
+    &#groups-personal-li:before,
+    &#home-groups-li:before {
+      font-family: 'FontAwesome';
+      content: "\f0ac";
+    }
+    &#invite-groups-li:before {
+      font-family: 'FontAwesome';
+      content: "\f055";
+    }
+    &#forums-personal-li:before,
+    &#nav-forum-groups-li:before {
+      font-family: 'FontAwesome';
+      content: "\f0e5";
+    }
+    &#photos-personal-li:before {
+      font-family: 'FontAwesome';
+      content: "\f030";
+    }
+    &#settings-personal-li:before,
+    &#admin-groups-li:before {
+      font-family: 'FontAwesome';
+      content: "\f013";
+    }
   }
 }
 
@@ -2333,13 +2334,18 @@ MAXIMUM width of 380 pixels (phones portrait)
 --------------------------------------------------------------*/
 @media screen and (max-width: 380px) {
   li {
-    &.bbp-forum-info, &.bbp-topic-title {
+    &.bbp-forum-info, 
+    &.bbp-topic-title {
       width: 30%;
     }
-    &.bbp-forum-freshness, &.bbp-topic-freshness {
+    &.bbp-forum-freshness, 
+    &.bbp-topic-freshness {
       width: 24%;
     }
-    &.bbp-forum-topic-count, &.bbp-topic-voice-count, &.bbp-forum-reply-count, &.bbp-topic-reply-count {
+    &.bbp-forum-topic-count, 
+    &.bbp-topic-voice-count, 
+    &.bbp-forum-reply-count, 
+    &.bbp-topic-reply-count {
       width: 20%;
     }
   }
@@ -2359,7 +2365,9 @@ body {
   }
 
   &.is-mobile #buddypress #mobile-item-nav ul li {
-    &:active, &.current, &.selected {
+    &:active, 
+    &.current, 
+    &.selected {
       background-color: $green;
     }
   }
