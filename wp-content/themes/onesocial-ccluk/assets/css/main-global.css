@@ -1624,7 +1624,7 @@ img.wp-smiley, .rsswidget img {
 /*--------------------------------------------------------------
 3.1 - Body, links, basics
 --------------------------------------------------------------*/
-body.no-adminbar #wpadminbar, body:not(.logged-in).no-adminbar #wpadminbar, body.logged-in.no-adminbar #wpadminbar {
+body:not(.logged-in).no-adminbar #wpadminbar {
   display: none !important;
 }
 

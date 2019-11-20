@@ -1695,9 +1695,7 @@ img.wp-smiley, .rsswidget img {
 --------------------------------------------------------------*/
 
 body {
-  &.no-adminbar,
-  &:not(.logged-in).no-adminbar, 
-  &.logged-in.no-adminbar {
+  &:not(.logged-in).no-adminbar {
     #wpadminbar {
       display: none !important;
     }
