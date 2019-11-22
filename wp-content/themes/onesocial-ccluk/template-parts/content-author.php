@@ -102,11 +102,11 @@
 			?>
 			<div class="author-follow">
 				<?php
-				$args = array(
-					'leader_id' => get_the_author_meta( 'ID' )
-				);
-
 				if ( function_exists( "bp_follow_add_follow_button" ) ) {
+					$args = array(
+						'leader_id' => get_the_author_meta( 'ID' )
+					);
+					
 					bp_follow_add_follow_button( $args );
 				}
 				?>

@@ -4608,13 +4608,15 @@ select[multiple="multiple"] {
 9.2 - Headers
 --------------------------------------------------------------*/
 
-#secondary div#item-header-content h1, #buddypress div#item-header div#item-header-content h1 {
+#secondary div#item-header-content h1, 
+#buddypress div#item-header div#item-header-content h1 {
   font-size: 24px;
   margin-bottom: 0;
   margin-top: 0;
 }
 
-#secondary .user-nicename, #buddypress div#item-header h2 {
+#secondary .user-nicename, 
+#buddypress div#item-header h2 {
   line-height: 1.2;
   font-size: 15px;
   margin: 0px 0 26px;
@@ -4660,9 +4662,6 @@ p#item-desc {
   position: relative;
   #sort-posts-form #sort-submit {
     display: none;
-  }
-  .profile-visible {
-    /*display: block;*/
   }
   .to-top {
     display: none;
