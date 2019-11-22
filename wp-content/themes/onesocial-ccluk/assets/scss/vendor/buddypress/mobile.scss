@@ -1425,9 +1425,14 @@ h1.big,
 1.1.13.2 - Group
 --------------------------------------------------------------*/
 
-&.single-item.groups #buddypress div#subnav.item-list-tabs {
-  border-bottom: none;
-  /*margin-bottom: 0;*/
+&.single-item.groups #buddypress {
+  div#subnav.item-list-tabs {
+    border-bottom: none;
+  }
+
+  .dir-list.group_members ul.item-list > li {
+    width: auto;
+  }
 }
 
 /* Group Settings */

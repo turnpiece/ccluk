@@ -7573,7 +7573,9 @@ MAXIMUM width of 380 pixels (phones portrait)
   }
   body.buddypress.single-item.groups #buddypress div#subnav.item-list-tabs {
     border-bottom: none;
-    /*margin-bottom: 0;*/
+  }
+  body.buddypress.single-item.groups #buddypress .dir-list.group_members ul.item-list > li {
+    width: auto;
   }
   body.buddypress.group-settings #buddypress #item-body {
     font-size: 12px;
