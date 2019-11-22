@@ -1695,20 +1695,20 @@ img.wp-smiley, .rsswidget img {
 --------------------------------------------------------------*/
 
 body {
-  &:not(.logged-in).no-adminbar {
-    #wpadminbar {
-      display: none !important;
+  &.no-adminbar {
+    &:not(.logged-in),
+    &.is-desktop {
+      #wpadminbar {
+        display: none !important;
+      }
     }
   }
-  &:not(.logged-in):not(.no-adminbar).is-desktop.admin-bar, 
+  &:not(.no-adminbar).admin-bar,
   &.logged-in.is-desktop.admin-bar:not(.no-adminbar) {
     margin-top: 32px !important;
   }
   &.logged-in.is-mobile.admin-bar {
     margin-top: 0 !important;
-  }
-  &:not(.no-adminbar).admin-bar {
-    margin-top: 32px !important;
   }
 }
 

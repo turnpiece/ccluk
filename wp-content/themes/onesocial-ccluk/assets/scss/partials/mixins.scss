@@ -97,7 +97,7 @@
   @include display-flex();
 	-webkit-flex-wrap: wrap;
 	-ms-flex-wrap: wrap;
-	flex-wrap: row wrap;
+	flex-wrap: wrap;
   @include align-items( $align );
   justify-content: $justify;
 }

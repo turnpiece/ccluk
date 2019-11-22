@@ -37,7 +37,7 @@ body.bp-user.messages.is-desktop #buddypress .messages-container {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
-  flex-wrap: row wrap;
+  flex-wrap: wrap;
   -webkit-box-align: stretch;
       -ms-flex-align: stretch;
           align-items: stretch;
@@ -3263,7 +3263,7 @@ ul.horiz-gallery li img,
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
-  flex-wrap: row wrap;
+  flex-wrap: wrap;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -5346,7 +5346,7 @@ body.buddypress #buddypress div.pagination .pagination-links {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
-  flex-wrap: row wrap;
+  flex-wrap: wrap;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -5495,7 +5495,7 @@ body.buddypress #buddypress #item-title-area {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
-  flex-wrap: row wrap;
+  flex-wrap: wrap;
   align-items: flex-end;
   justify-content: space-between;
   -webkit-box-align: end;
@@ -6029,7 +6029,7 @@ body.buddypress.activity #buddypress .item-list-tabs.activity-type-tabs ul {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
-  flex-wrap: row wrap;
+  flex-wrap: wrap;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -6100,7 +6100,7 @@ body.buddypress.bp-user.settings #buddypress #item-nav {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
-  flex-wrap: row wrap;
+  flex-wrap: wrap;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -6121,7 +6121,7 @@ body.buddypress #buddypress > div[role=navigation].item-list-tabs ul {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
-  flex-wrap: row wrap;
+  flex-wrap: wrap;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -6465,9 +6465,70 @@ MAXIMUM width of 380 pixels (phones portrait)
     /***************** Mobile ******************/
     /***************** End Mobile ******************/
   }
+  body.buddypress .mobile-item-nav-container {
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    /* Fix for Webkit flickering */
+    z-index: 1;
+  }
   body.buddypress .mobile-item-nav-wrapper {
     margin-left: auto;
     margin-right: auto;
+    position: relative;
+    width: 100%;
+    min-height: 98px;
+    -webkit-transition-property: -webkit-transform, left, top;
+    -webkit-transition-duration: 0s;
+    /* -webkit-transform:translate3d(0,0,0); activate the GPU for hardware acceleration */
+    -webkit-transition-timing-function: ease;
+    -moz-transition-property: -moz-transform, left, top;
+    -moz-transition-duration: 0s;
+    /* -moz-transform:translate3d(0,0,0); activate the GPU for hardware acceleration */
+    -moz-transition-timing-function: ease;
+    -o-transition-property: -o-transform, left, top;
+    -o-transition-duration: 0s;
+    /* -o-transform:translate3d(0,0,0); activate the GPU for hardware acceleration */
+    -o-transition-timing-function: ease;
+    -o-transform: translate(0, 0);
+    -ms-transition-property: -ms-transform, left, top;
+    -ms-transition-duration: 0s;
+    /* -ms-transform:translate3d(0,0,0); activate the GPU for hardware acceleration */
+    -ms-transition-timing-function: ease;
+    -webkit-transition-property: left, top, -webkit-transform;
+    transition-property: left, top, -webkit-transform;
+    transition-property: transform, left, top;
+    transition-property: transform, left, top, -webkit-transform;
+    transition-duration: 0s;
+    /* transform:translate3d(0,0,0); activate the GPU for hardware acceleration */
+    transition-timing-function: ease;
+  }
+  body.buddypress .mobile-item-nav-container.fixed,
+  body.buddypress #mobile-item-nav.fixed {
+    width: 852px !important;
+    height: auto;
+  }
+  body.buddypress .mobile-item-nav-scroll-container.fixed {
+    width: 100% !important;
+    height: auto;
+  }
+  body.buddypress .mobile-item-nav-scroll-container #mobile-item-nav.fixed {
+    width: 852px !important;
+    height: auto;
+  }
+  body.buddypress #blog-order-select form {
+    margin-left: 0;
+  }
+  body.buddypress #buddypress #groups-directory-form .item-list-tabs li,
+  body.buddypress .entry-content #buddypress #blogs-directory-form .item-list-tabs li,
+  body.buddypress #buddypress #members-directory-form .item-list-tabs li {
+    float: none;
+    margin: 0 0 10px 3px;
+  }
+  body.buddypress .entry-content #buddypress #blogs-directory-form .item-list-tabs li:first-child {
+    margin-left: 0;
   }
   body.buddypress #buddypress #mobile-item-nav-wrap,
   body.buddypress #buddypress ul#activity-stream li.activity-item {
@@ -6475,13 +6536,6 @@ MAXIMUM width of 380 pixels (phones portrait)
   }
   body.buddypress #buddypress div#item-header div#item-header-content h2 {
     margin-bottom: 20px;
-  }
-  body.buddypress #buddypress #groups-directory-form .item-list-tabs li, body.buddypress .entry-content #buddypress #blogs-directory-form .item-list-tabs li, body.buddypress #buddypress #members-directory-form .item-list-tabs li {
-    float: none;
-    margin: 0 0 10px 3px;
-  }
-  body.buddypress .entry-content #buddypress #blogs-directory-form .item-list-tabs li:first-child {
-    margin-left: 0;
   }
   body.buddypress #buddypress #members-directory-form .item-list-tabs li:first-child {
     margin-left: 0;
@@ -7028,7 +7082,7 @@ MAXIMUM width of 380 pixels (phones portrait)
   body.buddypress #buddypress #mobile-item-nav-wrap {
     margin-bottom: 15px;
     min-height: 110px;
-    min-width: calc(100% + 30px);
+    min-width: calc(100% - 30px);
   }
   body.buddypress #buddypress #mobile-item-nav-wrap div.item-list-tabs {
     border: none;
@@ -7041,13 +7095,14 @@ MAXIMUM width of 380 pixels (phones portrait)
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: wrap;
-    flex-wrap: row wrap;
+    flex-wrap: wrap;
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
+    align-items: center;
     padding-top: 0;
     margin: 0 !important;
   }
@@ -7057,7 +7112,7 @@ MAXIMUM width of 380 pixels (phones portrait)
   body.buddypress #buddypress #mobile-item-nav > div.item-list-tabs > ul li {
     height: 60px;
     width: 80px;
-    margin: 0 5px 20px;
+    margin: 0 5px 30px;
     padding: 0;
     border: none;
     background-color: rgba(0, 152, 218, 0.85);
@@ -9117,7 +9172,7 @@ span.bbp-author-ip {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
-  flex-wrap: row wrap;
+  flex-wrap: wrap;
   -webkit-box-align: stretch;
       -ms-flex-align: stretch;
           align-items: stretch;
@@ -10504,7 +10559,7 @@ Message error
 1.1.3.2 - Admin Bar Layout
 --------------------------------------------------------------*/
   div#wpadminbar ul {
-    background-color: #54ae68;
+    background-color: #22a7f0;
     list-style: none;
     margin: 0;
   }
@@ -10523,13 +10578,15 @@ Message error
     padding: 8px 25px;
     line-height: 1.6;
     font-size: 15px;
-    color: #fff;
     text-decoration: none;
     display: block;
     color: #fff;
   }
   div#wpadminbar li a:active, div#wpadminbar li a:hover {
     color: #fff;
+  }
+  div#wpadminbar li:active, div#wpadminbar li:hover {
+    background-color: #54ae68;
   }
   /*--------------------------------------------------------------
 1.1.3.3 - Left Navigation Animation
@@ -10546,7 +10603,8 @@ Message error
     -webkit-transform: translate(240px, 0);
             transform: translate(240px, 0);
   }
-  body.open-right #main-wrap, body.open-right #colophon {
+  body.open-right #main-wrap,
+  body.open-right #colophon {
     -webkit-transform: translate(-240px, 0);
             transform: translate(-240px, 0);
   }
@@ -10554,20 +10612,21 @@ Message error
     display: none;
   }
   /*--------------------------------------------------------------
-1.1.3.4 - Left Content Animation
---------------------------------------------------------------*/
-  /* Content Sliding Open Effect */
-  /*--------------------------------------------------------------
 1.1.3.5 - Left Admin Bar Content
 --------------------------------------------------------------*/
-  /* Hide unused content */
-  #wp-admin-bar-top-secondary li#wp-admin-bar-my-account.with-avatar > a.ab-item:first-of-type, #wp-admin-bar-top-secondary li#wp-admin-bar-bp-notifications, #wp-admin-bar-top-secondary li#wp-admin-bar-search {
-    display: none;
-  }
   #wpadminbar a.screen-reader-shortcut {
     display: none;
   }
-  /* Account Info */
+  #wpadminbar li#wp-admin-bar-mycred-account {
+    margin: 10px 0;
+  }
+  #wp-admin-bar-top-secondary {
+    /* Hide unused content */
+    /* Account Info */
+  }
+  #wp-admin-bar-top-secondary li#wp-admin-bar-my-account.with-avatar > a.ab-item:first-of-type, #wp-admin-bar-top-secondary li#wp-admin-bar-bp-notifications, #wp-admin-bar-top-secondary li#wp-admin-bar-search {
+    display: none;
+  }
   #wp-admin-bar-top-secondary ul#wp-admin-bar-user-actions li#wp-admin-bar-user-info {
     position: relative;
   }
@@ -10604,11 +10663,8 @@ Message error
     font-weight: 400;
     margin-top: 8px;
   }
-  div#wpadminbar li#wp-admin-bar-mycred-account {
-    margin: 10px 0;
-  }
   #wp-admin-bar-mycred-account > .ab-item.ab-empty-item {
-    background: #3c3c44;
+    background: #54ae68;
     margin-bottom: 5px;
   }
   #wp-admin-bar-mycred-account .ab-item.ab-empty-item {
@@ -10617,10 +10673,10 @@ Message error
   }
   /* Separators */
   #wpadminbar div.quicklinks ul li.menupop div.ab-sub-wrapper ul > li.menupop > a.ab-item {
-    background: #3C3C44;
-    color: #96969e;
+    background-color: #54ae68;
+    color: #fff;
     cursor: default;
-    font-size: 11px;
+    font-size: 15px;
     font-weight: 400;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -10629,17 +10685,7 @@ Message error
     display: none;
   }
   #wpadminbar div.quicklinks ul li.menupop div.ab-sub-wrapper ul > li.menupop > div.ab-sub-wrapper li a span.count {
-    background-color: #717176;
-    color: #fff;
-    font-size: 12px;
-    line-height: 1;
-    padding: 1px 6px;
-    margin-left: 1px;
-    border-radius: 999px;
-  }
-  /* Indicators */
-  .left-btn #ab-pending-notifications {
-    background-color: #717176;
+    background-color: #54ae68;
     color: #fff;
     font-size: 12px;
     line-height: 1;
@@ -10648,10 +10694,17 @@ Message error
     border-radius: 999px;
   }
   #wpadminbar div.quicklinks ul li.menupop div.ab-sub-wrapper ul > li#wp-admin-bar-my-account-notifications > div.ab-sub-wrapper li a span.count {
-    background-color: #f82a1d;
+    background-color: #e85c41;
   }
+  /* Indicators */
   .left-btn #ab-pending-notifications {
-    background-color: #f82a1d;
+    color: #fff;
+    font-size: 12px;
+    line-height: 1;
+    padding: 1px 6px;
+    margin-left: 1px;
+    border-radius: 999px;
+    background-color: #e85c41;
     position: absolute;
     top: 9px;
     right: 7px;

@@ -1,19 +1,71 @@
+.mobile-item-nav-container {
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  backface-visibility: hidden;
+  /* Fix for Webkit flickering */
+  z-index: 1;
+}
+
 .mobile-item-nav-wrapper {
-    margin-left: auto;
-    margin-right: auto;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  width: 100%;
+  min-height: 98px;
+  -webkit-transition-property: -webkit-transform, left, top;
+  -webkit-transition-duration: 0s;
+  /* -webkit-transform:translate3d(0,0,0); activate the GPU for hardware acceleration */
+  -webkit-transition-timing-function: ease;
+  -moz-transition-property: -moz-transform, left, top;
+  -moz-transition-duration: 0s;
+  /* -moz-transform:translate3d(0,0,0); activate the GPU for hardware acceleration */
+  -moz-transition-timing-function: ease;
+  -o-transition-property: -o-transform, left, top;
+  -o-transition-duration: 0s;
+  /* -o-transform:translate3d(0,0,0); activate the GPU for hardware acceleration */
+  -o-transition-timing-function: ease;
+  -o-transform: translate(0, 0);
+  -ms-transition-property: -ms-transform, left, top;
+  -ms-transition-duration: 0s;
+  /* -ms-transform:translate3d(0,0,0); activate the GPU for hardware acceleration */
+  -ms-transition-timing-function: ease;
+  transition-property: transform, left, top;
+  transition-duration: 0s;
+  /* transform:translate3d(0,0,0); activate the GPU for hardware acceleration */
+  transition-timing-function: ease;
 }
 
-#buddypress {
-    #mobile-item-nav-wrap,
-    ul#activity-stream li.activity-item {
-        background: transparent;
-    }
-    div#item-header div#item-header-content h2 {
-        margin-bottom: 20px;
-    }
+.mobile-item-nav-container, 
+#mobile-item-nav {
+  &.fixed {
+    width: 852px !important;
+    height: auto;
+  }
 }
 
-#buddypress #groups-directory-form .item-list-tabs li, .entry-content #buddypress #blogs-directory-form .item-list-tabs li, #buddypress #members-directory-form .item-list-tabs li {
+.mobile-item-nav-scroll-container {
+  &.fixed {
+    width: 100% !important;
+    height: auto;
+  }
+  #mobile-item-nav.fixed {
+    width: 852px !important;
+    height: auto;
+  }
+}
+
+#blog-order-select form {
+  margin-left: 0;
+}
+
+#buddypress #groups-directory-form .item-list-tabs li, 
+.entry-content #buddypress #blogs-directory-form .item-list-tabs li, 
+#buddypress #members-directory-form .item-list-tabs li {
   float: none;
   margin: 0 0 10px 3px;
 }
@@ -23,6 +75,13 @@
 }
 
 #buddypress {
+  #mobile-item-nav-wrap,
+  ul#activity-stream li.activity-item {
+      background: transparent;
+  }
+  div#item-header div#item-header-content h2 {
+      margin-bottom: 20px;
+  }
   #members-directory-form .item-list-tabs li:first-child {
     margin-left: 0;
   }
@@ -716,7 +775,7 @@ body {
   #mobile-item-nav-wrap {
     margin-bottom: 15px;
     min-height: 110px;
-    min-width: calc(100% + 30px);
+    min-width: calc(100% - 30px);
     div.item-list-tabs {
       border: none;
       margin: 0;
@@ -727,6 +786,7 @@ body {
     ul {
       min-height: 90px;
       @include display-flex-box();
+      align-items: center;
       padding-top: 0;
       margin: 0 !important;
     }
@@ -735,7 +795,7 @@ body {
         > ul li {
           height: 60px;
           width: 80px;
-          margin: 0 5px 20px;
+          margin: 0 5px 30px;
           padding: 0;
           border: none;
           background-color: $blue_bg;
