@@ -698,6 +698,11 @@ span.bbp-author-ip {
   color: $light;
 }
 
+.bbp-user-nicename,
+.bbp-reply-post-date {
+  color: $green;
+}
+
 #bbpress-forums {
   #favorite-toggle .is-favorite .favorite-toggle,
   #subscription-toggle .is-subscribed .subscription-toggle {
@@ -871,7 +876,7 @@ body {
       line-height: 46px;
       @include border-radius( 50% );
       text-align: center;
-      background-color: $gray;
+      background-color: $blue;
       color: $white;
       font-size: 20px;
       font-family: "onesocial" !important;
@@ -884,20 +889,12 @@ body {
       -moz-osx-font-smoothing: grayscale;
       /* cursor: pointer; */
     }
-  }
-  #favorite-toggle .favorite-toggle:before {
-    content: 'S';
-    line-height: 49px;
-  }
-
-  #favorite-toggle .favorite-toggle,
-  #subscription-toggle .subscription-toggle {
     &:after {
       content: '';
       width: 8px;
       height: 8px;
       border-radius: 2px;
-      background-color: $gray;
+      background-color: $blue;
       -ms-transform: rotate(45deg);
       -webkit-transform: rotate(45deg);
       transform: rotate(45deg);
@@ -905,6 +902,10 @@ body {
       top: 19px;
       right: -2px;
     }
+  }
+  #favorite-toggle .favorite-toggle:before {
+    content: 'S';
+    line-height: 49px;
   }
 
   #favorite-toggle .is-favorite .favorite-toggle,
@@ -979,7 +980,7 @@ fieldset span.bbp-admin-links {
 }
 
 tr td span.bbp-admin-links a:hover {
-  color: $red;
+  color: $green;
 }
 
 td {
@@ -994,7 +995,7 @@ td {
 .bbp-forum-header a.bbp-forum-permalink {
   float: right;
   margin-left: 10px;
-  color: $gray;
+  color: $blue;
 }
 
 /*--------------------------------------------------------------
@@ -1036,10 +1037,6 @@ td {
       }
     }
   }
-}
-
-#bbpress-forums li {
-
 }
 
 #bbpress-forums {
@@ -1088,6 +1085,7 @@ td {
   width: 100%;
   margin-bottom: 15px;
   font-size: $font-size-tiny;
+  color: $green;
 }
 
 .bbp-pagination-count {
@@ -1096,7 +1094,8 @@ td {
 
 .bbp-pagination-links {
   float: right;
-  line-height: 13px;
+  line-height: $font-size-tiny;
+  color: $blue;
 }
 
 .bbp-topic-pagination {
@@ -1105,7 +1104,7 @@ td {
   margin-bottom: 2px;
   a {
     font-size: $font-size-tiny;
-    line-height: 10px;
+    line-height: $font-size-tiny;
     padding: 1px 3px;
     color: $blue;
     border: 1px solid $blue;

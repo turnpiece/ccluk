@@ -8,15 +8,15 @@
 1.0.5 - (...) Menu
 --------------------------------------------------------------*/
 
-.single-item.groups #buddypress div#item-nav #object-nav.item-list-tabs {
+&.single-item.groups #buddypress div#item-nav #object-nav.item-list-tabs {
     text-align: left;
 }
 
-.boss-page-loaded #buddypress div#item-nav #object-nav.item-list-tabs {
+&.boss-page-loaded #buddypress div#item-nav #object-nav.item-list-tabs {
     overflow: visible;
 }
 
-body #buddypress div#item-nav #object-nav.item-list-tabs > ul > li {
+#buddypress div#item-nav #object-nav.item-list-tabs > ul > li {
     float: left;
 }
 
@@ -102,7 +102,7 @@ body #buddypress div#item-nav #object-nav.item-list-tabs > ul > li {
     padding-right: 0;
 }
 
-.is-desktop {
+&.is-desktop {
     #buddypress {
         div.buddyboss-media-form-wrapper form {
             background-color: $secondary_bg;
@@ -140,4 +140,90 @@ body #buddypress div#item-nav #object-nav.item-list-tabs > ul > li {
             color: $green;
         }
     }
+}
+
+&.groups {
+    &.group-members {
+        #buddypress {
+            #subnav.item-list-tabs > ul {
+                @include display-flex-box();
+
+                > li {
+                    max-width: 50%;
+
+                    &:active,
+                    &:hover {
+                        background: transparent;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/*--------------------------------------------------------------
+1.1.10 - Dropdowns
+--------------------------------------------------------------*/
+
+body .buddyboss-select {
+    display: inline-block;
+    float: none;
+    margin-top: 6px;
+    vertical-align: bottom;
+    white-space: nowrap;
+}
+
+.buddyboss-select-inner {
+    position: relative;
+    padding-right: 40px;
+    height: 30px;
+    line-height: 30px;
+    &:after {
+        content: "P";
+        border: 1px solid $green;
+        position: absolute;
+        right: 0;
+        padding: 0px 11px;
+        height: 30px;
+        line-height: 30px;
+        color: $green;
+        font-size: 10px;
+        font-family: "onesocial" !important;
+        font-style: normal !important;
+        font-weight: 700;
+        font-variant: normal !important;
+        text-transform: none !important;
+        speak: none;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    select {
+        cursor: pointer;
+        height: 30px;
+        width: 100%;
+        opacity: 0;
+        border: none;
+        margin: 0;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 1;
+
+        option {
+            color: $blue;
+
+            &:hover {
+                color: $green;
+            }
+        }
+    }
+    span {
+        color: $green;
+        font-size: $font-size-tiny;
+        text-transform: uppercase;
+    }
+}
+
+.directory.activity #activity-filter-select .buddyboss-select label {
+    display: none;
 }

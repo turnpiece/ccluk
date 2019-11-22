@@ -1624,20 +1624,16 @@ img.wp-smiley, .rsswidget img {
 /*--------------------------------------------------------------
 3.1 - Body, links, basics
 --------------------------------------------------------------*/
-body:not(.logged-in).no-adminbar #wpadminbar {
+body.no-adminbar:not(.logged-in) #wpadminbar, body.no-adminbar.is-desktop #wpadminbar {
   display: none !important;
 }
 
-body:not(.logged-in):not(.no-adminbar).is-desktop.admin-bar, body.logged-in.is-desktop.admin-bar:not(.no-adminbar) {
+body:not(.no-adminbar).admin-bar, body.logged-in.is-desktop.admin-bar:not(.no-adminbar) {
   margin-top: 32px !important;
 }
 
 body.logged-in.is-mobile.admin-bar {
   margin-top: 0 !important;
-}
-
-body:not(.no-adminbar).admin-bar {
-  margin-top: 32px !important;
 }
 
 .mfp-wrap.mfp-ready ~ #wpadminbar {

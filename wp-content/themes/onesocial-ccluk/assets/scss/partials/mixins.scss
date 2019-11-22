@@ -67,7 +67,10 @@
     li {
       position: relative;
       a {
-        font-size: $font-size-sm;
+        font-size: $font-size-tiny;
+        @media screen and (min-width: 769px) {
+          font-size: $font-size-sm;
+        }
         @include inactive-tab();
         @include border-radius(0);
 
@@ -97,7 +100,7 @@
   @include display-flex();
 	-webkit-flex-wrap: wrap;
 	-ms-flex-wrap: wrap;
-	flex-wrap: row wrap;
+	flex-wrap: wrap;
   @include align-items( $align );
   justify-content: $justify;
 }
@@ -123,7 +126,19 @@
 
 @mixin align-items( $align: center ) {
 	-webkit-align-items: $align;
-  	align-items: $align;
+  align-items: $align;
+}
+
+@mixin align-self( $align: flex-end ) {
+  -webkit-align-self: $align;
+  align-self: $align;
+}
+
+@mixin justify-content( $align: center ) {
+  -webkit-box-pack: $align;
+  -webkit-justify-content: $align;
+  -ms-flex-pack: $align;
+  justify-content: $align;
 }
 
 @mixin button( $hover_bg: $green, $hover_color: $white ) {

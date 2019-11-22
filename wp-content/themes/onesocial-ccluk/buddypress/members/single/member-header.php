@@ -36,21 +36,20 @@ $displayed_user	 = bp_displayed_user_id();
 	<?php endif; ?>
 
 	<?php
-	$bio_field = onesocial_get_option( 'boss_bio_field' );
-	if ( $bio_field && function_exists( 'bp_get_profile_field_data' ) ) {
-		$bio = bp_get_profile_field_data( array( 'field' => $bio_field ) );
-		if ( $bio ) {
-			?>
-			<p id="item-desc"><?php echo stripslashes( $bio ); ?></p>
-			<?php
+		$bio_field = onesocial_get_option( 'boss_bio_field' );
+		if ( $bio_field && function_exists( 'bp_get_profile_field_data' ) ) {
+			$bio = bp_get_profile_field_data( array( 'field' => $bio_field ) );
+			if ( $bio ) {
+				?>
+				<p id="item-desc"><?php echo stripslashes( $bio ); ?></p>
+				<?php
+			}
 		}
-	}
 	?>
 
 	<!-- Socials -->
 	<div class="btn-group social">
-
-		<?php
+	<?php
 
 		if ( $current_user != $displayed_user ) {
 			if ( function_exists( 'bp_follow_add_follow_button' ) ) {
@@ -66,9 +65,7 @@ $displayed_user	 = bp_displayed_user_id();
 				bp_send_private_message_button();
 			}
 		}
-		?>
-			
-		<?php
+
 		add_filter( "buddyboss_get_user_social_array", "buddyboss_user_social_remove_disabled" ); //remove disabled.
 
 		foreach ( buddyboss_get_user_social_array() as $social => $name ):
@@ -76,7 +73,11 @@ $displayed_user	 = bp_displayed_user_id();
 			?>
 
 			<?php if ( !empty( $url ) ): ?>
-				<a class="btn" href="<?php echo $url; ?>" title="<?php echo esc_attr( $name ); ?>" target="_blank"><i class="bb-icon-<?php echo $social; ?>"></i></a>
+				<a class="btn" href="<?php echo $url; ?>" title="<?php echo esc_attr( $name ); ?>" target="_blank"><i class="bb-icon-<?php echo $social; ?>"></i><?php
+					if ($social === 'twitter') {
+						echo ' @' . basename( $url );
+					}
+				?></a>
 			<?php endif; ?>
 
 		<?php endforeach; ?>

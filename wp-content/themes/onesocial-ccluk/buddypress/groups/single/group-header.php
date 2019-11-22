@@ -63,32 +63,7 @@
 					</div><!-- #item-header-content -->
 
 				</div>
-<?php /*
-				<div id="item-actions">
 
-					<?php if ( bp_group_is_visible() ) : ?>
-
-						<?php
-						buddyboss_group_list_admins();
-
-						do_action( 'bp_after_group_menu_admins' );
-
-						if ( bp_group_has_moderators() ) :
-							do_action( 'bp_before_group_menu_mods' );
-							?>
-
-							<?php
-							buddyboss_group_list_mods();
-
-							do_action( 'bp_after_group_menu_mods' );
-
-						endif;
-
-					endif;
-					?>
-
-				</div><!-- #item-actions -->
-*/ ?>
             </div><!-- /.table-cell -->
 
         </div>

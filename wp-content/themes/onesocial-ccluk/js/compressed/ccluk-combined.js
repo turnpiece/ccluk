@@ -4411,9 +4411,6 @@ var BuddyBossMain = ( function ( $, window, undefined ) {
         }
 
         function render_layout() {
-            var
-                window_height = $window.height(), // window height - 60px (Header height) - carousel_nav_height (Carousel Navigation space)
-                carousel_width = ( $item_nav.find( 'li' ).length * 94 );
 
             // If on small screens make sure the main page elements are
             // full width vertically
