@@ -630,7 +630,8 @@ margin: 0 0 25px;
 text-align: right;
 }
 
-#delete_drafts_messages, #messages-bulk-manage {
+#delete_drafts_messages, 
+#messages-bulk-manage {
   border: 0;
   color: $white;
   font-size: $font-size-tiny;

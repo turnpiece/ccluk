@@ -2808,10 +2808,6 @@ div {
   /*Match horizontal alignment*/
 }
 
-.bp-user .entry-header.buddypress .entry-title {
-  display: none;
-}
-
 .entry-header {
   margin-bottom: 15px;
   img.wp-post-image {
@@ -4199,12 +4195,6 @@ body article.error404 .entry-header {
   margin: 0 auto;
 }
 
-#cpt-product-stream .bboss_search_item {
-  border-bottom: 0;
-  margin: 0;
-  padding: 0;
-}
-
 .bb-search-result-group .horiz-gallery, 
 #buddypress ul.item-list li .bb-search-result-group div.item-desc {
   margin: 0;
@@ -4232,9 +4222,6 @@ body article.error404 .entry-header {
   .edit-link {
     display: none;
   }
-  .site-content article.page {
-    /*padding-top: 0;*/
-  }
   .bboss_search_item_post {
     .entry-title {
       margin: 0;
@@ -4245,7 +4232,8 @@ body article.error404 .entry-header {
   }
 }
 
-.bb-search-result-group .item, #buddypress .bboss_search_results_wrapper ul.item-list li div.item-title {
+.bb-search-result-group .item, 
+#buddypress .bboss_search_results_wrapper ul.item-list li div.item-title {
   width: 100%;
 }
 
@@ -4278,94 +4266,6 @@ body article.error404 .entry-header {
   padding-top: 70px;
 }
 
-
-/*--------------------------------------------------------------
-6.0 - Forms
---------------------------------------------------------------*/
-
-#buddyboss-media-album-create-form {
-  margin-top: 20px;
-}
-
-h2.entry-title .button.bp-title-button {
-  float: right;
-}
-
-.create-album-title, .edit-album-title, .bp-user.my-account.photos h2.entry-title {
-  margin-bottom: 50px;
-  margin-top: 50px;
-  overflow: hidden;
-}
-
-#buddypress .standard-form .editfield,
-#buddyboss-media-album-create-form > div,
-#buddypress #create-group-form .editfield {
-  margin-bottom: 30px;
-}
-
-.album-wrapper .editfield > .buddyboss-select {
-  width: auto;
-}
-
-input#save_as_draft {
-  float: right;
-}
-
-.register #buddypress .standard-form #blog-details-section input#signup_blog_url,
-select[multiple="multiple"] {
-  width: 100%;
-}
-
-.register #buddypress .standard-form #blog-details-section [type="text"] {
-  margin-bottom: 16px;
-}
-
-#buddypress {
-  .standard-form {
-    p.description {
-      font-size: $font-size-sm;
-    }
-    .input-options {
-      padding: 10px 0;
-
-      label.option-label {
-          font-size: $font-size-sm;
-          display: block;
-          line-height: 1.4;
-      }
-    }
-
-    &#sidebar-login-form input {
-      &[type="text"], 
-      &[type="password"] {
-        padding: 4px;
-        width: 95%;
-      }
-    }
-    #basic-details-section input[type="password"],
-    #blog-details-section input#signup_blog_url {
-      width: 35%;
-    }
-  }
-
-  .standard-form#signup_form {
-    input {
-      &[type="email"],
-      &[type="text"] {
-        width: 100%;
-      }
-    }
-    textarea {
-      width: 100%;
-    }
-  }
-}
-
-.sap-story-publish:hover, #save_as_draft:hover,
-#buddypress .standard-form div.submit input:hover {
-  @include box-shadow( none );
-  color: $dark;
-}
 
 /*--------------------------------------------------------------
 7.0 - Ajax Loading
@@ -4588,14 +4488,6 @@ select[multiple="multiple"] {
 }
 
 /*--------------------------------------------------------------
-9.0 - BuddyPress Components
---------------------------------------------------------------*/
-
-/*--------------------------------------------------------------
-9.1 - Recent activity
---------------------------------------------------------------*/
-
-/*--------------------------------------------------------------
 9.2 - Headers
 --------------------------------------------------------------*/
 
@@ -4788,10 +4680,6 @@ p#item-desc {
   label:before, span:before, strong:before {
     top: 5px;
   }
-}
-
-body.register #buddypress div.page ul {
-  list-style: none;
 }
 
 /*--------------------------------------------------------------

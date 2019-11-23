@@ -150,6 +150,14 @@ body.create-blog {
 
 body.register {
 
+    #buddypress div.page ul {
+      list-style: none;
+    }
+
+    .standard-form #blog-details-section [type="text"] {
+      margin-bottom: 16px;
+    }
+
     fieldset,
     div#register-page .register-section,
     div#register-page .security-question-section {
@@ -293,6 +301,10 @@ body.register {
     }
 
     #buddypress {
+      .standard-form #blog-details-section input#signup_blog_url,
+      select[multiple="multiple"] {
+        width: 100%;
+      }
       div#register-page {
         .register-section h4 {
           margin-bottom: 40px;

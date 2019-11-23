@@ -168,6 +168,11 @@ html.mfp-helper {
 1.1.1 - Basic Structure
 --------------------------------------------------------------*/
 
+#primary {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
 .bb-side-icon {
   display: none;
 }
@@ -187,7 +192,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .blog {
-  #primary, #inner-wrap.open-sidebar #secondary {
+  #primary, 
+  #inner-wrap.open-sidebar #secondary {
     width: 100%;
     margin: 0;
   }

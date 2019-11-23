@@ -214,10 +214,6 @@ div.bbp-forum-title,
   font-size: $font-size-sm;
 }
 
-.bp-secondary-action.buddyboss_edit_activity:before {
-  /*content: "T";*/
-}
-
 #main #buddypress a.bp-secondary-action {
   &.spam-activity, &.spam-activity-comment {
     font-size: 0;
@@ -242,6 +238,57 @@ div.bbp-forum-title,
   }
 }
 
+/*--------------------------------------------------------------
+6.0 - Forms
+--------------------------------------------------------------*/
+
+#buddypress {
+  .standard-form {
+    p.description {
+      font-size: $font-size-sm;
+    }
+    .input-options {
+      padding: 10px 0;
+
+      label.option-label {
+          font-size: $font-size-sm;
+          display: block;
+          line-height: 1.4;
+      }
+    }
+
+    &#sidebar-login-form input {
+      &[type="text"], 
+      &[type="password"] {
+        padding: 4px;
+        width: 95%;
+      }
+    }
+    #basic-details-section input[type="password"],
+    #blog-details-section input#signup_blog_url {
+      width: 35%;
+    }
+  }
+
+  .standard-form#signup_form {
+    input {
+      &[type="email"],
+      &[type="text"] {
+        width: 100%;
+      }
+    }
+    textarea {
+      width: 100%;
+    }
+  }
+}
+
+.sap-story-publish:hover, #save_as_draft:hover,
+#buddypress .standard-form div.submit input:hover {
+  @include box-shadow( none );
+  color: $dark;
+}
+
 #buddypress {
   #activity-stream {
     embed, iframe, object, video {
@@ -252,6 +299,36 @@ div.bbp-forum-title,
     border-bottom: none;
     padding-bottom: 0;
   }
+}
+
+#buddyboss-media-album-create-form {
+  margin-top: 20px;
+}
+
+h2.entry-title .button.bp-title-button {
+  float: right;
+}
+
+.create-album-title, 
+.edit-album-title, 
+.bp-user.my-account.photos h2.entry-title {
+  margin-bottom: 50px;
+  margin-top: 50px;
+  overflow: hidden;
+}
+
+#buddypress .standard-form .editfield,
+#buddyboss-media-album-create-form > div,
+#buddypress #create-group-form .editfield {
+  margin-bottom: 30px;
+}
+
+.album-wrapper .editfield > .buddyboss-select {
+  width: auto;
+}
+
+input#save_as_draft {
+  float: right;
 }
 
 form#whats-new-form {
@@ -569,7 +646,9 @@ body.buddypress {
   transition: opacity 600ms ease 0s;
 }
 
-.bp-user.my-account.photos #whats-new-content .boss-insert-buttons, #group-settings-form .boss-insert-buttons {
+.bp-user .entry-header.buddypress .entry-title,
+.bp-user.my-account.photos #whats-new-content .boss-insert-buttons, 
+#group-settings-form .boss-insert-buttons {
   display: none;
 }
 

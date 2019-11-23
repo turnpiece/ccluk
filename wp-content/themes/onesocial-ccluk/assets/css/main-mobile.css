@@ -156,6 +156,11 @@ html.mfp-helper body {
 /*--------------------------------------------------------------
 1.1.1 - Basic Structure
 --------------------------------------------------------------*/
+#primary {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
 .bb-side-icon {
   display: none;
 }
@@ -174,7 +179,8 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 400;
 }
 
-.blog #primary, .blog #inner-wrap.open-sidebar #secondary {
+.blog #primary,
+.blog #inner-wrap.open-sidebar #secondary {
   width: 100%;
   margin: 0;
 }
