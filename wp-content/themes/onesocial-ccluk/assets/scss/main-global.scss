@@ -4331,11 +4331,13 @@ select[multiple="multiple"] {
       label.option-label {
           font-size: $font-size-sm;
           display: block;
+          line-height: 1.4;
       }
     }
 
     &#sidebar-login-form input {
-      &[type="text"], &[type="password"] {
+      &[type="text"], 
+      &[type="password"] {
         padding: 4px;
         width: 95%;
       }
@@ -4357,17 +4359,6 @@ select[multiple="multiple"] {
       width: 100%;
     }
   }
-}
-
-#save_as_draft {
-  margin-right: 15px;
-  background-color: transparent;
-  color: $green;
-  font-size: 14px;
-  font-weight: 400;
-  padding: 22px 0 2px;
-  border-top: 1px solid $green;
-  margin-top: 20px;
 }
 
 .sap-story-publish:hover, #save_as_draft:hover,

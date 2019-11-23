@@ -215,7 +215,7 @@ body.register {
       .register-section {
 
           label, legend {
-              @include form-label();
+            @include form-label();
           }
 
           h2 {

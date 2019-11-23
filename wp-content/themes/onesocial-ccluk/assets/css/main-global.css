@@ -2256,7 +2256,7 @@ div.footer-inner-bottom .footer-inner {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
-  flex-wrap: row wrap;
+  flex-wrap: wrap;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -4359,6 +4359,7 @@ select[multiple="multiple"] {
 #buddypress .standard-form .input-options label.option-label {
   font-size: 15px;
   display: block;
+  line-height: 1.4;
 }
 
 #buddypress .standard-form#sidebar-login-form input[type="text"], #buddypress .standard-form#sidebar-login-form input[type="password"] {
@@ -4377,17 +4378,6 @@ select[multiple="multiple"] {
 
 #buddypress .standard-form#signup_form textarea {
   width: 100%;
-}
-
-#save_as_draft {
-  margin-right: 15px;
-  background-color: transparent;
-  color: #54ae68;
-  font-size: 14px;
-  font-weight: 400;
-  padding: 22px 0 2px;
-  border-top: 1px solid #54ae68;
-  margin-top: 20px;
 }
 
 .sap-story-publish:hover, #save_as_draft:hover,
@@ -4580,13 +4570,15 @@ select[multiple="multiple"] {
 /*--------------------------------------------------------------
 9.2 - Headers
 --------------------------------------------------------------*/
-#secondary div#item-header-content h1, #buddypress div#item-header div#item-header-content h1 {
+#secondary div#item-header-content h1,
+#buddypress div#item-header div#item-header-content h1 {
   font-size: 24px;
   margin-bottom: 0;
   margin-top: 0;
 }
 
-#secondary .user-nicename, #buddypress div#item-header h2 {
+#secondary .user-nicename,
+#buddypress div#item-header h2 {
   line-height: 1.2;
   font-size: 15px;
   margin: 0px 0 26px;
@@ -4633,10 +4625,6 @@ p#item-desc {
 
 #item-posts #sort-posts-form #sort-submit {
   display: none;
-}
-
-#item-posts .profile-visible {
-  /*display: block;*/
 }
 
 #item-posts .to-top {

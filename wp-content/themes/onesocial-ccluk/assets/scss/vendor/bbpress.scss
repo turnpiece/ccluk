@@ -1128,9 +1128,11 @@ td {
 }
 
 #bbpress-forums fieldset.bbp-form {
+  legend, label {
+    @include form-label( $font-size-std );
+  }
   legend {
     padding: 0 0 12px;
-    font-size: $font-size-std;
     font-weight: 600;
     width: 100%;
     word-break: break-all;

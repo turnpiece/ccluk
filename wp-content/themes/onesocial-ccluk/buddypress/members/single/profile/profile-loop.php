@@ -7,6 +7,8 @@
  * @version 3.0.0
  */
 
+$hidden = array( 'Postcode' );
+
 /** This action is documented in bp-templates/bp-legacy/buddypress/members/single/profile/profile-wp.php */
 do_action( 'bp_before_profile_loop_content' ); ?>
 
@@ -35,7 +37,7 @@ do_action( 'bp_before_profile_loop_content' ); ?>
 
 					<?php while ( bp_profile_fields() ) : bp_the_profile_field(); ?>
 
-						<?php if ( bp_field_has_data() ) : $fields++; ?>
+						<?php if ( bp_field_has_data() && ! in_array( bp_get_the_profile_field_name(), $hidden ) ) : $fields++; ?>
 
 							<li<?php bp_field_css_class(); ?>>
 
@@ -69,7 +71,7 @@ do_action( 'bp_before_profile_loop_content' ); ?>
 
 					<?php while ( bp_profile_fields() ) : bp_the_profile_field(); ?>
 
-						<?php if ( bp_field_has_data() ) : $fields++; ?>
+						<?php if ( bp_field_has_data() && ! in_array( bp_get_the_profile_field_name(), $hidden ) ) : $fields++; ?>
 
 							<tr<?php bp_field_css_class(); ?>>
 
