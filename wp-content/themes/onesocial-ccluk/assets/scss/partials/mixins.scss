@@ -112,10 +112,14 @@
   display: flex;
 }
 
+@mixin flex-flow( $arg: row wrap ) {
+  -webkit-flex-flow: $arg;
+  -ms-flex-flow: $arg;
+  flex-flow: $arg;
+}
+
 @mixin flex-row-wrap() {
-	-webkit-flex-flow: row wrap;
-	-ms-flex-flow: row wrap;
-	flex-flow: row wrap;
+  @include flex-flow( row wrap );
 }
 
 @mixin flex-column-nowrap() {
@@ -236,8 +240,8 @@
   color: $green;
 }
 
-@mixin form-label() {
-  font-size: $font-size-min;
+@mixin form-label( $size: $font-size-min ) {
+  font-size: $size;
   color: $green;
 }
 

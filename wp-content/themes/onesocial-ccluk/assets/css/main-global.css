@@ -2256,7 +2256,7 @@ div.footer-inner-bottom .footer-inner {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
-  flex-wrap: row wrap;
+  flex-wrap: wrap;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -2749,10 +2749,6 @@ div.footer-inner ul.social-icons li span:before {
   margin-bottom: 0;
   margin-top: -4px;
   /*Match horizontal alignment*/
-}
-
-.bp-user .entry-header.buddypress .entry-title {
-  display: none;
 }
 
 .entry-header {
@@ -4228,12 +4224,6 @@ body article.error404 .entry-header {
   margin: 0 auto;
 }
 
-#cpt-product-stream .bboss_search_item {
-  border-bottom: 0;
-  margin: 0;
-  padding: 0;
-}
-
 .bb-search-result-group .horiz-gallery,
 #buddypress ul.item-list li .bb-search-result-group div.item-desc {
   margin: 0;
@@ -4259,10 +4249,6 @@ body article.error404 .entry-header {
   display: none;
 }
 
-.search-results .site-content article.page {
-  /*padding-top: 0;*/
-}
-
 .search-results .bboss_search_item_post .entry-title {
   margin: 0;
 }
@@ -4271,7 +4257,8 @@ body article.error404 .entry-header {
   margin: 0 0 26px;
 }
 
-.bb-search-result-group .item, #buddypress .bboss_search_results_wrapper ul.item-list li div.item-title {
+.bb-search-result-group .item,
+#buddypress .bboss_search_results_wrapper ul.item-list li div.item-title {
   width: 100%;
 }
 
@@ -4306,95 +4293,6 @@ body article.error404 .entry-header {
 
 .search-content-wrap .pagination-below {
   padding-top: 70px;
-}
-
-/*--------------------------------------------------------------
-6.0 - Forms
---------------------------------------------------------------*/
-#buddyboss-media-album-create-form {
-  margin-top: 20px;
-}
-
-h2.entry-title .button.bp-title-button {
-  float: right;
-}
-
-.create-album-title, .edit-album-title, .bp-user.my-account.photos h2.entry-title {
-  margin-bottom: 50px;
-  margin-top: 50px;
-  overflow: hidden;
-}
-
-#buddypress .standard-form .editfield,
-#buddyboss-media-album-create-form > div,
-#buddypress #create-group-form .editfield {
-  margin-bottom: 30px;
-}
-
-.album-wrapper .editfield > .buddyboss-select {
-  width: auto;
-}
-
-input#save_as_draft {
-  float: right;
-}
-
-.register #buddypress .standard-form #blog-details-section input#signup_blog_url,
-select[multiple="multiple"] {
-  width: 100%;
-}
-
-.register #buddypress .standard-form #blog-details-section [type="text"] {
-  margin-bottom: 16px;
-}
-
-#buddypress .standard-form p.description {
-  font-size: 15px;
-}
-
-#buddypress .standard-form .input-options {
-  padding: 10px 0;
-}
-
-#buddypress .standard-form .input-options label.option-label {
-  font-size: 15px;
-  display: block;
-}
-
-#buddypress .standard-form#sidebar-login-form input[type="text"], #buddypress .standard-form#sidebar-login-form input[type="password"] {
-  padding: 4px;
-  width: 95%;
-}
-
-#buddypress .standard-form #basic-details-section input[type="password"],
-#buddypress .standard-form #blog-details-section input#signup_blog_url {
-  width: 35%;
-}
-
-#buddypress .standard-form#signup_form input[type="email"], #buddypress .standard-form#signup_form input[type="text"] {
-  width: 100%;
-}
-
-#buddypress .standard-form#signup_form textarea {
-  width: 100%;
-}
-
-#save_as_draft {
-  margin-right: 15px;
-  background-color: transparent;
-  color: #54ae68;
-  font-size: 14px;
-  font-weight: 400;
-  padding: 22px 0 2px;
-  border-top: 1px solid #54ae68;
-  margin-top: 20px;
-}
-
-.sap-story-publish:hover, #save_as_draft:hover,
-#buddypress .standard-form div.submit input:hover {
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  color: #333;
 }
 
 /*--------------------------------------------------------------
@@ -4572,21 +4470,17 @@ select[multiple="multiple"] {
 }
 
 /*--------------------------------------------------------------
-9.0 - BuddyPress Components
---------------------------------------------------------------*/
-/*--------------------------------------------------------------
-9.1 - Recent activity
---------------------------------------------------------------*/
-/*--------------------------------------------------------------
 9.2 - Headers
 --------------------------------------------------------------*/
-#secondary div#item-header-content h1, #buddypress div#item-header div#item-header-content h1 {
+#secondary div#item-header-content h1,
+#buddypress div#item-header div#item-header-content h1 {
   font-size: 24px;
   margin-bottom: 0;
   margin-top: 0;
 }
 
-#secondary .user-nicename, #buddypress div#item-header h2 {
+#secondary .user-nicename,
+#buddypress div#item-header h2 {
   line-height: 1.2;
   font-size: 15px;
   margin: 0px 0 26px;
@@ -4633,10 +4527,6 @@ p#item-desc {
 
 #item-posts #sort-posts-form #sort-submit {
   display: none;
-}
-
-#item-posts .profile-visible {
-  /*display: block;*/
 }
 
 #item-posts .to-top {
@@ -4778,10 +4668,6 @@ p#item-desc {
 
 .category_hierarchy_ul input[type=checkbox] + label:before, .category_hierarchy_ul input[type=checkbox] + span:before, .category_hierarchy_ul input[type=checkbox] + strong:before {
   top: 5px;
-}
-
-body.register #buddypress div.page ul {
-  list-style: none;
 }
 
 /*--------------------------------------------------------------

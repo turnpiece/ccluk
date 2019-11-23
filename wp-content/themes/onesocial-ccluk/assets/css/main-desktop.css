@@ -22,32 +22,6 @@ This is the Desktop stylesheet, served to laptops and desktop devices.
 
     1.2.3 - Widgets
     1.2.4 - Footer
-----------------------------------------------------------------
->>> BUDDYPRESS
-----------------------------------------------------------------
-1.1 - All Desktops
-    1.1.1 - Directories - Members, Groups, Blogs, Forums
-    1.1.1 - Item Headers
-    1.1.2 - Object Item Lists Tabs
-    1.1.3 - Subnav Item Lists Tabs
-    1.1.4 - Filters
-    1.1.5 - Activity Listing
-    1.1.6 - Activity Comments
-    1.1.7 - Miscellaneous
-    1.1.8 - Member Settings
-    1.1.9 - Messaging
-    1.1.10 - Group Settings: Radio buttons, Checkboxes
-    1.1.11 - Group Create
-    1.1.12 - Item Lists
-1.2 - Custom media queries
-    1.2.1 - Item List Tabs
-    1.2.2 - Sitewide Notices
-    1.2.3 - Profile
-----------------------------------------------------------------
->>> PLUGINS
-----------------------------------------------------------------
-1.1 - Social Articles
-1.2 - BuddyBoss Media
 
 */
 /*--------------------------------------------------------------
@@ -233,7 +207,10 @@ body.single-item.groups #main {
   max-width: 100%;
 }
 
-.sidebar-left #main, .sidebar-left .home-inner-wrap, .sidebar-left .search-content-wrap, .sidebar-left .buddypress-content-wrap {
+.sidebar-left #main,
+.sidebar-left .home-inner-wrap,
+.sidebar-left .search-content-wrap,
+.sidebar-left .buddypress-content-wrap {
   -webkit-box-orient: horizontal;
   -webkit-box-direction: reverse;
   -ms-flex-direction: row-reverse;
@@ -268,18 +245,19 @@ body.single-item.groups #main {
   max-width: 780px;
 }
 
-.search-content-wrap, .buddypress-content-wrap {
+.search-content-wrap,
+.buddypress-content-wrap {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  /* This is added to fix search layout issue after load more */
   -ms-flex-flow: row wrap;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
           flex-flow: row wrap;
 }
 
-.search-content, .buddypress-content {
+.search-content,
+.buddypress-content {
   -webkit-box-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -298,7 +276,9 @@ body.single-item.groups #main {
 }
 
 /* Full Width (no sidebar) */
-body.template-front-page .site-content, body.single-attachment .site-content, body.full-width .site-content {
+body.template-front-page .site-content,
+body.single-attachment .site-content,
+body.full-width .site-content {
   width: 100%;
 }
 

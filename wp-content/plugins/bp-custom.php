@@ -41,6 +41,9 @@ class CCLUK_BP_Custom {
 
 		// disable data export
 		add_filter( 'bp_settings_show_user_data_page', '__return_false' );
+
+		// remove starred messages
+		add_filter( 'bp_is_messages_star_active', '__return_false' );
 	}
 
 	public function buddypress_menu( $items, $args ) {

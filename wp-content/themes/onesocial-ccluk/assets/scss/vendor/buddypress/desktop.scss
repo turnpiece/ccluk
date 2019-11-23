@@ -61,39 +61,40 @@
 }
 
 #buddypress {
-    div#item-nav {
-        #object-nav.item-list-tabs {
-            overflow: hidden;
-            height: 67px;
-            white-space: nowrap;
-            text-align: left;
-        }
-
-        .item-list-tabs ul li {
-            .bb-menu-button {
-                color: $white;
-                font-size: 8px;
-                height: 25px;
-                line-height: 23px;
-                margin: 7px 0 0;
-                padding: 0;
-                text-align: center;
-                width: 25px;
+    div {
+        &#item-nav {
+            #object-nav.item-list-tabs {
+                overflow: hidden;
+                height: 67px;
+                white-space: nowrap;
+                text-align: left;
             }
-            &:hover .bb-menu-button {
-                color: $white !important;
+
+            .item-list-tabs ul li {
+                .bb-menu-button {
+                    color: $white;
+                    font-size: 8px;
+                    height: 25px;
+                    line-height: 23px;
+                    margin: 7px 0 0;
+                    padding: 0;
+                    text-align: center;
+                    width: 25px;
+                }
+                &:hover .bb-menu-button {
+                    color: $white !important;
+                }
+                &.hideshow a span {
+                    display: inline-block;
+                    float: none;
+                    margin-top: -3px;
+                }
             }
         }
     }
 
     .groups-members-search {
         width: 55%;
-    }
-
-    div#item-nav .item-list-tabs ul li.hideshow a span {
-        display: inline-block;
-        float: none;
-        margin-top: -3px;
     }
 }
 

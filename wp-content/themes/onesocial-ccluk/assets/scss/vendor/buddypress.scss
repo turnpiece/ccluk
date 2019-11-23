@@ -214,10 +214,6 @@ div.bbp-forum-title,
   font-size: $font-size-sm;
 }
 
-.bp-secondary-action.buddyboss_edit_activity:before {
-  /*content: "T";*/
-}
-
 #main #buddypress a.bp-secondary-action {
   &.spam-activity, &.spam-activity-comment {
     font-size: 0;
@@ -242,6 +238,57 @@ div.bbp-forum-title,
   }
 }
 
+/*--------------------------------------------------------------
+6.0 - Forms
+--------------------------------------------------------------*/
+
+#buddypress {
+  .standard-form {
+    p.description {
+      font-size: $font-size-sm;
+    }
+    .input-options {
+      padding: 10px 0;
+
+      label.option-label {
+          font-size: $font-size-sm;
+          display: block;
+          line-height: 1.4;
+      }
+    }
+
+    &#sidebar-login-form input {
+      &[type="text"], 
+      &[type="password"] {
+        padding: 4px;
+        width: 95%;
+      }
+    }
+    #basic-details-section input[type="password"],
+    #blog-details-section input#signup_blog_url {
+      width: 35%;
+    }
+  }
+
+  .standard-form#signup_form {
+    input {
+      &[type="email"],
+      &[type="text"] {
+        width: 100%;
+      }
+    }
+    textarea {
+      width: 100%;
+    }
+  }
+}
+
+.sap-story-publish:hover, #save_as_draft:hover,
+#buddypress .standard-form div.submit input:hover {
+  @include box-shadow( none );
+  color: $dark;
+}
+
 #buddypress {
   #activity-stream {
     embed, iframe, object, video {
@@ -252,6 +299,36 @@ div.bbp-forum-title,
     border-bottom: none;
     padding-bottom: 0;
   }
+}
+
+#buddyboss-media-album-create-form {
+  margin-top: 20px;
+}
+
+h2.entry-title .button.bp-title-button {
+  float: right;
+}
+
+.create-album-title, 
+.edit-album-title, 
+.bp-user.my-account.photos h2.entry-title {
+  margin-bottom: 50px;
+  margin-top: 50px;
+  overflow: hidden;
+}
+
+#buddypress .standard-form .editfield,
+#buddyboss-media-album-create-form > div,
+#buddypress #create-group-form .editfield {
+  margin-bottom: 30px;
+}
+
+.album-wrapper .editfield > .buddyboss-select {
+  width: auto;
+}
+
+input#save_as_draft {
+  float: right;
 }
 
 form#whats-new-form {
@@ -569,7 +646,9 @@ body.buddypress {
   transition: opacity 600ms ease 0s;
 }
 
-.bp-user.my-account.photos #whats-new-content .boss-insert-buttons, #group-settings-form .boss-insert-buttons {
+.bp-user .entry-header.buddypress .entry-title,
+.bp-user.my-account.photos #whats-new-content .boss-insert-buttons, 
+#group-settings-form .boss-insert-buttons {
   display: none;
 }
 
@@ -1753,12 +1832,15 @@ div#sitewide-notice div#message.error p {
       margin: 10px 10px 0 0;
     }
   }
-  ul.button-nav li {
-    float: left;
-    margin: 0 10px 10px 0;
-    list-style: none;
-    &.current a {
-      font-weight: 600;
+  ul.button-nav {
+    margin: 20px auto;
+    li {
+      float: left;
+      margin: 0 10px 10px 0;
+      list-style: none;
+      &.current a {
+        font-weight: 600;
+      }
     }
   }
   .standard-form {
@@ -1778,8 +1860,7 @@ div#sitewide-notice div#message.error p {
     label, span.label {
       display: block;
       font-weight: 400;
-      font-size: 16px;
-      color: $dark;
+      font-size: $font-size-sm;
       margin: 0 0 10px;
       clear: left;
       line-height: 1;
@@ -1804,7 +1885,9 @@ div#sitewide-notice div#message.error p {
       /*margin-bottom: 10px;*/
     }
     input {
-      &[type="text"], &[type="email"], &[type="password"] {
+      &[type="text"], 
+      &[type="email"], 
+      &[type="password"] {
         width: 100%;
         /*margin-bottom: 10px;*/
       }
@@ -4497,49 +4580,38 @@ body.buddypress {
     }
 
 	#buddypress {
-	  ul.button-nav li a,
-	  div.generic-button a {
-	    background-color: $green;
-	    border: none;
-	    color: $white;
-	    cursor: pointer;
-	    font-size: $font-size-tiny;
-	    line-height: 20px;
-	    text-align: center;
-	    text-decoration: none;
-	    padding: 6px 14px;
-	    appearance: none;
-	    -moz-appearance: none;
-	    /* Firefox */
-	    -webkit-appearance: none;
-	    /* Safari and Chrome */
-	    display: inline-block;
-	    font-weight: 300;
-	    font-family: inherit;
+	  ul.button-nav li,
+	  div.generic-button {
+      a {
+        background-color: $blue;
+        border: none;
+        color: $white;
+        cursor: pointer;
+        font-size: $font-size-tiny;
+        line-height: 20px;
+        text-align: center;
+        text-decoration: none;
+        padding: 6px 14px;
+        appearance: none;
+        -moz-appearance: none;
+        /* Firefox */
+        -webkit-appearance: none;
+        /* Safari and Chrome */
+        display: inline-block;
+        font-weight: 300;
+        font-family: inherit;
 
-	    ul.button-nav li a:active,
-		div.generic-button a:active {
-	      /* Darken */
-		  @include darken();
-	    }
-	  }
-
-	  ul.button-nav li {
-	    a:hover, &.current a {
+        &:active,
+        &:hover {
+          background-color: $green;
+        }
+      }
+      &.current a {
 	      outline: none;
 	      color: $white;
 	      text-decoration: none;
-	      /* Darken */
-	      @include darken();
+	      background-color: $green;
 	    }
-	  }
-
-	  div.generic-button a:hover {
-	    outline: none;
-	    color: $white;
-	    text-decoration: none;
-	    /* Darken */
-	    @include darken();
 	  }
 
 	  .group-join div.generic-button a:after {
@@ -4549,21 +4621,23 @@ body.buddypress {
 	  }
 
 	  #posts-stream li.bboss_search_item {
-		border-bottom: 0;
-		margin: 0;
-		padding: 0;
-	  }
+      border-bottom: 0;
+      margin: 0;
+      padding: 0;
+    }
+    
+    #messages-stream,
+    #groups-stream {
+      li.bboss_search_item {
+        padding: 40px 0;
+        &:first-child {
+          padding-top: 0;
+        }
+      }
+    }
+
 	  #messages-stream li.bboss_search_item {
-		padding: 30px 0 0;
-		&:first-child {
-		  padding-top: 0;
-		}
-	  }
-	  #groups-stream li.bboss_search_item {
-		padding: 40px 0;
-		&:first-child {
-		  padding-top: 0;
-		}
+      padding: 30px 0 0;
 	  }
 
 	  div.activity-comments form div.ac-reply-avatar {
@@ -4616,7 +4690,6 @@ body.buddypress {
 	      }
 	    }
 
-
 		  ul li:after {
 		    clear: both;
 		    content: ' ';
@@ -4637,17 +4710,17 @@ body.buddypress {
 	  }
 
 	  .results-group-groups .bb-search-result-group .group-members-results .avatar {
-		border-radius: 0;
-		height: auto;
-		max-width: 50px;
+      border-radius: 0;
+      height: auto;
+      max-width: 50px;
 	  }
 	  .bb-search-result-group .group-members-results {
-		float: right;
+		  float: right;
 	  }
 	  ul.item-list .bb-search-result-group .activity {
-		float: right;
-		margin-top: 10px;
-		width: auto;
+		  float: right;
+      margin-top: 10px;
+      width: auto;
 	  }
 
 	/*--------------------------------------------------------------
@@ -4669,30 +4742,25 @@ body.buddypress {
 	    text-align: center;
 	  }
 	  #pag-bottom {
-	    display: -webkit-box;
-	    display: -webkit-flex;
-	    display: -ms-flexbox;
-	    display: flex;
-	    -webkit-flex-flow: column-reverse nowrap;
-	    -ms-flex-flow: column-reverse nowrap;
-	    flex-flow: column-reverse nowrap;
+      @include display-flex();
+      @include flex-flow( column-reverse nowrap );
 	  }
 	  div.pagination {
 	    .pag-count {
 	      margin-top: 40px;
 	    }
 	    .pagination-links {
-            @include display-flex-box();
-            span {
-	            padding: 16px 18px;
-            }
-            a {
-                padding: 16px 18px;
-	            &:hover {
-	               font-weight: 600;
-	            }
-	        }
-	     }
+        @include display-flex-box();
+        span {
+          padding: 16px 18px;
+        }
+        a {
+          padding: 16px 18px;
+          &:hover {
+            font-weight: 600;
+          }
+        }
+	    }
 	  }
 	  noscript div.pagination {
 	    margin-bottom: 15px;
@@ -4731,10 +4799,7 @@ body.buddypress {
 	  }
 	  div {
 	    &.acomment-header {
-	      display: -webkit-box;
-	      display: -webkit-flex;
-	      display: -ms-flexbox;
-	      display: flex;
+	      @include display-flex();
 	      padding-left: 70px;
 	      margin-top: 5px;
 	      margin-bottom: 6px;
@@ -4761,21 +4826,21 @@ body.buddypress {
 	}
 
 	&.single-item.groups {
-        .site-content {
-	  margin-top: 0;
-	}
-
-  #buddypress div#item-header {
-    div#item-header-avatar {
-      width: 185px;
+    .site-content {
+      margin-top: 0;
     }
-    #item-header-avatar img.avatar {
-      width: 185px;
-      height: 185px;
-    }
-  }
 
-  #secondary {
+    #buddypress div#item-header {
+      div#item-header-avatar {
+        width: 185px;
+      }
+      #item-header-avatar img.avatar {
+        width: 185px;
+        height: 185px;
+      }
+    }
+
+    #secondary {
       #item-header-content {
         padding-top: 10px;
         + .widget {
@@ -4788,42 +4853,42 @@ body.buddypress {
             }
         }
       }
-  }
-  #buddypress {
-    form#send-invite-form #invite-list {
-        margin-bottom: 50px;
     }
+    #buddypress {
+      form#send-invite-form #invite-list {
+          margin-bottom: 50px;
+      }
 
-    #item-header span.activity {
-      color: $green;
-      margin-top: 6px;
-      display: block;
+      #item-header span.activity {
+        color: $green;
+        margin-top: 6px;
+        display: block;
+      }
+      #activity-stream {
+        margin-bottom: 0;
+      }
+      div#item-body {
+        margin-bottom: 70px;
+        float: right;
+        width: 100%;
+      }
     }
-    #activity-stream {
+  }
+
+  #item-title-area {
+    h1 {
+      margin-top: 0;
       margin-bottom: 0;
+      color: $green;
+      font-family: $font-heading;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 8%;
     }
-    div#item-body {
-      margin-bottom: 70px;
-      float: right;
-      width: 100%;
+    > div {
+      vertical-align: top;
     }
   }
-}
-
-#item-title-area {
-  h1 {
-    margin-top: 0;
-    margin-bottom: 0;
-    color: $green;
-    font-family: $font-heading;
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 8%;
-  }
-  > div {
-    vertical-align: top;
-  }
-}
 
 	#buddypress #item-title-area {
     @include display-flex-box( flex-end, space-between );
@@ -4857,7 +4922,7 @@ body.buddypress {
 	  color: $green;
 
     p {
-        font-size: $font-size-sm;
+      font-size: $font-size-sm;
     }
 	}
 
@@ -5221,6 +5286,7 @@ body.buddypress {
 					border: 0;
 
 					legend {
+            @include form-label();
 						margin: 0 0 10px;
 						line-height: 1;
 					}
