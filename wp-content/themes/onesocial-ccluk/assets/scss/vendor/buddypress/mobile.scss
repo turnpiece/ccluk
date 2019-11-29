@@ -1904,6 +1904,27 @@ div.bbp-submit-wrapper {
 }
 
 #bbpress-forums {
+  div {
+    &.bbp-topic-author,
+    &.bbp-reply-author {
+      width: auto;
+      position: relative;
+    
+      .bbp-author-avatar {
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+
+      .bbp-author-name,
+      .bbp-author-role,
+      .bbp-user-nicename {
+        margin-left: 70px;
+      }
+    }
+
+  }
+
   ul.bbp-threaded-replies {
     /*margin-left: 0;*/
     /* indent threaded replies less on mobile */

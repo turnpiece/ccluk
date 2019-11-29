@@ -8016,6 +8016,22 @@ MAXIMUM width of 380 pixels (phones portrait)
     overflow: hidden;
     border-radius: 0;
   }
+  body.buddypress #bbpress-forums div.bbp-topic-author, body.buddypress #bbpress-forums div.bbp-reply-author {
+    width: auto;
+    position: relative;
+  }
+  body.buddypress #bbpress-forums div.bbp-topic-author .bbp-author-avatar, body.buddypress #bbpress-forums div.bbp-reply-author .bbp-author-avatar {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  body.buddypress #bbpress-forums div.bbp-topic-author .bbp-author-name,
+  body.buddypress #bbpress-forums div.bbp-topic-author .bbp-author-role,
+  body.buddypress #bbpress-forums div.bbp-topic-author .bbp-user-nicename, body.buddypress #bbpress-forums div.bbp-reply-author .bbp-author-name,
+  body.buddypress #bbpress-forums div.bbp-reply-author .bbp-author-role,
+  body.buddypress #bbpress-forums div.bbp-reply-author .bbp-user-nicename {
+    margin-left: 70px;
+  }
   body.buddypress #bbpress-forums ul.bbp-threaded-replies {
     /*margin-left: 0;*/
     /* indent threaded replies less on mobile */
@@ -9043,7 +9059,6 @@ div.bbp-topic-tags a {
   margin-bottom: 20px;
   overflow: hidden;
   font-size: inherit;
-  text-align: center;
 }
 
 #bbpress-forums hr {
@@ -9504,39 +9519,39 @@ li.bbp-header div.bbp-topic-content span#subscription-toggle, li.bbp-header div.
 #bbpress-forums div.bbp-topic-author, #bbpress-forums div.bbp-reply-author {
   /* float: left; */
   text-align: left;
-  width: 240px;
+  width: 170px;
   margin-bottom: 8px;
   display: table-cell;
 }
 
 #bbpress-forums div.bbp-topic-author .bbp-author-avatar, #bbpress-forums div.bbp-reply-author .bbp-author-avatar {
-  float: left;
-  margin-right: 12%;
-  margin-top: 8px;
+  width: 50px;
+  margin-right: 120px;
 }
 
 #bbpress-forums div.bbp-topic-author img.avatar, #bbpress-forums div.bbp-reply-author img.avatar {
   max-width: 50px;
   height: auto;
   padding: 0;
-  margin: 1px auto 12px auto;
   float: none;
 }
 
 #bbpress-forums div.bbp-topic-author a.bbp-author-name, #bbpress-forums div.bbp-reply-author a.bbp-author-name {
-  clear: both;
   line-height: 1;
-  text-align: center;
   word-wrap: break-word;
   font-weight: 700;
   font-size: 15px;
 }
 
+#bbpress-forums div.bbp-topic-author .bbp-author-role,
+#bbpress-forums div.bbp-topic-author .bbp-user-nicename, #bbpress-forums div.bbp-reply-author .bbp-author-role,
+#bbpress-forums div.bbp-reply-author .bbp-user-nicename {
+  font-size: 12px;
+}
+
 #bbpress-forums div.bbp-topic-author .bbp-author-role, #bbpress-forums div.bbp-reply-author .bbp-author-role {
   color: #838383;
-  font-size: 12px;
   position: relative;
-  top: -2px;
 }
 
 #bbpress-forums div.bbp-topic-content {

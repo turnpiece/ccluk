@@ -111,7 +111,6 @@ div.bbp-topic-tags a {
   margin-bottom: 20px;
   overflow: hidden;
   font-size: inherit;
-  text-align: center;
 }
 
 .bp-user #bbpress-forums {
@@ -599,38 +598,37 @@ li.bbp-header div {
     &.bbp-reply-author {
       /* float: left; */
       text-align: left;
-      width: 240px;
+      width: 170px;
       margin-bottom: 8px;
       display: table-cell;
     
       .bbp-author-avatar {
-        float: left;
-        margin-right: 12%;
-        margin-top: 8px;
+        width: 50px;
+        margin-right: 120px;
       }
 
       img.avatar {
         max-width: 50px;
         height: auto;
         padding: 0;
-        margin: 1px auto 12px auto;
         float: none;
       }
 
       a.bbp-author-name {
-        clear: both;
         line-height: 1;
-        text-align: center;
         word-wrap: break-word;
         font-weight: 700;
         font-size: $font-size-sm;
       }
+
+      .bbp-author-role,
+      .bbp-user-nicename {
+        font-size: $font-size-tiny;
+      }
     
       .bbp-author-role {
         color: $gray;
-        font-size: $font-size-tiny;
         position: relative;
-        top: -2px;
       }
     }
     &.bbp-topic-content {
