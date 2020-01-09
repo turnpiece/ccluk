@@ -514,7 +514,7 @@ body.page-template-homepage #main .section .section-content {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
-  flex-wrap: row wrap;
+  flex-wrap: wrap;
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
@@ -743,7 +743,7 @@ body.page-template-homepage #main .section.feature .section-content article {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
-  flex-wrap: row wrap;
+  flex-wrap: wrap;
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
@@ -1190,6 +1190,14 @@ body.create-blog input[type="text"] {
   padding-bottom: 6px;
 }
 
+body.register #buddypress div.page ul {
+  list-style: none;
+}
+
+body.register .standard-form #blog-details-section [type="text"] {
+  margin-bottom: 16px;
+}
+
 body.register fieldset,
 body.register div#register-page .register-section,
 body.register div#register-page .security-question-section {
@@ -1334,6 +1342,11 @@ body.register div#register-page #signup_form.standard-form div.submit input {
 
 body.register div#register-page #pass-strength-result {
   text-align: right;
+}
+
+body.register #buddypress .standard-form #blog-details-section input#signup_blog_url,
+body.register #buddypress select[multiple="multiple"] {
+  width: 100%;
 }
 
 body.register #buddypress div#register-page .register-section h4 {

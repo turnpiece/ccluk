@@ -66,6 +66,7 @@
 		@include display-flex-box();
     li {
       position: relative;
+      padding: 0 15px;
       a {
         font-size: $font-size-tiny;
         @media screen and (min-width: 769px) {

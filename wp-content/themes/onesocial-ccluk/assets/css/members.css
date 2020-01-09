@@ -6057,6 +6057,7 @@ body.buddypress.activity #buddypress .item-list-tabs.activity-type-tabs ul {
 
 body.buddypress.activity #buddypress .item-list-tabs.activity-type-tabs ul li {
   position: relative;
+  padding: 0 15px;
 }
 
 body.buddypress.activity #buddypress .item-list-tabs.activity-type-tabs ul li a {
@@ -6159,6 +6160,7 @@ body.buddypress #buddypress div:not(#mobile-item-nav) > div.item-list-tabs ul li
 body.buddypress #buddypress .messages-container div#subnav.item-list-tabs ul li,
 body.buddypress #buddypress > div[role=navigation].item-list-tabs ul li {
   position: relative;
+  padding: 0 15px;
 }
 
 body.buddypress #buddypress .dir-form div.item-list-tabs ul li a,
