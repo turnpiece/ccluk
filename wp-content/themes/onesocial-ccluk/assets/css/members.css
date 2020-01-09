@@ -6057,7 +6057,12 @@ body.buddypress.activity #buddypress .item-list-tabs.activity-type-tabs ul {
 
 body.buddypress.activity #buddypress .item-list-tabs.activity-type-tabs ul li {
   position: relative;
-  padding: 0 15px;
+}
+
+@media screen and (min-width: 769px) {
+  body.buddypress.activity #buddypress .item-list-tabs.activity-type-tabs ul li {
+    padding-right: 25px;
+  }
 }
 
 body.buddypress.activity #buddypress .item-list-tabs.activity-type-tabs ul li a {
@@ -6160,7 +6165,16 @@ body.buddypress #buddypress div:not(#mobile-item-nav) > div.item-list-tabs ul li
 body.buddypress #buddypress .messages-container div#subnav.item-list-tabs ul li,
 body.buddypress #buddypress > div[role=navigation].item-list-tabs ul li {
   position: relative;
-  padding: 0 15px;
+}
+
+@media screen and (min-width: 769px) {
+  body.buddypress #buddypress .dir-form div.item-list-tabs ul li,
+  body.buddypress #buddypress div#subnav.item-list-tabs ul li,
+  body.buddypress #buddypress div:not(#mobile-item-nav) > div.item-list-tabs ul li,
+  body.buddypress #buddypress .messages-container div#subnav.item-list-tabs ul li,
+  body.buddypress #buddypress > div[role=navigation].item-list-tabs ul li {
+    padding-right: 25px;
+  }
 }
 
 body.buddypress #buddypress .dir-form div.item-list-tabs ul li a,
@@ -7439,7 +7453,7 @@ MAXIMUM width of 380 pixels (phones portrait)
     display: inline-block;
     padding: 4px 5px;
     position: relative;
-    margin: 0 10px 10px 0;
+    margin: 0 5px 5px 0;
     line-height: 1.4;
     background-color: #fff;
   }
