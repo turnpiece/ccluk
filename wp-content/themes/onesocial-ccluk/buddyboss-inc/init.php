@@ -134,7 +134,7 @@ Class BuddyBoss_Theme {
 	public function includes() {
 		// Theme setup
 		require_once( $this->inc_dir . '/theme-functions.php' );
-		//require_once( $this->inc_dir . '/extra-functions.php' );
+		require_once( $this->inc_dir . '/extra-functions.php' );
 
 		// Ajax file
 		require_once( $this->inc_dir . '/ajax-load-posts.php' );
