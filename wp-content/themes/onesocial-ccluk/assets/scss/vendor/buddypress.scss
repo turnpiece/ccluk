@@ -3250,9 +3250,6 @@ body.buddypress.is-desktop {
           }
           > a {
             font-size: $font-size-tiny;
-            @media screen and (min-width: 1200px) {
-              font-size: $font-size-sm;
-            }
             font-weight: 700;
             text-transform: uppercase;
             color: $blue;

@@ -3920,12 +3920,6 @@ body.buddypress.is-desktop #buddypress div#item-nav > div#object-nav.item-list-t
   background: transparent;
 }
 
-@media screen and (min-width: 1200px) {
-  body.buddypress.is-desktop #buddypress div#item-nav > div#object-nav.item-list-tabs ul li > a {
-    font-size: 15px;
-  }
-}
-
 body.buddypress.is-desktop #buddypress div#item-nav > div#object-nav.item-list-tabs ul li > a span {
   color: inherit;
   background: transparent;
