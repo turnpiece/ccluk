@@ -1,22 +1,22 @@
 <?php
 
 class Eab_Template {
-
+	
 	public static function get_archive_content ($post, $content=false) {
-
+		
 		$event = ($post instanceof Eab_EventModel) ? $post : new Eab_EventModel($post);
 		if ('incsub_event' != $event->get_type()) return $content;
-
+		
 		$start_day = date_i18n('m', $event->get_start_timestamp());
 
 		$network = $event->from_network();
-		$link = $network
+		$link = $network 
 			? get_blog_permalink($network, $event->get_id())
 			: get_permalink($event->get_id())
 		;
-
+		
 		$new_content  = '';
-
+		
 		$new_content .= '<div class="event ' . self::get_status_class($event) . '" itemscope itemtype="http://schema.org/Event">';
 
 		if( !empty( $content['with_thumbnail'] ) && ($content['with_thumbnail'] == 'yes' || true == $content['with_thumbnail']) ) {
@@ -27,7 +27,7 @@ class Eab_Template {
 
 		$new_content .= '<meta itemprop="name" content="' . esc_attr($event->get_title()) . '" />';
 		$new_content .= '<a href="' . $link . '" class="wpmudevevents-viewevent">' .
-			__('View event', Eab_EventsHub::TEXT_DOMAIN) .
+			__('View event', Eab_EventsHub::TEXT_DOMAIN) . 
 		'</a>';
 		$new_content .= apply_filters('eab-template-archive_after_view_link', '', $event);
 		$new_content .= '<div style="clear: both;"></div>';
@@ -36,24 +36,24 @@ class Eab_Template {
 		$new_content .= self::get_rsvp_form($event);
 		$new_content .= '</div>';
 		$new_content .= '<div style="clear:both"></div>';
-
+		
 		return $new_content;
 	}
-
+	
 	public static function get_single_content ($post, $content=false) {
 		global $current_user;
 		$event = ($post instanceof Eab_EventModel) ? $post : new Eab_EventModel($post);
-
+		
 		if ('incsub_event' != $event->get_type()) return $content;
-
+		
 		$start_day = date_i18n('m', $event->get_start_timestamp());
-
+		    
 		$new_content  = '';
 		$new_content .= '<div class="event ' . self::get_status_class($event) . '" id="wpmudevevents-wrapper" itemscope itemtype="http://schema.org/Event"><div id="wpmudevents-single">';
 		$new_content .= '<meta itemprop="name" content="' . esc_attr($event->get_title()) . '" />';
-
+		
 		$new_content .= self::get_error_notice();
-
+		
 		// Added by Hakan
 		$show_pay_note = $event->is_premium() && $event->user_is_coming() && !$event->user_paid();
 		$show_pay_note = apply_filters('eab-event-show_pay_note', $show_pay_note, $event->get_id () );
@@ -79,49 +79,49 @@ class Eab_Template {
 			$new_content .= __( 'Your payment is being processed. This may take a few minutes to show here.', Eab_EventsHub::TEXT_DOMAIN ) . ' ';
 			$new_content .= '</div>';
 		}
-
+		
 		// Added by Hakan
 		//$new_content = apply_filters('eab-event-after_payment_forms', $new_content, $event->get_id()); // Moved this to self::get_payment_forms()
-
+	
 		$new_content .= '<div class="eab-needtomove"><div id="event-bread-crumbs" >' . self::get_breadcrumbs($event) . '</div></div>';
-
+		
 		$new_content .= '<div id="wpmudevevents-header">';
 		$new_content .= self::get_rsvp_form($event);
 		$new_content .= self::get_inline_rsvps($event);
 		$new_content .= '</div>';
-
+		
 		$new_content .= '<hr/>';
-
+		
 		$new_content .= '<div class="wpmudevevents-content">';
-
+		
 		$new_content .= '<div id="wpmudevevents-contentheader">';
 		$new_content .= '<h3>' . __('About this event:', Eab_EventsHub::TEXT_DOMAIN) . '</h3>';
 		$new_content .= '<div id="wpmudevevents-user">'. __('Created by ', Eab_EventsHub::TEXT_DOMAIN) . self::get_event_author_link($event) . '</div>';
 		$new_content .= '</div>';
-
+		
 		$new_content .= '<hr/>';
-
+		
 		$new_content .= '<div id="wpmudevevents-contentmeta">' . self::get_event_details($event) . '<div style="clear: both;"></div></div>';
-		$new_content .= '<div id="wpmudevevents-contentbody" itemprop="description">' . ($content ? $content : $event->get_content()) . '</div>';
-
+		$new_content .= '<div id="wpmudevevents-contentbody" itemprop="description">' . ($content ? $content : $event->get_content()) . '</div>';			
+		
 		if ($event->has_venue_map()) {
 			$new_content .= '<div id="wpmudevevents-map">' . $event->get_venue_location(Eab_EventModel::VENUE_AS_MAP) . '</div>';
 		}
 		$new_content .= '</div>';
 		$new_content .= apply_filters('eab-events-after_single_event', '', $event);
 		$new_content .= '</div></div>';
-		return $new_content;
+		return $new_content;		
 	}
 
 	public static function get_inline_rsvps ($post) {
 		$event = ($post instanceof Eab_EventModel) ? $post : new Eab_EventModel($post);
 		$data = Eab_Options::get_instance();
-
+		
 		$content = '';
 		if ($event->has_bookings() && $data->get_option('display_attendees') == 1) {
 			$content .= '<div id="wpmudevevents-rsvps">';
-			$content .= '<a href="' .
-				admin_url('admin-ajax.php?action=eab_list_rsvps&pid=' . $event->get_id()) .
+			$content .= '<a href="' . 
+				admin_url('admin-ajax.php?action=eab_list_rsvps&pid=' . $event->get_id()) . 
 				'" id="wpmudevevents-load-rsvps" class="hide-if-no-js wpmudevevents-viewrsvps wpmudevevents-loadrsvps">' .
 					apply_filters( 'eab_show_rsvp_text', __('See who has RSVPed', Eab_EventsHub::TEXT_DOMAIN) ) .
 			'</a>';
@@ -132,10 +132,10 @@ class Eab_Template {
 			$content .= '</div>';
 			$content .= '<div id="wpmudevevents-rsvps-response"></div>';
 		}
-
+		
 		return $content;
 	}
-
+	
 	public static function get_rsvps ($post) {
 		$data = Eab_Options::get_instance();
 		$event = ($post instanceof Eab_EventModel) ? $post : new Eab_EventModel($post);
@@ -162,71 +162,71 @@ class Eab_Template {
 	public static function get_bookings ($status, $post) {
 		global $wpdb;
 		$event = ($post instanceof Eab_EventModel) ? $post : new Eab_EventModel($post);
-
+		
 		$statuses = array(
-			Eab_EventModel::BOOKING_YES => __('Attending', Eab_EventsHub::TEXT_DOMAIN),
-			Eab_EventModel::BOOKING_MAYBE => __('Maybe', Eab_EventsHub::TEXT_DOMAIN),
+			Eab_EventModel::BOOKING_YES => __('Attending', Eab_EventsHub::TEXT_DOMAIN), 
+			Eab_EventModel::BOOKING_MAYBE => __('Maybe', Eab_EventsHub::TEXT_DOMAIN), 
 			Eab_EventModel::BOOKING_NO => __('No', Eab_EventsHub::TEXT_DOMAIN)
 		);
 		if (!in_array($status, array_keys($statuses))) return false; // Unknown status
 		$status_name = $statuses[$status];
-
+		
 		$bookings = $wpdb->get_results($wpdb->prepare("SELECT user_id FROM ".Eab_EventsHub::tablename(Eab_EventsHub::BOOKING_TABLE)." WHERE event_id = %d AND status = %s ORDER BY timestamp;", $event->get_id(), $status));
 		if (!count($bookings)) return false;
-
-		$content = '';
+		
+		$content = '';		
 		$content .= '<h4>'. $status_name . '</h4>';
 		$content .= '<ul class="eab-guest-list">';
-
+		
 		foreach ($bookings as $booking) {
 			$user_data = get_userdata($booking->user_id);
-			$url = defined('BP_VERSION')
-				? bp_core_get_user_domain($booking->user_id) :
+			$url = defined('BP_VERSION') 
+				? bp_core_get_user_domain($booking->user_id) : 
 				get_author_posts_url($booking->user_id)
 			;
-
+			
 			$avatar = '<a href="' . $url . '" title="' . esc_attr($user_data->display_name) . '">' .
 				get_avatar($booking->user_id, 32) .
 			'</a>';
-			$avatar = apply_filters('eab-guest_list-guest_avatar',
+			$avatar = apply_filters('eab-guest_list-guest_avatar', 
 				apply_filters("eab-guest_list-status_{$status}-guest_avatar", $avatar, $booking->user_id, $user_data, $event),
 				$booking->user_id, $user_data, $event
 			);
-
+			
 			$content .= "<li>{$avatar}</li>";
 		}
-
+		
 		$content .= '</ul>';
 		$content .= '<div class="clear"></div>';
-
-		return $content;
+		
+		return $content;	
 	}
 
 	public static function get_user_events ($status, $user_id) {
 		global $wpdb;
-
+		
 		$statuses = array(
-			Eab_EventModel::BOOKING_YES => __('Attending', Eab_EventsHub::TEXT_DOMAIN),
-			Eab_EventModel::BOOKING_MAYBE => __('Maybe', Eab_EventsHub::TEXT_DOMAIN),
+			Eab_EventModel::BOOKING_YES => __('Attending', Eab_EventsHub::TEXT_DOMAIN), 
+			Eab_EventModel::BOOKING_MAYBE => __('Maybe', Eab_EventsHub::TEXT_DOMAIN), 
 			Eab_EventModel::BOOKING_NO => __('No', Eab_EventsHub::TEXT_DOMAIN)
 		);
 		if (!in_array($status, array_keys($statuses))) return false; // Unknown status
 		$status_name = $statuses[$status];
-
+		
 		$bookings = $wpdb->get_col($wpdb->prepare("SELECT event_id FROM ".Eab_EventsHub::tablename(Eab_EventsHub::BOOKING_TABLE)." WHERE user_id = %d AND status = %s ORDER BY timestamp;", $user_id, $status));
 		if (!count($bookings)) return false;
-
+		
 		$ret = '<div class="wpmudevevents-user_bookings wpmudevevents-user_bookings-' . $status . '">';
 		foreach ($bookings as $event_id) {
 			$event = new Eab_EventModel(get_post($event_id));
 			$id_check = $event->get_id();
 			if (apply_filters('eab-event-user_events-exclude_event', empty($id_check), $event)) continue;
 			$ret .= '<h4>' . self::get_event_link($event) . '</h4>';
-			$ret .= '<div class="wpmudevevents-event-meta">' .
+			$ret .= '<div class="wpmudevevents-event-meta">' . 
 				apply_filters('eab-event-user_events-before_meta', '', $event, $status) .
 				self::get_event_dates($event) .
 				'<br />' .
-				$event->get_venue_location() .
+				$event->get_venue_location() . 
 			'</div>';
 		}
 		$ret .= '</div>';
@@ -240,10 +240,10 @@ class Eab_Template {
 		foreach ($events as $event) {
 			if ($event->is_recurring()) continue;
 			$ret .= '<h4>' . self::get_event_link($event) . '</h4>';
-			$ret .= '<div class="wpmudevevents-event-meta">' .
+			$ret .= '<div class="wpmudevevents-event-meta">' . 
 				self::get_event_dates($event) .
 				'<br />' .
-				$event->get_venue_location() .
+				$event->get_venue_location() . 
 			'</div>';
 		}
 		$ret .= '</div>';
@@ -260,10 +260,10 @@ class Eab_Template {
 		$content = '<div class="eab-add_attendance-container">';
 
 		//$content .= '<div id="eab-bookings-response"></div>';
-
+                
                 $content .= '<fieldset class="eab-add_attendance">';
 		$content .= '<legend>' . __('Add user', Eab_EventsHub::TEXT_DOMAIN) . '</legend>';
-
+		
 		$content .= '<label>' . __('User email', Eab_EventsHub::TEXT_DOMAIN) . '</label>&nbsp;';
 		$content .= '<input type="hidden" class="eab-attendance-event_id" value="' . (int)$event->get_id() . '" />';
 		$content .= '<input type="email" class="eab-attendance-email" />';
@@ -274,9 +274,9 @@ class Eab_Template {
 		$content .= '</select>';
 		$content .= '<input type="button" class="button" value="' . esc_attr(__('Add', Eab_EventsHub::TEXT_DOMAIN)) . '" />';
 		$content .= '</fieldset>';
-
+		
 		$content .= '</div>';
-
+		
 		return $content;
 	}
 
@@ -284,7 +284,7 @@ class Eab_Template {
 		global $wpdb;
 		if (!current_user_can('edit_posts')) return false; // Basic sanity check
 		$event = ($post instanceof Eab_EventModel) ? $post : new Eab_EventModel($post);
-
+		
 		$statuses = self::get_rsvp_status_list();
 		if (!in_array($status, array_keys($statuses))) return false; // Unknown status
 		$status_name = $statuses[$status];
@@ -319,17 +319,17 @@ class Eab_Template {
 					$ticket_count = $event->get_booking_meta($booking->id, 'booking_ticket_count');
 					$ticket_count = $ticket_count ? $ticket_count : 1;
 					$payment_status = '' .
-						'<span class="eab-guest-payment_info-paid">' .
-							__('Paid', Eab_EventsHub::TEXT_DOMAIN) .
+						'<span class="eab-guest-payment_info-paid">' . 
+							__('Paid', Eab_EventsHub::TEXT_DOMAIN) . 
 						'</span>' .
 						'&nbsp;' .
 						sprintf(__('(%s tickets)', Eab_EventsHub::TEXT_DOMAIN), $ticket_count) .
-					'';
+					''; 
 				} else {
 					$payment_status = '<span class="eab-guest-payment_info-not_paid">' . __('Not paid', Eab_EventsHub::TEXT_DOMAIN) . '</span>';
 				}
 				// Added by Hakan
-				$payment_status = apply_filters('eab-event-payment_status', $payment_status, $booking->user_id, $event);
+				$payment_status = apply_filters('eab-event-payment_status', $payment_status, $booking->user_id, $event); 
 				$content .= "<div class='eab-guest-payment_info'>{$payment_status}</div>";
 			}
 			if (in_array($status, array(Eab_EventModel::BOOKING_YES, Eab_EventModel::BOOKING_MAYBE))) {
@@ -352,7 +352,7 @@ class Eab_Template {
 		}
 		$content .= '</ul>';
 		$content .= '<div class="clear"></div>';
-
+		
 		return $content;
 	}
 
@@ -361,76 +361,76 @@ class Eab_Template {
 		$user_id = $event->get_author();
 		$url = get_the_author_meta('url', $user_id);
 		$author = get_the_author_meta('display_name', $user_id);
-		return $url
-			? '<a href="' . $url . '" title="' .
-				esc_attr(sprintf(__("Visit %s&#8217;s website"), $author)) .
-				'" rel="external">' .
-					$author .
+		return $url 
+			? '<a href="' . $url . '" title="' . 
+				esc_attr(sprintf(__("Visit %s&#8217;s website"), $author)) . 
+				'" rel="external">' . 
+					$author . 
 			'</a>'
 			: $author
 		;
 	}
-
+	
 	public static function get_breadcrumbs ($post) {
 		$event = ($post instanceof Eab_EventModel) ? $post : new Eab_EventModel($post);
 		$start = $event->get_start_timestamp();
 		$content = '';
-
+		
 		$content .= '<a href="' . self::get_root_url() . '/" class="parent">' .
 			__("Events", Eab_EventsHub::TEXT_DOMAIN) .
 		'</a> &gt; ';
 		$content .= '<a href="' . self::get_archive_url($start, false) . '" class="parent">' .
 				date('Y', $start) .
 		'</a> &gt; ';
-		$content .= '<a href="' . self::get_archive_url($start, true) . '" class="parent">' .
+		$content .= '<a href="' . self::get_archive_url($start, true) . '" class="parent">' . 
 				date_i18n('F', $start) .
 		'</a> &gt; ';
 		$content .= '<span class="current">' . $event->get_title() . '</span>';
-
+		
 		return $content;
 	}
-
+	
 	public static function get_payment_forms ($post ) {
 		global $blog_id, $current_user;
 		$event = ($post instanceof Eab_EventModel) ? $post : new Eab_EventModel($post);
 
 		$booking_id = $event->get_user_booking_id();
 		$data = Eab_Options::get_instance();
-
+		
 		$content = '';
-
+		
 		if( trim( $data->get_option('paypal_email') ) != '' ) {
-
-			$content .= $data->get_option('paypal_sandbox')
+		
+			$content .= $data->get_option('paypal_sandbox') 
 				? '<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">'
 				: '<form action="https://www.paypal.com/cgi-bin/webscr" method="post">'
 			;
 			$content .= '<input type="hidden" name="business" value="' . $data->get_option('paypal_email') . '" />';
 			$content .= '<input type="hidden" name="item_name" value="' . esc_attr($event->get_title()) . '" />';
 			$content .= '<input type="hidden" name="item_number" value="' . $event->get_id() . '" />';
-			$content .= '<input type="hidden" name="notify_url" value="' .
+			$content .= '<input type="hidden" name="notify_url" value="' . 
 				admin_url('admin-ajax.php?action=eab_paypal_ipn&blog_id=' . $blog_id . '&booking_id=' . $booking_id) .
 			'" />';
 			$content .= '<input type="hidden" name="amount" value="' . $event->get_price()  .'" />';
 			$content .= '<input type="hidden" name="return" value="' . get_permalink($event->get_id()) . '?paypal_processing=1" />';
 			$content .= '<input type="hidden" name="currency_code" value="' . $data->get_option('currency') . '">';
 			$content .= '<input type="hidden" name="cmd" value="_xclick" />';
-
+			
 			// Add multiple tickets
 			$extra_attributes = '';
 			$extra_attributes = apply_filters('eab-payment-paypal_tickets-extra_attributes', $extra_attributes, $event->get_id(), $booking_id);
-			$content .= '' .// '<a href="#buy-tickets" class="eab-buy_tickets-trigger" style="display:none">' . __('Buy tickets', Eab_EventsHub::TEXT_DOMAIN) . '</a>' .
+			$content .= '' .// '<a href="#buy-tickets" class="eab-buy_tickets-trigger" style="display:none">' . __('Buy tickets', Eab_EventsHub::TEXT_DOMAIN) . '</a>' . 
 				sprintf(
-					//'<p class="eab-buy_tickets-target">' . __('I want to buy %s ticket(s)', Eab_EventsHub::TEXT_DOMAIN) . '</p>',
-					'<p>' . __('I want to buy %s ticket(s)', Eab_EventsHub::TEXT_DOMAIN) . '</p>',
+					//'<p class="eab-buy_tickets-target">' . __('I want to buy %s ticket(s)', Eab_EventsHub::TEXT_DOMAIN) . '</p>', 
+					'<p>' . __('I want to buy %s ticket(s)', Eab_EventsHub::TEXT_DOMAIN) . '</p>', 
 					'<input type="number" size="2" name="quantity" value="1" min="1" ' . $extra_attributes . ' />'
 				)
 			;
-
+			
 			$content .= '<input type="image" name="submit" border="0" src="https://www.paypal.com/en_US/i/btn/btn_paynow_SM.gif" alt="PayPal - The safer, easier way to pay online" />';
 			$content .= '<img alt="" border="0" width="1" height="1" src="https://www.paypal.com/en_US/i/scr/pixel.gif" />';
 			$content .= '</form>';
-
+		
 		}
 
 		// Moved this here so manual payments get propagated to templates.
@@ -438,7 +438,7 @@ class Eab_Template {
 
 		// Added by Hakan
 		$content = apply_filters('eab-event-payment_forms', $content, $event->get_id());
-
+		
 		return $content;
 	}
 
@@ -454,27 +454,27 @@ class Eab_Template {
 		$timestamp = $timestamp ? $timestamp : eab_current_time();
 		$format = $full ? 'Y/m' : 'Y';
 		return get_home_url(
-			$blog_id,
+			$blog_id, 
 			$data->get_option('slug') . '/' . date($format, $timestamp) . '/'
 		);
-	}
+	} 
 
 	public static function get_archive_url_next ($timestamp=false, $full=false) {
 		//return self::get_archive_url($timestamp + (32*86400), $full);
 		return self::get_archive_url(strtotime("next month", $timestamp), $full);
-	}
+	} 
 	public static function get_archive_url_next_year ($timestamp=false, $full=false) {
 		//return self::get_archive_url($timestamp + (366*86400), $full);
 		return self::get_archive_url(strtotime("next year", $timestamp), $full);
-	}
+	} 
 	public static function get_archive_url_prev ($timestamp=false, $full=false) {
 		//return self::get_archive_url($timestamp - (28*86400), $full);
 		return self::get_archive_url(strtotime("previous month", $timestamp), $full);
-	}
+	} 
 	public static function get_archive_url_prev_year ($timestamp=false, $full=false) {
 		//return self::get_archive_url($timestamp - (366*86400), $full);
 		return self::get_archive_url(strtotime("previous year", $timestamp), $full);
-	}
+	} 
 
 	public static function get_event_link ($post) {
 		$event = ($post instanceof Eab_EventModel) ? $post : new Eab_EventModel($post);
@@ -483,7 +483,7 @@ class Eab_Template {
 
 	public static function get_error_notice() {
 		if (!isset( $_GET['eab_success_msg'] ) && !isset( $_GET['eab_error_msg'] )) return;
-
+		
 		$legacy_redirects = apply_filters(
 			'eab-rsvps-status_messages-legacy_redirects',
 			(defined('EAB_RSVPS_LEGACY_REDIRECTS') && EAB_RSVPS_LEGACY_REDIRECTS)
@@ -498,21 +498,21 @@ class Eab_Template {
 			;
 			if ($message) $content = '<div id="eab-success-notice" class="message success">' . esc_html($message) . '</div>';
 		}
-
+		
 		$content .= isset($_GET['eab_error_msg'])
 		 	? '<div id="eab-error-notice" class="message error">'.esc_html(stripslashes($_GET['eab_error_msg'])).'</div>'
 		 	: ''
-		 ;
+		 ;	
 		return $content;
 	}
-
+	
 	public static function get_rsvp_form ($post) {
 		global $current_user;
 		$event = ($post instanceof Eab_EventModel) ? $post : new Eab_EventModel($post);
-
+		    
 		$content = '';
 		$content .= '<div class="wpmudevevents-buttons">';
-
+		
 		if ($event->is_open()) {
 			if (is_user_logged_in()) {
 				$booking_id = $event->get_user_booking_id();
@@ -531,7 +531,7 @@ class Eab_Template {
 				);
 				$content .= apply_filters('eab-rsvps-button-maybe',
 					'<input class="' . (($booking_id && $booking_status == 'maybe') ? 'current wpmudevevents-maybe-submit' : 'wpmudevevents-maybe-submit ' . $default_class) .
-						'" type="submit" name="action_maybe" value="' . __('Maybe', Eab_EventsHub::TEXT_DOMAIN) .
+						'" type="submit" name="action_maybe" value="' . __('Maybe', Eab_EventsHub::TEXT_DOMAIN) . 
 					'" '.(($booking_id && $booking_status == 'maybe') ? 'disabled="disabled"' : '').' />',
 					$event->get_id()
 				);
@@ -567,19 +567,19 @@ class Eab_Template {
 				);
 			}
 		}
-
+		
 		$content .= '</div>';
-
+	
 		$content = apply_filters('eab-rsvps-rsvp_form', $content, $event);
 
 		return $content;
 	}
-
+	
 	public static function get_event_details ($post) {
 		$content = '';
 		$data = Eab_Options::get_instance();
 		$event = ($post instanceof Eab_EventModel) ? $post : new Eab_EventModel($post);
-
+		
 		$content .= '<div class="wpmudevevents-date">' . self::get_event_dates($event) . '</div>';
 
 		if ($event->has_venue()) {
@@ -588,7 +588,7 @@ class Eab_Template {
                             <span itemprop='name'>{$venue}</span>
                             <span itemprop='address' itemscope itemtype='http://schema.org/PostalAddress'></span>
                         </div>";
-
+                            
 		}
 		if ($event->is_premium()) {
 			$price = $event->get_price();
@@ -600,24 +600,24 @@ class Eab_Template {
 		if ($data) {
 			$content .= '<div class="wpmudevevents-additional_details">' . $data . '</div>';
 		}
-
+		
 		return $content;
 	}
 
 	public static function get_event_dates ($post) {
 		$content = '';
 		$event = ($post instanceof Eab_EventModel) ? $post : new Eab_EventModel($post);
-
+		
 		$start_dates = $event->get_start_dates();
 		if (!$start_dates) return $content;
 		foreach ($start_dates as $key => $start) {
 			$start = $event->get_start_timestamp($key);
-			$end = $event->get_end_timestamp($key);
-
-			$end_date_str = (date('Y-m-d', $start) != date('Y-m-d', $end))
+			$end = $event->get_end_timestamp($key);		
+			
+			$end_date_str = (date('Y-m-d', $start) != date('Y-m-d', $end)) 
 				? date_i18n(get_option('date_format'), $end) : ''
 			;
-
+			
 			$content .= $key ? __(' and ', Eab_EventsHub::TEXT_DOMAIN) : '';
 
 			// Differentiate start/end date equality
@@ -675,8 +675,8 @@ class Eab_Template {
 
 	public static function get_rsvp_status_list () {
 		return array(
-			Eab_EventModel::BOOKING_YES => __('Attending', Eab_EventsHub::TEXT_DOMAIN),
-			Eab_EventModel::BOOKING_MAYBE => __('Maybe', Eab_EventsHub::TEXT_DOMAIN),
+			Eab_EventModel::BOOKING_YES => __('Attending', Eab_EventsHub::TEXT_DOMAIN), 
+			Eab_EventModel::BOOKING_MAYBE => __('Maybe', Eab_EventsHub::TEXT_DOMAIN), 
 			Eab_EventModel::BOOKING_NO => __('No', Eab_EventsHub::TEXT_DOMAIN)
 		);
 	}
@@ -700,7 +700,7 @@ class Eab_Template {
 			: $status
 		;
 		return urlencode($value);
-	}
+	}	
 
 	public static function get_success_message ($status=false) {
 		$status = $status ? $status : Eab_EventModel::BOOKING_YES;
@@ -802,11 +802,11 @@ class Eab_Template {
 
 		$strlen = self::util_strlen($str);
 		$max = $strlen - $start;
-		$length = $length
+		$length = $length 
 			? ($length > $max ? $max : $length)
 			: $strlen
 		;
-
+		
 		return $start
 			? preg_replace ('/^(.{'.$length.'}).*$/mu', '\1', $str)
 			: preg_replace ('/^.{'.$start.'}(.{'.$length.'}).*$/mu', '\1', $str)
@@ -816,12 +816,12 @@ class Eab_Template {
 	public static function util_safe_substr ($str, $start=0, $length=false) {
 		return self::util_substr(wp_strip_all_tags($str), $start, $length);
 	}
-
+	
 	public static function util_words_limit ($str, $count=false, $default_suffix='... ') {
 		if (!$count) return $str;
 		$str = preg_replace('/\s+/', ' ', $str);
 		$words = explode(' ', $str);
-
+		
 		return count($words) <= $count
 			? $str
 			: join(' ', array_slice($words, 0, $count)) . $default_suffix;
@@ -959,5 +959,5 @@ class Eab_Template {
 		$title = 'title="' . esc_attr($resolved['title']) . '"';
 		return "<abbr {$title}>({$resolved['type']})</abbr>";
 	}
-
+	
 }

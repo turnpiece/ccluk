@@ -18,7 +18,7 @@ if (!class_exists('Eab_ExporterFactory')) require_once EAB_PLUGIN_DIR . 'lib/cla
 class Eab_Export_iCal {
 
 	private $_data;
-
+        
         private $_added = array();
 
 	function __construct () {
@@ -33,7 +33,7 @@ class Eab_Export_iCal {
 	private function _add_hooks () {
 		add_action('eab-settings-after_plugin_settings', array($this, 'show_settings'));
 		add_filter('eab-settings-before_save', array($this, 'save_settings'));
-
+		
 		add_action('wp', array($this, 'intercept_page_load'), 99);
 
 		if ($this->_data->get_option('eab_export-ical-auto_show_links')) {
@@ -115,20 +115,20 @@ class Eab_Export_iCal {
 	}
 
 	function append_export_link ($content, $event) {
-
+                
 		if (in_array($event->get_id(), $this->_added)) return $content;
             $this->_added[] = $event->get_id();
-
+            
 		$download = $this->_data->get_option('eab_export-ical-download_links') ? '&attachment' : '';
-		return "{$content} <a class='export_to_ical' href='" .
-			get_permalink($event->get_id()) .
+		return "{$content} <a class='export_to_ical' href='" . 
+			get_permalink($event->get_id()) . 
 			'?eab_format=ical' . $download .
 		"'><span class='eab_export'>" . __('Export to iCal', Eab_EventsHub::TEXT_DOMAIN) . '</span></a>';
 	}
 
 	function intercept_page_load () {
 		if (is_admin()) return false;
-
+		
 		global $wp_query;
 		if (!isset($_GET['eab_format'])) return false;
 		if ('ical' != strtolower($_GET['eab_format'])) return false;
@@ -223,7 +223,7 @@ class Eab_Exporter_Ical extends Eab_Exporter {
 		$start_dates = $event->get_start_dates();
 		$tz_offset = get_option('gmt_offset') * 3600;
 		$time_callback = /*'gmt' == $this->_calculus ? 'gmdate' : */'date';
-
+		
 		$zulu = ''; $tzid = '';
 		if ('gmt' == $this->_calculus) {
 			$zulu = 'Z';

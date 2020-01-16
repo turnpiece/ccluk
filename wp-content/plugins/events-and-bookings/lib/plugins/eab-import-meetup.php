@@ -74,7 +74,7 @@ if (!class_exists('WpmuDev_Wp_Meetup')) {
 
 		protected function _read ($what, $params=array()) {
 			if (!is_array($params)) $params = array();
-
+			
 			$what = $this->_route($what);
 			if (!empty($params['id'])) {
 				$what = preg_replace('/:id:/', $params['id'], $what);
@@ -98,21 +98,21 @@ if (!class_exists('WpmuDev_Wp_Meetup')) {
 			if (preg_match('/\//', $what)) return $what;
 			$what = strtoupper('endpoint_' . preg_replace('/[^a-z_0-9]/i', '', $what));
 			$const = constant("WpmuDev_Wp_Meetup::{$what}");
-
+			
 			return $const;
 		}
 	}
 }
 
 class Eab_Wp_Meetup extends WpmuDev_Wp_Meetup {
-
+	
 	private $_data;
 
 	public function __construct () {
 		$this->_data = Eab_Options::get_instance();
 		$key = $this->_data->get_option('meetup_importer-api_key');
 		if (!empty($key)) $this->_set_key($key);
-	}
+	}	
 
 	/**
 	 * Fetches the member topics.
@@ -129,7 +129,7 @@ class Eab_Wp_Meetup extends WpmuDev_Wp_Meetup {
 
 
 class Eab_Calendars_MeetupImporter {
-
+	
 	private $_data;
 	private $_meetup;
 
@@ -146,7 +146,7 @@ class Eab_Calendars_MeetupImporter {
 	private function _add_hooks () {
 		add_action('eab-settings-after_api_settings', array($this, 'show_settings'));
 		add_filter('eab-settings-before_save', array($this, 'save_settings'));
-
+		
 		add_action('wp_ajax_eab_meetup-import_user_events', array($this, 'json_import_user_events'));
 		add_action('wp_ajax_eab_meetup-import_nearby_events', array($this, 'json_import_nearby_events'));
 		add_action('wp_ajax_eab_meetup-import_user_topics', array($this, 'json_import_user_topics'));
@@ -220,7 +220,7 @@ class Eab_Calendars_MeetupImporter {
 	}
 
 	public function json_import_nearby_events () {
-
+		
 		$data = stripslashes_deep($_POST);
 		$lat = (float)$data['lat'];
 		$lng = (float)$data['lng'];
@@ -272,7 +272,7 @@ class Eab_Calendars_MeetupImporter {
 		if (!$time) return false;
                 $offset = apply_filters( 'eab_meetup_offset_adjust', get_option( 'gmt_offset' ) );
                 $time = $time + ( $offset * 60 * 60 );
-
+                
 		if (empty($event['status']) || 'upcoming' != $event['status']) return false;
 
 		// Is the event already imported?
@@ -395,7 +395,7 @@ $(function () {
 	$("#eab-meetup_importer-import_location_events").on("click", function (e) {
 		e.preventDefault();
 		write_status("<?php echo esc_js(__('Please, hold on...', Eab_EventsHub::TEXT_DOMAIN)); ?>");
-
+                
 		navigator.geolocation.getCurrentPosition(function (resp) {
 			$.post(ajaxurl, {
 				action: 'eab_meetup-import_nearby_events',

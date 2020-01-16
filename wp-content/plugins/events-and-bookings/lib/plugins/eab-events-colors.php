@@ -9,27 +9,27 @@ AddonType: Events
 */
 
 class Eab_Events_Colors {
-
+	
 	private $_data;
-
+	
 	private function __construct () {
 		$this->_data = Eab_Options::get_instance();
 	}
-
+	
 	public static function serve () {
 		$me = new Eab_Events_Colors;
 		$me->_add_hooks();
 	}
-
+	
 	private function _add_hooks () {
 		add_action('eab-settings-after_appearance_settings', array($this, 'show_settings'));
 		add_filter('eab-settings-before_save', array($this, 'save_settings'));
 		add_action('admin_head-incsub_event_page_eab_settings', array($this, 'enqueue_dependencies'));
-
+	
 		add_action('wp_head', array($this, 'inject_color_settings'));
         add_action('wp_footer', array($this, 'inject_footer_script'), 10);
 	}
-
+	
 	function enqueue_dependencies () {
 		wp_enqueue_style('wp-color-picker');
 		wp_enqueue_script('wp-color-picker');
@@ -127,7 +127,7 @@ class Eab_Events_Colors {
 </style>
 <?php
 	}
-
+	
 	function show_settings () {
 		$categories = get_terms('eab_events_category', array(
 			'hide_empty' => false,
@@ -215,7 +215,7 @@ class Eab_Events_Colors {
 (function ($) {
 $(function () {
 	var $fields = $('#eab-settings-colors input[type="color"]');
-
+        
 	if ($fields.length && $fields.wpColorPicker) $fields.wpColorPicker();
 	$("#eab-colors-reset_to_defaults").click(function (e) {
             e.preventDefault();
@@ -229,16 +229,16 @@ $(function () {
                     $( $fields[i] ).attr( 'value', '#FFFFFF' );
                 }
             }
-
+            
             $( 'input[name="submit_settings"]' ).click();
 		//$fields.val('');
 	});
 });
 })(jQuery);
 </script>
-<?php
+<?php		
 	}
-
+	
 	function save_settings ($options) {
 		if (!empty($_POST['eab-colors'])) $options['eab-colors'] = $_POST['eab-colors'];
 		$options['eab-colors-use_widget'] = !empty($_POST['eab-colors-use_widget']);

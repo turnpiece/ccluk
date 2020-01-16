@@ -6,3 +6,4 @@ class Eab_Widget extends WP_Widget {
      */
     var $translation_domain = 'eab';
 }
+

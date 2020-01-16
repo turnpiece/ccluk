@@ -100,7 +100,7 @@ class Eab_ErrorLogger_Admin extends Eab_ErrorLogger {
 		$errors = $this->_repository->get_all();
 		$this->_repository->purge();
 		if (empty($errors)) return false;
-
+		
 		$msg = '<ul><li>' . join('</li><li>', $errors) . '</li></ul>';
 		echo "<div class='error'><p>{$msg}</p></div>";
 	}

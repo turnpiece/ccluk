@@ -189,10 +189,10 @@ EOPublicCancellationCss;
 
 		$from = $this->_data->get_option('eab_cancelations-email-from');
 		$from = $from ? $from : get_option('admin_email');
-
+		
 		$subject = trim($this->_data->get_option('eab_cancelations-email-subject'));
 		$subject = !empty($subject) ? $subject : $this->_default_subject;
-
+		
 		$body = trim($this->_data->get_option('eab_cancelations-email-body'));
 		$body = !empty($body) ? $body : $this->_default_message;
 
@@ -216,7 +216,7 @@ EOPublicCancellationCss;
 			if (!is_email($user->user_email)) continue;
 			$codec->set_user($user);
 			wp_mail(
-				$user->user_email,
+				$user->user_email, 
 				$codec->expand($subject, Eab_Macro_Codec::FILTER_TITLE),
 				$codec->expand($body, Eab_Macro_Codec::FILTER_BODY),
 				$headers
@@ -259,16 +259,16 @@ EOPublicCancellationCss;
 	function show_settings () {
 		$tips = new WpmuDev_HelpTooltips();
 		$tips->set_icon_url(EAB_PLUGIN_URL . 'img/information.png');
-
+		
 		$from = $this->_data->get_option('eab_cancelations-email-from');
 		$from = $from ? $from : get_option('admin_email');
-
+		
 		$subject = trim($this->_data->get_option('eab_cancelations-email-subject'));
 		$subject = !empty($subject) ? $subject : $this->_default_subject;
-
+		
 		$body = trim($this->_data->get_option('eab_cancelations-email-body'));
 		$body = !empty($body) ? $body : $this->_default_message;
-
+		
 		$codec = new Eab_Macro_Codec;
 		$macros = join('</code>, <code>', $codec->get_macros());
 

@@ -16,7 +16,7 @@
 class Eab_Events_RSVPClosePeriod {
 
     private function __construct() {
-
+	
     }
 
     public static function serve() {

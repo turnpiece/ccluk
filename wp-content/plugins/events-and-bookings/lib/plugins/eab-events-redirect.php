@@ -19,7 +19,7 @@ class Eab_Events_EventControlledRedirect {
 
 	/**
 	 * Constructor
-	 */
+	 */	
 	private function __construct () {
 		$this->_data = Eab_Options::get_instance();
 	}
@@ -27,7 +27,7 @@ class Eab_Events_EventControlledRedirect {
 	/**
 	 * Run the Addon
 	 *
-	 */
+	 */	
 	public static function serve () {
 		$me = new Eab_Events_EventControlledRedirect;
 		$me->_add_hooks();
@@ -36,7 +36,7 @@ class Eab_Events_EventControlledRedirect {
 	/**
 	 * Hooks to the main plugin Events+
 	 *
-	 */
+	 */	
 	private function _add_hooks () {
 		add_action('eab-settings-after_payment_settings', array($this, 'show_settings'));
 		add_action('template_redirect', array($this, 'redirect'));
@@ -45,16 +45,16 @@ class Eab_Events_EventControlledRedirect {
 		add_filter('eab-settings-before_save', array($this,'save_settings'));
 		add_action('admin_notices', array($this, 'warn_admin'));
 	}
-
+	
 	function redirect() {
 		global $post, $wpdb;
-
+		
 		if ( $post ) {
 			/* Find if this page is selected to be redirected.
 			For optimization reasons, at this moment we assume that target url is defined
 			We will check it later
 			*/
-			$results 		= $wpdb->get_results("SELECT post_id FROM ". $wpdb->postmeta." WHERE meta_key='eab_events_redirect_source' AND meta_value='".$post->ID ."' ");
+			$results 		= $wpdb->get_results("SELECT post_id FROM ". $wpdb->postmeta." WHERE meta_key='eab_events_redirect_source' AND meta_value='".$post->ID ."' "); 
 			$global_post_id = $this->_data->get_option('global_redirect_source');
 			if ( $results ) {
 				$query = '';
@@ -68,29 +68,29 @@ class Eab_Events_EventControlledRedirect {
 				$this->finalize_redirect( $this->generate_query( ) ); // Check all active events now
 			}
 		}
-
+			
 
 		return; // No match, no redirect.
 	}
 
 	/**
 	 * Helper function to generate the query
-	 */
+	 */	
 	function generate_query( $post_id=0 ) {
 		global $wpdb;
 		if ( $post_id )
 			$add_query = "wposts.ID=".$post_id." ";
 		else
 			$add_query = "esource.meta_key='eab_events_redirect_source' AND esource.meta_value <> ''";
-
+			
 		$local_now = "DATE_ADD(UTC_TIMESTAMP(),INTERVAL ". ( current_time('timestamp') - time() ). " SECOND)";
-
+		
 		//$this->log( $local_now );
-
-		return "SELECT wposts.*
-				FROM $wpdb->posts wposts, $wpdb->postmeta estart, $wpdb->postmeta eend, $wpdb->postmeta estatus, $wpdb->postmeta esource
+			
+		return "SELECT wposts.* 
+				FROM $wpdb->posts wposts, $wpdb->postmeta estart, $wpdb->postmeta eend, $wpdb->postmeta estatus, $wpdb->postmeta esource 
 				WHERE ". $add_query . "
-				AND wposts.ID=estart.post_id AND wposts.ID=eend.post_id AND wposts.ID=estatus.post_id
+				AND wposts.ID=estart.post_id AND wposts.ID=eend.post_id AND wposts.ID=estatus.post_id 
 				AND estart.meta_key='incsub_event_start' AND estart.meta_value < $local_now
 				AND eend.meta_key='incsub_event_end' AND eend.meta_value > $local_now
 				AND estatus.meta_key='incsub_event_status' AND estatus.meta_value <> 'closed'
@@ -99,15 +99,15 @@ class Eab_Events_EventControlledRedirect {
 
 	/**
 	 * Save a message in the log file
-	 */
+	 */	
 	function log( $message='' ) {
 		// Don't give warning if folder is not writable
-		@file_put_contents( EAB_PLUGIN_DIR. "log.txt", $message . chr(10). chr(13), FILE_APPEND );
+		@file_put_contents( EAB_PLUGIN_DIR. "log.txt", $message . chr(10). chr(13), FILE_APPEND ); 
 	}
 
 	/**
 	 * Helper function to redirect, if conditions are met
-	 */
+	 */	
 	function finalize_redirect( $query ) {
 		global $wpdb;
 		$rows = $wpdb->get_results( $query );
@@ -147,7 +147,7 @@ class Eab_Events_EventControlledRedirect {
 	/**
 	 * Save post meta
 	 *
-	 */
+	 */	
 	function _save_meta ($post_id, $REQUEST) {
 		if (isset($REQUEST['incsub_event_redirect_source']) ) {
 			if ( trim( $REQUEST['incsub_event_redirect_source'] ) != '' )
@@ -163,19 +163,19 @@ class Eab_Events_EventControlledRedirect {
 		}
 	}
 	function save_redirect_meta ($post_id) {
-		$this->_save_meta($post_id, $_POST);
+		$this->_save_meta($post_id, $_POST);	
 	}
-
+	
 	/**
 	 * Add HTML codes to the event meta box
 	 *
-	 */
+	 */	
 	function event_meta_box( $content ) {
 		global $post;
-
+		
 		$source = get_post_meta( $post->ID, 'eab_events_redirect_source', true );
 		$target = get_post_meta( $post->ID, 'eab_events_redirect_target', true );
-
+	
 		$content .= '<div class="eab_meta_box">';
 		$content .= '<input type="hidden" name="incsub_event_redirect_meta" value="1" />';
 		$content .= '<div class="misc-eab-section">';
@@ -188,28 +188,28 @@ class Eab_Events_EventControlledRedirect {
 		$content .= '<div class="clear"></div>';
 		$content .= '</div>';
 		$content .= '</div>';
-
+	
 		return $content;
-
+	
 	}
 
-
+	 
 	/**
 	 * Add Addon settings to the other admin options to be saved
-	 */
+	 */	
 	function save_settings( $options ) {
 		$options['global_redirect_source']		= stripslashes($_POST['event_default']['global_redirect_source']);
 		$options['global_redirect_target']		= stripslashes($_POST['event_default']['global_redirect_target']);
-
+		
 		return $options;
 	}
-
+	
 	/**
 	 * Admin settings
 	 *
-	 */
+	 */	
 	function show_settings() {
-		if (!class_exists('WpmuDev_HelpTooltips'))
+		if (!class_exists('WpmuDev_HelpTooltips')) 
 			require_once dirname(__FILE__) . '/lib/class_wd_help_tooltips.php';
 		$tips = new WpmuDev_HelpTooltips();
 		$tips->set_icon_url(EAB_PLUGIN_URL . 'img/information.png' );
@@ -222,14 +222,14 @@ class Eab_Events_EventControlledRedirect {
 						<input type="text" size="10" name="event_default[global_redirect_source]" value="<?php print $this->_data->get_option('global_redirect_source'); ?>" />
 						<span><?php echo $tips->add_tip(__('If you enter an ID here all events which do NOT have a source page ID setting will use this setting.', Eab_EventsHub::TEXT_DOMAIN)); ?></span>
 					</div>
-
+					    
 					<div class="eab-settings-settings_item">
 					    <label for="incsub_event-global_redirect_target" ><?php _e('Global target url', Eab_EventsHub::TEXT_DOMAIN); ?></label>
 						<input type="text" size="40" name="event_default[global_redirect_target]" value="<?php print $this->_data->get_option('global_redirect_target'); ?>" />
 						<span><?php echo $tips->add_tip(__('If you enter an url here all events which do NOT have a target url setting will use this setting.', Eab_EventsHub::TEXT_DOMAIN)); ?></span>
 					</div>
-
-
+					
+					    
 				</div>
 		    </div>
 		<?php

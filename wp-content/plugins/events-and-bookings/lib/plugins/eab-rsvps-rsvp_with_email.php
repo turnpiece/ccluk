@@ -87,7 +87,7 @@ class Eab_Events_RsvpWithEmail {
 		wp_new_user_notification($user_id, $password);
 
 		return get_userdata($user_id);
-
+		
 	}
 
 	private function _login_user ($user) {

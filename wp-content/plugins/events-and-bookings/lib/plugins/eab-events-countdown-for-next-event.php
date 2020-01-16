@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Next Event Countdown
-Description: Generates a flexible countdown shortcode for the next upcoming event that has not started yet. Visitor viewing the page can be redirected to any url when countdown expires.
+Description: Generates a flexible countdown shortcode for the next upcoming event that has not started yet. Visitor viewing the page can be redirected to any url when countdown expires. 
 Plugin URI: http://premium.wpmudev.org/project/events-and-booking
 Version: 0.27
 Author: WPMU DEV
@@ -21,9 +21,9 @@ Where:
 @id is a unique id. Only necessary and mandatory if more than one instance will be used on the same page. Default is null.
 
 @format is the countdown format of the output as defined in http://keith-wood.name/countdown.html
-e.g. "dHMS", which is the default, will countdown using days (unless it is not zero), hours, minutes and seconds.
+e.g. "dHMS", which is the default, will countdown using days (unless it is not zero), hours, minutes and seconds. 
 Lowercase means, that time part will be showed if not zero.
-Uppercase means, that time part will always be displayed.
+Uppercase means, that time part will always be displayed. 
 As default, days will only be displayed when necessary, the rest will be shown even if they are zero.
 
 @goto is the page that visitor will be redirected to when countdown expires. Default is null (No redirection).
@@ -45,9 +45,9 @@ For example, if you have a "Doors open time" of 2 hours before the event, enter 
 If set to "yes", the event countdown will also include the event title.
 
 Localization: Download the language pack from http://keith-wood.name/countdown.html and upload it in events-and-bookings/js/ folder.
-Countdown will automatically switch to your local settings as defined in locale setting or WPLANG of wp-config.php.
+Countdown will automatically switch to your local settings as defined in locale setting or WPLANG of wp-config.php. 
 If this language javascript file does not exist, English will be used.
-Note from wordpress.org: If you have a site network (Wordpress multisite),
+Note from wordpress.org: If you have a site network (Wordpress multisite), 
 the language is set on a per-blog basis through the "Site language" option in the Settings->General subpanel.
 
 */
@@ -58,22 +58,22 @@ class Eab_Events_CountdownforNextEvent {
 
 	/**
 	 * Constructor
-	 */
+	 */	
 	private function __construct () {
 		$this->add_countdown = false;
 	}
 
 	/**
 	 * Run the Addon
-	 */
+	 */	
 	public static function serve () {
 		$me = new Eab_Events_CountdownforNextEvent;
 		$me->_add_hooks();
 	}
 
 	/**
-	 * Hooks
-	 */
+	 * Hooks 
+	 */	
 	private function _add_hooks () {
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_scripts') );
 		add_shortcode( 'next_event_countdown', array($this, 'shortcode') );
@@ -83,7 +83,7 @@ class Eab_Events_CountdownforNextEvent {
 
 	/**
 	 * Register jQuery countdown
-	 */
+	 */		
 	function register_scripts() {
 		wp_register_script('jquery-countdown', EAB_PLUGIN_URL.'js/jquery.countdown.min.js', array('jquery','jquery-ui-widget'), Eab_EventsHub::CURRENT_VERSION);
 	}
@@ -91,11 +91,11 @@ class Eab_Events_CountdownforNextEvent {
 	/**
 	 * Load style only when they are necessary
 	 * http://beerpla.net/2010/01/13/wordpress-plugin-development-how-to-include-css-and-javascript-conditionally-and-only-when-needed-by-the-posts/
-	 */
+	 */		
 	function load_styles( $posts ) {
-		if ( empty($posts) OR is_admin() )
+		if ( empty($posts) OR is_admin() ) 
 			return $posts;
-
+	
 		$shortcode_found = false; // use this flag to see if styles and scripts need to be enqueued
 		foreach ($posts as $post) {
 			if (stripos($post->post_content, 'next_event_countdown') !== false) {
@@ -103,19 +103,19 @@ class Eab_Events_CountdownforNextEvent {
 				break;
 			}
 		}
-
+ 
 		if ($shortcode_found) {
 			wp_enqueue_style('jquery-countdown', EAB_PLUGIN_URL .'css/jquery.countdown.css');
 			if ( ! defined('EAB_COUNTDOWN_FLAG_STYLES_INJECTED') ) {
 				define( 'EAB_COUNTDOWN_FLAG_STYLES_INJECTED', true ); // Don't double-enqueue
 			}
 		}
-
+ 
 		return $posts;
 	}
 	/**
 	 * Load scripts to the footer only when they are necessary
-	 */
+	 */		
 	function load_scripts_footer() {
 		if ( $this->add_countdown ) {
 			wp_enqueue_script('jquery-countdown');
@@ -130,19 +130,19 @@ class Eab_Events_CountdownforNextEvent {
 
 	/**
 	 * Check if a localized countdown js file exists and locale settings match
-	 */
+	 */		
 	function locale() {
 		if ( !$locale = str_replace( "_", "-", get_locale() ) )
 			return false;
-
-		// First check with full match, e.g. zh-CN
+		
+		// First check with full match, e.g. zh-CN	
 		if ( file_exists( EAB_PLUGIN_DIR . "js/jquery.countdown-".$locale.".js" ) )
 			return $locale;
 		// Then check the first abbr. e.g. zh
 		list( $locale1, $locale2 ) = explode( "-", $locale );
 		if ( file_exists( EAB_PLUGIN_DIR . "js/jquery.countdown-".$locale1.".js" ) )
 			return $locale1;
-
+			
 		// No localized js file exists, use English
 		return false;
 	}
@@ -167,7 +167,7 @@ class Eab_Events_CountdownforNextEvent {
 			'category' => false,
 			'categories' => false,
 			'weeks' => false
-		));
+		)); 
 
 		if (!empty($args['legacy'])) return $this->_legacy_shortcode($original_arguments);
 		$class = !empty($args['class'])
@@ -176,7 +176,7 @@ class Eab_Events_CountdownforNextEvent {
 		;
 
 		$id = str_replace(array(" ","'",'"'), "", $args['id']); // We cannot let spaces and quotes in id
-
+			
 		// Do not add quotes for page refresh
 		if ( $args['goto'] && $args['goto'] != "window.location.href" )
 			$args['goto'] = "'". str_replace( array("'",'"'), "", $args['goto'] ). "'"; // Do not allow quotes which may break js
@@ -192,7 +192,7 @@ class Eab_Events_CountdownforNextEvent {
 			case 254:	$height = 260; break;
 			default:	$args['size'] = 70; $height = 72; break;
 		}
-
+		
 		$sprite_file = EAB_PLUGIN_URL . '/img/sprite_'.$args['size'].'x'.$height.'.png';
 
 		$secs = -1;
@@ -202,7 +202,7 @@ class Eab_Events_CountdownforNextEvent {
 		}
 		$query = $codec->get_query_args($args);
 		$now = eab_current_time() + $additional;
-
+		
 		//$events = Eab_CollectionFactory::get_upcoming_events($now, $query);
 
 		$future_peeking_method = false;
@@ -211,7 +211,7 @@ class Eab_Events_CountdownforNextEvent {
 		if (!empty($future_peeking_method)) add_filter('eab-collection-upcoming_weeks-week_number', $future_peeking_method);
 		$events = Eab_CollectionFactory::get_upcoming_weeks_events($now, $query);
 		if (!empty($future_peeking_method)) remove_filter('eab-collection-upcoming_weeks-week_number', $future_peeking_method);
-
+		
 		$ret = array();
 		foreach ($events as $event) {
 			$ts = $event->get_start_timestamp();
@@ -247,24 +247,24 @@ class Eab_Events_CountdownforNextEvent {
 		if ('flip' == $args['type']) {
 			$script .= '<script type="text/javascript" src="' . plugins_url(basename(EAB_PLUGIN_DIR) . "/js/event_countdown_flip.js") . '"></script>';
 		}
-
+		
 		// remove line breaks to prevent wpautop break the script
 		$script = str_replace( array("\r","\n","\t","<br>","<br />"), "", preg_replace('/\s+/m', ' ', $script) );
-
+		
 		$this->add_countdown = true;
 
 		$markup = '<div class="eab_next_event_countdown-wrapper">' .
 			($args['title']
 				? '<h4><a href="' . get_permalink($next->get_id()) . '">' . $next->get_title() . '</a></h4>'
 				: ''
-			) .
-			"<div id='eab_next_event_countdown{$id}' {$class} data-height='{$height}' data-size='" . $args['size'] . "'></div>" .
+			) . 
+			"<div id='eab_next_event_countdown{$id}' {$class} data-height='{$height}' data-size='" . $args['size'] . "'></div>" . 
 		'</div>';
 
 		if ($transform && !empty($args['allow_scaling'])) {
 			$markup .= <<<EOStandardTransformCSS
 <style type="text/css">
-#eab_next_event_countdown{$id} .countdown_section {
+#eab_next_event_countdown{$id} .countdown_section { 
 	transform: scale({$transform},{$transform});
 	-ms-transform: scale({$transform},{$transform});
 	-webkit-transform: scale({$transform},{$transform});
@@ -297,9 +297,9 @@ EOStandardCompactCSS;
 
 	/**
 	 * Generate shortcode
-	 */
+	 */	
 	private function _legacy_shortcode( $atts ) {
-
+	
 		extract( shortcode_atts( array(
 		'id'		=> '',
 		'format'	=> 'dHMS',
@@ -314,13 +314,13 @@ EOStandardCompactCSS;
 		'footer_script' => false,
 		'expired'	=> __('Closed', Eab_EventsHub::TEXT_DOMAIN)
 		), $atts ) );
-
+		
 		$id = str_replace( array(" ","'",'"'), "", $id ); // We cannot let spaces and quotes in id
 		$goto = trim( $goto );
-
+		
 		if ( $class )
 			$class = " class='".$class."'";
-
+			
 		// Do not add quotes for page refresh
 		if ( $goto && $goto != "window.location.href" )
 			$goto = "'". str_replace( array("'",'"'), "", $goto ). "'"; // Do not allow quotes which may break js
@@ -336,16 +336,16 @@ EOStandardCompactCSS;
 			case 254:	$height = 260; break;
 			default:	$size = 70; $height = 72; break;
 		}
-
+		
 		$sprite_file = EAB_PLUGIN_URL . 'img/sprite_'.$size.'x'.$height.'.png';
-
+		
 		global $wpdb;
-
+		
 		$result = $wpdb->get_row(
-			"SELECT estart.*
+			"SELECT estart.* 
 			FROM $wpdb->posts wposts, $wpdb->postmeta estart, $wpdb->postmeta eend, $wpdb->postmeta estatus
-			WHERE
-			wposts.ID=estart.post_id AND wposts.ID=eend.post_id AND wposts.ID=estatus.post_id
+			WHERE 
+			wposts.ID=estart.post_id AND wposts.ID=eend.post_id AND wposts.ID=estatus.post_id 
 			AND estart.meta_key='incsub_event_start' AND estart.meta_value > DATE_ADD(UTC_TIMESTAMP(),INTERVAL ". ( current_time('timestamp') - time() - 60 * abs($add) ). " SECOND)
 			AND eend.meta_key='incsub_event_end' AND eend.meta_value > estart.meta_value
 			AND estatus.meta_key='incsub_event_status' AND estatus.meta_value <> 'closed'
@@ -353,10 +353,10 @@ EOStandardCompactCSS;
 			ORDER BY estart.meta_value ASC
 			LIMIT 1
 			");
-
+		
 		// Find how many seconds left to the event
 		if ( $result == null )
-			$secs = -1;
+			$secs = -1; 
 		else
 			$secs = strtotime( $result->meta_value ) - current_time('timestamp') + 60 * (int)$add;
 
@@ -384,24 +384,24 @@ EOStandardCompactCSS;
 		if ('flip' == $type) {
 			$script .= '<script type="text/javascript" src="' . plugins_url(basename(EAB_PLUGIN_DIR) . "/js/event_countdown_flip.js") . '"></script>';
 		}
-
+		
 		// remove line breaks to prevent wpautop break the script
 		$script = str_replace( array("\r","\n","\t","<br>","<br />"), "", preg_replace('/\s+/m', ' ', $script) );
-
+		
 		$this->add_countdown = true;
 
 		$markup = '<div class="eab_next_event_countdown-wrapper">' .
 			($title && in_array($title, array('yes', 'true', '1'))
 				? '<h4><a href="' . get_permalink($result->post_id) . '">' . get_the_title($result->post_id) . '</a></h4>'
 				: ''
-			) .
-			"<div id='eab_next_event_countdown{$id}' {$class} data-height='{$height}' data-size='{$size}'></div>" .
+			) . 
+			"<div id='eab_next_event_countdown{$id}' {$class} data-height='{$height}' data-size='{$size}'></div>" . 
 		'</div>';
 
 		if ($transform && !empty($allow_scaling)) {
 			$markup .= <<<EOTransformCSS
 <style type="text/css">
-#eab_next_event_countdown{$id} .countdown_section {
+#eab_next_event_countdown{$id} .countdown_section { 
 	transform: scale({$transform},{$transform});
 	-ms-transform: scale({$transform},{$transform});
 	-webkit-transform: scale({$transform},{$transform});

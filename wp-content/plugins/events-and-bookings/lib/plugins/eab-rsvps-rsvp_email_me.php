@@ -78,10 +78,10 @@ class Eab_Events_RsvpEmailMe {
 		$subject = $this->_data->get_option('eab_rsvps-email_me-subject');
 		$body = $this->_data->get_option('eab_rsvps-email_me-body');
 		$admin_email = get_option('admin_email');
-
+                
         $from = $this->_data->get_option('eab_rsvps-email_me-from');
 		$from = $from ? $from : get_option('admin_email');
-
+		
 		$from_name = $this->_data->get_option('eab_rsvps-email_me-from-name');
 		$from_name = ! empty( $from_name ) ? $from_name : get_bloginfo( 'name' );
 
@@ -94,7 +94,7 @@ class Eab_Events_RsvpEmailMe {
 
 		$codec = new Eab_Events_RsvpEmailMe_Codec($event_id, $user_id);
 		add_filter('wp_mail_content_type', array($this, 'email_charset'));
-
+		
 		if ($this->_data->get_option('eab_rsvps-email_me-notify_admin')) {
 			wp_mail(
 				$admin_email,
@@ -155,7 +155,7 @@ class Eab_Events_RsvpEmailMe {
 	function show_settings () {
 		$tips = new WpmuDev_HelpTooltips();
 		$tips->set_icon_url(EAB_PLUGIN_URL . 'img/information.png' );
-
+		
 		$positive_rsvp = $this->_data->get_option('eab_rsvps-email_me-positive_rsvp') ? 'checked="checked"' : '';
 		$paid_rsvp = $this->_data->get_option('eab_rsvps-email_me-paid_rsvp') ? 'checked="checked"' : '';
 		$notify_admin = $this->_data->get_option('eab_rsvps-email_me-notify_admin') ? 'checked="checked"' : '';
@@ -164,7 +164,7 @@ class Eab_Events_RsvpEmailMe {
         $from = $this->_data->get_option('eab_rsvps-email_me-from');
 		$from_name = $this->_data->get_option('eab_rsvps-email_me-from-name');
 		$body = $this->_data->get_option('eab_rsvps-email_me-body');
-
+		
 		$codec = new Eab_Events_RsvpEmailMe_Codec;
 		$macros = join('</code>, <code>', $codec->get_macros());
 
@@ -246,7 +246,7 @@ $(function () {
 		$events = $("#eab_event-eab_rsvps-me-events")
 	;
 	$("#eab_event-eab_rsvps-me-preview").on("click", function () {
-		var body_string = (tinyMCE && tinyMCE.activeEditor
+		var body_string = (tinyMCE && tinyMCE.activeEditor 
 			? tinyMCE.activeEditor.getContent()
 			: $("#eab_rsvps_me-email_me-body").val()
 		);

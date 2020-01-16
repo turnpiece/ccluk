@@ -44,21 +44,21 @@ abstract class WpmuDev_Wp_Oauth {
 	protected $_oauth_verification_endpoint;
 
 	/**
-	 * These are login request parameters.
+	 * These are login request parameters. 
 	 * Should be overriden in the implementing class.
 	 * @var array
 	 */
 	protected $_login_parameters = array();
 
 	/**
-	 * These are verification request parameters.
+	 * These are verification request parameters. 
 	 * Should be overriden in the implementing class.
 	 * @var array
 	 */
 	protected $_verification_parameters = array();
 
 	/**
-	 * These are token refresh request parameters.
+	 * These are token refresh request parameters. 
 	 * Should be overriden in the implementing class.
 	 * @var array
 	 */
@@ -79,17 +79,17 @@ abstract class WpmuDev_Wp_Oauth {
 	 * Run right after self::__construct();
 	 */
 	abstract public function initialize_parameters ();
-
+	
 	/**
 	 * Implementation-specific token retrieval interface.
 	 */
-	abstract public function is_authenticated ();
+	abstract public function is_authenticated ();	
 
 	/**
 	 * Implementation-specific authentication interface.
 	 */
 	abstract public function get_authentication ();
-
+	
 	/**
 	 * Implementation-specific oAuth login response processor.
 	 */
@@ -114,7 +114,7 @@ abstract class WpmuDev_Wp_Oauth {
 
 
 /* ----- Shared + Helpers ----- */
-
+	
 	/**
 	 * Instantiates oAuth handler and sets UA string.
 	 */
@@ -143,8 +143,8 @@ abstract class WpmuDev_Wp_Oauth {
 	 * @return mixed           Login parameter array value, or $default if key not set
 	 */
 	public function get_parameter ($key, $default=false, $scope=false) {
-		$parameters = self::SCOPE_VERIFICATION == $scope
-			? $this->_verification_parameters
+		$parameters = self::SCOPE_VERIFICATION == $scope 
+			? $this->_verification_parameters 
 			: (self::SCOPE_LOGIN == $scope ? $this->_login_parameters : $this->_refresh_parameters)
 		;
 		return isset($parameters[$key])
@@ -175,8 +175,8 @@ abstract class WpmuDev_Wp_Oauth {
 	}
 
 	protected function _get_parameter_query ($scope=false) {
-		$parameters = self::SCOPE_VERIFICATION == $scope
-			? $this->_verification_parameters
+		$parameters = self::SCOPE_VERIFICATION == $scope 
+			? $this->_verification_parameters 
 			: (self::SCOPE_LOGIN == $scope ? $this->_login_parameters : $this->_refresh_parameters)
 		;
 		return http_build_query($parameters, null, '&');
@@ -218,7 +218,7 @@ abstract class WpmuDev_Wp_StoredOauth extends WpmuDev_Wp_Oauth {
 
 	protected function _get_data_key ($key) {
 		$class = get_class($this);
-		return apply_filters(strtolower(__CLASS__) . '-get_data_storage_key',
+		return apply_filters(strtolower(__CLASS__) . '-get_data_storage_key', 
 			apply_filters(strtolower($class) . "-get_data_storage_key", $key, $this),
 			$this
 		);
@@ -296,7 +296,7 @@ abstract class Eab_Gcal_Plugin_Oauth extends WpmuDev_Wp_StoredOauth {
 		$this->set_parameter('redirect_uri', $this->get_login_response_endpoint(), self::SCOPE_LOGIN);
 		$this->set_parameter('client_id', $this->_client_id, self::SCOPE_LOGIN);
 		$this->set_parameter('state', __CLASS__, self::SCOPE_LOGIN);
-
+		
 		$this->set_parameter('redirect_uri', $this->get_login_response_endpoint(), self::SCOPE_VERIFICATION);
 		$this->set_parameter('client_id', $this->_client_id, self::SCOPE_VERIFICATION);
 		$this->set_parameter('client_secret', $this->_client_secret, self::SCOPE_VERIFICATION);
@@ -331,7 +331,7 @@ abstract class Eab_Gcal_Plugin_Oauth extends WpmuDev_Wp_StoredOauth {
 
 	public function get_token_data () {
 		$token_data = $this->get_data('token_data');
-		return (!$token_data || !is_array($token_data))
+		return (!$token_data || !is_array($token_data)) 
 			? array()
 			: $token_data
 		;
@@ -357,10 +357,10 @@ abstract class Eab_Gcal_Plugin_Oauth extends WpmuDev_Wp_StoredOauth {
 
 		// Verify state...
 		// ...
-
+		
 		// Verify code...
 		// ...
-
+		
 		$this->set_parameter('code', $code, self::SCOPE_VERIFICATION);
 		$this->set_header('method', 'POST');
 		$raw_token = $this->_verify_authentication_code();
@@ -372,7 +372,7 @@ abstract class Eab_Gcal_Plugin_Oauth extends WpmuDev_Wp_StoredOauth {
 		$token_data['time'] = time();
 
 		$this->set_data('token_data', $token_data);
-
+		
 		die;
 	}
 
@@ -484,7 +484,7 @@ abstract class Eab_FB_Plugin_Oauth extends WpmuDev_Wp_StoredOauth {
 		$this->set_parameter('redirect_uri', $this->get_login_response_endpoint(), self::SCOPE_LOGIN);
 		$this->set_parameter('client_id', $this->_client_id, self::SCOPE_LOGIN);
 		$this->set_parameter('state', __CLASS__, self::SCOPE_LOGIN);
-
+		
 		$this->set_parameter('redirect_uri', $this->get_login_response_endpoint(), self::SCOPE_VERIFICATION);
 		$this->set_parameter('client_id', $this->_client_id, self::SCOPE_VERIFICATION);
 		$this->set_parameter('client_secret', $this->_client_secret, self::SCOPE_VERIFICATION);
@@ -506,7 +506,7 @@ abstract class Eab_FB_Plugin_Oauth extends WpmuDev_Wp_StoredOauth {
 
 	public function get_token_data () {
 		$token_data = $this->get_data('token_data');
-		return (!$token_data || !is_array($token_data))
+		return (!$token_data || !is_array($token_data)) 
 			? array()
 			: $token_data
 		;
@@ -527,10 +527,10 @@ abstract class Eab_FB_Plugin_Oauth extends WpmuDev_Wp_StoredOauth {
 	public function process_oauth_login_response () {
 		$code = isset($_GET['code']) ? $_GET['code'] : false;
 		if (!$code) die;
-
+		
 		// Verify code...
 		// ...
-
+		
 		$this->set_parameter('code', $code, self::SCOPE_VERIFICATION);
 		$this->set_header('method', 'POST');
 		$raw_token = $this->_verify_authentication_code();
@@ -551,7 +551,7 @@ abstract class Eab_FB_Plugin_Oauth extends WpmuDev_Wp_StoredOauth {
 		$token_data['time'] = time();
 
 		$this->set_data('token_data', $token_data);
-
+		
 		die;
 	}
 
@@ -659,7 +659,7 @@ abstract class WpmuDev_Gcal_Helper {
 		));
 		$limit = $limit && (int)$limit ? "maxResults={$limit}" : '';
 		$raw_data = $this->_request("/calendars/{$calendar_id}/events?{$limit}", $args);
-		return $this->_get_items($raw_data);
+		return $this->_get_items($raw_data);	
 	}
 
 
@@ -674,7 +674,7 @@ abstract class WpmuDev_Gcal_Helper {
 	private function _request ($relative, $args) {
 		if (!$this->_token) return false;
 		$query_separator = preg_match('/\?/', $relative) ? '&' : '?';
-		$url = untrailingslashit($this->_endpoint)
+		$url = untrailingslashit($this->_endpoint) 
 			. '/' . trim($relative, '/') .
 			$query_separator . http_build_query(array('access_token' => $this->_token), null, '&')
 		;
@@ -690,3 +690,4 @@ abstract class WpmuDev_Gcal_Helper {
 		return json_decode($body, true);
 	}
 }
+

@@ -1,11 +1,11 @@
 <?php
 
 class Eab_Upcoming_Widget extends Eab_Widget {
-
+	
 	private $_defaults = array();
-
+    
     function __construct () {
-    	$this->_defaults = apply_filters('eab-widgets-upcoming-default_fields', array(
+    	$this->_defaults = apply_filters('eab-widgets-upcoming-default_fields', array( 
 			'title' 				=> __('Upcoming', $this->translation_domain),
 			'excerpt' 				=> false,
 			'excerpt_words_limit' 	=> false,
@@ -23,18 +23,18 @@ class Eab_Upcoming_Widget extends Eab_Widget {
         );
 		parent::__construct('incsub_event_upcoming', __('Upcoming Events', $this->translation_domain), $widget_ops, $control_ops);
     }
-
+    
     function widget ($args, $instance) {
 		global $wpdb, $current_site, $post, $wiki_tree;
-
+		
 		extract($args);
-
+		
 		$instance = apply_filters('eab-widgets-upcoming-instance_read', $instance, $this);
 		$options = wp_parse_args( (array ) $instance, $this->_defaults );
 		if ( isset( $instance['title'] ) && !empty( $instance['title'] ) ) {
 			$options['title'] = strip_tags( $instance['title'] );
 		}
-
+		
 		$title = apply_filters('widget_title', ( empty($options['title']) ) ? __('Upcoming', $this->translation_domain) : $options['title'], $options, $this->id_base);
 		$query_args = array(
 			'posts_per_page' => $options['limit'],
@@ -53,9 +53,9 @@ class Eab_Upcoming_Widget extends Eab_Widget {
 		}
 		$_events = Eab_CollectionFactory::get_upcoming_weeks_events(eab_current_time(), $query_args);
 		if (!empty($lookahead_func)) {
-			remove_filter('eab-collection-upcoming_weeks-week_number', $lookahead_func);
+			remove_filter('eab-collection-upcoming_weeks-week_number', $lookahead_func);	
 		}
-
+	
 		if (is_array($_events) && count($_events) > 0) {
 			echo $before_widget;
 			echo $before_title . $title . $after_title;
@@ -93,11 +93,11 @@ class Eab_Upcoming_Widget extends Eab_Widget {
 			$after_widget;
 		}
     }
-
+    
     function update ($new_instance, $old_instance) {
 		$instance 		= $old_instance;
         $new_instance 	= wp_parse_args((array)$new_instance, $this->_defaults);
-
+        
         $instance['title'] 					= isset( $new_instance['title'] ) ? strip_tags($new_instance['title']) : '';
         $instance['excerpt'] 				= isset( $new_instance['excerpt'] ) ? (int)$new_instance['excerpt'] : 0;
         $instance['excerpt_words_limit'] 	= isset( $new_instance['excerpt_words_limit'] ) ? (int)$new_instance['excerpt_words_limit'] : 0;
@@ -108,59 +108,59 @@ class Eab_Upcoming_Widget extends Eab_Widget {
         $instance['category'] 				= isset( $new_instance['category'] ) ?  (int)$new_instance['category'] : 0;
 
         $instance 		= apply_filters('eab-widgets-upcoming-instance_update', $instance, $new_instance, $this);
-
+	
         return $instance;
     }
-
+    
     function form ($instance) {
     	$instance = apply_filters('eab-widgets-upcoming-instance_read', $instance, $this);
 		$options = wp_parse_args((array)$instance, $this->_defaults);
 		if ( isset( $instance['title'] ) && !empty( $instance['title'] ) ) {
 			$options['title'] = strip_tags( $instance['title'] );
 		}
-
-
+        	
+		
 		$categories = get_terms('eab_events_category');
 	?>
 	<div style="text-align:left">
             <label for="<?php echo $this->get_field_id('title'); ?>" style="line-height:35px;display:block;">
             	<?php _e('Title', $this->translation_domain); ?>:<br />
-				<input class="widefat"
-					id="<?php echo $this->get_field_id('title'); ?>"
-					name="<?php echo $this->get_field_name('title'); ?>"
-					value="<?php echo $options['title']; ?>" type="text" style="width:95%;"
+				<input class="widefat" 
+					id="<?php echo $this->get_field_id('title'); ?>" 
+					name="<?php echo $this->get_field_name('title'); ?>" 
+					value="<?php echo $options['title']; ?>" type="text" style="width:95%;" 
 				/>
             </label>
             <label for="<?php echo $this->get_field_id('dates'); ?>" style="display:block;">
-				<input type="checkbox"
-					id="<?php echo $this->get_field_id('dates'); ?>"
-					name="<?php echo $this->get_field_name('dates'); ?>"
-					value="1" <?php echo ($options['dates'] ? 'checked="checked"' : ''); ?>
+				<input type="checkbox" 
+					id="<?php echo $this->get_field_id('dates'); ?>" 
+					name="<?php echo $this->get_field_name('dates'); ?>" 
+					value="1" <?php echo ($options['dates'] ? 'checked="checked"' : ''); ?> 
 				/>
             	<?php _e('Show dates', $this->translation_domain); ?>
             </label>
             <label for="<?php echo $this->get_field_id('excerpt'); ?>" style="display:block;">
-				<input type="checkbox"
-					id="<?php echo $this->get_field_id('excerpt'); ?>"
-					name="<?php echo $this->get_field_name('excerpt'); ?>"
-					value="1" <?php echo ($options['excerpt'] ? 'checked="checked"' : ''); ?>
+				<input type="checkbox" 
+					id="<?php echo $this->get_field_id('excerpt'); ?>" 
+					name="<?php echo $this->get_field_name('excerpt'); ?>" 
+					value="1" <?php echo ($options['excerpt'] ? 'checked="checked"' : ''); ?> 
 				/>
             	<?php _e('Show excerpt', $this->translation_domain); ?>
             </label>
              <label for="<?php echo $this->get_field_id('excerpt_words_limit'); ?>" style="display:block; margin-left:1.8em">
             	<?php _e('Limit my excerpt to this many words <small>(<code>0</code> for no limit)</small>:', $this->translation_domain); ?>
-				<input type="text"
+				<input type="text" 
 					size="2"
-					id="<?php echo $this->get_field_id('excerpt_words_limit'); ?>"
-					name="<?php echo $this->get_field_name('excerpt_words_limit'); ?>"
+					id="<?php echo $this->get_field_id('excerpt_words_limit'); ?>" 
+					name="<?php echo $this->get_field_name('excerpt_words_limit'); ?>" 
 					value="<?php echo (int)$options['excerpt_words_limit']; ?>"
 				/>
             </label>
             <label for="<?php echo $this->get_field_id('thumbnail'); ?>" style="display:block;">
-				<input type="checkbox"
-					id="<?php echo $this->get_field_id('thumbnail'); ?>"
-					name="<?php echo $this->get_field_name('thumbnail'); ?>"
-					value="1" <?php echo ($options['thumbnail'] ? 'checked="checked"' : ''); ?>
+				<input type="checkbox" 
+					id="<?php echo $this->get_field_id('thumbnail'); ?>" 
+					name="<?php echo $this->get_field_name('thumbnail'); ?>" 
+					value="1" <?php echo ($options['thumbnail'] ? 'checked="checked"' : ''); ?> 
 				/>
             	<?php _e('Show thumbnail', $this->translation_domain); ?>
            </label>
@@ -171,7 +171,7 @@ class Eab_Upcoming_Widget extends Eab_Widget {
 						<?php $selected = ($i == $options['limit']) ? 'selected="selected"' : ''; ?>
 						<option value="<?php echo $i; ?>" <?php echo $selected;?>><?php echo $i;?></option>
 					<?php } ?>
-				</select>
+				</select> 
            </label>
            <label for="<?php echo $this->get_field_id('lookahead'); ?>" style="line-height:35px;display:block;">
             	<?php _e('Lookahead', $this->translation_domain); ?>:
@@ -190,7 +190,7 @@ class Eab_Upcoming_Widget extends Eab_Widget {
 						<?php $selected = ($category->term_id == $options['category']) ? 'selected="selected"' : ''; ?>
 						<option value="<?php echo $category->term_id; ?>" <?php echo $selected;?>><?php echo $category->name;?></option>
 					<?php } ?>
-				</select>
+				</select> 
            </label>
            <?php do_action('eab-widgets-upcoming-widget_form', $options, $this); ?>
 	</div>

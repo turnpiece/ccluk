@@ -122,7 +122,7 @@ function send_email_non_paid_members_callback() {
 
 			$codec = new Eab_Macro_Codec( $event_id, $user_id );
 			add_filter( 'wp_mail_content_type', array( $this, 'email_charset' ) );
-
+			
 			wp_mail(
 				$user->user_email,
 				$codec->expand( $subject, Eab_Macro_Codec::FILTER_TITLE ),
@@ -158,11 +158,11 @@ function send_email_non_paid_members_callback() {
 	function show_settings () {
 		$tips = new WpmuDev_HelpTooltips();
 		$tips->set_icon_url(EAB_PLUGIN_URL . 'img/information.png' );
-
+		
 		$from = $this->_data->get_option('eab_rsvps-email_non_paid-from');
 		$subject = $this->_data->get_option('eab_rsvps-email_non_paid-subject');
 		$body = $this->_data->get_option('eab_rsvps-email_non_paid-body');
-
+		
 		$codec = new Eab_Macro_Codec;
 		$macros = join('</code>, <code>', $codec->get_macros());
 
@@ -211,7 +211,7 @@ $(function () {
 		$events = $("#eab_event-eab_rsvps-non_paid-events")
 	;
 	$("#eab_event-eab_rsvps-non_paid-preview").on("click", function () {
-		var body_string = (tinyMCE && tinyMCE.activeEditor
+		var body_string = (tinyMCE && tinyMCE.activeEditor 
 			? tinyMCE.activeEditor.getContent()
 			: $("eab_rsvps-email_non_paid-body").val()
 		);

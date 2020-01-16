@@ -13,7 +13,7 @@ class Eab_Archive_Shortcode extends Eab_Codec {
 			$requested_page     = $requested_page ? $requested_page : get_query_var( 'paged' );
 			$this->args['page'] = $requested_page ? $requested_page : $this->args['page'];
 		}
-
+		
 		$this->query = $this->_to_query_args( $this->args );
 	}
 
@@ -22,7 +22,7 @@ class Eab_Archive_Shortcode extends Eab_Codec {
 		$method = false;
 
 		$events = array();
-
+		
 		if ( is_multisite() && $this->args['network'] ) {
 			$events = Eab_Network::get_archive_events( 30 );
 		} else {
@@ -38,22 +38,22 @@ class Eab_Archive_Shortcode extends Eab_Codec {
 			    $start = !empty($this->args['date']) ? $this->args['date'] : eab_current_time();
 			    $start_date = create_function( '', 'return "' . date('Y-m-d', $start) .' 00:00";');
 			    $end_date = create_function( '', 'return "' . date('Y-m-d', $this->args['end_date']) . ' 23:59";');
-
+			    
 			    add_filter('eab-collection-date_range_start', $start_date);
-			    add_filter('eab-collection-date_range_end', $end_date);
+			    add_filter('eab-collection-date_range_end', $end_date); 
 
 			    $events = Eab_CollectionFactory::get_date_range_events( $start, $this->query );
-
+			    
 			    remove_filter( 'eab-collection-date_range_start', $start_date );
 			    remove_filter( 'eab-collection-date_range_end', $end_date );
             } elseif ( $this->args['day_only']) {
 			    $date = !empty($this->args['date']) ? $this->args['date'] : eab_current_time();
 			    $ddate = create_function( '', 'return "' . date('Y-m-d', $date) .'";');
-
+			    
 			    add_filter('eab-collection-daily_events_date', $ddate);
 
 			    $events = Eab_CollectionFactory::get_daily_events( $date, $this->query );
-
+			    
 			    remove_filter( 'eab-collection-daily_events_date', $ddate );
 			} else {
 			    // Lookahead - depending on presence, use regular upcoming query, or poll week count
@@ -80,7 +80,7 @@ class Eab_Archive_Shortcode extends Eab_Codec {
 				remove_filter( 'eab-collection-date_ordering_direction', $order_method );
 			}
 		}
-
+                
 		if( $this->args['network'] && is_multisite() && $this->args['categories'] ) {
 			$events = $this->_get_network_events_by_categories( $events );
 		}
@@ -96,14 +96,14 @@ class Eab_Archive_Shortcode extends Eab_Codec {
 			    if ( $this->args['end_date'] ) {
 					add_filter('eab-collection-date_range_start', $start_date);
 					add_filter('eab-collection-date_range_end', $end_date);
-
+				
 					$events_query = Eab_CollectionFactory::get_date_range( $start, $this->query );
-
+				
 					remove_filter( 'eab-collection-date_range_start', $start_date );
 					remove_filter( 'eab-collection-date_range_end', $end_date );
                 } elseif ($this->args['day_only']) {
 					add_filter('eab-collection-daily_events_date', $ddate);
-
+				
 					$events_query = Eab_CollectionFactory::get_daily( $date, $this->query );
 
 					remove_filter( 'eab-collection-daily_events_date', $ddate );
@@ -132,7 +132,7 @@ class Eab_Archive_Shortcode extends Eab_Codec {
 
 		return $output;
 	}
-
+        
 	private function _get_network_events_by_categories( $events ) {
 		if( $this->args['categories']['type'] == 'id' ) {
 			if( count( $this->args['categories']['value'] ) > 1 ) {
@@ -144,9 +144,9 @@ class Eab_Archive_Shortcode extends Eab_Codec {
 
 					foreach( $this->args['categories']['value'] as $cat ) {
 						$term = get_term( $cat, 'eab_events_category' );
-
+						
 						if( ! is_object( $term ) ) continue;
-
+						
 						if( $term->slug != '' ) {
 							$cats[] = $term->slug;
 						}
@@ -178,7 +178,7 @@ class Eab_Archive_Shortcode extends Eab_Codec {
 
 		return count( $modified_events ) > 0 ? $modified_events : $events;
 	}
-
+	
 	private function _get_network_events_by_category( $events ) {
 		if( $this->args['category']['type'] == 'id' ) {
 			$sites = wp_get_sites();
@@ -188,9 +188,9 @@ class Eab_Archive_Shortcode extends Eab_Codec {
 				switch_to_blog( $site['blog_id'] );
 
 					$term = get_term( $this->args['category']['value'], 'eab_events_category' );
-
+					
 					if( ! is_object( $term ) ) continue;
-
+					
 					if( $term->slug != '' ) {
 						$cats[] = $term->slug;
 					}

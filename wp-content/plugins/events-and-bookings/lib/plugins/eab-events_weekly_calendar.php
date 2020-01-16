@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Weekly Event Calendar
-Description: Creates a weekly calender shortcode which can be used in any page. Calendar start and end hours, interval time can be selected.
+Description: Creates a weekly calender shortcode which can be used in any page. Calendar start and end hours, interval time can be selected. 
 Plugin URI: http://premium.wpmudev.org/project/events-and-booking
 Version: 0.27
 Author: WPMU DEV
@@ -19,13 +19,13 @@ class Eab_CalendarTable_WeeklyEventArchiveCalendar {
 	protected $_events = array();
 	protected $_current_timestamp;
 
-
+	
 	function __construct() {
 		$this->_data = Eab_Options::get_instance();
 		if ( !is_object( $this->_data ) ) {
 			$this->_data = new Eab_Options;
 		}
-
+			
 		// To follow WP Start of week setting
 		if ( !$this->start_of_week = get_option('start_of_week') )
 			$this->start_of_week = 0;
@@ -36,7 +36,7 @@ class Eab_CalendarTable_WeeklyEventArchiveCalendar {
 	/**
 	 * Run the Addon
 	 *
-	 */
+	 */	
 	public static function serve () {
 		$me = new Eab_CalendarTable_WeeklyEventArchiveCalendar;
 		$me->_add_hooks();
@@ -45,23 +45,23 @@ class Eab_CalendarTable_WeeklyEventArchiveCalendar {
 	/**
 	 * Hooks to the main plugin Events+
 	 *
-	 */
+	 */	
 	private function _add_hooks () {
-
+		
 		add_action('eab-settings-after_payment_settings', array($this, 'show_settings'));
 		add_filter('eab-settings-before_save', array($this,'save_settings'));
 		add_filter( 'the_posts', array($this, 'load_styles') );
 		add_shortcode('weekly_event_calendar', array($this,'shortcode'));
 	}
-
+	
 	/**
 	 * Load style only when they are necessary
 	 * http://beerpla.net/2010/01/13/wordpress-plugin-development-how-to-include-css-and-javascript-conditionally-and-only-when-needed-by-the-posts/
-	 */
+	 */		
 	function load_styles( $posts ) {
-		if ( empty($posts) OR is_admin() )
+		if ( empty($posts) OR is_admin() ) 
 			return $posts;
-
+	
 		$shortcode_found = false; // use this flag to see if styles and scripts need to be enqueued
 		foreach ($posts as $post) {
 			if (stripos($post->post_content, 'weekly_event_calendar') !== false) {
@@ -69,18 +69,18 @@ class Eab_CalendarTable_WeeklyEventArchiveCalendar {
 				break;
 			}
 		}
-
-		if ($shortcode_found)
+ 
+		if ($shortcode_found) 
 			wp_enqueue_style('eab-events-weekly-calendar', EAB_PLUGIN_URL . "css/weekly-event-calendar.css" );
-
+ 
 		return $posts;
-	}
+	}	
 	/**
 	 * Returns the timestamp of Sunday of the current week or selected date
 	 *
-	 */
+	 */	
 	function sunday( $timestamp=false ) {
-
+	
 		$date = $timestamp ? $timestamp : $this->get_local_time();
 		$test = date( "l", $date );
 		// Return today's timestamp if today is sunday
@@ -92,39 +92,39 @@ class Eab_CalendarTable_WeeklyEventArchiveCalendar {
 			return strtotime( "last Sunday", $date );
 		}
 	}
-
+	
 	function shortcode( $attr ) {
-
+	
 		extract( shortcode_atts( array(
 		'id'		=> '',
 		'class'		=> ''
 		), $attr ) );
-
+		
 		if ( isset( $_GET["wcalendar"] ) )
 			$time = $_GET["wcalendar"];
 		else
 			$time = $this->get_local_time();
-
+	
 		global $post;
 		$start_of_calendar = $this->sunday( $time ) + $this->start_of_week*86400;
-
+		
 		$c  = '';
 		$c .= '<div id="primary">';
         $c .= '<div id="wpmudevevents-wrapper">';
         $c .= '<h2>'. sprintf(
             	__('Events from %s to %s', Eab_EventsHub::TEXT_DOMAIN),
-            	date_i18n($this->date_format, $start_of_calendar ), date_i18n($this->date_format, $start_of_calendar + 6*86400 )
+            	date_i18n($this->date_format, $start_of_calendar ), date_i18n($this->date_format, $start_of_calendar + 6*86400 ) 
 				) .'</h2>';
         $c .= '<div class="wpmudevevents-list">';
  		$c .= $this->get_weekly_calendar($time, $id, $class);
-
+		
 		$c .= '<div class="event-pagination">';
-		$prev = $time - (7*86400);
+		$prev = $time - (7*86400); 
 		$next = $time + (7*86400);
 		$c .= '<a href="'. add_query_arg( "wcalendar", $prev, get_permalink( $post->ID ) ) .'">' . __('Prev', Eab_EventsHub::TEXT_DOMAIN) . '</a>';
 		$c .= '<a href="'. add_query_arg( "wcalendar", $next, get_permalink( $post->ID ) ). '">' . __('Next', Eab_EventsHub::TEXT_DOMAIN) . '</a>';
 		$c .= '</div>';
-
+			
 		$c .= '</div>
 			</div>
 		</div>';
@@ -143,27 +143,27 @@ class Eab_CalendarTable_WeeklyEventArchiveCalendar {
 			';
 		return $c;
 	}
-
-
+	
+	
 	protected function _get_text_domain () {
 		return Eab_EventsHub::TEXT_DOMAIN;
-	}
-
+	}	
+	
 	public function get_timestamp () {
 		return $this->_current_timestamp;
 	}
 
 	/**
 	 * Gets local time
-	 *
-	 */
+	 * 
+	 */	
 	public function get_local_time () {
 			return current_time('timestamp');
 	}
 	/**
 	 * Converts number of seconds to hours:mins acc to the WP time format setting
-	 *
-	 */
+	 * 
+	 */	
 	public function secs2hours( $secs ) {
 		$min = (int)($secs / 60);
 		$hours = "00";
@@ -176,17 +176,17 @@ class Eab_CalendarTable_WeeklyEventArchiveCalendar {
 			$mins = $min - $hours * 60;
 			if ( $mins < 10 )
 				$mins = "0" . $mins;
-			$hours_min = $hours . ":" . $mins;
+			$hours_min = $hours . ":" . $mins;			
 		}
 		if ( $this->time_format )
 			$hours_min = date( $this->time_format, strtotime( $hours_min . ":00" ) );
-
+			
 		return $hours_min;
 	}
 	/**
 	 * Arranges days array acc. to start of week, e.g 1234560 (Week starting with Monday)
 	 * @ days: input array, @ prepend: What to add as first element
-	 */
+	 */	
 	public function arrange( $days, $prepend ) {
 		if ( $this->start_of_week ) {
 			for ( $n = 1; $n<=$this->start_of_week; $n++ )
@@ -194,62 +194,62 @@ class Eab_CalendarTable_WeeklyEventArchiveCalendar {
 		}
 
 		array_unshift( $days, $prepend );
-
+	
 		return $days;
 	}
 
 	public function get_weekly_calendar ( $timestamp=false, $id='', $class='' ) {
-
+	
 		$options = Eab_Options::get_instance();
-
+		
 		if ( !is_object( $options ) )
 			$options = new Eab_Options;
 
 		$timestamp = $timestamp ? $timestamp : $this->get_local_time();
 		$year = date("Y", $timestamp);
 		$month = date("m", $timestamp);
-
+		
 		//$query = Eab_CollectionFactory::get_upcoming(strtotime("{$year}-{$month}-01 00:00"));
 		$query = Eab_CollectionFactory::get_upcoming_weeks(strtotime("{$year}-{$month}-01 00:00"));
 		$this->_events = $query->posts;
-
+		
 		$date = $timestamp ? $timestamp : $this->get_local_time();
-
+		
 		$sunday = $this->sunday( $date ); // Timestamp of first Sunday of any date
 
 		if ( !$start = $options->get_option('weekly_calendar_start') OR $start > 23 )
 			$start = 10; // Set a default working time start
 		$first = $start *3600 + $sunday; // Timestamp of the first cell of first Sunday
-
+		
 		if ( !$end = $options->get_option('weekly_calendar_end') OR $end < 1 )
 			$end = 24; // Set a default working time end
 		$last = $end *3600 + $sunday; // Timestamp of the last cell of first Sunday
-
+		
 		if ( !$interval = $options->get_option('weekly_calendar_interval') OR $interval < 10 OR $interval > 60 * 12 )
 			$interval = 120; // Set a default interval in minutes
 		$step = $interval * 60; // Timestamp increase interval to one cell below
-
+		
 		$days = $this->arrange( array(0,1,2,3,4,5,6), -1 ); // Arrange days acc. to start of week
-
+		
 		$post_info = array();
 		foreach ($this->_events as $event) {
 			$post_info[] = $this->_get_item_data($event);
 		}
-
+		
 		$tbl_id = $id;
 		$tbl_id = $tbl_id ? "id='{$tbl_id}'" : '';
 		$tbl_class = $class;
 		$tbl_class = $tbl_class ? "class='{$tbl_class}'" : '';
-
+		
 		$ret = '';
 		$ret .= "<table width='100%' {$tbl_id} {$tbl_class}>";
 		$ret .= $this->_get_table_meta_row('thead');
 		$ret .= '<tbody>';
-
+		
 		$ret .= $this->_get_first_row();
-
+		
 		$todays_no = date("w", $this->get_local_time () ); // Number of today
-
+		
 		for ( $t=$first; $t<$last; $t=$t+$step ) {
 			foreach ( $days as $key=>$i ) {
                             // Not sure if it's current fix, but it works!
@@ -260,9 +260,9 @@ class Eab_CalendarTable_WeeklyEventArchiveCalendar {
 					$ret .= "<td class='wpmudevevents-weekly-calendar-hours-mins'>".$from." - ".$to."</td>";
 				}
 				else {
-					$current_cell_start = $t + $i * 86400;
+					$current_cell_start = $t + $i * 86400; 
 					$current_cell_end = $current_cell_start + $step;
-
+					
 					$this->reset_event_info_storage();
 					foreach ($post_info as $ipost) {
 						$count = count($ipost['event_starts']);
@@ -272,13 +272,13 @@ class Eab_CalendarTable_WeeklyEventArchiveCalendar {
 							if ($start < $current_cell_end && $end > $current_cell_start) {
 								if ( $options->get_option('weekly_calendar_display') )
 									$this->set_event_info_author(
-										array('start' => $start, 'end'=> $end),
+										array('start' => $start, 'end'=> $end), 
 										array('start' => $current_cell_start, 'end'=> $current_cell_end),
 										$ipost
 									);
 								else
 									$this->set_event_info(
-										array('start' => $start, 'end'=> $end),
+										array('start' => $start, 'end'=> $end), 
 										array('start' => $current_cell_start, 'end'=> $current_cell_end),
 										$ipost
 									);
@@ -294,16 +294,16 @@ class Eab_CalendarTable_WeeklyEventArchiveCalendar {
 			}
 			$ret .= '</tr><tr>'; // Close the last day of the week
 		}
-
+		
 		$ret .= $this->_get_last_row();
-
+		
 		$ret .= '</tbody>';
 		$ret .= $this->_get_table_meta_row('tfoot');
 		$ret .= '</table>';
-
-		return $ret;
+		
+		return $ret;			
 	}
-
+	
 	protected function _get_item_data ($post) {
 		$event = ($post instanceof Eab_EventModel) ? $post : new Eab_EventModel($post);
 		$event_starts = $event->get_start_dates();
@@ -326,7 +326,7 @@ class Eab_CalendarTable_WeeklyEventArchiveCalendar {
 			'author_avatar'	=> get_avatar( $user_data->ID, 72 ),
 			'author_bio'	=> $user_data->description,
 			'event_content'	=> strip_shortcodes( $event->get_content() )
-
+			
 		);
 		if (isset($post->blog_id)) $res['blog_id'] = $post->blog_id;
 		return $res;
@@ -337,7 +337,7 @@ class Eab_CalendarTable_WeeklyEventArchiveCalendar {
 		$cells = '<th>' . join('</th><th>', $day_names_array) . '</th>';
 		return "<{$which}><tr>{$cells}</tr></{$which}>";
 	}
-
+	
 	public function get_day_names () {
 		return array(
 			__('Sunday', $this->_get_text_domain()),
@@ -349,32 +349,32 @@ class Eab_CalendarTable_WeeklyEventArchiveCalendar {
 			__('Saturday', $this->_get_text_domain()),
 		);
 	}
-
+	
 	public function set_event_info_author ($event_tstamps, $current_tstamps, $event_info) {
-		$this->_data[] = '<a class="wpmudevevents-calendar-event ' . $event_info['status_class'] . '" href="' . get_permalink($event_info['id']) . '">' .
+		$this->_data[] = '<a class="wpmudevevents-calendar-event ' . $event_info['status_class'] . '" href="' . get_permalink($event_info['id']) . '">' . 
 			$event_info['title'] .
-			'<span class="wpmudevevents-calendar-event-info">' .
+			'<span class="wpmudevevents-calendar-event-info">' . 
 				"<span class='wpmudevevents-calendar-avatar'>". $event_info['author_avatar'] . "</span>" .
 				"<span class='wpmudevevents-calendar-author'>" . $event_info['event_author'] . "</span><br />".
 				"<span class='wpmudevevents-calendar-bio'>". wp_trim_words( $event_info['author_bio'], 20  ). "</span>" .
 				"<span style='clear:both'></span>" .
-			'</span>' .
-		'</a>';
+			'</span>' . 
+		'</a>'; 
 	}
-
+	
 	public function set_event_info ($event_tstamps, $current_tstamps, $event_info) {
-		$this->_data[] = '<a class="wpmudevevents-calendar-event ' . $event_info['status_class'] . '" href="' . get_permalink($event_info['id']) . '">' .
+		$this->_data[] = '<a class="wpmudevevents-calendar-event ' . $event_info['status_class'] . '" href="' . get_permalink($event_info['id']) . '">' . 
 			$event_info['title'] .
-			'<span class="wpmudevevents-calendar-event-info">' .
+			'<span class="wpmudevevents-calendar-event-info">' . 
 				"<span class='wpmudevevents-calendar-thumbnail'>". get_the_post_thumbnail( $event_info['id'], 'medium' ) . "</span>" .
 				"<span class='wpmudevevents-calendar-start'>" . date_i18n(get_option('date_format'), $current_tstamps['start']) . "</span>".
 				"<span class='wpmudevevents-calendar-venue'>" . $event_info['event_venue'] . "</span>".
 				"<span class='wpmudevevents-calendar-content'>". wp_trim_words( $event_info['event_content'], 20  ). "</span>" .
 				"<span style='clear:both'></span>" .
-			'</span>' .
-		'</a>';
+			'</span>' . 
+		'</a>'; 
 	}
-
+	
 	public function get_event_info_as_string ($day) {
 		$activity = '';
 		if ($this->_data) {
@@ -382,22 +382,22 @@ class Eab_CalendarTable_WeeklyEventArchiveCalendar {
 		}
 		return $activity;
 	}
-
+	
 	protected function _get_first_row () { return ''; }
 	protected function _get_last_row () { return ''; }
 	public function reset_event_info_storage () { $this->_data = array(); }
-
+	
 	/**
 	 * Save a message to the log file
-	 */
+	 */	
 	function log( $message='' ) {
 		// Don't give warning if folder is not writable
-		@file_put_contents( EAB_PLUGIN_DIR . "log.txt", $message . chr(10). chr(13), FILE_APPEND );
+		@file_put_contents( EAB_PLUGIN_DIR . "log.txt", $message . chr(10). chr(13), FILE_APPEND ); 
 	}
 
 	/**
 	 * Add Addon settings to the other admin options to be saved
-	 */
+	 */	
 	function save_settings( $options ) {
 		$options['weekly_calendar_start']		= stripslashes($_POST['event_default']['weekly_calendar_start']);
 		$options['weekly_calendar_end']			= stripslashes($_POST['event_default']['weekly_calendar_end']);
@@ -405,13 +405,13 @@ class Eab_CalendarTable_WeeklyEventArchiveCalendar {
 		$options['weekly_calendar_display']		= stripslashes($_POST['event_default']['weekly_calendar_display']);
 		return $options;
 	}
-
+	
 	/**
 	 * Admin settings
 	 *
-	 */
+	 */	
 	function show_settings() {
-		if (!class_exists('WpmuDev_HelpTooltips'))
+		if (!class_exists('WpmuDev_HelpTooltips')) 
 			require_once dirname(__FILE__) . '/lib/class_wd_help_tooltips.php';
 		$tips = new WpmuDev_HelpTooltips();
 		$tips->set_icon_url(EAB_PLUGIN_URL . 'img/information.png' );
@@ -424,29 +424,29 @@ class Eab_CalendarTable_WeeklyEventArchiveCalendar {
 						<input type="text" size="10" name="event_default[weekly_calendar_start]" value="<?php print $this->_data->get_option('weekly_calendar_start'); ?>" />
 						<span><?php echo $tips->add_tip(__('Enter the hour of the day calendar starts in 24 hour format, without am/pm and minutes, e.g. 13. Default is 10 (10am).', Eab_EventsHub::TEXT_DOMAIN)); ?></span>
 					</div>
-
+					    
 					<div class="eab-settings-settings_item">
 					    <label for="incsub_event-weekly_calendar_end" ><?php _e('Calendar end hour', Eab_EventsHub::TEXT_DOMAIN); ?></label>
 						<input type="text" size="10" name="event_default[weekly_calendar_end]" value="<?php print $this->_data->get_option('weekly_calendar_end'); ?>" />
 						<span><?php echo $tips->add_tip(__('Enter the hour of the day calendar ends in 24 hour format, without am/pm and minutes, e.g. 22. Default is 24 (12pm).', Eab_EventsHub::TEXT_DOMAIN)); ?></span>
 					</div>
-
+					
 					<div class="eab-settings-settings_item">
 					    <label for="incsub_event-weekly_calendar_interval" ><?php _e('Calendar step interval (minutes)', Eab_EventsHub::TEXT_DOMAIN); ?></label>
 						<input type="text" size="10" name="event_default[weekly_calendar_interval]" value="<?php print $this->_data->get_option('weekly_calendar_interval'); ?>" />
 						<span><?php echo $tips->add_tip(__('Enter the number of minutes which will determine how many rows the calendar table will have. Default is 120 (2 hours). Minimum allowed value is 10. Too small values may result a long table.', Eab_EventsHub::TEXT_DOMAIN)); ?></span>
 					</div>
-
+					
 					<div class="eab-settings-settings_item">
 					    <label for="incsub_event-weekly_calendar_display" ><?php _e('Display in tooltip', Eab_EventsHub::TEXT_DOMAIN); ?></label>
 						<select name="event_default[weekly_calendar_display]">
 						<option value=""><?php _e('Event venue, thumbnail, starting date and content', Eab_EventsHub::TEXT_DOMAIN); ?></option>
 						<option value="author" <?php if( $this->_data->get_option('weekly_calendar_display') ) echo "selected='selected'"?>><?php _e('Author name, avatar and bio', Eab_EventsHub::TEXT_DOMAIN); ?></option>
-
+						
 						</select>
 						<span><?php echo $tips->add_tip(__('Select which items should be displayed in the tooltip, i.e. when visitor places the mouse over the event.', Eab_EventsHub::TEXT_DOMAIN)); ?></span>
 					</div>
-
+					    
 				</div>
 		    </div>
 		<?php

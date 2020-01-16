@@ -44,7 +44,7 @@
 }
 
 #wpmudevevents-contentheader{
-	overflow: hidden;
+	overflow: hidden;	
 }
 
 #wpmudevevents-user{
@@ -62,7 +62,7 @@
 
 #wpmudevevents-contentbody{
 	overflow: hidden;
-	padding: 0 0 10px 0;
+	padding: 0 0 10px 0;	
 }
 
 #wpmudevevents-wrapper h2{
@@ -82,7 +82,7 @@
 }
 
 a.wpmudevevents-viewevent{
-	float: right;
+	float: right;	
 	color: #75ab24;
     cursor: pointer;
     display: inline-block;
@@ -120,7 +120,7 @@ a:hover.wpmudevevents-viewevent{
 }
 
 a.wpmudevevents-book{
-	float: right;
+	float: right;	
     cursor: pointer;
     display: inline-block;
     background-color: #e6e6e6;
@@ -153,7 +153,7 @@ a.wpmudevevents-book{
 }
 
 a.wpmudevevents-yes-submit, input.wpmudevevents-yes-submit{
-	float: center;
+	float: center;	
 	color: #75ab24;
     cursor: pointer;
     display: inline-block;
@@ -201,7 +201,7 @@ a:hover.wpmudevevents-yes-submit, a.active.wpmudevevents-yes-submit{
 }
 
 a.wpmudevevents-maybe-submit, input.wpmudevevents-maybe-submit{
-	float: center;
+	float: center;	
 	color: #bd8728;
     cursor: pointer;
     display: inline-block;
@@ -244,7 +244,7 @@ a:hover.wpmudevevents-maybe-submit, a.active.wpmudevevents-maybe-submit{
 }
 
 a.wpmudevevents-no-submit, input.wpmudevevents-no-submit{
-	float: center;
+	float: center;		
 	color: #bd3328;
     cursor: pointer;
     display: inline-block;
@@ -358,6 +358,3 @@ table.wpmudevevents-tickets{
 .wpmudevevents-buttons {
 	margin-bottom: 0px !important;
 }
-
-
-/* 87274-1550006837-au */

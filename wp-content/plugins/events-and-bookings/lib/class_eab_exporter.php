@@ -35,7 +35,7 @@ abstract class Eab_Exporter {
 
 	const DISPOSITION_INLINE = 'inline';
 	const DISPOSITION_ATTACHMENT = 'attachment';
-
+	
 	protected $_event_id = false;
 	protected $_collection = false;
 
@@ -115,8 +115,8 @@ abstract class Eab_Exporter {
 
 	protected function _get_statuses () {
 		return array(
-			Eab_EventModel::BOOKING_YES => __('Attending', Eab_EventsHub::TEXT_DOMAIN),
-			Eab_EventModel::BOOKING_MAYBE => __('Maybe', Eab_EventsHub::TEXT_DOMAIN),
+			Eab_EventModel::BOOKING_YES => __('Attending', Eab_EventsHub::TEXT_DOMAIN), 
+			Eab_EventModel::BOOKING_MAYBE => __('Maybe', Eab_EventsHub::TEXT_DOMAIN), 
 			Eab_EventModel::BOOKING_NO => __('No', Eab_EventsHub::TEXT_DOMAIN)
 		);
 	}

@@ -31,7 +31,7 @@ class Eab_Api {
 			// Google
 			if ( !class_exists( 'LightOpenID' ) ) {
 				include_once  EAB_PLUGIN_DIR . 'lib/lightopenid/openid.php';
-			}
+			} 
 			$this->openid 			= new LightOpenID;
 
 			$this->openid->identity = 'https://www.google.com/accounts/o8/id';

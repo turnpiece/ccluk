@@ -60,22 +60,22 @@ class Eab_Events_Nre {
 	<div class="eab-inside">
 		<div class="eab-settings-settings_item" style="line-height:1.8em">
 			<label for="eab-events-nre-noindex_scope"><?php _e('Add <code>noindex</code> to my recurring events instances', Eab_EventsHub::TEXT_DOMAIN); ?>:</label><br />
-			<?php
-			foreach ($_temporal as $key => $label) {
+			<?php 
+			foreach ($_temporal as $key => $label) { 
 				$selected = ($key == $this->_options['noindex_scope']) ? 'checked="checked"' : '';
 				echo "<input type='radio' name='eab-events-nre[noindex_scope]' id='eab-events-nre-noindex_scope-{$key}' value='{$key}' {$selected} />&nbsp; ";
 				echo "<label for='eab-events-nre-noindex_scope-{$key}'>{$label}</label><br />";
-			}
+			} 
 			?>
 		</div>
 		<div class="eab-settings-settings_item" style="line-height:1.8em">
 			<label for="eab-events-nre-noindex_archives"><?php _e('Add <code>noindex</code> to my event archives', Eab_EventsHub::TEXT_DOMAIN); ?>:</label><br />
-			<?php
-			foreach ($_temporal_archives as $key => $label) {
+			<?php 
+			foreach ($_temporal_archives as $key => $label) { 
 				$selected = ($key == $this->_options['noindex_archives']) ? 'checked="checked"' : '';
 				echo "<input type='radio' name='eab-events-nre[noindex_archives]' id='eab-events-nre-noindex_archives-{$key}' value='{$key}' {$selected} />&nbsp; ";
 				echo "<label for='eab-events-nre-noindex_archives-{$key}'>{$label}</label><br />";
-			}
+			} 
 			?>
 		</div>
 		<div class="eab-settings-settings_item">
@@ -87,9 +87,9 @@ class Eab_Events_Nre {
 		</div>
 	</div>
 </div>
-<?php
+<?php		
 	}
-
+	
 	function save_settings ($options) {
 		$options['eab-events-nre'] = @$_POST['eab-events-nre'];
 		return $options;
@@ -175,7 +175,7 @@ class Eab_Events_Nre {
 		global $post;
 		if (!is_singular()) return false;
 		if (!$post || !is_object($post) || !isset($post->post_type) || Eab_EventModel::POST_TYPE != $post->post_type) return false;
-
+		
 		$event = $post instanceof Eab_EventModel ? $post : new Eab_EventModel($post);
 		if (!$event->is_recurring_child()) return false;
 		return $event;

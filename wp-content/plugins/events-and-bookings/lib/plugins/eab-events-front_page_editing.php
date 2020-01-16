@@ -276,9 +276,9 @@ class Eab_Events_FrontPageEditing {
 		update_post_meta($post_id, 'incsub_event_end', $end);
 		update_post_meta( $post_id, 'incsub_event_no_end', $has_no_end_time );
 		update_post_meta($post_id, 'incsub_event_status', strip_tags($data['status']));
-
+		
 		//specify if the event has start and end time or not.
-		//if ( $data['has_start'] == 0 ) update_post_meta($post_id, 'incsub_event_no_start',1);
+		//if ( $data['has_start'] == 0 ) update_post_meta($post_id, 'incsub_event_no_start',1);			
 		//if ( $data['has_end'] == 0 ) update_post_meta($post_id, 'incsub_event_no_end',1);
 
 		$venue_map = get_post_meta($post_id, 'agm_map_created', true);
@@ -294,7 +294,7 @@ class Eab_Events_FrontPageEditing {
 		update_post_meta($post_id, 'incsub_event_paid', ($is_paid ? '1' : ''));
 		update_post_meta($post_id, 'incsub_event_fee', $fee);
 		do_action('eab-events-fpe-save_meta', $post_id, $data);
-
+    
 		$selected_terms = ( isset( $data['category'] ) && is_array( $data['category'] ) ) ? array_map( 'intval' , $data['category'] ) : array();
 		wp_set_post_terms( $post_id, $selected_terms, 'eab_events_category', false );
 
@@ -305,7 +305,7 @@ class Eab_Events_FrontPageEditing {
 			$message = __('Event saved and waiting for approval', Eab_EventsHub::TEXT_DOMAIN);
 			do_action( 'eab_bp_event_saved_for_approval', $post_id );
 		}
-
+		
 		die(json_encode(array(
 			'status' => 1,
 			'post_id' => $post_id,
@@ -417,11 +417,11 @@ class Eab_Events_FrontPageEditing {
 				</div>
 				<div class="eab-events-fpe-meta_box_sub_item">
 					<div class="eab-events-fpe_wrap_time_start <?php echo $has_no_start_time ? 'hide_time_option' : '' ?>"  >
-						<label class="date-title"><?php _e('Time', Eab_EventsHub::TEXT_DOMAIN); ?></label>
-						<input type="text" name="" id="eab-events-fpe-start_time" value="<?php echo date('H:i', $start); ?>" size="3" />
+						<label class="date-title"><?php _e('Time', Eab_EventsHub::TEXT_DOMAIN); ?></label>					
+						<input type="text" name="" id="eab-events-fpe-start_time" value="<?php echo date('H:i', $start); ?>" size="3" />					
 					</div>
 					<div id="eab-events-fpe-time__start">
-						<input type="checkbox" id="eab-events-fpe-toggle_time__start" class="eab_action_cb eab_time_toggle" data-time-affect="start" <?php checked( $has_no_start_time ); ?> />
+						<input type="checkbox" id="eab-events-fpe-toggle_time__start" class="eab_action_cb eab_time_toggle" data-time-affect="start" <?php checked( $has_no_start_time ); ?> /> 
 						<a class="eab_action_button eab_time_toggle" data-time-affect="start"><?php _e('No start time', Eab_EventsHub::TEXT_DOMAIN); ?></a>
 					</div>
 				</div>
@@ -437,11 +437,11 @@ class Eab_Events_FrontPageEditing {
 				</div>
 				<div class="eab-events-fpe-meta_box_sub_item">
 					<div class="eab-events-fpe_wrap_time_end <?php echo $has_no_end_time ? 'hide_time_option' : '' ?>">
-						<label class="date-title"><?php _e('Time', Eab_EventsHub::TEXT_DOMAIN); ?></label>
+						<label class="date-title"><?php _e('Time', Eab_EventsHub::TEXT_DOMAIN); ?></label>					
 						<input type="text" name="" id="eab-events-fpe-end_time" value="<?php echo date('H:i', $end); ?>" size="3" />
 					</div>
 					<div id="eab-events-fpe-time__end">
-						<input type="checkbox" id="eab-events-fpe-toggle_time__end" class="eab_action_cb eab_time_toggle" data-time-affect="end" <?php checked( $has_no_end_time ); ?> />
+						<input type="checkbox" id="eab-events-fpe-toggle_time__end" class="eab_action_cb eab_time_toggle" data-time-affect="end" <?php checked( $has_no_end_time ); ?> /> 
 						<a class="eab_action_button eab_time_toggle" data-time-affect="end"><?php _e('No end time', Eab_EventsHub::TEXT_DOMAIN); ?></a></div>
 				</div>
 			</fieldset>

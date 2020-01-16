@@ -10,29 +10,29 @@ Author: WPMU DEV
 
 /*
 Detail: Allows deeper integration of your Events with BuddyPress groups. <br /> <b>Requires BuddyPress Groups component</b>
-*/
+*/ 
 
 if( ! defined( 'EAB_SHOW_HIDDEN_GROUP' ) ) define( 'EAB_SHOW_HIDDEN_GROUP', false );
 
 class Eab_BuddyPress_GroupEvents {
-
+	
 	const SLUG = 'group-events';
 	private $_data;
-
+	
 	private function __construct () {
 		$this->_data = Eab_Options::get_instance();
 	}
-
+	
 	public static function serve () {
 		$me = new Eab_BuddyPress_GroupEvents;
 		$me->_add_hooks();
 	}
-
+	
 	private function _add_hooks () {
 		add_action('admin_notices', array($this, 'show_nags'));
 		add_action('eab-settings-after_plugin_settings', array($this, 'show_settings'));
 		add_filter('eab-settings-before_save', array($this, 'save_settings'));
-
+		
 		if ($this->_data->get_option('bp-group_event-auto_join_groups')) {
 			add_action('incsub_event_booking_yes', array($this, 'auto_join_group'), 10, 2);
 			add_action('incsub_event_booking_maybe', array($this, 'auto_join_group'), 10, 2);
@@ -45,7 +45,7 @@ class Eab_BuddyPress_GroupEvents {
 		add_filter('eab-event_meta-event_meta_box-after', array($this, 'add_meta_box'));
 		add_action('eab-event_meta-save_meta', array($this, 'save_meta'));
 		add_action('eab-events-recurrent_event_child-save_meta', array($this, 'save_meta'));
-
+		
 		// Front page editor integration
 		add_filter('eab-events-fpe-add_meta', array($this, 'add_fpe_meta_box'), 10, 2);
 		add_action('eab-events-fpe-enqueue_dependencies', array($this, 'enqueue_fpe_dependencies'), 10, 2);
@@ -54,13 +54,13 @@ class Eab_BuddyPress_GroupEvents {
 		// Upcoming and popular widget integration
 		add_filter('eab-widgets-upcoming-default_fields', array($this, 'widget_instance_defaults'));
 		add_filter('eab-widgets-popular-default_fields', array($this, 'widget_instance_defaults'));
-
+		
 		add_filter('eab-widgets-upcoming-instance_update', array($this, 'widget_instance_update'), 10, 2);
 		add_filter('eab-widgets-popular-instance_update', array($this, 'widget_instance_update'), 10, 2);
-
+		
 		add_action('eab-widgets-upcoming-widget_form', array($this, 'widget_form'), 10, 2);
 		add_action('eab-widgets-popular-widget_form', array($this, 'widget_form'), 10, 2);
-
+		
 		add_action('eab-widgets-upcoming-after_event', array($this, 'widget_event_group'), 10, 2);
 		add_action('eab-widgets-popular-after_event', array($this, 'widget_event_group'), 10, 2);
 	}
@@ -78,10 +78,10 @@ class Eab_BuddyPress_GroupEvents {
 	function widget_form ($options, $widget) {
 		?>
 <label for="<?php echo $widget->get_field_id('show_bp_group'); ?>" style="display:block;">
-	<input type="checkbox"
-		id="<?php echo $widget->get_field_id('show_bp_group'); ?>"
-		name="<?php echo $widget->get_field_name('show_bp_group'); ?>"
-		value="1" <?php echo ($options['show_bp_group'] ? 'checked="checked"' : ''); ?>
+	<input type="checkbox" 
+		id="<?php echo $widget->get_field_id('show_bp_group'); ?>" 
+		name="<?php echo $widget->get_field_name('show_bp_group'); ?>" 
+		value="1" <?php echo ($options['show_bp_group'] ? 'checked="checked"' : ''); ?> 
 	/>
 	<?php _e('Show BuddyPress group', Eab_EventsHub::TEXT_DOMAIN); ?>
 </label>
@@ -101,12 +101,12 @@ class Eab_BuddyPress_GroupEvents {
 		if (!($query instanceof WP_Query)) return $query;
 		if (Eab_EventModel::POST_TYPE != @$query->query_vars['post_type']) return $query;
 		if (!function_exists('groups_is_user_member')) return $query;
-
+		
 		$posts = array();
 		foreach ($query->posts as $post) {
 			$group = (int)get_post_meta($post->ID, 'eab_event-bp-group_event', true);
 			if ($group) {
-				if (!groups_is_user_member($current_user->ID, $group)) continue;
+				if (!groups_is_user_member($current_user->ID, $group)) continue; 
 			}
 			$posts[] = $post;
 		}
@@ -114,7 +114,7 @@ class Eab_BuddyPress_GroupEvents {
 		$query->post_count = count($posts);
 		return $query;
 	}
-
+	
 	function auto_join_group ($event_id, $user_id) {
 		if (!function_exists('groups_get_groups')) return false;
 		if (!$this->_data->get_option('bp-group_event-auto_join_groups')) return false;
@@ -123,7 +123,7 @@ class Eab_BuddyPress_GroupEvents {
 
 		groups_accept_invite($user_id, $group_id);
 	}
-
+	
 	function show_nags () {
 		if (!defined('BP_VERSION')) {
 			echo '<div class="error"><p>' .
@@ -136,7 +136,7 @@ class Eab_BuddyPress_GroupEvents {
 			'</p></div>';
 		}
 	}
-
+	
 	function show_settings () {
 		$tips = new WpmuDev_HelpTooltips();
 		$tips->set_icon_url(EAB_PLUGIN_URL . 'img/information.png');
@@ -190,7 +190,7 @@ class Eab_BuddyPress_GroupEvents {
 		global $post, $current_user;
 		if (!function_exists('groups_get_groups')) return $box;
 		$group_id = get_post_meta($post->ID, 'eab_event-bp-group_event', true);
-
+		
 		$group_count = defined('EAB_BP_GROUPS_LIST_GROUP_LIMIT') && intval(EAB_BP_GROUPS_LIST_GROUP_LIMIT)
 			? EAB_BP_GROUPS_LIST_GROUP_LIMIT
 			: groups_get_total_group_count()
@@ -201,14 +201,14 @@ class Eab_BuddyPress_GroupEvents {
 		}
 		$groups = groups_get_groups($group_params);
 		$groups = @$groups['groups'] ? $groups['groups'] : array();
-
+		
 		$ret = '';
 		$ret .= '<div class="eab_meta_box">';
 		$ret .= '<div class="misc-eab-section" >';
 		$ret .= '<div class="eab_meta_column_box top"><label for="eab_event-bp-group_event">' .
-			__('Group event', Eab_EventsHub::TEXT_DOMAIN) .
+			__('Group event', Eab_EventsHub::TEXT_DOMAIN) . 
 		'</label></div>';
-
+		
 		$ret .= __('This is a group event for', Eab_EventsHub::TEXT_DOMAIN);
 		$ret .= ' <select name="eab_event-bp-group_event" id="eab_event-bp-group_event">';
 		$ret .= '<option value="">' . __('Not a group event', Eab_EventsHub::TEXT_DOMAIN) . '&nbsp;</option>';
@@ -217,7 +217,7 @@ class Eab_BuddyPress_GroupEvents {
 			$ret .= "<option value='{$group->id}' {$selected}>{$group->name}</option>";
 		}
 		$ret .= '</select> ';
-
+		
 		$ret .= '</div>';
 		$ret .= '</div>';
 		return $box . $ret;
@@ -227,7 +227,7 @@ class Eab_BuddyPress_GroupEvents {
 		global $current_user;
 		if (!function_exists('groups_get_groups')) return $box;
 		$group_id = get_post_meta($event->get_id(), 'eab_event-bp-group_event', true);
-
+		
 		$group_count = defined('EAB_BP_GROUPS_LIST_GROUP_LIMIT') && intval(EAB_BP_GROUPS_LIST_GROUP_LIMIT)
 			? EAB_BP_GROUPS_LIST_GROUP_LIMIT
 			: groups_get_total_group_count()
@@ -238,7 +238,7 @@ class Eab_BuddyPress_GroupEvents {
 		}
 		$groups = groups_get_groups($group_params);
 		$groups = @$groups['groups'] ? $groups['groups'] : array();
-
+		
 		$ret .= '<div class="eab-events-fpe-meta_box">';
 		$ret .= __('This is a group event for', Eab_EventsHub::TEXT_DOMAIN);
 		$ret .= ' <select name="eab_event-bp-group_event" id="eab_event-bp-group_event">';
@@ -249,19 +249,19 @@ class Eab_BuddyPress_GroupEvents {
 		}
 		$ret .= '</select> ';
 		$ret .= '</div>';
-
+		
 		return $box . $ret;
 	}
-
+	
 	private function _save_meta ($post_id, $request) {
 		if (!function_exists('groups_get_groups')) return false;
 		if (!isset($request['eab_event-bp-group_event'])) return false;
-
+		
 		$data = (int)$request['eab_event-bp-group_event'];
 		//if (!$data) return false;
-
+		
 		update_post_meta($post_id, 'eab_event-bp-group_event', $data);
-
+		
 		$email_grp_member = $this->_data->get_option('eab_event_bp_group_event_email_grp_member');
 		if( isset( $email_grp_member ) &&  $email_grp_member == 1 ) {
 			$grp_members = groups_get_group_members( array( 'group_id' => $data, 'exclude_admins_mods' => false ) );
@@ -274,9 +274,9 @@ class Eab_BuddyPress_GroupEvents {
 				wp_mail( $member->user_email, $subject, $message );
 			}
 		}
-
+		
 	}
-
+	
 	function save_meta ($post_id) {
 		$this->_save_meta($post_id, $_POST);
 	}
@@ -284,7 +284,7 @@ class Eab_BuddyPress_GroupEvents {
 	function save_fpe_meta ($post_id, $request) {
 		$this->_save_meta($post_id, $request);
 	}
-
+	
 	function add_tab () {
 		global $bp, $current_user;
 		if (!function_exists('groups_get_groups')) return false;
@@ -292,12 +292,12 @@ class Eab_BuddyPress_GroupEvents {
 
 		// Don't show groups tab for non-members if Events are private to groups
 		if ($this->_data->get_option('bp-group_event-private_events')) {
-			if (!groups_is_user_member($current_user->id, $bp->groups->current_group->id)) return false;
+			if (!groups_is_user_member($current_user->id, $bp->groups->current_group->id)) return false; 
 		}
-
+		
 		$name = __('Group Events', Eab_EventsHub::TEXT_DOMAIN);
 		$groups_link = bp_get_group_permalink($bp->groups->current_group);//$bp->root_domain . '/' . $bp->groups->slug . '/' . $bp->groups->current_group->slug . '/';
-
+		
 		bp_core_new_subnav_item(array(
 			'name' => $name,
 			'slug' => self::SLUG,
@@ -306,18 +306,18 @@ class Eab_BuddyPress_GroupEvents {
 			'screen_function' => array($this, 'bind_bp_groups_page'),
 		));
 	}
-
+	
 	function bind_bp_groups_page () {
 		add_action('bp_template_content', array($this, 'show_group_events_profile_body'));
 		add_action('bp_head', array($this, 'enqueue_dependencies'));
 		bp_core_load_template(apply_filters('bp_core_template_plugin', 'groups/single/plugins'));
 	}
-
+	
 	function enqueue_dependencies () {
 		// @TODO: refactor to separate style.
 		wp_enqueue_style('eab-bp-group_events', plugins_url(basename(EAB_PLUGIN_DIR) . "/default-templates/calendar/events.css"));
 	}
-
+	
 	function enqueue_fpe_dependencies () {
 		wp_enqueue_script('eab-buddypress-group_events-fpe', plugins_url(basename(EAB_PLUGIN_DIR) . "/js/eab-buddypress-group_events-fpe.js"), array('jquery'));
 	}
@@ -325,14 +325,14 @@ class Eab_BuddyPress_GroupEvents {
 	function show_group_events_profile_body () {
 		global $bp;
 		$timestamp = $this->_get_requested_timestamp();
-
+		
 		$collection = new Eab_BuddyPress_GroupEventsCollection($bp->groups->current_group->id, $timestamp);
 		$events = $collection->to_collection();
 		if (!class_exists('Eab_CalendarTable_EventArchiveCalendar')) require_once EAB_PLUGIN_DIR . 'lib/class_eab_calendar_helper.php';
 		$renderer = new Eab_CalendarTable_EventArchiveCalendar($events);
-
+		
 		do_action('eab-buddypress-group_events-before_events');
-		echo '<h3>' . date_i18n('F Y', $timestamp) . '</h3>';
+		echo '<h3>' . date_i18n('F Y', $timestamp) . '</h3>'; 
 		do_action('eab-buddypress-group_events-after_head');
 		echo $this->_get_navigation($timestamp);
 		echo $renderer->get_month_calendar($timestamp);
@@ -343,10 +343,10 @@ class Eab_BuddyPress_GroupEvents {
 	private function _get_navigation ($timestamp) {
 		global $bp;
 		$root = $bp->root_domain . '/' . $bp->pages->groups->slug . '/' . $bp->groups->current_group->slug . '/';
-
+		
 		$prev_url = $root . self::SLUG . date_i18n('/Y/m/', $timestamp - (28*86400));
 		$next_url = $root . self::SLUG . date_i18n('/Y/m/', $timestamp + (32*86400));
-
+		
 		return '<div class="eab-bp-group_events-navigation">' .
 			'<div class="eab-bp-group_events-navigation-prev" style="float:left">' .
 				"<a href='{$prev_url}'>" . __('Prev', Eab_EventsHub::TEXT_DOMAIN) . '</a>' .
@@ -356,17 +356,17 @@ class Eab_BuddyPress_GroupEvents {
 			'</div>' .
 		'</div>';
 	}
-
+	
 	private function _get_requested_timestamp () {
 		global $bp;
 		if (!$bp->action_variables) return eab_current_time();
-
+		
 		$year = (int)(isset($bp->action_variables[0]) ? $bp->action_variables[0] : date('Y'));
 		$year = $year ? $year : date('Y');
 
 		$month = (int)(isset($bp->action_variables[1]) ? $bp->action_variables[1] : date('m'));
 		$month = $month ? $month : date('m');
-
+		
 		return strtotime("{$year}-{$month}-01");
 	}
 }
@@ -374,14 +374,14 @@ class Eab_BuddyPress_GroupEvents {
 
 
 class Eab_BuddyPress_GroupEventsCollection extends Eab_UpcomingCollection {
-
+	
 	private $_group_id;
-
+		
 	public function __construct ($group_id, $timestamp=false, $args=array()) {
 		$this->_group_id = $group_id;
 		parent::__construct($timestamp, $args);
 	}
-
+	
 	public function build_query_args ($args) {
 		$args = parent::build_query_args($args);
 		$args['meta_query'][] = array(
@@ -392,14 +392,14 @@ class Eab_BuddyPress_GroupEventsCollection extends Eab_UpcomingCollection {
 	}
 }
 class Eab_BuddyPress_GroupEventsWeeksCollection extends Eab_UpcomingWeeksCollection {
-
+	
 	private $_group_id;
-
+		
 	public function __construct ($group_id, $timestamp=false, $args=array()) {
 		$this->_group_id = $group_id;
 		parent::__construct($timestamp, $args);
 	}
-
+	
 	public function build_query_args ($args) {
 		$args = parent::build_query_args($args);
 		$args['meta_query'][] = array(
@@ -424,10 +424,10 @@ class Eab_GroupEvents_Template extends Eab_Template {
 			$event_id = $post->ID;
 		}
 		if (!$event_id) return false;
-
+		
 		$group_id = get_post_meta($event_id, 'eab_event-bp-group_event', true);
 		if (!$group_id) return false;
-
+		
 		$group = groups_get_group(array('group_id' => $group_id));
 		if (!$group) return false;
 
@@ -457,7 +457,7 @@ class Eab_GroupEvents_Shortcodes extends Eab_Codec {
 
 	function process_group_archives_shortcode ($args=array(), $content=false) {
 		$args = $this->_preparse_arguments($args, array(
-		// Date arguments
+		// Date arguments	
 			'date' => false, // Starting date - default to now
 			'lookahead' => false, // Don't use default monthly page - use weeks count instead
 			'weeks' => false, // Look ahead this many weeks
@@ -521,7 +521,7 @@ class Eab_GroupEvents_Shortcodes extends Eab_Codec {
 			: false
 		;
 		if ($order_method) add_filter('eab-collection-date_ordering_direction', $order_method);
-
+		
 		// Lookahead - depending on presence, use regular upcoming query, or poll week count
 		if ($args['lookahead']) {
 			$method = $args['weeks']

@@ -227,7 +227,7 @@ class Eab_Admin {
 							'Restore this Event from the Trash',
 							esc_attr( sprintf( __( 'Restore &#8220;%s&#8221; from the Trash' ), $title ) ),
 							__( 'Restore' )
-						);
+						);	
 					} else if (EMPTY_TRASH_DAYS) {
 						$actions['trash'] = '<a class="submitdelete" title="' . esc_attr(__('Move this Event to the Trash', Eab_EventsHub::TEXT_DOMAIN)) . '" href="' . get_delete_post_link($event->get_id()) . '">' . __('Trash') . '</a>';
 					}

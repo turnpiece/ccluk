@@ -233,7 +233,7 @@ abstract class WpmuDev_DatedVenueItem extends WpmuDev_RecurringDatedItem {
 			if (!$map_id) return false;
 		} else if (!isset($matches[1]) || !isset($matches[1][0])) return false;
 		$map = $map_id ? $map_id : $matches[1][0];
-
+		
 		return apply_filters( 'eab_event_location_map', $map );
 	}
 
@@ -590,7 +590,7 @@ class Eab_EventModel extends WpmuDev_DatedVenuePremiumModel {
 		$instances = $this->_get_recurring_instances_timestamps($start, $end, $interval, $time_parts);
 
 		$duration = (float)@$time_parts['duration'];
-
+		
 		if( false !== strpos( $time_parts['duration'], ':') ){
 			list( $hours, $minutes ) = explode( ':', $time_parts['duration'] );
 			$duration = ( $minutes * MINUTE_IN_SECONDS ) + ( $hours * HOUR_IN_SECONDS );
@@ -646,13 +646,13 @@ class Eab_EventModel extends WpmuDev_DatedVenuePremiumModel {
 				do_action('eab-events-recurrent_event_child-save_meta', $post_id);
 			}
 		}
-
+        
         $new_post_ids = $this->_get_recurring_children_ids();
-
+        
 		if ($old_post_ids) {
 			$this->_remap_bookings($old_post_ids, $new_post_ids);
 		}
-
+		
 		do_action( 'eab-events-spawn_recurring_instances-after', $old_post_ids, $new_post_ids );
 	}
 
@@ -1101,8 +1101,8 @@ class Eab_EventModel extends WpmuDev_DatedVenuePremiumModel {
 		// Can't edit attendance for paid premium events
 		if ( $this->user_paid( $user_id ) ) {
 
-			if (
-				apply_filters( 'eab-rsvp_forbid-cancel-paid', false, $this, $user_id ) &&
+			if ( 
+				apply_filters( 'eab-rsvp_forbid-cancel-paid', false, $this, $user_id ) && 
 				$this->is_premium()
 			) {
 
@@ -1111,28 +1111,28 @@ class Eab_EventModel extends WpmuDev_DatedVenuePremiumModel {
 
 			// If it is paid we need to remove payment too
 			// In case we need to keep the payment, use the `eab-rsvp_can-cancel-payment` filter
-			if(
-				apply_filters( 'eab-rsvp_can-cancel-payment', true, $this, $user_id ) &&
+			if( 
+				apply_filters( 'eab-rsvp_can-cancel-payment', true, $this, $user_id ) && 
 				! $this->cancel_payment( $user_id ) ) {
 					return false;
 			}
 
 		}
-
+		
 		global $wpdb;
 		return $wpdb->query($wpdb->prepare("UPDATE " . Eab_EventsHub::tablename(Eab_EventsHub::BOOKING_TABLE) . " SET status='no' WHERE event_id = %d AND user_id = %d LIMIT 1;", $this->get_id(), $user_id));
-
+		
 	}
-
+	
 	public function cancel_payment( $user_id = false ) {
 
 		if ( ! $user_id ) return false;
-
+ 
  		global $wpdb;
-
+		
 		$booking_id = $this->get_user_booking_id( $user_id );
 		$meta_table = Eab_EventsHub::tablename( Eab_EventsHub::BOOKING_META_TABLE );
-		$query = $wpdb->prepare( "DELETE FROM {$meta_table} WHERE booking_id = %d AND meta_key = 'booking_transaction_key'", $booking_id );
+		$query = $wpdb->prepare( "DELETE FROM {$meta_table} WHERE booking_id = %d AND meta_key = 'booking_transaction_key'", $booking_id );		
 
 		// Used for MarketPress Integration
 		do_action( 'eab-rsvp_before_cancel_payment', $this, $user_id );
@@ -1151,7 +1151,7 @@ class Eab_EventModel extends WpmuDev_DatedVenuePremiumModel {
 		return $wpdb->query($wpdb->prepare("DELETE FROM " . Eab_EventsHub::tablename(Eab_EventsHub::BOOKING_TABLE) . " WHERE event_id = %d AND user_id = %d LIMIT 1;", $this->get_id(), $user_id));
 
 	}
-
+	
 	public function add_attendance ($user_id, $status) {
 		$user_id = (int)$this->_to_user_id($user_id);
 		if (!$user_id) return false;

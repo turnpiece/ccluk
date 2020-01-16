@@ -7,7 +7,7 @@
 function eab_get_template_class () {
 	$class = apply_filters('eab-templating-template_class', 'Eab_Template');
 	return class_exists( $class )
-		? $class
+		? $class 
 		: 'Eab_Template'
 	;
 }
@@ -18,7 +18,7 @@ function eab_get_template_class () {
  */
 function eab_call_template ( $method ) {
 	$class_name = eab_get_template_class();
-	if ( !class_exists( $class_name ) ) {
+	if ( !class_exists( $class_name ) ) { 
 		return false;
 	}
 
@@ -39,7 +39,7 @@ function eab_call_template ( $method ) {
  * @return  bool Exists or not.
  */
 function eab_has_template_method ($method) {
-	if ( !$method ) {
+	if ( !$method ) { 
 		return false;
 	}
 

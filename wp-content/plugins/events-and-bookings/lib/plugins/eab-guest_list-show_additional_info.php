@@ -9,20 +9,20 @@ AddonType: Integration
 */
 
 class Eab_GuestList_ShowAdditionalInfo {
-
+	
 	private function __construct () {
 		$this->_data = Eab_Options::get_instance();
 	}
-
+	
 	public static function serve () {
 		$me = new Eab_GuestList_ShowAdditionalInfo;
 		$me->_add_hooks();
 	}
-
+	
 	private function _add_hooks () {
 		add_action('eab-settings-after_plugin_settings', array($this, 'show_settings'));
 		add_filter('eab-settings-before_save', array($this, 'save_settings'));
-
+		
 		add_action('wp_print_styles', array($this, 'add_styles'));
 		add_filter('eab-guest_list-guest_avatar', array($this, 'process_avatar'), 10, 4);
 
@@ -33,7 +33,7 @@ class Eab_GuestList_ShowAdditionalInfo {
 			add_filter('eab-guest_list-export-guest_name', array($this, 'process_username'), 10, 3);
 		}
 	}
-
+	
 	function add_styles () {
 		global $post;
 		if (Eab_EventModel::POST_TYPE != $post->post_type) return false;
@@ -46,7 +46,7 @@ class Eab_GuestList_ShowAdditionalInfo {
 			: $username
 		;
 	}
-
+	
 	function process_avatar ($avatar, $user_id, $user_data, $event) {
 		$avatar_sizes = array(
 			'' => false,
@@ -55,17 +55,17 @@ class Eab_GuestList_ShowAdditionalInfo {
 			'large' => 96,
 		);
 		$size = $this->_data->get_option('guest_lists-sai-avatar_size');
-		$size = in_array($size, array_keys($avatar_sizes)) ? (int)$avatar_sizes[$size] : false;
+		$size = in_array($size, array_keys($avatar_sizes)) ? (int)$avatar_sizes[$size] : false; 
 		$avatar = $size ? get_avatar($user_id, $size) : false;
-
+		
 		$name = $this->_userdata_to_user_name($user_id, $user_data);
 		$name = sprintf("<span class='eab-guest_lists-user_name'>%s</span>", $name);
 
-		$url = defined('BP_VERSION')
-			? bp_core_get_user_domain($user_id) :
+		$url = defined('BP_VERSION') 
+			? bp_core_get_user_domain($user_id) : 
 			get_author_posts_url($user_id)
 		;
-
+		
 		if ($size) {
 			$width = $size+4;
 			$style = "style='display:block; width:{$width}px; float:left; overflow:hidden; margin: 0 5px;'";
@@ -104,23 +104,23 @@ class Eab_GuestList_ShowAdditionalInfo {
 				break;
 			default:
 				$tmp_name = false;
-				break;
+				break;	
 		}
-		return trim($tmp_name)
-			? $tmp_name
+		return trim($tmp_name) 
+			? $tmp_name 
 			: $name
 		;
 	}
-
+	
 	function show_settings () {
 		$tips = new WpmuDev_HelpTooltips();
 		$tips->set_icon_url(EAB_PLUGIN_URL . 'img/information.png' );
-
+		
 		$no_avatar = !$this->_data->get_option('guest_lists-sai-avatar_size') ? 'checked="checked"' : '';
 		$avatar_small = ('small' == $this->_data->get_option('guest_lists-sai-avatar_size')) ? 'checked="checked"' : '';
 		$avatar_med = ('medium' == $this->_data->get_option('guest_lists-sai-avatar_size')) ? 'checked="checked"' : '';
 		$avatar_large = ('large' == $this->_data->get_option('guest_lists-sai-avatar_size')) ? 'checked="checked"' : '';
-
+		
 		$no_name = !$this->_data->get_option('guest_lists-sai-show_name') ? 'checked="checked"' : '';
 		$username = ('username' == $this->_data->get_option('guest_lists-sai-show_name')) ? 'checked="checked"' : '';
 		$display_name = ('display_name' == $this->_data->get_option('guest_lists-sai-show_name')) ? 'checked="checked"' : '';
@@ -213,7 +213,7 @@ class Eab_GuestList_ShowAdditionalInfo {
 		$options['guest_lists-sai-show_in_export'] = !empty($_POST['event_default']['guest_lists-sai-show_in_export']);
 		return $options;
 	}
-
+	
 }
 
 Eab_GuestList_ShowAdditionalInfo::serve();

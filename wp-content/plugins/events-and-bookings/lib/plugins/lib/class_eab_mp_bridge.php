@@ -6,7 +6,7 @@
 class Eab_MP_Bridge {
 
 	private $_data;
-
+	
 	// The Attribute title that will hold the date variations for recurring events
 	const VARIATION_NAME = 'Event Variation';
 
@@ -39,14 +39,14 @@ class Eab_MP_Bridge {
 		// Recurring events
 		add_action('eab-events-recurring_instances-deleted', array($this, 'thrash_old_product_variations')); // Thrash old variations
 		add_action('eab-events-recurrent_event_child-save_meta', array($this, 'save_event_product_variations')); // Spawn variations
-
+		
         // Create the Product variations for the Recurring Event dates
 		add_action( 'eab-events-spawn_recurring_instances-after', array( $this, 'save_recurring_child_event_product_variations' ), 10, 2 );
 
 		// Archiving
 		add_action('eab-scheduler-event_archived', array($this, 'archived_event_mp_cleanup'));
                 add_action( 'eab-rsvps-button-no', array( &$this, 'eab_mp_variation_check' ), 99, 2 );
-
+                
         // When cancelling a paid Booking of an Event, we need to cancel the order too
 		add_action( 'eab-rsvp_before_cancel_payment', array( $this, 'cancel_event_order' ), 10, 2 );
 	}
@@ -57,11 +57,11 @@ class Eab_MP_Bridge {
 	function archived_event_mp_cleanup ($event) {
 		if (!is_object($event) || !method_exists($event, 'get_id')) return false; // Invalid parameter
 		$parent_event_id = $event->is_recurring_child();
-		if ($parent_event_id) {
+		if ($parent_event_id) { 
 			// Recurring event instance
 			$linked_product_id = get_post_meta($parent_event_id, 'eab_product_id', true);
 			if (!$linked_product_id) return false;
-
+			
 			$meta = get_post_custom($linked_product_id);
 			$skus = !empty($meta['mp_sku'][0]) ? maybe_unserialize($meta['mp_sku'][0]) : false;
 			if (empty($skus)) return false;
@@ -71,7 +71,7 @@ class Eab_MP_Bridge {
 
 			$var_names = !empty($meta['mp_var_name'][0]) ? maybe_unserialize($meta['mp_var_name'][0]) : false;
 			if (empty($var_names)) return false;
-
+			
 			$event_id = $event->get_id();
 
 			foreach ($skus as $id => $sku) {
@@ -135,7 +135,7 @@ class Eab_MP_Bridge {
 		if ( ! $this->_is_mp_present() ){
 			return $price;
 		}
-
+		
 		$linked_product_id = get_post_meta($event_id, 'eab_product_id', true);
 
 		if ( ! $linked_product_id ) {
@@ -158,7 +158,7 @@ class Eab_MP_Bridge {
 		if (!$parent_event_id) {
 			$linked_product_id = get_post_meta($event_id, 'eab_product_id', true);
 			if (!$linked_product_id) return $price;
-
+			
 			return mp_product_price(false, $linked_product_id, false);
 		} else {
 			// Recurring event child. Figure out parent-linked product ID and appropriate SKU
@@ -181,7 +181,7 @@ class Eab_MP_Bridge {
 
 			$raw_price = MP_Product::get_variation_meta($variation_id, 'regular_price');
 			if (!$raw_price) return $price;
-
+			
 
 			//$product = new MP_Product($linked_product_id);
 			//if ($product->on_sale()) {
@@ -243,7 +243,7 @@ class Eab_MP_Bridge {
 		$out .= '</select>';
 		return $out;
 	}
-
+	
 	/**
 	 * Saves initial related Product selection, for singular/top-level events.
 	 */
@@ -306,10 +306,10 @@ class Eab_MP_Bridge {
 
 		$max = count($meta);
 		$meta[$max] = date_i18n(get_option("date_format"), $event->get_start_timestamp());
-
+		
 		$sku = get_post_meta($product_id, 'mp_sku', true);
 		$sku[$max] = $instance_id;
-
+		
 		$price = get_post_meta($product_id, 'mp_price', true);
 		$price[$max] = $quick_price;
 
@@ -334,7 +334,7 @@ class Eab_MP_Bridge {
 		update_post_meta( $product_id, 'has_variations', true );
 
 		do_action('eab-mp-variation-meta', $product_id, $max, $instance_id, $event->is_recurring_child(), $unset_first);
-
+        
         /*
 		// Let's get the variations going
 		// Actually this will re-create variations for Parent Product for each recurrent Event created.
@@ -361,7 +361,7 @@ class Eab_MP_Bridge {
 		}
 		*/
 	}
-
+	
 	public function save_recurring_child_event_product_variations( $old_post_ids, $new_post_ids ) {
 
 		if ( ! empty( $new_post_ids ) && class_exists( 'MP_Installer' ) ) {
@@ -406,7 +406,7 @@ class Eab_MP_Bridge {
 
 					self::create_product_variation( $atts );
 
-				}
+				}				
 
 			}
 
@@ -433,7 +433,7 @@ class Eab_MP_Bridge {
 			'post_status'  => 'publish',
 			'post_type'    => MP_Product::get_variations_post_type(),
 			'post_parent'  => $product_id,
-		);
+		);  
 		$variation_id = wp_insert_post( $variation_args );
 
 		// Add meta to new Variation
@@ -487,7 +487,7 @@ class Eab_MP_Bridge {
 		if ( ! term_exists( $slug, $variation_tax ) ) {
 			$tid = wp_insert_term( $variation_term, $variation_tax, array(
 				'slug' => $slug,
-			) );
+			) );			
 		}
 		else {
 			$tid = get_term_by( 'slug', $slug, $variation_tax, ARRAY_A );
@@ -521,22 +521,22 @@ class Eab_MP_Bridge {
 	 */
 	function add_event_product_to_cart($event_id, $user_id) {
 
-		if (
-			! $this->_is_mp_present() ||
+		if ( 
+			! $this->_is_mp_present() || 
 			! apply_filters( 'incsub_event_add_event_product_to_cart', true, $event_id, $user_id ) )
 		{
 			return;
 		}
-
+		
 		$event = new Eab_EventModel(get_post($event_id));
-		$recurring = $event->is_recurring_child();
+		$recurring = $event->is_recurring_child();		
 
-		/*
+		/* 
 		* Now recurring event have the same post meta as regular events, eab_product_id, where they store the Variation Product id for tha event date
 		*/
 		/*
 		$product_id = false;
-
+		
 		if ($recurring) {
 			$parent_product_id = get_post_meta($recurring, 'eab_product_id', true);
 			$query = new WP_Query(array(
@@ -554,7 +554,7 @@ class Eab_MP_Bridge {
 			$product_id = get_post_meta($event_id, 'eab_product_id', true);
 		}
 		*/
-
+		
 		$product_id = get_post_meta($event_id, 'eab_product_id', true);
 
 		if ( ! $product_id && $recurring ) {
@@ -589,7 +589,7 @@ class Eab_MP_Bridge {
 		}
 
 	}
-
+        
     function process_event_payment_forms ($form, $event_id) {
 		$product_id = get_post_meta($event_id, 'eab_product_id', true);
 		if( !isset( $product_id ) || empty( $product_id ) ) return $form;
@@ -614,7 +614,7 @@ class Eab_MP_Bridge {
 			? $order->get_cart()->get_items()
 			: (isset($order->mp_cart_info) ? $order->mp_cart_info : array())
 		;
-
+                
 		if (is_array($cart_info) && count($cart_info)) foreach($cart_info as $cart_id => $count) {
 			$event_id = $product_id = false;
 
@@ -706,7 +706,7 @@ class Eab_MP_Bridge {
 	 * Quickly scans product for default (first-available) price.
 	 */
 	private function _get_quick_product_price ($product_id) {
-
+            
             $product = new MP_Product( $product_id );
             if( $product->has_variations() ) {
                 $variation_price = $product->get_price();
@@ -733,8 +733,8 @@ class Eab_MP_Bridge {
 	private function _establish_relation ($event_id, $product_id) {
 		if (!$event_id) return false;
 		$old_product_id = get_post_meta($event_id, 'eab_product_id', true);
-		$price = $product_id
-			? $this->_get_quick_product_price($product_id)
+		$price = $product_id 
+			? $this->_get_quick_product_price($product_id) 
 			: false
 		;
 
@@ -756,7 +756,7 @@ class Eab_MP_Bridge {
 			update_post_meta($old_product_id, 'eab_event_id', false);
 		}
 	}
-
+        
         public function eab_mp_variation_check( $content, $event_id ) {
             $event = new Eab_EventModel( get_post( $event_id ) );
             $product_id = get_post_meta( $event_id, 'eab_product_id', true );
@@ -764,7 +764,7 @@ class Eab_MP_Bridge {
                 $product = new MP_Product( $product_id );
                 if( $product->has_variations() ) {
                     $variations = $product->get_variations();
-
+                    
                     $html = '<select name="action_variation" style="width: 100%; margin-bottom: 10px;">';
                     foreach( $variations as $variation ){
                         $price = $variation->get_price();
@@ -776,7 +776,7 @@ class Eab_MP_Bridge {
             }
             return $content;
         }
-
+		
 		public function remove_event_rsvp( $item_id, $site_id )
 		{
 			$event_id = $this->order_to_event_id( $item_id );
@@ -785,7 +785,7 @@ class Eab_MP_Bridge {
 			do_action( 'incsub_event_booking_no', $event_id, get_current_user_id() );
 			$eab->recount_bookings( $event_id );
 		}
-
+		
 	// Sets the order status to `order_received`
 	public function cancel_event_order( $event = null, $user_id = null ) {
 
@@ -803,7 +803,7 @@ class Eab_MP_Bridge {
 		}
 
 		$order_id = (int) $booking_meta['order_id'];
-
+		
 		$result           = wp_update_post( array(
 			'ID'          => $order_id,
 			'post_status' => 'order_received',

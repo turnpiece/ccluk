@@ -10,29 +10,29 @@ Author: WPMU DEV
 
 /*
 Detail: This add-on will automatically publish an activity update whenever a predefined action happens in Events+, according to your settings.
-*/
+*/ 
 
 class Eab_BuddyPress_AutoUpdateActivity {
-
+	
 	private $_data;
-
+	
 	private function __construct () {
 		$this->_data = Eab_Options::get_instance();
 	}
-
+	
 	public static function serve () {
 		$me = new Eab_BuddyPress_AutoUpdateActivity;
 		$me->_add_hooks();
 	}
-
+	
 	private function _add_hooks () {
 		add_action('admin_notices', array($this, 'show_nags'));
 		add_action('eab-settings-after_plugin_settings', array($this, 'show_settings'));
 		add_filter('eab-settings-before_save', array($this, 'save_settings'));
-
+		
 		add_action('eab-event_meta-after_save_meta', array($this, 'dispatch_creation_activity_update'));
 		add_action('eab-events-fpe-save_meta', array($this, 'dispatch_creation_activity_update'));
-
+		
 		add_action('incsub_event_booking_yes', array($this, 'dispatch_positive_rsvp_activity_update'), 10, 2);
 		add_action('incsub_event_booking_maybe', array($this, 'dispatch_maybe_rsvp_activity_update'), 10, 2);
 		add_action('incsub_event_booking_no', array($this, 'dispatch_negative_rsvp_activity_update'), 10, 2);
@@ -40,19 +40,19 @@ class Eab_BuddyPress_AutoUpdateActivity {
 
 	function dispatch_creation_activity_update ($post_id) {
 		if (!function_exists('bp_activity_get')) return false; // WTF
-
+		
 		$created = $this->_data->get_option('bp-activity_autoupdate-event_created');
 		if (!$created) return false;
 
 		$event = new Eab_EventModel(get_post($post_id));
 		if (!$event->is_published()) return false;
-
+		
 		$user_link = bp_core_get_userlink($event->get_author());
 		$update = false;
 
 		$group_id =  $this->_is_group_event($event->get_id());
 		$public_announcement = $this->_is_public_announcement($event->get_id());
-
+		
 		if ('any' == $created) {
 			$update = sprintf(__('%s created an event', Eab_EventsHub::TEXT_DOMAIN), $user_link);
 		} else if ('group' == $created && $group_id) {
@@ -100,7 +100,7 @@ class Eab_BuddyPress_AutoUpdateActivity {
 				$old = reset($existing['activities']);
 				if (is_object($old) && isset($old->id)) $group_activity['id'] = $old->id;
 			}
-
+			
 			// Add group activity update
 			groups_record_activity($group_activity);
 		}
@@ -148,7 +148,7 @@ class Eab_BuddyPress_AutoUpdateActivity {
 			'type' => 'event_rsvp',
 			'item_id' => $event->get_id(),
 		);
-
+		
 		if ($this->_data->get_option('bp-activity_autoupdate-user_rsvp_group_post') && $group_id) {
 			global $bp;
 			$group_activity = $raw_activity;
@@ -166,7 +166,7 @@ class Eab_BuddyPress_AutoUpdateActivity {
 				$old = reset($existing['activities']);
 				if (is_object($old) && isset($old->id)) $group_activity['id'] = $old->id;
 			}
-
+			
 			// Add group activity update
 			groups_record_activity($group_activity);
 		} else {
@@ -182,12 +182,12 @@ class Eab_BuddyPress_AutoUpdateActivity {
 				$old = reset($existing['activities']);
 				if (is_object($old) && isset($old->id)) $activity['id'] = $old->id;
 			}
-
+			
 			// Add site/user activity update
 			bp_activity_add($activity);
 		}
 	}
-
+	
 	function show_nags () {
 		$msg = false;
 		if (!defined('BP_VERSION')) {
@@ -209,14 +209,14 @@ class Eab_BuddyPress_AutoUpdateActivity {
 		$group_event_created = class_exists('Eab_BuddyPress_GroupEvents') && 'group' == $_created ? 'checked="checked"' : false;
 		$pa_event_created = class_exists('Eab_Events_Pae') && 'pa' == $_created ? 'checked="checked"' : false;
 		$skip_created = !$_created ? 'checked="checked"' : false;
-
+		
 		$created_group_post = class_exists('Eab_BuddyPress_GroupEvents') && $this->_data->get_option('bp-activity_autoupdate-created_group_post') ? 'checked="checked"' : false;
-
+		
 		$user_rsvp_yes = $this->_data->get_option('bp-activity_autoupdate-user_rsvp_yes') ? 'checked="checked"' : false;
 		$user_rsvp_maybe = $this->_data->get_option('bp-activity_autoupdate-user_rsvp_maybe') ? 'checked="checked"' : false;
 		$user_rsvp_no = $this->_data->get_option('bp-activity_autoupdate-user_rsvp_no') ? 'checked="checked"' : false;
 
-
+		
 		$user_rsvp_group_only = class_exists('Eab_BuddyPress_GroupEvents') && $this->_data->get_option('bp-activity_autoupdate-user_rsvp_group_only') ? 'checked="checked"' : false;
 		$user_rsvp_group_post = class_exists('Eab_BuddyPress_GroupEvents') && $this->_data->get_option('bp-activity_autoupdate-user_rsvp_group_post') ? 'checked="checked"' : false;
 ?>
@@ -224,31 +224,31 @@ class Eab_BuddyPress_AutoUpdateActivity {
 	<h3 class="eab-hndle"><?php _e('Activity auto-update settings', Eab_EventsHub::TEXT_DOMAIN); ?></h3>
 	<div class="eab-inside">
 		<div class="eab-settings-settings_item" style="line-height:1.8em">
-			<label><?php _e('Automatically update Activity feed when an Event is created:', Eab_EventsHub::TEXT_DOMAIN); ?></label>
+			<label><?php _e('Automatically update Activity feed when an Event is created:', Eab_EventsHub::TEXT_DOMAIN); ?></label>	
 			<span><?php echo $tips->add_tip(__('An activity update posted each time an Event is created.', Eab_EventsHub::TEXT_DOMAIN)); ?></span>
-			<br />
+			<br />	
 			<input type="radio" id="eab_event-bp-activity_autoupdate-event_created" name="eab-bp-activity_autoupdate[event_created]" value="any" <?php print $event_created; ?> />
 			<label for="eab_event-bp-activity_autoupdate-event_created"><?php _e('Any event', Eab_EventsHub::TEXT_DOMAIN); ?></label>
 		<?php if (class_exists('Eab_BuddyPress_GroupEvents')) { ?>
-			<br />
+			<br />	
 			<input type="radio" id="eab_event-bp-activity_autoupdate-group_event_created" name="eab-bp-activity_autoupdate[event_created]" value="group" <?php print $group_event_created; ?> />
 			<label for="eab_event-bp-activity_autoupdate-group_event_created"><?php _e('Group event', Eab_EventsHub::TEXT_DOMAIN); ?></label>
 		<?php } ?>
 		<?php if (class_exists('Eab_Events_Pae')) { ?>
-			<br />
+			<br />	
 			<input type="radio" id="eab_event-bp-activity_autoupdate-pa_event_created" name="eab-bp-activity_autoupdate[event_created]" value="pa" <?php print $pa_event_created; ?> />
 			<label for="eab_event-bp-activity_autoupdate-pa_event_created"><?php _e('Public announcement event', Eab_EventsHub::TEXT_DOMAIN); ?></label>
 		<?php } ?>
 			<br />
 			<input type="radio" id="eab_event-bp-activity_autoupdate-skip_created" name="eab-bp-activity_autoupdate[event_created]" value="any" <?php print $skip_created; ?> />
 			<label for="eab_event-bp-activity_autoupdate-skip_created"><?php _e('Do not update activity', Eab_EventsHub::TEXT_DOMAIN); ?></label>
-			<br />
-			<br />
+			<br />	
+			<br />	
 			<input type="checkbox" id="eab_event-bp-activity_autoupdate-created_group_post" name="eab-bp-activity_autoupdate[created_group_post]" value="1" <?php print $created_group_post; ?> />
 			<label for="eab_event-bp-activity_autoupdate-created_group_post"><?php _e('Always update corresponding group feeds on group event creation', Eab_EventsHub::TEXT_DOMAIN); ?></label>
 		</div>
 		<div class="eab-settings-settings_item" style="line-height:1.8em">
-			<label><?php _e('Automatically update Activity feed when user:', Eab_EventsHub::TEXT_DOMAIN); ?></label>
+			<label><?php _e('Automatically update Activity feed when user:', Eab_EventsHub::TEXT_DOMAIN); ?></label>				
 			<span><?php echo $tips->add_tip(__('An activity update posted each time an user RSVPs.', Eab_EventsHub::TEXT_DOMAIN)); ?></span>
 			<br />
 			<input type="checkbox" id="eab_event-bp-activity_autoupdate-user_rsvp_yes" name="eab-bp-activity_autoupdate[user_rsvp_yes]" value="1" <?php print $user_rsvp_yes; ?> />
@@ -291,7 +291,7 @@ class Eab_BuddyPress_AutoUpdateActivity {
 		if (!class_exists('Eab_Events_Pae')) return false;
 		return (int)get_post_meta($post_id, 'eab_public_announcement', true);
 	}
-
+	
 }
 
 Eab_BuddyPress_AutoUpdateActivity::serve();

@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Next Event Shortcode
-Description: Generates a formattable shortcode displaying time of the next upcoming event that has not started yet
+Description: Generates a formattable shortcode displaying time of the next upcoming event that has not started yet 
 Plugin URI: http://premium.wpmudev.org/project/events-and-booking
 Version: 0.27
 Author: WPMU DEV
@@ -31,23 +31,23 @@ class Eab_Events_NextEventShortcode {
 
 	/**
 	 * Constructor
-	 */
+	 */	
 	private function __construct () {
 	}
 
 	/**
 	 * Run the Addon
 	 *
-	 */
+	 */	
 	public static function serve () {
 		$me = new Eab_Events_NextEventShortcode;
 		$me->_add_hooks();
 	}
 
 	/**
-	 * Hooks
+	 * Hooks 
 	 *
-	 */
+	 */	
 	private function _add_hooks () {
 		add_shortcode( 'next_event', array($this, 'shortcode') );
 	}
@@ -105,7 +105,7 @@ class Eab_Events_NextEventShortcode {
 	/**
 	 * Generate shortcode
 	 *
-	 */
+	 */	
 	private function _legacy_shortcode( $atts ) {
 
 		extract( shortcode_atts( array(
@@ -114,17 +114,17 @@ class Eab_Events_NextEventShortcode {
 		'add'	=> 0,
 		'expired'	=> __('Closed', Eab_EventsHub::TEXT_DOMAIN)
 		), $atts ) );
-
+		
 		if ( $class )
 			$class = " class='".$class."'";
-
+		
 		global $wpdb;
-
+		
 		$result = $wpdb->get_row(
 			"SELECT estart.*
 			FROM $wpdb->posts wposts, $wpdb->postmeta estart, $wpdb->postmeta eend, $wpdb->postmeta estatus
-			WHERE
-			wposts.ID=estart.post_id AND wposts.ID=eend.post_id AND wposts.ID=estatus.post_id
+			WHERE 
+			wposts.ID=estart.post_id AND wposts.ID=eend.post_id AND wposts.ID=estatus.post_id 
 			AND estart.meta_key='incsub_event_start' AND estart.meta_value > DATE_ADD(UTC_TIMESTAMP(),INTERVAL ". ( current_time('timestamp') - time() ). " SECOND)
 			AND eend.meta_key='incsub_event_end' AND eend.meta_value > estart.meta_value
 			AND estatus.meta_key='incsub_event_status' AND estatus.meta_value <> 'closed'
@@ -132,16 +132,16 @@ class Eab_Events_NextEventShortcode {
 			ORDER BY estart.meta_value ASC
 			LIMIT 1
 			");
-
+		
 		$secs = 0;
 		if ( $add )
 			$secs = 60 * (int)$add;
-
+		
 		if ( $result != null )
 			$out = '<div'.$class.'>'. date( $format, strtotime( $result->meta_value, current_time('timestamp') ) + $secs ) . "</div>";
 		else
 			$out = '<div'.$class.'>'. $expired . "</div>";
-
+			
 		return $out;
 	}
 }

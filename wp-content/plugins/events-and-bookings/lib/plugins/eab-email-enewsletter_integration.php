@@ -9,20 +9,20 @@ Author: WPMU DEV
 */
 
 class Eab_Email_eNewsletterIntegration {
-
+	
 	private $_model;
-
+	
 	private function __construct () {}
-
+	
 	public static function serve () {
 		$me = new Eab_Email_eNewsletterIntegration;
 		$me->_add_hooks();
 	}
-
+	
 	private function _add_hooks () {
 		add_action('init', array($this, 'populate_newsletter_object'));
 		add_action('admin_notices', array($this, 'show_nags'));
-
+		
 		add_filter('eab-event_meta-meta_box_registration', array($this, 'add_meta_box'));
 		add_action('eab-event_meta-after_save_meta', array($this, 'save_meta'));
 
@@ -41,11 +41,11 @@ class Eab_Email_eNewsletterIntegration {
 	function process_booking_no ($event_id, $user_id) {
 		$this->_model->update_rsvp_group($event_id, $user_id, Eab_EventModel::BOOKING_NO);
 	}
-
+	
 	function populate_newsletter_object () {
 		$this->_model = new Eab_Emi_Model;
 	}
-
+	
 	function show_nags () {
 		if (!$this->_model->has_newsletter()) {
 			echo '<div class="error"><p>' .
@@ -53,17 +53,17 @@ class Eab_Email_eNewsletterIntegration {
 			'</p></div>';
 		}
 	}
-
+	
 	function add_meta_box () {
 		if (!$this->_model->has_newsletter()) return false;
-		add_meta_box('eab-email-newsletter', __('e-Newsletter', Eab_EventsHub::TEXT_DOMAIN), array($this, 'create_meta_box'), 'incsub_event', 'side', 'low');
+		add_meta_box('eab-email-newsletter', __('e-Newsletter', Eab_EventsHub::TEXT_DOMAIN), array($this, 'create_meta_box'), 'incsub_event', 'side', 'low');	
 	}
-
+	
 	function create_meta_box () {
 		$newsletters = $this->_model->get_newsletters();
 		$expanded = $this->_model->get_expanded_newsletter_ids();
 		if (!is_array($expanded)) $expanded = array();
-
+		
 		$ret = '';
 		$ret .= __('When I save my event, send this newsletter:', Eab_EventsHub::TEXT_DOMAIN);
 		$ret .= ' <select name="eab_event-email-enewsletter" id="eab_event-email-enewsletter">';
@@ -97,10 +97,10 @@ class Eab_Email_eNewsletterIntegration {
 		$ret .= 	__('Negative (&quot;No&quot;)', Eab_EventsHub::TEXT_DOMAIN);
 		$ret .= '</label>';
 		$ret .= '<br />';
-
+		
 		echo $ret;
 	}
-
+	
 	function save_meta ($event_id) {
 		$newsletter_id = !empty($_POST['eab_event-email-enewsletter']) && is_numeric($_POST['eab_event-email-enewsletter'])
 			? (int)$_POST['eab_event-email-enewsletter']
@@ -122,14 +122,14 @@ class Eab_Email_eNewsletterIntegration {
 		}
 
 		if (!$newsletter_id) return false;
-
+		
 		wp_redirect(
 			admin_url('admin.php?page=newsletters&newsletter_action=send_newsletter&newsletter_id=' . $newsletter_id)
 		);
 		die;
 	}
 
-
+	
 }
 
 
@@ -164,7 +164,7 @@ class Eab_Emi_Model {
 	}
 
 	/**
-	 * Enewsletter plugin has some issues where the plugin does not create tables.
+	 * Enewsletter plugin has some issues where the plugin does not create tables. 
 	 * So we need to check
 	 */
 	public function newsletter_tables_exist() {
@@ -202,9 +202,9 @@ class Eab_Emi_Model {
 		$event 		= new Eab_EventModel( get_post( $event_id ) );
 		$parent 	= $event->is_recurring_child();
 		$group_pack = get_post_meta( $event_id, self::GROUP_POST_META_KEY, true );
-		if ( empty( $group_pack ) && !empty( $parent ) )
+		if ( empty( $group_pack ) && !empty( $parent ) ) 
 			return $this->update_rsvp_group( $parent, $user_id, $rsvp );
-		if ( empty( $group_pack ) )
+		if ( empty( $group_pack ) ) 
 			return false;
 
 		$group_ids = array();
@@ -243,7 +243,7 @@ class Eab_Emi_Model {
 			}
 		}
 
-
+		
 		return true;
 	}
 
@@ -261,7 +261,7 @@ class Eab_Emi_Model {
 		$all_event_ids = array_filter(array_map('intval', $all_event_ids));
 
 		$rsvps = $this->_db->get_col(
-			"SELECT DISTINCT user_id FROM " .
+			"SELECT DISTINCT user_id FROM " . 
 				Eab_EventsHub::tablename(Eab_EventsHub::BOOKING_TABLE) .
 			" WHERE event_id IN(" . join(',', $all_event_ids) . ") AND status IN ('" . join("','", $bookings) . "')"
 		);
@@ -285,7 +285,7 @@ class Eab_Emi_Model {
 		$event_id = $event->get_id();
 		$group_key = self::GROUP_POST_META_KEY;
 		$prefix = $this->_get_table_prefix();
-
+		
 		$packed_group_ids = get_post_meta($event_id, $group_key, true);
 		$packed_group_ids = is_array($packed_group_ids) ? $packed_group_ids : array();
 		$group_id = false;
@@ -338,7 +338,7 @@ class Eab_Emi_Model {
 		if (empty($newsletter_id) || empty($event_id)) return false;
 
 		$event = new Eab_EventModel(get_post($event_id));
-
+		
 		$data = $this->_newsletter->get_newsletter_data($newsletter_id);
 		if (empty($data)) return false;
 
@@ -421,7 +421,7 @@ class Eab_Emi_Model {
 				SELECT %d, template, subject, from_name, from_email, content, contact_info, bounce_email
 				FROM {$prefix}enewsletter_newsletters
 				WHERE newsletter_id = %d",
-			time(),
+			time(), 
 			$newsletter_id
 		));
 
@@ -453,7 +453,7 @@ class Eab_Emi_Model {
 
 	private function _get_default_content ($event) {
 		$network = $event->from_network();
-		$link = $network
+		$link = $network 
 			? get_blog_permalink($network, $event->get_id())
 			: get_permalink($event->get_id())
 		;
@@ -469,5 +469,5 @@ class Eab_Emi_Model {
 		return apply_filters('eab-email-newsletter-default_subject', $subject, $event);
 	}
 }
-
+	
 Eab_Email_eNewsletterIntegration:: serve();

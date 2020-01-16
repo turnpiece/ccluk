@@ -50,7 +50,7 @@ class Eab_Events_RsvpEmail {
 		$from = $from ? $from : get_option('admin_email');
 		$subject = $this->_data->get_option('eab_rsvps-email-subject');
 		$body = $this->_data->get_option('eab_rsvps-email-body');
-
+		
 		$from_name = $this->_data->get_option('eab_rsvps-email-from-name');
 		$from_name = ! empty( $from_name ) ? $from_name : get_bloginfo( 'name' );
 
@@ -63,7 +63,7 @@ class Eab_Events_RsvpEmail {
 		$codec = new Eab_Events_RsvpEmail_Codec($event_id, $user_id);
 		add_filter('wp_mail_content_type', array($this, 'email_charset'));
 		wp_mail(
-			$user->user_email,
+			$user->user_email, 
 			$codec->expand($subject, Eab_Macro_Codec::FILTER_TITLE),
 			$codec->expand($body, Eab_Macro_Codec::FILTER_BODY),
 			$headers
@@ -97,14 +97,14 @@ class Eab_Events_RsvpEmail {
 	function show_settings () {
 		$tips = new WpmuDev_HelpTooltips();
 		$tips->set_icon_url(EAB_PLUGIN_URL . 'img/information.png' );
-
+		
 		$from = $this->_data->get_option('eab_rsvps-email-from');
 		$from = $from ? $from : get_option('admin_email');
 		$from_name = $this->_data->get_option('eab_rsvps-email-from-name');
 		$from_name = ! empty( $from_name ) ? $from_name : get_bloginfo( 'name' );
 		$subject = $this->_data->get_option('eab_rsvps-email-subject');
 		$body = $this->_data->get_option('eab_rsvps-email-body');
-
+		
 		$codec = new Eab_Events_RsvpEmail_Codec;
 		$macros = join('</code>, <code>', $codec->get_macros());
 
@@ -158,7 +158,7 @@ $(function () {
 		$events = $("#eab_event-eab_rsvps-events")
 	;
 	$("#eab_event-eab_rsvps-preview").on("click", function () {
-		var body_string = (tinyMCE && tinyMCE.activeEditor
+		var body_string = (tinyMCE && tinyMCE.activeEditor 
 			? tinyMCE.activeEditor.getContent()
 			: $("#eab_rsvps-email-body").val()
 		);

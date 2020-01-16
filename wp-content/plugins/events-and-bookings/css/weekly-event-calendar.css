@@ -38,7 +38,7 @@ a.wpmudevevents-calendar-event {
 	border: 1px solid #558B04;
 	border-radius: 5px;
 }
-a.wpmudevevents-calendar-event:hover {
+a.wpmudevevents-calendar-event:hover {	
 	background: #659B14;
 	text-decoration: none;
 }
@@ -71,6 +71,3 @@ font-weight:bold;font-size:larger;float:left;width:200px;
 .wpmudevevents-calendar-bio, .wpmudevevents-calendar-content{
 float:left;width:200px;
 }
-
-
-/* 87274-1550006837-au */

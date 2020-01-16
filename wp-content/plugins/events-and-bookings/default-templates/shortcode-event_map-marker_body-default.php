@@ -1,5 +1,5 @@
-<?php
-$class_pfx = !empty($args['class']) ? $args['class'] : 'eab-events_map';
+<?php 
+$class_pfx = !empty($args['class']) ? $args['class'] : 'eab-events_map'; 
 $content = '';
 if ($args['show_date']) $content .= eab_call_template('get_event_dates', $events);
 if ($args['show_excerpt']) $content .= '<div class="eab-event-excerpt">' . $events->get_excerpt_or_fallback($args['excerpt_length']) . '</div>';

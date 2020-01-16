@@ -30,10 +30,10 @@ get_header( 'event' );
 				}
 				echo $renderer->get_month_calendar($time);
             ?>
-
+			
 				<div class="event-pagination">
-					<?php
-						$prev = $time - (28*86400);
+					<?php 
+						$prev = $time - (28*86400); 
 						$next = $time + (32*86400);
 					?>
 					<a href="<?php echo Eab_Template::get_archive_url($prev, true); ?>">Prev</a>

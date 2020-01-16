@@ -45,10 +45,10 @@ class Eab_Rsvps_RsvpAutoReset {
 		//$rsvps = Eab_EventModel::get_bookings(Eab_EventModel::BOOKING_YES, $since);
 		$rsvps = Eab_EventModel::get_bookings(Eab_EventModel::BOOKING_YES); // Just reset all the expired bookings.
 		$now = eab_current_time();
-
+		
 		$cutoff_limit = $this->_data->get_option('rsvp_auto_reset-cutoff');
 		$cutoff_limit = $cutoff_limit ? $cutoff_limit : 3600;
-
+		
 		$callback = (int)$this->_data->get_option('rsvp_auto_reset-remove_attendance')
 			? 'delete_attendance'
 			: 'cancel_attendance'
@@ -58,7 +58,7 @@ class Eab_Rsvps_RsvpAutoReset {
 			// Check time difference
 			$time_diff = $now - strtotime($rsvp->timestamp);
 			if ($time_diff < $cutoff_limit) continue; // This one still has time to pay
-
+			
 			// Check event premium status
 			if (empty($events[$rsvp->event_id])) $events[$rsvp->event_id] = new Eab_EventModel(get_post($rsvp->event_id));
 			if (!$events[$rsvp->event_id]->is_premium()) continue; // Not a paid event, carry on

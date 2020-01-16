@@ -3,15 +3,15 @@ global $blog_id, $wp_query, $booking, $post, $current_user;
 $event = new Eab_EventModel($post);
 get_header();
 ?>
-
-
+       
+        
 <?php
 	the_post();
 	$start_day = date_i18n('m', strtotime(get_post_meta($post->ID, 'incsub_event_start', true)));
 ?>
 	<div id="primary">
 		<div id="content" role="main">
-
+			
 <div class="event <?php echo Eab_Template::get_status_class($post); ?>" id="wpmudevevents-wrapper">
 	<div id="wpmudevents-single">
 		<div class="wpmudevevents-header">
@@ -21,10 +21,10 @@ get_header();
 			</div>
 		</div>
 		<?php echo Eab_Template::get_error_notice(); ?>
-		<div id="wpmudevevents-left">
+		<div id="wpmudevevents-left">	
 			<div id="wpmudevevents-tickets" class="wpmudevevents-box">
 				<?php
-                    	if ($event->is_premium() && $event->user_is_coming() && !$event->user_paid()) {
+                    	if ($event->is_premium() && $event->user_is_coming() && !$event->user_paid()) { 
                     ?>
 					<div id="wpmudevevents-payment">
 						<a href="" id="wpmudevevents-notpaid-submit">You haven't paid for this event</a>
@@ -37,7 +37,7 @@ get_header();
 					<h3>About this event :</h3>
 				</div>
 					<div class="wpmudevevents-boxinner">
-					<?php
+					<?php 
 						add_filter('agm_google_maps-options', 'eab_autoshow_map_off', 99);
 						the_content();
 						remove_filter('agm_google_maps-options', 'eab_autoshow_map_off');
@@ -78,6 +78,6 @@ get_header();
 
 		</div>
 	</div>
-
-
+        
+        
 <?php get_footer('event'); ?>

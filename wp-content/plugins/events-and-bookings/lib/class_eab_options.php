@@ -1,9 +1,9 @@
 <?php
 
 class Eab_Options {
-
+	
 	const OPTIONS_KEY = 'incsub_event_default';
-
+	
 	private static $_instance;
 	private $_data = array();
 
@@ -11,12 +11,12 @@ class Eab_Options {
 	public function __construct () {
 		$this->_populate();
 	}
-
+	
 	public static function get_instance () {
 		if (!isset(self::$_instance)) self::$_instance = new Eab_Options;
 		return self::$_instance;
 	}
-
+	
 	/**
 	 * @return array
 	 */
@@ -38,7 +38,7 @@ class Eab_Options {
 			'single_template' => ''
 		);
 	}
-
+	
 	/**
 	 * @param string $name Option name
 	 * @param mixed $default Optional default return value
@@ -47,11 +47,11 @@ class Eab_Options {
 	public function get_option ($name, $default=false) {
 		return isset($this->_data[$name]) ? $this->_data[$name] : $default;
 	}
-
+	
 	public function set_option ($name, $value) {
 		$this->_data[$name] = $value;
 	}
-
+	
 	/**
 	 * Sets and stores options.
 	 * @param array $values A hash of values to be stored.
@@ -67,7 +67,7 @@ class Eab_Options {
 	public function update () {
 		return update_option(self::OPTIONS_KEY, $this->_data);
 	}
-
+	
 	private function _populate () {
 		$this->_data = get_option(self::OPTIONS_KEY, $this->get_default_options() );
 	}

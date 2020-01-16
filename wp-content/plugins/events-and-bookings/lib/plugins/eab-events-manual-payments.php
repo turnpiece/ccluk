@@ -19,7 +19,7 @@ class Eab_Events_ManualPayments {
 
 	/**
 	 * Constructor
-	 */
+	 */	
 	private function __construct () {
 		$this->_data = Eab_Options::get_instance();
 	}
@@ -27,7 +27,7 @@ class Eab_Events_ManualPayments {
 	/**
 	 * Run the Addon
 	 *
-	 */
+	 */	
 	public static function serve () {
 		$me = new Eab_Events_ManualPayments;
 		$me->_add_hooks();
@@ -36,7 +36,7 @@ class Eab_Events_ManualPayments {
 	/**
 	 * Hooks to the main plugin Events+
 	 *
-	 */
+	 */	
 	private function _add_hooks () {
 		add_action('eab-settings-after_payment_settings', array($this, 'show_settings'));
 		add_action('admin_notices', array($this, 'show_nags'));
@@ -52,7 +52,7 @@ class Eab_Events_ManualPayments {
 
 	/**
 	 * Ajax call when user clicks payment button
-	 */
+	 */	
 	function do_payment() {
 		check_ajax_referer( 'manual-payment-nonce', 'nonce' );
 		$user_id = $_POST["user_id"];
@@ -68,7 +68,7 @@ class Eab_Events_ManualPayments {
 					die();
 			}
 		}
-
+                
 		array_push( $payments, array( "id"=>$user_id, "stat"=>"pending"));
 		//$payments = array_filter( array_unique( $payments ) ); // Clear empty records, just in case
                 $payments = array_map( "unserialize", array_unique( array_map( "serialize", $payments ) ) );
@@ -78,7 +78,7 @@ class Eab_Events_ManualPayments {
 
 	/**
 	 * Adds the button to the front end that reveals instructions box
-	 */
+	 */	
 	function add_select_button( $content, $event_id ) {
 		if ($this->_data->get_option('paypal_email')) $content .= '<br /><br />';
 		$content .= '<a class="wpmudevevents-yes-submit" style="float:none !important" href="javascript:void(0)" id="manual_payment_select_'.$event_id.'">'. $this->_data->get_option('manual_payment_select') . '</a>';
@@ -89,13 +89,13 @@ class Eab_Events_ManualPayments {
 						});
 					});';
 		$content .= '</script>';
-
+		
 		return $content;
 	}
 
 	/**
 	 * Adds instructions box to the front end
-	 */
+	 */	
 	function add_instructions( $content, $event_id ) {
 		global $current_user;
 		$content .= '<div class="message" id="manual_payment_instructions_'.$event_id.'" style="display:none">';
@@ -134,24 +134,24 @@ class Eab_Events_ManualPayments {
 			'</p></div>';
 		}
 	}
-
+	 
 	/**
 	 * Add Addon settings to the other admin options to be saved
-	 */
+	 */	
 	function save_settings( $options ) {
 		$options['manual_payment_select']		= stripslashes($_POST['event_default']['manual_payment_select']);
 		$options['manual_payment_pay']			= stripslashes($_POST['event_default']['manual_payment_pay']);
 		$options['manual_payment_instructions']	= stripslashes($_POST['event_default']['manual_payment_instructions']);
-
+		
 		return $options;
 	}
-
+	
 	/**
 	 * Admin settings
 	 *
-	 */
+	 */	
 	function show_settings() {
-		if ( !class_exists( 'WpmuDev_HelpTooltips' ) )
+		if ( !class_exists( 'WpmuDev_HelpTooltips' ) ) 
 			require_once dirname(__FILE__) . '/lib/class_wd_help_tooltips.php';
 		$tips = new WpmuDev_HelpTooltips();
 		$tips->set_icon_url( EAB_PLUGIN_URL . 'img/information.png' );
@@ -164,19 +164,19 @@ class Eab_Events_ManualPayments {
 						<input type="text" size="40" name="event_default[manual_payment_select]" value="<?php print $this->_data->get_option('manual_payment_select'); ?>" />
 						<span><?php echo $tips->add_tip(__('This is the text that will appear on Select Manual Payment button.', Eab_EventsHub::TEXT_DOMAIN)); ?></span>
 					</div>
-
+					    
 					<div class="eab-settings-settings_item">
 					    <label for="incsub_event-manual_payment_pay" ><?php _e('Pay button text', Eab_EventsHub::TEXT_DOMAIN); ?></label>
 						<input type="text" size="40" name="event_default[manual_payment_pay]" value="<?php print $this->_data->get_option('manual_payment_pay'); ?>" />
 						<span><?php echo $tips->add_tip( __('This is the text that will appear on Pay button. User needs to click this button after he made the payment.', Eab_EventsHub::TEXT_DOMAIN)); ?></span>
 					</div>
-
+					
 					<div class="eab-settings-settings_item">
 					    <label for="incsub_event-manual_payment_instructions" ><?php _e('Instructions', Eab_EventsHub::TEXT_DOMAIN); ?>&nbsp;:</label>
 						<span><?php echo $tips->add_tip( __('Write the procedure that the user needs to do for a manual payment here. Use MANUALPAYMENTBUTTON to insert the Pay Button to the desired location.', Eab_EventsHub::TEXT_DOMAIN)); ?></span>
 						<?php wp_editor( $this->_data->get_option('manual_payment_instructions'), 'manualpaymentsinstructions', array('textarea_name'=>'event_default[manual_payment_instructions]', 'textarea_rows' => 5) ); ?>
 					</div>
-
+					    
 				</div>
 		    </div>
 		<?php
@@ -186,7 +186,7 @@ class Eab_Events_ManualPayments {
 	 * Check if 'You havent paid for this event' note will be displayed
 	 * If user is approved to be paid, return false, i.e don't show pay note
 	 * Otherwise return whatever sent here
-	 */
+	 */	
 	function will_show_pay_note( $show_pay_note, $event_id ) {
 		global $current_user;
 		$payments = maybe_unserialize( stripslashes( Eab_EventModel::get_booking_meta( $event_id, "manual_payment") ) );
@@ -201,7 +201,7 @@ class Eab_Events_ManualPayments {
 
 	/**
 	 * Modify payment status text if user is manually selected that he paid
-	 */
+	 */		
 	function status( $payment_status, $user_id ) {
 		global $post; // This object should be available as we are on Admin side
 		$payments = maybe_unserialize( stripslashes( Eab_EventModel::get_booking_meta( $post->ID, "manual_payment") ) );
@@ -216,7 +216,7 @@ class Eab_Events_ManualPayments {
 
 	/**
 	 * Approve a payment on the admin side
-	 */
+	 */	
 	function approve_payment() {
 		$user_id = $_POST["user_id"];
 		$event_id = $_POST["event_id"];
@@ -227,7 +227,7 @@ class Eab_Events_ManualPayments {
 			$post  		= get_post( $event_id );
 			$event 		= ( $post instanceof Eab_EventModel ) ? $post : new Eab_EventModel( $post );
 			$booking_id = $event->get_user_booking_id( $user_id );
-			foreach ( $payments as $key=>$payment ) {
+			foreach ( $payments as $key=>$payment ) { 
 				if ( $payment["id"] == $user_id ) {
 					$payments[$key]["stat"] = "paid";
 					//$payments = array_filter( array_unique( $payments ) );
@@ -241,10 +241,10 @@ class Eab_Events_ManualPayments {
 		}
 		die( json_encode( array( "error" => __( "Record could not be found", Eab_EventsHub::TEXT_DOMAIN ) ) ) );
 	}
-
+	
 	/**
 	 * Add manual payment link inside the RSVP box
-	 */
+	 */		
 	function add_approve_payment( $content, $user_id ) {
 		global $post;
 		$payments = maybe_unserialize( stripslashes( Eab_EventModel::get_booking_meta( $post->ID, "manual_payment") ) );

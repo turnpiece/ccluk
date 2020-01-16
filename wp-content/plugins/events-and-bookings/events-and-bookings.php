@@ -6,7 +6,7 @@ Description: Events gives you a flexible WordPress-based system for organizing p
 Author: WPMU DEV
 Text Domain: eab
 WDP ID: 249
-Version: 1.9.9
+Version: 1.9.91
 Author URI: http://premium.wpmudev.org
 */
 
@@ -30,7 +30,7 @@ class Eab_EventsHub {
 	 * @TODO Update version number for new releases
      * @var	string
      */
-    const CURRENT_VERSION 		= '1.9.8';
+    const CURRENT_VERSION 		= '1.9.91';
 
     /**
      * Translation domain
@@ -151,8 +151,8 @@ class Eab_EventsHub {
     public function reverse_m2_modified_event_cpt( $wp_query, $obj ) {
         if( ! isset( $wp_query->query_vars['post_type'] ) ) {
 			return;
-		}
-
+		} 
+		
 		if( is_array( $wp_query->query_vars['post_type'] ) && $wp_query->query_vars['post_type'][0] == Eab_EventModel::POST_TYPE ) {
             $wp_query->query_vars['post_type'] = Eab_EventModel::POST_TYPE;
         }
@@ -170,7 +170,7 @@ class Eab_EventsHub {
 
 	function process_recurrent_trashing ( $post_id ) {
 		$event = new Eab_EventModel( get_post( $post_id ) );
-		if ( !$event->is_recurring() )  {
+		if ( !$event->is_recurring() )  { 
 			return false;
 		}
 		$event->trash_recurring_instances();
@@ -178,7 +178,7 @@ class Eab_EventsHub {
 
 	function process_recurrent_untrashing ( $post_id ) {
 		$event = new Eab_EventModel( get_post( $post_id ) );
-		if ( !$event->is_recurring() )  {
+		if ( !$event->is_recurring() )  { 
 			return false;
 		}
 		$event->untrash_recurring_instances();
@@ -186,18 +186,18 @@ class Eab_EventsHub {
 
 	function process_recurrent_deletion ( $post_id ) {
 		$event = new Eab_EventModel( get_post( $post_id ) );
-		if ( !$event->is_recurring() )  {
+		if ( !$event->is_recurring() )  { 
 			return false;
 		}
 		$event->delete_recurring_instances();
 	}
 
 	function respawn_recurring_instances ( $post ) {
-		if ( empty( $post->post_type ) || Eab_EventModel::POST_TYPE !== $post->post_type )  {
+		if ( empty( $post->post_type ) || Eab_EventModel::POST_TYPE !== $post->post_type )  { 
 			return false;
 		}
 		$event = new Eab_EventModel( $post );
-		if ( !$event->is_recurring() )  {
+		if ( !$event->is_recurring() )  { 
 			return false;
 		}
 
@@ -241,9 +241,9 @@ class Eab_EventsHub {
 		//wp_register_script('eab_jquery_ui', plugins_url('events-and-bookings/js/jquery-ui.custom.min.js'), array('jquery'), self::CURRENT_VERSION);
 
 		wp_register_script( 'eab_event_js', EAB_PLUGIN_URL . 'js/eab-event.js', array('jquery'), self::CURRENT_VERSION );
-
+		
 		wp_register_style( 'eab_jquery_ui', EAB_PLUGIN_URL . 'css/smoothness/jquery-ui-1.8.16.custom.css', null, '1.8.16' );
-
+		
 
 		wp_register_style( 'eab_front', EAB_PLUGIN_URL .'css/front.css' , null, self::CURRENT_VERSION );
 
@@ -256,7 +256,7 @@ class Eab_EventsHub {
 		}
 
 		if ( isset( $_REQUEST['eab_export'] ) ) {
-			if ( !class_exists( 'Eab_ExporterFactory' ) )  {
+			if ( !class_exists( 'Eab_ExporterFactory' ) )  { 
 				require_once EAB_PLUGIN_DIR . 'lib/class_eab_exporter.php';
 			}
 			Eab_ExporterFactory::serve( $_REQUEST );
@@ -361,7 +361,7 @@ class Eab_EventsHub {
 
 	/**
 	 * Check RSVP
-	 *
+	 * 
 	 * @return book
 	 */
 	function check_rsvp_per_event( $event_id, $user_id, $status ) {
@@ -401,7 +401,7 @@ class Eab_EventsHub {
 
     public function update_count_rsvp_meta( $event_id ) {
 		global $wpdb;
-
+		
 		$table_name = self::tablename( self::BOOKING_TABLE );
 
         // Yes
@@ -461,7 +461,7 @@ class Eab_EventsHub {
 		if ( ! is_post_type_archive ( 'incsub_event' ) ) {
 			return $path;
 		}
-
+		    
 
 		$current_filter = explode( '_', current_filter() );
 		$type 			= reset( $current_filter );
@@ -485,15 +485,15 @@ class Eab_EventsHub {
 			$style_path = file_exists( EAB_PLUGIN_DIR . "default-templates/{$eab_type}/events.css" );
 			$style 		= $style_path ? EAB_PLUGIN_URL . "default-templates/{$eab_type}/events.css" : $style;
 		}
-		if ( $style ) {
+		if ( $style ) { 
 			add_action( 'wp_head', create_function('', "wp_enqueue_style('eab-events', '$style');" ) );
 		}
 
 		if ( empty( $path ) || "$type.php" == $file ) {
 			if ( $eab_type && !$is_theme_tpl ) {
 				$path = EAB_PLUGIN_DIR . "default-templates/{$eab_type}/{$type}-incsub_event.php";
-				if ( file_exists( $path ) ) {
-					return $path;
+				if ( file_exists( $path ) ) { 
+					return $path; 
 				}
 				else {
 					// A more specific template was not found, so load the default one
@@ -502,8 +502,8 @@ class Eab_EventsHub {
 						$path = get_stylesheet_directory().'/archive.php';
 				    } else if ( file_exists( get_template_directory() . '/archive.php' ) ) {
 						$path = get_template_directory().'/archive.php';
-					} else {
-						$path = '';
+					} else { 
+						$path = ''; 
 					}
 				}
 			} else if ( $eab_type && $is_theme_tpl ) {
@@ -529,7 +529,7 @@ class Eab_EventsHub {
 
     function archive_content( $content ) {
 		global $post;
-		if ( 'incsub_event' != $post->post_type ) {
+		if ( 'incsub_event' != $post->post_type ) { 
 			return $content;
 		}
 		return Eab_Template::get_archive_content( $post );
@@ -568,14 +568,14 @@ class Eab_EventsHub {
 			$style_path = file_exists(EAB_PLUGIN_DIR . "default-templates/{$eab_type}/events.css" );
 			$style 		= $style_path ? EAB_PLUGIN_URL . "default-templates/{$eab_type}/events.css" : $style;
 		}
-		if ( $style ) {
+		if ( $style ) { 
 			add_action( 'wp_head', create_function('', "wp_enqueue_style('eab-events', '$style');" ) );
 		}
 
 		if ( empty( $path ) || "$type.php" == $file ) {
 			if ($eab_type && !$is_theme_tpl) {
 				$path = EAB_PLUGIN_DIR . "default-templates/{$eab_type}/{$type}-incsub_event.php";
-				if ( file_exists( $path ) ) {
+				if ( file_exists( $path ) ) { 
 					return $path;
 				} else {
 					// A more specific template was not found, so load the default one
@@ -649,7 +649,7 @@ class Eab_EventsHub {
     function wp_enqueue_scripts() {
 		global $wp_query;
 
-		$script = 'var _eab_data=' . json_encode( apply_filters( 'eab-javascript-public_data',
+		$script = 'var _eab_data=' . json_encode( apply_filters( 'eab-javascript-public_data', 
 				array(
 					'ajax_url' => admin_url('admin-ajax.php'),
 					'root_url' => EAB_PLUGIN_URL . 'img/',
@@ -672,8 +672,8 @@ class Eab_EventsHub {
 
     }
 
-    public function enqueue_api_scripts () {
-		return $this->_api->enqueue_api_scripts();
+    public function enqueue_api_scripts () { 
+		return $this->_api->enqueue_api_scripts(); 
 	}
 
     function event_meta_box () {
@@ -1240,7 +1240,7 @@ class Eab_EventsHub {
 		    do_action( 'incsub_event_save_when_meta', $post_id, $meta );
 		}
 
-
+		
 		if ( $is_valid_post_type ) {
 			do_action( 'eab-event_meta-after_save_meta', $post_id );
 		}
@@ -1442,9 +1442,9 @@ class Eab_EventsHub {
 
 
     function cron_schedules( $schedules ) {
-		$schedules['thirtyminutes'] = array(
-			'interval' 	=> 1800,
-			'display' 	=> __( 'Once every half an hour', self::TEXT_DOMAIN )
+		$schedules['thirtyminutes'] = array( 
+			'interval' 	=> 1800, 
+			'display' 	=> __( 'Once every half an hour', self::TEXT_DOMAIN ) 
 		);
 
 		return $schedules;
@@ -1547,9 +1547,9 @@ class Eab_EventsHub {
 }
 
 // Don't do session_start this when saving php files from WP editor
-if (
-	! wp_doing_ajax() &&
-	! isset( $_POST['newcontent'] ) &&
+if ( 
+	! wp_doing_ajax() && 
+	! isset( $_POST['newcontent'] ) && 
 	! ( function_exists( 'get_current_sceen' ) && 'theme-editor' == get_current_sceen()->id )
 ) {
 	$sess_id = session_id();

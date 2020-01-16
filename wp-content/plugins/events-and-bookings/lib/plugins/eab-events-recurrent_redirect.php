@@ -14,7 +14,7 @@ class Eab_Events_RecurrentRootRedirect {
 
 	/**
 	 * Constructor
-	 */
+	 */	
 	private function __construct () {
 		$this->_data = Eab_Options::get_instance();
 	}
@@ -22,7 +22,7 @@ class Eab_Events_RecurrentRootRedirect {
 	/**
 	 * Run the Addon
 	 *
-	 */
+	 */	
 	public static function serve () {
 		$me = new Eab_Events_RecurrentRootRedirect;
 		$me->_add_hooks();
@@ -31,16 +31,16 @@ class Eab_Events_RecurrentRootRedirect {
 	/**
 	 * Hooks to the main plugin Events+
 	 *
-	 */
+	 */	
 	private function _add_hooks () {
 		add_action('template_redirect', array($this, 'redirect'));
 	}
-
+	
 	function redirect() {
 		global $post;
 		if (!is_singular()) return false;
 		if (!$post || !is_object($post) || !isset($post->post_type) || 'incsub_event' != $post->post_type) return false;
-
+		
 		$event = ($post instanceof Eab_EventModel) ? $post : new Eab_EventModel($post);
 		if (!$event->is_recurring()) return false;
 		if ($event->is_recurring_child()) return false; // Already an instance - no need to keep going.
@@ -85,9 +85,9 @@ class Eab_AllUpcomingRecurringChildrenCollection extends Eab_UpcomingCollection 
 	public function order_by_date ($q) {
 		return "eab_meta.meta_value DESC";
 	}
-
+	
 	public function build_query_args ($args) {
-		$status = $this->_event->is_trashed()
+		$status = $this->_event->is_trashed() 
 			? WpmuDev_RecurringDatedItem::RECURRENCE_TRASH_STATUS
 			: WpmuDev_RecurringDatedItem::RECURRENCE_STATUS
 		;

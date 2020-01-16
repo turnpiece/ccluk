@@ -50,7 +50,7 @@
 
 #wpmudevevents-contentheader{
 	overflow: hidden;
-	padding-top: 10px;
+	padding-top: 10px;	
 }
 
 #wpmudevevents-user{
@@ -77,14 +77,14 @@
 }
 
 .wpmudevevents-location{
-	float: left;
+	float: left;	
 	margin: 0 20px 0 0;
 	background: url('../img/052.png') 0 5px no-repeat;
 	padding: 0 0 0 20px;
 }
 
 .wpmudevevents-price{
-	float: left;
+	float: left;	
 	margin: 0 20px 0 0;
 	background: url('../img/028.png') 0 5px no-repeat;
 	padding: 0 0 0 20px;
@@ -92,11 +92,11 @@
 
 #wpmudevevents-contentbody{
 	overflow: hidden;
-	padding: 0 0 10px 0;
+	padding: 0 0 10px 0;	
 }
 
 #wpmudevevents-wrapper h2{
-	float: left;
+	float: left;	
 	font-size: 1.9em;
 	margin: 10px 0;
 	padding: 0;
@@ -114,7 +114,7 @@
 }
 
 a.wpmudevevents-viewevent{
-	float: right;
+	float: right;	
 	color: #75ab24;
     cursor: pointer;
     display: inline-block;
@@ -143,7 +143,7 @@ a.wpmudevevents-viewrsvps {
 }
 
 a.wpmudevevents-yes-submit, input.wpmudevevents-yes-submit{
-	float: center;
+	float: center;	
 	color: #75ab24;
     cursor: pointer;
     display: inline-block;
@@ -172,7 +172,7 @@ a.wpmudevevents-yes-submit, input.wpmudevevents-yes-submit{
 }
 
 a.wpmudevevents-maybe-submit, input.wpmudevevents-maybe-submit{
-	float: center;
+	float: center;	
 	color: #bd8728;
     cursor: pointer;
     display: inline-block;
@@ -201,7 +201,7 @@ a.wpmudevevents-maybe-submit, input.wpmudevevents-maybe-submit{
 }
 
 a.wpmudevevents-no-submit, input.wpmudevevents-no-submit{
-	float: center;
+	float: center;		
 	color: #bd3328;
     cursor: pointer;
     display: inline-block;
@@ -295,7 +295,7 @@ div.wpmudevevents-attendees ul.eab-guest-list {
 }
 
 #wpmudevevents-hide-rsvps, #wpmudevevents-load-rsvps, a.wpmudevevents-login_link-cancel {
-	float: center;
+	float: center;	
 	color: #333;
     cursor: pointer;
     display: inline-block;
@@ -460,7 +460,7 @@ a.wpmudevevents-login_link-wordpress {
 
 .wpmudevevents-date var,
 var.eab-date_format-date,
-var.eab-date_format-time
+var.eab-date_format-time 
 {
   font-style: normal;
 }
@@ -547,6 +547,3 @@ a.export_to_ical:after, a.export_to_gcal:after {
     background: url(../img/028.png) 0px 2px no-repeat;
     padding-left: 20px;
 }
-
-
-/* 87274-1550006837-au */

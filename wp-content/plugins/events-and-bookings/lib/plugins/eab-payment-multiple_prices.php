@@ -17,12 +17,12 @@ class Eab_Payment_MultiplePrices {
 	private function _add_hooks () {
 		//add_action('admin_enqueue_scripts', array($this, 'load_admin_scripts'));
 		add_action('admin_footer', array($this, 'load_admin_scripts'));
-
+		
 		//add_filter('eab-payment-event_price', array($this, 'get_event_prices')); // Model getter
-
+		
 		add_filter('eab-event-payment_forms', array($this, 'get_payment_forms'), 10, 2); // Template forms
 		add_filter('eab-payment-event_price-for_user', array($this, 'get_user_price_selection'), 10, 3); // IPN response
-
+		
 		add_filter('eab-event_meta-event_price', array($this, 'get_event_price_metabox'), 10, 2); // Event meta
 		add_filter('eab-event_meta-event_meta_box-after', array($this, 'get_event_price_metabox_template'), 10, 2); // Event meta template
 		add_action('incsub_event_save_payments_meta', array($this, 'save_event_meta_tiers'));
@@ -64,15 +64,15 @@ $(function () {
 </script>
 EOJs;
 	}
-
+	
 	function get_event_price_metabox ($markup, $event_id) {
 		$event = new Eab_EventModel($event_id);
 		$price = $event->get_price();
-		$markup = is_array($price)
+		$markup = is_array($price) 
 			? $this->_get_existing_tiers_meta_markup($price, $markup)
 			: '<div id="eab-payment-multiple_prices-singular">' . $markup . '</div>'
 		;
-
+		
 		return "<div id='eab-payment-multiple_prices-tiers'>{$markup} " . $this->_get_blank_tiers_meta_markup($event) . "</div>";
 	}
 
@@ -132,7 +132,7 @@ EOJs;
 			: $price
 		;
 	}
-
+	
 	function get_payment_forms ($form, $event_id) {
 		$event = new Eab_EventModel($event_id);
 		$price = $event->get_price();
@@ -140,44 +140,44 @@ EOJs;
 
 		$selection = '<select id="" name="amount">';
 		foreach ($price as $tier) {
-			$selection .= '<option value="' . (float)$tier['fee'] . '">' .
+			$selection .= '<option value="' . (float)$tier['fee'] . '">' . 
 				$tier['label'] . ": " . $this->_data->get_option("currency") . " " . $tier['fee'] .
 			'</option>';
 		}
 		$selection .= '</select>';
 
 		global $blog_id, $current_user;
-		$content .= $this->_data->get_option('paypal_sandbox')
+		$content .= $this->_data->get_option('paypal_sandbox') 
 			? '<form action="https://sandbox.paypal.com/cgi-bin/webscr" method="post">'
 			: '<form action="https://www.paypal.com/cgi-bin/webscr" method="post">'
 		;
 		$content .= '<input type="hidden" name="business" value="' . $this->_data->get_option('paypal_email') . '" />';
 		$content .= '<input type="hidden" name="item_name" value="' . esc_attr($event->get_title()) . '" />';
 		$content .= '<input type="hidden" name="item_number" value="' . $event->get_id() . '" />';
-		$content .= '<input type="hidden" name="notify_url" value="' .
+		$content .= '<input type="hidden" name="notify_url" value="' . 
 			admin_url('admin-ajax.php?action=eab_paypal_ipn&blog_id=' . $blog_id . '&booking_id=' . $booking_id) .
 		'" />';
 		$content .= '<br />' . __('Please, select price tier', Eab_EventsHub::TEXT_DOMAIN) . ' ' . $selection;
 		$content .= '<input type="hidden" name="return" value="' . get_permalink($event->get_id()) . '" />';
 		$content .= '<input type="hidden" name="currency_code" value="' . $this->_data->get_option('currency') . '">';
 		$content .= '<input type="hidden" name="cmd" value="_xclick" />';
-
+		
 		// Add multiple tickets
 		$extra_attributes = apply_filters('eab-payment-paypal_tickets-extra_attributes', $extra_attributes, $event->get_id(), $booking_id);
-		$content .= '' .// '<a href="#buy-tickets" class="eab-buy_tickets-trigger" style="display:none">' . __('Buy tickets', Eab_EventsHub::TEXT_DOMAIN) . '</a>' .
+		$content .= '' .// '<a href="#buy-tickets" class="eab-buy_tickets-trigger" style="display:none">' . __('Buy tickets', Eab_EventsHub::TEXT_DOMAIN) . '</a>' . 
 			sprintf(
-				//'<p class="eab-buy_tickets-target">' . __('I want to buy %s ticket(s)', Eab_EventsHub::TEXT_DOMAIN) . '</p>',
-				'<p>' . __('I want to buy %s ticket(s)', Eab_EventsHub::TEXT_DOMAIN) . '</p>',
+				//'<p class="eab-buy_tickets-target">' . __('I want to buy %s ticket(s)', Eab_EventsHub::TEXT_DOMAIN) . '</p>', 
+				'<p>' . __('I want to buy %s ticket(s)', Eab_EventsHub::TEXT_DOMAIN) . '</p>', 
 				'<input type="number" size="2" name="quantity" value="1" min="1" ' . $extra_attributes . ' />'
 			)
 		;
-
+		
 		$content .= '<input type="image" name="submit" border="0" src="https://www.paypal.com/en_US/i/btn/btn_paynow_SM.gif" alt="PayPal - The safer, easier way to pay online" />';
 		$content .= '<img alt="" border="0" width="1" height="1" src="https://www.paypal.com/en_US/i/scr/pixel.gif" />';
 		$content .= '</form>';
 		return $content;
 	}
-
+	
 	function get_user_price_selection ($price_meta, $event_id, $user_id) {
 		return $price_meta;
 	}

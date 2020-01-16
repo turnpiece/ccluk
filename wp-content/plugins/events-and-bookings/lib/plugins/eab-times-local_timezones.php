@@ -10,12 +10,12 @@ AddonType: Events
 
 class Eab_Events_LocalTimezones {
 	private function __construct () {}
-
+	
 	public static function serve () {
 		$me = new Eab_Events_LocalTimezones;
 		$me->_add_hooks();
 	}
-
+	
 	private function _add_hooks () {
 		add_action('eab-javascript-enqueue_scripts', array($this, 'include_scripts'));
 	}

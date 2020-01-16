@@ -9,10 +9,10 @@ AddonType: Integration
 */
 
 class Eab_Events_Capabilities {
-
+	
 	private $_data;
 	private $_capabilities = array();
-
+	
 	private function __construct () {
 		$this->_data = Eab_Options::get_instance();
 		$this->_capabilities = array (
@@ -24,28 +24,28 @@ class Eab_Events_Capabilities {
 			'delete_published_events' => __('Delete Published Events', Eab_EventsHub::TEXT_DOMAIN),
 		);
 	}
-
+	
 	public static function serve () {
 		$me = new Eab_Events_Capabilities;
 		$me->_add_hooks();
 	}
-
+	
 	private function _add_hooks () {
 		add_action('eab-settings-after_plugin_settings', array($this, 'show_settings'));
 		add_filter('eab-settings-before_save', array($this, 'save_settings'));
 		add_action('admin_head-incsub_event_page_eab_settings', array($this, 'enqueue_dependencies'));
-
+		
 		add_filter('eab-capabilities-user_can', array($this, 'check_capability_for'), 10, 4);
-
+		
 		$eab_protect_media_images = $this->_data->get_option('eab_protect_media_images');
 		if( $eab_protect_media_images == 1 )
 			add_filter( 'posts_where', array( $this, 'eab_protect_media_images' ), 10, 2 );
 	}
-
+	
 	function eab_protect_media_images( $where, $query ) {
                 if( $query->query['post_type'] != 'attachment' ) return $where;
 		global $current_user;
-
+                
 		if( is_user_logged_in() ){
 			if( ! is_super_admin() )
 				$where .= ' AND post_author=' . $current_user->data->ID;
@@ -53,7 +53,7 @@ class Eab_Events_Capabilities {
 
 		return $where;
 	}
-
+	
 	function check_capability_for ($capable, $capability, $user, $args) {
 		if (!in_array($capability, array_keys($this->_capabilities))) return $capable;
 
@@ -74,12 +74,12 @@ class Eab_Events_Capabilities {
 		}
 		return (int)@$capabilities[$capability];
 	}
-
+	
 	function enqueue_dependencies () {
 		wp_enqueue_style('eab-event-capabilities', plugins_url(basename(EAB_PLUGIN_DIR) . '/css/eab-event-capabilities.css'));
 		wp_enqueue_script('eab-event-capabilities', plugins_url(basename(EAB_PLUGIN_DIR) . '/js/eab-event-capabilities.js'), array('jquery'));
 	}
-
+	
 	function show_settings () {
 		global $wp_roles;
 		$_roles = $wp_roles->get_names();
@@ -106,29 +106,29 @@ class Eab_Events_Capabilities {
 			<input <?php echo $eab_protect_media_images == 1 ? 'checked="checked"' : '' ?> type="checkbox" name="eab_protect_media_images" value="1">
 			<?php _e( 'Check the box if you want to restrict the media files to the author only', Eab_EventsHub::TEXT_DOMAIN ); ?>
 		</p>
-
+		
 	</div>
 </div>
-<?php
+<?php		
 	}
-
+	
 	function save_settings ($options) {
 		$options['eab-capabilities_map'] = @$_POST['eab-capabilities_map'];
 		$options['eab_protect_media_images'] = isset( $_POST['eab_protect_media_images'] ) ? $_POST['eab_protect_media_images'] : 0;
 		return $options;
 	}
-
+	
 	private function _create_role_box ($role, $role_label) {
 		$box = '<div class="eab-events-capabilities-per_role" id="eab-events-capabilities-editor-' . esc_attr($role) . '">';
 		$box .= '<h4>' . sprintf(__('Your <b>%s</b> users can...', Eab_EventsHub::TEXT_DOMAIN), $role_label) . '</h4>';
 		foreach ($this->_capabilities as $capability => $cap_label) {
 			$box .= $this->_get_capability_box($role, $capability, $cap_label);
 		}
-
+		
 		$box .= '</div>';
 		return $box;
 	}
-
+	
 	private function _get_capability_box ($role, $capability, $cap_label) {
 		global $wp_roles;
 		$wp_roles_map = $wp_roles->get_role($role);
@@ -136,27 +136,27 @@ class Eab_Events_Capabilities {
 		$roles_map = $roles_map ? $roles_map : array();
 
 		$capabilities = isset($roles_map[$role]) ? $roles_map[$role] : array();
-
+		
 		if (!$capabilities) {
 			$capabilities = $wp_roles_map->capabilities;
 			$capability_check = preg_replace('/_event/', '_post', $capability);
 		} else {
 			$capability_check = $capability;
 		}
-
+		
 		if ((int)@$capabilities[$capability_check]) {
 			$checked = 'checked="checked"';
 		} else {
 			$checked = '';
-		}
-
+		} 
+		
 		$box = '<div class="eab-events-capabilities-capability_box">';
-
+		
 		$box .= "<label for='eab-capabilities_map-{$role}-{$capability}'>";
 		$box .= "<input type='hidden' name='eab-capabilities_map[{$role}][{$capability}]' value='' /> ";
 		$box .= "<input type='checkbox' id='eab-capabilities_map-{$role}-{$capability}' name='eab-capabilities_map[{$role}][{$capability}]' value='1' {$checked} /> ";
 		$box .= '&hellip;' . $cap_label . '</label>';
-
+		
 		$box .= '</div>';
 		return $box;
 	}

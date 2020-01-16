@@ -17,7 +17,7 @@ if (!class_exists('Eab_Importer')) require_once(EAB_PLUGIN_DIR . 'lib/class_eab_
  * Concrete oAuth login interface implementation.
  */
 class Eab_Gcal_Oauth_GoogleImporter extends Eab_Gcal_Plugin_Oauth_RO {
-
+	
 	public function get_data_key ($key) {
 		return $this->_get_data_key("gcal_importer-{$key}");
 	}
@@ -55,7 +55,7 @@ class Eab_Gcal_Importer_GoogleImporter extends Eab_ScheduledImporter {
 
 	public static function serve () { return new Eab_Gcal_Importer_GoogleImporter; }
 
-	public function check_schedule () {
+	public function check_schedule () {	
 		$last_run = (int)get_option($this->get_schedule_key());
 		$run_each = $this->_data->get_option('gcal_importer-run_each');
 		$run_each = $run_each ? $run_each : 3600;
@@ -110,7 +110,7 @@ class Eab_Gcal_Importer_GoogleImporter extends Eab_ScheduledImporter {
 		// Metadata - timestamps
                 $startDateTime = isset($gevent['start']['dateTime']) ? $gevent['start']['dateTime'] : $gevent['start']['date'];
                 $endDateTime = isset($gevent['end']['dateTime']) ? $gevent['end']['dateTime'] : $gevent['end']['date'];
-
+                
 		$start = isset($startDateTime) ? $this->_to_local_time($startDateTime) : false;
 		$end = isset($endDateTime) ? $this->_to_local_time($endDateTime) : false;
 		if ($start) $meta['incsub_event_start'] = date('Y-m-d H:i:s', $start);
@@ -204,7 +204,7 @@ class Eab_Calendars_GoogleImporter {
 		$raw_authors = get_users(array('who' => 'authors'));
 		$possible_authors = array_combine(
 			wp_list_pluck($raw_authors, 'ID'),
-			wp_list_pluck($raw_authors, 'display_name')
+			wp_list_pluck($raw_authors, 'display_name') 
 		);
 ?>
 <div id="eab-settings-gcal_importer" class="eab-metabox postbox">

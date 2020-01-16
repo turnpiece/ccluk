@@ -5,7 +5,7 @@
  * For versions that actually work
  */
 class Eab_MP_Bridge_Legacy {
-
+	
 	private $_data;
 
 	private function __construct () {
@@ -43,11 +43,11 @@ class Eab_MP_Bridge_Legacy {
 	function archived_event_mp_cleanup ($event) {
 		if (!is_object($event) || !method_exists($event, 'get_id')) return false; // Invalid parameter
 		$parent_event_id = $event->is_recurring_child();
-		if ($parent_event_id) {
+		if ($parent_event_id) { 
 			// Recurring event instance
 			$linked_product_id = get_post_meta($parent_event_id, 'eab_product_id', true);
 			if (!$linked_product_id) return false;
-
+			
 			$meta = get_post_custom($linked_product_id);
 			$skus = !empty($meta['mp_sku'][0]) ? maybe_unserialize($meta['mp_sku'][0]) : false;
 			if (empty($skus)) return false;
@@ -57,7 +57,7 @@ class Eab_MP_Bridge_Legacy {
 
 			$var_names = !empty($meta['mp_var_name'][0]) ? maybe_unserialize($meta['mp_var_name'][0]) : false;
 			if (empty($var_names)) return false;
-
+			
 			$event_id = $event->get_id();
 
 			foreach ($skus as $id => $sku) {
@@ -99,7 +99,7 @@ class Eab_MP_Bridge_Legacy {
 		if (!$parent_event_id) {
 			$linked_product_id = get_post_meta($event_id, 'eab_product_id', true);
 			if (!$linked_product_id) return $price;
-
+			
 			return mp_product_price(false, $linked_product_id, false);
 		} else {
 			// Recurring event child. Figure out parent-linked product ID and appropriate SKU
@@ -111,10 +111,10 @@ class Eab_MP_Bridge_Legacy {
 
 			$price_id = in_array($event_id, $skus) ? array_search($event_id, $skus) : false;
 			if (false === $price_id) return $price;
-
+			
 			$prices = maybe_unserialize(get_post_meta($linked_product_id, 'mp_price', true));
 			if (empty($prices)) return $price;
-
+			
 			$raw_price = isset($prices[$price_id]) ? $prices[$price_id] : false;
 			if (!$raw_price) return $price;
 
@@ -172,7 +172,7 @@ class Eab_MP_Bridge_Legacy {
 		$out .= '</select>';
 		return $out;
 	}
-
+	
 	/**
 	 * Saves initial related Product selection, for singular/top-level events.
 	 */
@@ -223,10 +223,10 @@ class Eab_MP_Bridge_Legacy {
 
 		$max = count($meta);
 		$meta[$max] = date_i18n(get_option("date_format"), $event->get_start_timestamp());
-
+		
 		$sku = get_post_meta($product_id, 'mp_sku', true);
 		$sku[$max] = $instance_id;
-
+		
 		$price = get_post_meta($product_id, 'mp_price', true);
 		$price[$max] = $quick_price;
 
@@ -276,7 +276,7 @@ class Eab_MP_Bridge_Legacy {
 	 */
 	function process_event_payment_forms ($form, $event_id) {
 		if (!$this->_is_mp_present()) return $form;
-
+		
 		$event = new Eab_EventModel(get_post($event_id));
 		$recurring = $event->is_recurring_child();
 		$event_id = $recurring ? $recurring : $event_id;
@@ -382,8 +382,8 @@ class Eab_MP_Bridge_Legacy {
 	private function _establish_relation ($event_id, $product_id) {
 		if (!$event_id) return false;
 		$old_product_id = get_post_meta($event_id, 'eab_product_id', true);
-		$price = $product_id
-			? $this->_get_quick_product_price($product_id)
+		$price = $product_id 
+			? $this->_get_quick_product_price($product_id) 
 			: false
 		;
 
@@ -391,7 +391,7 @@ class Eab_MP_Bridge_Legacy {
 			// Cross-link
 			// 1. Ensure uniqueness
 			global $wpdb;
-			$wpdb->query("DELETE FROM {$wpdb->postmeta} WHERE (meta_key='eab_product_id' AND meta_value='{$product_id}') OR (meta_key='eab_event_id' AND meta_value='{$event_id}')");	 	 	 	 				   		
+			$wpdb->query("DELETE FROM {$wpdb->postmeta} WHERE (meta_key='eab_product_id' AND meta_value='{$product_id}') OR (meta_key='eab_event_id' AND meta_value='{$event_id}')");
 			// So after this is done, drop any caching for current event
 			clean_post_cache($event_id);
 

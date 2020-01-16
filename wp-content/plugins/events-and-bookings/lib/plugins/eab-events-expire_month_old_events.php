@@ -13,19 +13,19 @@ Detail: Your <em>archived</em> events will be shown in archives, but visitors wo
 */
 
 class Eab_Events_ExpireMonthOldEvents {
-
+	
 	private function __construct () {}
-
+	
 	public static function serve () {
 		$me = new Eab_Events_ExpireMonthOldEvents;
 		$me->_add_hooks();
 	}
-
+	
 	private function _add_hooks () {
 		add_action('admin_notices', array($this, 'show_nags'));
 		add_action('eab_scheduled_jobs', array($this, 'expire_archived_events'), 99);
 	}
-
+	
 	function show_nags () {
 		if (!class_exists('Eab_Events_ExpirePastEvents')) return false;
 		if (defined('EAB_EXPIRY_CLASS_NAG_RENDERED')) return false;
@@ -34,7 +34,7 @@ class Eab_Events_ExpireMonthOldEvents {
 		'</p></div>';
 		define('EAB_EXPIRY_CLASS_NAG_RENDERED', true);
 	}
-
+	
 	function expire_archived_events () {
 		if (class_exists('Eab_Events_ExpirePastEvents')) return false;
 		$args = array();
@@ -52,15 +52,15 @@ class Eab_Events_ExpireMonthOldEvents {
  * Month-old archived events
  */
 class Eab_LastMonthArchivedCollection extends Eab_TimedCollection {
-
+	
 	public function build_query_args ($args) {
 		$time = $this->get_timestamp();
-
+		
 		$args = array_merge(
 			$args,
 			array(
 			 	'post_type' => 'incsub_event',
-				'suppress_filters' => false,
+				'suppress_filters' => false, 
 				'posts_per_page' => EAB_OLD_EVENTS_EXPIRY_LIMIT,
 				'meta_query' => array(
 					array(

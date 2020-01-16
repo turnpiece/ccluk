@@ -10,12 +10,12 @@ Author: WPMU DEV
 
 /*
 Detail: Displays lists of user RSVPs on your users member pages.
-*/
+*/ 
 
 class Eab_BuddyPress_MyEvents {
-
+	
 	private $_data;
-
+	
 	private function __construct () {
 		$this->_data = Eab_Options::get_instance();
 	}
@@ -24,15 +24,15 @@ class Eab_BuddyPress_MyEvents {
 		$me = new Eab_BuddyPress_MyEvents;
 		$me->_add_hooks();
 	}
-
+	
 	private function _add_hooks () {
 		add_action('admin_notices', array($this, 'show_nags'));
 		add_action('eab-settings-after_plugin_settings', array($this, 'show_settings'));
 		add_filter('eab-settings-before_save', array($this, 'save_settings'));
-
+		
 		add_action('bp_init', array($this, 'add_bp_profile_entry'));
 	}
-
+	
 	function show_nags () {
 		if (!defined('BP_VERSION')) {
 			echo '<div class="error"><p>' .
@@ -45,7 +45,7 @@ class Eab_BuddyPress_MyEvents {
 		$post_type = get_post_type_object(Eab_EventModel::POST_TYPE);
 		return current_user_can($post_type->cap->edit_posts);
 	}
-
+	
 	function add_bp_profile_entry () {
 		global $bp;
 		bp_core_new_nav_item(array(
@@ -87,7 +87,7 @@ class Eab_BuddyPress_MyEvents {
 		));
 		do_action('eab-events-my_events-set_up_navigation');
 	}
-
+	
 	function bind_bp_organized_page () {
 		add_action('bp_template_title', array($this, 'show_organized_title'));
 		add_action('bp_template_content', array($this, 'show_organized_body'));
@@ -112,13 +112,13 @@ class Eab_BuddyPress_MyEvents {
 		add_action('bp_head', array($this, 'enqueue_dependencies'));
 		bp_core_load_template(apply_filters('bp_core_template_plugin', 'members/single/plugins'));
 	}
-
+	
 	function enqueue_dependencies () {
 		global $bp;
 		if ('my-events' != $bp->current_component) return false;
 		wp_enqueue_style('eab-bp-my_events', EAB_PLUGIN_URL . 'css/eab-buddypress-my_events.css');
 	}
-
+	
 	function show_organized_title () {
 		echo __('Organized Events', Eab_EventsHub::TEXT_DOMAIN);
 	}
@@ -135,7 +135,7 @@ class Eab_BuddyPress_MyEvents {
 	function show_organized_body () {
 		global $bp;
 		echo '<div id="eab-bp-my_events-wrapper">';
-		echo '<div class="eab-bp-my_events eab-bp-organized">' .
+		echo '<div class="eab-bp-my_events eab-bp-organized">' . 
 			Eab_Template::get_user_organized_events($bp->displayed_user->id) .
 		'</div>';
 		echo '</div>';
@@ -148,7 +148,7 @@ class Eab_BuddyPress_MyEvents {
 			if ('hide' == $premium) add_filter('eab-event-user_events-exclude_event', array($this, 'exclude_premium_event_rsvp'), 10, 2);
 		}
 		echo '<div id="eab-bp-my_events-wrapper">';
-		echo '<div class="eab-bp-my_events eab-bp-rsvp_yes">' .
+		echo '<div class="eab-bp-my_events eab-bp-rsvp_yes">' . 
 			Eab_Template::get_user_events(Eab_EventModel::BOOKING_YES, $bp->displayed_user->id) .
 		'</div>';
 		echo '</div>';
@@ -156,7 +156,7 @@ class Eab_BuddyPress_MyEvents {
 	function show_maybe_body () {
 		global $bp;
 		echo '<div id="eab-bp-my_events-wrapper">';
-		echo '<div class="eab-bp-my_events eab-bp-rsvp_maybe">' .
+		echo '<div class="eab-bp-my_events eab-bp-rsvp_maybe">' . 
 			Eab_Template::get_user_events(Eab_EventModel::BOOKING_MAYBE, $bp->displayed_user->id) .
 		'</div>';
 		echo '</div>';
@@ -164,7 +164,7 @@ class Eab_BuddyPress_MyEvents {
 	function show_not_attending_body () {
 		global $bp;
 		echo '<div id="eab-bp-my_events-wrapper">';
-		echo '<div class="eab-bp-my_events eab-bp-rsvp_no">' .
+		echo '<div class="eab-bp-my_events eab-bp-rsvp_no">' . 
 			Eab_Template::get_user_events(Eab_EventModel::BOOKING_NO, $bp->displayed_user->id) .
 		'</div>';
 		echo '</div>';
@@ -177,7 +177,7 @@ class Eab_BuddyPress_MyEvents {
 		$user_id = $bp->displayed_user->id;
 		if (Eab_EventModel::BOOKING_YES != $status) return $content;
 		if ($event->user_paid($user_id)) return $content;
-
+		
 		$content .= '<div class="eab-premium_event-unpaid_notice"><b>' . __('Event not paid', Eab_EventsHub::TEXT_DOMAIN) . '</b></div>';
 
 		return $content;
@@ -270,28 +270,28 @@ class Eab_MyEvents_Shortcodes extends Eab_Codec {
 		// Check if the user can organize events
 		$post_type = get_post_type_object(Eab_EventModel::POST_TYPE);
 		if (in_array('organized', $args['sections']) && user_can($args['user'], $post_type->cap->edit_posts)) {
-			$output .= '<div class="' . $args['class'] . ' eab-bp-organized">' .
+			$output .= '<div class="' . $args['class'] . ' eab-bp-organized">' . 
 				($args['show_titles'] ? '<h4>' . __('Organized Events', Eab_EventsHub::TEXT_DOMAIN) . '</h4>' : '') .
 				Eab_Template::get_user_organized_events($args['user']) .
 			'</div>';
 		}
 
 		if (in_array('yes', $args['sections'])) {
-			$output .= '<div class="' . $args['class'] . ' eab-bp-rsvp_yes">' .
+			$output .= '<div class="' . $args['class'] . ' eab-bp-rsvp_yes">' . 
 				($args['show_titles'] ? '<h4>' . __('Attending Events', Eab_EventsHub::TEXT_DOMAIN) . '</h4>' : '') .
 				Eab_Template::get_user_events(Eab_EventModel::BOOKING_YES, $args['user']) .
 			'</div>';
 		}
-
+	
 		if (in_array('maybe', $args['sections'])) {
-			$output .= '<div class="' . $args['class'] . ' eab-bp-rsvp_maybe">' .
+			$output .= '<div class="' . $args['class'] . ' eab-bp-rsvp_maybe">' . 
 				($args['show_titles'] ? '<h4>' . __('Maybe attending Events', Eab_EventsHub::TEXT_DOMAIN) . '</h4>' : '') .
 				Eab_Template::get_user_events(Eab_EventModel::BOOKING_MAYBE, $args['user']) .
 			'</div>';
 		}
-
+		
 		if (in_array('no', $args['sections'])) {
-			$output .= '<div class="' . $args['class'] . ' eab-bp-rsvp_no">' .
+			$output .= '<div class="' . $args['class'] . ' eab-bp-rsvp_no">' . 
 				($args['show_titles'] ? '<h4>' . __('Not attending Events', Eab_EventsHub::TEXT_DOMAIN) . '</h4>' : '') .
 				Eab_Template::get_user_events(Eab_EventModel::BOOKING_NO, $args['user']) .
 			'</div>';

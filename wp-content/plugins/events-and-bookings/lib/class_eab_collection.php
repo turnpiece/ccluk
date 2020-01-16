@@ -93,11 +93,17 @@ class Eab_UpcomingCollection extends Eab_TimedCollection {
 	}
 
 	public function build_query_args ($args) {
-
-		$hide_old = apply_filters( 'eab-collection/hide_old', false );
+		
+		$hide_old = apply_filters( 'eab-collection/hide_old', true );
 		$time = $this->get_timestamp();
+		
 		if( $hide_old ){
-			$time = time();
+			$current_month = date( 'm' );
+			$calendar_month = date( 'm', $time );
+
+			if ( $current_month >= $calendar_month ){
+				$time = time();	
+			}			
 		}
 
 		$year = (int)date('Y', $time);
@@ -125,7 +131,7 @@ class Eab_UpcomingCollection extends Eab_TimedCollection {
 		}
 
 		if (!isset($args['posts_per_page'])) $args['posts_per_page'] = apply_filters('eab-collection-upcoming-max_results', EAB_MAX_UPCOMING_EVENTS);
-
+		
 		$args = array_merge(
 			$args,
 			array(
@@ -160,7 +166,7 @@ class Eab_UpcomingCollection extends Eab_TimedCollection {
 
 /**
  * events time-restricted collection (Date Range) implementation.
- *
+ * 
  */
 class Eab_DateRangeCollection extends Eab_TimedCollection {
 
@@ -183,7 +189,7 @@ class Eab_DateRangeCollection extends Eab_TimedCollection {
 		$forbidden_statuses = apply_filters('eab-collection-forbidden_statuses', $forbidden_statuses);
 
 		if (!isset($args['posts_per_page'])) $args['posts_per_page'] = -1;
-
+		
 		$args = array_merge(
 			$args,
 			array(
@@ -216,18 +222,18 @@ class Eab_DateRangeCollection extends Eab_TimedCollection {
 }
 
 class Eab_DateRangeArchiveCollection extends Eab_TimedCollection {
-
+	
 		public function __construct ($timestamp=false, $args=array()) {
 			Eab_Filter::start_date_ordering_set_up();
 			add_filter('eab-ordering-date_ordering_direction', array($this, 'propagate_direction_filter'));
 			parent::__construct($timestamp, $args);
 			Eab_Filter::start_date_ordering_tear_down();
 		}
-
+	
 		public function propagate_direction_filter ($direction) {
 			return apply_filters('eab-collection-date_ordering_direction', $direction);
 		}
-
+	
 		public function build_query_args ($args) {
 		    $forbidden_statuses = array(Eab_EventModel::STATUS_CLOSED);
 		    if (!isset($args['incsub_event'])) { // If not single
@@ -336,32 +342,32 @@ class Eab_UpcomingWeeksCollection extends Eab_TimedCollection {
 }
 
 class Eab_UpcomingWeeksArchiveCollection extends Eab_TimedCollection {
-
+	
 		const WEEK_COUNT = 5;
-
+	
 		public function __construct ($timestamp=false, $args=array()) {
 			if (!defined('EAB_COLLECTION_UPCOMING_WEEKS_COUNT')) define('EAB_COLLECTION_UPCOMING_WEEKS_COUNT', self::WEEK_COUNT, true);
-
+	
 			Eab_Filter::start_date_ordering_set_up();
 			add_filter('eab-ordering-date_ordering_direction', array($this, 'propagate_direction_filter'));
 			parent::__construct($timestamp, $args);
 			Eab_Filter::start_date_ordering_tear_down();
 		}
-
+	
 		public function propagate_direction_filter ($direction) {
 			return apply_filters('eab-collection-date_ordering_direction', $direction);
 		}
-
+	
 		public function build_query_args ($args) {
 			// Changes by Hakan
 			// Commented lines were not removed intentionally.
 			$time = $this->get_timestamp();
-
+	
 			if (!isset($args['posts_per_page'])) $args['posts_per_page'] = -1;
-
+	
 			$weeks = apply_filters( 'eab-collection-upcoming_weeks-archive-week_number', EAB_COLLECTION_UPCOMING_WEEKS_COUNT );
 			$weeks = is_numeric($weeks) ? $weeks : self::WEEK_COUNT;
-
+	
 			$args = array_merge(
 				$args,
 				array(
@@ -570,7 +576,7 @@ class Eab_ArchivedRecurringChildrenCollection extends Eab_AllRecurringChildrenCo
 
 /**
  * Upcoming events time-restricted collection (Daily) implementation.
- *
+ * 
  */
 class Eab_DailyCollection extends Eab_TimedCollection {
 
@@ -628,18 +634,18 @@ class Eab_DailyCollection extends Eab_TimedCollection {
 }
 
 class Eab_DailyArchiveCollection extends Eab_TimedCollection {
-
+	
 		public function __construct ($timestamp=false, $args=array()) {
 			Eab_Filter::start_date_ordering_set_up();
 			add_filter('eab-ordering-date_ordering_direction', array($this, 'propagate_direction_filter'));
 			parent::__construct($timestamp, $args);
 			Eab_Filter::start_date_ordering_tear_down();
 		}
-
+	
 		public function propagate_direction_filter ($direction) {
 			return apply_filters('eab-collection-date_ordering_direction', $direction);
 		}
-
+	
 		public function build_query_args ($args) {
 		    $forbidden_statuses = array(Eab_EventModel::STATUS_CLOSED);
 		    if (!isset($args['incsub_event'])) { // If not single

@@ -5,9 +5,9 @@
  * through Post Indexer.
  */
 class Eab_Network {
-
+	
 	private function __construct () {}
-
+	
 	/**
 	 * Available only on multisite.
 	 */
@@ -16,11 +16,11 @@ class Eab_Network {
 		$me = new Eab_Network;
 		$me->_add_hooks();
 	}
-
+	
 	private function _add_hooks () {
 		add_action('plugins_loaded', array($this, 'load_dependencies'));
 	}
-
+	
 	/**
 	 * Check if PI is available, and proceed if it is.
 	 */
@@ -28,7 +28,7 @@ class Eab_Network {
 		if (!eab_has_post_indexer()) return false;
 		add_action('widgets_init', array($this, 'load_widgets'), 20);
 	}
-
+	
 	/**
 	 * We have all we need, let's register widgets.
 	 */
@@ -36,7 +36,7 @@ class Eab_Network {
 		require_once EAB_PLUGIN_DIR . 'lib/widgets/NetworkUpcoming_Widget.class.php';
 		register_widget('Eab_NetworkUpcoming_Widget');
 	}
-
+	
 /* ----- Model procedures ----- */
 
 	/**
@@ -46,7 +46,7 @@ class Eab_Network {
 	public static function get_upcoming_events ($limit=5) {
 		if (!eab_has_post_indexer()) return array();
 		$limit = (int)$limit ? (int)$limit : 5;
-
+		
 		global $wpdb;
 		$result = array();
 		$count = 0;
@@ -56,7 +56,7 @@ class Eab_Network {
 		$pi_post_id = eab_pi_get_post_id();
 		$raw_network_events = $wpdb->get_results("SELECT * FROM {$wpdb->base_prefix}{$pi_table} WHERE post_type='incsub_event' ORDER BY {$pi_published} DESC");
 		if (!$raw_network_events) return $result;
-
+		
 		foreach ($raw_network_events as $event) {
 			if ($count == $limit) break;
 			switch_to_blog($event->$pi_blog_id);
@@ -71,11 +71,11 @@ class Eab_Network {
 		}
 		return apply_filters( 'eab_get_upcoming_events', $result, $limit );
 	}
-
+        
         public static function get_archive_events ($limit=5) {
 		if (!eab_has_post_indexer()) return array();
 		$limit = (int)$limit ? (int)$limit : 5;
-
+		
 		global $wpdb;
 		$result = array();
 		$count = 0;
@@ -85,7 +85,7 @@ class Eab_Network {
 		$pi_post_id = eab_pi_get_post_id();
 		$raw_network_events = $wpdb->get_results("SELECT * FROM {$wpdb->base_prefix}{$pi_table} WHERE post_type='incsub_event' ORDER BY {$pi_published} DESC");
 		if (!$raw_network_events) return $result;
-
+		
 		foreach ($raw_network_events as $event) {
 			if ($count == $limit) break;
 			switch_to_blog($event->$pi_blog_id);

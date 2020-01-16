@@ -33,7 +33,7 @@ class UrandomPseudoRandomStringGenerator implements PseudoRandomStringGeneratorI
     /**
      * @const string The error message when generating the string fails.
      */
-    const ERROR_MESSAGE = 'Unable to generate a cryptographically secure pseudo-random string from /dev/urandom. ';	 	 	 	 				   		
+    const ERROR_MESSAGE = 'Unable to generate a cryptographically secure pseudo-random string from /dev/urandom. ';
 
     /**
      * @throws FacebookSDKException

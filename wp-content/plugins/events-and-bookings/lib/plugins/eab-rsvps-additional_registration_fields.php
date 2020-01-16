@@ -39,10 +39,10 @@ class Eab_Rsvps_AdditionalRegistrationFields {
 	function inject_export_columns ($row, $event, $booking, $user) {
 		if (empty($user->ID)) return $row;
 		$has_empty = true;
-
+		
 		$fields = Eab_Rsvps_Arf_Model::get($user->ID);
 		if (empty($fields) && !$has_empty) return $row;
-
+		
 		foreach ($fields as $key => $value) {
 			if (empty($value) && !$has_empty) continue;
 			$row[$key] = '' === $value
@@ -253,7 +253,7 @@ $(document).on("eab-api-registration-data", function (e, data, deferred) {
 </script>
 <script>
 (function ($) {
-
+    
     var WPMU_UnderscoreSettingsOverride = {
         evaluate: /\{\{(.+?)\}\}/gim,
         interpolate: /\{\{=(.+?)\}\}/gim,
@@ -307,7 +307,7 @@ $(function () {
 </style>
 		<?php
 	}
-
+	
 	function save_settings ($options) {
 		if (empty($_POST['eab-arf-additional_fields'])) return $options;
 		$data = stripslashes_deep($_POST['eab-arf-additional_fields']);

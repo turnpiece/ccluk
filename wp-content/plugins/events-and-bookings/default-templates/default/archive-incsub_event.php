@@ -11,7 +11,7 @@ get_header( 'event' );
                     <p><?php $event_ptype = get_post_type_object( 'incsub_event' ); echo $event_ptype->labels->not_found; ?></p>
                 <?php else: ?>
                     <div class="wpmudevevents-list">
-
+                   
                     <?php while ( have_posts() ) : the_post(); ?>
                         <div class="event <?php echo Eab_Template::get_status_class($post); ?>">
                             <div class="wpmudevevents-header">

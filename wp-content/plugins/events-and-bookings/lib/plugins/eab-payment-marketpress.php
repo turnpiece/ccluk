@@ -98,7 +98,7 @@ class Eab_Payments_PaymentViaProducts {
 	function show_settings () {
 		$tips = new WpmuDev_HelpTooltips();
 		$tips->set_icon_url(EAB_PLUGIN_URL . 'img/information.png' );
-
+		
 		$category_id = $this->_data->get_option('payment-ppvp-category');
 		$categories = get_terms('product_category', array(
 			'hide_empty' => false,

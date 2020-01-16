@@ -159,7 +159,7 @@ class Eab_AddonHandler {
 		if ( !class_exists( 'WpmuDev_HelpTooltips' ) ) {
 			require_once EAB_PLUGIN_DIR . 'lib/class_wd_help_tooltips.php';
 		}
-
+			
 		$tips = new WpmuDev_HelpTooltips();
 		$tips->set_icon_url( EAB_PLUGIN_URL . 'img/information.png' );
 

@@ -10,21 +10,21 @@ AddonType: Events
 
 /*
 Detail: <b>Note:</b> this may take time and resources if you have a lot of events.
-*/
+*/ 
 
 class Eab_Events_Calendar_RecurringShortCode {
-
+	
 	private function __construct () {}
-
+	
 	public static function serve () {
 		$me = new Eab_Events_Calendar_RecurringShortCode;
 		$me->_add_hooks();
 	}
-
+	
 	private function _add_hooks () {
 		add_shortcode( 'eab_calendar_recurring', array( $this, 'eab_calendar_recurring_cb' ) );
 	}
-
+	
 	function eab_calendar_recurring_cb( $args ) {
 		$args = shortcode_atts( array(
                         'id' => false,
@@ -49,7 +49,7 @@ class Eab_Events_Calendar_RecurringShortCode {
 			'show_excerpt' => false,
 			'excerpt_length' => 55,
 		), $args, 'eab_recurring' );
-
+                
 		if (!empty($_GET['date'])) {
 			$date = strtotime($_GET['date']);
 			if ($date) $args['date'] = $date;
@@ -65,7 +65,7 @@ class Eab_Events_Calendar_RecurringShortCode {
 			if (isset($q->posts[0])) $event = new Eab_EventModel($q->posts[0]);
 		}
 		if (!$event) return $content;
-
+		
 		$rec_events = Eab_CollectionFactory::get_all_recurring_children_events($event);
 
 		$output = $this->get_shortcode_calendar_output($rec_events, $args);
@@ -73,10 +73,10 @@ class Eab_Events_Calendar_RecurringShortCode {
 
 		if (!$args['override_styles']) wp_enqueue_style('eab_calendar_shortcode', eab_call_template('util_get_default_template_style', 'calendar'));
 		return $output;
-
+		
 	}
-
-
+	
+	
 	function get_shortcode_calendar_output ($events, $args) {
 		if (!class_exists('Eab_CalendarTable_EventShortcodeCalendar')) require_once EAB_PLUGIN_DIR . 'lib/class_eab_calendar_helper.php';
 		$renderer = new Eab_CalendarTable_EventShortcodeCalendar($events);
@@ -93,7 +93,7 @@ class Eab_Events_Calendar_RecurringShortCode {
 
 		return '<section class="wpmudevevents-list">' . $renderer->get_month_calendar($args['date']) . '</section>';
 	}
-
+	
 }
 
 if (!is_admin()) Eab_Events_Calendar_RecurringShortCode::serve();

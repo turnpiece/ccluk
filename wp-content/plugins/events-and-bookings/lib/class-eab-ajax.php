@@ -211,11 +211,11 @@ class Eab_Ajax {
                                 while (username_exists($username)) {
                                         $username .= rand(0,9);
                                 }
-
+                
                                 $password = wp_generate_password(12, false);
                                 $user_id = wp_create_user($username, $password, $email);
                         }
-
+                        
                         $event = new Eab_EventModel($post);
 			$event->add_attendance($user_id, $status);
 		}

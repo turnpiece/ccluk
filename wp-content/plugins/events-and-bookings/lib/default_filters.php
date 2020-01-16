@@ -109,7 +109,7 @@ if (!(defined('EAB_SKIP_FORCED_META_ID_ORDERING') && EAB_SKIP_FORCED_META_ID_ORD
 // End Core WP postmeta filtering
 
 // Category sorting in default WP requests
-if (!(defined('EAB_SKIP_FORCED_CATEGORY_ORDERING') && EAB_SKIP_FORCED_CATEGORY_ORDERING)) {
+if (!(defined('EAB_SKIP_FORCED_CATEGORY_ORDERING') && EAB_SKIP_FORCED_CATEGORY_ORDERING)) {	
 
 	function _eab_tear_down_event_categories_for_ordering ($posts) {
 		Eab_Filter::start_date_ordering_tear_down();
@@ -146,7 +146,7 @@ add_action('pre_get_posts', '_eab_dispatch_event_archives', 1);
 function _eab_hide_past_events_from_archive_pages( $query ) {
 
 	if ( is_tax( 'eab_events_category' ) && $query->is_main_query() && ! is_admin() ) {
-
+	
 		$meta_query = array(
              array(
                 'key' 		=> 'incsub_event_start',
@@ -186,7 +186,7 @@ EO_EAB_AGM_SUBSCRIBER_SCRIPT;
 add_action('admin_footer-post-new.php', 'eab_to_agm__ensure_subscribers_maps', 99);
 add_action('admin_footer-post.php', 'eab_to_agm__ensure_subscribers_maps', 99);
 // End Admin side - ensure Maps availability for subscribers
-
+ 
 // Render event categories as CSS classes
 function eab__event_categories_to_classes ($cls, $event_id) {
 	$event = new Eab_EventModel(get_post($event_id));
@@ -248,7 +248,7 @@ if (!(defined('EAB_SKIP_DEFAULT_ULTIMATE_FACEBOOK_EVENT_FILTERING') && EAB_SKIP_
 
 // WPML translated Events content with directory URL setup
 if (!(defined('EAB_SKIP_DEFAULT_WPML_REWRITE_FILTERING') && EAB_SKIP_DEFAULT_WPML_REWRITE_FILTERING)) {
-
+	
 	function eab_to_wpml__rewrite_rules ($rules) {
 		global $sitepress;
 		$wpml_settings = $sitepress->get_settings();
@@ -356,7 +356,7 @@ if (defined('EAB_OPTMIZIE_SCRIPT_LOAD') && EAB_OPTMIZIE_SCRIPT_LOAD) {
 			$key = !empty($key) ? $key : $this->_get_request_key();
 			return get_transient($key);
 		}
-
+		
 		private function _endpoint_set_optimized_cache ($cache) {
 			$key = $this->_get_request_key();
 			return set_transient($key, $cache, DAY_IN_SECONDS);

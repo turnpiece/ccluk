@@ -3,19 +3,19 @@
 class Eab_Month_Navigation_Widget extends Eab_Widget {
 	public function __construct () {
 		$widget_ops = array(
-			'classname' => __CLASS__,
+			'classname' => __CLASS__, 
 			'description' => __( 'Displays a form to navigation to other month archive.', $this->translation_domain ),
 		);
 
 		parent::__construct( __CLASS__, __( 'Monthly Event Archive Navigation', $this->translation_domain ), $widget_ops );
 	}
-
+	
 	public function form ($instance) {
 		$title		= isset( $instance['title'] ) ? esc_attr( $instance['title'] ) : '';
 		$text		= isset( $instance['text'] ) ? esc_attr( $instance['text'] ) : '';
 		$year_from 	= isset( $instance['year_from'] ) ? esc_attr( $instance['year_from'] ) : '';
 		$year_to 	= isset( $instance['year_to'] ) ? esc_attr( $instance['year_to'] ) : '';
-
+		
 		$text 		= empty( $text ) ? __( 'Browse', $this->translation_domain ) : $text;
 		$year_to 	= empty( $year_to ) ? date( 'Y' ) : $year_to;
 		$year_from 	= empty( $year_from ) ? $year_to - 5 : $year_from;
@@ -38,19 +38,19 @@ class Eab_Month_Navigation_Widget extends Eab_Widget {
 		</p>
 		<?php
 	}
-
+	
 	public function update ( $new_instance, $old_instance ) {
 		$instance = $old_instance;
 		$instance['title'] 		= isset( $new_instance['title'] ) ? strip_tags($new_instance['title']) : '';
 		$instance['text'] 		= isset( $new_instance['text'] ) ?strip_tags( $new_instance['text'] ) : '';
 		$instance['year_from'] 	= isset( $new_instance['year_from'] ) ?strip_tags( $new_instance['year_from'] ) : '';
 		$instance['year_to'] 	= isset( $new_instance['year_to'] ) ?strip_tags( $new_instance['year_to'] ) : '';
-
+		
 		delete_transient( $this->get_field_id( 'cache' ) );
 
 		return $instance;
 	}
-
+	
 	public function widget ( $args, $instance ) {
 		extract($args);
 		$title = apply_filters( 'widget_title', $instance['title'] );
@@ -101,14 +101,14 @@ class Eab_Month_Navigation_Widget extends Eab_Widget {
 				var year 	= document.getElementById( 'eab_widget_year' ).value,
 					month 	= document.getElementById( 'eab_widget_month' ).value,
 					url		= '<?php echo home_url($eab->_data->get_option('slug')) . '/'; ?>' + year + '/' + month;
-
+				
 				window.location.href = url;
-
+				
 				return false;
 			}
 			</script>
 		</div>
 		<?php
-		echo $after_widget;
+		echo $after_widget;	
 	}
 }

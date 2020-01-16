@@ -41,7 +41,7 @@ abstract class Eab_Importer {
 
 
 /* ----- Shared code, helpers ----- */
-
+	
 	public function import_events ($source) {
                 remove_action( 'transition_post_status',     '_transition_post_status',                  5, 3 );
 		$events = (array)$this->map_to_raw_events_array($source);
@@ -58,9 +58,9 @@ abstract class Eab_Importer {
 		$post = $this->map_to_post_type($source);
 		if (!$post || !is_array($post)) return false;
 		$post['post_type'] = Eab_EventModel::POST_TYPE;
-
+		
 		$meta = $this->map_to_post_meta($source);
-
+                
 		$post_id = wp_insert_post($post);
 		if (!$post_id) return false; // Log error
 
