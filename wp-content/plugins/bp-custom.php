@@ -44,6 +44,19 @@ class CCLUK_BP_Custom {
 
 		// remove starred messages
 		add_filter( 'bp_is_messages_star_active', '__return_false' );
+
+		// reorder profile menu tabs
+		add_action( 'bp_setup_nav', array( $this, 'profile_tab_order'), 999 );
+
+		// define the default Profile component
+		define( 'BP_DEFAULT_COMPONENT', 'profile' );
+	}
+
+	public function profile_tab_order() {
+		/* Reorder profile tabs */
+		global $bp;
+		$bp->bp_nav['profile']['position'] = 10;
+		$bp->bp_nav['activity']['position'] = 20;
 	}
 
 	public function buddypress_menu( $items, $args ) {
