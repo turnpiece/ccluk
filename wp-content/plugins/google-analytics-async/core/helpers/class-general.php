@@ -197,4 +197,24 @@ class General {
 		 */
 		return apply_filters( 'beehive_wpmudev_membership_status', $status );
 	}
+
+	/**
+	 * Sanitize a simple array input using array_map.
+	 *
+	 * If the input is not an array it will not process.
+	 *
+	 * @param array  $data     Data to sanitize.
+	 * @param string $function Function name to use.
+	 *
+	 * @since 3.2.2
+	 *
+	 * @return array
+	 */
+	public static function sanitize_array( $data, $function = 'sanitize_text_field' ) {
+		if ( is_array( $data ) && function_exists( $function ) ) {
+			$data = array_map( $function, $data );
+		}
+
+		return $data;
+	}
 }

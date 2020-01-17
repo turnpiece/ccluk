@@ -82,6 +82,11 @@ class DB_Prefix_Service extends Rule_Service implements IRule_Service {
 		}
 		//all good
 		$wpdb->query( 'COMMIT' );
+		//because we write to db so the later query will be error as the table from $wpdb not there anymore
+		//replace the $wpdb isntance
+		$wpdb->set_prefix( $this->new_prefix );
+		//some time it can be gap time from io or so, just sleep it for 3s
+		sleep(3);
 
 		return true;
 	}
@@ -244,6 +249,8 @@ class DB_Prefix_Service extends Rule_Service implements IRule_Service {
 			}
 			//all good
 			$wpdb->query( 'COMMIT' );
+			//restore back
+			$wpdb->set_prefix( 'wp_' );
 
 			return true;
 		}

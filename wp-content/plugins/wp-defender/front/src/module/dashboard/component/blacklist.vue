@@ -23,7 +23,7 @@
             </div>
             <form method="post" class="margin-top-30" v-else-if="status==='new'">
                 <submit-button type="button" css-class="sui-button-blue" :state="state" @click="toggle(true)">
-                    {{__("Active")}}
+                    {{__("Activate")}}
                 </submit-button>
             </form>
             <div v-else-if="status==='blacklisted'" class="sui-notice sui-notice-error">

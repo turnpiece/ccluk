@@ -19,14 +19,10 @@ class Protect_Information_Service extends Rule_Service implements IRule_Service 
 	public function check() {
 		$cache = WP_Helper::getArrayCache()->get( 'Protect_Information_Service', null );
 		if ( $cache === null ) {
-			$url        = wp_defender()->getPluginUrl() . 'changelog.txt';
-			$ssl_verify = apply_filters( 'defender_ssl_verify', true ); //most hosts dont really have valid ssl or ssl still pending
-			$status     = wp_remote_head( $url, array(
-				'user-agent' => $_SERVER['HTTP_USER_AGENT'],
-				'timeout'    => 3,
-				'sslverify'  => $ssl_verify
-			) );
-			if ( 200 == wp_remote_retrieve_response_code( $status ) ) {
+			$url     = wp_defender()->getPluginUrl() . 'changelog.txt';
+			$headers = $this->headRequest( $url, 'Protect Information' );
+
+			if ( 200 == $headers['response_code'] ) {
 				WP_Helper::getArrayCache()->set( 'Protect_Information_Service', false );
 
 				return false;
@@ -71,6 +67,8 @@ class Protect_Information_Service extends Rule_Service implements IRule_Service 
 			$htConfig = array_merge( $htConfig, $rules );
 			file_put_contents( $htPath, implode( PHP_EOL, $htConfig ), LOCK_EX );
 		}
+		$url = wp_defender()->getPluginUrl() . 'changelog.txt';
+		$this->clearHeadRequest( $url );
 
 		return true;
 	}
@@ -97,6 +95,8 @@ class Protect_Information_Service extends Rule_Service implements IRule_Service 
 			}
 			$htConfig = trim( $htConfig );
 			file_put_contents( $htPath, $htConfig, LOCK_EX );
+			$url = wp_defender()->getPluginUrl() . 'changelog.txt';
+			$this->clearHeadRequest( $url );
 
 			return true;
 		} else {

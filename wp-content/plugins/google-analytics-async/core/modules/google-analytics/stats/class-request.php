@@ -9,6 +9,7 @@ use Exception;
 use Beehive\Core\Utils\Abstracts\Base;
 use Google_Service_AnalyticsReporting_Metric;
 use Google_Service_AnalyticsReporting_OrderBy;
+use Beehive\Core\Modules\Google_Analytics\Data;
 use Google_Service_AnalyticsReporting_Dimension;
 use Google_Service_AnalyticsReporting_DateRange;
 use Beehive\Core\Modules\Google_Analytics\Helper;
@@ -204,13 +205,22 @@ class Request extends Base {
 				$this->get_previous_period( $from, $to ),
 			];
 
+			// If the current page is home page.
+			if ( trailingslashit( network_site_url() ) === trailingslashit( $url ) ) {
+				$url = '/';
+			} else {
+				// Get the url part without domain name.
+				$url = str_replace( untrailingslashit( network_site_url() ), '', $url );
+			}
+
 			// Setup account.
 			$this->setup_account();
 
 			// Filter based on the post id.
 			$dimension_filters[] = $this->get_dimension_filter( [
 				'pagePath' => [
-					'value' => basename( $url ) . '/$',
+					'value'    => $url,
+					'operator' => 'EXACT',
 				],
 			] );
 
@@ -995,7 +1005,20 @@ class Request extends Base {
 		$network = Helper::instance()->login_source( $network ) === 'network';
 
 		// Get currently assigned id.
-		$this->account = beehive_analytics()->settings->get( 'account_id', 'google', $network );
+		$account = beehive_analytics()->settings->get( 'account_id', 'google', $network );
+
+		// Some times, account id can be empty when user didn't save the settings. We need to handle this ourselves.
+		if ( empty( $account ) ) {
+			// Get available profiles.
+			$profiles = Data::instance()->profiles( $network );
+			if ( ! empty( $profiles ) ) {
+				// Set the first item for now.
+				$account = $profiles[0]->getId();
+				beehive_analytics()->settings->update( 'account_id', $account, 'google', $network );
+			}
+		}
+
+		$this->account = $account;
 	}
 
 	/**

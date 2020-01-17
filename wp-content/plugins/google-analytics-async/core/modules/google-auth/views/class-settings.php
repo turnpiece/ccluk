@@ -206,10 +206,7 @@ class Settings extends View {
 		// Only when the user has permission.
 		if ( Permission::user_can( 'settings', $this->is_network() ) ) {
 			// Continue only when required.
-			if ( Google_Auth\Helper::instance()->reauth_required( $this->is_network() ) // Only when reauthentication required.
-			     && ( ! General::is_plugin_admin() || Template::current_tab() !== 'general' ) // No need within settings tab.
-			     && ! Template::notice_dismissed( 'google_reauth' )
-			) {
+			if ( $this->reauth_notice_required( $this->is_network() ) ) {
 				?>
 				<div class="error notice is-dismissible" data-type="google_reauth">
 					<p><?php printf( esc_html__( 'It appears the connection with your Google Analytics account has been broken. Re-authenticate with Google in %s’s settings to continue viewing analytics in your Dashboard.', 'ga_trans' ), esc_attr( General::plugin_name() ) ); ?></p>
@@ -237,10 +234,7 @@ class Settings extends View {
 		// Only when the user has permission.
 		if ( Permission::user_can( 'settings', $this->is_network() ) ) {
 			// Continue only when required.
-			if ( Google_Auth\Helper::instance()->setup_required( $this->is_network() ) // Only when reauthentication required.
-			     && ( ! General::is_plugin_admin() || Template::current_tab() !== 'general' ) // No need within settings tab.
-			     && ! Template::notice_dismissed( 'google_setup' )
-			) {
+			if ( $this->setup_notice_required( $this->is_network() ) ) {
 				?>
 				<div class="error notice is-dismissible" data-type="google_setup">
 					<p><?php printf( esc_html__( 'It appears you haven’t finished linking up your Google Analytics account with %s. Finish the setup to view analytics in your Dashboard.', 'ga_trans' ), esc_attr( General::plugin_name() ) ); ?></p>
@@ -376,5 +370,110 @@ class Settings extends View {
 		 * @since 3.2.0
 		 */
 		return apply_filters( 'beehive_google_profiles_list', $list, $network );
+	}
+
+	/**
+	 * Check if the setup notice should be shown.
+	 *
+	 * @param bool $network Network flag.
+	 *
+	 * @since 3.2.1
+	 *
+	 * @return bool
+	 */
+	private function setup_notice_required( $network ) {
+		// Default source is single site.
+		$required = Google_Auth\Helper::instance()->setup_required( $network );
+
+		// Only valid if mutisite.
+		if ( is_multisite() && ! $network && General::is_networkwide() ) {
+			if (
+				// No need to show the initial setup notice if api is setup.
+				! Google_Auth\Helper::instance()->is_setup()
+				// Login status network wide.
+				&& ! Google_Auth\Helper::instance()->is_logged_in( true )
+				&& $required
+			) {
+				$required = true;
+			} else {
+				$required = false;
+			}
+		}
+
+		// Make sure we can display notice.
+		if ( ! $this->can_display_notice( 'google_setup' ) ) {
+			$required = false;
+		}
+
+		/**
+		 * Filter hook to modify the setup required notice flag.
+		 *
+		 * @param bool $required Is required?.
+		 * @param bool $network  Is network level.
+		 *
+		 * @since 3.2.1
+		 */
+		return apply_filters( 'beehive_google_setup_notice_required', $required, $network );
+	}
+
+	/**
+	 * Check if the re-authentication notice should be shown.
+	 *
+	 * @param bool $network Network flag.
+	 *
+	 * @since 3.2.1
+	 *
+	 * @return bool
+	 */
+	private function reauth_notice_required( $network ) {
+		// Default source is single site.
+		$required = Google_Auth\Helper::instance()->reauth_required( $network );
+
+		// Only valid if mutisite.
+		if ( is_multisite() && ! $network && General::is_networkwide() ) {
+			// Login status network wide.
+			if ( ! Google_Auth\Helper::instance()->is_logged_in( true ) && $required ) {
+				$required = true;
+			} else {
+				$required = false;
+			}
+		}
+
+		// Make sure we can display notice.
+		if ( ! $this->can_display_notice( 'google_reauth' ) ) {
+			$required = false;
+		}
+
+		/**
+		 * Filter hook to modify the re-auth required notice flag.
+		 *
+		 * @param bool $required Is required?.
+		 * @param bool $network  Is network level.
+		 *
+		 * @since 3.2.1
+		 */
+		return apply_filters( 'beehive_google_reauth_notice_required', $required, $network );
+	}
+
+	/**
+	 * Basic checks before displaying notice.
+	 *
+	 * @param string $type Notice type.
+	 *
+	 * @since 3.2.1
+	 *
+	 * @return bool
+	 */
+	private function can_display_notice( $type ) {
+		if (
+			// Dismissed by the user.
+			Template::notice_dismissed( $type )
+			// In Google setup page.
+			|| ( General::is_plugin_admin() && Template::current_tab() === 'general' )
+		) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 }

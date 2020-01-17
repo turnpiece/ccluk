@@ -19,7 +19,7 @@ $skip_emails = $model->get( Shipper_Model_Stored_Options::KEY_SKIPEMAILS );
 <div class="sui-box shipper-page-settings-migration">
 
 	<div class="sui-box-header">
-		<h2 class="sui-box-title"><?php esc_html_e( 'Migration', 'shipper' ); ?></h2>
+		<h2 class="sui-box-title"><?php esc_html_e( 'API Migration', 'shipper' ); ?></h2>
 	</div>
 
 	<form method="POST">

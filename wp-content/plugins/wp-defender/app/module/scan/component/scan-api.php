@@ -32,7 +32,7 @@ class Scan_Api extends Component {
 	 */
 	public static function createScan() {
 		if ( is_null( self::getActiveScan() ) ) {
-			self::flushCache( false );
+			self::flushCache();
 
 			$model             = new Scan();
 			$model->status     = Scan::STATUS_INIT;
@@ -125,9 +125,11 @@ class Scan_Api extends Component {
 				ABSPATH . 'wp-includes',
 			)
 		), true );
-		$cache->set( self::CACHE_CORE, array_merge( $firstLevelFiles, $coreFiles ), 0 );
+		$files     = array_merge( $firstLevelFiles, $coreFiles );
+		$files     = apply_filters( 'wd_core_files', $files );
+		$cache->set( self::CACHE_CORE, $files, 0 );
 
-		return array_merge( $firstLevelFiles, $coreFiles );
+		return $files;
 	}
 
 	/**
@@ -145,7 +147,7 @@ class Scan_Api extends Component {
 		), true, $settings->max_filesize, true );
 		//include wp-config.php here
 		$files[] = ABSPATH . 'wp-config.php';
-
+		$files   = apply_filters( 'wd_content_files', $files );
 		$cache->set( self::CACHE_CONTENT, $files );
 
 		return $files;
@@ -263,8 +265,12 @@ class Scan_Api extends Component {
 					return false;
 				} else {
 					//each request onlly allow 10s, or when reached to 64MB ram
-					$est      = microtime( true ) - $start;
-					$currMem  = ( memory_get_peak_usage( true ) / 1024 / 1024 );
+					$est     = microtime( true ) - $start;
+					$currMem = ( memory_get_peak_usage( true ) / 1024 / 1024 );
+					if ( php_sapi_name() == 'cli' ) {
+						echo $queue->current() . PHP_EOL;
+					}
+					//echo $currMem . PHP_EOL;
 					$memLimit = apply_filters( 'defender_scan_memory_alloc', 128 );
 					if ( $est >= 15 || $currMem >= $memLimit || $queue->isEnd() || $queue->key() == 1 ) {
 						//save current process and pause
@@ -453,9 +459,7 @@ class Scan_Api extends Component {
 				}
 			}
 		}
-		if ( php_sapi_name() == "cli" ) {
-			echo $total . PHP_EOL;
-		}
+
 		$percent = 0;
 		if ( $total > 0 ) {
 			$percent = round( ( $currentIndex / $total ) * 100, 2 );

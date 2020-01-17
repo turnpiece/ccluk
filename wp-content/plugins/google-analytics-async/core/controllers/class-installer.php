@@ -214,15 +214,19 @@ class Installer extends Base {
 	 * @return string
 	 */
 	private function option_3_2( $key, $group = 'track_settings', $default = '' ) {
+		static $network_options = [];
 		static $options = [];
 
-		// Get settings.
-		if ( empty( $options ) ) {
-			// Get old options.
-			$options = is_network_admin() ? get_site_option( 'ga2_settings', [] ) : get_option( 'ga2_settings', [] );
+		// Get old options.
+		if ( $this->is_network() && empty( $network_options ) ) {
+			$network_options = get_site_option( 'ga2_settings', [] );
+		} elseif ( ! $this->is_network() && empty( $options ) ) {
+			$options = get_option( 'ga2_settings', [] );
 		}
 
-		return isset( $options[ $group ][ $key ] ) ? $options[ $group ][ $key ] : $default;
+		$current_options = $this->is_network() ? $network_options : $options;
+
+		return isset( $current_options[ $group ][ $key ] ) ? $current_options[ $group ][ $key ] : $default;
 	}
 
 	/**

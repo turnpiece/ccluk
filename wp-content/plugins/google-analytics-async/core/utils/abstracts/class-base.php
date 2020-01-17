@@ -74,6 +74,6 @@ abstract class Base extends Singleton {
 		 *
 		 * @since 3.2.0
 		 */
-		return apply_filters( 'beehive_is_netwrok', $network );
+		return apply_filters( 'beehive_is_network', $network );
 	}
 }

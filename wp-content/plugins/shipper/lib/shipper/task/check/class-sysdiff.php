@@ -28,7 +28,12 @@ class Shipper_Task_Check_Sysdiff extends Shipper_Task_Check {
 				self::ERR_BLOCKING,
 				__( 'No remote data to process', 'shipper' )
 			);
+
 			return false;
+		}
+
+		if ( ! isset( $remote['wordpress'][ Shipper_Model_System_Wp::SHIPPER_VERSION ] ) ) {
+			$remote['wordpress'][ Shipper_Model_System_Wp::SHIPPER_VERSION ] = '1.0.3';
 		}
 
 		$model = new Shipper_Model_System;
@@ -40,6 +45,7 @@ class Shipper_Task_Check_Sysdiff extends Shipper_Task_Check {
 					self::ERR_BLOCKING,
 					sprintf( __( 'Invalid remote data for section %s', 'shipper' ), $section )
 				);
+
 				return false;
 			}
 			if ( ! isset( $local[ $section ] ) ) {
@@ -47,6 +53,7 @@ class Shipper_Task_Check_Sysdiff extends Shipper_Task_Check {
 					self::ERR_BLOCKING,
 					sprintf( __( 'Invalid local data for section %s', 'shipper' ), $section )
 				);
+
 				return false;
 			}
 			foreach ( $info as $key => $value ) {
@@ -58,10 +65,11 @@ class Shipper_Task_Check_Sysdiff extends Shipper_Task_Check {
 							$section, $key
 						)
 					);
+
 					return false;
 				}
 
-				$check = strtolower( "{$section}_{$key}" );
+				$check  = strtolower( "{$section}_{$key}" );
 				$method = "is_{$check}_diff_acceptable";
 
 				if ( is_callable( array( $this, $method ) ) ) {
@@ -79,6 +87,7 @@ class Shipper_Task_Check_Sysdiff extends Shipper_Task_Check {
 				}
 			}
 		}
+
 		return true;
 	}
 
@@ -91,22 +100,22 @@ class Shipper_Task_Check_Sysdiff extends Shipper_Task_Check {
 	 * @return object Shipper_Model_Check instance
 	 */
 	public function is_php_version_major_diff_acceptable( $remote, $local ) {
-		$check = new Shipper_Model_Check( __( 'PHP version is compatible', 'shipper' ) );
+		$check  = new Shipper_Model_Check( __( 'PHP version is compatible', 'shipper' ) );
 		$status = Shipper_Model_Check::STATUS_OK;
 
 		if ( $remote !== $local ) {
-			$status = Shipper_Model_Check::STATUS_WARNING;
+			$status    = Shipper_Model_Check::STATUS_WARNING;
 			$migration = new Shipper_Model_Stored_Migration;
-			$tpl = new Shipper_Helper_Template;
+			$tpl       = new Shipper_Helper_Template;
 			$check->set( 'title', __( 'PHP Version Difference', 'shipper' ) );
 			$check->set(
-				'message', 
+				'message',
 				$tpl->get(
 					'checks/php-difference',
 					array(
-						'local' => $this->get_normalized_version( $local ),
-						'remote' => $this->get_normalized_version( $remote ),
-						'source' => $migration->get_source(),
+						'local'       => $this->get_normalized_version( $local ),
+						'remote'      => $this->get_normalized_version( $remote ),
+						'source'      => $migration->get_source(),
 						'destination' => $migration->get_destination(),
 					)
 				)
@@ -125,22 +134,22 @@ class Shipper_Task_Check_Sysdiff extends Shipper_Task_Check {
 	 * @return object Shipper_Model_Check instance
 	 */
 	public function is_mysql_version_diff_acceptable( $remote, $local ) {
-		$check = new Shipper_Model_Check( __( 'MySQL version is compatible', 'shipper' ) );
+		$check  = new Shipper_Model_Check( __( 'MySQL version is compatible', 'shipper' ) );
 		$status = Shipper_Model_Check::STATUS_OK;
 
 		if ( version_compare( $this->get_normalized_version( $remote ), $this->get_normalized_version( $local ), 'ne' ) ) {
-			$status = Shipper_Model_Check::STATUS_WARNING;
+			$status    = Shipper_Model_Check::STATUS_WARNING;
 			$migration = new Shipper_Model_Stored_Migration;
-			$tpl = new Shipper_Helper_Template;
+			$tpl       = new Shipper_Helper_Template;
 			$check->set( 'title', __( 'MySQL Version Difference', 'shipper' ) );
 			$check->set(
-				'message', 
+				'message',
 				$tpl->get(
 					'checks/mysql-difference',
 					array(
-						'local' => $local,
-						'remote' => $remote,
-						'source' => $migration->get_source(),
+						'local'       => $local,
+						'remote'      => $remote,
+						'source'      => $migration->get_source(),
 						'destination' => $migration->get_destination(),
 					)
 				)
@@ -159,22 +168,22 @@ class Shipper_Task_Check_Sysdiff extends Shipper_Task_Check {
 	 * @return object Shipper_Model_Check instance
 	 */
 	public function is_mysql_charset_diff_acceptable( $remote, $local ) {
-		$check = new Shipper_Model_Check( __( 'Database Charset is compatible', 'shipper' ) );
+		$check  = new Shipper_Model_Check( __( 'Database Charset is compatible', 'shipper' ) );
 		$status = Shipper_Model_Check::STATUS_OK;
 
 		if ( strtolower( $remote ) !== strtolower( $local ) ) {
-			$status = Shipper_Model_Check::STATUS_WARNING;
+			$status    = Shipper_Model_Check::STATUS_WARNING;
 			$migration = new Shipper_Model_Stored_Migration;
-			$tpl = new Shipper_Helper_Template;
+			$tpl       = new Shipper_Helper_Template;
 			$check->set( 'title', __( 'Database Charset Difference', 'shipper' ) );
 			$check->set(
-				'message', 
+				'message',
 				$tpl->get(
 					'checks/charset-difference',
 					array(
-						'local' => strtoupper( $local ),
-						'remote' => strtoupper( $remote ),
-						'source' => $migration->get_source(),
+						'local'       => strtoupper( $local ),
+						'remote'      => strtoupper( $remote ),
+						'source'      => $migration->get_source(),
 						'destination' => $migration->get_destination(),
 					)
 				)
@@ -193,22 +202,22 @@ class Shipper_Task_Check_Sysdiff extends Shipper_Task_Check {
 	 * @return object Shipper_Model_Check instance
 	 */
 	public function is_server_type_diff_acceptable( $remote, $local ) {
-		$check = new Shipper_Model_Check( __( 'Server Type is compatible', 'shipper' ) );
+		$check  = new Shipper_Model_Check( __( 'Server Type is compatible', 'shipper' ) );
 		$status = Shipper_Model_Check::STATUS_OK;
 
 		if ( $remote !== $local ) {
-			$status = Shipper_Model_Check::STATUS_WARNING;
+			$status    = Shipper_Model_Check::STATUS_WARNING;
 			$migration = new Shipper_Model_Stored_Migration;
-			$tpl = new Shipper_Helper_Template;
+			$tpl       = new Shipper_Helper_Template;
 			$check->set( 'title', __( 'Server Type Difference', 'shipper' ) );
 			$check->set(
-				'message', 
+				'message',
 				$tpl->get(
 					'checks/servertype-difference',
 					array(
-						'local' => $local,
-						'remote' => $remote,
-						'source' => $migration->get_source(),
+						'local'       => $local,
+						'remote'      => $remote,
+						'source'      => $migration->get_source(),
 						'destination' => $migration->get_destination(),
 					)
 				)
@@ -227,22 +236,22 @@ class Shipper_Task_Check_Sysdiff extends Shipper_Task_Check {
 	 * @return object Shipper_Model_Check instance
 	 */
 	public function is_server_os_diff_acceptable( $remote, $local ) {
-		$check = new Shipper_Model_Check( __( 'Server Operating System is compatible', 'shipper' ) );
+		$check  = new Shipper_Model_Check( __( 'Server Operating System is compatible', 'shipper' ) );
 		$status = Shipper_Model_Check::STATUS_OK;
 
 		if ( strtolower( $remote ) !== strtolower( $local ) ) {
-			$status = Shipper_Model_Check::STATUS_WARNING;
+			$status    = Shipper_Model_Check::STATUS_WARNING;
 			$migration = new Shipper_Model_Stored_Migration;
-			$tpl = new Shipper_Helper_Template;
+			$tpl       = new Shipper_Helper_Template;
 			$check->set( 'title', __( 'Server Operating System Difference', 'shipper' ) );
 			$check->set(
-				'message', 
+				'message',
 				$tpl->get(
 					'checks/serveros-difference',
 					array(
-						'local' => $local,
-						'remote' => $remote,
-						'source' => $migration->get_source(),
+						'local'       => $local,
+						'remote'      => $remote,
+						'source'      => $migration->get_source(),
 						'destination' => $migration->get_destination(),
 					)
 				)
@@ -261,22 +270,22 @@ class Shipper_Task_Check_Sysdiff extends Shipper_Task_Check {
 	 * @return object Shipper_Model_Check instance
 	 */
 	public function is_wordpress_multisite_diff_acceptable( $remote, $local ) {
-		$check = new Shipper_Model_Check( __( 'Installation type is compatible', 'shipper' ) );
+		$check  = new Shipper_Model_Check( __( 'Installation type is compatible', 'shipper' ) );
 		$status = Shipper_Model_Check::STATUS_OK;
 
 		if ( (int) $remote !== (int) $local ) {
-			$status = Shipper_Model_Check::STATUS_ERROR;
+			$status    = Shipper_Model_Check::STATUS_ERROR;
 			$migration = new Shipper_Model_Stored_Migration;
-			$tpl = new Shipper_Helper_Template;
+			$tpl       = new Shipper_Helper_Template;
 			$check->set( 'title', __( 'Installation Type Difference - Single Site / Multisite', 'shipper' ) );
 			$check->set(
-				'message', 
+				'message',
 				$tpl->get(
 					'checks/multisite-difference',
 					array(
-						'local' => (int) $local,
-						'remote' => (int) $remote,
-						'source' => $migration->get_source(),
+						'local'       => (int) $local,
+						'remote'      => (int) $remote,
+						'source'      => $migration->get_source(),
 						'destination' => $migration->get_destination(),
 					)
 				)
@@ -295,23 +304,48 @@ class Shipper_Task_Check_Sysdiff extends Shipper_Task_Check {
 	 * @return object Shipper_Model_Check instance
 	 */
 	public function is_wordpress_subdomain_install_diff_acceptable( $remote, $local ) {
-		$check = new Shipper_Model_Check( __( 'Multisite Address is compatible', 'shipper' ) );
-		$status = Shipper_Model_Check::STATUS_OK;
+		$check    = new Shipper_Model_Check( __( 'Multisite Address is compatible', 'shipper' ) );
+		$status   = Shipper_Model_Check::STATUS_OK;
 		$do_check = is_multisite();
 
 		if ( $do_check && (int) $remote !== (int) $local ) {
-			$status = Shipper_Model_Check::STATUS_ERROR;
+			$status    = Shipper_Model_Check::STATUS_ERROR;
 			$migration = new Shipper_Model_Stored_Migration;
-			$tpl = new Shipper_Helper_Template;
+			$tpl       = new Shipper_Helper_Template;
 			$check->set( 'title', __( 'Multisite Address Type Difference', 'shipper' ) );
 			$check->set(
-				'message', 
+				'message',
 				$tpl->get(
 					'checks/subdomain-difference',
 					array(
-						'local' => (int) $local,
-						'remote' => (int) $remote,
-						'source' => $migration->get_source(),
+						'local'       => (int) $local,
+						'remote'      => (int) $remote,
+						'source'      => $migration->get_source(),
+						'destination' => $migration->get_destination(),
+					)
+				)
+			);
+		}
+
+		return $check->complete( $status );
+	}
+
+	public function is_wordpress_shipper_version_diff_acceptable( $remote, $local ) {
+		$check  = new Shipper_Model_Check( __( 'Shipper version is compatibility', 'shipper' ) );
+		$status = Shipper_Model_Check::STATUS_OK;
+		if ( $remote == false || $remote != $local ) {
+			$status    = Shipper_Model_Check::STATUS_ERROR;
+			$migration = new Shipper_Model_Stored_Migration;
+			$tpl       = new Shipper_Helper_Template;
+			$check->set( 'title', __( 'Shipper Version Difference', 'shipper' ) );
+			$check->set(
+				'message',
+				$tpl->get(
+					'checks/shipper-difference',
+					array(
+						'local'       => $local,
+						'remote'      => $remote,
+						'source'      => $migration->get_source(),
 						'destination' => $migration->get_destination(),
 					)
 				)
@@ -325,15 +359,16 @@ class Shipper_Task_Check_Sysdiff extends Shipper_Task_Check {
 	 * Normalizes version strings to point-separated integers
 	 *
 	 * @param string $version Raw version to normalize.
-	 * @param int    $precision Optional number of point-separated values.
+	 * @param int $precision Optional number of point-separated values.
 	 *
 	 * @return string
 	 */
 	public function get_normalized_version( $version, $precision = 2 ) {
 		$ver = array_map( 'intval', explode( '.', $version, $precision + 1 ) );
-		if ( count( $ver ) > $precision ) { array_pop( $ver ); }
+		if ( count( $ver ) > $precision ) {
+			array_pop( $ver );
+		}
+
 		return join( '.', $ver );
-
 	}
-
 }

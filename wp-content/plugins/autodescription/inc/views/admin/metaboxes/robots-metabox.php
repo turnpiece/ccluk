@@ -150,7 +150,8 @@ switch ( $instance ) :
 		$this->wrap_fields(
 			vsprintf(
 				'<p><label for="%1$s"><strong>%2$s</strong> %5$s</label></p>
-				<p><select name="%3$s" id="%1$s">%4$s</select></p>',
+				<p><select name="%3$s" id="%1$s">%4$s</select></p>
+				<p class=description>%6$s</p>',
 				[
 					$this->get_field_id( 'max_snippet_length' ),
 					esc_html__( 'Maximum text snippet length', 'autodescription' ),
@@ -161,6 +162,7 @@ switch ( $instance ) :
 						'',
 						false
 					),
+					esc_html__( "This directive also imposes a limit on meta descriptions and structured data, which unintentionally restricts the amount of information you can share. Therefore, it's best to use at least a 320 character limit.", 'autodescription' ),
 				]
 			),
 			true
@@ -186,7 +188,8 @@ switch ( $instance ) :
 		$this->wrap_fields(
 			vsprintf(
 				'<p><label for="%1$s"><strong>%2$s</strong> %5$s</label></p>
-				<p><select name="%3$s" id="%1$s">%4$s</select></p>',
+				<p><select name="%3$s" id="%1$s">%4$s</select></p>
+				<p class=description>%6$s</p>',
 				[
 					$this->get_field_id( 'max_image_preview' ),
 					esc_html__( 'Maximum image preview size', 'autodescription' ),
@@ -197,6 +200,15 @@ switch ( $instance ) :
 						'',
 						false
 					),
+					$this->convert_markdown(
+						sprintf(
+							/* translators: Backticks and hyperlink are Markdown! %s = link to documentation. */
+							esc_html__( 'The "None, disallow preview" setting will not be used when `nofollow` or `noarchive` are set for a page. This is to work around unexpected deindexing behavior in Google Search. [Learn more](%s).', 'autodescription' ),
+							'https://kb.theseoframework.com/kb/why-is-max-image-preview-none-purged/'
+						),
+						[ 'code', 'a' ],
+						[ 'a_external' => true ]
+					),
 				]
 			),
 			true
@@ -204,7 +216,7 @@ switch ( $instance ) :
 
 		$_video_snippet_types['default'] = [
 			-1 => __( 'Full video preview', 'autodescription' ),
-			0  => _x( 'None, disallow preview', 'quanity: zero', 'autodescription' ),
+			0  => _x( 'None, still image only', 'quanity: zero', 'autodescription' ),
 		];
 		foreach ( range( 1, 600, 1 ) as $_n ) {
 			/* translators: %d = number */

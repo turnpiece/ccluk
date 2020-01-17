@@ -3,8 +3,10 @@
 /**
  * Admin settings page template.
  *
- * @var bool       $network   Is network settings page?.
- * @var array|bool $ps_levels Pro Sites levels.
+ * @var bool       $network           Is network settings page?.
+ * @var array|bool $ps_levels         Pro Sites levels.
+ * @var bool       $anonymize_visible Is IP Anonymize option visible.
+ * @var bool       $networkwide       Is plugin active networkwide.
  */
 
 // If this file is called directly, abort.
@@ -18,7 +20,7 @@ defined( 'WPINC' ) || die;
 
 		<div class="sui-box-settings-col-1">
 			<span class="sui-settings-label"><?php esc_html_e( 'Account', 'ga_trans' ); ?></span>
-			<span class="sui-description"><?php esc_html_e( 'Google API project is suitable for high traffic websites and will result in smoother experience for site admins.', 'ga_trans' ); ?></span>
+			<span class="sui-description"><?php esc_html_e( 'Authenticate with Google to connect your analytics profile and begin feeding analytics in your WordPress Dashboard.', 'ga_trans' ); ?></span>
 		</div>
 
 		<div class="sui-box-settings-col-2">
@@ -36,7 +38,7 @@ defined( 'WPINC' ) || die;
 
 	</div>
 
-<?php if ( $network ) : ?>
+<?php if ( $network || ! $networkwide ) : ?>
 
 	<div class="sui-box-settings-row">
 
@@ -57,6 +59,8 @@ defined( 'WPINC' ) || die;
 
 <?php endif; ?>
 
+<?php if ( $anonymize_visible ) : ?>
+
 	<div class="sui-box-settings-row">
 
 		<div class="sui-box-settings-col-1">
@@ -64,16 +68,18 @@ defined( 'WPINC' ) || die;
 			<span class="sui-description"><?php esc_html_e( 'When enabled, visitor IP address will be anonymized.', 'ga_trans' ); ?></span>
 		</div>
 
+		<?php $anonymize = beehive_analytics()->settings->get( 'anonymize', 'general', $network ); ?>
+
 		<div class="sui-box-settings-col-2">
 			<label for="beehive-settings-anonymize" class="sui-toggle">
-				<input type="checkbox" id="beehive-settings-anonymize" name="general[anonymize]" value="1" <?php checked( beehive_analytics()->settings->get( 'anonymize', 'general', $network ), 1 ); ?>>
+				<input type="checkbox" id="beehive-settings-anonymize" name="general[anonymize]" value="1" <?php checked( $anonymize, 1 ); ?>>
 				<span class="sui-toggle-slider"></span>
 			</label>
 			<label for="beehive-settings-anonymize" class="sui-toggle-label"><?php esc_html_e( 'Enable IP Anonymization', 'ga_trans' ); ?></label>
 
 			<?php if ( $network ) : ?>
 
-				<div class="sui-border-frame">
+				<div class="sui-border-frame <?php echo $anonymize ? '' : 'sui-hidden'; ?>" id="beehive-settings-force-anonymize-wrapper">
 					<label for="beehive-settings-force-anonymize" class="sui-label"><?php esc_html_e( 'Whole network tracking', 'ga_trans' ); ?></label>
 					<label for="beehive-settings-force-anonymize" class="sui-checkbox sui-checkbox-sm">
 						<input type="checkbox" id="beehive-settings-force-anonymize" name="general[force_anonymize]" value="1" <?php checked( beehive_analytics()->settings->get( 'force_anonymize', 'general', $network ), 1 ); ?>>
@@ -88,11 +94,13 @@ defined( 'WPINC' ) || die;
 
 	</div>
 
+<?php endif; ?>
+
 	<div class="sui-box-settings-row">
 
 		<div class="sui-box-settings-col-1">
 			<span class="sui-settings-label"><?php esc_html_e( 'Display Advertising', 'ga_trans' ); ?></span>
-			<span class="sui-description"><?php printf( __( 'Enable support for Google\'s Display Advertising and get additional demographic and interests reports. You can read more about it <a href="%s" target="_blank">here</a>.', 'ga_trans' ), 'https://support.google.com/analytics/answer/3450482?hl=en&ref_topic=3413645&rd=1' ); ?></span>
+			<span class="sui-description"><?php printf( __( 'Enable support for Google\'s Display Advertising and get additional demographic and interest reports. You can read more about it <a href="%s" target="_blank">here</a>.', 'ga_trans' ), 'https://support.google.com/analytics/answer/3450482?hl=en&ref_topic=3413645&rd=1' ); ?></span>
 		</div>
 
 		<div class="sui-box-settings-col-2">
@@ -122,7 +130,7 @@ defined( 'WPINC' ) || die;
 			<span class="sui-description"><?php esc_html_e( 'Choose which Pro Site levels can configure analytics settings.', 'ga_trans' ); ?></span>
 			<?php foreach ( $ps_levels as $level => $data ) : ?>
 				<label for="beehive-settings-ps-level-<?php echo esc_attr( $level ); ?>" class="sui-checkbox">
-					<input type="checkbox" id="beehive-settings-ps-level-<?php echo esc_attr( $level ); ?>" name="general[prosites_settings_level][]" value="<?php echo esc_attr( $level ); ?>" <?php checked( in_array( $level, (array) beehive_analytics()->settings->get( 'prosites_settings_level', 'general', $network, [] ), true ) ); ?> />
+					<input type="checkbox" id="beehive-settings-ps-level-<?php echo esc_attr( $level ); ?>" name="general[prosites_settings_level][]" value="<?php echo esc_attr( $level ); ?>" <?php checked( in_array( $level, (array) beehive_analytics()->settings->get( 'prosites_settings_level', 'general', $network, [] ) ) ); ?> />
 					<span aria-hidden="true"></span>
 					<span><?php echo esc_attr( $data['name'] ); ?></span>
 				</label>
@@ -134,7 +142,7 @@ defined( 'WPINC' ) || die;
 			<span class="sui-description"><?php esc_html_e( 'Choose which Pro Site levels can view analytics in their WP Admin Dashboard\'s.', 'ga_trans' ); ?></span>
 			<?php foreach ( $ps_levels as $level => $data ) : ?>
 				<label for="beehive-dashboard-ps-level-<?php echo esc_attr( $level ); ?>" class="sui-checkbox">
-					<input type="checkbox" id="beehive-dashboard-ps-level-<?php echo esc_attr( $level ); ?>" name="general[prosites_analytics_level][]" value="<?php echo esc_attr( $level ); ?>" <?php checked( in_array( $level, (array) beehive_analytics()->settings->get( 'prosites_analytics_level', 'general', $network, [] ), true ) ); ?> />
+					<input type="checkbox" id="beehive-dashboard-ps-level-<?php echo esc_attr( $level ); ?>" name="general[prosites_analytics_level][]" value="<?php echo esc_attr( $level ); ?>" <?php checked( in_array( $level, (array) beehive_analytics()->settings->get( 'prosites_analytics_level', 'general', $network, [] ) ) ); ?> />
 					<span aria-hidden="true"></span>
 					<span><?php echo esc_attr( $data['name'] ); ?></span>
 				</label>

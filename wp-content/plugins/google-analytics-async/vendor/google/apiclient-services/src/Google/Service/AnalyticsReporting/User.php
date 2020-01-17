@@ -30,7 +30,7 @@ class Google_Service_AnalyticsReporting_User extends Google_Model
   }
   public function setUserId($userId)
   {
-    $this->userId = $userId;	 	 	 	 	   			 	
+    $this->userId = $userId;
   }
   public function getUserId()
   {

@@ -17,22 +17,22 @@ class Shipper_Controller_Setup_Uninstall extends Shipper_Controller_Setup {
 	 */
 	public static function uninstall() {
 		self::get()
-			->clear_intermediate_tables()
-			->clear_fs_storage()
-			->clear_stub_storage();
+		    ->clear_intermediate_tables()
+		    ->clear_fs_storage()
+		    ->clear_stub_storage();
 		self::get()
-			->clear_db_storage()
-			->unregister_from_api();
+		    ->clear_db_storage()
+		    ->unregister_from_api();
 	}
 
 	/**
 	 * Clears the DB storage
 	 *
-	 * @uses $wpdb
-	 *
 	 * @param object $model Optional Shipper_Model_Stored_Options instance (used in tests).
 	 *
 	 * @return object Shipper_Controller_Setup instance
+	 * @uses $wpdb
+	 *
 	 */
 	public function clear_db_storage( $model = false ) {
 		global $wpdb;
@@ -56,6 +56,10 @@ class Shipper_Controller_Setup_Uninstall extends Shipper_Controller_Setup {
 			$wpdb->prepare( "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s", $storage )
 		);
 
+		$wpdb->query(
+			$wpdb->prepare( "DELETE FROM {$wpdb->options} WHERE option_name = %s", 'shipper_version' )
+		);
+
 		shipper_flush_cache();
 
 		return $this;
@@ -70,11 +74,11 @@ class Shipper_Controller_Setup_Uninstall extends Shipper_Controller_Setup {
 		$site_id = false;
 
 		$model = new Shipper_Model_Stored_Destinations;
-		$site = $model->get_current();
+		$site  = $model->get_current();
 
 		if ( empty( $site['site_id'] ) ) {
 			// Attempt to re-acquire the data.
-			$task =  new Shipper_Task_Api_Destinations_Get;
+			$task  = new Shipper_Task_Api_Destinations_Get;
 			$sites = $task->apply();
 			$model->set_data( $sites );
 			$site = $model->get_current();

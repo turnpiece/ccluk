@@ -42,8 +42,7 @@ class Shipper_Task_Import_Tables extends Shipper_Task_Import {
 	public function get_current_table() {
 		return isset( $this->_current_table )
 			? $this->_current_table
-			: ''
-		;
+			: '';
 	}
 
 	/**
@@ -57,6 +56,7 @@ class Shipper_Task_Import_Tables extends Shipper_Task_Import {
 		if ( ! isset( $this->_storage ) ) {
 			$this->_storage = new Shipper_Model_Stored_Tablelist;
 		}
+
 		return $this->_storage;
 	}
 
@@ -68,7 +68,7 @@ class Shipper_Task_Import_Tables extends Shipper_Task_Import {
 	 * @return array
 	 */
 	public function get_tables_list() {
-		$list = $this->get_storage();
+		$list   = $this->get_storage();
 		$tables = $list->get( Shipper_Model_Stored_Tablelist::KEY_TABLES_LIST, array() );
 		if ( empty( $tables ) ) {
 			$tables = Shipper_Model_Database_Table_Import::get_table_names_from_files();
@@ -101,12 +101,12 @@ class Shipper_Task_Import_Tables extends Shipper_Task_Import {
 	 * @return string
 	 */
 	public function get_work_description() {
-		$table = $this->get_current_table();
+		$table   = $this->get_current_table();
 		$current = '';
 		if ( ! empty( $table ) ) {
-			$nfo = $this->get_storage()->get( $table, array() );
-			$pos = ! empty( $nfo['position'] ) ? (int) $nfo['position'] : 0;
-			$phase = ! empty( $nfo['phase'] ) ? $nfo['phase'] : '';
+			$nfo     = $this->get_storage()->get( $table, array() );
+			$pos     = ! empty( $nfo['position'] ) ? (int) $nfo['position'] : 0;
+			$phase   = ! empty( $nfo['phase'] ) ? $nfo['phase'] : '';
 			$current = sprintf( __( '(table %1$s, restoring, at position %2$d)', 'shipper' ), $table, $pos );
 
 			if ( self::PHASE_INIT === $phase ) {
@@ -115,6 +115,7 @@ class Shipper_Task_Import_Tables extends Shipper_Task_Import {
 				$current = sprintf( __( '(table %s, finalize)', 'shipper' ), $table );
 			}
 		}
+
 		return sprintf(
 			__( 'Restore the database %s', 'shipper' ),
 			$current
@@ -130,6 +131,7 @@ class Shipper_Task_Import_Tables extends Shipper_Task_Import {
 			Shipper_Model_Stored_Tablelist::KEY_PROCESSED_TABLES,
 			array()
 		);
+
 		return count( $processed );
 	}
 
@@ -141,10 +143,10 @@ class Shipper_Task_Import_Tables extends Shipper_Task_Import {
 	 * @return bool True if all done, false otherwise
 	 */
 	public function import_table( $table ) {
-		$nfo = $this->get_storage()->get( $table, array() );
-		$total = ! empty( $nfo['total'] ) ? (int) $nfo['total'] : 0;
+		$nfo      = $this->get_storage()->get( $table, array() );
+		$total    = ! empty( $nfo['total'] ) ? (int) $nfo['total'] : 0;
 		$position = ! empty( $nfo['position'] ) ? (int) $nfo['position'] : 0;
-		$phase = ! empty( $nfo['phase'] ) ? $nfo['phase'] : self::PHASE_INIT;
+		$phase    = ! empty( $nfo['phase'] ) ? $nfo['phase'] : self::PHASE_INIT;
 
 		// @TODO make this reasonable
 		$limit = apply_filters(
@@ -155,7 +157,7 @@ class Shipper_Task_Import_Tables extends Shipper_Task_Import {
 		$model = new Shipper_Model_Database_Table_Import( $table );
 
 		if ( empty( $total ) ) {
-			$phase = self::PHASE_INIT;
+			$phase  = self::PHASE_INIT;
 			$status = $model->preprocess_import_file();
 
 			if ( empty( $status ) ) {
@@ -166,26 +168,27 @@ class Shipper_Task_Import_Tables extends Shipper_Task_Import {
 						basename( $table )
 					)
 				);
+
 				// Serious enough to not go further with this table.
 				return true;
 			}
 
 			// Also, let's see how many statements there is.
-			$total = $model->get_statements_count();
+			$total    = $model->get_statements_count();
 			$position = 0;
 
-			Shipper_Helper_Log::write(sprintf(
+			Shipper_Helper_Log::write( sprintf(
 				__( 'Found %1$d statements for %2$s', 'shipper' ),
 				$total, $table
-			));
+			) );
 
 			if ( 0 === $total ) {
 				// Warn about this - there should be at least *some* inside.
 				$phase = self::PHASE_FINISHED;
-				Shipper_Helper_Log::write(sprintf(
+				Shipper_Helper_Log::write( sprintf(
 					__( 'Empty statement count found for %s, skipping.', 'shipper' ),
 					$table
-				));
+				) );
 			}
 		} elseif ( self::PHASE_POSTPROCESS !== $phase ) {
 			$phase = self::PHASE_PROCESS;
@@ -220,22 +223,15 @@ class Shipper_Task_Import_Tables extends Shipper_Task_Import {
 				false
 			);
 			if ( ! $is_mock_import ) {
-				$status = $model->import_table_finish();
-				if ( empty( $status ) ) {
-					$this->add_error(
-						self::ERR_SQL,
-						sprintf( __( 'Error finalizing table %1$s', 'shipper' ), $table )
-					);
-					return true; // Short-out, we're done here.
-				}
+				return true;
 			}
 		}
 
-		$this->get_storage()->set($table, array(
-			'total' => $total,
+		$this->get_storage()->set( $table, array(
+			'total'    => $total,
 			'position' => $position,
-			'phase' => $phase,
-		));
+			'phase'    => $phase,
+		) );
 		$this->get_storage()->save();
 
 		return $position >= $total && self::PHASE_FINISHED === $phase;
@@ -251,7 +247,7 @@ class Shipper_Task_Import_Tables extends Shipper_Task_Import {
 	 * @return bool
 	 */
 	public function apply( $args = array() ) {
-		$tables = $this->get_tables_list();
+		$tables    = $this->get_tables_list();
 		$processed = $this->get_storage()->get(
 			Shipper_Model_Stored_Tablelist::KEY_PROCESSED_TABLES,
 			array()
@@ -263,7 +259,7 @@ class Shipper_Task_Import_Tables extends Shipper_Task_Import {
 				continue;
 			}
 			$this->_current_table = $table;
-			$status = $this->import_table( $table );
+			$status               = $this->import_table( $table );
 
 			if ( ! empty( $status ) ) {
 				$processed[] = $table;
@@ -276,6 +272,19 @@ class Shipper_Task_Import_Tables extends Shipper_Task_Import {
 		// Update list.
 		$this->get_storage()->set( Shipper_Model_Stored_Tablelist::KEY_PROCESSED_TABLES, $processed );
 		$this->get_storage()->save();
+		if ( count( $tables ) == count( $processed ) ) {
+			//done now, we should change the table this time
+			foreach ( $processed as $table ) {
+				$model  = new Shipper_Model_Database_Table_Import( $table );
+				$status = $model->import_table_finish();
+				if ( empty( $status ) ) {
+					$this->add_error(
+						self::ERR_SQL,
+						sprintf( __( 'Error finalizing table %1$s', 'shipper' ), $table )
+					);
+				}
+			}
+		}
 
 		return count( $tables ) === count( $processed );
 	}

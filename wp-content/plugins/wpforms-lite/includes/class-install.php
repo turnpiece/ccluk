@@ -2,11 +2,7 @@
 /**
  * Handles plugin installation upon activation.
  *
- * @package    WPForms
- * @author     WPForms
- * @since      1.0.0
- * @license    GPL-2.0+
- * @copyright  Copyright (c) 2016, WPForms LLC
+ * @since 1.0.0
  */
 class WPForms_Install {
 
@@ -76,7 +72,7 @@ class WPForms_Install {
 	}
 
 	/**
-	 * Runs manual install.
+	 * Run manual installation.
 	 *
 	 * @since 1.5.4.2
 	 *

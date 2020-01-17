@@ -32,7 +32,7 @@ $include_msg = __( 'Reinclude file', 'shipper' );
 	</thead>
 	<tbody>
 	<?php foreach ( $files as $file ) { ?>
-	<?php 
+	<?php
 		if ( isset( $file['path'] ) ) {
 			$file['path'] = wp_normalize_path( realpath( $file['path'] ) );
 		}

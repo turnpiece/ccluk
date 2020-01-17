@@ -32,15 +32,13 @@ class Shipper_Task_Export_Tables extends Shipper_Task_Export {
 	public function apply( $args = array() ) {
 		$migration = new Shipper_Model_Stored_Migration;
 		$tablelist = new Shipper_Model_Stored_Tablelist;
-		$remote = new Shipper_Helper_Fs_Remote;
 
-		$tables = $this->get_tables_list( $tablelist );
-		$is_done = true;
+		$tables    = $this->get_tables_list( $tablelist );
+		$is_done   = true;
 		$processed = $tablelist->get(
 			Shipper_Model_Stored_Tablelist::KEY_PROCESSED_TABLES,
 			array()
 		);
-		$dest_root = Shipper_Helper_Fs_Path::clean_fname( $migration->get_destination() );
 
 		foreach ( $tables as $table ) {
 			if ( in_array( $table, $processed, true ) ) {
@@ -61,7 +59,9 @@ class Shipper_Task_Export_Tables extends Shipper_Task_Export {
 				true,
 				$table
 			);
-			if ( ! $do_process_item ) { continue; }
+			if ( ! $do_process_item ) {
+				continue;
+			}
 
 			// Update status flag first.
 			$this->_has_done_anything = true;
@@ -87,32 +87,14 @@ class Shipper_Task_Export_Tables extends Shipper_Task_Export {
 				Shipper_Helper_Log::write(
 					sprintf( __( 'Shipper couldn\'t read file: %s', 'shipper' ), $source )
 				);
+
 				return false;
 			}
 
-			$destination = $this->get_destination_path( $table . '.sql' );
-			$s3_dest = trailingslashit( $dest_root ) . $destination;
-			$progress = $remote->upload( $source, $s3_dest );
-			$upload_is_done = $progress->is_done();
-
-			if ( $upload_is_done && $progress->has_error() ) {
-				Shipper_Helper_Log::write(
-					sprintf( 'Uploading %s failed, will re-try', $table )
-				);
-				$upload_is_done = false;
-			}
+			$upload_is_done = $this->table_to_final_destination( $table, $source );
 
 			if ( $upload_is_done ) {
-				// Update filelist manifest.
-				$dumped = new Shipper_Model_Dumped_Filelist;
-				$target_line = array(
-					'source' => $source,
-					'destination' => $destination,
-					'size' => filesize( $source ),
-				);
-				$dumped->add_statement( $target_line );
-				$dumped->close();
-				shipper_delete_file( $source );
+				//shipper_delete_file( $source );
 
 				Shipper_Helper_Log::debug(
 					sprintf( __( 'Exported and archived table %s', 'shipper' ), $table )
@@ -131,6 +113,38 @@ class Shipper_Task_Export_Tables extends Shipper_Task_Export {
 		return $is_done;
 	}
 
+	public function table_to_final_destination( $table, $exported_file ) {
+		$migration = new Shipper_Model_Stored_Migration;
+		$remote    = new Shipper_Helper_Fs_Remote;
+		$dest_root = Shipper_Helper_Fs_Path::clean_fname( $migration->get_destination() );
+
+		$destination    = $this->get_destination_path( $table . '.sql' );
+		$s3_dest        = trailingslashit( $dest_root ) . $destination;
+		$progress       = $remote->upload( $exported_file, $s3_dest );
+		$upload_is_done = $progress->is_done();
+
+		if ( $upload_is_done && $progress->has_error() ) {
+			Shipper_Helper_Log::write(
+				sprintf( 'Uploading %s failed, will re-try', $table )
+			);
+			$upload_is_done = false;
+		}
+		Shipper_Helper_Log::write( $exported_file );
+		if ( $upload_is_done ) {
+			// Update filelist manifest.
+			$dumped      = new Shipper_Model_Dumped_Filelist;
+			$target_line = array(
+				'source'      => $exported_file,
+				'destination' => $destination,
+				'size'        => filesize( $exported_file ),
+			);
+			$dumped->add_statement( $target_line );
+			$dumped->close();
+		}
+
+		return $upload_is_done;
+	}
+
 	/**
 	 * Gets currently processed table
 	 *
@@ -139,8 +153,7 @@ class Shipper_Task_Export_Tables extends Shipper_Task_Export {
 	public function get_current_table() {
 		return isset( $this->_current_table )
 			? $this->_current_table
-			: ''
-		;
+			: '';
 	}
 
 	/**
@@ -170,13 +183,15 @@ class Shipper_Task_Export_Tables extends Shipper_Task_Export {
 			return $tables;
 		}
 
-		$db = new Shipper_Model_Database;
+		$db         = new Shipper_Model_Database;
 		$raw_tables = $db->get_tables_list();
-		$tables = array();
-		$rx = preg_quote( Shipper_Task_Import::PREFIX, '/' );
+		$tables     = array();
+		$rx         = preg_quote( Shipper_Task_Import::PREFIX, '/' );
 
 		foreach ( $raw_tables as $table ) {
-			if ( preg_match( "/^{$rx}/", $table ) ) { continue; }
+			if ( preg_match( "/^{$rx}/", $table ) ) {
+				continue;
+			}
 			$tables[] = $table;
 		}
 
@@ -188,6 +203,7 @@ class Shipper_Task_Export_Tables extends Shipper_Task_Export {
 					DB_NAME, $db->get_error()
 				)
 			);
+
 			return array();
 		}
 		$storage->set(
@@ -225,7 +241,7 @@ class Shipper_Task_Export_Tables extends Shipper_Task_Export {
 	 */
 	public function get_source_path( $table, $migration ) {
 		$storage = new Shipper_Model_Stored_Tablelist;
-		$model = new Shipper_Model_Database_Table_Export( $table );
+		$model   = new Shipper_Model_Database_Table_Export( $table );
 
 		$state = $storage->get( $table, array() );
 		// @TODO make this reasonable
@@ -234,9 +250,9 @@ class Shipper_Task_Export_Tables extends Shipper_Task_Export {
 			250
 		);
 
-		$done = isset( $state['done'] ) ? ! ! $state['done'] : false;
+		$done     = isset( $state['done'] ) ? ! ! $state['done'] : false;
 		$position = isset( $state['position'] ) ? (int) $state['position'] : 0;
-		$total = isset( $state['total'] ) ? (int) $state['total'] : 0;
+		$total    = isset( $state['total'] ) ? (int) $state['total'] : 0;
 
 		$destination = $model->get_file_path();
 
@@ -253,6 +269,7 @@ class Shipper_Task_Export_Tables extends Shipper_Task_Export {
 					self::ERR_ACCESS,
 					sprintf( __( 'Shipper couldn\'t write to file: %s', 'shipper' ), $destination )
 				);
+
 				return false;
 			}
 		}
@@ -272,19 +289,20 @@ class Shipper_Task_Export_Tables extends Shipper_Task_Export {
 					self::ERR_ACCESS,
 					sprintf( __( 'Shipper couldn\'t write to file: %s', 'shipper' ), $destination )
 				);
+
 				return false;
 			}
 		}
 
 		//$done = count( $sqls ) < $limit; // If we have less than limit results, we should be good.
-		$done = empty( $sqls ); // We're done when we got nothing in results.
+		$done     = empty( $sqls ); // We're done when we got nothing in results.
 		$position += count( $sqls ); // Record new position.
 
-		$storage->set($table, array(
-			'done' => $done,
+		$storage->set( $table, array(
+			'done'     => $done,
 			'position' => $position,
-			'total' => $total,
-		));
+			'total'    => $total,
+		) );
 		$storage->save();
 
 		// @TODO: perhaps get rid of this entirely? #cleanup #performance
@@ -300,8 +318,7 @@ class Shipper_Task_Export_Tables extends Shipper_Task_Export {
 
 		return ! empty( $done )
 			? $destination
-			: false
-		;
+			: false;
 	}
 
 	/**
@@ -322,7 +339,7 @@ class Shipper_Task_Export_Tables extends Shipper_Task_Export {
 	 */
 	public function get_total_tables_count() {
 		$tablelist = new Shipper_Model_Stored_Tablelist;
-		$tables = $this->get_tables_list( $tablelist );
+		$tables    = $this->get_tables_list( $tablelist );
 
 		return count( $tables );
 	}
@@ -349,8 +366,8 @@ class Shipper_Task_Export_Tables extends Shipper_Task_Export {
 	 */
 	public function get_total_rows_count() {
 		$tablelist = new Shipper_Model_Stored_Tablelist;
-		$tables = $this->get_tables_list( $tablelist );
-		$total = 0;
+		$tables    = $this->get_tables_list( $tablelist );
+		$total     = 0;
 
 		foreach ( $tables as $table ) {
 			$state = $tablelist->get( $table, array() );
@@ -369,13 +386,13 @@ class Shipper_Task_Export_Tables extends Shipper_Task_Export {
 	 */
 	public function get_processed_rows_count() {
 		$tablelist = new Shipper_Model_Stored_Tablelist;
-		$current = $this->get_current_table();
-		$state = $tablelist->get( $current, array() );
+		$current   = $this->get_current_table();
+		$state     = $tablelist->get( $current, array() );
 		$processed = $tablelist->get(
 			Shipper_Model_Stored_Tablelist::KEY_PROCESSED_TABLES,
 			array()
 		);
-		$total = isset( $state['position'] ) ? (int) $state['position'] : 0;
+		$total     = isset( $state['position'] ) ? (int) $state['position'] : 0;
 
 		foreach ( $processed as $table ) {
 			if ( $table === $current ) {
@@ -414,15 +431,15 @@ class Shipper_Task_Export_Tables extends Shipper_Task_Export {
 	 * @return string
 	 */
 	public function get_work_description() {
-		$current = $this->get_current_table();
+		$current  = $this->get_current_table();
 		$position = false;
-		$done = false;
+		$done     = false;
 		if ( ! empty( $current ) ) {
-			$storage = new Shipper_Model_Stored_Tablelist;
-			$state = $storage->get( $current, array() );
+			$storage  = new Shipper_Model_Stored_Tablelist;
+			$state    = $storage->get( $current, array() );
 			$position = isset( $state['position'] ) ? (int) $state['position'] : 0;
-			$done = isset( $state['done'] ) ? ! ! $state['done'] : false;
-			$rows = isset( $state['total'] ) ? (int) $state['total'] : 0;
+			$done     = isset( $state['done'] ) ? ! ! $state['done'] : false;
+			$rows     = isset( $state['total'] ) ? (int) $state['total'] : 0;
 		}
 
 		$details = __( 'uploaded, analyzing next', 'shipper' );
@@ -442,6 +459,7 @@ class Shipper_Task_Export_Tables extends Shipper_Task_Export {
 				$current, $details
 			);
 		}
+
 		return sprintf(
 			__( 'Process tables %s', 'shipper' ),
 			$detailed_description

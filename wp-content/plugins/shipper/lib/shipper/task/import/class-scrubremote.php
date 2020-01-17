@@ -37,24 +37,25 @@ class Shipper_Task_Import_Scrubremote extends Shipper_Task_Import {
 		}
 
 		$migration = new Shipper_Model_Stored_Migration;
-		$domain = Shipper_Helper_Fs_Path::clean_fname( $migration->get_source() );
-		$remote = new Shipper_Helper_Fs_Remote;
+		$domain    = Shipper_Helper_Fs_Path::clean_fname( $migration->get_source() );
+		$remote    = new Shipper_Helper_Fs_Remote;
 
-		$pos = $this->get_initialized_position();
+		$pos         = $this->get_initialized_position();
 		$shipper_pos = $pos;
-		$statements = $this->get_file_statements( $pos );
-		$objects = array();
+		$statements  = $this->get_file_statements( $pos );
+		$objects     = array();
 
-		foreach( $statements as $data ) {
-			$file = trailingslashit( $domain ) . $data['destination'];
+		foreach ( $statements as $data ) {
+			$file      = trailingslashit( $domain ) . $data['destination'];
 			$objects[] = array(
 				'Key' => $remote->get_remote_path( $file ),
 			);
 		}
 
 		if ( empty( $statements ) && empty( $objects ) ) {
-			$files = new Shipper_Model_Dumped_Filelist;
-			$large = new Shipper_Model_Dumped_Largelist;
+			$files   = new Shipper_Model_Dumped_Filelist;
+			$large   = new Shipper_Model_Dumped_Largelist;
+			$package = new Shipper_Model_Dumped_Packagelist();
 			// Done, remove meta files and parent object
 			$objects[] = array(
 				'Key' => $remote->get_remote_path(
@@ -73,6 +74,11 @@ class Shipper_Task_Import_Scrubremote extends Shipper_Task_Import {
 			);
 			$objects[] = array(
 				'Key' => $remote->get_remote_path(
+					trailingslashit( $domain ) . 'meta/' . $package->get_file_name()
+				),
+			);
+			$objects[] = array(
+				'Key' => $remote->get_remote_path(
 					trailingslashit( $domain )
 				),
 			);
@@ -81,22 +87,22 @@ class Shipper_Task_Import_Scrubremote extends Shipper_Task_Import {
 		if ( ! empty( $objects ) ) {
 			$result = false;
 			try {
-				$s3 = $remote->get_remote_storage_handler();
+				$s3    = $remote->get_remote_storage_handler();
 				$creds = $remote->get_creds();
-				$s3->deleteObjects(array(
+				$s3->deleteObjects( array(
 					'Bucket' => $creds->get( Shipper_Model_Stored_Creds::KEY_BUCKET ),
 					'Delete' => array(
 						'Objects' => $objects,
 					),
-				));
+				) );
 				$result = true;
-			} catch( Exception $e ) {
+			} catch ( Exception $e ) {
 				Shipper_Helper_Log::write( 'NOTICE: remote export not scrubbed' );
 				Shipper_Helper_Log::write( $e->getMessage() );
 			}
 		}
 
-		$is_done = empty( $statements );
+		$is_done     = empty( $statements );
 		$shipper_pos = $is_done
 			? 0
 			: $shipper_pos + count( $statements );
@@ -105,7 +111,7 @@ class Shipper_Task_Import_Scrubremote extends Shipper_Task_Import {
 		return $is_done;
 	}
 
-	public function get_file_statements( $pos, $dumped=false ) {
+	public function get_file_statements( $pos, $dumped = false ) {
 		if ( empty( $dumped ) ) {
 			$dumped = new Shipper_Model_Dumped_Filelist;
 		}
@@ -115,15 +121,17 @@ class Shipper_Task_Import_Scrubremote extends Shipper_Task_Import {
 			// So we went over the count in regular files list.
 			// Let's go through large files now too.
 			$pos = $pos - $dumped->get_statements_count();
-			if ( $pos < 0 ) $pos = 0;
+			if ( $pos < 0 ) {
+				$pos = 0;
+			}
 			$dumped = new Shipper_Model_Dumped_Largelist;
-			$list = $dumped->get_statements( $pos, 999, 10000 );
+			$list   = $dumped->get_statements( $pos, 999, 10000 );
 		}
 
 		return $list;
 	}
 
-	public function get_initialized_position( $filelist=false ) {
+	public function get_initialized_position( $filelist = false ) {
 		if ( empty( $filelist ) ) {
 			$filelist = new Shipper_Model_Stored_Filelist;
 		}
@@ -138,13 +146,15 @@ class Shipper_Task_Import_Scrubremote extends Shipper_Task_Import {
 		return $pos;
 	}
 
-	public function set_initialized_position( $position, $filelist=false ) {
+	public function set_initialized_position( $position, $filelist = false ) {
 		if ( empty( $filelist ) ) {
 			$filelist = new Shipper_Model_Stored_Filelist;
 		}
 
 		$newpos = $filelist->get( Shipper_Model_Stored_Filelist::KEY_SCRUB_CURSOR, false );
-		if ( false === $newpos ) return false;
+		if ( false === $newpos ) {
+			return false;
+		}
 
 		$filelist->set( Shipper_Model_Stored_Filelist::KEY_SCRUB_CURSOR, $position );
 		$filelist->save();

@@ -14,7 +14,7 @@ $sorted = Shipper_Helper_Template_Sorter::checks_by_error_status( $checks['check
 
 <div class="sui-accordion sui-accordion-block">
 <?php if ( ! $has_service_errors ) { ?>
-	
+
 	<?php foreach ( $sorted as $check ) {
 		if ( 'ok' === $check['status'] ) {
 			if ( ! empty( $is_recheck ) ) {

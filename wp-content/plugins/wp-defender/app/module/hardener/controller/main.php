@@ -5,6 +5,7 @@
 
 namespace WP_Defender\Module\Hardener\Controller;
 
+use Hammer\Helper\HTTP_Helper;
 use WP_Defender\Behavior\Utils;
 use WP_Defender\Controller;
 use WP_Defender\Module\Hardener;
@@ -44,6 +45,36 @@ class Main extends Controller {
 		}
 
 		$this->addAction( 'tweaksSendNotification', 'tweaksSendNotification' );
+		$this->addAction( 'wp_loaded', 'maybeUnsubscribe' );
+	}
+
+	public function maybeUnsubscribe() {
+		if ( ! is_user_logged_in() ) {
+			return;
+		}
+
+		$action = HTTP_Helper::retrieveGet( 'action' );
+		if ( $action == 'unsubscribe_notification' ) {
+			$user = get_user_by( 'id', get_current_user_id() );
+			if ( ! is_object( $user ) ) {
+				return;
+			}
+			$model = Hardener\Model\Settings::instance();
+			foreach ( $model->receipts as $key => $val ) {
+				if ( $val['email'] == $user->user_email ) {
+					unset( $model->receipts[ $key ] );
+					break;
+				}
+			}
+			$model->receipts = array_filter( $model->receipts );
+			//check if empty recipients, then we disable notification
+			if ( empty( $model->receipts ) ) {
+				$model->notification = false;
+			}
+			$model->save();
+			wp_redirect( network_admin_url( 'admin.php?page=wdf-hardener&view=notification' ) );
+			exit;
+		}
 	}
 
 	public function tweaksSendNotification() {
@@ -55,13 +86,15 @@ class Main extends Controller {
 			$settings->save();
 		}
 
-		if ( strtotime( apply_filters( 'wd_tweaks_notification_interval', '+24 hours' ), apply_filters( 'wd_tweaks_last_action_time', $settings->last_seen ) ) > time() ) {
+		if ( strtotime( apply_filters( 'wd_tweaks_notification_interval', '+7 days' ), apply_filters( 'wd_tweaks_last_action_time', $settings->last_seen ) ) > time() ) {
 			return;
 		}
+		$settings->refreshStatus();
+		$tweaks = $settings->getIssues();
 
-		$tweaks = Hardener\Model\Settings::instance()->getIssues();
 		if ( count( $tweaks ) == 0 ) {
 			//no issue no email
+
 			return;
 		}
 		$no_reply_email = "noreply@" . parse_url( get_site_url(), PHP_URL_HOST );
@@ -80,7 +113,7 @@ class Main extends Controller {
 			$canSend = true;
 		} elseif ( strtotime( apply_filters( 'wd_tweaks_notification_interval', '+24 hours' ), apply_filters( 'wd_tweaks_last_notification_sent', $settings->last_sent ) ) < time() ) {
 			//this is the case email already sent once last 24 hours
-			if ( $settings->notification == false ) {
+			if ( $settings->notification_repeat == false ) {
 				//no repeat
 				return;
 			}
@@ -198,7 +231,8 @@ class Main extends Controller {
 				'ignoreTweak'    => wp_create_nonce( 'ignoreTweak' ),
 				'restoreTweak'   => wp_create_nonce( 'restoreTweak' ),
 				'revertTweak'    => wp_create_nonce( 'revertTweak' ),
-				'updateSettings' => wp_create_nonce( 'updateSettings' )
+				'updateSettings' => wp_create_nonce( 'updateSettings' ),
+				'recheck'        => wp_create_nonce( 'recheck' )
 			],
 			'model'     => [
 				'notification_repeat' => $settings->notification_repeat,

@@ -46,7 +46,7 @@ foreach ( $args as $key => $value ) {
 
 ?>
 
-<div <?php echo implode( ' ', wp_kses_post( $attrs ) ); ?>>
+<div <?php echo implode( ' ', wp_kses_post_deep( $attrs ) ); ?>>
 
 	<?php if ( isset( $caption ) && '' !== $caption ) : ?>
 		<div id="beehive-<?php echo esc_attr( $id ); ?>-caption" class="sui-screen-reader-text"><?php echo esc_html( $caption ); ?></div>

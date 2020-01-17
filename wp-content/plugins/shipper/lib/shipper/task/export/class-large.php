@@ -146,12 +146,32 @@ class Shipper_Task_Export_Large extends Shipper_Task_Export {
 	 *
 	 * @return int
 	 */
+	public function get_initialized_position1( $filelist = false ) {
+		if ( empty( $filelist ) ) {
+			$filelist = new Shipper_Model_Stored_Filelist;
+		}
+
+		$pos          = $filelist->get( Shipper_Model_Stored_Filelist::KEY_CURSOR, false );
+		$current_task = $filelist->get( Shipper_Model_Stored_Filelist::KEY_CURRENT_TASK, false );
+		if ( $current_task != __CLASS__ ) {
+			$pos = false;
+		}
+		if ( false === $pos ) {
+			$filelist->set( Shipper_Model_Stored_Filelist::KEY_CURSOR, 0 );
+			$filelist->set( Shipper_Model_Stored_Filelist::KEY_CURRENT_TASK, __CLASS__ );
+			$filelist->save();
+			$pos = 0;
+		}
+
+		return $pos;
+	}
+
 	public function get_initialized_position( $filelist = false ) {
 		if ( empty( $filelist ) ) {
 			$filelist = new Shipper_Model_Stored_Filelist;
 		}
 
-		$pos = $filelist->get( Shipper_Model_Stored_Filelist::KEY_CURSOR, false );
+		$pos          = $filelist->get( Shipper_Model_Stored_Filelist::KEY_CURSOR, false );
 		if ( false === $pos ) {
 			$filelist->set( Shipper_Model_Stored_Filelist::KEY_CURSOR, 0 );
 			$filelist->save();
@@ -207,7 +227,7 @@ class Shipper_Task_Export_Large extends Shipper_Task_Export {
 	public function get_work_description() {
 		$desc = sprintf(
 			__( '( %1$d of %2$d total )', 'shipper' ),
-			$this->get_current_step(), $this->get_total_steps() 
+			$this->get_current_step(), $this->get_total_steps()
 		);
 		return sprintf(
 			__( 'Upload large files %s', 'shipper' ),

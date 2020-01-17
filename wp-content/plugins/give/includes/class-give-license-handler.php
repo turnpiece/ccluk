@@ -293,7 +293,7 @@ if ( ! class_exists( 'Give_License' ) ) :
 				return false;
 			}
 
-			give_doing_it_wrong( __FUNCTION__, 'Use self::request_license_api instead', '2.5.0' );
+			give_doing_it_wrong( __FUNCTION__, 'Use self::request_license_api instead from GiveWP 2.5.0' );
 
 			// Data to send to the API.
 			$api_params = array(
@@ -795,7 +795,7 @@ if ( ! class_exists( 'Give_License' ) ) :
 								if ( ! $license['activations_left'] ) {
 									echo sprintf(
 										'<span class="give-license-activations-left">%1$s</span>',
-										__( 'No activation remaining', 'give' )
+										__( 'No activations remaining', 'give' )
 									);
 								} else {
 									echo sprintf(

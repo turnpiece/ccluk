@@ -1,10 +1,63 @@
 Plugin Name: WP Smush Pro
 Author: WPMU DEV
-Tested up to: 5.2.1
+Tested up to: 5.3.2
 
 Change Log:
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
+
+= 3.4.2 =
+
+- Enhance: Security
+- Fix: Fatal error on WordPress 4.x
+- Fix: Compatibility issue with ReCaptcha and lazy loading
+
+= 3.4.1 =
+
+- Fix: Upgrade from Free to Pro causing an error
+
+= 3.4.0 =
+
+- New: Option to ignore images from Smushing
+- New: CDN support for picture element
+- New: Lazy load for iframes
+- New: Lazy load compatibility with Block Gallery plugin
+- New: Lazy load compatibility with CoBlocks plugin
+- New: smush_cdn_custom_uploads_dir filter for use with custom upload directories in CDN
+- New: CDN support for images in data-original attribute
+- Enhance: Compatibility with WP Engine
+- Enhance: CDN support for custom UPLOADS directories
+- Enhance: Max width detection with CDN auto-resize functionality
+- Enhance: Lazy loading image format detection
+- Enhance: Lazy loading compatibility with AMP
+- Enhance: Lazy loading compatibility with Essential Grid
+- Enhance: Lazy loading compatibility with JetPack
+- Enhance: Integration settings pages UI, summary meta box UI
+- Enhance: Significantly increase performance on sites with large media libraries
+- Enhance: Support for WordPress 4.x
+- Enhance: Compatibility with Oxygen Builder
+- Enhance: Accessibility in modals
+- Fix: Undefined index PHP notices
+- Fix: Lazy loading not properly working on Bootstrap based themes
+- Fix: Lazy loading exclusion rules not working with active CDN
+- Fix: Failed parsing srcset attribute value since its w descriptor is invalid warnings
+- Fix: PHP warnings for getimagesize() disabled wrapper
+- Fix: UI conflict with Store Locator Plus plugin
+- Fix: CDN incorrectly resizing cropped images
+- Fix: Directory Smush permissions
+- Fix: NextGen gallery bulk Smush functionality
+- Fix: Network access control settings
+- Fix: Resize threshold not resetting when auto-resize is disabled
+
+= 3.3.2 =
+
+- New: Support for big images in WordPress 5.3
+- Fix: WP Offload Media integration with Pro version
+
+= 3.3.1 =
+
+- Fix: CDN incorrect calculation for image sizes attribute
+- Fix: Undefined index PHP notices
 
 = 3.3.0 =
 
@@ -659,4 +712,4 @@ Fix: Compatibility issues with latest WP Offload Media (WP Offload S3) update
 
 
 
-87274-1571425210-au
+87274-1579293170-au

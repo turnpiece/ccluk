@@ -15,7 +15,7 @@ class Shipper_Task_Check_Files extends Shipper_Task_Check {
 	 *
 	 * @var object Shipper_Helper_Fs_List instance
 	 */
-	private $_fs;
+	protected $_fs;
 
 	/**
 	 * Runs the task
@@ -25,14 +25,14 @@ class Shipper_Task_Check_Files extends Shipper_Task_Check {
 	 * @return bool Whether we encountered any errors
 	 */
 	public function apply( $args = array() ) {
-		$chks = array(
+		$chks    = array(
 			'file_sizes',
 			'file_names',
 			'package_sizes',
 		);
 		$storage = new Shipper_Model_Stored_Filelist;
-		$fs = new Shipper_Helper_Fs_List( $storage );
-		$fs->set_excludable( false ); // List everything.
+		$fs      = new Shipper_Helper_Fs_List( $storage );
+		//$fs->set_excludable( false ); // List everything.
 		$this->set_fs( $fs );
 
 		foreach ( $chks as $chk ) {
@@ -67,29 +67,33 @@ class Shipper_Task_Check_Files extends Shipper_Task_Check {
 	 * @return object Shipper_Model_Check instance
 	 */
 	public function are_file_sizes_valid( $storage ) {
-		$check = new Shipper_Model_Check( __( 'Large files', 'shipper' ) );
+		$check  = new Shipper_Model_Check( __( 'Large files', 'shipper' ) );
 		$status = Shipper_Model_Check::STATUS_OK;
 
 		$threshold = Shipper_Model_Stored_Migration::get_file_size_threshold();
 
 		$files = isset( $this->_fs ) ? $this->_fs->get_files() : array();
 
-		$oversized = $storage->get( 'oversized', array() );
+		$oversized   = $storage->get( 'oversized', array() );
 		$total_count = $storage->get( 'oversized_count', 0 );
 
 		foreach ( $files as $file ) {
-			if ( ! is_array( $file ) ) { continue; }
+			if ( ! is_array( $file ) ) {
+				continue;
+			}
 			if ( ! empty( $file['path'] ) ) {
-				$myself = wp_normalize_path( dirname( SHIPPER_PLUGIN_FILE ) );
+				$myself   = wp_normalize_path( dirname( SHIPPER_PLUGIN_FILE ) );
 				$filepath = wp_normalize_path( $file['path'] );
 				if ( preg_match(
 					'/^' . preg_quote( $myself, '/' ) . '/',
 					$filepath
-				) ) { continue; }
+				) ) {
+					continue;
+				}
 			}
 			if ( $file['size'] > $threshold ) {
 				$oversized[] = $file;
-				$total_count++;
+				$total_count ++;
 			}
 		}
 
@@ -111,10 +115,10 @@ class Shipper_Task_Check_Files extends Shipper_Task_Check {
 			if ( ! empty( $total_count ) ) {
 				$status = Shipper_Model_Check::STATUS_WARNING;
 			}
-			$tpl = new Shipper_Helper_Template;
-			$markup = $tpl->get('modals/check/preflight-row-files', array(
+			$tpl    = new Shipper_Helper_Template;
+			$markup = $tpl->get( 'modals/check/preflight-row-files', array(
 				'files' => $oversized,
-			));
+			) );
 			$check->set( 'message', $markup );
 		}
 		$check->set( 'check_type', 'file_sizes' );
@@ -135,21 +139,23 @@ class Shipper_Task_Check_Files extends Shipper_Task_Check {
 	 * @return object Shipper_Model_Check instance
 	 */
 	public function are_file_names_valid( $storage ) {
-		$check = new Shipper_Model_Check( __( 'Files with large names', 'shipper' ) );
+		$check  = new Shipper_Model_Check( __( 'Files with large names', 'shipper' ) );
 		$status = Shipper_Model_Check::STATUS_OK;
 
 		$threshold = 256; // For Win32.
 
 		$files = isset( $this->_fs ) ? $this->_fs->get_files() : array();
 
-		$invalid = $storage->get( 'invalid', array() );
+		$invalid     = $storage->get( 'invalid', array() );
 		$total_count = $storage->get( 'invalid_count', 0 );
 
 		foreach ( $files as $file ) {
-			if ( ! is_array( $file ) ) { continue; }
+			if ( ! is_array( $file ) ) {
+				continue;
+			}
 			if ( strlen( $file['path'] ) > $threshold && count( $invalid ) < 100 ) {
 				$invalid[] = $file;
-				$total_count++;
+				$total_count ++;
 			}
 		}
 
@@ -159,10 +165,10 @@ class Shipper_Task_Check_Files extends Shipper_Task_Check {
 
 		if ( ! empty( $invalid ) ) {
 			$status = Shipper_Model_Check::STATUS_WARNING;
-			$tpl = new Shipper_Helper_Template;
-			$markup = $tpl->get('modals/check/preflight-row-files', array(
+			$tpl    = new Shipper_Helper_Template;
+			$markup = $tpl->get( 'modals/check/preflight-row-files', array(
 				'files' => $invalid,
-			));
+			) );
 			$check->set( 'message', $markup );
 		}
 		$check->set( 'check_type', 'file_names' );
@@ -187,10 +193,12 @@ class Shipper_Task_Check_Files extends Shipper_Task_Check {
 	 */
 	public function are_package_sizes_valid( $storage ) {
 		$files_total_size = $storage->get( 'files_total_size', 0 );
-		$files = isset( $this->_fs ) ? $this->_fs->get_files() : array();
+		$files            = isset( $this->_fs ) ? $this->_fs->get_files() : array();
 
 		foreach ( $files as $file ) {
-			if ( ! is_array( $file ) ) { continue; }
+			if ( ! is_array( $file ) ) {
+				continue;
+			}
 			$files_total_size += $file['size'];
 		}
 
@@ -218,10 +226,10 @@ class Shipper_Task_Check_Files extends Shipper_Task_Check {
 	 * @return object Shipper_Model_Check instance
 	 */
 	public function get_package_size_check() {
-		$check = new Shipper_Model_Check( __( 'Package size', 'shipper' ) );
+		$check  = new Shipper_Model_Check( __( 'Package size', 'shipper' ) );
 		$status = Shipper_Model_Check::STATUS_OK;
 
-		$threshold = Shipper_Model_Stored_Migration::get_package_size_threshold();
+		$threshold    = Shipper_Model_Stored_Migration::get_package_size_threshold();
 		$package_size = $this->get_updated_package_size();
 
 		if ( $package_size > $threshold ) {
@@ -233,17 +241,17 @@ class Shipper_Task_Check_Files extends Shipper_Task_Check {
 		$tpl = new Shipper_Helper_Template;
 		$check->set(
 			'message',
-			$tpl->get('pages/preflight/wizard-files-package_size-full', array(
+			$tpl->get( 'pages/preflight/wizard-files-package_size-full', array(
 				'package_size' => $package_size,
-				'threshold' => $threshold,
-			))
+				'threshold'    => $threshold,
+			) )
 		);
 		$check->set(
 			'short_message',
-			$tpl->get('pages/preflight/wizard-files-package_size-summary', array(
+			$tpl->get( 'pages/preflight/wizard-files-package_size-summary', array(
 				'package_size' => $package_size,
-				'threshold' => $threshold,
-			))
+				'threshold'    => $threshold,
+			) )
 		);
 
 		return $check->complete( $status );
@@ -257,11 +265,11 @@ class Shipper_Task_Check_Files extends Shipper_Task_Check {
 	 * @return int
 	 */
 	public function get_updated_package_size() {
-		$estimate = new Shipper_Model_Stored_Estimate;
+		$estimate     = new Shipper_Model_Stored_Estimate;
 		$package_size = $estimate->get( 'raw_package_size', 0 );
 
 		$exclusions_model = new Shipper_Model_Stored_Exclusions;
-		$exclusions = array_keys( $exclusions_model->get_data() );
+		$exclusions       = array_keys( $exclusions_model->get_data() );
 		foreach ( $exclusions as $exc ) {
 			$package_size -= filesize( $exc );
 		}
@@ -285,6 +293,7 @@ class Shipper_Task_Check_Files extends Shipper_Task_Check {
 			$wpdb->prepare( 'SELECT sum(data_length+index_length) FROM information_schema.tables WHERE table_schema=%s GROUP BY table_schema', DB_NAME )
 		);
 		$storage->set( 'db_total_size', $result );
+
 		return $result;
 	}
 
@@ -294,7 +303,10 @@ class Shipper_Task_Check_Files extends Shipper_Task_Check {
 	 * @return bool
 	 */
 	public function is_done() {
-		if ( ! isset( $this->_fs ) ) { return false; }
+		if ( ! isset( $this->_fs ) ) {
+			return false;
+		}
+
 		return $this->_fs->is_done();
 	}
 
@@ -309,7 +321,7 @@ class Shipper_Task_Check_Files extends Shipper_Task_Check {
 		$storage->clear();
 		$storage->save();
 		if ( isset( $this->_fs ) ) {
-			$this->_fs->clear()->save();
+			$this->_fs->reset();
 		}
 
 		return true;

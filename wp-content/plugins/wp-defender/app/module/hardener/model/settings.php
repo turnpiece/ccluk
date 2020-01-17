@@ -373,7 +373,7 @@ class Settings extends \Hammer\WP\Settings {
 			Prevent_Php::$slug             => $init == true ? new Prevent_Php() : Prevent_Php::getClassName(),
 			Login_Duration::$slug          => $init == true ? new Login_Duration() : Login_Duration::getClassName(),
 			Disable_Xml_Rpc::$slug         => $init == true ? new Disable_Xml_Rpc() : Disable_Xml_Rpc::getClassName(),
-			WP_Rest_Api::$slug             => $init == true ? new WP_Rest_Api() : WP_Rest_Api::getClassName(),
+			//WP_Rest_Api::$slug             => $init == true ? new WP_Rest_Api() : WP_Rest_Api::getClassName(),
 			//============SECURITY HEADERS===================
 			Sh_X_Frame::$slug              => $init == true ? new Sh_X_Frame() : Sh_X_Frame::getClassName(),
 			Sh_XSS_Protection::$slug       => $init == true ? new Sh_XSS_Protection() : Sh_XSS_Protection::getClassName(),

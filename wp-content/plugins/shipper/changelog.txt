@@ -3,18 +3,17 @@ Author: Incsub
 
 Change Log:
 ----------------------------------------------------------------------
+1.1.2 - 2019-23-12
 ----------------------------------------------------------------------
+- Fix: Installer.php doesn't work properly on some hosts because of missing the function mysqli_fetch_all
 
-1.0.3 - 2019-06-19
+1.1 - 2019-12-03
 ----------------------------------------------------------------------
-- Feature: Restrict Shipper access to Dash user and add a Permissions tab in Shipper settings
-- Improvement: Improve Import/Export workflow, also we remove the Add Destination because it is not needed anymore
-- Improvement: UI/UX for Preflight check
-- Fix: Conflict with some heart-beat manager like Heartbeat Control, which prevent the preflight and migration progresses get updated
-- Fix: In some cases, migration will be fail if a DB table larger than 5MB
-- Fix: Migration failed but success message was sent
-- Fix: Show correct size of the remote install when running import task.
-- Fix: Better notification message for not approved users
+- Add: Introducing a new non-API based migration method called Package Migration. You can now create a package (.zip) of your website that you can upload to your server and follow an installation wizard to complete the migration.
+- Add: Advanced filters added to API Migrations method and Package migration method.
+- Add: Ability to use a custom database prefix while migrating your websites.
+- Improvement: The speed and stability of API migrations. API method has become a lot faster when resources are available on a host but fall back to the slower but reliable migration algorithm when resources are not available on a host.
+- Fix: Some plugin's settings were not being migrated properly.
 
 1.0.2 - 2018-05-14
 ----------------------------------------------------------------------
@@ -58,3 +57,6 @@ Change Log:
 1.0.0 - 2018-01-22
 ----------------------------------------------------------------------
 - Initial release
+
+
+87274-1579294382-au

@@ -30,7 +30,7 @@ defined( 'WPINC' ) || die();
 	<div class="beehive-google-setup-connect">
 
 		<div class="sui-description">
-			<?php esc_html_e( 'To connect with Google, you need to get an authorization from your account. Connect with Google and paste the access code below. Note, we only retrieve analytics information and no personally identifiable data.', 'ga_trans' ); ?>
+			<?php esc_html_e( 'Easily connect with Google and authorize your account. Note, we only retrieve analytics information and no personally identifiable data.', 'ga_trans' ); ?>
 		</div>
 
 		<div class="sui-form-field">

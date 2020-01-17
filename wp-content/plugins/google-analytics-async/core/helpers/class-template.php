@@ -77,16 +77,31 @@ class Template {
 	/**
 	 * Get the settings page url.
 	 *
-	 * @param string $tab     Tab.
-	 * @param bool   $network Network flag.
+	 * @param string   $tab     Tab.
+	 * @param bool     $network Network flag.
+	 * @param int|bool $blog_id Blog ID.
 	 *
 	 * @since 3.2.0
 	 *
 	 * @return string
 	 */
-	public static function settings_page( $tab = 'general', $network = false ) {
+	public static function settings_page( $tab = 'general', $network = false, $blog_id = false ) {
+		// Get current blog id if empty.
+		if ( ! $blog_id ) {
+			$blog_id = get_current_blog_id();
+		}
+
 		// Get base url.
-		$url = $network ? network_admin_url( 'admin.php' ) : admin_url( 'admin.php' );
+		$url = $network ? network_admin_url( 'admin.php' ) : get_admin_url( $blog_id, 'admin.php' );
+
+		/**
+		 * Filter to modify main url used to build settings url
+		 *
+		 * @param bool $network Network flag.
+		 *
+		 * @since 3.2.2
+		 */
+		$url = apply_filters( 'beehive_settings_main_url', $url, $network, $blog_id );
 
 		return add_query_arg( [
 			'page' => 'beehive-settings',

@@ -531,6 +531,8 @@ class Snapshot_Controller_Full_Ajax extends Snapshot_Controller_Full {
 			Snapshot_Helper_Log::error( "Could not lookup backup to abort processing." );
 		}
 
+		delete_site_option( self::OPTIONS_FLAG );
+
 		wp_send_json_success();
 	}
 

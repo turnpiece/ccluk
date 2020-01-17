@@ -599,6 +599,7 @@ WPForms.Admin.Builder.Providers = WPForms.Admin.Builder.Providers || (function (
 			 * Account specific methods.
 			 *
 			 * @since 1.4.8
+			 * @since 1.5.8 Added binding `onClose` event.
 			 */
 			account: {
 
@@ -691,8 +692,17 @@ WPForms.Admin.Builder.Providers = WPForms.Admin.Builder.Providers || (function (
 
 							modal.buttons.add.disable();
 							modal.buttons.cancel.disable();
+							modal.$body.addClass( 'wpforms-providers-account-add-modal' );
 
 							app.providerHolder.trigger( 'accountAddModal.onOpenBefore', [ modal ] );
+						},
+						// Before the modal is hidden.
+						onClose: function() {
+
+							// If an account was configured successfully - show a modal with adding a new connection.
+							if ( true === app.ui.account.isConfigured() ) {
+								app.ui.connectionAdd();
+							}
 						},
 						icon: 'fa fa-info-circle',
 						type: 'blue',
@@ -731,6 +741,19 @@ WPForms.Admin.Builder.Providers = WPForms.Admin.Builder.Providers || (function (
 					if ( typeof provider === 'string' && typeof handler === 'function' ) {
 						this.submitHandlers[ provider ] = handler;
 					}
+				},
+
+				/**
+				 * Check whether the defined provider is configured or not.
+				 *
+				 * @since 1.5.8
+				 *
+				 * @returns {boolean} Account status.
+				 */
+				isConfigured: function() {
+
+					// Check if `Add New Account` button is hidden.
+					return app.providerHolder.find( '.js-wpforms-builder-provider-account-add' ).hasClass( 'hidden' );
 				},
 			},
 		},

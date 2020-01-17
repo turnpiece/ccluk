@@ -2,7 +2,7 @@
     <div class="sui-box">
         <div class="sui-box-header">
             <h3 class="sui-box-title">
-                {{__("Reporting")}}
+                {{__("Reporting")}} <span class="sui-tag sui-tag-pro">{{__("Pro")}}</span>
             </h3>
         </div>
         <form method="post">
@@ -38,7 +38,7 @@
                     <img class="sui-image sui-upsell-image" :src="assetUrl('/assets/img/scanning-free-man.svg')">
                     <div class="sui-upsell-notice">
                         <p>
-                            {{__("Schedule automated file scanning and email reporting for all your websites. This feature is included in a WPMU DEV membership along with 100+ plugins &amp; themes, 24/7 support and lots of handy site management tools")}}  – <a :href="campaign_url('defender_filescanning_reports_upsell_link')">{{__("Try it all FREE today")}}</a>!
+                            {{__("Schedule automated file scanning and email reporting for all your websites. Get reporting as part of a WPMU DEV membership.")}}<br/> <a class="premium-button sui-button sui-button-purple" :href="campaign_url('defender_filescanning_reports_upsell_link')">{{__("Try Pro Free Today")}}</a>
                         </p>
                     </div>
                 </div>

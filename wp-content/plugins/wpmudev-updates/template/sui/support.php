@@ -97,7 +97,7 @@ $time_format = get_option( 'time_format' );
 			<div class="sui-notice-top sui-notice-success sui-can-dismiss">
 
 				<div class="sui-notice-content">
-					<p><?php esc_html_e( 'Support session granted. You can end session again at any time.', 'wpmudev' ); ?></p>
+					<p><?php printf( esc_html__('Support access granted. Please let support staff know you have granted access via your %s support ticket %s.', 'wpmudev' ), '<a href="' . esc_url( $urls->support_url ) . '">', '</a>' );//phpcs:ignore ?></p>
 				</div>
 
 				<span class="sui-notice-dismiss">
@@ -145,7 +145,7 @@ $time_format = get_option( 'time_format' );
 			<div class="sui-notice-top sui-notice-success sui-can-dismiss">
 
 				<div class="sui-notice-content">
-					<p><?php esc_html_e( 'Your note has been saved.', 'wpmudev' ); ?></p>
+					<p><?php printf( esc_html__('Your note has been saved. Please let support staff know you have granted access via your %s support ticket %s.', 'wpmudev' ), '<a href="' . esc_url( '$urls->support_url' ) . '">', '</a>' );//phpcs:ignore ?></p>
 				</div>
 
 				<span class="sui-notice-dismiss">
@@ -493,32 +493,30 @@ $time_format = get_option( 'time_format' );
 
 			</div>
 
-			<?php if ( ! $staff_login->enabled ) : ?>
 
-				<div class="sui-actions-right">
+			<div class="sui-actions-right">
 
-					<?php if ( ! empty( $access_logs ) ) : ?>
+				<?php if ( ! empty( $access_logs ) && ! $staff_login->enabled ) : ?>
 
-						<a href="<?php echo esc_url( $url_grant ); ?>"
-						   class="sui-button sui-button-blue js-loading-link"
-							<?php echo( ! is_wpmudev_member() ? 'disabled="disabled"' : '' ); ?>>
-							<span class="sui-loading-text">
-								<i class="sui-icon-key" aria-hidden="true"></i>
-								<?php esc_html_e( 'Grant Support Access', 'wpmudev' ); ?>
-							</span>
-							<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
-						</a>
-
-					<?php endif; ?>
-
-					<a class="sui-button sui-button-ghost js-modal-security">
-						<i class="sui-icon-question" aria-hidden="true"></i>
-						<?php esc_html_e( 'Security Details', 'wpmudev' ); ?>
+					<a href="<?php echo esc_url( $url_grant ); ?>"
+					class="sui-button sui-button-blue js-loading-link"
+						<?php echo( ! is_wpmudev_member() ? 'disabled="disabled"' : '' ); ?>>
+						<span class="sui-loading-text">
+							<i class="sui-icon-key" aria-hidden="true"></i>
+							<?php esc_html_e( 'Grant Support Access', 'wpmudev' ); ?>
+						</span>
+						<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
 					</a>
 
-				</div>
+				<?php endif; ?>
 
-			<?php endif; ?>
+				<a class="sui-button sui-button-ghost js-modal-security" href="javascript:;">
+					<i class="sui-icon-question" aria-hidden="true"></i>
+					<?php _e( 'SECURITY INFO', 'wpmudev' ); ?>
+				</a>
+
+			</div>
+
 
 		</div>
 
@@ -551,6 +549,19 @@ $time_format = get_option( 'time_format' );
 
 					</div>
 
+					<div class="sui-box-body">
+						<p class="sui-block-content-center sui-p-small" style="width: 100%">
+							<?php
+							$learnmore_url = 'https://premium.wpmudev.org/docs/getting-started/getting-support/#chapter-5';
+							printf(
+								esc_html__( 'Want to know more about the security of support access? %1$sLearn more%2$s', 'wpmudev' ),
+								'<a target="_blank" class="js-modal-security" style="cursor:pointer">',
+								'</a>'
+							);
+							?>
+						</p>
+					</div>
+
 				<?php endif; ?>
 
 			<?php } ?>
@@ -564,8 +575,7 @@ $time_format = get_option( 'time_format' );
 			<?php if ( $staff_login->enabled ) { ?>
 
 				<div class="sui-notice dashui-notice-support">
-
-					<p><?php echo esc_html( sprintf( __( 'You have an active support session. It will remain active for another %s.', 'wpmudev' ), human_time_diff( $staff_login->expires ) ) ); ?></p>
+					<p><?php echo esc_html( sprintf( __( "You have an active support session. If you haven't already, please let support staff know you have granted access. It will remain active for another %s.", 'wpmudev' ), human_time_diff( $staff_login->expires ) ) ); ?></p>
 
 					<div class="sui-notice-buttons">
 
@@ -675,15 +685,19 @@ $time_format = get_option( 'time_format' );
 
 				<tbody>
 
-					<?php foreach ( $access_logs as $time => $name ) : ?>
+					<?php foreach ( $access_logs as $time => $user ) : ?>
+						<?php
+							$time = WPMUDEV_Dashboard::$site->to_localtime( $time );
 
-						<?php $time = WPMUDEV_Dashboard::$site->to_localtime( $time ); ?>
-
+							//backward compat
+						 	$name = isset( $user['name'] ) ? $user['name'] : $user;
+						 	$img = isset( $user['image'] ) ? 'https://www.gravatar.com/avatar/' . $user['image'] : '';
+						?>
 						<tr>
 
 							<td class="sui-table-item-title">
 								<div class="dashui-staff-info">
-									<span class="dashui-avatar" style="background-image: url();" aria-hidden="true"></span>
+									<span class="dashui-avatar" style="background-image: url( <?php echo esc_url( $img ); ?> );" aria-hidden="true"></span>
 									<span class="dashui-name"><?php echo esc_html( $name ); ?></span>
 									<span class="sui-tag"><?php esc_html_e( 'Staff', 'wpmudev' ); ?></span>
 								</div>
@@ -699,6 +713,7 @@ $time_format = get_option( 'time_format' );
 
 					<?php endforeach; ?>
 
+
 				</tbody>
 
 			</table>
@@ -713,11 +728,14 @@ $time_format = get_option( 'time_format' );
 			<div class="sui-box-footer">
 
 				<p class="sui-block-content-center sui-p-small" style="width: 100%">
-					<?php printf(
+					<?php
+					$learnmore_url = 'https://premium.wpmudev.org/docs/getting-started/getting-support/#chapter-5';
+					printf(
 						esc_html__( 'Want to know more about the security of support access? %1$sLearn more%2$s', 'wpmudev' ),
-						'<a href="javascript:;" class="js-modal-security">',
+						'<a href="' . esc_url( $learnmore_url ) . '" target="_blank">',
 						'</a>'
-					); ?>
+					);
+					?>
 				</p>
 
 			</div>
@@ -774,7 +792,7 @@ $time_format = get_option( 'time_format' );
 
 			<div class="sui-box-header">
 
-				<h3 class="sui-box-title" id="dialogTitle"><?php esc_html_e( 'Support Access is secure', 'wpmudev' ); ?></h3>
+				<h3 class="sui-box-title" id="dialogTitle"><?php esc_html_e( 'How secure is support access?', 'wpmudev' ); ?></h3>
 
 				<div class="sui-actions-right">
 					<a data-a11y-dialog-hide class="sui-dialog-close" aria-label="<?php esc_html_e( 'Close this dialog window', 'wpmudev' ); ?>"></a>
@@ -784,11 +802,16 @@ $time_format = get_option( 'time_format' );
 
 			<div class="sui-box-body">
 
-				<p id="dialogDescription"><?php esc_html_e( 'When you click the "Grant Access" button a random 64 character access token is generated that is only good for 120 hours (5 days) and saved in your Database. This token is sent to the WPMU DEV API over an SSL encrypted connection to prevent eavesdropping, and stored on our secure servers. This access token is in no way related to your password, and can only be used from our closed WPMU DEV API system for temporary access to this site.', 'wpmudev' ); ?></p>
+				<p class="sui-p-small"><?php esc_html_e( 'In short, our support access feature is bullet-proof secure and closed off to current WPMU DEV support staff only. We have never had any security issues with it, however you can disable it if you wish to.', 'wpmudev' ); ?></p>
 
-				<p><?php echo wp_kses_post( __( '<b>Only current WPMU DEV support staff can use this token</b> to login as your user account by submitting a special form that only they have access to. This will give them 1 hour of admin access to this site before their login cookie expires. Every support staff login during the 5 day period is logged locally and you can view the details on this page.', 'wpmudev' ) ); ?></p>
+				<h4 class="dashui-modal-header"><?php esc_html_e( 'How it works', 'wpmudev' ); ?></h4>
+				<p id="dialogDescription" class="sui-p-small"><?php esc_html_e( 'When you click the "Grant Access" button a random 64 character access token is generated that is only good for 96 hours (5 days) and saved in your Database. This token is sent to the WPMU DEV API over an SSL encrypted connection to prevent eavesdropping, and stored on our secure servers. This access token is in no way related to your password, and can only be used from our closed WPMU DEV API system for temporary access to this site.', 'wpmudev' ); ?></p>
 
-				<p><?php echo wp_kses_post( __( '<b>You may at any time revoke this access</b> which invalidates the token and it will no longer be usable. If you have special security concerns and you would like to disable the support access tab and functionality completely and permanently for whatever reason, you may do so by adding this line to your wp-config.php file:', 'wpmudev' ) ); ?></p>
+				<h4 class="dashui-modal-header"><?php esc_html_e( 'Who has access?', 'wpmudev' ); ?></h4>
+				<p class="sui-p-small"><?php echo wp_kses_post( __( 'Only current WPMU DEV support staff can use this token to login as your user account by submitting a special form that only they have access to. This will give them 1 hour of admin access to this site before their login cookie expires. Every support staff login during the 5 day period is logged locally and you can view the details on this page.', 'wpmudev' ) ); ?></p>
+
+				<h4 class="dashui-modal-header"><?php esc_html_e( 'Revoke access', 'wpmudev' ); ?></h4>
+				<p class="sui-p-small"><?php echo wp_kses_post( __( 'You may at any time revoke this access which invalidates the token and it will no longer be usable. If you have special security concerns and you would like to disable the support access tab and functionality completely and permanently for whatever reason, you may do so by adding this line to your wp-config.php file:', 'wpmudev' ) ); ?></p>
 
 				<pre class="sui-code-snippet sui-no-copy">define('WPMUDEV_DISABLE_REMOTE_ACCESS', true);</pre>
 
@@ -796,8 +819,10 @@ $time_format = get_option( 'time_format' );
 
 			<div class="sui-box-footer">
 
-				<div class="sui-flex-child-right">
-					<a class="sui-button" data-a11y-dialog-hide="ftp-details"><?php esc_html_e( 'Close', 'wpmudev' ); ?></a>
+				<a class="sui-button sui-button-ghost" data-a11y-dialog-hide="ftp-details"><?php esc_html_e( 'Close', 'wpmudev' ); ?></a>
+
+				<div class="sui-actions-right">
+					<a class="sui-button" href="<?php echo esc_url('https://premium.wpmudev.org/docs/getting-started/getting-support/'); ?>"><?php esc_html_e( 'Support Docs', 'wpmudev' ); ?></a>
 				</div>
 
 			</div>

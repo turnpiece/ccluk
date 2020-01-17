@@ -146,11 +146,14 @@ class Settings extends View {
 		// Current tab.
 		$tab = Template::current_tab();
 
+		// Is plugin active network wide.
+		$networkwide = General::is_networkwide();
+
 		switch ( $tab ) {
 			case 'reports':
 				$roles = Permission::get_roles();
 				// If subsites can not over write.
-				if ( ! Permission::can_overwrite() && General::is_networkwide() ) {
+				if ( ! Permission::can_overwrite() && $networkwide ) {
 					$selected = (array) beehive_analytics()->settings->get( 'roles', 'permissions', true, [] );
 				} else {
 					$selected = (array) beehive_analytics()->settings->get( 'roles', 'permissions', $this->is_network(), [] );
@@ -184,8 +187,18 @@ class Settings extends View {
 				$args['auto_tracking_code'] = beehive_analytics()->settings->get( 'auto_track', 'misc', $this->is_network() );
 				break;
 			default:
+				$anonymize_visible = true;
+				if ( $networkwide && ! $this->is_network() ) {
+					if ( beehive_analytics()->settings->get( 'anonymize', 'general', true )
+					     && beehive_analytics()->settings->get( 'force_anonymize', 'general', true )
+					) {
+						$anonymize_visible = false;
+					}
+				}
 				// Get Pro Sites levels.
-				$args['ps_levels'] = $this->is_network() ? Permission::get_ps_levels() : false;
+				$args['ps_levels']         = $this->is_network() ? Permission::get_ps_levels() : false;
+				$args['anonymize_visible'] = $anonymize_visible;
+				$args['networkwide']       = $networkwide;
 				break;
 		}
 

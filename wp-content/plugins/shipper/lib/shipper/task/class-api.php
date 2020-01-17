@@ -47,8 +47,8 @@ abstract class Shipper_Task_Api extends Shipper_Task {
 	public function get_url() {
 		$base = defined( 'WPMUDEV_CUSTOM_API_SERVER' ) && WPMUDEV_CUSTOM_API_SERVER
 			? WPMUDEV_CUSTOM_API_SERVER
-			: 'https://premium.wpmudev.org/'
-		;
+			: 'https://premium.wpmudev.org/';
+
 		$service_url = trailingslashit( $base ) . 'api/shipper/' . $this->get_namespace();
 
 		/**
@@ -82,7 +82,7 @@ abstract class Shipper_Task_Api extends Shipper_Task {
 	 * @return bool
 	 */
 	public function check_api_communication_health_state() {
-		$model = new Shipper_Model_Api;
+		$model    = new Shipper_Model_Api;
 		$previous = $model->get_previous_api_fails();
 
 		if ( empty( $previous ) || count( $previous ) <= 2 ) {
@@ -95,6 +95,7 @@ abstract class Shipper_Task_Api extends Shipper_Task {
 		}
 
 		$backoff = $this->get_api_backoff_time( $previous, 2 );
+		$backoff = apply_filters( 'shipper_backoff', $backoff );
 		if ( $last_err + $backoff >= time() ) {
 			Shipper_Helper_Log::write(
 				sprintf(
@@ -109,6 +110,7 @@ abstract class Shipper_Task_Api extends Shipper_Task {
 					$backoff
 				)
 			);
+
 			return false;
 		}
 
@@ -125,7 +127,7 @@ abstract class Shipper_Task_Api extends Shipper_Task {
 			return 0;
 		}
 		$err_exponent = count( $errors ) - min( $cutoff, count( $errors ) );
-		$backoff = min( pow( 5, $err_exponent ), $this->get_max_backoff() );
+		$backoff      = min( pow( 5, $err_exponent ), $this->get_max_backoff() );
 
 		return $backoff;
 	}
@@ -139,7 +141,7 @@ abstract class Shipper_Task_Api extends Shipper_Task {
 	 *
 	 * @param string $endpoint Endpoint to ping.
 	 * @param string $method Request type, post or get, defaults to GET.
-	 * @param array  $request_data Optional request data.
+	 * @param array $request_data Optional request data.
 	 *
 	 * @return array
 	 */
@@ -156,8 +158,8 @@ abstract class Shipper_Task_Api extends Shipper_Task {
 			return array();
 		}
 
-		$url = trailingslashit( $this->get_url() ) . $endpoint;
-		$data = array();
+		$url     = trailingslashit( $this->get_url() ) . $endpoint;
+		$data    = array();
 		$timeout = 30; // In seconds.
 
 		if ( 'migration-start' === $endpoint ) {
@@ -167,15 +169,15 @@ abstract class Shipper_Task_Api extends Shipper_Task {
 		}
 
 		$args = array(
-			'timeout' => $timeout,
+			'timeout'   => $timeout,
 			'sslverify' => defined( 'WPMUDEV_API_SSLVERIFY' ) ? WPMUDEV_API_SSLVERIFY : true,
-			'headers' => array(
+			'headers'   => array(
 				'user-agent' => shipper_get_user_agent(),
 			),
 		);
 
 		$model = new Shipper_Model_Api;
-		$key = $model->get( 'api_key' );
+		$key   = $model->get( 'api_key' );
 		if ( ! empty( $key ) ) {
 			$args['headers']['Authorization'] = sprintf(
 				'Basic %s',
@@ -185,7 +187,7 @@ abstract class Shipper_Task_Api extends Shipper_Task {
 
 		if ( ! empty( $request_data ) ) {
 			if ( self::METHOD_POST === $method ) {
-				$args['body'] = $request_data;
+				$args['body']   = $request_data;
 				$args['method'] = 'POST';
 			} else {
 				$args['method'] = 'GET';
@@ -223,9 +225,9 @@ abstract class Shipper_Task_Api extends Shipper_Task {
 	 *
 	 * Is to be overridden as needed in concrete API task implementations.
 	 *
+	 * @return int
 	 * @since v1.0.3
 	 *
-	 * @return int
 	 */
 	public function get_api_cache_ttl() {
 		return 120;
@@ -236,9 +238,9 @@ abstract class Shipper_Task_Api extends Shipper_Task {
 	 *
 	 * Is to be overridden as needed in concrete API task implementations.
 	 *
+	 * @return bool
 	 * @since v1.0.3
 	 *
-	 * @return bool
 	 */
 	public function is_cacheable() {
 		return true;
@@ -249,19 +251,20 @@ abstract class Shipper_Task_Api extends Shipper_Task {
 	 *
 	 * Proxies the API model cache getter to inject the TTL data.
 	 *
-	 * @since v1.0.3
-	 *
 	 * @param string $endpoint API endpoint.
 	 * @param array $payload API request params.
 	 *
 	 * @return false|array Cached data, or (bool)false on failure.
+	 * @since v1.0.3
+	 *
 	 */
-	public function get_cached_api_response( $endpoint, $payload  ) {
+	public function get_cached_api_response( $endpoint, $payload ) {
 		if ( ! $this->is_cacheable() ) {
 			return false;
 		}
 
 		$model = new Shipper_Model_Api;
+
 		return $model->get_cached_api_response(
 			$endpoint,
 			$payload,
@@ -275,13 +278,15 @@ abstract class Shipper_Task_Api extends Shipper_Task {
 	 * Proxied the API model cache clearing so it can be called from the
 	 * concrete implementations without instantiating the model.
 	 *
-	 * @since v1.0.3
-	 *
 	 * @param string $endpoint API endpoint.
 	 * @param array|false $payload Optional payload.
+	 *
+	 * @since v1.0.3
+	 *
 	 */
 	public function clear_cached_api_response( $endpoint, $payload = false ) {
 		$model = new Shipper_Model_Api;
+
 		return $model->clear_cached_api_response( $endpoint, $payload );
 	}
 
@@ -295,11 +300,12 @@ abstract class Shipper_Task_Api extends Shipper_Task {
 	 * This is so we don't double down on API errors.
 	 * Non-http errors is optional.
 	 *
-	 * @since v1.0.3
-	 *
 	 * @param string $endpoint API endpoint.
 	 * @param string $error_type Error suffix to be added to error type.
 	 * @param string $error_message Optional error message.
+	 *
+	 * @since v1.0.3
+	 *
 	 */
 	public function record_non_success( $endpoint, $error_type, $error_message ) {
 		if ( $this->get_constants()->get( 'RECORD_NONHTTP_ERRORS' ) && ! $this->has_errors() ) {
@@ -316,9 +322,10 @@ abstract class Shipper_Task_Api extends Shipper_Task {
 	 *
 	 * Clears previous API fails, optionally.
 	 *
+	 * @param string $endpoint API endpoint.
+	 *
 	 * @since v1.0.3
 	 *
-	 * @param string $endpoint API endpoint.
 	 */
 	public function record_success( $endpoint ) {
 		if ( $this->get_constants()->get( 'RECORD_NONHTTP_ERRORS' ) && ! $this->has_errors() ) {
@@ -334,14 +341,15 @@ abstract class Shipper_Task_Api extends Shipper_Task {
 	 * Either an overridden constants instance, as used in tests,
 	 * or a brand new object instance
 	 *
+	 * @return object Shipper_Model_Constants_Shipper instance
 	 * @since v1.0.3
 	 *
-	 * @return object Shipper_Model_Constants_Shipper instance
 	 */
 	public function get_constants() {
 		if ( isset( $this->_constants ) ) {
 			return $this->_constants;
 		}
+
 		return new Shipper_Model_Constants_Shipper;
 	}
 
@@ -350,9 +358,10 @@ abstract class Shipper_Task_Api extends Shipper_Task {
 	 *
 	 * Used in tests.
 	 *
+	 * @param object $constants Shipper_Model_Constants_Shipper instance
+	 *
 	 * @since v1.0.3
 	 *
-	 * @param object $constants Shipper_Model_Constants_Shipper instance
 	 */
 	public function set_constants( Shipper_Model_Constants $constants ) {
 		$this->_constants = $constants;
@@ -361,13 +370,13 @@ abstract class Shipper_Task_Api extends Shipper_Task {
 	/**
 	 * Actually call the API endpoint
 	 *
-	 * @since v1.0.3
-	 *
 	 * @param string $url API URL to send the request to.
 	 * @param string $endpoint API endpoint to call.
 	 * @param array $args Actual request arguments.
 	 *
 	 * @return array
+	 * @since v1.0.3
+	 *
 	 */
 	public function get_api_response( $url, $endpoint, $args ) {
 		$model = new Shipper_Model_Api;
@@ -376,10 +385,11 @@ abstract class Shipper_Task_Api extends Shipper_Task {
 		$timer->start( $endpoint );
 		$resp = wp_remote_request( $url, $args );
 		$timer->stop( $endpoint );
+
 		$status_code = wp_remote_retrieve_response_code( $resp );
 
 		$diff = Shipper_Helper_Timer_Basic::get()->diff( $endpoint );
-		$msg = sprintf(
+		$msg  = sprintf(
 			'(Called %s: %.02f, status: %d)',
 			$endpoint, $diff, $status_code
 		);
@@ -416,8 +426,7 @@ abstract class Shipper_Task_Api extends Shipper_Task {
 		if ( ! empty( $is_connection_error ) ) {
 			$error_msg = ! empty( $data )
 				? $this->get_error_message( $data )
-				: $raw
-			;
+				: $raw;
 			$this->add_error(
 				self::ERR_CONNECTION,
 				sprintf(
@@ -426,6 +435,7 @@ abstract class Shipper_Task_Api extends Shipper_Task {
 				)
 			);
 			$model->record_api_fail();
+
 			return $data;
 		}
 
@@ -460,7 +470,9 @@ abstract class Shipper_Task_Api extends Shipper_Task {
 		$data = ! empty( $status['data'] )
 			? $status['data']
 			: __( 'Generic error', 'shipper' );
-		if ( is_string( $data ) ) { return $data; }
+		if ( is_string( $data ) ) {
+			return $data;
+		}
 
 		return $this->get_formatted_error_data( $data );
 	}
@@ -474,7 +486,9 @@ abstract class Shipper_Task_Api extends Shipper_Task {
 	 */
 	public function get_formatted_error_data( $data ) {
 		$error = '';
-		if ( ! is_array( $data ) && ! is_object( $data ) ) { return $error; }
+		if ( ! is_array( $data ) && ! is_object( $data ) ) {
+			return $error;
+		}
 
 		foreach ( (array) $data as $key => $value ) {
 			$error .= $key . ': ';

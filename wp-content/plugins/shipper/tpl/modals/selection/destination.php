@@ -18,7 +18,7 @@ $is_import = Shipper_Model_Stored_Migration::TYPE_IMPORT === $type;
 	<?php } ?>
 	</h3>
 	<div class="sui-actions-right">
-		<a href="<?php echo esc_url( admin_url( 'admin.php?page=shipper' ) ); ?>"
+		<a href="<?php echo esc_url( network_admin_url( 'admin.php?page=shipper' ) ); ?>"
 			class="shipper-go-back">
 			<i class="sui-icon-close" aria-hidden="true"></i>
 			<span><?php esc_html_e( 'Cancel', 'shipper' ); ?></span>
@@ -28,13 +28,13 @@ $is_import = Shipper_Model_Stored_Migration::TYPE_IMPORT === $type;
 
 <div class="sui-box-body sui-box-body-slim sui-block-content-center">
 	<p><?php
-	if ( $is_import ) { 
+	if ( $is_import ) {
 		echo wp_kses_post(
-			__( 'You can import any <b>live</b> site connected to the Hub.', 'shipper' )
+			__( 'You can import any <b>live</b> site connected to the Hub. ', 'shipper' )
 		);
 		esc_html_e( 'Which website would you like to import here?  ', 'shipper' );
 	} else {
-		esc_html_e( 'You can export this site to any other site connected to the Hub.', 'shipper' );
+		esc_html_e( 'You can export this site to any other site connected to the Hub. ', 'shipper' );
 		esc_html_e( 'Where would you like to export this site to?  ', 'shipper' );
 	}
 	?></p>

@@ -5,11 +5,7 @@ namespace WPForms\Lite\Admin;
 /**
  * Dashboard Widget shows a chart and the form entries stats in WP Dashboard.
  *
- * @package    WPForms\Lite\Admin
- * @author     WPForms
- * @since      1.5.0
- * @license    GPL-2.0+
- * @copyright  Copyright (c) 2018, WPForms LLC
+ * @since 1.5.0
  */
 class DashboardWidget {
 
@@ -39,7 +35,7 @@ class DashboardWidget {
 	public function init() {
 
 		// This widget should be displayed for certain high-level users only.
-		if ( ! wpforms_current_user_can() ) {
+		if ( ! wpforms_current_user_can( 'view_forms' ) ) {
 			return;
 		}
 
@@ -72,7 +68,7 @@ class DashboardWidget {
 			// Allow entries count logging for WPForms Lite.
 			'allow_entries_count_lite'         => \apply_filters( 'wpforms_dash_widget_allow_entries_count_lite', true ),
 
-			// Determines if the forms with no entries should appear in a forms list. Once switched, the effect applies after cache expiration.
+			// Determine if the forms with no entries should appear in a forms list. Once switched, the effect applies after cache expiration.
 			'display_forms_list_empty_entries' => \apply_filters( 'wpforms_dash_widget_display_forms_list_empty_entries', true ),
 		);
 	}

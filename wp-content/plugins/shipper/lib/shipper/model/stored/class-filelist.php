@@ -24,6 +24,8 @@ class Shipper_Model_Stored_Filelist extends Shipper_Model_Stored {
 	const KEY_ACTIVE_DONE = 'shipper-active-done';
 	const KEY_SCRUB_CURSOR = 'shipper-scrub-position';
 
+	const KEY_CURRENT_TASK = 'shipper-current-task';
+
 	/**
 	 * Constructor
 	 *

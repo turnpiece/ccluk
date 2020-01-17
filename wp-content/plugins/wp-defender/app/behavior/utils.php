@@ -6,10 +6,12 @@
 namespace WP_Defender\Behavior;
 
 use Gettext\Extractors\PhpArray;
+use Gettext\Generators\Mo;
 use Hammer\Base\Behavior;
 use Hammer\Helper\Log_Helper;
 use Hammer\Helper\WP_Helper;
 use WP_Defender\Component\Error_Code;
+use WP_Defender\Component\Jed;
 use WP_Defender\Module\Advanced_Tools\Component\Mask_Api;
 use WP_Defender\Module\Advanced_Tools\Model\Auth_Settings;
 use WP_Defender\Module\Advanced_Tools\Model\Mask_Settings;
@@ -608,7 +610,7 @@ class Utils extends Behavior {
 	 */
 	public function determineServer( $useStaticPath = false ) {
 		$url         = ( $useStaticPath ) ? wp_defender()->getPluginUrl() . 'changelog.txt' : home_url();
-		$server_type = get_site_transient( 'wd_util_server' );
+		$server_type = get_site_option( 'wd_util_server' );
 		if ( ! is_array( $server_type ) ) {
 			$server_type = array();
 		}
@@ -632,7 +634,7 @@ class Utils extends Behavior {
 			} else {
 				//so the server software is apache, let see what the header return
 				$request = wp_remote_head( $url, array(
-					'user-agent' => $_SERVER['HTTP_USER_AGENT'],
+					'user-agent' => 'WP Defender self ping - determine server type',
 					'sslverify'  => $ssl_verify
 				) );
 				$server  = wp_remote_retrieve_header( $request, 'server' );
@@ -652,7 +654,7 @@ class Utils extends Behavior {
 			//if fall in here, means there is st unknowed.
 			//we need to check there is not cli evn
 			$request = wp_remote_head( $url, array(
-				'user-agent' => $_SERVER['HTTP_USER_AGENT'],
+				'user-agent' => 'WP Defender self ping - determine server type',
 				'sslverify'  => $ssl_verify
 			) );
 			$server  = wp_remote_retrieve_header( $request, 'server' );
@@ -661,8 +663,7 @@ class Utils extends Behavior {
 		}
 
 		$server_type[ $url ] = $server;
-		//cache for an hour
-		set_site_transient( 'wd_util_server', $server_type, 3600 );
+		update_site_option( 'wd_util_server', $server_type );
 
 		return $server;
 	}
@@ -674,6 +675,9 @@ class Utils extends Behavior {
 	 * @return String
 	 */
 	public function determineApacheVersion() {
+		if ( defined( 'DEFENDER_APACHE_VERSION' ) ) {
+			return constant( 'DEFENDER_APACHE_VERSION' );
+		}
 		if ( ! function_exists( 'apache_get_version' ) ) {
 			$version        = '2.2'; //default supported is 2.2
 			$url            = home_url();
@@ -1083,9 +1087,13 @@ class Utils extends Behavior {
 		$mo_path   = wp_defender()->getPluginPath() . 'languages/' . $mo_file;
 		$json_path = wp_defender()->getPluginPath() . 'languages/' . "wpdef-{$locale}-{$handle}.json";
 		if ( file_exists( $json_path ) ) {
-			//already there
-			return;
+			$data = json_decode( file_get_contents( $json_path ), true );
+			if ( isset( $data['version'] ) ) {
+				return;
+			}
+			@unlink( $json_path );
 		}
+
 		if ( ! file_exists( $mo_path ) ) {
 			//no translation found
 			return;
@@ -1096,7 +1104,7 @@ class Utils extends Behavior {
 		$translations->setDomain( 'messages' );
 		$translations->setLanguage( get_locale() );
 		//export to json
-		\Gettext\Generators\Jed::toFile( $translations, $json_path );
+		Jed::toFile( $translations, $json_path );
 	}
 
 	/**
@@ -1374,16 +1382,6 @@ class Utils extends Behavior {
 		return $country_array;
 	}
 
-	public function debug( $log ) {
-		if ( ! defined( 'DEFENDER_DEBUG' ) ) {
-			return;
-		}
-
-		$dir  = $this->getDefUploadDir();
-		$path = $dir . '/defender.log';
-		file_put_contents( $path, $log . PHP_EOL, FILE_APPEND );
-	}
-
 	/**
 	 * @param $dir
 	 *
@@ -1412,5 +1410,101 @@ class Utils extends Behavior {
 		}
 
 		return true;
+	}
+
+	public function parseDomain( $domain ) {
+		if ( ! filter_var( $domain, FILTER_VALIDATE_DOMAIN ) ) {
+			return false;
+		}
+		$suffix = $this->getDomainSuffix( $domain );
+		if ( $suffix == false ) {
+			return false;
+		}
+		$host             = parse_url( $domain, PHP_URL_HOST );
+		$host_without_tld = str_replace( $suffix, '', $host );
+		//remove righter . if any
+		$host_without_tld = rtrim( $host_without_tld, '.' );
+		$parts            = explode( '.', $host_without_tld );
+		if ( count( $parts ) == 1 ) {
+			return [
+				'host' => $host,
+				'tld'  => $suffix
+			];
+		}
+		//parse to get the root & subdomain
+		$domain = array_pop( $parts );
+
+		return [
+			'host'      => $host,
+			'tld'       => $suffix,
+			'subdomain' => str_replace( $domain, '', $host_without_tld ),
+		];
+	}
+
+	private function getDomainSuffix( $domain ) {
+		$tlds = include dirname( __DIR__ ) . '/component/public-suffix.php';
+		//whitelist development
+		$tlds['localhost'] = 1;
+		$parts             = explode( '.', $domain );
+		$parts             = array_reverse( $parts );
+		$suffix            = '';
+		$list              = [];
+		$length            = 0;
+		foreach ( $parts as $part ) {
+			$suffix   = rtrim( $part . '.' . $suffix, '.' );
+			$notAllow = '!' . $suffix;
+			if ( isset( $tlds[ $notAllow ] ) ) {
+				//this wont be here
+				continue;
+			}
+			if ( isset( $tlds[ $suffix ] ) ) {
+				if ( $length > strlen( $suffix ) ) {
+					//put at last
+					$list[] = $suffix;
+				} else {
+					array_unshift( $list, $suffix );
+				}
+			}
+		};
+		if ( empty( $list ) ) {
+			return false;
+		}
+
+		//the lenghter will be use
+		return $list[0];
+	}
+
+	public function log( $log, $group = null ) {
+		if ( ! defined( 'DEFENDER_DEBUG' ) ) {
+			return;
+		}
+		$log_path = self::getDefUploadDir();
+		$log_name = hash( 'sha256', network_home_url() . $group . SECURE_AUTH_SALT );
+		$log_path = $log_path . '/' . $log_name;
+
+		$log = sprintf( '%s - %s' . PHP_EOL, date( 'Y-m-d H:i:s', current_time( 'timestamp' ) ), $log );
+		file_put_contents( $log_path, $log, FILE_APPEND );
+	}
+
+	public function read_log( $group = null ) {
+		if ( ! defined( 'DEFENDER_DEBUG' ) ) {
+			return;
+		}
+		$log_path = self::getDefUploadDir();
+		$log_name = hash( 'sha256', network_home_url() . $group . SECURE_AUTH_SALT );
+		$log_path = $log_path . '/' . $log_name;
+		$text     = file( $log_path );
+
+		return implode( array_reverse( $text ), PHP_EOL );
+	}
+
+	public function clear_log( $group = null ) {
+		if ( ! defined( 'DEFENDER_DEBUG' ) ) {
+			return;
+		}
+		$log_path = self::getDefUploadDir();
+		$log_name = hash( 'sha256', network_home_url() . $group . SECURE_AUTH_SALT );
+		$log_path = $log_path . '/' . $log_name;
+		@unlink( $log_path );
 	}
 }

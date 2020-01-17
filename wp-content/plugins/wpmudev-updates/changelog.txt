@@ -4,6 +4,23 @@ Author: Aaron Edwards
 Change Log:
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
+4.7.5 - 01/02/2020 - Aaron, Ivan, Biplav
+- Enhance: Update messages for new membership plans when site limit is reached
+- Fix: Typo in text description on the Dashboard > Resources widget
+- Fix: Snapshot not being able to fetch `site_id`
+
+----------------------------------------------------------------------
+4.7.4 - 12/16/2019 - Aaron, Ivan, Biplav
+- Improvement: New and improved dashboard UI
+- Improvement: Return specific error code for a permissions error
+- Improvement: Add loading states to the plugin list page
+- Improvement: Extend the white labeling functionality to subsite admins
+- Fix: Minor improvements on analytics chart
+- Fix: Staff photo not displaying on recent support access
+- Fix: WordPress notices not displaying on the plugin page
+- Fix: Improvements on the plugins bulk actions
+
+----------------------------------------------------------------------
 4.7.3.5 - 10/18/2019 - Aaron, Ivan, Biplav
 - Improvement: Better handling of + sign in the email address for SSO ( Single Sign-On )
 
@@ -562,4 +579,4 @@ Added option to disable admin notices.
 Initial Release.
 
 
-87274-1571425248-au
+87274-1579293128-au

@@ -29,7 +29,9 @@ class Shipper_Task_Export_Remote extends Shipper_Task_Export {
 	 * @return bool
 	 */
 	public function is_tracking() {
-		if ( ! $this->has_done_anything() ) { return false; }
+		if ( ! $this->has_done_anything() ) {
+			return false;
+		}
 
 		return self::STATUS_TRACKING === $this->_status;
 	}
@@ -44,8 +46,8 @@ class Shipper_Task_Export_Remote extends Shipper_Task_Export {
 	 * @return array
 	 */
 	public function get_cached_result( $remote_site ) {
-		$model = new Shipper_Model_Stored_Apicache_Mgrget;
-		$data = array();
+		$model  = new Shipper_Model_Stored_Apicache_Mgrget;
+		$data   = array();
 		$errors = array();
 
 		if ( ! $model->is_expired() ) {
@@ -56,7 +58,7 @@ class Shipper_Task_Export_Remote extends Shipper_Task_Export {
 			$task = new Shipper_Task_Api_Migrations_Get;
 			$data = $task->apply( array(
 				'domain' => $remote_site,
-			));
+			) );
 			if ( $task->has_errors() ) {
 				$errors = $task->get_errors();
 			}
@@ -64,8 +66,9 @@ class Shipper_Task_Export_Remote extends Shipper_Task_Export {
 			$model->set_timestamp( time() );
 			$model->save();
 		}
+
 		return array(
-			'mgr' => $data,
+			'mgr'    => $data,
 			'errors' => $errors,
 		);
 	}
@@ -73,25 +76,25 @@ class Shipper_Task_Export_Remote extends Shipper_Task_Export {
 	/**
 	 * Actually triggers the remote import
 	 *
-	 * @uses shipper_await_cancel
-	 *
 	 * @param array $args Not used.
 	 *
 	 * @return bool
+	 * @uses shipper_await_cancel
+	 *
 	 */
 	public function apply( $args = array() ) {
-		$this->_status = self::STATUS_CHECKING;
+		$this->_status            = self::STATUS_CHECKING;
 		$this->_has_done_anything = true;
 
-		$migration = new Shipper_Model_Stored_Migration;
-		$this_site = $migration->get_source();
+		$migration   = new Shipper_Model_Stored_Migration;
+		$this_site   = $migration->get_source();
 		$remote_site = $migration->get_destination();
 
 		$result = $this->get_cached_result( $remote_site );
 		$errors = ! empty( $result['errors'] )
 			? $result['errors']
 			: array();
-		$mgr = ! empty( $result['mgr'] )
+		$mgr    = ! empty( $result['mgr'] )
 			? $result['mgr']
 			: array();
 
@@ -101,11 +104,10 @@ class Shipper_Task_Export_Remote extends Shipper_Task_Export {
 		} else {
 			// We have status, carry on.
 			$progress = 0;
-			$status = true;
+			$status   = true;
 
 			$file = ! empty( $mgr['file'] ) ? $mgr['file'] : '';
 			$type = ! empty( $mgr['type'] ) ? $mgr['type'] : '';
-
 			if ( Shipper_Model_Stored_Migration::TYPE_EXPORT === $type ) {
 				// Previous export migration, null file.
 				// This is because we *want* to auto-start it in this scenario.
@@ -126,8 +128,8 @@ class Shipper_Task_Export_Remote extends Shipper_Task_Export {
 				$this->_status = self::STATUS_TRACKING;
 				// We already started an import there.
 				// Let's update the progress percentage.
-				$progress = (int) $mgr['status'];
-				$status = $progress > 99;
+				$progress                   = (int) $mgr['status'];
+				$status                     = $progress > 99;
 				$this->_percentage_imported = $progress;
 			} elseif ( empty( $file ) ) {
 				// Can we auto-start it?
@@ -139,7 +141,9 @@ class Shipper_Task_Export_Remote extends Shipper_Task_Export {
 			// If we're not done, let's give it some time now...
 			$has_lock = shipper_await_cancel( Shipper_Model_Stored_Migration::TYPE_EXPORT );
 			// If we encountered lock while waiting, we're done here.
-			if ( $has_lock ) { return true; }
+			if ( $has_lock ) {
+				return true;
+			}
 		}
 
 		return $status;
@@ -158,27 +162,37 @@ class Shipper_Task_Export_Remote extends Shipper_Task_Export {
 		$model->clear()->save();
 
 		// Assume we're not done yet at first.
-		$status = false;
-		$task = new Shipper_Task_Api_Destinations_Ping;
+		$status   = false;
+		$task     = new Shipper_Task_Api_Destinations_Ping;
 		$ping_arg = array(
 			'domain' => $remote_site,
 		);
-		$arg = array(
+		$arg      = array(
 			'source' => $remote_site,
 			'target' => $this_site,
-			'type' => Shipper_Model_Stored_Migration::TYPE_IMPORT,
+			'type'   => Shipper_Model_Stored_Migration::TYPE_IMPORT,
 		);
 
 		// Can we reach the remote site?
 		if ( $task->apply( $ping_arg ) ) {
 			// Yes, we can. Let's try starting export.
-			$task = new Shipper_Task_Api_Migrations_Start;
+			$migration = new Shipper_Model_Stored_Migration();
+			if ( $migration->get( Shipper_Model_Stored_Migration::HAS_STARTED ) == true ) {
+				Shipper_Helper_Log::debug( 'Back off, already started' );
+
+				return false;
+			}
+			$task   = new Shipper_Task_Api_Migrations_Start;
 			$status = $task->apply( $arg );
 			if ( $task->has_errors() ) {
 				// Well, that failed.
 				$status = true; // We're done!
 			} else {
 				$status = ! $status; // If task succeeded, we're not done.
+				//we already started, record it
+				$migration = new Shipper_Model_Stored_Migration();
+				$migration->set( Shipper_Model_Stored_Migration::HAS_STARTED, true );
+				$migration->save();
 			}
 			// Log any errors.
 			foreach ( $task->get_errors() as $err ) {
@@ -267,6 +281,7 @@ class Shipper_Task_Export_Remote extends Shipper_Task_Export {
 			(int) $this->_percentage_imported,
 			1
 		);
+
 		return sprintf(
 			__( 'Import to remote location ( at %d%% )', 'shipper' ),
 			$progress
@@ -282,9 +297,9 @@ class Shipper_Task_Export_Remote extends Shipper_Task_Export {
 		if ( $this->_percentage_imported ) {
 			return $this->_percentage_imported;
 		}
+
 		return $this->is_tracking()
 			? parent::get_status_percentage()
-			: 10
-		;
+			: 10;
 	}
 }

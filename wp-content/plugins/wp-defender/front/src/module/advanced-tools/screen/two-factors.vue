@@ -41,7 +41,8 @@
                         </span>
 					</p>
 				</div>
-				<div v-if="model.user_roles.length > 0" class="sui-notice sui-notice-info">
+				<div v-if="state.origin_state"
+				     class="sui-notice sui-notice-info">
 					<p>
 						<strong>{{__("Two-factor authentication is now active.")}}</strong> {{__("User roles with this feature enabled must visit their ")}}
 						<a :href="adminUrl('profile.php')">{{__("Profile page")}}</a> {{__("to complete setup and sync their account with the Authenticator app.")}}
@@ -378,7 +379,9 @@
 				nonces: advanced_tools.nonces,
 				endpoints: advanced_tools.endpoints,
 				state: {
-					on_saving: false
+					on_saving: false,
+					waiting_save: false,
+					origin_state: false
 				}
 			}
 		},
@@ -398,6 +401,7 @@
 						that.$nextTick(() => {
 							that.rebindSUI();
 							that.bindUploader();
+							this.state.waiting_save = false;
 						})
 					}
 				})
@@ -408,6 +412,7 @@
 				delete data['email_subject'];
 				delete data['email_sender'];
 				delete data['email_body'];
+				this.state.origin_state = this.model.user_roles.length > 0;
 				this.httpPostRequest('updateSettings', {
 					data: JSON.stringify({
 						settings: data,
@@ -477,6 +482,7 @@
 			this.$nextTick(() => {
 				this.bindUploader();
 			})
+			this.state.origin_state = this.model.user_roles.length > 0;
 		},
 	}
 </script>

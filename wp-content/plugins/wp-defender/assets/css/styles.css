@@ -12836,11 +12836,11 @@ This is used to give admin notices that are loaded outside of the .wrap but insi
   /* Code blocks */
   /* Inline code */
 }
-.file-scanning #scanning-dialog .sui-box-body {
+.file-scanning #scanning-dialog .sui-box-body:not(.scanning-free):not(.scanning-blank) {
   position: relative;
   padding-bottom: 150px;
 }
-.file-scanning #scanning-dialog .sui-box-body .scanning-man {
+.file-scanning #scanning-dialog .sui-box-body:not(.scanning-free):not(.scanning-blank) .scanning-man {
   background-image: url("../img/scanning-man.svg");
   background-repeat: no-repeat;
   background-size: contain;
@@ -12877,11 +12877,18 @@ This is used to give admin notices that are loaded outside of the .wrap but insi
 .file-scanning .sui-table tbody tr td {
   word-break: break-all;
 }
-.file-scanning .sui-upsell-row {
-  border-bottom: 1px solid #E6E6E6 !important;
-}
 .file-scanning .sui-accordion-item-title .sui-checkbox {
   margin-right: 10px !important;
+}
+.file-scanning .sui-box-body.scanning-free {
+  padding-bottom: 0 !important;
+}
+.file-scanning .sui-box-body.scanning-free .sui-upsell-notice {
+  margin-bottom: 35px;
+}
+.file-scanning .sui-box-body.scanning-free img.sui-upsell-image {
+  height: 215px;
+  width: auto !important;
 }
 .file-scanning code[class*=language-],
 .file-scanning pre[class*=language-] {
@@ -13166,6 +13173,13 @@ Fix out of align when using notice inside tweaks
   min-width: 50px;
 }
 
+a.premium-button {
+  clear: both;
+  color: white !important;
+  display: inline-block !important;
+  margin-top: 15px !important;
+}
+
 .wd-calendar {
   width: 530px !important;
 }
@@ -13309,4 +13323,4 @@ hr.sui-flushed {
 }
 
 
-/* 87274-1571425147-au */
+/* 87274-1579293150-au */

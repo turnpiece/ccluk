@@ -76,4 +76,10 @@ class Mask_Settings extends \Hammer\WP\Settings {
 
 		return $labels;
 	}
+
+	public function beforeValidate() {
+		if ( $this->mask_url === $this->redirect_traffic_url && strlen( $this->redirect_traffic_url ) > 0 ) {
+			$this->addError( 'redirect_traffic_url', __( "Redirect URL must different from Login URL", wp_defender()->domain ) );
+		}
+	}
 }

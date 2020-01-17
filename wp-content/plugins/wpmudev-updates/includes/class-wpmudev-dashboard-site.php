@@ -668,6 +668,7 @@ class WPMUDEV_Dashboard_Site {
 				WPMUDEV_Dashboard::$site->set_option( 'refresh_profile_flag', 1 );
 				WPMUDEV_Dashboard::$api->refresh_projects_data();
 				WPMUDEV_Dashboard::$site->refresh_local_projects( 'remote' );
+
 				// un silent message
 				$success = true;
 				break;
@@ -693,6 +694,11 @@ class WPMUDEV_Dashboard_Site {
 							'branding_enabled'  => array(
 								'option_name' => 'whitelabel_branding_enabled',
 								'default'     => false,
+							),
+							'branding_enabled_subsite'  => array(
+								'option_name'   => 'branding_enabled_subsite',
+								'expected_type' => 'boolean',
+								'default'       => false,
 							),
 							'branding_image'    => array(
 								'option_name' => 'whitelabel_branding_image',
@@ -1230,6 +1236,7 @@ class WPMUDEV_Dashboard_Site {
 								// Since we auto install, we need to associate SSO with the correct user.
 								WPMUDEV_Dashboard::$site->set_option( 'sso_userid', $current_user->ID );
 							}
+
 						}
 						$this->send_json_success(
 							array(
@@ -2604,7 +2611,16 @@ class WPMUDEV_Dashboard_Site {
 				5 * MINUTE_IN_SECONDS
 			);
 			$this->set_option( 'updates_available', false );
-			WPMUDEV_Dashboard::$api->hub_sync( $local_projects );
+
+			//check if is manual check for updates
+			if( isset( $_REQUEST['action'] ) && 'check-updates' === $_REQUEST['action'] ){
+				//force hubsync
+				$full_sync = true;
+			} else {
+				$full_sync = false;
+			}
+
+			WPMUDEV_Dashboard::$api->hub_sync( $local_projects, $full_sync );
 
 			// Recalculate upgrades with current/updated data.
 			WPMUDEV_Dashboard::$api->calculate_upgrades( $local_projects );
@@ -3380,6 +3396,11 @@ class WPMUDEV_Dashboard_Site {
 				'expected_type' => 'boolean',
 				'default'       => false,
 			),
+			'branding_enabled_subsite'  => array(
+				'option_name'   => 'branding_enabled_subsite',
+				'expected_type' => 'boolean',
+				'default'       => false,
+			),
 			'branding_image'    => array(
 				'option_name'   => 'whitelabel_branding_image',
 				'expected_type' => 'string',
@@ -3454,10 +3475,21 @@ class WPMUDEV_Dashboard_Site {
 			}
 			$default_branding['hide_branding'] = $whitelabel_settings['branding_enabled'];
 			if ( $whitelabel_settings['branding_enabled'] ) {
-				if ( 'hero_image' === $type ) {
-					return $whitelabel_settings['branding_image'];
+
+				if( is_multisite() && ! is_network_admin() && 1 === absint( $whitelabel_settings['branding_enabled_subsite'] ) ){
+					if( has_custom_logo() ){
+						$custom_logo_id = get_theme_mod( 'custom_logo' );
+						$image = wp_get_attachment_image_url( $custom_logo_id, 'full' );
+					}
+
+				} else {
+					$image = $whitelabel_settings['branding_image'];
 				}
-				$default_branding['hero_image'] = $whitelabel_settings['branding_image'];
+				if ( 'hero_image' === $type ) {
+					return $image;
+				}
+
+				$default_branding['hero_image'] = $image;
 			}
 			if ( 'change_footer' === $type ) {
 				return $whitelabel_settings['footer_enabled'];
@@ -4227,7 +4259,19 @@ if ( ! function_exists( 'wpmudev_whitelabel_sui_plugins_branding' ) ) {
 
 		$output = '';
 		if ( $whitelabel_settings['branding_enabled'] ) {
-			$image                    = $whitelabel_settings['branding_image'];
+
+			if( is_multisite() && ! is_network_admin() && $whitelabel_settings['branding_enabled_subsite'] ){
+
+				if( has_custom_logo() ){
+					$custom_logo_id = get_theme_mod( 'custom_logo' );
+					$image = wp_get_attachment_image_src( $custom_logo_id , 'full' );
+					$image = $image[0];
+				}
+
+			} else {
+				$image = $whitelabel_settings['branding_image'];
+			}
+
 			$additional_summary_class = ! empty( $image ) ? 'sui-rebranded' : 'sui-unbranded';
 			ob_start();
 			?>

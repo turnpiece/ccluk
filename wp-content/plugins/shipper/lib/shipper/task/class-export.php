@@ -177,5 +177,4 @@ abstract class Shipper_Task_Export extends Shipper_Task {
 			: ( $is_done ? 100 : 99 )
 		;
 	}
-
 }

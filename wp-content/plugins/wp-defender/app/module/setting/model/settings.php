@@ -23,7 +23,10 @@ class Settings extends \Hammer\WP\Settings {
 	}
 
 	public function __construct( $id, $is_multi ) {
-		$site_locale = get_locale();
+		parent::__construct( $id, $is_multi );
+		$this->high_contrast_mode = ! ! $this->high_contrast_mode;
+		$this->usage_tracking     = ! ! $this->usage_tracking;
+		$site_locale              = get_locale();
 
 		if ( 'en_US' === $site_locale ) {
 			$site_language = 'English';
@@ -33,10 +36,6 @@ class Settings extends \Hammer\WP\Settings {
 			$site_language = $translations[ $site_locale ]['native_name'];
 		}
 		$this->translate = $site_language;
-
-		parent::__construct( $id, $is_multi );
-		$this->high_contrast_mode = ! ! $this->high_contrast_mode;
-		$this->usage_tracking     = ! ! $this->usage_tracking;
 	}
 
 	/**

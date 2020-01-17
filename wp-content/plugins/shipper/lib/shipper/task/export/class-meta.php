@@ -24,12 +24,13 @@ class Shipper_Task_Export_Meta extends Shipper_Task_Export {
 	 */
 	public function apply( $args = array() ) {
 		$migration = new Shipper_Model_Stored_Migration;
-		$remote = new Shipper_Helper_Fs_Remote;
+		$remote    = new Shipper_Helper_Fs_Remote;
 
 		// Update status flag first.
 		$this->_has_done_anything = true;
-		$files = new Shipper_Model_Dumped_Filelist;
-		$large = new Shipper_Model_Dumped_Largelist;
+		$files                    = new Shipper_Model_Dumped_Filelist;
+		$large                    = new Shipper_Model_Dumped_Largelist;
+		$packages                 = new Shipper_Model_Dumped_Packagelist();
 
 		$batch = array(
 			$this->get_upload_command(
@@ -41,12 +42,15 @@ class Shipper_Task_Export_Meta extends Shipper_Task_Export {
 			$this->get_upload_command(
 				$large->get_file_path()
 			),
+			$this->get_upload_command(
+				$packages->get_file_path()
+			)
 		);
-
 		if ( ! empty( $batch ) ) {
 			$status = $remote->execute_batch_queue( $batch );
 			if ( empty( $status ) ) {
 				Shipper_Helper_Log::write( 'Something went wrong uploading meta files, will re-try' );
+
 				// Attempt re-try.
 				return false;
 			}
@@ -70,11 +74,11 @@ class Shipper_Task_Export_Meta extends Shipper_Task_Export {
 		}
 
 		$migration = new Shipper_Model_Stored_Migration;
-		$remote = new Shipper_Helper_Fs_Remote;
+		$remote    = new Shipper_Helper_Fs_Remote;
 
-		$dest_root = Shipper_Helper_Fs_Path::clean_fname( $migration->get_destination() );
+		$dest_root   = Shipper_Helper_Fs_Path::clean_fname( $migration->get_destination() );
 		$destination = trailingslashit( $dest_root ) .
-			$this->get_destination_path( basename( $source ) );
+		               $this->get_destination_path( basename( $source ) );
 
 		return $remote->get_upload_command( $source, $destination );
 	}
@@ -90,20 +94,21 @@ class Shipper_Task_Export_Meta extends Shipper_Task_Export {
 	 * @return string|bool
 	 */
 	public function get_source_path( $file, $migration ) {
-		$manifest = $this->get_manifest( $migration );
+		$manifest    = $this->get_manifest( $migration );
 		$destination = Shipper_Helper_Fs_Path::get_temp_dir() . preg_replace( '/[^-_a-z0-9]/i', '', $file ) . '.json';
-		$flags = defined( 'JSON_PRETTY_PRINT' )
+		$flags       = defined( 'JSON_PRETTY_PRINT' )
 			? JSON_PRETTY_PRINT
-			: 0
-		;
-		$res = file_put_contents( $destination, json_encode( $manifest, $flags ) );
+			: 0;
+		$res         = file_put_contents( $destination, json_encode( $manifest, $flags ) );
 		if ( false === $res ) {
 			$this->add_error(
 				self::ERR_ACCESS,
 				sprintf( __( 'Shipper couldn\'t write to file: %s', 'shipper' ), $destination )
 			);
+
 			return false;
 		}
+
 		return $destination;
 	}
 
@@ -127,6 +132,7 @@ class Shipper_Task_Export_Meta extends Shipper_Task_Export {
 	 */
 	public function get_manifest( $migration ) {
 		$manifest = Shipper_Model_Manifest::from_migration( $migration );
+
 		return $manifest->get_data();
 	}
 

@@ -47,6 +47,14 @@ Administrator';
 		$this->enabled        = ! ! $this->enabled;
 		$this->force_auth     = ! ! $this->force_auth;
 		$this->custom_graphic = ! ! $this->custom_graphic;
+		if ( ! is_array( $this->user_roles ) ) {
+			$this->user_roles = [];
+		}
+		$this->user_roles = array_values( $this->user_roles );
+		if ( ! is_array( $this->force_auth_roles ) ) {
+			$this->force_auth_roles = [];
+		}
+		$this->force_auth_roles = array_values( $this->force_auth_roles );
 	}
 
 	/**
@@ -57,6 +65,7 @@ Administrator';
 			$class           = new Auth_Settings( 'wd_2auth_settings', WP_Helper::is_network_activate( wp_defender()->plugin_slug ) );
 			self::$_instance = $class;
 		}
+
 		return self::$_instance;
 	}
 

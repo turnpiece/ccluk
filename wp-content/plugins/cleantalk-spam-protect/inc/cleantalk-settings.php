@@ -129,18 +129,6 @@ function apbct_settings__set_fileds( $fields ){
 					'title'       => __('Custom contact forms', 'cleantalk'),
 					'description' => __('Anti spam test for any WordPress themes or contacts forms.', 'cleantalk'),
 				),
-				'wc_checkout_test' => array(
-					'title'       => __('WooCommerce checkout form', 'cleantalk'),
-					'description' => __('Anti spam test for WooCommerce checkout form.', 'cleantalk'),
-					'childrens'   => array('wc_register_from_order')
-				),
-				'wc_register_from_order' => array(
-					'title'           => __('Spam test for registration during checkout', 'cleantalk'),
-					'description'     => __('Enable anti spam test for registration process which during woocommerce\'s checkout.', 'cleantalk'),
-					'parent'          => 'wc_checkout_test',
-					'class'           => 'apbct_settings-field_wrapper--sub',
-					'reverse_trigger' => true
-				),
 				'search_test' => array(
 					'title'       => __('Test default Wordpress search form for spam', 'cleantalk'),
 					'description' => __('Spam protection for Search form.', 'cleantalk')
@@ -171,9 +159,59 @@ function apbct_settings__set_fileds( $fields ){
 		),
 		
 		// Comments and Messages
+		'wc' => array(
+			'title'          => __('WooCommerce', 'cleantalk'),
+			'fields'         => array(
+				'wc_checkout_test' => array(
+					'title'       => __('WooCommerce checkout form', 'cleantalk'),
+					'description' => __('Anti spam test for WooCommerce checkout form.', 'cleantalk'),
+					'childrens'   => array('wc_register_from_order')
+				),
+				'wc_register_from_order' => array(
+					'title'           => __('Spam test for registration during checkout', 'cleantalk'),
+					'description'     => __('Enable anti spam test for registration process which during woocommerce\'s checkout.', 'cleantalk'),
+					'parent'          => 'wc_checkout_test',
+					'class'           => 'apbct_settings-field_wrapper--sub',
+					'reverse_trigger' => true
+				),
+			),
+		),
+		
+		// Comments and Messages
 		'comments_and_messages' => array(
 			'title'          => __('Comments and Messages', 'cleantalk'),
 			'fields'         => array(
+				'disable_comments__all' => array(
+					'title' => __( 'Disable all comments', 'cleantalk' ),
+					'description' => __( 'Disabling comments for all types of content.', 'cleantalk' ),
+					'childrens' => array(
+						'disable_comments__posts',
+						'disable_comments__pages',
+						'disable_comments__media',
+					),
+					'options' => array(
+						array( 'val' => 1, 'label' => __( 'On' ), 'childrens_enable' => 0, ),
+						array( 'val' => 0, 'label' => __( 'Off' ), 'childrens_enable' => 1, ),
+					),
+				),
+				'disable_comments__posts' => array(
+					'title'           => __( 'Disable comments for all posts', 'cleantalk' ),
+					'class'           => 'apbct_settings-field_wrapper--sub',
+					'parent'          => 'disable_comments__all',
+					'reverse_trigger' => true,
+				),
+				'disable_comments__pages' => array(
+					'title'           => __( 'Disable comments for all pages', 'cleantalk' ),
+					'class'           => 'apbct_settings-field_wrapper--sub',
+					'parent'          => 'disable_comments__all',
+					'reverse_trigger' => true,
+				),
+				'disable_comments__media' => array(
+					'title'           => __( 'Disable comments for all media', 'cleantalk' ),
+					'class'           => 'apbct_settings-field_wrapper--sub',
+					'parent'          => 'disable_comments__all',
+					'reverse_trigger' => true,
+				),
 				'bp_private_messages' => array(
 					'title'       => __('BuddyPress Private Messages', 'cleantalk'),
 					'description' => __('Check buddyPress private messages.', 'cleantalk'),
@@ -452,8 +490,8 @@ function apbct_settings__add_groups_and_fields( $fields ){
 		'callback'        => 'apbct_settings__field__draw',
 		'type'            => 'radio',
 		'options' => array(
-			array('val' => 1, 'label'  => __('On'),),
-			array('val' => 0, 'label'  => __('Off'),),
+			array('val' => 1, 'label'  => __('On'),  'childrens_enable' => 1, ),
+			array('val' => 0, 'label'  => __('Off'), 'childrens_enable' => 0, ),
 		),
 		'def_class'          => 'apbct_settings-field_wrapper',
 		'class'              => '',
@@ -536,7 +574,7 @@ function apbct_settings__display() {
 					// .' <a href="https://community.cleantalk.org/viewforum.php?f=25" target="_blank">'.__("Tech forum", 'cleantalk').'</a>'
 					// .($user_token ? ", <a href='https://cleantalk.org/my/support?user_token=$user_token&cp_mode=antispam' target='_blank'>".__("Service support ", 'cleantalk').'</a>' : '').
 						.'<br>';
-					echo __('Plugin Homepage at', 'cleantalk').' <a href="http://cleantalk.org" target="_blank">cleantalk.org</a>.<br/>';
+					echo __('Plugin Homepage at', 'cleantalk').' <a href="https://cleantalk.org" target="_blank">cleantalk.org</a>.<br/>';
 					echo '<span id="apbct_gdpr_open_modal" style="text-decoration: underline;">'.__('GDPR compliance', 'cleantalk').'</span><br/>';
 					echo __('Use s@cleantalk.org to test plugin in any WordPress form.', 'cleantalk').'<br>';
 					echo __('CleanTalk is registered Trademark. All rights reserved.', 'cleantalk').'<br/>';
@@ -610,7 +648,9 @@ function apbct_settings__display() {
 function apbct_settings__display__network(){
 	// If it's network admin dashboard
 	if(is_network_admin()){
-		$link = get_site_option('siteurl').'wp-admin/options-general.php?page=cleantalk';
+		$site_url = get_site_option('siteurl');
+		$site_url = preg_match( '/\/$/', $site_url ) ? $site_url : $site_url . '/';
+		$link = $site_url . 'wp-admin/options-general.php?page=cleantalk';
 		printf("<h2>" . __("Please, enter the %splugin settings%s in main site dashboard.", 'cleantalk') . "</h2>", "<a href='$link'>", "</a>");
 		return;
 	}
@@ -630,12 +670,12 @@ function apbct_settings__error__output($return = false){
 		
 		$error_texts = array(
 			// Misc
-			'key_invalid' => __('Error occured while API key validating. Error: ', 'security-malware-firewall'),
-			'key_get' => __('Error occured while automatically gettings access key. Error: ', 'security-malware-firewall'),
-			'sfw_send_logs' => __('Error occured while sending sending SpamFireWall logs. Error: ', 'security-malware-firewall'),
-			'sfw_update' => __('Error occured while updating SpamFireWall local base. Error: '            , 'security-malware-firewall'),
-			'account_check' => __('Error occured while checking account status. Error: ', 'security-malware-firewall'),
-			'api' => __('Error occured while excuting API call. Error: ', 'security-malware-firewall'),
+			'key_invalid' => __('Error occured while API key validating. Error: ', 'cleantalk'),
+			'key_get' => __('Error occured while automatically gettings access key. Error: ', 'cleantalk'),
+			'sfw_send_logs' => __('Error occured while sending sending SpamFireWall logs. Error: ', 'cleantalk'),
+			'sfw_update' => __('Error occured while updating SpamFireWall local base. Error: '            , 'cleantalk'),
+			'account_check' => __('Error occured while checking account status. Error: ', 'cleantalk'),
+			'api' => __('Error occured while excuting API call. Error: ', 'cleantalk'),
 			
 			// Validating settings
 			'settings_validate' => 'Validate Settings',
@@ -643,7 +683,7 @@ function apbct_settings__error__output($return = false){
 			'exclusions_fields' => 'Field Exclusions',
 			
 			// Unknown
-			'unknown' => __('Unknown error. Error: ', 'security-malware-firewall'),
+			'unknown' => __('Unknown error. Error: ', 'cleantalk'),
 		);
 		
 		$errors_out = array();
@@ -674,7 +714,7 @@ function apbct_settings__error__output($return = false){
 		
 		if(!empty($errors_out)){
 			$out .= '<div id="apbctTopWarning" class="error" style="position: relative;">'
-				.'<h3 style="display: inline-block;">'.__('Errors:', 'security-malware-firewall').'</h3>';
+				.'<h3 style="display: inline-block;">'.__('Errors:', 'cleantalk').'</h3>';
 				foreach($errors_out as $value){
 					$out .= '<h4>'.$value.'</h4>';
 				}
@@ -767,7 +807,7 @@ function apbct_settings__field__state(){
 	// Autoupdate status
 	if($apbct->notice_auto_update && (!$apbct->white_label || is_main_site())){
 		echo '<img class="apbct_status_icon" src="'.($apbct->auto_update == 1 ? $img : ($apbct->auto_update == -1 ? $img_no : $img_no_gray)).'"/>'.__('Auto update', 'cleantalk')
-		     .' <sup><a href="http://cleantalk.org/help/cleantalk-auto-update" target="_blank">?</a></sup>';
+		     .' <sup><a href="https://cleantalk.org/help/cleantalk-auto-update" target="_blank">?</a></sup>';
 	}
 	
 	// WooCommerce
@@ -845,7 +885,7 @@ function apbct_settings__field__apikey(){
 			// Warnings and GDPR
 			printf( __('Admin e-mail (%s) will be used for registration, if you want to use other email please %sGet Access Key Manually%s.', 'cleantalk'),
 				ct_get_admin_email(),
-				'<a target="__blank" href="'
+				'<a class="apbct_color--gray" target="__blank" href="'
 					. sprintf( 'https://cleantalk.org/register?platform=wordpress&email=%s&website=%s',
 						urlencode(ct_get_admin_email()),
 						urlencode(parse_url(get_option('siteurl'),PHP_URL_HOST))
@@ -859,8 +899,8 @@ function apbct_settings__field__apikey(){
 				echo '<div>';
 					echo '<input checked type="checkbox" id="license_agreed" onclick="apbctSettingsDependencies(\'apbct_setting---get_key_auto\');"/>';
 					echo '<label for="spbc_license_agreed">';
-						printf( __('I accept %sLicense Agreement%s.', 'security-malware-firewall'),
-							'<a href="https://cleantalk.org/publicoffer" target="_blank" style="color:#66b;">',
+						printf( __('I accept %sLicense Agreement%s.', 'cleantalk'),
+							'<a class = "apbct_color--gray" href="https://cleantalk.org/publicoffer" target="_blank">',
 							'</a>'
 						);
 					echo "</label>";
@@ -1094,7 +1134,7 @@ function apbct_settings__field__draw($params = array()){
 						     .' value="'.$option['val'].'"'
 						     .($params['parent'] ? $disabled : '')
 						     .($params['childrens']
-								? ' onchange="apbctSettingsDependencies(\'' . $childrens . '\')"'
+								? ' onchange="apbctSettingsDependencies(\'' . $childrens . '\', ' . $option['childrens_enable'] . ')"'
 								: ''
 						     )
 						     .($value == $option['val'] ? ' checked' : '')
@@ -1217,7 +1257,7 @@ function apbct_settings__validate($settings) {
 	$result === false
 		? $apbct->error_add( 'exclusions_urls', 'is not valid: "' . $settings['exclusions__urls'] . '"', 'settings_validate' )
 		: $apbct->error_delete( 'exclusions_urls', true, 'settings_validate' );
-	$settings['exclusions_urls'] = $result ? $result: '';
+	$settings['exclusions__urls'] = $result ? $result: '';
 	
 	// Fields
 	$result  = apbct_settings__sanitize__exclusions($settings['exclusions__fields'],   $settings['exclusions__fields__use_regexp']);
@@ -1257,7 +1297,7 @@ function apbct_settings__validate($settings) {
 		$platform       = 'wordpress';
 		$user_ip        = CleantalkHelper::ip__get(array('real'), false);
 		$timezone       = filter_input(INPUT_POST, 'ct_admin_timezone');
-		$language       = filter_input(INPUT_SERVER, 'HTTP_ACCEPT_LANGUAGE');
+		$language       = apbct_get_server_variable( 'HTTP_ACCEPT_LANGUAGE' );
 		$wpms           = APBCT_WPMS && defined('SUBDOMAIN_INSTALL') && !SUBDOMAIN_INSTALL ? true : false;
 		$white_label    = $apbct->network_settings['white_label']             ? 1                                                   : 0;
 		$hoster_api_key = $apbct->network_settings['white_label__hoster_key'] ? $apbct->network_settings['white_label__hoster_key'] : '';
@@ -1288,7 +1328,7 @@ function apbct_settings__validate($settings) {
 		}else{
 			$apbct->error_add(
 				'key_get',
-				$result
+				$result['error']
 				. ($apbct->white_label
 					? ' <button name="submit" type="submit" class="cleantalk_link cleantalk_link-manual" value="get_key_auto">'
 					: ''

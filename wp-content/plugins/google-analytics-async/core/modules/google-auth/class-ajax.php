@@ -85,8 +85,11 @@ class Ajax extends Admin_Ajax {
 		// Setup client instance.
 		Google_Auth\Auth::instance()->setup_default( $this->is_network() );
 
+		// Access code.
+		$access_code = sanitize_text_field( $_REQUEST['access_code'] );
+
 		// Exchange access code and get access token.
-		$token = Google_Auth\Auth::instance()->client()->fetchAccessTokenWithAuthCode( $_REQUEST['access_code'] );
+		$token = Google_Auth\Auth::instance()->client()->fetchAccessTokenWithAuthCode( $access_code );
 
 		// Save access and refresh tokens if success.
 		if ( isset( $token['access_token'], $token['refresh_token'] ) ) {

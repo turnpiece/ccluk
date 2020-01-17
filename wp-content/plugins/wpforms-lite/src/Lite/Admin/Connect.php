@@ -2,17 +2,16 @@
 
 namespace WPForms\Lite\Admin;
 
+use WP_Error;
+use WPForms\Helpers\PluginSilentUpgrader;
+
 /**
  * WPForms Connect.
  *
  * WPForms Connect is our service that makes it easy for non-techy users to
  * upgrade to WPForms Pro without having to manually install WPForms Pro plugin.
  *
- * @package    WPForms\Admin
- * @author     WPForms
- * @since      1.5.5
- * @license    GPL-2.0+
- * @copyright  Copyright (c) 2019, WPForms LLC
+ * @since 1.5.5
  */
 class Connect {
 
@@ -224,14 +223,15 @@ class Connect {
 				\wp_send_json_error( $perm_error );
 			}
 
-			// We do not need any extra credentials if we have gotten this far, so let's install the plugin.
-			require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+			/*
+			 * We do not need any extra credentials if we have gotten this far, so let's install the plugin.
+			 */
 
 			// Do not allow WordPress to search/download translations, as this will break JS output.
 			\remove_action( 'upgrader_process_complete', array( 'Language_Pack_Upgrader', 'async_upgrade' ), 20 );
 
 			// Create the plugin upgrader with our custom skin.
-			$installer = new \Plugin_Upgrader( new ConnectSkin() );
+			$installer = new PluginSilentUpgrader( new ConnectSkin() );
 
 			// Error check.
 			if ( ! method_exists( $installer, 'install' ) ) {

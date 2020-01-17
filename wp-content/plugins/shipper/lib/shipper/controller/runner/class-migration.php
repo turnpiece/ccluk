@@ -37,6 +37,7 @@ class Shipper_Controller_Runner_Migration extends Shipper_Controller_Runner {
 			Shipper_Model_Stored_Migration::TYPE_IMPORT === $migration->get_type()
 		) {
 			define( 'WPMUDEV_LIMIT_TO_USER', true );
+
 			return true;
 		}
 
@@ -63,7 +64,7 @@ class Shipper_Controller_Runner_Migration extends Shipper_Controller_Runner {
 	 * Prepares the migration
 	 *
 	 * @param string $type Migration type to prepare.
-	 * @param int    $site_id Destination site ID.
+	 * @param int $site_id Destination site ID.
 	 * @param string $origin Optional migration origin.
 	 */
 	public function prepare( $type, $site_id, $origin = false ) {
@@ -71,7 +72,7 @@ class Shipper_Controller_Runner_Migration extends Shipper_Controller_Runner {
 		$storage->clear();
 		$storage->save();
 
-		$migration = new Shipper_Model_Stored_Migration;
+		$migration    = new Shipper_Model_Stored_Migration;
 		$destinations = new Shipper_Model_Stored_Destinations;
 
 		/**
@@ -118,9 +119,9 @@ class Shipper_Controller_Runner_Migration extends Shipper_Controller_Runner {
 		// Re-initialize the storages.
 		$this->reset_all();
 
-		$ctrl = Shipper_Controller_Runner_Preflight::get();
+		$ctrl      = Shipper_Controller_Runner_Preflight::get();
 		$preflight = $ctrl->get_proxied_results();
-		$warnings = ! empty( $preflight['warnings'] )
+		$warnings  = ! empty( $preflight['warnings'] )
 			? (int) $preflight['warnings']
 			: 0;
 
@@ -171,7 +172,7 @@ class Shipper_Controller_Runner_Migration extends Shipper_Controller_Runner {
 			// Completing during cancel - update migration errors.
 			$migration->set( 'errors', array(
 				__( 'Cancelled', 'shipper' ),
-			));
+			) );
 		}
 
 		Shipper_Helper_Log::write(
@@ -193,7 +194,7 @@ class Shipper_Controller_Runner_Migration extends Shipper_Controller_Runner {
 	 * Resets used models
 	 */
 	public function reset_all() {
-		$storage = new Shipper_Model_Stored_Filelist;
+		$storage     = new Shipper_Model_Stored_Filelist;
 		$total_steps = $storage->get( Shipper_Model_Stored_Filelist::KEY_TOTAL );
 		$storage->clear();
 		$storage->set( Shipper_Model_Stored_Filelist::KEY_TOTAL, $total_steps );
@@ -202,13 +203,13 @@ class Shipper_Controller_Runner_Migration extends Shipper_Controller_Runner {
 		$health = new Shipper_Model_Stored_Healthcheck;
 		$health->clear()->save();
 
-		$files = new Shipper_Model_Dumped_Filelist;
+		$files             = new Shipper_Model_Dumped_Filelist;
 		$filelist_manifest = $files->get_file_path();
 		if ( file_exists( $filelist_manifest ) ) {
 			unlink( $filelist_manifest );
 		}
 
-		$files = new Shipper_Model_Dumped_Largelist;
+		$files             = new Shipper_Model_Dumped_Largelist;
 		$filelist_manifest = $files->get_file_path();
 		if ( file_exists( $filelist_manifest ) ) {
 			unlink( $filelist_manifest );
@@ -238,9 +239,9 @@ class Shipper_Controller_Runner_Migration extends Shipper_Controller_Runner {
 	 * @return bool
 	 */
 	public function process_cancel() {
-		$migration = new Shipper_Model_Stored_Migration;
-		$remote = $migration->get_destination();
-		$type = $migration->get_type();
+		$migration   = new Shipper_Model_Stored_Migration;
+		$remote      = $migration->get_destination();
+		$type        = $migration->get_type();
 		$autostarted = ! ! $migration->is_from_hub();
 
 		if ( ! $migration->is_active() ) {
@@ -255,8 +256,7 @@ class Shipper_Controller_Runner_Migration extends Shipper_Controller_Runner {
 			// Do early cleanup.
 			$task = Shipper_Model_Stored_Migration::TYPE_EXPORT === $migration->get_type()
 				? new Shipper_Task_Export_Cleanup
-				: new Shipper_Task_Import_Cleanup
-			;
+				: new Shipper_Task_Import_Cleanup;
 			$task->apply();
 
 			// Re-initialize the storages.
@@ -276,10 +276,10 @@ class Shipper_Controller_Runner_Migration extends Shipper_Controller_Runner {
 				Shipper_Helper_Log::write(
 					sprintf( __( 'Attempting cancel on %s migration', 'shipper' ), $remote )
 				);
-				$task = new Shipper_Task_Api_Migrations_Cancel;
-				$result = $task->apply(array(
+				$task   = new Shipper_Task_Api_Migrations_Cancel;
+				$result = $task->apply( array(
 					'domain' => $remote,
-				));
+				) );
 				if ( empty( $result ) ) {
 					Shipper_Helper_Log::write(
 						__( 'Canceling remote migration failed', 'shipper' )
@@ -322,12 +322,15 @@ class Shipper_Controller_Runner_Migration extends Shipper_Controller_Runner {
 	 */
 	public function process_tick() {
 		$migration = new Shipper_Model_Stored_Migration;
-		if ( ! $migration->is_active() ) { return false; }
+		if ( ! $migration->is_active() ) {
+			return false;
+		}
 
 		$task = Shipper_Model_Stored_Migration::TYPE_EXPORT === $migration->get_type()
 			? new Shipper_Task_Export_All
-			: new Shipper_Task_Import_All
-		;
+			: new Shipper_Task_Import_All;
+		$migration->set( 'memory_limit', ini_get( 'memory_limit' ) );
+		$migration->save();
 		Shipper_Helper_System::optimize();
 
 		$status = $task->apply();

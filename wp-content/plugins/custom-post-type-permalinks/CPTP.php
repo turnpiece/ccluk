@@ -49,7 +49,6 @@ class CPTP {
 		$this->set_module( 'flush_rules', new CPTP_Module_FlushRules() );
 
 		do_action( 'CPTP_load_modules', $this );
-
 	}
 
 	/**
@@ -68,14 +67,16 @@ class CPTP {
 	/**
 	 * Set module instance.
 	 *
-	 * @since 1.5.0
-	 *
 	 * @param String      $name Module Name.
 	 * @param CPTP_Module $module Module instance.
+	 *
+	 * @since 1.5.0
 	 */
 	public function set_module( $name, CPTP_Module $module ) {
-
-		$this->modules[ $name ] = apply_filters( "CPTP_set_{$name}_module", $module );
+		$module = apply_filters( "CPTP_set_{$name}_module", $module );
+		if ( $module instanceof CPTP_Module ) {
+			$this->modules[ $name ] = $module;
+		}
 	}
 
 	/**
@@ -96,7 +97,6 @@ class CPTP {
 	 * @static
 	 */
 	public static function get_instance() {
-
 		if ( ! isset( self::$_instance ) ) {
 			self::$_instance = new CPTP();
 		}

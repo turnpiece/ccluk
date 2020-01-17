@@ -35,7 +35,7 @@ define( 'AI1WM_DEBUG', false );
 // ==================
 // = Plugin Version =
 // ==================
-define( 'AI1WM_VERSION', '7.8' );
+define( 'AI1WM_VERSION', '7.14' );
 
 // ===============
 // = Plugin Name =
@@ -207,6 +207,21 @@ define( 'AI1WM_WP_STACK_CACHE_NAME', 'wp-stack-cache.php' );
 // ===========================
 define( 'AI1WM_WP_COMSH_LOADER_NAME', 'wpcomsh-loader.php' );
 
+// ================================
+// = WP Engine System Plugin Name =
+// ================================
+define( 'AI1WM_WP_ENGINE_SYSTEM_PLUGIN_NAME', 'mu-plugin.php' );
+
+// ===========================
+// = WPE Sign On Plugin Name =
+// ===========================
+define( 'AI1WM_WPE_SIGN_ON_PLUGIN_NAME', 'wpe-wp-sign-on-plugin.php' );
+
+// ===================================
+// = WP Engine Security Auditor Name =
+// ===================================
+define( 'AI1WM_WP_ENGINE_SECURITY_AUDITOR_NAME', 'wpengine-security-auditor.php' );
+
 // ===================
 // = Export Log Name =
 // ===================
@@ -341,6 +356,16 @@ define( 'AI1WM_MAX_SELECT_RECORDS', 1000 );
 // = Max Storage Cleanup =
 // =======================
 define( 'AI1WM_MAX_STORAGE_CLEANUP', 24 * 60 * 60 );
+
+// =====================
+// = Disk Space Factor =
+// =====================
+define( 'AI1WM_DISK_SPACE_FACTOR', 2 );
+
+// ====================
+// = Disk Space Extra =
+//=====================
+define( 'AI1WM_DISK_SPACE_EXTRA', 300 * 1024 * 1024 );
 
 // ===========================
 // = WP_CONTENT_DIR Constant =

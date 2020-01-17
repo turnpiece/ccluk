@@ -47,7 +47,7 @@ $has_issues = (bool) $checks['errors_count'];
 				<td class="sui-table-item-title">
 					<?php echo esc_html( $check['title'] ); ?>
 				</td>
-				
+
 				<td class="shipper-check-status">
 				<?php
 					$icon_type = 'ok' === $check['status']

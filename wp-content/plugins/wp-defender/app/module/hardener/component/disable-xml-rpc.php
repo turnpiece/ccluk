@@ -32,13 +32,9 @@ class Disable_Xml_Rpc extends Rule {
 		$this->addAction( 'processingHardener' . self::$slug, 'process' );
 		$this->addAction( 'processRevert' . self::$slug, 'revert' );
 		if ( in_array( self::$slug, Settings::instance()->fixed ) ) {
-			$this->addFilter( 'xmlrpc_enabled', 'return_false' );
+			add_filter( 'xmlrpc_enabled', '__return_false' );
 			$this->addFilter( 'xmlrpc_methods', 'block_xmlrpc_attacks' );
 		}
-	}
-
-	function return_false() {
-		return false;
 	}
 
 	function block_xmlrpc_attacks( $methods ) {

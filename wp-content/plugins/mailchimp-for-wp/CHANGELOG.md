@@ -1,6 +1,66 @@
 Changelog
 =========
 
+#### 4.7.4 - Dec 7, 2019
+
+**Fixes**
+
+- htaccess config for servers running Apache 2.4 or later.
+
+
+#### 4.7.3 - Dec 4, 2019
+
+**Fixes**
+
+- Top Bar & User Sync add-on using API v2 since version 4.7.1.
+- Revert change in formatter for date fields, breaking all forms with date fields in them.
+
+**Improvements**
+
+- Add getter method for raw (unmodified) data on form class.
+
+
+#### 4.7.2 - Nov 27, 2019
+
+**Fixes**
+
+- Invalid .htaccess file in case there already is one in the uploads directory.
+
+
+#### 4.7.1 - Nov 26, 2019
+
+**Improvements**
+
+- Update MemberPress hook names. Thanks [Ian Heggaton](https://github.com/pixelated-au)!
+- Use WordPress.org translations instead of bundling translation files in plugin itself.
+- Write .htaccess to directory of debug log file, to prevent file access.
+- Add some convenient hooks for Checkout for WooCommerce.
+- Stop parsing shortcodes in text widgets as WordPress core does this since version 4.9.
+
+
+#### 4.7 - Nov 7, 2019
+
+**Improvements**
+
+- Add role=alert to form notices.
+- Add setting to pre-check sign-up checkbox for Gravity Forms integrations.
+- Add new position for WooCommerce integration: directly after the billing_email field.
+- Fix PHP notices for submitting a form and saving a form as an administrator.
+- Add link to [Koko Analytics plugin](https://wordpress.org/plugins/koko-analytics/).
+
+
+#### 4.6.2 - Oct 24, 2019
+
+**Fixes**
+
+- Address fields in forms would always be required (even if really optional).
+
+**Improvements**
+
+- Add proper SVG admin menu icon.
+- Minor overall performance and memory usage improvements.
+
+
 #### 4.6.1 - Oct 7, 2019
 
 **Fixes**
@@ -1228,7 +1288,7 @@ Before upgrading, please go through the [upgrade guide](https://mc4wp.com/kb/upg
 
 **Improvements**
 
-- Updated Italian, Russian & Turkish translations. [Want to help translate the plugin? Full translations get a free Pro license](https://www.transifex.com/projects/p/mailchimp-for-wordpress/).
+- Updated Italian, Russian & Turkish translations. 
 
 #### 2.2.8 - March 24, 2015
 
@@ -1318,7 +1378,7 @@ A huge thank you to [Stefan Oderbolz](http://metaodi.ch/) for various fixed and 
 
 - Moved third-party scripts to their own directory for easier exclusion
 - All code is now adhering to the WP Code Standards
-- Updated [Dutch, German, Spanish, Hungarian, French, Italian and Turkish translations](https://www.transifex.com/projects/p/mailchimp-for-wordpress/).
+- Updated Dutch, German, Spanish, Hungarian, French, Italian and Turkish translations.
 
 **Additions**
 
@@ -1328,7 +1388,7 @@ A huge thank you to [Stefan Oderbolz](http://metaodi.ch/) for various fixed and 
 
 #### 2.2.3 - January 24, 2015
 
-Minor improvements and additions for compatibility with the [Mailchimp Sync plugin](https://wordpress.org/plugins/mailchimp-sync/).
+Minor improvements and additions for compatibility with the [Mailchimp User Sync plugin](https://mc4wp.com/premium-features/).
 
 #### 2.2.2 - January 13, 2015
 

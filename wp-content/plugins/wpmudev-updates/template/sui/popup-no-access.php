@@ -21,86 +21,69 @@
 
 /** @var  WPMUDEV_Dashboard_Sui_Page_Urls $urls */
 $url_upgrade = $urls->remote_site . 'hub/account/';
+
+$url_upgrade = add_query_arg( array(
+    'utm_source' 	=> 'wpmudev-dashboard',
+    'utm_medium' 	=> 'plugin',
+    'utm_campaign' 	=> 'dashboard_expired_modal_reactivate',
+), $url_upgrade );
+
 $url_logout  = $urls->dashboard_url . '&clear_key=1';
 $url_refresh = wp_nonce_url( add_query_arg( 'action', 'check-updates' ), 'check-updates', 'hash' );
+$reason_text = __( "Whoops, looks like you’ve logged in with an expired membership. Reactivate your membership to get access to pro features, 24/7 support and The Hub website management tools.", 'wpmudev' );
 
-switch ( $reason ) {
-	case 'free':
-		$reason_text =
-			__( "%s, to get access to all of our premium plugins, as well as 24/7 support you'll need an <strong>active membership</strong>. It's easy to do and only takes a few minutes!",
-			    'wpmudev' );
-		break;
-
-	case 'single':
-		$reason_text =
-			__( "%s, to get access to all of our premium plugins, as well as 24/7 support you'll need to upgrade your membership from <strong>single</strong> to <strong>full</strong>. It's easy to do and only takes a few minutes!",
-			    'wpmudev' );
-		break;
-
-	default:
-		$reason_text = __( "%s, to get access to all of our premium plugins, as well as 24/7 support you'll need to upgrade your membership. It's easy to do and only takes a few minutes!",
-		                   'wpmudev' );
-		break;
+if( 'single' === $reason ){
+	$reason_text = sprintf( __( "Whoops, looks like you have a single plugin membership. Upgrade your WPMU Dev membership to unlock pro features for this website. %s Note you can still use the Support & Settings tabs", 'wpmudev' ), '<br>' );
 }
 
 ?>
-<div class="sui-dialog" tabindex="-1" aria-hidden="true" id="upgrade-membership">
+<div class="sui-dialog sui-dialog-alt sui-dialog-sm" tabindex="-1" aria-hidden="true" id="upgrade-membership">
 
-	<?php if ( 'free' === $reason ) : ?>
-		<div class="sui-dialog-overlay"></div>
-	<?php endif; ?>
-	<?php if ( 'single' === $reason ) : ?>
-		<div class="sui-dialog-overlay" data-a11y-dialog-hide=""></div>
-	<?php endif; ?>
-
+	<div class="sui-dialog-overlay"></div>
 	<div class="sui-dialog-content" aria-labelledby="dialogTitle" aria-describedby="dialogDescription" role="dialog">
 
 		<div class="sui-box" role="document">
 			<form>
 
-				<div class="sui-box-header">
-					<h3 class="sui-box-title" id="dialogTitle"><?php esc_html_e( 'Upgrade your WPMU DEV Membership!', 'wpmudev' ); ?></h3>
-					<div class="sui-actions-right">
-						<a href="<?php echo esc_url( $url_upgrade ); ?>" class="sui-button sui-button-green" target="_blank">
-							<?php esc_html_e( 'Upgrade Membership', 'wpmudev' ); ?>
-						</a>
-					</div>
+				<div class="sui-box-header sui-block-content-center">
+					<h3 class="sui-box-title" id="dialogTitle"><?php esc_html_e( 'Upgrade Membership!', 'wpmudev' ); ?></h3>
 				</div>
 
-				<div class="sui-box-body">
+				<div class="sui-box-body sui-block-content-center" style="padding: 0 30px;">
 					<p id="dialogDescription">
 						<?php
 						// @codingStandardsIgnoreStart: Reason contains HTML, no escaping!
-						printf( $reason_text, esc_html( ucfirst( $username ) ) );
+						echo wp_kses_post( $reason_text );
 						// @codingStandardsIgnoreEnd
 						?>
 					</p>
 
-					<ul>
-						<li><i class="sui-icon-check" aria-hidden="true"></i> <?php esc_html_e( 'Access to 140+ Plugins', 'wpmudev' ); ?></li>
-						<li><i class="sui-icon-check" aria-hidden="true"></i> <?php esc_html_e( 'Access to Security, Backups, SEO and Performance Services', 'wpmudev' ); ?></li>
-						<li><i class="sui-icon-check" aria-hidden="true"></i> <?php esc_html_e( '24/7 Expert WordPress Support', 'wpmudev' ); ?></li>
-					</ul>
-
 					<div class="sui-block-content-center">
-						<a href="<?php echo esc_url( $url_upgrade ); ?>" class="sui-button sui-button-green sui-button-lg" target="_blank">
-							<?php esc_html_e( 'Upgrade Membership', 'wpmudev' ); ?>
+						<a href="<?php echo esc_url( $url_upgrade ); ?>" class="sui-button sui-button-blue sui-button-md" target="_blank">
+						<?php 'single' === $reason ? esc_html_e( 'Upgrade Membership', 'wpmudev' ) : esc_html_e( 'Reactivate Membership', 'wpmudev' ); ?>
 						</a>
 					</div>
 
 				</div>
 
-				<div class="sui-box-footer">
-					<a class="sui-button sui-button-ghost" href="<?php echo esc_url( $url_refresh ); ?>">
-						<i class="sui-icon-update" aria-hidden="true"></i>
+				<div class="sui-box-footer membership-upgrade-footer" style="padding: 30px;">
+					<a href="<?php echo esc_url( $url_refresh ); ?>">
+						<i class="sui-icon-refresh" aria-hidden="true"></i>
 						<?php esc_html_e( 'Refresh Status', 'wpmudev' ); ?>
 					</a>
-					<div class="sui-actions-right">
-						<a class="sui-button" href="<?php echo esc_url( $url_logout ); ?>">
-							<i class="sui-icon-power-on-off" aria-hidden="true"></i>
-							<?php esc_html_e( 'Switch Account', 'wpmudev' ); ?>
-						</a>
-					</div>
+					<a href="<?php echo esc_url( $url_logout ); ?>">
+						<i class="sui-icon-logout" aria-hidden="true"></i>
+						<?php esc_html_e( 'Switch Account', 'wpmudev' ); ?>
+					</a>
+				</div>
+				<div class="sui-block-content-center">
+					<img
+						src="<?php echo esc_url( WPMUDEV_Dashboard::$site->plugin_url . 'assets/images/graphic-support-new.png' ); ?>"
+						srcset="<?php echo esc_url( WPMUDEV_Dashboard::$site->plugin_url . 'assets/images/graphic-dashboard-modal-upgrade.png' ); ?> 1x, <?php echo esc_url( WPMUDEV_Dashboard::$site->plugin_url . 'assets/images/graphic-dashboard-modal-upgrade@2x.png' ); ?> 2x"
+						alt="Upgrade"
+						aria-hidden="true"
+						style = "vertical-align: middle;"
+					/>
 				</div>
 			</form>
 		</div>
@@ -114,8 +97,9 @@ switch ( $reason ) {
 		if (typeof window.wpmudevDashboardAdminDialog === 'function') {
 			var dialog        = document.getElementById('upgrade-membership');
 			var upgradeDialog = new wpmudevDashboardAdminDialog(dialog, jQuery('.sui-wrap').get(0));
+			//disable modal dissmiss on keypress
+			upgradeDialog._bindKeypress = undefined;
 			upgradeDialog.show();
-
 			setTimeout(function () {
 				if (jQuery('#upgrade-membership').attr('aria-hidden')) {
 					jQuery('#upgrade-membership').removeAttr('aria-hidden');

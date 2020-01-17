@@ -55,7 +55,7 @@
                                                    :true-value="true"
                                                    :false-value="false"/>
                                             <span aria-hidden="true"></span>
-                                            <span>{{__("Send reminders every 24 hours if fixes still hasn’t been actioned.")}}</span>
+                                            <span>{{__("Send reminders every 7 days if fixes still hasn’t been actioned.")}}</span>
                                         </label>
                                     </div>
                                 </div>

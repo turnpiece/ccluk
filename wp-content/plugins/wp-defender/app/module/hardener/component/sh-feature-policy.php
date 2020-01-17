@@ -145,8 +145,21 @@ class Sh_Feature_Policy extends Rule {
 	 */
 	public function process() {
 		//calling the service
-		$this->getService()->process();
-		Settings::instance()->addToResolved( self::$slug );
+		$mode              = HTTP_Helper::retrievePost( 'mode' );
+		$values            = HTTP_Helper::retrievePost( 'values' );
+		$scenario          = HTTP_Helper::retrievePost( 'scenario' );
+		$service           = $this->getService();
+		$service->mode     = $mode;
+		$service->values   = $values;
+		$service->scenario = $scenario;
+		$ret               = $service->process();
+		if ( ! is_wp_error( $ret ) ) {
+			Settings::instance()->addToResolved( self::$slug );
+		} else {
+			wp_send_json_error( [
+				'message' => $ret->get_error_message()
+			] );
+		}
 	}
 
 	/**

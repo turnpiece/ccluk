@@ -137,6 +137,7 @@ class Content_Scan extends Behavior {
 			'WP_Defender\Module\Scan\Behavior\Pro\Scans\Command_Injection_Detector',
 			'WP_Defender\Module\Scan\Behavior\Pro\Scans\Object_Injection_Detector',
 			//'WP_Defender\Module\Scan\Behavior\Pro\Scans\Xss_Detector',
+			'WP_Defender\Module\Scan\Behavior\Pro\Scans\String_Encrypt_Detector'
 		);
 		foreach ( $this->tokenizers as $stackPtr => $token ) {
 			foreach ( $engines as $engine ) {
@@ -147,7 +148,29 @@ class Content_Scan extends Behavior {
 			}
 		}
 
+		$eval_point = 0;
+		$evals      = [];
+		foreach ( $scanError as $key => $err ) {
+			//since eval is easily to get false positive, so we only count if
+			//it combination with other issue
+			if ( $err['type'] != 'eval' ) {
+				$eval_point += 1;
+			} else {
+				$evals[] = $key;
+			}
+			if ( isset( $err['output'] ) && $err['output'] == false ) {
+				unset( $scanError[ $key ] );
+			}
+		}
 		$scanError = array_filter( $scanError );
+
+		if ( $eval_point == 0 && count( $evals ) ) {
+			//remove it
+			foreach ( $evals as $key ) {
+				unset( $scanError[ $key ] );
+			}
+		}
+
 		if ( count( $scanError ) ) {
 			//filter it out so no duplicate
 			foreach ( $scanError as $k => $line ) {
@@ -181,11 +204,14 @@ class Content_Scan extends Behavior {
 		$this->skipTo                       = null;
 		$this->content                      = null;
 		unset( $content );
-
 		unset( $this->tokens );
+		unset( $this->content );
+
+		//unset( $this->tokenizers );
 
 		return true;
 	}
+
 
 	/**
 	 * this is for record fail files, to prevent block

@@ -8,11 +8,7 @@ use WPForms\Providers\Provider\Status;
 /**
  * Class FormBuilder handles functionality inside the form builder.
  *
- * @package    WPForms\Providers\Provider\Settings
- * @author     WPForms
- * @since      1.4.7
- * @license    GPL-2.0+
- * @copyright  Copyright (c) 2018, WPForms LLC
+ * @since 1.4.7
  */
 abstract class FormBuilder implements FormBuilderInterface {
 
@@ -249,7 +245,7 @@ abstract class FormBuilder implements FormBuilderInterface {
 		\check_ajax_referer( 'wpforms-builder', 'nonce' );
 
 		// Check for permissions.
-		if ( ! \wpforms_current_user_can() ) {
+		if ( ! \wpforms_current_user_can( 'edit_forms' ) ) {
 			\wp_send_json_error(
 				array(
 					'error' => \esc_html__( 'You do not have permission to perform this action.', 'wpforms-lite' ),

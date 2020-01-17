@@ -16,6 +16,7 @@ class Shipper_Model_System_Wp extends Shipper_Model {
 	const DIR_UPLOADS = 'UPLOADS';
 	const MULTISITE = 'MULTISITE';
 	const SUBDOMAIN = 'SUBDOMAIN_INSTALL';
+	const SHIPPER_VERSION = 'shipper_version';
 
 	/**
 	 * Constructor
@@ -32,13 +33,14 @@ class Shipper_Model_System_Wp extends Shipper_Model {
 	public function populate() {
 		global $wp_version;
 
-		$this->set_data(array(
+		$this->set_data( array(
 			self::DIR_CONTENT => Shipper_Helper_Fs_Path::get_relpath( $this->get_define( self::DIR_CONTENT ) ),
 			self::DIR_PLUGINS => Shipper_Helper_Fs_Path::get_relpath( $this->get_define( self::DIR_PLUGINS ) ),
-			self::MULTISITE => $this->get_define( self::MULTISITE ),
-			self::SUBDOMAIN => $this->get_define( self::SUBDOMAIN ),
-		));
+			self::MULTISITE   => $this->get_define( self::MULTISITE ),
+			self::SUBDOMAIN   => $this->get_define( self::SUBDOMAIN ),
+		) );
 		$this->set( self::VERSION, $wp_version );
+		$this->set( self::SHIPPER_VERSION, SHIPPER_VERSION );
 
 		$uploads = wp_upload_dir();
 		$this->set( self::DIR_UPLOADS, Shipper_Helper_Fs_Path::get_relpath( $uploads['basedir'] ) );
@@ -52,7 +54,10 @@ class Shipper_Model_System_Wp extends Shipper_Model {
 	 * @return mixed
 	 */
 	public function get_define( $dfn ) {
-		if ( ! defined( $dfn ) ) { return false; }
+		if ( ! defined( $dfn ) ) {
+			return false;
+		}
+
 		return constant( $dfn );
 	}
 
@@ -60,7 +65,7 @@ class Shipper_Model_System_Wp extends Shipper_Model {
 	 * Get value formatted nicely for output
 	 *
 	 * @param string $key Value key.
-	 * @param mixed  $fallback What to use as fallback.
+	 * @param mixed $fallback What to use as fallback.
 	 *
 	 * @return string
 	 */

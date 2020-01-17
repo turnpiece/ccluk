@@ -12,6 +12,7 @@ use Beehive\Core\Helpers\Permission;
 use Beehive\Core\Utils\Abstracts\Base;
 use Beehive\Core\Controllers\Capability;
 use Beehive\Core\Modules\Google_Analytics\Views\Stats;
+use Beehive\Core\Modules\Google_Analytics\Views\Settings;
 use Beehive\Core\Modules\Google_Analytics\Views\Tracking;
 
 /**
@@ -59,6 +60,7 @@ class Analytics extends Base {
 		// Initialize sub classes.
 		Ajax::instance()->init();
 		Stats::instance()->init();
+		Settings::instance()->init();
 		Tracking::instance()->init();
 	}
 

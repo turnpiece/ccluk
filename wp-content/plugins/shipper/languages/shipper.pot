@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Shipper package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Shipper 1.0.3\n"
+"Project-Id-Version: Shipper 1.1-alpha.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/shipper\n"
-"POT-Creation-Date: 2019-06-19 04:54:58+00:00\n"
+"POT-Creation-Date: 2019-06-14 03:11:30+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,13 +13,15 @@ msgstr ""
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "X-Generator: grunt-wp-i18n 1.0.3\n"
 
-#: lib/functions.php:148 lib/shipper/model/stored/class-options.php:126
+#: lib/functions.php:148 lib/shipper/model/stored/class-options.php:134
 msgid "Anonymous"
 msgstr ""
 
 #: lib/shipper/controller/admin/class-migrate.php:85
 #: lib/shipper/controller/admin/class-migrate.php:109
 #: lib/shipper/controller/admin/class-migrate.php:132
+#: lib/shipper/controller/admin/class-packages.php:51
+#: lib/shipper/controller/admin/class-packages.php:140
 #: lib/shipper/controller/admin/class-settings.php:52
 #: lib/shipper/controller/admin/class-settings.php:77
 #: lib/shipper/controller/admin/class-tools.php:50
@@ -66,6 +68,24 @@ msgstr ""
 msgid "Preflight still running"
 msgstr ""
 
+#: lib/shipper/controller/ajax/packages/class-build.php:46
+msgid "Package migration complete"
+msgstr ""
+
+#: lib/shipper/controller/ajax/packages/class-build.php:87
+#: lib/shipper/helper/wpcli/class-package.php:184
+msgid "Package migration start"
+msgstr ""
+
+#: lib/shipper/controller/ajax/packages/class-build.php:100
+msgid "Packaging failed, concurrent process is running"
+msgstr ""
+
+#: lib/shipper/controller/ajax/packages/class-build.php:158
+#: lib/shipper/controller/class-runner.php:209
+msgid "Encountered a FATAL ERROR: %1$s in %2$s on line %3$d"
+msgstr ""
+
 #: lib/shipper/controller/class-admin.php:105
 msgid "Destination error: %s"
 msgstr ""
@@ -77,10 +97,6 @@ msgstr ""
 #: lib/shipper/controller/class-ajax.php:42
 #: lib/shipper/controller/class-ajax.php:52
 msgid "You are not authorized to perform this action."
-msgstr ""
-
-#: lib/shipper/controller/class-runner.php:209
-msgid "Encountered a FATAL ERROR: %1$s in %2$s on line %3$d"
 msgstr ""
 
 #: lib/shipper/controller/class-runner.php:313
@@ -120,6 +136,7 @@ msgid "Migration complete"
 msgstr ""
 
 #: lib/shipper/controller/runner/class-migration.php:248
+#: lib/shipper/controller/runner/class-package.php:41
 msgid "Migration inactive"
 msgstr ""
 
@@ -140,7 +157,12 @@ msgid "This is Hub-initiated migration, no remote to cancel"
 msgstr ""
 
 #: lib/shipper/controller/runner/class-migration.php:298
+#: lib/shipper/controller/runner/class-package.php:66
 msgid "Migration cancelled"
+msgstr ""
+
+#: lib/shipper/controller/runner/class-package.php:45
+msgid "Attempting to cancel packaging"
 msgstr ""
 
 #: lib/shipper/controller/runner/class-preflight.php:44
@@ -222,6 +244,16 @@ msgstr ""
 msgid "Error initializing upload: %s"
 msgstr ""
 
+#: lib/shipper/model/archive/class-zip.php:25
+#: lib/shipper/task/package/class-files.php:57
+msgid "Shipper couldn't archive file: %s"
+msgstr ""
+
+#: lib/shipper/model/archive/class-zip.php:40
+#: lib/shipper/task/class-export.php:121
+msgid "Shipper could not open target zip file: %s"
+msgstr ""
+
 #: lib/shipper/model/class-database.php:351
 msgid "Destination table %s exists, moving it to %s first"
 msgstr ""
@@ -274,28 +306,28 @@ msgstr ""
 msgid "Unable to extract the statements to import for %1$s from position %2$d"
 msgstr ""
 
-#: lib/shipper/model/database/table/class-import.php:408
+#: lib/shipper/model/database/table/class-import.php:388
 msgid "Fatal error processing %1$s at position [%2$d][%3$d]: %4$s"
 msgstr ""
 
-#: lib/shipper/model/database/table/class-import.php:409
+#: lib/shipper/model/database/table/class-import.php:389
 msgid "Ignored issue processing %1$s at position [%2$d][%3$d]: %4$s"
 msgstr ""
 
-#: lib/shipper/model/database/table/class-import.php:476
-#: lib/shipper/model/database/table/class-import.php:522
+#: lib/shipper/model/database/table/class-import.php:456
+#: lib/shipper/model/database/table/class-import.php:502
 msgid "Error in statement %1$s: The database said: %2$s"
 msgstr ""
 
-#: lib/shipper/model/database/table/class-import.php:612
+#: lib/shipper/model/database/table/class-import.php:592
 msgid "Unable to find primary key for %1$s (%2$s)."
 msgstr ""
 
-#: lib/shipper/model/database/table/class-import.php:630
+#: lib/shipper/model/database/table/class-import.php:610
 msgid "Error processing statement in %1$s - empty resultset for %2$d"
 msgstr ""
 
-#: lib/shipper/model/database/table/class-import.php:672
+#: lib/shipper/model/database/table/class-import.php:652
 msgid "Error updating row %1$d - %2$s"
 msgstr ""
 
@@ -448,11 +480,13 @@ msgstr ""
 
 #: lib/shipper/task/check/class-files.php:221
 #: lib/shipper/task/check/class-rpkg.php:49
+#: lib/shipper/task/check/package/class-files.php:20
 msgid "Package size"
 msgstr ""
 
 #: lib/shipper/task/check/class-files.php:228
 #: lib/shipper/task/check/class-rpkg.php:67
+#: lib/shipper/task/check/package/class-files.php:27
 msgid "Package size is large"
 msgstr ""
 
@@ -653,10 +687,6 @@ msgstr ""
 msgid "Generic error"
 msgstr ""
 
-#: lib/shipper/task/class-export.php:121
-msgid "Shipper could not open target zip file: %s"
-msgstr ""
-
 #: lib/shipper/task/export/class-all.php:85
 msgid "%1$s - at %2$d%% (step %3$d of %4$d) - total progress: %5$d%% %6$s"
 msgstr ""
@@ -679,15 +709,15 @@ msgid "Clean up"
 msgstr ""
 
 #: lib/shipper/task/export/class-files.php:59
-#: lib/shipper/task/export/class-tables.php:88
+#: lib/shipper/task/export/class-tables.php:86
 msgid "Shipper couldn't read file: %s"
 msgstr ""
 
-#: lib/shipper/task/export/class-files.php:175
+#: lib/shipper/task/export/class-files.php:182
 msgid " (%1$d files, %2$s)"
 msgstr ""
 
-#: lib/shipper/task/export/class-files.php:180
+#: lib/shipper/task/export/class-files.php:187
 msgid "Gather files for upload %s"
 msgstr ""
 
@@ -711,8 +741,8 @@ msgid "Upload large files %s"
 msgstr ""
 
 #: lib/shipper/task/export/class-meta.php:103
-#: lib/shipper/task/export/class-tables.php:254
-#: lib/shipper/task/export/class-tables.php:273
+#: lib/shipper/task/export/class-tables.php:265
+#: lib/shipper/task/export/class-tables.php:284
 msgid "Shipper couldn't write to file: %s"
 msgstr ""
 
@@ -740,31 +770,31 @@ msgstr ""
 msgid "Import to remote location ( at %d%% )"
 msgstr ""
 
-#: lib/shipper/task/export/class-tables.php:118
+#: lib/shipper/task/export/class-tables.php:97
 msgid "Exported and archived table %s"
 msgstr ""
 
-#: lib/shipper/task/export/class-tables.php:187
+#: lib/shipper/task/export/class-tables.php:198
 msgid "Unable to list tables on %1$s - the database said [%2$s]"
 msgstr ""
 
-#: lib/shipper/task/export/class-tables.php:264
+#: lib/shipper/task/export/class-tables.php:275
 msgid "Error selecting results for %s"
 msgstr ""
 
-#: lib/shipper/task/export/class-tables.php:428
+#: lib/shipper/task/export/class-tables.php:439
 msgid "uploaded, analyzing next"
 msgstr ""
 
-#: lib/shipper/task/export/class-tables.php:431
+#: lib/shipper/task/export/class-tables.php:442
 msgid "row %1$d of %2$d"
 msgstr ""
 
-#: lib/shipper/task/export/class-tables.php:439
+#: lib/shipper/task/export/class-tables.php:450
 msgid "( table %1$d of %2$d: %3$s, %4$s )"
 msgstr ""
 
-#: lib/shipper/task/export/class-tables.php:446
+#: lib/shipper/task/export/class-tables.php:457
 msgid "Process tables %s"
 msgstr ""
 
@@ -981,6 +1011,14 @@ msgstr ""
 
 #: lib/shipper/task/import/class-tables.php:227
 msgid "Error finalizing table %1$s"
+msgstr ""
+
+#: lib/shipper/task/package/class-all.php:80
+msgid "Running %1$s task, %2$d of %3$d ( %4$d%% / %5$d%% )"
+msgstr ""
+
+#: lib/shipper/task/package/class-tables.php:21
+msgid "Shipper couldn't archive exported table %1$s as %2$s"
 msgstr ""
 
 #: tpl/checks/aws-sdk.php:11 tpl/checks/charset-difference.php:11
@@ -1387,6 +1425,7 @@ msgid ""
 msgstr ""
 
 #: tpl/checks/remote-package-large.php:27 tpl/checks/remote-package-zero.php:20
+#: tpl/modals/packages/preflight/issue-package_size-full.php:18
 #: tpl/pages/preflight/wizard-files-package_size-full.php:18
 msgid ""
 "Also, please note that the time your site takes to migrate may vary "
@@ -1789,11 +1828,14 @@ msgid "Filename"
 msgstr ""
 
 #: tpl/modals/check/preflight-row-files.php:26
+#: tpl/modals/packages/preflight/issue-message.php:71
+#: tpl/pages/packages/migration/additional.php:68
 #: tpl/pages/preflight/wizard-files-result-wrapper.php:61
 msgid "Size"
 msgstr ""
 
 #: tpl/modals/check/preflight-row-files.php:28
+#: tpl/modals/packages/preflight/issue-message.php:58
 #: tpl/pages/preflight/wizard-files-result-wrapper.php:48
 msgid "Type"
 msgstr ""
@@ -1803,11 +1845,13 @@ msgid "Include/Exclude"
 msgstr ""
 
 #: tpl/modals/check/preflight-row-files.php:79
+#: tpl/pages/packages/settings/item-storage-body.php:43
 #: tpl/pages/preflight/wizard-files-result-pagination.php:17
 msgid "Exclude"
 msgstr ""
 
 #: tpl/modals/check/preflight-row-files.php:83
+#: tpl/pages/packages/settings/item-storage-body.php:50
 #: tpl/pages/preflight/wizard-files-result-pagination.php:16
 msgid "Include"
 msgstr ""
@@ -1825,6 +1869,8 @@ msgid "Remote server"
 msgstr ""
 
 #: tpl/modals/check/preflight-row.php:19
+#: tpl/modals/packages/create/settings.php:17
+#: tpl/modals/packages/preflight/check.php:51
 msgid "Files"
 msgstr ""
 
@@ -1843,7 +1889,9 @@ msgid ""
 msgstr ""
 
 #: tpl/modals/check/system.php:80 tpl/modals/check/system.php:94
-#: tpl/modals/destination-fail.php:28 tpl/msgs/wizard-destination-errors.php:42
+#: tpl/modals/destination-fail.php:28
+#: tpl/modals/packages/preflight/issue.php:47
+#: tpl/msgs/wizard-destination-errors.php:42
 #: tpl/msgs/wizard-destination-errors.php:54 tpl/msgs/wizard-rpkg-errors.php:42
 #: tpl/msgs/wizard-rpkg-errors.php:54 tpl/msgs/wizard-source-errors.php:22
 #: tpl/msgs/wizard-source-errors.php:34 tpl/msgs/wizard-sysdiff-errors.php:42
@@ -1865,7 +1913,9 @@ msgstr ""
 #: tpl/modals/destination-connect.php:18 tpl/modals/destination-fail.php:16
 #: tpl/modals/destination-hub.php:16 tpl/modals/destination-prepare.php:21
 #: tpl/modals/destination-refresh.php:15 tpl/modals/migration-deletedest.php:20
-#: tpl/modals/preflight-cancel.php:20 tpl/modals/settings-reset.php:20
+#: tpl/modals/packages/build.php:38 tpl/modals/packages/create.php:30
+#: tpl/modals/packages/preflight.php:30 tpl/modals/preflight-cancel.php:20
+#: tpl/modals/settings-reset.php:20
 msgid "Close this dialog window"
 msgstr ""
 
@@ -2037,6 +2087,9 @@ msgid "E.g. john@doe.com"
 msgstr ""
 
 #: tpl/modals/email-add.php:57 tpl/modals/migration-deletedest.php:32
+#: tpl/modals/packages/create/confirm.php:22
+#: tpl/modals/packages/create/meta.php:87
+#: tpl/modals/packages/create/settings.php:43
 #: tpl/modals/selection/destination.php:24
 #: tpl/modals/selection/install-fail.php:19
 #: tpl/modals/selection/loading-error.php:19
@@ -2070,6 +2123,7 @@ msgid "Are you sure you want to delete %s from your destinations list?"
 msgstr ""
 
 #: tpl/modals/migration-deletedest.php:36
+#: tpl/pages/packages/migration/additional.php:158
 msgid "Delete"
 msgstr ""
 
@@ -2116,6 +2170,360 @@ msgstr ""
 
 #: tpl/modals/migration-ready.php:66
 msgid "Begin import"
+msgstr ""
+
+#: tpl/modals/packages/build/cancel.php:11
+msgid "Are you sure you want to cancel the package build?"
+msgstr ""
+
+#: tpl/modals/packages/build/cancel.php:17
+msgid "Go Back"
+msgstr ""
+
+#: tpl/modals/packages/build/cancel.php:22 tpl/modals/packages/build.php:18
+msgid "Cancel Package"
+msgstr ""
+
+#: tpl/modals/packages/build/fail.php:14
+msgid ""
+"There was an error while trying to build your package! You can check logs "
+"for more details or retry creating the package. Not able to solve this? "
+"Contact our <a href=\"%s\" target=\"_blank\">support</a> team for further "
+"help."
+msgstr ""
+
+#: tpl/modals/packages/build/fail.php:20
+msgid "Encountered error:"
+msgstr ""
+
+#: tpl/modals/packages/build/fail.php:29
+#: tpl/pages/packages/migration/additional.php:164
+msgid "View Logs"
+msgstr ""
+
+#: tpl/modals/packages/build/fail.php:35
+msgid "Retry Package"
+msgstr ""
+
+#: tpl/modals/packages/build/migration.php:11
+msgid ""
+"Great! We're building your package. Keep this modal open during the build "
+"process. This may take anywhere from few seconds to a couple of minutes "
+"depending upon the size of your site."
+msgstr ""
+
+#: tpl/modals/packages/build/migration.php:34
+msgid "Building Package Archive..."
+msgstr ""
+
+#: tpl/modals/packages/build/migration.php:42
+#: tpl/pages/packages/migration/package.php:48
+msgid "Package Archive"
+msgstr ""
+
+#: tpl/modals/packages/build/migration.php:51
+#: tpl/pages/packages/migration/package.php:65
+msgid "Installer"
+msgstr ""
+
+#: tpl/modals/packages/build.php:15
+msgid "Building Package"
+msgstr ""
+
+#: tpl/modals/packages/build.php:16
+msgid "Package Failed"
+msgstr ""
+
+#: tpl/modals/packages/create/confirm.php:11
+msgid ""
+"Are you sure you wish to create a new package? This will override your "
+"existing package since you can only have one package at a time to avoid any "
+"security risks."
+msgstr ""
+
+#: tpl/modals/packages/create/confirm.php:27
+#: tpl/modals/packages/create/meta.php:92 tpl/modals/welcome.php:10
+#: tpl/pages/migration/progress-done.php:80
+msgid "Continue"
+msgstr ""
+
+#: tpl/modals/packages/create/meta.php:19
+msgid ""
+"Let's begin with the configurations such as giving your package a name and "
+"password protecting your installer file."
+msgstr ""
+
+#: tpl/modals/packages/create/meta.php:29
+#: tpl/pages/packages/migration/additional.php:33
+msgid "Package Name"
+msgstr ""
+
+#: tpl/modals/packages/create/meta.php:41
+#: tpl/pages/packages/migration/additional.php:139
+msgid "Password Protection"
+msgstr ""
+
+#: tpl/modals/packages/create/meta.php:45
+msgid "Disable"
+msgstr ""
+
+#: tpl/modals/packages/create/meta.php:46
+msgid "Enable"
+msgstr ""
+
+#: tpl/modals/packages/create/meta.php:52
+#: tpl/modals/packages/create/meta.php:57
+msgid ""
+"Choose whether you want to restrict the access to the installer file with a "
+"password. When enabled, you'll be asked to enter your chosen password to "
+"begin the installation process."
+msgstr ""
+
+#: tpl/modals/packages/create/meta.php:61
+msgid "Installer Password"
+msgstr ""
+
+#: tpl/modals/packages/create/meta.php:68
+msgid "Choose your password"
+msgstr ""
+
+#: tpl/modals/packages/create/settings-advanced.php:10
+msgid "Use the following advanced options to filter the content of your package."
+msgstr ""
+
+#: tpl/modals/packages/create/settings-advanced.php:18
+msgid "Exclude spam comments  "
+msgstr ""
+
+#: tpl/modals/packages/create/settings-advanced.php:27
+msgid "Exclude post revisions  "
+msgstr ""
+
+#: tpl/modals/packages/create/settings-advanced.php:37
+msgid "Exclude inactive themes"
+msgstr ""
+
+#: tpl/modals/packages/create/settings-advanced.php:46
+msgid "Exclude inactive plugins"
+msgstr ""
+
+#: tpl/modals/packages/create/settings-database.php:9
+msgid "Select this item"
+msgstr ""
+
+#: tpl/modals/packages/create/settings-database.php:10
+msgid "Open or close this item"
+msgstr ""
+
+#: tpl/modals/packages/create/settings-database.php:24
+msgid "All"
+msgstr ""
+
+#: tpl/modals/packages/create/settings-database.php:36
+msgid "WordPress Core Tables"
+msgstr ""
+
+#: tpl/modals/packages/create/settings-database.php:67
+msgid "Non - WordPress Core Tables"
+msgstr ""
+
+#: tpl/modals/packages/create/settings-database.php:98
+msgid "Other Tables"
+msgstr ""
+
+#: tpl/modals/packages/create/settings-files.php:21
+msgid "File Exclusion Filter"
+msgstr ""
+
+#: tpl/modals/packages/create/settings-files.php:24
+msgid "Themes"
+msgstr ""
+
+#: tpl/modals/packages/create/settings-files.php:26
+msgid "Plugins"
+msgstr ""
+
+#: tpl/modals/packages/create/settings-files.php:28
+msgid "Media"
+msgstr ""
+
+#: tpl/modals/packages/create/settings-files.php:35
+msgid ""
+"Enter one exclusion rule per line. We use pattern matching to exclude files "
+"based on your exclusion rules. Not sure how to use them? Refer to our <a "
+"href=\"%s\" target=\"_blank\">file exclusion docs</a>."
+msgstr ""
+
+#: tpl/modals/packages/create/settings.php:11
+msgid ""
+"By default, the package includes your entire website. However, if you don't "
+"want to migrate any specific files, folders or database tables, you can use "
+"the filters below to exclude them from your package."
+msgstr ""
+
+#: tpl/modals/packages/create/settings.php:18
+#: tpl/modals/packages/preflight/check.php:61
+#: tpl/pages/packages/settings/item-database-title.php:12
+msgid "Database"
+msgstr ""
+
+#: tpl/modals/packages/create/settings.php:19
+msgid "Advanced"
+msgstr ""
+
+#: tpl/modals/packages/create/settings.php:48
+msgid "Build Package"
+msgstr ""
+
+#: tpl/modals/packages/create.php:15
+msgid "Create New Package"
+msgstr ""
+
+#: tpl/modals/packages/create.php:16
+#: tpl/pages/packages/migration/initial.php:15
+msgid "Create Package"
+msgstr ""
+
+#: tpl/modals/packages/preflight/check.php:11
+msgid ""
+"Hold tight! We’re running a pre-flight check for any issues that might "
+"prevent a package build. This will only take a few seconds."
+msgstr ""
+
+#: tpl/modals/packages/preflight/check.php:33
+msgid "Connecting..."
+msgstr ""
+
+#: tpl/modals/packages/preflight/check.php:40
+msgid "Checking system..."
+msgstr ""
+
+#: tpl/modals/packages/preflight/check.php:41
+msgid "System"
+msgstr ""
+
+#: tpl/modals/packages/preflight/check.php:50
+msgid "Checking files..."
+msgstr ""
+
+#: tpl/modals/packages/preflight/check.php:60
+msgid "Checking database..."
+msgstr ""
+
+#: tpl/modals/packages/preflight/issue-message.php:29
+#: tpl/pages/preflight/wizard-files-result-wrapper.php:19
+msgid ""
+"Files over 8MB are listed below. Large files such as media files or backups "
+"can cause timeout issues on some budget hosts during the migration. We "
+"recommend excluding them from the migration and uploading them via FTP to "
+"your destination."
+msgstr ""
+
+#: tpl/modals/packages/preflight/issue-message.php:34
+#: tpl/pages/preflight/wizard-files-result-wrapper.php:24
+msgid ""
+"Files with names longer than 256 characters are listed below. Files with "
+"large names can cause issues on some hosts. We recommend excluding them "
+"from the migration and uploading them via FTP to your destination."
+msgstr ""
+
+#: tpl/modals/packages/preflight/issue-message.php:49
+#: tpl/pages/preflight/wizard-files-result-wrapper.php:39
+msgid "File path has keyword"
+msgstr ""
+
+#: tpl/modals/packages/preflight/issue-message.php:52
+#: tpl/pages/preflight/wizard-files-result-wrapper.php:42
+msgid "E.g. Plugin Name"
+msgstr ""
+
+#: tpl/modals/packages/preflight/issue-message.php:61
+#: tpl/pages/preflight/wizard-files-result-wrapper.php:51
+msgid "Any"
+msgstr ""
+
+#: tpl/modals/packages/preflight/issue-message.php:62
+#: tpl/pages/packages/settings/item-archive-title.php:12
+#: tpl/pages/preflight/wizard-files-result-wrapper.php:52
+msgid "Archive"
+msgstr ""
+
+#: tpl/modals/packages/preflight/issue-message.php:74
+#: tpl/pages/preflight/wizard-files-result-wrapper.php:64
+msgid "E.g. 150"
+msgstr ""
+
+#: tpl/modals/packages/preflight/issue-message.php:80
+#: tpl/pages/preflight/wizard-files-result-wrapper.php:70
+msgid "Mb"
+msgstr ""
+
+#: tpl/modals/packages/preflight/issue-message.php:93
+#: tpl/modals/settings-reset.php:33
+#: tpl/pages/preflight/wizard-files-result-wrapper.php:83
+#: tpl/pages/settings/data.php:65 tpl/pages/settings/data.php:117
+msgid "Reset"
+msgstr ""
+
+#: tpl/modals/packages/preflight/issue-message.php:98
+#: tpl/pages/preflight/wizard-files-result-pagination.php:20
+#: tpl/pages/preflight/wizard-files-result-wrapper.php:88
+msgid "Apply"
+msgstr ""
+
+#: tpl/modals/packages/preflight/issue-message.php:107
+#: tpl/pages/preflight/wizard-files-result-wrapper.php:97
+msgid "Path:"
+msgstr ""
+
+#: tpl/modals/packages/preflight/issue-message.php:112
+#: tpl/pages/preflight/wizard-files-result-wrapper.php:102
+msgid "Type:"
+msgstr ""
+
+#: tpl/modals/packages/preflight/issue-message.php:117
+#: tpl/pages/preflight/wizard-files-result-wrapper.php:107
+msgid "Size:"
+msgstr ""
+
+#: tpl/modals/packages/preflight/issue-package_size-summary.php:13
+msgid ""
+"Your overall site size is %1$s. We estimate that your final packaged "
+"archive could end up being somewhere between %2$s and %3$s in size. Where "
+"the final result will land in this spectrum will vary with the type of "
+"files the majority of your site consists of and the compression rate we can "
+"achieve on them."
+msgstr ""
+
+#: tpl/modals/packages/preflight/issue-package_size-summary.php:21
+#: tpl/pages/preflight/wizard-files-package_size-summary.php:12
+msgid ""
+"If you haven’t already, you can try excluding larger files to speed up "
+"migration."
+msgstr ""
+
+#: tpl/modals/packages/preflight/issues.php:11
+msgid ""
+"Andy, we’ve uncovered a few potential issues that may affect the package "
+"build and migration process. Take a look through them and action what you "
+"like. While you can ignore the warnings, you must fix the errors (if any) "
+"to continue your migration."
+msgstr ""
+
+#: tpl/modals/packages/preflight/issues.php:23
+msgid "Run Pre-Flight"
+msgstr ""
+
+#: tpl/modals/packages/preflight/issues.php:29
+msgid "Continue Anyway"
+msgstr ""
+
+#: tpl/modals/packages/preflight.php:15
+msgid "Pre-Flight Check"
+msgstr ""
+
+#: tpl/modals/packages/preflight.php:16
+msgid "Pre-Flight Issues"
 msgstr ""
 
 #: tpl/modals/preflight/checks-local-files.php:89
@@ -2322,12 +2730,6 @@ msgid ""
 "defaults?"
 msgstr ""
 
-#: tpl/modals/settings-reset.php:33
-#: tpl/pages/preflight/wizard-files-result-wrapper.php:83
-#: tpl/pages/settings/data.php:65 tpl/pages/settings/data.php:117
-msgid "Reset"
-msgstr ""
-
 #: tpl/modals/user-add.php:25
 msgid "Add User"
 msgstr ""
@@ -2348,10 +2750,6 @@ msgstr ""
 
 #: tpl/modals/welcome-activation.php:13
 msgid "This plugin works by migrating websites using the WPMU DEV API & Hub."
-msgstr ""
-
-#: tpl/modals/welcome.php:10 tpl/pages/migration/progress-done.php:80
-msgid "Continue"
 msgstr ""
 
 #: tpl/modals/welcome.php:27
@@ -2745,6 +3143,237 @@ msgstr ""
 msgid "View documentation"
 msgstr ""
 
+#: tpl/pages/packages/main.php:10 tpl/pages/packages/migration.php:18
+msgid "Package"
+msgstr ""
+
+#: tpl/pages/packages/main.php:11 tpl/pages/packages/settings.php:19
+#: tpl/pages/settings/data.php:44 tpl/pages/settings/main.php:19
+msgid "Settings"
+msgstr ""
+
+#: tpl/pages/packages/main.php:16
+msgid "Package Migration"
+msgstr ""
+
+#: tpl/pages/packages/migration/additional.php:17
+msgid "Additional Details"
+msgstr ""
+
+#: tpl/pages/packages/migration/additional.php:19
+msgid "This section contains complete details about the package"
+msgstr ""
+
+#: tpl/pages/packages/migration/additional.php:46
+msgid "Created on"
+msgstr ""
+
+#: tpl/pages/packages/migration/additional.php:81
+msgid "File Exclusions"
+msgstr ""
+
+#: tpl/pages/packages/migration/additional.php:99
+msgid "Database Exclusions"
+msgstr ""
+
+#: tpl/pages/packages/migration/additional.php:117
+msgid "Advanced Exclusions"
+msgstr ""
+
+#: tpl/pages/packages/migration/initial.php:11
+msgid ""
+"Package migration lets you create a package of your website, upload it to "
+"your destination website and follow an installer wizard to complete the "
+"migration."
+msgstr ""
+
+#: tpl/pages/packages/migration/package.php:14
+msgid "Ready To Migrate"
+msgstr ""
+
+#: tpl/pages/packages/migration/package.php:15
+msgid ""
+"Your package is ready! Follow the instructions below to migrate this site "
+"to another server:"
+msgstr ""
+
+#: tpl/pages/packages/migration/package.php:27
+msgid "Download package archive and installer"
+msgstr ""
+
+#: tpl/pages/packages/migration/package.php:32
+msgid ""
+"The first step is to download both the archive ZIP file, and the "
+"installer.php file. You'll need both of these to complete the migration."
+msgstr ""
+
+#: tpl/pages/packages/migration/package.php:87
+msgid "Upload both files to your destination server"
+msgstr ""
+
+#: tpl/pages/packages/migration/package.php:94
+msgid ""
+"The next step is to upload both the package archive and installer files to "
+"the root directory of your destination server. We recommend uploading them "
+"via FTP using an FTP client such as <a href=\"%s\" "
+"target=\"_blank\">FileZilla</a>. You’ll need an FTP account to connect to "
+"your destination server, and if you are not sure how to create an FTP "
+"account, please contact your hosting support."
+msgstr ""
+
+#: tpl/pages/packages/migration/package.php:108
+msgid "Visit installer.php on your destination server and follow the instructions"
+msgstr ""
+
+#: tpl/pages/packages/migration/package.php:115
+msgid ""
+"Once you've uploaded both the archive and installer files to your new "
+"server, you need to visit the installer.php in your browser. To do this, "
+"open up your web browser and type in your new website domain along with "
+"/installer.php. I.e. <b>https://example.com/installer.php</b>. Follow the "
+"instructions on the installer wizard to complete the migration."
+msgstr ""
+
+#: tpl/pages/packages/migration.php:24
+msgid "New Package"
+msgstr ""
+
+#: tpl/pages/packages/settings/item-archive-body.php:26
+msgid "Archive Engine"
+msgstr ""
+
+#: tpl/pages/packages/settings/item-archive-body.php:30
+msgid ""
+"Choose the archive engine you want to use for creating the package.zip. We "
+"recommend using the <b>Shell Zip</b> method since it uses your server's "
+"internal shell commands for creating the zip file. However, if your host "
+"doesn't support the Shell Zip method, you can fall back to the "
+"<b>ZipArchive</b> method.  "
+msgstr ""
+
+#: tpl/pages/packages/settings/item-archive-body.php:37
+msgid "Shell Zip"
+msgstr ""
+
+#: tpl/pages/packages/settings/item-archive-body.php:40
+msgid "PHP ZipArchive"
+msgstr ""
+
+#: tpl/pages/packages/settings/item-archive-body.php:63
+msgid ""
+"We couldn't find zip at its default location. If you are not sure of the "
+"path, contact your hosting support."
+msgstr ""
+
+#: tpl/pages/packages/settings/item-archive-body.php:68
+msgid ""
+"The Shell ZIP method requires PHP shell_exec function to work, and your "
+"host doesn't support that. Please contact your hosting support or system "
+"admin to allow the shell_exec function."
+msgstr ""
+
+#: tpl/pages/packages/settings/item-archive-body.php:80
+msgid "Buffer Size"
+msgstr ""
+
+#: tpl/pages/packages/settings/item-archive-body.php:93
+msgid ""
+"Buffer size is the size of each chunk of the archive in multi-threaded "
+"mode. A larger value will result in a faster build but more unstable on "
+"some budget hosts."
+msgstr ""
+
+#: tpl/pages/packages/settings/item-archive-title.php:17
+msgid ""
+"The archive settings allow you to customize the archive build process of "
+"your packages."
+msgstr ""
+
+#: tpl/pages/packages/settings/item-database-body.php:26
+msgid "SQL Script"
+msgstr ""
+
+#: tpl/pages/packages/settings/item-database-body.php:29
+msgid ""
+"Choose how you want to build the database scripts in your packages. We "
+"recommend using MySQLDump method whenever possible. However, if your host "
+"doesn't support this or it's causing some issues in the package build "
+"process, you can fall back to the PHP Code method to build the database "
+"scripts."
+msgstr ""
+
+#: tpl/pages/packages/settings/item-database-body.php:35
+msgid "MySQLDump"
+msgstr ""
+
+#: tpl/pages/packages/settings/item-database-body.php:38
+msgid "PHP Code"
+msgstr ""
+
+#: tpl/pages/packages/settings/item-database-body.php:61
+msgid ""
+"We couldn't find MySQLDump at its default location. If you are not sure of "
+"the path, contact your hosting support."
+msgstr ""
+
+#: tpl/pages/packages/settings/item-database-body.php:66
+msgid ""
+"The MySQLDump method requires PHP shell_exec function to work, and your "
+"host doesn't support that. Please contact your hosting support or system "
+"admin to allow the shell_exec function."
+msgstr ""
+
+#: tpl/pages/packages/settings/item-database-body.php:78
+msgid "Query Limit"
+msgstr ""
+
+#: tpl/pages/packages/settings/item-database-body.php:90
+msgid ""
+"We recommend using a lower query limit on the budget hosts. A higher limit "
+"size will speed up the build time, but it will use more memory."
+msgstr ""
+
+#: tpl/pages/packages/settings/item-database-title.php:17
+msgid ""
+"The database settings allow you to customize the database build process of "
+"your packages."
+msgstr ""
+
+#: tpl/pages/packages/settings/item-storage-body.php:18
+msgid "Location"
+msgstr ""
+
+#: tpl/pages/packages/settings/item-storage-body.php:21
+msgid ""
+"By default, Shipper creates a default directory to keep your package. You "
+"can change the storage directory by replacing the path below with the "
+"relative path of your chosen directory."
+msgstr ""
+
+#: tpl/pages/packages/settings/item-storage-body.php:31
+msgid "Exclude from package builds"
+msgstr ""
+
+#: tpl/pages/packages/settings/item-storage-body.php:34
+msgid ""
+"We recommend excluding the storage directory, and all of its content and "
+"sub-folders from package builds."
+msgstr ""
+
+#: tpl/pages/packages/settings/item-storage-title.php:12
+msgid "Storage Directory"
+msgstr ""
+
+#: tpl/pages/packages/settings/item-storage-title.php:17
+msgid ""
+"The storage directory settings allow you to configure your package storage "
+"location as per your need."
+msgstr ""
+
+#: tpl/pages/packages/settings.php:48
+msgid "Save Changes"
+msgstr ""
+
 #: tpl/pages/preflight/progress-bar.php:29
 msgid ""
 "We're just running a quick pre-flight check to make sure the migration will "
@@ -2788,19 +3417,8 @@ msgstr ""
 msgid "No issues found"
 msgstr ""
 
-#: tpl/pages/preflight/wizard-files-package_size-summary.php:12
-msgid ""
-"If you haven’t already, you can try excluding larger files to speed up "
-"migration."
-msgstr ""
-
 #: tpl/pages/preflight/wizard-files-result-pagination.php:15
 msgid "Bulk actions"
-msgstr ""
-
-#: tpl/pages/preflight/wizard-files-result-pagination.php:20
-#: tpl/pages/preflight/wizard-files-result-wrapper.php:88
-msgid "Apply"
 msgstr ""
 
 #: tpl/pages/preflight/wizard-files-result-pagination.php:45
@@ -2809,57 +3427,6 @@ msgstr ""
 
 #: tpl/pages/preflight/wizard-files-result-pagination.php:46
 msgid "Filter pagination"
-msgstr ""
-
-#: tpl/pages/preflight/wizard-files-result-wrapper.php:19
-msgid ""
-"Files over 8MB are listed below. Large files such as media files or backups "
-"can cause timeout issues on some budget hosts during the migration. We "
-"recommend excluding them from the migration and uploading them via FTP to "
-"your destination."
-msgstr ""
-
-#: tpl/pages/preflight/wizard-files-result-wrapper.php:24
-msgid ""
-"Files with names longer than 256 characters are listed below. Files with "
-"large names can cause issues on some hosts. We recommend excluding them "
-"from the migration and uploading them via FTP to your destination."
-msgstr ""
-
-#: tpl/pages/preflight/wizard-files-result-wrapper.php:39
-msgid "File path has keyword"
-msgstr ""
-
-#: tpl/pages/preflight/wizard-files-result-wrapper.php:42
-msgid "E.g. Plugin Name"
-msgstr ""
-
-#: tpl/pages/preflight/wizard-files-result-wrapper.php:51
-msgid "Any"
-msgstr ""
-
-#: tpl/pages/preflight/wizard-files-result-wrapper.php:52
-msgid "Archive"
-msgstr ""
-
-#: tpl/pages/preflight/wizard-files-result-wrapper.php:64
-msgid "E.g. 150"
-msgstr ""
-
-#: tpl/pages/preflight/wizard-files-result-wrapper.php:70
-msgid "Mb"
-msgstr ""
-
-#: tpl/pages/preflight/wizard-files-result-wrapper.php:97
-msgid "Path:"
-msgstr ""
-
-#: tpl/pages/preflight/wizard-files-result-wrapper.php:102
-msgid "Type:"
-msgstr ""
-
-#: tpl/pages/preflight/wizard-files-result-wrapper.php:107
-msgid "Size:"
 msgstr ""
 
 #: tpl/pages/preflight/wizard-files.php:16
@@ -2950,10 +3517,6 @@ msgstr ""
 msgid ""
 "When you uninstall this plugin, what do you want to do with your settings "
 "and data?"
-msgstr ""
-
-#: tpl/pages/settings/data.php:44 tpl/pages/settings/main.php:19
-msgid "Settings"
 msgstr ""
 
 #: tpl/pages/settings/data.php:46
@@ -3241,6 +3804,11 @@ msgctxt "page label"
 msgid "Migrate"
 msgstr ""
 
+#: lib/shipper/controller/admin/class-packages.php:36
+msgctxt "page label"
+msgid "Package Migration"
+msgstr ""
+
 #: lib/shipper/controller/admin/class-settings.php:36
 msgctxt "page label"
 msgid "Settings"
@@ -3259,6 +3827,11 @@ msgstr ""
 #: lib/shipper/controller/admin/class-migrate.php:37
 msgctxt "menu label"
 msgid "Migrate"
+msgstr ""
+
+#: lib/shipper/controller/admin/class-packages.php:37
+msgctxt "menu label"
+msgid "Package Migration"
 msgstr ""
 
 #: lib/shipper/controller/admin/class-settings.php:37

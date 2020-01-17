@@ -1,6 +1,6 @@
 .file-scanning {
   #scanning-dialog {
-	.sui-box-body {
+	.sui-box-body:not(.scanning-free):not(.scanning-blank) {
 	  position: relative;
 	  padding-bottom: 150px;
 
@@ -59,13 +59,22 @@
 	}
   }
 
-  .sui-upsell-row {
-	border-bottom: 1px solid #E6E6E6 !important;
-  }
-
   .sui-accordion-item-title {
 	.sui-checkbox {
 	  margin-right: 10px !important;
+	}
+  }
+
+  .sui-box-body.scanning-free {
+	padding-bottom: 0 !important;
+
+	.sui-upsell-notice {
+	  margin-bottom: 35px;
+	}
+
+	img.sui-upsell-image {
+	  height: 215px;
+	  width: auto !important;
 	}
   }
 

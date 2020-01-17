@@ -81,7 +81,7 @@ $has_issues = (bool) $checks['errors_count'];
 		</div>
 	<?php } ?>
 
-	
+
 	<div class="sui-notice-top sui-notice-success sui-can-dismiss shipper-toggle-success" style="display:none">
 		<div class="sui-notice-content shipper-exclude-success" style="display:none">
 			<p>

@@ -85,15 +85,15 @@ $footer_nav_links[] = array(
 	<ul class="sui-footer-social">
 		<li><a href="https://www.facebook.com/wpmudev" target="_blank">
 				<i class="sui-icon-social-facebook" aria-hidden="true"></i>
-				<span class="sui-screen-reader-text">Facebook</span>
+				<span class="sui-screen-reader-text"><?php _e( 'Facebook', 'wpmudev' ); ?></span>
 			</a></li>
 		<li><a href="https://twitter.com/wpmudev" target="_blank">
 				<i class="sui-icon-social-twitter" aria-hidden="true"></i></a>
-			<span class="sui-screen-reader-text">Twitter</span>
+			<span class="sui-screen-reader-text"><?php _e( 'Twitter', 'wpmudev' ); ?></span>
 		</li>
 		<li><a href="https://www.instagram.com/wpmu_dev/" target="_blank">
 				<i class="sui-icon-instagram" aria-hidden="true"></i>
-				<span class="sui-screen-reader-text">Instagram</span>
+				<span class="sui-screen-reader-text"><?php _e( 'Instagram', 'wpmudev' ); ?></span>
 			</a>
 		</li>
 	</ul>

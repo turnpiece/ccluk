@@ -6,8 +6,11 @@
 namespace WP_Defender\Module\Hardener\Controller;
 
 use Hammer\Helper\HTTP_Helper;
+use Hammer\Helper\WP_Helper;
+use WP_Defender\Behavior\Utils;
 use WP_Defender\Controller;
 use WP_Defender\Module\Hardener;
+use WP_Defender\Module\Hardener\Model\Settings;
 
 class Rest extends Controller {
 	public function __construct() {
@@ -19,6 +22,7 @@ class Rest extends Controller {
 			$namespace . '/ignoreTweak'    => 'ignoreTweak',
 			$namespace . '/restoreTweak'   => 'restoreTweak',
 			$namespace . '/updateSettings' => 'updateSettings',
+			$namespace . '/reCheck'        => 'reCheck',
 		];
 		$this->registerEndpoints( $routes, Hardener::getClassName() );
 	}
@@ -52,6 +56,29 @@ class Rest extends Controller {
 		wp_send_json_success( array(
 			'message' => __( "Your settings have been updated.", wp_defender()->domain )
 		) );
+	}
+
+	public function reCheck() {
+		if ( ! $this->checkPermission() ) {
+			return;
+		}
+
+		if ( ! wp_verify_nonce( HTTP_Helper::retrieveGet( '_wpnonce' ), 'recheck' ) ) {
+			return;
+		}
+		$type = HTTP_Helper::retrievePost( 'type' );
+		if ( $type == 'prevent-php' ) {
+			$url = WP_Helper::getUploadUrl();
+			$url = $url . '/wp-defender/index.php';
+		} else {
+			$url = wp_defender()->getPluginUrl() . 'changelog.txt';
+		}
+		$model = Settings::instance();
+		$cache = $model->getDValues( 'head_requests' );
+		Utils::instance()->log( sprintf( 'clean up %s', $url ), 'tweaks' );
+		unset( $cache[ $url ] );
+		$model->setDValues( 'head_requests', $cache );
+		wp_send_json_success( $this->tweaksSummary() );
 	}
 
 	/**

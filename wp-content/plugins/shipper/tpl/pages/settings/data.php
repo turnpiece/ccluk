@@ -38,7 +38,7 @@ $preserve_data = $model->get( Shipper_Model_Stored_Options::KEY_DATA );
 					); ?>
 				</p>
 			</div>
-			
+
 			<div class="sui-box-settings-col-2">
 				<div class="shipper-form-item">
 					<label class="sui-settings-label"><?php esc_html_e( 'Settings', 'shipper' ); ?></label>
@@ -105,7 +105,7 @@ $preserve_data = $model->get( Shipper_Model_Stored_Options::KEY_DATA );
 					<?php esc_html_e( 'Use this button to roll back to the default settings.', 'shipper'); ?>
 				</p>
 			</div>
-			
+
 			<div class="sui-box-settings-col-2">
 				<div class="shipper-form-item">
 					<button

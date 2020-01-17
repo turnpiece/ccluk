@@ -198,7 +198,7 @@ class Shipper_Task_Check_System extends Shipper_Task_Check {
 			$check->set( 'title', __( 'Max Execution Time is low', 'shipper' ) );
 			$tpl = new Shipper_Helper_Template;
 			$check->set(
-				'message', 
+				'message',
 				$tpl->get(
 					'checks/exec-time',
 					array( 'value' => $value, 'domain' => $this->get_domain() )

@@ -5,11 +5,7 @@ namespace WPForms\Lite\Reports;
 /**
  * Generates form submissions reports.
  *
- * @package    WPForms\Lite\Reports
- * @author     WPForms
- * @since      1.5.4
- * @license    GPL-2.0+
- * @copyright  Copyright (c) 2019, WPForms LLC
+ * @since 1.5.4
  */
 class EntriesCount {
 

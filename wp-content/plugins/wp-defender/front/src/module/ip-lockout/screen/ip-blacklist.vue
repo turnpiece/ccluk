@@ -84,7 +84,8 @@
 								{{__("To use this feature you must first download the latest Geo IP Database.")}}
 							</p>
 							<div class="sui-notice-buttons">
-								<submit-button type="button" css-class="sui-button-ghost" @click="download_geodb"
+								<submit-button id="download-geodb" type="button" css-class="sui-button-ghost"
+								               @click="download_geodb"
 								               :state="state">
 									{{__("Download")}}
 								</submit-button>
@@ -105,7 +106,7 @@
 								</p>
 								<div class="sui-border-frame">
 									<div class="sui-control-with-icon">
-										<select class="sui-select sui-select jquery-select sui-form-control"
+										<select class="sui-select jquery-select sui-form-control"
 										        name="country_blacklist" id="country_blacklist"
 										        :placeholder="__('Type country name')"
 										        v-model="model.country_blacklist"
@@ -275,7 +276,8 @@
 						})
 						jQuery('#country_blacklist').SUIselect2({
 							dropdownCssClass: 'sui-select-dropdown'
-						})
+						});
+						location.reload()
 					})
 				})
 			},
@@ -329,6 +331,7 @@
 		mounted: function () {
 			let mediaUploader;
 			let vm = this;
+			console.log('here');
 			jQuery('.file-picker').click(function () {
 				if (mediaUploader) {
 					mediaUploader.open();

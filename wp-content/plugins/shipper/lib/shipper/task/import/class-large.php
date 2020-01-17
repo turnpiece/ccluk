@@ -120,7 +120,7 @@ class Shipper_Task_Import_Large extends Shipper_Task_Import {
 
 	public function deploy_file( $source, $dest_relpath ) {
 		$destination = trailingslashit( ABSPATH ) . preg_replace(
-			'/^' . preg_quote( 
+			'/^' . preg_quote(
 				trailingslashit( Shipper_Model_Stored_Migration::COMPONENT_FS ),
 				'/'
 			) . '/',

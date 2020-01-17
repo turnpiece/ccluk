@@ -5,6 +5,7 @@ namespace Beehive\Core\Controllers;
 // If this file is called directly, abort.
 defined( 'WPINC' ) || die;
 
+use Beehive\Core\Helpers\General;
 use Beehive\Core\Utils\Abstracts\Admin_Ajax;
 
 /**
@@ -83,13 +84,13 @@ class Ajax extends Admin_Ajax {
 		$options['google']['account_id']                = empty( $_POST['google_account'] ) ? '' : sanitize_text_field( $_POST['google_account'] );
 		$options['google']['auto_track']                = empty( $_POST['auto_track'] ) ? 0 : 1;
 		$options['general']['track_admin']              = empty( $_POST['track_admin'] ) ? 0 : 1;
-		$options['general']['prosites_analytics_level'] = empty( $_POST['ps_analytics'] ) ? [] : $_POST['ps_analytics'];
-		$options['general']['prosites_settings_level']  = empty( $_POST['ps_settings'] ) ? [] : $_POST['ps_settings'];
-		$options['permissions']['roles']                = empty( $_POST['roles'] ) ? [] : $_POST['roles'];
+		$options['general']['prosites_analytics_level'] = empty( $_POST['ps_analytics'] ) ? [] : General::sanitize_array( $_POST['ps_analytics'], 'intval' );
+		$options['general']['prosites_settings_level']  = empty( $_POST['ps_settings'] ) ? [] : General::sanitize_array( $_POST['ps_settings'], 'intval' );
+		$options['permissions']['roles']                = empty( $_POST['roles'] ) ? [] : General::sanitize_array( $_POST['roles'] );
 		$options['permissions']['overwrite_cap']        = empty( $_POST['roles_overwrite'] ) ? 0 : 1;
 		// Save tracking code.
 		if ( ! empty( $_POST['tracking'] ) ) {
-			$options['tracking']['code'] = $_POST['tracking'];
+			$options['tracking']['code'] = sanitize_text_field( $_POST['tracking'] );
 		}
 
 		// Set the flag.

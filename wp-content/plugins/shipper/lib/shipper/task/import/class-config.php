@@ -41,9 +41,10 @@ class Shipper_Task_Import_Config extends Shipper_Task_Import {
 	 */
 	public function get_fs_lister() {
 		if ( ! isset( $this->_files ) ) {
-			$storage = new Shipper_Model_Stored_Filelist;
+			$storage      = new Shipper_Model_Stored_Filelist;
 			$this->_files = new Shipper_Helper_Fs_List( $storage );
 		}
+
 		return $this->_files;
 	}
 
@@ -75,9 +76,9 @@ class Shipper_Task_Import_Config extends Shipper_Task_Import {
 			Shipper_Helper_Log::write(
 				__( 'Notice: protective environment detected, skipping config files', 'shipper' )
 			);
+
 			return true; // We're done.
 		}
-
 		$temp = trailingslashit( Shipper_Helper_Fs_Path::get_temp_dir() );
 		$root = $temp . 'files/';
 		if ( ! file_exists( $root ) || ! is_dir( $root ) ) {
@@ -85,6 +86,7 @@ class Shipper_Task_Import_Config extends Shipper_Task_Import {
 				self::ERR_ACCESS,
 				sprintf( __( 'Temporary files directory doesn\'t seem to exist: %s', 'shipper' ), $root )
 			);
+
 			return true;
 		}
 		$config_files = $this->get_fs_storage()->get(
@@ -93,12 +95,11 @@ class Shipper_Task_Import_Config extends Shipper_Task_Import {
 		);
 
 		$replacement = trailingslashit( Shipper_Helper_Fs_Path::get_temp_dir() ) .
-			trailingslashit( Shipper_Model_Stored_Migration::COMPONENT_FS );
-		$root_rx = preg_quote( trailingslashit( ABSPATH ), '/' );
-		$replacer = new Shipper_Helper_Replacer_File( Shipper_Helper_Codec::DECODE );
+		               trailingslashit( Shipper_Model_Stored_Migration::COMPONENT_FS );
+		$root_rx     = preg_quote( trailingslashit( ABSPATH ), '/' );
+		$replacer    = new Shipper_Helper_Replacer_File( Shipper_Helper_Codec::DECODE );
 		$replacer->add_codec( new Shipper_Helper_Codec_Rewrite );
 		$replacer->add_codec( new Shipper_Helper_Codec_Paths );
-
 		foreach ( $config_files as $destination ) {
 
 			$file = preg_replace( "/^{$root_rx}/", $replacement, $destination );
@@ -136,13 +137,18 @@ class Shipper_Task_Import_Config extends Shipper_Task_Import {
 			);
 			if ( ! $is_mock_import ) {
 				if ( ! copy( $tmp_file, $destination ) ) {
-					$this->add_error(
-						self::ERR_ACCESS,
-						sprintf(
-							__( 'Unable to copy staged config file %1$s to %2$s', 'shipper' ),
-							$file, $destination
-						)
-					);
+					$is_file_exists = file_exists( $tmp_file );
+//					$this->add_error(
+//						self::ERR_ACCESS,
+//						sprintf(
+//							__( 'Unable to copy staged config file %1$s to %2$s %s', 'shipper' ),
+//							$file, $destination
+//						)
+//					);
+					Shipper_Helper_Log::write( sprintf(
+						__( 'Unable to copy staged config file %1$s to %2$s %s', 'shipper' ),
+						$file, $destination, $is_file_exists ? null : "File not exists"
+					) );
 					// Actually, keep plowing - we're committed now.
 					// return true; // Break, has error.
 				}

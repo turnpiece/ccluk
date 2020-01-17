@@ -6,6 +6,7 @@
 namespace WP_Defender\Module\Hardener\Component;
 
 use Hammer\Helper\HTTP_Helper;
+use WP_Defender\Behavior\Utils;
 use WP_Defender\Module\Hardener\Model\Settings;
 use WP_Defender\Module\Hardener\Rule;
 
@@ -24,12 +25,20 @@ class Sh_Strict_Transport extends Rule {
 	public function getMiscData() {
 		$settings = Settings::instance();
 		$data     = $settings->getDValues( Sh_Strict_Transport_Service::KEY );
+		//we need to check if this is root domain to show the subdomain option
+		$site_url        = network_site_url();
+		$domain_data     = Utils::instance()->parseDomain( $site_url );
+		$allow_subdomain = false;
+		if ( is_array( $domain_data ) && ! isset( $domain_data['subdomain'] ) ) {
+			$allow_subdomain = true;
+		}
 
 		return [
 			'hsts_preload'        => is_array( $data ) && isset( $data['hsts_preload'] ) ? $data['hsts_preload'] : 0,
 			'include_subdomain'   => is_array( $data ) && isset( $data['include_subdomain'] ) ? $data['include_subdomain'] : 0,
 			'hsts_cache_duration' => is_array( $data ) && isset( $data['hsts_cache_duration'] ) ? $data['hsts_cache_duration'] : '7 days',
 			'somewhere'           => is_array( $data ) && isset( $data['somewhere'] ) ? $data['somewhere'] : false,
+			'allow_subdomain'     => $allow_subdomain
 		];
 	}
 
@@ -112,8 +121,19 @@ class Sh_Strict_Transport extends Rule {
 	 * @return mixed|void
 	 */
 	public function process() {
-		$this->getService()->process();
-		Settings::instance()->addToResolved( Sh_Strict_Transport::$slug );
+		$service                      = $this->getService();
+		$service->hsts                = HTTP_Helper::retrievePost( 'hsts_preload' );
+		$service->include_subdomain   = HTTP_Helper::retrievePost( 'include_subdomain' );
+		$service->hsts_cache_duration = HTTP_Helper::retrievePost( 'hsts_cache_duration' );
+		$service->scenario            = HTTP_Helper::retrievePost( 'scenario' );
+		$ret                          = $service->process();
+		if ( is_wp_error( $ret ) ) {
+			wp_send_json_error( [
+				'message' => $ret->get_error_message()
+			] );
+		} else {
+			Settings::instance()->addToResolved( Sh_Strict_Transport::$slug );
+		}
 	}
 
 	/**

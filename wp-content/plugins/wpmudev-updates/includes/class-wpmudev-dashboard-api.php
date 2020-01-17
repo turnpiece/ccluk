@@ -54,6 +54,13 @@ class WPMUDEV_Dashboard_Api {
 	protected $api_key = '';
 
 	/**
+	 * Stores the site_id from the API.
+	 *
+	 * @var int
+	 */
+	protected $api_site_id = '';
+
+	/**
 	 * Holds the last API error that occured (if any)
 	 *
 	 * @var string
@@ -148,6 +155,37 @@ class WPMUDEV_Dashboard_Api {
 	}
 
 	/**
+	 * Returns the site_id.
+	 *
+	 * We just need this get method for this
+	 * because it comes with membershipdata
+	 * which is handled set/cleared on hubsync.
+	 *
+	 *
+	 * @since  4.7.4
+	 * @return int
+	 */
+	public function get_site_id() {
+
+		//do this here since we don't need it in construct.
+		if( ! $this->api_site_id ){
+			//Careful while using this.
+			//Manually changing site ID could break your site and hub connection.
+			//This is only for advance usage.
+			if ( defined( 'WPMUDEV_SITE_ID' ) && WPMUDEV_SITE_ID ) {
+				$this->api_site_id = WPMUDEV_SITE_ID;
+			} else {
+				$membership = $this->get_membership_data();
+				if( ! empty( $membership ) && isset( $membership['hub_site_id'] ) ){
+					$this->api_site_id = $membership['hub_site_id'];
+				}
+			}
+		}
+
+		return $this->api_site_id;
+	}
+
+	/**
 	 * Returns the canonical site_url that should be used for the site in the hub.
 	 *
 	 * Define WPMUDEV_HUB_SITE_URL to override or make static the url it should show as
@@ -198,7 +236,7 @@ class WPMUDEV_Dashboard_Api {
 		if ( defined( 'WPMUDEV_HUB_ADMIN_URL' ) ) {
 			return WPMUDEV_HUB_ADMIN_URL;
 		} elseif ( defined( 'WPMUDEV_HUB_SITE_URL' ) ) {
-			return is_multisite() ? trailingslashit( WPMUDEV_HUB_SITE_URL ) . 'wp-admin/network/' : 'wp-admin/';
+			return is_multisite() ? trailingslashit( WPMUDEV_HUB_SITE_URL ) . 'wp-admin/network/' : trailingslashit( WPMUDEV_HUB_SITE_URL ) . 'wp-admin/';
 		} else {
 			return network_admin_url();
 		}
@@ -602,6 +640,9 @@ class WPMUDEV_Dashboard_Api {
 			if ( is_numeric( $data['membership'] ) ) {
 				$type       = 'single';
 				$project_id = intval( $data['membership'] );
+			} elseif( is_bool( $data['membership'] ) && is_numeric( $data['membership_full_level'] ) ) {
+				$type       = 'single';
+				$project_id = intval( $data['membership_full_level'] );
 			} else {
 				$type = 'free';
 			}
@@ -1134,6 +1175,7 @@ class WPMUDEV_Dashboard_Api {
 			$stats_data,
 			'POST'
 		);
+
 
 		if ( 200 == wp_remote_retrieve_response_code( $response ) ) {
 			$data = json_decode( wp_remote_retrieve_body( $response ), true );
@@ -1827,7 +1869,11 @@ class WPMUDEV_Dashboard_Api {
 			setcookie( 'wpmudev_is_staff', '1', time() + 3600, COOKIEPATH, COOKIE_DOMAIN, $secure_cookie, true );
 
 			// Record login info.
-			$access['logins'][ time() ] = $_REQUEST['staff'];
+			$access['logins'][ time() ] = array(
+				'name' => $_REQUEST['staff'],
+				'image' => $_REQUEST['gravatar_hash'],
+			);
+
 			WPMUDEV_Dashboard::$site->set_option( 'remote_access', $access );
 
 			// Send to dashboard.

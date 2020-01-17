@@ -3,7 +3,50 @@ Author: Mariusz Misiek, Joel James
 
 Change Log:
 
-= 3.2.0 (2019-06-27) =
+= 3.2.3 (2019-12-16) =
+**👌 Improvements:**
+
+- Use Select2 for Google Analytics view selector.
+
+**🐛 Bug Fixes:**
+
+- WP 5.3.1 breaks statistics when an array is passed to wp_kses_post.
+
+= 3.2.2 (2019-11-20) =
+**📦 New:**
+
+- Added admin pages tracking option in single sites.
+
+**👌 Improvements:**
+
+- Show loading indicator when stats are being loaded.
+- Hide IP Anonymization settings in subsites if forced from the network.
+- Updated the UI descriptions.
+- Show error message in plugin settings when required APIs are not enabled.
+
+**🐛 Bug Fixes:**
+
+- Fixed conflict with UpdraftPlus.
+- Fixed conflict with Backup Buddy.
+- Fixed wrong tooltip title in the statistics page.
+
+= 3.2.1 (2019-10-28) =
+**📦 New:**
+
+- New filter beehive_google_api_error_log to enable debug log for api errors.
+
+**👌 Improvements:**
+
+- Improvements in re-authentication message.
+
+**🐛 Bug Fixes:**
+
+- Fixed conflict with Remould theme.
+- Fixed wrong legend text in visitors section.
+- Fixed empty stats when a page is set as front page.
+- Fixed admin page tracking issues in subsites.
+
+= 3.2.0 (2019-10-11) =
 **📦 New:**
 
 - Upgraded UI to SUI.
@@ -325,4 +368,4 @@ Change Log:
 - WPMU 2.7 Compatible.
 
 
-87274-1571425175-au
+87274-1579294090-au

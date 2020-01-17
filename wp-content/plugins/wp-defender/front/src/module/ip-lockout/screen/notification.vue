@@ -84,8 +84,9 @@
                         <div class="sui-border-frame sui-toggle-content">
                             <div class="sui-form-field">
                                 <label class="sui-label"><strong>{{__("Threshold")}}</strong> {{__("- The number of lockouts before we turn off emails")}}</label>
-                                <select class="jquery-select" id="cooldown_number_lockout"
+                                <select class="jquery-select sui-select" id="cooldown_number_lockout"
                                         name="cooldown_number_lockout"
+                                        data-minimum-results-for-search="Infinity"
                                         v-model="model.cooldown_number_lockout">
                                     <option value="1">1</option>
                                     <option value="3">3</option>
@@ -95,7 +96,8 @@
                             </div>
                             <div class="sui-form-field">
                                 <label class="sui-label"><strong>{{__("Cool Off Period")}}</strong> {{__("- For how long should we turn them off?")}}</label>
-                                <select class="jquery-select" id="cooldown_period" name="cooldown_period"
+                                <select class="jquery-select sui-select" id="cooldown_period" name="cooldown_period"
+                                        data-minimum-results-for-search="Infinity"
                                         v-model="model.cooldown_period">
                                     <option value="1">{{__("1 hour")}}</option>
                                     <option value="2">{{__("2 hours")}}</option>

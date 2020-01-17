@@ -18,6 +18,13 @@ import './migrate/preflight-files.js';
 
 import './migrate/site-selection.js';
 import './migrate/preflight.js';
+import './migrate/exclusion.js'
+import './migrate/dbprefix.js'
+
+import './packages/meta.js';
+import './packages/preflight.js';
+import './packages/build.js';
+import './packages/settings.js';
 
 var shipper_sui_version = require('@wpmudev/shared-ui/package.json').version;
 ;(function($) {

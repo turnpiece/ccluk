@@ -80,12 +80,12 @@ class Admin extends Base {
 		}
 
 		// Set our custom body class.
-		$classes .= ' sui-beehive-admin';
+		$classes .= ' sui-beehive-admin ';
 
 		// Only within our admin page.
 		if ( General::is_plugin_admin() ) {
 			// Shared UI.
-			$classes .= ' sui-' . str_replace( '.', '-', BEEHIVE_SUI_VERSION );
+			$classes .= ' sui-' . str_replace( '.', '-', BEEHIVE_SUI_VERSION ) . ' ';
 		}
 
 		return $classes;

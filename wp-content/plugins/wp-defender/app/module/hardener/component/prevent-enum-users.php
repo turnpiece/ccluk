@@ -27,7 +27,7 @@ class Prevent_Enum_Users extends Rule {
 	 * @return string
 	 */
 	function getErrorReason() {
-		return __( "User enumeration is currently disabled.", wp_defender()->domain );
+		return __( "User enumeration is currently allowed.", wp_defender()->domain );
 	}
 
 	/**
@@ -35,7 +35,7 @@ class Prevent_Enum_Users extends Rule {
 	 * @return mixed
 	 */
 	function getSuccessReason() {
-		return __( "You've automatically enabled user enumeration protection, good job!", wp_defender()->domain );
+		return __( "User enumeration is currently blocked, nice work!", wp_defender()->domain );
 	}
 
 	/**
@@ -90,10 +90,17 @@ class Prevent_Enum_Users extends Rule {
 		$this->addAction( 'processingHardener' . self::$slug, 'process' );
 		$this->addAction( 'processRevert' . self::$slug, 'revert' );
 		$flag = Settings::instance()->getDValues( Prevent_Enum_Users_Service::CACHE_KEY );
-
+		if ( php_sapi_name() == 'cli' ) {
+			//in cli, ignore this
+			$flag = 0;
+		}
 		if ( $flag == 1 ) {
 			if ( ! is_admin() ) {
 				// default URL format
+				if ( ! isset( $_SERVER['QUERY_STRING'] ) ) {
+					return;
+				}
+
 				if ( preg_match( '/author=([0-9]*)/i', $_SERVER['QUERY_STRING'] ) ) {
 					wp_die( __( 'Sorry, you are not allowed to access this page', wp_defender()->domain ) );
 				}

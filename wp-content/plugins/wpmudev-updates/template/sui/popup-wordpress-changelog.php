@@ -35,7 +35,7 @@ $dlg_id = 'dlg-' . md5( time() . '-' . $pid );
 		font-size: 15px;
 	}
 	h1, h2, h3, h4 {
-		font-family: 'Roboto Condensed', 'Roboto', 'Helvetica Neue', Helvetica, sans-serif;
+		font-family: 'Roboto Condensed', 'Roboto', 'Helvetica Neue', Helvetica, sans-serif;	 	 	 	 	 		    	
 		font-weight: 700;
 		color: #777771;
 	}

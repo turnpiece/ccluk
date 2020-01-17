@@ -13,7 +13,7 @@
 		<?php esc_html_e( 'Error Fetching Sites', 'shipper' ); ?>
 	</h3>
 	<div class="sui-actions-right">
-		<a href="<?php echo esc_url( admin_url( 'admin.php?page=shipper' ) ); ?>"
+		<a href="<?php echo esc_url( network_admin_url( 'admin.php?page=shipper' ) ); ?>"
 			class="shipper-go-back">
 			<i class="sui-icon-close" aria-hidden="true"></i>
 			<span><?php esc_html_e( 'Cancel', 'shipper' ); ?></span>

@@ -99,7 +99,11 @@ class Sh_X_Frame extends Rule {
 	 * @return mixed|void
 	 */
 	public function process() {
-		$ret = $this->getService()->process();
+		$service           = $this->getService();
+		$service->mode     = HTTP_Helper::retrievePost( 'mode' );
+		$service->values   = HTTP_Helper::retrievePost( 'values' );
+		$service->scenario = HTTP_Helper::retrievePost( 'scenario' );
+		$ret               = $this->getService()->process();
 		if ( is_wp_error( $ret ) ) {
 			wp_send_json_error( [
 				'message' => $ret->get_error_message()

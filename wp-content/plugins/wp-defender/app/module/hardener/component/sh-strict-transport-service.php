@@ -6,6 +6,7 @@
 namespace WP_Defender\Module\Hardener\Component;
 
 use Hammer\Helper\HTTP_Helper;
+use WP_Defender\Behavior\Utils;
 use WP_Defender\Component\Error_Code;
 use WP_Defender\Module\Hardener\IRule_Service;
 use WP_Defender\Module\Hardener\Model\Settings;
@@ -13,19 +14,25 @@ use WP_Defender\Module\Hardener\Rule_Service;
 
 class Sh_Strict_Transport_Service extends Rule_Service implements IRule_Service {
 	const KEY = 'sh_strict_transport';
+	public $hsts;
+	public $include_subdomain;
+	public $hsts_cache_duration;
+	public $scenario;
 
 	/**
 	 * @return bool
 	 */
 	public function check() {
-		$response = wp_remote_head( network_site_url() );
-		if ( is_wp_error( $response ) ) {
+		$settings = Settings::instance();
+
+		$headers = $this->headRequest( network_site_url(), self::KEY );
+		if ( is_wp_error( $headers ) ) {
+			Utils::instance()->log( sprintf( 'Self ping error: %s', $headers->get_error_message() ),'tweaks' );
+
 			return false;
 		}
-		$headers = $response['headers'];
 		if ( isset( $headers['strict-transport-security'] ) ) {
-			$settings = Settings::instance();
-			$data     = $settings->getDValues( self::KEY );
+			$data = $settings->getDValues( self::KEY );
 			if ( $data === null ) {
 				$data = [ 'somewhere' => true ];
 				//someone applied first, we need to get the current settings
@@ -64,6 +71,11 @@ class Sh_Strict_Transport_Service extends Rule_Service implements IRule_Service 
 			return true;
 		}
 
+		$data = $settings->getDValues( self::KEY );
+		if ( is_array( $data ) && isset( $data['hsts_cache_duration'] ) ) {
+			return true;
+		}
+
 		return false;
 	}
 
@@ -71,10 +83,10 @@ class Sh_Strict_Transport_Service extends Rule_Service implements IRule_Service 
 	 * @return bool|\WP_Error
 	 */
 	public function process() {
-		$hsts                = HTTP_Helper::retrievePost( 'hsts_preload' );
-		$include_subdomain   = HTTP_Helper::retrievePost( 'include_subdomain' );
-		$hsts_cache_duration = HTTP_Helper::retrievePost( 'hsts_cache_duration' );
-		$scenario            = HTTP_Helper::retrievePost( 'scenario' );
+		$hsts                = $this->hsts;
+		$include_subdomain   = $this->include_subdomain;
+		$hsts_cache_duration = $this->hsts_cache_duration;
+		$scenario            = $this->scenario;
 		$settings            = Settings::instance();
 		$data                = $settings->getDValues( self::KEY );
 		if ( ! is_array( $data ) ) {

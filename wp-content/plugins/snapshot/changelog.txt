@@ -6,6 +6,11 @@ Change Log:
 ----------------------------------------------------------------------
 
 
+3.2.1.4
+----------------------------------------------------------------------
+- [Fix] Canceling a backup that is in progress will stop all future scheduled backups
+
+
 3.2.1.3
 ----------------------------------------------------------------------
 - [Fix] Resolve issues reported by RIPS
@@ -628,4 +633,4 @@ http://premium.wpmudev.org/forums/topic/need-to-turn-off-zlib-compression-for-it
 - Initial stable release
 
 
-87274-1571425218-au
+87274-1579294400-au
