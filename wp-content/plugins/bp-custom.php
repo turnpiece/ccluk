@@ -8,6 +8,10 @@ class CCLUK_BP_Custom {
 
 	const POSTCODE_FIELD_ID = 2;
 
+	const SLUG = 'ccluk';
+
+	private $members_group_id;
+
 	private $location = array(
 		'parliamentary_constituency',
 		'region',
@@ -50,6 +54,17 @@ class CCLUK_BP_Custom {
 
 		// define the default Profile component
 		define( 'BP_DEFAULT_COMPONENT', 'profile' );
+
+		// populate members group
+		if (! get_option( self::SLUG.'_populate_members_group_completed' ) ) {
+			// cron job to add users to members group
+			add_action( 'populate_members_group_cron_hook', array( $this, 'populate_members_group' ) );
+
+			// check if this job has been scheduled
+			if ( ! wp_next_scheduled( 'populate_members_group_cron_hook' ) ) {
+				wp_schedule_event( time(), 'daily', 'populate_members_group_cron_hook' );
+			}
+		}
 	}
 
 	public function profile_tab_order() {
@@ -94,6 +109,7 @@ class CCLUK_BP_Custom {
 		}
 		return $items;
 	}
+
 	// text at bottom of registration page
 	public function manual_signup_notice() { ?>
 		<div class="manual-registration">
@@ -146,9 +162,68 @@ class CCLUK_BP_Custom {
 
 	// join members group on signup
 	public function join_group_on_signup( $user_id ){
+		$this->join_members_group( $user_id );
+	}
 
-		if ($group_id = $this->get_members_group_id())
-	    	groups_join_group( $group_id, $user_id );
+	public function populate_members_group() {
+
+		self::debug( __FUNCTION__ );
+
+		$id = self::SLUG . '_' . __FUNCTION__;
+
+		$offset = get_option( $id, 0 );
+
+		$users = get_users(
+			array(
+				'role__in' => array( 'contributor', 'author' ),
+				'orderby' => 'registered',
+				'order' => 'ASC',
+				'fields' => array( 'ID' ),
+				'number' => 100,
+				'offset' => (int)$offset
+			)
+		);
+
+		if (count($users)) {
+			foreach ( $users as $user )
+				$this->join_members_group( $user->ID );
+
+			update_option( $id, $offset + count($users) );
+
+		} else {
+			// assume it's all been done
+			add_option( $id.'_completed', time() );
+
+			// remove the cron job
+			$timestamp = wp_next_scheduled( 'populate_members_group_cron_hook' );
+			wp_unschedule_event( $timestamp, 'populate_members_group_cron_hook' );
+		}
+	}
+
+	/**
+	 * join members group
+	 * 
+	 * @param int $user_id
+	 * 
+	 */
+	private function join_members_group( $user_id ) {
+		if ($group_id = $this->get_members_group_id()) {
+			if ( !groups_is_user_member( $user_id, $group_id ) ) {
+				self::debug( __FUNCTION__ . ' ' . $user_id );
+
+				// join them to the group
+				groups_join_group( $group_id, $user_id );
+
+				// delete the activity record
+				bp_activity_delete(
+					array(
+						'type' => 'joined_group',
+						'item_id' => $group_id,
+						'user_id' => $user_id,
+					)
+				);
+			}
+		}
 	}
 
 	/**
@@ -373,11 +448,19 @@ class CCLUK_BP_Custom {
 	}
 
 	private function get_members_group_id() {
-		global $wpdb;
 
-		$bp = buddypress();
+		if (empty($this->members_group_id)) {
+			global $wpdb;
 
-		return $wpdb->get_var( "SELECT `id` FROM `{$bp->groups->table_name}` WHERE `status` = 'public' AND `parent_id` = 0 AND `slug` LIKE '%all-members'" );
+			$bp = buddypress();
+
+			self::vardump( $bp->groups );
+			self::debug( __FUNCTION__ . ' ' . $bp->groups->table_name );
+
+			$this->members_group_id = $wpdb->get_var( "SELECT `id` FROM `{$bp->groups->table_name}` WHERE `status` = 'public' AND `parent_id` = 0 AND `slug` LIKE '%all-members'" );
+		}
+
+		return $this->members_group_id;
 	}
 
 	protected static function debug( $message ) {
