@@ -735,6 +735,14 @@ body #buddypress div.activity-comments form#frm_buddypress-edit-activity .ac-tex
   }
 }
 
+body.buddypress.groups.single-item {
+  &.group-members {
+    #item-body > .item-list-tabs {
+      display: none;
+    }
+  }
+}
+
 /*--------------------------------------------------------------
 4.1 - Search Forms
 --------------------------------------------------------------*/
@@ -1059,33 +1067,38 @@ label[for="groupblog-create-new-no"] {
   display: inline-block;
   display: -webkit-box;
   display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-flex-flow: row wrap;
-  -ms-flex-flow: row wrap;
-  flex-flow: row wrap;
-  /*overflow-x: hidden;*/
-  /* Removed - This cause some content getting hidden on members page */
+  @include display-flex();
+  @include flex-flow( row wrap );
   > li {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-flow: column;
-    -ms-flex-flow: column;
-    flex-flow: column;
-    padding: 0 15px 50px;
-    float: left;
-    width: 25%;
+    @include display-flex();
+    @include flex-flow( column );
+    padding: 0 30px 30px;
     text-align: center;
     overflow: visible;
   }
   &#groups-list {
+    display: block;
+    max-width: $content_w;
+    margin: 0 auto;
+    > li {
+      display: list-item;
+      position: relative;
+      padding-left: 250px;
+      padding-right: 30px;
+      border-bottom: 1px solid $green;
+      margin-bottom: 30px;
+
       .item-avatar {
-          margin-left: 0;
+        width: 140px;
+        margin-left: 0;
+        position: absolute;
+        left: 30px;
       }
+      .item,
+      .info-group {
+        max-width: 450px;
+      }
+    }
   }
 }
 
@@ -1106,7 +1119,7 @@ label[for="groupblog-create-new-no"] {
     overflow: visible;
   }
   .inner-avatar-wrap {
-    max-width: 185px;
+    max-width: 140px;
     width: 100%;
     display: inline-block;
     margin-bottom: 30px;
@@ -1171,7 +1184,7 @@ label[for="groupblog-create-new-no"] {
   }
   .dir-list ul.item-list .inner-avatar-wrap img.avatar {
     margin: 0;
-    width: 185px;
+    width: 140px;
     height: auto;
   }
 }
@@ -1187,7 +1200,6 @@ label[for="groupblog-create-new-no"] {
 
 #buddypress .dir-list ul.item-list {
     .item-title {
-        width: 100%;
         font-size: $font-size-sm;
         margin-bottom: 20px;
         text-align: center;
@@ -1290,7 +1302,8 @@ label[for="groupblog-create-new-no"] {
   z-index: 1;
 }
 
-.author-follow div.generic-button a, #main .inner-avatar-wrap .generic-button a:not(.group-sub):not(.group-subscription-close) {
+.author-follow div.generic-button a, 
+#main .inner-avatar-wrap .generic-button a:not(.group-sub):not(.group-subscription-close) {
   background: transparent;
   color: transparent;
   font-size: 10px;
@@ -1565,8 +1578,8 @@ label[for="groupblog-create-new-no"] {
 
 .bb-group-avatar-wrap .action {
   position: absolute;
-  right: -19px;
-  top: 40px;
+  left: -29px;
+  top: -19px;
   z-index: 2;
 }
 
@@ -1578,15 +1591,18 @@ label[for="groupblog-create-new-no"] {
   height: 32px;
   line-height: 28px;
   position: absolute;
-  right: 10px;
-  top: 44px;
+  left: 0;
+  top: 0;
   width: 32px;
   z-index: 2;
 
   > span {
-      color: rgba(0, 0, 0, 0.3);
-      font-size: 10px;
-      padding-left: 42px;
+      color: $black;
+      background-color: $white_bg;
+      @include border-radius( 5px );
+      font-size: $font-size-tiny;
+      margin-left: 50px;
+      padding: 5px;
       text-transform: uppercase;
       visibility: hidden;
   }
@@ -1595,15 +1611,20 @@ label[for="groupblog-create-new-no"] {
   }
 }
 
-.bb-icon.bb-icon {
+.bb-icon {
   background: $white;
-  border: 2px solid #ddd;
+  color: $green;
+  border: 2px solid;
   border-radius: 100%;
   float: left;
   height: 32px;
   line-height: 28px;
   position: absolute;
   width: 32px;
+
+  &.fa-lock {
+    color: $red;
+  }
 }
 
 .bb-order-by {
@@ -1617,7 +1638,7 @@ label[for="groupblog-create-new-no"] {
 /* SVG clip */
 
 .svgclippaths #buddypress #groups-dir-list ul.item-list .inner-avatar-wrap img.avatar {
-  max-width: 185px;
+  max-width: 140px;
   height: auto;
 }
 
@@ -2488,7 +2509,7 @@ label[for='select-all-notifications'] {
       clear: both;
       display: block;
       font-size: $font-size-sm;
-      margin-bottom: 36px;
+      margin-bottom: $font-size-sm;
       padding: 6px 10px;
       text-transform: uppercase;
       text-align: left;
@@ -2588,7 +2609,6 @@ label[for='select-all-notifications'] {
       font-size: 6px;
       margin-left: 0;
       overflow: visible;
-      @include justify-content( center );
 
       li img.avatar {
         width: 50px;
@@ -3600,7 +3620,7 @@ body:not(.group-members) #buddypress div {
       }
     }
     &#members-list {
-      li div.item-title {
+      li > .item > div.item-title {
         width: 90%;
         margin: 0 5%;
         text-align: center;
@@ -4836,11 +4856,11 @@ body.buddypress {
 
     #buddypress div#item-header {
       div#item-header-avatar {
-        width: 185px;
+        width: 140px;
       }
       #item-header-avatar img.avatar {
-        width: 185px;
-        height: 185px;
+        width: 140px;
+        height: 140px;
       }
     }
 
@@ -5126,7 +5146,6 @@ body.buddypress {
         div.item-title {
           font-weight: 600;
           font-size: $font-size-std;
-          width: 70%;
           margin: 0 0 4px;
           line-height: 1.3;
         }
@@ -5312,7 +5331,12 @@ body.buddypress {
 			.svg-graphic {
 				@include border-radius( 10% );
 			}
-		}
+    }
+    
+    .bb-group-avatar-wrap-mobile,
+    .bb-group-mobile-content {
+      display: none;
+    }
 
 		div#message p {
 			background-color: $green;
@@ -5605,19 +5629,18 @@ body.buddypress {
 	&.members {
 		#buddypress {
 			#members-directory-form.dir-form {
-                ul.item-list {
-                    .item {
-                        .item-title {
-                            width: 100%;
-                            font-size: $font-size-sm;
-                        }
-                    }
-                    .item-avatar {
-                        .inner-avatar-wrap {
-                            margin-bottom: 10px;
-                        }
-                    }
-                }
+        ul.item-list {
+          .item {
+            .item-title {
+              font-size: $font-size-sm;
+            }
+          }
+          .item-avatar {
+            .inner-avatar-wrap {
+              margin-bottom: 10px;
+            }
+          }
+        }
 			}
 		}
 	}

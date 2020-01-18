@@ -887,7 +887,7 @@ input[type="radio"] + span:before, input[type="radio"] + label:before, input[typ
 input[type="checkbox"] + span:before, input[type="checkbox"] + label:before, input[type="checkbox"] + strong:before {
   content: '';
   position: absolute;
-  top: 6px;
+  top: 4px;
   left: -21px;
   z-index: 0;
   width: 9px;

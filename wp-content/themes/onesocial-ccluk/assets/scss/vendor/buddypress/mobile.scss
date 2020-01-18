@@ -1656,7 +1656,7 @@ Directories: Members, Groups, Blogs, Forums
       padding-top: 5px;
     }
     &#item-header div#item-header-avatar {
-      height: 185px;
+      height: 140px;
       margin-bottom: 20px;
     }
   }
@@ -1695,7 +1695,7 @@ Directories: Members, Groups, Blogs, Forums
       width: 100%;
     }
   }
-  .bb-group-avatar-wrap-mobile.bb-group-avatar-wrap-mobile {
+  .bb-group-avatar-wrap-mobile {
     display: block;
   }
 }
@@ -1707,18 +1707,28 @@ Directories: Members, Groups, Blogs, Forums
 }
 
 @media screen and (max-width: 622px) {
-  .bb-group-avatar-wrap-mobile.bb-group-avatar-wrap-mobile {
-    float: none;
-    text-align: center;
-    margin-right: 0;
-  }
-  .boss-group-header .group-header-content {
-    margin-top: 20px;
-    width: 100%;
-    margin-bottom: 0;
-  }
-  .bb-group-mobile-content {
-    width: 100%;
+  &.single-item.groups {
+    .bb-group-avatar-wrap-mobile {
+      float: none;
+      text-align: center;
+      margin-right: 0;
+
+      .svg-graphic {
+        width: 95px;
+        height: 95px;
+      }
+    }
+    .group-header-content {
+      text-align: center;
+    }
+    .boss-group-header .group-header-content {
+      margin-top: 20px;
+      width: 100%;
+      margin-bottom: 0;
+    }
+    .bb-group-mobile-content {
+      width: 100%;
+    }
   }
 }
 
@@ -2706,8 +2716,15 @@ MAXIMUM width of 768 pixels
 
 @media screen and (max-width: 768px) {
   #buddypress {
-    .dir-list ul.item-list > li {
-      width: 50%;
+    .dir-list ul.item-list {
+      &#groups-list > li {
+        padding-left: 180px;
+        padding-right: 10px;
+
+        .item-avatar {
+          left: 0;
+        }
+      }
     }
 
     table#message-threads tr td.thread-info {
@@ -2750,14 +2767,6 @@ MAXIMUM width of 520 pixels
       }
     }
   }
-
-  .single-item.groups {
-    #buddypress {
-      #item-header span.activity {
-        text-shadow: none;
-      }
-    }
-  }
   
   .bb-has-sidebar #buddypress .dir-list.mygroups, 
   .single-item.groups #buddypress .dir-list.group_members, 
@@ -2769,7 +2778,7 @@ MAXIMUM width of 520 pixels
     }
   }
 
-  .bb-group-avatar-wrap-mobile.bb-group-avatar-wrap-mobile {
+  .bb-group-avatar-wrap-mobile {
     float: none;
     text-align: center;
     margin-right: 0;
@@ -2818,7 +2827,7 @@ MAXIMUM width of 480 pixels and MINIMUM width of 380 pixels (phones)
   .single-item.groups #buddypress #item-header span.activity, #item-title-area h1 {
     color: inherit;
   }
-  .bb-group-avatar-wrap-mobile.bb-group-avatar-wrap-mobile {
+  .bb-group-avatar-wrap-mobile {
     margin-bottom: 10px;
     margin-right: 0;
   }

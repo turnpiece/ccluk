@@ -1537,9 +1537,6 @@ Media queries
     float: left;
     clear: left;
   }
-  #buddypress #groups-list .boss-group-content {
-    min-height: 150px;
-  }
 }
 
 @media screen and (min-width: 1200px) {

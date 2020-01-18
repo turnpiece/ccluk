@@ -41,7 +41,6 @@
 			</ul>
 		</div><!-- .item-list-tabs -->
 
-
 		<?php if ( bp_get_current_group_directory_type() ) : ?>
 
 			<?php bp_current_group_directory_type_message() ?>

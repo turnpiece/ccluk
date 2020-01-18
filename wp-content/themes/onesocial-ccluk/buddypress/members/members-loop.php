@@ -31,7 +31,7 @@
 							?>
 
 							<a class="boss-avatar-container" href="<?php bp_member_permalink(); ?>">
-								<?php bp_member_avatar( 'type=full&width=215&height=215' ); ?>
+								<?php bp_member_avatar( 'type=full&width=140&height=140' ); ?>
 							</a>
 						</div>
 					</div>

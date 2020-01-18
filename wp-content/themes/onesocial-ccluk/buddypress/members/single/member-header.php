@@ -17,7 +17,7 @@ $displayed_user	 = bp_displayed_user_id();
 	<div class="item-avatar author-avatar">
 		<div class="inner-avatar-wrap">
 			<a class="boss-avatar-container" href="<?php echo bp_core_get_user_domain( $displayed_user ); ?>">
-				<?php bp_displayed_user_avatar( 'type=full&width=215&height=215' ); ?>
+				<?php bp_displayed_user_avatar( 'type=full&width=140&height=140' ); ?>
 			</a>
 		</div>
 	</div>

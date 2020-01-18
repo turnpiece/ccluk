@@ -5,7 +5,7 @@
 .bb-group-members .avatar {
   border-radius: 100%;
   margin-bottom: 15px;
-  max-width: 185px;
+  max-width: 140px;
 }
 
 .bb-invite-list h4 {
@@ -512,7 +512,7 @@ li {
       font-size: $font-size-sm;
       font-weight: 700;
       color: $green;
-      text-align: left;
+      text-align: center;
     }
   }
   &.bbp-forum-freshness,
@@ -1126,8 +1126,11 @@ td {
 }
 
 #bbpress-forums fieldset.bbp-form {
-  legend, label {
+  legend {
     @include form-label( $font-size-std );
+  } 
+  label {
+    @include form-label( $font-size-sm );
   }
   legend {
     padding: 0 0 12px;

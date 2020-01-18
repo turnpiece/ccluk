@@ -43,7 +43,7 @@
 						?>
 
 						<a class="boss-avatar-container" href="<?php bp_group_member_domain(); ?>">
-							<?php bp_group_member_avatar_thumb( 'type=full&width=215&height=215' ); ?>
+							<?php bp_group_member_avatar_thumb( 'type=full&width=140&height=140' ); ?>
 						</a>
 					</div>
 				</div>

@@ -1174,7 +1174,7 @@ div#register-page #signup_form.standard-form div.submit input {
   color: #fff;
 }
 
-.bb-group-avatar-wrap-mobile, .bb-group-mobile-content, .item-header-mobile {
+.item-header-mobile {
   display: none;
 }
 

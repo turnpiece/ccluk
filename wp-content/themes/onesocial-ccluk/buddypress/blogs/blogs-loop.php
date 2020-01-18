@@ -35,7 +35,7 @@ do_action( 'bp_before_blogs_loop' );
 				<div class="item-avatar blogs-item-avatar">
 					<div class="inner-avatar-wrap">
 						<a class="boss-avatar-container" href="<?php bp_blog_permalink(); ?>">
-							<?php bp_blog_avatar( 'type=full&width=215&height=215' ); ?>
+							<?php bp_blog_avatar( 'type=full&width=140&height=140' ); ?>
 						</a>
 					</div>
 				</div>

@@ -5,7 +5,6 @@
  * @package BuddyPress
  * @subpackage bp-legacy
  */
-
 ?>
 <div class="item-list-tabs no-ajax" id="subnav" aria-label="<?php esc_attr_e( 'Group secondary navigation', 'onesocial' ); ?>" role="navigation">
 	<ul>
