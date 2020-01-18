@@ -4057,9 +4057,13 @@ body:not(.group-members) #buddypress div:not(#item-nav):not(#mobile-item-nav) > 
   vertical-align: middle;
 }
 
-.bp-legacy div#item-body div.item-list-tabs ul li:hover, .bp-legacy div#item-body div.item-list-tabs ul li:active,
-.bp-legacy div#item-body div.item-list-tabs ul li.selected a,
-.bp-legacy div#item-body div.item-list-tabs ul li.current a {
+.bp-legacy div#item-body div.item-list-tabs ul li a:hover, .bp-legacy div#item-body div.item-list-tabs ul li a:active {
+  color: #fff;
+  background-color: #54ae68;
+  border-color: #54ae68;
+}
+
+.bp-legacy div#item-body div.item-list-tabs ul li:hover a, .bp-legacy div#item-body div.item-list-tabs ul li:active a, .bp-legacy div#item-body div.item-list-tabs ul li.selected a, .bp-legacy div#item-body div.item-list-tabs ul li.current a {
   color: #fff;
   background-color: #54ae68;
   border-color: #54ae68;

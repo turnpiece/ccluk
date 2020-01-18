@@ -3408,13 +3408,20 @@ body:not(.group-members) #buddypress div {
               text-align: center;
               vertical-align: middle;
             }
+
+            &:hover,
+            &:active {
+              @include active-tab();
+            }
           }
 
           &:hover,
           &:active,
-          &.selected a,
-          &.current a {
-            @include active-tab();
+          &.selected,
+          &.current {
+            a {
+              @include active-tab();
+            }
           }
 
           li {
