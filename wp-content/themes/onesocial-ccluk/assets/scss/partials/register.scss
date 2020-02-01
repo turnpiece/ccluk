@@ -58,7 +58,7 @@ div#register-page {
     label {
         width: 80px;
         margin-left: 20px;
-        display: inline;
+        display: inline-block;
     }
 
     input#bp-security-check {
@@ -73,36 +73,38 @@ div#register-page {
 
 #buddypress {
     .standard-form {
-        #signup_form {
-            div div.error {
-              background-color: $red;
-              border-radius: 3px;
-              color: $white;
-              margin: 0 0 10px 0;
-              padding: 6px;
-              text-align: center;
-            }
-            .buddyboss-select label {
-              margin-top: 0;
-            }
-            div.submit {
-              float: right;
-            }
+      &#signup_form {
+        div.error {
+          background-color: $red;
+          border-radius: 3px;
+          color: $white;
+          margin: 0 0 10px 0;
+          padding: 6px;
+          text-align: center;
         }
-
-          p.description {
-            color: $gray;
-            margin: 5px 0;
-          }
-          div.submit {
-            clear: both;
-            padding: 5px 0 0 0;
-          }
-
-        div#signup-avatar img {
-          margin: 0 15px 10px 0;
+        .buddyboss-select label {
+          margin-top: 0;
         }
+        div.submit {
+          float: right;
+        }
+      }
+
+      p.description {
+        color: $gray;
+        margin: 5px 0;
+      }
+      
+      div.submit {
+        clear: both;
+        padding: 5px 0 0 0;
+      }
+
+      div#signup-avatar img {
+        margin: 0 15px 10px 0;
+      }
     }
+    
     div#register-page .register-section h4 {
       color: $black;
       margin-bottom: 40px;
@@ -111,41 +113,32 @@ div#register-page {
     }
 }
 
-div#register-page #basic-details-section input {
-  margin-bottom: 30px;
-}
-
-#buddypress div#register-page #basic-details-section input {
-  &.password-entry, &.password-entry-confirm {
-    width: 100%;
-  }
-}
-
-div#register-page #signup_form.standard-form div.submit {
-  float: none !important;
-  margin: 0 auto;
-  input {
-    margin: 0;
-    padding: 17px 22px;
-    font-size: 20px;
-    color: $white;
-  }
-}
-
-.bb-group-avatar-wrap-mobile, .bb-group-mobile-content, .item-header-mobile {
-  display: none;
-}
-
-body.create-blog {
-  label.checkbox {
-    display: block;
-    strong {
-      padding-top: 1px;
+#buddypress div#register-page {
+  #basic-details-section,
+  #profile-details-section {
+    input {
+      &[type="text"],
+      &[type="email"],
+      &[type="password"]{
+        width: 100%;
+      }
     }
   }
-  input[type="text"] {
-    padding-bottom: 6px;
+
+  #signup_form.standard-form div.submit {
+    float: none !important;
+    margin: 0 auto;
+    input {
+      margin: 0;
+      padding: 17px 22px;
+      font-size: 20px;
+      color: $white;
+    }
   }
+}
+
+.item-header-mobile {
+  display: none;
 }
 
 body.register {
@@ -154,19 +147,36 @@ body.register {
       list-style: none;
     }
 
-    .standard-form #blog-details-section [type="text"] {
-      margin-bottom: 16px;
+    .standard-form {
+      &#signup_form {
+        input {
+          &[type="email"],
+          &[type="text"] {
+            width: 100%;
+          }
+        }
+        textarea {
+          width: 100%;
+        }
+      }
+    
+      #blog-details-section [type="text"] {
+        margin-bottom: 16px;
+      }
     }
 
-    fieldset,
-    div#register-page .register-section,
-    div#register-page .security-question-section {
+    fieldset {
     	border: none;
     }
 
     div#register-page {
       text-align: left;
 
+      .register-section,
+      .security-question-section {
+        border: none;
+      }
+      
       p {
         margin: 10px auto 24px;
         max-width: 400px;
@@ -310,12 +320,6 @@ body.register {
           margin-bottom: 40px;
           margin-top: 10px;
           padding-bottom: 15px;
-        }
-        #basic-details-section input {
-          &.password-entry,
-          &.password-entry-confirm {
-            width: 100%;
-          }
         }
       }
     }

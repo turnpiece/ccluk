@@ -4744,6 +4744,51 @@ img#wpstats {
 }
 
 /*--------------------------------------------------------------
+6.0 - Forms
+--------------------------------------------------------------*/
+h2.entry-title .button.bp-title-button {
+  float: right;
+}
+
+#buddypress .standard-form .editfield,
+#buddyboss-media-album-create-form > div,
+#buddypress #create-group-form .editfield {
+  margin-bottom: 30px;
+}
+
+#buddypress .standard-form p.description {
+  font-size: 15px;
+}
+
+#buddypress .standard-form .input-options {
+  padding: 10px 0;
+}
+
+#buddypress .standard-form .input-options label.option-label {
+  font-size: 15px;
+  display: block;
+}
+
+#buddypress .standard-form#sidebar-login-form input[type="text"], #buddypress .standard-form#sidebar-login-form input[type="password"] {
+  padding: 4px;
+  width: 95%;
+}
+
+#buddypress .standard-form#signup_form input[type="email"], #buddypress .standard-form#signup_form input[type="text"] {
+  width: 100%;
+}
+
+#buddypress .standard-form#signup_form textarea {
+  width: 100%;
+}
+
+#buddypress .standard-form div.submit input:hover {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: #333;
+}
+
+/*--------------------------------------------------------------
 8.0 - SI CAPTCHA Anti-Spam
 --------------------------------------------------------------*/
 .captchaSizeDivSmall {
