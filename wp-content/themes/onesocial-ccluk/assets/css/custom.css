@@ -1116,7 +1116,7 @@ div#register-page .manual-registration {
   margin-top: 40px;
 }
 
-#buddypress .standard-form #signup_form div div.error {
+#buddypress .standard-form#signup_form div.error {
   background-color: #e85c41;
   border-radius: 3px;
   color: #fff;
@@ -1125,11 +1125,11 @@ div#register-page .manual-registration {
   text-align: center;
 }
 
-#buddypress .standard-form #signup_form .buddyboss-select label {
+#buddypress .standard-form#signup_form .buddyboss-select label {
   margin-top: 0;
 }
 
-#buddypress .standard-form #signup_form div.submit {
+#buddypress .standard-form#signup_form div.submit {
   float: right;
 }
 
@@ -1159,7 +1159,6 @@ div#register-page .manual-registration {
 #buddypress div#register-page #profile-details-section input[type="email"],
 #buddypress div#register-page #profile-details-section input[type="password"] {
   width: 100%;
-  margin-bottom: 30px;
 }
 
 #buddypress div#register-page #signup_form.standard-form div.submit {
@@ -1182,19 +1181,30 @@ body.register #buddypress div.page ul {
   list-style: none;
 }
 
+body.register .standard-form#signup_form input[type="email"], body.register .standard-form#signup_form input[type="text"] {
+  width: 100%;
+}
+
+body.register .standard-form#signup_form textarea {
+  width: 100%;
+}
+
 body.register .standard-form #blog-details-section [type="text"] {
   margin-bottom: 16px;
 }
 
-body.register fieldset,
-body.register div#register-page .register-section,
-body.register div#register-page .security-question-section {
+body.register fieldset {
   border: none;
 }
 
 body.register div#register-page {
   text-align: left;
   /* newsletter sighup checkbox */
+}
+
+body.register div#register-page .register-section,
+body.register div#register-page .security-question-section {
+  border: none;
 }
 
 body.register div#register-page p {
@@ -1341,10 +1351,6 @@ body.register #buddypress div#register-page .register-section h4 {
   margin-bottom: 40px;
   margin-top: 10px;
   padding-bottom: 15px;
-}
-
-body.register #buddypress div#register-page #basic-details-section input.password-entry, body.register #buddypress div#register-page #basic-details-section input.password-entry-confirm {
-  width: 100%;
 }
 
 body.register .popup-content {
