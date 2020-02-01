@@ -1104,7 +1104,7 @@ div#register-page .security-question-section h4 {
 div#register-page .security-question-section label {
   width: 80px;
   margin-left: 20px;
-  display: inline;
+  display: inline-block;
 }
 
 div#register-page .security-question-section input#bp-security-check {
@@ -1154,40 +1154,28 @@ div#register-page .manual-registration {
   padding-bottom: 15px;
 }
 
-div#register-page #basic-details-section input {
+#buddypress div#register-page #basic-details-section input[type="text"], #buddypress div#register-page #basic-details-section input[type="email"], #buddypress div#register-page #basic-details-section input[type="password"],
+#buddypress div#register-page #profile-details-section input[type="text"],
+#buddypress div#register-page #profile-details-section input[type="email"],
+#buddypress div#register-page #profile-details-section input[type="password"] {
+  width: 100%;
   margin-bottom: 30px;
 }
 
-#buddypress div#register-page #basic-details-section input.password-entry, #buddypress div#register-page #basic-details-section input.password-entry-confirm {
-  width: 100%;
-}
-
-div#register-page #signup_form.standard-form div.submit {
+#buddypress div#register-page #signup_form.standard-form div.submit {
   float: none !important;
   margin: 0 auto;
 }
 
-div#register-page #signup_form.standard-form div.submit input {
+#buddypress div#register-page #signup_form.standard-form div.submit input {
   margin: 0;
   padding: 17px 22px;
   font-size: 20px;
   color: #fff;
 }
 
-.bb-group-avatar-wrap-mobile, .bb-group-mobile-content, .item-header-mobile {
+.item-header-mobile {
   display: none;
-}
-
-body.create-blog label.checkbox {
-  display: block;
-}
-
-body.create-blog label.checkbox strong {
-  padding-top: 1px;
-}
-
-body.create-blog input[type="text"] {
-  padding-bottom: 6px;
 }
 
 body.register #buddypress div.page ul {

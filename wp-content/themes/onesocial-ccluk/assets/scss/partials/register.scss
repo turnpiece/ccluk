@@ -58,7 +58,7 @@ div#register-page {
     label {
         width: 80px;
         margin-left: 20px;
-        display: inline;
+        display: inline-block;
     }
 
     input#bp-security-check {
@@ -111,41 +111,33 @@ div#register-page {
     }
 }
 
-div#register-page #basic-details-section input {
-  margin-bottom: 30px;
-}
-
-#buddypress div#register-page #basic-details-section input {
-  &.password-entry, &.password-entry-confirm {
-    width: 100%;
-  }
-}
-
-div#register-page #signup_form.standard-form div.submit {
-  float: none !important;
-  margin: 0 auto;
-  input {
-    margin: 0;
-    padding: 17px 22px;
-    font-size: 20px;
-    color: $white;
-  }
-}
-
-.bb-group-avatar-wrap-mobile, .bb-group-mobile-content, .item-header-mobile {
-  display: none;
-}
-
-body.create-blog {
-  label.checkbox {
-    display: block;
-    strong {
-      padding-top: 1px;
+#buddypress div#register-page {
+  #basic-details-section,
+  #profile-details-section {
+    input {
+      &[type="text"],
+      &[type="email"],
+      &[type="password"]{
+        width: 100%;
+        margin-bottom: 30px;
+      }
     }
   }
-  input[type="text"] {
-    padding-bottom: 6px;
+
+  #signup_form.standard-form div.submit {
+    float: none !important;
+    margin: 0 auto;
+    input {
+      margin: 0;
+      padding: 17px 22px;
+      font-size: 20px;
+      color: $white;
+    }
   }
+}
+
+.item-header-mobile {
+  display: none;
 }
 
 body.register {
