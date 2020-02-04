@@ -32,7 +32,7 @@ foreach ( $args as $key => $value ) {
 }
 ?>
 
-<div <?php echo implode( ' ', wp_kses_post( $attrs ) ); ?>>
+<div <?php echo implode( ' ', wp_kses_post_deep( $attrs ) ); ?>>
 
 	<?php if ( isset( $message ) && '' !== $message ) { ?>
 		<p><?php echo $message; // phpcs:disable ?></p>

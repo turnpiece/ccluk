@@ -2,6 +2,23 @@
 
 ## Changelog
 
+### 1.6.1, 2019-12-21
+
+* fixed: Toolbar indicator has no visible slash in Sunrise admin theme
+* fixed: undefined function `is_plugin_active_for_network()` (thanks [isabelc](https://github.com/isabelc)!)
+
+### 1.6.0, 2019-12-15
+
+* fixed: undefined index for `$_SERVER['SERVER_NAME']` when emails sent during wp-cli
+* added: indicator setting to show either a Toolbar indicator or a site-wide admin notice when emails are disabled
+* added: filter hook `disable_emails_indicator` for setting the indicator from code; accepts 'none', 'toolbar', 'notice'
+
+### 1.5.0, 2019-11-11
+
+* fixed: PHP notice -- Trying to get property 'ErrorInfo' of non-object
+* changed: requires minimum PHP 5.6; recommend PHP 7.3+
+* added: support for running the plugin as a must-use plugin (mu-plugin)
+
 ### 1.4.0, 2018-11-21
 
 * added: setting to force Events Manager to use `wp_mail()` so that its emails can be disabled

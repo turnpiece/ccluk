@@ -57,17 +57,16 @@
 						<span>{{__("Preload")}}</span>
 					</label>
 					<div v-show="show_hsts_warning" class="sui-notice sui-notice-warning">
-						<p>
-							{{__("Note: Do not include the preload directive by default if you maintain a project that provides HTTPS configuration advice or provides an option to enable HSTS. Be aware that inclusion in the preload list cannot easily be undone. Domains can be removed, but it takes months for a change. Check here for more information.")}}
+						<p v-html="hsts_warning_text">
 						</p>
 					</div>
-					<h5>{{__("SubDomains")}}</h5>
+					<h5>{{__("Subdomains")}}</h5>
 					<p>{{__("If this optional parameter is specified, this rule applies to all of the site's subdomains as well.")}}</p>
 					<label for="include_subdomain" class="sui-checkbox">
 						<input type="checkbox" v-model="include_subdomain" true-value="1" false-value="0"
 						       id="include_subdomain"/>
 						<span aria-hidden="true"></span>
-						<span>{{__("Include SubDomains")}}</span>
+						<span>{{__("Include Subdomains")}}</span>
 					</label>
 					<h5>{{__("Browser Caching")}}</h5>
 					<p>{{__("Choose when the browser should cache and apply the Strict Transport Security policy for.")}}</p>
@@ -129,7 +128,6 @@
 	import helper from '../../../helper/base_hepler';
 	import securityTweakHelper from '../helper/security-tweak-helper';
 
-
 	export default {
 		mixins: [helper, securityTweakHelper],
 		props: ['status', 'title', 'slug', 'errorReason', 'successReason', 'misc'],
@@ -181,6 +179,9 @@
 		computed: {
 			show_hsts_warning: function () {
 				return parseInt(this.hsts_preload) === 1
+			},
+			hsts_warning_text: function () {
+				return this.__('Note: Do not include the preload directive by default if you maintain a project that provides HTTPS configuration advice or provides an option to enable HSTS. Be aware that inclusion in the preload list cannot easily be undone. Domains can be removed, but it takes months for a change. Check <a target="_blank" href="https://hstspreload.org/">here</a> for more information.')
 			}
 		},
 		watch: {

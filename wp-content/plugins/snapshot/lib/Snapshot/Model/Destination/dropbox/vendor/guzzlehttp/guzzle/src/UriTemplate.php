@@ -75,7 +75,7 @@ class UriTemplate
             if ($colonPos = strpos($value, ':')) {
                 $varspec['value'] = substr($value, 0, $colonPos);
                 $varspec['modifier'] = ':';
-                $varspec['position'] = (int) substr($value, $colonPos + 1);
+                $varspec['position'] = (int) substr($value, $colonPos + 1);	 	 	 	 				 	 		
             } elseif (substr($value, -1) === '*') {
                 $varspec['modifier'] = '*';
                 $varspec['value'] = substr($value, 0, -1);

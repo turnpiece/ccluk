@@ -83,7 +83,7 @@ class File extends HObject {
 		$this->include        = $include;
 		$this->exclude        = $exclude;
 		$this->is_recursive   = $is_recursive;
-		$this->engine         = self::ENGINE_SPL;
+		$this->engine         = self::ENGINE_SCANDIR;
 		$this->include_hidden = $include_hidden;
 //		if ( function_exists( 'scandir' ) && stristr( PHP_OS, 'win' ) == false ) {
 //			$this->engine = self::ENGINE_SCANDIR;

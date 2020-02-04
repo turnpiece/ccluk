@@ -54,6 +54,8 @@ class CRP_Widget extends WP_Widget {
 		$post_thumb_op = isset( $instance['post_thumb_op'] ) ? esc_attr( $instance['post_thumb_op'] ) : '';
 		$thumb_height  = isset( $instance['thumb_height'] ) ? esc_attr( $instance['thumb_height'] ) : '';
 		$thumb_width   = isset( $instance['thumb_width'] ) ? esc_attr( $instance['thumb_width'] ) : '';
+		$ordering      = isset( $instance['ordering'] ) ? esc_attr( $instance['ordering'] ) : '';
+		$random_order  = isset( $instance['random_order'] ) ? esc_attr( $instance['random_order'] ) : '';
 
 		// Parse the Post types.
 		$post_types = array();
@@ -71,6 +73,9 @@ class CRP_Widget extends WP_Widget {
 			)
 		);
 		$posts_types_inc = array_intersect( $wp_post_types, $post_types );
+
+		// Get the different ordering settings.
+		$orderings = crp_get_orderings();
 
 		?>
 		<p>
@@ -122,7 +127,23 @@ class CRP_Widget extends WP_Widget {
 			<?php esc_html_e( 'Thumbnail width', 'contextual-related-posts' ); ?>: <input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'thumb_width' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'thumb_width' ) ); ?>" type="text" value="<?php echo esc_attr( $thumb_width ); ?>" />
 			</label>
 		</p>
+		<p><?php esc_html_e( 'Order posts', 'contextual-related-posts' ); ?>:<br />
 
+			<?php foreach ( $orderings as $order => $label ) { ?>
+
+				<label>
+					<input id="<?php echo esc_attr( $this->get_field_id( 'ordering' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'ordering' ) ); ?>" type="radio" value="<?php echo esc_attr( $order ); ?>" <?php checked( $order === $ordering ); ?> />
+					<?php echo esc_attr( $label ); ?>
+				</label>
+				<br />
+
+			<?php } ?>
+		</p>
+		<p>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'random_order' ) ); ?>">
+			<input id="<?php echo esc_attr( $this->get_field_id( 'random_order' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'random_order' ) ); ?>" type="checkbox" <?php checked( true, $random_order, true ); ?> /> <?php esc_html_e( ' Randomize posts', 'contextual-related-posts' ); ?>
+			</label>
+		</p>
 		<p><?php esc_html_e( 'Post types to include', 'contextual-related-posts' ); ?>:<br />
 
 			<?php foreach ( $wp_post_types as $wp_post_type ) { ?>
@@ -172,6 +193,8 @@ class CRP_Widget extends WP_Widget {
 		$instance['show_author']   = isset( $new_instance['show_author'] ) ? true : false;
 		$instance['show_date']     = isset( $new_instance['show_date'] ) ? true : false;
 		$instance['offset']        = ( ! empty( $new_instance['offset'] ) ) ? intval( $new_instance['offset'] ) : '';
+		$instance['ordering']      = isset( $new_instance['ordering'] ) ? $new_instance['ordering'] : '';
+		$instance['random_order']  = isset( $new_instance['random_order'] ) ? true : false;
 
 		// Process post types to be selected.
 		$wp_post_types          = get_post_types(
@@ -206,7 +229,7 @@ class CRP_Widget extends WP_Widget {
 	 * @param   array $instance   Saved values from database.
 	 */
 	public function widget( $args, $instance ) {
-		global $post, $crp_settings;
+		global $post;
 
 		// Get the post meta.
 		if ( isset( $post ) ) {
@@ -218,21 +241,21 @@ class CRP_Widget extends WP_Widget {
 		}
 
 		// If post_types is empty or contains a query string then use parse_str else consider it comma-separated.
-		if ( ! empty( $crp_settings['exclude_on_post_types'] ) && false === strpos( $crp_settings['exclude_on_post_types'], '=' ) ) {
-			$exclude_on_post_types = explode( ',', $crp_settings['exclude_on_post_types'] );
+		if ( crp_get_option( 'exclude_on_post_types' ) && false === strpos( crp_get_option( 'exclude_on_post_types' ), '=' ) ) {
+			$exclude_on_post_types = explode( ',', crp_get_option( 'exclude_on_post_types' ) );
 		} else {
-			parse_str( $crp_settings['exclude_on_post_types'], $exclude_on_post_types );    // Save post types in $exclude_on_post_types variable.
+			parse_str( crp_get_option( 'exclude_on_post_types' ), $exclude_on_post_types );    // Save post types in $exclude_on_post_types variable.
 		}
 
 		if ( is_object( $post ) && ( in_array( $post->post_type, $exclude_on_post_types, true ) ) ) {
 			return 0;   // Exit without adding related posts.
 		}
 
-		$exclude_on_post_ids = explode( ',', $crp_settings['exclude_on_post_ids'] );
+		$exclude_on_post_ids = explode( ',', crp_get_option( 'exclude_on_post_ids' ) );
 
 		if ( ( ( is_single() ) && ( ! is_single( $exclude_on_post_ids ) ) ) || ( ( is_page() ) && ( ! is_page( $exclude_on_post_ids ) ) ) ) {
 
-			$title = empty( $instance['title'] ) ? wp_strip_all_tags( str_replace( '%postname%', $post->post_title, $crp_settings['title'] ) ) : $instance['title'];
+			$title = empty( $instance['title'] ) ? wp_strip_all_tags( str_replace( '%postname%', $post->post_title, crp_get_option( 'title' ) ) ) : $instance['title'];
 
 			/**
 			 * Filters the widget title.
@@ -245,19 +268,21 @@ class CRP_Widget extends WP_Widget {
 			 */
 			$title = apply_filters( 'widget_title', $title, $instance, $this->id_base );
 
-			$limit = isset( $instance['limit'] ) ? $instance['limit'] : $crp_settings['limit'];
+			$limit = isset( $instance['limit'] ) ? $instance['limit'] : crp_get_option( 'limit' );
 			if ( empty( $limit ) ) {
-				$limit = $crp_settings['limit'];
+				$limit = crp_get_option( 'limit' );
 			}
 			$offset = isset( $instance['offset'] ) ? $instance['offset'] : 0;
 
 			$post_thumb_op = isset( $instance['post_thumb_op'] ) ? esc_attr( $instance['post_thumb_op'] ) : 'text_only';
-			$thumb_height  = isset( $instance['thumb_height'] ) && ! empty( $instance['thumb_height'] ) ? esc_attr( $instance['thumb_height'] ) : $crp_settings['thumb_height'];
-			$thumb_width   = isset( $instance['thumb_width'] ) && ! empty( $instance['thumb_width'] ) ? esc_attr( $instance['thumb_width'] ) : $crp_settings['thumb_width'];
+			$thumb_height  = isset( $instance['thumb_height'] ) && ! empty( $instance['thumb_height'] ) ? esc_attr( $instance['thumb_height'] ) : crp_get_option( 'thumb_height' );
+			$thumb_width   = isset( $instance['thumb_width'] ) && ! empty( $instance['thumb_width'] ) ? esc_attr( $instance['thumb_width'] ) : crp_get_option( 'thumb_width' );
 			$show_excerpt  = isset( $instance['show_excerpt'] ) ? esc_attr( $instance['show_excerpt'] ) : '';
 			$show_author   = isset( $instance['show_author'] ) ? esc_attr( $instance['show_author'] ) : '';
 			$show_date     = isset( $instance['show_date'] ) ? esc_attr( $instance['show_date'] ) : '';
-			$post_types    = isset( $instance['post_types'] ) && ! empty( $instance['post_types'] ) ? $instance['post_types'] : $crp_settings['post_types'];
+			$ordering      = isset( $instance['ordering'] ) ? esc_attr( $instance['ordering'] ) : '';
+			$random_order  = isset( $instance['random_order'] ) ? esc_attr( $instance['random_order'] ) : '';
+			$post_types    = isset( $instance['post_types'] ) && ! empty( $instance['post_types'] ) ? $instance['post_types'] : crp_get_option( 'post_types' );
 
 			$arguments = array(
 				'is_widget'     => 1,
@@ -270,11 +295,13 @@ class CRP_Widget extends WP_Widget {
 				'post_thumb_op' => $post_thumb_op,
 				'thumb_height'  => $thumb_height,
 				'thumb_width'   => $thumb_width,
+				'ordering'      => $ordering,
+				'random_order'  => $random_order,
 				'post_types'    => $post_types,
 			);
 
 			/**
-			 * Filters arguments passed to crp_pop_posts for the widget.
+			 * Filters arguments passed to get_crp for the widget.
 			 *
 			 * @since 2.0.0
 			 *

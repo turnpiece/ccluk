@@ -257,6 +257,7 @@ function ct_ajax_hook($message_obj = false, $additional = false)
 	
     // Go out because of not spam data
     $skip_post = array(
+        'apbct_js_keys__get',  // Our service code
         'gmaps_display_info_window',  // Geo My WP pop-up windows.
         'gmw_ps_display_info_window',  // Geo My WP pop-up windows.
         'the_champ_user_auth',  // Super Socializer
@@ -283,13 +284,16 @@ function ct_ajax_hook($message_obj = false, $additional = false)
 		'check_retina_image_availability', //There are too many ajax requests from mobile
 	    'uap_check_reg_field_ajax', // Ultimate Affiliate Pro. Form validation.
 	    'edit-comment', // Edit comments by admin ??? that shouldn't happen
+	    'formcraft3_save_form_progress', // FormCraft – Contact Form Builder for WordPress. Save progress.
+	    'wpdmpp_save_settings', // PayPal save settings.
+        'give_process_donation', // GiveWP will be checked by feedback_general_contact_form
     );
-	
+    
     // Skip test if
     if( !$apbct->settings['general_contact_forms_test'] || // Test disabled
         !apbct_is_user_enable($apbct->user) || // User is admin, editor, author
 	    // (function_exists('get_current_user_id') && get_current_user_id() != 0) || // Check with default wp_* function if it's admin
-	    ($apbct->settings['protect_logged_in'] && ($apbct->user instanceof WP_User) && $apbct->user->ID !== 0 ) || // Logged in user
+	    (!$apbct->settings['protect_logged_in'] && ($apbct->user instanceof WP_User) && $apbct->user->ID !== 0 ) || // Logged in user
         apbct_exclusions_check__url() || // url exclusions
         (isset($_POST['action']) && in_array($_POST['action'], $skip_post)) || // Special params
 	    (isset($_GET['action'])  && in_array($_GET['action'], $skip_post)) ||  // Special params

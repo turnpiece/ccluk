@@ -77,7 +77,18 @@ class Main extends Controller {
 			return;
 		}
 
-		$arr = apply_filters( 'ip_lockout_default_whitelist_ip', array(
+		$arr = $this->defaultWhiteListIps();
+
+		if ( in_array( $ip, $arr ) ) {
+			return;
+		}
+
+		$loginListener    = new Login_Listener();
+		$notfoundListener = new Notfound_Listener();
+	}
+
+	private function defaultWhiteListIps() {
+		return apply_filters( 'ip_lockout_default_whitelist_ip', array(
 			'192.241.148.185',
 			'104.236.132.222',
 			'192.241.140.159',
@@ -86,16 +97,13 @@ class Main extends Controller {
 			'54.197.28.242',
 			'54.221.174.186',
 			'54.236.233.244',
+			'18.204.159.253',
+			'66.135.60.59',
+			'34.196.51.17',
+			'52.57.5.20',
 			'127.0.0.1',
 			array_key_exists( 'SERVER_ADDR', $_SERVER ) ? $_SERVER['SERVER_ADDR'] : ( isset( $_SERVER['LOCAL_ADDR'] ) ? $_SERVER['LOCAL_ADDR'] : null )
 		) );
-
-		if ( in_array( $ip, $arr ) ) {
-			return;
-		}
-
-		$loginListener    = new Login_Listener();
-		$notfoundListener = new Notfound_Listener();
 	}
 
 	/**
@@ -164,7 +172,12 @@ class Main extends Controller {
 			die;
 		}
 
-		$ip = $this->getUserIp();
+		$ip  = $this->getUserIp();
+		$arr = $this->defaultWhiteListIps();
+
+		if ( in_array( $ip, $arr ) ) {
+			return;
+		}
 		if ( $settings->isWhitelist( $ip ) ) {
 			return;
 		} elseif ( $settings->isBlacklist( $ip ) ) {

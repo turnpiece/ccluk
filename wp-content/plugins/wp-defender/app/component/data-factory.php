@@ -119,7 +119,7 @@ class Data_Factory {
 				'lastLockout' => $summaryData['lastLockout']
 			],
 			'notification' => $settings->login_lockout_notification && $settings->ip_lockout_notification,
-			'enabled'      => $settings->login_protection && $settings->ip_lockout_notification
+			'enabled'      => $settings->login_protection || $settings->detect_404
 		];
 	}
 

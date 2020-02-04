@@ -1,8 +1,8 @@
 <?php
 /**
- * Uninstalls WPForms.
+ * Uninstall WPForms.
  *
- * Removes:
+ * Remove:
  * - Entries table
  * - Entry Meta table
  * - Entry fields table
@@ -14,11 +14,7 @@
  * - WPForms term meta
  * - WPForms Uploads
  *
- * @package    WPForms
- * @author     WPForms
- * @since      1.4.5
- * @license    GPL-2.0+
- * @copyright  Copyright (c) 2018, WPForms LLC
+ * @since 1.4.5
  *
  * @var WP_Filesystem_Base $wp_filesystem
  */

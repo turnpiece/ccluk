@@ -8,7 +8,7 @@
 ?>
 
 <div class="sui-row">
-	<div class="sui-col">
+	<div class="sui-col sui-col-md-4">
 		<div class="sui-form-field shipper-bulk-actions-field">
 			<div class="sui-with-button">
 				<select class="sui-select-sm" name="shipper-bulk-action">

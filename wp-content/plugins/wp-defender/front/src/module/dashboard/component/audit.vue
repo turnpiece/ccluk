@@ -41,7 +41,7 @@
                 </div>
             </div>
         </div>
-        <div class="sui-box-footer">
+        <div v-if="enabled===true" class="sui-box-footer">
             <div class="sui-actions-left">
                 <a :href="adminUrl('admin.php?page=wdf-logging')"
                    class="sui-button sui-button-ghost">

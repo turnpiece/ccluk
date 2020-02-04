@@ -5,13 +5,16 @@
  *
  * This page is shown when the plugin is activated.
  *
- * @package    WPForms
- * @author     WPForms
- * @since      1.0.0
- * @license    GPL-2.0+
- * @copyright  Copyright (c) 2016, WPForms LLC
+ * @since 1.0.0
  */
 class WPForms_Welcome {
+
+	/**
+	 * Hidden welcome page slug.
+	 *
+	 * @since 1.5.6
+	 */
+	const SLUG = 'wpforms-getting-started';
 
 	/**
 	 * Primary class constructor.
@@ -19,6 +22,26 @@ class WPForms_Welcome {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
+
+		add_action( 'plugins_loaded', array( $this, 'hooks' ) );
+	}
+
+	/**
+	 * Register all WP hooks.
+	 *
+	 * @since 1.5.6
+	 */
+	public function hooks() {
+
+		// If user is in admin ajax or doing cron, return.
+		if ( wp_doing_ajax() || wp_doing_cron() ) {
+			return;
+		}
+
+		// If user cannot manage_options, return.
+		if ( ! wpforms_current_user_can() ) {
+			return;
+		}
 
 		add_action( 'admin_menu', array( $this, 'register' ) );
 		add_action( 'admin_head', array( $this, 'hide_menu' ) );
@@ -39,8 +62,8 @@ class WPForms_Welcome {
 		add_dashboard_page(
 			esc_html__( 'Welcome to WPForms', 'wpforms-lite' ),
 			esc_html__( 'Welcome to WPForms', 'wpforms-lite' ),
-			apply_filters( 'wpforms_welcome_cap', 'manage_options' ),
-			'wpforms-getting-started',
+			apply_filters( 'wpforms_welcome_cap', wpforms_get_capability_manage_options() ),
+			self::SLUG,
 			array( $this, 'output' )
 		);
 	}
@@ -53,7 +76,8 @@ class WPForms_Welcome {
 	 * @since 1.0.0
 	 */
 	public function hide_menu() {
-		remove_submenu_page( 'index.php', 'wpforms-getting-started' );
+
+		remove_submenu_page( 'index.php', self::SLUG );
 	}
 
 	/**
@@ -89,7 +113,7 @@ class WPForms_Welcome {
 
 		if ( ! $upgrade ) {
 			// Initial install.
-			wp_safe_redirect( admin_url( 'index.php?page=wpforms-getting-started' ) );
+			wp_safe_redirect( admin_url( 'index.php?page=' . self::SLUG ) );
 			exit;
 		}
 	}

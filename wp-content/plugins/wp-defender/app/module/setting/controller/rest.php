@@ -64,6 +64,11 @@ class Rest extends Controller {
 		delete_transient( 'wp_defender_free_is_activated' );
 		delete_transient( 'wp_defender_is_activated' );
 
+		delete_site_option( 'wp_defender_free_is_activated' );
+		delete_site_option( 'wp_defender_is_activated' );
+		delete_option( 'wp_defender_free_is_activated' );
+		delete_option( 'wp_defender_is_activated' );
+
 		$res = array(
 			'message' => __( "Your settings have been reset.", wp_defender()->domain )
 		);

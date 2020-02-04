@@ -5,6 +5,7 @@
 
 namespace WP_Defender\Module\Hardener\Component;
 
+use WP_Defender\Behavior\Utils;
 use WP_Defender\Module\Hardener\IRule_Service;
 use WP_Defender\Module\Hardener\Model\Settings;
 use WP_Defender\Module\Hardener\Rule_Service;
@@ -36,37 +37,32 @@ class PHP_Version_Service extends Rule_Service implements IRule_Service {
 	}
 
 	protected function queryVersion() {
-		$lastCheck = get_site_transient( 'defender_last_check_php_versions' );
-		if ( ! $lastCheck || strtotime( '+24 hours', $lastCheck ) < time() ) {
-			$html = wp_remote_get( 'http://php.net/supported-versions.php' );
-			if ( is_wp_error( $html ) ) {
-				delete_site_transient( 'defender_last_check_php_versions' );
-
-				return false;
+		$infos         = [
+			'7.2' => [ '30 Nov 2019', '30 Nov 2020' ],
+			'7.3' => [ '6 Dec 2020', '6 Dec 2021' ],
+			'7.4' => [ '28 Nov 2021', '28 Nov 2022' ]
+		];
+		$minVersion    = null;
+		$stableVersion = null;
+		foreach ( $infos as $php => $dates ) {
+			list( $active, $security ) = $dates;
+			//get the one still have security updates
+			if ( $minVersion == null && strtotime( $active ) < time() && strtotime( $security ) > time() ) {
+				$minVersion = $php;
 			}
-			if ( class_exists( '\DOMDocument' ) ) {
-				$dom = new \DOMDocument;
-				libxml_use_internal_errors( true );
-				$dom->loadHTML( $html['body'] );
-				$finder       = new \DOMXPath( $dom );
-				$classname    = "security";
-				$securityNode = $finder->query( "//*[contains(@class, '$classname')]/td[1]/a" );
-				$securityNode = $securityNode->item( 0 )->nodeValue;
-				$classname    = "stable";
-				$lastStable   = $finder->query( "//*[contains(@class, '$classname')][2]/td[1]/a" );;
-				$lastStable                   = $lastStable->item( 0 )->nodeValue;
-				$settings                     = Settings::instance();
-				$settings->stable_php_version = $lastStable;
-				$settings->min_php_version    = $securityNode;
-				$settings->save();
-				set_site_transient( 'defender_last_check_php_versions', time(), 60 * 60 * 24 );
-			} else {
-				//do it manually
-				$settings                     = Settings::instance();
-				$settings->stable_php_version = 7.3;
-				$settings->min_php_version    = 7.1;
-				$settings->save();
+			//if no min available, we pick the current active
+			if ( $minVersion == null && strtotime( $active ) > time() ) {
+				$minVersion = $php;
+			}
+			//pick the nearest the min version, we want stable, not features
+			if ( $stableVersion == null && $minVersion != null && version_compare( $php, $minVersion, '>' ) ) {
+				$stableVersion = $php;
 			}
 		}
+
+		$settings                     = Settings::instance();
+		$settings->stable_php_version = $stableVersion;
+		$settings->min_php_version    = $minVersion;
+		$settings->save();
 	}
 }

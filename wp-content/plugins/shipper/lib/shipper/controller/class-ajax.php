@@ -53,4 +53,38 @@ abstract class Shipper_Controller_Ajax extends Shipper_Controller {
 		);
 	}
 
+	/**
+	 * Adds an AJAX action handler to an action
+	 *
+	 * @since v1.1
+	 *
+	 * @param string $action Action suffix to bind to.
+	 * @param callable $handler Handler method to bind.
+	 * @param bool $is_nopriv Is the action wide-open (defaults to false).
+	 */
+	public function add_handler( $action, $handler, $is_nopriv = false ) {
+		return add_action(
+			$this->get_handler_action( $action, $is_nopriv ),
+			$handler
+		);
+	}
+
+	/**
+	 * Gets an AJAX handler action from action sufix
+	 *
+	 * @param string $action Action suffix.
+	 * @param bool $is_nopriv Is the action wide-open (defaults to false).
+	 *
+	 * @return string
+	 */
+	public function get_handler_action( $action, $is_nopriv = false ) {
+		$obj = strtolower( get_class( $this ) );
+		$class = strtolower( __CLASS__ );
+		$infix = preg_replace( '/^' . preg_quote( $class, '/' ) . '/', '', $obj );
+		$str = (bool) $is_nopriv
+			? 'wp_ajax_nopriv_shipper%1$s_%2$s'
+			: 'wp_ajax_shipper%1$s_%2$s';
+		return sprintf( $str, $infix, $action );
+	}
+
 }

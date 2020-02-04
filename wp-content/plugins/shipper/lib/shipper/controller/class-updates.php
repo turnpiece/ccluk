@@ -95,9 +95,9 @@ class Shipper_Controller_Updates extends Shipper_Controller {
 					$this->get_rounded_percentage( $percentage )
 				)
 				->set_timestamp( time() )
-				->save()
-			;
+				->save();
 		}
+
 		return $status;
 	}
 
@@ -111,7 +111,7 @@ class Shipper_Controller_Updates extends Shipper_Controller {
 	 * @return bool
 	 */
 	public function send_updates_complete( $migration ) {
-		$data = $migration->get_data();
+		$data    = $migration->get_data();
 		$success = empty( $data['errors'] );
 
 		if ( empty( $success ) ) {
@@ -120,13 +120,13 @@ class Shipper_Controller_Updates extends Shipper_Controller {
 
 		$task = Shipper_Model_Stored_Migration::TYPE_EXPORT === $migration->get_type()
 			? new Shipper_Task_Export_All
-			: new Shipper_Task_Import_All
-		;
+			: new Shipper_Task_Import_All;
+
 		$status = $this->send_update(
 			$migration, 100, $this->get_updater_file_name( $migration, $task )
 		);
-		$cname = $this->get_data_model_class_name();
-		$model = new $cname;
+		$cname  = $this->get_data_model_class_name();
+		$model  = new $cname;
 		$model->clear()->save();
 
 		return $status;
@@ -143,8 +143,8 @@ class Shipper_Controller_Updates extends Shipper_Controller {
 		$status = $this->send_update(
 			$migration, 0, ''
 		);
-		$cname = $this->get_data_model_class_name();
-		$model = new $cname;
+		$cname  = $this->get_data_model_class_name();
+		$model  = new $cname;
 		$model->clear()->save();
 
 		return $status;
@@ -158,15 +158,18 @@ class Shipper_Controller_Updates extends Shipper_Controller {
 	 * @return bool
 	 */
 	public function has_updated_with_percentage( $percentage ) {
-		if ( 0 === $percentage ) { return false; }
+		if ( 0 === $percentage ) {
+			return false;
+		}
 
 		$rounded = $this->get_rounded_percentage( $percentage );
-		$cname = $this->get_data_model_class_name();
-		$model = new $cname;
+		$cname   = $this->get_data_model_class_name();
+		$model   = new $cname;
 		if ( $model->is_expired() ) {
 			$model->clear()->save();
 		}
 		$updated = $model->get( Shipper_Model_Stored_Updates::KEY_PERCENT, 0 );
+
 		return $updated >= $rounded;
 	}
 
@@ -204,6 +207,7 @@ class Shipper_Controller_Updates extends Shipper_Controller {
 		if ( $this->_updater_task_class_name && class_exists( $this->_data_model_class_name ) ) {
 			$cname = $this->_updater_task_class_name;
 		}
+
 		return $cname;
 	}
 
@@ -230,6 +234,7 @@ class Shipper_Controller_Updates extends Shipper_Controller {
 		if ( $this->_data_model_class_name && class_exists( $this->_data_model_class_name ) ) {
 			$cname = $this->_data_model_class_name;
 		}
+
 		return $cname;
 	}
 
@@ -243,14 +248,14 @@ class Shipper_Controller_Updates extends Shipper_Controller {
 	 * @return bool
 	 */
 	public function send_update( $migration, $status, $filename ) {
-		$cname = $this->get_updater_task_class_name();
-		$task = new $cname;
-		$status = $task->apply(array(
+		$cname  = $this->get_updater_task_class_name();
+		$task   = new $cname;
+		$status = $task->apply( array(
 			'domain' => $migration->get_source(),
 			'status' => $status,
-			'type' => $migration->get_type(),
-			'file' => $filename,
-		));
+			'type'   => $migration->get_type(),
+			'file'   => $filename,
+		) );
 
 
 		if ( $task->has_errors() ) {
@@ -276,6 +281,7 @@ class Shipper_Controller_Updates extends Shipper_Controller {
 		if ( Shipper_Model_Stored_Migration::TYPE_EXPORT === $migration->get_type() ) {
 			return basename( $task->get_archive_path( $migration->get_destination() ) );
 		}
+
 		return Shipper_Task_Import::ARCHIVE;
 	}
 }

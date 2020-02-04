@@ -80,7 +80,7 @@
 													<div class="sui-col"
 													     v-show="parseInt(model.report_frequency) !== 1">
 														<label class="sui-label">{{__("Day of the week")}}</label>
-														<select class="jquery-select" name="report_day"
+														<select class="jquery-select sui-select" name="report_day" id="report_day"
 														        v-model="model.report_day">
 															<option v-for="day in misc.days_of_weeks"
 															        :value="day.toLowerCase()">{{day}}
@@ -89,7 +89,7 @@
 													</div>
 													<div class="sui-col">
 														<label class="sui-label">{{__("Time of day")}}</label>
-														<select class="jquery-select" name="report_time"
+														<select class="jquery-select sui-select" name="report_time" id="report_time"
 														        v-model="model.report_time">
 															<option v-for="(time,index) in misc.times_of_days"
 															        :value="index">{{time}}

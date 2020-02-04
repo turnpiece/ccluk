@@ -94,7 +94,33 @@ abstract class Shipper_Model_Dumped {
 		$allowed_mb = (float) $allowed_mb;
 		if ( empty( $allowed_mb ) ) { $allowed_mb = 50; }
 
-		$allowed_bytesize = $allowed_mb * 1024 * 1024;
+		/**
+		 * Maximum cumulative chunk size, in bytes
+		 *
+		 * @since v1.1
+		 *
+		 * @param int $allowed_bytesize Maximum bytes.
+		 *
+		 * @return int
+		 */
+		$allowed_bytesize = apply_filters(
+			'shipper_dumped_statements_max_bytes',
+			$allowed_mb * 1024 * 1024
+		);
+
+		/**
+		 * Maximum number of dumped items to return
+		 *
+		 * @since v1.1
+		 *
+		 * @param int $limit Maximum number of items.
+		 *
+		 * @return int
+		 */
+		$limit = apply_filters(
+			'shipper_dumped_statements_limit',
+			$limit
+		);
 
 		$count = 0;
 		$queue_size = 0;

@@ -25,10 +25,10 @@ class Shipper_Task_Export_Files extends Shipper_Task_Export {
 	public function apply( $args = array() ) {
 		$migration = new Shipper_Model_Stored_Migration;
 
-		$storage = new Shipper_Model_Stored_Filelist;
+		$storage      = new Shipper_Model_Stored_Filelist;
 		$this->_files = new Shipper_Helper_Fs_List( $storage );
-		$dumped = new Shipper_Model_Dumped_Filelist;
-		$large = new Shipper_Model_Dumped_Largelist;
+		$dumped       = new Shipper_Model_Dumped_Filelist;
+		$large        = new Shipper_Model_Dumped_Largelist;
 
 		if ( $this->_files->is_done() ) {
 			return true;
@@ -46,10 +46,14 @@ class Shipper_Task_Export_Files extends Shipper_Task_Export {
 		);
 
 		foreach ( $this->_files->get_files() as $item ) {
-			if ( empty( $item['path'] ) ) { continue; }
+			if ( empty( $item['path'] ) ) {
+				continue;
+			}
 
 			$source = $this->get_source_path( $item['path'], $migration );
-			if ( empty( $source ) ) { continue; }
+			if ( empty( $source ) ) {
+				continue;
+			}
 
 			$destination = $this->get_destination_path( $item['path'] );
 
@@ -71,9 +75,9 @@ class Shipper_Task_Export_Files extends Shipper_Task_Export {
 			}
 
 			$target_line = array(
-				'source' => $source,
+				'source'      => $source,
 				'destination' => $destination,
-				'size' => $item['size'],
+				'size'        => $item['size'],
 			);
 			if ( $item['size'] > Shipper_Model_Stored_Migration::get_file_size_threshold() ) {
 				$large->add_statement( $target_line );
@@ -104,12 +108,10 @@ class Shipper_Task_Export_Files extends Shipper_Task_Export {
 			return $path;
 		}
 
-		if ( Shipper_Helper_Fs_Path::is_wp_config( $path ) ) {
-			$model = new Shipper_Model_Stored_Options;
-			if ( $model->get( Shipper_Model_Stored_Options::KEY_SKIPCONFIG ) ) {
-				Shipper_Helper_Log::write( 'Skipping wp-config in export' );
-				return false;
-			}
+		if ( Shipper_Helper_Fs_Path::is_wp_config( $path ) && ! $this->is_config_included() ) {
+			Shipper_Helper_Log::write( 'Skipping wp-config in export' );
+
+			return false;
 		}
 
 		$replacer = new Shipper_Helper_Replacer_File( Shipper_Helper_Codec::ENCODE );
@@ -117,6 +119,17 @@ class Shipper_Task_Export_Files extends Shipper_Task_Export {
 		$replacer->add_codec( new Shipper_Helper_Codec_Paths );
 
 		return $replacer->transform( $path );
+	}
+
+	/**
+	 * Checks whether to include the wp-config in gathered files list
+	 *
+	 * @return bool
+	 */
+	public function is_config_included() {
+		$model = new Shipper_Model_Stored_Options;
+
+		return $model->get( Shipper_Model_Stored_Options::KEY_SKIPCONFIG );
 	}
 
 	/**
@@ -137,9 +150,10 @@ class Shipper_Task_Export_Files extends Shipper_Task_Export {
 	 */
 	public function get_total_steps() {
 		if ( ! isset( $this->_files ) ) {
-			$storage = new Shipper_Model_Stored_Filelist;
+			$storage      = new Shipper_Model_Stored_Filelist;
 			$this->_files = new Shipper_Helper_Fs_List( $storage );
 		}
+
 		return $this->_files->get_total_steps();
 	}
 
@@ -150,9 +164,10 @@ class Shipper_Task_Export_Files extends Shipper_Task_Export {
 	 */
 	public function get_current_step() {
 		if ( ! isset( $this->_files ) ) {
-			$storage = new Shipper_Model_Stored_Filelist;
+			$storage      = new Shipper_Model_Stored_Filelist;
 			$this->_files = new Shipper_Helper_Fs_List( $storage );
 		}
+
 		return $this->_files->get_current_step();
 	}
 
@@ -163,11 +178,11 @@ class Shipper_Task_Export_Files extends Shipper_Task_Export {
 	 */
 	public function get_work_description() {
 		if ( ! isset( $this->_files ) ) {
-			$storage = new Shipper_Model_Stored_Filelist;
+			$storage      = new Shipper_Model_Stored_Filelist;
 			$this->_files = new Shipper_Helper_Fs_List( $storage );
 		}
 		$files = $this->_files->get_files();
-		$size = array_sum( wp_list_pluck( $files, 'size' ) );
+		$size  = array_sum( wp_list_pluck( $files, 'size' ) );
 
 		$current = '';
 		if ( ! empty( $size ) ) {
@@ -176,6 +191,7 @@ class Shipper_Task_Export_Files extends Shipper_Task_Export {
 				count( $files ), size_format( $size )
 			);
 		}
+
 		return sprintf(
 			__( 'Gather files for upload %s', 'shipper' ),
 			$current

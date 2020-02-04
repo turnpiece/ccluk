@@ -7,11 +7,7 @@ use WPForms\Integrations\IntegrationInterface;
 /**
  * Site Health WPForms Info.
  *
- * @since      1.5.5
- * @author     WPForms
- * @package    WPForms\Integrations\SiteHealth
- * @license    GPL-2.0+
- * @copyright  Copyright (c) 2019, WPForms LLC
+ * @since 1.5.5
  */
 class SiteHealth implements IntegrationInterface {
 

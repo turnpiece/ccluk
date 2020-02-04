@@ -20,16 +20,16 @@ class Shipper_Helper_Codec_Define extends Shipper_Helper_Codec {
 	 */
 	public function get_replacements_list() {
 		$defines = array(
-			'DB_NAME' => '{{SHIPPER_DB_NAME}}',
-			'DB_HOST' => '{{SHIPPER_DB_HOST}}',
-			'DB_USER' => '{{SHIPPER_DB_USER}}',
+			'DB_NAME'     => '{{SHIPPER_DB_NAME}}',
+			'DB_HOST'     => '{{SHIPPER_DB_HOST}}',
+			'DB_USER'     => '{{SHIPPER_DB_USER}}',
 			'DB_PASSWORD' => '{{SHIPPER_DB_PASSWORD}}',
 		);
 
 		// Multisite.
 		// Handles the simplest case - MS <=> MS migrations.
 		$defines['DOMAIN_CURRENT_SITE'] = '{{SHIPPER_DOMAIN_CURRENT_SITE}}';
-		$defines['PATH_CURRENT_SITE'] = '{{SHIPPER_PATH_CURRENT_SITE}}';
+		$defines['PATH_CURRENT_SITE']   = '{{SHIPPER_PATH_CURRENT_SITE}}';
 
 		return $defines;
 	}
@@ -46,6 +46,7 @@ class Shipper_Helper_Codec_Define extends Shipper_Helper_Codec {
 	 */
 	public function is_original_present( $original ) {
 		$present = defined( $original );
+
 		return $present;
 	}
 
@@ -57,7 +58,8 @@ class Shipper_Helper_Codec_Define extends Shipper_Helper_Codec {
 	 * @return mixed
 	 */
 	public function get_original_value( $original ) {
-		$value = constant( $original );
+		$value = defined( $original ) ? constant( $original ) : '';
+
 		return $value;
 	}
 
@@ -74,19 +76,19 @@ class Shipper_Helper_Codec_Define extends Shipper_Helper_Codec {
 	public function get_matcher( $string, $value = '' ) {
 		$value = ! empty( $value )
 			? preg_quote( $value, '/' )
-			: '[^\'"]*?'
-		;
+			: '[^\'"]*?';
+
 		// @codingStandardsIgnoreStart
 		return '(?:^|\b)define\s?\(\s*' .
-			'(?:\'|")' .
-				preg_quote( $string, '/' ) .
-			'(?:\'|")' .
-			'\s*,\s*' .
-			'(?:\'|")' .
-				'(' . $value . ')' .
-			'(?:\'|")' .
-			'\s*' .
-		'\)\s*;\s*(?:\b|$)';
+		       '(?:\'|")' .
+		       preg_quote( $string, '/' ) .
+		       '(?:\'|")' .
+		       '\s*,\s*' .
+		       '(?:\'|")' .
+		       '(' . $value . ')' .
+		       '(?:\'|")' .
+		       '\s*' .
+		       '\)\s*;\s*(?:\b|$)';
 		// @codingStandardsIgnoreEnd
 	}
 

@@ -1,8 +1,27 @@
 Plugin Name: WP Defender
 Author: Hoang Ngo, Aaron Edwards
-Tested up to: 4.7.4
+Tested up to: 5.3
 
 Change Log:
+
+2.2.4 - 2019-16-01
+----------------------------------------------------------------------
+- Fix: Security tweaks self ping cause performance issues.
+
+2.2.3 - 2019-27-11
+----------------------------------------------------------------------
+- Improvement: Increased the frequency of Security Tweak notifications from daily to weekly.
+- Fix: Two-Factor activate/deactivate not working as expected.
+- Fix: Defender IP Lockouts was blocking Hub services.
+- Fix: Error when bulk deletes lockout logs, without selecting any.
+- Fix: Active Translation in General Settings was not using the language that had been set.
+- Fix: The first time you setup the Blacklist location, it doesn't save.
+- Fix: Security Keys tweaks showing decimals in status.
+- Fix: Enforcing Security Header tweaks revert when you refresh the page.
+- Fix: Lockout duration in email notification now reflects the right setting instead of always in seconds.
+- Fix: Missing logs from the  Audit logging screen.
+- Remove: WordPress REST API security tweak. This feature was causing many sites to break basic functionality so we've decided to remove it.
+- Other minor enhancements and fixes
 
 2.2.1 - 2019-04-10
 ----------------------------------------------------------------------
@@ -306,4 +325,4 @@ Fixed: Scanning was sometimes slow or getting stuck
 - First release
 
 
-87274-1571425147-au
+87274-1579293150-au

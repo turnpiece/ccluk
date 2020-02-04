@@ -295,7 +295,7 @@ class Main extends \WP_Defender\Controller {
 			foreach ( $params as $key => $val ) {
 				$email_content = str_replace( '{' . $key . '}', $val, $email_content );
 			}
-			wp_mail( $email, sprintf( esc_html__( "Here's what's been happening at %s", wp_defender()->domain ), network_site_url() ), $email_content, $headers );
+			wp_mail( $email, sprintf( __( "Here's what's been happening at %s", wp_defender()->domain ), network_site_url() ), $email_content, $headers );
 		}
 
 		$settings->lastReportSent = time();

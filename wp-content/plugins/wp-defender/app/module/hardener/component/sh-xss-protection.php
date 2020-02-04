@@ -28,10 +28,11 @@ class Sh_XSS_Protection extends Rule {
 	public function getMiscData() {
 		$settings = Settings::instance();
 		$data     = $settings->getDValues( self::KEY );
-
-		return [
+		$miscs    = [
 			'mode' => is_array( $data ) && isset( $data['mode'] ) ? $data['mode'] : 'sanitize',
 		];
+
+		return $miscs;
 	}
 
 	/**
@@ -104,7 +105,10 @@ class Sh_XSS_Protection extends Rule {
 	 * @return mixed|void
 	 */
 	public function process() {
-		$ret = $this->getService()->process();
+		$service           = $this->getService();
+		$service->mode     = HTTP_Helper::retrievePost( 'mode' );
+		$service->scenario = HTTP_Helper::retrievePost( 'scenario' );
+		$ret               = $service->process();
 		if ( is_wp_error( $ret ) ) {
 			wp_send_json_error( [ 'message' => $ret->get_error_message() ] );
 		}

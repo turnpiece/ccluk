@@ -27,6 +27,18 @@ class Apache_Service extends Rule_Service implements IRule_Service {
 	private $new_htconfig = array();
 
 	/**
+	 * The htaccess inside wp-content
+	 * @var string
+	 */
+	public $contentdir_path = null;
+
+	/**
+	 * The htaccess path inside wp-includes
+	 * @var null
+	 */
+	public $includedir_path = null;
+
+	/**
 	 * @return bool
 	 */
 	public function check() {
@@ -55,269 +67,119 @@ class Apache_Service extends Rule_Service implements IRule_Service {
 		return true;
 	}
 
-	/**
-	 * @return bool|\WP_Error
-	 */
-	private function protectIncludesDir() {
-		$htPath = ABSPATH . WPINC . '/' . '.htaccess';
-
-		if ( ! is_file( $htPath ) ) {
-			if ( file_put_contents( $htPath, '', LOCK_EX ) === false ) {
+	public function protectContentDir() {
+		$ht_path = $this->contentdir_path;
+		if ( $ht_path == null ) {
+			$ht_path = WP_CONTENT_DIR . '/' . '.htaccess';
+		}
+		if ( ! file_exists( $ht_path ) ) {
+			if ( file_put_contents( $ht_path, '', LOCK_EX ) === false ) {
 				return new \WP_Error( Error_Code::NOT_WRITEABLE,
-					sprintf( __( "The file %s is not writable", wp_defender()->domain ), $htPath ) );
+					sprintf( __( "The file %s is not writable", wp_defender()->domain ), $ht_path ) );
 			}
-		} elseif ( ! is_writeable( $htPath ) ) {
+		} elseif ( ! is_writeable( $ht_path ) ) {
 			return new \WP_Error( Error_Code::NOT_WRITEABLE,
-				sprintf( __( "The file %s is not writable", wp_defender()->domain ), $htPath ) );
-		}
-		$htConfig = file( $htPath );
-		$deny     = $this->generateHtAccessRule( false );
-		$allow    = $this->generateHtAccessRule( true );
-		$default  = array(
-			PHP_EOL . '## WP Defender - Protect PHP Executed ##' . PHP_EOL,
-			'<Files *.php>' . PHP_EOL .
-			$deny .
-			'</Files>' . PHP_EOL,
-			'<Files wp-tinymce.php>' . PHP_EOL .
-			$allow .
-			'</Files>' . PHP_EOL,
-			'<Files ms-files.php>' . PHP_EOL .
-			$allow .
-			'</Files>' . PHP_EOL,
-			'## WP Defender - End ##' . PHP_EOL
-		);
-		/*$status   = wp_remote_head( network_site_url() . 'wp-includes', array( 'user-agent' => $_SERVER['HTTP_USER_AGENT'] ) );
-		if ( 200 == wp_remote_retrieve_response_code( $status ) ) {
-			$default[] = 'Options -Indexes' . PHP_EOL;
-		}*/
-		$containsSearch = array_diff( $default, $htConfig );
-		if ( count( $containsSearch ) == 0 || ( count( $containsSearch ) == count( $default ) ) ) {
-			//append this
-			$htConfig = array_merge( $htConfig, array( implode( '', $default ) ) );
-			file_put_contents( $htPath, implode( '', $htConfig ), LOCK_EX );
-		} elseif ( count( $containsSearch ) != count( $htConfig ) ) {
-			//corrupt
-			$htContent = file_get_contents( $htPath );
-			preg_match( '/## WP Defender(.*?)## WP Defender - End ##/s', $htContent, $matches );
-			if ( count( $matches ) ) {
-				//remove the whole parts as it partial done
-				$htContent = str_replace( $matches[0], '', $htContent );
-				$htConfig  = explode( PHP_EOL, $htContent );
-				$htConfig  = array_merge( $htConfig, array( implode( '', $default ) ) );
-				file_put_contents( $htPath, implode( '', $htConfig ), LOCK_EX );
-			}
+				sprintf( __( "The file %s is not writable", wp_defender()->domain ), $ht_path ) );
 		}
 
-		return true;
+		$exists_rules = $this->cleanupOldRules( file_get_contents( $ht_path ) );
+		$rule         = [
+			'## WP Defender - Protect PHP Executed ##',
+			'<Files *.php>',
+			$this->generateHtAccessRule( false ),
+			'</Files>',
+		];
+		if ( ! empty( $this->exclude_file_paths ) ) {
+			foreach ( $this->exclude_file_paths as $file_path ) {
+				$rule[] = sprintf( "<Files %s>", sanitize_file_name( $file_path ) );
+				$rule[] = $this->generateHtAccessRule( true );
+				$rule[] = "</Files>";
+			}
+		}
+		$rule[] = '## WP Defender - End ##';
+		file_put_contents( $ht_path, $exists_rules . implode( PHP_EOL, $rule ), LOCK_EX );
 	}
 
-	/**
-	 * @return bool|\WP_Error
-	 */
-	private function protectContentDir() {
-		$htPath = WP_CONTENT_DIR . '/' . '.htaccess';
-		if ( ! file_exists( $htPath ) ) {
-			if ( file_put_contents( $htPath, '', LOCK_EX ) === false ) {
+	public function protectIncludesDir() {
+		$ht_path = $this->includedir_path;
+		if ( $ht_path == null ) {
+			$ht_path = ABSPATH . WPINC . '/' . '.htaccess';
+		}
+		if ( ! is_file( $ht_path ) ) {
+			if ( file_put_contents( $ht_path, '', LOCK_EX ) === false ) {
 				return new \WP_Error( Error_Code::NOT_WRITEABLE,
-					sprintf( __( "The file %s is not writable", wp_defender()->domain ), $htPath ) );
+					sprintf( __( "The file %s is not writable", wp_defender()->domain ), $ht_path ) );
 			}
-		} elseif ( ! is_writeable( $htPath ) ) {
+		} elseif ( ! is_writeable( $ht_path ) ) {
 			return new \WP_Error( Error_Code::NOT_WRITEABLE,
-				sprintf( __( "The file %s is not writable", wp_defender()->domain ), $htPath ) );
+				sprintf( __( "The file %s is not writable", wp_defender()->domain ), $ht_path ) );
 		}
-		$htConfig = file( $htPath );
-		$deny     = $this->generateHtAccessRule( false );
-		$allow    = $this->generateHtAccessRule( true );
-		$default  = array(
-			PHP_EOL . '## WP Defender - Protect PHP Executed ##' . PHP_EOL,
-			'<Files *.php>' . PHP_EOL .
-			$deny .
-			'</Files>' . PHP_EOL,
-			'## WP Defender - End ##' . PHP_EOL
-		);
+		$exists_rules = $this->cleanupOldRules( file_get_contents( $ht_path ) );
 
-		if ( ! empty( $this->exclude_file_paths ) ) {
-
-			$custom_exclude = array();
-
-			foreach ( $this->exclude_file_paths as $file_path ) {
-				$file_path = trim( preg_replace( '/\s\s+/', ' ', $file_path ) ); //remove trailing new lines
-				if ( ! empty( $file_path ) ) {
-					$custom_exclude[] = '<Files ' . $file_path . '> ' . PHP_EOL .
-					                    $allow .
-					                    '</Files>' . PHP_EOL;
-				}
-			}
-
-			if ( ! empty( $custom_exclude ) ) {
-				array_splice( $default, 2, 0, $custom_exclude ); //Add the excludes before the ## WP Defender - End ##
-				$this->new_htconfig = $default; //Set the new array structure for when we want to remove
-			}
-		}
-
-		$containsSearch = array_diff( $default, $htConfig );
-		if ( count( $containsSearch ) == 0 || ( count( $containsSearch ) == count( $default ) ) ) {
-			//append this
-			$htConfig = array_merge( $htConfig, array( implode( '', $default ) ) );
-			file_put_contents( $htPath, implode( '', $htConfig ), LOCK_EX );
-		}
-
-		return true;
+		$rule = [
+			'## WP Defender - Protect PHP Executed ##',
+			'<Files *.php>',
+			$this->generateHtAccessRule( false ),
+			'</Files>',
+			'<Files wp-tinymce.php>',
+			$this->generateHtAccessRule( true ),
+			'</Files>',
+			'<Files ms-files.php>',
+			$this->generateHtAccessRule( true ),
+			'</Files>',
+			'## WP Defender - End ##',
+		];
+		//no exclude here
+		file_put_contents( $ht_path, $exists_rules . implode( PHP_EOL, $rule ), LOCK_EX );
 	}
 
 	/**
 	 * Protect uploads directory
-	 * Sometimes a user will set a custom upload directory
-	 *
-	 * @return bool|\WP_Error
+	 * This only when user provide a custom uploads
 	 */
 	public function protectUploadsDir() {
 		if ( defined( 'UPLOADS' ) ) {
-			$htPath = ABSPATH . UPLOADS . '/' . '.htaccess';
-			if ( ! file_exists( $htPath ) ) {
-				if ( ! file_put_contents( $htPath, '', LOCK_EX ) ) {
-					return new \WP_Error( Error_Code::NOT_WRITEABLE,
-						sprintf( __( "The file %s is not writable", wp_defender()->domain ), $htPath ) );
-				}
-			} elseif ( ! is_writeable( $htPath ) ) {
-				return new \WP_Error( Error_Code::NOT_WRITEABLE,
-					sprintf( __( "The file %s is not writable", wp_defender()->domain ), $htPath ) );
-			}
-			$htConfig = file( $htPath );
-			$deny     = $this->generateHtAccessRule( false );
-			$allow    = $this->generateHtAccessRule( true );
-			$default  = array(
-				PHP_EOL . '## WP Defender - Protect PHP Executed ##' . PHP_EOL,
-				'<Files *.php>' . PHP_EOL .
-				$deny .
-				'</Files>' . PHP_EOL,
-				'## WP Defender - End ##' . PHP_EOL
-			);
-
-			if ( ! empty( $this->exclude_file_paths ) ) {
-
-				$custom_exclude = array();
-
-				foreach ( $this->exclude_file_paths as $file_path ) {
-					$file_path = trim( preg_replace( '/\s\s+/', ' ', $file_path ) ); //remove trailing new lines
-					if ( ! empty( $file_path ) ) {
-						$custom_exclude[] = '<Files ' . $file_path . '> ' . PHP_EOL .
-						                    $allow .
-						                    '</Files>' . PHP_EOL;
-					}
-				}
-
-				if ( ! empty( $custom_exclude ) ) {
-					array_splice( $default, 2, 0, $custom_exclude ); //Add the excludes before the ## WP Defender - End ##
-					$this->new_htconfig = $default; //Set the new array structure for when we want to remove
-				}
-			}
-
-			$containsSearch = array_diff( $default, $htConfig );
-			if ( count( $containsSearch ) == 0 || ( count( $containsSearch ) == count( $default ) ) ) {
-				//append this
-				$htConfig = array_merge( $htConfig, array( implode( '', $default ) ) );
-				file_put_contents( $htPath, implode( '', $htConfig ), LOCK_EX );
-			}
+			$this->contentdir_path = ABSPATH . UPLOADS . '/' . '.htaccess';
+			//should be same with protect content dirs
+			$this->protectContentDir();
 		}
-
-		return true;
 	}
 
 	public function unProtectContentDir() {
-		$htPath = WP_CONTENT_DIR . '/' . '.htaccess';
-		if ( ! is_writeable( $htPath ) ) {
+		$ht_path = $this->contentdir_path;
+		if ( $ht_path == null ) {
+			$ht_path = WP_CONTENT_DIR . '/' . '.htaccess';
+		}
+		if ( ! file_exists( $ht_path ) ) {
+			//do nothing
+			return;
+		}
+		if ( ! is_writeable( $ht_path ) ) {
 			return new \WP_Error( Error_Code::NOT_WRITEABLE,
-				sprintf( __( "The file %s is not writable", wp_defender()->domain ), $htPath ) );
+				sprintf( __( "The file %s is not writable", wp_defender()->domain ), $ht_path ) );
 		}
-		$htConfig = file_get_contents( $htPath );
-		$deny     = $this->generateHtAccessRule( false );
-		$default  = array(
-			PHP_EOL . '## WP Defender - Protect PHP Executed ##' . PHP_EOL,
-			'<Files *.php>' . PHP_EOL .
-			$deny .
-			'</Files>' . PHP_EOL,
-			'## WP Defender - End ##' . PHP_EOL
-		);
-
-		if ( ! empty( $this->new_htconfig ) ) {
-			$default = $this->new_htconfig;
-		}
-
-		//Introduced regex
-		preg_match_all( '/## WP Defender(.*?)## WP Defender - End ##/s', $htConfig, $matches );
-		if ( is_array( $matches ) && count( $matches ) > 0 ) {
-			$htConfig = str_replace( implode( '', $matches[0] ), '', $htConfig );
-		} else {
-			$htConfig = str_replace( implode( '', $default ), '', $htConfig );
-		}
-		$htConfig = trim( $htConfig );
-		file_put_contents( $htPath, $htConfig, LOCK_EX );
+		$ht_config = $this->cleanupOldRules( file_get_contents( $ht_path ) );
+		$ht_config = trim( $ht_config );
+		file_put_contents( $ht_path, trim( $ht_config ), LOCK_EX );
 	}
 
 	public function unProtectIncludeDir() {
-		$htPath = ABSPATH . WPINC . '/' . '.htaccess';
-		if ( ! is_writeable( $htPath ) ) {
+		$ht_path = $this->includedir_path;
+		if ( $ht_path == null ) {
+			$ht_path = ABSPATH . WPINC . '/' . '.htaccess';
+		}
+		if ( ! is_writeable( $ht_path ) ) {
 			return new \WP_Error( Error_Code::NOT_WRITEABLE,
-				sprintf( __( "The file %s is not writable", wp_defender()->domain ), $htPath ) );
+				sprintf( __( "The file %s is not writable", wp_defender()->domain ), $ht_path ) );
 		}
-		$htConfig = file_get_contents( $htPath );
-		$deny     = $this->generateHtAccessRule( false );
-		$allow    = $this->generateHtAccessRule( true );
-		$default  = array(
-			PHP_EOL . '## WP Defender - Protect PHP Executed ##' . PHP_EOL,
-			'<Files *.php>' . PHP_EOL .
-			$deny .
-			'</Files>' . PHP_EOL,
-			'<Files wp-tinymce.php>' . PHP_EOL .
-			$allow .
-			'</Files>' . PHP_EOL,
-			'<Files ms-files.php>' . PHP_EOL .
-			$allow .
-			'</Files>' . PHP_EOL,
-			'## WP Defender - End ##' . PHP_EOL
-		);
-
-		preg_match_all( '/## WP Defender(.*?)## WP Defender - End ##/s', $htConfig, $matches );
-		if ( is_array( $matches ) && count( $matches ) > 0 ) {
-			$htConfig = str_replace( implode( '', $matches[0] ), '', $htConfig );
-		} else {
-			$htConfig = str_replace( implode( '', $default ), '', $htConfig );
-		}
-		$htConfig = trim( $htConfig );
-		file_put_contents( $htPath, $htConfig, LOCK_EX );
+		$ht_config = $this->cleanupOldRules( file_get_contents( $ht_path ) );
+		file_put_contents( $ht_path, trim( $ht_config ), LOCK_EX );
 	}
 
 	public function unProtectUploadDir() {
 		if ( defined( 'UPLOADS' ) ) {
-			$htPath = ABSPATH . UPLOADS . '/' . '.htaccess';
-			if ( ! is_writeable( $htPath ) ) {
-				return new \WP_Error( Error_Code::NOT_WRITEABLE,
-					sprintf( __( "The file %s is not writable", wp_defender()->domain ), $htPath ) );
-			}
-			$htConfig = file_get_contents( $htPath );
-			$deny     = $this->generateHtAccessRule( false );
-			$default  = array(
-				PHP_EOL . '## WP Defender - Protect PHP Executed ##' . PHP_EOL,
-				'<Files *.php>' . PHP_EOL .
-				$deny .
-				'</Files>' . PHP_EOL,
-				'## WP Defender - End ##' . PHP_EOL
-			);
-
-			if ( ! empty( $this->new_htconfig ) ) {
-				$default = $this->new_htconfig;
-			}
-
-			//Introduced regex
-			preg_match_all( '/## WP Defender(.*?)## WP Defender - End ##/s', $htConfig, $matches );
-			if ( is_array( $matches ) && count( $matches ) > 0 ) {
-				$htConfig = str_replace( implode( '', $matches[0] ), '', $htConfig );
-			} else {
-				$htConfig = str_replace( implode( '', $default ), '', $htConfig );
-			}
-			$htConfig = trim( $htConfig );
-			file_put_contents( $htPath, $htConfig, LOCK_EX );
+			$this->contentdir_path = ABSPATH . UPLOADS . '/' . '.htaccess';
+			$this->unProtectContentDir();
 		}
 	}
 
@@ -385,6 +247,25 @@ class Apache_Service extends Rule_Service implements IRule_Service {
 	}
 
 	/**
+	 * @param $exists_rules
+	 *
+	 * @return string|string[]|null
+	 */
+	private function cleanupOldRules( $exists_rules ) {
+		$pattern = '/(## WP Defender - Protect PHP Executed ##((.|\n)*)## WP Defender - End ##)/';
+		if ( preg_match( $pattern, $exists_rules ) ) {
+			//replace it
+			$exists_rules = preg_replace( $pattern, '', $exists_rules );
+		}
+		$exists_rules = trim( $exists_rules );
+		if ( strlen( $exists_rules ) ) {
+			$exists_rules .= PHP_EOL;
+		}
+
+		return $exists_rules;
+	}
+
+	/**
 	 * Return the correct apache rules for allow/deny
 	 *
 	 * @return String
@@ -393,16 +274,16 @@ class Apache_Service extends Rule_Service implements IRule_Service {
 		$version = Utils::instance()->determineApacheVersion();
 		if ( floatval( $version ) >= 2.4 ) {
 			if ( $allow ) {
-				return 'Require all granted' . PHP_EOL;
+				return 'Require all granted';
 			} else {
-				return 'Require all denied' . PHP_EOL;
+				return 'Require all denied';
 			}
 		} else {
 			if ( $allow ) {
-				return 'Allow from all' . PHP_EOL;
+				return 'Allow from all';
 			} else {
 				return 'Order allow,deny' . PHP_EOL .
-				       'Deny from all' . PHP_EOL;
+				       'Deny from all';
 			}
 		}
 	}

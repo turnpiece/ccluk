@@ -33,18 +33,6 @@ class Auth extends Base {
 	private $client;
 
 	/**
-	 * Initialize the class and register hooks.
-	 *
-	 * @since 3.2.0
-	 *
-	 * @return void
-	 */
-	protected function __construct() {
-		// Initialize new client.
-		$this->client( true );
-	}
-
-	/**
 	 * Initialize all sub classes.
 	 *
 	 * @since 3.2.0
@@ -72,7 +60,7 @@ class Auth extends Base {
 	 */
 	public function client( $new = false ) {
 		// If requested for new instance.
-		if ( $new ) {
+		if ( $new || ! $this->client instanceof Google_Client ) {
 			// Set new instance.
 			$this->client = new Google_Client();
 
@@ -263,7 +251,12 @@ class Auth extends Base {
 		}
 
 		// Remove Google login data.
-		$updated = beehive_analytics()->settings->update_group( [], 'google_login', $network );
+		$logout = beehive_analytics()->settings->update_group( [], 'google_login', $network );
+
+		// Remove the account id.
+		if ( $logout ) {
+			beehive_analytics()->settings->update( 'account_id', '', 'google', $network );
+		}
 
 		// Delete profiles from cache.
 		Cache::delete_cache( 'google_profiles', true, $network );
@@ -278,8 +271,8 @@ class Auth extends Base {
 		 *
 		 * @since 3.2.0
 		 */
-		do_action( 'beehive_google_auth_logout', $updated );
+		do_action( 'beehive_google_auth_logout', $logout );
 
-		return $updated;
+		return $logout;
 	}
 }

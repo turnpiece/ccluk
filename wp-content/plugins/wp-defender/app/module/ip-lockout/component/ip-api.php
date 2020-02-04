@@ -162,13 +162,18 @@ class IP_API extends Component {
 	 */
 	public static function getCurrentCountry() {
 		$settings = Settings::instance();
+		if ( php_sapi_name() === 'cli' ) {
+			//never catch if from cli
+			return false;
+		}
 		if ( ! $settings->isGeoDBDownloaded() ) {
 			return false;
 		}
-		if ( php_sapi_name() === 'cli' ) {
+		$geoIP = new GeoIp( $settings->geoIP_db );
+		$ip    = Utils::instance()->getUserIp();
+		if ( ! filter_var( $ip, FILTER_VALIDATE_IP ) ) {
 			return false;
 		}
-		$geoIP   = new GeoIp( $settings->geoIP_db );
 		$country = $geoIP->ipToCountry( Utils::instance()->getUserIp() );
 
 		return $country;

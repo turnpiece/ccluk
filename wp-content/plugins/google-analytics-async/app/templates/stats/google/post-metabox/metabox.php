@@ -75,10 +75,10 @@ $bottom_row = [
 				$trend_value = '<i class="sui-icon-pause"></i>';
 			} elseif ( is_numeric( $stats[ $key ]['trend'] ) && $stats[ $key ]['trend'] > 0 ) {
 				$trend_class = 'up';
-				$trend_value = abs( $stats[ $key ]['trend'] );
+				$trend_value = abs( $stats[ $key ]['trend'] ) . '%';
 			} elseif ( is_numeric( $stats[ $key ]['trend'] ) && $stats[ $key ]['trend'] < 0 ) {
 				$trend_class = 'down';
-				$trend_value = abs( $stats[ $key ]['trend'] );
+				$trend_value = abs( $stats[ $key ]['trend'] ) . '%';
 			} elseif ( is_numeric( $stats[ $key ]['trend'] ) && 0 === (int) $stats[ $key ]['trend'] ) {
 				$trend_class = 'equal';
 				$trend_value = '<i class="sui-icon-pause"></i>';
@@ -134,10 +134,10 @@ $bottom_row = [
 				$trend_value = '<i class="sui-icon-pause"></i>';
 			} elseif ( is_numeric( $stats[ $key ]['trend'] ) && $stats[ $key ]['trend'] > 0 ) {
 				$trend_class = 'up';
-				$trend_value = abs( $stats[ $key ]['trend'] );
+				$trend_value = abs( $stats[ $key ]['trend'] ) . '%';
 			} elseif ( is_numeric( $stats[ $key ]['trend'] ) && $stats[ $key ]['trend'] < 0 ) {
 				$trend_class = 'down';
-				$trend_value = abs( $stats[ $key ]['trend'] );
+				$trend_value = abs( $stats[ $key ]['trend'] ) . '%';
 			} elseif ( is_numeric( $stats[ $key ]['trend'] ) && 0 === (int) $stats[ $key ]['trend'] ) {
 				$trend_class = 'equal';
 				$trend_value = '<i class="sui-icon-pause"></i>';

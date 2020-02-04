@@ -17,7 +17,6 @@ class CPTP_Module_Permalink extends CPTP_Module {
 	 * Add Filter Hooks.
 	 */
 	public function add_hook() {
-
 		add_filter(
 			'post_type_link',
 			array( $this, 'post_type_link' ),
@@ -61,15 +60,19 @@ class CPTP_Module_Permalink extends CPTP_Module {
 		 */
 		global $wp_rewrite;
 
-		if ( ! $wp_rewrite->permalink_structure ) {
+		if ( ! $wp_rewrite->using_permalinks() ) {
 			return $post_link;
 		}
 
-		$draft_or_pending = isset( $post->post_status ) && in_array( $post->post_status, array(
-			'draft',
-			'pending',
-			'auto-draft',
-		), true );
+		$draft_or_pending = isset( $post->post_status ) && in_array(
+			$post->post_status,
+			array(
+				'draft',
+				'pending',
+				'auto-draft',
+			),
+			true
+		);
 		if ( $draft_or_pending && ! $leavename ) {
 			return $post_link;
 		}
@@ -137,7 +140,7 @@ class CPTP_Module_Permalink extends CPTP_Module {
 			$categories = get_the_category( $post->ID );
 			if ( $categories ) {
 				$categories = CPTP_Util::sort_terms( $categories );
-
+				// phpcs:ignore
 				$category_object = apply_filters( 'post_link_category', $categories[0], $categories, $post );
 				$category_object = get_term( $category_object, 'category' );
 				$category        = $category_object->slug;
@@ -206,7 +209,6 @@ class CPTP_Module_Permalink extends CPTP_Module {
 
 		// %taxnomomy% -> parent/child
 		foreach ( $taxonomies as $taxonomy => $objects ) {
-
 			if ( false !== strpos( $permalink, '%' . $taxonomy . '%' ) ) {
 				$terms = get_the_terms( $post_id, $taxonomy );
 
@@ -214,7 +216,7 @@ class CPTP_Module_Permalink extends CPTP_Module {
 					$parents  = array_map( array( __CLASS__, 'get_term_parent' ), $terms );
 					$newTerms = array();
 					foreach ( $terms as $key => $term ) {
-						if ( ! in_array( $term->term_id, $parents , true ) ) {
+						if ( ! in_array( $term->term_id, $parents, true ) ) {
 							$newTerms[] = $term;
 						}
 					}
@@ -273,7 +275,7 @@ class CPTP_Module_Permalink extends CPTP_Module {
 		 */
 		global $wp_rewrite;
 
-		if ( ! $wp_rewrite->permalink_structure ) {
+		if ( ! $wp_rewrite->using_permalinks() ) {
 			return $link;
 		}
 
@@ -302,7 +304,6 @@ class CPTP_Module_Permalink extends CPTP_Module {
 
 		if ( empty( $post_type->_builtin ) ) {
 			if ( strpos( $permalink, '%postname%' ) < strrpos( $permalink, '%post_id%' ) && false === strrpos( $link, 'attachment/' ) ) {
-
 				$link = str_replace( $post->post_name, 'attachment/' . $post->post_name, $link );
 			}
 		}
@@ -330,7 +331,7 @@ class CPTP_Module_Permalink extends CPTP_Module {
 		 */
 		global $wp_rewrite;
 
-		if ( ! $wp_rewrite->permalink_structure ) {
+		if ( ! $wp_rewrite->using_permalinks() ) {
 			return $termlink;
 		}
 

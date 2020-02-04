@@ -43,7 +43,7 @@ class Change_Admin extends Rule {
 	}
 
 	public function revert() {
-		// TODO: Implement revert() method.
+
 	}
 
 	/**

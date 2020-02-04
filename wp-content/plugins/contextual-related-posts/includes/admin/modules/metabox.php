@@ -103,6 +103,13 @@ function crp_call_meta_box() {
 	}
 	$manual_related_array = explode( ',', $manual_related );
 
+	// Keyword - word or phrase.
+	if ( isset( $crp_post_meta['keyword'] ) ) {
+		$keyword = $crp_post_meta['keyword'];
+	} else {
+		$keyword = '';
+	}
+
 	?>
 	<p>
 		<label for="crp_disable_here"><strong><?php esc_html_e( 'Disable Related Posts display:', 'contextual-related-posts' ); ?></strong></label>
@@ -116,6 +123,12 @@ function crp_call_meta_box() {
 		<input type="checkbox" id="crp_exclude_this_post" name="crp_exclude_this_post" <?php checked( 1, $exclude_this_post, true ); ?> />
 		<br />
 		<em><?php esc_html_e( 'If this is checked, then this post will be excluded from the popular posts list.', 'contextual-related-posts' ); ?></em>
+	</p>
+
+	<p>
+		<label for="keyword"><strong><?php esc_html_e( 'Keyword:', 'contextual-related-posts' ); ?></strong></label>
+		<textarea class="large-text" cols="50" rows="5" id="crp_keyword" name="crp_keyword"><?php echo esc_textarea( stripslashes( $keyword ) ); ?></textarea>
+		<em><?php esc_html_e( 'Enter either a word or a phrase that will be used to find related posts. If entered, the plugin will continue to search the `post_title` and `post_content` fields but will use this keyword instead of the values of the title and content of this post.', 'contextual-related-posts' ); ?></em>
 	</p>
 
 	<p>
@@ -217,16 +230,20 @@ function crp_save_meta_box( $post_id ) {
 	}
 
 	// Disable posts.
-	if ( isset( $_POST['crp_disable_here'] ) ) { // Input var okay.
+	if ( isset( $_POST['crp_disable_here'] ) ) {
 		$crp_post_meta['crp_disable_here'] = 1;
 	} else {
 		$crp_post_meta['crp_disable_here'] = 0;
 	}
 
-	if ( isset( $_POST['crp_exclude_this_post'] ) ) { // Input var okay.
+	if ( isset( $_POST['crp_exclude_this_post'] ) ) {
 		$crp_post_meta['exclude_this_post'] = 1;
 	} else {
 		$crp_post_meta['exclude_this_post'] = 0;
+	}
+
+	if ( isset( $_POST['crp_keyword'] ) ) {
+		$crp_post_meta['keyword'] = sanitize_text_field( wp_unslash( $_POST['crp_keyword'] ) );
 	}
 
 	// Save Manual related posts.
@@ -259,12 +276,6 @@ function crp_save_meta_box( $post_id ) {
 		delete_post_meta( $post_id, 'crp_post_meta' );  // Delete the post meta if no options are set.
 	} else {
 		update_post_meta( $post_id, 'crp_post_meta', $crp_post_meta_filtered );
-	}
-
-	// Clear cache of current post.
-	$default_meta_keys = crp_cache_get_keys();
-	foreach ( $default_meta_keys as $meta_key ) {
-		delete_post_meta( $post_id, $meta_key );
 	}
 
 	/**

@@ -60,7 +60,11 @@ abstract class Shipper_Helper_Codec {
 			'\w+' .
 			preg_quote( '}}', '/' ) .
 		'/';
-		return (bool) preg_match( $macro_rx, $str );
+		return apply_filters(
+			'shipper_has_macro',
+			(bool) preg_match( $macro_rx, $str ),
+			$str
+		);
 	}
 
 	/**

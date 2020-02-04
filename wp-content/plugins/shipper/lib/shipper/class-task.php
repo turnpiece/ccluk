@@ -53,6 +53,7 @@ abstract class Shipper_Task {
 	 */
 	public function clear_errors() {
 		$this->_errors = array();
+
 		return $this;
 	}
 
@@ -61,7 +62,7 @@ abstract class Shipper_Task {
 	 *
 	 * @param string $err Error suffix to be added to error type.
 	 * @param string $msg Optional error message.
-	 * @param array  $data Optional error data.
+	 * @param array $data Optional error data.
 	 *
 	 * @return object Shipper_Task instance
 	 */
@@ -69,7 +70,7 @@ abstract class Shipper_Task {
 		// @codingStandardsIgnoreLine Plugin-backported
 		$cls = get_called_class();
 
-		$error = new WP_Error(
+		$error           = new WP_Error(
 			$cls . Shipper_Model::SCOPE_DELIMITER . $err,
 			$msg,
 			$data
@@ -77,5 +78,35 @@ abstract class Shipper_Task {
 		$this->_errors[] = $error;
 
 		return $this;
+	}
+
+	/**
+	 * We have to check if this is from newer to older migration while upgrading
+	 * @return bool
+	 */
+	public function is_signal_come_from_compatibility_version() {
+		$migration = new Shipper_Model_Stored_Migration;
+		$is_valid  = $migration->get( 'is_compatibility', false );
+		if ( $is_valid === - 1 ) {
+			//this should not here as it will cancel right away, but just a fail safe
+			return false;
+		}
+		if ( $is_valid == true ) {
+			return true;
+		}
+		Shipper_Helper_Log::debug( 'Request to get info from API for checking compatibility, should only see this message once time.' );
+		$target  = $migration->get_destination();
+		$request = new Shipper_Task_Api_Info_Get( array( 'domain' => $target ) );
+		$info    = $request->apply();
+		if ( ! isset( $info['wordpress'][ Shipper_Model_System_Wp::SHIPPER_VERSION ] ) ) {
+			$migration->set( 'is_compatibility', - 1 );
+			$migration->save();
+
+			return false;
+		}
+		$migration->set( 'is_compatibility', true );
+		$migration->save();
+
+		return true;
 	}
 }

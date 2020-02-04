@@ -6,11 +6,7 @@ namespace WPForms\Providers\Provider;
  * Class Core stores the basic information about the provider.
  * It's also a Container to load single instances of requires classes.
  *
- * @package    WPForms\Providers\Provider\Settings
- * @author     WPForms
- * @since      1.4.7
- * @license    GPL-2.0+
- * @copyright  Copyright (c) 2018, WPForms LLC
+ * @since 1.4.7
  */
 abstract class Core {
 

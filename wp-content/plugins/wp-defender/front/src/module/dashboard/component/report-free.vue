@@ -37,8 +37,8 @@
                      :src="assetUrl('/assets/img/dev-man-pre.svg')">
                 <div class="sui-upsell-notice">
                     <p>
-                        {{__("Automated reports are included in a WPMU DEV membership along with 100+ plugins &amp; themes, 24/7 support and lots of handy site management tools.")}}
-                        <a :href="campaign_url('defender_dash_reports_upsell_link')">{{__("Try it all absolutely free.")}}</a>
+                        {{__("Schedule automatic reports and recieve directly to your inbox. Get reporting as part of a WPMU DEV membership.")}}<br/>
+                        <a class="premium-button sui-button sui-button-purple" target='_blank' :href="campaign_url('defender_dash_reports_upsell_link')">{{__("Try Pro Free Today")}}</a>
                     </p>
                 </div>
             </div>

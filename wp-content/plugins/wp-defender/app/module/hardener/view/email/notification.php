@@ -316,12 +316,12 @@
                                                                         <tr style="padding:0;text-align:left;vertical-align:top">
                                                                             <th class="menu-item float-center"
                                                                                 style="Margin:0 auto;color:#000;float:none;font-family:'Open Sans',Helvetica,Arial,sans-serif;font-size:18px;font-weight:400;line-height:25px;margin:0 auto;padding:0;padding-right:10px;text-align:center">
-                                                                                <a href="#"
+                                                                                <a href="<?php echo network_admin_url('admin.php?page=wdf-hardener&view=notification') ?>"
                                                                                    style="Margin:0;color:#888;font-family:'Open Sans',Helvetica,Arial,sans-serif;font-size:14px;font-weight:400;line-height:30px;margin:0;padding:0;text-align:center;text-decoration:underline">Manage
                                                                                     your email preferences</a></th>
                                                                             <th class="menu-item float-center"
                                                                                 style="Margin:0 auto;color:#000;float:none;font-family:'Open Sans',Helvetica,Arial,sans-serif;font-size:18px;font-weight:400;line-height:25px;margin:0 auto;padding:0;padding-right:10px;text-align:center">
-                                                                                <a href="#"
+                                                                                <a href="<?php echo network_admin_url('admin.php?page=wdf-hardener&action=unsubscribe_notification') ?>"
                                                                                    style="Margin:0;color:#888;font-family:'Open Sans',Helvetica,Arial,sans-serif;font-size:14px;font-weight:400;line-height:30px;margin:0;padding:0;text-align:center;text-decoration:underline">Unsubscribe</a>
                                                                             </th>
                                                                         </tr>

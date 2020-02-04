@@ -37,7 +37,7 @@ class Shipper_Model_Fs_Blacklist {
 	 */
 	public function __construct() {
 		$this->_files = $this->get_default_file_exclusions();
-		$this->_dirs = $this->get_default_directory_exclusions();
+		$this->_dirs  = $this->get_default_directory_exclusions();
 	}
 
 	/**
@@ -58,14 +58,19 @@ class Shipper_Model_Fs_Blacklist {
 		return (array) $this->_files;
 	}
 
-	/**
-	 * Gets the file exclusions that should be there always
-	 *
-	 * @return array
-	 */
-	public function get_default_file_exclusions() {
-		$mdl = new Shipper_Model_Stored_Exclusions;
-		$exclusions = array_merge( array_keys( $mdl->get_data() ), array(
+	public function is_skipping_wp_core() {
+		return (bool) apply_filters(
+			'shipper_blacklist_skip_wp_core',
+			true
+		);
+	}
+
+	public function get_wp_core_file_exclusions() {
+		if ( ! $this->is_skipping_wp_core() ) {
+			return array();
+		}
+
+		return array(
 			// WordPress general.
 			trailingslashit( ABSPATH ) . 'wp-activate.php',
 			trailingslashit( ABSPATH ) . 'wp-blog-header.php',
@@ -80,36 +85,50 @@ class Shipper_Model_Fs_Blacklist {
 			trailingslashit( ABSPATH ) . 'wp-signup.php',
 			trailingslashit( ABSPATH ) . 'wp-trackback.php',
 			trailingslashit( ABSPATH ) . 'xmlrpc.php',
+		);
+	}
 
-			// WP Engine specific!
-			trailingslashit( WP_CONTENT_DIR ) . 'mysql.sql',
-			trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/mu-plugin.php',
-			trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/slt-force-strong-passwords.php',
-			trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/stop-long-comments.php',
+	/**
+	 * Gets the file exclusions that should be there always
+	 *
+	 * @return array
+	 */
+	public function get_default_file_exclusions() {
+		$mdl        = new Shipper_Model_Stored_Exclusions;
+		$exclusions = array_merge(
+			array_keys( $mdl->get_data() ),
+			$this->get_wp_core_file_exclusions(),
+			array(
 
-			// GoDaddy specific.
-			trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/gd-system-plugin.php',
+				// WP Engine specific!
+				trailingslashit( WP_CONTENT_DIR ) . 'mysql.sql',
+				trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/mu-plugin.php',
+				trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/slt-force-strong-passwords.php',
+				trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/stop-long-comments.php',
 
-			// Kinsta specific.
-			trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/kinsta-mu-plugins.php',
+				// GoDaddy specific.
+				trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/gd-system-plugin.php',
 
-			// Flywheel specific.
-			trailingslashit( ABSPATH ) . '.fw-config.php',
+				// Kinsta specific.
+				trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/kinsta-mu-plugins.php',
 
-			// EasyWP specific.
-			trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/wp-nc-easywp.php',
+				// Flywheel specific.
+				trailingslashit( ABSPATH ) . '.fw-config.php',
 
-			// Bluehost specific.
-			trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/endurance-browser-cache.php',
+				// EasyWP specific.
+				trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/wp-nc-easywp.php',
 
-			// iThemes specific.
-			trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/cs-cache-enabler.php',
-			trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/cs-filters-and-actions.php',
+				// Bluehost specific.
+				trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/endurance-browser-cache.php',
 
-			// WPMU DEV specific.
-			trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/wpmudev-hosting.php',
+				// iThemes specific.
+				trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/cs-cache-enabler.php',
+				trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/cs-filters-and-actions.php',
 
-		) );
+				// WPMU DEV specific.
+				trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/wpmudev-hosting.php',
+
+			) );
 		if ( Shipper_Model_Env::is_flywheel() ) {
 			// Flywheel does weird stuff with wp-config.
 			$exclusions[] = trailingslashit( ABSPATH ) . 'wp-config.php';
@@ -122,53 +141,69 @@ class Shipper_Model_Fs_Blacklist {
 		return $exclusions;
 	}
 
+	public function get_wp_core_directory_exclusions() {
+		if ( ! $this->is_skipping_wp_core() ) {
+			return array();
+		}
+
+		return array(
+			// WordPress general.
+			trailingslashit( ABSPATH ) . WPINC,
+			trailingslashit( ABSPATH ) . 'wp-admin/',
+		);
+	}
+
 	/**
 	 * Gets the directory exclusions that should be there always
 	 *
 	 * @return array
 	 */
 	public function get_default_directory_exclusions() {
-		return array(
-			// WordPress general.
-			trailingslashit( ABSPATH ) . WPINC,
-			trailingslashit( ABSPATH ) . 'wp-admin/',
+		$is_exclude_shipper = apply_filters( 'shipper_exclude_self_files', true );
 
-			// Snapshot-specific.
-			'_restore/_imports/',
+		$lists = array_merge(
+			$this->get_wp_core_directory_exclusions(),
+			array(
+				// Snapshot-specific.
+				'_restore/_imports/',
 
-			// Hummingbird caches.
-			trailingslashit( WP_CONTENT_DIR ) . 'wphb-cache/',
+				// Hummingbird caches.
+				trailingslashit( WP_CONTENT_DIR ) . 'wphb-cache/',
 
-			// Ourselves too.
-			trailingslashit( dirname( SHIPPER_PLUGIN_FILE ) ),
+				// Ourselves too.
+				$is_exclude_shipper ? trailingslashit( dirname( SHIPPER_PLUGIN_FILE ) ) : null,
 
-			// Well-known.
-			trailingslashit( ABSPATH ) . '.well-known/',
-			// Caches.
-			trailingslashit( WP_CONTENT_DIR ) . 'cache/',
+				// Well-known.
+				trailingslashit( ABSPATH ) . '.well-known/',
+				// Caches.
+				trailingslashit( WP_CONTENT_DIR ) . 'cache/',
 
-			// WP Engine specific!
-			trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/force-strong-passwords/',
-			trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/wpengine-common/',
+				// WP Engine specific!
+				trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/force-strong-passwords/',
+				trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/wpengine-common/',
 
-			// SiteGround-specific.
-			trailingslashit( WP_CONTENT_DIR ) . 'plugins/sg-cachepress/',
+				// SiteGround-specific.
+				trailingslashit( WP_CONTENT_DIR ) . 'plugins/sg-cachepress/',
 
-			// GoDaddy-specific.
-			trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/gd-system-plugin/',
+				// GoDaddy-specific.
+				trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/gd-system-plugin/',
 
-			// Kinsta specific.
-			trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/kinsta-mu-plugins/',
+				// Kinsta specific.
+				trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/kinsta-mu-plugins/',
 
-			// EasyWP specific.
-			trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/wp-nc-easywp/',
+				// EasyWP specific.
+				trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/wp-nc-easywp/',
 
-			// iThemes specific.
-			trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/cs-cache-enabler/',
+				// iThemes specific.
+				trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/cs-cache-enabler/',
 
-			// WPMU DEV specific.
-			trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/wpmudev-hosting/',
+				// WPMU DEV specific.
+				trailingslashit( WP_CONTENT_DIR ) . 'mu-plugins/wpmudev-hosting/',
+			)
 		);
+		$lists = array_filter( $lists );
+
+		return $lists;
 	}
 
 	/**
@@ -197,11 +232,11 @@ class Shipper_Model_Fs_Blacklist {
 	 * @return bool
 	 */
 	public function is_in_directory( $path ) {
-		$path = trailingslashit( wp_normalize_path( $path ) );
+		$path   = trailingslashit( wp_normalize_path( $path ) );
 		$result = false;
 
 		foreach ( $this->get_directories() as $exclusion ) {
-			$result = (bool) stristr( $path, $exclusion );
+			$result = (bool) stristr( $path, (string) $exclusion );
 			if ( ! empty( $result ) ) {
 				break;
 			}
@@ -218,7 +253,7 @@ class Shipper_Model_Fs_Blacklist {
 	 * @return bool
 	 */
 	public function is_excluded_file( $path ) {
-		$path = wp_normalize_path( $path );
+		$path   = wp_normalize_path( $path );
 		$result = false;
 
 		foreach ( $this->get_files() as $file ) {
@@ -245,6 +280,7 @@ class Shipper_Model_Fs_Blacklist {
 		if ( $this->is_in_directory( $path ) ) {
 			return true;
 		}
+
 		return $this->is_excluded_file( $path );
 	}
 }

@@ -65,9 +65,6 @@ class Prevent_Php extends Rule {
 
 
 	function revert() {
-		if ( ! $this->verifyNonce() ) {
-			return;
-		}
 		$settings = Settings::instance();
 		$server   = $settings->active_server;
 		if ( in_array( $settings->active_server, array( 'apache', 'litespeed' ) ) ) {
@@ -84,6 +81,9 @@ class Prevent_Php extends Rule {
 				$settings->saveExcludedFilePaths( array() );
 				$settings->saveNewHtConfig( array() );
 			}
+			$url = WP_Helper::getUploadUrl();
+			$url = $url . '/wp-defender/index.php';
+			$this->getService()->clearHeadRequest( $url );
 			$settings->addToIssues( self::$slug );
 		} else {
 			wp_send_json_error( array(
@@ -124,6 +124,9 @@ class Prevent_Php extends Rule {
 			}
 			$settings->setActiveServer( $server );
 			$settings->addToResolved( self::$slug );
+			$url = WP_Helper::getUploadUrl();
+			$url = $url . '/wp-defender/index.php';
+			$this->getService()->clearHeadRequest( $url );
 		} else {
 			wp_send_json_error( array(
 				'message' => $ret->get_error_message()

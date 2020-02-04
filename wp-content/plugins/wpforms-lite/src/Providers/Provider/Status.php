@@ -6,11 +6,7 @@ namespace WPForms\Providers\Provider;
  * Class Status gives ability to check/work with provider statuses.
  * Might be used later to track Provider errors on data-delivery.
  *
- * @package    WPForms\Providers
- * @author     WPForms
- * @since      1.4.8
- * @license    GPL-2.0+
- * @copyright  Copyright (c) 2018, WPForms LLC
+ * @since 1.4.8
  */
 class Status {
 

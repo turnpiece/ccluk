@@ -43,7 +43,11 @@ class Hardener extends Module {
 				//refetch those list
 
 				$settings->refreshStatus();
+			} elseif ( defined( 'DOING_CRON' ) ) {
+				//if this is in cronjob, we refresh it too
+				$settings->refreshStatus();
 			}
+			$settings->save();
 		}
 
 		//we will need to add every hooks needed

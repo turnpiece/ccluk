@@ -92,6 +92,6 @@ class DB_Prefix extends Rule {
 	function getSuccessReason() {
 		global $wpdb;
 
-		return sprintf( __( "You're database prefix is set to <strong>%s</strong> and is unique, %s would be proud.", wp_defender()->domain ), $wpdb->prefix, \WP_Defender\Behavior\Utils::instance()->getDisplayName() );
+		return sprintf( __( "Your database prefix is set to <strong>%s</strong> and is unique, %s would be proud.", wp_defender()->domain ), $wpdb->prefix, \WP_Defender\Behavior\Utils::instance()->getDisplayName() );
 	}
 }

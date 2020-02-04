@@ -9,7 +9,7 @@
  * - $member          = WPMUDEV_Dashboard::$api->get_profile();
  * - $urls            = $this->page_urls;
  * - $allowed_users   = WPMUDEV_Dashboard::$site->get_allowed_users();
- * - $auto_update     = WPMUDEV_Dashboard::$site->get_option( 'autoupdate_dashboard' );	 	 	 	 	 		    	
+ * - $auto_update     = WPMUDEV_Dashboard::$site->get_option( 'autoupdate_dashboard' );
  * - $membership_type = WPMUDEV_Dashboard::$api->get_membership_type( $single_id );
  * - $single_id (int. ID of the single-license project)
  *
@@ -449,7 +449,10 @@ if ( WPMUDEV_LIMIT_TO_USER ) {
 
 </div>
 
-<?php $this->load_sui_template( 'footer', array(), true ); ?>
+<?php
+$this->load_sui_template( 'element-last-refresh', array(), true );
+
+$this->load_sui_template( 'footer', array(), true ); ?>
 
 <div class="sui-dialog sui-dialog-alt sui-dialog-sm" aria-hidden="true" tabindex="-1" id="admin-add">
 

@@ -6,11 +6,7 @@ namespace WPForms\Lite\Admin\Settings;
  * Settings changes and enhancements to educate Lite users on what is
  * available in WPForms Pro.
  *
- * @package    WPForms\Admin\Settings
- * @author     WPForms
- * @since      1.5.5
- * @license    GPL-2.0+
- * @copyright  Copyright (c) 2019, WPForms LLC
+ * @since 1.5.5
  */
 class Education {
 

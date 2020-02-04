@@ -22,27 +22,18 @@ class Prevent_PHP_Service extends Rule_Service implements IRule_Service {
 		if ( $cache === null ) {
 			//init upload dir and a php file
 			Utils::instance()->getDefUploadDir();
-			$url = WP_Helper::getUploadUrl();
-			$url = $url . '/wp-defender/index.php';
-			$ssl_verify = apply_filters( 'defender_ssl_verify', true ); //most hosts dont really have valid ssl or ssl still pending
-			$status = wp_remote_head( $url, array(
-				'user-agent' => $_SERVER['HTTP_USER_AGENT'],
-				'timeout'    => 3,
-				'sslverify'  => $ssl_verify
-			) );
-			if ( is_wp_error( $status ) ) {
-				//General error
+			$url     = WP_Helper::getUploadUrl();
+			$url     = $url . '/wp-defender/index.php';
+			$headers = $this->headRequest( $url, 'Prevent PHP Execution' );
+
+			if ( 200 == $headers['response_code'] ) {
+				WP_Helper::getArrayCache()->set( 'Prevent_PHP_Service', false );
+
 				return false;
-			} else {
-				if ( 200 == wp_remote_retrieve_response_code( $status ) ) {
-					WP_Helper::getArrayCache()->set( 'Prevent_PHP_Service', false );
-
-					return false;
-				}
-				WP_Helper::getArrayCache()->set( 'Prevent_PHP_Service', true );
-
-				return true;
 			}
+			WP_Helper::getArrayCache()->set( 'Prevent_PHP_Service', true );
+
+			return true;
 		} else {
 			return $cache;
 		}

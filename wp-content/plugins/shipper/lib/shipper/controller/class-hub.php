@@ -120,4 +120,3 @@ abstract class Shipper_Controller_Hub extends Shipper_Controller {
 		return wp_send_json_success( $status );
 	}
 }
-

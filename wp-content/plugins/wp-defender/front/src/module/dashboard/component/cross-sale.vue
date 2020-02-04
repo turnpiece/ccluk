@@ -36,7 +36,7 @@
                     <div class="sui-box-body">
                         <h3>{{__("Hummingbird Page Speed Optimization")}}</h3>
                         <p>{{__("Performance Tests, File Optimization & Compression, Page, Browser & Gravatar Caching, GZIP Compression, CloudFlare Integration & more.")}}</p>
-                        <a href="https://wordpress.org/plugins/defender-security/"
+                        <a href="https://wordpress.org/plugins/hummingbird-performance/"
                            target="_blank"
                            class="sui-button sui-button-ghost">
                             {{__("View features")}} <i aria-hidden="true" class="sui-icon-arrow-right"></i>

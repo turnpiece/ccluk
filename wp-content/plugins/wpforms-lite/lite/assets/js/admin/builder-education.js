@@ -72,6 +72,28 @@ var WPFormsBuilderEducation = window.WPFormsBuilderEducation || ( function( docu
 					}
 				}
 			);
+
+			// "Did You Know?" Click on the dissmiss button.
+			$( '.wpforms-dyk' ).on( 'click', '.dismiss', function( e ) {
+
+				var $t = $( this ),
+					$dyk = $t.closest( '.wpforms-dyk' ),
+					data = {
+						action: 'wpforms_dyk_dismiss',
+						nonce: wpforms_builder.nonce,
+						section: $t.attr( 'data-section' ),
+					};
+
+				$dyk.find( '.wpforms-dyk-fbox' ).addClass( 'out' );
+				setTimeout(
+					function() {
+						$dyk.remove();
+					},
+					300
+				);
+
+				$.get( wpforms_builder.ajax_url, data );
+			} );
 		},
 
 		/**
@@ -100,9 +122,9 @@ var WPFormsBuilderEducation = window.WPFormsBuilderEducation || ( function( docu
 						text    : wpforms_builder_lite.upgrade_button,
 						btnClass: 'btn-confirm',
 						keys    : [ 'enter' ],
-						action: function () {
+						action: function() {
 							window.open( upgradeURL, '_blank' );
-							$.alert({
+							$.alert( {
 								title   : false,
 								content : wpforms_builder_lite.upgrade_modal,
 								icon    : 'fa fa-info-circle',
@@ -112,15 +134,15 @@ var WPFormsBuilderEducation = window.WPFormsBuilderEducation || ( function( docu
 									confirm: {
 										text    : wpforms_builder.ok,
 										btnClass: 'btn-confirm',
-										keys    : [ 'enter' ]
-									}
-								}
+										keys    : [ 'enter' ],
+									},
+								},
 							} );
-						}
-					}
-				}
+						},
+					},
+				},
 			} );
-		}
+		},
 	};
 
 	// Provide access to public functions/properties.

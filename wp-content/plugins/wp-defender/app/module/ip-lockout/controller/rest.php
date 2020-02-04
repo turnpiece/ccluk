@@ -153,7 +153,7 @@ class Rest extends Controller {
 			return;
 		}
 
-		$ids      = HTTP_Helper::retrievePost( 'ids' );
+		$ids      = HTTP_Helper::retrievePost( 'ids', [] );
 		$type     = HTTP_Helper::retrievePost( 'type' );
 		$messages = '';
 		$ips      = [];

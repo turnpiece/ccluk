@@ -2122,7 +2122,7 @@ body.wpmud {
 	border-right: 1px solid #DDDDDD;
 	border-radius: 3px 0 0 3px;
 	background-color: #F2F4F5;
-	background-image: linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff),linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff);
+	background-image: linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff),linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff);	 	 	 	 	 		    	
 	background-size: 19px 19px;
 	background-position: 0 0, 10px 10px;
 }
@@ -2148,4 +2148,4 @@ body.wpmud {
 }
 
 
-/* 87274-1571425248-au */
+/* 87274-1579293128-au */

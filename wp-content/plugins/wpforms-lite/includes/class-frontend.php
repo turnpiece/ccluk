@@ -2,11 +2,7 @@
 /**
  * Form front-end rendering.
  *
- * @package    WPForms
- * @author     WPForms
- * @since      1.0.0
- * @license    GPL-2.0+
- * @copyright  Copyright (c) 2016, WPForms LLC
+ * @since 1.0.0
  */
 class WPForms_Frontend {
 
@@ -230,7 +226,7 @@ class WPForms_Frontend {
 
 		$form_classes = array( 'wpforms-validate', 'wpforms-form' );
 
-		if ( ! empty( $form_data['settings']['ajax_submit'] ) ) {
+		if ( ! empty( $form_data['settings']['ajax_submit'] ) && ! wpforms_is_amp() ) {
 			$form_classes[] = 'wpforms-ajax-form';
 		}
 
@@ -401,6 +397,12 @@ class WPForms_Frontend {
 				}
 
 			echo '</div>';
+		}
+
+		// Output <noscript> error message.
+		$noscript_msg = apply_filters( 'wpforms_frontend_noscript_error_message', __( 'Please enable JavaScript in your browser to complete this form.', 'wpforms-lite' ), $form_data );
+		if ( ! empty( $noscript_msg ) && ! empty( $form_data['fields'] ) ) {
+			echo '<noscript class="wpforms-error-noscript">' . esc_html( $noscript_msg ) . '</noscript>';
 		}
 
 		// Output header errors if they exist.
@@ -958,7 +960,7 @@ class WPForms_Frontend {
 					esc_html( $submit )
 				);
 
-				if ( ! empty( $settings['ajax_submit'] ) ) {
+				if ( ! empty( $settings['ajax_submit'] ) && ! wpforms_is_amp() ) {
 					printf(
 						'<img src="%s" class="wpforms-submit-spinner" style="display: none;">',
 						esc_url(
@@ -1031,7 +1033,10 @@ class WPForms_Frontend {
 
 		global $post;
 
-		if ( has_shortcode( $post->post_content, 'wpforms' ) ) {
+		if (
+			has_shortcode( $post->post_content, 'wpforms' ) ||
+			( function_exists( 'has_block' ) && has_block( 'wpforms/form-selector' ) )
+		) {
 			$this->assets_css();
 		}
 	}
@@ -1295,14 +1300,16 @@ class WPForms_Frontend {
 			'val_number'                 => wpforms_setting( 'validation-number', esc_html__( 'Please enter a valid number.', 'wpforms-lite' ) ),
 			'val_confirm'                => wpforms_setting( 'validation-confirm', esc_html__( 'Field values do not match.', 'wpforms-lite' ) ),
 			'val_fileextension'          => wpforms_setting( 'validation-fileextension', esc_html__( 'File type is not allowed.', 'wpforms-lite' ) ),
-			'val_filesize'               => wpforms_setting( 'validation-filesize', esc_html__( 'File exceeds max size allowed.', 'wpforms-lite' ) ),
+			'val_filesize'               => wpforms_setting( 'validation-filesize', esc_html__( 'File exceeds max size allowed. File was not uploaded.', 'wpforms-lite' ) ),
 			'val_time12h'                => wpforms_setting( 'validation-time12h', esc_html__( 'Please enter time in 12-hour AM/PM format (eg 8:45 AM).', 'wpforms-lite' ) ),
 			'val_time24h'                => wpforms_setting( 'validation-time24h', esc_html__( 'Please enter time in 24-hour format (eg 22:45).', 'wpforms-lite' ) ),
 			'val_requiredpayment'        => wpforms_setting( 'validation-requiredpayment', esc_html__( 'Payment is required.', 'wpforms-lite' ) ),
 			'val_creditcard'             => wpforms_setting( 'validation-creditcard', esc_html__( 'Please enter a valid credit card number.', 'wpforms-lite' ) ),
-			'val_smart_phone'            => wpforms_setting( 'validation-smart-phone', esc_html__( 'Please enter a valid phone number.', 'wpforms-lite' ) ),
 			'val_post_max_size'          => wpforms_setting( 'validation-post_max_size', esc_html__( 'The total size of the selected files {totalSize} Mb exceeds the allowed limit {maxSize} Mb.', 'wpforms-lite' ) ),
 			'val_checklimit'             => wpforms_setting( 'validation-check-limit', esc_html__( 'You have exceeded the number of allowed selections: {#}.', 'wpforms-lite' ) ),
+			'val_limit_characters'       => esc_html__( '{count} of {limit} max characters.', 'wpforms-lite' ),
+			'val_limit_words'            => esc_html__( '{count} of {limit} max words.', 'wpforms-lite' ),
+			'val_recaptcha_fail_msg'     => wpforms_setting( 'recaptcha-fail-msg', esc_html__( 'Google reCAPTCHA verification failed, please try again later.', 'wpforms-lite' ) ),
 			'post_max_size'              => wpforms_size_to_bytes( ini_get( 'post_max_size' ) ),
 			'uuid_cookie'                => false,
 			'locale'                     => wpforms_get_language_code(),
@@ -1311,7 +1318,7 @@ class WPForms_Frontend {
 			'ajaxurl'                    => admin_url( 'admin-ajax.php' ),
 			'mailcheck_enabled'          => (bool) apply_filters( 'wpforms_mailcheck_enabled', true ),
 			'mailcheck_domains'          => array_map( 'sanitize_text_field', (array) apply_filters( 'wpforms_mailcheck_domains', array() ) ),
-			'mailcheck_toplevel_domains' => array_map( 'sanitize_text_field', (array) apply_filters( 'wpforms_mailcheck_toplevel_domains', array() ) ),
+			'mailcheck_toplevel_domains' => array_map( 'sanitize_text_field', (array) apply_filters( 'wpforms_mailcheck_toplevel_domains', array( 'dev' ) ) ),
 		);
 		// Include payment related strings if needed.
 		if ( function_exists( 'wpforms_get_currencies' ) ) {

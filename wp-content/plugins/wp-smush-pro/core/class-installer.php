@@ -121,6 +121,14 @@ class Installer {
 				self::upgrade_3_2_2_1();
 			}
 
+			if ( version_compare( $version, '3.3.2', '<' ) ) {
+				self::upgrade_3_3_2();
+			}
+
+			if ( version_compare( $version, '3.4.0', '<' ) ) {
+				self::upgrade_3_4();
+			}
+
 			// Create/upgrade directory smush table.
 			self::directory_smush_table();
 
@@ -150,9 +158,6 @@ class Installer {
 
 		// Create/upgrade directory smush table.
 		WP_Smush::get_instance()->core()->mod->dir->create_table();
-
-		// Run the directory smush table update.
-		WP_Smush::get_instance()->core()->db()->update_dir_path_hash();
 	}
 
 	/**
@@ -292,6 +297,36 @@ class Installer {
 		$network_enabled = get_site_option( WP_SMUSH_PREFIX . 'networkwide' );
 		update_site_option( WP_SMUSH_PREFIX . 'networkwide', ! ( '1' === $network_enabled ) );
 		wp_cache_flush();
+	}
+
+	/**
+	 * Show notice on upgrade.
+	 *
+	 * @since 3.3.2
+	 */
+	private static function upgrade_3_3_2() {
+		$install_type = get_site_option( 'wp-smush-install-type', false );
+		if ( 'existing' === $install_type ) {
+			set_site_transient( 'wp-smush-update-modal', true, 3600 );
+		}
+	}
+
+	/**
+	 * Adds new lazy load iframe setting.
+	 *
+	 * @since 3.4.0
+	 */
+	private static function upgrade_3_4() {
+		// Add new lazy-load options.
+		$lazy = Settings::get_instance()->get_setting( WP_SMUSH_PREFIX . 'lazy_load' );
+
+		if ( ! $lazy ) {
+			return;
+		}
+
+		$lazy['format']['iframe'] = true;
+
+		Settings::get_instance()->set_setting( WP_SMUSH_PREFIX . 'lazy_load', $lazy );
 	}
 
 }

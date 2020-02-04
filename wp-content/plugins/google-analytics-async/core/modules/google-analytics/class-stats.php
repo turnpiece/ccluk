@@ -187,12 +187,14 @@ class Stats extends Google_API {
 		/**
 		 * Filter the Google stats data.
 		 *
-		 * @param array  $stats Stats data.
-		 * @param string $type  Stats type.
+		 * @param array  $stats   Stats data.
+		 * @param string $type    Stats type.
+		 * @param bool   $network Network flag.
 		 *
 		 * @since 3.2.0
+		 * @since 3.3.3 Added network param.
 		 */
-		return apply_filters( 'beehive_google_stats_formatted', $stats, $type );
+		return apply_filters( 'beehive_google_stats_formatted', $stats, $type, $network );
 	}
 
 	/**

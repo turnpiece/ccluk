@@ -1,5 +1,64 @@
 == Changelog ==
 
+= 1.5.8.2 =
+- Fixed: Can't add new line in textareas in the form builder (Notifications > Message etc).
+- Fixed: Choices editing block inside the form builder is hidden if creating a form using a template.
+
+= 1.5.8.1 =
+- Fixed: "Invalid form" error on form submit if AJAX form submissions is enabled and user is not logged in.
+
+= 1.5.8 =
+- Changed: Sullie logo in the Form Builder got his left hand back.
+- Changed: Hide image choices options if dynamic choices is enabled.
+- Changed: Adjusted Number field input to improve consistency across different browsers/devices.
+- Changed: Improve Block detection to load CSS styles earlier.
+- Changed: Open New Provider Connection modal after account has been added.
+- Changed: Improve the way Lite and Pro versions of the plugin activation handled.
+- Changed: Remove the unnecessary "Required" setting from a Number Slider field.
+- Fixed: Number slider incorrect label display in the form Builder preview panel.
+- Fixed: Quick links menu generating browser console error on Survey Print results page.
+- Fixed: Required validation message isn't removed immediately on choices selection.
+- Fixed: Form Builder styles compatibility with the new WordPress 5.3 styles.
+- Fixed: Correctly process Enter key press in Smart phone field when Enter is used to submit a form.
+- Fixed: Remove not-needed GET params from URL in Builder when a new form created to prevent race conditions with certain providers loading logic.
+- Fixed: Properly scroll in all major browsers to a faulty field in a form, including multi-page forms.
+- Fixed: Textarea character limit check returns an error if the content pasted is too large and contains '\r\n' line breaks.
+
+= 1.5.7 =
+- Added: Number Slider field.
+- Added: reCAPTCHA field in Form Builder allowing to easily manage the reCAPTCHA for a form.
+- Added: Admin area quick links menu.
+- Added: Analytics sub-menu page.
+- Added: SMTP sub-menu page.
+- Changed: Improved forms bulk actions processing.
+- Changed: Added a Form Builder splash screen which is displayed on mobile devices.
+- Changed: Display warning message if JavaScript is disabled in the browser.
+- Changed: Improved form front-end display and alignment for Gutenberg focused themes.
+- Changed: Improved invisible reCAPTCHA behavior when form is submitted.
+- Changed: Improved actions and filters for notification emails.
+- Fixed: Duplicate of the duplicated form created on page reload.
+- Fixed: Do not submit the form via AJAX (if enabled in form settings) when in AMP mode.
+- Fixed: WordPress 5.3 admin area styling issues.
+- Fixed: Number field incorrectly processing negative numbers.
+- Fixed: `page_url` Smart Tag issues.
+
+= 1.5.6.2 =
+- Added: Default value for "Paragraph text" field.
+- Fixed: WordPress 5.3 compatibility.
+- Fixed: Smart Phone countries squashed dropdown on screen-width <= 600px on themes with Base form styling selected.
+- Fixed: Field's Default value `0` disappears after saving and exiting the form builder.
+- Fixed: Smart Email field did not recognize `.dev` top level domains as valid.
+
+= 1.5.6.1 =
+- N/A: Pro only release.
+
+= 1.5.6 =
+- IMPORANT: Support for PHP 5.3 has been discontinued. If you are running PHP 5.3, you MUST upgrade PHP before installing WPForms 1.5.6. Failure to do that will disable WPForms core functionality.
+- Added: Single Line Text/Paragraph fields limitation options (limit by character or word count).
+- Added: "Community" sub-menu page for easy access to helpful resources and links.
+- Changed: Minimum PHP version requirement is now PHP 5.4.
+- Changed: Minimum WordPress version requirement is now WordPress 4.9.
+
 = 1.5.5.1 =
 - Fixed: Broken reCAPTCHA checkbox in Builder > Settings > General if reCAPTCHA type does not set in WPForms > Settings.
 - Fixed: Email field server-side validation issue.

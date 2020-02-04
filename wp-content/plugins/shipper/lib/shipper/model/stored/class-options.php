@@ -29,6 +29,14 @@ class Shipper_Model_Stored_Options extends Shipper_Model_Stored {
 
 	const KEY_USER_ACCESS = 'allow_user_ids';
 
+	const KEY_PACKAGE_LOCATION = 'package_location';
+	const KEY_PACKAGE_EXCLUDE = 'exclude_location';
+
+	const KEY_PACKAGE_DB_BINARY = 'package_db_use_binary';
+	const KEY_PACKAGE_DB_LIMIT = 'package_db_query_limit';
+	const KEY_PACKAGE_ZIP_BINARY = 'package_zip_use_binary';
+	const KEY_PACKAGE_ZIP_LIMIT = 'package_zip_fs_limit';
+
 	/**
 	 * Constructor
 	 *

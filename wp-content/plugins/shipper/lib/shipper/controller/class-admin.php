@@ -25,13 +25,21 @@ class Shipper_Controller_Admin extends Shipper_Controller {
 	 * Boots the controller and sets up event listeners.
 	 */
 	public function boot() {
-		if ( ! is_admin() ) { return false; }
+		if ( ! is_admin() ) {
+			return false;
+		}
 
 		add_action(
-			(is_multisite() ? 'network_admin_menu' : 'admin_menu'),
+			( is_multisite() ? 'network_admin_menu' : 'admin_menu' ),
 			array( $this, 'add_menu' ),
 			$this->get_page_order()
 		);
+		if ( ! has_filter( 'plugin_action_links_' . plugin_basename( 'shipper/shipper.php' ) ) ) {
+			add_filter( 'plugin_action_links_' . plugin_basename( 'shipper/shipper.php' ), array(
+				&$this,
+				'add_setting_links'
+			) );
+		}
 	}
 
 	/**
@@ -42,8 +50,20 @@ class Shipper_Controller_Admin extends Shipper_Controller {
 	public function get_capability() {
 		return is_multisite()
 			? 'manage_network_options'
-			: 'manage_options'
-		;
+			: 'manage_options';
+	}
+
+	public function add_setting_links( $links ) {
+		$mylinks = array(
+			'<a href="' . network_admin_url( 'admin.php?page=shipper-settings' ) . '">' . __( "Settings", 'shipper' ) . '</a>',
+		);
+
+		$mylinks = array_merge( $links, $mylinks );
+		$mylinks = array_merge( $mylinks, array(
+			'<a target="_blank" href="https://premium.wpmudev.org/docs/wpmu-dev-plugins/shipper/">' . __( "Docs", 'shipper' ) . '</a>',
+		) );
+
+		return $mylinks;
 	}
 
 	/**
@@ -73,15 +93,17 @@ class Shipper_Controller_Admin extends Shipper_Controller {
 	 * @return array
 	 */
 	public function handle_migration_destinations_cache() {
-		if ( ! shipper_user_can_ship() ) { return array(); }
+		if ( ! shipper_user_can_ship() ) {
+			return array();
+		}
 		$destinations = new Shipper_Model_Stored_Destinations;
 
-		$list = $destinations->get_data();
+		$list   = $destinations->get_data();
 		$errors = array();
 
 		if ( empty( $list ) ) {
 			// Empty list, not even the current site in it. Add current site.
-			$task = new Shipper_Task_Api_Destinations_Add;
+			$task   = new Shipper_Task_Api_Destinations_Add;
 			$result = $task->apply();
 			if ( ! empty( $result ) ) {
 				// Success - expire destinations so they're refreshed in next step.
@@ -89,7 +111,7 @@ class Shipper_Controller_Admin extends Shipper_Controller {
 
 				// Let's also refresh our systems info.
 				$info_task = new Shipper_Task_Api_Info_Set;
-				$system = new Shipper_Model_System;
+				$system    = new Shipper_Model_System;
 				$info_task->apply( $system->get_data() );
 			}
 			$errors = array_merge( $errors, $task->get_errors() );
@@ -116,7 +138,7 @@ class Shipper_Controller_Admin extends Shipper_Controller {
 	 * @return array Errors, if any
 	 */
 	public function update_destinations_cache() {
-		$task = new Shipper_Task_Api_Destinations_Get;
+		$task   = new Shipper_Task_Api_Destinations_Get;
 		$result = $task->apply();
 		if ( ! empty( $result ) ) {
 			// We got the listing result - update stored destinations cache.
@@ -125,6 +147,7 @@ class Shipper_Controller_Admin extends Shipper_Controller {
 			$destinations->set_timestamp( time() );
 			$destinations->save();
 		}
+
 		return $task->get_errors();
 	}
 
@@ -138,12 +161,15 @@ class Shipper_Controller_Admin extends Shipper_Controller {
 	 * @return string
 	 */
 	public function add_admin_body_class( $classes ) {
-		if ( ! shipper_user_can_ship() ) { return $classes; }
+		if ( ! shipper_user_can_ship() ) {
+			return $classes;
+		}
 
-		$cls = explode( ' ', $classes );
-		$cls[] = 'sui-2-3-27';
+		$cls   = explode( ' ', $classes );
+		$cls[] = 'sui-2-3-29';
 		$cls[] = 'shipper-admin';
 		$cls[] = 'shipper-sui';
+
 		return join( ' ', $cls );
 	}
 
@@ -151,7 +177,9 @@ class Shipper_Controller_Admin extends Shipper_Controller {
 	 * Adds front-end dependencies that are shared between Shipper admin pages
 	 */
 	public function add_shared_dependencies() {
-		if ( ! shipper_user_can_ship() ) { return false; }
+		if ( ! shipper_user_can_ship() ) {
+			return false;
+		}
 
 		add_filter( 'admin_body_class', array( $this, 'add_admin_body_class' ) );
 		$assets = new Shipper_Helper_Assets;
@@ -175,7 +203,7 @@ class Shipper_Controller_Admin extends Shipper_Controller {
 			'_shipper',
 			array(
 				'update_interval' => Shipper_Helper_Assets::get_update_interval(),
-				'per_page' => $model->get( Shipper_Model_Stored_Options::KEY_PER_PAGE, 10 )
+				'per_page'        => $model->get( Shipper_Model_Stored_Options::KEY_PER_PAGE, 10 )
 			)
 		);
 
@@ -210,7 +238,7 @@ class Shipper_Controller_Admin extends Shipper_Controller {
 			'heartbeatSettings',
 			apply_filters( 'heartbeat_settings', array() )
 		);
- 	}
+	}
 
 	/**
 	 * Whether or not the current user can access shipper pages
@@ -226,6 +254,7 @@ class Shipper_Controller_Admin extends Shipper_Controller {
 		$allowed_users = shipper_get_allowed_users();
 		if ( ! empty( $allowed_users ) ) {
 			$user_id = get_current_user_id();
+
 			return in_array(
 				(int) $user_id,
 				array_map( 'intval', $allowed_users ),

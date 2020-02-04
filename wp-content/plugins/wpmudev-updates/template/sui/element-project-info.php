@@ -33,7 +33,9 @@ $actions              = array();
 $is_single_action     = false;
 $actions_icon         = 'sui-icon-plus';
 $main_action_class    = 'sui-button-blue';
+$main_action_class_modal = 'sui-button-blue';
 $show_num_install     = false;
+$allow_description    = false;
 $num_install          = 0;
 $rounded_num_install  = 0;
 $modal_install_button = array();
@@ -41,7 +43,8 @@ $incompatible_reason  = '';
 
 if ( ! $res->is_installed ) {
 	$is_single_action    = true;
-	$show_num_install    = true;
+	$show_num_install    = false;
+	$allow_description   = true;
 	$num_install         = (int) $res->downloads;
 	$rounded_num_install = $num_install;
 	if ( $num_install > 999 ) {
@@ -70,7 +73,7 @@ if ( ! $res->is_installed ) {
 				'name' => __( 'Install', 'wpmudev' ),
 				'url'  => $res->url->install,
 				'type' => 'modal-ajax',
-				'icon' => 'sui-icon-plus',
+				'icon' => 'sui-icon-download',
 				'data' => array(
 					'action'  => 'project-install',
 					'hash'    => $hashes['project-install'],
@@ -126,7 +129,7 @@ if ( ! $res->is_installed ) {
 			'name' => __( 'Update', 'wpmudev' ),
 			'url'  => '',
 			'type' => 'modal-ajax',
-			'icon' => '',
+			'icon' => 'sui-icon-download',
 			'data' => array(
 				'action'  => 'project-update',
 				'hash'    => $hashes['project-update'],
@@ -138,7 +141,19 @@ if ( ! $res->is_installed ) {
 			'name' => __( 'Update', 'wpmudev' ),
 			'url'  => '#update=' . $pid,
 			'type' => 'modal-ajax',
-			'icon' => 'sui-icon-update',
+			'icon' => 'sui-icon-download',
+			'data' => array(
+				'action'  => 'project-update',
+				'hash'    => $hashes['project-update'],
+				'project' => $pid,
+			),
+		);
+
+		$actions['changelog'] = array(
+			'name' => __( 'View Changelog', 'wpmudev' ),
+			'url'  => '#update=' . $pid,
+			'type' => 'modal-ajax',
+			'icon' => 'sui-icon-list-bullet',
 			'data' => array(
 				'action'  => 'project-update',
 				'hash'    => $hashes['project-update'],
@@ -247,7 +262,6 @@ if ( ! $res->is_installed ) {
 					'project' => $pid,
 				),
 			);
-			$main_action_class = 'sui-button-ghost';
 
 			$actions['configure'] = array(
 				'name' => __( 'Configure', 'wpmudev' ),
@@ -280,7 +294,7 @@ if ( ! $res->is_installed ) {
 			'name' => ( $res->is_network_admin ? __( 'Network Activate', 'wpmudev' ) : __( 'Activate', 'wpmudev' ) ),
 			'url'  => '#activate=' . $pid,
 			'type' => 'ajax',
-			'icon' => '',
+			'icon' => 'sui-icon-power-on-off',
 			'data' => array(
 				'action'  => 'project-activate',
 				'hash'    => $hashes['project-activate'],
@@ -313,6 +327,8 @@ if ( ! $res->is_installed ) {
 			),
 		);
 	}
+
+	$main_action_class = 'sui-button-icon';
 }
 
 // Show special error and message if Upfront not installed
@@ -425,6 +441,7 @@ foreach ( $res->tags as $tid => $plugin_tag ) {
 						>
 
 							<span class="sui-loading-text">
+								<i class="<?php echo esc_attr( $main_action['icon'] ); ?>"></i>
 								<?php echo esc_html( $main_action['name'] ); ?>
 							</span>
 
@@ -434,7 +451,7 @@ foreach ( $res->tags as $tid => $plugin_tag ) {
 					<?php endif; ?>
 
 					<?php if ( ! empty( $incompatible_reason ) ) : ?>
-						<span class="sui-tag sui-tag-red sui-tag-ghost"><?php echo esc_html( $incompatible_reason ); ?></span>
+						<span class="sui-tag sui-tag-sm sui-tag-red sui-tag-ghost sui-tag-sm"><?php echo esc_html( $incompatible_reason ); ?></span>
 					<?php endif; ?>
 
 					<?php if ( ! empty( $actions ) ) : ?>
@@ -525,7 +542,10 @@ foreach ( $res->tags as $tid => $plugin_tag ) {
 
 		<table class="sui-table">
 
-			<tr data-project="<?php echo esc_attr( $pid ); ?>">
+			<tr
+				data-project="<?php echo esc_attr( $pid ); ?>"
+				class="<?php echo ! $res->is_installed ? esc_attr( 'dashui-is-notinstalled' ): ''; ?> <?php echo $res->has_update ? esc_attr( 'dashui-plugin-hasupdate' ): ''; ?> <?php echo ! $res->is_active ? esc_attr( 'dashui-plugin-notactive' ): ''; ?>"
+			>
 
 				<td class="dashui-column-title">
 
@@ -542,19 +562,168 @@ foreach ( $res->tags as $tid => $plugin_tag ) {
 						</label>
 
 						<div class="dashui-plugin-image plugin-image"
-						     style="background-image: url('<?php echo esc_url( $res->url->thumbnail ); ?>');"
-						     aria-hidden="true">
-						</div>
+						     style="position:relative;"
+							 aria-hidden="true">
+							 <?php if ( $res->has_update || ! $res->is_installed ): ?>
+							 	<?php echo $res->has_update ? '<span class="dashui-update-dot"></span>' : ''; ?>
+								<img
+								src="<?php echo esc_url( $res->url->thumbnail_square ); ?>"
+								class="sui-image plugin-image js-show-plugin-modal"
+								style="width:30px;height:30px; border-radius: 5px;"
+								data-action="<?php echo $res->has_update ? 'changelog' : 'info'; ?>"
+					        	data-project="<?php echo esc_attr( $pid ); ?>"
+								>
+							<?php else: ?>
+								<a href="<?php echo esc_url( $res->url->config ); ?>">
+									<img
+										src="<?php echo esc_url( $res->url->thumbnail_square ); ?>"
+										class="sui-image plugin-image"
+										style="width:30px;height:30px; border-radius: 5px;"
+										data-project="<?php echo esc_attr( $pid ); ?>"
+									>
+								</a>
+							<?php endif; ?>
 
-						<button class="dashui-plugin-name js-show-plugin-modal"
-						        data-action="info"
-						        data-project="<?php echo esc_attr( $pid ); ?>">
-							<?php echo esc_html( $res->name ); ?>
-						</button>
+						</div>
+						<?php if ( $res->has_update || ! $res->is_installed ): ?>
+							<button class="dashui-plugin-name js-show-plugin-modal"
+									data-action="<?php echo $res->has_update ? 'changelog' : 'info'; ?>"
+									data-project="<?php echo esc_attr( $pid ); ?>">
+								<?php
+								if( $res->is_installed ):
+									printf( '%s <span class="sui-tag sui-tag-sm" style="margin-left:10px;">v%s</span>', esc_html( $res->name ), esc_html( $res->version_installed ) );
+								else:
+									echo esc_html( $res->name );
+								endif; ?>
+								<div class="dashui-desktop-hidden" style="display:inline-block; margin-left:5px;">
+									<?php if( $res->has_update ){ ?>
+										<a
+											href="#"
+											class="js-show-plugin-modal"
+											data-action="<?php echo $res->has_update ? 'changelog' : 'info'; ?>"
+											data-project="<?php echo esc_attr( $pid ); ?>"
+											>
+											<?php printf( '<span class="sui-tag sui-tag-sm sui-tag-yellow" style="cursor:pointer;">v%s %s</span>', esc_html( $res->version_latest ), esc_html__('update available' ) ); ?>
+										</a>
+									<?php } elseif( $res->is_active ) { ?>
+											<div class="dashui-loader-wrap">
+												<div class="dashui-loader-text">
+													<span class="sui-tag sui-tag-sm sui-tag-blue sui-loading-text"> <?php esc_html_e( 'Active', 'wpmudev' ); ?></span>
+												</div>
+												<div class="dashui-loader" style="display: none;">
+													<p class="sui-p-small"><i class="sui-icon-loader sui-loading" aria-hidden="true"></i><?php esc_html_e( 'Deactivating...', 'wpmudev' ); ?></p>
+												</div>
+											</div>
+									<?php } elseif( $res->is_installed ) { ?>
+											<div class="dashui-loader-wrap">
+												<div class="dashui-loader-text">
+													<span class="sui-tag sui-tag-sm sui-loading-text"> <?php esc_html_e( 'Inactive', 'wpmudev' ); ?> </span>
+												</div>
+												<div class="dashui-loader" style="display: none;">
+													<div class="dashui-loader-activate">
+														<p class="sui-p-small"><i class="sui-icon-loader sui-loading" aria-hidden="true"></i><?php esc_html_e( 'Activating...', 'wpmudev' ); ?></p>
+													</div>
+													<div class="dashui-loader-delete">
+														<p class="sui-p-small"><i class="sui-icon-loader sui-loading" aria-hidden="true"></i><?php esc_html_e( 'Deleting...', 'wpmudev' ); ?></p>
+													</div>
+												</div>
+
+											</div>
+									<?php } ?>
+								</div>
+							</button>
+						<?php else: ?>
+							<div class="dashui-plugin-name">
+								<a href="<?php echo esc_url( $res->url->config ); ?>">
+								<?php echo esc_html( $res->name );  ?>
+								</a>
+								<a
+									href="#"
+									class="js-show-plugin-modal"
+									data-action="changelog"
+									data-project="<?php echo esc_attr( $pid ); ?>">
+									<span class="sui-tag sui-tag-sm" style="margin-left:10px; cursor:pointer;">v<?php echo $res->version_installed; ?></span>
+								</a>
+								<div class="dashui-desktop-hidden" style="display:inline-block; margin-left:5px;">
+									<?php if( $res->has_update ){ ?>
+										<a
+											href="#"
+											class="js-show-plugin-modal"
+											data-action="<?php echo $res->has_update ? 'changelog' : 'info'; ?>"
+											data-project="<?php echo esc_attr( $pid ); ?>"
+											>
+											<?php printf( '<span class="sui-tag sui-tag-sm sui-tag-yellow" style="cursor:pointer;">v%s %s</span>', esc_html( $res->version_latest ), esc_html__('update available' ) ); ?>
+										</a>
+									<?php } elseif( $res->is_active ) { ?>
+											<div class="dashui-loader-wrap">
+												<div class="dashui-loader-text">
+													<span class="sui-tag sui-tag-sm sui-tag-blue sui-loading-text"> <?php esc_html_e( 'Active', 'wpmudev' ); ?></span>
+												</div>
+												<div class="dashui-loader" style="display: none;">
+													<p class="sui-p-small"><i class="sui-icon-loader sui-loading" aria-hidden="true"></i><?php esc_html_e( 'Deactivating...', 'wpmudev' ); ?></p>
+												</div>
+											</div>
+									<?php } elseif( $res->is_installed ) { ?>
+											<div class="dashui-loader-wrap">
+												<div class="dashui-loader-text">
+													<span class="sui-tag sui-tag-sm sui-loading-text"> <?php esc_html_e( 'Inactive', 'wpmudev' ); ?> </span>
+												</div>
+												<div class="dashui-loader" style="display: none;">
+													<div class="dashui-loader-activate">
+														<p class="sui-p-small"><i class="sui-icon-loader sui-loading" aria-hidden="true"></i><?php esc_html_e( 'Activating...', 'wpmudev' ); ?></p>
+													</div>
+													<div class="dashui-loader-delete">
+														<p class="sui-p-small"><i class="sui-icon-loader sui-loading" aria-hidden="true"></i><?php esc_html_e( 'Deleting...', 'wpmudev' ); ?></p>
+													</div>
+												</div>
+
+											</div>
+									<?php } ?>
+								</div>
+							</div>
+						<?php endif; ?>
 
 						<?php if ( ! empty( $incompatible_reason ) || ! empty( $actions ) ) { ?>
 
-							<div class="dashui-plugin-actions dashui-desktop-hidden">
+							<div class="dashui-plugin-actions dashui-desktop-hidden" style="display:inline-flex">
+								<div class="dashui-mobile-main-action" style="width:60px">
+									<?php
+									// Primary action button
+									if ( ! empty( $main_action ) ) : ?>
+
+										<a
+											href="<?php echo esc_url( $main_action['url'] ); ?>"
+											class="sui-button <?php echo esc_attr( $main_action_class ); ?>"
+											data-type="<?php echo esc_attr( $main_action['type'] ); ?>"
+											<?php if ( isset( $main_action['data'] ) && is_array( $main_action['data'] ) ) : ?>
+												<?php foreach ( $main_action['data'] as $key_attr => $data_attr ) : ?>
+													data-<?php echo esc_attr( $key_attr ); ?>="<?php echo esc_attr( $data_attr ); ?>"
+												<?php endforeach; ?>
+											<?php endif; ?>
+										>
+
+											<?php if( 'sui-button-icon' !== $main_action_class ): ?>
+												<span class="sui-loading-text">
+													<?php if ( $main_action['icon'] ): ?>
+														<i class="<?php echo esc_attr( $main_action['icon'] ); ?>"></i>
+													<?php endif; ?>
+
+													<?php echo esc_html( $main_action['name'] ); ?>
+												</span>
+												<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
+
+											<?php else: ?>
+
+												<?php if ( $main_action['icon'] ): ?>
+													<i class="<?php echo esc_attr( $main_action['icon'] ); ?>"></i>
+												<?php endif; ?>
+
+											<?php endif; ?>
+
+										</a>
+
+									<?php endif; ?>
+								</div>
 
 								<?php
 								// Secondary action button
@@ -585,7 +754,6 @@ foreach ( $res->tags as $tid => $plugin_tag ) {
 												</span>
 
 												<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
-
 											</a>
 
 										<?php endif; ?>
@@ -646,7 +814,48 @@ foreach ( $res->tags as $tid => $plugin_tag ) {
 
 				</td>
 
-				<td class="dashui-column-description plugin-row-info"><?php echo esc_html( $res->info ); ?></td>
+				<?php if( $res->is_installed ): ?>
+					<td class="dashui-column-actions plugin-row-actions dashui-mobile-hidden">
+						<?php if( $res->has_update ){ ?>
+							<a
+								href="#"
+								class="js-show-plugin-modal"
+								data-action="<?php echo $res->has_update ? 'changelog' : 'info'; ?>"
+								data-project="<?php echo esc_attr( $pid ); ?>"
+								>
+						  		<?php printf( '<span class="sui-tag sui-tag-sm sui-tag-yellow" style="cursor:pointer;">v%s %s</span>', esc_html( $res->version_latest ), esc_html__('update available' ) ); ?>
+							</a>
+						   <?php } elseif( $res->is_active ) { ?>
+								<div class="dashui-loader-wrap">
+									<div class="dashui-loader-text">
+										<span class="sui-tag sui-tag-sm sui-tag-blue sui-loading-text"> <?php esc_html_e( 'Active', 'wpmudev' ); ?></span>
+									</div>
+									<div class="dashui-loader" style="display: none;">
+										<p class="sui-p-small"><i class="sui-icon-loader sui-loading" aria-hidden="true"></i><?php esc_html_e( 'Deactivating...', 'wpmudev' ); ?></p>
+						   			</div>
+						   		</div>
+						<?php } else{ ?>
+								<div class="dashui-loader-wrap">
+									<div class="dashui-loader-text">
+										<span class="sui-tag sui-tag-sm sui-loading-text"> <?php esc_html_e( 'Inactive', 'wpmudev' ); ?> </span>
+									</div>
+									<div class="dashui-loader" style="display: none;">
+										<div class="dashui-loader-activate">
+											<p class="sui-p-small"><i class="sui-icon-loader sui-loading" aria-hidden="true"></i><?php esc_html_e( 'Activating...', 'wpmudev' ); ?></p>
+										</div>
+										<div class="dashui-loader-delete">
+											<p class="sui-p-small"><i class="sui-icon-loader sui-loading" aria-hidden="true"></i><?php esc_html_e( 'Deleting...', 'wpmudev' ); ?></p>
+										</div>
+									</div>
+
+								</div>
+						<?php } ?>
+					</td>
+				<?php endif; ?>
+
+				<?php if( true === $allow_description ): ?>
+					<td class="dashui-column-description plugin-row-info"><?php echo esc_html( $res->info ); ?></td>
+				<?php endif; ?>
 
 				<td class="dashui-column-actions plugin-row-actions">
 
@@ -677,14 +886,23 @@ foreach ( $res->tags as $tid => $plugin_tag ) {
 									<?php endif; ?>
 								>
 
-									<span class="sui-loading-text">
+									<?php if( 'sui-button-icon' !== $main_action_class ): ?>
+										<span class="sui-loading-text">
+											<?php if ( $main_action['icon'] ): ?>
+												<i class="<?php echo esc_attr( $main_action['icon'] ); ?>"></i>
+											<?php endif; ?>
+
+											<?php echo esc_html( $main_action['name'] ); ?>
+										</span>
+										<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
+
+									<?php else: ?>
+
 										<?php if ( $main_action['icon'] ): ?>
 											<i class="<?php echo esc_attr( $main_action['icon'] ); ?>"></i>
 										<?php endif; ?>
-										<?php echo esc_html( $main_action['name'] ); ?>
-									</span>
 
-									<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
+									<?php endif; ?>
 
 								</a>
 
@@ -693,7 +911,7 @@ foreach ( $res->tags as $tid => $plugin_tag ) {
 							<?php
 							// Incompatible notice
 							if ( ! empty( $incompatible_reason ) ) : ?>
-								<span class="sui-tag sui-tag-red sui-tag-ghost"><?php echo esc_html( $incompatible_reason ); ?></span>
+								<span class="sui-tag sui-tag-sm sui-tag-red sui-tag-ghost"><?php echo esc_html( $incompatible_reason ); ?></span>
 							<?php endif; ?>
 
 							<?php
@@ -710,8 +928,7 @@ foreach ( $res->tags as $tid => $plugin_tag ) {
 
 										<a
 											href="<?php echo esc_url( $plugin_action['url'] ); ?>"
-											class="sui-button-icon sui-button-blue sui-tooltip"
-											data-tooltip="<?php echo esc_attr( $plugin_action['name'] ); ?>"
+											class="<?php echo $res->is_active ? 'sui-button-icon' : 'sui-button sui-button-blue'; ?>"
 											data-type="<?php echo esc_attr( $plugin_action['type'] ); ?>"
 											<?php if ( isset( $plugin_action['data'] ) && is_array( $plugin_action['data'] ) ) : ?>
 												<?php foreach ( $plugin_action['data'] as $key_attr => $data_attr ) : ?>
@@ -722,6 +939,9 @@ foreach ( $res->tags as $tid => $plugin_tag ) {
 
 											<span class="sui-loading-text">
 												<i class="<?php echo esc_attr( $plugin_action['icon'] ); ?>"></i>
+												<?php if( ! $res->is_active ){
+													echo esc_html( $plugin_action['name'] );
+												} ?>
 											</span>
 
 											<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
@@ -782,54 +1002,6 @@ foreach ( $res->tags as $tid => $plugin_tag ) {
 
 					</div>
 
-					<?php if ( $show_num_install || ! empty( $main_action ) ) { ?>
-
-						<div class="dashui-plugin-actions dashui-desktop-hidden">
-
-							<?php
-							// Show total number of installs
-							if ( $show_num_install ) { ?>
-								<span class="sui-tag"><?php echo esc_html( sprintf( _n( '%s install', '%s installs', $num_install, 'wpmudev' ), $rounded_num_install ) ); ?></span>
-							<?php } ?>
-
-							<?php
-							// Incompatible notice
-							if ( ! empty( $incompatible_reason ) ) : ?>
-								<span class="sui-tag sui-tag-red sui-tag-ghost"><?php echo esc_html( $incompatible_reason ); ?></span>
-							<?php endif; ?>
-
-							<?php
-							// Primary action button
-							if ( ! empty( $main_action ) ) : ?>
-
-								<a
-									href="<?php echo esc_url( $main_action['url'] ); ?>"
-									class="sui-button <?php echo esc_attr( $main_action_class ); ?>"
-									data-type="<?php echo esc_attr( $main_action['type'] ); ?>"
-									<?php if ( isset( $main_action['data'] ) && is_array( $main_action['data'] ) ) : ?>
-										<?php foreach ( $main_action['data'] as $key_attr => $data_attr ) : ?>
-											data-<?php echo esc_attr( $key_attr ); ?>="<?php echo esc_attr( $data_attr ); ?>"
-										<?php endforeach; ?>
-									<?php endif; ?>
-								>
-
-									<span class="sui-loading-text">
-										<?php if ( $main_action['icon'] ): ?>
-											<i class="<?php echo esc_attr( $main_action['icon'] ); ?>"></i>
-										<?php endif; ?>
-										<?php echo esc_html( $main_action['name'] ); ?>
-									</span>
-
-									<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
-
-								</a>
-
-							<?php endif; ?>
-
-						</div>
-
-					<?php } ?>
-
 				</td>
 
 			</tr>
@@ -861,7 +1033,7 @@ foreach ( $res->tags as $tid => $plugin_tag ) {
 						<div class="sui-actions-right">
 
 							<?php if ( ! empty( $incompatible_reason ) ) : ?>
-								<span class="sui-tag sui-tag-red sui-tag-ghost"><?php echo esc_html( $incompatible_reason ); ?></span>
+								<span class="sui-tag sui-tag-sm sui-tag-red sui-tag-ghost"><?php echo esc_html( $incompatible_reason ); ?></span>
 							<?php endif; ?>
 
 
@@ -887,7 +1059,7 @@ foreach ( $res->tags as $tid => $plugin_tag ) {
 
 
 							<?php if ( ! empty( $main_action ) ) : ?>
-								<a class="sui-button <?php echo esc_attr( $main_action_class ); ?>"
+								<a class="sui-button <?php echo esc_attr( $main_action_class_modal ); ?>"
 								   href="<?php echo esc_url( $main_action['url'] ); ?>"
 								   data-type="<?php echo esc_attr( $main_action['type'] ); ?>"
 									<?php if ( isset( $main_action['data'] ) && is_array( $main_action['data'] ) ) : ?>
@@ -897,9 +1069,6 @@ foreach ( $res->tags as $tid => $plugin_tag ) {
 									<?php endif; ?>
 								>
 							<span class="sui-loading-text">
-							<?php if ( $main_action['icon'] ): ?>
-								<i class="<?php echo esc_attr( $main_action['icon'] ); ?>"></i>
-							<?php endif; ?>
 								<?php echo esc_html( $main_action['name'] ); ?>
 							</span>
 									<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
@@ -943,7 +1112,7 @@ foreach ( $res->tags as $tid => $plugin_tag ) {
 
 
 							<?php if ( ! empty( $main_action ) ) : ?>
-								<a class="sui-button <?php echo esc_attr( $main_action_class ); ?>"
+								<a class="sui-button <?php echo esc_attr( $main_action_class_modal ); ?>"
 								   href="<?php echo esc_url( $main_action['url'] ); ?>"
 								   data-type="<?php echo esc_attr( $main_action['type'] ); ?>"
 									<?php if ( isset( $main_action['data'] ) && is_array( $main_action['data'] ) ) : ?>
@@ -953,9 +1122,7 @@ foreach ( $res->tags as $tid => $plugin_tag ) {
 									<?php endif; ?>
 								>
 							<span class="sui-loading-text">
-							<?php if ( $main_action['icon'] ): ?>
-								<i class="<?php echo esc_attr( $main_action['icon'] ); ?>"></i>
-							<?php endif; ?>
+
 								<?php echo esc_html( $main_action['name'] ); ?>
 							</span>
 									<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
@@ -1018,6 +1185,16 @@ foreach ( $res->tags as $tid => $plugin_tag ) {
 						</a>
 					</div>
 
+					<div class="sui-block-content-center">
+						<img
+							src="<?php echo esc_url( WPMUDEV_Dashboard::$site->plugin_url . 'assets/images/devman-loading.png' ); ?>"
+							srcset="<?php echo esc_url( WPMUDEV_Dashboard::$site->plugin_url . 'assets/images/devman-loading.png' ); ?> 1x, <?php echo esc_url( WPMUDEV_Dashboard::$site->plugin_url . 'assets/images/devman-loading@2x.png' ); ?> 2x"
+							alt="Upgrade"
+							aria-hidden="true"
+							style = "vertical-align: middle;"
+						/>
+					</div>
+
 				</div>
 
 			</div>
@@ -1025,5 +1202,5 @@ foreach ( $res->tags as $tid => $plugin_tag ) {
 		</div>
 
 	</div>
-
 </div>
+

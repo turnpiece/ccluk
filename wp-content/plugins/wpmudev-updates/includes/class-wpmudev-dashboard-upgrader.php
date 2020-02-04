@@ -479,6 +479,7 @@ class WPMUDEV_Dashboard_Upgrader {
 		$this->clear_log();
 		$this->clear_version();
 
+
 		// Is a WPMU DEV project?
 		$is_dev = is_numeric( $pid );
 
@@ -496,6 +497,11 @@ class WPMUDEV_Dashboard_Upgrader {
 			$slug = ( 'plugin' == $type && false !== strpos( $filename, '/' ) ) ? dirname( $filename ) : $filename; //TODO can't update hello dolly "hello.php"
 		} else {
 			$this->set_error( $pid, 'UPG.07', __( 'Invalid upgrade call', 'wpmudev' ) );
+			return false;
+		}
+
+		if( ! $this->can_auto_install( $type ) ){
+			$this->set_error( $pid, 'UPG.10', __( 'Insufficient filesystem permissions', 'wpmudev' ) );
 			return false;
 		}
 
@@ -560,9 +566,15 @@ class WPMUDEV_Dashboard_Upgrader {
 		}
 
 		$this->log = $skin->get_upgrade_messages();
-
 		if ( is_wp_error( $skin->result ) ) {
-			$this->set_error( $pid, 'UPG.04', $skin->result->get_error_message() );
+			if ( in_array( $skin->result->get_error_code() , array( 'remove_old_failed', 'mkdir_failed_ziparchive' ) ) ) {
+				$this->set_error( $pid, 'UPG.10', $skin->get_error_messages() );
+			} else {
+				$this->set_error( $pid, 'UPG.04', $skin->result->get_error_message() );
+			}
+			return false;
+		} elseif ( in_array( $skin->get_errors()->get_error_code() , array( 'remove_old_failed', 'mkdir_failed_ziparchive' ) ) ) {
+			$this->set_error( $pid, 'UPG.10', $skin->get_error_messages() );
 			return false;
 		} elseif ( $skin->get_errors()->get_error_code() ) {
 			$this->set_error( $pid, 'UPG.09', $skin->get_error_messages() );
@@ -630,6 +642,11 @@ class WPMUDEV_Dashboard_Upgrader {
 
 			$slug = 'wpmudev_install-' . $pid;
 			$type = $project->type;
+
+			if( ! $this->can_auto_install( $type ) ){
+				$this->set_error( $pid, 'INS.09', __( 'Insufficient filesystem permissions', 'wpmudev' ) );
+				return false;
+			}
 
 			// Make sure Upfront is available before an upfront theme or plugin is installed.
 			if ( $project->need_upfront && ! WPMUDEV_Dashboard::$site->is_upfront_installed() ) {
@@ -710,12 +727,18 @@ class WPMUDEV_Dashboard_Upgrader {
 		}
 
 		$this->log = $skin->get_upgrade_messages();
-
 		if ( is_wp_error( $result ) ) {
-			$this->set_error( $pid, 'INS.05', $result->get_error_message() );
+			if ( 'mkdir_failed_ziparchive' === $skin->$result->get_error_code() ) {
+				$this->set_error( $pid, 'INS.09', $skin->get_error_messages() );
+			} else {
+				$this->set_error( $pid, 'INS.05', $result->get_error_message() );
+			}
 			return false;
 		} elseif ( is_wp_error( $skin->result ) ) {
 			$this->set_error( $pid, 'INS.03', $skin->result->get_error_message() );
+			return false;
+		} elseif ( 'mkdir_failed_ziparchive' === $skin->get_errors()->get_error_code() ) {
+			$this->set_error( $pid, 'INS.09', $skin->get_error_messages() );
 			return false;
 		} elseif ( $skin->get_errors()->get_error_code() ) {
 			$this->set_error( $pid, 'INS.06', $skin->get_error_messages() );
@@ -1151,7 +1174,11 @@ class WPMUDEV_Dashboard_Upgrader {
 
 			return true;
 		} elseif ( is_wp_error( $result ) ) {
-			$this->set_error( $pid, $result->get_error_code(), $result->get_error_message() );
+			if ( 'could_not_remove_plugin' === $skin->$result->get_error_code() ) {
+				$this->set_error( $pid, 'DEL.10', $skin->get_error_messages() );
+			} else {
+				$this->set_error( $pid, $result->get_error_code(), $result->get_error_message() );
+			}
 
 			return false;
 		} else {

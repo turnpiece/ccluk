@@ -4,11 +4,7 @@ namespace WPForms\Emails;
 /**
  * Fetching and formatting Info Blocks for Email Summaries class.
  *
- * @package    WPForms\Emails
- * @author     WPForms
- * @since      1.5.4
- * @license    GPL-2.0+
- * @copyright  Copyright (c) 2019, WPForms LLC
+ * @since 1.5.4
  */
 class InfoBlocks {
 

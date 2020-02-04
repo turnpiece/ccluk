@@ -140,7 +140,7 @@ class Sh_Content_Security extends Rule {
 	 * Cancel the debug, redirect to security tweaks page
 	 */
 	public function cancelDebug() {
-		setcookie( self::$slug . '-testing', false, - 1, '', '', false, true );
+		setcookie( self::$slug . '-testing', false, - 1, '', '', true, true );
 		$status = $this->check();
 		wp_redirect( network_admin_url( 'admin.php?page=wdf-hardener&view=' . ( $status == true ? 'resolved' : 'issues' ) ) );
 		exit;
@@ -155,8 +155,8 @@ class Sh_Content_Security extends Rule {
 		$settings->setDValues( Sh_Content_Security_Service::KEY_STAGING_DATA, $test_data );
 		$settings->setDValues( Sh_Content_Security_Service::KEY_TEMP_DATA, null );
 		$status = $this->check();
-		setcookie( self::$slug . '-testing', false, - 1, '', '', false, true );
-		setcookie( self::$slug . '-staging', true, 0, '', '', false, true );
+		setcookie( self::$slug . '-testing', false, - 1, '', '', true, true );
+		setcookie( self::$slug . '-staging', true, 0, '', '', true, true );
 		wp_redirect( network_admin_url( 'admin.php?page=wdf-hardener&view=' . ( $status == true ? 'resolved' : 'issues' ) ) );
 		exit;
 	}
@@ -166,8 +166,8 @@ class Sh_Content_Security extends Rule {
 		$stagingData = $settings->getDValues( Sh_Content_Security_Service::KEY_STAGING_DATA );
 		$settings->setDValues( Sh_Content_Security_Service::KEY_DATA, $stagingData );
 		$settings->setDValues( Sh_Content_Security_Service::KEY_STAGING_DATA, null );
-		setcookie( self::$slug . '-testing', false, - 1, '', '', false, true );
-		setcookie( self::$slug . '-staging', false, - 1, '', '', false, true );
+		setcookie( self::$slug . '-testing', false, - 1, '', '', true, true );
+		setcookie( self::$slug . '-staging', false, - 1, '', '', true, true );
 		wp_redirect( network_admin_url( 'admin.php?page=wdf-hardener&view=resolved' ) );
 		exit;
 	}
@@ -277,7 +277,7 @@ class Sh_Content_Security extends Rule {
 					$headers[] = str_replace( '_', '-', $key ) . ' ' . $value;
 				}
 			}
-			$headers = array_filter($headers);
+			$headers = array_filter( $headers );
 			if ( empty( $headers ) ) {
 				return;
 			}

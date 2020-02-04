@@ -25,24 +25,23 @@ class Security_Key_Service extends Rule_Service implements IRule_Service {
 		if ( $interval == null ) {
 			$interval = self::DEFAULT_DAYS;
 		}
+		if ( ! $last ) {
+			if ( file_exists( ABSPATH . 'wp-config' ) ) {
+				$last = filemtime( ABSPATH . 'wp-config' );
+			} else {
+				//looks like the site is new instance, we should get the date from files
+				$last = filemtime( ABSPATH . WPINC . '/general-template.php' );
+			}
+		}
 
 		if ( $last ) {
-			if ( $reminder == null ) {
-				$reminder = strtotime( '+' . $interval, $last );
-			}
+			//date we should remind user
+			$reminder = strtotime( '+' . $interval, $last );
 			if ( $reminder < time() ) {
 				return false;
 			}
 
 			return true;
-		} elseif ( $reminder != null && $reminder < time() ) {
-			return true;
-		} else {
-			//no data, we have to guess the date wp install
-			$timestamp = filemtime( ABSPATH . '/' . WPINC . '/general-template.php' );
-			if ( $timestamp !== false && strtotime( '+' . $interval, $timestamp ) > time() ) {
-				return true;
-			}
 		}
 
 		return false;

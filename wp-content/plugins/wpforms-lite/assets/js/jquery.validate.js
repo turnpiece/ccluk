@@ -145,7 +145,6 @@ $.extend( $.fn, {
 		var element = this[ 0 ],
 			isContentEditable = typeof this.attr( "contenteditable" ) !== "undefined" && this.attr( "contenteditable" ) !== "false",
 			settings, staticRules, existingRules, data, param, filtered;
-
 		// If nothing is selected, return empty object; can't chain anyway
 		if ( element == null ) {
 			return;
@@ -643,7 +642,6 @@ $.extend( $.validator, {
 		elements: function() {
 			var validator = this,
 				rulesCache = {};
-
 			// Select all valid inputs inside the form (no submit or reset buttons)
 			return $( this.currentForm )
 			.find( "input, select, textarea, [contenteditable]" )
@@ -1238,7 +1236,6 @@ $.extend( $.validator, {
 			method, value;
 
 		for ( method in $.validator.methods ) {
-
 			// Support for <input required> in both html5 and older browsers
 			if ( method === "required" ) {
 				value = element.getAttribute( method );

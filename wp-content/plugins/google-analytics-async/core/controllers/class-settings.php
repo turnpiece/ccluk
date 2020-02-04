@@ -5,6 +5,7 @@ namespace Beehive\Core\Controllers;
 // If this file is called directly, abort.
 defined( 'WPINC' ) || die;
 
+use Beehive\Core\Helpers\General;
 use Beehive\Core\Helpers\Permission;
 use Beehive\Core\Utils\Abstracts\Base;
 use Beehive\Core\Modules\Google_Analytics\Views\Settings as Analytics_Settings;
@@ -176,7 +177,6 @@ class Settings extends Base {
 		} else {
 			// Few items are not required in sub sites.
 			if ( is_multisite() ) {
-				unset( $settings['general']['track_admin'] );
 				unset( $settings['general']['anonymize_ip_force'] );
 				unset( $settings['general']['prosites_settings_level'] );
 				unset( $settings['general']['prosites_analytics_level'] );
@@ -650,7 +650,7 @@ class Settings extends Base {
 					$new_value = $form_data[ $group ][ $field ];
 					// Sanitize the values.
 					if ( is_array( $new_value ) ) {
-						$options[ $group ][ $field ] = array_map( 'sanitize_text_field', $new_value );
+						$options[ $group ][ $field ] = General::sanitize_array( $new_value );
 					} else {
 						$options[ $group ][ $field ] = sanitize_text_field( $new_value );
 					}

@@ -50,6 +50,11 @@ div.wpforms-container-full .wpforms-form * {
 	box-shadow:none;
 }
 
+div.wpforms-container-full {
+	margin-left: auto;
+	margin-right: auto;
+}
+
 div.wpforms-container-full .wpforms-form amp-img > img {
 	position: absolute; /* Override position:static from previous rule, to prevent breaking AMP layout. */
 }
@@ -140,7 +145,8 @@ div.wpforms-container-full .wpforms-form .wpforms-field {
 }
 
 /* Field Description */
-div.wpforms-container-full .wpforms-form .wpforms-field-description {
+div.wpforms-container-full .wpforms-form .wpforms-field-description,
+div.wpforms-container-full .wpforms-form .wpforms-field-limit-text {
 	font-size: 13px;
 	line-height: 1.3;
 	margin: 8px 0 0 0;
@@ -540,8 +546,8 @@ div.wpforms-container-full .wpforms-form select:disabled {
 
 /* Errors, Warnings, etc
 ----------------------------------------------------------------------------- */
-
-div.wpforms-container-full .wpforms-form .wpforms-error-container {
+div.wpforms-container-full .wpforms-form .wpforms-error-container,
+div.wpforms-container-full .wpforms-form noscript.wpforms-error-noscript {
 	color: #990000;
 }
 
@@ -590,7 +596,7 @@ div.wpforms-container-full .wpforms-form .wpforms-error-alert {
 .wpforms-confirmation-container-full,
 div[submit-success] > .wpforms-confirmation-container-full {
 	color: #333;
-	margin: 0 0 24px 0;
+	margin: 0 auto 24px;
 	padding: 15px 15px;
 }
 
@@ -729,6 +735,79 @@ div.wpforms-container-full .wpforms-form .wpforms-field-credit-card-expiration s
 	line-height: 38px;
 }
 
+/* Number slider field
+----------------------------------------------------------------------------- */
+div.wpforms-container-full .wpforms-form .wpforms-field-number-slider input[type=range] {
+	-webkit-appearance: none;
+	appearance: none;
+	height: 10px;
+	background: #fff;
+	border: 1px solid #CCC;
+	border-radius: 5px;
+	outline: none;
+	padding: 0;
+	margin: 10px 0 5px;
+}
+
+div.wpforms-container-full .wpforms-form .wpforms-field-number-slider input[type=range]::-ms-track {
+	color: transparent;
+}
+
+div.wpforms-container-full .wpforms-form .wpforms-field-number-slider input[type=range]::-webkit-slider-thumb {
+	-webkit-appearance: none; /* Override default look */
+	appearance: none;
+	width: 17px;
+	height: 17px;
+	background: #B5B5B5;
+	cursor: pointer;
+	border-radius: 100%;
+}
+
+div.wpforms-container-full .wpforms-form .wpforms-field-number-slider input[type=range]::-moz-range-thumb {
+	width: 17px;
+	height: 17px;
+	background: #B5B5B5;
+	cursor: pointer;
+	border-radius: 100%;
+}
+
+div.wpforms-container-full .wpforms-form .wpforms-field-number-slider input[type=range]::-ms-thumb {
+	width: 17px;
+	height: 17px;
+	background: #B5B5B5;
+	cursor: pointer;
+	border-radius: 100%;
+}
+
+div.wpforms-container-full .wpforms-form .wpforms-field-number-slider .wpforms-field-number-slider-hint {
+	font-size: 13px;
+}
+
+/* Stripe Credit Card field
+----------------------------------------------------------------------------- */
+
+div.wpforms-container-full .wpforms-form .wpforms-field-stripe-credit-card-cardnumber,
+div.wpforms-container-full .wpforms-form input.wpforms-stripe-credit-card-hidden-input {
+	background-color: #fff;
+	box-sizing: border-box;
+	border-radius: 2px;
+	color: #333;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	display: block;
+	float: none;
+	font-size: 16px;
+	border: 1px solid #ccc;
+	padding: 8px 10px;
+	height: 38px;
+	width: 100%;
+	line-height: 1.3
+}
+
+div.wpforms-container-full .wpforms-form .wpforms-stripe-element-invalid {
+	border: 1px solid #cc0000!important;
+}
+
 
 /* HTML field
 ----------------------------------------------------------------------------- */
@@ -812,6 +891,147 @@ div.wpforms-container-full .wpforms-form .wpforms-field-rating-item input:focus 
 	-webkit-transform: scale(1.3);
 	transform: scale(1.3);
 	opacity: 1;
+}
+
+/* File upload field
+----------------------------------------------------------------------------- */
+div.wpforms-field-file-upload .wpforms-hide{
+	display: none !important;
+}
+
+div.wpforms-field-file-upload .wpforms-file-upload-builder-modern {
+	border: 2px dashed rgba(0, 0, 0, 0.1);
+	background: rgba(0, 0, 0, 0.02);
+	padding: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	cursor: pointer;
+}
+
+div.wpforms-field-file-upload .wpforms-file-upload-builder-modern.wpforms-with-files{
+	padding: 5px;
+	flex-direction: row;
+	align-items: flex-start;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+}
+
+div.wpforms-field-file-upload .wpforms-file-upload-builder-modern svg{
+	height: 50px;
+	width: 50px;
+	color: #e27730;
+}
+
+div.wpforms-field-file-upload .wpforms-file-upload-builder-modern .wpforms-modern-title{
+	font-weight: bold;
+}
+
+div.wpforms-field-file-upload .wpforms-file-upload-builder-modern .wpforms-modern-hint{
+	color: rgba(0, 0, 0, 0.1);
+}
+
+div.wpforms-field-file-upload .wpforms-file-upload-builder-modern.wpforms-highlighted{
+	border-color: #e27730;
+}
+
+div.wpforms-field-file-upload .wpforms-file-upload-builder-modern .wpforms-text{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+div.wpforms-field-file-upload .wpforms-file-upload-builder-modern .wpforms-preview-block{
+	width: 100px;
+	height: 100px;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	background: #fff;
+	background-size: cover !important;
+	margin: 5px;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: default;
+}
+
+div.wpforms-field-file-upload .wpforms-file-upload-builder-modern .wpforms-preview-block:hover .wpforms-overlay{
+	opacity: 1;
+}
+
+div.wpforms-field-file-upload .wpforms-file-upload-builder-modern .wpforms-preview-block .wpforms-overlay{
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: rgba(0, 0, 0, 0.5);
+	opacity: 0;
+}
+
+div.wpforms-field-file-upload .wpforms-file-upload-builder-modern .wpforms-preview-block .wpforms-overlay .wpforms-close{
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	cursor: pointer;
+	display: block;
+	width: 18px;
+	height: 18px;
+}
+
+div.wpforms-field-file-upload .wpforms-file-upload-builder-modern .wpforms-preview-block .wpforms-overlay .wpforms-title{
+	position: absolute;
+	font-size: 12px;
+	color: #fff;
+	top: 25px;
+	bottom: 10px;
+	left: 5px;
+	right: 5px;
+	overflow-y: auto;
+	line-height: 16px;
+}
+
+div.wpforms-field-file-upload .wpforms-file-upload-builder-modern .wpforms-preview-block .wpforms-overlay .wpforms-close .wpforms-close-left,
+div.wpforms-field-file-upload .wpforms-file-upload-builder-modern .wpforms-preview-block .wpforms-overlay .wpforms-close .wpforms-close-right{
+	height: 18px;
+	width: 1px;
+	background: #fff;
+	position: absolute;
+	display: block;
+	z-index: 1;
+	right: 9px;
+}
+
+div.wpforms-field-file-upload .wpforms-file-upload-builder-modern .wpforms-preview-block .wpforms-overlay .wpforms-close .wpforms-close-left{
+	-webkit-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+}
+
+div.wpforms-field-file-upload .wpforms-file-upload-builder-modern .wpforms-preview-block .wpforms-overlay .wpforms-close .wpforms-close-right{
+	-webkit-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+
+div.wpforms-field-file-upload .wpforms-file-upload-builder-modern .wpforms-preview-block svg{
+	height: 25px;
+	width: 25px;
+	color: rgba(0, 0, 0, 0.1);
+}
+
+div.wpforms-field-file-upload .wpforms-file-upload-builder-modern .wpforms-preview-block .wpforms-progress{
+	height: 5px;
+	width: 0;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	background: #e27730;
+	transition: all 0.5s;
+}
+
+div.wpforms-field-file-upload .wpforms-file-upload-builder-modern input[type="file"] {
+	display: none;
 }
 
 
@@ -1203,6 +1423,12 @@ div.wpforms-container-full .wpforms-form .wpforms-screen-reader-element {
 	word-wrap: normal !important;
 }
 
+/* Limit options */
+div.wpforms-container-full .wpforms-form .wpforms-limit-text{
+	font-size: 13px;
+	display: block;
+}
+
 /* Media Queries
 ----------------------------------------------------------------------------- */
 
@@ -1250,24 +1476,12 @@ div.wpforms-container-full .wpforms-form .wpforms-screen-reader-element {
 
 	/* Page indicator */
 	div.wpforms-container-full .wpforms-form .wpforms-page-indicator.circles .wpforms-page-indicator-page {
-		float: none;
-		display: block;
-		margin: 0 0 10px 0;
+		margin: 0 10px 0 0;
 	}
 	div.wpforms-container-full .wpforms-form .wpforms-page-indicator.circles .wpforms-page-indicator-page-number {
 		width: 30px;
 		height: 30px;
 		line-height: 30px;
-	}
-	div.wpforms-container-full .wpforms-form .wpforms-page-indicator.connector .wpforms-page-indicator-page {
-		width: 100% !important;
-		padding: 5px 10px;
-	}
-	div.wpforms-container-full .wpforms-form .wpforms-page-indicator.connector .wpforms-page-indicator-page.active {
-		font-weight: 700;
-	}
-	div.wpforms-container-full .wpforms-form .wpforms-page-indicator.connector .wpforms-page-indicator-page-number {
-		display: none;
 	}
 
 	/* Date-Time field */
@@ -1328,4 +1542,14 @@ div.components-panel__body .wpforms-gutenberg-panel-notice {
 	border: 1px solid #bce8f1;
 	color: #31708f;
 	padding: 10px;
+}
+
+/* RTL support
+----------------------------------------------------------------------------- */
+
+/* Phone US format */
+body.rtl .wpforms-field-phone input[type=tel] {
+	direction: ltr;
+	unicode-bidi: embed;
+	text-align: right;
 }

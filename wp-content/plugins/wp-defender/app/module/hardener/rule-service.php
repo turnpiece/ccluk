@@ -83,4 +83,60 @@ class Rule_Service extends Component {
 
 		return false;
 	}
+
+	/**
+	 * @param $url
+	 * @param $origin
+	 *
+	 * @return array|mixed|\WP_Error
+	 */
+	protected function headRequest( $url, $origin, $ttl = null ) {
+		$settings = Hardener\Model\Settings::instance();
+		$cached   = $settings->getDValues( 'head_requests' );
+		if ( ! is_array( $cached ) ) {
+			$cached = [];
+		}
+		if ( isset( $cached[ $url ] ) ) {
+			$cache = $cached[ $url ];
+			if ( $cache['ttl'] > time() ) {
+				//we'll use the cache
+				Utils::instance()->log( sprintf( 'Header for %s return from cached', $url ) );
+
+				return $cache['data'];
+			}
+		}
+
+		//no cache or cache expired
+		$request = wp_remote_head( $url, [
+			'user-agent' => 'WP Defender self ping - ' . $origin
+		] );
+		if ( ! is_wp_error( $request ) ) {
+			$headers = wp_remote_retrieve_headers( $request );
+			$headers = $headers->getAll();
+			if ( $ttl === null ) {
+				$ttl = strtotime( '+1 day' );
+			}
+			$headers['response_code'] = wp_remote_retrieve_response_code( $request );
+			$cached[ $url ]           = [
+				'ttl'  => apply_filters( 'wd_tweaks_head_request_ttl', $ttl ),
+				'data' => $headers
+			];
+			$settings->setDValues( 'head_requests', $cached );
+			Utils::instance()->log( sprintf( 'Fetched header for %s into cache', $url ), 'tweaks' );
+
+			return $headers;
+		}
+
+		return $request;
+	}
+
+	/**
+	 * @param $url
+	 */
+	public function clearHeadRequest( $url ) {
+		$settings = Hardener\Model\Settings::instance();
+		$cached   = $settings->getDValues( 'head_requests' );
+		unset( $cached[ $url ] );
+		$settings->setDValues( 'head_requests', $cached );
+	}
 }

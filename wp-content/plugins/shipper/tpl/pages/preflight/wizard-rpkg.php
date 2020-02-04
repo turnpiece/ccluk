@@ -31,7 +31,7 @@ $has_service_errors = ! empty( $checks['errors'] );
 				<td class="sui-table-item-title">
 					<?php echo esc_html( $check['title'] ); ?>
 				</td>
-				
+
 				<td class="shipper-check-status">
 				<?php
 					$icon_type = 'ok' === $check['status']
@@ -48,7 +48,7 @@ $has_service_errors = ! empty( $checks['errors'] );
 							echo esc_attr( $icon_type );
 						?> sui-<?php echo esc_attr( $icon_kind ); ?>"></i>
 				</td>
-				
+
 				<td>
 					<div class="shipper-check-message">
 					<?php
@@ -90,4 +90,3 @@ $has_service_errors = ! empty( $checks['errors'] );
 	</table>
 	<?php } // if has service issues ?>
 </div>
-

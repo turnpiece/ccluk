@@ -837,6 +837,10 @@ function give_get_plugins( $args = array() ) {
 	}
 
 	if( ! empty( $args['only_premium_add_ons'] ) ) {
+		if( ! function_exists( 'give_get_premium_add_ons' ) ) {
+			require_once GIVE_PLUGIN_DIR . '/includes/admin/misc-functions.php';
+		}
+
 		$premium_addons_list = give_get_premium_add_ons();
 
 		foreach ( $plugins as $key => $plugin ){
@@ -1573,15 +1577,33 @@ function give_donation_history_table_end() {
  *
  * @param string $function
  * @param string $message
- * @param string $version
+ * @param string $version deprecated
  *
  * @return void
  * @since  1.8.18
+ * @since  2.5.13 Refactor function
  */
-function give_doing_it_wrong( $function, $message, $version ) {
-	$message .= "\nBacktrace:" . wp_debug_backtrace_summary();
+function give_doing_it_wrong( $function, $message, $version = null  ) {
+	/**
+	 * Fires while calling function incorrectly.
+	 *
+	 * Allow you to hook to incorrect function call.
+	 *
+	 * @param string $function    The function that was called.
+	 * @param string $replacement Optional. The function that should have been called.
+	 * @param string $version     The plugin version that deprecated the function.
+	 *
+	 * @since 2.5.13
+	 */
+	do_action( 'give_doing_it_wrong', $function, $message, $version );
 
-	_doing_it_wrong( $function, $message, $version );
+	$show_errors = current_user_can( 'manage_options' );
+
+	// Allow plugin to filter the output error trigger.
+	if ( WP_DEBUG && apply_filters( 'give_doing_it_wrong_trigger_error', $show_errors ) ) {
+		trigger_error( sprintf( __( '%1$s was called <strong>incorrectly</strong>. %2$s', 'give' ), $function, $message ) );
+		trigger_error( print_r( wp_debug_backtrace_summary(), 1 ) );// Limited to previous 1028 characters, but since we only need to move back 1 in stack that should be fine.
+	}
 }
 
 
@@ -2159,7 +2181,7 @@ function give_get_receipt_link( $donation_id ) {
  */
 function give_get_receipt_url( $donation_id ) {
 
-	$receipt_url = esc_url(
+	$receipt_url = esc_url_raw(
 		add_query_arg(
 			array(
 				'donation_id' => $donation_id,
@@ -2183,7 +2205,7 @@ function give_get_view_receipt_link( $donation_id ) {
 
 	return sprintf(
 		'<a href="%1$s">%2$s</a>',
-		esc_url( give_get_view_receipt_url( $donation_id ) ),
+		give_get_view_receipt_url( $donation_id ),
 		esc_html__( 'View the receipt in your browser &raquo;', 'give' )
 	);
 
@@ -2199,7 +2221,7 @@ function give_get_view_receipt_link( $donation_id ) {
  */
 function give_get_view_receipt_url( $donation_id ) {
 
-	$receipt_url = esc_url(
+	$receipt_url = esc_url_raw(
 		add_query_arg(
 			array(
 				'action'     => 'view_in_browser',

@@ -5,7 +5,11 @@ namespace Beehive\Core\Modules\Google_Analytics\Views;
 // If this file is called directly, abort.
 defined( 'WPINC' ) || die;
 
+use Beehive\Core\Helpers\General;
+use Beehive\Core\Helpers\Template;
+use Beehive\Core\Modules\Google_Auth;
 use Beehive\Core\Utils\Abstracts\View;
+use Beehive\Core\Modules\Google_Analytics;
 
 /**
  * The Google analytics module settings view.
@@ -16,6 +20,21 @@ use Beehive\Core\Utils\Abstracts\View;
  * @author Joel James <joel@incsub.com>
  */
 class Settings extends View {
+
+	/**
+	 * Initialize the class by registering hooks.
+	 *
+	 * @since 3.2.2
+	 *
+	 * @return void
+	 */
+	public function init() {
+		// Only when logged in.
+		if ( Google_Auth\Helper::instance()->is_logged_in( $this->is_network() ) ) {
+			// Check and show API status error.
+			add_action( 'current_screen', [ $this, 'check_api_status' ] );
+		}
+	}
 
 	/**
 	 * Get the reports tree for the dashboard widget.
@@ -92,5 +111,28 @@ class Settings extends View {
 		 * @since 3.2.0
 		 */
 		return apply_filters( 'beehive_report_statistics_tree', $tree );
+	}
+
+	/**
+	 * Check if required Analytics Reporting API is enabled.
+	 *
+	 * Analytics Reporting API is required to get the stats. We need to
+	 * trigger it in Google account settings page to get the API error
+	 * if it's not enabled.
+	 *
+	 * @since 3.2.2
+	 *
+	 * @return void
+	 */
+	public function check_api_status() {
+		if ( General::is_plugin_admin() && 'general' === Template::current_tab( 'general' ) ) {
+			// Try to get today's stats from API.
+			Google_Analytics\Stats::instance()->stats(
+				date( 'Y-m-d' ),
+				date( 'Y-m-d' ),
+				'dashboard',
+				$this->is_network()
+			);
+		}
 	}
 }

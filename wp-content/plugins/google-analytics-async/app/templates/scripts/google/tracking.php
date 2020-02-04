@@ -15,6 +15,15 @@
 
 defined( 'WPINC' ) || die();
 
+/**
+ * Filter hook to change the function name in GA script.
+ *
+ * @param string $ga_tag Ga tag name.
+ *
+ * @since 3.2.0
+ */
+$ga_tag = apply_filters( 'beehive_google_analytics_function_name', 'beehive_ga' );
+
 ?>
 
 <?php if ( beehive_analytics()->is_pro() ) : ?>
@@ -33,16 +42,16 @@ defined( 'WPINC' ) || die();
 		a.async = 1;
 		a.src = g;
 		m.parentNode.insertBefore( a, m )
-	} )( window, document, 'script', '//www.google-analytics.com/analytics.js', 'beehive_ga' );
+	} )( window, document, 'script', '//www.google-analytics.com/analytics.js', '<?php echo esc_attr( $ga_tag ); ?>' );
 
 	function beehive_ga_track() {
 <?php if ( ! empty( $network_tracking_code ) ) : // Network tracking. ?>
-		beehive_ga( 'create', '<?php echo esc_html( $network_tracking_code ); ?>', 'auto' ); // Create network tracking.
+		<?php echo esc_attr( $ga_tag ); ?>( 'create', '<?php echo esc_html( $network_tracking_code ); ?>', 'auto' ); // Create network tracking.
 <?php if ( $network_anonymize ) : ?>
-		beehive_ga( 'set', 'anonymizeIp', true ); // Anonymize IP.
+		<?php echo esc_attr( $ga_tag ); ?>( 'set', 'anonymizeIp', true ); // Anonymize IP.
 <?php endif; ?>
 <?php if ( $network_advertising ) : ?>
-		beehive_ga( 'require', 'displayfeatures' ); // Display advertising.
+		<?php echo esc_attr( $ga_tag ); ?>( 'require', 'displayfeatures' ); // Display advertising.
 <?php endif; ?>
 <?php
 /**
@@ -63,15 +72,15 @@ do_action_deprecated(
  */
 do_action( 'beehive_google_network_tracking_vars' );
 ?>
-		beehive_ga( 'send', 'pageview' ); // Send pageview.
+		<?php echo esc_attr( $ga_tag ); ?>( 'send', 'pageview' ); // Send pageview.
 <?php endif; ?>
 <?php if ( ! empty( $tracking_code ) ) : // Sub site tracking. ?>
-		beehive_ga( 'create', '<?php echo esc_html( $tracking_code ); ?>', 'auto', { 'name': 'single' } ); // Create single site tracking.
+		<?php echo esc_attr( $ga_tag ); ?>( 'create', '<?php echo esc_html( $tracking_code ); ?>', 'auto', { 'name': 'single' } ); // Create single site tracking.
 <?php if ( $anonymize ) : ?>
-		beehive_ga( 'single.set', 'anonymizeIp', true ); // Anonymize IP.
+		<?php echo esc_attr( $ga_tag ); ?>( 'single.set', 'anonymizeIp', true ); // Anonymize IP.
 <?php endif; ?>
 <?php if ( $advertising ) : ?>
-		beehive_ga( 'single.require', 'displayfeatures' ); // Display advertising.
+		<?php echo esc_attr( $ga_tag ); ?>( 'single.require', 'displayfeatures' ); // Display advertising.
 <?php endif; ?>
 <?php
 /**
@@ -92,7 +101,7 @@ do_action_deprecated(
  */
 do_action( 'beehive_google_tracking_vars' );
 ?>
-		beehive_ga( 'single.send', 'pageview' ); // Send pageview.
+		<?php echo esc_attr( $ga_tag ); ?>( 'single.send', 'pageview' ); // Send pageview.
 <?php endif; ?>
 	}
 

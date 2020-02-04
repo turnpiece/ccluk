@@ -74,11 +74,9 @@ do_action( 'beehive_google_account_notice' );
 
 <div class="sui-border-frame google-account-selector">
 
-	<div class="sui-description"><?php esc_html_e( 'Select your website profile for displaying analytics', 'ga_trans' ); ?></div>
-
 	<div class="sui-form-field">
-		<label for="beehive-settings-google-account-id" class="sui-label"><?php esc_html_e( 'Choose your analytics view (profile)', 'ga_trans' ); ?></label>
-		<select name="google[account_id]" id="beehive-settings-google-account-id">
+		<label for="beehive-settings-google-account-id" class="sui-label"><?php esc_html_e( 'Choose your view (profile)', 'ga_trans' ); ?></label>
+		<select class="sui-select" name="google[account_id]" id="beehive-settings-google-account-id">
 			<?php if ( empty( $accounts ) ) : ?>
 				<option value=""><?php esc_html_e( 'No website information', 'ga_trans' ); ?></option>
 			<?php else : ?>
@@ -87,6 +85,7 @@ do_action( 'beehive_google_account_notice' );
 				<?php endforeach; ?>
 			<?php endif; ?>
 		</select>
+		<div class="sui-description"><?php esc_html_e( 'Site not here? Try logging into another account above!', 'ga_trans' ); ?></div>
 		<?php if ( empty( $accounts ) ) : ?>
 			<div class="sui-notice sui-notice-error">
 				<p>

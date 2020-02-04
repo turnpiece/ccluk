@@ -5,11 +5,7 @@ namespace WPForms\Forms;
 /**
  * Form preview.
  *
- * @package    WPForms\Forms
- * @author     WPForms
- * @since      1.5.1
- * @license    GPL-2.0+
- * @copyright  Copyright (c) 2019, WPForms LLC
+ * @since 1.5.1
  */
 class Preview {
 
@@ -51,13 +47,19 @@ class Preview {
 		}
 
 		// Check for logged in user with correct capabilities.
-		if ( ! \is_user_logged_in() || ! \wpforms_current_user_can() ) {
+		if ( ! \is_user_logged_in() ) {
+			return false;
+		}
+
+		$form_id = \absint( $_GET['wpforms_form_preview'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
+		if ( ! \wpforms_current_user_can( 'view_form_single', $form_id ) ) {
 			return false;
 		}
 
 		// Fetch form details for the entry.
 		$this->form_data = \wpforms()->form->get(
-			\absint( $_GET['wpforms_form_preview'] ), // phpcs:ignore
+			$form_id,
 			array(
 				'content_only' => true,
 			)
@@ -96,7 +98,7 @@ class Preview {
 	 *
 	 * @since 1.5.1
 	 *
-	 * @param WP_Query $query The WP_Query instance.
+	 * @param \WP_Query $query The WP_Query instance.
 	 */
 	public function pre_get_posts( $query ) {
 
@@ -135,9 +137,12 @@ class Preview {
 	 */
 	public function the_content() {
 
-		// Extra cap check just for fun.
-		if ( ! \wpforms_current_user_can() ) {
-			return;
+		if ( ! isset( $this->form_data['id'] ) ) {
+			return '';
+		}
+
+		if ( ! wpforms_current_user_can( 'view_form_single', $this->form_data['id'] ) ) {
+			return '';
 		}
 
 		$content = esc_html__( 'This is a preview of your form. This page is not publicly accessible.', 'wpforms-lite' );
@@ -156,7 +161,7 @@ class Preview {
 	 *
 	 * @since 1.5.1
 	 *
-	 * @return array
+	 * @return string
 	 */
 	public function template_include() {
 

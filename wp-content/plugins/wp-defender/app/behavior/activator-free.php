@@ -49,7 +49,7 @@ class Activator_Free extends Behavior {
 			}
 		}
 
-		set_site_transient( 'wp_defender_free_is_activated', 1 );
+		update_site_option( 'wp_defender_free_is_activated', 1 );
 
 		wp_send_json_success( array(
 			'activated' => $activated,
@@ -69,6 +69,11 @@ class Activator_Free extends Behavior {
 		if ( get_site_transient( 'wp_defender_free_is_activated' ) == 1 ) {
 			return 0;
 		}
+
+		if ( get_site_option( 'wp_defender_free_is_activated' ) == 1 ) {
+			return 0;
+		}
+
 		$keys = [
 			'wp_defender',
 			'wd_scan_settings',

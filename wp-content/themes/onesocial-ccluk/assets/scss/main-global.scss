@@ -4771,6 +4771,63 @@ img#wpstats {
 }
 
 /*--------------------------------------------------------------
+6.0 - Forms
+--------------------------------------------------------------*/
+
+h2.entry-title .button.bp-title-button {
+  float: right;
+}
+
+#buddypress .standard-form .editfield,
+#buddyboss-media-album-create-form > div,
+#buddypress #create-group-form .editfield {
+  margin-bottom: 30px;
+}
+
+#buddypress {
+  .standard-form {
+    p.description {
+      font-size: $font-size-sm;
+    }
+    .input-options {
+      padding: 10px 0;
+
+      label.option-label {
+          font-size: $font-size-sm;
+          display: block;
+      }
+    }
+
+    &#sidebar-login-form input {
+      &[type="text"], 
+      &[type="password"] {
+        padding: 4px;
+        width: 95%;
+      }
+    }
+  }
+
+  .standard-form{
+    &#signup_form {
+      input {
+        &[type="email"],
+        &[type="text"] {
+          width: 100%;
+        }
+      }
+      textarea {
+        width: 100%;
+      }
+    }
+
+    div.submit input:hover {
+      @include box-shadow( none );
+      color: $dark;
+    }
+  }
+}
+
+/*--------------------------------------------------------------
 8.0 - SI CAPTCHA Anti-Spam
 --------------------------------------------------------------*/
 

@@ -44,7 +44,7 @@ $migration = new Shipper_Model_Stored_Migration;
 
 	<div data-migration_type="<?php echo esc_attr( $migration->get_type() ); ?>"
 		class="sui-accordion sui-accordion-flushed shipper-result-sections">
-		
+
 		<div class="sui-accordion-item" data-section="local">
 			<div class="sui-accordion-item-header">
 				<div class="sui-accordion-item-title">
@@ -71,7 +71,7 @@ $migration = new Shipper_Model_Stored_Migration;
 				?>
 			</div>
 		</div>
-		
+
 		<div class="sui-accordion-item" data-section="remote">
 			<div class="sui-accordion-item-header">
 				<div class="sui-accordion-item-title">
@@ -98,7 +98,7 @@ $migration = new Shipper_Model_Stored_Migration;
 				?>
 			</div>
 		</div>
-		
+
 		<div class="sui-accordion-item" data-section="sysdiff">
 			<div class="sui-accordion-item-header">
 				<div class="sui-accordion-item-title">

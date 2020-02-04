@@ -33,37 +33,12 @@
 			esc_html_e( 'Directories have permissions that specify who and what can read, write, modify, and access them. You need to provide proper permissions to the working directory for Shipper to operate correctly. ', 'shipper' );
 		?>
 	</p>
+    <p></p>
 	<p>
 		<?php
-			echo wp_kses_post( sprintf( __( 'Your working directory is located at <code>%s</code>. You can change permissions of your working directory via either FTP or SSH. Follow the steps below to add the proper permissions:'  , 'shipper' ), $value ) );
+			echo wp_kses_post( sprintf( __( 'Your working directory is located at <code>%s</code>. Please make sure that working directory has write permissions for PHP owner so Shipper scripts could write in this directory. If you are not sure how to check the permissions, contact your hosting support or your system admin to fix the permissions for you.'  , 'shipper' ), $value ) );
 		?>
 	</p>
-	<div class="sui-side-tabs sui-tabs">
-		<div data-tabs>
-			<div class="active"><?php esc_html_e( 'FTP', 'shipper' ); ?></div>
-			<div><?php esc_html_e( 'SSH', 'shipper' ); ?></div>
-		</div>
-		<div data-panes>
-			<div class="sui-tab-boxed active">
-				<p>
-					<?php esc_html_e( 'Follow the instructions below to change permissions of your working directory.', 'shipper' ); ?>
-				</p>
-				<h5><?php esc_html_e( 'Instructions', 'shipper' ); ?></h5>
-				<p>
-					<?php echo wp_kses_post( sprintf( __( '1. Connect to your site via FTP, and go to your working directory at <code>%s</code>', 'shipper' ), $value ) ); ?><br />
-					<?php esc_html_e( '2. Right click on your working directory, and click on the “File permissions” options.', 'shipper' ); ?><br />
-					<?php esc_html_e( '3. Shipper needs 766 permissions to write to this directory, so enter 766 into the numeric value field.', 'shipper' ); ?><br />
-					<?php esc_html_e( '4. Enable the “Recurse into subdirectories” option, and click OK to activate the permissions.', 'shipper' ); ?>
-				</p>
-			</div>
-			<div class="sui-tab-boxed">
-				<p>
-					<?php esc_html_e( 'If you have SSH access to your hosting account, you can use chmod to change file permissions, which is the preferred method for experienced users only. Run the following command to change the permissions of your working directory:', 'shipper' ); ?>
-				</p>
-				<pre class="sui-code-snipper"><?php echo esc_html( sprintf( 'chmod -R 766 %s', $value ) ); ?></pre>
-			</div>
-		</div>
-	</div><!-- .sui-tabs -->
 </div>
 <div class="sui-notice-top sui-notice-error sui-can-dismiss shipper-recheck-unsuccessful" style="display:none">
 	<div class="sui-notice-content">

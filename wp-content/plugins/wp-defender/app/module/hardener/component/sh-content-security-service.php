@@ -153,9 +153,9 @@ class Sh_Content_Security_Service extends Rule_Service implements IRule_Service 
 			 *  - show a small banner for cancel, or apply the changes.
 			 */
 			$settings->setDValues( self::KEY_TEMP_DATA, $data );
-			setcookie( Sh_Content_Security::$slug . '-testing', true, 0, '', '', false, true );
+			setcookie( Sh_Content_Security::$slug . '-testing', true, 0, '', '', true, true );
 			//clear the old staging
-			setcookie( Sh_Content_Security::$slug . '-staging', false, - 1, '', '', false, true );
+			setcookie( Sh_Content_Security::$slug . '-staging', false, - 1, '', '', true, true );
 			//a simple flag to use while cookie being set
 		} else {
 			$settings->setDValues( self::KEY_DATA, $data );

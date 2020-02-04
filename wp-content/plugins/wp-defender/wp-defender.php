@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Defender Pro
  * Plugin URI: https://premium.wpmudev.org/project/wp-defender/
- * Version:     2.2.2
+ * Version:     2.2.4
  * Description: Get regular security scans, vulnerability reports, safety recommendations and customized hardening for your site in just a few clicks. Defender is the analyst and enforcer who never sleeps.
  * Author:      WPMU DEV
  * Author URI:  http://premium.wpmudev.org/
@@ -87,12 +87,19 @@ class WP_Defender {
 		$this->initVars();
 		$this->includeVendors();
 		$this->autoload();
+		if ( class_exists( 'WP_ClI' ) ) {
+			$this->initCliCommand();
+		}
 		add_action( 'admin_enqueue_scripts', array( &$this, 'register_styles' ) );
 		add_action( 'plugins_loaded', array( &$this, 'loadTextDomain' ) );
 		include_once $this->getPluginPath() . 'main-activator.php';
 		$this->global['bootstrap'] = new WD_Main_Activator( $this );
 		//for the new SUI
 		add_filter( 'admin_body_class', array( &$this, 'adminBodyClasses' ) );
+	}
+
+	public function initCliCommand() {
+		WP_CLI::add_command( 'defender', '\WP_Defender\Component\Cli' );
 	}
 
 	public function loadTextDomain() {
@@ -115,7 +122,8 @@ class WP_Defender {
 			'wdf-logging',
 			'wdf-ip-lockout',
 			'wdf-advanced-tools',
-			'wdf-setting'
+			'wdf-setting',
+			'wdf-debug'
 		];
 		$page  = isset( $_GET['page'] ) ? $_GET['page'] : null;
 		if ( in_array( $page, $pages ) ) {
@@ -132,8 +140,13 @@ class WP_Defender {
 		$phpVersion = phpversion();
 		if ( version_compare( $phpVersion, '5.3', '>=' ) && ! function_exists( 'initCacheEngine' ) ) {
 			//if current theme is Avanda, turn off wp defender object cache as avanda agressive flush cache when any cpt save
-			if ( function_exists( 'Avada' ) ) {
-				define( 'WD_NO_OBJECT_CACHE', 1 );
+			if ( function_exists( 'get_option' ) ) {
+				$template = get_option( 'template' );
+				$template = strtolower( $template );
+
+				if ( $template == 'avada' ) {
+					define( 'WD_NO_OBJECT_CACHE', 1 );
+				}
 			}
 			include_once $this->plugin_path . 'vendor' . DIRECTORY_SEPARATOR . 'hammer' . DIRECTORY_SEPARATOR . 'bootstrap.php';
 		}

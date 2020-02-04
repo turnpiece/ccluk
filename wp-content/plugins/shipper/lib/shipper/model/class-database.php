@@ -53,7 +53,8 @@ class Shipper_Model_Database {
 	 * @return array
 	 */
 	public function get_reserved_words() {
-		$reserved_names = array( 'key', 'group', 'show', 'order' );
+		$reserved_names = array( 'key', 'group', 'show', 'order', 'require', 'virtual' );
+
 		return $reserved_names;
 	}
 
@@ -63,11 +64,12 @@ class Shipper_Model_Database {
 	 * @return array
 	 */
 	public function get_tables_list() {
-		$query = 'SHOW TABLES FROM `' . DB_NAME . '`';
+		$query  = 'SHOW TABLES FROM `' . DB_NAME . '`';
 		$tables = $this->run(
 			$query,
 			self::QUERY_GET_COL
 		);
+
 		return (array) $tables;
 	}
 
@@ -104,7 +106,7 @@ class Shipper_Model_Database {
 	 */
 	public function has_error() {
 		return ! empty(
-			$this->get_error()
+		$this->get_error()
 		);
 	}
 
@@ -122,7 +124,7 @@ class Shipper_Model_Database {
 	 *
 	 * @param string $query SQL query to run.
 	 * @param string $callback WPDB method to use.
-	 * @param mixed  $param Additional parameter to use.
+	 * @param mixed $param Additional parameter to use.
 	 *
 	 * @return mixed Query result
 	 */
@@ -137,6 +139,7 @@ class Shipper_Model_Database {
 		}
 
 		$this->clear_error();
+
 		return call_user_func_array(
 			array( $this->get_dbh(), $callback ),
 			$args
@@ -153,7 +156,7 @@ class Shipper_Model_Database {
 	public function query_ignore( $statement ) {
 		$this->get_dbh()->query( 'SET foreign_key_checks = 0' );
 		$result = $this->get_dbh()->query( $statement );
-		$error = $this->get_error();
+		$error  = $this->get_error();
 		$this->get_dbh()->query( 'SET foreign_key_checks = 1' );
 
 		$this->get_dbh()->last_error = $error;
@@ -171,16 +174,17 @@ class Shipper_Model_Database {
 	 * @return string|bool Primary key, or false on failure
 	 */
 	public function get_primary_key( $table ) {
-		if ( ! empty( $this->_primary_keys[ $table ] ) ) { return $this->_primary_keys[ $table ]; }
+		if ( ! empty( $this->_primary_keys[ $table ] ) ) {
+			return $this->_primary_keys[ $table ];
+		}
 
-		$keys = $this->get_dbh()->get_row(
+		$keys        = $this->get_dbh()->get_row(
 			"SHOW KEYS FROM {$table} WHERE key_name = 'PRIMARY' or key_name = 'ID'",
 			ARRAY_A
 		);
 		$primary_key = ! empty( $keys['Column_name'] )
 			? $keys['Column_name']
-			: false
-		;
+			: false;
 
 		if ( ! empty( $primary_key ) ) {
 			$this->_primary_keys[ $table ] = $primary_key;
@@ -201,7 +205,9 @@ class Shipper_Model_Database {
 		foreach ( $tables as $table ) {
 			$sqls[] = "SELECT '{$table}', COUNT(*) AS cnt FROM {$table}";
 		}
-		if ( empty( $sqls ) ) { return array(); }
+		if ( empty( $sqls ) ) {
+			return array();
+		}
 
 		$raw = (array) $this->run(
 			join( ' UNION ALL ', $sqls ),
@@ -243,19 +249,19 @@ class Shipper_Model_Database {
 	 */
 	public function get_temporary_table_name( $src ) {
 		$table_name_length = strlen( $src ) + 5;
-		$max_base = $table_name_length >= self::MAX_SQL_TABLE_NAME_LENGTH
+		$max_base          = $table_name_length >= self::MAX_SQL_TABLE_NAME_LENGTH
 			? self::MAX_SQL_TABLE_NAME_LENGTH
 			: self::MAX_SQL_TABLE_NAME_LENGTH - ( strlen( $src ) + 5 );
-		$max = $max_base > ( PHP_INT_MAX / 1000 )
+		$max               = $max_base > ( PHP_INT_MAX / 1000 )
 			? PHP_INT_MAX
-			: $max_base * 1000
-		;
+			: $max_base * 1000;
 		if ( $table_name_length >= self::MAX_SQL_TABLE_NAME_LENGTH ) {
 			// Ensure table name uniqueness for very long tables.
 			$maxlen = strlen( $max ) + 5;
-			$src = substr( $src, 0, self::MAX_SQL_TABLE_NAME_LENGTH - $maxlen );
+			$src    = substr( $src, 0, self::MAX_SQL_TABLE_NAME_LENGTH - $maxlen );
 		}
-		return "{$src}_tmp_" . rand(0, $max);
+
+		return "{$src}_tmp_" . rand( 0, $max );
 	}
 
 	/**
@@ -268,11 +274,11 @@ class Shipper_Model_Database {
 	 */
 	public function is_options_table_row( $raw, $table ) {
 		return shipper_array_keys_exist( array(
-			'option_id',
-			'option_name',
-			'option_value',
-			'autoload',
-		), $raw ) && strrpos( $table, 'options' );
+				'option_id',
+				'option_name',
+				'option_value',
+				'autoload',
+			), $raw ) && strrpos( $table, 'options' );
 	}
 
 	/**
@@ -285,11 +291,11 @@ class Shipper_Model_Database {
 	 */
 	public function is_sitemeta_table_row( $raw, $table ) {
 		return shipper_array_keys_exist( array(
-			'meta_id',
-			'site_id',
-			'meta_key',
-			'meta_value',
-		), $raw ) && strrpos( $table, 'sitemeta' );
+				'meta_id',
+				'site_id',
+				'meta_key',
+				'meta_value',
+			), $raw ) && strrpos( $table, 'sitemeta' );
 	}
 
 	/**
@@ -302,14 +308,14 @@ class Shipper_Model_Database {
 	 */
 	public function is_users_table_row( $raw, $table ) {
 		return shipper_array_keys_exist( array(
-			'user_login',
-			'user_pass',
-			'user_nicename',
-			'user_email',
-			'user_activation_key',
-			'user_status',
-			'display_name',
-		), $raw ) && strrpos( $table, 'users' );
+				'user_login',
+				'user_pass',
+				'user_nicename',
+				'user_email',
+				'user_activation_key',
+				'user_status',
+				'display_name',
+			), $raw ) && strrpos( $table, 'users' );
 	}
 
 	/**
@@ -327,6 +333,7 @@ class Shipper_Model_Database {
 		if ( $this->is_sitemeta_table_row( $raw, $table ) ) {
 			return $raw['meta_key'];
 		}
+
 		return '';
 	}
 
@@ -362,6 +369,7 @@ class Shipper_Model_Database {
 						$this->get_error()
 					)
 				);
+
 				return false;
 			}
 		}
@@ -383,6 +391,7 @@ class Shipper_Model_Database {
 					$src_table, $dest_table, $this->get_error()
 				)
 			);
+
 			return false;
 		}
 

@@ -6,7 +6,7 @@
  */
 
 $tools = array(
-	'migration' => __( 'Migration', 'shipper' ),
+	'migration' => __( 'API Migration', 'shipper' ),
 	'accessibility' => __( 'Accessibility', 'shipper' ),
 	'data' => __( 'Data', 'shipper' ),
 	'notifications' => __( 'Notifications', 'shipper' ),

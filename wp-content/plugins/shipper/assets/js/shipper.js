@@ -563,6 +563,172 @@
 
 /***/ }),
 
+/***/ "./assets/src/js/migrate/dbprefix.js":
+/*!*******************************************!*\
+  !*** ./assets/src/js/migrate/dbprefix.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+;(function ($) {
+	function init() {
+		if ($('.shipper-db-prefix-modal').length) {
+			//open modal
+			$(window).on('load', function () {
+				$('.shipper-db-prefix-modal').attr('aria-hidden', false);
+				$('.shipper-db-prefix-modal').find('.sui-tab-item.active input[name="migrate_dbprefix"]').click()
+			});
+			$('.shipper-db-prefix-modal .sui-dialog-close,' +
+				' .shipper-db-prefix-modal .shipper-cancel').on('click', handle_preflight_cancel);
+			$('.shipper-update-prefix').on('click', handle_update_prefix)
+		}
+	}
+
+	function stop_prop(e) {
+		if (e && e.preventDefault) e.preventDefault();
+		if (e && e.stopPropagation) e.stopPropagation();
+		return false;
+	}
+
+	/**
+	 * Copy the code form preflight as the process much same
+	 * @param e
+	 * @returns {boolean}
+	 */
+	function handle_preflight_cancel(e) {
+		$.post(ajaxurl, {action: 'shipper_preflight_cancel'}, function () {
+			window.location.search = '?page=shipper';
+		});
+		return stop_prop(e);
+	}
+
+	/**
+	 * Saving the prefix option to current migration
+	 */
+	function handle_update_prefix(e) {
+		var option = $('input[name="migrate_dbprefix"]:checked').val()
+		var value = $('input[name="migrate_dbprefix_value"]').val()
+
+		$.post(ajaxurl, {
+			action: 'shipper_dbprefix_update',
+			option: option,
+			value: value
+		}, function (data) {
+			console.log(data);
+			if (data.success === true) {
+				console.log('updated db prefix');
+				location.reload();
+			} else {
+				//show error
+			}
+		});
+	}
+
+	$(init());
+}(jQuery))
+
+/***/ }),
+
+/***/ "./assets/src/js/migrate/exclusion.js":
+/*!********************************************!*\
+  !*** ./assets/src/js/migrate/exclusion.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+;(function ($) {
+	function init() {
+		if ($('.shipper-migration-exclusion').length) {
+			//open modal
+			$(window).on('load', function () {
+				$('.shipper-migration-exclusion').attr('aria-hidden', false);
+			});
+			$('.shipper-migration-exclusion .sui-dialog-close,' +
+				' .shipper-migration-exclusion .shipper-cancel').on('click', handle_preflight_cancel);
+			$(document).on(
+				'click',
+				'.shipper-quicklinks a[data-path]',
+				insert_quicklink
+			);
+			$(document).on('click', '.shipper-update-exclusion', update_exclusion);
+		}
+	}
+
+	function insert_quicklink(e) {
+		var path = $(this).attr('data-path'),
+			$target = $(this).closest('.sui-form-field').find('textarea'),
+			paths = $target.val().split("\n");
+		paths.push(path);
+		$target.val($.trim(paths.join("\n")));
+		return stop_prop(e);
+	}
+
+	function stop_prop(e) {
+		if (e && e.preventDefault) e.preventDefault();
+		if (e && e.stopPropagation) e.stopPropagation();
+		return false;
+	}
+
+	/**
+	 * Copy the code form preflight as the process much same
+	 * @param e
+	 * @returns {boolean}
+	 */
+	function handle_preflight_cancel(e) {
+		$.post(ajaxurl, {action: 'shipper_preflight_cancel'}, function () {
+			window.location.search = '?page=shipper';
+		});
+		return stop_prop(e);
+	}
+
+	function update_exclusion(e) {
+		var data = _.extend(
+			{action: 'shipper_migration_exclusion'},
+			{'exclude_files': gather_files()},
+			{'exclude_tables': gather_database()},
+			{'exclude_extra': gather_advanced()}
+		)
+		var el = $(e.target);
+		console.log(el);
+		console.log(el.data('url'));
+		$.post(ajaxurl, data, function (data) {
+			if (data.success === true) {
+				location.href = el.data('url');
+			}
+		});
+	}
+
+	function gather_files() {
+		return $('.shipper-file-exclusions textarea')
+			.val().split("\n");
+	}
+
+	function gather_database() {
+		var $selected = $('.sui-tree [aria-selected="true"] [data-table]'),
+			sel = [];
+
+		$selected.each(function () {
+			sel.push($(this).attr('data-table'));
+		});
+
+		return sel;
+	}
+
+	function gather_advanced() {
+		var $els = $('.sui-checkbox-stacked :checkbox'),
+			opts = [];
+		$els.each(function () {
+			if (!$(this).is(':checked')) return true;
+			opts.push($(this).attr('name'));
+		});
+		return opts;
+	}
+
+	$(init());
+}(jQuery))
+
+/***/ }),
+
 /***/ "./assets/src/js/migrate/initial.js":
 /*!******************************************!*\
   !*** ./assets/src/js/migrate/initial.js ***!
@@ -940,56 +1106,56 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-;( function( $ ) {
+;(function ($) {
 
-	var Filter = function( $root, type, filter_callback ) {
+	var Filter = function ($root, type, filter_callback) {
 
 		function get_filter_form_field() {
-			return $( '.shipper-filter-area [data-filter-field="' + type + '"]', $root );
+			return $('.shipper-filter-area [data-filter-field="' + type + '"]', $root);
 		}
 
 		function get_filter_form_value() {
-			return get_filter_form_field().find( ':input' ).val();
+			return get_filter_form_field().find(':input').val();
 		}
 
 		function reset_filter_form_field() {
 			get_filter_form_field()
-				.find( ':input' ).val( '' )
+				.find(':input').val('')
 			;
 			clear_active_filter();
 		}
 
-		function get_active_filter( ) {
-			return $( '.shipper-active-filters .shipper-filter', $root )
-				.filter( '[data-filter-type="' + type + '"]' );
+		function get_active_filter() {
+			return $('.shipper-active-filters .shipper-filter', $root)
+				.filter('[data-filter-type="' + type + '"]');
 		}
 
 		function clear_active_filter() {
-			get_active_filter().removeClass( 'shipper-filter-active' );
+			get_active_filter().removeClass('shipper-filter-active');
 		}
 
 		function is_active_filter() {
-			return get_active_filter().is( '.shipper-filter-active' );
+			return get_active_filter().is('.shipper-filter-active');
 		}
 
-		function update_active_filter( value ) {
+		function update_active_filter(value) {
 			clear_active_filter();
-			if ( ! value ) {
+			if (!value) {
 				return false;
 			}
 			get_active_filter()
-				.addClass( 'shipper-filter-active' )
-				.find( '.shipper-filter-target' ).text( value )
+				.addClass('shipper-filter-active')
+				.find('.shipper-filter-target').text(value)
 			;
 		}
 
 		function get_filter_callback() {
-			return filter_callback( get_filter_form_value() );
+			return filter_callback(get_filter_form_value());
 		}
-		
+
 		var filter = {
 			apply_filter: function () {
-				update_active_filter( get_filter_form_value() );
+				update_active_filter(get_filter_form_value());
 				return get_filter_callback();
 			},
 			reset_filter: function () {
@@ -1002,7 +1168,7 @@
 		return filter;
 	};
 
-	var Pagination = function( $root ) {
+	var Pagination = function ($root) {
 
 		var PER_PAGE = parseInt((_shipper || {}).per_page || 10);
 
@@ -1012,94 +1178,98 @@
 			return _current_page || 1;
 		}
 
-		function set_current_page( idx ) {
+		function set_current_page(idx) {
 			_current_page = idx || 1;
 		}
 
-		function apply_pagination( page ) {
-			if ( page ) {
-				set_current_page( page );
+		function apply_pagination(page) {
+			if (page) {
+				set_current_page(page);
 			}
 			page = get_current_page();
 
-			var start = ( page - 1 ) * PER_PAGE + 1,
+			var start = (page - 1) * PER_PAGE + 1,
 				end = page * PER_PAGE,
-				$rows = $( '.shipper-filelist tr.shipper-paginated', $root ),
-				$pagination_items = $( '.sui-pagination li', $root ),
+				$rows = $('.shipper-filelist tr.shipper-paginated', $root),
+				$pagination_items = $('.sui-pagination li', $root),
 				current = 0
 			;
-			$rows.removeClass( 'shipper-paginated-visible' );
-			$rows.each( function () {
+			$rows.removeClass('shipper-paginated-visible');
+			$rows.each(function () {
 				current++;
-				if ( current < start ) { return true; }
-				if ( current > end ) { return false; }
-				var $row = $( this );
-				$row.addClass( 'shipper-paginated-visible' );
-			} );
+				if (current < start) {
+					return true;
+				}
+				if (current > end) {
+					return false;
+				}
+				var $row = $(this);
+				$row.addClass('shipper-paginated-visible');
+			});
 
 			$pagination_items
-				.removeClass( 'sui-active' )
-				.filter( '[data-idx="' + page + '"]' ).addClass( 'sui-active' )
+				.removeClass('sui-active')
+				.filter('[data-idx="' + page + '"]').addClass('sui-active')
 			;
-			$root.trigger( 'shipper-pagination-applied' );
+			$root.trigger('shipper-pagination-applied');
 		}
 
 		function build_pagination() {
-			var $paginations = $( '.sui-pagination', $root ),
-				$rows = $( '.shipper-filelist tr.shipper-paginated', $root ),
-				items = Math.ceil( $rows.length / PER_PAGE )
+			var $paginations = $('.sui-pagination', $root),
+				$rows = $('.shipper-filelist tr.shipper-paginated', $root),
+				items = Math.ceil($rows.length / PER_PAGE)
 			;
-			if ( $rows.length <= PER_PAGE ) {
+			if ($rows.length <= PER_PAGE) {
 				$paginations.remove();
 				return false;
 			}
-			$paginations.each( function () {
-				var $pagination = $( this ),
-					$first = $pagination.find( 'li:first' )
+			$paginations.each(function () {
+				var $pagination = $(this),
+					$first = $pagination.find('li:first')
 				;
-				for ( var i = 1; i <= items; i++ ) {
+				for (var i = 1; i <= items; i++) {
 					var $tpl = $first.clone();
 					$tpl
-						.attr( 'data-idx', i )
-						.find( 'a' )
-							.attr( 'href', '#page-' + i )
-							.text( i )
-							.off( 'click' )
-							.on( 'click', function ( e ) {
-								apply_pagination( $( this ).closest( 'li' ).attr( 'data-idx' ) );
-								return stop_prop( e );
-							})
+						.attr('data-idx', i)
+						.find('a')
+						.attr('href', '#page-' + i)
+						.text(i)
+						.off('click')
+						.on('click', function (e) {
+							apply_pagination($(this).closest('li').attr('data-idx'));
+							return stop_prop(e);
+						})
 					;
-					$pagination.find( 'li:last' ).before( $tpl );
+					$pagination.find('li:last').before($tpl);
 				}
 			});
 
 			$root
-				.off( 'click', '.sui-pagination a[href="#first"]' )
-				.on( 'click', '.sui-pagination a[href="#first"]', function( e ) {
-					apply_pagination( 1 );
-					return stop_prop( e );
-				} )
+				.off('click', '.sui-pagination a[href="#first"]')
+				.on('click', '.sui-pagination a[href="#first"]', function (e) {
+					apply_pagination(1);
+					return stop_prop(e);
+				})
 			;
 			$root
-				.off( 'click', '.sui-pagination a[href="#last"]' )
-				.on( 'click', '.sui-pagination a[href="#last"]', function( e ) {
-					apply_pagination( $( this ).closest( 'ul' ).find( 'li' ).length - 2 );
-					return stop_prop( e );
-				} )
+				.off('click', '.sui-pagination a[href="#last"]')
+				.on('click', '.sui-pagination a[href="#last"]', function (e) {
+					apply_pagination($(this).closest('ul').find('li').length - 2);
+					return stop_prop(e);
+				})
 			;
 
-			$( '.shipper-files-count', $root )
-				.text( $rows.length )
-					.closest( '.sui-pagination-results' )
+			$('.shipper-files-count', $root)
+				.text($rows.length)
+				.closest('.sui-pagination-results')
 				.show();
 
 			$paginations.show();
 		}
 
 		function destroy_pagination() {
-			var $paginations = $( '.sui-pagination', $root ),
-				$items = $paginations.find( '[data-idx]' )
+			var $paginations = $('.sui-pagination', $root),
+				$items = $paginations.find('[data-idx]')
 			;
 			$items.remove();
 			$paginations.hide();
@@ -1115,7 +1285,7 @@
 		};
 	};
 
-	var PaginatedFilterArea = function( $root ) {
+	var PaginatedFilterArea = function ($root) {
 
 		var FILTER_PATH = 'path';
 		var FILTER_TYPE = 'type';
@@ -1123,35 +1293,35 @@
 
 		var _filters = {};
 
-		_filters[ FILTER_PATH ] = new Filter( $root, FILTER_PATH, function ( value, $el ) {
-			var rx = new RegExp( value, 'i' );
-			return function ( index ) {
-				if ( ! value ) return true;
-				return !! rx.exec( $( this ).attr( 'data-path' ) );
+		_filters[FILTER_PATH] = new Filter($root, FILTER_PATH, function (value, $el) {
+			var rx = new RegExp(value, 'i');
+			return function (index) {
+				if (!value) return true;
+				return !!rx.exec($(this).attr('data-path'));
 			};
 		});
-		_filters[ FILTER_TYPE ] = new Filter( $root, FILTER_TYPE, function ( value, $el ) {
-			return function ( index ) {
-				if ( ! value ) return true;
-				return $( this ).attr( 'data-type' ) === value;
+		_filters[FILTER_TYPE] = new Filter($root, FILTER_TYPE, function (value, $el) {
+			return function (index) {
+				if (!value) return true;
+				return $(this).attr('data-type') === value;
 			}
 		});
-		_filters[ FILTER_SIZE ] = new Filter( $root, FILTER_SIZE, function ( value, $el ) {
-			var size_mb = parseInt( value, 10 ) * 1048576;
-			return function ( index ) {
-				if ( ! value ) return true;
-				return parseInt( $( this ).attr( 'data-size' ), 10 ) > size_mb;
+		_filters[FILTER_SIZE] = new Filter($root, FILTER_SIZE, function (value, $el) {
+			var size_mb = parseInt(value, 10) * 1048576;
+			return function (index) {
+				if (!value) return true;
+				return parseInt($(this).attr('data-size'), 10) > size_mb;
 			}
 		});
 
-		var _pagination = new Pagination( $root );
+		var _pagination = new Pagination($root);
 		_pagination.apply();
 
 
 		function filter_form_reset() {
-			$.each(_filters, function( type, filter ) {
+			$.each(_filters, function (type, filter) {
 				filter.reset_filter();
-			} );
+			});
 			unselect_all();
 			_pagination.destroy();
 			_pagination.build();
@@ -1160,29 +1330,29 @@
 
 		function filter_form_apply() {
 			unselect_all();
-			$( 'tr.shipper-paginated', $root )
-				.removeClass( 'shipper-paginated-visible' )
-				.filter( function ( index ) {
+			$('tr.shipper-paginated', $root)
+				.removeClass('shipper-paginated-visible')
+				.filter(function (index) {
 					var me = this,
 						show = true
 					;
-					$.each( _filters, function( type, filter ) {
-						show = filter.apply_filter().call( me, index );
-						if ( ! show ) return false;
-					} );
+					$.each(_filters, function (type, filter) {
+						show = filter.apply_filter().call(me, index);
+						if (!show) return false;
+					});
 					return show;
-				} ).addClass( 'shipper-paginated-visible' );
+				}).addClass('shipper-paginated-visible');
 			;
 			_pagination.destroy();
 		}
 
 		function get_active_filter_types() {
 			var active = [];
-			$.each( _filters, function( type, filter ) {
-				if ( filter.is_active() ) {
-					active.push( type );
+			$.each(_filters, function (type, filter) {
+				if (filter.is_active()) {
+					active.push(type);
 				}
-			} );
+			});
 			return active;
 		}
 
@@ -1190,26 +1360,26 @@
 			return !!get_active_filter_types().length;
 		}
 
-		function handle_remove_active_filter( e ) {
-			var $active = $( this );
-			if ( ! $active.is( '.shipper-filter' ) ) {
-				$active = $active.closest( '.shipper-filter' );
+		function handle_remove_active_filter(e) {
+			var $active = $(this);
+			if (!$active.is('.shipper-filter')) {
+				$active = $active.closest('.shipper-filter');
 			}
-			var type = $active.attr( 'data-filter-type' );
-			_filters[ type ].reset_filter();
+			var type = $active.attr('data-filter-type');
+			_filters[type].reset_filter();
 			filter_form_apply();
 
-			if ( ! has_active_filters() ) {
+			if (!has_active_filters()) {
 				filter_form_reset();
 			}
 
-			return stop_prop( e );
+			return stop_prop(e);
 		}
 
 		function toggle_all_selection_visible() {
-			var $rows = $( '.shipper-filelist tr.shipper-paginated-visible', $root ),
-				$me = $( '.shipper-filelist :checkbox[name="shipper-bulk-all"]', $root );
-			if ( $me.attr( 'checked' ) ) {
+			var $rows = $('.shipper-filelist tr.shipper-paginated-visible', $root),
+				$me = $('.shipper-filelist :checkbox[name="shipper-bulk-all"]', $root);
+			if ($me.attr('checked')) {
 				select_all();
 			} else {
 				unselect_all();
@@ -1217,68 +1387,69 @@
 		}
 
 		function select_all() {
-			var $rows = $( '.shipper-filelist tr.shipper-paginated-visible', $root );
-			$rows.each( function( idx, row ) {
-				select( $( row ) );
-			} );
-			$( '.shipper-filelist :checkbox[name="shipper-bulk-all"]', $root )
-				.attr( 'checked', true );
+			var $rows = $('.shipper-filelist tr.shipper-paginated-visible', $root);
+			$rows.each(function (idx, row) {
+				select($(row));
+			});
+			$('.shipper-filelist :checkbox[name="shipper-bulk-all"]', $root)
+				.attr('checked', true);
 			toggle_bulk_actions_disabled();
 		}
 
-		function select( $row ) {
-			$row.find( ':checkbox[name="shipper-bulk"]' )
-				.attr( 'checked', true );
+		function select($row) {
+			$row.find(':checkbox[name="shipper-bulk"]')
+				.attr('checked', true);
 			toggle_bulk_actions_disabled();
 		}
 
 		function unselect_all() {
-			var $rows = $( '.shipper-filelist tr.shipper-paginated-visible', $root );
-			$rows.each( function( idx, row ) {
-				unselect( $( row ) );
-			} );
-			$( '.shipper-filelist :checkbox[name="shipper-bulk-all"]', $root )
-				.attr( 'checked', false );
+			var $rows = $('.shipper-filelist tr.shipper-paginated-visible', $root);
+			$rows.each(function (idx, row) {
+				unselect($(row));
+			});
+			$('.shipper-filelist :checkbox[name="shipper-bulk-all"]', $root)
+				.attr('checked', false);
 			toggle_bulk_actions_disabled();
 		}
 
-		function unselect( $row ) {
-			$row.find( ':checkbox[name="shipper-bulk"]' )
-				.attr( 'checked', false );
+		function unselect($row) {
+			$row.find(':checkbox[name="shipper-bulk"]')
+				.attr('checked', false);
 			toggle_bulk_actions_disabled();
 		}
 
 		function toggle_bulk_actions_disabled_raw() {
-			var $rows = $( '.shipper-filelist tr.shipper-paginated-visible' )
-				.find( ':checkbox[name="shipper-bulk"]:checked' );
-			$( '.shipper-bulk-actions-field select, .shipper-bulk-actions-field button' )
-				.attr( 'disabled', ! $rows.length );
+			var $rows = $('.shipper-filelist tr.shipper-paginated-visible')
+				.find(':checkbox[name="shipper-bulk"]:checked');
+			$('.shipper-bulk-actions-field select, .shipper-bulk-actions-field button')
+				.attr('disabled', !$rows.length);
 		}
-		var toggle_bulk_actions_disabled = _.debounce( toggle_bulk_actions_disabled_raw, 100 );
 
-		function handle_filter_area_toggle( e ) {
-			var $el = $( this ),
-				$target = $( '.shipper-filter-area', $root )
+		var toggle_bulk_actions_disabled = _.debounce(toggle_bulk_actions_disabled_raw, 100);
+
+		function handle_filter_area_toggle(e) {
+			var $el = $(this),
+				$target = $('.shipper-filter-area', $root)
 			;
-			$el.toggleClass( 'sui-active' );
+			$el.toggleClass('sui-active');
 			unselect_all();
 
-			if ( $el.is( '.sui-active' ) ) {
+			if ($el.is('.sui-active')) {
 				$target.show();
 			} else {
 				$target.hide();
-				if ( ! has_active_filters() ) {
+				if (!has_active_filters()) {
 					filter_form_reset();
 				}
 			}
 
-			return stop_prop( e );
+			return stop_prop(e);
 		}
 
 		function apply_bulk_actions() {
-			var $me = $( '.shipper-bulk-actions-field', $root ),
-				$els = $( ':checkbox[name="shipper-bulk"]:checked', $root ),
-				action = $( this ).closest( '.sui-form-field' ).find( 'select' ).val(),
+			var $me = $('.shipper-bulk-actions-field', $root),
+				$els = $(':checkbox[name="shipper-bulk"]:checked', $root),
+				action = $(this).closest('.sui-form-field').find('select').val(),
 				els = []
 			;
 			var $msgroot = $('.shipper-toggle-success'),
@@ -1290,57 +1461,57 @@
 				}
 			;
 			hide_warning();
-			if ( ! action || ! $els.length ) return false;
+			if (!action || !$els.length) return false;
 
 			$me
-				.find( 'button' ).attr( 'disabled', true ).end()
-				.find( 'select' ).attr( 'disabled', true ).end()
-				.find( '.sui-with-button' ).append( '<i class="sui-icon-loader sui-loading"></i>' )
+				.find('button').attr('disabled', true).end()
+				.find('select').attr('disabled', true).end()
+				.find('.sui-with-button').append('<i class="sui-icon-loader sui-loading"></i>')
 			;
-			$els.each( function() {
-				var $el = $( this ).closest( 'tr' ),
+			$els.each(function () {
+				var $el = $(this).closest('tr'),
 					dfr = new $.Deferred()
 				;
-				if ( 'exclude' === action && $el.is( '.shipper-file-excluded' ) ) {
+				if ('exclude' === action && $el.is('.shipper-file-excluded')) {
 					// Already excluded, don't bother.
 					return true;
 				}
-				if ( 'include' === action && !$el.is( '.shipper-file-excluded' ) ) {
+				if ('include' === action && !$el.is('.shipper-file-excluded')) {
 					// Already included, carry on.
 					return true;
 				}
 				els.push({
-					path: $el.attr( 'data-path' ),
-					_wpnonce: $el.find( '[data-wpnonce]' ).attr( 'data-wpnonce' )
-				} );
-			} );
+					path: $el.attr('data-path'),
+					_wpnonce: $el.find('[data-wpnonce]').attr('data-wpnonce')
+				});
+			});
 
-			$.post( ajaxurl, { action: 'shipper_bulk_process_paths', apply: action, paths: els } )
-				.done( function ( data ) {
+			$.post(ajaxurl, {action: 'shipper_bulk_process_paths', apply: action, paths: els})
+				.done(function (data) {
 					$me
-						.find( 'button' ).attr( 'disabled', false ).end()
-						.find( 'select' ).attr( 'disabled', false ).end()
-						.find( '.sui-loading' ).remove()
+						.find('button').attr('disabled', false).end()
+						.find('select').attr('disabled', false).end()
+						.find('.sui-loading').remove()
 					;
 					var cls = '.shipper-' + action + '-success';
 					clearTimeout($msgroot.data('shipper-timeout'));
 					$msgroot
 						.find(cls)
-							.find('.shipper-toggle-count').text(els.length).end()
-							.show().end()
+						.find('.shipper-toggle-count').text(els.length).end()
+						.show().end()
 						.show()
 					;
 					var tmout = setTimeout(hide_warning, 3000);
 					$msgroot.data('shipper-timeout', tmout);
-					update_exclusions( ( data || {} ).data );
+					update_exclusions((data || {}).data);
 					update_file_item_rows();
 					update_package_size_message();
-			});
+				});
 		}
 
-		function enter_to_apply_filters( e ) {
+		function enter_to_apply_filters(e) {
 			var key = e.which;
-			if ( 13 === key ) {
+			if (13 === key) {
 				filter_form_apply();
 			}
 		}
@@ -1362,198 +1533,207 @@
 		}
 
 		function update_package_size_message() {
-			var $package_size = $( '#shipper-preflight-results [data-section="files"] div.sui-accordion-item:last .shipper-check-status' );
+			var $package_size = $('#shipper-preflight-results [data-section="files"] div.sui-accordion-item:last .shipper-check-status');
 
-			if ( ! $package_size.find( 'i.sui-loading' ).length ) {
+			if (!$package_size.find('i.sui-loading').length) {
 				$package_size.append(
 					'<i class="sui-icon-loader sui-loading"></i>'
 				);
 			}
+			var urlParams = new URLSearchParams(window.location.search);
+			var action = 'shipper_get_package_size_message';
+			if ('shipper-packages' === urlParams.get('page')) {
+				action = 'shipper_package_get_package_size_message';
+			}
 			$.post(
 				ajaxurl,
-				{ action: 'shipper_get_package_size_message' },
-				function( rsp ) {
-					var oversized = ( ( rsp || {} ).data || {} ).oversized || false,
-						markup = ( ( rsp || {} ).data || {} ).markup || false,
-						excluded = ( ( rsp || {} ).data || {} ).excluded || 0,
-						package_size = ( ( rsp || {} ).data || {} ).package_size || ''
+				{action: action},
+				function (rsp) {
+					var oversized = ((rsp || {}).data || {}).oversized || false,
+						markup = ((rsp || {}).data || {}).markup || false,
+						excluded = ((rsp || {}).data || {}).excluded || 0,
+						package_size = ((rsp || {}).data || {}).package_size || ''
 					;
-					if ( ! markup ) {
+					if (!markup) {
 						// No markup, nothing to do here.
 						return false;
 					}
+					$(document).trigger(
+						'shipper:preflight-files:package_size', [package_size]
+					);
 
-					var $target = $( '#shipper-preflight-results [data-section="files"] div.sui-accordion-item:last' ),
-						$msg = $( '.shipper-package-size-summary' ),
-						$file_items = $( '#shipper-preflight-results .shipper-filelist tbody tr' ),
-						$status = $target.find( 'div.shipper-check-status .sui-tag' ),
-						$title_status = $target.find( '.sui-accordion-item-title i' )
+					var $target = $('#shipper-preflight-results [data-section="files"] div.sui-accordion-item:last'),
+						$msg = $('.shipper-package-size-summary'),
+						$file_items = $('#shipper-preflight-results .shipper-filelist tbody tr'),
+						$status = $target.find('div.shipper-check-status .sui-tag'),
+						$title_status = $target.find('.sui-accordion-item-title i')
 					;
 
-					if ( !! oversized ) {
+					if (!!oversized) {
 						$status
-							.removeClass( 'sui-tag-success' )
-							.addClass( 'sui-tag-warning' )
-							.text( package_size );
+							.removeClass('sui-tag-success')
+							.addClass('sui-tag-warning')
+							.text(package_size);
 						$title_status
-							.removeClass( 'sui-success' )
-							.addClass( 'sui-warning' );
+							.removeClass('sui-success')
+							.addClass('sui-warning');
 					} else {
 						$status
-							.removeClass( 'sui-tag-warning' )
-							.addClass( 'sui-tag-success' )
-							.text( package_size );
+							.removeClass('sui-tag-warning')
+							.addClass('sui-tag-success')
+							.text(package_size);
 						$title_status
-							.removeClass( 'sui-warning' )
-							.addClass( 'sui-success' );
+							.removeClass('sui-warning')
+							.addClass('sui-success');
 					}
-					$msg.each( function () {
-						$( this ).replaceWith( markup );
-					} );
+					$msg.each(function () {
+						$(this).replaceWith(markup);
+					});
 
 					update_file_item_rows();
 					toggle_files_top_level_warning();
 				}
-			).always( function() {
-				$package_size.find( 'i.sui-loading' ).remove();
+			).always(function () {
+				$package_size.find('i.sui-loading').remove();
 				update_files_tab_status();
-			} );
+			});
 		}
-		var debounced_msg_update = _.debounce( update_package_size_message, 1000 );
 
-		function update_file_item_check_row( row_cls ) {
-			var $root = $( '#shipper-preflight-results [data-section="files"]'),
-				$row = $root.find( 'div.sui-accordion-item' + row_cls ),
-				$cnt_row = $row.find( 'div.sui-accordion-item-body' ),
-				$status = $row.find( '.sui-tag' ),
-				$title_status = $row.find( '.sui-accordion-item-title i' )
-				ex = $cnt_row.find( 'tbody .shipper-paginated:not(.shipper-file-excluded)' ).length
+		var debounced_msg_update = _.debounce(update_package_size_message, 1000);
+
+		function update_file_item_check_row(row_cls) {
+			var $root = $('#shipper-preflight-results [data-section="files"]'),
+				$row = $root.find('div.sui-accordion-item' + row_cls),
+				$cnt_row = $row.find('div.sui-accordion-item-body'),
+				$status = $row.find('.sui-tag'),
+				$title_status = $row.find('.sui-accordion-item-title i')
+			ex = $cnt_row.find('tbody .shipper-paginated:not(.shipper-file-excluded)').length
 			;
 
 			// Update the counts.
-			$status.text( ex );
+			$status.text(ex);
 
 			// Update the colors.
-			if ( ex ) {
+			if (ex) {
 				$status
-					.removeClass( 'sui-tag-success' )
-					.addClass( 'sui-tag-warning' );
+					.removeClass('sui-tag-success')
+					.addClass('sui-tag-warning');
 				$title_status
-					.removeClass( 'sui-success' )
-					.addClass( 'sui-warning' );
+					.removeClass('sui-success')
+					.addClass('sui-warning');
 			} else {
 				$status
-					.removeClass( 'sui-tag-warning' )
-					.addClass( 'sui-tag-success' );
+					.removeClass('sui-tag-warning')
+					.addClass('sui-tag-success');
 				$title_status
-					.removeClass( 'sui-warning' )
-					.addClass( 'sui-success' );
+					.removeClass('sui-warning')
+					.addClass('sui-success');
 			}
 
 			// Update the status messages.
-			var $cell = $row.find( '[data-shipper-success-msg]' );
-			if ( $status.is( '.sui-tag-success' ) ) {
-				$cell.text( $cell.attr( 'data-shipper-success-msg' ) );
+			var $cell = $row.find('[data-shipper-success-msg]');
+			if ($status.is('.sui-tag-success')) {
+				$cell.text($cell.attr('data-shipper-success-msg'));
 			} else {
-				$cell.text( $cell.attr( 'data-shipper-warning-msg' ) );
+				$cell.text($cell.attr('data-shipper-warning-msg'));
 			}
 		}
 
 		function update_file_item_rows() {
-			update_file_item_check_row( '.shipper-file_sizes' );
-			update_file_item_check_row( '.shipper-file_names' );
+			update_file_item_check_row('.shipper-file_sizes');
+			update_file_item_check_row('.shipper-file_names');
 		}
 
 		function update_files_tab_status() {
-			$( document ).trigger(
+			$(document).trigger(
 				'shipper:preflight-files:status',
-				[ $( '.shipper-wizard-files .shipper-check-status .sui-tag-warning' ).length ]
+				[$('.shipper-wizard-files .shipper-check-status .sui-tag-warning').length]
 			);
 		}
 
-		function exclude_file( $el ) {
-			var exclude = $el.attr( 'data-path' );
+		function exclude_file($el) {
+			var exclude = $el.attr('data-path');
 
 			return $.post(ajaxurl, {
 				action: 'shipper_toggle_path_exclusion',
 				path: exclude,
-				_wpnonce: $el.find( '[data-wpnonce]' ).attr( 'data-wpnonce' )
-				}, function( resp ) {
-					var exs = (resp || {}).data || {};
-					update_exclusion( exs, $el );
-					debounced_msg_update();
-				})
-			;
+				_wpnonce: $el.find('[data-wpnonce]').attr('data-wpnonce')
+			}, function (resp) {
+				var exs = (resp || {}).data || {};
+				update_exclusion(exs, $el);
+				debounced_msg_update();
+			})
+				;
 		}
 
-		function update_exclusions( excludes ) {
+		function update_exclusions(excludes) {
 			excludes = excludes || {};
-			$( '.shipper-filelist tr[data-path]', $root ).each( function() {
-				update_exclusion( excludes, $( this ) );
-			} );
+			$('.shipper-filelist tr[data-path]', $root).each(function () {
+				update_exclusion(excludes, $(this));
+			});
 		}
 
-		function update_exclusion( excludes, $el ) {
-			var path = $el.attr( 'data-path' );
-			if ( ! ! ( excludes[path] || "" ).length ) {
-				$el.addClass( 'shipper-file-excluded' );
+		function update_exclusion(excludes, $el) {
+			var path = $el.attr('data-path');
+			if (!!(excludes[path] || "").length) {
+				$el.addClass('shipper-file-excluded');
 			} else {
-				$el.removeClass( 'shipper-file-excluded' );
+				$el.removeClass('shipper-file-excluded');
 			}
 		}
 
 		function load_exclusions() {
 			return $.post(ajaxurl, {
 				action: 'shipper_get_path_exclusions',
-				}, function( resp ) {
-					var exs = (resp || {}).data || {};
-					update_exclusions( exs );
-					update_file_item_rows();
-					$( document ).trigger( 'shipper:preflight-files:status' );
-				})
-			;
+			}, function (resp) {
+				var exs = (resp || {}).data || {};
+				update_exclusions(exs);
+				update_file_item_rows();
+				$(document).trigger('shipper:preflight-files:status');
+			})
+				;
 		}
 
 		function boot() {
-			$( '.shipper-filelist tr.shipper-paginated-visible :checkbox[name="shipper-bulk"]', $root )
-				.on( 'change', toggle_bulk_actions_disabled );
-			$( '.shipper-filelist :checkbox[name="shipper-bulk-all"]', $root )
-				.off( 'change' )
-				.on( 'change', toggle_all_selection_visible )
+			$('.shipper-filelist tr.shipper-paginated-visible :checkbox[name="shipper-bulk"]', $root)
+				.on('change', toggle_bulk_actions_disabled);
+			$('.shipper-filelist :checkbox[name="shipper-bulk-all"]', $root)
+				.off('change')
+				.on('change', toggle_all_selection_visible)
 			;
-			$( '.shipper-filter-area .shipper-filter-reset', $root )
-				.off( 'click' )
-				.on( 'click', filter_form_reset )
+			$('.shipper-filter-area .shipper-filter-reset', $root)
+				.off('click')
+				.on('click', filter_form_reset)
 			;
-			$( '.shipper-filter-area .shipper-filter-apply', $root )
-				.off( 'click' )
-				.on( 'click', filter_form_apply )
+			$('.shipper-filter-area .shipper-filter-apply', $root)
+				.off('click')
+				.on('click', filter_form_apply)
 			;
-			$( '.shipper-filter-area :input', $root )
-				.off( 'keydown' )
-				.on( 'keydown', enter_to_apply_filters )
+			$('.shipper-filter-area :input', $root)
+				.off('keydown')
+				.on('keydown', enter_to_apply_filters)
 			;
 			$root
-				.off( 'click', '.shipper-filter .sui-active-filter-remove' )
-				.on( 'click', '.shipper-filter .sui-active-filter-remove', handle_remove_active_filter )
-			;
-
-			$root
-				.off( 'click', '.sui-pagination-open-filter' )
-				.on( 'click', '.sui-pagination-open-filter', handle_filter_area_toggle )
+				.off('click', '.shipper-filter .sui-active-filter-remove')
+				.on('click', '.shipper-filter .sui-active-filter-remove', handle_remove_active_filter)
 			;
 
 			$root
-				.off( 'click', '.shipper-bulk-action' )
-				.on( 'click', '.shipper-bulk-action', apply_bulk_actions )
+				.off('click', '.sui-pagination-open-filter')
+				.on('click', '.sui-pagination-open-filter', handle_filter_area_toggle)
 			;
 
-			$root.on( 'click', '.shipper-filelist tr a', function( e ) {
-				exclude_file( $( this ).closest( 'tr' ) );
-				return stop_prop( e );
-			} );
+			$root
+				.off('click', '.shipper-bulk-action')
+				.on('click', '.shipper-bulk-action', apply_bulk_actions)
+			;
 
-			$root.on( 'shipper-pagination-applied', function () {
+			$root.on('click', '.shipper-filelist tr a', function (e) {
+				exclude_file($(this).closest('tr'));
+				return stop_prop(e);
+			});
+
+			$root.on('shipper-pagination-applied', function () {
 				unselect_all();
 			});
 
@@ -1566,11 +1746,11 @@
 		boot();
 
 		return {
-			get_filters: function() {
+			get_filters: function () {
 				return _filters;
 			},
 			get_active_filters: get_active_filter_types,
-			apply_pagination: function() {
+			apply_pagination: function () {
 				_pagination.apply();
 			},
 			get_current_page: function () {
@@ -1579,25 +1759,34 @@
 		}
 	};
 
-	function stop_prop( e ) {
-		if ( e && e.preventDefault ) e.preventDefault();
-		if ( e && e.stopPropagation ) e.stopPropagation();
+	function stop_prop(e) {
+		if (e && e.preventDefault) e.preventDefault();
+		if (e && e.stopPropagation) e.stopPropagation();
 		return false;
 	}
 
 	var _areas = [];
+
 	function bootstrap() {
-		$( '.shipper-wizard-result-files' ).each( function() {
-			_areas.push( new PaginatedFilterArea( $( this ) ) );
-		} );
+		$('.shipper-wizard-result-files').each(function () {
+			_areas.push(new PaginatedFilterArea($(this)));
+		});
 	}
 
-	$( window ).on('load', function() {
-		if ( $( '.shipper-wizard-result-files' ).length ) {
+	$(window).on('load', function () {
+		if ($('.shipper-wizard-result-files').length) {
 			bootstrap();
 		}
 	});
-} )( jQuery );
+
+	/**
+	 * Well, saddle me up and call me Margaret, these will get reused!
+	 */
+	window._shipper.Filter = Filter;
+	window._shipper.Pagination = Pagination;
+	window._shipper.PaginatedFilterArea = PaginatedFilterArea;
+
+})(jQuery);
 
 
 /***/ }),
@@ -2745,6 +2934,764 @@
 
 /***/ }),
 
+/***/ "./assets/src/js/packages/build.js":
+/*!*****************************************!*\
+  !*** ./assets/src/js/packages/build.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+;( function( $ ) {
+
+	/**
+	 * Building state flag
+	 *
+	 * @var {Boolean}
+	 */
+	var _building_paused = false;
+
+	function stop_prop( e ) {
+		if ( e && e.stopPropagation ) e.stopPropagation();
+		if ( e && e.preventDefault ) e.preventDefault();
+		return false;
+	}
+
+	function get_modal( modal ) {
+		return $( '.shipper-package-build-' + modal );
+	}
+
+	function show_modal( modal ) {
+		var $modal = get_modal( modal );
+		if ( $modal.length ) {
+			$( '.sui-dialog' ).attr( 'aria-hidden', true );
+			$modal.attr( 'aria-hidden', false )
+		}
+		return $modal;
+	}
+
+	function send_request( action, obj ) {
+		var dfr = new $.Deferred();
+		obj = obj || {};
+		obj.action = 'shipper_packages_build_' + action;
+		$.post( ajaxurl, obj )
+			.done( function( resp ) {
+				var status = ( resp || {} ).success,
+					data = ( resp || {} ).data;
+				if ( status ) {
+					return dfr.resolveWith( this, [data] );
+				}
+				return dfr.rejectWith( this, [data] );
+			} )
+			.fail( function( resp, type, error ) {
+				var json = resp.responseJSON || {},
+					msg = ( json || {} ).data || error;
+				if ( typeof "" !== typeof msg ) {
+					msg = error;
+				}
+				dfr.rejectWith( this, [msg] );
+			} );
+		return dfr.promise();
+	}
+
+	function update_progress( percentage, msg ) {
+		percentage = ( parseInt( percentage, 10 ) || 1 ) + '%';
+		get_modal( 'migration' )
+			.find( '.shipper-progress-label' ).text( percentage ).end()
+			.find( '.shipper-progress-bar' ).css( 'width', percentage ).end();
+		if ( msg ) {
+			get_modal( 'migration' ).find( '.shipper-progress-status' ).text( msg );
+		}
+	}
+
+	function finalize_package() {
+		var $active = get_modal( 'migration' )
+			.find( '.shipper-progress-check' )
+				.removeClass( 'active' )
+				.last().addClass( 'active' );
+		update_progress(
+			50,
+			$active.find( '.shipper-progress-title' ).text() + '...'
+		);
+		send_request( 'done' )
+			.done( function() {
+				update_progress( 100, 'Done' );
+				window.location.reload();
+			} )
+			.fail( function( error ) {
+				show_error_dialog( error );
+			} );
+	}
+
+	function process_package() {
+		if ( _building_paused ) {
+			return false;
+		}
+
+		send_request( 'build' )
+			.done( function( percentage ) {
+				update_progress( percentage );
+				if ( percentage < 100 ) {
+					return setTimeout( process_package, 100 );
+				}
+
+				return setTimeout( finalize_package, 100 );
+			} )
+			.fail( function( error ) {
+				show_error_dialog( error );
+			} );
+	}
+
+	function start_building( e ) {
+		_building_paused = false;
+
+		show_modal( 'migration' );
+		send_request( 'prepare' )
+			.done( function( percentage ) {
+				update_progress( percentage );
+				process_package();
+			} )
+			.fail( function( error ) {
+				show_error_dialog( error );
+			} );
+		return stop_prop( e );
+	}
+
+	function cancel_building( e ) {
+		send_request( 'cancel' )
+			.done( function() {
+				window.location.reload();
+			} )
+			.fail( function( error ) {
+				show_error_dialog( error );
+			} );
+		return stop_prop( e );
+	}
+
+	function continue_building( e ) {
+		_building_paused = false;
+		show_modal( 'migration' );
+		process_package();
+		return stop_prop( e );
+	}
+
+	function show_cancel_dialog( e ) {
+		_building_paused = true;
+
+		show_modal( 'cancel' )
+			.find( '.shipper-goback' )
+				.off( 'click' )
+				.on( 'click', continue_building ).end()
+			.find( '.shipper-cancel' )
+				.off( 'click' )
+				.on( 'click', cancel_building ).end()
+		return stop_prop( e );
+	}
+
+	function show_error_dialog( error ) {
+		show_modal( 'fail' )
+			.find( '.shipper-error-message-wrapper' ).hide().end()
+			.find( '.shipper-restart' )
+			.off( 'click' )
+			.on( 'click', start_building );
+
+		if ( ( error || {} ).length ) {
+			get_modal( 'fail' ).find( '.shipper-error-message-wrapper' ).show()
+				.find( '.shipper-error-message' )
+					.html(
+						'<code>' + error + '</code>'
+					);
+		}
+	}
+
+	function init() {
+		if ( ! $( '.shipper-packages-migration-main' ).length ) {
+			return false;
+		}
+		$( document ).on(
+			'shipper-package-build',
+			start_building
+		);
+		$( document ).on(
+			'click',
+			'#shipper-package-build .shipper-cancel, #shipper-package-build .sui-dialog-close',
+			show_cancel_dialog
+		);
+	}
+
+	$( init );
+
+} )( jQuery );
+
+
+/***/ }),
+
+/***/ "./assets/src/js/packages/meta.js":
+/*!****************************************!*\
+  !*** ./assets/src/js/packages/meta.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+;( function( $ ) {
+
+	function stop_prop( e ) {
+		if ( e && e.stopPropagation ) e.stopPropagation();
+		if ( e && e.preventDefault ) e.preventDefault();
+		return false;
+	}
+
+	function get_modal( modal ) {
+		return $( '.shipper-package-create-' + modal );
+	}
+
+	function show_modal( modal ) {
+		var $modal = get_modal( modal );
+		if ( $modal.length ) {
+			$( '.sui-dialog' ).attr( 'aria-hidden', true );
+			$modal.attr( 'aria-hidden', false )
+		}
+		return $modal;
+	}
+
+	function insert_quicklink( e ) {
+		var path = $( this ).attr( 'data-path' ),
+			$target = $( this ).closest( '.sui-form-field' ).find( 'textarea' ),
+			paths = $target.val().split( "\n" );
+		paths.push( path );
+		$target.val( $.trim( paths.join( "\n" ) ) );
+		return stop_prop( e );
+	}
+
+	function gather_files() {
+		return $( '.shipper-file-exclusions textarea' )
+			.val().split( "\n" );
+	}
+
+	function gather_database() {
+		var $selected = $( '.sui-tree [aria-selected="true"] [data-table]' ),
+			sel = [];
+
+		$selected.each( function() {
+			sel.push( $( this ).attr( 'data-table' ) );
+		} );
+
+		return sel;
+	}
+
+	function gather_advanced() {
+		var $els = $( '.sui-checkbox-stacked :checkbox' ),
+			opts = [];
+		$els.each( function() {
+			if ( ! $( this ).is( ':checked' ) ) return true;
+			opts.push( $( this ).attr( 'name' ) );
+		} );
+		return opts;
+	}
+
+	function gather_meta() {
+		var $modal = get_modal( 'meta' );
+		return {
+			name: $modal.find( 'input[name="package-name"]' ).val(),
+			password: $modal.attr( 'data-password' ),
+			_wpnonce: $modal.find( 'input[name="shipper-create-package"]' ).val()
+		};
+	}
+
+	function start_preflight( e ) {
+		$( document ).trigger( 'shipper-package-preflight' );
+		return stop_prop( e );
+	}
+
+	function gather_all_settings( e ) {
+		send_request( 'create', _.extend(
+			gather_meta(),
+			{ 'exclude_files': gather_files() },
+			{ 'exclude_tables': gather_database() },
+			{ 'exclude_extra': gather_advanced() }
+		) ).done( start_preflight );
+		return stop_prop( e );
+	}
+
+	function send_request( action, obj ) {
+		obj = obj || {};
+		obj.action = 'shipper_packages_meta_' + action;
+		return $.post( ajaxurl, obj );
+	}
+
+	function handle_package_rewrite( e ) {
+		var nonce = $( 'input[name="shipper-reset-package"]' ).val();
+		send_request( 'reset', { _wpnonce: nonce } )
+			.done( show_package_meta );
+		return stop_prop( e );
+	}
+
+	function show_package_settings( e ) {
+		show_modal( 'settings' )
+			.find( '.shipper-next' )
+				.off( 'click' )
+				.on( 'click', gather_all_settings ).end()
+			.find( '.shipper-previous' )
+				.off( 'click' )
+				.on( 'click', show_package_meta )
+		;
+		return stop_prop( e );
+	}
+
+	function set_password_and_show_package_settings( e ) {
+		var $modal = get_modal( 'meta' ),
+			$password = $modal.find( '[data-state]:visible input[name="installer-password"]' );
+		$modal.attr( 'data-password', $password.val() );
+		return show_package_settings( e );
+	}
+
+	function show_package_meta( e ) {
+		show_modal( 'meta' )
+			.attr( 'data-password', '' )
+			.find( '.shipper-next' )
+				.off( 'click' )
+				.on( 'click', set_password_and_show_package_settings );
+		return stop_prop( e );
+	}
+
+	function show_package_rewrite_confirm() {
+		show_modal( 'confirm' )
+			.find( '.shipper-next' )
+				.off( 'click' )
+				.on( 'click', handle_package_rewrite );
+	}
+
+	function create_new_package( e ) {
+		if ( $( '.shipper-packages-migration' ).is( '.shipper-has-packages' ) ) {
+			show_package_rewrite_confirm();
+		} else show_package_meta();
+
+		return stop_prop( e );
+	}
+
+	function delete_package( e ) {
+		var nonce = $( 'input[name="shipper-reset-package"]' ).val();
+		send_request( 'reset', { _wpnonce: nonce } )
+			.done( function() {
+				window.location.reload();
+			} );
+		return stop_prop( e );
+	}
+
+	function download_package( e ) {
+		var nonce = $( this ).closest( '.shipper-download' )
+			.find( ':hidden[name="_wpnonce"]' ).val();
+		window.location = ajaxurl +
+			'?action=shipper_packages_meta_download_package&_wpnonce=' +
+			nonce;
+		return stop_prop( e );
+	}
+
+	function download_installer( e ) {
+		var nonce = $( this ).closest( '.shipper-download' )
+			.find( ':hidden[name="_wpnonce"]' ).val();
+		window.location = ajaxurl +
+			'?action=shipper_packages_meta_download_installer&_wpnonce=' +
+			nonce;
+		return stop_prop( e );
+	}
+
+	function init() {
+		if ( ! $( '.shipper-packages-migration-main' ).length ) {
+			return false;
+		}
+		if ( ( window._shipper || {} ).navbar ) {
+			window._shipper.navbar( '.shipper-page-packages' );
+		}
+		$( document ).on(
+			'click',
+			'.shipper-new-package',
+			create_new_package
+		);
+		$( document ).on(
+			'click',
+			'.shipper-delete',
+			delete_package
+		);
+		$( document ).on(
+			'click',
+			'.shipper-quicklinks a[data-path]',
+			insert_quicklink
+		);
+		$( document ).on(
+			'click',
+			'#shipper-package-create .shipper-cancel, #shipper-package-create .sui-dialog-close',
+			function( e ) {
+				$( '.sui-dialog' ).attr( 'aria-hidden', true );
+				return stop_prop( e );
+			}
+		);
+
+		$( document ).on(
+			'click',
+			'.shipper-download-item.archive',
+			download_package
+		);
+		$( document ).on(
+			'click',
+			'.shipper-download-item.installer',
+			download_installer
+		);
+	}
+
+	$( init );
+
+} )( jQuery );
+
+
+/***/ }),
+
+/***/ "./assets/src/js/packages/preflight.js":
+/*!*********************************************!*\
+  !*** ./assets/src/js/packages/preflight.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+;(function ($) {
+
+	/**
+	 * Preflight state flag
+	 *
+	 * @var {Boolean}
+	 */
+	var _preflight_paused = false;
+
+	var issues_count = 0;
+
+	function stop_prop(e) {
+		if (e && e.stopPropagation) e.stopPropagation();
+		if (e && e.preventDefault) e.preventDefault();
+		return false;
+	}
+
+	function get_modal(modal) {
+		return $('.shipper-package-preflight-' + modal);
+	}
+
+	function show_modal(modal) {
+		var $modal = get_modal(modal);
+		if ($modal.length) {
+			$('.sui-dialog').attr('aria-hidden', true);
+			$modal.attr('aria-hidden', false)
+		}
+		return $modal;
+	}
+
+	function send_request(action, obj) {
+		var dfr = new $.Deferred();
+		obj = obj || {};
+		obj.action = 'shipper_packages_preflight_' + action;
+		$.post(ajaxurl, obj)
+			.done(function (resp) {
+				var status = (resp || {}).success,
+					data = (resp || {}).data;
+				if (status) {
+					return dfr.resolveWith(this, [data]);
+				}
+				return dfr.rejectWith(this, [data]);
+			})
+			.fail(function () {
+				dfr.reject();
+			});
+		return dfr.promise();
+	}
+
+	function start_building(e) {
+		$(document).trigger('shipper-package-build');
+	}
+
+	function update_countable_files_status($item) {
+		var $total = $item.find('.shipper-paginated'),
+			$excluded = $total.filter('.shipper-file-excluded'),
+			severity = $total.length > $excluded.length ? 'warning' : 'success';
+
+		if (!$total.length) {
+			$item.hide(); // Nothing to show here.
+		}
+
+		$item.find('.shipper-issue-summary-count').remove();
+		$item.find('.shipper-issue-summary').after(
+			'<div class="shipper-issue-summary-count">' +
+			'<span class="sui-tag sui-tag-' + severity + '">' +
+			($total.length - $excluded.length) +
+			'</span>' +
+			'</div>'
+		);
+		$item.find('.shipper-issue-severity')
+			.removeClass('shipper-severity-success')
+			.removeClass('shipper-severity-warning')
+			.addClass('shipper-severity-' + severity);
+	}
+
+	function update_package_size($item) {
+		if ($item.length === 0) {
+			return;
+		}
+		var size = $item.find('[data-size]').attr('data-size'),
+			num = size.split(/(\d+)/)[1],
+			unit = size.split(/(\d+)/)[2] || "b"
+		multiplier = 1,
+			severity = 'success',
+			cutoff = 200 * 1024 * 1024;
+		if (unit.match(/^\s*k/i)) multiplier = 1024;
+		if (unit.match(/^\s*m/i)) multiplier = 1024 * 1024;
+		if (unit.match(/^\s*g/i)) multiplier = 1024 * 1024 * 1024;
+		if (unit.match(/^\s*t/i)) multiplier = 1024 * 1024 * 1024 * 1024;
+
+		if ((parseInt(num, 10) || 1) * multiplier > cutoff) {
+			severity = 'warning';
+		}
+
+		$item.find('.shipper-issue-summary-count').remove();
+		$item.find('.shipper-issue-summary').after(
+			'<div class="shipper-issue-summary-count">' +
+			'<span class="sui-tag sui-tag-' + severity + '">' +
+			(size.replace(/ /, '&nbsp;')) +
+			'</span>' +
+			'</div>'
+		);
+		$item.find('.shipper-issue-severity')
+			.removeClass('shipper-severity-success')
+			.removeClass('shipper-severity-warning')
+			.addClass('shipper-severity-' + severity);
+	}
+
+	function update_preflight_state() {
+		var $modal = get_modal('issues'),
+			$large = $modal.find('.shipper-issue-file_sizes'),
+			$names = $modal.find('.shipper-issue-file_names'),
+			$size = $modal.find('.shipper-issue-package_size');
+
+		update_countable_files_status($large);
+		update_countable_files_status($names);
+		update_package_size($size);
+
+		$modal.find('.shipper-next').attr(
+			'disabled',
+			!!$modal.find('.shipper-severity-error').length
+		);
+	}
+
+	function handle_update_package_size(e, package_size) {
+		console.log('new size', package_size);
+		$('.shipper-issue-package_size .shipper-package_size')
+			.attr('data-size', package_size);
+		update_preflight_state();
+	}
+
+	function show_results() {
+		if (_preflight_paused) {
+			return true;
+		}
+		//we will check if no preflight issues, we moving forward to build screen
+		console.log(issues_count);
+		if (issues_count === 0) {
+			start_building();
+			return;
+		}
+
+		update_preflight_state();
+		var $modal = show_modal('issues')
+			.find('.shipper-next')
+			.off('click')
+			.on('click', start_building).end()
+			.find('.shipper-restart')
+			.off('click')
+			.on('click', start_preflight).end()
+		;
+		$('.shipper-wizard-result-files').each(function () {
+			new window._shipper.PaginatedFilterArea($(this));
+		});
+		$(document).on(
+			'shipper:preflight-files:package_size',
+			handle_update_package_size
+		);
+
+		$modal.find('select').each(function () {
+			SUI.suiSelect(this);
+		});
+		SUI.suiTabs();
+	}
+
+	function check_database() {
+		if (_preflight_paused) {
+			return true;
+		}
+		var $active = show_modal('check')
+			.find('.shipper-progress-label').text('99%').end()
+			.find('.shipper-progress-bar').css('width', '99%').end()
+			.find('.shipper-progress-check')
+			.removeClass('active')
+			.last().addClass('active');
+		get_modal('check').find('.shipper-progress-status').text(
+			$active.find('.shipper-progress-title').attr('data-active')
+		);
+		setTimeout(show_results, 1000);
+	}
+
+	function check_files() {
+		if (_preflight_paused) {
+			return true;
+		}
+		var $active = show_modal('check')
+			.find('.shipper-progress-label').text('66%').end()
+			.find('.shipper-progress-bar').css('width', '66%').end()
+			.find('.shipper-progress-check')
+			.removeClass('active')
+			.eq(1).addClass('active');
+		get_modal('check').find('.shipper-progress-status').text(
+			$active.find('.shipper-progress-title').attr('data-active')
+		);
+		send_request('files')
+			.done(function (data) {
+				var $issues = get_modal('issues').find('.shipper-issues'),
+					is_done = (data || {}).is_done,
+					issues = (data || {}).issues || [];
+				if (!is_done) {
+					return setTimeout(check_files, 100);
+				}
+
+				$.each(issues, function (idx, issue) {
+					$issues.append(issue);
+				});
+				//set the counter
+				console.log(issues);
+				issues_count += issues.length;
+				setTimeout(check_database, 100);
+			});
+	}
+
+	function check_system() {
+		if (_preflight_paused) {
+			return true;
+		}
+		var $active = show_modal('check')
+			.find('.shipper-progress-label').text('33%').end()
+			.find('.shipper-progress-bar').css('width', '33%').end()
+			.find('.shipper-progress-check')
+			.removeClass('active')
+			.first().addClass('active');
+		get_modal('check').find('.shipper-progress-status').text(
+			$active.find('.shipper-progress-title').attr('data-active')
+		);
+		send_request('system')
+			.done(function (issues) {
+				var $issues = get_modal('issues').find('.shipper-issues');
+				$.each(issues, function (idx, issue) {
+					$issues.append(issue);
+				});
+				issues_count += issues.length;
+				setTimeout(check_files, 100);
+			});
+	}
+
+	function start_preflight(e) {
+		_preflight_paused = false;
+		issues_count = 0;
+		show_modal('check');
+		get_modal('issues').find('.shipper-issues').html('');
+		check_system();
+		return stop_prop(e);
+	}
+
+	function cancel_preflight(e) {
+		_preflight_paused = true;
+		$('.sui-dialog').attr('aria-hidden', true);
+		return stop_prop(e);
+	}
+
+	function init() {
+		if (!$('.shipper-packages-migration-main').length) {
+			return false;
+		}
+		$(document).on(
+			'shipper-package-preflight',
+			start_preflight
+		);
+		$(document).on(
+			'click',
+			'.shipper-issue-title',
+			function (e) {
+				$(this).closest('.shipper-issue').toggleClass('shipper-issue-open');
+				return stop_prop(e);
+			}
+		);
+		$(document).on(
+			'click',
+			'#shipper-package-preflight .shipper-cancel, #shipper-package-preflight .sui-dialog-close',
+			cancel_preflight
+		);
+		$(document).on(
+			'click',
+			'.shipper-issue .shipper-recheck',
+			start_preflight
+		);
+	}
+
+	$(init);
+
+})(jQuery);
+
+
+/***/ }),
+
+/***/ "./assets/src/js/packages/settings.js":
+/*!********************************************!*\
+  !*** ./assets/src/js/packages/settings.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+;(function ($) {
+
+	function stop_prop(e) {
+		if (e && e.stopPropagation) e.stopPropagation();
+		if (e && e.preventDefault) e.preventDefault();
+		return false;
+	}
+
+	function handle_tab_option_selection() {
+		$(this)
+			.find(':radio').attr('checked', false).end()
+			.find('.sui-tab-boxed.active')
+			.find(':radio').attr('checked', true);
+		maybe_prevent_submit()
+	}
+
+	function maybe_prevent_submit() {
+		var is_mysqldump_error = $('.shipper-tab-boxed-error input[name="database-use-binary"]').is(':checked');
+		var is_shellarchive_error = $('.shipper-tab-boxed-error input[name="archive-use-binary"]').is(':checked');
+		if (is_mysqldump_error || is_shellarchive_error) {
+			$('.sui-button.shipper-save').attr('disabled', true)
+		} else {
+			$('.sui-button.shipper-save').removeAttr('disabled');
+		}
+	}
+
+	function init() {
+		if (!$('.shipper-packages-settings').length) {
+			return false;
+		}
+		if ((window._shipper || {}).navbar) {
+			window._shipper.navbar('.shipper-page-packages');
+		}
+		$(".sui-tabs")
+			.on('click', handle_tab_option_selection)
+			.each(handle_tab_option_selection);
+	}
+
+	$(init);
+
+})(jQuery);
+
+
+/***/ }),
+
 /***/ "./assets/src/js/settings/notifications.js":
 /*!*************************************************!*\
   !*** ./assets/src/js/settings/notifications.js ***!
@@ -3249,6 +4196,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _migrate_site_selection_js__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_migrate_site_selection_js__WEBPACK_IMPORTED_MODULE_15__);
 /* harmony import */ var _migrate_preflight_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./migrate/preflight.js */ "./assets/src/js/migrate/preflight.js");
 /* harmony import */ var _migrate_preflight_js__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(_migrate_preflight_js__WEBPACK_IMPORTED_MODULE_16__);
+/* harmony import */ var _migrate_exclusion_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./migrate/exclusion.js */ "./assets/src/js/migrate/exclusion.js");
+/* harmony import */ var _migrate_exclusion_js__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(_migrate_exclusion_js__WEBPACK_IMPORTED_MODULE_17__);
+/* harmony import */ var _migrate_dbprefix_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./migrate/dbprefix.js */ "./assets/src/js/migrate/dbprefix.js");
+/* harmony import */ var _migrate_dbprefix_js__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(_migrate_dbprefix_js__WEBPACK_IMPORTED_MODULE_18__);
+/* harmony import */ var _packages_meta_js__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./packages/meta.js */ "./assets/src/js/packages/meta.js");
+/* harmony import */ var _packages_meta_js__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(_packages_meta_js__WEBPACK_IMPORTED_MODULE_19__);
+/* harmony import */ var _packages_preflight_js__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./packages/preflight.js */ "./assets/src/js/packages/preflight.js");
+/* harmony import */ var _packages_preflight_js__WEBPACK_IMPORTED_MODULE_20___default = /*#__PURE__*/__webpack_require__.n(_packages_preflight_js__WEBPACK_IMPORTED_MODULE_20__);
+/* harmony import */ var _packages_build_js__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./packages/build.js */ "./assets/src/js/packages/build.js");
+/* harmony import */ var _packages_build_js__WEBPACK_IMPORTED_MODULE_21___default = /*#__PURE__*/__webpack_require__.n(_packages_build_js__WEBPACK_IMPORTED_MODULE_21__);
+/* harmony import */ var _packages_settings_js__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./packages/settings.js */ "./assets/src/js/packages/settings.js");
+/* harmony import */ var _packages_settings_js__WEBPACK_IMPORTED_MODULE_22___default = /*#__PURE__*/__webpack_require__.n(_packages_settings_js__WEBPACK_IMPORTED_MODULE_22__);
 // Everything and the kitchen sink.
 
 
@@ -3259,6 +4218,13 @@ __webpack_require__.r(__webpack_exports__);
  // @deprecated?
 
  // @deprecated
+
+
+
+
+
+
+
 
 
 
@@ -3922,9 +4888,9 @@ var shipper_sui_version = __webpack_require__(/*! @wpmudev/shared-ui/package.jso
 		return this;
 	};
 
-	if ( 0 !== $( '.sui-2-3-27 .sui-accordion' ).length ) {
+	if ( 0 !== $( '.sui-2-3-29 .sui-accordion' ).length ) {
 
-		$( '.sui-2-3-27 .sui-accordion' ).each( function() {
+		$( '.sui-2-3-29 .sui-accordion' ).each( function() {
 			SUI.suiAccordion( this );
 		});
 	}
@@ -4976,7 +5942,7 @@ var shipper_sui_version = __webpack_require__(/*! @wpmudev/shared-ui/package.jso
     SUI.suiCodeSnippet = function( ) {
 
         // Convert all code snippet.
-        $( '.sui-2-3-27 .sui-code-snippet:not(.sui-no-copy)' ).each( function() {
+        $( '.sui-2-3-29 .sui-code-snippet:not(.sui-no-copy)' ).each( function() {
 
             // backward compat of instantiate new accordion
             $( this ).SUICodeSnippet({});
@@ -5343,7 +6309,7 @@ var shipper_sui_version = __webpack_require__(/*! @wpmudev/shared-ui/package.jso
 		return this;
 	};
 
-	$( '.sui-2-3-27 .sui-slider' ).each( function() {
+	$( '.sui-2-3-29 .sui-slider' ).each( function() {
 		SUI.dialogSlider( this );
 	});
 
@@ -5363,7 +6329,7 @@ var shipper_sui_version = __webpack_require__(/*! @wpmudev/shared-ui/package.jso
 
 		function closeAllDropdowns( $except ) {
 
-			var $dropdowns = $( '.sui-2-3-27 .sui-dropdown' );
+			var $dropdowns = $( '.sui-2-3-29 .sui-dropdown' );
 
 			if ( $except ) {
 				$dropdowns = $dropdowns.not( $except );
@@ -5390,7 +6356,7 @@ var shipper_sui_version = __webpack_require__(/*! @wpmudev/shared-ui/package.jso
 
 		$( 'body' ).mouseup( function( e ) {
 
-			var $anchor = $( '.sui-2-3-27 .sui-dropdown-anchor' );
+			var $anchor = $( '.sui-2-3-29 .sui-dropdown-anchor' );
 
 			if ( ( ! $anchor.is( e.target ) ) && ( 0 === $anchor.has( e.target ).length ) ) {
 				closeAllDropdowns();
@@ -5430,11 +6396,15 @@ var shipper_sui_version = __webpack_require__(/*! @wpmudev/shared-ui/package.jso
 
 	document.addEventListener( 'DOMContentLoaded', function() {
 		var mainEl = $( '.sui-wrap' );
-		SUI.dialogs = {};
+		if ( undefined === SUI.dialogs ) {
+			SUI.dialogs = {};
+		}
 
 		// Init the dialog elements.
-		$( '.sui-dialog' ).each( function() {
-			SUI.dialogs[this.id] = new A11yDialog( this, mainEl );
+		$( '.sui-2-3-29 .sui-dialog' ).each( function() {
+			if ( ! SUI.dialogs.hasOwnProperty( this.id ) ) {
+				SUI.dialogs[this.id] = new A11yDialog( this, mainEl );
+			}
 		});
 
 	});
@@ -5444,9 +6414,9 @@ var shipper_sui_version = __webpack_require__(/*! @wpmudev/shared-ui/package.jso
 ( function( $ ) {
 
 	// This will auto hide the top notice if the classes .sui-can-dismiss or .sui-cant-dismiss aren't present.
-	$( '.sui-2-3-27 .sui-notice-top:not(.sui-can-dismiss, .sui-cant-dismiss)' ).delay( 3000 ).slideUp( 'slow' );
+	$( '.sui-2-3-29 .sui-notice-top:not(.sui-can-dismiss, .sui-cant-dismiss)' ).delay( 3000 ).slideUp( 'slow' );
 
-	$( '.sui-2-3-27 .sui-notice-dismiss' ).click( function( e ) {
+	$( '.sui-2-3-29 .sui-notice-dismiss' ).click( function( e ) {
 		e.preventDefault();
 
         $( this ).parent().stop().slideUp( 'slow' );
@@ -5468,7 +6438,7 @@ var shipper_sui_version = __webpack_require__(/*! @wpmudev/shared-ui/package.jso
 
 	SUI.showHidePassword = function() {
 
-		$( '.sui-2-3-27 .sui-form-field' ).each( function() {
+		$( '.sui-2-3-29 .sui-form-field' ).each( function() {
 
 			var $this = $( this );
 
@@ -5509,7 +6479,7 @@ var shipper_sui_version = __webpack_require__(/*! @wpmudev/shared-ui/package.jso
     var endpoint = 'https://api.reviews.co.uk/merchant/reviews?store=wpmudev-org';
 
     // Update the reviews with the live stats.
-    $( '.sui-2-3-27 .sui-reviews' ).each( function() {
+    $( '.sui-2-3-29 .sui-reviews' ).each( function() {
         var review = $( this );
         $.get( endpoint, function( data ) {
             var stars = Math.round( data.stats.average_rating );
@@ -5553,7 +6523,7 @@ var shipper_sui_version = __webpack_require__(/*! @wpmudev/shared-ui/package.jso
 		$( el ).prepend( svg ).addClass( 'loaded' ).find( 'circle:last-child' ).css( 'animation', 'sui' + score + ' 3s forwards' );
 	};
 
-	$( '.sui-2-3-27 .sui-circle-score' ).each( function() {
+	$( '.sui-2-3-29 .sui-circle-score' ).each( function() {
 		SUI.loadCircleScore( this );
 	});
 
@@ -5771,7 +6741,7 @@ var shipper_sui_version = __webpack_require__(/*! @wpmudev/shared-ui/package.jso
 	};
 
 	// Convert all select lists to fancy sui Select lists.
-	$( '.sui-2-3-27 select:not([multiple])' ).each( function() {
+	$( '.sui-2-3-29 select:not([multiple])' ).each( function() {
 		SUI.suiSelect( this );
 	});
 
@@ -12344,7 +13314,7 @@ var shipper_sui_version = __webpack_require__(/*! @wpmudev/shared-ui/package.jso
 
 	};
 
-	$( '.sui-2-3-27 .sui-side-tabs label.sui-tab-item input' ).each( function() {
+	$( '.sui-2-3-29 .sui-side-tabs label.sui-tab-item input' ).each( function() {
 		SUI.sideTabs( this );
 	});
 
@@ -12546,7 +13516,7 @@ var shipper_sui_version = __webpack_require__(/*! @wpmudev/shared-ui/package.jso
     };
 
 
-    if ( 0 !== $( '.sui-2-3-27 .sui-tabs' ).length ) {
+    if ( 0 !== $( '.sui-2-3-29 .sui-tabs' ).length ) {
         SUI.suiTabs();
     }
 
@@ -12566,18 +13536,12 @@ var shipper_sui_version = __webpack_require__(/*! @wpmudev/shared-ui/package.jso
 
 		var tree     = $( element ),
 			leaf     = tree.find( 'li[role="treeitem"]' ),
-			node     = leaf.find( '> .sui-tree-node' ),
-			checkbox = node. find( '> .sui-node-checkbox input' ),
 			branch   = leaf.find( '> ul[role="group"]' )
 			;
 
 		// Hide sub-groups
 		branch.slideUp();
 
-		// Uncheck item
-		if ( 0 !== checkbox.length ) {
-			checkbox.prop( 'checked', false );
-		}
 
 		leaf.each( function() {
 
@@ -12936,6 +13900,22 @@ var shipper_sui_version = __webpack_require__(/*! @wpmudev/shared-ui/package.jso
 					remove();
 				}
 			}
+
+			// TEST: Verify if input is checked on load
+			// if ( 'selector' === tree.data( 'tree' ) ) {
+			//
+			// 	if ( 0 !== tree.find( 'input' ).length ) {
+			//
+			// 		tree.find( 'input' ).each( function() {
+			//
+			// 			console.log( '#' + $( this ).attr( 'id' ) + ': ' + $( this ).prop( 'checked' ) );
+			//
+			// 			// Output:
+			// 			// #input-id: value
+			//
+			// 		});
+			// 	}
+			// }
 		}
 
 		init();
@@ -12943,9 +13923,9 @@ var shipper_sui_version = __webpack_require__(/*! @wpmudev/shared-ui/package.jso
 		return this;
 	};
 
-	if ( 0 !== $( '.sui-2-3-27 .sui-tree' ).length ) {
+	if ( 0 !== $( '.sui-2-3-29 .sui-tree' ).length ) {
 
-		$( '.sui-2-3-27 .sui-tree' ).each( function() {
+		$( '.sui-2-3-29 .sui-tree' ).each( function() {
 			SUI.suiTree( $( this ), true );
 		});
 	}
@@ -12964,7 +13944,7 @@ var shipper_sui_version = __webpack_require__(/*! @wpmudev/shared-ui/package.jso
 
 	SUI.upload = function() {
 
-		$( '.sui-2-3-27 .sui-upload-group input[type="file"]' ).on( 'change', function( e ) {
+		$( '.sui-2-3-29 .sui-upload-group input[type="file"]' ).on( 'change', function( e ) {
 			var file = $( this )[0].files[0],
 				message = $( this ).find( '~ .sui-upload-message' );
 
@@ -14499,7 +15479,7 @@ ace.define( 'ace/theme/sui', [], function( require, exports, module ) {
 /*! exports provided: _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _shasum, _spec, _where, author, browserslist, bugs, bundleDependencies, deprecated, description, devDependencies, eslintConfig, eslintIgnore, files, homepage, license, main, name, repository, sass, scripts, style, version, default */
 /***/ (function(module) {
 
-module.exports = {"_from":"@wpmudev/shared-ui@2.3.27","_id":"@wpmudev/shared-ui@2.3.27","_inBundle":false,"_integrity":"sha512-tJIiF9kznyo2DDd9i5t7+wuhYUG9TgXauterYrx47dIWvL5p+yDPmz/7Eu9X4kpq8P/7zBSGO8T1BLyBcElirA==","_location":"/@wpmudev/shared-ui","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"@wpmudev/shared-ui@2.3.27","name":"@wpmudev/shared-ui","escapedName":"@wpmudev%2fshared-ui","scope":"@wpmudev","rawSpec":"2.3.27","saveSpec":null,"fetchSpec":"2.3.27"},"_requiredBy":["#DEV:/"],"_resolved":"https://registry.npmjs.org/@wpmudev/shared-ui/-/shared-ui-2.3.27.tgz","_shasum":"789612323804819a52a814a7d4f94d2be6ee5074","_spec":"@wpmudev/shared-ui@2.3.27","_where":"/Users/hoang/Work/incsub/wp-content/plugins/shipper","author":{"name":"WPMU DEV"},"browserslist":["> 1%","Last 2 versions","not ie <= 8"],"bugs":{"url":"https://github.com/wpmudev/shared-ui/issues"},"bundleDependencies":false,"deprecated":false,"description":"For internal use in WPMU DEV plugins","devDependencies":{"browser-sync":"^2.26.3","chalk":"^2.4.1","eslint-config-wordpress":"^2.0.0","fs":"0.0.1-security","gulp":"^3.9.1","gulp-autoprefixer":"^6.0.0","gulp-clean-css":"^3.10.0","gulp-concat":"^2.6.1","gulp-eslint":"^5.0.0","gulp-header":"^2.0.5","gulp-rename":"^1.4.0","gulp-replace":"^1.0.0","gulp-sass":"^4.0.2","gulp-uglify":"^3.0.1","gulp-watch":"^5.0.1","natives":"^1.1.6","pump":"^3.0.0"},"eslintConfig":{"extends":"wordpress"},"eslintIgnore":["a11y-dialog.js","clipboard.js","gulpfile.js","select2.full.js","ace.js","mode-css.js","sticky-box.js","mode-html.js","worker-css.js"],"files":["dist/","js/","scss/"],"homepage":"https://wpmudev.github.io/shared-ui/","license":"GPL-2.0","main":"dist/js/shared-ui","name":"@wpmudev/shared-ui","repository":{"type":"git","url":"git://github.com/wpmudev/shared-ui.git"},"sass":"scss/shared-ui.scss","scripts":{"changelog":" ./changelog.sh","dev":"gulp dev","release:major":"npm version major --no-git-tag-version && gulp update-versions:build && git add -A && git commit -m \":package:\" && npm publish","release:minor":"npm version minor --no-git-tag-version && gulp update-versions:build && git add -A && git commit -m \":package:\" && npm publish","release:patch":"npm version patch --no-git-tag-version && gulp update-versions:build && git add -A && git commit -m \":package:\" && npm publish"},"style":"dist/css/shared-ui.css","version":"2.3.27"};
+module.exports = JSON.parse("{\"_from\":\"@wpmudev/shared-ui\",\"_id\":\"@wpmudev/shared-ui@2.3.29\",\"_inBundle\":false,\"_integrity\":\"sha512-P4m6CAlpuolPTuAS5VaqDqJ5p/NKO7TDVSvWGvSvnQbRZafzc2iOiVVjdvWJj6sa1jN4S02EMszsXwsgJqt/5Q==\",\"_location\":\"/@wpmudev/shared-ui\",\"_phantomChildren\":{},\"_requested\":{\"type\":\"tag\",\"registry\":true,\"raw\":\"@wpmudev/shared-ui\",\"name\":\"@wpmudev/shared-ui\",\"escapedName\":\"@wpmudev%2fshared-ui\",\"scope\":\"@wpmudev\",\"rawSpec\":\"\",\"saveSpec\":null,\"fetchSpec\":\"latest\"},\"_requiredBy\":[\"#USER\",\"/\"],\"_resolved\":\"https://registry.npmjs.org/@wpmudev/shared-ui/-/shared-ui-2.3.29.tgz\",\"_shasum\":\"5ccd297c6cc4a4335eefd9a700f77912a8252a40\",\"_spec\":\"@wpmudev/shared-ui\",\"_where\":\"/Users/hoang/Work/shipper-wp\",\"author\":{\"name\":\"WPMU DEV\"},\"browserslist\":[\"> 1%\",\"Last 2 versions\",\"not ie <= 8\"],\"bugs\":{\"url\":\"https://github.com/wpmudev/shared-ui/issues\"},\"bundleDependencies\":false,\"deprecated\":false,\"description\":\"For internal use in WPMU DEV plugins\",\"devDependencies\":{\"browser-sync\":\"^2.26.3\",\"chalk\":\"^2.4.1\",\"eslint-config-wordpress\":\"^2.0.0\",\"fs\":\"0.0.1-security\",\"gulp\":\"^3.9.1\",\"gulp-autoprefixer\":\"^6.0.0\",\"gulp-clean-css\":\"^3.10.0\",\"gulp-concat\":\"^2.6.1\",\"gulp-eslint\":\"^5.0.0\",\"gulp-header\":\"^2.0.5\",\"gulp-rename\":\"^1.4.0\",\"gulp-replace\":\"^1.0.0\",\"gulp-sass\":\"^4.0.2\",\"gulp-uglify\":\"^3.0.1\",\"gulp-watch\":\"^5.0.1\",\"natives\":\"^1.1.6\",\"pump\":\"^3.0.0\"},\"eslintConfig\":{\"extends\":\"wordpress\"},\"eslintIgnore\":[\"a11y-dialog.js\",\"clipboard.js\",\"gulpfile.js\",\"select2.full.js\",\"ace.js\",\"mode-css.js\",\"sticky-box.js\",\"mode-html.js\",\"worker-css.js\"],\"files\":[\"dist/\",\"js/\",\"scss/\"],\"homepage\":\"https://wpmudev.github.io/shared-ui/\",\"license\":\"GPL-2.0\",\"main\":\"dist/js/shared-ui\",\"name\":\"@wpmudev/shared-ui\",\"repository\":{\"type\":\"git\",\"url\":\"git://github.com/wpmudev/shared-ui.git\"},\"sass\":\"scss/shared-ui.scss\",\"scripts\":{\"changelog\":\" ./changelog.sh\",\"dev\":\"gulp dev\",\"release:major\":\"npm version major --no-git-tag-version && gulp update-versions:build && git add -A && git commit -m \\\":package:\\\" && npm publish\",\"release:minor\":\"npm version minor --no-git-tag-version && gulp update-versions:build && git add -A && git commit -m \\\":package:\\\" && npm publish\",\"release:patch\":\"npm version patch --no-git-tag-version && gulp update-versions:build && git add -A && git commit -m \\\":package:\\\" && npm publish\"},\"style\":\"dist/css/shared-ui.css\",\"version\":\"2.3.29\"}");
 
 /***/ }),
 

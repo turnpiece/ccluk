@@ -6,10 +6,10 @@
  */
 
 /**
- * Plugin Name: Shipper
+ * Plugin Name: Shipper Pro
  * Plugin URI: http://premium.wpmudev.org/project/shipper/
- * Description: WPMU DEV Shipper plugin
- * Version: 1.0.3
+ * Description: Migrate WordPress websites from host to host, local to production, development to live with just a few clicks.
+ * Version: 1.1.2
  * Network: true
  * Text Domain: shipper
  * Author: WPMU DEV
@@ -35,7 +35,7 @@
 * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 */
 
-define( 'SHIPPER_VERSION', '1.0.3' );
+define( 'SHIPPER_VERSION', '1.1' );
 define( 'SHIPPER_PLUGIN_FILE', __FILE__ );
 
 if ( ! defined( 'SHIPPER_IS_TEST_ENV' ) ) {
@@ -43,7 +43,9 @@ if ( ! defined( 'SHIPPER_IS_TEST_ENV' ) ) {
 }
 
 require_once( dirname( __FILE__ ) . '/lib/functions.php' );
+require_once( dirname( __FILE__ ) . '/lib/exceptions.php' );
 require_once( dirname( __FILE__ ) . '/lib/loader.php' );
+require_once( dirname( __FILE__ ) . '/lib/upgrader.php' );
 
 register_activation_hook(
 	__FILE__,
@@ -59,4 +61,3 @@ register_uninstall_hook(
 );
 
 Shipper_Main::get()->boot();
-

@@ -3,8 +3,8 @@ Tags: related posts, related, related articles, contextual related posts, simila
 Contributors: webberzone, Ajay
 Donate link: https://ajaydsouza.com/donate/
 Stable tag: trunk
-Requires at least: 4.7
-Tested up to: 5.2
+Requires at least: 4.8
+Tested up to: 5.3
 License: GPLv2 or later
 
 Add related posts to your WordPress site with inbuilt caching. Supports thumbnails, shortcodes, widgets and custom post types!
@@ -22,11 +22,12 @@ And the default inbuilt styles allow you to switch between gorgeous thumbnail-ri
 = Key features =
 
 * **Automatic**: CRP will start displaying related posts on your site and feed automatically after the content when you activate the plugin. No need to edit template files
-* **Manual install**: Want more control over placement? Check the [FAQ](http://wordpress.org/extend/plugins/contextual-related-posts/faq/) on which functions are available for manual install.
-* **Caching**: Related posts output is automatically cached as visitors browse through your site
+* **Manual install**: Want more control over placement? Check the [FAQ](http://wordpress.org/extend/plugins/contextual-related-posts/faq/) on which functions are available for manual install
+* **Gutenberg / Block Editor support**: You can find a block called "Related Posts [CRP]" with its own configurable set of options
 * **Widgets**: Add related posts to widgetized area of your theme. Lots of options available
 * **Shortcode**: Use `[crp]` to display the posts anywhere you want in the post content
 * **The algorithm**: Find related posts by title and/or content of the current post
+* **Caching**: Related posts output is automatically cached as visitors browse through your site
 * **Exclusions**: Exclude posts from categories from being displayed in the list. Or you can exclude posts or pages by ID
 * **Custom post types**: The related posts list lets you include posts, pages, attachments or any other custom post type!
 * **Thumbnail support**:
@@ -96,6 +97,7 @@ Contextual Related Posts is available for [translation directly on WordPress.org
 8. Contextual Related Post metabox in the Edit Posts screen
 9. CRP Widget
 10. Tools page
+11. Gutenberg block - Settings sidebar
 
 == Frequently Asked Questions ==
 
@@ -164,85 +166,28 @@ Parameters:
 
 = Shortcodes =
 
-You can insert the related posts anywhere in your post using the `[crp]` shortcode. The plugin takes three optional attributes `limit`, `heading` and `cache` as follows:
-
-`[crp limit="5" heading="1" cache="1"]`
-
-*limit* : Maximum number of posts to return. The actual number displayed may be lower depending on the matching algorithm and the category / post exclusion settings.
-
-*heading* : By default, the heading you specify in **Title of related posts:** under **Output options** will be displayed. You can override this by specifying your own heading e.g.
-
-`
-<h3>Similar posts</h3>
-[crp limit="2" heading="0"]
-`
-*cache* : Cache the output or not? By default the output will be cached for the post you add the shortcode in. You can override this by specifying `cache=0`
-
-In addition to the above, the shortcode takes every option that the plugin supports. See `crp_default_options()` function to see the options that can be set.
+You can insert the related posts anywhere in your post using the `[crp]` shortcode. View [this article in the knowledge base](https://webberzone.com/support/knowledgebase/contextual-related-posts-shortcode/) for more details.
 
 
 == Changelog ==
 
-= 2.7.0 =
+= 2.8.0 =
 
-Release post: [https://wzn.io/2XUCur8](https://wzn.io/2XUCur8)
-
-* Features:
-	* Caching improvements: "Enable cache" has been renamed to "Cache HTML output". New option "Cache posts only" has been introduced to cache the output of the database query (array of posts)
-	* New option to order posts by relevance, dates or randomly
-	* New option to limit posts by the same author
-	* Thumbnail HTML markup includes `srcset` and `sizes` attributes when available. Read [Responsive Images in WordPress 4.4](https://make.wordpress.org/core/2015/11/10/responsive-images-in-wordpress-4-4/)
-
-* Enhancements:
-	* No longer use `get_the_title`. You can use `crp_title` and/or `crp_thumb_title` filters to edit the post title and the alt/title attributes of the thumbnail respectively
-	* Selecting Rounded thumbnails under Styles tab will allow your thumbnail setting to either be "inline before text" or "only thumbnails, no text"
-
-= 2.6.3 =
-
-Release post: [https://wzn.io/2VrGdOR](https://wzn.io/2VrGdOR)
-
-* Enhancements:
-	* Optimized versions of default.png and default2.png
-
-* Bug fixes:
-	* Fixed PHP error when viewing feed
-	* "Exclude categories" setting wouldn't save properly
-	* Delete any deprecated settings on save should work properly
-	* Clearer messages when saving options and a style is activated
-
-= 2.6.2 =
-
-Release post: [https://wzn.io/2K2ohWB](https://wzn.io/2K2ohWB)
-
-* Bug fixes:
-	* Fixed PHP fatal error "Can’t use function return value in write context"
-	* Changed default setting for thumbnail width and height to 150
-
-= 2.6.1 =
-
-Release post: [https://wzn.io/2K2ohWB](https://wzn.io/2K2ohWB)
+Release post: [https://webberzone.com/blog/contextual-related-posts-v2-8-0/](https://webberzone.com/blog/contextual-related-posts-v2-8-0/)
 
 * Features:
-	* New options to delete options and/or data on uninstall. This will only work if you visit the Settings page and save the pages.
-
-* Bug fixes:
-	* Custom CSS code should now be properly added to the header
-	* Upgrading settings when "Automatically add related posts to" had no options checked should work properly
-
-= 2.6.0 =
-
-Release post: [https://wzn.io/2JZBZJy](https://wzn.io/2JZBZJy)
-
-* Features:
-	* Implemented the Settings API for handling plugin settings
-	* New Tools page: Recreate the indices, delete the cache and delete old settings
+    * New block for Gutenberg aka the block editor. The block is called **Related Posts [CRP]** and you can find it under the widgets category
+    * Two new settings in the widget: **Order posts** and **Randomize order** that allows the global setting to be overridden
+    * New setting called **Keyword** in the Meta box where you can enter a word or a phrase to find related posts. If entered, the plugin will continue to search the `post_title` and `post_content` fields but will use this keyword instead of the values of the title and content of the source post
 
 * Enhancements:
-	* `widget_title` filter includes `$instance` and `id_base` variables
+    * Show author, Show date, Show post excerpt and Post thumbnail settings will show a message that they cannnot be modified in case the Rounded thumbnails or No text styles are selected
 
 * Bug fixes:
-	* Checked for non-zero thumbnail width and height in the widget
-	* More checks for PHP errors and notices
+	* Selecting date order now orders the related posts by newest first
+    * Fixed PHP warning in the widget
+    * Stop using `current_time( 'timestamp' )`
+    * Fixes incorrect thumbnail image displayed for attachments in the related posts list
 
 = Earlier versions =
 
@@ -251,7 +196,6 @@ For the changelog of earlier versions, please refer to the separate changelog.tx
 
 == Upgrade Notice ==
 
-= 2.7.0 =
-* More caching control, new options and enhancements.
-Check the Changelog for more details
-
+= 2.8.0 =
+New block for Gutenberg. Enhancements to the widget. New Keyword setting.
+Check the Changelog for more details or view the release post on [https://webberzone.com](https://webberzone.com)

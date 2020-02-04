@@ -7,11 +7,7 @@ use WPForms\Providers\Provider\Core;
 /**
  * Class PageIntegrations handles the WPForms -> Settings -> Integrations page.
  *
- * @package    WPForms\Providers\Provider\Settings
- * @author     WPForms
- * @since      1.4.7
- * @license    GPL-2.0+
- * @copyright  Copyright (c) 2018, WPForms LLC
+ * @since 1.4.7
  */
 abstract class PageIntegrations implements PageIntegrationsInterface {
 

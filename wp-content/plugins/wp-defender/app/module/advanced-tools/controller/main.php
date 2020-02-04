@@ -96,9 +96,11 @@ class Main extends Controller {
 
 		return [
 			'misc'      => [
-				'all_roles'     => $allRoles,
-				'compatibility' => isset( wp_defender()->global['compatibility'] ) && is_array( wp_defender()->global['compatibility'] ) ? wp_defender()->global['compatibility'] : false,
-				'new_login_url' => Mask_Api::getNewLoginUrl()
+				'all_roles'          => $allRoles,
+				'compatibility'      => isset( wp_defender()->global['compatibility'] ) && is_array( wp_defender()->global['compatibility'] ) ? wp_defender()->global['compatibility'] : false,
+				'new_login_url'      => Mask_Api::getNewLoginUrl(),
+				'login_redirect_url' => Mask_Api::getRedirectUrl(),
+				'home_url'           => trailingslashit( network_home_url() )
 			],
 			'model'     => [
 				'two_factor' => $settings->export(),

@@ -5,6 +5,7 @@ namespace Beehive\Core\Modules\Google_Auth;
 // If this file is called directly, abort.
 defined( 'WPINC' ) || die;
 
+use Beehive\Core\Helpers\General;
 use Beehive\Core\Helpers\Template;
 use Beehive\Core\Utils\Abstracts\Base;
 
@@ -54,26 +55,20 @@ class Actions extends Base {
 		$state = json_decode( urldecode( $_GET['state'] ), true );
 
 		// Continue only after security check.
-		if ( isset( $state['beehive_nonce'], $state['origin'], $state['default'] )
-		     && wp_verify_nonce( $state['beehive_nonce'], 'beehive_nonce' )
-		) {
-			// Setup the redirect url.
+		if ( isset( $state['beehive_nonce'], $state['origin'], $state['default'] ) ) {
+			// Setup the redirect url base.
 			if ( 'network' === $state['origin'] ) {
 				$url = Template::settings_page( 'general', true );
 			} else {
-				// Get the redirect url base.
-				$url = add_query_arg( [
-					'page' => 'beehive-settings',
-					'tab'  => 'general',
-				], get_admin_url( $state['origin'], 'admin.php' ) );
+				$url = Template::settings_page( 'general', false, $state['origin'] );
 			}
 
 			// Setup redirect url.
 			$url = add_query_arg( [
-				'gnonce'  => wp_create_nonce( 'beehive_nonce' ), // Nonce.
-				'gcode'   => isset( $_GET['code'] ) ? $_GET['code'] : 0,
-				'default' => $state['default'],
-				'modal'   => empty( $state['modal'] ) ? 0 : 1,
+				'gcode'         => isset( $_GET['code'] ) ? $_GET['code'] : 0,
+				'default'       => $state['default'],
+				'beehive_nonce' => $state['beehive_nonce'], // Nonce retained for verification in subsite.
+				'modal'         => empty( $state['modal'] ) ? 0 : 1,
 			], $url );
 
 			/**
@@ -112,12 +107,12 @@ class Actions extends Base {
 		$core = Auth::instance();
 
 		// Continue only when required data is set.
-		if ( ! isset( $_GET['gcode'], $_GET['gnonce'], $_GET['page'], $_GET['default'] ) ) {
+		if ( ! isset( $_GET['gcode'], $_GET['beehive_nonce'], $_GET['page'], $_GET['default'] ) ) {
 			return;
 		}
 
 		// Security check.
-		if ( ! wp_verify_nonce( $_GET['gnonce'], 'beehive_nonce' ) ) {
+		if ( ! wp_verify_nonce( $_GET['beehive_nonce'], 'beehive_nonce' ) ) {
 			return;
 		}
 
@@ -135,8 +130,11 @@ class Actions extends Base {
 			// Setup client instance.
 			$default ? $core->setup_default( $network ) : $core->setup( $network );
 
+			// Sanitize the code.
+			$g_code = sanitize_text_field( $_GET['gcode'] );
+
 			// Exchange access code and get access token.
-			$token = $core->client()->fetchAccessTokenWithAuthCode( $_GET['gcode'] );
+			$token = $core->client()->fetchAccessTokenWithAuthCode( $g_code );
 
 			// Save access and refresh tokens.
 			if ( isset( $token['access_token'], $token['refresh_token'] ) ) {
@@ -202,7 +200,7 @@ class Actions extends Base {
 				if ( isset( $data[ $key ] ) ) {
 					// Sanitize.
 					if ( is_array( $data[ $key ] ) ) {
-						$options[ $key ] = array_map( 'sanitize_text_field', $data[ $key ] );
+						$options[ $key ] = General::sanitize_array( $data[ $key ] );
 					} else {
 						$options[ $key ] = sanitize_text_field( $data[ $key ] );
 					}

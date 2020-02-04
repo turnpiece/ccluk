@@ -228,14 +228,15 @@ class Rest extends Controller {
 			'paged'       => HTTP_Helper::retrieveGet( 'paged', 1 )
 		);
 		$params      = array();
-
+		$_GET        = array_filter( $_GET );
 		foreach ( $attributes as $att => $value ) {
 			$params[ $att ] = HTTP_Helper::retrieveGet( $att, $value );
 			if ( $att == 'date_from' || $att == 'date_to' ) {
-				$df_object = \DateTime::createFromFormat( $date_format, $params[ $att ] );
-				//check if the date string is right, if not, we use default
-				if ( is_object( $df_object ) ) {
-					$params[ $att ] = $df_object->format( 'Y-m-d' );
+				$df_object = new \DateTime( $params[ $att ] );
+				if ( $att == 'date_from' ) {
+					$params[ $att ] = $df_object->setTime( 0, 0 )->format( 'Y-m-d H:i:s' );
+				} elseif ( $att == 'date_to' ) {
+					$params[ $att ] = $df_object->setTime( 23, 59, 59 )->format( 'Y-m-d H:i:s' );
 				}
 			} elseif ( $att == 'user_id' ) {
 				$term = HTTP_Helper::retrieveGet( 'term' );
@@ -253,10 +254,6 @@ class Rest extends Controller {
 				$params['date_from'] = date( 'Y-m-d', strtotime( '-' . $value . ' days', current_time( 'timestamp' ) ) );
 			}
 		}
-
-		$params['date_to']   = trim( $params['date_to'] . ' 23:59:59' );
-		$params['date_from'] = trim( $params['date_from'] . ' 00:00:00' );
-
 		if ( HTTP_Helper::retrieveGet( 'all_type' ) == 1 ) {
 			$params['event_type'] = Audit_API::getEventType();
 		}

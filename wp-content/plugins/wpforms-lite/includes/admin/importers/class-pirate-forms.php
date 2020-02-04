@@ -3,11 +3,7 @@
 /**
  * Pirate Forms Importer class.
  *
- * @package    WPForms
- * @author     WPForms
- * @since      1.4.9
- * @license    GPL-2.0+
- * @copyright  Copyright (c) 2018, WPForms LLC
+ * @since 1.4.9
  */
 class WPForms_Pirate_Forms extends WPForms_Importer {
 
@@ -142,7 +138,7 @@ class WPForms_Pirate_Forms extends WPForms_Importer {
 		check_ajax_referer( 'wpforms-admin', 'nonce' );
 
 		// Check for permissions.
-		if ( ! wpforms_current_user_can() ) {
+		if ( ! wpforms_current_user_can( 'create_forms' ) ) {
 			wp_send_json_error();
 		}
 
@@ -639,15 +635,11 @@ class WPForms_Pirate_Forms extends WPForms_Importer {
 			return false;
 		}
 
-		// We do not need any extra credentials if we have gotten this far, so let's install the plugin.
-		require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
-		require_once __DIR__ . '/class-install-silent-skin.php';
-
 		// Do not allow WordPress to search/download translations, as this will break JS output.
 		remove_action( 'upgrader_process_complete', array( 'Language_Pack_Upgrader', 'async_upgrade' ), 20 );
 
 		// Create the plugin upgrader with our custom skin.
-		$installer = new Plugin_Upgrader( new WPForms_Install_Silent_Skin() );
+		$installer = new \WPForms\Helpers\PluginSilentUpgrader( new \WPForms\Helpers\PluginSilentUpgraderSkin() );
 
 		// Error check.
 		if ( ! method_exists( $installer, 'install' ) ) {

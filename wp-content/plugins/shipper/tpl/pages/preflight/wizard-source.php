@@ -31,7 +31,7 @@ $migration = new Shipper_Model_Stored_Migration;
 				<td class="sui-table-item-title">
 					<?php echo esc_html( $check['title'] ); ?>
 				</td>
-				
+
 				<td class="shipper-check-status">
 				<?php
 					$icon_type = 'ok' === $check['status']
@@ -46,7 +46,7 @@ $migration = new Shipper_Model_Stored_Migration;
 					<i aria-hidden="true"
 						class="sui-icon-<?php echo $icon_type; ?> sui-<?php echo $icon_kind; ?>"></i>
 				</td>
-				
+
 				<td>
 					<div class="shipper-check-message">
 					<?php
@@ -99,4 +99,3 @@ $migration = new Shipper_Model_Stored_Migration;
 	</div>
 <?php } ?>
 </div>
-

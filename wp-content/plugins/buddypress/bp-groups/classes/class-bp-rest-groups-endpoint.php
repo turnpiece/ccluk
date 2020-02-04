@@ -133,6 +133,11 @@ class BP_REST_Groups_Endpoint extends WP_REST_Controller {
 		// Actually, query it.
 		$groups = groups_get_groups( $args );
 
+		// Users need (at least, should we be more restrictive ?) to be logged in to use the edit context.
+		if ( 'edit' === $request->get_param( 'context' ) && ! is_user_logged_in() ) {
+			$request->set_param( 'context', 'view' );
+		}
+
 		$retval = array();
 		foreach ( $groups['groups'] as $group ) {
 			$retval[] = $this->prepare_response_for_collection(
@@ -597,31 +602,36 @@ class BP_REST_Groups_Endpoint extends WP_REST_Controller {
 			'name'               => bp_get_group_name( $item ),
 			'slug'               => bp_get_group_slug( $item ),
 			'status'             => bp_get_group_status( $item ),
-			'avatar_urls'        => array(),
 			'admins'             => array(),
 			'mods'               => array(),
 			'total_member_count' => null,
 			'last_activity'      => null,
 		);
 
-		// Avatars.
-		$data['avatar_urls']['thumb'] = bp_core_fetch_avatar(
-			array(
-				'html'    => false,
-				'object'  => 'group',
-				'item_id' => $item->id,
-				'type'    => 'thumb',
-			)
-		);
+		// Get item schema.
+		$schema = $this->get_item_schema();
 
-		$data['avatar_urls']['full'] = bp_core_fetch_avatar(
-			array(
-				'html'    => false,
-				'object'  => 'group',
-				'item_id' => $item->id,
-				'type'    => 'full',
-			)
-		);
+		// Avatars.
+		if ( ! empty( $schema['properties']['avatar_urls'] ) ) {
+			$data['avatar_urls'] = array(
+				'thumb' => bp_core_fetch_avatar(
+					array(
+						'html'    => false,
+						'object'  => 'group',
+						'item_id' => $item->id,
+						'type'    => 'thumb',
+					)
+				),
+				'full'  => bp_core_fetch_avatar(
+					array(
+						'html'    => false,
+						'object'  => 'group',
+						'item_id' => $item->id,
+						'type'    => 'full',
+					)
+				),
+			);
+		}
 
 		$context = ! empty( $request['context'] ) ? $request['context'] : 'view';
 
@@ -642,6 +652,20 @@ class BP_REST_Groups_Endpoint extends WP_REST_Controller {
 			);
 
 			foreach ( (array) $admin_mods['members'] as $user ) {
+				// Make sure to unset private data.
+				$private_keys = array_intersect(
+					array_keys( get_object_vars( $user ) ),
+					array(
+						'user_pass',
+						'user_email',
+						'user_activation_key',
+					)
+				);
+
+				foreach ( $private_keys as $private_key ) {
+					unset( $user->{$private_key} );
+				}
+
 				if ( ! empty( $user->is_admin ) ) {
 					$data['admins'][] = $user;
 				} else {
@@ -1051,7 +1075,7 @@ class BP_REST_Groups_Endpoint extends WP_REST_Controller {
 		);
 
 		// Avatars.
-		if ( true === buddypress()->avatar->show_avatars ) {
+		if ( ! bp_disable_group_avatar_uploads() ) {
 			$avatar_properties = array();
 
 			$avatar_properties['full'] = array(

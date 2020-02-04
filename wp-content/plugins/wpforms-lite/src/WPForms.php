@@ -6,8 +6,6 @@ namespace WPForms {
 	 * Main WPForms class.
 	 *
 	 * @since 1.0.0
-	 *
-	 * @package WPForms
 	 */
 	final class WPForms {
 
@@ -112,6 +110,15 @@ namespace WPForms {
 		public $license;
 
 		/**
+		 * Classes registry.
+		 *
+		 * @since 1.5.7
+		 *
+		 * @var array
+		 */
+		private $registry = array();
+
+		/**
 		 * Paid returns true, free (Lite) returns false.
 		 *
 		 * @since 1.3.9
@@ -119,6 +126,21 @@ namespace WPForms {
 		 * @var boolean
 		 */
 		public $pro = false;
+
+		/**
+		 * Backward compatibility method for accessing the class registry in an old way
+		 * e.g. 'wpforms()->form' or 'wpforms()->entry'
+		 *
+		 * @since 1.5.7
+		 *
+		 * @param string $name Name of the object to get.
+		 *
+		 * @return mixed|null
+		 */
+		public function __get( $name ) {
+
+			return $this->get( $name );
+		}
 
 		/**
 		 * Main WPForms Instance.
@@ -195,6 +217,7 @@ namespace WPForms {
 
 			// Global includes.
 			require_once WPFORMS_PLUGIN_DIR . 'includes/functions.php';
+			require_once WPFORMS_PLUGIN_DIR . 'includes/functions-list.php';
 			require_once WPFORMS_PLUGIN_DIR . 'includes/class-install.php';
 			require_once WPFORMS_PLUGIN_DIR . 'includes/class-form.php';
 			require_once WPFORMS_PLUGIN_DIR . 'includes/class-fields.php';
@@ -210,6 +233,7 @@ namespace WPForms {
 			require_once WPFORMS_PLUGIN_DIR . 'includes/class-conditional-logic-core.php';
 			require_once WPFORMS_PLUGIN_DIR . 'includes/emails/class-emails.php';
 			require_once WPFORMS_PLUGIN_DIR . 'includes/integrations.php';
+			require_once WPFORMS_PLUGIN_DIR . 'includes/deprecated.php';
 
 			// Admin/Dashboard only includes, also in ajax.
 			if ( is_admin() ) {
@@ -227,7 +251,6 @@ namespace WPForms {
 				require_once WPFORMS_PLUGIN_DIR . 'includes/admin/class-importers.php';
 				require_once WPFORMS_PLUGIN_DIR . 'includes/admin/class-about.php';
 				require_once WPFORMS_PLUGIN_DIR . 'includes/admin/ajax-actions.php';
-				require_once WPFORMS_PLUGIN_DIR . 'includes/admin/class-am-notification.php';
 				require_once WPFORMS_PLUGIN_DIR . 'includes/admin/class-am-deactivation-survey.php';
 			}
 		}
@@ -241,6 +264,14 @@ namespace WPForms {
 
 			// Autoload Composer packages.
 			require_once WPFORMS_PLUGIN_DIR . 'vendor/autoload.php';
+
+			 // Load the class loader.
+			$this->register(
+				[
+					'name' => 'Loader',
+					'hook' => false,
+				]
+			);
 
 			if ( version_compare( phpversion(), '5.5', '>=' ) ) {
 				/*
@@ -287,10 +318,6 @@ namespace WPForms {
 			$this->logs       = new \WPForms_Logging();
 
 			if ( is_admin() ) {
-				if ( ! wpforms_setting( 'hide-announcements', false ) ) {
-					new \AM_Notification( WPFORMS_PLUGIN_SLUG, $this->version );
-				}
-
 				if ( $this->pro || ( ! $this->pro && ! file_exists( WP_PLUGIN_DIR . '/wpforms/wpforms.php' ) ) ) {
 					new \AM_Deactivation_Survey( 'WPForms', basename( dirname( __DIR__ ) ) );
 				}
@@ -298,6 +325,92 @@ namespace WPForms {
 
 			// Hook now that all of the WPForms stuff is loaded.
 			do_action( 'wpforms_loaded' );
+		}
+
+		/**
+		 * Register a class.
+		 *
+		 * @since 1.5.7
+		 *
+		 * @param array $class Class registration info.
+		 */
+		public function register( $class ) {
+
+			if ( empty( $class['name'] ) || ! is_string( $class['name'] ) ) {
+				return;
+			}
+
+			if ( isset( $class['condition'] ) && empty( $class['condition'] ) ) {
+				return;
+			}
+
+			$full_name = $this->pro ? '\WPForms\Pro\\' . $class['name'] : '\WPForms\Lite\\' . $class['name'];
+			$full_name = class_exists( $full_name ) ? $full_name : '\WPForms\\' . $class['name'];
+
+			if ( ! class_exists( $full_name ) ) {
+				return;
+			}
+
+			$pattern  = '/[^a-zA-Z0-9_\\\-]/';
+			$id       = isset( $class['id'] ) ? $class['id'] : '';
+			$id       = $id ? preg_replace( $pattern, '', (string) $id ) : $id;
+			$hook     = isset( $class['hook'] ) ? $class['hook'] : 'wpforms_loaded';
+			$hook     = $hook ? preg_replace( $pattern, '', (string) $hook ) : $hook;
+			$run      = isset( $class['run'] ) ? $class['run'] : 'init';
+			$priority = isset( $class['priority'] ) && is_int( $class['priority'] ) ? $class['priority'] : 10;
+
+			$callback = function () use ( $full_name, $id, $run ) {
+
+				$instance = new $full_name();
+				if ( $id && ! array_key_exists( $id, $this->registry ) ) {
+					$this->registry[ $id ] = $instance;
+				}
+				if ( $run && method_exists( $instance, $run ) ) {
+					$instance->{$run}();
+				}
+			};
+
+			if ( $hook ) {
+				add_action( $hook, $callback, $priority );
+			} else {
+				$callback();
+			}
+		}
+
+		/**
+		 * Register classes in bulk.
+		 *
+		 * @since 1.5.7
+		 *
+		 * @param array $classes Classes to register.
+		 */
+		public function register_bulk( $classes ) {
+
+			if ( ! is_array( $classes ) ) {
+				return;
+			}
+
+			foreach ( $classes as $class ) {
+				$this->register( $class );
+			}
+		}
+
+		/**
+		 * Get a class instance from a registry.
+		 *
+		 * @since 1.5.7
+		 *
+		 * @param string $name Class name or an alias.
+		 *
+		 * @return mixed|null
+		 */
+		public function get( $name ) {
+
+			if ( ! empty( $this->registry[ $name ] ) ) {
+				return $this->registry[ $name ];
+			}
+
+			return null;
 		}
 	}
 }

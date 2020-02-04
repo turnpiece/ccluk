@@ -61,6 +61,11 @@ abstract class Google_API extends Base {
 		// Get errors array.
 		$errors = method_exists( $error, 'getErrors' ) ? $error->getErrors() : [];
 
+		// Log the error to php error log.
+		if ( apply_filters( 'beehive_google_api_error_log', false ) ) {
+			error_log( $error->getMessage() );
+		}
+
 		// Add error notification.
 		if ( ! empty( $errors[0]['message'] ) ) {
 			$message = $errors[0]['message'];

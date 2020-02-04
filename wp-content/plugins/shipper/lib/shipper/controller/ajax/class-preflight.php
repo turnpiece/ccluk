@@ -14,7 +14,9 @@ class Shipper_Controller_Ajax_Preflight extends Shipper_Controller_Ajax {
 	 * Boots the controller and sets up event listeners.
 	 */
 	public function boot() {
-		if ( ! is_admin() ) { return false; }
+		if ( ! is_admin() ) {
+			return false;
+		}
 
 		add_action(
 			'wp_ajax_shipper_preflight_restart',
@@ -52,24 +54,24 @@ class Shipper_Controller_Ajax_Preflight extends Shipper_Controller_Ajax {
 	public function json_get_package_size_message() {
 		$this->do_request_sanity_check();
 
-		$chk = new Shipper_Task_Check_Files;
+		$chk          = new Shipper_Task_Check_Files;
 		$package_size = $chk->get_updated_package_size();
-		$threshold = Shipper_Model_Stored_Migration::get_package_size_threshold();
-		$exclusions = new Shipper_Model_Stored_Exclusions;
+		$threshold    = Shipper_Model_Stored_Migration::get_package_size_threshold();
+		$exclusions   = new Shipper_Model_Stored_Exclusions;
 
-		$tpl = new Shipper_Helper_Template;
+		$tpl    = new Shipper_Helper_Template;
 		$markup = $tpl->get(
 			'pages/preflight/wizard-files-package_size-summary',
 			array(
 				'package_size' => $package_size,
-				'threshold' => $threshold,
+				'threshold'    => $threshold,
 			)
 		);
 		wp_send_json_success( array(
-			'excluded' => count( $exclusions->get_data() ),
+			'excluded'     => count( $exclusions->get_data() ),
 			'package_size' => size_format( $package_size ),
-			'oversized' => $package_size > $threshold,
-			'markup' => $markup,
+			'oversized'    => $package_size > $threshold,
+			'markup'       => $markup,
 		) );
 	}
 
@@ -91,7 +93,7 @@ class Shipper_Controller_Ajax_Preflight extends Shipper_Controller_Ajax {
 		$data = stripslashes_deep( $_POST );
 
 		$exclusions = new Shipper_Model_Stored_Exclusions;
-		$paths = $exclusions->get_data();
+		$paths      = $exclusions->get_data();
 
 		$root_rx = preg_quote(
 			realpath( ABSPATH ),
@@ -99,7 +101,7 @@ class Shipper_Controller_Ajax_Preflight extends Shipper_Controller_Ajax {
 		);
 
 		if ( ! empty( $data['path'] ) ) {
-			$path = wp_normalize_path( realpath( $data['path'] ) );
+			$path         = wp_normalize_path( realpath( $data['path'] ) );
 			$path_windows = realpath( $data['path'] ); // Check for Windows paths as well.
 			if ( ! empty( $path ) ) {
 				// Check if this is a sub-path of root.
@@ -127,18 +129,18 @@ class Shipper_Controller_Ajax_Preflight extends Shipper_Controller_Ajax {
 	public function json_bulk_process_paths() {
 		$this->do_request_sanity_check();
 		// @codingStandardsIgnoreLine Nonce already checked in `do_request_sanity_check`
-		$data = stripslashes_deep( $_POST );
-		$data_paths = ! empty( $data['paths'] ) && is_array( $data['paths' ] )
+		$data       = stripslashes_deep( $_POST );
+		$data_paths = ! empty( $data['paths'] ) && is_array( $data['paths'] )
 			? $data['paths']
 			: array();
 
 		if ( empty( $data['apply'] ) ) {
 			return wp_send_json_error();
 		}
-		$action = 'exclude' === $data['apply'] ? 'exclude' : 'include';
+		$action     = 'exclude' === $data['apply'] ? 'exclude' : 'include';
 		$exclusions = new Shipper_Model_Stored_Exclusions;
-		$paths = $exclusions->get_data();
-		$root_rx = preg_quote(
+		$paths      = $exclusions->get_data();
+		$root_rx    = preg_quote(
 			realpath( ABSPATH ),
 			'/'
 		);
@@ -147,7 +149,7 @@ class Shipper_Controller_Ajax_Preflight extends Shipper_Controller_Ajax {
 			if ( empty( $path_item['path'] ) || empty( $path_item['_wpnonce'] ) ) {
 				continue;
 			}
-			$path = wp_normalize_path( realpath ( $path_item['path'] ) );
+			$path         = wp_normalize_path( realpath( $path_item['path'] ) );
 			$path_windows = realpath( $path_item['path'] );
 			if ( ! empty( $path ) ) {
 				// Check if this is a sub-path of root.
@@ -155,13 +157,15 @@ class Shipper_Controller_Ajax_Preflight extends Shipper_Controller_Ajax {
 					$path = false;
 				}
 			}
-			if ( empty( $path ) ) { continue; }
+			if ( empty( $path ) ) {
+				continue;
+			}
 
 			if ( 'exclude' === $action && ! in_array( $path, array_keys( $paths ), true ) ) {
-					$exclusions->set( $path, md5( $path ) );
+				$exclusions->set( $path, md5( $path ) );
 			}
 			if ( 'include' === $action && in_array( $path, array_keys( $paths ), true ) ) {
-					$exclusions->remove( $path );
+				$exclusions->remove( $path );
 			}
 		}
 
@@ -180,7 +184,7 @@ class Shipper_Controller_Ajax_Preflight extends Shipper_Controller_Ajax {
 			wp_send_json_error( __( 'Preflight still running', 'shipper' ) );
 		}
 
-		$data = stripslashes_deep( $_POST );
+		$data    = stripslashes_deep( $_POST );
 		$section = ! empty( $data['section'] )
 			? $data['section']
 			: false;
@@ -225,19 +229,19 @@ class Shipper_Controller_Ajax_Preflight extends Shipper_Controller_Ajax {
 			if ( $key ) {
 				$changed = true;
 				$ctrl->get_status()
-					->set_check( $key, false )
-					->clear_check_errors( $key )
-					->set( Shipper_Model_Stored_Preflight::KEY_DONE, false )
-					->save();
+				     ->set_check( $key, false )
+				     ->clear_check_errors( $key )
+				     ->set( Shipper_Model_Stored_Preflight::KEY_DONE, false )
+				     ->save();
 			} else if ( 'files' === $section ) {
 				$changed = true;
 				$ctrl->get_status()
-					->set_check( Shipper_Model_Stored_Preflight::KEY_CHECKS_FILES, false )
-					->clear_check_errors( Shipper_Model_Stored_Preflight::KEY_CHECKS_FILES )
-					->set_check( Shipper_Model_Stored_Preflight::KEY_CHECKS_RPKG, false )
-					->clear_check_errors( Shipper_Model_Stored_Preflight::KEY_CHECKS_RPKG )
-					->set( Shipper_Model_Stored_Preflight::KEY_DONE, false )
-					->save();
+				     ->set_check( Shipper_Model_Stored_Preflight::KEY_CHECKS_FILES, false )
+				     ->clear_check_errors( Shipper_Model_Stored_Preflight::KEY_CHECKS_FILES )
+				     ->set_check( Shipper_Model_Stored_Preflight::KEY_CHECKS_RPKG, false )
+				     ->clear_check_errors( Shipper_Model_Stored_Preflight::KEY_CHECKS_RPKG )
+				     ->set( Shipper_Model_Stored_Preflight::KEY_DONE, false )
+				     ->save();
 			}
 
 			if ( $changed ) {
@@ -259,14 +263,15 @@ class Shipper_Controller_Ajax_Preflight extends Shipper_Controller_Ajax {
 		if ( ! $ctrl->get_status()->get( Shipper_Model_Stored_Preflight::KEY_DONE ) ) {
 			return wp_send_json_error(); // Not done yet.
 		}
-		$tpl = new Shipper_Helper_Template;
+		$tpl      = new Shipper_Helper_Template;
 		$response = $tpl->get(
 			'modals/preflight',
 			array(
-				'modal' => 'results',
+				'modal'      => 'results',
 				'is_recheck' => true,
 			)
 		);
+
 		return wp_send_json_success( $response );
 	}
 
@@ -279,7 +284,7 @@ class Shipper_Controller_Ajax_Preflight extends Shipper_Controller_Ajax {
 		$ctrl->attempt_cancel();
 
 		$preflight = $ctrl->get_status();
-		$data = $preflight->get_data();
+		$data      = $preflight->get_data();
 		$ctrl->clear();
 
 		return empty( $data )

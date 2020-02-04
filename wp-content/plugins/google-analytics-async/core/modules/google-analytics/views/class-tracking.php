@@ -5,6 +5,7 @@ namespace Beehive\Core\Modules\Google_Analytics\Views;
 // If this file is called directly, abort.
 defined( 'WPINC' ) || die;
 
+use Beehive\Core\Helpers\General;
 use Beehive\Core\Utils\Abstracts\View;
 
 /**
@@ -73,17 +74,38 @@ class Tracking extends View {
 			$network_code = $network_auto_tracking_code;
 		}
 
-		// Force anonymize.
-		$force_anonymize = beehive_analytics()->settings->get( 'force_anonymize', 'general', true );
+		// No need to load if both tracking codes are empty.
+		if ( empty( $single_code ) && empty( $network_code ) ) {
+			return;
+		}
+
+		// Anonymize settings.
+		$anonymize         = beehive_analytics()->settings->get( 'anonymize', 'general' );
+		$network_anonymize = beehive_analytics()->settings->get( 'anonymize', 'general', true );
+
+		// If forced from network settings.
+		if ( General::is_networkwide() && ! $this->is_network() && $network_anonymize ) {
+			$anonymize = beehive_analytics()->settings->get( 'force_anonymize', 'general', true ) ? true : $anonymize;
+		}
+
+		// Network admin tracking does not require subsite tracking code.
+		if ( $this->is_network() || ( General::is_networkwide() && is_admin() ) ) {
+			$single_code = '';
+		}
+
+		// Network code is required only when plugin is active networkwide.
+		if ( ! General::is_networkwide() ) {
+			$network_code = '';
+		}
 
 		// Render tracking code template.
 		$this->view( 'scripts/google/tracking', [
 			'network_tracking_code' => $network_code,
 			// Only when different tracking code is set for network and single.
 			'tracking_code'         => $network_code === $single_code ? '' : $single_code,
-			'anonymize'             => $force_anonymize ? true : beehive_analytics()->settings->get( 'anonymize', 'general' ),
+			'anonymize'             => $anonymize,
+			'network_anonymize'     => $network_anonymize,
 			'advertising'           => beehive_analytics()->settings->get( 'advertising', 'general' ),
-			'network_anonymize'     => beehive_analytics()->settings->get( 'anonymize', 'general', true ),
 			'network_advertising'   => beehive_analytics()->settings->get( 'advertising', 'general', true ),
 		] );
 	}
@@ -96,12 +118,12 @@ class Tracking extends View {
 	 * @return void
 	 */
 	public function admin_tracking() {
-		// Continue only when enabled.
-		$admin_tracking = beehive_analytics()->settings->get(
-			'track_admin',
-			'general',
-			$this->is_network()
-		);
+		if ( General::is_networkwide() ) {
+			// Continue only when enabled.
+			$admin_tracking = beehive_analytics()->settings->get( 'track_admin', 'general', true );
+		} else {
+			$admin_tracking = beehive_analytics()->settings->get( 'track_admin', 'general' );
+		}
 
 		/**
 		 * Filter hook to enable/disable admin tracking.

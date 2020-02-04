@@ -13,7 +13,7 @@
                 </p>
                 <form method="post" @submit.prevent="toggle(true,'login_protection')" class="ip-frm">
                     <submit-button type="submit" css-class="sui-button-blue" :state="state">
-                        {{__("Active")}}
+                        {{__("Activate")}}
                     </submit-button>
                 </form>
             </div>
@@ -107,8 +107,9 @@
                                                    class="sui-form-control"/>
                                         </div>
                                         <div class="sui-col-md-4">
-                                            <select name="login_protection_lockout_duration_unit"
-                                                    class="jquery-select"
+                                            <select id="lockout-duration-unit" name="login_protection_lockout_duration_unit"
+                                                    class="jquery-select sui-select"
+                                                    data-minimum-results-for-search="Infinity"
                                                     v-model="model.login_protection_lockout_duration_unit">
                                                 <option value="seconds">{{__("Seconds")}}</option>
                                                 <option value="minutes">{{__("Minutes")}}</option>

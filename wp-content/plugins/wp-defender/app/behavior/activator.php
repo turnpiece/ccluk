@@ -79,7 +79,7 @@ class Activator extends Behavior {
 			}
 		}
 
-		set_site_transient( 'wp_defender_is_activated', 1 );
+		update_site_option( 'wp_defender_is_activated', 1 );
 		wp_send_json_success( array(
 			'activated' => $activated,
 			//'message'   => __( "" )
@@ -97,9 +97,18 @@ class Activator extends Behavior {
 			return 0;
 		}
 
+		if ( get_site_option( 'wp_defender_is_free_activated' ) == 1 ) {
+			return 1;
+		}
+
+		if ( get_site_option( 'wp_defender_is_activated' ) == 1 ) {
+			return 0;
+		}
+
 		if ( get_site_transient( 'wp_defender_is_activated' ) == 1 ) {
 			return 0;
 		}
+
 
 		if ( $cache->get( 'wdf_isActivated', false ) == 1 ) {
 			//this mean user just upgraded from the free
@@ -109,6 +118,8 @@ class Activator extends Behavior {
 		if ( get_site_transient( 'wp_defender_is_free_activated' ) == 1 ) {
 			return 1;
 		}
+
+
 		$keys = [
 			'wp_defender',
 			'wd_scan_settings',

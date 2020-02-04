@@ -533,6 +533,7 @@ class Detect extends Render {
 	 *
 	 * @since 4.0.0
 	 * @staticvar bool $detected
+	 * @TODO add filter?
 	 *
 	 * @return bool
 	 */
@@ -680,6 +681,7 @@ class Detect extends Render {
 	 * Detect if the current screen type is a page or taxonomy.
 	 *
 	 * @since 2.3.1
+	 * @TODO unused... deprecate me.
 	 * @staticvar array $is_page
 	 *
 	 * @param string $type the Screen type
@@ -708,6 +710,7 @@ class Detect extends Render {
 	 *
 	 * @since 4.0.0
 	 * @since 4.0.2 Now tests for an existing post/term ID when on singular/term pages.
+	 * @since 4.0.3 Can now assert empty categories again by checking for taxonomy support.
 	 *
 	 * @return bool
 	 */
@@ -731,7 +734,10 @@ class Detect extends Render {
 				break;
 
 			case $this->is_term_meta_capable():
-				$supported = $this->is_post_type_supported() && $this->get_the_real_ID();
+				// When a term has no posts attached, it'll not return a post type, and it returns a 404 late in the loop.
+				// This is because get_post_type() tries to assert the first post in the loop here.
+				// Thus, we test for is_taxonomy_supported() instead.
+				$supported = $this->is_taxonomy_supported() && $this->get_the_real_ID();
 				break;
 
 			default:

@@ -47,7 +47,7 @@ class Shipper_Task_Export_Upload extends Shipper_Task_Export {
 		 */
 		$max_statements = (int) apply_filters(
 			'shipper_export_max_upload_statements',
-			10
+			100
 		);
 		$statements = $dumped->get_statements( $pos, $max_statements );
 		foreach ( $statements as $data ) {

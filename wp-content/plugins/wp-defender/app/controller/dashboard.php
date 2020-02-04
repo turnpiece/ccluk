@@ -54,7 +54,7 @@ class Dashboard extends Controller {
 			return;
 		}
 		$is_free = wp_defender()->isFree ? '_free' : null;
-		set_site_transient( 'wp_defender' . $is_free . '_is_activated', 1 );
+		update_site_option( 'wp_defender' . $is_free . '_is_activated', 1 );
 		wp_send_json_success();
 	}
 

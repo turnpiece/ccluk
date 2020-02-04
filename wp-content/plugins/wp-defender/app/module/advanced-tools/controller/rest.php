@@ -87,14 +87,19 @@ class Rest extends Controller {
 			$model = Advanced_Tools\Model\Mask_Settings::instance();
 		}
 		$model->import( $settings );
-		$model->save();
-
-		$res = array(
-			'message' => __( "Your settings have been updated.", wp_defender()->domain )
-		);
-
-		$this->submitStatsToDev();
-		wp_send_json_success( $res );
+		if ( $model->validate() ) {
+			$model->save();
+			$res = array(
+				'message' => __( "Your settings have been updated.", wp_defender()->domain )
+			);
+			$this->submitStatsToDev();
+			wp_send_json_success( $res );
+		} else {
+			$res = array(
+				'message' => implode( '<br/>', $model->getErrors() )
+			);
+			wp_send_json_error( $res );
+		}
 	}
 
 	/**

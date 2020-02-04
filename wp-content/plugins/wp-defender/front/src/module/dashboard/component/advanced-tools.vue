@@ -73,8 +73,8 @@
                     <div class="sui-notice sui-notice-success margin-top-10 margin-bottom-30"
                          v-else-if="mask_login.useable===true">
                         <p>
-                            {{__("Masking is currently active at ")}} <a
-                                :href="adminUrl(mask_login.login_url)">{{mask_login.login_url}}</a>
+                            {{__("Masking is currently active at ")}} <a target="_blank"
+                                :href="mask_login.login_url">{{mask_login.login_url}}</a>
                         </p>
                     </div>
                 </td>

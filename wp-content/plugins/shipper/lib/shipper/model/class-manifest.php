@@ -23,15 +23,19 @@ class Shipper_Model_Manifest extends Shipper_Model {
 	 */
 	public static function from_migration( Shipper_Model_Stored_Migration $migration ) {
 		global $table_prefix;
-		$manifest = new self;
-		$manifest->set_data(array(
-			'version' => SHIPPER_VERSION,
-			'created' => date( 'r' ),
-			'source' => $migration->get_source(),
-			'destination' => $migration->get_destination(),
-			'abspath' => ABSPATH,
-			'table_prefix' => $table_prefix,
-		));
+		$manifest  = new self;
+		$db_prefix = new Shipper_Model_Stored_Dbprefix();
+		$manifest->set_data( array(
+			'version'             => SHIPPER_VERSION,
+			'created'             => date( 'r' ),
+			'source'              => $migration->get_source(),
+			'destination'         => $migration->get_destination(),
+			'abspath'             => ABSPATH,
+			'table_prefix'        => $table_prefix,
+			'dbprefix_option'     => $db_prefix->get( 'option' ),
+			'dbprefix_value'      => $db_prefix->get( 'value' ),
+		) );
+
 		return $manifest;
 	}
 
@@ -45,18 +49,27 @@ class Shipper_Model_Manifest extends Shipper_Model {
 	public static function from_source( $source ) {
 		$manifest = new self;
 
-		if ( ! file_exists( $source ) ) { return $manifest; }
-		if ( ! is_readable( $source ) ) { return $manifest; }
+		if ( ! file_exists( $source ) ) {
+			return $manifest;
+		}
+		if ( ! is_readable( $source ) ) {
+			return $manifest;
+		}
 
 		$cnt = file_get_contents( $source );
-		if ( empty( $cnt ) ) { return $manifest; }
+		if ( empty( $cnt ) ) {
+			return $manifest;
+		}
 
 		$json = json_decode( $cnt, true );
-		if ( empty( $json ) || ! is_array( $json ) ) { return $manifest; }
+		if ( empty( $json ) || ! is_array( $json ) ) {
+			return $manifest;
+		}
 
 		foreach ( $json as $key => $value ) {
 			$manifest->set( $key, $value );
 		}
+
 		return $manifest;
 	}
 }

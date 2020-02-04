@@ -25,6 +25,8 @@ class Shipper_Model_Stored_Migration extends Shipper_Model_Stored {
 	const COMPONENT_DB = 'sqls';
 	const COMPONENT_META = 'meta';
 
+	const HAS_STARTED = 'has-started';
+
 	/**
 	 * Gets maximum file size before issuing a warning
 	 *
@@ -109,10 +111,18 @@ class Shipper_Model_Stored_Migration extends Shipper_Model_Stored {
 	 * @return bool
 	 */
 	public function begin() {
-		if ( ! $this->get_source() ) { return false; }
-		if ( ! $this->get_destination() ) { return false; }
-		if ( ! $this->get_type() ) { return false; }
-		if ( ! $this->get_origin() ) { return false; }
+		if ( ! $this->get_source() ) {
+			return false;
+		}
+		if ( ! $this->get_destination() ) {
+			return false;
+		}
+		if ( ! $this->get_type() ) {
+			return false;
+		}
+		if ( ! $this->get_origin() ) {
+			return false;
+		}
 
 		$this->set( 'state', self::STATE_ACTIVE );
 		$this->save();
@@ -166,6 +176,7 @@ class Shipper_Model_Stored_Migration extends Shipper_Model_Stored {
 	 */
 	public function is_empty() {
 		$data = $this->get_data();
+
 		return empty( $data );
 	}
 
@@ -211,12 +222,12 @@ class Shipper_Model_Stored_Migration extends Shipper_Model_Stored {
 	 * @return string
 	 */
 	public function get_description() {
-		$source = $this->get_source();
+		$source      = $this->get_source();
 		$destination = $this->get_destination();
 
 		$direction = self::TYPE_IMPORT === $this->get_type() ? '<=' : '=>';
 
-		$state = $this->is_active()
+		$state  = $this->is_active()
 			? __( 'running', 'shipper' )
 			: __( 'idle', 'shipper' );
 		$origin = $this->is_from_hub()

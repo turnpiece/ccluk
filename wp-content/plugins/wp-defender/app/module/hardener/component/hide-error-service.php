@@ -17,37 +17,14 @@ class Hide_Error_Service extends Rule_Service implements IRule_Service {
 	 * @return bool
 	 */
 	public function check() {
-		//we will start a request to see if it is showing error
-		$altCache = WP_Helper::getArrayCache();
-		$cached   = $altCache->get( 'Hide_Error_Service', null );
-		if ( $cached === null ) {
-			//tmp turn off error log
-			$isLog = ini_get( 'log_errors' );
-			if ( $isLog == 1 ) {
-				ini_set( 'log_errors', 0 );
-			}
-			$url      = site_url( 'wp-includes/theme-compat/embed.php', array(
-				'user-agent' => 'Defender self check'
-			) );
-			$response = wp_remote_get( $url, [
-				'timeout' => 3
-			] );
-			$body     = wp_remote_retrieve_body( $response );
-			if ( $isLog == 1 ) {
-				ini_set( 'log_errors', 1 );
-			}
-			if ( strpos( $body, ABSPATH . 'wp-includes/theme-compat/embed.php' ) !== false ||
-			     WP_DEBUG == true && ( ! defined( 'WP_DEBUG_DISPLAY' ) || WP_DEBUG_DISPLAY != false ) ) {
-				$altCache->set( 'Hide_Error_Service', 0 );
-
-				return false;
-			}
-			$altCache->set( 'Hide_Error_Service', 1 );
-
+		if ( defined( 'WP_DEBUG' ) && constant( 'WP_DEBUG' ) == false ) {
 			return true;
-		} else {
-			return $cached;
 		}
+		if ( defined( 'WP_DEBUG_DISPLAY' ) && constant( 'WP_DEBUG_DISPLAY' ) == false ) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

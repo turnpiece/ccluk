@@ -83,6 +83,7 @@ class Shipper_Helper_Fs_List {
 	 */
 	public function set_root( $path ) {
 		$this->_root = wp_normalize_path( $path );
+
 		return $this;
 	}
 
@@ -101,8 +102,7 @@ class Shipper_Helper_Fs_List {
 
 		return ! empty( $this->_root )
 			? (string) $this->_root
-			: $root
-		;
+			: $root;
 	}
 
 	/**
@@ -116,6 +116,7 @@ class Shipper_Helper_Fs_List {
 		$total = $this->get_total_steps();
 		$this->_storage->clear();
 		$this->_storage->set( Shipper_Model_Stored_Filelist::KEY_TOTAL, $total );
+
 		return $this->_storage->save();
 	}
 
@@ -169,8 +170,7 @@ class Shipper_Helper_Fs_List {
 	public function get_paths_limit() {
 		$limit = $this->is_excludable()
 			? 50
-			: 250
-		;
+			: 250;
 
 		/**
 		 * Max number of paths to be processed per step
@@ -197,8 +197,7 @@ class Shipper_Helper_Fs_List {
 	public function get_bytes_limit() {
 		$limit = $this->is_excludable()
 			? 2 * 1024 * 1024
-			: 0
-		;
+			: 0;
 
 		/**
 		 * Max number of bytes to process per step
@@ -221,10 +220,11 @@ class Shipper_Helper_Fs_List {
 	 * @return array
 	 */
 	public function process_files() {
-		if ( $this->is_done() ) { return $this->_files; }
-
-		$processed = 0;
-		$limit = $this->get_paths_limit();
+		if ( $this->is_done() ) {
+			return $this->_files;
+		}
+		$processed   = 0;
+		$limit       = $this->get_paths_limit();
 		$limit_files = $limit * 6;
 		$limit_bytes = $this->get_bytes_limit();
 
@@ -243,7 +243,7 @@ class Shipper_Helper_Fs_List {
 
 		while ( ! empty( $paths ) ) {
 			$path = array_pop( $paths );
-			$processed++;
+			$processed ++;
 
 			$contents = shipper_glob_all( $path );
 			foreach ( $contents as $item ) {
@@ -261,7 +261,10 @@ class Shipper_Helper_Fs_List {
 					true,
 					$item
 				);
-				if ( ! $do_process_item ) { continue; }
+
+				if ( ! $do_process_item ) {
+					continue;
+				}
 
 				if ( is_object( $exclusions ) && $exclusions->is_excluded( $item ) ) {
 					Shipper_Helper_Log::write(
@@ -326,12 +329,12 @@ class Shipper_Helper_Fs_List {
 			$this->_storage->set( Shipper_Model_Stored_Filelist::KEY_DONE, true );
 		}
 		$step = $this->_storage->get( Shipper_Model_Stored_Filelist::KEY_STEP, 0 );
-		$step++;
+		$step ++;
 		$this->_storage->set( Shipper_Model_Stored_Filelist::KEY_STEP, $step );
 
 		$total = $this->get_total_steps();
 		if ( $total <= $step ) {
-			$total++;
+			$total ++;
 			$this->_storage->set( Shipper_Model_Stored_Filelist::KEY_TOTAL, $total );
 		}
 

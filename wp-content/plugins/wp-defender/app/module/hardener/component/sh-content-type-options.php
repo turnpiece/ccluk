@@ -93,6 +93,17 @@ class Sh_Content_Type_Options extends Rule {
 	 */
 	public function process() {
 		//calling the service
+		$mode     = HTTP_Helper::retrievePost( 'mode' );
+		$scenario = HTTP_Helper::retrievePost( 'scenario' );
+		$service           = $this->getService();
+		$service->mode     = $mode;
+		$service->scenario = $scenario;
+		$ret               = $service->process();
+		if ( is_wp_error( $ret ) ) {
+			wp_send_json_error( [
+				'message' => $ret->get_error_message()
+			] );
+		}
 		$this->getService()->process();
 		Settings::instance()->addToResolved( self::$slug );
 	}

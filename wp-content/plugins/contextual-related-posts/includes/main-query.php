@@ -34,9 +34,11 @@ function get_crp( $args = array() ) {
 		'is_widget'    => false,
 		'is_shortcode' => false,
 		'is_manual'    => false,
+		'is_block'     => false,
 		'echo'         => true,
 		'heading'      => true,
 		'offset'       => 0,
+		'extra_class'  => '',
 	);
 	$defaults = array_merge( $defaults, $crp_settings );
 
@@ -49,13 +51,16 @@ function get_crp( $args = array() ) {
 	}
 
 	// Support caching to speed up retrieval.
-	if ( ! empty( $args['cache'] ) && empty( $args['cache_posts'] ) ) {
+	if ( ! empty( $args['cache'] ) && empty( $args['cache_posts'] ) && ! ( is_preview() || is_admin() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) ) {
 		$meta_key = 'crp_related_posts';
 		if ( $args['is_widget'] ) {
 			$meta_key .= '_widget';
 		}
 		if ( $args['is_manual'] ) {
 			$meta_key .= '_manual';
+		}
+		if ( $args['is_block'] ) {
+			$meta_key .= '_block';
 		}
 		if ( is_feed() ) {
 			$meta_key .= '_feed';
@@ -89,16 +94,17 @@ function get_crp( $args = array() ) {
 	 */
 	$custom_template = apply_filters( 'crp_custom_template', null, $results, $args );
 	if ( ! empty( $custom_template ) ) {
-		if ( ! empty( $args['cache'] ) && empty( $args['cache_posts'] ) ) {
+		if ( ! empty( $args['cache'] ) && empty( $args['cache_posts'] ) && ! ( is_preview() || is_admin() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) ) {
 			update_post_meta( $post->ID, $meta_key, $custom_template, '' );
 		}
 		return $custom_template;
 	}
 
-	$widget_class    = $args['is_widget'] ? 'crp_related_widget' : 'crp_related ';
+	$widget_class    = $args['is_widget'] ? 'crp_related_widget ' : 'crp_related ';
 	$shortcode_class = $args['is_shortcode'] ? 'crp_related_shortcode ' : '';
+	$block_class     = $args['is_block'] ? 'crp_related_block ' : '';
 
-	$post_classes = $widget_class . $shortcode_class;
+	$post_classes = $widget_class . $shortcode_class . $block_class . ' ' . $args['extra_class'];
 
 	/**
 	 * Filter the classes added to the div wrapper of the Contextual Related Posts.
@@ -224,7 +230,7 @@ function get_crp( $args = array() ) {
 	$output .= '</div>'; // Closing div of 'crp_related'.
 
 	// Support caching to speed up retrieval.
-	if ( ! empty( $args['cache'] ) && empty( $args['cache_posts'] ) ) {
+	if ( ! empty( $args['cache'] ) && empty( $args['cache_posts'] ) && ! ( is_preview() || is_admin() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) ) {
 		update_post_meta( $post->ID, $meta_key, $output, '' );
 	}
 
@@ -246,7 +252,7 @@ function get_crp( $args = array() ) {
  * @since 1.9
  *
  * @param array $args Arguments array.
- * @return object $results
+ * @return object $results Array of related post objects
  */
 function get_crp_posts_id( $args = array() ) {
 	global $wpdb, $post, $crp_settings;
@@ -349,6 +355,15 @@ function get_crp_posts_id( $args = array() ) {
 		$match_fields_content[] = crp_excerpt( $source_post->ID, $args['match_content_words'], false );
 	}
 
+	// If keyword is entered, override the matching content.
+	$crp_post_meta = get_post_meta( $post->ID, 'crp_post_meta', true );
+
+	if ( isset( $crp_post_meta['keyword'] ) ) {
+		$match_fields_content = array(
+			$crp_post_meta['keyword'],
+		);
+	}
+
 	/**
 	 * Filter the fields that are to be matched.
 	 *
@@ -378,7 +393,7 @@ function get_crp_posts_id( $args = array() ) {
 	$now             = gmdate( 'Y-m-d H:i:s', ( time() + ( $time_difference * 3600 ) ) );
 
 	// Limit the related posts by time.
-	$current_time = current_time( 'timestamp', 0 );
+	$current_time = strtotime( current_time( 'mysql' ) );
 	$from_date    = $current_time - ( absint( $args['daily_range'] ) * DAY_IN_SECONDS );
 	$from_date    = gmdate( 'Y-m-d H:i:s', $from_date );
 
@@ -390,7 +405,7 @@ function get_crp_posts_id( $args = array() ) {
 
 		// Set order by in case of date.
 		if ( isset( $args['ordering'] ) && 'date' === $args['ordering'] ) {
-			$orderby = " $wpdb->posts.post_date ";
+			$orderby = " $wpdb->posts.post_date DESC ";
 		}
 
 		// Create the base MATCH clause.
@@ -437,7 +452,7 @@ function get_crp_posts_id( $args = array() ) {
 		$where  = $match;
 		$where .= $now_clause;
 		$where .= $from_clause;
-		$where .= " AND $wpdb->posts.post_status = 'publish' ";                 // Only show published posts.
+		$where .= " AND $wpdb->posts.post_status IN ('publish','inherit') "; // Only show published posts or attachments.
 		$where .= $wpdb->prepare( " AND {$wpdb->posts}.ID != %d ", $source_post->ID );  // Don't include the current ID.
 
 		if ( isset( $args['same_author'] ) && $args['same_author'] ) {
@@ -457,7 +472,7 @@ function get_crp_posts_id( $args = array() ) {
 		$exclude_post_ids = apply_filters( 'crp_exclude_post_ids', $exclude_post_ids );
 
 		// Convert it back to string.
-		$exclude_post_ids = implode( ',', array_filter( $exclude_post_ids ) );
+		$exclude_post_ids = implode( ',', array_filter( array_filter( $exclude_post_ids, 'absint' ) ) );
 
 		if ( '' != $exclude_post_ids ) { // phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
 			$where .= " AND $wpdb->posts.ID NOT IN ({$exclude_post_ids}) ";
@@ -553,7 +568,7 @@ function get_crp_posts_id( $args = array() ) {
 		$sql = "SELECT DISTINCT $fields FROM $wpdb->posts $join WHERE 1=1 $where $groupby $having $orderby $limits";
 
 		// Support caching to speed up retrieval.
-		if ( ! empty( $args['cache_posts'] ) ) {
+		if ( ! empty( $args['cache_posts'] ) && ! ( is_preview() || is_admin() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) ) {
 
 			$attr = array(
 				'offset'           => $offset,
@@ -575,7 +590,7 @@ function get_crp_posts_id( $args = array() ) {
 		}
 
 		// Support caching to speed up retrieval.
-		if ( ! empty( $args['cache_posts'] ) ) {
+		if ( ! empty( $args['cache_posts'] ) && ! ( is_preview() || is_admin() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) ) {
 			update_post_meta( $post->ID, $meta_key, $results, '' );
 		}
 
@@ -601,6 +616,8 @@ function get_crp_posts_id( $args = array() ) {
 
 /**
  * Get the meta key based on a list of parameters.
+ *
+ * @since 2.7.0
  *
  * @param array $attr   Array of attributes.
  * @return string Cache meta key

@@ -33,32 +33,34 @@ class Shipper_Task_Import_Download extends Shipper_Task_Import {
 	 */
 	public function apply( $args = array() ) {
 		$migration = new Shipper_Model_Stored_Migration;
-		$domain = $migration->get_source();
+		$domain    = $migration->get_source();
 
 		$local_root = trailingslashit(
-			Shipper_Helper_Fs_Path::get_temp_dir()
-		) . Shipper_Model_Stored_Migration::COMPONENT_META;
+			              Shipper_Helper_Fs_Path::get_temp_dir()
+		              ) . Shipper_Model_Stored_Migration::COMPONENT_META;
 		if ( ! file_exists( $local_root ) ) {
 			wp_mkdir_p( $local_root );
 		}
 		$domain_root = trailingslashit(
-			Shipper_Helper_Fs_Path::clean_fname( $domain )
-		) . Shipper_Model_Stored_Migration::COMPONENT_META;
+			               Shipper_Helper_Fs_Path::clean_fname( $domain )
+		               ) . Shipper_Model_Stored_Migration::COMPONENT_META;
 
-		$files = new Shipper_Model_Dumped_Filelist;
-		$large = new Shipper_Model_Dumped_Largelist;
-		$metas = array(
+		$files   = new Shipper_Model_Dumped_Filelist;
+		$large   = new Shipper_Model_Dumped_Largelist;
+		$package = new Shipper_Model_Dumped_Packagelist();
+		$metas   = array(
 			$files->get_file_name(),
 			$large->get_file_name(),
-			'migration_manifest.json' 
+			$package->get_file_name(),
+			'migration_manifest.json'
 		);
 
 		$remote = new Shipper_Helper_Fs_Remote;
-		$batch = array();
-		foreach( $metas as $basename ) {
-			$source = trailingslashit( $domain_root ) . $basename;
+		$batch  = array();
+		foreach ( $metas as $basename ) {
+			$source      = trailingslashit( $domain_root ) . $basename;
 			$destination = trailingslashit( $local_root ) . $basename;
-			$batch[] = $remote->get_download_command( $source, $destination );
+			$batch[]     = $remote->get_download_command( $source, $destination );
 		}
 		if ( ! empty( $batch ) ) {
 			$status = $remote->execute_batch_queue( $batch );
@@ -66,6 +68,7 @@ class Shipper_Task_Import_Download extends Shipper_Task_Import {
 				Shipper_Helper_Log::write(
 					'Something went wrong donwloading meta files, will re-try'
 				);
+
 				// Attempt re-try.
 				return false;
 			}

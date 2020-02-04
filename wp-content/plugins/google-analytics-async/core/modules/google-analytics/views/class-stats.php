@@ -264,6 +264,8 @@ class Stats extends View {
 			'search_engines'     => __( 'Search Engines', 'ga_trans' ),
 			'select_option'      => __( 'Select an option below to print chart data.', 'ga_trans' ),
 			'has'                => __( 'has', 'ga_trans' ),
+			'current_period'     => __( 'Current Period', 'ga_trans' ),
+			'previous_period'    => __( 'Previous Period', 'ga_trans' ),
 		];
 
 		/**

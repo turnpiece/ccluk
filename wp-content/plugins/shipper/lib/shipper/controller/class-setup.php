@@ -76,7 +76,7 @@ abstract class Shipper_Controller_Setup extends Shipper_Controller {
 	 * Clears user-exposed filesystem storage
 	 *
 	 * This is things like logs - it is cleared depending on settings.
-	 * 
+	 *
 	 * @param object $model Optional Shipper_Model_Stored_Options instance (used in tests).
 	 *
 	 * @return object Shipper_Controller_Setup instance

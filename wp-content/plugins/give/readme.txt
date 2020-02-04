@@ -1,11 +1,11 @@
 === GiveWP - Donation Plugin and Fundraising Platform ===
-Contributors: givewp, dlocc, webdevmattcrom, ravinderk, mehul0810, kevinwhoffman, mikehale, jason_the_adams
+Contributors: givewp, dlocc, webdevmattcrom, ravinderk, mehul0810, kevinwhoffman, jason_the_adams, henryholtgeerts
 Donate link: https://givewp.com/
 Tags: donation, donations, donation plugin, wordpress donation plugin, givewp, give, wp donation, ecommerce, e-commerce, fundraising, fundraiser, crowdfunding, wordpress donations, gutenberg, gutenberg donations, commerce, wordpress ecommerce, giving, charity, donate, gifts, non-profit, paypal, stripe, churches, nonprofit, paypal donations, paypal donate, stripe donations, stripe donate, authorize.net, authorize.net donations
 Requires at least: 4.8
-Tested up to: 5.2
+Tested up to: 5.3
 Requires PHP: 5.6
-Stable tag: 2.5.9
+Stable tag: 2.5.13
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -50,7 +50,7 @@ Find out more:
 
 = Who Uses GiveWP? =
 
-With more than 40,000+ active installs of GiveWP, we hear more and more success stories from nonprofit organizations using GiveWP. Causes are using GiveWP to raise millions of dollars per year. Check out some of our [GiveWP Stories](http://bit.ly/WPORGGiveStories) and [Case Studies](http://bit.ly/WPORGGiveCaseStudies) for details about their success.
+With more than 70,000+ active installs of GiveWP, we hear more and more success stories from nonprofit organizations using GiveWP. Causes are using GiveWP to raise millions of dollars per year. Check out some of our [GiveWP Stories](http://bit.ly/WPORGGiveStories) and [Case Studies](http://bit.ly/WPORGGiveCaseStudies) for details about their success.
 
 = Why Use GiveWP for Donations? =
 
@@ -223,13 +223,46 @@ The 2% fee on Stripe donations only applies to donations taken via our free Stri
 
 == Changelog ==
 
+= 2.5.13: January 15th, 2020 =
+* Fix: Resolved an issue when using button mode of multiple donation buttons appearing incorrectly within shortcodes, blocks, and widgets. [#4379](https://github.com/impress-org/givewp/issues/4379)
+* Fix: Correct an ordering issue with the form grid when sorting by "Form Title" it was using the slug rather than the actual donation form title. [#4392](https://github.com/impress-org/givewp/issues/4392)
+* Fix: Removed deprecated usage of `wp.components.ServerSideRender` in our Gutenberg blocks. [#4402](https://github.com/impress-org/givewp/issues/4402)
+* Tweak: Refactored the `give_doing_it_wrong()` function so that it properly displays Give-specific messages for developers. [#2572](https://github.com/impress-org/givewp/issues/2572)
+
+= 2.5.12: December 31st, 2019 =
+* Fix: Resolved an issue with donation receipt emails and admin notifications not being sent out properly when a new donation is made. The cause of the issue was a security permission check incorrectly put in place in the previous version that was unable to be bypassed by new donors. We've reverted that change and fully tested to ensure emails are working as expected again. [#4379](https://github.com/impress-org/givewp/issues/4379)
+
+= 2.5.11: December 23rd, 2019 =
+* Fix: Activating Give created a minor style conflict with the Gutenberg editor slightly pushing down some buttons. This has been resolved by refactoring the styles so they no longer conflict with WP Core elements. [#4354](https://github.com/impress-org/givewp/issues/4354)
+* Fix: Sorting donation payments by taxonomy would result in AJAX fails in JavaScript. [#2976](https://github.com/impress-org/givewp/issues/2976)
+* Improvement: New unit test added to test for the `give_verify_minimum_price()` function. [#3232](https://github.com/impress-org/givewp/issues/3232)
+* Refactor: Removed duplicate code for fetching donor addresses to improve performance. [#3253](https://github.com/impress-org/givewp/issues/3253)
+* Refactor: We removed the old notes column from the donor table now that that data has long been migrated over to a custom tables' column. [#3632](https://github.com/impress-org/givewp/issues/3632)
+* Fix: Improved responsiveness in the donation forms list screen by preventing the copy shortcode button from overlapping with other columns on smaller screens. [#4090](https://github.com/impress-org/givewp/issues/4090)
+* Fix: Ensure that empty donation receipt emails can not triggered incorrectly. [#4185](https://github.com/impress-org/givewp/issues/4185)
+* Refactor: Adjusted meta capabilities so that they are not assigned to roles. [#4212](https://github.com/impress-org/givewp/issues/4212)
+* Fix: Improved `give_send_back_to_checkout()` redirect functionality with `add_query_arg()` and `remove_query_arg()` for a dramatically simpler solution that provides for WordPress installed in a subdirectory. Thanks @luizbills for the contribution! [#4311](https://github.com/impress-org/givewp/issues/4311)
+* Fix: Resolved several style issues with WordPress 5.3+'s new admin changes. [#4315](https://github.com/impress-org/givewp/issues/4315)
+* Fix: The UK's County field is no longer required. This change is based on customer feedback this field should not be required. [#4316](https://github.com/impress-org/givewp/issues/4316)
+* Fix: Resolve updates not showing up without a manual refresh of licenses. Previously add-on updates would be checked every few weeks. Now they are checked on every 48 hours. [#4318](https://github.com/impress-org/givewp/issues/4318)
+* Fix: Resolved an error with Stripe that would occur if an existing donor would make a new donation using a different credit card. The error "The customer does not have a payment method with the ID..." will no longer appear now and donations will process as expected. [#4328](https://github.com/impress-org/givewp/issues/4328)
+* Fix: Resolved an issue with Stripe Checkout if you chose to load scripts in the footer would result in a redirect loop depending on your set up. [#4329](https://github.com/impress-org/givewp/issues/4329)
+* Fix: When clicking on the modal popup button it would previously be hidden from the DOM which could result in background jumpiness. Now the button is not hidden which leads to better theme compatibility. [#4352](https://github.com/impress-org/givewp/issues/4352)
+* Fix: Corrected an broken URL in the in add-ons header. [#4307](https://github.com/impress-org/givewp/issues/4307)
+
+= 2.5.10: October 28th, 2019 =
+* Fix: Resolved an issue with Stripe Checkout 2.0 and featured images not properly displaying for certain WP installs. [#4281](https://github.com/impress-org/givewp/issues/4281)
+* Fix: Optimized and resolved a number of scenarios regarding donors updating credit cards with the Stripe payment gateway. Now when comparing the card's fingerprint the plugin also checks the expiration date and CVC and updates the card in Stripe if it has changed. [#4280](https://github.com/impress-org/givewp/issues/4280)
+* Fix: The Stripe 2% application fee is not ever charged with the new Checkout 2.0 if you are using the Premium gateway add-on. [#4287](https://github.com/impress-org/givewp/issues/4287)
+* Fix: Resolved an issue with the `{receipt_link_url}` not working when using the plain text email option. [#4284](https://github.com/impress-org/givewp/issues/4284)
+
 = 2.5.9: October 15th, 2019 =
 * New: Added a new filter `give_donation_form_submit_button_text` for developers. Thanks @mcdonagg! [#4269](https://github.com/impress-org/givewp/issues/4269)
 * Fix: Resolved an edge case update conflict with Stripe and Recurring which could cause a fatal error for some installs. [#4272](https://github.com/impress-org/givewp/issues/4272)
 * Fix: Corrected an edge case issue with Stripe Credit Card fields not appearing properly after updating. [#4274](https://github.com/impress-org/givewp/issues/4274)
 * Fix: Improved the layout of the Stripe Connect banner for smaller screens. [#4259](https://github.com/impress-org/givewp/issues/4259)
 * Fix: Removed space in link to Stripe's webhook documentation. [#4266](https://github.com/impress-org/givewp/issues/4266)
-* Fix: Resolved typos in GitHub's readme.md documenation. [#4268](https://github.com/impress-org/givewp/issues/4268)
+* Fix: Resolved typos in GitHub's readme.md documentation. [#4268](https://github.com/impress-org/givewp/issues/4268)
 
 = 2.5.8: September 26th, 2019 =
 * Fix: Resolved an upgrade issue for customers who had enabled the Stripe Credit Card option in GiveWP 2.5.4 and below and Stripe 2.2.0 and below. After upgrading existing donors were not able to change their credit card info and new donors were not able make donations. [#4260](https://github.com/impress-org/givewp/issues/4260)

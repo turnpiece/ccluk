@@ -338,26 +338,6 @@ class Shipper_Model_Database_Table_Import extends Shipper_Model_Database_Table {
 	public function preprocess_import_file() {
 // @TODO implement this properly - deprecate method or implement switching #cleanup
 return true; // Temporary - we try preprocessing each statement.
-		$table = $this->get_table_name();
-
-		// First up, let's pre-process the file.
-		$decoder = new Shipper_Helper_Replacer_File( Shipper_Helper_Codec::DECODE );
-
-		// We'll only be using the SQL query codec.
-		$decoder->set_codec_list(array(
-			Shipper_Helper_Codec_Sql::get_intermediate( Shipper_Task_Import::PREFIX )
-		));
-
-		$path = $this->get_file_path( $table );
-		$tmp_path = $decoder->transform( $path );
-
-		if ( file_exists( $tmp_path ) ) {
-			rename( $tmp_path, $path );
-		} else {
-			return false;
-		}
-
-		return true;
 	}
 
 	/**
