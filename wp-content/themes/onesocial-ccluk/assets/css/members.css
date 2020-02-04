@@ -1653,17 +1653,17 @@ body.buddypress.groups.single-item.group-members #item-body > .item-list-tabs {
   font-weight: 600;
 }
 
+.group-avatar #group-create-body .left-menu {
+  float: left;
+  margin-bottom: 20px;
+  margin-right: 20px;
+}
+
 .group-create.forum .standard-form h4 + p {
   font-size: 15px;
   line-height: 1.6;
   font-weight: 600;
   margin-bottom: 50px;
-}
-
-.group-avatar #group-create-body .left-menu {
-  float: left;
-  margin-bottom: 20px;
-  margin-right: 20px;
 }
 
 #buddypress #create-group-form .bp-template-notice {
@@ -2603,10 +2603,6 @@ div#sitewide-notice div#message.error p {
 --------------------------------------------------------------*/
 .buddypress-content-wrap {
   padding-bottom: 60px;
-}
-
-.bp-user.my-account.blog .buddypress-content-wrap {
-  padding-bottom: 0;
 }
 
 .buddypress-content-wrap #buddypress div.pagination,
@@ -3839,7 +3835,7 @@ body #groups-list .group-subscription-options {
 /* Members */
 div#item-header-avatar {
   margin: 10px auto 20px;
-  display: inline-block;
+  display: block;
   position: relative;
 }
 
@@ -6663,7 +6659,9 @@ MAXIMUM width of 380 pixels (phones portrait)
   body.buddypress #buddyboss-media-add-photo-button:active {
     background-color: #ddd;
   }
-  body.buddypress .buddyboss-media-progress, body.buddypress .buddyboss-media-progress-bar, body.buddypress .buddyboss-media-progress-value {
+  body.buddypress .buddyboss-media-progress,
+  body.buddypress .buddyboss-media-progress-bar,
+  body.buddypress .buddyboss-media-progress-value {
     float: none;
     position: absolute;
     top: 10px;
@@ -6782,22 +6780,23 @@ MAXIMUM width of 380 pixels (phones portrait)
     -webkit-box-direction: normal;
             flex-flow: column nowrap;
   }
-  body.buddypress .bb-group-avatar-wrap-desktop,
-  body.buddypress .item-header-sidebar {
+  body.buddypress #buddypress .bb-group-avatar-wrap-desktop,
+  body.buddypress #buddypress .item-header-sidebar {
     display: none;
-  }
-  body.buddypress .bb-group-avatar-wrap-mobile {
-    margin-right: 30px;
-    float: left;
   }
   body.buddypress #buddypress div#item-header div#item-meta {
     text-shadow: 0 0 1px rgba(255, 255, 255, 0.9);
   }
-  body.buddypress .groups .bb-group-avatar-wrap-mobile div#item-header-avatar {
+  body.buddypress.groups #buddypress .bb-group-avatar-wrap-mobile {
+    display: block;
+    margin-right: 30px;
+    float: left;
+  }
+  body.buddypress.groups #buddypress .bb-group-avatar-wrap-mobile div#item-header-avatar {
     margin-right: 20px;
     width: auto;
   }
-  body.buddypress .bb-group-avatar-wrap-mobile #item-header-content {
+  body.buddypress.groups #buddypress .bb-group-avatar-wrap-mobile #item-header-content {
     padding-top: 120px;
     position: relative;
   }
@@ -6806,15 +6805,15 @@ MAXIMUM width of 380 pixels (phones portrait)
     margin: 0;
     text-align: left;
   }
-  body.buddypress .single-item.groups .bb-group-avatar-wrap-mobile + #item-header {
+  body.buddypress.single-item.groups .bb-group-avatar-wrap-mobile + #item-header {
     margin-top: 0;
   }
-  body.buddypress .single-item #buddypress #item-title-area {
+  body.buddypress.single-item.groups #buddypress #item-nav {
+    clear: both;
+  }
+  body.buddypress.single-item #buddypress #item-title-area {
     display: block;
     height: auto;
-  }
-  body.buddypress .single-item.groups #buddypress #item-nav {
-    clear: both;
   }
   body.buddypress .boss-group-header #item-actions::after {
     clear: both;
@@ -6825,14 +6824,14 @@ MAXIMUM width of 380 pixels (phones portrait)
     color: inherit;
     text-shadow: 0 0 0;
   }
-  body.buddypress body:not(.bp-user).activity .entry-header {
+  body.buddypress:not(.bp-user).activity .entry-header {
     padding: 15px;
     margin: 0;
   }
-  body.buddypress body:not(.bp-user).activity .entry-content {
+  body.buddypress:not(.bp-user).activity .entry-content {
     overflow: hidden;
   }
-  body.buddypress body:not(.bp-user).activity .entry-content > p {
+  body.buddypress:not(.bp-user).activity .entry-content > p {
     margin-left: 15px;
     margin-right: 15px;
   }
@@ -6870,7 +6869,7 @@ MAXIMUM width of 380 pixels (phones portrait)
     padding: 0;
     margin: 8px 0 20px;
   }
-  body.buddypress body.single-item #buddypress div#item-header span.activity {
+  body.buddypress.single-item #buddypress div#item-header span.activity {
     margin: 15px 0 5px;
   }
   body.buddypress #buddypress div#item-header #item-buttons {
@@ -6908,124 +6907,116 @@ MAXIMUM width of 380 pixels (phones portrait)
   body.buddypress #buddypress .activity-list li.load-newest.loading a:after {
     color: #fff;
   }
-  body.buddypress body.single-item.groups #buddypress .dir-list.group_members ul.item-list > li,
-  body.buddypress body.single #buddypress .dir-list ul.item-list > li,
-  body.buddypress body.bp-user #buddypress .dir-list ul.item-list > li,
-  body.buddypress body.page-right-sidebar #buddypress .dir-list ul.item-list > li {
+  body.buddypress.single-item.groups #buddypress .dir-list.group_members ul.item-list > li,
+  body.buddypress.single #buddypress .dir-list ul.item-list > li,
+  body.buddypress.bp-user #buddypress .dir-list ul.item-list > li,
+  body.buddypress.page-right-sidebar #buddypress .dir-list ul.item-list > li {
     width: 50%;
   }
-  body.buddypress body .item-header-mobile {
+  body.buddypress .item-header-mobile {
     display: block;
   }
-  body.buddypress body .item-header-sidebar {
+  body.buddypress .item-header-sidebar {
     display: none;
   }
-  body.buddypress body .bb-group-avatar-wrap-mobile {
-    margin-right: 30px;
-    float: left;
-  }
-  body.buddypress body.groups .bb-group-avatar-wrap-mobile div#item-header-avatar {
+  body.buddypress.groups .bb-group-avatar-wrap-mobile div#item-header-avatar {
     margin-right: 20px;
     width: auto;
   }
-  body.buddypress body.groups div#item-header-avatar {
+  body.buddypress.groups div#item-header-avatar {
     /*width: 100%;*/
     text-align: center;
   }
-  body.buddypress body .bb-group-avatar-wrap-mobile #item-header-content {
-    padding-top: 120px;
-    position: relative;
-  }
-  body.buddypress body.single-item.groups .bb-group-avatar-wrap-mobile + #item-header {
+  body.buddypress.single-item.groups .bb-group-avatar-wrap-mobile + #item-header {
     margin-top: 0;
   }
-  body.buddypress body.single-item #buddypress #item-title-area {
+  body.buddypress.single-item #buddypress #item-title-area {
     display: block;
     height: auto;
   }
-  body.buddypress body.single-item.groups #buddypress #item-nav {
+  body.buddypress.single-item.groups #buddypress #item-nav {
     clear: both;
   }
-  body.buddypress body .boss-group-header #item-actions::after {
+  body.buddypress .boss-group-header #item-actions::after {
     clear: both;
     content: "";
     display: table;
   }
-  body.buddypress body #buddypress div#item-header .group-admin-name {
+  body.buddypress #buddypress div#item-header .group-admin-name {
     color: inherit;
     text-shadow: 0 0 0;
   }
-  body.buddypress body #item-title-area h1 {
+  body.buddypress #item-title-area h1 {
     font-size: 26px;
     margin: 0;
   }
-  body.buddypress body .bb-group-mobile-content {
+  body.buddypress.groups #buddypress .bb-group-mobile-content {
     display: block;
     overflow: hidden;
-    width: -o-calc(100% - 221px);
-    width: calc(100% - 221px);
+    width: -o-calc(100% - 350px);
+    width: calc(100% - 350px);
     float: right;
   }
-  body.buddypress body .bb-group-mobile-content #item-meta p {
+  body.buddypress.groups #buddypress .bb-group-mobile-content #item-meta p {
     color: #54ae68;
   }
-  body.buddypress body .boss-group-header .group-header-content {
-    width: -o-calc(100% - 221px);
-    width: calc(100% - 221px);
+  body.buddypress.groups .boss-group-header .group-header-content {
+    max-width: 200px;
     float: right;
   }
-  body.buddypress body .boss-group-header .group-header-content h1 {
+  body.buddypress.groups .boss-group-header .group-header-content h1 {
     width: 100%;
   }
-  body.buddypress body .boss-group-header #item-actions {
+  body.buddypress.groups .boss-group-header #item-actions {
     overflow: hidden;
     width: 100%;
   }
-  body.buddypress body .bb-group-avatar-wrap-mobile {
+  body.buddypress.groups .bb-group-avatar-wrap-mobile {
     display: block;
   }
-  body.buddypress body #buddypress .dir-list ul.item-list > li {
+  body.buddypress #buddypress .dir-list ul.item-list > li {
     width: 33.33333%;
   }
-  body.buddypress body #buddypress #groups-directory-form .item-list-tabs {
+  body.buddypress #buddypress #groups-directory-form .item-list-tabs {
     max-width: 100%;
   }
-  body.buddypress body .entry-content #buddypress #blogs-directory-form .item-list-tabs {
+  body.buddypress .entry-content #buddypress #blogs-directory-form .item-list-tabs {
     max-width: 100%;
   }
-  body.buddypress body #buddypress #members-directory-form .item-list-tabs, body.buddypress body #buddypress .dir-search.boss-search-wrapper {
+  body.buddypress #buddypress #members-directory-form .item-list-tabs,
+  body.buddypress #buddypress .dir-search.boss-search-wrapper {
     max-width: 100%;
   }
-  body.buddypress body .single-item.groups #secondary {
+  body.buddypress .single-item.groups #secondary {
     margin-top: 0;
   }
-  body.buddypress body.has-activity #buddypress div.item-list-tabs,
-  body.buddypress body.has-activity #buddypress form#whats-new-form {
+  body.buddypress.has-activity #buddypress div.item-list-tabs,
+  body.buddypress.has-activity #buddypress form#whats-new-form {
     background: transparent;
   }
-  body.buddypress body.bp-user {
+  body.buddypress.bp-user {
     /* Header Content */
   }
-  body.buddypress body.bp-user #buddypress #item-header-content {
+  body.buddypress.bp-user #buddypress #item-header-content {
     margin-top: 8px;
     min-height: 74px;
   }
-  body.buddypress body.bp-user #item-header {
+  body.buddypress.bp-user #item-header {
     text-align: center;
   }
-  body.buddypress body.bp-user .info-group .bb-follow-title {
+  body.buddypress.bp-user .info-group .bb-follow-title {
     margin-top: 0;
     margin-bottom: 20px;
   }
-  body.buddypress body.buddypress article.error404 .entry-header {
+  body.buddypress.buddypress article.error404 .entry-header {
     margin-left: 0;
     max-width: 100%;
   }
-  body.buddypress body.single-item.groups #buddypress #item-header-content {
+  body.buddypress.single-item.groups #buddypress #item-header-content {
     margin-top: 0;
     /* min-height: 74px; */
   }
-  body.buddypress body.single-item.groups #buddypress div#item-header div#item-actions {
+  body.buddypress.single-item.groups #buddypress div#item-header div#item-actions {
     display: none;
     /* delete this line to display Group Admins on phones */
     background: transparent;
@@ -7033,8 +7024,8 @@ MAXIMUM width of 380 pixels (phones portrait)
             box-shadow: none;
     width: 100%;
   }
-  body.buddypress body.bp-user #buddypress #item-header-avatar,
-  body.buddypress body.single-item.groups #buddypress #item-header-avatar {
+  body.buddypress.bp-user #buddypress #item-header-avatar,
+  body.buddypress.single-item.groups #buddypress #item-header-avatar {
     margin-top: 0;
   }
   body.buddypress #buddypress div#item-header div#item-actions {
@@ -7874,42 +7865,27 @@ MAXIMUM width of 380 pixels (phones portrait)
     font-size: 40px;
     margin-top: 10px;
   }
-  body.buddypress.single-item.groups #buddypress div#item-body {
+  body.buddypress.groups #buddypress div#item-body {
     padding-top: 5px;
   }
-  body.buddypress.single-item.groups #buddypress div#item-header div#item-header-avatar {
+  body.buddypress.groups #buddypress div#item-header div#item-header-avatar {
     height: 140px;
     margin-bottom: 20px;
   }
 }
 
 @media screen and (max-width: 1024px) and (min-width: 623px) {
-  body.buddypress .bb-group-mobile-content {
-    display: block;
-    overflow: hidden;
-  }
-  body.buddypress .boss-group-header .group-header-content {
+  body.buddypress.groups #buddypress .boss-group-header .group-header-content {
     margin-bottom: 10px;
-  }
-  body.buddypress .bb-group-mobile-content {
-    width: -o-calc(100% - 221px);
-    width: calc(100% - 221px);
-    float: right;
-  }
-  body.buddypress .boss-group-header .group-header-content {
-    width: -o-calc(100% - 221px);
-    width: calc(100% - 221px);
+    max-width: 200px;
     float: left;
   }
-  body.buddypress .boss-group-header .group-header-content h1 {
+  body.buddypress.groups #buddypress .boss-group-header .group-header-content h1 {
     width: 100%;
   }
-  body.buddypress .boss-group-header #item-actions {
+  body.buddypress.groups #buddypress .boss-group-header #item-actions {
     overflow: hidden;
     width: 100%;
-  }
-  body.buddypress .bb-group-avatar-wrap-mobile {
-    display: block;
   }
 }
 
@@ -7920,24 +7896,22 @@ MAXIMUM width of 380 pixels (phones portrait)
 }
 
 @media screen and (max-width: 1024px) and (max-width: 622px) {
-  body.buddypress.single-item.groups .bb-group-avatar-wrap-mobile {
+  body.buddypress.groups #buddypress .bb-group-avatar-wrap-mobile {
     float: none;
     text-align: center;
     margin-right: 0;
   }
-  body.buddypress.single-item.groups .bb-group-avatar-wrap-mobile .svg-graphic {
+  body.buddypress.groups #buddypress .bb-group-avatar-wrap-mobile .svg-graphic {
     width: 95px;
     height: 95px;
   }
-  body.buddypress.single-item.groups .group-header-content {
+  body.buddypress.groups #buddypress .boss-group-header .group-header-content {
     text-align: center;
-  }
-  body.buddypress.single-item.groups .boss-group-header .group-header-content {
     margin-top: 20px;
     width: 100%;
     margin-bottom: 0;
   }
-  body.buddypress.single-item.groups .bb-group-mobile-content {
+  body.buddypress.groups #buddypress .bb-group-mobile-content {
     width: 100%;
   }
 }
@@ -7953,7 +7927,6 @@ MAXIMUM width of 380 pixels (phones portrait)
   body.buddypress.single-item.groups #item-header {
     text-align: center;
   }
-  body.buddypress .group-header-content,
   body.buddypress.single-item.groups #buddypress #item-header-content {
     text-align: left;
   }
@@ -8739,7 +8712,7 @@ MAXIMUM width of 380 pixels (phones portrait)
   body.buddypress #buddypress table#message-threads tr th:first-child, body.buddypress #buddypress table#message-threads tr td:first-child {
     padding-right: 10px;
   }
-  body.buddypress .is-mobile.single #sitewide-notice:not(:empty) + #page {
+  body.buddypress.is-mobile.single #sitewide-notice:not(:empty) + #page {
     padding-top: 0;
   }
   body.buddypress #item-title-area .group-header-wrap {
@@ -8748,7 +8721,7 @@ MAXIMUM width of 380 pixels (phones portrait)
   body.buddypress .bb-cover-photo {
     height: 280px;
   }
-  body.buddypress .single-item.groups #buddypress #item-header span.activity, body.buddypress #item-title-area h1 {
+  body.buddypress.single-item.groups #buddypress #item-header span.activity, body.buddypress #item-title-area h1 {
     color: inherit;
   }
   body.buddypress .bb-group-avatar-wrap-mobile {
@@ -9669,6 +9642,10 @@ span.bbp-author-ip {
   color: #54ae68;
 }
 
+#bbpress-forums.bbpress-wrapper > h2 {
+  display: none;
+}
+
 #bbpress-forums #favorite-toggle .is-favorite .favorite-toggle:before, #bbpress-forums #favorite-toggle .is-favorite .favorite-toggle:after,
 #bbpress-forums #subscription-toggle .is-subscribed .subscription-toggle:before,
 #bbpress-forums #subscription-toggle .is-subscribed .subscription-toggle:after {
@@ -9704,8 +9681,16 @@ span.bbp-author-ip {
   border-color: rgba(84, 174, 104, 0.9);
 }
 
+#bbpress-forums .bbp-forum-data .bbp-author-link > .bbp-author-avatar {
+  display: none;
+}
+
 #bbpress-forums div.bbp-template-notice {
   display: none;
+}
+
+body.groups.topic #bbpress-forums.bbpress-wrapper > h2 {
+  display: block;
 }
 
 #bb-activity-stream {
@@ -9957,6 +9942,7 @@ td.bbp-topic-admin-links, td.bbp-topic-counts {
   float: right;
   margin-left: 10px;
   color: #22a7f0;
+  font-size: 12px;
 }
 
 /*--------------------------------------------------------------
@@ -10128,7 +10114,7 @@ td.bbp-topic-admin-links, td.bbp-topic-counts {
 }
 
 #bbpress-forums fieldset.bbp-form textarea, #bbpress-forums fieldset.bbp-form input {
-  padding: 10px 0;
+  padding: 12px;
 }
 
 textarea#bbp_reply_content, textarea#bbp_topic_content {

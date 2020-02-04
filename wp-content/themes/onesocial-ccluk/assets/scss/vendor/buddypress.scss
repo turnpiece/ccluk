@@ -976,10 +976,17 @@ body.buddypress.groups.single-item {
   margin-left: 20px;
 }
 
-.group-avatar #group-create-body .main-column p {
-  font-size: $font-size-sm;
-  line-height: 1.6;
-  font-weight: 600;
+.group-avatar #group-create-body {
+  .main-column p {
+    font-size: $font-size-sm;
+    line-height: 1.6;
+    font-weight: 600;
+  }
+  .left-menu {
+    float: left;
+    margin-bottom: 20px;
+    margin-right: 20px;
+  }
 }
 
 .group-create.forum .standard-form h4 + p {
@@ -987,12 +994,6 @@ body.buddypress.groups.single-item {
   line-height: 1.6;
   font-weight: 600;
   margin-bottom: 50px;
-}
-
-.group-avatar #group-create-body .left-menu {
-  float: left;
-  margin-bottom: 20px;
-  margin-right: 20px;
 }
 
 #buddypress #create-group-form .bp-template-notice {
@@ -1935,13 +1936,11 @@ div#sitewide-notice div#message.error p {
   padding-bottom: 60px;
 }
 
-.bp-user.my-account.blog .buddypress-content-wrap {
-  padding-bottom: 0;
-}
-
-.buddypress-content-wrap #buddypress div.pagination,
-#buddypress .buddypress-content-wrap div.pagination {
-  padding-bottom: 10px;
+.buddypress-content-wrap #buddypress,
+#buddypress .buddypress-content-wrap {
+  div.pagination {
+    padding-bottom: 10px;
+  }
 }
 
 .buddypress-content-wrap .profile .bp-uploader-window {
@@ -3170,7 +3169,7 @@ body {
 
 div#item-header-avatar {
   margin: 10px auto 20px;
-  display: inline-block;
+  display: block;
   position: relative;
 }
 

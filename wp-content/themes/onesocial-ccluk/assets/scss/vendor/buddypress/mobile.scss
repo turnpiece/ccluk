@@ -125,7 +125,9 @@ body.articles #buddypress ul.nav-tabs {
   }
 }
 
-.buddyboss-media-progress, .buddyboss-media-progress-bar, .buddyboss-media-progress-value {
+.buddyboss-media-progress, 
+.buddyboss-media-progress-bar, 
+.buddyboss-media-progress-value {
   float: none;
   position: absolute;
   top: 10px;
@@ -264,28 +266,35 @@ div.footer-inner-bottom .footer-inner {
   @include flex-column-nowrap();
 }
 
-.bb-group-avatar-wrap-desktop,
-.item-header-sidebar {
-  display: none;
+#buddypress {
+
+  .bb-group-avatar-wrap-desktop,
+  .item-header-sidebar {
+    display: none;
+  }
+
+  div#item-header div#item-meta {
+    text-shadow: 0 0 1px rgba(255, 255, 255, 0.9);
+  }
 }
 
-.bb-group-avatar-wrap-mobile {
-  margin-right: 30px;
-  float: left;
-}
+&.groups #buddypress {
 
-#buddypress div#item-header div#item-meta {
-  text-shadow: 0 0 1px rgba(255, 255, 255, 0.9);
-}
+  .bb-group-avatar-wrap-mobile {
+    display: block;
+    margin-right: 30px;
+    float: left;
+    
+    div#item-header-avatar {
+      margin-right: 20px;
+      width: auto;
+    }
 
-.groups .bb-group-avatar-wrap-mobile div#item-header-avatar {
-  margin-right: 20px;
-  width: auto;
-}
-
-.bb-group-avatar-wrap-mobile #item-header-content {
-  padding-top: 120px;
-  position: relative;
+    #item-header-content {
+      padding-top: 120px;
+      position: relative;
+    }
+  }
 }
 
 #item-title-area {
@@ -296,16 +305,20 @@ div.footer-inner-bottom .footer-inner {
   }
 }
 
-.single-item {
-  &.groups .bb-group-avatar-wrap-mobile + #item-header {
-    margin-top: 0;
+&.single-item {
+  &.groups {
+    .bb-group-avatar-wrap-mobile + #item-header {
+      margin-top: 0;
+    }
+
+    #buddypress #item-nav {
+      clear: both;
+    }
   }
+
   #buddypress #item-title-area {
     display: block;
     height: auto;
-  }
-  &.groups #buddypress #item-nav {
-    clear: both;
   }
 }
 
@@ -325,7 +338,7 @@ div.footer-inner-bottom .footer-inner {
 --------------------------------------------------------------*/
 /* Activity Page Header */
 
-body:not(.bp-user).activity {
+&:not(.bp-user).activity {
   .entry-header {
     padding: 15px;
     margin: 0;
@@ -388,7 +401,7 @@ body:not(.bp-user).activity {
 
 /* Header Title */
 
-body.single-item #buddypress div#item-header span.activity {
+&.single-item #buddypress div#item-header span.activity {
   margin: 15px 0 5px;
 }
 
@@ -437,177 +450,165 @@ div#item-header-avatar img.avatar {
   }
 }
 
-body {
-    &.single-item.groups #buddypress .dir-list.group_members,
-    &.single #buddypress .dir-list,
-    &.bp-user #buddypress .dir-list,
-    &.page-right-sidebar #buddypress .dir-list {
-      ul.item-list > li {
-        width: 50%;
-      }
-    }
+&.single-item.groups #buddypress .dir-list.group_members,
+&.single #buddypress .dir-list,
+&.bp-user #buddypress .dir-list,
+&.page-right-sidebar #buddypress .dir-list {
+  ul.item-list > li {
+    width: 50%;
+  }
+}
 
-    .item-header-mobile {
-      display: block;
-    }
+.item-header-mobile {
+  display: block;
+}
 
-    .item-header-sidebar {
-      display: none;
-    }
-    
-    .bb-group-avatar-wrap-mobile {
-      margin-right: 30px;
-      float: left;
-    }
-    
-    &.groups {
-      .bb-group-avatar-wrap-mobile div#item-header-avatar {
-        margin-right: 20px;
-        width: auto;
-      }
+.item-header-sidebar {
+  display: none;
+}
 
-      div#item-header-avatar {
-        /*width: 100%;*/
-        text-align: center;
-      }
-    }
-    
-    .bb-group-avatar-wrap-mobile #item-header-content {
-      padding-top: 120px;
-      position: relative;
-    }
-    
-    &.single-item {
-      &.groups .bb-group-avatar-wrap-mobile + #item-header {
-        margin-top: 0;
-      }
-      #buddypress #item-title-area {
-        display: block;
-        height: auto;
-      }
-      &.groups #buddypress #item-nav {
-        clear: both;
-      }
-    }
+&.groups {
+  .bb-group-avatar-wrap-mobile div#item-header-avatar {
+    margin-right: 20px;
+    width: auto;
+  }
 
-    .boss-group-header #item-actions::after {
-      clear: both;
-      content: "";
-      display: table;
-    }
-    
-    #buddypress div#item-header .group-admin-name {
-      color: inherit;
-      text-shadow: 0 0 0;
-    }
-    #item-title-area {
-      h1 {
-        font-size: 26px;
-        margin: 0;
-      }
-    }
+  div#item-header-avatar {
+    /*width: 100%;*/
+    text-align: center;
+  }
+}
+
+&.single-item {
+  &.groups .bb-group-avatar-wrap-mobile + #item-header {
+    margin-top: 0;
+  }
+  #buddypress #item-title-area {
+    display: block;
+    height: auto;
+  }
+  &.groups #buddypress #item-nav {
+    clear: both;
+  }
+}
+
+.boss-group-header #item-actions::after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+#buddypress div#item-header .group-admin-name {
+  color: inherit;
+  text-shadow: 0 0 0;
+}
+#item-title-area {
+  h1 {
+    font-size: 26px;
+    margin: 0;
+  }
+}
+&.groups {
+  #buddypress {
     .bb-group-mobile-content {
-        display: block;
-        overflow: hidden;
-        width: -moz-calc(100% - 221px);
-        width: -webkit-calc(100% - 221px);
-        width: -o-calc(100% - 221px);
-        width: calc(100% - 221px);
-        float: right;
-        #item-meta {
-            p {
-                color: $green;
-            }
-        }
-    }
-    .boss-group-header {
-      .group-header-content {
-        width: -moz-calc(100% - 221px);
-        width: -webkit-calc(100% - 221px);
-        width: -o-calc(100% - 221px);
-        width: calc(100% - 221px);
-        float: right;
-        h1 {
-          width: 100%;
-        }
-      }
-      #item-actions {
-        overflow: hidden;
-        width: 100%;
-      }
-    }
-    .bb-group-avatar-wrap-mobile {
       display: block;
-    }
-
-    #buddypress {
-      .dir-list ul.item-list > li {
-        width: 33.33333%;
-      }
-      #groups-directory-form .item-list-tabs {
-        max-width: 100%;
-      }
-    }
-    .entry-content #buddypress #blogs-directory-form .item-list-tabs {
-      max-width: 100%;
-    }
-    #buddypress {
-      #members-directory-form .item-list-tabs, .dir-search.boss-search-wrapper {
-        max-width: 100%;
-      }
-    }
-    .single-item.groups #secondary {
-      margin-top: 0;
-    }
-
-    &.has-activity {
-        #buddypress {
-            div.item-list-tabs,
-            form#whats-new-form {
-                background: transparent;
-            }
+      overflow: hidden;
+      @include calc-width('100% - 350px') ;
+      float: right;
+      #item-meta {
+        p {
+          color: $green;
         }
-    }
-
-    &.bp-user {
-      /* Header Content */
-
-      #buddypress #item-header-content {
-        margin-top: 8px;
-        min-height: 74px;
-      }
-
-      #item-header {
-          text-align: center;
-      }
-
-      .info-group .bb-follow-title {
-          margin-top: 0;
-          margin-bottom: 20px;
       }
     }
+  }
 
-    &.buddypress article.error404 .entry-header {
-      margin-left: 0;
-      max-width: 100%;
-    }
-    &.single-item.groups #buddypress {
-      #item-header-content {
-          margin-top: 0;
-          /* min-height: 74px; */
-      }
-      div#item-header div#item-actions {
-        display: none;
-        /* delete this line to display Group Admins on phones */
-        background: transparent;
-        box-shadow: none;
+  .boss-group-header {
+    .group-header-content {
+      max-width: 200px;
+      float: right;
+      h1 {
         width: 100%;
       }
     }
-    &.bp-user #buddypress #item-header-avatar,
-    &.single-item.groups #buddypress #item-header-avatar {
-        margin-top: 0;
+    #item-actions {
+      overflow: hidden;
+      width: 100%;
     }
+  }
+  .bb-group-avatar-wrap-mobile {
+    display: block;
+  }
+}
+
+#buddypress {
+  .dir-list ul.item-list > li {
+    width: 33.33333%;
+  }
+  #groups-directory-form .item-list-tabs {
+    max-width: 100%;
+  }
+}
+.entry-content #buddypress #blogs-directory-form .item-list-tabs {
+  max-width: 100%;
+}
+#buddypress {
+  #members-directory-form .item-list-tabs, 
+  .dir-search.boss-search-wrapper {
+    max-width: 100%;
+  }
+}
+.single-item.groups #secondary {
+  margin-top: 0;
+}
+
+&.has-activity {
+    #buddypress {
+        div.item-list-tabs,
+        form#whats-new-form {
+            background: transparent;
+        }
+    }
+}
+
+&.bp-user {
+  /* Header Content */
+
+  #buddypress #item-header-content {
+    margin-top: 8px;
+    min-height: 74px;
+  }
+
+  #item-header {
+      text-align: center;
+  }
+
+  .info-group .bb-follow-title {
+      margin-top: 0;
+      margin-bottom: 20px;
+  }
+}
+
+&.buddypress article.error404 .entry-header {
+  margin-left: 0;
+  max-width: 100%;
+}
+&.single-item.groups #buddypress {
+  #item-header-content {
+      margin-top: 0;
+      /* min-height: 74px; */
+  }
+  div#item-header div#item-actions {
+    display: none;
+    /* delete this line to display Group Admins on phones */
+    background: transparent;
+    box-shadow: none;
+    width: 100%;
+  }
+}
+&.bp-user #buddypress #item-header-avatar,
+&.single-item.groups #buddypress #item-header-avatar {
+    margin-top: 0;
 }
 
 /* Group Header */
@@ -1650,7 +1651,7 @@ Directories: Members, Groups, Blogs, Forums
 1.1.15 - Group Header
 --------------------------------------------------------------*/
 
-&.single-item.groups {
+&.groups {
   #buddypress div {
     &#item-body {
       padding-top: 5px;
@@ -1665,38 +1666,23 @@ Directories: Members, Groups, Blogs, Forums
 /** --- **/
 
 @media screen and (min-width: 623px) {
-  .bb-group-mobile-content {
-    display: block;
-    overflow: hidden;
-  }
-  .boss-group-header .group-header-content {
-    margin-bottom: 10px;
-  }
-  .bb-group-mobile-content {
-    width: -moz-calc(100% - 221px);
-    width: -webkit-calc(100% - 221px);
-    width: -o-calc(100% - 221px);
-    width: calc(100% - 221px);
-    float: right;
-  }
-  .boss-group-header {
-    .group-header-content {
-      width: -moz-calc(100% - 221px);
-      width: -webkit-calc(100% - 221px);
-      width: -o-calc(100% - 221px);
-      width: calc(100% - 221px);
-      float: left;
-      h1 {
-        width: 100%;
+  &.groups {
+    #buddypress {
+      .boss-group-header {
+        .group-header-content {
+          margin-bottom: 10px;
+          max-width: 200px;
+          float: left;
+          h1 {
+            width: 100%;
+          }
+        }
+        #item-actions {
+          overflow: hidden;
+          width: 100%;
+        }
       }
     }
-    #item-actions {
-      overflow: hidden;
-      width: 100%;
-    }
-  }
-  .bb-group-avatar-wrap-mobile {
-    display: block;
   }
 }
 
@@ -1707,27 +1693,28 @@ Directories: Members, Groups, Blogs, Forums
 }
 
 @media screen and (max-width: 622px) {
-  &.single-item.groups {
-    .bb-group-avatar-wrap-mobile {
-      float: none;
-      text-align: center;
-      margin-right: 0;
+  &.groups {
+    #buddypress {
+      .bb-group-avatar-wrap-mobile {
+        float: none;
+        text-align: center;
+        margin-right: 0;
 
-      .svg-graphic {
-        width: 95px;
-        height: 95px;
+        .svg-graphic {
+          width: 95px;
+          height: 95px;
+        }
       }
-    }
-    .group-header-content {
-      text-align: center;
-    }
-    .boss-group-header .group-header-content {
-      margin-top: 20px;
-      width: 100%;
-      margin-bottom: 0;
-    }
-    .bb-group-mobile-content {
-      width: 100%;
+
+      .boss-group-header .group-header-content {
+        text-align: center;
+        margin-top: 20px;
+        width: 100%;
+        margin-bottom: 0;
+      }
+      .bb-group-mobile-content {
+        width: 100%;
+      }
     }
   }
 }
@@ -1745,7 +1732,6 @@ Directories: Members, Groups, Blogs, Forums
   &.single-item.groups #item-header {
     text-align: center;
   }
-  .group-header-content,
   &.single-item.groups #buddypress #item-header-content {
     text-align: left;
   }
@@ -1801,6 +1787,7 @@ Directories: Members, Groups, Blogs, Forums
 /*--------------------------------------------------------------
 1.1.18 - Group: Send Invites
 --------------------------------------------------------------*/
+
 
 #buddypress {
   div#invite-list {
@@ -2814,7 +2801,7 @@ MAXIMUM width of 480 pixels and MINIMUM width of 380 pixels (phones)
       padding-right: 10px;
     }
   }
-  .is-mobile.single #sitewide-notice:not(:empty) + #page {
+  &.is-mobile.single #sitewide-notice:not(:empty) + #page {
     padding-top: 0;
   }
 
@@ -2824,7 +2811,7 @@ MAXIMUM width of 480 pixels and MINIMUM width of 380 pixels (phones)
   .bb-cover-photo {
     height: 280px;
   }
-  .single-item.groups #buddypress #item-header span.activity, #item-title-area h1 {
+  &.single-item.groups #buddypress #item-header span.activity, #item-title-area h1 {
     color: inherit;
   }
   .bb-group-avatar-wrap-mobile {

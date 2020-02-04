@@ -344,3 +344,10 @@
   color: $green;
   background-color: $white;
 }
+
+@mixin calc-width( $x ) {
+  width: -moz-calc(#{$x});
+  width: -webkit-calc(#{$x});
+  width: -o-calc(#{$x});
+  width: calc(#{$x});
+}

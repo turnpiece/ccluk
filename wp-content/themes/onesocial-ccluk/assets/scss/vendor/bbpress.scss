@@ -702,6 +702,10 @@ span.bbp-author-ip {
 }
 
 #bbpress-forums {
+  &.bbpress-wrapper > h2 {
+    display: none;
+  }
+
   #favorite-toggle .is-favorite .favorite-toggle,
   #subscription-toggle .is-subscribed .subscription-toggle {
     &:before,
@@ -737,12 +741,24 @@ span.bbp-author-ip {
 
 		&:before {
 			border-color: $green_bg;
-		}
+    }
+    
+    .bbp-author-link > .bbp-author-avatar {
+      display: none;
+    }
 	}
 
 	div.bbp-template-notice {
 		display: none;
 	}
+}
+
+body.groups.topic {
+  #bbpress-forums {
+    &.bbpress-wrapper > h2 {
+      display: block;
+    }
+  }
 }
 
 #bb-activity-stream {
@@ -994,6 +1010,7 @@ td {
   float: right;
   margin-left: 10px;
   color: $blue;
+  font-size: $font-size-tiny;
 }
 
 /*--------------------------------------------------------------
@@ -1165,7 +1182,7 @@ td {
   }
   fieldset.bbp-form {
     textarea, input {
-      padding: 10px 0;
+      padding: 12px;
     }
   }
 }

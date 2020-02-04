@@ -138,7 +138,7 @@
 						?>
 
 						<a href="<?php bp_group_permalink(); ?>" title="<?php bp_group_name(); ?>">
-							<svg class="svg-graphic" width="190" height="190" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" version="1.1">
+							<svg class="svg-graphic" width="100" height="100" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" version="1.1">
 								<image class="before-load" height="100%" width="100%" xlink:href="<?php echo get_template_directory_uri(); ?>/images/background.png" />
 								<image class="after-load" height="100%" width="100%" xlink:href="<?php echo $src; ?>" />
 							</svg>
