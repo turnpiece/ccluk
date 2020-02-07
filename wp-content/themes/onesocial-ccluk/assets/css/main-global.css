@@ -920,10 +920,17 @@ button[disabled], input[disabled] {
 }
 
 /* Default state */
+#secondary div.generic-button a,
+#buddypress .comment-reply-link,
+.entry-header .entry-title a.button,
+a.bp-title-button,
+article.post-password-required input[type=submit],
+li.bypostauthor cite span,
+a.button,
 input[type="button"],
 input[type="reset"],
 button {
-  background-color: #54ae68;
+  background-color: #22a7f0;
   border: none;
   color: #fff;
   cursor: pointer;
@@ -941,60 +948,41 @@ button {
   font-family: inherit;
 }
 
-input[type="button"]:hover, input[type="button"]:active,
+#secondary div.generic-button a:hover, #secondary div.generic-button a:active,
+#buddypress .comment-reply-link:hover,
+#buddypress .comment-reply-link:active,
+.entry-header .entry-title a.button:hover,
+.entry-header .entry-title a.button:active,
+a.bp-title-button:hover,
+a.bp-title-button:active,
+article.post-password-required input[type=submit]:hover,
+article.post-password-required input[type=submit]:active,
+li.bypostauthor cite span:hover,
+li.bypostauthor cite span:active,
+a.button:hover,
+a.button:active,
+input[type="button"]:hover,
+input[type="button"]:active,
 input[type="reset"]:hover,
 input[type="reset"]:active,
 button:hover,
 button:active {
   outline: none;
   color: #fff;
-  background-color: #22a7f0;
+  background-color: #54ae68;
   text-decoration: none;
-}
-
-article.post-password-required input[type=submit],
-li.bypostauthor cite span,
-a.button {
-  background-color: #22a7f0;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  font-size: 12px;
-  line-height: 20px;
-  text-align: center;
-  text-decoration: none;
-  padding: 6px 14px;
-  appearance: none;
-  -moz-appearance: none;
-  /* Firefox */
-  -webkit-appearance: none;
-  /* Safari and Chrome */
-  display: inline-block;
-  font-weight: 300;
-  font-family: inherit;
 }
 
 #secondary div.generic-button a,
 #buddypress .comment-reply-link,
 .entry-header .entry-title a.button,
-a.bp-title-button {
-  background-color: #22a7f0;
-  border: none;
-  color: #fff;
-  cursor: pointer;
+a.bp-title-button,
+article.post-password-required input[type=submit],
+li.bypostauthor cite span,
+a.button {
   font-size: 12px;
   line-height: 20px;
   text-align: center;
-  text-decoration: none;
-  padding: 6px 14px;
-  appearance: none;
-  -moz-appearance: none;
-  /* Firefox */
-  -webkit-appearance: none;
-  /* Safari and Chrome */
-  display: inline-block;
-  font-weight: 300;
-  font-family: inherit;
 }
 
 /* Hover state */

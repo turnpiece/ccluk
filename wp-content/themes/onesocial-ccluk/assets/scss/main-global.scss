@@ -969,12 +969,20 @@ button[disabled], input[disabled] {
   background-color: #cecece;
 }
 
+
 /* Default state */
 
+#secondary div.generic-button a,
+#buddypress .comment-reply-link,
+.entry-header .entry-title a.button,
+a.bp-title-button,
+article.post-password-required input[type=submit],
+li.bypostauthor cite span,
+a.button,
 input[type="button"], 
 input[type="reset"],
 button {
-  background-color: $green;
+  background-color: $blue;
   border: none;
   color: $white;
   cursor: pointer;
@@ -994,54 +1002,21 @@ button {
   &:hover, &:active {
     outline: none;
     color: $white;
-    background-color: $blue;
+    background-color: $green;
     text-decoration: none;
   }
-}
-
-article.post-password-required input[type=submit],
-li.bypostauthor cite span,
-a.button {
-  background-color: $blue;
-  border: none;
-  color: $white;
-  cursor: pointer;
-  font-size: $font-size-tiny;
-  line-height: 20px;
-  text-align: center;
-  text-decoration: none;
-  padding: 6px 14px;
-  appearance: none;
-  -moz-appearance: none;
-  /* Firefox */
-  -webkit-appearance: none;
-  /* Safari and Chrome */
-  display: inline-block;
-  font-weight: 300;
-  font-family: inherit;
 }
 
 #secondary div.generic-button a,
 #buddypress .comment-reply-link,
 .entry-header .entry-title a.button,
-a.bp-title-button {
-  background-color: $blue;
-  border: none;
-  color: $white;
-  cursor: pointer;
+a.bp-title-button,
+article.post-password-required input[type=submit],
+li.bypostauthor cite span,
+a.button {
   font-size: $font-size-tiny;
   line-height: 20px;
   text-align: center;
-  text-decoration: none;
-  padding: 6px 14px;
-  appearance: none;
-  -moz-appearance: none;
-  /* Firefox */
-  -webkit-appearance: none;
-  /* Safari and Chrome */
-  display: inline-block;
-  font-weight: 300;
-  font-family: inherit;
 }
 
 /* Hover state */
