@@ -2176,8 +2176,8 @@ div#sitewide-notice div#message.error p {
         color: $white;
       }
       .yes input:checked + label {
-        background-color: #57ad68;
-        border-color: #57ad68;
+        background-color: $green;
+        border-color: $green;
       }
       .no {
         input:checked + label {
@@ -3718,15 +3718,6 @@ body.activity-permalink #buddypress .activity-list .activity-avatar {
   width: 15%;
 }
 
-#buddypress ul.item-list.activity-list {
-  li.has-comments {
-    padding-bottom: 15px;
-  }
-  > li {
-    width: 100%;
-  }
-}
-
 body.activity-permalink #buddypress ul.activity-list li.has-comments {
   padding-bottom: 0;
 }
@@ -3749,30 +3740,45 @@ body.activity-permalink #buddypress li.mini .activity-meta {
 
 #buddypress {
   .activity-list {
-      li {
-        .activity-content {
-          position: relative;
-        }
-        &.mini .activity-content p {
-          margin: 0;
-        }
-        .activity-inreplyto {
-          display: none;
-          /* hides the View Conversation link */
-          > p {
-            margin: 0;
-            display: inline;
-          }
-          blockquote, div.activity-inner {
-            background: none;
-            border: none;
-            display: inline;
-            margin: 0;
-            overflow: hidden;
-            padding: 0;
+    &.item-list {
+      li.has-comments {
+        padding-bottom: 15px;
+      }
+      > li {
+        width: 100%;
+      }
+    }
+    li {
+      .activity-content {
+        position: relative;
+      }
+      .activity-header {
+        p {
+          img {
+            display: none;
           }
         }
       }
+      &.mini .activity-content p {
+        margin: 0;
+      }
+      .activity-inreplyto {
+        display: none;
+        /* hides the View Conversation link */
+        > p {
+          margin: 0;
+          display: inline;
+        }
+        blockquote, div.activity-inner {
+          background: none;
+          border: none;
+          display: inline;
+          margin: 0;
+          overflow: hidden;
+          padding: 0;
+        }
+      }
+    }
     .activity-comments {
       margin: 0 0 0 30%;
     }
@@ -3780,22 +3786,7 @@ body.activity-permalink #buddypress li.mini .activity-meta {
   #activity-stream li .activity-comments.buddyboss-activity-comments-form {
     margin-left: 30%;
   }
-}
 
-body.activity-permalink #buddypress .activity-list .activity-comments {
-  margin: 0 0 0 15%;
-}
-
-#buddypress .activity-list .activity-content,
-.search #buddypress .results-group .activity-list .activity-content {
-  margin: 0 0 0 15%;
-}
-
-body.activity-permalink #buddypress .activity-list li .activity-content {
-  margin-left: 15%;
-}
-
-#buddypress {
   .activity-list .activity-content {
     .activity-header, .comment-header {
       line-height: 1.5;
@@ -3851,16 +3842,7 @@ body.activity-permalink #buddypress .activity-list li .activity-content {
       }
     }
   }
-}
 
-body.activity-permalink #buddypress .activity-content {
-  .activity-inner, blockquote {
-    margin-left: 0;
-    margin-top: 5px;
-  }
-}
-
-#buddypress {
   .activity-inner > {
     .activity-inner, blockquote {
       margin: 0;
@@ -3880,6 +3862,27 @@ body.activity-permalink #buddypress .activity-content {
   }
 }
 
+#buddypress .activity-list .activity-content,
+.search #buddypress .results-group .activity-list .activity-content {
+  margin: 0 0 0 15%;
+}
+
+body.activity-permalink #buddypress .activity-list {
+  .activity-comments {
+    margin: 0 0 0 15%;
+  }
+  li .activity-content {
+    margin-left: 15%;
+  }
+}
+
+body.activity-permalink #buddypress .activity-content {
+  .activity-inner, blockquote {
+    margin-left: 0;
+    margin-top: 5px;
+  }
+}
+
 #main #buddypress .activity-list li {
   &.load-more,
   &.load-newest {
@@ -3889,193 +3892,35 @@ body.activity-permalink #buddypress .activity-content {
   }
 }
 
-.sap-load-more-posts, .button-load-more-posts {
+.sap-load-more-posts, 
+.button-load-more-posts {
   display: inline-block;
   color: $white;
   font-size: 10px;
   padding: 7px 20px;
   font-weight: 300;
   text-transform: uppercase;
-  background-color: #57ad68;
+  background-color: $green;
   border-radius: 15px;
 }
 
 #buddypress .activity-list li {
-  &.load-more a, &.load-newest a {
-    display: inline-block;
-    color: $white;
-    font-size: 10px;
-    padding: 7px 20px;
-    font-weight: 300;
-    text-transform: uppercase;
-    background-color: #57ad68;
-    border-radius: 15px;
-  }
-  &.load-more.loading a, &.load-newest.loading {
-    text-decoration: none;
-  }
-}
-
-/*--------------------------------------------------------------
-1.1.7 - Activity Comments
---------------------------------------------------------------*/
-
-body.activity-permalink #buddypress div.activity-meta {
-  margin-bottom: 6px;
-}
-
-#buddypress {
-  div.activity-meta a {
-    &:before {
-      text-align: center;
-    }
-    &:hover {
-      -moz-box-shadow: none;
-      -webkit-box-shadow: none;
-      box-shadow: none;
-    }
-  }
-  a {
-    &.activity-time-since {
-      color: #aaa;
+  &.load-more, 
+  &.load-newest {
+    a {
+      display: inline-block;
+      color: $white;
+      font-size: 10px;
+      padding: 7px 20px;
       font-weight: 300;
-      &:hover {
-        color: #888;
-      }
-    }
-    &.bp-primary-action {
-      text-decoration: none;
+      text-transform: uppercase;
+      background-color: $green;
+      border-radius: 15px;
     }
   }
-  #reply-title small a {
+  &.load-more.loading a, 
+  &.load-newest.loading {
     text-decoration: none;
-  }
-  a.bp-primary-action span, #reply-title small a span {
-    background-color: #888;
-    color: $white;
-    margin-left: 2px;
-    padding: 0 4px;
-    font-size: 10px;
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
-    border-radius: 2px;
-  }
-  div.activity-comments {
-    overflow: hidden;
-    /* IE fix */
-    position: relative;
-    width: auto;
-    > ul {
-      padding: 0;
-    }
-    ul {
-      border: none;
-      list-style: none;
-      li {
-        border: none;
-        list-style: none;
-        &.show-all {
-          padding: 5px 10px;
-        }
-        &.reply-like-count {
-          padding: 0;
-          margin: 0;
-          border: none;
-        }
-      }
-      clear: both;
-      margin: 0;
-      /**/
-      position: relative;
-    }
-    form.ac-form {
-      position: relative;
-    }
-    ul li {
-      padding: 40px 0 15px;
-      &:not(.activity-like-count) {
-        border-top: 1px solid $secondary_bg;
-      }
-    }
-    form.ac-form {
-      border-top: 1px solid $secondary_bg;
-    }
-    > ul > li:first-child {
-      border-top: none;
-    }
-    ul li.activity-like-count {
-      padding: 10px 0;
-    }
-  }
-}
-
-body.activity-permalink #buddypress .activity-list li.mini .activity-comments {
-  clear: none;
-  margin-top: 0;
-}
-
-#buddypress div.activity-comments {
-  ul li {
-    &:last-child {
-      margin-bottom: 0;
-    }
-    > ul {
-      margin-top: 0;
-    }
-  }
-}
-
-body.activity-permalink #buddypress div.activity-comments ul li > ul {
-  margin-top: 10px;
-}
-
-#buddypress div.activity-comments ul li ul {
-  background: $white;
-  &.acomment-reply-like-content {
-    background: transparent;
-    margin: 5px 0;
-  }
-  > li {
-    margin-left: 30px;
-  }
-}
-
-#main #buddypress div.activity-comments div.acomment-avatar img {
-  border-width: 1px;
-  float: left;
-  height: 46px;
-  margin: 0;
-  width: 46px;
-}
-
-#buddypress {
-  div {
-    &.activity-comments div.acomment-content {
-      margin: 5px 0 25px 70px;
-      padding-right: 10px;
-      clear: both;
-    }
-    &.acomment-content {
-      .time-since, .activity-delete-link, .comment-header {
-        display: none;
-      }
-    }
-    &.activity-comments form.ac-form {
-      display: none;
-    }
-  }
-  .activity.activity {
-    div.activity-comments form.root {
-      border-bottom: 1px solid $divider_color;
-      border-top: 1px solid $divider_color;
-      clear: both;
-      margin: 30px 0 20px;
-      padding: 30px 0;
-    }
-    .mini div.activity-comments form.root {
-      border-top: 0;
-      margin-top: 0;
-    }
   }
 }
 

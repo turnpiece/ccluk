@@ -1045,7 +1045,7 @@ input[type="submit"] {
 
 li.bypostauthor cite span {
   color: #fff;
-  background-color: #497EA8;
+  background-color: #22a7f0;
   display: inline-block;
   border-radius: 2px;
 }
@@ -4552,7 +4552,7 @@ p#item-desc {
 
 #item-posts h3 span {
   margin-left: 3px;
-  color: #57ad68;
+  color: #54ae68;
 }
 
 #item-posts .inner {
@@ -4617,7 +4617,7 @@ p#item-desc {
 
 #item-photos h3 span {
   margin-left: 3px;
-  color: #57ad68;
+  color: #54ae68;
 }
 
 .boss-member-meta {

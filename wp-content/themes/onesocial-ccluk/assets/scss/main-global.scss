@@ -1091,7 +1091,7 @@ input[type="submit"] {
 
 li.bypostauthor cite span {
   color: $white;
-  background-color: #497EA8;
+  background-color: $blue;
   display: inline-block;
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
@@ -4567,7 +4567,7 @@ p#item-desc {
 
     span {
       margin-left: 3px;
-      color: #57ad68;
+      color: $green;
     }
   }
 
@@ -4626,7 +4626,7 @@ p#item-desc {
     vertical-align: top;
     span {
       margin-left: 3px;
-      color: #57ad68;
+      color: $green;
     }
   }
 }
