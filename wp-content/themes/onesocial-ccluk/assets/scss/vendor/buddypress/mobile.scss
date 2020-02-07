@@ -1476,7 +1476,7 @@ h1.big,
           padding: 5px 0 0 30px !important;
           li {
             list-style: none;
-            color: #999;
+            color: $gray;
             font-size: 13px;
             line-height: 18px;
           }
@@ -1571,7 +1571,7 @@ h1.big,
       }
       &#members-list a.show-options {
         float: right;
-        color: #999;
+        color: $gray;
         font-size: $font-size-tiny;
         &:after {
           font-family: 'FontAwesome';
@@ -1585,7 +1585,7 @@ h1.big,
           content: "\f0d7";
           font-size: 14px;
           -webkit-font-smoothing: antialiased;
-          color: #999;
+          color: $gray;
           margin-left: 8px;
         }
         &.active:after {
@@ -2188,7 +2188,7 @@ body.activity-permalink #buddypress ul#activity-stream {
       color: $blue;
       font-weight: 400 !important;
       &:hover {
-        color: #888;
+        color: $gray;
       }
     }
     &.bp-primary-action {
@@ -2200,8 +2200,9 @@ body.activity-permalink #buddypress ul#activity-stream {
     margin-right: 5px;
     text-decoration: none;
   }
-  a.bp-primary-action span, #reply-title small a span {
-    background-color: #999;
+  a.bp-primary-action span, 
+  #reply-title small a span {
+    background-color: $gray;
     color: $white;
     margin-left: 2px;
     padding: 0 5px;
@@ -2583,7 +2584,7 @@ body.activity-permalink #buddypress .activity-list > li:first-child {
     .comment-header {
       margin: 0 0 10px;
       padding: 0 10px 0;
-      color: #888;
+      color: $gray;
       line-height: 1.8 !important;
       height: 41px;
     }
@@ -2601,7 +2602,7 @@ body.activity-permalink #buddypress .activity-list > li:first-child {
       font-weight: 600;
     }
     .activity-header a span, .comment-header a span {
-      color: #888;
+      color: $gray;
     }
   }
   .activity-header {
