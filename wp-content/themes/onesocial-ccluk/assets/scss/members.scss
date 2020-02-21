@@ -25,10 +25,10 @@
 .forum-titles,
 .sap-container,
 .bb-search-forums-label{
-    font-family: $font-default;
-    font-weight: 400;
-    font-style: normal;
-    font-size: $font-size-sm;
+  font-family: $font-default;
+  font-weight: 400;
+  font-style: normal;
+  font-size: $font-size-sm;
 }
 
 #buddyboss-bbpress-media-bulk-uploader-wrapper,
@@ -37,9 +37,9 @@
 #buddyboss-media-preview-inner,
 .buddyboss-bbpress-media-preview-inner,
 .buddyboss-comment-media-preview-inner {
-    img {
-        margin-bottom: 5px;
-    }
+  img {
+      margin-bottom: 5px;
+  }
 }
 
 #save_as_draft {
@@ -58,19 +58,19 @@
 --------------------------------------------------------------*/
 
 .header-account-login {
-    .avatar,
-    img {
-      border-radius: 100%;
-      max-width: 46px;
-      position: relative;
-      top: -2px;
-    }
+  .avatar,
+  img {
+    border-radius: 100%;
+    max-width: 46px;
+    position: relative;
+    top: -2px;
   }
+}
   
-  .header-style-2 .header-account-login .avatar {
-    margin-right: -2px;
-  }
+.header-style-2 .header-account-login .avatar {
+  margin-right: -2px;
+}
 
 @media screen and (max-width: 1024px)  {
-    @import "partials/adminbar";
+  @import "partials/adminbar";
 }
