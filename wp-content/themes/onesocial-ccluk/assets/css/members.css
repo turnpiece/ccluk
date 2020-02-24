@@ -6052,7 +6052,7 @@ body.buddypress.activity #buddypress .item-list-tabs.activity-type-tabs ul li {
 
 @media screen and (min-width: 769px) {
   body.buddypress.activity #buddypress .item-list-tabs.activity-type-tabs ul li {
-    padding-right: 15px;
+    padding-right: 25px;
   }
 }
 
@@ -6164,7 +6164,7 @@ body.buddypress #buddypress > div[role=navigation].item-list-tabs ul li {
   body.buddypress #buddypress div:not(#mobile-item-nav) > div.item-list-tabs ul li,
   body.buddypress #buddypress .messages-container div#subnav.item-list-tabs ul li,
   body.buddypress #buddypress > div[role=navigation].item-list-tabs ul li {
-    padding-right: 15px;
+    padding-right: 25px;
   }
 }
 
