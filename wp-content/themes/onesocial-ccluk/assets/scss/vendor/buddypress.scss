@@ -2781,6 +2781,9 @@ body.activity-permalink #buddypress ul.item-list {
         margin-top: 5px;
       }
     }
+    &#members-list > li {
+      border-bottom: 0;
+    }
   }
   #members-list.albums-list li {
     img.avatar {
