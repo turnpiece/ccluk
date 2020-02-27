@@ -3483,6 +3483,10 @@ body.activity-permalink #buddypress ul.item-list li.activity-item {
   margin-top: 5px;
 }
 
+#buddypress ul#members-list > li {
+  border-bottom: 0;
+}
+
 #buddypress #members-list.albums-list li img.avatar {
   height: auto;
   margin: 0 0 20px;
@@ -6052,7 +6056,7 @@ body.buddypress.activity #buddypress .item-list-tabs.activity-type-tabs ul li {
 
 @media screen and (min-width: 769px) {
   body.buddypress.activity #buddypress .item-list-tabs.activity-type-tabs ul li {
-    padding-right: 15px;
+    padding-right: 25px;
   }
 }
 
@@ -6164,7 +6168,7 @@ body.buddypress #buddypress > div[role=navigation].item-list-tabs ul li {
   body.buddypress #buddypress div:not(#mobile-item-nav) > div.item-list-tabs ul li,
   body.buddypress #buddypress .messages-container div#subnav.item-list-tabs ul li,
   body.buddypress #buddypress > div[role=navigation].item-list-tabs ul li {
-    padding-right: 15px;
+    padding-right: 25px;
   }
 }
 
