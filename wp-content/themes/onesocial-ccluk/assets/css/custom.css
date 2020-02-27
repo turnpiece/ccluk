@@ -2292,19 +2292,20 @@ div#sitewide-notice div#message p {
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
 }
 
-.single-incsub_event #wpmudevevents-wrapper h3,
-.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta,
-.single-incsub_event #wpmudevevents-wrapper #event-bread-crumbs .current {
+.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentheader {
+  padding-top: 0;
+}
+
+.single-incsub_event #wpmudevevents-wrapper .wpmudevevents-contentmeta {
   color: #54ae68;
+  margin: 10px 0px;
+  margin: 1rem 0rem;
+  margin-top: 10px;
+  padding-top: 0;
 }
 
-.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta {
-  margin: 12px 0px;
-  margin: 1.2rem 0rem;
-}
-
-.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_ical,
-.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_gcal {
+.single-incsub_event #wpmudevevents-wrapper .wpmudevevents-contentmeta a.export_to_ical,
+.single-incsub_event #wpmudevevents-wrapper .wpmudevevents-contentmeta a.export_to_gcal {
   float: right;
   margin: 2px 0px;
   margin: 0.2rem 0rem;
@@ -2316,21 +2317,21 @@ div#sitewide-notice div#message p {
   border-radius: 5px;
 }
 
-.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_ical:hover,
-.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_gcal:hover {
+.single-incsub_event #wpmudevevents-wrapper .wpmudevevents-contentmeta a.export_to_ical:hover,
+.single-incsub_event #wpmudevevents-wrapper .wpmudevevents-contentmeta a.export_to_gcal:hover {
   background-color: #54ae68;
 }
 
-.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_ical:before,
-.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_ical > span,
-.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_gcal:before,
-.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_gcal > span {
+.single-incsub_event #wpmudevevents-wrapper .wpmudevevents-contentmeta a.export_to_ical:before,
+.single-incsub_event #wpmudevevents-wrapper .wpmudevevents-contentmeta a.export_to_ical > span,
+.single-incsub_event #wpmudevevents-wrapper .wpmudevevents-contentmeta a.export_to_gcal:before,
+.single-incsub_event #wpmudevevents-wrapper .wpmudevevents-contentmeta a.export_to_gcal > span {
   color: #fff;
   border-color: #fff;
 }
 
-.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_ical:after,
-.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentmeta a.export_to_gcal:after {
+.single-incsub_event #wpmudevevents-wrapper .wpmudevevents-contentmeta a.export_to_ical:after,
+.single-incsub_event #wpmudevevents-wrapper .wpmudevevents-contentmeta a.export_to_gcal:after {
   color: #fff;
   border-color: #fff transparent;
 }
