@@ -6,6 +6,22 @@
  *
  * @package OneSocial Theme
  */
+
+$q = new WP_Query(
+	array(
+		'posts_per_page' => 0,
+		'post_type' => 'incsub_event',
+		'meta_key' => 'incsub_event_start',
+		'orderby' => 'meta_value',
+		'order' => 'ASC',
+		'meta_query' => array(
+			'key' => 'incsub_event_start',
+			'value' => date('Y-m-d'),
+			'compare' => '>='
+		)
+	)
+);
+
 get_header();
 
 ?>
@@ -16,7 +32,7 @@ get_header();
 
 		<div id="content" role="main">
 
-		<?php if ( have_posts() ) : ?>
+		<?php if ( $q->have_posts() ) : ?>
 
 			<header class="archive-header dir-header">
 				<?php 
@@ -32,12 +48,12 @@ get_header();
 
 			<?php
 			/* Start the Loop */
-			while ( have_posts() ) : the_post(); ?>
+			while ( $q->have_posts() ) : $q->the_post(); ?>
 
 				<div class="article-outher">
 					
 					<div class="content-wrap">
-						<?php get_template_part( 'template-parts/content', get_post_format() ); ?>
+						<?php get_template_part( 'template-parts/content', 'incsub_event' ); ?>
 					</div>
 
 				</div>
