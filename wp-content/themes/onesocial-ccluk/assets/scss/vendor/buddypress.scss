@@ -2781,8 +2781,11 @@ body.activity-permalink #buddypress ul.item-list {
         margin-top: 5px;
       }
     }
-    &#members-list > li {
-      border-bottom: 0;
+    &#members-list,
+    &#member-list {
+      > li {
+        border-bottom: 0;
+      }
     }
   }
   #members-list.albums-list li {
@@ -5107,20 +5110,20 @@ body.buddypress {
 		  padding: 10px 0;
 		}
 		ul.item-list {
-		  li .activity-avatar div {
-        line-height: 1;
-        margin-bottom: 7px;
-        font-weight: 400;
-        &.nice-name {
-          color: $green;
-          font-size: 80%;
-        }
-		  }
 		  &:not(.bb-group-members) li #item-content {
         width: 75%;
         float: left;
 		  }
 		  li {
+        .activity-avatar div {
+          line-height: 1;
+          margin-bottom: 7px;
+          font-weight: 400;
+          &.nice-name {
+            color: $green;
+            font-size: 80%;
+          }
+        }
         #item-content h5 {
           margin: 0;
         }

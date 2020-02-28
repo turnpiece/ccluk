@@ -3483,7 +3483,7 @@ body.activity-permalink #buddypress ul.item-list li.activity-item {
   margin-top: 5px;
 }
 
-#buddypress ul#members-list > li {
+#buddypress ul#members-list > li, #buddypress ul#member-list > li {
   border-bottom: 0;
 }
 
@@ -5698,6 +5698,11 @@ body.buddypress #buddypress .bb-comment-author {
   padding: 10px 0;
 }
 
+body.buddypress #buddypress ul.item-list:not(.bb-group-members) li #item-content {
+  width: 75%;
+  float: left;
+}
+
 body.buddypress #buddypress ul.item-list li .activity-avatar div {
   line-height: 1;
   margin-bottom: 7px;
@@ -5707,11 +5712,6 @@ body.buddypress #buddypress ul.item-list li .activity-avatar div {
 body.buddypress #buddypress ul.item-list li .activity-avatar div.nice-name {
   color: #54ae68;
   font-size: 80%;
-}
-
-body.buddypress #buddypress ul.item-list:not(.bb-group-members) li #item-content {
-  width: 75%;
-  float: left;
 }
 
 body.buddypress #buddypress ul.item-list li #item-content h5 {
