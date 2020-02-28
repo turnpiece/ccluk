@@ -14,7 +14,7 @@
  */
 do_action( 'bp_before_activity_loop' ); ?>
 
-<?php if ( bp_has_activities( bp_ajax_querystring( 'activity' ) . '&action=new_forum_post,new_blog_comment,new_blog_post,created_group,new_forum_topic,activity_update,profile_update' ) ) : ?>
+<?php if ( bp_has_activities( bp_ajax_querystring( 'activity' ) . '&action=new_forum_post,new_blog_comment,new_blog_post,created_group,new_forum_topic,activity_update,profile_update,bbp_topic_create,bbp_reply_create' ) ) : ?>
 
 	<?php if ( empty( $_POST['page'] ) ) : ?>
 
