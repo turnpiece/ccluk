@@ -91,7 +91,7 @@
 
 		<?php do_action( 'bbp_theme_before_topic_freshness_author' ); ?>
 
-		<?php bbp_author_link( array( 'post_id' => bbp_get_topic_last_active_id(), 'type' => 'avatar', 'size' => 75 ) ); ?>
+		<?php bbp_author_link( array( 'post_id' => bbp_get_topic_last_active_id(), 'type' => 'avatar', 'size' => 14 ) ); ?>
 
 		<p class="bbp-topic-meta">
 

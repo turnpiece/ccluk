@@ -4377,62 +4377,6 @@ body article.error404 .entry-header {
   background: transparent;
 }
 
-#buddypress ul#topic-post-list {
-  margin: 0;
-  width: auto;
-}
-
-#buddypress ul#topic-post-list li {
-  padding: 15px;
-  position: relative;
-}
-
-#buddypress ul#topic-post-list li.alt {
-  background-color: #f9f9f9;
-}
-
-#buddypress ul#topic-post-list li div.poster-meta {
-  color: #888;
-  margin-bottom: 10px;
-}
-
-#buddypress ul#topic-post-list li div.post-content {
-  margin-left: 54px;
-}
-
-#buddypress div.topic-tags {
-  font-size: 80%;
-}
-
-#buddypress div.admin-links {
-  color: #888;
-  font-size: 90%;
-  position: absolute;
-  top: 15px;
-  right: 25px;
-}
-
-#buddypress div#topic-meta {
-  margin: 0;
-  padding: 5px 19px 30px;
-  position: relative;
-}
-
-#buddypress div#topic-meta div.admin-links {
-  right: 0;
-  top: -10px;
-}
-
-#buddypress div#topic-meta h3 {
-  margin: 5px 0;
-}
-
-#buddypress div#new-topic-post {
-  display: none;
-  margin: 20px 0 0 0;
-  padding: 1px 0 0 0;
-}
-
 #buddypress table {
   width: 100%;
 }

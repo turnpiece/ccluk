@@ -1,39 +1,57 @@
 <?php
+
 /**
  * Forums Loop - Single Forum
  *
  * @package bbPress
  * @subpackage Theme
  */
+
+// Exit if accessed directly
+defined( 'ABSPATH' ) || exit;
+
 ?>
 
 <ul id="bbp-forum-<?php bbp_forum_id(); ?>" <?php bbp_forum_class(); ?>>
-
 	<li class="bbp-forum-info">
 
-		<div class="bbp-forum-info-content">
+		<?php if ( bbp_is_user_home() && bbp_is_subscriptions() ) : ?>
 
-			<?php do_action( 'bbp_theme_before_forum_title' ); ?>
+			<span class="bbp-row-actions">
 
-			<a class="bbp-forum-title" href="<?php bbp_forum_permalink(); ?>" title="<?php bbp_forum_title(); ?>"><?php bbp_forum_title(); ?></a>
+				<?php do_action( 'bbp_theme_before_forum_subscription_action' ); ?>
 
-			<?php do_action( 'bbp_theme_after_forum_title' ); ?>
+				<?php bbp_forum_subscription_link( array( 'before' => '', 'subscribe' => __( 'Subscribe' ), 'unsubscribe' => __( 'Unsubscribe' ) ) ); ?>
+
+				<?php do_action( 'bbp_theme_after_forum_subscription_action' ); ?>
+
+			</span>
+
+		<?php endif; ?>
+
+		<?php do_action( 'bbp_theme_before_forum_title' ); ?>
+
+		<a class="bbp-forum-title" href="<?php bbp_forum_permalink(); ?>"><?php bbp_forum_title(); ?></a>
+
+		<?php do_action( 'bbp_theme_after_forum_title' ); ?>
+
+		<?php if ( ! bbp_is_subscriptions() ) : ?>
 
 			<?php do_action( 'bbp_theme_before_forum_description' ); ?>
 
-			<div class="bbp-forum-content"><?php the_content(); ?></div>
+			<div class="bbp-forum-content"><?php bbp_forum_content(); ?></div>
 
 			<?php do_action( 'bbp_theme_after_forum_description' ); ?>
 
-			<?php do_action( 'bbp_theme_before_forum_sub_forums' ); ?>
+		<?php endif; ?>
 
-			<?php bbp_list_forums(); ?>
+		<?php do_action( 'bbp_theme_before_forum_sub_forums' ); ?>
 
-			<?php do_action( 'bbp_theme_after_forum_sub_forums' ); ?>
+		<?php bbp_list_forums(); ?>
 
-			<?php bbp_forum_row_actions(); ?>
+		<?php do_action( 'bbp_theme_after_forum_sub_forums' ); ?>
 
-		</div>
+		<?php bbp_forum_row_actions(); ?>
 
 	</li>
 
@@ -45,22 +63,21 @@
 
 		<?php do_action( 'bbp_theme_before_topic_author' ); ?>
 
-		<?php bbp_author_link( array( 'post_id' => bbp_get_forum_last_active_id(), 'type' => 'avatar', 'size' => 75 ) ); ?>
+		<?php bbp_author_link( array( 'post_id' => bbp_get_forum_last_active_id(), 'type' => 'avatar', 'size' => 14 ) ); ?>
 
 		<p class="bbp-topic-meta">
 
 			<span class="bbp-topic-freshness-author"><?php bbp_author_link( array( 'post_id' => bbp_get_forum_last_active_id(), 'type' => 'name' ) ); ?></span>
 
+			<?php do_action( 'bbp_theme_after_topic_author' ); ?>
+
 			<?php do_action( 'bbp_theme_before_forum_freshness_link' ); ?>
 
-			<span class="bbp-topic-freshness-link"><?php bbp_forum_freshness_link(); ?></span>
+			<br />
+			<span class="bbp-forum-freshness-link"><?php bbp_forum_freshness_link(); ?></span>
 
 			<?php do_action( 'bbp_theme_after_forum_freshness_link' ); ?>
 
 		</p>
-
-		<?php do_action( 'bbp_theme_after_topic_author' ); ?>
-
 	</li>
-
 </ul><!-- #bbp-forum-<?php bbp_forum_id(); ?> -->

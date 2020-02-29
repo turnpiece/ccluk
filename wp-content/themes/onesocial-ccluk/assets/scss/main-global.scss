@@ -4354,55 +4354,6 @@ body article.error404 .entry-header {
       background: transparent;
     }
   }
-  ul#topic-post-list {
-    margin: 0;
-    width: auto;
-    li {
-      padding: 15px;
-      position: relative;
-      &.alt {
-        background-color: $secondary_bg;
-      }
-      div {
-        &.poster-meta {
-          color: #888;
-          margin-bottom: 10px;
-        }
-        &.post-content {
-          margin-left: 54px;
-        }
-      }
-    }
-  }
-  div {
-    &.topic-tags {
-      font-size: 80%;
-    }
-    &.admin-links {
-      color: #888;
-      font-size: 90%;
-      position: absolute;
-      top: 15px;
-      right: 25px;
-    }
-    &#topic-meta {
-      margin: 0;
-      padding: 5px 19px 30px;
-      position: relative;
-      div.admin-links {
-        right: 0;
-        top: -10px;
-      }
-      h3 {
-        margin: 5px 0;
-      }
-    }
-    &#new-topic-post {
-      display: none;
-      margin: 20px 0 0 0;
-      padding: 1px 0 0 0;
-    }
-  }
   table {
     width: 100%;
   }
