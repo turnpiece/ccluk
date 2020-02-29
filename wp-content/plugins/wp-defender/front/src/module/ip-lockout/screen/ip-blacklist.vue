@@ -79,16 +79,35 @@
 						<span class="sui-description">{{__("Use this feature to ban any countries you don't expect/want traffic from to protect your site entirely from unwanted hackers and bots.")}}</span>
 					</div>
 					<div class="sui-box-settings-col-2 geo-ip-block">
-						<div class="sui-notice sui-notice-info" v-if="misc.geo_db_downloaded===false">
-							<p>
-								{{__("To use this feature you must first download the latest Geo IP Database.")}}
-							</p>
-							<div class="sui-notice-buttons">
-								<submit-button id="download-geodb" type="button" css-class="sui-button-ghost"
-								               @click="download_geodb"
-								               :state="state">
-									{{__("Download")}}
-								</submit-button>
+						<div v-if="misc.geo_db_downloaded===false">
+							<div class="sui-notice sui-notice-info sui-notice-global">
+								<p>
+									{{__("To use this feature you must follow the steps described below to download the latest Geo IP Database.")}}
+								</p>
+							</div>
+							<div class="sui-border-frame">
+								<div class="download-instruction" v-html="this.geodb_download_instruction"></div>
+								<div class="sui-form-field">
+									<label class="sui-label">
+										{{__("API Key")}}
+									</label>
+									<div>
+										<span class="sui-field-prefix"><i class="sui-icon-key"></i></span>
+										<input placeholder="Place the API key here"
+										       class="sui-form-control sui-field-has-prefix" type="text"
+										       v-model="api_key"/>
+									</div>
+								</div>
+								<div class="sui-notice-buttons">
+									<submit-button :disabled="!geo_downloadable" id="download-geodb" type="button"
+									               css-class="sui-button-ghost"
+									               @click="download_geodb"
+									               :state="state">
+										<i class="sui-icon-download-cloud" aria-hidden="true"></i>
+										<i class="sui-screen-reader-text">{{__("Download")}}</i>
+										{{__("Download")}}
+									</submit-button>
+								</div>
 							</div>
 						</div>
 						<div v-else>
@@ -193,7 +212,8 @@
 								</button>
 							</div>
 							<div class="clear margin-top-10"></div>
-							<submit-button type="button" @click="import_ip" css-class="sui-button-ghost" :state="state">
+							<submit-button type="button" @click="import_ip"
+							               css-class="sui-button-ghost" :state="state">
 								<i class="sui-icon-download-cloud" aria-hidden="true"></i>
 								{{__("Import")}}
 							</submit-button>
@@ -239,7 +259,6 @@
 <script>
 	import base_heper from '../../../helper/base_hepler';
 	import locked_ips_dialog from '../component/locked-ips-dialog';
-
 	export default {
 		mixins: [base_heper],
 		name: "ip_blacklist",
@@ -250,6 +269,7 @@
 				state: {
 					on_saving: false,
 				},
+				geo_downloadable: false,
 				nonces: iplockout.nonces,
 				endpoints: iplockout.endpoints,
 				misc: iplockout.misc,
@@ -259,7 +279,8 @@
 				},
 				blacklist: {
 					count: null
-				}
+				},
+				api_key: null
 			}
 		},
 		components: {
@@ -268,16 +289,16 @@
 		methods: {
 			download_geodb: function () {
 				let that = this;
-				this.httpGetRequest('downloadGeoDB', {}, function () {
-					that.misc.geo_db_downloaded = true;
+				this.httpPostRequest('downloadGeoDB', {
+					api_key: that.api_key
+				}, function (response) {
 					that.$nextTick(function () {
-						jQuery('#country_whitelist').SUIselect2({
-							dropdownCssClass: 'sui-select-dropdown'
-						})
-						jQuery('#country_blacklist').SUIselect2({
-							dropdownCssClass: 'sui-select-dropdown'
-						});
-						location.reload()
+						if (response.success === true) {
+							that.misc.geo_db_downloaded = true;
+							location.reload();
+						} else {
+							Defender.showNotification('error', response.data.message);
+						}
 					})
 				})
 			},
@@ -326,12 +347,26 @@
 			},
 			export_url: function () {
 				return this.adminUrl('admin.php?page=wdf-ip-lockout&view=export&_wpnonce=' + this.nonces['exportIps'])
+			},
+			geodb_download_instruction: function () {
+				let strings = '<span class="sui-description">' + this.vsprintf(this.__("1. <a target='_blank' href='%s'>Sign up</a> for GeoLite2 Downloadable Databases."), "https://www.maxmind.com/en/geolite2/signup") + '</span>'
+				strings += '<span class="sui-description">' + this.vsprintf(this.__('2. Login to your account and follow <a target="_blank" href="%s">this link</a> to copy the API key.'), "https://www.maxmind.com/en/accounts/194122/license-key") + '</span>'
+				strings += '<span class="sui-description">' + this.__('3. Place the API key in the input below and click the download button.') + '</span>'
+				return strings;
+			}
+		},
+		watch: {
+			'api_key': function (val, old) {
+				if (val.trim().length > 0) {
+					this.geo_downloadable = true;
+				} else {
+					this.geo_downloadable = false;
+				}
 			}
 		},
 		mounted: function () {
 			let mediaUploader;
 			let vm = this;
-			console.log('here');
 			jQuery('.file-picker').click(function () {
 				if (mediaUploader) {
 					mediaUploader.open();

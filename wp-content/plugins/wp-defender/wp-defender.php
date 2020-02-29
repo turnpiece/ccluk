@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Defender Pro
  * Plugin URI: https://premium.wpmudev.org/project/wp-defender/
- * Version:     2.2.4
+ * Version:     2.2.6
  * Description: Get regular security scans, vulnerability reports, safety recommendations and customized hardening for your site in just a few clicks. Defender is the analyst and enforcer who never sleeps.
  * Author:      WPMU DEV
  * Author URI:  http://premium.wpmudev.org/
@@ -95,7 +95,7 @@ class WP_Defender {
 		include_once $this->getPluginPath() . 'main-activator.php';
 		$this->global['bootstrap'] = new WD_Main_Activator( $this );
 		//for the new SUI
-		add_filter( 'admin_body_class', array( &$this, 'adminBodyClasses' ) );
+		add_filter( 'admin_body_class', array( $this, 'adminBodyClasses' ), 11 );
 	}
 
 	public function initCliCommand() {
@@ -126,9 +126,10 @@ class WP_Defender {
 			'wdf-debug'
 		];
 		$page  = isset( $_GET['page'] ) ? $_GET['page'] : null;
-		if ( in_array( $page, $pages ) ) {
-			$classes .= ' sui-2-4-1 ';
+		if ( ! in_array( $page, $pages, true ) ) {
+			return $classes;
 		}
+		$classes .= ' sui-2-4-1 ';
 
 		return $classes;
 	}
@@ -283,6 +284,9 @@ if ( ! function_exists( 'wp_defender' ) ) {
 		wp_clear_scheduled_hook( 'cleanUpOldLog' );
 		wp_clear_scheduled_hook( 'scanReportCron' );
 		wp_clear_scheduled_hook( 'tweaksSendNotification' );
+		wp_clear_scheduled_hook( 'auditSyncWithCloud' );
+		//flush events to cloud
+		\WP_Defender\Module\Audit\Model\Events::instance()->sendToApi();
 	}
 
 	function wp_defender_activate() {

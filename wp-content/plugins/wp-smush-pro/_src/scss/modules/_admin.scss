@@ -2,6 +2,19 @@
 
 @include body-class {
 
+	/** Override SUI styles (since 3.6.0) */
+	.sui-notice-top p { width: 100%; }
+
+	/**
+	 * Fix summary image size. Overwrite of SUI styles.
+	 * @since 3.6.0
+	 */
+	@media screen and (min-width: 783px) {
+		.sui-wrap .sui-summary:not(.sui-unbranded):not(.sui-summary-sm) {
+			background-size: auto 80%;
+		}
+	}
+
 	/** Override WP Footer Styling, Hide it on WPMU pages only, if we really need to **/
 	#wpfooter {
 		display: block;
@@ -33,7 +46,7 @@
 		}
 
 		.sui-upgrade-page {
-			.sui-upgrade-page-cta__inner a:hover {
+			.sui-upgrade-page-cta__inner a.sui-button-purple:hover {
 				color: #fff !important;
 			}
 
@@ -280,6 +293,17 @@
 				&.loaded, &.fadeInLeft, &.fadeInRight { opacity: 1; }
 				&.fadeInLeft { animation-name: fadeInLeft; }
 				&.fadeInRight { animation-name: fadeInRight; }
+
+				.sui-box-selectors {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+
+					label:last-of-type {
+						top: 0;
+						font-size: 13px;
+					}
+				}
 			}
 
 			.smush-onboarding-arrows a {
@@ -405,7 +429,7 @@
 						content: "I";
 						font-family: wpmudev-plugin-icons !important;
 						speak: none;
-						font-size: 1em;
+						font-size: 16px;
 						font-style: normal;
 						font-weight: 400;
 						font-variant: normal;
@@ -566,10 +590,40 @@
 			background-size: 170px;
 		}
 
+		/**
+		 * Smush video upsell on dedicated upgrade page and dashboard widget.
+		 * @since 3.6.0
+		 */
+		.sui-upgrade-page .thumbnail-container {
+			cursor: pointer;
+			img { width: 640px; }
+		}
+
 		.smush-pro-features {
+			.smush-pro-features-header {
+				background-color: #FAFAFA;
+				margin: -45px -30px 30px;
+				padding: 40px 30px 15px;
+				display: flex;
+				justify-content: space-evenly;
+
+				& > div:first-of-type {
+					max-width: 380px;
+				}
+
+				@media screen and (max-width: 782px) {
+					margin: -35px -20px 20px;
+				}
+
+				.thumbnail-container {
+					cursor: pointer;
+					text-align: center;
+					img { width: 380px; }
+				}
+			}
 
 			.smush-pro-feature-title {
-				@include icon(before, check-tick);
+				@include icon(before, check);
 				font-weight: 500;
 				line-height: 30px;
 				color: #333;
@@ -609,16 +663,24 @@
 			}
 		}
 
+		.sui-progress-close {
+			border: 0;
+			background: 0;
+			text-transform: uppercase;
+			color: #888888;
+			font-size: 12px;
+			font-weight: 500;
+			letter-spacing: -0.25px;
+			margin-left: 10px;
+			cursor: pointer;
+		}
+
 		.sui-progress-close.wp-smush-cancel-bulk.sui-hidden,
 		.sui-progress-close.wp-smush-all.sui-hidden {
 			display: none !important;
 		}
 
 		.sui-notice {
-			&.wp-smush-all-done {
-				margin-top: 0 !important;
-			}
-
 			&.smush-notice-sm {
 				p {
 					font-size: 13px;

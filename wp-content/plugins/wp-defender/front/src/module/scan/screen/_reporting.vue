@@ -78,7 +78,7 @@
 									</div>
 									<div class="sui-form-field">
 										<label class="sui-label">{{__("Time of day")}}</label>
-										<select class="report-selector" name="time" v-model="model.time">
+										<select class="sui-select report-selector" name="time" v-model="model.time">
 											<option v-for="(display,time) in times_of_day"
 											        :value="time">{{display}}
 											</option>

@@ -79,24 +79,39 @@ class Main extends Controller {
 
 	public function tweaksSendNotification() {
 		$settings = Hardener\Model\Settings::instance();
-		//if last seen very near, do no thing
-		if ( ! $settings->last_seen ) {
-			//should not in here
-			$settings->last_seen = time();
-			$settings->save();
+		$canSend  = false;
+		if ( $settings->last_sent ) {
+			if (
+				$settings->notification_repeat == true
+				&& strtotime( apply_filters( 'wd_tweaks_notification_interval', '+24 hours' ), apply_filters( 'wd_tweaks_last_notification_sent', $settings->last_sent ) ) < time() ) {
+				$canSend = true;
+			}
+		} else {
+			//this only happen one
+			if ( ! $settings->last_seen ) {
+				//should not in here
+				$settings->last_seen = time();
+				$settings->save();
+			}
+
+			if ( strtotime( apply_filters( 'wd_tweaks_notification_interval', '+7 days' ), apply_filters( 'wd_tweaks_last_action_time', $settings->last_seen ) ) > time() ) {
+				return;
+			}
+
+			$canSend = true;
 		}
 
-		if ( strtotime( apply_filters( 'wd_tweaks_notification_interval', '+7 days' ), apply_filters( 'wd_tweaks_last_action_time', $settings->last_seen ) ) > time() ) {
+		if ( ! $canSend ) {
 			return;
 		}
+
 		$settings->refreshStatus();
 		$tweaks = $settings->getIssues();
 
-		if ( count( $tweaks ) == 0 ) {
-			//no issue no email
-
+		if ( ! count( $tweaks ) ) {
 			return;
 		}
+
 		$no_reply_email = "noreply@" . parse_url( get_site_url(), PHP_URL_HOST );
 		$no_reply_email = apply_filters( 'wd_scan_noreply_email', $no_reply_email );
 		$headers        = array(
@@ -106,28 +121,13 @@ class Main extends Controller {
 
 		$subject = _n( 'Security Tweak Report for %s. %s tweak needs attention.', 'Security Tweak Report for %s. %s tweaks needs attention.', count( $tweaks ), wp_defender()->domain );
 		$subject = sprintf( $subject, network_site_url(), count( $tweaks ) );
-		$canSend = false;
-		if ( $settings->last_sent == null ) {
-			//this is the case user install this and never check the page
-			//send report
-			$canSend = true;
-		} elseif ( strtotime( apply_filters( 'wd_tweaks_notification_interval', '+24 hours' ), apply_filters( 'wd_tweaks_last_notification_sent', $settings->last_sent ) ) < time() ) {
-			//this is the case email already sent once last 24 hours
-			if ( $settings->notification_repeat == false ) {
-				//no repeat
-				return;
-			}
-			$canSend = true;
-		}
 
-		if ( $canSend ) {
-			foreach ( $settings->receipts as $receipt ) {
-				$email = $receipt['email'];
-				$ret   = wp_mail( $email, $subject, $this->prepareEmailContent( $receipt['first_name'], $email ), $headers );
-			}
-			$settings->last_sent = time();
-			$settings->save();
+		foreach ( $settings->receipts as $receipt ) {
+			$email = $receipt['email'];
+			$ret   = wp_mail( $email, $subject, $this->prepareEmailContent( $receipt['first_name'], $email ), $headers );
 		}
+		$settings->last_sent = time();
+		$settings->save();
 	}
 
 	private function prepareEmailContent( $firstName, $email = null ) {

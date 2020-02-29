@@ -29,9 +29,6 @@
             },
             rebrand_img: function () {
                 if (this.whitelabel.hero_image.length > 0) {
-                    console.log({
-                        'background-image': "url('" + this.whitelabel.hero_image + "')"
-                    });
                     return {
                         'background-image': "url('" + this.whitelabel.hero_image + "')"
                     }

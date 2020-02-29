@@ -121,7 +121,7 @@ class Helper
 			// Detect IP type
 			$ip_type = self::ip__validate(isset( $_SERVER['REMOTE_ADDR'] ) ? $_SERVER['REMOTE_ADDR'] : '');
 			if($ip_type)
-				$ips['real'] = $ip_type == 'v6' ? self::ip__v6_normalize(isset( $_SERVER['REMOTE_ADDR'] ) ? $_SERVER['REMOTE_ADDR'] : '') : isset( $_SERVER['REMOTE_ADDR'] ) ? $_SERVER['REMOTE_ADDR'] : '';
+				$ips['real'] = ($ip_type == 'v6' ? self::ip__v6_normalize(isset( $_SERVER['REMOTE_ADDR'] ) ? $_SERVER['REMOTE_ADDR'] : '' ) : isset( $_SERVER['REMOTE_ADDR'] )) ? $_SERVER['REMOTE_ADDR'] : '';
 			
 			// Cloud Flare
 			if(isset($headers['CF-Connecting-IP'], $headers['CF-IPCountry'], $headers['CF-RAY']) || isset($headers['Cf-Connecting-Ip'], $headers['Cf-Ipcountry'], $headers['Cf-Ray'])){
@@ -256,8 +256,8 @@ class Helper
 		$ip_xtets = explode($ip_type == 'v4' ? '.' : ':', $ip);
 		
 		// Standartizing. Getting current octets/hextets. Adding leading zeros.
-		$net_xtet = str_pad(decbin($ip_type == 'v4' ? $net_ip_xtets[$xtet_count] : hexdec($net_ip_xtets[$xtet_count])), $xtet_base, 0, STR_PAD_LEFT);
-		$ip_xtet = str_pad(decbin($ip_type == 'v4' ? $ip_xtets[$xtet_count] : hexdec($ip_xtets[$xtet_count])), $xtet_base, 0, STR_PAD_LEFT);
+		$net_xtet = str_pad(decbin($ip_type == 'v4' ? $net_ip_xtets[$xtet_count] : @hexdec($net_ip_xtets[$xtet_count])), $xtet_base, 0, STR_PAD_LEFT);
+		$ip_xtet = str_pad(decbin($ip_type == 'v4' ? $ip_xtets[$xtet_count] : @hexdec($ip_xtets[$xtet_count])), $xtet_base, 0, STR_PAD_LEFT);
 		
 		// Comparing bit by bit
 		for($i = 0, $result = true; $mask != 0; $mask--, $i++){

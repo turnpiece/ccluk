@@ -45,7 +45,7 @@
                                          id="notification-box"
                                          data-tab-content="notification-box">
                                         <p class="sui-p-small">
-                                            {{__("By default, we will only notify the recipients below when a security tweak hasn’t been actioned for 24 hours.")}}
+                                            {{__("By default, we will only notify the recipients below when a security tweak hasn’t been actioned for 7 days.")}}
                                         </p>
                                         <recipients id="tweaks_recipients" @update:recipients="updateRecipients"
                                                     v-bind:recipients="model.recipients"></recipients>
@@ -55,7 +55,7 @@
                                                    :true-value="true"
                                                    :false-value="false"/>
                                             <span aria-hidden="true"></span>
-                                            <span>{{__("Send reminders every 7 days if fixes still hasn’t been actioned.")}}</span>
+                                            <span>{{__("Send reminders every 24 hours if fixes still hasn’t been actioned.")}}</span>
                                         </label>
                                     </div>
                                 </div>
@@ -66,7 +66,7 @@
             </div>
             <div class="sui-box-footer">
                 <div class="sui-actions-right">
-                    <submit-button type="submit" css-class="sui-button-blue" :state="state">
+                    <submit-button type="submit" css-class="sui-button-blue save-changes" :state="state">
                         <i class="sui-icon-save" aria-hidden="true"></i>
                         {{__("Save Changes")}}
                     </submit-button>

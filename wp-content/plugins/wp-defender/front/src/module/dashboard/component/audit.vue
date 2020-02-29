@@ -1,5 +1,5 @@
 <template>
-    <div class="sui-box">
+    <div id="audit-logging" class="sui-box">
         <div class="sui-box-header">
             <h3 class="sui-box-title">
                 <i class="sui-icon-eye" aria-hidden="true"></i>
@@ -11,7 +11,7 @@
                 {{__("Track and log events when changes are made to your website, giving you full visibility over what's going on behind the scenes.")}}
             </p>
             <form method="post" @submit.prevent="updateSettings" v-if="enabled===false">
-                <submit-button type="submit" css-class="sui-button-blue" :state="state">
+                <submit-button type="submit" css-class="sui-button-blue activate" :state="state">
                     {{__("Activate")}}
                 </submit-button>
             </form>

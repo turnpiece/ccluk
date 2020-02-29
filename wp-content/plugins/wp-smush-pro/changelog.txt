@@ -6,6 +6,45 @@ Change Log:
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
 
+= 3.6.0 =
+
+- New: CDN support for images in REST API responses
+- New: Media library filter to show uncompressed images
+- New: Native lazy loading support
+- Enhance: Image resize detection functionality
+- Enhance: Allow excluding images from lazy loading with data-skip-lazy attribute
+- Enhance: Improve restore backup UI
+- Enhance: Bulk smush UI
+- Fix: NextGEN Gallery integration
+- Fix: Error detecting language error on Settings page
+- Fix: "Choose directory" button disabled state after first click
+- Fix: Some notices not being dismissible
+- Fix: Image restore
+
+= 3.5.1 =
+
+- Fix: Browser console errors on pages without Backbone js scripts
+- Fix: Lazy load compatibility with Beaver Builder
+- Fix: Lazy load breaking videos
+
+= 3.5.0 =
+
+- New: Add custom post types to include/exclude filters in the lazy load module
+- New: CDN support for source in the picture element
+- New: Lazy loading for WebP images
+- New: Lazy loading support for picture element
+- Enhance: Page parsing performance
+- Enhance: Media library UI
+- Enhance: CDN compatibility with empty srcset and sizes image attributes
+- Enhance: CDN support for background images
+- Enhance: Lazy load compatibility with Envira Gallery plugin
+- Enhance: Plugins page links
+- Fix: CDN not detecting background images surrounded by HTML entities
+- Fix: CDN not replacing srcset in some cases
+- Fix: Lazy load Gravatars
+- Fix: WPBakery Page Builder integration
+- Fix: Typos in the lazy load module
+
 = 3.4.2 =
 
 - Enhance: Security
@@ -712,4 +751,4 @@ Fix: Compatibility issues with latest WP Offload Media (WP Offload S3) update
 
 
 
-87274-1579293170-au
+87274-1582990934-au

@@ -24,7 +24,13 @@ class Prevent_PHP_Service extends Rule_Service implements IRule_Service {
 			Utils::instance()->getDefUploadDir();
 			$url     = WP_Helper::getUploadUrl();
 			$url     = $url . '/wp-defender/index.php';
-			$headers = $this->headRequest( $url, 'Prevent PHP Execution' );
+			$headers = $this->headRequest( $url, 'Prevent PHP Execution', strtotime( '+1 day' ) );
+
+			if ( is_wp_error( $headers ) ) {
+				Utils::instance()->log( sprintf( 'Self ping error: %s', $headers->get_error_message() ), 'tweaks' );
+
+				return false;
+			}
 
 			if ( 200 == $headers['response_code'] ) {
 				WP_Helper::getArrayCache()->set( 'Prevent_PHP_Service', false );

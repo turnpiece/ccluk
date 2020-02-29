@@ -17,7 +17,7 @@
                         <i class="sui-icon-chevron-down" aria-hidden="true"></i>
                     </button>
                     <submit-button v-else type="button" :state="state"
-                                   css-class="sui-button-ghost float-r" @click="restore">
+                            css-class="sui-button-ghost float-r restore" @click="restore">
                         <span class="sui-loading-text">
                         <i class="sui-icon-undo" aria-hidden="true"></i>{{__("Restore")}}
                         </span>
@@ -511,7 +511,7 @@
                     </div>
                     <div class="sui-actions-right">
                         <form v-on:submit.prevent="process('enforce')" method="post"
-                              class="hardener-frm rule-process hardener-frm-process-xml-rpc">
+                              class="hardener-frm apply rule-process hardener-frm-process-xml-rpc">
                             <submit-button :state="state" css-class="sui-button-blue" type="submit">
                                 <span class="sui-loading-text">{{__( "Enforce" ) }}</span>
                                 <i class="sui-icon-loader sui-loading" aria-hidden="true"></i>

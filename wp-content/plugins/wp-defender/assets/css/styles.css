@@ -12793,6 +12793,9 @@ This is used to give admin notices that are loaded outside of the .wrap but insi
     top: 0;
     left: 0;
   }
+  .security-tweaks .sui-summary.sui-rebranded {
+    background-size: 200px auto;
+  }
 }
 .security-tweaks .sui-accordion-item .sui-accordion-item-body .sui-box .sui-box-body strong {
   color: #333;
@@ -12873,6 +12876,9 @@ This is used to give admin notices that are loaded outside of the .wrap but insi
     top: 0;
     left: 0;
   }
+  .file-scanning .sui-summary.sui-rebranded {
+    background-size: 200px auto;
+  }
 }
 .file-scanning .sui-table tbody tr td {
   word-break: break-all;
@@ -12889,6 +12895,14 @@ This is used to give admin notices that are loaded outside of the .wrap but insi
 .file-scanning .sui-box-body.scanning-free img.sui-upsell-image {
   height: 215px;
   width: auto !important;
+}
+.file-scanning code ins {
+  background-color: #97f295;
+  text-decoration: none;
+}
+.file-scanning code del {
+  background-color: #fdd;
+  text-decoration: none;
 }
 .file-scanning code[class*=language-],
 .file-scanning pre[class*=language-] {
@@ -13110,6 +13124,37 @@ This is used to give admin notices that are loaded outside of the .wrap but insi
 .iplockout .locked-ips-dialog .sui-box-selector {
   overflow: visible;
 }
+.iplockout .geo-ip-block .sui-notice-info.sui-notice-global {
+  margin-bottom: 15px;
+}
+.iplockout .geo-ip-block .sui-notice-info.sui-notice-global p:before {
+  content: "W";
+}
+.iplockout .geo-ip-block .download-instruction {
+  margin-bottom: 20px;
+}
+.iplockout .geo-ip-block .sui-form-field {
+  margin-bottom: 10px;
+}
+.iplockout .geo-ip-block .sui-form-field > div {
+  background-color: #FAFAFA;
+  border-radius: 4px;
+  border: 1px solid #DDDDDD;
+}
+.iplockout .geo-ip-block .sui-form-field > div .sui-field-prefix {
+  margin-left: 10px;
+  margin-right: 0;
+}
+.iplockout .geo-ip-block .sui-form-field > div input, .iplockout .geo-ip-block .sui-form-field > div input:focus, .iplockout .geo-ip-block .sui-form-field > div input:hover {
+  border: none;
+  background: none;
+}
+.iplockout .geo-ip-block .sui-form-field > div input {
+  padding-top: 0;
+  padding-bottom: 0;
+  height: 30px;
+  font-size: 12px;
+}
 
 @media (min-width: 783px) {
   .auditing .sui-summary:not(.sui-unbranded) {
@@ -13120,6 +13165,9 @@ This is used to give admin notices that are loaded outside of the .wrap but insi
   }
   .auditing .sui-summary:not(.sui-unbranded) .sui-summary-image-space {
     display: block;
+  }
+  .auditing .sui-summary.sui-rebranded {
+    background-size: 200px auto;
   }
 }
 .auditing .sui-pagination-filter .sui-form-field .sui-checkbox span {
@@ -13323,4 +13371,4 @@ hr.sui-flushed {
 }
 
 
-/* 87274-1579293150-au */
+/* 87274-1582990884-au */

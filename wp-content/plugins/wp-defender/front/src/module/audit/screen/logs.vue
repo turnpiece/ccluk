@@ -134,7 +134,7 @@
 					<div class="sui-box">
 						<div class="sui-box-body">
 							<strong>{{__("Description")}}</strong>
-							<p v-text="xss(item.msg)"></p>
+							<p v-text="item.msg"></p>
 							<div class="sui-row">
 								<div class="sui-col">
 									<strong class="block">{{__("Context")}}</strong>
@@ -328,7 +328,15 @@
 				return moment().subtract(30, 'days').format()
 			},
 			get_export_url: function () {
-				return ajaxurl + '?action=' + this.endpoints.exportAsCvs + '&_wpnonce=' + this.nonces.exportAsCvs;
+				let url = ajaxurl + '?action=' + this.endpoints.exportAsCvs + '&_wpnonce=' + this.nonces.exportAsCvs;
+				url += '&date_from=' + this.filter.date_from;
+				url += '&date_to=' + this.filter.date_to;
+				this.filter.events.forEach(function (value) {
+					url += '&event_type[]=' + value;
+				})
+				url += '&term=' + this.filter.username;
+				url += '&ip=' + this.filter.ip_address
+				return url;
 			}
 		},
 		watch: {
@@ -347,6 +355,8 @@
 			let date_from = urlParams.get('date_from') !== null ? urlParams.get('date_from') : moment().subtract(7, 'day').format('MM/DD/YYYY')
 			let date_to = urlParams.get('date_to') !== null ? urlParams.get('date_to') : moment().format('MM/DD/YYYY');
 			this.filter.date_range = date_from + ' - ' + date_to;
+			this.filter.date_from = date_from;
+			this.filter.date_to = date_to;
 			let self = this;
 			this.fetch_data(function () {
 				//the default range is 7 days, so we can use the first logs for summary count

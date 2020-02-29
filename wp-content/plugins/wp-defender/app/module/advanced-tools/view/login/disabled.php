@@ -1,12 +1,20 @@
 <h2><?php _e( "Security", wp_defender()->domain ) ?></h2>
-<table class="form-table">
+<table class="form-table" id="defender-security">
     <tbody>
     <tr class="user-sessions-wrap hide-if-no-js">
         <th><?php _e( "Two Factor Authentication", wp_defender()->domain ) ?></th>
         <td aria-live="assertive">
 			<?php
 			$settings = \WP_Defender\Module\Advanced_Tools\Model\Auth_Settings::instance();
-			if ( $settings->force_auth ):
+			$force_auth_for_curr_user = false;
+			$user = wp_get_current_user();
+			if ( $user->ID && isset( $settings->force_auth_roles ) && ! empty( $settings->force_auth_roles ) ) {
+				$curr_user_roles = (array) $user->roles;
+				if ( ! empty( array_intersect( $curr_user_roles, $settings->force_auth_roles ) ) ) {
+					$force_auth_for_curr_user = true;
+				}
+			}
+			if ( $force_auth_for_curr_user && $settings->force_auth ):
 				?>
                 <div class="def-warning">
                     <i class="dashicons dashicons-warning" aria-hidden="true"></i>
@@ -16,7 +24,6 @@
                 </div>
 			<?php endif; ?>
 			<?php
-			$user  = wp_get_current_user();
 			$email = '';
 			if ( is_object( $user ) ) {
 				$email = $user->user_email;
@@ -72,8 +79,6 @@
     </tr>
     </tbody>
 </table>
-<script type="text/javascript"
-        src="<?php echo wp_defender()->getPluginUrl() . 'app/module/advanced-tools/js/qrcode.min.js' ?>"></script>
 <script type="text/javascript">
     jQuery(function ($) {
         $('#def2qr').hide();
@@ -141,7 +146,7 @@
         });
     })
 </script>
-<?php if ( $settings->force_auth ): ?>
+<?php if ( $force_auth_for_curr_user && $settings->force_auth ): ?>
     <script type="text/javascript">
         jQuery(function ($) {
             $('html, body').animate({scrollTop: $("#show2AuthActivator").offset().top}, 1000);

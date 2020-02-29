@@ -42,6 +42,7 @@
 				errors: [],
 			};
 
+			this.resetModalWidth();
 			this.renderTemplate();
 
 			// Show the modal.
@@ -64,6 +65,15 @@
 		},
 
 		/**
+		 * Reset modal width.
+		 * @since 3.6.0
+		 */
+		resetModalWidth() {
+			this.modal.style.maxWidth = '460px';
+			this.modal.querySelector( '.sui-box' ).style.maxWidth = '460px';
+		},
+
+		/**
 		 * Catch "Finish setup wizard" button click.
 		 */
 		bindSubmit() {
@@ -73,7 +83,7 @@
 			if ( confirmButton ) {
 				confirmButton.addEventListener( 'click', function( e ) {
 					e.preventDefault();
-					self.modal.querySelector( '.sui-box' ).style.maxWidth = '460px';
+					self.resetModalWidth();
 
 					self.settings = { slide: 'progress' };
 					self.errors = [];
@@ -195,6 +205,7 @@
 
 				self.renderTemplate();
 				if ( 0 < this.errors.length ) {
+					this.modal.style.maxWidth = '660px';
 					this.modal.querySelector( '.sui-box' ).style.maxWidth = '660px';
 				}
 			}

@@ -721,6 +721,23 @@ function apbct_forms__search__testSpam( $search ){
 	return $search;
 }
 
+function apbct_search_add_noindex() {
+
+    global $apbct;
+
+    if(
+        ! is_search() || // If it is search results
+        $apbct->settings['search_test'] == 0 ||
+        $apbct->settings['protect_logged_in'] != 1 && is_user_logged_in() // Skip processing for logged in users.
+    ){
+        return ;
+    }
+
+    echo '<!-- meta by Cleantalk AntiSpam Protection plugin -->' . "\n";
+    echo '<meta name="robots" content="noindex,nofollow" />' . "\n";
+
+}
+
 /**
  * Test woocommerce checkout form for spam
  *
@@ -1475,7 +1492,7 @@ function apbct_js_test($field_name = 'ct_checkjs', $data = null) {
 		    $apbct->settings['use_static_js_key'] == 1 ||
 		    ( $apbct->settings['use_static_js_key'] == - 1 &&
 		      ( apbct_is_cache_plugins_exists() ||
-		        ( apbct_is_post() && $apbct->data['cache_detected'] == 1 )
+		        ( apbct_is_post() && isset($apbct->data['cache_detected']) && $apbct->data['cache_detected'] == 1 )
 		      )
 		    )
 	    ){
@@ -1949,6 +1966,11 @@ function apbct_registration__Wordpress__changeMailNotification($wp_new_user_noti
  *
  */
 function apbct_registration__UltimateMembers__check( $args ){
+
+    if ( isset( UM()->form()->errors ) ) {
+        $sender_info['previous_form_validation'] = true;
+        $sender_info['validation_notice'] = json_encode( UM()->form()->errors );
+    }
 
 	global $apbct, $cleantalk_executed;
 
@@ -3037,6 +3059,49 @@ function apbct_form__elementor_pro__testSpam() {
 
 }
 
+// INEVIO theme integration
+function apbct_form__inevio__testSpam() {
+
+    global $apbct, $cleantalk_executed;
+
+    $theme = wp_get_theme();
+    if(
+        stripos( $theme->get( 'Name' ), 'INEVIO' ) === false ||
+        $apbct->settings['contact_forms_test'] == 0 ||
+        ($apbct->settings['protect_logged_in'] != 1 && is_user_logged_in()) || // Skip processing for logged in users.
+        apbct_exclusions_check__url()
+    ) {
+        return false;
+    }
+    $form_data = array();
+    parse_str($_POST['data'], $form_data);
+
+    $name    = isset($form_data['name']) ?  $form_data['name'] : '';
+    $email   = isset($form_data['email']) ?  $form_data['email'] : '';
+    $message = isset($form_data['message']) ?  $form_data['message'] : '';
+
+    $post_info['comment_type'] = 'contact_form_wordpress_inevio_theme';
+
+    $cleantalk_executed = true;
+    $base_call_result = apbct_base_call(
+        array(
+            'message'         => $message,
+            'sender_email'    => $email,
+            'sender_nickname' => $name,
+            'post_info'       => $post_info,
+        )
+    );
+
+    $ct_result = $base_call_result['ct_result'];
+
+    if ( $ct_result->allow == 0 ) {
+        die(json_encode(array('apbct' => array('blocked' => true, 'comment' => $ct_result->comment,))));
+    }
+
+    return true;
+
+}
+
 /**
  * General test for any contact form
  */
@@ -3081,6 +3146,7 @@ function ct_contact_form_validate() {
 		(isset($_POST['wc_reset_password'], $_POST['_wpnonce'], $_POST['_wp_http_referer'])) || // WooCommerce recovery password form
 		((isset($_POST['woocommerce-login-nonce']) || isset($_POST['_wpnonce'])) && isset($_POST['login'], $_POST['password'], $_POST['_wp_http_referer'])) || // WooCommerce login form
 		(isset($_POST['wc-api']) && strtolower($_POST['wc-api']) == 'wc_gateway_systempay') || // Woo Systempay payment plugin
+        apbct_is_in_uri( 'wc-api=WC_Gateway_Realex_Redirect') || // Woo Realex payment Gateway plugin
         (isset($_POST['_wpcf7'], $_POST['_wpcf7_version'], $_POST['_wpcf7_locale'])) || //CF7 fix)
 		(isset($_POST['hash'], $_POST['device_unique_id'], $_POST['device_name'])) ||//Mobile Assistant Connector fix
 		isset($_POST['gform_submit']) || //Gravity form
@@ -3110,7 +3176,12 @@ function ct_contact_form_validate() {
         (isset($_POST['action']) && $_POST['action'] == 'wilcity_reset_password') || // Exception for reset password form. From Analysis uid=430898
         (isset($_POST['action']) && $_POST['action'] == 'wilcity_login') || // Exception for login form. From Analysis uid=430898
         (isset($_POST['qcfsubmit'])) || //Exception for submit quick forms - duplicates with qcfvalidate
-        apbct_is_in_uri('tin-canny-learndash-reporting/src/h5p-xapi/process-xapi-statement.php?v=asd') //Skip Tin Canny plugin
+        apbct_is_in_uri('tin-canny-learndash-reporting/src/h5p-xapi/process-xapi-statement.php?v=asd') || //Skip Tin Canny plugin
+        ( isset( $_POST['na'], $_POST['ts'], $_POST['nhr'] ) && !apbct_is_in_uri( '?na=s' ) ) ||  // The Newsletter Plugin double requests fix. Ticket #14772
+        (isset($_POST['spl_action']) && $_POST['spl_action'] == 'register') || //Skip interal action with empty params
+        (isset($_POST['action']) && $_POST['action'] == 'bwfan_insert_abandoned_cart' && apbct_is_in_uri( 'my-account/edit-address' )) || //Skip edit account
+        apbct_is_in_uri('login-1') || //Skip login form
+        apbct_is_in_uri('recuperacao-de-senha-2') //Skip form reset password
 		) {
         return null;
     }
@@ -3294,7 +3365,10 @@ function ct_contact_form_validate_postdata() {
 		(isset($_GET['wc-ajax']) && $_GET['wc-ajax'] == 'sa_wc_buy_now_get_ajax_buy_now_button') || //BuyNow add to cart
         apbct_is_in_uri('/wp-json/wpstatistics/v1/hit') || //WPStatistics
 		(isset($_POST['ihcaction']) && $_POST['ihcaction'] == 'login') || //Skip login form
-		(isset($_POST['action']) && $_POST['action'] == 'infinite_scroll') //Scroll
+		(isset($_POST['action']) && $_POST['action'] == 'infinite_scroll') || //Scroll
+		isset($_POST['gform_submit']) || //Skip gravity checking because of direct integration
+		(isset($_POST['lrm_action']) && $_POST['lrm_action'] == 'login') || //Skip login form
+        apbct_is_in_uri( 'xmlrpc.php?for=jetpack' )
         ) {
         return null;
     }
@@ -3413,6 +3487,9 @@ function ct_enqueue_scripts_public($hook){
 
 	global $current_user, $apbct;
 
+	if (apbct_exclusions_check__url()) {
+		return;
+	}
 	if($apbct->settings['registrations_test'] || $apbct->settings['comments_test'] || $apbct->settings['contact_forms_test'] || $apbct->settings['general_contact_forms_test'] || $apbct->settings['wc_checkout_test'] || $apbct->settings['check_external'] || $apbct->settings['check_internal'] || $apbct->settings['bp_private_messages'] || $apbct->settings['general_postdata_test']){
 
 		// Differnt JS params

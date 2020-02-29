@@ -118,14 +118,19 @@ class Prevent_Php extends Rule {
 		$ret = $service->process();
 		if ( ! is_wp_error( $ret ) ) {
 			$settings = Settings::instance();
-			if ( in_array( $server, array( 'apache', 'litespeed' ) ) ) {
-				$settings->saveExcludedFilePaths( $service->getExcludedFilePaths() );
-				$settings->saveNewHtConfig( $service->getNewHtConfig() );
+			$url      = WP_Helper::getUploadUrl();
+			$url      = $url . '/wp-defender/index.php';
+			$this->getService()->clearHeadRequest( $url );
+			$ret = $this->getService()->check();
+			if ( $ret == false ) {
+				wp_send_json_error( [
+					'message' => __( "The rules can't apply to your host. This can because of your host doesn't allow for overriding, or you apply for the wrong webserver", wp_defender()->domain )
+				] );
 			}
+			$settings->saveExcludedFilePaths( $service->getExcludedFilePaths() );
+			$settings->saveNewHtConfig( $service->getNewHtConfig() );
 			$settings->setActiveServer( $server );
 			$settings->addToResolved( self::$slug );
-			$url = WP_Helper::getUploadUrl();
-			$url = $url . '/wp-defender/index.php';
 			$this->getService()->clearHeadRequest( $url );
 		} else {
 			wp_send_json_error( array(

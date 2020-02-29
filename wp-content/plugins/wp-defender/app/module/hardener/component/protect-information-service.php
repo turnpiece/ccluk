@@ -19,8 +19,14 @@ class Protect_Information_Service extends Rule_Service implements IRule_Service 
 	public function check() {
 		$cache = WP_Helper::getArrayCache()->get( 'Protect_Information_Service', null );
 		if ( $cache === null ) {
-			$url     = wp_defender()->getPluginUrl() . 'changelog.txt';
-			$headers = $this->headRequest( $url, 'Protect Information' );
+			$url     = wp_defender()->getPluginUrl() . 'languages/wpdef-default.pot';
+			$headers = $this->headRequest( $url, 'Protect Information', strtotime( '+1 day' ) );
+
+			if ( is_wp_error( $headers ) ) {
+				Utils::instance()->log( sprintf( 'Self ping error: %s', $headers->get_error_message() ), 'tweaks' );
+
+				return false;
+			}
 
 			if ( 200 == $headers['response_code'] ) {
 				WP_Helper::getArrayCache()->set( 'Protect_Information_Service', false );
@@ -67,8 +73,13 @@ class Protect_Information_Service extends Rule_Service implements IRule_Service 
 			$htConfig = array_merge( $htConfig, $rules );
 			file_put_contents( $htPath, implode( PHP_EOL, $htConfig ), LOCK_EX );
 		}
-		$url = wp_defender()->getPluginUrl() . 'changelog.txt';
+		$url = wp_defender()->getPluginUrl() . 'languages/wpdef-default.pot';
 		$this->clearHeadRequest( $url );
+		if ( ! $this->check() ) {
+			wp_send_json_error( [
+				'message' => __( "The rules can't apply to your host. This can because of your host doesn't allow for overriding, or you apply for the wrong webserver", wp_defender()->domain )
+			] );
+		}
 
 		return true;
 	}
@@ -95,7 +106,7 @@ class Protect_Information_Service extends Rule_Service implements IRule_Service 
 			}
 			$htConfig = trim( $htConfig );
 			file_put_contents( $htPath, $htConfig, LOCK_EX );
-			$url = wp_defender()->getPluginUrl() . 'changelog.txt';
+			$url = wp_defender()->getPluginUrl() . 'languages/wpdef-default.pot';
 			$this->clearHeadRequest( $url );
 
 			return true;
@@ -129,7 +140,7 @@ location = /wp-config.php {
 }
 
 # Deny access to revealing or potentially dangerous files in the /wp-content/ directory (including sub-folders)
-location ~* ^$wp_content/.*\.(txt|md|exe|sh|bak|inc|pot|po|mo|log|sql)$ {
+location ~* ^$wp_content/.*\.(md|exe|sh|bak|inc|pot|po|mo|log|sql)$ {
   deny all;
 }
 ";
@@ -147,7 +158,7 @@ location ~* ^$wp_content/.*\.(txt|md|exe|sh|bak|inc|pot|po|mo|log|sql)$ {
 		if ( floatval( $version ) >= 2.4 ) {
 			$rules = array(
 				PHP_EOL . '## WP Defender - Prevent information disclosure ##' . PHP_EOL,
-				'<FilesMatch "\.(txt|md|exe|sh|bak|inc|pot|po|mo|log|sql)$">' . PHP_EOL .
+				'<FilesMatch "\.(md|exe|sh|bak|inc|pot|po|mo|log|sql)$">' . PHP_EOL .
 				'Require all denied' . PHP_EOL .
 				'</FilesMatch>' . PHP_EOL,
 				'<Files robots.txt>' . PHP_EOL .
@@ -161,7 +172,7 @@ location ~* ^$wp_content/.*\.(txt|md|exe|sh|bak|inc|pot|po|mo|log|sql)$ {
 		} else {
 			$rules = array(
 				PHP_EOL . '## WP Defender - Prevent information disclosure ##' . PHP_EOL,
-				'<FilesMatch "\.(txt|md|exe|sh|bak|inc|pot|po|mo|log|sql)$">' . PHP_EOL .
+				'<FilesMatch "\.(md|exe|sh|bak|inc|pot|po|mo|log|sql)$">' . PHP_EOL .
 				'Order allow,deny' . PHP_EOL .
 				'Deny from all' . PHP_EOL .
 				'</FilesMatch>' . PHP_EOL,

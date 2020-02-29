@@ -10,6 +10,7 @@ use WP_Defender\Behavior\Utils;
 use WP_Defender\Module\Audit\Behavior\Audit;
 use WP_Defender\Module\Audit\Component\Audit_API;
 use WP_Defender\Module\Audit\Component\Audit_Table;
+use WP_Defender\Module\Audit\Model\Events;
 use WP_Defender\Module\Audit\Model\Settings;
 
 class Main extends \WP_Defender\Controller {
@@ -53,9 +54,29 @@ class Main extends \WP_Defender\Controller {
 		if ( Settings::instance()->enabled == 1 ) {
 			$this->addAction( 'wp_loaded', 'setupEvents', 1 );
 			$this->addAction( 'shutdown', 'triggerEventSubmit' );
+			$this->addFilter( 'cron_schedules', 'registerSchedule' );
+			if ( ! wp_next_scheduled( 'auditSyncWithCloud' ) ) {
+				wp_schedule_event( time(), 'daily', 'auditSyncWithCloud' );
+			}
+			$this->addAction( 'auditSyncWithCloud', 'syncWithCloud' );
 		}
 		//report cron
 		$this->addAction( 'auditReportCron', 'auditReportCron' );
+	}
+
+	public function syncWithCloud() {
+		Events::instance()->sendToApi();
+		Events::instance()->fetch();
+		Events::instance()->checksumData();
+	}
+
+	public function registerSchedule( $schedules ) {
+		$schedules['audit_triweekly'] = [
+			'interval' => DAY_IN_SECONDS * 3,
+			'display'  => __( "Triweekly" )
+		];
+
+		return $schedules;
 	}
 
 	public function sort_email_data( $a, $b ) {
@@ -72,7 +93,11 @@ class Main extends \WP_Defender\Controller {
 	public function triggerEventSubmit() {
 		$data = WP_Helper::getArrayCache()->get( 'events_queue', array() );
 		if ( is_array( $data ) && count( $data ) ) {
-			Audit_API::onCloud( $data );
+			if ( Events::instance()->hasData() ) {
+				Events::instance()->append( $data );
+			} else {
+				Audit_API::onCloud( $data );
+			}
 		}
 	}
 
@@ -126,17 +151,20 @@ class Main extends \WP_Defender\Controller {
 
 		$date_from = date( 'Y-m-d', $date_from );
 		$date_to   = date( 'Y-m-d', $date_to );
-
-		$logs = Audit_API::pullLogs( array(
+		$filters   = [
 			'date_from' => $date_from . ' 0:00:00',
 			'date_to'   => $date_to . ' 23:59:59',
-			//no paging
 			'paged'     => - 1,
-			//'no_group_item' => 1
-		) );
-		if ( is_wp_error( $logs ) ) {
-			return;
+		];
+		if ( Events::instance()->hasData() ) {
+			$logs = Events::instance()->getData( $filters );
+		} else {
+			$logs = Audit_API::pullLogs( $filters );
+			if ( is_wp_error( $logs ) ) {
+				return;
+			}
 		}
+
 		$data       = $logs['data'];
 		$email_data = array();
 		foreach ( $data as $row => $val ) {

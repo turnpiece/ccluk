@@ -10,7 +10,7 @@
                         <i class="sui-icon-chevron-down" aria-hidden="true"></i>
                     </button>
                     <submit-button v-else type="button" :state="state"
-                            css-class="sui-button-ghost float-r" @click="restore">
+                            css-class="sui-button-ghost float-r restore" @click="restore">
                         <span class="sui-loading-text">
                         <i class="sui-icon-undo" aria-hidden="true"></i>{{__("Restore")}}
                         </span>
@@ -24,7 +24,7 @@
                 <div class="sui-box-body">
                     <strong>{{__("Overview")}}</strong>
                     <p>
-                        {{__("One of most common methods of gaining access to websites is through brute force attacks on login areas using default/common usernames and passwords. If you're using the default ‘admin' username, you're giving away an important piece of the puzzle hackers need to hijack your website.")}}
+                        {{__("One of the most common methods of gaining access to websites is through brute force attacks on login areas using default/common usernames and passwords. If you're using the default ‘admin' username, you're giving away an important piece of the puzzle hackers need to hijack your website.")}}
                     </p>
                     <div v-if="status==='fixed'">
                         <strong>
@@ -43,7 +43,7 @@
                             </p>
                         </div>
                         <p>
-                            {{ __( "Using the default admin username is widely considered bad practice and opens you up to the easitest form of entry to your website. We recommend avoiding generic usernames like admin, administrator, and anything that matches your hostname (mattebutter) as these are the usernames hackers and bots will attempt first." ) }}
+                            {{ __( "Using the default admin username is widely considered bad practice and opens you up to the easiest form of entry to your website. We recommend avoiding generic usernames like admin, administrator, and anything that matches your hostname (mattebutter) as these are the usernames hackers and bots will attempt first." ) }}
                         </p>
                         <strong>
                             {{ __( "How to fix" ) }}
@@ -63,7 +63,7 @@
                     <div class="sui-actions-left">
                         <form method="post" v-on:submit.prevent="ignore">
                             <submit-button :state="state" type="submit" name="ignore"
-                                    value="ignore" class="sui-button sui-button-ghost">
+                                    value="ignore" class="sui-button sui-button-ghost ignore">
                                 <span class="sui-loading-text"><i class="sui-icon-eye-hide" aria-hidden="true"></i> {{ __( "Ignore")}}</span>
                                 <i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
                             </submit-button>
@@ -72,7 +72,7 @@
                     <div class="sui-actions-right">
                         <form v-on:submit.prevent="process" method="post"
                               class="hardener-frm rule-process hardener-frm-process-xml-rpc">
-                            <submit-button :state="state" css-class="sui-button-blue" type="submit">
+                            <submit-button :state="state" css-class="sui-button-blue apply" type="submit">
                                 <span class="sui-loading-text">{{__( "Update Username" ) }}</span>
                                 <i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
                             </submit-button>

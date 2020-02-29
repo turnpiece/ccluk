@@ -4,7 +4,24 @@ Tested up to: 5.3
 
 Change Log:
 
-2.2.4 - 2019-16-01
+2.2.6 - 2020-17-02
+----------------------------------------------------------------------
+- Improvement: Frequency of Security Tweak notifications reduced to 7 days
+- Fix: GeoIP now compatible with new MaxMind policy
+- Fix: Mask login URL now allow URL with an extension
+- Fix: Lockout notification email now displays correct time unit
+- Fix: Get started screen appears only where required
+- Fix: Manage your email preferences & unsubscribe email link now works
+- Fix: Strict Transport Security Header now shows subdomain option on the root domain
+- Fix: On login lockout, Defender doesn't block IP permanently
+- Fix: Mask login won't block admin links from email
+- Other minor enhancements and fixes
+
+2.2.5 - 2020-27-01
+----------------------------------------------------------------------
+- Fix: Displaying Defender pages after activating the plugin.
+
+2.2.4 - 2020-16-01
 ----------------------------------------------------------------------
 - Fix: Security tweaks self ping cause performance issues.
 
@@ -325,4 +342,4 @@ Fixed: Scanning was sometimes slow or getting stuck
 - First release
 
 
-87274-1579293150-au
+87274-1582990884-au

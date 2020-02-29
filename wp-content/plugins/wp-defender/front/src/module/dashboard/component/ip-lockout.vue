@@ -1,5 +1,5 @@
 <template>
-	<div class="sui-box">
+	<div id="ip-lockout" class="sui-box">
 		<div class="sui-box-header">
 			<h3 class="sui-box-title">
 				<i class="sui-icon-lock" aria-hidden="true"></i>
@@ -11,7 +11,7 @@
 				{{__("Protect to your login area and have Defender automatically lockout any suspicious behaviour.")}}
 			</p>
 			<form method="post" @submit.prevent="updateSettings" v-if="enabled===false">
-				<submit-button type="submit" css-class="sui-button-blue" :state="state">
+				<submit-button type="submit" css-class="sui-button-blue activate" :state="state">
 					{{__("Activate")}}
 				</submit-button>
 			</form>

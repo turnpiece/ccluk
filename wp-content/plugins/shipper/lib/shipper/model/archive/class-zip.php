@@ -38,12 +38,15 @@ class Shipper_Model_Archive_Zip extends Shipper_Model_Archive {
 		$this->_zip = new ZipArchive;
 		if ( true !== $this->_zip->open( $this->get_path(), ZipArchive::CREATE ) ) {
 			throw new Shipper_Exception(
-				sprintf( __( 'Shipper could not open target zip file: %s', 'shipper' ), $archive )
+				sprintf( __( 'Shipper could not open target zip file: %s', 'shipper' ), $this->get_path() )
 			);
 		}
 	}
 
 	public function close() {
+		if ( ! is_object( $this->_zip ) ) {
+			return;
+		}
 		$this->_zip->close();
 		$this->_added_files = 0;
 		$this->_zip         = false;
@@ -53,7 +56,7 @@ class Shipper_Model_Archive_Zip extends Shipper_Model_Archive {
 		$this->_zip = new ZipArchive();
 		if ( ! $this->_zip->open( $this->get_path() ) ) {
 			throw new Shipper_Exception(
-				sprintf( __( 'Shipper could not open target zip file: %s', 'shipper' ), $archive )
+				sprintf( __( 'Shipper could not open target zip file: %s', 'shipper' ), $this->get_path() )
 			);
 		}
 		$this->_zip->extractTo( $destination );
@@ -64,6 +67,7 @@ class Shipper_Model_Archive_Zip extends Shipper_Model_Archive {
 		if ( ! is_object( $this->_zip ) ) {
 			$this->open();
 		}
+
 		return $this->_zip->count();
 	}
 }

@@ -58,21 +58,19 @@ class Main_Free extends \WP_Defender\Controller {
 
 	public function scripts() {
 		if ( $this->isInPage() ) {
-			if ( $this->isInPage() ) {
-				wp_enqueue_style( 'wpmudev-sui' );
-				wp_enqueue_style( 'defender' );
+			wp_enqueue_style( 'wpmudev-sui' );
+			wp_enqueue_style( 'defender' );
 
-				wp_register_script( 'defender-audit', wp_defender()->getPluginUrl() . 'assets/app/audit.js', array(
-					'vue',
-					'defender',
-					'wp-i18n'
-				), wp_defender()->version, true );
-				Utils::instance()->createTranslationJson( 'defender-audit' );
-				wp_set_script_translations( 'defender-audit', 'wpdef', wp_defender()->getPluginPath() . 'languages' );
-				wp_localize_script( 'defender-audit', 'auditData', [] );
-				wp_enqueue_script( 'defender-audit' );
-				wp_enqueue_script( 'wpmudev-sui' );
-			}
+			wp_register_script( 'defender-audit', wp_defender()->getPluginUrl() . 'assets/app/audit.js', array(
+				'vue',
+				'defender',
+				'wp-i18n'
+			), wp_defender()->version, true );
+			Utils::instance()->createTranslationJson( 'defender-audit' );
+			wp_set_script_translations( 'defender-audit', 'wpdef', wp_defender()->getPluginPath() . 'languages' );
+			wp_localize_script( 'defender-audit', 'auditData', [] );
+			wp_enqueue_script( 'defender-audit' );
+			wp_enqueue_script( 'wpmudev-sui' );
 		}
 	}
 

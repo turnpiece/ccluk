@@ -143,6 +143,9 @@ $cleantalk_hooked_actions[] = 'fue_wc_set_cart_email';  // Don't check email via
 /* Follow-Up Emails */
 $cleantalk_hooked_actions[] = 'fue_wc_set_cart_email';  // Don't check email via this plugin
 
+/* The Fluent Form have the direct integration */
+$cleantalk_hooked_actions[] = 'fluentform_submit';
+
 function ct_validate_email_ajaxlogin($email=null, $is_ajax=true){
 	
 	$email = is_null( $email ) ? $email : $_POST['email'];
@@ -286,7 +289,13 @@ function ct_ajax_hook($message_obj = false, $additional = false)
 	    'edit-comment', // Edit comments by admin ??? that shouldn't happen
 	    'formcraft3_save_form_progress', // FormCraft – Contact Form Builder for WordPress. Save progress.
 	    'wpdmpp_save_settings', // PayPal save settings.
-        'give_process_donation', // GiveWP will be checked by feedback_general_contact_form
+	    'iwj_login', // Fix for unknown plugin for user #133315
+	    'custom_user_login', // Fix for unknown plugin for user #466875
+	    'wordfence_ls_authenticate', //Fix for wordfence auth
+	    'frm_strp_amount', //Admin stripe form
+	    'wouCheckOnlineUsers', //Skip updraft admin checking users
+	    'et_fb_get_shortcode_from_fb_object', //Skip generate shortcode
+	    'pp_lf_process_login', //Skip login form
     );
     
     // Skip test if
@@ -309,9 +318,13 @@ function ct_ajax_hook($message_obj = false, $additional = false)
     {
         return false;
     }
- 
-	//General post_info for all ajax calls
-	$post_info = array('comment_type' => 'feedback_ajax');
+
+    //General post_info for all ajax calls
+	$post_info = array(
+	    'comment_type' => 'feedback_ajax',
+        'post_url' => apbct_get_server_variable( 'HTTP_REFERER' ), // Page URL must be an previous page
+    );
+
 	$checkjs = apbct_js_test('ct_checkjs', $_COOKIE);
 		
     if(isset($_POST['user_login']))
@@ -554,8 +567,8 @@ function ct_ajax_hook($message_obj = false, $additional = false)
 				'display' => "Oops, got a few problems here",
 				'errors' => array(
 					0 => array(
-						error => 'error',
-						name => 'name'
+						'error' => 'error',
+						'name' => 'name'
 					),
 				),
 				'success' => 'false',
@@ -637,12 +650,11 @@ function ct_ajax_hook($message_obj = false, $additional = false)
 		{
 			header('Content-Type: application/json');
 			$result = Array(
-				'no' => "",
-				'result' => "failure",
+				'no' => isset($_POST['cforms_id']) ? $_POST['cforms_id'] : '',
+				'result' => 'failure',
 				'html' =>$ct_result->comment,
 				'hide' => false,
 				'redirection' => null
-
 			);
 			print json_encode($result);
 			die();

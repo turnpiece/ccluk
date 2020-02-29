@@ -17,8 +17,8 @@ use RecursiveIteratorIterator;
 use Smush\Core\Core;
 use Smush\Core\Installer;
 use Smush\Core\Settings;
-use Smush\WP_Smush;
 use WP_Error;
+use WP_Smush;
 
 if ( ! defined( 'WPINC' ) ) {
 	die;
@@ -359,7 +359,6 @@ class Dir extends Abstract_Module {
 		) $charset_collate;";
 
 		// Include the upgrade library to initialize a table.
-		/* @noinspection PhpIncludeInspection */
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 		dbDelta( $sql );
 
@@ -396,7 +395,7 @@ class Dir extends Abstract_Module {
 	public function get_image_errors() {
 		global $wpdb;
 
-		$results = $wpdb->get_results(
+		return $wpdb->get_results(
 			"SELECT id, path, error
 					FROM {$wpdb->prefix}smush_dir_images
 					WHERE error IS NOT NULL
@@ -404,8 +403,6 @@ class Dir extends Abstract_Module {
 					LIMIT 20",
 			ARRAY_A
 		); // Db call ok; no-cache ok.
-
-		return $results;
 	}
 
 	/**
@@ -418,13 +415,11 @@ class Dir extends Abstract_Module {
 	public function get_image_errors_count() {
 		global $wpdb;
 
-		$count = $wpdb->get_var(
+		return (int) $wpdb->get_var(
 			"SELECT COUNT(id)
 					FROM {$wpdb->prefix}smush_dir_images
 					WHERE error IS NOT NULL AND last_scan = ( SELECT MAX(last_scan) FROM {$wpdb->prefix}smush_dir_images )"
 		); // Db call ok.
-
-		return (int) $count;
 	}
 
 	/**
@@ -1063,7 +1058,7 @@ class Dir extends Abstract_Module {
 		$percent     = $size_before > 0 ? ( $savings / $size_before ) * 100 : 0;
 
 		// Store the stats in array.
-		$result = array(
+		return array(
 			'total_count'   => $total_attachments,
 			'smushed_count' => $smushed,
 			'savings'       => size_format( $savings ),
@@ -1073,8 +1068,6 @@ class Dir extends Abstract_Module {
 			/* translators: %s: total number of images */
 			'tooltip_text'  => ! empty( $total_images ) ? sprintf( __( "You've smushed %d images in total.", 'wp-smushit' ), $total_images ) : '',
 		);
-
-		return $result;
 	}
 
 	/**

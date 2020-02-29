@@ -100,7 +100,7 @@ class Rule_Service extends Component {
 			$cache = $cached[ $url ];
 			if ( $cache['ttl'] > time() ) {
 				//we'll use the cache
-				Utils::instance()->log( sprintf( 'Header for %s return from cached', $url ) );
+				//Utils::instance()->log( sprintf( 'Header for %s return from cached', $url ) );
 
 				return $cache['data'];
 			}

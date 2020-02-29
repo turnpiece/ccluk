@@ -8,7 +8,7 @@
 
 namespace Smush\Core;
 
-use Smush\WP_Smush;
+use WP_Smush;
 
 if ( ! defined( 'WPINC' ) ) {
 	die;
@@ -69,6 +69,7 @@ class Settings {
 		'keep_data'         => true,
 		'lazy_load'         => false,
 		'background_images' => true,
+		'rest_api_support'  => false, // CDN option.
 	);
 
 	/**
@@ -84,15 +85,7 @@ class Settings {
 	 *
 	 * @var array $basic_features
 	 */
-	public static $basic_features = array(
-		'bulk',
-		'auto',
-		'strip_exif',
-		'resize',
-		'gutenberg',
-		'js_builder',
-		'lazy_load',
-	);
+	public static $basic_features = array( 'bulk', 'auto', 'strip_exif', 'resize', 'gutenberg', 'js_builder', 'lazy_load' );
 
 	/**
 	 * List of fields in bulk smush form.
@@ -119,7 +112,7 @@ class Settings {
 	 *
 	 * @var array
 	 */
-	private $cdn_fields = array( 'background_images', 'auto_resize', 'webp' );
+	private $cdn_fields = array( 'background_images', 'auto_resize', 'webp', 'rest_api_support' );
 
 	/**
 	 * List of fields in Settings form.

@@ -4,10 +4,10 @@ Tags: spam, antispam, woocommerce, comments, firewall
 Requires at least: 3.0
 Tested up to: 5.3
 Requires PHP: 5.4
-Stable tag: 5.132.3
+Stable tag: 5.134
 License: GPLv2
 
-Spam protection, antispam, firewall, premium plugin. No spam comments & users, no spam contact form & WooCommerce anti-spam.
+Spam protection, anti-spam, firewall, premium plugin. No spam comments & users, no spam contact form & WooCommerce anti-spam.
 
 == Description ==
 
@@ -432,26 +432,12 @@ or
 	define('CLEANTALK_AJAX_USE_FOOTER_HEADER', false); //false - don't use wp_footer() and wp_header() for including AJAX script, true - use it
 
 = Can I add exclusions for some pages of my site? =
-Yes, you can. Add this string in your wp-config.php file before defining database constants:
-
-	$cleantalk_url_exclusions = array('url1', 'url2', 'url3');
-
-Now, all pages containing strings 'url1', 'url2', or 'url3' will be excluded from anti-spam checking. Remember, that this option will not be applied in registration and comment checking - they are always protected from spam. This is similar to regular expression /.*url1.*/ or wildcard like *url1*.
-
-For example: If you need to except these URLs:
-example.com/some/thing
-example.com/some/one
-example.com/some/body
-You should type this in wp-config.php:
-
-	$cleantalk_url_exclusions = array('some');
+Yes, you can. There is a special setting in plugin settings.
+You could use this guide to learn more: https://cleantalk.org/help/exclusion-from-anti-spam-checking#wordpress
 
 = Can I not send my personal data to CleanTalk servers? =
-Yes, you can exclude your data. Add this string in your wp-config.php file before defining database constants:
-
-	$cleantalk_key_exclusions = Array('key1', 'key2', 'key3'); 
-
-Now all fields in your submissions with the keys named 'key1', 'key2' or 'key3' will be excluded from spam checking.
+Yes, you can exclude your data. There is a special setting in plugin settings.
+You could use this guide to learn more: https://cleantalk.org/help/exclusion-from-anti-spam-checking#WordPress_field_exclusions
 
 = How to test Spam FireWall? =
 Use special IP 10.10.10.10 in URL to test Spam FireWall. For example,
@@ -579,6 +565,34 @@ If your website has forms that send data to external sources, you can enable opt
 10. Website's options.
 
 == Changelog ==
+
+= 5.134 February 27 2020 =
+  * Fix: SpamFireWall update large data issues.
+  * Fix: Auto-update for some banner notifications.
+  * Fix: QuickContactForm protection.
+  * Minor fixes.
+  * Spam protection improved.
+
+= 5.133.2 February 10 2020 =
+  * Fix: Add no-index meta tag to search page only.
+  * Fix: Namespace issues.
+
+= 5.133.1 February 03 2020 =
+  * Fix: PHP 7.4 issues.
+  * Fix: Woocommerce options moved to a separate block.
+  * Fix: CSS/HTML issues on settings page.
+  * Minor fixes.
+  * Spam protection improved.
+
+= 5.133 January 20 2020 =
+  * Upd: Rebuilding users/comments scan
+  * Fix: UltimateMember - form validation checking fixed.
+  * Fix: Exclusion for login form.
+  * Fix: Disable scripts on excluded pages.
+  * Fix: PHP 7.4 compability.
+  * Minor fixes.
+  * Spam protection improved.
+
 = 5.132.3 December 19 2019 =
   * Fix: The disable comments functionality.
 

@@ -152,7 +152,6 @@ class Settings extends \Hammer\WP\Settings {
 			}
 		}
 		$this->active_server = Utils::instance()->determineServer();
-		$this->active_server = Utils::instance()->determineServer();
 		parent::__construct( $id, $is_multi );
 		$this->notification = ! ! $this->notification;
 		if ( ! is_array( $this->receipts ) ) {
@@ -500,5 +499,14 @@ class Settings extends \Hammer\WP\Settings {
 		}
 
 		return $labels;
+	}
+
+	public function resolve( $rules ) {
+		if ( $rules == true ) {
+			$rules = $this->getDefinedRules( true );
+		}
+		foreach ( $rules as $key => $rule ) {
+			$rule->process();
+		}
 	}
 }

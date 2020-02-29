@@ -1,5 +1,5 @@
 <template>
-	<div v-if="model.enabled===false" class="sui-box">
+	<div id="2factor" v-if="model.enabled===false" class="sui-box">
 		<div class="sui-box">
 			<div class="sui-box-header">
 				<h3 class="sui-box-title">
@@ -14,8 +14,7 @@
 						{{__("Beef up your website’s security with two-factor authentication. Add an extra step in the login process so that users are required to enter a password and an app-generated passcode using their phone – the best protection against brute force attacks.")}}
 					</p>
 					<form method="post" @submit.prevent="toggle(true)">
-						<submit-button type="submit" :state="state" css-class="sui-button-blue">
-							<i class="sui-icon-save" aria-hidden="true"></i>
+						<submit-button type="submit" :state="state" css-class="sui-button-blue activate">
 							{{__("Activate")}}
 						</submit-button>
 					</form>
@@ -275,7 +274,7 @@
 			</div>
 			<div class="sui-box-footer">
 				<div class="sui-actions-right">
-					<submit-button css-class="sui-button-blue" type="submit" :state="state">
+					<submit-button css-class="sui-button-blue save-changes" type="submit" :state="state">
 						<i class="sui-icon-save" aria-hidden="true"></i>
 						{{__("Save Changes")}}
 					</submit-button>
@@ -401,7 +400,7 @@
 						that.$nextTick(() => {
 							that.rebindSUI();
 							that.bindUploader();
-							this.state.waiting_save = false;
+							that.state.waiting_save = false;
 						})
 					}
 				})
@@ -479,9 +478,10 @@
 			}
 		},
 		mounted: function () {
+			let that = this;
 			this.$nextTick(() => {
-				this.bindUploader();
-			})
+				that.bindUploader();
+			});
 			this.state.origin_state = this.model.user_roles.length > 0;
 		},
 	}

@@ -10,12 +10,11 @@ use WP_Defender\Behavior\Utils;
 
 class Reporting extends Behavior {
 	public function scheduleReportTime( $settings ) {
-		if ( $settings->notification ) {
+		if ( $settings->report ) {
 			$cronTime = Utils::instance()->reportCronTimestamp( $settings->time, 'scanReportCron' );
 			wp_schedule_event( $cronTime, 'daily', 'scanReportCron' );
 		} else {
 			wp_clear_scheduled_hook( 'processScanCron' );
 		}
-
 	}
 }

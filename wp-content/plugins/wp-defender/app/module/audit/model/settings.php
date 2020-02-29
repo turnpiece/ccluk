@@ -115,8 +115,8 @@ class Settings extends \Hammer\WP\Settings {
 				$report_time = sprintf( __( "at %s", wp_defender()->domain ),
 					strftime( '%I:%M %p', strtotime( $this->time ) ) );
 			} else {
-				$report_time = sprintf( __( "%s at %s", wp_defender()->domain ),
-					ucfirst( $this->day ),
+				$report_time = sprintf( __( "%s on %s at %s", wp_defender()->domain ),
+					ucfirst( Utils::instance()->frequencyToText( $this->frequency ) ), ucfirst( $this->day ),
 					strftime( '%I:%M %p', strtotime( $this->time ) ) );
 
 			}

@@ -28,27 +28,28 @@ class DB_Cache extends Cache {
 		}
 		$expire_key = $this->buildKey( $key . '_expire' );
 		if ( $this->isActivatedSingle() ) {
-			update_option( $key, $value, false );
-			update_option( $expire_key, strtotime( '+' . $duration . ' seconds' ), false );
+			$ret1 = update_option( $key, $value, false );
+			$ret2 = update_option( $expire_key, strtotime( '+' . $duration . ' seconds' ), false );
 		} else {
-			update_site_option( $key, $value );
-			update_site_option( $expire_key, strtotime( '+' . $duration . ' seconds' ) );
+			$ret1 = update_site_option( $key, $value );
+			$ret2 = update_site_option( $expire_key, strtotime( '+' . $duration . ' seconds' ) );
 		}
 
-		return true;
+		return $ret1 && $ret2;
 	}
 
 	/**
 	 * @param $key
 	 * @param $value
+	 *
+	 * @return bool
 	 */
 	protected function updateValue( $key, $value ) {
 		if ( $this->isActivatedSingle() ) {
-			update_option( $key, $value, false );
+			return update_option( $key, $value, false );
 		} else {
-			update_site_option( $key, $value );
+			return update_site_option( $key, $value );
 		}
-
 	}
 
 	/**

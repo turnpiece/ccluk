@@ -1,5 +1,5 @@
 <template>
-	<div class="sui-box" v-if="model.enabled===false">
+	<div id="mask-login" class="sui-box" v-if="model.enabled===false">
 		<div class="sui-box-header">
 			<h3 class="sui-box-title">
 				{{__("Mask Login Area")}}
@@ -13,8 +13,9 @@
 					{{__("Change the location of WordPress's default login area, making it harder for automated bots to find and also more convenient for your users.")}}
 				</p>
 				<form method="post">
-					<submit-button type="button" @click="toggle(true)" css-class="sui-button-blue" :state="state">
-						{{__("Active")}}
+					<submit-button type="button" @click="toggle(true)" css-class="sui-button-blue activate"
+					               :state="state">
+						{{__("Activate")}}
 					</submit-button>
 				</form>
 			</div>
@@ -38,7 +39,7 @@
                         </span>
 					</p>
 				</div>
-				<div class="sui-notice sui-notice-warning" v-if="model.mask_url.length === 0">
+				<div class="sui-notice sui-notice-warning" v-if="state.original_state === false">
 					<p>
 						{{__("Masking is currently inactive. Choose your URL and save your settings to finish setup.")}}
 					</p>
@@ -124,7 +125,7 @@
 				</div>
 			</div>
 			<div class="sui-box-footer">
-				<submit-button type="submit" :state="state" css-class="sui-button-blue">
+				<submit-button type="submit" :state="state" css-class="sui-button-blue save-changes">
 					<i class="sui-icon-save" aria-hidden="true"></i>
 					{{__("Save Changes")}}
 				</submit-button>
@@ -148,7 +149,7 @@
 				endpoints: advanced_tools.endpoints,
 				state: {
 					on_saving: false,
-					waiting_save: false
+					original_state: false
 				}
 			}
 		},
@@ -157,12 +158,16 @@
 				value = this.convertToSlug(value);
 				this.model.mask_url = value;
 				this.misc.new_login_url = this.misc.home_url + value;
+				this.state.waiting_save = true;
 			},
 			'model.redirect_traffic_url': function (value) {
 				value = this.convertToSlug(value);
 				this.model.redirect_traffic_url = value;
 				this.misc.login_redirect_url = this.misc.home_url + value;
 			},
+		},
+		mounted: function () {
+			this.state.original_state = this.model.mask_url.length > 0
 		},
 		methods: {
 			toggle: function (value) {
@@ -180,19 +185,22 @@
 			},
 			updateSettings: function () {
 				let data = this.model;
+				let that = this;
 				//unset email subject as we dont use it on this function
 				this.httpPostRequest('updateSettings', {
 					data: JSON.stringify({
 						settings: data,
 						module: 'mask-login'
 					})
+				}, function () {
+					that.state.original_state = that.model.mask_url.length > 0
 				});
 			},
 			convertToSlug: function (text) {
 				return text
 					.toLowerCase()
 					//.replace(/ /g, '-')
-					.replace(/[^\w-/]+/g, '')
+					.replace(/[^\w-/.]+/g, '')
 					;
 			}
 		},

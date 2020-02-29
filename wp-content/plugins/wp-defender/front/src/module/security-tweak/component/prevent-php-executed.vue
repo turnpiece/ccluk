@@ -151,7 +151,7 @@
 								<div class="sui-tab-content sui-tab-boxed" :class="{'active':current_server==='iss7'}"
 								     data-tab-content="pi_iis7-box">
 									<p v-html="iisText"></p>
-									<form>
+									<form method="post" v-on:submit.prevent="process">
 										<button class="sui-button sui-button-blue" type="submit">
 											{{__("Add web.config file")}}
 										</button>
@@ -245,14 +245,14 @@
 		},
 		computed: {
 			issUrl: function () {
-				return 'For IIS servers, ' + '<a href="https://technet.microsoft.com/en-us/library/cc725855(v=ws.10).aspx">visit Microsoft TechNet</a>';
+				return 'For IIS servers, ' + '<a target="_blank" href="https://technet.microsoft.com/en-us/library/cc725855(v=ws.10).aspx">visit Microsoft TechNet</a>';
 			},
 			supportUrl: function () {
 				return "Still having trouble? " + "<a target='_blank' href='https://premium.wpmudev.org/forums/forum/support#question'>Open a support ticket</a>";
 			},
 			iisText: function () {
 				let string = vsprintf(this.__("We will place %s file into the uploads folder to lock down the files and folders inside."), "<strong>web.config</strong>");
-				string += vsprintf(this.__("For more information, please <a href='%s'>visit Microsoft TechNet</a>"), "https://technet.microsoft.com/en-us/library/cc725855(v=ws.10).aspx");
+				string += vsprintf(this.__("For more information, please <a target='_blank' href='%s'>visit Microsoft TechNet</a>"), "https://technet.microsoft.com/en-us/library/cc725855(v=ws.10).aspx");
 				return string;
 			}
 		}

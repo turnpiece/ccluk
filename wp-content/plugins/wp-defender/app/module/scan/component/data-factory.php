@@ -31,7 +31,7 @@ class Data_Factory {
 			$scan = [
 				'status'      => $model->status,
 				'status_text' => $model->statusText,
-				'percent'     => Scan_Api::getScanProgress( true )
+				'percent'     => ( new Scanning() )->getScanProgress()
 			];
 		} else {
 			$issuesItems = $lastScan->getItemsAsJson( 0, Result_Item::STATUS_ISSUE, null );

@@ -1,5 +1,5 @@
 <template>
-    <div class="sui-accordion-item" :class="cssClass">
+    <div :id="slug" class="sui-accordion-item" :class="cssClass">
         <div class="sui-accordion-item-header">
             <div class="sui-accordion-item-title">
                 <i aria-hidden="true" :class="titleIcon"></i>
@@ -10,7 +10,7 @@
                         <i class="sui-icon-chevron-down" aria-hidden="true"></i>
                     </button>
                     <submit-button v-else type="button" :state="state"
-                            css-class="sui-button-ghost float-r" @click="restore">
+                            css-class="sui-button-ghost float-r restore" @click="restore">
                         <span class="sui-loading-text">
                         <i class="sui-icon-undo" aria-hidden="true"></i>{{__("Restore")}}
                         </span>
@@ -65,7 +65,7 @@
                     <div class="sui-actions-left">
                         <form method="post" v-on:submit.prevent="ignore">
                             <submit-button :state="state" type="submit" name="ignore"
-                                    value="ignore" class="sui-button sui-button-ghost">
+                                    value="ignore" class="sui-button sui-button-ghost ignore">
                                 <span class="sui-loading-text"><i class="sui-icon-eye-hide" aria-hidden="true"></i> {{ __( "Ignore")}}</span>
                                 <i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
                             </submit-button>
@@ -73,7 +73,7 @@
                     </div>
                     <div class="sui-actions-right">
                         <form v-on:submit.prevent="process" method="post">
-                            <submit-button :state="state" :disabled="!state.canSubmit" css-class="sui-button-blue" type="submit">
+                            <submit-button :state="state" :disabled="!state.canSubmit" css-class="sui-button-blue apply" type="submit">
                                 <span class="sui-loading-text">{{__( "Update" ) }}</span>
                                 <i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
                             </submit-button>
@@ -82,7 +82,7 @@
                 </div>
                 <div v-else class="sui-box-footer">
                     <form v-on:submit.prevent="revert" method="post">
-                        <submit-button :state="state" css-class="sui-button" type="submit">
+                        <submit-button :state="state" css-class="sui-button revert" type="submit">
                             <span class="sui-loading-text">{{__( "Revert" ) }}</span>
                             <i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
                         </submit-button>

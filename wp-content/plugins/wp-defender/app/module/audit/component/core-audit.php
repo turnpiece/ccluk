@@ -237,15 +237,15 @@ class Core_Audit extends Event_Abstract {
 			return false;
 		}
 
-		if ( isset( $upgrader->skin->api->preview_url ) ) {
+		if ( $options['type'] == 'theme' ) {
 			return array(
-				sprintf( esc_html__( "%s installed theme: %s, version %s", wp_defender()->domain ), Utils::instance()->getDisplayName( get_current_user_id() ), $name, $version ),
+				sprintf( esc_html__( "%s installed theme: %s", wp_defender()->domain ), Utils::instance()->getDisplayName( get_current_user_id() ), $name ),
 				self::CONTEXT_THEME,
 				self::ACTION_INSTALLED
 			);
 		} else {
 			return array(
-				sprintf( esc_html__( "%s installed plugin: %s, version %s", wp_defender()->domain ), Utils::instance()->getDisplayName( get_current_user_id() ), $name, $version ),
+				sprintf( esc_html__( "%s installed plugin: %s", wp_defender()->domain ), Utils::instance()->getDisplayName( get_current_user_id() ), $name ),
 				self::CONTEXT_PLUGIN,
 				self::ACTION_INSTALLED
 			);

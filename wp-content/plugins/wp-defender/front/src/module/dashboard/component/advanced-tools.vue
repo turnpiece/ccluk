@@ -24,7 +24,7 @@
                     <form method="post" v-if="two_factor.enabled === false" class="margin-top-10 margin-bottom-10"
                           @submit.prevent="updateSettings('auth')">
                         <submit-button type="submit" css-class="sui-button-blue" :state="state">
-                            {{__("Active")}}
+                            {{__("Activate")}}
                         </submit-button>
                     </form>
                     <div class="sui-notice sui-notice-warning margin-bottom-30 margin-top-10"
@@ -56,7 +56,7 @@
                     <form method="post" class="margin-top-10 margin-bottom-30"
                           @submit.prevent="updateSettings('mask-login')" v-if="mask_login.enabled===false">
                         <submit-button type="submit" css-class="sui-button-blue" :state="state">
-                            {{__("Active")}}
+                            {{__("Activate")}}
                         </submit-button>
                     </form>
                     <div class="sui-notice sui-notice-warning margin-bottom-30 margin-top-10"

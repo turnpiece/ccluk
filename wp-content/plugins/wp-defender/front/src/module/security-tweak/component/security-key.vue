@@ -131,7 +131,7 @@
 					} else {
 						Defender.showNotification('success', response.data.message);
 						setTimeout(function () {
-							location.reload();
+							location.href = response.data.url
 						}, 3000)
 					}
 				});

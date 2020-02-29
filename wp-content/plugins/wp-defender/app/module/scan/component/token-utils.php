@@ -22,7 +22,7 @@ class Token_Utils extends Component {
 	 *
 	 * @return bool
 	 */
-	public static function findPrevious( $token, $from, $end = null ) {
+	public static function findPrevious( $token, $from, $end = 0 ) {
 		for ( $i = $from; $i >= $end; $i -- ) {
 			if ( isset( self::$tokens[ $i ] ) && self::$tokens[ $i ]['code'] == $token ) {
 				return $i;

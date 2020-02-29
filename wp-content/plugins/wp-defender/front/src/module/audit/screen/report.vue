@@ -72,7 +72,7 @@
 			</div>
 			<div class="sui-box-footer">
 				<div class="sui-actions-right">
-					<submit-button type="submit" css-class="sui-button-blue" :state="state">
+					<submit-button type="submit" css-class="sui-button-blue save-changes" :state="state">
 						<i class="sui-icon-save" aria-hidden="true"></i>
 						{{__("Save Changes")}}
 					</submit-button>

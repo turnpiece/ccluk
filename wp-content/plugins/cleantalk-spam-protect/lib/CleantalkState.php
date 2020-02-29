@@ -83,7 +83,7 @@ class CleantalkState
         'set_cookies'=>            1, // Disable cookies generatation to be compatible with Varnish.
         'set_cookies__sessions'=>  0, // Use alt sessions for cookies.
         'ssl_on' =>                0, // Secure connection to servers 
-		'use_buitin_http_api' =>   0, // Using Wordpress HTTP built in API
+		'use_buitin_http_api' =>   1, // Using Wordpress HTTP built in API
 		
 		// Exclusions
 		'exclusions__urls'               => '',
@@ -499,7 +499,7 @@ class CleantalkState
 	public function __set($name, $value)
     {
         $this->storage[$name] = $value;
-		if(isset($this->storage['data']) && array_key_exists($name, $this->storage['data'])){
+		if(isset($this->storage['data'][$name])){
 			$this->storage['data'][$name] = $value;
 		}
     }
@@ -515,11 +515,11 @@ class CleantalkState
 	public function __get($name)
     {
 		// First check in storage
-        if (array_key_exists($name, $this->storage)){
+        if (isset($this->storage[$name])){
             return $this->storage[$name];
 	        
 		// Then in data
-        }elseif(array_key_exists($name, $this->storage['data'])){
+        }elseif(isset($this->storage['data'][$name])){
 			$this->$name = $this->storage['data'][$name];
 			return $this->storage['data'][$name];
 			
@@ -540,5 +540,21 @@ class CleantalkState
 	public function __unset($name)
 	{
 		unset($this->storage[$name]);
+	}
+	
+	public function server(){
+		return \Cleantalk\Common\Server::getInstance();
+	}
+	public function cookie(){
+		return \Cleantalk\Common\Cookie::getInstance();
+	}
+	public function request(){
+		return \Cleantalk\Common\Request::getInstance();
+	}
+	public function post(){
+		return \Cleantalk\Common\Post::getInstance();
+	}
+	public function get(){
+		return \Cleantalk\Common\Get::getInstance();
 	}
 }

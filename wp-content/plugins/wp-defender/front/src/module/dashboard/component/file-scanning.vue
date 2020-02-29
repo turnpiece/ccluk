@@ -12,7 +12,7 @@
         </div>
         <div class="sui-box-body" :class="{'no-padding-bottom':scan!==null && scan.status==='finish'}">
             <p>
-                {{__("Scan your website for file changes, vulnerabilities and injected code and get and get notified about anything suspicious.")}}
+                {{__("Scan your website for file changes, vulnerabilities and injected code and get notified about anything suspicious.")}}
             </p>
 
             <div v-if="scan===null">

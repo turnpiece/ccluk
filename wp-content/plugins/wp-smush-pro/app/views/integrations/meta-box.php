@@ -54,9 +54,9 @@ if ( ! defined( 'WPINC' ) ) {
 
 <?php if ( ! $is_pro ) : ?>
 	<div class="sui-box-settings-row sui-upsell-row">
-		<img class="sui-image sui-upsell-image sui-upsell-image-smush integrations-upsell-image"
-             src="<?php echo esc_url( WP_SMUSH_URL . 'app/assets/images/smush-graphic-integrations-upsell.png' ); ?>"
-             srcset="<?php echo esc_url( WP_SMUSH_URL . 'app/assets/images/smush-graphic-integrations-upsell@2x.png' ); ?> 2x">
+		<img class="sui-image sui-upsell-image sui-upsell-image-smush integrations-upsell-image" alt=""
+			src="<?php echo esc_url( WP_SMUSH_URL . 'app/assets/images/smush-graphic-integrations-upsell.png' ); ?>"
+			srcset="<?php echo esc_url( WP_SMUSH_URL . 'app/assets/images/smush-graphic-integrations-upsell@2x.png' ); ?> 2x">
 		<div class="sui-notice sui-notice-purple smush-upsell-notice">
 			<p>
 				<?php

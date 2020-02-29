@@ -102,7 +102,7 @@ class Notfound_Listener extends Controller {
 
 		if ( $attempts > $settings->detect_404_threshold ) {
 			//lock it
-			$this->lock( $model, $uri );
+			$this->lock( $model, 'normal', $uri );
 			$this->log( $uri, Log_Model::LOCKOUT_404, sprintf( __( "Lockout occurred:  Too many 404 requests for %s" ), $uri ) );
 		}
 	}
@@ -113,7 +113,10 @@ class Notfound_Listener extends Controller {
 	 * @param $uri
 	 */
 	private function lock( IP_Model $model, $scenario = 'normal', $uri = '' ) {
-		$settings         = Settings::instance();
+		$settings = Settings::instance();
+		if ( $settings->detect_404_lockout_ban == true ) {
+			$scenario = 'blacklist';
+		}
 		$model->status    = IP_Model::STATUS_BLOCKED;
 		$model->lock_time = time();
 		if ( $scenario == 'blacklist' ) {
@@ -153,10 +156,14 @@ class Notfound_Listener extends Controller {
 	 */
 	private function email( IP_Model $model, $uri ) {
 		$settings = Settings::instance();
+		Utils::instance()->log( 'Check to send 404 notification' );
 		if ( ! Login_Protection_Api::maybeSendNotification( '404', $model, $settings ) ) {
 			return;
 		}
+		Utils::instance()->log( 'Allow to send 404 notification' );
 		$isBlacklisted = $settings->isBlacklist( $model->ip );
+		Utils::instance()->log( sprintf( 'Recipients %d', count( $settings->receipts ) ) );
+		Utils::instance()->log( $uri );
 		foreach ( $settings->receipts as $item ) {
 			$content        = $this->renderPartial( $isBlacklisted == true ? 'emails/404-ban' : 'emails/404-lockout', array(
 				'admin' => $item['first_name'],
@@ -169,7 +176,8 @@ class Notfound_Listener extends Controller {
 				'From: Defender <' . $no_reply_email . '>',
 				'Content-Type: text/html; charset=UTF-8'
 			);
-			wp_mail( $item['email'], sprintf( __( "404 lockout alert for %s", wp_defender()->domain ), network_site_url() ), $content, $headers );
+			$ret            = wp_mail( $item['email'], sprintf( __( "404 lockout alert for %s", wp_defender()->domain ), network_site_url() ), $content, $headers );
+			Utils::instance()->log( sprintf( 'Mail send result :%s', var_export( $ret, true ) ) );
 		}
 	}
 }

@@ -5,7 +5,7 @@
                 {{__("Ignored")}}
             </h3>
             <div class="sui-actions-left">
-                <span v-if="summary.ignored_count > 0" class="sui-tag">{{summary.ignored_count}}</span>
+                <span v-if="summary.ignore_count > 0" class="sui-tag">{{summary.ignore_count}}</span>
             </div>
         </div>
         <div class="sui-box-body">

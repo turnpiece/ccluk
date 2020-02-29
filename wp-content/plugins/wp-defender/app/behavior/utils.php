@@ -1493,7 +1493,10 @@ class Utils extends Behavior {
 		$log_path = self::getDefUploadDir();
 		$log_name = hash( 'sha256', network_home_url() . $group . SECURE_AUTH_SALT );
 		$log_path = $log_path . '/' . $log_name;
-		$text     = file( $log_path );
+		if ( ! file_exists( $log_path ) ) {
+			return;
+		}
+		$text = file( $log_path );
 
 		return implode( array_reverse( $text ), PHP_EOL );
 	}

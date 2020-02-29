@@ -71,7 +71,7 @@ class Rest extends Controller {
 			$url = WP_Helper::getUploadUrl();
 			$url = $url . '/wp-defender/index.php';
 		} else {
-			$url = wp_defender()->getPluginUrl() . 'changelog.txt';
+			$url = wp_defender()->getPluginUrl() . 'languages/wpdef-default.pot';
 		}
 		$model = Settings::instance();
 		$cache = $model->getDValues( 'head_requests' );

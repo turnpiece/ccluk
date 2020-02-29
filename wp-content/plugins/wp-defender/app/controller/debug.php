@@ -59,11 +59,12 @@ class Debug extends Controller {
 	}
 
 	public function actionIndex() {
-		$cache = Container::instance()->get( 'cache' );
+		$cache    = Container::instance()->get( 'cache' );
+		$scanning = new Scanning();
 		$this->render( 'debug', [
 			'core'     => $cache->get( Scan_Api::CACHE_CORE, [] ),
 			'content'  => $cache->get( Scan_Api::CACHE_CONTENT, [] ),
-			'progress' => Scan_Api::getScanProgress( true )
+			'progress' => $scanning->getScanProgress()
 		] );
 	}
 

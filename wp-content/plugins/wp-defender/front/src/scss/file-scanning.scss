@@ -47,8 +47,10 @@
 		}
 	  }
 	}
+	.sui-summary.sui-rebranded {
+	  background-size: 200px auto;
+	}
   }
-
   .sui-table {
 	tbody {
 	  tr {
@@ -75,6 +77,18 @@
 	img.sui-upsell-image {
 	  height: 215px;
 	  width: auto !important;
+	}
+  }
+
+  code {
+	ins {
+	  background-color: #97f295;
+	  text-decoration: none;
+	}
+
+	del {
+	  background-color: #fdd;
+	  text-decoration: none;
 	}
   }
 

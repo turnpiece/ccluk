@@ -27,12 +27,12 @@ if ( ! defined( 'WPINC' ) ) {
 
 	<p>
 		<?php
-		esc_html_e( 'Take a load off your server by delivering your images from our blazingly-fast CDN.', 'wp-smushit' );
+		esc_html_e( 'Multiply the speed and savings! Upload huge images and the Smush CDN will perfectly resize the files, safely convert to a Next-Gen format (WebP), and delivers them directly to your visitors from our blazing-fast multi-location globe servers.', 'wp-smushit' );
 		?>
 	</p>
 
 	<div class="sui-notice sui-notice-<?php echo esc_attr( $class ); ?> smush-notice-sm">
-		<p><?php echo $status_msg; ?></p>
+		<p><?php echo wp_kses_post( $status_msg ); ?></p>
 		<?php if ( 'error' === $class && 'overcap' === $status ) : ?>
 			<div class="sui-notice-buttons">
 				<a href="https://premium.wpmudev.org/hub/account/" target="_blank" class="sui-button">

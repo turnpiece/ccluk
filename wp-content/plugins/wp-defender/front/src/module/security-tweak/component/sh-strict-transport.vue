@@ -1,5 +1,5 @@
 <template>
-	<div class="sui-accordion-item" :class="cssClass">
+	<div :id="slug" class="sui-accordion-item" :class="cssClass">
 		<div class="sui-accordion-item-header">
 			<div class="sui-accordion-item-title">
 				<i aria-hidden="true" :class="titleIcon"></i>
@@ -10,7 +10,7 @@
 						<i class="sui-icon-chevron-down" aria-hidden="true"></i>
 					</button>
 					<submit-button v-else type="button" :state="state"
-					               css-class="sui-button-ghost float-r" @click="restore">
+					               css-class="sui-button-ghost float-r restore" @click="restore">
                         <span class="sui-loading-text">
                         <i class="sui-icon-undo" aria-hidden="true"></i>{{__("Restore")}}
                         </span>
@@ -60,18 +60,21 @@
 						<p v-html="hsts_warning_text">
 						</p>
 					</div>
-					<h5>{{__("Subdomains")}}</h5>
-					<p>{{__("If this optional parameter is specified, this rule applies to all of the site's subdomains as well.")}}</p>
-					<label for="include_subdomain" class="sui-checkbox">
-						<input type="checkbox" v-model="include_subdomain" true-value="1" false-value="0"
-						       id="include_subdomain"/>
-						<span aria-hidden="true"></span>
-						<span>{{__("Include Subdomains")}}</span>
-					</label>
+					<div v-if="misc.allow_subdomain === true">
+						<h5>{{__("Subdomains")}}</h5>
+						<p>{{__("If this optional parameter is specified, this rule applies to all of the site's subdomains as well.")}}</p>
+						<label for="include_subdomain" class="sui-checkbox">
+							<input type="checkbox" v-model="include_subdomain" true-value="1" false-value="0"
+							       id="include_subdomain"/>
+							<span aria-hidden="true"></span>
+							<span>{{__("Include Subdomains")}}</span>
+						</label>
+					</div>
 					<h5>{{__("Browser Caching")}}</h5>
 					<p>{{__("Choose when the browser should cache and apply the Strict Transport Security policy for.")}}</p>
 					<label class="sui-label">{{__("HSTS Maximum Age")}}</label>
-					<select class="select-need-update" id="hsts-cache-duration" data-module="sh-strict-transport"
+					<select data-minimum-results-for-search="Infinity" class="sui-select select-need-update"
+					        id="hsts-cache-duration" data-module="sh-strict-transport"
 					        v-model="hsts_cache_duration"
 					        data-key="hsts_cache_duration">
 						<option value="1 hour">{{__("1 hour")}}</option>
@@ -85,7 +88,7 @@
 				<div v-if="status==='fixed'" class="sui-box-footer">
 					<div class="sui-actions-left" v-if="misc.somewhere===false">
 						<form v-on:submit.prevent="revert" method="post">
-							<submit-button :state="state" css-class="sui-button-ghost" type="submit">
+							<submit-button :state="state" css-class="sui-button-ghost revert" type="submit">
 								<span class="sui-loading-text">{{__( "Revert" ) }}</span>
 								<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
 							</submit-button>
@@ -93,7 +96,7 @@
 					</div>
 					<div class="sui-actions-right">
 						<form v-on:submit.prevent="process('update')" method="post"
-						      class="hardener-frm rule-process hardener-frm-process-xml-rpc">
+						      class="hardener-frm rule-process hardener-frm-process-xml-rpc update">
 							<submit-button :state="state" type="submit">
 								<span class="sui-loading-text">{{__( "Update" ) }}</span>
 								<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
@@ -104,7 +107,7 @@
 				<div v-if="status==='issues'" class="sui-box-footer">
 					<div class="sui-actions-left">
 						<form method="post" v-on:submit.prevent="ignore">
-							<submit-button :state="state" type="submit" css-class="sui-button-ghost">
+							<submit-button :state="state" type="submit" css-class="sui-button-ghost ignore">
 								<span class="sui-loading-text"><i class="sui-icon-eye-hide" aria-hidden="true"></i> {{ __( "Ignore")}}</span>
 								<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
 							</submit-button>
@@ -113,7 +116,7 @@
 					<div class="sui-actions-right">
 						<form v-on:submit.prevent="process('enforce')" method="post"
 						      class="hardener-frm rule-process hardener-frm-process-xml-rpc">
-							<submit-button :state="state" css-class="sui-button-blue" type="submit">
+							<submit-button :state="state" css-class="sui-button-blue apply" type="submit">
 								<span class="sui-loading-text">{{__( "Enforce" ) }}</span>
 								<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
 							</submit-button>
@@ -146,6 +149,9 @@
 			this.hsts_preload = this.misc.hsts_preload;
 			this.include_subdomain = this.misc.include_subdomain;
 			this.hsts_cache_duration = this.misc.hsts_cache_duration
+			if (this.misc.allow_subdomain === false) {
+				this.include_subdomain = false;
+			}
 		},
 		mounted: function () {
 			let self = this;
@@ -171,7 +177,7 @@
 						Defender.showNotification('error', response.data.message);
 					} else {
 						Defender.showNotification('success', response.data.message);
-
+						this.rebindSUI();
 					}
 				});
 			}

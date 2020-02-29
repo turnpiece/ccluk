@@ -12,7 +12,8 @@
 					<div class="sui-summary-details">
 						<span class="sui-summary-large" v-text="countTotalIssues"></span>
 						<span class="sui-tooltip sui-tooltip-top-left sui-tooltip-constrained" :data-tooltip="tooltips">
-                            <i aria-hidden="true" class="sui-icon-check-tick sui-success" v-if="this.security_tweaks.count.issues === 0 && this.scan.count === 0">
+                            <i aria-hidden="true" class="sui-icon-check-tick sui-success"
+                               v-if="this.security_tweaks.count.issues === 0 && this.scan.count === 0">
                             </i>
                             <i class="sui-icon-info sui-warning" aria-hidden="true" v-else></i>
                         </span>
@@ -41,7 +42,7 @@
 						</li>
 						<li>
 							<span class="sui-list-label">{{__("Last Lockout")}}</span>
-							<span class="sui-list-detail">{{__("Never")}}</span>
+							<span class="sui-list-detail">{{ ip_lockout.last_lockout }}</span>
 						</li>
 					</ul>
 				</div>
@@ -107,6 +108,9 @@
 				scan: {
 					count: 0,
 					scan: dashboard.scan.scan,
+				},
+				ip_lockout: {
+					last_lockout: dashboard.ip_lockout.summary.lastLockout
 				},
 				nonces: dashboard.scan.nonces,
 				endpoints: dashboard.scan.endpoints,

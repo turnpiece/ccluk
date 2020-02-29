@@ -124,10 +124,16 @@
 					priority: 10,
 				},
 
+				unsmushed: {
+					text: smush_vars.strings.filter_not_processed,
+					props: { stats: 'unsmushed' },
+					priority: 20,
+				},
+
 				excluded: {
 					text: smush_vars.strings.filter_excl,
-					props: { stats: 'null' },
-					priority: 20,
+					props: { stats: 'excluded' },
+					priority: 30,
 				},
 			};
 		},

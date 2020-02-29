@@ -1,5 +1,5 @@
 <template>
-	<div class="sui-accordion-item" :class="cssClass">
+	<div :id="slug" class="sui-accordion-item" :class="cssClass">
 		<div class="sui-accordion-item-header">
 			<div class="sui-accordion-item-title">
 				<i aria-hidden="true" :class="titleIcon"></i>
@@ -10,12 +10,12 @@
 						<i class="sui-icon-chevron-down" aria-hidden="true"></i>
 					</button>
 					<submit-button v-else type="button" :state="state"
-					               css-class="sui-button-ghost float-r" @click="restore">
+                            css-class="sui-button-ghost float-r restore" @click="restore">
                         <span class="sui-loading-text">
                         <i class="sui-icon-undo" aria-hidden="true"></i>{{__("Restore")}}
                         </span>
-						<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
-					</submit-button>
+                        <i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
+                    </submit-button>
 				</div>
 			</div>
 		</div>
@@ -53,7 +53,7 @@
 					</div>
 					<div class="sui-border-frame">
 						<label class="sui-label">{{__("Referrer Information")}}</label>
-						<select id="referrer-policy" v-model="mode">
+						<select class="sui-select" data-minimum-results-for-search="Infinity" id="referrer-policy" v-model="mode">
 							<option value="no-referrer">no-referrer</option>
 							<option value="no-referrer-when-downgrade">no-referrer-when-downgrade</option>
 							<option value="origin">origin</option>
@@ -70,7 +70,7 @@
 					<div class="sui-actions-left">
 						<form v-on:submit.prevent="revert" method="post">
 							<button :class="{'sui-button-onload':state.isSaving===true}"
-							        class="sui-button sui-button-ghost" type="submit">
+							        class="sui-button sui-button-ghost revert" type="submit">
 								<span class="sui-loading-text">{{__( "Revert" ) }}</span>
 								<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
 							</button>
@@ -79,7 +79,7 @@
 					<div class="sui-actions-right">
 						<form v-on:submit.prevent="process('update')" method="post"
 						      class="hardener-frm rule-process hardener-frm-process-xml-rpc">
-							<submit-button :state="state" class="sui-button" type="submit">
+							<submit-button css-class="update" :state="state" class="sui-button" type="submit">
 								<span class="sui-loading-text">{{__( "Update" ) }}</span>
 								<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
 							</submit-button>
@@ -89,7 +89,7 @@
 				<div v-if="status==='issues'" class="sui-box-footer">
 					<div class="sui-actions-left">
 						<form method="post" v-on:submit.prevent="ignore">
-							<submit-button :state="state" type="submit" class="sui-button sui-button-ghost">
+							<submit-button :state="state" type="submit" class="sui-button sui-button-ghost ignore">
 								<span class="sui-loading-text"><i class="sui-icon-eye-hide" aria-hidden="true"></i> {{ __( "Ignore")}}</span>
 								<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
 							</submit-button>
@@ -97,7 +97,7 @@
 					</div>
 					<div class="sui-actions-right">
 						<form v-on:submit.prevent="process('enforce')" method="post"
-						      class="hardener-frm rule-process hardener-frm-process-xml-rpc">
+						      class="hardener-frm rule-process hardener-frm-process-xml-rpc apply">
 							<submit-button :state="state" css-class="sui-button-blue" type="submit">
 								<span class="sui-loading-text">{{__( "Enforce" ) }}</span>
 								<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
@@ -148,6 +148,7 @@
 						Defender.showNotification('error', response.data.message);
 					} else {
 						Defender.showNotification('success', response.data.message);
+						this.rebindSUI();
 					}
 				});
 			},

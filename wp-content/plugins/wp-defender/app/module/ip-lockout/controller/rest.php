@@ -290,8 +290,10 @@ class Rest extends Controller {
 			return;
 		}
 
-		$url = "http://geolite.maxmind.com/download/geoip/database/GeoLite2-Country.tar.gz";
-		$tmp = download_url( $url );
+		$license_key = HTTP_Helper::retrievePost( 'api_key' );
+		$license_key = sanitize_text_field( $license_key );
+		$url         = "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-Country&license_key=$license_key&suffix=tar.gz";
+		$tmp         = download_url( $url );
 		if ( ! is_wp_error( $tmp ) ) {
 			$phar    = new \PharData( $tmp );
 			$defPath = Utils::instance()->getDefUploadDir();
@@ -306,6 +308,10 @@ class Rest extends Controller {
 			wp_send_json_success( array(
 				'message' => __( "Database downloaded", wp_defender()->domain )
 			) );
+		} else {
+			wp_send_json_error( [
+				'message' => $tmp->get_error_message()
+			] );
 		}
 	}
 
@@ -379,6 +385,9 @@ class Rest extends Controller {
 		$behaviors = array(
 			'utils' => '\WP_Defender\Behavior\Utils',
 		);
+		if ( class_exists( 'WP_Defender\Module\IP_Lockout\Behavior\Pro\Reporting' ) ) {
+			$behaviors['report'] = 'WP_Defender\Module\IP_Lockout\Behavior\Pro\Reporting';
+		}
 
 		return $behaviors;
 	}

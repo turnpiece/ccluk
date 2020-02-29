@@ -25,7 +25,7 @@ class File_Helper {
 			$tv->max_filesize = $max_size;
 		}
 		$result = $tv->get_dir_tree();
-		unset( $v );
+		unset( $tv );
 
 		return $result;
 	}

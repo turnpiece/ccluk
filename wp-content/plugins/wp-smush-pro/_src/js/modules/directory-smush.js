@@ -50,18 +50,8 @@ import Scanner from '../smush/directory-scanner';
 				// Hide all the notices.
 				$( 'div.wp-smush-scan-result div.wp-smush-notice' ).hide();
 
-				// If disabled, do not process.
-				if ( $( this ).attr( 'disabled' ) ) {
-					return;
-				}
-
-				// Disable buttons.
-				$( this ).attr( 'disabled', 'disabled' );
-
 				// Remove notice.
 				$( 'div.wp-smush-info' ).remove();
-
-				window.SUI.openModal( 'wp-smush-list-dialog', 'dialog-close-div', undefined, false );
 
 				// Display file tree for directory Smush.
 				self.initFileTree();
@@ -176,6 +166,11 @@ import Scanner from '../smush/directory-scanner';
 					},
 					cache: false,
 				};
+
+			// Object already defined.
+			if ( Object.entries( self.tree ).length > 0 ) {
+				return;
+			}
 
 			self.tree = createTree( '.wp-smush-list-dialog .content', {
 				autoCollapse: true, // Automatically collapse all siblings, when a node is expanded

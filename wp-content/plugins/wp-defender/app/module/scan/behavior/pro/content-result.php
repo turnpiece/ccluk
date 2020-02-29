@@ -15,13 +15,15 @@ class Content_Result extends \Hammer\Base\Behavior {
 		$full_path = $this->getRaw()['file'];
 		$tracer    = [];
 		foreach ( $this->getRaw()['meta'] as $item ) {
-			$tracer[] = [
-				'text'   => $item['text'],
-				'line'   => $item['line'],
-				'offset' => $item['offset'],
-				'column' => $item['length'],
-				'code'   => $this->getCodeBlock( $item )
-			];
+			if ( ! isset( $tracer[ $item['line'] ] ) ) {
+				$tracer[ $item['line'] ] = [
+					'text'   => $item['text'],
+					'line'   => $item['line'],
+					'offset' => $item['offset'],
+					'column' => $item['length'],
+					'code'   => $this->getCodeBlock( $item )
+				];
+			}
 		}
 
 		return [
@@ -45,9 +47,13 @@ class Content_Result extends \Hammer\Base\Behavior {
 		$column = $item['length'];
 		$code   = file( $this->getRaw()['file'] );
 		//we'll get lines +-1
-		$lines[]  = isset( $code[ $line - 1 ] ) ? $code[ $line - 1 ] : null;
-		$lines[]  = $code[ $line ];
-		$lines[]  = isset( $code[ $line - 1 ] ) ? $code[ $line - 1 ] : null;
+		$margin = 3;
+		for ( $j = $line - $margin; $j <= $line + $margin; $j ++ ) {
+			$lines[] = isset( $code[ $j ] ) ? $code[ $j ] : null;
+		}
+//		$lines[]  = isset( $code[ $line - 1 ] ) ? $code[ $line - 1 ] : null;
+//		$lines[]  = $code[ $line ];
+//		$lines[]  = isset( $code[ $line + 1 ] ) ? $code[ $line + 1 ] : null;
 		$lines    = array_filter( $lines );
 		$entities = htmlentities( implode( '', $lines ), ENT_QUOTES . ENT_HTML5, 'UTF-8' );
 		$entities = str_replace( '&lt;mark&gt;', '<mark>', $entities, $count );

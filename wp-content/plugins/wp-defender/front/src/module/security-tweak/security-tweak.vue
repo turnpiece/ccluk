@@ -23,7 +23,9 @@
                             </span>
 						<span class="sui-summary-sub">{{__("Security issues")}}</span>
 					</div>
+					<span aria-hidden="true" class="sui-hidden test-tooltip-content" v-html="tooltipText">
 
+					</span>
 				</div>
 
 				<div class="sui-summary-segment">
@@ -74,7 +76,7 @@
 							      class="sui-tag count-ignored">{{summary.ignore_count}}</span>
 						</li>
 						<li class="sui-vertical-tab" :class="{current:view==='notification'}">
-							<a @click.prevent="view='notification'"
+							<a @click.prevent="view='notification'" data-tab="tweaks_notification"
 							   :href="adminUrl('admin.php?page=wdf-hardener&view=notification')">
 								{{__("Notifications")}}
 							</a>

@@ -5,6 +5,7 @@
  * @since 3.2.0
  * @package WP_Smush
  *
+ * @var array $cpts      Custom post types.
  * @var array $settings  Lazy loading settings.
  */
 
@@ -20,7 +21,7 @@ wp_enqueue_style( 'wp-color-picker' );
 
 <p>
 	<?php
-	esc_html_e( 'This feature defers the loading of below the fold imagery until the page has loaded. This reduces load on your server and speeds up the page load time.', 'wp-smushit' );
+	esc_html_e( 'This feature stops offscreen images from loading until a visitor scrolls to them. Make your page load faster, use less bandwidth and fix the “defer offscreen images” recommendation from a Google PageSpeed test.', 'wp-smushit' );
 	?>
 </p>
 
@@ -70,7 +71,7 @@ wp_enqueue_style( 'wp-color-picker' );
 			</label>
 			<label for="format-iframe" class="sui-checkbox sui-checkbox-stacked">
 				<input type='hidden' value='0' name='format[iframe]' />
-				<input type="checkbox" name="format[iframe]" id="format-iframe" <?php checked( $settings['format']['iframe'] ); ?> />
+				<input type="checkbox" name="format[iframe]" id="format-iframe" <?php checked( ! isset( $settings['format']['iframe'] ) || $settings['format']['iframe'] ); ?> />
 				<span aria-hidden="true"></span>
 				<span><?php esc_html_e( 'iframe', 'wp-smushit' ); ?></span>
 			</label>
@@ -400,6 +401,20 @@ wp_enqueue_style( 'wp-color-picker' );
 							</label>
 						</td>
 					</tr>
+					<?php foreach ( $cpts  as $custom_post_type ) : ?>
+						<tr>
+							<td><strong><?php echo esc_html( $custom_post_type->label ); ?></strong></td>
+							<td><?php echo esc_html( $custom_post_type->name ); ?></td>
+							<td>
+								<label class="sui-toggle" for="include-<?php echo esc_attr( $custom_post_type->name ); ?>">
+									<input type='hidden' value='0' name='include[<?php echo esc_attr( $custom_post_type->name ); ?>]' />
+									<input type="checkbox" name="include[<?php echo esc_attr( $custom_post_type->name ); ?>]" id="include-<?php echo esc_attr( $custom_post_type->name ); ?>"
+										<?php checked( ! isset( $settings['include'][ $custom_post_type->name ] ) || $settings['include'][ $custom_post_type->name ] ); ?> />
+									<span class="sui-toggle-slider"></span>
+								</label>
+							</td>
+						</tr>
+					<?php endforeach; ?>
 					</tbody>
 				</table>
 			</div>
@@ -488,7 +503,7 @@ wp_enqueue_style( 'wp-color-picker' );
 							<p><?php esc_html_e( 'Your theme must be using the wp_footer() function.', 'wp-smushit' ); ?></p>
 						</div>
 						<div class="sui-notice">
-							<p><?php esc_html_e( 'Your theme must be using the wp_header() function.', 'wp-smushit' ); ?></p>
+							<p><?php esc_html_e( 'Your theme must be using the wp_head() function.', 'wp-smushit' ); ?></p>
 						</div>
 					</div>
 				</div>

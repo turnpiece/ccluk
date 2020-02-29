@@ -31,8 +31,7 @@
 			usage: false,
 		},
 		contentContainer: document.getElementById( 'smush-onboarding-content' ),
-		//onboardingSlides: [ 'start', 'auto', 'lossy', 'strip_exif', 'original', 'lazy_load', 'usage' ],
-		onboardingSlides: [ 'start', 'auto', 'lossy', 'strip_exif', 'original', 'lazy_load' ],
+		onboardingSlides: [ 'start', 'auto', 'lossy', 'strip_exif', 'original', 'lazy_load', 'usage' ],
 		touchX: null,
 		touchY: null,
 

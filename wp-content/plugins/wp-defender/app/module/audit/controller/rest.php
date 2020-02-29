@@ -12,6 +12,7 @@ use WP_Defender\Behavior\Utils;
 use WP_Defender\Controller;
 use WP_Defender\Module\Audit;
 use WP_Defender\Module\Audit\Component\Audit_API;
+use WP_Defender\Module\Audit\Model\Events;
 
 class Rest extends Controller {
 	public function __construct() {
@@ -38,8 +39,15 @@ class Rest extends Controller {
 			return;
 		}
 
-		$params  = $this->prepareAuditParams();
-		$data    = Audit_API::pullLogs( $params, 'timestamp', 'desc', true );
+		$params = $this->prepareAuditParams();
+		if ( Audit\Model\Events::instance()->hasData() ) {
+			Utils::instance()->log( 'Pull log from local' );
+			$data = Audit\Model\Events::instance()->getData( $params );
+		} else {
+			Utils::instance()->log( 'Pull log from API' );
+			$data = Audit_API::pullLogs( $params, 'timestamp', 'desc', true );
+		}
+
 		$logs    = $data['data'];
 		$fp      = fopen( 'php://memory', 'w' );
 		$headers = array(
@@ -85,42 +93,53 @@ class Rest extends Controller {
 			return;
 		}
 
-		$eventsInMonth = Audit_API::pullLogs( array(
-			'date_from' => date( 'Y-m-d', strtotime( 'first day of this month', current_time( 'timestamp' ) ) ) . ' 00:00:00',
+		$thirty_days_args = [
+			'date_from' => date( 'Y-m-d', strtotime( '-30 days', current_time( 'timestamp' ) ) ) . ' 00:00:00',
 			'date_to'   => date( 'Y-m-d' ) . ' 23:59:59'
-		) );
+		];
 
-		if ( is_wp_error( $eventsInMonth ) ) {
+		if ( Audit\Model\Events::instance()->hasData() ) {
+			Utils::instance()->log( 'Pull log from local' );
+			$events = Audit\Model\Events::instance()->getData( $thirty_days_args );
+		} else {
+			Utils::instance()->log( 'Pull log from API' );
+			$events = Audit_API::pullLogs( $thirty_days_args );
+		}
+
+		if ( is_wp_error( $events ) ) {
 			wp_send_json_error( array(
-				'message' => $eventsInMonth->get_error_message()
+				'message' => $events->get_error_message()
 			) );
 		}
 
-		$lastEventDate   = __( "Never", wp_defender()->domain );
-		$dailyEventCount = 0;
-		$weekCount       = 0;
-		if ( $eventsInMonth['total_items'] > 0 ) {
-			$request = Audit_API::pullLogs( array(
-				'date_from' => date( 'Y-m-d', strtotime( '-7 days' ) ) . ' 00:00:00',
-				'date_to'   => date( 'Y-m-d' ) . ' 23:59:59'
-			) );
-			if ( is_wp_error( $request ) ) {
-				wp_send_json_error( array(
-					'message' => $request->get_error_message()
-				) );
+		Utils::instance()->log( sprintf( "Summary events %d", count( $events['data'] ) ), "audit" );
+
+		$last_event_date = __( "Never", wp_defender()->domain );
+		$week_count      = 0;
+		$month_count     = 0;
+
+		if ( $events['total_items'] > 0 ) {
+			$min_month_date = new \DateTime( date( 'Y-m-d', strtotime( 'first day of this month', current_time( 'timestamp' ) ) ) );
+			$min_week_date  = new \DateTime( date( 'Y-m-d', strtotime( '-7 days', current_time( 'timestamp' ) ) ) );
+			foreach ( $events['data'] as $datum ) {
+				if ( $datum['timestamp'] > $min_week_date->setTime( 0, 0, 0 )->getTimestamp() ) {
+					$week_count += 1;
+				}
+				if ( $datum['timestamp'] > $min_month_date->setTime( 0, 0, 0 )->getTimestamp() ) {
+					$month_count += 1;
+				}
 			}
-			$weekCount     = $request['total_items'];
-			$lastEventDate = $eventsInMonth['data'][0]['timestamp'];
-			if ( is_array( $lastEventDate ) ) {
-				$lastEventDate = $lastEventDate[0];
+
+			$last_event_date = $events['data'][0]['timestamp'];
+			if ( is_array( $last_event_date ) ) {
+				$last_event_date = $last_event_date[0];
 			}
-			$lastEventDate = $this->formatDateTime( date( 'Y-m-d H:i:s', $lastEventDate ) );
+			$last_event_date = $this->formatDateTime( date( 'Y-m-d H:i:s', $last_event_date ) );
 		}
 		wp_send_json_success( [
-			'monthCount' => $eventsInMonth['total_items'],
-			'dayCount'   => $dailyEventCount,
-			'lastEvent'  => $lastEventDate,
-			'weekCount'  => $weekCount
+			'monthCount' => $month_count,
+			'lastEvent'  => $last_event_date,
+			'weekCount'  => $week_count
 		] );
 	}
 
@@ -130,17 +149,30 @@ class Rest extends Controller {
 	 */
 	public function updateSettings() {
 		if ( ! $this->checkPermission() ) {
+			wp_send_json_error( [
+				'message' => 'You are not allow here'
+			] );
+
 			return;
 		}
 
 		if ( ! wp_verify_nonce( HTTP_Helper::retrieveGet( '_wpnonce' ), 'updateSettings' ) ) {
+			wp_send_json_error( [
+				'message' => 'You are not allow here'
+			] );
+
 			return;
 		}
-		$data     = stripslashes( $_POST['data'] );
-		$data     = json_decode( $data, true );
-		$settings = Audit\Model\Settings::instance();
+		$data       = stripslashes( $_POST['data'] );
+		$data       = json_decode( $data, true );
+		$settings   = Audit\Model\Settings::instance();
+		$last_state = $settings->enabled;
 		$settings->import( $data );
 		$settings->save();
+		if ( $last_state == false && Audit\Model\Events::instance()->hasData() == false ) {
+			//this mean the previous state is disable, now is enable and no data fetched from api
+			Events::instance()->fetch();
+		}
 		$cronTime = $this->reportCronTimestamp( $settings->time, 'auditReportCron' );
 		if ( $settings->notification == true ) {
 			wp_schedule_event( $cronTime, 'daily', 'auditReportCron' );
@@ -151,7 +183,7 @@ class Rest extends Controller {
 				'report_time' => $settings->get_report_times_as_string()
 			]
 		);
-		Utils::instance()->submitStatsToDev();
+		$this->submitStatsToDev();
 		wp_send_json_success( $res );
 	}
 
@@ -167,15 +199,20 @@ class Rest extends Controller {
 			return;
 		}
 		$params = $this->prepareAuditParams();
-
-		$logs = Audit_API::pullLogs( $params, 'timestamp', 'desc', true );
+		if ( Audit\Model\Events::instance()->hasData( $params ) ) {
+			$logs = Audit\Model\Events::instance()->getData( $params, 'timestamp', 'desc', true );
+		} else {
+			//fallback to directly API if the local cache has issues
+			Utils::instance()->log( 'Pull audit logs from API' );
+			$logs = Audit_API::pullLogs( $params, 'timestamp', 'desc', true );
+		}
+		Utils::instance()->log( sprintf( 'audit min date %s', $params['date_from'] ), 'audit' );
 		if ( is_wp_error( $logs ) ) {
 			wp_send_json_error( [
 				'message' => $logs->get_error_message()
 			] );
 		}
-		$time = microtime( true );
-
+		$time         = microtime( true );
 		$logs['data'] = array_map( function ( $item ) {
 			$item['user'] = Utils::instance()->getDisplayName( $item['user_id'] );
 			//$item['user']=1;

@@ -235,6 +235,15 @@ class Mask_Api extends Component {
 	}
 
 	/**
+	 * @return bool
+	 */
+	public static function isEnabled() {
+		$model = Mask_Settings::instance();
+
+		return $model->isEnabled();
+	}
+
+	/**
 	 * @param null $slug
 	 *
 	 * @return bool|\WP_Error

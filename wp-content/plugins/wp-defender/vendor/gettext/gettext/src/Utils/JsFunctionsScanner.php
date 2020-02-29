@@ -172,7 +172,7 @@ class JsFunctionsScanner extends FunctionsScanner
                 case ')':
                     switch ($this->status()) {
                         case 'function':
-                            if (($argument = self::prepareArgument($buffer))) {
+                            if (($argument = static::prepareArgument($buffer))) {
                                 $bufferFunctions[0][2][] = $argument;
                             }
 
@@ -189,7 +189,7 @@ class JsFunctionsScanner extends FunctionsScanner
                 case ',':
                     switch ($this->status()) {
                         case 'function':
-                            if (($argument = self::prepareArgument($buffer))) {
+                            if (($argument = static::prepareArgument($buffer))) {
                                 $bufferFunctions[0][2][] = $argument;
                             }
 

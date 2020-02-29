@@ -77,4 +77,20 @@
 			<pre style="max-height: 300px;overflow-y: scroll"><?php echo \WP_Defender\Behavior\Utils::instance()->read_log( 'settings' ) ?></pre>
 		</div>
 	</div>
+	<div class="sui-box">
+		<div class="sui-box-header">
+			<h3 class="sui-box-title">Ip Lockout</h3>
+		</div>
+		<div class="sui-box-body">
+			<pre style="max-height: 300px;overflow-y: scroll"><?php echo \WP_Defender\Behavior\Utils::instance()->read_log( 'lockout' ) ?></pre>
+		</div>
+	</div>
+	<div class="sui-box">
+		<div class="sui-box-header">
+			<h3 class="sui-box-title">Audit</h3>
+		</div>
+		<div class="sui-box-body">
+			<pre style="max-height: 300px;overflow-y: scroll"><?php echo \WP_Defender\Behavior\Utils::instance()->read_log( 'audit' ) ?></pre>
+		</div>
+	</div>
 </div>

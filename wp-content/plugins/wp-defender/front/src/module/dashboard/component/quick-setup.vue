@@ -9,7 +9,7 @@
                     </h3>
                     <div class="sui-actions-right">
                         <form method="post" @submit.prevent="skip">
-                            <submit-button type="submit" class="sui-button-ghost" :state="state">
+                            <submit-button type="submit" class="sui-button-ghost quicksetup-skip" :state="state">
                                 {{__("Skip")}}
                             </submit-button>
                         </form>
@@ -122,7 +122,7 @@
                                 </small>
                             </div>
                             <div class="sui-col-md-3">
-                                <submit-button type="submit" :state="state" class="sui-button sui-button-blue">
+                                <submit-button type="submit" :state="state" class="sui-button sui-button-blue quicksetup-apply">
                                     {{__("Get Started")}}
                                 </submit-button>
                             </div>

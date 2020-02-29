@@ -3,7 +3,7 @@
  */
 const { createHigherOrderComponent } = wp.compose,
 	{ Fragment } = wp.element,
-	{ InspectorControls } = wp.editor,
+	{ InspectorControls } = wp.blockEditor,
 	{ PanelBody } = wp.components;
 
 /**
@@ -79,7 +79,7 @@ export function fetchProps( props ) {
 	image.fetch( { attribute: 'smush' } ).done( function( img ) {
 		if ( 'string' === typeof img.smush ) {
 			props.setAttributes( { smush: img.smush } );
-			setTimeout( () => fetch( props ), 3000 );
+			//setTimeout( () => fetch( props ), 3000 );
 		} else if ( 'undefined' !== typeof img.smush && (
 			'undefined' === typeof smushData || JSON.stringify( smushData ) !== JSON.stringify( img.smush )
 		) ) {

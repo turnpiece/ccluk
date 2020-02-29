@@ -158,7 +158,7 @@ if ( ! defined( 'WPINC' ) ) {
 				printf(
 					/* translators: %1$s - <a> link, %2$s - </a> */
 					esc_html__( 'Navigate to %1$sTools%2$s to begin the process.', 'wp-smushit' ),
-					'<a href="' . esc_url( menu_page_url( 'smush', false ) ) . '&view=tools">',
+					'<a href="' . esc_url( $this->get_page_url() ) . '&view=tools">',
 					'</a>'
 				);
 				?>

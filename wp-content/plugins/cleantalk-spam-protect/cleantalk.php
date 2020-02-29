@@ -3,7 +3,7 @@
   Plugin Name: Anti-Spam by CleanTalk
   Plugin URI: https://cleantalk.org
   Description: Max power, all-in-one, no Captcha, premium anti-spam plugin. No comment spam, no registration spam, no contact spam, protects any WordPress forms.
-  Version: 5.132.3
+  Version: 5.134
   Author: СleanTalk <welcome@cleantalk.org>
   Author URI: https://cleantalk.org
   Text Domain: cleantalk
@@ -51,6 +51,7 @@ if( !defined( 'CLEANTALK_PLUGIN_DIR' ) ){
 	require_once(CLEANTALK_PLUGIN_DIR . 'lib/cleantalk-php-patch.php');  // Pathces fpr different functions which not exists
 	
 	// Base classes
+    require_once(CLEANTALK_PLUGIN_DIR . 'lib/autoloader.php');                // Autoloader
 	require_once(CLEANTALK_PLUGIN_DIR . 'lib/Cleantalk/Antispam/API.php');    // API
     require_once(CLEANTALK_PLUGIN_DIR . 'lib/Cleantalk/Antispam/DB.php');     // Database driver
 	require_once(CLEANTALK_PLUGIN_DIR . 'lib/Cleantalk/Antispam/Helper.php'); // Helper
@@ -120,6 +121,7 @@ if( !defined( 'CLEANTALK_PLUGIN_DIR' ) ){
 	define('APBCT_TBL_FIREWALL_DATA', $apbct->db_prefix . 'cleantalk_sfw');      // Table with firewall data.
 	define('APBCT_TBL_FIREWALL_LOG',  $apbct->db_prefix . 'cleantalk_sfw_logs'); // Table with firewall logs.
 	define('APBCT_TBL_SESSIONS',      $apbct->db_prefix . 'cleantalk_sessions'); // Table with session data.
+    define('APBCT_SPAMSCAN_LOGS',     $apbct->db_prefix . 'cleantalk_spamscan_logs'); // Table with session data.
 	define('APBCT_SELECT_LIMIT',      5000); // Select limit for logs.
 	define('APBCT_WRITE_LIMIT',       5000); // Write limit for firewall data.
 	
@@ -183,6 +185,12 @@ if( !defined( 'CLEANTALK_PLUGIN_DIR' ) ){
 		}
 		
 	}
+
+    $apbct_active_integrations = array(
+        'ContactBank' => array( 'hook' => 'contact_bank_frontend_ajax_call', 'ajax' => true ),
+        'FluentForm'  => array( 'hook' => 'fluentform_validations', 'ajax' => false )
+    );
+    new  \Cleantalk\Antispam\Integrations( $apbct_active_integrations );
 	
 	// Ninja Forms. Making GET action to POST action
     if( apbct_is_in_uri( 'admin-ajax.php' ) && sizeof($_POST) > 0 && isset($_GET['action']) && $_GET['action']=='ninja_forms_ajax_submit' )
@@ -217,12 +225,17 @@ if( !defined( 'CLEANTALK_PLUGIN_DIR' ) ){
         }
     }, 1, 2);
 
+    // INEVIO theme integration
+    add_action( 'wp_ajax_contact_form_handler',        'apbct_form__inevio__testSpam', 1 );
+    add_action( 'wp_ajax_nopriv_contact_form_handler', 'apbct_form__inevio__testSpam', 1 );
+
 	// Public actions
 	if(!is_admin() && !apbct_is_ajax()){
 		
 		// Default search
 		//add_filter( 'get_search_form',  'apbct_forms__search__addField' );
 		add_filter( 'get_search_query', 'apbct_forms__search__testSpam' );
+        add_action( 'wp_head', 'apbct_search_add_noindex', 1 );
 		
 		// Remote calls
 		if(isset($_GET['spbc_remote_call_token'], $_GET['spbc_remote_call_action'], $_GET['plugin_name']) && in_array($_GET['plugin_name'], array('antispam','anti-spam', 'apbct'))){
@@ -273,9 +286,8 @@ if( !defined( 'CLEANTALK_PLUGIN_DIR' ) ){
 	
 	// Admin panel actions
     if (is_admin() || is_network_admin()){
-		
-		require_once(CLEANTALK_PLUGIN_DIR . 'inc/cleantalk-comments.php');
-		require_once(CLEANTALK_PLUGIN_DIR . 'inc/cleantalk-users.php');
+
+        require_once( CLEANTALK_PLUGIN_DIR . 'inc/cleantalk-find-spam.php' );
 		require_once(CLEANTALK_PLUGIN_DIR . 'inc/cleantalk-admin.php');
 		require_once(CLEANTALK_PLUGIN_DIR . 'inc/cleantalk-settings.php');
 				
@@ -374,7 +386,9 @@ if( !defined( 'CLEANTALK_PLUGIN_DIR' ) ){
     }else{
 		
 		require_once(CLEANTALK_PLUGIN_DIR . 'inc/cleantalk-public.php');
-		
+
+
+
 		add_action('wp_enqueue_scripts', 'ct_enqueue_scripts_public');
 		
 		// Init action.
@@ -429,10 +443,9 @@ function apbct_remote_call__perform()
 	global $apbct;
 	
 	$remote_action = $_GET['spbc_remote_call_action'];
-	
-	if(array_key_exists($remote_action, $apbct->remote_calls)){
-				
-		if(time() - $apbct->remote_calls[$remote_action]['last_call'] > APBCT_REMOTE_CALL_SLEEP){
+
+	if( isset( $apbct->remote_calls[$remote_action] ) ){
+		if(time() - $apbct->remote_calls[$remote_action]['last_call'] > APBCT_REMOTE_CALL_SLEEP || ($remote_action == 'sfw_update' && isset($_GET['file_urls']))) {
 			
 			$apbct->remote_calls[$remote_action]['last_call'] = time();
 			$apbct->save('remote_calls');
@@ -442,7 +455,7 @@ function apbct_remote_call__perform()
 				// Flag to let plugin know that Remote Call is running.
 				$apbct->rc_running = true;
 				
-				switch ($_GET['spbc_remote_call_action']) {
+				switch ($remote_action) {
 					
 				// Close renew banner
 					case 'close_renew_banner':
@@ -560,7 +573,7 @@ function apbct_sfw__check()
 				$apbct->data['sfw_counter']['all']++;
 				$apbct->saveData();
 				if(!headers_sent())
-					apbct_cookie__set ('ct_sfw_passed', '0', time()+86400*3, '/', parse_url(get_option('siteurl'),PHP_URL_HOST), false, true, 'Lax' );
+					apbct_cookie__set ('ct_sfw_passed', '0', time()+86400*3, '/', null, false, true, 'Lax' );
 			}
 			break;
 		}else{
@@ -610,7 +623,7 @@ function apbct_sfw__check()
 		}else{
 			reset($sfw->passed_ips);
 			if(!empty($apbct->settings['set_cookies']) && !headers_sent() && key($sfw->passed_ips))
-				setcookie ('ct_sfw_pass_key', md5($sfw->passed_ips[key($sfw->passed_ips)]['ip'].$apbct->api_key), time()+86400*30, '/', parse_url(get_option('siteurl'),PHP_URL_HOST) ,false);
+				setcookie ('ct_sfw_pass_key', md5($sfw->passed_ips[key($sfw->passed_ips)]['ip'].$apbct->api_key), time()+86400*30, '/', null,false);
 		}
 	}
 	unset($is_sfw_check, $sfw, $sfw_ip, $ct_cur_ip);
@@ -894,20 +907,54 @@ function ct_sfw_update($immediate = false){
 		
 		$sfw = new CleantalkSFW();
 		
-		$file_url = isset($_GET['file_url']) ? $_GET['file_url'] : null;
-		$result = $sfw->sfw_update($apbct->api_key, $file_url, $immediate);
+		$file_urls = isset($_GET['file_urls']) ? explode(',', $_GET['file_urls']) : null;
 
-		if(empty($result['error'])){
-			$apbct->stats['sfw']['last_update_time'] = time();
-			$apbct->stats['sfw']['entries'] = $result;
+		if (!$file_urls) {
+
+			//Reset previous entries count
+			$apbct->stats['sfw']['entries'] = 0;
 			$apbct->save('stats');
-		}
+
+			$result = $sfw->sfw_update($apbct->api_key, null, $immediate);
+			
+		} else {
+			if (is_array($file_urls) && count($file_urls)) {
+
+				$result = $sfw->sfw_update($apbct->api_key, $file_urls[0], $immediate);
+				
+				if(empty($result['error'])){
+
+					array_shift($file_urls);	
+
+					//Increment sfw entries
+					$apbct->stats['sfw']['entries'] += $result;
+					$apbct->save('stats');
+
+					if (count($file_urls)) {
+						CleantalkHelper::http__request(
+							get_option('siteurl'), 
+							array(
+								'spbc_remote_call_token'  => md5($apbct->api_key),
+								'spbc_remote_call_action' => 'sfw_update',
+								'plugin_name'             => 'apbct',
+								'file_urls'               => implode(',', $file_urls),
+							),
+							array('get', 'async')
+						);							
+					} else {
+						//Files array is empty update sfw time
+						$apbct->stats['sfw']['last_update_time'] = time();
+						$apbct->save('stats');
+					}
+				} else 
+					return array('error' => 'ERROR_WHILE_INSERTING_SFW_DATA');
+			} 
+		}	
 
 		return $result;
 	}
 	
 	return array('error' => 'SFW_DISABLED');
-	
 }
 
 function ct_sfw_send_logs()
@@ -1020,12 +1067,15 @@ function apbct_rc__install_plugin($wp = null, $plugin = null){
 					include_once( ABSPATH . 'wp-admin/includes/file.php' );
 					include_once( ABSPATH . 'wp-admin/includes/misc.php' );
 					include_once( CLEANTALK_PLUGIN_DIR . 'lib/CleantalkUpgrader.php' );
-					include_once( CLEANTALK_PLUGIN_DIR . 'lib/CleantalkUpgraderSkin.php' );
-					include_once( CLEANTALK_PLUGIN_DIR . 'lib/CleantalkUpgraderSkin_Deprecated.php' );
-					if (version_compare(PHP_VERSION, '5.6.0') >= 0 && version_compare($wp_version, '5.3') >= 0)
-						$installer= new CleantalkUpgrader( new CleantalkUpgraderSkin() );
-					else 
-						$installer= new CleantalkUpgrader( new CleantalkUpgraderSkin_Deprecated() );
+
+					if (version_compare(PHP_VERSION, '5.6.0') >= 0 && version_compare($wp_version, '5.3') >= 0) {
+                        include_once( CLEANTALK_PLUGIN_DIR . 'lib/CleantalkUpgraderSkin.php' );
+                        $installer= new CleantalkUpgrader( new CleantalkUpgraderSkin() );
+                    } else {
+                        include_once( CLEANTALK_PLUGIN_DIR . 'lib/CleantalkUpgraderSkin_Deprecated.php' );
+                        $installer= new CleantalkUpgrader( new CleantalkUpgraderSkin_Deprecated() );
+                    }
+
 					$installer->install($result->download_link);
 					
 					if($installer->apbct_result === 'OK'){
@@ -1181,14 +1231,17 @@ function apbct_rc__update(){
 	include_once( ABSPATH . 'wp-admin/includes/misc.php' );
 	
 	include_once( CLEANTALK_PLUGIN_DIR . 'lib/CleantalkUpgrader.php' );
-	include_once( CLEANTALK_PLUGIN_DIR . 'lib/CleantalkUpgraderSkin.php' );
-	include_once( CLEANTALK_PLUGIN_DIR . 'lib/CleantalkUpgraderSkin_Deprecated.php' );
 	
 	apbct_maintance_mode__enable( 30 );
-	if (version_compare(PHP_VERSION, '5.6.0') >= 0 && version_compare($wp_version, '5.3') >= 0)
+	
+	if (version_compare(PHP_VERSION, '5.6.0') >= 0 && version_compare($wp_version, '5.3') >= 0){
+		include_once( CLEANTALK_PLUGIN_DIR . 'lib/CleantalkUpgraderSkin.php' );
 		$upgrader = new CleantalkUpgrader( new CleantalkUpgraderSkin( compact('title', 'nonce', 'url', 'plugin') ) );
-	else
+	}else{
+		include_once( CLEANTALK_PLUGIN_DIR . 'lib/CleantalkUpgraderSkin_Deprecated.php' );
 		$upgrader = new CleantalkUpgrader( new CleantalkUpgraderSkin_Deprecated( compact('title', 'nonce', 'url', 'plugin') ) );
+	}
+	
     $upgrader->upgrade($plugin);
 	
 	apbct_maintance_mode__disable();
@@ -1525,14 +1578,15 @@ function apbct_cookie(){
 	}
 	
 	
-// Cookie names to validate
+    // Cookie names to validate
 	$cookie_test_value = array(
 		'cookies_names' => array(),
 		'check_value' => $apbct->api_key,
 	);
 	
-	$domain = parse_url(get_option('siteurl'),PHP_URL_HOST);
-	
+	// We need to skip the domain attribute for prevent including the dot to the cookie's domain on the client.
+    $domain = null;
+
 // Submit time
 	if(empty($_POST['ct_multipage_form'])){ // Do not start/reset page timer if it is multipage form (Gravitiy forms))
 		$apbct_timestamp = time();

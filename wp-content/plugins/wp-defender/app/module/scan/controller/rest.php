@@ -273,7 +273,7 @@ class Rest extends Controller {
 		$activeScan = Scan\Component\Scan_Api::getActiveScan();
 		if ( is_object( $activeScan ) ) {
 			$activeScan->delete();
-			Scan_Api::flushCache();
+			(new Scan\Component\Scanning())->flushCache();
 		}
 		$data = Scan\Component\Data_Factory::buildData();
 
@@ -297,7 +297,9 @@ class Rest extends Controller {
 		 */
 		wp_clear_scheduled_hook( 'processScanCron' );
 
-		$ret = Scan\Component\Scan_Api::processActiveScan();
+		//$ret = Scan\Component\Scan_Api::processActiveScan();
+		$scanning = new Scan\Component\Scanning();
+		$ret      = $scanning->do();
 		if ( $ret == true ) {
 			do_action( 'sendScanEmail' );
 
@@ -309,7 +311,7 @@ class Rest extends Controller {
 			$model = Scan\Component\Scan_Api::getActiveScan();
 			$data  = array(
 				'status'      => $model->status,
-				'percent'     => Scan\Component\Scan_Api::getScanProgress(),
+				'percent'     => round( $scanning->getScanProgress(), 2 ),
 				'status_text' => is_object( $model ) ? $model->statusText : null,
 			);
 			//not completed
@@ -341,6 +343,7 @@ class Rest extends Controller {
 				$data[ $key ] = sanitize_text_field( $val );
 			}
 		}
+
 		$settings->import( $data );
 		$settings->email_all_ok    = stripslashes( $settings->email_all_ok );
 		$settings->email_has_issue = stripslashes( $settings->email_has_issue );
@@ -369,7 +372,7 @@ class Rest extends Controller {
 		];
 
 		if ( wp_defender()->isFree == false ) {
-			$behaviors['pro'] = '\WP_Defender\Module\Scan\Behavior\Pro\Reporting';
+			$behaviors['pro'] = Scan\Behavior\Pro\Reporting::class;
 		}
 
 		return $behaviors;

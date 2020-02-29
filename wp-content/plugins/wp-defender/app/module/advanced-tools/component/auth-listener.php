@@ -201,7 +201,8 @@ class Auth_Listener extends Component {
 		$token = HTTP_Helper::retrieveGet( 'token' );
 		$query = new \WP_User_Query( array(
 			'meta_key'   => 'defOTPLoginToken',
-			'meta_value' => $token
+			'meta_value' => $token,
+			'blog_id'    => 0
 		) );
 		$res   = $query->get_results();
 		if ( empty( $res ) ) {

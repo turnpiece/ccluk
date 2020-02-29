@@ -63,7 +63,7 @@
 					</div>
 					<div class="sui-actions-right">
 						<form v-on:submit.prevent="process" method="post">
-							<submit-button :state="state" css-class="sui-button-blue trigger" type="submit">
+							<submit-button :state="state" css-class="sui-button-blue apply" type="submit">
 								<span class="sui-loading-text">{{__( "Disable file editor" ) }}</span>
 								<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
 							</submit-button>

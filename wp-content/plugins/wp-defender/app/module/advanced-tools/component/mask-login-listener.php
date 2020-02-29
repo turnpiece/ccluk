@@ -22,8 +22,9 @@ class Mask_Login_Listener extends Component {
 				$this->addFilter( 'wp_redirect', 'filterWPRedirect', 10, 2 );
 				$this->addFilter( 'site_url', 'filterSiteUrl', 9999, 4 );
 				$this->addFilter( 'network_site_url', 'filterNetworkSiteUrl', 9999, 3 );
-//				$this->add_filter( 'network_admin_url', 'filterAdminUrl', 9999, 2 );
-//				$this->add_filter( 'adminUrl', 'filterAdminUrl', 9999, 2 );
+				$this->addFilter( 'wp_mail', 'filterEmailBody', 999 );
+				//$this->addFilter( 'network_admin_url', 'filterAdminUrl', 9999, 2 );
+				//$this->add_filter( 'adminUrl', 'filterAdminUrl', 9999, 2 );
 				remove_action( 'template_redirect', 'wp_redirect_admin_locations' );
 				//if prosite is activate and useremail is not defined, we need to update the
 				//email to match the new login URL
@@ -38,6 +39,31 @@ class Mask_Login_Listener extends Component {
 				}
 			}
 		}
+	}
+
+	public function filterEmailBody( $args ) {
+		$patterns = [
+			//approve comment
+			'/(' . preg_quote( site_url(), '/' ) . '\/wp-admin\/comment\.php\?.+)/',
+			//all comments
+			'/(' . preg_quote( site_url(), '/' ) . '\/wp-admin\/edit-comments\.php\?.+$)/'
+		];
+
+		$message = $args['message'];
+		foreach ( $patterns as $pattern ) {
+			if ( preg_match_all( $pattern, $message, $matches ) ) {
+				foreach ( $matches[0] as $url ) {
+					parse_str( parse_url( $url, PHP_URL_QUERY ), $parts );
+					if ( ! isset( $parts['ticket'] ) ) {
+						$new_url = add_query_arg( 'ticket', Mask_Api::generateTicket(), $url );
+						$message = str_replace( $url, $new_url, $message );
+					}
+				}
+			}
+		}
+		$args['message'] = $message;
+
+		return $args;
 	}
 
 	/**
@@ -188,6 +214,11 @@ class Mask_Login_Listener extends Component {
 	 * @return mixed
 	 */
 	public function filterAdminUrl( $currentUrl, $scheme = null ) {
+		//we just need to add a otp if not any
+		parse_str( parse_url( $currentUrl, PHP_URL_QUERY ), $parts );
+		if ( ! isset( $parts['ticket'] ) ) {
+
+		}
 
 		return $currentUrl;
 	}
@@ -215,7 +246,9 @@ class Mask_Login_Listener extends Component {
 	}
 
 	private function _handleRequestToLoginPage() {
-		$this->_maybeLock();
+		if ( ! is_user_logged_in() ) {
+			$this->_maybeLock();
+		}
 	}
 
 	private function _showLoginPage() {

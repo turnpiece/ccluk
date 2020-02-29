@@ -12,7 +12,6 @@ Vue.component('submit-button', submit_button)
 Vue.component('app-footer', footer);
 Vue.component('doc-link', doc_link);
 Vue.component('summary-box', summary_box);
-
 var vm = new Vue({
 	el: '#defender',
 	components: {

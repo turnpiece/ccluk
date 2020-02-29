@@ -147,10 +147,10 @@
 					if (response.success === true) {
 						self.code = response.data.code;
 						self.pulled = true;
-						self.$nextTick(() => {
-							let element = document.getElementById(self.element_id);
-							Prism.highlightElement(element);
-						})
+						// self.$nextTick(() => {
+						// 	let element = document.getElementById(self.element_id);
+						// 	//Prism.highlightElement(element);
+						// })
 					}
 				}, true)
 			},
@@ -170,10 +170,7 @@
 			this.element_id = Math.random()
 		},
 		updated: function () {
-			console.log('--------');
-			console.log(this.item.full_path);
-			console.log(this.pulled);
-			console.log('--------');
+
 		}
 	}
 </script>

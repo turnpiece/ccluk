@@ -133,7 +133,7 @@ function apbct_settings__set_fileds( $fields ){
 					'title'       => __('Test default Wordpress search form for spam', 'cleantalk'),
 					'description' => __('Spam protection for Search form.', 'cleantalk')
 						. (!$apbct->white_label || is_main_site()
-							? sprintf(__('Read more about %sspam protection for Search form%s on our blog.', 'cleantalk'),
+							? sprintf(__('Read more about %sspam protection for Search form%s on our blog. “noindex” tag will be placed in meta derictive on search page.', 'cleantalk'),
 								'<a href="https://blog.cleantalk.org/how-to-protect-website-search-from-spambots/" target="_blank">',
 								'</a>'
 								)
@@ -566,7 +566,7 @@ function apbct_settings__display() {
 			
 			// Top info
 			if(!$apbct->white_label){
-				echo '<div style="float: right; padding: 15px 15px 5px 15px; font-size: 13px; position: relative; top: -55px; background: #f1f1f1;">';
+				echo '<div style="float: right; padding: 15px 15px 5px 15px; font-size: 13px; position: relative; background: #f1f1f1;">';
 
 					echo __('CleanTalk\'s tech support:', 'cleantalk')
 						.'&nbsp;'
@@ -1493,4 +1493,12 @@ function apbct_settings__get__long_description(){
 	);
 	
 	die(json_encode($descriptions[$setting_id]));
+}
+
+function apbct_settings__check_renew_banner() {
+	global $apbct;
+	
+	check_ajax_referer('ct_secret_nonce' );
+
+	die(json_encode(array('close_renew_banner' => ($apbct->data['notice_trial'] == 0 && $apbct->data['notice_renew'] == 0) ? true : false)));
 }

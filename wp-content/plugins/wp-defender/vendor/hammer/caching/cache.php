@@ -107,15 +107,17 @@ abstract class Cache extends Component {
 	 * @param $key
 	 * @param $value
 	 * @param null $duration
+	 *
+	 * @return bool
 	 */
 	public function set( $key, $value, $duration = null ) {
 		$key      = $this->buildKey( $key );
 		$duration = $duration === null ? $this->duration : $duration;
 		$value    = $this->serialize( $value );
 		if ( ! $this->exists( $key ) ) {
-			$this->addValue( $key, $value, $duration );
+			return $this->addValue( $key, $value, $duration );
 		} else {
-			$this->setValue( $key, $value, $duration );
+			return $this->setValue( $key, $value, $duration );
 		}
 	}
 

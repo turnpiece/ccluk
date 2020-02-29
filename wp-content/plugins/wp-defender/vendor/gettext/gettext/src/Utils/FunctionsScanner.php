@@ -70,7 +70,7 @@ abstract class FunctionsScanner
                 continue;
             }
 
-            if (!$isDefaultDomain && !$domainTranslations) {
+            if (!$domainTranslations) {
                 continue;
             }
 
@@ -93,7 +93,7 @@ abstract class FunctionsScanner
      * @return array|null
      * @throws Exception
      */
-    private function deconstructArgs($function, $args)
+    protected function deconstructArgs($function, $args)
     {
         $domain = null;
         $context = null;

@@ -30,15 +30,15 @@
             <div class="sui-row-with-sidenav">
                 <div class="sui-sidenav">
                     <ul class="sui-vertical-tabs sui-sidenav-hide-md">
-                        <li class="sui-vertical-tab" :class="{current:view==='logs'}">
+                        <li id="tab_log" class="sui-vertical-tab" :class="{current:view==='logs'}">
                             <a @click.prevent="view='logs'"
                                :href="adminUrl('admin.php?page=wdf-logging')">{{__("Event Logs")}}</a>
                         </li>
-                        <li class="sui-vertical-tab" :class="{current:view==='settings'}">
+                        <li id="tab_settings" class="sui-vertical-tab" :class="{current:view==='settings'}">
                             <a @click.prevent="view='settings'"
                                :href="adminUrl('admin.php?page=wdf-logging&view=settings')">{{__("Settings")}}</a>
                         </li>
-                        <li class="sui-vertical-tab" :class="{current:view==='report'}">
+                        <li id="tab_report" class="sui-vertical-tab" :class="{current:view==='report'}">
                             <a @click.prevent="view='report'"
                                :href="adminUrl('admin.php?page=wdf-logging&view=report')">{{__("Reports")}}</a>
                         </li>
@@ -82,8 +82,7 @@
                         <p>
                             {{__("Track and log each and every event when changes are made to your website and getdetailed reports on what's going on behind the scenes, including any hacking attempts onyour site.")}}
                         </p>
-                        <submit-button type="button" css-class="sui-button-blue" :state="state" @click="toggle(true)">
-                            <i class="sui-icon-save" aria-hidden="true"></i>
+                        <submit-button type="button" css-class="sui-button-blue activate" :state="state" @click="toggle(true)">
                             {{__("Activate")}}
                         </submit-button>
                     </div>

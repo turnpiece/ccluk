@@ -17,7 +17,6 @@
                     </p>
                     <form method="post" @submit.prevent="newScan">
                         <submit-button type="submit" css-class="sui-button-blue" :state="state">
-                            <i class="sui-icon-save" aria-hidden="true"></i>
                             {{__("Run Scan")}}
                         </submit-button>
                     </form>

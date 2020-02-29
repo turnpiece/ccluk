@@ -18,6 +18,14 @@
 		line-height: 1.33333;
 	}
 
+	.smush-status-links {
+		width: 100%;
+	}
+
+	span.sui-tooltip {
+		float: none;
+	}
+
 	a {
 		margin-left: 5px;
 	}
@@ -28,17 +36,32 @@
 	}
 }
 
-/**
- * Smush buttons & stats in the media library, media upload and featured image modals.
- *
- * @since 2.8.0
- */
-.wp-list-table.media {
-	.spinner.visible {
-		width: 100%;
-		padding-left: 25px;
-		margin: 10px 0 0;
-	}
+.attachment-info .smush-status-links,
+.column-smushit .smush-status-links {
+	color: #ddd;
+}
+
+.column-smushit .smush-status-links > a {
+	box-shadow: none;
+	outline: none;
+}
+
+.wp-smush-progress {
+	padding-left: 25px;
+	margin: 0;
+	background-size: 17px 17px;
+	visibility: visible;
+	vertical-align: initial !important; /* prevent from jumping on a line */
+	display: inline;
+	color: #32373c;
+	cursor: default;
+}
+
+// Fix grid view links.
+.attachment-details .setting span.wp-smush-progress {
+	width: auto;
+	line-height: 0;
+	margin-right: 5px;
 }
 
 /** Settings Page **/
@@ -74,19 +97,8 @@
 	font-size: 11px;
 }
 
-.smush-skipped {
-	display: flex;
-	align-items: center;
-	align-content: center;
-}
-
-.smush-skipped.error {
-	color: #C41921;
-}
-
 .smush-skipped .dashicons-editor-help {
-	cursor: pointer;
-	margin-top: -1px;
+	margin-top: -2px;
 	margin-left: 5px;
 }
 
@@ -96,6 +108,7 @@
 }
 
 /** Disabled Hyperlinks **/
+/*
 .smush-stats a[disabled] {
 	cursor: default;
 	color: grey;
@@ -104,16 +117,7 @@
 .wp-smush-error {
 	color: #ffb900;
 }
-
-.resmush-scan {
-	vertical-align: middle;
-	line-height: 28px;
-}
-
-/** Resmush Button **/
-#wp-smush-resmush {
-	margin: 20px 0;
-}
+*/
 
 /** Bulk Smush Page UI - New UI Changes **/
 /** Font-Families **/
@@ -168,28 +172,6 @@
 			filter: blur(2px);
 		}
 	}
-}
-
-.column-smushit {
-	color: #ddd !important;
-
-	.wp-smush-progress { color: #32373c; }
-}
-
-.column-smushit div.smush-status-links,
-.attachment-details .setting div.smush-status-links {
-	float: left;
-	text-align: left;
-	color: #ddd;
-
-	.wp-smush-action {
-		margin-right: 5px;
-		margin-bottom: 5px;
-	}
-}
-
-div.attachment-details .setting div.smush-status-links.smush-status-links div.smush-stats-wrapper {
-	margin-top: 15px;
 }
 
 /** Bulk Smush **/

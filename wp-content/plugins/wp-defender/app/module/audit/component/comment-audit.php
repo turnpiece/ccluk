@@ -1,5 +1,7 @@
 <?php
+
 namespace WP_Defender\Module\Audit\Component;
+
 use WP_Defender\Behavior\Utils;
 use WP_Defender\Module\Audit\Event_Abstract;
 
@@ -68,7 +70,10 @@ class Comment_Audit extends Event_Abstract {
 				'level'       => self::LOG_LEVEL_INFO,
 				'event_type'  => $this->type,
 				'action_type' => Audit_API::ACTION_UPDATED,
-				'callback'    => array( '\WP_Defender\Module\Audit\Component\Comment_Audit', 'processCommentStatusChanged' ),
+				'callback'    => array(
+					'\WP_Defender\Module\Audit\Component\Comment_Audit',
+					'processCommentStatusChanged'
+				),
 			),
 			'edit_comment'              => array(
 				'args'        => array( 'comment_ID' ),
@@ -82,7 +87,10 @@ class Comment_Audit extends Event_Abstract {
 				'level'       => self::LOG_LEVEL_INFO,
 				'event_type'  => $this->type,
 				'action_type' => self::ACTION_DUPLICATED,
-				'callback'    => array( '\WP_Defender\Module\Audit\Component\Comment_Audit', 'processCommentDuplicateTrigger' ),
+				'callback'    => array(
+					'\WP_Defender\Module\Audit\Component\Comment_Audit',
+					'processCommentDuplicateTrigger'
+				),
 			),
 		);
 	}

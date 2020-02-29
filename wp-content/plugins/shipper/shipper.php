@@ -9,7 +9,7 @@
  * Plugin Name: Shipper Pro
  * Plugin URI: http://premium.wpmudev.org/project/shipper/
  * Description: Migrate WordPress websites from host to host, local to production, development to live with just a few clicks.
- * Version: 1.1.2
+ * Version: 1.1.3
  * Network: true
  * Text Domain: shipper
  * Author: WPMU DEV

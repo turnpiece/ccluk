@@ -11,7 +11,7 @@ namespace Smush\App\Pages;
 use Smush\App\Abstract_Page;
 use Smush\Core\Core;
 use Smush\Core\Settings;
-use Smush\WP_Smush;
+use WP_Smush;
 
 if ( ! defined( 'WPINC' ) ) {
 	die;
@@ -166,9 +166,9 @@ class Dashboard extends Abstract_Page {
 			if ( ! WP_Smush::is_pro() ) {
 				$this->add_meta_box(
 					'pro-features',
-					__( 'Pro Features', 'wp-smushit' ),
+					__( 'Upgrade to Smush Pro', 'wp-smushit' ),
 					array( $this, 'pro_features_metabox' ),
-					array( $this, 'pro_features_metabox_header' ),
+					null,
 					null,
 					'bulk'
 				);
@@ -191,9 +191,7 @@ class Dashboard extends Abstract_Page {
 
 		if ( 'integrations' === $this->get_current_tab() && $this->should_render() ) {
 			// Show integrations box.
-			$class          = WP_Smush::is_pro() ? 'smush-integrations-wrapper wp-smush-pro' : 'smush-integrations-wrapper';
-			$box_body_class = WP_Smush::is_pro() ? '' : 'sui-upsell-items';
-
+			$class = WP_Smush::is_pro() ? 'smush-integrations-wrapper wp-smush-pro' : 'smush-integrations-wrapper';
 			$this->add_meta_box(
 				'integrations',
 				__( 'Integrations', 'wp-smushit' ),
@@ -203,7 +201,7 @@ class Dashboard extends Abstract_Page {
 				'integrations',
 				array(
 					'box_class'         => "sui-box {$class}",
-					'box_content_class' => "sui-box-body {$box_body_class}",
+					'box_content_class' => 'sui-box-body sui-upsell-items',
 				)
 			);
 		}
@@ -267,13 +265,17 @@ class Dashboard extends Abstract_Page {
 		}
 
 		if ( 'tools' === $this->get_current_tab() && $this->should_render() ) {
+			$box_body_class = WP_Smush::is_pro() ? '' : 'sui-upsell-items';
 			$this->add_meta_box(
 				'tools',
 				__( 'Tools', 'wp-smushit' ),
 				array( $this, 'tools_metabox' ),
 				null,
 				array( $this, 'common_metabox_footer' ),
-				'tools'
+				'tools',
+				array(
+					'box_content_class' => "sui-box-body {$box_body_class}",
+				)
 			);
 		}
 
@@ -540,10 +542,8 @@ class Dashboard extends Abstract_Page {
 						<p class="wp-smush-stats-label-message">
 							<?php
 							$link_class = 'wp-smush-lossy-enable-link';
-							if ( is_multisite() && Settings::can_access( 'bulk' ) ) {
-								$settings_link = WP_Smush::get_instance()->admin()->settings_link( array(), true, true ) . '#enable-lossy';
-							} elseif ( 'bulk' !== $this->get_current_tab() ) {
-								$settings_link = WP_Smush::get_instance()->admin()->settings_link( array(), true ) . '#enable-lossy';
+							if ( ( is_multisite() && Settings::can_access( 'bulk' ) ) || 'bulk' !== $this->get_current_tab() ) {
+								$settings_link = $this->get_page_url() . '#enable-lossy';
 							} else {
 								$settings_link = '#';
 								$link_class    = 'wp-smush-lossy-enable';
@@ -609,7 +609,7 @@ class Dashboard extends Abstract_Page {
 	 */
 	public function settings_row( $setting_m_key, $label, $name, $setting_val, $disable = false, $upsell = false ) {
 		?>
-		<div class="sui-box-settings-row wp-smush-basic <?php echo $upsell ? 'sui-disabled' : ''; ?>">
+		<div class="sui-box-settings-row wp-smush-basic <?php echo $upsell || $disable ? 'sui-disabled' : ''; ?>">
 			<div class="sui-box-settings-col-1">
 				<span class="sui-settings-label <?php echo 'gutenberg' === $name ? 'sui-settings-label-with-tag' : ''; ?>">
 					<?php echo esc_html( $label ); ?>
@@ -617,18 +617,27 @@ class Dashboard extends Abstract_Page {
 				</span>
 
 				<span class="sui-description">
-					<?php echo WP_Smush::get_instance()->core()->settings[ $name ]['desc']; ?>
+					<?php echo wp_kses_post( WP_Smush::get_instance()->core()->settings[ $name ]['desc'] ); ?>
 				</span>
 			</div>
 			<div class="sui-box-settings-col-2" id="column-<?php echo esc_attr( $setting_m_key ); ?>">
 				<div class="sui-form-field">
 					<?php if ( isset( WP_Smush::get_instance()->core()->settings[ $name ]['label'] ) ) : ?>
-						<label class="sui-toggle">
-							<input type="checkbox" aria-describedby="<?php echo esc_attr( $setting_m_key . '-desc' ); ?>" id="<?php echo esc_attr( $setting_m_key ); ?>" name="<?php echo esc_attr( $setting_m_key ); ?>" <?php checked( $setting_val, 1, true ); ?> value="1" <?php disabled( $disable ); ?>>
-							<span class="sui-toggle-slider"></span>
-						</label>
-						<label for="<?php echo esc_attr( $setting_m_key ); ?>">
-							<?php echo esc_html( WP_Smush::get_instance()->core()->settings[ $name ]['label'] ); ?>
+						<label for="<?php echo esc_attr( $setting_m_key ); ?>" class="sui-toggle">
+							<input
+								type="checkbox"
+								value="1"
+								id="<?php echo esc_attr( $setting_m_key ); ?>"
+								name="<?php echo esc_attr( $setting_m_key ); ?>"
+								aria-labelledby="<?php echo esc_attr( $setting_m_key . '-label' ); ?>"
+								aria-describedby="<?php echo esc_attr( $setting_m_key . '-desc' ); ?>"
+								<?php checked( $setting_val, 1, true ); ?>
+								<?php disabled( $disable ); ?>
+							/>
+							<span class="sui-toggle-slider" aria-hidden="true"></span>
+							<span id="<?php echo esc_attr( $setting_m_key . '-label' ); ?>" class="sui-toggle-label">
+								<?php echo esc_html( WP_Smush::get_instance()->core()->settings[ $name ]['label'] ); ?>
+							</span>
 						</label>
 					<?php endif; ?>
 					<!-- Print/Perform action in right setting column -->
@@ -661,6 +670,24 @@ class Dashboard extends Abstract_Page {
 			return;
 		}
 
+		if ( 'png_to_jpg' === $setting_key ) {
+			?>
+			<div class="sui-notice sui-notice-info auto-smush-notice">
+				<p>
+					<?php
+					printf(
+						/* translators: %1$s - <strong>, %2$s - </strong> */
+						wp_kses( 'Note: Any PNGs with transparency will be ignored. Smush will only convert PNGs if it results in a smaller file size. The resulting file will have a new filename and extension (JPEG), and %1$sany hard-coded URLs on your site that contain the original PNG filename will need to be updated manually%2$s.', 'wp-smushit' ),
+						'<strong>',
+						'</strong>'
+					);
+					?>
+				</p>
+			</div>
+			<?php
+			return;
+		}
+
 		global $wp_version;
 
 		?>
@@ -685,15 +712,6 @@ class Dashboard extends Abstract_Page {
 					esc_html_e(
 						'Note: This data adds to the size of the image. While this information might be
 					important to photographers, it’s unnecessary for most users and safe to remove.',
-						'wp-smushit'
-					);
-					break;
-				case 'png_to_jpg':
-					esc_html_e(
-						'Note: Any PNGs with transparency will be ignored. Smush will only convert PNGs
-					if it results in a smaller file size. The resulting file will have a new filename and extension
-					(JPEG), and any hard-coded URLs on your site that contain the original PNG filename will need
-					to be updated.',
 						'wp-smushit'
 					);
 					break;
@@ -816,13 +834,20 @@ class Dashboard extends Abstract_Page {
 		$setting_key = WP_SMUSH_PREFIX . 'backup';
 		?>
 		<div class="sui-form-field">
-			<label class="sui-toggle">
-				<input type="checkbox" aria-describedby="<?php echo esc_attr( $setting_key ); ?>-desc" id="<?php echo esc_attr( $setting_key ); ?>" name="<?php echo esc_attr( $setting_key ); ?>" <?php checked( $setting_val, 1 ); ?> value="1">
-				<span class="sui-toggle-slider"></span>
-				<label class="toggle-label <?php echo esc_attr( $setting_key . '-label' ); ?>" for="<?php echo esc_attr( $setting_key ); ?>" aria-hidden="true"></label>
-			</label>
-			<label for="<?php echo esc_attr( $setting_key ); ?>">
-				<?php echo esc_html( WP_Smush::get_instance()->core()->settings['backup']['label'] ); ?>
+			<label for="<?php echo esc_attr( $setting_key ); ?>" class="sui-toggle">
+				<input
+					type="checkbox"
+					value="1"
+					id="<?php echo esc_attr( $setting_key ); ?>"
+					name="<?php echo esc_attr( $setting_key ); ?>"
+					aria-labelledby="<?php echo esc_attr( $setting_key . '-label' ); ?>"
+					aria-describedby="<?php echo esc_attr( $setting_key ); ?>-desc"
+					<?php checked( $setting_val, 1 ); ?>
+				/>
+				<span class="sui-toggle-slider" aria-hidden="true"></span>
+				<span id="<?php echo esc_attr( $setting_key . '-label' ); ?>" class="sui-toggle-label">
+					<?php echo esc_html( WP_Smush::get_instance()->core()->settings['backup']['label'] ); ?>
+				</span>
 			</label>
 			<span class="sui-description sui-toggle-description">
 				<?php echo esc_html( WP_Smush::get_instance()->core()->settings['backup']['desc'] ); ?>
@@ -870,16 +895,14 @@ class Dashboard extends Abstract_Page {
 			// Delete the transients.
 			delete_transient( 'wp-smush-show-dir-scan-notice' );
 			delete_transient( 'wp-smush-dir-scan-failed-items' );
-			?>
-			<div class="sui-notice-top sui-can-dismiss <?php echo esc_attr( $notice_class ); ?>">
-				<p class="sui-notice-content">
-					<?php echo $notice_message; ?>
-				</p>
-				<span class="sui-notice-dismiss">
-					<a role="button" href="#" aria-label="<?php esc_attr_e( 'Dismiss', 'wp-smushit' ); ?>" class="sui-icon-check"></a>
-				</span>
-			</div>
-			<?php
+			$this->view(
+				'notice',
+				array(
+					'classes' => $notice_class,
+					'message' => $notice_message,
+				),
+				'common'
+			);
 		}
 	}
 
@@ -988,11 +1011,11 @@ class Dashboard extends Abstract_Page {
 		$this->view(
 			'bulk-settings/meta-box',
 			array(
-				'basic_features'      => Settings::$basic_features,
-				'cdn_enabled'         => $this->settings->get( 'cdn' ),
-				'grouped_settings'    => $fields,
-				'settings'            => $this->settings->get(),
-				'settings_data'       => WP_Smush::get_instance()->core()->settings,
+				'basic_features'   => Settings::$basic_features,
+				'cdn_enabled'      => $this->settings->get( 'cdn' ),
+				'grouped_settings' => $fields,
+				'settings'         => $this->settings->get(),
+				'settings_data'    => WP_Smush::get_instance()->core()->settings,
 			)
 		);
 	}
@@ -1011,33 +1034,21 @@ class Dashboard extends Abstract_Page {
 			$this->upgrade_url
 		);
 
-		$this->view(
-			'pro-features/meta-box',
-			array(
-				'upsell_url' => $upsell_url,
-			)
-		);
-	}
-
-	/**
-	 * Pro features meta box header.
-	 */
-	public function pro_features_metabox_header() {
 		// Upgrade url with analytics keys.
 		$upgrade_url = add_query_arg(
 			array(
 				'utm_source'   => 'smush',
 				'utm_medium'   => 'plugin',
-				'utm_campaign' => 'smush_advancedsettings_profeature_tag',
+				'utm_campaign' => 'smush-advanced-settings-video-button',
 			),
 			$this->upgrade_url
 		);
 
 		$this->view(
-			'pro-features/meta-box-header',
+			'pro-features/meta-box',
 			array(
-				'title'       => __( 'Smush Pro', 'wp-smushit' ),
 				'upgrade_url' => $upgrade_url,
+				'upsell_url'  => $upsell_url,
 			)
 		);
 	}
@@ -1234,10 +1245,9 @@ class Dashboard extends Abstract_Page {
 
 		$site_locale = get_locale();
 
-		if ( 'en_US' === $site_locale ) {
+		if ( 'en' === $site_locale || 'en_US' === $site_locale ) {
 			$site_language = 'English';
 		} else {
-			/* @noinspection PhpIncludeInspection */
 			require_once ABSPATH . 'wp-admin/includes/translation-install.php';
 			$translations  = wp_get_available_translations();
 			$site_language = isset( $translations[ $site_locale ] ) ? $translations[ $site_locale ]['native_name'] : __( 'Error detecting language', 'wp-smushit' );
@@ -1277,8 +1287,20 @@ class Dashboard extends Abstract_Page {
 	 * @since 3.2.0
 	 */
 	public function lazyload_metabox() {
-		$settings = $this->settings->get_setting( WP_SMUSH_PREFIX . 'lazy_load' );
-		$this->view( 'lazyload/meta-box', array( 'settings' => $settings ) );
+		$this->view(
+			'lazyload/meta-box',
+			array(
+				'settings' => $this->settings->get_setting( WP_SMUSH_PREFIX . 'lazy_load' ),
+				'cpts'     => get_post_types( // custom post types.
+					array(
+						'public'   => true,
+						'_builtin' => false,
+					),
+					'objects',
+					'and'
+				),
+			)
+		);
 	}
 
 	/**
@@ -1302,6 +1324,7 @@ class Dashboard extends Abstract_Page {
 				'grouped_settings' => $this->settings->get_tools_fields(),
 				'settings'         => $this->settings->get(),
 				'settings_data'    => WP_Smush::get_instance()->core()->settings,
+				'backups_count'    => WP_Smush::get_instance()->core()->mod->backup->get_attachments_with_backups(),
 			)
 		);
 	}

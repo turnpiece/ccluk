@@ -32,12 +32,13 @@ class Scan_Api extends Component {
 	 */
 	public static function createScan() {
 		if ( is_null( self::getActiveScan() ) ) {
-			self::flushCache();
+			( new Scanning() )->flushCache();
 
 			$model             = new Scan();
 			$model->status     = Scan::STATUS_INIT;
 			$model->statusText = __( "Initializing...", wp_defender()->domain );
 			$model->save();
+			Utils::instance()->clear_log( 'scan' );
 
 			return $model;
 		} else {
@@ -54,11 +55,14 @@ class Scan_Api extends Component {
 
 	/**
 	 * Get the current scan on going
-	 * @return null|Scan
+	 *
+	 * @param $fresh
+	 *
+	 * @return false|mixed|Scan|null
 	 */
-	public static function getActiveScan() {
+	public static function getActiveScan( $fresh = false ) {
 		$cache = WP_Helper::getArrayCache();
-		if ( $cache->exists( 'activeScan' ) ) {
+		if ( $cache->exists( 'activeScan' ) && $fresh == false ) {
 			return $cache->get( 'activeScan' );
 		}
 		$model = Scan::findOne( array(
@@ -90,7 +94,6 @@ class Scan_Api extends Component {
 
 		$cache->set( 'lastScan', $model );
 
-
 		return $model;
 	}
 
@@ -106,7 +109,7 @@ class Scan_Api extends Component {
 		if ( is_array( $cached ) && ! empty( $cached ) ) {
 			return $cached;
 		}
-
+		$time            = microtime( true );
 		$settings        = Settings::instance();
 		$firstLevelFiles = File_Helper::findFiles( ABSPATH, true, true, array(
 			'dir'      => array(
@@ -128,6 +131,7 @@ class Scan_Api extends Component {
 		$files     = array_merge( $firstLevelFiles, $coreFiles );
 		$files     = apply_filters( 'wd_core_files', $files );
 		$cache->set( self::CACHE_CORE, $files, 0 );
+		Utils::instance()->log( sprintf( 'Core files: %d time finished: %s', count( $files ), microtime( true ) - $time ), 'scan' );
 
 		return $files;
 	}
@@ -138,6 +142,7 @@ class Scan_Api extends Component {
 	public static function getContentFiles() {
 		$cache  = Container::instance()->get( 'cache' );
 		$cached = $cache->get( self::CACHE_CONTENT, false );
+
 		if ( is_array( $cached ) && ! empty( $cached ) ) {
 			return $cached;
 		}
@@ -145,10 +150,14 @@ class Scan_Api extends Component {
 		$files    = File_Helper::findFiles( WP_CONTENT_DIR, true, false, array(), array(
 			'ext' => array( 'php' )
 		), true, $settings->max_filesize, true );
+//		$files = File_Helper::findFiles( WP_CONTENT_DIR . '/removidosnomaa', true, false, array(), array(
+//			'ext' => array( 'php' )
+//		), true, $settings->max_filesize, true );
 		//include wp-config.php here
 		$files[] = ABSPATH . 'wp-config.php';
 		$files   = apply_filters( 'wd_content_files', $files );
 		$cache->set( self::CACHE_CONTENT, $files );
+		Utils::instance()->log( sprintf( 'Content files: %d', count( $files ) ), 'scan' );
 
 		return $files;
 	}
@@ -187,144 +196,6 @@ class Scan_Api extends Component {
 	}
 
 	/**
-	 * Processing a scan, return bool if done or not
-	 * @return bool|\WP_Error
-	 */
-	public static function processActiveScan() {
-		$model = self::getActiveScan();
-		$start = microtime( true );
-		if ( ! is_object( $model ) ) {
-			return new \WP_Error( Error_Code::INVALID, __( "No scan record exists", wp_defender()->domain ) );
-		}
-
-		if ( $model->status == Scan::STATUS_ERROR ) {
-			//stop scan
-			self::releaseLock();
-
-			return new \WP_Error( Error_Code::SCAN_ERROR, $model->statusText );
-		}
-
-		$settings = Settings::instance();
-		$steps    = $settings->getScansAvailable();
-		$done     = 0;
-		if ( self::isLock() ) {
-			//locking
-			return false;
-		} else {
-			//create a safe lock
-			self::createLock();
-		}
-
-		/**
-		 * loop through scanning steps, instance scan step as queue and process
-		 */
-		foreach ( $steps as $step ) {
-			$queue = Settings::queueFactory( $step, array(
-				'model'      => $model,
-				'ignoreList' => self::getIgnoreList()
-			) );
-
-			if ( ! is_object( $queue ) || $queue->isEnd() ) {
-				$done ++;
-				continue;
-			}
-
-			$lastPost = $queue->key();
-
-			if ( $lastPost == 0 ) {
-				//this is newly, we will update the status text here
-				switch ( $step ) {
-					case 'core':
-						$model->statusText = __( "Analyzing WordPress Core...", wp_defender()->domain );
-						break;
-					case 'md5':
-						$model->statusText = __( "Prepare Wordpress Content...", wp_defender()->domain );
-						break;
-					case 'content':
-						$model->statusText = __( "Analyzing WordPress Content...", wp_defender()->domain );
-						break;
-					case 'vuln':
-						$model->statusText = __( "Checking for any published vulnerabilities your plugins & themes...", wp_defender()->domain );
-						break;
-					default:
-						//param not from the button on frontend, log it
-						error_log( sprintf( 'Unexpected value %s from IP %s', $step, Utils::instance()->getUserIp() ) );
-						break;
-				}
-				$model->save();
-			}
-			while ( ! $queue->isEnd() ) {
-				//while in the loop, the model can be set as ERROR, check and return of Error
-				if ( $queue->processItem() == false ) {
-					//we will by pass this if the process is fail
-					//todo we will output the error and let user know
-					$queue->next();
-					$queue->saveProcess();
-					self::releaseLock();
-
-					return false;
-				} else {
-					//each request onlly allow 10s, or when reached to 64MB ram
-					$est     = microtime( true ) - $start;
-					$currMem = ( memory_get_peak_usage( true ) / 1024 / 1024 );
-					if ( php_sapi_name() == 'cli' ) {
-						echo $queue->current() . PHP_EOL;
-					}
-					//echo $currMem . PHP_EOL;
-					$memLimit = apply_filters( 'defender_scan_memory_alloc', 128 );
-					if ( $est >= 15 || $currMem >= $memLimit || $queue->isEnd() || $queue->key() == 1 ) {
-						//save current process and pause
-						$queue->saveProcess();
-
-						//unlock before return
-						self::releaseLock();
-						//we have to cache the checksum of content here
-						if ( $step == 'content' ) {
-							$altCache    = WP_Helper::getArrayCache();
-							$oldChecksum = $altCache->get( Content_Scan::CONTENT_CHECKSUM, null );
-							$tries       = $altCache->get( Content_Scan::FILES_TRIED, null );
-							$cache       = WP_Helper::getCache();
-							if ( is_array( $oldChecksum ) ) {
-								$cache->set( Content_Scan::CONTENT_CHECKSUM, $oldChecksum );
-							}
-							if ( is_array( $tries ) ) {
-								$cache->set( Content_Scan::FILES_TRIED, $tries );
-							}
-						}
-
-						return false;
-					}
-				}
-			}
-			//break at the end to prevent it stuck so long when init, also the heavy part is in the while loop
-			break;
-		}
-
-		if ( $done == count( $steps ) ) {
-			//all done
-			//remove all old records
-			$lastScan = self::getLastScan();
-			if ( is_object( $lastScan ) ) {
-				$lastScan->delete();
-			}
-			//mark the current as complted
-			$model->status = Scan::STATUS_FINISH;
-			$model->save();
-			if ( $model->logs == 'report' ) {
-				$settings->last_report_sent = time();
-				$settings->save();
-			}
-			self::flushCache();
-			self::releaseLock();
-
-			return true;
-		}
-		self::releaseLock();
-
-		return false;
-	}
-
-	/**
 	 * remove all scan models
 	 */
 	public static function removeAllScanRecords() {
@@ -339,31 +210,19 @@ class Scan_Api extends Component {
 	 * @return Result_Item[]
 	 */
 	public static function getIgnoreList() {
-		if ( is_array( self::$ignoreList ) ) {
-			return self::$ignoreList;
+		$cache  = WP_Helper::getArrayCache();
+		$cached = $cache->get( self::IGNORE_LIST, false );
+		if ( is_array( $cached ) ) {
+			return $cached;
 		}
-
-		$ids = get_site_option( self::IGNORE_LIST );
-		if ( $ids == false ) {
-			$cache = Container::instance()->get( 'cache' );
-			$ids   = $cache->get( self::IGNORE_LIST, array() );
-			update_site_option( self::IGNORE_LIST, $ids );
-		} elseif ( ! is_array( $ids ) ) {
-			$ids = unserialize( $ids );
-		}
-
-		if ( empty( $ids ) ) {
-			self::$ignoreList = array();
-
-			return array();
-		}
+		$ids = get_site_option( self::IGNORE_LIST, [] );
 
 		$ignoreList = Result_Item::findAll( array(
 			'id' => $ids
 		) );
 
-		self::$ignoreList = $ignoreList;
-
+		$cached = $ignoreList;
+		$cache->set( self::IGNORE_LIST, $cached );
 
 		return $ignoreList;
 	}
@@ -392,17 +251,9 @@ class Scan_Api extends Component {
 	 * @param $id
 	 */
 	public static function indexIgnore( $id ) {
-		$ids = get_site_option( self::IGNORE_LIST );
-		if ( $ids == false ) {
-			$cache = Container::instance()->get( 'cache' );
-			$ids   = $cache->get( self::IGNORE_LIST, array() );
-		} elseif ( ! is_array( $ids ) ) {
-			$ids = unserialize( $ids );
-		}
-		if ( ! is_array( $ids ) ) {
-			$ids = array();
-		}
+		$ids   = get_site_option( self::IGNORE_LIST, [] );
 		$ids[] = $id;
+		$ids   = array_unique( $ids );
 		update_site_option( self::IGNORE_LIST, $ids );
 	}
 
@@ -412,91 +263,20 @@ class Scan_Api extends Component {
 	 * @param $id
 	 */
 	public static function unIndexIgnore( $id ) {
-		$ids = get_site_option( self::IGNORE_LIST );
-		if ( $ids == false ) {
-			$cache = Container::instance()->get( 'cache' );
-			$ids   = $cache->get( self::IGNORE_LIST, array() );
-		} elseif ( ! is_array( $ids ) ) {
-			$ids = unserialize( $ids );
-		}
-		if ( ! is_array( $ids ) ) {
-			$ids = array();
+		$ids = get_site_option( self::IGNORE_LIST, [] );
+		if ( empty( $ids ) ) {
+			return;
 		}
 		unset( $ids[ array_search( $id, $ids ) ] );
 		update_site_option( self::IGNORE_LIST, $ids );
 	}
 
 	/**
-	 * Get current percent, if $getFromCache set to true, we will get the last cached value
-	 *
-	 * @param bool $getFromCache
-	 *
-	 * @return float|int
-	 */
-	public static function getScanProgress( $getFromCache = false ) {
-		$cache = WP_Helper::getCache();
-		if ( $getFromCache ) {
-			$cache = $cache->get( 'defenderScanPercent' );
-			if ( $cache == false ) {
-				return 0;
-			}
-
-			return $cache;
-		}
-
-		$settings     = Settings::instance();
-		$steps        = $settings->getScansAvailable();
-		$total        = 0;
-		$currentIndex = 0;
-		foreach ( $steps as $step ) {
-			$queue = Settings::queueFactory( $step, array() );
-			if ( is_object( $queue ) ) {
-				$total += $queue->count();
-				if ( $queue->isEnd() ) {
-					$currentIndex += $queue->count();
-				} else {
-					$currentIndex += $queue->key();
-				}
-			}
-		}
-
-		$percent = 0;
-		if ( $total > 0 ) {
-			$percent = round( ( $currentIndex / $total ) * 100, 2 );
-		}
-		$cache->set( 'defenderScanPercent', $percent, 3600 );
-
-		return $percent;
-	}
-
-	/**
 	 * flush all cache generated during scan process
+	 * @deprecated
 	 */
-	public static function flushCache( $flushQueue = true ) {
-		$cache = WP_Helper::getCache();
-		if ( $flushQueue == true ) {
-			$settings = Settings::instance();
-			$steps    = $settings->getScansAvailable();
-			foreach ( $steps as $step ) {
-				$queue = Settings::queueFactory( $step, array() );
-				if ( is_object( $queue ) ) {
-					$queue->clearStatusData();
-				}
-			}
-		}
-		//todo still update
-		$cache->delete( self::CACHE_CORE );
-		$cache->delete( self::CACHE_CONTENT );
-		$cache->delete( self::SCAN_PATTERN );
-		delete_site_option( self::SCAN_PATTERN );
-		$cache->delete( 'filestried' );
-		$cache->delete( self::CACHE_CHECKSUMS );
-		$cache->delete( 'defenderScanPercent' );
-		$altCache = WP_Helper::getArrayCache();
-		$altCache->delete( 'lastScan' );
-		$altCache->delete( 'activeScan' );
-		Scan_Api::releaseLock();
-		File_Helper::deleteFolder( Utils::instance()->getDefUploadDir() . '/md5-scan' );
+	public static function flushCache() {
+		( new Scanning() )->flushCache();
 	}
 
 	/**
@@ -587,51 +367,6 @@ class Scan_Api extends Component {
 	}
 
 	/**
-	 * Create a lock
-	 * @return int
-	 */
-	public static function createLock() {
-		$lockPath = WP_Helper::getUploadDir() . '/wp-defender/';
-		if ( ! is_dir( $lockPath ) ) {
-			wp_mkdir_p( $lockPath );
-		}
-
-		$lockFile = $lockPath . 'scan-lock';
-
-		return file_put_contents( $lockFile, time(), LOCK_EX );
-	}
-
-	/**
-	 * @return bool
-	 */
-	public static function isLock() {
-		$lockPath = WP_Helper::getUploadDir() . '/wp-defender/';
-		$lockFile = $lockPath . 'scan-lock';
-		if ( ! is_file( $lockFile ) ) {
-			return false;
-		}
-
-		$time = file_get_contents( $lockFile );
-		if ( strtotime( '+1 minutes', $time ) < time() ) {
-			//this lock locked for too long, unlock it
-			@unlink( $lockFile );
-
-			return false;
-		}
-
-		return true;
-	}
-
-	/**
-	 * release a lock
-	 */
-	public static function releaseLock() {
-		$lockPath = WP_Helper::getUploadDir() . '/wp-defender/';
-		$lockFile = $lockPath . 'scan-lock';
-		@unlink( $lockFile );
-	}
-
-	/**
 	 * @return array|mixed|object|\WP_Error
 	 */
 	public static function getPatterns() {
@@ -641,20 +376,26 @@ class Scan_Api extends Component {
 		}
 
 		$patterns = get_site_option( Scan_Api::SCAN_PATTERN, null );
+
 		if ( is_array( $patterns ) ) {
 			//return pattern if that exists, no matter the content
 			return $patterns;
 		}
+		$base         = defined( 'WPMUDEV_CUSTOM_API_SERVER' ) && WPMUDEV_CUSTOM_API_SERVER
+			? WPMUDEV_CUSTOM_API_SERVER
+			: 'https://premium.wpmudev.org/';
+		$api_endpoint = "{$base}api/defender/v1/yara-signatures";
 
-		$api_endpoint = "https://premium.wpmudev.org/api/defender/v1/signatures";
-		$patterns     = Utils::instance()->devCall( $api_endpoint, array(), array(
+		$patterns = Utils::instance()->devCall( $api_endpoint, array(), array(
 			'method' => 'GET'
 		) );
+		if ( is_wp_error( $patterns ) ) {
+			Utils::instance()->log( $patterns->get_error_message(), 'scan' );
+		}
 		if ( is_wp_error( $patterns ) || $patterns == false ) {
 			$patterns = array();
 		}
-
-
+		Utils::instance()->log( sprintf( 'Fetch rules from %s. Found %d', $api_endpoint, count( $patterns ) ), 'scan' );
 		update_site_option( Scan_Api::SCAN_PATTERN, $patterns );
 
 		return $patterns;

@@ -369,7 +369,6 @@ function apbct_get_sender_info() {
 		'headers_sent__hook'     => !empty($apbct->headers_sent__hook)  ? $apbct->headers_sent__hook  : false,
 		'headers_sent__where'    => !empty($apbct->headers_sent__where) ? $apbct->headers_sent__where : false,
 		'request_type'           => apbct_get_server_variable('REQUEST_METHOD') ? apbct_get_server_variable('REQUEST_METHOD') : 'UNKNOWN',
-		'abpct_hyro_acc_collect' => !empty($_COOKIE['abpct_hyro_acc_collect'])                     ? json_decode(stripslashes($_COOKIE['abpct_hyro_acc_collect']), true): null,
 	);
 }
 
@@ -734,6 +733,7 @@ function ct_get_fields_any($arr, $message=array(), $email = null, $nickname = ar
 		'ebd_settings',
 		'ebd_downloads_',
 		'ecole_origine',
+		'signature',
 	);
 	
 	// Reset $message if we have a sign-up data

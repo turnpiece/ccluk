@@ -7,6 +7,7 @@ namespace Hammer\Queue;
 
 use Hammer\Base\Component;
 use Hammer\Base\Container;
+use WP_Defender\Behavior\Utils;
 
 class Queue extends Component implements \Iterator, \ArrayAccess, \Countable {
 	const EVENT_ITEM_PROCESSED = 'itemProcessed', EVENT_ITEM_FAIlED = 'itemFailed';
@@ -207,7 +208,8 @@ class Queue extends Component implements \Iterator, \ArrayAccess, \Countable {
 	public function saveProcess() {
 		if ( $this->continueable == true ) {
 			$cache = Container::instance()->get( 'cache' );
-			$cache->set( 'queue_' . $this->slug, $this->position, 0 );
+			$ret   = $cache->set( 'queue_' . $this->slug, $this->position, 0 );
+			Utils::instance()->log( sprintf( 'Cached %s at %s. Status: %s', $this->slug, $this->position, var_export( $ret, true ) ) );
 		}
 	}
 

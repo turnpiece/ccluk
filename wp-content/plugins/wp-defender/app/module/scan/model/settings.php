@@ -5,14 +5,13 @@
 
 namespace WP_Defender\Module\Scan\Model;
 
-use Hammer\Helper\Log_Helper;
 use Hammer\Helper\WP_Helper;
 use Hammer\Queue\Queue;
 use WP_Defender\Behavior\Utils;
+use WP_Defender\Module\Scan\Behavior\Core_Files;
 use WP_Defender\Module\Scan\Behavior\Core_Scan;
-use WP_Defender\Module\Scan\Behavior\Pro\Content_Scan;
-use WP_Defender\Module\Scan\Behavior\Pro\Content_Scan2;
-use WP_Defender\Module\Scan\Behavior\Pro\MD5_Scan;
+use WP_Defender\Module\Scan\Behavior\Pro\Content_Files;
+use WP_Defender\Module\Scan\Behavior\Pro\Content_Yara_Scan;
 use WP_Defender\Module\Scan\Behavior\Pro\Vuln_Scan;
 use WP_Defender\Module\Scan\Component\Scan_Api;
 
@@ -191,6 +190,7 @@ Official WPMU DEV Superhero', wp_defender()->domain );
 	public function getScansAvailable() {
 		$scans = array();
 		if ( $this->scan_core ) {
+			$scans[] = 'gather_core_files';
 			$scans[] = 'core';
 		}
 
@@ -226,6 +226,13 @@ Official WPMU DEV Superhero', wp_defender()->domain );
 	 */
 	public static function queueFactory( $slug, $args = array() ) {
 		switch ( $slug ) {
+			case 'gather_core_files':
+				$queue                = new Queue( [ 'dummy' ], 'gather_core_files', true );
+				$queue->args          = $args;
+				$queue->args['owner'] = $queue;
+				$queue->attachBehavior( 'core_files', new Core_Files() );
+
+				return $queue;
 			case 'core':
 				$queue                = new Queue(
 					Scan_Api::getCoreFiles(),
@@ -252,24 +259,18 @@ Official WPMU DEV Superhero', wp_defender()->domain );
 
 				return $queue;
 				break;
-			case 'md5':
-				if ( ! class_exists( '\WP_Defender\Module\Scan\Behavior\Pro\Md5_Scan' ) ) {
+			case 'gather_content_files':
+				if ( ! class_exists( '\WP_Defender\Module\Scan\Behavior\Pro\Content_Yara_Scan' ) ) {
 					return null;
 				}
-				$plugins = array();
-				foreach ( get_plugins() as $slug => $plugin ) {
-					$plugin['slug'] = $slug;
-					$plugins[]      = $plugin;
-				}
-				$queue                = new Queue( array_merge( $plugins, wp_get_themes() ), 'md5', true );
+				$queue                = new Queue( [ 'dummy' ], 'gather_content_files', true );
 				$queue->args          = $args;
 				$queue->args['owner'] = $queue;
-				$queue->attachBehavior( 'md5', new MD5_Scan() );
+				$queue->attachBehavior( 'content_files', new Content_Files() );
 
 				return $queue;
-				break;
 			case 'content':
-				if ( ! class_exists( '\WP_Defender\Module\Scan\Behavior\Pro\Content_Scan' ) ) {
+				if ( ! class_exists( '\WP_Defender\Module\Scan\Behavior\Pro\Content_Yara_Scan' ) ) {
 					return null;
 				}
 				//dont use composer autoload preventing bloating
@@ -278,7 +279,7 @@ Official WPMU DEV Superhero', wp_defender()->domain );
 				$queue->args['owner']    = $queue;
 				$patterns                = Scan_Api::getPatterns();
 				$queue->args['patterns'] = $patterns;
-				$queue->attachBehavior( 'content', new Content_Scan() );
+				$queue->attachBehavior( 'content', new Content_Yara_Scan() );
 
 				return $queue;
 				break;

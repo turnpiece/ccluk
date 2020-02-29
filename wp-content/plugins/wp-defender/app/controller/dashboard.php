@@ -14,6 +14,7 @@ use WP_Defender\Module\Audit\Component\Audit_API;
 use WP_Defender\Module\IP_Lockout;
 use WP_Defender\Module\IP_Lockout\Component\Login_Protection_Api;
 use WP_Defender\Module\Scan\Component\Scan_Api;
+use WP_Defender\Module\Scan\Component\Scanning;
 use WP_Defender\Module\Scan\Model\Result_Item;
 use WP_Defender\Module\Scan\Model\Settings;
 use WP_Defender\Module\Setting\Component\Backup_Settings;
@@ -152,13 +153,14 @@ class Dashboard extends Controller {
 	}
 
 	public function getScanProgress() {
-		$ret = Scan_Api::processActiveScan();
+		$scanning = new Scanning();
+		$ret      = $scanning->do();
 		if ( is_wp_error( $ret ) ) {
 			wp_send_json_error( array(
 				'message' => $ret->get_error_message()
 			) );
 		} else {
-			$percent = Scan_Api::getScanProgress();
+			$percent = $scanning->getScanProgress();
 			if ( $ret == true ) {
 				$percent = 100;
 			}

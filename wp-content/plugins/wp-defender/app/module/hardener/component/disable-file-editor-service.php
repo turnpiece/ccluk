@@ -33,7 +33,7 @@ class Disable_File_Editor_Service extends Rule_Service implements IRule_Service 
 		}
 		$config = file( $config_path );
 		$line   = $this->findLine( $config );
-		if ( $line == false ) {
+		if ( false === $line ) {
 			//no defined, we just need to inject
 			$hook_line = $this->findDefaultHookLine( $config );
 			if ( $hook_line === false ) {
@@ -44,7 +44,7 @@ class Disable_File_Editor_Service extends Rule_Service implements IRule_Service 
 			return file_put_contents( $config_path, implode( null, $config ), LOCK_EX );
 		} else {
 			list( $value, $line ) = $line;
-			if ( $value == true ) {
+			if ( true === $value ) {
 				//already disable it, if we sitll here mean st not work, do nothing
 				return;
 			} else {

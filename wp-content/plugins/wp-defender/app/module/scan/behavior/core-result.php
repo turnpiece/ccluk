@@ -137,6 +137,16 @@ class Core_Result extends Behavior {
 	 */
 	public function getSrcCode() {
 		if ( is_file( $this->getSubtitle() ) || is_dir( $this->getSubtitle() ) ) {
+//			$mime = mime_content_type( $this->getSubtitle() );
+//			if ( strpos( $mime, 'text/' ) !== 0 ) {
+//				Utils::instance()->log( sprintf( 'file %s with mime %s',$this->getSubtitle(),$mime ), 'scan' );
+//
+//				return __( "This file type is not supported", wp_defender()->domain );
+//			}
+			$file_size = filesize( $this->getSubtitle() );
+			if ( $file_size > 3145728 ) {
+				return __( "This file size is too big", wp_defender()->domain );
+			}
 			$raw = $this->getRaw();
 			if ( $raw['type'] == 'unknown' ) {
 				$content = file_get_contents( $this->getSubtitle() );
@@ -170,7 +180,6 @@ class Core_Result extends Behavior {
 		if ( ! class_exists( 'Text_Diff', false ) || ! class_exists( 'Text_Diff_Renderer_inline', false ) ) {
 			require( ABSPATH . WPINC . DIRECTORY_SEPARATOR . 'wp-diff.php' );
 		}
-
 		$left_lines  = explode( "\n", $left_string );
 		$right_lines = explode( "\n", $right_string );
 		$text_diff   = new \Text_Diff( 'auto', array(

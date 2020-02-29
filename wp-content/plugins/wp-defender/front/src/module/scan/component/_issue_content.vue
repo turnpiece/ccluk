@@ -153,7 +153,7 @@
 			this.element_id = Math.random()
 		},
 		updated: function () {
-			console.log('here');
+
 		}
 	}
 </script>

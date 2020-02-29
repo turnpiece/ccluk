@@ -3,9 +3,9 @@ Contributors: kylephillips
 Donate link: http://nestedpages.com/
 Tags: pages, admin, nested, tree view, page tree, sort, quick edit, structure
 Requires at least: 3.8
-Tested up to: 5.2
+Tested up to: 5.3
 Requires PHP: 5.4
-Stable tag: 3.1.6
+Stable tag: 3.1.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -104,6 +104,10 @@ No. The menu synchronization currently only works within the pages post type.
 9. The Nested Pages interface can be enabled on a per-post-type basis, with customizable options for each type.
 
 == Changelog ==
+
+= 3.1.8 =
+* Fixes conflict with Subpages Expanded plugin where sidebar selections under the appearance > widgets screen was broken
+* Fixes bug where setting a page to anything other than published was not removing menu items during sync
 
 = 3.1.7 =
 * Updates quick edit interface.

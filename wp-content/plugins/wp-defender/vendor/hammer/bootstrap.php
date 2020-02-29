@@ -28,9 +28,9 @@ spl_autoload_register( function ( $class ) {
 require_once __DIR__ . '/vendor/maxmind-db/reader/autoload.php';
 
 //loading the dependency
-\Hammer\Base\Container::instance()->set( 'cache', initCacheEngine() );
+\Hammer\Base\Container::instance()->set( 'cache', new \Hammer\Caching\DB_Cache() );
 \Hammer\Base\Container::instance()->set( 'cache_alt', new \Hammer\Caching\Array_Cache() );
-
+\Hammer\Base\Container::instance()->set( 'cache_object', new \Hammer\Caching\Array_Cache() );
 /**
  * Init cache engine base on availability of memcached or not
  * @return \Hammer\Caching\DB_Cache|\Hammer\Caching\Memcached_Cache
@@ -39,7 +39,7 @@ function initCacheEngine() {
 	if ( ! defined( 'WD_NO_OBJECT_CACHE' ) ) {
 		define( 'WD_NO_OBJECT_CACHE', 0 );
 	}
-	return new \Hammer\Caching\DB_Cache();
+
 	if ( function_exists( 'wp_using_ext_object_cache' )
 	     && wp_using_ext_object_cache() && ! defined( 'W3TC' ) && WD_NO_OBJECT_CACHE == 0 ) {
 		return new \Hammer\Caching\Memcached_Cache();

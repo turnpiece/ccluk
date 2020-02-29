@@ -32,7 +32,7 @@
 						</div>
 						<div class="sui-box-body" :class="body_css">
 							<p>
-								{{__("Defender is scanning your files for malicious code. This will take a few minutes depending on the size of your website.")}}
+								{{__("Defender is currently scanning your files for malicious code, please be patient this should on take a few minutes depending on the size of your website.")}}
 							</p>
 							<div class="sui-progress-block">
 								<div class="sui-progress">
@@ -150,7 +150,7 @@
 			},
 			polling: function () {
 				if (this.state.canceling === false) {
-					this.polling_state = setTimeout(this.refreshStatus(), 500)
+					this.polling_state = setTimeout(this.refreshStatus(), 2000)
 				}
 			},
 			cancelScan: function () {

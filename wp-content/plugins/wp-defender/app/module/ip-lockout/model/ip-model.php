@@ -50,7 +50,7 @@ class IP_Model extends DB_Model {
 	 * @return IP_Model|null
 	 */
 	public static function init() {
-		$model = self::findOne( [ 'ip' => Utils::instance()->getUserIp() ] );
+		$model = self::findOne( [ 'ip' => Utils::instance()->getUserIp() ] );	   			 	 		  		  	 	
 		if ( ! is_object( $model ) ) {
 			$model = new IP_Model();
 			//create new

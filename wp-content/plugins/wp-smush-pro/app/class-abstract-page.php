@@ -9,7 +9,7 @@ namespace Smush\App;
 
 use Smush\Core\Modules\Dir;
 use Smush\Core\Settings;
-use Smush\WP_Smush;
+use WP_Smush;
 use WPMUDEV_Dashboard;
 
 if ( ! defined( 'WPINC' ) ) {
@@ -422,9 +422,10 @@ abstract class Abstract_Page {
 	 */
 	public function get_current_tab() {
 		$tabs = $this->get_tabs();
+		$view = filter_input( INPUT_GET, 'view', FILTER_SANITIZE_STRING );
 
-		if ( isset( $_GET['view'] ) && array_key_exists( wp_unslash( $_GET['view'] ), $tabs ) ) { // Input var ok.
-			return wp_unslash( $_GET['view'] ); // Input var ok.
+		if ( array_key_exists( $view, $tabs ) ) {
+			return $view;
 		}
 
 		if ( empty( $tabs ) ) {
@@ -558,8 +559,14 @@ abstract class Abstract_Page {
 						<?php esc_html_e( 'Re-Check Images', 'wp-smushit' ); ?>
 					</button>
 				<?php endif; ?>
-				<?php if ( ! $this->hide_wpmudev_doc_link() ) : ?>
-					<a href="https://premium.wpmudev.org/project/wp-smush-pro/#wpmud-hg-project-documentation" class="sui-button sui-button-ghost" target="_blank">
+				<?php if ( ! apply_filters( 'wpmudev_branding_hide_doc_link', false ) ) : ?>
+					<?php
+					$doc = 'https://premium.wpmudev.org/project/wp-smush-pro/#wpmud-hg-project-documentation';
+					if ( WP_Smush::is_pro() ) {
+						$doc = 'https://premium.wpmudev.org/docs/wpmu-dev-plugins/smush/?utm_source=smush&utm_medium=plugin&utm_campaign=smush_pluginlist_docs';
+					}
+					?>
+					<a href="<?php echo esc_url( $doc ); ?>>" class="sui-button sui-button-ghost" target="_blank">
 						<i class="sui-icon-academy" aria-hidden="true"></i> <?php esc_html_e( 'Documentation', 'wp-smushit' ); ?>
 					</a>
 				<?php endif; ?>
@@ -616,15 +623,12 @@ abstract class Abstract_Page {
 	 * Display a admin notice on smush screen if the custom table wasn't created
 	 */
 	private function show_table_error() {
-		$notice = '';
-
 		$current_screen = get_current_screen();
 		if ( 'toplevel_page_smush' !== $current_screen->id && 'toplevel_page_smush-network' !== $current_screen->id ) {
-			return $notice;
+			return;
 		}
 
-		if ( ! Dir::table_exist() ) {
-			// Display a notice.
+		if ( ! Dir::table_exist() ) { // Display a notice.
 			?>
 			<div class="sui-notice sui-notice-warning missing_table">
 				<p>
@@ -658,7 +662,7 @@ abstract class Abstract_Page {
 		?>
 
 		<div class="sui-notice wp-smush-api-message <?php echo esc_attr( $type_class ); ?>">
-			<p><?php echo $message; ?></p>
+			<p><?php echo wp_kses_post( $message ); ?></p>
 			<span class="sui-notice-dismiss">
 				<a href="#"><?php esc_html_e( 'Dismiss', 'wp-smushit' ); ?></a>
 			</span>
@@ -702,21 +706,20 @@ abstract class Abstract_Page {
 		if ( $smush_count || $resmush_count ) {
 			$message_class = ' sui-notice-warning';
 			// Show link to bulk smush tab from other tabs.
-			$bulk_smush_link = 'bulk' === $this->get_current_tab() ? '<a href="#" class="wp-smush-trigger-bulk">' : '<a href="' . WP_Smush::get_instance()->admin()->settings_link( array(), true ) . '">';
+			$bulk_smush_link = 'bulk' === $this->get_current_tab() ? '<a href="#" class="wp-smush-trigger-bulk">' : '<a href="' . $this->get_page_url() . '">';
 			/* translators: %1$s - <a>, %2$s - </a> */
 			$message .= ' ' . sprintf( esc_html__( 'You have images that need smushing. %1$sBulk smush now!%2$s', 'wp-smushit' ), $bulk_smush_link, '</a>' );
 		}
-		?>
-		<div class="sui-notice-top sui-can-dismiss <?php echo esc_attr( $message_class ); ?>">
-			<div class="sui-notice-content">
-				<p><?php echo $message; ?></p>
-			</div>
-			<span class="sui-notice-dismiss">
-				<a role="button" href="#" aria-label="<?php esc_attr_e( 'Dismiss', 'wp-smushit' ); ?>" class="sui-icon-check"></a>
-			</span>
-		</div>
 
-		<?php
+		$this->view(
+			'notice',
+			array(
+				'classes' => $message_class,
+				'message' => $message,
+			),
+			'common'
+		);
+
 		// Remove the option.
 		$this->settings->delete_setting( WP_SMUSH_PREFIX . 'settings_updated' );
 	}
@@ -738,28 +741,6 @@ abstract class Abstract_Page {
 		);
 
 		return $plugin_pages;
-	}
-
-	/**
-	 * Flag to hide wpmudev branding image.
-	 *
-	 * @since 3.0
-	 *
-	 * @return bool
-	 */
-	public function hide_wpmudev_branding() {
-		return apply_filters( 'wpmudev_branding_hide_branding', false );
-	}
-
-	/**
-	 * Flag to hide wpmudev doc link.
-	 *
-	 * @since 3.0
-	 *
-	 * @return bool
-	 */
-	public function hide_wpmudev_doc_link() {
-		return apply_filters( 'wpmudev_branding_hide_doc_link', false );
 	}
 
 	/**
@@ -796,6 +777,36 @@ abstract class Abstract_Page {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Return this menu page URL
+	 *
+	 * @since 3.5.0
+	 *
+	 * @return string
+	 */
+	public function get_page_url() {
+		if ( is_multisite() && is_network_admin() ) {
+			global $_parent_pages;
+
+			if ( isset( $_parent_pages[ $this->slug ] ) ) {
+				$parent_slug = $_parent_pages[ $this->slug ];
+				if ( $parent_slug && ! isset( $_parent_pages[ $parent_slug ] ) ) {
+					$url = network_admin_url( add_query_arg( 'page', $this->slug, $parent_slug ) );
+				} else {
+					$url = network_admin_url( 'admin.php?page=' . $this->slug );
+				}
+			} else {
+				$url = '';
+			}
+
+			$url = esc_url( $url );
+
+			return $url;
+		} else {
+			return menu_page_url( $this->slug, false );
+		}
 	}
 
 }

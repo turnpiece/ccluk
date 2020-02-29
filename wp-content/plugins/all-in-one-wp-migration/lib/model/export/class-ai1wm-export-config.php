@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (C) 2014-2019 ServMask Inc.
+ * Copyright (C) 2014-2020 ServMask Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -148,6 +148,9 @@ class Ai1wm_Export_Config {
 
 		// Set active stylesheet
 		$config['Stylesheet'] = ai1wm_active_stylesheet();
+
+		// Set upload path
+		$config['Uploads'] = get_option( 'upload_path' );
 
 		// Save package.json file
 		$handle = ai1wm_open( ai1wm_package_path( $params ), 'w' );

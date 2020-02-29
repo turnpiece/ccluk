@@ -1,5 +1,5 @@
 <template>
-	<div class="sui-accordion-item" :class="cssClass">
+	<div :id="slug" class="sui-accordion-item" :class="cssClass">
 		<div class="sui-accordion-item-header">
 			<div class="sui-accordion-item-title">
 				<i aria-hidden="true" :class="titleIcon"></i>
@@ -10,12 +10,12 @@
 						<i class="sui-icon-chevron-down" aria-hidden="true"></i>
 					</button>
 					<submit-button v-else type="button" :state="state"
-					               css-class="sui-button-ghost float-r" @click="restore">
+                            css-class="sui-button-ghost float-r restore" @click="restore">
                         <span class="sui-loading-text">
                         <i class="sui-icon-undo" aria-hidden="true"></i>{{__("Restore")}}
                         </span>
-						<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
-					</submit-button>
+                        <i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
+                    </submit-button>
 				</div>
 			</div>
 		</div>
@@ -45,7 +45,7 @@
 							{{ __( "Currently, some of your config files aren’t protected. It’s best to lock this down these files to ensure they can’t be accessed by hackers and bots." ) }}
 						</p>
 					</div>
-					<div class="sui-tabs sui-side-tabs">
+					<div class="sui-tabs sui-side-tabs" v-if="status==='issues'">
 						<div class="sui-side-tabs">
 							<div class="sui-tabs-menu">
 								<label for="pi_apache" :class="{'active':current_server==='apache'}"
@@ -127,7 +127,7 @@
 								<div class="sui-tab-content sui-tab-boxed" :class="{'active':current_server==='iss7'}"
 								     data-tab-content="pi_iis7-box">
 									<p v-html="iisText"></p>
-									<form>
+									<form method="post" v-on:submit.prevent="process">
 										<button class="sui-button sui-button-blue" type="submit">
 											{{__("Add web.config file")}}
 										</button>
@@ -140,12 +140,20 @@
 				<div v-if="status==='issues'" class="sui-box-footer">
 					<div class="sui-actions-left">
 						<form method="post" v-on:submit.prevent="ignore">
-							<submit-button :state="state" type="submit" css-class="sui-button-ghost">
-								<span class="sui-loading-text"><i class="sui-icon-eye-hide" aria-hidden="true"></i> {{ __( "Ignore")}}</span>
-								<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
-							</submit-button>
-						</form>
+                            <submit-button :state="state" type="submit" css-class="sui-button-ghost ignore">
+                                <span class="sui-loading-text"><i class="sui-icon-eye-hide" aria-hidden="true"></i> {{ __( "Ignore")}}</span>
+                                <i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
+                            </submit-button>
+                        </form>
 					</div>
+				</div>
+				<div v-else-if="status==='fixed' && current_server ==='apache'" class="sui-box-footer">
+					<form v-on:submit.prevent="revert" method="post">
+						<submit-button :state="state" type="submit" css-class="revert">
+							<span class="sui-loading-text">{{__( "Revert" ) }}</span>
+							<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
+						</submit-button>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -187,14 +195,14 @@
 		},
 		computed: {
 			issUrl: function () {
-				return 'For IIS servers, ' + '<a href="https://technet.microsoft.com/en-us/library/cc725855(v=ws.10).aspx">visit Microsoft TechNet</a>';
+				return 'For IIS servers, ' + '<a target="_blank" href="https://technet.microsoft.com/en-us/library/cc725855(v=ws.10).aspx">visit Microsoft TechNet</a>';
 			},
 			supportUrl: function () {
 				return "Still having trouble? " + "<a target='_blank' href='https://premium.wpmudev.org/forums/forum/support#question'>Open a support ticket</a>";
 			},
 			iisText: function () {
 				let string = vsprintf(this.__("We will place %s file into the uploads folder to lock down the files and folders inside."), "<strong>web.config</strong>");
-				string += vsprintf(this.__("For more information, please <a href='%s'>visit Microsoft TechNet</a>"), "https://technet.microsoft.com/en-us/library/cc725855(v=ws.10).aspx");
+				string += vsprintf(this.__("For more information, please <a target='_blank' href='%s'>visit Microsoft TechNet</a>"), "https://technet.microsoft.com/en-us/library/cc725855(v=ws.10).aspx");
 				return string;
 			}
 		}
