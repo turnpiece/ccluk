@@ -1086,7 +1086,7 @@ label[for="groupblog-create-new-no"] {
 }
 
 .bb-has-sidebar #buddypress .dir-list.mygroups ul.item-list > li {
-  width: 50%;
+  width: 100%;
 }
 
 #buddypress .dir-list ul.item-list {
@@ -1250,7 +1250,7 @@ label[for="groupblog-create-new-no"] {
   width: auto;
   z-index: 2;
   .generic-button a {
-    background-color: $white;
+    background-color: $gray;
     border: 1px solid $divider_color;
     clear: both;
     color: $blue;
@@ -1303,7 +1303,8 @@ label[for="groupblog-create-new-no"] {
 }
 
 #page #main {
-  .author-follow div.generic-button.loading a:before, .inner-avatar-wrap .generic-button.loading a:not(.group-sub):not(.group-subscription-close):before {
+  .author-follow div.generic-button.loading a:before, 
+  .inner-avatar-wrap .generic-button.loading a:not(.group-sub):not(.group-subscription-close):before {
     content: "H";
     color: $white;
     font-family: 'onesocial';
@@ -1317,7 +1318,8 @@ label[for="groupblog-create-new-no"] {
 .author-follow div.generic-button a:hover,
 #main .inner-avatar-wrap .generic-button a:not(.group-sub):not(.group-subscription-close):hover {
   background: transparent;
-  color: $gray;
+  color: $green;
+  font-size: $font-size-tiny;
   box-shadow: none;
   visibility: visible;
 }
@@ -1405,7 +1407,7 @@ label[for="groupblog-create-new-no"] {
 .inner-avatar-wrap {
   .group-button.membership-requested:before,
   .membership-requested a:before {
-    background: $blue;
+    background: $gray;
     content: '\f017';
     font-family: 'fontawesome';
     font-size: 15px;
@@ -1427,7 +1429,7 @@ label[for="groupblog-create-new-no"] {
 
 .author-follow div.generic-button a:after {
   -moz-osx-font-smoothing: grayscale;
-  background-color: #e33d41;
+  background-color: $red;
   border: 2px solid $white;
   border-radius: 100%;
   color: $white;
@@ -1497,7 +1499,7 @@ label[for="groupblog-create-new-no"] {
     &.is_friend.remove:after,
     &.leave-group:after {
       -moz-osx-font-smoothing: grayscale;
-      background-color: #e33d41;
+      background-color: $red;
       border: 2px solid $white;
       border-radius: 100%;
       color: $white;
@@ -1553,10 +1555,8 @@ label[for="groupblog-create-new-no"] {
 }
 
 .bb-group-avatar-wrap .action {
-  position: absolute;
-  left: -29px;
-  top: -19px;
   z-index: 2;
+  position: relative;
 }
 
 .action:empty + .bb-icon-bars-f {
@@ -1567,17 +1567,17 @@ label[for="groupblog-create-new-no"] {
   height: 32px;
   line-height: 28px;
   position: absolute;
-  left: 0;
-  top: 0;
+  right: 10px;
+  bottom: 0;
   width: 32px;
   z-index: 2;
 
   > span {
-      color: $black;
+      color: $green;
       background-color: $white_bg;
       @include border-radius( 5px );
       font-size: $font-size-tiny;
-      margin-left: 50px;
+      margin-left: 35px;
       padding: 5px;
       text-transform: uppercase;
       visibility: hidden;

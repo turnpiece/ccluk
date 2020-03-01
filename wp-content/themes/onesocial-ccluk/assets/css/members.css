@@ -1762,7 +1762,7 @@ label[for="groupblog-create-new-no"] .buddyboss-select {
 }
 
 .bb-has-sidebar #buddypress .dir-list.mygroups ul.item-list > li {
-  width: 50%;
+  width: 100%;
 }
 
 #buddypress .dir-list ul.item-list .item-avatar {
@@ -1937,7 +1937,7 @@ label[for="groupblog-create-new-no"] .buddyboss-select {
 }
 
 #main #buddypress .bb-member-quick-link-wrapper .action .generic-button a {
-  background-color: #fff;
+  background-color: #838383;
   border: 1px solid rgba(0, 0, 0, 0.1);
   clear: both;
   color: #22a7f0;
@@ -1986,7 +1986,8 @@ label[for="groupblog-create-new-no"] .buddyboss-select {
   display: flex !important;
 }
 
-#page #main .author-follow div.generic-button.loading a:before, #page #main .inner-avatar-wrap .generic-button.loading a:not(.group-sub):not(.group-subscription-close):before {
+#page #main .author-follow div.generic-button.loading a:before,
+#page #main .inner-avatar-wrap .generic-button.loading a:not(.group-sub):not(.group-subscription-close):before {
   content: "H";
   color: #fff;
   font-family: 'onesocial';
@@ -1997,7 +1998,8 @@ label[for="groupblog-create-new-no"] .buddyboss-select {
 .author-follow div.generic-button a:hover,
 #main .inner-avatar-wrap .generic-button a:not(.group-sub):not(.group-subscription-close):hover {
   background: transparent;
-  color: #838383;
+  color: #54ae68;
+  font-size: 12px;
   -webkit-box-shadow: none;
           box-shadow: none;
   visibility: visible;
@@ -2082,7 +2084,7 @@ label[for="groupblog-create-new-no"] .buddyboss-select {
 
 .inner-avatar-wrap .group-button.membership-requested:before,
 .inner-avatar-wrap .membership-requested a:before {
-  background: #22a7f0;
+  background: #838383;
   content: '\f017';
   font-family: 'fontawesome';
   font-size: 15px;
@@ -2101,7 +2103,7 @@ label[for="groupblog-create-new-no"] .buddyboss-select {
 
 .author-follow div.generic-button a:after {
   -moz-osx-font-smoothing: grayscale;
-  background-color: #e33d41;
+  background-color: #e85c41;
   border: 2px solid #fff;
   border-radius: 100%;
   color: #fff;
@@ -2169,7 +2171,7 @@ label[for="groupblog-create-new-no"] .buddyboss-select {
 
 .inner-avatar-wrap .generic-button a.is_friend.remove:after, .inner-avatar-wrap .generic-button a.leave-group:after {
   -moz-osx-font-smoothing: grayscale;
-  background-color: #e33d41;
+  background-color: #e85c41;
   border: 2px solid #fff;
   border-radius: 100%;
   color: #fff;
@@ -2219,10 +2221,8 @@ label[for="groupblog-create-new-no"] .buddyboss-select {
 }
 
 .bb-group-avatar-wrap .action {
-  position: absolute;
-  left: -29px;
-  top: -19px;
   z-index: 2;
+  position: relative;
 }
 
 .action:empty + .bb-icon-bars-f {
@@ -2233,18 +2233,18 @@ label[for="groupblog-create-new-no"] .buddyboss-select {
   height: 32px;
   line-height: 28px;
   position: absolute;
-  left: 0;
-  top: 0;
+  right: 10px;
+  bottom: 0;
   width: 32px;
   z-index: 2;
 }
 
 .bb-meta > span {
-  color: #000;
+  color: #54ae68;
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 5px;
   font-size: 12px;
-  margin-left: 50px;
+  margin-left: 35px;
   padding: 5px;
   text-transform: uppercase;
   visibility: hidden;
@@ -9825,6 +9825,18 @@ body.bbpress article.topic, body.bbpress article.forum {
   width: 46px;
 }
 
+#bbpress-forums #favorite-toggle .favorite-toggle:before, #bbpress-forums #favorite-toggle .favorite-toggle:after,
+#bbpress-forums #subscription-toggle .subscription-toggle:before,
+#bbpress-forums #subscription-toggle .subscription-toggle:after {
+  background-color: #838383;
+}
+
+#bbpress-forums #favorite-toggle .favorite-toggle:hover:before, #bbpress-forums #favorite-toggle .favorite-toggle:hover:after,
+#bbpress-forums #subscription-toggle .subscription-toggle:hover:before,
+#bbpress-forums #subscription-toggle .subscription-toggle:hover:after {
+  background-color: #54ae68;
+}
+
 #bbpress-forums #favorite-toggle .favorite-toggle:before,
 #bbpress-forums #subscription-toggle .subscription-toggle:before {
   content: 'u';
@@ -9835,7 +9847,6 @@ body.bbpress article.topic, body.bbpress article.forum {
   line-height: 46px;
   border-radius: 50%;
   text-align: center;
-  background-color: #22a7f0;
   color: #fff;
   font-size: 20px;
   font-family: "onesocial" !important;
@@ -9855,7 +9866,6 @@ body.bbpress article.topic, body.bbpress article.forum {
   width: 8px;
   height: 8px;
   border-radius: 2px;
-  background-color: #22a7f0;
   -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
   position: absolute;

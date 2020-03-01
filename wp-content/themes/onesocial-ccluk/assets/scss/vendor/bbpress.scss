@@ -870,6 +870,18 @@ body {
 #bbpress-forums {
   #favorite-toggle .favorite-toggle,
   #subscription-toggle .subscription-toggle {
+    &:before,
+    &:after {
+      background-color: $gray;
+    }
+
+    &:hover {
+      &:before,
+      &:after {
+        background-color: $green;
+      }
+    }
+    
     &:before {
       content: 'u';
       display: block;
@@ -879,7 +891,6 @@ body {
       line-height: 46px;
       @include border-radius( 50% );
       text-align: center;
-      background-color: $blue;
       color: $white;
       font-size: 20px;
       font-family: "onesocial" !important;
@@ -897,7 +908,6 @@ body {
       width: 8px;
       height: 8px;
       border-radius: 2px;
-      background-color: $blue;
       -ms-transform: rotate(45deg);
       -webkit-transform: rotate(45deg);
       transform: rotate(45deg);

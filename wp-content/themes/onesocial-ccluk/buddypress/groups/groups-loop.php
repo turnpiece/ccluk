@@ -24,6 +24,23 @@
 				<div class="item-avatar">
 					<div class="inner-avatar-wrap bb-group-avatar-wrap">
 
+						<?php
+						global $groups_template;
+
+						$html			 = bp_get_group_avatar( 'type=full' );
+						$doc			 = new DOMDocument();
+						$doc->loadHTML( $html );
+						$xpath			 = new DOMXPath( $doc );
+						$src			 = $xpath->evaluate( "string(//img/@src)" );
+						?>
+						<a href="<?php bp_group_permalink(); ?>" title="<?php bp_group_name(); ?>">
+							<svg class="svg-graphic" width="100" height="100" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" version="1.1">
+								<image class="before-load" height="100%" width="100%" xlink:href="<?php echo get_template_directory_uri(); ?>/images/background.png" />
+								<image class="after-load" height="100%" width="100%" xlink:href="<?php echo $src; ?>" />
+							</svg>
+						</a>
+
+
 						<div class="action">
 							<?php do_action( 'bp_directory_groups_actions' ); ?>
 
@@ -50,22 +67,6 @@
 								?>
 							</div>
 						</div>
-
-						<?php
-						global $groups_template;
-
-						$html			 = bp_get_group_avatar( 'type=full' );
-						$doc			 = new DOMDocument();
-						$doc->loadHTML( $html );
-						$xpath			 = new DOMXPath( $doc );
-						$src			 = $xpath->evaluate( "string(//img/@src)" );
-						?>
-						<a href="<?php bp_group_permalink(); ?>" title="<?php bp_group_name(); ?>">
-							<svg class="svg-graphic" width="100" height="100" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" version="1.1">
-								<image class="before-load" height="100%" width="100%" xlink:href="<?php echo get_template_directory_uri(); ?>/images/background.png" />
-								<image class="after-load" height="100%" width="100%" xlink:href="<?php echo $src; ?>" />
-							</svg>
-						</a>
 
 					</div>
 				</div>
