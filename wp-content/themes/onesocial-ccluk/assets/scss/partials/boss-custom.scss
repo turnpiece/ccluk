@@ -446,13 +446,6 @@ body {
   border-color: $white transparent transparent transparent;
 }
 
-div {
-  &.bbp-template-notice,
-  &.indicator-hint {
-    background-color: $secondary_bg;
-  }
-}
-
 div#sitewide-notice div#message p {
   background-color: $secondary_bg;
 }

@@ -749,10 +749,6 @@ span.bbp-author-ip {
       display: none;
     }
 	}
-
-	div.bbp-template-notice {
-		display: none;
-	}
 }
 
 body.groups.topic {
@@ -1086,6 +1082,10 @@ td {
       margin: 5px 0 0 35px;
       font-size: $font-size-tiny;
     }
+  }
+
+  .bbp-meta {
+    font-size: $font-size-tiny;
   }
 }
 
@@ -1430,47 +1430,32 @@ p.form-allowed-tags {
 --------------------------------------------------------------*/
 
 div {
-  &.bbp-template-notice, &.indicator-hint {
+  &.bbp-template-notice, 
+  &.indicator-hint {
     padding: 10px 14px;
     margin: 5px 0 15px;
-    font-size: $font-size-tiny;
+    font-size: $font-size-sm;
     clear: both;
-    background-color: $secondary_bg;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
+    color: $white;
+    background-color: $green;
+    @include border-radius( 3px );
   }
   &.bbp-template-notice {
     a {
       text-decoration: none;
       &:hover {
-        color: $gray;
         text-decoration: underline;
       }
     }
     &.info {
-      background-color: #d7e7f1;
-      color: #4d7190;
-      a {
-        color: #4d7190;
-      }
+      background-color: $green;
     }
     &.important {
-      background-color: #d7f1d9;
-      color: #67ab6a;
-      color: #67ab6a;
-      a {
-        color: #67ab6a;
-      }
+      background-color: $black;
     }
-    &.error, &.warning {
-      background-color: #f9f2f4;
-    }
-    &.error, &.warning {
-      color: #b25551;
-      a {
-        color: #b25551;
-      }
+    &.error, 
+    &.warning {
+      background-color: $dark_red;
     }
     p {
       margin: 0 !important;
