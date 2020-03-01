@@ -1350,31 +1350,37 @@ label[for="groupblog-create-new-no"] {
 }
 
 .inner-avatar-wrap {
-  .generic-button a:not(.group-sub):not(.group-subscription-close):before {
-    background: #50A9E5;
-    border-radius: 100%;
-    color: $white;
-    content: "q";
-    font-family: 'onesocial';
-    font-size: $font-size-sm;
-    font-weight: 600;
-    line-height: 32px;
-    left: 0;
-    height: 32px;
-    position: absolute;
-    text-align: center;
-    /*text-indent: 2px;*/
-    text-transform: none;
-    top: 2px;
-    width: 32px;
-    visibility: visible;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    transition: none 0s ease 0s;
-    -webkit-transition: none 0s ease 0s;
-    -moz-transition: none 0s ease 0s;
+  .generic-button a:not(.group-sub):not(.group-subscription-close){
+    &:before {
+      background: $gray;
+      border-radius: 100%;
+      color: $white;
+      content: "q";
+      font-family: 'onesocial';
+      font-size: $font-size-sm;
+      font-weight: 600;
+      line-height: 32px;
+      left: 0;
+      height: 32px;
+      position: absolute;
+      text-align: center;
+      /*text-indent: 2px;*/
+      text-transform: none;
+      top: 2px;
+      width: 32px;
+      visibility: visible;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      transition: none 0s ease 0s;
+      -webkit-transition: none 0s ease 0s;
+      -moz-transition: none 0s ease 0s;
+    }
+    &.leave-group:before {
+      background: $green;
+    }
   }
-  .awaiting_response_friend a[rel='remove']:before, .pending_friend a.remove:before {
+  .awaiting_response_friend a[rel='remove']:before, 
+  .pending_friend a.remove:before {
     background: $blue;
     content: '\f017';
     font-family: 'fontawesome';
@@ -2691,7 +2697,7 @@ ul.horiz-gallery li img,
 
     .see-more a {
         color: $white;
-        background-color: $green;
+        background-color: $blue;
         font-size: $font-size-sm;
         width: 46px;
         height: 46px;
@@ -2699,9 +2705,7 @@ ul.horiz-gallery li img,
         text-align: center;
         vertical-align: bottom;
         &:hover {
-            -moz-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
-            -webkit-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
-            box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
+            background-color: $green;
         }
     }
     h5 {
@@ -2778,8 +2782,7 @@ body.activity-permalink #buddypress ul.item-list {
 }
 
 #buddypress #item-title-area .highlight, 
-.bb-cover-photo .update-cover-photo div, 
-#main ul.horiz-gallery .see-more a {
+.bb-cover-photo .update-cover-photo div {
   background-color: $green;
 }
 

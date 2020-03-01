@@ -2031,7 +2031,7 @@ label[for="groupblog-create-new-no"] .buddyboss-select {
 }
 
 .inner-avatar-wrap .generic-button a:not(.group-sub):not(.group-subscription-close):before {
-  background: #50A9E5;
+  background: #838383;
   border-radius: 100%;
   color: #fff;
   content: "q";
@@ -2055,7 +2055,12 @@ label[for="groupblog-create-new-no"] .buddyboss-select {
   -moz-transition: none 0s ease 0s;
 }
 
-.inner-avatar-wrap .awaiting_response_friend a[rel='remove']:before, .inner-avatar-wrap .pending_friend a.remove:before {
+.inner-avatar-wrap .generic-button a:not(.group-sub):not(.group-subscription-close).leave-group:before {
+  background: #54ae68;
+}
+
+.inner-avatar-wrap .awaiting_response_friend a[rel='remove']:before,
+.inner-avatar-wrap .pending_friend a.remove:before {
   background: #22a7f0;
   content: '\f017';
   font-family: 'fontawesome';
@@ -3402,7 +3407,7 @@ ul.horiz-gallery li img,
 
 #main ul.horiz-gallery .see-more a {
   color: #fff;
-  background-color: #54ae68;
+  background-color: #22a7f0;
   font-size: 15px;
   width: 46px;
   height: 46px;
@@ -3412,8 +3417,7 @@ ul.horiz-gallery li img,
 }
 
 #main ul.horiz-gallery .see-more a:hover {
-  -webkit-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
-  box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
+  background-color: #54ae68;
 }
 
 #main ul.horiz-gallery h5 {
@@ -3490,8 +3494,7 @@ body.activity-permalink #buddypress ul.item-list li.activity-item {
 }
 
 #buddypress #item-title-area .highlight,
-.bb-cover-photo .update-cover-photo div,
-#main ul.horiz-gallery .see-more a {
+.bb-cover-photo .update-cover-photo div {
   background-color: #54ae68;
 }
 
