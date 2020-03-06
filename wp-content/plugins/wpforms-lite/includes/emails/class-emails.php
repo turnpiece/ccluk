@@ -531,13 +531,13 @@ class WPForms_WP_Emails {
 
 					if (
 						! apply_filters( 'wpforms_email_display_empty_fields', false ) &&
-						( empty( $this->fields[ $field_id ]['value'] ) && '0' !== $this->fields[ $field_id ]['value'] )
+						( ! isset( $this->fields[ $field_id ]['value'] ) || (string) $this->fields[ $field_id ]['value'] === '' )
 					) {
 						continue;
 					}
 
 					$field_name = $this->fields[ $field_id ]['name'];
-					$field_val  = empty( $this->fields[ $field_id ]['value'] ) && '0' !== $this->fields[ $field_id ]['value'] ? '<em>' . esc_html__( '(empty)', 'wpforms-lite' ) . '</em>' : $this->fields[ $field_id ]['value'];
+					$field_val  = empty( $this->fields[ $field_id ]['value'] ) && ! is_numeric( $this->fields[ $field_id ]['value'] ) ? '<em>' . esc_html__( '(empty)', 'wpforms-lite' ) . '</em>' : $this->fields[ $field_id ]['value'];
 				}
 
 				if ( empty( $field_name ) && ! is_null( $field_name ) ) {
@@ -575,11 +575,14 @@ class WPForms_WP_Emails {
 			 */
 			foreach ( $this->fields as $field ) {
 
-				if ( ! apply_filters( 'wpforms_email_display_empty_fields', false ) && ( empty( $field['value'] ) && '0' !== $field['value'] ) ) {
+				if (
+					! apply_filters( 'wpforms_email_display_empty_fields', false ) &&
+					( ! isset( $field['value'] ) || (string) $field['value'] === '' )
+				) {
 					continue;
 				}
 
-				$field_val  = empty( $field['value'] ) && '0' !== $field['value'] ? esc_html__( '(empty)', 'wpforms-lite' ) : $field['value'];
+				$field_val  = empty( $field['value'] ) && ! is_numeric( $field['value'] ) ? esc_html__( '(empty)', 'wpforms-lite' ) : $field['value'];
 				$field_name = $field['name'];
 
 				if ( empty( $field_name ) ) {

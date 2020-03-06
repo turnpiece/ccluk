@@ -1,4 +1,4 @@
-/* global wpforms_builder, wpf, List, jconfirm, wpforms_panel_switch */
+/* global wpforms_builder, wpf, List, jconfirm, wpforms_panel_switch, WPForms */
 
 var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) {
 
@@ -289,7 +289,7 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 			var fieldID = $( event.target ).parents( '.wpforms-field-option-row' ).data( 'fieldId' );
 			var defaultValue = document.getElementById( 'wpforms-field-option-' + fieldID + '-default_value' );
 
-			if ( str.includes( '{value}' ) && defaultValue ) {
+			if ( defaultValue ) {
 				app.updateNumberSliderHintStr( fieldID, str )
 					.updateNumberSliderHint( fieldID, defaultValue.value );
 			}
@@ -475,7 +475,7 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 			var hint = document.getElementById( 'wpforms-number-slider-hint-' + fieldID );
 
 			if ( hint ) {
-				hint.innerHTML = hint.dataset.hint.replace( '{value}', '<b>' + value + '</b>' );
+				hint.innerHTML = wpf.sanitizeHTML( hint.dataset.hint ).replace( '{value}', '<b>' + value + '</b>' );
 			}
 
 			return this;
@@ -691,6 +691,7 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 		 * Switch Panels.
 		 *
 		 * @since 1.0.0
+		 * @since 1.5.9 Added `wpformsPanelSwitched` triger.
 		 */
 		panelSwitch: function(panel) {
 
@@ -711,6 +712,8 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 				$panel.addClass('active');
 
 				history.replaceState({}, null, wpf.updateQueryString('view', panel));
+
+				$builder.trigger( 'wpformsPanelSwitched', panel );
 			}
 		},
 
@@ -1112,12 +1115,12 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 			// Real-time updates for "Description" field option
 			$builder.on( 'input', '.wpforms-field-option-row-description textarea', function() {
 				var $this = $( this ),
-					value = $this.val(),
+					value = wpf.sanitizeHTML( $this.val() ),
 					id    = $this.parent().data( 'field-id' ),
 					$desc = $( '#wpforms-field-'+id ).find( '.description' );
 
 				if ( $desc.hasClass( 'nl2br' ) ) {
-					$desc.html( value.replace( /\n/g, '<br>') );
+					$desc.html( value.replace( /\n/g, '<br>' ) );
 				} else {
 					$desc.html( value );
 				}
@@ -1228,6 +1231,10 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 					id    = $(this).parent().parent().data('field-id');
 				$('#wpforms-field-'+id).find('.wpforms-date').toggleClass('wpforms-date-type-datepicker wpforms-date-type-dropdown');
 				$('#wpforms-field-option-'+id).toggleClass('wpforms-date-type-datepicker wpforms-date-type-dropdown');
+
+				if ( value === 'dropdown' ) {
+					$( '#wpforms-field-option-' + id + '-date_format' ).prop( 'selectedIndex', 0 ).trigger( 'change' );
+				}
 			});
 
 			// Real-time updates for Date/Time date select format
@@ -2199,7 +2206,7 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 			}
 			$('#wpforms-field-option-row-' + id + '-choices .choices-list li').each( function( index ) {
 				var $this    = $(this),
-					label    = $this.find('input.label').val(),
+					label    = wpf.sanitizeHTML( $this.find( 'input.label' ).val() ),
 					selected = $this.find('input.default').is(':checked'),
 					choice 	 = $( new_choice.replace('{label}',label) );
 				$('#wpforms-field-'+id+' .primary-input').append(choice);
@@ -2288,7 +2295,7 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 				if ( ! newValues.hasOwnProperty( key ) ) {
 					continue;
 				}
-				var value     = newValues[ key ],
+				var value     = wpf.sanitizeHTML( newValues[ key ] ),
 					newChoice = choice;
 				value = value.trim();
 				newChoice = newChoice.replace( /\[choices\]\[(\d+)\]/g, '[choices][' + nextID + ']' );
@@ -2923,13 +2930,14 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 			} );
 
 			// Real-time updates for editing the form title
-			$builder.on('input', '#wpforms-panel-field-settings-form_title, #wpforms-setup-name', function(){
-				var title = $(this).val();
-				if (title.length > 38) {
-					title = $.trim(title).substring(0, 38).split(" ").slice(0, -1).join(" ") + "..."
-				}
-				$('.wpforms-form-name').text( title );
-			});
+			$builder.on( 'input', '#wpforms-panel-field-settings-form_title, #wpforms-setup-name', function() {
+
+				var title = $.trim( $( this ).val() );
+
+				$( '.wpforms-preview .wpforms-form-name' ).text( title );
+				$( '.wpforms-center-form-name.wpforms-form-name' ).text( title );
+				app.trimFormTitle();
+			} );
 
 			// Real-time updates for editing the form description
 			$builder.on('input', '#wpforms-panel-field-settings-form_desc', function(){
@@ -3125,14 +3133,14 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 		 */
 		settingsBlockAdd: function($el) {
 
-			var nextID       = Number($el.attr('data-next-id')),
-				blockType    = $el.data('block-type'),
-				namePrompt   = wpforms_builder[blockType + '_prompt'],
-				nameField    = '<input autofocus="" type="text" id="settings-block-name" placeholder="'+wpforms_builder[blockType + '_ph']+'">',
-				nameError    = '<p class="error">'+wpforms_builder[blockType + '_error']+'</p>',
+			var nextID = Number( $el.attr( 'data-next-id' ) ),
+				blockType = $el.data( 'block-type' ),
+				namePrompt = wpforms_builder[ blockType + '_prompt' ],
+				nameField = '<input autofocus="" type="text" id="settings-block-name" placeholder="' + wpforms_builder[ blockType + '_ph' ] + '">',
+				nameError = '<p class="error">' + wpforms_builder[ blockType + '_error' ] + '</p>',
 				modalContent = namePrompt + nameField + nameError;
 
-			var modal = $.confirm({
+			var modal = $.confirm( {
 				container: $builder,
 				title: false,
 				content: modalContent,
@@ -3142,101 +3150,105 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 					confirm: {
 						text: wpforms_builder.ok,
 						btnClass: 'btn-confirm',
-						keys: ['enter'],
+						keys: [ 'enter' ],
 						action: function() {
-							var settingsBlockName = $.trim(this.$content.find('input#settings-block-name').val()),
-								error = this.$content.find('.error');
 
-							if (settingsBlockName === '') {
+							var settingsBlockName = $.trim( this.$content.find( 'input#settings-block-name' ).val() ),
+								error = this.$content.find( '.error' );
+
+							if ( settingsBlockName === '' ) {
 								error.show();
 								return false;
 							} else {
-								var $firstSettingsBlock = $el.closest('.wpforms-panel-content-section').find('.wpforms-builder-settings-block').first(),
-									$newSettingsBlock   = $firstSettingsBlock.clone(),
+								var $firstSettingsBlock = $el.closest( '.wpforms-panel-content-section' ).find( '.wpforms-builder-settings-block' ).first(),
+									$newSettingsBlock = $firstSettingsBlock.clone(),
 									newSettingsBlock;
 
-								$newSettingsBlock.attr('data-block-id', nextID);
-								$newSettingsBlock.find('.wpforms-builder-settings-block-header span').text(settingsBlockName);
-								$newSettingsBlock.find('input, textarea, select').each(function(index, el) {
-									var $this = $(this);
-									if ($this.attr('name')) {
-										$this.val('')
-											.attr('name', $this.attr('name').replace(/\[(\d+)\]/, '['+nextID+']'));
-										if ($this.is('select')) {
-											$this.find('option').prop('selected',false).attr('selected',false);
-											$this.find('option:first').prop('selected',true).attr('selected','selected');
-										} else if ( $this.attr('type') === 'checkbox') {
-											$this.prop('checked', false).attr('checked', false).val('1');
+								$newSettingsBlock.attr( 'data-block-id', nextID );
+								$newSettingsBlock.find( '.wpforms-builder-settings-block-header span' ).text( settingsBlockName );
+								$newSettingsBlock.find( 'input, textarea, select' ).each( function( index, el ) {
+									var $this = $( this );
+									if ( $this.attr( 'name' ) ) {
+										$this.val( '' ).attr( 'name', $this.attr( 'name' ).replace( /\[(\d+)\]/, '[' + nextID + ']' ) );
+										if ( $this.is( 'select' ) ) {
+											$this.find( 'option' ).prop( 'selected', false ).attr( 'selected', false );
+											$this.find( 'option:first' ).prop( 'selected', true ).attr( 'selected', 'selected' );
+										} else if ( $this.attr( 'type' ) === 'checkbox' ) {
+											$this.prop( 'checked', false ).attr( 'checked', false ).val( '1' );
 										} else {
-											$this.val('').attr('value','');
+											$this.val( '' ).attr( 'value', '' );
 										}
 									}
-								});
+								} );
 
-								$newSettingsBlock.find('.wpforms-builder-settings-block-header input').val(settingsBlockName).attr('value',settingsBlockName);
+								$newSettingsBlock.find( '.wpforms-builder-settings-block-header input' ).val( settingsBlockName ).attr( 'value', settingsBlockName );
 
 								if ( blockType === 'notification' ) {
-									$newSettingsBlock.find('.email-msg textarea').val('{all_fields}').attr('value', '{all_fields}');
-									$newSettingsBlock.find('.email-recipient input').val('{admin_email}').attr('value', '{admin_email}');
+									$newSettingsBlock.find( '.email-msg textarea' ).val( '{all_fields}' ).attr( 'value', '{all_fields}' );
+									$newSettingsBlock.find( '.email-recipient input' ).val( '{admin_email}' ).attr( 'value', '{admin_email}' );
 								}
 
 								if ( blockType === 'confirmation' ) {
-									$newSettingsBlock.removeClass('wpforms-confirmation-default');
-									$newSettingsBlock.find('.wpforms-panel-field-textarea').remove();
-									if (typeof WPForms !== 'undefined') {
-										$newSettingsBlock.find('.wpforms-panel-field-confirmations-type-wrap')
-											.after(WPForms.Admin.Builder.Templates
-												.get('wpforms-builder-confirmations-message-field')({
-													id: nextID
-												})
+									$newSettingsBlock.removeClass( 'wpforms-confirmation-default' );
+									$newSettingsBlock.find( '.wpforms-panel-field-textarea' ).remove();
+									if ( typeof WPForms !== 'undefined' ) {
+										$newSettingsBlock.find( '.wpforms-panel-field-confirmations-type-wrap' )
+											.after( WPForms.Admin.Builder.Templates
+												.get( 'wpforms-builder-confirmations-message-field' )( {
+													id: nextID,
+												} )
 											);
 									}
 								}
 
 								// Conditional logic, if present
-								var $conditionalLogic = $newSettingsBlock.find('.wpforms-conditional-block');
-								if ($conditionalLogic.length && typeof WPForms !== 'undefined') {
+								var $conditionalLogic = $newSettingsBlock.find( '.wpforms-conditional-block' );
+								if ( $conditionalLogic.length && typeof WPForms !== 'undefined' ) {
 									$conditionalLogic
-										.html(WPForms.Admin.Builder.Templates
-											.get('wpforms-builder-conditional-logic-toggle-field')({
+										.html( WPForms.Admin.Builder.Templates
+											.get( 'wpforms-builder-conditional-logic-toggle-field' )( {
 												id: nextID,
 												type: blockType,
-												actions: JSON.stringify($newSettingsBlock.find('.wpforms-panel-field-conditional_logic-checkbox').data('actions')),
-												actionDesc: $newSettingsBlock.find('.wpforms-panel-field-conditional_logic-checkbox').data('action-desc')
-											})
+												actions: JSON.stringify( $newSettingsBlock.find( '.wpforms-panel-field-conditional_logic-checkbox' ).data( 'actions' ) ),
+												actionDesc: $newSettingsBlock.find( '.wpforms-panel-field-conditional_logic-checkbox' ).data( 'action-desc' ),
+											} )
 										);
 								}
 
-								newSettingsBlock = $newSettingsBlock.wrap('<div>').parent().html();
+								newSettingsBlock = $newSettingsBlock.wrap( '<div>' ).parent().html();
 								newSettingsBlock = newSettingsBlock.replace( /\[conditionals\]\[(\d+)\]\[(\d+)\]/g, '[conditionals][0][0]' );
 
 								$firstSettingsBlock.before( newSettingsBlock );
 
 								if ( blockType === 'confirmation' ) {
-									app.confirmationFieldsToggle($('.wpforms-panel-field-confirmations-type').first());
+									app.confirmationFieldsToggle( $( '.wpforms-panel-field-confirmations-type' ).first() );
 								}
 
-								if (typeof tinymce !== 'undefined' && typeof wp.editor !== 'undefined' && blockType === 'confirmation') {
-									wp.editor.initialize('wpforms-panel-field-confirmations-message-' + nextID, s.tinymceDefaults);
+								if ( typeof tinymce !== 'undefined' && typeof wp.editor !== 'undefined' && blockType === 'confirmation' ) {
+									wp.editor.initialize( 'wpforms-panel-field-confirmations-message-' + nextID, s.tinymceDefaults );
 								}
 
-								$el.attr('data-next-id', nextID+1);
+								$el.attr( 'data-next-id', nextID + 1 );
+
+								// Re-init tooltips for new section.
+								wpf.initTooltips();
 							}
-						}
+						},
 					},
 					cancel: {
-						text: wpforms_builder.cancel
-					}
-				}
-			});
+						text: wpforms_builder.cancel,
+					},
+				},
+			} );
 
 			// We need to process this event here, because we need a confirm modal object defined, so we can intrude into it.
 			// Pressing Enter will click the Ok button.
-			$builder.on('keypress', '#settings-block-name', function(e) {
-				if (e.keyCode === 13) {
-					$(modal.buttons.confirm.el).trigger('click');
+			$builder.on( 'keypress', '#settings-block-name', function( e ) {
+
+				if ( e.keyCode === 13 ) {
+					$( modal.buttons.confirm.el ).trigger( 'click' );
 				}
-			});
+			} );
 		},
 
 		/**
@@ -3400,7 +3412,7 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 			$builder.on( 'click', '#wpforms-embed', function( e ) {
 				e.preventDefault();
 				var content = wpforms_builder.embed_modal,
-					videoId = wpforms_builder.is_gutenberg ? 'ccyJMwyI8x0' : 'IxGVz3AjEe0';
+					videoId = wpforms_builder.is_gutenberg ? '_29nTiDvmLw' : 'IxGVz3AjEe0';
 
 				content += '<input type=\'text\' value=\'[wpforms id="' + s.formID + '" title="false" description="false"]\' readonly id=\'wpforms-embed-shortcode\'>';
 				content += wpforms_builder.embed_modal_2;
@@ -3925,8 +3937,8 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 					}
 
 					// Compile the label
-					if (typeof fields[field_id].label !== 'undefined' && fields[field_id].label.length) {
-						label = wpf.sanitizeString(fields[field_id].label);
+					if ( typeof fields[field_id].label !== 'undefined' && fields[field_id].label.length ) {
+						label = wpf.sanitizeHTML( fields[field_id].label );
 					} else {
 						label = wpforms_builder.field + ' #' + fields[field_id].val;
 					}
@@ -3977,10 +3989,10 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 		 */
 		trimFormTitle: function() {
 
-			var $title = $('.wpforms-center-form-name');
-			if ($title.text().length > 38) {
-				var shortTitle = $.trim($title.text()).substring(0, 38).split(" ").slice(0, -1).join(" ") + "...";
-				$title.text(shortTitle);
+			var $title = $( '.wpforms-center-form-name' );
+			if ( $title.text().length > 38 ) {
+				var shortTitle = $.trim( $title.text() ).substring( 0, 38 ).split( ' ' ).slice( 0, -1 ).join( ' ' ) + '...';
+				$title.text( shortTitle );
 			}
 		},
 

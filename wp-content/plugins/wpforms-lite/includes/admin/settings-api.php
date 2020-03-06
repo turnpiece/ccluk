@@ -253,23 +253,31 @@ function wpforms_settings_select_callback( $args ) {
 	$select_name = $id;
 	$class       = ! empty( $args['choicesjs'] ) ? 'choicesjs-select' : '';
 	$choices     = ! empty( $args['choicesjs'] ) ? true : false;
-	$data        = '';
+	$data        = isset( $args['data'] ) ? (array) $args['data'] : array();
+	$attr        = isset( $args['attr'] ) ? (array) $args['attr'] : array();
 
 	if ( $choices && ! empty( $args['search'] ) ) {
-		$data .= ' data-search="true"';
+		$data['search'] = 'true';
 	}
 
 	if ( ! empty( $args['placeholder'] ) ) {
-		$data .= ' data-placeholder="' . esc_attr( $args['placeholder'] ) . '"';
+		$data['placeholder'] = $args['placeholder'];
 	}
 
 	if ( $choices && ! empty( $args['multiple'] ) ) {
-		$data       .= ' multiple';
+		$attr[]      = 'multiple';
 		$select_name = $id . '[]';
 	}
 
+	foreach ( $data as $name => $val ) {
+		$data[ $name ] = 'data-' . sanitize_html_class( $name ) . '="' . esc_attr( $val ) . '"';
+	}
+
+	$data = implode( ' ', $data );
+	$attr = implode( ' ', array_map( 'sanitize_html_class', $attr ) );
+
 	$output  = $choices ? '<span class="choicesjs-select-wrap">' : '';
-	$output .= '<select id="wpforms-setting-' . $id . '" name="' . $select_name . '" class="' . $class . '"' . $data . '>';
+	$output .= '<select id="wpforms-setting-' . $id . '" name="' . $select_name . '" class="' . $class . '"' . $data . $attr . '>';
 
 	foreach ( $args['options'] as $option => $name ) {
 		if ( empty( $args['selected'] ) ) {

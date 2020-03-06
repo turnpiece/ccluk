@@ -866,35 +866,77 @@ class Dashboard extends Abstract_Page {
 	 */
 	public function smush_result_notice() {
 		// Get the counts from transient.
-		$items          = get_transient( 'wp-smush-show-dir-scan-notice' );
-		$failed_items   = get_transient( 'wp-smush-dir-scan-failed-items' );
-		$notice_message = esc_html__( 'All images failed to optimize.', 'wp-smushit' );
+		$items          = (int) get_transient( 'wp-smush-show-dir-scan-notice' );
+		$failed_items   = (int) get_transient( 'wp-smush-dir-scan-failed-items' );
+		$skipped_items  = (int) get_transient( 'wp-smush-dir-scan-skipped-items' );
+		$notice_message = esc_html__( 'Image compression complete.', 'wp-smushit' ) . ' ';
 		$notice_class   = 'sui-notice-error';
 
-		// Not all images optimized.
-		if ( ! empty( $failed_items ) && ! empty( $items ) ) {
-			$notice_message = sprintf(
-				/* translators: %1$d: number of images smushed and %1$d number of failed. */
-				esc_html__( '%1$d images were successfully optimized and %2$d images failed.', 'wp-smushit' ),
-				absint( $items ),
-				absint( $failed_items )
-			);
-			$notice_class = 'sui-notice-warning';
-		} elseif ( ! empty( $items ) && empty( $failed_items ) ) {
-			// Yay! All images were optimized.
-			$notice_message = sprintf(
-				/* translators: %d: number of images */
-				esc_html__( '%d images were successfully optimized.', 'wp-smushit' ),
-				absint( $items )
+		$total = $items + $failed_items + $skipped_items;
+
+		/**
+		 * 1 image was successfully optimized / 10 images were successfully optimized
+		 * 1 image was skipped because it couldn't be optimized / 5/10 images were skipped because they couldn't be optimized
+		 * 1 image resulted in an error / 5/10 images resulted in an error, check the logs for more information
+		 *
+		 * 2/10 images were skipped because they couldn't be optimized and 4/10 resulted in an error
+		 */
+
+		if ( 0 === $failed_items && 0 === $skipped_items ) {
+			$notice_message .= sprintf(
+				/* translators: %d - number of images */
+				_n(
+					'%d image was successfully optimized',
+					'%d images were successfully optimized',
+					$items,
+					'wp-smushit'
+				),
+				$items
 			);
 			$notice_class = 'sui-notice-success';
+		} elseif ( 0 <= $skipped_items && 0 === $failed_items ) {
+			$notice_message .= sprintf(
+				/* translators: %1$d - number of skipped images, %2$d - total number of images */
+				_n(
+					'%d image was skipped because it couldn\'t be optimized',
+					'%1$d/%2$d images were skipped because they couldn\'t be optimized',
+					$skipped_items,
+					'wp-smushit'
+				),
+				$skipped_items,
+				$total
+			);
+			$notice_class = 'sui-notice-success';
+		} elseif ( 0 === $skipped_items && 0 <= $failed_items ) {
+			$notice_message .= sprintf(
+				/* translators: %1$d - number of failed images, %2$d - total number of images */
+				_n(
+					'%d resulted in an error',
+					'%1$d/%2$d images resulted in an error, check the logs for more information',
+					$failed_items,
+					'wp-smushit'
+				),
+				$failed_items,
+				$total
+			);
+		} elseif ( 0 <= $skipped_items && 0 <= $failed_items ) {
+			$notice_message .= sprintf(
+				/* translators: %1$d - number of skipped images, %2$d - total number of images, %3$d - number of failed images */
+				esc_html__( '%1$d/%2$d images were skipped because they couldn\'t be optimized and %3$d/%2$d resulted in an error', 'wp-smushit' ),
+				$skipped_items,
+				$total,
+				$failed_items
+			);
+			$notice_class = 'sui-notice-warning';
 		}
 
 		// If we have counts, show the notice.
-		if ( ! empty( $items ) || ! empty( $failed_items ) ) {
+		if ( 0 < $total ) {
 			// Delete the transients.
 			delete_transient( 'wp-smush-show-dir-scan-notice' );
 			delete_transient( 'wp-smush-dir-scan-failed-items' );
+			delete_transient( 'wp-smush-dir-scan-skipped-items' );
+
 			$this->view(
 				'notice',
 				array(

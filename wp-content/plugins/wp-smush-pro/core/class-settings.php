@@ -112,7 +112,7 @@ class Settings {
 	 *
 	 * @var array
 	 */
-	private $cdn_fields = array( 'background_images', 'auto_resize', 'webp', 'rest_api_support' );
+	private $cdn_fields = array( 'cdn', 'background_images', 'auto_resize', 'webp', 'rest_api_support' );
 
 	/**
 	 * List of fields in Settings form.
@@ -479,7 +479,7 @@ class Settings {
 	 * @since 3.2.0
 	 */
 	public function reset() {
-		check_ajax_referer( 'get-smush-status' );
+		check_ajax_referer( 'wp_smush_reset' );
 
 		if ( ! current_user_can( 'manage_options' ) ) {
 			die();

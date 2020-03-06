@@ -1809,6 +1809,13 @@ function wpforms_get_providers_all() {
 
 	$providers = array(
 		array(
+			'name'        => 'ActiveCampaign',
+			'slug'        => 'activecampaign',
+			'img'         => 'addon-icon-activecampaign.png',
+			'plugin'      => 'wpforms-activecampaign/wpforms-activecampaign.php',
+			'plugin_slug' => 'wpforms-activecampaign',
+		),
+		array(
 			'name'        => 'AWeber',
 			'slug'        => 'aweber',
 			'img'         => 'addon-icon-aweber.png',
@@ -1837,7 +1844,7 @@ function wpforms_get_providers_all() {
 			'plugin_slug' => 'wpforms-getresponse',
 		),
 		array(
-			'name'        => 'MailChimp',
+			'name'        => 'Mailchimp',
 			'slug'        => 'mailchimp',
 			'img'         => 'addon-icon-mailchimp.png',
 			'plugin'      => 'wpforms-mailchimp/wpforms-mailchimp.php',

@@ -6,7 +6,7 @@
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2015 - 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2015 - 2020 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -33,6 +33,7 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
  * @since 2.3.5 Emptied. (~2.5 months later)
  * @since 2.6.2 Emptied. (~6 months later)
  * @since 2.9.2 Emptied. (~8 months later)
+ * @TODO 5.0.0 empty this.
  */
 
 /**
@@ -85,7 +86,7 @@ function the_seo_framework_dot_version( $version = '2.4' ) {
 	$current_version = the_seo_framework_version();
 
 	if ( $current_version ) {
-		$version_len = strlen( $version );
+		$version_len         = strlen( $version );
 		$current_version_len = strlen( $current_version );
 
 		//* Only allow 3 length.

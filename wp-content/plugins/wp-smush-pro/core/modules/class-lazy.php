@@ -209,7 +209,7 @@ class Lazy extends Abstract_Module {
 			$js = "var e = jQuery( '.wp-block-blockgallery-masonry ul' );";
 		}
 
-		$block_gallery_compat = "jQuery(document).on('lazyloaded', function(){{$js} if ('function' === typeof e.masonry) e.masonry();});";
+		$block_gallery_compat = "jQuery(document).on('lazyloaded', function(){{$js} if ('function' === typeof e.masonry) e.masonry();});";				 	          			 
 
 		wp_add_inline_script( 'smush-lazy-load', $block_gallery_compat );
 	}
@@ -361,7 +361,9 @@ class Lazy extends Abstract_Module {
 		Helpers\Parser::add_attribute( $new_image, 'src', 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' );
 
 		// Use noscript element in HTML to load elements normally when JavaScript is disabled in browser.
-		$new_image .= '<noscript>' . $image . '</noscript>';
+		if ( ! $iframe ) {
+			$new_image .= '<noscript>' . $image . '</noscript>';
+		}
 
 		return $new_image;
 	}

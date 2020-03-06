@@ -10,7 +10,7 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2015 - 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2015 - 2020 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -315,7 +315,7 @@ class Detect extends Render {
 	 *
 	 * @since 1.3.0
 	 * @since 2.6.0 Uses new style detection.
-	 * @since 3.1.0: The filter no longer short-circuits the function when it's false.
+	 * @since 3.1.0 The filter no longer short-circuits the function when it's false.
 	 *
 	 * @return bool SEO plugin detected.
 	 */
@@ -360,8 +360,8 @@ class Detect extends Render {
 	 * Determines if other Open Graph or SEO plugins are active.
 	 *
 	 * @since 1.3.0
-	 * @since 2.8.0: No longer checks for old style filter.
-	 * @since 3.1.0: The filter no longer short-circuits the function when it's false.
+	 * @since 2.8.0 No longer checks for old style filter.
+	 * @since 3.1.0 The filter no longer short-circuits the function when it's false.
 	 *
 	 * @return bool True if OG or SEO plugin detected.
 	 */
@@ -410,7 +410,7 @@ class Detect extends Render {
 	 * Determines if other Twitter Card plugins are active.
 	 *
 	 * @since 2.6.0
-	 * @since 3.1.0: The filter no longer short-circuits the function when it's false.
+	 * @since 3.1.0 The filter no longer short-circuits the function when it's false.
 	 * @staticvar bool $detected
 	 *
 	 * @return bool Twitter Card plugin detected.
@@ -476,7 +476,7 @@ class Detect extends Render {
 	 * Determines if other Sitemap plugins are active.
 	 *
 	 * @since 2.1.0
-	 * @since 3.1.0: The filter no longer short-circuits the function when it's false.
+	 * @since 3.1.0 The filter no longer short-circuits the function when it's false.
 	 * @staticvar bool $detected
 	 *
 	 * @return bool
@@ -740,10 +740,21 @@ class Detect extends Render {
 				$supported = $this->is_taxonomy_supported() && $this->get_the_real_ID();
 				break;
 
+			// Including 404.
 			default:
 				$supported = true;
 				break;
 		endswitch;
+
+		/**
+		 * Override false negatives on exploit.
+		 *
+		 * This protects against (accidental) negative-SEO bombarding.
+		 * Support broken queries, so we can noindex them.
+		 */
+		if ( ! $supported && $this->is_query_exploited() ) {
+			$supported = true;
+		}
 
 		/**
 		 * @since 4.0.0
@@ -753,16 +764,150 @@ class Detect extends Render {
 	}
 
 	/**
+	 * Determines when paged/page is exploited.
+	 *
+	 * Google is acting "smart" nowadays, and follows everything that remotely resembles a link. Therefore, unintentional
+	 * queries can occur in WordPress. WordPress deals with this well, alas, the query parser (WP_Query::parse_query)
+	 * doesn't rectify the mixed signals it receives. Instead, it only sanitizes it, resulting in a combobulated mess.
+	 * Ultimately, this leads to non-existing blog archives, among other failures.
+	 *
+	 * Example 1: `/?p=nonnumeric` will cause an issue. We will see a non-existing blog page. `is_home` is true, but
+	 * `page_id` leads to 0 while the database expects the blog page to be another page. So, `is_posts_page` is
+	 * incorrectly false. This is mitigated via the canonical URL, but that MUST output, thus overriding otherwise chosen
+	 * and expected behavior.
+	 *
+	 * Example 2: `/page/2/?p=nonnumeric` will cause a bigger issue. What happens is that `is_home` will again be true,
+	 * but so will `is_paged`. `paged` will be set to `2` (as per example URL). The page ID will again be set to `0`,
+	 * which is completely false. The canonical URL will be malformed. Even moreso, Google can ignore the canonical URL,
+	 * so we MUST output noindex.
+	 *
+	 * Example 3: `/page/2/?X=nonnumeric` will also cause the same issues as in example 2. Where X can be:
+	 * `page_id`, `attachment_id`, `year`, `monthnum`, `day`, `w`, `m`, and of course `p`.
+	 *
+	 * Example 4: `/?hour=nonnumeric`, the same issue as Example 1. The canonical URL is malformed, noindex is set, and
+	 * link relationships will be active. A complete mess. `minute` and `second` are also affected the same way.
+	 *
+	 * Example 5: `/page/2/?p=0`, this is the trickiest. It's indicative of a paginated blog, but also the homepage. When
+	 * the homepage is not a blog, then this query is malformed. Otherwise, however, it's a good query.
+	 *
+	 * @since 4.0.5
+	 * @global \WP_Query $wp_query
+	 * @staticvar bool $exploited Cached whether the query is exploited.
+	 *
+	 * @return bool Whether the query is (accidentally) exploited.
+	 *              Defaults to false when `advanced_query_protection` option is disabled.
+	 *              False when there's a query-ID found.
+	 *              False when no custom query is set (for the homepage).
+	 *              Otherwise, it performs query tests.
+	 */
+	public function is_query_exploited() {
+
+		static $exploited;
+
+		if ( isset( $exploited ) ) return $exploited;
+
+		if ( ! $this->get_option( 'advanced_query_protection' ) )
+			return $exploited = false;
+
+		// When the page ID is not 0, a real page will always be returned.
+		if ( $this->get_the_real_ID() )
+			return $exploited = false;
+
+		global $wp_query;
+
+		// When no special query data is registered, ignore this. Don't set cache.
+		if ( ! isset( $wp_query->query ) )
+			return false;
+
+		/**
+		 * @since 4.0.5
+		 * @param array $exploitables The exploitable endpoints by type.
+		 */
+		$exploitables = \apply_filters(
+			'the_seo_framework_exploitable_query_endpoints',
+			[
+				'numeric'       => [
+					'page_id',
+					'attachment_id',
+					'year',
+					'monthnum',
+					'day',
+					'w',
+					'm',
+					'p',
+					'paged', // 'page' is mitigated by WordPress.
+					'hour',
+					'minute',
+					'second',
+					'subpost_id',
+				],
+				'numeric_array' => [
+					'cat',
+					'author',
+				],
+				'requires_s'    => [
+					'sentence',
+				],
+			]
+		);
+
+		$query     = $wp_query->query;
+		$exploited = false;
+
+		foreach ( $exploitables as $type => $qvs ) :
+			foreach ( $qvs as $qv ) :
+				// Don't guess "empty", because falsey or empty-array is also empty.
+				if ( ! isset( $query[ $qv ] ) ) continue;
+
+				switch ( $type ) :
+					case 'numeric':
+						if ( '0' === $query[ $qv ] || ! is_numeric( $query[ $qv ] ) ) {
+							$exploited = true;
+							break 3;
+						}
+						break;
+
+					case 'numeric_array':
+						// We can't protect non-pretty permalinks.
+						if ( ! $this->pretty_permalinks ) break;
+
+						// If WordPress didn't canonical_redirect() the user yet, it's exploited.
+						// WordPress mitigates this via a 404 query when a numeric value is found.
+						if ( ! preg_match( '/[0-9]/', $query[ $qv ] ) ) {
+							$exploited = true;
+							break 3;
+						}
+						break;
+
+					case 'requires_s':
+						if ( ! isset( $query['s'] ) ) {
+							$exploited = true;
+							break 3;
+						}
+						break;
+
+					default:
+						break;
+				endswitch;
+			endforeach;
+		endforeach;
+
+		return $exploited;
+	}
+
+	/**
 	 * Detects if the current or inputted post type is supported and not disabled.
 	 *
 	 * @since 3.1.0
+	 * @since 4.0.5 The `$post_type` fallback now uses a real query ID, instead of `$GLOBALS['post']`;
+	 *              mitigating issues with singular-archives pages (blog, shop, etc.).
 	 *
 	 * @param string $post_type Optional. The post type to check.
 	 * @return bool
 	 */
 	public function is_post_type_supported( $post_type = '' ) {
 
-		$post_type = $post_type ?: \get_post_type() ?: $this->get_admin_post_type();
+		$post_type = $post_type ?: $this->get_post_type_real_ID() ?: $this->get_admin_post_type();
 
 		/**
 		 * @since 2.6.2
@@ -817,6 +962,8 @@ class Detect extends Render {
 	 * Checks (current) Post Type for having taxonomical archives.
 	 *
 	 * @since 2.9.3
+	 * @since 4.0.5 The `$post_type` fallback now uses a real query ID, instead of `$GLOBALS['post']`;
+	 *              mitigating issues with singular-archives pages (blog, shop, etc.).
 	 * @staticvar array $cache
 	 * @global \WP_Screen $current_screen
 	 *
@@ -830,7 +977,7 @@ class Detect extends Render {
 		if ( isset( $cache[ $post_type ] ) )
 			return $cache[ $post_type ];
 
-		$post_type = $post_type ?: \get_post_type() ?: $this->get_admin_post_type();
+		$post_type = $post_type ?: $this->get_post_type_real_ID() ?: $this->get_admin_post_type();
 		if ( ! $post_type ) return false;
 
 		if ( \get_object_taxonomies( $post_type, 'names' ) )
@@ -913,13 +1060,15 @@ class Detect extends Render {
 	 *
 	 * @since 3.1.0
 	 * @since 3.1.2 Now is fiterable.
+	 * @since 4.0.5 The `$post_type` fallback now uses a real query ID, instead of `$GLOBALS['post']`;
+	 *              mitigating issues with singular-archives pages (blog, shop, etc.).
 	 *
 	 * @param string $post_type Optional. The post type to check.
 	 * @return bool True if disabled, false otherwise.
 	 */
 	public function is_post_type_disabled( $post_type = '' ) {
 
-		$post_type = $post_type ?: \get_post_type() ?: $this->get_admin_post_type();
+		$post_type = $post_type ?: $this->get_post_type_real_ID() ?: $this->get_admin_post_type();
 
 		/**
 		 * @since 3.1.2
@@ -1064,5 +1213,33 @@ class Detect extends Render {
 		$parsed_url = parse_url( \get_option( 'home' ) );
 
 		return $cache = ! empty( $parsed_url['path'] ) && ltrim( $parsed_url['path'], ' \\/' );
+	}
+
+	/**
+	 * Determines if the input text has transformative Yoast SEO syntax.
+	 *
+	 * @since 4.0.5
+	 * @link <https://yoast.com/help/list-available-snippet-variables-yoast-seo/>
+	 *
+	 * @param string $text The text to evaluate.
+	 * @return bool
+	 */
+	public function has_yoast_syntax( $text ) {
+
+		if ( false === strpos( $text, '%%' ) ) return false;
+
+		$tags_simple = [ 'date', 'title', 'parent_title', 'archive_title', 'sitename', 'sitedesc', 'excerpt', 'excerpt_only', 'tag', 'category', 'primary_category', 'category_description', 'tag_description', 'term_description', 'term_title', 'searchphrase', 'sep', 'pt_single', 'pt_plural', 'modified', 'id', 'name', 'user_description', 'page', 'pagetotal', 'pagenumber', 'caption', 'focuskw', 'term404', 'ct_product_cat', 'ct_product_tag', 'wc_shortdesc', 'wc_sku', 'wc_brand', 'wc_price' ];
+
+		$_regex = sprintf( '%%%s%%', implode( '|', $tags_simple ) );
+
+		if ( preg_match( "/$_regex/i", $text ) ) return true;
+
+		$tags_wildcard_end = [ 'cs_', 'ct_desc_', 'ct_pa_' ];
+
+		$_regex = sprintf( '%%(%s)[^\s]*?%%', implode( '|', $tags_wildcard_end ) );
+
+		if ( preg_match( "/$_regex/", $text ) ) return true;
+
+		return false;
 	}
 }

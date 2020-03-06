@@ -149,7 +149,7 @@ class WPForms_Field_Number extends WPForms_Field {
 		if (
 			! empty( $form_data['fields'][ $field_id ]['required'] ) &&
 			empty( $value ) &&
-			'0' != $value
+			! is_numeric( $value )
 		) {
 			wpforms()->process->errors[ $form_id ][ $field_id ] = wpforms_get_required_label();
 		}
@@ -194,14 +194,17 @@ class WPForms_Field_Number extends WPForms_Field {
 	 */
 	private function sanitize_value( $value ) {
 
+		if ( empty( $value ) && ! is_numeric( $value ) ) {
+			return '';
+		}
+
 		// Some browsers allow other non-digit/decimal characters to be submitted
 		// with the num input, which then trips the is_numeric validation below.
 		// To get around this we remove all chars that are not expected.
 		$signed_value = preg_replace( '/[^-0-9.]/', '', $value );
-		$abs_value    = abs( $signed_value );
-		$value        = strpos( $signed_value, '-' ) === 0 ? '-' . $abs_value : $abs_value;
+		$abs_value    = str_replace( '-', '', $signed_value );
 
-		return $value;
+		return $signed_value < 0 ? '-' . $abs_value : $abs_value;
 	}
 }
 

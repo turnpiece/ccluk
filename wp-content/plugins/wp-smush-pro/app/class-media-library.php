@@ -316,9 +316,6 @@ class Media_Library extends Abstract_Module {
 						'savings'      => esc_html__( 'Savings', 'wp-smushit' ),
 					),
 				),
-				'nonce'   => array(
-					'get_smush_status' => wp_create_nonce( 'get-smush-status' ),
-				),
 			)
 		);
 	}

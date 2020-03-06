@@ -10,7 +10,7 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2015 - 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2015 - 2020 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -181,13 +181,12 @@ class Admin_Pages extends Profile {
 	 * Outputs notices on SEO setting changes.
 	 *
 	 * @since 4.0.0
+	 * @since 4.0.5 This is no longer a static function.
 	 * @access private
 	 */
-	public static function _do_settings_page_notices() {
+	public function _do_settings_page_notices() {
 
-		$tsf = \the_seo_framework();
-
-		$notice = $tsf->get_static_cache( 'settings_notice' );
+		$notice = $this->get_static_cache( 'settings_notice' );
 
 		if ( ! $notice ) return;
 
@@ -216,9 +215,9 @@ class Admin_Pages extends Profile {
 				break;
 		}
 
-		$tsf->update_static_cache( 'settings_notice', '' );
+		$this->update_static_cache( 'settings_notice', '' );
 
-		$message and $tsf->do_dismissible_notice( $message, $type ?: 'updated' );
+		$message and $this->do_dismissible_notice( $message, $type ?: 'updated' );
 	}
 
 	/**
@@ -270,8 +269,8 @@ class Admin_Pages extends Profile {
 	 * Outputs in-post flex navigational wrapper and its content.
 	 *
 	 * @since 2.9.0
-	 * @since 3.0.0: Converted to view.
-	 * @since 4.0.0: Deprecated third parameter, silently.
+	 * @since 3.0.0 Converted to view.
+	 * @since 4.0.0 Deprecated third parameter, silently.
 	 *
 	 * @param string $id       The nav-tab ID
 	 * @param array  $tabs     The tab content {
@@ -659,9 +658,11 @@ class Admin_Pages extends Profile {
 	 * Returns a chechbox wrapper.
 	 *
 	 * @since 3.1.0
+	 * @since 4.0.5 You can now supply an extra class for the checkbox.
 	 *
 	 * @param array $args : {
 	 *    string $id          The option name, used as field ID.
+	 *    string $class       The checkbox class.
 	 *    string $index       The option index, used when the option is an array.
 	 *    string $label       The checkbox label description, placed inline of the checkbox.
 	 *    string $description The checkbox additional description, placed underneat.
@@ -677,6 +678,7 @@ class Admin_Pages extends Profile {
 		$args = array_merge(
 			[
 				'id'          => '',
+				'class'       => '',
 				'index'       => '',
 				'label'       => '',
 				'description' => '',
@@ -706,17 +708,22 @@ class Admin_Pages extends Profile {
 			$value = isset( $value[ $index ] ) ? $value[ $index ] : '';
 		}
 
-		$cb_class = '';
+		$cb_classes = [];
+
+		if ( $args['class'] ) {
+			$cb_classes[] = $args['class'];
+		}
+
 		if ( $args['disabled'] ) {
-			$cb_class = 'tsf-disabled';
+			$cb_classes[] = 'tsf-disabled';
 		} elseif ( ! $args['index'] ) {
 			// Can't fetch conditionals in index.
-			$cb_class = $this->get_is_conditional_checked( $args['id'], false );
+			$cb_classes[] = $this->get_is_conditional_checked( $args['id'], false );
 		} else {
 			if ( $args['default'] ) {
-				$cb_class = 'tsf-default-selected';
+				$cb_classes[] = 'tsf-default-selected';
 			} elseif ( $args['warned'] ) {
-				$cb_class = 'tsf-warning-selected';
+				$cb_classes[] = 'tsf-warning-selected';
 			}
 		}
 
@@ -730,7 +737,7 @@ class Admin_Pages extends Profile {
 					vsprintf(
 						'<input type=checkbox class="%s" name="%s" id="%s" value="1" %s %s /> %s',
 						[
-							$cb_class,
+							esc_attr( implode( ' ', $cb_classes ) ),
 							$field_name,
 							$field_id,
 							\checked( $value, true, false ),

@@ -184,7 +184,9 @@ class WPForms_Frontend {
 			absint( wpforms()->process->form_data['id'] ) === $form_id
 		) {
 			do_action( 'wpforms_frontend_output_success', wpforms()->process->form_data, wpforms()->process->fields, wpforms()->process->entry_id );
-			wpforms_debug_data( $_POST );
+			echo '<div>';
+			wpforms_debug_data( $_POST ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
+			echo '</div>';
 			return;
 		}
 
@@ -196,7 +198,9 @@ class WPForms_Frontend {
 			absint( $_POST['wpforms']['id'] ) === $form_id
 		) {
 			do_action( 'wpforms_frontend_output_success', $form_data, false, false );
-			wpforms_debug_data( $_POST );
+			echo '<div>';
+			wpforms_debug_data( $_POST ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
+			echo '</div>';
 			return;
 		}
 
@@ -316,7 +320,9 @@ class WPForms_Frontend {
 		$this->forms[ $form_id ] = $form_data;
 
 		// Optional debug information if WPFORMS_DEBUG is defined.
-		wpforms_debug_data( $form_data );
+		echo '<div>';
+		wpforms_debug_data( $_POST ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		echo '</div>';
 
 		// After output hook.
 		do_action( 'wpforms_frontend_output_after', $form_data, $form );
@@ -401,7 +407,7 @@ class WPForms_Frontend {
 
 		// Output <noscript> error message.
 		$noscript_msg = apply_filters( 'wpforms_frontend_noscript_error_message', __( 'Please enable JavaScript in your browser to complete this form.', 'wpforms-lite' ), $form_data );
-		if ( ! empty( $noscript_msg ) && ! empty( $form_data['fields'] ) ) {
+		if ( ! empty( $noscript_msg ) && ! empty( $form_data['fields'] ) && ! wpforms_is_amp() ) {
 			echo '<noscript class="wpforms-error-noscript">' . esc_html( $noscript_msg ) . '</noscript>';
 		}
 
@@ -752,7 +758,7 @@ class WPForms_Frontend {
 
 		printf( '<div %s>%s</div>',
 			wpforms_html_attributes( $description['id'], $description['class'], $description['data'], $description['attr'] ),
-			$description['value']
+			do_shortcode( $description['value'] )
 		);
 	}
 
@@ -962,7 +968,7 @@ class WPForms_Frontend {
 
 				if ( ! empty( $settings['ajax_submit'] ) && ! wpforms_is_amp() ) {
 					printf(
-						'<img src="%s" class="wpforms-submit-spinner" style="display: none;">',
+						'<img src="%s" class="wpforms-submit-spinner" style="display: none;" width="26" height="26" alt="">',
 						esc_url(
 							apply_filters(
 								'wpforms_display_sumbit_spinner_src',

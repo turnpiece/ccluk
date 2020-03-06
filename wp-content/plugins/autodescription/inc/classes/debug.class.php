@@ -12,7 +12,7 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2015 - 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2015 - 2020 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -493,6 +493,7 @@ final class Debug {
 	 * This won't consider hiding the output.
 	 *
 	 * @since 2.6.5
+	 * @since 4.0.5 Now obtains the real rendered HTML output, instead of estimated.
 	 *
 	 * @return string Wrapped SEO meta tags output.
 	 */
@@ -509,34 +510,7 @@ final class Debug {
 		//* Start timer.
 		$this->timer( true );
 
-		$output = $tsf->robots()
-				. $tsf->the_description()
-				. $tsf->og_image()
-				. $tsf->og_locale()
-				. $tsf->og_type()
-				. $tsf->og_title()
-				. $tsf->og_description()
-				. $tsf->og_url()
-				. $tsf->og_sitename()
-				. $tsf->facebook_publisher()
-				. $tsf->facebook_author()
-				. $tsf->facebook_app_id()
-				. $tsf->article_published_time()
-				. $tsf->article_modified_time()
-				. $tsf->twitter_card()
-				. $tsf->twitter_site()
-				. $tsf->twitter_creator()
-				. $tsf->twitter_title()
-				. $tsf->twitter_description()
-				. $tsf->twitter_image()
-				. $tsf->shortlink()
-				. $tsf->canonical()
-				. $tsf->paged_urls()
-				. $tsf->ld_json()
-				. $tsf->google_site_output()
-				. $tsf->bing_site_output()
-				. $tsf->yandex_site_output()
-				. $tsf->pint_site_output();
+		$output = $tsf->get_html_output();
 
 		$timer = '<div style="display:inline-block;width:100%;padding:20px;border-bottom:1px solid #ccc;">Generated in: ' . number_format( $this->timer(), 5 ) . ' seconds</div>';
 
@@ -620,45 +594,57 @@ final class Debug {
 
 		$tsf = \the_seo_framework();
 
+		// phpcs:disable, WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase -- Not this file's issue.
 		//* Only get true/false values.
-		$page_id              = $tsf->get_the_real_ID();
-		$is_404               = $tsf->is_404();
-		$is_admin             = $tsf->is_admin();
-		$is_attachment        = $tsf->is_attachment();
-		$is_archive           = $tsf->is_archive();
-		$is_term_edit         = $tsf->is_term_edit();
-		$is_post_edit         = $tsf->is_post_edit();
-		$is_wp_lists_edit     = $tsf->is_wp_lists_edit();
-		$is_author            = $tsf->is_author();
-		$is_blog_page         = $tsf->is_blog_page();
-		$is_category          = $tsf->is_category();
-		$is_date              = $tsf->is_date();
-		$is_year              = $tsf->is_year();
-		$is_month             = $tsf->is_month();
-		$is_day               = $tsf->is_day();
-		$is_feed              = $tsf->is_feed();
-		$is_real_front_page   = $tsf->is_real_front_page();
-		$is_front_page_by_id  = $tsf->is_front_page_by_id( $tsf->get_the_real_ID() );
-		$is_home              = $tsf->is_home();
-		$is_page              = $tsf->is_page();
-		$page                 = $tsf->page();
-		$paged                = $tsf->paged();
-		$is_preview           = $tsf->is_preview();
-		$is_customize_preview = $tsf->is_customize_preview();
-		$is_search            = $tsf->is_search();
-		$is_single            = $tsf->is_single();
-		$is_singular          = $tsf->is_singular();
-		$is_static_frontpage  = $tsf->is_static_frontpage();
-		$is_tag               = $tsf->is_tag();
-		$is_tax               = $tsf->is_tax();
-		$is_wc_shop           = $tsf->is_wc_shop();
-		$is_wc_product        = $tsf->is_wc_product();
-		$is_seo_settings_page = $tsf->is_seo_settings_page( true );
-		$numpages             = $tsf->numpages();
-		$is_multipage         = $tsf->is_multipage();
-		$is_singular_archive  = $tsf->is_singular_archive();
-		$is_term_meta_capable = $tsf->is_term_meta_capable();
-		$is_post_type_archive = \is_post_type_archive();
+		$page_id                = $tsf->get_the_real_ID();
+		$is_query_exploited     = $tsf->is_query_exploited();
+		$query_supports_seo     = $tsf->query_supports_seo() ? 'yes' : 'no';
+		$is_404                 = $tsf->is_404();
+		$is_admin               = $tsf->is_admin();
+		$is_attachment          = $tsf->is_attachment();
+		$is_archive             = $tsf->is_archive();
+		$is_term_edit           = $tsf->is_term_edit();
+		$is_post_edit           = $tsf->is_post_edit();
+		$is_wp_lists_edit       = $tsf->is_wp_lists_edit();
+		$is_author              = $tsf->is_author();
+		$is_blog_page           = $tsf->is_blog_page();
+		$is_category            = $tsf->is_category();
+		$is_date                = $tsf->is_date();
+		$is_year                = $tsf->is_year();
+		$is_month               = $tsf->is_month();
+		$is_day                 = $tsf->is_day();
+		$is_feed                = $tsf->is_feed();
+		$is_real_front_page     = $tsf->is_real_front_page();
+		$is_front_page_by_id    = $tsf->is_front_page_by_id( $page_id );
+		$is_home                = $tsf->is_home();
+		$is_page                = $tsf->is_page();
+		$page                   = $tsf->page();
+		$paged                  = $tsf->paged();
+		$is_preview             = $tsf->is_preview();
+		$is_customize_preview   = $tsf->is_customize_preview();
+		$is_search              = $tsf->is_search();
+		$is_single              = $tsf->is_single();
+		$is_singular            = $tsf->is_singular();
+		$is_static_frontpage    = $tsf->is_static_frontpage();
+		$is_tag                 = $tsf->is_tag();
+		$is_tax                 = $tsf->is_tax();
+		$is_shop                = $tsf->is_shop();
+		$is_wc_shop             = $tsf->is_wc_shop();
+		$is_product             = $tsf->is_product();
+		$is_wc_product          = $tsf->is_wc_product();
+		$is_seo_settings_page   = $tsf->is_seo_settings_page( true );
+		$numpages               = $tsf->numpages();
+		$is_multipage           = $tsf->is_multipage();
+		$is_singular_archive    = $tsf->is_singular_archive();
+		$is_term_meta_capable   = $tsf->is_term_meta_capable();
+		$is_post_type_supported = $tsf->is_post_type_supported();
+		$get_post_type          = \get_post_type();
+		$get_post_type_real_ID  = $tsf->get_post_type_real_ID();
+		$admin_post_type        = $tsf->get_admin_post_type();
+		$current_taxonomy       = $tsf->get_current_taxonomy();
+		$is_post_type_archive   = \is_post_type_archive();
+		$is_protected           = $tsf->is_protected( $page_id );
+		// phpcs:enable, WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase -- Not this file's issue.
 
 		//* Don't debug the class object.
 		unset( $tsf );

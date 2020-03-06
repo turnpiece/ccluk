@@ -8,7 +8,7 @@
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2019 - 2020 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -76,6 +76,82 @@ window.tsfSettings = function( $ ) {
 
 		$( '#autodescription-site-settings\\[display_character_counter\\]' ).on( 'click', togglePixelCounterDisplay );
 		$( '#autodescription-site-settings\\[display_pixel_counter\\]' ).on( 'click', togglePixelCounterDisplay );
+
+		// This prevents notice-removal checks before they're added.
+		let init = false;
+		/**
+		 * Triggers displaying/hiding of post type warnings on the settings page.
+		 *
+		 * @since 4.0.5
+		 * @access private
+		 *
+		 * @function
+		 * @param {!jQuery.Event} event
+		 * @return {undefined}
+		 */
+		const checkDisabledPT = ( event ) => {
+
+			if ( ! event.target.name ) return;
+
+			let postType = event.target.name.split( /(?:.+\[)(.+?)(?:])/ ).join('');
+			if ( $( event.target ).is( ':checked' ) ) {
+				setDisabledPT( postType );
+			} else {
+				init && unsetDisabledPT( postType );
+			}
+		}
+		const helpTemplate = wp.template( 'tsf-disabled-post-type-help' )();
+		/**
+		 * @param {string} postType
+		 * @return {string} The cloned input class used to send POST data.
+		 */
+		const getCloneClass = postType => 'tsf-disabled-post-type-input-clone-' + postType;
+		/**
+		 * @param {string} postType
+		 * @return {array} A list of affected post type settings.
+		 */
+		const getPostTypeSettings = ( postType ) => [
+			document.getElementById( 'autodescription-site-settings[noindex_post_types][' + postType + ']' ),
+			document.getElementById( 'autodescription-site-settings[nofollow_post_types][' + postType + ']' ),
+			document.getElementById( 'autodescription-site-settings[noarchive_post_types][' + postType + ']' ),
+		].filter( el => el );
+		const setDisabledPT = ( postType ) => {
+			getPostTypeSettings( postType ).forEach( element => {
+				let clone = element.cloneNode( true );
+				clone.type = 'hidden';
+				// Note that this might cause inconsistencies when other JS elements try to amend the data via ID.
+				// However, they should use 'getElementsByName', anyway.
+				clone.id  += '-cloned' ;
+				clone.classList.add( getCloneClass( postType ) );
+
+				element.disabled           = true;
+				element.dataset.hasWarning = true;
+
+				$( element.closest( 'label' ) ).append( helpTemplate ).append( clone );
+			} );
+
+			tsfTT.triggerReset();
+		}
+		const unsetDisabledPT = ( postType ) => {
+			getPostTypeSettings( postType ).forEach( element => {
+				if ( ! element.dataset.hasWarning ) return;
+
+				// 'tsf-post-type-warning' is defined at `../inc/views/templates/settings/settings.php`
+				element.closest( 'label' ).querySelector( '.tsf-post-type-warning' ).remove();
+
+				document.querySelectorAll( '.' + getCloneClass( postType ) ).forEach( ( clone ) => {
+					clone.remove();
+				} );
+
+				element.disabled           = false;
+				element.dataset.hasWarning = false;
+			} );
+		}
+		$( '.tsf-disabled-post-types' )
+			.on( 'change.tsfSetPostType', checkDisabledPT )
+			.trigger( 'change.tsfSetPostType' );
+
+		init = true;
 	}
 
 	/**
@@ -129,6 +205,7 @@ window.tsfSettings = function( $ ) {
 	 * Initializes Titles' meta input.
 	 *
 	 * @since 4.0.0
+	 * @since 4.0.5 Fixed the additionsToggle getter.
 	 * @access private
 	 *
 	 * @function
@@ -136,7 +213,7 @@ window.tsfSettings = function( $ ) {
 	 */
 	const _initTitleSettings = () => {
 
-		let additionsToggle = document.getElementById( '#autodescription-site-settings[title_rem_additions]' );
+		let additionsToggle = document.getElementById( 'autodescription-site-settings[title_rem_additions]' );
 
 		/**
 		 * Toggles example on Left/Right selection of global title options.
@@ -205,19 +282,11 @@ window.tsfSettings = function( $ ) {
 		 * @return {undefined}
 		 */
 		const updateSeparator = ( event ) => {
-			let val       = event.target.value,
+			let entity    = event.target.dataset.entity,
 				separator = '';
 
-			switch ( val ) {
-				case 'pipe':
-					separator = '|';
-					break;
+			separator = $( '<div/>' ).html( entity ).text();
 
-				default:
-					// XSS ok: val is sanitized by PHP: s_title_separator().
-					separator = $( '<div/>' ).html( "&" + val + ";" ).text();
-					break;
-			}
 			$( ".tsf-sep-js" ).text( ' ' + separator + ' ' );
 
 			$( window ).trigger( 'tsf-title-sep-updated', [ separator ] );
@@ -549,6 +618,7 @@ window.tsfSettings = function( $ ) {
 			"#autodescription-site-settings\\[google_verification\\]",
 			"#autodescription-site-settings\\[bing_verification\\]",
 			"#autodescription-site-settings\\[yandex_verification\\]",
+			"#autodescription-site-settings\\[baidu_verification\\]",
 			"#autodescription-site-settings\\[pint_verification\\]",
 		].join( ', ' ) );
 
@@ -762,7 +832,7 @@ window.tsfSettings = function( $ ) {
 		 * @return {undefined}
 		 */
 		load: () => {
-			$( 'div.updated, div.error, div.notice, .notice-error, .notice-warning, .notice-info' ).insertAfter( '.tsf-top-wrap' )
+			$( 'div.updated, div.error, div.notice, .notice-error, .notice-warning, .notice-info' ).insertAfter( '.tsf-top-wrap' );
 
 			$( document.body ).on( 'tsf-onload', _loadSettings );
 			$( document.body ).on( 'tsf-ready', _readySettings );

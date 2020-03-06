@@ -52,7 +52,7 @@ class WPForms_Settings {
 			add_action( 'wpforms_admin_page', array( $this, 'output' ) );
 
 			// Hook for addons.
-			do_action( 'wpforms_settings_init' );
+			do_action( 'wpforms_settings_init', $this );
 		}
 	}
 
@@ -521,14 +521,14 @@ class WPForms_Settings {
 			'integrations' => array(
 				'integrations-heading'   => array(
 					'id'       => 'integrations-heading',
-					'content'  => '<h4>' . esc_html__( 'Integrations', 'wpforms-lite' ) . '</h4><p>' . esc_html__( 'Manage integrations with popular providers such as Constant Contact, MailChimp, Zapier, and more.', 'wpforms-lite' ) . '</p>',
+					'content'  => '<h4>' . esc_html__( 'Integrations', 'wpforms-lite' ) . '</h4><p>' . esc_html__( 'Manage integrations with popular providers such as Constant Contact, Mailchimp, Zapier, and more.', 'wpforms-lite' ) . '</p>',
 					'type'     => 'content',
 					'no_label' => true,
 					'class'    => array( 'section-heading' ),
 				),
 				'integrations-providers' => array(
 					'id'      => 'integrations-providers',
-					'content' => '<h4>' . esc_html__( 'Integrations', 'wpforms-lite' ) . '</h4><p>' . esc_html__( 'Manage integrations with popular providers such as Constant Contact, MailChimp, Zapier, and more.', 'wpforms-lite' ) . '</p>',
+					'content' => '<h4>' . esc_html__( 'Integrations', 'wpforms-lite' ) . '</h4><p>' . esc_html__( 'Manage integrations with popular providers such as Constant Contact, Mailchimp, Zapier, and more.', 'wpforms-lite' ) . '</p>',
 					'type'    => 'providers',
 					'wrap'    => 'none',
 				),

@@ -19,7 +19,7 @@ class WPForms_Admin_Menu {
 		add_action( 'admin_head', array( $this, 'hide_wpforms_submenu_items' ) );
 
 		// Plugins page settings link.
-		add_filter( 'plugin_action_links_' . plugin_basename( WPFORMS_PLUGIN_DIR . 'wpforms.php' ), array( $this, 'settings_link' ) );
+		add_filter( 'plugin_action_links_' . plugin_basename( WPFORMS_PLUGIN_DIR . 'wpforms.php' ), array( $this, 'settings_link' ), 10 );
 	}
 
 	/**
@@ -232,22 +232,36 @@ class WPForms_Admin_Menu {
 	 */
 	public function settings_link( $links ) {
 
-		$admin_link = add_query_arg(
-			array(
-				'page' => 'wpforms-settings',
+		$custom['settings'] = sprintf(
+			'<a href="%s" aria-label="%s">%s</a>',
+			esc_url(
+				add_query_arg(
+					array(
+						'page' => 'wpforms-settings',
+					),
+					admin_url( 'admin.php' )
+				)
 			),
-			admin_url( 'admin.php' )
-		);
-
-		$setting_link = sprintf(
-			'<a href="%s">%s</a>',
-			esc_url( $admin_link ),
+			esc_attr__( 'Go to WPForms Settings page', 'wpforms-lite' ),
 			esc_html__( 'Settings', 'wpforms-lite' )
 		);
 
-		array_unshift( $links, $setting_link );
+		$custom['support'] = sprintf(
+			'<a href="%1$s" aria-label="%2$s" style="font-weight:bold;">%3$s</a>',
+			esc_url(
+				add_query_arg(
+					array(
+						'page' => 'wpforms-about',
+						'view' => 'versus',
+					),
+					admin_url( 'admin.php' )
+				)
+			),
+			esc_attr__( 'Go to WPForms Lite vs Pro comparison page', 'wpforms-lite' ),
+			esc_html__( 'Premium Support', 'wpforms-lite' )
+		);
 
-		return $links;
+		return array_merge( $custom, (array) $links );
 	}
 }
 

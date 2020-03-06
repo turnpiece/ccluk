@@ -10,7 +10,7 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2015 - 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2015 - 2020 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -38,6 +38,8 @@ class User_Data extends Term_Data {
 	 * Returns default user meta.
 	 *
 	 * @since 3.0.0
+	 * @TODO add filter as with get_term_meta_defaults() and get_post_meta_defaults()
+	 *       (also define unfiltered values via a different function)
 	 *
 	 * @return array The default user meta index and values.
 	 */
@@ -53,8 +55,8 @@ class User_Data extends Term_Data {
 	 * Returns the current post author ID.
 	 *
 	 * @since 3.0.0
-	 * @since 3.2.2: 1. Now no longer returns the latest post author ID on home-as-blog pages.
-	 *               2. Now always returns an integer.
+	 * @since 3.2.2 : 1. Now no longer returns the latest post author ID on home-as-blog pages.
+	 *                2. Now always returns an integer.
 	 * @staticvar $cache
 	 *
 	 * @return int Post author ID on success, 0 on failure.
@@ -99,6 +101,7 @@ class User_Data extends Term_Data {
 	 *
 	 * @since 2.7.0
 	 * @since 2.8.0 Always returns array, even if no value is assigned.
+	 * @TODO update to return default values as with `get_post_meta` and `get_term_meta`
 	 * @staticvar array $usermeta_cache
 	 *
 	 * @param int    $user_id   The user ID.

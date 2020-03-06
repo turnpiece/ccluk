@@ -165,7 +165,7 @@ if ( ! defined( 'WPINC' ) ) {
 	>
 		<div class="sui-box">
 			<div id="smush-onboarding-content" aria-live="polite"></div>
-			<?php wp_nonce_field( 'smush_quick_setup' ); ?>
+			<input type="hidden" id="smush_quick_setup_nonce" name="_wpnonce" value="<?php echo wp_create_nonce( 'smush_quick_setup' ); ?>">
 		</div>
 		<button class="sui-modal-skip smush-onboarding-skip-link">
 			<?php esc_html_e( 'Skip this, I’ll set it up later', 'wp-smushit' ); ?>

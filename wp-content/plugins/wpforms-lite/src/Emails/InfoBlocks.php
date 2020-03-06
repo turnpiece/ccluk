@@ -26,7 +26,6 @@ class InfoBlocks {
 
 		$info = array();
 
-		// TODO: Change this URL once the infrastructure is ready.
 		$res = \wp_remote_get( self::SOURCE_URL );
 
 		if ( \is_wp_error( $res ) ) {

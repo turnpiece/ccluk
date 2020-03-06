@@ -8,7 +8,7 @@
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2015 - 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2015 - 2020 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -140,10 +140,10 @@ window.tsf = function( $ ) {
 	 *
 	 * @since 3.0.1
 	 * @since 3.1.2 Now escapes backslashes correctly.
-	 * @since 4.0.0: 1. Now escapes all backslashes, instead of only double.
-	 *               2. Now escapes forward slashes:
-	 *                  Although unlikely, some HTML parsers may omit the closing " of an attribute,
-	 *                  which may cause the slash to close the HTML tag.
+	 * @since 4.0.0 : 1. Now escapes all backslashes, instead of only double.
+	 *                2. Now escapes forward slashes:
+	 *                   Although unlikely, some HTML parsers may omit the closing " of an attribute,
+	 *                   which may cause the slash to close the HTML tag.
 	 * @access public
 	 *
 	 * @function

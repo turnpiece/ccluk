@@ -10,7 +10,7 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2015 - 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2015 - 2020 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -167,12 +167,6 @@ class Sanitize extends Admin_Pages {
 		);
 
 		$this->add_option_filter(
-			's_description',
-			THE_SEO_FRAMEWORK_SITE_OPTIONS,
-			[]
-		);
-
-		$this->add_option_filter(
 			's_description_raw',
 			THE_SEO_FRAMEWORK_SITE_OPTIONS,
 			[
@@ -244,7 +238,6 @@ class Sanitize extends Admin_Pages {
 				'display_pixel_counter',
 				'display_character_counter',
 
-				'cache_meta_schema',
 				'cache_sitemap',
 				'cache_object',
 
@@ -279,6 +272,8 @@ class Sanitize extends Admin_Pages {
 				'search_noarchive',
 				'site_noarchive',
 
+				'advanced_query_protection',
+
 				'paged_noindex',
 				'home_paged_noindex',
 
@@ -296,9 +291,12 @@ class Sanitize extends Admin_Pages {
 				'prev_next_archives',
 				'prev_next_frontpage',
 
+				'oembed_remove_author',
+
 				'og_tags',
 				'facebook_tags',
 				'twitter_tags',
+				'oembed_scripts',
 
 				'multi_og_image',
 
@@ -315,6 +313,7 @@ class Sanitize extends Admin_Pages {
 
 				'excerpt_the_feed',
 				'source_the_feed',
+				'index_the_feed',
 
 				'ld_json_searchbox',
 				'ld_json_breadcrumbs',
@@ -377,6 +376,7 @@ class Sanitize extends Admin_Pages {
 				'google_verification',
 				'bing_verification',
 				'yandex_verification',
+				'baidu_verification',
 				'pint_verification',
 			]
 		);
@@ -447,6 +447,7 @@ class Sanitize extends Admin_Pages {
 			[
 				'sitemap_color_main',
 				'sitemap_color_accent',
+				'theme_color',
 			]
 		);
 
@@ -484,7 +485,7 @@ class Sanitize extends Admin_Pages {
 	 * sanitizer at the right time.
 	 *
 	 * @since 2.2.2
-	 * @since 2.7.0: Uses external caching function.
+	 * @since 2.7.0 Uses external caching function.
 	 * @since 2.8.0 Renamed.
 	 * @since 4.0.0 Now caches its $option registration.
 	 * @staticvar array $cache
@@ -857,6 +858,7 @@ class Sanitize extends Admin_Pages {
 	 * Also converts back-solidi to their respective HTML entities for non-destructive handling.
 	 *
 	 * @since 2.8.2
+	 * @since 4.0.5 Now normalized `-` entities.
 	 *
 	 * @param string $new_value The Description.
 	 * @return string One line sanitized description.
@@ -866,6 +868,7 @@ class Sanitize extends Admin_Pages {
 		$new_value = $this->s_singleline( $new_value );
 		$new_value = $this->s_nbsp( $new_value );
 		$new_value = $this->s_tabs( $new_value );
+		$new_value = $this->s_hyphen( $new_value );
 		$new_value = $this->s_bsol( $new_value );
 		$new_value = $this->s_dupe_space( $new_value );
 
@@ -919,6 +922,7 @@ class Sanitize extends Admin_Pages {
 	 * @since 2.8.0
 	 * @since 2.8.2 : 1. Added $allow_shortcodes parameter.
 	 *                2. Added $escape parameter.
+	 * @since 3.2.4 Now selectively clears tags.
 	 * @see `$this->strip_tags_cs()`
 	 *
 	 * @param string $excerpt          The excerpt.
@@ -935,7 +939,7 @@ class Sanitize extends Admin_Pages {
 			'space' =>
 				[ 'article', 'aside', 'blockquote', 'dd', 'div', 'dl', 'dt', 'figcaption', 'figure', 'footer', 'li', 'main', 'ol', 'p', 'section', 'tfoot', 'ul' ],
 			'clear' =>
-				[ 'address', 'bdo', 'br', 'button', 'canvas', 'code', 'fieldset', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'header', 'hr', 'input', 'label', 'link', 'meta', 'nav', 'noscript', 'option', 'pre', 'samp', 'script', 'select', 'style', 'svg', 'table', 'textarea', 'var', 'video' ],
+				[ 'address', 'bdo', 'br', 'button', 'canvas', 'code', 'fieldset', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'header', 'hr', 'iframe', 'input', 'label', 'link', 'meta', 'nav', 'noscript', 'option', 'pre', 'samp', 'script', 'select', 'style', 'svg', 'table', 'textarea', 'var', 'video' ],
 		];
 
 		/**
@@ -1011,6 +1015,7 @@ class Sanitize extends Admin_Pages {
 	 *
 	 * @since 2.8.2
 	 * @since 4.0.0 Now normalizes `&` entities.
+	 * @since 4.0.5 Now normalized `-` entities.
 	 *
 	 * @param string $new_value The input Title.
 	 * @return string Sanitized, beautified and trimmed title.
@@ -1020,6 +1025,7 @@ class Sanitize extends Admin_Pages {
 		$new_value = $this->s_singleline( $new_value );
 		$new_value = $this->s_nbsp( $new_value );
 		$new_value = $this->s_tabs( $new_value );
+		$new_value = $this->s_hyphen( $new_value );
 		$new_value = $this->s_bsol( $new_value );
 		$new_value = $this->s_dupe_space( $new_value );
 
@@ -1340,10 +1346,10 @@ class Sanitize extends Admin_Pages {
 	 *
 	 * @since 2.2.2
 	 * @since 2.8.0 Method is now public.
-	 * @since 3.0.0: 1. Now removes '@' from the URL path.
-	 *               2. Now removes spaces and tabs.
-	 * @since 4.0.0: 1. Now returns empty on lone `@` entries.
-	 *               2. Now returns empty when using only spaces and tabs.
+	 * @since 3.0.0 : 1. Now removes '@' from the URL path.
+	 *                2. Now removes spaces and tabs.
+	 * @since 4.0.0 : 1. Now returns empty on lone `@` entries.
+	 *                2. Now returns empty when using only spaces and tabs.
 	 *
 	 * @param string $new_value String with potentially wrong Twitter username.
 	 * @return string String with 'correct' Twitter username
@@ -1375,8 +1381,8 @@ class Sanitize extends Admin_Pages {
 	 * @since 2.2.2
 	 * @since 2.8.0 Method is now public.
 	 * @since 3.0.6 Now allows a sole query argument when profile.php is used.
-	 * @since 4.0.0: 1. No longer returns a plain Facebook URL when the entry path is sanitized to become empty.
-	 *               2. Now returns empty when using only spaces and tabs.
+	 * @since 4.0.0 : 1. No longer returns a plain Facebook URL when the entry path is sanitized to become empty.
+	 *                2. Now returns empty when using only spaces and tabs.
 	 *
 	 * @param string $new_value String with potentially wrong Facebook profile URL.
 	 * @return string String with 'correct' Facebook profile URL.
@@ -1536,6 +1542,30 @@ class Sanitize extends Admin_Pages {
 			return $color;
 
 		return '';
+	}
+
+	/**
+	 * Replaces non-transformative hyphens with entity hyphens.
+	 * Duplicated simple hyphens are preserved.
+	 *
+	 * Regex challenge, make the columns without an x light up:
+	 * xxx - xx - xxx- - - xxxxxx xxxxxx- xxxxx - -
+	 * --- - -- - ---- - - ------ ------- ----- - -
+	 *
+	 * The answer? `/((-{2,3})(*SKIP)-|-)(?(2)(*FAIL))/`
+	 * Sybre-kamisama.
+	 *
+	 * @since 4.0.5
+	 *
+	 * @param string $text String with potential hyphens.
+	 * @return string A string with safe HTML encoded hyphens.
+	 */
+	public function s_hyphen( $text ) {
+
+		$text = preg_replace( '/((-{2,3})(*SKIP)-|-)(?(2)(*FAIL))/', '&#x2d;', $text );
+
+		// This is faster than putting these alternative sequences in the `-|-` regex above.
+		return str_replace( [ '&#45;', "\xe2\x80\x90" ], '&#x2d;', $text );
 	}
 
 	/**
@@ -1715,7 +1745,12 @@ class Sanitize extends Admin_Pages {
 	 *
 	 * @since 3.2.4
 	 * @since 4.0.0 Now allows emptying the indexes `space` and `clear`.
-	 * @link: https://www.w3schools.com/html/html_blocks.asp
+	 * @since 4.0.5 1. Added the `strip` argument index to the second parameter for clearing leftover tags.
+	 *              2. Now also clears `iframe` tags by default.
+	 *              3. Now no longer (for example) accidentally takes `link` tags when only `li` tags are set for stripping.
+	 *              4. Now performs a separate query for void elements; to prevent regex recursion.
+	 * @link https://www.w3schools.com/html/html_blocks.asp
+	 * @link https://html.spec.whatwg.org/multipage/syntax.html#void-elements
 	 *
 	 * @param string $input The input text that needs its tags stripped.
 	 * @param array  $args  The input arguments: {
@@ -1725,9 +1760,10 @@ class Sanitize extends Admin_Pages {
 	 *                         'clear'   : @param array|null HTML elements that should be emptied and replaced with a space.
 	 *                                                       If not set or null, skip check.
 	 *                                                       If empty array, skips stripping; otherwise, use input.
+	 *                         'strip'   : @param bool       If set, strip_tags() is performed before returning the output.
 	 *                      }
-	 *                      NOTE: WARNING The array values are forwarded to a regex without sanitization.
-	 *                      NOTE: Unlisted, script, and style tags will be stripped via PHP's `strip_tags()`.
+	 *                      NOTE: WARNING The array values are forwarded to a regex without sanitization/quoting.
+	 *                      NOTE: Unlisted, script, and style tags will be stripped via PHP's `strip_tags()`. (togglable via `$args['strip']`)
 	 *                            Also note that their contents are maintained as-is, without added spaces.
 	 *                            It is why you should always list `style` and `script` in the `clear` array.
 	 * @return string The output string without tags.
@@ -1738,8 +1774,11 @@ class Sanitize extends Admin_Pages {
 			'space' =>
 				[ 'address', 'article', 'aside', 'blockquote', 'dd', 'div', 'dl', 'dt', 'fieldset', 'figcaption', 'figure', 'footer', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'header', 'li', 'main', 'nav', 'ol', 'p', 'pre', 'section', 'table', 'tfoot', 'ul' ],
 			'clear' =>
-				[ 'bdo', 'br', 'button', 'canvas', 'code', 'hr', 'input', 'label', 'link', 'noscript', 'meta', 'option', 'samp', 'script', 'select', 'style', 'svg', 'textarea', 'var', 'video' ],
+				[ 'bdo', 'br', 'button', 'canvas', 'code', 'hr', 'iframe', 'input', 'label', 'link', 'noscript', 'meta', 'option', 'samp', 'script', 'select', 'style', 'svg', 'textarea', 'var', 'video' ],
+			'strip' => true,
 		];
+
+		$void = [ 'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr' ];
 
 		if ( ! $args ) {
 			$args = $default_args;
@@ -1753,20 +1792,34 @@ class Sanitize extends Admin_Pages {
 					}
 				}
 			}
+			$args['strip'] = isset( $args['strip'] ) ? $args['strip'] : $default_args['strip'];
 		}
 
 		// Clear first, so there's less to process; then add spaces.
 		foreach ( [ 'clear', 'space' ] as $type ) {
 			if ( empty( $args[ $type ] ) ) continue;
 
-			$_regex   = sprintf( '<(%s)[^>]*?>((.*?)(<\/\1>))?', implode( '|', $args[ $type ] ) );
+			// void = element without content.
+			$void_query = array_intersect( $args[ $type ], $void );
+			// fill = Normal, template, raw text, escapable text, foreign.
+			$fill_query = array_diff( $args[ $type ], $void );
+
 			$_replace = 'space' === $type ? ' $2 ' : ' ';
 
-			$input = preg_replace( "/$_regex/si", $_replace, $input );
+			$_regex = sprintf( '<(%s)\b[^>]*?>', implode( '|', $args[ $type ] ) );
+
+			if ( $void_query ) {
+				$_regex = sprintf( '<(%s)\b[^>]*?>', implode( '|', $void_query ) );
+				$input  = preg_replace( "/$_regex/si", $_replace, $input );
+			}
+			if ( $fill_query ) {
+				$_regex = sprintf( '<(%s)\b[^>]*?>(.*?<\/\1>)?', implode( '|', $fill_query ) );
+				$input  = preg_replace( "/$_regex/si", $_replace, $input );
+			}
 		}
 
 		// phpcs:ignore, WordPress.WP.AlternativeFunctions.strip_tags_strip_tags -- $args defines stripping of 'script' and 'style'.
-		return strip_tags( $input );
+		return $args['strip'] ? strip_tags( $input ) : $input;
 	}
 
 	/**
@@ -1774,6 +1827,7 @@ class Sanitize extends Admin_Pages {
 	 *
 	 * @since 4.0.0
 	 * @since 4.0.2 Now finds smaller images when they're over 4K.
+	 * @since 4.0.5 Now faults images with filename extensions APNG, BMP, ICO, TIFF, or SVG.
 	 * @NOTE If the input details are in an associative array, they'll be converted to sequential.
 	 *
 	 * @param array $details The image details, either associative (see $defaults) or sequential.
@@ -1805,6 +1859,22 @@ class Sanitize extends Admin_Pages {
 		$url = $this->s_url_relative_to_current_scheme( $url );
 
 		if ( ! $url ) return $defaults;
+
+		/**
+		 * Skip APNG, BMP, ICO, TIFF, and SVG.
+		 *
+		 * @link <https://developer.twitter.com/en/docs/tweets/optimize-with-cards/overview/markup>
+		 * @link <https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Image_types>
+		 * jp(e)g, png, webp, and gif are supported. Assume all non-matches to fall in those categories,
+		 * since we don't perform a live MIME-test.
+		 *
+		 * Tested with Facebook; they ignore them too. There's no documentation available.
+		 */
+		if ( in_array(
+			strtolower( strtok( pathinfo( $url, PATHINFO_EXTENSION ), '?' ) ),
+			[ 'apng', 'bmp', 'ico', 'cur', 'svg', 'tif', 'tiff' ],
+			true
+		) ) return $defaults;
 
 		$width  = (int) $width;
 		$height = (int) $height;

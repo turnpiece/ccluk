@@ -902,7 +902,7 @@ class CDN extends Abstract_Module {
 			return $response;
 		}
 
-		if ( ! isset( $response['content']['rendered'] ) ) {
+		if ( ! is_array( $response ) || ! isset( $response['content']['rendered'] ) ) {
 			return $response;
 		}
 
@@ -1281,6 +1281,9 @@ class CDN extends Abstract_Module {
 	 * @return bool|string
 	 */
 	public function is_supported_path( $src ) {
+		// Remove whitespaces.
+		$src = trim( $src );
+
 		// Allow only these extensions in CDN.
 		$ext = strtolower( pathinfo( $src, PATHINFO_EXTENSION ) );
 		if ( ! in_array( $ext, $this->supported_extensions, true ) ) {

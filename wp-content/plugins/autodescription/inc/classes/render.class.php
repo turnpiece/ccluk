@@ -10,7 +10,7 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2015 - 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2015 - 2020 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -577,6 +577,25 @@ class Render extends Admin_Init {
 	}
 
 	/**
+	 * Renders Theme Color meta tag.
+	 *
+	 * @since 4.0.5
+	 *
+	 * @return string The Theme Color meta tag.
+	 */
+	public function theme_color() {
+
+		$theme_color = $this->get_option( 'theme_color' );
+
+		$output = '';
+
+		if ( $theme_color )
+			$output = '<meta name="theme-color" content="' . \esc_attr( $theme_color ) . '" />' . "\r\n";
+
+		return $output;
+	}
+
+	/**
 	 * Renders Facebook Author meta tag.
 	 *
 	 * @since 2.2.2
@@ -686,9 +705,9 @@ class Render extends Admin_Init {
 	 *
 	 * @since 2.2.2
 	 * @since 2.8.0 Returns empty on product pages.
-	 * @since 3.0.0: 1. Now checks for 0000 timestamps.
-	 *               2. Now uses timestamp formats.
-	 *               3. Now uses GMT time.
+	 * @since 3.0.0 : 1. Now checks for 0000 timestamps.
+	 *                2. Now uses timestamp formats.
+	 *                3. Now uses GMT time.
 	 *
 	 * @return string The Article Publishing Time meta tag.
 	 */
@@ -732,8 +751,8 @@ class Render extends Admin_Init {
 	 * @since 2.2.2
 	 * @since 2.7.0 Listens to $this->get_the_real_ID() instead of WordPress Core ID determination.
 	 * @since 2.8.0 Returns empty on product pages.
-	 * @since 3.0.0: 1. Now checks for 0000 timestamps.
-	 *               2. Now uses timestamp formats.
+	 * @since 3.0.0 : 1. Now checks for 0000 timestamps.
+	 *                2. Now uses timestamp formats.
 	 *
 	 * @return string The Article Modified Time meta tag, and optionally the Open Graph Updated Time.
 	 */
@@ -929,6 +948,34 @@ class Render extends Admin_Init {
 	}
 
 	/**
+	 * Renders Baidu Site Verification code meta tag.
+	 *
+	 * @since 4.0.5
+	 *
+	 * @return string The Baidu Site Verification code meta tag.
+	 */
+	public function baidu_site_output() {
+
+		/**
+		 * @since 4.0.5
+		 * @param string $code The Baidu verification code.
+		 * @param int    $id   The current post or term ID.
+		 */
+		$code = (string) \apply_filters_ref_array(
+			'the_seo_framework_baidusite_output',
+			[
+				$this->get_option( 'baidu_verification' ),
+				$this->get_the_real_ID(),
+			]
+		);
+
+		if ( $code )
+			return '<meta name="baidu-site-verification" content="' . \esc_attr( $code ) . '" />' . PHP_EOL;
+
+		return '';
+	}
+
+	/**
 	 * Renders Pinterest Site Verification code meta tag.
 	 *
 	 * @since 2.5.2
@@ -988,7 +1035,9 @@ class Render extends Admin_Init {
 	 * @return array
 	 */
 	public function get_robots_meta() {
+
 		static $cache = null;
+
 		/**
 		 * @since 2.6.0
 		 * @param array $meta The robots meta.

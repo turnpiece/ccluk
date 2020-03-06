@@ -704,11 +704,12 @@ var wpforms = window.wpforms || ( function( document, window, $ ) {
 			} );
 
 			// IE: Click on the `image choice` image should trigger the click event on the input (checkbox or radio) field.
-			$( document ).on( 'click', '.wpforms-image-choices-item img', function( e ) {
+			if ( window.document.documentMode ) {
+				$( document ).on( 'click', '.wpforms-image-choices-item img', function() {
 
-				e.preventDefault();
-				$( this ).closest( 'label' ).find( 'input' ).click();
-			} );
+					$( this ).closest( 'label' ).find( 'input' ).click();
+				} );
+			}
 
 			$( document ).on( 'change', '.wpforms-field-checkbox input, .wpforms-field-radio input, .wpforms-field-payment-multiple input, .wpforms-field-payment-checkbox input, .wpforms-field-gdpr-checkbox input', function( event ) {
 
@@ -1710,8 +1711,9 @@ var wpforms = window.wpforms || ( function( document, window, $ ) {
 					submitText  = $submit.data( 'submit-text' );
 
 				if ( submitText ) {
-					$submit.text( submitText ).prop( 'disabled', false );
+					$submit.text( submitText );
 				}
+				$submit.prop( 'disabled', false );
 
 				$container.css( 'opacity', '' );
 				$spinner.hide();

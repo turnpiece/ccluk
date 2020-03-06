@@ -8,7 +8,7 @@ namespace The_SEO_Framework\Bridges;
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2019 - 2020 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -51,7 +51,7 @@ final class SeoSettings {
 		 * Set any to false if you wish the meta box to be removed.
 		 *
 		 * @since 2.2.4
-		 * @since 2.8.0: Added `the_seo_framework_general_metabox` filter.
+		 * @since 2.8.0 Added `the_seo_framework_general_metabox` filter.
 		 */
 		$general     = (bool) \apply_filters( 'the_seo_framework_general_metabox', true );
 		$title       = (bool) \apply_filters( 'the_seo_framework_title_metabox', true );
@@ -569,6 +569,17 @@ final class SeoSettings {
 	 */
 	public static function _social_metabox_twitter_tab() {
 		\the_seo_framework()->get_view( 'admin/metaboxes/social-metabox', [], 'twitter' );
+	}
+
+	/**
+	 * Social Metabox oEmbed Tab output.
+	 *
+	 * @since 4.0.5
+	 * @access private
+	 * @see static::social_metabox() Callback for Social Settings box.
+	 */
+	public static function _social_metabox_oembed_tab() {
+		\the_seo_framework()->get_view( 'admin/metaboxes/social-metabox', [], 'oembed' );
 	}
 
 	/**

@@ -35,7 +35,7 @@ switch ( $instance ) :
 			],
 			'nofollow'  => [
 				'value' => 'nofollow',
-				'desc'  => __( 'These options most likely prevent links from being followed on the selected archives and pages. If you enable this, the selected archives or pages in-page links will gain no SEO value, including your own links.', 'autodescription' ),
+				'desc'  => __( 'These options most likely prevent links from being followed on the selected archives and pages. If you enable this, the selected archives or pages in-page links will gain no SEO value, including your internal links.', 'autodescription' ),
 			],
 			'noarchive' => [
 				'value' => 'noarchive',
@@ -84,6 +84,22 @@ switch ( $instance ) :
 
 	case 'the_seo_framework_robots_metabox_general':
 		?>
+		<h4><?php esc_html_e( 'Advanced Query Protection', 'autodescription' ); ?></h4>
+		<?php
+		$this->description( __( 'Some URL queries can cause WordPress to show faux archives. When search engines spot these, they will crawl and index them, which may cause a drop in ranking. Advanced query protection will prevent robots from indexing these archives.', 'autodescription' ) );
+
+		$this->wrap_fields(
+			$this->make_checkbox(
+				'advanced_query_protection',
+				esc_html__( 'Enable advanced query protection?', 'autodescription' ),
+				'',
+				false
+			),
+			true
+		);
+		?>
+		<hr>
+
 		<h4><?php esc_html_e( 'Paginated Archive Settings', 'autodescription' ); ?></h4>
 		<?php
 		$this->description( __( "Indexing the second or later page of any archive might cause duplication errors. Search engines look down upon them; therefore, it's recommended to disable indexing of those pages.", 'autodescription' ) );
@@ -188,8 +204,7 @@ switch ( $instance ) :
 		$this->wrap_fields(
 			vsprintf(
 				'<p><label for="%1$s"><strong>%2$s</strong> %5$s</label></p>
-				<p><select name="%3$s" id="%1$s">%4$s</select></p>
-				<p class=description>%6$s</p>',
+				<p><select name="%3$s" id="%1$s">%4$s</select></p>',
 				[
 					$this->get_field_id( 'max_image_preview' ),
 					esc_html__( 'Maximum image preview size', 'autodescription' ),
@@ -199,15 +214,6 @@ switch ( $instance ) :
 						__( 'This may limit the image preview size for all images from this site.', 'autodescription' ),
 						'',
 						false
-					),
-					$this->convert_markdown(
-						sprintf(
-							/* translators: Backticks and hyperlink are Markdown! %s = link to documentation. */
-							esc_html__( 'The "None, disallow preview" setting will not be used when `nofollow` or `noarchive` are set for a page. This is to work around unexpected deindexing behavior in Google Search. [Learn more](%s).', 'autodescription' ),
-							'https://kb.theseoframework.com/kb/why-is-max-image-preview-none-purged/'
-						),
-						[ 'code', 'a' ],
-						[ 'a_external' => true ]
 					),
 				]
 			),
