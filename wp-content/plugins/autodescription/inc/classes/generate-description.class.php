@@ -10,7 +10,7 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2015 - 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2015 - 2020 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -147,8 +147,8 @@ class Generate_Description extends Generate {
 	 * Falls back to meta description.
 	 *
 	 * @since 3.1.0
-	 * @since 3.2.2: 1. Now tests for the homepage as page prior getting custom field data.
-	 *               2. Now obtains custom field data for terms.
+	 * @since 3.2.2 : 1. Now tests for the homepage as page prior getting custom field data.
+	 *                2. Now obtains custom field data for terms.
 	 * @since 4.0.0 Added term meta item checks.
 	 * @see $this->get_open_graph_description()
 	 * @see $this->get_open_graph_description_from_custom_field()
@@ -235,8 +235,8 @@ class Generate_Description extends Generate {
 	 * Falls back to Open Graph description.
 	 *
 	 * @since 3.1.0
-	 * @since 3.2.2: 1. Now tests for the homepage as page prior getting custom field data.
-	 *               2. Now obtains custom field data for terms.
+	 * @since 3.2.2 : 1. Now tests for the homepage as page prior getting custom field data.
+	 *                2. Now obtains custom field data for terms.
 	 * @since 4.0.0 Added term meta item checks.
 	 * @see $this->get_twitter_description()
 	 * @see $this->get_twitter_description_from_custom_field()
@@ -282,8 +282,8 @@ class Generate_Description extends Generate {
 	 * Falls back to Open Graph description.
 	 *
 	 * @since 3.1.0
-	 * @since 3.2.2: 1. Now tests for the homepage as page prior getting custom field data.
-	 *               2. Now obtains custom field data for terms.
+	 * @since 3.2.2 : 1. Now tests for the homepage as page prior getting custom field data.
+	 *                2. Now obtains custom field data for terms.
 	 * @since 4.0.0 Added term meta item checks.
 	 * @see $this->get_twitter_description()
 	 * @see $this->get_twitter_description_from_custom_field()
@@ -474,7 +474,7 @@ class Generate_Description extends Generate {
 		$excerpt = (string) \apply_filters( 'the_seo_framework_fetched_description_excerpt', $excerpt, 0, $args );
 
 		$excerpt = $this->trim_excerpt(
-			html_entity_decode( $excerpt, ENT_QUOTES | ENT_COMPAT, 'UTF-8' ),
+			$excerpt,
 			0,
 			$this->get_input_guidelines()['description'][ $type ]['chars']['goodUpper']
 		);
@@ -795,6 +795,8 @@ class Generate_Description extends Generate {
 	 * @since 4.0.0 : 1. Now stops parsing earlier on failure.
 	 *                2. Now performs faster queries.
 	 *                3. Now maintains last sentence with closing punctuations.
+	 * @since 4.0.5 : Now decodes the excerpt input, improving accuracy, and so that HTML entities at
+	 *                the end won't be transformed into gibberish.
 	 * @see https://secure.php.net/manual/en/regexp.reference.unicode.php
 	 *
 	 * We use `[^\P{Po}\'\"]` because WordPress texturizes ' and " to fall under `\P{Po}`, while they don't untexturized.
@@ -806,6 +808,8 @@ class Generate_Description extends Generate {
 	 * @return string The trimmed excerpt.
 	 */
 	public function trim_excerpt( $excerpt, $depr = 0, $max_char_length = 0 ) {
+
+		$excerpt = html_entity_decode( $excerpt, ENT_QUOTES | ENT_COMPAT, 'UTF-8' );
 
 		//* Find all words with $max_char_length, and trim when the last word boundary or punctuation is found.
 		preg_match( sprintf( '/.{0,%d}([^\P{Po}\'\"]|\p{Z}|$){1}/su', $max_char_length ), trim( $excerpt ), $matches );
@@ -865,7 +869,7 @@ class Generate_Description extends Generate {
 			// $excerpt = $matches[1];
 		// }
 
-		//* Remove leading commas and spaces.
+		//* Remove trailing commas and spaces.
 		$excerpt = rtrim( $excerpt, ' ,' );
 
 		if ( ';' === substr( $excerpt, -1 ) ) {

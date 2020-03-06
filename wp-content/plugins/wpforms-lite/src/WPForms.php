@@ -165,7 +165,7 @@ namespace WPForms {
 
 				// Load Pro or Lite specific files.
 				if ( self::$instance->pro ) {
-					require_once WPFORMS_PLUGIN_DIR . 'pro/wpforms-pro.php';
+					self::$instance->registry['pro'] = require_once WPFORMS_PLUGIN_DIR . 'pro/wpforms-pro.php';
 				} else {
 					require_once WPFORMS_PLUGIN_DIR . 'lite/wpforms-lite.php';
 				}
@@ -212,6 +212,8 @@ namespace WPForms {
 		 * @since 1.0.0
 		 */
 		private function includes() {
+
+			require_once WPFORMS_PLUGIN_DIR . 'includes/class-db.php';
 
 			$this->includes_magic();
 
@@ -262,10 +264,13 @@ namespace WPForms {
 		 */
 		private function includes_magic() {
 
+			// Action Scheduler requires a special loading procedure.
+			require_once WPFORMS_PLUGIN_DIR . 'vendor/woocommerce/action-scheduler/action-scheduler.php';
+
 			// Autoload Composer packages.
 			require_once WPFORMS_PLUGIN_DIR . 'vendor/autoload.php';
 
-			 // Load the class loader.
+			// Load the class loader.
 			$this->register(
 				[
 					'name' => 'Loader',

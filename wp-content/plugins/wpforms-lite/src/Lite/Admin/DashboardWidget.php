@@ -35,11 +35,11 @@ class DashboardWidget {
 	public function init() {
 
 		// This widget should be displayed for certain high-level users only.
-		if ( ! wpforms_current_user_can( 'view_forms' ) ) {
+		if ( ! wpforms_current_user_can() ) {
 			return;
 		}
 
-		if ( ! apply_filters( 'wpforms_admin_dashboardwidget', '__return_true' ) ) {
+		if ( ! apply_filters( 'wpforms_admin_dashboardwidget', true ) ) {
 			return;
 		}
 
@@ -65,9 +65,6 @@ class DashboardWidget {
 			// Transient lifetime in seconds. Defaults to the end of a current day.
 			'transient_lifetime'               => \apply_filters( 'wpforms_dash_widget_transient_lifetime', \strtotime( 'tomorrow' ) - \time() ),
 
-			// Allow entries count logging for WPForms Lite.
-			'allow_entries_count_lite'         => \apply_filters( 'wpforms_dash_widget_allow_entries_count_lite', true ),
-
 			// Determine if the forms with no entries should appear in a forms list. Once switched, the effect applies after cache expiration.
 			'display_forms_list_empty_entries' => \apply_filters( 'wpforms_dash_widget_display_forms_list_empty_entries', true ),
 		);
@@ -85,10 +82,6 @@ class DashboardWidget {
 		\add_action( 'wp_dashboard_setup', array( $this, 'widget_register' ) );
 
 		\add_action( 'admin_init', array( $this, 'hide_widget' ) );
-
-		if ( ! empty( $this->settings['allow_entries_count_lite'] ) ) {
-			\add_action( 'wpforms_process_entry_save', array( $this, 'update_entry_count' ), 10, 3 );
-		}
 
 		\add_action( 'wpforms_create_form', __CLASS__ . '::clear_widget_cache' );
 		\add_action( 'wpforms_save_form', __CLASS__ . '::clear_widget_cache' );
@@ -473,27 +466,6 @@ class DashboardWidget {
 
 		\wp_safe_redirect( $redirect_url );
 		exit();
-	}
-
-	/**
-	 * Increase entries count once a form is submitted.
-	 *
-	 * @since 1.5.0
-	 *
-	 * @param array      $fields  Set of form fields.
-	 * @param array      $entry   Entry contents.
-	 * @param int|string $form_id Form ID.
-	 */
-	public function update_entry_count( $fields, $entry, $form_id ) {
-
-		$form_id = \absint( $form_id );
-
-		if ( empty( $form_id ) ) {
-			return;
-		}
-
-		$count = \absint( \get_post_meta( $form_id, 'wpforms_entries_count', true ) );
-		\update_post_meta( $form_id, 'wpforms_entries_count', $count + 1 );
 	}
 
 	/**

@@ -10,7 +10,7 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2015 - 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2015 - 2020 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -81,7 +81,7 @@ class Generate_Ldjson extends Generate_Image {
 		if ( \has_filter( 'the_seo_framework_receive_json_data' ) ) {
 			/**
 			 * @since 2.9.3
-			 * @param array  $data The LD-JSON data.
+			 * @param array  $data The JSON-LD data.
 			 * @param string $key  The data key.
 			 */
 			$data = (array) \apply_filters_ref_array( 'the_seo_framework_receive_json_data', [ $data, $key ] );
@@ -140,37 +140,22 @@ class Generate_Ldjson extends Generate_Image {
 	 *
 	 * @since 2.6.0
 	 * @since 3.1.0 No longer cares for json_ld plugins.
+	 * @since 4.0.5 Removed caching.
 	 *
 	 * @return string The LD+JSON scripts.
 	 */
 	public function render_ld_json_scripts() {
 
-		$use_cache      = (bool) $this->get_option( 'cache_meta_schema' );
-		$transient_name = $use_cache ? $this->get_ld_json_transient_name( $this->get_the_real_ID() ) : '';
+		if ( $this->is_real_front_page() ) {
+			//= Homepage Schema.
+			$output = '';
 
-		$output = $transient_name ? $this->get_transient( $transient_name ) : false;
-		if ( false === $output ) :
-			if ( $this->is_real_front_page() ) {
-				//= Homepage Schema.
-				$output = '';
-
-				$output .= $this->get_ld_json_website() ?: '';
-				$output .= $this->get_ld_json_links() ?: '';
-			} else {
-				//= All other pages' Schema.
-				$output = $this->get_ld_json_breadcrumbs() ?: '';
-			}
-
-			if ( $use_cache ) {
-				/**
-				 * Transient expiration: 1 week.
-				 * Keep the script for at most 1 week.
-				 */
-				$expiration = WEEK_IN_SECONDS;
-
-				$this->set_transient( $transient_name, $output, $expiration );
-			}
-		endif;
+			$output .= $this->get_ld_json_website() ?: '';
+			$output .= $this->get_ld_json_links() ?: '';
+		} else {
+			//= All other pages' Schema.
+			$output = $this->get_ld_json_breadcrumbs() ?: '';
+		}
 
 		return $output;
 	}
@@ -263,6 +248,7 @@ class Generate_Ldjson extends Generate_Image {
 
 		/**
 		 * @since 2.7 or later.
+		 * @TODO deprecate
 		 * @param array The SEO Framework's option names used for sitelinks.
 		 */
 		$sameurls_options = (array) \apply_filters(
@@ -375,6 +361,7 @@ class Generate_Ldjson extends Generate_Image {
 		$output = '';
 
 		if ( $this->is_singular() && ! $this->is_real_front_page() ) {
+			// TODO Shouldn't this be is_post_type_hierarchical()?
 			if ( $this->is_single() ) {
 				$output = $this->get_ld_json_breadcrumbs_post();
 			} else {
@@ -437,8 +424,8 @@ class Generate_Ldjson extends Generate_Image {
 	 * Generates LD+JSON Breadcrumbs script for Posts.
 	 *
 	 * @since 2.9.3
-	 * @since 3.0.0 1: Now only returns one crumb.
-	 *              2: Now listens to primary term ID.
+	 * @since 3.0.0 : 1. Now only returns one crumb.
+	 *                2. Now listens to primary term ID.
 	 *
 	 * @return string LD+JSON breadcrumbs script for Posts on success. Empty string on failure.
 	 */
@@ -682,9 +669,9 @@ class Generate_Ldjson extends Generate_Image {
 	 * Generates homepage LD+JSON breadcrumb.
 	 *
 	 * @since 2.9.3
-	 * @since 3.2.2: 1. The title now works for the homepage as blog.
-	 *               2. The image has been disabled for the homepage as blog.
-	 *                    - I couldn't fix it without evading the API, which is bad.
+	 * @since 3.2.2 : 1. The title now works for the homepage as blog.
+	 *                2. The image has been disabled for the homepage as blog.
+	 *                   i. I couldn't fix it without evading the API, which is bad.
 	 * @since 4.0.0 Removed the image input requirement.
 	 * @staticvar array $crumb
 	 *
@@ -847,7 +834,6 @@ class Generate_Ldjson extends Generate_Image {
 		/**
 		 * @since 2.9.0
 		 * @param bool $use_seo_title Whether to use the SEO title.
-		 * NOTE: Changing this does not affect the transient cache; wait for it to clear.
 		 */
 		return isset( $cache ) ? $cache : $cache = (bool) \apply_filters( 'the_seo_framework_use_breadcrumb_seo_title', true );
 	}

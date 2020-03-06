@@ -9,7 +9,7 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2015 - 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2015 - 2020 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -107,15 +107,15 @@ function _do_upgrade() {
 
 	// Check if upgrade is locked. Otherwise, lock it.
 	if ( \get_transient( 'tsf_upgrade_lock' ) ) return;
-	\set_transient( 'tsf_upgrade_lock', true, 300 );
+
+	$timeout = 5 * MINUTE_IN_SECONDS;
+	\set_transient( 'tsf_upgrade_lock', true, $timeout );
 
 	// Register this AFTER the transient is set. Otherwise, it may clear the transient in another thread.
 	register_shutdown_function( __NAMESPACE__ . '\\_release_upgrade_lock' );
 
 	\wp_raise_memory_limit( 'tsf_upgrade' );
-
-	// phpcs:ignore, WordPress.PHP.NoSilencedErrors -- Feature may be disabled.
-	@set_time_limit( 300 );
+	set_time_limit( $timeout );
 
 	/**
 	 * Clear the cache to prevent an update_option() from saving a stale database version to the cache.
@@ -175,6 +175,11 @@ function _do_upgrade() {
 	if ( $version < '3300' ) {
 		_do_upgrade_3300();
 		$version = '3300';
+	}
+
+	if ( $version < '4051' ) {
+		_do_upgrade_4051();
+		$version = '4051';
 	}
 
 	/**
@@ -258,7 +263,7 @@ function _do_upgrade_notice() {
 		);
 	} else {
 		$tsf->do_dismissible_notice(
-			\esc_html__( 'Thank you for installing The SEO Framework! Your website is now optimized for SEO, automatically. We hope you enjoy our free plugin. Good luck with your site!', 'autodescription' ),
+			\esc_html__( 'Thank you for installing The SEO Framework! Your website is now optimized for search and social sharing, automatically. We hope you enjoy our free plugin. Good luck with your site!', 'autodescription' ),
 			'updated',
 			false,
 			false
@@ -539,6 +544,7 @@ function _do_upgrade_3103() {
  * refactored the whole API.
  *
  * @since 4.0.0
+ * @since 4.0.5 The upgrader now updates "dash" to "hyphen".
  */
 function _do_upgrade_3300() {
 
@@ -554,9 +560,9 @@ function _do_upgrade_3300() {
 
 		$defaults = _upgrade_default_site_options();
 
-		// Convert 'dash' title option to 'ndash', silently. Nothing really changes for the user.
+		// Convert 'dash' title option to 'hyphen', silently. Nothing really changes for the user.
 		if ( 'dash' === $tsf->get_option( 'title_separator', false ) )
-			$tsf->update_option( 'title_separator', 'ndash' );
+			$tsf->update_option( 'title_separator', 'hyphen' );
 
 		// Add default cron pinging option.
 		if ( isset( $defaults['ping_use_cron'] ) ) {
@@ -585,4 +591,26 @@ function _do_upgrade_3300() {
 	}
 
 	\update_option( 'the_seo_framework_upgraded_db_version', '3300' );
+}
+
+/**
+ * Registers the advanced_query_protection option. 0 for existing sites. 1 for new sites.
+ * Registers the `index_the_feed` and `baidu_verification` options for existing sites. New sites will have it registered already.
+ *
+ * @since 4.0.5
+ */
+function _do_upgrade_4051() {
+
+	$tsf = \the_seo_framework();
+
+	if ( \get_option( 'the_seo_framework_initial_db_version' ) < '4051' ) {
+		$tsf->update_option( 'advanced_query_protection', 0 );
+		$tsf->update_option( 'index_the_feed', 0 );
+		$tsf->update_option( 'baidu_verification', '' );
+		$tsf->update_option( 'oembed_scripts', 1 );
+		$tsf->update_option( 'oembed_remove_author', 0 );
+		$tsf->update_option( 'theme_color', '' );
+	}
+
+	\update_option( 'the_seo_framework_upgraded_db_version', '4051' );
 }

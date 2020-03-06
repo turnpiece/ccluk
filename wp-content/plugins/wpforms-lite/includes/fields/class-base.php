@@ -827,7 +827,7 @@ abstract class WPForms_Field {
 					$fld .= sprintf(
 						'<input type="text" name="%s[value]" value="%s" class="value">',
 						$base,
-						esc_attr( $value['value'] )
+						esc_attr( ! isset( $value['value'] ) ? '' : $value['value'] )
 					);
 					$fld .= '<div class="wpforms-image-upload">';
 					$fld .= '<div class="preview">';
@@ -879,7 +879,7 @@ abstract class WPForms_Field {
 
 				$note = sprintf(
 					'<div class="wpforms-alert-warning wpforms-alert-small wpforms-alert %s">',
-					empty( $dynamic ) && ! empty( $field[ 'dynamic_' . $dynamic ] ) ? '' : 'wpforms-hidden'
+					! empty( $dynamic ) && ! empty( $field[ 'dynamic_' . $dynamic ] ) ? '' : 'wpforms-hidden'
 				);
 
 				$note .= sprintf(
@@ -1341,8 +1341,9 @@ abstract class WPForms_Field {
 	 */
 	public function field_preview_option( $option, $field, $args = array(), $echo = true ) {
 
-		$output = '';
-		$class  = ! empty( $args['class'] ) ? wpforms_sanitize_classes( $args['class'] ) : '';
+		$output       = '';
+		$class        = ! empty( $args['class'] ) ? wpforms_sanitize_classes( $args['class'] ) : '';
+		$allowed_tags = wpforms_builder_preview_get_allowed_tags();
 
 		switch ( $option ) {
 
@@ -1352,7 +1353,7 @@ abstract class WPForms_Field {
 				break;
 
 			case 'description':
-				$description = isset( $field['description'] ) && ! empty( $field['description'] ) ? $field['description'] : '';
+				$description = isset( $field['description'] ) && ! empty( $field['description'] ) ? wp_kses( $field['description'], $allowed_tags ) : '';
 				$description = strpos( $class, 'nl2br' ) !== false ? nl2br( $description ) : $description;
 				$output      = sprintf( '<div class="description %s">%s</div>', $class, $description );
 				break;
@@ -1368,7 +1369,7 @@ abstract class WPForms_Field {
 				 * Check to see if this field is configured for Dynamic Choices,
 				 * either auto populating from a post type or a taxonomy.
 				 */
-				if ( ! empty( $field['dynamic_post_type'] ) ) {
+				if ( ! empty( $field['dynamic_post_type'] ) || ! empty( $field['dynamic_taxonomy'] ) ) {
 					switch ( $dynamic ) {
 						case 'post_type':
 							// Post type dynamic populating.
@@ -1426,7 +1427,9 @@ abstract class WPForms_Field {
 				// Notify if dynamic choices source is currently empty.
 				if ( empty( $values ) ) {
 					$values = array(
-						'label' => esc_html__( '(empty)', 'wpforms-lite' ),
+						array(
+							'label' => esc_html__( '(empty)', 'wpforms-lite' ),
+						),
 					);
 				}
 
@@ -1553,7 +1556,7 @@ abstract class WPForms_Field {
 								'<input type="%s" %s disabled>%s',
 								$type,
 								$selected,
-								$value['label']
+								wp_kses( $value['label'], $allowed_tags )
 							);
 						}
 
@@ -1588,7 +1591,7 @@ abstract class WPForms_Field {
 			return $output;
 		}
 
-		echo $output; // WPCS: XSS ok.
+		echo $output; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 	/**

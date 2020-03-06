@@ -8,7 +8,7 @@ namespace The_SEO_Framework\Builders;
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2019 - 2020 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -418,8 +418,8 @@ class Sitemap_Base extends Sitemap {
 	 * Retrieves additional URLs and builds items from them.
 	 *
 	 * @since 4.0.0
-	 * @since 4.0.1: 1. Converted to generator and iterator. Therefore, renamed function.
-	 *               2. Now actually does something.
+	 * @since 4.0.1 : 1. Converted to generator and iterator. Therefore, renamed function.
+	 *                2. Now actually does something.
 	 * @generator
 	 * @iterator
 	 *

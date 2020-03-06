@@ -51,6 +51,10 @@ class Parser {
 			return;
 		}
 
+		if ( wp_doing_cron() ) {
+			return;
+		}
+
 		if ( $this->is_page_builder() ) {
 			return;
 		}
@@ -190,6 +194,14 @@ class Parser {
 			return $content;
 		}
 
+		// Try to sort out the duplicate entries.
+		$elements = array_unique( $images[0] );
+		$urls     = array_unique( $images['img_url'] );
+		if ( count( $elements ) === count( $urls ) ) {
+			$images[0]         = $elements;
+			$images['img_url'] = $urls;
+		}
+
 		foreach ( $images[0] as $key => $image ) {
 			$img_src   = $images['img_url'][ $key ];
 			$new_image = $image;
@@ -268,7 +280,7 @@ class Parser {
 	private static function get_background_images( $content ) {
 		$images = array();
 
-		if ( preg_match_all( '/(?:background-image:\s*?url\([\'"]?(?P<img_url>.*?[^\s\'"]+)[\'"]?\))/is', $content, $images ) ) {
+		if ( preg_match_all( '/(?:background-image:\s*?url\([\'"]?(?P<img_url>.*?[^)\'"]+)[\'"]?\))/i', $content, $images ) ) {
 			foreach ( $images as $key => $unused ) {
 				// Simplify the output as much as possible, mostly for confirming test results.
 				if ( is_numeric( $key ) && $key > 0 ) {
@@ -315,8 +327,23 @@ class Parser {
 			return true;
 		}
 
+		// Oxygen builder as well.
+		if ( null !== filter_input( INPUT_GET, 'ct_builder' ) ) {
+			return true;
+		}
+
 		// Beaver builder.
 		if ( null !== filter_input( INPUT_GET, 'fl_builder' ) ) {
+			return true;
+		}
+
+		// Thrive Architect Builder.
+		if ( null !== filter_input( INPUT_GET, 'tve' ) && null !== filter_input( INPUT_GET, 'tcbf' ) ) {
+			return true;
+		}
+
+		// Tatsu page builder.
+		if ( null !== filter_input( INPUT_GET, 'tatsu' ) ) {
 			return true;
 		}
 

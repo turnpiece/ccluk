@@ -11,7 +11,7 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2015 - 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2015 - 2020 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -181,6 +181,9 @@ final class Load extends Feed {
 		if ( $this->detect_plugin( [ 'functions' => [ 'wc' ] ] ) ) {
 			//* WooCommerce.
 			$this->_include_compat( 'woocommerce', 'plugin' );
+		} elseif ( $this->detect_plugin( [ 'constants' => [ 'EDD_VERSION' ] ] ) ) {
+			//* Easy Digital Downloads.
+			$this->_include_compat( 'edd', 'plugin' );
 		}
 	}
 

@@ -197,11 +197,20 @@ class FormSelector implements IntegrationInterface {
 
 		\do_action( 'wpforms_gutenberg_block_before' );
 
-		\wpforms_display(
-			$id,
-			\apply_filters( 'wpforms_gutenberg_block_form_title', $title, $id ),
-			\apply_filters( 'wpforms_gutenberg_block_form_desc', $desc, $id )
-		);
+		if ( $this->is_gb_editor() ) {
+			wpforms_display(
+				$id,
+				apply_filters( 'wpforms_gutenberg_block_form_title', $title, $id ),
+				apply_filters( 'wpforms_gutenberg_block_form_desc', $desc, $id )
+			);
+		} else {
+			printf(
+				'[wpforms id="%s" title="%d" description="%d"]',
+				absint( $id ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				apply_filters( 'wpforms_gutenberg_block_form_title', $title, $id ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				apply_filters( 'wpforms_gutenberg_block_form_desc', $desc, $id ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			);
+		}
 
 		\do_action( 'wpforms_gutenberg_block_after' );
 

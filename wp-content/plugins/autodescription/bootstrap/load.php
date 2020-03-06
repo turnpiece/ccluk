@@ -9,7 +9,7 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2018 - 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2018 - 2020 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -78,10 +78,10 @@ function _init_tsf() {
 	/**
 	 * @package The_SEO_Framework
 	 */
-	if ( \The_SEO_Framework\_can_load() ) {
+	if ( _can_load() ) {
 		if ( \is_admin() ) {
 			//! TODO: admin-only loader?
-			$tsf         = new \The_SEO_Framework\Load();
+			$tsf         = new Load();
 			$tsf->loaded = true;
 
 			$tsf->_load_early_compat_files();
@@ -92,7 +92,7 @@ function _init_tsf() {
 			 */
 			\do_action( 'the_seo_framework_admin_loaded' );
 		} else {
-			$tsf         = new \The_SEO_Framework\Load();
+			$tsf         = new Load();
 			$tsf->loaded = true;
 
 			$tsf->_load_early_compat_files();
@@ -104,7 +104,7 @@ function _init_tsf() {
 		 */
 		\do_action( 'the_seo_framework_loaded' );
 	} else {
-		$tsf         = new \The_SEO_Framework\Silencer();
+		$tsf         = new Silencer();
 		$tsf->loaded = false;
 	}
 
