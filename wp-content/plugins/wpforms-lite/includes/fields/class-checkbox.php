@@ -593,7 +593,13 @@ class WPForms_Field_Checkbox extends WPForms_Field {
 		// Basic required check - If field is marked as required, check for entry data.
 		if (
 			! empty( $form_data['fields'][ $field_id ]['required'] ) &&
-			( empty( $field_submit ) || ( 1 === count( $field_submit ) && empty( $field_submit[0] ) ) )
+			(
+				empty( $field_submit ) ||
+				(
+					count( $field_submit ) === 1 &&
+					( ! isset( $field_submit[0] ) || (string) $field_submit[0] === '' )
+				)
+			)
 		) {
 			$error = wpforms_get_required_label();
 		}

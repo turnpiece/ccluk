@@ -12,7 +12,7 @@ defined( 'THE_SEO_FRAMEWORK_DB_VERSION' ) or die;
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2018 - 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2018 - 2020 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -41,6 +41,7 @@ the_seo_framework_pre_boot_test();
  * Tests plugin upgrade.
  *
  * @since 3.1.0
+ * @since 4.0.5 No longer assumes the main blog (WP Multisite) has been tested, although that's very likely when updated via the interface.
  * @access private
  * @link http://php.net/eol.php
  * @link https://codex.wordpress.org/WordPress_Versions
@@ -60,7 +61,7 @@ function the_seo_framework_pre_boot_test() {
 
 		$nw = get_network();
 		if ( $nw instanceof WP_Network ) {
-			if ( get_blog_option( $nw->site_id, 'the_seo_framework_tested_upgrade_version' ) ) {
+			if ( get_blog_option( $nw->site_id, 'the_seo_framework_tested_upgrade_version' ) >= THE_SEO_FRAMEWORK_DB_VERSION ) {
 				update_option( 'the_seo_framework_tested_upgrade_version', THE_SEO_FRAMEWORK_DB_VERSION );
 				return;
 			}
@@ -109,7 +110,7 @@ function the_seo_framework_pre_boot_test() {
 	switch ( $test ) :
 		case 1:
 			//* PHP requirements not met, always count up to encourage best standards.
-			$requirement = 'PHP 5.5.0 or later';
+			$requirement = 'PHP 5.6.0 or later';
 			$issue       = 'PHP version';
 			$version     = PHP_VERSION;
 			$subtitle    = 'Server Requirements';

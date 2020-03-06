@@ -7,7 +7,7 @@ namespace The_SEO_Framework\Bridges;
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2019 - 2020 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -244,6 +244,23 @@ abstract class ListTable {
 			\add_filter( 'manage_edit-' . $taxonomy . '_columns', [ $this, '_add_column' ], 1, 1 );
 		}
 		// phpcs:enable, WordPress.Security.NonceVerification
+	}
+
+	/**
+	 * Returns a JS script that triggers list updates.
+	 * This is a necessity as WordPress doesn't trigger actions on update.
+	 *
+	 * TODO bind to WordPress' function instead? Didn't we already do that?!
+	 * See: `tsfLe._hijackListeners()`; Although, that doesn't cover "adding" new items.
+	 *
+	 * @since 4.0.5
+	 * @NOTE: Do not bind to `tsfLeDispatchUpdate`, it's a private action.
+	 *        Bind to `tsfLeUpdated` instead, which is debounced and should only run once.
+	 *
+	 * @return string The triggering script.
+	 */
+	protected function get_ajax_dispatch_updated_event() {
+		return "<script>'use strict';(()=>document.dispatchEvent(new Event('tsfLeDispatchUpdate')))();</script>";
 	}
 
 	/**

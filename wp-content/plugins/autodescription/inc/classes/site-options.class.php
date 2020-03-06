@@ -10,7 +10,7 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2015 - 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2015 - 2020 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -78,7 +78,6 @@ class Site_Options extends Sanitize {
 				'alter_archive_query_type' => 'in_query', // Archive query type.
 				'alter_search_query_type'  => 'in_query', // Search query type.
 
-				'cache_meta_schema'      => 0, // Schema.org transient cache.
 				'cache_sitemap'          => 1, // Sitemap transient cache.
 				'cache_object'           => 1, // Object caching.
 
@@ -100,7 +99,7 @@ class Site_Options extends Sanitize {
 				'disabled_post_types' => [], // Post Type support.
 
 				// Title.
-				'title_separator'     => 'pipe',    // Title separator, dropdown
+				'title_separator'     => 'hyphen',  // Title separator, dropdown
 				'title_location'      => $titleloc, // Title separation location
 				'title_rem_additions' => 0,         // Remove title additions
 				'title_rem_prefixes'  => 0,         // Remove title prefixes from archives.
@@ -140,6 +139,9 @@ class Site_Options extends Sanitize {
 				'site_noarchive'       => 0, // Site Page robots noarchive
 
 				$this->get_robots_post_type_option_id( 'noarchive' ) => [], // Post Type support.
+
+				// Robots query protection
+				'advanced_query_protection' => 1,
 
 				// Robots pagination index.
 				'paged_noindex'      => 1, // Every second or later page noindex
@@ -192,22 +194,30 @@ class Site_Options extends Sanitize {
 				'twitter_site'    => '', // Twitter business @username
 				'twitter_creator' => '', // Twitter user @username
 
+				// oEmbed.
+				'oembed_remove_author' => 0, // Remove author from oEmbeds
+
 				// Social on/off.
 				'og_tags'         => 1, // Output of Open Graph meta tags
 				'facebook_tags'   => 1, // Output the Facebook meta tags
 				'twitter_tags'    => 1, // Output the Twitter meta tags
+				'oembed_scripts'  => 1, // Enable WordPress's oEmbed scripts
 
 				// Social image settings.
-				'multi_og_image'  => 1,
+				'multi_og_image' => 1, // Allow multiple images to be generated
+
+				// Theme color settings
+				'theme_color' => '', // Theme color metatag, default none
 
 				// Social FallBack images (fb = fallback)
-				'social_image_fb_url'   => '', // Fallback image URL
-				'social_image_fb_id'    => 0, // Fallback image ID
+				'social_image_fb_url' => '', // Fallback image URL
+				'social_image_fb_id'  => 0,  // Fallback image ID
 
 				// Webmasters.
 				'google_verification' => '', // Google Verification Code
 				'bing_verification'   => '', // Bing Verification Code
 				'yandex_verification' => '', // Yandex Verification Code
+				'baidu_verification'  => '', // Baidu Verification Code
 				'pint_verification'   => '', // Pinterest Verification Code
 
 				// Knowledge general. https://developers.google.com/structured-data/customize/contact-points - This is extremely extended and valuable. Expect a premium version.
@@ -248,12 +258,13 @@ class Site_Options extends Sanitize {
 
 				'sitemap_styles'       => 1,        // Whether to style the sitemap
 				'sitemap_logo'         => 1,        // Whether to add logo to sitemap
-				'sitemap_color_main'   => '333',    // Sitemap main color
-				'sitemap_color_accent' => '00cd98', // Sitemap accent color
+				'sitemap_color_main'   => '222222', // Sitemap main color
+				'sitemap_color_accent' => '00a0d2', // Sitemap accent color
 
 				// Feed.
 				'excerpt_the_feed' => 1, // Generate feed Excerpts
 				'source_the_feed'  => 1, // Add backlink at the end of the feed
+				'index_the_feed'   => 0, // Add backlink at the end of the feed
 
 				// Schema
 				'ld_json_searchbox'   => 1, // LD+Json Sitelinks Searchbox

@@ -351,6 +351,12 @@ function wpforms_builder_dynamic_source() {
 		}
 	}
 
+	if ( empty( $items ) ) {
+		$items = array(
+			esc_html__( '(empty)', 'wpforms-lite' ),
+		);
+	}
+
 	wp_send_json_success(
 		array(
 			'items'       => $items,

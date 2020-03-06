@@ -1053,7 +1053,7 @@ div.wpforms-container-full .wpforms-form ul.wpforms-image-choices-modern img {
 	max-width: 100%;
 }
 
-div.wpforms-container-full .wpforms-form ul.wpforms-image-choices-modern label {
+div.wpforms-container-full .wpforms-form ul.wpforms-image-choices-modern label:not(.wpforms-error) {
 	background-color: #fff;
 	display: block;
 	margin: 0 auto;
@@ -1065,8 +1065,8 @@ div.wpforms-container-full .wpforms-form ul.wpforms-image-choices-modern label {
 	text-align: center;
 }
 
-div.wpforms-container-full .wpforms-form ul.wpforms-image-choices-modern label:hover,
-div.wpforms-container-full .wpforms-form ul.wpforms-image-choices-modern label:focus {
+div.wpforms-container-full .wpforms-form ul.wpforms-image-choices-modern label:not(.wpforms-error):hover,
+div.wpforms-container-full .wpforms-form ul.wpforms-image-choices-modern label:not(.wpforms-error):focus {
 	border:1px solid #ddd;
 }
 
@@ -1120,7 +1120,7 @@ div.wpforms-container-full .wpforms-form ul.wpforms-image-choices-classic img {
 	max-width: 100%;
 }
 
-div.wpforms-container-full .wpforms-form ul.wpforms-image-choices-classic label {
+div.wpforms-container-full .wpforms-form ul.wpforms-image-choices-classic label:not(.wpforms-error) {
 	background-color: #fff;
 	display: block;
 	margin: 0 auto;
@@ -1130,8 +1130,8 @@ div.wpforms-container-full .wpforms-form ul.wpforms-image-choices-classic label 
 	text-align: center;
 }
 
-div.wpforms-container-full .wpforms-form ul.wpforms-image-choices-classic label:hover,
-div.wpforms-container-full .wpforms-form ul.wpforms-image-choices-classic label:focus {
+div.wpforms-container-full .wpforms-form ul.wpforms-image-choices-classic label:not(.wpforms-error):hover,
+div.wpforms-container-full .wpforms-form ul.wpforms-image-choices-classic label:not(.wpforms-error):focus {
 	border-color: #ddd;
 }
 
@@ -1140,7 +1140,7 @@ div.wpforms-container-full .wpforms-form ul.wpforms-image-choices-classic .wpfor
 }
 
 div.wpforms-container-full .wpforms-form ul.wpforms-image-choices-classic .wpforms-selected label {
-	border-color: #666;
+	border-color: #666 !important;
 }
 
 div.wpforms-container-full .wpforms-form ul.wpforms-image-choices-classic .wpforms-image-choices-label {

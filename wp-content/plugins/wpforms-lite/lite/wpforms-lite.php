@@ -25,6 +25,9 @@ class WPForms_Lite {
 		add_action( 'wpforms_admin_settings_after', array( $this, 'settings_cta' ), 10, 1 );
 		add_action( 'wp_ajax_wpforms_lite_settings_upgrade', array( $this, 'settings_cta_dismiss' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueues' ) );
+
+		// Entries count logging for WPForms Lite.
+		add_action( 'wpforms_process_entry_save', array( $this, 'update_entry_count' ), 10, 3 );
 	}
 
 	/**
@@ -981,6 +984,11 @@ class WPForms_Lite {
 		$upgrade = wpforms_admin_upgrade_link( 'addons' );
 		$addons  = array(
 			array(
+				'name' => 'ActiveCampaign',
+				'desc' => 'WPForms ActiveCampaign addon lets you add contacts to your account, record events, add notes to contacts, and more.',
+				'icon' => 'addon-icon-activecampaign.png',
+			),
+			array(
 				'name' => 'Aweber',
 				'desc' => 'WPForms AWeber addon allows you to create AWeber newsletter signup forms in WordPress, so you can grow your email list.',
 				'icon' => 'addon-icon-aweber.png',
@@ -1036,8 +1044,8 @@ class WPForms_Lite {
 				'icon' => 'addon-icon-getresponse.png',
 			),
 			array(
-				'name' => 'MailChimp',
-				'desc' => 'WPForms MailChimp addon allows you to create MailChimp newsletter signup forms in WordPress, so you can grow your email list.',
+				'name' => 'Mailchimp',
+				'desc' => 'WPForms Mailchimp addon allows you to create Mailchimp newsletter signup forms in WordPress, so you can grow your email list.',
 				'icon' => 'addon-icon-mailchimp.png',
 			),
 			array(
@@ -1132,6 +1140,31 @@ class WPForms_Lite {
 		</div>
 
 		<?php
+	}
+
+	/**
+	 * Increase entries count once a form is submitted.
+	 *
+	 * @since 1.5.9
+	 *
+	 * @param array      $fields  Set of form fields.
+	 * @param array      $entry   Entry contents.
+	 * @param int|string $form_id Form ID.
+	 */
+	public function update_entry_count( $fields, $entry, $form_id ) {
+
+		if ( ! apply_filters( 'wpforms_dash_widget_allow_entries_count_lite', true ) ) {
+			return;
+		}
+
+		$form_id = absint( $form_id );
+
+		if ( empty( $form_id ) ) {
+			return;
+		}
+
+		$count = absint( get_post_meta( $form_id, 'wpforms_entries_count', true ) );
+		update_post_meta( $form_id, 'wpforms_entries_count', $count + 1 );
 	}
 }
 

@@ -2,9 +2,9 @@
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Smush Pro 3.6.0\n"
+"Project-Id-Version: Smush Pro 3.6.1\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2020-02-25 07:19:45+00:00\n"
+"POT-Creation-Date: 2020-03-06 01:47:04+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -177,7 +177,7 @@ msgid "Smush Pro"
 msgstr ""
 
 #: app/class-admin.php:246 app/class-media-library.php:308
-#: app/class-media-library.php:518
+#: app/class-media-library.php:515
 #: core/integrations/nextgen/class-admin.php:121
 #: core/integrations/nextgen/class-admin.php:123
 #: core/integrations/nextgen/class-admin.php:318 wp-smush.php:411
@@ -356,25 +356,25 @@ msgstr ""
 msgid "Select an image to view Smush stats."
 msgstr ""
 
-#: app/class-media-library.php:315 app/class-media-library.php:732
+#: app/class-media-library.php:315 app/class-media-library.php:729
 #: core/integrations/nextgen/class-stats.php:539
 msgid "Image size"
 msgstr ""
 
-#: app/class-media-library.php:316 app/class-media-library.php:733
+#: app/class-media-library.php:316 app/class-media-library.php:730
 #: core/integrations/nextgen/class-stats.php:540
 msgid "Savings"
 msgstr ""
 
-#: app/class-media-library.php:358 app/class-media-library.php:455
+#: app/class-media-library.php:355 app/class-media-library.php:452
 msgid "Smushing in progress.."
 msgstr ""
 
-#: app/class-media-library.php:362
+#: app/class-media-library.php:359
 msgid "Smush Now!"
 msgstr ""
 
-#: app/class-media-library.php:382
+#: app/class-media-library.php:379
 #. translators: %s: number of thumbnails
 msgid ""
 "When you upload an image to WordPress it automatically creates %s thumbnail "
@@ -383,31 +383,31 @@ msgid ""
 "your site we don’t Smush them. Pro users can override this."
 msgstr ""
 
-#: app/class-media-library.php:388
+#: app/class-media-library.php:385
 msgid ""
 "Image couldn't be smushed as it exceeded the 5Mb size limit, Pro users can "
 "smush images with size up to 32Mb."
 msgstr ""
 
-#: app/class-media-library.php:391
+#: app/class-media-library.php:388
 msgid " Skipped"
 msgstr ""
 
-#: app/class-media-library.php:409 app/class-media-library.php:463
-#: app/class-media-library.php:691 core/class-core.php:414
+#: app/class-media-library.php:406 app/class-media-library.php:460
+#: app/class-media-library.php:688 core/class-core.php:414
 #: core/class-rest.php:80 core/integrations/nextgen/class-admin.php:312
 msgid "Not processed"
 msgstr ""
 
-#: app/class-media-library.php:459 core/class-core.php:413
+#: app/class-media-library.php:456 core/class-core.php:413
 msgid "Ignored from auto-smush"
 msgstr ""
 
-#: app/class-media-library.php:469
+#: app/class-media-library.php:466
 msgid "Already optimized"
 msgstr ""
 
-#: app/class-media-library.php:475
+#: app/class-media-library.php:472
 #. translators: %1$s: bytes savings, %2$s: percentage savings, %3$d: number of
 #. images
 msgid "Reduced by %1$s (%2$s)"
@@ -415,48 +415,48 @@ msgid_plural "%3$d images reduced by %1$s (%2$s)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: app/class-media-library.php:485
+#: app/class-media-library.php:482
 #. translators: %1$s: new line, %2$s: image size
 msgid "%1$sImage size: %2$s"
 msgstr ""
 
-#: app/class-media-library.php:513
+#: app/class-media-library.php:510
 msgid "Undo"
 msgstr ""
 
-#: app/class-media-library.php:520 app/class-media-library.php:710
+#: app/class-media-library.php:517 app/class-media-library.php:707
 msgid "Ignore"
 msgstr ""
 
-#: app/class-media-library.php:545
+#: app/class-media-library.php:542
 msgid "Detailed stats for all the image sizes"
 msgstr ""
 
-#: app/class-media-library.php:546
+#: app/class-media-library.php:543
 msgid "View Stats"
 msgstr ""
 
-#: app/class-media-library.php:708
+#: app/class-media-library.php:705
 msgid "Show in bulk Smush"
 msgstr ""
 
-#: app/class-media-library.php:868
+#: app/class-media-library.php:865
 msgid "Smush image including original file"
 msgstr ""
 
-#: app/class-media-library.php:872
+#: app/class-media-library.php:869
 msgid "Resmush"
 msgstr ""
 
-#: app/class-media-library.php:894
+#: app/class-media-library.php:891
 msgid "Restore original image"
 msgstr ""
 
-#: app/class-media-library.php:898
+#: app/class-media-library.php:895
 msgid "Restore"
 msgstr ""
 
-#: app/class-media-library.php:927 core/class-core.php:265
+#: app/class-media-library.php:924 core/class-core.php:265
 #: core/class-core.php:383 core/integrations/nextgen/class-admin.php:211
 #: core/integrations/nextgen/class-stats.php:365
 msgid "Super-Smush"
@@ -492,7 +492,7 @@ msgid ""
 msgstr ""
 
 #: app/common/progress-bar.php:57 app/modals/progress-dialog.php:85
-#: app/modals/reset-settings.php:36 app/modals/restore-images.php:52
+#: app/modals/reset-settings.php:37 app/modals/restore-images.php:52
 #: app/modals/restore-images.php:70 app/modals/restore-images.php:139
 msgid "Cancel"
 msgstr ""
@@ -571,7 +571,7 @@ msgstr ""
 
 #: app/modals/onboarding.php:43 app/modals/onboarding.php:148
 #: app/pages/class-dashboard.php:64 app/pages/class-dashboard.php:213
-#: app/pages/class-dashboard.php:225 app/pages/class-dashboard.php:1278
+#: app/pages/class-dashboard.php:225 app/pages/class-dashboard.php:1320
 #: app/views/settings/meta-box.php:126
 msgid "Lazy Load"
 msgstr ""
@@ -713,7 +713,7 @@ msgid ""
 "defaults?"
 msgstr ""
 
-#: app/modals/reset-settings.php:40
+#: app/modals/reset-settings.php:41
 msgid "Reset settings"
 msgstr ""
 
@@ -832,7 +832,7 @@ msgstr ""
 
 #: app/pages/class-dashboard.php:65 app/pages/class-dashboard.php:238
 #: app/pages/class-dashboard.php:248 app/pages/class-dashboard.php:257
-#: app/pages/class-dashboard.php:1157 app/pages/class-dashboard.php:1232
+#: app/pages/class-dashboard.php:1199 app/pages/class-dashboard.php:1274
 #: app/views/settings/meta-box.php:131 core/modules/class-cdn.php:288
 #. translators: %1$s - starting a tag, %2$s - closing a tag
 msgid "CDN"
@@ -1008,32 +1008,51 @@ msgstr ""
 msgid "Included image sizes"
 msgstr ""
 
-#: app/pages/class-dashboard.php:871
-msgid "All images failed to optimize."
+#: app/pages/class-dashboard.php:872
+msgid "Image compression complete."
 msgstr ""
 
-#: app/pages/class-dashboard.php:878
-#. translators: %1$d: number of images smushed and %1$d number of failed.
-msgid "%1$d images were successfully optimized and %2$d images failed."
+#: app/pages/class-dashboard.php:888
+#. translators: %d - number of images
+msgid "%d image was successfully optimized"
+msgid_plural "%d images were successfully optimized"
+msgstr[0] ""
+msgstr[1] ""
+
+#: app/pages/class-dashboard.php:900
+#. translators: %1$d - number of skipped images, %2$d - total number of images
+msgid "%d image was skipped because it couldn't be optimized"
+msgid_plural "%1$d/%2$d images were skipped because they couldn't be optimized"
+msgstr[0] ""
+msgstr[1] ""
+
+#: app/pages/class-dashboard.php:913
+#. translators: %1$d - number of failed images, %2$d - total number of images
+msgid "%d resulted in an error"
+msgid_plural "%1$d/%2$d images resulted in an error, check the logs for more information"
+msgstr[0] ""
+msgstr[1] ""
+
+#: app/pages/class-dashboard.php:925
+#. translators: %1$d - number of skipped images, %2$d - total number of images,
+#. %3$d - number of failed images
+msgid ""
+"%1$d/%2$d images were skipped because they couldn't be optimized and "
+"%3$d/%2$d resulted in an error"
 msgstr ""
 
-#: app/pages/class-dashboard.php:887
-#. translators: %d: number of images
-msgid "%d images were successfully optimized."
-msgstr ""
-
-#: app/pages/class-dashboard.php:1172 core/modules/class-cdn.php:305
+#: app/pages/class-dashboard.php:1214 core/modules/class-cdn.php:305
 msgid ""
 "Your media is currently being served from the WPMU DEV CDN. Bulk and "
 "Directory smush features are treated separately and will continue to run "
 "independently."
 msgstr ""
 
-#: app/pages/class-dashboard.php:1176
+#: app/pages/class-dashboard.php:1218
 msgid "CDN is not yet active. Configure your settings below and click Activate."
 msgstr ""
 
-#: app/pages/class-dashboard.php:1177
+#: app/pages/class-dashboard.php:1219
 msgid ""
 "Your settings have been saved and changes are now propagating to the CDN. "
 "Changes can take up to 30\n"
@@ -1041,17 +1060,17 @@ msgid ""
 "in the mean time, please be patient."
 msgstr ""
 
-#: app/pages/class-dashboard.php:1233
+#: app/pages/class-dashboard.php:1275
 msgid ""
 "This feature is likely to work without issue, however our CDN is in beta "
 "stage and some issues are still present."
 msgstr ""
 
-#: app/pages/class-dashboard.php:1253
+#: app/pages/class-dashboard.php:1295
 msgid "Error detecting language"
 msgstr ""
 
-#: app/pages/class-dashboard.php:1279
+#: app/pages/class-dashboard.php:1321
 msgid ""
 "This feature is likely to work without issue, however lazy load is in beta "
 "stage and some issues are still present"
@@ -2471,7 +2490,7 @@ msgstr ""
 msgid "images optimized"
 msgstr ""
 
-#: core/class-core.php:406 core/modules/class-dir.php:1154
+#: core/class-core.php:406 core/modules/class-dir.php:1180
 msgid "Choose directory"
 msgstr ""
 
@@ -2753,7 +2772,7 @@ msgid ""
 "images in REST API responses."
 msgstr ""
 
-#: core/modules/class-cdn.php:290 core/modules/class-dir.php:1160
+#: core/modules/class-cdn.php:290 core/modules/class-dir.php:1186
 msgid "Updating Stats"
 msgstr ""
 
@@ -2791,53 +2810,49 @@ msgstr ""
 msgid "Too many requests, please try again in a moment."
 msgstr ""
 
-#: core/modules/class-dir.php:215
+#: core/modules/class-dir.php:222
 msgid "Incorrect image id"
 msgstr ""
 
-#: core/modules/class-dir.php:244
-msgid "Could not find image id in last scanned images"
-msgstr ""
-
-#: core/modules/class-dir.php:253
+#: core/modules/class-dir.php:254
 msgid "Potential Phar PHP Object Injection detected"
 msgstr ""
 
-#: core/modules/class-dir.php:273
+#: core/modules/class-dir.php:274
 msgid "Image couldn't be optimized"
 msgstr ""
 
-#: core/modules/class-dir.php:453 core/modules/class-dir.php:468
-#: core/modules/class-dir.php:634 core/modules/class-dir.php:751
+#: core/modules/class-dir.php:479 core/modules/class-dir.php:494
+#: core/modules/class-dir.php:660 core/modules/class-dir.php:777
 msgid "Unauthorized"
 msgstr ""
 
-#: core/modules/class-dir.php:574
+#: core/modules/class-dir.php:600
 msgid "There was a problem getting the selected directories"
 msgstr ""
 
-#: core/modules/class-dir.php:737
+#: core/modules/class-dir.php:763
 msgid "We could not find any images in the selected directory."
 msgstr ""
 
-#: core/modules/class-dir.php:759
+#: core/modules/class-dir.php:785
 msgid "Empty Directory Path"
 msgstr ""
 
-#: core/modules/class-dir.php:1069
+#: core/modules/class-dir.php:1095
 #. translators: %s: total number of images
 msgid "You've smushed %d images in total."
 msgstr ""
 
-#: core/modules/class-dir.php:1148
+#: core/modules/class-dir.php:1174
 msgid "Directory Smush Savings"
 msgstr ""
 
-#: core/modules/class-dir.php:1151
+#: core/modules/class-dir.php:1177
 msgid "Smush images that aren't located in your uploads folder."
 msgstr ""
 
-#: core/modules/class-dir.php:1153
+#: core/modules/class-dir.php:1179
 msgid "Select a directory you'd like to Smush."
 msgstr ""
 

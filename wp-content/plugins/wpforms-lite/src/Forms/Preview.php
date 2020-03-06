@@ -145,11 +145,77 @@ class Preview {
 			return '';
 		}
 
-		$content = esc_html__( 'This is a preview of your form. This page is not publicly accessible.', 'wpforms-lite' );
+		$links = [];
+
+		if ( wpforms_current_user_can( 'edit_form_single', $this->form_data['id'] ) ) {
+			$links[] = [
+				'url'  => esc_url(
+					add_query_arg(
+						[
+							'page'    => 'wpforms-builder',
+							'view'    => 'fields',
+							'form_id' => absint( $this->form_data['id'] ),
+						],
+				 		admin_url( 'admin.php' )
+					)
+				),
+				'text' => esc_html__( 'Edit Form', 'wpform-lite' ),
+			];
+		}
+
+		if ( wpforms()->pro && wpforms_current_user_can( 'view_entries_form_single', $this->form_data['id'] ) ) {
+			$links[] = [
+				'url'  => esc_url(
+					add_query_arg(
+						[
+							'page'    => 'wpforms-entries',
+							'view'    => 'list',
+							'form_id' => absint( $this->form_data['id'] ),
+						],
+						admin_url( 'admin.php' )
+					)
+				),
+				'text' => esc_html__( 'View Entries', 'wpform-lite' ),
+			];
+		}
 
 		if ( ! empty( $_GET['new_window'] ) ) { // phpcs:ignore
-			$content .= ' <a href="javascript:window.close();">' . esc_html__( 'Close this window', 'wpforms-lite' ) . '.</a>';
+			$links[] = [
+				'url'  => 'javascript:window.close();',
+				'text' => esc_html__( 'Close this window', 'wpforms-lite' ),
+			];
 		}
+
+		$content  = '<p>';
+		$content .= esc_html__( 'This is a preview of your form. This page is not publicly accessible.', 'wpforms-lite' );
+		if ( ! empty( $links ) ) {
+			$content .= '<br>';
+			foreach ( $links as $key => $link ) {
+				$content .= '<a href="' . $link['url'] . '">' . $link['text'] . '</a>';
+				$l        = array_keys( $links );
+				if ( end( $l ) !== $key ) {
+					$content .= ' <span style="display:inline-block;margin:0 6px;opacity: 0.5">|</span> ';
+				}
+			}
+		}
+		$content .= '</p>';
+
+		$content .= '<p>';
+		$content .= sprintf(
+			wp_kses(
+				/* translators: %1$s - WPForms doc link. */
+				__( 'For form testing tips, check out our <a href="%1$s" target="_blank" rel="noopener noreferrer">complete guide!</a>', 'wpforms-lite' ),
+				[
+					'a' => [
+						'href'   => [],
+						'target' => [],
+						'rel'    => [],
+					],
+				]
+			),
+			'https://wpforms.com/docs/how-to-properly-test-your-wordpress-forms-before-launching-checklist/'
+		);
+		$content .= '</p>';
 
 		$content .= do_shortcode( '[wpforms id="' . absint( $this->form_data['id'] ) . '"]' );
 

@@ -481,7 +481,7 @@ class WPForms_About {
 			</div>
 
 			<div class="wpforms-admin-about-section-first-form-video">
-				<iframe src="https://www.youtube-nocookie.com/embed/yDyvSGV7tP4?rel=0" width="540" height="304" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+				<iframe src="https://www.youtube-nocookie.com/embed/o2nE1P74WxQ?rel=0" width="540" height="304" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 			</div>
 
 		</div>
@@ -1043,7 +1043,7 @@ class WPForms_About {
 					'status' => 'full',
 					'text'   => array(
 						'<strong>' . esc_html__( 'All Marketing Integrations', 'wpforms-lite' ) . '</strong>',
-						esc_html__( 'Constant Contact, MailChimp, AWeber, GetResponse, Campaign Monitor, and Drip.', 'wpforms-lite' ),
+						esc_html__( 'Constant Contact, Mailchimp, AWeber, GetResponse, Campaign Monitor, and Drip.', 'wpforms-lite' ),
 						'',
 						wp_kses(
 							__( '<strong>Bonus:</strong> 500+ integrations with Zapier.', 'wpforms-lite' ),

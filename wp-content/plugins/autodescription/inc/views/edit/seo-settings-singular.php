@@ -14,7 +14,7 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) and $_this = the_seo_framework_class() an
 $instance = $this->get_view_instance( 'inpost', $instance );
 
 //* Setup default vars.
-$post_id  = $this->get_the_real_ID(); // We also have access to object $post at the main call...
+$post_id = $this->get_the_real_ID(); // We also have access to object $post at the main call...
 
 $_generator_args = [
 	'id'       => $post_id,
@@ -133,14 +133,14 @@ switch ( $instance ) :
 							<?php
 							esc_html_e( 'Remove the blog name?', 'autodescription' );
 							echo ' ';
-							$this->make_info( sprintf( __( 'For the homepage, this option must be managed at the SEO Settings.', 'autodescription' ) ) );
+							$this->make_info( __( 'This option must be managed on the SEO Settings page for the homepage.', 'autodescription' ) );
 						else :
 							?>
 							<input type="checkbox" name="autodescription[_tsf_title_no_blogname]" id="autodescription_title_no_blogname" value="1" <?php checked( $this->get_post_meta_item( '_tsf_title_no_blogname' ) ); ?> />
 							<?php
 							esc_html_e( 'Remove the blog name?', 'autodescription' );
 							echo ' ';
-							$this->make_info( sprintf( __( 'Use this when you want to rearrange the title parts manually.', 'autodescription' ) ) );
+							$this->make_info( __( 'Use this when you want to rearrange the title parts manually.', 'autodescription' ) );
 						endif;
 						?>
 					</label>

@@ -10,7 +10,7 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2015 - 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2015 - 2020 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -141,7 +141,7 @@ class Feed extends Cache {
 	protected function get_feed_entry_source_link() {
 		/**
 		 * @since 2.6.0
-		 * @since 2.7.2 or 2.7.3: Escaped output.
+		 * @since 2.7.2 or 2.7.3 : Escaped output.
 		 * @param string $source The source indication string.
 		 */
 		$source_i18n = (string) \apply_filters(

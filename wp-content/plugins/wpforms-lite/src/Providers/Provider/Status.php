@@ -44,6 +44,7 @@ class Status {
 	 * @example: Status::init( 'drip' )->is_ready();
 	 *
 	 * @since 1.4.8
+	 * @since 1.5.9 Added a check on provider.
 	 *
 	 * @param string $provider Provider slug.
 	 *
@@ -52,7 +53,7 @@ class Status {
 	public static function init( $provider ) {
 		static $instance;
 
-		if ( ! $instance ) {
+		if ( ! $instance || $provider !== $instance->provider ) {
 			$instance = new self( $provider );
 		}
 

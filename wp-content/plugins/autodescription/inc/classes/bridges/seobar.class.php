@@ -8,7 +8,7 @@ namespace The_SEO_Framework\Bridges;
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2019 - 2020 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -124,7 +124,7 @@ final class SeoBar extends ListTable {
 		] );
 
 		if ( $this->doing_ajax )
-			echo $this->get_seo_bar_ajax_script(); // phpcs:ignore, WordPress.Security.EscapeOutput
+			echo $this->get_ajax_dispatch_updated_event(); // phpcs:ignore, WordPress.Security.EscapeOutput
 	}
 
 	/**
@@ -148,26 +148,11 @@ final class SeoBar extends ListTable {
 		if ( $this->column_name !== $column_name ) return $string;
 
 		if ( $this->doing_ajax )
-			$string .= $this->get_seo_bar_ajax_script();
+			$string .= $this->get_ajax_dispatch_updated_event();
 
 		return \The_SEO_Framework\Interpreters\SeoBar::generate_bar( [
 			'id'       => $term_id,
 			'taxonomy' => $this->taxonomy,
 		] ) . $string;
-	}
-
-	/**
-	 * Outputs a JS script that triggers SEO Bar updates.
-	 * This is a necessity as WordPress doesn't trigger actions on update.
-	 *
-	 * TODO bind to WordPress' function instead? Didn't we already do that?!
-	 * See: `tsfLe._hijackListeners()`; Although, that doesn't cover "adding" new items.
-	 *
-	 * @since 4.0.0
-	 *
-	 * @return string The triggering script.
-	 */
-	private function get_seo_bar_ajax_script() {
-		return "<script>'use strict';(()=>document.dispatchEvent(new Event('tsfLeUpdated')))();</script>";
 	}
 }

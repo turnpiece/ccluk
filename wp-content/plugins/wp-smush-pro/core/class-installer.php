@@ -46,7 +46,7 @@ class Installer {
 
 		$version = get_site_option( WP_SMUSH_PREFIX . 'version' );
 
-		if ( ! class_exists( 'Settings' ) ) {
+		if ( ! class_exists( '\\Smush\\Core\\Settings' ) ) {
 			/* @noinspection PhpIncludeInspection */
 			require_once WP_SMUSH_DIR . 'core/class-settings.php';
 		}

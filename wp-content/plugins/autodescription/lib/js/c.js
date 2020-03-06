@@ -8,7 +8,7 @@
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2019 - 2020 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -229,12 +229,9 @@ window.tsfC = function( $ ) {
 		label = l10n.i18n.pixelsUsed.replace( /%1\$d/g, testWidth );
 		label = label.replace( /%2\$d/g, guidelines.goodUpper );
 
-		label = label + '<br>' + guidelineHelper;
+		label += '<br>' + guidelineHelper;
 
-		//= IE11 compat... great. Spread syntax please :)
-		for ( let _c in classes ) {
-			bar.classList.remove( classes[ _c ] );
-		}
+		bar.classList.remove( ...Object.values( classes ) );
 
 		// Set visuals.
 		bar.classList.add( newClass );

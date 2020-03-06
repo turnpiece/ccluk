@@ -1,5 +1,30 @@
 == Changelog ==
 
+= 1.5.9.1 =
+- Fixed: Checkbox image click doesn't work well to select an option.
+- Fixed: Do not allow empty connection names (spaces only) for providers.
+
+= 1.5.9 =
+- IMPORTANT: Support for PHP 5.4 has been discontinued. If you are running PHP 5.4, you MUST upgrade PHP before installing WPForms 1.5.9. Failure to do that will disable WPForms core functionality.
+- Added: New hooks and filters in several places, e.g. pre-deletion for entries/forms.
+- Added: Async/scheduled tasks management support (e.g. sending emails in the background).
+- Changed: Update the "How to Create Your First Contact Form" video URL.
+- Changed: Update the "How to Embed A Form" video URL in a Form Builder "Embed" modal.
+- Changed: Number Slider field: allow empty value in "Value Display" option.
+- Changed: Improved admin input field focus states to be more consistent with WordPress core.
+- Fixed: Numbers/Numbers Slider field: allow `0` value in email notifications and field smart tags output.
+- Fixed: Required Checkbox fields with `0` value not passing validation.
+- Fixed: Multiple Choice field could generate a PHP notice when the form was created after using a custom form template.
+- Fixed: Initialize tooltips properly for newly created Notifications/Confirmations.
+- Fixed: Ajax button should be re-enabled after incorrect form submission.
+- Fixed: Remove Javascript alert notice when form is viewed in AMP.
+- Fixed: Improve compatibility with the "Lazy Loading Feature Plugin" for Ajax spinner image on front-end.
+- Fixed: Validation issue with required Checkbox fields using Image Choices.
+- Fixed: Form builder preview issue with a field using Dynamic Choices setting.
+- Fixed: Number Field values not allowing leading zeros.
+- Fixed: Form Builder: templates search bar shows icon over text.
+- Fixed: Security hardening and improvements.
+
 = 1.5.8.2 =
 - Fixed: Can't add new line in textareas in the form builder (Notifications > Message etc).
 - Fixed: Choices editing block inside the form builder is hidden if creating a form using a template.

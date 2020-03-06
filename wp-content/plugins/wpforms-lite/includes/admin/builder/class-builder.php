@@ -301,9 +301,16 @@ class WPForms_Builder {
 		);
 
 		wp_enqueue_script(
+			'dom-purify',
+			WPFORMS_PLUGIN_URL . 'assets/js/purify.min.js',
+			array(),
+			'2.0.8'
+		);
+
+		wp_enqueue_script(
 			'wpforms-utils',
 			WPFORMS_PLUGIN_URL . 'assets/js/admin-utils.js',
-			array(),
+			array( 'jquery', 'dom-purify' ),
 			WPFORMS_VERSION
 		);
 
@@ -428,10 +435,14 @@ class WPForms_Builder {
 
 		$strings = apply_filters( 'wpforms_builder_strings', $strings, $this->form );
 
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended
 		if ( ! empty( $_GET['form_id'] ) ) {
-			$strings['preview_url'] = esc_url( wpforms_get_form_preview_url( $_GET['form_id'] ) );
-			$strings['entries_url'] = esc_url( admin_url( 'admin.php?page=wpforms-entries&view=list&form_id=' . (int) $_GET['form_id'] ) );
+			$form_id = (int) $_GET['form_id'];
+
+			$strings['preview_url'] = esc_url( add_query_arg( 'new_window', 1, wpforms_get_form_preview_url( $form_id ) ) );
+			$strings['entries_url'] = esc_url( admin_url( 'admin.php?page=wpforms-entries&view=list&form_id=' . $form_id ) );
 		}
+		// phpcs:enable
 
 		wp_localize_script(
 			'wpforms-builder',

@@ -681,10 +681,10 @@ class WPForms_Conditional_Logic_Core {
 								$pass_rule = ! in_array( $right, $left );
 								break;
 							case 'e':
-								$pass_rule = ( false === $left[0] );
+								$pass_rule = empty( $left[0] );
 								break;
 							case '!e':
-								$pass_rule = ( false !== $left[0] );
+								$pass_rule = ! empty( $left[0] );
 								break;
 							default:
 								$pass_rule = apply_filters( 'wpforms_process_conditional_logic', false, $rule_operator, $left, $right );

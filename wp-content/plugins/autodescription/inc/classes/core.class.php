@@ -10,7 +10,7 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2015 - 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2015 - 2020 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -213,15 +213,17 @@ class Core {
 	 */
 	public function _add_plugin_action_links( $links = [] ) {
 
-		if ( $this->load_options )
+		if ( $this->load_options ) {
 			$tsf_links['settings'] = sprintf(
 				'<a href="%s">%s</a>',
 				\esc_url( \admin_url( 'admin.php?page=' . $this->seo_settings_page_slug ) ),
 				\esc_html__( 'Settings', 'autodescription' )
 			);
+		}
 
 		$tsf_links['about'] = sprintf(
-			'<a href="https://theseoframework.com/about-us/" rel="noreferrer noopener nofollow" target="_blank">%s</a>',
+			'<a href="%s" rel="noreferrer noopener" target="_blank">%s</a>',
+			'https://theseoframework.com/about-us/',
 			\esc_html_x( 'About', 'About us', 'autodescription' )
 		);
 		$tsf_links['tsfem'] = sprintf(
@@ -256,25 +258,32 @@ class Core {
 		return array_merge(
 			$plugin_meta,
 			[
-				'docs' => vsprintf(
+				'support' => vsprintf(
+					'<a href="%s" rel="noreferrer noopener nofollow" target="_blank">%s</a>',
+					[
+						'https://tsf.fyi/support',
+						\esc_html__( 'Get support', 'autodescription' ),
+					]
+				),
+				'docs'    => vsprintf(
 					'<a href="%s" rel="noreferrer noopener nofollow" target="_blank">%s</a>',
 					[
 						'https://tsf.fyi/docs',
 						\esc_html__( 'View documentation', 'autodescription' ),
 					]
 				),
-				'API'  => vsprintf(
+				'API'     => vsprintf(
 					'<a href="%s" rel="noreferrer noopener nofollow" target="_blank">%s</a>',
 					[
 						'https://tsf.fyi/docs/api',
 						\esc_html__( 'View API docs', 'autodescription' ),
 					]
 				),
-				'EM'   => vsprintf(
+				'EM'      => vsprintf(
 					'<a href="%s" rel="noreferrer noopener nofollow" target="_blank">%s</a>',
 					[
 						'https://tsf.fyi/extension-manager',
-						$_get_em ? \esc_html_x( 'Get the Extension Manager', 'Extension Manager is a product name; do not translate it.', 'autodescription' ) : 'Extension Manager',
+						$_get_em ? \esc_html_x( 'Get Extension Manager', 'Extension Manager is a product name; do not translate it.', 'autodescription' ) : 'Extension Manager',
 					]
 				),
 			]
@@ -345,6 +354,7 @@ class Core {
 	 * Checks if blog is public through WordPress core settings.
 	 *
 	 * @since 2.6.0
+	 * @since 4.0.5 Can now test for non-sanitized 'blog_public' option states.
 	 * @staticvar bool $cache
 	 *
 	 * @return bool True is blog is public.
@@ -353,13 +363,7 @@ class Core {
 
 		static $cache = null;
 
-		if ( isset( $cache ) )
-			return $cache;
-
-		if ( '1' === \get_option( 'blog_public' ) )
-			return $cache = true;
-
-		return $cache = false;
+		return isset( $cache ) ? $cache : $cache = (bool) \get_option( 'blog_public' );
 	}
 
 	/**
@@ -497,20 +501,19 @@ class Core {
 
 		static $old_tz = null;
 
-		// phpcs:ignore, WordPress.WP.TimezoneChange
 		$old_tz = $old_tz ?: date_default_timezone_get() ?: 'UTC';
 
 		if ( $reset ) {
 			$_revert_tz = $old_tz;
 			$old_tz     = null;
-			// phpcs:ignore, WordPress.WP.TimezoneChange
+			// phpcs:ignore, WordPress.DateTime.RestrictedFunctions.timezone_change_date_default_timezone_set
 			return date_default_timezone_set( $_revert_tz );
 		}
 
 		if ( empty( $tzstring ) )
 			$tzstring = $this->get_timezone_string( true ) ?: $old_tz;
 
-		// phpcs:ignore, WordPress.WP.TimezoneChange
+		// phpcs:ignore, WordPress.DateTime.RestrictedFunctions.timezone_change_date_default_timezone_set
 		return date_default_timezone_set( $tzstring );
 	}
 
@@ -674,7 +677,7 @@ class Core {
 	 * @since 2.8.0
 	 * @since 2.9.0 Now adds a little more relative softness based on rel_lum.
 	 * @since 2.9.2 (Typo): Renamed from 'get_relatitve_fontcolor' to 'get_relative_fontcolor'.
-	 * @since 3.0.4 : Now uses WCAG's relative luminance formula
+	 * @since 3.0.4 Now uses WCAG's relative luminance formula
 	 * @link https://www.w3.org/TR/2008/REC-WCAG20-20081211/#visual-audio-contrast-contrast
 	 * @link https://www.w3.org/WAI/GL/wiki/Relative_luminance
 	 *
@@ -740,6 +743,7 @@ class Core {
 	 * Returns sitemap color scheme.
 	 *
 	 * @since 2.8.0
+	 * @since 4.0.5 Changed default colors to be more in line with WordPress.
 	 *
 	 * @param bool $get_defaults Whether to get the default colors.
 	 * @return array The sitemap colors.
@@ -748,8 +752,8 @@ class Core {
 
 		if ( $get_defaults ) {
 			$colors = [
-				'main'   => '#333',
-				'accent' => '#00cd98',
+				'main'   => '#222222',
+				'accent' => '#00a0d2',
 			];
 		} else {
 			$main   = $this->s_color_hex( $this->get_option( 'sitemap_color_main' ) );

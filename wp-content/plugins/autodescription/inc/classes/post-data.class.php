@@ -10,7 +10,7 @@ defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2015 - 2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2015 - 2020 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -122,7 +122,22 @@ class Post_Data extends Detect {
 			$meta[ $key ] = $value[0];
 		}
 
-		return $cache[ $post_id ] = array_merge( $defaults, $meta );
+		/**
+		 * @since 4.0.5
+		 * @note Do not delete/unset/add indexes! It'll cause errors.
+		 * @param array $meta    The current post meta.
+		 * @param int   $post_id The post ID.
+		 */
+		$meta = \apply_filters_ref_array(
+			'the_seo_framework_post_meta',
+			[
+				array_merge( $defaults, $meta ),
+				$post->ID,
+			]
+		);
+
+		// Cache using the input ID, otherwise invalid queries can bypass the cache.
+		return $cache[ $post_id ] = $meta;
 	}
 
 	/**
@@ -500,7 +515,7 @@ class Post_Data extends Detect {
 		//* Check that the user is allowed to edit the post. Nonce checks are done in bulk later.
 		if ( ! \current_user_can( 'edit_post', $post->ID ) ) return;
 
-		$post_type = \get_post_type( $post->ID ) ?: false;
+		$post_type = \get_post_type( $post ) ?: false;
 		// Can this even fail?
 		if ( ! $post_type ) return;
 
@@ -597,8 +612,8 @@ class Post_Data extends Detect {
 
 		/**
 		 * @since 2.6.6
-		 * @since 3.1.0 1: Now defaults to `null`
-		 *              2: Now, when a boolean (either true or false) is defined, it'll short-circuit this function.
+		 * @since 3.1.0 : 1. Now defaults to `null`
+		 *                2. Now, when a boolean (either true or false) is defined, it'll short-circuit this function.
 		 * @param boolean|null $detected Whether a builder should be detected.
 		 * @param int          $post_id The current Post ID.
 		 * @param array        $meta The current post meta.

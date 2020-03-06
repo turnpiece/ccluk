@@ -41,10 +41,10 @@ abstract class PageIntegrations implements PageIntegrationsInterface {
 	protected function ajax() {
 
 		// Remove provider from Settings Integrations tab.
-		\add_action( 'wp_ajax_wpforms_settings_provider_disconnect', array( $this, 'ajax_disconnect' ) );
+		\add_action( "wp_ajax_wpforms_settings_provider_disconnect_{$this->core->slug}", array( $this, 'ajax_disconnect' ) );
 
 		// Add new provider from Settings Integrations tab.
-		\add_action( 'wp_ajax_wpforms_settings_provider_add', array( $this, 'ajax_connect' ) );
+		\add_action( "wp_ajax_wpforms_settings_provider_add_{$this->core->slug}", array( $this, 'ajax_connect' ) );
 	}
 
 	/**
@@ -216,10 +216,6 @@ abstract class PageIntegrations implements PageIntegrationsInterface {
 	 * @return bool False when not own provider is processed.
 	 */
 	public function ajax_connect() {
-
-		if ( $_POST['provider'] !== $this->core->slug ) { // phpcs:ignore
-			return false;
-		}
 
 		// Run a security check.
 		\check_ajax_referer( 'wpforms-admin', 'nonce' );
