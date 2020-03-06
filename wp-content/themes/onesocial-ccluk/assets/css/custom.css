@@ -2188,7 +2188,10 @@ body.buddypress #content article.error404 {
   background-color: #fff;
 }
 
-.bp-legacy div#item-body, .os-loader, .medium-editor-insert-plugin .medium-insert-buttons .medium-insert-buttons-addons li, .sap-publish-popup {
+.bp-legacy div#item-body,
+.os-loader,
+.medium-editor-insert-plugin .medium-insert-buttons .medium-insert-buttons-addons li,
+.sap-publish-popup {
   background-color: #fff;
 }
 
@@ -2239,10 +2242,6 @@ body.buddypress #content article.error404 {
 
 .incom-bubble-style:before {
   border-color: #fff transparent transparent transparent;
-}
-
-div.bbp-template-notice, div.indicator-hint {
-  background-color: #f9f9f9;
 }
 
 div#sitewide-notice div#message p {

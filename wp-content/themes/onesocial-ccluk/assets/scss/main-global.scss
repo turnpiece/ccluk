@@ -4731,20 +4731,6 @@ h2.entry-title .button.bp-title-button {
         width: 95%;
       }
     }
-  }
-
-  .standard-form{
-    &#signup_form {
-      input {
-        &[type="email"],
-        &[type="text"] {
-          width: 100%;
-        }
-      }
-      textarea {
-        width: 100%;
-      }
-    }
 
     div.submit input:hover {
       @include box-shadow( none );

@@ -843,26 +843,30 @@ div#item-header-avatar img.avatar {
     width: 100%;
   }
 
-  #item-body form.standard-form ul {
-    width: 100%;
-    padding: 0;
-    &.radio, &.checkbox {
-      list-style-type: none;
+  #item-body form.standard-form {
+    ul {
+      width: 100%;
+      padding: 0;
+      &.radio, 
+      &.checkbox {
+        list-style-type: none;
+        li {
+          margin: 0 0 0 10px;
+        }
+      }
     }
-    &.radio li, &.checkbox li {
-      margin: 0 0 0 10px;
-    }
-  }
-  .standard-form {
+
     .field_multi-select select {
       width: 98%;
     }
   }
+  
 
   /*  Search Input Fields */
 
   div {
-    &.dir-search, &.message-search {
+    &.dir-search, 
+    &.message-search {
       width: 100%;
       margin: 0;
       float: left !important;
@@ -873,48 +877,50 @@ div#item-header-avatar img.avatar {
         float: left !important;
         position: relative;
       }
+
+      input[type="text"] {
+        float: left;
+        height: 25px;
+        padding: 6px 2% 6px 3%;
+        width: 95%;
+        position: relative;
+        -webkit-appearance: none;
+      }
     }
     &.dir-search {
-      label, form label {
+      label, 
+      form label {
         width: 100%;
         padding-bottom: 10px;
       }
     }
     &.message-search {
-      label, form label {
+      label, 
+      form label {
         width: 100%;
         padding-bottom: 10px;
       }
-    }
-    &.dir-search input[type=submit], &.message-search input[type=submit] {
-      /* display: none; */
-    }
-    &.dir-search input[type="text"], &.message-search input[type="text"] {
-      float: left;
-      height: 25px;
-      padding: 6px 2% 6px 3%;
-      width: 95%;
-      position: relative;
-      -webkit-appearance: none;
     }
   }
 }
 
 #bbpress-forums {
-  div.bbp-search-form a#clear-input, form#bbp-search-index-form a#clear-input {
-    width: 50px;
-    height: 66px;
-    line-height: 66px;
-    display: block;
-    text-align: center;
-    position: absolute;
-    text-decoration: none;
-    right: 0;
-    top: 0px;
-    display: none;
+  div.bbp-search-form, 
+  form#bbp-search-index-form {
+    a#clear-input {
+      width: 50px;
+      height: 66px;
+      line-height: 66px;
+      display: block;
+      text-align: center;
+      position: absolute;
+      text-decoration: none;
+      right: 0;
+      top: 0px;
+      display: none;
+    }
   }
 }
-
 
 &.directory #buddypress ul.item-list li div.item-desc {
   /*margin: 10px 0 0 0;*/

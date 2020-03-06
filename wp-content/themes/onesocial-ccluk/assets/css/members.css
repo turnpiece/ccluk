@@ -945,19 +945,6 @@ div.bbp-forum-title,
   width: 95%;
 }
 
-#buddypress .standard-form #basic-details-section input[type="password"],
-#buddypress .standard-form #blog-details-section input#signup_blog_url {
-  width: 35%;
-}
-
-#buddypress .standard-form#signup_form input[type="email"], #buddypress .standard-form#signup_form input[type="text"] {
-  width: 100%;
-}
-
-#buddypress .standard-form#signup_form textarea {
-  width: 100%;
-}
-
 .sap-story-publish:hover, #save_as_draft:hover,
 #buddypress .standard-form div.submit input:hover {
   -webkit-box-shadow: none;
@@ -2516,16 +2503,13 @@ div#sitewide-notice div#message.error p {
   height: auto;
 }
 
-#buddypress .standard-form input[type="password"] {
-  margin-bottom: 5px;
-}
-
 #buddypress .standard-form p {
   margin-bottom: 26px;
   margin-top: 10px;
 }
 
-#buddypress .standard-form label, #buddypress .standard-form span.label {
+#buddypress .standard-form label,
+#buddypress .standard-form span.label {
   display: block;
   font-weight: 400;
   font-size: 15px;
@@ -2538,11 +2522,12 @@ div#sitewide-notice div#message.error p {
   font-weight: 300;
 }
 
-#buddypress .standard-form div.checkbox label, #buddypress .standard-form div.radio label {
+#buddypress .standard-form div.checkbox label,
+#buddypress .standard-form div.radio label {
   color: #333;
   font-size: 100%;
   font-weight: 400;
-  margin: 5px 0 0 0;
+  margin: 5px 0 20px 0;
   clear: none;
 }
 
@@ -2667,10 +2652,6 @@ div#sitewide-notice div#message.error p {
 
 #buddypress table.forum td {
   text-align: left;
-}
-
-#buddypress table tr.alt td {
-  /* background-color: #fafbfb; */
 }
 
 #buddypress table.forum td.td-postcount {
@@ -2804,7 +2785,8 @@ div#sitewide-notice div#message.error p {
   padding: 10px 0;
 }
 
-#buddypress table.notification-settings .yes, #buddypress table.notification-settings .no {
+#buddypress table.notification-settings .yes,
+#buddypress table.notification-settings .no {
   padding-left: 0;
   padding-right: 0;
   position: relative;
@@ -2812,15 +2794,8 @@ div#sitewide-notice div#message.error p {
   width: 10px;
 }
 
-#buddypress table.notification-settings .yes {
-  text-align: right;
-}
-
-#buddypress table.notification-settings .no {
-  text-align: left;
-}
-
-#buddypress table.notification-settings .yes input, #buddypress table.notification-settings .no input {
+#buddypress table.notification-settings .yes input,
+#buddypress table.notification-settings .no input {
   border: 0;
   height: 40px;
   margin: 0;
@@ -2830,8 +2805,17 @@ div#sitewide-notice div#message.error p {
   width: 42px;
 }
 
-#buddypress table.notification-settings .yes input:checked + label, #buddypress table.notification-settings .no input:checked + label {
+#buddypress table.notification-settings .yes input:checked + label,
+#buddypress table.notification-settings .no input:checked + label {
   color: #fff;
+}
+
+#buddypress table.notification-settings .yes {
+  text-align: right;
+}
+
+#buddypress table.notification-settings .no {
+  text-align: left;
 }
 
 #buddypress table.notification-settings .yes input:checked + label {
@@ -3121,7 +3105,7 @@ label[for='select-all-notifications'] {
 
 .bp-legacy div#item-body {
   clear: left;
-  padding: 0 0 15px;
+  padding: 0 5px 15px;
   overflow: hidden;
 }
 
@@ -5124,29 +5108,22 @@ body.articles #buddypress div#item-body {
   margin-bottom: 5px;
   color: #333;
   margin-left: 36px;
+  font-size: 12px;
 }
 
 #buddypress .standard-form div.radio > label {
-  font-size: 15px;
-  line-height: 22px;
+  color: #22a7f0;
+  font-weight: 600;
 }
 
-#buddypress .standard-form div.radio > label strong {
-  font-weight: 600;
+#buddypress .standard-form div.radio > label:hover, #buddypress .standard-form div.radio > label.selected {
+  color: #54ae68;
 }
 
 #buddypress .standard-form a.clear-value {
   display: block;
   margin-top: 5px;
   outline: none;
-}
-
-#buddypress .standard-form #basic-details-section,
-#buddypress .standard-form #blog-details-section,
-#buddypress .standard-form #profile-details-section,
-#buddypress .standard-form .security-question-section {
-  float: left;
-  width: 48%;
 }
 
 #buddypress .standard-form #blog-details-section {
@@ -7265,7 +7242,7 @@ MAXIMUM width of 380 pixels (phones portrait)
   body.buddypress #buddypress #item-body form.standard-form ul.radio li, body.buddypress #buddypress #item-body form.standard-form ul.checkbox li {
     margin: 0 0 0 10px;
   }
-  body.buddypress #buddypress .standard-form .field_multi-select select {
+  body.buddypress #buddypress #item-body form.standard-form .field_multi-select select {
     width: 98%;
   }
   body.buddypress #buddypress div.dir-search, body.buddypress #buddypress div.message-search {
@@ -7280,17 +7257,6 @@ MAXIMUM width of 380 pixels (phones portrait)
     float: left !important;
     position: relative;
   }
-  body.buddypress #buddypress div.dir-search label, body.buddypress #buddypress div.dir-search form label {
-    width: 100%;
-    padding-bottom: 10px;
-  }
-  body.buddypress #buddypress div.message-search label, body.buddypress #buddypress div.message-search form label {
-    width: 100%;
-    padding-bottom: 10px;
-  }
-  body.buddypress #buddypress div.dir-search input[type=submit], body.buddypress #buddypress div.message-search input[type=submit] {
-    /* display: none; */
-  }
   body.buddypress #buddypress div.dir-search input[type="text"], body.buddypress #buddypress div.message-search input[type="text"] {
     float: left;
     height: 25px;
@@ -7299,7 +7265,18 @@ MAXIMUM width of 380 pixels (phones portrait)
     position: relative;
     -webkit-appearance: none;
   }
-  body.buddypress #bbpress-forums div.bbp-search-form a#clear-input, body.buddypress #bbpress-forums form#bbp-search-index-form a#clear-input {
+  body.buddypress #buddypress div.dir-search label,
+  body.buddypress #buddypress div.dir-search form label {
+    width: 100%;
+    padding-bottom: 10px;
+  }
+  body.buddypress #buddypress div.message-search label,
+  body.buddypress #buddypress div.message-search form label {
+    width: 100%;
+    padding-bottom: 10px;
+  }
+  body.buddypress #bbpress-forums div.bbp-search-form a#clear-input,
+  body.buddypress #bbpress-forums form#bbp-search-index-form a#clear-input {
     width: 50px;
     height: 66px;
     line-height: 66px;

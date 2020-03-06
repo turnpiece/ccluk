@@ -4706,14 +4706,6 @@ h2.entry-title .button.bp-title-button {
   width: 95%;
 }
 
-#buddypress .standard-form#signup_form input[type="email"], #buddypress .standard-form#signup_form input[type="text"] {
-  width: 100%;
-}
-
-#buddypress .standard-form#signup_form textarea {
-  width: 100%;
-}
-
 #buddypress .standard-form div.submit input:hover {
   -webkit-box-shadow: none;
   box-shadow: none;
