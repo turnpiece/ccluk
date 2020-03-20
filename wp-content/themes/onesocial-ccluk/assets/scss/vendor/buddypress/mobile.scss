@@ -2643,13 +2643,11 @@ body.activity-permalink #buddypress .activity-list > li:first-child {
       overflow: hidden;
       font-size: 14px;
       padding: 10px;
-      border: none !important;
       .button {
         display: inline;
         font-size: inherit;
         font-weight: 400;
         padding: 3px 7px;
-        width: auto;
       }
       img {
         max-width: 100%;
@@ -2696,6 +2694,11 @@ body.activity-permalink #buddypress .activity-list > li:first-child {
   padding-bottom: 0;
 }
 
+// BP Group Email Subscription plugin
+
+.group-subscription-div {
+  display: none;
+}
 
 /*--------------------------------------------------------------
 MAXIMUM width of 768 pixels
