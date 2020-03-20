@@ -457,7 +457,7 @@ class WPMUDEV_Dashboard_Ui {
 
 		$disable = array();
 		foreach ( $projects as $pid => $data ) {
-			$item = WPMUDEV_Dashboard::$site->get_project_infos( $pid );
+			$item = WPMUDEV_Dashboard::$site->get_project_info( $pid );
 			if ( ! $item ) {
 				continue;
 			} // Possibly a free wp.org plugin.
@@ -668,8 +668,8 @@ class WPMUDEV_Dashboard_Ui {
 	}
 
 	public function wp_popup_changelog( $pid ) {
-		$this->load_sui_template(
-			'popup-wordpress-changelog',
+		$this->render_with_sui_wrapper(
+			'sui/popup-wordpress-changelog',
 			compact( 'pid' )
 		);
 
@@ -684,10 +684,9 @@ class WPMUDEV_Dashboard_Ui {
 		}
 
 		$urls = $this->page_urls;
-		$this->load_sui_template(
-			'element-project-info',
-			compact( 'pid', 'urls' ),
-			true
+		$this->render(
+			'sui/element-project-info',
+			compact( 'pid', 'urls' )
 		);
 
 		if ( $as_json ) {
@@ -699,10 +698,9 @@ class WPMUDEV_Dashboard_Ui {
 				$data['other'] = array();
 				foreach ( $other_pids as $pid2 ) {
 					ob_start();
-					$this->load_sui_template(
-						'element-project-info',
-						array( 'pid' => $pid2, 'urls' ),
-						true
+					$this->render(
+						'sui/element-project-info',
+						array( 'pid' => $pid2, 'urls' )
 					);
 					$code                   = ob_get_clean();
 					$data['other'][ $pid2 ] = $code;
@@ -711,7 +709,7 @@ class WPMUDEV_Dashboard_Ui {
 
 			if ( $message ) {
 				ob_start();
-				$this->load_template( $message, compact( 'pid' ) );
+				$this->render( $message, compact( 'pid' ) );
 				$code            = ob_get_clean();
 				$data['overlay'] = $code;
 			}
@@ -771,16 +769,15 @@ class WPMUDEV_Dashboard_Ui {
 		switch ( $type ) {
 			// Project-Info/overview.
 			case 'info':
-				$this->load_sui_template(
-					'popup-project',
-					compact( 'pid' ),
-					true
+				$this->render(
+					'sui/popup-project',
+					compact( 'pid' )
 				);
 				break;
 
 			// Update information. // deprecated
 			case 'update':
-				$this->load_template(
+				$this->render(
 					'popup-update-info',
 					compact( 'pid' )
 				);
@@ -788,7 +785,7 @@ class WPMUDEV_Dashboard_Ui {
 
 			// Show the changelog.  // deprecated
 			case 'changelog':
-				$this->load_template(
+				$this->render(
 					'popup-project-changelog',
 					compact( 'pid' )
 				);
@@ -961,7 +958,7 @@ class WPMUDEV_Dashboard_Ui {
 		// Redirect user, if we have a valid PID in URL param.
 		if ( ! empty( $_get_data['page'] ) && 0 === strpos( $_get_data['page'], 'wpmudev' ) ) {
 			if ( ! empty( $_get_data['pid'] ) && is_numeric( $_get_data['pid'] ) ) {
-				$project = WPMUDEV_Dashboard::$site->get_project_infos( $_get_data['pid'] );
+				$project = WPMUDEV_Dashboard::$site->get_project_info( $_get_data['pid'] );
 				if ( $project ) {
 					if ( 'plugin' === $project->type ) {
 						$redirect = $this->page_urls->plugins_url . '#pid=' . $project->pid;
@@ -1260,7 +1257,7 @@ class WPMUDEV_Dashboard_Ui {
 		$available_hosting_sites = 0;
 
 		if ( ! current_user_can( 'manage_options' ) ) {
-			$this->load_sui_template( 'no_access' );
+			$this->render_with_sui_wrapper( 'sui/no_access' );
 		}
 
 		// First login redirect is done.
@@ -1298,10 +1295,10 @@ class WPMUDEV_Dashboard_Ui {
 
 		if ( ! $is_logged_in ) {
 			// User did not log in to WPMUDEV -> Show login page!
-			$this->load_sui_template( 'login', compact( 'key_valid', 'connection_error', 'site_limit_exceeded', 'non_hosting_site_limit_exceeded', 'urls', 'site_limit_num', 'available_hosting_sites' ) );
+			$this->render_with_sui_wrapper( 'sui/login', compact( 'key_valid', 'connection_error', 'site_limit_exceeded', 'non_hosting_site_limit_exceeded', 'urls', 'site_limit_num', 'available_hosting_sites' ) );
 		} elseif ( ! WPMUDEV_Dashboard::$site->allowed_user() ) {
 			// User has no permission to view the page.
-			$this->load_sui_template( 'no_access' );
+			$this->render_with_sui_wrapper( 'sui/no_access' );
 		} else {
 
 			if ( ! isset( $_GET['fetch_menu'] ) || 1 !== (int) $_GET['fetch_menu'] ) { // wpcs: csrf ok.
@@ -1345,7 +1342,7 @@ class WPMUDEV_Dashboard_Ui {
 
 			// single membership
 			if ( $project_id ) {
-				$my_project = WPMUDEV_Dashboard::$site->get_project_infos( $project_id );
+				$my_project = WPMUDEV_Dashboard::$site->get_project_info( $project_id );
 			}
 
 			/**
@@ -1353,8 +1350,8 @@ class WPMUDEV_Dashboard_Ui {
 			 */
 			do_action( 'wpmudev_dashboard_notice-dashboard' );
 
-			$this->load_sui_template(
-				'dashboard',
+			$this->render_with_sui_wrapper(
+				'sui/dashboard',
 				compact( 'data', 'member', 'urls', 'type', 'my_project', 'projects_nr', 'active_projects', 'update_plugins', 'staff_login', 'whitelabel_settings', 'analytics_enabled', 'total_visits', 'membership_data' )
 			);
 		}
@@ -1373,7 +1370,7 @@ class WPMUDEV_Dashboard_Ui {
 	 * before or after the actual template.
 	 *
 	 * E.g.
-	 *   load_template( 'no_access', array( 'msg' => 'test' ) );
+	 *   render( 'no_access', array( 'msg' => 'test' ) );
 	 *   will load the file template/no_access.php and pass it variable $msg
 	 *
 	 * Views:
@@ -1386,7 +1383,7 @@ class WPMUDEV_Dashboard_Ui {
 	 * @param  string $name The template name.
 	 * @param  array  $data Variables passed to the template, key => value pairs.
 	 */
-	protected function load_template( $name, $data = array() ) {
+	public function render( $name, $data = array() ) {
 		if ( ! empty( $_REQUEST['view'] ) ) {// wpcs csrf ok.
 			$view   = strtolower( sanitize_html_class( $_REQUEST['view'] ) );
 			$file_1 = $name . '-' . $view . '.php';
@@ -1436,15 +1433,10 @@ class WPMUDEV_Dashboard_Ui {
 		}
 	}
 
-	public function load_sui_template( $name, $data = array(), $skip_wrapper = false ) {
-		if ( ! $skip_wrapper ) {
-			echo '<main class="sui-wrap">';
-		}
-
-		$this->load_template( 'sui/' . $name, $data );
-		if ( ! $skip_wrapper ) {
-			echo "</main>";
-		}
+	public function render_with_sui_wrapper( $name, $data = array() ) {
+		echo '<main class="sui-wrap">';
+		$this->render( $name, $data );
+		echo "</main>";
 	}
 
 	/**
@@ -1461,7 +1453,7 @@ class WPMUDEV_Dashboard_Ui {
 			'all'     => 0,
 		);
 		foreach ( $projects as $project ) {
-			$project_info = WPMUDEV_Dashboard::$site->get_project_infos( $project['id'] );
+			$project_info = WPMUDEV_Dashboard::$site->get_project_info( $project['id'] );
 
 			// skip hidden/deprecated plugins
 			if ( $project_info->is_hidden ) {
@@ -1500,7 +1492,7 @@ class WPMUDEV_Dashboard_Ui {
 			'all'     => 0,
 		);
 		foreach ( $projects as $project ) {
-			$project_info = WPMUDEV_Dashboard::$site->get_project_infos( $project['id'] );
+			$project_info = WPMUDEV_Dashboard::$site->get_project_info( $project['id'] );
 
 			// skip hidden/deprecated plugins
 			if ( $project_info->is_hidden ) {
@@ -1587,6 +1579,8 @@ class WPMUDEV_Dashboard_Ui {
 				'installing_plugin'                   => __( 'Installing %s ...', 'wpmudev' ),
 				'deactivating_plugin'                 => __( 'Deactivating %s ...', 'wpmudev' ),
 				'deleting_plugin'                     => __( 'Deleting %s ...', 'wpmudev' ),
+				'installing_translation'              => __( 'Installing %s translation...', 'wpmudev' ),
+				'translation_updated'                 => __( '%s translations successfully updated.', 'wpmudev' ),
 				'no_result_search_plugin_all'         => __( 'There are no plugins matching your search, please try again.', 'wpmudev' ),
 				'no_result_search_plugin_activated'   => __( 'There are no active plugins matching your search, please try again.', 'wpmudev' ),
 				'no_result_search_plugin_deactivated' => __( 'There are no deactivated plugins matching your search, please try again.', 'wpmudev' ),
@@ -1619,10 +1613,9 @@ class WPMUDEV_Dashboard_Ui {
 		$profile = $member['profile'];
 
 
-		$this->load_sui_template(
-			'header',
-			compact( 'page_title', 'is_logged_in', 'url_dash', 'url_logout', 'profile', 'url_support', 'documentation_url' ),
-			true
+		$this->render(
+			'sui/header',
+			compact( 'page_title', 'is_logged_in', 'url_dash', 'url_logout', 'profile', 'url_support', 'documentation_url' )
 		);
 
 		$data = array();
@@ -1654,14 +1647,12 @@ class WPMUDEV_Dashboard_Ui {
 	 * @internal Menu callback
 	 */
 	public function render_analytics_widget() {
-		$this->load_template(
-			'widget-analytics'
-		);
+		$this->render('widget-analytics');
 	}
 
 	public function render_plugins() {
 		if ( ! current_user_can( 'install_plugins' ) ) {
-			$this->load_sui_template( 'no_access' );
+			$this->render_with_sui_wrapper( 'sui/no_access' );
 		}
 
 		if ( ! isset( $_GET['fetch_menu'] ) || 1 !== (int) $_GET['fetch_menu'] ) { // wpcs: csrf ok.
@@ -1693,8 +1684,8 @@ class WPMUDEV_Dashboard_Ui {
 		 */
 		do_action( 'wpmudev_dashboard_notice-plugins' );
 
-		$this->load_sui_template(
-			'plugins',
+		$this->render_with_sui_wrapper(
+			'sui/plugins',
 			compact( 'data', 'urls', 'tags', 'update_plugins', 'membership_type', 'active_projects', 'all_plugins', 'member' )
 		);
 	}
@@ -1708,7 +1699,7 @@ class WPMUDEV_Dashboard_Ui {
 	public function render_support() {
 		$required = ( is_multisite() ? 'manage_network_options' : 'manage_options' );
 		if ( ! current_user_can( $required ) ) {
-			$this->load_sui_template( 'no_access' );
+			$this->render_with_sui_wrapper( 'sui/no_access' );
 		}
 
 		$this->page_urls->real_support_url = $this->page_urls->remote_site . 'hub/support/';
@@ -1731,7 +1722,7 @@ class WPMUDEV_Dashboard_Ui {
 		 */
 		do_action( 'wpmudev_dashboard_notice-support' );
 
-		$this->load_sui_template( 'support', compact( 'profile', 'data', 'urls', 'staff_login', 'notes', 'access_logs' ) );
+		$this->render_with_sui_wrapper( 'sui/support', compact( 'profile', 'data', 'urls', 'staff_login', 'notes', 'access_logs' ) );
 	}
 
 	public function render_tools() {
@@ -1739,7 +1730,7 @@ class WPMUDEV_Dashboard_Ui {
 		$membership_type = WPMUDEV_Dashboard::$api->get_membership_type( $dummy );
 
 		if ( ! current_user_can( $required ) ) {
-			$this->load_sui_template( 'no_access' );
+			$this->render_with_sui_wrapper( 'sui/no_access' );
 		}
 
 		// support media library usage
@@ -1759,28 +1750,30 @@ class WPMUDEV_Dashboard_Ui {
 		 */
 		do_action( 'wpmudev_dashboard_notice-tools' );
 
-		$this->load_sui_template( 'tools', compact( 'urls', 'whitelabel_settings', 'analytics_enabled', 'analytics_role', 'analytics_metrics', 'membership_type' ) );
+		$this->render_with_sui_wrapper( 'sui/tools', compact( 'urls', 'whitelabel_settings', 'analytics_enabled', 'analytics_role', 'analytics_metrics', 'membership_type' ) );
 	}
 
 	public function render_settings() {
 		$required = ( is_multisite() ? 'manage_network_options' : 'manage_options' );
 		if ( ! current_user_can( $required ) ) {
-			$this->load_sui_template( 'no_access' );
+			$this->render_with_sui_wrapper( 'sui/no_access' );
 		}
 
-		$member          = WPMUDEV_Dashboard::$api->get_profile();
-		$urls            = $this->page_urls;
-		$allowed_users   = WPMUDEV_Dashboard::$site->get_allowed_users();
-		$auto_update     = WPMUDEV_Dashboard::$site->get_option( 'autoupdate_dashboard' );
-		$enable_sso     = WPMUDEV_Dashboard::$site->get_option( 'enable_sso' );
-		$membership_type = WPMUDEV_Dashboard::$api->get_membership_type( $single_id );
+		$member                  = WPMUDEV_Dashboard::$api->get_profile();
+		$urls                    = $this->page_urls;
+		$allowed_users           = WPMUDEV_Dashboard::$site->get_allowed_users();
+		$auto_update             = WPMUDEV_Dashboard::$site->get_option( 'autoupdate_dashboard' );
+		$enable_sso              = WPMUDEV_Dashboard::$site->get_option( 'enable_sso' );
+		$membership_type         = WPMUDEV_Dashboard::$api->get_membership_type( $single_id );
+		$enable_auto_translation = WPMUDEV_Dashboard::$site->get_option( 'enable_auto_translation' );
+		$translation_update      = WPMUDEV_Dashboard::$site->get_option( 'translation_updates_available' );
 
 		/**
 		 * Custom hook to display own notifications inside Dashboard.
 		 */
 		do_action( 'wpmudev_dashboard_notice-settings' );
 
-		$this->load_sui_template( 'settings', compact( 'member', 'urls', 'allowed_users', 'auto_update', 'enable_sso', 'membership_type', $single_id ) );
+		$this->render_with_sui_wrapper( 'sui/settings', compact( 'member', 'urls', 'allowed_users', 'auto_update', 'enable_sso', 'membership_type', 'translation_update', 'enable_auto_translation', $single_id ) );
 	}
 
 	/**
@@ -1803,10 +1796,9 @@ class WPMUDEV_Dashboard_Ui {
 			$username = $user->user_login;
 		}
 
-		$this->load_sui_template(
-			'popup-no-access',
-			compact( 'is_logged_in', 'urls', 'username', 'reason' ),
-			true
+		$this->render(
+			'sui/popup-no-access',
+			compact( 'is_logged_in', 'urls', 'username', 'reason' )
 		);
 	}
 }

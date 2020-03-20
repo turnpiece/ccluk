@@ -8,7 +8,7 @@ use WP_Defender\Module\Audit\Component\Audit_API;
 use function foo\func;
 
 class Events extends \Hammer\WP\Settings {
-	static $_instance;
+	private static $_instance;
 	/**
 	 * The active data
 	 * @var array
@@ -91,11 +91,12 @@ class Events extends \Hammer\WP\Settings {
 		//if user fetch things that we don't have in local cache, fetch and merge
 		$date_format = 'Y-m-d H:i:s';
 		$args        = [
-			'date_from' => date( $date_format, strtotime( 'midnight', strtotime( '-60 days', current_time( 'timestamp' ) ) ) ),
+			'date_from' => date( $date_format, strtotime( 'midnight', strtotime( '-30 days', current_time( 'timestamp' ) ) ) ),
 			'date_to'   => date( $date_format, strtotime( 'tomorrow', current_time( 'timestamp' ) ) ),
 		];
 		Utils::instance()->log( sprintf( 'Fetching data from %s to %s to local', $args['date_from'], $args['date_to'] ) );
 		$data = Audit_API::pullLogs( $args, 'timestamp', 'desc', true );
+
 		if ( is_wp_error( $data ) ) {
 			Utils::instance()->log( sprintf( 'Fetch error: %s', $data->get_error_message() ) );
 

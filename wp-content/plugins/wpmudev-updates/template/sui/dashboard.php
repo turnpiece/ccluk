@@ -35,7 +35,7 @@ if( 'full' === $type ):
 				continue;
 			}
 
-			$plugin = WPMUDEV_Dashboard::$site->get_project_infos( $item );
+			$plugin = WPMUDEV_Dashboard::$site->get_project_info( $item );
 			//get the updates first
 			if( ! $plugin->has_update ){
 				continue;
@@ -51,7 +51,7 @@ if( 'full' === $type ):
 			continue;
 		}
 
-		$plugin = WPMUDEV_Dashboard::$site->get_project_infos( $item );
+		$plugin = WPMUDEV_Dashboard::$site->get_project_info( $item );
 
 		//if update is complete break
 		if( 5 <= count( $selected_plugins ) ){
@@ -122,166 +122,30 @@ if( 'full' === $type ):
 	<div class="sui-row dashui-table-widgets">
 		<div class="sui-col-md-6">
 			<?php // BOX: Installed Plugins ?>
-			<?php $this->load_sui_template( '/dashboard-templates/installed-plugins', compact( 'data', 'urls', 'selected_plugins' ), true ); ?>
+			<?php $this->render( 'sui/dashboard-templates/installed-plugins', compact( 'data', 'urls', 'selected_plugins' ) ); ?>
 
 			<?php // BOX: Services ?>
-			<?php $this->load_sui_template( '/dashboard-templates/services', compact( 'urls', 'membership_data' ), true ); ?>
+			<?php $this->render( 'sui/dashboard-templates/services', compact( 'urls', 'membership_data' ) ); ?>
 
 			<?php // BOX: Support ?>
-			<?php $this->load_sui_template( '/dashboard-templates/support', compact( 'urls', 'member', 'staff_login' ), true ); ?>
+			<?php $this->render( 'sui/dashboard-templates/support', compact( 'urls', 'member', 'staff_login' ) ); ?>
 		</div>
 
 		<div class="sui-col-md-6">
 
 			<?php // BOX: Tools ?>
-			<?php $this->load_sui_template( '/dashboard-templates/tools', compact( 'urls', 'whitelabel_settings', 'analytics_enabled', 'total_visits' ), true ); ?>
+			<?php $this->render( 'sui/dashboard-templates/tools', compact( 'urls', 'whitelabel_settings', 'analytics_enabled', 'total_visits' ) ); ?>
 
 			<?php // BOX: Resources ?>
-			<?php $this->load_sui_template( '/dashboard-templates/resources', compact( 'urls' ), true ); ?>
+			<?php $this->render( 'sui/dashboard-templates/resources', compact( 'urls' ) ); ?>
 
 		</div>
 	</div>
 
-	<div class="sui-hidden">
-		<?php
-		foreach ( $selected_plugins as $project ) {
-			$this->render_project( $project );
-		}
-		?>
-
-		<div class="js-notifications">
-			<div class="sui-notice-top sui-notice-success js-activated-single">
-				<div class="sui-notice-content">
-					<p><strong><?php esc_html_e( 'Success', 'wpmudev' ); ?>:</strong> <?php esc_html_e( 'Plugin activated successfully.', 'wpmudev' ); ?></p>
-					<p><?php esc_html_e( 'Please wait while we refresh the page...', 'wpmudev' ); ?></p>
-				</div>
-			</div>
-			<div class="sui-notice-top sui-notice-error sui-can-dismiss js-failed-activated-single">
-				<div class="sui-notice-content">
-					<p><strong><?php esc_html_e( 'Failed', 'wpmudev' ); ?>:</strong> <?php esc_html_e( 'Plugin failed to be activated.', 'wpmudev' ); ?></p>
-					<p class="js-custom-message"></p>
-				</div>
-				<span class="sui-notice-dismiss">
-					<a role="button" aria-label="Dismiss" class="sui-icon-check"></a>
-				</span>
-			</div>
-			<div class="sui-notice-top sui-notice-success js-activated-multi">
-				<div class="sui-notice-content">
-					<p><strong><?php esc_html_e( 'Success', 'wpmudev' ); ?>:</strong> <?php esc_html_e( 'Plugins activated.', 'wpmudev' ); ?></p>
-					<p><?php esc_html_e( 'Please wait while we refresh the page...', 'wpmudev' ); ?></p>
-				</div>
-			</div>
-
-			<div class="sui-notice-top sui-notice-success js-deactivated-single">
-				<div class="sui-notice-content">
-					<p><strong><?php esc_html_e( 'Success', 'wpmudev' ); ?>:</strong> <?php esc_html_e( 'Plugin deactivated.', 'wpmudev' ); ?></p>
-					<p><?php esc_html_e( 'Please wait while we refresh the page...', 'wpmudev' ); ?></p>
-				</div>
-			</div>
-			<div class="sui-notice-top sui-notice-success js-deactivated-multi">
-				<div class="sui-notice-content">
-					<p><strong><?php esc_html_e( 'Success', 'wpmudev' ); ?>:</strong> <?php esc_html_e( 'Plugins deactivated.', 'wpmudev' ); ?></p>
-					<p><?php esc_html_e( 'Please wait while we refresh the page...', 'wpmudev' ); ?></p>
-				</div>
-			</div>
-
-			<div class="sui-notice-top sui-notice-success sui-can-dismiss js-installed-single">
-				<div class="sui-notice-content">
-					<p><strong><?php esc_html_e( 'Success', 'wpmudev' ); ?>:</strong> <?php esc_html_e( 'Plugin successfully installed.', 'wpmudev' ); ?></p>
-				</div>
-				<span class="sui-notice-dismiss">
-					<a role="button" aria-label="Dismiss" class="sui-icon-check"></a>
-				</span>
-			</div>
-			<div class="sui-notice-top sui-notice-error sui-can-dismiss js-failed-installed-single">
-				<div class="sui-notice-content">
-					<p><strong><?php esc_html_e( 'Failed', 'wpmudev' ); ?>:</strong> <?php esc_html_e( 'Plugin failed to be installed.', 'wpmudev' ); ?></p>
-					<p class="js-custom-message"></p>
-				</div>
-				<span class="sui-notice-dismiss">
-					<a role="button" aria-label="Dismiss" class="sui-icon-check"></a>
-				</span>
-			</div>
-
-			<div class="sui-notice-top sui-notice-success sui-can-dismiss js-deleted-single">
-				<div class="sui-notice-content">
-					<p><strong><?php esc_html_e( 'Success', 'wpmudev' ); ?>:</strong> <?php esc_html_e( 'Plugin successfully deleted.', 'wpmudev' ); ?></p>
-				</div>
-				<span class="sui-notice-dismiss">
-					<a role="button" aria-label="Dismiss" class="sui-icon-check"></a>
-				</span>
-			</div>
-			<div class="sui-notice-top sui-notice-error sui-can-dismiss js-failed-deleted-single">
-				<div class="sui-notice-content">
-					<p><strong><?php esc_html_e( 'Failed', 'wpmudev' ); ?>:</strong> <?php esc_html_e( 'Plugin failed to be deleted.', 'wpmudev' ); ?></p>
-					<p class="js-custom-message"></p>
-				</div>
-				<span class="sui-notice-dismiss">
-					<a role="button" aria-label="Dismiss" class="sui-icon-check"></a>
-				</span>
-			</div>
-
-			<div class="sui-notice-top sui-notice-success sui-can-dismiss js-updated-single">
-				<div class="sui-notice-content">
-					<p><strong><?php esc_html_e( 'Success', 'wpmudev' ); ?>:</strong> <?php esc_html_e( 'Plugin successfully updated.', 'wpmudev' ); ?></p>
-				</div>
-				<span class="sui-notice-dismiss">
-					<a role="button" aria-label="Dismiss" class="sui-icon-check"></a>
-				</span>
-			</div>
-			<div class="sui-notice-top sui-notice-error sui-can-dismiss js-failed-updated-single">
-				<div class="sui-notice-content">
-					<p><strong><?php esc_html_e( 'Failed', 'wpmudev' ); ?>:</strong> <?php esc_html_e( 'Plugin failed to be updated.', 'wpmudev' ); ?></p>
-					<p class="js-custom-message"></p>
-				</div>
-				<span class="sui-notice-dismiss">
-					<a role="button" aria-label="Dismiss" class="sui-icon-check"></a>
-				</span>
-			</div>
-
-			<div class="sui-notice-top sui-notice-success sui-can-dismiss js-updated-bulk">
-				<div class="sui-notice-content">
-					<p><strong><?php esc_html_e( 'Success', 'wpmudev' ); ?>:</strong> <?php esc_html_e( 'Plugins successfully updated.', 'wpmudev' ); ?></p>
-				</div>
-				<span class="sui-notice-dismiss">
-					<a role="button" aria-label="Dismiss" class="sui-icon-check"></a>
-				</span>
-			</div>
-
-			<div class="sui-notice-top sui-notice-success sui-can-dismiss js-installed-bulk">
-				<div class="sui-notice-content">
-					<p><strong><?php esc_html_e( 'Success', 'wpmudev' ); ?>:</strong> <?php esc_html_e( 'Plugins successfully installed.', 'wpmudev' ); ?></p>
-				</div>
-				<span class="sui-notice-dismiss">
-					<a role="button" aria-label="Dismiss" class="sui-icon-check"></a>
-				</span>
-			</div>
-
-			<div class="sui-notice-top sui-notice-success sui-can-dismiss js-deleted-bulk">
-				<div class="sui-notice-content">
-					<p><strong><?php esc_html_e( 'Success', 'wpmudev' ); ?>:</strong> <?php esc_html_e( 'Plugins successfully deleted.', 'wpmudev' ); ?></p>
-				</div>
-				<span class="sui-notice-dismiss">
-					<a role="button" aria-label="Dismiss" class="sui-icon-check"></a>
-				</span>
-			</div>
-
-
-			<div class="sui-notice-top sui-notice-error sui-can-dismiss js-general-fail">
-				<div class="sui-notice-content">
-					<p><strong><?php esc_html_e( 'Failed', 'wpmudev' ); ?>:</strong> <?php esc_html_e( 'Whoops, we had an unexpected response from WordPress, please try again.', 'wpmudev' ); ?></p>
-				</div>
-				<span class="sui-notice-dismiss">
-					<a role="button" aria-label="Dismiss" class="sui-icon-check"></a>
-				</span>
-			</div>
-		</div>
-
-	</div>
 	<?php
-	$this->load_sui_template( 'element-last-refresh', array(), true );
+	$this->render( 'sui/element-last-refresh' );
 
-	$this->load_sui_template( 'footer', array(), true );
+	$this->render( 'sui/footer' );
 endif;
 
 if ( 'free' === $type || 'single' === $type ) :

@@ -3,7 +3,7 @@
   Plugin Name: Anti-Spam by CleanTalk
   Plugin URI: https://cleantalk.org
   Description: Max power, all-in-one, no Captcha, premium anti-spam plugin. No comment spam, no registration spam, no contact spam, protects any WordPress forms.
-  Version: 5.134
+  Version: 5.135
   Author: СleanTalk <welcome@cleantalk.org>
   Author URI: https://cleantalk.org
   Text Domain: cleantalk
@@ -187,8 +187,9 @@ if( !defined( 'CLEANTALK_PLUGIN_DIR' ) ){
 	}
 
     $apbct_active_integrations = array(
-        'ContactBank' => array( 'hook' => 'contact_bank_frontend_ajax_call', 'ajax' => true ),
-        'FluentForm'  => array( 'hook' => 'fluentform_validations', 'ajax' => false )
+        'ContactBank'          => array( 'hook' => 'contact_bank_frontend_ajax_call', 'ajax' => true ),
+        'FluentForm'           => array( 'hook' => 'fluentform_validations', 'ajax' => false ),
+        'ElfsightContactForm'  => array( 'hook' => 'elfsight_contact_form_mail', 'ajax' => true )
     );
     new  \Cleantalk\Antispam\Integrations( $apbct_active_integrations );
 	
@@ -327,8 +328,10 @@ if( !defined( 'CLEANTALK_PLUGIN_DIR' ) ){
 			// Check AJAX requests
 				// if User is not logged in
 				// if Unknown action or Known action with mandatory check
-			if(	(!apbct_is_user_logged_in() || $apbct->settings['protect_logged_in'] == 1) &&
-				isset($_POST['action']) && (!in_array($_POST['action'], $cleantalk_hooked_actions) || in_array($_POST['action'], $cleantalk_ajax_actions_to_check))
+			if(	( ! apbct_is_user_logged_in() || $apbct->settings['protect_logged_in'] == 1)  &&
+				isset( $_POST['action'] ) &&
+                ( ! in_array( $_POST['action'], $cleantalk_hooked_actions ) || in_array( $_POST['action'], $cleantalk_ajax_actions_to_check ) ) &&
+                ! array_search( $_POST['action'], array_column( $apbct_active_integrations, 'hook' ) )
 			){
 				ct_ajax_hook();
 			}
@@ -906,8 +909,9 @@ function ct_sfw_update($immediate = false){
     if($apbct->settings['spam_firewall'] == 1){
 		
 		$sfw = new CleantalkSFW();
-		
-		$file_urls = isset($_GET['file_urls']) ? explode(',', $_GET['file_urls']) : null;
+
+	    $file_urls = isset($_GET['file_urls']) ? urldecode( $_GET['file_urls'] ) : null;
+	    $file_urls = isset($file_urls) ? explode(',', $file_urls) : null;
 
 		if (!$file_urls) {
 

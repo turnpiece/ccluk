@@ -14,7 +14,7 @@ var WPFormsBuilderEducation = window.WPFormsBuilderEducation || ( function( docu
 	 *
 	 * @since 1.5.1
 	 *
-	 * @type {Object}
+	 * @type {object}
 	 */
 	var app = {
 
@@ -65,15 +65,15 @@ var WPFormsBuilderEducation = window.WPFormsBuilderEducation || ( function( docu
 						event.stopImmediatePropagation();
 
 						if ( $this.hasClass( 'wpforms-add-fields-button' ) ) {
-							app.upgradeModal( $this.text() + ' ' + wpforms_builder.field );
+							app.upgradeModal( $this.text() + ' ' + wpforms_builder.field, $this.data( 'license' ) );
 						} else {
-							app.upgradeModal( $this.data( 'name' ) );
+							app.upgradeModal( $this.data( 'name' ), $this.data( 'license' ) );
 						}
 					}
 				}
 			);
 
-			// "Did You Know?" Click on the dissmiss button.
+			// "Did You Know?" Click on the dismiss button.
 			$( '.wpforms-dyk' ).on( 'click', '.dismiss', function( e ) {
 
 				var $t = $( this ),
@@ -102,31 +102,42 @@ var WPFormsBuilderEducation = window.WPFormsBuilderEducation || ( function( docu
 		 * @since 1.5.1
 		 *
 		 * @param {string} feature Feature name.
+		 * @param {string} type Feature license type: pro or elite.
 		 */
-		upgradeModal: function( feature ) {
+		upgradeModal: function( feature, type ) {
 
-			var message    = wpforms_builder_lite.upgrade_message.replace( /%name%/g, feature ),
-				upgradeURL = encodeURI( wpforms_builder_lite.upgrade_url + '&utm_content=' + feature.trim() );
+			// Provide a default value.
+			if ( typeof type === 'undefined' || type.length === 0 ) {
+				type = 'pro';
+			}
+
+			// Make sure we received only supported type.
+			if ( $.inArray( type, [ 'pro', 'elite' ] ) < 0 ) {
+				return;
+			}
+
+			var message    = wpforms_builder_lite.upgrade[type].message.replace( /%name%/g, feature ),
+				upgradeURL = encodeURI( wpforms_builder_lite.upgrade[type].url + '&utm_content=' + feature.trim() );
 
 			$.alert( {
-				title   : feature + ' ' + wpforms_builder_lite.upgrade_title,
+				title   : feature + ' ' + wpforms_builder_lite.upgrade[type].title,
 				icon    : 'fa fa-lock',
 				content : message,
 				boxWidth: '550px',
 				onOpenBefore: function() {
-					this.$btnc.after( '<div class="discount-note">' + wpforms_builder_lite.upgrade_bonus + wpforms_builder_lite.upgrade_doc + '</div>' );
+					this.$btnc.after( '<div class="discount-note">' + wpforms_builder_lite.upgrade[type].bonus + wpforms_builder_lite.upgrade[type].doc + '</div>' );
 					this.$body.find( '.jconfirm-content' ).addClass( 'lite-upgrade' );
 				},
 				buttons : {
 					confirm: {
-						text    : wpforms_builder_lite.upgrade_button,
+						text    : wpforms_builder_lite.upgrade[type].button,
 						btnClass: 'btn-confirm',
 						keys    : [ 'enter' ],
 						action: function() {
 							window.open( upgradeURL, '_blank' );
 							$.alert( {
 								title   : false,
-								content : wpforms_builder_lite.upgrade_modal,
+								content : wpforms_builder_lite.upgrade[type].modal,
 								icon    : 'fa fa-info-circle',
 								type    : 'blue',
 								boxWidth: '565px',

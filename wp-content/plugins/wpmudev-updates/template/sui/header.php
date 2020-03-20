@@ -19,21 +19,22 @@
 
 				<a href="<?php echo esc_url( $url_dash ); ?>"
 					class="sui-button-icon sui-tooltip sui-tooltip-bottom sui-tooltip-bottom-left-mobile"
+					target="_blank"
 					data-tooltip="<?php esc_html_e( 'Hub', 'wpmudev' ); ?>">
-					<i class="sui-icon-hub sui-md"></i>
+					<i class="sui-icon-hub sui-md" aria-hidden="true"></i>
 				</a>
 
 				<a href="<?php echo esc_url( $documentation_url ); ?>"
 					target="_blank"
 					class="sui-button-icon sui-tooltip sui-tooltip-bottom sui-tooltip-bottom-left-mobile"
 					data-tooltip="<?php esc_html_e( 'Documentation', 'wpmudev' ); ?>">
-					<i class="sui-icon-academy sui-md"></i>
+					<i class="sui-icon-academy sui-md" aria-hidden="true"></i>
 				</a>
 
 				<a href="<?php echo esc_url( $url_support ); ?>"
 					class="sui-button-icon sui-tooltip sui-tooltip-bottom sui-tooltip-bottom-left-mobile"
 					data-tooltip="<?php esc_html_e( 'Support', 'wpmudev' ); ?>">
-					<i class="sui-icon-help-support sui-md"></i>
+					<i class="sui-icon-help-support sui-md"aria-hidden="true"></i>
 				</a>
 
 				<div class="sui-dropdown">
@@ -45,7 +46,7 @@
 							<img src="<?php echo esc_url( $profile['avatar'] ); ?>"
 								aria-hidden="true" />
 
-							<i class="sui-icon-chevron-down"></i>
+							<i class="sui-icon-chevron-down" aria-hidden="true"></i>
 
 							<span class="sui-screen-reader-text"><?php esc_html_e( 'Open settings', 'wpmudev' ); ?></span>
 

@@ -6,9 +6,9 @@ Author URI: https://shop.webaware.com.au/
 Donate link: https://shop.webaware.com.au/donations/?donation_for=Disable+Emails
 Tags: disable emails, block emails
 Requires at least: 4.9
-Tested up to: 5.3
+Tested up to: 5.4
 Requires PHP: 5.6
-Stable tag: 1.6.1
+Stable tag: 1.6.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -80,33 +80,24 @@ NB: if you activate the must-use plugin on a multisite, it will stop emails on a
 
 ## Upgrade Notice
 
-### 1.6.1
+### 1.6.3
 
-Toolbar indicator now has a visible slash in Sunrise admin theme; fixed: undefined function is_plugin_active_for_network()
+fixed: unhandled `phpmailerException` exceptions
 
 ## Changelog
 
 The full changelog can be found [on GitHub](https://github.com/webaware/disable-emails/blob/master/changelog.md). Recent entries:
 
-### 1.6.1
+### 1.6.3
 
-Released 2019-12-21
+Released 2020-03-19
 
-* fixed: Toolbar indicator has no visible slash in Sunrise admin theme
-* fixed: undefined function `is_plugin_active_for_network()` (thanks [isabelc](https://github.com/isabelc)!)
+* fixed: unhandled `phpmailerException` exceptions (thanks, [y0uri](https://wordpress.org/support/users/y0uri/)!)
 
-### 1.6.0
+### 1.6.2
 
-Released 2019-12-15
+Released 2020-03-10
 
-* fixed: undefined index for `$_SERVER['SERVER_NAME']` when emails sent during wp-cli
-* added: indicator setting to show either a Toolbar indicator or a site-wide admin notice when emails are disabled
-* added: filter hook `disable_emails_indicator` for setting the indicator from code; accepts 'none', 'toolbar', 'notice'
-
-### 1.5.0
-
-Released 2019-11-11
-
-* fixed: PHP notice -- Trying to get property 'ErrorInfo' of non-object
-* changed: requires minimum PHP 5.6; recommend PHP 7.3+
-* added: support for running the plugin as a must-use plugin (mu-plugin)
+* fixed: activating the must-use plugin throws an error if the mu-plugins folder is missing
+* changed: can now enable both a Toolbar indicator and a site-wide admin notice when emails are disabled
+* changed: filter hook `disable_emails_indicator` also accepts 'notice_toolbar' to enable both notice and Toolbar indicator

@@ -154,7 +154,7 @@ class Cli {
 			}
 			$scanning = new Scanning();
 			$scanning->releaseLock();
-			$is_done  = $scanning->do();
+			$is_done  = $scanning->run();
 			$progress = $scanning->getScanProgress();
 			//$is_done  = Scan_Api::processActiveScan();
 			//$progress = Scan_Api::getScanProgress();

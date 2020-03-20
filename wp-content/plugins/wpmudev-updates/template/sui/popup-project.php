@@ -6,7 +6,7 @@ if ( ! $pid ) {
 	return;
 }
 
-$res = WPMUDEV_Dashboard::$site->get_project_infos( $pid, true );
+$res = WPMUDEV_Dashboard::$site->get_project_info( $pid, true );
 
 // Skip invalid projects.
 if ( empty( $res->pid ) || empty( $res->name ) ) {
@@ -402,8 +402,7 @@ foreach ( $res->tags as $tid => $plugin_tag ) {
 	$attr[ 'plugin-tag-' . $tid ] = 1;
 }
 ?>
-
-<p id="dialogDescription"><?php echo esc_html( $res->info ); ?></p>
+<p id="dialogDescription<?php echo esc_html( $pid ); ?>2"><?php echo esc_html( $res->info ); ?></p>
 
 <div class="sui-tabs sui-tabs-flushed"
 	style="margin-top: 0 !important; border-top: 1px solid #E6E6E6;">

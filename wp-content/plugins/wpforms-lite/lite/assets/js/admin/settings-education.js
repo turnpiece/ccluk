@@ -14,7 +14,7 @@ var WPFormsSettingsEducation = window.WPFormsSettingsEducation || ( function( do
 	 *
 	 * @since 1.5.5
 	 *
-	 * @type {Object}
+	 * @type {object}
 	 */
 	var app = {
 
@@ -62,7 +62,7 @@ var WPFormsSettingsEducation = window.WPFormsSettingsEducation || ( function( do
 					event.preventDefault();
 					event.stopImmediatePropagation();
 
-					app.upgradeModal( $this.data( 'name' ) );
+					app.upgradeModal( $this.data( 'name' ), $this.data( 'license' ) );
 				}
 			);
 		},
@@ -73,31 +73,42 @@ var WPFormsSettingsEducation = window.WPFormsSettingsEducation || ( function( do
 		 * @since 1.5.5
 		 *
 		 * @param {string} feature Feature name.
+		 * @param {string} type    License type.
 		 */
-		upgradeModal: function( feature ) {
+		upgradeModal: function( feature, type ) {
 
-			var message    = wpforms_admin.upgrade_message.replace( /%name%/g, feature ),
-				upgradeURL = encodeURI( wpforms_admin.upgrade_url + '&utm_content=' + feature.trim() );
+			// Provide a default value.
+			if ( typeof type === 'undefined' || type.length === 0 ) {
+				type = 'pro';
+			}
+
+			// Make sure we received only supported type.
+			if ( $.inArray( type, [ 'pro', 'elite' ] ) < 0 ) {
+				return;
+			}
+
+			var message    = wpforms_admin.upgrade[type].message.replace( /%name%/g, feature ),
+				upgradeURL = encodeURI( wpforms_admin.upgrade[type].url + '&utm_content=' + feature.trim() );
 
 			$.alert( {
-				title   : feature + ' ' + wpforms_admin.upgrade_title,
+				title   : feature + ' ' + wpforms_admin.upgrade[type].title,
 				icon    : 'fa fa-lock',
 				content : message,
 				boxWidth: '550px',
 				onOpenBefore: function() {
-					this.$btnc.after( '<div class="discount-note">' + wpforms_admin.upgrade_bonus + wpforms_admin.upgrade_doc + '</div>' );
+					this.$btnc.after( '<div class="discount-note">' + wpforms_admin.upgrade[type].bonus + wpforms_admin.upgrade[type].doc + '</div>' );
 					this.$body.find( '.jconfirm-content' ).addClass( 'lite-upgrade' );
 				},
 				buttons : {
 					confirm: {
-						text    : wpforms_admin.upgrade_button,
+						text    : wpforms_admin.upgrade[type].button,
 						btnClass: 'btn-confirm',
 						keys    : [ 'enter' ],
 						action: function() {
 							window.open( upgradeURL, '_blank' );
 							$.alert( {
 								title   : false,
-								content : wpforms_admin.upgrade_modal,
+								content : wpforms_admin.upgrade[type].modal,
 								icon    : 'fa fa-info-circle',
 								type    : 'blue',
 								boxWidth: '565px',

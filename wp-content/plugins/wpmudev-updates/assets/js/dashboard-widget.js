@@ -664,9 +664,16 @@
 
 				//Set YAxis max value for proper curve
 				var yAxisData 	 = all_data[$type].data.map( ( data ) => data.y ),
-				yAxisDataMax = Math.max.apply(null, yAxisData);
-				chartConfig.options.scales.yAxes[0].ticks.suggestedMax = yAxisDataMax + Math.round( 0.1 * yAxisDataMax );
+				yAxisDataMax = Math.max.apply(null, yAxisData),
+				max = yAxisDataMax + Math.round( 0.1 * yAxisDataMax );
 
+				//for small data math round may cause issue
+				//just increase a number for small data
+				if( yAxisDataMax === max ){
+					max++;
+				}
+
+				chartConfig.options.scales.yAxes[0].ticks.suggestedMax = max;
 			}
 
 			chartConfig.data.datasets[0].label = all_data[$type].label;

@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Defender Pro
  * Plugin URI: https://premium.wpmudev.org/project/wp-defender/
- * Version:     2.2.6
+ * Version:     2.2.7
  * Description: Get regular security scans, vulnerability reports, safety recommendations and customized hardening for your site in just a few clicks. Defender is the analyst and enforcer who never sleeps.
  * Author:      WPMU DEV
  * Author URI:  http://premium.wpmudev.org/
@@ -206,14 +206,14 @@ class WP_Defender {
 		$js_files = array(
 			'wpmudev-sui' => $this->plugin_url . 'assets/js/shared-ui.js',
 			'defender'    => $this->plugin_url . 'assets/js/scripts.js',
-			'vue'         => $this->plugin_url . 'assets/js/vendor/vue.runtime' . $is_min . '.js',
+			'def-vue'     => $this->plugin_url . 'assets/js/vendor/vue.runtime' . $is_min . '.js',
 		);
 
 		foreach ( $js_files as $slug => $file ) {
 			wp_register_script( $slug, $file, array( 'jquery' ), $this->version, true );
 		}
 
-		wp_localize_script( 'vue', 'defender', array(
+		wp_localize_script( 'def-vue', 'defender', array(
 			'whitelabel'   => \WP_Defender\Behavior\WPMUDEV::instance()->whiteLabelStatus(),
 			'misc'         => [
 				'high_contrast' => \WP_Defender\Behavior\WPMUDEV::instance()->maybeHighContrast(),

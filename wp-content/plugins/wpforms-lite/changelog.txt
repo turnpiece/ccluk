@@ -1,5 +1,12 @@
 == Changelog ==
 
+= 1.5.9.5 =
+- Fixed: do not try to process entries in Lite.
+
+= 1.5.9.4 =
+- Changed: Improve async notification emails scheduling compatibility with certain caching plugins and site installs.
+- Fixed: Some smart tags are not rendered correctly in the email notifications if sent asynchronously.
+
 = 1.5.9.1 =
 - Fixed: Checkbox image click doesn't work well to select an option.
 - Fixed: Do not allow empty connection names (spaces only) for providers.

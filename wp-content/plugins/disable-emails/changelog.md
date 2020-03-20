@@ -2,6 +2,16 @@
 
 ## Changelog
 
+### 1.6.3, 2020-03-19
+
+* fixed: unhandled `phpmailerException` exceptions (thanks, [y0uri](https://wordpress.org/support/users/y0uri/)!)
+
+### 1.6.2, 2020-03-10
+
+* fixed: activating the must-use plugin throws an error if the mu-plugins folder is missing
+* changed: can now enable both a Toolbar indicator and a site-wide admin notice when emails are disabled
+* changed: filter hook `disable_emails_indicator` also accepts 'notice_toolbar' to enable both notice and Toolbar indicator
+
 ### 1.6.1, 2019-12-21
 
 * fixed: Toolbar indicator has no visible slash in Sunrise admin theme

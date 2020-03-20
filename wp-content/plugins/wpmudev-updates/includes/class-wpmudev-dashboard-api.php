@@ -40,6 +40,13 @@ class WPMUDEV_Dashboard_Api {
 	protected $rest_api_analytics = 'api/analytics/v1/';
 
 	/**
+	 * Path to the Analytics REST API on the server.
+	 *
+	 * @var string (URL)
+	 */
+	protected $rest_api_translation = 'api/translations/v1/';
+
+	/**
 	 * The complete WPMUDEV REST API endpoint. Defined in constructor.
 	 *
 	 * @var string (URL)
@@ -100,6 +107,11 @@ class WPMUDEV_Dashboard_Api {
 				'wpmudev_scheduled_jobs',
 				array( $this, 'refresh_projects_data' )
 			);
+			add_action(
+				'wpmudev_scheduled_jobs',
+				array( $this, 'maybe_update_translations' )
+			);
+
 		} elseif ( wp_next_scheduled( 'wpmudev_scheduled_jobs' ) ) {
 			// In case the cron job was already installed in a sub-site...
 			wp_clear_scheduled_hook( 'wpmudev_scheduled_jobs' );
@@ -1281,6 +1293,7 @@ class WPMUDEV_Dashboard_Api {
 				WPMUDEV_Dashboard::$site->set_option( 'updates_data', $data );
 				WPMUDEV_Dashboard::$site->set_option( 'last_run_updates', time() );
 				$this->calculate_upgrades();
+				$this->calculate_translation_upgrades( true );
 				$this->enqueue_notices( $data );
 
 				$res = $data;
@@ -1430,6 +1443,256 @@ class WPMUDEV_Dashboard_Api {
 		return $res;
 	}
 
+	/*
+	 * *********************************************************************** *
+	 * *     TRANSLATION UPDATE FUNCTIONS
+	 * *********************************************************************** *
+	 */
+
+	/**
+	 * Get translation details from the API.
+	 * The API usually returns all the translation data of all projects
+	 * so this is parsed and sorted here.
+	 *
+	 * @since  4.8.0
+	 *
+	 * @param  bool $force Forcing will update the data and ignore cache.
+	 */
+	public function get_project_translations( $force = false ) {
+		$res      = false;
+
+		/*
+		Note: This endpoint requires an API key.
+		 */
+
+		if ( defined( 'WP_INSTALLING' ) ) {
+			return false;
+		}
+
+		// return from cache if possible. We don't use *_site_transient() to avoid unnecessary autoloading.
+		$cached = WPMUDEV_Dashboard::$site->get_transient( 'translations_all' );
+
+		// if ( false !== $cached ) {
+		// 	return $cached;
+		// }
+
+		//set api base.
+		$api_base = $this->server_root . $this->rest_api_translation;
+
+		// sets up special auth header.
+		$options['headers']                  = array();
+		$options['headers']['Authorization'] = $this->get_key();
+
+		$response = WPMUDEV_Dashboard::$api->call(
+			$api_base . 'projects',
+			false,
+			'GET',
+			$options
+		);
+
+		if ( wp_remote_retrieve_response_code( $response ) == 200 ) {
+			$data = json_decode( wp_remote_retrieve_body( $response ), true );
+			if ( is_array( $data ) ) {
+				$res = $data;
+			} else {
+				$this->parse_api_error( 'Error unserializing remote response' );
+			}
+		} else {
+			$this->parse_api_error( $response );
+		}
+
+		if ( is_array( $res ) ) {
+			$res = $this->sort_translation_projects( $res );
+		}
+		$data['timestamp'] = time();
+		WPMUDEV_Dashboard::$site->set_transient(
+			'translations_all',
+			$res,
+			WEEK_IN_SECONDS
+		);
+
+		return $res;
+	}
+
+	/**
+	 * Get translation details from the API.
+	 * The API usually returns specific data of all projects
+	 * so this is parsed and sorted here.
+	 *
+	 * @since  4.8.0
+	 *
+	 * @param  string $locale Locale to search translations for.
+	 * @param  bool $force Forcing will update the data and ignore cache.
+	 */
+	public function get_project_locale_translations( $locale, $force = false ) {
+		$res = false;
+
+		/*
+		Note: This endpoint requires an API key.
+		 */
+
+		if ( defined( 'WP_INSTALLING' ) ) {
+			return false;
+		}
+
+		//if no locale is present return.
+		if ( ! $locale ) {
+			return false;
+		}
+
+		// return from cache if possible. Get locale baset cache.
+		$cached = WPMUDEV_Dashboard::$site->get_transient( 'translations_all_' . $locale );
+
+		if ( false !== $cached && ! $force ) {
+			return $cached;
+		}
+
+		//set api base.
+		$api_base = $this->server_root . $this->rest_api_translation;
+
+		// sets up special auth header.
+		$options['headers']                  = array();
+		$options['headers']['Authorization'] = $this->get_key();
+
+		$response = WPMUDEV_Dashboard::$api->call(
+			$api_base . 'sets/' . $locale . '/projects',
+			false,
+			'GET',
+			$options
+        );
+
+
+		if ( wp_remote_retrieve_response_code( $response ) == 200 ) {
+			$data = json_decode( wp_remote_retrieve_body( $response ), true );
+			if ( is_array( $data ) ) {
+				$res = $data;
+			} else {
+				$this->parse_api_error( 'Error unserializing remote response' );
+			}
+		} else {
+			$this->parse_api_error( $response );
+		}
+
+		if ( is_array( $res ) ) {
+			$res = $this->sort_translation_projects( $res );
+		}
+		$data['timestamp'] = time();
+		WPMUDEV_Dashboard::$site->set_transient(
+			'translations_all_' . $locale,
+			$res,
+			WEEK_IN_SECONDS
+		);
+
+		return $res;
+	}
+
+	/**
+	 * Parses the Translation API response data and sort active premium projects
+	 *
+	 * @since  4.8.0
+	 *
+	 * @param  array $translations Response data from Translation API call to parse.
+	 */
+	public function sort_translation_projects( $translations ) {
+		$data                = WPMUDEV_Dashboard::$api->get_projects_data();
+		$projects            = wp_list_pluck( $data['projects'], 'id' );
+        $project_translation = array();
+
+		foreach ( $translations as $key => $project ) {
+            if( is_wp_error( $project ) ) {
+                continue;
+            }
+			if ( in_array( $project['dev_project_id'], $projects, true ) ) {
+				$project_translation[] = $project;
+			}
+		}
+		return $project_translation;
+	}
+
+	/**
+	 * Calculate if the translation files need update.
+	 *
+	 * @since  4.8.0
+	 */
+	public function calculate_translation_upgrades( $force = false ) {
+		$available_translation = wp_get_installed_translations( 'plugins' );
+		$projects              = array();
+		$translation_needed    = array();
+		$locale                = WPMUDEV_Dashboard::$site->get_option( 'translation_locale' );
+		$auto_update           = WPMUDEV_Dashboard::$site->get_option( 'enable_auto_translation' );
+		$update_available      = WPMUDEV_Dashboard::$site->get_option( 'translation_updates_available' );
+        $translations          = $this->get_project_locale_translations( $locale, $force );
+
+		//set api base.
+		$api_base = $this->server_root . $this->rest_api_translation;
+
+		//cache
+		if ( ! $force && ! empty( $update_available ) ) {
+			return $update_available;
+		}
+
+		if( $translations ) {
+			//sort installed plugins
+			foreach ( $translations as $key => $value ) {
+				$project = WPMUDEV_Dashboard::$site->get_project_info( $value['dev_project_id'] );
+				if ( $project->is_installed ) {
+					$value['translation_slug'] = $value['slug'];
+					$value['version']          = $project->version_installed;
+					$value['name']             = $project->name;
+					$projects[]                = $value;
+				}
+			}
+		}
+
+		//check if translation is not installed and if is installed check if is available.
+		foreach ( $projects as $key => $updates ) {
+
+			if (
+				! array_key_exists( $updates['translation_slug'], $available_translation ) ||
+				! array_key_exists( $locale, $available_translation[ $updates['translation_slug'] ] ) ||
+					(
+						array_key_exists( $updates['translation_slug'], $available_translation ) &&
+						array_key_exists( $locale, $available_translation[ $updates['translation_slug'] ] ) &&
+						strtotime( $available_translation[ $updates['translation_slug'] ][ $locale ]['PO-Revision-Date'] ) < strtotime( $updates['sets'][0]['last_modified_utc'] )
+					)
+				) {
+
+				//package url
+				$package = $this->rest_url_auth( $updates['sets'][0]['download_url'] );
+				$package = add_query_arg( array(
+					'format' => 'pomo_zip'
+				), $package );
+
+				$translation_needed[] = array(
+					'type'       => 'plugin',
+					'slug'       => $updates['translation_slug'],
+					'language'   => $locale,
+					'version'    => $updates['version'],
+					'updated'    => $updates['sets'][0]['last_modified_utc'],
+					'package'    => $package,
+					'autoupdate' => (bool) $auto_update,
+					'name'       => $updates['name'],
+				);
+			}
+		}
+
+		WPMUDEV_Dashboard::$site->set_option( 'translation_updates_available', $translation_needed );
+		return $translation_needed;
+	}
+
+	/**
+	 * Auto update the translation files.
+	 *
+	 * @since  4.8.0
+	 */
+	public function maybe_update_translations() {
+		if ( WPMUDEV_Dashboard::$site->get_option( 'enable_auto_translation' ) ) {
+			//upgrade all the translations
+			WPMUDEV_Dashboard::$upgrader->upgrade_translation();
+			return true;
+		}
+		return false;
+	}
 	/**
 	 * Parses the API response data and enqueues the correct message for the
 	 * current member.
@@ -1497,7 +1760,7 @@ class WPMUDEV_Dashboard_Api {
 		// Check for updates.
 		foreach ( $local_projects as $pid => $dummy ) {
 			// Skip if the project is not installed on current site.
-			$item = WPMUDEV_Dashboard::$site->get_project_infos( $pid );
+			$item = WPMUDEV_Dashboard::$site->get_project_info( $pid );
 			if ( ! $item || empty( $item->name ) ) {
 				continue;
 			}
@@ -1954,6 +2217,7 @@ class WPMUDEV_Dashboard_Api {
 			// Build hmac for OAuth.
 			$domain   = $this->network_site_url();
 			$profile  = $this->get_profile();
+
 			$outgoing_hmac = hash_hmac( 'sha256', $token . $hashed_pre_sso_state . $redirect . $domain, $api_key );
 
 			$auth_endpoint = $this->rest_url( 'sso-hub' );
@@ -2101,7 +2365,6 @@ class WPMUDEV_Dashboard_Api {
 			'POST',
 			$options
 		);
-
 		if ( wp_remote_retrieve_response_code( $response ) == 200 ) {
 			$data = json_decode( wp_remote_retrieve_body( $response ), true );
 
@@ -2178,6 +2441,7 @@ class WPMUDEV_Dashboard_Api {
 		}
 
 		$transient_key = 'wdp_analytics_' . md5( $remote_path );
+
 		// return from cache if possible. We don't use *_site_transient() to avoid unnecessary autoloading.
 		if ( false !== ( $cached = get_transient( $transient_key ) ) ) {
 			$cached = $this->_analytics_overall_filter_metrics( $cached );
@@ -2206,7 +2470,7 @@ class WPMUDEV_Dashboard_Api {
 		// parse the data into a format best for our needs
 		$final_data = array();
 		$final_data['autocomplete'] = array();
-
+		$comparison_data = isset( $data['comparision_overall'] ) ? $data['comparision_overall'] : array();
 		// overall data for charts and totals.
 		if ( isset( $data['overall'] ) ) {
 
@@ -2246,13 +2510,70 @@ class WPMUDEV_Dashboard_Api {
 				}
 			}
 
+			foreach ( $comparison_data as $date => $day ) {
+				if ( isset( $day[0] ) ) {
+					$day = $day[0];
+				}
+				// this helps data appear on correct day in x axis.
+				$timestamp = date( 'c', strtotime( '+1 day', strtotime( $date ) ) );
+				foreach( $to_process as $key => $process ) {
+					$y_value = isset( $day[ $process['orig_key'] ] ) ? $day[ $process['orig_key'] ] : null;
+					$comparing_data[ $key ]['label'] = $process['label'];
+					$comparing_data[ $key ]['data'][] = array( 't' => $timestamp, 'y' => $y_value );
+
+				}
+			}
+
 			foreach( $to_process as $key => $process ) {
 				if ( isset( $final_data['overall']['chart'][ $key ] ) ) {
-					$list   = array_filter( wp_list_pluck( $final_data['overall']['chart'][ $key ]['data'], 'y' ) );
+					$totals 		= 0;
+					$compare_total 	= 0;
+					$compare_avg 	= false;
+					$compare_data 	= array();
+					if( isset( $comparing_data[ $key ] ) ){
+						$compare_data 	= wp_list_pluck(  $comparing_data[ $key ]['data'], 'y' );
+					}
+
+					$list = wp_list_pluck( $final_data['overall']['chart'][ $key ]['data'], 'y' );
+
+					//for number we want total, others mean
+					if ( '_analytics_format_num' === $process['callback'] ) {
+						$totals = array_sum( $list );
+						$compare_total = array_sum( $compare_data );
+					} else {
+						if ( count( $list ) ) {
+							$avg = array_sum( $list ) / count( $list );
+							if( ! empty( $compare_data ) && count( $compare_data ) ){
+								$compare_avg = array_sum( $compare_data ) / count( $compare_data );
+							}
+						} else {
+							$avg = false;
+							$compare_avg = false;
+						}
+						$totals = $avg;
+						$compare_total = $compare_avg;
+					}
+
 					if ( count( $list ) ) {
-						$start  = current( $list );
-						$end    = end( $list );
-						$change = round( ( ( $end - $start ) / $start * 100 ), 1 );
+
+						//assume 1 if no data found.
+						$start  = $compare_total > 0 ? abs( $compare_total ) : 0;
+
+						if ( 0 === $start && 0 === abs( $totals ) ) {
+							$end = 0;
+						} else {
+							$end = $totals > 0 ? abs( $totals ) : 1;
+						}
+
+						//if no data found the current data is the increment.
+						if ( $start <= 0 && $end <= 0 ) {
+							$change = 0;
+						} elseif( $start <= 0 ) {
+							$change = round( $end, 1 );
+						} else {
+							$change = round( ( ( $end - $start ) / $start * 100 ), 1 );
+						}
+
 					} else {
 						$change = 0;
 					}
@@ -2260,19 +2581,9 @@ class WPMUDEV_Dashboard_Api {
 					$final_data['overall']['totals'][ $key ] = array(
 						'change'    => number_format_i18n( abs( $change ) ) . '%',
 						'direction' => ( $change == 0 ) ? 'none' : ( $change > 0 ? 'up' : 'down' ),
+						'value' 	=> call_user_func( array( $this, $process['callback'] ), $totals ),
 					);
 
-					//for number we want total, others mean
-					if ( '_analytics_format_num' === $process['callback'] ) {
-						$final_data['overall']['totals'][ $key ]['value'] = call_user_func( array( $this, $process['callback'] ), array_sum( $list ) );
-					} else {
-						if ( count( $list ) ) {
-							$avg = array_sum( $list ) / count( $list );
-						} else {
-							$avg = false;
-						}
-						$final_data['overall']['totals'][ $key ]['value'] = call_user_func( array( $this, $process['callback'] ), $avg );
-					}
 				}
 			}
 		}
@@ -2414,7 +2725,6 @@ class WPMUDEV_Dashboard_Api {
 		set_transient( $transient_key, $final_data, DAY_IN_SECONDS );
 
 		$final_data = $this->_analytics_overall_filter_metrics( $final_data );
-
 		return $final_data;
 	}
 
@@ -2463,6 +2773,7 @@ class WPMUDEV_Dashboard_Api {
 
 		// parse the data into a format best for our needs
 		$final_data = array();
+		$comparison_data = isset( $data['comparisions'] ) ? $data['comparisions'] : array();
 
 		// available fields are a bit different when filtered to subsite
 		$to_process = array(
@@ -2515,13 +2826,71 @@ class WPMUDEV_Dashboard_Api {
 			}
 		}
 
+		foreach ( $comparison_data as $date => $day ) {
+			if ( isset( $day[0] ) ) {
+				$day = $day[0];
+			}
+			// this helps data appear on correct day in x axis.
+			$timestamp = date( 'c', strtotime( '+1 day', strtotime( $date ) ) );
+			foreach( $to_process as $key => $process ) {
+				$y_value = isset( $day[ $process['orig_key'] ] ) ? $day[ $process['orig_key'] ] : null;
+				$comparing_data['chart'][ $key ]['label'] = $process['label'];
+				$comparing_data['chart'][ $key ]['data'][] = array( 't' => $timestamp, 'y' => $y_value );
+
+			}
+		}
 		foreach( $to_process as $key => $process ) {
+
 			if ( isset( $final_data['chart'][ $key ] ) ) {
-				$list   = array_filter( wp_list_pluck( $final_data['chart'][ $key ]['data'], 'y' ) );
+				$list   		= array_filter( wp_list_pluck( $final_data['chart'][ $key ]['data'], 'y' ) );
+				$compare_data 	= array();
+				$totals 		= 0;
+				$compare_total 	= 0;
+				$compare_avg 	= false;
+
+				if( isset( $comparing_data['chart'][ $key ] ) ){
+					$compare_data 	= wp_list_pluck(  $comparing_data['chart'][ $key ]['data'], 'y' );
+				}
+
+				//for number we want total, others mean
+				if ( '_analytics_format_num' === $process['callback'] ) {
+					$totals = array_sum( $list );
+					$compare_total = array_sum( $compare_data );
+				} else {
+					if ( count( $list ) ) {
+						$avg = array_sum( $list ) / count( $list );
+						if( ! empty( $compare_data ) && count( $compare_data ) ){
+							$compare_avg = array_sum( $compare_data ) / count( $compare_data );
+						}
+					} else {
+						$avg = false;
+						$compare_avg = false;
+					}
+					$totals = $avg;
+					$compare_total = $compare_avg;
+				}
+
 				if ( count( $list ) ) {
-					$start  = current( $list );
-					$end    = end( $list );
-					$change = round( ( ( $end - $start ) / $start * 100 ), 1 );
+
+					//assume 1 if no data found.
+					$start  = $compare_total > 0 ? abs( $compare_total ) : 0;
+
+					if ( 0 === $start && 0 === abs( $totals ) ) {
+						$end = 0;
+					} else {
+						$end = $totals > 0 ? abs( $totals ) : 1;
+					}
+
+					//if no data found the current data is the increment.
+					if ( $start <= 0 && $end <= 0 ) {
+						$change = 0;
+					} elseif( $start <= 0 ) {
+						$change = round( $end, 1 );
+					} else {
+						$change = round( ( ( $end - $start ) / $start * 100 ), 1 );
+					}
+
+
 				} else {
 					$change = 0;
 				}
@@ -2529,21 +2898,13 @@ class WPMUDEV_Dashboard_Api {
 				$final_data['totals'][ $key ] = array(
 					'change'    => number_format_i18n( abs( $change ) ) . '%',
 					'direction' => ( $change == 0 ) ? 'none' : ( $change > 0 ? 'up' : 'down' ),
+					'value' 	=> call_user_func( array( $this, $process['callback'] ), $totals ),
 				);
 
-				//for number we want total, others mean
-				if ( '_analytics_format_num' === $process['callback'] ) {
-					$final_data['totals'][ $key ]['value'] = call_user_func( array( $this, $process['callback'] ), array_sum( $list ) );
-				} else {
-					if ( count( $list ) ) {
-						$avg = array_sum( $list ) / count( $list );
-					} else {
-						$avg = false;
-					}
-					$final_data['totals'][ $key ]['value'] = call_user_func( array( $this, $process['callback'] ), $avg );
-				}
 			}
+
 		}
+
 
 		return $final_data;
 	}

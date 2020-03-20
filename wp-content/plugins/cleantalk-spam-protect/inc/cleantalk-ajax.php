@@ -296,6 +296,7 @@ function ct_ajax_hook($message_obj = false, $additional = false)
 	    'wouCheckOnlineUsers', //Skip updraft admin checking users
 	    'et_fb_get_shortcode_from_fb_object', //Skip generate shortcode
 	    'pp_lf_process_login', //Skip login form
+	    'check_email', //Ajax email checking
     );
     
     // Skip test if
@@ -313,7 +314,8 @@ function ct_ajax_hook($message_obj = false, $additional = false)
 		        (isset($message_obj['author']) && intval($message_obj['author']) == 0) ||
 		        (isset($message_obj['post_author']) && intval($message_obj['post_author']) == 0)
 	        )
-        )
+        ) ||
+        (isset($_POST['action'], $_POST['arm_action']) && $_POST['action'] == 'arm_shortcode_form_ajax_action' && $_POST['arm_action'] == 'please-login') //arm forms skip login
     )
     {
         return false;

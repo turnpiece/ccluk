@@ -4,7 +4,7 @@ Tags: spam, antispam, woocommerce, comments, firewall
 Requires at least: 3.0
 Tested up to: 5.3
 Requires PHP: 5.4
-Stable tag: 5.134
+Stable tag: 5.135
 License: GPLv2
 
 Spam protection, anti-spam, firewall, premium plugin. No spam comments & users, no spam contact form & WooCommerce anti-spam.
@@ -565,6 +565,16 @@ If your website has forms that send data to external sources, you can enable opt
 10. Website's options.
 
 == Changelog ==
+
+= 5.135 March 16 2020 =
+  * New: Setting which disallow sub-sites administrators to manage plugin settings.
+  * New: Add custom title for message.
+  * Mod: New headers for spam scan tabs.
+  * Fix: ARM form login check.
+  * Fix: For GET requests in HTTP API.
+  * Fix: Getting variables in Get and Server classes.
+  * Fix: SFW update system.
+  * Fix: Empty connection error in Cleantalk/Antispam/API.
 
 = 5.134 February 27 2020 =
   * Fix: SpamFireWall update large data issues.

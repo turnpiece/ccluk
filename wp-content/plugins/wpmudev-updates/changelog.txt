@@ -4,6 +4,22 @@ Author: Aaron Edwards
 Change Log:
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
+4.8.1 - 03/10/2020- Aaron, Ivan, Biplav
+- Fix: Bugs causing styles to stop rendering
+
+----------------------------------------------------------------------
+
+4.8.0 - 03/10/2020- Aaron, Ivan, Biplav
+- Add: Translation updates for the premium plugins
+- Add: More white labeling options by linking Branda
+- Improvement: Accessibility improvements on the Dashboard pages
+- Improvement: Analytics metrics comparisons improved
+- Improvement: Branding logo ( Whitelabels ) is now protected and can't be deleted by unauthorized users
+- Fix: Configuration links for SmartCrawl
+- Fix: A typo on the plugin install notices
+- Fix: Hub requests not working in some instances
+
+----------------------------------------------------------------------
 4.7.5 - 01/02/2020 - Aaron, Ivan, Biplav
 - Enhance: Update messages for new membership plans when site limit is reached
 - Fix: Typo in text description on the Dashboard > Resources widget
@@ -579,4 +595,4 @@ Added option to disable admin notices.
 Initial Release.
 
 
-87274-1579293128-au
+87274-1584739293-au

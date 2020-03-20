@@ -3,9 +3,9 @@ Contributors: bradt, deliciousbrains
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5VPMGLLK94XJC
 Tags: Export WordPress, Migrate WordPress, WordPress database plugin, WordPress migration plugin, WP Migrate DB
 Requires at least: 3.6
-Tested up to: 5.3.2
+Tested up to: 5.4
 Requires PHP: 5.4
-Stable tag: 1.0.12
+Stable tag: 1.0.13
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -186,6 +186,11 @@ Find out all relevant [pricing information over on our official site](https://de
 3. Saving the exported database
 
 == Changelog ==
+
+= WP Migrate DB 1.0.13 - 2020-03-17  =
+* Bug fix: Usage of `get_magic_quotes_gpc()` triggers a warning on PHP 7.4+
+* Bug fix: WordPress `home` and `site_url` values are set incorrectly on multisite installs with the 'ms_files_rewriting' option set
+* Bug fix: PHP warning during JSON find & replace if search or replace value is empty
 
 = WP Migrate DB 1.0.12 - 2020-02-26  =
 * Bug fix: Sanitize $_GET parameter when triggering download for export

@@ -1,8 +1,5 @@
 <?php
 
-use WPForms\Tasks\Meta;
-use WPForms\Tasks\Actions\EntryEmailsTask;
-
 /**
  * Process and validate form entries.
  *
@@ -342,8 +339,8 @@ class WPForms_Process {
 		// Success - add entry to database.
 		$this->entry_id = $this->entry_save( $this->fields, $entry, $this->form_data['id'], $this->form_data );
 
-		// Check how to send emails: right now or async.
-		$this->trigger_entry_email( $this->fields, $entry, $this->form_data, $this->entry_id, 'entry' );
+		// Fire the logic to send notification emails.
+		$this->entry_email( $this->fields, $entry, $this->form_data, $this->entry_id, 'entry' );
 
 		// Pass completed and formatted fields in POST.
 		$_POST['wpforms']['complete'] = $this->fields;
@@ -572,58 +569,6 @@ class WPForms_Process {
 	}
 
 	/**
-	 * Check how to send emails: right now or async.
-	 *
-	 * @since 1.5.9
-	 *
-	 * @param array  $fields    List of fields.
-	 * @param array  $entry     Submitted form entry.
-	 * @param array  $form_data Form data and settings.
-	 * @param int    $entry_id  Saved entry id.
-	 * @param string $context   In which context this email is sent.
-	 */
-	public function trigger_entry_email( $fields, $entry, $form_data, $entry_id, $context = '' ) {
-		/*
-		 * Although we think async way to send emails is better,
-		 * we want to give a "kill-switch", that will allow to
-		 * disable sending emails in a separate process.
-		 */
-		$send_same_process = apply_filters(
-			'wpforms_tasks_entry_emails_trigger_send_same_process',
-			false,
-			$fields,
-			$entry,
-			$form_data,
-			$entry_id,
-			$context
-		);
-
-		if ( $send_same_process ) {
-			$this->entry_email( $fields, $entry, $form_data, $entry_id, $context );
-
-			return;
-		}
-
-		/*
-		 * When entries storage is disabled we assume that user doesn't want them
-		 * to be in a database (GDPR-related concerns, for example).
-		 * In this case send emails immediately "the old way".
-		 */
-		if ( ! empty( $form_data['settings']['disable_entries'] ) ) {
-			$this->entry_email( $fields, $entry, $form_data, $entry_id, $context );
-
-			return;
-		}
-
-		/*
-		 * Create a new async task, that will store all params temporarily encoded
-		 * in a custom tasks meta table and schedule to send emails in a separate process asap.
-		 */
-		( new EntryEmailsTask() )->params( $fields, $entry, $form_data, $entry_id, 'entry' )
-		                         ->register();
-	}
-
-	/**
 	 * Send entry email notifications.
 	 *
 	 * @since 1.0.0
@@ -669,19 +614,6 @@ class WPForms_Process {
 		} else {
 			$notifications = $form_data['settings']['notifications'];
 		}
-
-		/*
-		 * In our tests sometimes only 6 emails were sent using SMTP connection
-		 * during the 60 sec max_execution_time.
-		 * Reason for that is each email creates a new SMTP connection.
-		 * As this whole email sending procedure is done in the background
-		 * we can remove the limit to have "limitless" number of emails sent.
-		 *
-		 * We don't use `action_scheduler_queue_runner_time_limit` filter
-		 * because it will increase that limit for ALL actions/tasks,
-		 * and this might not be desirable.
-		 */
-		@set_time_limit( 0 );
 
 		foreach ( $notifications as $notification_id => $notification ) :
 

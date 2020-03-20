@@ -20,7 +20,7 @@
         <tbody>
             <?php
             foreach( $selected_plugins as $item ) {
-                $plugin = WPMUDEV_Dashboard::$site->get_project_infos( $item );
+                $plugin = WPMUDEV_Dashboard::$site->get_project_info( $item );
             ?>
                 <tr class='<?php echo $plugin->has_update ? esc_attr( "has-update" ): ''; ?>'>
                     <td class="dashui-item-image">

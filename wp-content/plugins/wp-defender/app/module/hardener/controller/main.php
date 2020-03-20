@@ -192,7 +192,7 @@ class Main extends Controller {
 		if ( $this->isInPage() ) {
 			wp_enqueue_style( 'defender' );
 			wp_register_script( 'defender-hardener', wp_defender()->getPluginUrl() . 'assets/app/security-tweaks.js', array(
-				'vue',
+				'def-vue',
 				'defender',
 				'wp-i18n'
 			), false, true );

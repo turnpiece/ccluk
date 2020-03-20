@@ -626,7 +626,7 @@ class WPForms_Settings {
 					<form class="wpforms-admin-settings-form" method="post">
 						<input type="hidden" name="action" value="update-settings">
 						<input type="hidden" name="view" value="<?php echo esc_attr( $this->view ); ?>">
-						<input type="hidden" name="nonce" value="<?php echo wp_create_nonce( 'wpforms-settings-nonce' ); ?>">
+						<input type="hidden" name="nonce" value="<?php echo esc_attr( wp_create_nonce( 'wpforms-settings-nonce' ) ); ?>">
 				<?php endif; ?>
 
 				<?php do_action( 'wpforms_admin_settings_before', $this->view, $fields ); ?>

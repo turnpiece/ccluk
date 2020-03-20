@@ -63,7 +63,7 @@ class Main extends Controller {
 
 			wp_enqueue_script( 'defender' );
 			wp_register_script( 'defender-settings', wp_defender()->getPluginUrl() . 'assets/app/settings.js', [
-				'vue',
+				'def-vue',
 				'defender',
 				'wp-i18n'
 			], wp_defender()->version, true );

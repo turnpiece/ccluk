@@ -71,7 +71,7 @@ class Main extends Controller {
 			wp_enqueue_media();
 			wp_enqueue_style( 'defender' );
 			wp_register_script( 'defender-adtools', wp_defender()->getPluginUrl() . 'assets/app/advanced-tools.js', array(
-				'vue',
+				'def-vue',
 				'defender',
 				'wp-i18n'
 			), wp_defender()->version, true );

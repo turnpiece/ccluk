@@ -52,6 +52,10 @@ class Tasks {
 	 */
 	public function get_tasks() {
 
+		if ( ! $this->is_usable() ) {
+			return [];
+		}
+
 		$tasks = [
 			Actions\EntryEmailsMetaCleanupTask::class,
 		];
@@ -84,8 +88,13 @@ class Tasks {
 	 *              ->params( 'The Big Lebowski', 1998 )
 	 *              ->register();
 	 *
-	 * This `wpforms_do_something_special` action will be later processed as:
+	 * This `i_am_the_dude` action will be later processed as:
 	 *     add_action( 'i_am_the_dude', 'thats_what_you_call_me' );
+	 *
+	 * Function `thats_what_you_call_me()` will receive `$meta_id` param,
+	 * and you will be able to receive all params from the action like this:
+	 *     $params = ( new Meta() )->get( (int) $meta_id );
+	 *     list( $name, $year ) = $meta->data;
 	 *
 	 * @since 1.5.9
 	 *
@@ -116,5 +125,27 @@ class Tasks {
 		if ( class_exists( 'ActionScheduler_DBStore' ) ) {
 			\ActionScheduler_DBStore::instance()->cancel_actions_by_group( $group );
 		}
+	}
+
+	/**
+	 * Whether ActionScheduler thinks that it has migrated or not.
+	 *
+	 * @since 1.5.9.3
+	 *
+	 * @return bool
+	 */
+	public function is_usable() {
+
+		// No tasks if ActionScheduler wasn't loaded.
+		if ( ! class_exists( 'ActionScheduler_DataController' ) ) {
+			return false;
+		}
+
+		// No tasks if ActionScheduler has not migrated.
+		if ( ! \ActionScheduler_DataController::is_migration_complete() ) {
+			return false;
+		}
+
+		return true;
 	}
 }

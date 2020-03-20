@@ -310,6 +310,8 @@ class WPMUDEV_Dashboard_Upgrader {
 		if ( 'direct' == get_filesystem_method() ) {
 			if ( 'plugin' == $type ) {
 				$root = WP_PLUGIN_DIR;
+			} elseif ( 'language' === $type ) {
+				$root = is_dir( WP_LANG_DIR ) ? WP_LANG_DIR : WP_CONTENT_DIR;
 			} else {
 				$root = WP_CONTENT_DIR . '/themes';
 			}
@@ -438,13 +440,13 @@ class WPMUDEV_Dashboard_Upgrader {
 			return false;
 		}
 
-		$project = WPMUDEV_Dashboard::$site->get_project_infos( $pid );
+		$project = WPMUDEV_Dashboard::$site->get_project_info( $pid );
 		$resp['type'] = $project->type;
 		$resp['filename'] = $project->filename;
 
 		// Upfront special: If updating a child theme or upfront dependant first update parent.
 		if ( $project->need_upfront ) {
-			$upfront = WPMUDEV_Dashboard::$site->get_project_infos( WPMUDEV_Dashboard::$site->id_upfront );
+			$upfront = WPMUDEV_Dashboard::$site->get_project_info( WPMUDEV_Dashboard::$site->id_upfront );
 
 			// Time condition to avoid repeated UF checks if there was an error.
 			$check = (int) WPMUDEV_Dashboard::$site->get_option( 'last_check_upfront' );
@@ -611,6 +613,102 @@ class WPMUDEV_Dashboard_Upgrader {
 	}
 
 	/**
+	 * Download and install a plugin translation files.
+	 *
+	 * A lot of logic is borrowed from ajax-actions.php
+	 *
+	 * @since  4.8.0
+	 * @param  string $slug Plugin slugs to upgrade translations.
+	 * @return bool True on success.
+	 */
+	public function upgrade_translation( $slug = '' ) {
+
+		$translations = $this->wp_format_translation_updates( $slug );
+		if ( empty( $translations ) ) {
+			$this->set_error( $slug, 'TUPG.01', __( 'WPMU Dev translations upto date', 'wpmudev' ) );
+			return false;
+		}
+
+		if( ! $this->can_auto_install( 'language' ) ){
+			$this->set_error( $slug, 'TUPG.02', __( 'Insufficient filesystem permissions', 'wpmudev' ) );
+			return false;
+		}
+
+		//for updating translations
+		include_once( ABSPATH . 'wp-admin/includes/class-wp-upgrader.php' );
+
+		$skin     = new WP_Ajax_Upgrader_Skin();
+		$upgrader = new Language_Pack_Upgrader( $skin );
+		$result   = false;
+		$success  = false;
+
+		$result   = $upgrader->bulk_upgrade( $translations );
+
+		$this->log = $skin->get_upgrade_messages();
+
+		if ( is_wp_error( $skin->get_errors() ) && ! $skin->result ) {
+			$this->set_error( $slug, 'TUPG.03', $skin->get_errors()->get_error_message() );
+			return false;
+		} elseif ( false === $result ) {
+			global $wp_filesystem;
+
+			$error = __( 'Unable to connect to the filesystem. Please confirm your credentials.' );
+
+			// Pass through the error from WP_Filesystem if one was raised.
+			if ( $wp_filesystem instanceof WP_Filesystem_Base && is_wp_error( $wp_filesystem->errors ) && $wp_filesystem->errors->get_error_code() ) {
+				$error = esc_html( $wp_filesystem->errors->get_error_message() );
+			}
+
+			$this->set_error( $slug, 'TUPG.04', $error );
+			return false;
+		} elseif ( $result ) { //this is success!
+
+			// API call to inform wpmudev site about the change, as it's a single we can let it do that at the end to avoid multiple pings
+			WPMUDEV_Dashboard::$api->calculate_translation_upgrades( true );
+			return true;
+		}
+
+		// An unhandled error occurred.
+		$this->set_error( $slug, 'TUPG.05', __( 'Update failed for an unknown reason.', 'wpmudev' ) );
+		return false;
+	}
+
+	/**
+	 * Retrieves a list of all language updates available.
+	 *
+	 * @since 4.8.0
+	 *
+	 * @param  $slug string Slug of the plugin that we are to update
+	 *
+	 * @return object[] Array of translation objects that have available updates.
+	 *
+	 */
+	public function wp_format_translation_updates( $slug = '' ) {
+		$updates      = array();
+		$translations = WPMUDEV_Dashboard::$site->get_option( 'translation_updates_available' );
+
+		//if no translations avaialbe return empty
+		if ( empty( $translations ) ) {
+			return array();
+		}
+
+		//if empty slug return all available.
+		if( empty( $slug ) ) {
+			foreach ( $translations as $key => $value ) {
+				$updates[] = (object) $value;
+			}
+		} else {
+			foreach ( $translations as $key => $value ) {
+				if( $value['slug'] === $slug ) {
+					$updates[] = (object) $value;
+					break;
+				}
+			}
+		}
+		return $updates;
+	}
+
+	/**
 	 * Install a new plugin or theme.
 	 *
 	 * A lot of logic is borrowed from ajax-actions.php
@@ -634,7 +732,7 @@ class WPMUDEV_Dashboard_Upgrader {
 				return false;
 			}
 
-			$project = WPMUDEV_Dashboard::$site->get_project_infos( $pid );
+			$project = WPMUDEV_Dashboard::$site->get_project_info( $pid );
 			if ( ! $project ) {
 				$this->set_error( $pid, 'INS.04', __( 'Invalid project', 'wpmudev' ) );
 				return false;

@@ -110,7 +110,7 @@ class Main extends \WP_Defender\Controller {
 		}
 
 		$scanning = new Scan\Component\Scanning();
-		$ret      = $scanning->do();
+		$ret      = $scanning->run();
 
 		if ( $ret == true ) {
 			//completed
@@ -140,7 +140,7 @@ class Main extends \WP_Defender\Controller {
 			wp_enqueue_style( 'defender' );
 
 			wp_register_script( 'defender-scan', wp_defender()->getPluginUrl() . 'assets/app/scan.js', [
-				'vue',
+				'def-vue',
 				'defender',
 				'wp-i18n'
 			], wp_defender()->version, true );

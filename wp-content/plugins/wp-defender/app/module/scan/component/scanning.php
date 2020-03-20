@@ -16,7 +16,7 @@ class Scanning extends Component {
 	/**
 	 * @return bool|\WP_Error
 	 */
-	public function do() {
+	public function run() {
 		$model = Scan_Api::getActiveScan();
 		$start = microtime( true );
 		if ( ! is_object( $model ) ) {
@@ -50,6 +50,8 @@ class Scanning extends Component {
 			$result = $queue->processItem();
 			if ( $result === false ) {
 				//current item fail, return
+				//moving on
+				$queue->next();
 				$queue->saveProcess();
 				$this->releaseLock();
 

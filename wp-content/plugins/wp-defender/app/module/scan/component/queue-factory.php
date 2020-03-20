@@ -4,6 +4,7 @@ namespace WP_Defender\Module\Scan\Component;
 
 use Hammer\Queue\Queue;
 use Hammer\WP\Component;
+use WP_Defender\Behavior\Utils;
 use WP_Defender\Module\Scan\Behavior\Core_Files;
 use WP_Defender\Module\Scan\Behavior\Core_Scan;
 use WP_Defender\Module\Scan\Behavior\Pro\Content_Yara_Scan;

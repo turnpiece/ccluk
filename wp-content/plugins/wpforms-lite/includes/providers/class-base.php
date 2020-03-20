@@ -1235,7 +1235,7 @@ abstract class WPForms_Provider {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param array $active Array of active connections.
+	 * @param array $active   Array of active connections.
 	 * @param array $settings Array of all connections settings.
 	 */
 	public function integrations_tab_options( $active, $settings ) {

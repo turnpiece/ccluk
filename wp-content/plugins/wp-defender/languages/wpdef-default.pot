@@ -12,9 +12,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: wp-defender 2.2.6\n"
+"Project-Id-Version: wp-defender 2.2.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-17 14:59+0700\n"
+"POT-Creation-Date: 2020-03-09 15:13+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2621,7 +2621,7 @@ msgid "Lockout Log"
 msgstr ""
 
 #: app/module/ip-lockout.php:37 app/module/ip-lockout/behavior/widget.php:26
-#: app/module/ip-lockout/controller/main.php:325
+#: app/module/ip-lockout/controller/main.php:326
 #: front/src/module/dashboard/component/ip-lockout.vue:6
 #: front/src/module/dashboard/component/quick-setup-free.vue:50
 #: front/src/module/dashboard/component/quick-setup.vue:73
@@ -2969,11 +2969,11 @@ msgstr ""
 msgid "Demo"
 msgstr ""
 
-#: app/module/ip-lockout/controller/main.php:475
+#: app/module/ip-lockout/controller/main.php:476
 msgid "Block all"
 msgstr ""
 
-#: app/module/ip-lockout/controller/main.php:476
+#: app/module/ip-lockout/controller/main.php:477
 #: front/src/module/security-tweak/component/sh-feature-policy.vue:68
 msgid "Allow all"
 msgstr ""
@@ -3851,17 +3851,17 @@ msgstr ""
 msgid "Update Plugin"
 msgstr ""
 
-#: app/module/scan/component/queue-factory.php:27
-#: app/module/scan/component/queue-factory.php:38
+#: app/module/scan/component/queue-factory.php:28
+#: app/module/scan/component/queue-factory.php:39
 msgid "Analyzing WordPress Core..."
 msgstr ""
 
-#: app/module/scan/component/queue-factory.php:54
+#: app/module/scan/component/queue-factory.php:55
 msgid "Checking for any published vulnerabilities your plugins & themes..."
 msgstr ""
 
-#: app/module/scan/component/queue-factory.php:63
-#: app/module/scan/component/queue-factory.php:76
+#: app/module/scan/component/queue-factory.php:64
+#: app/module/scan/component/queue-factory.php:77
 msgid "Analyzing WordPress Content..."
 msgstr ""
 
@@ -4553,12 +4553,10 @@ msgid ""
 msgstr ""
 
 #: dash-notice/wpmudev-dash-notification.php:223
-#: extra/dash-notice/wpmudev-dash-notification.php:223
 msgid "install"
 msgstr ""
 
 #: dash-notice/wpmudev-dash-notification.php:230
-#: extra/dash-notice/wpmudev-dash-notification.php:230
 #, php-format
 msgid ""
 "Important updates are available for <strong>%s</strong>. Install the free "
@@ -4566,7 +4564,6 @@ msgid ""
 msgstr ""
 
 #: dash-notice/wpmudev-dash-notification.php:232
-#: extra/dash-notice/wpmudev-dash-notification.php:232
 #, php-format
 msgid ""
 "<strong>%s</strong> is almost ready - install the free WPMU DEV Dashboard "
@@ -4574,47 +4571,37 @@ msgid ""
 msgstr ""
 
 #: dash-notice/wpmudev-dash-notification.php:236
-#: extra/dash-notice/wpmudev-dash-notification.php:236
 msgid ""
 "Important updates are available for your WPMU DEV plugins/themes. Install "
 "the free WPMU DEV Dashboard plugin now for updates and support!"
 msgstr ""
 
 #: dash-notice/wpmudev-dash-notification.php:238
-#: extra/dash-notice/wpmudev-dash-notification.php:238
 msgid ""
 "Almost ready - install the free WPMU DEV Dashboard plugin for updates and "
 "support!"
 msgstr ""
 
 #: dash-notice/wpmudev-dash-notification.php:244
-#: extra/dash-notice/wpmudev-dash-notification.php:244
 msgid "Install Plugin"
 msgstr ""
 
 #: dash-notice/wpmudev-dash-notification.php:247
 #: dash-notice/wpmudev-dash-notification.php:288
-#: extra/dash-notice/wpmudev-dash-notification.php:247
-#: extra/dash-notice/wpmudev-dash-notification.php:288
 msgid "Saving..."
 msgstr ""
 
 #: dash-notice/wpmudev-dash-notification.php:248
 #: dash-notice/wpmudev-dash-notification.php:289
-#: extra/dash-notice/wpmudev-dash-notification.php:248
-#: extra/dash-notice/wpmudev-dash-notification.php:289
-#: extra/recommended-plugins-notice/notice.php:491
 #: recommended-plugins-notice/notice.php:491
 msgid "Dismiss"
 msgstr ""
 
 #: dash-notice/wpmudev-dash-notification.php:264
-#: extra/dash-notice/wpmudev-dash-notification.php:264
 msgid "activate"
 msgstr ""
 
 #: dash-notice/wpmudev-dash-notification.php:271
-#: extra/dash-notice/wpmudev-dash-notification.php:271
 #, php-format
 msgid ""
 "Important updates are available for <strong>%s</strong>. Activate the WPMU "
@@ -4622,69 +4609,58 @@ msgid ""
 msgstr ""
 
 #: dash-notice/wpmudev-dash-notification.php:273
-#: extra/dash-notice/wpmudev-dash-notification.php:273
 #, php-format
 msgid ""
 "Just one more step to enable updates and support for <strong>%s</strong>!"
 msgstr ""
 
 #: dash-notice/wpmudev-dash-notification.php:277
-#: extra/dash-notice/wpmudev-dash-notification.php:277
 msgid ""
 "Important updates are available for your WPMU DEV plugins/themes. Activate "
 "the WPMU DEV Dashboard to update now!"
 msgstr ""
 
 #: dash-notice/wpmudev-dash-notification.php:279
-#: extra/dash-notice/wpmudev-dash-notification.php:279
 msgid ""
 "Just one more step - activate the WPMU DEV Dashboard plugin and you're all "
 "done!"
 msgstr ""
 
 #: dash-notice/wpmudev-dash-notification.php:285
-#: extra/dash-notice/wpmudev-dash-notification.php:285
 msgid "Activate WPMU DEV Dashboard"
 msgstr ""
 
 #: dash-notice/wpmudev-dash-notification.php:952
-#: extra/dash-notice/wpmudev-dash-notification.php:952
 msgid "We did not find any data for this plugin or theme..."
 msgstr ""
 
 #: dash-notice/wpmudev-dash-notification.php:1131
-#: extra/dash-notice/wpmudev-dash-notification.php:1131
 #, php-format
 msgid "%s changelog"
 msgstr ""
 
 #: dash-notice/wpmudev-dash-notification.php:1161
-#: extra/dash-notice/wpmudev-dash-notification.php:1161
 msgid "Current"
 msgstr ""
 
 #: dash-notice/wpmudev-dash-notification.php:1167
-#: extra/dash-notice/wpmudev-dash-notification.php:1167
 msgid "New"
 msgstr ""
 
 #: dash-notice/wpmudev-dash-notification.php:1184
-#: extra/dash-notice/wpmudev-dash-notification.php:1184
 #, php-format
 msgid "Version %s"
 msgstr ""
 
 #: dash-notice/wpmudev-dash-notification.php:1202
-#: extra/dash-notice/wpmudev-dash-notification.php:1202
 msgid "Show all changes"
 msgstr ""
 
 #: dash-notice/wpmudev-dash-notification.php:1203
-#: extra/dash-notice/wpmudev-dash-notification.php:1203
 msgid "Hide details"
 msgstr ""
 
-#: extra/free-dashboard/module.php:386 free-dashboard/module.php:386
+#: free-dashboard/module.php:386
 #, php-format
 msgid ""
 "We're happy that you've chosen to install %s! Are you interested in how to "
@@ -4693,70 +4669,34 @@ msgid ""
 "info you want, no subscription!"
 msgstr ""
 
-#: extra/free-dashboard/module.php:413 extra/free-dashboard/module.php:474
 #: free-dashboard/module.php:402 free-dashboard/module.php:438
 msgid "Thanks :)"
 msgstr ""
 
-#: extra/free-dashboard/module.php:416 extra/free-dashboard/module.php:481
 #: free-dashboard/module.php:405 free-dashboard/module.php:445
 msgid "Saving"
 msgstr ""
 
-#: extra/free-dashboard/module.php:417 extra/free-dashboard/module.php:482
 #: free-dashboard/module.php:406 free-dashboard/module.php:446
 msgid "No thanks"
 msgstr ""
 
-#: extra/free-dashboard/module.php:459 free-dashboard/module.php:423
+#: free-dashboard/module.php:423
 #, php-format
 msgid ""
 "Hey %s, you've been using %s for a while now, and we hope you're happy with "
 "it."
 msgstr ""
 
-#: extra/free-dashboard/module.php:459 free-dashboard/module.php:423
+#: free-dashboard/module.php:423
 msgid ""
 "We've spent countless hours developing this free plugin for you, and we "
 "would really appreciate it if you dropped us a quick rating!"
 msgstr ""
 
-#: extra/free-dashboard/module.php:477 free-dashboard/module.php:441
+#: free-dashboard/module.php:441
 #, php-format
 msgid "Rate %s"
-msgstr ""
-
-#: extra/recommended-plugins-notice/notice.php:194
-#: recommended-plugins-notice/notice.php:194
-#, php-format
-msgid "Enjoying %s? Try out a few of our other popular free plugins..."
-msgstr ""
-
-#: extra/recommended-plugins-notice/notice.php:286
-#: recommended-plugins-notice/notice.php:286
-msgid "Resize, optimize and compress all of your images to the max."
-msgstr ""
-
-#: extra/recommended-plugins-notice/notice.php:294
-#: recommended-plugins-notice/notice.php:294
-msgid "Add powerful caching and optimize your assets."
-msgstr ""
-
-#: extra/recommended-plugins-notice/notice.php:302
-#: extra/recommended-plugins-notice/notice.php:318
-#: recommended-plugins-notice/notice.php:302
-#: recommended-plugins-notice/notice.php:318
-msgid "Create dynamic forms easily and quickly with our form builder."
-msgstr ""
-
-#: extra/recommended-plugins-notice/notice.php:310
-#: recommended-plugins-notice/notice.php:310
-msgid "Configure your markup for optimal page and social ranking."
-msgstr ""
-
-#: extra/recommended-plugins-notice/notice.php:326
-#: recommended-plugins-notice/notice.php:326
-msgid "Generate leads with pop-ups, slide-ins and email opt-ins."
 msgstr ""
 
 #: free/main-activator.php:132
@@ -4854,6 +4794,32 @@ msgstr ""
 
 #: node_modules/node-wp-i18n/test/fixtures/makepot/nested-theme/subdir/index.php:2
 msgid "Index"
+msgstr ""
+
+#: recommended-plugins-notice/notice.php:194
+#, php-format
+msgid "Enjoying %s? Try out a few of our other popular free plugins..."
+msgstr ""
+
+#: recommended-plugins-notice/notice.php:286
+msgid "Resize, optimize and compress all of your images to the max."
+msgstr ""
+
+#: recommended-plugins-notice/notice.php:294
+msgid "Add powerful caching and optimize your assets."
+msgstr ""
+
+#: recommended-plugins-notice/notice.php:302
+#: recommended-plugins-notice/notice.php:318
+msgid "Create dynamic forms easily and quickly with our form builder."
+msgstr ""
+
+#: recommended-plugins-notice/notice.php:310
+msgid "Configure your markup for optimal page and social ranking."
+msgstr ""
+
+#: recommended-plugins-notice/notice.php:326
+msgid "Generate leads with pop-ups, slide-ins and email opt-ins."
 msgstr ""
 
 #: front/src/component/recipients.vue:5

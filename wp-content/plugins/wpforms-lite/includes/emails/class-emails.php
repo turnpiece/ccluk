@@ -1,5 +1,7 @@
 <?php
 
+use WPForms\Tasks\Actions\EntryEmailsTask;
+
 /**
  * Emails.
  *
@@ -144,6 +146,7 @@ class WPForms_WP_Emails {
 	 * @param mixed  $value Object property value.
 	 */
 	public function __set( $key, $value ) {
+
 		$this->$key = $value;
 	}
 
@@ -323,9 +326,9 @@ class WPForms_WP_Emails {
 	 *
 	 * @since 1.1.3
 	 *
-	 * @param string $to The To address.
-	 * @param string $subject The subject line of the email.
-	 * @param string $message The body of the email.
+	 * @param string $to          The To address.
+	 * @param string $subject     The subject line of the email.
+	 * @param string $message     The body of the email.
 	 * @param array  $attachments Attachments to the email.
 	 *
 	 * @return bool
@@ -376,19 +379,45 @@ class WPForms_WP_Emails {
 			$this
 		);
 
-		// Let's do this.
-		$sent = wp_mail(
-			$data['to'],
-			wpforms_decode_string( $this->process_tag( $data['subject'] ) ),
-			$this->build_email( $data['message'] ),
-			$data['headers'],
-			$data['attachments']
+		$send_same_process = apply_filters(
+			'wpforms_tasks_entry_emails_trigger_send_same_process',
+			false,
+			$this->fields,
+			! empty( wpforms()->entry ) ? wpforms()->entry->get( $this->entry_id ) : [],
+			$this->form_data,
+			$this->entry_id,
+			'entry'
 		);
+
+		if (
+			$send_same_process ||
+			! empty( $this->form_data['settings']['disable_entries'] )
+		) {
+			// Let's do this NOW.
+			$result = wp_mail(
+				$data['to'],
+				wpforms_decode_string( $this->process_tag( $data['subject'] ) ),
+				$this->build_email( $data['message'] ),
+				$data['headers'],
+				$data['attachments']
+			);
+		} else {
+			// Schedule the email.
+			$result = (bool) ( new EntryEmailsTask() )
+				->params(
+					$data['to'],
+					wpforms_decode_string( $this->process_tag( $data['subject'] ) ),
+					$this->build_email( $data['message'] ),
+					$data['headers'],
+					$data['attachments']
+				)
+				->register();
+		}
 
 		// Hooks after the email is sent.
 		do_action( 'wpforms_email_send_after', $this );
 
-		return $sent;
+		return $result;
 	}
 
 	/**
@@ -540,9 +569,8 @@ class WPForms_WP_Emails {
 					$field_val  = empty( $this->fields[ $field_id ]['value'] ) && ! is_numeric( $this->fields[ $field_id ]['value'] ) ? '<em>' . esc_html__( '(empty)', 'wpforms-lite' ) . '</em>' : $this->fields[ $field_id ]['value'];
 				}
 
-				if ( empty( $field_name ) && ! is_null( $field_name ) ) {
-					$field_name = sprintf(
-						/* translators: %d - field ID. */
+				if ( empty( $field_name ) && null !== $field_name ) {
+					$field_name = sprintf( /* translators: %d - field ID. */
 						esc_html__( 'Field ID #%d', 'wpforms-lite' ),
 						absint( $field['id'] )
 					);
@@ -560,7 +588,8 @@ class WPForms_WP_Emails {
 						'wpforms_html_field_value',
 						wpforms_decode_string( $field_val ),
 						isset( $this->fields[ $field_id ] ) ? $this->fields[ $field_id ] : $field,
-						$this->form_data, 'email-html'
+						$this->form_data,
+						'email-html'
 					),
 					$field_item
 				);
@@ -586,8 +615,7 @@ class WPForms_WP_Emails {
 				$field_name = $field['name'];
 
 				if ( empty( $field_name ) ) {
-					$field_name = sprintf(
-						/* translators: %d - field ID. */
+					$field_name = sprintf( /* translators: %d - field ID. */
 						esc_html__( 'Field ID #%d', 'wpforms-lite' ),
 						absint( $field['id'] )
 					);
@@ -615,6 +643,7 @@ class WPForms_WP_Emails {
 	 * @return bool
 	 */
 	public function is_email_disabled() {
+
 		return (bool) apply_filters( 'wpforms_disable_all_emails', false, $this );
 	}
 

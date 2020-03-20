@@ -347,7 +347,7 @@ class Main extends \WP_Defender\Controller {
 			wp_enqueue_style( 'defender' );
 
 			wp_register_script( 'defender-audit', wp_defender()->getPluginUrl() . 'assets/app/audit.js', array(
-				'vue',
+				'def-vue',
 				'defender',
 				'wp-i18n'
 			), wp_defender()->version, true );

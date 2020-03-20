@@ -90,7 +90,7 @@ if( 'full' === $membership_type ):
 									tabindex="4"
 									style="display:inline-block; position:relative; width:40%"
 									>
-									<?php esc_html_e( 'Updates', 'wpmudev' ); ?> <span class="sui-tag sui-tag-yellow sui-tag-sm" style="right: -25px;"><?php echo esc_html( $update_plugins ); ?></span>
+									<?php esc_html_e( 'Updates', 'wpmudev' ); ?> <span class="sui-tag sui-tag-yellow sui-tag-sm" style="<?php echo is_rtl() ? 'right: -30px': 'right: -25px;'?>"><?php echo esc_html( $update_plugins ); ?></span>
 								</a>
 							</li>
 						<?php endif; ?>
@@ -208,7 +208,7 @@ if( 'full' === $membership_type ):
 
 			<div class="sui-box-body">
 
-				<?php $this->load_sui_template( 'element-last-refresh', array(), true ); ?>
+				<?php $this->render( 'sui/element-last-refresh' ); ?>
 
 			</div>
 
@@ -382,7 +382,7 @@ if( 'full' === $membership_type ):
 					</div>
 
 					<div class="sui-notice js-bulk-message-need-reload" style="text-align:left">
-						<p><?php esc_html_e( 'This page need to be reloaded before changes you just made become visible.', 'wpmudev' ); ?></p>
+						<p><?php esc_html_e( 'This page needs to be reloaded before changes you just made become visible.', 'wpmudev' ); ?></p>
 						<div class="sui-notice-buttons">
 							<a href="" class="sui-button"><?php esc_html_e( 'Reload now', 'wpmudev' ); ?></a>
 						</div>
@@ -446,7 +446,7 @@ if( 'full' === $membership_type ):
 		</div>
 	</div>
 
-	<?php $this->load_sui_template( 'footer', array(), true ); ?>
+	<?php $this->render( 'sui/footer' ); ?>
 <?php endif; ?>
 
 <?php
@@ -454,6 +454,6 @@ if ( 'free' === $membership_type || 'single' === $membership_type ) {
 	$this->render_upgrade_box( $membership_type );
 }
 if ( ! WPMUDEV_Dashboard::$upgrader->can_auto_install( 'plugin' ) ) {
-	$this->load_sui_template( 'popup-ftp-details', array(), true );
+	$this->render( 'sui/popup-ftp-details' );
 }
 ?>

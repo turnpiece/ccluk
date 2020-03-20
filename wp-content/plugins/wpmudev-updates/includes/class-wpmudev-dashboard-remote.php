@@ -189,6 +189,7 @@ class WPMUDEV_Dashboard_Remote {
 			return;
 		}
 
+
 		$this->register_internal_actions();
 		$this->register_plugin_actions();
 
@@ -197,7 +198,7 @@ class WPMUDEV_Dashboard_Remote {
 
 		$this->validate_hash( $_GET['wpmudev-hub'], $raw_json );
 
-		$body = json_decode( stripslashes( $raw_json ) );
+		$body = json_decode( $raw_json );
 		if ( ! isset( $body->action ) ) {
 			wp_send_json_error( array( 'code' => 'invalid_params', 'message' => 'The "action" parameter is missing' ) );
 		}

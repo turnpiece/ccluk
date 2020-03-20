@@ -154,7 +154,7 @@ class Dashboard extends Controller {
 
 	public function getScanProgress() {
 		$scanning = new Scanning();
-		$ret      = $scanning->do();
+		$ret      = $scanning->run();
 		if ( is_wp_error( $ret ) ) {
 			wp_send_json_error( array(
 				'message' => $ret->get_error_message()
@@ -408,7 +408,7 @@ class Dashboard extends Controller {
 	public function scripts() {
 		wp_enqueue_style( 'defender' );
 		wp_register_script( 'defender-dashboard', wp_defender()->getPluginUrl() . 'assets/app/dashboard.js', array(
-			'vue',
+			'def-vue',
 			'defender',
 			'wp-i18n'
 		), wp_defender()->version, true );

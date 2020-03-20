@@ -771,16 +771,16 @@ $time_format = get_option( 'time_format' );
 		</div>
 
 		<div class="sui-box-body">
-			<?php $this->load_sui_template( 'part-system-info', array(), true ); ?>
+			<?php $this->render( 'sui/part-system-info' ); ?>
 		</div>
 
 	</div>
 
 </div>
 
-<?php $this->load_sui_template( 'element-last-refresh', array(), true ); ?>
+<?php $this->render( 'sui/element-last-refresh' ); ?>
 
-<?php $this->load_sui_template( 'footer', array(), true ); ?>
+<?php $this->render( 'sui/footer' ); ?>
 
 <div class="sui-dialog" aria-hidden="true" tabindex="-1" id="security-details">
 

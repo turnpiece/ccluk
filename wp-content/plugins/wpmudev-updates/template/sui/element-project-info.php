@@ -6,7 +6,13 @@ if ( ! $pid ) {
 	return;
 }
 
-$res = WPMUDEV_Dashboard::$site->get_project_infos( $pid );
+//for backward compatibility while updating.
+if ( method_exists( WPMUDEV_Dashboard::$site, 'get_project_info' ) ) {
+	$res = WPMUDEV_Dashboard::$site->get_project_info( $pid );
+
+} else {
+	$res = WPMUDEV_Dashboard::$site->get_project_infos( $pid );
+}
 
 // Skip invalid projects.
 if ( empty( $res->pid ) || empty( $res->name ) ) {
@@ -558,32 +564,33 @@ foreach ( $res->tags as $tid => $plugin_tag ) {
 							       id="bulk-action-<?php echo esc_attr( $pid ); ?>"
 							       class="js-plugin-check"/>
 							<span aria-hidden="true"></span>
-							<span class="sui-screen-reader-text"><?php esc_html_e( 'Select this plugin', 'wpmudev' ); ?></span>
+							<span class="sui-screen-reader-text"><?php printf('%s %s', esc_html_e('Select this plugin ', 'wpmudev'), $res->name); ?></span>
 						</label>
 
 						<div class="dashui-plugin-image plugin-image"
-						     style="position:relative;"
-							 aria-hidden="true">
-							 <?php if ( $res->has_update || ! $res->is_installed ): ?>
-							 	<?php echo $res->has_update ? '<span class="dashui-update-dot"></span>' : ''; ?>
+						     style="position:relative;">
+							<?php if ( $res->has_update || ! $res->is_installed ): ?>
+								<?php echo $res->has_update ? '<span class="dashui-update-dot" aria-hidden="true"></span>' : ''; ?>
 								<img
-								src="<?php echo esc_url( $res->url->thumbnail_square ); ?>"
-								class="sui-image plugin-image js-show-plugin-modal"
-								style="width:30px;height:30px; border-radius: 5px;"
-								data-action="<?php echo $res->has_update ? 'changelog' : 'info'; ?>"
-					        	data-project="<?php echo esc_attr( $pid ); ?>"
+									src="<?php echo esc_url( $res->url->thumbnail_square ); ?>"
+									class="sui-image plugin-image js-show-plugin-modal"
+									style="width:30px;height:30px; border-radius: 5px;"
+									aria-hidden="true"
+									data-action="<?php echo $res->has_update ? 'changelog' : 'info'; ?>"
+									data-project="<?php echo esc_attr( $pid ); ?>"
 								>
 							<?php else: ?>
 								<a href="<?php echo esc_url( $res->url->config ); ?>">
 									<img
 										src="<?php echo esc_url( $res->url->thumbnail_square ); ?>"
 										class="sui-image plugin-image"
+										aria-hidden="true"
 										style="width:30px;height:30px; border-radius: 5px;"
 										data-project="<?php echo esc_attr( $pid ); ?>"
 									>
+									<span class="sui-screen-reader-text"><?php printf('%s %s', $res->name, esc_html_e( ' settings', 'wpmudev' )); ?></span>
 								</a>
 							<?php endif; ?>
-
 						</div>
 						<?php if ( $res->has_update || ! $res->is_installed ): ?>
 							<button class="dashui-plugin-name js-show-plugin-modal"
@@ -591,7 +598,7 @@ foreach ( $res->tags as $tid => $plugin_tag ) {
 									data-project="<?php echo esc_attr( $pid ); ?>">
 								<?php
 								if( $res->is_installed ):
-									printf( '%s <span class="sui-tag sui-tag-sm" style="margin-left:10px;">v%s</span>', esc_html( $res->name ), esc_html( $res->version_installed ) );
+									printf( '%s <span class="sui-tag sui-tag-sm" style="margin-left:10px;">v%s</span>', esc_html( $res->name ), esc_html( $res->version_installed ) );	 	 	 	 	 		    	
 								else:
 									echo esc_html( $res->name );
 								endif; ?>
@@ -643,6 +650,7 @@ foreach ( $res->tags as $tid => $plugin_tag ) {
 									data-action="changelog"
 									data-project="<?php echo esc_attr( $pid ); ?>">
 									<span class="sui-tag sui-tag-sm" style="margin-left:10px; cursor:pointer;">v<?php echo $res->version_installed; ?></span>
+									<span class="sui-screen-reader-text"><?php esc_html_e('Show changelog', 'wpmudev'); ?></span>
 								</a>
 								<div class="dashui-desktop-hidden" style="display:inline-block; margin-left:5px;">
 									<?php if( $res->has_update ){ ?>
@@ -1025,11 +1033,11 @@ foreach ( $res->tags as $tid => $plugin_tag ) {
 		     data-hash="<?php echo esc_attr( wp_create_nonce( 'show-popup' ) ); ?>">
 
 			<div class="sui-dialog-overlay" data-a11y-dialog-hide></div>
-			<div class="sui-dialog-content" aria-labelledby="dialogTitle" aria-describedby="dialogDescription" role="dialog">
+			<div class="sui-dialog-content" aria-labelledby="dialogTitle<?php echo esc_attr( $pid ); ?>2" aria-describedby="dialogDescription<?php echo esc_attr( $pid ); ?>2" role="dialog">
 				<div class="sui-box" role="document">
 
 					<div class="sui-box-header">
-						<h3 class="sui-box-title" id="dialogTitle"><?php echo esc_html( $res->name ); ?></h3>
+						<h3 class="sui-box-title" id="dialogTitle<?php echo esc_attr( $pid ); ?>2"><?php echo esc_html( $res->name ); ?></h3>
 						<div class="sui-actions-right">
 
 							<?php if ( ! empty( $incompatible_reason ) ) : ?>
@@ -1153,30 +1161,31 @@ foreach ( $res->tags as $tid => $plugin_tag ) {
 
 			<div class="sui-dialog-overlay" data-a11y-dialog-hide></div>
 
-			<div class="sui-dialog-content" aria-labelledby="dialogTitle" aria-describedby="dialogDescription" role="dialog">
+			<div class="sui-dialog-content" aria-labelledby="dialogTitle<?php echo esc_attr( $pid ); ?>" aria-describedby="dialogDescription<?php echo esc_attr( $pid ); ?>" role="dialog">
 
 				<div class="sui-box" role="document">
 
 
 					<div class="sui-box-header">
-						<h3 class="sui-box-title" id="dialogTitle"><?php echo esc_html( sprintf( __( '%s installed!', 'wpmudev' ), $res->name ) ); ?></h3>
+						<h3 class="sui-box-title" id="dialogTitle<?php echo esc_attr( $pid ); ?>"><?php echo esc_html( sprintf( __( '%s installed!', 'wpmudev' ), $res->name ) ); ?></h3>
 						<div class="sui-actions-right">
-							<a data-a11y-dialog-hide class="sui-dialog-close" aria-label="<?php esc_html_e( 'Close this dialog window', 'wpmudev' ); ?>"></a>
+							<a data-a11y-dialog-hide class="sui-dialog-close" aria-label="<?php esc_html_e( 'Close this dialog window', 'wpmudev' ); ?>" href="#"></a>
 						</div>
 					</div>
 
 					<div class="sui-box-body">
-						<p id="dialogDescription">
+						<p id="dialogDescription<?php echo esc_attr( $pid ); ?>">
 							<?php esc_html_e( 'Would you like to activate it now?', 'wpmudev' ); ?>
 						</p>
 					</div>
 
 					<div class="sui-box-footer">
-						<a class="sui-button sui-button-ghost" data-a11y-dialog-hide="admin-add"><?php esc_html_e( 'CONTINUE', 'wpmudev' ); ?></a>
+						<a class="sui-button sui-button-ghost" data-a11y-dialog-hide="admin-add" href="#"><?php esc_html_e( 'CONTINUE', 'wpmudev' ); ?></a>
 						<a class="sui-button sui-button-blue"
-						   data-action="project-activate"
-						   data-hash="<?php echo esc_attr( $hashes['project-activate'] ); ?>"
-						   data-project="<?php echo esc_attr( $pid ); ?>"
+							data-action="project-activate"
+							href="#"
+							data-hash="<?php echo esc_attr( $hashes['project-activate'] ); ?>"
+							data-project="<?php echo esc_attr( $pid ); ?>"
 						>
 							<span class="sui-loading-text">
 								<?php esc_html_e( 'ACTIVATE', 'wpmudev' ); ?>

@@ -61,7 +61,7 @@ global $wp_version;
 
 		<div class="sui-box-body">
 
-			<?php $this->load_sui_template( 'part-system-info', array(), true ); ?>
+			<?php $this->render( 'sui/part-system-info' ); ?>
 
 		</div>
 

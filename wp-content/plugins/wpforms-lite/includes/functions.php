@@ -1807,59 +1807,64 @@ function wpforms_get_day_period_date( $period, $timestamp = '', $format = 'Y-m-d
  */
 function wpforms_get_providers_all() {
 
-	$providers = array(
-		array(
+	return [
+		[
 			'name'        => 'ActiveCampaign',
 			'slug'        => 'activecampaign',
 			'img'         => 'addon-icon-activecampaign.png',
 			'plugin'      => 'wpforms-activecampaign/wpforms-activecampaign.php',
 			'plugin_slug' => 'wpforms-activecampaign',
-		),
-		array(
+			'license'     => 'elite',
+		],
+		[
 			'name'        => 'AWeber',
 			'slug'        => 'aweber',
 			'img'         => 'addon-icon-aweber.png',
 			'plugin'      => 'wpforms-aweber/wpforms-aweber.php',
 			'plugin_slug' => 'wpforms-aweber',
-		),
-		array(
+			'license'     => 'pro',
+		],
+		[
 			'name'        => 'Campaign Monitor',
 			'slug'        => 'campaign-monitor',
 			'img'         => 'addon-icon-campaign-monitor.png',
 			'plugin'      => 'wpforms-campaign-monitor/wpforms-campaign-monitor.php',
 			'plugin_slug' => 'wpforms-campaign-monitor',
-		),
-		array(
+			'license'     => 'pro',
+		],
+		[
 			'name'        => 'Drip',
 			'slug'        => 'drip',
 			'img'         => 'addon-icon-drip.png',
 			'plugin'      => 'wpforms-drip/wpforms-drip.php',
 			'plugin_slug' => 'wpforms-drip',
-		),
-		array(
+			'license'     => 'pro',
+		],
+		[
 			'name'        => 'GetResponse',
 			'slug'        => 'getresponse',
 			'img'         => 'addon-icon-getresponse.png',
 			'plugin'      => 'wpforms-getresponse/wpforms-getresponse.php',
 			'plugin_slug' => 'wpforms-getresponse',
-		),
-		array(
+			'license'     => 'pro',
+		],
+		[
 			'name'        => 'Mailchimp',
 			'slug'        => 'mailchimp',
 			'img'         => 'addon-icon-mailchimp.png',
 			'plugin'      => 'wpforms-mailchimp/wpforms-mailchimp.php',
 			'plugin_slug' => 'wpforms-mailchimp',
-		),
-		array(
+			'license'     => 'pro',
+		],
+		[
 			'name'        => 'Zapier',
 			'slug'        => 'zapier',
 			'img'         => 'addon-icon-zapier.png',
 			'plugin'      => 'wpforms-zapier/wpforms-zapier.php',
 			'plugin_slug' => 'wpforms-zapier',
-		),
-	);
-
-	return $providers;
+			'license'     => 'pro',
+		],
+	];
 }
 
 /**
@@ -1938,6 +1943,7 @@ function wpforms_update_providers_options( $provider, $options, $key = '' ) {
  */
 function wpforms_is_admin_page( $slug = '', $view = '' ) {
 
+	// phpcs:disable WordPress.Security.NonceVerification.Recommended
 	// Check against basic requirements.
 	if (
 		! is_admin() ||
@@ -1962,6 +1968,7 @@ function wpforms_is_admin_page( $slug = '', $view = '' ) {
 	) {
 		return false;
 	}
+	// phpcs:enable
 
 	return true;
 }

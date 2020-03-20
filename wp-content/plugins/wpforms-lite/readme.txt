@@ -3,7 +3,7 @@ Contributors: wpforms, jaredatch, smub, slaFFik
 Tags: contact form, contact form plugin, forms, form builder, custom form, contact button, contact me, custom contact form, form manager, form, forms builder, forms creator, captcha, recaptcha, Akismet, email form, web form, feedback form, payment form, survey form, donation form, email submit form, message form, mailchimp, mailchimp form, aweber, aweber form, paypal, paypal form, stripe, stripe form, getresponse, getresponse form, email subscription, contact form widget, user registration form, wordpress registration, wordpress login form, feedback
 Requires at least: 4.9
 Tested up to: 5.3
-Stable tag: 1.5.9.1
+Stable tag: 1.5.9.5
 Requires PHP: 5.5
 License: GNU General Public License v2.0 or later
 
@@ -400,6 +400,13 @@ Thank you
 Syed Balkhi
 
 == Changelog ==
+
+= 1.5.9.5 =
+- Fixed: do not try to process entries in Lite.
+
+= 1.5.9.4 =
+- Changed: Improve async notification emails scheduling compatibility with certain caching plugins and site installs.
+- Fixed: Some smart tags are not rendered correctly in the email notifications if sent asynchronously.
 
 = 1.5.9.1 =
 - Fixed: Checkbox image click doesn't work well to select an option.

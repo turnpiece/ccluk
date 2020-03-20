@@ -350,7 +350,7 @@
 			},
 			geodb_download_instruction: function () {
 				let strings = '<span class="sui-description">' + this.vsprintf(this.__("1. <a target='_blank' href='%s'>Sign up</a> for GeoLite2 Downloadable Databases."), "https://www.maxmind.com/en/geolite2/signup") + '</span>'
-				strings += '<span class="sui-description">' + this.vsprintf(this.__('2. Login to your account and follow <a target="_blank" href="%s">this link</a> to copy the API key.'), "https://www.maxmind.com/en/accounts/194122/license-key") + '</span>'
+				strings += '<span class="sui-description">' + this.vsprintf(this.__('2. Login to your account and follow <a target="_blank" href="%s">this link</a> to copy the API key.'), "https://www.maxmind.com/en/accounts/current/license-key") + '</span>'
 				strings += '<span class="sui-description">' + this.__('3. Place the API key in the input below and click the download button.') + '</span>'
 				return strings;
 			}

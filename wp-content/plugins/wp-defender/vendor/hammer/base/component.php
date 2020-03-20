@@ -305,7 +305,10 @@ class Component extends HObject {
 	public function __set( $name, $value ) {
 		$refClass = new \ReflectionClass( $this );
 		if ( $refClass->hasProperty( $name ) ) {
-			$refClass->getProperty( $name )->setValue( $value );
+			$prop = $refClass->getProperty( $name );
+			if ( $prop->isPublic() ) {
+				$prop->setValue( $value );
+			}
 
 			return;
 		}

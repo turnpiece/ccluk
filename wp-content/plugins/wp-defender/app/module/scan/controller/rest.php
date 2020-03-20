@@ -299,7 +299,7 @@ class Rest extends Controller {
 
 		//$ret = Scan\Component\Scan_Api::processActiveScan();
 		$scanning = new Scan\Component\Scanning();
-		$ret      = $scanning->do();
+		$ret      = $scanning->run();
 		if ( $ret == true ) {
 			do_action( 'sendScanEmail' );
 

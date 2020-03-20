@@ -69,7 +69,7 @@ class SiteHealth implements IntegrationInterface {
 		// License key type.
 		$wpforms['fields']['license'] = array(
 			'label' => esc_html__( 'License key type', 'wpforms-lite' ),
-			'value' => wpforms_setting( 'type', '', 'wpforms_license' ),
+			'value' => wpforms_get_license_type(),
 		);
 
 		// Install date.

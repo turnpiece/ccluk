@@ -53,6 +53,9 @@ class Yara_Engine {
 				}
 			}
 		}
+		if ( ! is_array( $rule['strings'] ) ) {
+			$rule['strings'] = [];
+		}
 		foreach ( $rule['strings'] as $string ) {
 			switch ( $string['type'] ) {
 				case 0:

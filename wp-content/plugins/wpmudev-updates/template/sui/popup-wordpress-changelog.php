@@ -11,7 +11,7 @@
  * @package WPMUDEV_Dashboard
  */
 
-$item = WPMUDEV_Dashboard::$site->get_project_infos( $pid, true );
+$item = WPMUDEV_Dashboard::$site->get_project_info( $pid, true );
 
 if ( ! $item || ! is_object( $item ) ) {
 	return;
@@ -35,7 +35,7 @@ $dlg_id = 'dlg-' . md5( time() . '-' . $pid );
 		font-size: 15px;
 	}
 	h1, h2, h3, h4 {
-		font-family: 'Roboto Condensed', 'Roboto', 'Helvetica Neue', Helvetica, sans-serif;	 	 	 	 	 		    	
+		font-family: 'Roboto Condensed', 'Roboto', 'Helvetica Neue', Helvetica, sans-serif;
 		font-weight: 700;
 		color: #777771;
 	}

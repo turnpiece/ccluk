@@ -269,6 +269,7 @@ class Main extends Controller {
 	 * @param Log_Model $log
 	 */
 	public function updateIpStats( Log_Model $log ) {
+
 		if ( $log->type == Log_Model::AUTH_FAIL ) {
 			Login_Protection_Api::maybeLock( $log );
 		} elseif ( $log->type == Log_Model::ERROR_404 ) {
@@ -336,7 +337,7 @@ class Main extends Controller {
 			wp_enqueue_style( 'wpmudev-sui' );
 			wp_enqueue_style( 'defender' );
 			wp_register_script( 'defender-iplockout', wp_defender()->getPluginUrl() . 'assets/app/ip-lockout.js', array(
-				'vue',
+				'def-vue',
 				'defender',
 				'wp-i18n'
 			), wp_defender()->version, true );
