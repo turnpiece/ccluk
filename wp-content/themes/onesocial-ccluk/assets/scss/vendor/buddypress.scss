@@ -3066,13 +3066,12 @@ body #buddypress div.buddyboss-media-form-wrapper div#invite-list ul li {
   position: relative;
 }
 
-body {
-  #groups-dir-list .group-subscription-div, #groups-list .group-subscription-div {
-    padding-top: 0;
-    margin-bottom: 20px;
+#buddypress {
+  .group-subscription-div {
+    display: none;
   }
 }
-
+/*
 #secondary div.generic-button.group-subscription-options {
   position: absolute;
   width: 100%;
@@ -3147,7 +3146,7 @@ body {
   margin-top: 5px;
 }
 
-
+*/
 
 #buddypress {
     #object-nav .sub-menu {
