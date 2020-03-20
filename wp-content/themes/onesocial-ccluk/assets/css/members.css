@@ -3805,7 +3805,8 @@ body #groups-list .group-subscription-options {
   display: none;
 }
 
-#secondary div.generic-button.group-subscription-options a.group-subscription-close, #buddypress #groups-list a.group-subscription-close {
+#secondary div.generic-button.group-subscription-options a.group-subscription-close,
+#buddypress #groups-list a.group-subscription-close {
   background-color: transparent;
   margin-top: 4px;
   margin-bottom: 4px;
@@ -3844,6 +3845,36 @@ body #groups-list .group-subscription-options {
 
 #activity-filter-select .buddyboss-select {
   margin-top: 0;
+}
+
+#buddypress .ass-email-type {
+  font-size: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+#buddypress .ass-email-type > label {
+  color: #22a7f0;
+  font-weight: 600;
+}
+
+#buddypress .ass-email-type > label:hover, #buddypress .ass-email-type > label.selected {
+  color: #54ae68;
+}
+
+#buddypress .ass-email-type .ass-email-explain {
+  font-size: 12px;
+  margin-left: 23px;
+  color: #838383;
+}
+
+#buddypress #ass-email-subscriptions-options-page {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+#buddypress #ass-email-subscriptions-options-page #ass-save {
+  margin-top: 20px;
 }
 
 /*---------------------------------------------------------------
@@ -7917,10 +7948,18 @@ MAXIMUM width of 380 pixels (phones portrait)
     text-align: center;
     margin-top: 20px;
     width: 100%;
+    max-width: 100%;
     margin-bottom: 0;
+    float: none;
+  }
+  body.buddypress.groups #buddypress .boss-group-header .group-header-content > h1.main-title {
+    text-align: center;
   }
   body.buddypress.groups #buddypress .bb-group-mobile-content {
     width: 100%;
+  }
+  body.buddypress.groups #buddypress .bb-group-mobile-content > #item-header-content {
+    text-align: center;
   }
 }
 
@@ -7934,9 +7973,6 @@ MAXIMUM width of 380 pixels (phones portrait)
   }
   body.buddypress.single-item.groups #item-header {
     text-align: center;
-  }
-  body.buddypress.single-item.groups #buddypress #item-header-content {
-    text-align: left;
   }
   body.buddypress #item-title-area h1 {
     font-size: 24px;

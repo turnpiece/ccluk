@@ -3129,7 +3129,8 @@ body {
   display: none;
 }
 
-#secondary div.generic-button.group-subscription-options a.group-subscription-close, #buddypress #groups-list a.group-subscription-close {
+#secondary div.generic-button.group-subscription-options a.group-subscription-close, 
+#buddypress #groups-list a.group-subscription-close {
   background-color: transparent;
   margin-top: 4px;
   margin-bottom: 4px;
@@ -3173,6 +3174,42 @@ body {
 
 #activity-filter-select .buddyboss-select {
   margin-top: 0;
+}
+
+#buddypress {
+  .ass-email-type {
+    font-size: $font-size-sm;
+    margin-top: 15px;
+    margin-bottom: 15px;
+
+    > label {
+      color: $blue;
+      font-weight: 600;
+  
+      &:hover,
+      &.selected {
+        color: $green;
+      }
+    }
+
+    .ass-email-explain {
+      font-size: $font-size-tiny;
+      margin-left: 23px;
+      color: $gray;
+    }
+  }
+
+
+
+
+  #ass-email-subscriptions-options-page {
+    max-width: 500px;
+    @include centred-margin( 0 );
+
+    #ass-save {
+      margin-top: 20px;
+    }
+  }
 }
 
 /*---------------------------------------------------------------

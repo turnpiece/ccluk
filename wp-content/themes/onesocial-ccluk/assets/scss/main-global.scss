@@ -879,64 +879,52 @@ input {
     @include border-radius(0);
     padding: 0;
   }
-  &[type="checkbox"]:not(.styled), &[type="radio"]:not(.styled) {
-    margin: 1px 10px 0 0;
-  }
-  &[type="checkbox"].styled {
-    opacity: 0;
-    position: relative;
-    z-index: 1;
-  }
-  &[type="radio"] {
+  &[type="radio"],
+  &[type="checkbox"] {
+    &:not(.styled) {
+      margin: 1px 10px 0 0;
+    }
     &.styled {
       opacity: 0;
       position: relative;
       z-index: 1;
     }
     + {
-      span, label, strong {
+      span, 
+      label, 
+      strong {
         position: relative;
         left: 10px;
+        margin-right: 10px;
         z-index: 0;
         font-weight: 400;
         line-height: 17px;
+
+        &:before {
+          content: '';
+          position: absolute;
+          z-index: 0;
+          line-height: 1;
+        }
       }
-    }
-  }
-  &[type="checkbox"] + {
-    span, label, strong {
-      position: relative;
-      left: 10px;
-      margin-right: 10px;
-      z-index: 0;
-      font-weight: 400;
-      line-height: 17px;
     }
   }
   &[type="radio"] + {
     span:before, label:before, strong:before {
-      content: '';
-      position: absolute;
       border: 5px solid $white;
       padding: 0px;
       border-radius: 15px;
       top: 6px;
       left: -21px;
-      z-index: 0;
-      line-height: 1;
     }
   }
   &[type="checkbox"] {
     + {
       span:before, label:before, strong:before {
-        content: '';
-        position: absolute;
         top: 4px;
         left: -21px;
-        z-index: 0;
         width: 9px;
         height: 9px;
-        line-height: 1;
       }
     }
     &:checked + {
@@ -964,7 +952,8 @@ input {
 --------------------------------------------------------------*/
 /* Disabled state */
 
-button[disabled], input[disabled] {
+button[disabled], 
+input[disabled] {
   cursor: default;
   background-color: #cecece;
 }
@@ -5873,15 +5862,6 @@ a.liked {
 
 .menu-visible-left #mobile-right-panel, .menu-visible-right #wpadminbar {
   visibility: hidden;
-}
-
-.mfp-content.mfp-content {
-  .rtm-lightbox-container {
-    /*background: none;*/
-  }
-  .rtm-single-meta {
-    background: #ddd;
-  }
 }
 
 .dashicons, .dashicons-before:before {

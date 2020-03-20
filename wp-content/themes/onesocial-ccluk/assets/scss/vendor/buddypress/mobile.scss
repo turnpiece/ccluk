@@ -1716,10 +1716,20 @@ Directories: Members, Groups, Blogs, Forums
         text-align: center;
         margin-top: 20px;
         width: 100%;
+        max-width: 100%;
         margin-bottom: 0;
+        float: none;
+
+        > h1.main-title {
+          text-align: center;
+        }
       }
       .bb-group-mobile-content {
         width: 100%;
+
+        > #item-header-content {
+          text-align: center;
+        }
       }
     }
   }
@@ -1737,9 +1747,6 @@ Directories: Members, Groups, Blogs, Forums
   }
   &.single-item.groups #item-header {
     text-align: center;
-  }
-  &.single-item.groups #buddypress #item-header-content {
-    text-align: left;
   }
   #item-title-area h1 {
     font-size: $font-size-mid;

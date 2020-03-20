@@ -839,31 +839,21 @@ input[type="checkbox"], input[type="radio"], input[type="file"], input[type="hid
   padding: 0;
 }
 
-input[type="checkbox"]:not(.styled), input[type="radio"]:not(.styled) {
+input[type="radio"]:not(.styled), input[type="checkbox"]:not(.styled) {
   margin: 1px 10px 0 0;
 }
 
-input[type="checkbox"].styled {
+input[type="radio"].styled, input[type="checkbox"].styled {
   opacity: 0;
   position: relative;
   z-index: 1;
 }
 
-input[type="radio"].styled {
-  opacity: 0;
-  position: relative;
-  z-index: 1;
-}
-
-input[type="radio"] + span, input[type="radio"] + label, input[type="radio"] + strong {
-  position: relative;
-  left: 10px;
-  z-index: 0;
-  font-weight: 400;
-  line-height: 17px;
-}
-
-input[type="checkbox"] + span, input[type="checkbox"] + label, input[type="checkbox"] + strong {
+input[type="radio"] + span,
+input[type="radio"] + label,
+input[type="radio"] + strong, input[type="checkbox"] + span,
+input[type="checkbox"] + label,
+input[type="checkbox"] + strong {
   position: relative;
   left: 10px;
   margin-right: 10px;
@@ -872,27 +862,30 @@ input[type="checkbox"] + span, input[type="checkbox"] + label, input[type="check
   line-height: 17px;
 }
 
-input[type="radio"] + span:before, input[type="radio"] + label:before, input[type="radio"] + strong:before {
+input[type="radio"] + span:before,
+input[type="radio"] + label:before,
+input[type="radio"] + strong:before, input[type="checkbox"] + span:before,
+input[type="checkbox"] + label:before,
+input[type="checkbox"] + strong:before {
   content: '';
   position: absolute;
+  z-index: 0;
+  line-height: 1;
+}
+
+input[type="radio"] + span:before, input[type="radio"] + label:before, input[type="radio"] + strong:before {
   border: 5px solid #fff;
   padding: 0px;
   border-radius: 15px;
   top: 6px;
   left: -21px;
-  z-index: 0;
-  line-height: 1;
 }
 
 input[type="checkbox"] + span:before, input[type="checkbox"] + label:before, input[type="checkbox"] + strong:before {
-  content: '';
-  position: absolute;
   top: 4px;
   left: -21px;
-  z-index: 0;
   width: 9px;
   height: 9px;
-  line-height: 1;
 }
 
 input[type="checkbox"]:checked + span:after, input[type="checkbox"]:checked + label:after, input[type="checkbox"]:checked + strong:after {
@@ -914,7 +907,8 @@ input[type="radio"]:checked + span:before, input[type="radio"]:checked + label:b
 2.4 - Buttons
 --------------------------------------------------------------*/
 /* Disabled state */
-button[disabled], input[disabled] {
+button[disabled],
+input[disabled] {
   cursor: default;
   background-color: #cecece;
 }
@@ -5858,14 +5852,6 @@ a.liked:hover, a.liked:active, a.liked:focus, a.liked span.sl-count {
 
 .menu-visible-left #mobile-right-panel, .menu-visible-right #wpadminbar {
   visibility: hidden;
-}
-
-.mfp-content.mfp-content .rtm-lightbox-container {
-  /*background: none;*/
-}
-
-.mfp-content.mfp-content .rtm-single-meta {
-  background: #ddd;
 }
 
 .dashicons, .dashicons-before:before {
