@@ -6491,6 +6491,9 @@ body.buddypress.activity-permalink .entry-header {
 @media screen and (max-width: 1024px) {
   body.buddypress {
     /*--------------------------------------------------------------
+1.1.5 - Dropdowns
+--------------------------------------------------------------*/
+    /*--------------------------------------------------------------
 2.1.2 - BuddyPress Activity Plus
 --------------------------------------------------------------*/
     /*--------------------------------------------------------------
@@ -6619,6 +6622,72 @@ MAXIMUM width of 380 pixels (phones portrait)
 --------------------------------------------------------------*/
     /***************** Mobile ******************/
     /***************** End Mobile ******************/
+  }
+  body.buddypress body .buddyboss-select {
+    float: none;
+  }
+  body.buddypress .buddyboss-select-inner {
+    display: block;
+    width: 100%;
+    clear: both;
+    padding: 0;
+    margin: 0;
+    font-size: 13px;
+    position: relative;
+    margin: 0 10px 10px 0;
+    background-color: #fff;
+    float: left;
+    border: 1px solid #aaa;
+  }
+  body.buddypress .buddyboss-select-inner:after {
+    font-family: "onesocial" !important;
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-variant: normal !important;
+    text-transform: none !important;
+    speak: none;
+    display: block;
+    line-height: 1;
+    content: "P";
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+    color: #22a7f0;
+    position: absolute;
+    right: 12px;
+    top: 12px;
+  }
+  body.buddypress .buddyboss-select-inner select {
+    cursor: pointer;
+    height: 37px;
+    width: 100%;
+    opacity: 0;
+    border: none;
+    /* overrides browser default */
+    margin: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 5;
+  }
+  body.buddypress .buddyboss-select-inner span {
+    float: left;
+    font-weight: 600;
+    height: 37px;
+    line-height: 37px;
+    padding: 0 30px 0 15px;
+    padding-right: 30px;
+    text-transform: none;
+  }
+  body.buddypress .datebox {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  body.buddypress .datebox .buddyboss-select:first-child, body.buddypress .datebox .buddyboss-select:nth-child(2) {
+    margin-right: 0;
+  }
+  body.buddypress .datebox .buddyboss-select:nth-child(2), body.buddypress .datebox .buddyboss-select:nth-child(3) {
+    padding-top: 25px;
   }
   body.buddypress .bpfb_form_container {
     padding: 0 !important;
@@ -7937,6 +8006,12 @@ MAXIMUM width of 380 pixels (phones portrait)
 }
 
 @media screen and (max-width: 1024px) and (max-width: 622px) {
+  body.buddypress.groups #buddypress #bbpress-forums #subscription-toggle {
+    margin-top: 0;
+  }
+  body.buddypress.groups #buddypress #bbpress-forums .bbp-forum-data {
+    max-width: 80%;
+  }
   body.buddypress.groups #buddypress .bb-group-avatar-wrap-mobile {
     float: none;
     text-align: center;
@@ -7948,7 +8023,7 @@ MAXIMUM width of 380 pixels (phones portrait)
   }
   body.buddypress.groups #buddypress .boss-group-header .group-header-content {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 0;
     width: 100%;
     max-width: 100%;
     margin-bottom: 0;
