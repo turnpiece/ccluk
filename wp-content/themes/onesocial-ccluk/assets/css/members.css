@@ -9778,6 +9778,9 @@ span.bbp-author-ip {
 
 #bbpress-forums .bbp-forum-data {
   border-color: rgba(84, 174, 104, 0.9);
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 3px;
 }
 
 #bbpress-forums .bbp-forum-data .last-activity {
@@ -9893,7 +9896,7 @@ body.bbpress article.topic, body.bbpress article.forum {
   vertical-align: middle;
   position: relative;
   margin-left: 5px;
-  min-height: 46px;
+  min-height: 24px;
 }
 
 #bbp-topic-details {
