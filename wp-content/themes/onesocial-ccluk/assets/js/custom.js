@@ -16,7 +16,7 @@
 	});
 
 	function checkRadioLabels() {
-		$('div.radio').find('label').each( function() {
+		$('div.radio, div.ass-email-type').find('label').each( function() {
 			if ($(this).find('input').is(':checked'))
 				$(this).addClass('selected');
 			else
@@ -24,7 +24,7 @@
 		})
 	}
 
-	$('div.radio').find('label').find('input').on('click', function() {
+	$('div.radio, div.ass-email-type').find('label').find('input').on('click', function() {
 		checkRadioLabels();
 	});
 

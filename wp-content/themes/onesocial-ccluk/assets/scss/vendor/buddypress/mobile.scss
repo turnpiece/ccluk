@@ -1,4 +1,79 @@
 /*--------------------------------------------------------------
+1.1.5 - Dropdowns
+--------------------------------------------------------------*/
+
+body .buddyboss-select {
+  float: none;
+}
+
+.buddyboss-select-inner {
+  display: block;
+  width: 100%;
+  clear: both;
+  padding: 0;
+  margin: 0;
+  font-size: 13px;
+  position: relative;
+  margin: 0 10px 10px 0;
+  background-color: $white;
+  float: left;
+  border: 1px solid $light;
+  &:after {
+    font-family: "onesocial" !important;
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-variant: normal !important;
+    text-transform: none !important;
+    speak: none;
+    display: block;
+    line-height: 1;
+    content: "P";
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+    color: $blue;
+    position: absolute;
+    right: 12px;
+    top: 12px;
+  }
+  select {
+    cursor: pointer;
+    height: 37px;
+    width: 100%;
+    opacity: 0;
+    border: none;
+    /* overrides browser default */
+    margin: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 5;
+  }
+}
+
+.buddyboss-select-inner span {
+  float: left;
+  font-weight: 600;
+  height: 37px;
+  line-height: 37px;
+  padding: 0 30px 0 15px;
+  padding-right: 30px;
+  text-transform: none;
+}
+
+.datebox {
+  @include display-flex();
+  .buddyboss-select {
+    &:first-child, &:nth-child(2) {
+      margin-right: 0;
+    }
+    &:nth-child(2), &:nth-child(3) {
+      padding-top: 25px;
+    }
+  }
+}
+
+
+/*--------------------------------------------------------------
 2.1.2 - BuddyPress Activity Plus
 --------------------------------------------------------------*/
 
@@ -1701,6 +1776,15 @@ Directories: Members, Groups, Blogs, Forums
 @media screen and (max-width: 622px) {
   &.groups {
     #buddypress {
+      #bbpress-forums {
+        #subscription-toggle {
+          margin-top: 0; 
+        }
+        .bbp-forum-data {
+          max-width: 80%;
+        }
+      }
+
       .bb-group-avatar-wrap-mobile {
         float: none;
         text-align: center;
@@ -1714,12 +1798,22 @@ Directories: Members, Groups, Blogs, Forums
 
       .boss-group-header .group-header-content {
         text-align: center;
-        margin-top: 20px;
+        margin-top: 0;
         width: 100%;
+        max-width: 100%;
         margin-bottom: 0;
+        float: none;
+
+        > h1.main-title {
+          text-align: center;
+        }
       }
       .bb-group-mobile-content {
         width: 100%;
+
+        > #item-header-content {
+          text-align: center;
+        }
       }
     }
   }
@@ -1737,9 +1831,6 @@ Directories: Members, Groups, Blogs, Forums
   }
   &.single-item.groups #item-header {
     text-align: center;
-  }
-  &.single-item.groups #buddypress #item-header-content {
-    text-align: left;
   }
   #item-title-area h1 {
     font-size: $font-size-mid;
@@ -2643,13 +2734,11 @@ body.activity-permalink #buddypress .activity-list > li:first-child {
       overflow: hidden;
       font-size: 14px;
       padding: 10px;
-      border: none !important;
       .button {
         display: inline;
         font-size: inherit;
         font-weight: 400;
         padding: 3px 7px;
-        width: auto;
       }
       img {
         max-width: 100%;
@@ -2695,7 +2784,6 @@ body.activity-permalink #buddypress .activity-list > li:first-child {
   margin-top: 20px;
   padding-bottom: 0;
 }
-
 
 /*--------------------------------------------------------------
 MAXIMUM width of 768 pixels

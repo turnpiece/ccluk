@@ -839,31 +839,21 @@ input[type="checkbox"], input[type="radio"], input[type="file"], input[type="hid
   padding: 0;
 }
 
-input[type="checkbox"]:not(.styled), input[type="radio"]:not(.styled) {
+input[type="radio"]:not(.styled), input[type="checkbox"]:not(.styled) {
   margin: 1px 10px 0 0;
 }
 
-input[type="checkbox"].styled {
+input[type="radio"].styled, input[type="checkbox"].styled {
   opacity: 0;
   position: relative;
   z-index: 1;
 }
 
-input[type="radio"].styled {
-  opacity: 0;
-  position: relative;
-  z-index: 1;
-}
-
-input[type="radio"] + span, input[type="radio"] + label, input[type="radio"] + strong {
-  position: relative;
-  left: 10px;
-  z-index: 0;
-  font-weight: 400;
-  line-height: 17px;
-}
-
-input[type="checkbox"] + span, input[type="checkbox"] + label, input[type="checkbox"] + strong {
+input[type="radio"] + span,
+input[type="radio"] + label,
+input[type="radio"] + strong, input[type="checkbox"] + span,
+input[type="checkbox"] + label,
+input[type="checkbox"] + strong {
   position: relative;
   left: 10px;
   margin-right: 10px;
@@ -872,27 +862,30 @@ input[type="checkbox"] + span, input[type="checkbox"] + label, input[type="check
   line-height: 17px;
 }
 
-input[type="radio"] + span:before, input[type="radio"] + label:before, input[type="radio"] + strong:before {
+input[type="radio"] + span:before,
+input[type="radio"] + label:before,
+input[type="radio"] + strong:before, input[type="checkbox"] + span:before,
+input[type="checkbox"] + label:before,
+input[type="checkbox"] + strong:before {
   content: '';
   position: absolute;
+  z-index: 0;
+  line-height: 1;
+}
+
+input[type="radio"] + span:before, input[type="radio"] + label:before, input[type="radio"] + strong:before {
   border: 5px solid #fff;
   padding: 0px;
   border-radius: 15px;
   top: 6px;
   left: -21px;
-  z-index: 0;
-  line-height: 1;
 }
 
 input[type="checkbox"] + span:before, input[type="checkbox"] + label:before, input[type="checkbox"] + strong:before {
-  content: '';
-  position: absolute;
   top: 4px;
   left: -21px;
-  z-index: 0;
   width: 9px;
   height: 9px;
-  line-height: 1;
 }
 
 input[type="checkbox"]:checked + span:after, input[type="checkbox"]:checked + label:after, input[type="checkbox"]:checked + strong:after {
@@ -914,7 +907,8 @@ input[type="radio"]:checked + span:before, input[type="radio"]:checked + label:b
 2.4 - Buttons
 --------------------------------------------------------------*/
 /* Disabled state */
-button[disabled], input[disabled] {
+button[disabled],
+input[disabled] {
   cursor: default;
   background-color: #cecece;
 }
@@ -3861,16 +3855,16 @@ a.comment-reply-link, a.comment-edit-link {
   display: none;
 }
 
-.comments-area .children article {
-  /*padding-top: 0;*/
-}
-
 /*--------------------------------------------------------------
 9.2 - Comment form
 --------------------------------------------------------------*/
 #comments {
   clear: left;
-  margin-bottom: 15px;
+  margin-bottom: 55px;
+}
+
+#comments .inner {
+  padding-top: 25px;
 }
 
 .comments-title + #respond {
@@ -3890,7 +3884,7 @@ a.comment-reply-link, a.comment-edit-link {
 }
 
 #respond #cancel-comment-reply-link {
-  color: #f14e56;
+  color: #e85c41;
   font-size: 12px;
   font-weight: 400;
   position: relative;
@@ -3980,7 +3974,7 @@ body.logged-in #respond .comment-form-comment {
 }
 
 .required {
-  color: #f14e56;
+  color: #e85c41;
 }
 
 .comment-avatar {
@@ -4913,7 +4907,8 @@ input#user_login {
   margin: 20px 0;
 }
 
-.popup-content input:not([type="checkbox"]):not([type="radio"]):not([type="button"]), .popup-content .input:not([type="checkbox"]):not([type="radio"]):not([type="button"]) {
+.popup-content input:not([type="checkbox"]):not([type="radio"]):not([type="button"]),
+.popup-content .input:not([type="checkbox"]):not([type="radio"]):not([type="button"]) {
   background: transparent;
   border-color: rgba(0, 0, 0, 0.1);
   border-width: 0 0 1px;
@@ -4968,14 +4963,11 @@ input#user_login {
 
 .popup-content .email-wrap, .popup-content .password-wrap, .popup-content .username-wrap {
   position: relative;
+  margin-bottom: 15px;
 }
 
 .popup-content .options-wrap {
   overflow: hidden;
-}
-
-.popup-content .email-wrap, .popup-content .username-wrap, .popup-content .password-wrap {
-  margin-bottom: 15px;
 }
 
 .popup-content .submit button:not(#searchsubmit):not(.update-cover-photo) {
@@ -4987,7 +4979,8 @@ input#user_login {
   display: block;
 }
 
-.popup-content .button:not(.ed_button), .wp-social-login-provider-list.wp-social-login-provider-list a {
+.popup-content .button:not(.ed_button),
+.wp-social-login-provider-list.wp-social-login-provider-list a {
   border-radius: 40px;
   color: #fff;
   display: block;
@@ -5200,26 +5193,6 @@ p.description:empty {
 
 .wp-social-login-provider-aol {
   background: #ff0b00;
-}
-
-.wp-social-login-provider-yandex {
-  background: #ffcc00;
-}
-
-.wp-social-login-provider-mailru {
-  background: #168de2;
-}
-
-.wp-social-login-provider-vkontakte {
-  background: #45668e;
-}
-
-.wp-social-login-provider-mixi {
-  background: #d1ad5a;
-}
-
-.wp-social-login-provider-skyrock {
-  background: #009aff;
 }
 
 .wp-social-login-provider-goodreads {
@@ -5858,14 +5831,6 @@ a.liked:hover, a.liked:active, a.liked:focus, a.liked span.sl-count {
 
 .menu-visible-left #mobile-right-panel, .menu-visible-right #wpadminbar {
   visibility: hidden;
-}
-
-.mfp-content.mfp-content .rtm-lightbox-container {
-  /*background: none;*/
-}
-
-.mfp-content.mfp-content .rtm-single-meta {
-  background: #ddd;
 }
 
 .dashicons, .dashicons-before:before {

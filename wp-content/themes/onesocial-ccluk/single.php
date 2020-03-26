@@ -17,10 +17,11 @@ get_header();
 			<?php get_template_part( 'template-parts/content', get_post_format() ); ?>
 
 			<?php
-                        $post_status = get_post_status(get_the_ID());
-                        if ( 'publish' == $post_status || 'private' == $post_status ) {
-                            comments_template( '', true );
-                        } ?>
+				$post_status = get_post_status(get_the_ID());
+				if ( 'publish' == $post_status || 'private' == $post_status ) {
+					comments_template( '', true );
+				} 
+			?>
 
 		<?php endwhile; // end of the loop. ?>
 

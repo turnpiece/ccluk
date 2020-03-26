@@ -3066,13 +3066,12 @@ body #buddypress div.buddyboss-media-form-wrapper div#invite-list ul li {
   position: relative;
 }
 
-body {
-  #groups-dir-list .group-subscription-div, #groups-list .group-subscription-div {
-    padding-top: 0;
-    margin-bottom: 20px;
+#buddypress {
+  .group-subscription-div {
+    display: none;
   }
 }
-
+/*
 #secondary div.generic-button.group-subscription-options {
   position: absolute;
   width: 100%;
@@ -3129,7 +3128,8 @@ body {
   display: none;
 }
 
-#secondary div.generic-button.group-subscription-options a.group-subscription-close, #buddypress #groups-list a.group-subscription-close {
+#secondary div.generic-button.group-subscription-options a.group-subscription-close, 
+#buddypress #groups-list a.group-subscription-close {
   background-color: transparent;
   margin-top: 4px;
   margin-bottom: 4px;
@@ -3146,7 +3146,7 @@ body {
   margin-top: 5px;
 }
 
-
+*/
 
 #buddypress {
     #object-nav .sub-menu {
@@ -3173,6 +3173,42 @@ body {
 
 #activity-filter-select .buddyboss-select {
   margin-top: 0;
+}
+
+#buddypress {
+  .ass-email-type {
+    font-size: $font-size-sm;
+    margin-top: 15px;
+    margin-bottom: 15px;
+
+    > label {
+      color: $blue;
+      font-weight: 600;
+  
+      &:hover,
+      &.selected {
+        color: $green;
+      }
+    }
+
+    .ass-email-explain {
+      font-size: $font-size-tiny;
+      margin-left: 23px;
+      color: $gray;
+    }
+  }
+
+
+
+
+  #ass-email-subscriptions-options-page {
+    max-width: 500px;
+    @include centred-margin( 0 );
+
+    #ass-save {
+      margin-top: 20px;
+    }
+  }
 }
 
 /*---------------------------------------------------------------
@@ -3573,9 +3609,12 @@ body:not(.group-members) #buddypress div {
     }
     &#subnav.item-list-tabs,
     &:not(#item-nav):not(#mobile-item-nav) > .item-list-tabs {
-      ul li li {
-        float: left;
-        margin-top: 0;
+      ul li {
+        padding-right: 12px;
+        li {
+          float: left;
+          margin-top: 0;
+        }
       }
     }
   }
@@ -5397,14 +5436,15 @@ body.buddypress {
       }
     }
 
-    div.activity-comments div.acomment-meta a:not(.activity-time-since):hover, 
-    .activity-header a:hover,
-    .btn-group.social a:hover, 
-    .standard-form div.submit a.prev:hover {
-      color: $green;
+    div.activity-comments div.acomment-meta a:not(.activity-time-since), 
+    .activity-header a,
+    .btn-group.social a, 
+    .standard-form div.submit a.prev {
+      &:hover {
+        color: $green;
+      }
     }
 
-    #group-create-nav .group-create,
     div#item-nav .item-list-tabs ul li .bb-menu-button {
       background-color: $green;
     }
@@ -5415,7 +5455,8 @@ body.buddypress {
   }
   
   #create-group-form {
-    #invite-list strong, &.standard-form label span.highlight {
+    #invite-list strong, 
+    &.standard-form label span.highlight {
       color: $green;
     }
   }
