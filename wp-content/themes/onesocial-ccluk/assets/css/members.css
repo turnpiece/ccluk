@@ -6080,7 +6080,6 @@ body.buddypress #buddypress .standard-form div.submit a.prev:hover {
   color: #54ae68;
 }
 
-body.buddypress #buddypress #group-create-nav .group-create,
 body.buddypress #buddypress div#item-nav .item-list-tabs ul li .bb-menu-button {
   background-color: #54ae68;
 }
@@ -6089,7 +6088,8 @@ body.buddypress #buddypress ul.button-nav li a, body.buddypress #buddypress div.
   background-color: #22a7f0;
 }
 
-body.buddypress #create-group-form #invite-list strong, body.buddypress #create-group-form.standard-form label span.highlight {
+body.buddypress #create-group-form #invite-list strong,
+body.buddypress #create-group-form.standard-form label span.highlight {
   color: #54ae68;
 }
 

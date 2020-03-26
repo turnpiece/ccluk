@@ -5436,14 +5436,15 @@ body.buddypress {
       }
     }
 
-    div.activity-comments div.acomment-meta a:not(.activity-time-since):hover, 
-    .activity-header a:hover,
-    .btn-group.social a:hover, 
-    .standard-form div.submit a.prev:hover {
-      color: $green;
+    div.activity-comments div.acomment-meta a:not(.activity-time-since), 
+    .activity-header a,
+    .btn-group.social a, 
+    .standard-form div.submit a.prev {
+      &:hover {
+        color: $green;
+      }
     }
 
-    #group-create-nav .group-create,
     div#item-nav .item-list-tabs ul li .bb-menu-button {
       background-color: $green;
     }
@@ -5454,7 +5455,8 @@ body.buddypress {
   }
   
   #create-group-form {
-    #invite-list strong, &.standard-form label span.highlight {
+    #invite-list strong, 
+    &.standard-form label span.highlight {
       color: $green;
     }
   }
