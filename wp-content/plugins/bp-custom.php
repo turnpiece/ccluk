@@ -52,6 +52,9 @@ class CCLUK_BP_Custom {
 		// reorder profile menu tabs
 		add_action( 'bp_setup_nav', array( $this, 'profile_tab_order'), 999 );
 
+		// subscribe to group on joining
+		add_action( 'groups_join_group', array( $this, 'groups_join_group' ), 10, 2 );
+
 		// define the default Profile component
 		define( 'BP_DEFAULT_COMPONENT', 'profile' );
 
@@ -197,6 +200,30 @@ class CCLUK_BP_Custom {
 			// remove the cron job
 			$timestamp = wp_next_scheduled( 'populate_members_group_cron_hook' );
 			wp_unschedule_event( $timestamp, 'populate_members_group_cron_hook' );
+		}
+	}
+
+	/**
+	 * 
+	 * groups join group
+	 * action on joining a group
+	 * 
+	 * @param int $group_id
+	 * @param int $user_id
+	 * 
+	 */
+	public function groups_join_group( $group_id, $user_id ) {
+
+		// check group email subscriptions plugin is active
+		if (function_exists( 'ass_get_group_subscription_status' ) && 
+			function_exists( 'ass_group_subscription' )) {
+
+			$subs = ass_get_group_subscription_status( $user_id, $group_id );
+
+			if (empty($subs)) {
+				// subscribe them to daily digest email on joining a group
+				ass_group_subscription( 'dig', $user_id, $group_id );
+			}
 		}
 	}
 
