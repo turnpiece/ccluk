@@ -152,7 +152,7 @@ function buddyboss_onesocial_scripts_styles() {
 	$css_compressed_dest = '/css-compressed';
 	$assets_dir = get_stylesheet_directory_uri() . '/assets';
 
-	$CSS_URL = $assets_dir . ( onesocial_get_option( 'boss_minified_css' ) && !CCLUK_DEBUGGING ? $css_compressed_dest : $css_dest );
+	$CSS_URL = $assets_dir . ( !CCLUK_DEBUGGING ? $css_compressed_dest : $css_dest );
 
 	// OneSocial icon fonts.
 	wp_register_style( 'icons', $CSS_URL . '/onesocial-icons.css', array(), $onesocial_version, 'all' );
@@ -164,46 +164,32 @@ function buddyboss_onesocial_scripts_styles() {
 	// is adminbar fixed or floated
 	$adminbar_layout = 'fixed';
 
-	// Switch between mobile and desktop
-	if ( isset( $_COOKIE[ 'switch_mode' ] ) && (onesocial_get_option( 'boss_layout_switcher' )) ) {
-		if ( $_COOKIE[ 'switch_mode' ] == 'mobile' ) {
+	if ( is_phone() ) {
+		wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.'.$ext, array( 'icons' ), $onesocial_version, 'all' );
+		$only_mobile = true;
+	} elseif ( wp_is_mobile() ) {
+		if ( onesocial_get_option( 'boss_layout_tablet' ) == 'desktop' ) {
+			wp_enqueue_style( 'onesocial-main-desktop', $CSS_URL . '/main-desktop.css', array( 'icons' ), $onesocial_version, 'all' );
+			// Activate our own Fixed or Floating (defaults to Fixed) adminbar stylesheet. Load DashIcons and GoogleFonts first.
+			wp_enqueue_style( 'buddyboss-wp-adminbar-desktop-' . $adminbar_layout, $CSS_URL . '/adminbar-desktop-' . $adminbar_layout . '.css', array( 'dashicons' ), $onesocial_version, 'all' );
+		} else {
+			wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.'.$ext, array( 'icons' ), $onesocial_version, 'all' );
+			$only_mobile = true;
+		}
+	} else {
+		if ( onesocial_get_option( 'boss_layout_desktop' ) == 'mobile' ) {
 			wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.'.$ext, array( 'icons' ), $onesocial_version, 'all' );
 			$only_mobile = true;
 		} else {
 			wp_enqueue_style( 'onesocial-main-desktop', $CSS_URL . '/main-desktop.css', array( 'icons' ), $onesocial_version, 'screen and (min-width: 1025px)' );
 			// Activate our own Fixed or Floating (defaults to Fixed) adminbar stylesheet. Load DashIcons and GoogleFonts first.
 			wp_enqueue_style( 'buddyboss-wp-adminbar-desktop-' . $adminbar_layout, $CSS_URL . '/adminbar-desktop-' . $adminbar_layout . '.css', array( 'dashicons' ), $onesocial_version, 'screen and (min-width: 1025px)' );
-			wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.'.$ext, array( 'icons' ), $onesocial_version, 'screen and (max-width: 1024px)' );
 		}
-		// Defaults
-	} else {
-		if ( is_phone() ) {
-			wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.'.$ext, array( 'icons' ), $onesocial_version, 'all' );
-			$only_mobile = true;
-		} elseif ( wp_is_mobile() ) {
-			if ( onesocial_get_option( 'boss_layout_tablet' ) == 'desktop' ) {
-				wp_enqueue_style( 'onesocial-main-desktop', $CSS_URL . '/main-desktop.css', array( 'icons' ), $onesocial_version, 'all' );
-				// Activate our own Fixed or Floating (defaults to Fixed) adminbar stylesheet. Load DashIcons and GoogleFonts first.
-				wp_enqueue_style( 'buddyboss-wp-adminbar-desktop-' . $adminbar_layout, $CSS_URL . '/adminbar-desktop-' . $adminbar_layout . '.css', array( 'dashicons' ), $onesocial_version, 'all' );
-			} else {
-				wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.'.$ext, array( 'icons' ), $onesocial_version, 'all' );
-				$only_mobile = true;
-			}
-		} else {
-			if ( onesocial_get_option( 'boss_layout_desktop' ) == 'mobile' ) {
-				wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.'.$ext, array( 'icons' ), $onesocial_version, 'all' );
-				$only_mobile = true;
-			} else {
-				wp_enqueue_style( 'onesocial-main-desktop', $CSS_URL . '/main-desktop.css', array( 'icons' ), $onesocial_version, 'screen and (min-width: 1025px)' );
-				// Activate our own Fixed or Floating (defaults to Fixed) adminbar stylesheet. Load DashIcons and GoogleFonts first.
-				wp_enqueue_style( 'buddyboss-wp-adminbar-desktop-' . $adminbar_layout, $CSS_URL . '/adminbar-desktop-' . $adminbar_layout . '.css', array( 'dashicons' ), $onesocial_version, 'screen and (min-width: 1025px)' );
-			}
-		}
+	}
 
-		// Media query fallback
-		if ( !wp_script_is( 'onesocial-main-mobile', 'enqueued' ) ) {
-			wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.'.$ext, array( 'icons' ), $onesocial_version, 'screen and (max-width: 1024px)' );
-		}
+	// Media query fallback
+	if ( !wp_script_is( 'onesocial-main-mobile', 'enqueued' ) ) {
+		wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.'.$ext, array( 'icons' ), $onesocial_version, 'screen and (max-width: 1024px)' );
 	}
 
 	/*
@@ -700,29 +686,6 @@ function buddyboss_widgets_init() {
 
 add_action( 'widgets_init', 'buddyboss_widgets_init' );
 
-if ( !function_exists( 'buddyboss_content_nav' ) ) {
-
-	/**
-	 * Displays navigation to next/previous pages when applicable.
-	 *
-	 * @since OneSocial 1.0.0
-	 */
-	function buddyboss_content_nav( $nav_id ) {
-		global $wp_query;
-
-		if ( $wp_query->max_num_pages > 1 ) :
-			?>
-			<nav id="<?php echo esc_attr( $nav_id ); ?>" class="navigation" role="navigation">
-				<h3 class="assistive-text"><?php _e( 'Post navigation', 'onesocial' ); ?></h3>
-				<div class="nav-previous alignleft"><?php next_posts_link( __( '<span class="meta-nav">&larr;</span> Older posts', 'onesocial' ) ); ?></div>
-				<div class="nav-next alignright"><?php previous_posts_link( __( 'Newer posts <span class="meta-nav">&rarr;</span>', 'onesocial' ) ); ?></div>
-			</nav><!-- #<?php echo esc_attr( $nav_id ); ?> .navigation -->
-			<?php
-		endif;
-	}
-
-}
-
 if ( !function_exists( 'buddyboss_entry_meta' ) ) {
 
 	/**
@@ -755,62 +718,6 @@ if ( !function_exists( 'buddyboss_entry_meta' ) ) {
 	}
 
 }
-
-if ( !function_exists( 'buddyboss_post_thumbnail' ) ) :
-
-	/**
-	 * Display an optional post thumbnail.
-	 *
-	 * Wraps the post thumbnail in an anchor element on index views, or a div
-	 * element when on single views.
-	 *
-	 * @since 1.0.0
-	 */
-	function buddyboss_post_thumbnail() {
-		if ( post_password_required() || is_attachment() || !has_post_thumbnail() ) {
-			return;
-		}
-
-		if ( is_single() ) :
-			?>
-
-			<div class="post-thumbnail">
-				<?php the_post_thumbnail( 'post-thumbnail' ); ?>
-			</div><!-- .post-thumbnail -->
-
-		<?php else : ?>
-
-			<a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true">
-				<?php
-				the_post_thumbnail( 'post-thumbnail', array( 'alt' => get_the_title() ) );
-				?>
-			</a>
-
-		<?php
-		endif; // End is_singular()
-	}
-
-endif;
-
-
-if ( !function_exists( 'buddyboss_post_content' ) ) :
-
-	/**
-	 * Prints post content.
-	 */
-	function buddyboss_post_content() {
-		if ( is_single() ) {
-			the_content();
-			wp_link_pages( array(
-				'before' => '<div class="page-links">' . __( 'Pages:', 'onesocial' ),
-				'after'	 => '</div>',
-			) );
-		} else {
-			the_excerpt();
-		}
-	}
-
-endif;
 
 /**
  * Extends the default WordPress body classes.
@@ -853,21 +760,6 @@ function buddyboss_body_class( $classes ) {
 		if ( onesocial_get_option( 'boss_layout_desktop' ) == 'mobile' ) {
 			$classes[] = 'is-mobile';
 		} else {
-			$classes[] = 'is-desktop';
-		}
-	}
-
-	// Switch layout class
-	if ( isset( $_COOKIE[ 'switch_mode' ] ) && (onesocial_get_option( 'boss_layout_switcher' )) ) {
-		if ( $_COOKIE[ 'switch_mode' ] == 'mobile' ) {
-			if ( ($key = array_search( 'is-desktop', $classes )) !== false ) {
-				unset( $classes[ $key ] );
-			}
-			$classes[] = 'is-mobile';
-		} else {
-			if ( ($key = array_search( 'is-mobile', $classes )) !== false ) {
-				unset( $classes[ $key ] );
-			}
 			$classes[] = 'is-desktop';
 		}
 	}
@@ -1222,23 +1114,6 @@ function buddyboss_is_plugin_active( $plugin ) {
 }
 
 /**
- * Return the ID of a page set as the home page.
- *
- * @return false|int ID of page set as the home page
- * @since OneSocial Theme 1.0.0
- */
-if ( !function_exists( 'bp_dtheme_page_on_front' ) ) :
-
-	function bp_dtheme_page_on_front() {
-		if ( 'page' != get_option( 'show_on_front' ) )
-			return false;
-
-		return apply_filters( 'bp_dtheme_page_on_front', get_option( 'page_on_front' ) );
-	}
-
-endif;
-
-/**
  * Add a View Profile link in Dashboard > Users panel
  *
  * @since OneSocial 1.0.0
@@ -1292,38 +1167,6 @@ function buddyboss_more_posts_profile( $posts, $sort, $count, $data_target ) {
 			}
 			?>
 		</div>
-	</div>
-	<?php
-}
-
-/**
- * Show more posts on blog page
- *
- * @since OneSocial Theme 1.0.0
- */
-function buddyboss_more_posts_blog( $posts, $sort, $count, $data_target ) {
-	?>
-	<div class="inner">
-		<h2 class="title"><?php echo ($sort === 'recommended') ? __( 'Most recommended stories', 'onesocial' ) : __( 'Latest stories', 'onesocial' ); ?></h2>
-		<ul class="animatedParent1">
-			<?php
-			$post_count = 0;
-			while ( $posts->have_posts() ) {
-				$posts->the_post();
-				$post_count++;
-				?>
-				<li class="animated fadeInLeftShort <?php echo $data_target; ?>" data-id="<?php echo $post_count; ?>">
-					<?php
-					printf( '<a href="%1$s" title="%2$s" rel="bookmark" class="entry-date"><time datetime="%3$s"><div>%4$s</div><div>%5$s</div><div>%6$s</div></time></a>', esc_url( get_permalink() ), esc_attr( get_the_time() ), esc_attr( get_the_date( 'c' ) ), esc_html( get_the_date( 'M' ) ), esc_html( get_the_date( 'j' ) ), esc_html( get_the_date( 'Y' ) )
-					);
-					?>
-					<h3>
-						<a href="<?php the_permalink(); ?>" title="<?php echo esc_attr( sprintf( __( 'Permalink to %s', 'onesocial' ), the_title_attribute( 'echo=0' ) ) ); ?>" rel="bookmark"><?php the_title(); ?></a>
-					</h3>
-				</li>
-			<?php }
-			?>
-		</ul>
 	</div>
 	<?php
 }
@@ -2984,18 +2827,6 @@ if ( !function_exists( 'buddyboss_comment' ) ) {
 
 	global $BUDDYBOSS_BM;
 
-	function onesocial_userblog_is_network_activated() {
-		$network_activated = '';
-		if ( is_multisite() ) {
-			if ( !function_exists( 'is_plugin_active_for_network' ) )
-				require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
-			if ( is_plugin_active_for_network( basename( constant( 'BP_PLUGIN_DIR' ) ) . '/bp-loader.php' ) && is_plugin_active_for_network( basename( constant( 'BUDDYBOSS_SAP_PLUGIN_DIR' ) ) . '/bp-user-blog.php' ) ) {
-				$network_activated = TRUE;
-			}
-		}
-
-		return $network_activated;
-	}
 
 if( !function_exists( 'buddyboss_bp_options_nav' ) ):
 /**

@@ -1,22 +1,6 @@
 <?php
 
 /**
- * Register BuddyBoss Menu Page
- *
-if ( !function_exists( 'register_buddyboss_menu_page' ) ) {
-
-	function register_buddyboss_menu_page() {
-		// Set position with odd number to avoid confict with other plugin/theme.
-		add_menu_page( 'BuddyBoss', 'BuddyBoss', 'manage_options', 'buddyboss-settings', '', get_template_directory_uri() . '/buddyboss-inc/buddyboss-framework/assets/images/logo.svg', 61.000129 );
-		// To remove empty parent menu item.
-		add_submenu_page( 'buddyboss-settings', 'BuddyBoss', 'BuddyBoss', 'manage_options', 'buddyboss-settings' );
-		remove_submenu_page( 'buddyboss-settings', 'buddyboss-settings' );
-	}
-
-	add_action( 'admin_menu', 'register_buddyboss_menu_page' );
-}
-*/
-/**
  * Load extensions - MUST be loaded before your options are set
  */
 if ( file_exists( dirname( __FILE__ ) . '/boss-extensions/extensions-init.php' ) ) {
@@ -41,9 +25,6 @@ if ( !function_exists( 'load_boss_theme_options' ) ) {
 		}
 		if ( file_exists( dirname( __FILE__ ) . '/plugin-support.php' ) ) {
 			require_once( dirname( __FILE__ ) . '/plugin-support.php' );
-		}
-		if ( file_exists( dirname( __FILE__ ) . '/help-support.php' ) ) {
-			require_once( dirname( __FILE__ ) . '/help-support.php' );
 		}
 	}
 

@@ -27,12 +27,7 @@
 
 			<?php
 			if ( $bookmarks_page && $bookmark_post && onesocial_get_option( 'bookmarks_button' ) ) {
-                                $bookmark_href = trailingslashit( get_permalink( $bookmarks_page ) );
-                                //Keeping bookmarkpage same if network activated
-                                if (onesocial_userblog_is_network_activated()) {
-                                    $bookmark_href = trailingslashit(get_blog_permalink( 1,$bookmarks_page ));
-                                }
-                                
+                $bookmark_href = trailingslashit( get_permalink( $bookmarks_page ) );          
 				?>
 				<a href="<?php echo $bookmark_href; ?>" class="header-button boss-tooltip underlined bookmark-page" data-tooltip="<?php _e( 'Bookmarks', 'onesocial' ); ?>">
 					<i class="bb-icon-bookmark"></i>
@@ -57,12 +52,8 @@
 
 		if ( is_user_logged_in() && buddyboss_is_bp_active() && $create_new_post_page && onesocial_get_option( 'write_post_button' ) ) {
 			
-                        $href = trailingslashit( get_permalink( $create_new_post_page ) );
-                        //Keeping addnew post same if network activated
-                        if (onesocial_userblog_is_network_activated()) {
-                            $href = trailingslashit(get_blog_permalink( 1,$create_new_post_page ));
-                        }
-                        ?>
+			$href = trailingslashit( get_permalink( $create_new_post_page ) );
+			?>
 			<a href="<?php echo $href; ?>" class="header-button boss-tooltip boss-write-story-icon" data-tooltip="<?php _e( 'Write a Story', 'onesocial' ); ?>">
 				<i class="bb-icon-write"></i>
 			</a><?php }

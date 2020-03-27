@@ -960,21 +960,6 @@ if ( !class_exists( 'onesocial_Redux_Framework_config' ) ) {
 				)
 			);
 
-			// Theme Support
-			$this->sections[] = array(
-				'icon'		 => 'el el-universal-access',
-				'title'		 => __( 'Support', 'onesocial' ),
-				'customizer' => false,
-				'fields'	 => array(
-					array(
-						'id'		 => 'boss_support',
-						'type'		 => 'raw',
-						'markdown'	 => true,
-						'callback'	 => 'boss_support_tab_content',
-					),
-				),
-			);
-
 			// Import / Export
 			$this->sections[] = array(
 				'title'	 => __( 'Import / Export', 'onesocial' ),
