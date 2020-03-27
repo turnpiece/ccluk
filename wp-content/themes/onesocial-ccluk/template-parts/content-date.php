@@ -22,7 +22,6 @@
 				</span>
 				
 				<div class="load-more-posts">
-					<i class="bb-icon-bars-f"></i>
 					<a href="<?php echo get_the_author_meta( 'ID' ); ?>" data-sort="recommended" data-target="target-<?php the_ID(); ?>" data-sequence="500"><?php _e( 'Most recommended stories', 'onesocial' ); ?></a>
 					<a href="<?php echo get_the_author_meta( 'ID' ); ?>" data-sort="latests" class="show-latest" data-target="target-<?php the_ID(); ?>" data-sequence="500"><?php _e( 'Latest stories', 'onesocial' ); ?></a>
 				</div>

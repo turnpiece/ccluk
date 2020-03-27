@@ -531,14 +531,8 @@ div.footer-inner ul.footer-menu li {
   width: 100%;
 }
 
-.author-details .author-middle,
-.load-more-posts .bb-icon-bars-f {
+.author-details .author-middle {
   display: none;
-}
-
-.post-author .load-more-posts.active .bb-icon-bars-f:before {
-  -webkit-transform: rotate(-90deg);
-  transform: rotate(-90deg);
 }
 
 .posts-stream ul li {

@@ -3024,14 +3024,6 @@ single .entry-post-thumbnail:not(.category-thumb) img {
   color: #22a7f0;
 }
 
-.post-author .load-more-posts.active .bb-icon-bars-f:before {
-  content: 'A';
-  color: #54ae68;
-  -webkit-transform: rotate(180deg);
-  transform: rotate(180deg);
-  display: inline-block;
-}
-
 .author-details .author-middle .author-bio {
   color: #333;
   font-size: 14px;

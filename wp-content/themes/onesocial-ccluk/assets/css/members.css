@@ -1884,12 +1884,6 @@ label[for="groupblog-create-new-no"] .buddyboss-select {
   margin-left: 0;
 }
 
-#buddypress .dir-list ul.item-list .item-title .bb-icon-bars-f {
-  color: rgba(0, 0, 0, 0.2);
-  font-size: 15px;
-  margin-left: 10px;
-}
-
 #buddypress ul.item-list li div.item-desc {
   margin-bottom: 35px;
 }

@@ -3058,14 +3058,6 @@ single .entry-post-thumbnail:not(.category-thumb) img {
       color: $blue;
     }
   }
-  .load-more-posts.active .bb-icon-bars-f:before {
-    content: 'A';
-    color: $green;
-    -ms-transform: rotate(180deg);
-    -webkit-transform: rotate(180deg);
-    transform: rotate(180deg);
-    display: inline-block;
-  }
 }
 
 .author-details {

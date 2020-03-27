@@ -545,15 +545,8 @@ div {
   width: 100%;
 }
 
-.author-details .author-middle, 
-.load-more-posts .bb-icon-bars-f {
+.author-details .author-middle {
   display: none;
-}
-
-.post-author .load-more-posts.active .bb-icon-bars-f:before {
-  -ms-transform: rotate(-90deg);
-  -webkit-transform: rotate(-90deg);
-  transform: rotate(-90deg);
 }
 
 .posts-stream ul li {
