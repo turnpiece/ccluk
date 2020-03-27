@@ -2415,8 +2415,4 @@ MINIMUM width of 481 pixels (phones and larger)
   #buddypress .activity-list .activity-content blockquote {
     margin-top: 12px;
   }
-  .bp-user #item-header,
-  .groups div#item-header-avatar {
-    text-align: left;
-  }
 }

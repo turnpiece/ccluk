@@ -294,9 +294,6 @@ header#masthead {
   .site.has-thumbnail {
     padding-top: 30px;
   }
-  .entry-post-thumbnail {
-    /*margin-top: 55px;*/
-  }
 }
 
 .entry-summary-thumbnail {
@@ -409,7 +406,6 @@ body .buddyboss-select {
 --------------------------------------------------------------*/
 
 #secondary {
-  /*background-color: rgba(0, 0, 0, 0.05);*/
   padding: 0 15px;
 }
 
@@ -421,6 +417,10 @@ body .buddyboss-select {
   padding-top: 30px;
 }
 
+.footer-widget .widget h4.widgettitle {
+  font-size: 20px;
+}
+
 .widget-area {
   clear: both;
   .widget {
@@ -429,18 +429,6 @@ body .buddyboss-select {
     h3 {
       font-size: 20px;
     }
-  }
-  .widget_bp_profile_search h4 {
-    font-size: 20px;
-  }
-}
-
-.footer-widget .widget h4.widgettitle {
-  font-size: 20px;
-}
-
-.widget-area {
-  .widget {
     p, li, .textwidget {
       font-size: 14px;
     }
@@ -458,6 +446,9 @@ body .buddyboss-select {
       height: auto;
       padding: 12px;
     }
+  }
+  .widget_bp_profile_search h4 {
+    font-size: 20px;
   }
   .widget_search,
   .widget_display_search  {
@@ -516,7 +507,6 @@ div {
 }
 
 .post-author {
-  /*padding: 0 15px;*/
   position: relative;
 }
 
@@ -526,7 +516,8 @@ div {
   float: left;
 }
 
-.author-middle, .author-top {
+.author-middle, 
+.author-top {
   display: table-cell;
   vertical-align: top;
 }
@@ -543,7 +534,8 @@ div {
   width: 100%;
 }
 
-.author-middle, .author-top {
+.author-middle, 
+.author-top {
   display: block;
 }
 
@@ -553,7 +545,8 @@ div {
   width: 100%;
 }
 
-.author-details .author-middle, .load-more-posts .bb-icon-bars-f {
+.author-details .author-middle, 
+.load-more-posts .bb-icon-bars-f {
   display: none;
 }
 
@@ -627,7 +620,7 @@ aside.post-author {
 }
 
 .author-bio {
-  color: #333;
+  color: $dark;
   margin-bottom: 10px;
   font-weight: 400;
   line-height: 1.3;
@@ -677,7 +670,15 @@ body {
   }
 }
 
+/*--------------------------------------------------------------
+1.2 - Custom media queries
+--------------------------------------------------------------*/
+
 @media screen and (max-width: 520px) {
+  #primary {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
   body.error404 .site {
     padding-left: 15px;
     padding-right: 15px;
@@ -728,9 +729,6 @@ body {
   }
 }
 
-/*--------------------------------------------------------------
-1.2 - Custom media queries
---------------------------------------------------------------*/
 @media screen and (max-width: 460px) {
   .author-top .author .url img {
     width: 50px;
@@ -751,13 +749,25 @@ body {
 }
 
 /*--------------------------------------------------------------
+1.2.1 - Profile Posts
+--------------------------------------------------------------*/
+@media screen and (max-width: 680px) {
+  #item-posts .inner article {
+    width: 100%;
+  }
+}
+
+/*--------------------------------------------------------------
 1.1.6 - Forms
 --------------------------------------------------------------*/
 /* General */
 
 /* Placeholders */
 
-::-webkit-input-placeholder, :-moz-placeholder, ::-moz-placeholder, :-ms-input-placeholder {
+::-webkit-input-placeholder, 
+:-moz-placeholder, 
+::-moz-placeholder, 
+:-ms-input-placeholder {
   color: #888;
 }
 
@@ -771,30 +781,6 @@ body {
 
 .button-load-more-posts.loading:after {
   color: $white;
-}
-
-/*  Carousel Styles - idangerous.swiper  - http://www.idangero.us/sliders/swiper */
-
-/* IE10 Windows Phone 8 Fixes */
-
-.swiper-wp8-horizontal {
-  -ms-touch-action: pan-y;
-}
-
-.swiper-wp8-vertical {
-  -ms-touch-action: pan-x;
-}
-
-/*--------------------------------------------------------------
-1.2 - Custom media queries
---------------------------------------------------------------*/
-/*--------------------------------------------------------------
-1.2.1 - Profile Posts
---------------------------------------------------------------*/
-@media screen and (max-width: 680px) {
-  #item-posts .inner article {
-    width: 100%;
-  }
 }
 
 

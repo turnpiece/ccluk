@@ -109,6 +109,7 @@
 }
 
 @mixin display-flex() {
+  display: -moz-box;
 	display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -329,10 +330,14 @@
 }
 
 @mixin ease-in-out() {
-  -webkit-transition: all .15s ease-in-out;
-  -moz-transition: all .15s ease-in-out;
-  -o-transition: all .15s ease-in-out;
-  transition: all .15s ease-in-out;
+  @include transition(all .15s ease-in-out);
+}
+
+@mixin transition($transition...) {
+  -moz-transition:    $transition;
+  -o-transition:      $transition;
+  -webkit-transition: $transition;
+  transition:         $transition;
 }
 
 @mixin subnav-item() {
