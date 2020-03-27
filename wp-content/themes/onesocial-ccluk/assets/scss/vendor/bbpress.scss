@@ -726,10 +726,7 @@ span.bbp-author-ip {
 	}
 
 	.bbp-forum-data {
-    border-color: $green_bg;
-    border-width: 1px;
-    border-style: solid;
-    @include border-radius( 3px );
+		border-color: $green_bg;
 		.last-activity {
 			font-size: $font-size-sm;
 			color: $green;
@@ -840,7 +837,7 @@ body {
   vertical-align: middle;
   position: relative;
   margin-left: 5px;
-  min-height: 24px;
+  min-height: 46px;
 }
 
 #bbp-topic-details {
