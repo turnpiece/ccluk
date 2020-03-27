@@ -285,10 +285,6 @@ header#masthead #header-aside, header#masthead #logo-area {
   padding-top: 30px;
 }
 
-.single-post .entry-post-thumbnail {
-  /*margin-top: 55px;*/
-}
-
 .entry-summary-thumbnail {
   margin-left: 0;
 }
@@ -325,10 +321,76 @@ body:not(.buddypress).archive #content article.type-post {
 }
 
 /*--------------------------------------------------------------
+1.1.5 - Dropdowns
+--------------------------------------------------------------*/
+body .buddyboss-select {
+  float: none;
+}
+
+.buddyboss-select-inner {
+  display: block;
+  width: 100%;
+  clear: both;
+  padding: 0;
+  margin: 0;
+  font-size: 13px;
+  position: relative;
+  margin: 0 10px 10px 0;
+  background-color: #fff;
+  float: left;
+  border: 1px solid #aaa;
+}
+
+.buddyboss-select-inner:after {
+  font-family: "onesocial" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  display: block;
+  line-height: 1;
+  content: "P";
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  color: #22a7f0;
+  position: absolute;
+  right: 12px;
+  top: 12px;
+}
+
+.buddyboss-select-inner select {
+  cursor: pointer;
+  height: 37px;
+  width: 100%;
+  opacity: 0;
+  border: none;
+  /* overrides browser default */
+  margin: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 5;
+}
+
+.buddyboss-select-inner span {
+  float: left;
+  font-weight: 600;
+  height: 37px;
+  line-height: 37px;
+  padding: 0 30px 0 15px;
+  padding-right: 30px;
+  text-transform: none;
+}
+
+.datebox .buddyboss-select:first-child, .datebox .buddyboss-select:nth-child(2) {
+  margin-right: 0;
+}
+
+/*--------------------------------------------------------------
 1.1.6 - Widgets
 --------------------------------------------------------------*/
 #secondary {
-  /*background-color: rgba(0, 0, 0, 0.05);*/
   padding: 0 15px;
 }
 
@@ -338,6 +400,10 @@ body:not(.buddypress).archive #content article.type-post {
 
 .page:not(.buddypress) #secondary {
   padding-top: 30px;
+}
+
+.footer-widget .widget h4.widgettitle {
+  font-size: 20px;
 }
 
 .widget-area {
@@ -350,14 +416,6 @@ body:not(.buddypress).archive #content article.type-post {
 }
 
 .widget-area .widget h3 {
-  font-size: 20px;
-}
-
-.widget-area .widget_bp_profile_search h4 {
-  font-size: 20px;
-}
-
-.footer-widget .widget h4.widgettitle {
   font-size: 20px;
 }
 
@@ -375,6 +433,10 @@ body:not(.buddypress).archive #content article.type-post {
   background-color: #fff;
   height: auto;
   padding: 12px;
+}
+
+.widget-area .widget_bp_profile_search h4 {
+  font-size: 20px;
 }
 
 .widget-area .widget_search input[type="text"],
@@ -431,7 +493,6 @@ div.footer-inner ul.footer-menu li {
 }
 
 .post-author {
-  /*padding: 0 15px;*/
   position: relative;
 }
 
@@ -441,7 +502,8 @@ div.footer-inner ul.footer-menu li {
   float: left;
 }
 
-.author-middle, .author-top {
+.author-middle,
+.author-top {
   display: table-cell;
   vertical-align: top;
 }
@@ -458,7 +520,8 @@ div.footer-inner ul.footer-menu li {
   width: 100%;
 }
 
-.author-middle, .author-top {
+.author-middle,
+.author-top {
   display: block;
 }
 
@@ -468,7 +531,8 @@ div.footer-inner ul.footer-menu li {
   width: 100%;
 }
 
-.author-details .author-middle, .load-more-posts .bb-icon-bars-f {
+.author-details .author-middle,
+.load-more-posts .bb-icon-bars-f {
   display: none;
 }
 
@@ -593,7 +657,14 @@ body:not(.has-activity) .entry-content > #buddypress > #item-body {
   overflow: hidden;
 }
 
+/*--------------------------------------------------------------
+1.2 - Custom media queries
+--------------------------------------------------------------*/
 @media screen and (max-width: 520px) {
+  #primary {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
   body.error404 .site {
     padding-left: 15px;
     padding-right: 15px;
@@ -642,9 +713,6 @@ body:not(.has-activity) .entry-content > #buddypress > #item-body {
   }
 }
 
-/*--------------------------------------------------------------
-1.2 - Custom media queries
---------------------------------------------------------------*/
 @media screen and (max-width: 460px) {
   .author-top .author .url img {
     width: 50px;
@@ -665,11 +733,23 @@ body:not(.has-activity) .entry-content > #buddypress > #item-body {
 }
 
 /*--------------------------------------------------------------
+1.2.1 - Profile Posts
+--------------------------------------------------------------*/
+@media screen and (max-width: 680px) {
+  #item-posts .inner article {
+    width: 100%;
+  }
+}
+
+/*--------------------------------------------------------------
 1.1.6 - Forms
 --------------------------------------------------------------*/
 /* General */
 /* Placeholders */
-::-webkit-input-placeholder, :-moz-placeholder, ::-moz-placeholder, :-ms-input-placeholder {
+::-webkit-input-placeholder,
+:-moz-placeholder,
+::-moz-placeholder,
+:-ms-input-placeholder {
   color: #888;
 }
 
@@ -702,28 +782,6 @@ body:not(.has-activity) .entry-content > #buddypress > #item-body {
 
 .button-load-more-posts.loading:after {
   color: #fff;
-}
-
-/*  Carousel Styles - idangerous.swiper  - http://www.idangero.us/sliders/swiper */
-/* IE10 Windows Phone 8 Fixes */
-.swiper-wp8-horizontal {
-  -ms-touch-action: pan-y;
-}
-
-.swiper-wp8-vertical {
-  -ms-touch-action: pan-x;
-}
-
-/*--------------------------------------------------------------
-1.2 - Custom media queries
---------------------------------------------------------------*/
-/*--------------------------------------------------------------
-1.2.1 - Profile Posts
---------------------------------------------------------------*/
-@media screen and (max-width: 680px) {
-  #item-posts .inner article {
-    width: 100%;
-  }
 }
 
 /*----------------------------------------------------------------
@@ -1256,6 +1314,16 @@ body.open-right #mobile-right-panel {
 /* Register Page */
 body.register .page-full-width {
   padding: 50px 25px;
+}
+
+.datebox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.datebox .buddyboss-select:nth-child(2), .datebox .buddyboss-select:nth-child(3) {
+  padding-top: 25px;
 }
 
 body.register .page-full-width .entry-title {

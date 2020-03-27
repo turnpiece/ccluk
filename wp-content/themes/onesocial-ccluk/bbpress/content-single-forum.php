@@ -9,7 +9,11 @@
 
 ?>
 
+<div id="bbpress-forums">
+
 	<?php bbp_breadcrumb(); ?>
+
+	<?php bbp_forum_subscription_link(); ?>
 
 	<?php do_action( 'bbp_template_before_single_forum' ); ?>
 
@@ -47,3 +51,4 @@
 
 	<?php do_action( 'bbp_template_after_single_forum' ); ?>
 
+</div>

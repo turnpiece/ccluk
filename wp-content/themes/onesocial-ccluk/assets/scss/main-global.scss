@@ -3829,17 +3829,17 @@ a {
   }
 }
 
+.comments-area .children article {
+  /*padding-top: 0;*/
+}
+
 /*--------------------------------------------------------------
 9.2 - Comment form
 --------------------------------------------------------------*/
 
 #comments {
   clear: left;
-  margin-bottom: 55px;
-
-  .inner {
-    padding-top: 25px;
-  }
+  margin-bottom: 15px;
 }
 
 .comments-title + #respond {
@@ -3848,7 +3848,9 @@ a {
 }
 
 #respond {
-  @include border-radius( 3px );
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
   h3#reply-title {
     float: right;
     font-size: 16px;
@@ -3856,7 +3858,7 @@ a {
     margin: 15px 0 0;
   }
   #cancel-comment-reply-link {
-    color: $red;
+    color: #f14e56;
     font-size: $font-size-tiny;
     font-weight: 400;
     position: relative;
@@ -3938,7 +3940,7 @@ body.logged-in #respond .comment-form-comment {
 }
 
 .required {
-  color: $red;
+  color: #f14e56;
 }
 
 .comment-avatar {
@@ -4934,8 +4936,7 @@ input#user_login {
 }
 
 .popup-content {
-  input:not([type="checkbox"]):not([type="radio"]):not([type="button"]), 
-  .input:not([type="checkbox"]):not([type="radio"]):not([type="button"]) {
+  input:not([type="checkbox"]):not([type="radio"]):not([type="button"]), .input:not([type="checkbox"]):not([type="radio"]):not([type="button"]) {
     background: transparent;
     border-color: $divider_color;
     border-width: 0 0 1px;
@@ -4986,10 +4987,12 @@ input#user_login {
   }
   .email-wrap, .password-wrap, .username-wrap {
     position: relative;
-    margin-bottom: 15px;
   }
   .options-wrap {
     overflow: hidden;
+  }
+  .email-wrap, .username-wrap, .password-wrap {
+    margin-bottom: 15px;
   }
   .submit button:not(#searchsubmit):not(.update-cover-photo) {
     margin-bottom: 30px;
@@ -5001,8 +5004,7 @@ input#user_login {
   display: block;
 }
 
-.popup-content .button:not(.ed_button), 
-.wp-social-login-provider-list.wp-social-login-provider-list a {
+.popup-content .button:not(.ed_button), .wp-social-login-provider-list.wp-social-login-provider-list a {
   border-radius: 40px;
   color: $white;
   display: block;
@@ -5030,10 +5032,9 @@ input#user_login {
   -webkit-align-items: flex-end;
   -ms-flex-align: end;
   align-items: flex-end;
-  @include display-flex();
+@include display-flex();
   .buddyboss-select {
-    &:first-child, 
-    &:nth-child(2) {
+    &:first-child, &:nth-child(2) {
       margin-right: 15px;
     }
   }
@@ -5217,6 +5218,26 @@ p.description:empty {
 
 .wp-social-login-provider-aol {
   background: #ff0b00;
+}
+
+.wp-social-login-provider-yandex {
+  background: #ffcc00;
+}
+
+.wp-social-login-provider-mailru {
+  background: #168de2;
+}
+
+.wp-social-login-provider-vkontakte {
+  background: #45668e;
+}
+
+.wp-social-login-provider-mixi {
+  background: #d1ad5a;
+}
+
+.wp-social-login-provider-skyrock {
+  background: #009aff;
 }
 
 .wp-social-login-provider-goodreads {

@@ -2420,7 +2420,7 @@ label[for='select-all-notifications'] {
 
 .bp-legacy div#item-body {
   clear: left;
-  padding: 0 5px 15px;
+  padding: 0 0 15px;
   overflow: hidden;
 }
 
@@ -2800,7 +2800,6 @@ body.activity-permalink #buddypress ul.item-list {
         position: relative;
         list-style: none;
         overflow: hidden;
-        border-bottom: 1px solid $divider_color;
       }
       &:not(.bb-group-members) li img.avatar {
         float: left;
@@ -3222,11 +3221,6 @@ div#item-header-avatar {
   position: relative;
 }
 
-.groups div#item-header-avatar {
-  /*width: 100%;*/
-  text-align: left;
-}
-
 .bb-group-avatar-wrap {
   width: 100%;
 }
@@ -3242,8 +3236,14 @@ div#item-header-avatar img.avatar {
   @include border-radius( 50% );
 }
 
-.bp-user #item-header {
-  text-align: center;
+.bp-user {
+  #item-header {
+    text-align: center;
+  }
+
+  .site-content {
+    margin-top: 0;
+  }
 }
 
 body.single-item.groups .entry-header .entry-title {
@@ -3255,7 +3255,8 @@ body.single-item.groups .entry-header .entry-title {
 }
 
 body.bp-user #buddypress div#item-nav {
-  margin-bottom: 50px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 #mobile-item-nav-wrap {
@@ -3771,15 +3772,6 @@ body.activity-permalink #buddypress li.mini .activity-meta {
       li.has-comments {
         padding-bottom: 15px;
       }
-      > li {
-        width: 100%;
-
-        &.joined_group,
-        &.new_member,
-        &.new_avatar { 
-          display: none;
-        }
-      }
     }
     li {
       .activity-content {
@@ -3829,7 +3821,6 @@ body.activity-permalink #buddypress li.mini .activity-meta {
       &.new_forum_post, 
       &.new_forum_topic {
         .activity-content .activity-inner {
-          border-left: 2px solid #EAEAEA;
           margin-left: 5px;
           margin: 10px 10px 0 5px;
           padding-left: 10px;
@@ -5436,15 +5427,14 @@ body.buddypress {
       }
     }
 
-    div.activity-comments div.acomment-meta a:not(.activity-time-since), 
-    .activity-header a,
-    .btn-group.social a, 
-    .standard-form div.submit a.prev {
-      &:hover {
-        color: $green;
-      }
+    div.activity-comments div.acomment-meta a:not(.activity-time-since):hover, 
+    .activity-header a:hover,
+    .btn-group.social a:hover, 
+    .standard-form div.submit a.prev:hover {
+      color: $green;
     }
 
+    #group-create-nav .group-create,
     div#item-nav .item-list-tabs ul li .bb-menu-button {
       background-color: $green;
     }
@@ -5455,8 +5445,7 @@ body.buddypress {
   }
   
   #create-group-form {
-    #invite-list strong, 
-    &.standard-form label span.highlight {
+    #invite-list strong, &.standard-form label span.highlight {
       color: $green;
     }
   }
@@ -5506,10 +5495,6 @@ body.buddypress {
 			  display: none;
 			}
 		}
-
-    .site {
-        padding-top: 30px;
-    }
 
     &.settings {
       #buddypress {
@@ -5649,31 +5634,6 @@ body.buddypress {
 					    		color: $green;
 					    	}
 					    }
-					}
-				}
-			}
-			.item-header-mobile {
-				position: relative;
-				min-height: 150px;
-
-				#item-header-avatar {
-					position: absolute;
-					left: 0;
-					top: 0;
-				}
-
-				#item-header-content {
-					margin-left: 200px;
-          text-align: left;
-          
-          > h1 {
-            text-align: left;
-          }
-
-					.btn-group-social {
-						.generic-button a {
-							padding-left: 0;
-						}
 					}
 				}
 			}
