@@ -1,12 +1,12 @@
 .single-incsub_event {
 
+	.entry-header {
+		@include page-header();
+	}
+	
 	.header-area {
 		max-width: $content_w;
 		@include centred-margin( 0 );
-
-		.entry-header {
-			@include page-header();
-		}
 	}
 
 	#wpmudevevents-wrapper {

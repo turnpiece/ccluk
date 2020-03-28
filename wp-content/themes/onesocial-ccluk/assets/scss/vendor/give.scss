@@ -1,6 +1,11 @@
 /* styles for GIve donation pages */
 
 body.single-give_forms {
+
+	.entry-header {
+		@include page-header();
+	}
+
 	#main {
 		max-width: $content_w;
 
@@ -8,10 +13,6 @@ body.single-give_forms {
 			.header-area {
 				max-width: $content_w;
 				@include centred-margin();
-				
-				> .entry-header {
-					@include page-header();
-				}
 			}
 		}
 	}

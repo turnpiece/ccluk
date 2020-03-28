@@ -43,7 +43,7 @@ h1, h2, h3, h4, h5, h6, ul, ol, dd, table, p, address, pre, hr, figure, video {
 }
 
 h3, h4 {
-  line-height: 1.6;
+  line-height: 1.4;
 }
 
 a,
@@ -412,19 +412,19 @@ a.cta:hover {
 }
 
 /* styles for pages */
-body.page #primary article > .entry-header {
+.entry-header {
   margin: 12px 0px;
   margin: 1.2rem 0rem;
   border-bottom: 1px solid #54ae68;
 }
 
-body.page #primary article > .entry-header h1.entry-title {
+.entry-header h1.entry-title {
   font-size: 48px;
   padding-bottom: 15px;
   color: #54ae68;
 }
 
-body.page #primary article > .entry-header a > .entry-title {
+.entry-header a > .entry-title {
   color: #22a7f0;
 }
 
@@ -2265,25 +2265,25 @@ div#sitewide-notice div#message p {
 }
 
 /** Styles for plugins etc. **/
-.single-incsub_event .header-area {
-  max-width: 750px;
-  margin: 0 auto;
-}
-
-.single-incsub_event .header-area .entry-header {
+.single-incsub_event .entry-header {
   margin: 12px 0px;
   margin: 1.2rem 0rem;
   border-bottom: 1px solid #54ae68;
 }
 
-.single-incsub_event .header-area .entry-header h1.entry-title {
+.single-incsub_event .entry-header h1.entry-title {
   font-size: 48px;
   padding-bottom: 15px;
   color: #54ae68;
 }
 
-.single-incsub_event .header-area .entry-header a > .entry-title {
+.single-incsub_event .entry-header a > .entry-title {
   color: #22a7f0;
+}
+
+.single-incsub_event .header-area {
+  max-width: 750px;
+  margin: 0 auto;
 }
 
 .single-incsub_event #wpmudevevents-wrapper {
@@ -2350,6 +2350,22 @@ div#sitewide-notice div#message p {
 }
 
 /* styles for GIve donation pages */
+body.single-give_forms .entry-header {
+  margin: 12px 0px;
+  margin: 1.2rem 0rem;
+  border-bottom: 1px solid #54ae68;
+}
+
+body.single-give_forms .entry-header h1.entry-title {
+  font-size: 48px;
+  padding-bottom: 15px;
+  color: #54ae68;
+}
+
+body.single-give_forms .entry-header a > .entry-title {
+  color: #22a7f0;
+}
+
 body.single-give_forms #main {
   max-width: 750px;
 }
@@ -2358,22 +2374,6 @@ body.single-give_forms #main #content .header-area {
   max-width: 750px;
   margin: 15px auto;
   margin: 1.5rem auto;
-}
-
-body.single-give_forms #main #content .header-area > .entry-header {
-  margin: 12px 0px;
-  margin: 1.2rem 0rem;
-  border-bottom: 1px solid #54ae68;
-}
-
-body.single-give_forms #main #content .header-area > .entry-header h1.entry-title {
-  font-size: 48px;
-  padding-bottom: 15px;
-  color: #54ae68;
-}
-
-body.single-give_forms #main #content .header-area > .entry-header a > .entry-title {
-  color: #22a7f0;
 }
 
 body.single-give_forms #secondary {

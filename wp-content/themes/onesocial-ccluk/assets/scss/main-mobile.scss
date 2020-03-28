@@ -187,7 +187,7 @@ html.mfp-helper {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #555;
+  color: $dark;
   font-weight: 400;
 }
 
@@ -583,7 +583,7 @@ div {
 body {
   &:not(.buddypress) #content article {
     border-bottom: 0;
-    /*padding: 25px 0 40px;*/
+    padding-top: 0;
   }
   #content article.boss-create-post-wrapper {
     border-bottom: 1px solid $light;

@@ -1,12 +1,12 @@
 /* styles for pages */
 
+.entry-header {
+	@include page-header();
+}
+
 body.page {
 	#primary {
 		article {
-			> .entry-header {
-				@include page-header();
-			}
-
 			&.has-post-thumbnail {
 				> .entry-header {
 					border-bottom: none;

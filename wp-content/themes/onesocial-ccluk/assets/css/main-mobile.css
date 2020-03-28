@@ -175,7 +175,7 @@ html.mfp-helper body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #555;
+  color: #333;
   font-weight: 400;
 }
 
@@ -570,7 +570,7 @@ div.footer-inner ul.footer-menu li {
 
 body:not(.buddypress) #content article {
   border-bottom: 0;
-  /*padding: 25px 0 40px;*/
+  padding-top: 0;
 }
 
 body #content article.boss-create-post-wrapper {
@@ -1699,6 +1699,9 @@ MAXIMUM width of 768 pixels (vertical tablets & large phones)
   body.page-template-homepage #main .section.banner.text-left .section-title-container > .section-title p, body.page-template-homepage #main .section.banner.text-right .section-title-container > .section-title h2,
   body.page-template-homepage #main .section.banner.text-right .section-title-container > .section-title p {
     text-align: center;
+  }
+  body.page #primary article > .entry-header h1.entry-title {
+    font-size: 36px;
   }
   html.js {
     margin-top: 0 !important;

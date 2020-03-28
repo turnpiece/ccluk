@@ -735,7 +735,7 @@ q, blockquote {
   border-left: 4px solid #54ae68;
   color: #54ae68;
   font-style: italic;
-  margin: 0 0 1.625rem 1.625rem;
+  margin: 0 0 1.625rem 0.8rem;
   padding-left: 1rem;
 }
 
@@ -1635,19 +1635,19 @@ a:before, a:after {
   transition: all .15s ease-in-out;
 }
 
-body.search #primary .page-header {
+body.search .page-header {
   margin: 12px 0px;
   margin: 1.2rem 0rem;
   border-bottom: 1px solid #54ae68;
 }
 
-body.search #primary .page-header h1.entry-title {
+body.search .page-header h1.entry-title {
   font-size: 48px;
   padding-bottom: 15px;
   color: #54ae68;
 }
 
-body.search #primary .page-header a > .entry-title {
+body.search .page-header a > .entry-title {
   color: #22a7f0;
 }
 

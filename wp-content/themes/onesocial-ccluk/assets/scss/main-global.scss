@@ -768,7 +768,7 @@ q, blockquote {
   border-left: 4px solid $green;
   color: $green;
   font-style: italic;
-  margin: 0 0 1.625rem 1.625rem;
+  margin: 0 0 1.625rem 0.8rem;
   padding-left: 1rem;
 
   cite {
@@ -1697,10 +1697,8 @@ a {
 }
 
 body.search {
-  #primary {
-    .page-header {
-      @include page-header();
-    }
+  .page-header {
+    @include page-header();
   }
 }
 

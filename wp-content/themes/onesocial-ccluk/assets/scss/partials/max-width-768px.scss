@@ -25,6 +25,16 @@
             }
         }
     }
+
+    &.page {
+        #primary {
+            article {
+                > .entry-header h1.entry-title {
+                    font-size: $font-size-lg;
+                }
+            }
+        }
+    }
 }
 
 html.js {
