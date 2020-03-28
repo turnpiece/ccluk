@@ -138,7 +138,6 @@ add_action( 'after_setup_theme', 'ccluk_theme_setup' );
 function ccluk_wsl_secure_avatar_fix( $user_id, $provider, $redirect_to, $adapter, $hybridauth_user_profile, $wp_user ) {
 	// check for insecure avatar
 	if ($hybridauth_user_profile->photoURL && strpos( $hybridauth_user_profile->photoURL, 'http://' ) !== false) {
-		error_log( __FUNCTION__ . ' changing insecure avatar url ' . $hybridauth_user_profile->photoURL );
 		$hybridauth_user_profile->photoURL = str_replace( 'http:', '', $hybridauth_user_profile->photoURL );
 	}
 }
@@ -146,7 +145,6 @@ function ccluk_wsl_secure_avatar_fix( $user_id, $provider, $redirect_to, $adapte
 function ccluk_wsl_secure_avatar_check( $user_id, $provider, $hybridauth_user_profile, $redirect_to ) {
 	// check for insecure avatar
 	if ($hybridauth_user_profile->photoURL && strpos( $hybridauth_user_profile->photoURL, 'http://' ) !== false) {
-		error_log( __FUNCTION__ . ' changing insecure avatar url ' . $hybridauth_user_profile->photoURL );
 		update_user_meta( $user_id, 'wsl_current_user_image', str_replace( 'http:', '', $hybridauth_user_profile->photoURL ) );
 	}
 }
