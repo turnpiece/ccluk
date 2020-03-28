@@ -116,8 +116,60 @@ function ccluk_theme_setup()
 
     // disable public messaging
     add_filter('bp_get_send_public_message_button', '__return_false');
+
+    // check for WordPress Social Login
+	if (isset($GLOBALS['WORDPRESS_SOCIAL_LOGIN_VERSION'])) {
+		add_action( 'wsl_process_login_authenticate_wp_user_start', 'ccluk_wsl_secure_avatar_fix', 10, 6 );
+		add_action( 'wsl_hook_process_login_before_wp_safe_redirect', 'ccluk_wsl_secure_avatar_check', 10, 4 );
+		add_filter( 'wsl_hook_alter_get_bp_user_custom_avatar', 'ccluk_wsl_get_bp_avatar_filter', 10, 5 );
+		add_filter( 'wsl_hook_alter_wp_user_custom_avatar', 'ccluk_wsl_get_wp_avatar_filter', 10, 8 );
+	}
 }
 add_action( 'after_setup_theme', 'ccluk_theme_setup' );
+
+/*
+ *
+ * WordPress Social Login hooks
+ * 
+ * secure avatar fix
+ * updates an http:// image to //
+ * 
+ */
+function ccluk_wsl_secure_avatar_fix( $user_id, $provider, $redirect_to, $adapter, $hybridauth_user_profile, $wp_user ) {
+	// check for insecure avatar
+	if ($hybridauth_user_profile->photoURL && strpos( $hybridauth_user_profile->photoURL, 'http://' ) !== false) {
+		error_log( __FUNCTION__ . ' changing insecure avatar url ' . $hybridauth_user_profile->photoURL );
+		$hybridauth_user_profile->photoURL = str_replace( 'http:', '', $hybridauth_user_profile->photoURL );
+	}
+}
+
+function ccluk_wsl_secure_avatar_check( $user_id, $provider, $hybridauth_user_profile, $redirect_to ) {
+	// check for insecure avatar
+	if ($hybridauth_user_profile->photoURL && strpos( $hybridauth_user_profile->photoURL, 'http://' ) !== false) {
+		error_log( __FUNCTION__ . ' changing insecure avatar url ' . $hybridauth_user_profile->photoURL );
+		update_user_meta( $user_id, 'wsl_current_user_image', str_replace( 'http:', '', $hybridauth_user_profile->photoURL ) );
+	}
+}
+
+function ccluk_wsl_get_bp_avatar_filter( $wsl_html, $user_id, $wsl_avatar, $html, $args ) {
+	if (strpos( $wsl_avatar, 'http://' ) !== false) {
+		$wsl_avatar = str_replace( 'http:', '', $wsl_avatar );
+		$img_class  = ('class="' .(!empty($args ['class']) ?($args ['class'] . ' ') : '') . 'avatar-wordpress-social-login" ');
+		$img_width  = (!empty($args ['width']) ? 'width="' . $args ['width'] . '" ' : 'width="' . bp_core_avatar_full_width() . '" ' );
+		$img_height = (!empty($args ['height']) ? 'height="' . $args ['height'] . '" ' : 'height="' . bp_core_avatar_full_height() . '" ' );
+		$img_alt    = (!empty( $args['alt'] ) ? 'alt="' . esc_attr( $args['alt'] ) . '" ' : '' );
+		$wsl_html = preg_replace('#<img[^>]+>#i', '<img src="' . $wsl_avatar . '" ' . $img_alt . $img_class . $img_height . $img_width . '/>', $html );
+	}
+	return $wsl_html;
+}
+
+function ccluk_wsl_get_wp_avatar_filter( $wsl_html, $user_id, $wsl_avatar, $html, $mixed, $size, $default, $alt ) {
+	if (strpos( $wsl_avatar, 'http://' ) !== false) {
+		$wsl_avatar = str_replace( 'http:', '', $wsl_avatar );
+		$wsl_html = '<img alt="'. $alt .'" src="' . $wsl_avatar . '" class="avatar avatar-wordpress-social-login avatar-' . $size . ' photo" height="' . $size . '" width="' . $size . '" />';
+	}
+	return $wsl_html;
+}
 
 /**
  * Enqueues scripts and styles for child theme front-end.
