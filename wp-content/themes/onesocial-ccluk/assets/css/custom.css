@@ -412,19 +412,19 @@ a.cta:hover {
 }
 
 /* styles for pages */
-.entry-header {
+body.page #primary article .entry-header {
   margin: 12px 0px;
   margin: 1.2rem 0rem;
   border-bottom: 1px solid #54ae68;
 }
 
-.entry-header h1.entry-title {
+body.page #primary article .entry-header h1.entry-title {
   font-size: 48px;
   padding-bottom: 15px;
   color: #54ae68;
 }
 
-.entry-header a > .entry-title {
+body.page #primary article .entry-header a > .entry-title {
   color: #22a7f0;
 }
 
@@ -2398,6 +2398,10 @@ body.single-give_forms #secondary {
 .give-form button.give-btn:hover {
   color: #fff;
   background-color: #54ae68;
+}
+
+#catapult-cookie-bar a.ctcc-more-info-link {
+  text-decoration: underline;
 }
 
 /*--------------------------------------------------------------

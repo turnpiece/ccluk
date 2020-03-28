@@ -153,6 +153,7 @@ function buddyboss_onesocial_scripts_styles() {
 	$assets_dir = get_stylesheet_directory_uri() . '/assets';
 
 	$CSS_URL = $assets_dir . ( !CCLUK_DEBUGGING ? $css_compressed_dest : $css_dest );
+	$JS_URL = $assets_dir . '/js';
 
 	// OneSocial icon fonts.
 	wp_register_style( 'icons', $CSS_URL . '/onesocial-icons.css', array(), $onesocial_version, 'all' );
@@ -161,6 +162,33 @@ function buddyboss_onesocial_scripts_styles() {
 	// Activate our main stylesheets.
 	wp_enqueue_style( 'onesocial-main-global', $CSS_URL . '/main-global.css', array( 'icons' ), $onesocial_version, 'all' );
 
+	/*
+	 * Custom styles
+	 *
+	 * need to ensure this stylesheet loads after the parent stylesheets
+	 *
+	 */
+	wp_enqueue_style( 'ccluk-custom', $CSS_URL . '/custom.css', array( 'onesocial-main-global' ) );
+  
+	if (is_user_logged_in()) {
+		// styles for logged in members
+		wp_enqueue_style( 'ccluk-members', $CSS_URL . '/members.css', array( 'ccluk-custom' ) );
+	}
+  
+	// load fonts
+	wp_enqueue_style( 'ccluk-fonts', 'https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i|Ubuntu:700&display=swap' );
+
+	/*
+	 * Scripts
+	 *
+	 * need to ensure this script loads after the parent scripts
+	 *
+	 */
+	wp_enqueue_script( 'ccluk-menu-js', $JS_URL . '/menu.'.(CCLUK_DEBUGGING ? '' : 'min.').'js', array( 'jquery' ) );
+  
+	// Google Analytics tracking
+	wp_enqueue_script( 'ccluk-ga-tracking-js', $JS_URL . '/ga-tracking.'.(CCLUK_DEBUGGING ? '' : 'min.').'js', array( 'jquery' ) );
+  
 	// is adminbar fixed or floated
 	$adminbar_layout = 'fixed';
 

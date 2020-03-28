@@ -127,6 +127,10 @@ function ccluk_theme_setup()
 }
 add_action( 'after_setup_theme', 'ccluk_theme_setup' );
 
+/****************************** CUSTOM FUNCTIONS ******************************/
+
+// Add your own custom functions here
+
 /*
  *
  * WordPress Social Login hooks
@@ -168,60 +172,6 @@ function ccluk_wsl_get_wp_avatar_filter( $wsl_html, $user_id, $wsl_avatar, $html
 	}
 	return $wsl_html;
 }
-
-/**
- * Enqueues scripts and styles for child theme front-end.
- *
- * @since OneSocial Child Theme  1.0.0
- */
-function ccluk_theme_scripts_styles()
-{
-  /**
-   * Scripts and Styles loaded by the parent theme can be unloaded if needed
-   * using wp_deregister_script or wp_deregister_style.
-   *
-   * See the WordPress Codex for more information about those functions:
-   * http://codex.wordpress.org/Function_Reference/wp_deregister_script
-   * http://codex.wordpress.org/Function_Reference/wp_deregister_style
-   **/
-
-   $css = get_stylesheet_directory_uri() . '/assets/' . ( CCLUK_DEBUGGING ? 'css' : 'css-compressed' );
-
-  /*
-   * Styles
-   *
-   * need to ensure this stylesheet loads after the parent stylesheets
-   *
-   */
-   wp_enqueue_style( 'ccluk-custom', $css.'/custom.css', array( 'onesocial-main-global' ) );
-
-   if (is_user_logged_in()) {
-       // styles for logged in members
-       wp_enqueue_style( 'ccluk-members', $css.'/members.css', array( 'ccluk-custom' ) );
-   }
-
-   // load fonts
-   wp_enqueue_style( 'ccluk-fonts', 'https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i|Ubuntu:700&display=swap' );
-  wp_enqueue_style( 'ccluk-custom', get_stylesheet_directory_uri() . '/assets/css'.(CCLUK_DEBUGGING ? '' : '-compressed').'/custom.css', array( 'onesocial-main-global' ) );
-
-  /*
-   * Scripts
-   *
-   * need to ensure this script loads after the parent scripts
-   *
-   */
-    wp_enqueue_script( 'ccluk-menu-js', get_stylesheet_directory_uri() . '/assets/js/menu.'.(CCLUK_DEBUGGING ? '' : 'min.').'js', array( 'jquery' ) );
-
-    // Google Analytics tracking
-    wp_enqueue_script( 'ccluk-ga-tracking-js', get_stylesheet_directory_uri() . '/assets/js/ga-tracking.'.(CCLUK_DEBUGGING ? '' : 'min.').'js', array( 'jquery' ) );
-
-}
-add_action( 'wp_enqueue_scripts', 'ccluk_theme_scripts_styles', 9999 );
-
-
-/****************************** CUSTOM FUNCTIONS ******************************/
-
-// Add your own custom functions here
 
 /**
 * Redirect buddypress and bbpress pages to registration page
