@@ -1976,6 +1976,78 @@ label[for="groupblog-create-new-no"] .buddyboss-select {
   animation: spin 2s infinite linear;
 }
 
+#buddypress button.loading:after,
+#buddypress ul li.loading a:after {
+  font-family: 'fontawesome';
+  font-weight: normal;
+  font-style: normal;
+  text-rendering: auto;
+  text-decoration: inherit;
+  speak: none;
+  display: inline-block;
+  line-height: 1;
+  content: "\f110";
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  color: #fff;
+  text-decoration: none;
+  margin-left: 8px;
+  padding: 0;
+  -webkit-animation: spin 2s infinite linear;
+  animation: spin 2s infinite linear;
+}
+
+#buddypress input[type="submit"].pending, #buddypress input[type="submit"].disabled, #buddypress input[type="button"].pending, #buddypress input[type="button"].disabled, #buddypress input[type="reset"].pending, #buddypress input[type="reset"].disabled {
+  border-color: #eee;
+  color: #bbb;
+  cursor: disabled;
+}
+
+#buddypress button.pending, #buddypress button.disabled {
+  border-color: #eee;
+  color: #bbb;
+  cursor: disabled;
+}
+
+#buddypress div.pending a,
+#buddypress a.disabled {
+  border-color: #eee;
+  color: #bbb;
+  cursor: disabled;
+}
+
+#buddypress input[type="submit"]:hover.pending, #buddypress input[type="submit"]:hover.disabled, #buddypress input[type="button"]:hover.pending, #buddypress input[type="button"]:hover.disabled, #buddypress input[type="reset"]:hover.pending, #buddypress input[type="reset"]:hover.disabled {
+  background: #fff;
+  border-color: #eee;
+  color: #bbb;
+}
+
+#buddypress button.pending:hover, #buddypress button.disabled:hover {
+  background: #fff;
+  border-color: #eee;
+  color: #bbb;
+}
+
+#buddypress div.pending a:hover,
+#buddypress a.disabled:hover {
+  background: #fff;
+  border-color: #eee;
+  color: #bbb;
+}
+
+#buddypress div.submit input.loading {
+  border-color: #eee;
+  color: #bbb;
+}
+
+#buddypress div.submit #send_reply_button {
+  background: transparent;
+}
+
+#buddypress table {
+  width: 100%;
+}
+
 .author-follow div.generic-button a:hover,
 #main .inner-avatar-wrap .generic-button a:not(.group-sub):not(.group-subscription-close):hover {
   background: transparent;
@@ -2324,7 +2396,7 @@ body #buddypress .group-join div.generic-button a:before {
 }
 
 #buddypress .group-join div.generic-button a.leave-group:hover:before {
-  background-color: #a3a3a3;
+  background-color: #B5290E;
 }
 
 #buddypress div#message {
@@ -2818,8 +2890,8 @@ div#sitewide-notice div#message.error p {
 }
 
 #buddypress table.notification-settings .no input:checked + label {
-  background-color: #a3a3a3;
-  border-color: #a3a3a3;
+  background-color: #B5290E;
+  border-color: #B5290E;
 }
 
 #buddypress table.notification-settings .no label {
@@ -3731,6 +3803,45 @@ body #buddypress div.buddyboss-media-form-wrapper div#invite-list ul li {
   margin-left: 6px;
 }
 
+#item-photos .wrap {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding-top: 70px;
+}
+
+#item-photos .size-activity-4-thumbnail {
+  height: 50px;
+}
+
+#item-photos .activity {
+  margin-top: 36px;
+  margin-bottom: 70px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+#item-photos h3 {
+  display: inline-block;
+  padding: 5px 9px;
+  line-height: 1.7;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+  background-color: #333;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+  font-size: 10px;
+  font-family: inherit;
+  text-transform: uppercase;
+  margin: 0 10px 0 0;
+  vertical-align: top;
+}
+
+#item-photos h3 span {
+  margin-left: 3px;
+  color: #54ae68;
+}
+
 /*--------------------------------------------------------------
 19.0 - BuddyPress Group Email Subscription
 --------------------------------------------------------------*/
@@ -3742,82 +3853,6 @@ body #buddypress div.buddyboss-media-form-wrapper div#invite-list ul li {
   display: none;
 }
 
-/*
-#secondary div.generic-button.group-subscription-options {
-  position: absolute;
-  width: 100%;
-  margin-left: 0;
-  background-color: $white;
-  height: auto;
-  margin-top: -10px;
-  z-index: 4;
-  font-size: $font-size-tiny;
-  line-height: 1.2;
-  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.11);
-}
-
-body {
-  #groups-dir-list .group-subscription-options,
-  #groups-list .group-subscription-options {
-    position: absolute;
-    width: 100%;
-    margin-left: 0;
-    background-color: $white;
-    height: auto;
-    margin-top: -10px;
-    z-index: 4;
-    font-size: $font-size-tiny;
-    line-height: 1.2;
-    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.11);
-  }
-}
-
-#secondary {
-  #item-meta {
-    position: relative;
-  }
-  div.generic-button.group-subscription-options a.group-sub {
-    display: block;
-    width: 100%;
-    margin-bottom: 2px;
-    margin-top: 12px;
-  }
-}
-
-#buddypress #groups-list a.group-sub {
-  display: block;
-  width: 100%;
-  margin-bottom: 2px;
-  margin-top: 12px;
-}
-
-#secondary div.generic-button.group-subscription-options a.group-sub:first-child, #buddypress #groups-list a.group-sub:first-child {
-  margin-top: 0;
-}
-
-#secondary div.generic-button.group-subscription-options .fa-spinner, #buddypress #groups-list a.group-subscription-close .fa-spinner, #secondary div.generic-button.group-subscription-options a.group-sub .fa-spinner, #buddypress #groups-list a.group-sub .fa-spinner {
-  display: none;
-}
-
-#secondary div.generic-button.group-subscription-options a.group-subscription-close, 
-#buddypress #groups-list a.group-subscription-close {
-  background-color: transparent;
-  margin-top: 4px;
-  margin-bottom: 4px;
-  color: #000;
-  padding: 0;
-  display: block;
-  height: auto;
-}
-
-#secondary div.generic-button.group-subscription-options {
-  display: none;
-  max-width: 200px;
-  right: 0;
-  margin-top: 5px;
-}
-
-*/
 #buddypress #object-nav .sub-menu {
   display: none;
   width: 0;
@@ -3836,6 +3871,15 @@ body {
 #buddypress .filters .buddyboss-select label,
 #buddypress div#subnav.item-list-tabs ul li.last label {
   display: none;
+}
+
+/* buddyboss-wall-privacy */
+body #buddypress div.buddyboss-wall-form-wrapper #form_buddyboss-wall-privacy {
+  padding: 20px 10px 10px;
+}
+
+#buddypress div.buddyboss-wall-form-wrapper #form_buddyboss-wall-privacy .field.submit {
+  margin-top: 15px;
 }
 
 #activity-filter-select .buddyboss-select {
@@ -9139,7 +9183,7 @@ div.bbp-topic-tags a {
   -webkit-box-shadow: none;
           box-shadow: none;
   clip: auto !important;
-  /*color: #21759b;*/
+  /*color: $blue;*/
   display: block;
   font-size: 0.05469rem;
   font-weight: bold;
@@ -9536,7 +9580,7 @@ li.bbp-forum-freshness, li.bbp-topic-freshness {
 }
 
 #bbpress-forums li.bbp-body ul.bbp-forum-status-closed div.bbp-forum-info-content .bbp-forum-title:before {
-  color: #a3a3a3;
+  color: #B5290E;
   content: "U";
   margin: 0 20px 0 0;
   position: relative;
@@ -10415,7 +10459,7 @@ div.bbp-template-notice.important {
 }
 
 div.bbp-template-notice.error, div.bbp-template-notice.warning {
-  background-color: #a3a3a3;
+  background-color: #B5290E;
 }
 
 div.bbp-template-notice p {
@@ -10468,7 +10512,7 @@ div.indicator-hint p {
 }
 
 #bbpress-forums .status-closed a.bbp-topic-permalink:before {
-  color: #a3a3a3;
+  color: #B5290E;
   content: "\55";
   font-size: 18px;
 }
@@ -10744,6 +10788,40 @@ body.single-item.groups .buddypress-content-wrap {
 /*--------------------------------------------------------------
 18.0 - Search results
 --------------------------------------------------------------*/
+.bb-search-result-group .item,
+#buddypress .bboss_search_results_wrapper ul.item-list li div.item-title {
+  width: 100%;
+}
+
+.bb-search-result-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.bb-search-result-group .item-avatar {
+  padding-right: 40px;
+  width: 20%;
+}
+
+.bb-search-result-group .item-meta {
+  text-align: right;
+}
+
+.bb-search-result-group .item-avatar {
+  padding-right: 40px;
+}
+
+.bb-search-result-group .bb-group-title {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.bb-search-result-group .bb-group-type {
+  font-size: 11px;
+  font-weight: normal;
+}
+
 #bbp-search-results .bbp-forum-title h3,
 #bbp-search-results .bbp-reply-title h3,
 #bbp-search-results .bbp-topic-title h3 {

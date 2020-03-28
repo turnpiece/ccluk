@@ -404,7 +404,8 @@ body {
 }
 
 .sl-count {
-  &:after, &:before {
+  &:after, 
+  &:before {
     background-color: $white;
   }
 }

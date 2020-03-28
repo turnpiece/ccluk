@@ -130,7 +130,7 @@ div.bbp-topic-tags a {
       border-radius: 0;
       box-shadow: none;
       clip: auto !important;
-      /*color: #21759b;*/
+      /*color: $blue;*/
       display: block;
       font-size: 0.05469rem;
       font-weight: bold;
@@ -1800,6 +1800,33 @@ body {
 /*--------------------------------------------------------------
 18.0 - Search results
 --------------------------------------------------------------*/
+
+.bb-search-result-group .item, 
+#buddypress .bboss_search_results_wrapper ul.item-list li div.item-title {
+  width: 100%;
+}
+
+.bb-search-result-group {
+  @include display-flex();
+  .item-avatar {
+    padding-right: 40px;
+    width: 20%;
+  }
+  .item-meta {
+    text-align: right;
+  }
+  .item-avatar {
+    padding-right: 40px;
+  }
+  .bb-group-title {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  .bb-group-type {
+    font-size: 11px;
+    font-weight: normal;
+  }
+}
 
 #bbp-search-results {
   .bbp-forum-title h3, 
