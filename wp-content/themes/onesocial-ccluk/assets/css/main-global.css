@@ -5350,3 +5350,19 @@ label[for='subscribe-reloaded'] .buddyboss-select {
   position: relative;
   top: 3px;
 }
+
+/*--------------------------------------------------------------
+MINIMUM width of 481 pixels (phones and larger)
+--------------------------------------------------------------*/
+@media screen and (min-width: 481px) {
+  .site-header .site-title {
+    width: 300px;
+  }
+  #logo-area {
+    width: 320px;
+  }
+  #buddypress .activity-list .activity-content .activity-inner,
+  #buddypress .activity-list .activity-content blockquote {
+    margin-top: 12px;
+  }
+}

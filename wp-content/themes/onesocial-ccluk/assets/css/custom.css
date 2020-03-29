@@ -2403,19 +2403,3 @@ body.single-give_forms #secondary {
 #catapult-cookie-bar a.ctcc-more-info-link {
   text-decoration: underline;
 }
-
-/*--------------------------------------------------------------
-MINIMUM width of 481 pixels (phones and larger)
---------------------------------------------------------------*/
-@media screen and (min-width: 481px) {
-  .site-header .site-title {
-    width: 300px;
-  }
-  #logo-area {
-    width: 320px;
-  }
-  #buddypress .activity-list .activity-content .activity-inner,
-  #buddypress .activity-list .activity-content blockquote {
-    margin-top: 12px;
-  }
-}

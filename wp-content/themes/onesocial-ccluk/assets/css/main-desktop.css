@@ -548,7 +548,6 @@ body.full-width .site-content {
   text-align: left;
   text-overflow: ellipsis;
   white-space: nowrap;
-  width: 160px;
 }
 
 .site-title a {
