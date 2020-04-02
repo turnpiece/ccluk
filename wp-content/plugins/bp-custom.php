@@ -58,14 +58,16 @@ class CCLUK_BP_Custom {
 		// define the default Profile component
 		define( 'BP_DEFAULT_COMPONENT', 'profile' );
 
-		// populate members group
-		if (! get_option( self::SLUG.'_populate_members_group_completed' ) ) {
-			// cron job to add users to members group
-			add_action( 'populate_members_group_cron_hook', array( $this, 'populate_members_group' ) );
+		// populate and subscribe to members group
+		foreach( array( 'populate', 'subscribe' ) as $fn ) {
+			if (! get_option( self::SLUG.'_'.$fn.'_members_group_completed' ) ) {
+				// cron job to add users to members group
+				add_action( $fn.'_members_group_cron_hook', array( $this, $fn.'_members_group' ) );
 
-			// check if this job has been scheduled
-			if ( ! wp_next_scheduled( 'populate_members_group_cron_hook' ) ) {
-				wp_schedule_event( time(), 'daily', 'populate_members_group_cron_hook' );
+				// check if this job has been scheduled
+				if ( ! wp_next_scheduled( $fn.'_members_group_cron_hook' ) ) {
+					wp_schedule_event( time(), 'daily', $fn.'_members_group_cron_hook' );
+				}
 			}
 		}
 	}
@@ -203,6 +205,51 @@ class CCLUK_BP_Custom {
 		}
 	}
 
+	// subscribe people to the members group
+	public function subscribe_members_group() {
+
+		self::debug( __FUNCTION__ );
+
+		$id = self::SLUG . '_' . __FUNCTION__;
+
+		$offset = get_option( $id, 0 );
+
+		// get members group id
+		if ($group_id = $this->get_members_group_id()) {
+
+			$users = get_users(
+				array(
+					'role__in' => array( 'contributor', 'author' ),
+					'orderby' => 'registered',
+					'order' => 'ASC',
+					'fields' => array( 'ID' ),
+					'number' => 100,
+					'offset' => (int)$offset
+				)
+			);
+
+			if (count($users)) {
+				foreach ( $users as $user ) {
+					if (groups_is_user_member( $user->ID, $group_id )) {
+						$this->subscribe_to_group( $user->ID, $group_id );
+					} else {
+						$this->join_members_group( $user->ID );
+					}
+				}	
+
+				update_option( $id, $offset + count($users) );
+
+			} else {
+				// assume it's all been done
+				add_option( $id.'_completed', time() );
+
+				// remove the cron job
+				$timestamp = wp_next_scheduled( 'subscribe_members_group_cron_hook' );
+				wp_unschedule_event( $timestamp, 'subscribe_members_group_cron_hook' );
+			}
+		}
+	}
+
 	/**
 	 * 
 	 * groups join group
@@ -213,7 +260,10 @@ class CCLUK_BP_Custom {
 	 * 
 	 */
 	public function groups_join_group( $group_id, $user_id ) {
+		$this->subscribe_to_group( $user_id, $group_id );
+	}
 
+	private function subscribe_to_group( $user_id, $group_id ) {
 		// check group email subscriptions plugin is active
 		if (function_exists( 'ass_get_group_subscription_status' ) && 
 			function_exists( 'ass_group_subscription' )) {
