@@ -55,6 +55,12 @@ class CCLUK_BP_Custom {
 		// subscribe to group on joining
 		add_action( 'groups_join_group', array( $this, 'groups_join_group' ), 10, 2 );
 
+		// groups page intro
+		add_action( 'bp_before_directory_groups', array( $this, 'groups_page_intro' ) );
+
+		// members page intro
+		add_action( 'bp_before_directory_members', array( $this, 'members_page_intro' ) );
+
 		// define the default Profile component
 		define( 'BP_DEFAULT_COMPONENT', 'profile' );
 
@@ -166,6 +172,18 @@ class CCLUK_BP_Custom {
 	// join members group on signup
 	public function join_group_on_signup( $user_id ){
 		$this->join_members_group( $user_id );
+	}
+
+	public function groups_page_intro() {
+		echo $this->get_page_intro( __( "Join a group to connect with other members and get involved." ) );
+	}
+
+	public function members_page_intro() {
+		echo $this->get_page_intro( __( "NOTE: This shows members who have joined via this website.<br />There are members who aren't on here." ) );
+	}
+
+	private function get_page_intro( $content ) {
+		return '<div class="intro"><p>' . $content . '</p></div>';
 	}
 
 	public function populate_members_group() {
