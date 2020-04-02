@@ -1722,6 +1722,12 @@ body #buddypress .group-join div.generic-button a {
 }
 
 #buddypress {
+  .intro {
+    max-width: $content_w;
+    text-align: center;
+    @include centred-margin();
+  }
+
   .group-join div.generic-button a {
     &:hover {
       -moz-box-shadow: none;
@@ -1781,17 +1787,17 @@ div#sitewide-notice #message.info {
 
 #buddypress,
 div#sitewide-notice {
-     div#message {
-         &.updated {
-             clear: both;
-         }
-         p {
-             display: block;
-             font-size: $font-size-tiny;
-             font-weight: 400;
-             padding: 8px 10px;
-         }
-     }
+  div#message {
+    &.updated {
+        clear: both;
+    }
+    p {
+        display: block;
+        font-size: $font-size-tiny;
+        font-weight: 400;
+        padding: 8px 10px;
+    }
+  }
 }
 
 /* Default alert-message */
@@ -1804,29 +1810,29 @@ div#sitewide-notice {
     color: inherit;
     text-decoration: underline;
   }
+
+  &:before {
+    font-family: 'FontAwesome';
+    font-weight: normal;
+    font-style: normal;
+    text-rendering: auto;
+    text-decoration: inherit;
+    speak: none;
+    display: inline-block;
+    line-height: 1;
+    content: "\f071";
+    font-size: $font-size-tiny;
+    -webkit-font-smoothing: antialiased;
+    text-decoration: none;
+    margin-right: 5px;
+    padding: 0;
+    vertical-align: middle;
+  }
 }
 
 div#sitewide-notice div#message p a {
   color: inherit;
   text-decoration: underline;
-}
-
-#buddypress div#message p:before {
-  font-family: 'FontAwesome';
-  font-weight: normal;
-  font-style: normal;
-  text-rendering: auto;
-  text-decoration: inherit;
-  speak: none;
-  display: inline-block;
-  line-height: 1;
-  content: "\f071";
-  font-size: $font-size-tiny;
-  -webkit-font-smoothing: antialiased;
-  text-decoration: none;
-  margin-right: 5px;
-  padding: 0;
-  vertical-align: middle;
 }
 
 /* Sitewide Notice */
@@ -3249,9 +3255,6 @@ body #buddypress div.buddyboss-wall-form-wrapper #form_buddyboss-wall-privacy {
       color: $gray;
     }
   }
-
-
-
 
   #ass-email-subscriptions-options-page {
     max-width: 500px;

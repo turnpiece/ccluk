@@ -2372,6 +2372,13 @@ body #buddypress .group-join div.generic-button a:before {
   transition: none;
 }
 
+#buddypress .intro {
+  max-width: 750px;
+  text-align: center;
+  margin: 15px auto;
+  margin: 1.5rem auto;
+}
+
 #buddypress .group-join div.generic-button a:hover {
   -webkit-box-shadow: none;
   box-shadow: none;
@@ -2454,11 +2461,6 @@ div#sitewide-notice div#message p {
   text-decoration: underline;
 }
 
-div#sitewide-notice div#message p a {
-  color: inherit;
-  text-decoration: underline;
-}
-
 #buddypress div#message p:before {
   font-family: 'FontAwesome';
   font-weight: normal;
@@ -2475,6 +2477,11 @@ div#sitewide-notice div#message p a {
   margin-right: 5px;
   padding: 0;
   vertical-align: middle;
+}
+
+div#sitewide-notice div#message p a {
+  color: inherit;
+  text-decoration: underline;
 }
 
 /* Sitewide Notice */
