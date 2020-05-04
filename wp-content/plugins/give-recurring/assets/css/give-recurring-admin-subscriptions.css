@@ -1,0 +1,164 @@
+/**
+ * Give Recurring Admin Donation Form Styles
+ */
+#give-subscriber-wrapper {
+	display: inline-block;
+	margin-left: -1px;
+	z-index: 2;
+	width: 700px;
+	padding: 20px;
+	background-color: #FFF;
+	min-height: 200px;
+	border: 1px solid #e5e5e5;
+	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+}
+
+.widefat.subscriptions th#actions {
+	width: 70px;
+}
+
+.widefat.subscriptions th#subscription {
+	width: 200px;
+}
+
+.widefat.subscriptions th#status {
+	width: 110px;
+}
+
+.give-donation-status {
+	margin: 0 0 0 5px;
+}
+
+.give-donation-status.status-complete > span, .give-donation-status.status-completed > span {
+	background-color: #333;
+}
+
+.give-donation-status.status-active > span {
+	background-color: #7ad03a;
+}
+
+#give-subscription-details-h1 {
+	margin-bottom: 15px;
+}
+
+.inital-donation-heading {
+	border-left: 1px solid #e5e5e5;
+	margin: 0;
+	padding: 10px;
+	border-right: 1px solid #e5e5e5;
+}
+
+.give-recurring-description, p.give-recurring-description, .widefat td p.give-recurring-description {
+	font-size: 13px;
+	line-height: 1.5;
+	color: #aaaaaa;
+	font-style: italic;
+	margin: 0;
+	padding: .5em 0;
+}
+
+.update-wrap {
+	float: right;
+	margin: 0 0 20px;
+}
+
+.additional-actions {
+	clear: right;
+	text-align: right;
+}
+
+.wrap span.give-add-renewal, .wrap span.give-add-renewal:hover, .wrap span.give-add-renewal:focus {
+	font-size: 12px;
+	font-weight: normal;
+	cursor: pointer;
+	padding: 2px 6px;
+}
+
+/* Manual add renewal */
+.give-manual-add-renewal {
+	display: none;
+}
+
+.give-sub-add-renewal-desc {
+	font-style: italic;
+}
+
+.update-renewal-date-p {
+	display: inline-block;
+	margin: 4px 0 0 10px;
+}
+
+.give-recurring-manual-renewal-input {
+	width: 100px;
+	padding: 3px;
+}
+
+.give-recurring-manual-renewal-label {
+	display: inline-block;
+	width: 150px;
+	padding: 3px;
+}
+
+.give-recurring-manual-renewal-submit-wrap {
+	margin: 0 0 20px;
+}
+
+#give-sub-add-renewal .renewal-invalid-field {
+	border-color: red;
+}
+
+#give-sub-add-renewal .give-required-indicator {
+	color: red;
+}
+
+/* Filters */
+#subscribers-filter ul.subsubsub {
+	margin-bottom: 12px;
+}
+
+#give-subscriptions-search-input {
+	min-width: 230px;
+}
+
+#give-subscriptions-filters .search-box {
+	float: left;
+	margin-right: 18px;
+	width: auto;
+}
+
+/* Synchronizer */
+
+span.give-active-sync-message {
+	float: left;
+	margin: 5px 0 0;
+	font-style: italic;
+	color: #949494;
+}
+
+span.give-active-sync-message:before {
+	content: ' ';
+	background-image: url(/wp-admin/images/spinner-2x.gif);
+	background-size: 20px;
+	width: 20px;
+	height: 20px;
+	display: block;
+	float: left;
+	margin: 0 6px 0 0;
+	position: relative;
+	top: -1px;
+}
+
+div#give-subscription-notes {
+	margin-top: 30px;
+}
+div#give-subscription-notes h3.hndle {
+	font-size: 14px;
+	padding: 8px 12px;
+	margin: 0;
+	line-height: 1.4;
+}
+
+div#give-subscription-notes textarea {
+	min-height: 150px;
+}

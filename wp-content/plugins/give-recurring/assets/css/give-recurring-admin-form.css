@@ -1,0 +1,108 @@
+/**
+ * Give Recurring Admin Donation Form Styles
+ *
+ * Recurring Multi-level Table Styles:  @see: https://github.com/impres-org/give-recurring-donations/issues/85
+ */
+
+/*-------------------------------------
+Messages
+-------------------------------------*/
+
+div.give-recurring-login-required {
+	border-left: 2px solid orange;
+	background-color: #FAFAFA;
+	margin: 0;
+	padding: 16px;
+}
+
+div.give-recurring-login-required p {
+	font-style: italic;
+	margin: 0;
+}
+#give-recurring-options.give-recurring-options fieldset.give_recurring_all_options p.give-field-wrap {
+	display: inline-block;
+	float: left;
+	vertical-align: middle;
+	padding-left: 32px;
+	border-width: 0;
+}
+
+.give-recurring-options fieldset.give_recurring_all_options legend {
+	display: inline;
+	float: left;
+	vertical-align: middle;
+	padding: 17px 20px 0 12px;
+	font-size: 12px;
+}
+
+#give-recurring-options.give-recurring-options {
+	border-bottom: 1px solid #eee;
+}
+
+#give-recurring-options.give-recurring-options fieldset.give_recurring_all_options p.give-field-wrap.give-recurring-times label {
+	width: auto;
+	margin: 5px 20px 0 -25px;
+}
+
+#give-recurring-options.give-recurring-options fieldset.give_recurring_all_options p.give-field-wrap.give-recurring-period-choice-common {
+	padding-left: 0;
+}
+
+.give-inline-row-control {
+	width: auto !important;
+	border-bottom: 0 none !important;
+	float: left;
+}
+
+.give-inline-row-period {
+	padding-left: 0 !important;
+}
+
+.give-inline-row-limit {
+	padding-left: 32px !important;
+}
+
+.give-metabox-panel-wrap .give-inline-row-limit label {
+	width: auto !important;
+	margin:5px 20px 0 -25px !important;
+}
+.give-metabox-panel-wrap ._give_custom_amount_text_field{clear: both;border-top: 1px solid #eee;}
+.give-metabox-panel-wrap .give-control-select-onetime {
+	left: 32px;
+	position: relative;
+}
+.give-metabox-panel-wrap .give_recurring_all_options span.give-field-description, .give-metabox-panel-wrap .give_custom_recurring_all_options span.give-field-description {
+	width: 100%;
+	float: left;
+	clear: both;
+	padding-left: 162px;
+	color: #aaaaaa;
+	font-size: 12px;
+	line-height: 18px;
+	font-style: italic;
+}
+.give-metabox-panel-wrap fieldset.give_recurring_all_options, .give-metabox-panel-wrap  fieldset.give_custom_recurring_all_options  {
+	padding: 1em 20px 1em 0;
+	margin: 0;
+}
+.give-metabox-panel-wrap fieldset.give_custom_recurring_all_options legend {
+	display: inline;
+	float: left;
+	vertical-align: middle;
+	padding: 17px 20px 0 12px;
+	font-size: 12px;
+}
+
+#give-metabox-form-data fieldset.give_custom_recurring_all_options  p.give-recurring-custom-amount-interval {
+	padding-left: 32px !important;
+}
+
+#give-metabox-form-data #give-recurring-options ._give_times_field label {
+	cursor: default;
+}
+
+#donation_goal_options .give-recurring-goal-format {
+	border: 1px solid #d1d1d18f;
+	display:inline-block;
+	padding: 4px 5px 5px 5px;
+}

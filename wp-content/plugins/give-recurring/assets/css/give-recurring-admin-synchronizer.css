@@ -1,0 +1,42 @@
+/**
+ * Give Admin Tools Recurring CSS
+ */
+
+.give-recurring-sync-log-content {
+    max-height: 600px;
+    background-color: rgba(0, 0, 0, .07);
+    font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;
+    padding: 10px 20px 20px;
+    margin: 0 0 20px;
+    overflow: hidden;
+    overflow-y: scroll;
+    border: 1px solid #d8d8d8;
+}
+
+/* Notices */
+
+.give-recurring-sync-notice-success,
+.give-recurring-sync-notice-success a {
+    color: #06b706;
+}
+
+.give-recurring-sync-notice-error,
+.give-recurring-sync-notice-error a {
+    color: #ea0c0c;
+}
+
+.give-recurring-sync-notice-item_missing {
+    color: orange;
+}
+
+.give-sr-wrap {
+    padding: .75rem 0;
+}
+
+.give-sr-export {
+    margin-bottom: 0.75rem;
+}
+
+.subscription-payments-only {
+    margin-right: 1rem;
+} 

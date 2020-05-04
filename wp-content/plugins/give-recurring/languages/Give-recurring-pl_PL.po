@@ -1,0 +1,1614 @@
+# Copyright (C) 2016 WordImpress
+# This file is distributed under the same license as the Give - Recurring Donations package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Give - Recurring Donations 1.0.1\n"
+"Report-Msgid-Bugs-To: https://givewp.com/\n"
+"POT-Creation-Date: 2016-02-06 05:18+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2016-02-06 22:41+0000\n"
+"Language-Team: WP-Translations <wpt@wp-translations.org>\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;"
+"_nx_noop:1,2,3c;esc_attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;"
+"esc_html_x:1,2c\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: ..\n"
+"X-Textdomain-Support: yes\n"
+"Last-Translator: \n"
+"Language: pl_PL\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: give-recurring.php:366
+msgid "Cancelled <span class=\"count\">(%s)</span>"
+msgid_plural "Cancelled <span class=\"count\">(%s)</span>"
+msgstr[0] "Anulowana <span class=\"count\">(%s)</span>"
+msgstr[1] "Anulowane <span class=\"count\">(%s)</span>"
+msgstr[2] "Anulowane <span class=\"count\">(%s)</span>"
+
+#: give-recurring.php:374
+msgid "Subscription <span class=\"count\">(%s)</span>"
+msgid_plural "Subscription <span class=\"count\">(%s)</span>"
+msgstr[0] "Subskrypcja <span class=\"count\">(%s)</span>"
+msgstr[1] "Subskrypcje <span class=\"count\">(%s)</span>"
+msgstr[2] "Sybskrypcji <span class=\"count\">(%s)</span>"
+
+#: give-recurring.php:387 give-recurring.php:388
+#: includes/admin/class-recurring-reports.php:255
+#: includes/admin/customers.php:16 includes/admin/subscriptions-details.php:19
+msgid "Subscriptions"
+msgstr "Subskrypcje"
+
+#: give-recurring.php:433 includes/admin/metabox.php:239
+#: templates/shortcode-subscription-receipt.php:28
+#: templates/shortcode-subscriptions.php:42
+msgid "Subscription"
+msgstr "Subskrypcja"
+
+#: give-recurring.php:434 give-recurring.php:469
+#: includes/admin/subscriptions-details.php:173
+#: includes/give-recurring-helpers.php:222
+msgid "Cancelled"
+msgstr "Anulowane"
+
+#: give-recurring.php:461 includes/admin/customers.php:66
+msgid "Subscription Donation"
+msgstr "Subskrypcja dotacji"
+
+#: give-recurring.php:924
+msgid "Give Subscriber"
+msgstr "Subskrybent Give"
+
+#: give-recurring.php:992 includes/admin/metabox.php:401
+#: includes/admin/settings.php:11
+msgid "Recurring Donations"
+msgstr "Cykliczne dotacje"
+
+#: give-recurring.php:1016
+msgid ""
+"%sActivation Error:%s We noticed Give is not active. Please activate Give in "
+"order to use the Recurring Donations Add-on."
+msgstr ""
+"%sBłąd Aktywacji:%s Give jest nie aktywne. Aktywuj Give aby używać dodatku "
+"Cyklicznych Dotacji"
+
+#: give-recurring.php:1024
+msgid ""
+"%sActivation Error:%s We noticed Give is not up to date. Please update Give "
+"in order to use the Recurring Donations Add-on."
+msgstr ""
+"%sBłąd Aktywacji:%s Give nie jest zaktualizowane. Proszę o aktualizację Give "
+"aby używać dodatku Cyklicznych Dotacji."
+
+#: includes/admin/class-admin-notices.php:35
+msgid "Subscription successfully updated"
+msgstr "Subskrypcja została pomyślnie zaktualizowana"
+
+#: includes/admin/class-admin-notices.php:41
+msgid "Subscription successfully deleted"
+msgstr "Subskrypcja została pomyślnie usunięta"
+
+#: includes/admin/class-admin-notices.php:47
+msgid "Subscription successfully cancelled"
+msgstr "Subskrypcja została pomyślnie anulowana"
+
+#: includes/admin/class-recurring-email-log.php:44
+msgid "Email Type"
+msgstr "Typ e-maila"
+
+#: includes/admin/class-recurring-email-log.php:45
+#: includes/admin/expiration-notice-add.php:26
+#: includes/admin/expiration-notice-edit.php:31
+#: includes/admin/renewal-notice-add.php:26
+#: includes/admin/renewal-notice-edit.php:31
+msgid "Email Subject"
+msgstr "Temat e-maila"
+
+#: includes/admin/class-recurring-email-log.php:46
+msgid "Email Recipient"
+msgstr "E-mail odbiorcy"
+
+#: includes/admin/class-recurring-email-log.php:47
+msgid "Date Sent"
+msgstr "Data wysłania"
+
+#: includes/admin/class-recurring-email-log.php:48
+msgid "Donation Form"
+msgstr "Formularz Dotacji"
+
+#: includes/admin/class-recurring-email-log.php:87
+msgid "No subject found."
+msgstr "Nie znaleziono tematu."
+
+#: includes/admin/class-recurring-email-log.php:261
+msgid "Renewal Notice"
+msgstr "Powiadomienie o odnowieniu"
+
+#: includes/admin/class-recurring-email-log.php:264
+msgid "Expiration Notice"
+msgstr "Powiadomienie o wygaśnięciu"
+
+#: includes/admin/class-recurring-email-log.php:267
+msgid "Cancellation Notice"
+msgstr "Powiadomienie o anulowaniu"
+
+#: includes/admin/class-recurring-email-log.php:270
+msgid "Subscription Receipt"
+msgstr "Potwierdzenie Subskrypcji"
+
+#: includes/admin/class-recurring-reports.php:32
+#: includes/admin/class-recurring-reports.php:265
+#: includes/admin/subscriptions-details.php:225
+msgid "Subscription Donations"
+msgstr "Dotacje z subskrypcji"
+
+#: includes/admin/class-recurring-reports.php:96
+msgid "You do not have permission to view this data"
+msgstr "Nie masz dostępu do tych danych."
+
+#: includes/admin/class-recurring-reports.php:96
+#: includes/admin/settings-recurring-emails.php:194
+#: includes/admin/settings-recurring-emails.php:198
+#: includes/admin/settings-recurring-emails.php:273
+#: includes/admin/settings-recurring-emails.php:277
+#: includes/admin/settings-recurring-emails.php:332
+#: includes/admin/settings-recurring-emails.php:336
+#: includes/admin/settings-recurring-emails.php:391
+#: includes/admin/settings-recurring-emails.php:395
+#: includes/admin/settings-recurring-emails.php:399
+#: includes/admin/subscriptions.php:29
+#: includes/gateways/give-recurring-gateway.php:153
+#: includes/gateways/give-recurring-gateway.php:328
+#: includes/gateways/give-recurring-gateway.php:336
+#: includes/gateways/give-recurring-gateway.php:363
+#: includes/gateways/give-recurring-paypal.php:552
+#: includes/gateways/give-recurring-paypal.php:563
+#: includes/gateways/give-recurring-paypalpro.php:536
+#: includes/gateways/give-recurring-wepay.php:618
+#: includes/gateways/give-recurring-wepay.php:628
+msgid "Error"
+msgstr "Błąd"
+
+#: includes/admin/class-recurring-reports.php:256
+msgid "Earnings"
+msgstr "Zarobki"
+
+#: includes/admin/class-recurring-reports.php:290
+msgid "Total earnings for period shown: "
+msgstr "Suma darowizn na okres:"
+
+#: includes/admin/class-recurring-reports.php:296
+msgid "Total subscription donation renewals for period shown: "
+msgstr "Suma odnowionych subskrypcji dotacji na okres:"
+
+#: includes/admin/class-recurring-reports.php:325
+msgid "Recurring Emails"
+msgstr "Cykliczne e-maile"
+
+#: includes/admin/class-shortcode-generator.php:21
+msgid "Give Subscriptions"
+msgstr "Subskrypcje Give"
+
+#: includes/admin/class-subscriptions-list-table.php:73
+msgid "Donor"
+msgstr "Darczyńca"
+
+#: includes/admin/class-subscriptions-list-table.php:74
+msgid "Details"
+msgstr "Szczegóły"
+
+#: includes/admin/class-subscriptions-list-table.php:75
+#: includes/admin/subscriptions-details.php:233
+#: templates/shortcode-subscription-receipt.php:29
+#: templates/shortcode-subscriptions.php:43
+msgid "Status"
+msgstr "Status"
+
+#: includes/admin/class-subscriptions-list-table.php:76
+#: includes/admin/customers.php:21 includes/admin/subscriptions-details.php:231
+msgid "Amount"
+msgstr "Kwota"
+
+#: includes/admin/class-subscriptions-list-table.php:77
+#: includes/admin/metabox.php:38 includes/admin/metabox.php:100
+#: includes/admin/metabox.php:191
+msgid "Period"
+msgstr "Okres"
+
+#: includes/admin/class-subscriptions-list-table.php:78
+#: templates/shortcode-subscription-receipt.php:32
+#: templates/shortcode-subscriptions.php:46
+msgid "Progress"
+msgstr "Postęp"
+
+#: includes/admin/class-subscriptions-list-table.php:80
+#: templates/shortcode-subscription-receipt.php:33
+#: templates/shortcode-subscriptions.php:49
+msgid "Start"
+msgstr "Początek"
+
+#: includes/admin/class-subscriptions-list-table.php:81
+#: templates/shortcode-subscription-receipt.php:34
+#: templates/shortcode-subscriptions.php:50
+msgid "End"
+msgstr "Koniec"
+
+#: includes/admin/class-subscriptions-list-table.php:82
+msgid "Recurring ID"
+msgstr "Cykliczne Identyfikator ID"
+
+#: includes/admin/class-subscriptions-list-table.php:254
+#: includes/admin/subscriptions-details.php:162
+#: templates/shortcode-subscription-receipt.php:65
+#: templates/shortcode-subscriptions.php:78
+msgid "Until cancelled"
+msgstr "Do odwołania"
+
+#: includes/admin/class-subscriptions-list-table.php:271
+msgid "View or edit subscription"
+msgstr "Zobacz lub edytuj subskrypcję"
+
+#: includes/admin/class-subscriptions-list-table.php:271
+msgid "View / Edit"
+msgstr "Zobacz/Edytuj"
+
+#: includes/admin/customers.php:22
+#: includes/admin/settings-recurring-emails.php:22
+#: includes/admin/settings-recurring-emails.php:71
+#: includes/admin/subscriptions-details.php:234
+#: templates/shortcode-subscriptions.php:51
+msgid "Actions"
+msgstr "Akcje"
+
+#: includes/admin/customers.php:33 includes/admin/subscriptions-details.php:248
+#: includes/admin/subscriptions-details.php:281
+msgid "View Details"
+msgstr "Zobacz szczegóły"
+
+#: includes/admin/expiration-notice-add.php:19
+#: includes/admin/expiration-notice-add.php:69
+msgid "Add Expiration Notice"
+msgstr "Dodaj powiadomienie o wygaśnięciu"
+
+#: includes/admin/expiration-notice-add.php:19
+#: includes/admin/expiration-notice-edit.php:25
+#: includes/admin/renewal-notice-add.php:19
+#: includes/admin/renewal-notice-edit.php:25
+msgid "Go Back"
+msgstr "Wróć"
+
+#: includes/admin/expiration-notice-add.php:29
+#: includes/give-recurring-emails.php:166
+#: includes/give-recurring-expirations.php:91
+#: includes/give-recurring-expirations.php:127
+msgid "Your Subscription is About to Expire"
+msgstr "Twoja Subskrypcja wkrótce się skończy"
+
+#: includes/admin/expiration-notice-add.php:31
+#: includes/admin/expiration-notice-edit.php:36
+msgid "The subject line of the expiration notice email"
+msgstr "Temat maila powiadamiającego o kończącej się subskrypcji"
+
+#: includes/admin/expiration-notice-add.php:36
+#: includes/admin/expiration-notice-edit.php:41
+#: includes/admin/renewal-notice-add.php:36
+#: includes/admin/renewal-notice-edit.php:41
+msgid "Email Period"
+msgstr "Czas Emaila"
+
+#: includes/admin/expiration-notice-add.php:45
+#: includes/admin/expiration-notice-edit.php:50
+#: includes/admin/renewal-notice-add.php:45
+#: includes/admin/renewal-notice-edit.php:50
+msgid "When should this email be sent?"
+msgstr "Kiedy ten email powinien być wysłany?"
+
+#: includes/admin/expiration-notice-add.php:50
+#: includes/admin/expiration-notice-edit.php:55
+#: includes/admin/renewal-notice-add.php:50
+#: includes/admin/renewal-notice-edit.php:55
+msgid "Email Message"
+msgstr "Treść Emaila"
+
+#: includes/admin/expiration-notice-add.php:54
+#: includes/admin/expiration-notice-edit.php:59
+msgid ""
+"The email message to be sent with the expiration notice. The following "
+"template tags can be used in the message:"
+msgstr ""
+"Wiadomość jaka będzie wysłana w powiadomieniu o kończącej się subskrypcji. "
+"Można użyć poniższych tagów w wiadomości:"
+
+#: includes/admin/expiration-notice-add.php:56
+#: includes/admin/expiration-notice-edit.php:61
+#: includes/admin/renewal-notice-add.php:56
+#: includes/admin/renewal-notice-edit.php:61
+msgid "The donor's name"
+msgstr "Imię Darczyńcy"
+
+#: includes/admin/expiration-notice-add.php:57
+#: includes/admin/expiration-notice-edit.php:62
+#: includes/admin/renewal-notice-add.php:57
+#: includes/admin/renewal-notice-edit.php:62
+msgid "The name of the donation form the subscription belongs to"
+msgstr "Nazwa do kogo należy subskrypcja formularza dotacji"
+
+#: includes/admin/expiration-notice-add.php:58
+#: includes/admin/expiration-notice-edit.php:63
+#: includes/admin/renewal-notice-add.php:58
+#: includes/admin/renewal-notice-edit.php:63
+msgid "The expiration date for the subscription"
+msgstr "Data wygaśnięcia subskrypcji"
+
+#: includes/admin/expiration-notice-add.php:59
+#: includes/admin/expiration-notice-edit.php:64
+msgid "Outputs a link to the donation form the donor gave to"
+msgstr "Link do formularza dotacji danego darczyńcy"
+
+#: includes/admin/expiration-notice-edit.php:25
+msgid "Edit Expiration Notice"
+msgstr "Edytuj Powiadomienie o Zakończeniu Subskrypcji"
+
+#: includes/admin/expiration-notice-edit.php:75
+msgid "Update Expiration Notice"
+msgstr "Aktualizuj Powiadomienie o Zakończeniu Subskrypcji"
+
+#: includes/admin/metabox.php:37 includes/admin/metabox.php:63
+#: includes/admin/metabox.php:178
+msgid "Recurring"
+msgstr "Cykliczne/Powtarzające się"
+
+#: includes/admin/metabox.php:68
+msgid "No"
+msgstr "Nie"
+
+#: includes/admin/metabox.php:69
+msgid "Yes"
+msgstr "Tak"
+
+#: includes/admin/metabox.php:182
+msgid "No - Not Recurring"
+msgstr "Nie - Nie cykliczne"
+
+#: includes/admin/metabox.php:183
+msgid "Yes - Admin Defined"
+msgstr "Tak - Zdefiniowane przed Administratora"
+
+#: includes/admin/metabox.php:184
+msgid "Yes - Donor's Choice"
+msgstr "Tak - Wybrane przez Darczyńcę"
+
+#: includes/admin/metabox.php:187
+msgid ""
+"Is this a recurring donation form? If so, select which kind of recurring "
+"donation form you would like to create. The \"Admin Defined\" option ensures "
+"that set donation forms are always recurring. For multi-level forms, the "
+"\"Admin Defined\" makes it so that the recurring option can be set per "
+"level. The \"Donor Choice\" option allows the potential donor to decide "
+"within the form whether they want to make the donation recurring or not "
+"based on your chosen subscription period."
+msgstr ""
+"Czy jest to formularz do cyklicznych/ powtarzających się płatności? Jeśli "
+"tak, wybierz rodzaj formularza cyklicznych dotacji jaki chcesz utworzyć. "
+"\"Zdefiniowane przez Administratora\" opcja zapewnia, że zestaw formularzy "
+"dotacji zawsze będzie cykliczny. Dla formularzy wielopoziomowych, "
+"\"Zdefiniowane przez Administratora\" może zostać ustawiona oddzielnie na "
+"każdy poziom. \"Wybrane przez Darczyńcę\" opcja pozwala potencjalnemu "
+"darczyńcy na zdecydowanie w czasie wypełniania formularza czy chce by "
+"dotacje były cykliczne, lub utworzyć własne ustawienia powtarzającej się "
+"płatności."
+
+#: includes/admin/metabox.php:196
+msgid ""
+"How often would you like the donation to reoccur? This is the time between "
+"payments."
+msgstr ""
+"Jak często chcesz by twoja dotacja była odnawiana? Jest to okres pomiędzy "
+"płatnościami."
+
+#: includes/admin/metabox.php:207
+msgid ""
+"How many times should this donation occur? Leave blank or \"0\" for infinite "
+"or until the user cancels."
+msgstr ""
+"Ile razy dotacja ma się powtórzyć? Pozostaw puste lub wpisz \"0\" dla nie "
+"kończących się dotacji lub do momentu aż użytkownik anuluje subskrypcję."
+
+#: includes/admin/metabox.php:268
+msgid "Subscription Meta"
+msgstr "Meta Subskrypcji"
+
+#: includes/admin/metabox.php:273
+msgid "Subscription ID: <a href=\"%s\">#%d</a>"
+msgstr "Identyfikator ID Subskrypcji: <a href=\"%s\">#%d</a>"
+
+#: includes/admin/metabox.php:285
+msgid "Subscription Donations:"
+msgstr "Dotacje z Subskrypcji:"
+
+#: includes/admin/metabox.php:328 includes/admin/metabox.php:366
+msgid ""
+"This is a recurring donation parent payment. The parent payment is the very "
+"first payment made by this donor. All payments made after for the profile "
+"are marked as sub-payments and will appear as subscription payements."
+msgstr ""
+"To jest główna płatność cyklicznych dotacji. Główna płatność jest pierwszą "
+"płatnością dokonaną przez darczyńcę. Wszystkie późniejsze płatności tego "
+"użytkownika będą oznaczone jako sub-płatności i pojawią się jako cykliczne "
+"płatności."
+
+#: includes/admin/metabox.php:333
+msgid "This is a subscription payment for the donation form:"
+msgstr "To jest abonamentowa płatność (Subskrypcja) z formularza dotacji:"
+
+#: includes/admin/metabox.php:405
+msgid "Parent Payment: <a href=\"%s\">#%s</a>"
+msgstr "Główna płatność: <a href=\"%s\">#%s</a>"
+
+#: includes/admin/renewal-notice-add.php:19
+#: includes/admin/renewal-notice-add.php:68
+msgid "Add Renewal Notice"
+msgstr "Dodaj Powiadomienie o Odnowieniu Subskrypcji"
+
+#: includes/admin/renewal-notice-add.php:29
+#: includes/admin/settings-recurring-emails.php:343
+#: includes/give-recurring-emails.php:160
+#: includes/give-recurring-renewals.php:83
+#: includes/give-recurring-renewals.php:115
+msgid "Your Subscription is About to Renew"
+msgstr "Twoja Subskrypcja wkrótce się odnowi"
+
+#: includes/admin/renewal-notice-add.php:31
+#: includes/admin/renewal-notice-edit.php:36
+msgid "The subject line of the renewal notice email"
+msgstr "Temat emaila powiadamiającego o odnowieniu subskrypcji"
+
+#: includes/admin/renewal-notice-add.php:54
+#: includes/admin/renewal-notice-edit.php:59
+msgid ""
+"The email message to be sent with the renewal notice. The following template "
+"tags can be used in the message:"
+msgstr ""
+"Wiadomość emaila powiadamiającego o odnowieniu subskrypcji. Poniższe tagi "
+"mogą być użyte w wiadomości:"
+
+#: includes/admin/renewal-notice-edit.php:25
+msgid "Edit Renewal Notice"
+msgstr "Edytuj Powiadomienie o Odnowieniu Subskrypcji"
+
+#: includes/admin/renewal-notice-edit.php:74
+msgid "Update Renewal Notice"
+msgstr "Aktualizuj Powiadomienie o  Odnowieniu Subskrypcji"
+
+#: includes/admin/settings-recurring-emails.php:20
+#: includes/admin/settings-recurring-emails.php:69
+msgid "Subject"
+msgstr "Temat"
+
+#: includes/admin/settings-recurring-emails.php:21
+#: includes/admin/settings-recurring-emails.php:70
+msgid "Send Period"
+msgstr "Czas wysłania"
+
+#: includes/admin/settings-recurring-emails.php:33
+#: includes/admin/settings-recurring-emails.php:82
+msgid "Edit"
+msgstr "Edytuj"
+
+#: includes/admin/settings-recurring-emails.php:34
+#: includes/admin/settings-recurring-emails.php:83
+msgid "Delete"
+msgstr "Usuń"
+
+#: includes/admin/settings-recurring-emails.php:41
+msgid "Add Renewal Reminder"
+msgstr "Dodaj Przypomnienie o Odnowieniu Subskrypcji"
+
+#: includes/admin/settings-recurring-emails.php:42
+msgid "View Renewal Reminder Log"
+msgstr "Zobacz Logi Przypomnień o Odnowieniu"
+
+#: includes/admin/settings-recurring-emails.php:90
+msgid "Add Expiration Reminder"
+msgstr "Dodaj Przypomnienie o Zakończeniu Subskrypcji"
+
+#: includes/admin/settings-recurring-emails.php:91
+msgid "View Expiration Reminder Log"
+msgstr "Zobacz Logi Przypomnień o Zakończeniu"
+
+#: includes/admin/settings-recurring-emails.php:109
+#: includes/admin/settings-recurring-emails.php:110
+msgid "Subscription Renewal Reminder"
+msgstr "Przypomnienie o Odnowieniu Subskrypcji"
+
+#: includes/admin/settings-recurring-emails.php:118
+#: includes/admin/settings-recurring-emails.php:119
+msgid "Subscription Expiration Reminder"
+msgstr "Przypomnienie o Zakończeniu Subskrypcji"
+
+#: includes/admin/settings-recurring-emails.php:152
+#: includes/admin/settings-recurring-emails.php:387
+msgid "Oops looks like something went wrong."
+msgstr "Coś poszło nie tak."
+
+#: includes/admin/settings-recurring-emails.php:194
+msgid "You do not have permission to add email notices"
+msgstr "Nie masz odpowiednich uprawnień"
+
+#: includes/admin/settings-recurring-emails.php:198
+#: includes/admin/settings-recurring-emails.php:277
+#: includes/admin/settings-recurring-emails.php:336
+#: includes/admin/settings-recurring-emails.php:395
+#: includes/admin/subscriptions.php:29 includes/admin/subscriptions.php:64
+#: includes/gateways/give-recurring-gateway.php:328
+msgid "Nonce verification failed"
+msgstr "Weryfikacja jednorazowego identyfikatora (Nonce)nie powiodła się"
+
+#: includes/admin/settings-recurring-emails.php:204
+msgid "Your Donation Subscription is About to Renew"
+msgstr "Twoja Subskrypcja Dotacji wkrótce się odnowi"
+
+#: includes/admin/settings-recurring-emails.php:205
+msgid ""
+"Hello {name},\r\n"
+"\r\n"
+"\tYour subscription for {subscription_name} will renew on {expiration}."
+msgstr ""
+"Wita {name},\r\n"
+"\r\n"
+"\tTwoja subskrypcja dla {subscription_name} odnowi się w dniu {expiration}."
+
+#: includes/admin/settings-recurring-emails.php:211
+msgid "Your Donation Subscription is About to Expire"
+msgstr "Twoja Subskrypcja Dotacji wkrótce się zakończy"
+
+#: includes/admin/settings-recurring-emails.php:212
+msgid ""
+"Hello {name},\r\n"
+"\r\n"
+"\t\tYour donation subscription for {subscription_name} is about to expire."
+"\r\n"
+"\r\n"
+"\t\tIf you wish to renew your subscription, simply click the link below and "
+"follow the instructions.\r\n"
+"\r\n"
+"\t\tYour subscription expires on: {expiration}.\r\n"
+"\r\n"
+"\t\tRenew now: {renewal_link}."
+msgstr ""
+"Witaj{name},\r\n"
+"\r\n"
+"\t\tTwoja Subskrypcja dotacji dla {subscription_name} wkrótce się zakończy."
+"\r\n"
+"\r\n"
+"\t\\Subskrypcja kończy się w dniu: {expiration}.\r\n"
+"\r\n"
+"\t\tOdnów swoją subskrypcję tutaj: {renewal_link}."
+
+#: includes/admin/settings-recurring-emails.php:273
+msgid "You do not have permission to add renewal notices"
+msgstr "Nie masz odpowiednich uprawnień"
+
+#: includes/admin/settings-recurring-emails.php:281
+msgid "No renewal notice ID was provided"
+msgstr "Nie podano identyfikatora  ID powiadomienia o odnowieniu"
+
+#: includes/admin/settings-recurring-emails.php:284
+msgid "Your License Key is About to Expire"
+msgstr "Ważność Twojego Klucza Licencyjnego wkrótce się skończy"
+
+#: includes/admin/settings-recurring-emails.php:332
+msgid "You do not have permission to add notices"
+msgstr "Nie masz uprawnień do dodawania powiadomień"
+
+#: includes/admin/settings-recurring-emails.php:340
+#: includes/admin/settings-recurring-emails.php:399
+msgid "No notice ID was provided"
+msgstr "Nie podano ID powiadomienia"
+
+#: includes/admin/settings-recurring-emails.php:391
+msgid "You do not have permission to delete notices"
+msgstr "Nie masz uprawnień by usuwać powiadomienia"
+
+#: includes/admin/settings.php:34
+msgid "Recurring Donations Settings"
+msgstr "Ustawienia Cyklicznych Dotacji"
+
+#: includes/admin/settings.php:38
+msgid "&nbsp;"
+msgstr "&nbsp;"
+
+#: includes/admin/settings.php:47
+msgid "Subscription Receipt Email"
+msgstr "Email Potwierdzenia Subskrypcji"
+
+#: includes/admin/settings.php:53
+msgid "Activate Subscription Receipt"
+msgstr "Aktywuj Potwierdzenie Subskrypcji"
+
+#: includes/admin/settings.php:55
+msgid ""
+"Check this option if you would like donors to receive an email when a "
+"subscription donation payment has been received. Note: some payment gateways "
+"like Stripe and Authorize.net may also send out an email depending on your "
+"gateway settings."
+msgstr ""
+"Zaznacz tę opcję jeśli chcesz by darczyńcy otrzymywali email potwierdzający "
+"otrzymanie cyklicznych płatności. Uwaga: Niektóre bramki płatnicze takie jak "
+"Stripe i Authorize.net mogą również wysyłać emaile potwierdzające zależnie "
+"od twoich ustawień w bramce płatniczej. "
+
+#: includes/admin/settings.php:59
+msgid "Subscription Receipt Subject"
+msgstr "Temat Potwierdzenia Subskrypcji"
+
+#: includes/admin/settings.php:61
+msgid "Enter the subject line for the donation receipt email"
+msgstr "Wpisz temat emaila wysyłanego jako potwierdzenie subskrypcji"
+
+#: includes/admin/settings.php:63 includes/admin/settings.php:66
+msgid "Subscription Donation Receipt"
+msgstr "Potwierdzenie Cyklicznej Płatności"
+
+#: includes/admin/settings.php:68
+msgid ""
+"Enter the email message that is sent to users after completing a successful "
+"subscription donation. HTML is accepted. Available template tags:"
+msgstr ""
+"Wpisz treść emaila jaki będzie wysyłany do użytkowników po dokonaniu "
+"cyklicznej płatności. Akceptowany jest HTML. Dostępne tagi:"
+
+#: includes/admin/settings.php:70 includes/admin/settings.php:100
+msgid "Dear"
+msgstr "Drogi/a"
+
+#: includes/admin/settings.php:70
+msgid ""
+"Thank you for your donation and continued support. Your generosity is "
+"appreciated! Here are your donation details:"
+msgstr ""
+"Dziękujemy za Twoją dotację i ciągłe wsparcie. Twoja hojność jest przez nas "
+"wysoko ceniona! Poniżej załączamy szczegóły Twojej Dotacji:"
+
+#: includes/admin/settings.php:77
+msgid "Subscription Cancelled Email"
+msgstr "Email Potwierdzający Anulowanie Subskrypcji"
+
+#: includes/admin/settings.php:83
+msgid "Activate Cancelled Email"
+msgstr "Włącz Email Potwierdzający Anulowanie "
+
+#: includes/admin/settings.php:85
+msgid ""
+"Check this option if you would like donors to receive an email when a "
+"subscription has been cancelled. The email will send when either the donor "
+"or admin cancels the subscription."
+msgstr ""
+"Zaznacz tę opcję jeśli chcesz by darczyńcy otrzymywali email potwierdzający "
+"że ich subskrypcja została anulowana. Powiadomienie zostanie wysłane gdy "
+"użytkownik bądź administrator anuluje subskrypcję."
+
+#: includes/admin/settings.php:89
+msgid "Subscription Cancelled Subject"
+msgstr "Temat Powiadomienia o Anulowaniu"
+
+#: includes/admin/settings.php:91
+msgid ""
+"Enter the subject line of the email sent when a subscription is cancelled."
+msgstr "Wpisz temat emaila wysyłanego gdy subskrypcja zostanie anulowana."
+
+#: includes/admin/settings.php:93
+msgid "Subscription Donation Cancelled"
+msgstr "Subskrypcja Dotacji została Anulowana"
+
+#: includes/admin/settings.php:96
+msgid "Subscription Cancelled Message"
+msgstr "Wiadomość Potwierdzenia Anulowania"
+
+#: includes/admin/settings.php:98
+msgid ""
+"Enter the email message that is sent to users when a subscription is "
+"cancelled. HTML is accepted. Available template tags:"
+msgstr ""
+"Wpisz wiadomość emaila jaki będzie wysyłany do użytkowników gdy subskrypcja "
+"zostanie anulowana. Akceptowany jest HTML. Dostępne tagi:"
+
+#: includes/admin/settings.php:100
+msgid ""
+"Your subscription for {donation} has been successfully cancelled. Here are "
+"the subscription details for your records:\n"
+"\n"
+"<strong>Subscription:</strong> {donation} - {price}\n"
+"<strong>Subscription Frequency:</strong> {subscription_frequency} \n"
+"<strong>Completed Donations:</strong> {subscriptions_completed} \n"
+"<strong>Payment Method:</strong> {payment_method}\n"
+"<strong>Cancellation Date:</strong> {cancellation_date}\n"
+"\n"
+"Sincerely,\n"
+"{sitename}"
+msgstr ""
+"Twoja Subskrypcja (Abonament) dla {donation} została anulowana. Poniżesz "
+"znajdziesz szczegóły twojej Subskrypcji:\n"
+"\n"
+"<strong>Subskrypcja:</strong>{donation}-{price}\n"
+"<strong>Okres Subskrypcji:</strong>{subscription_frequency}\n"
+"<strong>Dokonane Dotacje:</strong>{subscription_completed}\n"
+"<strong>Rodzaj Płatności:</strong>{payment_metod}\n"
+"<strong>Data Anulowania:</strong>{cancellation_date}\n"
+"\n"
+"Z Poważaniem, \n"
+"{sitename}"
+
+#: includes/admin/settings.php:168
+msgid ""
+"%1$sImportant:%2$s It appears your license is inactive for the Recurring "
+"Donations Add-on. Activating your license is important for receiving updates "
+"and support. %3$sClick here to activate your license%4$s"
+msgstr ""
+"%1$sUwaga:%2$s Wygląda na to, że twoja licencja na Dodatek Cyklicznych "
+"Płatności jest nieaktywna. Aktywacja jest istotna by otrzymywać aktualizacje "
+"i wsparcie. %3$sKliknij tutaj by aktywować swoją licencję%4$s"
+
+#: includes/admin/settings.php:176
+msgid "Give - Recurring Donations Add-on"
+msgstr "Give - Dodatek Cyklicznych Płatności"
+
+#: includes/admin/settings.php:179
+msgid ""
+"Welcome to the Give Recurring Donations Add-on. This Add-on allows you "
+"create donations forms like never before with support for daily, weekly, "
+"monthly, and annual subscriptions. As well, you can customize the number of "
+"times you'd like to run the subscription, for example \"Give $20 a Month for "
+"a Year\", and also give the donor the choice whether or not make their "
+"donation recurring."
+msgstr ""
+"Witamy w Dodatku Cyklicznych Płatności. Ten dodatek umożliwia tworzenie "
+"formularzy jak nigdy dotąd ze wsparciem codziennych, tygodniowych, "
+"miesięcznych i rocznych subskrypcji(abonamentów). Dodatkowo umożliwia zmianę "
+"ile razy chcesz by subskrypcja się powtarzała, na przykład \"20zł "
+"miesięcznie przez Rok). Ponadto Darczyńca otrzymuje możliwość wyboru, czy "
+"chce by jego dotacje były cykliczne czy nie. "
+
+#: includes/admin/settings.php:186
+msgid "Your license is active and you are receiving support and updates"
+msgstr "Twoja licencja jest aktywna i otrzymujesz wsparcie i aktualizacje"
+
+#: includes/admin/settings.php:196
+msgid "Recurring Donations Documentation"
+msgstr "Dokumentacja Cyklicznych Płatności"
+
+#: includes/admin/settings.php:197
+msgid ""
+"The following articles will help you get started accepting recurring "
+"donations. Please read and test thoroughly prior to going live. If you have "
+"any questions or trouble along the way, we are here to help."
+msgstr ""
+"Poniższe artykuły pomogą ci w rozpoczęciu otrzymywania cyklicznych "
+"płatności. Prosimy o dokładne przeczytanie i przetestowanie zanim włączysz "
+"cykliczne płatności do użytku. Jeśli masz jakiekolwiek pytania lub problemy "
+"jesteśmy zwróć się do nas. Jesteśmy tu by Ci pomóc. "
+
+#: includes/admin/settings.php:237
+msgid ""
+"There was an error retrieving the Give documentation list from the server. "
+"Please try again later."
+msgstr ""
+"Wystąpił błąd podczas pobierania dokumentacji Give z serwera. Proszę "
+"spróbować ponownie. "
+
+#: includes/admin/subscriptions-details.php:50
+msgid "You are not permitted to view this data."
+msgstr "Nie masz uprawnień do przeglądania tych danych."
+
+#: includes/admin/subscriptions-details.php:55
+#: includes/admin/subscriptions-details.php:64
+msgid "Invalid subscription ID Provided."
+msgstr "Podano błędne ID subskrypcji"
+
+#: includes/admin/subscriptions-details.php:70
+#: templates/shortcode-subscription-receipt.php:22
+msgid "Subscription Details"
+msgstr "Szczegóły Subskrypcji"
+
+#: includes/admin/subscriptions-details.php:94
+msgid "Donor:"
+msgstr "Darczyńca:"
+
+#: includes/admin/subscriptions-details.php:101
+msgid "Donation Form Title:"
+msgstr "Tytuł Formularza Dotacji: "
+
+#: includes/admin/subscriptions-details.php:108
+msgid "Initial Transaction ID:"
+msgstr "ID Pierwszej Transakcji:"
+
+#: includes/admin/subscriptions-details.php:114
+msgid "Billing Period:"
+msgstr "Okres płatności:"
+
+#: includes/admin/subscriptions-details.php:120
+msgid "Times Billed:"
+msgstr "Ile razy płatne:"
+
+#: includes/admin/subscriptions-details.php:126
+msgid "Donation Form ID:"
+msgstr "ID Formularza Dotacji:"
+
+#: includes/admin/subscriptions-details.php:135
+msgid "Gateway:"
+msgstr "Bramka płatności:"
+
+#: includes/admin/subscriptions-details.php:143
+msgid "Profile ID:"
+msgstr "Profil:"
+
+#: includes/admin/subscriptions-details.php:149
+msgid "Subscription Start:"
+msgstr "Rozpoczęcie subskrypcji:"
+
+#: includes/admin/subscriptions-details.php:156
+msgid "Subscription End:"
+msgstr "Zakończenie subskrypcji:"
+
+#: includes/admin/subscriptions-details.php:167
+msgid "Subscription Status:"
+msgstr "Status subskrypcji:"
+
+#: includes/admin/subscriptions-details.php:171
+#: includes/give-recurring-helpers.php:219
+msgid "Pending"
+msgstr "Oczekująca"
+
+#: includes/admin/subscriptions-details.php:172
+#: includes/give-recurring-helpers.php:231
+msgid "Active"
+msgstr "Aktywna"
+
+#: includes/admin/subscriptions-details.php:174
+#: includes/give-recurring-helpers.php:225
+msgid "Expired"
+msgstr "Wygasła"
+
+#: includes/admin/subscriptions-details.php:175
+#: includes/give-recurring-helpers.php:228
+msgid "Completed"
+msgstr "Zakończona"
+
+#: includes/admin/subscriptions-details.php:187
+msgid "Update Subscription"
+msgstr "Aktualizuj Subskrypcję"
+
+#: includes/admin/subscriptions-details.php:194
+msgid "Cancel Subscription"
+msgstr "Anuluj subskrypcję"
+
+#: includes/admin/subscriptions-details.php:198
+msgid "Delete Subscription"
+msgstr "Usuń subskrypcję"
+
+#: includes/admin/subscriptions-details.php:213
+msgid "Subscription Value"
+msgstr "Wartość Subskrypcji"
+
+#: includes/admin/subscriptions-details.php:230
+msgid "ID"
+msgstr "ID"
+
+#: includes/admin/subscriptions-details.php:232
+msgid "Date"
+msgstr "Data"
+
+#: includes/admin/subscriptions-details.php:246
+msgid "View Details for Transaction"
+msgstr "Zobacz Szczegóły Transakcji"
+
+#: includes/admin/subscriptions-details.php:257
+msgid ""
+"No subscription transactions yet. When this subscription renews you will see "
+"subscriptions in this section."
+msgstr ""
+"Nie ma jeszcze transakcji z subskrypcji. Kiedy subskrypcja się odnowi "
+"zobaczysz ją w tej sekcji."
+
+#: includes/admin/subscriptions-details.php:264
+msgid "Initial Donation:"
+msgstr "Pierwsza Dotacja:"
+
+#: includes/admin/subscriptions-details.php:279
+msgid "View Details for Donation"
+msgstr "Zobacz Szczegóły Dotacji"
+
+#: includes/admin/subscriptions.php:64
+msgid "Error: Nonce verification failed"
+msgstr ""
+"Błąd: Weryfikacja Identyfikatora Jednorazowego (Nonce) nie powiodła się"
+
+#: includes/gateways/give-recurring-authorize.php:59
+msgid "MD5-Hash"
+msgstr "MD5 Hash"
+
+#: includes/gateways/give-recurring-authorize.php:60
+msgid ""
+"The Authorize.net MD5 Hash security feature allows Give to authenticate "
+"transaction responses from the payment gateway. %1$sRead more about this "
+"feature%2$s"
+msgstr ""
+"MD5 Hash z Authorize.net umożliwia Give uwierzytelniać transakcje z bramki "
+"płatniczej. %1$s Dowiedz się więcej na ten temat%2$s"
+
+#: includes/gateways/give-recurring-authorize.php:65
+msgid "Hash Value"
+msgstr "Wartość Hash"
+
+#: includes/gateways/give-recurring-authorize.php:66
+msgid ""
+"Please type the hash value exactly as it appears within your Authorize.net "
+"settings as described in the documentation article linked above."
+msgstr ""
+"Proszę podać wartość hash dokładnie taką samą jak w ustawieniach twojego "
+"Authorize.net zgodnie z artykułem dokumentacji, którego link jest powyżej. "
+
+#: includes/gateways/give-recurring-authorize.php:109
+msgid "Authorize gateway is not activated"
+msgstr "Bramka płatności Authorize nie jest aktywowana"
+
+#: includes/gateways/give-recurring-authorize.php:113
+msgid "API Login ID or Transaction key is missing"
+msgstr "Brakuje API Login ID lub klucza transakcji"
+
+#: includes/gateways/give-recurring-authorize.php:137
+msgid "Your subscription cannot be created due to an error at the gateway."
+msgstr ""
+"Twoja subskrypcja nie może zostać utworzona z powodu błędu z bramką "
+"płatności."
+
+#: includes/gateways/give-recurring-gateway.php:153
+msgid "Nonce verification has failed"
+msgstr "Weryfikacja jednorazowego identyfikatora (Nonce)nie powiodła się"
+
+#: includes/gateways/give-recurring-gateway.php:157
+msgid "You must log in or create an account to purchase a subscription"
+msgstr "Musisz się zalogować lub zarejestrować aby zakupić subskrypcję"
+
+#: includes/gateways/give-recurring-gateway.php:336
+msgid "This subscription cannot be cancelled"
+msgstr "Tej subskrypcji nie można anulować"
+
+#: includes/gateways/give-recurring-paypal.php:121
+msgid "Please enter your PayPal email address."
+msgstr "Proszę wpisać adres email do PayPal."
+
+#: includes/gateways/give-recurring-paypal.php:252
+msgid "PayPal Subscription ID: %s"
+msgstr "Identyfikator ID subskrypcji Paypal: %s"
+
+#: includes/gateways/give-recurring-paypal.php:311
+msgid "IPN Error"
+msgstr "Błąd IPN"
+
+#: includes/gateways/give-recurring-paypal.php:311
+msgid "Invalid currency in IPN response. IPN data: "
+msgstr "Nieprawidłowa waluta podana w IPN. Dane IPN: %s"
+
+#: includes/gateways/give-recurring-paypal.php:423
+#: includes/gateways/give-recurring-paypalpro.php:620
+msgid "PayPal subscription cancellation failed."
+msgstr "Anulowanie subskrypcji PayPal nie powiodło się."
+
+#: includes/gateways/give-recurring-paypal.php:425
+#: includes/gateways/give-recurring-paypalpro.php:528
+#: includes/gateways/give-recurring-paypalpro.php:622
+msgid "Error message:"
+msgstr "Komunikat błędu"
+
+#: includes/gateways/give-recurring-paypal.php:426
+#: includes/gateways/give-recurring-paypalpro.php:529
+#: includes/gateways/give-recurring-paypalpro.php:623
+msgid "Error code:"
+msgstr "Błąd Kodu"
+
+#: includes/gateways/give-recurring-paypal.php:428
+#: includes/gateways/give-recurring-paypalpro.php:625
+msgid "Error: "
+msgstr "Błąd"
+
+#: includes/gateways/give-recurring-paypal.php:428
+#: includes/gateways/give-recurring-paypalpro.php:625
+msgid "PayPal Cancellation Error"
+msgstr "Błąd Anulowania PayPal"
+
+#: includes/gateways/give-recurring-paypal.php:454
+msgid ""
+"The following API keys are required in order to process PayPal Standard "
+"subscriptions cancellations on site. %1$sClick here%2$s to learn more about "
+"PayPal Standard's recurring capabilities and requirements."
+msgstr ""
+"Poniższe klucze API są wymagane aby umożliwić anulowanie subskrypcji PayPal "
+"na stronie. %1$s Kliknij Tutaj%2$s aby dowiedzieć się więcej na temat "
+"standardowych możliwości i wymagań cyklicznych płatności PayPal."
+
+#: includes/gateways/give-recurring-paypal.php:459
+msgid "Live API Username"
+msgstr "Nazwa użytkownika API"
+
+#: includes/gateways/give-recurring-paypal.php:460
+msgid "Enter your live API username"
+msgstr "Wpisz swoją nazwę użytkownika API"
+
+#: includes/gateways/give-recurring-paypal.php:466
+msgid "Live API Password"
+msgstr "Hasło API"
+
+#: includes/gateways/give-recurring-paypal.php:467
+msgid "Enter your live API password"
+msgstr "Wpisz swoje Hasło API"
+
+#: includes/gateways/give-recurring-paypal.php:472
+msgid "Live API Signature"
+msgstr "Sygnatura API"
+
+#: includes/gateways/give-recurring-paypal.php:473
+msgid "Enter your live API signature"
+msgstr "Wpisz swoją sygnaturę API"
+
+#: includes/gateways/give-recurring-paypal.php:478
+msgid "Test API Username"
+msgstr "Nazwa Użytkownika do Test API"
+
+#: includes/gateways/give-recurring-paypal.php:479
+msgid "Enter your test API username"
+msgstr "Wpisz swoją nazwę użytkownika do test API"
+
+#: includes/gateways/give-recurring-paypal.php:484
+msgid "Test API Password"
+msgstr "Hasło do Test API"
+
+#: includes/gateways/give-recurring-paypal.php:485
+msgid "Enter your test API password"
+msgstr "Wpisz swoje hasło do test API"
+
+#: includes/gateways/give-recurring-paypal.php:490
+msgid "Test API Signature"
+msgstr "Sygnatura do test API"
+
+#: includes/gateways/give-recurring-paypal.php:491
+msgid "Enter your test API signature"
+msgstr "Wpisz swoją sygnaturę do test API"
+
+#: includes/gateways/give-recurring-paypal.php:552
+#: includes/gateways/give-recurring-paypal.php:563
+#: includes/give-recurring-scripts.php:107
+msgid ""
+"PayPal Standard requires recurring times to be more than 1. Please specify a "
+"time with a minimum value of 2 and a maximum value of 52."
+msgstr ""
+"Paypal Standard wymaga by cykliczne płatności występowały więcej niż 1 raz. "
+"Proszę ustawić ilość o wartości pomiędzy 2 a 52."
+
+#: includes/gateways/give-recurring-paypalpro.php:85
+msgid ""
+"It appears that you have not configured PayPal API access. Please configure "
+"it in Give &rarr; Settings"
+msgstr ""
+"Wygląda na to że nie masz skonfigurowanego dostępu do API PayPal. Proszę "
+"skonfigurować to w Ustawieniach &rarr;  Give"
+
+#: includes/gateways/give-recurring-paypalpro.php:195
+msgid "IPN Verification Failed"
+msgstr "Nie powiodła się werygikacja IPN"
+
+#: includes/gateways/give-recurring-paypalpro.php:289
+msgid "Subscription payment successful"
+msgstr "Płatność cykliczna się powiodła"
+
+#: includes/gateways/give-recurring-paypalpro.php:294
+#: tests/unit-tests/gateways/tests-give-recurring-paypalpro.php:110
+msgid "Subscription could not be renewed due to error"
+msgstr "Subskrypcja nie została odnowiona z powodu błędu"
+
+#: includes/gateways/give-recurring-paypalpro.php:300
+#: tests/unit-tests/gateways/tests-give-recurring-paypalpro.php:118
+msgid "Invalid IPN for pay and renew transaction"
+msgstr "Nieprawidłowe IPN dla płacenia i odnawiania transakcji"
+
+#: includes/gateways/give-recurring-paypalpro.php:365
+msgid "Subscription Cancelled"
+msgstr "Anulowano Subskrypcję"
+
+#: includes/gateways/give-recurring-paypalpro.php:370
+#: tests/unit-tests/gateways/tests-give-recurring-paypalpro.php:180
+msgid "Subscription could not be cancelled due to error"
+msgstr "subskrypcja nie mogła zostać anulowana z powodu błędu"
+
+#: includes/gateways/give-recurring-paypalpro.php:376
+#: tests/unit-tests/gateways/tests-give-recurring-paypalpro.php:188
+msgid "Invalid IPN to cancel a subscription"
+msgstr "Nieprawidłowy IPN by anulować subskrypcję"
+
+#: includes/gateways/give-recurring-paypalpro.php:403
+msgid "Subscription marked as complete"
+msgstr "Subskrypcja została oznaczona jako zakończona"
+
+#: includes/gateways/give-recurring-paypalpro.php:408
+msgid "Subscription could not be completed due to error"
+msgstr "Subskrypcja nie mogła zostać zakończona z powodu błędu"
+
+#: includes/gateways/give-recurring-paypalpro.php:414
+msgid "Invalid IPN to complete a subscription"
+msgstr "Nieprawidłowy IPN aby zakończyć subskrypcję"
+
+#: includes/gateways/give-recurring-paypalpro.php:460
+msgid "Recurring Payment Failed"
+msgstr "Cykliczna płatność nie powiodła się"
+
+#: includes/gateways/give-recurring-paypalpro.php:481
+msgid "Payment Data : %s"
+msgstr "Dane Płatności : %s"
+
+#: includes/gateways/give-recurring-paypalpro.php:482
+msgid "Error Processing IPN Transaction"
+msgstr "Błąd przetwarzania IPN Transakcji"
+
+#: includes/gateways/give-recurring-paypalpro.php:487
+#: includes/gateways/give-recurring-paypalpro.php:488
+msgid "Invalid Currency Code"
+msgstr "Nieprawidłowy kod waluty"
+
+#: includes/gateways/give-recurring-paypalpro.php:487
+msgid ""
+"The currency code in an IPN request did not match the site currency code. "
+"Payment data: %s"
+msgstr ""
+"Kod IPN waluty nie odpowiada kodowi waluty ustawionej na stronie. Dane "
+"płatności: %s"
+
+#: includes/gateways/give-recurring-paypalpro.php:494
+msgid "Invalid PayPal IPN"
+msgstr "Nieprawidłowe PayPal IPN"
+
+#: includes/gateways/give-recurring-paypalpro.php:494
+msgid "The PayPal IPN request received was invalid. Please contact support."
+msgstr ""
+"Otrzymany PayPal IPN był nieprawidłowy. Proszę o skontaktowanie się ze "
+"wsparciem."
+
+#: includes/gateways/give-recurring-paypalpro.php:495
+msgid "Invalid IPN"
+msgstr "Nieprawidłowe IPN"
+
+#: includes/gateways/give-recurring-paypalpro.php:525
+msgid "There was a warning or error while creating subscription"
+msgstr "Wystąpił błąd podczas tworzenia subskrypcji"
+
+#: includes/gateways/give-recurring-paypalpro.php:664
+msgid "Something has gone wrong, please try again"
+msgstr "Coś poszło nie tak, prosimy spróbować ponownie. "
+
+#: includes/gateways/give-recurring-stripe.php:56
+msgid "The Stripe payment gateway does not appear to be activated."
+msgstr "Bramka płatnicza Strip nie jest aktywowana."
+
+#: includes/gateways/give-recurring-stripe.php:61
+msgid "The Stripe publishable key must be entered in settings."
+msgstr "Klucz publiczny Stripe musi zostać podany w ustawieniach."
+
+#: includes/gateways/give-recurring-stripe.php:66
+msgid "The Stripe secret key must be entered in settings."
+msgstr "Prywatny klucz Stripe musi być podany w ustawieniach."
+
+#: includes/gateways/give-recurring-stripe.php:85
+msgid "The subscription plan in Stripe could not be created, please try again."
+msgstr ""
+"Wystąpił błąd podczas tworzenia planu subskrypcji w Stripe, prosimy "
+"spróbować ponownie."
+
+#: includes/gateways/give-recurring-stripe.php:94
+msgid "The customer account in Stripe could not be created, please try again."
+msgstr ""
+"Wystąpił błąd podczas tworzenia konta klienta w Stripe, prosimy spróbować "
+"ponownie."
+
+#: includes/gateways/give-recurring-stripe.php:189
+msgid "Processed event : %s"
+msgstr "Przetworzone zdarzenie: %s"
+
+#: includes/gateways/give-recurring-stripe.php:193
+msgid "Invalid Request"
+msgstr "Nieprawidłowe żądanie"
+
+#: includes/gateways/give-recurring-stripe.php:370
+msgid "Charge refunded in Stripe."
+msgstr "Opłata została zrefundowana w Stripe."
+
+#: includes/gateways/give-recurring-wepay.php:93
+msgid "The WePay payment gateway does not appear to be activated."
+msgstr "Bramka Płatnicza w WePay nie jest aktywowana."
+
+#: includes/gateways/give-recurring-wepay.php:125
+msgid "There was a problem tokenizing this credit card, please try again."
+msgstr ""
+"Wystąpił błąd związany z tą kartą kredytową, prosimy spróbować ponownie."
+
+#: includes/gateways/give-recurring-wepay.php:258
+msgid "WePay Subscription ID: %s"
+msgstr "Identyfikator ID Subskrypcji WePay: %s"
+
+#: includes/gateways/give-recurring-wepay.php:292
+msgid ""
+"The subscription ID for this WePay transaction is missing. Please contact "
+"support."
+msgstr ""
+"Brakuje Indentyfikatora ID dla tej transakcji WePay. Prosimy o kontakt ze "
+"wsparciem."
+
+#: includes/gateways/give-recurring-wepay.php:304
+msgid ""
+"We are still confirming the initial subscription charge with WePay. This can "
+"take a few minutes to complete."
+msgstr ""
+"Nadal jesteśmy w trakcie potwierdzania wstępnej płatności subskrypcji w "
+"WePay. Może to zająć kilka minut, prosimy o cierpliwość. "
+
+#: includes/gateways/give-recurring-wepay.php:363
+msgid "The subscription plan in WePay could not be created, please try again."
+msgstr ""
+"Wystąpił błąd podczas tworzenia planu subskrypcji w WePay. Prosimy o "
+"spróbowanie ponownie. "
+
+#: includes/gateways/give-recurring-wepay.php:608
+#: includes/give-recurring-scripts.php:111
+msgid ""
+"WePay does not allow for daily recurring donations. Please select a period "
+"other than daily."
+msgstr ""
+"WePay nie zezwala na dzienne cykliczne płatności. Prosimy o wybranie innej "
+"częstotliwości płatności. "
+
+#: includes/give-recurring-emails.php:159
+msgid ""
+"Hello {name},\n"
+"\n"
+"Your subscription for {subscription_name} will renew on {expiration}."
+msgstr ""
+"Witaj, {name} \n"
+"\n"
+"Twoja subskrypcja dla {subscription_name} odnowi się w dniu {expiration}."
+
+#: includes/give-recurring-emails.php:165
+msgid ""
+"Hello {name},\n"
+"\n"
+"Your subscription for {subscription_name} will expire on {expiration}."
+msgstr ""
+"Witaj, {name} \n"
+"\n"
+"Twoja Subskrypcja dla {subscription_name} zakończy się w dniu {expiration}."
+
+#: includes/give-recurring-expirations.php:41
+msgid "One day before expiration"
+msgstr "Dzień przed wygaśnięciem"
+
+#: includes/give-recurring-expirations.php:42
+msgid "Two days before expiration"
+msgstr "Dwa dnie przed wygaśnięciem"
+
+#: includes/give-recurring-expirations.php:43
+msgid "Three days before expiration"
+msgstr "Trzy dni przed wygaśnięciem"
+
+#: includes/give-recurring-expirations.php:44
+msgid "One week before expiration"
+msgstr "Tydzień przed wygaśnięciem"
+
+#: includes/give-recurring-expirations.php:45
+msgid "Two weeks before expiration"
+msgstr "Dwa tygodnie przed wygaśnięciem"
+
+#: includes/give-recurring-expirations.php:46
+msgid "One month before expiration"
+msgstr "Miesiąc przed wygaśnięciem"
+
+#: includes/give-recurring-expirations.php:47
+msgid "Two months before expiration"
+msgstr "Dwa miesiące przed wygaśnięciem"
+
+#: includes/give-recurring-expirations.php:48
+msgid "Three months before expiration"
+msgstr "Trzy miesiące przed wygaśnięciem"
+
+#: includes/give-recurring-expirations.php:49
+msgid "At the time of expiration"
+msgstr "W dniu wygaśnięcia"
+
+#: includes/give-recurring-expirations.php:50
+msgid "One day after expiration"
+msgstr "Dzięń po wygaśnięciu"
+
+#: includes/give-recurring-expirations.php:51
+msgid "Two days after expiration"
+msgstr "Dwa dni po wygaśnięciu"
+
+#: includes/give-recurring-expirations.php:52
+msgid "Three days after expiration"
+msgstr "Trzy dni po wygaśnięciu"
+
+#: includes/give-recurring-expirations.php:53
+msgid "One week after expiration"
+msgstr "Tydzień po wygaśnięciu"
+
+#: includes/give-recurring-expirations.php:54
+msgid "Two weeks after expiration"
+msgstr "Dwa tygodnie po wygaśnięciu"
+
+#: includes/give-recurring-expirations.php:55
+msgid "One month after expiration"
+msgstr "Miesiąc po wygaśnięciu"
+
+#: includes/give-recurring-expirations.php:56
+msgid "Two months after expiration"
+msgstr "Dwa miesiące po wygaśnięciu"
+
+#: includes/give-recurring-expirations.php:57
+msgid "Three months after expiration"
+msgstr "Trzy miesiące po wygaśnięciu"
+
+#: includes/give-recurring-helpers.php:26
+msgid "Daily for %d Day"
+msgid_plural "Daily for %d Days"
+msgstr[0] "Codziennie przez %d dzień"
+msgstr[1] "Codziennie przez %d dni"
+msgstr[2] "Codziennie przez %d dni"
+
+#: includes/give-recurring-helpers.php:29
+msgid "Weekly for %d Week"
+msgid_plural "Weekly for %d Weeks"
+msgstr[0] "Tygodniowo przez %d tydzień"
+msgstr[1] "Tygodniowo przez %d tygodnie"
+msgstr[2] "Tygodniowo przez %d tygodni"
+
+#: includes/give-recurring-helpers.php:32
+msgid "Monthly for %d Month"
+msgid_plural "Monthly for %d Months"
+msgstr[0] "Miesięcznie przez %d miesiąc"
+msgstr[1] "Miesięcznie przez %d miesiące"
+msgstr[2] "Miesięcznie przez %d miesięcy"
+
+#: includes/give-recurring-helpers.php:35
+msgid "Yearly for %d Year"
+msgid_plural "Yearly for %d Years"
+msgstr[0] "Corocznie przez %d rok"
+msgstr[1] "Corocznie przez %d lata"
+msgstr[2] "Corocznie przez %d lat"
+
+#: includes/give-recurring-helpers.php:44
+msgid "Daily"
+msgstr "Dziennie"
+
+#: includes/give-recurring-helpers.php:47
+msgid "Weekly"
+msgstr "Tygodniowo"
+
+#: includes/give-recurring-helpers.php:50
+msgid "Monthly"
+msgstr "Miesięcznie"
+
+#: includes/give-recurring-helpers.php:53
+msgid "Yearly"
+msgstr "Corocznie"
+
+#: includes/give-recurring-helpers.php:150
+#: includes/give-recurring-helpers.php:161
+msgid "Custom Amount"
+msgstr "Własna kwota"
+
+#: includes/give-recurring-helpers.php:181
+msgid "Test Donation"
+msgstr "Testowa Dotacja"
+
+#: includes/give-recurring-helpers.php:184
+msgid "WePay"
+msgstr "WePay"
+
+#: includes/give-recurring-helpers.php:187
+msgid "PayPal - Standard"
+msgstr "PayPal Standard"
+
+#: includes/give-recurring-helpers.php:190
+msgid "PayPal Pro"
+msgstr "PayPal Pro"
+
+#: includes/give-recurring-helpers.php:193
+msgid "Stripe"
+msgstr "Stripe"
+
+#: includes/give-recurring-helpers.php:196
+msgid "Authorize.net"
+msgstr "Authorize.net"
+
+#: includes/give-recurring-helpers.php:260
+msgid "Untitled Donation Form"
+msgstr "Formularz dotacji bez tytułu"
+
+#: includes/give-recurring-renewals.php:42
+msgid "One day before renewal"
+msgstr "Dzień przed odnowieniem"
+
+#: includes/give-recurring-renewals.php:43
+msgid "Two days before renewal"
+msgstr "Dwa dni przed odnowieniem"
+
+#: includes/give-recurring-renewals.php:44
+msgid "Three days before renewal"
+msgstr "Trzy dni przed odnowieniem"
+
+#: includes/give-recurring-renewals.php:45
+msgid "One week before renewal"
+msgstr "Tydzień przed odnowieniem"
+
+#: includes/give-recurring-renewals.php:46
+msgid "Two weeks before renewal"
+msgstr "Dwa tygodnie przed odnowieniem"
+
+#: includes/give-recurring-renewals.php:47
+msgid "One month before renewal"
+msgstr "Miesiąc przed odnowieniem"
+
+#: includes/give-recurring-renewals.php:48
+msgid "Two months before renewal"
+msgstr "Dwa miesiące przed odnowieniem"
+
+#: includes/give-recurring-renewals.php:49
+msgid "Three months before renewal"
+msgstr "Trzy miesiące przed odnowieniem"
+
+#: includes/give-recurring-scripts.php:28
+#: includes/give-recurring-scripts.php:62
+msgid "Are you sure you want to cancel this subscription?"
+msgstr "Na pewno chcesz anulować te subskrypcję? "
+
+#: includes/give-recurring-scripts.php:63
+msgid "Are you sure you want to delete this subscription?"
+msgstr "Na pewno chcesz usunąć tę subskrypcję? "
+
+#: includes/give-recurring-scripts.php:108
+msgid "Stripe requires that the Times option be set to 0."
+msgstr "Stripe wymaga by opcja Times była ustawiona na 0."
+
+#: includes/give-recurring-shortcodes.php:84
+msgid "Invalid User ID"
+msgstr "Nieprawidłowy Identyfikator użytkownika"
+
+#: includes/give-recurring-shortcodes.php:108
+msgid "Invalid Payment Update"
+msgstr "Nieprawidłowa aktualizacja płatności"
+
+#: includes/give-recurring-shortcodes.php:114
+msgid "Unable to verify payment update. Please try again later."
+msgstr ""
+"Nie udało się zweryfikować aktualizację płatności. Prosimy spróbować "
+"ponownie później."
+
+#: includes/give-recurring-subscriber.php:198
+msgid "The specified profile ID does not belong to the given customer"
+msgstr "Podany identyfikator ID nie należy do podanego klienta"
+
+#: includes/give-recurring-template.php:38
+msgid "One time donation"
+msgstr "Jednorazowa dotacja"
+
+#: includes/give-recurring-template.php:88
+msgid "Make this Donation"
+msgstr "Wpłać Dotację"
+
+#: includes/give-subscription.php:109
+msgid "Can't get property %s"
+msgstr "Nie można uzyskać właściwości %s"
+
+#: includes/give-subscription.php:347
+msgid "Subscription #%$1s %2$s"
+msgstr "Subskrypcja #%$1s %2$s "
+
+#: templates/shortcode-subscription-receipt.php:30
+#: templates/shortcode-subscriptions.php:44
+msgid "Renewal Date"
+msgstr "Data odnowienia"
+
+#: templates/shortcode-subscription-receipt.php:31
+#: templates/shortcode-subscriptions.php:45
+msgid "Billing Cycle"
+msgstr "Okres rozliczeniowy"
+
+#: templates/shortcode-subscription-receipt.php:47
+#: templates/shortcode-subscriptions.php:59
+msgid "N/A"
+msgstr "N/D"
+
+#: templates/shortcode-subscriptions.php:21
+msgid "You have not made any subscription donations."
+msgstr "Nie dokonałeś/łaś jeszcze żadnych dotacji."
+
+#: templates/shortcode-subscriptions.php:31
+msgid "Notice"
+msgstr "Notatka"
+
+#: templates/shortcode-subscriptions.php:31
+msgid "Your donation subscription has successfully been cancelled."
+msgstr "Twoja subskrypcja dotacji została pomyślnie anulowana."
+
+#: templates/shortcode-subscriptions.php:84
+msgid "View Invoice"
+msgstr "Zobacz fakturę"
+
+#: templates/shortcode-subscriptions.php:87
+msgid "Cancel"
+msgstr "Anuluj"
+
+#: templates/shortcode-subscriptions.php:104
+msgid "You must be logged in to view your subscriptions."
+msgstr "Musisz być zalogowany/a by zobaczyć swoje subskrypcje."
+
+#: tests/unit-tests/gateways/tests-give-recurring-paypalpro.php:145
+msgid "Subscription could not be expired due to error"
+msgstr "Subskrypcja nie wygasła z powodu błędu"
+
+#: tests/unit-tests/gateways/tests-give-recurring-paypalpro.php:153
+msgid "Invalid IPN to expire a subscription"
+msgstr "Nieprawidłowy IPN do wygaśnięcia subskrypcji"
+
+#. Description of the plugin/theme
+msgid "Adds support for recurring donations to the Give Donations plugin."
+msgstr "Dodaje wsparcie dla cyklicznych dotacji do wtyczki Give."
+
+#: give-recurring.php:361
+msgctxt "Cancelled payment status"
+msgid "Cancelled"
+msgstr "Anulowano"
+
+#: give-recurring.php:369
+msgctxt "Subscription payment status"
+msgid "Subscription"
+msgstr "Skubskrypcja"
+
+#: give-recurring.php:484
+msgctxt "Billing period"
+msgid "Daily"
+msgstr "Dziennie"
+
+#: give-recurring.php:485
+msgctxt "Billing period"
+msgid "Weekly"
+msgstr "Tygodniowo"
+
+#: give-recurring.php:486
+msgctxt "Billing period"
+msgid "Monthly"
+msgstr "Miesięcznie"
+
+#: give-recurring.php:487
+msgctxt "Billing period"
+msgid "Yearly"
+msgstr "Corocznie"
+
+#: includes/admin/customers.php:31
+msgctxt "Example: $10 every month"
+msgid "%s every %s"
+msgstr "%s co %s"
+
+#: includes/admin/metabox.php:39
+msgctxt "Referring to billing period"
+msgid "Times"
+msgstr "Razy"
+
+#: includes/give-recurring-scripts.php:103
+msgctxt "Referring to billing period"
+msgid "time"
+msgstr "raz"
+
+#: includes/give-recurring-scripts.php:104
+msgctxt "Referring to billing period"
+msgid "times"
+msgstr "razy"

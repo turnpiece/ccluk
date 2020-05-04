@@ -1,0 +1,128 @@
+/**
+ * Give Recurring Admin Settings styles
+ */
+
+a.view-recurring-log {
+	float: right;
+}
+
+p.give-paypal-description {
+	background: #FFF;
+	padding: 15px;
+	border-radius: 5px;
+}
+
+.give-recurring-notice {
+	margin: 10px 0;
+	padding: 12px;
+	border-left: 4px solid #46b450;
+	box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.give-recurring-notice-issue {
+	border-left-color: #dc3232;
+}
+
+/* Recurring doc list */
+
+.recurring-docs-list p {
+	font-style: italic;
+	color: #aaaaaa;
+	max-width:1200px;
+}
+
+ul.doc-list {
+	list-style: disc;
+	margin: 5px 0 0 20px;
+}
+
+ul.doc-list ul.children {
+	list-style: circle;
+	margin: 8px 0 12px 20px;
+}
+
+.give-subscriber-notifications .check-column {
+	padding: 13px 10px 0 20px !important;
+}
+
+.give-subscriber-notifications td.check-column input {
+	display: none;
+}
+
+.give-subscriber-notifications th.check-column .give-email-notification-status {
+	color: white;
+	cursor: pointer;
+}
+
+.give-subscriber-notifications th.check-column .give-email-notification-status[data-edit="1"] i.dashicons {
+	border-radius: 1em;
+	padding: 2px;
+}
+
+.give-subscriber-notifications th.check-column .give-email-notification-enabled .dashicons-yes,
+.give-subscriber-notifications th.check-column .give-email-notification-disabled:hover .dashicons-no-alt {
+	background: #46b450;
+}
+
+.give-subscriber-notifications th.check-column .give-email-notification-enabled .dashicons-lock {
+	color: #46b450;
+}
+
+.give-subscriber-notifications th.check-column .give-email-notification-disabled .dashicons-no-alt,
+.give-subscriber-notifications th.check-column .give-email-notification-enabled:hover .dashicons-yes {
+	background: #bbbbbb;
+}
+
+.give-subscriber-notifications th.check-column .give-email-notification-disabled .dashicons-lock {
+	color: #bbbbbb;
+}
+
+.give-subscriber-notifications th.check-column .dashicons-no-alt:hover:before {
+	content: "\f147" !important;
+}
+
+.give-subscriber-notifications th.check-column .dashicons-yes:hover:before {
+	content: "\f335" !important;
+}
+
+.give-subscriber-notifications .spinner.is-active {
+	margin: 0 0 0 2px;
+	float: none;
+}
+
+.give-subscriber-notifications .spinner {
+	position: absolute;
+}
+
+.give-subscriber-notifications .check-column-title {
+	width: 45px;
+}
+
+.give-settings-subscription-reminder-section .form-table td {
+	vertical-align: top;
+}
+
+.give-settings-subscription-reminder-section .give-subscriber-notifications tr .action-buttons {
+	visibility: hidden;
+	margin-top: .25rem;
+	color: #ddd;
+	font-size: 13px;
+}
+
+.give-settings-subscription-reminder-section .give-subscriber-notifications tr:hover .action-buttons {
+	visibility: visible;
+}
+
+#excluded_gateways_chosen .chosen-choices {
+	width: 25em;
+}
+
+.give-email-tags-wrap .give_next_payment_attempt_tag,
+.give-email-tags-wrap .give_update_payment_method_link_tag {
+	display: none;
+}
+
+.give-settings-donor-subscription-payment-failed-section .give-email-tags-wrap .give_next_payment_attempt_tag,
+.give-settings-donor-subscription-payment-failed-section .give-email-tags-wrap .give_update_payment_method_link_tag {
+	display: block;
+}

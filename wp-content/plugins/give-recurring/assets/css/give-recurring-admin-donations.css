@@ -1,0 +1,71 @@
+/**
+ * Give Recurring Admin Transaction Styles
+ *
+ * @description: Providing some recurring specific styles for update payments
+ */
+
+.give-recurring-notice {
+	padding: 15px;
+	font-style: italic;
+	color: #868686;
+	position: relative;
+}
+
+.give-recurring-notice .dashicons {
+	position: absolute;
+	top: 50%;
+	margin-top: -40px;
+	left: 50%;
+	margin-left: -40px;
+	width: 80px;
+	height: 80px;
+	font-size: 72px;
+	opacity: 0.1;
+	z-index: 0;
+}
+
+span.give-donation-status-recurring {
+	background-color: transparent !important;
+	cursor: help;
+	font-size: 14px;
+	height: 14px;
+	width: 14px;
+	color: #2683B8;
+	margin: 1px 3px 0 -1px;
+}
+
+span.give-donation-status-recurring svg {
+	fill: #2683B8;
+	width: 20px;
+	height: 20px;
+	position: relative;
+	top: 3px;
+}
+
+#give-donation-subscription-payments .give-donation-sub-id-p {
+	margin: 0 !important;
+	font-size: 14px;
+	position: relative;
+	top: 0;
+	left: 10px;
+	width: 100%;
+	padding: 10px 0;
+}
+
+#give-donation-subscription-payments .give-recurring-parent-inside {
+	position: relative;
+	margin: 0;
+	padding: 0;
+}
+
+.give-donation-renewals-wrap {
+	padding: 0 10px 0;
+	margin: 0;
+	overflow-y: scroll;
+	max-height: 300px;
+	min-height:8px;
+}
+
+#give-donation-subscription-payments .give-recurring-renewal-payment-inside {
+	margin-bottom:10px;
+}
