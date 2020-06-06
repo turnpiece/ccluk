@@ -18,8 +18,6 @@
     </div>
 
     <footer class="action">
-        <?php bp_group_join_button() ?>
-
         <div class="meta">
             <?php bp_group_type() ?> / <?php bp_group_member_count() ?>
         </div>
