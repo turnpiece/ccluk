@@ -3,8 +3,17 @@
         list-style-type: none;
 
         li {
-            img.crp_thumb {
+            position: relative;
+            min-height: 110px;
+
+            .crp_thumb {
                 margin-right: 10px;
+            }
+
+            .crp_title {
+                position: absolute;
+                left: 235px;
+                top: 0;
             }
         }
     }

@@ -2413,6 +2413,17 @@ body.single-give_forms #secondary {
   list-style-type: none;
 }
 
-.crp_related ul li img.crp_thumb {
+.crp_related ul li {
+  position: relative;
+  min-height: 110px;
+}
+
+.crp_related ul li .crp_thumb {
   margin-right: 10px;
+}
+
+.crp_related ul li .crp_title {
+  position: absolute;
+  left: 235px;
+  top: 0;
 }
