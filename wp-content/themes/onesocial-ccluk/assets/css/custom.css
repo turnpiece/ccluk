@@ -2401,6 +2401,18 @@ body.single-give_forms #secondary {
   background-color: #54ae68;
 }
 
+[id*=give-form] .give-recurring-donors-choice label {
+  font-size: inherit;
+}
+
 #catapult-cookie-bar a.ctcc-more-info-link {
   text-decoration: underline;
+}
+
+.crp_related ul {
+  list-style-type: none;
+}
+
+.crp_related ul li img.crp_thumb {
+  margin-right: 10px;
 }
