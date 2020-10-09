@@ -2,9 +2,9 @@
 Contributors: yani.iliev, bangelov, pimjitsawang
 Tags: move, transfer, copy, migrate, backup, clone, restore, db migration, wordpress migration, website migration, database export, database import, apoyo, sauvegarde, di riserva, バックアップ
 Requires at least: 3.3
-Tested up to: 5.4
+Tested up to: 5.5
 Requires PHP: 5.2.17
-Stable tag: 7.18
+Stable tag: 7.28
 License: GPLv2 or later
 
 Move, transfer, copy, migrate, and backup a site with 1-click. Quick, easy, and reliable.
@@ -108,6 +108,66 @@ Alternatively you can download the plugin using the download button on this page
 All-in-One WP Migration **asks for your consent** to collect **requester's email address** when filling plugin's contact form. [GDPR Compliant Privacy Policy](https://www.iubenda.com/privacy-policy/946881)
 
 == Changelog ==
+= 7.28 =
+**Added**
+
+* Improved support for WPML plugin
+
+= 7.27 =
+**Added**
+
+* Translate button on the plugins page
+
+**Fixed**
+
+* Better PHP 7.4 compatibility
+
+= 7.26 =
+**Changed**
+
+* Tested up to WordPress 5.5
+
+= 7.25 =
+**Added**
+
+* Improved support for pretty permalinks detection on import
+
+= 7.24 =
+**Added**
+
+* Improved support for SiteGround hosting
+
+= 7.23 =
+**Added**
+
+* Improved support for RevSlider plugin
+* Improved support for WordPress.com migrations
+
+= 7.22 =
+**Added**
+
+* Improved upload path replacement
+* Set permalinks structure to default when pretty permalinks are not supported
+
+**Fixed**
+
+* Exclude media from advanced options
+
+= 7.21 =
+**Added**
+
+* Better compatibility to Oxygen Builder. Thanks Rookie for reporting it
+
+= 7.20 =
+**Fixed**
+
+* Total files number in enumerate and content steps
+
+= 7.19 =
+**Added**
+
+* Support for custom upload directory
+
 = 7.18 =
 **Added**
 

@@ -86,7 +86,7 @@ function apbct_wp_validate_auth_cookie( $cookie = '', $scheme = '' ) {
 			$hash = hash_hmac($algo, $username . '|' . $expiration . '|' . $token, $key);
 			if(hash_equals($hash, $hmac)){
 				$sessions = get_user_meta($user->ID, 'session_tokens', true);
-				$sessions = current($sessions);
+				$sessions = is_array($sessions) ? current($sessions) : $sessions;
 				if(is_array($sessions)){
 					if(is_int($sessions['expiration']) && $sessions['expiration'] > time()){
 						return $user->ID;
@@ -283,6 +283,29 @@ function apbct_wp_doing_cron() {
         return wp_doing_cron();
     } else {
         return ( defined( 'DOING_CRON' ) && DOING_CRON );
+    }
+
+}
+
+/**
+ * Checks if a comment contains disallowed characters or words.
+ *
+ * @param $author
+ * @param $email
+ * @param $url
+ * @param $comment
+ * @param $user_ip
+ * @param $user_agent
+ * @return bool
+ */
+function apbct_wp_blacklist_check($author, $email, $url, $comment, $user_ip, $user_agent ) {
+
+    global $wp_version;
+
+    if( version_compare($wp_version, '5.5.0', '>=') ) {
+        return wp_check_comment_disallowed_list( $author, $email, $url, $comment, $user_ip, $user_agent );
+    } else {
+        return wp_blacklist_check( $author, $email, $url, $comment, $user_ip, $user_agent );
     }
 
 }

@@ -28,10 +28,11 @@ class Data_Factory {
 			/**
 			 * This case there is a scan on progress, show status, status text and percent
 			 */
+			$scanning = new Scan\Component\Scanning();
 			$scan = [
 				'status'      => $model->status,
 				'status_text' => $model->statusText,
-				'percent'     => ( new Scanning() )->getScanProgress()
+				'percent'     => round( $scanning->getScanProgress(), 2 )
 			];
 		} else {
 			$issuesItems = $lastScan->getItemsAsJson( 0, Result_Item::STATUS_ISSUE, null );
@@ -72,6 +73,7 @@ class Data_Factory {
 					'always_send_notification',
 					'recipients_notification',
 					'email_subject',
+					'email_subject_issue',
 					'email_all_ok',
 					'email_has_issue'
 				] )

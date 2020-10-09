@@ -52,7 +52,7 @@ class Queue_Factory extends Component {
 
 				return [
 					$queue,
-					__( "Checking for any published vulnerabilities your plugins & themes...", wp_defender()->domain )
+					__( "Checking for any published vulnerabilities in your plugins & themes...", wp_defender()->domain )
 				];
 				break;
 			case 'gather_content_files':

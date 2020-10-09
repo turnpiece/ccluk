@@ -17,9 +17,14 @@
             </form>
             <div v-else>
                 <div class="sui-notice">
-                    <p>
-                        {{summary.weekCount}} {{__(" events logged in the past 7 days.")}}
-                    </p>
+                    <div class="sui-notice-content">
+                        <div class="sui-notice-message">
+                            <i class="sui-notice-icon sui-icon-info sui-md" aria-hidden="true"></i>
+                            <p>
+                                {{summary.weekCount}} {{__(" events logged in the past 7 days.")}}
+                            </p>
+                        </div>
+                    </div>
                 </div>
                 <div class="sui-field-list sui-flushed no-border">
                     <div class="sui-field-list-body">

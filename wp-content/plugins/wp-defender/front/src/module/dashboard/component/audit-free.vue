@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="sui-box-body sui-upsell-items">
-            <div class="sui-box-settings-row no-margin-bottom no-padding-bottom">
+            <div class="sui-padding-left sui-padding-right sui-padding-top">
                 <p>
                     {{__("Track and log events when changes are made to your website giving you full visibility of what's going on behind the scenes.")}}
                 </p>
@@ -20,7 +20,9 @@
                      :src="assetUrl('assets/img/audit-presale.svg')">
                 <div class="sui-upsell-notice">
                     <p>
-                        {{__("Get an automatic report about the changes made on your website with Audit Logging. Get Audit Logging as part of a WPMU DEV membership.")}}<br/> <a class="premium-button sui-button sui-button-purple" target='_blank' :href="campaign_url('defender_dash_auditlogging_upsell_link')">{{__("Try Pro Free Today")}}</a>
+                        {{__("Get an automatic report about the changes made on your website with Audit Logging. Get Audit Logging as part of a WPMU DEV membership.")}}<br/>
+                        <a class="premium-button sui-button sui-button-purple" target='_blank'
+                           :href="campaign_url('defender_dash_auditlogging_upsell_link')">{{__("Try Pro Free Today")}}</a>
                     </p>
                 </div>
             </div>

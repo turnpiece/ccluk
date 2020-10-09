@@ -1,4 +1,13 @@
 <?php
+/**
+ * The tracking view class for Google.
+ *
+ * @link    http://premium.wpmudev.org
+ * @since   3.2.0
+ *
+ * @author  Joel James <joel@incsub.com>
+ * @package Beehive\Core\Modules\Google_Analytics\Views
+ */
 
 namespace Beehive\Core\Modules\Google_Analytics\Views;
 
@@ -9,12 +18,9 @@ use Beehive\Core\Helpers\General;
 use Beehive\Core\Utils\Abstracts\View;
 
 /**
- * The tracking view class for Google.
+ * Class Tracking
  *
- * @link   http://premium.wpmudev.org
- * @since  3.2.0
- *
- * @author Joel James <joel@incsub.com>
+ * @package Beehive\Core\Modules\Google_Analytics\Views
  */
 class Tracking extends View {
 
@@ -27,10 +33,10 @@ class Tracking extends View {
 	 */
 	public function init() {
 		// Site tracking id.
-		add_action( 'wp_head', [ $this, 'tracking' ] );
+		add_action( 'wp_head', array( $this, 'tracking' ) );
 
 		// Add admin tracking id if required.
-		add_action( 'admin_head', [ $this, 'admin_tracking' ] );
+		add_action( 'admin_head', array( $this, 'admin_tracking' ) );
 	}
 
 	/**
@@ -66,11 +72,13 @@ class Tracking extends View {
 		$single_auto_tracking_code  = beehive_analytics()->settings->get( 'auto_track', 'misc' );
 		$network_auto_tracking_code = beehive_analytics()->settings->get( 'auto_track', 'misc', true );
 
-		// Use auto tracking code if required.
-		if ( empty( $single_code ) && ! empty( $single_auto_tracking ) && ! empty( $single_auto_tracking_code ) ) {
+		// User auto-tracking single code.
+		if ( ! empty( $single_auto_tracking ) && ! empty( $single_auto_tracking_code ) ) {
 			$single_code = $single_auto_tracking_code;
 		}
-		if ( empty( $network_code ) && ! empty( $network_auto_tracking ) && ! empty( $network_auto_tracking_code ) ) {
+
+		// Use auto-tracking network code.
+		if ( ! empty( $network_auto_tracking ) && ! empty( $network_auto_tracking_code ) ) {
 			$network_code = $network_auto_tracking_code;
 		}
 
@@ -99,15 +107,18 @@ class Tracking extends View {
 		}
 
 		// Render tracking code template.
-		$this->view( 'scripts/google/tracking', [
-			'network_tracking_code' => $network_code,
-			// Only when different tracking code is set for network and single.
-			'tracking_code'         => $network_code === $single_code ? '' : $single_code,
-			'anonymize'             => $anonymize,
-			'network_anonymize'     => $network_anonymize,
-			'advertising'           => beehive_analytics()->settings->get( 'advertising', 'general' ),
-			'network_advertising'   => beehive_analytics()->settings->get( 'advertising', 'general', true ),
-		] );
+		$this->view(
+			'scripts/google/tracking',
+			array(
+				'network_tracking_code' => $network_code,
+				// Only when different tracking code is set for network and single.
+				'tracking_code'         => $network_code === $single_code ? '' : $single_code,
+				'anonymize'             => $anonymize,
+				'network_anonymize'     => $network_anonymize,
+				'advertising'           => beehive_analytics()->settings->get( 'advertising', 'general' ),
+				'network_advertising'   => beehive_analytics()->settings->get( 'advertising', 'general', true ),
+			)
+		);
 	}
 
 	/**

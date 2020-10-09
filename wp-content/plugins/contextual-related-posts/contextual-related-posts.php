@@ -9,13 +9,13 @@
  * @author    Ajay D'Souza
  * @license   GPL-2.0+
  * @link      https://webberzone.com
- * @copyright 2009-2019 Ajay D'Souza
+ * @copyright 2009-2020 Ajay D'Souza
  *
  * @wordpress-plugin
  * Plugin Name: Contextual Related Posts
  * Plugin URI:  https://webberzone.com/plugins/contextual-related-posts/
  * Description: Display a set of related posts on your website or in your feed. Increase reader retention and reduce bounce rates
- * Version:     2.8.0
+ * Version:     2.9.4
  * Author:      WebberZone
  * Author URI:  https://webberzone.com
  * License:     GPL-2.0+
@@ -29,6 +29,18 @@
 if ( ! defined( 'WPINC' ) ) {
 	die;
 }
+
+/**
+ * Holds the version of Contextual Related Posts.
+ *
+ * @since 2.9.3
+ *
+ * @var string Contextual Related Posts Version.
+ */
+if ( ! defined( 'CRP_VERSION' ) ) {
+	define( 'CRP_VERSION', '2.9.3' );
+}
+
 
 /**
  * Holds the filesystem directory path (with trailing slash) for Contextual Related Posts.
@@ -72,7 +84,7 @@ if ( ! defined( 'CRP_PLUGIN_URL' ) ) {
  * @var int Maximum number of words to match.
  */
 if ( ! defined( 'CRP_MAX_WORDS' ) ) {
-	define( 'CRP_MAX_WORDS', 500 );
+	define( 'CRP_MAX_WORDS', 250 );
 }
 
 /*

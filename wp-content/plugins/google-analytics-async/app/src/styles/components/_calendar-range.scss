@@ -1,0 +1,138 @@
+@include body-class(true) {
+	.beehive-range-picker {
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		position: relative;
+		margin: 0;
+		padding: 4px 10px;
+		border: 1px solid palette(gray, lighter);
+		border-radius: $border-radius;
+		background-color: #fafafa;
+		color: palette(gray, dark);
+		font: 500 15px/30px $font;
+		letter-spacing: $font--letter-spacing;
+
+		span {
+			min-width: 1px;
+			display: block;
+			flex: 1 1 auto;
+
+			&:first-child {
+				margin-left: 5px;
+			}
+
+			+ [class*='sui-icon-'] {
+				margin-left: 5px;
+			}
+		}
+
+		[class*='sui-icon-'] {
+			width: 30px;
+			height: 30px;
+			display: flex;
+			flex: 0 0 auto;
+			align-items: center;
+			justify-content: center;
+			color: palette(gray, light);
+
+			&:before {
+				display: block;
+				color: inherit;
+			}
+		}
+	}
+}
+
+.daterangepicker {
+	&.beehive-range-calendar {
+		display: flex !important;
+		z-index: 9999;
+		padding-top: 15px !important;
+		padding-right: 0;
+		padding-left: 0;
+		box-sizing: border-box;
+
+		&.show-ranges {
+			.ranges {
+				flex: 1;
+				position: relative;
+				top: 0;
+
+				ul {
+					display: block;
+
+					li {
+						display: block;
+						margin: 0;
+						padding: 5px 14px;
+						border-radius: 0;
+						background-color: $white;
+						color: palette(gray, light);
+						font: 500 13px/24px $font;
+						letter-spacing: $font--letter-spacing;
+						text-align: left;
+
+						&:hover,
+						&:focus {
+							background-color: palette(silver, default);
+						}
+
+						&.active {
+							background-color: palette(gray, light);
+							color: $white;
+						}
+					}
+				}
+			}
+		}
+
+		&.show-calendar {
+			.ranges {
+				ul li {
+					position: relative;
+
+					&:before {
+						content: ' ';
+						position: absolute;
+						top: 0;
+						right: -34px;
+						border-width: 17px;
+						border-style: solid;
+						border-color: transparent;
+					}
+
+					&:hover,
+					&:focus,
+					&:active {
+						&:before {
+							border-left-color: palette(silver, default);
+						}
+					}
+
+					&.active {
+						&:before {
+							border-left-color: palette(gray, light);
+						}
+					}
+				}
+
+				+ .drp-calendar {
+					margin-left: 34px;
+				}
+			}
+
+			.drp-calendar {
+				&.right {
+					margin-right: 20px;
+				}
+			}
+		}
+
+		&:not(.show-calendar) {
+			.drp-calendar {
+				display: none;
+			}
+		}
+	}
+}

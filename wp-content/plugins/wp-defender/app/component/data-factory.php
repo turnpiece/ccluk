@@ -5,12 +5,14 @@
 
 namespace WP_Defender\Component;
 
+use Hammer\Base\Container;
 use WP_Defender\Behavior\Utils;
 use WP_Defender\Module\Advanced_Tools\Component\Mask_Api;
-use WP_Defender\Module\Advanced_Tools\Model\Auth_Settings;
 use WP_Defender\Module\Advanced_Tools\Model\Mask_Settings;
+use WP_Defender\Module\Advanced_Tools\Model\Security_Headers_Settings;
 use WP_Defender\Module\Hardener\Model\Settings;
 use WP_Defender\Module\IP_Lockout\Model\Log_Model;
+use WP_Defender\Module\Two_Factor\Model\Auth_Settings;
 
 class Data_Factory {
 	public static function buildData() {
@@ -26,6 +28,35 @@ class Data_Factory {
 			'audit'           => self::buildAuditData(),
 			'report'          => self::buildReportData(),
 			'advanced_tools'  => self::buildAToolsData(),
+			'two_fa'          => self::buildTwoFaData(),
+			'waf'             => self::buildWafData(),
+			'settings'        => self::buildSettingsData()
+		];
+	}
+
+	public static function buildSettingsData() {
+		$module     = Container::instance()->get( 'setting' );
+		$controller = $module->getController( 'main' );
+
+		return $controller->scriptsData();
+	}
+
+	public static function buildWafData() {
+		return Container::instance()->get( 'waf' )->_scriptsData();
+	}
+
+	public static function buildTwoFaData() {
+		$settings = Auth_Settings::instance();
+
+		return [
+			'enabled'   => $settings->enabled,
+			'useable'   => $settings->enabled && count( $settings->user_roles ),
+			'nonces'    => [
+				'updateSettings' => wp_create_nonce( 'updateSettings' ),
+			],
+			'endpoints' => [
+				'updateSettings' => 'wp-defender/v1/twoFa/updateSettings',
+			]
 		];
 	}
 
@@ -33,20 +64,29 @@ class Data_Factory {
 	 * @return array
 	 */
 	public static function buildAToolsData() {
+		$headers = [];
+		if ( isset( wp_defender()->global['security_headers_enabled'] ) ) {
+			$headers = wp_defender()->global['security_headers_enabled'];
+		}
+		$data = [];
+		foreach ( $headers as $header ) {
+			$data[] = [
+				'slug'  => $header::$rule_slug,
+				'title' => $header->getTitle()
+			];
+		}
+
 		return [
-			'two_factors' => [
-				'enabled' => Auth_Settings::instance()->enabled,
-				'useable' => count( Auth_Settings::instance()->user_roles ) > 0
-			],
-			'mask_login'  => [
+			'security_headers' => $data,
+			'mask_login'       => [
 				'enabled'   => Mask_Settings::instance()->enabled,
 				'useable'   => strlen( Mask_Settings::instance()->mask_url ) > 0,
 				'login_url' => Mask_Api::getNewLoginUrl()
 			],
-			'nonces'      => [
+			'nonces'           => [
 				'updateSettings' => wp_create_nonce( 'updateSettings' )
 			],
-			'endpoints'   => [
+			'endpoints'        => [
 				'updateSettings' => 'wp-defender/v1/advanced-tools/updateSettings'
 			]
 		];

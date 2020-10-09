@@ -16,7 +16,7 @@ class Blacklist extends Behavior {
 		$api = Utils::instance()->getAPIKey();
 		if ( ! $api ) {
 			wp_send_json_error( array(
-				'message' => __( "A WPMU DEV subscription is required for blacklist monitoring", wp_defender()->domain )
+				'message' => __( "A WPMU DEV subscription is required for blocklist monitoring", wp_defender()->domain )
 			) );
 		}
 		if ( $status == null ) {

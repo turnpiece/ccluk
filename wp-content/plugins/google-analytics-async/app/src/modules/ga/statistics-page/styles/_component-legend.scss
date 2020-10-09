@@ -1,0 +1,49 @@
+@include body-class(true) {
+	.beehive-options-sidenote {
+		max-width: 100%;
+		display: flex;
+		order: 2;
+		align-items: center;
+		justify-content: center;
+		margin: 0;
+		padding: 10px #{$sui-gutter / 2} 25px;
+		border: 0;
+		color: #23282d;
+		font: 400 13px/18px $font;
+		letter-spacing: 0;
+
+		span {
+			display: block;
+			flex: 0 0 auto;
+			position: relative;
+			margin: 0 25px;
+			padding-left: 15px;
+
+			.beehive-sidenote-indicator {
+				content: ' ';
+				width: 10px;
+				height: 10px;
+				display: block;
+				position: absolute;
+				top: 4px;
+				left: 0;
+				margin: 0;
+				padding: 0;
+				border: 0;
+				border-radius: 10px;
+			}
+
+			&.beehive-sidenote-left {
+				.beehive-sidenote-indicator {
+					background-color: #2d8ce2;
+				}
+			}
+
+			&.beehive-sidenote-right {
+				.beehive-sidenote-indicator {
+					background-color: #7766a7;
+				}
+			}
+		}
+	}
+}

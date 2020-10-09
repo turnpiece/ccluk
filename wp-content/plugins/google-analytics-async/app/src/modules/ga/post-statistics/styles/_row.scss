@@ -1,0 +1,23 @@
+@include body-class(true) {
+	.sui-row {
+		[class*='sui-col-'] {
+			// Align tooltips to left.
+			&:nth-child(3n + 1) {
+				.#{$prefix}-block-wrapper {
+					.#{$prefix}-tooltip {
+						@extend .sui-tooltip-top-left;
+					}
+				}
+			}
+
+			// Align tooltips to right.
+			&:nth-child(3n + 3) {
+				.#{$prefix}-block-wrapper {
+					.#{$prefix}-tooltip {
+						@extend .sui-tooltip-top-right;
+					}
+				}
+			}
+		}
+	}
+}

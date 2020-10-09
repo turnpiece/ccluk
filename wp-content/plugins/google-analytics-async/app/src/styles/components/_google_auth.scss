@@ -1,0 +1,43 @@
+@include body-class {
+	.sui-wrap {
+		.beehive-google-setup-connect {
+			.sui-button {
+				&.beehive-connect-google-btn {
+					background-color: $white;
+					box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
+					color: palette(gray, dark);
+					font-size: 12px;
+					text-transform: none;
+
+					&:hover,
+					&:focus,
+					&:active {
+						background-color: $blue;
+						color: $white;
+
+						.sui-icon-google-connect {
+							background-image: -webkit-image-set(
+								url('../../../images/icons/icon-google-connect-white.png')
+									1x,
+								url('../../../images/icons/icon-google-connect-white@2x.png')
+									2x
+							);
+						}
+					}
+				}
+			}
+
+			.sui-form-field {
+				&.google-setup-connect {
+					.sui-description {
+						font-size: 11px;
+
+						i {
+							cursor: pointer;
+						}
+					}
+				}
+			}
+		}
+	}
+}

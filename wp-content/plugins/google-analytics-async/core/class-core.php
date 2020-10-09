@@ -1,4 +1,16 @@
 <?php
+/**
+ * Defines everything for the core plugin.
+ *
+ * @note    Only hooks fired after the `plugins_loaded` hook will work here.
+ *       You need to register earlier hooks separately.
+ *
+ * @link    http://premium.wpmudev.org
+ * @since   3.2.0
+ *
+ * @author  Joel James <joel@incsub.com>
+ * @package Beehive\Core
+ */
 
 namespace Beehive\Core;
 
@@ -6,26 +18,15 @@ namespace Beehive\Core;
 defined( 'WPINC' ) || die;
 
 use Beehive\Core\Modules;
-use Beehive\Core\Views\Settings;
-use Beehive\Core\Controllers\GDPR;
-use Beehive\Core\Controllers\Ajax;
-use Beehive\Core\Controllers\Admin;
-use Beehive\Core\Controllers\Assets;
-use Beehive\Core\Controllers\Common;
+use Beehive\Core\Endpoints;
+use Beehive\Core\Controllers;
 use Beehive\Core\Utils\Abstracts\Base;
-use Beehive\Core\Controllers\Capability;
-use Beehive\Core\Controllers\Compatibility;
+use Beehive\Core\Views\Admin as Admin_View;
 
 /**
- * Defines everything for the core plugin.
+ * Class Core
  *
- * @note   Only hooks fired after the `plugins_loaded` hook will work here.
- *       You need to register earlier hooks separately.
- *
- * @link   http://premium.wpmudev.org
- * @since  3.2.0
- *
- * @author Joel James <joel@incsub.com>
+ * @package Beehive\Core
  */
 class Core extends Base {
 
@@ -50,7 +51,7 @@ class Core extends Base {
 		 * We need to initialize the modules as early as possible
 		 * but using `init` hook. Then only other hooks will work.
 		 */
-		add_action( 'init', [ $this, 'init_modules' ], -1 );
+		add_action( 'init', array( $this, 'init_modules' ), -1 );
 
 		/**
 		 * Action hook to trigger after initializing all core actions.
@@ -73,14 +74,20 @@ class Core extends Base {
 	 */
 	private function init() {
 		// Initialize sub classes.
-		Settings::instance()->init();
-		Capability::instance()->init();
-		Admin::instance()->init();
-		Assets::instance()->init();
-		Common::instance()->init();
-		Ajax::instance()->init();
-		GDPR::instance()->init();
-		Compatibility::instance()->init();
+		Controllers\I18n::instance()->init();
+		Admin_View::instance()->init();
+		Controllers\Capability::instance()->init();
+		Controllers\Admin::instance()->init();
+		Controllers\Menu::instance()->init();
+		Controllers\Assets::instance()->init();
+		Controllers\Common::instance()->init();
+		Controllers\GDPR::instance()->init();
+		Controllers\Compatibility::instance()->init();
+
+		// Setup endpoints.
+		Endpoints\Settings::instance();
+		Endpoints\Actions::instance();
+		Endpoints\Data::instance();
 	}
 
 	/**
@@ -99,6 +106,9 @@ class Core extends Base {
 
 		// Google Analytics.
 		Modules\Google_Analytics\Analytics::instance()->init();
+
+		// Google Tag Manager.
+		Modules\Google_Tag_Manager\Tag_Manager::instance()->init();
 
 		/**
 		 * Action hook to execute after free modules initialization.

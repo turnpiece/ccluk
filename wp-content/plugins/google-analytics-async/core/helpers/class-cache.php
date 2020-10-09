@@ -1,4 +1,13 @@
 <?php
+/**
+ * Define the cache helper.
+ *
+ * @link    http://premium.wpmudev.org
+ * @since   3.2.0
+ *
+ * @author  Joel James <joel@incsub.com>
+ * @package Beehive\Core\Helpers
+ */
 
 namespace Beehive\Core\Helpers;
 
@@ -6,12 +15,9 @@ namespace Beehive\Core\Helpers;
 defined( 'WPINC' ) || die;
 
 /**
- * Define the cache helper.
+ * Class Cache
  *
- * @link   http://premium.wpmudev.org
- * @since  3.2.0
- *
- * @author Joel James <joel@incsub.com>
+ * @package Beehive\Core\Helpers
  */
 class Cache {
 
@@ -43,7 +49,7 @@ class Cache {
 	 *
 	 * Used to set different key for network level data.
 	 *
-	 * @param string $name    Name
+	 * @param string $name    Name.
 	 * @param bool   $network Is network level?.
 	 *
 	 * @since 3.2.0
@@ -56,7 +62,7 @@ class Cache {
 			$name = $name . '_network';
 		}
 
-		return md5( json_encode( $name ) );
+		return md5( wp_json_encode( $name ) );
 	}
 
 	/**
@@ -69,17 +75,17 @@ class Cache {
 	 * @param int|string $key       The cache key to use for retrieval later.
 	 * @param mixed      $data      The contents to store in the cache.
 	 * @param bool       $network   Network flag (useful for transient).
-	 * @param bool       $transient Should set to transient also?.
 	 * @param string     $group     Optional. Where to group the cache contents.
 	 *                              Enables the same key to be used across groups.
 	 * @param int        $expire    Optional. When to expire the cache contents, in seconds.
 	 *                              Default 0 (no expiration).
 	 *
 	 * @since 3.2.0
+	 * @since 3.2.4 Removed transient.
 	 *
 	 * @return bool False on failure, true on success.
 	 */
-	public static function set_cache( $key, $data, $network = false, $transient = true, $group = self::CACHE_GROUP, $expire = 0 ) {
+	public static function set_cache( $key, $data, $network = false, $group = self::CACHE_GROUP, $expire = 0 ) {
 		// Check if caching disabled.
 		if ( ! self::can_cache() ) {
 			return false;
@@ -100,11 +106,6 @@ class Cache {
 			wp_cache_set( self::CACHE_VERSION_KEY, $version );
 		}
 
-		// Set to transient.
-		if ( $transient && self::can_transient() ) {
-			self::set_transient( $key, $data, $version, $network, $expire );
-		}
-
 		// Add to cache array with version.
 		$data = array(
 			'data'    => $data,
@@ -118,44 +119,59 @@ class Cache {
 	/**
 	 * Wrapper for get_transient function in Beehive.
 	 *
-	 * Use this to get the cache values set using set_cache method.
+	 * Use this method so we can easily clear all transients of the plugin at once.
 	 *
 	 * @param string $key           Transient name. Expected to not be SQL-escaped. Must be
 	 *                              172 characters or fewer in length.
 	 * @param mixed  $data          Transient value. Must be serializable if non-scalar.
 	 *                              Expected to not be SQL-escaped.
-	 * @param int    $version       Transient version.
 	 * @param bool   $network       Network flag.
 	 * @param int    $expire        Optional. When to expire the cache contents, in seconds.
 	 *                              Default 0 (no expiration).
 	 *
 	 * @since 3.2.0
+	 * @since 3.2.4 Made independent.
 	 *
 	 * @return bool|mixed False on failure or the transient content.
 	 */
-	public static function set_transient( $key, $data, $version, $network = false, $expire = 0 ) {
+	public static function set_transient( $key, $data, $network = false, $expire = 0 ) {
 		// Check if caching disabled.
 		if ( ! self::can_transient() ) {
 			return false;
 		}
 
-		// Add to cache array with version.
+		// Get transient version.
+		if ( $network ) {
+			$version = get_site_transient( self::CACHE_VERSION_KEY );
+		} else {
+			$version = get_transient( self::CACHE_VERSION_KEY );
+		}
+
+		// Get the expiry time.
+		$expire = self::expiry( $expire, $key );
+
+		// In case version is not set, set now.
+		if ( empty( $version ) ) {
+			$version = 1;
+
+			// Set transient version.
+			if ( $network ) {
+				set_site_transient( self::CACHE_VERSION_KEY, $version, $expire );
+			} else {
+				set_transient( self::CACHE_VERSION_KEY, $version, $expire );
+			}
+		}
+
+		// Add to transient array with version.
 		$data = array(
 			'data'    => $data,
 			'version' => $version,
 		);
 
+		// Set transient data.
 		if ( $network ) {
-			// Set transient version.
-			set_site_transient( self::CACHE_VERSION_KEY, $version, $expire );
-
-			// Set transient data.
 			return set_site_transient( self::cache_key( $key ), $data, $expire );
 		} else {
-			// Set transient version.
-			set_transient( self::CACHE_VERSION_KEY, $version, $expire );
-
-			// Set transient data.
 			return set_transient( self::cache_key( $key ), $data, $expire );
 		}
 	}
@@ -166,8 +182,7 @@ class Cache {
 	 * Use this to get the cache values set using set_cache method.
 	 *
 	 * @param int|string $key       The key under which the cache contents are stored.
-	 * @param bool       $network   Network flag (useful for transient).
-	 * @param bool       $transient Should try transient also?.
+	 * @param bool       $network   Network flag.
 	 * @param string     $group     Optional. Where the cache contents are grouped.
 	 * @param bool       $force     Optional. Whether to force an update of the local
 	 *                              cache from the persistent cache. Default false.
@@ -175,11 +190,12 @@ class Cache {
 	 *                              Disambiguate a return of false, a storable value. Default null.
 	 *
 	 * @since 3.2.0
+	 * @since 3.2.4 Removed transient.
 	 *
 	 * @return bool|mixed False on failure to retrieve contents or the cache
 	 *                      contents on success
 	 */
-	public static function get_cache( $key, $network = false, $transient = true, $group = self::CACHE_GROUP, $force = false, &$found = null ) {
+	public static function get_cache( $key, $network = false, $group = self::CACHE_GROUP, $force = false, &$found = null ) {
 		// Check if caching disabled.
 		if ( ! self::can_cache() ) {
 			return false;
@@ -196,12 +212,9 @@ class Cache {
 			// Return only data.
 			if ( isset( $data['version'] ) && $version === $data['version'] && ! empty( $data['data'] ) ) {
 				return $data['data'];
+			} elseif ( isset( $data['version'] ) && $version !== $data['version'] ) {
+				$found = false;
 			}
-		}
-
-		// Try to get from transient.
-		if ( $transient && self::can_transient() ) {
-			return self::get_transient( $key, $network );
 		}
 
 		return false;
@@ -226,10 +239,13 @@ class Cache {
 		}
 
 		// Get transient version.
-		$version = $network ? get_site_transient( self::CACHE_VERSION_KEY ) : get_transient( self::CACHE_VERSION_KEY );
+		if ( $network ) {
+			$version = get_site_transient( self::CACHE_VERSION_KEY );
+		} else {
+			$version = get_transient( self::CACHE_VERSION_KEY );
+		}
 
 		if ( ! empty( $version ) ) {
-			// Format key.
 			$key = self::cache_key( $key );
 
 			// Get transient data.
@@ -247,31 +263,42 @@ class Cache {
 	/**
 	 * Delete a single item from the cache.
 	 *
-	 * This is a wrapper function for wp_cache_delete, but we
-	 * also delete the data from transient.
+	 * This is a wrapper function for wp_cache_delete to handle key format.
 	 *
-	 * @param int|string $key       The key under which the cache contents are stored.
-	 * @param bool       $transient Should delete transient also?.
-	 * @param bool       $network   Network flag.
-	 * @param string     $group     Optional. Where the cache contents are grouped.
+	 * @param int|string $key     The key under which the cache contents are stored.
+	 * @param bool       $network Network flag.
+	 * @param string     $group   Optional. Where the cache contents are grouped.
 	 *
 	 * @since 3.2.0
 	 *
 	 * @return bool
 	 */
-	public static function delete_cache( $key, $transient = true, $network = false, $group = self::CACHE_GROUP ) {
+	public static function delete_cache( $key, $network = false, $group = self::CACHE_GROUP ) {
 		// Delete object cache.
-		$deleted = wp_cache_delete( self::cache_key( $key, $network ), $group );
+		return wp_cache_delete(
+			self::cache_key( $key, $network ),
+			$group
+		);
+	}
+
+	/**
+	 * Delete a single item from the transient.
+	 *
+	 * This is a wrapper function for site_transient to handle key format.
+	 *
+	 * @param int|string $key     The key under which the transient contents are stored.
+	 * @param bool       $network Network flag.
+	 *
+	 * @since 3.2.4
+	 *
+	 * @return bool
+	 */
+	public static function delete_transient( $key, $network = false ) {
+		// Generate transient key.
+		$key = self::cache_key( $key );
 
 		// Delete transient.
-		if ( $transient ) {
-			// Generate transient key.
-			$key = self::cache_key( $key );
-			// Delete transient.
-			$deleted = $network ? delete_site_transient( $key ) : delete_transient( $key );
-		}
-
-		return $deleted;
+		return $network ? delete_site_transient( $key ) : delete_transient( $key );
 	}
 
 	/**
@@ -280,30 +307,65 @@ class Cache {
 	 * We can not delete the cache by group. So use
 	 * this method to refresh the cache using version.
 	 *
-	 * @param bool $transient Should refresh transient also?.
-	 *
 	 * @since 3.2.0
+	 * @since 3.2.4 Added network param.
+	 * @since 3.2.4 Removed transient.
 	 *
 	 * @return bool
 	 */
-	public static function refresh_cache( $transient = true ) {
+	public static function refresh_cache() {
 		// Check if caching disabled.
 		if ( ! self::can_cache() ) {
 			return false;
 		}
 
-		// Increment the version.
-		$inc = wp_cache_incr( self::CACHE_VERSION_KEY );
+		return wp_cache_incr( self::CACHE_VERSION_KEY );
+	}
 
-		if ( $transient && self::can_transient() ) {
-			// Transient version.
-			$version = (int) get_transient( self::CACHE_VERSION_KEY );
-
-			// Update with new version.
-			$inc = set_transient( self::CACHE_VERSION_KEY, $version + 1, self::expiry( self::CACHE_VERSION_KEY ) );
+	/**
+	 * Refresh the whole Beehive transient.
+	 *
+	 * We can not delete the transient by group. So use
+	 * this method to refresh the transient using version.
+	 *
+	 * @param bool $network Network flag.
+	 *
+	 * @since 3.2.4
+	 *
+	 * @return bool
+	 */
+	public static function refresh_transient( $network = false ) {
+		// Check if transient disabled.
+		if ( ! self::can_transient() ) {
+			return false;
 		}
 
-		return $inc ? true : false;
+		// Transient version.
+		if ( $network ) {
+			$version = get_site_transient( self::CACHE_VERSION_KEY );
+		} else {
+			$version = get_transient( self::CACHE_VERSION_KEY );
+		}
+
+		// Make sure it's int.
+		$version = ( (int) $version ) + 1;
+
+		// Update with new version.
+		if ( $network ) {
+			$success = set_site_transient(
+				self::CACHE_VERSION_KEY,
+				$version,
+				self::expiry( self::CACHE_VERSION_KEY )
+			);
+		} else {
+			$success = set_transient(
+				self::CACHE_VERSION_KEY,
+				$version,
+				self::expiry( self::CACHE_VERSION_KEY )
+			);
+		}
+
+		return $success;
 	}
 
 	/**
@@ -399,7 +461,7 @@ class Cache {
 		 */
 		$expire = apply_filters_deprecated(
 			'ga_cache_timeout',
-			[ $expire ],
+			array( $expire ),
 			'3.2.0',
 			'beehive_cache_expiry'
 		);

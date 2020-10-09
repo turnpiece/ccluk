@@ -1,4 +1,13 @@
 <?php
+/**
+ * Base class for all classes.
+ *
+ * @link    http://premium.wpmudev.org
+ * @since   3.2.0
+ *
+ * @author  Joel James <joel@incsub.com>
+ * @package Beehive\Core\Utils\Abstracts
+ */
 
 namespace Beehive\Core\Utils\Abstracts;
 
@@ -6,12 +15,9 @@ namespace Beehive\Core\Utils\Abstracts;
 defined( 'WPINC' ) || die;
 
 /**
- * Base class for all classes.
+ * Class Base
  *
- * @link   http://premium.wpmudev.org
- * @since  3.2.0
- *
- * @author Joel James <joel@incsub.com>
+ * @package Beehive\Core\Utils\Abstracts
  */
 abstract class Base extends Singleton {
 
@@ -62,6 +68,7 @@ abstract class Base extends Singleton {
 	public function is_network() {
 		// If called from Ajax, check request.
 		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+			// phpcs:ignore
 			$network = ! empty( $_REQUEST['network'] );
 		} else {
 			$network = is_network_admin();

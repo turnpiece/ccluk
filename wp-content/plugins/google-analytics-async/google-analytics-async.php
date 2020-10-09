@@ -9,9 +9,10 @@
  * Description: Enables Google Analytics for your site with statistics inside WordPress admin panel. Single and multi site compatible!
  * Author:      WPMU DEV
  * Author URI:  http://premium.wpmudev.org
- * Version:     3.2.3
+ * Version:     3.3.0
  * License:     GNU General Public License (Version 2 - GPLv2)
  * Text Domain: ga_trans
+ * Domain Path: /languages
  * WDP ID:      51
  *
  * Beehive is free software: you can redistribute it and/or modify
@@ -45,7 +46,7 @@ if ( ! defined( 'BEEHIVE_PLUGIN_FILE' ) ) {
 
 // Plugin version.
 if ( ! defined( 'BEEHIVE_VERSION' ) ) {
-	define( 'BEEHIVE_VERSION', '3.2.3' );
+	define( 'BEEHIVE_VERSION', '3.3.0' );
 }
 
 // Auto load classes.
@@ -56,7 +57,7 @@ require_once plugin_dir_path( __FILE__ ) . '/core/utils/autoloader.php';
  *
  * @since 3.2.0
  */
-register_activation_hook( __FILE__, [ \Beehive\Core\Controllers\Installer::instance(), 'activate' ] );
+register_activation_hook( __FILE__, array( \Beehive\Core\Controllers\Installer::instance(), 'activate' ) );
 
 // Make sure beehive is not already defined.
 if ( ! function_exists( 'beehive_analytics' ) ) {

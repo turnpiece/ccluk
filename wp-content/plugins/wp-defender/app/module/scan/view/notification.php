@@ -194,7 +194,7 @@
                                     <label class="sui-label">
 					                    <?php _e( "Subject", wp_defender()->domain ) ?>
                                     </label>
-                                    <input type="text" class="sui-form-control" name="email_subject" value="<?php echo $setting->email_subject ?>">
+                                    <input type="text" class="sui-form-control" name="email_subject_issue" value="<?php echo $setting->email_subject_issue ?>">
                                 </div>
                             </div>
                         </div>

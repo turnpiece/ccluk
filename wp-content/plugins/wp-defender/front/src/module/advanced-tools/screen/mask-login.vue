@@ -21,7 +21,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="sui-box" v-else>
+	<div id="mask-login" class="sui-box" v-else>
 		<div class="sui-box-header">
 			<h3 class="sui-box-title">
 				{{__("Mask Login Area")}}
@@ -33,22 +33,43 @@
 					{{__("Change your default WordPress login URL to hide your login area from hackers and bots.")}}
 				</p>
 				<div class="sui-notice sui-notice-error" v-if="misc.compatibility!==false">
+ <div class="sui-notice-content">
+                    <div class="sui-notice-message">
+                        <i class="sui-notice-icon sui-icon-info sui-md" aria-hidden="true"></i>
+
 					<p>
                         <span v-for="issue in misc.compatibility">
                             {{issue}}
                         </span>
 					</p>
-				</div>
+
+                    </div>
+                </div>
+</div>
 				<div class="sui-notice sui-notice-warning" v-if="state.original_state === false">
+ <div class="sui-notice-content">
+                    <div class="sui-notice-message">
+                        <i class="sui-notice-icon sui-icon-info sui-md" aria-hidden="true"></i>
+
 					<p>
 						{{__("Masking is currently inactive. Choose your URL and save your settings to finish setup.")}}
 					</p>
-				</div>
+
+                    </div>
+                </div>
+</div>
 				<div class="sui-notice sui-notice-info" v-else>
+ <div class="sui-notice-content">
+                    <div class="sui-notice-message">
+                        <i class="sui-notice-icon sui-icon-info sui-md" aria-hidden="true"></i>
+
 					<p>
 						{{__("Masking is currently active at ")}} <strong v-text="misc.new_login_url"></strong>
 					</p>
-				</div>
+
+                    </div>
+                </div>
+</div>
 				<div class="sui-box-settings-row">
 					<div class="sui-box-settings-col-1">
                     <span class="sui-settings-label">

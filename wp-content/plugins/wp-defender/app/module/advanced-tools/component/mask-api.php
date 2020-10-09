@@ -10,6 +10,7 @@ use Hammer\WP\Component;
 use WP_Defender\Behavior\Utils;
 use WP_Defender\Component\Error_Code;
 use WP_Defender\Module\Advanced_Tools\Model\Mask_Settings;
+use WP_Defender\Module\Two_Factor\Component\Auth_API;
 
 class Mask_Api extends Component {
 	/**

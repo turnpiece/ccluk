@@ -13,7 +13,7 @@ interface Request
      * @param $url
      * @param $options
      */
-    public function __construct($url, $options);
+    public function __construct($url, $options);	   			 	 		  		  	 	
 
     /**
      * @param $body

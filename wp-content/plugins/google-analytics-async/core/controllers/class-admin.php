@@ -1,4 +1,14 @@
 <?php
+/**
+ * The admin class of the plugin.
+ *
+ * Defines admin-specific functionality of the plugin.
+ *
+ * @link    http://premium.wpmudev.org
+ * @since   3.2.0
+ * @author  Joel James <joel@incsub.com>
+ * @package Beehive\Core\Controllers
+ */
 
 namespace Beehive\Core\Controllers;
 
@@ -8,17 +18,12 @@ defined( 'WPINC' ) || die;
 use Beehive\Core\Helpers\General;
 use Beehive\Core\Helpers\Template;
 use Beehive\Core\Utils\Abstracts\Base;
-use Beehive\Core\Views\Settings as Settings_View;
+use Beehive\Core\Views\Admin as Admin_View;
 
 /**
- * The admin class of the plugin.
+ * Class Admin
  *
- * Defines admin-specific functionality of the plugin.
- *
- * @link   http://premium.wpmudev.org
- * @since  3.2.0
- *
- * @author Joel James <joel@incsub.com>
+ * @package Beehive\Core\Controllers
  */
 class Admin extends Base {
 
@@ -30,38 +35,35 @@ class Admin extends Base {
 	 * @return void
 	 */
 	public function init() {
-		// Add settings menu.
-		add_filter( 'beehive_admin_menu_items', [ $this, 'settings_menu' ], 10, 2 );
-
-		// Setup plugin menu.
-		add_action( 'admin_menu', [ $this, 'admin_menu' ] );
-
-		// Setup network admin menu.
-		add_action( 'network_admin_menu', [ $this, 'admin_menu' ] );
-
-		// Process settings form.
-		add_action( 'admin_init', [ Settings::instance(), 'process_settings' ] );
-
 		// Add body class to admin pages.
-		add_filter( 'admin_body_class', [ $this, 'admin_body_classes' ] );
+		add_filter( 'admin_body_class', array( $this, 'admin_body_classes' ) );
 
 		// Add plugin action links.
-		add_filter( 'plugin_action_links_' . plugin_basename( BEEHIVE_PLUGIN_FILE ), [
-			$this,
-			'action_links',
-		] );
+		add_filter(
+			'plugin_action_links_' . plugin_basename( BEEHIVE_PLUGIN_FILE ),
+			array(
+				$this,
+				'action_links',
+			)
+		);
 
 		// Only if network wide.
 		if ( General::is_networkwide() ) {
 			// Network admin plugin action links.
-			add_filter( 'network_admin_plugin_action_links_' . plugin_basename( BEEHIVE_PLUGIN_FILE ), [
-				$this,
-				'action_links',
-			] );
+			add_filter(
+				'network_admin_plugin_action_links_' . plugin_basename( BEEHIVE_PLUGIN_FILE ),
+				array(
+					$this,
+					'action_links',
+				)
+			);
 		}
 
 		// Add links next to network admin plugin details.
-		add_filter( 'plugin_row_meta', [ $this, 'plugin_row_meta' ], 10, 2 );
+		add_filter( 'plugin_row_meta', array( $this, 'plugin_row_meta' ), 10, 2 );
+
+		// Process plugin actions from url.
+		add_filter( 'admin_init', array( $this, 'process_actions_from_url' ) );
 	}
 
 	/**
@@ -82,53 +84,28 @@ class Admin extends Base {
 		// Set our custom body class.
 		$classes .= ' sui-beehive-admin ';
 
+		// Check if plugin admin.
+		$is_plugin_admin = General::is_plugin_settings() || General::is_plugin_dashboard() || General::is_plugin_accounts();
+
+		/**
+		 * Filter to include current page for Beehive admin class.
+		 *
+		 * @param bool $is_plugin_admin Should include.
+		 *
+		 * @since 3.2.4
+		 */
+		$is_plugin_admin = apply_filters( 'beehive_admin_body_classes_is_plugin_admin', $is_plugin_admin );
+
 		// Only within our admin page.
-		if ( General::is_plugin_admin() ) {
+		if ( $is_plugin_admin ) {
 			// Shared UI.
 			$classes .= ' sui-' . str_replace( '.', '-', BEEHIVE_SUI_VERSION ) . ' ';
+		} else {
+			// Shared UI.
+			$classes .= ' sui-beehive-' . str_replace( '.', '-', BEEHIVE_SUI_VERSION ) . ' ';
 		}
 
 		return $classes;
-	}
-
-	/**
-	 * Register admin menu for the settings.
-	 *
-	 * We will register a dummy menu and then overwrite it with
-	 * another sub menu items.
-	 *
-	 * @since 3.2.0
-	 *
-	 * @return void
-	 */
-	public function admin_menu() {
-		// Do not add network menu if not active network wide.
-		if ( $this->is_network() && ! General::is_networkwide() ) {
-			return;
-		}
-
-		// Get plugin name.
-		$name = General::plugin_name();
-
-		// Add a dummy page.
-		add_menu_page(
-			$name,
-			$name,
-			Capability::SETTINGS_CAP,
-			'beehive-settings',
-			false,
-			Settings_View::instance()->get_menu_icon()
-		);
-
-		// Add settings page.
-		add_submenu_page(
-			'beehive-settings',
-			__( 'Beehive Settings', 'ga_trans' ),
-			__( 'Settings', 'ga_trans' ),
-			Capability::SETTINGS_CAP,
-			'beehive-settings', // Should be same as parent.
-			[ Settings_View::instance(), 'settings_page' ]
-		);
 	}
 
 	/**
@@ -145,13 +122,13 @@ class Admin extends Base {
 	 */
 	public function action_links( $links ) {
 		// Added a fix for weird warning in multisite, "array_unshift() expects parameter 1 to be array, null given".
-		$links = empty( $links ) ? [] : $links;
+		$links = empty( $links ) ? array() : $links;
 
 		// Common links.
-		$custom = [
-			'settings' => '<a href="' . Template::settings_page( 'general', $this->is_network() ) . '" aria-label="' . esc_attr( __( 'Settings', 'ga_trans' ) ) . '">' . __( 'Settings', 'ga_trans' ) . '</a>',
+		$custom = array(
+			'settings' => '<a href="' . Template::settings_url( 'permissions', $this->is_network() ) . '" aria-label="' . esc_attr( __( 'Settings', 'ga_trans' ) ) . '">' . __( 'Settings', 'ga_trans' ) . '</a>',
 			'docs'     => '<a href="https://premium.wpmudev.org/docs/wpmu-dev-plugins/beehive/?utm_source=beehive&utm_medium=plugin&utm_campaign=beehive_pluginlist_docs" aria-label="' . esc_attr( __( 'Documentation', 'ga_trans' ) ) . '" target="_blank">' . __( 'Docs', 'ga_trans' ) . '</a>',
-		];
+		);
 
 		// WPMUDEV membership status.
 		$membership = General::membership_status();
@@ -186,15 +163,20 @@ class Admin extends Base {
 		}
 
 		// Make sure the links are array.
-		$links = empty( $links ) ? [] : $links;
+		$links = empty( $links ) ? array() : $links;
 
 		// Only for our plugin.
 		if ( plugin_basename( BEEHIVE_PLUGIN_FILE ) === $file ) {
+			// Replace view plugin site link.
+			if ( isset( $links[2] ) ) {
+				$links[2] = '<a href="https://premium.wpmudev.org/project/beehive-analytics-pro/" target="_blank">' . esc_html__( 'View Details', 'ga_trans' ) . '</a>';
+			}
+
 			if ( beehive_analytics()->is_pro() ) {
 				$custom['support'] = '<a href="https://premium.wpmudev.org/get-support/" aria-label="' . esc_html__( 'Get Premium Support', 'ga_trans' ) . '" target="_blank">' . esc_html__( 'Premium Support', 'ga_trans' ) . '</a>';
 			} else {
 				$custom['rate']    = '<a href="https://wordpress.org/support/plugin/beehive-analytics/reviews/?rate=5#new-post" aria-label="' . esc_html__( 'Rate Beehive', 'ga_trans' ) . '" target="_blank">' . esc_html__( 'Rate Beehive', 'ga_trans' ) . '</a>';
-				$custom['support'] = '<a href="https://wordpress.org/support/plugin/404-to-301/" aria-label="' . esc_html__( 'Get Support', 'ga_trans' ) . '" target="_blank">' . esc_html__( 'Support', 'ga_trans' ) . '</a>';
+				$custom['support'] = '<a href="https://wordpress.org/support/plugin/beehive-analytics/" aria-label="' . esc_html__( 'Get Support', 'ga_trans' ) . '" target="_blank">' . esc_html__( 'Support', 'ga_trans' ) . '</a>';
 			}
 
 			$custom['roadmap'] = '<a href="https://premium.wpmudev.org/roadmap/" aria-label="' . esc_html__( 'View our Public Roadmap', 'ga_trans' ) . '" target="_blank">' . esc_html__( 'Roadmap', 'ga_trans' ) . '</a>';
@@ -204,5 +186,38 @@ class Admin extends Base {
 		}
 
 		return $links;
+	}
+
+	/**
+	 * Process custom admin actions for the plugin.
+	 *
+	 * All actions added in `beehive-admin-action` param will be
+	 * processed here.
+	 *
+	 * @since 3.2.5
+	 *
+	 * @return void
+	 */
+	public function process_actions_from_url() {
+		// If action not found.
+		if ( ! isset( $_GET['beehive-admin-action'], $_GET['beehive-admin-action-nonce'] ) ) {
+			return;
+		}
+
+		// If nonce verification failed. Bail.
+		// phpcs:ignore
+		if ( ! wp_verify_nonce( $_GET['beehive-admin-action-nonce'], 'beehive_admin_action' ) ) {
+			return;
+		}
+
+		switch ( $_GET['beehive-admin-action'] ) {
+			case 'dismiss-welcome':
+				// Dismiss the welcome modal.
+				beehive_analytics()->settings->update( 'show_welcome', 0, 'misc', $this->is_network() );
+				break;
+
+			default:
+				return;
+		}
 	}
 }

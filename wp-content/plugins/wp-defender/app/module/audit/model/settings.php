@@ -97,7 +97,8 @@ class Settings extends \Hammer\WP\Settings {
 	 */
 	public static function instance() {
 		if ( is_null( self::$_instance ) ) {
-			$class           = new Settings( 'wd_audit_settings', WP_Helper::is_network_activate( wp_defender()->plugin_slug ) );
+			$class           = new Settings( 'wd_audit_settings',
+				WP_Helper::is_network_activate( wp_defender()->plugin_slug ) );
 			self::$_instance = $class;
 		}
 
@@ -152,18 +153,17 @@ class Settings extends \Hammer\WP\Settings {
 	/**
 	 * Define labels for settings key, we will use it for HUB
 	 *
-	 * @param null $key
+	 * @param  null  $key
 	 *
 	 * @return array|mixed
 	 */
 	public function labels( $key = null ) {
 		$labels = [
-			'notification' => __( 'Notification', wp_defender()->domain ),
-			'receipts'     => __( 'Recipients', wp_defender()->domain ),
-			'day'          => __( "Day of the week", wp_defender()->domain ),
-			'time'         => __( "Time of day", wp_defender()->domain ),
-			'frequency'    => __( "Frequency", wp_defender()->domain ),
-			'storage_days' => __( "Storage for", wp_defender()->domain )
+			'enabled'      => __( 'Enable', wp_defender()->domain ),
+			'storage_days' => __( "Settings - Log Storage", wp_defender()->domain ),
+			'notification' => __( 'Reports - Scheduled Audit Log Report', wp_defender()->domain ),
+			'frequency'    => __( "Reports - Frequency", wp_defender()->domain ),
+			'receipts'     => __( 'Reports - Recipients', wp_defender()->domain ),
 		];
 
 		if ( $key != null ) {
@@ -171,5 +171,35 @@ class Settings extends \Hammer\WP\Settings {
 		}
 
 		return $labels;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function export_strings( $configs ) {
+		$model = new Settings( 'wd_audit_settings',
+			WP_Helper::is_network_activate( wp_defender()->plugin_slug ) );
+		$model->import( $configs );
+		if ( wp_defender()->isFree ) {
+			return [
+				sprintf( __( 'Inactive %s', wp_defender()->domain ),'<span class="sui-tag sui-tag-pro">Pro</span>' )
+			];
+		}
+
+		return [
+			$model->enabled ? __( 'Active', wp_defender()->domain ) : __( 'Inactive', wp_defender()->domain )
+		];
+	}
+
+	public function format_hub_data() {
+		return [
+			'enabled'      => $this->enabled ? __( 'Active', wp_defender()->domain ) : __( 'Inactivate',
+				wp_defender()->domain ),
+			'storage_days' => $this->storage_days,
+			'notification' => $this->notification ? __( 'Activate',
+				wp_defender()->domain ) : __( 'Inactivate', wp_defender()->domain ),
+			'frequency'    => Utils::instance()->format_frequency_for_hub( $this->frequency, $this->day, $this->time ),
+			'receipts'     => Utils::instance()->recipientsToString( $this->receipts )
+		];
 	}
 }

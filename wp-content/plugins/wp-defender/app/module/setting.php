@@ -11,7 +11,7 @@ use WP_Defender\Module\Setting\Controller\Rest;
 
 class Setting extends Module {
 	public function __construct() {
-		new Main();
+		$this->addController( 'main', new Main() );
 		new Rest();
 	}
 }

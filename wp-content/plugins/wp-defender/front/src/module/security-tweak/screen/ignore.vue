@@ -13,9 +13,14 @@
                 {{__("You have chosen to ignore these fixes. You can restore and action them at any time.")}}
             </p>
             <div v-if="summary.ignore_count === 0" class="sui-notice">
-                <p>
-                    {{__("Well, turns out you haven't ignored anything yet - keep up the good fight!")}}
-                </p>
+                <div class="sui-notice-content">
+                    <div class="sui-notice-message">
+                        <i class="sui-icon-info sui-notice-icon sui-md"></i>
+                        <p>
+                            {{__("Well, turns out you haven't ignored anything yet - keep up the good fight!")}}
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
         <div v-if="summary.ignore_count > 0" class="sui-accordion sui-accordion-flushed">

@@ -23,9 +23,7 @@ spl_autoload_register( function ( $class ) {
 } );
 
 //autoload dependencies
-//require_once __DIR__ . '/vendor/autoload.php';
-
-require_once __DIR__ . '/vendor/maxmind-db/reader/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
 //loading the dependency
 \Hammer\Base\Container::instance()->set( 'cache', new \Hammer\Caching\DB_Cache() );

@@ -1,21 +1,28 @@
 <?php
+/**
+ * The Google analytics popular contents widget class.
+ *
+ * @link    http://premium.wpmudev.org
+ * @since   3.2.0
+ *
+ * @author  Joel James <joel@incsub.com>
+ * @package Beehive\Core\Modules\Google_Analytics\Widgets
+ */
 
 namespace Beehive\Core\Modules\Google_Analytics\Widgets;
 
 // If this file is called directly, abort.
 defined( 'WPINC' ) || die;
 
+use Beehive\Core\Helpers\Cache;
+use Beehive\Core\Controllers\Assets;
 use Beehive\Core\Utils\Abstracts\Widget;
-use Beehive\Core\Modules\Google_Analytics\Stats;
-use Beehive\Core\Modules\Google_Analytics\Views\Stats as Stats_View;
+use Beehive\Core\Modules\Google_Analytics;
 
 /**
- * The Google analytics popular contents widget class.
+ * Class Popular
  *
- * @link   http://premium.wpmudev.org
- * @since  3.2.0
- *
- * @author Joel James <joel@incsub.com>
+ * @package Beehive\Core\Modules\Google_Analytics\Widgets
  */
 class Popular extends Widget {
 
@@ -39,7 +46,7 @@ class Popular extends Widget {
 		parent::__construct(
 			$this->id,
 			__( 'Most popular posts', 'ga_trans' ),
-			[ 'description' => __( 'Your site\'s most popular posts.', 'ga_trans' ) ]
+			array( 'description' => __( 'Your site\'s most popular posts.', 'ga_trans' ) )
 		);
 
 		$this->init();
@@ -54,7 +61,13 @@ class Popular extends Widget {
 	 */
 	public function init() {
 		// Setup vars for the front end widget.
-		add_filter( 'beehive_google_popular_widget_localize_vars', [ $this, 'script_vars' ] );
+		add_filter( 'beehive_assets_scripts_localize_vars_beehive-popular-widget', array( $this, 'widget_vars' ) );
+
+		// Register assets.
+		add_filter( 'beehive_assets_get_scripts', array( $this, 'get_scripts' ), 10, 2 );
+
+		// Add i18n strings for the locale.
+		add_filter( 'beehive_i18n_get_locale_scripts', array( $this, 'setup_i18n' ), 10, 2 );
 	}
 
 	/**
@@ -77,13 +90,13 @@ class Popular extends Widget {
 		$cache = wp_cache_get( $this->id, 'widget' );
 
 		// Widget content.
-		$args['content'] = empty( $cache ) ? $this->content( true ) : $cache;
+		$args['content'] = empty( $cache ) ? $this->cache_content() : $cache;
 
 		// Render template.
-		Stats_View::instance()->popular_widget_content( $args );
+		Google_Analytics\Views\Stats::instance()->popular_widget_content( $args );
 
 		// Enqueue scripts.
-		wp_enqueue_script( 'beehive_popular_widget' );
+		Assets::instance()->enqueue_script( 'beehive-popular-widget' );
 	}
 
 	/**
@@ -99,14 +112,14 @@ class Popular extends Widget {
 	 * @return void
 	 */
 	public function form( $instance ) {
-		$args = [
+		$args = array(
 			'widget' => $this,
 			'number' => isset( $instance['number'] ) ? intval( $instance['number'] ) : 10,
 			'title'  => isset( $instance['title'] ) ? esc_attr( $instance['title'] ) : __( 'Most popular posts', 'ga_trans' ),
-		];
+		);
 
 		// Render template.
-		Stats_View::instance()->popular_widget_form( $args );
+		Google_Analytics\Views\Stats::instance()->popular_widget_form( $args );
 	}
 
 	/**
@@ -118,21 +131,144 @@ class Popular extends Widget {
 	 *
 	 * @return array
 	 */
-	public function script_vars( $vars ) {
-		// Stats are required only when widget is active.
-		if ( is_active_widget( false, false, $this->id_base, true ) ) {
-			// Check if stats available from cache.
-			$stats = $this->stats( true );
+	public function widget_vars( $vars ) {
+		// Can we get the stats.
+		$vars['can_get_stats'] = Google_Analytics\Helper::instance()->can_get_stats();
+		/**
+		 * Modify no. of retries if the most popular widget request is empty.
+		 *
+		 * @param int Number of retries.
+		 *
+		 * @since 3.2.4
+		 */
+		$vars['retries'] = apply_filters( 'beehive_google_popular_widget_retries', 1 );
 
-			// If not available, request to load via ajax.
-			if ( empty( $stats ) ) {
-				$vars['async_load_popular_stats'] = true;
+		return $vars;
+	}
+
+	/**
+	 * Add localized strings that can be used in JavaScript.
+	 *
+	 * @param array  $strings Existing strings.
+	 * @param string $script  Script name.
+	 *
+	 * @since 3.2.4
+	 *
+	 * @return array
+	 */
+	public function setup_i18n( $strings, $script ) {
+		if ( 'beehive-popular-widget' === $script ) {
+			$strings['widget'] = array(
+				'no_data' => __( 'No data yet.', 'ga_trans' ),
+			);
+		}
+
+		return $strings;
+	}
+
+	/**
+	 * Get the scripts list to register.
+	 *
+	 * @param array $scripts Scripts list.
+	 * @param bool  $admin   Is admin assets?.
+	 *
+	 * @since 3.2.4
+	 *
+	 * @return array
+	 */
+	public function get_scripts( $scripts, $admin ) {
+		if ( ! $admin ) {
+			// Most popular widget.
+			$scripts['beehive-popular-widget'] = array(
+				'src'  => 'popular-widget.min.js',
+				'deps' => array( 'jquery' ),
+			);
+		}
+
+		return $scripts;
+	}
+
+	/**
+	 * Get the list of popular posts.
+	 *
+	 * Get from cache if possible. Or setup the list
+	 * using the URLs from Google API.
+	 * Please note: Even if you set count param, you may get less
+	 * no. of items. This is because we emit links from other sites
+	 * and if there are many links from other sites in most popular
+	 * pages API response, you will get less no. of items after the
+	 * emission of other sites.
+	 *
+	 * @param int  $count      No. of items required.
+	 * @param bool $cache_only Should check only cache.
+	 *
+	 * @since 3.2.4
+	 *
+	 * @return array
+	 */
+	public function get_list( $count = 0, $cache_only = false ) {
+		// Get the count from widget settings.
+		if ( empty( $count ) ) {
+			// Get settings.
+			$settings = $this->get_settings();
+
+			if ( is_array( $settings ) ) {
+				// Get first item.
+				$settings = reset( $settings );
+				// Get settings.
+				$count = isset( $settings['number'] ) ? $settings['number'] : 5;
 			} else {
-				$vars['stats'] = $this->stats( true );
+				$count = 5;
 			}
 		}
 
-		return $vars;
+		/**
+		 * Filter to change no. of items in widget.
+		 *
+		 * @param int $number No. of items.
+		 *
+		 * @since 3.2.0
+		 */
+		$count = apply_filters( 'beehive_google_popular_widget_items_count', $count );
+
+		// Get cache key.
+		$cache_key = Cache::cache_key( 'popular_posts_' . $count );
+
+		// Get list from cache.
+		$list = Cache::get_transient( $cache_key );
+
+		// If requested exclusively from cache.
+		if ( $cache_only ) {
+			return empty( $list ) ? array() : $list;
+		}
+
+		// Setup the list.
+		if ( empty( $list ) ) {
+			$list = array();
+
+			// Get the stats instance.
+			$stats = Google_Analytics\Stats::instance();
+
+			// Get the stats.
+			$urls = $stats->stats(
+				gmdate( 'Y-m-d', strtotime( '-30 days' ) ),
+				gmdate( 'Y-m-d', strtotime( '-1 days' ) ),
+				'popular_widget'
+			);
+
+			// If list found, setup the real post data.
+			if ( ! empty( $urls ) ) {
+				// Setup the list.
+				$list = $this->setup_list( $urls, $count );
+
+				// Set to cache.
+				if ( ! empty( $list ) ) {
+					Cache::set_transient( $cache_key, $list );
+				}
+			}
+		}
+
+		return $list;
 	}
 
 	/**
@@ -141,60 +277,68 @@ class Popular extends Widget {
 	 * When widget is rendered, we need to render the content
 	 * only if it exist in cache if the argument is set.
 	 *
-	 * @param bool            $cache_only Only from cache.
-	 * @param \Exception|bool $exception  Exception if any.
-	 *
 	 * @since 3.2.0
 	 *
 	 * @return string
 	 */
-	public function content( $cache_only = false, &$exception = false ) {
-		$content = '';
+	private function cache_content() {
+		// Get the stats instance.
+		$list = $this->get_list( 0, true );
 
-		// Get the stats.
-		$stats = $this->stats( $cache_only, $exception );
+		// If empty, show loading text.
+		if ( empty( $list ) ) {
+			return '<div id="beehive-popular-widget-loading">' . esc_html__( 'Loading...', 'ga_trans' ) . '</div>';
+		}
 
-		// Not found in cache, so set a loading message as content.
-		if ( $cache_only && empty( $stats ) ) {
-			$content = '<li>' . __( 'Loading...', 'ga_trans' ) . '</li>';
-		} elseif ( ! empty( $stats ) ) {
+		// Setup page list.
+		$content = '<ul>';
+		foreach ( $list as $item ) {
+			$content .= '<li><a href="' . $item['link'] . '" title="' . $item['title'] . '">' . $item['title'] . '</a></li>';
+		}
+		$content .= '</ul>';
+
+		return $content;
+	}
+
+	/**
+	 * Setup the list of post data.
+	 *
+	 * We need to get only the posts data. Exclude all
+	 * other post types.
+	 *
+	 * @param array $urls  Popular post urls.
+	 * @param int   $count No. of items required.
+	 *
+	 * @since 3.2.0
+	 *
+	 * @return array
+	 */
+	private function setup_list( $urls = array(), $count = 5 ) {
+		$list = array();
+
+		if ( ! empty( $urls ) ) {
 			// Post IDs.
-			$post_ids = [];
+			$post_ids = array();
 
-			// Get settings.
-			$settings = $this->get_settings();
-
-			if ( is_array( $settings ) ) {
-				// Get first item.
-				$settings = reset( $settings );
-				// Get settings.
-				$number = isset( $settings['number'] ) ? $settings['number'] : 5;
-			} else {
-				$number = 5;
-			}
-
-			/**
-			 * Filter to change no. of items in widget.
-			 *
-			 * @param int $number No. of items.
-			 *
-			 * @since 3.2.0
-			 */
-			$number = apply_filters( 'beehive_google_popular_widget_items_count', $number );
-
-			foreach ( $stats['pages'] as $url ) {
+			foreach ( $urls as $url ) {
 				// We need only few items.
-				if ( count( $post_ids ) >= $number ) {
+				if ( count( $post_ids ) >= $count ) {
 					break;
 				}
 
 				$url = $this->process_url( $url );
 
 				// Now try to get the post id.
+				// phpcs:ignore
 				$post_id = url_to_postid( ( is_ssl() ? 'https://' : 'http://' ) . $url );
 
 				// This page is not from this site.
 				if ( ! $post_id ) {
+					continue;
+				}
+
+				// Do not duplicate.
+				if ( in_array( $post_id, $post_ids, true ) ) {
 					continue;
 				}
 
@@ -203,26 +347,17 @@ class Popular extends Widget {
 					continue;
 				}
 
-				// Do not duplicate.
-				if ( in_array( $post_id, $post_ids ) ) {
-					continue;
-				}
-
 				// Add to post ids.
 				$post_ids[] = $post_id;
 
-				// Get the content.
-				$content .= '<li><a href="' . get_the_permalink( $post_id ) . '">' . get_the_title( $post_id ) . '</a></li>';
+				$list[] = array(
+					'link'  => get_the_permalink( $post_id ),
+					'title' => get_the_title( $post_id ),
+				);
 			}
-
-			// Set cache.
-			wp_cache_set( $this->id, $content, 'widget' );
-		} else {
-			// Stats not found, let the user know.
-			$content = '<li>' . __( 'No data yet.', 'ga_trans' ) . '</li>';
 		}
 
-		return $content;
+		return $list;
 	}
 
 	/**
@@ -235,56 +370,18 @@ class Popular extends Widget {
 	 * @return string
 	 */
 	private function process_url( $url ) {
-		global $dm_map;
+		/**
+		 * Filter hook to alter the home url before filtering.
+		 *
+		 * Domain mapping plugins can use this filter to add the support.
+		 *
+		 * @param string $url Home URL.
+		 *
+		 * @since 3.2.4
+		 */
+		$url = apply_filters( 'beehive_google_analytics_popular_widget_process_url_replace', $url );
 
-		// Add Domain Mapping support.
-		if ( method_exists( $dm_map, 'domain_mapping_siteurl' ) ) {
-			// Get mapped url without protocol.
-			$mapped_url = str_replace( [
-				'http://',
-				'https://',
-			], '', $dm_map->domain_mapping_siteurl( home_url() ) );
-
-			// Get home url without protocol.
-			$home_url = str_replace( array( 'http://', 'https://' ), '', home_url() );
-
-			// Replace it with mapped url.
-			$url = str_replace( $mapped_url, $home_url, $url );
-		} else {
-			// We don't need protocol.
-			$url = str_replace( [ 'http://', 'https://' ], '', $url );
-		}
-
-		return $url;
-	}
-
-	/**
-	 * Get stats data from Google.
-	 *
-	 * This gets top pages list stats for the site.
-	 * This will work only if the current site is selected
-	 * in Google account.
-	 *
-	 * @param bool            $cache_only Should get from cache only.
-	 * @param \Exception|bool $exception  Exception if any.
-	 *
-	 * @since 3.2.0
-	 *
-	 * @return array
-	 */
-	private function stats( $cache_only = false, &$exception = false ) {
-		// Stats instance.
-		$stats = Stats::instance();
-
-		// Get top pages.
-		return $stats->stats(
-			date( 'Y-m-d', strtotime( '-30 days' ) ),
-			date( 'Y-m-d' ),
-			'popular_widget',
-			false,
-			false,
-			$cache_only,
-			$exception
-		);
+		// We don't need protocol.
+		return str_replace( array( 'http://', 'https://' ), '', $url );
 	}
 }

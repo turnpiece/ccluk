@@ -10,13 +10,6 @@ import preventPHPExecuted from '../component/prevent-php-executed.vue';
 import protectInformation from '../component/protect-information.vue';
 import securityKey from '../component/security-key.vue';
 import wpVersion from '../component/wp-versions.vue';
-import shXframe from '../component/sh-xframe.vue';
-import shXSSPtoection from '../component/sh-xss-protection.vue';
-import featurePolicy from '../component/sh-feature-policy.vue';
-import referrerPolicy from '../component/sh-referrer-policy.vue';
-import strictTransport from '../component/sh-strict-transport.vue';
-import contentTypeOptions from '../component/sh-content-type-options.vue';
-import contentSecurity from '../component/sh-content-security.vue';
 import wpRestApi from '../component/wp-rest-api.vue';
 import preventEnumUsers from '../component/prevent-enum-users.vue';
 
@@ -33,13 +26,6 @@ export default {
     'protect-information': protectInformation,
     'security-key': securityKey,
     'wp-version': wpVersion,
-    'sh-xframe': shXframe,
-    'sh-xss-protection': shXSSPtoection,
-    'sh-feature-policy': featurePolicy,
-    'sh-referrer-policy': referrerPolicy,
-    'sh-strict-transport': strictTransport,
-    'sh-content-type-options': contentTypeOptions,
-    'sh-content-security': contentSecurity,
     'wp-rest-api': wpRestApi,
     'prevent-enum-users': preventEnumUsers
 }

@@ -3,7 +3,7 @@
 		<div class="sui-box-header">
 			<h3 class="sui-box-title">
 				<i class="sui-icon-lock" aria-hidden="true"></i>
-				{{__("IP Lockouts")}}
+				{{__("Firewall")}}
 			</h3>
 		</div>
 		<div class="sui-box-body" :class="{'no-padding-bottom':enabled===true}">

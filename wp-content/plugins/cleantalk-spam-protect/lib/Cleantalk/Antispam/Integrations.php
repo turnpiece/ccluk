@@ -25,7 +25,7 @@ class Integrations
         }
     }
 
-    public function checkSpam()
+    public function checkSpam( $argument )
     {
         global $cleantalk_executed;
 
@@ -38,10 +38,11 @@ class Integrations
                 $this->integration = new $class();
                 if( ! ( $this->integration instanceof \Cleantalk\Antispam\Integrations\IntegrationBase ) ) {
                     // @ToDo have to handle an error
+                    do_action( 'apbct_skipped_request', __FILE__ . ' -> ' . __FUNCTION__ . '():' . __LINE__, array('Integration is not instanse of IntegrationBase class.') );
                     return;
                 }
                 // Run data collecting for spam checking
-                $data = $this->integration->getDataForChecking();
+                $data = $this->integration->getDataForChecking( $argument );
                 if( ! is_null( $data ) ) {
                     // Go spam checking
                     $base_call_result = apbct_base_call(

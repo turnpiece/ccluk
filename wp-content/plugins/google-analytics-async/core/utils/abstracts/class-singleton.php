@@ -1,4 +1,13 @@
 <?php
+/**
+ * Singleton class for all classes.
+ *
+ * @link    http://premium.wpmudev.org
+ * @since   3.2.0
+ *
+ * @author  Joel James <joel@incsub.com>
+ * @package Beehive\Core\Utils\Abstracts
+ */
 
 namespace Beehive\Core\Utils\Abstracts;
 
@@ -6,12 +15,9 @@ namespace Beehive\Core\Utils\Abstracts;
 defined( 'WPINC' ) || die;
 
 /**
- * Singleton class for all classes.
+ * Class Singleton
  *
- * @link   http://premium.wpmudev.org
- * @since  3.2.0
- *
- * @author Joel James <joel@incsub.com>
+ * @package Beehive\Core\Utils\Abstracts
  */
 abstract class Singleton {
 

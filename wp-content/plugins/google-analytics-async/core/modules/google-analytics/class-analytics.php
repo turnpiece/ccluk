@@ -1,27 +1,29 @@
 <?php
+/**
+ * The Google core class.
+ *
+ * @link    http://premium.wpmudev.org
+ * @since   3.2.0
+ *
+ * @author  Joel James <joel@incsub.com>
+ * @package Beehive\Core\Modules\Google_Analytics
+ */
 
 namespace Beehive\Core\Modules\Google_Analytics;
 
 // If this file is called directly, abort.
 defined( 'WPINC' ) || die;
 
-use Google_Service_Analytics;
-use Beehive\Core\Helpers\General;
-use Beehive\Core\Helpers\Template;
 use Beehive\Core\Helpers\Permission;
+use Beehive\Google_Service_Analytics;
 use Beehive\Core\Utils\Abstracts\Base;
-use Beehive\Core\Controllers\Capability;
 use Beehive\Core\Modules\Google_Analytics\Views\Stats;
-use Beehive\Core\Modules\Google_Analytics\Views\Settings;
 use Beehive\Core\Modules\Google_Analytics\Views\Tracking;
 
 /**
- * The Google core class.
+ * Class Analytics
  *
- * @link   http://premium.wpmudev.org
- * @since  3.2.0
- *
- * @author Joel James <joel@incsub.com>
+ * @package Beehive\Core\Modules\Google_Analytics
  */
 class Analytics extends Base {
 
@@ -33,35 +35,26 @@ class Analytics extends Base {
 	 * @return void
 	 */
 	public function init() {
-		// Dashoard stats widget.
-		add_action( 'wp_dashboard_setup', [ $this, 'dashboard_widget' ] );
-
-		// Dashboard stats widget for network.
-		add_action( 'wp_network_dashboard_setup', [ $this, 'dashboard_widget' ] );
-
 		// Add Google Analytics auth scopes.
-		add_filter( 'beehive_google_auth_scopes', [ $this, 'auth_scopes' ] );
+		add_filter( 'beehive_google_auth_scopes', array( $this, 'auth_scopes' ) );
+
+		// Setup profiles after authentication.
+		add_action( 'beehive_google_auth_completed', array( $this, 'setup_profiles' ), 10, 3 );
 
 		// Stats menu is required only when logged in.
 		if ( Helper::instance()->can_get_stats( $this->is_network() ) ) {
 			// Setup widgets.
-			add_action( 'widgets_init', [ $this, 'widgets' ] );
-
-			// Stats metabox for Post/Page edit screen.
-			add_action( 'add_meta_boxes', [ $this, 'post_widget' ] );
-
-			// Stats menu in dashboard.
-			add_action( 'admin_menu', [ $this, 'statistics_menu' ] );
-
-			// Stats menu in dashboard.
-			add_action( 'network_admin_menu', [ $this, 'statistics_menu' ] );
+			add_action( 'widgets_init', array( $this, 'widgets' ) );
 		}
 
 		// Initialize sub classes.
-		Ajax::instance()->init();
+		Admin::instance()->init();
 		Stats::instance()->init();
-		Settings::instance()->init();
 		Tracking::instance()->init();
+
+		// Rest API.
+		Endpoints\Stats::instance();
+		Endpoints\Data::instance();
 	}
 
 	/**
@@ -73,9 +66,8 @@ class Analytics extends Base {
 	 *
 	 * @return array $scopes
 	 */
-	public function auth_scopes( $scopes = [] ) {
+	public function auth_scopes( $scopes = array() ) {
 		// Add Google Analytics auth scope.
-		//$scopes[] = Google_Service_Analytics::ANALYTICS;
 		$scopes[] = Google_Service_Analytics::ANALYTICS_READONLY;
 
 		return $scopes;
@@ -99,90 +91,22 @@ class Analytics extends Base {
 	}
 
 	/**
-	 * Add stats overview dashboard widget.
+	 * Update the available list of GA profiles after the authentication.
 	 *
-	 * Contents of this widget is loaded via Ajax.
+	 * We are prefetching this so that the users won't see empty list.
 	 *
-	 * @since 3.2.0
-	 *
-	 * @return void
-	 */
-	public function dashboard_widget() {
-		// Do not continue if not active network wide.
-		if ( $this->is_network() && ! General::is_networkwide() ) {
-			return;
-		}
-
-		// Make sure the user has capability.
-		if ( Permission::user_can( 'analytics', $this->is_network() ) ) {
-			// Register widget.
-			wp_add_dashboard_widget(
-				'beehive_dashboard',
-				__( 'Visitors', 'ga_trans' ),
-				[ Stats::instance(), 'dashboard_widget' ]
-			);
-		}
-	}
-
-	/**
-	 * Stats metabox for the post edit screen.
+	 * @param bool $success Is success or fail?.
+	 * @param bool $default Did we connect using default credentials?.
+	 * @param bool $network Network flag.
 	 *
 	 * @since 3.2.0
 	 *
 	 * @return void
 	 */
-	public function post_widget() {
-		// Make sure the user has capability (Only for subsite/single site).
-		$capable = Permission::user_can( 'analytics' );
-
-		if ( Helper::instance()->can_get_stats() && $capable ) {
-			// Register metabox.
-			add_meta_box(
-				'beehive_analytics_stats',
-				__( 'Statistics for last 30 days', 'ga_trans' ),
-				[ Stats::instance(), 'post_widget' ],
-				Helper::instance()->post_types(),
-				'normal'
-			);
+	public function setup_profiles( $success, $default, $network ) {
+		// Fetch the list of profiles.
+		if ( $success ) {
+			Data::instance()->profiles_list( $network, true );
 		}
-	}
-
-	/**
-	 * Register admin menu for the stats page.
-	 *
-	 * This is for dashboard submenu.
-	 *
-	 * @since 3.2.0
-	 *
-	 * @return void
-	 */
-	public function statistics_menu() {
-		// Do not continue if not active network wide.
-		if ( $this->is_network() && ! General::is_networkwide() ) {
-			return;
-		}
-
-		// Should be able to manage settings.
-		if ( ! Permission::can_view_analytics( $this->is_network() ) ) {
-			return;
-		}
-
-		// Dashboard stats page.
-		add_dashboard_page(
-			__( 'All statistics', 'ga_trans' ),
-			__( 'Statistics', 'ga_trans' ),
-			Capability::ANALYTICS_CAP,
-			'beehive-statistics',
-			[ Views\Stats::instance(), 'stats_page' ]
-		);
-
-		global $submenu;
-
-		// Add a linked menu item to dashboard stats page.
-		$submenu['beehive-settings'][1] = [
-			__( 'All statistics', 'ga_trans' ),
-			Capability::ANALYTICS_CAP,
-			Template::statistics_page( $this->is_network() ),
-		];
 	}
 }

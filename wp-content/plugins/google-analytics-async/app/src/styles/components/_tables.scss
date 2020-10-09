@@ -1,0 +1,19 @@
+@include body-class(true) {
+	.beehive-outside-table {
+		border-radius: 0;
+		border-left: 0;
+		border-right: 0;
+
+		th.content-title {
+			width: 55%;
+		}
+
+		td.content-center {
+			text-align: center;
+		}
+
+		td.content-right {
+			text-align: right;
+		}
+	}
+}

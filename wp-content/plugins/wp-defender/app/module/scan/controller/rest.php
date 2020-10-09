@@ -77,7 +77,27 @@ class Rest extends Controller {
 						wp_defender()->domain )
 				) ) );
 				break;
-
+			case 'delete':
+				foreach ( $items as $id ) {
+					$item = Result_Item::findByID( $id );
+					if ( is_object( $item ) ) {
+						$ret = $item->purge();
+						if ( is_wp_error( $ret ) ) {
+							break;
+							wp_send_json_error( array(
+								'message' => $ret->get_error_message()
+							) );
+						}
+					}
+				}
+				$this->submitStatsToDev();
+				wp_send_json_success( array_merge( Scan\Component\Data_Factory::buildData(), array(
+					'message' => _n( "The suspicious file has been successfully deleted.",
+						"The suspicious files have been successfully deleted.",
+						count( $items ),
+						wp_defender()->domain )
+				) ) );
+				break;
 			default:
 				//param not from the button on frontend, log it
 				error_log( sprintf( 'Unexpected value %s from IP %s', $bulk, Utils::instance()->getUserIp() ) );
@@ -225,7 +245,9 @@ class Rest extends Controller {
 			$model->unignore();
 			$this->submitStatsToDev();
 			wp_send_json_success( array_merge( Scan\Component\Data_Factory::buildData(),
-				[ 'message' => __( "The suspicious file has been successfully restored.", wp_defender()->domain ), ] ) );
+				[
+					'message' => __( "The suspicious file has been successfully restored.", wp_defender()->domain ),
+				] ) );
 		} else {
 			wp_send_json_error( array(
 				'message' => __( "The item doesn't exist!", wp_defender()->domain )
@@ -273,7 +295,7 @@ class Rest extends Controller {
 		$activeScan = Scan\Component\Scan_Api::getActiveScan();
 		if ( is_object( $activeScan ) ) {
 			$activeScan->delete();
-			(new Scan\Component\Scanning())->flushCache();
+			( new Scan\Component\Scanning() )->flushCache();
 		}
 		$data = Scan\Component\Data_Factory::buildData();
 
@@ -349,6 +371,10 @@ class Rest extends Controller {
 		$settings->email_has_issue = stripslashes( $settings->email_has_issue );
 		$settings->save();
 		if ( $this->hasMethod( 'scheduleReportTime' ) ) {
+			if ( $settings->last_report_sent == null ) {
+				$settings->last_report_sent = current_time( 'timestamp' );
+				$settings->save();
+			}
 			$this->scheduleReportTime( $settings );
 			$this->submitStatsToDev();
 		}

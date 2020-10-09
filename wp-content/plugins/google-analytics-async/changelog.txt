@@ -3,6 +3,95 @@ Author: Mariusz Misiek, Joel James
 
 Change Log:
 
+= 3.3.0 (2020-09-23) =
+**📦 New:**
+
+- Google Tag Manager integration.
+- Accounts page to manage authentication to different services.
+- Separate page for Google Analytics settings.
+
+**👌 Improvements:**
+
+- Improvements in onboarding modal.
+- Performance improvements in dashboard widget.
+- Cleanup unwanted services from Google library.
+
+**🐛 Bug Fixes:**
+
+- API client failure on old PHP versions (PHP v5).
+
+= 3.2.8 (2020-08-26) =
+**👌 Improvements:**
+
+- API keys load balancing to avoid request limit issues.
+- Store authentication client id in database.
+- The original admin who installed Beehive can't be denied the settings access.
+- Show Google login and tracking ID status notice in settings page.
+
+**🐛 Bug Fixes:**
+
+- Manual tracking ID is being used when automatic detection is enabled.
+- Network URL is used for authentication redirect if plugin is not activated network wide.
+- Composer autoload conflict with Updraft.
+- Conflict with Google Site Kit.
+- Log texts are hidden in Dashboard summary box.
+
+= 3.2.7 (2020-08-14) =
+**🐛 Bug Fixes:**
+
+- Fixed broken pages when site is using different locale.
+
+**👌 Improvements:**
+
+- Updated Google lib to v2.7.0.
+
+= 3.2.6 (2020-05-29) =
+**🐛 Bug Fixes:**
+
+- Fixed blank page after the update.
+
+= 3.2.5 (2020-05-27) =
+**📦 New:**
+
+- Ability to control who can manage Beehive settings.
+- Added welcome modal to highlight important changes.
+
+**👌 Improvements:**
+
+- Prefix vendor libraries to avoid composer conflicts.
+- Combine chart tooltips when the comparison is used.
+- Use prefixed vendor libraries to avoid conflict.
+
+**🐛 Bug Fixes:**
+
+- Fixed conflicts with other plugins using Guzzle PHP lib.
+- Fixed using network_site_url only when Beehive is not network-wide active.
+- Fixed wrong Client ID and Client Secret check on subsites.
+
+= 3.2.4 (2020-04-06) =
+**📦 New:**
+
+- Added dashboard page.
+- Upgraded statistics page to use SUI.
+- Upgraded statistics widget to use SUI.
+- Added white labelling support.
+- Added ability to clear statistics cache from plugin settings.
+- Added rest endpoints for statistics and settings.
+- Added new filters for domain mapping support.
+
+**👌 Improvements:**
+
+- Upgraded to new SUI.
+- Improved UX to connect with Google.
+- Using ChartJS for all charts except Geo Chart.
+- Improved caching using transient.
+- Store plugin version in subsites for the upgrade process.
+- Merged reports and permission settings.
+
+**🐛 Bug Fixes:**
+
+- Fixed domain mapping support.
+
 = 3.2.3 (2019-12-16) =
 **👌 Improvements:**
 
@@ -368,4 +457,4 @@ Change Log:
 - WPMU 2.7 Compatible.
 
 
-87274-1579294090-au
+87274-1602263353-au

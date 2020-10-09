@@ -93,54 +93,7 @@ class Rest extends Controller {
 			return;
 		}
 
-		$thirty_days_args = [
-			'date_from' => date( 'Y-m-d', strtotime( '-30 days', current_time( 'timestamp' ) ) ) . ' 00:00:00',
-			'date_to'   => date( 'Y-m-d' ) . ' 23:59:59'
-		];
-
-		if ( Audit\Model\Events::instance()->hasData() ) {
-			Utils::instance()->log( 'Pull log from local' );
-			$events = Audit\Model\Events::instance()->getData( $thirty_days_args );
-		} else {
-			Utils::instance()->log( 'Pull log from API' );
-			$events = Audit_API::pullLogs( $thirty_days_args );
-		}
-
-		if ( is_wp_error( $events ) ) {
-			wp_send_json_error( array(
-				'message' => $events->get_error_message()
-			) );
-		}
-
-		Utils::instance()->log( sprintf( "Summary events %d", count( $events['data'] ) ), "audit" );
-
-		$last_event_date = __( "Never", wp_defender()->domain );
-		$week_count      = 0;
-		$month_count     = 0;
-
-		if ( $events['total_items'] > 0 ) {
-			$min_month_date = new \DateTime( date( 'Y-m-d', strtotime( 'first day of this month', current_time( 'timestamp' ) ) ) );
-			$min_week_date  = new \DateTime( date( 'Y-m-d', strtotime( '-7 days', current_time( 'timestamp' ) ) ) );
-			foreach ( $events['data'] as $datum ) {
-				if ( $datum['timestamp'] > $min_week_date->setTime( 0, 0, 0 )->getTimestamp() ) {
-					$week_count += 1;
-				}
-				if ( $datum['timestamp'] > $min_month_date->setTime( 0, 0, 0 )->getTimestamp() ) {
-					$month_count += 1;
-				}
-			}
-
-			$last_event_date = $events['data'][0]['timestamp'];
-			if ( is_array( $last_event_date ) ) {
-				$last_event_date = $last_event_date[0];
-			}
-			$last_event_date = $this->formatDateTime( date( 'Y-m-d H:i:s', $last_event_date ) );
-		}
-		wp_send_json_success( [
-			'monthCount' => $month_count,
-			'lastEvent'  => $last_event_date,
-			'weekCount'  => $week_count
-		] );
+		wp_send_json_success( Audit_API::summary() );
 	}
 
 	/**
@@ -199,11 +152,13 @@ class Rest extends Controller {
 			return;
 		}
 		$params = $this->prepareAuditParams();
+
 		if ( Audit\Model\Events::instance()->hasData( $params ) ) {
 			$logs = Audit\Model\Events::instance()->getData( $params, 'timestamp', 'desc', true );
 		} else {
 			//fallback to directly API if the local cache has issues
 			Utils::instance()->log( 'Pull audit logs from API' );
+			//we will push and refresh here so we always get latest source
 			$logs = Audit_API::pullLogs( $params, 'timestamp', 'desc', true );
 		}
 		Utils::instance()->log( sprintf( 'audit min date %s', $params['date_from'] ), 'audit' );
@@ -288,7 +243,8 @@ class Rest extends Controller {
 					}
 				}
 			} elseif ( $att == 'date_range' && in_array( $value, array( 1, 7, 30 ) ) ) {
-				$params['date_from'] = date( 'Y-m-d', strtotime( '-' . $value . ' days', current_time( 'timestamp' ) ) );
+				$params['date_from'] = date( 'Y-m-d',
+					strtotime( '-' . $value . ' days', current_time( 'timestamp' ) ) );
 			}
 		}
 		if ( HTTP_Helper::retrieveGet( 'all_type' ) == 1 ) {

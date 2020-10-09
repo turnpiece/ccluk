@@ -1,12 +1,12 @@
 === BuddyPress ===
 Contributors: johnjamesjacoby, DJPaul, boonebgorges, r-a-y, imath, mercime, tw2113, dcavins, hnla, karmatosed, slaFFik, dimensionmedia, henrywright, netweb, offereins, espellcaste, modemlooper, danbp, Venutius, apeatling, shanebp
 Tags: user profiles, activity streams, messaging, friends, user groups, notifications, community, social networking, intranet
-Requires at least: 4.7
-Tested up to: 5.3
-Requires PHP: 5.3
-Stable tag: 5.1.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Requires at least: 4.8
+Requires PHP: 5.6
+Tested up to: 5.5.1
+Stable tag: 6.3.0
 
 BuddyPress helps site builders & developers add community features to their websites, with user profiles, activity streams, and more!
 
@@ -125,6 +125,21 @@ Try <a href="https://wordpress.org/plugins/bbpress/">bbPress</a>. It integrates 
 
 == Upgrade Notice ==
 
+= 6.3.0 =
+See: https://codex.buddypress.org/releases/version-6-3-0/
+
+= 6.2.0 =
+See: https://codex.buddypress.org/releases/version-6-2-0/
+
+= 6.1.0 =
+See: https://codex.buddypress.org/releases/version-6-1-0/
+
+= 6.0.0 =
+See: https://codex.buddypress.org/releases/version-6-0-0/
+
+= 5.2.0 =
+See: https://codex.buddypress.org/releases/version-5-2-0/
+
 = 5.1.2 =
 See: https://codex.buddypress.org/releases/version-5-1-2/
 
@@ -153,6 +168,21 @@ See: https://codex.buddypress.org/releases/version-4-1-0/
 See: https://codex.buddypress.org/releases/version-4-0-0/
 
 == Changelog ==
+
+= 6.3.0 =
+See: https://codex.buddypress.org/releases/version-6-3-0/
+
+= 6.2.0 =
+See: https://codex.buddypress.org/releases/version-6-2-0/
+
+= 6.1.0 =
+See: https://codex.buddypress.org/releases/version-6-1-0/
+
+= 6.0.0 =
+See: https://codex.buddypress.org/releases/version-6-0-0/
+
+= 5.2.0 =
+See: https://codex.buddypress.org/releases/version-5-2-0/
 
 = 5.1.2 =
 See: https://codex.buddypress.org/releases/version-5-1-2/

@@ -3,7 +3,12 @@
 @import "security-tweaks";
 @import "file-scanning";
 @import "ip-lockout";
+@import "two-fa";
 @import "audit";
+@import "waf";
 @import "override";
 @import "components";
 @import "helper";
+@import "settings";
+@import "tailwind.scss";
+@import "tutorial";

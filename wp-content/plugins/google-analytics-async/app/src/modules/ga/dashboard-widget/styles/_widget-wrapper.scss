@@ -1,0 +1,53 @@
+@include body-class(true) {
+	margin: 0;
+	padding: #{$sui-gutter-md - 11px} #{$sui-gutter-md - 12px} #{$sui-gutter-md -
+		12px};
+
+	&,
+	* {
+		box-sizing: border-box;
+	}
+
+	// SIZE: Normal.
+	&:not(.beehive-widget-small) {
+		padding: #{$sui-gutter - 11px} #{$sui-gutter - 12px} #{$sui-gutter -
+			12px};
+	}
+
+	// STATE: Loading.
+	&.beehive-loading {
+		position: relative;
+
+		p.beehive-loading-text {
+			position: absolute;
+			z-index: 21;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			color: palette(gray, light);
+			font: 500 13px/18px $font;
+			letter-spacing: $font--letter-spacing;
+
+			[class*='sui-icon-'] {
+				margin-right: 10px;
+			}
+		}
+
+		&:before {
+			content: ' ';
+			width: 100%;
+			position: absolute;
+			z-index: 20;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			background-color: rgba(255, 255, 255, 0.95);
+		}
+	}
+
+	&:not(.beehive-loading) {
+		p.beehive-loading-text {
+			display: none;
+		}
+	}
+}

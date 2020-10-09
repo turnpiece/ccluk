@@ -13,12 +13,14 @@ use Hammer\Helper\WP_Helper;
 use WP_Defender\Component\Error_Code;
 use WP_Defender\Component\Jed;
 use WP_Defender\Module\Advanced_Tools\Component\Mask_Api;
-use WP_Defender\Module\Advanced_Tools\Model\Auth_Settings;
 use WP_Defender\Module\Advanced_Tools\Model\Mask_Settings;
+use WP_Defender\Module\Audit\Component\Audit_API;
+use WP_Defender\Module\Audit\Model\Events;
 use WP_Defender\Module\Hardener\Model\Settings;
 use WP_Defender\Module\IP_Lockout\Component\Login_Protection_Api;
 use WP_Defender\Module\Scan\Component\Scan_Api;
 use WP_Defender\Module\Scan\Model\Result_Item;
+use WP_Defender\Module\Two_Factor\Model\Auth_Settings;
 
 class Utils extends Behavior {
 	/**
@@ -34,9 +36,9 @@ class Utils extends Behavior {
 
 	/**
 	 * @param $endPoint
-	 * @param array $bodyArgs
-	 * @param array $requestArgs
-	 * @param bool $returnRaw
+	 * @param  array  $bodyArgs
+	 * @param  array  $requestArgs
+	 * @param  bool  $returnRaw
 	 *
 	 * @return array|mixed|object|\WP_Error
 	 */
@@ -71,9 +73,10 @@ class Utils extends Behavior {
 
 			if (
 				'OK' !== wp_remote_retrieve_response_message( $response )
-				OR 200 !== wp_remote_retrieve_response_code( $response )
+				or 200 !== wp_remote_retrieve_response_code( $response )
 			) {
-				return new \WP_Error( wp_remote_retrieve_response_code( $response ), wp_remote_retrieve_response_message( $response ) );
+				return new \WP_Error( wp_remote_retrieve_response_code( $response ),
+					wp_remote_retrieve_response_message( $response ) );
 			} else {
 				$data = wp_remote_retrieve_body( $response );
 
@@ -81,7 +84,8 @@ class Utils extends Behavior {
 			}
 		} else {
 			return new \WP_Error( 'dashboard_required',
-				sprintf( esc_html__( "WPMU DEV Dashboard will be required for this action. Please visit <a href=\"%s\">here</a> and install the WPMU DEV Dashboard", wp_defender()->domain )
+				sprintf( esc_html__( "WPMU DEV Dashboard will be required for this action. Please visit <a href=\"%s\">here</a> and install the WPMU DEV Dashboard",
+						wp_defender()->domain )
 					, 'https://premium.wpmudev.org/project/wpmu-dev-dashboard/' ) );
 		}
 	}
@@ -98,6 +102,17 @@ class Utils extends Behavior {
 		$host = rtrim( $host, '/' );
 
 		return $host;
+	}
+
+	public function format_frequency_for_hub( $frequency, $day, $time ) {
+		$time = strftime( '%I:%M %p', strtotime( $time ) );
+		if ( 1 == $frequency ) {
+			return 'Daily at ' . $time;
+		} elseif ( 7 == $frequency ) {
+			return 'Weekly on ' . $day . ' at ' . $time;
+		} elseif ( 30 == $frequency ) {
+			return 'Monthly on ';
+		}
 	}
 
 	/**
@@ -168,7 +183,7 @@ class Utils extends Behavior {
 
 	/**
 	 * @param $timestring string
-	 * @param bool $i18n
+	 * @param  bool  $i18n
 	 *
 	 * @return false|string
 	 */
@@ -192,7 +207,7 @@ class Utils extends Behavior {
 	/**
 	 * Get user display name if logged in, or Guest instead
 	 *
-	 * @param null $user_id
+	 * @param  null  $user_id
 	 *
 	 * @return string
 	 */
@@ -360,6 +375,35 @@ class Utils extends Behavior {
 	/**
 	 * @param $interval
 	 * @param $day
+	 * @param $time
+	 * @param $last_report_time
+	 *
+	 * @return false|string
+	 */
+	public function getNextRun( $interval, $day, $time, $last_report_time ) {
+		$strings = '';
+
+		if ( 1 === (int) $interval ) {
+			$next_run = strtotime( 'tomorrow midnight', $last_report_time );
+			if ( $next_run == strtotime( 'today midnight', current_time( 'timestamp' ) ) ) {
+				$strings = sprintf( __( 'Today, %s', wp_defender()->domain ), $time );
+			} else {
+				$strings = sprintf( __( 'Tomorrow, %s', wp_defender()->domain ), $time );
+			}
+		} elseif ( 7 === (int) $interval ) {
+			$next_run = strtotime( $day . ' next week', $last_report_time );
+			$strings  = date( 'd M', $next_run ) . ' ' . $time;
+		} elseif ( 30 === (int) $interval ) {
+			$next_run = strtotime( '+30 days', $last_report_time );
+			$strings  = date( 'd M', strtotime( $day, $next_run ) ) . ' ' . $time;
+		}
+
+		return $strings;
+	}
+
+	/**
+	 * @param $interval
+	 * @param $day
 	 * @param $lastReportTime
 	 *
 	 * @return bool
@@ -397,7 +441,6 @@ class Utils extends Behavior {
 			$timezone[1] = '00';
 		}
 		$offset = implode( ':', $timezone );
-
 		list( $hours, $minutes ) = explode( ':', $offset );
 		$seconds = $hours * 60 * 60 + $minutes * 60;
 		$lc      = localtime( time(), true );
@@ -434,7 +477,7 @@ class Utils extends Behavior {
 	/**
 	 * Validates that the IP that made the request is from cloudflare
 	 *
-	 * @param String $ip - the ip to check
+	 * @param  String  $ip  - the ip to check
 	 *
 	 * @return bool
 	 */
@@ -468,8 +511,8 @@ class Utils extends Behavior {
 	/**
 	 * Check if the cloudflare IP is in range
 	 *
-	 * @param String $ip - the current IP
-	 * @param String $range - the allowed range of cloudflare ips
+	 * @param  String  $ip  - the current IP
+	 * @param  String  $range  - the allowed range of cloudflare ips
 	 *
 	 * @return bool
 	 */
@@ -560,7 +603,6 @@ class Utils extends Behavior {
 		}
 		$client_real = isset( $_SERVER['HTTP_X_REAL_IP'] ) ? $_SERVER['HTTP_X_REAL_IP'] : null;
 		$ret         = $remote;
-
 		if ( filter_var( $client, FILTER_VALIDATE_IP ) ) {
 			$ret = $client;
 		} elseif ( filter_var( $client_real, FILTER_VALIDATE_IP ) ) {
@@ -587,7 +629,8 @@ class Utils extends Behavior {
 		for ( $i = 0; $i < 24; $i ++ ) {
 			foreach ( apply_filters( 'wd_scan_get_times_interval', array( '00', '30' ) ) as $min ) {
 				$time          = $i . ':' . $min;
-				$data[ $time ] = apply_filters( 'wd_scan_get_times_hour_min', strftime( '%I:%M %p', strtotime( $time ) ) );
+				$data[ $time ] = apply_filters( 'wd_scan_get_times_hour_min',
+					strftime( '%I:%M %p', strtotime( $time ) ) );
 			}
 		}
 
@@ -606,7 +649,7 @@ class Utils extends Behavior {
 	 * Determine the server
 	 * Incase we are using a hybrid server and need to know where static files are houses, pass true as a param
 	 *
-	 * @param $useStaticPath - use static path instead of home url. This is the path to Defender changelog
+	 * @param $useStaticPath  - use static path instead of home url. This is the path to Defender changelog
 	 */
 	public function determineServer( $useStaticPath = false ) {
 		$url         = ( $useStaticPath ) ? wp_defender()->getPluginUrl() . 'changelog.txt' : home_url();
@@ -623,7 +666,8 @@ class Utils extends Behavior {
 		global $is_apache, $is_nginx, $is_IIS, $is_iis7;
 
 		$server     = null;
-		$ssl_verify = apply_filters( 'defender_ssl_verify', true ); //most hosts dont really have valid ssl or ssl still pending
+		$ssl_verify = apply_filters( 'defender_ssl_verify',
+			true ); //most hosts dont really have valid ssl or ssl still pending
 
 		if ( $is_nginx ) {
 			$server = 'nginx';
@@ -827,14 +871,24 @@ class Utils extends Behavior {
 				break;
 			default:
 				//param not from the button on frontend, log it
-				error_log( sprintf( 'Unexpected value %s from IP %s', $lockoutSettings->report_frequency, Utils::instance()->getUserIp() ) );
+				error_log( sprintf( 'Unexpected value %s from IP %s', $lockoutSettings->report_frequency,
+					Utils::instance()->getUserIp() ) );
 				break;
 		}
 
-		$events_in_month = \WP_Defender\Module\Audit\Component\Audit_API::pullLogs( array(
-			'date_from' => date( 'Y-m-d', strtotime( 'first day of this month', current_time( 'timestamp' ) ) ) . ' 00:00:00',
-			'date_to'   => date( 'Y-m-d' ) . ' 23:59:59',
-		) );
+		$thirty_days_args = [
+			'date_from' => date( 'Y-m-d',
+					strtotime( '-30 days', current_time( 'timestamp' ) ) ) . ' 00:00:00',
+			'date_to'   => date( 'Y-m-d', current_time( 'timestamp' ) ) . ' 23:59:59',
+		];
+
+		if ( Events::instance()->hasData() ) {
+			Utils::instance()->log( 'Pull log from local' );
+			$events_in_month = Events::instance()->getData( $thirty_days_args );
+		} else {
+			Utils::instance()->log( 'Pull log from API' );
+			$events_in_month = Audit_API::pullLogs( $thirty_days_args );
+		}
 
 		$last_event_date = __( 'Never', wp_defender()->domain );
 
@@ -884,8 +938,8 @@ class Utils extends Behavior {
 					'total_lockout'         => Login_Protection_Api::getAllLockouts( $after_time ),
 					'advanced'              => array(
 						'multi_factors_auth' => array(
-							'active'  => Auth_Settings::instance()->enabled,
-							'enabled' => ! empty( Auth_Settings::instance()->user_roles ),
+							'active'  => Auth_Settings::instance()->enabled && ! empty( Auth_Settings::instance()->user_roles ),
+							'enabled' => Auth_Settings::instance()->enabled,
 						),
 						'mask_login'         => array(
 							'activate'   => Mask_Settings::instance()->isEnabled(),
@@ -924,6 +978,12 @@ class Utils extends Behavior {
 							),
 						)
 					),
+					'notifications'   => array(
+						'firewall' => array(
+							'login_lockout' => \WP_Defender\Module\IP_Lockout\Model\Settings::instance()->login_lockout_notification,
+							'404_lockout'   => \WP_Defender\Module\IP_Lockout\Model\Settings::instance()->ip_lockout_notification
+						)
+					),
 				)
 			)
 		);
@@ -957,7 +1017,7 @@ class Utils extends Behavior {
 	}
 
 	/**
-	 * @param null $result
+	 * @param  null  $result
 	 *
 	 * @return bool
 	 */
@@ -1049,23 +1109,6 @@ class Utils extends Behavior {
 	}
 
 	/**
-	 * Convert true/false to 1/0 and viceversa
-	 *
-	 * @param $data
-	 *
-	 * @return mixed
-	 */
-	public function convertBoolean( $data ) {
-		foreach ( $data as $key => $val ) {
-			if ( filter_var( $val, FILTER_VALIDATE_BOOLEAN ) ) {
-				$data[ $key ] = (int) $val;
-			}
-		}
-
-		return $data;
-	}
-
-	/**
 	 * @param $campaign
 	 *
 	 * @return string
@@ -1105,6 +1148,15 @@ class Utils extends Behavior {
 		$translations->setLanguage( get_locale() );
 		//export to json
 		Jed::toFile( $translations, $json_path );
+	}
+
+	public function recipientsToString( $recipients ) {
+		$strings = [];
+		foreach ( $recipients as $recipient ) {
+			$strings[] = $recipient['email'];
+		}
+
+		return implode( ', ', $strings );
 	}
 
 	/**
@@ -1401,25 +1453,31 @@ class Utils extends Behavior {
 				$res = @unlink( $file->getRealPath() );
 			}
 			if ( $res == false ) {
-				return new \WP_Error( Error_Code::NOT_WRITEABLE, __( "Defender doesn't have enough permission to remove this file", wp_defender()->domain ) );
+				return new \WP_Error( Error_Code::NOT_WRITEABLE,
+					__( "Defender doesn't have enough permission to remove this file", wp_defender()->domain ) );
 			}
 		}
 		$res = @rmdir( $dir );
 		if ( $res == false ) {
-			return new \WP_Error( Error_Code::NOT_WRITEABLE, __( "Defender doesn't have enough permission to remove this file", wp_defender()->domain ) );
+			return new \WP_Error( Error_Code::NOT_WRITEABLE,
+				__( "Defender doesn't have enough permission to remove this file", wp_defender()->domain ) );
 		}
 
 		return true;
 	}
 
 	public function parseDomain( $domain ) {
-		if ( ! filter_var( $domain, FILTER_VALIDATE_DOMAIN ) ) {
+		//FILTER_VALIDATE_DOMAIN filter will be added in PHP 7
+		$filter_domain = version_compare( PHP_VERSION, '7.0', '>=' ) ? FILTER_VALIDATE_DOMAIN : FILTER_VALIDATE_URL;
+		if ( ! filter_var( $domain, $filter_domain ) ) {
 			return false;
 		}
 		$suffix = $this->getDomainSuffix( $domain );
 		if ( $suffix == false ) {
 			return false;
 		}
+		//exclude 'www.'
+		$domain           = str_replace( 'www.', '', $domain );
 		$host             = parse_url( $domain, PHP_URL_HOST );
 		$host_without_tld = str_replace( $suffix, '', $host );
 		//remove righter . if any

@@ -10,7 +10,6 @@ use Hammer\Helper\Log_Helper;
 use Hammer\Helper\WP_Helper;
 use WP_Defender\Behavior\Utils;
 use WP_Defender\Module\Audit\Component\Audit_API;
-use WP_Defender\Module\Audit\Component\Audit_Table;
 use WP_Defender\Module\Audit\Model\Settings;
 
 class Main_Free extends \WP_Defender\Controller {

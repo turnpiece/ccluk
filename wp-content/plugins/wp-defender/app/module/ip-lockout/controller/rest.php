@@ -30,6 +30,7 @@ class Rest extends Controller {
 			$namespace . '/emptyLogs'      => 'emptyLogs',
 			$namespace . '/queryLockedIps' => 'queryLockedIps',
 			$namespace . '/ipAction'       => 'ipAction',
+			$namespace . '/exportAsCsv'    => 'exportAsCsv'
 		];
 
 		$this->registerEndpoints( $routes, IP_Lockout::getClassName() );
@@ -101,16 +102,22 @@ class Rest extends Controller {
 		$type = sanitize_key( $type );
 
 		if ( $ip && filter_var( $ip, FILTER_VALIDATE_IP ) ) {
-			if ( $type == 'unwhitelist' || $type == 'unblacklist' ) {
+			if ( 'unwhitelist' === $type || 'unblacklist' === $type ) {
 				$type = substr( $type, 2 );
+				$type = 'whitelist' === $type ? 'allowlist' : 'blocklist';
 				Settings::instance()->removeIpFromList( $ip, $type );
 				wp_send_json_success( array(
-					'message' => sprintf( __( "IP %s has been removed from your %s. You can control your %s in <a href=\"%s\">IP Lockouts.</a>", wp_defender()->domain ), $ip, $type, $type, network_admin_url( 'admin.php?page=wdf-ip-lockout&view=blacklist' ) ),
+					'message' => sprintf( __( "IP %s has been removed from your %s. You can control your %s in <a href=\"%s\">IP Lockouts.</a>",
+						wp_defender()->domain ), $ip, $type, $type,
+						network_admin_url( 'admin.php?page=wdf-ip-lockout&view=blocklist' ) ),
 				) );
 			} else {
+				$type = 'whitelist' === $type ? 'allowlist' : 'blocklist';
 				Settings::instance()->addIpToList( $ip, $type );
 				wp_send_json_success( array(
-					'message' => sprintf( __( "IP %s has been added to your %s You can control your %s in <a href=\"%s\">IP Lockouts.</a>", wp_defender()->domain ), $ip, $type, $type, network_admin_url( 'admin.php?page=wdf-ip-lockout&view=blacklist' ) ),
+					'message' => sprintf( __( "IP %s has been added to your %s You can control your %s in <a href=\"%s\">IP Lockouts.</a>",
+						wp_defender()->domain ), $ip, $type, $type,
+						network_admin_url( 'admin.php?page=wdf-ip-lockout&view=blocklist' ) ),
 				) );
 			}
 
@@ -164,17 +171,21 @@ class Rest extends Controller {
 					foreach ( $ids as $id ) {
 						$model = Log_Model::findByID( $id );
 						$ips[] = $model->ip;
-						$settings->addIpToList( $model->ip, 'whitelist' );
+						$settings->addIpToList( $model->ip, 'allowlist' );
 					}
-					$messages = sprintf( __( "IP %s has been added to your whitelist. You can control your whitelist in <a href=\"%s\">IP Lockouts.</a>", wp_defender()->domain ), implode( ',', $ips ), network_admin_url( 'admin.php?page=wdf-ip-lockout&view=blacklist' ) );
+					$messages = sprintf( __( "IP %s has been added to your allowlist. You can control your allowlist in <a href=\"%s\">IP Lockouts.</a>",
+						wp_defender()->domain ), implode( ',', $ips ),
+						network_admin_url( 'admin.php?page=wdf-ip-lockout&view=blocklist' ) );
 					break;
 				case 'ban':
 					foreach ( $ids as $id ) {
 						$model = Log_Model::findByID( $id );
 						$ips[] = $model->ip;
-						$settings->addIpToList( $model->ip, 'blacklist' );
+						$settings->addIpToList( $model->ip, 'blocklist' );
 					}
-					$messages = sprintf( __( "IP %s has been added to your blacklist You can control your blacklist in <a href=\"%s\">IP Lockouts.</a>", wp_defender()->domain ), implode( ',', $ips ), network_admin_url( 'admin.php?page=wdf-ip-lockout&view=blacklist' ) );
+					$messages = sprintf( __( "IP %s has been added to your blocklist You can control your blocklist in <a href=\"%s\">IP Lockouts.</a>",
+						wp_defender()->domain ), implode( ',', $ips ),
+						network_admin_url( 'admin.php?page=wdf-ip-lockout&view=blocklist' ) );
 					break;
 				case 'delete':
 					foreach ( $ids as $id ) {
@@ -269,12 +280,15 @@ class Rest extends Controller {
 
 		$settings = Settings::instance();
 		//all good, start to import
+
 		foreach ( $data as $line ) {
 			$settings->addIpToList( $line[0], $line[1] );
 		}
 		wp_send_json_success( array(
-			'message' => __( "Your whitelist/blacklist has been successfully imported.", wp_defender()->domain ),
-			'reload'  => 1
+			'message'   => __( "Your allowlist/blocklist has been successfully imported.", wp_defender()->domain ),
+			'reload'    => 1,
+			'blacklist' => $settings->getIpBlacklist(),
+			'whitelist' => $settings->getIpWhitelist()
 		) );
 	}
 
@@ -339,7 +353,8 @@ class Rest extends Controller {
 			$isBLSelf = WP_Helper::getArrayCache()->get( 'isBlacklistSelf', false );
 			if ( $faultIps || $isBLSelf ) {
 				$res = array(
-					'message' => sprintf( __( "Your settings have been updated, however some IPs were removed because invalid format, or you blacklist yourself", wp_defender()->domain ), implode( ',', $faultIps ) ),
+					'message' => sprintf( __( "Your settings have been updated, however some IPs were removed because invalid format, or you blocklist yourself",
+						wp_defender()->domain ), implode( ',', $faultIps ) ),
 					'reload'  => 1
 				);
 			} else {
@@ -379,6 +394,47 @@ class Rest extends Controller {
 				'message' => implode( '<br/>', $settings->getErrors() )
 			) );
 		}
+	}
+
+	/**
+	 * Csv exporter
+	 */
+	public function exportAsCsv() {
+		if ( ! $this->checkPermission() ) {
+			return;
+		}
+
+		if ( ! wp_verify_nonce( HTTP_Helper::retrieveGet( '_wpnonce' ), 'exportAsCsv' ) ) {
+			return;
+		}
+		$logs    = Log_Model::findAll();
+		$fp      = fopen( 'php://memory', 'w' );
+		$headers = array(
+			__( 'Log', wp_defender()->domain ),
+			__( 'Date / Time', wp_defender()->domain ),
+			__( 'Type', wp_defender()->domain ),
+			__( 'IP address', wp_defender()->domain ),
+			__( 'Status', wp_defender()->domain )
+		);
+		fputcsv( $fp, $headers );
+		foreach ( $logs as $log ) {
+			$item = array(
+				$log->log,
+				$log->get_date(),
+				$log->get_type(),
+				$log->ip,
+				Login_Protection_Api::getIPStatusText( $log->ip )
+			);
+			fputcsv( $fp, $item );
+		}
+
+		$filename = 'wdf-lockout-logs-export-' . date( 'ymdHis' ) . '.csv';
+		fseek( $fp, 0 );
+		header( 'Content-Type: text/csv' );
+		header( 'Content-Disposition: attachment; filename="' . $filename . '";' );
+		// make php send the generated csv lines to the browser
+		fpassthru( $fp );
+		exit();
 	}
 
 	public function behaviors() {

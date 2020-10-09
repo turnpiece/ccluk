@@ -2,9 +2,10 @@
 Tags: related posts, related, related articles, contextual related posts, similar posts, related posts widget
 Contributors: webberzone, Ajay
 Donate link: https://ajaydsouza.com/donate/
-Stable tag: trunk
-Requires at least: 4.8
-Tested up to: 5.3
+Stable tag: 2.9.4
+Requires at least: 4.9
+Tested up to: 5.5
+Requires PHP: 5.6
 License: GPLv2 or later
 
 Add related posts to your WordPress site with inbuilt caching. Supports thumbnails, shortcodes, widgets and custom post types!
@@ -40,6 +41,12 @@ And the default inbuilt styles allow you to switch between gorgeous thumbnail-ri
     * Display excerpts in post. You can select the length of the excerpt in words
     * Customise which HTML tags to use for displaying the output in case you don't prefer the default `list` format
 * **Extendable code**: CRP has tonnes of filters and actions that allow any developer to easily add features, edit outputs, etc.
+
+= mySQL FULLTEXT indices =
+
+On activation, the plugin creates three mySQL FULLTEXT indices (or indexes) that are then used to find the related posts in the `*_posts`. These are for `post_content`, `post_title` and `(post_title,post_content)`. If you're running a multisite installation, then this is created for each of the blogs on activation. All these indices occupy space in your mySQL database but are essential for the plugin to run.
+
+You have two sets of options in the settings page which allows you to remove these indices when you deactivate or delete the plugin. The latter is true by default.
 
 = Extensions/Addons =
 
@@ -171,31 +178,69 @@ You can insert the related posts anywhere in your post using the `[crp]` shortco
 
 == Changelog ==
 
-= 2.8.0 =
+= 2.9.4 =
 
-Release post: [https://webberzone.com/blog/contextual-related-posts-v2-8-0/](https://webberzone.com/blog/contextual-related-posts-v2-8-0/)
+Release post: [https://webberzone.com/blog/contextual-related-posts-v2-9-3/](https://webberzone.com/blog/contextual-related-posts-v2-9-3/)
+
+* Bugs:
+    * Fixed nonce verification not always done in Import/Export interface. Thanks to [Lenon Leite](https://github.com/lenonleite)
+
+= 2.9.3 =
+
+Release post: [https://webberzone.com/blog/contextual-related-posts-v2-9-3/](https://webberzone.com/blog/contextual-related-posts-v2-9-3/)
 
 * Features:
-    * New block for Gutenberg aka the block editor. The block is called **Related Posts [CRP]** and you can find it under the widgets category
-    * Two new settings in the widget: **Order posts** and **Randomize order** that allows the global setting to be overridden
-    * New setting called **Keyword** in the Meta box where you can enter a word or a phrase to find related posts. If entered, the plugin will continue to search the `post_title` and `post_content` fields but will use this keyword instead of the values of the title and content of the source post
+    * New constant `CRP_VERSION` to hold the current version of the plugin
+    * New setting to delete FULLTEXT indices on deactivation
 
 * Enhancements:
-    * Show author, Show date, Show post excerpt and Post thumbnail settings will show a message that they cannnot be modified in case the Rounded thumbnails or No text styles are selected
+    * Added the `$args` attribute to the filters in main-query.php
+
+= 2.9.2 =
+
+Release post: [https://webberzone.com/blog/contextual-related-posts-v2-9-0/](https://webberzone.com/blog/contextual-related-posts-v2-9-0/)
+
+Bug fixes:
+    * Password protected posts will no longer show the excerpt
+
+= 2.9.1 =
+
+Release post: [https://webberzone.com/blog/contextual-related-posts-v2-9-0/](https://webberzone.com/blog/contextual-related-posts-v2-9-0/)
+
+Bug fixes:
+    * Custom CSS box would not save and get cleared out when saving settings
+	* `include_cat_ids` didn't work with the shortcode
+
+= 2.9.0 =
+
+Release post: [https://webberzone.com/blog/contextual-related-posts-v2-9-0/](https://webberzone.com/blog/contextual-related-posts-v2-9-0/)
+
+* Features:
+    * New section under Settings > Related Posts > Tools to export and import settings. Best option if you'd like the same configuration across multiple WordPress sites
+	* New shortcode setting `include_cat_ids` to limit top posts to selected categories/taxonomies. Use a comma separated list of [term_taxonomy_id](https://codex.wordpress.org/WordPress_Taxonomy#wp_term_taxonomy)
+	* New setting in widget to only include certain categories. Doesn't work with custom taxonomies
+
+* Enhancements:
+    * New function: `crp_get_thumb_size()` to get the correct size of the thumbnail
+    * Only run a get_post query if only the post ID is passed to `crp_get_the_post_thumbnail()`
+    * `$match_fields` parameter added to `crp_posts_match` filter
+    * Updated WPML functions to use latest filters
+	* Admin scripts are no longer loaded into the head - but using a separate JavaScript file
+	* Implemented CodeMirror to format custom styles box
+    * New filters `get_crp_short_circuit` and `get_crp_posts_id_short_circuit` to bypass outputs and queries
+    * `CRP_MAX_WORDS` has been reduced from 500 to 250 to avoid "Too many words" mySQL error
+    * The link to the Contextual Related Posts link is no longer a list item but a smaller text paragraph below the items. You can turn this on by enabling Show Credit.
 
 * Bug fixes:
-	* Selecting date order now orders the related posts by newest first
-    * Fixed PHP warning in the widget
-    * Stop using `current_time( 'timestamp' )`
-    * Fixes incorrect thumbnail image displayed for attachments in the related posts list
+    * Fixed errors created when trying to fetch a featured image or scanned images with remote links
+    * Saving categories fields in the settings page uses `str_getcsv` and a custom function `crp_str_putcsv`
 
 = Earlier versions =
 
-For the changelog of earlier versions, please refer to the separate changelog.txt file.
+For the changelog of earlier versions, please refer to the separate changelog.txt file or the [releases page on Github](https://github.com/WebberZone/contextual-related-posts/releases).
 
 
 == Upgrade Notice ==
 
-= 2.8.0 =
-New block for Gutenberg. Enhancements to the widget. New Keyword setting.
-Check the Changelog for more details or view the release post on [https://webberzone.com](https://webberzone.com)
+= 2.9.4 =
+Bug fix and minor security release. Check the Changelog for more details or view the release post on https://webberzone.com

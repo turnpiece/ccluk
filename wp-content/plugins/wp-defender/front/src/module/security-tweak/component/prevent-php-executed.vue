@@ -31,16 +31,30 @@
 							{{ __( "Status" ) }}
 						</strong>
 						<div class="sui-notice sui-notice-success margin-bottom-30">
+ <div class="sui-notice-content">
+                    <div class="sui-notice-message">
+                        <i class="sui-notice-icon sui-icon-info sui-md" aria-hidden="true"></i>
+
 							<p v-html="successReason"></p>
-						</div>
+
+                    </div>
+                </div>
+</div>
 					</div>
 					<div v-else>
 						<strong>
 							{{ __( "Status" ) }}
 						</strong>
 						<div class="sui-notice sui-notice-warning">
+ <div class="sui-notice-content">
+                    <div class="sui-notice-message">
+                        <i class="sui-notice-icon sui-icon-info sui-md" aria-hidden="true"></i>
+
 							<p v-html="errorReason"></p>
-						</div>
+
+                    </div>
+                </div>
+</div>
 						<p>
 							{{ __( "Currently, all directories can have PHP code executed in them. It’s best to lock this down to only the directories that require, and add any further execeptions you need." ) }}
 						</p>
@@ -140,8 +154,15 @@
 											</submit-button>
 										</p>
 										<div class="sui-notice">
+ <div class="sui-notice-content">
+                    <div class="sui-notice-message">
+                        <i class="sui-notice-icon sui-icon-info sui-md" aria-hidden="true"></i>
+
 											<p v-html="supportUrl"></p>
-										</div>
+
+                    </div>
+                </div>
+</div>
 									</div>
 								</div>
 								<div class="sui-tab-content sui-tab-boxed" :class="{'active':current_server==='iis'}"

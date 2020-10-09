@@ -49,4 +49,4 @@ return array(
 	'validate_valid_persian_text'       => 'Bagian {field} seharusnya berisi teks dalam bahasa Persian/Dari atau Arabic ',
 	'validate_valid_pashtu_text'        => 'Bagian {field} seharusnya berisi teks dalam bahasa Pashtu',
     'validate_valid_twitter'            => 'Bagian {field} bukan merupakan format alamat twitter yang benar',
-);	   			 	 		  		  	 	
+);

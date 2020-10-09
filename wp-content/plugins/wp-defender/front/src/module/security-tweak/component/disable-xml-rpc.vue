@@ -34,16 +34,30 @@
                             {{ __( "Status" ) }}
                         </strong>
                         <div class="sui-notice sui-notice-success">
+ <div class="sui-notice-content">
+                    <div class="sui-notice-message">
+                        <i class="sui-notice-icon sui-icon-info sui-md" aria-hidden="true"></i>
+
                             <p v-html="successReason"></p>
-                        </div>
+
+                    </div>
+                </div>
+</div>
                     </div>
                     <div v-else>
                         <strong>
                             {{ __( "Status" ) }}
                         </strong>
                         <div class="sui-notice sui-notice-warning">
+ <div class="sui-notice-content">
+                    <div class="sui-notice-message">
+                        <i class="sui-notice-icon sui-icon-info sui-md" aria-hidden="true"></i>
+
                             <p v-html="errorReason"></p>
-                        </div>
+
+                    </div>
+                </div>
+</div>
                         <p>
                             {{ __( "In the past, there were security concerns with XML-RPC so we recommend making sure this feature is fully disabled if you don’t need it active." ) }}
                         </p>

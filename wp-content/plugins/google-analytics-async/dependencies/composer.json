@@ -1,0 +1,53 @@
+{
+    "name": "incsub\/google-analytics-async",
+    "version": "3.3.0",
+    "description": "Beehive Analytics",
+    "keywords": [
+        "google",
+        "analytics",
+        "google-analytics",
+        "statistics"
+    ],
+    "homepage": "https:\/\/premium.wpmudev.org\/project\/beehive-analytics-pro\/",
+    "license": "GPL-2.0+",
+    "authors": [
+        {
+            "name": "Incsub",
+            "homepage": "https:\/\/premium.wpmudev.org"
+        }
+    ],
+    "type": "wordpress-plugin",
+    "require": {
+        "php": ">=5.4",
+        "google\/apiclient": "2.7.0"
+    },
+    "config": {
+        "platform": {
+            "php": "5.4"
+        }
+    },
+    "extra": {
+        "google\/apiclient-services": [
+            "Oauth2",
+            "Analytics",
+            "PeopleService",
+            "AnalyticsReporting"
+        ]
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "Google_Task_Composer::cleanup",
+            "php misc\/composer\/php-scoper.phar add-prefix --config=misc\/composer\/scoper.inc.php --output-dir=dependencies --force",
+            "cd dependencies && composer dump-autoload",
+            "php misc\/composer\/prefix-fixer.php",
+            "rm -rf vendor"
+        ],
+        "post-update-cmd": [
+            "Google_Task_Composer::cleanup",
+            "php misc\/composer\/php-scoper.phar add-prefix --config=misc\/composer\/scoper.inc.php --output-dir=dependencies --force",
+            "cd dependencies && composer dump-autoload",
+            "php misc\/composer\/prefix-fixer.php",
+            "rm -rf vendor"
+        ]
+    }
+}

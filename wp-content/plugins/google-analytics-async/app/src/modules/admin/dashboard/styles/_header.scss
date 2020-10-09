@@ -1,0 +1,27 @@
+@include body-class(true) {
+	.sui-header {
+		.sui-actions-right {
+			.beehive-range-picker {
+				min-width: 110px;
+				padding-top: 7px;
+				padding-right: 0;
+				padding-bottom: 7px;
+				padding-left: 12px;
+				font-size: 13px;
+				line-height: 16px;
+
+				[class*='sui-icon-'] {
+					height: 16px;
+
+					&:not(.beehive-range-picker-button) {
+						display: none;
+					}
+				}
+
+				&:not(:last-child) {
+					margin-right: 7px;
+				}
+			}
+		}
+	}
+}

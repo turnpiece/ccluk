@@ -12,13 +12,13 @@
                 <div class="sui-field-list-body">
                     <div class="sui-field-list-item">
                         <label class="sui-field-list-item-label">
-                            <small><strong>{{__("File Scanning")}}</strong></small>
+                            <small><strong>{{__("Malware Scanning")}}</strong></small>
                         </label>
                         <span v-html="statusText(scan)"></span>
                     </div>
                     <div class="sui-field-list-item">
                         <label class="sui-field-list-item-label">
-                            <small><strong>{{__("IP Lockouts")}}</strong></small>
+                            <small><strong>{{__("Firewall")}}</strong></small>
                         </label>
                         <span v-html="statusText(ip_lockout)"></span>
                     </div>

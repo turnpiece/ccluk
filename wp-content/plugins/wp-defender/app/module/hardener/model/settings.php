@@ -8,7 +8,6 @@ namespace WP_Defender\Module\Hardener\Model;
 use Hammer\Helper\WP_Helper;
 use WP_Defender\Behavior\Utils;
 use WP_Defender\Module\Hardener\Component\Change_Admin;
-use WP_Defender\Module\Hardener\Component\DB_Prefix;
 use WP_Defender\Module\Hardener\Component\Disable_File_Editor;
 use WP_Defender\Module\Hardener\Component\Disable_Trackback;
 use WP_Defender\Module\Hardener\Component\Disable_Xml_Rpc;
@@ -19,14 +18,6 @@ use WP_Defender\Module\Hardener\Component\Prevent_Enum_Users;
 use WP_Defender\Module\Hardener\Component\Prevent_Php;
 use WP_Defender\Module\Hardener\Component\Protect_Information;
 use WP_Defender\Module\Hardener\Component\Security_Key;
-use WP_Defender\Module\Hardener\Component\Sh_Content_Security;
-use WP_Defender\Module\Hardener\Component\Sh_Content_Type_Options;
-use WP_Defender\Module\Hardener\Component\Sh_Feature_Policy;
-use WP_Defender\Module\Hardener\Component\Sh_Referrer_Policy;
-use WP_Defender\Module\Hardener\Component\Sh_Strict_Transport;
-use WP_Defender\Module\Hardener\Component\Sh_X_Frame;
-use WP_Defender\Module\Hardener\Component\Sh_XSS_Protection;
-use WP_Defender\Module\Hardener\Component\WP_Rest_Api;
 use WP_Defender\Module\Hardener\Component\WP_Version;
 use WP_Defender\Module\Hardener\Rule;
 
@@ -134,12 +125,7 @@ class Settings extends \Hammer\WP\Settings {
 	 */
 	public $is_prefix_changed = false;
 
-	/**
-	 * shorthand to add to a list
-	 *
-	 * @param $slug
-	 * @param $devPush
-	 */
+	public $automate = false;
 
 	public function __construct( $id, $is_multi ) {
 		if ( is_admin() || is_network_admin() && current_user_can( 'manage_options' ) ) {
@@ -162,7 +148,7 @@ class Settings extends \Hammer\WP\Settings {
 
 	/**
 	 * @param $slug
-	 * @param bool $devPush
+	 * @param  bool  $devPush
 	 */
 	public function addToIssues( $slug, $devPush = true ) {
 		$this->addToList( 'issues', $slug, $devPush );
@@ -231,7 +217,8 @@ class Settings extends \Hammer\WP\Settings {
 			self::$_instance = null;
 		}
 		if ( is_null( self::$_instance ) ) {
-			self::$_instance = new Settings( 'wd_hardener_settings', WP_Helper::is_network_activate( wp_defender()->plugin_slug ) );
+			self::$_instance = new Settings( 'wd_hardener_settings',
+				WP_Helper::is_network_activate( wp_defender()->plugin_slug ) );
 		}
 
 		return self::$_instance;
@@ -244,8 +231,15 @@ class Settings extends \Hammer\WP\Settings {
 		$definedRules = $this->getDefinedRules( true );
 		$this->fixed  = array();
 		$this->issues = array();
+		if ( ! is_array( $this->ignore ) ) {
+			$this->ignore = array();
+		}
+
 		foreach ( $definedRules as $rule ) {
-			if ( empty( $rule::$slug ) || in_array( $rule::$slug, $this->ignore ) ) {
+			if (
+				empty( $rule::$slug )
+				|| in_array( $rule::$slug, $this->ignore, true )
+			) {
 				//this rule ignored, no process
 				continue;
 			}
@@ -255,6 +249,7 @@ class Settings extends \Hammer\WP\Settings {
 				$this->issues[] = $rule::$slug;
 			}
 		}
+
 		$this->last_status_check = time();
 		$this->save();
 	}
@@ -330,9 +325,11 @@ class Settings extends \Hammer\WP\Settings {
 	public function getFixed() {
 		$rules  = $this->getDefinedRules( true );
 		$issues = array();
-		foreach ( $this->fixed as $issue ) {
-			if ( isset( $rules[ $issue ] ) ) {
-				$issues[] = $rules[ $issue ];
+		if ( is_array( $this->fixed ) && ! empty( $this->fixed ) ) {
+			foreach ( $this->fixed as $issue ) {
+				if ( isset( $rules[ $issue ] ) ) {
+					$issues[] = $rules[ $issue ];
+				}
 			}
 		}
 
@@ -353,34 +350,26 @@ class Settings extends \Hammer\WP\Settings {
 
 	/**
 	 *
-	 * @param bool $init
+	 * @param  bool  $init
 	 *
 	 * @return array
 	 */
 	public function getDefinedRules( $init = false ) {
 		return array(
-			Disable_Trackback::$slug       => $init == true ? new Disable_Trackback() : Disable_Trackback::getClassName(),
-			WP_Version::$slug              => $init == true ? new WP_Version() : WP_Version::getClassName(),
-			PHP_Version::$slug             => $init == true ? new PHP_Version() : PHP_Version::getClassName(),
-			Change_Admin::$slug            => $init == true ? new Change_Admin() : Change_Admin::getClassName(),
-			DB_Prefix::$slug               => $init == true ? new DB_Prefix() : DB_Prefix::getClassName(),
-			Disable_File_Editor::$slug     => $init == true ? new Disable_File_Editor() : Disable_File_Editor::getClassName(),
-			Hide_Error::$slug              => $init == true ? new Hide_Error() : Hide_Error::getClassName(),
-			Prevent_Enum_Users::$slug      => $init == true ? new Prevent_Enum_Users() : Prevent_Enum_Users::getClassName(),
-			Security_Key::$slug            => $init == true ? new Security_Key() : Security_Key::getClassName(),
-			Protect_Information::$slug     => $init == true ? new Protect_Information() : Protect_Information::getClassName(),
-			Prevent_Php::$slug             => $init == true ? new Prevent_Php() : Prevent_Php::getClassName(),
-			Login_Duration::$slug          => $init == true ? new Login_Duration() : Login_Duration::getClassName(),
-			Disable_Xml_Rpc::$slug         => $init == true ? new Disable_Xml_Rpc() : Disable_Xml_Rpc::getClassName(),
+			Disable_Trackback::$slug   => $init == true ? new Disable_Trackback() : Disable_Trackback::getClassName(),
+			WP_Version::$slug          => $init == true ? new WP_Version() : WP_Version::getClassName(),
+			PHP_Version::$slug         => $init == true ? new PHP_Version() : PHP_Version::getClassName(),
+			Change_Admin::$slug        => $init == true ? new Change_Admin() : Change_Admin::getClassName(),
+			//DB_Prefix::$slug           => $init == true ? new DB_Prefix() : DB_Prefix::getClassName(),
+			Disable_File_Editor::$slug => $init == true ? new Disable_File_Editor() : Disable_File_Editor::getClassName(),
+			Hide_Error::$slug          => $init == true ? new Hide_Error() : Hide_Error::getClassName(),
+			Prevent_Enum_Users::$slug  => $init == true ? new Prevent_Enum_Users() : Prevent_Enum_Users::getClassName(),
+			Security_Key::$slug        => $init == true ? new Security_Key() : Security_Key::getClassName(),
+			Protect_Information::$slug => $init == true ? new Protect_Information() : Protect_Information::getClassName(),
+			Prevent_Php::$slug         => $init == true ? new Prevent_Php() : Prevent_Php::getClassName(),
+			Login_Duration::$slug      => $init == true ? new Login_Duration() : Login_Duration::getClassName(),
+			Disable_Xml_Rpc::$slug     => $init == true ? new Disable_Xml_Rpc() : Disable_Xml_Rpc::getClassName(),
 			//WP_Rest_Api::$slug             => $init == true ? new WP_Rest_Api() : WP_Rest_Api::getClassName(),
-			//============SECURITY HEADERS===================
-			Sh_X_Frame::$slug              => $init == true ? new Sh_X_Frame() : Sh_X_Frame::getClassName(),
-			Sh_XSS_Protection::$slug       => $init == true ? new Sh_XSS_Protection() : Sh_XSS_Protection::getClassName(),
-			Sh_Feature_Policy::$slug       => $init == true ? new Sh_Feature_Policy() : Sh_Feature_Policy::getClassName(),
-			Sh_Referrer_Policy::$slug      => $init == true ? new Sh_Referrer_Policy() : Sh_Referrer_Policy::getClassName(),
-			Sh_Strict_Transport::$slug     => $init == true ? new Sh_Strict_Transport() : Sh_Strict_Transport::getClassName(),
-			Sh_Content_Type_Options::$slug => $init == true ? new Sh_Content_Type_Options() : Sh_Content_Type_Options::getClassName(),
-			//Sh_Content_Security::$slug     => $init == true ? new Sh_Content_Security() : Sh_Content_Security::getClassName(),
 		);
 	}
 
@@ -402,6 +391,9 @@ class Settings extends \Hammer\WP\Settings {
 	 * @param $value
 	 */
 	public function setDValues( $key, $value ) {
+		if ( ! is_array( $this->data ) ) {
+			$this->data = [];
+		}
 		if ( $value == null ) {
 			unset( $this->data[ $key ] );
 		} else {
@@ -413,7 +405,7 @@ class Settings extends \Hammer\WP\Settings {
 	/**
 	 * Save the exclude file paths
 	 *
-	 * @param Array - $paths
+	 * @param  Array - $paths
 	 */
 	public function saveExcludedFilePaths( $paths = array() ) {
 		$this->exclude_file_paths = $paths;
@@ -422,7 +414,7 @@ class Settings extends \Hammer\WP\Settings {
 	/**
 	 * Save the htconfig
 	 *
-	 * @param Array - $config
+	 * @param  Array - $config
 	 */
 	public function saveNewHtConfig( $config = array() ) {
 		$this->new_htconfig = $config;
@@ -449,7 +441,7 @@ class Settings extends \Hammer\WP\Settings {
 	/**
 	 * Set the active server
 	 *
-	 * @param String $server
+	 * @param  String  $server
 	 */
 	public function setActiveServer( $server ) {
 		$this->active_server = $server;
@@ -475,23 +467,23 @@ class Settings extends \Hammer\WP\Settings {
 							}
 						}
 					}
-				)
-			)
+				),
+			),
 		);
 	}
 
 	/**
 	 * Define labels for settings key, we will use it for HUB
 	 *
-	 * @param null $key
+	 * @param  null  $key
 	 *
 	 * @return array|mixed
 	 */
 	public function labels( $key = null ) {
 		$labels = [
-			'notification'        => __( 'Notification', wp_defender()->domain ),
-			'receipts'            => __( 'Recipients', wp_defender()->domain ),
-			'notification_repeat' => __( "Send reminders", wp_defender()->domain )
+			'notification'        => __( 'Email reminders', wp_defender()->domain ),
+			'notification_repeat' => __( "Remind every 24 hours", wp_defender()->domain ),
+			'receipts'            => __( 'Email reminder recipients', wp_defender()->domain ),
 		];
 
 		if ( $key != null ) {
@@ -499,6 +491,122 @@ class Settings extends \Hammer\WP\Settings {
 		}
 
 		return $labels;
+	}
+
+	/**
+	 * Get export strings, use in config import.export
+	 *
+	 * @param $configs
+	 *
+	 * @return array
+	 */
+	public function export_strings( $configs ) {
+		$this->refreshStatus();
+		$strings = [];
+		$model   = new Settings( 'wd_hardener_settings',
+			WP_Helper::is_network_activate( wp_defender()->plugin_slug ) );
+		$model->import( $configs );
+		if ( $model->automate ) {
+			//if automate, mean enable as much as possible
+			$count       = count( $this->getDefinedRules() );
+			$manual_done = [
+				Change_Admin::$slug,
+				PHP_Version::$slug,
+				Prevent_Php::$slug,
+				Protect_Information::$slug,
+				WP_Version::$slug
+			];
+			if ( is_array( $this->fixed ) && ! empty( $this->fixed ) ) {
+				foreach ( $manual_done as $slug ) {
+					if ( ! in_array( $slug, $this->fixed ) ) {
+						$count -= 1;
+					}
+				}
+			}
+			$strings[] = sprintf( __( '%d/%d recommendations activated', wp_defender()->domain ),
+				$count, count( $model->getDefinedRules() ) );
+		} elseif ( empty( $model->getIssues() ) ) {
+			$strings[] = __( 'All available recommendations activated', wp_defender()->domain );
+		} else {
+			$strings[] = sprintf( __( '%d/%d recommendations activated', wp_defender()->domain ),
+				count( $model->getFixed() ), count( $model->getDefinedRules() ) );
+		}
+
+		if ( $model->notification ) {
+			$strings[] = __( 'Email notifications active', wp_defender()->domain );
+		}
+
+		return $strings;
+	}
+
+	/**
+	 * This is for the case like Change_Admin
+	 * @return array
+	 */
+	public function export_extra() {
+		return [];
+	}
+
+	public function automate() {
+		$need_reauth = false;
+		//force a refresh
+		$this->refreshStatus();
+		if ( $this->automate === true ) {
+			//if automate is true, auto resolve all
+			$manual_done = [
+				Change_Admin::$slug,
+				PHP_Version::$slug,
+				Prevent_Php::$slug,
+				Protect_Information::$slug,
+				WP_Version::$slug
+			];
+			foreach ( $this->getIssues() as $issue ) {
+				if ( in_array( $issue::$slug, $manual_done ) ) {
+					continue;
+				}
+				if ( $issue::$slug === Security_Key::$slug ) {
+					$need_reauth = true;
+				}
+				$ret = $issue->getService()->process();
+			}
+			$this->automate = false;
+			$this->save();
+		} else {
+			//there are some tweak that need manual apply, as files based, or change admin
+			foreach ( $this->getIssues() as $item ) {
+				if ( in_array( $item::$slug,
+					[
+						Change_Admin::$slug,
+						PHP_Version::$slug,
+						Prevent_Php::$slug,
+						Protect_Information::$slug,
+						WP_Version::$slug
+					] ) ) {
+					continue;
+				}
+
+				if ( in_array( $item::$slug, [
+					Security_Key::$slug
+				] ) ) {
+					$need_reauth = true;
+				}
+
+				$ret = $item->getService()->process();
+			}
+		}
+
+		return $need_reauth;
+	}
+
+	public function format_hub_data() {
+		return [
+			'notification'        => $this->notification ? __( 'Active', wp_defender()->domain ) : __( 'Inactivate',
+				wp_defender()->domain ),
+			'notification_repeat' => $this->notification_repeat ? __( 'Yes', wp_defender()->domain ) : __( 'No',
+				wp_defender()->domain ),
+			'receipts'            => empty( $this->receipts ) ? __( 'No recipients',
+				wp_defender()->domain ) : Utils::instance()->recipientsToString( $this->receipts )
+		];
 	}
 
 	public function resolve( $rules ) {

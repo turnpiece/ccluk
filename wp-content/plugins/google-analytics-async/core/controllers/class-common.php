@@ -1,4 +1,13 @@
 <?php
+/**
+ * The common class of the plugin.
+ *
+ * @link    http://premium.wpmudev.org
+ * @since   3.2.0
+ *
+ * @author  Joel James <joel@incsub.com>
+ * @package Beehive\Core\Controllers
+ */
 
 namespace Beehive\Core\Controllers;
 
@@ -8,12 +17,9 @@ defined( 'WPINC' ) || die;
 use Beehive\Core\Utils\Abstracts\Base;
 
 /**
- * The common class of the plugin.
+ * Class Common
  *
- * @link   http://premium.wpmudev.org
- * @since  3.2.0
- *
- * @author Joel James <joel@incsub.com>
+ * @package Beehive\Core\Controllers
  */
 class Common extends Base {
 
@@ -26,10 +32,10 @@ class Common extends Base {
 	 */
 	public function init() {
 		// Process upgrade.
-		add_action( 'init', [ $this, 'upgrade' ] );
+		add_action( 'init', array( $this, 'upgrade' ) );
 
 		// Deactivate free version.
-		add_action( 'init', [ $this, 'deactivate_free' ] );
+		add_action( 'init', array( $this, 'deactivate_free' ) );
 	}
 
 	/**
@@ -64,8 +70,7 @@ class Common extends Base {
 			}
 
 			// Check if the Pro version exists and is activated.
-			if ( is_plugin_active( 'google-analytics-async/google-analytics-async.php' )
-			     && is_plugin_active( 'beehive-analytics/beehive-analytics.php' ) ) {
+			if ( is_plugin_active( 'google-analytics-async/google-analytics-async.php' ) && is_plugin_active( 'beehive-analytics/beehive-analytics.php' ) ) {
 				// Pro is activated, so deactivate the free one.
 				deactivate_plugins( 'beehive-analytics/beehive-analytics.php' );
 			}

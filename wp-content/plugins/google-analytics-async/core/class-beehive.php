@@ -1,4 +1,13 @@
 <?php
+/**
+ * The core plugin class.
+ *
+ * @link    http://premium.wpmudev.org
+ * @since   3.2.0
+ *
+ * @author  Joel James <joel@incsub.com>
+ * @package Beehive\Core
+ */
 
 namespace Beehive\Core;
 
@@ -9,19 +18,16 @@ use Beehive\Core\Controllers\Settings;
 use Beehive\Core\Utils\Abstracts\Base;
 
 /**
- * The core plugin class.
+ * Class Beehive
  *
- * @link   http://premium.wpmudev.org
- * @since  3.2.0
- *
- * @author Joel James <joel@incsub.com>
+ * @package Beehive\Core
  */
 final class Beehive extends Base {
 
 	/**
 	 * Settings helper class instance.
 	 *
-	 * @var Settings
+	 * @var settings
 	 *
 	 * @since  3.2.0
 	 */
@@ -40,28 +46,8 @@ final class Beehive extends Base {
 	 */
 	protected function __construct() {
 		$this->define();
-		$this->locale();
 		$this->init();
 		$this->run();
-	}
-
-	/**
-	 * Define the locale for this plugin for internationalization.
-	 *
-	 * Uses the I18n class in order to set the domain and to register the hook
-	 * with WordPress.
-	 *
-	 * @since  3.2.0
-	 * @access private
-	 *
-	 * @return void
-	 */
-	private function locale() {
-		load_plugin_textdomain(
-			'ga_trans',
-			false,
-			BEEHIVE_DIR . '/languages/'
-		);
 	}
 
 	/**
@@ -128,7 +114,7 @@ final class Beehive extends Base {
 	private function define() {
 		// Shared UI version.
 		if ( ! defined( 'BEEHIVE_SUI_VERSION' ) ) {
-			define( 'BEEHIVE_SUI_VERSION', '2.3.31' );
+			define( 'BEEHIVE_SUI_VERSION', '2.9.6' );
 		}
 
 		// Plugin directory.

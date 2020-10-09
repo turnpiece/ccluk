@@ -3,17 +3,14 @@
 		<div class="file-scanning">
 			<div class="sui-header">
 				<h1 class="sui-header-title">
-					{{__("FILE SCANNING")}}
+					{{__("Malware Scanning")}}
 				</h1>
 				<div class="sui-actions-left">
 					<submit-button type="button" @click="newScan" css-class="sui-button-blue" :state="state">
 						{{__("New Scan")}}
 					</submit-button>
 				</div>
-				<div class="sui-actions-right">
-					<doc-link
-							link="https://premium.wpmudev.org/docs/wpmu-dev-plugins/defender/#security-scans"></doc-link>
-				</div>
+				<doc-link link="https://premium.wpmudev.org/docs/wpmu-dev-plugins/defender/#malware-scanning"></doc-link>
 			</div>
 			<summary-box>
 				<div class="sui-summary-segment">
@@ -24,7 +21,7 @@
                             <i aria-hidden="true"
                                :class="{'sui-icon-info sui-warning':count_total > 0,'sui-icon-check-tick sui-success':count_total===0}"></i>
                         </span>
-						<span class="sui-summary-sub">{{__("File scanning issues")}}</span>
+						<span class="sui-summary-sub">{{__("Malware scanning issues")}}</span>
 						<span class="sui-summary-detail" v-text="last_scan_date"></span>
 						<span class="sui-summary-sub">{{__("Last scan")}}</span>
 					</div>
@@ -184,8 +181,9 @@
 		},
 		mounted: function () {
 			if (this.$root.store.state_changed) {
+				let self = this;
 				this.$nextTick(() => {
-					this.rebindSUI()
+					self.rebindSUI()
 				})
 			}
 			self = this;

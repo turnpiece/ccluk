@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+// Overwrite font path.
+$sui-font-path: '~@wpmudev/shared-ui/dist/fonts/';
+
+// ============================================================
+// Shared UI.
+// Import original shared-ui styles.
+@import '~@wpmudev/shared-ui/scss/functions';
+@import '~@wpmudev/shared-ui/scss/colors';
+@import '~@wpmudev/shared-ui/scss/variables';
+
+// Overwrite SUI variables
+$prefix: 'beehive';
+$sui-version: 'beehive-admin';
+$sui-wrap-class: 'beehive-post-stats-wrap';
+
+$a-color: #0073aa;
+$a-action-color: #00a0d2;
+
+// Continue importing shared-ui styles.
+@import '~@wpmudev/shared-ui/scss/mixins';
+@import '~@wpmudev/shared-ui/scss/accessibility';
+@import '~@wpmudev/shared-ui/scss/typography';
+@import '~@wpmudev/shared-ui/scss/icons';
+@import '~@wpmudev/shared-ui/scss/layout';
+@import '~@wpmudev/shared-ui/scss/tooltips';
+
+// Widget styles.
+@import 'body';
+@import 'row';

@@ -26,6 +26,15 @@ class Module extends Component {
 	}
 
 	/**
+	 * @param $id
+	 *
+	 * @return mixed|null
+	 */
+	public function getController( $id ) {
+		return isset( $this->_controllers[ $id ] ) ? $this->_controllers[ $id ] : null;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function controllerMap() {

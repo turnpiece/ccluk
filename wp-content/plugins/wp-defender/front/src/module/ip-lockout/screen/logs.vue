@@ -13,7 +13,7 @@
 						<option value="ip">{{__("IP Address")}}</option>
 					</select>
 				</div>
-				<a :href="adminUrl('admin-ajax.php?action=lockoutExportAsCsv')"
+				<a :href="get_export_url"
 				   class="sui-button sui-button-outlined">
 					{{__("Export CSV")}}
 				</a>
@@ -21,7 +21,7 @@
 		</div>
 		<div class="sui-box-body">
 			<p>
-				{{__("Here's your comprehensive IP lockout log. You can whitelist and ban IPs from there.")}}
+				{{__("Here's your comprehensive IP lockout log. You can allowlist and ban IPs from there.")}}
 			</p>
 		</div>
 		<lockout-table
@@ -58,6 +58,11 @@
 				let key = jQuery(this).attr('name');
 				self[key] = value;
 			})
+		},
+		computed: {
+			get_export_url: function () {
+				return ajaxurl + '?action=' + iplockout.endpoints.exportAsCsv + '&_wpnonce=' + iplockout.nonces.exportAsCsv;
+			}
 		}
 	}
 </script>

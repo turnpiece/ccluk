@@ -3,31 +3,31 @@ Fix out of align when using notice inside tweaks
  */
 .sui-accordion-item-body {
   strong {
-	font-size: 13px;
-	font-weight: bold;
-	color: #333333
+    font-size: 13px;
+    font-weight: bold;
+    color: #333333
   }
 
   .sui-notice {
-	p {
-	  margin-bottom: 0 !important;
-	  margin-top: 0 !important;
-	}
+    p {
+      margin-bottom: 0 !important;
+      margin-top: 0 !important;
+    }
   }
 
   ol {
-	li {
-	  color: #888888;
-	  list-style-type: disc;
-	}
+    li {
+      color: #888888;
+      list-style-type: disc;
+    }
   }
 }
 
 .sui-box {
   .sui-box-header {
-	h3.sui-box-title {
-	  min-width: 50px;
-	}
+    h3.sui-box-title {
+      min-width: 50px;
+    }
   }
 }
 
@@ -36,4 +36,25 @@ a.premium-button {
   color: white !important;
   display: inline-block !important;
   margin-top: 15px !important;
+}
+
+.sui-wrap {
+  .sui-header {
+    h1 {
+      text-transform: none !important;
+    }
+  }
+
+  .sui-header-title {
+    text-transform: none;
+  }
+}
+
+#configs {
+  .sui-accordion-item-header {
+    .sui-button-icon {
+      margin-right: 0 !important;
+      margin-left: auto;
+    }
+  }
 }

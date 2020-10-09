@@ -132,7 +132,7 @@ class Options_Audit extends Event_Abstract {
 			'comment_whitelist'             => esc_html__( "Before a comment appears", wp_defender()->domain ),
 			'comment_max_links'             => esc_html__( "Comment Moderation", wp_defender()->domain ),
 			'moderation_keys'               => esc_html__( "Comment Moderation", wp_defender()->domain ),
-			'blacklist_keys'                => esc_html__( "Comment Blacklist", wp_defender()->domain ),
+			'blacklist_keys'                => esc_html__( "Comment Blocklist", wp_defender()->domain ),
 			'show_avatars'                  => esc_html__( "Avatar Display", wp_defender()->domain ),
 			'avatar_rating'                 => esc_html__( "Maximum Rating", wp_defender()->domain ),
 			'avatar_default'                => esc_html__( "Default Avatar", wp_defender()->domain ),

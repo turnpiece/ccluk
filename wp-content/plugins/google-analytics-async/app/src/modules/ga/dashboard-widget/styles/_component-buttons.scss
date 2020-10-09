@@ -1,0 +1,163 @@
+@include body-class(true) {
+	.beehive-buttons-wrapper {
+		.beehive-button-holder {
+			display: block;
+			padding: 0 0 $sui-gutter-md;
+		}
+
+		.beehive-button {
+			width: 100%;
+			cursor: pointer;
+			display: block;
+			position: relative;
+			margin: 0;
+			padding: $sui-gutter-md $sui-gutter-md;
+			border: 0;
+			border-radius: $border-radius;
+			background-image: none;
+			background-color: #fafafa;
+			color: palette(gray, light);
+			font: bold 12px/16px $font;
+			text-align: left;
+
+			* {
+				pointer-events: none;
+			}
+
+			.beehive-button-name {
+				display: block;
+				color: palette(gray, dark);
+				text-transform: uppercase;
+			}
+
+			.beehive-button-value {
+				overflow: hidden;
+				display: block;
+				font-size: 15px;
+				line-height: 43px;
+				font-weight: 500;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+
+				&.beehive-lg {
+					font-size: 32px;
+				}
+
+				&.beehive-blue {
+					color: $blue;
+				}
+			}
+
+			.beehive-button-trend {
+				display: block;
+				font-size: 13px;
+				line-height: 18px;
+
+				[class*='sui-icon-'] {
+					&:before {
+						color: inherit;
+					}
+				}
+
+				&.beehive-red {
+					color: $red;
+
+					[class*='sui-icon-'] {
+						margin-left: 2px;
+					}
+				}
+
+				&.beehive-green {
+					color: $green;
+
+					[class*='sui-icon-'] {
+						margin-right: 2px;
+					}
+				}
+			}
+
+			.beehive-button-stats {
+				max-width: 100%;
+				display: flex;
+				align-items: center;
+
+				.beehive-button-value {
+					flex: 0 1 auto;
+
+					+ .beehive-button-trend {
+						margin-left: #{$sui-gutter-md / 2};
+					}
+				}
+
+				.beehive-button-trend {
+					flex: 0 0 auto;
+				}
+			}
+
+			.beehive-button-icon {
+				display: block;
+				flex: 0 0 auto;
+				position: absolute;
+				top: 50%;
+				right: #{$sui-gutter-md / 2};
+				transform: translateY(-50%);
+				color: palette(silver, medium);
+
+				&:before {
+					color: inherit;
+				}
+			}
+
+			&,
+			&:hover,
+			&:focus,
+			&:active {
+				outline: none;
+				box-shadow: none;
+			}
+		}
+	}
+
+	// SIZE: Small.
+	&.beehive-widget-small {
+		.beehive-buttons-wrapper {
+			.beehive-button-holder {
+				&:last-child {
+					padding-bottom: 0;
+				}
+			}
+		}
+	}
+
+	// SIZE: Normal.
+	&:not(.beehive-widget-small) {
+		.beehive-buttons-wrapper {
+			display: flex;
+			flex-wrap: wrap;
+			margin: 0 -#{$sui-gutter / 2} -#{$sui-gutter-md};
+
+			.beehive-button-holder {
+				max-width: 50%;
+				flex: 0 0 50%;
+				padding-right: #{$sui-gutter / 2};
+				padding-left: #{$sui-gutter / 2};
+			}
+
+			.beehive-button {
+				padding: $sui-gutter-md $sui-gutter;
+
+				.beehive-button-stats {
+					.beehive-button-value {
+						+ .beehive-button-trend {
+							margin-left: #{$sui-gutter-md / 2};
+						}
+					}
+				}
+
+				.beehive-button-icon {
+					right: #{$sui-gutter / 2};
+				}
+			}
+		}
+	}
+}

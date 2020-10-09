@@ -1,8 +1,60 @@
 Plugin Name: WP Defender
-Author: Hoang Ngo, Aaron Edwards
-Tested up to: 5.3
+Author: Hoang Ngo, Aaron Edwards, Anton Shulga
+Tested up to: 5.5
 
 Change Log:
+
+2.3.2 - 2020-09-14
+- New: Add a separate Tutorials sub-menu and X-icon to remove it from the Dashboard
+- Improvement: Change mention of blacklist and whitelist to blocklist and allowlist on Defender pages
+- Improvement: Change Documentation links for Firewall and Malware Scanning
+- Improvement: Config Improvements
+- Fix: Display custom login forms if the Defender Masking URL is enabled
+- Fix: Receive email from Defender security tweaks daily
+- Fix: Activate 'Mask Login Area' through the Defender dashboard
+- Fix: Correct display of the Audit log for a new registered user - except for a Subscriber role - in MU
+- Fix: Masked login alters ajaxurl in MU in sites table page
+- Fix: Remove 'ambient-light-sensor', 'picture-in-picture', 'speaker' and 'vr' directives from Feature-Policy header
+- Fix: Compatibility with HUB
+- Other minor enhancements and fixes
+
+2.3.1 - 2020-08-06
+----------------------------------------------------------------------
+- New: Feature to save presets configurations of the Defender's settings, and make them available to download and apply to your other sites.
+- New: Add tutorials section in the Defender dashboard.
+- Improvement: Allow to bulk delete suspicious files
+- Improvement: Improve the logic of how "Include sub-domains" option should be shown on the Strict Transport Security header
+- Fix: Prevent wp-signup.php to access when Mask Login is enabled.
+- Fix: 2FA login does not redirect correctly after login via the my-account page of Woocommerce
+- Other minor enhancements and fixes
+
+2.3 - 2020-05-18
+----------------------------------------------------------------------
+- Improvement: Change the description for X-Content-Type-Options security header
+- Fix: The WAF widget and WAF page will be hidden when white label activated
+- Fix: Include Subdomain option for Strict Transport security header
+- Fix: Cron for Audit logs
+- Other minor enhancements and fixes
+
+2.2.9 - 2020-04-05
+----------------------------------------------------------------------
+- New: WPMU DEV’s Hosted Web Application Firewall (WAF) is a first layer of protection to block hackers and bot attacks before they ever reach your site. Websites hosted with WPMU DEV can now use this advanced WAF by enabling it via your site’s Security or Hosting tab in The Hub.
+- Improvement: Moved the security headers out of Security Tweaks and into their own section inside Advanced Tools.
+- Improvement: Relocated Two-Factor Authentication to it’s own menu item and area.
+- Improvement: Renamed a couple of modules to more accurately reflect what they do.
+- Fix - Minor bugs and improvements
+
+2.2.8 - 2020-28-04
+----------------------------------------------------------------------
+- Improvement: Add plugin configuration import/export option for Hub
+- Improvement: HSTS Maximum age of Strict Transport Security header added 30 days, 2 years
+- Improvement: Update copy for MaxMind license key
+- Fix: Separate email subjects of templates for scan notifications
+- Fix: Warning open_basedir restriction in effect
+- Fix: 2FA required even if the role is unchecked
+- Fix: Preview for Lockout Custom Message doesn't work
+- Fix: Sending lockout emails even though they are disabled
+- Other minor enhancements and fixes
 
 2.2.7 - 2020-09-03
 ----------------------------------------------------------------------
@@ -346,4 +398,4 @@ Fixed: Scanning was sometimes slow or getting stuck
 - First release
 
 
-87274-1584739240-au
+87274-1602263414-au

@@ -44,10 +44,11 @@ class Main extends Controller {
 	 */
 	public function adminMenu() {
 		$cap = is_multisite() ? 'manage_network_options' : 'manage_options';
-		add_submenu_page( 'wp-defender', esc_html__( "Settings", wp_defender()->domain ), esc_html__( "Settings", wp_defender()->domain ), $cap, $this->slug, array(
-			&$this,
-			'actionIndex'
-		) );
+		add_submenu_page( 'wp-defender', esc_html__( "Settings", wp_defender()->domain ),
+			esc_html__( "Settings", wp_defender()->domain ), $cap, $this->slug, array(
+				&$this,
+				'actionIndex'
+			) );
 	}
 
 	public function actionIndex() {
@@ -84,8 +85,16 @@ class Main extends Controller {
 			return [];
 		}
 		$settings = Settings::instance();
+		Setting\Component\Backup_Settings::maybeCreateDefaultConfig();
+		$configs = Setting\Component\Backup_Settings::getConfigs();
+
+		foreach ( $configs as &$config ) {
+			//unset the data as we dont need it
+			unset( $config['configs'] );
+		}
 
 		return [
+			'configs'   => $configs,
 			'model'     => [
 				'general'       => $settings->exportByKeys( [
 					'translate',
@@ -101,7 +110,13 @@ class Main extends Controller {
 			],
 			'nonces'    => [
 				'updateSettings' => wp_create_nonce( 'updateSettings' ),
-				'resetSettings'  => wp_create_nonce( 'resetSettings' )
+				'resetSettings'  => wp_create_nonce( 'resetSettings' ),
+				'newConfig'      => wp_create_nonce( 'newConfig' ),
+				'updateConfig'   => wp_create_nonce( 'updateConfig' ),
+				'applyConfig'    => wp_create_nonce( 'applyConfig' ),
+				'deleteConfig'   => wp_create_nonce( 'deleteConfig' ),
+				'downloadConfig' => wp_create_nonce( 'downloadConfig' ),
+				'importConfig'   => wp_create_nonce( 'importConfig' ),
 			],
 			'endpoints' => $this->getAllAvailableEndpoints( Setting::getClassName() ),
 			'misc'      => [

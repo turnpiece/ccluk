@@ -1,4 +1,13 @@
 <?php
+/**
+ * The Google general data class.
+ *
+ * @link    http://premium.wpmudev.org
+ * @since   3.2.0
+ *
+ * @author  Joel James <joel@incsub.com>
+ * @package Beehive\Core\Modules\Google_Auth
+ */
 
 namespace Beehive\Core\Modules\Google_Auth;
 
@@ -6,19 +15,51 @@ namespace Beehive\Core\Modules\Google_Auth;
 defined( 'WPINC' ) || die;
 
 use Exception;
-use Google_Service_Exception;
+use Beehive\Google_Service_Exception;
 use Beehive\Core\Utils\Abstracts\Google_API;
-use Google_Service_PeopleService as Google_People;
+use Beehive\Google_Service_PeopleService as Google_People;
 
 /**
- * The Google general data class.
+ * Class Data
  *
- * @link   http://premium.wpmudev.org
- * @since  3.2.0
- *
- * @author Joel James <joel@incsub.com>
+ * @package Beehive\Core\Modules\Google_Auth
  */
 class Data extends Google_API {
+
+	/**
+	 * Get the default credentials for the Beehive app.
+	 *
+	 * In order to load-balance the API request limit, we need
+	 * to use multiple API projects in Beehive.
+	 * Weight is required to priortize the selection. Higher weighted
+	 * key pair gets higher priority.
+	 *
+	 * @since 3.3.0
+	 *
+	 * @return array
+	 */
+	public function credentials() {
+		// Default credentials.
+		$creds = array(
+			'640050123521-r5bp4142nh6dkh8bn0e6sn3pv852v3fm.apps.googleusercontent.com' => array(
+				'secret' => 'wWEelqN4DvE2DJjUPp-4KSka',
+				'weight' => 1,
+			),
+			'600314239770-5huksonskhpspttt9euamsd2vfv3m0gr.apps.googleusercontent.com' => array(
+				'secret' => 'z02i4rsfhTLNC0hYjLJgn5P_',
+				'weight' => 5,
+			),
+		);
+
+		/**
+		 * Filter to add/remove default API credentials.
+		 *
+		 * @param array $creds Credentials.
+		 *
+		 * @since 3.3.0
+		 */
+		return apply_filters( 'beehive_google_default_credentials', $creds );
+	}
 
 	/**
 	 * Get authenticated user's name and email address.
@@ -47,12 +88,12 @@ class Data extends Google_API {
 				// Get name and email address.
 				$person = $people->people->get(
 					'people/me',
-					[ 'personFields' => 'names,emailAddresses,photos' ]
+					array( 'personFields' => 'names,emailAddresses,photos' )
 				);
 
 				// Could not find.
 				if ( empty( $person ) ) {
-					return [];
+					return array();
 				}
 
 				// Get names.
@@ -63,11 +104,11 @@ class Data extends Google_API {
 				$photos = $person->getPhotos();
 
 				// Set data.
-				$user = [
+				$user = array(
 					'name'  => isset( $names[0] ) ? $names[0]->getDisplayName() : '',
 					'email' => isset( $emails[0] ) ? $emails[0]->getValue() : '',
 					'photo' => isset( $photos[0] ) ? $photos[0]->getUrl() : '',
-				];
+				);
 
 				// Get existing values.
 				$google_login = beehive_analytics()->settings->get_options( 'google_login', $network );
@@ -89,12 +130,12 @@ class Data extends Google_API {
 				 */
 				do_action( 'beehive_after_google_user_fetch', $user );
 			} catch ( Google_Service_Exception $e ) {
-				$user = [];
+				$user = array();
 
 				// Process the exception.
 				$this->error( $e );
 			} catch ( Exception $e ) {
-				$user = [];
+				$user = array();
 
 				// Process the exception.
 				$this->error( $e );

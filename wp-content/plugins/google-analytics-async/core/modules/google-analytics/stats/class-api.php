@@ -1,4 +1,13 @@
 <?php
+/**
+ * The Google API setup class.
+ *
+ * @link    http://premium.wpmudev.org
+ * @since   3.2.0
+ *
+ * @author  Joel James <joel@incsub.com>
+ * @package Beehive\Core\Modules\Google_Analytics\Stats
+ */
 
 namespace Beehive\Core\Modules\Google_Analytics\Stats;
 
@@ -6,20 +15,17 @@ namespace Beehive\Core\Modules\Google_Analytics\Stats;
 defined( 'WPINC' ) || die;
 
 use Exception;
-use Google_Service_Exception;
+use Beehive\Google_Service_Exception;
 use Beehive\Core\Modules\Google_Auth;
-use Google_Service_AnalyticsReporting;
 use Beehive\Core\Utils\Abstracts\Google_API;
+use Beehive\Google_Service_AnalyticsReporting;
 use Beehive\Core\Modules\Google_Analytics\Helper;
-use Google_Service_AnalyticsReporting_GetReportsRequest;
+use Beehive\Google_Service_AnalyticsReporting_GetReportsRequest;
 
 /**
- * The Google API setup class.
+ * Class API
  *
- * @link   http://premium.wpmudev.org
- * @since  3.2.0
- *
- * @author Joel James <joel@incsub.com>
+ * @package Beehive\Core\Modules\Google_Analytics\Stats
  */
 class API extends Google_API {
 
@@ -46,14 +52,14 @@ class API extends Google_API {
 	 *
 	 * @return array
 	 */
-	public function process_request_types( $request_types = [], $network = false, &$exception = false ) {
+	public function process_request_types( $request_types = array(), $network = false, &$exception = false ) {
 		// Decide login source.
 		$network = Helper::instance()->login_source( $network ) === 'network';
 
 		// Setup login.
 		$this->setup( $network );
 
-		$full_reports = [];
+		$full_reports = array();
 
 		// Process each request types (different date ranges).
 		foreach ( $request_types as $type => $requests ) {
@@ -85,8 +91,8 @@ class API extends Google_API {
 	 *
 	 * @return array
 	 */
-	public function process_requests( $requests = [], &$exception = false ) {
-		$full_reports = [];
+	public function process_requests( $requests = array(), &$exception = false ) {
+		$full_reports = array();
 
 		// Make sure we don't break anything.
 		try {
@@ -112,7 +118,7 @@ class API extends Google_API {
 			}
 		} catch ( Google_Service_Exception $e ) {
 			// Oh well, failed.
-			$full_reports = [];
+			$full_reports = array();
 
 			// Perform error actions.
 			$this->error( $e );
@@ -120,7 +126,7 @@ class API extends Google_API {
 			$exception = $e;
 		} catch ( Exception $e ) {
 			// Oh well, failed generally.
-			$full_reports = [];
+			$full_reports = array();
 
 			// Perform error actions.
 			$this->error( $e );

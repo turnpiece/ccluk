@@ -12,8 +12,8 @@ class Settings extends \Hammer\WP\Settings {
 
 	public $translate;
 	public $usage_tracking = false;
-	public $uninstall_data = 'remove';
-	public $uninstall_settings = 'reset';
+	public $uninstall_data = 'keep';
+	public $uninstall_settings = 'preserve';
 	public $high_contrast_mode = false;
 
 	public function behaviors() {
@@ -43,20 +43,28 @@ class Settings extends \Hammer\WP\Settings {
 	 */
 	public static function instance() {
 		if ( is_null( self::$_instance ) ) {
-			$class           = new Settings( 'wd_main_settings', WP_Helper::is_network_activate( wp_defender()->plugin_slug ) );
+			$class           = new Settings( 'wd_main_settings',
+				WP_Helper::is_network_activate( wp_defender()->plugin_slug ) );
 			self::$_instance = $class;
 		}
 
 		return self::$_instance;
 	}
 
+	/**
+	 * @return array
+	 */
+	public function export_strings() {
+		return [];
+	}
+
 	public function labels( $key = null ) {
 		$labels = [
-			'translate'          => __( 'Translations', wp_defender()->domain ),
-			'usage_tracking'     => __( "Usage Tracking", wp_defender()->domain ),
-			'uninstall_data'     => __( 'Uninstall data', wp_defender()->domain ),
-			'uninstall_settings' => __( "Uninstall Settings", wp_defender()->domain ),
-			'high_contrast_mode' => __( "High Contrast Mode", wp_defender()->domain ),
+			'translate'          => __( 'General - Translation', wp_defender()->domain ),
+			'usage_tracking'     => __( "General - Usage Tracking", wp_defender()->domain ),
+			'uninstall_data'     => __( 'Data & Settings - Uninstalling Data', wp_defender()->domain ),
+			'uninstall_settings' => __( "Data & Settings - Uninstalling Settings", wp_defender()->domain ),
+			'high_contrast_mode' => __( "Accessibility - High Contrast Mode", wp_defender()->domain ),
 		];
 
 		if ( $key != null ) {
@@ -64,5 +72,19 @@ class Settings extends \Hammer\WP\Settings {
 		}
 
 		return $labels;
+	}
+
+	public function format_hub_data() {
+		return [
+			'translate'          => $this->translate,
+			'usage_tracking'     => $this->usage_tracking ? __( 'Activate', wp_defender()->domain ) : __( 'Inactive',
+				wp_defender()->domain ),
+			'uninstall_data'     => $this->uninstall_data === 'keep' ? __( 'Keep Data',
+				wp_defender()->domain ) : __( 'Delete Data', wp_defender()->domain ),
+			'uninstall_settings' => $this->uninstall_settings === 'preserve' ? __( 'Preserve Settings',
+				wp_defender()->domain ) : __( 'Delete Settings', wp_defender()->domain ),
+			'high_contrast_mode' => $this->high_contrast_mode ? __( 'Activate', wp_defender()->domain ) : __( 'Inactive',
+				wp_defender()->domain ),
+		];
 	}
 }

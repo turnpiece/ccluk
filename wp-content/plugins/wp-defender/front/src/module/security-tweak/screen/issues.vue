@@ -11,9 +11,14 @@
                 {{__("Activate security tweaks to strengthen your website against harmful hackers and bots who try to break in. We recommend you action as many tweaks as possible, some may require your server provider to help.")}}
             </p>
             <div v-if="summary.issues_count === 0" class="sui-notice sui-notice-success">
-                <p>
-                    {{__("You have actioned all available security tweaks, great work!")}}
-                </p>
+                <div class="sui-notice-content">
+                    <div class="sui-notice-message">
+                        <i class="sui-icon-info sui-notice-icon sui-md"></i>
+                        <p>
+                            {{__("You have actioned all available security tweaks, great work!")}}
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
         <div v-if="summary.issues_count > 0" class="sui-accordion sui-accordion-flushed">

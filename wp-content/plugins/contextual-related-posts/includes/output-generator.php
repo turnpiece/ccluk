@@ -6,7 +6,7 @@
  * @author    Ajay D'Souza
  * @license   GPL-2.0+
  * @link      https://webberzone.com
- * @copyright 2009-2019 Ajay D'Souza
+ * @copyright 2009-2020 Ajay D'Souza
  */
 
 // If this file is called directly, abort.
@@ -299,7 +299,7 @@ function crp_list_link( $args, $result ) {
 	$link            = crp_permalink( $args, $result );
 	$link_attributes = crp_link_attributes( $args );
 
-	$output .= '<a href="' . $link . '" ' . $link_attributes . '>';
+	$output .= '<a href="' . $link . '" ' . $link_attributes . ' class="' . $result->post_type . '-' . $result->ID . '">';
 
 	if ( 'after' === $args['post_thumb_op'] ) {
 		$output .= '<span class="crp_title">' . $title . '</span>'; // Add title when required by settings.
@@ -308,7 +308,7 @@ function crp_list_link( $args, $result ) {
 	if ( 'inline' === $args['post_thumb_op'] || 'after' === $args['post_thumb_op'] || 'thumbs_only' === $args['post_thumb_op'] ) {
 		$output .= crp_get_the_post_thumbnail(
 			array(
-				'postid'             => $result->ID,
+				'postid'             => $result,
 				'thumb_height'       => $args['thumb_height'],
 				'thumb_width'        => $args['thumb_width'],
 				'thumb_meta'         => $args['thumb_meta'],

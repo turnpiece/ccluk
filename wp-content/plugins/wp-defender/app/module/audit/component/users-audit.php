@@ -16,6 +16,8 @@ class Users_Audit extends Event_Abstract {
 	private $type = 'user';
 
 	public function get_hooks() {
+		$key_user_register = is_multisite() ? 'add_user_to_blog' : 'user_register';
+
 		return array(
 			'wp_login_failed'       => array(
 				'args'        => array( 'username' ),
@@ -45,7 +47,7 @@ class Users_Audit extends Event_Abstract {
 					'username' => Utils::instance()->getDisplayName( get_current_user_id() )
 				)
 			),
-			'user_register'         => array(
+			$key_user_register      => array(
 				'args'         => array( 'user_id' ),
 				'text'         => is_admin() ? sprintf( esc_html__( "%s added a new user: Username: %s, Role: %s", wp_defender()->domain ), '{{wp_user}}', '{{username}}', '{{user_role}}' )
 					: sprintf( esc_html__( "A new user registered: Username: %s, Role: %s", wp_defender()->domain ), '{{username}}', '{{user_role}}' ),
@@ -63,7 +65,7 @@ class Users_Audit extends Event_Abstract {
 						'result_property' => 'user_login'
 					),
 					'user_role' => array(
-						'callable' => array( '\WP_Defender\Module\Audit\Component\Users_Audit', 'get_user_role' ),
+						'callable' => array( self::class, 'get_user_role' ),
 						'params'   => array(
 							'{{user_id}}'
 						),
@@ -130,7 +132,7 @@ class Users_Audit extends Event_Abstract {
 				'action_type' => Audit_API::ACTION_UPDATED,
 				'event_type'  => $this->type,
 				'context'     => self::CONTEXT_PROFILE,
-				'callback'    => array( '\WP_Defender\Module\Audit\Component\Users_Audit', 'profile_update_callback' ),
+				'callback'    => array( self::class, 'profile_update_callback' ),
 			),
 			'retrieve_password'     => array(
 				'args'        => array( 'username' ),

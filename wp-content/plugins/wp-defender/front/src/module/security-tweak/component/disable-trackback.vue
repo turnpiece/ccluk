@@ -31,16 +31,30 @@
 							{{ __( "Status" ) }}
 						</strong>
 						<div class="sui-notice sui-notice-success">
+ <div class="sui-notice-content">
+                    <div class="sui-notice-message">
+                        <i class="sui-notice-icon sui-icon-info sui-md" aria-hidden="true"></i>
+
 							<p v-html="successReason"></p>
-						</div>
+
+                    </div>
+                </div>
+</div>
 					</div>
 					<div v-else>
 						<strong>
 							{{ __( "Status" ) }}
 						</strong>
 						<div class="sui-notice sui-notice-warning">
+ <div class="sui-notice-content">
+                    <div class="sui-notice-message">
+                        <i class="sui-notice-icon sui-icon-info sui-md" aria-hidden="true"></i>
+
 							<p v-html="errorReason"></p>
-						</div>
+
+                    </div>
+                </div>
+</div>
 						<p>
 							{{ __( "Trackbacks and pingbacks can lead to DDos attacks and tons of spam comments. If you don’t require this feature, we recommend turning it off." ) }}
 						</p>

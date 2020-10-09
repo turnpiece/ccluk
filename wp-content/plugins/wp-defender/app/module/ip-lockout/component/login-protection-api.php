@@ -82,7 +82,7 @@ class Login_Protection_Api extends Component {
 			$lock_log->save();
 			//if fail2ban, we will add that IP to blacklist
 			if ( $settings->login_protection_lockout_ban || $blacklist ) {
-				$settings->addIpToList( $model->ip, 'blacklist' );
+				$settings->addIpToList( $model->ip, 'blocklist' );
 			}
 
 			//trigger an action
@@ -160,7 +160,7 @@ class Login_Protection_Api extends Component {
 			//if fail2ban, we will add that IP to blacklist
 			$isBlacklist = false;
 			if ( $settings->detect_404_lockout_ban ) {
-				$settings->addIpToList( $model->ip, 'blacklist' );
+				$settings->addIpToList( $model->ip, 'blocklist' );
 				$isBlacklist = true;
 			}
 			do_action( 'wd_404_lockout', $model, $uri, $isBlacklist );
@@ -314,7 +314,7 @@ class Login_Protection_Api extends Component {
 				return false;
 			}
 
-			if ( ! in_array( $line[1], array( 'whitelist', 'blacklist' ) ) ) {
+			if ( ! in_array( $line[1], array( 'allowlist', 'blocklist' ) ) ) {
 				return false;
 			}
 
@@ -498,7 +498,8 @@ class Login_Protection_Api extends Component {
 					'value'   => $lastSent
 				)
 			) );
-			if ( $count >= $settings->cooldown_number_lockout ) {
+			//The number of lockouts before we turn off emails or for first attempt
+			if ( ( '0' === $count ) || ( $count >= $settings->cooldown_number_lockout ) ) {
 				$model->updateMeta( $stopTimeKey, strtotime( '+' . $settings->cooldown_period . ' hours' ) );
 				$model->updateMeta( $lastSentKey, time() );
 			}
@@ -579,10 +580,10 @@ CREATE TABLE `{$tableName2}` (
 	 */
 	public static function getIPStatusText( $ip ) {
 		if ( Settings::instance()->isWhitelist( $ip ) ) {
-			return __( "Is whitelisted", wp_defender()->domain );
+			return __( "Is allowlisted", wp_defender()->domain );
 		}
 		if ( Settings::instance()->isBlacklist( $ip ) ) {
-			return __( "Is blacklisted", wp_defender()->domain );
+			return __( "Is blocklisted", wp_defender()->domain );
 		}
 
 		$model = IP_Model::findOne( array(

@@ -1,12 +1,13 @@
 <?php
-
-// Include composer autoload.
-if ( file_exists( plugin_dir_path( BEEHIVE_PLUGIN_FILE ) . '/vendor/autoload.php' ) ) {
-	require_once plugin_dir_path( BEEHIVE_PLUGIN_FILE ) . '/vendor/autoload.php';
-} else {
-	// We need autoload.
-	wp_die( __( 'Autoloader is missing. Please run composer install if you are on development version.', 'ga_trans' ) );	 	 	 	 	   			 	
-}
+/**
+ * The core auto loader class.
+ *
+ * @link    http://premium.wpmudev.org
+ * @since   3.2.0
+ *
+ * @author  Joel James <joel@incsub.com>
+ * @package Beehive
+ */
 
 // Only if required.
 if ( ! function_exists( 'beehive_auto_loader' ) ) {
@@ -34,7 +35,7 @@ if ( ! function_exists( 'beehive_auto_loader' ) ) {
 
 		// Do a reverse loop through $file_parts to build the path to the file.
 		$namespace = '';
-		for ( $i = count( $file_parts ) - 1; $i > 0; $i -- ) {
+		for ( $i = count( $file_parts ) - 1; $i > 0; $i-- ) {
 
 			// Read the current component of the file part.
 			$current = strtolower( $file_parts[ $i ] );
@@ -65,14 +66,22 @@ if ( ! function_exists( 'beehive_auto_loader' ) ) {
 		}
 
 		// Now build a path to the file using mapping to the file location.
-		$filepath = trailingslashit( untrailingslashit( plugin_dir_path( dirname( __DIR__ ) ) ) . $namespace );
+		$filepath  = trailingslashit( untrailingslashit( plugin_dir_path( dirname( __DIR__ ) ) ) . $namespace );
 		$filepath .= $file_name;
 
 		// If the file exists in the specified path, then include it.
 		if ( file_exists( $filepath ) ) {
 			include_once $filepath;
 		} else {
-			wp_die( printf( __( 'The file attempting to be loaded at %s does not exist.', 'ga_trans' ), $filepath ) );
+			wp_die(
+				esc_html(
+					printf(
+						// translators: %s is the file path.
+						esc_html__( 'The file attempting to be loaded at %s does not exist.', 'ga_trans' ),
+						$filepath
+					)
+				)
+			);
 		}
 	}
 }

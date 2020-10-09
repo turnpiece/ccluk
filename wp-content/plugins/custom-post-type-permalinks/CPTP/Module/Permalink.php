@@ -37,6 +37,13 @@ class CPTP_Module_Permalink extends CPTP_Module {
 			apply_filters( 'cptp_attachment_link_priority', 20 ),
 			2
 		);
+
+		add_filter(
+			'wpml_st_post_type_link_filter_original_slug',
+			array( $this, 'replace_post_slug_with_placeholder' ),
+			10,
+			3
+		);
 	}
 
 
@@ -48,9 +55,8 @@ class CPTP_Module_Permalink extends CPTP_Module {
 	 * @param WP_Post $post post object.
 	 * @param String  $leavename for edit.php.
 	 *
-	 * @version 2.0
-	 *
 	 * @return string
+	 * @version 2.0
 	 */
 	public function post_type_link( $post_link, $post, $leavename ) {
 		/**
@@ -91,7 +97,7 @@ class CPTP_Module_Permalink extends CPTP_Module {
 		$permalink = $wp_rewrite->get_extra_permastruct( $post_type );
 
 		$permalink = str_replace( '%post_id%', $post->ID, $permalink );
-		$permalink = str_replace( '%' . $post_type . '_slug%', $pt_object->rewrite['slug'], $permalink );
+		$permalink = str_replace( CPTP_Module_Rewrite::get_slug_placeholder( $post_type ), $pt_object->rewrite['slug'], $permalink );
 
 		// has parent.
 		$parentsDirs = '';
@@ -113,17 +119,19 @@ class CPTP_Module_Permalink extends CPTP_Module {
 
 		// %post_id%/attachment/%attachement_name%;
 		$id = filter_input( INPUT_GET, 'post' );
-		if ( null !== $id && intval( $id ) !== $post->ID ) {
-			$parent_structure = trim( CPTP_Util::get_permalink_structure( $post->post_type ), '/' );
-			$parent_dirs      = explode( '/', $parent_structure );
-			if ( is_array( $parent_dirs ) ) {
-				$last_dir = array_pop( $parent_dirs );
-			} else {
-				$last_dir = $parent_dirs;
-			}
+		if ( 'attachment' === $post->post_type ) {
+			if ( null !== $id && intval( $id ) !== $post->ID ) {
+				$parent_structure = trim( CPTP_Util::get_permalink_structure( $post->post_type ), '/' );
+				$parent_dirs      = explode( '/', $parent_structure );
+				if ( is_array( $parent_dirs ) ) {
+					$last_dir = array_pop( $parent_dirs );
+				} else {
+					$last_dir = $parent_dirs;
+				}
 
-			if ( '%post_id%' === $parent_structure || '%post_id%' === $last_dir ) {
-				$permalink = $permalink . '/attachment/';
+				if ( '%post_id%' === $parent_structure || '%post_id%' === $last_dir ) {
+					$permalink = untrailingslashit( $permalink ) . '/attachment/';
+				}
 			}
 		}
 
@@ -139,13 +147,25 @@ class CPTP_Module_Permalink extends CPTP_Module {
 		if ( false !== strpos( $permalink, '%category%' ) ) {
 			$categories = get_the_category( $post->ID );
 			if ( $categories ) {
-				$categories = CPTP_Util::sort_terms( $categories );
+				$categories      = CPTP_Util::sort_terms( $categories );
+				$category_object = reset( $categories );
 				// phpcs:ignore
-				$category_object = apply_filters( 'post_link_category', $categories[0], $categories, $post );
+				$category_object = apply_filters( 'post_link_category', $category_object, $categories, $post );
+
+				/**
+				 * Filters the category for a post of a custom post type.
+				 *
+				 * @since 3.4.0
+				 *
+				 * @param WP_Term   $category_object Selected category.
+				 * @param WP_Term[] $categories      Categories set in post.
+				 * @param WP_Post   $post            Post object.
+				 */
+				$category_object = apply_filters( 'cptp_post_link_category', $category_object, $categories, $post );
 				$category_object = get_term( $category_object, 'category' );
 				$category        = $category_object->slug;
 				if ( $category_object->parent ) {
-					$parent = $category_object->parent;
+					$parent   = $category_object->parent;
 					$category = get_category_parents( $parent, false, '/', true ) . $category;
 				}
 			}
@@ -176,12 +196,12 @@ class CPTP_Module_Permalink extends CPTP_Module {
 				'%author%',
 			),
 			array(
-				date( 'Y', $post_date ),
-				date( 'm', $post_date ),
-				date( 'd', $post_date ),
-				date( 'H', $post_date ),
-				date( 'i', $post_date ),
-				date( 's', $post_date ),
+				gmdate( 'Y', $post_date ),
+				gmdate( 'm', $post_date ),
+				gmdate( 'd', $post_date ),
+				gmdate( 'H', $post_date ),
+				gmdate( 'i', $post_date ),
+				gmdate( 's', $post_date ),
 				$category,
 				$author,
 			),
@@ -189,6 +209,7 @@ class CPTP_Module_Permalink extends CPTP_Module {
 		);
 		$permalink = str_replace( $search, $replace, $permalink );
 		$permalink = home_url( $permalink );
+
 		return $permalink;
 	}
 
@@ -196,7 +217,7 @@ class CPTP_Module_Permalink extends CPTP_Module {
 	/**
 	 * Create %tax% -> term
 	 *
-	 * @param int    $post_id  post id.
+	 * @param int    $post_id post id.
 	 * @param string $permalink permalink uri.
 	 *
 	 * @return array
@@ -205,6 +226,7 @@ class CPTP_Module_Permalink extends CPTP_Module {
 		$search  = array();
 		$replace = array();
 
+		$post       = get_post( $post_id );
 		$taxonomies = CPTP_Util::get_taxonomies( true );
 
 		// %taxnomomy% -> parent/child
@@ -221,7 +243,19 @@ class CPTP_Module_Permalink extends CPTP_Module {
 						}
 					}
 
-					$term_obj  = reset( $newTerms );
+					$term_obj = reset( $newTerms );
+
+					/**
+					 * Filters the term for a post of a custom post type.
+					 *
+					 * @since 3.4.0
+					 *
+					 * @param WP_Term     $term_obj Selected term.
+					 * @param WP_Term[]   $terms    Terms set in post.
+					 * @param WP_Taxonomy $taxonomy Taxonomy object.
+					 * @param WP_Post     $post     Post object.
+					 */
+					$term_obj  = apply_filters( 'cptp_post_link_term', $term_obj, $terms, $taxonomy, $post );
 					$term_slug = $term_obj->slug;
 
 					if ( isset( $term_obj->parent ) && $term_obj->parent ) {
@@ -237,7 +271,7 @@ class CPTP_Module_Permalink extends CPTP_Module {
 		}
 
 		return array(
-			'search' => $search,
+			'search'  => $search,
 			'replace' => $replace,
 		);
 	}
@@ -259,13 +293,13 @@ class CPTP_Module_Permalink extends CPTP_Module {
 	/**
 	 * Fix attachment output
 	 *
-	 * @version 1.0
-	 * @since 0.8.2
-	 *
 	 * @param string $link permalink URI.
 	 * @param int    $post_id Post ID.
 	 *
 	 * @return string
+	 * @since 0.8.2
+	 *
+	 * @version 1.0
 	 */
 	public function attachment_link( $link, $post_id ) {
 		/**
@@ -299,8 +333,8 @@ class CPTP_Module_Permalink extends CPTP_Module {
 			return $link;
 		}
 
-		$permalink   = CPTP_Util::get_permalink_structure( $post_parent->post_type );
-		$post_type   = get_post_type_object( $post_parent->post_type );
+		$permalink = CPTP_Util::get_permalink_structure( $post_parent->post_type );
+		$post_type = get_post_type_object( $post_parent->post_type );
 
 		if ( empty( $post_type->_builtin ) ) {
 			if ( strpos( $permalink, '%postname%' ) < strrpos( $permalink, '%post_id%' ) && false === strrpos( $link, 'attachment/' ) ) {
@@ -314,14 +348,13 @@ class CPTP_Module_Permalink extends CPTP_Module {
 	/**
 	 * Fix taxonomy link outputs.
 	 *
-	 * @since 0.6
-	 * @version 1.0
-	 *
 	 * @param string $termlink link URI.
 	 * @param Object $term Term Object.
 	 * @param Object $taxonomy Taxonomy Object.
 	 *
 	 * @return string
+	 * @since 0.6
+	 * @version 1.0
 	 */
 	public function term_link( $termlink, $term, $taxonomy ) {
 		/**
@@ -361,8 +394,8 @@ class CPTP_Module_Permalink extends CPTP_Module {
 			$post_type = $taxonomy->object_type[0];
 		}
 
-		$front         = substr( $wp_rewrite->front, 1 );
-		$termlink      = str_replace( $front, '', $termlink );// remove front.
+		$front    = substr( $wp_rewrite->front, 1 );
+		$termlink = str_replace( $front, '', $termlink );// remove front.
 
 		$post_type_obj = get_post_type_object( $post_type );
 
@@ -370,8 +403,8 @@ class CPTP_Module_Permalink extends CPTP_Module {
 			return $termlink;
 		}
 
-		$slug          = $post_type_obj->rewrite['slug'];
-		$with_front    = $post_type_obj->rewrite['with_front'];
+		$slug       = $post_type_obj->rewrite['slug'];
+		$with_front = $post_type_obj->rewrite['with_front'];
 
 		if ( $with_front ) {
 			$slug = $front . $slug;
@@ -386,5 +419,19 @@ class CPTP_Module_Permalink extends CPTP_Module {
 		}
 
 		return $termlink;
+	}
+
+	/**
+	 * This filter is needed for WPML's compatibility. It will return
+	 * the slug placeholder instead of the original CPT slug.
+	 *
+	 * @param string  $original_slug The original CPT slug.
+	 * @param string  $post_link     The post link.
+	 * @param WP_Post $post          The post.
+	 *
+	 * @return string
+	 */
+	public function replace_post_slug_with_placeholder( $original_slug, $post_link, $post ) {
+		return CPTP_Module_Rewrite::get_slug_placeholder( $post->post_type );
 	}
 }

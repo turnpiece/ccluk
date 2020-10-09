@@ -41,7 +41,7 @@
 						<select id="bulk-action" class="sui-select-sm">
 							<option value="">{{__("Bulk action")}}</option>
 							<option value="ban">{{__("Ban")}}</option>
-							<option value="whitelist">{{__("Whitelist")}}</option>
+							<option value="whitelist">{{__("Allowlist")}}</option>
 							<option value="delete">{{__("Delete")}}</option>
 						</select>
 						<button type="submit" class="sui-button" :class="{'sui-button-onload':state.on_saving}">
@@ -103,10 +103,17 @@
 				<tr>
 					<td>
 						<div class="sui-notice">
+ <div class="sui-notice-content">
+                    <div class="sui-notice-message">
+                        <i class="sui-notice-icon sui-icon-info sui-md" aria-hidden="true"></i>
+
 							<p>
 								{{__("No lockout events have been logged within the selected time period.")}}
 							</p>
-						</div>
+
+                    </div>
+                </div>
+</div>
 					</td>
 				</tr>
 			</table>
@@ -116,10 +123,17 @@
 				<tr>
 					<td>
 						<div class="sui-notice">
+ <div class="sui-notice-content">
+                    <div class="sui-notice-message">
+                        <i class="sui-notice-icon sui-icon-info sui-md" aria-hidden="true"></i>
+
 							<p>
 								{{__("Loading logs....")}}
 							</p>
-						</div>
+
+                    </div>
+                </div>
+</div>
 					</td>
 				</tr>
 			</table>
@@ -194,7 +208,7 @@
 										        type="button" class="sui-button sui-button-ghost">
                                             <span class="sui-loading-text">
                                                 <i class="sui-icon-check-tick" aria-hidden="true"></i>
-                                                {{__("Add whitelist")}}
+                                                {{__("Add allowlist")}}
                                             </span>
 											<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
 										</button>
@@ -203,7 +217,7 @@
 										        v-if="log.ip_status==='whitelist'" type="button"
 										        class="sui-button sui-button-ghost">
                                             <span class="sui-loading-text">
-                                            {{__("Unwhitelist")}}
+                                            {{__("Unallowlist")}}
                                             </span>
 											<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
 										</button>

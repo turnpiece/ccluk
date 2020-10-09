@@ -1,4 +1,13 @@
 <?php
+/**
+ * The base class for Widgets.
+ *
+ * @link    http://premium.wpmudev.org
+ * @since   3.2.0
+ *
+ * @author  Joel James <joel@incsub.com>
+ * @package Beehive\Core\Utils\Abstracts
+ */
 
 namespace Beehive\Core\Utils\Abstracts;
 
@@ -8,12 +17,9 @@ defined( 'WPINC' ) || die;
 use WP_Widget;
 
 /**
- * The base class for Widgets.
+ * Class Widget
  *
- * @link   http://premium.wpmudev.org
- * @since  3.2.0
- *
- * @author Joel James <joel@incsub.com>
+ * @package Beehive\Core\Utils\Abstracts
  */
 abstract class Widget extends WP_Widget {
 
@@ -53,7 +59,7 @@ abstract class Widget extends WP_Widget {
 	public function update( $new, $old ) {
 		// Update each values.
 		foreach ( $new as $key => $value ) {
-			$old[ $key ] = strip_tags( stripslashes( $value ) );
+			$old[ $key ] = wp_strip_all_tags( stripslashes( $value ) );
 		}
 
 		return $old;

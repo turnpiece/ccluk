@@ -3,7 +3,7 @@
         <div class="sui-box-header">
             <h3 class="sui-box-title">
                 <i class="sui-icon-layers" aria-hidden="true"></i>
-                {{__("File Scanning")}}
+                {{__("Malware Scanning")}}
             </h3>
             <div class="sui-actions-left" v-if="scan !== null && scan.status === 'finish'">
                 <span class="sui-tag sui-tag-error"

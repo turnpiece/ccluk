@@ -1,4 +1,13 @@
 <?php
+/**
+ * The view base class of the plugin.
+ *
+ * @link    http://premium.wpmudev.org
+ * @since   3.2.0
+ *
+ * @author  Joel James <joel@incsub.com>
+ * @package Beehive\Core\Utils\Abstracts
+ */
 
 namespace Beehive\Core\Utils\Abstracts;
 
@@ -6,12 +15,9 @@ namespace Beehive\Core\Utils\Abstracts;
 defined( 'WPINC' ) || die;
 
 /**
- * The view base class of the plugin.
+ * Class View
  *
- * @link   http://premium.wpmudev.org
- * @since  3.2.0
- *
- * @author Joel James <joel@incsub.com>
+ * @package Beehive\Core\Utils\Abstracts
  */
 class View extends Base {
 
@@ -33,6 +39,7 @@ class View extends Base {
 		if ( file_exists( $file_name ) && is_readable( $file_name ) ) {
 			if ( ! empty( $args ) ) {
 				$args = (array) $args;
+				// phpcs:ignore
 				extract( $args );
 			}
 
@@ -55,14 +62,17 @@ class View extends Base {
 	 */
 	public function notice( $content, $type = 'success', $top = true, $dismiss = true ) {
 		// Available notice types.
-		$types = [ 'success', 'warning', 'error', 'info', 'purple', 'orange', 'loading' ];
+		$types = array( 'success', 'warning', 'error', 'info', 'purple', 'orange', 'loading' );
 
 		// Render notice.
-		$this->view( 'settings/common/notice', [
-			'content' => $content,
-			'type'    => in_array( $type, $types, true ) ? $type : '',
-			'top'     => $top,
-			'dismiss' => $dismiss,
-		] );
+		$this->view(
+			'settings/common/notice',
+			array(
+				'content' => $content,
+				'type'    => in_array( $type, $types, true ) ? $type : '',
+				'top'     => $top,
+				'dismiss' => $dismiss,
+			)
+		);
 	}
 }

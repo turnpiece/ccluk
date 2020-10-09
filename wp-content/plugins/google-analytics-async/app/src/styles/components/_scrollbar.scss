@@ -1,0 +1,20 @@
+@include body-class(true) {
+	// Scrollbar width.
+	*::-webkit-scrollbar {
+		width: 4px;
+		height: 4px;
+	}
+
+	// Scrollbar track.
+	*::-webkit-scrollbar-track {
+		background: #f5f5f5;
+		border-radius: 4px;
+	}
+
+	// Scrollbar handler.
+	*::-webkit-scrollbar-thumb {
+		height: 20%;
+		background: $a-color;
+		border-radius: 4px;
+	}
+}

@@ -1,0 +1,134 @@
+#tutorial {
+  .sui-box-body {
+    background-color: #FAFAFA;
+  }
+
+  .wd-tutorial-post {
+    .wd-tutorial-post-wrapper {
+      background-color: #FFFFFF;
+      border: 1px solid #E6E6E6;
+      border-radius: 4px;
+      height: 336px;
+
+      .wd-tutorial-post-body {
+        padding: 20px 20px 30px 20px;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+
+        .wd-tutorial-post-body-title {
+          a {
+            color: #333;
+            font-weight: 500;
+            letter-spacing: -0.22px;
+            line-height: 18px;
+          }
+        }
+
+        .wd-tutorial-post-body-desc {
+          margin-top: 10px;
+          margin-bottom: 0;
+          height: 66px;
+
+          a {
+            color: #888;
+            font-weight: normal;
+          }
+        }
+
+        .wd-tutorial-post-body-footer {
+          position: absolute;
+          letter-spacing: -0.25px;
+          line-height: 18px;
+          font-size: 13px;
+          height: 18px;
+          bottom: 30px;
+          left: 0;
+          padding-left: 35px;
+          padding-right: 35px;
+          width: 100%;
+
+          .wd-read-more {
+            float: left;
+          }
+
+          a {
+            color: #17A8E3;
+            font-weight: 500;
+          }
+          .time-read {
+            color: #888888;
+            float: right;
+            display: flex;
+            align-items: center;
+            i {
+              margin-right: 5px;
+            }
+          }
+        }
+      }
+
+      &:hover {
+        transform: scale(1.06);
+        transition: transform .4s;
+        box-shadow: 0 2px 7px 0 rgba(0,0,0,0.05);
+        cursor: pointer;
+
+        .wd-tutorial-post-body .wd-tutorial-post-body-footer {
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+      }
+    }
+  }
+
+  @media (min-width: 1630px) {
+    .wd-tutorial-post-img {
+      display: block;
+      max-width: 100%;
+      overflow: hidden;
+      position: relative;
+      text-align: center;
+      height: 140px;
+    }
+  }
+
+  @media (max-width: 782px) {
+    .sui-header h1 {
+      flex: none;
+    }
+
+    .sui-header .sui-actions-right{
+      margin-left: auto;
+      margin-right: 0;
+      margin-top: 0;
+    }
+
+    .sui-box-body {
+      padding-top: 30px;
+      padding-bottom: 30px;
+    }
+
+    [class*="sui-col-"] {
+      padding-left: 20px;
+      padding-right: 20px;
+      margin-bottom: 30px;
+    }
+    .wd-tutorial-post .wd-tutorial-post-wrapper .wd-tutorial-post-body .wd-tutorial-post-body-footer {
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+  }
+
+  @media (max-width: 479px) {
+    [class*="sui-col-"]:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  @media (min-width: 407px) and (max-width: 479px) {
+    .sui-image {
+      width: 382px;
+    }
+  }
+}

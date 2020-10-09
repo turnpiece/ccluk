@@ -1,5 +1,5 @@
 <template>
-    <div class="sui-wrap" :class="maybeHighContrast">
+    <div class="sui-wrap" :class="maybeHighContrast()">
         <div class="sui-box">
             <div class="sui-box-header">
                 <h3 class="sui-box-title">

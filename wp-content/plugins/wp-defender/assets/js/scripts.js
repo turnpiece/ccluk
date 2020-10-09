@@ -1,38 +1,26 @@
 window.Defender = window.Defender || {};
 
 //Added extra parameter to allow for some actions to keep modal open
-Defender.showNotification = function (type, message, closeModal) {
+Defender.showNotification = function (type, message, closeModal = false) {
     var jq = jQuery;
-    if (jq('body').find('.sui-notice-floating').size() > 0) {
-        return;
+    if (jq('body').find('#defender-notification').size() === 0) {
+        var html = '<div class="sui-floating-notices"><div role="alert" id="defender-notification" class="sui-notice" aria-live="assertive"></div></div>';
+        jq('.sui-wrap').prepend(html);
     }
-    var div = jq('<div class="sui-notice-floating"/>');
-    if (type == 'error') {
-        div.addClass('sui-notice-error');
-    } else {
-        div.addClass('sui-notice-success');
-    }
-    div.html('<p>' + message + '</p>'); //Decode the message incase it was esc_html
-    div.hide();
-    jq('.sui-wrap').prepend(div);
-    var close_modal = (typeof closeModal === 'undefined') ? true : closeModal;
-    div.fadeIn(300, function () {
-        //Check if close is enabled
-        if (close_modal) {
-            setTimeout(function () {
-                div.fadeOut(200, function () {
-                    div.remove();
-                });
-            }, 5000);
+    var options = {
+        type: 'green',
+        icon: 'info',
+        dismiss: {
+            show: closeModal,
+            label: 'Click to close',
+            tooltip: 'Dismiss'
+        },
+        autoclose: {
+            timeout: 3000
         }
-    });
-    //An action has to be done. So we cant do this
-    if (close_modal) {
-        div.on('click', function () {
-            div.fadeOut(200, function () {
-                div.remove();
-            });
-        });
     }
-
-};
+    if (type === 'error') {
+        options.type = 'red';
+    }
+    SUI.openNotice('defender-notification', '<p>' + message + '</p>', options);
+}

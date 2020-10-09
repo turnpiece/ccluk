@@ -3,8 +3,8 @@
         <div class="wp-defender" id="wp-defender">
             <div class="iplockout">
                 <div class="sui-header">
-                    <h1 class="sui-header-title">{{__("IP Lockout")}}</h1>
-                    <doc-link link="https://premium.wpmudev.org/docs/wpmu-dev-plugins/defender/#ip-lockouts"></doc-link>
+                    <h1 class="sui-header-title">{{__("Firewall")}}</h1>
+                    <doc-link link="https://premium.wpmudev.org/docs/wpmu-dev-plugins/defender/#firewall"></doc-link>
                 </div>
                 <summary-box>
                     <div class="sui-summary-segment">
@@ -44,9 +44,9 @@
                                 <a @click.prevent="view='404'" data-tab="notfound_lockout"
                                    :href="adminUrl('admin.php?page=wdf-ip-lockout&view=404')">{{__("404 Detection")}}</a>
                             </li>
-                            <li :class="{current:view==='blacklist'}" class="sui-vertical-tab">
-                                <a @click.prevent="view='blacklist'" data-tab="blacklist"
-                                   :href="adminUrl('admin.php?page=wdf-ip-lockout&view=blacklist')">{{__("IP Banning")}}</a>
+                            <li :class="{current:view==='blocklist'}" class="sui-vertical-tab">
+                                <a @click.prevent="view='blocklist'" data-tab="blocklist"
+                                   :href="adminUrl('admin.php?page=wdf-ip-lockout&view=blocklist')">{{__("IP Banning")}}</a>
                             </li>
                             <li :class="{current:view==='logs'}" class="sui-vertical-tab">
                                 <a @click.prevent="view='logs'" data-tab="logs"
@@ -69,7 +69,7 @@
                             <select class="sui-mobile-nav" style="display: none;">
                                 <option value="login">{{__("Login Protection")}}</option>
                                 <option value="404">{{__("404 Detection")}}</option>
-                                <option value="blacklist">{{__("IP Banning")}}</option>
+                                <option value="blocklist">{{__("IP Banning")}}</option>
                                 <option value="logs">{{__("Logs")}}</option>
                                 <option value="notification">{{__("Notifications")}}</option>
                                 <option value="settings">{{__("Settings")}}</option>
@@ -79,7 +79,7 @@
                     </div>
                     <lockout v-show="view==='login'"></lockout>
                     <nf-lockout v-show="view==='404'"></nf-lockout>
-                    <ip-blacklist v-show="view==='blacklist'"></ip-blacklist>
+                    <ip-blacklist v-show="view==='blocklist'"></ip-blacklist>
                     <logs v-show="view==='logs'"></logs>
                     <notification v-show="view==='notification'"></notification>
                     <settings v-show="view==='settings'"></settings>

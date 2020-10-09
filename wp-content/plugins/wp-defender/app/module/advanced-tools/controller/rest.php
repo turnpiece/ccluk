@@ -12,13 +12,13 @@ use WP_Defender\Module\Advanced_Tools;
 
 class Rest extends Controller {
 	public function __construct() {
-		$namespace = 'wp-defender/v1';
+		$namespace  = 'wp-defender/v1';
 		$namespace .= '/advanced-tools';
-		$routes    = [
+		$routes     = array(
 			$namespace . '/updateSettings' => 'updateSettings',
 			$namespace . '/sendTestEmail'  => 'sendTestEmail',
 
-		];
+		);
 		$this->registerEndpoints( $routes, Advanced_Tools::getClassName() );
 	}
 
@@ -35,18 +35,18 @@ class Rest extends Controller {
 		}
 
 		//get the backup email from current user
-		$backup_email = Advanced_Tools\Component\Auth_API::getBackupEmail( get_current_user_id() );
+		$backup_email = \WP_Defender\Module\Two_Factor\Component\Auth_API::getBackupEmail( get_current_user_id() );
 		$subject      = wp_kses_post( HTTP_Helper::retrievePost( 'email_subject' ) );
 		$sender       = HTTP_Helper::retrievePost( 'email_sender' );
 		$body         = wp_kses_post( HTTP_Helper::retrievePost( 'email_body' ) );
-		$params       = [
+		$params       = array(
 			'pass_code'    => '[a-sample-passcode]',
-			'display_name' => Utils::instance()->getDisplayName()
-		];
+			'display_name' => Utils::instance()->getDisplayName(),
+		);
 		foreach ( $params as $key => $param ) {
 			$body = str_replace( "{{$key}}", $param, $body );
 		}
-		$headers = [ 'Content-Type: text/html; charset=UTF-8' ];
+		$headers = array( 'Content-Type: text/html; charset=UTF-8' );
 		if ( $sender ) {
 			$from_email = get_bloginfo( 'admin_email' );
 			$headers[]  = sprintf( 'From: %s <%s>', $sender, $from_email );
@@ -54,13 +54,17 @@ class Rest extends Controller {
 
 		$send_mail = wp_mail( $backup_email, $subject, $body, $headers );
 		if ( $send_mail ) {
-			wp_send_json_success( array(
-				'message' => __( 'Test email has been sent to your email.', wp_defender()->domain ),
-			) );
+			wp_send_json_success(
+				array(
+					'message' => __( 'Test email has been sent to your email.', wp_defender()->domain ),
+				)
+			);
 		} else {
-			wp_send_json_error( array(
-				'message' => __( 'Test email failed.', wp_defender()->domain ),
-			) );
+			wp_send_json_error(
+				array(
+					'message' => __( 'Test email failed.', wp_defender()->domain ),
+				)
+			);
 		}
 
 	}
@@ -81,8 +85,9 @@ class Rest extends Controller {
 		$data     = json_decode( $data, true );
 		$module   = $data['module'];
 		$settings = $data['settings'];
-		if ( $module == 'auth' ) {
-			$model = Advanced_Tools\Model\Auth_Settings::instance();
+		if ( 'security-headers' === $module ) {
+			$model    = Advanced_Tools\Model\Security_Headers_Settings::instance();
+			$settings = apply_filters( 'processing_security_headers', $settings );
 		} else {
 			$model = Advanced_Tools\Model\Mask_Settings::instance();
 		}
@@ -90,13 +95,13 @@ class Rest extends Controller {
 		if ( $model->validate() ) {
 			$model->save();
 			$res = array(
-				'message' => __( "Your settings have been updated.", wp_defender()->domain )
+				'message' => __( 'Your settings have been updated.', wp_defender()->domain ),
 			);
 			$this->submitStatsToDev();
 			wp_send_json_success( $res );
 		} else {
 			$res = array(
-				'message' => implode( '<br/>', $model->getErrors() )
+				'message' => implode( '<br/>', $model->getErrors() ),
 			);
 			wp_send_json_error( $res );
 		}

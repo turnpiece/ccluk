@@ -3,11 +3,9 @@
         <div class="file-scanning">
             <div class="sui-header">
                 <h1 class="sui-header-title">
-                    {{__("File Scanning")}}
+                    {{__("Malware Scanning")}}
                 </h1>
-                <div class="sui-actions-right">
-                    <doc-link link="https://premium.wpmudev.org/docs/wpmu-dev-plugins/defender/#security-scans"></doc-link>
-                </div>
+                 <doc-link link="https://premium.wpmudev.org/docs/wpmu-dev-plugins/defender/#malware-scanning"></doc-link>
             </div>
             <div class="sui-box sui-message">
                 <img v-if="maybeHideBranding() === false" :src="assetUrl('/assets/img/no-scan-man.svg')" class="sui-image" aria-hidden="true">

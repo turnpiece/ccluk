@@ -58,10 +58,17 @@
                             {{ __( "Status" ) }}
                         </strong>
                         <div class="sui-notice sui-notice-success">
+ <div class="sui-notice-content">
+                    <div class="sui-notice-message">
+                        <i class="sui-notice-icon sui-icon-info sui-md" aria-hidden="true"></i>
+
                             <p>
                                 {{__("You have the latest version of WordPress installed, good stuff!")}}
                             </p>
-                        </div>
+
+                    </div>
+                </div>
+</div>
                     </div>
                 </div>
                 <div v-if="status==='issues'" class="sui-box-footer">

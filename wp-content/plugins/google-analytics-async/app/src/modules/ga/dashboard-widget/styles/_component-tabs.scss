@@ -1,0 +1,142 @@
+@include body-class(true) {
+	.beehive-tabs {
+		display: flex;
+		flex-direction: column-reverse;
+
+		.beehive-tabs-menu {
+			position: relative;
+			display: block;
+			flex: 0 0 auto;
+			margin: 0 -#{$sui-gutter-md} -#{$sui-gutter-md};
+
+			.beehive-tabs-menu-wrapper {
+				display: flex;
+				overflow: scroll;
+			}
+
+			.beehive-tab {
+				min-width: 182px;
+				flex: 0 0 auto;
+				cursor: pointer;
+				display: block;
+				margin: 0;
+				padding: 12px $sui-gutter-md;
+				border: 0;
+				background-color: $white;
+				color: palette(gray, light);
+				font: 500 12px/16px $font;
+				letter-spacing: normal;
+				text-align: left;
+				-webkit-tap-highlight-color: transparent;
+				transition: $transition;
+
+				* {
+					pointer-events: none;
+				}
+
+				.beehive-item-wrapper {
+					display: block;
+				}
+
+				.beehive-item-title {
+					overflow: hidden;
+					display: block;
+					margin: 0 0 6px;
+					font-weight: 600;
+					text-transform: uppercase;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+				}
+
+				.beehive-item-stats {
+					display: flex;
+					align-items: center;
+
+					.beehive-item-value {
+						min-width: 1px;
+						flex: 1;
+					}
+
+					.beehive-item-trend {
+						margin-left: 5px;
+						flex: 0 0 auto;
+					}
+				}
+
+				.beehive-item-value {
+					display: block;
+					color: palette(gray, default);
+					font-size: 25px;
+					line-height: 33px;
+				}
+
+				.beehive-item-trend {
+					[class*='sui-icon-'] {
+						margin-right: 5px;
+
+						&:before {
+							color: inherit;
+						}
+					}
+
+					&.beehive-red {
+						color: $red;
+					}
+
+					&.beehive-green {
+						color: $green;
+					}
+				}
+
+				&:not(.beehive-empty-tab) {
+					&,
+					&:hover,
+					&:focus {
+						outline: none;
+						box-shadow: none;
+					}
+
+					&:hover,
+					&:focus,
+					&.beehive-active {
+						background-color: rgba(23, 168, 227, 0.03);
+						box-shadow: inset 0 -2px 0 0 $blue;
+
+						&,
+						.beehive-item-value {
+							color: $blue;
+						}
+					}
+
+					&.beehive-active {
+						box-shadow: inset 0 -2px 0 0 $blue;
+						background-color: rgba(23, 168, 227, 0.03);
+					}
+				}
+
+				&.beehive-empty-tab {
+					pointer-events: none;
+				}
+			}
+		}
+
+		.beehive-tab-panel {
+			.beehive-chart {
+				height: 220px;
+			}
+		}
+	}
+
+	// SIZE: Normal.
+	&:not(.beehive-widget-small) {
+		.beehive-tabs {
+			.beehive-tabs-menu {
+				margin: 0 -#{$sui-gutter} -#{$sui-gutter};
+
+				.beehive-tab {
+					padding-left: $sui-gutter;
+				}
+			}
+		}
+	}
+}

@@ -121,7 +121,7 @@ class Login_Listener extends Controller {
 			$model->save();
 
 			//add to blacklist
-			Settings::instance()->addIpToList( $model->ip, 'blacklist' );
+			Settings::instance()->addIpToList( $model->ip, 'blocklist' );
 			$this->log( $username, Log_Model::AUTH_LOCK, sprintf( esc_html__( "Failed login attempt with a ban username %s", wp_defender()->domain ), $username ) );
 		} else {
 			$model->status          = IP_Model::STATUS_BLOCKED;
@@ -130,7 +130,7 @@ class Login_Listener extends Controller {
 			$model->lock_time       = time();
 			$model->save();
 			if ( $scenario === 'ban' ) {
-				$settings->addIpToList( $model->ip, 'blacklist' );
+				$settings->addIpToList( $model->ip, 'blocklist' );
 			}
 			$this->log( $username, Log_Model::AUTH_LOCK, __( "Lockout occurred: Too many failed login attempts", wp_defender()->domain ) );
 		}

@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+// Overwrite font path.
+$sui-font-path: '~@wpmudev/shared-ui/dist/fonts/';
+
+// ============================================================
+// Shared UI.
+// Import original shared-ui styles.
+@import '~@wpmudev/shared-ui/scss/functions';
+@import '~@wpmudev/shared-ui/scss/colors';
+@import '~@wpmudev/shared-ui/scss/variables';
+
+$sui-version: 'beehive-' + $sui-version;
+$sui-wrap-class: 'beehive-widget-wrap';
+
+// Continue importing shared-ui styles.
+@import '~@wpmudev/shared-ui/scss/mixins';
+@import '~@wpmudev/shared-ui/scss/accessibility';
+@import '~@wpmudev/shared-ui/scss/animations';
+@import '~@wpmudev/shared-ui/scss/typography';
+@import '~@wpmudev/shared-ui/scss/icons';
+@import '~@wpmudev/shared-ui/scss/buttons';
+@import '~@wpmudev/shared-ui/scss/tabs';
+@import '~@wpmudev/shared-ui/scss/scores';
+@import '~@wpmudev/shared-ui/scss/notifications';
+@import '~@wpmudev/shared-ui/scss/calendar-range';
+
+// Components.
+@import '../../../styles/components/scrollbar';
+@import '../../../styles/components/calendar-range';
+
+// Widgets Styles.
+@import 'widget-wrapper';
+@import 'widget-header';
+@import 'widget-body';
+@import 'component-box';
+@import 'component-tabs';
+@import 'component-grid';
+@import 'component-utils';
+@import 'component-table';
+@import 'component-buttons';
+@import 'component-users-donut';

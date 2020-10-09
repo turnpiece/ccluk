@@ -10,6 +10,7 @@ use Hammer\Helper\Log_Helper;
 use Hammer\Helper\WP_Helper;
 use WP_Defender\Behavior\Utils;
 use WP_Defender\Component\Error_Code;
+use WP_Defender\Module\Audit\Model\Events;
 use WP_Defender\Module\Audit\Model\Settings;
 
 class Audit_API extends Component {
@@ -18,14 +19,14 @@ class Audit_API extends Component {
 	public static $end_point = 'audit.wpmudev.org';
 
 	/**
-	 * @param array $filter
-	 * @param string $order_by
-	 * @param string $order
+	 * @param  array  $filter
+	 * @param  string  $order_by
+	 * @param  string  $order
 	 *
 	 * @return array|mixed|object|\WP_Error
 	 */
 	public static function pullLogs( $filter = array(), $order_by = 'timestamp', $order = 'desc', $nopaging = false ) {
-		$data = $filter;
+		$data             = $filter;
 		$data['site_url'] = network_site_url();
 		$data['order_by'] = $order_by;
 		$data['order']    = $order;
@@ -33,8 +34,10 @@ class Audit_API extends Component {
 		$data['timezone'] = get_option( 'gmt_offset' );
 		//if timezone is 9.5 mean we will convert it manually to UTC before submit
 		if ( $data['timezone'] == '9.5' ) {
-			$dateFrom          = Utils::instance()->formatDateTime( Utils::instance()->localToUtc( $data['date_from'] ), false );
-			$dateTo            = Utils::instance()->formatDateTime( Utils::instance()->localToUtc( $data['date_to'] ), false );
+			$dateFrom          = Utils::instance()->formatDateTime( Utils::instance()->localToUtc( $data['date_from'] ),
+				false );
+			$dateTo            = Utils::instance()->formatDateTime( Utils::instance()->localToUtc( $data['date_to'] ),
+				false );
 			$data['date_from'] = $dateFrom;
 			$data['date_to']   = $dateTo;
 			$data['timezone']  = '0';
@@ -63,18 +66,20 @@ class Audit_API extends Component {
 			return $results;
 		}
 
-		return new \WP_Error( Error_Code::API_ERROR, sprintf( __( "Whoops, Defender had trouble loading up your event log. You can try a <a href='%s'class=''>​quick refresh</a>​ of this page or check back again later.", wp_defender()->domain ),
-			network_admin_url( 'admin.php?page=wdf-logging' ) ) );
+		return new \WP_Error( Error_Code::API_ERROR,
+			sprintf( __( "Whoops, Defender had trouble loading up your event log. You can try a <a href='%s'class=''>​quick refresh</a>​ of this page or check back again later.",
+				wp_defender()->domain ),
+				network_admin_url( 'admin.php?page=wdf-logging' ) ) );
 	}
 
 	/**
-	 * @param array $filter
+	 * @param  array  $filter
 	 *
 	 * @return array|mixed|object|\WP_Error
 	 */
 	public static function pullLogsSummary( $filter = array() ) {
 		$data             = $filter;
-		$data['site_url']  = network_site_url();
+		$data['site_url'] = network_site_url();
 		$data['timezone'] = get_option( 'gmt_offset' );
 		if ( $data['timezone'] == '9.5' ) {
 			//little case for 9.5 timezone
@@ -128,8 +133,10 @@ class Audit_API extends Component {
 			return $results;
 		}
 
-		return new \WP_Error( Error_Code::API_ERROR, sprintf( __( "Whoops, Defender had trouble loading up your event log. You can try a <a href='%s'class=''>​quick refresh</a>​ of this page or check back again later.", wp_defender()->domain ),
-			network_admin_url( 'admin.php?page=wdf-logging' ) ) );
+		return new \WP_Error( Error_Code::API_ERROR,
+			sprintf( __( "Whoops, Defender had trouble loading up your event log. You can try a <a href='%s'class=''>​quick refresh</a>​ of this page or check back again later.",
+				wp_defender()->domain ),
+				network_admin_url( 'admin.php?page=wdf-logging' ) ) );
 	}
 
 	/**
@@ -218,9 +225,11 @@ class Audit_API extends Component {
 
 	/**
 	 * @param $data
+	 *
+	 * @return array|mixed|object|\WP_Error
 	 */
 	public static function curlToAPI( $data ) {
-		Utils::instance()->devCall( 'http://' . self::$end_point . '/logs/add_multiple', $data, array(
+		return Utils::instance()->devCall( 'https://' . self::$end_point . '/logs/add_multiple', $data, array(
 			'method'  => 'POST',
 			'timeout' => 3,
 			'headers' => array(
@@ -288,7 +297,7 @@ class Audit_API extends Component {
 	}
 
 	/**
-	 * @param bool $clearCron
+	 * @param  bool  $clearCron
 	 *
 	 * @return false|int
 	 * @deprecated
@@ -306,12 +315,16 @@ class Audit_API extends Component {
 				break;
 			case '7':
 			default:
-				$timeString     = date( 'Y-m-d', strtotime( $settings->day . ' this week' ) ) . ' ' . $settings->time . ':00';
-				$nextTimeString = date( 'Y-m-d', strtotime( $settings->day . ' next week' ) ) . ' ' . $settings->time . ':00';
+				$timeString     = date( 'Y-m-d',
+						strtotime( $settings->day . ' this week' ) ) . ' ' . $settings->time . ':00';
+				$nextTimeString = date( 'Y-m-d',
+						strtotime( $settings->day . ' next week' ) ) . ' ' . $settings->time . ':00';
 				break;
 			case '30':
-				$timeString     = date( 'Y-m-d', strtotime( $settings->day . ' this month' ) ) . ' ' . $settings->time . ':00';
-				$nextTimeString = date( 'Y-m-d', strtotime( $settings->day . ' next month' ) ) . ' ' . $settings->time . ':00';
+				$timeString     = date( 'Y-m-d',
+						strtotime( $settings->day . ' this month' ) ) . ' ' . $settings->time . ':00';
+				$nextTimeString = date( 'Y-m-d',
+						strtotime( $settings->day . ' next month' ) ) . ' ' . $settings->time . ':00';
 				break;
 		}
 
@@ -366,6 +379,82 @@ class Audit_API extends Component {
 
 		WP_Helper::getArrayCache()->set( 'event_types', array_unique( $event_types ) );
 		WP_Helper::getArrayCache()->set( 'dictionary', $dictionary );
+	}
+
+	/**
+	 * Return summary data
+	 * @param bool $for_hub
+	 *
+	 * @return array|\WP_Error
+	 */
+	public static function summary( $for_hub = false ) {
+		$thirty_days_args = [
+			'date_from' => date( 'Y-m-d', strtotime( '-30 days', current_time( 'timestamp' ) ) ) . ' 00:00:00',
+			'date_to'   => date( 'Y-m-d' ) . ' 23:59:59'
+		];
+
+		if ( Events::instance()->hasData() ) {
+			Utils::instance()->log( 'Pull log from local' );
+			$events = Events::instance()->getData( $thirty_days_args );
+		} else {
+			Utils::instance()->log( 'Pull log from API' );
+			$events = Audit_API::pullLogs( $thirty_days_args );
+		}
+
+		if ( is_wp_error( $events ) ) {
+			wp_send_json_error( array(
+				'message' => $events->get_error_message()
+			) );
+		}
+
+		Utils::instance()->log( sprintf( "Summary events %d", count( $events['data'] ) ), "audit" );
+
+		$last_event_date = __( "Never", wp_defender()->domain );
+		$week_count      = 0;
+		$month_count     = 0;
+		$day_count       = 0;
+		$last_7_days     = 0;
+		$last_30_days    = 0;
+		if ( $events['total_items'] > 0 ) {
+			$min_month_date = new \DateTime( date( 'Y-m-d',
+				strtotime( 'first day of this month', current_time( 'timestamp' ) ) ) );
+			$min_week_date  = new \DateTime( date( 'Y-m-d', strtotime( '-7 days', current_time( 'timestamp' ) ) ) );
+
+			foreach ( $events['data'] as $datum ) {
+				if ( $datum['timestamp'] > $min_week_date->setTime( 0, 0, 0 )->getTimestamp() ) {
+					$week_count += 1;
+				}
+				if ( $datum['timestamp'] > $min_month_date->setTime( 0, 0, 0 )->getTimestamp() ) {
+					$month_count += 1;
+				}
+				if ( $datum['timestamp'] > strtotime( '-24 hours', current_time( 'timestamp' ) ) ) {
+					$day_count ++;
+				}
+				if ( $datum['timestamp'] > strtotime( '-7 days', current_time( 'timestamp' ) ) ) {
+					$last_7_days ++;
+				}
+				if ( $datum['timestamp'] > strtotime( '-30 days', current_time( 'timestamp' ) ) ) {
+					$last_30_days ++;
+				}
+			}
+
+			$last_event_date = $events['data'][0]['timestamp'];
+			if ( is_array( $last_event_date ) ) {
+				$last_event_date = $last_event_date[0];
+			}
+			$last_event_date = $for_hub
+				? date( 'Y-m-d H:i:s', $last_event_date )
+				: Utils::instance()->formatDateTime( date( 'Y-m-d H:i:s', $last_event_date ) );
+		}
+
+		return [
+			'monthCount'   => $month_count,
+			'lastEvent'    => $last_event_date,
+			'weekCount'    => $week_count,
+			'day_count'    => $day_count,
+			'last_7_days'  => $last_7_days,
+			'last_30_days' => $last_30_days
+		];
 	}
 
 	/**

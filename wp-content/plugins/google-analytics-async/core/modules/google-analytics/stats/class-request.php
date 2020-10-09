@@ -1,4 +1,13 @@
 <?php
+/**
+ * The Google API request setup class.
+ *
+ * @link    http://premium.wpmudev.org
+ * @since   3.2.0
+ *
+ * @author  Joel James <joel@incsub.com>
+ * @package Beehive\Core\Modules\Google_Analytics\Stats
+ */
 
 namespace Beehive\Core\Modules\Google_Analytics\Stats;
 
@@ -6,25 +15,23 @@ namespace Beehive\Core\Modules\Google_Analytics\Stats;
 defined( 'WPINC' ) || die;
 
 use Exception;
+use Beehive\Core\Helpers\General;
 use Beehive\Core\Utils\Abstracts\Base;
-use Google_Service_AnalyticsReporting_Metric;
-use Google_Service_AnalyticsReporting_OrderBy;
 use Beehive\Core\Modules\Google_Analytics\Data;
-use Google_Service_AnalyticsReporting_Dimension;
-use Google_Service_AnalyticsReporting_DateRange;
 use Beehive\Core\Modules\Google_Analytics\Helper;
-use Google_Service_AnalyticsReporting_ReportRequest;
-use Google_Service_AnalyticsReporting_DimensionFilter;
-use Google_Service_AnalyticsReporting_MetricFilterClause;
-use Google_Service_AnalyticsReporting_DimensionFilterClause;
+use Beehive\Google_Service_AnalyticsReporting_Metric;
+use Beehive\Google_Service_AnalyticsReporting_OrderBy;
+use Beehive\Google_Service_AnalyticsReporting_Dimension;
+use Beehive\Google_Service_AnalyticsReporting_DateRange;
+use Beehive\Google_Service_AnalyticsReporting_ReportRequest;
+use Beehive\Google_Service_AnalyticsReporting_DimensionFilter;
+use Beehive\Google_Service_AnalyticsReporting_MetricFilterClause;
+use Beehive\Google_Service_AnalyticsReporting_DimensionFilterClause;
 
 /**
- * The Google API request setup class.
+ * Class Request
  *
- * @link   http://premium.wpmudev.org
- * @since  3.2.0
- *
- * @author Joel James <joel@incsub.com>
+ * @package Beehive\Core\Modules\Google_Analytics\Stats
  */
 class Request extends Base {
 
@@ -88,6 +95,9 @@ class Request extends Base {
 	 * @since 3.2.0
 	 */
 	public function __construct() {
+		// Make sure the autoloader is ready.
+		General::vendor_autoload();
+
 		// Setup API object.
 		$this->api = API::instance();
 	}
@@ -107,7 +117,7 @@ class Request extends Base {
 	 * @return array $requests
 	 */
 	public function get( $type, $from, $to, $network = false ) {
-		$requests = [];
+		$requests = array();
 
 		$this->network         = $network;
 		$this->current_period  = $this->get_period( $from, $to );
@@ -116,14 +126,14 @@ class Request extends Base {
 		switch ( $type ) {
 			// Stats page.
 			case 'stats':
-				$requests = [
+				$requests = array(
 					// These stats will have multiple date range values.
-					'multiple' => [
+					'multiple' => array(
 						$this->summary(),
 						$this->top_pages(),
-					],
+					),
 					// Current date range stats.
-					'current'  => [
+					'current'  => array(
 						$this->top_countries(),
 						$this->mediums(),
 						$this->search_engines(),
@@ -134,29 +144,29 @@ class Request extends Base {
 						$this->page_sessions(),
 						$this->average_sessions(),
 						$this->bounce_rates(),
-					],
+					),
 					// Previous date range stats.
-					'previous' => [
+					'previous' => array(
 						$this->sessions( false ),
 						$this->users( false ),
 						$this->pageviews( false ),
 						$this->page_sessions( false ),
 						$this->average_sessions( false ),
 						$this->bounce_rates( false ),
-					],
-				];
+					),
+				);
 				break;
 			// Dashboard widget.
 			case 'dashboard':
-				$requests = [
+				$requests = array(
 					// These stats will have multiple date range values.
-					'multiple' => [
+					'multiple' => array(
 						$this->summary(),
-						$this->top_pages(),
-					],
+						$this->top_pages( 5 ),
+					),
 					// Current date range stats.
-					'current'  => [
-						$this->top_countries(),
+					'current'  => array(
+						$this->top_countries( true, 5 ),
 						$this->mediums(),
 						$this->search_engines(),
 						$this->social_networks(),
@@ -166,15 +176,25 @@ class Request extends Base {
 						$this->page_sessions(),
 						$this->average_sessions(),
 						$this->bounce_rates(),
-					],
-				];
+					),
+				);
 				break;
 			// Popular posts widget.
 			case 'popular_widget':
-				$requests = [
-					'current' => [ $this->popular_pages() ],
-				];
+				$requests = array(
+					'current' => array( $this->popular_pages() ),
+				);
 				break;
+
+			case 'summary':
+				$requests = array(
+					'multiple' => array( $this->summary() ),
+					'current'  => array(
+						$this->popular_pages( 1 ),
+						$this->search_engines( true, 1 ),
+						$this->mediums( true, 1 ),
+					),
+				);
 		}
 
 		return $requests;
@@ -192,7 +212,7 @@ class Request extends Base {
 	 * @return Google_Service_AnalyticsReporting_ReportRequest[]
 	 */
 	public function post( $post_id, $from, $to ) {
-		$requests = [];
+		$requests = array();
 
 		// Get page permalink.
 		$url = get_permalink( $post_id );
@@ -200,10 +220,10 @@ class Request extends Base {
 		// Only when valid post id is found.
 		if ( ! empty( $url ) ) {
 			// Setup dates.
-			$periods = [
+			$periods = array(
 				$this->get_period( $from, $to ),
 				$this->get_previous_period( $from, $to ),
-			];
+			);
 
 			// If the current page is home page.
 			if ( trailingslashit( network_site_url() ) === trailingslashit( $url ) ) {
@@ -217,24 +237,29 @@ class Request extends Base {
 			$this->setup_account();
 
 			// Filter based on the post id.
-			$dimension_filters[] = $this->get_dimension_filter( [
-				'pagePath' => [
-					'value'    => $url,
-					'operator' => 'EXACT',
-				],
-			] );
+			$dimension_filters[] = $this->get_dimension_filter(
+				array(
+					'pagePath' => array(
+						'value'    => $url,
+						'operator' => 'EXACT',
+					),
+				)
+			);
 
 			// Set summary request.
-			$metrics = $this->get_metrics( [
-				'sessions',
-				'pageviews',
-				'users',
-				'pageviewsPerSession',
-				'avgSessionDuration',
-				'bounceRate',
-			], 'summary' );
+			$metrics = $this->get_metrics(
+				array(
+					'sessions',
+					'pageviews',
+					'users',
+					'pageviewsPerSession',
+					'avgSessionDuration',
+					'bounceRate',
+				),
+				'summary'
+			);
 
-			$requests['multiple'] = [ $this->get_request( $periods, $metrics, [], [], $dimension_filters ) ];
+			$requests['multiple'] = array( $this->get_request( $periods, $metrics, array(), array(), $dimension_filters ) );
 		}
 
 		return $requests;
@@ -251,26 +276,30 @@ class Request extends Base {
 	 */
 	public function summary() {
 		// Setup dates.
-		$periods = [
+		$periods = array(
 			// Current period.
 			$this->current_period,
 			// We need stats for the previous period also.
 			$this->previous_period,
-		];
+		);
 
 		// Setup account.
 		$this->setup_account( $this->network );
 
 		// Set summary request.
-		$metrics = $this->get_metrics( [
-			'sessions',
-			'pageviews',
-			'users',
-			'pageviewsPerSession',
-			'avgSessionDuration',
-			'bounceRate',
-			'percentNewSessions',
-		], 'summary' );
+		$metrics = $this->get_metrics(
+			array(
+				'sessions',
+				'pageviews',
+				'users',
+				'pageviewsPerSession',
+				'avgSessionDuration',
+				'bounceRate',
+				'percentNewSessions',
+				'newUsers',
+			),
+			'summary'
+		);
 
 		return $this->get_request( $periods, $metrics );
 	}
@@ -280,16 +309,18 @@ class Request extends Base {
 	 *
 	 * This is not required in network admin.
 	 *
+	 * @param int $page_size Page size.
+	 *
 	 * @since 3.2.0
 	 *
 	 * @return Google_Service_AnalyticsReporting_ReportRequest
 	 */
-	public function popular_pages() {
+	public function popular_pages( $page_size = 0 ) {
 		// Setup dates.
-		$periods = [ $this->current_period ];
+		$periods = array( $this->current_period );
 
 		// Setup account.
-		$this->setup_account();
+		$this->setup_account( $this->network );
 
 		/**
 		 * Filter hook to modify no. of popular page items required.
@@ -299,126 +330,135 @@ class Request extends Base {
 		 *
 		 * @since 3.2.0
 		 */
-		$page_size = apply_filters( 'beehive_google_analytics_request_popular_posts_size', 0, $this->network );
+		$page_size = apply_filters( 'beehive_google_analytics_request_popular_posts_size', $page_size, $this->network );
 
 		// Set top pages request.
-		$metrics = $this->get_metrics( [ 'pageviews' ], 'pages' );
+		$metrics = $this->get_metrics( array( 'pageviews' ), 'pages' );
 
-		$dimensions = $this->get_dimensions( [ 'hostname', 'pageTitle', 'pagePath' ] );
+		$dimensions = $this->get_dimensions( array( 'hostname', 'pageTitle', 'pagePath' ) );
 
-		$orders = $this->get_orders( [ 'pageviews' ] );
+		// Order by pageviews.
+		$orders = $this->get_orders( array( 'pageviews' ) );
 
-		return $this->get_request( $periods, $metrics, $dimensions, $orders, [], [], $page_size );
+		return $this->get_request( $periods, $metrics, $dimensions, $orders, array(), array(), $page_size );
 	}
 
 	/**
 	 * Set API request for top visited pages stats.
 	 *
+	 * @param int $page_size Page size.
+	 *
 	 * @since 3.2.0
 	 *
 	 * @return Google_Service_AnalyticsReporting_ReportRequest
 	 */
-	public function top_pages() {
+	public function top_pages( $page_size = 25 ) {
 		// Setup dates.
-		$periods = [
+		$periods = array(
 			// Current period.
 			$this->current_period,
 			// We need stats for the previous period also.
 			$this->previous_period,
-		];
+		);
 
 		// Setup account.
 		$this->setup_account( $this->network );
 
+		/**
+		 * Filter hook to modify no. of pages required.
+		 *
+		 * @param int  $page_size Page size (default is 0 for all).
+		 * @param bool $network   Network flag.
+		 *
+		 * @since 3.2.4
+		 */
+		$page_size = apply_filters( 'beehive_google_analytics_request_top_pages_size', $page_size, $this->network );
+
 		// Set top pages request.
-		$metrics = $this->get_metrics( [ 'avgSessionDuration', 'pageviews' ], 'pages' );
+		$metrics = $this->get_metrics( array( 'avgSessionDuration', 'pageviews' ), 'pages' );
 
-		$dimensions = $this->get_dimensions( [ 'hostname', 'pageTitle', 'pagePath' ] );
+		$dimensions = $this->get_dimensions( array( 'hostname', 'pageTitle', 'pagePath' ) );
 
-		$orders = $this->get_orders( [ 'pageviews' ] );
+		// Order by pageviews.
+		$orders = $this->get_orders( array( 'pageviews' ) );
 
-		return $this->get_request( $periods, $metrics, $dimensions, $orders, [], [], 25 );
+		return $this->get_request( $periods, $metrics, $dimensions, $orders, array(), array(), $page_size );
 	}
 
 	/**
 	 * Set API request for the top visited countries.
 	 *
-	 * @param bool $current Is this request is for current period.
+	 * @param bool $current   Is this request is for current period.
+	 * @param int  $page_size Page size.
 	 *
 	 * @since 3.2.0
 	 *
 	 * @return Google_Service_AnalyticsReporting_ReportRequest
 	 */
-	public function top_countries( $current = true ) {
+	public function top_countries( $current = true, $page_size = 25 ) {
 		// Setup dates.
-		$periods = [ $current ? $this->current_period : $this->previous_period ];
+		$periods = array( $current ? $this->current_period : $this->previous_period );
 
 		// Setup account.
 		$this->setup_account( $this->network );
 
+		/**
+		 * Filter hook to modify no. of countries returned.
+		 *
+		 * @param int  $page_size Page size (default is 0 for all).
+		 * @param bool $network   Network flag.
+		 *
+		 * @since 3.2.4
+		 */
+		$page_size = apply_filters( 'beehive_google_analytics_request_top_countries_size', $page_size, $this->network );
+
 		// Set top pages request.
-		$metrics = $this->get_metrics( [ 'pageviews' ], 'countries' );
+		$metrics = $this->get_metrics( array( 'pageviews' ), 'countries' );
 
-		$dimensions = $this->get_dimensions( [ 'country', 'countryIsoCode' ] );
+		$dimensions = $this->get_dimensions( array( 'country', 'countryIsoCode' ) );
 
-		$orders = $this->get_orders( [ 'pageviews' ] );
+		// Order by pageviews.
+		$orders = $this->get_orders( array( 'pageviews' ) );
 
-		return $this->get_request( $periods, $metrics, $dimensions, $orders, [], [], 25 );
+		return $this->get_request( $periods, $metrics, $dimensions, $orders, array(), array(), $page_size );
 	}
 
 	/**
 	 * Set API request for the mediums stats.
 	 *
-	 * @param bool $current Is this request is for current period.
+	 * @param bool $current   Is this request is for current period.
+	 * @param int  $page_size Page size.
 	 *
 	 * @since 3.2.0
 	 *
 	 * @return Google_Service_AnalyticsReporting_ReportRequest
 	 */
-	public function mediums( $current = true ) {
+	public function mediums( $current = true, $page_size = 0 ) {
 		// Setup dates.
-		$periods = [ $current ? $this->current_period : $this->previous_period ];
+		$periods = array( $current ? $this->current_period : $this->previous_period );
 
 		// Setup account.
 		$this->setup_account( $this->network );
 
-		// Set top pages request.
-		$metrics = $this->get_metrics( [ 'sessions' ], 'mediums' );
-
-		$dimensions = $this->get_dimensions( [ 'channelGrouping' ] );
-
-		return $this->get_request( $periods, $metrics, $dimensions );
-	}
-
-	/**
-	 * Set API request for the search engine traffic stats.
-	 *
-	 * @param bool $current Is this request is for current period.
-	 *
-	 * @since 3.2.0
-	 *
-	 * @return Google_Service_AnalyticsReporting_ReportRequest
-	 */
-	public function search_engines( $current = true ) {
-		// Setup dates.
-		$periods = [ $current ? $this->current_period : $this->previous_period ];
-
-		// Setup account.
-		$this->setup_account( $this->network );
+		/**
+		 * Filter hook to modify no. of mediums returned.
+		 *
+		 * @param int  $page_size Page size (default is 0 for all).
+		 * @param bool $network   Network flag.
+		 *
+		 * @since 3.2.4
+		 */
+		$page_size = apply_filters( 'beehive_google_analytics_request_mediums_size', $page_size, $this->network );
 
 		// Set top pages request.
-		$metrics = $this->get_metrics( [ 'sessions' ], 'search_engines' );
+		$metrics = $this->get_metrics( array( 'sessions' ), 'mediums' );
 
-		$dimensions = $this->get_dimensions( [ 'medium', 'source' ] );
+		$dimensions = $this->get_dimensions( array( 'channelGrouping' ) );
 
-		$dimension_filters[] = $this->get_dimension_filter( [
-			'medium' => [
-				'value'    => 'organic',
-				'operator' => 'EXACT',
-			],
-		] );
+		// Order by sessions.
+		$orders = $this->get_orders( array( 'sessions' ) );
 
-		return $this->get_request( $periods, $metrics, $dimensions, [], $dimension_filters );
+		return $this->get_request( $periods, $metrics, $dimensions, $orders, array(), array(), $page_size );
 	}
 
 	/**
@@ -432,17 +472,20 @@ class Request extends Base {
 	 */
 	public function social_networks( $current = true ) {
 		// Setup dates.
-		$periods = [ $current ? $this->current_period : $this->previous_period ];
+		$periods = array( $current ? $this->current_period : $this->previous_period );
 
 		// Setup account.
 		$this->setup_account( $this->network );
 
 		// Set top pages request.
-		$metrics = $this->get_metrics( [ 'sessions' ], 'social_networks' );
+		$metrics = $this->get_metrics( array( 'sessions' ), 'social_networks' );
 
-		$dimensions = $this->get_dimensions( [ 'socialNetwork' ] );
+		$dimensions = $this->get_dimensions( array( 'socialNetwork' ) );
 
-		return $this->get_request( $periods, $metrics, $dimensions );
+		// Order by sessions.
+		$orders = $this->get_orders( array( 'sessions' ) );
+
+		return $this->get_request( $periods, $metrics, $dimensions, $orders );
 	}
 
 	/**
@@ -456,19 +499,66 @@ class Request extends Base {
 	 */
 	public function sessions( $current = true ) {
 		// Setup dates.
-		$periods = [ $current ? $this->current_period : $this->previous_period ];
+		$periods = array( $current ? $this->current_period : $this->previous_period );
 
 		// Setup account.
 		$this->setup_account( $this->network );
 
 		// Set top pages request.
-		$metrics = $this->get_metrics( [ 'sessions' ], 'sessions' );
+		$metrics = $this->get_metrics( array( 'sessions' ), 'sessions' );
 
 		$period_dimension = $this->get_period_dimension();
 
-		$dimensions = $this->get_dimensions( [ $period_dimension ] );
+		$dimensions = $this->get_dimensions( array( $period_dimension ) );
 
 		return $this->get_request( $periods, $metrics, $dimensions );
+	}
+
+	/**
+	 * Set API request for the search engine traffic stats.
+	 *
+	 * @param bool $current   Is this request is for current period.
+	 * @param int  $page_size Page size.
+	 *
+	 * @since 3.2.0
+	 *
+	 * @return Google_Service_AnalyticsReporting_ReportRequest
+	 */
+	public function search_engines( $current = true, $page_size = 0 ) {
+		// Setup dates.
+		$periods = array( $current ? $this->current_period : $this->previous_period );
+
+		// Setup account.
+		$this->setup_account( $this->network );
+
+		/**
+		 * Filter hook to modify no. of search engines returned.
+		 *
+		 * @param int  $page_size Page size (default is 0 for all).
+		 * @param bool $network   Network flag.
+		 *
+		 * @since 3.2.4
+		 */
+		$page_size = apply_filters( 'beehive_google_analytics_request_search_engines_size', $page_size, $this->network );
+
+		// Set top pages request.
+		$metrics = $this->get_metrics( array( 'sessions' ), 'search_engines' );
+
+		$dimensions = $this->get_dimensions( array( 'medium', 'source' ) );
+
+		$dimension_filters[] = $this->get_dimension_filter(
+			array(
+				'medium' => array(
+					'value'    => 'organic',
+					'operator' => 'EXACT',
+				),
+			)
+		);
+
+		// Order by sessions.
+		$orders = $this->get_orders( array( 'sessions' ) );
+
+		return $this->get_request( $periods, $metrics, $dimensions, $orders, $dimension_filters, array(), $page_size );
 	}
 
 	/**
@@ -482,17 +572,17 @@ class Request extends Base {
 	 */
 	public function users( $current = true ) {
 		// Setup dates.
-		$periods = [ $current ? $this->current_period : $this->previous_period ];
+		$periods = array( $current ? $this->current_period : $this->previous_period );
 
 		// Setup account.
 		$this->setup_account( $this->network );
 
 		// Set top pages request.
-		$metrics = $this->get_metrics( [ 'users' ], 'users' );
+		$metrics = $this->get_metrics( array( 'users' ), 'users' );
 
 		$period_dimension = $this->get_period_dimension();
 
-		$dimensions = $this->get_dimensions( [ $period_dimension ] );
+		$dimensions = $this->get_dimensions( array( $period_dimension ) );
 
 		return $this->get_request( $periods, $metrics, $dimensions );
 	}
@@ -508,17 +598,17 @@ class Request extends Base {
 	 */
 	public function pageviews( $current = true ) {
 		// Setup dates.
-		$periods = [ $current ? $this->current_period : $this->previous_period ];
+		$periods = array( $current ? $this->current_period : $this->previous_period );
 
 		// Setup account.
 		$this->setup_account( $this->network );
 
 		// Set top pages request.
-		$metrics = $this->get_metrics( [ 'pageviews' ], 'pageviews' );
+		$metrics = $this->get_metrics( array( 'pageviews' ), 'pageviews' );
 
 		$period_dimension = $this->get_period_dimension();
 
-		$dimensions = $this->get_dimensions( [ $period_dimension ] );
+		$dimensions = $this->get_dimensions( array( $period_dimension ) );
 
 		return $this->get_request( $periods, $metrics, $dimensions );
 	}
@@ -534,17 +624,17 @@ class Request extends Base {
 	 */
 	public function page_sessions( $current = true ) {
 		// Setup dates.
-		$periods = [ $current ? $this->current_period : $this->previous_period ];
+		$periods = array( $current ? $this->current_period : $this->previous_period );
 
 		// Setup account.
 		$this->setup_account( $this->network );
 
 		// Set top pages request.
-		$metrics = $this->get_metrics( [ 'pageviewsPerSession' ], 'page_sessions' );
+		$metrics = $this->get_metrics( array( 'pageviewsPerSession' ), 'page_sessions' );
 
 		$period_dimension = $this->get_period_dimension();
 
-		$dimensions = $this->get_dimensions( [ $period_dimension ] );
+		$dimensions = $this->get_dimensions( array( $period_dimension ) );
 
 		return $this->get_request( $periods, $metrics, $dimensions );
 	}
@@ -560,17 +650,17 @@ class Request extends Base {
 	 */
 	public function average_sessions( $current = true ) {
 		// Setup dates.
-		$periods = [ $current ? $this->current_period : $this->previous_period ];
+		$periods = array( $current ? $this->current_period : $this->previous_period );
 
 		// Setup account.
 		$this->setup_account( $this->network );
 
 		// Set top pages request.
-		$metrics = $this->get_metrics( [ 'avgSessionDuration' ], 'average_sessions' );
+		$metrics = $this->get_metrics( array( 'avgSessionDuration' ), 'average_sessions' );
 
 		$period_dimension = $this->get_period_dimension();
 
-		$dimensions = $this->get_dimensions( [ $period_dimension ] );
+		$dimensions = $this->get_dimensions( array( $period_dimension ) );
 
 		return $this->get_request( $periods, $metrics, $dimensions );
 	}
@@ -586,17 +676,17 @@ class Request extends Base {
 	 */
 	public function bounce_rates( $current = true ) {
 		// Setup dates.
-		$periods = [ $current ? $this->current_period : $this->previous_period ];
+		$periods = array( $current ? $this->current_period : $this->previous_period );
 
 		// Setup account.
 		$this->setup_account( $this->network );
 
 		// Set top pages request.
-		$metrics = $this->get_metrics( [ 'bounceRate' ], 'bounce_rates' );
+		$metrics = $this->get_metrics( array( 'bounceRate' ), 'bounce_rates' );
 
 		$period_dimension = $this->get_period_dimension();
 
-		$dimensions = $this->get_dimensions( [ $period_dimension ] );
+		$dimensions = $this->get_dimensions( array( $period_dimension ) );
 
 		return $this->get_request( $periods, $metrics, $dimensions );
 	}
@@ -616,9 +706,9 @@ class Request extends Base {
 	 *
 	 * @return Google_Service_AnalyticsReporting_Metric[]
 	 */
-	public function get_metrics( $metrics = [], $alias = 'beehive' ) {
+	public function get_metrics( $metrics = array(), $alias = 'beehive' ) {
 		// Empty the metrics.
-		$metrics_instances = [];
+		$metrics_instances = array();
 
 		// Set each metrics.
 		foreach ( (array) $metrics as $type ) {
@@ -650,9 +740,9 @@ class Request extends Base {
 	 *
 	 * @return Google_Service_AnalyticsReporting_Dimension[]
 	 */
-	public function get_dimensions( $dimensions = [] ) {
+	public function get_dimensions( $dimensions = array() ) {
 		// Empty the dimensions.
-		$dimension_instances = [];
+		$dimension_instances = array();
 
 		// Set each metrics.
 		foreach ( (array) $dimensions as $type ) {
@@ -680,9 +770,9 @@ class Request extends Base {
 	 *
 	 * @return Google_Service_AnalyticsReporting_OrderBy[]
 	 */
-	public function get_orders( $fields = [] ) {
+	public function get_orders( $fields = array() ) {
 		// Empty the sortings.
-		$orders = [];
+		$orders = array();
 
 		// Only when fields are not empty.
 		if ( ! empty( $fields ) ) {
@@ -726,7 +816,7 @@ class Request extends Base {
 			// Set dimension name.
 			$filter->setDimensionName( "ga:{$field}" );
 			// Set value.
-			$filter->setExpressions( [ $data['value'] ] );
+			$filter->setExpressions( array( $data['value'] ) );
 			// Set operator.
 			if ( isset( $data['operator'] ) ) {
 				$filter->setOperator( $data['operator'] );
@@ -760,8 +850,8 @@ class Request extends Base {
 	public function get_period( $from, $to ) {
 		try {
 			// Make sure the dates are in proper format.
-			$from = date( 'Y-m-d', strtotime( $from ) );
-			$to   = date( 'Y-m-d', strtotime( $to ) );
+			$from = gmdate( 'Y-m-d', strtotime( $from ) );
+			$to   = gmdate( 'Y-m-d', strtotime( $to ) );
 
 			// Create date objects from the periods.
 			$date_from = date_create( $from );
@@ -773,12 +863,14 @@ class Request extends Base {
 		}
 
 		// We need to show date in month format.
-		if ( $days > 364 ) {
+		if ( $days >= 364 ) {
 			$this->period_dimension = 'yearMonth';
+		} elseif ( $days >= 89 ) {
+			$this->period_dimension = 'yearWeek';
 		} elseif ( $days > 0 ) {
 			$this->period_dimension = 'date';
 		} else {
-			$this->period_dimension = 'hour';
+			$this->period_dimension = 'dateHour';
 		}
 
 		// Create the DateRange object.
@@ -807,36 +899,16 @@ class Request extends Base {
 	public function get_previous_period( $from, $to ) {
 		$date = false;
 
-		try {
-			// Make sure the dates are in proper format.
-			$from = date( 'Y-m-d', strtotime( $from ) );
-			$to   = date( 'Y-m-d', strtotime( $to ) );
-
-			// Create date objects from the periods.
-			$date_from = date_create( $from );
-			$date_to   = date_create( $to );
-			// Get the difference between periods.
-			$days = (int) date_diff( $date_from, $date_to )->days;
-
-			if ( $days > 0 ) {
-				$previous_from = date( 'Y-m-d', strtotime( $from . ' -' . ( $days + 1 ) . ' days' ) );
-				$previous_to   = date( 'Y-m-d', strtotime( $from . ' -1 days' ) );
-			} else {
-				$previous_from = date( 'Y-m-d', strtotime( $from . ' -1 days' ) );
-				$previous_to   = $previous_from;
-			}
-		} catch ( Exception $e ) {
-			$previous_from = false;
-			$previous_to   = false;
-		}
+		// Get previous period.
+		$period = Helper::get_previous_period( $from, $to );
 
 		// Create the DateRange object.
-		if ( ! empty( $previous_from ) ) {
+		if ( ! empty( $period['from'] ) ) {
 			$date = new Google_Service_AnalyticsReporting_DateRange();
 			// Set start date.
-			$date->setStartDate( $previous_from );
+			$date->setStartDate( $period['from'] );
 			// Set end date.
-			$date->setEndDate( $previous_to );
+			$date->setEndDate( $period['to'] );
 		}
 
 		return $date;
@@ -860,7 +932,7 @@ class Request extends Base {
 	 *
 	 * @return Google_Service_AnalyticsReporting_ReportRequest
 	 */
-	public function get_request( $periods, $metrics, $dimensions = [], $orders = [], $dimention_filters = [], $metrics_filters = [], $page_size = 0 ) {
+	public function get_request( $periods, $metrics, $dimensions = array(), $orders = array(), $dimention_filters = array(), $metrics_filters = array(), $page_size = 0 ) {
 		// Create the ReportRequest object.
 		$request = new Google_Service_AnalyticsReporting_ReportRequest();
 		// Set view.
@@ -917,15 +989,14 @@ class Request extends Base {
 	 * @since 3.2.0
 	 */
 	private function get_basic_filters() {
-		$filters = [];
+		$filters = array();
 
 		// Remove unwanted items.
-		//$filters[] = $this->get_dimension_filter( [
-		//	'pagePath' => [
-		//		'value' => '!@preview=true',
-		//	],
-		//] );
-
+		// $filters[] = $this->get_dimension_filter( [
+		// 'pagePath' => [
+		// 'value' => '!@preview=true',
+		// ],
+		// ] );
 		// When subsite data is loaded from network credentials,
 		// make sure to show stats only for current site.
 		if ( ! $this->network && Helper::instance()->login_source( $this->network ) === 'network' ) {
@@ -947,33 +1018,44 @@ class Request extends Base {
 	 * @return array
 	 */
 	private function get_url_filter() {
-		$filters = [];
-
-		global $dm_map;
+		$filters = array();
 
 		// No need for network admin stats.
 		if ( $this->is_network() ) {
-			return [];
+			return array();
 		}
 
-		// Get mapped url if Domain Mapping exist.
-		$url = method_exists( $dm_map, 'domain_mapping_siteurl' ) ? $dm_map->domain_mapping_siteurl( home_url() ) : home_url();
+		// Get home url.
+		$url = home_url();
+
+		/**
+		 * Filter hook to alter the home url before filtering.
+		 *
+		 * Domain mapping plugins can use this filter to add the support.
+		 *
+		 * @param string $url Home URL.
+		 *
+		 * @since 3.2.4
+		 */
+		$url = apply_filters( 'beehive_google_analytics_request_home_url', $url );
 
 		// Remove the protocols.
-		$url_parts = explode( '/', str_replace( [ 'http://', 'https://' ], '', $url ) );
+		$url_parts = explode( '/', str_replace( array( 'http://', 'https://' ), '', $url ) );
 
 		// Incase it is empty, try site url.
 		if ( ! $url_parts ) {
-			$url_parts = explode( '/', str_replace( [ 'http://', 'https://' ], '', site_url() ) );
+			$url_parts = explode( '/', str_replace( array( 'http://', 'https://' ), '', site_url() ) );
 		}
 
 		// Set host filter.
-		$filters[] = $this->get_dimension_filter( [
-			'hostname' => [
-				'value'    => $url_parts[0],
-				'operator' => 'EXACT',
-			],
-		] );
+		$filters[] = $this->get_dimension_filter(
+			array(
+				'hostname' => array(
+					'value'    => $url_parts[0],
+					'operator' => 'EXACT',
+				),
+			)
+		);
 
 		// If its in subdirectory mode, then set correct beginning for page path.
 		if ( count( $url_parts ) > 1 ) {
@@ -981,11 +1063,13 @@ class Request extends Base {
 			$pagepath = implode( '/', $url_parts );
 
 			// Set path filter.
-			$filters[] = $this->get_dimension_filter( [
-				'pagePath' => [
-					'value' => "^/$pagepath/.*",
-				],
-			] );
+			$filters[] = $this->get_dimension_filter(
+				array(
+					'pagePath' => array(
+						'value' => "^/$pagepath/.*",
+					),
+				)
+			);
 		}
 
 		return $filters;
@@ -1014,6 +1098,7 @@ class Request extends Base {
 			if ( ! empty( $profiles ) ) {
 				// Set the first item for now.
 				$account = $profiles[0]->getId();
+				// Update the settings.
 				beehive_analytics()->settings->update( 'account_id', $account, 'google', $network );
 			}
 		}

@@ -8,24 +8,24 @@
             <div class="sui-row-with-sidenav">
                 <div class="sui-sidenav">
                     <ul class="sui-vertical-tabs sui-sidenav-hide-md">
-                        <li :class="{current:view==='two-factor-auth'}" class="sui-vertical-tab">
-                            <a @click.prevent="view='two-factor-auth'" data-tab="login_lockout"
-                               href="#2factor">{{__("Two-Factor Auth")}}</a>
-                        </li>
                         <li :class="{current:view==='mask-login'}" class="sui-vertical-tab">
                             <a @click.prevent="view='mask-login'" data-tab="notfound_lockout"
                                href="#mask-login">{{__("Mask Login Area")}}</a>
                         </li>
+                        <li :class="{current:view==='security-headers'}" class="sui-vertical-tab">
+                            <a @click.prevent="view='security-headers'" role="button"
+                               href="#">{{__("Security Headers")}}</a>
+                        </li>
                     </ul>
                     <div class="sui-sidenav-hide-lg">
                         <select class="sui-mobile-nav">
-                            <option value="two-factor-auth">{{__("Two-Factor Auth")}}</option>
-                            <option value="mask-login">{{__("Mask Login Area")}}</option>
+                            <option value="mask-login" :selected="view==='mask-login'">{{__("Mask Login Area")}}</option>
+                            <option value="security-headers" :selected="view==='security-headers'">{{__("Security Headers")}}</option>
                         </select>
                     </div>
                 </div>
-                <two-factors v-show="view==='two-factor-auth'"></two-factors>
                 <mask-login v-show="view==='mask-login'"></mask-login>
+                <security-headers v-show="view==='security-headers'"></security-headers>
             </div>
         </div>
         <app-footer></app-footer>
@@ -34,14 +34,14 @@
 
 <script>
     import base_helper from '../../helper/base_hepler';
-    import two_factors from './screen/two-factors';
     import mask_login from './screen/mask-login';
+    import security_headers from './screen/security-headers';
 
     export default {
         mixins: [base_helper],
         components: {
-            'two-factors': two_factors,
             'mask-login': mask_login,
+            'security-headers': security_headers
         },
         data: function () {
             return {
@@ -58,7 +58,7 @@
             let urlParams = new URLSearchParams(window.location.search);
             let view = urlParams.get('view');
             if (view === null) {
-                view = "two-factor-auth";
+                view = 'mask-login'
             }
             this.view = view;
         },

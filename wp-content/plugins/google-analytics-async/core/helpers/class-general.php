@@ -1,4 +1,13 @@
 <?php
+/**
+ * Defines general helper functionality of the plugin.
+ *
+ * @link    http://premium.wpmudev.org
+ * @since   3.2.0
+ *
+ * @author  Joel James <joel@incsub.com>
+ * @package Beehive\Core\Helpers
+ */
 
 namespace Beehive\Core\Helpers;
 
@@ -8,43 +17,56 @@ defined( 'WPINC' ) || die;
 use WPMUDEV_Dashboard;
 
 /**
- * Defines general helper functionality of the plugin.
+ * Class General
  *
- * @link   http://premium.wpmudev.org
- * @since  3.2.0
- *
- * @author Joel James <joel@incsub.com>
+ * @package Beehive\Core\Helpers
  */
 class General {
 
 	/**
-	 * List of plugin settings pages.
+	 * List of plugin dashboard pages.
 	 *
-	 * @var array $plugin_pages
-	 */
-	public static $pages = array(
-		'toplevel_page_beehive-settings',
-		'toplevel_page_beehive-settings-network',
-	);
-
-	/**
-	 * List of plugin dashboard stats pages.
+	 * @since 3.2.4
 	 *
-	 * @var array $plugin_pages
+	 * @var array $pages
 	 */
 	public static $dashboard_pages = array(
-		'dashboard-network',
-		'dashboard',
+		'toplevel_page_beehive',
+		'toplevel_page_beehive-network',
 	);
 
 	/**
-	 * List of plugin stats pages.
+	 * List of plugin settings pages.
 	 *
-	 * @var array $plugin_pages
+	 * @since 3.2.4
+	 *
+	 * @var array $pages
 	 */
-	public static $stats_pages = array(
-		'dashboard_page_beehive-statistics',
-		'index_page_beehive-statistics-network',
+	public static $settings_pages = array(
+		'dashboard_page_beehive-settings',
+		'dashboard_page_beehive-settings-network',
+	);
+
+	/**
+	 * List of plugin integration pages.
+	 *
+	 * @var array $pages
+	 *
+	 * @since 3.3.0
+	 */
+	public static $integrations_pages = array(
+		'dashboard_page_beehive-integrations',
+		'dashboard_page_beehive-integrations-network',
+	);
+
+	/**
+	 * List of dashboard pages.
+	 *
+	 * @var array $dashboard_pages
+	 */
+	public static $wp_dashboard_pages = array(
+		'dashboard',
+		'dashboard-network',
 	);
 
 	/**
@@ -95,33 +117,50 @@ class General {
 	}
 
 	/**
-	 * Check if current page is plugin admin page.
+	 * Check if current page is plugin dashboard page.
 	 *
-	 * @since 3.2.0
+	 * @since 3.2.4
 	 *
 	 * @return bool
 	 */
-	public static function is_plugin_admin() {
+	public static function is_plugin_dashboard() {
 		// Get current screen id.
 		$current_screen = get_current_screen();
 
 		// Check if current page is our plugin page.
-		return isset( $current_screen->id ) && in_array( $current_screen->id, self::$pages, true );
+		return isset( $current_screen->id ) && in_array( $current_screen->id, self::$dashboard_pages, true );
 	}
 
 	/**
-	 * Check if current page is plugin stats page.
+	 * Check if current page is plugin settings page.
 	 *
-	 * @since 3.2.0
+	 * @since 3.2.4
 	 *
 	 * @return bool
 	 */
-	public static function is_plugin_stats() {
+	public static function is_plugin_settings() {
 		// Get current screen id.
 		$current_screen = get_current_screen();
 
-		// Check if current page is our plugin stats page.
-		return isset( $current_screen->id ) && in_array( $current_screen->id, self::$stats_pages, true );
+		// Check if current page is our plugin page.
+		// Using strpos to support translation - https://incsub.atlassian.net/browse/BEE-15.
+		return isset( $current_screen->id ) && strpos( $current_screen->id, 'page_beehive-settings' );
+	}
+
+	/**
+	 * Check if current page is plugin accounts page.
+	 *
+	 * @since 3.3.0
+	 *
+	 * @return bool
+	 */
+	public static function is_plugin_accounts() {
+		// Get current screen id.
+		$current_screen = get_current_screen();
+
+		// Check if current page is our plugin page.
+		// Using strpos to support translation - https://incsub.atlassian.net/browse/BEE-15.
+		return isset( $current_screen->id ) && strpos( $current_screen->id, 'page_beehive-accounts' );
 	}
 
 	/**
@@ -131,12 +170,36 @@ class General {
 	 *
 	 * @return bool
 	 */
-	public static function is_plugin_dashboard_widget() {
+	public static function is_wp_dashboard_page() {
 		// Get current screen id.
 		$current_screen = get_current_screen();
 
 		// Check if current page is dashboard page.
-		return isset( $current_screen->id ) && in_array( $current_screen->id, self::$dashboard_pages, true );
+		return isset( $current_screen->id ) && in_array( $current_screen->id, self::$wp_dashboard_pages, true );
+	}
+
+	/**
+	 * Get list of page ids of plugin admin pages.
+	 *
+	 * PLEASE NOTE: Settings subpages maynot be correct when you
+	 * run a different locale.
+	 *
+	 * @since 3.2.4
+	 *
+	 * @return array
+	 */
+	public static function get_plugin_admin_pages() {
+		// Merge dashboard and settings pages.
+		$pages = array_merge( self::$dashboard_pages, self::$settings_pages );
+
+		/**
+		 * Filter the list of Beehive admin page ids.
+		 *
+		 * @param array $pages
+		 *
+		 * @since 3.2.4
+		 */
+		return apply_filters( 'beehive_admin_pages_list', $pages );
 	}
 
 	/**
@@ -216,5 +279,48 @@ class General {
 		}
 
 		return $data;
+	}
+
+	/**
+	 * Check if a given date string is in required format.
+	 *
+	 * @param string $date   Date string to check.
+	 * @param string $format Date format to check.
+	 *
+	 * @since 3.2.4
+	 *
+	 * @return bool
+	 */
+	public static function check_date_format( $date, $format = 'Y-m-d' ) {
+		$created = \DateTime::createFromFormat( $format, $date );
+
+		return $created && $created->format( $format ) === $date;
+	}
+
+	/**
+	 * Autoload vendor autoload class if required.
+	 *
+	 * This was introduced to avoid loading the composer autloader
+	 * in all pages. We need to load the autoloader only when it's
+	 * really required. Otherwise other plugins/themes using composer
+	 * will load our prefixed Google lib and throw fatal error.
+	 *
+	 * @since 3.2.7
+	 *
+	 * @return void
+	 */
+	public static function vendor_autoload() {
+		static $loaded = null;
+
+		if ( ! $loaded ) {
+			if ( file_exists( plugin_dir_path( BEEHIVE_PLUGIN_FILE ) . '/dependencies/vendor/scoper-autoload.php' ) ) {
+				require_once plugin_dir_path( BEEHIVE_PLUGIN_FILE ) . '/dependencies/vendor/scoper-autoload.php';
+			} elseif ( BEEHIVE_VERSION && version_compare( BEEHIVE_VERSION, '3.2.4', '>' ) ) {
+				// We need autoload.
+				wp_die( esc_html__( 'Autoloader is missing. Please run composer install if you are on development version.', 'ga_trans' ) );
+			}
+
+			$loaded = true;
+		}
 	}
 }

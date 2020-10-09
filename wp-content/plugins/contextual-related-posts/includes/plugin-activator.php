@@ -6,7 +6,7 @@
  * @author    Ajay D'Souza
  * @license   GPL-2.0+
  * @link      https://webberzone.com
- * @copyright 2009-2019 Ajay D'Souza
+ * @copyright 2009-2020 Ajay D'Souza
  */
 
 // If this file is called directly, abort.
@@ -57,16 +57,57 @@ register_activation_hook( CRP_PLUGIN_FILE, 'crp_activate' );
  * @since 2.0.0
  */
 function crp_single_activate() {
-	global $wpdb;
-
-	$wpdb->hide_errors();
-
 	crp_create_index();
-
-	$wpdb->show_errors();
-
 }
 
+/**
+ * Fired for each blog when the plugin is deactivated.
+ *
+ * @since 2.9.3
+ *
+ * @param    boolean $network_wide    True if WPMU superadmin uses
+ *                                    "Network Deactivate" action, false if
+ *                                    WPMU is disabled or plugin is
+ *                                    deactivated on an individual blog.
+ */
+function crp_deactivate( $network_wide ) {
+	global $wpdb;
+
+	if ( is_multisite() && $network_wide ) {
+
+		// Get all blogs in the network and activate plugin on each one.
+		$blog_ids = $wpdb->get_col( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+			"
+        	SELECT blog_id FROM $wpdb->blogs
+			WHERE archived = '0' AND spam = '0' AND deleted = '0'
+			"
+		);
+		foreach ( $blog_ids as $blog_id ) {
+			switch_to_blog( $blog_id );
+			crp_single_deactivate();
+		}
+
+		// Switch back to the current blog.
+		restore_current_blog();
+
+	} else {
+		crp_single_deactivate();
+	}
+}
+register_deactivation_hook( CRP_PLUGIN_FILE, 'crp_deactivate' );
+
+/**
+ * Fired for each blog when the plugin is deactivated.
+ *
+ * @since 2.9.3
+ */
+function crp_single_deactivate() {
+	$settings = get_option( 'crp_settings' );
+
+	if ( ! empty( $settings['uninstall_indices_deactivate'] ) ) {
+		crp_delete_index();
+	}
+}
 
 /**
  * Fired when a new site is activated with a WPMU environment.

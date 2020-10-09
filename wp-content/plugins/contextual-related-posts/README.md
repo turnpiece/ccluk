@@ -6,9 +6,9 @@
 [![Build Status](https://travis-ci.org/WebberZone/contextual-related-posts.svg?branch=master)](https://travis-ci.org/WebberZone/contextual-related-posts)
 [![Code Climate](https://codeclimate.com/github/WebberZone/contextual-related-posts/badges/gpa.svg)](https://codeclimate.com/github/WebberZone/contextual-related-posts)
 
-__Requires:__ 4.8
+__Requires:__ 4.9
 
-__Tested up to:__ 5.3
+__Tested up to:__ 5.5
 
 __License:__ [GPL-2.0+](http://www.gnu.org/licenses/gpl-2.0.html)
 
@@ -47,6 +47,12 @@ And the default inbuilt styles allow you to switch between gorgeous thumbnail-ri
   * Display excerpts in post. You can select the length of the excerpt in words
   * Customise which HTML tags to use for displaying the output in case you don't prefer the default `list` format
 * **Extendable code**: CRP has tonnes of filters and actions that allow any developer to easily add features, edit outputs, etc.
+
+### mySQL FULLTEXT indices
+
+On activation, the plugin creates three mySQL FULLTEXT indices (or indexes) that are then used to find the related posts in the `*_posts`. These are for `post_content`, `post_title` and `(post_title,post_content)`. If you're running a multisite installation, then this is created for each of the blogs on activation. All these indices occupy space in your mySQL database but are essential for the plugin to run.
+
+You have two sets of options in the settings page which allows you to remove these indices when you deactivate or delete the plugin. The latter is true by default.
 
 ### Extensions/Addons
 
@@ -90,6 +96,6 @@ More screenshots are available on the [WordPress plugin page](https://wordpress.
 
 ## Frequently Asked Questions
 
-Check out the [FAQ on the plugin page](https://wordpress.org/plugins/contextual-related-posts/faq/).
+Check out the [FAQ on the plugin page](https://wordpress.org/plugins/contextual-related-posts/faq/) or the [knowledge base](https://webberzone.com/support/section/contextual-related-posts/)
 
 If your question isn't listed there, please create a new post at the [WordPress.org support forum](https://wordpress.org/support/plugin/contextual-related-posts). It is the fastest way to get support as I monitor the forums regularly. I also provide [premium *paid* support via email](https://webberzone.com/support/).

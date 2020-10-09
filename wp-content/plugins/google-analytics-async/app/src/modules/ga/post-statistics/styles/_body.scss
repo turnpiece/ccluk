@@ -1,0 +1,214 @@
+@include body-class(true) {
+	margin-right: 0;
+	margin-left: 0;
+
+	* {
+		box-sizing: border-box;
+	}
+
+	.#{$prefix}-block {
+		margin: 0;
+		padding: #{$sui-gutter - 4px} #{$sui-gutter - 1px};
+		border: 1px solid palette(silver, soft);
+		border-radius: $border-radius;
+		background-color: #fafafa;
+
+		&-wrapper {
+			display: flex;
+			align-items: flex-start;
+
+			.#{$prefix}-tooltip {
+				cursor: help;
+				flex: 0 0 auto;
+				margin: 5px 0;
+				@extend .sui-tooltip;
+				@extend .sui-tooltip-constrained;
+
+				[class*='sui-icon-'] {
+					color: #c9c9c9;
+					transition: $transition;
+
+					&:before {
+						color: inherit;
+					}
+				}
+
+				&:hover {
+					[class*='sui-icon-'] {
+						color: $a-color;
+					}
+				}
+
+				&:not(:last-child) {
+					margin-right: 10px;
+				}
+
+				@include media(max-width, md) {
+					display: none;
+				}
+			}
+
+			.#{$prefix}-block-content {
+				min-width: 1px;
+				flex: 1;
+
+				.#{$prefix}-name {
+					color: $a-color;
+					font: 500 19px/25px $font;
+					letter-spacing: 0;
+				}
+
+				.#{$prefix}-value {
+					color: $a-color;
+					font: 500 28px/37px $font;
+					letter-spacing: 0;
+				}
+
+				.#{$prefix}-date {
+					color: palette(gray, default);
+					font: 400 14px/19px $font;
+					letter-spacing: 0;
+				}
+
+				.#{$prefix}-trend {
+					font: 500 15px/20px $font;
+					letter-spacing: 0;
+
+					@include icon(before, '', true) {
+						color: inherit;
+						font-size: 12px;
+						line-height: 12px;
+					}
+
+					&:before {
+						margin-right: 4px;
+					}
+
+					&[data-trend='up'] {
+						color: #1abc9c;
+						@include icon(before, 'arrow-up', false);
+
+						&[data-item='bounce_rates'] {
+							color: #ff6d6d;
+						}
+					}
+
+					&[data-trend='down'] {
+						color: #ff6d6d;
+						@include icon(before, 'arrow-down', false);
+
+						&[data-item='bounce_rates'] {
+							color: #1abc9c;
+						}
+					}
+
+					&[data-trend='equal'] {
+						color: #aaaaaa;
+
+						.sui-icon-pause {
+							&:before {
+								transform: rotate(90deg);
+							}
+						}
+					}
+
+					&[data-trend='none'] {
+						color: #dddddd;
+						margin-right: 3px;
+
+						.sui-icon-pause {
+							width: 12px;
+							height: 3px;
+							overflow: hidden;
+							position: relative;
+
+							&:before {
+								display: block;
+								position: absolute;
+								transform: rotate(90deg);
+								top: -3px;
+								left: 0;
+							}
+						}
+					}
+				}
+
+				&-top,
+				&-bottom {
+					display: flex;
+					align-items: center;
+
+					span {
+						display: block;
+						flex: 0 0 auto;
+
+						&:first-child {
+							@include media(min-width, md) {
+								min-width: 1px;
+								flex: 1;
+							}
+						}
+
+						&:not(:first-child) {
+							@include media(min-width, md) {
+								margin-left: 5px;
+							}
+						}
+
+						@include media(min-width, md) {
+							overflow: hidden;
+							text-overflow: ellipsis;
+							white-space: nowrap;
+						}
+					}
+
+					&:not(:last-child) {
+						margin-bottom: 1px;
+
+						@include media(max-width, md) {
+							margin-bottom: 5px;
+						}
+					}
+				}
+
+				&-top {
+					span {
+						&:first-child {
+							@include media(max-width, md) {
+								margin-bottom: #{$sui-gutter-md / 2};
+							}
+						}
+					}
+
+					@include media(max-width, md) {
+						display: block;
+					}
+				}
+
+				&-bottom {
+					span {
+						&:first-child {
+							@include media(max-width, md) {
+								margin-top: #{$sui-gutter-md / 2};
+							}
+						}
+					}
+
+					@include media(max-width, md) {
+						flex-direction: column-reverse;
+						align-items: unset;
+					}
+				}
+			}
+
+			@include media(max-width, md) {
+				display: block;
+				text-align: center;
+			}
+		}
+
+		@include media(max-width, md) {
+			padding: #{$sui-gutter-md - 4px} #{$sui-gutter-md - 1px};
+		}
+	}
+}

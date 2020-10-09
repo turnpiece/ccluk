@@ -6,13 +6,13 @@
         <div class="sui-footer" v-else>Made with <i class="sui-icon-heart"></i> by WPMU DEV</div>
 
         <div v-if="whitelabel.hide_doc_link===false">
-            <ul v-if="is_free" class="sui-footer-nav">
+            <ul v-if="is_free === 1" class="sui-footer-nav">
                 <li><a href="https://profiles.wordpress.org/wpmudev#content-plugins" target="_blank">Free
                     Plugins</a>
                 </li>
                 <li><a href="https://premium.wpmudev.org/features/" target="_blank">Membership</a></li>
                 <li><a href="https://premium.wpmudev.org/roadmap/" target="_blank">Roadmap</a></li>
-                <li><a href="https://wordpress.org/support/plugin/plugin-name" target="_blank">Support</a></li>
+                <li><a href="https://wordpress.org/support/plugin/defender-security/" target="_blank">Support</a></li>
                 <li><a href="https://premium.wpmudev.org/docs/" target="_blank">Docs</a></li>
                 <li><a href="https://premium.wpmudev.org/hub/" target="_blank">The Hub</a></li>
                 <li><a href="https://premium.wpmudev.org/terms-of-service/" target="_blank">Terms of Service</a>
@@ -55,7 +55,7 @@
         data: function () {
             return {
                 whitelabel: defender.whitelabel,
-                is_free: defender.is_free
+                is_free: parseInt(defender.is_free)
             }
         }
     }

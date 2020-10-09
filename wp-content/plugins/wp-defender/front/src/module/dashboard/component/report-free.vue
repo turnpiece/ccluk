@@ -14,7 +14,7 @@
                 <div class="sui-field-list-body">
                     <div class="sui-field-list-item">
                         <label class="sui-field-list-item-label">
-                            <small><strong>{{__("File Scanning")}}</strong></small>
+                            <small><strong>{{__("Malware Scanning")}}</strong></small>
                         </label>
                         <span class="sui-tag sui-tag-disabled">{{__("Inactive")}}</span>
                     </div>

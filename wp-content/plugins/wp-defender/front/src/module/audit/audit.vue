@@ -80,7 +80,7 @@
 
                     <div class="sui-message-content">
                         <p>
-                            {{__("Track and log each and every event when changes are made to your website and getdetailed reports on what's going on behind the scenes, including any hacking attempts onyour site.")}}
+                            {{__("Track and log each and every event when changes are made to your website and get detailed reports on what's going on behind the scenes, including any hacking attempts onyour site.")}}
                         </p>
                         <submit-button type="button" css-class="sui-button-blue activate" :state="state" @click="toggle(true)">
                             {{__("Activate")}}

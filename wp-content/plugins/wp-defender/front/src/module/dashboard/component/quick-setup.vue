@@ -1,7 +1,12 @@
 <template>
-    <div class="sui-dialog" aria-hidden="true" tabindex="-1" id="activator">
-        <div class="sui-dialog-overlay" data-a11y-dialog-hide></div>
-        <div class="sui-dialog-content" aria-labelledby="Quick setup" aria-describedby="" role="dialog">
+    <div class="sui-modal sui-modal-lg">
+        <div
+                role="dialog"
+                id="activator"
+                class="sui-modal-content"
+                aria-modal="true"
+                aria-labelledby="Quick setup"
+        >
             <div class="sui-box" role="document" v-if="status==='normal'">
                 <div class="sui-box-header">
                     <h3 class="sui-box-title">
@@ -9,7 +14,7 @@
                     </h3>
                     <div class="sui-actions-right">
                         <form method="post" @submit.prevent="skip">
-                            <submit-button type="submit" class="sui-button-ghost quicksetup-skip" :state="state">
+                            <submit-button type="submit" css-class="sui-button-ghost quicksetup-skip" :state="state">
                                 {{__("Skip")}}
                             </submit-button>
                         </form>
@@ -24,7 +29,7 @@
                         <div class="sui-row">
                             <div class="sui-col-md-10">
                                 <span class="sui-settings-label">
-                                    {{__("Automatic File Scans & Reporting")}}
+                                    {{__("Automatic Malware Scanning & Reporting")}}
                                 </span>
                                 <span class="sui-description">
                                 {{__("Scan your website for file changes, vulnerabilities and injected code and get notified about anything suspicious.")}}
@@ -70,7 +75,7 @@
                         <div class="sui-row">
                             <div class="sui-col-md-10">
                                 <span class="sui-settings-label">
-                                   {{__("IP Lockouts")}}
+                                   {{__("Firewall")}}
                                 </span>
                                 <span class="sui-description">
                                     {{__("Protect your login area and have Defender automatically lockout any suspicious behaviour.")}}
@@ -93,10 +98,10 @@
                         <div class="sui-row">
                             <div class="sui-col-md-10">
                                 <span class="sui-settings-label">
-                                   {{__("Blacklist Monitor")}}
+                                   {{__("Blocklist Monitor")}}
                                 </span>
                                 <span class="sui-description">
-                                {{__("Automatically check if you’re on Google’s blacklist every 6 hours. If something’s wrong, we’ll let you know via email.")}}
+                                {{__("Automatically check if you’re on Google’s blocklist every 6 hours. If something’s wrong, we’ll let you know via email.")}}
                                 </span>
                             </div>
 
@@ -122,14 +127,15 @@
                                 </small>
                             </div>
                             <div class="sui-col-md-3">
-                                <submit-button type="submit" :state="state" class="sui-button sui-button-blue quicksetup-apply">
+                                <submit-button type="submit" :state="state"
+                                               css-class="sui-button-blue quicksetup-apply">
                                     {{__("Get Started")}}
                                 </submit-button>
                             </div>
                         </div>
                     </div>
                 </form>
-                <img v-if="maybeHideBranding" :src="assetUrl('/assets/img/defender-activator.svg')"
+                <img v-if="!maybeHideBranding" :src="assetUrl('/assets/img/defender-activator.svg')"
                      class="sui-image sui-image-center"/>
             </div>
             <div class="sui-box" v-else>
@@ -153,7 +159,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </template>
 
@@ -188,17 +193,27 @@
             },
             skip: function () {
                 this.httpPostRequest('skip', this.model, function (response) {
-                    SUI.dialogs['activator'].hide();
+                    SUI.closeModal()
                 })
             }
         },
         mounted: function () {
             document.onreadystatechange = () => {
                 if (document.readyState === "complete") {
-                    if (SUI.dialogs['activator'] !== undefined) {
-                        //this is refresh case
-                        SUI.dialogs['activator'].show();
-                    }
+                    const modalId        = 'activator',
+                        focusAfterClosed = 'wpbody',
+                        focusWhenOpen    = undefined,
+                        hasOverlayMask   = false,
+                        isCloseOnEsc     = false
+                    ;
+
+                    SUI.openModal(
+                        modalId,
+                        focusAfterClosed,
+                        focusWhenOpen,
+                        hasOverlayMask,
+                        isCloseOnEsc
+                    );
                 }
             }
         }

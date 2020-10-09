@@ -1,4 +1,13 @@
 <?php
+/**
+ * The compatibility functionality class.
+ *
+ * @link    http://premium.wpmudev.org
+ * @since   3.2.0
+ *
+ * @author  Joel James <joel@incsub.com>
+ * @package Beehive\Core\Controllers
+ */
 
 namespace Beehive\Core\Controllers;
 
@@ -9,12 +18,9 @@ use Beehive\Core\Helpers\General;
 use Beehive\Core\Utils\Abstracts\Base;
 
 /**
- * The compatibility functionality class.
+ * Class Compatibility
  *
- * @link   http://premium.wpmudev.org
- * @since  3.2.0
- *
- * @author Joel James <joel@incsub.com>
+ * @package Beehive\Core\Controllers
  */
 class Compatibility extends Base {
 
@@ -27,12 +33,22 @@ class Compatibility extends Base {
 	 */
 	public function init() {
 		// Members plugin.
-		add_action( 'members_register_caps', [ $this, 'register_members_caps' ] );
-		add_action( 'members_register_cap_groups', [ $this, 'register_members_groups' ] );
+		add_action( 'members_register_caps', array( $this, 'register_members_caps' ) );
+		add_action( 'members_register_cap_groups', array( $this, 'register_members_groups' ) );
 
 		// User role editor plugin.
-		add_filter( 'ure_built_in_wp_caps', [ $this, 'filter_ure_caps' ] );
-		add_filter( 'ure_capabilities_groups_tree', [ $this, 'filter_ure_groups' ] );
+		add_filter( 'ure_built_in_wp_caps', array( $this, 'filter_ure_caps' ) );
+		add_filter( 'ure_capabilities_groups_tree', array( $this, 'filter_ure_groups' ) );
+
+		// WPMU Domain Mapping support.
+		add_filter( 'beehive_google_analytics_request_home_url', array( $this, 'filter_wpmu_dm_mapped_url' ) );
+		add_filter(
+			'beehive_google_analytics_popular_widget_process_url_replace',
+			array(
+				$this,
+				'filter_wpmu_dm_mapped_url_replace',
+			)
+		);
 	}
 
 	/**
@@ -46,16 +62,22 @@ class Compatibility extends Base {
 	 */
 	public function register_members_caps() {
 		// Settings.
-		members_register_cap( Capability::SETTINGS_CAP, [
-			'label' => __( 'Manage Settings', 'ga_trans' ),
-			'group' => 'beehive',
-		] );
+		members_register_cap(
+			Capability::SETTINGS_CAP,
+			array(
+				'label' => __( 'Manage Settings', 'ga_trans' ),
+				'group' => 'beehive',
+			)
+		);
 
 		// Analytics.
-		members_register_cap( Capability::ANALYTICS_CAP, [
-			'label' => __( 'View Analytics', 'ga_trans' ),
-			'group' => 'beehive',
-		] );
+		members_register_cap(
+			Capability::ANALYTICS_CAP,
+			array(
+				'label' => __( 'View Analytics', 'ga_trans' ),
+				'group' => 'beehive',
+			)
+		);
 	}
 
 	/**
@@ -66,14 +88,17 @@ class Compatibility extends Base {
 	 * @return void
 	 */
 	public function register_members_groups() {
-		members_register_cap_group( 'beehive', [
-			'label' => General::plugin_name(),
-			'caps'  => [
-				Capability::SETTINGS_CAP,
-				Capability::ANALYTICS_CAP,
-			],
-			'icon'  => 'dashicons-chart-area',
-		] );
+		members_register_cap_group(
+			'beehive',
+			array(
+				'label' => General::plugin_name(),
+				'caps'  => array(
+					Capability::SETTINGS_CAP,
+					Capability::ANALYTICS_CAP,
+				),
+				'icon'  => 'dashicons-chart-area',
+			)
+		);
 	}
 
 	/**
@@ -89,16 +114,16 @@ class Compatibility extends Base {
 	 */
 	public function filter_ure_caps( $caps ) {
 		// Settings.
-		$caps[ Capability::SETTINGS_CAP ] = [
+		$caps[ Capability::SETTINGS_CAP ] = array(
 			'custom',
 			'beehive',
-		];
+		);
 
 		// Analytics.
-		$caps[ Capability::ANALYTICS_CAP ] = [
+		$caps[ Capability::ANALYTICS_CAP ] = array(
 			'custom',
 			'beehive',
-		];
+		);
 
 		return $caps;
 	}
@@ -113,12 +138,67 @@ class Compatibility extends Base {
 	 * @return array[] Updated array of groups.
 	 */
 	public function filter_ure_groups( $groups ) {
-		$groups['beehive'] = [
+		$groups['beehive'] = array(
 			'caption' => General::plugin_name(),
 			'parent'  => 'custom',
 			'level'   => 2,
-		];
+		);
 
 		return $groups;
+	}
+
+	/**
+	 * Filter the url to return mapped url before setting GA filter.
+	 *
+	 * @param string $url Home URL.
+	 *
+	 * @link  https://wordpress.org/plugins/wordpress-mu-domain-mapping/
+	 *
+	 * @since 3.2.4
+	 *
+	 * @return string.
+	 */
+	public function filter_wpmu_dm_mapped_url( $url ) {
+		// Only if domain mapping exist.
+		if ( function_exists( 'domain_mapping_siteurl' ) ) {
+			// WordPress MU Domain Mapping.
+			$url = domain_mapping_siteurl( $url );
+		}
+
+		return $url;
+	}
+
+	/**
+	 * Filter the post/page url to display the links in popular posts widget.
+	 *
+	 * @param string $url Post URL.
+	 *
+	 * @link  https://wordpress.org/plugins/wordpress-mu-domain-mapping/
+	 *
+	 * @since 3.2.4
+	 *
+	 * @return string.
+	 */
+	public function filter_wpmu_dm_mapped_url_replace( $url ) {
+		// Only if domain mapping exist.
+		if ( function_exists( 'domain_mapping_siteurl' ) ) {
+			// Get mapped url without protocol.
+			$mapped_url = str_replace(
+				array(
+					'http://',
+					'https://',
+				),
+				'',
+				domain_mapping_siteurl( home_url() )
+			);
+
+			// Get home url without protocol.
+			$home_url = str_replace( array( 'http://', 'https://' ), '', home_url() );
+
+			// Replace it with mapped url.
+			$url = str_replace( $mapped_url, $home_url, $url );
+		}
+
+		return $url;
 	}
 }

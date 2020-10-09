@@ -1,4 +1,13 @@
 <?php
+/**
+ * The GDPR class of the plugin.
+ *
+ * @link    http://premium.wpmudev.org
+ * @since   3.2.0
+ *
+ * @author  Joel James <joel@incsub.com>
+ * @package Beehive\Core\Controllers
+ */
 
 namespace Beehive\Core\Controllers;
 
@@ -9,12 +18,9 @@ use Beehive\Core\Helpers\General;
 use Beehive\Core\Utils\Abstracts\Base;
 
 /**
- * The GDPR class of the plugin.
+ * Class GDPR
  *
- * @link   http://premium.wpmudev.org
- * @since  3.2.0
- *
- * @author Joel James <joel@incsub.com>
+ * @package Beehive\Core\Controllers
  */
 class GDPR extends Base {
 
@@ -27,7 +33,7 @@ class GDPR extends Base {
 	 */
 	public function init() {
 		// Add GDPR content to privacy page.
-		add_action( 'admin_init', [ $this, 'privacy_content' ] );
+		add_action( 'admin_init', array( $this, 'privacy_content' ) );
 	}
 
 	/**

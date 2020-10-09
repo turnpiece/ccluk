@@ -7,9 +7,7 @@ namespace WP_Defender\Module\Audit\Controller;
 
 use Hammer\Helper\WP_Helper;
 use WP_Defender\Behavior\Utils;
-use WP_Defender\Module\Audit\Behavior\Audit;
 use WP_Defender\Module\Audit\Component\Audit_API;
-use WP_Defender\Module\Audit\Component\Audit_Table;
 use WP_Defender\Module\Audit\Model\Events;
 use WP_Defender\Module\Audit\Model\Settings;
 
@@ -48,13 +46,9 @@ class Main extends \WP_Defender\Controller {
 			$this->addAction( 'defender_enqueue_assets', 'scripts', 11 );
 		}
 
-		//$this->addAjaxAction( 'auditOnCloud', 'auditOnCloud', true, true );
-		//$this->addAjaxAction( 'exportAsCvs', 'exportAsCvs' );
-
 		if ( Settings::instance()->enabled == 1 ) {
 			$this->addAction( 'wp_loaded', 'setupEvents', 1 );
 			$this->addAction( 'shutdown', 'triggerEventSubmit' );
-			$this->addFilter( 'cron_schedules', 'registerSchedule' );
 			if ( ! wp_next_scheduled( 'auditSyncWithCloud' ) ) {
 				wp_schedule_event( time(), 'daily', 'auditSyncWithCloud' );
 			}
@@ -68,15 +62,6 @@ class Main extends \WP_Defender\Controller {
 		Events::instance()->sendToApi();
 		Events::instance()->fetch();
 		Events::instance()->checksumData();
-	}
-
-	public function registerSchedule( $schedules ) {
-		$schedules['audit_triweekly'] = [
-			'interval' => DAY_IN_SECONDS * 3,
-			'display'  => __( "Triweekly" )
-		];
-
-		return $schedules;
 	}
 
 	public function sort_email_data( $a, $b ) {
@@ -93,7 +78,7 @@ class Main extends \WP_Defender\Controller {
 	public function triggerEventSubmit() {
 		$data = WP_Helper::getArrayCache()->get( 'events_queue', array() );
 		if ( is_array( $data ) && count( $data ) ) {
-			if ( Events::instance()->hasData() ) {
+			if ( Events::instance()->hasData( [], true ) ) {
 				Events::instance()->append( $data );
 			} else {
 				Audit_API::onCloud( $data );
@@ -357,7 +342,7 @@ class Main extends \WP_Defender\Controller {
 			wp_enqueue_script( 'defender-audit' );
 			wp_enqueue_script( 'wpmudev-sui' );
 			wp_enqueue_script( 'audit-momentjs', wp_defender()->getPluginUrl() . 'assets/js/vendor/moment/moment.min.js' );
-			wp_enqueue_style( 'audit-daterangepicker', wp_defender()->getPluginUrl() . 'assets/js/vendor/daterangepicker/daterangepicker.css' );
+//			wp_enqueue_style( 'audit-daterangepicker', wp_defender()->getPluginUrl() . 'assets/js/vendor/daterangepicker/daterangepicker.css' );
 			wp_enqueue_script( 'audit-daterangepicker', wp_defender()->getPluginUrl() . 'assets/js/vendor/daterangepicker/daterangepicker.js' );
 		}
 	}

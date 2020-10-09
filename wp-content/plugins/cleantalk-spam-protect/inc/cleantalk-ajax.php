@@ -146,6 +146,11 @@ $cleantalk_hooked_actions[] = 'fue_wc_set_cart_email';  // Don't check email via
 /* The Fluent Form have the direct integration */
 $cleantalk_hooked_actions[] = 'fluentform_submit';
 
+/* Estimation Forms have the direct integration */
+if( class_exists('LFB_Core') ) {
+    $cleantalk_hooked_actions[] = 'send_email';
+}
+
 function ct_validate_email_ajaxlogin($email=null, $is_ajax=true){
 	
 	$email = is_null( $email ) ? $email : $_POST['email'];
@@ -258,7 +263,7 @@ function ct_ajax_hook($message_obj = false, $additional = false)
 	// Get current_user and set it globaly
 	apbct_wp_set_current_user($current_user instanceof WP_User ? $current_user	: apbct_wp_get_current_user() );
 	
-    // Go out because of not spam data
+    // $_REQUEST['action'] to skip. Go out because of not spam data
     $skip_post = array(
         'apbct_js_keys__get',  // Our service code
         'gmaps_display_info_window',  // Geo My WP pop-up windows.
@@ -297,6 +302,19 @@ function ct_ajax_hook($message_obj = false, $additional = false)
 	    'et_fb_get_shortcode_from_fb_object', //Skip generate shortcode
 	    'pp_lf_process_login', //Skip login form
 	    'check_email', //Ajax email checking
+	    'dflg_do_sign_in_user', // Unknown plugin
+	    'cartflows_save_cart_abandonment_data', // WooCommerce cartflow
+	    'rcp_process_register_form', // WordPress Membership Plugin – Restrict Content
+	    'give_process_donation', // GiveWP
+	    'apus_ajax_login', // ???? plugin authorization
+        'bookly_save_customer', //bookly
+        'postmark_test', //Avocet
+        'postmark_save', //Avocet
+        'ck_get_subscriber', //ConvertKit checking the subscriber
+        'metorik_send_cart', //Metorik skip
+	    'ppom_ajax_validation', // PPOM add to cart validation
+	    'wpforms_form_abandonment', // WPForms. Quiting without submitting
+	    'post_woo_ml_email_cookie', //Woocommerce system
     );
     
     // Skip test if
@@ -318,6 +336,7 @@ function ct_ajax_hook($message_obj = false, $additional = false)
         (isset($_POST['action'], $_POST['arm_action']) && $_POST['action'] == 'arm_shortcode_form_ajax_action' && $_POST['arm_action'] == 'please-login') //arm forms skip login
     )
     {
+	    do_action( 'apbct_skipped_request', __FILE__ . ' -> ' . __FUNCTION__ . '():' . __LINE__, $_POST );
         return false;
     }
 
@@ -370,22 +389,34 @@ function ct_ajax_hook($message_obj = false, $additional = false)
 		$ct_post_temp['comment'] = $_POST['comment'];
 	}
 	//Woocommerce checkout
-	if(isset($_POST['action']) && $_POST['action']=='woocommerce_checkout'){
+	if( \Cleantalk\Variables\Post::get( 'action' ) == 'woocommerce_checkout' || \Cleantalk\Variables\Post::get( 'action' ) == 'save_data' ){
 		$post_info['comment_type'] = 'order';
+		if( empty( $apbct->settings['wc_checkout_test'] ) ){
+			do_action( 'apbct_skipped_request', __FILE__ . ' -> ' . __FUNCTION__ . '():' . __LINE__, $_POST );
+			return false;
+		}
 	}
 	//Easy Forms for Mailchimp
-	if( isset($_POST['action']) && $_POST['action']=='process_form_submission' ){
+	if( \Cleantalk\Variables\Post::get('action') == 'process_form_submission' ){
 		$post_info['comment_type'] = 'contact_enquire_wordpress_easy_forms_for_mailchimp';
-		if( isset($_POST['form_data']) ) {
-			$form_data = explode( '&', $_POST['form_data'] );
+		if( \Cleantalk\Variables\Post::get('form_data') ) {
+			$form_data = explode( '&', urldecode( \Cleantalk\Variables\Post::get('form_data') ) );
 			$form_data_arr = array();
 			foreach ( $form_data as $val ) {
 				$form_data_element = explode( '=', $val );
 				$form_data_arr[$form_data_element[0]] = @$form_data_element[1];
 			}
-			if( isset( $form_data_arr['EMAIL'] ) ) {
+			if( isset( $form_data_arr['EMAIL'] ) )
 				$ct_post_temp['email'] = $form_data_arr['EMAIL'];
-			}
+			if( isset( $form_data_arr['FNAME'] ) )
+				$ct_post_temp['nickname'] = $form_data_arr['FNAME'];
+		}
+	}
+	if (isset($_POST['action']) && $_POST['action'] == 'ufbl_front_form_action'){
+		$ct_post_temp = $_POST;
+		foreach ($ct_post_temp as $key => $value) {
+			if (preg_match('/form_data_\d_name/', $key)) 
+				unset($ct_post_temp[$key]);
 		}
 	}
 	
@@ -403,21 +434,32 @@ function ct_ajax_hook($message_obj = false, $additional = false)
     }
     
     // Skip submission if no data found
-    if ($sender_email === ''|| !$contact_form)
-        return false;
+    if ($sender_email === ''|| !$contact_form) {
+	    do_action( 'apbct_skipped_request', __FILE__ . ' -> ' . __FUNCTION__ . '():' . __LINE__, $_POST );
+	    return false;
+    }
+
 	
 	 // Mailpoet fix
-    if (isset($message['wysijaData'], $message['wysijaplugin'], $message['task'], $message['controller']) && $message['wysijaplugin'] == 'wysija-newsletters' && $message['controller'] == 'campaigns')
-        return false;
-    // Mailpoet3 admin skip fix
-    if (isset($_POST['action'], $_POST['method']) && $_POST['action'] == 'mailpoet' && $_POST['method'] =='save')
+    if (isset($message['wysijaData'], $message['wysijaplugin'], $message['task'], $message['controller']) && $message['wysijaplugin'] == 'wysija-newsletters' && $message['controller'] == 'campaigns') {
+	    do_action( 'apbct_skipped_request', __FILE__ . ' -> ' . __FUNCTION__ . '():' . __LINE__, $_POST );
     	return false;
+    }
+
+    // Mailpoet3 admin skip fix
+    if (isset($_POST['action'], $_POST['method']) && $_POST['action'] == 'mailpoet' && $_POST['method'] =='save') {
+	    do_action( 'apbct_skipped_request', __FILE__ . ' -> ' . __FUNCTION__ . '():' . __LINE__, $_POST );
+    	return false;
+    }
+
 	
 	// WP Foto Vote Fix
 	if (!empty($_FILES)){
 		foreach($message as $key => $value){
-			if(strpos($key, 'oje') !== false)
-				return; 
+			if(strpos($key, 'oje') !== false) {
+				do_action( 'apbct_skipped_request', __FILE__ . ' -> ' . __FUNCTION__ . '():' . __LINE__, $_POST );
+				return false;
+			}
 		} unset($key ,$value);
 	}
 	
@@ -728,7 +770,13 @@ function ct_ajax_hook($message_obj = false, $additional = false)
 		}
 		else
 		{
-			die(json_encode(array('apbct' => array('blocked' => true, 'comment' => $ct_result->comment,))));
+			die(json_encode(array( 'apbct' => array(
+					'blocked' => true,
+					'comment' => $ct_result->comment,
+					'stop_script' => \Cleantalk\Variables\Post::has_string('action', 'tve_leads_ajax_')
+						? 1
+						: 0
+			))));
 		}
 	}
 	//Allow == 1
@@ -736,6 +784,13 @@ function ct_ajax_hook($message_obj = false, $additional = false)
 		//QAEngine Theme answers
 		if ( !empty($message_obj) && isset($message_obj['post_type'], $message_obj['post_content']) ){
 			return $message_obj;
+		}
+		// Force AJAX check
+		if( \Cleantalk\Variables\Post::get('action') == 'cleantalk_force_ajax_check' ){
+			die(json_encode(array( 'apbct' => array(
+				'blocked' => false,
+				'allow' => true,
+			))));
 		}
 	}
 }

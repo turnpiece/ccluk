@@ -8,13 +8,19 @@
                 {{__("Here is a list of the suspicious files you have chosen to ignore.")}}
             </p>
             <div v-if="ignoredItems.length===0" class="sui-notice sui-notice-success">
-                <p>
-                    {{__("You haven't chosen to ignore any suspicious files yet. Ignored files appear here and can be restored at any time")}}
-                </p>
+                <div class="sui-notice-content">
+                    <div class="sui-notice-message">
+                        <i class="sui-icon-info sui-notice-icon sui-md"></i>
+                        <p>
+                            {{__("You haven't chosen to ignore any suspicious files yet. Ignored files appear here and can be restored at any time")}}
+                        </p>
+                    </div>
+                </div>
             </div>
             <nav_and_filter scenario="ignored" @bulk:selected="bulk = $event" v-else></nav_and_filter>
         </div>
-        <issues_table :bulk="isBulk" scenario="ignored" :items="ignoredItems" v-if="ignoredItems.length>0"></issues_table>
+        <issues_table :bulk="isBulk" scenario="ignored" :items="ignoredItems"
+                      v-if="ignoredItems.length>0"></issues_table>
     </div>
 </template>
 

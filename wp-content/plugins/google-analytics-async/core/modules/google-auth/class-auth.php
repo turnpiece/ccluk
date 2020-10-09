@@ -1,25 +1,30 @@
 <?php
+/**
+ * The Google auth class.
+ *
+ * @link    http://premium.wpmudev.org
+ * @since   3.2.0
+ *
+ * @author  Joel James <joel@incsub.com>
+ * @package Beehive\Core\Modules\Google_Auth
+ */
 
 namespace Beehive\Core\Modules\Google_Auth;
 
 // If this file is called directly, abort.
 defined( 'WPINC' ) || die;
 
-use Google_Client;
+use Beehive\Google_Client;
 use Beehive\Core\Helpers\Cache;
 use Beehive\Core\Helpers\General;
-use Google_Service_PeopleService;
 use Beehive\Core\Helpers\Permission;
 use Beehive\Core\Utils\Abstracts\Base;
-use Beehive\Core\Modules\Google_Auth\Views\Settings;
+use Beehive\Google_Service_PeopleService;
 
 /**
- * The Google auth class.
+ * Class Auth
  *
- * @link   http://premium.wpmudev.org
- * @since  3.2.0
- *
- * @author Joel James <joel@incsub.com>
+ * @package Beehive\Core\Modules\Google_Auth
  */
 class Auth extends Base {
 
@@ -41,9 +46,13 @@ class Auth extends Base {
 	 */
 	public function init() {
 		// Init child class.
-		Ajax::instance()->init();
 		Actions::instance()->init();
-		Settings::instance()->init();
+
+		// Views.
+		Views\Admin::instance()->init();
+
+		// Register endpoints.
+		Endpoints\Auth::instance();
 	}
 
 	/**
@@ -59,6 +68,9 @@ class Auth extends Base {
 	 * @return Google_Client
 	 */
 	public function client( $new = false ) {
+		// Make sure the autoloader is ready.
+		General::vendor_autoload();
+
 		// If requested for new instance.
 		if ( $new || ! $this->client instanceof Google_Client ) {
 			// Set new instance.
@@ -121,13 +133,13 @@ class Auth extends Base {
 		 *
 		 * @since 3.2.0
 		 */
-		$scopes = (array) apply_filters( 'beehive_google_auth_scopes', [] );
+		$scopes = (array) apply_filters( 'beehive_google_auth_scopes', array() );
 
 		// These are always required.
-		$required_scopes = [
+		$required_scopes = array(
 			Google_Service_PeopleService::USERINFO_PROFILE,
 			Google_Service_PeopleService::USERINFO_EMAIL,
-		];
+		);
 
 		// Merge all scopes.
 		$scopes = array_unique( array_merge( $required_scopes, $scopes ) );
@@ -154,41 +166,36 @@ class Auth extends Base {
 	 * This is not a recommeded method. But if user would like to
 	 * connect with Google without API keys, we could let them using
 	 * the default hardcoded API keys.
+	 * If client ID is specificed, we will use that client ID and it's
+	 * client secret pair.
 	 *
-	 * @param bool $network Network flag.
+	 * @param bool   $network Network flag.
+	 * @param string $client_id Client ID.
 	 *
 	 * @since 3.2.0
+	 * @since 3.3.0 Added client ID param.
 	 *
 	 * @return void
 	 */
-	public function setup_default( $network = false ) {
-		/**
-		 * Filter to change default client ID.
-		 *
-		 * @param string $default_client_id Default client ID.
-		 *
-		 * @deprecated 3.2.0
-		 */
-		$default_client_id = apply_filters_deprecated(
-			'ga_project_client_id',
-			[ '640050123521-r5bp4142nh6dkh8bn0e6sn3pv852v3fm.apps.googleusercontent.com' ],
-			'3.2.0',
-			'beehive_google_default_client_id'
+	public function setup_default( $network = false, $client_id = '' ) {
+		$credential = array(
+			'client_id'     => '',
+			'client_secret' => '',
 		);
 
-		/**
-		 * Filter to change default client secret.
-		 *
-		 * @param string $default_client_secret Default client secret.
-		 *
-		 * @deprecated 3.2.0
-		 */
-		$default_client_secret = apply_filters_deprecated(
-			'ga_project_client_secret',
-			[ 'wWEelqN4DvE2DJjUPp-4KSka' ],
-			'3.2.0',
-			'beehive_google_default_client_secret'
-		);
+		// Get default credentials.
+		if ( empty( $client_id ) ) {
+			$credential = $this->get_default_credential( $network );
+		} else {
+			$default_creds = Data::instance()->credentials();
+			// Check if the client id exist in default list.
+			if ( isset( $default_creds[ $client_id ] ) ) {
+				$credential = array(
+					'client_id'     => $client_id,
+					'client_secret' => $default_creds[ $client_id ]['secret'],
+				);
+			}
+		}
 
 		/**
 		 * Filter to change default client ID.
@@ -197,7 +204,7 @@ class Auth extends Base {
 		 *
 		 * @since 3.0.0
 		 */
-		$default_client_id = apply_filters( 'beehive_google_default_client_id', $default_client_id );
+		$default_client_id = apply_filters( 'beehive_google_default_client_id', $credential['client_id'] );
 
 		/**
 		 * Filter to change default client secret.
@@ -206,7 +213,7 @@ class Auth extends Base {
 		 *
 		 * @since 3.0.0
 		 */
-		$default_client_secret = apply_filters( 'beehive_google_default_client_secret', $default_client_secret );
+		$default_client_secret = apply_filters( 'beehive_google_default_client_secret', $credential['client_secret'] );
 
 		// Setup using default credentials.
 		$this->setup( $network, $default_client_id, $default_client_secret );
@@ -234,6 +241,59 @@ class Auth extends Base {
 	}
 
 	/**
+	 * Get the default API credentials to load balance.
+	 *
+	 * We use multiple API keys to load balance the request
+	 * limit set by Google. If user is already logged in, get
+	 * the keys from the db. Otherwise get a random pair.
+	 * Before 3.3.0, we had only one API key pair. So it will take
+	 * some time to eventually
+	 *
+	 * @param bool $network Network flag.
+	 *
+	 * @since 3.3.0
+	 *
+	 * @return array
+	 */
+	public function get_default_credential( $network = false ) {
+		static $credentials = null;
+
+		// Only if empty.
+		if ( is_null( $credentials ) ) {
+			// Check if already logged in.
+			$loggedin = Helper::instance()->is_logged_in( $network );
+
+			if ( $loggedin ) {
+				// Get the pair from the db.
+				$credentials = array(
+					'client_id'     => beehive_analytics()->settings->get( 'client_id', 'google_login', $network, '' ),
+					'client_secret' => beehive_analytics()->settings->get( 'client_secret', 'google_login', $network, '' ),
+				);
+
+				// Backward compatibility for 3.2.6 and below.
+				if ( empty( $credentials['client_id'] ) || empty( $credentials['client_secret'] ) ) {
+					$credentials = array(
+						'client_id'     => '640050123521-r5bp4142nh6dkh8bn0e6sn3pv852v3fm.apps.googleusercontent.com',
+						'client_secret' => 'wWEelqN4DvE2DJjUPp-4KSka',
+					);
+				}
+			} else {
+				// Get random credentials.
+				$credentials = $this->get_random_creds();
+			}
+		}
+
+		/**
+		 * Filter to modify default credentials before processing.
+		 *
+		 * @param array $credentials Client ID and Client secret.
+		 *
+		 * @since 3.2.7
+		 */
+		return apply_filters( 'beehive_google_auth_get_default_credential', $credentials );
+	}
+
+	/**
 	 * Logout current Google authentication code.
 	 *
 	 * Logging out will not remove API credentials.
@@ -251,17 +311,19 @@ class Auth extends Base {
 		}
 
 		// Remove Google login data.
-		$logout = beehive_analytics()->settings->update_group( [], 'google_login', $network );
+		$logout = beehive_analytics()->settings->update_group( array(), 'google_login', $network );
 
-		// Remove the account id.
+		// Remove the account id and tracking id.
 		if ( $logout ) {
 			beehive_analytics()->settings->update( 'account_id', '', 'google', $network );
+			beehive_analytics()->settings->update( 'auto_track', '', 'misc', $network );
 		}
 
 		// Delete profiles from cache.
-		Cache::delete_cache( 'google_profiles', true, $network );
+		Cache::delete_transient( 'google_profiles', $network );
 
 		// Refresh caches.
+		Cache::refresh_transient();
 		Cache::refresh_cache();
 
 		/**
@@ -274,5 +336,49 @@ class Auth extends Base {
 		do_action( 'beehive_google_auth_logout', $logout );
 
 		return $logout;
+	}
+
+	/**
+	 * Get a random credential pair for authentication.
+	 *
+	 * @since 3.2.7
+	 *
+	 * @return array
+	 */
+	private function get_random_creds() {
+		// Get the available pair of default keys.
+		$default_creds = Data::instance()->credentials();
+
+		// Take only client IDs.
+		$client_ids = array_keys( $default_creds );
+
+		$keys = array();
+
+		// Prepare for the random selection.
+		foreach ( $client_ids as $key => $client_id ) {
+			if ( isset( $default_creds[ $client_id ]['weight'] ) ) {
+				for ( $i = 0; $i < $default_creds[ $client_id ]['weight']; $i++ ) {
+					$keys[] = $key;
+				}
+			}
+		}
+
+		// Get random client ID.
+		$random_client = $client_ids[ $keys[ wp_rand( 0, count( $keys ) - 1 ) ] ];
+
+		// Set the client id and secret of random pair.
+		$credentials = array(
+			'client_id'     => $random_client,
+			'client_secret' => $default_creds[ $random_client ]['secret'],
+		);
+
+		/**
+		 * Filter to modify random credentials before processing.
+		 *
+		 * @param array $credentials Client ID and Client secret.
+		 *
+		 * @since 3.2.7
+		 */
+		return apply_filters( 'beehive_google_auth_get_random_creds', $credentials );
 	}
 }

@@ -170,7 +170,7 @@ class Settings extends \Hammer\WP\Settings {
 	 * @return array
 	 */
 	public function get404Whitelist() {
-		$arr = array_filter( explode( PHP_EOL, $this->detect_404_whitelist ) );;
+		$arr = array_filter( explode( PHP_EOL, $this->detect_404_whitelist ) );
 		$arr = array_map( 'trim', $arr );
 
 		return $arr;
@@ -335,16 +335,19 @@ class Settings extends \Hammer\WP\Settings {
 	}
 
 	/**
+	 * Add IP to list
+	 *
 	 * @param $ip
-	 * @param $list
+	 * @param string $list blocklist|allowlist
+	 * @since 2.3.2
 	 */
 	public function addIpToList( $ip, $list ) {
 		$ips  = array();
 		$type = '';
-		if ( $list == 'blacklist' ) {
+		if ( 'blocklist' === $list ) {
 			$ips  = $this->getIpBlacklist();
 			$type = 'ip_blacklist';
-		} else if ( $list == 'whitelist' ) {
+		} elseif ( 'allowlist' === $list ) {
 			$ips  = $this->getIpWhitelist();
 			$type = 'ip_whitelist';
 		}
@@ -359,16 +362,19 @@ class Settings extends \Hammer\WP\Settings {
 	}
 
 	/**
+	 * Remove IP from list
+	 *
 	 * @param $ip
-	 * @param $list
+	 * @param string $list blocklist|allowlist
+	 * @since 2.3.2
 	 */
 	public function removeIpFromList( $ip, $list ) {
 		$ips  = array();
 		$type = '';
-		if ( $list == 'blacklist' ) {
+		if ( 'blocklist' === $list ) {
 			$ips  = $this->getIpBlacklist();
 			$type = 'ip_blacklist';
-		} else if ( $list == 'whitelist' ) {
+		} elseif ( 'allowlist' === $list ) {
 			$ips  = $this->getIpWhitelist();
 			$type = 'ip_whitelist';
 		}
@@ -629,7 +635,8 @@ class Settings extends \Hammer\WP\Settings {
 	 */
 	public static function instance() {
 		if ( is_null( self::$_instance ) ) {
-			$class           = new Settings( 'wd_lockdown_settings', WP_Helper::is_network_activate( wp_defender()->plugin_slug ) );
+			$class           = new Settings( 'wd_lockdown_settings',
+				WP_Helper::is_network_activate( wp_defender()->plugin_slug ) );
 			self::$_instance = $class;
 		}
 
@@ -640,49 +647,45 @@ class Settings extends \Hammer\WP\Settings {
 	/**
 	 * Define labels for settings key, we will use it for HUB
 	 *
-	 * @param null $key
+	 * @param  null  $key
 	 *
 	 * @return array|mixed
 	 */
 	public function labels( $key = null ) {
 		$labels = [
-			'login_protection'                       => __( "Login Protection", wp_defender()->domain ),
-			'login_protection_login_attempt'         => __( "Threshold: Failed logins", wp_defender()->domain ),
-			'login_protection_lockout_timeframe'     => __( "Threshold: Timeframe", wp_defender()->domain ),
-			'login_protection_lockout_ban'           => __( "Duration", wp_defender()->domain ),
-			'login_protection_lockout_duration'      => __( "Duration", wp_defender()->domain ),
-			'login_protection_lockout_duration_unit' => __( "Duration unit", wp_defender()->domain ),
-			'login_protection_lockout_message'       => __( "Message", wp_defender()->domain ),
-			'username_blacklist'                     => __( "Banned usernames", wp_defender()->domain ),
-			'detect_404'                             => __( "404 Detection", wp_defender()->domain ),
-			'detect_404_threshold'                   => __( "Threshold: 404 hits", wp_defender()->domain ),
-			'detect_404_timeframe'                   => __( "Threshold: Timeframe", wp_defender()->domain ),
-			'detect_404_lockout_ban'                 => __( "Duration", wp_defender()->domain ),
-			'detect_404_lockout_duration'            => __( "Duration", wp_defender()->domain ),
-			'detect_404_lockout_duration_unit'       => __( "Duration unit", wp_defender()->domain ),
-			'detect_404_lockout_message'             => __( "Message", wp_defender()->domain ),
-			'detect_404_blacklist'                   => __( "Files & Folders: Blacklist", wp_defender()->domain ),
-			'detect_404_whitelist'                   => __( "Files & Folders: Whitelist", wp_defender()->domain ),
-			'detect_404_filetypes_blacklist'         => __( "Filetypes & Extensions: Blacklist", wp_defender()->domain ),
-			'detect_404_ignored_filetypes'           => __( "Filetypes & Extensions: Whitelist", wp_defender()->domain ),
-			'detect_404_logged'                      => __( "Monitor 404s from logged in users", wp_defender()->domain ),
-			'ip_blacklist'                           => __( "IP Addresses: Blacklist", wp_defender()->domain ),
-			'ip_whitelist'                           => __( "IP Addresses: Whitelist", wp_defender()->domain ),
-			'country_blacklist'                      => __( "Country: Blacklist", wp_defender()->domain ),
-			'country_whitelist'                      => __( "Country: Whitelist", wp_defender()->domain ),
-			'ip_lockout_message'                     => __( "Lockout message", wp_defender()->domain ),
-			'login_lockout_notification'             => __( "Email Notifications: Login Protection Lockout", wp_defender()->domain ),
-			'ip_lockout_notification'                => __( "Email Notifications: 404 Protection Lockout", wp_defender()->domain ),
-			'receipts'                               => __( "Recipients for notification", wp_defender()->domain ),
-			'cooldown_enabled'                       => __( "Repeat Lockouts", wp_defender()->domain ),
-			'cooldown_number_lockout'                => __( "Threshold", wp_defender()->domain ),
-			'cooldown_period'                        => __( "Cool Off Period", wp_defender()->domain ),
-			'storage_days'                           => __( "Storage", wp_defender()->domain ),
-			'report'                                 => __( "Report", wp_defender()->domain ),
-			'report_receipts'                        => __( "Recipients for report", wp_defender()->domain ),
-			'report_frequency'                       => __( "Frequency", wp_defender()->domain ),
-			'report_day'                             => __( "Day of the week", wp_defender()->domain ),
-			'report_time'                            => __( "Time of day", wp_defender()->domain )
+			'login_protection'                  => __( "Login Protection", wp_defender()->domain ),
+			'login_protection_login_attempt'    => __( "Login Protection - Threshold", wp_defender()->domain ),
+			'login_protection_lockout_duration' => __( "Login Protection - Duration", wp_defender()->domain ),
+			'login_protection_lockout_message'  => __( "Login Protection - Lockout Message", wp_defender()->domain ),
+			'username_blacklist'                => __( "Login Protection - Banned Usernames", wp_defender()->domain ),
+			'detect_404'                        => __( "404 Detection", wp_defender()->domain ),
+			'detect_404_threshold'              => __( "404 Detection - Threshold", wp_defender()->domain ),
+			'detect_404_lockout_duration'       => __( "404 Detection - Duration", wp_defender()->domain ),
+			'detect_404_lockout_message'        => __( "404 Detection - Lockout Message", wp_defender()->domain ),
+			'detect_404_blacklist'              => __( "404 Detection - Files & Folders Blacklist",
+				wp_defender()->domain ),
+			'detect_404_whitelist'              => __( "404 Detection - Files & Folders Whitelist",
+				wp_defender()->domain ),
+			'detect_404_filetypes_blacklist'    => __( "404 Detection - Filetypes & Extensions Whitelist",
+				wp_defender()->domain ),
+			'detect_404_ignored_filetypes'      => __( "404 Detection - Filetypes & Extensions Blacklist",
+				wp_defender()->domain ),
+			'detect_404_logged'                 => __( "404 Detection - Monitor logged in users",
+				wp_defender()->domain ),
+			'ip_blacklist'                      => __( "IP Banning - IP Address Blacklist", wp_defender()->domain ),
+			'ip_whitelist'                      => __( "IP Banning - IP Address Whitelist", wp_defender()->domain ),
+			'country_blacklist'                 => __( "IP Banning - Country Whitelist", wp_defender()->domain ),
+			'country_whitelist'                 => __( "IP Banning - Country Blacklist", wp_defender()->domain ),
+			'ip_lockout_message'                => __( "IP Banning - Lockout Message", wp_defender()->domain ),
+			'login_lockout_notification'        => __( "Emails - Login Protection Lockout", wp_defender()->domain ),
+			'ip_lockout_notification'           => __( "Emails - 404 Detection Lockout", wp_defender()->domain ),
+			'receipts'                          => __( "Emails - Lockout Recipients", wp_defender()->domain ),
+			'cooldown_enabled'                  => __( "Emails - Repeat Lockouts", wp_defender()->domain ),
+			'cooldown_number_lockout'           => __( "Emails - Repeat Lockouts Threshold", wp_defender()->domain ),
+			'report'                            => __( "Reports - Scheduled Lockout Report", wp_defender()->domain ),
+			'report_frequency'                  => __( "Reports - Frequency", wp_defender()->domain ),
+			'report_receipts'                   => __( "Reports - Recipients", wp_defender()->domain ),
+			'storage_days'                      => __( "Days to keep logs", wp_defender()->domain ),
 		];
 
 		if ( $key != null ) {
@@ -690,5 +693,75 @@ class Settings extends \Hammer\WP\Settings {
 		}
 
 		return $labels;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function export_strings( $configs ) {
+
+		return [
+			__( 'Active', wp_defender()->domain )
+		];
+	}
+
+	public function format_hub_data() {
+		return [
+			'login_protection'                  => $this->login_protection ? __( 'Activate',
+				wp_defender()->domain ) : __( 'Inactivate',
+				wp_defender()->domain ),
+			'login_protection_login_attempt'    => sprintf( __( '%d logins in %d seconds',
+				wp_defender()->domain ),
+				$this->login_protection_login_attempt, $this->login_protection_lockout_timeframe ),
+			'login_protection_lockout_duration' => $this->login_protection_lockout_ban ? __( 'Permanent',
+				wp_defender()->domain ) : $this->login_protection_lockout_timeframe . ' ' . $this->login_protection_lockout_duration_unit,
+			'login_protection_lockout_message'  => $this->login_protection_lockout_message,
+			'username_blacklist'                => empty( $this->username_blacklist ) ? __( 'None',
+				wp_defender()->domain ) : $this->username_blacklist,
+			'detect_404'                        => $this->detect_404 ? __( 'Activate',
+				wp_defender()->domain ) : __( 'Inactivate',
+				wp_defender()->domain ),
+			'detect_404_threshold'              => sprintf( __( '%d hits in %d seconds',
+				wp_defender()->domain ),
+				$this->detect_404_threshold, $this->detect_404_timeframe ),
+			'detect_404_lockout_duration'       => $this->detect_404_lockout_ban ? __( 'Permanent',
+				wp_defender()->domain ) : $this->detect_404_lockout_duration . ' ' . $this->detect_404_lockout_duration_unit,
+			'detect_404_lockout_message'        => $this->detect_404_lockout_message,
+			'detect_404_blacklist'              => empty( $this->detect_404_blacklist ) ? __( 'None',
+				wp_defender()->domain ) : $this->detect_404_blacklist,
+			'detect_404_whitelist'              => empty( $this->detect_404_whitelist ) ? __( 'None',
+				wp_defender()->domain ) : $this->detect_404_whitelist,
+			'detect_404_filetypes_blacklist'    => empty( $this->detect_404_filetypes_blacklist ) ? __( 'None',
+				wp_defender()->domain ) : $this->detect_404_filetypes_blacklist,
+			'detect_404_ignored_filetypes'      => empty( $this->detect_404_ignored_filetypes ) ? __( 'None',
+				wp_defender()->domain ) : $this->detect_404_ignored_filetypes,
+			'detect_404_logged'                 => $this->detect_404_logged ? __( 'Yes',
+				wp_defender()->domain ) : __( 'No', wp_defender()->domain ),
+			'ip_blacklist'                      => empty( $this->ip_blacklist ) ? __( 'None',
+				wp_defender()->domain ) : $this->ip_blacklist,
+			'country_blacklist'                 => empty( $this->country_blacklist ) ? __( 'None',
+				wp_defender()->domain ) : $this->country_blacklist,
+			'ip_lockout_message'                => empty( $this->ip_lockout_message ) ? __( 'None',
+				wp_defender()->domain ) : $this->ip_lockout_message,
+			'login_lockout_notification'        => $this->login_lockout_notification ? __( 'Activate',
+				wp_defender()->domain ) : __( 'Inactivate',
+				wp_defender()->domain ),
+			'ip_lockout_notification'           => $this->ip_lockout_notification ? __( 'Activate',
+				wp_defender()->domain ) : __( 'Inactivate',
+				wp_defender()->domain ),
+			'receipts'                          => empty( $this->receipts ) ? __( 'None',
+				wp_defender()->domain ) : Utils::instance()->recipientsToString( $this->receipts ),
+			'cooldown_enabled'                  => $this->cooldown_enabled ? __( 'Yes',
+				wp_defender()->domain ) : __( 'No', wp_defender()->domain ),
+			'cooldown_number_lockout'           => $this->cooldown_number_lockout ? __( 'None',
+				wp_defender()->domain ) : $this->cooldown_number_lockout,
+			'report'                            => $this->report ? __( 'Activate',
+				wp_defender()->domain ) : __( 'Inactivate', wp_defender()->domain ),
+			'report_frequency'                  => Utils::instance()->format_frequency_for_hub( $this->report_frequency,
+				$this->report_day, $this->report_time ),
+			'report_receipts'                   => Utils::instance()->recipientsToString( $this->report_receipts ),
+			'storage_days'                      => sprintf( __( '%d days', wp_defender()->domain ),
+				$this->storage_days )
+		];
 	}
 }

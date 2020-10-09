@@ -1,0 +1,125 @@
+@include body-class(true) {
+	#beehive-widget-stats {
+		.beehive-table {
+			width: 100%;
+			margin: 0;
+			padding: 0;
+			border: 0;
+			border-spacing: 0;
+
+			tbody {
+				tr {
+					td {
+						margin: 0;
+						padding: #{$sui-gutter-md - 1px} #{$sui-gutter-md / 2};
+						border-width: 0 0 1px 0;
+						border-style: solid;
+						border-color: palette(silver, soft);
+						color: palette(gray, light);
+						font: 500 13px/22px $font;
+						letter-spacing: $font--letter-spacing;
+
+						&:first-child {
+							padding-left: $sui-gutter-md;
+
+							@include media(min-width, md) {
+								padding-left: $sui-gutter;
+							}
+						}
+
+						&:last-child {
+							padding-right: $sui-gutter-md;
+
+							@include media(min-width, md) {
+								padding-right: $sui-gutter;
+							}
+						}
+					}
+
+					td.beehive-stats-title {
+						width: 50%;
+						color: palette(gray, dark);
+
+						@include media(min-width, md) {
+							width: 40%;
+						}
+					}
+
+					td.beehive-stats-trend {
+						width: 25%;
+						color: palette(gray, light);
+						font-weight: 500;
+						text-align: right;
+
+						[class*='sui-icon-'] {
+							width: auto;
+							margin-right: 5px;
+
+							&:before {
+								color: inherit;
+							}
+						}
+
+						&.beehive-red {
+							color: $red;
+						}
+
+						&.beehive-green {
+							color: $green;
+						}
+
+						@include media(min-width, md) {
+							width: 20%;
+						}
+					}
+
+					td.beehive-stats-value {
+						width: 25%;
+						text-align: right;
+
+						@include media(min-width, md) {
+							width: 40%;
+						}
+					}
+
+					&:first-child {
+						td {
+							padding-top: 0;
+						}
+					}
+				}
+			}
+
+			tfoot {
+				tr {
+					td {
+						margin: 0;
+						padding: $sui-gutter-md #{$sui-gutter-md / 2};
+						border: 0;
+
+						&:first-child {
+							padding-left: $sui-gutter-md;
+
+							@include media(min-width, md) {
+								padding-left: $sui-gutter;
+							}
+						}
+
+						&:last-child {
+							padding-right: $sui-gutter-md;
+
+							@include media(min-width, md) {
+								padding-right: $sui-gutter;
+							}
+						}
+
+						@include media(min-width, md) {
+							padding-top: $sui-gutter;
+							padding-bottom: $sui-gutter;
+						}
+					}
+				}
+			}
+		}
+	}
+}

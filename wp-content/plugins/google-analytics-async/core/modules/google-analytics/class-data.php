@@ -1,4 +1,13 @@
 <?php
+/**
+ * The Google general data class.
+ *
+ * @link    http://premium.wpmudev.org
+ * @since   3.2.0
+ *
+ * @author  Joel James <joel@incsub.com>
+ * @package Beehive\Core\Modules\Google_Analytics
+ */
 
 namespace Beehive\Core\Modules\Google_Analytics;
 
@@ -6,20 +15,18 @@ namespace Beehive\Core\Modules\Google_Analytics;
 defined( 'WPINC' ) || die;
 
 use Exception;
-use Google_Service_Exception;
 use Beehive\Core\Helpers\Cache;
-use Google_Service_Analytics_Profile;
+use Beehive\Core\Helpers\General;
+use Beehive\Google_Service_Exception;
 use Beehive\Core\Modules\Google_Auth;
 use Beehive\Core\Utils\Abstracts\Google_API;
-use Google_Service_Analytics as Google_Analytics;
+use Beehive\Google_Service_Analytics_Profile;
+use Beehive\Google_Service_Analytics as Google_Analytics;
 
 /**
- * The Google general data class.
+ * Class Data
  *
- * @link   http://premium.wpmudev.org
- * @since  3.2.0
- *
- * @author Joel James <joel@incsub.com>
+ * @package Beehive\Core\Modules\Google_Analytics
  */
 class Data extends Google_API {
 
@@ -64,7 +71,7 @@ class Data extends Google_API {
 
 				// Set the results to cache.
 				if ( ! empty( $profiles ) ) {
-					Cache::set_cache( 'google_profiles', $profiles, $network );
+					Cache::set_transient( 'google_profiles', $profiles, $network );
 				}
 
 				/**
@@ -76,12 +83,12 @@ class Data extends Google_API {
 				 */
 				do_action( 'beehive_after_google_profiles', $profiles );
 			} catch ( Google_Service_Exception $e ) {
-				$profiles = [];
+				$profiles = array();
 
 				// Process the exception.
 				$this->error( $e );
 			} catch ( Exception $e ) {
-				$profiles = [];
+				$profiles = array();
 
 				// Process the exception.
 				$this->error( $e );
@@ -97,5 +104,91 @@ class Data extends Google_API {
 		 * @since 3.2.0
 		 */
 		return apply_filters( 'beehive_google_analytics_profiles', $profiles, $network );
+	}
+
+	/**
+	 * Get available profiles from current GA account.
+	 *
+	 * This is a wrapper function to display dropdowns in plugin
+	 * admin pages.
+	 *
+	 * @param bool $network Is network wide?.
+	 * @param bool $force   Should skip cache?.
+	 *
+	 * @since 3.2.0
+	 * @since 3.2.4 Moved to this class.
+	 *
+	 * @return array
+	 */
+	public function profiles_list( $network = false, $force = false ) {
+		$list   = array();
+		$update = false;
+
+		// Make sure the autoloader is ready.
+		General::vendor_autoload();
+
+		// Get available profiles.
+		$profiles = $this->profiles( $network, $force );
+
+		// Get settings.
+		$settings = beehive_analytics()->settings->get_options( false, $network, $force );
+
+		// Current website url.
+		$current_url = untrailingslashit( get_site_url() );
+
+		// Remove protocols.
+		$current_url = str_replace( array( 'http://', 'https://' ), '', $current_url );
+
+		foreach ( $profiles as $profile ) {
+			// Get profile website url.
+			$website_url = untrailingslashit( $profile->getWebsiteUrl() );
+
+			// Remove protocols.
+			$website_url = str_replace( array( 'http://', 'https://' ), '', $website_url );
+
+			// Perform some extra actions if website url is matching.
+			if ( $current_url === $website_url ) {
+				// Set tracking ID.
+				$settings['misc']['auto_track'] = $profile->getWebPropertyId();
+
+				// Update account id if website url is matched.
+				if ( empty( $settings['google']['account_id'] ) ) {
+					$settings['google']['account_id'] = $profile->getId();
+				}
+
+				// Should update settings.
+				$update = true;
+			}
+
+			// If no account is matched, select first one.
+			if ( empty( $settings['google']['account_id'] ) ) {
+				$settings['google']['account_id'] = $profiles[0]->getId();
+
+				// Should update settings.
+				$update = true;
+			}
+
+			// Update settings.
+			if ( $update ) {
+				beehive_analytics()->settings->update_options( $settings, $network );
+			}
+
+			$list[] = array(
+				'id'       => $profile->getId(),
+				'url'      => $profile->getWebsiteUrl(),
+				'name'     => $profile->getName(),
+				'property' => $profile->getWebPropertyId(),
+			);
+		}
+
+		/**
+		 * Filter hook to modify available profiles dropdown.
+		 *
+		 * @param array $profiles Profiles list.
+		 * @param bool  $network  Is network level.
+		 *
+		 * @since 3.2.0
+		 */
+		return apply_filters( 'beehive_google_profiles_list', $list, $network );
 	}
 }

@@ -1,0 +1,58 @@
+@include body-class(true) {
+	.beehive-row {
+		display: block;
+		margin: $sui-gutter-md 0 0;
+
+		.beehive-separator {
+			width: 80%;
+			height: 1px;
+			display: block;
+			margin: $sui-gutter-md auto;
+			background-color: palette(silver, soft);
+
+			&:first-child,
+			&:last-child {
+				display: none;
+			}
+		}
+
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+
+	// SIZE: Normal.
+	&:not(.beehive-widget-small) {
+		.beehive-row {
+			display: flex;
+			align-items: flex-start;
+			margin-top: $sui-gutter;
+
+			.beehive-col {
+				min-width: 1px;
+				flex: 1;
+				padding: #{$sui-gutter / 2} #{$sui-gutter-md / 2};
+
+				&:first-child {
+					padding-left: 0;
+				}
+
+				&:last-child {
+					padding-right: 0;
+				}
+			}
+
+			.beehive-separator {
+				width: 1px;
+				height: 42px;
+				flex: 0 0 auto;
+				align-self: flex-end;
+				margin: 0 $sui-gutter-md #{$sui-gutter / 2};
+			}
+
+			&:first-child {
+				margin-top: 0;
+			}
+		}
+	}
+}

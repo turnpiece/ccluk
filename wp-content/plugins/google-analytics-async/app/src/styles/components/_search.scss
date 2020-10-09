@@ -1,0 +1,10 @@
+@include body-class(true) {
+	.select2 {
+		// Select2.
+		.select2-search {
+			input.select2-search__field {
+				min-height: 22px !important;
+			}
+		}
+	}
+}

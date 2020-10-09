@@ -170,13 +170,20 @@
 		<div class="sui-row" v-if="data.chunks.length === 0">
 			<div class="sui-col">
 				<div class="sui-notice">
+ <div class="sui-notice-content">
+                    <div class="sui-notice-message">
+                        <i class="sui-notice-icon sui-icon-info sui-md" aria-hidden="true"></i>
+
 					<p v-if="state.is_fetching === true">
 						{{__("Loading events...")}}
 					</p>
 					<p v-else>
 						{{__("There have been no events logged in the selected time period.")}}
 					</p>
-				</div>
+
+                    </div>
+                </div>
+</div>
 			</div>
 		</div>
 		<div class="sui-center-box">

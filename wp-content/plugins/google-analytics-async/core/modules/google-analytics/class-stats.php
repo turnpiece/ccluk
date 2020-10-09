@@ -1,4 +1,13 @@
 <?php
+/**
+ * The Google analytics stats class.
+ *
+ * @link    http://premium.wpmudev.org
+ * @since   3.2.0
+ *
+ * @author  Joel James <joel@incsub.com>
+ * @package Beehive\Core\Modules\Google_Analytics
+ */
 
 namespace Beehive\Core\Modules\Google_Analytics;
 
@@ -6,19 +15,15 @@ namespace Beehive\Core\Modules\Google_Analytics;
 defined( 'WPINC' ) || die;
 
 use Beehive\Core\Helpers\Cache;
-use Beehive\Core\Helpers\Permission;
 use Beehive\Core\Utils\Abstracts\Google_API;
 use Beehive\Core\Modules\Google_Analytics\Stats\API;
 use Beehive\Core\Modules\Google_Analytics\Stats\Format;
 use Beehive\Core\Modules\Google_Analytics\Stats\Request;
 
 /**
- * The Google analytics stats class.
+ * Class Stats
  *
- * @link   http://premium.wpmudev.org
- * @since  3.2.0
- *
- * @author Joel James <joel@incsub.com>
+ * @package Beehive\Core\Modules\Google_Analytics
  */
 class Stats extends Google_API {
 
@@ -42,10 +47,10 @@ class Stats extends Google_API {
 	 * @return array
 	 */
 	public function stats( $from, $to, $type = 'stats', $network = false, $force = false, $cache_only = false, &$exception = false ) {
-		$stats = [];
+		$stats = array();
 
 		// Check if logged in.
-		if ( Helper::instance()->can_get_stats( $network ) ) {
+		if ( Helper::instance()->can_get_stats( $network, $exception ) ) {
 			// Cache key.
 			$cache_key = $this->cache_key( $from, $to, $type, $network );
 
@@ -57,11 +62,8 @@ class Stats extends Google_API {
 				$stats = $this->get( $from, $to, $type, $network, 0, $exception );
 
 				// Set to cache.
-				Cache::set_cache( $cache_key, $stats, $network );
+				Cache::set_transient( $cache_key, $stats, $network );
 			}
-
-			// Remove unwanted stats based on permission.
-			//$stats = $this->restrict_stats( $stats, $type );
 		}
 
 		/**
@@ -104,7 +106,7 @@ class Stats extends Google_API {
 		}
 
 		// Only when post id is set.
-		if ( ! empty( $post_id ) ) {
+		if ( ! empty( $post_id ) && Helper::instance()->can_get_stats( false, $exception ) ) {
 			// Cache key.
 			$cache_key = $this->cache_key( $from, $to, 'post' ) . '_' . $post_id;
 
@@ -117,10 +119,10 @@ class Stats extends Google_API {
 				$stats = $this->get( $from, $to, 'post', false, $post_id, $exception );
 
 				// Set to cache.
-				Cache::set_cache( $cache_key, $stats, false );
+				Cache::set_transient( $cache_key, $stats, false );
 			}
 		} else {
-			$stats = [];
+			$stats = array();
 		}
 
 		/**
@@ -181,7 +183,7 @@ class Stats extends Google_API {
 			 */
 			$stats = Format::instance()->format( $data, $type );
 		} else {
-			$stats = [];
+			$stats = array();
 		}
 
 		/**
@@ -195,61 +197,6 @@ class Stats extends Google_API {
 		 * @since 3.3.3 Added network param.
 		 */
 		return apply_filters( 'beehive_google_stats_formatted', $stats, $type, $network );
-	}
-
-	/**
-	 * Restrict the stats items based on the permissions set.
-	 *
-	 * @param array  $stats   Stats data array.
-	 * @param string $type    Stats type.
-	 * @param bool   $network Network flag.
-	 *
-	 * @since 3.2.0
-	 *
-	 * @return array
-	 */
-	private function restrict_stats( $stats, $type = 'stats', $network = false ) {
-		// Check only supported stats.
-		if ( ! in_array( $type, [ 'dashboard' ], true ) ) {
-			return $stats;
-		}
-
-		// Network super admin have all access.
-		if ( is_multisite() && Permission::is_admin_user( true ) ) {
-			return $stats;
-		}
-
-		// Single site admin have all access.
-		if ( ! is_multisite() && Permission::is_admin_user() ) {
-			return $stats;
-		}
-
-		// Get available capabilities of user.
-		$caps = Permission::user_report_caps( 'dashboard', $network );
-
-		$stats_final = [];
-
-		// Make each section in stats data are accessible.
-		foreach ( (array) $stats as $section => $stat ) {
-			if ( isset( $caps['general'][ $section ] )
-			     || isset( $caps['audience'][ $section ] )
-			     || isset( $caps['traffic'][ $section ] )
-			     || isset( $caps['top_pages'][ $section ] )
-			) {
-				$stats_final[ $section ] = $stat;
-			}
-		}
-
-		/**
-		 * Alter the restricted data based on permission.
-		 *
-		 * @param array $stats   Stats data.
-		 * @param array $caps    Capabilities.
-		 * @param bool  $network Network flag.
-		 *
-		 * @since 3.2.0
-		 */
-		return apply_filters( 'beehive_google_restricted_stats', $stats_final, $caps, $network );
 	}
 
 	/**
@@ -269,15 +216,15 @@ class Stats extends Google_API {
 	 */
 	private function cache_key( $from, $to, $type = 'stats', $network = false ) {
 		// Key items.
-		$keys = [
-			'stats', // Base.
+		$keys = array(
+			'google_analytics_stats', // Base.
 			$type, // Stats type.
 			$from, // Start date.
 			$to, // End date.
 			get_current_blog_id(), // Blog ID.
 			$network ? 1 : 0, // Network flag.
 			beehive_analytics()->settings->get( 'account_id', 'google', $network, '' ), // GA Account.
-		];
+		);
 
 		// Generate a string from array of keys.
 		$key = implode( '_', $keys );

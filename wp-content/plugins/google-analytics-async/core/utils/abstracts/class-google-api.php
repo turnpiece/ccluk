@@ -1,4 +1,13 @@
 <?php
+/**
+ * The Google API class.
+ *
+ * @link    http://premium.wpmudev.org
+ * @since   3.2.0
+ *
+ * @author  Joel James <joel@incsub.com>
+ * @package Beehive\Core\Utils\Abstracts
+ */
 
 namespace Beehive\Core\Utils\Abstracts;
 
@@ -8,15 +17,11 @@ defined( 'WPINC' ) || die;
 use Exception;
 use Google_Service_Exception;
 use Beehive\Core\Helpers\Cache;
-use Beehive\Core\Views\Settings;
 
 /**
- * The Google API class.
+ * Class Google_API
  *
- * @link   http://premium.wpmudev.org
- * @since  3.2.0
- *
- * @author Joel James <joel@incsub.com>
+ * @package Beehive\Core\Utils\Abstracts
  */
 abstract class Google_API extends Base {
 
@@ -26,23 +31,27 @@ abstract class Google_API extends Base {
 	 * This is a helper function to avoid duplicating cache checks
 	 * within other methods.
 	 *
-	 * @param string $name      Cache key.
-	 * @param bool   $network   Network flag.
-	 * @param bool   $force     Force from API.
-	 * @param bool   $transient Should check transient.
+	 * @param string $name              Cache key.
+	 * @param bool   $network           Network flag.
+	 * @param bool   $force             Force from API.
+	 * @param bool   $object_cache_only Should check only object cache (not transient).
 	 *
 	 * @since 3.2.0
 	 *
 	 * @return array|bool|mixed
 	 */
-	protected function cache( $name, $network, $force = false, $transient = true ) {
-		// If not forced, try cache.
+	protected function cache( $name, $network, $force = false, $object_cache_only = false ) {
+		// If not forced, try transient.
 		if ( ! $force ) {
-			// Try to get from cache.
-			return Cache::get_cache( $name, $network, $transient );
+			// Try to get from transient.
+			if ( $object_cache_only ) {
+				return Cache::get_cache( $name, $network );
+			} else {
+				return Cache::get_transient( $name, $network );
+			}
 		}
 
-		return [];
+		return array();
 	}
 
 	/**
@@ -58,35 +67,15 @@ abstract class Google_API extends Base {
 		// Get logged in status.
 		$logged_in = beehive_analytics()->settings->get( 'logged_in', 'google_login', $this->is_network() );
 
-		// Get errors array.
-		$errors = method_exists( $error, 'getErrors' ) ? $error->getErrors() : [];
-
 		// Log the error to php error log.
 		if ( apply_filters( 'beehive_google_api_error_log', false ) ) {
-			error_log( $error->getMessage() );
-		}
-
-		// Add error notification.
-		if ( ! empty( $errors[0]['message'] ) ) {
-			$message = $errors[0]['message'];
-
-			// Do not show multiple errors.
-			if ( ! has_action( 'beehive_google_account_notice' ) && 'User does not have any Google Analytics account.' !== $message ) {
-				// Show a notice in Google account settings.
-				add_action( 'beehive_google_account_notice', function () use ( $message ) {
-					Settings::instance()->notice( $message, 'error', false );
-				} );
-			}
+			// phpcs:ignore
+			error_log( print_r( $error->getMessage(), true ) );
 		}
 
 		// Process the error code.
 		switch ( $error->getCode() ) {
 			case 401:
-				// Set a flag that login is required.
-				if ( false === $logged_in || $logged_in > 0 ) {
-					beehive_analytics()->settings->update( 'logged_in', 1, 'google_login', $this->is_network() );
-				}
-				break;
 			case 403:
 				// User doesn't have analytics accounts.
 				break;

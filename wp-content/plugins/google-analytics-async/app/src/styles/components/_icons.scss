@@ -1,0 +1,42 @@
+$custom-icons: (
+        google-connect: 12px,
+        woocommerce: 24px,
+        gtm: 24px
+);
+
+@include body-class(true) {
+  .sui-icon {
+    @each $icon, $size in $custom-icons {
+      &-#{$icon} {
+        width: $size;
+        height: $size;
+        background-image: url('../../../images/icons/icon-#{$icon}.png');
+        background-image: -webkit-image-set(
+                        url('../../../images/icons/icon-#{$icon}.png') 1x,
+                        url('../../../images/icons/icon-#{$icon}@2x.png') 2x
+        );
+        background-image: image-set(
+                        url('../../../images/icons/icon-#{$icon}.png') 1x,
+                        url('../../../images/icons/icon-#{$icon}@2x.png') 2x
+        );
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: $size $size;
+      }
+    }
+  }
+
+  // FIX:
+  // Bad alignment when used inside .sui-box-title.
+  .sui-box {
+    .sui-box-title {
+      @each $icon, $size in $custom-icons {
+        .sui-icon-#{$icon} {
+          float: none;
+          display: inline-block;
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+}

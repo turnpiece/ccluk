@@ -1,14 +1,19 @@
 === Custom Post Type Permalinks ===
-Contributors:      Toro_Unit,inc2734,ixkaito,keita_kobayashi
-Donate link:       https://www.paypal.me/torounit
-Tags:              permalink,permalinks,custom post type,custom taxonomy,cms
-Requires at least: 4.3
-Tested up to:      5.3
-Requires PHP:      5.3
-Stable tag: 3.3.4
-License: GPLv2 or Later
+
+Contributors:      Toro_Unit, inc2734, ixkaito, keita_kobayashi, strategio  
+Donate link:       https://www.paypal.me/torounit  
+Tags:              permalink, url, link, address, custom post type  
+Requires at least: 4.7  
+Tested up to:      5.5  
+Requires PHP:      5.6  
+License:           GPLv2 or Later  
+License URI:       http://www.gnu.org/licenses/gpl-2.0.txt  
+Stable tag:        3.4.1
+
 
 Edit the permalink of custom post type.
+
+
 
 == Description ==
 
@@ -24,6 +29,7 @@ Donation: Please send [My Wishlist](http://www.amazon.co.jp/registry/wishlist/CO
 
 
 = Translators =
+
 * Japanese(ja) - [Toro_Unit](http://www.torounit.com/)
 * French(fr_FR) - [Geoffrey Crofte](http://geoffrey.crofte.fr/)
 * Russian(ru_RU) - [Olart](http://olart.ru), [Natali_Z](https://profiles.wordpress.org/natali_z)
@@ -37,8 +43,7 @@ Donation: Please send [My Wishlist](http://www.amazon.co.jp/registry/wishlist/CO
 
 Example:
 
-`
-register_post_type( 'foo',
+<pre>register_post_type( 'foo',
 	array(
 		'public' => true,
 		'has_archive' => true,
@@ -47,9 +52,20 @@ register_post_type( 'foo',
 		),
 		'cptp_permalink_structure' => '%post_id%'
 	)
-);
-`
+);</pre>
 
+= Exclude specific post type =
+
+<pre>add_filter(  'cptp_is_rewrite_supported_by_foo',  '__return_false' );
+
+// or
+
+add_filter(  'cptp_is_rewrite_supported', function ( $support , $post_type ) {
+    if ( 'foo' === $post_type ) {
+        return false;
+    }
+    return $support;
+}, 10, 2);</pre>
 
 == Installation ==
 
@@ -65,22 +81,40 @@ That's it. You can access the permalinks setting by going to *Settings -> Permal
 
 * screenshot-1.png
 
-
 == Changelog ==
 
+= 3.4.1 =
+* Fix readme.
+
+= 3.4.0 =
+
+* Tested 5.5 beta3
+* WPML support: custom post type slug translation. ( Props @strategio )
+* Add new filter `cptp_post_link_category` and `cptp_post_link_term` .
+* Use Lowercase prefix for action and filter.
+
+= 3.3.5 =
+
+* Tested 5.4
+* fix CPTP_Module_Permalink::post_type_link.
+
 = 3.3.1 =
+
 * Add disable option for date / author and post type archive.
 * Bug fix for `parse_request`.
 
 = 3.2.2 =
+
 * Fix readme.txt
 
 = 3.2.0 =
+
 * Support only public post type.
 * Add `CPTP_is_rewrite_supported_by_${post_type}` and `CPTP_is_rewrite_supported` filter.
 * Remove post_type query wp_get_archives.
 
 = 3.1.4 =
+
 * Test for WordPress 4.9.
 * PHPCS fix.
 

@@ -1,4 +1,13 @@
 <?php
+/**
+ * Defines permission helper functionality of the plugin.
+ *
+ * @link    http://premium.wpmudev.org
+ * @since   3.2.0
+ *
+ * @author  Joel James <joel@incsub.com>
+ * @package Beehive\Core\Helpers
+ */
 
 namespace Beehive\Core\Helpers;
 
@@ -8,12 +17,9 @@ defined( 'WPINC' ) || die;
 use Beehive\Core\Controllers\Capability;
 
 /**
- * Defines permission helper functionality of the plugin.
+ * Class Permission
  *
- * @link   http://premium.wpmudev.org
- * @since  3.2.0
- *
- * @author Joel James <joel@incsub.com>
+ * @package Beehive\Core\Helpers
  */
 class Permission {
 
@@ -69,11 +75,7 @@ class Permission {
 	 */
 	public static function has_ps_capability( $type = 'settings' ) {
 		// CIf Pro Sites is not active, capable.
-		if ( ! class_exists( 'ProSites' )
-		     || ! function_exists( 'is_pro_site' )
-		     || is_network_admin()
-		     || ! is_multisite()
-		) {
+		if ( ! class_exists( 'ProSites' ) || ! function_exists( 'is_pro_site' ) || is_network_admin() || ! is_multisite() ) {
 			return true;
 		}
 
@@ -86,7 +88,7 @@ class Permission {
 				$levels = beehive_analytics()->settings->get( 'prosites_settings_level', 'general', true );
 				break;
 			default:
-				$levels = [];
+				$levels = array();
 		}
 
 		// Return early if no level is selected.
@@ -185,7 +187,7 @@ class Permission {
 			$capable = true;
 		} else {
 			// If sub sites can't overwrite permissions get network permissions.
-			$network = self::can_overwrite() ? $network : true;
+			$network = self::can_overwrite( 'analytics' ) ? $network : true;
 
 			// Check for custom capability.
 			$custom_cap = beehive_analytics()->settings->get( 'custom_cap', 'permissions', $network );
@@ -218,18 +220,25 @@ class Permission {
 	 *
 	 * This will work only on multisite.
 	 *
+	 * @param string $type Permission type (settings or analytics).
+	 *
 	 * @since 3.2.0
+	 * @since 3.2.5 Added type param.
 	 *
 	 * @return bool
 	 */
-	public static function can_overwrite() {
+	public static function can_overwrite( $type = 'settings' ) {
 		// No if it's not multisite or in network admin.
 		if ( ! is_multisite() || is_network_admin() ) {
 			return true;
 		}
 
 		// Get the flag.
-		$overwrite = beehive_analytics()->settings->get( 'overwrite_cap', 'permissions', true );
+		if ( 'analytics' === $type ) {
+			$overwrite = beehive_analytics()->settings->get( 'overwrite_cap', 'permissions', true );
+		} else {
+			$overwrite = beehive_analytics()->settings->get( 'overwrite_settings_cap', 'permissions', true );
+		}
 
 		/**
 		 * Filter hook to change the ability to overwrite permissions.
@@ -266,7 +275,7 @@ class Permission {
 			$has = false;
 		} else {
 			// If sub sites can't overwrite permissions get network custom capability.
-			$network = self::can_overwrite() ? $network : true;
+			$network = self::can_overwrite( 'analytics' ) ? $network : true;
 
 			// Check for custom capability.
 			$custom_cap = beehive_analytics()->settings->get( 'custom_cap', 'permissions', $network );
@@ -314,35 +323,36 @@ class Permission {
 	 * @return array
 	 */
 	public static function user_report_caps( $type = 'dashboard', $network = false, $force = false ) {
-		static $caps = [];
+		static $caps = array();
 
-		$user_caps = [];
+		$user_caps = array();
 
 		$user_id = get_current_user_id();
 
 		// First get from cache.
 		if ( ! $force ) {
-			$user_caps = isset( $caps[ $user_id ][ $type ] ) ? $caps[ $user_id ][ $type ] : [];
+			$user_caps = isset( $caps[ $user_id ][ $type ] ) ? $caps[ $user_id ][ $type ] : array();
 		}
 
 		// Get from cache if exist.
 		if ( empty( $user_caps ) ) {
 			// Roles of current user.
 			$roles = self::get_current_roles( $network );
+			// Selected roles in settings.
+			$selected_roles = (array) beehive_analytics()->settings->get( 'roles', 'permissions', $network, array() );
 
 			// Report capabilities of current user role.
 			foreach ( $roles as $role ) {
-				// Get role's capabilities.
-				$type_caps = (array) beehive_analytics()->settings->get( $type, 'reports', $network, [] );
-				// Get caps for the role.
-				$role_caps = isset( $type_caps[ $role ] ) ? $type_caps[ $role ] : [];
-				// Add to caps array.
-				foreach ( $role_caps as $cap => $items ) {
-					// Make sure it is array before merge.
-					$items    = (array) $items;
-					$existing = isset( $user_caps[ $cap ] ) ? $user_caps[ $cap ] : [];
-					// Merge role's cap to other caps.
-					$user_caps[ $cap ] = array_merge( $items, $existing );
+				// Only if role is selected in settings.
+				if ( in_array( $role, $selected_roles, true ) ) {
+					// Get role's capabilities.
+					$role_caps = (array) beehive_analytics()->settings->get( $role, 'reports', $network, array() );
+					// Get caps for the role.
+					$role_caps = isset( $role_caps[ $type ] ) ? $role_caps[ $type ] : array();
+					// Add to caps array.
+					if ( ! empty( $role_caps ) ) {
+						$user_caps = array_unique( array_merge( $user_caps, $role_caps ) );
+					}
 				}
 			}
 
@@ -451,7 +461,14 @@ class Permission {
 
 		if ( is_null( $levels ) ) {
 			// Get Pro Sites levels.
-			$levels = get_site_option( 'psts_levels', [] );
+			$levels = get_site_option( 'psts_levels', array() );
+
+			// Remove invisible items.
+			foreach ( $levels as $level => $data ) {
+				if ( empty( $data['is_visible'] ) ) {
+					unset( $levels[ $level ] );
+				}
+			}
 		}
 
 		/**

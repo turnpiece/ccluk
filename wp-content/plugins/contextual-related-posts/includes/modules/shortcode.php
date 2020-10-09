@@ -7,7 +7,7 @@
  * @author    Ajay D'Souza
  * @license   GPL-2.0+
  * @link      https://webberzone.com
- * @copyright 2009-2019 Ajay D'Souza
+ * @copyright 2009-2020 Ajay D'Souza
  */
 
 // If this file is called directly, abort.
@@ -31,9 +31,10 @@ function crp_shortcode( $atts, $content = null ) { // phpcs:ignore Generic.CodeA
 		array_merge(
 			$crp_settings,
 			array(
-				'heading'      => 1,
-				'is_shortcode' => 1,
-				'offset'       => 0,
+				'heading'         => 1,
+				'is_shortcode'    => 1,
+				'offset'          => 0,
+				'include_cat_ids' => '',
 			)
 		),
 		$atts,

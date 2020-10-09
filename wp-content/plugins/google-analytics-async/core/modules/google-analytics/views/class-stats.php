@@ -1,23 +1,28 @@
 <?php
+/**
+ * The stats view functionality for the analytics
+ *
+ * @link    http://premium.wpmudev.org
+ * @since   3.2.0
+ *
+ * @author  Joel James <joel@incsub.com>
+ * @package Beehive\Core\Modules\Google_Analytics\Views
+ */
 
 namespace Beehive\Core\Modules\Google_Analytics\Views;
 
 // If this file is called directly, abort.
 defined( 'WPINC' ) || die;
 
-use Beehive\Core\Helpers\General;
-use Beehive\Core\Helpers\Template;
-use Beehive\Core\Modules\Google_Auth;
+use Beehive\Core\Helpers;
+use Beehive\Core\Controllers\Assets;
 use Beehive\Core\Utils\Abstracts\View;
 use Beehive\Core\Modules\Google_Analytics;
 
 /**
- * The stats view functionality for the analytics
+ * Class Stats
  *
- * @link   http://premium.wpmudev.org
- * @since  3.2.0
- *
- * @author Joel James <joel@incsub.com>
+ * @package Beehive\Core\Modules\Google_Analytics\Views
  */
 class Stats extends View {
 
@@ -29,16 +34,18 @@ class Stats extends View {
 	 * @return void
 	 */
 	public function init() {
-		// Setup required vars.
-		add_filter( 'beehive_google_dashboard_stats_localize_vars', [ $this, 'dashboard_vars' ] );
+		// Setup vars for the all stats page.
+		add_filter( 'beehive_google_stats_page_localize_vars', array( $this, 'all_stats_vars' ) );
 
-		if ( Google_Analytics\Helper::instance()->can_get_stats( $this->is_network() ) ) {
-			// Setup vars for the all stats page.
-			add_filter( 'beehive_google_stats_page_localize_vars', [ $this, 'all_stats_vars' ] );
+		// Common vars.
+		add_filter( 'beehive_assets_scripts_common_localize_vars', array( $this, 'common_vars' ) );
 
-			// Setup vars for the post edit page.
-			add_filter( 'beehive_google_post_stats_localize_vars', [ $this, 'post_vars' ] );
-		}
+		// Setup vars for the scripts.
+		add_filter( 'beehive_assets_scripts_localize_vars_beehive-post-statistics', array( $this, 'post_vars' ) );
+		add_filter( 'beehive_assets_scripts_localize_vars_beehive-post-statistics', array( $this, 'stats_vars' ) );
+		add_filter( 'beehive_assets_scripts_localize_vars_beehive-statistics-page', array( $this, 'stats_vars' ) );
+		add_filter( 'beehive_assets_scripts_localize_vars_beehive-dashboard-widget', array( $this, 'stats_vars' ) );
+		add_filter( 'beehive_assets_scripts_localize_vars_beehive-dashboard', array( $this, 'stats_vars' ) );
 	}
 
 	/**
@@ -49,17 +56,11 @@ class Stats extends View {
 	 * @return void
 	 */
 	public function dashboard_widget() {
-		// Render widget template.
-		$this->view( 'stats/google/dashboard-widget/widget', [
-			'logged_in'       => Google_Auth\Helper::instance()->is_logged_in( $this->is_network() ),
-			'can_get_stats'   => Google_Analytics\Helper::instance()->can_get_stats( $this->is_network() ),
-			'network'         => $this->is_network(),
-			'periods'         => $this->periods(),
-			'selected_period' => date( 'Y-m-d', strtotime( '-30 days' ) ),
-			'settings_url'    => Template::settings_page( 'general', $this->is_network() ),
-			'statistics_url'  => Template::statistics_page( $this->is_network() ),
-			'delay_notice'    => false,
-		] );
+		echo '<div id="beehive-dashboard-statistics-app"></div>';
+
+		// Enqueue assets.
+		Assets::instance()->enqueue_style( 'beehive-dashboard-widget' );
+		Assets::instance()->enqueue_script( 'beehive-dashboard-widget' );
 	}
 
 	/**
@@ -71,7 +72,7 @@ class Stats extends View {
 	 *
 	 * @return void
 	 */
-	public function popular_widget_content( $args = [] ) {
+	public function popular_widget_content( $args = array() ) {
 		// Render popular widget form template.
 		$this->view( 'stats/google/popular-widget/front', $args );
 	}
@@ -85,7 +86,7 @@ class Stats extends View {
 	 *
 	 * @return void
 	 */
-	public function popular_widget_form( $args = [] ) {
+	public function popular_widget_form( $args = array() ) {
 		// Render popular widget form template.
 		$this->view( 'stats/google/popular-widget/admin', $args );
 	}
@@ -100,16 +101,11 @@ class Stats extends View {
 	 * @return void
 	 */
 	public function post_widget() {
-		// Render stats metabox template.
-		$this->view( 'stats/google/post-metabox/metabox', [
-			'stats'      => $this->post_stats(),
-			'start_date' => date( 'M j', strtotime( '-30 days' ) ),
-			'end_date'   => date( 'M j', strtotime( '-1 days' ) ),
-		] );
+		echo '<div id="beehive-post-statistics-app"></div>';
 
-		// Enqueue scripts.
-		wp_enqueue_style( 'beehive_post_stats' );
-		wp_enqueue_script( 'beehive_post_stats' );
+		// Enqueue assets.
+		Assets::instance()->enqueue_style( 'beehive-post-statistics' );
+		Assets::instance()->enqueue_script( 'beehive-post-statistics' );
 	}
 
 	/**
@@ -120,47 +116,26 @@ class Stats extends View {
 	 * @return void
 	 */
 	public function stats_page() {
-		// Render stats main page.
-		$this->view( 'stats/google/stats-page/stats', [
-			'logged_in'       => Google_Auth\Helper::instance()->is_logged_in( $this->is_network() ),
-			'can_get_stats'   => Google_Analytics\Helper::instance()->can_get_stats( $this->is_network() ),
-			'network'         => $this->is_network(),
-			'periods'         => $this->periods(),
-			'selected_period' => date( 'Y-m-d', strtotime( '-30 days' ) ),
-			'delay_notice'    => false,
-		] );
+		echo '<div id="beehive-statistics-app"></div>';
+
+		// Enqueue assets.
+		Assets::instance()->enqueue_style( 'beehive-statistics-page' );
+		Assets::instance()->enqueue_script( 'beehive-statistics-page' );
 	}
 
 	/**
-	 * Setup script vars for the dashboard stats script.
+	 * Render settings page content for the Analytics.
 	 *
-	 * @param array $vars Localized vars.
+	 * @since 3.3.0
 	 *
-	 * @since 3.2.0
-	 *
-	 * @return mixed
+	 * @return void
 	 */
-	public function dashboard_vars( $vars ) {
-		// Network flag.
-		$vars['network'] = $this->is_network() ? 1 : 0;
-		// Add labels.
-		$vars['labels'] = $this->labels();
+	public function settings_page() {
+		echo '<div id="beehive-ga-settings-app"></div>';
 
-		// Can access stats?.
-		$can_access = Google_Analytics\Helper::instance()->can_get_stats( $this->is_network() );
-
-		// Stats widget.
-		if ( General::is_plugin_dashboard_widget() && $can_access ) {
-			// Setup stats data.
-			$vars['stats'] = $this->dashboard_stats();
-
-			// If cache stats are empty, set a flag, we will load stats using ajax.
-			if ( empty( $vars['stats'] ) ) {
-				$vars['async_load_dashboard_stats'] = true;
-			}
-		}
-
-		return $vars;
+		// Enqueue assets.
+		Assets::instance()->enqueue_style( 'beehive-ga-settings' );
+		Assets::instance()->enqueue_script( 'beehive-ga-settings' );
 	}
 
 	/**
@@ -169,279 +144,220 @@ class Stats extends View {
 	 * @param array $vars Localized vars.
 	 *
 	 * @since 3.2.0
+	 * @since 3.2.4 Removed unwanted items.
 	 *
-	 * @return mixed
+	 * @return array
 	 */
 	public function post_vars( $vars ) {
 		global $pagenow, $post;
 
-		// Network flag.
-		$vars['network'] = 0;
-		// Add labels.
-		$vars['labels'] = $this->labels();
-
-		// Can access stats?.
-		$can_access = Google_Analytics\Helper::instance()->can_get_stats( $this->is_network() );
-
-		// Allowed post type.
-		$allowed_post = in_array( get_post_type(), Google_Analytics\Helper::instance()->post_types(), true );
-
-		// Post stats.
-		if ( 'post.php' === $pagenow && $allowed_post && $can_access ) {
-			// Setup stats data.
-			$vars['stats'] = $this->post_stats();
-			// Post ID.
+		if ( 'post.php' === $pagenow && $post->ID > 0 ) {
 			$vars['post'] = $post->ID;
-
-			// Set a flag to load stats via ajax.
-			if ( empty( $vars['stats'] ) ) {
-				$vars['async_load_post_stats'] = true;
-			}
 		}
+
+		// Periods.
+		$vars['dates'] = array(
+			'start_date' => gmdate( 'M j', strtotime( '-30 days' ) ),
+			'end_date'   => gmdate( 'M j', strtotime( '-1 days' ) ),
+		);
 
 		return $vars;
 	}
 
 	/**
-	 * Setup script vars for the all stats script.
+	 * Setup script vars for the all stats and dashboard widget script.
 	 *
 	 * @param array $vars Localized vars.
 	 *
-	 * @since 3.2.0
+	 * @since 3.2.4
 	 *
-	 * @return mixed
+	 * @return array
 	 */
-	public function all_stats_vars( $vars ) {
-		// Network flag.
-		$vars['network'] = $this->is_network() ? 1 : 0;
-		// Add labels.
-		$vars['labels'] = $this->labels();
-
-		// Can access stats?.
-		$can_access = Google_Analytics\Helper::instance()->can_get_stats( $this->is_network() );
-
-		// Stats widget.
-		if ( General::is_plugin_stats() && $can_access ) {
-			// Get stats data.
-			$vars['stats'] = $this->all_stats();
-
-			// If stats are empty, we need to load them using ajax.
-			if ( empty( $vars['stats'] ) ) {
-				$vars['async_load_all_stats'] = true;
-			}
-		}
+	public function stats_vars( $vars ) {
+		$vars['can_get_stats']     = Google_Analytics\Helper::instance()->can_get_stats( $this->is_network() );
+		$vars['stats_permissions'] = $this->stats_permissions();
 
 		return $vars;
 	}
 
 	/**
-	 * Get translatable labels for Google stats charts.
+	 * Get the list of permitted stats item from the settings.
 	 *
-	 * @since 3.2.0
-	 *
-	 * @return array $labels
-	 */
-	private function labels() {
-		$labels = [
-			'no_info'            => __( 'No information', 'ga_trans' ),
-			'top_pages'          => __( 'Top Pages', 'ga_trans' ),
-			'visits'             => __( 'Visits', 'ga_trans' ),
-			'views'              => __( 'Views', 'ga_trans' ),
-			'top_countries'      => __( 'Top Countries', 'ga_trans' ),
-			'sessions'           => __( 'Sessions', 'ga_trans' ),
-			'trend'              => __( 'Trend', 'ga_trans' ),
-			'average_sessions'   => __( 'Avg. time', 'ga_trans' ),
-			'pageviews'          => __( 'Pageviews', 'ga_trans' ),
-			'returning_visitors' => __( 'Returning visitors', 'ga_trans' ),
-			'new_visitors'       => __( 'New visitors', 'ga_trans' ),
-			'users'              => __( 'Users', 'ga_trans' ),
-			'page_session'       => __( 'Pages/Session', 'ga_trans' ),
-			'bounce_rate'        => __( 'Bounce Rate', 'ga_trans' ),
-			'bounce_rates'       => __( 'Bounce Rates', 'ga_trans' ),
-			'country'            => __( 'Country', 'ga_trans' ),
-			'mediums'            => __( 'Mediums', 'ga_trans' ),
-			'social_networks'    => __( 'Social Networks', 'ga_trans' ),
-			'search_engines'     => __( 'Search Engines', 'ga_trans' ),
-			'select_option'      => __( 'Select an option below to print chart data.', 'ga_trans' ),
-			'has'                => __( 'has', 'ga_trans' ),
-			'current_period'     => __( 'Current Period', 'ga_trans' ),
-			'previous_period'    => __( 'Previous Period', 'ga_trans' ),
-		];
-
-		/**
-		 * Filter to modify labels of Google stats charts.
-		 *
-		 * @param array $labels Labels.
-		 *
-		 * @since 3.2.0
-		 */
-		return apply_filters( 'beehive_google_stats_labels', $labels );
-	}
-
-	/**
-	 * Get periods for the date range filter dropdown.
-	 *
-	 * Create an array of date data to show as dropdown in
-	 * stats dashboard widget.
-	 *
-	 * @since 3.2.0
+	 * @since 3.2.4
 	 *
 	 * @return array
 	 */
-	private function periods() {
-		// Today's date.
-		$today = date( 'Y-m-d' );
-		// Yesterday's date.
-		$yesterday = date( 'Y-m-d', strtotime( '-1 days' ) );
-
-		// Dates array.
-		$dates = [
-			$today                                   => [
-				'label' => __( 'Today', 'ga_trans' ),
-				'end'   => $today,
-			],
-			$yesterday                               => [
-				'label' => __( 'Yesterday', 'ga_trans' ),
-				'end'   => $yesterday,
-			],
-			date( 'Y-m-d', strtotime( '-7 days' ) )  => [
-				'label' => __( 'Last 7 days', 'ga_trans' ),
-				'end'   => $yesterday,
-			],
-			date( 'Y-m-d', strtotime( '-30 days' ) ) => [
-				'label' => __( 'Last 30 days', 'ga_trans' ),
-				'end'   => $yesterday,
-			],
-			date( 'Y-m-d', strtotime( '-90 days' ) ) => [
-				'label' => __( 'Last 90 days', 'ga_trans' ),
-				'end'   => $yesterday,
-			],
-			date( 'Y-m-d', strtotime( '-1 years' ) ) => [
-				'label' => __( 'Last year', 'ga_trans' ),
-				'end'   => $yesterday,
-			],
-			date( 'Y-m-d', strtotime( '-3 years' ) ) => [
-				'label' => __( 'Last 3 years', 'ga_trans' ),
-				'end'   => $yesterday,
-			],
-		];
-
-		/**
-		 * Filter to add or remove periods from date filter.
-		 *
-		 * The key of the item should be the start date, and the value
-		 * array should contain label and end date.
-		 *
-		 * @param array $dates Dates array.
-		 *
-		 * @since 3.2.0
-		 */
-		return apply_filters( 'beehive_google_analytics_periods', $dates );
-	}
-
-	/**
-	 * Get all stats reports data from Google.
-	 *
-	 * We will try to get the data from cache first.
-	 *
-	 * @since 3.2.0
-	 *
-	 * @return array
-	 */
-	private function dashboard_stats() {
-		// Stats instance.
-		$stats = Google_Analytics\Stats::instance();
-
-		// Get stats.
-		$stats = $stats->stats(
-			date( 'Y-m-d', strtotime( '-30 days' ) ),
-			date( 'Y-m-d', strtotime( '-1 days' ) ),
-			'dashboard',
-			$this->is_network(),
-			false,
-			true
-		);
-
-		/**
-		 * Filter to alter stats default data.
-		 *
-		 * @param array $stats Default stats.
-		 *
-		 * @since 3.2.0
-		 */
-		return apply_filters( 'beehive_google_dashboard_stats', $stats );
-	}
-
-	/**
-	 * Get all stats reports data from Google.
-	 *
-	 * We will get the data from cache only. If not found in cache,
-	 * we will set a flag so that the data will be loaded using ajax.
-	 *
-	 * @since 3.2.0
-	 *
-	 * @return array
-	 */
-	private function all_stats() {
-		// Stats instance.
-		$stats = Google_Analytics\Stats::instance();
-
-		// Get stats.
-		$stats = $stats->stats(
-			date( 'Y-m-d', strtotime( '-30 days' ) ),
-			date( 'Y-m-d', strtotime( '-1 days' ) ),
-			'stats',
-			$this->is_network(),
-			false,
-			true
-		);
-
-		/**
-		 * Filter to alter stats default data.
-		 *
-		 * @param array $stats Default stats.
-		 *
-		 * @since 3.2.0
-		 */
-		return apply_filters( 'beehive_google_all_stats', $stats );
-	}
-
-	/**
-	 * Get stats data for the current post.
-	 *
-	 * We will try to get the data from cache first.
-	 *
-	 * @since 3.2.0
-	 *
-	 * @return array
-	 */
-	private function post_stats() {
-		global $post;
-
-		$stats = [];
-
-		// Only when valid post id found.
-		if ( ! empty( $post->ID ) ) {
-			// Stats instance.
-			$stats = Google_Analytics\Stats::instance();
-
-			// Get stats.
-			$stats = $stats->post_stats(
-				$post->ID,
-				date( 'Y-m-d', strtotime( '-30 days' ) ),
-				date( 'Y-m-d', strtotime( '-1 days' ) ),
-				false,
-				true
-			);
+	private function stats_permissions() {
+		// Network admin is Super Man.
+		if ( $this->is_network() ) {
+			return array();
 		}
 
-		/**
-		 * Filter to alter stats default data.
-		 *
-		 * @param array $stats Default stats.
-		 *
-		 * @since 3.2.0
-		 */
-		return apply_filters( 'beehive_google_post_stats', $stats );
+		$network = false;
+
+		// Check if network options should be considered.
+		if ( Helpers\General::is_networkwide() ) {
+			// Can sub sites override.
+			$network = ! (bool) beehive_analytics()->settings->get( 'overwrite_cap', 'permissions', true );
+		}
+
+		// Get the custom capability.
+		$custom_cap = beehive_analytics()->settings->get( 'custom_cap', 'permissions', $network );
+
+		return array(
+			'has_custom_cap' => ! empty( $custom_cap ) && current_user_can( $custom_cap ) ? 1 : 0,
+			'dashboard'      => Helpers\Permission::user_report_caps( 'dashboard', $network ),
+			'statistics'     => Helpers\Permission::user_report_caps( 'statistics', $network ),
+		);
+	}
+
+	/**
+	 * Commons vars added from GA modules.
+	 *
+	 * @param array $vars Existing vars.
+	 *
+	 * @since 3.3.0
+	 *
+	 * @return array
+	 */
+	public function common_vars( $vars ) {
+		// Setup URLs.
+		$vars['urls']['statistics']  = Google_Analytics\Helper::statistics_url( $this->is_network() );
+		$vars['urls']['ga_account']  = Google_Analytics\Helper::settings_url( 'account', $this->is_network() );
+		$vars['urls']['ga_settings'] = Google_Analytics\Helper::settings_url( 'settings', $this->is_network() );
+
+		return $vars;
+	}
+
+	/**
+	 * Add items for the report section settings.
+	 *
+	 * Add sections from dashboard widget and all statistics page.
+	 *
+	 * @param array $items Report items.
+	 *
+	 * @since 3.2.4
+	 *
+	 * @return array
+	 */
+	public function report_items( $items ) {
+		// Dashboard widget.
+		$items['dashboard'] = array(
+			'name'     => 'dashboard',
+			'title'    => __( 'Dashboard Widget', 'ga_trans' ),
+			'children' => array(
+				array(
+					'name'     => 'general',
+					'title'    => __( 'General Stats', 'ga_trans' ),
+					'children' => array(
+						array(
+							'name'  => 'summary',
+							'title' => __( 'General Stats', 'ga_trans' ),
+
+						),
+					),
+				),
+				array(
+					'name'     => 'audience',
+					'title'    => __( 'Audiences', 'ga_trans' ),
+					'children' => array(
+						array(
+							'name'  => 'sessions',
+							'title' => __( 'Sessions', 'ga_trans' ),
+
+						),
+						array(
+							'name'  => 'users',
+							'title' => __( 'Users', 'ga_trans' ),
+
+						),
+						array(
+							'name'  => 'pageviews',
+							'title' => __( 'Pageviews', 'ga_trans' ),
+
+						),
+						array(
+							'name'  => 'page_sessions',
+							'title' => __( 'Pages/Sessions', 'ga_trans' ),
+
+						),
+						array(
+							'name'  => 'average_sessions',
+							'title' => __( 'Avg. Time', 'ga_trans' ),
+
+						),
+						array(
+							'name'  => 'bounce_rates',
+							'title' => __( 'Bounce Rates', 'ga_trans' ),
+
+						),
+					),
+				),
+				array(
+					'name'  => 'pages',
+					'title' => __( 'Top Pages & Views', 'ga_trans' ),
+				),
+				array(
+					'name'     => 'traffic',
+					'title'    => __( 'Traffic', 'ga_trans' ),
+					'children' => array(
+						array(
+							'name'  => 'countries',
+							'title' => __( 'Top Countries', 'ga_trans' ),
+
+						),
+						array(
+							'name'  => 'mediums',
+							'title' => __( 'Top Medium', 'ga_trans' ),
+
+						),
+						array(
+							'name'  => 'search_engines',
+							'title' => __( 'Top Search Engine', 'ga_trans' ),
+
+						),
+						array(
+							'name'  => 'social_networks',
+							'title' => __( 'Top Social Network', 'ga_trans' ),
+
+						),
+					),
+				),
+			),
+		);
+
+		// All statistics page.
+		$items['statistics'] = array(
+			'name'     => 'statistics',
+			'title'    => __( 'Statistics/Google Analytics', 'ga_trans' ),
+			'children' => array(
+				array(
+					'name'  => 'visitors',
+					'title' => __( 'Visitors', 'ga_trans' ),
+				),
+				array(
+					'name'  => 'pages',
+					'title' => __( 'Top Pages', 'ga_trans' ),
+				),
+				array(
+					'name'  => 'countries',
+					'title' => __( 'Top Countries', 'ga_trans' ),
+				),
+				array(
+					'name'  => 'mediums',
+					'title' => __( 'Top Medium', 'ga_trans' ),
+				),
+				array(
+					'name'  => 'social_networks',
+					'title' => __( 'Top Social Network', 'ga_trans' ),
+				),
+				array(
+					'name'  => 'search_engines',
+					'title' => __( 'Top Search Engine', 'ga_trans' ),
+				),
+			),
+		);
+
+		return $items;
 	}
 }

@@ -1,5 +1,5 @@
 <template>
-    <div v-if="whitelabel.hide_doc_link===false" class="sui-actions-right">
+    <div v-if="is_free!==1 && whitelabel.hide_doc_link===false" class="sui-actions-right">
         <a :href="link" target="_blank" class="sui-button sui-button-ghost">
             <i class="sui-icon-academy"></i> {{__("View Documentation")}}
         </a>
@@ -15,7 +15,8 @@
         props: ['link'],
         data: function () {
             return {
-                whitelabel: defender.whitelabel
+                whitelabel: defender.whitelabel,
+                is_free: parseInt(defender.is_free)
             }
         }
     }

@@ -1,0 +1,104 @@
+#configs {
+  input[type="file"] {
+    display: none;
+    opacity: 0;
+  }
+
+  .sui-upsell-items {
+    .sui-box-settings-row {
+      &:after {
+        display: none;
+      }
+    }
+  }
+
+  .sui-accordion-item-header {
+    .config-description {
+      position: relative;
+
+      .quick-apply {
+        display: none;
+      }
+    }
+
+    .sui-dropdown {
+      margin-left: 20px;
+      margin-right: 0;
+    }
+
+    .defender-container {
+      background-color: #B12508;
+      border-radius: 10px;
+      margin-right: 15px;
+
+      i {
+        margin: 7px;
+        font-size: 14px;
+      }
+
+      i:before {
+        color: #FFBA01
+      }
+    }
+
+    i.sui-icon-check-tick {
+      margin-left: 10px;
+    }
+
+    i.sui-icon-check-tick:before {
+      color: #DDDDDD;
+      font-size: 12px !important;
+    }
+
+    .defender-config-title {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      display: inline-block;
+    }
+
+    .sui-button-icon {
+      i {
+        margin: 0;
+      }
+    }
+  }
+
+  .config-detail {
+    hr{
+      margin-bottom: 20px;
+      margin-top: 20px;
+    }
+    table {
+      td {
+        color: #888888
+      }
+
+      td:nth-child(1) {
+        color: #333
+      }
+
+      tr.odd {
+        background-color: #f8f8f8;
+      }
+    }
+  }
+
+  .sui-modal-content {
+    textarea.sui-form-control {
+      line-height: 30px;
+      resize: none;
+    }
+  }
+
+  @media (min-width: 783px) {
+    .sui-box-body .sui-upsell-row .defender-config-notice-info {
+      padding-left: 130px;
+    }
+  }
+  @media (max-width: 768px) {
+    .config-description {
+      display: none;
+    }
+  }
+}

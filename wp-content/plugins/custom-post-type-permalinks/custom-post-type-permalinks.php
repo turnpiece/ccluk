@@ -5,13 +5,13 @@
  * Description:  Add post archives of custom post type and customizable permalinks.
  * Author: Toro_Unit
  * Author URI: https://torounit.com/
- * Version: 3.3.4
+ * Version: 3.4.1
  * Text Domain: custom-post-type-permalinks
  * License: GPL2 or later
  * Domain Path: /language/
  *
  * @package Custom_Post_Type_Permalinks
- * @version 3.3.4
+ * @version 3.4.1
  */
 
 define( 'CPTP_PLUGIN_FILE', __FILE__ );
@@ -20,21 +20,23 @@ define( 'CPTP_DEFAULT_PERMALINK', '/%postname%/' );
 $cptp_data = get_file_data(
 	__FILE__,
 	array(
-		'Name' => 'Plugin Name',
-		'PluginURI' => 'Plugin URI',
-		'Version' => 'Version',
+		'Name'        => 'Plugin Name',
+		'PluginURI'   => 'Plugin URI',
+		'Version'     => 'Version',
 		'Description' => 'Description',
-		'Author' => 'Author',
-		'AuthorURI' => 'Author URI',
-		'TextDomain' => 'Text Domain',
-		'DomainPath' => 'Domain Path',
-		'Network' => 'Network',
+		'Author'      => 'Author',
+		'AuthorURI'   => 'Author URI',
+		'TextDomain'  => 'Text Domain',
+		'DomainPath'  => 'Domain Path',
+		'Network'     => 'Network',
 	)
 );
 
 define( 'CPTP_VERSION', $cptp_data['Version'] );
 define( 'CPTP_DOMAIN_PATH', $cptp_data['DomainPath'] );
 define( 'CPTP_TEXT_DOMAIN', $cptp_data['TextDomain'] );
+
+unset( $cptp_data );
 
 
 /**

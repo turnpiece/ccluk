@@ -75,6 +75,12 @@ class Settings extends \Hammer\WP\Settings {
 	public $max_filesize = 1;
 
 	/**
+	 * Subject for email with issues
+	 * @var string
+	 */
+	public $email_subject_issue = '';
+	/**
+	 * Subject for email without issues
 	 * @var string
 	 */
 	public $email_subject = '';
@@ -121,8 +127,9 @@ class Settings extends \Hammer\WP\Settings {
 	}
 
 	public function __construct( $id, $is_multi ) {
-		$this->email_subject   = __( 'Scan of {SITE_URL} complete. {ISSUES_COUNT} issues found.', wp_defender()->domain );
-		$this->email_has_issue = __( 'Hi {USER_NAME},
+		$this->email_subject_issue = __( 'Scan of {SITE_URL} complete. {ISSUES_COUNT} issues found.',
+			wp_defender()->domain );
+		$this->email_has_issue     = __( 'Hi {USER_NAME},
 
 WP Defender here, reporting back from the front.
 
@@ -132,7 +139,9 @@ I\'ve finished scanning {SITE_URL} for vulnerabilities and I found {ISSUES_COUNT
 Stay Safe,
 WP Defender
 Official WPMU DEV Superhero', wp_defender()->domain );
-		$this->email_all_ok    = __( 'Hi {USER_NAME},
+		$this->email_subject       = __( 'Scan of {SITE_URL} complete. {ISSUES_COUNT} issues found.',
+			wp_defender()->domain );
+		$this->email_all_ok        = __( 'Hi {USER_NAME},
 
 WP Defender here, reporting back from the front.
 
@@ -211,7 +220,8 @@ Official WPMU DEV Superhero', wp_defender()->domain );
 	 */
 	public static function instance() {
 		if ( is_null( self::$_instance ) ) {
-			$class           = new Settings( 'wd_scan_settings', WP_Helper::is_network_activate( wp_defender()->plugin_slug ) );
+			$class           = new Settings( 'wd_scan_settings',
+				WP_Helper::is_network_activate( wp_defender()->plugin_slug ) );
 			self::$_instance = $class;
 		}
 
@@ -220,7 +230,7 @@ Official WPMU DEV Superhero', wp_defender()->domain );
 
 	/**
 	 * @param $slug
-	 * @param array $args
+	 * @param  array  $args
 	 *
 	 * @return Queue|null
 	 */
@@ -324,31 +334,103 @@ Official WPMU DEV Superhero', wp_defender()->domain );
 		);
 	}
 
+	public function format_hub_data() {
+		return [
+			'scan_core'                => $this->scan_core ? __( 'Yes', wp_defender()->domain ) : __( 'No',
+				wp_defender()->domain ),
+			'scan_vuln'                => $this->scan_vuln ? __( 'Yes', wp_defender()->domain ) : __( 'No',
+				wp_defender()->domain ),
+			'scan_content'             => $this->scan_content ? __( 'Yes', wp_defender()->domain ) : __( 'No',
+				wp_defender()->domain ),
+			'max_filesize'             => $this->max_filesize . ' MB',
+			'notification'             => $this->notification ? __( 'Activate',
+				wp_defender()->domain ) : __( 'Inactivate',
+				wp_defender()->domain ),
+			'always_send_notification' => $this->always_send_notification ? __( 'Yes',
+				wp_defender()->domain ) : __( 'No', wp_defender()->domain ),
+			'email_subject_issue'      => $this->email_subject_issue,
+			'email_subject'            => $this->email_subject,
+			'email_has_issue'          => $this->email_has_issue,
+			'email_all_ok'             => $this->email_all_ok,
+			'recipients_notification'  => empty( $this->recipients_notification ) ? __( 'No recipients',
+				wp_defender()->domain ) : Utils::instance()->recipientsToString( $this->recipients_notification ),
+			'report'                   => $this->report ? __( 'Activate',
+				wp_defender()->domain ) : __( 'Inactivate', wp_defender()->domain ),
+			'always_send'              => $this->always_send ? __( 'Yes',
+				wp_defender()->domain ) : __( 'No', wp_defender()->domain ),
+			'recipients'               => empty( $this->recipients ) ? __( 'No recipients',
+				wp_defender()->domain ) : Utils::instance()->recipientsToString( $this->recipients ),
+			'frequency'                => Utils::instance()->format_frequency_for_hub( $this->frequency, $this->day,
+				$this->time )
+		];
+	}
+
+	/**
+	 * @return array
+	 */
+	public function export_strings( $configs ) {
+		$model = new Settings( 'wd_scan_settings',
+			WP_Helper::is_network_activate( wp_defender()->plugin_slug ) );
+		$model->import( $configs );
+		$strings = [];
+		if ( $this->is_any_active() ) {
+			$strings[] = __( 'Active', wp_defender()->domain );
+		} else {
+			$strings[] = __( 'Inactive', wp_defender()->domain );
+		}
+
+		if ( $model->notification ) {
+			$strings[] = __( 'Email notifications active', wp_defender()->domain );
+		}
+		if ( $model->report && ! wp_defender()->isFree ) {
+			$strings[] = sprintf( __( 'Email reports sending %s', wp_defender()->domain ),
+				Utils::instance()->frequencyToText( $model->frequency ) );
+		} elseif ( wp_defender()->isFree ) {
+			$strings[] = sprintf( __( 'Email report inactive %s', wp_defender()->domain ),
+				'<span class="sui-tag sui-tag-pro">Pro</span>' );
+		}
+
+		return $strings;
+	}
+
+	public function is_any_active() {
+		if ( ! $this->scan_core && wp_defender()->isFree ) {
+			return false;
+		} elseif ( ( ! $this->scan_core && ! $this->scan_content && ! $this->scan_vuln ) && ! wp_defender()->isFree ) {
+			return false;
+		}
+
+		return true;
+	}
+
 	/**
 	 * Define labels for settings key, we will use it for HUB
 	 *
-	 * @param null $key
+	 * @param  null  $key
 	 *
 	 * @return array|mixed
 	 */
 	public function labels( $key = null ) {
 		$labels = [
-			'scan_core'                => __( "Scan Types: WordPress Core", wp_defender()->domain ),
-			'scan_vuln'                => __( "Scan Types: Plugins & Themes", wp_defender()->domain ),
-			'scan_content'             => __( "Scan Types: Suspicious Code", wp_defender()->domain ),
-			'max_filesize'             => __( "Maximum included file size", wp_defender()->domain ),
-			'report'                   => __( "Report", wp_defender()->domain ),
-			'always_send'              => __( "Also send report when no issues are detected.", wp_defender()->domain ),
-			'recipients'               => __( "Recipients for report", wp_defender()->domain ),
-			'day'                      => __( "Day of the week", wp_defender()->domain ),
-			'time'                     => __( "Time of day", wp_defender()->domain ),
-			'frequency'                => __( "Frequency", wp_defender()->domain ),
-			'notification'             => __( "Notification", wp_defender()->domain ),
-			'always_send_notification' => __( "Also send notification when no issues are detected.", wp_defender()->domain ),
-			'recipients_notification'  => __( "Recipients for notification", wp_defender()->domain ),
-			'email_subject'            => __( "Email Subject", wp_defender()->domain ),
-			'email_all_ok'             => __( "When no issues are found", wp_defender()->domain ),
-			'email_has_issue'          => __( "When an issue is found", wp_defender()->domain )
+			'scan_core'                => __( "Scan WordPress Core", wp_defender()->domain ),
+			'scan_vuln'                => __( "Scan Plugins & Themes", wp_defender()->domain ),
+			'scan_content'             => __( "Scan Suspicious Code", wp_defender()->domain ),
+			'max_filesize'             => __( "Maximum included filesize", wp_defender()->domain ),
+			'notification'             => __( "Send scan completion email", wp_defender()->domain ),
+			'always_send_notification' => __( "Send scan completion emails even if no issues are detected",
+				wp_defender()->domain ),
+			'email_subject_issue'      => __( "Email subject when an issue is found", wp_defender()->domain ),
+			'email_subject'            => __( "Email subject when no issues are found", wp_defender()->domain ),
+			'email_has_issue'          => __( "Email body when an issue is found", wp_defender()->domain ),
+			'email_all_ok'             => __( "Email body when no issues are found", wp_defender()->domain ),
+			'recipients_notification'  => __( "Scan completion email recipients", wp_defender()->domain ),
+
+			'report'      => __( "Send scheduled email reports", wp_defender()->domain ),
+			'always_send' => __( "Send email report even if no issues are detected",
+				wp_defender()->domain ),
+			'recipients'  => __( "Scheduled email report recipients", wp_defender()->domain ),
+			'frequency'   => __( "Report Frequency", wp_defender()->domain ),
+
 		];
 		if ( $key != null ) {
 			return isset( $labels[ $key ] ) ? $labels[ $key ] : null;

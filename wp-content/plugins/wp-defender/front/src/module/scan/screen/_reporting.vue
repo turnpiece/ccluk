@@ -18,75 +18,82 @@
                         </span>
 					</div>
 					<div class="sui-box-settings-col-2">
-						<div class="sui-side-tabs">
-							<div class="sui-tabs-menu">
-								<label for="report_on"
-								       :class="{active:model.report===true}"
-								       class="sui-tab-item">
-									<input type="radio" :value="true"
-									       id="report_on"
-									       data-tab-menu="report-box"
-									       v-model="model.report">
-									{{__("On")}}
-								</label>
-								<label for="report_off"
-								       :class="{active:model.report===false}"
-								       class="sui-tab-item">
-									<input type="radio" :value="false" data-tab-menu=""
-									       id="report_off" v-model="model.report">
-									{{__("Off")}}
-								</label>
-							</div>
-							<div class="sui-tabs-content">
-								<div class="sui-tab-content sui-tab-boxed" :class="{active:model.report===true}"
-								     id="report-box" data-tab-content="report-box">
-									<p class="sui-p-small">
-										{{__("By default, we will only notify the recipients below when there is an issue from your file scan. Enable this option to send emails even when no issues are detected.")}}
-									</p>
-									<label class="sui-toggle">
-										<input role="presentation" type="checkbox" name="always_send"
-										       class="toggle-checkbox" v-model="model.always_send"
-										       id="always_send"/>
-										<span class="sui-toggle-slider"></span>
-									</label>
-									<label for="always_send" class="sui-toggle-label">
-										{{__("Also send notifications when no issues are detected.")}}
-									</label>
-									<div class="margin-top-30">
-										<recipients id="report_dialog" @update:recipients="updateRecipients"
-										            v-bind:recipients="model.recipients"></recipients>
-									</div>
-									<div class="margin-bottom-20">
-										<h3 class="sui-field-list-title">
-											{{__("Reporting")}}
-										</h3>
-									</div>
-									<div class="sui-form-field">
-										<label class="sui-label">{{__("Frequency")}}</label>
-										<select class="report-selector" v-model="model.frequency" name="frequency">
-											<option value="1">{{__("Daily")}}</option>
-											<option value="7">{{__("Weekly")}}</option>
-											<option value="30">{{__("Monthly")}}</option>
-										</select>
-									</div>
-									<div class="sui-form-field" v-show="model.frequency > 1">
-										<label class="sui-label">{{__("Day of the week")}}</label>
-										<select class="report-selector" name="day" v-model="model.day">
-											<option v-for="day in days_of_week" :value="day.toLowerCase()">{{day}}
-											</option>
-										</select>
-									</div>
-									<div class="sui-form-field">
-										<label class="sui-label">{{__("Time of day")}}</label>
-										<select class="sui-select report-selector" name="time" v-model="model.time">
-											<option v-for="(display,time) in times_of_day"
-											        :value="time">{{display}}
-											</option>
-										</select>
-									</div>
-								</div>
-							</div>
-						</div>
+            <sidetab slug="report" :active="model.report" @selected="model.report = $event"
+                     :labels="[
+                                   {
+                                      text:__('On'),
+                                      value:true,
+                                      mute:false
+                                   },
+                                   {
+                                      text:__('Off'),
+                                      value:false,
+                                      mute:true
+                                   }
+                               ]"
+            >
+              <template v-slot:true>
+                <p class="sui-p-small">
+                  {{__("By default, we will only notify the recipients below when there is an issue from your file scan. Enable this option to send emails even when no issues are detected.")}}
+                </p>
+                <label class="sui-toggle">
+                  <input role="presentation" type="checkbox" name="always_send"
+                         class="toggle-checkbox" v-model="model.always_send"
+                         id="always_send"/>
+                  <span class="sui-toggle-slider"></span>
+                </label>
+                <label for="always_send" class="sui-toggle-label">
+                  {{__("Also send notifications when no issues are detected.")}}
+                </label>
+                <div class="margin-top-30">
+                  <recipients id="report_dialog" @update:recipients="updateRecipients"
+                              v-bind:recipients="model.recipients"></recipients>
+                </div>
+                <div class="margin-bottom-20">
+                  <h3 class="sui-field-list-title">
+                    {{__("Reporting")}}
+                  </h3>
+                </div>
+                <div class="sui-form-field">
+                  <label for="scan_report_frequency"
+                         id="label_scan_report_frequency" class="sui-label">
+                    {{__("Frequency")}}
+                  </label>
+                  <select id="scan_report_frequency"
+                          aria-labelledby="label_scan_report_frequency" class="report-selector"
+                          v-model="model.frequency" name="frequency">
+                    <option value="1">{{__("Daily")}}</option>
+                    <option value="7">{{__("Weekly")}}</option>
+                    <option value="30">{{__("Monthly")}}</option>
+                  </select>
+                </div>
+                <div class="sui-form-field" v-show="model.frequency > 1">
+                  <label for="scan_report_day_week"
+                         id="label_scan_report_day_week" class="sui-label">
+                    {{__("Day of the week")}}
+                  </label>
+                  <select id="scan_report_day_week"
+                          aria-labelledby="label_scan_report_day_week" class="report-selector"
+                          name="day" v-model="model.day">
+                    <option v-for="day in days_of_week" :value="day.toLowerCase()">{{day}}
+                    </option>
+                  </select>
+                </div>
+                <div class="sui-form-field">
+                  <label for="scan_report_day_time"
+                         id="label_scan_report_day_time" class="sui-label">
+                    {{__("Time of day")}}
+                  </label>
+                  <select id="scan_report_day_time"
+                          aria-labelledby="label_scan_report_day_time" class="sui-select report-selector"
+                          name="time" v-model="model.time">
+                    <option v-for="(display,time) in times_of_day"
+                            :value="time">{{display}}
+                    </option>
+                  </select>
+                </div>
+              </template>
+            </sidetab>
 					</div>
 				</div>
 			</div>
@@ -105,6 +112,7 @@
 <script>
 	import base_hepler from "../../../helper/base_hepler";
 	import recipients from "../../../component/recipients"
+  import Sidetab from "../../../component/sidetab";
 
 	export default {
 		mixins: [base_hepler],
@@ -134,6 +142,7 @@
 			},
 		},
 		components: {
+      Sidetab,
 			recipients: recipients
 		},
 		mounted: function () {

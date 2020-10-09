@@ -8,13 +8,14 @@ namespace WP_Defender\Module\Advanced_Tools\Component;
 use Hammer\Helper\HTTP_Helper;
 use Hammer\WP\Component;
 use WP_Defender\Module\Advanced_Tools\Model\Mask_Settings;
+use WP_Defender\Module\Two_Factor\Component\Auth_API;
 
 class Mask_Login_Listener extends Component {
 	public function __construct() {
 		$settings        = Mask_Settings::instance();
 		$emergencySwitch = apply_filters( 'wpd_masklogin_disabled', 0 );
 
-		if ( $settings->isEnabled() == true && $emergencySwitch == 0 ) {
+		if ( true === $settings->isEnabled() && 0 === $emergencySwitch ) {
 			$isJetpackSSO = Auth_API::isJetPackSSO();
 			$isTML        = Auth_API::isTML();
 			if ( ! $isJetpackSSO && ! $isTML ) {
@@ -42,12 +43,12 @@ class Mask_Login_Listener extends Component {
 	}
 
 	public function filterEmailBody( $args ) {
-		$patterns = [
+		$patterns = array(
 			//approve comment
 			'/(' . preg_quote( site_url(), '/' ) . '\/wp-admin\/comment\.php\?.+)/',
 			//all comments
-			'/(' . preg_quote( site_url(), '/' ) . '\/wp-admin\/edit-comments\.php\?.+$)/'
-		];
+			'/(' . preg_quote( site_url(), '/' ) . '\/wp-admin\/edit-comments\.php\?.+$)/',
+		);
 
 		$message = $args['message'];
 		foreach ( $patterns as $pattern ) {
@@ -84,24 +85,70 @@ class Mask_Login_Listener extends Component {
 	}
 
 	public function handleLoginRequest() {
+		$ticket = HTTP_Helper::retrieveGet( 'ticket', false );
+		if ( false !== $ticket && Mask_Api::redeemTicket( $ticket ) ) {
+			//we have an express ticket
+			return true;
+		}
 		//need to check if the current request is for signup, login, if those is not the slug, then we redirect
 		//to the 404 redirect, or 403 wp die
 		$requestPath = Mask_Api::getRequestPath();
 		$settings    = Mask_Settings::instance();
-		$ticket      = HTTP_Helper::retrieveGet( 'ticket', false );
-		if ( $ticket !== false && Mask_Api::redeemTicket( $ticket ) ) {
-			//we have an express ticket
-			return true;
-		}
-		if ( '/' . ltrim( $settings->mask_url, '/' ) == $requestPath ) {
+		if ( '/' . ltrim( $settings->mask_url, '/' ) === $requestPath ) {
 			//we need to redirect this one to wp-login and open it
 			$this->_showLoginPage();
-		} elseif ( substr( $requestPath, 0, 9 ) == '/wp-admin' ) {
-			//this one try to login to wp-admin, redirect or lock it
-			$this->_handleRequestToAdmin();
-		} elseif ( $requestPath == '/wp-login.php' || $requestPath == '/login' ) {
-			//this one want to login, redirect or lock
-			$this->_handleRequestToLoginPage();
+		}
+		if ( is_user_logged_in() ) {
+			//do nothing
+			return;
+		}
+
+		if ( defined( 'DOING_AJAX' ) ) {
+			//we listen on normal requests, not ajax
+			return;
+		}
+		$requestPath = ltrim( $requestPath, '/' );
+		if ( ! $requestPath ) {
+			return;
+		}
+		// decoded url path, e.g. for case 'wp-%61dmin'
+		$requestPath = rawurldecode( strtolower( $requestPath ) );
+		/**
+		 * Cases:
+		 * /wp-admin/admin.php
+		 * /login/
+		 * /wp-login.php
+		 * /wp-signup.php and etc.
+		 */
+		$loginSlugs = apply_filters(
+			'wd_login_slugs',
+			array(
+				'wp-admin',
+				'wp-login',
+				'wp-login.php',
+				'login',
+				'dashboard',
+				'admin',
+				'wp-signup.php',
+			)
+		);
+		// check the request path contains default login text
+		if ( in_array( $requestPath, $loginSlugs, true ) ) {
+			return $this->_maybeLock();
+		}
+		// or the request path starts from 'wp-admin/' or 'login/'
+		if (
+			0 === strpos( $requestPath, 'wp-admin/' )
+			|| 0 === strpos( $requestPath, 'login/' )
+		) {
+			return $this->_maybeLock();
+		}
+		// for case '/something/wp-login.php' or '/something/wp-login.php'
+		if (
+			preg_match( '/wp-login\.php/i', $requestPath )
+			|| preg_match( '/wp-signup\.php/i', $requestPath )
+		) {
+			return $this->_maybeLock();
 		}
 	}
 
@@ -181,24 +228,27 @@ class Mask_Login_Listener extends Component {
 			if ( ! is_object( $screen ) ) {
 				return $currentUrl;
 			}
-			if ( $screen->id == 'sites-network' ) {
+			if ( 'sites-network' === $screen->id ) {
 				//case URLs inside sites list, need to check those with custom domain cause when redirect, it will require re-loggin
 				$requestPath = Mask_Api::getRequestPath( $currentUrl );
-				if ( $requestPath == '/wp-admin' ) {
+				if ( '/wp-admin' === $requestPath ) {
 					$currentDomain = $_SERVER['HTTP_HOST'];
 					$subDomain     = parse_url( $currentUrl, PHP_URL_HOST );
-					if ( stristr( $subDomain, $currentDomain ) === false ) {
+					if ( ! empty( $subDomain ) && false === stristr( $subDomain, $currentDomain ) ) {
 						return Mask_Api::getNewLoginUrl( $subDomain );
 					}
 				}
-			} elseif ( $screen->id == 'my-sites' ) {
+			} elseif ( 'my-sites' === $screen->id ) {
 				//case inside my sites page, sometime the login session does not share between sites and we get block
 				//we will add an OTP key for redirect to wp-admin without get block
 				$otp = Mask_Api::createOTPKey();
 
-				return add_query_arg( array(
-					'otp' => $otp
-				), $currentUrl );
+				return add_query_arg(
+					array(
+						'otp' => $otp,
+					),
+					$currentUrl
+				);
 			}
 		}
 
@@ -223,34 +273,6 @@ class Mask_Login_Listener extends Component {
 		return $currentUrl;
 	}
 
-	/**
-	 * Catch any request to wp-admin/*, block or redirect it base on settings.
-	 * This wont apply for logged in user
-	 */
-	private function _handleRequestToAdmin() {
-		global $pagenow;
-		if ( defined( 'DOING_AJAX' ) ) {
-			//we need to allow ajax access for other tasks
-			return;
-		}
-		if ( is_user_logged_in() ) {
-			return;
-		}
-
-		if ( ( $key = HTTP_Helper::retrieveGet( 'otp', false ) ) !== false
-		     && Mask_Api::verifyOTP( $key ) ) {
-			return;
-		}
-
-		$this->_maybeLock();
-	}
-
-	private function _handleRequestToLoginPage() {
-		if ( ! is_user_logged_in() ) {
-			$this->_maybeLock();
-		}
-	}
-
 	private function _showLoginPage() {
 		global $error, $interim_login, $action, $user_login, $user, $redirect_to;
 		require_once ABSPATH . 'wp-login.php';
@@ -259,11 +281,11 @@ class Mask_Login_Listener extends Component {
 
 	private function _maybeLock() {
 		$settings = Mask_Settings::instance();
-		if ( $settings->isRedirect() == true ) {
+		if ( true === $settings->isRedirect() ) {
 			wp_safe_redirect( Mask_Api::getRedirectUrl() );
 			die;
 		} else {
-			wp_die( __( "This feature is disabled", wp_defender()->domain ) );
+			wp_die( __( 'This feature is disabled', wp_defender()->domain ) );
 		}
 	}
 }

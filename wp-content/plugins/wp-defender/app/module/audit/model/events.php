@@ -5,6 +5,7 @@ namespace WP_Defender\Module\Audit\Model;
 use Hammer\Helper\WP_Helper;
 use WP_Defender\Behavior\Utils;
 use WP_Defender\Module\Audit\Component\Audit_API;
+
 use function foo\func;
 
 class Events extends \Hammer\WP\Settings {
@@ -40,7 +41,8 @@ class Events extends \Hammer\WP\Settings {
 	 */
 	public static function instance() {
 		if ( is_null( self::$_instance ) ) {
-			$class           = new Events( 'wd_audit_cached', WP_Helper::is_network_activate( wp_defender()->plugin_slug ) );
+			$class           = new Events( 'wd_audit_cached',
+				WP_Helper::is_network_activate( wp_defender()->plugin_slug ) );
 			self::$_instance = $class;
 		}
 
@@ -52,31 +54,39 @@ class Events extends \Hammer\WP\Settings {
 	}
 
 	/**
-	 * @param array $params
+	 * @param  array  $params
+	 * @param  bool  $first_data
 	 *
 	 * @return int
 	 */
-	public function hasData( $params = [] ) {
+	public function hasData( $params = [], $first_data = false ) {
 		if ( ! is_countable( $this->data ) ) {
 			//fail safe
+
 			return false;
 		}
-		/**
-		 * if params empty means we query for summary, which mostly cached
-		 */
-		if ( empty( $params ) && is_countable( $this->data ) ) {
-			return count( $this->data );
+
+		if ( empty( $params ) ) {
+			//if no filter passed, then it means it elsewhere, we just need to check if this created in the db or not
+			$is = get_site_option( 'wd_audit_cached' );
+
+			if ( ! is_array( $is ) ) {
+				$is = json_decode( $is, true );
+			}
+
+			if ( ! is_array( $is ) ) {
+				return false;
+			}
+
+			return true;
 		}
 		/**
 		 * because we only cached for 2 months, so if user pick older there wont be data
 		 * return from API instead
 		 */
-		if ( is_countable( $this->data ) ) {
-
-			//if the timestamp smaller date from value, means we will have to pull the stuff from API
-			if ( strtotime( $params['date_from'] ) > strtotime( $this->lastSyncFrom ) ) {
-				return true;
-			}
+		//if the timestamp smaller date from value, means we will have to pull the stuff from API
+		if ( strtotime( $this->lastSyncFrom ) !== false && strtotime( $params['date_from'] ) > strtotime( $this->lastSyncFrom ) ) {
+			return true;
 		}
 
 		//fail safe
@@ -91,12 +101,13 @@ class Events extends \Hammer\WP\Settings {
 		//if user fetch things that we don't have in local cache, fetch and merge
 		$date_format = 'Y-m-d H:i:s';
 		$args        = [
-			'date_from' => date( $date_format, strtotime( 'midnight', strtotime( '-30 days', current_time( 'timestamp' ) ) ) ),
+			'date_from' => date( $date_format,
+				strtotime( 'midnight', strtotime( '-30 days', current_time( 'timestamp' ) ) ) ),
 			'date_to'   => date( $date_format, strtotime( 'tomorrow', current_time( 'timestamp' ) ) ),
 		];
-		Utils::instance()->log( sprintf( 'Fetching data from %s to %s to local', $args['date_from'], $args['date_to'] ) );
+		Utils::instance()->log( sprintf( 'Fetching data from %s to %s to local', $args['date_from'],
+			$args['date_to'] ) );
 		$data = Audit_API::pullLogs( $args, 'timestamp', 'desc', true );
-
 		if ( is_wp_error( $data ) ) {
 			Utils::instance()->log( sprintf( 'Fetch error: %s', $data->get_error_message() ) );
 
@@ -116,17 +127,16 @@ class Events extends \Hammer\WP\Settings {
 	/**
 	 *
 	 *
-	 * @param array $filter
-	 * @param string $order_by
-	 * @param string $order
-	 * @param bool $nopaging
+	 * @param  array  $filter
+	 * @param  string  $order_by
+	 * @param  string  $order
+	 * @param  bool  $nopaging
 	 *
 	 * @return array
 	 */
 	public function getData( $filter = array(), $order_by = 'timestamp', $order = 'desc', $nopaging = false ) {
 		$data = $this->filterData( array_merge( $this->data, $this->eventsPending ), $filter );
 		usort( $data, function ( $a, $b ) use ( $order, $order_by ) {
-
 			if ( $order == 'desc' ) {
 				return intval( $b[ $order_by ] ) > intval( $a[ $order_by ] );
 			} else {
@@ -146,6 +156,8 @@ class Events extends \Hammer\WP\Settings {
 
 	/**
 	 * Submit all the pending to cloud
+	 *
+	 * @return void
 	 */
 	public function sendToApi() {
 		if ( empty( $this->eventsPending ) ) {
@@ -154,8 +166,14 @@ class Events extends \Hammer\WP\Settings {
 		//upload data to cloud first
 		Utils::instance()->log( sprintf( 'Preparing submit %d events to cloud', count( $this->eventsPending ) ) );
 		Audit_API::openSocket();
+		$response = '';
 		if ( Audit_API::socketToAPI( $this->eventsPending ) == false ) {
-			Audit_API::curlToAPI( $this->eventsPending );
+			$response = Audit_API::curlToAPI( $this->eventsPending );
+		}
+		if ( is_wp_error( $response ) ) {
+			Utils::instance()->log( sprintf( 'API sending error: %s', $response->get_error_message() ), 'audit' );
+
+			return;
 		}
 		Utils::instance()->log( sprintf( 'Submitted %d events to cloud', count( $this->eventsPending ) ) );
 		//flushed
@@ -174,7 +192,7 @@ class Events extends \Hammer\WP\Settings {
 
 	/**
 	 * @param $data
-	 * @param array $filter
+	 * @param  array  $filter
 	 *
 	 * @return array
 	 */
@@ -210,7 +228,6 @@ class Events extends \Hammer\WP\Settings {
 				unset( $data[ $i ] );
 				continue;
 			}
-
 		}
 
 		return $data;
@@ -220,7 +237,6 @@ class Events extends \Hammer\WP\Settings {
 	 * @param $events
 	 */
 	public function append( $events ) {
-		Utils::instance()->log( var_export( $events, true ), 'settings' );
 		$this->eventsPending = array_merge( $this->eventsPending, $events );
 		$this->save();
 	}

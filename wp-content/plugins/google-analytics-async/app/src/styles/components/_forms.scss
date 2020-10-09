@@ -1,0 +1,17 @@
+@include body-class(true) {
+	.sui-form-control {
+		&.sui-form-control-sm {
+			height: 30px;
+			line-height: 16px;
+			font-size: 12px;
+		}
+	}
+
+	.sui-toggle {
+		&.sui-toggle-sm {
+			.sui-toggle-label {
+				font-size: 13px;
+			}
+		}
+	}
+}

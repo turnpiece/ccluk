@@ -1,0 +1,50 @@
+@include body-class(true) {
+	.sui-box.sui-summary {
+		.sui-summary-detail,
+		.sui-summary-details {
+			.beehive-stats-trend {
+				margin-left: 5px;
+				font-size: 13px;
+				font-weight: 500;
+
+				[class*='sui-icon-'] {
+					display: inline-block;
+					position: relative;
+					top: auto;
+					left: auto;
+
+					&:before {
+						color: inherit;
+					}
+				}
+
+				&.beehive-green {
+					color: $green;
+				}
+
+				&.beehive-red {
+					color: $red;
+				}
+			}
+		}
+		.sui-summary-segment {
+			.sui-list {
+				li {
+					.sui-list-label {
+						min-width: 100px;
+						max-width: 40%;
+						overflow: hidden;
+						white-space: nowrap;
+						text-overflow: ellipsis;
+					}
+					.sui-list-detail {
+						flex: 1;
+						overflow: hidden;
+						white-space: nowrap;
+						text-overflow: ellipsis;
+					}
+				}
+			}
+		}
+	}
+}

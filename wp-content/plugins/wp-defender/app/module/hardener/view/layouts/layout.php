@@ -7,7 +7,7 @@ $class    = '';
 if ( $countAll == 1 ) {
 	$tooltips = __( "You have one security tweak left to do. We recommend you action it, or ignore it if it's irrelevant.", wp_defender()->domain );
 } elseif ( $countAll > 1 ) {
-	$tooltips = sprintf( __( "You have %s security tweaks left to do. We recommend you take a look and action fixes, or ignore the issues if they are harmless." ), $countAll );
+	$tooltips = sprintf( __( "You have %s security tweaks left to do. We recommend you take a look and action fixes, or ignore the issues if they are harmless.", wp_defender()->domain ), $countAll );
 }
 $inlineHeroImage = strlen( wp_defender()->heroImage ) > 0 ? 'background-image: url(\'' . wp_defender()->heroImage . '\')' : null;
 ?>

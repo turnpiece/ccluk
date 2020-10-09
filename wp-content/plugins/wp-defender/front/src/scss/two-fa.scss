@@ -1,0 +1,17 @@
+#two-fa {
+  $summary-image: '../img/dashboard-defender.svg';
+  @media (min-width: 783px) {
+    .sui-summary:not(.sui-unbranded) {
+      background-image: url($summary-image);
+      background-repeat: no-repeat;
+      background-position: 30px center;
+
+      .sui-summary-image-space {
+        display: block;
+      }
+    }
+    .sui-summary:not(.sui-unbranded):not(.sui-rebranded) {
+      background-position: 30px 40px;
+    }
+  }
+}

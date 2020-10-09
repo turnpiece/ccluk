@@ -1,0 +1,201 @@
+@import './flags';
+
+@include body-class(true) {
+	// ELEMENT: Table.
+	table.beehive-chart-map-legend {
+		width: 100%;
+		max-width: 100%;
+		table-layout: auto;
+		border-spacing: 0;
+		border-collapse: collapse;
+
+		thead {
+			@extend %sui-screen-reader-text;
+
+			tr th {
+				width: auto;
+			}
+		}
+
+		tbody {
+			tr.beehive-legend-item {
+				td {
+					width: auto;
+					margin: 0;
+					border: 0;
+					vertical-align: middle;
+
+					&:first-child {
+						@include media(max-width, md) {
+							padding-left: 0;
+						}
+
+						@include media(min-width, md) {
+							padding-left: 0;
+						}
+					}
+
+					&:last-child {
+						@include media(max-width, md) {
+							padding-right: 0;
+						}
+
+						@include media(min-width, md) {
+							padding-right: 0;
+						}
+					}
+
+					@include media(max-width, md) {
+						padding: #{$sui-gutter-md / 2} 5px;
+					}
+
+					@include media(min-width, md) {
+						padding: #{$sui-gutter / 2} 5px;
+					}
+				}
+
+				td.beehive-legend-item-flag {
+					width: 30px;
+				}
+
+				td.beehive-legend-item-name {
+					color: palette(gray, dark);
+					font: 500 13px/22px $font;
+					letter-spacing: $font--letter-spacing;
+				}
+
+				td.beehive-legend-item-bar {
+					span[aria-hidden='true'] {
+						width: 100%;
+						height: #{$border-radius + 1px};
+						display: block;
+						position: relative;
+						overflow: hidden;
+						border-radius: $border-radius;
+						background-color: #f7f7f7;
+
+						span {
+							max-width: 100%;
+							height: #{$border-radius + 1px};
+							position: absolute;
+							top: 0;
+							left: 0;
+							border-radius: $border-radius;
+							background-color: $blue;
+						}
+
+						@include media(max-width, md) {
+							min-width: 100px;
+						}
+
+						@include media(min-width, md) {
+							min-width: 200px;
+						}
+					}
+				}
+
+				td.beehive-legend-item-value {
+					color: palette(gray, light);
+					font: 500 13px/22px $font;
+					letter-spacing: $font--letter-spacing;
+					text-align: right;
+				}
+
+				&:first-child {
+					td {
+						@include media(max-width, md) {
+							padding-top: 0;
+						}
+
+						@include media(min-width, md) {
+							padding-top: 0;
+						}
+					}
+				}
+
+				&:last-child {
+					td {
+						@include media(max-width, md) {
+							padding-bottom: 0;
+						}
+
+						@include media(min-width, md) {
+							padding-bottom: 0;
+						}
+					}
+				}
+			}
+		}
+
+		@include media(max-width, md) {
+			margin: $sui-gutter-md 0 0;
+		}
+
+		@include media(min-width, md) {
+			margin: $sui-gutter 0 0;
+		}
+	}
+
+	// ELEMENT: Chart Tooltip.
+	.google-visualization-tooltip {
+		display: block;
+		border-width: 0;
+		border-radius: $border-radius;
+		background-color: palette(gray, dark);
+		box-shadow: none;
+
+		.google-visualization-tooltip-item-list {
+			display: block;
+			margin: 0;
+			padding: 0;
+			border: 0;
+
+			&,
+			li {
+				list-style: none;
+			}
+
+			.google-visualization-tooltip-item {
+				display: block;
+				margin: 0;
+				padding: 0;
+				border: 0;
+
+				span {
+					display: block;
+				}
+			}
+		}
+
+		.beehive-charts-geotooltip {
+			display: flex !important;
+			padding: 10px 8px 10px 13px;
+
+			.beehive-flag {
+				flex: 0 0 auto;
+				align-self: center;
+
+				+ .beehive-country-sessions {
+					margin-left: 5px;
+				}
+			}
+
+			.beehive-country-sessions {
+				flex: 1 1 auto;
+				color: $white;
+				font: 400 12px/18px $font;
+				letter-spacing: normal;
+
+				span,
+				strong {
+					display: inline-block;
+				}
+
+				.beehive-country-name {
+					margin-right: 8px;
+					font-size: 13px;
+				}
+			}
+		}
+	}
+}

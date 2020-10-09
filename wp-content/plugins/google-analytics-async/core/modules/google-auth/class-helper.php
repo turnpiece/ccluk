@@ -1,20 +1,26 @@
 <?php
+/**
+ * The Google helper class.
+ *
+ * @link    http://premium.wpmudev.org
+ * @since   3.2.0
+ *
+ * @author  Joel James <joel@incsub.com>
+ * @package Beehive\Core\Modules\Google_Auth
+ */
 
 namespace Beehive\Core\Modules\Google_Auth;
 
 // If this file is called directly, abort.
 defined( 'WPINC' ) || die;
 
-use Beehive\Core\Helpers\General;
 use Beehive\Core\Utils\Abstracts\Base;
+use Beehive\Core\Helpers\General;
 
 /**
- * The Google helper class.
+ * Class Helper
  *
- * @link   http://premium.wpmudev.org
- * @since  3.2.0
- *
- * @author Joel James <joel@incsub.com>
+ * @package Beehive\Core\Modules\Google_Auth
  */
 class Helper extends Base {
 
@@ -111,15 +117,16 @@ class Helper extends Base {
 	/**
 	 * Get authentication redirect url.
 	 *
-	 * @param bool $network          Network flag.
-	 * @param bool $default          Should setup using default keys?.
-	 * @param bool $redirect_current Redirect to current site?.
+	 * @param bool  $network          Network flag.
+	 * @param bool  $default          Should setup using default keys?.
+	 * @param bool  $redirect_current Redirect to current site?.
+	 * @param array $data             Custom data.
 	 *
 	 * @since 3.2.0
 	 *
 	 * @return string
 	 */
-	public function auth_url( $network = false, $default = false, $redirect_current = false ) {
+	public function auth_url( $network = false, $default = false, $redirect_current = false, $data = array() ) {
 		$core = Auth::instance();
 
 		// Setup credentials.
@@ -127,9 +134,9 @@ class Helper extends Base {
 
 		// Set state.
 		if ( $redirect_current && $network ) {
-			Helper::instance()->set_state( false, $default );
+			self::instance()->set_state( false, $default, $data );
 		} else {
-			Helper::instance()->set_state( $network, $default );
+			self::instance()->set_state( $network, $default, $data );
 		}
 
 		// Return auth url.
@@ -214,7 +221,7 @@ class Helper extends Base {
 	 * we can process the authentication callback from Google
 	 * and generate access token.
 	 *
-	 * @param string $url     Redirect url.
+	 * @param string $url Redirect url.
 	 *
 	 * @since 3.2.0
 	 *
@@ -225,7 +232,22 @@ class Helper extends Base {
 		if ( empty( $url ) ) {
 			// Get the home url.
 			$url = network_site_url();
+
+			// Use the sub-site's url when not networkwide active on multisite.
+			if ( is_multisite() && ! General::is_networkwide() && ! $this->is_network() ) {
+				// Using trailingslashit() for similarity since network_site_url() contains a trailing slash.
+				$url = trailingslashit( site_url() );
+			}
 		}
+
+		/**
+		 * Filter hook to modify the return url
+		 *
+		 * @param string $url The default return url
+		 *
+		 * @since 3.2.5
+		 */
+		$url = apply_filters( 'beehive_google_set_redirect_url', $url );
 
 		// Setup redirect url.
 		Auth::instance()->client()->setRedirectUri( $url );
@@ -237,28 +259,31 @@ class Helper extends Base {
 	 * This is where we store our custom data to identify
 	 * the callback from Google authentication request.
 	 *
-	 * @param bool $network Network flag.
-	 * @param bool $default Are we using default keys?.
+	 * @param bool  $network Network flag.
+	 * @param bool  $default Are we using default keys?.
+	 * @param array $data    Custom data.
 	 *
 	 * @since 3.2.0
 	 *
 	 * @return void
 	 */
-	public function set_state( $network = false, $default = false ) {
+	public function set_state( $network = false, $default = false, $data = array() ) {
 		// Custom data.
-		$data = [
+		$data = array(
 			// Nonce for verification.
 			'beehive_nonce' => wp_create_nonce( 'beehive_nonce' ),
 			// Network flag.
 			'origin'        => $network ? 'network' : get_current_blog_id(),
 			'default'       => $default ? 1 : 0,
 			// To identify if it is from modal.
-			'modal'         => empty( $_REQUEST['is_modal'] ) ? 0 : 1,
-		];
+			// phpcs:ignore
+			'modal'         => empty( $data['is_modal'] ) ? 0 : 1,
+			'page'          => empty( $data['page'] ) ? 'settings' : $data['page'],
+		);
 
 		// Encode the data for url.
-		$data = json_encode( $data );
-		$data = urlencode( $data );
+		$data = wp_json_encode( $data );
+		$data = rawurlencode( $data );
 
 		// Set as state.
 		Auth::instance()->client()->setState( $data );
@@ -309,7 +334,7 @@ class Helper extends Base {
 		if ( empty( $id ) ) {
 			// If already logged in by network admin, get the network client id.
 			if ( ! $network && is_multisite() ) {
-				$network = $this->is_logged_in( true );
+				$network = $this->is_logged_in( true ) || 'network_connect' === $this->login_method();
 			}
 
 			$id = beehive_analytics()->settings->get( 'client_id', 'google', $network );
@@ -340,7 +365,7 @@ class Helper extends Base {
 		if ( empty( $secret ) ) {
 			// If already logged in by network admin, get the network client secret.
 			if ( ! $network && is_multisite() ) {
-				$network = $this->is_logged_in( true );
+				$network = $this->is_logged_in( true ) || 'network_connect' === $this->login_method();
 			}
 
 			$secret = beehive_analytics()->settings->get( 'client_secret', 'google', $network );

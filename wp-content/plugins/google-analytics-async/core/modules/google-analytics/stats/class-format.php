@@ -1,4 +1,17 @@
 <?php
+/**
+ * The data formatter class for Google stats.
+ *
+ * This class is little complex. Google Analytics Reporting API
+ * response is really complex. We need to properly format the response.
+ * Modify with caution.
+ *
+ * @link    http://premium.wpmudev.org
+ * @since   3.2.0
+ *
+ * @author  Joel James <joel@incsub.com>
+ * @package Beehive\Core\Modules\Google_Analytics\Stats
+ */
 
 namespace Beehive\Core\Modules\Google_Analytics\Stats;
 
@@ -8,16 +21,9 @@ defined( 'WPINC' ) || die;
 use Beehive\Core\Utils\Abstracts\Base;
 
 /**
- * The data formatter class for Google stats.
+ * Class Format
  *
- * This class is little complex. Google Analytics Reporting API
- * response is really complex. We need to properly format the response.
- * Modify with caution.
- *
- * @link   http://premium.wpmudev.org
- * @since  3.2.0
- *
- * @author Joel James <joel@incsub.com>
+ * @package Beehive\Core\Modules\Google_Analytics\Stats
  */
 class Format extends Base {
 
@@ -36,11 +42,11 @@ class Format extends Base {
 	 * @return array
 	 */
 	public function format( $data, $stats_type = 'stats' ) {
-		$final_stats = [];
+		$final_stats = array();
 
 		foreach ( $data as $type => $reports ) {
 			// Format stats.
-			$stats = [];
+			$stats = array();
 
 			if ( ! empty( $reports ) ) {
 				foreach ( $reports as $report ) {
@@ -77,8 +83,11 @@ class Format extends Base {
 			case 'post':
 				$stats = $this->post( $final_stats );
 				break;
+			case 'summary':
+				$stats = $this->dashboard_summary( $final_stats );
+				break;
 			default:
-				$stats = [];
+				$stats = array();
 				break;
 		}
 
@@ -99,14 +108,15 @@ class Format extends Base {
 	 *
 	 * @return void
 	 */
-	private function setup( $data, $dheaders, $mheaders, &$stats = [] ) {
+	private function setup( $data, $dheaders, $mheaders, &$stats = array() ) {
 		// Initialize the data array.
-		$dimension_data = $metric_data = [];
+		$dimension_data = array();
+		$metric_data    = array();
 
 		$data_count = count( $data );
 
 		// Loop through each item and get the data.
-		for ( $i = 0; $i < $data_count; $i ++ ) {
+		for ( $i = 0; $i < $data_count; $i++ ) {
 			// Single item.
 			$row = $data[ $i ];
 			// Dimensions of current item.
@@ -117,20 +127,20 @@ class Format extends Base {
 			$dheaders_count   = count( $dheaders );
 			$dimensions_count = count( $dimensions );
 			// Setup dimensions.
-			for ( $j = 0; $j < $dheaders_count && $j < $dimensions_count; $j ++ ) {
+			for ( $j = 0; $j < $dheaders_count && $j < $dimensions_count; $j++ ) {
 				$dimension_data[ $dheaders[ $j ] ] = $this->format_value( $dheaders[ $j ], $dimensions[ $j ] );
 			}
 
 			$metrics_count = count( $metrics );
 
 			// Setup metrics.
-			for ( $k = 0; $k < $metrics_count; $k ++ ) {
+			for ( $k = 0; $k < $metrics_count; $k++ ) {
 				// Metric values.
 				$values = $metrics[ $k ]->getValues();
 				// No. of values.
 				$value_count = count( $values );
 				// Setup the values to array.
-				for ( $l = 0; $l < $value_count; $l ++ ) {
+				for ( $l = 0; $l < $value_count; $l++ ) {
 					// Single item.
 					$entry = $mheaders[ $l ];
 					// Names.
@@ -211,12 +221,37 @@ class Format extends Base {
 				$value = $date->format( 'M Y' );
 				break;
 
+			// Year and week.
+			case 'ga:yearWeek':
+				// Get year from the string.
+				$year = substr( $value, 0, 4 );
+				// Get week number from the string.
+				$week = substr( $value, 4, 2 );
+
+				try {
+					$dto = new \DateTime();
+					// Setup date.
+					$dto->setISODate( $year, $week );
+					// Week start date.
+					$start = $dto->format( 'j M' );
+					$dto->modify( '+6 days' );
+					// Week end date.
+					$end = $dto->format( 'j M' );
+
+					// Return formatted value.
+					$value = $start . ' - ' . $end;
+				} catch ( \Exception $e ) {
+					// Return formatted value.
+					$value = '-';
+				}
+				break;
+
 			// Hour.
-			case 'ga:hour':
+			case 'ga:dateHour':
 				// Create a DateTime object from the Ym format.
-				$date = \DateTime::createFromFormat( 'H', $value );
+				$date = \DateTime::createFromFormat( 'YmdH', $value );
 				// Use the d/m/Y format.
-				$value = $date->format( 'h A' );
+				$value = $date->format( 'ga, D, M j, Y' );
 				break;
 
 			// Date format.
@@ -262,41 +297,50 @@ class Format extends Base {
 	 * @return mixed
 	 */
 	private function trend_value( $type, $current, $previous ) {
-		switch ( $type ) {
-			case 'bounceRate':
-			case 'pageviewsPerSession':
-			case 'pageviews':
-			case 'sessions':
-			case 'users':
-				$current  = (float) $current;
-				$previous = (float) $previous;
-				// When previous value is empty, trend is 100%.
-				if ( empty( $previous ) && ! empty( $current ) ) {
-					$trend = 100;
-				} elseif ( ! empty( $previous ) && empty( $current ) ) {
-					// When current value is 0 and previous value is not, trend is -100.
-					$trend = - 100;
-				} else {
-					if ( $current === $previous ) {
-						$trend = 0;
+		$value = 0;
+
+		if ( ! empty( $previous ) ) {
+			switch ( $type ) {
+				case 'bounceRate':
+				case 'pageviewsPerSession':
+				case 'pageviews':
+				case 'sessions':
+				case 'users':
+				case 'newUsers':
+					$current  = (float) $current;
+					$previous = (float) $previous;
+					// When previous value is empty, trend is 100%.
+					if ( empty( $previous ) && ! empty( $current ) ) {
+						$trend = 100;
+					} elseif ( ! empty( $previous ) && empty( $current ) ) {
+						// When current value is 0 and previous value is not, trend is -100.
+						$trend = -100;
 					} else {
-						$diff  = $current - $previous;
-						$trend = ( $diff / $previous ) * 100;
+						if ( $current === $previous ) {
+							$trend = 0;
+						} else {
+							$diff  = $current - $previous;
+							$trend = ( $diff / $previous ) * 100;
+						}
 					}
-				}
 
-				return round( $trend );
-			// Time difference.
-			case 'avgSessionDuration':
-				// Convert to seconds.
-				$current  = strtotime( $current ) - strtotime( '00:00:00' );
-				$previous = strtotime( $previous ) - strtotime( '00:00:00' );
+					$value = round( $trend );
+					break;
+				// Time difference.
+				case 'avgSessionDuration':
+					// Convert to seconds.
+					$current  = strtotime( $current ) - strtotime( '00:00:00' );
+					$previous = strtotime( $previous ) - strtotime( '00:00:00' );
 
-				// Now it's int, get the value.
-				return $this->trend_value( 'sessions', $current, $previous );
+					// Now it's int, get the value.
+					$value = $this->trend_value( 'sessions', $current, $previous );
+					break;
+				default:
+					$value = 0;
+			}
 		}
 
-		return 0;
+		return $value;
 	}
 
 	/**
@@ -305,15 +349,17 @@ class Format extends Base {
 	 * We need to make sure the anchor link is generated
 	 * only when the host name is valid.
 	 *
-	 * @param string $host  Host name.
-	 * @param string $path  Page path.
-	 * @param string $title Page title.
+	 * @param string $host      Host name.
+	 * @param string $path      Page path.
+	 * @param string $title     Page title.
+	 * @param bool   $use_title Use title instead of link as anchor text.
 	 *
 	 * @since 3.2.0
+	 * @since 3.2.4 Added $user_title param.
 	 *
 	 * @return string
 	 */
-	private function get_anchor( $host, $path, $title ) {
+	private function get_anchor( $host, $path, $title, $use_title = false ) {
 		// Generate url from the data.
 		$url = $this->get_link( $host, $path );
 
@@ -322,7 +368,9 @@ class Format extends Base {
 			return '';
 		}
 
-		return "<a href=\"{$url}\" target=\"_blank\" title=\"$title ($url)\">{$path}</a>";
+		$text = $use_title ? $title : $path;
+
+		return "<a href=\"{$url}\" target=\"_blank\" title=\"$title ($url)\">{$text}</a>";
 	}
 
 	/**
@@ -360,14 +408,14 @@ class Format extends Base {
 	private function get_time( $value, $type = 'int' ) {
 		// Get 3 value array of hour, minutes and seconds.
 		if ( 'int' === $type ) {
-			return [
-				(int) date( 'H', $value ),
-				(int) date( 'i', $value ),
-				(int) date( 's', $value ),
-			];
+			return array(
+				(int) gmdate( 'H', $value ),
+				(int) gmdate( 'i', $value ),
+				(int) gmdate( 's', $value ),
+			);
 		}
 
-		return date( 'H:i:s', $value );
+		return gmdate( 'H:i:s', $value );
 	}
 
 	/**
@@ -382,7 +430,7 @@ class Format extends Base {
 	 * @return array $stats
 	 */
 	private function dashboard_widget( $data ) {
-		$stats = [];
+		$stats = array();
 
 		// Oi, we need data.
 		if ( empty( $data ) ) {
@@ -395,45 +443,99 @@ class Format extends Base {
 
 			// Format countries list.
 			if ( isset( $data['current']['countries'] ) ) {
+				$country_count = 0;
+
 				foreach ( $data['current']['countries'] as $country ) {
 					// Top countries full details.
-					$stats['countries'][] = [
+					$stats['countries'][] = array(
 						$country['ga:country'],
 						$country['ga:countryIsoCode'],
 						$country['pageviews'],
-					];
+					);
+
+					// Add top country to summary.
+					if ( 0 === $country_count ) {
+						$stats['summary']['country'] = array(
+							'value'     => $country['ga:country'],
+							'code'      => $country['ga:countryIsoCode'],
+							'pageviews' => $country['pageviews'],
+						);
+					}
+
+					$country_count++;
 				}
 			}
 
 			// Format sources and mediums list.
 			if ( isset( $data['current']['mediums'] ) ) {
+				$medium_count = 0;
+
 				foreach ( $data['current']['mediums'] as $medium ) {
 					// Medium data.
-					$stats['mediums'][] = [ $medium['ga:channelGrouping'], $medium['sessions'] ];
+					$stats['mediums'][] = array( $medium['ga:channelGrouping'], $medium['sessions'] );
+
+					// Add top medium to summary.
+					if ( 0 === $medium_count ) {
+						$stats['summary']['medium'] = array(
+							'value'    => $medium['ga:channelGrouping'],
+							'sessions' => $medium['sessions'],
+						);
+					}
+
+					$medium_count++;
 				}
 			}
 
 			// Format sources and mediums list.
 			if ( isset( $data['current']['search_engines'] ) ) {
+				$search_engine_count = 0;
+
 				foreach ( $data['current']['search_engines'] as $search_engine ) {
 					// Search engine data.
-					$stats['search_engines'][] = [ ucfirst( $search_engine['ga:source'] ), $search_engine['sessions'] ];
+					$stats['search_engines'][] = array(
+						ucfirst( $search_engine['ga:source'] ),
+						$search_engine['sessions'],
+					);
+
+					// Add top search engine to summary.
+					if ( 0 === $search_engine_count ) {
+						$stats['summary']['search_engine'] = array(
+							'value'    => ucfirst( $search_engine['ga:source'] ),
+							'sessions' => $search_engine['sessions'],
+						);
+					}
+
+					$search_engine_count++;
 				}
 			}
 
 			// Format sources and mediums list.
 			if ( isset( $data['current']['social_networks'] ) ) {
+				$social_network_count = 0;
+
 				foreach ( $data['current']['social_networks'] as $social_network ) {
 					// Social network data.
-					$stats['social_networks'][] = [ $social_network['ga:socialNetwork'], $social_network['sessions'] ];
+					$stats['social_networks'][] = array( $social_network['ga:socialNetwork'], $social_network['sessions'] );
+
+					// Add top social network to summary.
+					if ( 0 === $social_network_count ) {
+						$stats['summary']['social_network'] = array(
+							'value'    => $social_network['ga:socialNetwork'],
+							'sessions' => $social_network['sessions'],
+						);
+					}
+
+					$social_network_count++;
 				}
 			}
 
 			// Format pages list.
 			if ( isset( $data['multiple']['pages'] ) ) {
+				$page_count = 0;
+
 				foreach ( $data['multiple']['pages'] as $page ) {
 					// Top countries full details.
-					$stats['pages'][] = [
+					$stats['pages'][] = array(
 						$this->get_anchor( $page['ga:hostname'], $page['ga:pagePath'], $page['ga:pageTitle'] ),
 						$this->get_time( $page['avgSessionDuration'][0], 'string' ),
 						$page['pageviews'][0],
@@ -442,12 +544,18 @@ class Format extends Base {
 							$page['pageviews'][0], // Current period value.
 							$page['pageviews'][1] // Previous period value.
 						),
-					];
-				}
+					);
 
-				// We need top 5 for general section.
-				if ( ! isset( $stats['top_pages'] ) || count( $stats['top_pages'] ) < 5 ) {
-					$stats['top_pages'] = array_slice( $stats['pages'], 0, 5, true );
+					// Add top page to summary.
+					if ( 0 === $page_count ) {
+						$stats['summary']['page'] = array(
+							'value'     => $page['ga:pageTitle'],
+							'html'      => $this->get_anchor( $page['ga:hostname'], $page['ga:pagePath'], $page['ga:pageTitle'], true ),
+							'pageviews' => $page['pageviews'][0],
+						);
+					}
+
+					$page_count++;
 				}
 			}
 
@@ -456,7 +564,7 @@ class Format extends Base {
 				foreach ( $data['current']['sessions'] as $session ) {
 					$date = $this->get_period_value( $session );
 					// Top countries full details.
-					$stats['sessions'][] = [ $date, $session['sessions'] ];
+					$stats['sessions'][] = array( $date, $session['sessions'] );
 				}
 			}
 
@@ -465,7 +573,7 @@ class Format extends Base {
 				foreach ( $data['current']['users'] as $user ) {
 					$date = $this->get_period_value( $user );
 					// Top countries full details.
-					$stats['users'][] = [ $date, $user['users'] ];
+					$stats['users'][] = array( $date, $user['users'] );
 				}
 			}
 
@@ -474,7 +582,7 @@ class Format extends Base {
 				foreach ( $data['current']['pageviews'] as $pageview ) {
 					$date = $this->get_period_value( $pageview );
 					// Top countries full details.
-					$stats['pageviews'][] = [ $date, $pageview['pageviews'] ];
+					$stats['pageviews'][] = array( $date, $pageview['pageviews'] );
 				}
 			}
 
@@ -483,7 +591,7 @@ class Format extends Base {
 				foreach ( $data['current']['page_sessions'] as $session ) {
 					$date = $this->get_period_value( $session );
 					// Top countries full details.
-					$stats['page_sessions'][] = [ $date, $session['pageviewsPerSession'] ];
+					$stats['page_sessions'][] = array( $date, $session['pageviewsPerSession'] );
 				}
 			}
 
@@ -492,7 +600,7 @@ class Format extends Base {
 				foreach ( $data['current']['average_sessions'] as $session ) {
 					$date = $this->get_period_value( $session );
 					// Top countries full details.
-					$stats['average_sessions'][] = [ $date, $this->get_time( $session['avgSessionDuration'] ) ];
+					$stats['average_sessions'][] = array( $date, $session['avgSessionDuration'] );
 				}
 			}
 
@@ -501,7 +609,7 @@ class Format extends Base {
 				foreach ( $data['current']['bounce_rates'] as $rate ) {
 					$date = $this->get_period_value( $rate );
 					// Top countries full details.
-					$stats['bounce_rates'][] = [ $date, $rate['bounceRate'] ];
+					$stats['bounce_rates'][] = array( $date, $rate['bounceRate'] );
 				}
 			}
 		}
@@ -521,13 +629,13 @@ class Format extends Base {
 	 * @return array $stats
 	 */
 	private function popular_widget( $data ) {
-		$stats = [];
+		$stats = array();
 
 		// Format pages list.
 		if ( isset( $data['current']['pages'] ) ) {
 			foreach ( $data['current']['pages'] as $page ) {
 				// Top pages list.
-				$stats['pages'][] = $this->get_link( $page['ga:hostname'], $page['ga:pagePath'] );
+				$stats[] = $this->get_link( $page['ga:hostname'], $page['ga:pagePath'] );
 			}
 		}
 
@@ -548,11 +656,89 @@ class Format extends Base {
 	private function post( $data ) {
 		// Oy hello, we need data.
 		if ( empty( $data ) ) {
-			return [];
+			return array();
 		} else {
 			// Format summary data.
 			return $this->summary( $data );
 		}
+	}
+
+	/**
+	 * Format the data for the dashboard summary page.
+	 *
+	 * Format the data array into the format of dashboard widget.
+	 *
+	 * @param array $data Stats data from Google.
+	 *
+	 * @since 3.2.4
+	 *
+	 * @return array $stats
+	 */
+	private function dashboard_summary( $data ) {
+		$stats = array();
+
+		// Oi, we need data.
+		if ( empty( $data ) ) {
+			return $stats;
+		}
+
+		// Format summary data.
+		if ( isset( $data['multiple']['summary'] ) ) {
+			$stats['summary'] = $this->summary( $data );
+
+			// Format sources and mediums list.
+			if ( isset( $data['current']['mediums'][0] ) ) {
+				// Medium data.
+				$stats['medium'] = array(
+					'name'     => $data['current']['mediums'][0]['ga:channelGrouping'],
+					'sessions' => $data['current']['mediums'][0]['sessions'],
+				);
+			} else {
+				$stats['medium'] = array();
+			}
+
+			// Format sources and mediums list.
+			if ( isset( $data['current']['search_engines'][0] ) ) {
+				// Search engine data.
+				$stats['search_engine'] = array(
+					'name'     => ucfirst( $data['current']['search_engines'][0]['ga:source'] ),
+					'sessions' => $data['current']['search_engines'][0]['sessions'],
+				);
+			} else {
+				$stats['search_engine'] = array();
+			}
+
+			// Format pages list.
+			if ( isset( $data['current']['pages'][0] ) ) {
+				// Top page details.
+				$stats['page'] = array(
+					'anchor'    => $this->get_anchor(
+						$data['current']['pages'][0]['ga:hostname'],
+						$data['current']['pages'][0]['ga:pagePath'],
+						$data['current']['pages'][0]['ga:pageTitle'],
+						true
+					),
+					'title'     => $data['current']['pages'][0]['ga:pageTitle'],
+					'pageviews' => $data['current']['pages'][0]['pageviews'],
+				);
+			} else {
+				$stats['page'] = array();
+			}
+
+			// Format countries list.
+			if ( isset( $data['current']['countries'][0] ) ) {
+				// Top country details.
+				$stats['country'] = array(
+					$data['current']['countries'][0]['ga:country'],
+					$data['current']['countries'][0]['ga:countryIsoCode'],
+					$data['current']['countries'][0]['pageviews'],
+				);
+			} else {
+				$stats['country'] = array();
+			}
+		}
+
+		return $stats;
 	}
 
 	/**
@@ -567,7 +753,7 @@ class Format extends Base {
 	 * @return array $stats
 	 */
 	private function stats_page( $data ) {
-		$stats = [];
+		$stats = array();
 
 		// Return early when don't get the data we deserve.
 		if ( empty( $data ) ) {
@@ -580,45 +766,96 @@ class Format extends Base {
 
 			// Format countries list.
 			if ( isset( $data['current']['countries'] ) ) {
+				$country_count = 0;
+
 				foreach ( $data['current']['countries'] as $country ) {
 					// Top countries full details.
-					$stats['countries'][] = [
+					$stats['countries'][] = array(
 						$country['ga:country'],
 						$country['ga:countryIsoCode'],
 						$country['pageviews'],
-					];
+					);
+
+					// Add top country to summary.
+					if ( 0 === $country_count ) {
+						$stats['summary']['country'] = array(
+							'value'     => $country['ga:country'],
+							'code'      => $country['ga:countryIsoCode'],
+							'pageviews' => $country['pageviews'],
+						);
+					}
+
+					$country_count++;
 				}
 			}
 
 			// Format sources and mediums list.
 			if ( isset( $data['current']['mediums'] ) ) {
+				$medium_count = 0;
+
 				foreach ( $data['current']['mediums'] as $medium ) {
 					// Medium data.
-					$stats['mediums'][] = [ $medium['ga:channelGrouping'], $medium['sessions'] ];
+					$stats['mediums'][] = array( $medium['ga:channelGrouping'], $medium['sessions'] );
+
+					// Add top medium to summary.
+					if ( 0 === $medium_count ) {
+						$stats['summary']['medium'] = array(
+							'value'    => $medium['ga:channelGrouping'],
+							'sessions' => $medium['sessions'],
+						);
+					}
+
+					$medium_count++;
 				}
 			}
 
 			// Format sources and mediums list.
 			if ( isset( $data['current']['search_engines'] ) ) {
+				$search_engine_count = 0;
+
 				foreach ( $data['current']['search_engines'] as $search_engine ) {
 					// Search engine data.
-					$stats['search_engines'][] = [ $search_engine['ga:source'], $search_engine['sessions'] ];
+					$stats['search_engines'][] = array( $search_engine['ga:source'], $search_engine['sessions'] );
+
+					// Add top search engine to summary.
+					if ( 0 === $search_engine_count ) {
+						$stats['summary']['search_engine'] = array(
+							'value'    => $search_engine['ga:source'],
+							'sessions' => $search_engine['sessions'],
+						);
+					}
+
+					$search_engine_count++;
 				}
 			}
 
 			// Format sources and mediums list.
 			if ( isset( $data['current']['social_networks'] ) ) {
+				$social_network_count = 0;
+
 				foreach ( $data['current']['social_networks'] as $social_network ) {
 					// Social network data.
-					$stats['social_networks'][] = [ $social_network['ga:socialNetwork'], $social_network['sessions'] ];
+					$stats['social_networks'][] = array( $social_network['ga:socialNetwork'], $social_network['sessions'] );
+
+					// Add top social network to summary.
+					if ( 0 === $social_network_count ) {
+						$stats['summary']['social_network'] = array(
+							'value'    => $social_network['ga:socialNetwork'],
+							'sessions' => $social_network['sessions'],
+						);
+					}
+
+					$social_network_count++;
 				}
 			}
 
 			// Format pages list.
 			if ( isset( $data['multiple']['pages'] ) ) {
+				$page_count = 0;
+
 				foreach ( $data['multiple']['pages'] as $page ) {
 					// Top countries full details.
-					$stats['pages'][] = [
+					$stats['pages'][] = array(
 						$this->get_anchor( $page['ga:hostname'], $page['ga:pagePath'], $page['ga:pageTitle'] ),
 						$this->get_time( $page['avgSessionDuration'][0], 'string' ),
 						$page['pageviews'][0],
@@ -627,7 +864,18 @@ class Format extends Base {
 							$page['pageviews'][0], // Current period value.
 							$page['pageviews'][1] // Previous period value.
 						),
-					];
+					);
+
+					// Add top page to summary.
+					if ( 0 === $page_count ) {
+						$stats['summary']['page'] = array(
+							'value'     => $page['ga:pageTitle'],
+							'title'     => $this->get_anchor( $page['ga:hostname'], $page['ga:pagePath'], $page['ga:pageTitle'], true ),
+							'pageviews' => $page['pageviews'][0],
+						);
+					}
+
+					$page_count++;
 				}
 			}
 
@@ -681,33 +929,40 @@ class Format extends Base {
 	 * @return array
 	 */
 	private function setup_periodic_values( $current, $previous, $type ) {
-		$stats = [];
+		$stats = array();
 
 		// Total no. of items.
 		$total_count = count( $current );
 
 		// Loop through all items.
-		for ( $i = 0; $i < $total_count; $i ++ ) {
+		for ( $i = 0; $i < $total_count; $i++ ) {
 			// Setup the period values.
-			$current_date  = $this->get_period_value( $current[ $i ] );
-			$previous_date = $this->get_period_value( $previous[ $i ] );
+			$current_date = $this->get_period_value( $current[ $i ] );
+
+			if ( isset( $previous[ $i ] ) ) {
+				$previous_data = $previous[ $i ][ $type ];
+				$previous_date = $this->get_period_value( $previous[ $i ] );
+			} else {
+				$previous_data = '';
+				$previous_date = '';
+			}
 
 			// Current period data.
-			$stats['current'][ $i ] = [
+			$stats['current'][ $i ] = array(
 				$current_date,
-				$this->format_periodic_value( $type, $current[ $i ][ $type ] ),
+				$this->format_periodic_value( $type, $current[ $i ][ $type ], 'string' ),
 				$this->trend_value(
 					$type,
 					$this->format_periodic_value( $type, $current[ $i ][ $type ], 'string' ),
-					$this->format_periodic_value( $type, $previous[ $i ][ $type ], 'string' )
+					$this->format_periodic_value( $type, $previous_data, 'string' )
 				),
-			];
+			);
 
 			// Previous period data.
-			$stats['previous'][ $i ] = [
+			$stats['previous'][ $i ] = array(
 				$previous_date,
-				$this->format_periodic_value( $type, $previous[ $i ][ $type ] ),
-			];
+				$this->format_periodic_value( $type, $previous_data ),
+			);
 		}
 
 		return $stats;
@@ -725,10 +980,12 @@ class Format extends Base {
 	 * @return mixed
 	 */
 	private function format_periodic_value( $type, $value, $time_type = 'int' ) {
-		// Avg session duration should be handled differently.
-		if ( 'avgSessionDuration' === $type ) {
-			$value = $this->get_time( $value, $time_type );
-		}
+		/**
+		 * Avg session duration should be handled differently.
+		 * if ( 'avgSessionDuration' === $type ) {
+		 * $value = $this->get_time( $value, $time_type );
+		 * }
+		 */
 
 		return $value;
 	}
@@ -744,49 +1001,48 @@ class Format extends Base {
 	 */
 	private function summary( $data ) {
 		// Summary data should be single array.
-		$summary = isset( $data['multiple']['summary'][0] ) ? $data['multiple']['summary'][0] : [];
+		$summary = isset( $data['multiple']['summary'][0] ) ? $data['multiple']['summary'][0] : array();
 		// Format summary data.
-		$summary = [
-			'sessions'         => [
+		$summary = array(
+			'sessions'         => array(
 				'value'    => isset( $summary['sessions'][0] ) ? $summary['sessions'][0] : 0,
 				'previous' => isset( $summary['sessions'][1] ) ? $summary['sessions'][1] : 0,
-				'type'     => 'number',
-			],
-			'users'            => [
+			),
+			'users'            => array(
 				'value'    => isset( $summary['users'][0] ) ? $summary['users'][0] : 0,
 				'previous' => isset( $summary['users'][1] ) ? $summary['users'][1] : 0,
-				'type'     => 'number',
-			],
-			'pageviews'        => [
+			),
+			'pageviews'        => array(
 				'value'    => isset( $summary['pageviews'][0] ) ? $summary['pageviews'][0] : 0,
 				'previous' => isset( $summary['pageviews'][1] ) ? $summary['pageviews'][1] : 0,
-				'type'     => 'number',
-			],
-			'page_sessions'    => [
+			),
+			'page_sessions'    => array(
 				'value'    => isset( $summary['pageviewsPerSession'][0] ) ? $summary['pageviewsPerSession'][0] : 0,
 				'previous' => isset( $summary['pageviewsPerSession'][1] ) ? $summary['pageviewsPerSession'][1] : 0,
-				'type'     => 'number',
-			],
-			'average_sessions' => [
+			),
+			'average_sessions' => array(
 				'value'    => isset( $summary['avgSessionDuration'][0] ) ? $this->get_time( $summary['avgSessionDuration'][0], 'string' ) : '00:00:00',
 				'previous' => isset( $summary['avgSessionDuration'][1] ) ? $this->get_time( $summary['avgSessionDuration'][1], 'string' ) : '00:00:00',
-				'type'     => 'timeofday',
-			],
-			'bounce_rates'     => [
+			),
+			'bounce_rates'     => array(
 				'value'    => isset( $summary['bounceRate'][0] ) ? $summary['bounceRate'][0] : 0,
 				'previous' => isset( $summary['bounceRate'][1] ) ? $summary['bounceRate'][1] : 0,
-				'type'     => 'number',
-			],
-			'user_sessions'    => [
+			),
+			'user_sessions'    => array(
 				'new'       => isset( $summary['percentNewSessions'][0] ) ? (float) $summary['percentNewSessions'][0] : 0,
 				'returning' => isset( $summary['percentNewSessions'][1] ) ? (float) ( 100 - $summary['percentNewSessions'][1] ) : 0,
-			],
-		];
+			),
+			'new_users'        => array(
+				'value'    => isset( $summary['newUsers'][0] ) ? $summary['newUsers'][0] : 0,
+				'previous' => isset( $summary['newUsers'][1] ) ? $summary['newUsers'][1] : 0,
+			),
+		);
 
 		// Now set the trends.
 		$summary['users']['trend']            = $this->trend_value( 'users', $summary['users']['value'], $summary['users']['previous'] );
 		$summary['sessions']['trend']         = $this->trend_value( 'sessions', $summary['sessions']['value'], $summary['sessions']['previous'] );
 		$summary['pageviews']['trend']        = $this->trend_value( 'pageviews', $summary['pageviews']['value'], $summary['pageviews']['previous'] );
+		$summary['new_users']['trend']        = $this->trend_value( 'newUsers', $summary['new_users']['value'], $summary['new_users']['previous'] );
 		$summary['bounce_rates']['trend']     = $this->trend_value( 'bounceRate', $summary['bounce_rates']['value'], $summary['bounce_rates']['previous'] );
 		$summary['page_sessions']['trend']    = $this->trend_value( 'pageviewsPerSession', $summary['page_sessions']['value'], $summary['page_sessions']['previous'] );
 		$summary['average_sessions']['trend'] = $this->trend_value( 'avgSessionDuration', $summary['average_sessions']['value'], $summary['average_sessions']['previous'] );
@@ -811,8 +1067,10 @@ class Format extends Base {
 		// Get the dimension type.
 		if ( isset( $data['ga:yearMonth'] ) ) {
 			$dimension = 'ga:yearMonth';
-		} elseif ( isset( $data['ga:hour'] ) ) {
-			$dimension = 'ga:hour';
+		} elseif ( isset( $data['ga:yearWeek'] ) ) {
+			$dimension = 'ga:yearWeek';
+		} elseif ( isset( $data['ga:dateHour'] ) ) {
+			$dimension = 'ga:dateHour';
 		} else {
 			$dimension = 'ga:date';
 		}

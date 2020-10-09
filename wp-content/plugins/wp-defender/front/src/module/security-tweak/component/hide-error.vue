@@ -31,16 +31,30 @@
                             {{ __( "Status" ) }}
                         </strong>
                         <div class="sui-notice sui-notice-success">
+ <div class="sui-notice-content">
+                    <div class="sui-notice-message">
+                        <i class="sui-notice-icon sui-icon-info sui-md" aria-hidden="true"></i>
+
                             <p v-html="successReason"></p>
-                        </div>
+
+                    </div>
+                </div>
+</div>
                     </div>
                     <div v-else>
                         <strong>
                             {{ __( "Status" ) }}
                         </strong>
                         <div class="sui-notice sui-notice-warning">
+ <div class="sui-notice-content">
+                    <div class="sui-notice-message">
+                        <i class="sui-notice-icon sui-icon-info sui-md" aria-hidden="true"></i>
+
                             <p v-html="errorReason"></p>
-                        </div>
+
+                    </div>
+                </div>
+</div>
                         <p>
                             {{ __( "While it may not be in use, we haven't found any code stopping debugging information being output. It's best to remove all doubt and disable error reporting completely." ) }}
                         </p>

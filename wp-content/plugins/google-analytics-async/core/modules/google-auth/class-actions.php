@@ -1,4 +1,13 @@
 <?php
+/**
+ * The Google authentication class.
+ *
+ * @link    http://premium.wpmudev.org
+ * @since   3.2.0
+ *
+ * @author  Joel James <joel@incsub.com>
+ * @package Beehive\Core\Modules\Google_Auth
+ */
 
 namespace Beehive\Core\Modules\Google_Auth;
 
@@ -10,12 +19,9 @@ use Beehive\Core\Helpers\Template;
 use Beehive\Core\Utils\Abstracts\Base;
 
 /**
- * The Google authentication class.
+ * Class Actions
  *
- * @link   http://premium.wpmudev.org
- * @since  3.2.0
- *
- * @author Joel James <joel@incsub.com>
+ * @package Beehive\Core\Modules\Google_Auth
  */
 class Actions extends Base {
 
@@ -28,10 +34,10 @@ class Actions extends Base {
 	 */
 	public function init() {
 		// Handle Google auth callback.
-		add_action( 'init', [ $this, 'handle_callback' ] );
+		add_action( 'init', array( $this, 'handle_callback' ) );
 
 		// Handle Google auth callback.
-		add_action( 'admin_init', [ $this, 'exchange_code' ] );
+		add_action( 'admin_init', array( $this, 'exchange_code' ) );
 	}
 
 	/**
@@ -47,29 +53,44 @@ class Actions extends Base {
 	 */
 	public function handle_callback() {
 		// Make sure this is Google callback.
+		// phpcs:ignore
 		if ( ! isset( $_GET['state'], $_GET['code'] ) && ! isset( $_GET['state'], $_GET['error'] ) ) {
 			return;
 		}
 
 		// Decode the state data.
-		$state = json_decode( urldecode( $_GET['state'] ), true );
+		// phpcs:ignore
+		$state = json_decode( rawurldecode( $_GET['state'] ), true );
 
 		// Continue only after security check.
-		if ( isset( $state['beehive_nonce'], $state['origin'], $state['default'] ) ) {
+		if ( isset( $state['beehive_nonce'], $state['origin'], $state['default'], $state['page'] ) ) {
 			// Setup the redirect url base.
 			if ( 'network' === $state['origin'] ) {
-				$url = Template::settings_page( 'general', true );
+				// If from dashboard.
+				if ( 'dashboard' === $state['page'] ) {
+					$url = Template::dashboard_url( true );
+				} else {
+					$url = Template::settings_url( 'permissions', true );
+				}
 			} else {
-				$url = Template::settings_page( 'general', false, $state['origin'] );
+				// If from dashboard.
+				if ( 'dashboard' === $state['page'] ) {
+					$url = Template::dashboard_url();
+				} else {
+					$url = Template::accounts_url( 'google', false, $state['origin'] );
+				}
 			}
 
 			// Setup redirect url.
-			$url = add_query_arg( [
-				'gcode'         => isset( $_GET['code'] ) ? $_GET['code'] : 0,
-				'default'       => $state['default'],
-				'beehive_nonce' => $state['beehive_nonce'], // Nonce retained for verification in subsite.
-				'modal'         => empty( $state['modal'] ) ? 0 : 1,
-			], $url );
+			$url = add_query_arg(
+				array(
+					// phpcs:ignore
+					'gcode'         => isset( $_GET['code'] ) ? $_GET['code'] : 0,
+					'default'       => $state['default'],
+					'beehive_nonce' => $state['beehive_nonce'], // Nonce retained for verification in subsite.
+				),
+				$url
+			);
 
 			/**
 			 * Action hook to execute after redirected from Google auth.
@@ -82,6 +103,7 @@ class Actions extends Base {
 			do_action( 'beehive_google_callback', $state, $url );
 
 			// Redirect to our page.
+			// phpcs:ignore
 			wp_redirect( esc_url_raw( $url ) );
 			exit;
 		}
@@ -107,30 +129,32 @@ class Actions extends Base {
 		$core = Auth::instance();
 
 		// Continue only when required data is set.
+		// phpcs:ignore
 		if ( ! isset( $_GET['gcode'], $_GET['beehive_nonce'], $_GET['page'], $_GET['default'] ) ) {
 			return;
 		}
 
 		// Security check.
+		// phpcs:ignore
 		if ( ! wp_verify_nonce( $_GET['beehive_nonce'], 'beehive_nonce' ) ) {
 			return;
 		}
 
 		// Check if the authentication is using default credentials.
+		// phpcs:ignore
 		$default = ! empty( $_GET['default'] );
 
-		// Get modal flag.
-		$modal = ! empty( $_GET['modal'] );
+		// Network flag.
+		$network = is_network_admin();
 
 		// Continue only if valid code found.
+		// phpcs:ignore
 		if ( ! empty( $_GET['gcode'] ) ) {
-			// Network flag.
-			$network = is_network_admin();
-
 			// Setup client instance.
 			$default ? $core->setup_default( $network ) : $core->setup( $network );
 
 			// Sanitize the code.
+			// phpcs:ignore
 			$g_code = sanitize_text_field( $_GET['gcode'] );
 
 			// Exchange access code and get access token.
@@ -138,25 +162,46 @@ class Actions extends Base {
 
 			// Save access and refresh tokens.
 			if ( isset( $token['access_token'], $token['refresh_token'] ) ) {
-				// Get granted scopes.
-				$scopes = empty( $token['scope'] ) ? '' : $token['scope'];
-				// Get scopes in array format.
-				$scopes = explode( ' ', $scopes );
+				// We don't need scope. It may get blocked by WAFs.
+				if ( isset( $token['scope'] ) ) {
+					unset( $token['scope'] );
+				}
+
+				// When we are re-using the network API creds.
+				if ( ! $network && General::is_networkwide() && Helper::instance()->is_logged_in( true ) && 'api' === Helper::instance()->login_method( true ) ) {
+					$method = 'network_connect';
+				} else {
+					$method = 'api';
+				}
 
 				// Update the login data.
-				$this->save_settings( 'google_login', [
-					'access_token' => json_encode( $token ), // For backward compatibility.
-					'scopes'       => (array) $scopes,
-					'logged_in'    => 2, // Logged in flag.
-					'method'       => 'api', // Login method.
-					'name'         => '', // Clear old name.
-					'email'        => '', // Clear old email.
-					'photo'        => '', // Clear old photo.
-				], $network );
+				$this->save_settings(
+					'google_login',
+					array(
+						'access_token' => wp_json_encode( $token ), // For backward compatibility.
+						'logged_in'    => 2, // Logged in flag.
+						'method'       => $method, // Login method.
+						'name'         => '', // Clear old name.
+						'email'        => '', // Clear old email.
+						'photo'        => '', // Clear old photo.
+					),
+					$network
+				);
+
+				// Setup user data.
+				Data::instance()->user( $network );
 
 				// Success flag.
 				$success = true;
 			}
+
+			// Flag to show notice.
+			beehive_analytics()->settings->update(
+				'google_auth_redirect_success',
+				$success ? 'success' : 'error',
+				'misc',
+				$network
+			);
 		}
 
 		/**
@@ -164,11 +209,11 @@ class Actions extends Base {
 		 *
 		 * @param bool $success Is success or fail?.
 		 * @param bool $default Did we connect using default credentials?.
-		 * @param bool $modal   Is it is from a modal?.
+		 * @param bool $network Network flag.
 		 *
 		 * @since 3.2.0
 		 */
-		do_action( 'beehive_google_auth_completed', $success, $default, $modal );
+		do_action( 'beehive_google_auth_completed', $success, $default, $network );
 	}
 
 	/**
@@ -185,7 +230,7 @@ class Actions extends Base {
 	 *
 	 * @return void
 	 */
-	public function save_settings( $type = 'google', $data = [], $network = false ) {
+	public function save_settings( $type = 'google', $data = array(), $network = false ) {
 		// Get available keys.
 		$fields = beehive_analytics()->settings->default_settings( $network );
 
