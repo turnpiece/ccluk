@@ -90,13 +90,14 @@ a:hover,
 }
 
 .widget-area .widget.widget_ccluk-newsletter-signup #mc_embed_signup form #mc-embedded-subscribe.button, .widget-area .widget.widget_custom_html #mc_embed_signup form #mc-embedded-subscribe.button {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
   border-radius: 5px;
   background-image: none;
   background-color: #22a7f0;
   border: none;
   text-shadow: none;
-  -webkit-box-shadow: none;
-          box-shadow: none;
+  box-shadow: none;
   padding: 6px 10px;
   padding: 0.6rem 1rem;
   color: #fff;
@@ -141,6 +142,7 @@ a:hover,
 .archive #main .post-author,
 .blog #main .post-author {
   -webkit-box-ordinal-group: 1;
+  -webkit-order: 0;
   -ms-flex-order: 0;
   order: 0;
   width: 165px;
@@ -200,6 +202,8 @@ input[type=submit] {
   padding: 10px 20px 10px 20px;
   background-color: #22a7f0;
   color: #fff;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
   border-radius: 3px;
 }
 
@@ -234,13 +238,14 @@ div.footer-inner-bottom {
 }
 
 a.button {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
   border-radius: 5px;
   background-image: none;
   background-color: #22a7f0;
   border: none;
   text-shadow: none;
-  -webkit-box-shadow: none;
-          box-shadow: none;
+  box-shadow: none;
   padding: 6px 10px;
   padding: 0.6rem 1rem;
   color: #fff;
@@ -252,6 +257,8 @@ a.button:hover {
 }
 
 a.cta {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
   border-radius: 10px;
   background-color: #22a7f0;
   padding: 12px 48px;
@@ -357,6 +364,8 @@ a.cta:hover {
 .single .entry-tags a,
 .single-post .entry-tags a,
 .single-give_forms .entry-tags a {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
   border-radius: 5px;
   background-color: #22a7f0;
   color: #fff;
@@ -510,17 +519,17 @@ body.page-template-homepage #main .section#primary {
 body.page-template-homepage #main .section .section-content {
   max-width: 1170px;
   margin: 0 auto;
+  display: -moz-box;
   display: -webkit-box;
+  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-align-items: flex-start;
+  align-items: flex-start;
+  justify-content: center;
 }
 
 body.page-template-homepage #main .section .section-content .list-item {
@@ -613,13 +622,10 @@ body.page-template-homepage #main .section.banner .section-content {
 
 body.page-template-homepage #main .section.banner .section-content > img {
   display: block;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 body.page-template-homepage #main .section.banner .section-title-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   padding: 0;
   z-index: 5;
@@ -653,8 +659,6 @@ body.page-template-homepage #main .section.banner.background .section-content > 
 }
 
 body.page-template-homepage #main .section.banner.background .section-title-container, body.page-template-homepage #main .section.banner.background-box .section-title-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   position: absolute;
   left: 0;
@@ -670,9 +674,7 @@ body.page-template-homepage #main .section.banner.background .section-title-cont
 }
 
 body.page-template-homepage #main .section.banner.background .section-title-container > .section-title, body.page-template-homepage #main .section.banner.background-box .section-title-container > .section-title {
-  -ms-flex-item-align: center;
-      -ms-grid-row-align: center;
-      align-self: center;
+  align-self: center;
   position: relative;
   max-width: 650px;
 }
@@ -693,8 +695,7 @@ body.page-template-homepage #main .section.banner.background-box .section-title-
   left: 50%;
   bottom: auto;
   margin-right: -50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   height: auto;
   max-height: 95%;
   padding: 30px;
@@ -739,17 +740,17 @@ body.page-template-homepage #main .section.feature .section-content {
 }
 
 body.page-template-homepage #main .section.feature .section-content article {
+  display: -moz-box;
   display: -webkit-box;
+  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-align-items: flex-start;
+  align-items: flex-start;
+  justify-content: center;
   padding: 20px 0px;
   padding: 2rem 0rem;
 }
@@ -777,11 +778,8 @@ body.page-template-homepage #main .section.feature .section-content article .lis
 
 body.page-template-homepage #main .section.about .section-content {
   text-align: center;
-  -ms-flex-line-pack: center;
-      align-content: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  align-content: center;
+  justify-content: center;
 }
 
 body.page-template-homepage #main .section.about .section-content .list-item {
@@ -812,11 +810,9 @@ body.page-template-homepage #main .section.twitter .section-content {
 }
 
 body.page-template-homepage #main .section.join .section-content, body.page-template-homepage #main .section.newsletter .section-content, body.page-template-homepage #main .section.embed .section-content {
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: start;
+  justify-content: space-around;
+  -webkit-align-items: start;
+  align-items: start;
   padding: 10px 0px;
   padding: 1rem 0rem;
 }
@@ -865,13 +861,14 @@ body.page-template-homepage #main .section.join .section-content .list-item.form
 
 body.page-template-homepage #main .section.join .section-content .list-item.form form.mc4wp-form input[type="submit"], body.page-template-homepage #main .section.newsletter .section-content .list-item.form form.mc4wp-form input[type="submit"], body.page-template-homepage #main .section.embed .section-content .list-item.form form.mc4wp-form input[type="submit"] {
   width: auto;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
   border-radius: 5px;
   background-image: none;
   background-color: #22a7f0;
   border: none;
   text-shadow: none;
-  -webkit-box-shadow: none;
-          box-shadow: none;
+  box-shadow: none;
   padding: 6px 10px;
   padding: 0.6rem 1rem;
   color: #fff;
@@ -903,13 +900,14 @@ body.page-template-homepage #main .section.join.embed .section-content .list-ite
 }
 
 body.page-template-homepage #main .section.join.embed .section-content .list-item.form #mc_embed_signup .button, body.page-template-homepage #main .section.join.newsletter .section-content .list-item.form #mc_embed_signup .button, body.page-template-homepage #main .section.newsletter.embed .section-content .list-item.form #mc_embed_signup .button, body.page-template-homepage #main .section.newsletter.newsletter .section-content .list-item.form #mc_embed_signup .button, body.page-template-homepage #main .section.embed.embed .section-content .list-item.form #mc_embed_signup .button, body.page-template-homepage #main .section.embed.newsletter .section-content .list-item.form #mc_embed_signup .button {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
   border-radius: 5px;
   background-image: none;
   background-color: #22a7f0;
   border: none;
   text-shadow: none;
-  -webkit-box-shadow: none;
-          box-shadow: none;
+  box-shadow: none;
   padding: 6px 10px;
   padding: 0.6rem 1rem;
   color: #fff;
@@ -929,6 +927,8 @@ body.page-template-homepage #main .section.join.embed .section-content .list-ite
 }
 
 body.page-template-homepage #main .section.join.embed .section-content .list-item.form #mc_embed_signup #mc-embedded-subscribe-form div.mce_inline_error, body.page-template-homepage #main .section.join.newsletter .section-content .list-item.form #mc_embed_signup #mc-embedded-subscribe-form div.mce_inline_error, body.page-template-homepage #main .section.newsletter.embed .section-content .list-item.form #mc_embed_signup #mc-embedded-subscribe-form div.mce_inline_error, body.page-template-homepage #main .section.newsletter.newsletter .section-content .list-item.form #mc_embed_signup #mc-embedded-subscribe-form div.mce_inline_error, body.page-template-homepage #main .section.embed.embed .section-content .list-item.form #mc_embed_signup #mc-embedded-subscribe-form div.mce_inline_error, body.page-template-homepage #main .section.embed.newsletter .section-content .list-item.form #mc_embed_signup #mc-embedded-subscribe-form div.mce_inline_error {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
   border-radius: 10px;
   padding: 10px 20px;
   padding: 1rem 2rem;
@@ -945,6 +945,8 @@ body.page-template-homepage #main .section.join.embed .section-content .list-ite
   margin: 1rem 1rem;
   padding: 10px 20px;
   padding: 1rem 2rem;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
   border-radius: 10px;
   font-weight: 400;
   color: #fff;
@@ -988,13 +990,14 @@ body.page-template-homepage #main .section.green-bg.blue-bg, body.page-template-
 }
 
 body.page-template-homepage .homepage-section-title > h4 {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
   border-radius: 5px;
   background-image: none;
   background-color: #22a7f0;
   border: none;
   text-shadow: none;
-  -webkit-box-shadow: none;
-          box-shadow: none;
+  box-shadow: none;
   padding: 6px 10px;
   padding: 0.6rem 1rem;
   color: #fff;
@@ -1047,8 +1050,7 @@ body.registration .site {
   background: transparent;
   border: none;
   text-align: center;
-  -webkit-box-shadow: none;
-          box-shadow: none;
+  box-shadow: none;
   padding: 10px 0 70px;
 }
 
@@ -1268,8 +1270,7 @@ body.register div#register-page .wp-social-login-widget {
 }
 
 body.register div#register-page .register-section {
-  -webkit-box-shadow: none;
-          box-shadow: none;
+  box-shadow: none;
 }
 
 body.register div#register-page .register-section label, body.register div#register-page .register-section legend {
@@ -1418,6 +1419,7 @@ body.register .entry-header h1.entry-title {
   top: 0;
   padding: 0 8px;
   -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
@@ -1456,11 +1458,13 @@ body.register .entry-header h1.entry-title {
 }
 
 .mfp-zoom-out-cur {
+  cursor: -moz-zoom-out;
   cursor: -webkit-zoom-out;
   cursor: zoom-out;
 }
 
 .mfp-zoom-out-cur .mfp-image-holder .mfp-close {
+  cursor: -moz-zoom-out;
   cursor: -webkit-zoom-out;
   cursor: zoom-out;
 }
@@ -1468,6 +1472,7 @@ body.register .entry-header h1.entry-title {
 .mfp-zoom {
   cursor: pointer;
   cursor: -webkit-zoom-in;
+  cursor: -moz-zoom-in;
   cursor: zoom-in;
 }
 
@@ -1478,8 +1483,7 @@ body.register .entry-header h1.entry-title {
 .mfp-arrow, .mfp-close, .mfp-counter, .mfp-preloader {
   -webkit-user-select: none;
   -moz-user-select: none;
-  -ms-user-select: none;
-      user-select: none;
+  user-select: none;
 }
 
 .mfp-loading.mfp-figure {
@@ -1685,8 +1689,7 @@ button::-moz-focus-inner {
   left: 0;
   width: 100%;
   height: 100%;
-  -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
-          box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
   background: #000;
 }
 
@@ -1697,6 +1700,7 @@ img.mfp-img {
   display: block;
   line-height: 0;
   -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   padding: 40px 0;
   margin: 0 auto;
@@ -1717,8 +1721,7 @@ img.mfp-img {
   width: auto;
   height: auto;
   z-index: -1;
-  -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
-          box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
   background: #444;
 }
 
@@ -1782,6 +1785,7 @@ img.mfp-img {
     padding: 3px 5px;
     position: fixed;
     -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
   }
   .mfp-img-mobile .mfp-bottom-bar:empty {
@@ -2069,13 +2073,11 @@ a.comment-reply-link:hover, a.comment-edit-link:hover {
   0%,
   80%,
   100% {
-    -webkit-box-shadow: 0 0 green;
-            box-shadow: 0 0 green;
+    box-shadow: 0 0 green;
     height: 4em;
   }
   40% {
-    -webkit-box-shadow: 0 -2em green;
-            box-shadow: 0 -2em green;
+    box-shadow: 0 -2em green;
     height: 5em;
   }
 }
@@ -2084,13 +2086,11 @@ a.comment-reply-link:hover, a.comment-edit-link:hover {
   0%,
   80%,
   100% {
-    -webkit-box-shadow: 0 0 green;
-            box-shadow: 0 0 green;
+    box-shadow: 0 0 green;
     height: 4em;
   }
   40% {
-    -webkit-box-shadow: 0 -2em green;
-            box-shadow: 0 -2em green;
+    box-shadow: 0 -2em green;
     height: 5em;
   }
 }
@@ -2117,27 +2117,26 @@ input[type="submit"] {
 }
 
 .main-navigation .nav-menu > li:hover > a {
-  -webkit-box-shadow: 0 -2px 0 #54ae68 inset;
-          box-shadow: 0 -2px 0 #54ae68 inset;
+  box-shadow: 0 -2px 0 #54ae68 inset;
 }
 
 .main-navigation div > ul > .current-menu-item > a, .main-navigation div > ul > .current-menu-ancestor > a {
-  -webkit-box-shadow: 0 -2px 0 #54ae68 inset;
-          box-shadow: 0 -2px 0 #54ae68 inset;
+  box-shadow: 0 -2px 0 #54ae68 inset;
 }
 
 .header-button.underlined {
-  -webkit-box-shadow: 0 -1px 0 #54ae68 inset;
-          box-shadow: 0 -1px 0 #54ae68 inset;
+  box-shadow: 0 -1px 0 #54ae68 inset;
 }
 
 input[type="checkbox"] + span:before, input[type="checkbox"] + label:before, input[type="checkbox"] + strong:before {
   -webkit-box-shadow: 0px 0px 0px 2px #54ae68;
+  -moz-box-shadow: 0px 0px 0px 2px #54ae68;
   box-shadow: 0px 0px 0px 2px #54ae68;
 }
 
 input[type="radio"] + span:before, input[type="radio"] + label:before, input[type="radio"] + strong:before {
   -webkit-box-shadow: 0px 0px 0px 2px #54ae68;
+  -moz-box-shadow: 0px 0px 0px 2px #54ae68;
   box-shadow: 0px 0px 0px 2px #54ae68;
 }
 
@@ -2307,6 +2306,7 @@ div#sitewide-notice div#message p {
   float: right;
   margin: 2px 0px;
   margin: 0.2rem 0rem;
+  -moz-box-shadow: none;
   -webkit-box-shadow: none;
   box-shadow: none;
   border: none;
@@ -2382,13 +2382,14 @@ body.single-give_forms #secondary {
 
 .give-form .give-donation-submit input[type=submit].give-btn,
 .give-form button.give-btn {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
   border-radius: 5px;
   background-image: none;
   background-color: #22a7f0;
   border: none;
   text-shadow: none;
-  -webkit-box-shadow: none;
-          box-shadow: none;
+  box-shadow: none;
   padding: 6px 10px;
   padding: 0.6rem 1rem;
   color: #fff;
