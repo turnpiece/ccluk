@@ -28,3 +28,7 @@ body.single-give_forms {
 		@include button();
 	}
 }
+
+[id*=give-form] .give-recurring-donors-choice label {
+	font-size: inherit;
+}
