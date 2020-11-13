@@ -2055,10 +2055,6 @@ label[for="groupblog-create-new-no"] .buddyboss-select {
   color: #bbb;
 }
 
-#buddypress div.submit #send_reply_button {
-  background: transparent;
-}
-
 #buddypress table {
   width: 100%;
 }
@@ -2634,6 +2630,8 @@ div#sitewide-notice div#message.error p {
 
 #buddypress .standard-form input[type="text"], #buddypress .standard-form input[type="email"], #buddypress .standard-form input[type="password"] {
   width: 100%;
+  padding: 6px 12px;
+  padding: 0.6rem 1.2rem;
   /*margin-bottom: 10px;*/
 }
 
@@ -5173,7 +5171,8 @@ body.articles #buddypress div#item-body {
 #buddypress #send-reply.standard-form textarea {
   height: 100px;
   margin-bottom: 20px;
-  padding: 10px 0;
+  padding: 6px 12px;
+  padding: 0.6rem 1.2rem;
   width: 100%;
 }
 

@@ -1373,9 +1373,6 @@ label[for="groupblog-create-new-no"] {
     input.loading {
       @include button-colours();
     }
-    #send_reply_button {
-      background: transparent;
-    }
   }
   table {
     width: 100%;
@@ -1964,6 +1961,7 @@ div#sitewide-notice div#message.error p {
       &[type="email"], 
       &[type="password"] {
         width: 100%;
+        @include padding( .6, 1.2 );
         /*margin-bottom: 10px;*/
       }
     }
@@ -4574,7 +4572,7 @@ body.articles #buddypress div#item-body {
   #send-reply.standard-form textarea {
     height: 100px;
     margin-bottom: 20px;
-    padding: 10px 0;
+    @include padding( .6, 1.2 );
     width: 100%;
   }
 }
