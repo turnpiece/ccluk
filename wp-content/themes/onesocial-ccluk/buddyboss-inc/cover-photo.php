@@ -169,7 +169,6 @@ function buddyboss_cover_photo( $object, $object_id ) {
 		return buddyboss_no_cover_photo( $object, $object_id ); //return blank cover photo
 	}
 
-//	if ( $object == "group" && !onesocial_get_option( 'social_portfolio_cover_group' ) ) { //return nothing.
 	if ( $object == "group" && bp_disable_group_cover_image_uploads() ) { //return nothing.
 		return buddyboss_no_cover_photo( $object, $object_id ); //return blank cover photo
 	}
