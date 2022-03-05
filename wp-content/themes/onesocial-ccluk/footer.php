@@ -23,8 +23,12 @@
 <?php
 global $bp, $post;
 
+$post_infinite			 = true;
+$boss_activity_infinite	 = true;
+$activity				 = isset( $bp ) ? $bp->current_component : false;
+
 // don't remove this filter, marketplace plugin uses it
-$show_footer = apply_filters( 'onesocial_show_footer', true );
+$show_footer = apply_filters( 'onesocial_show_footer', !( ( is_archive() || is_home() ) && $post_infinite && !( function_exists( 'is_shop' ) && is_shop() ) && !( function_exists( 'is_product_category' ) && is_product_category() ) && !( function_exists( 'is_product_tag' ) && is_product_tag() ) && !( function_exists( 'bbp_is_forum_archive' ) && bbp_is_forum_archive() ) ) || ( $activity == 'activity' && $boss_activity_infinite ) );
 
 if ( $show_footer ) : ?>
 
@@ -37,9 +41,18 @@ if ( $show_footer ) : ?>
 
 				<div id="footer-links">
 
-					<div class="footer-credits <?php if ( !has_nav_menu( 'secondary-menu' ) ) : ?>footer-credits-single<?php endif; ?>">
-						&copy; 2022 - <?php echo get_bloginfo( 'name' ) ?>
-					</div>
+					<?php
+					$show_copyright	 = true;
+					$copyright		 = "&copy; 2022 - " . get_bloginfo( 'name' );
+
+					if ( $show_copyright && $copyright ) {
+						?>
+
+						<div class="footer-credits <?php if ( !has_nav_menu( 'secondary-menu' ) ) : ?>footer-credits-single<?php endif; ?>">
+							<?php echo $copyright; ?>
+						</div>
+
+					<?php } ?>
 
 					<?php if ( has_nav_menu( 'secondary-menu' ) ) : ?>
 						<ul class="footer-menu">
@@ -48,6 +61,14 @@ if ( $show_footer ) : ?>
 					<?php endif; ?>
 
 				</div>
+
+				<?php if ( onesocial_get_option( 'boss_layout_switcher' ) ) { ?>
+					<form id="switch-mode" name="switch-mode" method="post" action="">
+						<input type="submit" value="View as Desktop" tabindex="1" id="switch_submit" name="submit" />
+						<input type="hidden" id="switch_mode" name="switch_mode" value="desktop" />
+						<?php wp_nonce_field( 'switcher_action', 'switcher_nonce_field' ); ?>
+					</form>
+				<?php } ?>
 
 				<?php get_template_part( 'template-parts/footer-social-links' ); ?>
 
@@ -61,6 +82,20 @@ if ( $show_footer ) : ?>
 	</footer>
 
 <?php endif; ?>
+
+<?php
+if ( !is_user_logged_in() ) {
+
+	if ( buddyboss_is_bp_active() && bp_get_signup_allowed() ) {
+		get_template_part( 'template-parts/site-register' );
+	}
+
+	get_template_part( 'template-parts/site-login' );
+}
+
+// Lost Password
+get_template_part( 'template-parts/site-lost-password' );
+?>
 
 <?php do_action( 'bp_footer' ) ?>
 
