@@ -1,8 +1,15 @@
 <?php
-$show_social_links	 = onesocial_get_option( 'footer_social_links' );
-$social_links		 = onesocial_get_option( 'boss_footer_social_links' );
 
-if ( $show_social_links && is_array( $social_links ) ) {
+// display social links in footer
+$social_links = array(
+	'facebook' => 'https://www.facebook.com/CitizensClimateLobbyUK/',
+	'twitter' => 'https://twitter.com/CitznsClimateUK',
+	'youtube' => 'https://www.youtube.com/channel/UCKg3OsMPlMzXlE0sGxrwhkg',
+	'instagram' => 'https://www.instagram.com/citizensclimatelobby/',
+	'linkedin' => 'https://uk.linkedin.com/company/ccluk/'
+);
+
+if ( !empty( $social_links ) ) {
 	?>
 
 	<div id="footer-icons">
