@@ -47,20 +47,6 @@
 							<?php } ?>
 						</div>
 
-						<div class="item-desc">
-							<?php
-							$bio_field = onesocial_get_option( 'boss_bio_field' );
-							if ( $bio_field ) {
-								$bio = bp_get_profile_field_data( array( 'field' => $bio_field, 'user_id' => $user_id ) );
-								if ( $bio ) {
-									?>
-									<div class="author-bio"><?php echo onesocial_custom_excerpt( $bio, 15 ); ?></div>
-									<?php
-								}
-							}
-							?>
-						</div>
-
 						<?php do_action( 'bp_directory_members_item' ); ?>
 
 						<?php

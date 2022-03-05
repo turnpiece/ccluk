@@ -547,14 +547,6 @@ if ( !class_exists( 'onesocial_Redux_Framework_config' ) ) {
 						'desc'	 => __( 'Profile Header Field', 'onesocial' )
 					),
 					array(
-						'id'		 => 'boss_bio_field',
-						'type'		 => 'select',
-						'url'		 => true,
-						'title'		 => __( 'Displayed Field', 'onesocial' ),
-						'subtitle'	 => __( 'Create a BuddyPress profile field at <em>Users &gt; Profile Fields</em> and set it to display in Member Profile headers. Ex: "Location"', 'onesocial' ),
-						'options'	 => $this->boss_customizer_xprofile_field_choices()
-					),
-					array(
 						'id'	 => 'social_media_links_info',
 						'type'	 => 'info',
 						'desc'	 => __( 'Social Media Links', 'onesocial' )

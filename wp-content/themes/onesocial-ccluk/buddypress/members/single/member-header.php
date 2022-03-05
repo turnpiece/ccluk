@@ -35,18 +35,6 @@ $displayed_user	 = bp_displayed_user_id();
 		<p class="region"><?php echo $region ?></p>
 	<?php endif; ?>
 
-	<?php
-		$bio_field = onesocial_get_option( 'boss_bio_field' );
-		if ( $bio_field && function_exists( 'bp_get_profile_field_data' ) ) {
-			$bio = bp_get_profile_field_data( array( 'field' => $bio_field ) );
-			if ( $bio ) {
-				?>
-				<p id="item-desc"><?php echo stripslashes( $bio ); ?></p>
-				<?php
-			}
-		}
-	?>
-
 	<!-- Socials -->
 	<div class="btn-group social">
 	<?php

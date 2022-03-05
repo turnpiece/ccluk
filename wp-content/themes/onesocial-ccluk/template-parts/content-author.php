@@ -38,16 +38,6 @@
 			if ( buddyboss_is_bp_active() ):
 				global $bp;
 
-				$bio_field = onesocial_get_option( 'boss_bio_field' );
-				if ( $bio_field && function_exists( 'bp_get_profile_field_data' ) ) {
-					$bio = bp_get_profile_field_data( array( 'field' => $bio_field, 'user_id' => get_the_author_meta( 'ID' ) ) );
-					if ( $bio ) {
-						?>
-						<div class="author-bio"><?php echo onesocial_custom_excerpt( $bio, 15 ); ?></div>
-						<?php
-					}
-				}
-
 				$showing = null;
 				//if bp-followers activated then show it.
 				if ( function_exists( "bp_follow_add_follow_button" ) ) {

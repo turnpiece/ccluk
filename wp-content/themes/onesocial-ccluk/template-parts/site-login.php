@@ -15,8 +15,8 @@ if ( $WORDPRESS_SOCIAL_LOGIN_VERSION ) {
 	<div class="animated fadeInDownShort LoginBox slow">
 
 		<?php
-		$title	 = onesocial_get_option( 'login_form_title' );
-		$desc	 = onesocial_get_option( 'login_form_description' );
+		$title	 = __( 'Welcome back!' );
+		$desc	 = sprintf( __( 'Sign in to %s or create an account' ), get_bloginfo( 'name' ) );
 
 		if ( $title ) {
 			echo '<h4 class="popup_title">' . $title . '</h4>';
@@ -68,12 +68,9 @@ if ( $WORDPRESS_SOCIAL_LOGIN_VERSION ) {
 
 				<?php do_action( 'login_form' ); ?>
 
-				<?php
-				$login_message = onesocial_get_option( 'boss_login_message' );
-
-				if ( !empty( $WORDPRESS_SOCIAL_LOGIN_VERSION ) && !empty( $login_message ) ) {
+				<?php if ( !empty( $WORDPRESS_SOCIAL_LOGIN_VERSION ) ) {
 					?>
-					<p class="login-message"><?php echo $login_message; ?></p>
+					<p class="login-message"><?php _e( 'We will never post to Twitter or Facebook without your permission.' ) ?></p>
 				<?php } ?>
 
 			</div>
