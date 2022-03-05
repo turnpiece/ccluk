@@ -88,11 +88,7 @@ $date = mysql2date( get_option('date_format'), $datetime );
 			$post_content = $post->post_content;
 
 			//entry-content
-			if ( 'excerpt' === onesocial_get_option( 'onesocial_entry_content' ) ):
-				the_excerpt();
-			else:
-				the_content();
-			endif;
+			the_excerpt();
 
 			?>
 

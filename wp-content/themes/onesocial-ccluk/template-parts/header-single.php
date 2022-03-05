@@ -47,18 +47,6 @@
 						printf( '<span class="author-name vcard"><a class="url fn n" href="%1$s" title="%2$s" rel="author">%3$s</a></span>', $user_link, esc_attr( sprintf( __( 'View all posts by %s', 'onesocial' ), $author_name ) ), $author_name
 						);
 
-						if ( buddyboss_is_bp_active() ) {
-							$bio_field = onesocial_get_option( 'boss_bio_field' );
-							if ( $bio_field ) {
-								$bio = bp_get_profile_field_data( array( 'field' => $bio_field, 'user_id' => $author_id ) );
-								if ( $bio ) {
-									?>
-									<div class="author-bio"><?php echo onesocial_custom_excerpt( $bio, 15 ); ?></div>
-									<?php
-								}
-							}
-						}
-
 						endif;?>
 
 						<div class="entry-meta">

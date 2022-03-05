@@ -35,8 +35,14 @@ class OneSocial_Social_Links extends WP_Widget {
 			echo $args[ 'before_title' ] . $title . $args[ 'after_title' ];
 		}
         
-        $show_social_links	 = onesocial_get_option( 'footer_social_links' );
-        $social_links		 = onesocial_get_option( 'boss_footer_social_links' );
+        $show_social_links	 = true;
+        $social_links		 = array(
+			'facebook' => 'https://www.facebook.com/CitizensClimateLobbyUK/',
+			'twitter' => 'https://twitter.com/CitznsClimateUK',
+			'youtube' => 'https://www.youtube.com/channel/UCKg3OsMPlMzXlE0sGxrwhkg',
+			'instagram' => 'https://www.instagram.com/citizensclimatelobby/',
+			'linkedin' => 'https://uk.linkedin.com/company/ccluk/'
+		);
 
         if ( $show_social_links && is_array( $social_links ) ) {
         ?>

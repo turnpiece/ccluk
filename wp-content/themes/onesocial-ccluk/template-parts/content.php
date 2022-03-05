@@ -75,21 +75,9 @@
 			$post_content = $post->post_content;
 
 			//entry-content
-			if ( 'excerpt' === onesocial_get_option( 'onesocial_entry_content' ) ):
-				the_excerpt();
-			else:
-				the_content();
-			endif;
+			the_excerpt();
 
 			?>
-			<?php /*
-			<footer class="entry-meta">
-				<a href="<?php the_permalink(); ?>" title="<?php echo esc_attr( sprintf( __( 'Permalink to %s', 'onesocial' ), the_title_attribute( 'echo=0' ) ) ); ?>" class="read-more"><?php _e( 'Continue reading', 'onesocial' ); ?></a>
-				<span class="sep"><?php _e( '.', 'onesocial' ) ?></span>
-				<span><?php echo boss_estimated_reading_time( $post_content ); ?></span>
-				<a href="#" class="to-top bb-icon-arrow-top-f"></a>
-			</footer><!-- .entry-meta -->
-			*/ ?>
 
 		</div><!-- .entry-content -->
 

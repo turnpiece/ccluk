@@ -23,9 +23,9 @@ add_action( 'login_enqueue_scripts', 'onesocial_login_fonts' );
  */
 function onesocial_custom_login_scripts() {
 
-	$show		 = onesocial_get_option( 'boss_custom_login' );
-	$admin_logo	 = onesocial_get_option( 'admin_logo_option' );
-	$logo_id	 = onesocial_get_option( 'boss_admin_login_logo', 'id' );
+	$show		 = true;
+	$admin_logo	 = 'title';
+	$logo_id	 = '';
 	$logo_img	 = wp_get_attachment_image_src( $logo_id, 'full' );
 
 	// Logo styles updated for the best view

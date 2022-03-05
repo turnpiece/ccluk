@@ -3,7 +3,7 @@ $messages	 = buddyboss_adminbar_messages();
 $link		 = $messages[ 0 ];
 unset( $messages[ 0 ] );
 
-if ( $link && onesocial_get_option( 'messages_button' ) ) {
+if ( $link ) {
 	?>
 
 	<div class="header-notifications">
