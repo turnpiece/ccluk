@@ -3,8 +3,8 @@
  * Logo Option
  */
 
-$show		 = onesocial_get_option( 'logo_switch' );
-$logo_id	 = onesocial_get_option( 'boss_logo', 'id' );
+$show		 = true;
+$logo_id	 = 366;
 $site_title	 = get_bloginfo( 'name' );
 $logo		 = ( $show && $logo_id ) ? wp_get_attachment_image( $logo_id, 'medium', '', array( 'class' => 'boss-logo' ) ) : $site_title;
 
