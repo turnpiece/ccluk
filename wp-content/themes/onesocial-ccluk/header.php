@@ -24,9 +24,7 @@
 		<?php wp_head(); ?>
 	</head>
 
-	<?php $inputs = ( onesocial_get_option( 'boss_inputs' ) ) ? '1' : '0'; ?>
-
-	<body <?php body_class(); ?> data-inputs="<?php echo $inputs; ?>">
+	<body <?php body_class(); ?> data-inputs="1">
 
 		<?php do_action( 'buddyboss_before_header' ); ?>
 
@@ -36,7 +34,7 @@
 
 			<?php do_action( 'onesocial_before_header' ); ?>
 
-			<header id="masthead" class="site-header" data-infinite="<?php echo ( onesocial_get_option( 'boss_activity_infinite' ) ) ? 'on' : 'off'; ?>">
+			<header id="masthead" class="site-header" data-infinite="on">
 				<div class="header-wrapper">
 					<?php get_template_part( 'template-parts/header-logo' ); ?>
 					<?php get_template_part( 'template-parts/header-nav' ); ?>

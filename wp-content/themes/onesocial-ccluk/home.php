@@ -25,12 +25,6 @@ get_header();
 				<h1 class="archive-title"><?php _e( 'Blog', 'onesocial' ) ?></h1>
 			</header><!-- .archive-header -->
 
-			<?php
-			if ( is_home() && is_user_logged_in() && function_exists( 'buddyboss_sap' ) && onesocial_get_option('onesocial_adding_posts') ) {
-				get_template_part( 'template-parts/create-post' );
-			}
-			?>
-
 			<!-- Display blog posts -->
 			<?php if ( have_posts() ) : ?>
 
