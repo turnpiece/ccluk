@@ -196,23 +196,12 @@ function buddyboss_onesocial_scripts_styles() {
 		wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.'.$ext, array( 'icons' ), $onesocial_version, 'all' );
 		$only_mobile = true;
 	} elseif ( wp_is_mobile() ) {
-		if ( onesocial_get_option( 'boss_layout_tablet' ) == 'desktop' ) {
-			wp_enqueue_style( 'onesocial-main-desktop', $CSS_URL . '/main-desktop.css', array( 'icons' ), $onesocial_version, 'all' );
-			// Activate our own Fixed or Floating (defaults to Fixed) adminbar stylesheet. Load DashIcons and GoogleFonts first.
-			wp_enqueue_style( 'buddyboss-wp-adminbar-desktop-' . $adminbar_layout, $CSS_URL . '/adminbar-desktop-' . $adminbar_layout . '.css', array( 'dashicons' ), $onesocial_version, 'all' );
-		} else {
-			wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.'.$ext, array( 'icons' ), $onesocial_version, 'all' );
-			$only_mobile = true;
-		}
+		wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.'.$ext, array( 'icons' ), $onesocial_version, 'all' );
+		$only_mobile = true;
 	} else {
-		if ( onesocial_get_option( 'boss_layout_desktop' ) == 'mobile' ) {
-			wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.'.$ext, array( 'icons' ), $onesocial_version, 'all' );
-			$only_mobile = true;
-		} else {
-			wp_enqueue_style( 'onesocial-main-desktop', $CSS_URL . '/main-desktop.css', array( 'icons' ), $onesocial_version, 'screen and (min-width: 1025px)' );
-			// Activate our own Fixed or Floating (defaults to Fixed) adminbar stylesheet. Load DashIcons and GoogleFonts first.
-			wp_enqueue_style( 'buddyboss-wp-adminbar-desktop-' . $adminbar_layout, $CSS_URL . '/adminbar-desktop-' . $adminbar_layout . '.css', array( 'dashicons' ), $onesocial_version, 'screen and (min-width: 1025px)' );
-		}
+		wp_enqueue_style( 'onesocial-main-desktop', $CSS_URL . '/main-desktop.css', array( 'icons' ), $onesocial_version, 'screen and (min-width: 1025px)' );
+		// Activate our own Fixed or Floating (defaults to Fixed) adminbar stylesheet. Load DashIcons and GoogleFonts first.
+		wp_enqueue_style( 'buddyboss-wp-adminbar-desktop-' . $adminbar_layout, $CSS_URL . '/adminbar-desktop-' . $adminbar_layout . '.css', array( 'dashicons' ), $onesocial_version, 'screen and (min-width: 1025px)' );
 	}
 
 	// Media query fallback
@@ -778,27 +767,19 @@ function buddyboss_body_class( $classes ) {
 	if ( is_phone() ) {
 		$classes[] = 'is-mobile';
 	} elseif ( wp_is_mobile() ) {
-		if ( onesocial_get_option( 'boss_layout_tablet' ) == 'desktop' ) {
-			$classes[] = 'is-desktop';
-		} else {
-			$classes[] = 'is-mobile';
-		}
+		$classes[] = 'is-mobile';
 		$classes[] = 'tablet';
 	} else {
-		if ( onesocial_get_option( 'boss_layout_desktop' ) == 'mobile' ) {
-			$classes[] = 'is-mobile';
-		} else {
-			$classes[] = 'is-desktop';
-		}
+		$classes[] = 'is-desktop';
 	}
 
 	// Search sidebar
 	if ( is_active_sidebar( 'search' ) && is_search() ) {
-		$search_sidebar_alignment	 = onesocial_get_option( 'search_sidebar' );
+		$search_sidebar_alignment	 = 'right';
 		$classes[]					 = 'search-sidebar-active bb-has-sidebar sidebar-' . $search_sidebar_alignment;
 	}
 
-	$page_sidebar		 = onesocial_get_option( 'page_sidebar' );
+	$page_sidebar		 = 'right';
 	$sidebar_alignment	 = ($page_sidebar) ? $page_sidebar : 'right';
 
 	// Home sidebar
@@ -811,7 +792,7 @@ function buddyboss_body_class( $classes ) {
 
 	// Home sidebar
 	if ( is_active_sidebar( 'home-sidebar' ) && is_front_page() ) {
-		$home_sidebar_alignment	 = onesocial_get_option( 'home_sidebar' );
+		$home_sidebar_alignment	 = 'right';
 		$classes[]				 = 'homepage-sidebar-active frontpage-page bb-has-sidebar sidebar-' . $home_sidebar_alignment;
 	}
 
@@ -837,32 +818,32 @@ function buddyboss_body_class( $classes ) {
 	}
 
 	// Blogs sidebar
-	$blogs_sidebar = onesocial_get_option( 'blogs_sidebar' ) ? onesocial_get_option( 'blogs_sidebar' ) : 'left';
+	$blogs_sidebar = 'left';
 	if ( buddyboss_is_bp_active() && is_active_sidebar( 'blogs' ) && is_multisite() && bp_is_current_component( 'blogs' ) && !bp_is_user() ) {
 		$classes[] = 'blogs-sidebar-active bb-has-sidebar sidebar-' . $blogs_sidebar;
 	}
 
 	// Activity sidebar
-	$activity_sidebar = onesocial_get_option( 'activity_sidebar' ) ? onesocial_get_option( 'activity_sidebar' ) : 'left';
+	$activity_sidebar = 'left';
 	if ( buddyboss_is_bp_active() && is_active_sidebar( 'activity' ) && bp_is_current_component( 'activity' ) && !bp_is_user() ) {
 		$classes[] = 'activity-sidebar-active bb-has-sidebar sidebar-' . $activity_sidebar;
 	}
 
 	// Members sidebar
-	$profile_sidebar = onesocial_get_option( 'profile_sidebar' ) ? onesocial_get_option( 'profile_sidebar' ) : 'left';
+	$profile_sidebar = 'left';
 	if ( buddyboss_is_bp_active() && bp_is_user() && ( 'messages' != $bp->current_component ) && ( 'settings' != $bp->current_component ) ) {
-		$sidebar_alignment	 = onesocial_get_option( 'profile_sidebar' );
+		$sidebar_alignment	 = 'left';
 		$classes[]			 = 'profile-sidebar-active bb-has-sidebar sidebar-' . $profile_sidebar;
 	}
 
 	// Single group sidebar
-	$single_group_sidebar = onesocial_get_option( 'single_group_sidebar' ) ? onesocial_get_option( 'single_group_sidebar' ) : 'left';
+	$single_group_sidebar = 'left';
 	if ( buddyboss_is_bp_active() && bp_is_group() ) {
 		$classes[] = 'group-sidebar-active bb-has-sidebar sidebar-' . $single_group_sidebar;
 	}
 
 	// Forums sidebar
-	$forums = onesocial_get_option( 'forums_sidebar' ) ? onesocial_get_option( 'forums_sidebar' ) : 'left';
+	$forums = 'left';
 	if ( is_active_sidebar( 'forums' ) && function_exists( 'is_bbpress' ) && is_bbpress() && !( function_exists( 'bp_is_user' ) && bp_is_user() ) ) {
 		$classes[] = 'forums-sidebar-active bb-has-sidebar sidebar-' . $forums;
 	}
@@ -876,22 +857,10 @@ function buddyboss_body_class( $classes ) {
 	}
 
 	//Adminbar
-	if ( !onesocial_get_option( 'boss_adminbar' ) ) {
-		$classes[] = 'no-adminbar';
-	}
-
-	//Sticky Header
-	if ( onesocial_get_option( 'sticky_header' ) ) {
-		$classes[] = 'sticky-header';
-	}
-
-	//Sticky Header
-	if ( is_home() && onesocial_get_option( 'boss_homepage_sidebar_switch' ) ) {
-		$classes[] = 'bb-sidebar-on';
-	}
+	$classes[] = 'no-adminbar';
 
 	// header class
-	$header_style	 = onesocial_get_option( 'boss_header' );
+	$header_style	 = 'header-style-1';
 	$classes[]		 = $header_style;
 
 	return array_unique( $classes );
@@ -1115,7 +1084,7 @@ function buddyboss_pagination() {
 		$template = 'archive';
 	}
 
-	$class	 = ( onesocial_get_option( 'post_infinite' ) ) ? ' post-infinite-scroll' : '';
+	$class	 = ' post-infinite-scroll';
 	$label	 = __( 'Load More', 'onesocial' );
 
 	if ( !is_single() && ( $nextpage <= $max_page ) ) {

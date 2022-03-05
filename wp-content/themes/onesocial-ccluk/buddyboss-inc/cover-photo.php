@@ -193,14 +193,9 @@ function buddyboss_cover_photo( $object, $object_id ) {
             
             //only for user ?
             if( 'user'==$object ){
-                //check for default-cover-photo-setting first
-                $cover_default = onesocial_get_option('boss_profile_cover_default' );
-                if( isset( $cover_default['url'] ) && !empty( $cover_default['url'] ) ){
-                    $cover_photo['attachment'] = $cover_default['url'];
-                } else {
-                    //set one from our stock photo
-                    $cover_photo = buddyboss_cover_photo_new_default( $object, $object_id );
-                }
+                //set one from our stock photo
+                $cover_photo = buddyboss_cover_photo_new_default( $object, $object_id );
+                
             } else {
                 return buddyboss_no_cover_photo( $object, $object_id ); //return blank cover photo
             }
@@ -262,8 +257,7 @@ function buddyboss_cover_photo( $object, $object_id ) {
 function buddyboss_no_cover_photo( $object, $object_id ) {
 
 	if ( !buddyboss_cover_photo_can_edit( $object, $object_id ) ) {
-        $profile_cover_default = onesocial_get_option('boss_profile_cover_default' );
-		$cover_default = isset( $profile_cover_default['url'] ) ? $profile_cover_default['url'] : '';
+		$cover_default = '';
         
 		return '<div class="bb-cover-photo no-photo">
                 <div class="holder" id="header-cover-image" style="background-image:url('. $cover_default .')"></div>
@@ -280,8 +274,7 @@ function buddyboss_no_cover_photo( $object, $object_id ) {
 
 	if ( $object == 'group' ) {
 		$permalink = bp_get_group_permalink() . 'admin/group-cover-image/';
-		$group_cover_default = onesocial_get_option('boss_group_cover_default' );
-		$cover_default = $group_cover_default['url'];
+		$cover_default = '';
 	}
 
 	if ( $object == 'user' ) {
@@ -294,8 +287,7 @@ function buddyboss_no_cover_photo( $object, $object_id ) {
 		}
 
 		$permalink = $user_domain . 'profile/change-cover-image/';
-		$profile_cover_default = onesocial_get_option('boss_profile_cover_default' );
-		$cover_default = isset( $profile_cover_default['url'] ) ? $profile_cover_default['url'] : '';
+		$cover_default = '';
 	}
 
 	return '
@@ -589,16 +581,6 @@ function buddyboss_cover_photo_refresh() {
 
 		$return[ "success" ] = __( "Cover photo is removed.", 'onesocial' );
 		$return[ "image" ]	 = '';
-
-		if (  $bp_params['object'] == 'group' ) {
-			$group_cover_default = onesocial_get_option('boss_group_cover_default' );
-			$return[ "image" ] = $group_cover_default['url'];
-		}
-
-		if (  $bp_params['object'] == 'user' ) {
-			$profile_cover_default = onesocial_get_option('boss_profile_cover_default' );
-			$return[ "image" ] = $profile_cover_default['url'];
-		}
 
 		die( json_encode( $return ) );
 	}
