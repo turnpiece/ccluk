@@ -1,16 +1,9 @@
 <?php
-if ( !is_user_logged_in() ) { ?>
+if ( !is_user_logged_in() ) {
 
-	<a href="#" class="login header-button animatedClick" data-target="LoginBox" title="<?php _e( 'Login', 'onesocial' ); ?>"><?php _e( 'Login', 'onesocial' ) ?></a><?php
-	//get_template_part( 'template-parts/site-login' );
-
-	if ( buddyboss_is_bp_active() && bp_get_signup_allowed() ) {
-		?>
-
-		<a href="<?php echo bp_get_signup_page(); ?>" class="header-button animatedClick" title="<?php _e( 'Join', 'onesocial' ); ?>"><?php _e( 'Join', 'onesocial' ); ?></a><?php
-		//get_template_part( 'template-parts/site-register' );
-	}
-
+	if ( buddyboss_is_bp_active() && bp_get_signup_allowed() ) { ?>
+		<a href="https://community.citizensclimate.org/join" class="header-button animatedClick" title="<?php _e( 'Join', 'onesocial' ); ?>"><?php _e( 'Join', 'onesocial' ); ?></a>
+	<?php }
 
 } else {
 
