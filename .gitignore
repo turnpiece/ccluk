@@ -86,9 +86,7 @@ Thumbs.db
 # "plugins" directory
 # "themes" directory
 wp-content/*
-!wp-content/mu-plugins/
-!wp-content/plugins/
-!wp-content/themes/
+!wp-content/themes/onesocial-ccluk
 
 # ignore these plugins from the core
 wp-content/plugins/hello.php
