@@ -132,8 +132,8 @@ function buddyboss_onesocial_scripts_styles() {
 	/**
 	 * Assign the OneSocial version to a var
 	 */
-	$theme				 = wp_get_theme( 'onesocial' );
-	$onesocial_version	 = $theme[ 'Version' ];
+	$theme		= wp_get_theme();
+	$version	= $theme[ 'Version' ];
 
 
 	/*	 * **************************** STYLES ***************************** */
@@ -156,11 +156,11 @@ function buddyboss_onesocial_scripts_styles() {
 	$JS_URL = $assets_dir . '/js';
 
 	// OneSocial icon fonts.
-	wp_register_style( 'icons', $CSS_URL . '/onesocial-icons.css', array(), $onesocial_version, 'all' );
+	wp_register_style( 'icons', $CSS_URL . '/onesocial-icons.css', array(), $version, 'all' );
 	wp_enqueue_style( 'icons' );
 
 	// Activate our main stylesheets.
-	wp_enqueue_style( 'onesocial-main-global', $CSS_URL . '/main-global.css', array( 'icons' ), $onesocial_version, 'all' );
+	wp_enqueue_style( 'onesocial-main-global', $CSS_URL . '/main-global.css', array( 'icons' ), $version, 'all' );
 
 	/*
 	 * Custom styles
@@ -168,11 +168,11 @@ function buddyboss_onesocial_scripts_styles() {
 	 * need to ensure this stylesheet loads after the parent stylesheets
 	 *
 	 */
-	wp_enqueue_style( 'ccluk-custom', $CSS_URL . '/custom.css', array( 'onesocial-main-global' ) );
+	wp_enqueue_style( 'ccluk-custom', $CSS_URL . '/custom.css', array( 'onesocial-main-global' ), $version );
   
 	if (is_user_logged_in()) {
 		// styles for logged in members
-		wp_enqueue_style( 'ccluk-members', $CSS_URL . '/members.css', array( 'ccluk-custom' ) );
+		wp_enqueue_style( 'ccluk-members', $CSS_URL . '/members.css', array( 'ccluk-custom' ), $version );
 	}
   
 	// load fonts
@@ -193,20 +193,20 @@ function buddyboss_onesocial_scripts_styles() {
 	$adminbar_layout = 'fixed';
 
 	if ( is_phone() ) {
-		wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.'.$ext, array( 'icons' ), $onesocial_version, 'all' );
+		wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.'.$ext, array( 'icons' ), $version, 'all' );
 		$only_mobile = true;
 	} elseif ( wp_is_mobile() ) {
-		wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.'.$ext, array( 'icons' ), $onesocial_version, 'all' );
+		wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.'.$ext, array( 'icons' ), $version, 'all' );
 		$only_mobile = true;
 	} else {
-		wp_enqueue_style( 'onesocial-main-desktop', $CSS_URL . '/main-desktop.css', array( 'icons' ), $onesocial_version, 'screen and (min-width: 1025px)' );
+		wp_enqueue_style( 'onesocial-main-desktop', $CSS_URL . '/main-desktop.css', array( 'icons' ), $version, 'screen and (min-width: 1025px)' );
 		// Activate our own Fixed or Floating (defaults to Fixed) adminbar stylesheet. Load DashIcons and GoogleFonts first.
-		wp_enqueue_style( 'buddyboss-wp-adminbar-desktop-' . $adminbar_layout, $CSS_URL . '/adminbar-desktop-' . $adminbar_layout . '.css', array( 'dashicons' ), $onesocial_version, 'screen and (min-width: 1025px)' );
+		wp_enqueue_style( 'buddyboss-wp-adminbar-desktop-' . $adminbar_layout, $CSS_URL . '/adminbar-desktop-' . $adminbar_layout . '.css', array( 'dashicons' ), $version, 'screen and (min-width: 1025px)' );
 	}
 
 	// Media query fallback
 	if ( !wp_script_is( 'onesocial-main-mobile', 'enqueued' ) ) {
-		wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.'.$ext, array( 'icons' ), $onesocial_version, 'screen and (max-width: 1024px)' );
+		wp_enqueue_style( 'onesocial-main-mobile', $CSS_URL . '/main-mobile.'.$ext, array( 'icons' ), $version, 'screen and (max-width: 1024px)' );
 	}
 
 	/*
@@ -299,7 +299,7 @@ function buddyboss_onesocial_scripts_styles() {
 
 	$js = ( defined( 'CCLUK_DEBUGGING' ) && CCLUK_DEBUGGING ) ? '.js': '.min.js';
 
-	wp_register_script( 'ccluk-main', get_stylesheet_directory_uri() . '/js/compressed/ccluk-combined'.$js, array( 'jquery', 'jquery-form' ), $onesocial_version, true );
+	wp_register_script( 'ccluk-main', get_stylesheet_directory_uri() . '/js/compressed/ccluk-combined'.$js, array( 'jquery', 'jquery-form' ), $version, true );
 	wp_localize_script( 'ccluk-main', 'translation', $translation_array );
 	wp_localize_script( 'ccluk-main', 'transport', $transport_array );
 	wp_localize_script( 'ccluk-main', 'ajaxposts', array(
@@ -312,7 +312,7 @@ function buddyboss_onesocial_scripts_styles() {
 
 	if (is_user_logged_in()) {
 
-		wp_register_script( 'ccluk-members-min', get_stylesheet_directory_uri() . '/js/compressed/ccluk-members.min.js', array( 'jquery' ), $onesocial_version, true );
+		wp_register_script( 'ccluk-members-min', get_stylesheet_directory_uri() . '/js/compressed/ccluk-members.min.js', array( 'jquery' ), $version, true );
 		wp_enqueue_script( 'ccluk-members-min' );
 
 		// Ajax script for friends load
@@ -336,7 +336,7 @@ function buddyboss_onesocial_scripts_styles() {
 	}
 
 	/* Custom CCL javascript */
-	wp_register_script( 'onesocial-custom', get_stylesheet_directory_uri() . '/assets/js/custom'.$js, array( 'jquery' ), $onesocial_version, true );
+	wp_register_script( 'onesocial-custom', get_stylesheet_directory_uri() . '/assets/js/custom'.$js, array( 'jquery' ), $version, true );
 	wp_enqueue_script( 'onesocial-custom' );
 
 	/**
@@ -357,14 +357,13 @@ add_action( 'wp_enqueue_scripts', 'buddyboss_onesocial_scripts_styles' );
  * Admin styles
  */
 function onesocial_admin_assets() {
-
 	/**
-	 * Assign the OneSocial version to a var
+	 * Assign theme version to a var
 	 */
-	$theme				 = wp_get_theme( 'onesocial' );
-	$onesocial_version	 = $theme[ 'Version' ];
+	$theme		= wp_get_theme(å);
+	$version	= $theme[ 'Version' ];
 
-	wp_enqueue_style( 'buddyboss-bm-main-admin-css', get_stylesheet_directory_uri() . '/css/admin.css', array(), $onesocial_version, 'all' );
+	wp_enqueue_style( 'buddyboss-bm-main-admin-css', get_stylesheet_directory_uri() . '/css/admin.css', array(), $version, 'all' );
 }
 
 add_action( 'admin_enqueue_scripts', 'onesocial_admin_assets' );
