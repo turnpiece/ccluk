@@ -7,6 +7,7 @@
 
 define( 'CCLUK_DEBUGGING', false );
 define( 'CCLUK_BB_COVER_PHOTO', false ); // use group cover photos?
+define( 'CCLUK_JOIN_URL', 'https://community.citizensclimate.org/join' );
 
 /**
  * To view theme functions, navigate to /buddyboss-inc/theme.php

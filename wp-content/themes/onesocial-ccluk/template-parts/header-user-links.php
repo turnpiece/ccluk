@@ -1,11 +1,7 @@
 <?php
-if ( !is_user_logged_in() ) {
-
-	if ( buddyboss_is_bp_active() && bp_get_signup_allowed() ) { ?>
-		<a href="https://community.citizensclimate.org/join" class="header-button animatedClick" title="<?php _e( 'Join', 'onesocial' ); ?>"><?php _e( 'Join', 'onesocial' ); ?></a>
-	<?php }
-
-} else {
+if ( !is_user_logged_in() ) : ?>
+	<a href="<?php echo CCLUK_JOIN_URL ?>" class="header-button animatedClick" title="<?php _e( 'Join', 'onesocial' ); ?>"><?php _e( 'Join', 'onesocial' ); ?></a>	
+<?php else :
 
 	$user_link = function_exists( 'bp_core_get_user_domain' ) ? bp_core_get_user_domain( get_current_user_id() ) : '#';
 
@@ -35,4 +31,4 @@ if ( !is_user_logged_in() ) {
 
 	<?php
     }
-}
+endif;

@@ -8,7 +8,7 @@ $disable    = get_theme_mod( $slug.'_disable' ) == 1 ? true : false;
 $title      = get_theme_mod( $slug.'_title', sprintf( __('Join %s', 'onesocial' ), get_bloginfo('name') ) );
 $text       = get_theme_mod( $slug.'_text' );
 $page_id    = get_theme_mod( $slug.'_source_page' );
-$page_url   = 'https://community.citizensclimate.org/join';
+$page_url   = 'CCLUK_JOIN_URL';
 
 if ( ccluk_is_selective_refresh() ) {
     $disable = false;
