@@ -360,7 +360,7 @@ function onesocial_admin_assets() {
 	/**
 	 * Assign theme version to a var
 	 */
-	$theme		= wp_get_theme(å);
+	$theme		= wp_get_theme();
 	$version	= $theme[ 'Version' ];
 
 	wp_enqueue_style( 'buddyboss-bm-main-admin-css', get_stylesheet_directory_uri() . '/css/admin.css', array(), $version, 'all' );
