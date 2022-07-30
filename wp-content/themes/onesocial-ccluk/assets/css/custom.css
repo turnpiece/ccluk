@@ -2409,6 +2409,10 @@ body.single-give_forms #secondary {
   text-decoration: underline;
 }
 
+.crp_related > h3 {
+  float: none;
+}
+
 .crp_related ul {
   list-style-type: none;
 }
