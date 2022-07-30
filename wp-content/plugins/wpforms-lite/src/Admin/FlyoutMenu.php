@@ -24,15 +24,8 @@ class FlyoutMenu {
 			return;
 		}
 
-		// Check if WPForms Challenge is active.
-		$challenge    = \get_option( 'wpforms_challenge' );
-		$forms_exists = (bool) \wpforms()->form->get( '', array( 'numberposts' => 1 ) );
-
-		if ( ! $forms_exists && (
-				empty( $challenge ) ||
-				( ! empty( $challenge['status'] ) && ! \in_array( $challenge['status'], array( 'completed', 'canceled', 'skipped' ), true ) )
-			)
-		) {
+		// Check if WPForms Challenge can be displayed.
+		if ( wpforms()->get( 'challenge' )->challenge_can_start() ) {
 			return;
 		}
 
@@ -47,49 +40,6 @@ class FlyoutMenu {
 	public function hooks() {
 
 		\add_action( 'admin_footer', array( $this, 'output' ) );
-	}
-
-	/**
-	 * Menu items data.
-	 *
-	 * @since 1.5.7
-	 */
-	public function menu_items() {
-
-		$is_pro = \wpforms()->pro;
-
-		$utm_campaign = $is_pro ? 'plugin' : 'liteplugin';
-
-		$items = array(
-			array(
-				'title'         => \esc_html__( 'Upgrade to WPForms Pro', 'wpforms-lite' ),
-				'url'           => \wpforms_admin_upgrade_link( 'flyout-menu' ),
-				'icon'          => 'fa-star',
-				'bgcolor'       => '#E1772F',
-				'hover_bgcolor' => '#ff8931',
-			),
-			array(
-				'title' => \esc_html__( 'Support & Docs', 'wpforms-lite' ),
-				'url'   => 'https://wpforms.com/docs/?utm_source=WordPress&utm_medium=Flyout Menu&utm_campaign=' . $utm_campaign . '&utm_content=Support',
-				'icon'  => 'fa-life-ring',
-			),
-			array(
-				'title' => \esc_html__( 'Join Our Community', 'wpforms-lite' ),
-				'url'   => 'https://www.facebook.com/groups/wpformsvip/',
-				'icon'  => 'fa-comments',
-			),
-			array(
-				'title' => \esc_html__( 'Suggest a Feature', 'wpforms-lite' ),
-				'url'   => 'https://wpforms.com/features/suggest/?utm_source=WordPress&utm_medium=Flyout Menu&utm_campaign=' . $utm_campaign . '&utm_content=Feature',
-				'icon'  => 'fa-lightbulb-o',
-			),
-		);
-
-		if ( $is_pro ) {
-			array_shift( $items );
-		}
-
-		return \apply_filters( 'wpforms_admin_flyout_menu_items', $items );
 	}
 
 	/**
@@ -123,7 +73,7 @@ class FlyoutMenu {
 	 *
 	 * @return string Menu items HTML.
 	 */
-	public function get_items_html() {
+	private function get_items_html() {
 
 		$items      = array_reverse( $this->menu_items() );
 		$items_html = '';
@@ -144,5 +94,48 @@ class FlyoutMenu {
 		}
 
 		return $items_html;
+	}
+
+	/**
+	 * Menu items data.
+	 *
+	 * @since 1.5.7
+	 */
+	private function menu_items() {
+
+		$is_pro = wpforms()->is_pro();
+
+		$utm_campaign = $is_pro ? 'plugin' : 'liteplugin';
+
+		$items = array(
+			array(
+				'title'         => \esc_html__( 'Upgrade to WPForms Pro', 'wpforms-lite' ),
+				'url'           => \wpforms_admin_upgrade_link( 'flyout-menu' ),
+				'icon'          => 'fa-star',
+				'bgcolor'       => '#E1772F',
+				'hover_bgcolor' => '#ff8931',
+			),
+			array(
+				'title' => \esc_html__( 'Support & Docs', 'wpforms-lite' ),
+				'url'   => 'https://wpforms.com/docs/?utm_source=WordPress&utm_medium=Flyout Menu&utm_campaign=' . $utm_campaign . '&utm_content=Support',
+				'icon'  => 'fa-life-ring',
+			),
+			array(
+				'title' => \esc_html__( 'Join Our Community', 'wpforms-lite' ),
+				'url'   => 'https://www.facebook.com/groups/wpformsvip/',
+				'icon'  => 'fa-comments',
+			),
+			array(
+				'title' => \esc_html__( 'Suggest a Feature', 'wpforms-lite' ),
+				'url'   => 'https://wpforms.com/features/suggest/?utm_source=WordPress&utm_medium=Flyout Menu&utm_campaign=' . $utm_campaign . '&utm_content=Feature',
+				'icon'  => 'fa-lightbulb-o',
+			),
+		);
+
+		if ( $is_pro ) {
+			array_shift( $items );
+		}
+
+		return \apply_filters( 'wpforms_admin_flyout_menu_items', $items );
 	}
 }

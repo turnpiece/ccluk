@@ -62,7 +62,7 @@ namespace Beehive\Monolog\Handler;
  * @method bool hasInfoThatPasses($message)
  * @method bool hasDebugThatPasses($message)
  */
-class TestHandler extends \Beehive\Monolog\Handler\AbstractProcessingHandler
+class TestHandler extends AbstractProcessingHandler
 {
     protected $records = array();
     protected $recordsByLevel = array();

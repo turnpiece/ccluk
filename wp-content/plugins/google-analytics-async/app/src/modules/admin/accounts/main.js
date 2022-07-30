@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './app'
 import router from './router'
+import { VuePlugin } from 'vuera'
 import store from '@/store/store'
 import Fragment from 'vue-fragment'
 import { sprintf } from 'sprintf-js'
@@ -12,6 +13,7 @@ import {
 	isMultisite,
 	isSubsite,
 	isNetworkWide,
+	hideDocLinks,
 } from '@/helpers/utils'
 
 Vue.config.productionTip = false
@@ -27,6 +29,7 @@ Vue.mixin({
 		isMultisite,
 		isSubsite,
 		isNetworkWide,
+		hideDocLinks,
 	},
 })
 
@@ -35,6 +38,7 @@ Vue.prototype.$i18n = window.beehiveI18n
 Vue.prototype.$vars = window.beehiveVars
 Vue.prototype.$moduleVars = window.beehiveModuleVars
 
+Vue.use(VuePlugin)
 Vue.use(Fragment.Plugin)
 
 new Vue({

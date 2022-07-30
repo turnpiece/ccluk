@@ -3,6 +3,7 @@
 namespace Beehive\Firebase\JWT;
 
 use DomainException;
+use InvalidArgumentException;
 use UnexpectedValueException;
 /**
  * JSON Web Key implementation, based on this spec:
@@ -35,10 +36,10 @@ class JWK
     {
         $keys = array();
         if (!isset($jwks['keys'])) {
-            throw new \UnexpectedValueException('"keys" member must exist in the JWK Set');
+            throw new UnexpectedValueException('"keys" member must exist in the JWK Set');
         }
         if (empty($jwks['keys'])) {
-            throw new \Beehive\Firebase\JWT\InvalidArgumentException('JWK Set did not contain any keys');
+            throw new InvalidArgumentException('JWK Set did not contain any keys');
         }
         foreach ($jwks['keys'] as $k => $v) {
             $kid = isset($v['kid']) ? $v['kid'] : $k;
@@ -47,7 +48,7 @@ class JWK
             }
         }
         if (0 === \count($keys)) {
-            throw new \UnexpectedValueException('No supported algorithms found in JWK Set');
+            throw new UnexpectedValueException('No supported algorithms found in JWK Set');
         }
         return $keys;
     }
@@ -64,26 +65,26 @@ class JWK
      *
      * @uses createPemFromModulusAndExponent
      */
-    private static function parseKey(array $jwk)
+    public static function parseKey(array $jwk)
     {
         if (empty($jwk)) {
-            throw new \Beehive\Firebase\JWT\InvalidArgumentException('JWK must not be empty');
+            throw new InvalidArgumentException('JWK must not be empty');
         }
         if (!isset($jwk['kty'])) {
-            throw new \UnexpectedValueException('JWK must contain a "kty" parameter');
+            throw new UnexpectedValueException('JWK must contain a "kty" parameter');
         }
         switch ($jwk['kty']) {
             case 'RSA':
-                if (\array_key_exists('d', $jwk)) {
-                    throw new \UnexpectedValueException('RSA private keys are not supported');
+                if (!empty($jwk['d'])) {
+                    throw new UnexpectedValueException('RSA private keys are not supported');
                 }
                 if (!isset($jwk['n']) || !isset($jwk['e'])) {
-                    throw new \UnexpectedValueException('RSA keys must contain values for both "n" and "e"');
+                    throw new UnexpectedValueException('RSA keys must contain values for both "n" and "e"');
                 }
                 $pem = self::createPemFromModulusAndExponent($jwk['n'], $jwk['e']);
                 $publicKey = \openssl_pkey_get_public($pem);
                 if (\false === $publicKey) {
-                    throw new \DomainException('OpenSSL error: ' . \openssl_error_string());
+                    throw new DomainException('OpenSSL error: ' . \openssl_error_string());
                 }
                 return $publicKey;
             default:
@@ -103,8 +104,8 @@ class JWK
      */
     private static function createPemFromModulusAndExponent($n, $e)
     {
-        $modulus = \Beehive\Firebase\JWT\JWT::urlsafeB64Decode($n);
-        $publicExponent = \Beehive\Firebase\JWT\JWT::urlsafeB64Decode($e);
+        $modulus = JWT::urlsafeB64Decode($n);
+        $publicExponent = JWT::urlsafeB64Decode($e);
         $components = array('modulus' => \pack('Ca*a*', 2, self::encodeLength(\strlen($modulus)), $modulus), 'publicExponent' => \pack('Ca*a*', 2, self::encodeLength(\strlen($publicExponent)), $publicExponent));
         $rsaPublicKey = \pack('Ca*a*a*', 48, self::encodeLength(\strlen($components['modulus']) + \strlen($components['publicExponent'])), $components['modulus'], $components['publicExponent']);
         // sequence(oid(1.2.840.113549.1.1.1), null)) = rsaEncryption.

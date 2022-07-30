@@ -2,7 +2,7 @@
 /**
  * Common data functionality REST endpoint.
  *
- * @link       http://premium.wpmudev.org
+ * @link       http://wpmudev.com
  * @since      3.2.5
  *
  * @author     Joel James <joel@incsub.com>

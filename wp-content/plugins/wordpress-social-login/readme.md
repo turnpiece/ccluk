@@ -1,4 +1,4 @@
-## [WordPress Social Login](https://wordpress.org/plugins/wordpress-social-login/) 2.3.0 [![Build Status](https://travis-ci.org/miled/wordpress-social-login.svg?branch=master)](https://travis-ci.org/miled/wordpress-social-login) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/miled/wordpress-social-login/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/miled/wordpress-social-login/?branch=master)
+## [WordPress Social Login](https://wordpress.org/plugins/wordpress-social-login/) 3.0.4-dev
 
 **WordPress Social Login** is a free and open source plugin made by the community, for the community.
 
@@ -6,16 +6,14 @@ Basically, WordPress Social Login allow your website visitors and customers to r
 
 For more information about WordPress Social Login, refer to our [online user guide](http://miled.github.io/wordpress-social-login/).
 
-    Note: This repository is for development only. 
-    The official release is distributed through WordPress website.
-![WSL Authentication Widget](https://raw.githubusercontent.com/miled/wordpress-social-login/master/screenshot-1.png)
+![WSL Authentication Widget](https://raw.githubusercontent.com/miled/wordpress-social-login/master/assets/screenshot-1.png)
 
 ### Key Features
 
 - No premium features.
 - One-click social login.
 - Absolute privacy of your website users data.
-- Wide variety of identities providers (25+ IDP).
+- Wide variety of identities providers.
 - A highly customizable and fully extensible widgets.
 - Easy-to-use and clean user interfaces.
 - Contacts import from google, facebook, live, linkedin and vkontakte.
@@ -26,29 +24,29 @@ For more information about WordPress Social Login, refer to our [online user gui
 - Modular design easily extended.
 - Comprehensive documentation.
 
-#### License 
+#### License
 
 MIT — That's short for do whatever you want.
 
 #### Thanks
 
-Big thanks to everyone who have contributed to WordPress Social Login by submitting Patches, Ideas, Reviews and by Helping in the support forum. 
+Big thanks to everyone who have contributed to WordPress Social Login by submitting Patches, Ideas, Reviews and by Helping in the support forum.
 
 #### Screenshots
-![screenshot](https://raw.githubusercontent.com/miled/wordpress-social-login/master/screenshot-2.png)
+![screenshot](https://raw.githubusercontent.com/miled/wordpress-social-login/master/assets/screenshot-2.png)
 ===
-![screenshot](https://raw.githubusercontent.com/miled/wordpress-social-login/master/screenshot-3.png)
+![screenshot](https://raw.githubusercontent.com/miled/wordpress-social-login/master/assets/screenshot-3.png)
 ===
 ![screenshot](http://miled.github.io/wordpress-social-login/assets/img/theme_fontawesome.png)
 ===
-![screenshot](https://raw.githubusercontent.com/miled/wordpress-social-login/master/screenshot-4.png)
+![screenshot](https://raw.githubusercontent.com/miled/wordpress-social-login/master/assets/screenshot-4.png)
 =
-![screenshot](https://raw.githubusercontent.com/miled/wordpress-social-login/master/screenshot-5.png)
+![screenshot](https://raw.githubusercontent.com/miled/wordpress-social-login/master/assets/screenshot-5.png)
 ===
-![screenshot](https://raw.githubusercontent.com/miled/wordpress-social-login/master/screenshot-6.png)
+![screenshot](https://raw.githubusercontent.com/miled/wordpress-social-login/master/assets/screenshot-6.png)
 ===
-![screenshot](https://raw.githubusercontent.com/miled/wordpress-social-login/master/screenshot-7.png)
+![screenshot](https://raw.githubusercontent.com/miled/wordpress-social-login/master/assets/screenshot-7.png)
 ===
-![screenshot](https://raw.githubusercontent.com/miled/wordpress-social-login/master/screenshot-8.png)
+![screenshot](https://raw.githubusercontent.com/miled/wordpress-social-login/master/assets/screenshot-8.png)
 ===
-![screenshot](https://raw.githubusercontent.com/miled/wordpress-social-login/master/screenshot-9.png)
+![screenshot](https://raw.githubusercontent.com/miled/wordpress-social-login/master/assets/screenshot-9.png)

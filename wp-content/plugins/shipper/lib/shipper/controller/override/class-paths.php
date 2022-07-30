@@ -46,7 +46,7 @@ class Shipper_Controller_Override_Paths extends Shipper_Controller_Override {
 	public function preprocess_constants( $model = false ) {
 		$constants = $this->get_constants();
 		if ( ! is_object( $model ) ) {
-			$model = new Shipper_Model_Stored_Options;
+			$model = new Shipper_Model_Stored_Options();
 		}
 
 		if ( $model->get( Shipper_Model_Stored_Options::KEY_UPLOADS ) ) {
@@ -66,8 +66,7 @@ class Shipper_Controller_Override_Paths extends Shipper_Controller_Override {
 		$override = $this->get_constants()->get( 'PATH_PROCESS_PATHS_LIMIT' );
 		return ! empty( $override )
 			? $override
-			: $limit
-		;
+			: $limit;
 	}
 
 	/**
@@ -81,8 +80,7 @@ class Shipper_Controller_Override_Paths extends Shipper_Controller_Override {
 		$override = $this->get_constants()->get( 'WORKING_DIRECTORY' );
 		return ! empty( $override )
 			? $override
-			: $path
-		;
+			: $path;
 	}
 
 	/**
@@ -96,7 +94,6 @@ class Shipper_Controller_Override_Paths extends Shipper_Controller_Override {
 		$override = $this->get_constants()->get( 'WORKING_DIRECTORY_ROOT' );
 		return ! empty( $override )
 			? $override
-			: $path
-		;
+			: $path;
 	}
 }

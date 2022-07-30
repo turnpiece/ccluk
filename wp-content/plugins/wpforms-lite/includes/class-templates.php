@@ -24,11 +24,11 @@ class WPForms_Templates {
 	 */
 	public function init() {
 
-		// Parent class template
+		// Parent class template.
 		require_once WPFORMS_PLUGIN_DIR . 'includes/templates/class-base.php';
 
-		// Load default templates on WP init
-		add_action( 'init', array( $this, 'load' ) );
+		// Load default templates on WP init.
+		add_action( 'init', [ $this, 'load' ] );
 	}
 
 	/**
@@ -38,15 +38,13 @@ class WPForms_Templates {
 	 */
 	public function load() {
 
-		$templates = apply_filters( 'wpforms_load_templates', array(
-			'blank',
-			'contact',
-			'request-quote',
-			'donation',
-			'order',
-			'subscribe',
-			'suggestion',
-		) );
+		$templates = apply_filters(
+			'wpforms_load_templates',
+			[
+				'blank',
+				'simple-contact-form',
+			]
+		);
 
 		foreach ( $templates as $template ) {
 
@@ -54,7 +52,7 @@ class WPForms_Templates {
 
 			if ( file_exists( WPFORMS_PLUGIN_DIR . 'includes/templates/class-' . $template . '.php' ) ) {
 				require_once WPFORMS_PLUGIN_DIR . 'includes/templates/class-' . $template . '.php';
-			} elseif ( file_exists( WPFORMS_PLUGIN_DIR . 'pro/includes/templates/class-' . $template . '.php' ) && wpforms()->pro ) {
+			} elseif ( file_exists( WPFORMS_PLUGIN_DIR . 'pro/includes/templates/class-' . $template . '.php' ) && wpforms()->is_pro() ) {
 				require_once WPFORMS_PLUGIN_DIR . 'pro/includes/templates/class-' . $template . '.php';
 			}
 		}

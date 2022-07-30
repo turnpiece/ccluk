@@ -30,13 +30,13 @@ $sui-wrap-class: 'beehive-widget-wrap';
 @import '../../../styles/components/calendar-range';
 
 // Widgets Styles.
-@import 'widget-wrapper';
-@import 'widget-header';
 @import 'widget-body';
-@import 'component-box';
-@import 'component-tabs';
-@import 'component-grid';
-@import 'component-utils';
-@import 'component-table';
-@import 'component-buttons';
-@import 'component-users-donut';
+@import 'widget-header';
+@import 'widget-wrapper';
+@import 'components/component-box';
+@import 'components/component-tabs';
+@import 'components/component-grid';
+@import 'components/component-utils';
+@import 'components/component-table';
+@import 'components/component-buttons';
+@import 'components/component-users-donut';

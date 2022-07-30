@@ -254,11 +254,13 @@ $this->render(
 
 											</div>
 
-											<h3><?php esc_html_e( 'Storage Limit', SNAPSHOT_I18N_DOMAIN ); ?></h3>
+											<h3 style=" margin-bottom: 0; "><?php esc_html_e( 'Storage Limit', SNAPSHOT_I18N_DOMAIN ); ?></h3>
 
-											<div class="storage-inline-form">
+											<p style=" margin-bottom: 5px; ">
+												<small><?php esc_html_e( 'Snapshot will store a certain number of backups, and will then remove the oldest backups when new ones get created. You can adjust the number of backups to keep here.', SNAPSHOT_I18N_DOMAIN ); ?></small>
+											</p>
 
-												<span class="inbetween">Keep</span>
+											<div class="">
 
 												<?php
 												if ( ! isset( $item['archive-count'] ) ) {
@@ -266,15 +268,16 @@ $this->render(
 												}
 
 												?>
-												<input type="number" name="backups-limit" id="snapshot-archive-count"
-												       value="<?php echo esc_attr( $item['archive-count'] ); ?>">
 
-												<span class="inbetween"><?php esc_html_e( 'backups before removing older archives.', SNAPSHOT_I18N_DOMAIN ); ?></span>
+												<label for="backups-limit" style=" font-size: 12px; font-weight: bold; color: #888888; letter-spacing: -0.25px; padding-left: 0; line-height: 22px; margin-bottom: 0; "><?php esc_html_e( 'Limit', SNAPSHOT_I18N_DOMAIN ); ?></label>
+												<input type="number" min="1" name="backups-limit" id="snapshot-archive-count"
+												       value="<?php echo esc_attr( $item['archive-count'] ); ?>" style=" width: 60px; ">
+
 
 											</div>
 
 											<p class="remove-older-managed">
-												<small><?php esc_html_e( "By default, Snapshot will run as many scheduled backups as you need. We recommend that you remove older backups to avoid filling your remote storage limit. If you would like to keep all of your backup archives, just set your storage limit to 0.", SNAPSHOT_I18N_DOMAIN ); ?></small>
+												<small><?php esc_html_e( "Set the number of backups you want to store. It must be greater than 0.", SNAPSHOT_I18N_DOMAIN ); ?></small>
 											</p>
 
 											<h3><?php esc_html_e( 'Optional', SNAPSHOT_I18N_DOMAIN ); ?></h3>

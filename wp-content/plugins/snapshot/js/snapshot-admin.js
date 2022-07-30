@@ -42,7 +42,7 @@
 		}
 
 		/*
-		 jQuery(window).resize(function() {
+		 jQuery(window).on('resize', function() {
 		 if (jQuery('#TB_window').length) {
 		 if (jQuery('#snapshot-log-viewer').length) {
 		 var doc_width 	= jQuery(document).width() * .80 ;
@@ -55,7 +55,7 @@
 		 });
 		 */
 
-		jQuery('a.snapshot-thickbox').click(function () {
+		jQuery('a.snapshot-thickbox').on('click', function () {
 			var doc_width = 700; //jQuery(document).width() * .80 ;
 			var doc_height = 600; //jQuery(document).height() * .60;
 
@@ -122,7 +122,7 @@
 			return false;
 		});
 
-		jQuery('a.snapshot-abort-item').click(function () {
+		jQuery('a.snapshot-abort-item').on('click', function () {
 			var item_info = jQuery(this).attr('href');
 
 			var data = {
@@ -159,21 +159,21 @@
 
 
 		/* When a table name checkbox is checked or unchecked we need to update the 'Select all'/'Deselect all' link labels */
-		jQuery('input.snapshot-table-item').click(function () {
+		jQuery('input.snapshot-table-item').on('click', function () {
 			check_checkbox_state();
 		});
 		check_checkbox_state();	// Call on pagew load to reset our displayed link labels.
 
 		/* Used on the 'Add New Snapshot' panel. Handles the Select All/Deselect All for the tables checkboxes */
-		jQuery('a.snapshot-table-select-all').click(function () {
+		jQuery('a.snapshot-table-select-all').on('click', function () {
 			var link_state = jQuery(this).html();
 			if (link_state === snapshot_admin_messages.select_all) {
 				jQuery(this).html(snapshot_admin_messages.unselect_all);
-				jQuery(this).parent().parent().find('ul input:checkbox').attr('checked', true);
+				jQuery(this).parent().parent().find('ul input:checkbox').prop('checked', true);
 			}
 			else if (link_state === snapshot_admin_messages.unselect_all) {
 				jQuery(this).html(snapshot_admin_messages.select_all);
-				jQuery(this).parent().parent().find('ul input:checkbox').attr('checked', false);
+				jQuery(this).parent().parent().find('ul input:checkbox').prop('checked', false);
 			}
 
 			return false;
@@ -181,7 +181,7 @@
 
 		/* Used on the 'Add New Snapshot' panel. Handles the backup All vs Backup Selected radio button
 		 set to show/hide backup sub-options */
-		jQuery('input.snapshot-backup-options').click(function () {
+		jQuery('input.snapshot-backup-options').on('click', function () {
 			var options_val = jQuery(this).val();
 			if (options_val === 'all') {
 				jQuery('div.snapshot-form-fiels-backup-options-select').slideUp('slow');
@@ -191,16 +191,16 @@
 		});
 
 		/* This section controls the Submit button on the Restore form. The button is disabled until the user selects a snapshot to restore */
-		jQuery('input:radio[name="snapshot-restore-file"]').click(function () {
+		jQuery('input:radio[name="snapshot-restore-file"]').on('click', function () {
 			if (jQuery('input:radio[name="snapshot-restore-file"]').is(":checked")) {
-				jQuery('input#snapshot-form-restore-submit').removeAttr('disabled');
+				jQuery('input#snapshot-form-restore-submit').prop('disabled', false);
 			} else {
-				jQuery('input#snapshot-form-restore-submit').attr('disabled', 'disabled');
+				jQuery('input#snapshot-form-restore-submit').prop('disabled', true);
 			}
 		});
 
 		/* Used on the 'All Snapshots' and 'Activity log' panels. Used to show/hide the WP tables container */
-		$('a.snapshot-list-table-global-show').click(function () {
+		$('a.snapshot-list-table-global-show').on('click', function () {
 			var container = $(this).parent().parent().find('p.snapshot-list-table-global-container');
 
 			if (container.is(":visible")) {
@@ -211,7 +211,7 @@
 			}
 			return false;
 		});
-		$('a.snapshot-list-table-wp-show').click(function () {
+		$('a.snapshot-list-table-wp-show').on('click', function () {
 			var container = $(this).parent().parent().find('p.snapshot-list-table-wp-container');
 
 			if (container.is(":visible")) {
@@ -224,7 +224,7 @@
 		});
 
 		/* Used on the 'All Snapshots' and 'Activity log' panels. Used to show/hide the Non-WP tables container */
-		$('a.snapshot-list-table-non-show').click(function () {
+		$('a.snapshot-list-table-non-show').on('click', function () {
 
 			if ($(this).parent().parent().find('p.snapshot-list-table-non-container').is(":visible")) {
 				var link_state = $(this).html().replace('hide', 'show');
@@ -242,7 +242,7 @@
 			return false;
 		});
 
-		$('a.snapshot-list-table-other-show').click(function () {
+		$('a.snapshot-list-table-other-show').on('click', function () {
 
 			if ($(this).parent().parent().find('p.snapshot-list-table-other-container').is(":visible")) {
 				var link_state = $(this).html().replace('hide', 'show');
@@ -260,7 +260,7 @@
 			return false;
 		});
 
-		jQuery("form#snapshot-add-update select#snapshot-destination").change(function () {
+		jQuery("form#snapshot-add-update select#snapshot-destination").on('change', function () {
 			var destination_value = jQuery(this).val();
 			if (destination_value !== '') {
 				var destination_option = jQuery('form#snapshot-add-update select#snapshot-destination option[value="' + destination_value + '"]');
@@ -282,12 +282,12 @@
 				jQuery('div#snapshot-destination-directory-description').show();
 				jQuery('div#snapshot-destination-directory-description-google-drive').hide();
 			}
-		}).change();
+		}).trigger('change');
 
 
 		/*  On a Multisite install there is a dropdown on the Add New Snapshot form. This dropdown allows the admin to select a blog to backup.
 		 When a blog is selected we update the table checkboxes displayed */
-		jQuery("form#snapshot-add-update select#snapshot-blog-id").change(function () {
+		jQuery("form#snapshot-add-update select#snapshot-blog-id").on('change', function () {
 
 			var blog_id = jQuery(this).val();
 			if (blog_id > 0) {
@@ -333,7 +333,7 @@
 								jQuery('li.snapshot-backup-files-sections-main-only').hide();
 								jQuery('span.snapshot-backup-files-sections-main-only').hide();
 								if (jQuery('input#snapshot-files-option-selected:checked').val() === "selected") {
-									jQuery('input#snapshot-files-option-all').attr('checked', 'checked');
+									jQuery('input#snapshot-files-option-all').prop('checked', true);
 								}
 							}
 						}
@@ -342,7 +342,7 @@
 			}
 		});
 
-		jQuery("form#snapshot-add-update button#snapshot-blog-id-lookup").click(function () {
+		jQuery("form#snapshot-add-update button#snapshot-blog-id-lookup").on('click', function () {
 			var blog_id_search = jQuery("form#snapshot-add-update input#snapshot-blog-id-search").val();
 
 			var security = jQuery(':hidden#snapshot-ajax-nonce').val();
@@ -369,7 +369,7 @@
 						if ((reply_data['blog'] !== undefined) && (reply_data['blog']['blog_id'] !== undefined)) {
 							var blog_id = parseInt(reply_data['blog']['blog_id']);
 							if (blog_id > 0) {
-								jQuery("form#snapshot-add-update input#snapshot-form-save-submit").removeAttr('disabled');
+								jQuery("form#snapshot-add-update input#snapshot-form-save-submit").prop('disabled', false);
 
 
 								//var blog_name = reply_data['blog']['blogname']+" ("+reply_data['blog']['domain']+")";
@@ -415,16 +415,16 @@
 										jQuery('li.snapshot-backup-files-sections-main-only').hide();
 										jQuery('span.snapshot-backup-files-sections-main-only').hide();
 										if (jQuery('input#snapshot-files-option-selected:checked').val() == "selected") {
-											jQuery('input#snapshot-files-option-all').attr('checked', 'checked');
+											jQuery('input#snapshot-files-option-all').prop('checked', true);
 										}
 									}
 								}
 							} else {
-								jQuery("form#snapshot-add-update input#snapshot-form-save-submit").attr('disabled', 'disabled');
+								jQuery("form#snapshot-add-update input#snapshot-form-save-submit").prop('disabled', true);
 							}
 						} else {
 							jQuery('div#snapshot-blog-search span#snapshot-blog-search-error').show();
-							jQuery("form#snapshot-add-update input#snapshot-form-save-submit").attr('disabled', 'disabled');
+							jQuery("form#snapshot-add-update input#snapshot-form-save-submit").prop('disabled', true);
 						}
 					}
 				});
@@ -432,7 +432,7 @@
 			return false;
 		});
 
-		jQuery("form#snapshot-add-update div#snapshot-blog-search-success button#snapshot-blog-id-change").click(function () {
+		jQuery("form#snapshot-add-update div#snapshot-blog-search-success button#snapshot-blog-id-change").on('click', function () {
 			jQuery('div#snapshot-blog-search-success').hide();
 			jQuery('div#snapshot-blog-search').show();
 			return false;
@@ -441,18 +441,18 @@
 		if (jQuery("form#snapshot-edit-restore input#snapshot-blog-id").length) {
 			var blog_id = jQuery("form#snapshot-edit-restore input#snapshot-blog-id").val();
 			if (blog_id == '') {
-				jQuery("form#snapshot-edit-restore input#snapshot-form-restore-submit").attr('disabled', 'disabled');
+				jQuery("form#snapshot-edit-restore input#snapshot-form-restore-submit").prop('disabled', true);
 			} else {
-				jQuery("form#snapshot-edit-restore input#snapshot-form-restore-submit").removeAttr('disabled');
+				jQuery("form#snapshot-edit-restore input#snapshot-form-restore-submit").prop('disabled', false);
 			}
 		}
 
 		if (jQuery("form#snapshot-add-update input#snapshot-blog-id").val() == '') {
-			jQuery("form#snapshot-add-update input#snapshot-form-save-submit").attr('disabled', 'disabled');
+			jQuery("form#snapshot-add-update input#snapshot-form-save-submit").prop('disabled', true);
 		}
 
 
-		jQuery("form#snapshot-edit-restore button#snapshot-blog-id-lookup").click(function () {
+		jQuery("form#snapshot-edit-restore button#snapshot-blog-id-lookup").on('click', function () {
 			var blog_id_search = jQuery("form#snapshot-edit-restore input#snapshot-blog-id-search").val();
 			var security = jQuery(':hidden#snapshot-ajax-nonce').val();
 
@@ -496,7 +496,7 @@
 							if ((reply_data['blog'] !== undefined) && (reply_data['blog']['blog_id'] !== undefined)) {
 								jQuery('input#snapshot-blog-id').val(reply_data['blog']['blog_id']);
 								jQuery('#snapshot-new-blog-id').html(reply_data['blog']['blog_id']);
-								jQuery("form#snapshot-edit-restore input#snapshot-form-restore-submit").removeAttr('disabled');
+								jQuery("form#snapshot-edit-restore input#snapshot-form-restore-submit").prop('disabled', false);
 
 							}
 
@@ -518,10 +518,10 @@
 							}
 
 							if (reply_data['WP_DB_PREFIX'] != reply_data['WP_DB_BASE_PREFIX']) {
-								jQuery('input#snapshot-files-option-config').attr('checked', false);
+								jQuery('input#snapshot-files-option-config').prop('checked', false);
 								jQuery('input#snapshot-files-option-config').prop('disabled', true);
 
-								jQuery('input#snapshot-files-option-htaccess').attr('checked', false);
+								jQuery('input#snapshot-files-option-htaccess').prop('checked', false);
 								jQuery('input#snapshot-files-option-htaccess').prop('disabled', true);
 							} else {
 								jQuery('input#snapshot-files-option-config').prop('disabled', false);
@@ -538,7 +538,7 @@
 			return false;
 		});
 
-		jQuery("button#snapshot-blog-id-cancel").click(function () {
+		jQuery("button#snapshot-blog-id-cancel").on('click', function () {
 			// console.log('in cancel');
 			jQuery('#snapshot-blog-search-success').show();
 			jQuery('#snapshot-blog-search').hide();
@@ -547,14 +547,14 @@
 		});
 
 
-		jQuery("form#snapshot-edit-restore #snapshot-blog-search-success button#snapshot-blog-id-change").click(function () {
+		jQuery("form#snapshot-edit-restore #snapshot-blog-search-success button#snapshot-blog-id-change").on('click', function () {
 			jQuery('#snapshot-blog-search-success').hide();
 			jQuery('#snapshot-blog-search').show();
 			return false;
 		});
 
 
-		jQuery("form#snapshot-add-update select#snapshot-interval").change(function () {
+		jQuery("form#snapshot-add-update select#snapshot-interval").on('change', function () {
 			var interval = jQuery(this).val();
 
 			jQuery('#interval-offset div.interval-offset-hourly').hide();
@@ -574,9 +574,9 @@
 			} else if ((interval == "") || (interval == "immediate") || (interval == "snapshot-5minutes")) {
 				jQuery('#interval-offset div.interval-offset-none').show();
 			}
-		}).change();
+		}).trigger('change');
 
-		jQuery("input.snapshot-tables-option").click(function () {
+		jQuery("input.snapshot-tables-option").on('click', function () {
 			var backup_database_options = jQuery('input.snapshot-tables-option:checked').val();
 			if ((backup_database_options == "none") || (backup_database_options == "all")) {
 				jQuery('div#snapshot-selected-tables-container').slideUp('fast');
@@ -586,7 +586,7 @@
 			}
 		});
 
-		jQuery("input.snapshot-files-option").click(function () {
+		jQuery("input.snapshot-files-option").on('click', function () {
 			var backup_database_options = jQuery('input.snapshot-files-option:checked').val();
 			if (backup_database_options == "none") {
 				jQuery('div#snapshot-selected-files-container').slideUp('fast');
@@ -654,39 +654,39 @@
 		}
 
 		/*
-		 jQuery('select#snapshot-interval').change(function(){
+		 jQuery('select#snapshot-interval').on('change', function(){
 
 		 var snapshot_interval = jQuery(this).val();
 		 if (snapshot_interval == "") {
 		 jQuery('select#snapshot-destination').val('');
-		 jQuery('select#snapshot-destination').attr('disabled', 'disabled');
+		 jQuery('select#snapshot-destination').prop('disabled', true);
 		 jQuery('input#snapshot-add-button').val('Create Snapshot');
 
-		 jQuery('input#snapshot-files-media').removeAttr('checked');
-		 jQuery('input#snapshot-files-media').attr('disabled', 'disabled');
+		 jQuery('input#snapshot-files-media').prop('checked', false);
+		 jQuery('input#snapshot-files-media').prop('disabled', true);
 
-		 jQuery('input#snapshot-files-database-only').attr('checked', 'checked');
-		 jQuery('input#snapshot-files-database-only').attr('disabled', 'disabled');
+		 jQuery('input#snapshot-files-database-only').prop('checked', true);
+		 jQuery('input#snapshot-files-database-only').prop('disabled', true);
 
 
 		 } else {
-		 jQuery('select#snapshot-destination').removeAttr('disabled');
+		 jQuery('select#snapshot-destination').prop('disabled', false);
 		 jQuery('input#snapshot-add-button').val('Schedule Snapshot');
 
-		 jQuery('input#snapshot-files-media').removeAttr('disabled');
-		 jQuery('input#snapshot-files-database-only').removeAttr('disabled');
+		 jQuery('input#snapshot-files-media').prop('disabled', false);
+		 jQuery('input#snapshot-files-database-only').prop('disabled', false);
 		 }
 
 		 });
 		 */
 
-		jQuery('select#snapshot-destination').change(function () {
+		jQuery('select#snapshot-destination').on('change', function () {
 			var destination_type = jQuery(this).find("option:selected").parent().attr("label");
 			if (destination_type === snapshot_admin_messages.destination_type_dropbox) {
-				jQuery('input#snapshot-destination-sync-mirror').attr('disabled', false);
+				jQuery('input#snapshot-destination-sync-mirror').prop('disabled', false);
 			} else {
-				jQuery('input#snapshot-destination-sync-mirror').attr('disabled', 'disabled');
-				jQuery('input#snapshot-destination-sync-archive').attr('checked', 'checked');
+				jQuery('input#snapshot-destination-sync-mirror').prop('disabled', true);
+				jQuery('input#snapshot-destination-sync-archive').prop('checked', true);
 			}
 		});
 
@@ -712,7 +712,7 @@
 
 
 		/* Used on the 'Add New Snapshot' panel. Handles the form submit to backup one table per request. Seems this was taking too long on some servers. */
-		jQuery("form#snapshot-add-update").submit(function () {
+		jQuery("form#snapshot-add-update").on('submit', function () {
 
 			var snapshot_form_files_sections = [];
 			var snapshot_form_files_option = jQuery('input.snapshot-files-option:checked').val();
@@ -982,7 +982,7 @@
 						var table_name = table_data['table_name'];
 
 						jQuery('#snapshot-progress-bar-container #snapshot-item-table-' + table_name + ' button.snapshot-button-abort').show();
-						jQuery('#snapshot-progress-bar-container #snapshot-item-table-' + table_name + ' button.snapshot-button-abort').click(function () {
+						jQuery('#snapshot-progress-bar-container #snapshot-item-table-' + table_name + ' button.snapshot-button-abort').on('click', function () {
 							snapshot_button_abort_proc();
 						});
 
@@ -1092,7 +1092,7 @@
 						jQuery('#snapshot-item-' + table_name + ' .snapshot-filename').html(": " + file_data_key);
 
 						jQuery('#snapshot-progress-bar-container').find('#snapshot-item-' + table_name)
-							.find('button.snapshot-button-abort').show().click(function () {
+							.find('button.snapshot-button-abort').show().on('click', function () {
 							snapshot_button_abort_proc();
 						});
 
@@ -1246,7 +1246,7 @@
 			return false;
 		});
 
-		jQuery("form#snapshot-edit-restore").submit(function () {
+		jQuery("form#snapshot-edit-restore").on('submit', function () {
 
 			/* From the form grab the Name and Notes field values. */
 			var snapshot_item_key = jQuery('input[name="item"]').val();
@@ -1333,7 +1333,7 @@
 					jQuery('#snapshot-progress-bar-container #snapshot-item-table-' + table_name + ' .progress .percent').html('0%');
 
 					jQuery('#snapshot-progress-bar-container #snapshot-item-table-' + table_name + ' .snapshot-button-abort').show();
-					jQuery('#snapshot-progress-bar-container #snapshot-item-table-' + table_name + ' button.snapshot-button-abort').click(function () {
+					jQuery('#snapshot-progress-bar-container #snapshot-item-table-' + table_name + ' button.snapshot-button-abort').on('click', function () {
 						snapshot_button_abort_proc();
 					});
 
@@ -1438,7 +1438,7 @@
 						var table_name = table_data['table_name'];
 
 						jQuery('#snapshot-progress-bar-container #snapshot-item-table-' + table_name + ' button.snapshot-button-abort').show();
-						jQuery('#snapshot-progress-bar-container #snapshot-item-table-' + table_name + ' button.snapshot-button-abort').click(function () {
+						jQuery('#snapshot-progress-bar-container #snapshot-item-table-' + table_name + ' button.snapshot-button-abort').on('click', function () {
 							snapshot_button_abort_proc();
 						});
 
@@ -1533,7 +1533,7 @@
 						jQuery('#snapshot-item-' + table_name + ' .snapshot-filename').html(": " + file_name);
 
 						jQuery('#snapshot-progress-bar-container #snapshot-item-file button.snapshot-button-abort').show();
-						jQuery('#snapshot-progress-bar-container #snapshot-item-file button.snapshot-button-abort').click(function () {
+						jQuery('#snapshot-progress-bar-container #snapshot-item-file button.snapshot-button-abort').on('click', function () {
 							snapshot_button_abort_proc();
 						});
 
@@ -1727,11 +1727,11 @@
 		var $freq = $('.wps-managed-backups-schedule-form select[name="frequency"]');
 		if (!$freq.length) return false;
 
-		$(".select-container.offset").hide().find("select").attr("disabled", true);
-		$(".select-container #frequency").attr("disabled", false);
-		$(".select-container #schedule_time").attr("disabled", false);
+		$(".select-container.offset").hide().find("select").prop("disabled", true);
+		$(".select-container #frequency").prop("disabled", false);
+		$(".select-container #schedule_time").prop("disabled", false);
 		var $el = $(".select-container.offset." + $freq.val());
-		if ($el.length) $el.show().find("select").attr("disabled", false);
+		if ($el.length) $el.show().find("select").prop("disabled", false);
 
 		// Handle the day label toggling.
 		if ($freq.val()==='weekly'){

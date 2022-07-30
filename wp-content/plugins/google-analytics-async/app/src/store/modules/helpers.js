@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import { restGet } from '@/helpers/api'
 import { isNetwork } from '@/helpers/utils'
+import { restGet, restGetStats } from '@/helpers/api'
 
 let vars = window.beehiveVars
 let moduleVars = window.beehiveModuleVars
@@ -74,6 +74,18 @@ const helpers = {
 		},
 
 		/**
+		 * Update the GA4 streams state.
+		 *
+		 * This will only update the value in store.
+		 *
+		 * @param {object} state State of the module.
+		 * @param {object} streams GA4 streams.
+		 */
+		setGoogleStreams: (state, streams) => {
+			state.google.streams = streams
+		},
+
+		/**
 		 * Update the google API status.
 		 *
 		 * This will only update the value in store.
@@ -134,13 +146,42 @@ const helpers = {
 		 */
 		updateGoogleProfiles: async ({ commit, dispatch }, data) => {
 			restGet({
-				path: 'data/analytics-profiles',
+				path: 'v1/data/analytics-profiles',
 				params: {
 					network: isNetwork() ? 1 : 0,
 				},
 			}).then((response) => {
 				if (response.success && response.data) {
 					commit('setGoogleProfiles', response.data)
+					if (data.reInit) {
+						dispatch('settings/reInit', {}, { root: true })
+					}
+					if (data.callback) {
+						data.callback()
+					}
+				}
+			})
+		},
+
+		/**
+		 * Action to update the Google Analytics 4 streams.
+		 *
+		 * Use this from any component.
+		 *
+		 * @param {object} Commit and State.
+		 * @param {object} data Status and other options.
+		 *
+		 * @return {Promise<void>}
+		 */
+		updateGoogleStreams: async ({ commit, dispatch }, data) => {
+			restGet({
+				path: 'v2/data/streams',
+				params: {
+					network: isNetwork() ? 1 : 0,
+				},
+			}).then((response) => {
+				if (response.success && response.data) {
+					commit('setGoogleStreams', response.data)
 					if (data.reInit) {
 						dispatch('settings/reInit', {}, { root: true })
 					}
@@ -161,7 +202,7 @@ const helpers = {
 		 * @return {Promise<void>}
 		 */
 		updateGoogleApi: async ({ commit }) => {
-			restGet({
+			restGetStats({
 				path: 'stats/api-status',
 				params: {
 					network: isNetwork() ? 1 : 0,

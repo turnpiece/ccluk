@@ -34,7 +34,7 @@ abstract class Shipper_Helper_Singleton {
 	 *
 	 * @return object Shipper_Helper_Singleton instance
 	 */
-	static public function get() {
+	public static function get() {
 		static $instances = array();
 
 		// @codingStandardsIgnoreLine Plugin-backported

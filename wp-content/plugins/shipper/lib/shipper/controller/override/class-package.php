@@ -11,8 +11,19 @@
  */
 abstract class Shipper_Controller_Override_Package extends Shipper_Controller_Override {
 
-	private $_model;
-	private $_exclusions;
+	/**
+	 * Shipper_Model_Stored_Package instance holder.
+	 *
+	 * @var Shipper_Model_Stored_Package
+	 */
+	private $model;
+
+	/**
+	 * Array of exclusions.
+	 *
+	 * @var array
+	 */
+	private $exclusions;
 
 	/**
 	 * Actually applies controller-specific overrides.
@@ -42,10 +53,11 @@ abstract class Shipper_Controller_Override_Package extends Shipper_Controller_Ov
 	 * @return object A Shipper_Model_Stored_Package instance
 	 */
 	public function get_model() {
-		if ( empty( $this->_model ) ) {
-			$this->_model = new Shipper_Model_Stored_Package;
+		if ( empty( $this->model ) ) {
+			$this->model = new Shipper_Model_Stored_PackageMeta();
 		}
-		return $this->_model;
+
+		return $this->model;
 	}
 
 	/**
@@ -54,13 +66,11 @@ abstract class Shipper_Controller_Override_Package extends Shipper_Controller_Ov
 	 * @return array
 	 */
 	public function get_exclusions() {
-		if ( empty( $this->_exclusions ) ) {
-			$tmp = $this->get_model()->get(
-				$this->get_scope(),
-				array()
-			);
-			$this->_exclusions = array_unique( array_filter( array_map( 'trim', $tmp ) ) );
+		if ( empty( $this->exclusions ) ) {
+			$tmp              = $this->get_model()->get( $this->get_scope(), array() );
+			$this->exclusions = array_unique( array_filter( array_map( 'trim', $tmp ) ) );
 		}
-		return $this->_exclusions;
+
+		return $this->exclusions;
 	}
 }

@@ -53,9 +53,13 @@ export default {
 		 * @return {string}
 		 */
 		hustleDesc() {
-			return this.hustleActive
-				? this.$i18n.desc.hustle_leads
-				: this.$i18n.desc.hustle_leads_install
+			if (this.hustleActive) {
+				return this.$i18n.desc.hustle_leads
+			} else {
+				return this.hustleInstalled
+					? this.$i18n.desc.hustle_leads_activate
+					: this.$i18n.desc.hustle_leads_install
+			}
 		},
 
 		/**
@@ -66,9 +70,13 @@ export default {
 		 * @return {string}
 		 */
 		forminatorFormDesc() {
-			return this.forminatorActive
-				? this.$i18n.desc.forminator_forms
-				: this.$i18n.desc.forminator_forms_install
+			if (this.forminatorActive) {
+				return this.$i18n.desc.forminator_forms
+			} else {
+				return this.forminatorInstalled
+					? this.$i18n.desc.forminator_forms_activate
+					: this.$i18n.desc.forminator_forms_install
+			}
 		},
 
 		/**
@@ -81,9 +89,11 @@ export default {
 		forminatorPollDesc() {
 			if (this.forminatorActive && !this.forminatorSupported) {
 				return this.$i18n.desc.forminator_polls_update
+			} else if (this.forminatorActive) {
+				return this.$i18n.desc.forminator_polls
 			} else {
-				return this.forminatorActive
-					? this.$i18n.desc.forminator_polls
+				return this.forminatorInstalled
+					? this.$i18n.desc.forminator_polls_activate
 					: this.$i18n.desc.forminator_polls_install
 			}
 		},
@@ -98,9 +108,11 @@ export default {
 		forminatorQuizDesc() {
 			if (this.forminatorActive && !this.forminatorSupported) {
 				return this.$i18n.desc.forminator_quizzes_update
+			} else if (this.forminatorActive) {
+				return this.$i18n.desc.forminator_quizzes
 			} else {
-				return this.forminatorActive
-					? this.$i18n.desc.forminator_quizzes
+				return this.forminatorInstalled
+					? this.$i18n.desc.forminator_quizzes_activate
 					: this.$i18n.desc.forminator_quizzes_install
 			}
 		},
@@ -117,6 +129,17 @@ export default {
 		},
 
 		/**
+		 * Check if Hustle plugin is installed.
+		 *
+		 * @since 3.3.3
+		 *
+		 * @return {boolean}
+		 */
+		hustleInstalled() {
+			return this.$moduleVars.integrations.hustle_installed
+		},
+
+		/**
 		 * Check if Forminator plugin is active.
 		 *
 		 * @since 3.3.0
@@ -125,6 +148,17 @@ export default {
 		 */
 		forminatorActive() {
 			return this.$moduleVars.integrations.forminator_active
+		},
+
+		/**
+		 * Check if Forminator plugin is installed.
+		 *
+		 * @since 3.3.3
+		 *
+		 * @return {boolean}
+		 */
+		forminatorInstalled() {
+			return this.$moduleVars.integrations.forminator_installed
 		},
 
 		/**

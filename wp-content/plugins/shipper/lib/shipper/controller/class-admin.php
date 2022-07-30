@@ -35,10 +35,13 @@ class Shipper_Controller_Admin extends Shipper_Controller {
 			$this->get_page_order()
 		);
 		if ( ! has_filter( 'plugin_action_links_' . plugin_basename( 'shipper/shipper.php' ) ) ) {
-			add_filter( 'plugin_action_links_' . plugin_basename( 'shipper/shipper.php' ), array(
-				&$this,
-				'add_setting_links'
-			) );
+			add_filter(
+				'plugin_action_links_' . plugin_basename( 'shipper/shipper.php' ),
+				array(
+					&$this,
+					'add_setting_links',
+				)
+			);
 		}
 	}
 
@@ -53,15 +56,25 @@ class Shipper_Controller_Admin extends Shipper_Controller {
 			: 'manage_options';
 	}
 
+	/**
+	 * Add setting links
+	 *
+	 * @param string $links links of settings.
+	 *
+	 * @return array
+	 */
 	public function add_setting_links( $links ) {
 		$mylinks = array(
-			'<a href="' . network_admin_url( 'admin.php?page=shipper-settings' ) . '">' . __( "Settings", 'shipper' ) . '</a>',
+			'<a href="' . network_admin_url( 'admin.php?page=shipper-settings&tool=migration' ) . '">' . __( 'Settings', 'shipper' ) . '</a>',
 		);
 
 		$mylinks = array_merge( $links, $mylinks );
-		$mylinks = array_merge( $mylinks, array(
-			'<a target="_blank" href="https://premium.wpmudev.org/docs/wpmu-dev-plugins/shipper/">' . __( "Docs", 'shipper' ) . '</a>',
-		) );
+		$mylinks = array_merge(
+			$mylinks,
+			array(
+				'<a target="_blank" href="https://wpmudev.com/docs/wpmu-dev-plugins/shipper/">' . __( 'Docs', 'shipper' ) . '</a>',
+			)
+		);
 
 		return $mylinks;
 	}
@@ -82,7 +95,7 @@ class Shipper_Controller_Admin extends Shipper_Controller {
 			_x( 'Shipper', 'menu label', 'shipper' ),
 			$capability,
 			'shipper',
-			array( Shipper_Controller_Admin_Migrate::get(), 'page_migrate' ),
+			array( Shipper_Controller_Admin_Dashboard::get(), 'render_dashboard' ),
 			Shipper_Helper_Assets::get_encoded_icon()
 		);
 	}
@@ -96,22 +109,22 @@ class Shipper_Controller_Admin extends Shipper_Controller {
 		if ( ! shipper_user_can_ship() ) {
 			return array();
 		}
-		$destinations = new Shipper_Model_Stored_Destinations;
+		$destinations = new Shipper_Model_Stored_Destinations();
 
 		$list   = $destinations->get_data();
 		$errors = array();
 
 		if ( empty( $list ) ) {
 			// Empty list, not even the current site in it. Add current site.
-			$task   = new Shipper_Task_Api_Destinations_Add;
+			$task   = new Shipper_Task_Api_Destinations_Add();
 			$result = $task->apply();
 			if ( ! empty( $result ) ) {
 				// Success - expire destinations so they're refreshed in next step.
 				$destinations->set_timestamp( false );
 
 				// Let's also refresh our systems info.
-				$info_task = new Shipper_Task_Api_Info_Set;
-				$system    = new Shipper_Model_System;
+				$info_task = new Shipper_Task_Api_Info_Set();
+				$system    = new Shipper_Model_System();
 				$info_task->apply( $system->get_data() );
 			}
 			$errors = array_merge( $errors, $task->get_errors() );
@@ -124,6 +137,7 @@ class Shipper_Controller_Admin extends Shipper_Controller {
 
 		foreach ( $errors as $error ) {
 			Shipper_Helper_Log::write(
+				/* translators: %s: error message. */
 				sprintf( __( 'Destination error: %s', 'shipper' ), $error->get_error_message() )
 			);
 		}
@@ -138,11 +152,11 @@ class Shipper_Controller_Admin extends Shipper_Controller {
 	 * @return array Errors, if any
 	 */
 	public function update_destinations_cache() {
-		$task   = new Shipper_Task_Api_Destinations_Get;
+		$task   = new Shipper_Task_Api_Destinations_Get();
 		$result = $task->apply();
 		if ( ! empty( $result ) ) {
 			// We got the listing result - update stored destinations cache.
-			$destinations = new Shipper_Model_Stored_Destinations;
+			$destinations = new Shipper_Model_Stored_Destinations();
 			$destinations->set_data( $result );
 			$destinations->set_timestamp( time() );
 			$destinations->save();
@@ -166,7 +180,7 @@ class Shipper_Controller_Admin extends Shipper_Controller {
 		}
 
 		$cls   = explode( ' ', $classes );
-		$cls[] = 'sui-2-3-29';
+		$cls[] = 'sui-2-10-8';
 		$cls[] = 'shipper-admin';
 		$cls[] = 'shipper-sui';
 
@@ -182,7 +196,7 @@ class Shipper_Controller_Admin extends Shipper_Controller {
 		}
 
 		add_filter( 'admin_body_class', array( $this, 'add_admin_body_class' ) );
-		$assets = new Shipper_Helper_Assets;
+		$assets = new Shipper_Helper_Assets();
 
 		wp_enqueue_style(
 			'shipper',
@@ -193,19 +207,28 @@ class Shipper_Controller_Admin extends Shipper_Controller {
 		wp_enqueue_script(
 			'shipper',
 			$assets->get_asset( 'js/shipper.js' ),
-			array( 'jquery', 'underscore' ),
+			array( 'jquery', 'underscore', 'clipboard' ),
 			SHIPPER_VERSION,
 			true
 		);
-		$model = new Shipper_Model_Stored_Options;
+
+		$message = 'Your account authentication failed. Please try again or contact our support team for help.';
+		$model = new Shipper_Model_Stored_Options();
 		wp_localize_script(
 			'shipper',
 			'_shipper',
 			array(
-				'update_interval' => Shipper_Helper_Assets::get_update_interval(),
-				'per_page'        => $model->get( Shipper_Model_Stored_Options::KEY_PER_PAGE, 10 )
+				'update_interval'    => Shipper_Helper_Assets::get_update_interval(),
+				'per_page'           => $model->get( Shipper_Model_Stored_Options::KEY_PER_PAGE, 10 ),
+				'i18n'               => array(
+					'google_auth_failed' => Shipper_Helper_Assets::has_docs_links()
+						? wp_kses_post( __( 'Your account authentication failed. Please try again or contact our <a href="https://wpmudev.com/hub2/support#get-support" target="_blank">support team</a> for help.', 'shipper' ) )
+						: __( 'Your account authentication failed. Please try again or contact our support team for help.', 'shipper' ),
+				),
 			)
 		);
+
+		$this->add_black_friday_dependencies();
 
 		// Trigger this on print, but early enough!
 		add_action( 'admin_print_scripts', array( $this, 'reenable_heartbeat' ), 0 );
@@ -231,7 +254,8 @@ class Shipper_Controller_Admin extends Shipper_Controller {
 			'heartbeat',
 			"/wp-includes/js/heartbeat$suffix.js",
 			array( 'jquery', 'wp-hooks' ),
-			false, 1
+			false,
+			1
 		);
 		wp_scripts()->localize(
 			'heartbeat',
@@ -266,5 +290,35 @@ class Shipper_Controller_Admin extends Shipper_Controller {
 		// That's kinda weird, but okay.
 		// Let's fall back to allowing access.
 		return true;
+	}
+
+	/**
+	 * Adds Black Friday dependencies
+	 */
+	private function add_black_friday_dependencies() {
+		if ( ! shipper_is_black_friday() ) {
+			return;
+		}
+
+		$assets = new Shipper_Helper_Assets();
+
+		wp_enqueue_script(
+			'shipper-black-friday',
+			$assets->get_asset( 'js/shipper-black-friday.js' ),
+			null,
+			SHIPPER_VERSION,
+			true
+		);
+
+		wp_localize_script(
+			'shipper-black-friday',
+			'shipper_bf',
+			array(
+				'header'  => esc_html__( 'Black Friday Offer!', 'shipper' ),
+				'message' => esc_html__( 'Get 11 Pro plugins on unlimited sites and much more with 50% OFF WPMU DEV Agency plan FOREVER', 'shipper' ),
+				'notice'  => esc_html__( '*Only admin users can see this message', 'shipper' ),
+				'link'    => 'https://wpmudev.com/black-friday/?coupon=BFP-2021&utm_source=shipper_pro&utm_medium=referral&utm_campaign=bf2021',
+			)
+		);
 	}
 }

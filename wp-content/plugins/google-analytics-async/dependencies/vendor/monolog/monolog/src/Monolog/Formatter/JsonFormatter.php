@@ -20,7 +20,7 @@ use Throwable;
  *
  * @author Jordi Boggiano <j.boggiano@seld.be>
  */
-class JsonFormatter extends \Beehive\Monolog\Formatter\NormalizerFormatter
+class JsonFormatter extends NormalizerFormatter
 {
     const BATCH_MODE_JSON = 1;
     const BATCH_MODE_NEWLINES = 2;
@@ -33,9 +33,11 @@ class JsonFormatter extends \Beehive\Monolog\Formatter\NormalizerFormatter
     /**
      * @param int $batchMode
      * @param bool $appendNewline
+     * @param int $maxDepth
      */
-    public function __construct($batchMode = self::BATCH_MODE_JSON, $appendNewline = \true)
+    public function __construct($batchMode = self::BATCH_MODE_JSON, $appendNewline = \true, $maxDepth = 9)
     {
+        parent::__construct(null, $maxDepth);
         $this->batchMode = $batchMode;
         $this->appendNewline = $appendNewline;
     }
@@ -125,8 +127,8 @@ class JsonFormatter extends \Beehive\Monolog\Formatter\NormalizerFormatter
      */
     protected function normalize($data, $depth = 0)
     {
-        if ($depth > 9) {
-            return 'Over 9 levels deep, aborting normalization';
+        if ($depth > $this->maxDepth) {
+            return 'Over ' . $this->maxDepth . ' levels deep, aborting normalization';
         }
         if (\is_array($data)) {
             $normalized = array();
@@ -140,7 +142,7 @@ class JsonFormatter extends \Beehive\Monolog\Formatter\NormalizerFormatter
             }
             return $normalized;
         }
-        if ($data instanceof \Exception || $data instanceof \Throwable) {
+        if ($data instanceof Exception || $data instanceof Throwable) {
             return $this->normalizeException($data);
         }
         if (\is_resource($data)) {
@@ -159,10 +161,10 @@ class JsonFormatter extends \Beehive\Monolog\Formatter\NormalizerFormatter
     protected function normalizeException($e)
     {
         // TODO 2.0 only check for Throwable
-        if (!$e instanceof \Exception && !$e instanceof \Throwable) {
-            throw new \InvalidArgumentException('Exception/Throwable expected, got ' . \gettype($e) . ' / ' . \Beehive\Monolog\Utils::getClass($e));
+        if (!$e instanceof Exception && !$e instanceof Throwable) {
+            throw new \InvalidArgumentException('Exception/Throwable expected, got ' . \gettype($e) . ' / ' . Utils::getClass($e));
         }
-        $data = array('class' => \Beehive\Monolog\Utils::getClass($e), 'message' => $e->getMessage(), 'code' => (int) $e->getCode(), 'file' => $e->getFile() . ':' . $e->getLine());
+        $data = array('class' => Utils::getClass($e), 'message' => $e->getMessage(), 'code' => (int) $e->getCode(), 'file' => $e->getFile() . ':' . $e->getLine());
         if ($this->includeStacktraces) {
             $trace = $e->getTrace();
             foreach ($trace as $frame) {

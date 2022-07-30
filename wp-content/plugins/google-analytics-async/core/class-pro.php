@@ -5,7 +5,7 @@
  * @note    Only hooks fired after the `plugins_loaded` hook will work here.
  *          You need to register earlier hooks separately.
  *
- * @link    http://premium.wpmudev.org
+ * @link    http://wpmudev.com
  * @since   3.2.0
  *
  * @author  Joel James <joel@incsub.com>
@@ -48,7 +48,7 @@ class Pro extends Base {
 		add_action( 'init', array( $this, 'init_modules' ), - 1 );
 
 		// Initialize dash notification.
-		add_action( 'init', array( $this, 'init_dash' ) );
+		add_action( 'init', array( $this, 'init_dash' ), 1 );
 
 		/**
 		 * Action hook to trigger after initializing all Pro features.

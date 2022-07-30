@@ -6,6 +6,7 @@ $summary-image--height: 184px;
 
 // Overwrite font path.
 $sui-font-path: '~@wpmudev/shared-ui/dist/fonts/';
+$sui-image-path: '~@wpmudev/shared-ui/dist/images/';
 
 // Share UI styles
 @import '~@wpmudev/shared-ui/scss/shared-ui';
@@ -25,3 +26,4 @@ $sui-font-path: '~@wpmudev/shared-ui/dist/fonts/';
 @import 'header';
 @import 'statics';
 @import 'summary';
+@import 'tutorials';

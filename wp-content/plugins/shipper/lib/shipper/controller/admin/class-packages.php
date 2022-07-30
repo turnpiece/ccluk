@@ -21,12 +21,19 @@ class Shipper_Controller_Admin_Packages extends Shipper_Controller_Admin {
 	}
 
 	/**
+	 * Boot method.
+	 *
 	 * @return bool|void
 	 */
 	public function boot() {
-		//add menu
+		if ( ! is_admin() ) {
+			return false;
+		}
+
+		// add menu.
 		parent::boot();
-		//we need to show the admin notices if the
+
+		// we need to show the admin notices if the.
 		if ( $this->is_install_files_leftover() ) {
 			add_action( 'wp_loaded', array( &$this, 'cleanup_installer' ) );
 			add_action( 'admin_notices', array( $this, 'installer_leftover_warning' ) );
@@ -34,6 +41,9 @@ class Shipper_Controller_Admin_Packages extends Shipper_Controller_Admin {
 		add_action( 'wp_loaded', array( &$this, 'maybe_settle_wpmudev' ) );
 	}
 
+	/**
+	 * Maybe settle wpmudev.
+	 */
 	public function maybe_settle_wpmudev() {
 		if ( ! class_exists( 'WPMUDEV_Dashboard' ) ) {
 			return;
@@ -45,7 +55,7 @@ class Shipper_Controller_Admin_Packages extends Shipper_Controller_Admin {
 		$analytics_enabled = WPMUDEV_Dashboard::$site->get_option( 'analytics_enabled' );
 		$analytics_site_id = WPMUDEV_Dashboard::$site->get_option( 'analytics_site_id' );
 		if ( $analytics_enabled && ! $analytics_site_id ) {
-			//generate one
+			// generate one.
 			WPMUDEV_Dashboard::$api->analytics_enable();
 		}
 	}
@@ -57,16 +67,10 @@ class Shipper_Controller_Admin_Packages extends Shipper_Controller_Admin {
 		if ( ! shipper_user_can_ship() ) {
 			return;
 		}
-		if ( $_SERVER['REQUEST_METHOD'] != 'POST' ) {
-			return;
-		}
 
-		$nonce = isset( $_POST['_wpnonce'] ) ? $_POST['_wpnonce'] : false;
-		if ( $nonce == false ) {
-			return;
-		}
+		$post_data = wp_unslash( $_POST );
 
-		if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'shipper-installer-cleanup' ) ) {
+		if ( empty( $post_data['_wpnonce'] ) || ! wp_verify_nonce( $post_data['_wpnonce'], 'shipper-installer-cleanup' ) ) {
 			return;
 		}
 
@@ -74,22 +78,24 @@ class Shipper_Controller_Admin_Packages extends Shipper_Controller_Admin {
 		$installer_path = ABSPATH . 'installer.php';
 		if ( is_dir( $working_path ) ) {
 			$status = Shipper_Helper_Fs_Path::rmdir_r( $working_path, null );
-			if ( $status == true ) {
-				//we remove all the insider, now just need to remove the folder
-				@rmdir( $working_path );
+			if ( $status ) {
+				// we remove all the insider, now just need to remove the folder.
+				@rmdir( $working_path ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged -- intentional
 			}
 		}
 		if ( file_exists( $installer_path ) ) {
-			@unlink( $installer_path );
+			@unlink( $installer_path ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged -- intentional
 		}
 		$path  = ABSPATH;
 		$files = glob( "{$path}*.shipper.zip" );
 		foreach ( $files as $file ) {
-			@unlink( $file );
+			@unlink( $file ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged -- intentional
 		}
 	}
 
 	/**
+	 * Is install files leftover.
+	 *
 	 * @return bool
 	 */
 	private function is_install_files_leftover() {
@@ -113,7 +119,6 @@ class Shipper_Controller_Admin_Packages extends Shipper_Controller_Admin {
 	/**
 	 * Show a warning if we found the installer still untouch
 	 */
-
 	public function installer_leftover_warning() {
 		if ( ! $this->is_install_files_leftover() ) {
 			return;
@@ -121,9 +126,9 @@ class Shipper_Controller_Admin_Packages extends Shipper_Controller_Admin {
 		$class       = 'notice notice-error';
 		$message     = esc_html__( 'We’ve found the installer files on this site. We highly recommend running the cleanup to delete all the installer files as soon as the migration is finished since they contain some sensitive information about your site. ', 'shipper' );
 		$nonce_field = wp_nonce_field( 'shipper-installer-cleanup' );
-		$button      = '<button class="button button-primary" type="submit">' . esc_html__( "Run cleanup", 'shipper' ) . '</button>';
-		$message     .= sprintf( '<form method="post">%1$s %2$s</form>', $nonce_field, $button );
-		printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), $message );
+		$button      = '<button class="button button-primary" type="submit">' . esc_html__( 'Run cleanup', 'shipper' ) . '</button>';
+		$message    .= sprintf( '<form method="post">%1$s %2$s</form>', $nonce_field, $button );
+		wp_kses_post( sprintf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), $message ) );
 	}
 
 	/**
@@ -154,54 +159,24 @@ class Shipper_Controller_Admin_Packages extends Shipper_Controller_Admin {
 	 */
 	public function save_settings() {
 		if ( ! $this->can_user_access_shipper_pages() ) {
-			return wp_die( esc_html( __( 'Nope.', 'shipper' ) ) );
+			wp_die( esc_html( __( 'Nope.', 'shipper' ) ) );
 		}
 
 		$tool = false;
 		if ( ! empty( $_GET['tool'] ) ) {
-			$tool = sanitize_text_field( $_GET['tool'] );
+			$tool = sanitize_text_field( wp_unslash( $_GET['tool'] ) );
 		}
 		if ( 'settings' !== $tool ) {
 			return false;
 		}
 
-		if ( empty( $_POST['_wpnonce'] ) ) {
+		$data = wp_unslash( $_POST );
+
+		if ( empty( $data['_wpnonce'] ) || ! wp_verify_nonce( $data['_wpnonce'], 'shipper-settings' ) ) {
 			return false;
 		}
-		if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'shipper-settings' ) ) {
-			return false;
-		}
 
-		$data  = stripslashes_deep( $_POST );
-		$model = new Shipper_Model_Stored_Options;
-
-		if ( ! empty( $data['storage_location'] ) ) {
-			$location = wp_normalize_path(
-				trailingslashit( $data['storage_location'] ) );
-			//because we use relative to display, so need to convert the value into absolute
-			$location = ABSPATH . '/' . ltrim( $location, '/' );
-			$storage  = wp_normalize_path(
-				trailingslashit( Shipper_Model_Fs_Package::get_root_path() ) );
-			if ( $location !== $storage ) {
-				wp_mkdir_p( $location );
-				if ( file_exists( $location ) ) {
-					@rmdir( $location );
-					Shipper_Helper_Fs_Path::rmdir_r( $storage, '' );
-					@rmdir( $storage );
-					$model->set(
-						Shipper_Model_Stored_Options::KEY_PACKAGE_LOCATION,
-						$location
-					);
-				}
-			}
-		}
-
-		if ( isset( $data['exclude_storage'] ) ) {
-			$model->set(
-				Shipper_Model_Stored_Options::KEY_PACKAGE_EXCLUDE,
-				! empty( $data['exclude_storage'] )
-			);
-		}
+		$model = new Shipper_Model_Stored_Options();
 
 		if ( isset( $data['database-use-binary'] ) ) {
 			$model->set(
@@ -237,6 +212,10 @@ class Shipper_Controller_Admin_Packages extends Shipper_Controller_Admin {
 			}
 		}
 
+		if ( isset( $data['safe-mode'] ) ) {
+			$model->set( Shipper_Model_Stored_Options::KEY_PACKAGE_SAFE_MODE, (bool) $data['safe-mode'] );
+		}
+
 		$model->save();
 		wp_safe_redirect( esc_url_raw( add_query_arg( 'saved', true ) ) );
 		die();
@@ -247,25 +226,40 @@ class Shipper_Controller_Admin_Packages extends Shipper_Controller_Admin {
 	 */
 	public function page_packages() {
 		if ( ! $this->can_user_access_shipper_pages() ) {
-			return wp_die( esc_html( __( 'Nope.', 'shipper' ) ) );
+			wp_die( esc_html( __( 'Nope.', 'shipper' ) ) );
 		}
 
-		$tool = 'migration';
-		if ( ! empty( $_GET['tool'] ) ) {
-			$tool = sanitize_text_field( $_GET['tool'] );
+		$tool     = 'migration';
+		$get_data = wp_unslash( $_GET ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
+		if ( ! empty( $get_data['tool'] ) ) {
+			$tool = sanitize_text_field( $get_data['tool'] );
 		}
 
 		// Clear abandoned packages.
-		$model = new Shipper_Model_Stored_Package;
+		$model = new Shipper_Model_Stored_Package();
+		$meta  = new Shipper_Model_Stored_PackageMeta();
 		if ( $model->has_package() && ! $model->get( Shipper_Model_Stored_Package::KEY_CREATED ) ) {
 			$model->clear()->save();
 			$path = Shipper_Model_Fs_Package::get_root_path();
 			Shipper_Helper_Fs_Path::rmdir_r( $path, '' );
-			@rmdir( $path );
+			@rmdir( $path ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged -- intentional
+		}
+		$show_flash = false;
+		if ( $meta->get( 'show_flash' ) ) {
+			$show_flash = true;
+			$meta->set( 'show_flash', false );
+			$meta->save();
 		}
 
-		$tpl = new Shipper_Helper_Template;
-		$tpl->render( 'pages/packages/main', array( 'current_tool' => $tool ) );
+		$tpl = new Shipper_Helper_Template();
+		$tpl->render(
+			'pages/packages/main',
+			array(
+				'current_tool' => $tool,
+				'show_flash'   => $show_flash,
+			)
+		);
 	}
 
 	/**

@@ -15,7 +15,7 @@ class Shipper_Model_Env {
 	 *
 	 * @return bool
 	 */
-	static public function is_phpunit_test() {
+	public static function is_phpunit_test() {
 		return ( defined( 'SHIPPER_IS_TEST_ENV' ) && SHIPPER_IS_TEST_ENV ) &&
 			defined( 'SHIPPER_TESTS_DATA_DIR' ) &&
 			class_exists( 'WP_UnitTestCase' ) &&
@@ -27,7 +27,7 @@ class Shipper_Model_Env {
 	 *
 	 * @return bool
 	 */
-	static public function is_wp_engine() {
+	public static function is_wp_engine() {
 		return defined( 'WPE_APIKEY' );
 	}
 
@@ -38,7 +38,7 @@ class Shipper_Model_Env {
 	 *
 	 * @return bool
 	 */
-	static public function is_auth_requiring_env() {
+	public static function is_auth_requiring_env() {
 
 		/**
 		 * Decide whether we're in an auth-requiring environment.
@@ -52,7 +52,7 @@ class Shipper_Model_Env {
 		 */
 		return (bool) apply_filters(
 			'shipper_is_auth_requiring_env',
-			Shipper_Model_Env::is_wp_engine()
+			self::is_wp_engine()
 		);
 	}
 
@@ -61,7 +61,7 @@ class Shipper_Model_Env {
 	 *
 	 * @return bool
 	 */
-	static public function is_wpmu_hosting() {
+	public static function is_wpmu_hosting() {
 		return isset( $_SERVER['WPMUDEV_HOSTED'] ) && ! empty( $_SERVER['WPMUDEV_HOSTED'] );
 	}
 
@@ -70,8 +70,11 @@ class Shipper_Model_Env {
 	 *
 	 * @return bool
 	 */
-	static public function is_wpmu_staging() {
-		if ( ! self::is_wpmu_hosting() ) { return false; }
+	public static function is_wpmu_staging() {
+		if ( ! self::is_wpmu_hosting() ) {
+			return false;
+		}
+
 		return isset( $_SERVER['WPMUDEV_HOSTING_ENV'] ) &&
 			'production' !== $_SERVER['WPMUDEV_HOSTING_ENV'];
 	}
@@ -81,7 +84,7 @@ class Shipper_Model_Env {
 	 *
 	 * @return bool
 	 */
-	static public function is_flywheel() {
+	public static function is_flywheel() {
 
 		/**
 		 * Whether or not we're dealing with Flywheel environment

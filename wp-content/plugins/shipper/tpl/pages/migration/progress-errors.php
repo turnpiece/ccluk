@@ -10,19 +10,22 @@ $is_remote_import_error = (bool) (
 	Shipper_Model_Stored_Migration::TYPE_EXPORT === $type
 );
 
-$domain     = $destination;
+$domain     = $destination; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- this is not WordPress global variable
 $action_url = esc_url( $domain );
 if ( $is_remote_import_error ) {
-	$model      = new Shipper_Model_Stored_Destinations;
+	$model      = new Shipper_Model_Stored_Destinations();
 	$target     = $model->get_by_domain( $domain );
 	$current    = $model->get_current();
-	$action_url = trailingslashit( esc_url( $target['admin_url'] ) ) .
-	              'admin.php?page=shipper&type=import&site=' . $current['site_id'];
+	$action_url = trailingslashit( esc_url( $target['admin_url'] ) ) . 'admin.php?page=shipper&type=import&site=' . $current['site_id'];
 }
-$errors = ! empty( $errors ) ? $errors : array();
 
-$migration        = new Shipper_Model_Stored_Migration;
+$errors           = ! empty( $errors ) ? $errors : array(); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- this is not WordPress global variable
+$migration        = new Shipper_Model_Stored_Migration();
 $ignored_warnings = (int) $migration->get( 'preflight_warnings', 0 );
+
+$error_msg = $is_remote_import_error
+	? __( 'method on your source site to create a package, upload it on this server, and follow the installation prompts to migrate.', 'shipper' )
+	: __( 'method to upload a package of your site onto your destination server and follow the installation prompts.', 'shipper' );
 ?>
 
 <div class="shipper-migration-error">
@@ -34,34 +37,45 @@ $ignored_warnings = (int) $migration->get( 'preflight_warnings', 0 );
 		?>
 	</div>
 
-	<?php foreach ( $errors as $error ) { ?>
-		<div class="sui-notice-top sui-notice-error sui-can-dismiss">
-			<div class="sui-notice-content">
-				<p><?php echo esc_html( $error ); ?></p>
+	<?php foreach ( $errors as $key => $error ) { // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- this is not WordPress global variable ?>
+		<div class="sui-floating-notices">
+			<div role="alert" id="shipper-progress-error-<?php echo esc_attr( $key ); ?>" class="sui-notice sui-notice-error sui-active sui-can-dismiss" aria-live="assertive" style="display: block;">
+				<div class="sui-notice-content">
+					<div class="sui-notice-message">
+						<span class="sui-notice-icon sui-icon-info sui-md" aria-hidden="true"></span>
+						<p><?php echo esc_html( $error ); ?></p>
+					</div>
+					<div class="sui-notice-actions">
+						<button class="sui-button-icon sui-notice-dismiss" data-notice-close="shipper-progress-error-<?php echo esc_attr( $key ); ?>">
+							<i class="sui-icon-check" aria-hidden="true"></i>
+							<span class="sui-screen-reader-text"><?php esc_attr_e( 'Close this notice', 'shipper' ); ?></span>
+						</button>
+					</div>
+				</div>
 			</div>
-			<span class="sui-notice-dismiss">
-			<a role="button" href="#" class="sui-icon-check"></a>
-		</span>
 		</div>
 	<?php } ?>
 
 	<p>
-		<a
-				href="<?php echo esc_url( network_admin_url( 'admin.php?page=shipper' ) ); ?>"
-				class="sui-button sui-button-primary"
-		><?php esc_html_e( 'Try again', 'shipper' ); ?></a>
-		<a
-				href="<?php echo esc_url( network_admin_url( 'admin.php?page=shipper-tools' ) ); ?>"
-				class="sui-button sui-button-ghost"
-		><?php esc_html_e( 'Check logs', 'shipper' ); ?></a>
+		<?php if ( ! empty( $is_remote_import_error ) ) { ?>
+			<?php /* translators: %1$s %2$s: website url. */ ?>
+			<?php echo wp_kses_post( sprintf( __( 'Please visit <a href="%1$s" target="_blank">%2$s</a> now to continue your migration.', 'shipper' ), esc_url( $action_url ), $domain ) ); ?>
+		<?php } ?>
+		<?php esc_html_e( 'Something went wrong with your migration. You can check the logs for errors, or follow our troubleshooting tips below to resolve the issues.', 'shipper' ); ?>
 	</p>
 
 	<p>
-		<?php if ( ! empty( $is_remote_import_error ) ) { ?>
-			<?php echo wp_kses_post( sprintf( __( 'Please visit <a href="%1$s" target="_blank">%2$s</a> now to continue your migration.', 'shipper' ), esc_url( $action_url ), $domain ) ); ?>
-		<?php } else {
-		} ?>
-		<?php esc_html_e( 'Something went wrong with your migration. You can check migration logs for some errors or follow our troubleshooting guide to resolve the issues. ', 'shipper' ); ?>
+		<a
+			href="<?php echo esc_url( network_admin_url( 'admin.php?page=shipper-api' ) ); ?>"
+			class="sui-button sui-button-primary"
+		>
+			<?php esc_html_e( 'Try again', 'shipper' ); ?></a>
+		<a
+			href="<?php echo esc_url( network_admin_url( 'admin.php?page=shipper-tools' ) ); ?>"
+			class="sui-button sui-button-ghost"
+		>
+			<?php esc_html_e( 'Check logs', 'shipper' ); ?>
+		</a>
 	</p>
 
 	<div class="shipper-migration-debug-tips">
@@ -69,45 +83,38 @@ $ignored_warnings = (int) $migration->get( 'preflight_warnings', 0 );
 
 		<?php if ( ! empty( $ignored_warnings ) ) { ?>
 			<p>
-				<i class="sui-icon-warning-alert shipper-warning" aria-hidden="true"></i>
-				<?php esc_html_e( 'You have ignored some warnings in your pre-flight check which might be causing your migration to fail. You can try to resolve those warnings and rerun the migration.', 'shipper' ); ?>
+				<i class="sui-icon-warning-alert shipper-info" aria-hidden="true"></i>
+				<?php esc_html_e( 'You ignored some warnings in your pre-flight check, which might have caused your migration to fail. You can try to resolve those warnings and rerun the migration.', 'shipper' ); ?>
 			</p>
+
 			<p>
-				<i class="sui-icon-warning-alert shipper-warning" aria-hidden="true"></i>
-				<?php esc_html_e( 'You’re migrating between two different hosts and this could be the reason for failed migration. You can try to contact support for this.', 'shipper' ); ?>
+				<i class="sui-icon-warning-alert shipper-info" aria-hidden="true"></i>
+				<?php
+					echo wp_kses_post(
+						sprintf(
+							/* translators: %1$s %2$s: website url, error message */
+							__( 'Use the <a href="%1$s" target="_blank">Package Migration</a> %2$s', 'shipper' ),
+							esc_url( network_admin_url( 'admin.php?page=shipper-packages' ) ),
+							$error_msg
+						)
+					);
+				?>
 			</p>
-		<?php } ?>
-		<p>
-			<i class="sui-icon-warning-alert" aria-hidden="true"></i>
-			<?php
-			printf(
-				__( 'Unable to migrate your site with the API migration method? You can try using the <a href="%s">Package Migration</a> method instead.', 'shipper' ),
-				network_admin_url( 'admin.php?page=shipper-packages' )
-			)
-			?>
-		</p>
-		<?php if ( Shipper_Helper_Assets::has_docs_links() ) { ?>
-<!--			<p>-->
-<!--				<i class="sui-icon-warning-alert" aria-hidden="true"></i>-->
-<!--				--><?php //printf(
-//					__( 'Refer to our <a href="%s" target="_blank">troubleshooting guide</a> to fix some common migration problems. ', 'shipper' ),
-//					esc_url( 'https://premium.wpmudev.org/docs/migration-troubleshooting' )
-//				); ?>
-<!--			</p>-->
-<!--			<p>-->
-<!--				<i class="sui-icon-warning-alert" aria-hidden="true"></i>-->
-<!--				--><?php //printf(
-//					__( 'Still not able to make Shipper work for this migration? Follow our <a href="%s" target="_blank">manual migration guide</a> to migrate your website manually.', 'shipper' ),
-//					esc_url( 'https://premium.wpmudev.org/docs/manual-migration' )
-//				); ?>
-<!--			</p>-->
-			<p class="shipper-contact-support">
-				<?php printf(
-					__( 'Need help or have some questions? <a href="%s" target="_blank">Contact Support</a>', 'shipper' ),
-					esc_url( 'https://premium.wpmudev.org/hub/support/' )
-				); ?>
-			</p>
+
+			<?php if ( Shipper_Helper_Assets::has_docs_links() ) : ?>
+				<p>
+					<i class="sui-icon-warning-alert shipper-info" aria-hidden="true"></i>
+					<?php
+					echo wp_kses_post(
+						sprintf(
+							/* translators: %s: wpmudev support url. */
+							__( 'None of the above was helpful? <a href="%s" target="_blank">Contact Support</a>', 'shipper' ),
+							esc_url( 'https://wpmudev.com/hub2/support/' )
+						)
+					);
+					?>
+				</p>
+			<?php endif; ?>
 		<?php } ?>
 	</div>
-
 </div> <?php // .shipper-migration-error ?>

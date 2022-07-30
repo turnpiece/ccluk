@@ -5,7 +5,7 @@
  * @package shipper
  */
 
-$loglines = array_reverse( Shipper_Helper_Log::get_lines() );
+$loglines     = array_reverse( Shipper_Helper_Log::get_lines() );
 $download_url = wp_nonce_url(
 	admin_url( 'admin-ajax.php?action=shipper_download_log' ),
 	'shipper_log_download'
@@ -40,27 +40,33 @@ $download_url = wp_nonce_url(
 			<?php esc_html_e( 'Here are Shipper\'s latest logs, use them to debug any issues you are having.', 'shipper' ); ?>
 		</p>
 
-	<?php if ( ! empty( $loglines ) ) { ?>
+	<?php if ( ! empty( $loglines ) ) { // phpcs:disable ?>
 		<textarea class="sui-form-control" readonly><?php
 			$format = get_option( 'date_format' ) . ' ' . get_option( 'time_format' );
-		foreach ( $loglines as $line ) {
-			echo '' .
-			esc_textarea( date_i18n( $format, $line['timestamp'] ) ) .
-			' - ' .
-			esc_textarea( $line['message'] ) .
-			"\n";
-		}
-		?></textarea>
+			foreach ( $loglines as $line ) {
+				echo '' .
+				esc_textarea( date_i18n( $format, $line['timestamp'] ) ) .
+				' - ' .
+				esc_textarea( $line['message'] ) .
+				"\n";
+			}
+			// phpcs:enable
+		?>
+		</textarea>
 
 		<p class="shipper-note">
 			<?php esc_html_e( 'Logs will be automatically refreshed each time you initiate a new migration.', 'shipper' ); ?>
 		</p>
 	<?php } else { ?>
 		<div class="sui-notice">
-			<p>
-				<?php esc_html_e( 'No event logs have been detected yet.', 'shipper' ); ?>
-				<?php esc_html_e( 'They will appear here once you have made an action.', 'shipper' ); ?>
-			</p>
+			<div class="sui-notice-content">
+				<div class="sui-notice-message">
+					<p>
+						<?php esc_html_e( 'No event logs have been detected yet.', 'shipper' ); ?>
+						<?php esc_html_e( 'They will appear here once you have made an action.', 'shipper' ); ?>
+					</p>
+				</div>
+			</div>
 		</div>
 	<?php } ?>
 

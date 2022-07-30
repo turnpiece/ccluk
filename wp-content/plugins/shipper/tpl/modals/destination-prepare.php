@@ -8,8 +8,7 @@
 ?>
 
 <div class="sui-box-header">
-	<input type="hidden" name="_wpnonce"
-		value="<?php echo esc_attr( wp_create_nonce( 'shipper_prepare_hub_site' ) );?>" />
+	<input type="hidden" name="_wpnonce" value="<?php echo esc_attr( wp_create_nonce( 'shipper_prepare_hub_site' ) ); ?>" />
 	<a href="#back" class="shipper-dialog-back">
 		<i class="sui-icon-chevron-left" aria-hidden="true"></i>
 		<span><?php esc_attr_e( 'Go back', 'shipper' ); ?></span>

@@ -32,7 +32,7 @@ class Shipper_Task_Import_Prepare extends Shipper_Task_Import_Cleanup {
 	 * @return bool
 	 */
 	public function apply( $args = array() ) {
-		$options = new Shipper_Model_Stored_Options;
+		$options = new Shipper_Model_Stored_Options();
 		$options->jettison_data();
 
 		return parent::apply( $args );

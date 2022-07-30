@@ -2,7 +2,7 @@
 /**
  * The GTM helper class.
  *
- * @link    http://premium.wpmudev.org
+ * @link    http://wpmudev.com
  * @since   3.3.0
  *
  * @author  Joel James <joel@incsub.com>
@@ -114,7 +114,7 @@ class Helper {
 
 		// Check if current page is our plugin stats page.
 		// Using strpos to support translation - https://incsub.atlassian.net/browse/BEE-15.
-		return isset( $current_screen->id ) && strpos( $current_screen->id, 'page_beehive-gtm-settings' );
+		return isset( $current_screen->id ) && strpos( $current_screen->id, 'page_beehive-google-tag-manager' );
 	}
 
 	/**
@@ -143,7 +143,7 @@ class Helper {
 		// Get page.
 		$url = add_query_arg(
 			array(
-				'page' => 'beehive-gtm-settings',
+				'page' => 'beehive-google-tag-manager',
 			),
 			$url
 		);

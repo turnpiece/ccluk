@@ -41,12 +41,7 @@
 			<div
 				class="sui-box-footer sui-flatten sui-content-center sui-spacing-bottom--50"
 			>
-				<button
-					role="button"
-					class="sui-button"
-					data-modal-slide-intro="next"
-					:data-modal-slide="`${$parent.modal}-admin-tracking`"
-				>
+				<button role="button" class="sui-button" @click="slideNext">
 					{{ $i18n.dialog.continue }}
 				</button>
 			</div>
@@ -66,6 +61,32 @@ export default {
 		AccountRoles,
 		AccountProfiles,
 		WhitelabelBanner,
+	},
+
+	props: {
+		canContinue: {
+			type: Boolean,
+			default: true,
+		},
+	},
+
+	methods: {
+		/**
+		 * Slide to next slide.
+		 *
+		 * @since 3.3.3
+		 */
+		slideNext() {
+			// Get next slide ID.
+			let next = this.canContinue ? '-admin-tracking' : '-finishing'
+
+			// Slide to next slide.
+			SUI.slideModal(this.$parent.modal + next, null, 'next')
+
+			if (!this.canContinue) {
+				this.$emit('submit')
+			}
+		},
 	},
 }
 </script>

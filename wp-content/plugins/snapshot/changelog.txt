@@ -5,6 +5,26 @@ Change Log:
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
 
+3.3.2
+----------------------------------------------------------------------
+- Bug: PHP 8 deprecations
+- Improvement: Upgrade Amazon S3 and Dropbox SDKs
+- Improvement: Enable mu-plugins backups on WordPress Single Site
+
+3.3.1
+----------------------------------------------------------------------
+- Bug: Backups to Google Drive not completing
+- Improvement: Compatibility with WordPress' jQuery update
+- Improvement: Ability to disable "Upgrade to Snapshot 4" notifications for 30 days
+
+3.3.0
+----------------------------------------------------------------------
+- [New] Add upgrade to 4.0 prompts in Snapshot 3.0
+
+3.2.1.5
+----------------------------------------------------------------------
+- [Fix] Backups not uploading and old backups deleting when Storage Limit = 0
+- [Fix] Snapshot backups not including media files for sites hosted with FlyWheel
 
 3.2.1.4
 ----------------------------------------------------------------------
@@ -633,4 +653,4 @@ http://premium.wpmudev.org/forums/topic/need-to-turn-off-zlib-compression-for-it
 - Initial stable release
 
 
-87274-1579294400-au
+87274-1659205627-au

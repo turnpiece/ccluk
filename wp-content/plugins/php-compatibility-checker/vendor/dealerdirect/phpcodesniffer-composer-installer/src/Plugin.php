@@ -4,7 +4,7 @@
  * This file is part of the Dealerdirect PHP_CodeSniffer Standards
  * Composer Installer Plugin package.
  *
- * @copyright 2016-2017 Dealerdirect B.V.
+ * @copyright 2016-2020 Dealerdirect B.V.
  * @license MIT
  */
 
@@ -15,31 +15,42 @@ use Composer\EventDispatcher\EventSubscriberInterface;
 use Composer\IO\IOInterface;
 use Composer\Package\AliasPackage;
 use Composer\Package\PackageInterface;
-use Composer\Package\RootpackageInterface;
+use Composer\Package\RootPackageInterface;
 use Composer\Plugin\PluginInterface;
 use Composer\Script\Event;
 use Composer\Script\ScriptEvents;
+use Composer\Util\Filesystem;
+use Composer\Util\ProcessExecutor;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Process\Exception\LogicException;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Exception\RuntimeException;
-use Symfony\Component\Process\ProcessBuilder;
+use Symfony\Component\Process\PhpExecutableFinder;
 
 /**
  * PHP_CodeSniffer standard installation manager.
  *
- * @author Franck Nijhof <f.nijhof@dealerdirect.nl>
+ * @author Franck Nijhof <franck.nijhof@dealerdirect.com>
  */
 class Plugin implements PluginInterface, EventSubscriberInterface
 {
-    const MESSAGE_RUNNING_INSTALLER = 'Running PHPCodeSniffer Composer Installer';
-    const MESSAGE_NOTHING_TO_INSTALL = 'Nothing to install or update';
+
+    const KEY_MAX_DEPTH = 'phpcodesniffer-search-depth';
+
+    const MESSAGE_ERROR_WRONG_MAX_DEPTH =
+        'The value of "%s" (in the composer.json "extra".section) must be an integer larger then %d, %s given.';
     const MESSAGE_NOT_INSTALLED = 'PHPCodeSniffer is not installed';
+    const MESSAGE_NOTHING_TO_INSTALL = 'Nothing to install or update';
+    const MESSAGE_PLUGIN_UNINSTALLED = 'PHPCodeSniffer Composer Installer is uninstalled';
+    const MESSAGE_RUNNING_INSTALLER = 'Running PHPCodeSniffer Composer Installer';
 
     const PACKAGE_NAME = 'squizlabs/php_codesniffer';
     const PACKAGE_TYPE = 'phpcodesniffer-standard';
 
+    const PHPCS_CONFIG_REGEX = '`%s:[^\r\n]+`';
     const PHPCS_CONFIG_KEY = 'installed_paths';
+
+    const PLUGIN_NAME = 'dealerdirect/phpcodesniffer-composer-installer';
 
     /**
      * @var Composer
@@ -47,9 +58,14 @@ class Plugin implements PluginInterface, EventSubscriberInterface
     private $composer;
 
     /**
-     * @var IOInterface
+     * @var string
      */
-    private $io;
+    private $cwd;
+
+    /**
+     * @var Filesystem
+     */
+    private $filesystem;
 
     /**
      * @var array
@@ -57,9 +73,14 @@ class Plugin implements PluginInterface, EventSubscriberInterface
     private $installedPaths;
 
     /**
-     * @var ProcessBuilder
+     * @var IOInterface
      */
-    private $processBuilder;
+    private $io;
+
+    /**
+     * @var ProcessExecutor
+     */
+    private $processExecutor;
 
     /**
      * Triggers the plugin's main functionality.
@@ -92,8 +113,8 @@ class Plugin implements PluginInterface, EventSubscriberInterface
      *
      * @throws \RuntimeException
      * @throws LogicException
-     * @throws RuntimeException
      * @throws ProcessFailedException
+     * @throws RuntimeException
      */
     public function activate(Composer $composer, IOInterface $io)
     {
@@ -101,6 +122,20 @@ class Plugin implements PluginInterface, EventSubscriberInterface
         $this->io = $io;
 
         $this->init();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function deactivate(Composer $composer, IOInterface $io)
+    {
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function uninstall(Composer $composer, IOInterface $io)
+    {
     }
 
     /**
@@ -113,12 +148,11 @@ class Plugin implements PluginInterface, EventSubscriberInterface
      */
     private function init()
     {
+        $this->cwd = getcwd();
         $this->installedPaths = array();
 
-        $this->processBuilder = new ProcessBuilder();
-        $this->processBuilder->setPrefix($this->composer->getConfig()->get('bin-dir') . DIRECTORY_SEPARATOR . 'phpcs');
-
-        $this->loadInstalledPaths();
+        $this->processExecutor = new ProcessExecutor($this->io);
+        $this->filesystem = new Filesystem($this->processExecutor);
     }
 
     /**
@@ -140,54 +174,82 @@ class Plugin implements PluginInterface, EventSubscriberInterface
      * Entry point for post install and post update events.
      *
      * @throws \InvalidArgumentException
-     * @throws RuntimeException
      * @throws LogicException
      * @throws ProcessFailedException
+     * @throws RuntimeException
      */
     public function onDependenciesChangedEvent()
     {
         $io = $this->io;
         $isVerbose = $io->isVerbose();
+        $exitCode = 0;
 
         if ($isVerbose) {
             $io->write(sprintf('<info>%s</info>', self::MESSAGE_RUNNING_INSTALLER));
         }
 
         if ($this->isPHPCodeSnifferInstalled() === true) {
+            $this->loadInstalledPaths();
             $installPathCleaned = $this->cleanInstalledPaths();
             $installPathUpdated = $this->updateInstalledPaths();
 
             if ($installPathCleaned === true || $installPathUpdated === true) {
-                $this->saveInstalledPaths();
+                $exitCode = $this->saveInstalledPaths();
             } elseif ($isVerbose) {
                 $io->write(sprintf('<info>%s</info>', self::MESSAGE_NOTHING_TO_INSTALL));
             }
-        } elseif ($isVerbose) {
-            $io->write(sprintf('<info>%s</info>', self::MESSAGE_NOT_INSTALLED));
+        } else {
+            $pluginPackage = $this
+                ->composer
+                ->getRepositoryManager()
+                ->getLocalRepository()
+                ->findPackages(self::PLUGIN_NAME)
+            ;
+
+            $isPluginUninstalled = count($pluginPackage) === 0;
+
+            if ($isPluginUninstalled) {
+                if ($isVerbose) {
+                    $io->write(sprintf('<info>%s</info>', self::MESSAGE_PLUGIN_UNINSTALLED));
+                }
+            } else {
+                $exitCode = 1;
+                if ($isVerbose) {
+                    $io->write(sprintf('<error>%s</error>', self::MESSAGE_NOT_INSTALLED));
+                }
+            }
         }
+
+        return $exitCode;
     }
 
     /**
      * Load all paths from PHP_CodeSniffer into an array.
      *
-     * @throws RuntimeException
      * @throws LogicException
      * @throws ProcessFailedException
+     * @throws RuntimeException
      */
     private function loadInstalledPaths()
     {
         if ($this->isPHPCodeSnifferInstalled() === true) {
-            $output = $this->processBuilder
-                ->setArguments(array('--config-show', self::PHPCS_CONFIG_KEY))
-                ->getProcess()
-                ->mustRun()
-                ->getOutput();
+            $this->processExecutor->execute(
+                sprintf(
+                    'phpcs --config-show %s',
+                    self::PHPCS_CONFIG_KEY
+                ),
+                $output,
+                $this->composer->getConfig()->get('bin-dir')
+            );
 
-            $phpcsInstalledPaths = str_replace(self::PHPCS_CONFIG_KEY . ': ', '', $output);
-            $phpcsInstalledPaths = trim($phpcsInstalledPaths);
+            $regex = sprintf(self::PHPCS_CONFIG_REGEX, self::PHPCS_CONFIG_KEY);
+            if (preg_match($regex, $output, $match) === 1) {
+                $phpcsInstalledPaths = str_replace(self::PHPCS_CONFIG_KEY . ': ', '', $match[0]);
+                $phpcsInstalledPaths = trim($phpcsInstalledPaths);
 
-            if ($phpcsInstalledPaths !== '') {
-                $this->installedPaths = explode(',', $phpcsInstalledPaths);
+                if ($phpcsInstalledPaths !== '') {
+                    $this->installedPaths = explode(',', $phpcsInstalledPaths);
+                }
             }
         }
     }
@@ -195,14 +257,17 @@ class Plugin implements PluginInterface, EventSubscriberInterface
     /**
      * Save all coding standard paths back into PHP_CodeSniffer
      *
-     * @throws RuntimeException
      * @throws LogicException
      * @throws ProcessFailedException
+     * @throws RuntimeException
+     *
+     * @return int Exit code. 0 for success, 1 or higher for failure.
      */
     private function saveInstalledPaths()
     {
         // Check if we found installed paths to set.
         if (count($this->installedPaths) !== 0) {
+            sort($this->installedPaths);
             $paths = implode(',', $this->installedPaths);
             $arguments = array('--config-set', self::PHPCS_CONFIG_KEY, $paths);
             $configMessage = sprintf(
@@ -219,18 +284,113 @@ class Plugin implements PluginInterface, EventSubscriberInterface
             );
         }
 
-        $this->io->write($configMessage);
+        // Prepare message in case of failure
+        $failMessage = sprintf(
+            'Failed to set PHP CodeSniffer <info>%s</info> Config',
+            self::PHPCS_CONFIG_KEY
+        );
 
-        $configResult = $this->processBuilder
-            ->setArguments($arguments)
-            ->getProcess()
-            ->mustRun()
-            ->getOutput()
-        ;
+        // Determine the path to the main PHPCS file.
+        $phpcsPath = $this->getPHPCodeSnifferInstallPath();
+        if (file_exists($phpcsPath . '/bin/phpcs') === true) {
+            // PHPCS 3.x.
+            $phpcsExecutable = './bin/phpcs';
+        } else {
+            // PHPCS 2.x.
+            $phpcsExecutable = './scripts/phpcs';
+        }
+
+        // Okay, lets rock!
+        $command = vsprintf(
+            '%s %s %s',
+            array(
+                'php executable'   => $this->getPhpExecCommand(),
+                'phpcs executable' => $phpcsExecutable,
+                'arguments'        => implode(' ', $arguments)
+            )
+        );
+
+        $exitCode = $this->processExecutor->execute($command, $configResult, $phpcsPath);
+        if ($exitCode === 0) {
+            $exitCode = $this->verifySaveSuccess();
+        }
+
+        if ($exitCode === 0) {
+            $this->io->write($configMessage);
+        } else {
+            $this->io->write($failMessage);
+        }
 
         if ($this->io->isVerbose() && !empty($configResult)) {
             $this->io->write(sprintf('<info>%s</info>', $configResult));
         }
+
+        return $exitCode;
+    }
+
+    /**
+     * Verify that the paths which were expected to be saved, have been.
+     *
+     * @return int Exit code. 0 for success, 1 for failure.
+     */
+    private function verifySaveSuccess()
+    {
+        $exitCode      = 1;
+        $expectedPaths = $this->installedPaths;
+
+        // Request the currently set installed paths after the save.
+        $this->loadInstalledPaths();
+
+        $registeredPaths = array_intersect($this->installedPaths, $expectedPaths);
+        $registeredCount = count($registeredPaths);
+        $expectedCount   = count($expectedPaths);
+
+        if ($expectedCount === $registeredCount) {
+            $exitCode = 0;
+        }
+
+        if ($exitCode === 1 && $this->io->isVerbose()) {
+            $verificationMessage = sprintf(
+                "Paths to external standards found by the plugin: <info>%s</info>\n"
+                . 'Actual paths registered with PHPCS: <info>%s</info>',
+                implode(', ', $expectedPaths),
+                implode(', ', $this->installedPaths)
+            );
+            $this->io->write($verificationMessage);
+        }
+
+        return $exitCode;
+    }
+
+    /**
+     * Get the path to the current PHP version being used.
+     *
+     * Duplicate of the same in the EventDispatcher class in Composer itself.
+     */
+    protected function getPhpExecCommand()
+    {
+        $finder = new PhpExecutableFinder();
+
+        $phpPath = $finder->find(false);
+
+        if ($phpPath === false) {
+            throw new \RuntimeException('Failed to locate PHP binary to execute ' . $phpPath);
+        }
+
+        $phpArgs = $finder->findArguments();
+        $phpArgs = $phpArgs
+            ? ' ' . implode(' ', $phpArgs)
+            : ''
+        ;
+
+        $command  = ProcessExecutor::escape($phpPath) .
+            $phpArgs .
+            ' -d allow_url_fopen=' . ProcessExecutor::escape(ini_get('allow_url_fopen')) .
+            ' -d disable_functions=' . ProcessExecutor::escape(ini_get('disable_functions')) .
+            ' -d memory_limit=' . ProcessExecutor::escape(ini_get('memory_limit'))
+        ;
+
+        return $command;
     }
 
     /**
@@ -248,7 +408,8 @@ class Plugin implements PluginInterface, EventSubscriberInterface
             // This might be a relative path as well
             $alternativePath = realpath($this->getPHPCodeSnifferInstallPath() . DIRECTORY_SEPARATOR . $path);
 
-            if ((is_dir($path) === false || is_readable($path) === false) &&
+            if (
+                (is_dir($path) === false || is_readable($path) === false) &&
                 (is_dir($alternativePath) === false || is_readable($alternativePath) === false)
             ) {
                 unset($this->installedPaths[$key]);
@@ -271,37 +432,43 @@ class Plugin implements PluginInterface, EventSubscriberInterface
     {
         $changes = false;
 
-        $searchPaths = array(getcwd());
+        $searchPaths = array($this->cwd);
         $codingStandardPackages = $this->getPHPCodingStandardPackages();
         foreach ($codingStandardPackages as $package) {
-            $searchPaths[] = $this->composer->getInstallationManager()->getInstallPath($package);
+            $installPath = $this->composer->getInstallationManager()->getInstallPath($package);
+            if ($this->filesystem->isAbsolutePath($installPath) === false) {
+                $installPath = $this->filesystem->normalizePath(
+                    $this->cwd . DIRECTORY_SEPARATOR . $installPath
+                );
+            }
+            $searchPaths[] = $installPath;
         }
 
         $finder = new Finder();
         $finder->files()
+            ->depth('<= ' . $this->getMaxDepth())
+            ->depth('>= ' . $this->getMinDepth())
             ->ignoreUnreadableDirs()
             ->ignoreVCS(true)
-            ->depth('< 4')
-            ->name('ruleset.xml')
-            ->in($searchPaths);
-
-        // Only version 3.x and higher has support for having coding standard in the root of the directory.
-        if ($this->isPHPCodeSnifferInstalled('>= 3.0.0') !== true) {
-            $finder->depth('>= 1');
-        }
+            ->in($searchPaths)
+            ->name('ruleset.xml');
 
         // Process each found possible ruleset.
         foreach ($finder as $ruleset) {
             $standardsPath = $ruleset->getPath();
 
             // Pick the directory above the directory containing the standard, unless this is the project root.
-            if ($standardsPath !== getcwd()) {
+            if ($standardsPath !== $this->cwd) {
                 $standardsPath = dirname($standardsPath);
             }
 
             // Use relative paths for local project repositories.
             if ($this->isRunningGlobally() === false) {
-                $standardsPath = $this->getRelativePath($standardsPath);
+                $standardsPath = $this->filesystem->findShortestPath(
+                    $this->getPHPCodeSnifferInstallPath(),
+                    $standardsPath,
+                    true
+                );
             }
 
             // De-duplicate and add when directory is not configured.
@@ -335,7 +502,8 @@ class Plugin implements PluginInterface, EventSubscriberInterface
             }
         );
 
-        if (! $this->composer->getPackage() instanceof RootpackageInterface
+        if (
+            ! $this->composer->getPackage() instanceof RootPackageInterface
             && $this->composer->getPackage()->getType() === self::PACKAGE_TYPE
         ) {
             $codingStandardPackages[] = $this->composer->getPackage();
@@ -394,48 +562,59 @@ class Plugin implements PluginInterface, EventSubscriberInterface
      */
     private function isRunningGlobally()
     {
-        return ($this->composer->getConfig()->get('home') === getcwd());
+        return ($this->composer->getConfig()->get('home') === $this->cwd);
     }
 
     /**
-     * Returns the relative path to PHP_CodeSniffer from any other absolute path
+     * Determines the maximum search depth when searching for Coding Standards.
      *
-     * @param string $to Absolute path
+     * @return int
      *
-     * @return string Relative path
+     * @throws \InvalidArgumentException
      */
-    private function getRelativePath($to)
+    private function getMaxDepth()
     {
-        $from = $this->getPHPCodeSnifferInstallPath();
+        $maxDepth = 3;
 
-        // Some compatibility fixes for Windows paths
-        $from = is_dir($from) ? rtrim($from, '\/') . '/' : $from;
-        $to = is_dir($to) ? rtrim($to, '\/') . '/' : $to;
-        $from = str_replace('\\', '/', $from);
-        $to = str_replace('\\', '/', $to);
+        $extra = $this->composer->getPackage()->getExtra();
 
-        $from = explode('/', $from);
-        $to = explode('/', $to);
-        $relPath = $to;
+        if (array_key_exists(self::KEY_MAX_DEPTH, $extra)) {
+            $maxDepth = $extra[self::KEY_MAX_DEPTH];
+            $minDepth = $this->getMinDepth();
 
-        foreach ($from as $depth => $dir) {
-            // Find first non-matching dir
-            if ($dir === $to[$depth]) {
-                // Ignore this directory
-                array_shift($relPath);
-            } else {
-                // Get number of remaining dirs to $from
-                $remaining = count($from) - $depth;
-                if ($remaining > 1) {
-                    // Add traversals up to first matching dir
-                    $padLength = (count($relPath) + $remaining - 1) * -1;
-                    $relPath = array_pad($relPath, $padLength, '..');
-                    break;
-                } else {
-                    $relPath[0] = './' . $relPath[0];
-                }
+            if (
+                (string) (int) $maxDepth !== (string) $maxDepth /* Must be an integer or cleanly castable to one */
+                || $maxDepth <= $minDepth                       /* Larger than the minimum */
+                || is_float($maxDepth) === true                 /* Within the boundaries of integer */
+            ) {
+                $message = vsprintf(
+                    self::MESSAGE_ERROR_WRONG_MAX_DEPTH,
+                    array(
+                        'key' => self::KEY_MAX_DEPTH,
+                        'min' => $minDepth,
+                        'given' => var_export($maxDepth, true),
+                    )
+                );
+
+                throw new \InvalidArgumentException($message);
             }
         }
-        return implode('/', $relPath);
+
+        return (int) $maxDepth;
+    }
+
+    /**
+     * Returns the minimal search depth for Coding Standard packages.
+     *
+     * Usually this is 0, unless PHP_CodeSniffer >= 3 is used.
+     *
+     * @return int
+     */
+    private function getMinDepth()
+    {
+        if ($this->isPHPCodeSnifferInstalled('>= 3.0.0') !== true) {
+            return 1;
+        }
+        return 0;
     }
 }

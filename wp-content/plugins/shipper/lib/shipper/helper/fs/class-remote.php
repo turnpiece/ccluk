@@ -17,7 +17,7 @@ class Shipper_Helper_Fs_Remote {
 	 *
 	 * @var object Shipper_Model_Stored_Creds instance
 	 */
-	private $_creds;
+	private $creds;
 
 	/**
 	 * Gets creds model and attempts auto-update
@@ -29,6 +29,7 @@ class Shipper_Helper_Fs_Remote {
 
 		if ( $creds->is_expired() ) {
 			$this->update_creds();
+
 			return $this->get_creds_model();
 		}
 
@@ -41,12 +42,12 @@ class Shipper_Helper_Fs_Remote {
 	 * @return object Shipper_Model_Stored_Creds instance
 	 */
 	public function get_creds_model() {
-		if ( ! empty( $this->_creds ) ) {
-			return $this->_creds;
+		if ( ! empty( $this->creds ) ) {
+			return $this->creds;
 		}
-		$this->_creds = new Shipper_Model_Stored_Creds;
+		$this->creds = new Shipper_Model_Stored_Creds();
 
-		return $this->_creds;
+		return $this->creds;
 	}
 
 	/**
@@ -54,22 +55,21 @@ class Shipper_Helper_Fs_Remote {
 	 *
 	 * Re-initializes creds model on success as a side-effect.
 	 *
-	 * @uses Shipper_Task_Api_Info_Creds
-	 *
 	 * @return bool
+	 * @uses Shipper_Task_Api_Info_Creds
 	 */
 	public function update_creds() {
-		$task = new Shipper_Task_Api_Info_Creds;
+		$task   = new Shipper_Task_Api_Info_Creds();
 		$result = $task->apply();
 		$status = false;
 
 		if ( ! empty( $result ) ) {
-			$creds = new Shipper_Model_Stored_Creds;
+			$creds = new Shipper_Model_Stored_Creds();
 			$creds->set_data( $result );
 			$creds->set_timestamp( time() );
 			$creds->save();
 
-			$this->_creds = $creds;
+			$this->creds = $creds;
 
 			// We're good, reset the error count.
 			update_site_option( 'shipper-storage-creds-errcount', 0 );
@@ -78,6 +78,7 @@ class Shipper_Helper_Fs_Remote {
 				foreach ( $task->get_errors() as $error ) {
 					Shipper_Helper_Log::write(
 						sprintf(
+							/* translators: %s: error message .*/
 							__( 'Credentials update failed: %s', 'shipper' ),
 							$error->get_error_message()
 						)
@@ -105,21 +106,21 @@ class Shipper_Helper_Fs_Remote {
 	/**
 	 * Uploads a local path to remote storage
 	 *
-	 * @throws Exception Thrown on S3 upload error.
-	 *
 	 * @param string $path Local path to upload.
 	 * @param string $dest Remote path.
 	 *
 	 * @return object Shipper_Model_Progress instance
+	 * @throws Exception Thrown on S3 upload error.
 	 */
 	public function upload( $path, $dest ) {
 		if ( apply_filters( 'shipper_api_mock_local', false ) ) {
 			return $this->upload_mock( $path, $dest );
 		}
 
-		$progress = new Shipper_Model_Progress;
+		$progress = new Shipper_Model_Progress();
 
 		$upload = $this->get_upload( $path, $dest );
+
 		if ( ! is_object( $upload ) ) {
 			if ( $upload ) {
 				$progress->set(
@@ -127,70 +128,96 @@ class Shipper_Helper_Fs_Remote {
 					Shipper_Model_Progress::STATUS_DONE
 				);
 			} else {
-				$progress->set_error( sprintf(
-					__( 'Initialization error on %s', 'shipper' ),
-					$path
-				) );
+				$progress->set_error(
+					sprintf(
+						/* translators: %s: error message .*/
+						__( 'Initialization error on %s', 'shipper' ),
+						$path
+					)
+				);
 			}
+
 			return $progress;
 		}
 
 		if ( ! $upload->has_transfer() ) {
-			$progress->set_error( sprintf(
-				__( 'Initialization error on %s', 'shipper' ),
-				$path
-			) );
+			$progress->set_error(
+				sprintf(
+					/* translators: %s: error message .*/
+					__( 'Initialization error on %s', 'shipper' ),
+					$path
+				)
+			);
+
 			return $progress;
 		}
 
 		$progress->set_total( $upload->get_parts_count() + 1 );
 		$progress->set_current( $upload->get_transfered_count() );
 
-		$next = $upload->get_next();
+		$next  = $upload->get_next();
 		$creds = $this->get_creds();
-		$s3 = $this->get_remote_storage_handler();
+		$s3    = $this->get_remote_storage_handler();
 
 		if ( ! empty( $next ) ) {
-			$fp = fopen( $path, 'r' );
-			if ( ftell( $fp ) !== $next['seekTo'] ) {
-				fseek( $fp, $next['seekTo'] );
+			$fs = Shipper_Helper_Fs_File::open( $path );
+
+			if ( ! $fs ) {
+				return false;
 			}
-			$body = fread( $fp, $next['length'] );
+
+			if ( $fs->ftell() !== $next['seekTo'] ) {
+				$fs->fseek( $next['seekTo'] );
+			}
+
+			$body = $fs->fread( $next['length'] );
+
 			// We have a part to upload.
 			// Let's do so.
-			$response = $s3->uploadPart(array(
-				'Bucket' => $creds->get( Shipper_Model_Stored_Creds::KEY_BUCKET ),
-				'Key' => $this->get_remote_path( $dest ),
-				'UploadId' => $upload->get_transfer_id(),
-				'PartNumber' => $next[ Shipper_Model_Stored_Multipart_Uploads::KEY_PART_IDX ] + 1,
-				'Body' => $body,
-			));
+			$response = $s3->uploadPart(
+				array(
+					'Bucket'     => $creds->get( Shipper_Model_Stored_Creds::KEY_BUCKET ),
+					'Key'        => $this->get_remote_path( $dest ),
+					'UploadId'   => $upload->get_transfer_id(),
+					'PartNumber' => $next[ Shipper_Model_Stored_Multipart_Uploads::KEY_PART_IDX ] + 1,
+					'Body'       => $body,
+				)
+			);
 
 			if ( $response ) {
 				$upload->complete_part( $next );
 				$progress->update();
 			} else {
-				$progress->set_error(sprintf(
-					__( 'Error uploading file %1$s, part %2$s', 'shipper' ),
-					$dest, $next[ Shipper_Model_Stored_Multipart_Uploads::KEY_PART_IDX ]
-				));
+				$progress->set_error(
+					sprintf(
+						/* translators: %1%s %2$s: file name and part. */
+						__( 'Error uploading file %1$s, part %2$s', 'shipper' ),
+						$dest,
+						$next[ Shipper_Model_Stored_Multipart_Uploads::KEY_PART_IDX ]
+					)
+				);
 			}
 		} else {
 			// We're all done, let's finalize.
 			try {
-				$parts = $s3->listParts(array(
-					'Bucket' => $creds->get( Shipper_Model_Stored_Creds::KEY_BUCKET ),
-					'Key' => $this->get_remote_path( $dest ),
-					'UploadId' => $upload->get_transfer_id(),
-				));
-				$response = $s3->completeMultipartUpload(array(
-					'Bucket' => $creds->get( Shipper_Model_Stored_Creds::KEY_BUCKET ),
-					'Key' => $this->get_remote_path( $dest ),
-					'UploadId' => $upload->get_transfer_id(),
-					'MultipartUpload' => array(
-						'Parts' => $parts['Parts'],
-					),
-				));
+				$parts = $s3->listParts(
+					array(
+						'Bucket'   => $creds->get( Shipper_Model_Stored_Creds::KEY_BUCKET ),
+						'Key'      => $this->get_remote_path( $dest ),
+						'UploadId' => $upload->get_transfer_id(),
+					)
+				);
+
+				$response = $s3->completeMultipartUpload(
+					array(
+						'Bucket'          => $creds->get( Shipper_Model_Stored_Creds::KEY_BUCKET ),
+						'Key'             => $this->get_remote_path( $dest ),
+						'UploadId'        => $upload->get_transfer_id(),
+						'MultipartUpload' => array(
+							'Parts' => $parts['Parts'],
+						),
+					)
+				);
 			} catch ( Exception $e ) {
 				Shipper_Helper_Log::write( wp_json_encode( $e->getMessage() ) );
 				$response = false;
@@ -202,10 +229,13 @@ class Shipper_Helper_Fs_Remote {
 					Shipper_Model_Progress::STATUS_DONE
 				);
 			} else {
-				$progress->set_error(sprintf(
-					__( 'Error finalizing upload %s', 'shipper' ),
-					$path
-				));
+				$progress->set_error(
+					sprintf(
+						/* translators: %s: error message file name. .*/
+						__( 'Error finalizing upload %s', 'shipper' ),
+						$path
+					)
+				);
 			}
 			$upload->clear();
 			$upload->save();
@@ -223,9 +253,8 @@ class Shipper_Helper_Fs_Remote {
 	 * @return object Shipper_Model_Progress instance
 	 */
 	public function upload_mock( $path, $dest ) {
-		$progress = new Shipper_Model_Progress;
-		$destination = trailingslashit( Shipper_Helper_Fs_Path::get_log_dir() )
-			. basename( $dest );
+		$progress    = new Shipper_Model_Progress();
+		$destination = trailingslashit( Shipper_Helper_Fs_Path::get_log_dir() ) . basename( $dest );
 
 		if ( ! file_exists( dirname( $destination ) ) ) {
 			wp_mkdir_p( dirname( $destination ) );
@@ -236,37 +265,42 @@ class Shipper_Helper_Fs_Remote {
 		} else {
 			$progress->set_error(
 				sprintf(
+					/* translators: %s: error message file name. */
 					__( 'Unable to upload %s', 'shipper' ),
 					$path
 				)
 			);
 		}
+
 		return $progress;
 	}
 
 	/**
 	 * Downloads a remote file to local path
 	 *
-	 * @throws Exception Thrown on S3 error.
-	 *
 	 * @param string $fname Remote filename to download.
 	 * @param string $path Local path to download to.
 	 *
 	 * @return object Shipper_Model_Progress instance
+	 * @throws Exception Thrown on S3 error.
 	 */
 	public function download( $fname, $path ) {
 		if ( apply_filters( 'shipper_api_mock_local', false ) ) {
 			return $this->download_mock( $fname, $path );
 		}
 
-		$progress = new Shipper_Model_Progress;
+		$progress = new Shipper_Model_Progress();
 
 		$download = $this->get_download( $fname );
 		if ( ! $download->has_transfer() ) {
-			$progress->set_error(sprintf(
-				__( 'Initialization error on %s', 'shipper' ),
-				$fname
-			));
+			$progress->set_error(
+				sprintf(
+					/* translators: %s: error message file name. */
+					__( 'Initialization error on %s', 'shipper' ),
+					$fname
+				)
+			);
+
 			return $progress;
 		}
 
@@ -280,10 +314,13 @@ class Shipper_Helper_Fs_Remote {
 				$progress->update();
 				$download->complete_part( $next );
 			} else {
-				$progress->set_error(sprintf(
-					__( 'Error downloading file %s', 'shipper' ),
-					$fname
-				));
+				$progress->set_error(
+					sprintf(
+						/* translators: %s: error message file name. */
+						__( 'Error downloading file %s', 'shipper' ),
+						$fname
+					)
+				);
 				$download->clear();
 				$download->save();
 			}
@@ -294,10 +331,13 @@ class Shipper_Helper_Fs_Remote {
 					Shipper_Model_Progress::STATUS_DONE
 				);
 			} else {
-				$progress->set_error(sprintf(
-					__( 'Error finalizing download %s', 'shipper' ),
-					$path
-				));
+				$progress->set_error(
+					sprintf(
+						/* translators: %s: error message file name. */
+						__( 'Error finalizing download %s', 'shipper' ),
+						$path
+					)
+				);
 			}
 			$download->clear();
 			$download->save();
@@ -312,16 +352,18 @@ class Shipper_Helper_Fs_Remote {
 	 * @param string $fname Remote filename to download.
 	 * @param string $path Local path to download to.
 	 *
-	 * @return object Shipper_Model_Progress instance
+	 * @return object Shipper_Model_Progress instance.
 	 */
 	public function download_mock( $fname, $path ) {
-		$progress = new Shipper_Model_Progress;
+		$progress = new Shipper_Model_Progress();
 
 		$fname = trailingslashit( Shipper_Helper_Fs_Path::get_log_dir() ) . $fname;
 		if ( ! file_exists( $fname ) || ! is_readable( $fname ) ) {
 			$progress->set_error(
+				/* translators: %s: error message file name. */
 				sprintf( __( 'Unable to locate the source file: %s', 'shipper' ), $fname )
 			);
+
 			return $progress;
 		}
 
@@ -330,11 +372,13 @@ class Shipper_Helper_Fs_Remote {
 		} else {
 			$progress->set_error(
 				sprintf(
+					/* translators: %s: error message file name. */
 					__( 'Unable to download %s', 'shipper' ),
 					$fname
 				)
 			);
 		}
+
 		return $progress;
 	}
 
@@ -353,18 +397,20 @@ class Shipper_Helper_Fs_Remote {
 		}
 
 		$creds = $this->get_creds();
-		$s3 = $this->get_remote_storage_handler();
+		$s3    = $this->get_remote_storage_handler();
 
-		$response = false;
+		$response   = false;
 		$from_bytes = $part['seekTo'];
-		$to_bytes = ($from_bytes + (int) $part['length']) - 1;
+		$to_bytes   = ( $from_bytes + (int) $part['length'] ) - 1;
 		try {
-			$response = $s3->getObject(array(
-				'Bucket' => $creds->get( Shipper_Model_Stored_Creds::KEY_BUCKET ),
-				'Key' => $this->get_remote_path( $fname ),
-				'SaveAs' => $this->get_download_part_name( $path, $part['seekTo'] ),
-				'Range' => "bytes={$from_bytes}-{$to_bytes}",
-			));
+			$response = $s3->getObject(
+				array(
+					'Bucket' => $creds->get( Shipper_Model_Stored_Creds::KEY_BUCKET ),
+					'Key'    => $this->get_remote_path( $fname ),
+					'SaveAs' => $this->get_download_part_name( $path, $part['seekTo'] ),
+					'Range'  => "bytes={$from_bytes}-{$to_bytes}",
+				)
+			);
 		} catch ( Exception $e ) {
 			$response = false;
 		}
@@ -384,16 +430,25 @@ class Shipper_Helper_Fs_Remote {
 		Shipper_Helper_Log::write( 'Stitching downloaded parts together' );
 		$status = true;
 		foreach ( $parts as $part ) {
-			$idx = $part['seekTo'];
+			$idx  = $part['seekTo'];
 			$file = $this->get_download_part_name( $path, $idx );
 			if ( ! file_exists( $file ) ) {
 				$status = false;
 				continue;
 			}
 
-			$status = (bool) @file_put_contents( $path, file_get_contents( $file ), FILE_APPEND );
+			$file_reader = Shipper_Helper_Fs_File::open( $file );
+			$file_writer = Shipper_Helper_Fs_File::open( $path, 'a' );
+
+			if ( ! $file_reader || ! $file_writer ) {
+				return false;
+			}
+
+			$status = ! ! $file_writer->fwrite( $file_reader->fread( $file_reader->getSize() ) );
+
 			if ( empty( $status ) ) {
 				Shipper_Helper_Log::write( "Stitching failed for part {$idx}" );
+
 				return false;
 			}
 			@unlink( $file );
@@ -417,7 +472,7 @@ class Shipper_Helper_Fs_Remote {
 	/**
 	 * Checks if a remote file exists
 	 *
-	 * @param string $fname Remote filename to check.
+	 * @param string $domain Remote filename to check.
 	 *
 	 * @return bool
 	 */
@@ -425,8 +480,9 @@ class Shipper_Helper_Fs_Remote {
 		$dirname = trailingslashit(
 			Shipper_Helper_Fs_Path::clean_fname( $domain )
 		) . trailingslashit( Shipper_Model_Stored_Migration::COMPONENT_META );
-		$files = new Shipper_Model_Dumped_Filelist;
-		$size = $this->get_remote_file_size( $dirname . $files->get_file_name() );
+		$files   = new Shipper_Model_Dumped_Filelist();
+		$size    = $this->get_remote_file_size( $dirname . $files->get_file_name() );
+
 		return false !== $size;
 	}
 
@@ -443,20 +499,21 @@ class Shipper_Helper_Fs_Remote {
 		}
 
 		$creds = $this->get_creds();
-		$s3 = $this->get_remote_storage_handler();
+		$s3    = $this->get_remote_storage_handler();
 		try {
-			$response = $s3->headObject(array(
-				'Bucket' => $creds->get( Shipper_Model_Stored_Creds::KEY_BUCKET ),
-				'Key' => $this->get_remote_path( $fname ),
-			));
+			$response = $s3->headObject(
+				array(
+					'Bucket' => $creds->get( Shipper_Model_Stored_Creds::KEY_BUCKET ),
+					'Key'    => $this->get_remote_path( $fname ),
+				)
+			);
 		} catch ( Exception $e ) {
 			return false;
 		}
 
 		return ! ! $response
 			? $response['ContentLength']
-			: false
-		;
+			: false;
 	}
 
 	/**
@@ -468,10 +525,10 @@ class Shipper_Helper_Fs_Remote {
 	 */
 	public function get_remote_file_size_mock( $fname ) {
 		$fname = trailingslashit( Shipper_Helper_Fs_Path::get_log_dir() ) . $fname;
+
 		return file_exists( $fname ) && is_readable( $fname )
 			? filesize( $fname )
-			: false
-		;
+			: false;
 	}
 
 	/**
@@ -482,7 +539,7 @@ class Shipper_Helper_Fs_Remote {
 	 * @return array
 	 */
 	public function get_file_upload_parts( $path ) {
-		$model = new Shipper_Model_Stored_Multipart_Uploads;
+		$model = new Shipper_Model_Stored_Multipart_Uploads();
 		$parts = array();
 
 		if ( file_exists( $path ) && is_readable( $path ) ) {
@@ -510,56 +567,70 @@ class Shipper_Helper_Fs_Remote {
 	 *                     (bool)false on error.
 	 */
 	public function get_upload( $path, $dest ) {
-		$model = new Shipper_Model_Stored_Multipart_Uploads;
+		$model = new Shipper_Model_Stored_Multipart_Uploads();
 		if ( $model->has_transfer() ) {
 			// Upload already created, let's just return that.
 			return $model;
 		}
 
 		// Okay, so let's initialize upload now.
-		$s3 = $this->get_remote_storage_handler();
+		$s3    = $this->get_remote_storage_handler();
 		$creds = $this->get_creds();
 		$parts = $this->get_file_upload_parts( $path );
 
 		$filesize = filesize( $path );
 
 		if ( $filesize < 5 * 1024 * 1024 ) {
+			$fs = Shipper_Helper_Fs_File::open( $path );
+
+			if ( ! $fs ) {
+				return false;
+			}
+
 			// Not multipart candidate - upload straight up.
 			try {
-				$s3->putObject(array(
-					'Bucket' => $creds->get( Shipper_Model_Stored_Creds::KEY_BUCKET ),
-					'Key' => $this->get_remote_path( $dest ),
-					'ACL' => 'private',
-					'ServerSideEncryption' => 'AES256',
-					'Body' => file_get_contents( $path ),
-				));
+				$s3->putObject(
+					array(
+						'Bucket'               => $creds->get( Shipper_Model_Stored_Creds::KEY_BUCKET ),
+						'Key'                  => $this->get_remote_path( $dest ),
+						'ACL'                  => 'private',
+						'ServerSideEncryption' => 'AES256',
+						'Body'                 => $fs->fread( $fs->getSize() ),
+					)
+				);
 
 				return true;
 			} catch ( Exception $e ) {
 				Shipper_Helper_Log::write(
 					"Error uploading {$path} to {$dest}: " . $e->getMessage()
 				);
+
 				return false;
 			}
 		} else {
 			// Multipart.
 			try {
-				$upload = $s3->createMultipartUpload(array(
-					'Bucket' => $creds->get( Shipper_Model_Stored_Creds::KEY_BUCKET ),
-					'Key' => $this->get_remote_path( $dest ),
-					'ACL' => 'private',
-					'ServerSideEncryption' => 'AES256',
-				));
+				$upload = $s3->createMultipartUpload(
+					array(
+						'Bucket'               => $creds->get( Shipper_Model_Stored_Creds::KEY_BUCKET ),
+						'Key'                  => $this->get_remote_path( $dest ),
+						'ACL'                  => 'private',
+						'ServerSideEncryption' => 'AES256',
+					)
+				);
 
 				$model->create(
 					(string) $upload['UploadId'],
 					$parts
 				);
 			} catch ( Exception $e ) {
-				Shipper_Helper_Log::write( sprintf(
-					__( 'Error initializing upload: %s', 'shipper' ),
-					$e->getMessage()
-				));
+				Shipper_Helper_Log::write(
+					sprintf(
+						/* translators: %s: error message. */
+						__( 'Error initializing upload: %s', 'shipper' ),
+						$e->getMessage()
+					)
+				);
 			}
 		}
 
@@ -577,7 +648,7 @@ class Shipper_Helper_Fs_Remote {
 	 * @return object Shipper_Model_Stored_Multipart_Downloads instance
 	 */
 	public function get_download( $fname ) {
-		$model = new Shipper_Model_Stored_Multipart_Downloads;
+		$model = new Shipper_Model_Stored_Multipart_Downloads();
 		if ( $model->has_transfer() ) {
 			// Upload already created, let's just return that.
 			return $model;
@@ -604,24 +675,27 @@ class Shipper_Helper_Fs_Remote {
 		if ( empty( $storage_handler ) ) {
 			if ( ! class_exists( 'Aws\S3\S3Client' ) ) {
 				// Require external SDK just in time for this.
-				require_once( dirname( SHIPPER_PLUGIN_FILE ) . '/lib/external/autoload.php' );
+				require_once dirname( SHIPPER_PLUGIN_FILE ) . '/vendor/autoload.php';
 			}
 			$creds = $this->get_creds();
-			$ca = trailingslashit( ABSPATH . WPINC ) . 'certificates/ca-bundle.crt';
+			$ca    = trailingslashit( ABSPATH . WPINC ) . 'certificates/ca-bundle.crt';
 
-			$storage_handler = new Aws\S3\S3Client(array(
-				'version' => '2006-03-01',
-				'region' => 'us-east-1',
-				'credentials' => array(
-					'key' => $creds->get( Shipper_Model_Stored_Creds::KEY_ID ),
-					'secret' => $creds->get( Shipper_Model_Stored_Creds::KEY_SECRET ),
-					'token' => $creds->get( Shipper_Model_Stored_Creds::KEY_TOKEN ),
-				),
-				'http' => array(
-					'verify' => $ca,
-				),
-			));
+			$storage_handler = new Aws\S3\S3Client(
+				array(
+					'version'     => '2006-03-01',
+					'region'      => 'us-east-1',
+					'credentials' => array(
+						'key'    => $creds->get( Shipper_Model_Stored_Creds::KEY_ID ),
+						'secret' => $creds->get( Shipper_Model_Stored_Creds::KEY_SECRET ),
+						'token'  => $creds->get( Shipper_Model_Stored_Creds::KEY_TOKEN ),
+					),
+					'http'        => array(
+						'verify' => $ca,
+					),
+				)
+			);
 		}
+
 		return $storage_handler;
 	}
 
@@ -651,7 +725,7 @@ class Shipper_Helper_Fs_Remote {
 	 * @return array|false
 	 */
 	public function get_upload_command( $source, $dest_relpath ) {
-		$s3 = $this->get_remote_storage_handler();
+		$s3    = $this->get_remote_storage_handler();
 		$creds = $this->get_creds();
 
 		if ( ! is_readable( $source ) ) {
@@ -659,13 +733,16 @@ class Shipper_Helper_Fs_Remote {
 			return false;
 		}
 
-		$cmd = $s3->getCommand('PutObject', array(
-			'Bucket' => $creds->get( Shipper_Model_Stored_Creds::KEY_BUCKET ),
-			'Key' => $this->get_remote_path( $dest_relpath ),
-			'ACL' => 'private',
-			'ServerSideEncryption' => 'AES256',
-			'SourceFile' => $source,
-		));
+		$cmd             = $s3->getCommand(
+			'PutObject',
+			array(
+				'Bucket'               => $creds->get( Shipper_Model_Stored_Creds::KEY_BUCKET ),
+				'Key'                  => $this->get_remote_path( $dest_relpath ),
+				'ACL'                  => 'private',
+				'ServerSideEncryption' => 'AES256',
+				'SourceFile'           => $source,
+			)
+		);
 		$cmd['@retries'] = 5;
 
 		return $cmd;
@@ -680,14 +757,17 @@ class Shipper_Helper_Fs_Remote {
 	 * @return array
 	 */
 	public function get_download_command( $source_relpath, $destination ) {
-		$s3 = $this->get_remote_storage_handler();
+		$s3    = $this->get_remote_storage_handler();
 		$creds = $this->get_creds();
 
-		$cmd = $s3->getCommand( 'getObject', array(
-			'Bucket' => $creds->get( Shipper_Model_Stored_Creds::KEY_BUCKET ),
-			'Key' => $this->get_remote_path( $source_relpath ),
-			'SaveAs' => $destination,
-		));
+		$cmd             = $s3->getCommand(
+			'getObject',
+			array(
+				'Bucket' => $creds->get( Shipper_Model_Stored_Creds::KEY_BUCKET ),
+				'Key'    => $this->get_remote_path( $source_relpath ),
+				'SaveAs' => $destination,
+			)
+		);
 		$cmd['@retries'] = 5;
 
 		return $cmd;
@@ -705,38 +785,31 @@ class Shipper_Helper_Fs_Remote {
 			return false;
 		}
 
-		$s3 = $this->get_remote_storage_handler();
-		$this->_batch_error = false;
+		$s3                = $this->get_remote_storage_handler();
+		$this->batch_error = false;
 
 		try {
-			\Aws\CommandPool::batch( $s3, $batch, array(
-				'concurrency' => 5,
-				/*
-				'before' => function ( $cmd, $key ) {
-					Shipper_Helper_Log::write( sprintf(
-						'About to send key [%s]',
-						$key
-					) );
-				},
-				'fulfilled' => function( $result, $key ) {
-					Shipper_Helper_Log::write( sprintf(
-						'[OK] Success sending off [%s]',
-						$key
-					) );
-				},
-				 */
-				'rejected' => function ( $reason, $key, $aggregate = false ) {
-					Shipper_Helper_Log::write( sprintf(
-						'[FAIL] Transfer failed for [%s]: [%s]',
-						$key, $reason->getMessage()
-					) );
-					$this->_batch_error = true;
-					if ( $aggregate && is_callable( array( $aggregate, 'reject' ) ) ) {
-						Shipper_Helper_Log::write( 'Rejecting aggregate' );
-						$aggregate->reject( 'Reject all' );
-					}
-				},
-			) );
+			\Aws\CommandPool::batch(
+				$s3,
+				$batch,
+				array(
+					'concurrency' => 5,
+					'rejected'    => function ( $reason, $key, $aggregate = false ) {
+						Shipper_Helper_Log::write(
+							sprintf(
+								'[FAIL] Transfer failed for [%s]: [%s]',
+								$key,
+								$reason->getMessage()
+							)
+						);
+						$this->batch_error = true;
+						if ( $aggregate && is_callable( array( $aggregate, 'reject' ) ) ) {
+							Shipper_Helper_Log::write( 'Rejecting aggregate' );
+							$aggregate->reject( 'Reject all' );
+						}
+					},
+				)
+			);
 		} catch ( Exception $e ) {
 			Shipper_Helper_Log::write(
 				sprintf(
@@ -744,9 +817,9 @@ class Shipper_Helper_Fs_Remote {
 					$e->getMessage()
 				)
 			);
-			$this->_batch_error = true;
+			$this->batch_error = true;
 		}
 
-		return ! $this->_batch_error;
+		return ! $this->batch_error;
 	}
 }

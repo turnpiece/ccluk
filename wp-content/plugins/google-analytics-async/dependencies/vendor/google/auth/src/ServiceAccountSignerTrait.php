@@ -36,9 +36,9 @@ trait ServiceAccountSignerTrait
         $privateKey = $this->auth->getSigningKey();
         $signedString = '';
         if (\class_exists('Beehive\\phpseclib\\Crypt\\RSA') && !$forceOpenssl) {
-            $rsa = new \Beehive\phpseclib\Crypt\RSA();
+            $rsa = new RSA();
             $rsa->loadKey($privateKey);
-            $rsa->setSignatureMode(\Beehive\phpseclib\Crypt\RSA::SIGNATURE_PKCS1);
+            $rsa->setSignatureMode(RSA::SIGNATURE_PKCS1);
             $rsa->setHash('sha256');
             $signedString = $rsa->sign($stringToSign);
         } elseif (\extension_loaded('openssl')) {

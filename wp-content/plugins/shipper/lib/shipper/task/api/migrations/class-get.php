@@ -20,8 +20,7 @@ class Shipper_Task_Api_Migrations_Get extends Shipper_Task_Api {
 	public function apply( $args = array() ) {
 		$domain = ! empty( $args['domain'] )
 			? $args['domain']
-			: false
-		;
+			: false;
 
 		if ( empty( $domain ) ) {
 			$this->clear_cached_api_response( 'migration-get' );
@@ -32,16 +31,21 @@ class Shipper_Task_Api_Migrations_Get extends Shipper_Task_Api {
 			return false;
 		}
 
-		$status = $this->get_response( 'migration-get', self::METHOD_GET, array(
-			'domain' => $domain,
-			'version' => SHIPPER_VERSION,
-		));
+		$status = $this->get_response(
+			'migration-get',
+			self::METHOD_GET,
+			array(
+				'domain'  => $domain,
+				'version' => SHIPPER_VERSION,
+			)
+		);
 
 		if ( empty( $status['success'] ) ) {
 			$this->record_non_success(
 				'migration-get',
 				self::ERR_SERVICE,
 				sprintf(
+					/* translators: error message. */
 					__( 'Service error: %s', 'shipper' ),
 					$this->get_formatted_error( $status )
 				)
@@ -51,8 +55,7 @@ class Shipper_Task_Api_Migrations_Get extends Shipper_Task_Api {
 
 		$data = ! empty( $status['data'] )
 			? $status['data']
-			: array()
-		;
+			: array();
 
 		$this->record_success( 'migration-get' );
 		return $data;

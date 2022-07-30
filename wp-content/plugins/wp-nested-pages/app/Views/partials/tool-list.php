@@ -11,15 +11,15 @@ if ( $wpml && $current_lang ) $searchLabel .= ' (' . $this->integrations->plugin
 
 	<ul class="subsubsub">
 		<li>
-			<a href="#all" class="np-toggle-publish active"><?php _e('All', 'wp-nested-pages'); ?></a> |
+			<a href="#all" class="np-toggle-publish <?php if ( $this->status_preference == 'all' ) echo 'active'; ?>"><?php _e('All', 'wp-nested-pages'); ?></a> |
 		</li>
 
 		<li>
-			<a href="#published" class="np-toggle-publish"><?php _e('Published', 'wp-nested-pages'); ?></a> |
+			<a href="#published" class="np-toggle-publish <?php if ( $this->status_preference == 'published' ) echo 'active'; ?>"><?php _e('Published', 'wp-nested-pages'); ?></a> |
 		</li>
 
 		<li>
-			<a href="#draft" class="np-toggle-publish"><?php _e('Draft', 'wp-nested-pages'); ?></a>
+			<a href="#draft" class="np-toggle-publish <?php if ( $this->status_preference == 'draft' ) echo 'active'; ?>"><?php _e('Draft', 'wp-nested-pages'); ?></a>
 		</li>
 
 		<li> |
@@ -67,7 +67,7 @@ if ( $wpml && $current_lang ) $searchLabel .= ' (' . $this->integrations->plugin
 						foreach( $users as $user ){
 							$out .= '<option value="' . $user->ID . '"';
 							if ( isset($_GET['author']) && ($_GET['author'] == $user->ID) ) $out .= ' selected';
-							$out .= '>' . esc_html__($user->display_name) . '</option>';
+							$out .= '>' . esc_html($user->display_name) . '</option>';
 						}
 						echo $out;
 					?>
@@ -92,7 +92,7 @@ if ( $wpml && $current_lang ) $searchLabel .= ' (' . $this->integrations->plugin
 							$out .= '<option value="' . $key . '"';
 							if ( $default_order_by && $default_order_by == $key ) $out .= ' selected';
 							if ( isset($_GET['orderby']) && ($_GET['orderby'] == $key) ) $out .= ' selected';
-							$out .= '>' . esc_html__($option) . '</option>';
+							$out .= '>' . esc_html($option) . '</option>';
 						}
 						echo $out;
 					?>
@@ -116,7 +116,7 @@ if ( $wpml && $current_lang ) $searchLabel .= ' (' . $this->integrations->plugin
 							$out .= '<option value="' . esc_attr($key) . '"';
 							if ( $default_order && $default_order == $key ) $out .= ' selected';
 							if ( isset($_GET['order']) && ($_GET['order'] == $key) ) $out .= ' selected';
-							$out .= '>' . esc_html__($option) . '</option>';
+							$out .= '>' . esc_html($option) . '</option>';
 						}
 						echo $out;
 					?>
@@ -146,6 +146,7 @@ if ( $wpml && $current_lang ) $searchLabel .= ' (' . $this->integrations->plugin
 			<div class="select">
 				<input type="hidden" name="action" value="npListingSort">
 				<input type="hidden" name="page" value="<?php echo $this->pageURL(); ?>">
+				<?php wp_nonce_field('nestedpages-nonce', 'nonce'); ?>
 				<input type="hidden" name="post_type" value="<?php echo esc_attr($this->post_type->name); ?>">
 				<input type="submit" id="nestedpages-sort" class="button" value="<?php echo esc_attr__('Apply', 'wp-nested-pages'); ?>">
 			</div>
@@ -161,12 +162,12 @@ if ( $wpml && $current_lang ) $searchLabel .= ' (' . $this->integrations->plugin
 				<select id="np_category" name="np_category" class="nestedpages-sort">
 					<?php
 						$tax = get_taxonomy('category');
-						$out = '<option value="all">' . __('All ', 'wp-nested-pages') . esc_html__($tax->labels->name) . '</option>';
+						$out = '<option value="all">' . __('All ', 'wp-nested-pages') . esc_html($tax->labels->name) . '</option>';
 						$terms = get_terms('category');
 						foreach( $terms as $term ){
 							$out .= '<option value="' . esc_attr($term->term_id) . '"';
 							if ( isset($_GET['category']) && ($_GET['category'] == $term->term_id) ) $out .= ' selected';
-							$out .= '>' . esc_html__($term->name) . '</option>';
+							$out .= '>' . esc_html($term->name) . '</option>';
 						}
 						echo $out;
 					?>
@@ -174,6 +175,7 @@ if ( $wpml && $current_lang ) $searchLabel .= ' (' . $this->integrations->plugin
 			</div>
 			<div class="select">
 				<input type="hidden" name="action" value="npCategoryFilter">
+				<?php wp_nonce_field('nestedpages-nonce', 'nonce'); ?>
 				<input type="hidden" name="page" value="<?php echo esc_url($this->pageURL()); ?>">
 				<input type="submit" id="nestedpages-sort" class="button" value="Apply">
 			</div>

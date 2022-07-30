@@ -44,26 +44,28 @@ class Shipper_Task_Api_Info_Creds extends Shipper_Task_Api {
 	 */
 	public function get_token( $domain ) {
 		$hasher = new Shipper_Helper_Hash( Shipper_Helper_Hash::INTERVAL_MEDIUM );
-		$model = new Shipper_Model_Api;
-		$token = $hasher->get_hash(
+		$model  = new Shipper_Model_Api();
+		$token  = $hasher->get_hash(
 			$model->get( 'api_secret' ),
 			$model->get( 'api_key' )
 		);
 
-		$status = $this->get_response( 'info-token', self::METHOD_GET, array(
-			'domain' => $domain,
-			'time' => time(),
-			'token' => $token,
-		));
+		$status = $this->get_response(
+			'info-token',
+			self::METHOD_GET,
+			array(
+				'domain' => $domain,
+				'time'   => time(),
+				'token'  => $token,
+			)
+		);
 
-		$data = ! empty( $status['data'] )
+		$data  = ! empty( $status['data'] )
 			? $status['data']
-			: array()
-		;
+			: array();
 		$token = ! empty( $data['token'] )
 			? $data['token']
-			: ''
-		;
+			: '';
 
 		return $token;
 	}
@@ -77,16 +79,21 @@ class Shipper_Task_Api_Info_Creds extends Shipper_Task_Api {
 	 * @return array
 	 */
 	public function get_creds( $domain, $token ) {
-		$status = $this->get_response( 'info-creds', self::METHOD_GET, array(
-			'domain' => $domain,
-			'token' => $token,
-		));
+		$status = $this->get_response(
+			'info-creds',
+			self::METHOD_GET,
+			array(
+				'domain' => $domain,
+				'token'  => $token,
+			)
+		);
 
 		if ( empty( $status['success'] ) ) {
 			$this->record_non_success(
 				'info-creds',
 				self::ERR_SERVICE,
 				sprintf(
+					/* translators: %s: error message. */
 					__( 'Service error: %s', 'shipper' ),
 					$this->get_formatted_error( $status )
 				)
@@ -96,8 +103,7 @@ class Shipper_Task_Api_Info_Creds extends Shipper_Task_Api {
 
 		$data = ! empty( $status['data'] )
 			? $status['data']
-			: array()
-		;
+			: array();
 
 		if ( ! empty( $data ) ) {
 			$this->record_success( 'info-creds' );

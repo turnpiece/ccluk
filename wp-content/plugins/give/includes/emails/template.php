@@ -114,31 +114,35 @@ function give_email_preview_buttons_callback( $field ) {
 
 	echo sprintf(
 		'<a href="%1$s" class="button-secondary" target="_blank">%2$s</a>',
-		wp_nonce_url(
-			add_query_arg(
-				array(
-					'give_action' => 'preview_email',
-					'email_type'  => $field_id,
-				),
-				home_url()
-			),
-			'give-preview-email'
-		),
+        esc_url(
+            wp_nonce_url(
+                add_query_arg(
+                    array(
+                        'give_action' => 'preview_email',
+                        'email_type'  => $field_id,
+                    ),
+                    home_url()
+                ),
+                'give-preview-email'
+            )
+        ),
 		$field['name']
 	);
 
 	echo sprintf(
 		' <a href="%1$s" aria-label="%2$s" class="button-secondary">%3$s</a>',
-		wp_nonce_url(
-			add_query_arg(
-				array(
-					'give_action'     => 'send_preview_email',
-					'email_type'      => $field_id,
-					'give-messages[]' => 'sent-test-email',
-				)
-			),
-			'give-send-preview-email'
-		),
+        esc_url(
+            wp_nonce_url(
+                add_query_arg(
+                    array(
+                        'give_action'     => 'send_preview_email',
+                        'email_type'      => $field_id,
+                        'give-messages[]' => 'sent-test-email',
+                    )
+                ),
+                'give-send-preview-email'
+            )
+        ),
 		esc_attr__( 'Send Test Email.', 'give' ),
 		esc_html__( 'Send Test Email', 'give' )
 	);
@@ -152,6 +156,7 @@ function give_email_preview_buttons_callback( $field ) {
  *
  * Displays a header bar with the ability to change donations to preview actual data within the preview. Will not display if
  *
+ * @since 2.14.0 reduce number of queries
  * @since 1.6
  */
 function give_get_preview_email_header() {
@@ -168,26 +173,25 @@ function give_get_preview_email_header() {
 	$donations = new Give_Payments_Query(
 		array(
 			'number' => 100,
-			'output' => '',
-			'fields' => 'ids',
 		)
 	);
 	$donations = $donations->get_payments();
-	$options   = array();
+	$options   = [];
 
 	// Default option.
 	$options[0] = esc_html__( 'No donations found.', 'give' );
 
 	// Provide nice human readable options.
+	/** @var Give_Payment[] $donations */
 	if ( $donations ) {
 		$options[0] = esc_html__( '- Select a donation -', 'give' );
-		foreach ( $donations as $donation_id ) {
+		foreach ( $donations as $donation ) {
 
-			$options[ $donation_id ] = sprintf(
+			$options[ $donation->ID ] = sprintf(
 				'#%1$s - %2$s - %3$s',
-				$donation_id,
-				give_get_donation_donor_email( $donation_id ),
-				get_the_title( $donation_id )
+				$donation->ID,
+				$donation->email,
+				$donation->number
 			);
 		}
 	}
@@ -200,7 +204,7 @@ function give_get_preview_email_header() {
 	$query            = $request_url_data['query'];
 	$query            = remove_query_arg( array( 'preview_id' ), $query );
 
-	$request_url = home_url( '/?' . str_replace( '', '', $query ) );
+	$request_url = esc_url_raw( home_url( '/?' . str_replace( '', '', $query ) ) );
 
 	$transaction_header .= '<script>
 				 function change_preview(){

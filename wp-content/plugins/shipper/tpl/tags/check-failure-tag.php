@@ -11,10 +11,10 @@
 	<div class="sui-accordion-item-header">
 		<div class="sui-accordion-item-title">
 			<?php
-				$this->render(
-					'tags/status-icon-preflight-check',
-					array( 'item' => $check )
-				);
+			$this->render(
+				'tags/status-icon-preflight-check',
+				array( 'item' => $check )
+			);
 			?>
 			<?php echo esc_html( $check['title'] ); ?>
 		</div>

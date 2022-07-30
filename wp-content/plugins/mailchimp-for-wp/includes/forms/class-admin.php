@@ -39,7 +39,7 @@ class MC4WP_Forms_Admin {
 
 
 	public function enqueue_gutenberg_assets() {
-		wp_enqueue_script( 'mc4wp-form-block', MC4WP_PLUGIN_URL . 'assets/js/forms-block.js', array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-components' ) );
+		wp_enqueue_script( 'mc4wp-form-block', mc4wp_plugin_url( 'assets/js/forms-block.js' ), array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-components' ) );
 
 		$forms = mc4wp_get_forms();
 		$data  = array();
@@ -61,7 +61,7 @@ class MC4WP_Forms_Admin {
 			return;
 		}
 
-		wp_register_script( 'mc4wp-forms-admin', MC4WP_PLUGIN_URL . 'assets/js/forms-admin' . $suffix . '.js', array( 'mc4wp-admin' ), MC4WP_VERSION, true );
+		wp_register_script( 'mc4wp-forms-admin', mc4wp_plugin_url( 'assets/js/forms-admin.js' ), array( 'mc4wp-admin' ), MC4WP_VERSION, true );
 		wp_enqueue_script( 'mc4wp-forms-admin' );
 		wp_localize_script(
 			'mc4wp-forms-admin',
@@ -135,10 +135,8 @@ class MC4WP_Forms_Admin {
 	 * Act on the "add form" form
 	 */
 	public function process_add_form() {
-		check_admin_referer( 'add_form', '_mc4wp_nonce' );
-
 		$form_data    = $_POST['mc4wp_form'];
-		$form_content = include MC4WP_PLUGIN_DIR . 'config/default-form-content.php';
+		$form_content = include MC4WP_PLUGIN_DIR . '/config/default-form-content.php';
 
 		// Fix for MultiSite stripping KSES for roles other than administrator
 		remove_all_filters( 'content_save_pre' );
@@ -168,47 +166,37 @@ class MC4WP_Forms_Admin {
 
 	/**
 	 * Saves a form to the database
-	 *
+	 * @param int $form_id
 	 * @param array $data
 	 * @return int
 	 */
-	public function save_form( $data ) {
+	private function save_form( $form_id, array $data ) {
 		$keys = array(
 			'settings' => array(),
 			'messages' => array(),
 			'name'     => '',
 			'content'  => '',
 		);
-
 		$data = array_merge( $keys, $data );
 		$data = $this->sanitize_form_data( $data );
 
 		$post_data = array(
+			'ID' => $form_id,
 			'post_type'    => 'mc4wp-form',
 			'post_status'  => ! empty( $data['status'] ) ? $data['status'] : 'publish',
 			'post_title'   => $data['name'],
 			'post_content' => $data['content'],
 		);
 
-		// if an `ID` is given, make sure post is of type `mc4wp-form`
-		if ( ! empty( $data['ID'] ) ) {
-			$post = get_post( $data['ID'] );
-
-			if ( $post instanceof WP_Post && $post->post_type === 'mc4wp-form' ) {
-				$post_data['ID'] = $data['ID'];
-
-				// merge new settings  with current settings to allow passing partial data
-				$current_settings = get_post_meta( $post->ID, '_mc4wp_settings', true );
-				if ( is_array( $current_settings ) ) {
-					$data['settings'] = array_merge( $current_settings, $data['settings'] );
-				}
-			}
-		}
-
 		// Fix for MultiSite stripping KSES for roles other than administrator
 		remove_all_filters( 'content_save_pre' );
+		wp_insert_post( $post_data );
 
-		$form_id = wp_insert_post( $post_data );
+		// merge new settings  with current settings to allow passing partial data
+		$current_settings = get_post_meta( $form_id, '_mc4wp_settings', true );
+		if ( is_array( $current_settings ) ) {
+			$data['settings'] = array_merge( $current_settings, $data['settings'] );
+		}
 		update_post_meta( $form_id, '_mc4wp_settings', $data['settings'] );
 
 		// save form messages in individual meta keys
@@ -232,7 +220,7 @@ class MC4WP_Forms_Admin {
 	 * @param array $data
 	 * @return array
 	 */
-	public function sanitize_form_data( $data ) {
+	public function sanitize_form_data( array $data ) {
 		$raw_data = $data;
 
 		// strip <form> tags from content
@@ -256,6 +244,94 @@ class MC4WP_Forms_Admin {
 
 		$data['settings']['lists'] = array_filter( (array) $data['settings']['lists'] );
 
+		// if current user can not post unfiltered HTML, run HTML through whitelist using wp_kses
+		if ( ! current_user_can( 'unfiltered_html' ) ) {
+			$always_allowed_attr = array_fill_keys(
+				array(
+				'aria-describedby',
+				'aria-details',
+				'aria-label',
+				'aria-labelledby',
+				'aria-hidden',
+				'class',
+				'id',
+				'style',
+				'title',
+				'role',
+				'data-*',
+				'tabindex',
+				),
+				true
+			);
+			$input_allowed_attr  = array_merge(
+				$always_allowed_attr,
+				array_fill_keys(
+					array(
+					'type',
+					'required',
+					'placeholder',
+					'value',
+					'name',
+					'step',
+					'min',
+					'max',
+					'checked',
+					'width',
+					'autocomplete',
+					'autofocus',
+					'minlength',
+					'maxlength',
+					'size',
+					'pattern',
+					'disabled',
+					'readonly',
+					),
+					true
+				)
+			);
+
+			$allowed         = array(
+				'p'        => $always_allowed_attr,
+				'label'    => array_merge( $always_allowed_attr, array( 'for' => true ) ),
+				'input'    => $input_allowed_attr,
+				'button'   => $input_allowed_attr,
+				'fieldset' => $always_allowed_attr,
+				'legend'   => $always_allowed_attr,
+				'ul'       => $always_allowed_attr,
+				'ol'       => $always_allowed_attr,
+				'li'       => $always_allowed_attr,
+				'select'   => array_merge( $input_allowed_attr, array( 'multiple' => true ) ),
+				'option'   => array_merge( $input_allowed_attr, array( 'selected' => true ) ),
+				'optgroup' => array(
+				'disabled' => true,
+				'label' => true,
+				),
+				'textarea' => array_merge(
+					$input_allowed_attr,
+					array(
+					'rows' => true,
+					'cols' => true,
+					)
+				),
+				'div'      => $always_allowed_attr,
+				'strong'   => $always_allowed_attr,
+				'em'       => $always_allowed_attr,
+				'span'     => $always_allowed_attr,
+				'a'        => array_merge( $always_allowed_attr, array( 'href' => true ) ),
+				'img'      => array_merge(
+					$always_allowed_attr,
+					array(
+						'src' => true,
+						'alt' => '',
+					)
+				),
+			);
+			$data['content'] = wp_kses( $data['content'], $allowed );
+			foreach ( $data['messages'] as $key => $message ) {
+				$data['messages'][ $key ] = wp_kses( $data['messages'][ $key ], $allowed );
+			}
+		}
+
 		/**
 		 * Filters the form data just before it is saved.
 		 *
@@ -274,8 +350,6 @@ class MC4WP_Forms_Admin {
 	 * Saves a form
 	 */
 	public function process_save_form() {
-		check_admin_referer( 'edit_form', '_mc4wp_nonce' );
-
 		// save global settings (if submitted)
 		if ( isset( $_POST['mc4wp'] ) && is_array( $_POST['mc4wp'] ) ) {
 			$options = get_option( 'mc4wp', array() );
@@ -286,13 +360,11 @@ class MC4WP_Forms_Admin {
 			update_option( 'mc4wp', $options );
 		}
 
-		// save form + settings
+		// update form, settings and messages
 		$form_id         = (int) $_POST['mc4wp_form_id'];
 		$form_data       = $_POST['mc4wp_form'];
-		$form_data['ID'] = $form_id;
-		$this->save_form( $form_data );
+		$this->save_form( $form_id, $form_data );
 		$this->set_default_form_id( $form_id );
-
 		$this->messages->flash( esc_html__( 'Form saved.', 'mailchimp-for-wp' ) );
 	}
 
@@ -300,7 +372,7 @@ class MC4WP_Forms_Admin {
 	 * @param int $form_id
 	 */
 	private function set_default_form_id( $form_id ) {
-		$default_form_id = (int) get_option( 'mc4wp_default_form_id', 0 );
+		$default_form_id = get_option( 'mc4wp_default_form_id', 0 );
 
 		if ( empty( $default_form_id ) ) {
 			update_option( 'mc4wp_default_form_id', $form_id );
@@ -343,11 +415,17 @@ class MC4WP_Forms_Admin {
 			$redirect_url = mc4wp_get_edit_form_url( $default_form->ID );
 		} catch ( Exception $e ) {
 			// no default form, query first available form and go there
-			$forms = mc4wp_get_forms( array( 'numberposts' => 1 ) );
+			$forms = mc4wp_get_forms(
+				array(
+				'posts_per_page' => 1,
+				'orderby' => 'ID',
+				'order' => 'ASC',
+				)
+			);
 
-			if ( $forms ) {
-				// if we have a post, go to the "edit form" screen
-				$form         = array_pop( $forms );
+			if ( count( $forms ) > 0 ) {
+				// take first form and use it to go to the "edit form" screen
+				$form         = array_shift( $forms );
 				$redirect_url = mc4wp_get_edit_form_url( $form->ID );
 			} else {
 				// we don't have a form yet, go to "add new" screen
@@ -412,7 +490,7 @@ class MC4WP_Forms_Admin {
 			site_url( '/', 'admin' )
 		);
 
-		require dirname( __FILE__ ) . '/views/edit-form.php';
+		require __DIR__ . '/views/edit-form.php';
 	}
 
 	/**
@@ -424,7 +502,7 @@ class MC4WP_Forms_Admin {
 		$mailchimp       = new MC4WP_MailChimp();
 		$lists           = $mailchimp->get_lists();
 		$number_of_lists = count( $lists );
-		require dirname( __FILE__ ) . '/views/add-form.php';
+		require __DIR__ . '/views/add-form.php';
 	}
 
 	/**

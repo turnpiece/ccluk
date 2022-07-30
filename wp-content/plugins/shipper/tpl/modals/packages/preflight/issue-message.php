@@ -6,36 +6,36 @@
  * @package shipper
  */
 
-if ( ! in_array( $check_type, array( 'file_sizes', 'file_names', 'package_size' ) ) ) {
+if ( ! in_array( $check_type, array( 'file_sizes', 'file_names', 'package_size' ), true ) ) {
 	echo wp_kses_post( $message );
 	return;
 }
-?>
-<?php if ( 'package_size' === $check_type ) { ?>
-	<?php
-		$estimate = new Shipper_Model_Stored_Estimate;
-		$size = size_format( $estimate->get( 'package_size' ) );
+
+if ( 'package_size' === $check_type ) {
+	$estimate = new Shipper_Model_Stored_Estimate();
+	$size     = size_format( $estimate->get( 'package_size' ) );
 	?>
+
 	<div class="shipper-package_size" data-size="<?php echo esc_attr( $size ); ?>">
 		<p class="shipper-issues-intro">
 			<?php echo wp_kses_post( $message ); ?>
 		</p>
 	</div>
-	<?php return; ?>
-<?php } ?>
+
+	<?php
+	return;
+}
+?>
+
 <div class="shipper-wizard-result-files">
 	<p class="shipper-issues-intro">
-<?php if ( 'file_sizes' === $check_type ) { ?>
-	<?php esc_html_e(
-		'Files over 8MB are listed below. Large files such as media files or backups can cause timeout issues on some budget hosts during the migration. We recommend excluding them from the migration and uploading them via FTP to your destination.',
-		'shipper'
-	); ?>
-<?php } else if ( 'file_names' === $check_type ) { ?>
-	<?php esc_html_e(
-		'Files with names longer than 256 characters are listed below. Files with large names can cause issues on some hosts. We recommend excluding them from the migration and uploading them via FTP to your destination.',
-		'shipper'
-	); ?>
-<?php } ?>
+		<?php
+		if ( 'file_sizes' === $check_type ) {
+			esc_html_e( 'Files over 8MB are listed below. Large files such as media files or backups can cause timeout issues on some budget hosts during the migration. We recommend excluding them from the migration and uploading them via FTP to your destination.', 'shipper' );
+		} elseif ( 'file_names' === $check_type ) {
+			esc_html_e( 'Files with names longer than 256 characters are listed below. Files with large names can cause issues on some hosts. We recommend excluding them from the migration and uploading them via FTP to your destination.', 'shipper' );
+		}
+		?>
 	</p>
 
 <hr />
@@ -57,7 +57,7 @@ if ( ! in_array( $check_type, array( 'file_sizes', 'file_names', 'package_size' 
 				<label class="sui-label">
 					<span><?php esc_html_e( 'Type', 'shipper' ); ?></span>
 				</label>
-				<select name="shipper-filter-extension">
+				<select name="shipper-filter-extension" class="sui-select">
 					<option value=""><?php esc_html_e( 'Any', 'shipper' ); ?></option>
 					<option value="zip"><?php esc_html_e( 'Archive', 'shipper' ); ?></option>
 				</select>
@@ -76,7 +76,7 @@ if ( ! in_array( $check_type, array( 'file_sizes', 'file_names', 'package_size' 
 					</div>
 					<div class="sui-col">
 						<label class="sui-label"><span>&nbsp;</span></label>
-						<select>
+						<select class="sui-select">
 							<option value=""><?php esc_html_e( 'Mb', 'shipper' ); ?></option>
 						</select>
 					</div>
@@ -120,17 +120,16 @@ if ( ! in_array( $check_type, array( 'file_sizes', 'file_names', 'package_size' 
 	</span>
 </div>
 
-
 <?php
-	echo preg_replace(
+// phpcs:disable
+echo preg_replace(
 		'/' . preg_quote( '{{', '/' ) .
 		'shipper-nonce-placeholder' .
 		preg_quote( '}}', '/' ) . '/',
 		wp_create_nonce( 'shipper_path_toggle' ),
 		$message
 	);
+// phpcs:enable
 ?>
-
-
-<?php $this->render( 'pages/preflight/wizard-files-result-pagination' ); ?>
+<?php $this->render( 'pages/preflight/wizard-files-result-pagination', array( 'hide_filter' => true ) ); ?>
 </div>

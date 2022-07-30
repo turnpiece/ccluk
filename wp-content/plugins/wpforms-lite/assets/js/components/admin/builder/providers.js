@@ -1,4 +1,4 @@
-/* global WPForms, jQuery, Map, wpforms_builder, wpforms_builder_providers, _ */
+/* global wpforms_builder, wpforms_builder_providers, wpf */
 
 var WPForms = window.WPForms || {};
 WPForms.Admin = WPForms.Admin || {};
@@ -51,7 +51,16 @@ WPForms.Admin.Builder.Providers = WPForms.Admin.Builder.Providers || ( function(
 				'wpforms-providers-builder-content-connection-fields',
 				'wpforms-providers-builder-content-connection-conditionals'
 			]
-		}
+		},
+
+		/**
+		 * Form fields for the current state.
+		 *
+		 * @since 1.6.1.2
+		 *
+		 * @type {object}
+		 */
+		fields: {},
 	};
 
 	/**
@@ -88,7 +97,7 @@ WPForms.Admin.Builder.Providers = WPForms.Admin.Builder.Providers || ( function(
 		 *
 		 * @type {object}
 		 */
-		spinner: '<i class="fa fa-circle-o-notch fa-spin wpforms-button-icon" />',
+		spinner: '<i class="wpforms-loading-spinner wpforms-loading-inline"></i>',
 
 		/**
 		 * All ajax requests are grouped together with own properties.
@@ -96,6 +105,7 @@ WPForms.Admin.Builder.Providers = WPForms.Admin.Builder.Providers || ( function(
 		 * @since 1.4.7
 		 */
 		ajax: {
+
 			/**
 			 * Merge custom AJAX data object with defaults.
 			 *
@@ -103,14 +113,16 @@ WPForms.Admin.Builder.Providers = WPForms.Admin.Builder.Providers || ( function(
 			 * @since 1.5.9 Added a new parameter - provider
 			 *
 			 * @param {string} provider Current provider slug.
-			 * @param {object} custom AJAX data object with custom settings.
+			 * @param {object} custom Ajax data object with custom settings.
 			 *
-			 * @returns {Object}
+			 * @returns {object} Ajax data.
 			 */
 			_mergeData: function( provider, custom ) {
 
 				var data = {
-					id: $( '#wpforms-builder-form' ).data( 'id' ),
+					id: app.form.data( 'id' ),
+					// eslint-disable-next-line camelcase
+					revision_id: app.form.data( 'revision' ),
 					nonce: wpforms_builder.nonce,
 					action: 'wpforms_builder_provider_ajax_' + provider,
 				};
@@ -373,7 +385,7 @@ WPForms.Admin.Builder.Providers = WPForms.Admin.Builder.Providers || ( function(
 		init: function() {
 
 			// Do that when DOM is ready.
-			$( document ).ready( app.ready );
+			$( app.ready );
 		},
 
 		/**
@@ -381,10 +393,14 @@ WPForms.Admin.Builder.Providers = WPForms.Admin.Builder.Providers || ( function(
 		 * Should be hooked into in addons, that need to work with DOM, templates etc.
 		 *
 		 * @since 1.4.7
+		 * @since 1.6.1.2 Added initialization for `__private.fields` property.
 		 */
 		ready: function() {
 
-			app.panelHolder = $( '#wpforms-panel-providers' );
+			// Save a current form fields state.
+			__private.fields = $.extend( {}, wpf.getFields( false, true ) );
+
+			app.panelHolder = $( '#wpforms-panel-providers, #wpforms-panel-settings' );
 
 			app.Templates = WPForms.Admin.Builder.Templates;
 			app.Templates.add( __private.config.templates );
@@ -399,13 +415,14 @@ WPForms.Admin.Builder.Providers = WPForms.Admin.Builder.Providers || ( function(
 		 * Process all generic actions/events, mostly custom that were fired by our API.
 		 *
 		 * @since 1.4.7
+		 * @since 1.6.1.2 Added a calling `app.updateMapSelects()` method.
 		 */
 		bindActions: function() {
 
 			// On Form save - notify user about required fields.
 			$( document ).on( 'wpformsSaved', function() {
 
-				var $connectionBlocks = $( '#wpforms-panel-providers' ).find( '.wpforms-builder-provider-connection' );
+				var $connectionBlocks = app.panelHolder.find( '.wpforms-builder-provider-connection' );
 
 				if ( ! $connectionBlocks.length ) {
 					return;
@@ -456,6 +473,11 @@ WPForms.Admin.Builder.Providers = WPForms.Admin.Builder.Providers || ( function(
 						isShownOnce = true;
 					}
 				} );
+
+				// On "Fields" page additional update provider's field mapped items.
+				if ( 'fields' === wpf.getQueryString( 'view' ) ) {
+					app.updateMapSelects( $connectionBlocks );
+				}
 			} );
 
 			/*
@@ -463,12 +485,103 @@ WPForms.Admin.Builder.Providers = WPForms.Admin.Builder.Providers || ( function(
 			 * This will prevent a please-save-prompt to appear, when navigating
 			 * out and back to Marketing tab without doing any changes anywhere.
 			 */
-			$( '#wpforms-panel-providers' ).on( 'connectionRendered', function() {
+			app.panelHolder.on( 'connectionRendered', function() {
 
 				if ( wpf.initialSave === true ) {
-					wpf.savedState = wpf.getFormState( '#wpforms-builder-form');
+					wpf.savedState = wpf.getFormState( '#wpforms-builder-form' );
 				}
 			} );
+		},
+
+		/**
+		 * Update selects for mapping if any form fields was added, deleted or changed.
+		 *
+		 * @since 1.6.1.2
+		 *
+		 * @param {object} $connections jQuery selector for active conenctions.
+		 */
+		updateMapSelects: function( $connections ) {
+
+			var fields = $.extend( {}, wpf.getFields() ),
+				currentSaveFields,
+				prevSaveFields;
+
+			// We should to detect changes for labels only.
+			currentSaveFields = _.mapObject( fields, function( field, key ) {
+
+				return field.label;
+			} );
+			prevSaveFields    = _.mapObject( __private.fields, function( field, key ) {
+
+				return field.label;
+			} );
+
+			// Check if form has any fields and if they have changed labels after previous saving process.
+			if (
+				( _.isEmpty( currentSaveFields ) && _.isEmpty( prevSaveFields ) ) ||
+				( JSON.stringify( currentSaveFields ) === JSON.stringify( prevSaveFields ) )
+			) {
+				return;
+			}
+
+			// Prepare a current form field IDs.
+			var fieldIds = Object.keys( currentSaveFields )
+				.map( function( id ) {
+
+					return parseInt( id, 10 );
+				} );
+
+			// Determine deleted field IDs - it's a diff between previous and current form state.
+			var deleted = Object.keys( prevSaveFields )
+				.map( function( id ) {
+
+					return parseInt( id, 10 );
+				} )
+				.filter( function( id ) {
+
+					return ! fieldIds.includes( id );
+				} );
+
+			// Remove from mapping selects "deleted" fields.
+			for ( var index = 0; index < deleted.length; index++ ) {
+				$( '.wpforms-builder-provider-connection-fields-table .wpforms-builder-provider-connection-field-value option[value="' + deleted[ index ] + '"]', $connections ).remove();
+			}
+
+			var label, $exists;
+			for ( var id in fields ) {
+
+				// Prepare the label.
+				if ( typeof fields[ id ].label !== 'undefined' && fields[ id ].label.toString().trim() !== '' ) {
+					label = wpf.sanitizeHTML( fields[ id ].label.toString().trim() );
+				} else {
+					label = wpforms_builder.field + ' #' + id;
+				}
+
+				// Try to find all select options by value.
+				$exists = $( '.wpforms-builder-provider-connection-fields-table .wpforms-builder-provider-connection-field-value option[value="' + id + '"]', $connections );
+
+				// If no option was found - add a new one for all selects.
+				if ( ! $exists.length ) {
+					$( '.wpforms-builder-provider-connection-fields-table .wpforms-builder-provider-connection-field-value', $connections ).append( $( '<option>', { value: id, text: label } ) );
+					continue;
+				}
+
+				// Update a field label if a previous and current labels not equal.
+				if ( wpf.sanitizeHTML( fields[ id ].label ) !== wpf.sanitizeHTML( prevSaveFields[ id ] ) ) {
+					$exists.text( label );
+				}
+			}
+
+			// If selects for mapping was changed, that whole form state was changed as well.
+			// That's why we need to re-save it.
+			if ( wpf.savedState !== wpf.getFormState( '#wpforms-builder-form' ) ) {
+				wpf.savedState = wpf.getFormState( '#wpforms-builder-form' );
+			}
+
+			// Save form fields state for next saving process.
+			__private.fields = fields;
+
+			app.panelHolder.trigger( 'WPForms.Admin.Builder.Providers.updatedMapSelects', [ $connections, fields ] );
 		},
 
 		/**
@@ -517,7 +630,7 @@ WPForms.Admin.Builder.Providers = WPForms.Admin.Builder.Providers || ( function(
 
 						var $table = $( this ).parents( '.wpforms-builder-provider-connection-fields-table' ),
 							$clone = $table.find( 'tr' ).last().clone( true ),
-							nextID = parseInt( /\[(\d+)\]/g.exec( $clone.find( '.wpforms-builder-provider-connection-field-name' ).attr( 'name' ) )[ 1 ], 10 ) + 1;
+							nextID = parseInt( /\[.+]\[.+]\[.+]\[(\d+)]/.exec( $clone.find( '.wpforms-builder-provider-connection-field-name' ).attr( 'name' ) )[ 1 ], 10 ) + 1;
 
 						// Clear the row and increment the counter.
 						$clone.find( '.wpforms-builder-provider-connection-field-name' )
@@ -542,9 +655,37 @@ WPForms.Admin.Builder.Providers = WPForms.Admin.Builder.Providers || ( function(
 						$row.remove();
 					} );
 
-				// CONNECTION: Rendered.
-				$( '#wpforms-panel-providers' ).on( 'connectionRendered', function( e, provider, connectionId ) {
+				// CONNECTION: Generated.
+				app.panelHolder.on( 'connectionGenerated', function( e, data ) {
+
 					wpf.initTooltips();
+
+					// Hide provider default settings screen.
+					$( this )
+						.find( '.wpforms-builder-provider-connection[data-connection_id="' + data.connection.id + '"]' )
+						.closest( '.wpforms-panel-content-section' )
+						.find( '.wpforms-builder-provider-connections-default' )
+						.addClass( 'wpforms-hidden' );
+				} );
+
+				// CONNECTION: Rendered.
+				app.panelHolder.on( 'connectionRendered', function( e, provider, connectionId ) {
+
+					wpf.initTooltips();
+
+					// Some our addons have another arguments for this trigger.
+					// We will fix it asap.
+					if ( typeof connectionId === 'undefined' ) {
+						if ( ! _.isObject( provider ) || ! _.has( provider, 'connection_id' ) ) {
+							return;
+						}
+						connectionId = provider.connection_id;
+					}
+
+					// If connection has mapped select fields - call `wpformsFieldUpdate` trigger.
+					if ( $( this ).find( '.wpforms-builder-provider-connection[data-connection_id="' + connectionId + '"] .wpforms-field-map-select' ).length ) {
+						wpf.fieldUpdate();
+					}
 				} );
 			},
 
@@ -561,11 +702,9 @@ WPForms.Admin.Builder.Providers = WPForms.Admin.Builder.Providers || ( function(
 
 				$.confirm( {
 					title: false,
-					content: wpforms_builder_providers.prompt_connection.replace( /%type%/g, 'connection' )
-					+ '<input autofocus="" type="text" id="wpforms-builder-provider-connection-name" placeholder="' + wpforms_builder_providers.prompt_placeholder + '">'
-					+ '<p class="error">' + wpforms_builder_providers.error_name + '</p>',
-					backgroundDismiss: false,
-					closeIcon: false,
+					content: wpforms_builder_providers.prompt_connection.replace( /%type%/g, 'connection' ) +
+						'<input autofocus="" type="text" id="wpforms-builder-provider-connection-name" placeholder="' + wpforms_builder_providers.prompt_placeholder + '">' +
+						'<p class="error">' + wpforms_builder_providers.error_name + '</p>',
 					icon: 'fa fa-info-circle',
 					type: 'blue',
 					buttons: {
@@ -585,7 +724,7 @@ WPForms.Admin.Builder.Providers = WPForms.Admin.Builder.Providers || ( function(
 								} else {
 									app.getProviderHolder( provider ).trigger( 'connectionCreate', [ name ] );
 								}
-							}
+							},
 						},
 						cancel: {
 							text: wpforms_builder.cancel,
@@ -601,8 +740,8 @@ WPForms.Admin.Builder.Providers = WPForms.Admin.Builder.Providers || ( function(
 			 * @since 1.4.7
 			 * @since 1.5.9 Added a new parameter - provider.
 			 *
-			 * @param {string} provider Current provider slug.
-			 * @param {Object} $connection jQuery DOM element for a connection.
+			 * @param {string} provider    Current provider slug.
+			 * @param {object} $connection jQuery DOM element for a connection.
 			 */
 			connectionDelete: function( provider, $connection ) {
 
@@ -621,17 +760,24 @@ WPForms.Admin.Builder.Providers = WPForms.Admin.Builder.Providers || ( function(
 								// We need this BEFORE removing, as some handlers might need DOM element.
 								app.getProviderHolder( provider ).trigger( 'connectionDelete', [ $connection ] );
 
+								var $section = $connection.closest( '.wpforms-panel-content-section' );
+
 								$connection.fadeOut( 'fast', function() {
+
 									$( this ).remove();
 
 									app.getProviderHolder( provider ).trigger( 'connectionDeleted', [ $connection ] );
+
+									if ( ! $section.find( '.wpforms-builder-provider-connection' ).length ) {
+										$section.find( '.wpforms-builder-provider-connections-default' ).removeClass( 'wpforms-hidden' );
+									}
 								} );
-							}
+							},
 						},
 						cancel: {
-							text: wpforms_builder.cancel
-						}
-					}
+							text: wpforms_builder.cancel,
+						},
+					},
 				} );
 			},
 
@@ -648,7 +794,7 @@ WPForms.Admin.Builder.Providers = WPForms.Admin.Builder.Providers || ( function(
 				 *
 				 * @since 1.4.8
 				 *
-				 * @param {String}
+				 * @param {string}
 				 */
 				provider: '',
 
@@ -667,7 +813,7 @@ WPForms.Admin.Builder.Providers = WPForms.Admin.Builder.Providers || ( function(
 				 *
 				 * @since 1.4.8
 				 *
-				 * @param {String} provider
+				 * @param {string} provider Provider slug.
 				 */
 				setProvider: function( provider ) {
 					this.provider = provider;
@@ -813,11 +959,11 @@ WPForms.Admin.Builder.Providers = WPForms.Admin.Builder.Providers || ( function(
 		 *
 		 * @since 1.4.7
 		 *
-		 * @returns {Object} jQuery DOM element.
+		 * @returns {object} jQuery DOM element.
 		 */
 		getProviderHolder: function( provider ) {
 			return $( '#' + provider + '-provider' );
-		}
+		},
 	};
 
 	// Provide access to public functions/properties.

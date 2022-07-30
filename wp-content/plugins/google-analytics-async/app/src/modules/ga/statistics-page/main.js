@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './app'
 import store from '@/store/store'
+import { VuePlugin } from 'vuera'
 import Fragment from 'vue-fragment'
 import { sprintf } from 'sprintf-js'
 import {
@@ -11,8 +12,6 @@ import {
 	isMultisite,
 	isSubsite,
 	isNetworkWide,
-	isSuperAdmin,
-	isAdmin
 } from '@/helpers/utils'
 
 Vue.config.productionTip = false
@@ -28,19 +27,18 @@ Vue.mixin({
 		isMultisite,
 		isSubsite,
 		isNetworkWide,
-		isSuperAdmin,
-		isAdmin
 	},
-});
+})
 
 // Global vars.
 Vue.prototype.$i18n = window.beehiveI18n
 Vue.prototype.$vars = window.beehiveVars
 Vue.prototype.$moduleVars = window.beehiveModuleVars
 
+Vue.use(VuePlugin)
 Vue.use(Fragment.Plugin)
 
 new Vue({
-	render: h => h(App),
-	store
+	render: (h) => h(App),
+	store,
 }).$mount('#beehive-statistics-app')

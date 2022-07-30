@@ -49,7 +49,7 @@
 		if ( is_super_admin() || current_user_can( $post_type_object->cap->edit_others_posts ) ) :
 			$users_opt = [
 				'hide_if_only_one_author' => false,
-				'who' => 'authors',
+				'capability' => 'edit_posts',
 				'name' => 'post_author',
 				'id' => 'post_author',
 				'class'=> 'authors',
@@ -77,7 +77,7 @@
 		</div>
 		<?php endif; ?>
 
-		<?php if ( $this->post_type->name == 'page' && $this->user->canSortPages() && !$this->listing_repo->isSearch() ) : ?>
+		<?php if ( $this->post_type->name == 'page' && $this->user->canSortPosts($this->post_type->name) && !$this->listing_repo->isSearch() ) : ?>
 		<div class="form-control full checkbox">
 			<label>
 				<input type="checkbox" name="nav_status" class="np_nav_status" value="hide" />

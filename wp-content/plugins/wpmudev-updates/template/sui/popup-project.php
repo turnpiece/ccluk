@@ -113,7 +113,6 @@ if ( ! $res->is_installed ) {
 			),
 		);
 	}
-
 } else {
 	/*
 	 * Plugin is installed.
@@ -122,7 +121,7 @@ if ( ! $res->is_installed ) {
 	$is_single_action = false;
 	$actions_icon     = 'sui-icon-widget-settings-config';
 
-	//update always prioritized
+	// update always prioritized.
 	if ( $res->has_update ) {
 		$main_action = array(
 			'name' => __( 'Update', 'wpmudev' ),
@@ -148,7 +147,7 @@ if ( ! $res->is_installed ) {
 			),
 		);
 
-		//activate/deactivate, configure, delete
+		// activate/deactivate, configure, delete.
 		if ( $res->is_active ) {
 			$actions['deactivate'] = array(
 				'name' => ( $res->is_network_admin ? __( 'Network Deactivate', 'wpmudev' ) : __( 'Deactivate', 'wpmudev' ) ),

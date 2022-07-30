@@ -1,12 +1,11 @@
 <?php
 /**
- * \PHPCompatibility\Sniffs\UseDeclarations\NewGroupUseDeclarationsSniff.
+ * PHPCompatibility, an external standard for PHP_CodeSniffer.
  *
- * PHP version 7.0
- *
- * @category PHP
- * @package  PHPCompatibility
- * @author   Wim Godden <wim.godden@cu.be>
+ * @package   PHPCompatibility
+ * @copyright 2012-2019 PHPCompatibility Contributors
+ * @license   https://opensource.org/licenses/LGPL-3.0 LGPL3
+ * @link      https://github.com/PHPCompatibility/PHPCompatibility
  */
 
 namespace PHPCompatibility\Sniffs\UseDeclarations;
@@ -16,18 +15,30 @@ use PHP_CodeSniffer_File as File;
 use PHP_CodeSniffer_Tokens as Tokens;
 
 /**
- * \PHPCompatibility\Sniffs\UseDeclarations\NewGroupUseDeclarationsSniff.
+ * Detect group use declarations as introduced in PHP 7.0.
+ *
+ * Checks for:
+ * - Group use statements as introduced in PHP 7.0.
+ * - Trailing comma's in group use statements as allowed since PHP 7.2.
  *
  * PHP version 7.0
+ * PHP version 7.2
  *
- * @category PHP
- * @package  PHPCompatibility
- * @author   Wim Godden <wim.godden@cu.be>
+ * @link https://www.php.net/manual/en/migration70.new-features.php#migration70.new-features.group-use-declarations
+ * @link https://www.php.net/manual/en/migration72.new-features.php#migration72.new-features.trailing-comma-in-grouped-namespaces
+ * @link https://wiki.php.net/rfc/group_use_declarations
+ * @link https://wiki.php.net/rfc/list-syntax-trailing-commas
+ * @link https://www.php.net/manual/en/language.namespaces.importing.php#language.namespaces.importing.group
+ *
+ * @since 7.0.0
+ * @since 8.0.1 Now also checks for trailing comma's in group `use` declarations.
  */
 class NewGroupUseDeclarationsSniff extends Sniff
 {
     /**
      * Returns an array of tokens this test wants to listen for.
+     *
+     * @since 7.0.0
      *
      * @return array
      */
@@ -43,6 +54,8 @@ class NewGroupUseDeclarationsSniff extends Sniff
 
     /**
      * Processes this test, when one of its tokens is encountered.
+     *
+     * @since 7.0.0
      *
      * @param \PHP_CodeSniffer_File $phpcsFile The file being scanned.
      * @param int                   $stackPtr  The position of the current token in

@@ -20,7 +20,7 @@ class Shipper_Helper_Assets {
 	 *
 	 * @return string
 	 */
-	static public function get_page_class( $page_sfx, $model = false ) {
+	public static function get_page_class( $page_sfx, $model = false ) {
 		return self::get_wrap_class( "shipper-page-{$page_sfx}", $model );
 	}
 
@@ -32,9 +32,9 @@ class Shipper_Helper_Assets {
 	 *
 	 * @return string
 	 */
-	static public function get_wrap_class( $page, $model = false ) {
+	public static function get_wrap_class( $page, $model = false ) {
 		if ( empty( $model ) ) {
-			$model = new Shipper_Model_Stored_Options;
+			$model = new Shipper_Model_Stored_Options();
 		}
 		$cls = array( $page, 'sui-wrap' );
 
@@ -63,9 +63,9 @@ class Shipper_Helper_Assets {
 		$relpath = 'assets/' . ltrim( $relpath, '/' );
 
 		if (
-			! (defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG)
+			! ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG )
 			&&
-			! (defined( 'WDEV_UNMINIFIED' ) && WDEV_UNMINIFIED)
+			! ( defined( 'WDEV_UNMINIFIED' ) && WDEV_UNMINIFIED )
 		) {
 			$relpath = $this->get_minified_asset_relpath( $relpath );
 		}
@@ -82,7 +82,8 @@ class Shipper_Helper_Assets {
 	 */
 	public function get_minified_asset_relpath( $relpath ) {
 		$type = $this->get_asset_type( $relpath );
-		if ( 'js' !== $type && 'css' !== $type ) { return $relpath; } // Assets not ready to be minified.
+		if ( 'js' !== $type && 'css' !== $type ) {
+			return $relpath; } // Assets not ready to be minified.
 
 		return preg_replace(
 			'/' . preg_quote( ".{$type}", '/' ) . '$/i',
@@ -109,7 +110,7 @@ class Shipper_Helper_Assets {
 	 *
 	 * @return int|string Update interval
 	 */
-	static public function get_update_interval() {
+	public static function get_update_interval() {
 
 		/**
 		 * Gets the update interval for Heartbeat API
@@ -129,7 +130,7 @@ class Shipper_Helper_Assets {
 	 *
 	 * @return string
 	 */
-	static public function get_shipper_icon() {
+	public static function get_shipper_icon() {
 		/**
 		 * Returns FS path to shipper icon.
 		 *
@@ -150,14 +151,14 @@ class Shipper_Helper_Assets {
 	 *
 	 * @return string
 	 */
-	static public function get_encoded_icon() {
+	public static function get_encoded_icon() {
 		$icon = self::get_shipper_icon();
 		if ( ! is_readable( $icon ) ) {
 			return '';
 		}
 
-		$icon = file_get_contents( $icon );
-		return 'data:image/svg+xml;base64,' . base64_encode( $icon );
+		$icon = file_get_contents( $icon ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+		return 'data:image/svg+xml;base64,' . base64_encode( $icon ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode
 	}
 
 	/**
@@ -165,7 +166,7 @@ class Shipper_Helper_Assets {
 	 *
 	 * @return bool
 	 */
-	static public function is_branding_hidden() {
+	public static function is_branding_hidden() {
 		return (bool) apply_filters(
 			'wpmudev_branding_hide_branding',
 			false
@@ -177,7 +178,7 @@ class Shipper_Helper_Assets {
 	 *
 	 * @return string
 	 */
-	static public function get_custom_hero_image() {
+	public static function get_custom_hero_image() {
 		return apply_filters( 'wpmudev_branding_hero_image', '' );
 	}
 
@@ -186,7 +187,7 @@ class Shipper_Helper_Assets {
 	 *
 	 * @return bool
 	 */
-	static public function has_custom_hero_image() {
+	public static function has_custom_hero_image() {
 		return ! empty( self::get_custom_hero_image() );
 	}
 
@@ -197,7 +198,7 @@ class Shipper_Helper_Assets {
 	 *
 	 * @return string
 	 */
-	static public function get_custom_hero_image_markup() {
+	public static function get_custom_hero_image_markup() {
 		if ( ! self::has_custom_hero_image() ) {
 			return '';
 		}
@@ -212,7 +213,7 @@ class Shipper_Helper_Assets {
 	 *
 	 * @return string
 	 */
-	static public function get_custom_footer( $default = '' ) {
+	public static function get_custom_footer( $default = '' ) {
 		return apply_filters( 'wpmudev_branding_footer_text', $default );
 	}
 
@@ -221,7 +222,7 @@ class Shipper_Helper_Assets {
 	 *
 	 * @return bool
 	 */
-	static public function has_custom_footer() {
+	public static function has_custom_footer() {
 		return false !== self::get_custom_footer( false );
 	}
 
@@ -230,7 +231,7 @@ class Shipper_Helper_Assets {
 	 *
 	 * @return true
 	 */
-	static public function has_docs_links() {
+	public static function has_docs_links() {
 		return ! apply_filters( 'wpmudev_branding_hide_doc_link', false );
 	}
 
@@ -241,13 +242,34 @@ class Shipper_Helper_Assets {
 	 *
 	 * @return string Footer (HTML)
 	 */
-	static function get_footer_text() {
+	public static function get_footer_text() {
 		if ( self::has_custom_footer() ) {
 			return self::get_custom_footer();
 		}
 		return sprintf(
+			/* translators: %s: love icon*/
 			__( 'Made with %s by WPMU DEV', 'shipper' ),
 			'<i class="sui-icon-heart" aria-hidden="true"></i>'
+		);
+	}
+
+	/**
+	 * Get shipper image relative|absolute path
+	 *
+	 * @since 1.2.6
+	 *
+	 * @param string $name name of the image.
+	 * @param bool   $abs_path Whether to return absolute or relative path.
+	 *
+	 * @return string
+	 */
+	public static function get_image( $name, $abs_path = false ) {
+		$plugin_url_func = $abs_path ? 'plugin_dir_path' : 'plugin_dir_url';
+
+		return apply_filters(
+			'shipper_assets_get_image',
+			$plugin_url_func( SHIPPER_PLUGIN_FILE ) . 'assets/img/' . $name,
+			$name
 		);
 	}
 }

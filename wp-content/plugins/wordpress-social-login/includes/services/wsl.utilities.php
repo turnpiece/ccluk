@@ -2,8 +2,8 @@
 /*!
 * WordPress Social Login
 *
-* http://miled.github.io/wordpress-social-login/ | https://github.com/miled/wordpress-social-login
-*  (c) 2011-2015 Mohamed Mrassi and contributors | http://wordpress.org/plugins/wordpress-social-login/
+* https://miled.github.io/wordpress-social-login/ | https://github.com/miled/wordpress-social-login
+*   (c) 2011-2020 Mohamed Mrassi and contributors | https://wordpress.org/plugins/wordpress-social-login/
 */
 
 /**
@@ -92,6 +92,9 @@ function wsl_get_current_url()
 
 	//Remove standard ports
 	$request_port = (!in_array($request_port, array (80, 443)) ? $request_port : '');
+
+	//Ignore $request_port if $request_host already contains it
+	$request_port = ( substr_compare( $request_host, ":$request_port", -strlen( ":$request_port" ) ) === 0 ? '' : $request_port );
 
 	//Build url
 	$current_url = $request_protocol . '://' . $request_host . ( ! empty ($request_port) ? (':'.$request_port) : '') . $request_uri;
@@ -188,7 +191,7 @@ function wsl_display_dev_mode_debugging_area( $keyword = 'wsl_' )
 	<table class="wsl-dev-table">
 		<tr>
 			<td colspan="3">
-				1. SAVEQUERIES should be defined and set to TRUE in order for the queries to show up (http://codex.wordpress.org/Editing_wp-config.php#Save_queries_for_analysis)
+				1. SAVEQUERIES should be defined and set to TRUE in order for the queries to show up (https://wordpress.org/support/article/editing-wp-config-php/#save-queries-for-analysis)
 				<br />
 				2. Calls for get_option() don't necessarily result on a query to the database. WP use both cache and wp_load_alloptions() to load all options at once. Hence, it won't be shown here.
 			</td>

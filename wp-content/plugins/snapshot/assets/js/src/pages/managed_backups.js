@@ -24,25 +24,25 @@
 
 		$('input[name="wps-managed-backups-menu"]').on('change', function (e) {
 			var value = $(this).filter(':checked').val();
-			$('select[name="wps-managed-backups-menu-mobile"]').val(value).change();
+			$('select[name="wps-managed-backups-menu-mobile"]').val(value).trigger('change');
 			$('.wps-managed-backups-pages > .wpmud-box').addClass('hidden').filter('.' + value).removeClass('hidden');
 		});
 
 		$('select[name="wps-managed-backups-menu-mobile"]').on('change', function (e) {
 			var value = $(this).val();
-			$('input[name="wps-managed-backups-menu"][value="' + value + '"]').attr('checked', 'checked');
+			$('input[name="wps-managed-backups-menu"][value="' + value + '"]').prop('checked', true);
 			$('.wps-managed-backups-pages > .wpmud-box').addClass('hidden').filter('.' + value).removeClass('hidden');
 		});
 
 		$("#wps-managed-backups-configure").on("click", function (e) {
 			e.preventDefault();
-			$("[for='wps-managed-backups-menu-config']").click();
+			$("[for='wps-managed-backups-menu-config']").trigger('click');
 			$('html,body').animate({
 				scrollTop: $(".wps-managed-backups-configs").offset().top
 			}, 'slow');
 		});
 
-		$("input[name='managed-backup-exclusions']").change(function () {
+		$("input[name='managed-backup-exclusions']").on('change', function () {
 			var global_exclusions = jQuery("input[name='managed-backup-exclusions']:checked").val();
 			if (global_exclusions === "global") {
 				$('div#managed-backup-exclusions-config').slideUp();
@@ -50,10 +50,10 @@
 				$('div#managed-backup-exclusions-config').slideDown();
 
 			}
-		}).change();
+		}).trigger('change');
 
 		$("#my-backup-all").on('change', function () {
-			$('input[id^="my-backup"]').attr('checked', $(this).is(':checked'));
+			$('input[id^="my-backup"]').prop('checked', $(this).is(':checked'));
 		});
 
 		$("#wps-managed-backups-onoff").on('change', function (e) {
@@ -91,11 +91,11 @@
             var $freq = $('#managed-backup-update select[name="frequency"]');
             if (!$freq.length) return false;
 
-            $(".select-container.offset").hide().find("select").attr("disabled", true);
-            $(".select-container #frequency").attr("disabled", false);
-            $(".select-container #schedule_time").attr("disabled", false);
+            $(".select-container.offset").hide().find("select").prop("disabled", true);
+            $(".select-container #frequency").prop("disabled", false);
+            $(".select-container #schedule_time").prop("disabled", false);
             var $el = $(".select-container.offset." + $freq.val());
-            if ($el.length) $el.show().find("select").attr("disabled", false);
+            if ($el.length) $el.show().find("select").prop("disabled", false);
 
             // Handle the day label toggling.
             if ($freq.val() === 'weekly') {

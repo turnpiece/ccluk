@@ -1,10 +1,6 @@
 <template>
 	<div class="sui-box sui-message sui-message-lg">
-		<image-tag
-			src="gtm/activate.png"
-			class="sui-image"
-			v-if="!$vars.whitelabel.hide_branding"
-		/>
+		<whitelabel-image-tag src="gtm/activate.png" class="sui-image" />
 
 		<div class="sui-message-content">
 			<p>{{ $i18n.desc.activate_gtm }}</p>
@@ -33,12 +29,12 @@
 </template>
 
 <script>
-import ImageTag from '@/components/elements/image-tag'
+import WhitelabelImageTag from '@/components/elements/whitelabel-image-tag'
 
 export default {
 	name: 'ActivationBox',
 
-	components: { ImageTag },
+	components: { WhitelabelImageTag },
 
 	data() {
 		return {

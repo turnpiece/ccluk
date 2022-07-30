@@ -10,7 +10,7 @@
 			>
 				<whitelabel-banner
 					src="onboarding/tracking.png"
-					:alt="$i18n.label.add_tracking_id"
+					:alt="$i18n.label.add_measurement_id"
 				/>
 
 				<button
@@ -37,14 +37,14 @@
 					</span>
 				</button>
 				<h3 class="sui-box-title sui-lg">
-					{{ $i18n.label.add_tracking_id }}
+					{{ $i18n.label.add_measurement_id }}
 				</h3>
 				<p
 					class="sui-description"
 					v-html="
 						sprintf(
-							$i18n.desc.tracking_id,
-							'https://support.google.com/analytics/answer/2763052?hl=en'
+							$i18n.desc.measurement_id,
+							'https://support.google.com/analytics/answer/9539598?hl=en'
 						)
 					"
 				></p>
@@ -58,12 +58,12 @@
 						for="beehive-settings-tracking-code-onboarding"
 						class="sui-label"
 					>
-						{{ $i18n.label.tracking_id }}
+						{{ $i18n.label.measurement_id }}
 					</label>
 					<!-- Tracking ID input -->
-					<tracking-id
+					<measurement-id
 						id="beehive-settings-tracking-code-onboarding"
-						v-model="trackingId"
+						v-model="measurementId"
 						context="onboarding"
 						@validation="handleValidation"
 					/>
@@ -73,7 +73,7 @@
 						role="alert"
 						v-if="error"
 					>
-						{{ $i18n.error.tracking_id }}
+						{{ $i18n.error.measurement_id }}
 					</span>
 				</div>
 			</div>
@@ -83,7 +83,7 @@
 				<button
 					role="button"
 					class="sui-button"
-					:disabled="error || !trackingId"
+					:disabled="error || !measurementId"
 					@click="saveCode"
 				>
 					{{ $i18n.button.save_code }}
@@ -95,14 +95,21 @@
 
 <script>
 import WhitelabelBanner from '@/components/elements/whitelabel-banner'
-import TrackingId from '@/modules/ga/settings/tabs/account/fields/tracking-id'
+import MeasurementId from '@/modules/ga/admin/tabs/account/fields/measurement-id'
 
 export default {
 	name: 'SlideTrackingId',
 
 	components: {
-		TrackingId,
+		MeasurementId,
 		WhitelabelBanner,
+	},
+
+	props: {
+		canContinue: {
+			type: Boolean,
+			default: true,
+		},
 	},
 
 	data() {
@@ -113,18 +120,18 @@ export default {
 
 	computed: {
 		/**
-		 * Computed model object to get tracking ID.
+		 * Computed model object to get measurement ID.
 		 *
 		 * @since 3.2.4
 		 *
 		 * @returns {string}
 		 */
-		trackingId: {
+		measurementId: {
 			get() {
-				return this.getOption('code', 'tracking', '')
+				return this.getOption('measurement', 'tracking', '')
 			},
 			set(value) {
-				this.setOption('code', 'tracking', value)
+				this.setOption('measurement', 'tracking', value)
 			},
 		},
 	},
@@ -158,7 +165,15 @@ export default {
 		 * @since 3.2.4
 		 */
 		slideNext() {
-			SUI.slideModal(this.$parent.modal + '-admin-tracking', null, 'next')
+			// Get next slide ID.
+			let next = this.canContinue ? '-admin-tracking' : '-finishing'
+
+			// Slide to next slide.
+			SUI.slideModal(this.$parent.modal + next, null, 'next')
+
+			if (!this.canContinue) {
+				this.$emit('submit')
+			}
 		},
 	},
 }

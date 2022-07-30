@@ -6,10 +6,10 @@
  * @package shipper
  */
 
-$status = ! empty( $status )
+$status    = ! empty( $status ) // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- this is not WordPress global
 	? $status
 	: 'success';
-$text = ! empty( $text )
+$text      = ! empty( $text )
 	? $text
 	: 0;
 $show_icon = ! empty( $hide )
@@ -17,6 +17,6 @@ $show_icon = ! empty( $hide )
 	: '';
 ?>
 
-<span <?php echo $show_icon; ?> class="sui-tag sui-tag-<?php echo sanitize_html_class( $status ); ?>">
+<span <?php echo esc_attr( $show_icon ); ?> class="sui-tag sui-tag-<?php echo sanitize_html_class( $status ); ?>">
 	<?php echo wp_kses_post( $text ); ?>
 </span>

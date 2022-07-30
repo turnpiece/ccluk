@@ -16,7 +16,7 @@ use Beehive\Monolog\Formatter\LineFormatter;
  *
  * @author Olivier Poitrey <rs@dailymotion.com>
  */
-class BrowserConsoleHandler extends \Beehive\Monolog\Handler\AbstractProcessingHandler
+class BrowserConsoleHandler extends AbstractProcessingHandler
 {
     protected static $initialized = \false;
     protected static $records = array();
@@ -31,7 +31,7 @@ class BrowserConsoleHandler extends \Beehive\Monolog\Handler\AbstractProcessingH
      */
     protected function getDefaultFormatter()
     {
-        return new \Beehive\Monolog\Formatter\LineFormatter('[[%channel%]]{macro: autolabel} [[%level_name%]]{font-weight: bold} %message%');
+        return new LineFormatter('[[%channel%]]{macro: autolabel} [[%level_name%]]{font-weight: bold} %message%');
     }
     /**
      * {@inheritDoc}

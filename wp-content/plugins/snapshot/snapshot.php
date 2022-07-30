@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Snapshot Pro
-Version: 3.2.1.4
+Version: 3.3.2
 Description: This plugin allows you to take quick on-demand backup snapshots of your working WordPress database. You can select from the default WordPress tables as well as custom plugin tables within the database structure. All snapshots are logged, and you can restore the snapshot as needed.
 Author: WPMU DEV
 Author URI: https://premium.wpmudev.org/
@@ -38,7 +38,7 @@ WDP ID: 257
  *
  */
 
-define('SNAPSHOT_VERSION', '3.2.1.4');
+define('SNAPSHOT_VERSION', '3.3.2');
 
 if ( ! defined( 'SNAPSHOT_I18N_DOMAIN' ) ) {
 	define( 'SNAPSHOT_I18N_DOMAIN', 'snapshot' );
@@ -57,6 +57,15 @@ require_once 'new-ui-tester.php';
 if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 
 	class WPMUDEVSnapshot {
+
+		const OPTION_V4_ADMIN_NOTICE_DISMISSED    = 'snapshot3_v4_admin_notice_dismissed';
+		const OPTION_V4_ADMIN_NOTICE_HIDDEN_UNTIL = 'snapshot3_v4_admin_notice_hidden_until';
+		const OPTION_V4_MODAL_DISMISSED           = 'snapshot3_v4_modal_dismissed';
+		const OPTION_V4_MODAL_HIDDEN_UNTIL        = 'snapshot3_v4_modal_hidden_until';
+		const OPTION_V4_NOTICE_HIDDEN_UNTIL       = 'snapshot3_v4_notice_hidden_until';
+		const SNAPSHOT_V4_PROJECT_ID              = 3760011;
+		const SNAPSHOT_V4_PLUGIN_FILE             = 'snapshot-backups/snapshot-backups.php';
+		const SNAPSHOT_V4_PAGE_URL                = 'admin.php?page=snapshot';
 
 		/**
 		 * Singleton instance of the plugin.
@@ -253,6 +262,13 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 			// Allow WP Heartbeat API on WP Engine for Snapshot pages
 			add_filter( 'wpe_heartbeat_allowed_pages', array( $this, 'wpe_allow_heartbeat' ) );
 
+			// "Upgrade to 4.0" prompt
+			add_action( is_multisite() ? 'network_admin_notices' : 'admin_notices', array( $this, 'snapshot_admin_notices_v4_prompt' ) );
+			add_action( 'wp_ajax_snapshot_admin_notice_v4_dismiss', array( $this, 'ajax_admin_notice_v4_dismiss' ) );
+			add_action( 'wp_ajax_snapshot_admin_notice_v4_install', array( $this, 'ajax_admin_notice_v4_install' ) );
+			add_action( 'wp_ajax_snapshot_upgrade_to_v4_modal_dismiss', array( $this, 'ajax_upgrade_to_v4_modal_dismiss' ) );
+			add_action( 'wp_ajax_snapshot_upgrade_to_v4_notice_dismiss', array( $this, 'ajax_upgrade_to_v4_notice_dismiss' ) );
+
 			require_once dirname( __FILE__ ) . '/lib/Snapshot/Helper/Privacy.php';
 			Snapshot_Gdpr::serve();
 
@@ -265,6 +281,11 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 		public function snapshot_check_home_path( $path ) {
 			if ( '/' === $path || 2 > strlen( $path ) ) {
 				$path = ABSPATH;
+			}
+
+			// Flywheel fix.
+			if ( defined( 'FLYWHEEL_CONFIG_DIR' ) ) {
+				$path = trailingslashit( dirname( WP_CONTENT_DIR ) );
 			}
 
 			return $path;
@@ -1414,14 +1435,13 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 						if ( is_object( $drive->client ) ) {
 
 							try {
-								$drive->client->authenticate( $_GET['code'] );
-
-							} catch ( Google_0814_Auth_Exception $e ) {
+								$drive->client->fetchAccessTokenWithAuthCode( filter_input( INPUT_GET, 'code', FILTER_SANITIZE_STRING ) );
+							} catch ( Google_Exception $e ) {
 								$auth_error = true;
 							}
 
 							if ( ! $auth_error ) {
-								$this->config_data['destinations'][ $item ]['access_token'] = $drive->client->getAccessToken();
+								$this->config_data['destinations'][ $item ]['access_token'] = wp_json_encode( $drive->client->getAccessToken() );
 								$this->save_config();
 							}
 						}
@@ -6557,6 +6577,11 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 			}
 
 			delete_option( $this->_settings['options_key'] );
+			delete_option( self::OPTION_V4_ADMIN_NOTICE_DISMISSED );
+			delete_option( self::OPTION_V4_ADMIN_NOTICE_HIDDEN_UNTIL );
+			delete_option( self::OPTION_V4_MODAL_DISMISSED );
+			delete_option( self::OPTION_V4_MODAL_HIDDEN_UNTIL );
+			delete_option( self::OPTION_V4_NOTICE_HIDDEN_UNTIL );
 		}
 
 		/**
@@ -8148,7 +8173,7 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 			$item_files = array();
 			$home_path = apply_filters( 'snapshot_home_path', get_home_path() );
 
-			if ( ( ! isset( $item['files-option'] ) ) || ( ! count( $item['files-option'] ) ) ) {
+			if ( ( ! isset( $item['files-option'] ) ) || ( ! ( is_string( $item['files-option'] ) ? 1 : count( $item['files-option'] ) ) ) ) {
 				return $item_files;
 			}
 
@@ -8775,6 +8800,130 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 				array_push( $heartbeat_allowed_pages, 'admin.php' );
 			}
 			return array_unique( $heartbeat_allowed_pages );
+		}
+
+		public static function get_file_url( $path ) {
+			return plugins_url( $path, __FILE__ );
+		}
+
+		public function snapshot_admin_notices_v4_prompt() {
+			if ( ! current_user_can( is_multisite() ? 'manage_network_options' : 'manage_options' ) ) {
+				return;
+			}
+
+			// Don't show the admin notice on Snapshot pages.
+			if ( 'snapshot_pro_dashboard' === get_current_screen()->parent_base ) {
+				return;
+			}
+
+			$ts = get_site_option( self::OPTION_V4_ADMIN_NOTICE_HIDDEN_UNTIL );
+			if ( $ts && $ts > time() ) {
+				return;
+			}
+
+			// Don't show the admin notice if Snapshot v4 already installed.
+			if ( is_plugin_active( self::SNAPSHOT_V4_PLUGIN_FILE ) ) {
+				return;
+			}
+
+			$this->_new_ui_tester->render(
+				'common/v4-admin-notice',
+				false,
+				array(
+					'bg_image_url' => self::get_file_url( '/assets/img/notice-background.svg' ),
+				),
+				false,
+				false
+			);
+
+			wp_enqueue_script(
+				'snapshot-upgrade-prompt',
+				plugins_url( '/js/v4-admin-notice.js', __FILE__ ),
+				array( 'jquery' ),
+				$this->_settings['SNAPSHOT_VERSION'],
+				true
+			);
+		}
+
+		public function ajax_admin_notice_v4_dismiss() {
+			check_ajax_referer( 'snapshot_admin_notice_v4', 'security' );
+			delete_site_option( self::OPTION_V4_ADMIN_NOTICE_DISMISSED );
+			update_site_option( self::OPTION_V4_ADMIN_NOTICE_HIDDEN_UNTIL, time() + 86400 * 30 );
+			wp_send_json_success();
+		}
+
+		public function ajax_admin_notice_v4_install() {
+			check_ajax_referer( 'snapshot_admin_notice_v4', 'security' );
+
+			if ( ! class_exists( 'WPMUDEV_Dashboard' ) ) {
+				wp_send_json_error( array( 'dashboard_error' => 'WPMUDEV_Dashboard does not exist' ) );
+			}
+
+			$upgrader = WPMUDEV_Dashboard::$upgrader;
+			$result   = $upgrader->install( self::SNAPSHOT_V4_PROJECT_ID );
+			$errors   = array(
+				'dashboard_error' => $upgrader->get_error(),
+			);
+
+			if ( $result || ( isset( $errors['dashboard_error']['message'] ) && ( false !== strpos( $errors['dashboard_error']['message'], 'Destination folder already exists' ) || false !== strpos( $errors['dashboard_error']['message'], 'Already installed' ) ) ) ) {
+				$result = true;
+				$activation_result = activate_plugin( self::SNAPSHOT_V4_PLUGIN_FILE );
+				if ( is_wp_error( $activation_result ) ) {
+					$errors['activation_error'] = $activation_result->get_error_message();
+					$result                     = false;
+				}
+			}
+
+			if ( $result ) {
+				wp_send_json_success(
+					array(
+						'redirect_to' => network_admin_url( self::SNAPSHOT_V4_PAGE_URL ),
+					)
+				);
+			} else {
+				wp_send_json_error( $errors );
+			}
+		}
+
+		public function need_show_v4_notice() {
+			// Don't show the notice if Snapshot v4 already installed.
+			if ( is_plugin_active( self::SNAPSHOT_V4_PLUGIN_FILE ) ) {
+				return false;
+			}
+
+			$ts = get_site_option( self::OPTION_V4_NOTICE_HIDDEN_UNTIL );
+			if ( $ts && $ts > time() ) {
+				return false;
+			}
+
+			return true;
+		}
+
+		public function ajax_upgrade_to_v4_modal_dismiss() {
+			check_ajax_referer( 'snapshot_admin_notice_v4', 'security' );
+			delete_site_option( self::OPTION_V4_MODAL_DISMISSED );
+			update_site_option( self::OPTION_V4_MODAL_HIDDEN_UNTIL, time() + 86400 * 30 );
+			wp_send_json_success();
+		}
+
+		public function ajax_upgrade_to_v4_notice_dismiss() {
+			check_ajax_referer( 'snapshot_admin_notice_v4', 'security' );
+			update_site_option( self::OPTION_V4_NOTICE_HIDDEN_UNTIL, time() + 86400 * 30 );
+			wp_send_json_success();
+		}
+
+		public function need_show_v4_modal() {
+			// Don't show the modal if Snapshot v4 already installed.
+			if ( is_plugin_active( self::SNAPSHOT_V4_PLUGIN_FILE ) ) {
+				return false;
+			}
+
+			$ts = get_site_option( self::OPTION_V4_MODAL_HIDDEN_UNTIL );
+			if ( $ts && $ts > time() ) {
+				return false;
+			}
+
+			return true;
 		}
 
 	}

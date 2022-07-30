@@ -11,7 +11,7 @@
 	<div class="sui-col sui-col-md-4">
 		<div class="sui-form-field shipper-bulk-actions-field">
 			<div class="sui-with-button">
-				<select class="sui-select-sm" name="shipper-bulk-action">
+				<select class="sui-select sui-select-sm" name="shipper-bulk-action">
 					<option value=""><?php esc_html_e( 'Bulk actions', 'shipper' ); ?></option>
 					<option value="include"><?php esc_html_e( 'Include', 'shipper' ); ?></option>
 					<option value="exclude"><?php esc_html_e( 'Exclude', 'shipper' ); ?></option>
@@ -40,11 +40,15 @@
 					</a>
 				</li>
 			</ul>
-			<button
-				class="sui-button-icon sui-button-outlined sui-pagination-open-filter sui-tooltip"
-				data-tooltip="<?php esc_attr_e( 'Filter', 'shipper' ); ?>"
-				aria-label="<?php esc_attr_e( 'Filter pagination', 'shipper' ); ?>"
-			><i class="sui-icon-filter" aria-hidden="true"></i></button>
+			<?php if ( ! isset( $hide_filter ) ) : ?>
+				<button
+					class="sui-button-icon sui-button-outlined sui-pagination-open-filter sui-tooltip"
+					data-tooltip="<?php esc_attr_e( 'Filter', 'shipper' ); ?>"
+					aria-label="<?php esc_attr_e( 'Filter pagination', 'shipper' ); ?>"
+				>
+					<i class="sui-icon-filter" aria-hidden="true"></i>
+				</button>
+			<?php endif; ?>
 		</div>
 	</div>
 </div>

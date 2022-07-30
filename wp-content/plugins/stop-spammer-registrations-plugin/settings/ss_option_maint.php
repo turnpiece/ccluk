@@ -1,89 +1,46 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-} // just in case
-if ( ! current_user_can( 'manage_options' ) ) {
-	die ( 'Access Denied' );
+
+if ( !defined( 'ABSPATH' ) ) {
+	http_response_code( 404 );
+	die();
 }
+
+if ( !current_user_can( 'manage_options' ) ) {
+	die ( 'Access Blocked' );
+}
+
 ss_fix_post_vars();
+
 ?>
+
 <div id="ss-plugin" class="wrap">
-    <h1 class="ss_head">Stop Spammers — DB Cleanup</h1>
-	<?php if ( array_key_exists( 'autol', $_POST )
-	           || array_key_exists( 'delo', $_POST )
-	) {
-		echo '<div class="notice notice-success is-dismissible"><p>Options Updated</p></div>';
+	<h1 class="ss_head">Stop Spammers — DB Cleanup</h1>
+	<?php if ( array_key_exists( 'autol', $_POST ) || array_key_exists( 'delo', $_POST ) ) {
+		echo '<div class="notice notice-success is-dismissible"><p>' . __( 'Options Updated', 'stop-spammer-registrations-plugin' ) . '</p></div>';
 	}
 	?>
 	<div class="ss_info_box">
-    <p>Plugins often don't clean up their mess when they are uninstalled. Some
-        malicious themes and plugins use
-        WordPress options to store information.
-        This function allows you inspect and delete orphan or suspicious options
-        and to change plugin options so that
-        they don&acute;t autoload.</p>
-    <p>In WordPress, some options are loaded whenever WordPress loads a page.
-        These are marked as autoload options.
-        This is done to speed up WordPress and prevent the programs from hitting
-        the database every time some plugin
-        needs to look up an option. Automatic loading of options at startup
-        makes WordPress fast, but it can also
-        use up memory for options that will seldom or never be used.</p>
-    <p>You can safely switch options so that they don&acute;t load
-        automatically. Probably the worst thing that will
-        happen is that the page will paint a little slower because the option is
-        retrieved separately from other
-        options. The best thing that can happen is there is a lower demand on
-        memory because the unused options are
-        not loaded when WordPress starts loading a page.</p>
-    <p>When plugins are uninstalled they are supposed to clean up their options.
-        Many plugins do not do any cleanup
-        during uninstall. It is quite possible that you have many orphan options
-        from plugins that you deleted long
-        ago. These are autoloaded on every page, slowing down your pages and
-        eating up memory. These options can be
-        safely marked so that they will not autoload. If you are sure they are
-        not needed you can delete them.</p>
-    <p>The change autoload column shows current autoload state. Yes means it is
-        autoloading. No means that it is
-        not.</p>
-    <p>You can change the autoload settings or delete an option on the form
-        below. Be aware that you can break some
-        plugins by deleting their options. I do not show most of the built-in
-        options used by WordPress. The list
-        below should be just plugin options.</p>
-    <p>It is far safer to change the autoload option value to &quot;no&quot;
-        than to delete an option. Only delete
-        an option if you are sure that it is from an uninstalled plugin. If you
-        find your pages slowing down, turn
-        the autoload option back to &quot;yes&quot;.</p>
-    <p>Option names are determined by the plugin author. Some are obvious, but
-        some make no sense. You may have to
-        do a little detective work to figure out where an option came from.</p></div>
+	<p><?php _e( 'Inspect and delete orphan or suspicious options or change plugin options so that they don&acute;t autoload. Be aware that you can break some plugins by deleting their options. Before making updates, please <a href="https://stopspammers.io/documentation/database-cleanup/" target="_blank">review our documentation</a>.', 'stop-spammer-registrations-plugin' ); ?></p></div>
 	<?php
 	global $wpdb;
 	$ptab  = $wpdb->options;
 	$nonce = '';
-	// echo "<!--\r\n\r\n";
-	// print_r( $_POST );
-	// echo "\r\n\r\n-->";
 	if ( array_key_exists( 'ss_opt_control', $_POST ) ) {
 		$nonce = $_POST['ss_opt_control'];
 	}
-	if ( ! empty( $nonce ) && wp_verify_nonce( $nonce, 'ss_update' ) ) {
+	if ( !empty( $nonce ) && wp_verify_nonce( $nonce, 'ss_update' ) ) {
 		if ( array_key_exists( 'view', $_POST ) ) {
-			$op = $_POST['view'];
+			$op = sanitize_text_field( $_POST['view'] );
 			$v  = get_option( $op );
 			if ( is_serialized( $v ) && @unserialize( $v ) !== false ) {
 				$v = @unserialize( $v );
 			}
 			$v = print_r( $v, true );
 			$v = htmlentities( $v );
-			echo "<h2>contents of $op</h2><pre>$v</pre>";
+			_e( '<h2>contents of ' . $op . '</h2><pre>' . $v . '</pre>', 'stop-spammer-registrations-plugin' );
 		}
 		if ( array_key_exists( 'autol', $_POST ) ) {
-			$autol = $_POST['autol'];
-			foreach ( $autol as $name ) {
+			foreach ( $_POST['autol'] as $name ) {
 				$au = substr( $name, 0, strpos( $name, '_' ) );
 				if ( strtolower( $au ) == 'no' ) {
 					$au = 'yes';
@@ -91,15 +48,15 @@ ss_fix_post_vars();
 					$au = 'no';
 				}
 				$name = substr( $name, strpos( $name, '_' ) + 1 );
-				echo "changing $name autoload to $au<br />";
+				_e( 'changing ' . $name . ' autoload to $au<br />', 'stop-spammer-registrations-plugin' );
 				$sql  = "update $ptab set autoload='$au' where option_name='$name'";
 				$wpdb->query( $sql );
 			}
 		}
 		if ( array_key_exists( 'delo', $_POST ) ) {
-			$delo = $_POST['delo'];
-			foreach ( $delo as $name ) {
-				echo "deleting $name <br />";
+			foreach ( $_POST['delo'] as $name ) {
+				$name = sanitize_key( $name );
+				_e( 'deleting ' . $name . ' <br />', 'stop-spammer-registrations-plugin' );
 				$sql = "delete from $ptab where option_name='$name'";
 				$wpdb->query( $sql );
 			}
@@ -112,7 +69,7 @@ ss_fix_post_vars();
 		'advanced_edit',
 		'avatar_default',
 		'avatar_rating',
-		'denylist_keys',
+		'blocklist_keys',
 		'blog_charset',
 		'blog_public',
 		'blogdescription',
@@ -219,7 +176,7 @@ ss_fix_post_vars();
 		'widget_rss',
 		'widget_search',
 		'widget_text',
-// some that I added because changing caused problems
+		// some that I added because changing caused problems
 		'akismet_available_servers',
 		'auth_key',
 		'auth_salt',
@@ -244,7 +201,7 @@ ss_fix_post_vars();
 		'auto_core_update_notified',
 		'link_manager_enabled',
 		'WPLANG',
-// added by jetsam -------------------------------------------
+		// added by jetsam -------------------------------------------
 		'ss_stop_sp_reg_options', // not for all
 		'ss_stop_sp_reg_stats', // not for all
 		// wp opts
@@ -259,27 +216,26 @@ ss_fix_post_vars();
 		'site_icon',
 		'theme_switch_menu_locations',
 		'wp_page_for_privacy_policy',
-// ----------------------------------------------------------
-
+		// ----------------------------------------------------------
 	);
 	global $wpdb;
 	// global $wp_query;
-	$ptab = $wpdb->options;
+	$ptab  = $wpdb->options;
 	// option_id, option_name, option_value, autoload
 	$sql   = "SELECT * from $ptab order by autoload,option_name";
 	$arows = $wpdb->get_results( $sql, ARRAY_A );
 	// filter out the ones we don't like
 	// echo "<br /> $sql : size of options array " . $ptab . " = " . count( $arows ) . "<br />";
-	$rows = array();
+	$rows  = array();
 	foreach ( $arows as $row ) {
 		$uop  = true;
 		$name = $row['option_name'];
-		if ( ! in_array( $name, $sysops ) ) {
-// check for name like for transients
-// _transient_ , _site_transient_
+		if ( !in_array( $name, $sysops ) ) {
+			// check for name like for transients
+			// _transient_ , _site_transient_
 			foreach ( $sysops as $op ) {
 				if ( strpos( $name, $op ) !== false ) {
-// hit a name like
+					// hit a name like
 					$uop = false;
 					break;
 				}
@@ -294,135 +250,129 @@ ss_fix_post_vars();
 	// $rows has the allowed options - all default and system options have been excluded
 	$nonce = wp_create_nonce( 'ss_update' );
 	?>
-    <form method="POST" name="DOIT2" action="">
-        <input type="hidden" name="ss_opt_control" value="<?php echo $nonce; ?>" />
-        <table width="100%" bgcolor="#b0b0b0" cellspacing='1' cellpadding="4">
-            <thead>
-            <tr bgcolor="#fff">
-                <th class="ss_cleanup">Option</th>
-                <th  class="ss_cleanup">Autoload</th>
-                <th  class="ss_cleanup">Size</th>
-                <th class="ss_cleanup">Change Autoload</th>
-                <th class="ss_cleanup">Delete</th>
-                <th class="ss_cleanup">View Contents</th>
-            </tr>
-            </thead>
+	<form method="post" name="DOIT2" action="">
+		<input type="hidden" name="ss_opt_control" value="<?php echo $nonce; ?>" />
+		<table id="sstable" name="sstable" cellspacing="2">
+			<thead>
+			<tr bgcolor="#fff">
+				<th class="ss_cleanup"><?php _e( 'Option', 'stop-spammer-registrations-plugin' ); ?></th>
+				<th class="ss_cleanup"><?php _e( 'Autoload', 'stop-spammer-registrations-plugin' ); ?></th>
+				<th class="ss_cleanup"><?php _e( 'Size', 'stop-spammer-registrations-plugin' ); ?></th>
+				<th class="ss_cleanup"><?php _e( 'Change Autoload', 'stop-spammer-registrations-plugin' ); ?></th>
+				<th class="ss_cleanup"><?php _e( 'Delete', 'stop-spammer-registrations-plugin' ); ?></th>
+				<th class="ss_cleanup"><?php _e( 'View Contents', 'stop-spammer-registrations-plugin' ); ?></th>
+			</tr>
+			</thead>
 			<?php
 			foreach ( $rows as $row ) {
 				extract( $row );
 				$sz = strlen( $option_value );
 				$au = $autoload;
 				$sz = number_format( $sz );
-//if ($autoload=='no') $au='No';
+				// if ( $autoload=='no' ) $au='No';
 				?>
-                <tr class="ss_cleanup_tr" bgcolor="#fff">
-                    <td align="center"><?php echo $option_name; ?></td>
-                    <td align="center"><?php echo $autoload; ?></td>
-                    <td align="center"><?php echo $sz; ?></td>
-                    <td align="center"><input type="checkbox" value="<?php echo $autoload . '_' . $option_name; ?>" name="autol[]">&nbsp;<?php echo $autoload; ?></td>
-                    <td align="center"><input type="checkbox" value="<?php echo $option_name; ?>" name="delo[]"></td>
-                    <td align="center"><button type="submit" name="view" value="<?php echo $option_name; ?>">view</button></td>
-                </tr>
+				<tr class="ss_cleanup_tr" bgcolor="#fff">
+					<td align="center"><?php echo $option_name; ?></td>
+					<td align="center"><?php echo $autoload; ?></td>
+					<td align="center"><?php echo $sz; ?></td>
+					<td align="center"><input type="checkbox" value="<?php echo $autoload . '_' . $option_name; ?>" name="autol[]">&nbsp;<?php echo $autoload; ?></td>
+					<td align="center"><input type="checkbox" value="<?php echo $option_name; ?>" name="delo[]"></td>
+					<td align="center"><button type="submit" name="view" value="<?php echo $option_name; ?>"><?php _e( 'view', 'stop-spammer-registrations-plugin' ); ?></button></td>
+				</tr>
 				<?php
 			}
 			?>
-        </table>
-        <p class="submit"><input class="button-primary" value="Update" type="submit" onclick="return confirm('Are you sure? These changes are permenant.');"></p>
-    </form>
+		</table>
+		<p class="submit"><input class="button-primary" value="<?php _e( 'Update', 'stop-spammer-registrations-plugin' ); ?>" type="submit" onclick="return confirm('Are you sure? These changes are permenant.');"></p>
+	</form>
 	<?php
 	$m1 = memory_get_usage();
 	$m3 = memory_get_peak_usage();
 	$m1 = number_format( $m1 );
 	$m3 = number_format( $m3 );
-	echo "<p>Memory Usage Currently: $m1, Peak: $m3</p>";
-	$nonce          = wp_create_nonce( 'ss_update2' );
+	_e( '<p>Memory Usage Currently: ' . $m1 . ' Peak: ' . $m3 . '</p>', 'stop-spammer-registrations-plugin' );
+	$nonce		    = wp_create_nonce( 'ss_update2' );
 	$showtransients = false; // change to true to clean up transients
-	if ( $showtransients
-	     && countTransients() > 0
-	) { // personal use - probably too dangerous for casual users
-		?>
-        <hr />
-        <p>WordPress creates temporary objects in the database called
-            transients.<br />
-            WordPress is not good about cleaning them up afterwards. You can
-            clean these up safely and it might
-            speed things up.</p>
-        <form method="POST" name="DOIT2" action="">
-            <input type="hidden" name="ss_opt_tdel" value="<?php echo $nonce; ?>" />
-            <p class="submit"><input class="button-primary" value="Delete Transients" type="submit" /></p>
-        </form>
+	if ( $showtransients && countTransients() > 0 ) { // personal use - probably too dangerous for casual users ?>
+		<hr />
+		<p><?php _e( 'WordPress creates temporary objects in the database called transients.<br />WordPress is not good about cleaning them up afterwards. You can clean these up safely and it might speed things up.', 'stop-spammer-registrations-plugin' ); ?></p>
+		<form method="post" name="DOIT2" action="">
+			<input type="hidden" name="ss_opt_tdel" value="<?php echo $nonce; ?>" />
+			<p class="submit"><input class="button-primary" value="<?php _e( 'Delete Transients', 'stop-spammer-registrations-plugin' ); ?>" type="submit" /></p>
+		</form>
 		<?php
 		$nonce = '';
 		if ( array_key_exists( 'ss_opt_tdel', $_POST ) ) {
 			$nonce = $_POST['ss_opt_tdel'];
 		}
-		if ( ! empty( $nonce ) && wp_verify_nonce( $nonce, 'ss_update2' ) ) {
-// doit!
+		if ( !empty( $nonce ) && wp_verify_nonce( $nonce, 'ss_update2' ) ) {
+			// doit!
 			deleteTransients();
 		}
 		?>
-        <p>Currently there are <?php echo countTransients(); ?> found.</p>
+		<p><?php _e( 'Currently there are ' . countTransients() . ' found.', 'stop-spammer-registrations-plugin' ); ?></p>
 		<?php
 	}
 	?>
 </div>
+
 <?php
+
 function countTransients() {
 	$blog_id = get_current_blog_id();
 	global $wpdb;
 	$optimeout = time() - 60;
-	$table     = $wpdb->get_blog_prefix( $blog_id ) . 'options';
-	$count     = 0;
-	$sql       = "
-select count(*) from $table 
-where
-option_name like '\_transient\_timeout\_%'
-or option_name like '\_site\_transient\_timeout\_%'
-or option_name like 'displayed\_galleries\_%'
-or option_name like 'displayed\_gallery\_rendering\_%'
-or t1.option_name like '\_transient\_feed\_mod_%' 
-or t1.option_name like '\_transient\__bbp\_%' 
-and option_value < '$optimeout'
-";
-	$sql       = "
-select count(*) from $table 
-where instr(t1.option_name,'SS_SECRET_WORD')>0
-";
-	$count     += $wpdb->get_var( $sql );
+	$table	   = $wpdb->get_blog_prefix( $blog_id ) . 'options';
+	$count	   = 0;
+	$sql	   = "
+		select count(*) from $table 
+		where
+		option_name like '\_transient\_timeout\_%'
+		or option_name like '\_site\_transient\_timeout\_%'
+		or option_name like 'displayed\_galleries\_%'
+		or option_name like 'displayed\_gallery\_rendering\_%'
+		or t1.option_name like '\_transient\_feed\_mod_%' 
+		or t1.option_name like '\_transient\__bbp\_%' 
+		and option_value < '$optimeout'
+	";
+	$sql = str_replace( "\t", '', $sql );
+	$sql = "
+		select count(*) from $table 
+		where instr(t1.option_name,'SS_SECRET_WORD')>0
+	";
+	$sql = str_replace( "\t", '', $sql );
+	$count	  += $wpdb->get_var( $sql );
 	if ( empty( $count ) ) {
 		$count = "0";
 	}
-
 	return $count;
 }
 
-/**
- * clear expired transients for current blog
- *
- * @param int $blog_id
- */
+// clear expired transients for current blog
 function deleteTransients() {
 	$blog_id = get_current_blog_id();
 	global $wpdb;
 	$optimeout = time() - 60;
-	$table     = $wpdb->get_blog_prefix( $blog_id ) . 'options';
-	$sql       = "
-delete from $table
-where 
-option_name like '\_transient\_timeout\_%'
-or option_name like '\_site\_transient\_timeout\_%'
-or option_name like 'displayed\_galleries\_%'
-or option_name like 'displayed\_gallery\_rendering\_%'
-or t1.option_name like '\_transient\_feed\_mod_%' 
-or t1.option_name like '\_transient\__bbp\_%' 
-or instr(t1.option_name,'SS_SECRET_WORD')>0
-and option_value < '$optimeout'
-";
+	$table	   = $wpdb->get_blog_prefix( $blog_id ) . 'options';
+	$sql	   = "
+		delete from $table
+		where 
+		option_name like '\_transient\_timeout\_%'
+		or option_name like '\_site\_transient\_timeout\_%'
+		or option_name like 'displayed\_galleries\_%'
+		or option_name like 'displayed\_gallery\_rendering\_%'
+		or t1.option_name like '\_transient\_feed\_mod_%' 
+		or t1.option_name like '\_transient\__bbp\_%' 
+		or instr(t1.option_name,'SS_SECRET_WORD')>0
+		and option_value < '$optimeout'
+	";
+	$sql = str_replace( "\t", '', $sql );
 	$wpdb->query( $sql );
 	$sql = "
-select count(*) from $table 
-where instr(t1.option_name,'SS_SECRET_WORD')>0
-";
+		select count(*) from $table 
+		where instr(t1.option_name,'SS_SECRET_WORD')>0
+	";
+	$sql = str_replace( "\t", '', $sql );
 	$wpdb->query( $sql );
 }
 

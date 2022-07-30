@@ -20,6 +20,7 @@ namespace Beehive\Google\Auth;
 use Beehive\Google\Auth\HttpHandler\HttpClientCache;
 use Beehive\Google\Auth\HttpHandler\HttpHandlerFactory;
 use Beehive\GuzzleHttp\Psr7;
+use Beehive\GuzzleHttp\Psr7\Utils;
 /**
  * Tools for using the IAM API.
  *
@@ -39,7 +40,7 @@ class Iam
      */
     public function __construct(callable $httpHandler = null)
     {
-        $this->httpHandler = $httpHandler ?: \Beehive\Google\Auth\HttpHandler\HttpHandlerFactory::build(\Beehive\Google\Auth\HttpHandler\HttpClientCache::getHttpClient());
+        $this->httpHandler = $httpHandler ?: HttpHandlerFactory::build(HttpClientCache::getHttpClient());
     }
     /**
      * Sign a string using the IAM signBlob API.
@@ -70,7 +71,7 @@ class Iam
         }
         $body = ['delegates' => $delegates, 'payload' => \base64_encode($stringToSign)];
         $headers = ['Authorization' => 'Bearer ' . $accessToken];
-        $request = new \Beehive\GuzzleHttp\Psr7\Request('POST', $uri, $headers, \Beehive\GuzzleHttp\Psr7\stream_for(\json_encode($body)));
+        $request = new Psr7\Request('POST', $uri, $headers, Utils::streamFor(\json_encode($body)));
         $res = $httpHandler($request);
         $body = \json_decode((string) $res->getBody(), \true);
         return $body['signedBlob'];

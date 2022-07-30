@@ -4,358 +4,395 @@
 /**
  * Modals JavaScript code.
  */
-(function() {
-  "use strict";
+( function() {
+	'use strict';
 
-  /**
-   * Onboarding modal.
-   *
-   * @since 3.1
-   */
-  WP_Smush.onboarding = {
-    membership: "free", // Assume free by default.
-    onboardingModal: document.getElementById("smush-onboarding-dialog"),
-    scanFilesModal: document.getElementById("checking-files-dialog"),
-    settings: {
-      first: true,
-      last: false,
-      slide: "start",
-      value: false
-    },
-    selection: {
-      auto: true,
-      lossy: true,
-      strip_exif: true,
-      original: false,
-      lazy_load: true,
-      usage: false
-    },
-    contentContainer: document.getElementById("smush-onboarding-content"),
-    onboardingSlides: [
-      "start",
-      "auto",
-      "lossy",
-      "strip_exif",
-      "original",
-      "lazy_load",
-      "usage"
-    ],
-    touchX: null,
-    touchY: null,
+	/**
+	 * Onboarding modal.
+	 *
+	 * @since 3.1
+	 */
+	WP_Smush.onboarding = {
+		membership: 'free', // Assume free by default.
+		onboardingModal: document.getElementById( 'smush-onboarding-dialog' ),
+		scanFilesModal: document.getElementById( 'checking-files-dialog' ),
+		settings: {
+			first: true,
+			last: false,
+			slide: 'start',
+			value: false,
+		},
+		selection: {
+			auto: true,
+			lossy: true,
+			strip_exif: true,
+			original: false,
+			lazy_load: true,
+			usage: false,
+		},
+		contentContainer: document.getElementById( 'smush-onboarding-content' ),
+		onboardingSlides: [
+			'start',
+			'auto',
+			'lossy',
+			'strip_exif',
+			'original',
+			'lazy_load',
+			'usage',
+		],
+		touchX: null,
+		touchY: null,
 
-    /**
-     * Init module.
-     */
-    init() {
-      if (!this.onboardingModal) {
-        return;
-      }
+		/**
+		 * Init module.
+		 */
+		init() {
+			if ( ! this.onboardingModal ) {
+				return;
+			}
 
-      this.membership = document.getElementById(
-        "smush-onboarding"
-      ).dataset.type;
+			const dialog = document.getElementById( 'smush-onboarding' );
 
-      if ("pro" !== this.membership) {
-        this.onboardingSlides = [
-          "start",
-          "auto",
-          "strip_exif",
-          "lazy_load",
-          "usage"
-        ];
-        this.selection.lossy = false;
-      }
+			this.membership = dialog.dataset.type;
 
-      this.renderTemplate();
+			if ( 'pro' !== this.membership ) {
+				this.onboardingSlides = [
+					'start',
+					'auto',
+					'lossy',
+					'strip_exif',
+					'lazy_load',
+					'usage',
+				];
+			}
 
-      // Skip setup.
-      const skipButton = this.onboardingModal.querySelector(
-        ".smush-onboarding-skip-link"
-      );
-      if (skipButton) {
-        skipButton.addEventListener("click", this.skipSetup);
-      }
+			if ( 'false' === dialog.dataset.tracking ) {
+				this.onboardingSlides.pop();
+			}
 
-      // Show the modal.
-      window.SUI.openModal(
-        "smush-onboarding-dialog",
-        "checking-files-dialog",
-        undefined,
-        false
-      );
-    },
+			this.renderTemplate();
 
-    /**
-     * Get swipe coordinates.
-     *
-     * @param {Object} e
-     */
-    handleTouchStart(e) {
-      const firstTouch = e.touches[0];
-      this.touchX = firstTouch.clientX;
-      this.touchY = firstTouch.clientY;
-    },
+			// Skip setup.
+			const skipButton = this.onboardingModal.querySelector(
+				'.smush-onboarding-skip-link'
+			);
+			if ( skipButton ) {
+				skipButton.addEventListener( 'click', this.skipSetup );
+			}
 
-    /**
-     * Process swipe left/right.
-     *
-     * @param {Object} e
-     */
-    handleTouchMove(e) {
-      if (!this.touchX || !this.touchY) {
-        return;
-      }
+			// Show the modal.
+			window.SUI.openModal(
+				'smush-onboarding-dialog',
+				'checking-files-dialog',
+				undefined,
+				false
+			);
+		},
 
-      const xUp = e.touches[0].clientX,
-        yUp = e.touches[0].clientY,
-        xDiff = this.touchX - xUp,
-        yDiff = this.touchY - yUp;
+		/**
+		 * Get swipe coordinates.
+		 *
+		 * @param {Object} e
+		 */
+		handleTouchStart( e ) {
+			const firstTouch = e.touches[ 0 ];
+			this.touchX = firstTouch.clientX;
+			this.touchY = firstTouch.clientY;
+		},
 
-      if (Math.abs(xDiff) > Math.abs(yDiff)) {
-        if (xDiff > 0) {
-          if (false === WP_Smush.onboarding.settings.last) {
-            WP_Smush.onboarding.next(null, "next");
-          }
-        } else if (false === WP_Smush.onboarding.settings.first) {
-          WP_Smush.onboarding.next(null, "prev");
-        }
-      }
+		/**
+		 * Process swipe left/right.
+		 *
+		 * @param {Object} e
+		 */
+		handleTouchMove( e ) {
+			if ( ! this.touchX || ! this.touchY ) {
+				return;
+			}
 
-      this.touchX = null;
-      this.touchY = null;
-    },
+			const xUp = e.touches[ 0 ].clientX,
+				yUp = e.touches[ 0 ].clientY,
+				xDiff = this.touchX - xUp,
+				yDiff = this.touchY - yUp;
 
-    /**
-     * Update the template, register new listeners.
-     *
-     * @param {string} directionClass  Accepts: fadeInRight, fadeInLeft, none.
-     */
-    renderTemplate(directionClass = "none") {
-      // Grab the selected value.
-      const input = this.onboardingModal.querySelector(
-        'input[type="checkbox"]'
-      );
-      if (input) {
-        this.selection[input.id] = input.checked;
-      }
+			if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {
+				if ( xDiff > 0 ) {
+					if ( false === WP_Smush.onboarding.settings.last ) {
+						WP_Smush.onboarding.next( null, 'next' );
+					}
+				} else if ( false === WP_Smush.onboarding.settings.first ) {
+					WP_Smush.onboarding.next( null, 'prev' );
+				}
+			}
 
-      const template = WP_Smush.onboarding.template("smush-onboarding");
-      const content = template(this.settings);
+			this.touchX = null;
+			this.touchY = null;
+		},
 
-      if (content) {
-        this.contentContainer.innerHTML = content;
+		/**
+		 * Update the template, register new listeners.
+		 *
+		 * @param {string} directionClass Accepts: fadeInRight, fadeInLeft, none.
+		 */
+		renderTemplate( directionClass = 'none' ) {
+			// Grab the selected value.
+			const input = this.onboardingModal.querySelector(
+				'input[type="checkbox"]'
+			);
+			if ( input ) {
+				this.selection[ input.id ] = input.checked;
+			}
 
-        if ("none" === directionClass) {
-          this.contentContainer.classList.add("loaded");
-        } else {
-          this.contentContainer.classList.remove("loaded");
-          this.contentContainer.classList.add(directionClass);
-          setTimeout(() => {
-            this.contentContainer.classList.add("loaded");
-            this.contentContainer.classList.remove(directionClass);
-          }, 600);
-        }
-      }
+			const template = WP_Smush.onboarding.template( 'smush-onboarding' );
+			const content = template( this.settings );
 
-      this.onboardingModal.addEventListener(
-        "touchstart",
-        this.handleTouchStart,
-        false
-      );
-      this.onboardingModal.addEventListener(
-        "touchmove",
-        this.handleTouchMove,
-        false
-      );
+			if ( content ) {
+				this.contentContainer.innerHTML = content;
 
-      this.bindSubmit();
-    },
+				if ( 'none' === directionClass ) {
+					this.contentContainer.classList.add( 'loaded' );
+				} else {
+					this.contentContainer.classList.remove( 'loaded' );
+					this.contentContainer.classList.add( directionClass );
+					setTimeout( () => {
+						this.contentContainer.classList.add( 'loaded' );
+						this.contentContainer.classList.remove(
+							directionClass
+						);
+					}, 600 );
+				}
+			}
 
-    /**
-     * Catch "Finish setup wizard" button click.
-     */
-    bindSubmit() {
-      const submitButton = this.onboardingModal.querySelector(
-        'button[type="submit"]'
-      );
-      const self = this;
+			this.onboardingModal.addEventListener(
+				'touchstart',
+				this.handleTouchStart,
+				false
+			);
+			this.onboardingModal.addEventListener(
+				'touchmove',
+				this.handleTouchMove,
+				false
+			);
 
-      if (submitButton) {
-        submitButton.addEventListener("click", function(e) {
-          e.preventDefault();
+			this.bindSubmit();
+		},
 
-          // Because we are not rendering the template, we need to update the last element value.
-          const input = self.onboardingModal.querySelector(
-            'input[type="checkbox"]'
-          );
-          if (input) {
-            self.selection[input.id] = input.checked;
-          }
+		/**
+		 * Catch "Finish setup wizard" button click.
+		 */
+		bindSubmit() {
+			const submitButton = this.onboardingModal.querySelector(
+				'button[type="submit"]'
+			);
+			const self = this;
 
-          const _nonce = document.getElementById("smush_quick_setup_nonce");
+			if ( submitButton ) {
+				submitButton.addEventListener( 'click', function( e ) {
+					e.preventDefault();
 
-          const xhr = new XMLHttpRequest();
-          xhr.open("POST", ajaxurl + "?action=smush_setup", true);
-          xhr.setRequestHeader(
-            "Content-type",
-            "application/x-www-form-urlencoded"
-          );
-          xhr.onload = () => {
-            if (200 === xhr.status) {
-              WP_Smush.onboarding.showScanDialog();
-            } else {
-              window.console.log(
-                "Request failed.  Returned status of " + xhr.status
-              );
-            }
-          };
-          xhr.send(
-            "smush_settings=" +
-              JSON.stringify(self.selection) +
-              "&_ajax_nonce=" +
-              _nonce.value
-          );
-        });
-      }
-    },
+					// Because we are not rendering the template, we need to update the last element value.
+					const input = self.onboardingModal.querySelector(
+						'input[type="checkbox"]'
+					);
+					if ( input ) {
+						self.selection[ input.id ] = input.checked;
+					}
 
-    /**
-     * Handle navigation.
-     *
-     * @param {Object} e
-     * @param {null|string} whereTo
-     */
-    next(e, whereTo = null) {
-      const index = this.onboardingSlides.indexOf(this.settings.slide);
-      let newIndex = 0;
+					const _nonce = document.getElementById(
+						'smush_quick_setup_nonce'
+					);
 
-      if (!whereTo) {
-        newIndex =
-          null !== e && e.classList.contains("next") ? index + 1 : index - 1;
-      } else {
-        newIndex = "next" === whereTo ? index + 1 : index - 1;
-      }
+					const xhr = new XMLHttpRequest();
+					xhr.open( 'POST', ajaxurl + '?action=smush_setup', true );
+					xhr.setRequestHeader(
+						'Content-type',
+						'application/x-www-form-urlencoded'
+					);
+					xhr.onload = () => {
+						if ( 200 === xhr.status ) {
+							WP_Smush.onboarding.showScanDialog();
+						} else {
+							window.console.log(
+								'Request failed.  Returned status of ' +
+									xhr.status
+							);
+						}
+					};
+					xhr.send(
+						'smush_settings=' +
+							JSON.stringify( self.selection ) +
+							'&_ajax_nonce=' +
+							_nonce.value
+					);
+				} );
+			}
+		},
 
-      const directionClass =
-        null !== e && e.classList.contains("next")
-          ? "fadeInRight"
-          : "fadeInLeft";
+		/**
+		 * Handle navigation.
+		 *
+		 * @param {Object}      e
+		 * @param {null|string} whereTo
+		 */
+		next( e, whereTo = null ) {
+			const index = this.onboardingSlides.indexOf( this.settings.slide );
+			let newIndex = 0;
 
-      this.settings = {
-        first: 0 === newIndex,
-        last: newIndex + 1 === this.onboardingSlides.length, // length !== index
-        slide: this.onboardingSlides[newIndex],
-        value: this.selection[this.onboardingSlides[newIndex]]
-      };
+			if ( ! whereTo ) {
+				newIndex =
+					null !== e && e.classList.contains( 'next' )
+						? index + 1
+						: index - 1;
+			} else {
+				newIndex = 'next' === whereTo ? index + 1 : index - 1;
+			}
 
-      this.renderTemplate(directionClass);
-    },
+			const directionClass =
+				null !== e && e.classList.contains( 'next' )
+					? 'fadeInRight'
+					: 'fadeInLeft';
 
-    /**
-     * Handle circle navigation.
-     *
-     * @param {string} target
-     */
-    goTo(target) {
-      const newIndex = this.onboardingSlides.indexOf(target);
+			this.settings = {
+				first: 0 === newIndex,
+				last: newIndex + 1 === this.onboardingSlides.length, // length !== index
+				slide: this.onboardingSlides[ newIndex ],
+				value: this.selection[ this.onboardingSlides[ newIndex ] ],
+			};
 
-      this.settings = {
-        first: 0 === newIndex,
-        last: newIndex + 1 === this.onboardingSlides.length, // length !== index
-        slide: target,
-        value: this.selection[target]
-      };
+			this.renderTemplate( directionClass );
+		},
 
-      this.renderTemplate();
-    },
+		/**
+		 * Handle circle navigation.
+		 *
+		 * @param {string} target
+		 */
+		goTo( target ) {
+			const newIndex = this.onboardingSlides.indexOf( target );
 
-    /**
-     * Skip onboarding experience.
-     */
-    skipSetup: () => {
-      const _nonce = document.getElementById("smush_quick_setup_nonce");
+			this.settings = {
+				first: 0 === newIndex,
+				last: newIndex + 1 === this.onboardingSlides.length, // length !== index
+				slide: target,
+				value: this.selection[ target ],
+			};
 
-      const xhr = new XMLHttpRequest();
-      xhr.open(
-        "POST",
-        ajaxurl + "?action=skip_smush_setup&_ajax_nonce=" + _nonce.value
-      );
-      xhr.onload = () => {
-        if (200 === xhr.status) {
-          WP_Smush.onboarding.showScanDialog();
-        } else {
-          window.console.log(
-            "Request failed.  Returned status of " + xhr.status
-          );
-        }
-      };
-      xhr.send();
-    },
+			this.renderTemplate();
+		},
 
-    /**
-     * Show checking files dialog.
-     */
-    showScanDialog() {
-      window.SUI.closeModal();
-      window.SUI.openModal(
-        "checking-files-dialog",
-        "wpbody-content",
-        undefined,
-        false
-      );
+		/**
+		 * Skip onboarding experience.
+		 */
+		skipSetup: () => {
+			const _nonce = document.getElementById( 'smush_quick_setup_nonce' );
 
-      const nonce = document.getElementById("wp_smush_options_nonce");
+			const xhr = new XMLHttpRequest();
+			xhr.open(
+				'POST',
+				ajaxurl + '?action=skip_smush_setup&_ajax_nonce=' + _nonce.value
+			);
+			xhr.onload = () => {
+				if ( 200 === xhr.status ) {
+					WP_Smush.onboarding.showScanDialog();
+				} else {
+					window.console.log(
+						'Request failed.  Returned status of ' + xhr.status
+					);
+				}
+			};
+			xhr.send();
+		},
 
-      setTimeout(() => {
-        const xhr = new XMLHttpRequest();
-        xhr.open("POST", ajaxurl + "?action=scan_for_resmush", true);
-        xhr.setRequestHeader(
-          "Content-type",
-          "application/x-www-form-urlencoded"
-        );
-        xhr.onload = () => {
-          const elem = document.querySelector("#smush-onboarding-dialog");
-          elem.parentNode.removeChild(elem);
-          window.SUI.closeModal();
+		/**
+		 * Show checking files dialog.
+		 */
+		showScanDialog() {
+			window.SUI.closeModal();
+			window.SUI.openModal(
+				'checking-files-dialog',
+				'wpbody-content',
+				undefined,
+				false
+			);
 
-          if (200 === xhr.status) {
-            setTimeout(function() {
-              location.reload();
-            }, 1000);
-          } else {
-            window.console.log(
-              "Request failed.  Returned status of " + xhr.status
-            );
-          }
-        };
-        xhr.send(
-          "type=media&get_ui=false&process_settings=false&wp_smush_options_nonce=" +
-            nonce.value
-        );
-      }, 3000);
-    }
-  };
+			const nonce = document.getElementById( 'wp_smush_options_nonce' );
 
-  /**
-   * Template function (underscores based).
-   *
-   * @type {Function}
-   */
-  WP_Smush.onboarding.template = _.memoize(id => {
-    let compiled;
-    const options = {
-      evaluate: /<#([\s\S]+?)#>/g,
-      interpolate: /{{{([\s\S]+?)}}}/g,
-      escape: /{{([^}]+?)}}(?!})/g,
-      variable: "data"
-    };
+			setTimeout( () => {
+				const xhr = new XMLHttpRequest();
+				xhr.open( 'POST', ajaxurl + '?action=scan_for_resmush', true );
+				xhr.setRequestHeader(
+					'Content-type',
+					'application/x-www-form-urlencoded'
+				);
+				xhr.onload = () => {
+					const elem = document.querySelector(
+						'#smush-onboarding-dialog'
+					);
+					elem.parentNode.removeChild( elem );
 
-    return data => {
-      _.templateSettings = options;
-      compiled = compiled || _.template(document.getElementById(id).innerHTML);
-      return compiled(data);
-    };
-  });
+					if ( 200 === xhr.status ) {
+						setTimeout( function() {
+							window.location.search = 'page=smush-bulk';
+						}, 1000 );
+					} else {
+						window.console.log(
+							'Request failed.  Returned status of ' + xhr.status
+						);
+					}
+				};
+				xhr.send(
+					'type=media&get_ui=false&process_settings=false&wp_smush_options_nonce=' +
+						nonce.value
+				);
+			}, 3000 );
+		},
 
-  window.addEventListener("load", () => WP_Smush.onboarding.init());
-})();
+		/**
+		 * Hide new features modal.
+		 *
+		 * @since 3.7.0
+		 */
+		hideUpgradeModal: () => {
+			const xhr = new XMLHttpRequest();
+			xhr.open( 'POST', ajaxurl + '?action=hide_new_features' );
+			xhr.onload = () => {
+				if ( 200 === xhr.status ) {
+					if ( window.location.search.indexOf('page=smush-bulk#column-lossy') ) {
+						window.SUI.closeModal( 'smush-updated-dialog' );
+					}
+					window.location.href = window.wp_smush_msgs.bulk_smush_url + '#column-lossy';
+				} else {
+					window.console.log(
+						'Request failed.  Returned status of ' + xhr.status
+					);
+				}
+			}
+			xhr.send();
+		},
+	};
+
+	/**
+	 * Template function (underscores based).
+	 *
+	 * @type {Function}
+	 */
+	WP_Smush.onboarding.template = _.memoize( ( id ) => {
+		let compiled;
+		const options = {
+			evaluate: /<#([\s\S]+?)#>/g,
+			interpolate: /{{{([\s\S]+?)}}}/g,
+			escape: /{{([^}]+?)}}(?!})/g,
+			variable: 'data',
+		};
+
+		return ( data ) => {
+			_.templateSettings = options;
+			compiled =
+				compiled ||
+				_.template( document.getElementById( id ).innerHTML );
+			return compiled( data );
+		};
+	} );
+
+	window.addEventListener( 'load', () => WP_Smush.onboarding.init() );
+}() );

@@ -183,8 +183,7 @@ class ANSI
     /**
      * Set the number of lines that should be logged past the terminal height
      *
-     * @param int $x
-     * @param int $y
+     * @param int $history
      * @access public
      */
     function setHistory($history)
@@ -218,7 +217,7 @@ class ANSI
                 // http://en.wikipedia.org/wiki/ANSI_escape_code#Sequence_elements
                 // single character CSI's not currently supported
                 switch (\true) {
-                    case $this->ansi == "\33=":
+                    case $this->ansi == "\x1b=":
                         $this->ansi = '';
                         continue 2;
                     case \strlen($this->ansi) == 2 && $chr >= 64 && $chr <= 95 && $chr != \ord('['):
@@ -231,13 +230,13 @@ class ANSI
                 $this->tokenization[] = '';
                 // http://ascii-table.com/ansi-escape-sequences-vt-100.php
                 switch ($this->ansi) {
-                    case "\33[H":
+                    case "\x1b[H":
                         // Move cursor to upper left corner
                         $this->old_x = $this->x;
                         $this->old_y = $this->y;
                         $this->x = $this->y = 0;
                         break;
-                    case "\33[J":
+                    case "\x1b[J":
                         // Clear screen from cursor down
                         $this->history = \array_merge($this->history, \array_slice(\array_splice($this->screen, $this->y + 1), 0, $this->old_y));
                         $this->screen = \array_merge($this->screen, \array_fill($this->y, $this->max_y, ''));
@@ -247,24 +246,24 @@ class ANSI
                             \array_shift($this->history);
                             \array_shift($this->history_attrs);
                         }
-                    case "\33[K":
+                    case "\x1b[K":
                         // Clear screen from cursor right
                         $this->screen[$this->y] = \substr($this->screen[$this->y], 0, $this->x);
                         \array_splice($this->attrs[$this->y], $this->x + 1, $this->max_x - $this->x, \array_fill($this->x, $this->max_x - ($this->x - 1), $this->base_attr_cell));
                         break;
-                    case "\33[2K":
+                    case "\x1b[2K":
                         // Clear entire line
                         $this->screen[$this->y] = \str_repeat(' ', $this->x);
                         $this->attrs[$this->y] = $this->attr_row;
                         break;
-                    case "\33[?1h":
+                    case "\x1b[?1h":
                     // set cursor key to application
-                    case "\33[?25h":
+                    case "\x1b[?25h":
                     // show the cursor
-                    case "\33(B":
+                    case "\x1b(B":
                         // set united states g0 character set
                         break;
-                    case "\33E":
+                    case "\x1bE":
                         // Move to next line
                         $this->_newLine();
                         $this->x = 0;
@@ -305,23 +304,24 @@ class ANSI
                                 $mods = \explode(';', $match[1]);
                                 foreach ($mods as $mod) {
                                     switch ($mod) {
-                                        case 0:
+                                        case '':
+                                        case '0':
                                             // Turn off character attributes
                                             $attr_cell = clone $this->base_attr_cell;
                                             break;
-                                        case 1:
+                                        case '1':
                                             // Turn bold mode on
                                             $attr_cell->bold = \true;
                                             break;
-                                        case 4:
+                                        case '4':
                                             // Turn underline mode on
                                             $attr_cell->underline = \true;
                                             break;
-                                        case 5:
+                                        case '5':
                                             // Turn blinking mode on
                                             $attr_cell->blink = \true;
                                             break;
-                                        case 7:
+                                        case '7':
                                             // Turn reverse video on
                                             $attr_cell->reverse = !$attr_cell->reverse;
                                             $temp = $attr_cell->background;
@@ -336,52 +336,52 @@ class ANSI
                                             $back =& $attr_cell->{$attr_cell->reverse ? 'foreground' : 'background'};
                                             switch ($mod) {
                                                 // @codingStandardsIgnoreStart
-                                                case 30:
+                                                case '30':
                                                     $front = 'black';
                                                     break;
-                                                case 31:
+                                                case '31':
                                                     $front = 'red';
                                                     break;
-                                                case 32:
+                                                case '32':
                                                     $front = 'green';
                                                     break;
-                                                case 33:
+                                                case '33':
                                                     $front = 'yellow';
                                                     break;
-                                                case 34:
+                                                case '34':
                                                     $front = 'blue';
                                                     break;
-                                                case 35:
+                                                case '35':
                                                     $front = 'magenta';
                                                     break;
-                                                case 36:
+                                                case '36':
                                                     $front = 'cyan';
                                                     break;
-                                                case 37:
+                                                case '37':
                                                     $front = 'white';
                                                     break;
-                                                case 40:
+                                                case '40':
                                                     $back = 'black';
                                                     break;
-                                                case 41:
+                                                case '41':
                                                     $back = 'red';
                                                     break;
-                                                case 42:
+                                                case '42':
                                                     $back = 'green';
                                                     break;
-                                                case 43:
+                                                case '43':
                                                     $back = 'yellow';
                                                     break;
-                                                case 44:
+                                                case '44':
                                                     $back = 'blue';
                                                     break;
-                                                case 45:
+                                                case '45':
                                                     $back = 'magenta';
                                                     break;
-                                                case 46:
+                                                case '46':
                                                     $back = 'cyan';
                                                     break;
-                                                case 47:
+                                                case '47':
                                                     $back = 'white';
                                                     break;
                                                 // @codingStandardsIgnoreEnd
@@ -407,7 +407,7 @@ class ANSI
                 case "\n":
                     $this->_newLine();
                     break;
-                case "\10":
+                case "\x08":
                     // backspace
                     if ($this->x) {
                         $this->x--;
@@ -415,16 +415,16 @@ class ANSI
                         $this->screen[$this->y] = \substr_replace($this->screen[$this->y], $source[$i], $this->x, 1);
                     }
                     break;
-                case "\17":
+                case "\x0f":
                     // shift
                     break;
-                case "\33":
+                case "\x1b":
                     // start ANSI escape code
                     $this->tokenization[\count($this->tokenization) - 1] = \substr($this->tokenization[\count($this->tokenization) - 1], 0, -1);
                     //if (!strlen($this->tokenization[count($this->tokenization) - 1])) {
                     //    array_pop($this->tokenization);
                     //}
-                    $this->ansi .= "\33";
+                    $this->ansi .= "\x1b";
                     break;
                 default:
                     $this->attrs[$this->y][$this->x] = clone $this->attr_cell;

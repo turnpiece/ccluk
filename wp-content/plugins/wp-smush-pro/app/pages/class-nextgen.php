@@ -29,6 +29,13 @@ class Nextgen extends Abstract_Page {
 	}
 
 	/**
+	 * Render inner content.
+	 */
+	public function render_inner_content() {
+		$this->view( 'smush-nextgen-page' );
+	}
+
+	/**
 	 * Register meta boxes.
 	 */
 	public function register_meta_boxes() {
@@ -45,7 +52,6 @@ class Nextgen extends Abstract_Page {
 			)
 		);
 
-		$class = WP_Smush::is_pro() ? 'bulk-smush-wrapper wp-smush-pro-install' : 'bulk-smush-wrapper';
 		$this->add_meta_box(
 			'bulk',
 			__( 'Bulk Smush', 'wp-smushit' ),
@@ -54,7 +60,7 @@ class Nextgen extends Abstract_Page {
 			null,
 			'bulk',
 			array(
-				'box_class' => "sui-box {$class}",
+				'box_class' => 'sui-box bulk-smush-wrapper',
 			)
 		);
 	}
@@ -76,16 +82,34 @@ class Nextgen extends Abstract_Page {
 	public function dashboard_summary_metabox() {
 		$ng = WP_Smush::get_instance()->core()->nextgen->ng_admin;
 
-		$lossy_enabled = WP_Smush::is_pro() && $this->settings->get( 'lossy' );
+		$lossy_enabled = $this->settings->get( 'lossy' );
 
 		$smushed_image_count = 0;
 		if ( $lossy_enabled ) {
-			$smushed_image = $ng->ng_stats->get_ngg_images( 'smushed' );
+			$smushed_image = $ng->ng_stats->get_ngg_images();
 			if ( ! empty( $smushed_image ) && is_array( $smushed_image ) && ! empty( $this->resmush_ids ) && is_array( $this->resmush_ids ) ) {
 				// Get smushed images excluding resmush IDs.
 				$smushed_image = array_diff_key( $smushed_image, array_flip( $this->resmush_ids ) );
 			}
 			$smushed_image_count = is_array( $smushed_image ) ? count( $smushed_image ) : 0;
+		}
+
+		$percent_optimized = 0;
+		if ( 0 === $smushed_image_count ) {
+			$grade = 'sui-grade-dismissed';
+		} else {
+			$resmush_ids   = get_option( 'wp-smush-nextgen-resmush-list', false );
+			$resmush_count = $resmush_ids ? count( $resmush_ids ) : 0;
+			$total_count   = WP_Smush::get_instance()->core()->nextgen->ng_admin->total_count;
+
+			$percent_optimized = floor( ( $smushed_image_count - $resmush_count ) * 100 / $total_count );
+
+			$grade = 'sui-grade-f';
+			if ( $percent_optimized >= 60 && $percent_optimized < 90 ) {
+				$grade = 'sui-grade-c';
+			} elseif ( $percent_optimized >= 90 ) {
+				$grade = 'sui-grade-a';
+			}
 		}
 
 		$this->view(
@@ -94,9 +118,13 @@ class Nextgen extends Abstract_Page {
 				'image_count'         => $ng->image_count,
 				'lossy_enabled'       => $lossy_enabled,
 				'smushed_image_count' => $smushed_image_count,
+				'super_smushed_count' => $ng->super_smushed,
 				'stats_human'         => $ng->stats['human'] > 0 ? $ng->stats['human'] : '0 MB',
 				'stats_percent'       => $ng->stats['percent'] > 0 ? number_format_i18n( $ng->stats['percent'], 1 ) : 0,
 				'total_count'         => $ng->total_count,
+				'percent_grade'       => $grade,
+				'percent_metric'      => 0.0 === (float) $percent_optimized ? 100 : $percent_optimized,
+				'percent_optimized'   => $percent_optimized,
 			)
 		);
 	}
@@ -121,9 +149,9 @@ class Nextgen extends Abstract_Page {
 
 		$resmush_ids = get_option( 'wp-smush-nextgen-resmush-list', false );
 
-		$count = $resmush_ids ? count( $resmush_ids ) : 0;
+		$resmush_count = $resmush_ids ? count( $resmush_ids ) : 0;
 
-		$count += $ng->remaining_count;
+		$count = $resmush_count + $ng->remaining_count;
 
 		$url = add_query_arg(
 			array(
@@ -135,14 +163,12 @@ class Nextgen extends Abstract_Page {
 		$this->view(
 			'nextgen/meta-box',
 			array(
-				'all_done'        => ( $ng->smushed_count == $ng->total_count ) && 0 == count( $ng->resmush_ids ),
-				'count'           => $count,
-				'lossy_enabled'   => WP_Smush::is_pro() && $this->settings->get( 'lossy' ),
-				'ng'              => $ng,
-				'remaining_count' => $ng->remaining_count,
-				'resmush_ids'     => $ng->resmush_ids,
-				'total_count'     => $ng->total_count,
-				'url'             => $url,
+				'total_images_to_smush' => $count,
+				'ng'                    => $ng,
+				'remaining_count'       => $ng->remaining_count,
+				'resmush_count'         => $resmush_count,
+				'total_count'           => $ng->total_count,
+				'url'                   => $url,
 			)
 		);
 	}

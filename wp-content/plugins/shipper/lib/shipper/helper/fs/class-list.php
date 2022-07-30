@@ -17,7 +17,7 @@ class Shipper_Helper_Fs_List {
 	 *
 	 * @var string
 	 */
-	private $_root;
+	private $root;
 
 	/**
 	 * Whether to process exclusions or not
@@ -26,30 +26,30 @@ class Shipper_Helper_Fs_List {
 	 *
 	 * @var bool
 	 */
-	private $_excludable = true;
+	private $excludable = true;
 
 	/**
 	 * Internal data storage, used for flags and such
 	 *
 	 * @var Shipper_Model_Storage
 	 */
-	private $_storage;
+	private $storage;
 
 	/**
 	 * Files in current run storage
 	 *
 	 * @var array
 	 */
-	private $_files = array();
+	private $files = array();
 
 	/**
 	 * Constructor.
 	 *
-	 * @param object $storage Shipper_Model_Stored instance.
+	 * @param Shipper_Model_Stored $storage Shipper_Model_Stored instance.
 	 */
 	public function __construct( Shipper_Model_Stored $storage ) {
-		$this->_storage = $storage;
-		$this->_storage->load();
+		$this->storage = $storage;
+		$this->storage->load();
 	}
 
 	/**
@@ -60,7 +60,7 @@ class Shipper_Helper_Fs_List {
 	 * @return Shipper_Helper_Fs_List
 	 */
 	public function set_excludable( $excludable ) {
-		$this->_excludable = ! ! $excludable;
+		$this->excludable = ! ! $excludable;
 
 		return $this;
 	}
@@ -71,7 +71,7 @@ class Shipper_Helper_Fs_List {
 	 * @return bool
 	 */
 	public function is_excludable() {
-		return ! ! $this->_excludable;
+		return ! ! $this->excludable;
 	}
 
 	/**
@@ -82,7 +82,7 @@ class Shipper_Helper_Fs_List {
 	 * @return Shipper_Helper_Fs_List
 	 */
 	public function set_root( $path ) {
-		$this->_root = wp_normalize_path( $path );
+		$this->root = wp_normalize_path( $path );
 
 		return $this;
 	}
@@ -100,8 +100,8 @@ class Shipper_Helper_Fs_List {
 			$root = WP_CONTENT_DIR;
 		}
 
-		return ! empty( $this->_root )
-			? (string) $this->_root
+		return ! empty( $this->root )
+			? (string) $this->root
 			: $root;
 	}
 
@@ -114,10 +114,10 @@ class Shipper_Helper_Fs_List {
 	 */
 	public function reset() {
 		$total = $this->get_total_steps();
-		$this->_storage->clear();
-		$this->_storage->set( Shipper_Model_Stored_Filelist::KEY_TOTAL, $total );
+		$this->storage->clear();
+		$this->storage->set( Shipper_Model_Stored_Filelist::KEY_TOTAL, $total );
 
-		return $this->_storage->save();
+		return $this->storage->save();
 	}
 
 	/**
@@ -126,7 +126,7 @@ class Shipper_Helper_Fs_List {
 	 * @return bool
 	 */
 	public function is_done() {
-		return ! ! $this->_storage->get( Shipper_Model_Stored_Filelist::KEY_DONE, false );
+		return ! ! $this->storage->get( Shipper_Model_Stored_Filelist::KEY_DONE, false );
 	}
 
 	/**
@@ -135,7 +135,7 @@ class Shipper_Helper_Fs_List {
 	 * @return int
 	 */
 	public function get_current_step() {
-		return (int) $this->_storage->get( Shipper_Model_Stored_Filelist::KEY_STEP, 1 );
+		return (int) $this->storage->get( Shipper_Model_Stored_Filelist::KEY_STEP, 1 );
 	}
 
 	/**
@@ -144,7 +144,7 @@ class Shipper_Helper_Fs_List {
 	 * @return int
 	 */
 	public function get_total_steps() {
-		return (int) $this->_storage->get( Shipper_Model_Stored_Filelist::KEY_TOTAL, 1 );
+		return (int) $this->storage->get( Shipper_Model_Stored_Filelist::KEY_TOTAL, 1 );
 	}
 
 	/**
@@ -155,8 +155,8 @@ class Shipper_Helper_Fs_List {
 	 * @return array
 	 */
 	public function get_files() {
-		if ( ! empty( $this->_files ) ) {
-			return $this->_files;
+		if ( ! empty( $this->files ) ) {
+			return $this->files;
 		}
 
 		return $this->process_files();
@@ -169,8 +169,8 @@ class Shipper_Helper_Fs_List {
 	 */
 	public function get_paths_limit() {
 		$limit = $this->is_excludable()
-			? 50
-			: 250;
+			? 1000
+			: 1500;
 
 		/**
 		 * Max number of paths to be processed per step
@@ -196,7 +196,7 @@ class Shipper_Helper_Fs_List {
 	 */
 	public function get_bytes_limit() {
 		$limit = $this->is_excludable()
-			? 2 * 1024 * 1024
+			? 25 * 1024 * 1024
 			: 0;
 
 		/**
@@ -221,20 +221,21 @@ class Shipper_Helper_Fs_List {
 	 */
 	public function process_files() {
 		if ( $this->is_done() ) {
-			return $this->_files;
+			return $this->files;
 		}
 		$processed   = 0;
 		$limit       = $this->get_paths_limit();
 		$limit_files = $limit * 6;
 		$limit_bytes = $this->get_bytes_limit();
 
-		$paths = $this->_storage->get(
-			Shipper_Model_Stored_Filelist::KEY_PATHS, array( $this->get_root() )
+		$paths = $this->storage->get(
+			Shipper_Model_Stored_Filelist::KEY_PATHS,
+			array( $this->get_root() )
 		);
 
 		$exclusions = false;
 		if ( $this->is_excludable() ) {
-			$exclusions = new Shipper_Model_Fs_Blacklist;
+			$exclusions = new Shipper_Model_Fs_Blacklist();
 			// Log dir is likely publicly accessible.
 			$exclusions->add_directory(
 				Shipper_Helper_Fs_Path::get_log_dir()
@@ -242,7 +243,7 @@ class Shipper_Helper_Fs_List {
 		}
 
 		while ( ! empty( $paths ) ) {
-			$path = array_pop( $paths );
+			$path = array_shift( $paths );
 			$processed ++;
 
 			$contents = shipper_glob_all( $path );
@@ -261,14 +262,20 @@ class Shipper_Helper_Fs_List {
 					true,
 					$item
 				);
-
 				if ( ! $do_process_item ) {
+					Shipper_Helper_Log::write(
+						sprintf(
+							/* translators: %s: file name. */
+							__( 'Skipping excluded item: %s', 'shipper' ),
+							$item
+						)
+					);
 					continue;
 				}
-
 				if ( is_object( $exclusions ) && $exclusions->is_excluded( $item ) ) {
 					Shipper_Helper_Log::write(
 						sprintf(
+							/* translators: %s: file name. */
 							__( 'Skipping excluded item: %s', 'shipper' ),
 							$item
 						)
@@ -284,6 +291,7 @@ class Shipper_Helper_Fs_List {
 							// This is so we stay log-silent during preflight check.
 							Shipper_Helper_Log::write(
 								sprintf(
+									/* translators: %s: file name. */
 									__( 'Skipping unreadable file: %s', 'shipper' ),
 									$item
 								)
@@ -295,7 +303,7 @@ class Shipper_Helper_Fs_List {
 
 					$size = filesize( $item );
 
-					$this->_files[] = array(
+					$this->files[] = array(
 						'path' => $item,
 						'size' => $size,
 					);
@@ -305,9 +313,9 @@ class Shipper_Helper_Fs_List {
 					}
 				}
 			}
-			$this->_storage->set( Shipper_Model_Stored_Filelist::KEY_PATHS, $paths );
+			$this->storage->set( Shipper_Model_Stored_Filelist::KEY_PATHS, $paths );
 
-			if ( count( $this->_files ) >= $limit_files ) {
+			if ( count( $this->files ) >= $limit_files ) {
 				break;
 			}
 
@@ -316,37 +324,37 @@ class Shipper_Helper_Fs_List {
 			}
 
 			if ( ! empty( $limit_bytes ) ) {
-				$total_bytes = array_sum( wp_list_pluck( $this->_files, 'size' ) );
+				$total_bytes = array_sum( wp_list_pluck( $this->files, 'size' ) );
 				if ( $total_bytes > $limit_bytes ) {
 					break;
 				}
 			}
 		}
 
-		$paths = $this->_storage->get( Shipper_Model_Stored_Filelist::KEY_PATHS );
+		$paths = $this->storage->get( Shipper_Model_Stored_Filelist::KEY_PATHS );
 		if ( empty( $paths ) ) {
 			// So we are done. Say so.
-			$this->_storage->set( Shipper_Model_Stored_Filelist::KEY_DONE, true );
+			$this->storage->set( Shipper_Model_Stored_Filelist::KEY_DONE, true );
 		}
-		$step = $this->_storage->get( Shipper_Model_Stored_Filelist::KEY_STEP, 0 );
+		$step = $this->storage->get( Shipper_Model_Stored_Filelist::KEY_STEP, 0 );
 		$step ++;
-		$this->_storage->set( Shipper_Model_Stored_Filelist::KEY_STEP, $step );
+		$this->storage->set( Shipper_Model_Stored_Filelist::KEY_STEP, $step );
 
 		$total = $this->get_total_steps();
 		if ( $total <= $step ) {
 			$total ++;
-			$this->_storage->set( Shipper_Model_Stored_Filelist::KEY_TOTAL, $total );
+			$this->storage->set( Shipper_Model_Stored_Filelist::KEY_TOTAL, $total );
 		}
 
-		$this->_storage->save();
+		$this->storage->save();
 
-		if ( empty( $this->_files ) ) {
+		if ( empty( $this->files ) ) {
 			// So we could be now iterating through the exclusions...
 			// If we're coming up short, add a passthrough file.
-			$this->_files[] = 'passthrough';
+			$this->files[] = 'passthrough';
 		}
 
-		return $this->_files;
+		return $this->files;
 	}
 
 	/**
@@ -355,6 +363,6 @@ class Shipper_Helper_Fs_List {
 	 * @return object Shipper_Model_Stored_Filelist instance
 	 */
 	public function get_storage() {
-		return $this->_storage;
+		return $this->storage;
 	}
 }

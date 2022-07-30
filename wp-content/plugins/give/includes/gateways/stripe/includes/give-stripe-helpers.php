@@ -10,6 +10,12 @@
  * @license    https://opensource.org/licenses/gpl-license GNU Public License
  */
 
+use Give\Log\Log;
+use Give\PaymentGateways\Exceptions\InvalidPropertyName;
+use Give\PaymentGateways\Stripe\Models\AccountDetail;
+use Give\PaymentGateways\Stripe\Repositories\Settings;
+use Give\ValueObjects\Money;
+
 // Exit, if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -407,22 +413,38 @@ function give_stripe_is_zero_decimal_currency() {
  * @see https://stripe.com/docs/api/php#create_charge-statement_descriptor
  *
  * @since 2.5.0
+ * @since 2.19.0 Previously stripe accounts have single global statement descriptor.
+ *             Now each stripe account will have their own statement descriptor.
+ * @since 2.19.2 give_stripe_get_connected_account_options function returns empty string as account id for stripe account connected with api keys.
+ *             For this return an exception throws. Internal logic update to get donation form stripe account on basis of account type
  *
- * @param array $data List of posted variable while submitting donation.
+ * @param array $donation_data List of posted variable while submitting donation.
  *
  * @return mixed
+ * @throws InvalidPropertyName
  */
-function give_stripe_get_statement_descriptor( $data = [] ) {
+function give_stripe_get_statement_descriptor($donation_data = [])
+{
+    $form_id = 0;
 
-	$descriptor_option = give_get_option( 'stripe_statement_descriptor', get_bloginfo( 'name' ) );
+    if ($donation_data && $donation_data['post_data']['give-form-id']) {
+        $form_id = (int)$donation_data['post_data']['give-form-id'];
+    } elseif (!empty($_POST['give-form-id'])) {
+        $form_id = absint($_POST['give-form-id']);
+    }
 
-	// Clean the statement descriptor.
-	$unsupported_characters = [ '<', '>', '"', '\'' ];
-	$statement_descriptor   = mb_substr( $descriptor_option, 0, 22 );
-	$statement_descriptor   = str_replace( $unsupported_characters, '', $statement_descriptor );
+    /*
+     * Stripe account connected with api keys does not have account id.
+     * We can use account slug to retrieve account data .
+     */
+    $defaultAccount = give_stripe_get_default_account($form_id);
+    $stripAccountId = $defaultAccount['account_id'] ?: $defaultAccount['account_slug'];
 
-	return apply_filters( 'give_stripe_statement_descriptor', $statement_descriptor, $data );
+    $stripeAccountFormPayment = give(Settings::class)
+        ->getStripeAccountById($stripAccountId);
+    $text = $stripeAccountFormPayment->statementDescriptor;
 
+    return apply_filters('give_stripe_statement_descriptor', $text, $donation_data);
 }
 
 /**
@@ -1035,11 +1057,12 @@ function give_stripe_cents_to_dollars( $cents ) {
  * @param string $dollars Amount in dollars.
  *
  * @since  2.5.0
+ * @since 2.9.2  Return amount in cent only if currency is not zero-decimal currency.
  *
  * @return string
  */
 function give_stripe_dollars_to_cents( $dollars ) {
-	return round( $dollars, give_currency_decimal_filter() ) * 100;
+	return Money::of( $dollars, give_get_currency() )->getMinorAmount();
 }
 
 /**
@@ -1075,25 +1098,6 @@ function give_stripe_format_amount( $amount ) {
 function give_stripe_get_checkout_type() {
 	return give_get_option( 'stripe_checkout_type', 'modal' );
 }
-
-/**
- * This function will help you load Stripe SDK based on the conditions.
- *
- * @since 2.5.5
- *
- * @return void
- */
-function give_stripe_load_stripe_sdk() {
-
-	$stripe_sdk_compatibility = give_get_option( 'stripe_sdk_incompatibility', 'composer' );
-
-	if ( 'composer' === $stripe_sdk_compatibility ) {
-		require_once GIVE_PLUGIN_DIR . 'vendor/autoload.php';
-	} elseif ( 'manual' === $stripe_sdk_compatibility ) {
-		require_once GIVE_PLUGIN_DIR . 'vendor/stripe/stripe-php/init.php';
-	}
-}
-
 
 /**
  * This function will prepare metadata to send to Stripe.
@@ -1135,9 +1139,10 @@ function give_stripe_prepare_metadata( $donation_id, $donation_data = [] ) {
 	// Add custom FFM fields to Stripe metadata.
 	$args = array_merge( $args, give_stripe_get_custom_ffm_fields( $form_id, $donation_id ) );
 
-	// Limit metadata passed to Stripe as maximum of 20 metadata is only allowed.
-	if ( count( $args ) > 20 ) {
-		$args = array_slice( $args, 0, 19, false );
+	// Limit metadata passed to Stripe as maximum of 50 metadata is only allowed.
+    // Stripe doc: https://stripe.com/docs/api/metadata
+	if ( count( $args ) > 50 ) {
+		$args = array_slice( $args, 0, 49 );
 		$args = array_merge(
 			$args,
 			[
@@ -1343,10 +1348,10 @@ function give_stripe_get_admin_settings_page_url( $args = [] ) {
 
 	$args = wp_parse_args( $args, $default_args );
 
-	return add_query_arg(
+	return esc_url_raw( add_query_arg(
 		$args,
-		esc_url_raw( admin_url( 'edit.php' ) )
-	);
+		admin_url( 'edit.php' )
+	) );
 }
 
 /**

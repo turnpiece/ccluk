@@ -6,7 +6,7 @@
  * @package shipper
  */
 
-$status = ! empty( $check['status'] )
+$status   = ! empty( $check['status'] ) // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- this is not WordPress global
 	? 'ok' === $check['status']
 	: true;
 $check_id = ! empty( $check['check_id'] )

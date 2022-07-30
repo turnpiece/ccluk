@@ -5,6 +5,7 @@ namespace Beehive\GuzzleHttp\Psr7;
 use Beehive\Psr\Http\Message\StreamInterface;
 /**
  * Stream decorator trait
+ *
  * @property StreamInterface stream
  */
 trait StreamDecoratorTrait
@@ -12,7 +13,7 @@ trait StreamDecoratorTrait
     /**
      * @param StreamInterface $stream Stream to decorate
      */
-    public function __construct(\Beehive\Psr\Http\Message\StreamInterface $stream)
+    public function __construct(StreamInterface $stream)
     {
         $this->stream = $stream;
     }
@@ -47,7 +48,7 @@ trait StreamDecoratorTrait
     }
     public function getContents()
     {
-        return copy_to_string($this);
+        return Utils::copyToString($this);
     }
     /**
      * Allow decorators to implement custom methods
@@ -119,6 +120,7 @@ trait StreamDecoratorTrait
      * Implement in subclasses to dynamically create streams when requested.
      *
      * @return StreamInterface
+     *
      * @throws \BadMethodCallException
      */
     protected function createStream()

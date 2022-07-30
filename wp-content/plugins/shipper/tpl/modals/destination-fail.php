@@ -17,10 +17,15 @@
 </div>
 <div class="sui-box-body">
 	<div class="sui-notice sui-notice-warning">
-		<p>
-			<?php esc_html_e( 'Shipper couldn\'t find a new website.', 'shipper' ); ?>
-			<?php esc_html_e( 'Double check you\'ve connected your website to the Hub and installed Shipper.', 'shipper' ); ?>
-		</p>
+		<div class="sui-notice-content">
+			<div class="sui-notice-message">
+				<i class="sui-notice-icon sui-icon-info sui-md" aria-hidden="true"></i>
+				<p>
+					<?php esc_html_e( 'Shipper couldn\'t find a new website.', 'shipper' ); ?>
+					<?php esc_html_e( 'Double check you\'ve connected your website to the Hub and installed Shipper.', 'shipper' ); ?>
+				</p>
+			</div>
+		</div>
 	</div>
 	<p>
 		<a href="#recheck"

@@ -18,6 +18,6 @@
 namespace Beehive\Google\Auth\Cache;
 
 use Beehive\Psr\Cache\InvalidArgumentException as PsrInvalidArgumentException;
-class InvalidArgumentException extends \InvalidArgumentException implements \Beehive\Psr\Cache\InvalidArgumentException
+class InvalidArgumentException extends \InvalidArgumentException implements PsrInvalidArgumentException
 {
 }

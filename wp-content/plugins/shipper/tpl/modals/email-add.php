@@ -7,68 +7,59 @@
 
 ?>
 
-<div class="sui-dialog sui-dialog-sm" id="shipper-add-recipient" aria-hidden="true">
-	<div class="sui-dialog-overlay" tabindex="-1" data-a11y-dialog-hide></div>
-
-	<div class="sui-dialog-content" role="dialog">
-
-		<div class="sui-box" role="document">
-			<div class="sui-box-header">
-				<div class="shipper-close">
-					<a href="#close">
-						<i class="sui-icon-close" aria-hidden="true"></i>
-						<span><?php esc_html_e( 'Close', 'shipper' ); ?></span>
-					</a>
-				</div>
-				<h3 class="sui-dialog-title"><?php esc_html_e( 'Add Recipient', 'shipper' ); ?></h3>
-			</div>
-			<div class="sui-box-body">
-<!--
-				<p>
-					<?php esc_html_e( 'Add as many recipients as you like.', 'shipper' ); ?>
-					<?php esc_html_e( 'They will receive email reports as per the schedule you set.', 'shipper' ); ?>
-				</p>
--->
-
-
-				<div class="sui-form-field">
-						<label for="" class="sui-label">
-							<?php esc_html_e( 'First name', 'shipper' ); ?>
-						</label>
-						<input
-							class="sui-form-control"
-							placeholder="<?php esc_attr_e( 'E.g. John', 'shipper' ); ?>"
-							type="text" />
-				</div>
-
-				<div class="sui-form-field">
-						<label for="" class="sui-label">
-							<?php esc_html_e( 'Email address', 'shipper' ); ?>
-						</label>
-						<input
-							class="sui-form-control"
-							placeholder="<?php esc_attr_e( 'E.g. john@doe.com', 'shipper' ); ?>"
-							type="email" />
-				</div>
-
-				<div class="shipper-actions">
-					<button
-						class="sui-button sui-button-ghost shipper-cancel">
-						<?php esc_html_e( 'Cancel', 'shipper' ); ?>
+<div class="sui-modal sui-modal-sm">
+	<div
+		role="dialog"
+		id="shipper-add-recipient"
+		class="sui-modal-content sui-content-fade-in"
+		aria-modal="true"
+		aria-labelledby="shipper-add-recipient-title"
+		aria-describedby="shipper-add-recipient-desc">
+			<div class="sui-box">
+				<div class="sui-box-header sui-flatten sui-content-center sui-spacing-top--60">
+					<button class="sui-button-icon sui-button-float--right shipper-cancel">
+						<i class="sui-icon-close sui-md" aria-hidden="true"></i>
+						<span class="sui-screen-reader-text"><?php esc_html_e( 'Close', 'shipper' ); ?></span>
 					</button>
 
+					<h3 id="shipper-add-recipient-title" class="sui-box-title sui-lg">
+						<?php esc_html_e( 'Add Recipient', 'shipper' ); ?>
+					</h3>
+				</div>
+
+				<div class="sui-box-body">
+					<div class="sui-form-field">
+						<label for="shipper-add-recipient-first-name" id="shipper-add-recipient-first-name-label" class="sui-label"><?php esc_html_e( 'First name', 'shipper' ); ?></label>
+						<input
+							type="text"
+							placeholder="<?php esc_attr_e( 'E.g. John', 'shipper' ); ?>"
+							id="shipper-add-recipient-first-name"
+							class="sui-form-control"
+							aria-labelledby="shipper-add-recipient-first-name-label"
+						/>
+					</div>
+
+					<div class="sui-form-field">
+						<label for="shipper-add-recipient-email" id="shipper-add-recipient-email-label" class="sui-label"><?php esc_html_e( 'Email address', 'shipper' ); ?></label>
+						<input
+							type="email"
+							placeholder="<?php esc_attr_e( 'E.g. John@doe.com', 'shipper' ); ?>"
+							id="shipper-add-recipient-email"
+							class="sui-form-control"
+							aria-labelledby="shipper-add-recipient-email-label"
+						/>
+					</div>
+				</div>
+
+				<div class="shipper-actions sui-box-footer sui-content-separated">
+					<button class="sui-button sui-button-ghost shipper-cancel"><?php esc_html_e( 'Cancel', 'shipper' ); ?></button>
 					<button
 						class="sui-button shipper-add"
-						data-add="<?php echo esc_attr(
-							wp_create_nonce( 'shipper_email_notifications_add' )
-						); ?>"
-						type="button">
-						<span><?php esc_html_e( 'Add', 'shipper' ); ?></span>
+						data-add="<?php echo esc_attr( wp_create_nonce( 'shipper_email_notifications_add' ) ); ?>"
+					>
+						<?php esc_html_e( 'Add', 'shipper' ); ?>
 					</button>
 				</div>
-
-			</div><?php // .sui-box-body ?>
-		</div><?php // .sui-box ?>
-
-	</div><?php // .sui-dialog-content ?>
-</div><?php // .sui-dialog ?>
+			</div>
+	</div>
+</div>

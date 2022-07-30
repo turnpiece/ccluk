@@ -6,16 +6,20 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Symfony\\Polyfill\\Php72\\' => array($vendorDir . '/symfony/polyfill-php72'),
+    'Symfony\\Polyfill\\Php70\\' => array($vendorDir . '/symfony/polyfill-php70'),
+    'Symfony\\Polyfill\\Intl\\Normalizer\\' => array($vendorDir . '/symfony/polyfill-intl-normalizer'),
+    'Symfony\\Polyfill\\Intl\\Idn\\' => array($vendorDir . '/symfony/polyfill-intl-idn'),
     'Beehive\\phpseclib\\' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
-    'Beehive\\React\\Promise\\' => array($vendorDir . '/react/promise/src'),
     'Beehive\\Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     'Beehive\\Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
     'Beehive\\Psr\\Cache\\' => array($vendorDir . '/psr/cache/src'),
     'Beehive\\Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
-    'Beehive\\GuzzleHttp\\Stream\\' => array($vendorDir . '/guzzlehttp/streams/src'),
-    'Beehive\\GuzzleHttp\\Ring\\' => array($vendorDir . '/guzzlehttp/ringphp/src'),
     'Beehive\\GuzzleHttp\\Psr7\\' => array($vendorDir . '/guzzlehttp/psr7/src'),
+    'Beehive\\GuzzleHttp\\Promise\\' => array($vendorDir . '/guzzlehttp/promises/src'),
     'Beehive\\GuzzleHttp\\' => array($vendorDir . '/guzzlehttp/guzzle/src'),
+    'Beehive\\Google\\Service\\' => array($vendorDir . '/google/apiclient-services/src'),
     'Beehive\\Google\\Auth\\' => array($vendorDir . '/google/auth/src'),
+    'Beehive\\Google\\' => array($vendorDir . '/google/apiclient/src'),
     'Beehive\\Firebase\\JWT\\' => array($vendorDir . '/firebase/php-jwt/src'),
 );

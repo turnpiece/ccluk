@@ -448,7 +448,7 @@ $this->render(
 
 													</li>
 
-													<?php if ( is_multisite() ) { ?>
+													<?php if ( true /*is_multisite()*/ ) { ?>
 
 														<li class="wps-input--item">
 
@@ -456,7 +456,7 @@ $this->render(
 
 																<input type="checkbox" class="snapshot-backup-sub-options"
                                                                 <?php
-                                                                if ( array_search( 'plugins', $item['files-sections'], true ) !== false ) {
+                                                                if ( array_search( 'mu-plugins', $item['files-sections'], true ) !== false ) {
 																	echo ' checked="checked" ';
 																}
                                                                 ?>

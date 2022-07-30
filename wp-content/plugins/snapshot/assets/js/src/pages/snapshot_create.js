@@ -5,25 +5,25 @@
 		// Check if there are hidden invalid values in storage limits. Mainly for taking care of existing snapshots updating to 3.2.
 		validate_archive_count("all", false);
 
-		jQuery("input[name='frequency']").change(function () {
+		jQuery("input[name='frequency']").on('change', function () {
 			var backup_frequency_options = jQuery("input[name='frequency']:checked").val();
 			if ((backup_frequency_options === "once")) {
-				jQuery('#snapshot-immediate').attr('disabled', false).attr('checked', true);
-				jQuery('#snapshot-interval').attr('disabled', true);
+				jQuery('#snapshot-immediate').prop('disabled', false).prop('checked', true);
+				jQuery('#snapshot-interval').prop('disabled', true);
 				jQuery('div#snapshot-schedule-options-container').slideUp('fast');
 				jQuery('#snapshot-add-update-submit').text(jQuery('#snapshot-add-update-submit').data('title-save-and-run'));
 			} else {
-				jQuery('#snapshot-immediate').attr('disabled', true).attr('checked', false);
-				jQuery('#snapshot-interval').attr('disabled', false);
+				jQuery('#snapshot-immediate').prop('disabled', true).prop('checked', false);
+				jQuery('#snapshot-interval').prop('disabled', false);
 				jQuery('div#snapshot-schedule-options-container').slideDown('slow');
 				if (!jQuery('#checkbox-run-backup-now').is(':checked')) {
 					jQuery('#snapshot-add-update-submit').text(jQuery('#snapshot-add-update-submit').data('title-save-only'));
 				}
 
 			}
-		}).change();
+		}).trigger('change');
 
-		jQuery("input[name='snapshot-clean-remote']").change(function () {
+		jQuery("input[name='snapshot-clean-remote']").on('change', function () {
 			var clean_remotes = jQuery("input[name='snapshot-clean-remote']:checked").val();
 			if (clean_remotes === "1") {
 				jQuery('div#remote-count').slideDown('fast');
@@ -32,9 +32,9 @@
 				jQuery('div#remote-count').slideUp('fast');
 				validate_archive_count("remote", "disable");
 			}
-		}).change();
+		}).trigger('change');
 
-		jQuery("input[name='snapshot-clean-local']").change(function () {
+		jQuery("input[name='snapshot-clean-local']").on('change', function () {
 			var clean_locals = jQuery("input[name='snapshot-clean-local']:checked").val();
 			if (clean_locals === "1") {
 				jQuery('div#local-count').slideDown('fast');
@@ -43,34 +43,34 @@
 				jQuery('div#local-count').slideUp('fast');
 				validate_archive_count("local", "disable");
 			}
-		}).change();
+		}).trigger('change');
 
 		function validate_archive_count(storage, state) {
 			if (storage === "remote") {
 				if (state === "enable") {
-					jQuery('input#snapshot-remote-archive-count').attr('disabled', false);
+					jQuery('input#snapshot-remote-archive-count').prop('disabled', false);
 				} else {
-					jQuery('input#snapshot-remote-archive-count').attr('disabled', 'disabled');
+					jQuery('input#snapshot-remote-archive-count').prop('disabled', true);
 				}
 			} else if (storage === "local") {
 				if (state === "enable") {
-					jQuery('input#snapshot-archive-count').attr('disabled', false);
+					jQuery('input#snapshot-archive-count').prop('disabled', false);
 				} else {
-					jQuery('input#snapshot-archive-count').attr('disabled', 'disabled');
+					jQuery('input#snapshot-archive-count').prop('disabled', true);
 				}
 			} if (storage === "all") {
 				if (jQuery("input[name='snapshot-clean-local']:checked").val() !== "1") {
-					jQuery('input#snapshot-archive-count').attr('disabled', 'disabled');
+					jQuery('input#snapshot-archive-count').prop('disabled', true);
 				}
 				if (jQuery("input[name='snapshot-clean-remote']:checked").val() !== "1") {
-					jQuery('input#snapshot-remote-archive-count').attr('disabled', 'disabled');
+					jQuery('input#snapshot-remote-archive-count').prop('disabled', true);
 				}
 			}
 
 			return false;
 		}
 
-		jQuery("#checkbox-run-backup-now").change(function () {
+		jQuery("#checkbox-run-backup-now").on('change', function () {
 			if ($(this).is(':checked') && jQuery("input[name='frequency']:checked").val() !== "once") {
 				jQuery('#snapshot-add-update-submit').text(jQuery('#snapshot-add-update-submit').data('title-save-and-run'));
 			} else {
@@ -78,15 +78,15 @@
 					jQuery('#snapshot-add-update-submit').text(jQuery('#snapshot-add-update-submit').data('title-save-only'));
 				}
 			}
-		}).change();
+		}).trigger('change');
 
-		jQuery('[name=snapshot-destination]').change(function () {
+		jQuery('[name=snapshot-destination]').on('change', function () {
 			var destination_type = jQuery('[name=snapshot-destination]:checked').attr('data-destination-type');
 			if (destination_type == "dropbox") {
-				jQuery('input#snapshot-destination-sync-mirror').attr('disabled', false);
+				jQuery('input#snapshot-destination-sync-mirror').prop('disabled', false);
 			} else {
-				jQuery('input#snapshot-destination-sync-mirror').attr('disabled', 'disabled');
-				jQuery('input#snapshot-destination-sync-archive').attr('checked', 'checked');
+				jQuery('input#snapshot-destination-sync-mirror').prop('disabled', true);
+				jQuery('input#snapshot-destination-sync-archive').prop('checked', true);
 			}
 
 			if (destination_type == "local") {
@@ -94,7 +94,7 @@
 			} else {
 				jQuery('div#clean-remote-count').slideDown('fast');
 			}
-		}).change();
+		}).trigger('change');
 
 		/* Handler for Backup/Restore user Aborts */
 
@@ -132,7 +132,7 @@
 			jQuery('#wps-build-progress').removeClass("hidden");
 			jQuery(".wpmud-box-title .wps-title-result").addClass("hidden");
 			jQuery(".wpmud-box-title .wps-title-progress").removeClass("hidden");
-			jQuery("form#snapshot-add-update").submit();
+			jQuery("form#snapshot-add-update").trigger('submit');
 		});
 
 		jQuery("#wps-build-error-back").on('click', function (e) {
@@ -180,7 +180,7 @@
 		});
 
 		/* Used on the 'Add New Snapshot' panel. Handles the form submit to backup one table per request. Seems this was taking too long on some servers. */
-		jQuery("form#snapshot-add-update").off().submit(function (e) {
+		jQuery("form#snapshot-add-update").off().on('submit', function (e) {
 			snapshot_ajax_user_aborted = false;
 
 			jQuery('[id^="snapshot-item-table-"]').remove();

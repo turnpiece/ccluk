@@ -18,14 +18,14 @@ class Shipper_Helper_System {
 	 *
 	 * @var int
 	 */
-	static private $_max_exec_time;
+	private static $max_exec_time;
 
 	/**
 	 * Optimize system for performance, as much as possible
 	 *
 	 * @return bool
 	 */
-	static public function optimize() {
+	public static function optimize() {
 		if ( self::is_in_safe_mode() ) {
 			Shipper_Helper_Log::write( 'WARNING: Safe mode on, skipping optimizations.' );
 
@@ -43,8 +43,8 @@ class Shipper_Helper_System {
 	 *
 	 * @return bool
 	 */
-	static public function optimize_memory_constraints() {
-		$size = @ini_get( 'memory_limit' );
+	public static function optimize_memory_constraints() {
+		$size = @ini_get( 'memory_limit' ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
 		if ( false === self::is_changeable( 'memory_limit' ) ) {
 			Shipper_Helper_Log::write(
 				sprintf( 'WARNING: Unable to change memory limit. Currently it is %s', $size )
@@ -52,9 +52,8 @@ class Shipper_Helper_System {
 
 			return false;
 		}
-
 		// Shut up and take all my memory.
-		return false !== @ini_set( 'memory_limit', - 1 );
+		return false !== @ini_set( 'memory_limit', - 1 ); // phpcs:ignore
 	}
 
 	/**
@@ -66,9 +65,9 @@ class Shipper_Helper_System {
 	 *
 	 * @return int
 	 */
-	static public function get_max_exec_time() {
-		if ( empty( self::$_max_exec_time ) ) {
-			self::$_max_exec_time = @ini_get( 'max_execution_time' );
+	public static function get_max_exec_time() {
+		if ( empty( self::$max_exec_time ) ) {
+			self::$max_exec_time = @ini_get( 'max_execution_time' ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
 		}
 
 		/**
@@ -80,11 +79,10 @@ class Shipper_Helper_System {
 		 *
 		 * @return int
 		 * @since v1.0.3
-		 *
 		 */
 		return (int) apply_filters(
 			'shipper_max_exec_time',
-			self::$_max_exec_time
+			self::$max_exec_time
 		);
 	}
 
@@ -97,7 +95,7 @@ class Shipper_Helper_System {
 	 *
 	 * @return int
 	 */
-	static public function get_max_exec_time_capped() {
+	public static function get_max_exec_time_capped() {
 		$time = (int) self::get_max_exec_time();
 
 		/**
@@ -107,7 +105,6 @@ class Shipper_Helper_System {
 		 *
 		 * @return int
 		 * @since v1.0.1
-		 *
 		 */
 		$cap_time = (int) apply_filters(
 			'shipper_max_exec_time_capped',
@@ -128,15 +125,15 @@ class Shipper_Helper_System {
 	 *
 	 * @return bool
 	 */
-	static public function optimize_time_limit() {
+	public static function optimize_time_limit() {
 		if ( self::is_disabled( 'set_time_limit' ) ) {
 			Shipper_Helper_Log::write( 'WARNING: set_time_limit is disabled or not available.' );
 
 			return false;
 		}
 		// Set the cached value *prior* to the shift attempt.
-		if ( empty( self::$_max_exec_time ) ) {
-			self::$_max_exec_time = @ini_get( 'max_execution_time' );
+		if ( empty( self::$max_exec_time ) ) {
+			self::$max_exec_time = @ini_get( 'max_execution_time' ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
 		}
 
 		return set_time_limit( 0 );
@@ -149,7 +146,7 @@ class Shipper_Helper_System {
 	 *
 	 * @return bool
 	 */
-	static public function is_disabled( $func ) {
+	public static function is_disabled( $func ) {
 		$callable = is_callable( $func );
 		if ( $callable ) {
 			$disabled = array_map( 'trim', explode( ',', ini_get( 'disable_functions' ) ) );
@@ -183,7 +180,7 @@ class Shipper_Helper_System {
 	 *
 	 * @return bool
 	 */
-	static public function is_changeable( $what ) {
+	public static function is_changeable( $what ) {
 		/**
 		 * Whether an ini key is changeable.
 		 *
@@ -203,25 +200,12 @@ class Shipper_Helper_System {
 
 	/**
 	 * Checks whether we're in PHP safe mode.
+	 * Used in tests.
 	 *
 	 * @return bool
 	 */
-	static public function is_in_safe_mode() {
-		$is_safe_mode = strtolower( ini_get( 'safe_mode' ) );
-
-		/**
-		 * Checks whether we're in PHP safe mode.
-		 *
-		 * Used in tests.
-		 *
-		 * @param bool $is_in_safe_mode Whether we're in safe mode.
-		 *
-		 * @return bool
-		 */
-		return (bool) apply_filters(
-			'shipper_helper_system_safemode',
-			( ! empty( $is_safe_mode ) && 'off' !== $is_safe_mode )
-		);
+	public static function is_in_safe_mode() {
+		return apply_filters( 'shipper_helper_system_safemode', false );
 	}
 
 	/**
@@ -233,7 +217,7 @@ class Shipper_Helper_System {
 	 *
 	 * @return bool
 	 */
-	static public function is_available( $func ) {
+	public static function is_available( $func ) {
 		static $available = array();
 		if ( isset( $available[ $func ] ) ) {
 			return (bool) $available[ $func ];
@@ -263,9 +247,8 @@ class Shipper_Helper_System {
 	 *
 	 * @return bool
 	 */
-	static public function can_call_system() {
-		return self::is_available( 'escapeshellcmd' ) &&
-		       self::is_available( 'exec' );
+	public static function can_call_system() {
+		return self::is_available( 'escapeshellcmd' ) && self::is_available( 'exec' );
 	}
 
 	/**
@@ -283,8 +266,8 @@ class Shipper_Helper_System {
 		$cmd = escapeshellcmd( $cmd );
 
 		// We have checked if system commands are available before this point.
-		// phpcs:ignore
-		return exec( "command -v {$cmd}" );
+
+		return exec( "command -v {$cmd}" ); // phpcs:ignore
 	}
 
 	/**
@@ -301,10 +284,31 @@ class Shipper_Helper_System {
 	}
 
 	/**
-	 * @return bool Check if this is WPMUDEV host
+	 * Check if it's wpmudev host.
+	 *
+	 * @return bool Check if this is WPMUDEV host.
 	 */
 	public static function is_wpmudev_host() {
 		return isset( $_SERVER['WPMUDEV_HOSTED'] ) && ! empty( $_SERVER['WPMUDEV_HOSTED'] );
 	}
 
+	/**
+	 * Get safe max execution time in seconds.
+	 *
+	 * @since 1.2.4
+	 *
+	 * @param int $trade_off 8 seconds trade off time.
+	 *
+	 * @return int
+	 */
+	public static function get_safe_max_execution_time( $trade_off = 8 ) {
+		$max_time = (int) self::get_max_exec_time();
+
+		if ( ! $max_time || $max_time > 30 ) {
+			// Seems max time is set to unlimited. But we want to play safe, so settings it to 30 seconds.
+			$max_time = 30;
+		}
+
+		return apply_filters( 'shipper_get_safe_max_execution_time', $max_time - $trade_off );
+	}
 }

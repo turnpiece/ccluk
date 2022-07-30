@@ -5,8 +5,8 @@
  * @package shipper
  */
 
-$checks = $result['checks']['local'];
-$migration = new Shipper_Model_Stored_Migration;
+$checks    = $result['checks']['local'];
+$migration = new Shipper_Model_Stored_Migration();
 ?>
 
 <div class="shipper-wizard-tab">
@@ -25,37 +25,36 @@ $migration = new Shipper_Model_Stored_Migration;
 			</tr>
 		</thead>
 		<tbody>
-		<?php foreach ( $checks['checks'] as $check ) { ?>
-			<?php if ( 'ok' === $check['status'] ) { continue; } ?>
+		<?php
+		foreach ( $checks['checks'] as $check ) {
+			if ( 'ok' === $check['status'] ) {
+				continue;
+			}
+			?>
 			<tr class="sui-accordion-item">
 				<td class="sui-table-item-title">
 					<?php echo esc_html( $check['title'] ); ?>
 				</td>
-
 				<td class="shipper-check-status">
-				<?php
+					<?php
 					$icon_type = 'ok' === $check['status']
 						? 'check-tick'
-						: 'warning-alert'
-					;
+						: 'warning-alert';
 					$icon_kind = 'warning-alert' === $icon_type
 						? $check['status']
-						: 'success'
-					;
-				?>
-					<i aria-hidden="true"
-						class="sui-icon-<?php echo $icon_type; ?> sui-<?php echo $icon_kind; ?>"></i>
+						: 'success';
+					?>
+					<i aria-hidden="true" class="sui-icon-<?php echo esc_attr( $icon_type ); ?> sui-<?php echo esc_attr( $icon_kind ); ?>"></i>
 				</td>
-
 				<td>
 					<div class="shipper-check-message">
 					<?php
-						$message = __( 'No issues found', 'shipper' );
-						$raw = '';
-						if ( ! empty( $check['message'] ) ) {
-							$message = trim( wp_strip_all_tags( $check['message'] ) );
-						}
-						echo $message;
+					$message = __( 'No issues found', 'shipper' );
+					$raw     = '';
+					if ( ! empty( $check['message'] ) ) {
+						$message = trim( wp_strip_all_tags( $check['message'] ) );
+					}
+					echo esc_html( $message );
 					?>
 					</div>
 				<?php if ( ! empty( $check['message'] ) ) { ?>
@@ -70,7 +69,7 @@ $migration = new Shipper_Model_Stored_Migration;
 				<td colspan="3">
 					<div class="sui-box">
 						<div class="sui-box-body">
-							<?php echo $check['message']; ?>
+							<?php echo esc_html( $check['message'] ); ?>
 							<?php if ( 'ok' !== $check['status'] ) { ?>
 								<p>
 									<a href="#reload" class="sui-button">
@@ -87,15 +86,20 @@ $migration = new Shipper_Model_Stored_Migration;
 		<?php } ?>
 		</tbody>
 	</table>
-<?php if ( Shipper_Model_Stored_Migration::TYPE_EXPORT === $migration->get_type()  && ! empty( $result['checks']['files'] ) ) { ?>
+<?php if ( Shipper_Model_Stored_Migration::TYPE_EXPORT === $migration->get_type() && ! empty( $result['checks']['files'] ) ) { ?>
 	<div>
-		<?php $this->render( 'pages/preflight/wizard-files', array(
-			'result' => $result,
-			'has_issues' => $has_issues,
-			'has_errors' => $has_errors,
-			'issues_count' => $issues_count,
-			'shipper_url' => $shipper_url,
-		) ); ?>
+		<?php
+		$this->render(
+			'pages/preflight/wizard-files',
+			array(
+				'result'       => $result,
+				'has_issues'   => $has_issues,
+				'has_errors'   => $has_errors,
+				'issues_count' => $issues_count,
+				'shipper_url'  => $shipper_url,
+			)
+		);
+		?>
 	</div>
 <?php } ?>
 </div>

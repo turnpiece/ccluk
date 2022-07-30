@@ -2,13 +2,301 @@ Plugin Name: WPMU DEV Dashboard
 Author: Aaron Edwards
 
 Change Log:
+
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
+
+4.11.14 - 18/07/2022 - Joel
+- Enhance: Plugin updates.
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+4.11.13 - 01/06/2022 - Joel
+- Enhance: Plugin updates.
+- Enhance: Bulk deactivation logic.
+- Enhance: Welcome screen after the login.
+- Enhance: Cleanup login screen UI.
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+4.11.12 - 04/04/2022 - Joel
+- New: Sign in with Google.
+- Enhance: Update SUI.
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+4.11.11 - 28/03/2022 - Joel
+- New: Support for Hub Team member login.
+- Enhance: Optimize DB queries.
+- Enhance: Update SUI.
+- Fix: Notice script is missing.
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+4.11.10 - 16/03/2022 - Joel
+- Enhance: Optimize settings management.
+- Enhance: Optimize DB queries.
+- Enhance: Use WP's ThickBox modal for changelogs.
+- Enhance: Hide non-admin users on permission settings.
+- Fix: Hub updates are failing on inactive sites.
+- Fix: Translation updates not working on certain membership types.
+- Fix: SmartCrawl menu labels are excluded from white-labeling.
+- Fix: Style issues on changelog modal.
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+4.11.9 - 23/02/2022 - Joel
+- New: Integration with WP Consent API and WPMUDEV Analytics.
+- New: API for replacing Pro and Free plugins from Hub.
+- Fix: Requests from the Hub is failing on WP Engine hosted sites.
+- Fix: SSO login not working on newly created sites.
+- Fix: Support tickets are hidden in some cases.
+- Fix: PHP warnings.
+- Fix: SUI select is conflicting with checkboxes.
+- Fix: Inconsistent active/inactive status of plugins on Hub.
+- Fix: Tooltip is adding scrollbar when connected to a custom API server.
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+4.11.8 - 26/12/2021 - Joel
+- Fix: Dashboard plugin is hidden from WP CLI.
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+4.11.7 - 21/12/2021 - Joel
+- Enhance: Permission settings.
+- Enhance: New user type support.
+- Enhance: Documentation links.
+- Enhance: Custom roles support for Analytics.
+- Enhance: Better error messages for bulk delete.
+- Fix: Conflict with Defender login masking and Hub requests.
+- Fix: Analytics stats mismatch between Hub and Dashboard.
+- Fix: Wrong analytics report periods.
+- Fix: PHP warning notices.
+- Fix: Autocomplete search not showing correct stats.
+- Fix: Scroll not working after plugin installation.
+- Fix: Staff login cookies are not removed after logout.
+- Fix: Top pages list is hidden in some cases.
+- Fix: Wrong translation update notifications.
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+4.11.6 - 10/11/2021 - Joel
+- Enhance: Optionally overwrite existing plugins using zip or URL from Hub.
+- Enhance: Premium plugins and themes updates from Hub & Automate.
+- Enhance: Improve analytics widget UX.
+- Enhance: Remove redundant footer links.
+- Enhance: SSO setup on the login page.
+- Enhance: Update analytics metric names.
+- Fix: Deprecated jQuery functions.
+- Fix: Wrong translation update notifications.
+- Fix: Plugin configuration links are not working.
+- Fix: Modal overlay is not removed after closing modals.
+- Fix: Wrong date value in analytics chart.
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+4.11.5 - 08/10/2021 - Joel
+- Fix: Hub plugin updates are failing due to a fatal error.
+- Fix: Automate is blocking cron jobs.
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+4.11.4 - 29/09/2021 - Joel
+- New: Ability to reset plugin settings.
+- New: Optional data and settings cleanup on plugin uninstallation.
+- New: Ability to configure support tickets visibility from Hub.
+- New: Ability to force sync from Hub.
+- Enhance: Premium plugins and themes updates with Automate.
+- Enhance: Analytics settings UX.
+- Enhance: Hide analytics widget if no metrics are selected.
+- Enhance: SSO authentication process.
+- Enhance: Plugins bulk action confirmation notice.
+- Fix: Hidden metrics are still visible on the analytics widget.
+- Fix: Wrong colspan for update notifications.
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+4.11.3 - 26/08/2021 - Joel
+- Enhance: Update analytics metrics.
+- Enhance: White label improvements.
+- Enhance: User search UX in permission settings.
+- Enhance: Hide the unwanted activate button on Dashboard.
+- Enhance: Remove extra confirmation modal when installing plugins.
+- Fix: SSO not working when activated from Hub.
+- Fix: Error messages on analytics API.
+- Fix: Conflict with Mailster plugin.
+- Fix: Scroll bar is hidden after closing modals.
+- Fix: Wrong message for Install bulk action.
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+4.11.2 - 19/07/2021 - Joel
+- New: Option to hide "What's new" model in Whitelabel settings.
+- Enhance: Allow auto-updates to be disabled from WP plugins page.
+- Enhance: Easier management of user permissions.
+- Enhance: Allow limited HTML tags in Whitelabel footer text.
+- Enhance: Whitelabel settings tabs.
+- Enhance: Hub APIs.
+- Enhance: PHP 8.0 support.
+- Fix: Permissions reset during plugin activation.
+- Fix: Empty search results notice always shown.
+- Fix: Unable to remove original admin from permission settings.
+- Fix: The site is being removed from Hub after the cron job.
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+4.11.1 - 22/06/2021 - Joel
+- New: White label plugin menu labels and icons.
+- New: "Install & Activate" bulk option for plugins.
+- Enhance: Compatibility with premium plugins and themes updates in Hub.
+- Enhance: Upgrade Shared UI library.
+- Enhance: Log errors only if WPMUDEV_API_DEBUG is defined as true.
+- Enhance: Update plugin icons for consistency.
+- Enhance: Bulk actions select.
+- Enhance: Removed unused styles and scripts.
+- Fix: Support link is broken in the notice.
+- Fix: Wrong translation update notification.
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+4.11.0 - 10/05/2021 - Ivan, Joel
+- New: Link logo by URL for whitelabelling.
+- New: New features highlights on plugin updates.
+- New: Hub endpoint for enabling SSO.
+- Enhance: Update changelog modal design.
+- Enhance: WP 5.8 support.
+- Enhance: New plans support.
+- Enhance: Analytics page for restricted membership plans.
+- Fix: Whitelabel not working as expected in WP 5.5
+- Fix: Extend access button not working for new membership plans.
+- Fix: Main menu title is not translatable.
+- Fix: SSO not working for some memberships.
+- Fix: Custom logo is not appearing in after enabling whitelabel.
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+4.10.8.1 - 15/04/2021 - Aaron, Ivan
+- Fix: access to undefined index in template
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+4.10.8 - 15/04/2021 - Aaron, Ivan
+- Add: correct error message for sign in with banned account
+
+----------------------------------------------------------------------
+
+4.10.7 - 12/03/2021 - Aaron, Ivan
+- Enhance: Change all URLs to wpmudev.com
+
+----------------------------------------------------------------------
+
+4.10.6 - 12/02/2020 - Aaron, Ivan
+- Fix: Upgrade Forminator Free to Pro on Dashboard Sign In
+
+----------------------------------------------------------------------
+
+4.10.5 - 10/08/2020 - Aaron, Ivan
+- Fix: Small fixes and stability improvements
+- Fix: Match grant support access icon in side menu with content
+
+----------------------------------------------------------------------
+
+4.10.4 - 10/06/2020 - Aaron, Ivan
+- Fix: Small fixes and stability improvements
+
+----------------------------------------------------------------------
+
+4.10.3 - 09/21/2020 - Aaron, Ivan
+- Fix: Plugins bulk actions position wrong in Firefox
+- Fix: Some URLs are pointing to the Hub 1
+- Fix: Improve description of white label Docs setting
+- Add: Allow JWT sign in for the Hub Client
+
+----------------------------------------------------------------------
+
+4.10.2 - 09/10/2020 - Aaron, Ivan
+- Fix: Small fixes and stability improvements
+
+----------------------------------------------------------------------
+
+4.10.1 - 08/27/2020 - Aaron, Ivan
+- Fix: Translations Update modal closes before update is finished
+- Fix: Update documentation links on Analytics and Whitelabel pages
+- Fix: Fix php notices on Plugins and Main page
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+4.10.0 - 08/20/2020 - Aaron, Ivan
+- Add: Split Tools into separate Whitelabel and Analytics pages
+- Add: Hide Dashboard from plugin list when Whitelabeling is active
+- Improvement: Prevent directory listing for all directories
+- Fix: Ensure compatibility with WP 5.5
+- Fix: Support access remains active after Dashboard is deactivated
+- Fix: Click at View Changelog more than once runs plugin update
+- Fix: Support Ticket display on the main page and on My Tickets page
+- Fix: PHPSecLib's random crypt not compatible with PHP 7.3
+- Fix: Blank content showing if Check Again is clicked on Settings and Support pages
+- Fix: Whitelabel page not showing correct situation for expired membership
+- Fix: Modals not closing properly on various close buttons
+
+----------------------------------------------------------------------
+
+4.9.4 - 06/18/2020 - Aaron, Ivan, Biplav
+- Fix: improve display of Snapshot versions
+
+----------------------------------------------------------------------
+4.9.3 - 06/15/2020 - Aaron, Ivan, Biplav
+- Improvement: Reset OPcache on plugin update.
+
+----------------------------------------------------------------------
+
+4.9.2 - 06/09/2020 - Aaron, Ivan, Biplav
+- Add: Improve Plugins page performance
+
+----------------------------------------------------------------------
+
+4.9.1 - 06/03/2020 - Aaron, Ivan, Biplav
+- Add: Onboarding experience improvements
+- Fix: Error when deleting plugin from the Hub
+- Fix: Total active plugins count not correct on MU sites
+- Fix: include "Improvements handling Snapshot-v4 release"
+
+----------------------------------------------------------------------
+
+4.9.0 - 06/03/2020 - Aaron, Ivan, Biplav
+- Add: Onboarding experience improvements
+- Fix: Error when deleting plugin from the Hub
+- Fix: Total active plugins count not correct on MU sites
+
+----------------------------------------------------------------------
+
+4.8.2 - 05/28/2020- Aaron, Ivan, Biplav
+- Add: Improvements handling Snapshot-v4 release.
+
+----------------------------------------------------------------------
+
 4.8.1 - 03/10/2020- Aaron, Ivan, Biplav
 - Fix: Bugs causing styles to stop rendering
 
 ----------------------------------------------------------------------
-
 4.8.0 - 03/10/2020- Aaron, Ivan, Biplav
 - Add: Translation updates for the premium plugins
 - Add: More white labeling options by linking Branda
@@ -595,4 +883,4 @@ Added option to disable admin notices.
 Initial Release.
 
 
-87274-1584739293-au
+87274-1659205676-au

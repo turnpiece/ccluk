@@ -688,6 +688,7 @@ function give_get_country_locale() {
 			'KR' => [
 				'state' => [
 					'required' => false,
+					'hidden'   => true,
 				],
 			],
 			'KW' => [
@@ -697,7 +698,7 @@ function give_get_country_locale() {
 			],
 			'LB' => [
 				'state' => [
-					'required' => false
+					'required' => false,
 				],
 			],
 			'MC' => [
@@ -2108,6 +2109,8 @@ function give_get_indonesian_states_list() {
  * Get Indian States
  *
  * @since 1.0
+ * @since 2.11.0 Renamed Indian state of Orissa to Odisha (#5826)
+ *
  * @return array $states A list of states
  */
 function give_get_indian_states_list() {
@@ -2132,7 +2135,7 @@ function give_get_indian_states_list() {
 		'ML' => 'Meghalaya',
 		'MZ' => 'Mizoram',
 		'NL' => 'Nagaland',
-		'OR' => 'Orissa',
+		'OR' => 'Odisha',
 		'PB' => 'Punjab',
 		'RJ' => 'Rajasthan',
 		'SK' => 'Sikkim',

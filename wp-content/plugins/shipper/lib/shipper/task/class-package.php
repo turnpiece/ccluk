@@ -11,8 +11,13 @@
  */
 abstract class Shipper_Task_Package extends Shipper_Task {
 
-	static public function get_zip() {
-		$model = new Shipper_Model_Stored_Package;
+	/**
+	 * Get zip.
+	 *
+	 * @return object|\Shipper_Model_Archive_Zip
+	 */
+	public static function get_zip() {
+		$model = new Shipper_Model_Stored_Package();
 		return Shipper_Model_Archive::get(
 			$model->get_package_path()
 		);
@@ -45,7 +50,9 @@ abstract class Shipper_Task_Package extends Shipper_Task {
 		$current = $this->get_current_step();
 
 		$total = $this->get_total_steps();
-		if ( empty( $total ) ) { return 1; }
+		if ( empty( $total ) ) {
+			return 1;
+		}
 
 		return ( $current * 100 ) / $total;
 	}

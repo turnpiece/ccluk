@@ -205,6 +205,19 @@ export function isValidGAID(id) {
 }
 
 /**
+ * Check if the tracking ID is in valid GA4 format.
+ *
+ * @param {string} id Tracking ID.
+ *
+ * @since 3.3.3
+ *
+ * @return {boolean}
+ */
+export function isValidGA4ID(id) {
+	return /^g-[a-zA-Z0-9]{8,10}$/i.test(id)
+}
+
+/**
  * Check if a stats item can be viewed by current user.
  *
  * This can be checked only in Statistics and Dashboard
@@ -243,4 +256,50 @@ export function canViewStats(section, type) {
 
 	// Section found.
 	return permissions[type].includes(section)
+}
+
+/**
+ * Check if a the current user has access to statistics menu.
+ *
+ * @since 3.3.5
+ *
+ * @return {boolean}
+ */
+export function hasStatisticsAccess() {
+	return window.beehiveModuleVars.show_statistics > 0
+}
+
+/**
+ * Check if a the current user has access to Beehive menu.
+ *
+ * @since 3.3.5
+ *
+ * @return {boolean}
+ */
+export function hasSettingsAccess() {
+	return window.beehiveModuleVars.show_settings > 0
+}
+
+/**
+ * Check if a the current user has access to permissions settings.
+ *
+ * @since 3.3.5
+ *
+ * @return {boolean}
+ */
+export function hasPermissionsAccess() {
+	return window.beehiveModuleVars.show_permissions > 0
+}
+
+/**
+ * Check if the whitelabel hide docs option is active.
+ *
+ * We will use the localized var from PHP.
+ *
+ * @since 3.3.8
+ *
+ * @return {boolean}
+ */
+export function hideDocLinks() {
+	return window.beehiveVars.whitelabel.hide_doc_link > 0
 }

@@ -22,14 +22,14 @@ class Shipper_Task_Import_Remote extends Shipper_Task_Import {
 	 *
 	 * @var int
 	 */
-	private $_percentage_exported;
+	private $percentage_exported;
 
 	/**
 	 * Remote processing flag
 	 *
 	 * @var string
 	 */
-	private $_status;
+	private $status;
 
 	/**
 	 * Checks whether we're tracking or initing import
@@ -37,7 +37,7 @@ class Shipper_Task_Import_Remote extends Shipper_Task_Import {
 	 * @return bool
 	 */
 	public function is_tracking() {
-		return self::STATUS_TRACKING === $this->_status;
+		return self::STATUS_TRACKING === $this->status;
 	}
 
 	/**
@@ -65,13 +65,15 @@ class Shipper_Task_Import_Remote extends Shipper_Task_Import {
 	 */
 	public function get_work_description() {
 		if ( $this->is_tracking() ) {
-			return ! empty( $this->_percentage_exported )
+			return ! empty( $this->percentage_exported )
 				? sprintf(
+					/* translators: %d: percentage count. */
 					__( 'Export remote system ( %d%% done )', 'shipper' ),
-					$this->_percentage_exported
+					$this->percentage_exported
 				)
 				: __( 'Export remote system', 'shipper' );
 		}
+
 		return __( 'Check remote system export status', 'shipper' );
 	}
 
@@ -85,24 +87,25 @@ class Shipper_Task_Import_Remote extends Shipper_Task_Import {
 	 * @return bool
 	 */
 	public function apply( $args = array() ) {
-		$migration = new Shipper_Model_Stored_Migration;
-		$domain = $migration->get_source();
+		$migration = new Shipper_Model_Stored_Migration();
+		$domain    = $migration->get_source();
 
 		// Check if we already have a migration source ready.
-		$remote = new Shipper_Helper_Fs_Remote;
+		$remote = new Shipper_Helper_Fs_Remote();
 
 		$status = false;
 		try {
 			if ( $remote->exists( $domain ) ) {
 				Shipper_Helper_Log::write(
 					sprintf(
+						/* translators: %s: domain name. */
 						__( 'Found an existing remote export for %s.', 'shipper' ),
 						$domain
 					)
 				);
 				$status = true;
 			}
-		} catch (Exception $e) {
+		} catch ( Exception $e ) {
 			// Yeah, so that went well...
 			// Okay, so never mind that. Let's carry on as we normally would.
 			// Pretend there's no previous export existing and start it up.
@@ -110,7 +113,9 @@ class Shipper_Task_Import_Remote extends Shipper_Task_Import {
 		}
 
 		// Okay, so we do have a previously exported remote file - we're good.
-		if ( $status ) { return $status; }
+		if ( $status ) {
+			return $status;
+		}
 
 		// No? Do the standard remote check dance.
 		return $this->ping_get();
@@ -119,23 +124,24 @@ class Shipper_Task_Import_Remote extends Shipper_Task_Import {
 	/**
 	 * Checks remote migration state and attempts start
 	 *
-	 * @uses shipper_await_cancel
-	 *
 	 * @return bool
+	 * @uses shipper_await_cancel
 	 */
 	public function ping_get() {
-		$this->_status = self::STATUS_CHECKING;
-		$migration = new Shipper_Model_Stored_Migration;
-		$this_site = $migration->get_source();
-		$remote_site = $migration->get_destination();
+		$this->status = self::STATUS_CHECKING;
+		$migration    = new Shipper_Model_Stored_Migration();
+		$this_site    = $migration->get_source();
+		$remote_site  = $migration->get_destination();
 
-		$task = new Shipper_Task_Api_Migrations_Get;
-		$mgr = $task->apply( array(
-			'domain' => $remote_site,
-		));
+		$task = new Shipper_Task_Api_Migrations_Get();
+		$mgr  = $task->apply(
+			array(
+				'domain' => $remote_site,
+			)
+		);
 
 		$progress = 0;
-		$status = true;
+		$status   = true;
 
 		if ( empty( $mgr['file'] ) || Shipper_Task_Import::ARCHIVE === $mgr['file'] ) {
 			Shipper_Helper_Log::write( __( 'No migration file present', 'shipper' ) );
@@ -146,30 +152,32 @@ class Shipper_Task_Import_Remote extends Shipper_Task_Import {
 				$status = $this->attempt_remote_export_start( $this_site, $remote_site );
 			} elseif ( Shipper_Task_Import::ARCHIVE !== $mgr['file'] ) {
 				Shipper_Helper_Log::write( __( 'Tracking remote export status', 'shipper' ) );
-				$this->_status = self::STATUS_TRACKING;
+				$this->status = self::STATUS_TRACKING;
 				// We do have a migration, but it's incomplete.
 				// Let's update progress percentage.
-				$progress = (int) $mgr['status'];
-				$this->_percentage_exported = $progress;
-				$status = false; // Not done yet.
+				$progress                  = (int) $mgr['status'];
+				$this->percentage_exported = $progress;
+				$status                    = false; // Not done yet.
 			}
 		} elseif ( Shipper_Task_Import::ARCHIVE !== $mgr['file'] ) {
 			Shipper_Helper_Log::write(
 				__( 'No migration file present, remote export started', 'shipper' )
 			);
-			$this->_status = self::STATUS_TRACKING;
+			$this->status = self::STATUS_TRACKING;
 			// We have a file.
 			// Let's also update progress percentage (should be 100% though).
-			$progress = (int) $mgr['status'];
-			$this->_percentage_exported = $progress;
-			$status = $progress > 99;
+			$progress                  = (int) $mgr['status'];
+			$this->percentage_exported = $progress;
+			$status                    = $progress > 99;
 		}
 
 		if ( empty( $status ) ) {
 			// If we're not done, let's give it some time now...
 			$has_lock = shipper_await_cancel( Shipper_Model_Stored_Migration::TYPE_IMPORT );
 			// If we encountered lock while waiting, we're done here.
-			if ( $has_lock ) { return true; }
+			if ( $has_lock ) {
+				return true;
+			}
 		}
 
 		return $status;
@@ -185,15 +193,15 @@ class Shipper_Task_Import_Remote extends Shipper_Task_Import {
 	 */
 	public function attempt_remote_export_start( $this_site, $remote_site ) {
 		// Assume we're not done yet at first.
-		$status = false;
-		$task = new Shipper_Task_Api_Destinations_Ping;
+		$status   = false;
+		$task     = new Shipper_Task_Api_Destinations_Ping();
 		$ping_arg = array(
 			'domain' => $remote_site,
 		);
-		$arg = array(
+		$arg      = array(
 			'source' => $remote_site,
 			'target' => $this_site,
-			'type' => Shipper_Model_Stored_Migration::TYPE_EXPORT,
+			'type'   => Shipper_Model_Stored_Migration::TYPE_EXPORT,
 		);
 
 		Shipper_Helper_Log::write( __( 'Pinging remote domain', 'shipper' ) );
@@ -202,13 +210,20 @@ class Shipper_Task_Import_Remote extends Shipper_Task_Import {
 		if ( $task->apply( $ping_arg ) ) {
 			// Yes, we can. Let's try starting export.
 			Shipper_Helper_Log::write( __( 'Remote domain reachable, attempting export', 'shipper' ) );
-			$task = new Shipper_Task_Api_Migrations_Start;
+			$task = new Shipper_Task_Api_Migrations_Start();
+
 			$status = $task->apply( $arg );
 			if ( $task->has_errors() ) {
 				// Well, that failed.
 				$status = true; // We're done!
 			} else {
 				$status = ! $status; // If task succeeded, we're not done.
+
+				// upload the nesesary info at first step.
+				$meta = new Shipper_Model_Stored_MigrationMeta();
+				if ( $meta->get_mode() === 'subsite' && $meta->get_site_id() ) {
+					Shipper_Helper_MS::transmit_subsite_id();
+				}
 			}
 
 			// Log any errors.
@@ -217,6 +232,7 @@ class Shipper_Task_Import_Remote extends Shipper_Task_Import {
 				$this->add_error(
 					self::ERR_REMOTE,
 					sprintf(
+						/* translators: %1$s: remote site. */
 						__( 'Unable to remotely export from %1$s. Please visit %1$s and start export there manually.', 'shipper' ),
 						$remote_site
 					)
@@ -229,6 +245,7 @@ class Shipper_Task_Import_Remote extends Shipper_Task_Import {
 			$this->add_error(
 				self::ERR_REMOTE,
 				sprintf(
+					/* translators: %1$s: remote site. */
 					__( 'Error starting export on %1$s. Please visit %1$s and start export there manually.', 'shipper' ),
 					$remote_site
 				)
@@ -250,12 +267,12 @@ class Shipper_Task_Import_Remote extends Shipper_Task_Import {
 	 * @return float
 	 */
 	public function get_status_percentage() {
-		if ( $this->_percentage_exported ) {
-			return $this->_percentage_exported;
+		if ( $this->percentage_exported ) {
+			return $this->percentage_exported;
 		}
+
 		return $this->is_tracking()
 			? parent::get_status_percentage()
-			: 10
-		;
+			: 10;
 	}
 }

@@ -18,11 +18,15 @@ class Shipper_Task_Api_Destinations_Add extends Shipper_Task_Api {
 	 * @return bool
 	 */
 	public function apply( $args = array() ) {
-		$model = new Shipper_Model_Api;
-		$status = $this->get_response( 'destinations-add', self::METHOD_POST, array(
-			'domain' => Shipper_Model_Stored_Destinations::get_current_domain(),
-			'key' => $model->get_api_secret(),
-		));
+		$model  = new Shipper_Model_Api();
+		$status = $this->get_response(
+			'destinations-add',
+			self::METHOD_POST,
+			array(
+				'domain' => Shipper_Model_Stored_Destinations::get_current_domain(),
+				'key'    => $model->get_api_secret(),
+			)
+		);
 
 		if ( empty( $status['success'] ) ) {
 			$this->record_non_success(

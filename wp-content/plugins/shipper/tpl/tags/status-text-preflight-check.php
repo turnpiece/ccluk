@@ -8,19 +8,21 @@
 
 $issues = array(
 	'warning' => 0,
-	'error' => 0,
+	'error'   => 0,
 );
-$items = ! empty( $items ) && is_array( $items )
+$items  = ! empty( $items ) && is_array( $items )
 	? $items
 	: array();
 
 foreach ( $items as $item ) {
-	if ( 'ok' === $item['status'] ) { continue; }
+	if ( 'ok' === $item['status'] ) {
+		continue;
+	}
 
 	$issues[ $item['status'] ] += 1;
 }
 
-$status = ! empty( $issues['error'] )
+$status = ! empty( $issues['error'] ) // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- this is not WordPress global
 	? 'error'
 	: ( ! empty( $issues['warning'] ) ? 'warning' : 'success' );
 
@@ -37,8 +39,8 @@ if ( 'success' === $status && empty( $text ) ) {
 		'tags/status-text',
 		array(
 			'status' => $status,
-			'text' => $text,
-			'hide' => false,
+			'text'   => $text,
+			'hide'   => false,
 		)
 	);
 }

@@ -25,7 +25,7 @@
             $('#wps-build-progress').removeClass("hidden");
             $(".wpmud-box-title .wps-title-result").addClass("hidden");
             $(".wpmud-box-title .wps-title-progress").removeClass("hidden");
-            $("form#snapshot-edit-restore").submit();
+            $("form#snapshot-edit-restore").trigger('submit');
         });
 
         $("#wps-build-error-back").on('click', function(e) {
@@ -44,7 +44,7 @@
             snapshot_button_abort_proc();
         });
 
-        $("form#snapshot-edit-restore").off().submit(function() {
+        $("form#snapshot-edit-restore").off().on('submit', function() {
 
             /* From the form grab the Name and Notes field values. */
             var snapshot_item_key = $('input[name="item"]').val();
@@ -135,7 +135,7 @@
                     $('#snapshot-progress-bar-container #snapshot-item-table-' + table_name + ' .progress .percent').html('0%');
 
                     $('#snapshot-progress-bar-container #snapshot-item-table-' + table_name + ' .snapshot-button-abort').show();
-                    $('#snapshot-progress-bar-container #snapshot-item-table-' + table_name + ' button.snapshot-button-abort').click(function() {
+                    $('#snapshot-progress-bar-container #snapshot-item-table-' + table_name + ' button.snapshot-button-abort').on('click', function() {
                         snapshot_button_abort_proc();
                     });
 
@@ -273,7 +273,7 @@
                         var table_data = tablesArray[table_idx];
                         table_name = table_data.table_name;
 
-                        $('#snapshot-progress-bar-container #snapshot-item-table-' + table_name + ' button.snapshot-button-abort').show().click(function() {
+                        $('#snapshot-progress-bar-container #snapshot-item-table-' + table_name + ' button.snapshot-button-abort').show().on('click', function() {
                             snapshot_button_abort_proc();
                         });
 
@@ -402,7 +402,7 @@
                         $('#snapshot-item-' + table_name + ' .snapshot-filename').html(": " + file_name);
 
                         $('#snapshot-progress-bar-container #snapshot-item-file button.snapshot-button-abort').show();
-                        $('#snapshot-progress-bar-container #snapshot-item-file button.snapshot-button-abort').click(function() {
+                        $('#snapshot-progress-bar-container #snapshot-item-file button.snapshot-button-abort').on('click', function() {
                             snapshot_button_abort_proc();
                         });
 

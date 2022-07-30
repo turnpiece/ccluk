@@ -6,6 +6,36 @@
 class ActionScheduler_WPCLI_Scheduler_command extends WP_CLI_Command {
 
 	/**
+	 * Force tables schema creation for Action Scheduler
+	 *
+	 * ## OPTIONS
+	 *
+	 * @param array $args Positional arguments.
+	 * @param array $assoc_args Keyed arguments.
+	 *
+	 * @subcommand fix-schema
+	 */
+	public function fix_schema( $args, $assoc_args ) {
+		$schema_classes = array( ActionScheduler_LoggerSchema::class, ActionScheduler_StoreSchema::class );
+
+		foreach ( $schema_classes as $classname ) {
+			if ( is_subclass_of( $classname, ActionScheduler_Abstract_Schema::class ) ) {
+				$obj = new $classname();
+				$obj->init();
+				$obj->register_tables( true );
+
+				WP_CLI::success(
+					sprintf(
+						/* translators: %s refers to the schema name*/
+						__( 'Registered schema for %s', 'action-scheduler' ),
+						$classname
+					)
+				);
+			}
+		}
+	}
+
+	/**
 	 * Run the Action Scheduler
 	 *
 	 * ## OPTIONS
@@ -48,8 +78,8 @@ class ActionScheduler_WPCLI_Scheduler_command extends WP_CLI_Command {
 		$hooks   = explode( ',', WP_CLI\Utils\get_flag_value( $assoc_args, 'hooks', '' ) );
 		$hooks   = array_filter( array_map( 'trim', $hooks ) );
 		$group   = \WP_CLI\Utils\get_flag_value( $assoc_args, 'group', '' );
-		$free_on = \WP_CLI\Utils\get_flag_value( $assoc_args, 'free-memory-on', '' );
-		$sleep   = \WP_CLI\Utils\get_flag_value( $assoc_args, 'pause', '' );
+		$free_on = \WP_CLI\Utils\get_flag_value( $assoc_args, 'free-memory-on', 50 );
+		$sleep   = \WP_CLI\Utils\get_flag_value( $assoc_args, 'pause', 0 );
 		$force   = \WP_CLI\Utils\get_flag_value( $assoc_args, 'force', false );
 
 		ActionScheduler_DataController::set_free_ticks( $free_on );

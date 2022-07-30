@@ -6,9 +6,9 @@
  */
 
 $is_reachable = true;
-$domain = Shipper_Model_Stored_Destinations::get_current_domain();
-$migration = new Shipper_Model_Stored_Migration;
-$action_url = esc_url( $domain );
+$domain       = Shipper_Model_Stored_Destinations::get_current_domain(); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- this is not WordPress global variable
+$migration    = new Shipper_Model_Stored_Migration();
+$action_url   = esc_url( $domain );
 
 $target = $destinations->get_by_domain(
 	$migration->get_destination()
@@ -16,22 +16,22 @@ $target = $destinations->get_by_domain(
 
 if ( Shipper_Model_Stored_Migration::TYPE_EXPORT === $type ) {
 	if ( empty( $target ) ) {
-		$target = $destinations->get_current();
+		$target       = $destinations->get_current();
 		$is_reachable = false;
 	} else {
-		$ping = new Shipper_Task_Api_Destinations_Ping;
-		$is_reachable = $ping->apply(array(
-			'domain' => $target['domain'],
-		));
-		$domain = $target['domain'];
+		$ping         = new Shipper_Task_Api_Destinations_Ping();
+		$is_reachable = $ping->apply(
+			array(
+				'domain' => $target['domain'],
+			)
+		);
+		$domain       = $target['domain']; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- this is not WordPress global variable
 	}
 }
 
 if ( ! $is_reachable ) {
-	$current = $destinations->get_current();
-	$action_url = trailingslashit( esc_url( $target['admin_url'] ) ) .
-		'admin.php?page=shipper&type=import&site=' . $current['site_id']
-	;
+	$current    = $destinations->get_current();
+	$action_url = trailingslashit( esc_url( $target['admin_url'] ) ) . 'admin.php?page=shipper&type=import&site=' . $current['site_id'];
 }
 
 ?>
@@ -59,10 +59,12 @@ if ( ! $is_reachable ) {
 	<?php if ( Shipper_Model_Stored_Migration::TYPE_EXPORT === $type ) { ?>
 		<?php if ( $is_reachable ) { ?>
 			<?php esc_html_e( 'Your website has been successfully migrated.', 'shipper' ); ?>
-			<?php echo wp_kses_post( sprintf( __( 'Visit <a href="%1$s" target="_blank">%1$s</a> now.', 'shipper' ), esc_url( $target['domain'] ), $target['domain'] ) ); ?>
+			<?php /* translators: %1$s* %2$s website url */ ?>
+			<?php echo wp_kses_post( sprintf( __( 'Visit <a href="%1$s" target="_blank">%2$s</a> now.', 'shipper' ), esc_url( $target['domain'] ), $target['domain'] ) ); ?>
 		<?php } else { ?>
 			<?php esc_html_e( 'Your website has been successfully exported.', 'shipper' ); ?>
-			<?php echo wp_kses_post( sprintf( __( 'Please visit <a href="%1$s" target="_blank">%2$s</a> now to continue your migration.', 'shipper' ), esc_url( $action_url ), $domain ) );  ?>
+			<?php /* translators: %1$s* %2$s website url */ ?>
+			<?php echo wp_kses_post( sprintf( __( 'Please visit <a href="%1$s" target="_blank">%2$s</a> now to continue your migration.', 'shipper' ), esc_url( $action_url ), $domain ) ); ?>
 		<?php } ?>
 	<?php } else { ?>
 		<?php esc_html_e( 'Your website has been successfully imported.', 'shipper' ); ?>

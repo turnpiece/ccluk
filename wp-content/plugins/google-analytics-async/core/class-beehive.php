@@ -2,7 +2,7 @@
 /**
  * The core plugin class.
  *
- * @link    http://premium.wpmudev.org
+ * @link    http://wpmudev.com
  * @since   3.2.0
  *
  * @author  Joel James <joel@incsub.com>
@@ -27,9 +27,9 @@ final class Beehive extends Base {
 	/**
 	 * Settings helper class instance.
 	 *
+	 * @since  3.2.0
 	 * @var settings
 	 *
-	 * @since  3.2.0
 	 */
 	public $settings;
 
@@ -75,9 +75,12 @@ final class Beehive extends Base {
 		// Run free version.
 		Core::instance()->setup();
 
-		// Run Pro version.
 		if ( $this->is_pro() ) {
+			// Run Pro version.
 			Pro::instance()->setup();
+		} else {
+			// Run free version.
+			Free::instance()->setup();
 		}
 	}
 
@@ -93,14 +96,9 @@ final class Beehive extends Base {
 	 * @return bool
 	 */
 	public function is_pro() {
-		static $is_pro = null;
-
-		// Check if Pro version file exist.
-		if ( is_null( $is_pro ) ) {
-			$is_pro = is_readable( BEEHIVE_DIR . '/core/class-pro.php' );
-		}
-
-		return $is_pro;
+		return defined( 'BEEHIVE_PRO' ) && BEEHIVE_PRO && (
+				! defined( 'BEEHIVE_FREE' ) || ! BEEHIVE_FREE
+			);
 	}
 
 	/**
@@ -114,7 +112,7 @@ final class Beehive extends Base {
 	private function define() {
 		// Shared UI version.
 		if ( ! defined( 'BEEHIVE_SUI_VERSION' ) ) {
-			define( 'BEEHIVE_SUI_VERSION', '2.9.6' );
+			define( 'BEEHIVE_SUI_VERSION', '2.12.10' );
 		}
 
 		// Plugin directory.

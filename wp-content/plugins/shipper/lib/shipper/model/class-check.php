@@ -13,9 +13,9 @@
 class Shipper_Model_Check extends Shipper_Model {
 
 	const STATUS_PENDING = 'pending';
-	const STATUS_OK = 'ok';
+	const STATUS_OK      = 'ok';
 	const STATUS_WARNING = 'warning';
-	const STATUS_ERROR = 'error';
+	const STATUS_ERROR   = 'error';
 
 	/**
 	 * Constructor
@@ -23,11 +23,13 @@ class Shipper_Model_Check extends Shipper_Model {
 	 * @param string $title Check title.
 	 */
 	public function __construct( $title ) {
-		$this->set_data(array(
-			'title' => $title,
-			'message' => '',
-			'status' => self::STATUS_PENDING,
-		));
+		$this->set_data(
+			array(
+				'title'   => $title,
+				'message' => '',
+				'status'  => self::STATUS_PENDING,
+			)
+		);
 	}
 
 	/**
@@ -41,6 +43,7 @@ class Shipper_Model_Check extends Shipper_Model {
 		if ( self::STATUS_PENDING === $this->get( 'status' ) ) {
 			$this->set( 'status', $status );
 		}
+
 		return $this;
 	}
 
@@ -52,7 +55,9 @@ class Shipper_Model_Check extends Shipper_Model {
 	public function is_failed() {
 		$status = $this->get( 'status' );
 
-		if ( self::STATUS_PENDING === $status ) { return false; }
+		if ( self::STATUS_PENDING === $status ) {
+			return false;
+		}
 
 		return self::STATUS_OK !== $status;
 	}
@@ -63,8 +68,12 @@ class Shipper_Model_Check extends Shipper_Model {
 	 * @return bool
 	 */
 	public function is_fatal() {
-		if ( ! $this->is_failed() ) { return false; }
+		if ( ! $this->is_failed() ) {
+			return false;
+		}
+
 		$status = $this->get( 'status' );
+
 		return self::STATUS_ERROR === $status;
 	}
 }

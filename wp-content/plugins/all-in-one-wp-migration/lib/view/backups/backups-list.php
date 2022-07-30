@@ -89,18 +89,49 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<?php endif; ?>
 					</td>
 					<td class="ai1wm-column-actions ai1wm-backup-actions">
-						<a href="<?php echo esc_url( ai1wm_backup_url( array( 'archive' => $backup['filename'] ) ) ); ?>" class="ai1wm-button-green ai1wm-backup-download" download="<?php echo esc_attr( $backup['filename'] ); ?>" aria-label="<?php _e( 'Download backup', AI1WM_PLUGIN_NAME ); ?>">
-							<i class="ai1wm-icon-arrow-down"></i>
-							<span><?php _e( 'Download', AI1WM_PLUGIN_NAME ); ?></span>
-						</a>
-						<a href="#" data-archive="<?php echo esc_attr( $backup['filename'] ); ?>" class="ai1wm-button-gray ai1wm-backup-restore" data-size="<?php echo esc_attr( $backup['size'] ); ?>" aria-label="<?php _e( 'Restore backup', AI1WM_PLUGIN_NAME ); ?>">
-							<i class="ai1wm-icon-cloud-upload"></i>
-							<span><?php _e( 'Restore', AI1WM_PLUGIN_NAME ); ?></span>
-						</a>
-						<a href="#" data-archive="<?php echo esc_attr( $backup['filename'] ); ?>" class="ai1wm-button-red ai1wm-backup-delete" aria-label="<?php _e( 'Delete backup', AI1WM_PLUGIN_NAME ); ?>">
-							<i class="ai1wm-icon-close"></i>
-							<span><?php _e( 'Delete', AI1WM_PLUGIN_NAME ); ?></span>
-						</a>
+						<div>
+							<a href="#" role="menu" aria-haspopup="true" class="ai1wm-backup-dots" title="<?php _e( 'More' ); ?>" aria-label="<?php _e( 'More' ); ?>">
+								<i class="ai1wm-icon-dots-horizontal-triple"></i>
+							</a>
+							<div class="ai1wm-backup-dots-menu">
+								<ul role="menu">
+									<li>
+										<a tabindex="-1" href="#" role="menuitem" class="ai1wm-backup-restore" data-archive="<?php echo esc_attr( $backup['filename'] ); ?>" data-size="<?php echo esc_attr( $backup['size'] ); ?>" aria-label="<?php _e( 'Restore', AI1WM_PLUGIN_NAME ); ?>">
+											<i class="ai1wm-icon-cloud-upload"></i>
+											<span><?php _e( 'Restore', AI1WM_PLUGIN_NAME ); ?></span>
+										</a>
+									</li>
+									<?php if ( $downloadable ) : ?>
+										<li>
+											<a tabindex="-1" href="<?php echo esc_url( ai1wm_backup_url( array( 'archive' => $backup['filename'] ) ) ); ?>" role="menuitem" download="<?php echo esc_attr( $backup['filename'] ); ?>" aria-label="<?php _e( 'Download', AI1WM_PLUGIN_NAME ); ?>">
+												<i class="ai1wm-icon-arrow-down"></i>
+												<?php _e( 'Download', AI1WM_PLUGIN_NAME ); ?>
+											</a>
+										</li>
+									<?php else : ?>
+										<li class="ai1wm-disabled">
+											<a tabindex="-1" href="#" role="menuitem" aria-label="<?php _e( 'Downloading is not possible because backups directory is not accessible.', AI1WM_PLUGIN_NAME ); ?>" title="<?php _e( 'Downloading is not possible because backups directory is not accessible.', AI1WM_PLUGIN_NAME ); ?>">
+												<i class="ai1wm-icon-arrow-down"></i>
+												<?php _e( 'Download', AI1WM_PLUGIN_NAME ); ?>
+											</a>
+										</li>
+									<?php endif; ?>
+									<li>
+										<a tabindex="-1" href="#" class="ai1wm-backup-list-content" data-archive="<?php echo esc_attr( $backup['filename'] ); ?>" role="menuitem" aria-label="<?php _e( 'Show backup content', AI1WM_PLUGIN_NAME ); ?>">
+											<i class="ai1wm-icon-file-content"></i>
+											<span><?php _e( 'List', AI1WM_PLUGIN_NAME ); ?></span>
+										</a>
+									</li>
+									<li class="divider"></li>
+									<li>
+										<a tabindex="-1" href="#" class="ai1wm-backup-delete" data-archive="<?php echo esc_attr( $backup['filename'] ); ?>" role="menuitem" aria-label="<?php _e( 'Delete', AI1WM_PLUGIN_NAME ); ?>">
+											<i class="ai1wm-icon-close"></i>
+											<span><?php _e( 'Delete', AI1WM_PLUGIN_NAME ); ?></span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
 					</td>
 				</tr>
 				<?php endforeach; ?>

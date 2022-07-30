@@ -1,10 +1,5 @@
 <template>
-	<img
-		:src="get1X"
-		:srcset="`${get1X} 1x, ${get2X} 2x`"
-		:alt="alt"
-		aria-hidden="true"
-	/>
+	<img :src="get1X" :srcset="getSrcSet" :alt="alt" aria-hidden="true" />
 </template>
 
 <script>
@@ -26,6 +21,10 @@ export default {
 			type: String,
 			default: '',
 		},
+		fullPath: {
+			type: Boolean,
+			default: false,
+		},
 	},
 
 	computed: {
@@ -36,8 +35,21 @@ export default {
 		 *
 		 * @returns {string}
 		 */
+		getSrcSet() {
+			return this.srcset
+				? this.get1X + ' 1x, ' + this.get2X + ' 2x'
+				: false
+		},
+
+		/**
+		 * Get the default image url.
+		 *
+		 * @since 1.8.0
+		 *
+		 * @returns {string}
+		 */
 		get1X() {
-			return imageUrl(this.src)
+			return this.fullPath ? this.src : imageUrl(this.src)
 		},
 
 		/**
@@ -49,7 +61,9 @@ export default {
 		 */
 		get2X() {
 			if (this.srcset) {
-				return imageUrl(this.src.replace(/(\.[\w\d_-]+)$/i, '@2x$1'))
+				let path = this.src.replace(/(\.[\w\d_-]+)$/i, '@2x$1')
+
+				return this.fullPath ? path : imageUrl(path)
 			} else {
 				return false
 			}

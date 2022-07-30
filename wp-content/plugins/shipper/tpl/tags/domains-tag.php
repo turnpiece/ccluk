@@ -6,10 +6,10 @@
  * @package shipper
  */
 
-$migration = new Shipper_Model_Stored_Migration;
-$source = preg_replace( '/^https?:\/\//', '', esc_url( $migration->get_source() ) );
-$destination = preg_replace( '/^https?:\/\//', '', esc_url( $migration->get_destination() ) );
-$is_import = Shipper_Model_Stored_Migration::TYPE_IMPORT === $migration->get_type();
+$migration   = new Shipper_Model_Stored_Migration();
+$source      = preg_replace( '/^https?:\/\//', '', esc_url( $migration->get_source( true ) ) );
+$destination = preg_replace( '/^https?:\/\//', '', esc_url( $migration->get_destination( true ) ) );
+$is_import   = Shipper_Model_Stored_Migration::TYPE_IMPORT === $migration->get_type();
 ?>
 
 <span class="sui-tag shipper-domains">

@@ -32,7 +32,7 @@ if ( ! class_exists( 'Give_Stripe' ) ) {
 		 */
 		public function __construct() {
 
-			add_filter( 'give_payment_gateways', array( $this, 'register_gateway' ) );
+			add_filter( 'give_payment_gateways', [ $this, 'register_gateway' ] );
 
 			/**
 			 * Using hardcoded constant for backward compatibility of Give 2.5.0 with Recurring 1.8.13 when Stripe Premium is not active.
@@ -54,6 +54,8 @@ if ( ! class_exists( 'Give_Stripe' ) ) {
 		 * This function is used to include the related Stripe core files.
 		 *
 		 * @since  2.5.0
+		 * @since 2.11.0 Stripe sdk loading logic has been removed because
+		 *             Composer autoloader will load it when required.
 		 * @access public
 		 *
 		 * @return void
@@ -89,9 +91,6 @@ if ( ! class_exists( 'Give_Stripe' ) ) {
 						version_compare( '1.9.3', $recurring_plugin_data['Version'], '>=' )
 					) {
 
-						// Load Stripe SDK.
-						give_stripe_load_stripe_sdk();
-
 						// Include frontend files.
 						$this->include_frontend_files();
 
@@ -101,7 +100,7 @@ if ( ! class_exists( 'Give_Stripe' ) ) {
 
 								// Register error notice.
 								Give()->notices->register_notice(
-									array(
+									[
 										'id'          => 'give-recurring-fatal-error',
 										'type'        => 'error',
 										'description' => sprintf(
@@ -110,7 +109,7 @@ if ( ! class_exists( 'Give_Stripe' ) ) {
 											'https://givewp.com/support/'
 										),
 										'show'        => true,
-									)
+									]
 								);
 							}
 						);
@@ -119,9 +118,6 @@ if ( ! class_exists( 'Give_Stripe' ) ) {
 
 				return;
 			}
-
-			// Load Stripe SDK.
-			give_stripe_load_stripe_sdk();
 
 			// Include frontend files.
 			$this->include_frontend_files();
@@ -147,7 +143,6 @@ if ( ! class_exists( 'Give_Stripe' ) ) {
 			// Load these files when accessed from admin.
 			if ( is_admin() ) {
 				require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/admin/class-give-stripe-admin-settings.php';
-				require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/admin/class-give-stripe-logs.php';
 			}
 		}
 
@@ -166,22 +161,19 @@ if ( ! class_exists( 'Give_Stripe' ) ) {
 			require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/filters.php';
 			require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/give-stripe-scripts.php';
 
-			// Classes.
-			require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/class-give-stripe-logger.php';
-			require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/class-give-stripe-invoice.php';
-			require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/class-give-stripe-customer.php';
-			require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/class-give-stripe-payment-intent.php';
-			require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/class-give-stripe-payment-method.php';
-			require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/class-give-stripe-checkout-session.php';
-			require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/class-give-stripe-gateway.php';
-			require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/class-give-stripe-webhooks.php';
+            // Classes.
+            require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/class-give-stripe-logger.php';
+            require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/class-give-stripe-invoice.php';
+            require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/class-give-stripe-customer.php';
+            require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/class-give-stripe-payment-intent.php';
+            require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/class-give-stripe-payment-method.php';
+            require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/class-give-stripe-checkout-session.php';
+            require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/class-give-stripe-gateway.php';
+            require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/class-give-stripe-webhooks.php';
 
-			// Payment Methods.
-			require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/payment-methods/class-give-stripe-card.php';
-			require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/payment-methods/class-give-stripe-checkout.php';
-			require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/payment-methods/class-give-stripe-sepa.php';
-			require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/payment-methods/class-give-stripe-becs.php';
-		}
+            // Payment Methods.
+            require_once GIVE_PLUGIN_DIR . 'includes/gateways/stripe/includes/payment-methods/class-give-stripe-card.php';
+        }
 
 		/**
 		 * Register the payment methods supported by Stripe.
@@ -196,28 +188,28 @@ if ( ! class_exists( 'Give_Stripe' ) ) {
 		public function register_gateway( $gateways ) {
 
 			// Stripe - On page credit card.
-			$gateways['stripe'] = array(
+			$gateways['stripe'] = [
 				'admin_label'    => __( 'Stripe - Credit Card', 'give' ),
 				'checkout_label' => __( 'Credit Card', 'give' ),
-			);
+			];
 
 			// Stripe - Off page credit card (also known as Checkout).
-			$gateways['stripe_checkout'] = array(
+			$gateways['stripe_checkout'] = [
 				'admin_label'    => __( 'Stripe - Checkout', 'give' ),
 				'checkout_label' => __( 'Credit Card', 'give' ),
-			);
+			];
 
 			// Stripe - SEPA Direct Debit.
-			$gateways['stripe_sepa'] = array(
+			$gateways['stripe_sepa'] = [
 				'admin_label'    => __( 'Stripe - SEPA Direct Debit', 'give' ),
 				'checkout_label' => __( 'SEPA Direct Debit', 'give' ),
-			);
+			];
 
 			// Stripe - BECS Direct Debit.
-			$gateways['stripe_becs'] = array(
+			$gateways['stripe_becs'] = [
 				'admin_label'    => __( 'Stripe - BECS Direct Debit', 'give' ),
 				'checkout_label' => __( 'BECS Direct Debit', 'give' ),
-			);
+			];
 
 			return $gateways;
 		}

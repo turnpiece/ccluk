@@ -115,12 +115,13 @@ class WPML
 			if ( $translation->language_code == $this->getDefaultLanguage() ) return $translation->element_id;
 		}
 	}
-
-	/**
-	* Sync Post Order among translations
-	* @param array of posts with children
-	*/
-	public function syncPostOrder($posts)
+    
+    /**
+     * Sync Post Order among translations
+     * @param array of posts with children
+     * @param int value of the parent ID
+     */
+	public function syncPostOrder($posts, $post_parent = 0)
 	{
 		if ( $this->settings['sync_page_ordering'] !== 1 ) return;
 		global $wpdb;
@@ -128,11 +129,15 @@ class WPML
 		foreach ( $posts as $order => $post ) :
 			$translations = $this->getAllTranslations($post['id']);
 			foreach ( $translations as $lang_code => $post_info ) :
-				$post_id = $post_info->element_id;
-				$query = "UPDATE $wpdb->posts SET menu_order = '$order' WHERE ID = '$post_id'";
+				$translation_post_id = $post_info->element_id;
+				$parent_translations = $this->getAllTranslations($post_parent);
+				$translated_parent = ( isset($parent_translations[$lang_code]) ) ? $parent_translations[$lang_code]->element_id : 0;
+				$query = "UPDATE $wpdb->posts SET menu_order = '$order', post_parent = '$translated_parent' WHERE ID = '$translation_post_id'";
 				$wpdb->query( $query );
 			endforeach;
-			if ( isset($post['children']) ) $this->syncPostOrder($post['children']);
+            if (isset($post['children'])) :
+                $this->syncPostOrder($post['children'], $post['id']);
+            endif;
 		endforeach;
 	}
 

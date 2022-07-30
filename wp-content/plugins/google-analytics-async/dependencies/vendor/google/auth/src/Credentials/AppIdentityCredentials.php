@@ -53,7 +53,7 @@ use Beehive\Google\Auth\SignBlobInterface;
  * $res = $client->get('volumes?q=Henry+David+Thoreau&country=US');
  * ```
  */
-class AppIdentityCredentials extends \Beehive\Google\Auth\CredentialsLoader implements \Beehive\Google\Auth\SignBlobInterface, \Beehive\Google\Auth\ProjectIdProviderInterface
+class AppIdentityCredentials extends CredentialsLoader implements SignBlobInterface, ProjectIdProviderInterface
 {
     /**
      * Result of fetchAuthToken.
@@ -119,7 +119,7 @@ class AppIdentityCredentials extends \Beehive\Google\Auth\CredentialsLoader impl
         }
         // AppIdentityService expects an array when multiple scopes are supplied
         $scope = \is_array($this->scope) ? $this->scope : \explode(' ', $this->scope);
-        $token = \Beehive\google\appengine\api\app_identity\AppIdentityService::getAccessToken($scope);
+        $token = AppIdentityService::getAccessToken($scope);
         $this->lastReceivedToken = $token;
         return $token;
     }
@@ -135,7 +135,7 @@ class AppIdentityCredentials extends \Beehive\Google\Auth\CredentialsLoader impl
     public function signBlob($stringToSign, $forceOpenSsl = \false)
     {
         $this->checkAppEngineContext();
-        return \base64_encode(\Beehive\google\appengine\api\app_identity\AppIdentityService::signForApp($stringToSign)['signature']);
+        return \base64_encode(AppIdentityService::signForApp($stringToSign)['signature']);
     }
     /**
      * Get the project ID from AppIdentityService.
@@ -152,7 +152,7 @@ class AppIdentityCredentials extends \Beehive\Google\Auth\CredentialsLoader impl
         } catch (\Exception $e) {
             return null;
         }
-        return \Beehive\google\appengine\api\app_identity\AppIdentityService::getApplicationId();
+        return AppIdentityService::getApplicationId();
     }
     /**
      * Get the client name from AppIdentityService.
@@ -167,7 +167,7 @@ class AppIdentityCredentials extends \Beehive\Google\Auth\CredentialsLoader impl
     {
         $this->checkAppEngineContext();
         if (!$this->clientName) {
-            $this->clientName = \Beehive\google\appengine\api\app_identity\AppIdentityService::getServiceAccountName();
+            $this->clientName = AppIdentityService::getServiceAccountName();
         }
         return $this->clientName;
     }

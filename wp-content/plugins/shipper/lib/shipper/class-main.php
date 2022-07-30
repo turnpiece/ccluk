@@ -24,17 +24,21 @@ class Shipper_Main extends Shipper_Helper_Singleton {
 			'override_paths',
 			'override_remote',
 			'override_tables',
-			'override_files',
 			'override_timeouts',
+			'override_migration_files',
+			'override_migration_tables',
+			'override_migration_advanced',
 			'override_package_files',
 			'override_package_tables',
 			'override_package_advanced',
 			'override_package_settings',
 			'admin',
+			'admin_dashboard',
 			'admin_migrate',
 			'admin_packages',
 			'admin_tools',
 			'admin_settings',
+			'admin_tutorials',
 			'ajax_admin',
 			'ajax_hub',
 			'ajax_migration',
@@ -46,6 +50,7 @@ class Shipper_Main extends Shipper_Helper_Singleton {
 			'ajax_packages_meta',
 			'ajax_packages_preflight',
 			'ajax_packages_build',
+			'ajax_dashboard',
 			'hub_migration',
 			'hub_destination',
 			'hub_util',
@@ -54,13 +59,12 @@ class Shipper_Main extends Shipper_Helper_Singleton {
 			'data',
 			'wpcli',
 		);
+
 		foreach ( $controllers as $ctrl ) {
-			$cname = 'Shipper_Controller_' . ucfirst( $ctrl );
+			$cname = 'Shipper_Controller_' . ucwords( $ctrl, '_' );
 			if ( class_exists( $cname ) ) {
-				$controller = call_user_func( array( $cname, 'get' ) );
-				$controller->boot();
+				$cname::get()->boot();
 			}
 		}
 	}
-
 }

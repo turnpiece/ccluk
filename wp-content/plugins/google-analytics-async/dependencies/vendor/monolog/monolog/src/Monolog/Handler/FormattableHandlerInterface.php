@@ -27,11 +27,11 @@ interface FormattableHandlerInterface
      * @param  FormatterInterface $formatter
      * @return HandlerInterface   self
      */
-    public function setFormatter(\Beehive\Monolog\Formatter\FormatterInterface $formatter) : \Beehive\Monolog\Handler\HandlerInterface;
+    public function setFormatter(FormatterInterface $formatter) : HandlerInterface;
     /**
      * Gets the formatter.
      *
      * @return FormatterInterface
      */
-    public function getFormatter() : \Beehive\Monolog\Formatter\FormatterInterface;
+    public function getFormatter() : FormatterInterface;
 }

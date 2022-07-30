@@ -39,8 +39,7 @@ class Shipper_Controller_Override_Timeouts extends Shipper_Controller_Override {
 		$tm = $this->get_constants()->get( 'SHIPPER_RUNNER_PING_TIMEOUT' );
 		return is_numeric( $tm )
 			? (float) $tm
-			: $timeout
-		;
+			: $timeout;
 	}
 
 	/**
@@ -54,7 +53,6 @@ class Shipper_Controller_Override_Timeouts extends Shipper_Controller_Override {
 		$tm = $this->get_constants()->get( 'SHIPPER_MAX_EXEC_TIME' );
 		return is_numeric( $tm )
 			? (int) $tm
-			: $timeout
-		;
+			: $timeout;
 	}
 }

@@ -21,16 +21,20 @@ use Beehive\Google\Auth\Credentials\InsecureCredentials;
 use Beehive\Google\Auth\Credentials\ServiceAccountCredentials;
 use Beehive\Google\Auth\Credentials\UserRefreshCredentials;
 use Beehive\GuzzleHttp\ClientInterface;
+use RuntimeException;
+use UnexpectedValueException;
 /**
  * CredentialsLoader contains the behaviour used to locate and find default
  * credentials files on the file system.
  */
-abstract class CredentialsLoader implements \Beehive\Google\Auth\FetchAuthTokenInterface, \Beehive\Google\Auth\UpdateMetadataInterface
+abstract class CredentialsLoader implements FetchAuthTokenInterface, UpdateMetadataInterface
 {
     const TOKEN_CREDENTIAL_URI = 'https://oauth2.googleapis.com/token';
     const ENV_VAR = 'GOOGLE_APPLICATION_CREDENTIALS';
     const WELL_KNOWN_PATH = 'gcloud/application_default_credentials.json';
     const NON_WINDOWS_WELL_KNOWN_PATH_BASE = '.config';
+    const MTLS_WELL_KNOWN_PATH = '.secureConnect/context_aware_metadata.json';
+    const MTLS_CERT_ENV_VAR = 'GOOGLE_API_USE_CLIENT_CERTIFICATE';
     /**
      * @param string $cause
      * @return string
@@ -57,10 +61,10 @@ abstract class CredentialsLoader implements \Beehive\Google\Auth\FetchAuthTokenI
     private static function getGuzzleMajorVersion()
     {
         if (\defined('Beehive\GuzzleHttp\ClientInterface::MAJOR_VERSION')) {
-            return \Beehive\GuzzleHttp\ClientInterface::MAJOR_VERSION;
+            return ClientInterface::MAJOR_VERSION;
         }
         if (\defined('Beehive\GuzzleHttp\ClientInterface::VERSION')) {
-            return (int) \substr(\Beehive\GuzzleHttp\ClientInterface::VERSION, 0, 1);
+            return (int) \substr(ClientInterface::VERSION, 0, 1);
         }
         throw new \Exception('Version not supported');
     }
@@ -119,18 +123,24 @@ abstract class CredentialsLoader implements \Beehive\Google\Auth\FetchAuthTokenI
      * @param string|array $scope the scope of the access request, expressed
      *        either as an Array or as a space-delimited String.
      * @param array $jsonKey the JSON credentials.
+     * @param string|array $defaultScope The default scope to use if no
+     *   user-defined scopes exist, expressed either as an Array or as a
+     *   space-delimited string.
+     *
      * @return ServiceAccountCredentials|UserRefreshCredentials
      */
-    public static function makeCredentials($scope, array $jsonKey)
+    public static function makeCredentials($scope, array $jsonKey, $defaultScope = null)
     {
         if (!\array_key_exists('type', $jsonKey)) {
             throw new \InvalidArgumentException('json key is missing the type field');
         }
         if ($jsonKey['type'] == 'service_account') {
-            return new \Beehive\Google\Auth\Credentials\ServiceAccountCredentials($scope, $jsonKey);
+            // Do not pass $defaultScope to ServiceAccountCredentials
+            return new ServiceAccountCredentials($scope, $jsonKey);
         }
         if ($jsonKey['type'] == 'authorized_user') {
-            return new \Beehive\Google\Auth\Credentials\UserRefreshCredentials($scope, $jsonKey);
+            $anyScope = $scope ?: $defaultScope;
+            return new UserRefreshCredentials($anyScope, $jsonKey);
         }
         throw new \InvalidArgumentException('invalid value in the type field');
     }
@@ -143,16 +153,16 @@ abstract class CredentialsLoader implements \Beehive\Google\Auth\FetchAuthTokenI
      * @param callable $tokenCallback (optional) function to be called when a new token is fetched.
      * @return \GuzzleHttp\Client
      */
-    public static function makeHttpClient(\Beehive\Google\Auth\FetchAuthTokenInterface $fetcher, array $httpClientOptions = [], callable $httpHandler = null, callable $tokenCallback = null)
+    public static function makeHttpClient(FetchAuthTokenInterface $fetcher, array $httpClientOptions = [], callable $httpHandler = null, callable $tokenCallback = null)
     {
         if (self::getGuzzleMajorVersion() === 5) {
             $client = new \Beehive\GuzzleHttp\Client($httpClientOptions);
             $client->setDefaultOption('auth', 'google_auth');
-            $subscriber = new \Beehive\Google\Auth\Subscriber\AuthTokenSubscriber($fetcher, $httpHandler, $tokenCallback);
+            $subscriber = new Subscriber\AuthTokenSubscriber($fetcher, $httpHandler, $tokenCallback);
             $client->getEmitter()->attach($subscriber);
             return $client;
         }
-        $middleware = new \Beehive\Google\Auth\Middleware\AuthTokenMiddleware($fetcher, $httpHandler, $tokenCallback);
+        $middleware = new Middleware\AuthTokenMiddleware($fetcher, $httpHandler, $tokenCallback);
         $stack = \Beehive\GuzzleHttp\HandlerStack::create();
         $stack->push($middleware);
         return new \Beehive\GuzzleHttp\Client(['handler' => $stack, 'auth' => 'google_auth'] + $httpClientOptions);
@@ -164,7 +174,7 @@ abstract class CredentialsLoader implements \Beehive\Google\Auth\FetchAuthTokenI
      */
     public static function makeInsecureCredentials()
     {
-        return new \Beehive\Google\Auth\Credentials\InsecureCredentials();
+        return new InsecureCredentials();
     }
     /**
      * export a callback function which updates runtime metadata.
@@ -188,7 +198,7 @@ abstract class CredentialsLoader implements \Beehive\Google\Auth\FetchAuthTokenI
     {
         if (isset($metadata[self::AUTH_METADATA_KEY])) {
             // Auth metadata has already been set
-            return $metdadata;
+            return $metadata;
         }
         $result = $this->fetchAuthToken($httpHandler);
         if (!isset($result['access_token'])) {
@@ -197,5 +207,55 @@ abstract class CredentialsLoader implements \Beehive\Google\Auth\FetchAuthTokenI
         $metadata_copy = $metadata;
         $metadata_copy[self::AUTH_METADATA_KEY] = array('Bearer ' . $result['access_token']);
         return $metadata_copy;
+    }
+    /**
+     * Gets a callable which returns the default device certification.
+     *
+     * @throws UnexpectedValueException
+     * @return callable|null
+     */
+    public static function getDefaultClientCertSource()
+    {
+        if (!($clientCertSourceJson = self::loadDefaultClientCertSourceFile())) {
+            return null;
+        }
+        $clientCertSourceCmd = $clientCertSourceJson['cert_provider_command'];
+        return function () use($clientCertSourceCmd) {
+            $cmd = \array_map('escapeshellarg', $clientCertSourceCmd);
+            \exec(\implode(' ', $cmd), $output, $returnVar);
+            if (0 === $returnVar) {
+                return \implode(\PHP_EOL, $output);
+            }
+            throw new RuntimeException('"cert_provider_command" failed with a nonzero exit code');
+        };
+    }
+    /**
+     * Determines whether or not the default device certificate should be loaded.
+     *
+     * @return bool
+     */
+    public static function shouldLoadClientCertSource()
+    {
+        return \filter_var(\getenv(self::MTLS_CERT_ENV_VAR), \FILTER_VALIDATE_BOOLEAN);
+    }
+    private static function loadDefaultClientCertSourceFile()
+    {
+        $rootEnv = self::isOnWindows() ? 'APPDATA' : 'HOME';
+        $path = \sprintf('%s/%s', \getenv($rootEnv), self::MTLS_WELL_KNOWN_PATH);
+        if (!\file_exists($path)) {
+            return null;
+        }
+        $jsonKey = \file_get_contents($path);
+        $clientCertSourceJson = \json_decode($jsonKey, \true);
+        if (!$clientCertSourceJson) {
+            throw new UnexpectedValueException('Invalid client cert source JSON');
+        }
+        if (!isset($clientCertSourceJson['cert_provider_command'])) {
+            throw new UnexpectedValueException('cert source requires "cert_provider_command"');
+        }
+        if (!\is_array($clientCertSourceJson['cert_provider_command'])) {
+            throw new UnexpectedValueException('cert source expects "cert_provider_command" to be an array');
+        }
+        return $clientCertSourceJson;
     }
 }

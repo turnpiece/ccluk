@@ -1,7 +1,7 @@
 <?php
 
 /**
-* This class takes care of all form related functionality
+* This class takes care of all form assets related functionality
  *
  * @access private
  * @ignore
@@ -9,17 +9,26 @@
 class MC4WP_Form_Asset_Manager {
 
 	/**
-	 * @var bool
+	 * @var bool Flag to determine whether scripts should be enqueued.
 	 */
-	protected $load_scripts = false;
+	private $load_scripts = false;
 
 	/**
 	 * Add hooks
 	 */
 	public function add_hooks() {
-		add_action( 'mc4wp_output_form', array( $this, 'before_output_form' ) );
+		add_action( 'init', array( $this, 'register_scripts' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'load_stylesheets' ) );
 		add_action( 'wp_footer', array( $this, 'load_scripts' ) );
+		add_action( 'mc4wp_output_form', array( $this, 'before_output_form' ) );
+		add_action( 'script_loader_tag', array( $this, 'add_defer_attribute' ), 10, 2 );
+	}
+
+	/**
+	 * Register scripts to be enqueued later.
+	 */
+	public function register_scripts() {
+		wp_register_script( 'mc4wp-forms-api', mc4wp_plugin_url( 'assets/js/forms.js' ), array(), MC4WP_VERSION, true );
 	}
 
 	/**
@@ -48,11 +57,7 @@ class MC4WP_Form_Asset_Manager {
 	 * @return string
 	 */
 	public function get_stylesheet_url( $stylesheet ) {
-		if ( ! $this->is_registered_stylesheet( $stylesheet ) ) {
-			return '';
-		}
-
-		return MC4WP_PLUGIN_URL . 'assets/css/form-' . $stylesheet . '.min.css';
+		return mc4wp_plugin_url( 'assets/css/form-' . $stylesheet . '.css' );
 	}
 
 	/**
@@ -90,16 +95,15 @@ class MC4WP_Form_Asset_Manager {
 			}
 
 			$handle = 'mc4wp-form-' . $stylesheet;
-			wp_enqueue_style( $handle, $this->get_stylesheet_url( $stylesheet ), array(), MC4WP_VERSION );
-			add_editor_style( $this->get_stylesheet_url( $stylesheet ) );
+			$url = $this->get_stylesheet_url( $stylesheet );
+			wp_enqueue_style( $handle, $url, array(), MC4WP_VERSION );
+			add_editor_style( $url );
 		}
 
 		/**
 		 * @ignore
 		 */
 		do_action( 'mc4wp_load_form_stylesheets', $stylesheets );
-
-		return true;
 	}
 
 	/**
@@ -141,10 +145,12 @@ class MC4WP_Form_Asset_Manager {
 	 * Load JavaScript files
 	 */
 	public function before_output_form() {
-		// print dummy JS
-		$this->print_dummy_javascript();
+		$load_scripts = apply_filters( 'mc4wp_load_form_scripts', true );
+		if ( ! $load_scripts ) {
+			return;
+		}
 
-		// set flag to load JS files in wp_footer
+		$this->print_dummy_javascript();
 		$this->load_scripts = true;
 	}
 
@@ -152,9 +158,8 @@ class MC4WP_Form_Asset_Manager {
 	 * Prints dummy JavaScript which allows people to call `mc4wp.forms.on()` before the JS is loaded.
 	 */
 	public function print_dummy_javascript() {
-		$file = dirname( __FILE__ ) . '/views/js/dummy-api.js';
 		echo '<script>';
-		include $file;
+		include __DIR__ . '/views/js/dummy-api.js';
 		echo '</script>';
 	}
 
@@ -162,34 +167,44 @@ class MC4WP_Form_Asset_Manager {
 	* Outputs the inline JavaScript that is used to enhance forms
 	*/
 	public function load_scripts() {
-		$load_scripts = $this->load_scripts;
-
-		/** @ignore */
-		$load_scripts = apply_filters( 'mc4wp_load_form_scripts', $load_scripts );
+		$load_scripts = apply_filters( 'mc4wp_load_form_scripts', $this->load_scripts );
 		if ( ! $load_scripts ) {
 			return;
 		}
 
-		$filename_suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
-
 		// load general client-side form API
-		wp_enqueue_script( 'mc4wp-forms-api', MC4WP_PLUGIN_URL . 'assets/js/forms' . $filename_suffix . '.js', array(), MC4WP_VERSION, true );
+		wp_enqueue_script( 'mc4wp-forms-api' );
 
 		// maybe load JS file for when a form was submitted over HTTP POST
 		$submitted_form_data = $this->get_submitted_form_data();
 		if ( $submitted_form_data !== null ) {
-			wp_enqueue_script( 'mc4wp-forms-submitted', MC4WP_PLUGIN_URL . 'assets/js/forms-submitted' . $filename_suffix . '.js', array( 'mc4wp-forms-api' ), MC4WP_VERSION, true );
+			wp_enqueue_script( 'mc4wp-forms-submitted', mc4wp_plugin_url( 'assets/js/forms-submitted.js' ), array( 'mc4wp-forms-api' ), MC4WP_VERSION, true );
 			wp_localize_script( 'mc4wp-forms-submitted', 'mc4wp_submitted_form', $submitted_form_data );
 		}
 
 		// print inline scripts
 		echo '<script>';
 		echo '(function() {';
-		include dirname( __FILE__ ) . '/views/js/url-fields.js';
+		include __DIR__ . '/views/js/url-fields.js';
 		echo '})();';
 		echo '</script>';
 
 		/** @ignore */
 		do_action( 'mc4wp_load_form_scripts' );
+	}
+
+	/**
+	 * Adds `defer` attribute to all form-related `<script>` elements so they do not block page rendering.
+	 *
+	 * @param string $tag
+	 * @param string $handle
+	 * @return string
+	 */
+	public function add_defer_attribute( $tag, $handle ) {
+		if ( ! in_array( $handle, array( 'mc4wp-forms-api', 'mc4wp-forms-submitted' ), true ) || stripos( $tag, ' defer' ) !== false ) {
+			return $tag;
+		}
+
+		return str_replace( ' src=', ' defer src=', $tag );
 	}
 }

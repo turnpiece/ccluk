@@ -103,7 +103,35 @@ class SWP_Auth_Helper {
 	 *
 	 */
 	public function get_access_token() {
+
 		return $this->has_credentials ? $this->access_token : false;
+	}
+
+
+	/**
+	 * The has_valid_token() method will return a true or false response as to
+	 * the current "validity" status of an access token. If we do not have an
+	 * access token or if it is expired, it will return false.
+	 *
+	 * @since  4.0.2 | 23 JUL 2020 | Created
+	 * @param  void
+	 * @return boolean True if valid. False if invalid or missing.
+	 *
+	 */
+	public function has_valid_token() {
+
+		// If we don't have an access token at all.
+		if ( false == $this->get_access_token() ) {
+			return false;
+		}
+
+		// If the access token is expired.
+		if( 'expired' == $this->get_access_token() ) {
+			return false;
+		}
+
+		// If we have an access token and it's good.
+		return true;
 	}
 
 
@@ -153,6 +181,7 @@ class SWP_Auth_Helper {
 
 
 	public function add_to_authorizations( $network_keys ) {
+		// return $network_keys;
 		return array_merge( $network_keys, array( $this->network ) );
 	}
 

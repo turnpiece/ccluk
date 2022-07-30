@@ -1,9 +1,20 @@
-
 <section id="header">
     <h1><?php esc_html_e( 'Dashboard', SNAPSHOT_I18N_DOMAIN ); ?></h1>
 </section>
 
 <div id="container" class="snapshot-three wps-page-dashboard">
+
+	<?php
+		WPMUDEVSnapshot::instance()->need_show_v4_notice() && $this->render(
+			'common/v4-notice',
+			false,
+			array(
+				'bg_image_url' => WPMUDEVSnapshot::get_file_url( '/assets/img/snapshot-hero-notice.svg' ),
+			),
+			false,
+			false
+		);
+	?>
 
 	<div class="row">
 
@@ -88,3 +99,5 @@ if( Snapshot_Helper_Utility::is_wpmu_hosting() ) {
 }
 
 $this->render( 'boxes/modals/popup-snapshot', false, $data, false, false );
+
+WPMUDEVSnapshot::instance()->need_show_v4_modal() && $this->render( 'boxes/modals/popup-upgrade-to-v4', false, array(), false, false );

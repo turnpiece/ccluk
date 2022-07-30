@@ -2,7 +2,7 @@
 /**
  * The GTM admin core class.
  *
- * @link    http://premium.wpmudev.org
+ * @link    http://wpmudev.com
  * @since   3.3.0
  *
  * @author  Joel James <joel@incsub.com>
@@ -35,7 +35,7 @@ class Admin extends Base {
 	 */
 	public function init() {
 		// Settings menu in dashboard.
-		add_action( 'beehive_admin_menu', array( $this, 'settings_menu' ) );
+		add_filter( 'beehive_main_menu_items', array( $this, 'admin_menu' ), 2 );
 
 		// Add i18n strings for the locale.
 		add_filter( 'beehive_i18n_get_locale_scripts', array( $this, 'setup_i18n' ), 10, 2 );
@@ -51,20 +51,22 @@ class Admin extends Base {
 	/**
 	 * Register admin submenu for the settings page.
 	 *
-	 * @since 3.3.0
+	 * @param array $menu_items Menu items.
 	 *
-	 * @return void
+	 * @since 3.3.7
+	 *
+	 * @return array
 	 */
-	public function settings_menu() {
-		// Add accounts page.
-		add_submenu_page(
-			Menu::SLUG,
-			__( 'Google Tag Manager Settings', 'ga_trans' ),
-			__( 'Google Tag Manager', 'ga_trans' ),
-			Capability::SETTINGS_CAP,
-			'beehive-gtm-settings',
-			array( Views\Admin::instance(), 'settings' )
+	public function admin_menu( $menu_items ) {
+		// Set the admin menu for GA.
+		$menu_items['beehive-google-tag-manager'] = array(
+			'page_title' => __( 'Google Tag Manager Settings', 'ga_trans' ),
+			'menu_title' => __( 'Google Tag Manager', 'ga_trans' ),
+			'cap'        => Capability::SETTINGS_CAP,
+			'callback'   => array( Views\Admin::instance(), 'settings' ),
 		);
+
+		return $menu_items;
 	}
 
 	/**

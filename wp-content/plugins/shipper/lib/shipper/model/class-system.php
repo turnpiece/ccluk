@@ -12,10 +12,10 @@
  */
 class Shipper_Model_System extends Shipper_Model {
 
-	const INFO_PHP = 'php';
+	const INFO_PHP    = 'php';
 	const INFO_SERVER = 'server';
-	const INFO_DB = 'mysql';
-	const INFO_WP = 'wordpress';
+	const INFO_DB     = 'mysql';
+	const INFO_WP     = 'wordpress';
 
 	/**
 	 * Constructor
@@ -23,12 +23,14 @@ class Shipper_Model_System extends Shipper_Model {
 	 * Sets internal storage data to submodels
 	 */
 	public function __construct() {
-		$this->set_data(array(
-			self::INFO_PHP => new Shipper_Model_System_Php,
-			self::INFO_DB => new Shipper_Model_System_Db,
-			self::INFO_SERVER => new Shipper_Model_System_Server,
-			self::INFO_WP => new Shipper_Model_System_Wp,
-		));
+		$this->set_data(
+			array(
+				self::INFO_PHP    => new Shipper_Model_System_Php(),
+				self::INFO_DB     => new Shipper_Model_System_Db(),
+				self::INFO_SERVER => new Shipper_Model_System_Server(),
+				self::INFO_WP     => new Shipper_Model_System_Wp(),
+			)
+		);
 	}
 
 	/**
@@ -38,7 +40,7 @@ class Shipper_Model_System extends Shipper_Model {
 	 */
 	public function get_data() {
 		$models = parent::get_data();
-		$data = array();
+		$data   = array();
 		foreach ( $models as $key => $model ) {
 			$data[ $key ] = $model->get_data();
 		}

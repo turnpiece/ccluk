@@ -16,7 +16,7 @@ use Beehive\Elastica\Document;
  *
  * @author Jelle Vink <jelle.vink@gmail.com>
  */
-class ElasticaFormatter extends \Beehive\Monolog\Formatter\NormalizerFormatter
+class ElasticaFormatter extends NormalizerFormatter
 {
     /**
      * @var string Elastic search index name
@@ -69,7 +69,7 @@ class ElasticaFormatter extends \Beehive\Monolog\Formatter\NormalizerFormatter
      */
     protected function getDocument($record)
     {
-        $document = new \Beehive\Elastica\Document();
+        $document = new Document();
         $document->setData($record);
         $document->setType($this->type);
         $document->setIndex($this->index);

@@ -89,9 +89,8 @@ $item = array_merge(
 			</p>
 
 			<ol class="instructions" id="directory-instructions">
-				<li><?php echo wp_kses_post( __( 'Go to your <a href="https://drive.google.com/#my-drive" target="_blank">Drive account</a>. Navigate to or create a new directory where you want to upload the Snapshot archives. Make sure you are viewing the destination directory.', SNAPSHOT_I18N_DOMAIN ) ); ?></li>
-				<li><?php echo wp_kses_post( __( 'The URL for the directory will be something similar to <em>https://drive.google.com/#folders/0B6GD66ctHXXCOWZKNDRIRGJJXS3</em>. The Directory ID would be the last part after <em>/#folders/</em>: <strong>0B6GD66ctHXXCOWZKNDRIRGJJXS3.</strong>', SNAPSHOT_I18N_DOMAIN ) ); ?></li>
-				<li><?php echo wp_kses_post( sprintf( esc_html__( 'You may specify multiple Directory IDs separated by a comma "%s"', SNAPSHOT_I18N_DOMAIN ), ',' ) ); ?></li>
+				<li><?php echo wp_kses_post( __( 'Go to your <a href="https://drive.google.com/drive/my-drive" target="_blank">Drive account</a>. Navigate to or create a new directory where you want to upload the Snapshot archives. Make sure you are viewing the destination directory.', SNAPSHOT_I18N_DOMAIN ) ); ?></li>
+				<li><?php echo wp_kses_post( __( 'The URL for the directory will be something similar to <em>https://drive.google.com/drive/folders/0B6GD66ctHXXCOWZKNDRIRGJJXS3</em>. The Directory ID would be the last part after <em>/folders/</em>: <strong>0B6GD66ctHXXCOWZKNDRIRGJJXS3.</strong>', SNAPSHOT_I18N_DOMAIN ) ); ?></li>
 			</ol>
 
 		</div>

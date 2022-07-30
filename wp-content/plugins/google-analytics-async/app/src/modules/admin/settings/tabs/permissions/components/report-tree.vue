@@ -53,7 +53,14 @@ export default {
 		getReports() {
 			let reports = this.getOption(this.role, 'reports', {})
 
-			return reports[this.type] || []
+			reports = reports[this.type] || []
+
+			// To support unexpected format.
+			if (typeof reports === 'object' && reports !== null) {
+				reports = Object.values(reports)
+			}
+
+			return reports
 		},
 	},
 

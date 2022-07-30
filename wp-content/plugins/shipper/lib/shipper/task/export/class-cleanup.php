@@ -3,6 +3,7 @@
  * Shipper export tasks: cleanup
  *
  * Triggers as the last task, and cleans up any leftover intermediate stuff.
+ * Clean up temp data before and after the migration.
  *
  * @package shipper
  */
@@ -20,13 +21,17 @@ class Shipper_Task_Export_Cleanup extends Shipper_Task_Export {
 	 * @return bool
 	 */
 	public function apply( $args = array() ) {
-		$this->_has_done_anything = true;
+		$this->has_done_anything = true;
 
 		// Clean up temp dir.
 		Shipper_Helper_Fs_Path::rmdir_r(
 			Shipper_Helper_Fs_Path::get_temp_dir(),
 			''
 		);
+
+		$exclusion = new Shipper_Model_Stored_Exclusions();
+		$exclusion->clear();
+		$exclusion->save();
 
 		return true;
 	}

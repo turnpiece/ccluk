@@ -17,7 +17,7 @@ class Shipper_Controller_Notifications extends Shipper_Controller {
 	 *
 	 * @var object Shipper_Model_Stored_Options instance
 	 */
-	protected $_model;
+	protected $model;
 
 	/**
 	 * Boot event listeners
@@ -47,7 +47,7 @@ class Shipper_Controller_Notifications extends Shipper_Controller {
 	 * @param object $migration Shipper_Model_Stored_Migration instance.
 	 */
 	public function send_notifications_complete( $migration ) {
-		$data = $migration->get_data();
+		$data    = $migration->get_data();
 		$success = empty( $data['errors'] );
 
 		if ( ! empty( $success ) ) {
@@ -84,28 +84,66 @@ class Shipper_Controller_Notifications extends Shipper_Controller {
 			// The local one should notify.
 			return false;
 		}
-		$model = $this->get_model();
-		$tpl = new Shipper_Helper_Template;
-		$type = $migration->get_type();
+
+		$model   = $this->get_model();
+		$tpl     = new Shipper_Helper_Template();
+		$type    = $migration->get_type();
+		$subject = $this->get_subject( $migration, $status );
+		$headers = array(
+			'Content-Type: text/html; charset=' . get_bloginfo( 'charset' ),
+		);
 
 		foreach ( $model->get_emails() as $email => $name ) {
 			$args = array(
-				'name' => $name,
+				'name'      => $name,
 				'migration' => $migration,
-				'status' => $status,
+				'status'    => $status,
+				'subject'   => $subject,
 			);
 
-			$subject = $tpl->get( sprintf( 'emails/%s/subject', $type ), $args );
 			$body = $tpl->get( sprintf( 'emails/%s/body', $type ), $args );
 
 			if ( ! empty( $subject ) && ! empty( $body ) && is_email( $email ) ) {
 				wp_mail(
 					$email,
 					$subject,
-					$body
+					$body,
+					$headers
 				);
 			}
 		}
+	}
+
+	/**
+	 * Get notification subject
+	 *
+	 * @since 1.2.6
+	 *
+	 * @param object $migration Shipper_Model_Stored_Migration instance.
+	 * @param bool   $status Migration status.
+	 *
+	 * @return string
+	 */
+	public function get_subject( $migration, $status ) {
+		$type = 'export' === $migration->get_type()
+			? __( 'Exported', 'shipper' )
+			: __( 'Imported', 'shipper' );
+
+		$to_or_from = 'export' === $migration->get_type()
+			? __( 'from', 'shipper' )
+			: __( 'to', 'shipper' );
+
+		$subject = $status
+			? sprintf(
+				/* translators: %1$s %2$s %3$s: migration type and source site url. */
+				__( 'Shipper successfully %1$s your site %2$s %3$s', 'shipper' ),
+				$type,
+				$to_or_from,
+				$migration->get_source()
+			)
+			: __( 'Shipper Encountered An Error', 'shipper' );
+
+		return apply_filters( 'shipper_get_notifications_subject', $subject, $migration, $status );
 	}
 
 	/**
@@ -114,9 +152,13 @@ class Shipper_Controller_Notifications extends Shipper_Controller {
 	 * @return object Shipper_Model_Stored_Options instance
 	 */
 	public function get_model() {
-		if ( ! empty( $this->_model ) ) { return $this->_model; }
-		$this->set_model( new Shipper_Model_Stored_Options );
-		return $this->_model;
+		if ( ! empty( $this->model ) ) {
+			return $this->model;
+		}
+
+		$this->set_model( new Shipper_Model_Stored_Options() );
+
+		return $this->model;
 	}
 
 	/**
@@ -124,12 +166,13 @@ class Shipper_Controller_Notifications extends Shipper_Controller {
 	 *
 	 * Used in tests
 	 *
-	 * @param object $model Shipper_Model_Stored instance.
+	 * @param Shipper_Model_Stored $model Shipper_Model_Stored instance.
 	 *
 	 * @return object Shipper_Controller_Notifications instance
 	 */
 	public function set_model( Shipper_Model_Stored $model ) {
-		$this->_model = $model;
+		$this->model = $model;
+
 		return $this;
 	}
 }

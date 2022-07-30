@@ -4,7 +4,7 @@
 
 	window.onload = function() {
 		/*********************************************************
-			Temporary patch for the custom color se lects.
+			Temporary patch for the custom color selects.
 		*********************************************************/
 		/*
 		*  Temp patch on the Visual Options colors.
@@ -142,9 +142,10 @@
 
 			var name = jQueryfield.attr('name');
 			var value;
-
 			if ('checkbox' === jQueryfield.attr('type')) {
 					value = jQueryfield.prop('checked');
+			} else if ( 'textarea' === jQueryfield.attr('type') ) {
+					value = jQueryfield.val();
 			} else {
 					value = jQueryfield.val();
 			}
@@ -161,7 +162,7 @@
 			var network = jQuery(this).data('network');
 			values.order_of_icons[network] = network;
 		});
-
+		console.log(values);
 		return values;
 	}
 
@@ -189,27 +190,50 @@
 	function tabNavInit() {
 		jQuery('.sw-tab-selector').on('click', function(event) {
 			event.preventDefault();
-
 			jQuery('html, body').animate({ scrollTop: 0 }, 300);
-
 			var tab = jQuery(this).attr('data-link');
-
-			jQuery('.sw-admin-tab').hide();
-
-			jQuery('#' + tab).show();
-
-			jQuery('.sw-header-menu li').removeClass('sw-active-tab');
-
-			jQuery(this).parents('li').addClass('sw-active-tab');
-
-			if ('swp_styles' === tab) {
-				socialWarfare.activateHoverStates();
-			}
-
-			socialWarfareAdmin.conditionalFields();
-
+			sessionStorage.setItem('swp_tab', tab);
+			activateSelectedTab(tab);
 		});
 	}
+
+
+	/**
+	 * The activateSelectedTab() function will hide all of the tabbed sections
+	 * and then reveal the one that was clicked on.
+	 *
+	 * @since  1.0.0 | UNKNOWN | Created
+	 * @since  4.2.0 | 25 AUG 2020 | Added existence check for tab content.
+	 * @param  string tab The unique key of the selected tab.
+	 * @return void
+	 *
+	 */
+	function activateSelectedTab(tab) {
+
+		// Bail if the requested tab doesn't exist on this page.
+		if( 0 === jQuery('[data-link="'+ tab +'"]').length ) {
+			return;
+		};
+
+		// Hide all of the tabs in one go.
+		jQuery('.sw-admin-tab').hide();
+
+		// Reveal the selected tab.
+		jQuery('#' + tab).show();
+
+		// Update the items in the menu so the right one has the active class.
+		jQuery('.sw-header-menu li').removeClass('sw-active-tab');
+		jQuery('[data-link="'+ tab +'"]').parents('li').addClass('sw-active-tab');
+
+		// Run some special stuff if we're on the styles tab now.
+		if ('swp_styles' === tab) {
+			socialWarfare.activateHoverStates();
+		}
+
+		// Update all of the conditional fields...just in case.
+		socialWarfareAdmin.conditionalFields();
+	}
+
 
 	/*********************************************************
 		Checkboxes
@@ -283,16 +307,17 @@
 			};
 
 			// Send the POST request
-			jQuery.post({
+			jQuery.ajax({
+				type: 'POST',
 				url: ajaxurl,
 				data: data,
 				success: function(response) {
 					// Clear the loading screen
 					clearLoadingScreen(true);
-
+					console.log(response);
 					// Reset the default options variable
 					socialWarfare.defaultOptions = fetchAllOptions();
-
+					console.log('woohoo');
 					saveColorToggle();
 				}
 
@@ -865,7 +890,66 @@
 		});
 	}
 
+
+	/**
+	 * A method to handle the deactivation functionality of the authorization
+	 * buttons for integrations like link shortening API's. This will ping the
+	 * registered function via admin-ajax which will in turn delete the stored
+	 * tokens from the database.
+	 *
+	 * @since  4.0.0 | 21 JUL 2019 | Created
+	 * @param  void
+	 * @return void
+	 *
+	 */
+	function handleDeactivations() {
+		jQuery('a[data-deactivation]').on('click',function( event ) {
+
+			// Fetch and check for the name of the deactivation hook.
+			var deactivationHook = $(this).data('deactivation');
+			if( deactivationHook ) {
+
+				// Activate the loading screen and disable the default click action.
+				loadingScreen();
+				event.preventDefault();
+
+				// Add our vender prefix to the admin-ajax action name.
+				var data = { action: 'swp_' + deactivationHook };
+
+				// Send the post request to admin-ajax.
+				jQuery.post(ajaxurl, data, function(response) {
+
+					// If successful, refresh the page so that the button is rebuilt.
+					if( 'success' == response ) {
+						location.reload();
+					}
+				});
+
+			}
+		});
+	}
+
+	function loadPreviousTab() {
+		var previousTime = sessionStorage.getItem('swp_tab_time');
+		var previousTab = sessionStorage.getItem('swp_tab');
+		var dateObject = new Date();
+		var currentTime = dateObject.getTime() / 1000;
+		if( (currentTime - previousTime) < 15) {
+			activateSelectedTab( previousTab );
+		}
+	}
+
+	function savePreviousTab() {
+		window.onbeforeunload = function(e) {
+			var dateObject = new Date();
+			var seconds = dateObject.getTime() / 1000;
+			sessionStorage.setItem('swp_tab_time', seconds);
+		}
+	}
+
 	jQuery(document).ready(function() {
+		savePreviousTab();
+		loadPreviousTab();
 		handleSettingSave();
 		populateOptions();
 		headerMenuInit();
@@ -880,6 +964,7 @@
 		getSystemStatus();
 		customUploaderInit();
 		set_ctt_preview();
-	  addIconTooltips();
+		addIconTooltips();
+		handleDeactivations();
 	});
 })(this, jQuery);

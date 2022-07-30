@@ -57,7 +57,7 @@
             snapshot_button_abort_proc();
         });
 
-        $("form#managed-backup-restore").off().submit(function (e) {
+        $("form#managed-backup-restore").off().on('submit', function (e) {
             e.preventDefault();
             /* Hide the form while processing */
             $('#managed-backup-restore').addClass('hidden');

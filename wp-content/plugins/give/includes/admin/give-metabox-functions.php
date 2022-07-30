@@ -356,6 +356,7 @@ function give_chosen_input( $field ) {
 				name="<?php echo $fieldName; ?>"
 				id="<?php echo esc_attr( $field['id'] ); ?>"
 			<?php echo "{$type} {$allow_new_values} {$placeholder}"; ?>
+            <?php echo give_get_attribute_str( $field ); ?>
 		>
 			<?php
 			foreach ( $choices as $key => $name ) {
@@ -749,6 +750,68 @@ function give_checkbox( $field ) {
 }
 
 /**
+ * Output multi checkbox input box.
+ *
+ * @since  2.9.0
+ *
+ * @param  array $field         {
+ *                              Optional. Array of checkbox field arguments.
+ *
+ * @type string  $id            Field ID. Default ''.
+ * @type string  $style         CSS style for input field. Default ''.
+ * @type string  $wrapper_class CSS class to use for wrapper of input field. Default ''.
+ * @type string  $value         Value of input field. Default ''.
+ * @type string  $name          Name of input field. Default ''.
+ * @type string  $description   Description of input field. Default ''.
+ * @type array   $attributes    List of attributes of input field. Default array().
+ *                                               for example: 'attributes' => array( 'placeholder' => '*****', 'class'
+ *                                               => '****' )
+ * @type array   $options       List of options. Default array().
+ *                                               for example: 'options' => array( 'option1' => 'Option 1', 'option2' =>
+ *                                               'Option 2' )
+ * }
+ * @return void
+ */
+function give_multicheck( $field ) {
+	global $thepostid, $post;
+
+	$thepostid              = empty( $thepostid ) ? $post->ID : $thepostid;
+	$field['style']         = isset( $field['style'] ) ? $field['style'] : '';
+	$field['wrapper_class'] = isset( $field['wrapper_class'] ) ? $field['wrapper_class'] : '';
+	$field['value']         = give_get_field_value( $field, $thepostid );
+	$field['value']         = is_array( $field['value'] ) ? $field['value'] : [];
+	$field['name']          = isset( $field['name'] ) ? $field['name'] : $field['id'];
+
+	?>
+	<fieldset class="give-field-wrap <?php echo esc_attr( $field['id'] ); ?>_field <?php echo esc_attr( $field['wrapper_class'] ); ?>">
+		<span class="give-field-label"><?php echo wp_kses_post( $field['name'] ); ?></span>
+		<legend class="screen-reader-text"><?php echo wp_kses_post( $field['name'] ); ?></legend>
+
+		<ul>
+		<?php foreach ( $field['options'] as $key => $value ) : ?>
+			<li>
+				<label>
+					<input
+						type="checkbox"
+						name="<?php echo give_get_field_name( $field ); ?>[]"
+						value="<?php echo esc_attr( $key ); ?>"
+						style="<?php echo esc_attr( $field['style'] ); ?>"
+						<?php echo give_get_attribute_str( $field ); ?>
+						<?php
+						if ( in_array( $key, $field['value'] ) ) {
+							echo 'checked="checked"';}
+						?>
+						/> <?php echo esc_html( $value ); ?>
+				</label>
+			</li>
+		<?php endforeach; ?>
+		</ul>
+		<?php echo give_get_field_description( $field ); ?>
+	</fieldset>
+	<?php
+}
+
+/**
  * Output a select input box.
  *
  * @since  1.8
@@ -846,6 +909,69 @@ function give_radio( $field ) {
 
 	echo give_get_field_description( $field );
 	echo '</fieldset>';
+}
+
+/**
+ * Output a multi-line radio input box.
+ *
+ * @since  2.9.0
+ *
+ * @param  array $field         {
+ *                              Optional. Array of radio field arguments.
+ *
+ * @type string  $id            Field ID. Default ''.
+ * @type string  $style         CSS style for input field. Default ''.
+ * @type string  $wrapper_class CSS class to use for wrapper of input field. Default ''.
+ * @type string  $value         Value of input field. Default ''.
+ * @type string  $name          Name of input field. Default ''.
+ * @type string  $description   Description of input field. Default ''.
+ * @type array   $attributes    List of attributes of input field. Default array().
+ *                                               for example: 'attributes' => array( 'placeholder' => '*****', 'class'
+ *                                               => '****' )
+ * @type array   $options       List of options. Default array().
+ *                                               for example: 'options' => array( 'enable' => [ 'label' => 'Enable', 'description' => 'Description' ] )
+ * }
+ * @return void
+ */
+function give_multiradio( $field ) {
+	global $thepostid, $post;
+
+	$thepostid              = empty( $thepostid ) ? $post->ID : $thepostid;
+	$field['style']         = isset( $field['style'] ) ? $field['style'] : '';
+	$field['wrapper_class'] = isset( $field['wrapper_class'] ) ? $field['wrapper_class'] : '';
+	$field['value']         = give_get_field_value( $field, $thepostid );
+	$field['name']          = isset( $field['name'] ) ? $field['name'] : $field['id'];
+	?>
+
+	<fieldset class="give-field-wrap <?php echo esc_attr( $field['id'] ); ?>_field <?php echo esc_attr( $field['wrapper_class'] ); ?>">
+		<span class="give-field-label"><?php echo wp_kses_post( $field['name'] ); ?></span>
+		<legend class="screen-reader-text"><?php echo wp_kses_post( $field['name'] ); ?></legend>
+
+
+		<ul class="give-radios">
+		<?php foreach ( $field['options'] as $key => $data ) : ?>
+			<li>
+				<label>
+					<input
+						type="radio"
+						name="<?php echo give_get_field_name( $field ); ?>"
+						value="<?php echo esc_attr( $key ); ?>"
+						style="<?php echo esc_attr( $field['style'] ); ?>"
+						<?php echo checked( esc_attr( $field['value'] ), esc_attr( $key ), false ); ?>
+						<?php echo give_get_attribute_str( $field ); ?>
+						/> <?php echo esc_html( $data['label'] ); ?>
+				</label>
+				<?php if ( isset( $data['description'] ) ) : ?>
+					<span class="give-field-description">
+						<?php echo esc_html( $data['description'] ); ?>
+					</span>
+				<?php endif; ?>
+			</li>
+		<?php endforeach; ?>
+		</ul>
+		<?php echo give_get_field_description( $field ); ?>
+	</fieldset>
+	<?php
 }
 
 /**
@@ -1032,33 +1158,37 @@ function give_email_preview_buttons( $field ) {
 
 	echo sprintf(
 		'<a href="%1$s" class="button-secondary" target="_blank">%2$s</a>',
-		wp_nonce_url(
-			add_query_arg(
-				[
-					'give_action' => 'preview_email',
-					'email_type'  => $field_id,
-					'form_id'     => $post->ID,
-				],
-				home_url()
-			),
-			'give-preview-email'
-		),
+        esc_url(
+            wp_nonce_url(
+                 add_query_arg(
+                     [
+                         'give_action' => 'preview_email',
+                         'email_type'  => $field_id,
+                         'form_id'     => $post->ID,
+                     ],
+                     home_url()
+                 ),
+                 'give-preview-email'
+            )
+        ),
 		$field['name']
 	);
 
 	echo sprintf(
 		' <a href="%1$s" aria-label="%2$s" class="button-secondary">%3$s</a>',
-		wp_nonce_url(
-			add_query_arg(
-				[
-					'give_action'     => 'send_preview_email',
-					'email_type'      => $field_id,
-					'give-messages[]' => 'sent-test-email',
-					'form_id'         => $post->ID,
-				]
-			),
-			'give-send-preview-email'
-		),
+        esc_url(
+            wp_nonce_url(
+                 add_query_arg(
+                     [
+                         'give_action'     => 'send_preview_email',
+                         'email_type'      => $field_id,
+                         'give-messages[]' => 'sent-test-email',
+                         'form_id'         => $post->ID,
+                     ]
+                 ),
+                 'give-send-preview-email'
+            )
+        ),
 		esc_attr__( 'Send Test Email.', 'give' ),
 		esc_html__( 'Send Test Email', 'give' )
 	);

@@ -1,5 +1,6 @@
 <?php
 
+use WPForms\Helpers\Templates;
 use WPForms\Tasks\Actions\EntryEmailsTask;
 
 /**
@@ -15,7 +16,7 @@ use WPForms\Tasks\Actions\EntryEmailsTask;
 class WPForms_WP_Emails {
 
 	/**
-	 * Holds the from address.
+	 * Store the from address.
 	 *
 	 * @since 1.1.3
 	 *
@@ -24,7 +25,7 @@ class WPForms_WP_Emails {
 	private $from_address;
 
 	/**
-	 * Holds the from name.
+	 * Store the from name.
 	 *
 	 * @since 1.1.3
 	 *
@@ -33,7 +34,7 @@ class WPForms_WP_Emails {
 	private $from_name;
 
 	/**
-	 * Holds the reply-to address.
+	 * Store the reply-to address.
 	 *
 	 * @since 1.1.3
 	 *
@@ -42,7 +43,7 @@ class WPForms_WP_Emails {
 	private $reply_to = false;
 
 	/**
-	 * Holds the carbon copy addresses.
+	 * Store the carbon copy addresses.
 	 *
 	 * @since 1.3.1
 	 *
@@ -51,7 +52,7 @@ class WPForms_WP_Emails {
 	private $cc = false;
 
 	/**
-	 * Holds the email content type.
+	 * Store the email content type.
 	 *
 	 * @since 1.1.3
 	 *
@@ -60,7 +61,7 @@ class WPForms_WP_Emails {
 	private $content_type;
 
 	/**
-	 * Holds the email headers.
+	 * Store the email headers.
 	 *
 	 * @since 1.1.3
 	 *
@@ -183,7 +184,7 @@ class WPForms_WP_Emails {
 			$this->from_address = get_option( 'admin_email' );
 		}
 
-		return apply_filters( 'wpforms_email_from_address', $this->from_address, $this );
+		return apply_filters( 'wpforms_email_from_address', wpforms_decode_string( $this->from_address ), $this );
 	}
 
 	/**
@@ -204,7 +205,7 @@ class WPForms_WP_Emails {
 			}
 		}
 
-		return apply_filters( 'wpforms_email_reply_to', $this->reply_to, $this );
+		return apply_filters( 'wpforms_email_reply_to', wpforms_decode_string( $this->reply_to ), $this );
 	}
 
 	/**
@@ -231,7 +232,7 @@ class WPForms_WP_Emails {
 			$this->cc = implode( ',', $addresses );
 		}
 
-		return apply_filters( 'wpforms_email_cc', $this->cc, $this );
+		return apply_filters( 'wpforms_email_cc', wpforms_decode_string( $this->cc ), $this );
 	}
 
 	/**
@@ -286,12 +287,17 @@ class WPForms_WP_Emails {
 	 */
 	public function build_email( $message ) {
 
+		// Plain text email shortcut.
 		if ( false === $this->html ) {
-			$message = $this->process_tag( $message, false, true );
+			$message = $this->process_tag( $message );
 			$message = str_replace( '{all_fields}', $this->wpforms_html_field_value( false ), $message );
 
-			return apply_filters( 'wpforms_email_message', $message, $this );
+			return apply_filters( 'wpforms_email_message', wpforms_decode_string( $message ), $this );
 		}
+
+		/*
+		 * Generate an HTML email.
+		 */
 
 		ob_start();
 
@@ -310,10 +316,11 @@ class WPForms_WP_Emails {
 		// Hooks into the email footer.
 		do_action( 'wpforms_email_footer', $this );
 
-		$message = $this->process_tag( $message, false );
+		$message = $this->process_tag( $message );
 		$message = nl2br( $message );
 
-		$body    = ob_get_clean();
+		$body = ob_get_clean();
+
 		$message = str_replace( '{email}', $message, $body );
 		$message = str_replace( '{all_fields}', $this->wpforms_html_field_value( true ), $message );
 		$message = make_clickable( $message );
@@ -396,7 +403,7 @@ class WPForms_WP_Emails {
 			// Let's do this NOW.
 			$result = wp_mail(
 				$data['to'],
-				wpforms_decode_string( $this->process_tag( $data['subject'] ) ),
+				$this->get_prepared_subject( $data['subject'] ),
 				$this->build_email( $data['message'] ),
 				$data['headers'],
 				$data['attachments']
@@ -406,7 +413,7 @@ class WPForms_WP_Emails {
 			$result = (bool) ( new EntryEmailsTask() )
 				->params(
 					$data['to'],
-					wpforms_decode_string( $this->process_tag( $data['subject'] ) ),
+					$this->get_prepared_subject( $data['subject'] ),
 					$this->build_email( $data['message'] ),
 					$data['headers'],
 					$data['attachments']
@@ -445,7 +452,7 @@ class WPForms_WP_Emails {
 	}
 
 	/**
-	 * Converts text formatted HTML. This is primarily for turning line breaks
+	 * Convert text formatted HTML. This is primarily for turning line breaks
 	 * into <p> and <br/> tags.
 	 *
 	 * @since 1.1.3
@@ -465,30 +472,20 @@ class WPForms_WP_Emails {
 
 	/**
 	 * Process a smart tag.
+	 * Decodes entities and sanitized (keeping line breaks) by default.
+	 *
+	 * @uses wpforms_decode_string()
 	 *
 	 * @since 1.1.3
+	 * @since 1.6.0 Deprecated 2 params: $sanitize, $linebreaks.
 	 *
-	 * @param string $string     String that may contain tags.
-	 * @param bool   $sanitize   Toggle to maybe sanitize.
-	 * @param bool   $linebreaks Toggle to process linebreaks.
+	 * @param string $string String that may contain tags.
 	 *
 	 * @return string
 	 */
-	public function process_tag( $string = '', $sanitize = true, $linebreaks = false ) {
+	public function process_tag( $string = '' ) {
 
-		$tag = apply_filters( 'wpforms_process_smart_tags', $string, $this->form_data, $this->fields, $this->entry_id );
-
-		$tag = wpforms_decode_string( $tag );
-
-		if ( $sanitize ) {
-			if ( $linebreaks ) {
-				$tag = wpforms_sanitize_textarea_field( $tag );
-			} else {
-				$tag = sanitize_text_field( $tag );
-			}
-		}
-
-		return $tag;
+		return wpforms_process_smart_tags( $string, $this->form_data, $this->fields, $this->entry_id );
 	}
 
 	/**
@@ -496,23 +493,23 @@ class WPForms_WP_Emails {
 	 *
 	 * @since 1.1.3
 	 *
-	 * @param bool $html Toggle to use HTML or plaintext.
+	 * @param bool $is_html_email Toggle to use HTML or plaintext.
 	 *
 	 * @return string
 	 */
-	public function wpforms_html_field_value( $html = true ) {
+	public function wpforms_html_field_value( $is_html_email = true ) { // phpcs:ignore
 
 		if ( empty( $this->fields ) ) {
 			return '';
 		}
 
 		if ( empty( $this->form_data['fields'] ) ) {
-			$html = false;
+			$is_html_email = false;
 		}
 
 		$message = '';
 
-		if ( $html ) {
+		if ( $is_html_email ) {
 			/*
 			 * HTML emails.
 			 */
@@ -543,17 +540,23 @@ class WPForms_WP_Emails {
 						continue;
 					}
 
-					if ( 'divider' === $field['type'] ) {
+					if ( $field['type'] === 'divider' ) {
 						$field_name = ! empty( $field['label'] ) ? str_repeat( '&mdash;', 3 ) . ' ' . $field['label'] . ' ' . str_repeat( '&mdash;', 3 ) : null;
 						$field_val  = ! empty( $field['description'] ) ? $field['description'] : '';
-					} elseif ( 'pagebreak' === $field['type'] ) {
-						if ( ! empty( $field['position'] ) && 'bottom' === $field['position'] ) {
+					} elseif ( $field['type'] === 'pagebreak' ) {
+						if ( ! empty( $field['position'] ) && $field['position'] === 'bottom' ) {
 							continue;
 						}
 						$title      = ! empty( $field['title'] ) ? $field['title'] : esc_html__( 'Page Break', 'wpforms-lite' );
 						$field_name = str_repeat( '&mdash;', 6 ) . ' ' . $title . ' ' . str_repeat( '&mdash;', 6 );
-					} elseif ( 'html' === $field['type'] ) {
-						$field_name = null;
+					} elseif ( $field['type'] === 'html' ) {
+
+						// If CL is enabled and the field is conditionally hidden, hide it from message.
+						if ( ! empty( $this->form_data['fields'][ $field['id'] ]['conditionals'] ) && ! wpforms_conditional_logic_fields()->field_is_visible( $this->form_data, $field['id'] ) ) {
+							continue;
+						}
+
+						$field_name = ! empty( $field['name'] ) ? $field['name'] : esc_html__( 'HTML / Code Block', 'wpforms-lite' );
 						$field_val  = $field['code'];
 					}
 				} else {
@@ -565,7 +568,7 @@ class WPForms_WP_Emails {
 						continue;
 					}
 
-					$field_name = $this->fields[ $field_id ]['name'];
+					$field_name = isset( $this->fields[ $field_id ]['name'] ) ? $this->fields[ $field_id ]['name'] : '';
 					$field_val  = empty( $this->fields[ $field_id ]['value'] ) && ! is_numeric( $this->fields[ $field_id ]['value'] ) ? '<em>' . esc_html__( '(empty)', 'wpforms-lite' ) . '</em>' : $this->fields[ $field_id ]['value'];
 				}
 
@@ -586,7 +589,7 @@ class WPForms_WP_Emails {
 					'{field_value}',
 					apply_filters(
 						'wpforms_html_field_value',
-						wpforms_decode_string( $field_val ),
+						$field_val,
 						isset( $this->fields[ $field_id ] ) ? $this->fields[ $field_id ] : $field,
 						$this->form_data,
 						'email-html'
@@ -621,15 +624,15 @@ class WPForms_WP_Emails {
 					);
 				}
 
-				$message    .= '--- ' . wpforms_decode_string( $field_name ) . " ---\r\n\r\n";
-				$field_value = wpforms_decode_string( $field_val ) . "\r\n\r\n";
+				$message    .= '--- ' . $field_name . " ---\r\n\r\n";
+				$field_value = $field_val . "\r\n\r\n";
 				$message    .= apply_filters( 'wpforms_plaintext_field_value', $field_value, $field, $this->form_data );
 			}
 		}
 
 		if ( empty( $message ) ) {
 			$empty_message = esc_html__( 'An empty form was submitted.', 'wpforms-lite' );
-			$message       = $html ? wpautop( $empty_message ) : $empty_message;
+			$message       = $is_html_email ? wpautop( $empty_message ) : $empty_message;
 		}
 
 		return $message;
@@ -664,7 +667,7 @@ class WPForms_WP_Emails {
 	}
 
 	/**
-	 * Retrieves a template part. Taken from bbPress.
+	 * Retrieve a template part. Taken from bbPress.
 	 *
 	 * @since 1.1.3
 	 *
@@ -723,8 +726,14 @@ class WPForms_WP_Emails {
 
 			// Try locating this template file by looping through the template paths.
 			foreach ( $this->get_theme_template_paths() as $template_path ) {
-				if ( file_exists( $template_path . $template_name ) ) {
-					$located = $template_path . $template_name;
+				$validated_path = Templates::validate_safe_path(
+					$template_path . $template_name,
+					[ 'theme', 'plugins' ]
+				);
+
+				if ( $validated_path ) {
+					$located = $validated_path;
+
 					break;
 				}
 			}
@@ -760,5 +769,23 @@ class WPForms_WP_Emails {
 		ksort( $file_paths, SORT_NUMERIC );
 
 		return array_map( 'trailingslashit', $file_paths );
+	}
+
+	/**
+	 * Perform email subject preparation: process tags, remove new lines, etc.
+	 *
+	 * @since 1.6.1
+	 *
+	 * @param string $subject Email subject to post-process.
+	 *
+	 * @return string
+	 */
+	private function get_prepared_subject( $subject ) {
+
+		$subject = $this->process_tag( $subject );
+
+		$subject = trim( str_replace( [ "\r\n", "\r", "\n" ], ' ', $subject ) );
+
+		return wpforms_decode_string( $subject );
 	}
 }

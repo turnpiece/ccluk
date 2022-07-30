@@ -40,7 +40,7 @@ namespace Beehive\phpseclib\Crypt;
  * @package RC2
  * @access  public
  */
-class RC2 extends \Beehive\phpseclib\Crypt\Base
+class RC2 extends Base
 {
     /**
      * Block Length of the cipher
@@ -229,7 +229,7 @@ class RC2 extends \Beehive\phpseclib\Crypt\Base
         }
         $this->current_key_length = $t1;
         // Key byte count should be 1..128.
-        $key = \strlen($key) ? \substr($key, 0, 128) : "\0";
+        $key = \strlen($key) ? \substr($key, 0, 128) : "\x00";
         $t = \strlen($key);
         // The mcrypt RC2 implementation only supports effective key length
         // of 1024 bits. It is however possible to handle effective key

@@ -17,7 +17,7 @@ class Shipper_Controller_Override_Debug extends Shipper_Controller_Override {
 	 */
 	public function prepare_debugging_overrides( $constants = false ) {
 		if ( ! is_object( $constants ) ) {
-			$constants = new Shipper_Model_Constants_Shipper;
+			$constants = new Shipper_Model_Constants_Shipper();
 		}
 		if ( $constants->is_defined( 'SHIPPER_I_KNOW_WHAT_IM_DOING' ) ) {
 			if ( $constants->get( 'SHIPPER_I_KNOW_WHAT_IM_DOING' ) ) {
@@ -31,8 +31,7 @@ class Shipper_Controller_Override_Debug extends Shipper_Controller_Override {
 		if ( $constants->is_defined( 'SHIPPER_DEBUG_LOG' ) ) {
 			$callback = (bool) $constants->get( 'SHIPPER_DEBUG_LOG' )
 				? '__return_true'
-				: '__return_false'
-			;
+				: '__return_false';
 			add_filter( 'shipper_log_debug_statements', $callback );
 		}
 	}
@@ -44,7 +43,7 @@ class Shipper_Controller_Override_Debug extends Shipper_Controller_Override {
 	 */
 	public function prepare_data_overrides( $constants = false ) {
 		if ( ! is_object( $constants ) ) {
-			$constants = new Shipper_Model_Constants_Shipper;
+			$constants = new Shipper_Model_Constants_Shipper();
 		}
 
 		$callback = $constants->get( 'SHIPPER_DATA_RECORDING' )

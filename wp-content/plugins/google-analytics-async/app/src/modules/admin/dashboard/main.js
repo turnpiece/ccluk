@@ -10,7 +10,7 @@ import {
 	isNetwork,
 	isMultisite,
 	isSubsite,
-	isNetworkWide
+	isNetworkWide,
 } from '@/helpers/utils'
 
 Vue.config.productionTip = false
@@ -25,7 +25,7 @@ Vue.mixin({
 		isNetwork,
 		isMultisite,
 		isSubsite,
-		isNetworkWide
+		isNetworkWide,
 	},
 })
 
@@ -37,6 +37,6 @@ Vue.prototype.$moduleVars = window.beehiveModuleVars
 Vue.use(Fragment.Plugin)
 
 new Vue({
-	render: h => h(App),
-	store
+	render: (h) => h(App),
+	store,
 }).$mount('#beehive-dashboard-app')

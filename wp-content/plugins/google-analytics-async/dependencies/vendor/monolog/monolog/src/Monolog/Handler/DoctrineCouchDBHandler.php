@@ -12,16 +12,16 @@ namespace Beehive\Monolog\Handler;
 
 use Beehive\Monolog\Logger;
 use Beehive\Monolog\Formatter\NormalizerFormatter;
-use Beehive\Doctrine\CouchDB\CouchDBClient;
+use Doctrine\CouchDB\CouchDBClient;
 /**
  * CouchDB handler for Doctrine CouchDB ODM
  *
  * @author Markus Bachmann <markus.bachmann@bachi.biz>
  */
-class DoctrineCouchDBHandler extends \Beehive\Monolog\Handler\AbstractProcessingHandler
+class DoctrineCouchDBHandler extends AbstractProcessingHandler
 {
     private $client;
-    public function __construct(\Beehive\Doctrine\CouchDB\CouchDBClient $client, $level = \Beehive\Monolog\Logger::DEBUG, $bubble = \true)
+    public function __construct(CouchDBClient $client, $level = Logger::DEBUG, $bubble = \true)
     {
         $this->client = $client;
         parent::__construct($level, $bubble);
@@ -35,6 +35,6 @@ class DoctrineCouchDBHandler extends \Beehive\Monolog\Handler\AbstractProcessing
     }
     protected function getDefaultFormatter()
     {
-        return new \Beehive\Monolog\Formatter\NormalizerFormatter();
+        return new NormalizerFormatter();
     }
 }

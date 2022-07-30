@@ -12,11 +12,11 @@
 
 			<div class="col-xs-12">
 
-				<p><?php esc_html_e('Snapshot Pro gives you Managed Backups with 10GB of storage space on WPMU DEV servers. Should your website ever break down, you can restore a full website with just a few clicks.', SNAPSHOT_I18N_DOMAIN); ?></p>
+				<p><?php esc_html_e('Snapshot Pro features an incremental backup engine and 10GB of included cloud storage. With Snapshot Pro 4, backups are faster and more efficient than ever before!', SNAPSHOT_I18N_DOMAIN); ?></p>
 
-				<p><?php esc_html_e('Try Snapshot Pro along with 100+ WPMU DEV plugins & 24/7 WP support for free today.', SNAPSHOT_I18N_DOMAIN); ?></p>
+				<p><?php esc_html_e('Try Snapshot Pro today, and make the most of automated incremental backups and WPMU DEV’s 24/7 support.', SNAPSHOT_I18N_DOMAIN); ?></p>
 
-				<a href="https://premium.wpmudev.org/project/snapshot/" target="_blank" class="button button-green"><?php esc_html_e( "Find out more", SNAPSHOT_I18N_DOMAIN ); ?></a>
+				<a href="https://premium.wpmudev.org/project/snapshot/?utm_source=snapshot&utm_medium=plugin-dashboard&utm_campaign=snapshot-plugin-project" target="_blank" class="button button-green"><?php esc_html_e( "Find out more", SNAPSHOT_I18N_DOMAIN ); ?></a>
 
 			</div>
 

@@ -21,6 +21,7 @@ class Shipper_Controller_Hub_Migration extends Shipper_Controller_Hub {
 			self::ACTION_MIGRATION_KICKSTART,
 			self::ACTION_MIGRATION_CANCEL,
 		);
+
 		return $known;
 	}
 
@@ -32,7 +33,7 @@ class Shipper_Controller_Hub_Migration extends Shipper_Controller_Hub {
 	 * @param object $request Optional WPMUDEV_Dashboard_Remote object.
 	 */
 	public function json_migration_cancel( $params, $action, $request = false ) {
-		$migration = new Shipper_Model_Stored_Migration;
+		$migration = new Shipper_Model_Stored_Migration();
 		if ( ! $migration->is_active() ) {
 			return $this->send_response_success(
 				array( 'status' => true ),
@@ -43,8 +44,8 @@ class Shipper_Controller_Hub_Migration extends Shipper_Controller_Hub {
 		$ctrl = Shipper_Controller_Runner_Migration::get();
 		$ctrl->attempt_cancel();
 
-		$migration = new Shipper_Model_Stored_Migration;
-		$status = $migration->is_active();
+		$migration = new Shipper_Model_Stored_Migration();
+		$status    = $migration->is_active();
 
 		return $this->send_response_success(
 			array( 'status' => $status ),
@@ -55,14 +56,14 @@ class Shipper_Controller_Hub_Migration extends Shipper_Controller_Hub {
 	/**
 	 * Handles a new migration kickstart request
 	 *
-	 * @since v1.0-beta-15
-	 *
 	 * @param object $params Parameters passed in json body.
 	 * @param string $action The action name that was called.
 	 * @param object $request Optional WPMUDEV_Dashboard_Remote object.
+	 *
+	 * @since v1.0-beta-15
 	 */
 	public function json_migration_kickstart( $params, $action, $request = false ) {
-		$migration = new Shipper_Model_Stored_Migration;
+		$migration = new Shipper_Model_Stored_Migration();
 		if ( ! $migration->is_active() ) {
 			return $this->send_response_error(
 				new WP_Error( 'migration_inactive', 'Migration is not active' ),
@@ -95,8 +96,8 @@ class Shipper_Controller_Hub_Migration extends Shipper_Controller_Hub {
 	 */
 	public function json_migration_start( $params, $action, $request = false ) {
 		$domain = false;
-		$type = false;
-		$phase = 'params_validation';
+		$type   = false;
+		$phase  = 'params_validation';
 		if ( ! is_object( $params ) ) {
 			return $this->send_response_error(
 				new WP_Error(
@@ -147,10 +148,10 @@ class Shipper_Controller_Hub_Migration extends Shipper_Controller_Hub {
 
 		// Now, carry on booting the export...
 		$phase = 'model_update';
-		$model = new Shipper_Model_Stored_Destinations;
+		$model = new Shipper_Model_Stored_Destinations();
 
 		// Update known destinations list first.
-		$task = new Shipper_Task_Api_Destinations_Get;
+		$task   = new Shipper_Task_Api_Destinations_Get();
 		$result = $task->apply();
 		if ( ! empty( $result ) ) {
 			// We got the listing result - update stored destinations cache.
@@ -164,6 +165,7 @@ class Shipper_Controller_Hub_Migration extends Shipper_Controller_Hub {
 					$err_msgs[] = $err->get_error_message();
 				}
 			}
+
 			return $this->send_response_error(
 				new WP_Error(
 					$phase,
@@ -175,18 +177,18 @@ class Shipper_Controller_Hub_Migration extends Shipper_Controller_Hub {
 
 		// We're sufficiently up to date - continue...
 		$phase = 'migration_bootstrap';
-		$site = $model->get_by_domain( $domain );
+		$site  = $model->get_by_domain( $domain );
 		if ( empty( $site ) ) {
 			return $this->send_response_error(
 				new WP_Error(
 					$phase,
-					sprintf( 'Unable to resolve doman to site ID: %s', $params->domain )
+					sprintf( 'Unable to resolve domain to site ID: %s', $params->domain )
 				),
 				$request
 			);
 		}
 
-		$migration = new Shipper_Model_Stored_Migration;
+		$migration = new Shipper_Model_Stored_Migration();
 		if ( $migration->is_active() ) {
 			if ( $migration->get_type() === $type ) {
 				// Success, but we're already running.
@@ -208,8 +210,8 @@ class Shipper_Controller_Hub_Migration extends Shipper_Controller_Hub {
 		$ctrl->begin();
 		$ctrl->run();
 
-		$migration = new Shipper_Model_Stored_Migration;
-		$status = $migration->is_active();
+		$migration = new Shipper_Model_Stored_Migration();
+		$status    = $migration->is_active();
 
 		return ! ! $status
 			? $this->send_response_success( $status, $request )

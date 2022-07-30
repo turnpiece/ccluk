@@ -15,7 +15,7 @@ namespace Beehive\Monolog\Formatter;
  *
  * @author Adam Pancutt <adam@pancutt.com>
  */
-class LogglyFormatter extends \Beehive\Monolog\Formatter\JsonFormatter
+class LogglyFormatter extends JsonFormatter
 {
     /**
      * Overrides the default batch mode to new lines for compatibility with the

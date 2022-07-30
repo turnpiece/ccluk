@@ -31,6 +31,18 @@ if ( ! $show_managed_backup_notice || ( isset( $plugin->config_data['managed_bac
 
 	<div id="container" class="snapshot-three wps-page-backups wps-page-hosting-backups">
 
+		<?php
+			WPMUDEVSnapshot::instance()->need_show_v4_notice() && $this->render(
+				'common/v4-notice',
+				false,
+				array(
+					'bg_image_url' => WPMUDEVSnapshot::get_file_url( '/assets/img/snapshot-hero-notice.svg' ),
+				),
+				false,
+				false
+			);
+		?>
+
 		<section class="wpmud-box wps-widget-hosting-backups-status">
 
 			<div class="wpmud-box-content">
@@ -175,7 +187,7 @@ if ( ! $show_managed_backup_notice || ( isset( $plugin->config_data['managed_bac
 									</div>
 									<div class="wps-restore-progress-error">
 										<?php
-										echo wp_kses_post( '<div class="wps-auth-message error"><p>' . sprintf( __( 'An error occurred while restoring your backup. <a href="%1$s" class="%2$s">Try restoring the backup</a> again and if the issue persists <a href="%3$s" target="_blank">our support team</a> is available 24/7 to help.', SNAPSHOT_I18N_DOMAIN ), '#', 'snapshot-hosting-backup-restore', 'https://premium.wpmudev.org/hub/support/#get-support' ) . '</p><i class="wps-icon i-close wps-popup-close wps-dismiss-notice"></i></div>' );
+										echo wp_kses_post( '<div class="wps-auth-message error"><p>' . sprintf( __( 'An error occurred while restoring your backup. <a href="%1$s" class="%2$s">Try restoring the backup</a> again and if the issue persists <a href="%3$s" target="_blank">our support team</a> is available 24/7 to help.', SNAPSHOT_I18N_DOMAIN ), '#', 'snapshot-hosting-backup-restore', 'https://premium.wpmudev.org/hub/support/#get-support' ) . '</p><i class="wps-icon i-close wps-popup-close wps-dismiss-notice"></i></div>' );	 	 	 	 				 	 		
 										?>
 									</div>
 								</div>
@@ -347,3 +359,5 @@ if ( ! $show_managed_backup_notice || ( isset( $plugin->config_data['managed_bac
 
 <?php
 $this->render( "boxes/modals/popup-hosting", false, array(), false, false );
+
+WPMUDEVSnapshot::instance()->need_show_v4_modal() && $this->render( 'boxes/modals/popup-upgrade-to-v4', false, array(), false, false );

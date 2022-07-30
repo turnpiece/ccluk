@@ -17,14 +17,14 @@ abstract class Shipper_Model_Constants {
 	 *
 	 * @var string
 	 */
-	private $_prefix = '';
+	private $prefix = '';
 
 	/**
 	 * Constant overrides
 	 *
 	 * @var array An overrides map
 	 */
-	private $_overrides = array();
+	private $overrides = array();
 
 	/**
 	 * Constructor
@@ -34,7 +34,7 @@ abstract class Shipper_Model_Constants {
 	 * @var string
 	 */
 	public function __construct( $prefix ) {
-		$this->_prefix = $prefix;
+		$this->prefix = $prefix;
 	}
 
 	/**
@@ -45,11 +45,11 @@ abstract class Shipper_Model_Constants {
 	 * @return string Constant name
 	 */
 	public function get_constant_name( $raw ) {
-		if ( empty( $this->_prefix ) ) {
+		if ( empty( $this->prefix ) ) {
 			return strtoupper( $raw );
 		}
 
-		$prefix = strtolower( $this->_prefix );
+		$prefix = strtolower( $this->prefix );
 		return preg_match( '/^' . $prefix . '/i', $raw )
 			? strtoupper( $raw )
 			: strtoupper( $prefix ) . strtoupper( $raw );
@@ -72,13 +72,13 @@ abstract class Shipper_Model_Constants {
 	 * Returns fallback if constant is not set.
 	 *
 	 * @param string $what Constant to check.
-	 * @param mixed $fallback Value to return if constant is not set.
+	 * @param mixed  $fallback Value to return if constant is not set.
 	 *
 	 * @return mixed Constant value or fallback
 	 */
-	public function get( $what, $fallback=false ) {
+	public function get( $what, $fallback = false ) {
 		if ( $this->is_overridden( $what ) ) {
-			return $this->_overrides[ $this->get_constant_name( $what ) ];
+			return $this->overrides[ $this->get_constant_name( $what ) ];
 		}
 		if ( ! $this->is_defined( $what ) ) {
 			return $fallback;
@@ -90,10 +90,10 @@ abstract class Shipper_Model_Constants {
 	 * Adds an override
 	 *
 	 * @param string $what Constant name to override.
-	 * @param mixed $value Constant value to set in overrides.
+	 * @param mixed  $value Constant value to set in overrides.
 	 */
 	public function add_override( $what, $value ) {
-		$this->_overrides[ $this->get_constant_name( $what ) ] = $value;
+		$this->overrides[ $this->get_constant_name( $what ) ] = $value;
 	}
 
 	/**
@@ -104,6 +104,6 @@ abstract class Shipper_Model_Constants {
 	 * @return bool
 	 */
 	public function is_overridden( $what ) {
-		return isset( $this->_overrides[ $this->get_constant_name( $what ) ] );
+		return isset( $this->overrides[ $this->get_constant_name( $what ) ] );
 	}
 }

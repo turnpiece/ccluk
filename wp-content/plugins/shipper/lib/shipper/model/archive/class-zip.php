@@ -11,63 +11,100 @@
  */
 class Shipper_Model_Archive_Zip extends Shipper_Model_Archive {
 
-	const FLUSH_THRESHOLD = 100;
+	const FLUSH_THRESHOLD = 500;
 
-	private $_zip;
-	private $_added_files = 0;
+	/**
+	 * Zip instance
+	 *
+	 * @var $zip
+	 */
+	private $zip;
 
+	/**
+	 * Added files count
+	 *
+	 * @var int
+	 */
+	private $added_files = 0;
+
+	/**
+	 * Add file to zip
+	 *
+	 * @param string $source source file path.
+	 * @param string $destination destination file path.
+	 *
+	 * @return bool
+	 * @throws \Shipper_Exception Throws Shipper Exception.
+	 */
 	public function add_file( $source, $destination ) {
-		if ( empty( $this->_zip ) ) {
+		if ( empty( $this->zip ) ) {
 			$this->open();
 		}
-		if ( ! $this->_zip->addFile( $source, $destination ) ) {
+		if ( ! $this->zip->addFile( $source, $destination ) ) {
 			throw new Shipper_Exception(
+				/* translators: %s: file path. */
 				sprintf( __( 'Shipper couldn\'t archive file: %s', 'shipper' ), $source )
 			);
 		}
-		$this->_added_files ++;
 
-		if ( $this->_added_files > self::FLUSH_THRESHOLD ) {
+		// set compression level.
+		$this->added_files ++;
+
+		if ( method_exists( $this->zip, 'setCompressionName' ) ) {
+			$this->zip->setCompressionName( $destination, ZipArchive::CM_SHRINK );
+		}
+
+		if ( $this->added_files > self::FLUSH_THRESHOLD ) {
 			$this->close();
 		}
 
 		return true;
 	}
 
+	/**
+	 * Open the zip
+	 *
+	 * @throws \Shipper_Exception Throws Shipper Exception.
+	 */
 	public function open() {
-		$this->_zip = new ZipArchive;
-		if ( true !== $this->_zip->open( $this->get_path(), ZipArchive::CREATE ) ) {
+		$this->zip = new ZipArchive();
+		if ( true !== $this->zip->open( $this->get_path(), ZipArchive::CREATE ) ) {
 			throw new Shipper_Exception(
+				/* translators: %s: file path. */
 				sprintf( __( 'Shipper could not open target zip file: %s', 'shipper' ), $this->get_path() )
 			);
 		}
 	}
 
+	/**
+	 * Close the zip
+	 */
 	public function close() {
-		if ( ! is_object( $this->_zip ) ) {
+		if ( ! empty( $this->zip ) ) {
+			$this->zip->close();
+			$this->added_files = 0;
+			$this->zip         = null;
+		}
+	}
+
+	/**
+	 * Extract the zip
+	 *
+	 * @param string $destination destination path.
+	 */
+	public function extract( $destination ) {
+		$this->zip = new ZipArchive();
+		if ( true !== $this->zip->open( $this->get_path() ) ) {
+			Shipper_Helper_Log::debug(
+				sprintf(
+					/* translators: %s: file path. */
+					__( 'Shipper could not open target zip file: %s', 'shipper' ),
+					$this->get_path()
+				)
+			);
 			return;
 		}
-		$this->_zip->close();
-		$this->_added_files = 0;
-		$this->_zip         = false;
-	}
-
-	public function extract( $destination ) {
-		$this->_zip = new ZipArchive();
-		if ( ! $this->_zip->open( $this->get_path() ) ) {
-			throw new Shipper_Exception(
-				sprintf( __( 'Shipper could not open target zip file: %s', 'shipper' ), $this->get_path() )
-			);
-		}
-		$this->_zip->extractTo( $destination );
-		$this->_zip->close();
-	}
-
-	public function stats() {
-		if ( ! is_object( $this->_zip ) ) {
-			$this->open();
-		}
-
-		return $this->_zip->count();
+		$this->zip->extractTo( $destination );
+		$this->zip->close();
 	}
 }

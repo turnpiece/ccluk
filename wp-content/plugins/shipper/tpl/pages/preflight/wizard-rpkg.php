@@ -5,7 +5,7 @@
  * @package shipper
  */
 
-$checks = $result['checks']['remote_package'];
+$checks             = $result['checks']['remote_package'];
 $has_service_errors = ! empty( $checks['errors'] );
 ?>
 
@@ -31,24 +31,17 @@ $has_service_errors = ! empty( $checks['errors'] );
 				<td class="sui-table-item-title">
 					<?php echo esc_html( $check['title'] ); ?>
 				</td>
-
 				<td class="shipper-check-status">
 				<?php
-					$icon_type = 'ok' === $check['status']
-						? 'check-tick'
-						: 'warning-alert'
-					;
-					$icon_kind = 'warning-alert' === $icon_type
-						? $check['status']
-						: 'success'
-					;
+				$icon_type = 'ok' === $check['status']
+					? 'check-tick'
+					: 'warning-alert';
+				$icon_kind = 'warning-alert' === $icon_type
+					? $check['status']
+					: 'success';
 				?>
-					<i aria-hidden="true"
-						class="sui-icon-<?php
-							echo esc_attr( $icon_type );
-						?> sui-<?php echo esc_attr( $icon_kind ); ?>"></i>
+					<i aria-hidden="true" class="sui-icon-<?php echo esc_attr( $icon_type ); ?> sui-<?php echo esc_attr( $icon_kind ); ?>"></i>
 				</td>
-
 				<td>
 					<div class="shipper-check-message">
 					<?php

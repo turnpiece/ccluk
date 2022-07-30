@@ -23,7 +23,7 @@ use Beehive\Google\Auth\FetchAuthTokenInterface;
  * This is useful for APIs which do not require authentication, for local
  * service emulators, and for testing.
  */
-class InsecureCredentials implements \Beehive\Google\Auth\FetchAuthTokenInterface
+class InsecureCredentials implements FetchAuthTokenInterface
 {
     /**
      * @var array

@@ -31,7 +31,7 @@ class Shipper_Controller_Runner_Migration extends Shipper_Controller_Runner {
 			return false;
 		}
 
-		$migration = new Shipper_Model_Stored_Migration;
+		$migration = new Shipper_Model_Stored_Migration();
 		if (
 			$migration->is_active() &&
 			Shipper_Model_Stored_Migration::TYPE_IMPORT === $migration->get_type()
@@ -64,17 +64,21 @@ class Shipper_Controller_Runner_Migration extends Shipper_Controller_Runner {
 	 * Prepares the migration
 	 *
 	 * @param string $type Migration type to prepare.
-	 * @param int $site_id Destination site ID.
+	 * @param int    $site_id Destination site ID.
 	 * @param string $origin Optional migration origin.
 	 */
 	public function prepare( $type, $site_id, $origin = false ) {
-		$storage = new Shipper_Model_Stored_Filelist;
+		$storage = new Shipper_Model_Stored_Filelist();
 		$storage->clear();
 		$storage->save();
 
-		$migration    = new Shipper_Model_Stored_Migration;
-		$destinations = new Shipper_Model_Stored_Destinations;
+		$migration    = new Shipper_Model_Stored_Migration();
+		$destinations = new Shipper_Model_Stored_Destinations();
 
+		// clear the old data.
+		$meta = new Shipper_Model_Stored_MigrationMeta();
+		$meta->set( Shipper_Task_Import_Syncfiles::HAS_INIT, false );
+		$meta->save();
 		/**
 		 * Whether to clear the log on migration prep
 		 *
@@ -93,14 +97,16 @@ class Shipper_Controller_Runner_Migration extends Shipper_Controller_Runner {
 		}
 
 		$target = $destinations->get_by_site_id( $site_id );
+		$domain = ! empty( $target['domain'] ) ? $target['domain'] : '';
 		$migration->prepare(
 			Shipper_Model_Stored_Destinations::get_current_domain(),
-			$target['domain'],
+			$domain,
 			$type,
 			$origin
 		);
 		Shipper_Helper_Log::write(
 			sprintf(
+				/* translators: %s: migration description. */
 				__( 'Migration start -- %s', 'shipper' ),
 				$migration->get_description()
 			)
@@ -129,10 +135,10 @@ class Shipper_Controller_Runner_Migration extends Shipper_Controller_Runner {
 		$ctrl->clear();
 
 		// Reset locks.
-		$locks = new Shipper_Helper_Locks;
+		$locks = new Shipper_Helper_Locks();
 		$locks->clear_locks();
 
-		$migration = new Shipper_Model_Stored_Migration;
+		$migration = new Shipper_Model_Stored_Migration();
 		$migration->begin();
 
 		$migration->set( 'preflight_warnings', $warnings )->save();
@@ -154,7 +160,7 @@ class Shipper_Controller_Runner_Migration extends Shipper_Controller_Runner {
 	 * Only if the migration is actually active
 	 */
 	public function run() {
-		$migration = new Shipper_Model_Stored_Migration;
+		$migration = new Shipper_Model_Stored_Migration();
 		if ( $migration->is_active() ) {
 			return $this->ping();
 		}
@@ -164,15 +170,19 @@ class Shipper_Controller_Runner_Migration extends Shipper_Controller_Runner {
 	 * Complete the active migration
 	 */
 	public function complete() {
-		$migration = new Shipper_Model_Stored_Migration;
+		$migration = new Shipper_Model_Stored_Migration();
 		$migration->complete();
 
-		$locks = new Shipper_Helper_Locks;
+		$locks = new Shipper_Helper_Locks();
+
 		if ( $locks->has_lock( Shipper_Helper_Locks::LOCK_CANCEL ) ) {
 			// Completing during cancel - update migration errors.
-			$migration->set( 'errors', array(
-				__( 'Cancelled', 'shipper' ),
-			) );
+			$migration->set(
+				'errors',
+				array(
+					__( 'Cancelled', 'shipper' ),
+				)
+			);
 		}
 
 		Shipper_Helper_Log::write(
@@ -194,38 +204,44 @@ class Shipper_Controller_Runner_Migration extends Shipper_Controller_Runner {
 	 * Resets used models
 	 */
 	public function reset_all() {
-		$storage     = new Shipper_Model_Stored_Filelist;
+		$storage     = new Shipper_Model_Stored_Filelist();
 		$total_steps = $storage->get( Shipper_Model_Stored_Filelist::KEY_TOTAL );
 		$storage->clear();
 		$storage->set( Shipper_Model_Stored_Filelist::KEY_TOTAL, $total_steps );
 		$storage->save();
 
-		$health = new Shipper_Model_Stored_Healthcheck;
+		$health = new Shipper_Model_Stored_Healthcheck();
 		$health->clear()->save();
 
-		$files             = new Shipper_Model_Dumped_Filelist;
+		$files             = new Shipper_Model_Dumped_Filelist();
 		$filelist_manifest = $files->get_file_path();
 		if ( file_exists( $filelist_manifest ) ) {
 			unlink( $filelist_manifest );
 		}
 
-		$files             = new Shipper_Model_Dumped_Largelist;
+		$files             = new Shipper_Model_Dumped_Largelist();
 		$filelist_manifest = $files->get_file_path();
 		if ( file_exists( $filelist_manifest ) ) {
 			unlink( $filelist_manifest );
 		}
 
-		$model = new Shipper_Model_Stored_Multipart_Uploads;
+		$model = new Shipper_Model_Stored_Multipart_Uploads();
 		$model->clear()->save();
-		$model = new Shipper_Model_Stored_Multipart_Downloads;
-		$model->clear()->save();
-
-		$model = new Shipper_Model_Stored_Updates;
+		$model = new Shipper_Model_Stored_Multipart_Downloads();
 		$model->clear()->save();
 
-		$tablelist = new Shipper_Model_Stored_Tablelist;
+		$model = new Shipper_Model_Stored_Updates();
+		$model->clear()->save();
+
+		$tablelist = new Shipper_Model_Stored_Tablelist();
 		$tablelist->clear();
 		$tablelist->save();
+
+		$package_list      = new Shipper_Model_Dumped_Packagelist();
+		$package_list_path = $package_list->get_file_path();
+		if ( file_exists( $package_list_path ) ) {
+			unlink( $package_list_path );
+		}
 	}
 
 	/**
@@ -239,7 +255,7 @@ class Shipper_Controller_Runner_Migration extends Shipper_Controller_Runner {
 	 * @return bool
 	 */
 	public function process_cancel() {
-		$migration   = new Shipper_Model_Stored_Migration;
+		$migration   = new Shipper_Model_Stored_Migration();
 		$remote      = $migration->get_destination();
 		$type        = $migration->get_type();
 		$autostarted = ! ! $migration->is_from_hub();
@@ -250,13 +266,14 @@ class Shipper_Controller_Runner_Migration extends Shipper_Controller_Runner {
 			);
 		} else {
 			Shipper_Helper_Log::write(
+				/* translators: %s: migration descriptions. */
 				sprintf( __( 'Attempting to cancel %s migration', 'shipper' ), $type )
 			);
 
 			// Do early cleanup.
 			$task = Shipper_Model_Stored_Migration::TYPE_EXPORT === $migration->get_type()
-				? new Shipper_Task_Export_Cleanup
-				: new Shipper_Task_Import_Cleanup;
+				? new Shipper_Task_Export_Cleanup()
+				: new Shipper_Task_Import_Cleanup();
 			$task->apply();
 
 			// Re-initialize the storages.
@@ -274,12 +291,15 @@ class Shipper_Controller_Runner_Migration extends Shipper_Controller_Runner {
 
 			if ( ! $autostarted ) {
 				Shipper_Helper_Log::write(
+					/* translators: %s: migration descriptions. */
 					sprintf( __( 'Attempting cancel on %s migration', 'shipper' ), $remote )
 				);
-				$task   = new Shipper_Task_Api_Migrations_Cancel;
-				$result = $task->apply( array(
-					'domain' => $remote,
-				) );
+				$task   = new Shipper_Task_Api_Migrations_Cancel();
+				$result = $task->apply(
+					array(
+						'domain' => $remote,
+					)
+				);
 				if ( empty( $result ) ) {
 					Shipper_Helper_Log::write(
 						__( 'Canceling remote migration failed', 'shipper' )
@@ -321,17 +341,24 @@ class Shipper_Controller_Runner_Migration extends Shipper_Controller_Runner {
 	 * Actually process the migration step
 	 */
 	public function process_tick() {
-		$migration = new Shipper_Model_Stored_Migration;
+		$migration = new Shipper_Model_Stored_Migration();
 		if ( ! $migration->is_active() ) {
 			return false;
 		}
 
 		$task = Shipper_Model_Stored_Migration::TYPE_EXPORT === $migration->get_type()
-			? new Shipper_Task_Export_All
-			: new Shipper_Task_Import_All;
+			? new Shipper_Task_Export_All()
+			: new Shipper_Task_Import_All();
 		$migration->set( 'memory_limit', ini_get( 'memory_limit' ) );
 		$migration->save();
 		Shipper_Helper_System::optimize();
+
+		/**
+		 *  We're adding this hook here, so that we can filter out data on api migration kick off
+		 *
+		 * @since 1.1.4
+		 */
+		do_action( 'shipper_migration_before_process_tick' );
 
 		$status = $task->apply();
 
@@ -351,7 +378,7 @@ class Shipper_Controller_Runner_Migration extends Shipper_Controller_Runner {
 
 		if ( $status ) {
 			// Migration is done, one way or another.
-			$locks = new Shipper_Helper_Locks;
+			$locks = new Shipper_Helper_Locks();
 			if ( ! $locks->has_lock( Shipper_Helper_Locks::LOCK_CANCEL ) ) {
 				// Not a lock-cancelled process. We're ticking and completing.
 				// If we are cancel-locked, let cancel take over in next tick.

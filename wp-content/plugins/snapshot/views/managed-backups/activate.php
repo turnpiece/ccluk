@@ -23,6 +23,18 @@ $data = array(
 
 <div id="container" class="snapshot-three wps-page-backups">
 
+	<?php
+		WPMUDEVSnapshot::instance()->need_show_v4_notice() && $this->render(
+			'common/v4-notice',
+			false,
+			array(
+				'bg_image_url' => WPMUDEVSnapshot::get_file_url( '/assets/img/snapshot-hero-notice.svg' ),
+			),
+			false,
+			false
+		);
+	?>
+
 	<section class="wpmud-box wps-widget-getkey">
 
 		<div class="wpmud-box-title">
@@ -111,3 +123,4 @@ $data = array(
 </div>
 
 <?php $this->render("boxes/modals/popup-snapshot", false, $data, false, false); ?>
+<?php WPMUDEVSnapshot::instance()->need_show_v4_modal() && $this->render( 'boxes/modals/popup-upgrade-to-v4', false, array(), false, false ); ?>

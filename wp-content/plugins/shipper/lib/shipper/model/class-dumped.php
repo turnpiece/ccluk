@@ -13,28 +13,28 @@
 abstract class Shipper_Model_Dumped {
 
 	const MODE_APPEND = 'a';
-	const MODE_READ = 'r';
+	const MODE_READ   = 'r';
 
 	/**
 	 * Implementation file name
 	 *
 	 * @var string
 	 */
-	private $_filename;
+	private $filename;
 
 	/**
-	 * Stores internal file handle
+	 * Stores SplFileObject instance.
 	 *
-	 * @var resource
+	 * @var $fs
 	 */
-	private $_handle;
+	private $fs;
 
 	/**
 	 * Current file handle access mode
 	 *
 	 * @var string
 	 */
-	private $_mode;
+	private $mode;
 
 	/**
 	 * Constructor
@@ -42,7 +42,7 @@ abstract class Shipper_Model_Dumped {
 	 * @param string $filename Implementation file name.
 	 */
 	public function __construct( $filename ) {
-		$this->_filename = $filename;
+		$this->filename = $filename;
 	}
 
 	/**
@@ -51,11 +51,11 @@ abstract class Shipper_Model_Dumped {
 	 * @param array|mixed $statement Statement to append.
 	 */
 	public function add_statement( $statement ) {
-		$this->acquire_handle( self::MODE_APPEND );
+		$this->acquire_fs( self::MODE_APPEND );
 
-		flock( $this->_handle, LOCK_EX );
-		fwrite( $this->_handle, wp_json_encode( $statement ) . "\n" );
-		flock( $this->_handle, LOCK_UN );
+		$this->fs->flock( LOCK_EX );
+		$this->fs->fwrite( wp_json_encode( $statement ) . "\n" );
+		$this->fs->flock( LOCK_UN );
 	}
 
 	/**
@@ -64,12 +64,14 @@ abstract class Shipper_Model_Dumped {
 	 * @return int
 	 */
 	public function get_statements_count() {
-		$this->acquire_handle( self::MODE_READ );
-		rewind( $this->_handle );
+		$this->acquire_fs( self::MODE_READ );
+		$this->fs->rewind();
 
 		$count = 0;
-		while ( fgets( $this->_handle ) !== false ) {
-			$count++;
+		while ( ! $this->fs->eof() ) {
+			if ( trim( $this->fs->fgets() ) ) {
+				$count++;
+			}
 		}
 
 		return $count;
@@ -88,20 +90,21 @@ abstract class Shipper_Model_Dumped {
 	 * @return array
 	 */
 	public function get_statements( $position, $limit = false, $allowed_mb = false ) {
-		$this->acquire_handle( self::MODE_READ );
-		rewind( $this->_handle );
+		$this->acquire_fs( self::MODE_READ );
+		$this->fs->rewind();
 
 		$allowed_mb = (float) $allowed_mb;
-		if ( empty( $allowed_mb ) ) { $allowed_mb = 50; }
+		if ( empty( $allowed_mb ) ) {
+			$allowed_mb = 50;
+		}
 
 		/**
 		 * Maximum cumulative chunk size, in bytes
 		 *
-		 * @since v1.1
-		 *
 		 * @param int $allowed_bytesize Maximum bytes.
 		 *
 		 * @return int
+		 * @since v1.1
 		 */
 		$allowed_bytesize = apply_filters(
 			'shipper_dumped_statements_max_bytes',
@@ -111,29 +114,37 @@ abstract class Shipper_Model_Dumped {
 		/**
 		 * Maximum number of dumped items to return
 		 *
-		 * @since v1.1
-		 *
 		 * @param int $limit Maximum number of items.
 		 *
 		 * @return int
+		 * @since v1.1
 		 */
 		$limit = apply_filters(
 			'shipper_dumped_statements_limit',
 			$limit
 		);
 
-		$count = 0;
+		$count      = 0;
 		$queue_size = 0;
-		$lines = array();
-		while ( ($line = fgets( $this->_handle )) !== false ) {
+		$lines      = array();
+		while ( ! $this->fs->eof() ) {
+			$line = $this->fs->fgets();
+
+			if ( ! trim( $line ) ) {
+				continue;
+			}
+
 			$count++;
-			if ( $count <= $position ) { continue; }
+
+			if ( $count <= $position ) {
+				continue;
+			}
 
 			if ( $limit && count( $lines ) >= $limit ) {
 				break;
 			}
 
-			$stmt = json_decode( $line, true );
+			$stmt    = json_decode( $line, true );
 			$lines[] = $stmt;
 
 			if ( ! empty( $stmt['size'] ) ) {
@@ -141,6 +152,7 @@ abstract class Shipper_Model_Dumped {
 			}
 
 			if ( $queue_size > $allowed_bytesize ) {
+				Shipper_Helper_Log::debug( sprintf( 'Break out of loop because %sMB', round( $queue_size / 1024 / 1024 ) ) );
 				break;
 			}
 		}
@@ -164,7 +176,7 @@ abstract class Shipper_Model_Dumped {
 		$correction_threshold = $allowed_bytesize / 10;
 
 		$will_correct = $queue_size > $allowed_bytesize &&
-			( $queue_size - $allowed_bytesize ) > $correction_threshold;
+						( $queue_size - $allowed_bytesize ) > $correction_threshold;
 		if ( count( $lines ) > 1 && $will_correct ) {
 			Shipper_Helper_Log::debug(
 				sprintf( 'Backing off one because %s', size_format( $queue_size ) )
@@ -181,7 +193,7 @@ abstract class Shipper_Model_Dumped {
 	 * @return string
 	 */
 	public function get_file_name() {
-		return $this->_filename;
+		return $this->filename;
 	}
 
 	/**
@@ -190,12 +202,11 @@ abstract class Shipper_Model_Dumped {
 	 * @return string
 	 */
 	public function get_file_path() {
-		$manifest_root = trailingslashit( Shipper_Helper_Fs_Path::get_temp_dir() ) .
-			Shipper_Model_Stored_Migration::COMPONENT_META
-		;
+		$manifest_root = trailingslashit( Shipper_Helper_Fs_Path::get_temp_dir() ) . Shipper_Model_Stored_Migration::COMPONENT_META;
 		if ( ! file_exists( $manifest_root ) ) {
 			wp_mkdir_p( $manifest_root );
 		}
+
 		return trailingslashit(
 			$manifest_root
 		) . $this->get_file_name();
@@ -209,21 +220,23 @@ abstract class Shipper_Model_Dumped {
 	public function open( $mode ) {
 		$filename = $this->get_file_path();
 		if ( self::MODE_APPEND !== $mode && ! file_exists( $filename ) ) {
-			file_put_contents( $filename, '' );
+			$fs = Shipper_Helper_Fs_File::open( $filename, self::MODE_APPEND );
+
+			if ( $fs ) {
+				$fs->fwrite( '' );
+			}
 		}
-		$this->_handle = fopen( $filename, $mode );
-		$this->_mode = $mode;
+
+		$this->fs   = Shipper_Helper_Fs_File::open( $filename, $mode );
+		$this->mode = $mode;
 	}
 
 	/**
 	 * Closes the file handle
 	 */
 	public function close() {
-		if ( $this->_handle ) {
-			fclose( $this->_handle );
-		}
-		$this->_handle = false;
-		$this->_mode = false;
+		$this->fs   = null;
+		$this->mode = false;
 	}
 
 	/**
@@ -231,11 +244,12 @@ abstract class Shipper_Model_Dumped {
 	 *
 	 * @param string $mode One of the supported access modes.
 	 */
-	public function acquire_handle( $mode ) {
-		if ( ! empty( $this->_handle ) && $mode !== $this->_mode ) {
+	public function acquire_fs( $mode ) {
+		if ( ! empty( $this->fs ) && $mode !== $this->mode ) {
 			$this->close();
 		}
-		if ( empty( $this->_handle ) ) {
+
+		if ( empty( $this->fs ) ) {
 			$this->open( $mode );
 		}
 	}

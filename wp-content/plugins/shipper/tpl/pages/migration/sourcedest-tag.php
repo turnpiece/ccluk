@@ -5,13 +5,16 @@
  * @package shipper
  */
 
-$source = Shipper_Model_Stored_Destinations::get_current_domain();
+$source      = Shipper_Model_Stored_Destinations::get_current_domain();
 $destination = $destinations->get_by_site_id( $site );
 
 $default_type = Shipper_Model_Stored_Migration::TYPE_EXPORT;
-$model = new Shipper_Model_Stored_Migration;
-$type = $model->get_type();
-if ( empty( $type ) ) { $type = $default_type; }
+$model        = new Shipper_Model_Stored_Migration();
+$type         = $model->get_type(); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- this is not WordPress global variable
+
+if ( empty( $type ) ) {
+	$type = $default_type; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- this is not WordPress global variable
+}
 ?>
 <div class="shipper-sourcedest-tag">
 	<span class="shipper-type-<?php echo esc_attr( $type ); ?> shipper-source-part">

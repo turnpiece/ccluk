@@ -15,13 +15,14 @@ use PHP_CodeSniffer_File as File;
 use PHP_CodeSniffer_Tokens as Tokens;
 
 /**
- * As of PHP 5.3, the __toString() magic method can no longer be passed arguments.
+ * As of PHP 5.3, the `__toString()` magic method can no longer be passed arguments.
  *
- * Sister-sniff to PHPCompatibility.FunctionDeclarations.ForbiddenToStringParameters.
- *
- * @link https://www.php.net/manual/en/migration53.incompatible.php
+ * Sister-sniff to `PHPCompatibility.FunctionDeclarations.ForbiddenToStringParameters`.
  *
  * PHP version 5.3
+ *
+ * @link https://www.php.net/manual/en/migration53.incompatible.php
+ * @link https://www.php.net/manual/en/language.oop5.magic.php#object.tostring
  *
  * @since 9.2.0
  */
@@ -76,7 +77,7 @@ class ForbiddenToStringParametersSniff extends Sniff
         }
 
         if (strtolower($tokens[$nextNonEmpty]['content']) !== '__tostring') {
-            // Not a call to the __clone() method.
+            // Not a call to the __toString() method.
             return;
         }
 

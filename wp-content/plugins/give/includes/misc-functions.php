@@ -10,6 +10,8 @@
  */
 
 // Exit if accessed directly.
+use Give\License\PremiumAddonsListManager;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -59,7 +61,7 @@ function give_get_current_page_url() {
 	 *
 	 * @since 1.0
 	 */
-	return apply_filters( 'give_get_current_page_url', $current_uri );
+	return esc_url_raw( apply_filters( 'give_get_current_page_url', $current_uri ) );
 
 }
 
@@ -233,19 +235,23 @@ function give_get_history_session() {
 /**
  * Generate Item Title for Payment Gateway.
  *
- * @param array $payment_data Payment Data.
+ * @since 1.8.14
+ * @since 2.9.6  Function will return form title with selected form level if price id set to zero. Added second param to return result with requested character length.
+ *
+ * @param  array  $payment_data  Payment Data.
+ *
+ * @param  string|null  $length
  *
  * @return string By default, the name of the form. Then the price level text if any is found.
- * @since 1.8.14
  */
-function give_payment_gateway_item_title( $payment_data ) {
+function give_payment_gateway_item_title( $payment_data, $length = null ) {
 
 	$form_id   = intval( $payment_data['post_data']['give-form-id'] );
 	$item_name = isset( $payment_data['post_data']['give-form-title'] ) ? $payment_data['post_data']['give-form-title'] : '';
 	$price_id  = isset( $payment_data['post_data']['give-price-id'] ) ? $payment_data['post_data']['give-price-id'] : '';
 
 	// Verify has variable prices.
-	if ( give_has_variable_prices( $form_id ) && ! empty( $price_id ) ) {
+	if ( give_has_variable_prices( $form_id ) ) {
 
 		$item_price_level_text = give_get_price_option_name( $form_id, $price_id, 0, false );
 
@@ -271,7 +277,14 @@ function give_payment_gateway_item_title( $payment_data ) {
 	 * @return string
 	 * @since 1.8.14
 	 */
-	return apply_filters( 'give_payment_gateway_item_title', $item_name, $form_id, $payment_data );
+	$item_name = apply_filters( 'give_payment_gateway_item_title', $item_name, $form_id, $payment_data );
+
+	// Cut the length
+	if ( $length ) {
+		$item_name = substr( $item_name, 0, $length );
+	}
+
+	return $item_name;
 }
 
 /**
@@ -833,35 +846,21 @@ function give_get_plugins( $args = [] ) {
 	if ( ! empty( $args['only_add_on'] ) ) {
 		$plugins = array_filter(
 			$plugins,
-			function( $plugin ) {
+			static function( $plugin ) {
 				return 'add-on' === $plugin['Type'];
 			}
 		);
 	}
 
 	if ( ! empty( $args['only_premium_add_ons'] ) ) {
-		if ( ! function_exists( 'give_get_premium_add_ons' ) ) {
-			require_once GIVE_PLUGIN_DIR . '/includes/admin/misc-functions.php';
-		}
-
-		$premium_addons_list = give_get_premium_add_ons();
+		$premiumAddonsListManger = give( PremiumAddonsListManager::class );
 
 		foreach ( $plugins as $key => $plugin ) {
-			$addon_shortname = str_replace( 'give-', '', $plugin['Dir'] );
-			$tmp             = $premium_addons_list;
-			$is_premium      = count(
-				array_filter(
-					$tmp,
-					function( $plugin ) use ( $addon_shortname ) {
-						return false !== strpos( $plugin, $addon_shortname );
-					}
-				)
-			);
+			if ( 'add-on' !== $plugin['Type'] ) {
+				unset( $plugins[ $key ] );
+			}
 
-			if (
-				'add-on' !== $plugin['Type']
-				|| ( false === strpos( $plugin['PluginURI'], 'givewp.com' ) && ! $is_premium )
-			) {
+			if ( ! $premiumAddonsListManger->isPremiumAddons( $plugin['PluginURI'] ) ) {
 				unset( $plugins[ $key ] );
 			}
 		}
@@ -1759,6 +1758,29 @@ function give_is_company_field_enabled( $form_id ) {
 }
 
 /**
+ * Check if Last Name field is required
+ *
+ * @param $form_id
+ *
+ * @return bool
+ * @since 2.15.0
+ */
+function give_is_last_name_required( $form_id ) {
+	$form_setting_val   = give_get_meta( $form_id, '_give_last_name_field_required', true );
+	$global_setting_val = give_get_option( 'last_name_field_required' );
+
+	if ( ! empty( $form_setting_val ) ) {
+		if ( 'required' === $form_setting_val ) {
+			return true;
+		}
+
+		return 'global' === $form_setting_val && 'required' === $global_setting_val;
+	}
+
+	return 'required' === $global_setting_val;
+}
+
+/**
  * Check if anonymous donation field enabled or not for form or globally.
  *
  * @param $form_id
@@ -1963,7 +1985,7 @@ function give_goal_progress_stats( $form ) {
 	// Define Actual Goal based on the goal format.
 	switch ( $goal_format ) {
 		case 'percentage':
-			$actual     = "{$actual}%";
+			$actual     = "{$progress}%";
 			$total_goal = '';
 			break;
 

@@ -2,7 +2,7 @@
 /**
  * Define the cache helper.
  *
- * @link    http://premium.wpmudev.org
+ * @link    http://wpmudev.com
  * @since   3.2.0
  *
  * @author  Joel James <joel@incsub.com>
@@ -62,7 +62,21 @@ class Cache {
 			$name = $name . '_network';
 		}
 
-		return md5( wp_json_encode( $name ) );
+		$key = md5( wp_json_encode( $name ) );
+
+		// Should always have our prefix.
+		$key = 'beehive_' . $key;
+
+		/**
+		 * Filter to modify cache key format.
+		 *
+		 * @param string $key     Cache key.
+		 * @param string $name    Original name.
+		 * @param bool   $network Is network level?.
+		 *
+		 * @since 3.3.5
+		 */
+		return apply_filters( 'beehive_cache_key', $key, $name, $network );
 	}
 
 	/**
@@ -469,7 +483,7 @@ class Cache {
 		/**
 		 * Change cache expiry time.
 		 *
-		 * @param bool   $expire Expiry time.
+		 * @param int    $expire Expiry time.
 		 * @param string $key    Cache key (useful to override specific expiry).
 		 *
 		 * @since 3.2.0

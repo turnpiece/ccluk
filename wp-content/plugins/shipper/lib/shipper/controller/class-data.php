@@ -25,7 +25,8 @@ class Shipper_Controller_Data extends Shipper_Controller {
 		add_action(
 			'shipper_migration_after_task',
 			array( $this, 'record_task_timers' ),
-			10, 2
+			10,
+			2
 		);
 
 		add_action(
@@ -37,6 +38,11 @@ class Shipper_Controller_Data extends Shipper_Controller {
 		add_action( 'shipper_migration_cancel', array( $this, 'on_cancel_migration' ) );
 	}
 
+	/**
+	 * Is data recording enabled
+	 *
+	 * @return bool
+	 */
 	public function is_data_recording_enabled() {
 		return (bool) apply_filters(
 			'shipper_enable_data_recording',
@@ -44,6 +50,9 @@ class Shipper_Controller_Data extends Shipper_Controller {
 		);
 	}
 
+	/**
+	 * Reset timers.
+	 */
 	public function reset_timers() {
 		Shipper_Helper_Timer_Basic::get()->reset_all();
 
@@ -52,6 +61,11 @@ class Shipper_Controller_Data extends Shipper_Controller {
 		$timer->start( 'migration' );
 	}
 
+	/**
+	 * Start the task timers.
+	 *
+	 * @param object $task task name.
+	 */
 	public function start_task_timers( $task ) {
 		$timer = get_class( $task );
 
@@ -66,13 +80,19 @@ class Shipper_Controller_Data extends Shipper_Controller {
 		}
 	}
 
+	/**
+	 * Record task timers.
+	 *
+	 * @param object $task task name.
+	 * @param bool   $status task status.
+	 */
 	public function record_task_timers( $task, $status ) {
-		$timer = get_class( $task );
+		$timer  = get_class( $task );
 		$helper = Shipper_Helper_Timer_Persistent::get();
 
 		$msg = array(
-			'name' => $timer,
-			'step' => Shipper_Helper_Timer_Basic::get()->diff( $timer ),
+			'name'  => $timer,
+			'step'  => Shipper_Helper_Timer_Basic::get()->diff( $timer ),
 			'total' => $helper->diff( 'migration' ),
 		);
 
@@ -106,28 +126,41 @@ class Shipper_Controller_Data extends Shipper_Controller {
 		);
 	}
 
+	/**
+	 * On complete migration.
+	 *
+	 * @param object $migration migration model.
+	 */
 	public function on_complete_migration( $migration ) {
-		$data = $migration->get_data();
+		$data    = $migration->get_data();
 		$success = empty( $data['errors'] );
 
 		$this->finish_data( $success );
 	}
 
+	/**
+	 * On cancel migration
+	 */
 	public function on_cancel_migration() {
 		return $this->finish_data( false );
 	}
 
+	/**
+	 * Finish data.
+	 *
+	 * @param string $success task status.
+	 */
 	public function finish_data( $success ) {
 		$timer = Shipper_Helper_Timer_Persistent::get();
 		$timer->stop( 'migration' );
 
 		$data = array(
-			'name' => 'migration',
+			'name'  => 'migration',
 			'total' => $timer->diff( 'migration' ),
 		);
 
 		if ( ! empty( $success ) ) {
-			$estimate = new Shipper_Model_Stored_Estimate;
+			$estimate     = new Shipper_Model_Stored_Estimate();
 			$data['size'] = $estimate->get( 'package_size' );
 			$data['unit'] = 'bytes';
 		}
@@ -135,6 +168,13 @@ class Shipper_Controller_Data extends Shipper_Controller {
 		Shipper_Helper_Log::data( $this->format_data( $data ) );
 	}
 
+	/**
+	 * Format data.
+	 *
+	 * @param array $raw an array of raw data.
+	 *
+	 * @return array
+	 */
 	public function format_data( $raw ) {
 		$format = array(
 			'name',
@@ -144,7 +184,7 @@ class Shipper_Controller_Data extends Shipper_Controller {
 			'size',
 			'unit',
 		);
-		$data = array();
+		$data   = array();
 		foreach ( $format as $type ) {
 			$data[ $type ] = isset( $raw[ $type ] )
 				? $raw[ $type ]

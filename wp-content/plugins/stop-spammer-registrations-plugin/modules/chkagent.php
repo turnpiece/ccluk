@@ -1,17 +1,17 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+
+if ( !defined( 'ABSPATH' ) ) {
+	http_response_code( 404 );
+	die();
 }
 
 class chkagent extends be_module {
-	public function process(
-		$ip, &$stats = array(), &$options = array(), &$post = array()
-	) {
-		if ( ! array_key_exists( 'badagents', $options ) ) {
+	public function process( $ip, &$stats = array(), &$options = array(), &$post = array() ) {
+		if ( !array_key_exists( 'badagents', $options ) ) {
 			return false;
 		}
 		$badagents = $options['badagents'];
-		if ( empty( $badagents ) || ! is_array( $badagents ) ) {
+		if ( empty( $badagents ) || !is_array( $badagents ) ) {
 			return false;
 		}
 		$agent = "";
@@ -19,9 +19,9 @@ class chkagent extends be_module {
 			$agent = $_SERVER['HTTP_USER_AGENT'];
 		}
 		if ( empty( $agent ) ) {
-			return 'Missing User Agent';
+			return __( 'Missing User Agent', 'stop-spammer-registrations-plugin' );
 		}
-// user agent can be spoofed - move these exclusions to a better test when finished
+		// user agent can be spoofed - move these exclusions to a better test when finished
 		if ( stripos( $agent, 'docs.google.com/viewer' ) !== false ) {
 			return false;
 		} // fix this?
@@ -33,10 +33,9 @@ class chkagent extends be_module {
 		} // fix this?
 		foreach ( $badagents as $a ) {
 			if ( stripos( $agent, $a ) !== false ) {
-				return 'Deny List User Agent: ' . $a;
+				return __( 'Block List User Agent: ', 'stop-spammer-registrations-plugin' ) . $a;
 			}
 		}
-
 		return false;
 	}
 }

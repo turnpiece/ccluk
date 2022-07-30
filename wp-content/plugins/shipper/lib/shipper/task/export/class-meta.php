@@ -23,14 +23,14 @@ class Shipper_Task_Export_Meta extends Shipper_Task_Export {
 	 * @return bool
 	 */
 	public function apply( $args = array() ) {
-		$migration = new Shipper_Model_Stored_Migration;
-		$remote    = new Shipper_Helper_Fs_Remote;
+		$migration = new Shipper_Model_Stored_Migration();
+		$remote    = new Shipper_Helper_Fs_Remote();
 
 		// Update status flag first.
-		$this->_has_done_anything = true;
-		$files                    = new Shipper_Model_Dumped_Filelist;
-		$large                    = new Shipper_Model_Dumped_Largelist;
-		$packages                 = new Shipper_Model_Dumped_Packagelist();
+		$this->has_done_anything = true;
+		$files                   = new Shipper_Model_Dumped_Filelist();
+		$large                   = new Shipper_Model_Dumped_Largelist();
+		$packages                = new Shipper_Model_Dumped_Packagelist();
 
 		$batch = array(
 			$this->get_upload_command(
@@ -44,7 +44,7 @@ class Shipper_Task_Export_Meta extends Shipper_Task_Export {
 			),
 			$this->get_upload_command(
 				$packages->get_file_path()
-			)
+			),
 		);
 		if ( ! empty( $batch ) ) {
 			$status = $remote->execute_batch_queue( $batch );
@@ -62,23 +62,31 @@ class Shipper_Task_Export_Meta extends Shipper_Task_Export {
 	/**
 	 * Gets putObject command for a source file
 	 *
+	 * @param string $source file source.
+	 *
 	 * @return array
 	 */
 	public function get_upload_command( $source ) {
 		if ( ! file_exists( $source ) ) {
-			Shipper_Helper_Log::write( sprintf(
-				'Non-existent meta file: %s, creating it first',
-				$source
-			) );
-			file_put_contents( $source, '' );
+			Shipper_Helper_Log::write(
+				sprintf(
+					'Non-existent meta file: %s, creating it first',
+					$source
+				)
+			);
+			$fs = Shipper_Helper_Fs_File::open( $source, 'w' );
+			if ( $fs ) {
+				return;
+			}
+
+			$fs->fwrite( '' );
 		}
 
-		$migration = new Shipper_Model_Stored_Migration;
-		$remote    = new Shipper_Helper_Fs_Remote;
+		$migration = new Shipper_Model_Stored_Migration();
+		$remote    = new Shipper_Helper_Fs_Remote();
 
 		$dest_root   = Shipper_Helper_Fs_Path::clean_fname( $migration->get_destination() );
-		$destination = trailingslashit( $dest_root ) .
-		               $this->get_destination_path( basename( $source ) );
+		$destination = trailingslashit( $dest_root ) . $this->get_destination_path( basename( $source ) );
 
 		return $remote->get_upload_command( $source, $destination );
 	}
@@ -99,10 +107,16 @@ class Shipper_Task_Export_Meta extends Shipper_Task_Export {
 		$flags       = defined( 'JSON_PRETTY_PRINT' )
 			? JSON_PRETTY_PRINT
 			: 0;
-		$res         = file_put_contents( $destination, json_encode( $manifest, $flags ) );
+
+		$fs = Shipper_Helper_Fs_File::open( $destination, 'w' );
+		if ( ! $fs ) {
+			return false;
+		}
+		$res = $fs->fwrite( wp_json_encode( $manifest, $flags ) );
 		if ( false === $res ) {
 			$this->add_error(
 				self::ERR_ACCESS,
+				/* translators: %s: file path. */
 				sprintf( __( 'Shipper couldn\'t write to file: %s', 'shipper' ), $destination )
 			);
 

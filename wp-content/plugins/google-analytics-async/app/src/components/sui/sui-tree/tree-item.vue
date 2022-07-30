@@ -1,5 +1,10 @@
 <template>
-	<li role="treeitem" :aria-selected="isSelected" :aria-disabled="isDisabled">
+	<li
+		role="treeitem"
+		ref="mainTree"
+		:aria-selected="isSelected"
+		:aria-disabled="isDisabled"
+	>
 		<div class="sui-tree-node">
 			<label
 				:for="`${tree}-${parent}-${child}`"
@@ -9,6 +14,7 @@
 					type="checkbox"
 					:id="`${tree}-${parent}-${child}`"
 					v-model="checked"
+					@change="expandChildren"
 				/>
 				<span aria-hidden="true"></span>
 				<span>{{ $i18n.tree.select }}</span>
@@ -16,7 +22,7 @@
 
 			<span class="sui-node-text">{{ title }}</span>
 
-			<button v-if="hasChildren" data-button="expander">
+			<button v-if="hasChildren" data-button="expander" ref="mainOpener">
 				<span aria-hidden="true"></span>
 				<span class="sui-screen-reader-text">
 					{{ $i18n.tree.open_close }}
@@ -119,7 +125,11 @@ export default {
 		 * @returns {boolean}
 		 */
 		isSelected() {
-			return this.selectedItems && this.selectedItems.includes(this.child)
+			let items = Array.isArray(this.selectedItems)
+				? this.selectedItems
+				: []
+
+			return items && items.includes(this.child)
 		},
 
 		/**
@@ -130,7 +140,11 @@ export default {
 		 * @returns {boolean}
 		 */
 		isDisabled() {
-			return this.disabledItems && this.disabledItems.includes(this.child)
+			let items = Array.isArray(this.disabledItems)
+				? this.disabledItems
+				: []
+
+			return items && items.includes(this.child)
 		},
 	},
 
@@ -183,6 +197,29 @@ export default {
 		itemSelect(data) {
 			// Emit the current child click.
 			this.$emit('itemSelect', data)
+		},
+
+		/**
+		 * Expand children if required.
+		 *
+		 * For the main tree item, expand children
+		 * when selected.
+		 *
+		 * @since 3.3.2
+		 *
+		 * @returns {void}
+		 */
+		expandChildren() {
+			if (!this.parent) {
+				// Get the expanded attribute.
+				let expanded = this.$refs.mainTree.getAttribute('aria-expanded')
+
+				// Expand if not opened yet.
+				if ('false' === expanded && this.checked) {
+					// Click on the opener button.
+					this.$refs.mainOpener.click()
+				}
+			}
 		},
 	},
 }

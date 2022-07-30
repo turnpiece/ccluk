@@ -8,10 +8,18 @@
 			:id="modal"
 		>
 			<!-- Tracking form modal -->
-			<slide-tracking-id @dismiss="dismiss" />
+			<slide-tracking-id
+				:can-continue="showAdminTracking"
+				@dismiss="dismiss"
+				@submit="submit"
+			/>
 
 			<!-- Admin tracking settings modal -->
-			<slide-admin-tracking @dismiss="dismiss" @submit="submit" />
+			<slide-admin-tracking
+				v-if="showAdminTracking"
+				@dismiss="dismiss"
+				@submit="submit"
+			/>
 
 			<!-- Finishing modal -->
 			<slide-finishing />
@@ -41,6 +49,23 @@ export default {
 			modal: 'beehive-onboarding-setup-tracking',
 			closeFocus: 'beehive-wrap',
 		}
+	},
+
+	computed: {
+		/**
+		 * Check if we can show Admin Tracking option.
+		 *
+		 * @since 3.3.3
+		 *
+		 * @returns {boolean}
+		 */
+		showAdminTracking() {
+			return (
+				!this.isMultisite() ||
+				!this.isNetworkWide() ||
+				(this.isNetworkWide() && this.isNetwork())
+			)
+		},
 	},
 
 	methods: {

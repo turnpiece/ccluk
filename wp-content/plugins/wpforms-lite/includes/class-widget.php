@@ -8,9 +8,10 @@
 class WPForms_Widget extends WP_Widget {
 
 	/**
-	 * Holds widget settings defaults, populated in constructor.
+	 * Hold widget settings defaults, populated in constructor.
 	 *
 	 * @since 1.0.2
+	 *
 	 * @var array
 	 */
 	protected $defaults;
@@ -34,10 +35,11 @@ class WPForms_Widget extends WP_Widget {
 		$widget_slug = 'wpforms-widget';
 
 		// Widget basics.
-		$widget_ops = array(
-			'classname'   => $widget_slug,
-			'description' => esc_html_x( 'Display a form.', 'Widget', 'wpforms-lite' ),
-		);
+		$widget_ops = [
+			'classname'             => $widget_slug,
+			'description'           => esc_html_x( 'Display a form.', 'Widget', 'wpforms-lite' ),
+			'show_instance_in_rest' => true,
+		];
 
 		// Widget controls.
 		$control_ops = array(
@@ -49,11 +51,11 @@ class WPForms_Widget extends WP_Widget {
 	}
 
 	/**
-	 * Outputs the HTML for this widget.
+	 * Output the HTML for this widget.
 	 *
 	 * @since 1.0.2
 	 *
-	 * @param array $args An array of standard parameters for widgets in this theme.
+	 * @param array $args     An array of standard parameters for widgets in this theme.
 	 * @param array $instance An array of settings for this widget instance.
 	 */
 	public function widget( $args, $instance ) {
@@ -61,11 +63,11 @@ class WPForms_Widget extends WP_Widget {
 		// Merge with defaults.
 		$instance = wp_parse_args( (array) $instance, $this->defaults );
 
-		echo $args['before_widget'];
+		echo $args['before_widget']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 		// Title.
 		if ( ! empty( $instance['title'] ) ) {
-			echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ) . $args['after_title'];
+			echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base ) . $args['after_title']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}
 
 		// Form.
@@ -73,11 +75,11 @@ class WPForms_Widget extends WP_Widget {
 			wpforms()->frontend->output( absint( $instance['form_id'] ), $instance['show_title'], $instance['show_desc'] );
 		}
 
-		echo $args['after_widget'];
+		echo $args['after_widget']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 	/**
-	 * Deals with the settings when they are saved by the admin. Here is
+	 * Deal with the settings when they are saved by the admin. Here is
 	 * where any validation should be dealt with.
 	 *
 	 * @since 1.0.2
@@ -91,20 +93,18 @@ class WPForms_Widget extends WP_Widget {
 
 		$new_instance['title']      = wp_strip_all_tags( $new_instance['title'] );
 		$new_instance['form_id']    = ! empty( $new_instance['form_id'] ) ? (int) $new_instance['form_id'] : 0;
-		$new_instance['show_title'] = isset( $new_instance['show_title'] ) ? '1' : false;
-		$new_instance['show_desc']  = isset( $new_instance['show_desc'] ) ? '1' : false;
+		$new_instance['show_title'] = isset( $new_instance['show_title'] ) && $new_instance['show_title'] ? '1' : false;
+		$new_instance['show_desc']  = isset( $new_instance['show_desc'] ) && $new_instance['show_desc'] ? '1' : false;
 
 		return $new_instance;
 	}
 
 	/**
-	 * Displays the form for this widget on the Widgets page of the WP Admin area.
+	 * Display the form for this widget on the Widgets page of the WP Admin area.
 	 *
 	 * @since 1.0.2
 	 *
 	 * @param array $instance An array of the current settings for this widget.
-	 *
-	 * @return void
 	 */
 	public function form( $instance ) {
 

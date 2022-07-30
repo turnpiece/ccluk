@@ -7,8 +7,7 @@
 
 $progress = ! empty( $progress )
 	? (int) $progress
-	: 0
-;
+	: 0;
 ?>
 
 <div class="shipper-migration-content shipper-migration-progress-content">
@@ -19,10 +18,13 @@ $progress = ! empty( $progress )
 	</div>
 
 	<?php
-		$this->render('pages/migration/sourcedest-tag', array(
+	$this->render(
+		'pages/migration/sourcedest-tag',
+		array(
 			'destinations' => $destinations,
-			'site' => $site,
-		));
+			'site'         => $site,
+		)
+	);
 	?>
 
 	<p class="shipper-note">

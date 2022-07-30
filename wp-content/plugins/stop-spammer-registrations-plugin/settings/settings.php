@@ -1,15 +1,15 @@
 <?php
-// this is the new settings pages for Stop Spammers
-// this is loaded only when users who can change settings are logged in
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+
+if ( !defined( 'ABSPATH' ) ) {
+	http_response_code( 404 );
+	die();
 }
 
 function ss_admin_menu_l() {
 	$iconpng = SS_PLUGIN_URL . 'images/sticon.png';
 	add_menu_page(
-		"Stop Spammers", // $page_title,
-		"Stop Spammers", // $menu_title,
+		'Stop Spammers', // $page_title,
+		'Stop Spammers', // $menu_title,
 		'manage_options', // $capability,
 		'stop_spammers', // $menu_slug,
 		'ss_summary', // $function
@@ -21,88 +21,90 @@ function ss_admin_menu_l() {
 	}
 	add_submenu_page(
 		'stop_spammers', // plugins parent
-		"Summary — Stop Spammers", // $page_title,
-		"Summary", // $menu_title,
+		__( 'Summary — Stop Spammers', 'stop-spammer-registrations-plugin' ), // $page_title,
+		__( 'Summary', 'stop-spammer-registrations-plugin' ), // $menu_title,
 		'manage_options', // $capability,
 		'stop_spammers', // $menu_slug,
 		'ss_summary' // $function
 	);
-	add_submenu_page(
-	'stop_spammers', // plugins parent
-	"Premium — Stop Spammers", // $page_title,
-	'<span class="gopro">Premium Security</span>', // $menu_title,
-	'manage_options', // $capability,
-	'ss_premium', // $menu_slug,
-	'ss_premium' // function
-	);
+	if ( !is_plugin_active( 'stop-spammers-premium/stop-spammers-premium.php' ) ) {
+		add_submenu_page(
+			'stop_spammers', // plugins parent
+			__( 'Premium — Stop Spammers', 'stop-spammer-registrations-plugin' ), // $page_title,
+			__( '<span class="gopro">Premium Security</span>', 'stop-spammer-registrations-plugin' ), // $menu_title,
+			'manage_options', // $capability,
+			'ss_premium', // $menu_slug,
+			'ss_premium' // function
+		);
+	}
 	add_submenu_page(
 		'stop_spammers', // plugins parent
-		"Protection Options — Stop Spammers", // $page_title,
-		'Protection Options', // $menu_title,
+		__( 'Protection Options — Stop Spammers', 'stop-spammer-registrations-plugin' ), // $page_title,
+		__( 'Protection Options', 'stop-spammer-registrations-plugin' ), // $menu_title,
 		'manage_options', // $capability,
 		'ss_options', // $menu_slug,
 		'ss_options' // function
 	);
 	add_submenu_page(
 		'stop_spammers', // plugins parent
-		"Allow Requests & Lists — Stop Spammers", // $page_title,
-		'Allow Reqests & Lists', // $menu_title,
+		__( 'Allow Lists — Stop Spammers', 'stop-spammer-registrations-plugin' ), // $page_title,
+		__( 'Allow Lists', 'stop-spammer-registrations-plugin' ), // $menu_title,
 		'manage_options', // $capability,
 		'ss_allow_list', // $menu_slug,
 		'ss_allowlist_settings' // function
 	);
 	add_submenu_page(
 		'stop_spammers', // plugins parent
-		"Block Lists — Stop Spammers", // $page_title,
-		'Block Lists', // $menu_title,
+		__( 'Block Lists — Stop Spammers', 'stop-spammer-registrations-plugin' ), // $page_title,
+		__( 'Block Lists', 'stop-spammer-registrations-plugin' ), // $menu_title,
 		'manage_options', // $capability,
-		'ss_deny_list', // $menu_slug,
-		'ss_denylist_settings' // function
+		'ss_block_list', // $menu_slug,
+		'ss_blocklist_settings' // function
 	);
 	add_submenu_page(
 		'stop_spammers', // plugins parent
-		"Challenge and Deny — Stop Spammers", // $page_title,
-		'Challenge &amp; Deny', // $menu_title,
+		__( 'Challenge & Block — Stop Spammers', 'stop-spammer-registrations-plugin' ), // $page_title,
+		__( 'Challenge & Block', 'stop-spammer-registrations-plugin' ), // $menu_title,
 		'manage_options', // $capability,
 		'ss_challenge', // $menu_slug,
 		'ss_challenges' // function
 	);
 	add_submenu_page(
 		'stop_spammers', // plugins parent
-		"Web Services — Stop Spammers", // $page_title,
-		'Web Services', // $menu_title,
+		__( 'Web Services — Stop Spammers', 'stop-spammer-registrations-plugin' ), // $page_title,
+		__( 'Web Services', 'stop-spammer-registrations-plugin' ), // $menu_title,
 		'manage_options', // $capability,
 		'ss_webservices_settings', // $menu_slug,
 		'ss_webservices_settings'
 	);
 	add_submenu_page(
 		'stop_spammers', // plugins parent
-		"Cache — Stop Spammers", // $page_title,
-		'Cache', // $menu_title,
+		__( 'Cache — Stop Spammers', 'stop-spammer-registrations-plugin' ), // $page_title,
+		__( 'Cache', 'stop-spammer-registrations-plugin' ), // $menu_title,
 		'manage_options', // $capability,
 		'ss_cache', // $menu_slug,
 		'ss_cache' // function
 	);
 	add_submenu_page(
 		'stop_spammers', // plugins parent
-		"Log Report — Stop Spammers", // $page_title,
-		'Log Report', // $menu_title,
+		__( 'Log Report — Stop Spammers', 'stop-spammer-registrations-plugin' ), // $page_title,
+		__( 'Log Report', 'stop-spammer-registrations-plugin' ), // $menu_title,
 		'manage_options', // $capability,
 		'ss_reports', // $menu_slug,
 		'ss_reports' // function
 	);
 	add_submenu_page(
 		'stop_spammers', // plugins parent
-		"Diagnostics — Stop Spammers", // $page_title,
-		'Diagnostics', // $menu_title,
+		__( 'Diagnostics — Stop Spammers', 'stop-spammer-registrations-plugin' ), // $page_title,
+		__( 'Diagnostics', 'stop-spammer-registrations-plugin' ), // $menu_title,
 		'manage_options', // $capability,
 		'ss_diagnostics', // $menu_slug,
 		'ss_diagnostics' // function
 	);
 	add_submenu_page(
 		'stop_spammers', // plugins parent
-		"Beta: DB Cleanup — Stop Spammers", // $page_title,
-		'Beta: DB Cleanup', // $menu_title,
+		__( 'Beta: DB Cleanup — Stop Spammers', 'stop-spammer-registrations-plugin' ), // $page_title,
+		__( 'Beta: DB Cleanup', 'stop-spammer-registrations-plugin' ), // $menu_title,
 		'manage_options', // $capability,
 		'ss_option_maint', // $menu_slug,
 		'ss_option_maint' // function
@@ -110,8 +112,8 @@ function ss_admin_menu_l() {
 	if ( function_exists( 'is_multisite' ) && is_multisite() ) {
 		add_submenu_page(
 			'stop_spammers', // plugins parent
-			"Multisite — Stop Spammers", // $page_title,
-			'Network', // $menu_title,
+			__( 'Multisite — Stop Spammers', 'stop-spammer-registrations-plugin' ), // $page_title,
+			__( 'Network', 'stop-spammer-registrations-plugin' ), // $menu_title,
 			'manage_options', // $capability,
 			'ss_network', // $menu_slug,
 			'ss_network'
@@ -121,13 +123,6 @@ function ss_admin_menu_l() {
 
 function ss_summary() {
 	include_setting( "ss_summary.php" );
-}
-
-if ( ! function_exists( 'ss_premium.php' ) ) {
-function ss_premium( $args ) {
-  include_setting( "ss_premium.php" );
-  return array();
-  }
 }
 
 function ss_network() {
@@ -142,8 +137,8 @@ function ss_allowlist_settings() {
 	include_setting( "ss_allowlist_settings.php" );
 }
 
-function ss_denylist_settings() {
-	include_setting( "ss_denylist_settings.php" );
+function ss_blocklist_settings() {
+	include_setting( "ss_blocklist_settings.php" );
 }
 
 function ss_options() {
@@ -160,10 +155,6 @@ function ss_reports() {
 
 function ss_cache() {
 	include_setting( "ss_cache.php" );
-}
-
-function ss_threat_scan() {
-	include_setting( "ss_threat_scan.php" );
 }
 
 function ss_option_maint() {
@@ -186,8 +177,11 @@ function ss_diagnostics() {
 	include_setting( "ss_diagnostics.php" );
 }
 
-function ss_allowreq() {
-	include_setting( "ss_allowreq.php" );
+if ( !function_exists( 'ss_premium.php' ) ) {
+function ss_premium( $args ) {
+  include_setting( "ss_premium.php" );
+  return array();
+  }
 }
 
 function include_setting( $file ) {
@@ -196,27 +190,26 @@ function include_setting( $file ) {
 	if ( file_exists( $ppath . $file ) ) {
 		require_once( $ppath . $file );
 	} else {
-		echo "<br />Missing file: $ppath $file <br />";
+		_e( '<br />Missing File: ' . $ppath, $file . ' <br />', 'stop-spammer-registrations-plugin' );
 	}
 	sfs_errorsonoff( 'off' );
 }
 
 function ss_fix_post_vars() {
-// sanitize post
-	$p    = $_POST;
-	$keys = array_keys( $_POST );
-	foreach ( $keys as $var ) {
-		try {
-			$val = $_POST[ $var ];
-			if ( is_string( $val ) ) {
-				if ( strpos( $val, "\n" ) !== false ) {
-					$val2 = esc_textarea( $val );
-				} else {
-					$val2 = sanitize_text_field( $val );
+	if ( !empty( $_POST ) ) {
+		$keys = isset( $_POST ) ? ( array ) array_keys( $_POST ) : array();
+		foreach ( $keys as $key ) {
+			try {
+				$key = sanitize_key( $key ); 
+				if ( is_string( $_POST[$key] ) ) {
+					if ( strpos( $_POST[$key], "\n" ) !== false ) {
+						$val2 = sanitize_textarea_field( $_POST[$key] );
+					} else {
+						$val2 = sanitize_text_field( $_POST[$key] );
+					}
+					$_POST[$key] = $val2;
 				}
-				$_POST[ $var ] = $val2;
-			}
-		} catch ( Exception $e ) {
+			} catch ( Exception $e ) {}
 		}
 	}
 }

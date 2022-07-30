@@ -43,15 +43,7 @@ class Parser {
 	 * @since 3.5.0  Moved from __construct().
 	 */
 	public function init() {
-		if ( is_admin() ) {
-			return;
-		}
-
-		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-			return;
-		}
-
-		if ( wp_doing_cron() ) {
+		if ( is_admin() || is_customize_preview() || wp_doing_ajax() || wp_doing_cron() ) {
 			return;
 		}
 
@@ -116,6 +108,10 @@ class Parser {
 	public function parse_page( $content ) {
 		// Do not parse page if CDN and Lazy load modules are disabled.
 		if ( ! $this->cdn && ! $this->lazy_load ) {
+			return $content;
+		}
+
+		if ( is_customize_preview() ) {
 			return $content;
 		}
 
@@ -210,6 +206,14 @@ class Parser {
 			$new_image = WP_Smush::get_instance()->core()->mod->cdn->parse_background_image( $img_src, $new_image );
 
 			$content = str_replace( $image, $new_image, $content );
+			/**
+			 * Filter the current page content after process background images.
+			 *
+			 * @param string $content Current Page content.
+			 * @param string $image   Backround Image tag without src.
+			 * @param string $img_src Image src.
+			 */
+			$content = apply_filters( 'smush_after_process_background_images', $content, $image, $img_src );
 		}
 
 		return $content;
@@ -222,12 +226,12 @@ class Parser {
 	 * @since 3.3.0
 	 */
 	private function is_smartcrawl_analysis() {
-		$wds_analysis = filter_input( INPUT_POST, 'action', FILTER_SANITIZE_STRING );
+		$wds_analysis = filter_input( INPUT_POST, 'action', FILTER_SANITIZE_SPECIAL_CHARS );
 		if ( ! is_null( $wds_analysis ) && 'wds-analysis-recheck' === $wds_analysis ) {
 			return true;
 		}
 
-		if ( null !== filter_input( INPUT_GET, 'wds-frontend-check', FILTER_SANITIZE_STRING ) ) {
+		if ( null !== filter_input( INPUT_GET, 'wds-frontend-check', FILTER_SANITIZE_SPECIAL_CHARS ) ) {
 			return true;
 		}
 
@@ -252,7 +256,19 @@ class Parser {
 	public function get_images_from_content( $content ) {
 		$images = array();
 
-		if ( preg_match_all( '/<(?P<type>img|source|iframe)\b(?>\s+(?:src=[\'"](?P<src>[^\'"]*)[\'"]|srcset=[\'"](?P<srcset>[^\'"]*)[\'"])|[^\s>]+|\s+)*>/is', $content, $images ) ) {
+		/**
+		 * Filter out only <body> content. As this was causing issues with escaped JS strings in <head>.
+		 *
+		 * @since 3.6.2
+		 */
+		if ( preg_match( '/(?=<body).*<\/body>/is', $content, $body ) ) {
+			$content = $body[0];
+		}
+
+		$pattern = '/<(?P<type>img|source|iframe)\b(?>\s+(?:src=[\'"](?P<src>[^\'"]*)[\'"]|srcset=[\'"](?P<srcset>[^\'"]*)[\'"])|[^\s>]+|\s+)*>/is';
+		$pattern = apply_filters( 'smush_images_from_content_regex', $pattern );
+
+		if ( preg_match_all( $pattern, $content, $images ) ) {
 			foreach ( $images as $key => $unused ) {
 				// Simplify the output as much as possible, mostly for confirming test results.
 				if ( is_numeric( $key ) && $key > 0 ) {
@@ -280,7 +296,10 @@ class Parser {
 	private static function get_background_images( $content ) {
 		$images = array();
 
-		if ( preg_match_all( '/(?:background-image:\s*?url\([\'"]?(?P<img_url>.*?[^)\'"]+)[\'"]?\))/i', $content, $images ) ) {
+		$pattern = '/(?:background-image:\s*?url\(\s*[\'"]?(?P<img_url>.*?[^)\'"]+)[\'"]?\s*\))/i';
+		$pattern = apply_filters( 'smush_background_images_regex', $pattern );
+
+		if ( preg_match_all( $pattern, $content, $images ) ) {
 			foreach ( $images as $key => $unused ) {
 				// Simplify the output as much as possible, mostly for confirming test results.
 				if ( is_numeric( $key ) && $key > 0 ) {
@@ -296,13 +315,18 @@ class Parser {
 		 */
 		$images['img_url'] = array_map(
 			function ( $image ) {
-				// Remove the starting &quot;.
-				if ( '&quot;' === substr( $image, 0, 6 ) ) {
+				// Quote entities.
+				$quotes = apply_filters( 'wp_smush_background_image_quotes', array( '&quot;', '&#034;', '&#039;', '&apos;' ) );
+
+				$image = trim( $image );
+
+				// Remove the starting quotes.
+				if ( in_array( substr( $image, 0, 6 ), $quotes, true ) ) {
 					$image = substr( $image, 6 );
 				}
 
-				// Remove the ending &quot;.
-				if ( '&quot;' === substr( $image, -6 ) ) {
+				// Remove the ending quotes.
+				if ( in_array( substr( $image, -6 ), $quotes, true ) ) {
 					$image = substr( $image, 0, -6 );
 				}
 
@@ -347,6 +371,13 @@ class Parser {
 			return true;
 		}
 
+		// BuddyBoss' AJAX requests. They do something strange and end up defining
+		// DOING_AJAX on template_redirect after self::parse_page() runs. That makes
+		// our lazy load page parsing break some of their AJAX requests.
+		if ( function_exists( 'bbp_is_ajax' ) && bbp_is_ajax() ) {
+			return true;
+		}
+
 		return false;
 	}
 
@@ -363,8 +394,10 @@ class Parser {
 	 */
 	public static function add_attribute( &$element, $name, $value = null ) {
 		$closing = false === strpos( $element, '/>' ) ? '>' : ' />';
+		$quotes  = false === strpos( $element, '"' ) ? '\'' : '"';
+
 		if ( ! is_null( $value ) ) {
-			$element = rtrim( $element, $closing ) . " {$name}=\"{$value}\"{$closing}";
+			$element = rtrim( $element, $closing ) . " {$name}={$quotes}{$value}{$quotes}{$closing}";
 		} else {
 			$element = rtrim( $element, $closing ) . " {$name}{$closing}";
 		}

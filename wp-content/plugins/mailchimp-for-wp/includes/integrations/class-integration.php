@@ -141,8 +141,7 @@ abstract class MC4WP_Integration {
 	 * @hooked `wp_head`
 	 */
 	public function print_css_reset() {
-		$suffix = defined( 'SCRIPT_DEBUG' ) ? '' : '.min';
-		$css    = file_get_contents( MC4WP_PLUGIN_DIR . 'assets/css/checkbox-reset' . $suffix . '.css' );
+		$css = file_get_contents( MC4WP_PLUGIN_DIR . '/assets/css/checkbox-reset.css' );
 
 		// replace selector by integration specific selector so the css affects just this checkbox
 		$css = str_ireplace( '__INTEGRATION_SLUG__', $this->slug, $css );
@@ -430,6 +429,9 @@ abstract class MC4WP_Integration {
 
 			/** @ignore (documented elsewhere) */
 			$subscriber = apply_filters( 'mc4wp_subscriber_data', $subscriber );
+			if ( ! $subscriber instanceof MC4WP_MailChimp_Subscriber ) {
+				continue;
+			}
 
 			/**
 			 * Filters subscriber data before it is sent to Mailchimp. Only fires for integration requests.
@@ -437,6 +439,9 @@ abstract class MC4WP_Integration {
 			 * @param MC4WP_MailChimp_Subscriber $subscriber
 			 */
 			$subscriber = apply_filters( 'mc4wp_integration_subscriber_data', $subscriber );
+			if ( ! $subscriber instanceof MC4WP_MailChimp_Subscriber ) {
+				continue;
+			}
 
 			/**
 			 * Filters subscriber data before it is sent to Mailchimp. Only fires for integration requests.
@@ -447,6 +452,9 @@ abstract class MC4WP_Integration {
 			 * @param int $related_object_id
 			 */
 			$subscriber = apply_filters( "mc4wp_integration_{$slug}_subscriber_data", $subscriber, $related_object_id );
+			if ( ! $subscriber instanceof MC4WP_MailChimp_Subscriber ) {
+				continue;
+			}
 
 			$result = $mailchimp->list_subscribe( $list_id, $subscriber->email_address, $subscriber->to_array(), $this->options['update_existing'], $this->options['replace_interests'] );
 		}

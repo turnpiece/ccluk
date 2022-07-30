@@ -17,15 +17,24 @@
 
 	<h4><?php esc_html_e( 'Status', 'shipper' ); ?></h4>
 	<div class="sui-notice sui-notice-error">
-		<p>
-			<?php
-				echo wp_kses_post( sprintf(
-					__( 'Password protection is enabled on <b>%s</b>.', 'shipper' ),
-					$domain
-				) );
-			?>
-		</p>
+		<div class="sui-notice-content">
+			<div class="sui-notice-message">
+				<i class="sui-notice-icon sui-icon-info sui-md" aria-hidden="true"></i>
+				<p>
+					<?php
+					echo wp_kses_post(
+						sprintf(
+							/* translators: %s: website name.*/
+							__( 'Password protection is enabled on <b>%s</b>.', 'shipper' ),
+							$domain
+						)
+					);
+					?>
+				</p>
+			</div>
+		</div>
 	</div>
+
 
 	<h4><?php esc_html_e( 'How To Fix', 'shipper' ); ?></h4>
 	<p>
@@ -43,17 +52,23 @@
 			esc_html_e( '2. Some managed hosts provide password protection. If your site is password protected in this way, you can disable in your hosting settings.', 'shipper' );
 		?>
 	</p>
-</div>
-<div class="sui-notice-top sui-notice-error sui-can-dismiss shipper-recheck-unsuccessful" style="display:none">
-	<div class="sui-notice-content">
-		<p>
-			<?php echo wp_kses_post( sprintf(
-				__( 'Password protection enabled on %1$s. Please fix this and check again.', 'shipper' ),
-				$domain
-			) ); ?>
-		</p>
+
+	<div class="sui-notice sui-notice-top sui-notice-error sui-can-dismiss shipper-recheck-unsuccessful" style="display:none">
+		<div class="sui-notice-content">
+			<div class="sui-notice-message">
+				<i class="sui-notice-icon sui-icon-info sui-md" aria-hidden="true"></i>
+				<p>
+					<?php
+					echo wp_kses_post(
+						sprintf(
+							/* translators: %1$s: website name.*/
+							__( 'Password protection enabled on %1$s. Please fix this and check again.', 'shipper' ),
+							$domain
+						)
+					);
+					?>
+				</p>
+			</div>
+		</div>
 	</div>
-	<span class="sui-notice-dismiss">
-		<a role="button" href="#" aria-label="Dismiss" class="sui-icon-check"></a>
-	</span>
 </div>

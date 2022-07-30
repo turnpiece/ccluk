@@ -35,12 +35,10 @@ class Shipper_Controller_Override_Mocks extends Shipper_Controller_Override {
 		if ( $constants->is_defined( 'SHIPPER_QUICK_EXPORT' ) ) {
 			$fs = $constants->is_defined( 'SHIPPER_QUICK_EXPORT_FS' )
 				? $fs
-				: true
-			;
+				: true;
 			$db = $constants->is_defined( 'SHIPPER_QUICK_EXPORT_DB' )
 				? $db
-				: true
-			;
+				: true;
 		}
 
 		// Force-skip content files.
@@ -66,12 +64,10 @@ class Shipper_Controller_Override_Mocks extends Shipper_Controller_Override {
 		if ( $constants->is_defined( 'SHIPPER_MOCK_IMPORT' ) ) {
 			$fs = $constants->is_defined( 'SHIPPER_MOCK_IMPORT_FS' )
 				? $fs
-				: true
-			;
+				: true;
 			$db = $constants->is_defined( 'SHIPPER_MOCK_IMPORT_DB' )
 				? $db
-				: true
-			;
+				: true;
 		}
 
 		// Force-mock files import.
@@ -94,7 +90,8 @@ class Shipper_Controller_Override_Mocks extends Shipper_Controller_Override {
 	 * @return bool
 	 */
 	public function skip_content_files( $include, $path ) {
-		if ( empty( $include ) ) { return $include; }
+		if ( empty( $include ) ) {
+			return $include; }
 		return ! preg_match( '/' . preg_quote( WP_CONTENT_DIR, '/' ) . '/', $path );
 	}
 
@@ -109,11 +106,11 @@ class Shipper_Controller_Override_Mocks extends Shipper_Controller_Override {
 	 * @return bool
 	 */
 	public function skip_most_tables( $include, $table ) {
-		if ( empty( $include ) ) { return $include; }
+		if ( empty( $include ) ) {
+			return $include; }
 		global $table_prefix;
 		return "{$table_prefix}options" === $table ||
 			"{$table_prefix}sitemeta" === $table ||
-			"{$table_prefix}blogs" === $table
-		;
+			"{$table_prefix}blogs" === $table;
 	}
 }

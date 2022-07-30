@@ -24,10 +24,12 @@ class Shipper_Controller_Heartbeat_Package extends Shipper_Controller_Heartbeat_
 		$event = wp_next_scheduled(
 			Shipper_Controller_Runner_Package::get()->kickstarter->get_kickstart_action()
 		);
+
 		$this->reschedule_kickstart_cron( $event );
+
 		return array(
-			'when' => date( 'r', $event ),
-			'in' => ( ! empty( $event ) ? $event - time() : 'never' ),
+			'when' => gmdate( 'r', $event ),
+			'in'   => ( ! empty( $event ) ? $event - time() : 'never' ),
 		);
 	}
 
@@ -40,9 +42,10 @@ class Shipper_Controller_Heartbeat_Package extends Shipper_Controller_Heartbeat_
 	 * @return bool
 	 */
 	public function reschedule_kickstart_cron( $event_ts ) {
-		if ( false !== $event_ts ) { return false; }
+		if ( false !== $event_ts ) {
+			return false; }
 
-		$migration = new Shipper_Model_Stored_Migration;
+		$migration = new Shipper_Model_Stored_Migration();
 		if ( ! $migration->is_active() ) {
 			return false;
 		}

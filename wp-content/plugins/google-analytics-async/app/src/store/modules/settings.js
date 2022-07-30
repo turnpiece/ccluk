@@ -110,7 +110,7 @@ const settings = {
 				: isNetwork()
 
 			restGet({
-				path: 'settings',
+				path: 'v1/settings',
 				params: {
 					network: network ? 1 : 0,
 				},
@@ -171,7 +171,7 @@ const settings = {
 			let success = false
 
 			await restPost({
-				path: 'settings',
+				path: 'v1/settings',
 				data: {
 					value: value,
 					network: network ? 1 : 0,

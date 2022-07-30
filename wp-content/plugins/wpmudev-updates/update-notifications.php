@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: WPMU DEV Dashboard
- * Plugin URI:  https://premium.wpmudev.org/project/wpmu-dev-dashboard/
+ * Plugin URI:  https://wpmudev.com/project/wpmu-dev-dashboard/
  * Description: Brings the powers of WPMU DEV directly to you. It will revolutionize how you use WordPress. Activate now!
  * Author:      WPMU DEV
- * Version:     4.8.1
- * Author URI:  https://premium.wpmudev.org/
+ * Version:     4.11.14
+ * Author URI:  https://wpmudev.com/
  * Text Domain: wpmudev
  * Domain Path: includes/languages/
  * Network:     true
@@ -44,18 +44,25 @@ class WPMUDEV_Dashboard {
 	 *
 	 * @var string (Version number)
 	 */
-	static public $version = '4.8.1';
+	public static $version = '4.11.14';
 
 	/**
 	 * The current SUI version.
+	 *
 	 * @var string (SUI Version number)
 	 *
 	 * Required for the body class on admin pages
 	 * Use sui followed by version number
 	 * Use dash instead of dots as number seperator
 	 */
-	static public $sui_version = 'sui-2-6-0';
+	public static $sui_version = 'sui-2-12-7';
 
+	/**
+	 * The current plugin base file name.
+	 *
+	 * @var string $file File name.
+	 */
+	public static $basename;
 
 	/**
 	 * Holds the API module.
@@ -64,7 +71,7 @@ class WPMUDEV_Dashboard {
 	 * @var   WPMUDEV_Dashboard_Api
 	 * @since 4.0.0
 	 */
-	static $api = null;
+	public static $api = null;
 
 	/**
 	 * Holds the Remote module.
@@ -73,16 +80,33 @@ class WPMUDEV_Dashboard {
 	 * @var   WPMUDEV_Dashboard_Remote
 	 * @since 4.0.0
 	 */
-	static $remote = null;
+	public static $remote = null;
 
 	/**
-	 * Holds the Site/Settings module.
+	 * Holds the settings module.
+	 *
 	 * Handles all local things like storing/fetching settings.
+	 *
+	 * @var WPMUDEV_Dashboard_Settings
+	 * @since 4.11.10
+	 */
+	public static $settings = null;
+
+	/**
+	 * Holds the Site module.
 	 *
 	 * @var   WPMUDEV_Dashboard_Site
 	 * @since 4.0.0
 	 */
-	static $site = null;
+	public static $site = null;
+
+	/**
+	 * Holds the ajax module.
+	 *
+	 * @var   WPMUDEV_Dashboard_Site
+	 * @since 4.11.6
+	 */
+	public static $ajax = null;
 
 	/**
 	 * Holds the UI module.
@@ -91,7 +115,7 @@ class WPMUDEV_Dashboard {
 	 * @var   WPMUDEV_Dashboard_Ui
 	 * @since 4.0.0
 	 */
-	static $ui = null;
+	public static $ui = null;
 
 	/**
 	 * Holds the Upgrader module.
@@ -100,7 +124,7 @@ class WPMUDEV_Dashboard {
 	 * @var   WPMUDEV_Dashboard_Upgrader
 	 * @since 4.1.0
 	 */
-	static $upgrader = null;
+	public static $upgrader = null;
 
 	/**
 	 * Holds the Notification module.
@@ -109,7 +133,31 @@ class WPMUDEV_Dashboard {
 	 * @var   WPMUDEV_Dashboard_Notice
 	 * @since 4.0.0
 	 */
-	static $notice = null;
+	public static $notice = null;
+
+	/**
+	 * Whitelabel functionality class.
+	 *
+	 * @var WPMUDEV_Dashboard_Whitelabel
+	 * @since 4.11.1
+	 */
+	public static $whitelabel = null;
+
+	/**
+	 * Utility functionality class.
+	 *
+	 * @var WPMUDEV_Dashboard_Utils
+	 * @since 4.11.3
+	 */
+	public static $utils = null;
+
+	/**
+	 * Compatibility functionality class.
+	 *
+	 * @var WPMUDEV_Dashboard_Compatibility
+	 * @since 4.11.3
+	 */
+	public static $compatibility = null;
 
 	/**
 	 * Creates and returns the WPMUDEV Dashboard object.
@@ -120,14 +168,14 @@ class WPMUDEV_Dashboard {
 	 * @since  4.0.0
 	 * @return WPMUDEV_Dashboard
 	 */
-	static public function instance() {
-		static $Inst = null;
+	public static function instance() {
+		static $inst = null;
 
-		if ( null === $Inst ) {
-			$Inst = new WPMUDEV_Dashboard();
+		if ( null === $inst ) {
+			$inst = new WPMUDEV_Dashboard();
 		}
 
-		return $Inst;
+		return $inst;
 	}
 
 	/**
@@ -138,20 +186,35 @@ class WPMUDEV_Dashboard {
 	 * @since 1.0.0
 	 */
 	private function __construct() {
+		// Plugin base name.
+		self::$basename = plugin_basename( __FILE__ );
+
 		require_once 'shared-ui/plugin-ui.php';
 
+		require_once 'includes/class-wpmudev-dashboard-settings.php';
 		require_once 'includes/class-wpmudev-dashboard-site.php';
+		require_once 'includes/class-wpmudev-dashboard-ajax.php';
 		require_once 'includes/class-wpmudev-dashboard-api.php';
 		require_once 'includes/class-wpmudev-dashboard-remote.php';
+		require_once 'includes/class-wpmudev-dashboard-sui-page-urls.php';
 		require_once 'includes/class-wpmudev-dashboard-ui.php';
 		require_once 'includes/class-wpmudev-dashboard-upgrader.php';
 		require_once 'includes/class-wpmudev-dashboard-notice.php';
+		require_once 'includes/class-wpmudev-dashboard-whitelabel.php';
+		require_once 'includes/class-wpmudev-dashboard-utils.php';
+		require_once 'includes/class-wpmudev-dashboard-compatibility.php';
+		require_once 'includes/class-wpmudev-dashboard-special-upgrader.php';
 
-		self::$site     = new WPMUDEV_Dashboard_Site( __FILE__ );
-		self::$api      = new WPMUDEV_Dashboard_Api();
-		self::$remote   = new WPMUDEV_Dashboard_Remote();
-		self::$notice   = new WPMUDEV_Dashboard_Message();
-		self::$upgrader = new WPMUDEV_Dashboard_Upgrader();
+		self::$settings      = new WPMUDEV_Dashboard_Settings();
+		self::$utils         = new WPMUDEV_Dashboard_Utils();
+		self::$site          = new WPMUDEV_Dashboard_Site( __FILE__ );
+		self::$ajax          = new WPMUDEV_Dashboard_Ajax();
+		self::$api           = new WPMUDEV_Dashboard_Api();
+		self::$remote        = new WPMUDEV_Dashboard_Remote();
+		self::$notice        = new WPMUDEV_Dashboard_Message();
+		self::$upgrader      = new WPMUDEV_Dashboard_Upgrader();
+		self::$whitelabel    = new WPMUDEV_Dashboard_Whitelabel();
+		self::$compatibility = new WPMUDEV_Dashboard_Compatibility();
 
 		/*
 		 * The UI module sets up all the WP hooks when it is created.
@@ -167,15 +230,25 @@ class WPMUDEV_Dashboard {
 		// Register the plugin deactivation hook.
 		register_deactivation_hook( __FILE__, array( $this, 'deactivate_plugin' ) );
 
-		// Register the plugin uninstall hook.
-		register_uninstall_hook( __FILE__, array( 'WPMUDEV_Dashboard', 'uninstall_plugin' ) );
+		// Get db version.
+		$version = self::$settings->get( 'version', 'general' );
+		// Only for v4.11.10.
+		if ( empty( $version ) ) {
+			// Try to get old structured version number.
+			$version = self::$settings->get( 'version' );
+		}
+
+		// If existing version is not same, upgrade.
+		if ( ! empty( $version ) && version_compare( $version, self::$version, '<' ) ) {
+			$this->upgrade_plugin( $version );
+		}
 
 		/**
 		 * Custom code can be executed after Dashboard is initialized with the
 		 * default settings.
 		 *
-		 * @since  4.0.0
 		 * @var  WPMUDEV_Dashboard The initialized dashboard object.
+		 * @since  4.0.0
 		 */
 		do_action( 'wpmudev_dashboard_init', $this );
 	}
@@ -183,54 +256,104 @@ class WPMUDEV_Dashboard {
 	/**
 	 * Run code on plugin activation.
 	 *
-	 * @since  1.0.0
+	 * @since    1.0.0
 	 * @internal Action hook
 	 */
 	public function activate_plugin() {
 		global $current_user;
 
+		// Register the plugin uninstall hook.
+		register_uninstall_hook( __FILE__, array( 'WPMUDEV_Dashboard', 'uninstall_plugin' ) );
+
+		// If first time activation.
+		if ( self::$settings->get( 'first_setup', 'flags', true ) ) {
+			/**
+			 * Action hook to execute on first plugin activation.
+			 *
+			 * @since 4.11.2
+			 */
+			do_action( 'wpmudev_dashboard_first_activation' );
+
+			// Not a first time activation anymore.
+			self::$settings->set( 'first_setup', false, 'flags' );
+		}
+
 		// Make sure all Dashboard settings exist in the DB.
-		WPMUDEV_Dashboard::$site->init_options();
+		self::$settings->init();
 
 		// Reset the admin-user when plugin is activated.
 		if ( $current_user && $current_user->ID ) {
-			WPMUDEV_Dashboard::$site->set_option( 'limit_to_user', $current_user->ID );
-		} else {
-			WPMUDEV_Dashboard::$site->set_option( 'limit_to_user', '' );
+			self::$site->add_allowed_user( $current_user->ID );
 		}
 
 		// On next page load we want to redirect user to login page.
-		WPMUDEV_Dashboard::$site->set_option( 'redirected_v4', 0 );
+		self::$settings->set( 'redirected_v4', false, 'flags' );
+
+		// Set plugin version on activation.
+		self::$settings->set( 'version', self::$version, 'general' );
 
 		// Force refresh of all data when plugin is activated.
-		WPMUDEV_Dashboard::$site->set_option( 'refresh_profile_flag', 1 );
-		add_action( 'shutdown', array( WPMUDEV_Dashboard::$api, 'refresh_projects_data' ) ); // this needs to trigger after init to prevent Call to undefined function wp_get_current_user() errors.
-		WPMUDEV_Dashboard::$site->schedule_shutdown_refresh();
+		self::$settings->set( 'refresh_profile', true, 'flags' );
+
+		// This needs to trigger after init to prevent Call to undefined function wp_get_current_user() errors.
+		add_action( 'shutdown', array( self::$api, 'refresh_projects_data' ) );
+
+		self::$site->schedule_shutdown_refresh();
 	}
 
 	/**
 	 * Run code on plugin deactivation.
 	 *
-	 * @since  4.1.1
+	 * @since    4.1.1
 	 * @internal Action hook
 	 */
 	public function deactivate_plugin() {
 		// On next page load we want to redirect user to login page.
-		WPMUDEV_Dashboard::$site->set_option( 'redirected_v4', 0 );
+		self::$settings->set( 'redirected_v4', false, 'flags' );
 	}
 
 	/**
 	 * Run code on plugin uninstall.
 	 *
-	 * @since  4.5
+	 * @since    4.5
 	 * @internal Action hook
 	 */
 	public static function uninstall_plugin() {
+		$keep_data     = self::$settings->get( 'uninstall_keep_data', 'flags' );
+		$keep_settings = self::$settings->get( 'uninstall_preserve_settings', 'flags' );
 		// On next page load we want to redirect user to login page.
-		WPMUDEV_Dashboard::$site->logout( false );
-		// TODO Delete all options from DB.
+		if ( ! $keep_data && ! $keep_settings ) {
+			self::$site->logout( false );
+		}
 	}
-};
+
+	/**
+	 * Run code on plugin version upgrade.
+	 *
+	 * @param string $version Old version.
+	 *
+	 * @since  4.11
+	 *
+	 * @return void
+	 */
+	private function upgrade_plugin( $version ) {
+		// Set new version.
+		self::$settings->set( 'version', self::$version, 'general' );
+
+		// Show upgrade highlights modal.
+		// self::$settings->set( 'highlights_dismissed', false, 'flags' );
+
+		/**
+		 * Action hook to execute upgrade functions.
+		 *
+		 * @param string $version     Old version.
+		 * @param string $new_version New version.
+		 *
+		 * @since  4.11
+		 */
+		do_action( 'wpmudev_dashboard_version_upgrade', $version, self::$version );
+	}
+}
 
 // Initialize the WPMUDEV Dashboard.
 WPMUDEV_Dashboard::instance();
@@ -240,5 +363,6 @@ if ( ! class_exists( 'WPMUDEV_Update_Notifications' ) ) {
 	/**
 	 * Dummy class for backwards compatibility to stone-age.
 	 */
-	class WPMUDEV_Update_Notifications {};
+	class WPMUDEV_Update_Notifications {
+	}
 }

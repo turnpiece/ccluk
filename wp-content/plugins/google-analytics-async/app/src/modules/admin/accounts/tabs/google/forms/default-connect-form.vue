@@ -39,11 +39,7 @@ export default {
 				this.$root.$emit('showTopNotice', {
 					dismiss: true,
 					type: 'error',
-					message: this.sprintf(
-						this.$i18n.notice.google_connect_error,
-						'https://premium.wpmudev.org/docs/wpmu-dev-plugins/beehive/#set-up-api-project',
-						'https://premium.wpmudev.org/get-support/'
-					),
+					message: this.$i18n.notice.google_connect_error,
 				})
 			}
 		},

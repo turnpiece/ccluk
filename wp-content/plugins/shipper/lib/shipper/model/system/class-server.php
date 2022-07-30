@@ -11,19 +11,19 @@
 class Shipper_Model_System_Server extends Shipper_Model {
 
 	const TYPE = 'type';
-	const OS = 'os';
+	const OS   = 'os';
 
 	const WORKING_DIR = 'working_directory';
 	const STORAGE_DIR = 'storage_directory';
-	const TEMP_DIR = 'temp_directory';
-	const LOG_DIR = 'log_directory';
+	const TEMP_DIR    = 'temp_directory';
+	const LOG_DIR     = 'log_directory';
 
 	const ACCESS_PROTECTED = 'access_protected';
 
 	const SRV_APACHE = 'apache';
-	const SRV_IIS = 'microsoft-iis';
-	const SRV_NGINX = 'nginx';
-	const SRV_OTHER = 'other';
+	const SRV_IIS    = 'microsoft-iis';
+	const SRV_NGINX  = 'nginx';
+	const SRV_OTHER  = 'other';
 
 	/**
 	 * Constructor
@@ -39,9 +39,8 @@ class Shipper_Model_System_Server extends Shipper_Model {
 	 */
 	public function populate() {
 		$server = ! empty( $_SERVER['SERVER_SOFTWARE'] )
-			? $_SERVER['SERVER_SOFTWARE']
-			: ''
-		;
+			? esc_url_raw( wp_unslash( $_SERVER['SERVER_SOFTWARE'] ) )
+			: '';
 		if ( false !== stripos( $server, self::SRV_APACHE ) ) {
 			$this->set( self::TYPE, self::SRV_APACHE );
 		} elseif ( false !== stripos( $server, self::SRV_IIS ) ) {
@@ -64,9 +63,12 @@ class Shipper_Model_System_Server extends Shipper_Model {
 	 * Checks for password protection on AJAX endpoint
 	 */
 	public function check_password_protection() {
-		$resp = wp_remote_head(admin_url( 'admin-ajax.php' ), array(
-			'timeout' => 1,
-		));
+		$resp = wp_remote_head(
+			admin_url( 'admin-ajax.php' ),
+			array(
+				'timeout' => 1,
+			)
+		);
 		$code = (int) wp_remote_retrieve_response_code( $resp );
 
 		$protected = 401 === $code;
@@ -114,17 +116,20 @@ class Shipper_Model_System_Server extends Shipper_Model {
 			(int) shipper_is_dir_visible( $dir )
 		);
 
-		$url = shipper_path_to_url( $dir );
+		$url  = shipper_path_to_url( $dir );
 		$code = 100;
 		if ( ! empty( $url ) ) {
-			$resp = wp_remote_head($url, array(
-				'timeout' => 1,
-			));
+			$resp = wp_remote_head(
+				$url,
+				array(
+					'timeout' => 1,
+				)
+			);
 			$code = (int) wp_remote_retrieve_response_code( $resp );
 		}
 		$this->set(
 			sprintf( '%s_accessible', $key ),
-			(int) ($code >= 200 && $code < 300)
+			(int) ( $code >= 200 && $code < 300 )
 		);
 	}
 
@@ -136,9 +141,17 @@ class Shipper_Model_System_Server extends Shipper_Model {
 	 * @return string
 	 */
 	public static function get_type_name( $type = '' ) {
-		if ( self::SRV_APACHE === $type ) { return __( 'Apache', 'shipper' ); }
-		if ( self::SRV_IIS === $type ) { return __( 'Microsoft IIS', 'shipper' ); }
-		if ( self::SRV_NGINX === $type ) { return __( 'Nginx', 'shipper' ); }
+		if ( self::SRV_APACHE === $type ) {
+			return __( 'Apache', 'shipper' );
+		}
+
+		if ( self::SRV_IIS === $type ) {
+			return __( 'Microsoft IIS', 'shipper' );
+		}
+
+		if ( self::SRV_NGINX === $type ) {
+			return __( 'Nginx', 'shipper' );
+		}
 
 		return __( 'something else', 'shipper' );
 	}

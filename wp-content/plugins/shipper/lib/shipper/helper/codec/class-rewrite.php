@@ -22,7 +22,7 @@ class Shipper_Helper_Codec_Rewrite extends Shipper_Helper_Codec_Domain {
 		$current = trailingslashit(
 			'http://' . Shipper_Model_Stored_Destinations::get_current_domain()
 		);
-		$path = parse_url( $current, PHP_URL_PATH );
+		$path    = wp_parse_url( $current, PHP_URL_PATH );
 		if ( ! empty( $path ) ) {
 			$rpl[ "RewriteBase {$path}" ] = '{{SHIPPER_REWRITE_BASE}}';
 		}

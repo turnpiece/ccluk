@@ -2,7 +2,7 @@
 /**
  * The Google core class.
  *
- * @link    http://premium.wpmudev.org
+ * @link    http://wpmudev.com
  * @since   3.2.0
  *
  * @author  Joel James <joel@incsub.com>
@@ -16,11 +16,11 @@ defined( 'WPINC' ) || die;
 
 use Beehive\Core\Data\Locale;
 use Beehive\Core\Helpers\General;
-use Beehive\Core\Controllers\Menu;
 use Beehive\Core\Helpers\Permission;
 use Beehive\Core\Modules\Google_Auth;
 use Beehive\Core\Utils\Abstracts\Base;
 use Beehive\Core\Controllers\Capability;
+use Beehive\Core\Views\Admin as Admin_View;
 
 /**
  * Class Admin
@@ -58,10 +58,11 @@ class Admin extends Base {
 		}
 
 		// Settings menu in dashboard.
-		add_action( 'beehive_admin_menu', array( $this, 'settings_menu' ) );
+		add_filter( 'beehive_main_menu_items', array( $this, 'admin_menu' ), 2 );
 
-		// Stats menu in dashboard.
-		add_filter( 'beehive_statistics_menu_items', array( $this, 'statistics_menu' ) );
+		// Settings menu in dashboard.
+		add_action( 'admin_menu', array( $this, 'statistics_menu' ) );
+		add_action( 'network_admin_menu', array( $this, 'statistics_menu' ) );
 
 		// Include required google vars.
 		add_filter(
@@ -107,7 +108,7 @@ class Admin extends Base {
 		}
 
 		// Make sure the user has capability.
-		if ( Permission::user_can( 'analytics', $this->is_network() ) ) {
+		if ( Permission::user_can( 'analytics', $this->is_network() ) && Permission::can_show_dashboard_widget() ) {
 			// Register widget.
 			wp_add_dashboard_widget(
 				'beehive_dashboard',
@@ -150,40 +151,122 @@ class Admin extends Base {
 	/**
 	 * Register admin submenu for the settings page.
 	 *
-	 * @since 3.3.0
+	 * @param array $menu_items Menu items.
 	 *
-	 * @return void
-	 */
-	public function settings_menu() {
-		// Add accounts page.
-		add_submenu_page(
-			Menu::SLUG,
-			__( 'Google Analytics Settings', 'ga_trans' ),
-			__( 'Google Analytics', 'ga_trans' ),
-			Capability::SETTINGS_CAP,
-			'beehive-ga-settings',
-			array( Views\Stats::instance(), 'settings_page' )
-		);
-	}
-
-	/**
-	 * Register admin submenu for the stats page.
-	 *
-	 * @param array $submenus Submenus.
-	 *
-	 * @since 3.2.0
+	 * @since 3.3.7
 	 *
 	 * @return array
 	 */
-	public function statistics_menu( $submenus ) {
+	public function admin_menu( $menu_items ) {
+		// Set the admin menu for GA.
+		$menu_items['beehive-google-analytics'] = array(
+			'page_title' => __( 'Google Analytics', 'ga_trans' ),
+			'menu_title' => __( 'Google Analytics', 'ga_trans' ),
+			'cap'        => Capability::SETTINGS_CAP,
+			'callback'   => array( Views\Stats::instance(), 'settings_page' ),
+		);
+
+		return $menu_items;
+	}
+
+	/**
+	 * Register admin submenu for statistics page.
+	 *
+	 * @since 3.3.7
+	 *
+	 * @return void
+	 */
+	public function statistics_menu() {
+		// Get statistics menu status.
+		$main_menu = beehive_analytics()->settings->get(
+			'statistics_menu',
+			'general',
+			$this->is_network()
+		);
+
+		if ( $main_menu && $this->show_statistics_menu() ) {
+			// Get statistics menu title.
+			$menu_title = beehive_analytics()->settings->get(
+				'statistics_menu_title',
+				'general',
+				$this->is_network(),
+				__( 'Statistics', 'ga_trans' )
+			);
+
+			// Make sure menu title is not empty.
+			$menu_title = empty( $menu_title ) ? __( 'Statistics', 'ga_trans' ) : $menu_title;
+
+			// Add the statistics main menu.
+			add_menu_page(
+				$menu_title,
+				$menu_title,
+				Capability::ANALYTICS_CAP,
+				'beehive-statistics',
+				array( Views\Stats::instance(), 'stats_page' ),
+				Admin_View::instance()->get_statistics_icon(),
+				3
+			);
+		}
+	}
+
+	/**
+	 * Check if statistics tab can be shown in GA menu.
+	 *
+	 * @since 3.3.7
+	 *
+	 * @return bool
+	 */
+	public function show_statistics_tab() {
+		// Get statistics menu status.
+		$main_menu = beehive_analytics()->settings->get(
+			'statistics_menu',
+			'general',
+			$this->is_network()
+		);
+
+		// Check if we can show statistics tab.
+		$can_show = ! $main_menu && $this->show_statistics_menu();
+
+		/**
+		 * Filter hook to change statistics tab.
+		 *
+		 * @param bool $can_show Can show.
+		 *
+		 * @since 3.3.7
+		 */
+		return apply_filters( 'beehive_google_analytics_show_statistics_tab', $can_show );
+	}
+
+	/**
+	 * Check if statistics menu can be shown in GA.
+	 *
+	 * Statistics menu should be hidden if the current user
+	 * doesn't have access or the selected statistics items
+	 * are empty.
+	 * You can use `beehive_google_analytics_show_statistics_menu`
+	 * to modify the access.
+	 *
+	 * @since 3.3.5
+	 *
+	 * @return bool
+	 */
+	public function show_statistics_menu() {
 		// Do not continue if not active network wide.
 		if ( $this->is_network() && ! General::is_networkwide() ) {
-			return $submenus;
+			/**
+			 * Filter to allow statistics menu in GA page.
+			 *
+			 * @param bool $show Should show?.
+			 *
+			 * @since 3.3.5
+			 */
+			return apply_filters( 'beehive_google_analytics_show_statistics_menu', false );
 		}
 
 		// Should be able to view analytics.
 		if ( ! Permission::can_view_analytics( $this->is_network() ) ) {
-			return $submenus;
+			// Filter documented above.
+			return apply_filters( 'beehive_google_analytics_show_statistics_menu', false );
 		}
 
 		// Admin users always have permission to view analytics.
@@ -206,20 +289,14 @@ class Admin extends Base {
 
 				// If not items allowed or only the statistics parent is added.
 				if ( empty( $caps ) || ( count( $caps ) === 1 && in_array( 'statistics', $caps, true ) ) ) {
-					return $submenus;
+					// Filter documented above.
+					return apply_filters( 'beehive_google_analytics_show_statistics_menu', false );
 				}
 			}
 		}
 
-		// Add settings page.
-		$submenus['beehive-google-analytics'] = array(
-			'page_title' => __( 'Google Analytics', 'ga_trans' ),
-			'menu_title' => __( 'Google Analytics', 'ga_trans' ),
-			'cap'        => Capability::ANALYTICS_CAP,
-			'callback'   => array( Views\Stats::instance(), 'stats_page' ),
-		);
-
-		return $submenus;
+		// Filter documented above.
+		return apply_filters( 'beehive_google_analytics_show_statistics_menu', true );
 	}
 
 	/**
@@ -235,17 +312,25 @@ class Admin extends Base {
 	public function get_styles( $styles, $admin ) {
 		if ( $admin ) {
 			// Settings.
-			$styles['beehive-ga-settings'] = array(
-				'src' => 'ga-settings.min.css',
+			$styles['beehive-ga-admin'] = array(
+				'src' => 'ga-admin.min.css',
 			);
+
+			// Statistics page.
+			$styles['beehive-statistics-page'] = array(
+				'src' => 'ga-statistics-page.min.css',
+			);
+
 			// Post statistics.
 			$styles['beehive-post-statistics'] = array(
 				'src' => 'ga-post-statistics.min.css',
 			);
+
 			// Dashboard widget.
 			$styles['beehive-dashboard-widget'] = array(
 				'src' => 'ga-dashboard-widget.min.css',
 			);
+
 			// All statistics page.
 			$styles['beehive-statistics-page'] = array(
 				'src' => 'ga-statistics-page.min.css',
@@ -268,25 +353,29 @@ class Admin extends Base {
 	public function get_scripts( $scripts, $admin ) {
 		if ( $admin ) {
 			// GA settings.
-			$scripts['beehive-ga-settings'] = array(
-				'src'  => 'ga-settings.min.js',
+			$scripts['beehive-ga-admin'] = array(
+				'src'  => 'ga-admin.min.js',
 				'deps' => array( 'beehive-sui-common', 'beehive-vendors', 'beehive-common' ),
 			);
+
+			// Statistics page.
+			$scripts['beehive-statistics-page'] = array(
+				'src'  => 'ga-statistics-page.min.js',
+				'deps' => array( 'beehive-sui-common', 'beehive-vendors', 'beehive-common' ),
+			);
+
 			// Post statistics.
 			$scripts['beehive-post-statistics'] = array(
 				'src'  => 'ga-post-statistics.min.js',
 				'deps' => array( 'beehive-vendors', 'beehive-common' ),
 			);
+
 			// Dashboard widget.
 			$scripts['beehive-dashboard-widget'] = array(
 				'src'  => 'ga-dashboard-widget.min.js',
 				'deps' => array( 'beehive-sui-dashboard-widget', 'beehive-vendors', 'beehive-common' ),
 			);
-			// All statistics page.
-			$scripts['beehive-statistics-page'] = array(
-				'src'  => 'ga-statistics-page.min.js',
-				'deps' => array( 'beehive-sui-common', 'beehive-vendors', 'beehive-common' ),
-			);
+
 			// Dashboard widget SUI.
 			$scripts['beehive-sui-dashboard-widget'] = array(
 				'src'  => 'sui-dashboard-widget.min.js',
@@ -308,7 +397,7 @@ class Admin extends Base {
 	 */
 	public function admin_body_class( $include ) {
 		// Enqueue stats widget assets.
-		if ( Helper::is_plugin_stats() || Helper::is_ga_settings() ) {
+		if ( Helper::is_ga_admin() ) {
 			$include = true;
 		}
 
@@ -327,13 +416,21 @@ class Admin extends Base {
 	 */
 	public function setup_i18n( $strings, $script ) {
 		switch ( $script ) {
-			case 'beehive-ga-settings':
+			case 'beehive-ga-admin':
 				// Add settings strings.
 				$strings = array_merge_recursive(
 					$strings,
 					Locale::welcome(),
 					Locale::auth_form(),
-					Data\Locale::settings()
+					Data\Locale::admin(),
+					Data\Locale::statistics()
+				);
+				break;
+			case 'beehive-statistics-page':
+				// Add statistics strings.
+				$strings = array_merge_recursive(
+					$strings,
+					Data\Locale::statistics()
 				);
 				break;
 			case 'beehive-post-statistics':
@@ -348,13 +445,6 @@ class Admin extends Base {
 				$strings = array_merge_recursive(
 					$strings,
 					Data\Locale::dashboard_widget()
-				);
-				break;
-			case 'beehive-statistics-page':
-				// Add strings.
-				$strings = array_merge_recursive(
-					$strings,
-					Data\Locale::statistics()
 				);
 				break;
 		}

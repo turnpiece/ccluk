@@ -12,7 +12,7 @@
  */
 class Shipper_Model_Stored_Modals extends Shipper_Model_Stored {
 
-	const STATE_OPEN = 'open';
+	const STATE_OPEN   = 'open';
 	const STATE_CLOSED = 'closed';
 
 	/**

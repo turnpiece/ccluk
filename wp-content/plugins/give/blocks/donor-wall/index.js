@@ -1,14 +1,14 @@
 /**
  * WordPress dependencies
  */
-const { __ } = wp.i18n;
-const { registerBlockType } = wp.blocks;
+import { __ } from '@wordpress/i18n'
+import { registerBlockType } from '@wordpress/blocks';
 
 /**
  * Internal dependencies
  */
 import blockAttributes from './data/attributes';
-import GiveLogo from '../components/logo';
+import GiveIcon from '@givewp/components/GiveIcon';
 import GiveDonorWallGrid from './edit/block';
 
 /**
@@ -16,13 +16,13 @@ import GiveDonorWallGrid from './edit/block';
  */
 
 export default registerBlockType( 'give/donor-wall', {
-	title: __( 'Donor Wall' ),
-	description: __( 'The GiveWP Donor Wall block inserts an existing donation form into the page. Each form\'s presentation can be customized below.' ),
+	title: __( 'Donor Wall', 'give' ),
+	description: __( 'The GiveWP Donor Wall block displays donations on the front end of the site. The settings below allow you to customize the information displayed', 'give' ),
 	category: 'give',
-	icon: <GiveLogo color="grey" />,
+	icon: <GiveIcon color="grey" />,
 	keywords: [
-		__( 'donation' ),
-		__( 'wall' ),
+		__( 'donation', 'give' ),
+		__( 'wall', 'give' ),
 	],
 	supports: {
 		html: false,

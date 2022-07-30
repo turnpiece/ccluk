@@ -25,6 +25,9 @@
 		</div>
 
 		<div>
+			<p class="shipper-description">
+				<?php esc_html_e( 'The selected tables are included in the migration. Be careful while excluding database tables because it may break your site or plugins.', 'shipper' ); ?>
+			</p>
 			<?php $this->render( 'modals/migration-exclusion/settings-database' ); ?>
 		</div>
 
@@ -35,3 +38,5 @@
 	</div><!-- data-panes -->
 
 </div><!-- sui-tabs -->
+
+<?php $this->render( 'modals/exclusion-filters' ); ?>

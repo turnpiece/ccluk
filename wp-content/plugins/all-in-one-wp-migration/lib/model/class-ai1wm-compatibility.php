@@ -38,9 +38,6 @@ class Ai1wm_Compatibility {
 			}
 		}
 
-		// Get updater URL
-		$updater_url = add_query_arg( array( 'ai1wm_check_for_updates' => 1, 'ai1wm_nonce' => wp_create_nonce( 'ai1wm_check_for_updates' ) ), network_admin_url( 'plugins.php' ) );
-
 		// If no extension is used, update everything that is available
 		if ( empty( $extensions ) ) {
 			$extensions = Ai1wm_Extensions::get();
@@ -52,7 +49,7 @@ class Ai1wm_Compatibility {
 				if ( defined( 'WP_CLI' ) ) {
 					$messages[] = sprintf( __( '%s is not the latest version. You must update the plugin before you can use it. ', AI1WM_PLUGIN_NAME ), $extension_data['title'] );
 				} else {
-					$messages[] = sprintf( __( '<strong>%s</strong> is not the latest version. You must <a href="%s">update the plugin</a> before you can use it. <br />', AI1WM_PLUGIN_NAME ), $extension_data['title'], $updater_url );
+					$messages[] = sprintf( __( '<strong>%s</strong> is not the latest version. You must <a href="%s">update the plugin</a> before you can use it. <br />', AI1WM_PLUGIN_NAME ), $extension_data['title'], network_admin_url( 'plugins.php' ) );
 				}
 			}
 		}

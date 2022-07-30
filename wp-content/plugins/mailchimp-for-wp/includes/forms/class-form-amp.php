@@ -11,6 +11,7 @@ class MC4WP_Form_AMP {
 	public function add_hooks() {
 		add_filter( 'mc4wp_form_content', array( $this, 'add_response_templates' ), 10, 2 );
 		add_filter( 'mc4wp_form_element_attributes', array( $this, 'add_amp_request' ) );
+		add_filter( 'mc4wp_load_form_scripts', array( $this, 'suppress_scripts' ) );
 	}
 
 	/**
@@ -21,7 +22,7 @@ class MC4WP_Form_AMP {
 	 * @return string    Modified $content.
 	 */
 	public function add_response_templates( $content, $form ) {
-		if ( ! function_exists( 'is_amp_endpoint' ) || ! is_amp_endpoint() ) {
+		if ( ! function_exists( 'amp_is_request' ) || ! amp_is_request() ) {
 			return $content;
 		}
 
@@ -64,10 +65,24 @@ class MC4WP_Form_AMP {
 	 * @return array Modified $attributes.
 	 */
 	public function add_amp_request( $attributes ) {
-		if ( function_exists( 'is_amp_endpoint' ) && is_amp_endpoint() ) {
+		if ( function_exists( 'amp_is_request' ) && amp_is_request() ) {
 			$attributes['action-xhr'] = get_rest_url( null, 'mc4wp/v1/form' );
 		}
 
 		return $attributes;
+	}
+
+	/**
+	 * Suppress form scripts on AMP pages.
+	 *
+	 * @param bool $load_scripts Whether scripts should be loaded.
+	 * @return bool Modified $load_scripts.
+	 */
+	public function suppress_scripts( $load_scripts ) {
+		if ( function_exists( 'amp_is_request' ) && amp_is_request() ) {
+			return false;
+		}
+
+		return $load_scripts;
 	}
 }

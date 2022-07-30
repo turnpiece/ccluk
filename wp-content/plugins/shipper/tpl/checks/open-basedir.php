@@ -11,34 +11,41 @@
 	<h4><?php esc_html_e( 'Overview', 'shipper' ); ?></h4>
 	<p>
 		<?php
-			echo wp_kses_post(
-				__( 'PHP has a security measure called <b>open_basedir</b> which limits which files can be accessed by a PHP script. Usually, it’s set to your root directory or a couple of specific directories. Shipper needs to be able to write in the working directory, storage directory, temp directory, and log directory to work properly. Having open_basedir active is likely to cause migration failures.', 'shipper' )
-			);
+		echo wp_kses_post(
+			__( 'PHP has a security measure called <b>open_basedir</b> which limits which files can be accessed by a PHP script. Usually, it’s set to your root directory or a couple of specific directories. Shipper needs to be able to write in the working directory, storage directory, temp directory, and log directory to work properly. Having open_basedir active is likely to cause migration failures.', 'shipper' )
+		);
 		?>
 	</p>
 
 	<h4><?php esc_html_e( 'Status', 'shipper' ); ?></h4>
 	<div class="sui-notice sui-notice-warning">
-		<p>
-			<?php
-				echo wp_kses_post( sprintf(
-					__( 'Open_basedir restriction is in effect on <b>%s</b>.', 'shipper' ),
-					$domain
-				) );
-			?>
-		</p>
+		<div class="sui-notice-content">
+			<div class="sui-notice-message">
+				<i class="sui-notice-icon sui-icon-info sui-md" aria-hidden="true"></i>
+				<p>
+					<?php
+					echo wp_kses_post(
+						sprintf(
+							/* translators: %s: website name.*/
+							__( 'Open_basedir restriction is in effect on <b>%s</b>.', 'shipper' ),
+							$domain
+						)
+					);
+					?>
+				</p>
+			</div>
+		</div>
 	</div>
 
 	<h4><?php esc_html_e( 'How To Fix', 'shipper' ); ?></h4>
 	<p>
 		<?php
-			echo wp_kses_post(
-				__('We recommend disabling the <b>open_basedir</b> restriction during migrations to ensure things go smoothly. ', 'shipper' ) );
+			echo wp_kses_post( __( 'We recommend disabling the <b>open_basedir</b> restriction during migrations to ensure things go smoothly.', 'shipper' ) );
 		?>
 	</p>
 	<p>
 		<?php
-			esc_html_e(' 1. Go to your cPanel > Select PHP Version, and click on Switch to PHP Options link to see the default values of PHP options. Update the value of open_basedir to an empty value, and click on Apply and then Save.', 'shipper' );
+			esc_html_e( '1. Go to your cPanel > Select PHP Version, and click on Switch to PHP Options link to see the default values of PHP options. Update the value of open_basedir to an empty value, and click on Apply and then Save.', 'shipper' );
 		?>
 	</p>
 	<p>
@@ -58,16 +65,29 @@
 		?>
 	</p>
 </div>
-<div class="sui-notice-top sui-notice-error sui-can-dismiss shipper-recheck-unsuccessful" style="display:none">
+
+<div id="basedir-notice-inline-dismiss" class="sui-notice sui-notice-top sui-notice-error sui-can-dismiss shipper-recheck-unsuccessful" style="display:none">
 	<div class="sui-notice-content">
-		<p>
-			<?php echo wp_kses_post( sprintf(
-				__( 'Open_basedir restriction in effect on %1$s. Please fix this and check again.', 'shipper' ),
-				$domain
-			) ); ?>
-		</p>
+		<div class="sui-notice-message">
+			<i class="sui-notice-icon sui-icon-info sui-md" aria-hidden="true"></i>
+			<p>
+				<?php
+				echo wp_kses_post(
+					sprintf(
+						/* translators: %1$s: website name. */
+						__( 'Open_basedir restriction in effect on %1$s. Please fix this and check again.', 'shipper' ),
+						$domain
+					)
+				);
+				?>
+			</p>
+		</div>
 	</div>
-	<span class="sui-notice-dismiss">
-		<a role="button" href="#" aria-label="Dismiss" class="sui-icon-check"></a>
-	</span>
+
+	<div class="sui-notice-actions">
+		<button class="sui-button-icon" data-notice-close="basedir-notice-inline-dismiss">
+			<i class="sui-icon-check" aria-hidden="true"></i>
+			<span class="sui-screen-reader-text"><?php esc_attr_e( 'Close this notice', 'shipper' ); ?></span>
+		</button>
+	</div>
 </div>

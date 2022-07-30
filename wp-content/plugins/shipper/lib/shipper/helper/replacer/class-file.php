@@ -28,17 +28,28 @@ class Shipper_Helper_Replacer_File extends Shipper_Helper_Replacer {
 		}
 
 		// Okay, so now we migrate the file.
-		$filename = md5( $path );
+		$filename    = md5( $path );
 		$destination = Shipper_Helper_Fs_Path::get_temp_dir() . $filename;
 
-		$content = file_get_contents( $path );
+		$fs = Shipper_Helper_Fs_File::open( $path );
+
+		if ( ! $fs ) {
+			return false;
+		}
+
+		$content = $fs->fread( $fs->getSize() );
 
 		$replacer = new Shipper_Helper_Replacer_String( $this->get_direction() );
 		$replacer->set_codec_list( $this->get_codec_list() );
 
-		file_put_contents( $destination, $replacer->transform( $content ) );
+		$fs = Shipper_Helper_Fs_File::open( $destination, 'w' );
+
+		if ( ! $fs ) {
+			return false;
+		}
+
+		$fs->fwrite( $replacer->transform( $content ) );
 
 		return $destination;
 	}
-
 }

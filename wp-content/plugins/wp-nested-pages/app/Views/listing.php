@@ -10,16 +10,16 @@ endif;
 <div class="wrap nestedpages <?php if ( $dark_mode ) echo 'np-dark-mode'; ?>">
 	<div class="nestedpages-listing-title">
 		<h1 class="wp-heading-inline">
-			<?php echo apply_filters('nestedpages_page_title', esc_html__($this->post_type->labels->name), $this->post_type); ?>
+			<?php echo apply_filters('nestedpages_page_title', esc_html($this->post_type->labels->name), $this->post_type); ?>
 		</h1>
 		
-		<?php if ( $this->user->canPublish($this->post_type->name) ) :  ?>
+		<?php if ( $this->user->canPublish($this->post_type->name) || $this->user->canSubmitPending($this->post_type->name) ) :  ?>
 		<a href="<?php echo $this->post_type_repo->addNewPostLink($this->post_type->name); ?>" class="page-title-action">
-			<?php echo apply_filters('nestedpages_add_new_text', esc_html__($this->post_type->labels->add_new), $this->post_type); ?>
+			<?php echo apply_filters('nestedpages_add_new_text', esc_html($this->post_type->labels->add_new), $this->post_type); ?>
 		</a>
 		<?php endif; ?>
 
-		<?php if ( $this->user->canPublish($this->post_type->name) && !$this->listing_repo->isSearch() && $wpml_pages ) : ?>
+		<?php if ( ($this->user->canPublish($this->post_type->name) || $this->user->canSubmitPending($this->post_type->name)) && !$this->listing_repo->isSearch() && $wpml_pages && !$this->listing_repo->isFiltered() ) : ?>
 		<a href="#" class="open-bulk-modal page-title-action" title="<?php _e('Add Multiple', 'wp-nested-pages'); ?>" data-parentid="0" data-nestedpages-modal-toggle="np-bulk-modal">
 			<?php echo apply_filters('nestedpages_add_multiple_text', esc_html__('Add Multiple', 'wp-nested-pages'), $this->post_type); ?>
 		</a>
@@ -31,12 +31,14 @@ endif;
 		</a>
 		<?php endif; ?>
 
+		<?php do_action('nestedpages_top_buttons', $this->post_type); ?>
+
 		<div class="nestedpages-top-toggles">
 		<?php if ( $this->post_type->hierarchical && !$this->listing_repo->isSearch() ) : ?>
 		<a href="#" class="np-btn nestedpages-toggleall" data-toggle="closed"><?php esc_html_e('Expand All', 'wp-nested-pages'); ?></a>
 		<?php endif; ?>
 
-		<?php if ( $this->user->canSortPages() && !$this->listing_repo->isSearch() && !$this->listing_repo->isFiltered() && !$this->listing_repo->isOrdered($this->post_type->name) ) : ?>
+		<?php if ( $this->user->canSortPosts($this->post_type->name) && !$this->listing_repo->isSearch() && !$this->listing_repo->isFiltered() && !$this->listing_repo->isOrdered($this->post_type->name) ) : ?>
 		<div class="np-sync-menu-cont" <?php if ( $this->confirmation->getMessage() ) echo 'style="margin-top:2px;"';?>>
 
 			<?php if ( $this->settings->autoPageOrderDisabled() ) : ?>
@@ -59,7 +61,7 @@ endif;
 					<input type="checkbox" name="np_sync_menu" class="np-sync-menu" value="sync" <?php if ( get_option('nestedpages_menusync') == 'sync' ) echo 'checked'; ?>/> 
 					<?php 
 						esc_html_e('Sync Menu', 'wp-nested-pages'); 
-						if ( $wpml ) echo ' (' . esc_html__($this->integrations->plugins->wpml->getCurrentLanguage('name')) . ')';
+						if ( $wpml ) echo ' (' . esc_html($this->integrations->plugins->wpml->getCurrentLanguage('name')) . ')';
 					?>
 				</label>
 				<?php else : ?>
@@ -105,7 +107,7 @@ endif;
 		</div>
 		<?php endif; ?>
 
-		<?php if ( $this->user->canPublish($this->post_type->name) ) : ?>
+		<?php if ( $this->user->canPublish($this->post_type->name) || $this->user->canSubmitPending($this->post_type->name) ) : ?>
 		<div class="new-child new-child-form np-inline-modal" style="display:none;">
 			<?php include( NestedPages\Helpers::view('forms/new-child') ); ?>
 		</div>

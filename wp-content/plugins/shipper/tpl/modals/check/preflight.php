@@ -7,9 +7,8 @@
 
 $args = array(
 	'destinations' => $destinations,
-	'site' => $site,
+	'site'         => $site,
 );
-
 
 if ( $ctrl->is_done() ) {
 	$this->render( 'modals/check/preflight-done', $args );

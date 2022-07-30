@@ -59,6 +59,16 @@ class SettingsRepository
 	}
 
 	/**
+	* Are private pages viewable in the menu
+	*/
+	public function privateMenuEnabled()
+	{
+		$option = get_option('nestedpages_ui', false);
+		$enabled = ( $option && isset($option['include_private']) && $option['include_private'] == 'true' ) ? true : false;
+		return apply_filters('nestedpages_menu_private_enabled', $enabled);
+	}
+
+	/**
 	* Is AJAX page order disabled?
 	*/
 	public function autoPageOrderDisabled()
@@ -221,5 +231,25 @@ class SettingsRepository
 		if ( !$menu_id ) return false;
 		$term = ( is_numeric($menu_id) ) ? get_term_by('id', $menu_id, 'nav_menu') : false;
 		return $term;
+	}
+
+	/**
+	* Sort View Enabled
+	* @return array of role names
+	*/
+	public function sortViewEnabled()
+	{
+		$roles = get_option('nestedpages_allowsortview');
+		
+		// If the option hasn't been saved yet, fall back to editors
+		if ( !$roles ) :
+			$roles = [];
+			$all_roles = wp_roles();
+			foreach ( $all_roles->roles as $name => $role ){
+				$single_role = get_role($name);
+				if ( $single_role->has_cap('edit_others_posts') ) $roles[] = $name;
+			}
+		endif;
+		return $roles;
 	}
 }

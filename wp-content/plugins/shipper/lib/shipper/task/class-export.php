@@ -54,9 +54,9 @@ abstract class Shipper_Task_Export extends Shipper_Task {
 	 */
 	abstract public function get_current_step();
 
-	const ERR_ZIP = 'error_zip';
-	const ERR_ACCESS = 'error_access';
-	const ERR_SQL = 'error_database';
+	const ERR_ZIP      = 'error_zip';
+	const ERR_ACCESS   = 'error_access';
+	const ERR_SQL      = 'error_database';
 	const ERR_TRANSFER = 'error_transfer';
 
 	/**
@@ -64,7 +64,7 @@ abstract class Shipper_Task_Export extends Shipper_Task {
 	 *
 	 * @var bool
 	 */
-	protected $_has_done_anything = false;
+	protected $has_done_anything = false;
 
 	/**
 	 * Checks if this task has done anything this far
@@ -72,7 +72,7 @@ abstract class Shipper_Task_Export extends Shipper_Task {
 	 * @return bool
 	 */
 	public function has_done_anything() {
-		return ! ! $this->_has_done_anything;
+		return ! ! $this->has_done_anything;
 	}
 
 	/**
@@ -98,9 +98,12 @@ abstract class Shipper_Task_Export extends Shipper_Task {
 	 * @return int Size, in bytes
 	 */
 	public function get_archive_size( $migration ) {
-		$size = 0;
+		$size    = 0;
 		$archive = $this->get_archive_path( $migration->get_destination() );
-		if ( ! file_exists( $archive ) ) { return $size; }
+
+		if ( ! file_exists( $archive ) ) {
+			return $size;
+		}
 
 		return filesize( $archive );
 	}
@@ -114,10 +117,11 @@ abstract class Shipper_Task_Export extends Shipper_Task {
 	 */
 	public function get_zip( $migration ) {
 		$archive = $this->get_archive_path( $migration->get_destination() );
-		$zip = new ZipArchive;
+		$zip     = new ZipArchive();
 		if ( true !== $zip->open( $archive, ZipArchive::CREATE ) ) {
 			$this->add_error(
 				self::ERR_ZIP,
+				/* translators: %s: file path. */
 				sprintf( __( 'Shipper could not open target zip file: %s', 'shipper' ), $archive )
 			);
 			return false;
@@ -134,14 +138,12 @@ abstract class Shipper_Task_Export extends Shipper_Task {
 	 * @return string
 	 */
 	public function get_destination_path( $path ) {
-		$base = Shipper_Model_Env::is_flywheel()
+		$base    = Shipper_Model_Env::is_flywheel()
 			? WP_CONTENT_DIR
-			: ABSPATH
-		;
-		$root = ! empty( $this->_files )
-			? $this->_files->get_root()
-			: $base
-		;
+			: ABSPATH;
+		$root    = ! empty( $this->files )
+			? $this->files->get_root()
+			: $base;
 		$relpath = Shipper_Helper_Fs_Path::get_relpath( $path, $root );
 
 		$pfx = $this->get_destination_type();
@@ -161,20 +163,20 @@ abstract class Shipper_Task_Export extends Shipper_Task {
 	 * @return float
 	 */
 	public function get_status_percentage() {
-		$total = (int) $this->get_total_steps();
+		$total   = (int) $this->get_total_steps();
 		$current = (int) $this->get_current_step();
 
-		if ( empty( $total ) ) { $total = 1; }
+		if ( empty( $total ) ) {
+			$total = 1;
+		}
 
-		$result = ( 100 / $total ) * $current;
+		$result  = ( 100 / $total ) * $current;
 		$is_done = is_callable( array( $this, 'is_done' ) )
 			? $this->is_done()
-			: $current > $total
-		;
+			: $current > $total;
 
 		return $result < 100
 			? $result
-			: ( $is_done ? 100 : 99 )
-		;
+			: ( $is_done ? 100 : 99 );
 	}
 }

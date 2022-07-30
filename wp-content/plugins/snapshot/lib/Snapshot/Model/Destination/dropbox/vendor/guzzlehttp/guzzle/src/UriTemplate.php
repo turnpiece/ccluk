@@ -75,7 +75,7 @@ class UriTemplate
             if ($colonPos = strpos($value, ':')) {
                 $varspec['value'] = substr($value, 0, $colonPos);
                 $varspec['modifier'] = ':';
-                $varspec['position'] = (int) substr($value, $colonPos + 1);	 	 	 	 				 	 		
+                $varspec['position'] = (int) substr($value, $colonPos + 1);
             } elseif (substr($value, -1) === '*') {
                 $varspec['modifier'] = '*';
                 $varspec['value'] = substr($value, 0, -1);
@@ -107,7 +107,6 @@ class UriTemplate
         $useQuery = self::$operatorHash[$parsed['operator']]['query'];
 
         foreach ($parsed['values'] as $value) {
-
             if (!isset($this->variables[$value['value']])) {
                 continue;
             }
@@ -117,11 +116,9 @@ class UriTemplate
             $expanded = '';
 
             if (is_array($variable)) {
-
                 $isAssoc = $this->isAssoc($variable);
                 $kvp = [];
                 foreach ($variable as $key => $var) {
-
                     if ($isAssoc) {
                         $key = rawurlencode($key);
                         $isNestedArray = is_array($var);
@@ -179,7 +176,6 @@ class UriTemplate
                     }
                     $expanded = implode(',', $kvp);
                 }
-
             } else {
                 if ($value['modifier'] === ':') {
                     $variable = substr($variable, 0, $value['position']);

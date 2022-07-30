@@ -38,6 +38,7 @@ class Social_Warfare {
 		add_action('plugins_loaded', array($this, 'init'));
 	}
 
+
 	public function init() {
 		// Loads the files for each class.
 		$this->load_classes();
@@ -114,7 +115,7 @@ class Social_Warfare {
 		 * This is the class that controls short links and UTM parameters.
 		 *
 		 */
-		new SWP_URL_Management();
+		new SWP_Link_Manager();
 
 
 		/**
@@ -233,6 +234,8 @@ class Social_Warfare {
 		 */
 
 		new SWP_Utility();
+
+		new SWP_Buttons_Panel_Ajax();
 
 	}
 
@@ -364,6 +367,7 @@ class Social_Warfare {
 		// WordPress functions for plugin operations.
 		require_once ABSPATH . 'wp-admin/includes/plugin.php';
 
+
 		/**
 		 * Utility Classes
 		 *
@@ -376,9 +380,7 @@ class Social_Warfare {
 			'Compatibility',
 			'CURL',
 			'Localization',
-			'Permalink',
 			'Database_Migration',
-			'URL_Management',
 			'Notice',
 			'Notice_Loader',
 			'Post_Cache_Loader',
@@ -387,9 +389,25 @@ class Social_Warfare {
 			'Plugin_Updater',
 			'Utility',
 			'Auth_Helper',
-			'Credential_Helper'
+			'Credential_Helper',
+			'AMP'
 		);
 		$this->load_files( '/lib/utilities/', $utilities);
+
+
+		/**
+		 * The URL Management Classes
+		 *
+		 * These classes will control the shortlinks and Google UTM parameters
+		 * functionality of the shareable links.
+		 *
+		 */
+		$url_management = array(
+			'Link_Manager',
+			'Link_Shortener',
+			'Permalink',
+		);
+		$this->load_files( '/lib/url-management/', $url_management);
 
 
 		/**
@@ -401,7 +419,7 @@ class Social_Warfare {
 		 * than ever before to create and add more social networks to the plugin.
 		 *
 		 * @since 3.6.1 | 31 MAY 2019 | Removed Google Plus
-		 * 
+		 *
 		 */
 		$social_networks = array(
 			'Social_Networks_Loader',
@@ -424,6 +442,7 @@ class Social_Warfare {
 		 *
 		 */
 		$buttons_panels = array(
+			'Buttons_Panel_Ajax',
 			'Buttons_Panel_Trait',
 			'Buttons_Panel',
 			'Buttons_Panel_Side',
@@ -539,16 +558,32 @@ class Social_Warfare {
 	/**
 	 * Loads an array of related files.
 	 *
+	 * @since  3.0.0 | 01 MAR 2018 | Created
+	 * @since  4.0.0 | 20 JUL 2019 | Implemented autoloading.
 	 * @param  string   $path  The relative path to the files home.
 	 * @param  array    $files The name of the files (classes), no vendor prefix.
-	 * @return none     The files are loaded into memory.
+	 * @return void     The files are loaded into memory.
 	 *
 	 */
 	private function load_files( $path, $files ) {
+
+		// Use Autoload to loadup out files and classes.
+		spl_autoload_register( function( $class_name ) use ($path) {
+			if( file_exists( SWP_PLUGIN_DIR.$path.$class_name.'.php' ) ) {
+				include SWP_PLUGIN_DIR.$path.$class_name.'.php';
+			}
+		});
+
+		// If autoloading fails, we'll loop and manually add all the files.
 		foreach( $files as $file ) {
 
-			//* Add our vendor prefix to the file name.
-			$file = "SWP_" . $file;
+			// If the class exists, then autoloading is functional so bail out.
+			if( class_exists( 'SWP_' . $file ) ) {
+				return;
+			}
+
+			// Add our vendor prefix to the file name.
+			$file = 'SWP_' . $file;
 			require_once SWP_PLUGIN_DIR . $path . $file . '.php';
 		}
 	}

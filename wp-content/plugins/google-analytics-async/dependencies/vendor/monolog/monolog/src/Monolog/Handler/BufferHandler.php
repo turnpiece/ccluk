@@ -21,7 +21,7 @@ use Beehive\Monolog\Formatter\FormatterInterface;
  *
  * @author Christophe Coevoet <stof@notk.org>
  */
-class BufferHandler extends \Beehive\Monolog\Handler\AbstractHandler
+class BufferHandler extends AbstractHandler
 {
     protected $handler;
     protected $bufferSize = 0;
@@ -36,7 +36,7 @@ class BufferHandler extends \Beehive\Monolog\Handler\AbstractHandler
      * @param bool             $bubble          Whether the messages that are handled can bubble up the stack or not
      * @param bool             $flushOnOverflow If true, the buffer is flushed when the max size has been reached, by default oldest entries are discarded
      */
-    public function __construct(\Beehive\Monolog\Handler\HandlerInterface $handler, $bufferLimit = 0, $level = \Beehive\Monolog\Logger::DEBUG, $bubble = \true, $flushOnOverflow = \false)
+    public function __construct(HandlerInterface $handler, $bufferLimit = 0, $level = Logger::DEBUG, $bubble = \true, $flushOnOverflow = \false)
     {
         parent::__construct($level, $bubble);
         $this->handler = $handler;
@@ -106,14 +106,14 @@ class BufferHandler extends \Beehive\Monolog\Handler\AbstractHandler
     {
         $this->flush();
         parent::reset();
-        if ($this->handler instanceof \Beehive\Monolog\ResettableInterface) {
+        if ($this->handler instanceof ResettableInterface) {
             $this->handler->reset();
         }
     }
     /**
      * {@inheritdoc}
      */
-    public function setFormatter(\Beehive\Monolog\Formatter\FormatterInterface $formatter)
+    public function setFormatter(FormatterInterface $formatter)
     {
         $this->handler->setFormatter($formatter);
         return $this;

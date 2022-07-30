@@ -1,12 +1,16 @@
 <?php
+
+use Give\Framework\Database\DB;
+use Give\Log\ValueObjects\LogType;
+
 /**
  * Admin Actions
  *
  * @package     Give
- * @subpackage  Admin/Actions
+ * @since       1.0
  * @copyright   Copyright (c) 2016, GiveWP
  * @license     https://opensource.org/licenses/gpl-license GNU Public License
- * @since       1.0
+ * @subpackage  Admin/Actions
  */
 
 // Exit if accessed directly.
@@ -25,9 +29,9 @@ function give_load_wp_editor() {
 	}
 
 	$wp_editor                     = json_decode( base64_decode( $_POST['wp_editor'] ), true );
-	$wp_editor[2]['textarea_name'] = $_POST['textarea_name'];
+	$wp_editor[2]['textarea_name'] = give_clean( $_POST['textarea_name'] );
 
-	wp_editor( $wp_editor[0], $_POST['wp_editor_id'], $wp_editor[2] );
+	wp_editor( wp_kses_post( $wp_editor[0] ), give_clean( $_POST['wp_editor_id'] ), $wp_editor[2] );
 
 	die();
 }
@@ -38,8 +42,8 @@ add_action( 'wp_ajax_give_load_wp_editor', 'give_load_wp_editor' );
 /**
  * Redirect admin to clean url give admin pages.
  *
- * @return bool
  * @since 1.8
+ * @return bool
  */
 function give_redirect_to_clean_url_admin_pages() {
 	// Give admin pages.
@@ -72,10 +76,12 @@ function give_redirect_to_clean_url_admin_pages() {
 	if ( $redirect ) {
 		// Redirect.
 		wp_redirect(
-			remove_query_arg(
-				[ '_wp_http_referer', '_wpnonce' ],
-				wp_unslash( $_SERVER['REQUEST_URI'] )
-			)
+            esc_url_raw(
+                remove_query_arg(
+                    [ '_wp_http_referer', '_wpnonce' ],
+                    wp_unslash( $_SERVER['REQUEST_URI'] )
+                )
+            )
 		);
 		exit;
 	}
@@ -89,8 +95,8 @@ add_action( 'admin_init', 'give_redirect_to_clean_url_admin_pages' );
  *
  * This code is used with AJAX call to hide outdated PHP notice for a short period of time
  *
- * @return void
  * @since 1.8.9
+ * @return void
  */
 function give_hide_outdated_php_notice() {
 
@@ -314,7 +320,7 @@ function _give_register_admin_notices() {
 							[
 								'id'          => 'give-sent-test-email',
 								'type'        => 'updated',
-								'description' => __( 'The test email has been sent.', 'give' ),
+								'description' => sprintf( __( 'The test email has been sent to %s.', 'give' ), wp_get_current_user()->user_email ),
 								'show'        => true,
 							]
 						);
@@ -526,21 +532,14 @@ function _give_register_admin_notices() {
 		current_user_can( 'manage_give_settings' ) &&
 		give_is_setting_enabled( give_get_option( 'akismet_spam_protection' ) )
 	) {
+		global $wpdb;
+
 		$current_time               = current_time( 'timestamp' );
 		$end_of_current_time_in_gmt = get_gmt_from_date( date( 'Y-m-d H:i:s', strtotime( 'tomorrow', $current_time ) ), 'U' );
 		$current_time_gmt           = get_gmt_from_date( date( 'Y-m-d H:i:s', $current_time ), 'U' );
 
-		$spam_count = Give()->log_db->count(
-			[
-				'log_type'   => 'spam',
-				'date_query' => [
-					[
-						'after'     => date( 'Y-m-d 00:00:00', $current_time ),
-						'before'    => date( 'Y-m-d 23:59:59', $current_time ),
-						'inclusive' => true,
-					],
-				],
-			]
+		$spam_count = DB::get_var(
+			DB::prepare( "SELECT COUNT(id) FROM {$wpdb->give_log} WHERE log_type = %s AND date >= CURDATE();", LogType::SPAM )
 		);
 
 		if ( $spam_count && ! Give_Admin_Settings::is_setting_page( 'logs', 'spam' ) ) {
@@ -641,6 +640,22 @@ function give_import_page_link_callback() {
 	?>
 	<a href="<?php echo esc_url( give_import_page_url() ); ?>"
 	   class="page-import-action page-title-action"><?php _e( 'Import Donations', 'give' ); ?></a>
+    <script>
+        function showReactTable () {
+            fetch( '<?php echo esc_url_raw(rest_url('give-api/v2/admin/donations/view?isLegacy=0')) ?>', {
+                method: 'GET',
+                headers: {
+                    ['X-WP-Nonce']: '<?php echo wp_create_nonce('wp_rest') ?>'
+                }
+            })
+            .then((res) => {
+                window.location.reload();
+            });
+        }
+    </script>
+    <button onclick="showReactTable()" class="page-title-action">
+        <?php _e('Switch to New View', 'give') ?>
+    </button>
 
 	<?php
 	// Check if view donation single page only.
@@ -814,10 +829,11 @@ function give_core_settings_import_callback() {
 	 *
 	 * @access public
 	 *
+	 * @since  1.8.17
+	 *
 	 * @param array $fields
 	 *
 	 * @return array $fields
-	 * @since  1.8.17
 	 */
 	$fields = (array) apply_filters( 'give_import_core_settings_fields', $fields );
 
@@ -841,13 +857,15 @@ function give_core_settings_import_callback() {
 		 *
 		 * @access public
 		 *
-		 * @param array $json_to_array     Setting that are being going to get imported
-		 * @param array $type              Type of Import
+		 * @since  1.8.17
+		 *
+		 * @param array $type Type of Import
 		 * @param array $host_give_options Setting old setting that used to be in the options table.
-		 * @param array $fields            Data that is being send from the ajax
+		 * @param array $fields Data that is being send from the ajax
+		 *
+		 * @param array $json_to_array Setting that are being going to get imported
 		 *
 		 * @return array $json_to_array Setting that are being going to get imported
-		 * @since  1.8.17
 		 */
 		$json_to_array = (array) apply_filters( 'give_import_core_settings_data', $json_to_array, $type, $host_give_options, $fields );
 
@@ -863,8 +881,8 @@ function give_core_settings_import_callback() {
 	 *
 	 * @access public
 	 *
-	 * @return array $url
 	 * @since  1.8.17
+	 * @return array $url
 	 */
 	$json_data['url'] = give_import_page_url(
 		(array) apply_filters(
@@ -897,12 +915,14 @@ add_action( 'current_screen', 'give_blank_slate' );
 /**
  * Validate Fields of User Profile
  *
- * @param object   $errors Object of WP Errors.
+ * @since 2.0
+ *
  * @param int|bool $update True or False.
- * @param object   $user   WP User Data.
+ * @param object   $user WP User Data.
+ *
+ * @param object   $errors Object of WP Errors.
  *
  * @return mixed
- * @since 2.0
  */
 function give_validate_user_profile( $errors, $update, $user ) {
 
@@ -935,32 +955,35 @@ add_action( 'user_profile_update_errors', 'give_validate_user_profile', 10, 3 );
 /**
  * Show Donor Information on User Profile Page.
  *
+ * @since 2.0
+ *
  * @param object $user User Object.
  *
- * @since 2.0
  */
 function give_donor_information_profile_fields( $user ) {
 	$donor = Give()->donors->get_donor_by( 'user_id', $user->ID );
 
 	// Display Donor Information, only if donor is attached with User.
-	if ( ! empty( $donor->user_id ) ) : ?>
-			<tr>
-				<th scope="row"><?php _e( 'Donor', 'give' ); ?></th>
-				<td>
-					<a href="<?php echo admin_url( 'edit.php?post_type=give_forms&page=give-donors&view=overview&id=' . $donor->id ); ?>">
-						<?php _e( 'View Donor Information', 'give' ); ?>
-					</a>
-				</td>
-			</tr>
-	<?php endif;
+	if ( ! empty( $donor->user_id ) ) :
+		?>
+		<tr>
+			<th scope="row"><?php _e( 'Donor', 'give' ); ?></th>
+			<td>
+				<a href="<?php echo admin_url( 'edit.php?post_type=give_forms&page=give-donors&view=overview&id=' . $donor->id ); ?>">
+					<?php _e( 'View Donor Information', 'give' ); ?>
+				</a>
+			</td>
+		</tr>
+		<?php
+	endif;
 }
 
 add_action( 'personal_options', 'give_donor_information_profile_fields' );
 /**
  * Get Array of WP User Roles.
  *
- * @return array
  * @since 1.8.13
+ * @return array
  */
 function give_get_user_roles() {
 	$user_roles = [];
@@ -977,8 +1000,9 @@ function give_get_user_roles() {
 /**
  * Ajax handle for donor address.
  *
- * @return string
  * @since 2.0
+ * @since 2.11.0 decode url before parsing and sanitizing url when set $post.
+ * @return void
  */
 function __give_ajax_donor_manage_addresses() {
 	// Bailout.
@@ -993,7 +1017,7 @@ function __give_ajax_donor_manage_addresses() {
 		);
 	}
 
-	$post                  = give_clean( wp_parse_args( $_POST ) );
+	$post                  = give_clean( wp_parse_args( urldecode_deep( $_POST ) ) );
 	$donorID               = absint( $post['donorID'] );
 	$form_data             = give_clean( wp_parse_args( $post['form'] ) );
 	$is_multi_address_type = ( 'billing' === $form_data['address-id'] || false !== strpos( $form_data['address-id'], '_' ) );
@@ -1147,10 +1171,11 @@ add_action( 'wp_ajax_donor_manage_addresses', '__give_ajax_donor_manage_addresse
 /**
  * Admin donor billing address label
  *
+ * @since 2.0
+ *
  * @param string $address_label
  *
  * @return string
- * @since 2.0
  */
 function __give_donor_billing_address_label( $address_label ) {
 	$address_label = __( 'Billing Address', 'give' );
@@ -1163,10 +1188,11 @@ add_action( 'give_donor_billing_address_label', '__give_donor_billing_address_la
 /**
  * Admin donor personal address label
  *
+ * @since 2.0
+ *
  * @param string $address_label
  *
  * @return string
- * @since 2.0
  */
 function __give_donor_personal_address_label( $address_label ) {
 	$address_label = __( 'Personal Address', 'give' );
@@ -1180,11 +1206,12 @@ add_action( 'give_donor_personal_address_label', '__give_donor_personal_address_
  * Update Donor Information when User Profile is updated from admin.
  * Note: for internal use only.
  *
+ * @since  2.0
+ *
  * @param int $user_id
  *
  * @access public
  * @return bool
- * @since  2.0
  */
 function give_update_donor_name_on_user_update( $user_id = 0 ) {
 
@@ -1223,12 +1250,14 @@ add_action( 'personal_options_update', 'give_update_donor_name_on_user_update', 
  * Updates the email address of a donor record when the email on a user is updated
  * Note: for internal use only.
  *
- * @param int          $user_id       User ID.
- * @param WP_User|bool $old_user_data User data.
- *
- * @return bool
  * @since  1.4.3
  * @access public
+ *
+ * @param WP_User|bool $old_user_data User data.
+ *
+ * @param int          $user_id User ID.
+ *
+ * @return bool
  */
 function give_update_donor_email_on_user_update( $user_id = 0, $old_user_data = false ) {
 
@@ -1265,10 +1294,11 @@ function give_update_donor_email_on_user_update( $user_id = 0, $old_user_data = 
 			/**
 			 * Fires after updating donor email on user update.
 			 *
-			 * @param WP_User    $user  WordPress User object.
+			 * @since 1.4.3
+			 *
 			 * @param Give_Donor $donor Give donor object.
 			 *
-			 * @since 1.4.3
+			 * @param WP_User    $user WordPress User object.
 			 */
 			do_action( 'give_update_donor_email_on_user_update', $user, $donor );
 
@@ -1312,8 +1342,8 @@ add_action( 'wp_ajax_give_cache_flush', 'give_cache_flush', 10, 0 );
  * note: only for internal use
  *
  * @access public
- * @return void
  * @since  2.5.0
+ * @return void
  */
 function give_license_notices() {
 
@@ -1435,10 +1465,11 @@ add_action( 'admin_notices', 'give_license_notices' );
 /**
  * Log give addon activation time
  *
- * @param $plugin
+ * @since 2.5.0
+ *
  * @param $network_wide
  *
- * @since 2.5.0
+ * @param $plugin
  */
 function give_log_addon_activation_time( $plugin, $network_wide ) {
 	if ( $network_wide ) {
@@ -1486,16 +1517,16 @@ function give_admin_quick_js() {
 	if ( is_multisite() && is_blog_admin() ) {
 		?>
 		<script>
-			jQuery( document ).ready( function( $ ) {
-				var $updateNotices = $( '[id$="-update"] ', '.wp-list-table' );
+			jQuery(document).ready(function ($) {
+				var $updateNotices = $('[id$="-update"] ', '.wp-list-table');
 
-				if ( $updateNotices.length ) {
-					$.each( $updateNotices, function( index, $updateNotice ) {
-						$updateNotice = $( $updateNotice );
-						$updateNotice.prev().addClass( 'update' );
-					} );
+				if ($updateNotices.length) {
+					$.each($updateNotices, function (index, $updateNotice) {
+						$updateNotice = $($updateNotice);
+						$updateNotice.prev().addClass('update');
+					});
 				}
-			} );
+			});
 		</script>
 		<?php
 	}
@@ -1511,25 +1542,23 @@ add_action( 'admin_head', 'give_admin_quick_js' );
 function give_admin_addon_menu_inline_scripts() {
 	?>
 	<script>
-		( function( $ ) {
-			const $addonLink = $( '#menu-posts-give_forms a[href^="https://go.givewp.com"]' );
-			$addonLink.attr( 'target', '_blank' );
-
+		(function ($) {
+			const $addonLink = $('#menu-posts-give_forms a[href^="edit.php?post_type=give_forms&page=give-add-ons"]');
 			<?php if ( empty( give_get_plugins( [ 'only_premium_add_ons' => true ] ) ) ) : ?>
-			$addonLink.addClass( 'give-highlight' );
-			$addonLink.prepend( '<span class="dashicons dashicons-star-filled"></span>' );
+			$addonLink.addClass('give-highlight');
+			$addonLink.prepend('<span class="dashicons dashicons-star-filled"></span>');
 			<?php endif; ?>
-		} )( jQuery )
+		})(jQuery)
 	</script>
 	<style>
-		#menu-posts-give_forms a[href^="https://go.givewp.com"].give-highlight {
+		#menu-posts-give_forms a[href^="edit.php?post_type=give_forms&page=give-add-ons"].give-highlight {
 			color: rgb(43, 194, 83);
 			font-weight: 700;
 			vertical-align: top;
 			text-shadow: 0 1px 2px #00000080;
 		}
 
-		#menu-posts-give_forms a[href^="https://go.givewp.com"].give-highlight span.dashicons {
+		#menu-posts-give_forms a[href^="edit.php?post_type=give_forms&page=give-add-ons"].give-highlight span.dashicons {
 			font-size: 14px !important;
 			width: auto;
 			height: 18px;
@@ -1545,9 +1574,10 @@ add_action( 'admin_footer', 'give_admin_addon_menu_inline_scripts' );
 /**
  * Handle akismet_deblacklist_spammed_email_handler give-action
  *
+ * @since 2.5.14
+ *
  * @param array $get
  *
- * @since 2.5.14
  */
 function give_akismet_deblacklist_spammed_email_handler( $get ) {
 	$email  = ! empty( $get['email'] ) && is_email( $get['email'] ) ? give_clean( $get['email'] ) : '';
@@ -1561,12 +1591,6 @@ function give_akismet_deblacklist_spammed_email_handler( $get ) {
 		array_unshift( $emails, $email );
 
 		give_update_option( 'akismet_whitelisted_email_addresses', $emails );
-
-		// Remove log, metadata and cache.
-		if ( Give()->log_db->delete( $log ) ) {
-			Give()->logmeta_db->delete_all_meta( $log );
-			Give()->logs->delete_cache();
-		}
 
 		// Redirect to Akismet setting page.
 		wp_safe_redirect( 'wp-admin/edit.php?post_type=give_forms&page=give-settings&tab=advanced&section=akismet-spam-protection&give-message=akismet-deblacklisted-email' );
@@ -1583,7 +1607,18 @@ add_action( 'give_akismet_deblacklist_spammed_email', 'give_akismet_deblacklist_
 function give_render_form_theme_setting_panel() {
 	require_once GIVE_PLUGIN_DIR . 'src/Views/Admin/Form/Metabox-Settings.php';
 }
+
 add_action( 'give_post_form_template_options_settings', 'give_render_form_theme_setting_panel' );
 
+/**
+ * Add Custom setting view for form grid setting panel
+ *
+ * @since 2.20.0
+ */
+function give_render_form_grid_setting_panel() {
+    require_once GIVE_PLUGIN_DIR . 'src/Views/Admin/Form/FormGrid-Settings.php';
+}
+
+add_action( 'give_post_form_grid_options_settings', 'give_render_form_grid_setting_panel' );
 
 

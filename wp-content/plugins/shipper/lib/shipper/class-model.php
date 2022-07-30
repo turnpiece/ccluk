@@ -19,7 +19,7 @@ abstract class Shipper_Model {
 	 *
 	 * @var array
 	 */
-	private $_data = array();
+	private $data = array();
 
 	/**
 	 * Gets value from internal storage
@@ -30,10 +30,9 @@ abstract class Shipper_Model {
 	 * @return mixed Corresponding value, or fallback
 	 */
 	public function get( $what, $fallback = false ) {
-		return isset( $this->_data[ $what ] )
-			? $this->_data[ $what ]
-			: $fallback
-		;
+		return isset( $this->data[ $what ] )
+			? $this->data[ $what ]
+			: $fallback;
 	}
 
 	/**
@@ -42,7 +41,7 @@ abstract class Shipper_Model {
 	 * @return array
 	 */
 	public function get_data() {
-		return (array) $this->_data;
+		return (array) $this->data;
 	}
 
 	/**
@@ -54,7 +53,7 @@ abstract class Shipper_Model {
 	 * @return object Shipper_Model instance
 	 */
 	public function set( $what, $value ) {
-		$this->_data[ $what ] = $value;
+		$this->data[ $what ] = $value;
 		return $this;
 	}
 
@@ -66,8 +65,8 @@ abstract class Shipper_Model {
 	 * @return object Shipper_Model instance
 	 */
 	public function remove( $what ) {
-		if ( isset( $this->_data[ $what ] ) ) {
-			unset( $this->_data[ $what ] );
+		if ( isset( $this->data[ $what ] ) ) {
+			unset( $this->data[ $what ] );
 		}
 		return $this;
 	}
@@ -81,7 +80,7 @@ abstract class Shipper_Model {
 	 */
 	public function set_data( $values ) {
 		if ( is_array( $values ) ) {
-			$this->_data = $values;
+			$this->data = $values;
 		}
 		return $this;
 	}
@@ -92,7 +91,7 @@ abstract class Shipper_Model {
 	 * @return object Shipper_Model instance
 	 */
 	public function clear() {
-		$this->_data = array();
+		$this->data = array();
 		return $this;
 	}
 }

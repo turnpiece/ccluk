@@ -107,7 +107,7 @@ class Snapshot_Helper_Debug {
 		}
 	}
 
-	public static function process_error_backtrace( $errno, $errstr, $errfile, $errline, $errcontext ) {
+	public static function process_error_backtrace( $errno, $errstr, $errfile, $errline, $errcontext = null ) {
 		if ( ! ( error_reporting() & $errno ) ) { // phpcs:ignore
 			return;
 		}

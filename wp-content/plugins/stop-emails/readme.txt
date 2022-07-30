@@ -2,8 +2,8 @@
 Contributors: salcode
 Tags: email, development
 Requires at least: 3.6
-Tested up to: 5.2
-Stable tag: 1.2.0
+Tested up to: 6.0
+Stable tag: 1.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -65,6 +65,10 @@ doing to cause emails to still be sent.
 Unfortunately in either of these cases, this plugin will not be able to stop
 the email.
 
+= Known Incompatible Plugins? =
+
+A list of Known Incompatible Plugins is available at [https://github.com/salcode/stop-emails/wiki/Known-Incompatible-Plugins](https://github.com/salcode/stop-emails/wiki/Known-Incompatible-Plugins).
+
 = I want to log the emails that are stopped =
 
 You can enable logging of stopped emails on the
@@ -89,6 +93,9 @@ Please report bugs at https://github.com/salcode/stop-emails/issues
 1. Lies! The email wasn't really sent, we're running Stop Emails
 
 == Changelog ==
+
+= 1.2.1 =
+* Conditionally modify how our fake PHPMailer extends the real PHPMailer class based on changes in PHPMailer introduced in WordPress core 5.5. This eliminates the message "PHP Deprecated: class-phpmailer.php is deprecated since version 5.5.0!" in the error logs.
 
 = 1.2.0 =
 * Add filter to force BuddyPress to use wp_mail() rather than its own BP_PHPMailer class

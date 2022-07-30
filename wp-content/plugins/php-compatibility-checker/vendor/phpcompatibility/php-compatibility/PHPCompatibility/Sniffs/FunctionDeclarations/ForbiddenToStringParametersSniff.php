@@ -17,11 +17,12 @@ use PHP_CodeSniffer_File as File;
 /**
  * As of PHP 5.3, the __toString() magic method can no longer accept arguments.
  *
- * Sister-sniff to PHPCompatibility.MethodUse.ForbiddenToStringParameters.
- *
- * @link https://www.php.net/manual/en/migration53.incompatible.php
+ * Sister-sniff to `PHPCompatibility.MethodUse.ForbiddenToStringParameters`.
  *
  * PHP version 5.3
+ *
+ * @link https://www.php.net/manual/en/migration53.incompatible.php
+ * @link https://www.php.net/manual/en/language.oop5.magic.php#object.tostring
  *
  * @since 9.2.0
  */
@@ -32,10 +33,11 @@ class ForbiddenToStringParametersSniff extends Sniff
      * Valid scopes for the __toString() method to live in.
      *
      * @since 9.2.0
+     * @since 9.3.2 Visibility changed from `public` to `protected`.
      *
      * @var array
      */
-    public $ooScopeTokens = array(
+    protected $ooScopeTokens = array(
         'T_CLASS'      => true,
         'T_INTERFACE'  => true,
         'T_TRAIT'      => true,

@@ -242,8 +242,8 @@ if ( ! class_exists( 'Give_Import_Core_Settings' ) ) {
 				<th colspan="2">
 					<h2><?php echo $title; ?></h2>
 					<p>
-						<a class="button button-large button-secondary" href="<?php echo add_query_arg( $query_arg_success, admin_url( 'edit.php' ) ); ?>"><?php echo $text; ?></a>
-						<a class="button button-large button-secondary" href="<?php echo add_query_arg( $query_arg_setting, admin_url( 'edit.php' ) ); ?>"><?php echo __( 'View Settings', 'give' ); ?></a>
+						<a class="button button-large button-secondary" href="<?php echo esc_url( add_query_arg( $query_arg_success, admin_url( 'edit.php' ) ) ); ?>"><?php echo $text; ?></a>
+						<a class="button button-large button-secondary" href="<?php echo esc_url( add_query_arg( $query_arg_setting, admin_url( 'edit.php' ) ) ); ?>"><?php echo __( 'View Settings', 'give' ); ?></a>
 					</p>
 				</th>
 			</tr>
@@ -362,7 +362,7 @@ if ( ! class_exists( 'Give_Import_Core_Settings' ) ) {
 				<td class="give-forminp">
 					<div class="give-field-wrap">
 						<label for="json">
-							<input type="file" name="json" class="give-upload-json-file" value="<?php echo $json; ?>"
+							<input type="file" name="json" class="give-upload-json-file" value="<?php echo esc_attr($json); ?>"
 								   accept=".json">
 							<p class="give-field-description"><?php esc_html_e( 'The file type must be JSON.', 'give' ); ?></p>
 						</label>

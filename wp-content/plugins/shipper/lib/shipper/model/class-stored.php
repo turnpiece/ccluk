@@ -13,18 +13,18 @@
 abstract class Shipper_Model_Stored extends Shipper_Model {
 
 	const KEY_TIMESTAMP = '::timestamp::';
-	const KEY_DATA = '::data::';
+	const KEY_DATA      = '::data::';
 
 	const TTL_PERMANENT = -1;
-	const TTL_LONG = 86400;
-	const TTL_SHORT = 600;
+	const TTL_LONG      = 86400;
+	const TTL_SHORT     = 600;
 
 	/**
 	 * Holds centralizes storage data helper
 	 *
 	 * @var object Shipper_Helper_Storage instance
 	 */
-	private $_storage;
+	private $storage;
 
 	/**
 	 * Constructor
@@ -33,7 +33,7 @@ abstract class Shipper_Model_Stored extends Shipper_Model {
 	 * @param bool   $alt Use alternative storage method.
 	 */
 	public function __construct( $namespace, $alt = false ) {
-		$this->_storage = Shipper_Helper_Storage::get( $namespace, $alt );
+		$this->storage = Shipper_Helper_Storage::get( $namespace, $alt );
 		$this->load();
 	}
 
@@ -43,10 +43,9 @@ abstract class Shipper_Model_Stored extends Shipper_Model {
 	 * @return int
 	 */
 	public function get_timestamp() {
-		return ! empty( $this->_storage->data[ self::KEY_TIMESTAMP ] )
-			? (int) $this->_storage->data[ self::KEY_TIMESTAMP ]
-			: 0
-		;
+		return ! empty( $this->storage->data[ self::KEY_TIMESTAMP ] )
+			? (int) $this->storage->data[ self::KEY_TIMESTAMP ]
+			: 0;
 	}
 
 	/**
@@ -57,7 +56,7 @@ abstract class Shipper_Model_Stored extends Shipper_Model {
 	 * @return object Shipper_Model_Storage instance
 	 */
 	public function set_timestamp( $timestamp ) {
-		$this->_storage->data[ self::KEY_TIMESTAMP ] = (int) $timestamp;
+		$this->storage->data[ self::KEY_TIMESTAMP ] = (int) $timestamp;
 		return $this;
 	}
 
@@ -89,7 +88,10 @@ abstract class Shipper_Model_Stored extends Shipper_Model {
 	 * @return bool
 	 */
 	public function is_expired() {
-		if ( ! $this->has_ttl() ) { return false; }
+		if ( ! $this->has_ttl() ) {
+			return false;
+		}
+
 		return $this->get_timestamp() + $this->get_ttl() < time();
 	}
 
@@ -99,7 +101,7 @@ abstract class Shipper_Model_Stored extends Shipper_Model {
 	 * @return bool
 	 */
 	public function load() {
-		return $this->_storage->load();
+		return $this->storage->load();
 	}
 
 	/**
@@ -108,7 +110,7 @@ abstract class Shipper_Model_Stored extends Shipper_Model {
 	 * @return bool
 	 */
 	public function save() {
-		return $this->_storage->save();
+		return $this->storage->save();
 	}
 
 	/**
@@ -117,10 +119,9 @@ abstract class Shipper_Model_Stored extends Shipper_Model {
 	 * @return array
 	 */
 	public function get_data() {
-		return ! empty( $this->_storage->data[ self::KEY_DATA ] )
-			? $this->_storage->data[ self::KEY_DATA ]
-			: array()
-		;
+		return ! empty( $this->storage->data[ self::KEY_DATA ] )
+			? $this->storage->data[ self::KEY_DATA ]
+			: array();
 	}
 
 	/**
@@ -132,7 +133,7 @@ abstract class Shipper_Model_Stored extends Shipper_Model {
 	 */
 	public function set_data( $values ) {
 		if ( is_array( $values ) ) {
-			$this->_storage->data[ self::KEY_DATA ] = $values;
+			$this->storage->data[ self::KEY_DATA ] = $values;
 		}
 		return $this;
 	}
@@ -154,8 +155,8 @@ abstract class Shipper_Model_Stored extends Shipper_Model {
 	 * @return object Shipper_Model instance
 	 */
 	public function remove( $what ) {
-		if ( isset( $this->_storage->data[ self::KEY_DATA ][ $what ] ) ) {
-			unset( $this->_storage->data[ self::KEY_DATA ][ $what ] );
+		if ( isset( $this->storage->data[ self::KEY_DATA ][ $what ] ) ) {
+			unset( $this->storage->data[ self::KEY_DATA ][ $what ] );
 		}
 		return $this;
 	}
@@ -169,7 +170,7 @@ abstract class Shipper_Model_Stored extends Shipper_Model {
 	 * @return object Shipper_Model instance
 	 */
 	public function set( $what, $value ) {
-		$this->_storage->data[ self::KEY_DATA ][ $what ] = $value;
+		$this->storage->data[ self::KEY_DATA ][ $what ] = $value;
 		return $this;
 	}
 
@@ -182,10 +183,9 @@ abstract class Shipper_Model_Stored extends Shipper_Model {
 	 * @return mixed Corresponding value, or fallback
 	 */
 	public function get( $what, $fallback = false ) {
-		return isset( $this->_storage->data[ self::KEY_DATA ][ $what ] )
-			? $this->_storage->data[ self::KEY_DATA ][ $what ]
-			: $fallback
-		;
+		return isset( $this->storage->data[ self::KEY_DATA ][ $what ] )
+			? $this->storage->data[ self::KEY_DATA ][ $what ]
+			: $fallback;
 	}
 
 	/**
@@ -196,6 +196,6 @@ abstract class Shipper_Model_Stored extends Shipper_Model {
 	 * @return Shipper_Helper_Storage
 	 */
 	public function get_storage() {
-		return $this->_storage;
+		return $this->storage;
 	}
 }

@@ -2,8 +2,8 @@
 /*!
 * WordPress Social Login
 *
-* http://miled.github.io/wordpress-social-login/ | https://github.com/miled/wordpress-social-login
-*  (c) 2011-2015 Mohamed Mrassi and contributors | http://wordpress.org/plugins/wordpress-social-login/
+* https://miled.github.io/wordpress-social-login/ | https://github.com/miled/wordpress-social-login
+*   (c) 2011-2020 Mohamed Mrassi and contributors | https://wordpress.org/plugins/wordpress-social-login/
 */
 
 /**
@@ -109,21 +109,37 @@ function wsl_render_auth_widget( $args = array() )
 	}
 
 	// build the authentication url which will call for wsl_process_login() : action=wordpress_social_authenticate
-	$authenticate_base_url = site_url( 'wp-login.php', 'login_post' ) 
-                                        . ( strpos( site_url( 'wp-login.php', 'login_post' ), '?' ) ? '&' : '?' ) 
-                                                . "action=wordpress_social_authenticate&mode=login&";
+	$authenticate_base_url = add_query_arg(
+		array(
+			'action' => 'wordpress_social_authenticate',
+			'mode'   => 'login',
+		),
+		site_url( 'wp-login.php', 'login_post' )
+	);
 
 	// if not in mode login, we overwrite the auth base url
 	// > admin auth playground
 	if( $auth_mode == 'test' )
 	{
-		$authenticate_base_url = home_url() . "/?action=wordpress_social_authenticate&mode=test&";
+		$authenticate_base_url = add_query_arg(
+            array(
+                'action' => 'wordpress_social_authenticate',
+                'mode'   => 'test',
+            ),
+            home_url()
+        );
 	}
 
 	// > account linking
 	elseif( $auth_mode == 'link' )
 	{
-		$authenticate_base_url = home_url() . "/?action=wordpress_social_authenticate&mode=link&";
+		$authenticate_base_url = add_query_arg(
+            array(
+                'action' => 'wordpress_social_authenticate',
+                'mode'   => 'link',
+            ),
+            home_url()
+        );
 	}
 
 	// Connect with caption
@@ -200,7 +216,13 @@ function wsl_render_auth_widget( $args = array() )
 			}
 
 			// build authentication url
-			$authenticate_url = $authenticate_base_url . "provider=" . $provider_id . "&redirect_to=" . urlencode( $redirect_to );
+			$authenticate_url = add_query_arg(
+				array(
+					'provider'    => $provider_id,
+					'redirect_to' => urlencode( $redirect_to ),
+				),
+				$authenticate_base_url
+			);
 
 			// http://codex.wordpress.org/Function_Reference/esc_url
 			$authenticate_url = esc_url( $authenticate_url );
@@ -226,8 +248,8 @@ function wsl_render_auth_widget( $args = array() )
 			{
 ?>
 
-		<a rel="nofollow" href="<?php echo $authenticate_url; ?>" title="<?php echo sprintf( _wsl__("Connect with %s", 'wordpress-social-login'), $provider_name ) ?>" class="wp-social-login-provider wp-social-login-provider-<?php echo strtolower( $provider_id ); ?>" data-provider="<?php echo $provider_id ?>">
-			<?php if( $social_icon_set == 'none' ){ echo apply_filters( 'wsl_render_auth_widget_alter_provider_name', $provider_name ); } else { ?><img alt="<?php echo $provider_name ?>" title="<?php echo sprintf( _wsl__("Connect with %s", 'wordpress-social-login'), $provider_name ) ?>" src="<?php echo $assets_base_url . strtolower( $provider_id ) . '.png' ?>" /><?php } ?>
+		<a rel="nofollow" href="<?php echo $authenticate_url; ?>" title="<?php echo sprintf( _wsl__("Connect with %s", 'wordpress-social-login'), $provider_name ) ?>" class="wp-social-login-provider wp-social-login-provider-<?php echo strtolower( $provider_id ); ?>" data-provider="<?php echo $provider_id ?>" role="button">
+			<?php if( $social_icon_set == 'none' ){ echo apply_filters( 'wsl_render_auth_widget_alter_provider_name', $provider_name ); } else { ?><img alt="<?php echo $provider_name ?>" src="<?php echo $assets_base_url . strtolower( $provider_id ) . '.png' ?>" aria-hidden="true" /><?php } ?>
 
 		</a>
 <?php
@@ -523,10 +545,10 @@ add_action( 'login_enqueue_scripts', 'wsl_add_stylesheets' );
 function wsl_add_javascripts()
 {
 	$wsl_settings_use_popup = get_option( 'wsl_settings_use_popup' );
-    
+
     // if a user is visiting using a mobile device, WSL will fall back to more in page
 	$wsl_settings_use_popup = function_exists( 'wp_is_mobile' ) ? wp_is_mobile() ? 2 : $wsl_settings_use_popup : $wsl_settings_use_popup;
-	
+
 	if( $wsl_settings_use_popup != 1 )
 	{
 		return null;

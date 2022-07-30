@@ -1,17 +1,17 @@
 <?php
+
+use Give\Framework\PaymentGateways\PaymentGatewayRegister;
+
 /**
  * Insert donor comment to donation.
  *
+ * @since 2.21.0 remove anonymous
  * @since 2.2.0
  *
- * @param int   $donation_id
- * @param array $donation_data
+ * @param  int  $donation_id
+ * @param  array  $donation_data
  */
 function __give_insert_donor_donation_comment( $donation_id, $donation_data ) {
-	$is_anonymous_donation = isset( $_POST['give_anonymous_donation'] )
-		? absint( $_POST['give_anonymous_donation'] )
-		: 0;
-
 	if ( ! empty( $_POST['give_comment'] ) ) {
 		$comment_meta = array( 'author_email' => $donation_data['user_info']['email'] );
 
@@ -27,11 +27,10 @@ function __give_insert_donor_donation_comment( $donation_id, $donation_data ) {
 			$comment_meta
 		);
 	}
-
-	give_update_meta( $donation_id, '_give_anonymous_donation', $is_anonymous_donation );
 }
 
 add_action( 'give_insert_payment', '__give_insert_donor_donation_comment', 10, 2 );
+
 
 
 /**
@@ -91,3 +90,27 @@ function __give_remove_donor_donation_comment( $donation_id ) {
 }
 
 add_action( 'give_payment_deleted', '__give_remove_donor_donation_comment', 10 );
+
+
+/**
+ * Update anonymous donation for legacy gateways
+ *
+ * @since 2.21.3
+ *
+ * @retrun void
+ */
+function giveUpdateAnonymousDonationForLegacyGateways(int $donationId)
+{
+    $gatewayId = give_get_meta($donationId,'_give_payment_gateway', true);
+
+    /** @var PaymentGatewayRegister $registrar */
+    $registrar = give(PaymentGatewayRegister::class);
+
+    if (!$registrar->hasPaymentGateway($gatewayId)){
+        $isAnonymousDonation = isset( $_POST['give_anonymous_donation'] ) ? absint( give_clean($_POST['give_anonymous_donation']) ) : 0;
+
+        give_update_meta( $donationId, '_give_anonymous_donation', $isAnonymousDonation );
+    }
+}
+
+add_action('give_insert_payment', 'giveUpdateAnonymousDonationForLegacyGateways');

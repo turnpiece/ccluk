@@ -228,7 +228,7 @@ class BigInteger
      * ?>
      * </code>
      *
-     * @param $x base-10 number or base-$base number if $base set.
+     * @param int|string|resource $x base-10 number or base-$base number if $base set.
      * @param int $base
      * @return \phpseclib\Math\BigInteger
      * @access public
@@ -247,7 +247,7 @@ class BigInteger
                     \define('MATH_BIGINTEGER_MODE', self::MODE_INTERNAL);
             }
         }
-        if (\extension_loaded('openssl') && !\defined('MATH_BIGINTEGER_OPENSSL_DISABLE') && !\defined('MATH_BIGINTEGER_OPENSSL_ENABLED')) {
+        if (\function_exists('phpinfo') && \extension_loaded('openssl') && !\defined('MATH_BIGINTEGER_OPENSSL_DISABLE') && !\defined('MATH_BIGINTEGER_OPENSSL_ENABLED')) {
             // some versions of XAMPP have mismatched versions of OpenSSL which causes it not to work
             $versions = array();
             // avoid generating errors (even with suppression) when phpinfo() is disabled (common in production systems)
@@ -591,12 +591,12 @@ class BigInteger
     {
         $hex = $this->toHex($twos_compliment);
         $bits = '';
-        for ($i = \strlen($hex) - 8, $start = \strlen($hex) & 7; $i >= $start; $i -= 8) {
-            $bits = \str_pad(\decbin(\hexdec(\substr($hex, $i, 8))), 32, '0', \STR_PAD_LEFT) . $bits;
+        for ($i = \strlen($hex) - 6, $start = \strlen($hex) % 6; $i >= $start; $i -= 6) {
+            $bits = \str_pad(\decbin(\hexdec(\substr($hex, $i, 6))), 24, '0', \STR_PAD_LEFT) . $bits;
         }
         if ($start) {
             // hexdec('') == 0
-            $bits = \str_pad(\decbin(\hexdec(\substr($hex, 0, $start))), 8, '0', \STR_PAD_LEFT) . $bits;
+            $bits = \str_pad(\decbin(\hexdec(\substr($hex, 0, $start))), 8 * $start, '0', \STR_PAD_LEFT) . $bits;
         }
         $result = $this->precision > 0 ? \substr($bits, -$this->precision) : \ltrim($bits, '0');
         if ($twos_compliment && $this->compare(new static()) > 0 && $this->precision <= 0) {
@@ -1440,7 +1440,7 @@ class BigInteger
             $RSAPublicKey = \chr(3) . $this->_encodeASN1Length(\strlen($RSAPublicKey)) . $RSAPublicKey;
             $encapsulated = \pack('Ca*a*', 48, $this->_encodeASN1Length(\strlen($rsaOID . $RSAPublicKey)), $rsaOID . $RSAPublicKey);
             $RSAPublicKey = "-----BEGIN PUBLIC KEY-----\r\n" . \chunk_split(\base64_encode($encapsulated)) . '-----END PUBLIC KEY-----';
-            $plaintext = \str_pad($this->toBytes(), \strlen($n->toBytes(\true)) - 1, "\0", \STR_PAD_LEFT);
+            $plaintext = \str_pad($this->toBytes(), \strlen($n->toBytes(\true)) - 1, "\x00", \STR_PAD_LEFT);
             if (\openssl_public_encrypt($plaintext, $result, $RSAPublicKey, \OPENSSL_NO_PADDING)) {
                 return new static($result, 256);
             }
@@ -1680,7 +1680,7 @@ class BigInteger
      *
      * @see self::_slidingWindow()
      * @access private
-     * @param \phpseclib\Math\BigInteger
+     * @param \phpseclib\Math\BigInteger $n
      * @return \phpseclib\Math\BigInteger
      */
     function _mod2($n)
@@ -2270,7 +2270,7 @@ class BigInteger
      * Note how the same comparison operator is used.  If you want to test for equality, use $x->equals($y).
      *
      * @param \phpseclib\Math\BigInteger $y
-     * @return int < 0 if $this is less than $y; > 0 if $this is greater than $y, and 0 if they are equal.
+     * @return int that is < 0 if $this is less than $y; > 0 if $this is greater than $y, and 0 if they are equal.
      * @access public
      * @see self::equals()
      * @internal Could return $this->subtract($x), but that's not as fast as what we do do.
@@ -2613,14 +2613,14 @@ class BigInteger
      *
      * Byte length is equal to $length. Uses \phpseclib\Crypt\Random if it's loaded and mt_rand if it's not.
      *
-     * @param int $length
+     * @param int $size
      * @return \phpseclib\Math\BigInteger
      * @access private
      */
     function _random_number_helper($size)
     {
         if (\class_exists('Beehive\\phpseclib\\Crypt\\Random')) {
-            $random = \Beehive\phpseclib\Crypt\Random::string($size);
+            $random = Random::string($size);
         } else {
             $random = '';
             if ($size & 1) {
@@ -2692,7 +2692,7 @@ class BigInteger
 
             http://crypto.stackexchange.com/questions/5708/creating-a-small-number-from-a-cryptographically-secure-random-string
         */
-        $random_max = new static(\chr(1) . \str_repeat("\0", $size), 256);
+        $random_max = new static(\chr(1) . \str_repeat("\x00", $size), 256);
         $random = $this->_random_number_helper($size);
         list($max_multiple) = $random_max->divide($max);
         $max_multiple = $max_multiple->multiply($max);
@@ -3041,7 +3041,7 @@ class BigInteger
      *
      * Removes leading zeros and truncates (if necessary) to maintain the appropriate precision
      *
-     * @param \phpseclib\Math\BigInteger
+     * @param \phpseclib\Math\BigInteger $result
      * @return \phpseclib\Math\BigInteger
      * @see self::_trim()
      * @access private
@@ -3106,8 +3106,8 @@ class BigInteger
     /**
      * Array Repeat
      *
-     * @param $input Array
-     * @param $multiplier mixed
+     * @param array $input
+     * @param mixed $multiplier
      * @return array
      * @access private
      */
@@ -3120,8 +3120,8 @@ class BigInteger
      *
      * Shifts binary strings $shift bits, essentially multiplying by 2**$shift.
      *
-     * @param $x String
-     * @param $shift Integer
+     * @param string $x (by reference)
+     * @param int $shift
      * @return string
      * @access private
      */
@@ -3148,8 +3148,8 @@ class BigInteger
      *
      * Shifts binary strings $shift bits, essentially dividing by 2**$shift and returning the remainder.
      *
-     * @param $x String
-     * @param $shift Integer
+     * @param string $x (by referenc)
+     * @param int $shift
      * @return string
      * @access private
      */

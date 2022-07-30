@@ -1,408 +1,750 @@
-# Copyright (C) 2016 Cookie Consent
-# This file is distributed under the same license as the Cookie Consent package.
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Cookie Consent 2.0.3\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/uk-cookie-"
-"consent\n"
-"POT-Creation-Date: 2016-01-12 23:15:34+00:00\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Project-Id-Version: Termly.io\n"
+"POT-Creation-Date: 2021-07-19 12:33-0700\n"
+"PO-Revision-Date: 2021-07-19 12:33-0700\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"X-Generator: Poedit 2.4.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: uk-cookie-consent.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+"X-Poedit-SearchPathExcluded-1: node_modules\n"
 
-#. #-#-#-#-#  uk-cookie-consent.pot (Cookie Consent 2.0.3)  #-#-#-#-#
-#. Plugin Name of the plugin/theme
-#: admin/class-ctcc-admin.php:56 admin/class-ctcc-admin.php:630
-#: public/customizer.php:17
-msgid "Cookie Consent"
+#: includes/controllers/class-app-controller.php:55
+#: includes/controllers/class-app-controller.php:56
+msgid "Account"
 msgstr ""
 
-#: admin/class-ctcc-admin.php:65
-msgid "General settings"
+#: includes/controllers/class-app-controller.php:75
+#: includes/views/upgrade-notice-sidebar.php:4
+msgid "Upgrade to Termly Pro"
 msgstr ""
 
-#: admin/class-ctcc-admin.php:72
-msgid "Close"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:80
-msgid "First Page Only"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:88
-msgid "Notification Duration"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:96
-msgid "Cookie Expiry"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:104
-msgid "Cookie Version"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:126
-msgid "Content settings"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:133
-msgid "Heading Text"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:141
-msgid "Notification Text"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:149
-msgid "More Info Text"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:157
-msgid "More Info Page"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:165
-msgid "More Info URL"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:173
-msgid "More Info Target"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:181
-msgid "Accept Text"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:203
-msgid "Styles settings"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:210 public/customizer.php:34
-msgid "Position"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:218 public/customizer.php:58
-msgid "Container Class"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:226
-msgid "Include Stylesheet"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:234 public/customizer.php:90
-msgid "Rounded Corners"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:242 public/customizer.php:106
-msgid "Drop Shadow"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:250 public/customizer.php:122
-msgid "Display Button With Text"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:258 public/customizer.php:138
-msgid "Use X Close"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:266 public/customizer.php:154
-msgid "Text Color"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:274 admin/class-ctcc-admin.php:306
-#: public/customizer.php:170
-msgid "Background Color"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:282 public/customizer.php:186
-msgid "Link Color"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:290 public/customizer.php:202
-msgid "Button Color"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:298 public/customizer.php:218
-msgid "Button Background"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:339 admin/class-ctcc-admin.php:349
-msgid "Cookies"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:350
-msgid "This site uses cookies: "
-msgstr ""
-
-#: admin/class-ctcc-admin.php:351
-msgid "Okay, thanks"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:352
-msgid "Find out more."
-msgstr ""
-
-#: admin/class-ctcc-admin.php:411
-msgid "On Click"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:412
-msgid "Timed"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:414
-msgid "How you want the user to close the notification"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:421
+#: includes/controllers/class-app-controller.php:127
 msgid ""
-"Select this to show the notification only on the first page the user visits"
+"The Termly plugin has been reset and the Termly services have been "
+"disconnected."
 msgstr ""
 
-#: admin/class-ctcc-admin.php:428
+#: includes/controllers/class-banner-settings-controller.php:29
+#: includes/controllers/class-banner-settings-controller.php:30
+#: includes/views/banner-settings.php:18
+msgid "Banner Settings"
+msgstr ""
+
+#: includes/controllers/class-cookie-management-controller.php:26
+#: includes/controllers/class-cookie-management-controller.php:27
+#: includes/views/cookie-management.php:19
+msgid "Cookie Management"
+msgstr ""
+
+#: includes/controllers/class-edit-cookie.php:43
+#: includes/views/edit-cookie.php:120
+msgid "Edit Cookie"
+msgstr ""
+
+#: includes/controllers/class-edit-cookie.php:140
+msgid "Please fill out all required fields"
+msgstr ""
+
+#: includes/controllers/class-edit-cookie.php:214
+msgid "Cookie updated"
+msgstr ""
+
+#: includes/controllers/class-edit-cookie.php:222
+msgid "Cookie update failed"
+msgstr ""
+
+#: includes/controllers/class-edit-cookie.php:248
+msgid "Cookie added"
+msgstr ""
+
+#: includes/controllers/class-edit-cookie.php:262
+msgid "Adding cookie failed"
+msgstr ""
+
+#: includes/controllers/class-policies-controller.php:25
+#: includes/controllers/class-policies-controller.php:26
+#: includes/views/policies.php:19
+msgid "Policies"
+msgstr ""
+
+#: includes/controllers/class-site-scan-controller.php:52
+msgid "Schedule Automatic Scans"
+msgstr ""
+
+#: includes/controllers/class-site-scan-controller.php:97
+msgid "I want to automatically scan my website"
+msgstr ""
+
+#: includes/controllers/class-site-scan-controller.php:101
+msgid "Every 3 Months"
+msgstr ""
+
+#: includes/controllers/class-site-scan-controller.php:102
+msgid "Every Month"
+msgstr ""
+
+#: includes/controllers/class-site-scan-controller.php:103
+msgid "Every Week"
+msgstr ""
+
+#: includes/controllers/class-site-scan-controller.php:113
+#: includes/controllers/class-site-scan-controller.php:114
+#: includes/views/site-scan.php:20
+msgid "Site Scan"
+msgstr ""
+
+#: includes/controllers/class-site-scan-controller.php:211
+msgid "No Scans Available"
+msgstr ""
+
+#: includes/controllers/class-site-scan-controller.php:217
+#, php-format
+msgid "Last scanned on %s"
+msgstr ""
+
+#: includes/controllers/class-site-scan-results-list-table.php:109
+msgid "No cookies found."
+msgstr ""
+
+#: includes/controllers/class-site-scan-results-list-table.php:122
+#: includes/controllers/class-site-scan-results-list-table.php:352
+msgid "Delete Permanently"
+msgstr ""
+
+#: includes/controllers/class-site-scan-results-list-table.php:139
+msgid "Cookie Name"
+msgstr ""
+
+#: includes/controllers/class-site-scan-results-list-table.php:140
+msgid "Description"
+msgstr ""
+
+#: includes/controllers/class-site-scan-results-list-table.php:141
+#: includes/views/edit-cookie.php:15
+msgid "Category"
+msgstr ""
+
+#: includes/controllers/class-site-scan-results-list-table.php:142
+msgid "Domain"
+msgstr ""
+
+#: includes/controllers/class-site-scan-results-list-table.php:143
+msgid "Status"
+msgstr ""
+
+#: includes/controllers/class-site-scan-results-list-table.php:233
+msgid "Filter by category"
+msgstr ""
+
+#: includes/controllers/class-site-scan-results-list-table.php:259
+msgid "Filter by domain"
+msgstr ""
+
+#: includes/controllers/class-site-scan-results-list-table.php:293
+msgid "Filter"
+msgstr ""
+
+#. translators: %s: Cookie title.
+#: includes/controllers/class-site-scan-results-list-table.php:341
+#, php-format
+msgid "Edit &#8220;%s&#8221;"
+msgstr ""
+
+#: includes/controllers/class-site-scan-results-list-table.php:342
+msgid "Edit"
+msgstr ""
+
+#. translators: %s: Cookie title.
+#: includes/controllers/class-site-scan-results-list-table.php:351
+#, php-format
+msgid "Delete &#8220;%s&#8221; permanently"
+msgstr ""
+
+#. translators: %s: Cookie name.
+#: includes/controllers/class-site-scan-results-list-table.php:384
+#, php-format
+msgid "Select %s"
+msgstr ""
+
+#: includes/controllers/class-site-scan-results-list-table.php:424
+msgid "Existing"
+msgstr ""
+
+#: includes/controllers/class-site-scan-results-list-table.php:429
+msgid "New"
+msgstr ""
+
+#: includes/controllers/class-site-scan-results-list-table.php:577
+msgid "The following cookie has been deleted"
+msgstr ""
+
+#: includes/controllers/class-site-scan-results-list-table.php:578
+msgid "The following cookies have been deleted"
+msgstr ""
+
+#: includes/controllers/class-site-scan-results-list-table.php:591
+msgid "Unable to delete the following cookie"
+msgstr ""
+
+#: includes/controllers/class-site-scan-results-list-table.php:592
+msgid "Unable to delete the following cookies"
+msgstr ""
+
+#: includes/controllers/class-termly-api-controller.php:26
+msgid "Site Name / URL"
+msgstr ""
+
+#: includes/controllers/class-termly-api-controller.php:34
+msgid "API Key"
+msgstr ""
+
+#: includes/controllers/class-termly-api-controller.php:46
+msgid "Business Information"
+msgstr ""
+
+#: includes/controllers/class-termly-api-controller.php:73
+msgid "Disconnect Site"
+msgstr ""
+
+#: includes/controllers/class-termly-api-controller.php:84
+msgid "First Name"
+msgstr ""
+
+#: includes/controllers/class-termly-api-controller.php:85
+msgid "Enter your first name"
+msgstr ""
+
+#: includes/controllers/class-termly-api-controller.php:88
+msgid "Last Name"
+msgstr ""
+
+#: includes/controllers/class-termly-api-controller.php:89
+msgid "Enter your last name"
+msgstr ""
+
+#: includes/controllers/class-termly-api-controller.php:92
+msgid "Email"
+msgstr ""
+
+#: includes/controllers/class-termly-api-controller.php:93
+msgid "Enter your email address"
+msgstr ""
+
+#: includes/controllers/class-termly-api-controller.php:96
+msgid "Password"
+msgstr ""
+
+#: includes/controllers/class-termly-api-controller.php:97
+msgid "Enter your password"
+msgstr ""
+
+#: includes/controllers/class-termly-api-controller.php:100
+msgid "Confirm Password"
+msgstr ""
+
+#: includes/controllers/class-termly-api-controller.php:101
+msgid "Confirm your password"
+msgstr ""
+
+#: includes/controllers/class-termly-api-controller.php:110
 msgid ""
-"If you chose Timer as the close method, enter how many seconds the "
-"notification should display for"
+"I want to receive news, feature updates, discounts, and offers from Termly."
 msgstr ""
 
-#: admin/class-ctcc-admin.php:435
-msgid "The number of days that the cookie is set for"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:442
+#: includes/controllers/class-termly-api-controller.php:118
 msgid ""
-"A version number for the cookie - update this to invalidate the cookie and "
-"force all users to view the notification again"
+"I acknowledge that I have read and agree to the <a href=\"https://termly.io/"
+"our-terms-of-use/\" target=\"_blank\">Terms and Conditions</a> and <a href="
+"\"https://termly.io/our-privacy-policy/\" target=\"_blank\">Privacy Policy</"
+"a>."
 msgstr ""
 
-#: admin/class-ctcc-admin.php:453
+#: includes/models/class-site-scan-model.php:40
+msgid "Your scan settings have been successfully saved."
+msgstr ""
+
+#: includes/models/class-site-scan-model.php:45
+msgid "Your scan settings have been successfully updated."
+msgstr ""
+
+#: includes/models/class-site-scan-model.php:52
+#: includes/models/class-termly-api-model.php:144
+msgid "The API Key entered is not valid."
+msgstr ""
+
+#: includes/models/class-termly-api-model.php:117
+msgid "The API Key has been successfully saved."
+msgstr ""
+
+#: includes/models/class-termly-api-model.php:123
+msgid "The API Key has been successfully updated."
+msgstr ""
+
+#: includes/models/class-termly-api-model.php:172
+msgid "The API Key can not be empty."
+msgstr ""
+
+#: includes/models/class-termly-api-model.php:203
+msgid "You must agree to the terms before creating an account."
+msgstr ""
+
+#: includes/models/class-termly-api-model.php:209
+msgid "All text fields must be filled in completely."
+msgstr ""
+
+#: includes/models/class-termly-api-model.php:250
 msgid ""
-"The heading text - only applies if you are not using a top or bottom bar"
+"You have signed up successfully! You can now start scanning your website."
 msgstr ""
 
-#: admin/class-ctcc-admin.php:460
-msgid "The default text to indicate that your site uses cookies"
+#: includes/models/class-termly-api-model.php:278
+msgid "Your account could not be created for the following reasons:"
 msgstr ""
 
-#: admin/class-ctcc-admin.php:467
-msgid "The default text to dismiss the notification"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:474
-msgid "The default text to use to link to a page providing further information"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:490
-msgid "The page containing further information about your cookie policy"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:497
+#: includes/models/class-termly-api-model.php:329
 msgid ""
-"You can add an absolute URL here to override the More Info Page setting "
-"above. Use this to link to an external website for further information about "
-"cookies."
+"You must agree to the update confirmation before updating your information."
 msgstr ""
 
-#: admin/class-ctcc-admin.php:504
-msgid "New Tab"
+#: includes/models/class-termly-api-model.php:371
+msgid "Your business information has been updated."
 msgstr ""
 
-#: admin/class-ctcc-admin.php:505
-msgid "Same Tab"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:507
-msgid "Open the More Information page in the same or new tab."
-msgstr ""
-
-#: admin/class-ctcc-admin.php:518 public/customizer.php:36
-msgid "Top Bar"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:519 public/customizer.php:37
-msgid "Bottom Bar"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:520 public/customizer.php:38
-msgid "Top Left Block"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:521 public/customizer.php:39
-msgid "Top Right Block"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:522 public/customizer.php:40
-msgid "Bottom Left Block"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:523 public/customizer.php:41
-msgid "Bottom Right Block"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:525
-msgid "Where the notification should appear"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:532
+#: includes/models/class-termly-api-model.php:404
 msgid ""
-"You can add an optional wrapper class, eg container, here to align the "
-"notification text with the rest of your content"
+"Your business information could not be updated because the request "
+"encountered an error. Please try again shortly.."
 msgstr ""
 
-#: admin/class-ctcc-admin.php:539
-msgid "Deselect this to dequeue the plugin stylesheet"
+#: includes/views/banner-settings.php:15
+#: includes/views/cookie-management.php:16 includes/views/edit-cookie.php:115
+#: includes/views/main-menu.php:16 includes/views/main-menu.php:19
+#: includes/views/policies.php:16 includes/views/sign-up.php:16
+#: includes/views/sign-up.php:19 includes/views/site-scan.php:17
+msgid "Termly"
 msgstr ""
 
-#: admin/class-ctcc-admin.php:546
-msgid "Round the corners on the block (doesn't apply to the top or bottom bar)"
+#: includes/views/banner-settings.php:21
+#: includes/views/cookie-management.php:28 includes/views/edit-cookie.php:132
+#: includes/views/main-menu.php:22 includes/views/policies.php:22
+#: includes/views/sign-up.php:22 includes/views/site-scan.php:37
+msgid "Go to Termly Dashboard"
 msgstr ""
 
-#: admin/class-ctcc-admin.php:553
-msgid "Add drop shadow to the block (doesn't apply to the top or bottom bar)"
+#: includes/views/banner-settings.php:36
+msgid "Consent Banner"
 msgstr ""
 
-#: admin/class-ctcc-admin.php:560
-msgid "Display the confirmation button with notification text"
+#: includes/views/banner-settings.php:44
+msgid "Customize Banner"
 msgstr ""
 
-#: admin/class-ctcc-admin.php:567
-msgid "Remove confirmation button and use 'X' icon instead"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:574
-msgid "The text color on the notification"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:581
-msgid "The background color for the notification"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:588
-msgid "The link color on the notification"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:595
-msgid "The text color on the notification button"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:602
-msgid "The background color on the notification button"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:607
-msgid "<p>Basic settings</p>"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:611
-msgid "<p>Update the content displayed to the user</p>"
-msgstr ""
-
-#: admin/class-ctcc-admin.php:615
+#: includes/views/banner-settings.php:48
 msgid ""
-"<p>Change the styles here if you like - but it's better in the Customizer</p>"
+"The Consent Banner lets you request consent for serving tracking scripts to "
+"your site visitors. It automatically adjusts to support the latest "
+"international regulation and includes a preference center where visitors can "
+"manage their consent preferences."
 msgstr ""
 
-#: admin/class-ctcc-admin.php:632
-msgid "General"
+#: includes/views/banner-settings.php:61
+msgid "Enable Consent Banner"
 msgstr ""
 
-#: admin/class-ctcc-admin.php:633
-msgid "Content"
+#: includes/views/banner-settings.php:64
+msgid "Auto Blocker"
 msgstr ""
 
-#: admin/class-ctcc-admin.php:634
-msgid "Styles"
+#: includes/views/banner-settings.php:69
+#, php-format
+msgid ""
+"<a href=\"%1$s\" target=\"_blank\">Auto Blocker</a> will automatically "
+"prevent scripts from running on your site until a visitor consents to their "
+"delivery. If you do not use Auto Blocker, make sure to set up <a href=\"%2$s"
+"\" target=\"_blank\">manual blocking</a> to remain compliant."
 msgstr ""
 
-#: admin/class-ctcc-admin.php:656
-msgid "Reset plugin defaults"
+#: includes/views/banner-settings.php:90
+msgid "Enable Auto Blocker"
 msgstr ""
 
-#: public/customizer.php:43
-msgid "Position and placement."
+#: includes/views/banner-settings.php:93
+msgid "Preference Center Button"
 msgstr ""
 
-#: public/customizer.php:59
-msgid "Optional wrapper class."
+#: includes/views/banner-settings.php:94
+msgid ""
+"Your site visitors must be able to change their cookie preferences at any "
+"time. Add the code below to your website to add a button that will open your "
+"Cookie Preference Center, where your visitors will be able to easily change "
+"their consent settings."
 msgstr ""
 
-#: public/customizer.php:74
-msgid "Enqueue Styles"
+#: includes/views/banner-settings.php:97
+msgid "HTML snippet for the preference center button"
 msgstr ""
 
-#: public/customizer.php:75
-msgid "Deselect this to dequeue the plugin stylesheet."
+#: includes/views/banner-settings.php:104
+msgid "Copy to clipboard"
 msgstr ""
 
-#: public/customizer.php:91
-msgid "Round the corners on the block."
+#: includes/views/cookie-management.php:24 includes/views/edit-cookie.php:127
+msgid "New Cookie"
 msgstr ""
 
-#: public/customizer.php:107
-msgid "Add drop shadow to the block."
+#: includes/views/cookie-management.php:45
+#, php-format
+msgid ""
+"Your site needs a cookie policy to remain compliant. View <a href=\"%s"
+"\">policies</a> to create one."
 msgstr ""
 
-#: public/customizer.php:123
-msgid "Deselect to float button to right."
+#: includes/views/cookie-management.php:67
+msgid "Search Cookies"
 msgstr ""
 
-#: public/customizer.php:139
-msgid "Replace confirmation button with 'X' icon."
+#: includes/views/edit-cookie.php:9
+msgid "Name"
 msgstr ""
 
-#: public/customizer.php:155
-msgid "Text color for your notification bar."
+#: includes/views/edit-cookie.php:18
+msgid "Essential"
 msgstr ""
 
-#: public/customizer.php:171
-msgid "Background color for your notification bar."
+#: includes/views/edit-cookie.php:19
+msgid "Performance and functionality"
 msgstr ""
 
-#: public/customizer.php:187
-msgid "Link color for your notification bar."
+#: includes/views/edit-cookie.php:20
+msgid "Analytics and customization"
 msgstr ""
 
-#: public/customizer.php:203
-msgid "Text color for your notification bar button."
+#: includes/views/edit-cookie.php:21
+msgid "Advertising"
 msgstr ""
 
-#: public/customizer.php:219
-msgid "Background color for your notification bar button."
+#: includes/views/edit-cookie.php:22
+msgid "Social networking"
 msgstr ""
 
-#: uk-cookie-consent.php:54
+#: includes/views/edit-cookie.php:23
+msgid "Unclassified"
+msgstr ""
+
+#: includes/views/edit-cookie.php:29
+msgid "Expires on"
+msgstr ""
+
+#: includes/views/edit-cookie.php:35
+msgid "Type"
+msgstr ""
+
+#: includes/views/edit-cookie.php:38
+msgid "Http Cookie"
+msgstr ""
+
+#: includes/views/edit-cookie.php:39
+msgid "Html Local Storage"
+msgstr ""
+
+#: includes/views/edit-cookie.php:40
+msgid "Html Session Storage"
+msgstr ""
+
+#: includes/views/edit-cookie.php:41
+msgid "Server Cookie"
+msgstr ""
+
+#: includes/views/edit-cookie.php:42
+msgid "Pixel Tracker"
+msgstr ""
+
+#: includes/views/edit-cookie.php:43
+msgid "IndexedDB"
+msgstr ""
+
+#: includes/views/edit-cookie.php:49
+msgid "Country"
+msgstr ""
+
+#: includes/views/edit-cookie.php:57
+msgid "Provider"
+msgstr ""
+
+#: includes/views/edit-cookie.php:63
+msgid "Service"
+msgstr ""
+
+#: includes/views/edit-cookie.php:69
+msgid "Service Privacy Policy"
+msgstr ""
+
+#: includes/views/edit-cookie.php:75
+msgid "Resource URL"
+msgstr ""
+
+#: includes/views/edit-cookie.php:81
+msgid "Example value"
+msgstr ""
+
+#: includes/views/edit-cookie.php:87
+msgid "Purpose"
+msgstr ""
+
+#: includes/views/edit-cookie.php:122
+msgid "Add Cookie"
+msgstr ""
+
+#: includes/views/edit-cookie.php:259
+msgid "Cancel"
+msgstr ""
+
+#: includes/views/edit-cookie.php:264
+msgid "Save &amp; Add Another"
+msgstr ""
+
+#: includes/views/edit-cookie.php:268
+msgid "Save"
+msgstr ""
+
+#: includes/views/main-menu.php:39
+msgid "Welcome to Termly"
+msgstr ""
+
+#: includes/views/main-menu.php:40
+msgid ""
+"You have successfully connected your Termly account. You can go to your "
+"Termly Dashboard at any time to manage your account and access the full "
+"suite of legal and data compliance tools."
+msgstr ""
+
+#: includes/views/new-scan-error-notice.php:11
+msgid "A new Cookie Scan could not be initiated because of an error."
+msgstr ""
+
+#: includes/views/new-scan-success-notice.php:11
+msgid ""
+"Your cookie scan is in progress! Most scans take less than five minutes, but "
+"scan time depends on the size of your website and subdomains. You'll be "
+"notified via email when your scan is complete."
+msgstr ""
+
+#: includes/views/policies.php:33
+msgid ""
+"Generate free attorney-crafted documents and policies that can easily be "
+"revised over time as regulation and your business changes. You can customize "
+"the look and feel to match your brand, then immediately embed them on your "
+"site."
+msgstr ""
+
+#: includes/views/policies.php:43
 msgid "Cookie Policy"
 msgstr ""
 
-#: uk-cookie-consent.php:55
+#: includes/views/policies.php:45
 msgid ""
-"This site uses cookies - small text files that are placed on your machine to "
-"help the site provide a better user experience. In general, cookies are used "
-"to retain user preferences, store information for things like shopping "
-"carts, and provide anonymised tracking data to third party applications like "
-"Google Analytics. As a rule, cookies will make your browsing experience "
-"better. However, you may prefer to disable cookies on this site and on "
-"others. The most effective way to do this is to disable cookies in your "
-"browser. We suggest consulting the Help section of your browser or taking a "
-"look at <a href=\"http://www.aboutcookies.org\">the About Cookies website</"
-"a> which offers guidance for all modern browsers"
+"Once your cookies have been categorized, our tool will automatically create "
+"a cookie policy perfectly tailored to your business."
+msgstr ""
+
+#: includes/views/policies.php:54 includes/views/policies.php:78
+#: includes/views/policies.php:102 includes/views/policies.php:127
+#: includes/views/policies.php:151
+msgid "Manage"
+msgstr ""
+
+#: includes/views/policies.php:67
+msgid "Privacy Policy"
+msgstr ""
+
+#: includes/views/policies.php:69
+msgid ""
+"Fit to meet the requirements of privacy laws and third-party platforms, "
+"including: GDPR, CCPA, CalOPPA, Google Analytics, AdSense, ecommerce laws."
+msgstr ""
+
+#: includes/views/policies.php:91
+msgid "Terms and Conditions"
+msgstr ""
+
+#: includes/views/policies.php:93
+msgid ""
+"Generate terms and conditions designed for your blog, website, app, SaaS, or "
+"ecommerce site. Establish guidelines and rights for your platform. "
+msgstr ""
+
+#: includes/views/policies.php:116
+msgid "Disclaimer"
+msgstr ""
+
+#: includes/views/policies.php:118
+msgid ""
+"Whatever disclosure policy you need — from a medical or affiliate disclaimer "
+"to a basic blog disclaimer — our generator has you covered."
+msgstr ""
+
+#: includes/views/policies.php:140
+msgid "Return Policy"
+msgstr ""
+
+#: includes/views/policies.php:142
+msgid ""
+"Our return policy generator tailors each policy specifically to your "
+"platform, no matter the size, type, or location of the business you operate."
+msgstr ""
+
+#: includes/views/sign-up-notice.php:11
+msgid "Your API key will be inserted automatically after signing up."
+msgstr ""
+
+#: includes/views/sign-up.php:35 includes/views/sign-up.php:60
+msgid "Sign up for Termly"
+msgstr ""
+
+#: includes/views/sign-up.php:36
+msgid ""
+"The all-in-one site scanner, cookie management, consent banner and more. "
+"Designed to work with WordPress and keep you legally compliant. Create an "
+"account to to gain access to: "
+msgstr ""
+
+#: includes/views/sign-up.php:38
+msgid "Free GDPR-, CCPA-, and ePrivacy-compliant cookie consent banner"
+msgstr ""
+
+#: includes/views/sign-up.php:39
+msgid "Automatic cookie consent & preference tracking"
+msgstr ""
+
+#: includes/views/sign-up.php:40
+msgid "Free legal policy generator"
+msgstr ""
+
+#: includes/views/sign-up.php:42
+msgid "Sign up & Get API Key"
+msgstr ""
+
+#: includes/views/sign-up.php:46
+msgid "Already have a Termly account? Enter your API key below."
+msgstr ""
+
+#: includes/views/sign-up.php:51
+msgid "Save API Key"
+msgstr ""
+
+#: includes/views/sign-up.php:54
+msgid "Log in to the Termly app to retrieve your API key."
+msgstr ""
+
+#: includes/views/sign-up.php:54
+msgid "Learn more"
+msgstr ""
+
+#: includes/views/sign-up.php:69
+msgid "Create Account"
+msgstr ""
+
+#: includes/views/site-scan-update-notice.php:11
+msgid "Your current plan only provides quarterly cookie scans."
+msgstr ""
+
+#: includes/views/site-scan-update-notice.php:12
+msgid ""
+"To keep your banner up to date and ensure compliance, we recommend a minimum "
+"of weekly scans."
+msgstr ""
+
+#: includes/views/site-scan-update-notice.php:13
+msgid "View Plans"
+msgstr ""
+
+#: includes/views/site-scan.php:32
+msgid "Scan Now"
+msgstr ""
+
+#: includes/views/site-scan.php:48
+msgid "Cookie Scan Results"
+msgstr ""
+
+#: includes/views/site-scan.php:60
+msgid "Site Scan Settings"
+msgstr ""
+
+#: includes/views/site-scan.php:61
+msgid ""
+"Termly can automatically scan your site for cookies. Schedule regular scans "
+"to keep your consent banner compliant."
+msgstr ""
+
+#: includes/views/upgrade-notice-sidebar.php:7
+msgid "30 Day Money Back Guarantee"
+msgstr ""
+
+#: includes/views/upgrade-notice-sidebar.php:8
+msgid "Multi-Language Support"
+msgstr ""
+
+#: includes/views/upgrade-notice-sidebar.php:9
+msgid "Scheduled Cookie Scans"
+msgstr ""
+
+#: includes/views/upgrade-notice-sidebar.php:10
+msgid "Scroll-to-Consent Functionality"
+msgstr ""
+
+#: includes/views/upgrade-notice-sidebar.php:11
+msgid "More Customization and Automation Options"
+msgstr ""
+
+#: includes/views/upgrade-notice-sidebar.php:17
+msgid "Upgrade to Pro"
+msgstr ""
+
+#: includes/views/upgrade-notice-sidebar.php:21
+msgid "Compare Plans"
+msgstr ""
+
+#: uk-cookie-consent.php:28
+msgid "Your site does not meet the minimum PHP version to run this plugin."
+msgstr ""
+
+#: uk-cookie-consent.php:49
+msgid ""
+"Your site does not meet the minimum WordPress version to run this plugin."
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Termly.io"
 msgstr ""
 
 #. Plugin URI of the plugin/theme
-msgid "http://catapultthemes.com/cookie-consent/"
+msgid "https://termly.io/products/"
 msgstr ""
 
 #. Description of the plugin/theme
-msgid "The only cookie consent plugin you'll ever need."
+msgid ""
+"Our easy to use cookie consent plugin can assist in your GDPR and ePrivacy "
+"Directive compliance efforts."
 msgstr ""
 
 #. Author of the plugin/theme
-msgid "Catapult_Themes"
+msgid "termly"
 msgstr ""
 
 #. Author URI of the plugin/theme
-msgid "http://catapultthemes.com/"
+msgid "https://termly.io/"
 msgstr ""

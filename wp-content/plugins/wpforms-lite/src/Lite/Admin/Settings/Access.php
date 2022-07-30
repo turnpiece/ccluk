@@ -54,14 +54,14 @@ class Access {
 		// Lity.
 		wp_enqueue_style(
 			'wpforms-lity',
-			WPFORMS_PLUGIN_URL . 'assets/css/lity.min.css',
+			WPFORMS_PLUGIN_URL . 'assets/lib/lity/lity.min.css',
 			null,
 			'3.0.0'
 		);
 
 		wp_enqueue_script(
 			'wpforms-lity',
-			WPFORMS_PLUGIN_URL . 'assets/js/lity.min.js',
+			WPFORMS_PLUGIN_URL . 'assets/lib/lity/lity.min.js',
 			array( 'jquery' ),
 			'3.0.0',
 			true
@@ -87,7 +87,7 @@ class Access {
 			),
 		);
 
-		return wpforms_list_insert_after( $tabs, 'integrations', $tab );
+		return wpforms_list_insert_after( $tabs, 'geolocation', $tab );
 	}
 
 	/**
@@ -239,7 +239,7 @@ class Access {
 		$content = sprintf(
 			'<a href="%1$s" target="_blank" rel="noopener noreferrer" class="wpforms-upgrade-modal wpforms-btn wpforms-btn-lg wpforms-btn-orange">%2$s</a>',
 			esc_url( 'https://wpforms.com/lite-upgrade/?discount=LITEUPGRADE&utm_source=WordPress&utm_medium=settings-license&utm_campaign=liteplugin' ),
-			esc_html__( 'Upgrade to WPForms Now', 'wpforms-lite' )
+			esc_html__( 'Upgrade to WPForms Pro', 'wpforms-lite' )
 		);
 
 		return $content;

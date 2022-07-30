@@ -17,11 +17,11 @@ if ( ! function_exists( 'get_called_class' ) ) {
 	 * @return string class
 	 */
 	function get_called_class() {
-		$bt = debug_backtrace();
+		$bt    = debug_backtrace(); // phpcs:ignore --debug_backtrace is required for our use case.
 		$lines = file( $bt[1]['file'] );
 		preg_match(
 			'/([a-zA-Z0-9\_]+)::' . $bt[1]['function'] . '/',
-			$lines[ $bt[1]['line'] -1 ],
+			$lines[ $bt[1]['line'] - 1 ],
 			$matches
 		);
 		return $matches[1];
@@ -47,7 +47,7 @@ function shipper_hex2bin( $str ) {
 	if ( function_exists( 'hex2bin' ) ) { return hex2bin( $str ); }
 
 	$sbin = '';
-	$len = strlen( $str );
+	$len  = strlen( $str );
 	for ( $i = 0; $i < $len; $i += 2 ) {
 		$sbin .= pack( 'H*', substr( $str, $i, 2 ) );
 	}
@@ -64,22 +64,26 @@ function shipper_hex2bin( $str ) {
  * @return bool
  */
 function shipper_has_error( $errstr, $errors ) {
-	if ( ! is_array( $errors ) ) { $errors = array( $errors ); }
+	if ( ! is_array( $errors ) ) {
+		$errors = array( $errors );
+	}
 
 	$delimiter = Shipper_Model::SCOPE_DELIMITER;
 
 	foreach ( $errors as $error ) {
-		if ( ! is_wp_error( $error ) ) { continue; }
-		$code = $error->get_error_code();
+		if ( ! is_wp_error( $error ) ) {
+			continue;
+		}
 
-		$pos = stripos( $code, "{$errstr}{$delimiter}" );
+		$code = $error->get_error_code();
+		$pos  = stripos( $code, "{$errstr}{$delimiter}" );
 		if ( 0 === $pos ) {
 			// Position zero - we matched error up to delimiter.
 			return true;
 		}
 
 		$string = "{$delimiter}{$errstr}";
-		$pos = stripos( $code, $string );
+		$pos    = stripos( $code, $string );
 		if ( false !== $pos && strlen( $code ) === $pos + strlen( $string ) ) {
 			// We found the substring, and it matches from delimiter to EOS.
 			return true;
@@ -96,31 +100,59 @@ function shipper_has_error( $errstr, $errors ) {
  */
 function shipper_get_admin_user() {
 	$user = false;
-	if( is_user_logged_in() ) {
-		$user 	= wp_get_current_user();
+	if ( is_user_logged_in() ) {
+		$user = wp_get_current_user();
 	} else {
 		if ( is_multisite() ) {
 			$super_ids = array();
-			$supers = get_super_admins();
+			$supers    = get_super_admins();
 			foreach ( $supers as $super ) {
 				$user_data = get_user_by( 'login', $super );
 				array_push( $super_ids, $user_data->ID );
 			}
 
 			// Get the super admin that logged in most recently, in case Defender's Login Duration is on.
-			$admins = get_users( array( 'blog_id' => 0, 'include' => $super_ids, 'meta_key' => 'last_login_time', 'orderby' => 'meta_value', 'order' => 'DESC', 'number' => 1 ) );
+			$admins = get_users(
+				array(
+					'blog_id'  => 0,
+					'include'  => $super_ids,
+					'meta_key' => 'last_login_time', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+					'orderby'  => 'meta_value',
+					'order'    => 'DESC',
+					'number'   => 1,
+				)
+			);
 
 			// If no super admins were returned, no last_login_time is being recorded, so we can take whoever.
 			if ( empty( $admins ) ) {
-				$admins = get_users( array( 'blog_id' => 0, 'include' => $super_ids, 'number' => 1 ) );
+				$admins = get_users(
+					array(
+						'blog_id' => 0,
+						'include' => $super_ids,
+						'number'  => 1,
+					)
+				);
 			}
 		} else {
 			// Get the admin that logged in most recently, in case Defender's Login Duration is on.
-			$admins = get_users( array( 'role' => 'administrator', 'meta_key' => 'last_login_time', 'orderby' => 'meta_value', 'order' => 'DESC', 'number' => 1 ) );
+			$admins = get_users(
+				array(
+					'role'     => 'administrator',
+					'meta_key' => 'last_login_time', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+					'orderby'  => 'meta_value',
+					'order'    => 'DESC',
+					'number'   => 1,
+				)
+			);
 
 			// If no admins were returned, no last_login_time is being recorded, so we can take whoever.
 			if ( empty( $admins ) ) {
-				$admins = get_users( array( 'role' => 'administrator', 'number' => 1 ) );
+				$admins = get_users(
+					array(
+						'role'   => 'administrator',
+						'number' => 1,
+					)
+				);
 			}
 		}
 
@@ -144,11 +176,12 @@ function shipper_get_user_name( $user_id = false ) {
 	$user_id = ! empty( $user_id ) && is_numeric( $user_id )
 		? (int) $user_id
 		: get_current_user_id();
+
 	$user = new WP_User( $user_id );
 	$name = __( 'Anonymous', 'shipper' );
 
 	if ( $user->exists() && $user->has_prop( 'user_firstname' ) ) {
-		$fn = $user->get( 'user_firstname' );
+		$fn   = $user->get( 'user_firstname' );
 		$name = ! empty( $fn ) ? $fn : $user->get( 'display_name' );
 	}
 
@@ -217,7 +250,7 @@ function shipper_await_cancel( $identifier = '', $secs = 30, $step = 1 ) {
 		(int) ( (float) $step * $micro )
 	);
 
-	$locks = new Shipper_Helper_Locks;
+	$locks = new Shipper_Helper_Locks();
 
 	// Not within waiting range, all good.
 	if ( $max <= $tick ) {
@@ -225,7 +258,8 @@ function shipper_await_cancel( $identifier = '', $secs = 30, $step = 1 ) {
 	}
 
 	foreach ( range( 1, $max, $tick ) as $tock ) {
-		usleep( $tick );
+		// @RIPS\Annotation\Ignore
+		usleep( $tick ); // phpcs:ignore --usleep is required for our use case.
 		if ( $locks->has_lock( Shipper_Helper_Locks::LOCK_CANCEL ) ) {
 			return true; // Done if cancel-locked.
 		}
@@ -271,8 +305,7 @@ function shipper_get_site_uniqid( $prefix = '' ) {
 
 	return ! empty( $prefix )
 		? sprintf( '%s-%s', $prefix, $id )
-		: $id
-	;
+		: $id;
 }
 
 /**
@@ -284,11 +317,15 @@ function shipper_get_site_uniqid( $prefix = '' ) {
  */
 function shipper_is_dir_visible( $dir = '' ) {
 	// If nothing passed, assume cwd.
-	if ( empty( $dir ) ) { return true; }
+	if ( empty( $dir ) ) {
+		return true;
+	}
 
 	$dir = wp_normalize_path( realpath( $dir ) );
 	// No such directory, we should be good.
-	if ( empty( $dir ) ) { return false; }
+	if ( empty( $dir ) ) {
+		return false;
+	}
 
 	$rx = preg_quote( ABSPATH, '/' );
 
@@ -303,15 +340,19 @@ function shipper_is_dir_visible( $dir = '' ) {
  * @return string Empty string on failure, URL on success
  */
 function shipper_path_to_url( $dir ) {
-	if ( empty( $dir ) ) { return ''; }
+	if ( empty( $dir ) ) {
+		return '';
+	}
 
 	$dir = wp_normalize_path( realpath( $dir ) );
-	if ( empty( $dir ) ) { return ''; }
+	if ( empty( $dir ) ) {
+		return '';
+	}
 
 	$attempts = array(
 		preg_quote( WP_CONTENT_DIR, '/' ) => WP_CONTENT_URL,
-		preg_quote( WP_PLUGIN_DIR, '/' ) => WP_PLUGIN_URL,
-		preg_quote( ABSPATH, '/' ) => home_url(),
+		preg_quote( WP_PLUGIN_DIR, '/' )  => WP_PLUGIN_URL,
+		preg_quote( ABSPATH, '/' )        => home_url(),
 	);
 
 	foreach ( $attempts as $rx => $url ) {
@@ -346,10 +387,8 @@ function shipper_delete_file( $path ) {
  * @return string
  */
 function shipper_get_protocol_agnostic( $url, $is_clean = false ) {
-	$root = empty( $is_clean )
-		? '//'
-		: ''
-	;
+	$root = empty( $is_clean ) ? '//' : '';
+
 	return preg_replace( '/^https?:\/\//i', $root, $url );
 }
 
@@ -390,7 +429,7 @@ function shipper_flush_cache() {
  */
 function shipper_get_user_agent() {
 	return sprintf(
-		'Mozilla/5.0 (compatible; WPMU DEV Shipper/%1$s; +https://premium.wpmudev.org)',
+		'Mozilla/5.0 (compatible; WPMU DEV Shipper/%1$s; +https://wpmudev.com)',
 		SHIPPER_VERSION
 	);
 }
@@ -438,7 +477,7 @@ function shipper_get_dashboard_users() {
 	}
 
 	$dash_users = ! empty( $dash_users ) && is_array( $dash_users )
-		? $dash_users
+		? array_map( 'absint', $dash_users )
 		: array();
 
 	/**
@@ -468,9 +507,291 @@ function shipper_get_dashboard_users() {
  * @return array A list of user IDs.
  */
 function shipper_get_allowed_users() {
-	$opts = new Shipper_Model_Stored_Options;
-	return $opts->get(
-		Shipper_Model_Stored_Options::KEY_USER_ACCESS,
-		shipper_get_dashboard_users()
+	$opts = new Shipper_Model_Stored_Options();
+
+	return array_unique(
+		array_merge(
+			$opts->get( Shipper_Model_Stored_Options::KEY_USER_ACCESS, array() ),
+			shipper_get_dashboard_users()
+		)
 	);
+}
+
+/**
+ * Get dashboard user's username
+ *
+ * @since v1.2.3
+ *
+ * @return string
+ */
+function shipper_get_dashboard_username() {
+	if ( class_exists( 'WPMUDEV_Dashboard' )
+		&& ! empty( WPMUDEV_Dashboard::$api )
+		&& is_callable( array( WPMUDEV_Dashboard::$api, 'get_profile' ) )
+	) {
+		$profile = WPMUDEV_Dashboard::$api->get_profile();
+	}
+
+	return ! empty( $profile['profile']['user_name'] ) ? $profile['profile']['user_name'] : 'n/a';
+}
+
+/**
+ * Get dashboard api authentication endpoint
+ *
+ * @since 1.1.5
+ *
+ * @return string | null on failure
+ */
+function shipper_get_dashboard_authentication_url() {
+	if ( class_exists( 'WPMUDEV_Dashboard' )
+		&& ! empty( WPMUDEV_Dashboard::$api )
+		&& is_callable( array( WPMUDEV_Dashboard::$api, 'rest_url' ) )
+	) {
+		return WPMUDEV_Dashboard::$api->rest_url( 'authenticate' );
+	}
+}
+
+/**
+ * Get the WPMU DEV custom api server url.
+ *
+ * @since 1.2.12
+ *
+ * @return string
+ */
+function shipper_get_wpmudev_custom_api_server() {
+	return ( defined( 'WPMUDEV_CUSTOM_API_SERVER' ) && WPMUDEV_CUSTOM_API_SERVER ) ? WPMUDEV_CUSTOM_API_SERVER : 'https://wpmudev.com/';
+}
+
+/**
+ * Get the URL for google login.
+ *
+ * @param string $context
+ * @param array $query
+ *
+ * @return string
+ */
+function shipper_get_site_url( $context = 'domain', $query = array()  ) {
+	if ( 'domain' === $context ) {
+		global $wpmudev_un;
+
+		if ( ! is_object( $wpmudev_un ) && class_exists( 'WPMUDEV_Dashboard' ) && method_exists( 'WPMUDEV_Dashboard', 'instance' ) ) {
+			$wpmudev_un = \WPMUDEV_Dashboard::instance();
+		}
+
+		if ( is_object( $wpmudev_un ) && method_exists( $wpmudev_un, 'network_site_url' ) ) {
+			$site_url = $wpmudev_un->network_site_url();
+		} elseif ( class_exists( 'WPMUDEV_Dashboard' ) && is_object( \WPMUDEV_Dashboard::$api ) && method_exists( \WPMUDEV_Dashboard::$api, 'get_key' ) ) {
+			$site_url = \WPMUDEV_Dashboard::$api->network_site_url();
+		} else {
+			$site_url = ( is_multisite() ) ? network_site_url() : site_url();
+		}
+
+		return $site_url;
+	} else {
+		$url = is_multisite() ? network_admin_url( 'admin.php' ) : admin_url( 'admin.php' );
+		$url .= '?' . http_build_query( $query );
+	}
+
+	return $url;
+}
+
+/**
+ * Get an array of relative to absolute file paths
+ *
+ * @param array $excluded_files a list of excluded files.
+ *
+ * @since 1.2.2
+ *
+ * @return array
+ */
+function shipper_get_relative_to_absolute_path( $excluded_files ) {
+	return array_map(
+		function( $file ) {
+			return Shipper_Helper_Fs_Path::get_abspath( $file );
+		},
+		$excluded_files
+	);
+}
+
+/**
+ * Get file formats
+ *
+ * @since 1.2.2
+ *
+ * @param array $formats An array of file formats.
+ * @param bool  $exclude_dot Whether to exclude dot or not.
+ *
+ * @return array
+ */
+function shipper_get_file_extensions( $formats, $exclude_dot = false ) {
+	$files = array_filter(
+		$formats,
+		function( $file ) {
+			return 0 === strpos( $file, '.' );
+		}
+	);
+
+	if ( $exclude_dot ) {
+		$files = array_map(
+			function( $file ) {
+				return str_replace( '.', '', $file );
+			},
+			$files
+		);
+	}
+
+	return $files;
+}
+
+/**
+ * Gets readable source path for a file.
+ *
+ * As a side-effect, will migrate individual config file
+ * and return a path to temp file with changes.
+ *
+ * @since 1.2.2
+ *
+ * @param string $path Absolute file path.
+ *
+ * @return string
+ */
+function shipper_get_transformed_config_file( $path ) {
+	if ( ! Shipper_Helper_Fs_Path::is_config_file( $path ) ) {
+		return $path;
+	}
+
+	$replacer = new Shipper_Helper_Replacer_File( Shipper_Helper_Codec::ENCODE );
+	$replacer->add_codec( new Shipper_Helper_Codec_Rewrite() );
+	$replacer->add_codec( new Shipper_Helper_Codec_Paths() );
+
+	return $replacer->transform( $path );
+}
+
+/**
+ * Get file limit for zip archive
+ *
+ * @since 1.2.2
+ *
+ * @return array
+ */
+function shipper_get_zip_file_limit() {
+	return apply_filters(
+		'shipper_get_zip_file_limit',
+		array(
+			100,
+			200,
+			500,
+			1000,
+			2500,
+			5000,
+			10000,
+			15000,
+		)
+	);
+}
+
+/**
+ * Get DB query limit for each iteration
+ *
+ * @since 1.2.4
+ *
+ * @return array
+ */
+function shipper_get_query_limit() {
+	return apply_filters(
+		'shipper_get_query_limit',
+		array(
+			500,
+			1000,
+			2500,
+			5000,
+			10000,
+			25000,
+			50000,
+			100000,
+			150000,
+			300000,
+			500000,
+		)
+	);
+}
+
+/**
+ * Check whether the platform is windows or not
+ *
+ * @since 1.2.2
+ *
+ * @return bool
+ */
+function shipper_is_windows() {
+	if ( defined( 'PHP_OS_FAMILY' ) ) {
+		return 'windows' === strtolower( PHP_OS_FAMILY ); // phpcs:ignore
+	}
+
+	return '\\' === DIRECTORY_SEPARATOR;
+}
+
+/**
+ * Generate random string
+ *
+ * @since 1.2.4
+ *
+ * @param int $len length of the string.
+ *
+ * @return string
+ */
+function shipper_get_random_string( $len = 5 ) {
+	$random = function_exists( 'random_bytes' )
+		? 'random_bytes'
+		: 'openssl_random_pseudo_bytes';
+
+	return $len <= 1 ? 'r' : 'r' . substr( bin2hex( $random( $len ) ), 0, $len - 1 );
+}
+
+/**
+ * Checks if Black Friday banner should be shown.
+ *
+ * @since 1.2.10
+ *
+ * @return boolean
+ */
+function shipper_is_black_friday() {
+	if ( get_site_option( 'shipper_bf_banner_seen' ) ) {
+		return false;
+	}
+
+	if ( apply_filters( 'wpmudev_branding_hide_branding', false ) ) {
+		return false;
+	}
+
+	if (
+		class_exists( 'WPMUDEV_Dashboard' ) &&
+		! empty( WPMUDEV_Dashboard::$site ) &&
+		is_callable( array( WPMUDEV_Dashboard::$site, 'allowed_user' ) )
+	) {
+		$user_id = get_current_user_id();
+		if ( ! WPMUDEV_Dashboard::$site->allowed_user( $user_id ) ) {
+			return false;
+		}
+	} else {
+		return false;
+	}
+
+	$current_date = date_i18n( 'Y-m-d' );
+	if ( defined( 'SHIPPER_FAKE_BF_DATE' ) && SHIPPER_FAKE_BF_DATE ) {
+		$current_date = SHIPPER_FAKE_BF_DATE;
+	}
+	$current_dt = date_create( $current_date );
+
+	// Before November 1st.
+	if ( $current_dt < date_create( date_i18n( '2021-11-01' ) ) ) {
+		return false;
+	}
+
+	// After December 6th.
+	if ( $current_dt >= date_create( date_i18n( '2021-12-06' ) ) ) {
+		return false;
+	}
+
+	return true;
 }

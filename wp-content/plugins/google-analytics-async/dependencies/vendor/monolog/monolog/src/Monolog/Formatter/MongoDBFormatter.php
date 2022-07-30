@@ -16,7 +16,7 @@ use Beehive\Monolog\Utils;
  *
  * @author Florian Plattner <me@florianplattner.de>
  */
-class MongoDBFormatter implements \Beehive\Monolog\Formatter\FormatterInterface
+class MongoDBFormatter implements FormatterInterface
 {
     private $exceptionTraceAsString;
     private $maxNestingLevel;
@@ -68,12 +68,12 @@ class MongoDBFormatter implements \Beehive\Monolog\Formatter\FormatterInterface
     protected function formatObject($value, $nestingLevel)
     {
         $objectVars = \get_object_vars($value);
-        $objectVars['class'] = \Beehive\Monolog\Utils::getClass($value);
+        $objectVars['class'] = Utils::getClass($value);
         return $this->formatArray($objectVars, $nestingLevel);
     }
     protected function formatException(\Exception $exception, $nestingLevel)
     {
-        $formattedException = array('class' => \Beehive\Monolog\Utils::getClass($exception), 'message' => $exception->getMessage(), 'code' => (int) $exception->getCode(), 'file' => $exception->getFile() . ':' . $exception->getLine());
+        $formattedException = array('class' => Utils::getClass($exception), 'message' => $exception->getMessage(), 'code' => (int) $exception->getCode(), 'file' => $exception->getFile() . ':' . $exception->getLine());
         if ($this->exceptionTraceAsString === \true) {
             $formattedException['trace'] = $exception->getTraceAsString();
         } else {

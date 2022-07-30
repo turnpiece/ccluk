@@ -1,28 +1,24 @@
 <template>
 	<!-- Open sui-wrap -->
 	<div class="sui-wrap" id="beehive-wrap">
-		<sui-header :title="$i18n.title.accounts">
-			<template v-slot:right>
-				<!-- Button to clear the cached data -->
-				<refresh-button />
-			</template>
-		</sui-header>
+		<black-friday-notice/>
+
+		<sui-header :title="$i18n.title.accounts" />
 
 		<div class="sui-row-with-sidenav">
-			<div class="sui-sidenav">
-				<ul class="sui-vertical-tabs sui-sidenav-hide-md">
-					<router-link class="sui-vertical-tab" tag="li" to="/google">
-						<a>{{ $i18n.label.google_account }}</a>
-					</router-link>
-				</ul>
-				<div class="sui-sidenav-hide-lg">
-					<sui-select
-						class="sui-mobile-nav"
-						style="display: none;"
-						id="settings-nav"
-						:options="navigation"
-						v-model="selectedPage"
-					/>
+			<div class="sui-sidenav" role="navigation">
+				<div class="sui-sidenav-settings">
+					<ul class="sui-vertical-tabs sui-sidenav-hide-md">
+						<router-link
+							class="sui-vertical-tab"
+							tag="li"
+							to="/google"
+						>
+							<a>{{ $i18n.label.google_account }}</a>
+						</router-link>
+					</ul>
+
+					<mobile-nav :selected="$route.path" :paths="nav" />
 				</div>
 			</div>
 			<router-view />
@@ -37,7 +33,8 @@
 import SuiHeader from '@/components/sui/sui-header'
 import SuiFooter from '@/components/sui/sui-footer'
 import SuiSelect from '@/components/sui/sui-select'
-import RefreshButton from '@/components/elements/refresh-button'
+import MobileNav from '@/components/elements/mobile-nav'
+import BlackFridayNotice from '@/components/elements/black-friday-notice'
 
 export default {
 	name: 'App',
@@ -46,14 +43,14 @@ export default {
 		SuiHeader,
 		SuiFooter,
 		SuiSelect,
-		RefreshButton,
+		MobileNav,
+		BlackFridayNotice
 	},
 
 	data() {
 		return {
-			selectedPage: '#' + this.$route.path,
-			navigation: {
-				'#/google': this.$i18n.label.google_account,
+			nav: {
+				'/google': this.$i18n.label.google_account,
 			},
 		}
 	},

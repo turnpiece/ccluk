@@ -34,15 +34,15 @@ class Shipper_Controller_Setup_Activate extends Shipper_Controller_Setup {
 	 * @return object Shipper_Controller_Setup instance
 	 */
 	public function add_admin_notification() {
-		$model = new Shipper_Model_Stored_Options;
+		$model = new Shipper_Model_Stored_Options();
 		if ( $model->get( Shipper_Model_Stored_Options::KEY_SEND ) ) {
 			// Already has been activated, let's not waste time here.
 			return $this;
 		}
 		$email = get_option( 'admin_email' );
-		$name = shipper_get_user_name();
+		$name  = shipper_get_user_name();
 		if ( shipper_user_can_ship() ) {
-			$user = wp_get_current_user();
+			$user  = wp_get_current_user();
 			$email = $user->user_email;
 		}
 
@@ -59,7 +59,7 @@ class Shipper_Controller_Setup_Activate extends Shipper_Controller_Setup {
 	 * @return object Shipper_Controller_Setup instance
 	 */
 	public function activate_email_notifications() {
-		$model = new Shipper_Model_Stored_Options;
+		$model = new Shipper_Model_Stored_Options();
 		$model->set( Shipper_Model_Stored_Options::KEY_SEND, true );
 		$model->save();
 		return $this;
@@ -73,14 +73,14 @@ class Shipper_Controller_Setup_Activate extends Shipper_Controller_Setup {
 	 * @return bool
 	 */
 	public function add_to_api() {
-		$task = new Shipper_Task_Api_Destinations_Add;
+		$task   = new Shipper_Task_Api_Destinations_Add();
 		$result = $task->apply();
 
 		if ( ! empty( $result ) ) {
 			// Let's also refresh our systems info.
-			$info_task = new Shipper_Task_Api_Info_Set;
-			$system = new Shipper_Model_System;
-			$result = $info_task->apply( $system->get_data() );
+			$info_task = new Shipper_Task_Api_Info_Set();
+			$system    = new Shipper_Model_System();
+			$result    = $info_task->apply( $system->get_data() );
 		}
 
 		return $result;

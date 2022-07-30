@@ -105,6 +105,7 @@ class Shipper_Helper_Fs_Path {
 			'.user.ini',
 			'wordfence-waf.php',
 		);
+
 		return in_array( basename( $path ), $configs, true );
 	}
 
@@ -119,8 +120,8 @@ class Shipper_Helper_Fs_Path {
 		if ( 'wp-tests-config.php' === basename( $path ) ) {
 			return true;
 		}
-		return 'wp-config.php' === basename( $path ) &&
-			trailingslashit( ABSPATH ) === trailingslashit( dirname( $path ) );
+
+		return 'wp-config.php' === basename( $path ) && trailingslashit( ABSPATH ) === trailingslashit( dirname( $path ) );
 	}
 
 	/**
@@ -132,6 +133,7 @@ class Shipper_Helper_Fs_Path {
 	 */
 	public static function is_plugin_file( $abspath ) {
 		$active_rx = preg_quote( WP_PLUGIN_DIR, '/' );
+
 		return (bool) preg_match( "/^{$active_rx}/", $abspath );
 	}
 
@@ -144,6 +146,7 @@ class Shipper_Helper_Fs_Path {
 	 */
 	public static function is_muplugin_file( $abspath ) {
 		$active_rx = preg_quote( WPMU_PLUGIN_DIR, '/' );
+
 		return (bool) preg_match( "/^{$active_rx}/", $abspath );
 	}
 
@@ -156,6 +159,7 @@ class Shipper_Helper_Fs_Path {
 	 */
 	public static function is_theme_file( $abspath ) {
 		$active_rx = preg_quote( trailingslashit( WP_CONTENT_DIR ) . 'themes', '/' );
+
 		return (bool) preg_match( "/^{$active_rx}/", $abspath );
 	}
 
@@ -172,14 +176,13 @@ class Shipper_Helper_Fs_Path {
 	 * @return bool
 	 */
 	public static function is_active_file( $abspath ) {
-		$object_cache_rx = preg_quote( trailingslashit( WP_CONTENT_DIR ), '/' ) .
-			preg_quote( 'object-cache.php', '/' );
+		$object_cache_rx = preg_quote( trailingslashit( WP_CONTENT_DIR ), '/' ) . preg_quote( 'object-cache.php', '/' );
+
 		if ( preg_match( "/{$object_cache_rx}$/", $abspath ) ) {
 			return true;
 		}
-		return self::is_plugin_file( $abspath )
-			|| self::is_muplugin_file( $abspath )
-			|| self::is_theme_file( $abspath );
+
+		return self::is_plugin_file( $abspath ) || self::is_muplugin_file( $abspath ) || self::is_theme_file( $abspath );
 	}
 
 	/**
@@ -199,11 +202,11 @@ class Shipper_Helper_Fs_Path {
 		 *
 		 * @return string
 		 */
-		$base_root = apply_filters(
+		$base_root   = apply_filters(
 			'shipper_paths_working_dir_root',
 			get_temp_dir()
 		);
-		$root = trailingslashit( $base_root );
+		$root        = trailingslashit( $base_root );
 		$shipper_dir = $root . shipper_get_site_uniqid( 'shipper' );
 
 		if ( ! is_dir( $shipper_dir ) ) {
@@ -239,7 +242,7 @@ class Shipper_Helper_Fs_Path {
 	 * @return string
 	 */
 	public static function get_temp_dir() {
-		$root = self::get_working_dir();
+		$root        = self::get_working_dir();
 		$shipper_dir = "{$root}tmp";
 
 		if ( ! is_dir( $shipper_dir ) ) {
@@ -250,12 +253,22 @@ class Shipper_Helper_Fs_Path {
 	}
 
 	/**
+	 * Get package extract dir.
+	 *
+	 * @return string
+	 */
+	public static function get_packageextract_dir() {
+		return trailingslashit( self::get_temp_dir() . 'package' );
+	}
+
+	/**
 	 * Gets the WP uploads directory path
 	 *
 	 * @return string
 	 */
 	public static function get_uploads_dir() {
 		$uploads = wp_upload_dir();
+
 		return trailingslashit( $uploads['basedir'] );
 	}
 
@@ -270,7 +283,7 @@ class Shipper_Helper_Fs_Path {
 	 * @return string
 	 */
 	public static function get_log_dir() {
-		$root = self::get_uploads_dir();
+		$root        = self::get_uploads_dir();
 		$shipper_dir = "{$root}shipper";
 
 		if ( ! is_dir( $shipper_dir ) ) {
@@ -293,7 +306,7 @@ class Shipper_Helper_Fs_Path {
 	 * @return string
 	 */
 	public static function get_storage_dir() {
-		$root = self::get_working_dir();
+		$root        = self::get_working_dir();
 		$shipper_dir = "{$root}storage";
 
 		if ( ! is_dir( $shipper_dir ) ) {
@@ -314,10 +327,14 @@ class Shipper_Helper_Fs_Path {
 	 * @return bool
 	 */
 	public static function attempt_htaccess_protect( $directory ) {
-		if ( empty( $directory ) ) { return false; }
+		if ( empty( $directory ) ) {
+			return false;
+		}
 
 		$directory = wp_normalize_path( trailingslashit( $directory ) );
-		if ( ! is_writable( $directory ) ) { return false; }
+		if ( ! is_writable( $directory ) ) {
+			return false;
+		}
 
 		$lines = array(
 			'Order deny,allow',
@@ -325,10 +342,13 @@ class Shipper_Helper_Fs_Path {
 			'Options -Indexes',
 		);
 
-		return ! ! file_put_contents(
-			"{$directory}.htaccess",
-			join( "\n", $lines )
-		);
+		$fs = Shipper_Helper_Fs_File::open( "{$directory}.htaccess", 'w' );
+
+		if ( ! $fs ) {
+			return false;
+		}
+
+		return ! ! $fs->fwrite( join( "\n", $lines ) );
 	}
 
 	/**
@@ -339,10 +359,10 @@ class Shipper_Helper_Fs_Path {
 	 *
 	 * @return bool
 	 */
-	static public function rmdir_r( $path, $previous ) {
-		$next = ( ! empty( $previous ) ? trailingslashit( $previous ) : '') . basename( $path );
+	public static function rmdir_r( $path, $previous ) {
+		$next    = ( ! empty( $previous ) ? trailingslashit( $previous ) : '' ) . basename( $path );
 		$cleanup = shipper_glob_all( $path );
-		$status = true;
+		$status  = true;
 		foreach ( $cleanup as $file ) {
 			if ( is_dir( $file ) ) {
 				if ( ! self::rmdir_r( $file, $next ) ) {

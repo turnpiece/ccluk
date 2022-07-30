@@ -25,12 +25,14 @@ class SMTP {
 	 *
 	 * @var array
 	 */
-	private $config = array(
+	private $config = [
 		'lite_plugin'       => 'wp-mail-smtp/wp_mail_smtp.php',
+		'lite_wporg_url'    => 'https://wordpress.org/plugins/wp-mail-smtp/',
 		'lite_download_url' => 'https://downloads.wordpress.org/plugin/wp-mail-smtp.zip',
 		'pro_plugin'        => 'wp-mail-smtp-pro/wp_mail_smtp.php',
-		'smtp_settings'     => 'admin.php?page=wp-mail-smtp',
-	);
+		'smtp_settings_url' => 'admin.php?page=wp-mail-smtp',
+		'smtp_wizard_url'   => 'admin.php?page=wp-mail-smtp-setup-wizard',
+	];
 
 	/**
 	 * Runtime data used for generating page HTML.
@@ -39,7 +41,7 @@ class SMTP {
 	 *
 	 * @var array
 	 */
-	private $output_data = array();
+	private $output_data = [];
 
 	/**
 	 * Constructor.
@@ -48,7 +50,7 @@ class SMTP {
 	 */
 	public function __construct() {
 
-		if ( ! \wpforms_current_user_can() ) {
+		if ( ! wpforms_current_user_can() ) {
 			return;
 		}
 
@@ -63,21 +65,21 @@ class SMTP {
 	public function hooks() {
 
 		if ( wp_doing_ajax() ) {
-			add_action( 'wp_ajax_wpforms_smtp_page_check_plugin_status', array( $this, 'ajax_check_plugin_status' ) );
+			add_action( 'wp_ajax_wpforms_smtp_page_check_plugin_status', [ $this, 'ajax_check_plugin_status' ] );
 		}
 
 		// Check what page we are on.
-		$page = isset( $_GET['page'] ) ? \sanitize_key( \wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.CSRF.NonceVerification
+		$page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.CSRF.NonceVerification
 
 		// Only load if we are actually on the SMTP page.
-		if ( self::SLUG !== $page ) {
+		if ( $page !== self::SLUG ) {
 			return;
 		}
 
-		add_action( 'admin_init', array( $this, 'redirect_to_smtp_settings' ) );
+		add_action( 'admin_init', [ $this, 'redirect_to_smtp_settings' ] );
 		add_filter( 'wpforms_admin_header', '__return_false' );
-		add_action( 'wpforms_admin_page', array( $this, 'output' ) );
-		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_assets' ) );
+		add_action( 'wpforms_admin_page', [ $this, 'output' ] );
+		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_assets' ] );
 
 		// Hook for addons.
 		do_action( 'wpforms_admin_pages_smtp_hooks' );
@@ -90,20 +92,20 @@ class SMTP {
 	 */
 	public function enqueue_assets() {
 
-		$min = \wpforms_get_min_suffix();
+		$min = wpforms_get_min_suffix();
 
 		// Lity.
 		wp_enqueue_style(
 			'wpforms-lity',
-			WPFORMS_PLUGIN_URL . 'assets/css/lity.min.css',
+			WPFORMS_PLUGIN_URL . 'assets/lib/lity/lity.min.css',
 			null,
 			'3.0.0'
 		);
 
 		wp_enqueue_script(
 			'wpforms-lity',
-			WPFORMS_PLUGIN_URL . 'assets/js/lity.min.js',
-			array( 'jquery' ),
+			WPFORMS_PLUGIN_URL . 'assets/lib/lity/lity.min.js',
+			[ 'jquery' ],
 			'3.0.0',
 			true
 		);
@@ -111,12 +113,12 @@ class SMTP {
 		wp_enqueue_script(
 			'wpforms-admin-page-smtp',
 			WPFORMS_PLUGIN_URL . "assets/js/components/admin/pages/smtp{$min}.js",
-			array( 'jquery' ),
+			[ 'jquery' ],
 			WPFORMS_VERSION,
 			true
 		);
 
-		\wp_localize_script(
+		wp_localize_script(
 			'wpforms-admin-page-smtp',
 			'wpforms_pluginlanding',
 			$this->get_js_strings()
@@ -134,29 +136,29 @@ class SMTP {
 
 		$error_could_not_install = sprintf(
 			wp_kses( /* translators: %s - Lite plugin download URL. */
-				__( 'Could not install plugin. Please <a href="%s">download</a> and install manually.', 'wpforms-lite' ),
-				array(
-					'a' => array(
+				__( 'Could not install the plugin automatically. Please <a href="%s">download</a> it and install it manually.', 'wpforms-lite' ),
+				[
+					'a' => [
 						'href' => true,
-					),
-				)
+					],
+				]
 			),
 			esc_url( $this->config['lite_download_url'] )
 		);
 
 		$error_could_not_activate = sprintf(
 			wp_kses( /* translators: %s - Lite plugin download URL. */
-				__( 'Could not activate plugin. Please activate from the <a href="%s">Plugins page</a>.', 'wpforms-lite' ),
-				array(
-					'a' => array(
+				__( 'Could not activate the plugin. Please activate it on the <a href="%s">Plugins page</a>.', 'wpforms-lite' ),
+				[
+					'a' => [
 						'href' => true,
-					),
-				)
+					],
+				]
 			),
 			esc_url( admin_url( 'plugins.php' ) )
 		);
 
-		return array(
+		return [
 			'installing'               => esc_html__( 'Installing...', 'wpforms-lite' ),
 			'activating'               => esc_html__( 'Activating...', 'wpforms-lite' ),
 			'activated'                => esc_html__( 'WP Mail SMTP Installed & Activated', 'wpforms-lite' ),
@@ -168,8 +170,11 @@ class SMTP {
 			'error_could_not_activate' => $error_could_not_activate,
 			'manual_install_url'       => $this->config['lite_download_url'],
 			'manual_activate_url'      => admin_url( 'plugins.php' ),
-			'smtp_settings_button'     => esc_html__( 'Go to SMTP Settings', 'wpforms-lite' ),
-		);
+			'smtp_settings'            => esc_html__( 'Go to SMTP settings', 'wpforms-lite' ),
+			'smtp_wizard'              => esc_html__( 'Open Setup Wizard', 'wpforms-lite' ),
+			'smtp_settings_url'        => esc_url( $this->config['smtp_settings_url'] ),
+			'smtp_wizard_url'          => esc_url( $this->config['smtp_wizard_url'] ),
+		];
 	}
 
 	/**
@@ -207,7 +212,7 @@ class SMTP {
 			esc_url( WPFORMS_PLUGIN_URL . 'assets/images/smtp/wpforms-wpmailsmtp@2x.png' ),
 			esc_attr__( 'WPForms ♥ WP Mail SMTP', 'wpforms-lite' ),
 			esc_html__( 'Making Email Deliverability Easy for WordPress', 'wpforms-lite' ),
-			esc_html__( 'WP Mail SMTP allows you to easily set up WordPress to use a trusted provider to reliably send emails, including form notifications. Built by the same folks behind WPForms.', 'wpforms-lite' )
+			esc_html__( 'WP Mail SMTP fixes deliverability problems with your WordPress emails and form notifications. It\'s built by the same folks behind WPForms.', 'wpforms-lite' )
 		);
 	}
 
@@ -230,15 +235,15 @@ class SMTP {
 					<li>%5$s</li>
 					<li>%6$s</li>
 					<li>%7$s</li>
-				</ul>			
+				</ul>
 			</section>',
-			esc_url( WPFORMS_PLUGIN_URL . 'assets/images/smtp/screenshot-tnail.png' ),
+			esc_url( WPFORMS_PLUGIN_URL . 'assets/images/smtp/screenshot-tnail.png?ver=' . WPFORMS_VERSION ),
 			esc_attr__( 'WP Mail SMTP screenshot', 'wpforms-lite' ),
-			esc_url( WPFORMS_PLUGIN_URL . 'assets/images/smtp/screenshot-full.png' ),
-			esc_html__( 'Over 1,000,000 websites use WP Mail SMTP.', 'wpforms-lite' ),
-			esc_html__( 'Send emails authenticated via trusted parties.', 'wpforms-lite' ),
-			esc_html__( 'Transactional Mailers: Pepipost, SendinBlue, Mailgun, SendGrid, Amazon SES.', 'wpforms-lite' ),
-			esc_html__( 'Web Mailers: Gmail, G Suite, Office 365, Outlook.com.', 'wpforms-lite' )
+			esc_url( WPFORMS_PLUGIN_URL . 'assets/images/smtp/screenshot-full.png?ver=' . WPFORMS_VERSION ),
+			esc_html__( 'Improves email deliverability in WordPress.', 'wpforms-lite' ),
+			esc_html__( 'Used by 2+ million websites.', 'wpforms-lite' ),
+			esc_html__( 'Free mailers: SendLayer, SMTP.com, Sendinblue, Google Workspace / Gmail, Mailgun, Postmark, SendGrid.', 'wpforms-lite' ),
+			esc_html__( 'Pro mailers: Amazon SES, Microsoft 365 / Outlook.com, Zoho Mail.', 'wpforms-lite' )
 		);
 	}
 
@@ -255,6 +260,37 @@ class SMTP {
 			return;
 		}
 
+		$button_format       = '<button class="button %3$s" data-plugin="%1$s" data-action="%4$s">%2$s</button>';
+		$button_allowed_html = [
+			'button' => [
+				'class'       => true,
+				'data-plugin' => true,
+				'data-action' => true,
+			],
+		];
+
+		if (
+			! $this->output_data['plugin_installed'] &&
+			! $this->output_data['pro_plugin_installed'] &&
+			! wpforms_can_install( 'plugin' )
+		) {
+			$button_format       = '<a class="link" href="%1$s" target="_blank" rel="nofollow noopener">%2$s <span aria-hidden="true" class="dashicons dashicons-external"></span></a>';
+			$button_allowed_html = [
+				'a'    => [
+					'class'  => true,
+					'href'   => true,
+					'target' => true,
+					'rel'    => true,
+				],
+				'span' => [
+					'class'       => true,
+					'aria-hidden' => true,
+				],
+			];
+		}
+
+		$button = sprintf( $button_format, esc_attr( $step['plugin'] ), esc_html( $step['button_text'] ), esc_attr( $step['button_class'] ), esc_attr( $step['button_action'] ) );
+
 		printf(
 			'<section class="step step-install">
 				<aside class="num">
@@ -264,17 +300,14 @@ class SMTP {
 				<div>
 					<h2>%3$s</h2>
 					<p>%4$s</p>
-					<button class="button %5$s" data-plugin="%6$s" data-action="%7$s">%8$s</button>
-				</div>		
+					%5$s
+				</div>
 			</section>',
 			esc_url( WPFORMS_PLUGIN_URL . 'assets/images/' . $step['icon'] ),
 			esc_attr__( 'Step 1', 'wpforms-lite' ),
-			esc_html__( 'Install and Activate WP Mail SMTP', 'wpforms-lite' ),
-			esc_html__( 'Install WP Mail SMTP from the WordPress.org plugin repository.', 'wpforms-lite' ),
-			esc_attr( $step['button_class'] ),
-			esc_attr( $step['plugin'] ),
-			esc_attr( $step['button_action'] ),
-			esc_html( $step['button_text'] )
+			esc_html( $step['heading'] ),
+			esc_html( $step['description'] ),
+			wp_kses( $button, $button_allowed_html )
 		);
 	}
 
@@ -301,7 +334,7 @@ class SMTP {
 					<h2>%4$s</h2>
 					<p>%5$s</p>
 					<button class="button %6$s" data-url="%7$s">%8$s</button>
-				</div>		
+				</div>
 			</section>',
 			esc_attr( $step['section_class'] ),
 			esc_url( WPFORMS_PLUGIN_URL . 'assets/images/' . $step['icon'] ),
@@ -309,7 +342,7 @@ class SMTP {
 			esc_html__( 'Set Up WP Mail SMTP', 'wpforms-lite' ),
 			esc_html__( 'Select and configure your mailer.', 'wpforms-lite' ),
 			esc_attr( $step['button_class'] ),
-			esc_url( admin_url( $this->config['smtp_settings'] ) ),
+			esc_url( admin_url( $this->config['smtp_wizard_url'] ) ),
 			esc_html( $step['button_text'] )
 		);
 	}
@@ -323,7 +356,10 @@ class SMTP {
 	 */
 	protected function get_data_step_install() {
 
-		$step = array();
+		$step = [];
+
+		$step['heading']     = esc_html__( 'Install and Activate WP Mail SMTP', 'wpforms-lite' );
+		$step['description'] = esc_html__( 'Install WP Mail SMTP from the WordPress.org plugin repository.', 'wpforms-lite' );
 
 		$this->output_data['all_plugins']          = get_plugins();
 		$this->output_data['plugin_installed']     = array_key_exists( $this->config['lite_plugin'], $this->output_data['all_plugins'] );
@@ -334,15 +370,22 @@ class SMTP {
 		if ( ! $this->output_data['plugin_installed'] && ! $this->output_data['pro_plugin_installed'] ) {
 			$step['icon']          = 'step-1.svg';
 			$step['button_text']   = esc_html__( 'Install WP Mail SMTP', 'wpforms-lite' );
-			$step['button_class']  = '';
+			$step['button_class']  = 'button-primary';
 			$step['button_action'] = 'install';
 			$step['plugin']        = $this->config['lite_download_url'];
+
+			if ( ! wpforms_can_install( 'plugin' ) ) {
+				$step['heading']     = esc_html__( 'WP Mail SMTP', 'wpforms-lite' );
+				$step['description'] = '';
+				$step['button_text'] = esc_html__( 'WP Mail SMTP on WordPress.org', 'wpforms-lite' );
+				$step['plugin']      = $this->config['lite_wporg_url'];
+			}
 		} else {
 			$this->output_data['plugin_activated'] = $this->is_smtp_activated();
 			$this->output_data['plugin_setup']     = $this->is_smtp_configured();
 			$step['icon']                          = $this->output_data['plugin_activated'] ? 'step-complete.svg' : 'step-1.svg';
 			$step['button_text']                   = $this->output_data['plugin_activated'] ? esc_html__( 'WP Mail SMTP Installed & Activated', 'wpforms-lite' ) : esc_html__( 'Activate WP Mail SMTP', 'wpforms-lite' );
-			$step['button_class']                  = $this->output_data['plugin_activated'] ? 'grey disabled' : '';
+			$step['button_class']                  = $this->output_data['plugin_activated'] ? 'grey disabled' : 'button-primary';
 			$step['button_action']                 = $this->output_data['plugin_activated'] ? '' : 'activate';
 			$step['plugin']                        = $this->output_data['pro_plugin_installed'] ? $this->config['pro_plugin'] : $this->config['lite_plugin'];
 		}
@@ -359,19 +402,23 @@ class SMTP {
 	 */
 	protected function get_data_step_setup() {
 
-		$step = array();
+		$step = [
+			'icon' => 'step-2.svg',
+		];
 
-		$step['icon']          = 'step-2.svg';
-		$step['section_class'] = $this->output_data['plugin_activated'] ? '' : 'grey';
-		$step['button_text']   = esc_html__( 'Start Setup', 'wpforms-lite' );
-		$step['button_class']  = 'grey disabled';
+		if ( $this->output_data['plugin_activated'] ) {
+			$step['section_class'] = '';
+			$step['button_class']  = 'button-primary';
+			$step['button_text']   = esc_html__( 'Open Setup Wizard', 'wpforms-lite' );
+		} else {
+			$step['section_class'] = 'grey';
+			$step['button_class']  = 'grey disabled';
+			$step['button_text']   = esc_html__( 'Start Setup', 'wpforms-lite' );
+		}
 
 		if ( $this->output_data['plugin_setup'] ) {
-			$step['icon']          = 'step-complete.svg';
-			$step['section_class'] = '';
-			$step['button_text']   = esc_html__( 'Go to SMTP settings', 'wpforms-lite' );
-		} else {
-			$step['button_class'] = $this->output_data['plugin_activated'] ? '' : 'grey disabled';
+			$step['icon']        = 'step-complete.svg';
+			$step['button_text'] = esc_html__( 'Go to SMTP settings', 'wpforms-lite' );
 		}
 
 		return $step;
@@ -391,24 +438,30 @@ class SMTP {
 			! wpforms_current_user_can()
 		) {
 			wp_send_json_error(
-				array(
+				[
 					'error' => esc_html__( 'You do not have permission.', 'wpforms-lite' ),
-				)
+				]
 			);
 		}
 
-		$result = array();
+		$result = [];
 
 		if ( ! $this->is_smtp_activated() ) {
 			wp_send_json_error(
-				array(
+				[
 					'error' => esc_html__( 'Plugin unavailable.', 'wpforms-lite' ),
-				)
+				]
 			);
 		}
 
 		$result['setup_status']  = (int) $this->is_smtp_configured();
 		$result['license_level'] = wp_mail_smtp()->get_license_type();
+
+		// Prevent redirect to the WP Mail SMTP Setup Wizard on the fresh installs.
+		// We need this workaround since WP Mail SMTP doesn't check whether the mailer is already configured when redirecting to the Setup Wizard on the first run.
+		if ( $result['setup_status'] > 0 ) {
+			update_option( 'wp_mail_smtp_activation_prevent_redirect', true );
+		}
 
 		wp_send_json_success( $result );
 	}
@@ -417,16 +470,57 @@ class SMTP {
 	 * Get $phpmailer instance.
 	 *
 	 * @since 1.5.7
+	 * @since 1.6.1.2 Conditionally returns $phpmailer v5 or v6.
 	 *
-	 * @return \PHPMailer Instance of PHPMailer.
+	 * @return \PHPMailer|\PHPMailer\PHPMailer\PHPMailer Instance of PHPMailer.
 	 */
 	protected function get_phpmailer() {
 
+		if ( version_compare( get_bloginfo( 'version' ), '5.5-alpha', '<' ) ) {
+			$phpmailer = $this->get_phpmailer_v5();
+		} else {
+			$phpmailer = $this->get_phpmailer_v6();
+		}
+
+		return $phpmailer;
+	}
+
+	/**
+	 * Get $phpmailer v5 instance.
+	 *
+	 * @since 1.6.1.2
+	 *
+	 * @return \PHPMailer Instance of PHPMailer.
+	 */
+	private function get_phpmailer_v5() {
+
 		global $phpmailer;
 
-		if ( ! is_object( $phpmailer ) || ! is_a( $phpmailer, 'PHPMailer' ) ) {
+		if ( ! ( $phpmailer instanceof \PHPMailer ) ) {
 			require_once ABSPATH . WPINC . '/class-phpmailer.php';
-			$phpmailer = new \PHPMailer( true ); // phpcs:ignore
+			require_once ABSPATH . WPINC . '/class-smtp.php';
+			$phpmailer = new \PHPMailer( true ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+		}
+
+		return $phpmailer;
+	}
+
+	/**
+	 * Get $phpmailer v6 instance.
+	 *
+	 * @since 1.6.1.2
+	 *
+	 * @return \PHPMailer\PHPMailer\PHPMailer Instance of PHPMailer.
+	 */
+	private function get_phpmailer_v6() {
+
+		global $phpmailer;
+
+		if ( ! ( $phpmailer instanceof \PHPMailer\PHPMailer\PHPMailer ) ) {
+			require_once ABSPATH . WPINC . '/PHPMailer/PHPMailer.php';
+			require_once ABSPATH . WPINC . '/PHPMailer/SMTP.php';
+			require_once ABSPATH . WPINC . '/PHPMailer/Exception.php';
+			$phpmailer = new \PHPMailer\PHPMailer\PHPMailer( true ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 		}
 
 		return $phpmailer;
@@ -446,11 +540,11 @@ class SMTP {
 		}
 
 		$phpmailer = $this->get_phpmailer();
+		$mailer    = \WPMailSMTP\Options::init()->get( 'mail', 'mailer' );
 
-		$mailer             = \WPMailSMTP\Options::init()->get( 'mail', 'mailer' );
-		$is_mailer_complete = wp_mail_smtp()->get_providers()->get_mailer( $mailer, $phpmailer )->is_mailer_complete();
-
-		return 'mail' !== $mailer && $is_mailer_complete;
+		return ! empty( $mailer ) &&
+			   $mailer !== 'mail' &&
+			   wp_mail_smtp()->get_providers()->get_mailer( $mailer, $phpmailer )->is_mailer_complete();
 	}
 
 	/**
@@ -474,7 +568,7 @@ class SMTP {
 
 		// Redirect to SMTP plugin if it is activated.
 		if ( $this->is_smtp_configured() ) {
-			wp_safe_redirect( admin_url( $this->config['smtp_settings'] ) );
+			wp_safe_redirect( admin_url( $this->config['smtp_settings_url'] ) );
 			exit;
 		}
 	}

@@ -17,10 +17,10 @@ use Beehive\Monolog\Logger;
  *
  * @author Markus Bachmann <markus.bachmann@bachi.biz>
  */
-class CouchDBHandler extends \Beehive\Monolog\Handler\AbstractProcessingHandler
+class CouchDBHandler extends AbstractProcessingHandler
 {
     private $options;
-    public function __construct(array $options = array(), $level = \Beehive\Monolog\Logger::DEBUG, $bubble = \true)
+    public function __construct(array $options = array(), $level = Logger::DEBUG, $bubble = \true)
     {
         $this->options = \array_merge(array('host' => 'localhost', 'port' => 5984, 'dbname' => 'logger', 'username' => null, 'password' => null), $options);
         parent::__construct($level, $bubble);
@@ -45,6 +45,6 @@ class CouchDBHandler extends \Beehive\Monolog\Handler\AbstractProcessingHandler
      */
     protected function getDefaultFormatter()
     {
-        return new \Beehive\Monolog\Formatter\JsonFormatter(\Beehive\Monolog\Formatter\JsonFormatter::BATCH_MODE_JSON, \false);
+        return new JsonFormatter(JsonFormatter::BATCH_MODE_JSON, \false);
     }
 }

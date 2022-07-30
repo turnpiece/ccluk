@@ -2,7 +2,7 @@
 /**
  * Defines template helper functionality of the plugin.
  *
- * @link    http://premium.wpmudev.org
+ * @link    http://wpmudev.com
  * @since   3.2.0
  *
  * @author  Joel James <joel@incsub.com>
@@ -57,7 +57,9 @@ class Template {
 		/**
 		 * Filter to modify main url used to build settings url
 		 *
-		 * @param bool $network Network flag.
+		 * @param string $url     URL.
+		 * @param bool   $network Network flag.
+		 * @param int    $blog_id Blog ID.
 		 *
 		 * @since 3.2.2
 		 */
@@ -98,7 +100,9 @@ class Template {
 		/**
 		 * Filter to modify main url used to build accounts url
 		 *
-		 * @param bool $network Network flag.
+		 * @param string $url     URL.
+		 * @param bool   $network Network flag.
+		 * @param int    $blog_id Blog ID.
 		 *
 		 * @since 3.3.0
 		 */
@@ -146,5 +150,20 @@ class Template {
 	 */
 	public static function asset_url( $url = '' ) {
 		return BEEHIVE_URL . 'app/assets/' . $url;
+	}
+
+	/**
+	 * Settings page url helper.
+	 *
+	 * Keeping this to avoid fatal error when JetPack is active
+	 * and we upgrade from 2.8.3
+	 * This will be removed soon.
+	 *
+	 * @deprecated 3.3.0
+	 *
+	 * @return string
+	 */
+	public static function settings_page() {
+		return '';
 	}
 }

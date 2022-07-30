@@ -30,11 +30,11 @@ class Shipper_Controller_Runner_Preflight extends Shipper_Controller_Runner {
 	 * Implements preflight-specific cancellation cleanup
 	 */
 	public function process_cancel() {
-		$system_task  = new Shipper_Task_Check_System;
-		$remote_task  = new Shipper_Task_Check_Rsystem;
-		$sysdiff_task = new Shipper_Task_Check_Sysdiff;
-		$files_task   = new Shipper_Task_Check_Files;
-		$rpkg_task    = new Shipper_Task_Check_Rpkg;
+		$system_task  = new Shipper_Task_Check_System();
+		$remote_task  = new Shipper_Task_Check_Rsystem();
+		$sysdiff_task = new Shipper_Task_Check_Sysdiff();
+		$files_task   = new Shipper_Task_Check_Files();
+		$rpkg_task    = new Shipper_Task_Check_Rpkg();
 		$system_task->restart();
 		$remote_task->restart();
 		$sysdiff_task->restart();
@@ -59,29 +59,25 @@ class Shipper_Controller_Runner_Preflight extends Shipper_Controller_Runner {
 			return true; // Already running.
 		}
 
-		$locks = new Shipper_Helper_Locks;
+		$locks = new Shipper_Helper_Locks();
 
 		if ( $locks->has_lock( $this->get_process_lock() ) ) {
 			return false;
 		}
 
-		$files_task = new Shipper_Task_Check_Files;
-		$rpkg_task  = new Shipper_Task_Check_Rpkg;
+		$files_task = new Shipper_Task_Check_Files();
+		$rpkg_task  = new Shipper_Task_Check_Rpkg();
 		$files_task->restart();
 		$rpkg_task->restart();
 
-		$api_model = new Shipper_Model_Api;
+		$api_model = new Shipper_Model_Api();
 		$api_model->clear_cached_api_response( 'info-get' );
 		$api_model->clear_cached_api_response( 'info-preflight' );
 
 		Shipper_Helper_Log::write( __( 'Preflight check start', 'shipper' ) );
 
-		$preflight = $this->get_status()
-		                  ->start( false )
-		                  ->save();
-
+		$this->get_status()->start( false )->save();
 		$this->process_system(); // Do this on start because it's fast.
-
 		$this->ping();
 	}
 
@@ -90,26 +86,22 @@ class Shipper_Controller_Runner_Preflight extends Shipper_Controller_Runner {
 	 *
 	 * @return bool Whether to continue with processing (opposite of all done)
 	 * @since v1.0.3
-	 *
 	 */
 	public function process_system() {
-		$system_task = new Shipper_Task_Check_System;
+		$system_task = new Shipper_Task_Check_System();
 		$system_task->restart();
 		$system = array();
 
-		$model = new Shipper_Model_System;
+		$model = new Shipper_Model_System();
 		$system_task->apply( $model->get_data() );
 		foreach ( $system_task->get_checks() as $check ) {
 			$system[] = $check->get_data();
 		}
 
-		$preflight = $this->get_status()
-		                  ->set_check( Shipper_Model_Stored_Preflight::KEY_CHECKS_SYSTEM, $system )
-		                  ->add_errors(
-			                  Shipper_Model_Stored_Preflight::KEY_CHECKS_SYSTEM,
-			                  $system_task->get_errors()
-		                  )
-		                  ->save();
+		$this->get_status()
+			->set_check( Shipper_Model_Stored_Preflight::KEY_CHECKS_SYSTEM, $system )
+			->add_errors( Shipper_Model_Stored_Preflight::KEY_CHECKS_SYSTEM, $system_task->get_errors() )
+			->save();
 
 		return ! $this->maybe_complete();
 	}
@@ -123,23 +115,22 @@ class Shipper_Controller_Runner_Preflight extends Shipper_Controller_Runner {
 	 *
 	 * @return bool Whether to continue with processing (opposite of all done)
 	 * @since v1.0.3
-	 *
 	 */
 	public function process_remote() {
 		do_action( 'shipper_before_process_remote' );
-		$remote_task = new Shipper_Task_Check_Rsystem;
+		$remote_task = new Shipper_Task_Check_Rsystem();
 		$remote_task->restart();
-		$sysdiff_task = new Shipper_Task_Check_Sysdiff;
+		$sysdiff_task = new Shipper_Task_Check_Sysdiff();
 		$sysdiff_task->restart();
 		$remote  = array();
 		$sysdiff = array();
 		$errors  = array();
 
-		$migration = new Shipper_Model_Stored_Migration;
+		$migration = new Shipper_Model_Stored_Migration();
 		$target    = $migration->get_destination();
 
-		$request = new Shipper_Task_Api_Info_Get( array( 'domain' => $target ) );
-		$info    = $request->apply();
+		$request = new Shipper_Task_Api_Info_Get();
+		$info    = $request->apply( array( 'domain' => $target ) );
 		if ( $request->has_errors() ) {
 			$errors = array_merge( $errors, $request->get_errors() );
 		}
@@ -152,18 +143,12 @@ class Shipper_Controller_Runner_Preflight extends Shipper_Controller_Runner {
 			$sysdiff[] = $check->get_data();
 		}
 
-		$preflight = $this->get_status()
-		                  ->set_check( Shipper_Model_Stored_Preflight::KEY_CHECKS_SYSDIFF, $sysdiff )
-		                  ->add_errors(
-			                  Shipper_Model_Stored_Preflight::KEY_CHECKS_SYSDIFF,
-			                  array_merge( $errors, $sysdiff_task->get_errors() )
-		                  )
-		                  ->set_check( Shipper_Model_Stored_Preflight::KEY_CHECKS_REMOTE, $remote )
-		                  ->add_errors(
-			                  Shipper_Model_Stored_Preflight::KEY_CHECKS_REMOTE,
-			                  array_merge( $errors, $remote_task->get_errors() )
-		                  )
-		                  ->save();
+		$this->get_status()
+			->set_check( Shipper_Model_Stored_Preflight::KEY_CHECKS_SYSDIFF, $sysdiff )
+			->add_errors( Shipper_Model_Stored_Preflight::KEY_CHECKS_SYSDIFF, array_merge( $errors, $sysdiff_task->get_errors() ) )
+			->set_check( Shipper_Model_Stored_Preflight::KEY_CHECKS_REMOTE, $remote )
+			->add_errors( Shipper_Model_Stored_Preflight::KEY_CHECKS_REMOTE, array_merge( $errors, $remote_task->get_errors() ) )
+			->save();
 
 		return ! $this->maybe_complete();
 	}
@@ -205,10 +190,9 @@ class Shipper_Controller_Runner_Preflight extends Shipper_Controller_Runner {
 	 *
 	 * @return bool
 	 * @since v1.0.3
-	 *
 	 */
 	public function has_package_or_files() {
-		$migration = new Shipper_Model_Stored_Migration;
+		$migration = new Shipper_Model_Stored_Migration();
 		$key       = Shipper_Model_Stored_Migration::TYPE_IMPORT === $migration->get_type()
 			? Shipper_Model_Stored_Preflight::KEY_CHECKS_RPKG
 			: Shipper_Model_Stored_Preflight::KEY_CHECKS_FILES;
@@ -224,11 +208,10 @@ class Shipper_Controller_Runner_Preflight extends Shipper_Controller_Runner {
 	 *
 	 * @return bool Whether to continue with processing (opposite of all done)
 	 * @since v1.0.3
-	 *
 	 */
 	public function process_package_or_files() {
 		do_action( 'shipper_before_process_package_or_files' );
-		$migration = new Shipper_Model_Stored_Migration;
+		$migration = new Shipper_Model_Stored_Migration();
 		if ( Shipper_Model_Stored_Migration::TYPE_IMPORT === $migration->get_type() ) {
 			return $this->process_remote_package();
 		}
@@ -243,10 +226,9 @@ class Shipper_Controller_Runner_Preflight extends Shipper_Controller_Runner {
 	 *
 	 * @return bool Whether to continue with processing (opposite of all done)
 	 * @since v1.0.3
-	 *
 	 */
 	public function process_remote_package() {
-		$task   = new Shipper_Task_Api_Info_Preflight;
+		$task   = new Shipper_Task_Api_Info_Preflight();
 		$result = $task->apply();
 
 		$preflight = $this->get_status();
@@ -258,7 +240,7 @@ class Shipper_Controller_Runner_Preflight extends Shipper_Controller_Runner {
 			// If so, we will be able to continue the migration.
 			// So, let's check for this explicitly, before erroring out.
 			$domain   = Shipper_Model_Stored_Destinations::get_current_domain();
-			$remote   = new Shipper_Helper_Fs_Remote;
+			$remote   = new Shipper_Helper_Fs_Remote();
 			$is_error = $task->has_errors();
 			try {
 				if ( $remote->exists( $domain ) ) {
@@ -279,10 +261,12 @@ class Shipper_Controller_Runner_Preflight extends Shipper_Controller_Runner {
 				Shipper_Helper_Log::write( 'Errors in remote preflight!' );
 				$preflight
 					->set_check(
-						Shipper_Model_Stored_Preflight::KEY_CHECKS_RPKG, $result
+						Shipper_Model_Stored_Preflight::KEY_CHECKS_RPKG,
+						$result
 					)
 					->add_errors(
-						Shipper_Model_Stored_Preflight::KEY_CHECKS_RPKG, $task->get_errors()
+						Shipper_Model_Stored_Preflight::KEY_CHECKS_RPKG,
+						$task->get_errors()
 					)
 					->save();
 
@@ -290,7 +274,7 @@ class Shipper_Controller_Runner_Preflight extends Shipper_Controller_Runner {
 			}
 		}
 
-		$rpkg_task = new Shipper_Task_Check_Rpkg;
+		$rpkg_task = new Shipper_Task_Check_Rpkg();
 		$rpkg_task->apply( $result );
 		$data = array();
 		foreach ( $rpkg_task->get_checks() as $check ) {
@@ -305,6 +289,10 @@ class Shipper_Controller_Runner_Preflight extends Shipper_Controller_Runner {
 				return true;
 			}
 		} else {
+			// So, we got the remote package size, let's store it so that we can calculate the ETA.
+			$estimated_model = new Shipper_Model_Stored_Estimate();
+			$estimated_model->set( Shipper_Model_Stored_Migration::PACKAGE_SIZE, $result['estimated_package_size'] );
+			$estimated_model->save();
 			$this->maybe_complete();
 		}
 
@@ -329,7 +317,7 @@ class Shipper_Controller_Runner_Preflight extends Shipper_Controller_Runner {
 
 		$files = array();
 
-		$files_task = new Shipper_Task_Check_Files;
+		$files_task = new Shipper_Task_Check_Files();
 		$files_task->apply();
 		$is_done = $files_task->is_done();
 		foreach ( $files_task->get_checks() as $check ) {
@@ -362,7 +350,6 @@ class Shipper_Controller_Runner_Preflight extends Shipper_Controller_Runner {
 	 *
 	 * @return bool All done or not
 	 * @since v1.0.3
-	 *
 	 */
 	public function maybe_complete() {
 		$preflight = $this->get_status();
@@ -407,16 +394,18 @@ class Shipper_Controller_Runner_Preflight extends Shipper_Controller_Runner {
 		foreach ( $check_types as $type ) {
 			$check = $data->get_check( $type );
 			foreach ( $check as $chk ) {
-				if ( Shipper_Model_Check::STATUS_OK === $chk['status'] ) {
+				if ( ! isset( $chk['status'] ) || Shipper_Model_Check::STATUS_OK === $chk['status'] ) {
 					continue;
 				}
 				Shipper_Helper_Log::write(
+					/* translators: %s: preflight issue title. */
 					sprintf( __( 'Preflight check issue: %s', 'shipper' ), $chk['title'] )
 				);
 			}
 			$errors = $data->get_check_errors( $type );
 			foreach ( $errors as $error ) {
 				Shipper_Helper_Log::write(
+					/* translators: %s: preflight issue title. */
 					sprintf( __( 'Preflight check error: %s', 'shipper' ), $error )
 				);
 			}
@@ -429,11 +418,11 @@ class Shipper_Controller_Runner_Preflight extends Shipper_Controller_Runner {
 	 * @return array
 	 */
 	public function get_status() {
-		if ( ! isset( $this->_model ) ) {
-			$this->_model = new Shipper_Model_Stored_Preflight;
+		if ( ! isset( $this->model ) ) {
+			$this->model = new Shipper_Model_Stored_Preflight();
 		}
 
-		return $this->_model;
+		return $this->model;
 	}
 
 	/**
@@ -443,8 +432,8 @@ class Shipper_Controller_Runner_Preflight extends Shipper_Controller_Runner {
 	 */
 	public function clear() {
 		return $this->get_status()
-		            ->clear()
-		            ->save();
+					->clear()
+					->save();
 	}
 
 	/**
@@ -463,7 +452,6 @@ class Shipper_Controller_Runner_Preflight extends Shipper_Controller_Runner {
 			'warnings' => 0,
 		);
 		$check_types = $preflight->get_check_types();
-//$file_errs = array_sum( wp_list_pluck( $result['checks']['files']['checks'], 'count' ) );
 
 		$file_warnings  = 0;
 		$other_warnings = 0;
@@ -473,8 +461,9 @@ class Shipper_Controller_Runner_Preflight extends Shipper_Controller_Runner {
 			$errors         = count( $error_messages );
 			$warnings       = 0;
 			foreach ( $checks as $chk ) {
+
 				if ( 'files' !== $type || empty( $chk['count'] ) ) {
-					if ( Shipper_Model_Check::STATUS_WARNING === $chk['status'] ) {
+					if ( isset( $chk['status'] ) && Shipper_Model_Check::STATUS_WARNING === $chk['status'] ) {
 						$warnings ++;
 						$other_warnings ++;
 					}
@@ -483,12 +472,12 @@ class Shipper_Controller_Runner_Preflight extends Shipper_Controller_Runner {
 					$file_warnings += $chk['count'];
 				}
 
-				if ( Shipper_Model_Check::STATUS_ERROR === $chk['status'] ) {
+				if ( isset( $chk['status'] ) && Shipper_Model_Check::STATUS_ERROR === $chk['status'] ) {
 					$errors ++;
 				}
 			}
-			$result['warnings']        += $warnings;
-			$result['errors']          += $errors;
+			$result['warnings']       += $warnings;
+			$result['errors']         += $errors;
 			$issues                    = $errors + $warnings;
 			$result['checks'][ $type ] = array(
 				'type'                  => $type,
@@ -501,7 +490,7 @@ class Shipper_Controller_Runner_Preflight extends Shipper_Controller_Runner {
 		}
 
 		if ( $file_warnings ) {
-			$exclusions = new Shipper_Model_Stored_Exclusions;
+			$exclusions = new Shipper_Model_Stored_Exclusions();
 			$cnt        = count( $exclusions->get_data() );
 			if ( empty( $other_warnings ) ) {
 				$result['warnings'] -= min( $result['warnings'], $cnt );

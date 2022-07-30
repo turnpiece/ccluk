@@ -22,22 +22,9 @@
 
 		<div class="sui-box-body">
 			<?php
-				$this->render(
-					'pages/packages/settings/item',
-					array( 'item' => 'storage' )
-				);
-			?>
-			<?php
-				$this->render(
-					'pages/packages/settings/item',
-					array( 'item' => 'database' )
-				);
-			?>
-			<?php
-				$this->render(
-					'pages/packages/settings/item',
-					array( 'item' => 'archive' )
-				);
+				$this->render( 'pages/packages/settings/item', array( 'item' => 'database' ) );
+				$this->render( 'pages/packages/settings/item', array( 'item' => 'archive' ) );
+				$this->render( 'pages/packages/settings/item', array( 'item' => 'safe-mode' ) );
 			?>
 		</div><!-- sui-box-body -->
 

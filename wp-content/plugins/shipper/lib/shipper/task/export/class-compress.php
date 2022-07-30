@@ -19,11 +19,11 @@ class Shipper_Task_Export_Compress extends Shipper_Task_Export {
 	 * @return bool
 	 */
 	public function apply( $args = array() ) {
-		$this->_has_done_anything = true;
+		$this->has_done_anything = true;
 
-		$dumped      = new Shipper_Model_Dumped_Filelist;
+		$dumped      = new Shipper_Model_Dumped_Filelist();
 		$pos         = $this->get_initialized_position();
-		$zip_name    = "package-" . uniqid() . ".zip";
+		$zip_name    = 'package-' . uniqid() . '.zip';
 		$shipper_pos = $pos;
 
 		$zip_path = Shipper_Helper_Fs_Path::get_temp_dir() . $zip_name;
@@ -38,35 +38,36 @@ class Shipper_Task_Export_Compress extends Shipper_Task_Export {
 		 *
 		 * @return int
 		 * @since v1.0.1
-		 *
 		 */
 		$memory_limit = $this->get_memory_limit();
 		Shipper_Helper_Log::debug( 'Memory detected ' . $memory_limit . ' MB' );
 
 		$max_statements = (int) apply_filters(
 			'shipper_export_max_upload_statements',
-			//fallback
-			100
+			// fallback.
+			0
 		);
-		$max_size       = $memory_limit <= 256 ? 2 : 4;
-		$max_size       = (int) apply_filters( 'shipper_export_max_upload_package_size', $max_size );
-		/**
-		 * If the memory too small, we will back to 100 files each instead of using file base
-		 */
-		if ( $memory_limit > 65 ) {
-			$max_statements = 0;
-		} else {
-			$max_size = 0;
-		}
-		Shipper_Helper_Log::debug( 'A package wil be ' . $max_size . 'MB' );
-		Shipper_Helper_Log::debug( 'max statements ' . $max_statements . ' - max_sizes ' . $max_size );
+		$max_size = $memory_limit <= 256 ? 25 : 50;
+		// use maxisze for determine the time.
+		$max_size = (int) apply_filters( 'shipper_export_max_upload_package_size', $max_size );
+
 		$statements = $dumped->get_statements( $pos, $max_statements, $max_size );
 		Shipper_Helper_Log::debug( 'total statements ' . ( count( $statements ) ) );
+		$timer = Shipper_Helper_Timer_Basic::get();
+		$timer->start( 'compress' );
 		foreach ( $statements as $data ) {
-			//we compress it as zip
+			// we compress it as zip.
 			$zip->add_file( $data['source'], wp_normalize_path( $data['destination'] ) );
 			$shipper_pos ++;
 		}
+		$zip->close();
+		$timer->stop( 'compress' );
+		Shipper_Helper_Log::debug( 'Time for compression: ' . $timer->diff( 'compress' ) );
+
+		if ( is_readable( $zip_path ) ) {
+			Shipper_Helper_Log::debug( sprintf( 'Allowed size: %sMB while real size %sMB', $max_size, round( filesize( $zip_path ) / 1024 / 1024, 2 ) ) );
+		}
+
 		$is_done     = empty( $statements );
 		$shipper_pos = $is_done
 			? 0
@@ -77,33 +78,40 @@ class Shipper_Task_Export_Compress extends Shipper_Task_Export {
 			return true;
 		}
 
-		//upload it now
-		$destination = "files/$zip_name";
-		//add it into a dump file
-		$package_list = new Shipper_Model_Dumped_Packagelist();
-		$package_list->add_statement( [
-			'source'      => $zip_path,
-			'destination' => $destination,
-			'size'        => filesize( $zip_path ),
-		] );
-		$package_list->close();
+		// upload it now.
+		if ( ! $is_done ) {
+			$destination = "files/$zip_name";
+			// add it into a dump file.
+			$package_list = new Shipper_Model_Dumped_Packagelist();
+			$package_list->add_statement(
+				array(
+					'source'      => $zip_path,
+					'destination' => $destination,
+					'size'        => is_readable( $zip_path ) ? filesize( $zip_path ) : 0,
+				)
+			);
+			$package_list->close();
+		}
 
 		return $is_done;
 	}
 
 	/**
+	 * Get memory limit
+	 *
 	 * @return float|int|string
 	 */
 	private function get_memory_limit() {
 		$migration    = new Shipper_Model_Stored_Migration();
 		$memory_limit = $migration->get( 'memory_limit' );
-		//convert all to M
+
+		// convert all to M.
 		if ( preg_match( '/^(\d+)(.)$/', $memory_limit, $matches ) ) {
-			if ( strtoupper( $matches[2] ) == 'M' ) {
+			if ( strtoupper( $matches[2] ) === 'M' ) {
 				$memory_limit = $matches[1];
-			} else if ( strtoupper( $matches[2] ) == 'K' ) {
-				$memory_limit = $matches[1] / 1024; // nnnK -> nnn KB
-			} elseif ( strtoupper( $matches[2] ) == 'G' ) {
+			} elseif ( strtoupper( $matches[2] ) === 'K' ) {
+				$memory_limit = $matches[1] / 1024; // nnnK -> nnn KB.
+			} elseif ( strtoupper( $matches[2] ) === 'G' ) {
 				$memory_limit = $matches[1] * 1024;
 			}
 		}
@@ -117,9 +125,7 @@ class Shipper_Task_Export_Compress extends Shipper_Task_Export {
 	 * @return int
 	 */
 	public function get_total_steps() {
-		$total = $this->get_total_files();
-
-		return $total;
+		return $this->get_total_files();
 	}
 
 	/**
@@ -148,8 +154,8 @@ class Shipper_Task_Export_Compress extends Shipper_Task_Export {
 	 */
 	public function get_source_path( $path, $migration ) {
 		$replacer = new Shipper_Helper_Replacer_File( Shipper_Helper_Codec::ENCODE );
-		$replacer->add_codec( new Shipper_Helper_Codec_Rewrite );
-		$replacer->add_codec( new Shipper_Helper_Codec_Paths );
+		$replacer->add_codec( new Shipper_Helper_Codec_Rewrite() );
+		$replacer->add_codec( new Shipper_Helper_Codec_Paths() );
 
 		return $replacer->transform( $path );
 	}
@@ -163,9 +169,16 @@ class Shipper_Task_Export_Compress extends Shipper_Task_Export {
 		return Shipper_Model_Stored_Migration::COMPONENT_FS;
 	}
 
+	/**
+	 * Get initialized position
+	 *
+	 * @param false $filelist list of files.
+	 *
+	 * @return false|int|mixed
+	 */
 	public function get_initialized_position( $filelist = false ) {
 		if ( empty( $filelist ) ) {
-			$filelist = new Shipper_Model_Stored_Filelist;
+			$filelist = new Shipper_Model_Stored_Filelist();
 		}
 
 		$pos = $filelist->get( Shipper_Model_Stored_Filelist::KEY_CURSOR, false );
@@ -178,9 +191,17 @@ class Shipper_Task_Export_Compress extends Shipper_Task_Export {
 		return $pos;
 	}
 
+	/**
+	 * Set initialized position
+	 *
+	 * @param int   $position position.
+	 * @param false $filelist file list.
+	 *
+	 * @return bool
+	 */
 	public function set_initialized_position( $position, $filelist = false ) {
 		if ( empty( $filelist ) ) {
-			$filelist = new Shipper_Model_Stored_Filelist;
+			$filelist = new Shipper_Model_Stored_Filelist();
 		}
 
 		$newpos = $filelist->get( Shipper_Model_Stored_Filelist::KEY_CURSOR, false );
@@ -194,9 +215,16 @@ class Shipper_Task_Export_Compress extends Shipper_Task_Export {
 		return true;
 	}
 
+	/**
+	 * Get total files
+	 *
+	 * @param false $dumped files array.
+	 *
+	 * @return int
+	 */
 	public function get_total_files( $dumped = false ) {
 		if ( empty( $dumped ) ) {
-			$dumped = new Shipper_Model_Dumped_Filelist;
+			$dumped = new Shipper_Model_Dumped_Filelist();
 		}
 
 		return $dumped->get_statements_count();
@@ -212,11 +240,14 @@ class Shipper_Task_Export_Compress extends Shipper_Task_Export {
 		$pos = ( empty( $this->get_initialized_position() ) && $this->has_done_anything() ) ? $this->get_total_files() : $this->get_initialized_position();
 
 		$desc = sprintf(
+			/* translators: %1$d %2$d: file position and total files count. */
 			__( '( %1$d of %2$d total )', 'shipper' ),
-			$pos, $this->get_total_files()
+			$pos,
+			$this->get_total_files()
 		);
 
 		return sprintf(
+			/* translators: %s: gathered files.*/
 			__( 'Compress gathered files %s', 'shipper' ),
 			$desc
 		);

@@ -1,39 +1,33 @@
 <template>
 	<fragment>
-		<div class="sui-form-field">
-			<span
-				class="sui-description"
-				v-html="
-					sprintf(
-						$i18n.desc.google_setup,
-						'https://premium.wpmudev.org/docs/wpmu-dev-plugins/beehive/#set-up-api-project'
-					)
-				"
-			></span>
-		</div>
+		<p class="sui-description" v-html="$i18n.desc.google_setup"></p>
+
 		<div
-			:class="{ 'sui-form-field-error': errors.includes('clientId') }"
 			class="sui-form-field"
+			:class="{ 'sui-form-field-error': errors.includes('clientId') }"
+			style="margin-bottom: 20px;"
 		>
 			<label
-				:for="`google-${context}-client-id`"
-				:id="`google-${context}-client-id-label`"
+				for="google-accounts-client-id"
+				id="google-accounts-client-id-label"
 				class="sui-label"
 			>
 				{{ $i18n.label.client_id }}
 			</label>
+
 			<input
 				v-model="clientId"
 				type="text"
-				:id="`google-${context}-client-id`"
+				id="google-accounts-client-id"
 				class="sui-form-control"
-				:aria-labelledby="`google-${context}-client-id-label`"
-				:aria-describedby="`google-${context}-client-id-error`"
+				aria-labelledby="google-accounts-client-id-label"
+				aria-describedby="google-accounts-client-id-error"
 				:placeholder="$i18n.placeholder.client_id"
 			/>
+
 			<span
 				v-if="errors.includes('clientId')"
-				:id="`google-${context}-client-id-error`"
+				id="google-accounts-client-id-error"
 				class="sui-error-message"
 			>
 				{{ $i18n.error.client_id }}
@@ -41,54 +35,55 @@
 		</div>
 
 		<div
-			:class="{ 'sui-form-field-error': errors.includes('clientSecret') }"
 			class="sui-form-field"
+			:class="{ 'sui-form-field-error': errors.includes('clientSecret') }"
+			style="margin-bottom: 10px;"
 		>
 			<label
-				:for="`google-${context}-client-secret`"
-				:id="`google-${context}-client-secret-label`"
+				for="google-accounts-client-secret"
+				id="google-accounts-client-secret-label"
 				class="sui-label"
 			>
-				{{ $i18n.error.client_secret }}
+				{{ $i18n.label.client_secret }}
 			</label>
+
 			<input
 				v-model="clientSecret"
 				type="text"
-				:id="`google-${context}-client-secret`"
+				id="google-accounts-client-secret"
 				class="sui-form-control"
-				:aria-labelledby="`google-${context}-client-secret-label`"
-				:aria-describedby="`google-${context}-client-secret-error`"
+				aria-labelledby="google-accounts-client-secret-label"
+				aria-describedby="google-accounts-client-secret-error"
 				:placeholder="$i18n.placeholder.client_secret"
 			/>
+
 			<span
 				v-if="errors.includes('clientSecret')"
-				:id="`google-${context}-client-secret-error`"
+				id="google-accounts-client-secret-error"
 				class="sui-error-message"
 			>
 				{{ $i18n.error.client_secret }}
 			</span>
 		</div>
 
-		<div class="sui-form-field">
-			<button
-				type="button"
-				class="sui-button sui-button-blue"
-				aria-live="polite"
-				:class="authButtonClass"
-				@click="authorize"
-			>
-				<span class="sui-button-text-default">
-					{{ $i18n.button.authorize }}
-				</span>
-				<span class="sui-button-text-onload">
-					<i
-						class="sui-icon-loader sui-loading"
-						aria-hidden="true"
-					></i>
-					{{ $i18n.button.processing }}
-				</span>
-			</button>
-		</div>
+		<button
+			type="button"
+			class="sui-button sui-button-sm sui-button-blue"
+			:class="authButtonClass"
+			aria-live="polite"
+			@click="authorize"
+		>
+			<span class="sui-button-text-default">
+				{{ $i18n.button.authorize }}
+			</span>
+			<span class="sui-button-text-onload">
+				<span
+					class="sui-icon-loader sui-loading"
+					aria-hidden="true"
+				></span>
+				{{ $i18n.button.processing }}
+			</span>
+		</button>
 	</fragment>
 </template>
 
@@ -97,13 +92,6 @@ import { restGet } from '@/helpers/api'
 
 export default {
 	name: 'ApiProjectForm',
-
-	props: {
-		context: {
-			type: String,
-			default: 'settings',
-		},
-	},
 
 	data() {
 		return {
@@ -185,13 +173,12 @@ export default {
 
 				// Get the auth url from API.
 				restGet({
-					path: 'auth/auth-url',
+					path: 'v1/auth/auth-url',
 					params: {
 						client_id: this.clientId,
 						client_secret: this.clientSecret,
 						network: this.isNetwork() ? 1 : 0,
-						context: this.context,
-						modal: this.context === 'onboarding' ? 1 : 0,
+						context: 'settings',
 					},
 				}).then((response) => {
 					// If the response is valid, redirect to the auth url.
@@ -220,17 +207,13 @@ export default {
 			this.$root.$emit('googleConnectProcessed', {
 				type: 'api',
 				success: false,
-				context: this.context,
 			})
 
 			// Show notice.
 			this.$root.$emit('showTopNotice', {
 				type: 'error',
 				dismiss: true,
-				message: this.sprintf(
-					this.$i18n.notice.auth_failed,
-					'https://premium.wpmudev.org/get-support/'
-				),
+				message: this.$i18n.notice.auth_failed,
 			})
 		},
 	},

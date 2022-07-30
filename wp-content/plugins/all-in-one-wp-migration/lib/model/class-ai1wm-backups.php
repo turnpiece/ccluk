@@ -86,13 +86,22 @@ class Ai1wm_Backups {
 	}
 
 	/**
+	 * Count all backup files
+	 *
+	 * @return integer
+	 */
+	public static function count_files() {
+		return count( Ai1wm_Backups::get_files() );
+	}
+
+	/**
 	 * Delete backup file
 	 *
 	 * @param  string  $file File name
 	 * @return boolean
 	 */
 	public static function delete_file( $file ) {
-		if ( validate_file( $file ) === 0 ) {
+		if ( ai1wm_is_filename_supported( $file ) ) {
 			return @unlink( ai1wm_backup_path( array( 'archive' => $file ) ) );
 		}
 	}
@@ -148,5 +157,14 @@ class Ai1wm_Backups {
 		}
 
 		return ( $a['mtime'] > $b['mtime'] ) ? - 1 : 1;
+	}
+
+	/**
+	 * Check if backups are downloadable
+	 */
+	public static function are_downloadable() {
+		$path = untrailingslashit( ABSPATH );
+
+		return substr( AI1WM_BACKUPS_PATH, 0, strlen( $path ) ) === $path;
 	}
 }

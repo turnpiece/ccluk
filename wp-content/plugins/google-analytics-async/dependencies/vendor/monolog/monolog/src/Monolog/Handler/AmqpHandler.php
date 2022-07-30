@@ -15,7 +15,7 @@ use Beehive\Monolog\Formatter\JsonFormatter;
 use Beehive\PhpAmqpLib\Message\AMQPMessage;
 use Beehive\PhpAmqpLib\Channel\AMQPChannel;
 use AMQPExchange;
-class AmqpHandler extends \Beehive\Monolog\Handler\AbstractProcessingHandler
+class AmqpHandler extends AbstractProcessingHandler
 {
     /**
      * @var AMQPExchange|AMQPChannel $exchange
@@ -31,11 +31,11 @@ class AmqpHandler extends \Beehive\Monolog\Handler\AbstractProcessingHandler
      * @param int                      $level
      * @param bool                     $bubble       Whether the messages that are handled can bubble up the stack or not
      */
-    public function __construct($exchange, $exchangeName = 'log', $level = \Beehive\Monolog\Logger::DEBUG, $bubble = \true)
+    public function __construct($exchange, $exchangeName = 'log', $level = Logger::DEBUG, $bubble = \true)
     {
-        if ($exchange instanceof \AMQPExchange) {
+        if ($exchange instanceof AMQPExchange) {
             $exchange->setName($exchangeName);
-        } elseif ($exchange instanceof \Beehive\PhpAmqpLib\Channel\AMQPChannel) {
+        } elseif ($exchange instanceof AMQPChannel) {
             $this->exchangeName = $exchangeName;
         } else {
             throw new \InvalidArgumentException('PhpAmqpLib\\Channel\\AMQPChannel or AMQPExchange instance required');
@@ -50,7 +50,7 @@ class AmqpHandler extends \Beehive\Monolog\Handler\AbstractProcessingHandler
     {
         $data = $record["formatted"];
         $routingKey = $this->getRoutingKey($record);
-        if ($this->exchange instanceof \AMQPExchange) {
+        if ($this->exchange instanceof AMQPExchange) {
             $this->exchange->publish($data, $routingKey, 0, array('delivery_mode' => 2, 'content_type' => 'application/json'));
         } else {
             $this->exchange->basic_publish($this->createAmqpMessage($data), $this->exchangeName, $routingKey);
@@ -61,7 +61,7 @@ class AmqpHandler extends \Beehive\Monolog\Handler\AbstractProcessingHandler
      */
     public function handleBatch(array $records)
     {
-        if ($this->exchange instanceof \AMQPExchange) {
+        if ($this->exchange instanceof AMQPExchange) {
             parent::handleBatch($records);
             return;
         }
@@ -97,13 +97,13 @@ class AmqpHandler extends \Beehive\Monolog\Handler\AbstractProcessingHandler
      */
     private function createAmqpMessage($data)
     {
-        return new \Beehive\PhpAmqpLib\Message\AMQPMessage((string) $data, array('delivery_mode' => 2, 'content_type' => 'application/json'));
+        return new AMQPMessage((string) $data, array('delivery_mode' => 2, 'content_type' => 'application/json'));
     }
     /**
      * {@inheritDoc}
      */
     protected function getDefaultFormatter()
     {
-        return new \Beehive\Monolog\Formatter\JsonFormatter(\Beehive\Monolog\Formatter\JsonFormatter::BATCH_MODE_JSON, \false);
+        return new JsonFormatter(JsonFormatter::BATCH_MODE_JSON, \false);
     }
 }

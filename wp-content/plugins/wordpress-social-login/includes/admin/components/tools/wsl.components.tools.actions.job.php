@@ -2,8 +2,8 @@
 /*!
 * WordPress Social Login
 *
-* http://miled.github.io/wordpress-social-login/ | https://github.com/miled/wordpress-social-login
-*  (c) 2011-2015 Mohamed Mrassi and contributors | http://wordpress.org/plugins/wordpress-social-login/
+* https://miled.github.io/wordpress-social-login/ | https://github.com/miled/wordpress-social-login
+*   (c) 2011-2020 Mohamed Mrassi and contributors | https://wordpress.org/plugins/wordpress-social-login/
 */
 
 // Exit if accessed directly
@@ -27,7 +27,7 @@ function wsl_component_tools_do_diagnostics()
 			<br />
 			<table class="wp-list-table widefat">
 				<?php
-					$test = version_compare( PHP_VERSION, '5.2.0', '>=' );
+					$test = version_compare( PHP_VERSION, '5.4.0', '>=' );
 					// $test = 0;
 				?>
 				<tr>
@@ -35,7 +35,7 @@ function wsl_component_tools_do_diagnostics()
 						<label>PHP Version</label>
 					</th>
 					<td>
-						<p>PHP >= 5.2.0 installed.</p>
+						<p>PHP >= 5.4.0 installed.</p>
 						<?php
 							if( ! $test )
 							{
@@ -252,7 +252,7 @@ function wsl_component_tools_do_diagnostics()
 							</div>
 						</div>
 
-						<p>You may double-check this test manually by clicking this <a href="<?php echo WORDPRESS_SOCIAL_LOGIN_HYBRIDAUTH_ENDPOINT_URL; ?>?test=http://example.com" target="_blank">direct link</a>.</p>
+						<p>You may double-check this test manually by clicking this <a href="<?php echo WORDPRESS_SOCIAL_LOGIN_HYBRIDAUTH_ENDPOINT_URL; ?>?end_points_test=http://example.com" target="_blank">direct link</a>.</p>
 					</td>
 					<td width="60">
 						<span id="end_points">testing..</span>
@@ -260,12 +260,11 @@ function wsl_component_tools_do_diagnostics()
 							jQuery(document).ready(function($) {
 								jQuery.ajax({
 									url: '<?php echo WORDPRESS_SOCIAL_LOGIN_HYBRIDAUTH_ENDPOINT_URL; ?>',
-									data: 'url=http://example.com',
+									data: 'end_points_test=http://example.com',
 									success: function () {
 										jQuery('#end_points').html( '<b style="color:green;">OK!</b>' );
 									},
 									error: function (xhr, ajaxOptions, thrownError) {
-										// console.log( xhr );
 										jQuery('#end_points_error').html( '"<b style="color:red;">' + xhr.status + ' ' + xhr.statusText + '</b>"' );
 										jQuery('#end_points').html( '<b style="color:red;">FAIL!</b>' );
 										jQuery('#end_points_warn').show();
@@ -318,7 +317,7 @@ function wsl_component_tools_do_diagnostics()
 				</tr>
 
 				<?php
-					$test = class_exists( 'Hybrid_Auth', false ) ? false : true;
+					$test = class_exists( 'Hybridauth\Hybridauth', false ) ? false : true;
 				?>
 				<tr>
 					<th width="200">
@@ -335,7 +334,7 @@ function wsl_component_tools_do_diagnostics()
 										<p>This is not critical but it may prevent WSL from working.</p>
 										<p>Please, inform the developer of that plugin not to auto-include the file below and to use Hybridauth Library only when required.</p>
 										<div style="background-color: #FFFFE0;border:1px solid #E6DB55; border-radius: 3px;padding: 10px;margin:2px;">
-										<?php try{$reflector = new ReflectionClass( 'Hybrid_Auth' ); echo $reflector->getFileName(); } catch( Exception $e ){} ?>
+										<?php try{$reflector = new ReflectionClass( 'Hybridauth\Hybridauth' ); echo $reflector->getFileName(); } catch( Exception $e ){} ?>
 										</div>
 									</div>
 								<?php
@@ -477,11 +476,11 @@ function wsl_component_tools_do_diagnostics()
 					$curl = '';
 					$test = true;
 
-					if( ! class_exists( 'Hybrid_Auth', false ) )
+					if( ! class_exists( 'Hybridauth\Hybridauth', false ) )
 					{
-						include_once WORDPRESS_SOCIAL_LOGIN_ABS_PATH . "/hybridauth/Hybrid/Auth.php";
+						require_once WORDPRESS_SOCIAL_LOGIN_ABS_PATH . 'hybridauth/library/src/autoload.php';
 
-						$curl = Hybrid_Auth::getCurrentUrl();
+						$curl = Hybridauth\HttpClient\Util::getCurrentUrl();
 					}
 
 					$headers = array( 'HTTP_VIA', 'HTTP_X_FORWARDED_FOR', 'HTTP_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_FORWARDED', 'HTTP_CLIENT_IP', 'HTTP_FORWARDED_FOR_IP', 'VIA', 'X_FORWARDED_FOR', 'FORWARDED_FOR', 'X_FORWARDED', 'FORWARDED', 'CLIENT_IP', 'FORWARDED_FOR_IP', 'HTTP_PROXY_CONNECTION' );

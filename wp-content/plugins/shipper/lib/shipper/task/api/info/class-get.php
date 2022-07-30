@@ -18,10 +18,10 @@ class Shipper_Task_Api_Info_Get extends Shipper_Task_Api {
 	 * @return array
 	 */
 	public function apply( $args = array() ) {
-		$migration = new Shipper_Model_Stored_Migration;
-		$data = array();
+		$migration = new Shipper_Model_Stored_Migration();
+		$data      = array();
+		$domain    = false;
 
-		$domain = false;
 		if ( ! empty( $args['domain'] ) ) {
 			$domain = Shipper_Model_Stored_Destinations::get_normalized_domain(
 				$args['domain']
@@ -30,23 +30,34 @@ class Shipper_Task_Api_Info_Get extends Shipper_Task_Api {
 			$domain = $migration->get_destination();
 		}
 
-		$status = $this->get_response( 'info-get', self::METHOD_GET, array(
-			'domain' => $domain,
-		));
+		if ( ! $domain ) {
+			return $data;
+		}
+
+		$status = $this->get_response(
+			'info-get',
+			self::METHOD_GET,
+			array(
+				'domain' => $domain,
+			)
+		);
 
 		if ( empty( $status['success'] ) ) {
 			$this->record_non_success(
 				'info-get',
 				self::ERR_SERVICE,
 				sprintf(
+					/* translators: %s: error message. */
 					__( 'Service error: %s', 'shipper' ),
 					$this->get_formatted_error( $status )
 				)
 			);
+
 			return $data;
 		}
 
 		$this->record_success( 'info-get' );
+
 		return $status['data'];
 	}
 

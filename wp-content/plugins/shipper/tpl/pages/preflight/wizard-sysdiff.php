@@ -5,7 +5,7 @@
  * @package shipper
  */
 
-$checks = $result['checks']['sysdiff'];
+$checks             = $result['checks']['sysdiff'];
 $has_service_errors = ! empty( $checks['errors'] );
 ?>
 
@@ -26,30 +26,27 @@ $has_service_errors = ! empty( $checks['errors'] );
 			</tr>
 		</thead>
 		<tbody>
-		<?php foreach ( $checks['checks'] as $check ) { ?>
-			<?php if ( 'ok' === $check['status'] ) { continue; } ?>
+		<?php
+		foreach ( $checks['checks'] as $check ) {
+			if ( 'ok' === $check['status'] ) {
+				continue;
+			}
+			?>
 			<tr class="sui-accordion-item">
 				<td class="sui-table-item-title">
 					<?php echo esc_html( $check['title'] ); ?>
 				</td>
-
 				<td class="shipper-check-status">
-				<?php
+					<?php
 					$icon_type = 'ok' === $check['status']
 						? 'check-tick'
-						: 'warning-alert'
-					;
+						: 'warning-alert';
 					$icon_kind = 'warning-alert' === $icon_type
 						? $check['status']
-						: 'success'
-					;
-				?>
-					<i aria-hidden="true"
-						class="sui-icon-<?php
-							echo esc_attr( $icon_type );
-						?> sui-<?php echo esc_attr( $icon_kind ); ?>"></i>
+						: 'success';
+					?>
+					<i aria-hidden="true" class="sui-icon-<?php echo esc_attr( $icon_type ); ?> sui-<?php echo esc_attr( $icon_kind ); ?>"></i>
 				</td>
-
 				<td>
 					<div class="shipper-check-message">
 					<?php

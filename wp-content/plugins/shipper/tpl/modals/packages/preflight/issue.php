@@ -11,7 +11,7 @@ if ( ! empty( $check_type ) ) {
 	$issue_type_class .= ' shipper-issue-' . esc_attr( $check_type );
 }
 if ( 'ok' === $status ) {
-	$status = 'success';
+	$status = 'success'; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- this is not WordPress global variable
 }
 ?>
 <div class="shipper-issue <?php echo esc_attr( $issue_type_class ); ?>">
@@ -21,7 +21,7 @@ if ( 'ok' === $status ) {
 		</div>
 
 		<div class="shipper-issue-summary">
-			<?php esc_html_e( $title ); ?>
+			<?php echo esc_html( $title ); ?>
 		</div>
 
 		<div class="shipper-issue-item-state">
@@ -32,14 +32,14 @@ if ( 'ok' === $status ) {
 	<div class="shipper-issue-body">
 		<div class="shipper-issue-body-content">
 		<?php
-			$this->render(
-				'modals/packages/preflight/issue-message',
-				array(
-					'message' => $message,
-					'status' => $status,
-					'check_type' => ! empty( $check_type ) ? $check_type : false,
-				)
-			);
+		$this->render(
+			'modals/packages/preflight/issue-message',
+			array(
+				'message'    => $message,
+				'status'     => $status,
+				'check_type' => ! empty( $check_type ) ? $check_type : false,
+			)
+		);
 		?>
 		<div class="shipper-issue-body-footer">
 			<button type="button" class="sui-button sui-button-ghost shipper-recheck">

@@ -15,7 +15,7 @@ namespace Beehive\Monolog\Handler;
  *
  * @author Gyula Sallai
  */
-abstract class MailHandler extends \Beehive\Monolog\Handler\AbstractProcessingHandler
+abstract class MailHandler extends AbstractProcessingHandler
 {
     /**
      * {@inheritdoc}

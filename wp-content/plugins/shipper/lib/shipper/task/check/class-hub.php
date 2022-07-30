@@ -11,8 +11,8 @@
 class Shipper_Task_Check_Hub extends Shipper_Task {
 
 	const ERR_DASH_PRESENT = 'dash_present';
-	const ERR_DASH_ACTIVE = 'dash_active';
-	const ERR_DASH_APIKEY = 'dash_api_key';
+	const ERR_DASH_ACTIVE  = 'dash_active';
+	const ERR_DASH_APIKEY  = 'dash_api_key';
 
 	/**
 	 * Checks whether we're overall Hub connection-ready
@@ -103,7 +103,7 @@ class Shipper_Task_Check_Hub extends Shipper_Task {
 	 * @return bool
 	 */
 	public function has_api_key() {
-		$model = new Shipper_Model_Api;
+		$model = new Shipper_Model_Api();
 
 		/**
 		 * Dashboard API key presence check filter

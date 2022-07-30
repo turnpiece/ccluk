@@ -14,6 +14,12 @@
  * Files copying class
  */
 class Shipper_Task_Import_Files extends Shipper_Task_Import {
+
+	/**
+	 * Storage holder.
+	 *
+	 * @var $storage
+	 */
 	protected $storage;
 
 	/**
@@ -27,12 +33,15 @@ class Shipper_Task_Import_Files extends Shipper_Task_Import {
 		$current  = '';
 		if ( ! empty( $position ) ) {
 			$current = sprintf(
+				/* translators: %1$d %2$s: position and total files.*/
 				__( '( %1$d of %2$s total )', 'shipper' ),
-				$position, $total
+				$position,
+				$total
 			);
 		}
 
 		return sprintf(
+			/* translators: %s: file name.*/
 			__( 'Download and place files %s', 'shipper' ),
 			$current
 		);
@@ -41,11 +50,12 @@ class Shipper_Task_Import_Files extends Shipper_Task_Import {
 	/**
 	 * Gets total files to process in this step
 	 *
+	 * @param object $migration Shipper_Model_Stored_Migration instance.
 	 * @return int
 	 */
 	public function get_total_files( $migration = false ) {
 		if ( empty( $migration ) ) {
-			$migration = new Shipper_Model_Stored_Migration;
+			$migration = new Shipper_Model_Stored_Migration();
 		}
 
 		return $migration->get( 'total-manifest-files' );
@@ -63,7 +73,7 @@ class Shipper_Task_Import_Files extends Shipper_Task_Import {
 	public function add_file_to_queue( $path, $queue, $storage = false ) {
 		$added = false;
 		if ( empty( $storage ) ) {
-			$storage = new Shipper_Model_Stored_Filelist;
+			$storage = new Shipper_Model_Stored_Filelist();
 		}
 		$files = $storage->get( $queue, array() );
 		if ( ! in_array( $path, $files, true ) ) {
@@ -112,33 +122,23 @@ class Shipper_Task_Import_Files extends Shipper_Task_Import {
 	/**
 	 * Gets file entries to process
 	 *
-	 * @param int $pos Position from where to start.
+	 * @param int    $pos Position from where to start.
 	 * @param object $dumped Optional dumped list model instance to use.
 	 *
 	 * @return array
 	 */
 	public function get_file_statements( $pos, $dumped = false ) {
 		if ( empty( $dumped ) ) {
-			$dumped = new Shipper_Model_Dumped_Filelist;
+			$dumped = new Shipper_Model_Dumped_Filelist();
 		}
 
 		$max_statements = (int) apply_filters(
 			'shipper_import_max_upload_statements',
-			//fallback
+			// fallback.
 			100
 		);
 
-		$memory_limit = $this->get_memory_limit();
-		Shipper_Helper_Log::debug( 'Memory detected ' . $memory_limit . ' MB' );
-		$max_size = $memory_limit <= 256 ? 1 : 2;
-		$max_size = (int) apply_filters( 'shipper_import_max_upload_package_size', $max_size );
-		if ( $memory_limit > 65 ) {
-			$max_statements = 0;
-		} else {
-			$max_size = 0;
-		}
-
-		return $dumped->get_statements( $pos, $max_statements, $max_size );
+		return $dumped->get_statements( $pos, $max_statements );
 	}
 
 	/**
@@ -150,7 +150,7 @@ class Shipper_Task_Import_Files extends Shipper_Task_Import {
 	 */
 	public function get_destination_domain( $migration = false ) {
 		if ( empty( $migration ) ) {
-			$migration = new Shipper_Model_Stored_Migration;
+			$migration = new Shipper_Model_Stored_Migration();
 		}
 
 		return $migration->get_source();
@@ -165,7 +165,7 @@ class Shipper_Task_Import_Files extends Shipper_Task_Import {
 	 */
 	public function get_initialized_position( $filelist = false ) {
 		if ( empty( $filelist ) ) {
-			$filelist = new Shipper_Model_Stored_Filelist;
+			$filelist = new Shipper_Model_Stored_Filelist();
 		}
 
 		$pos = $filelist->get( Shipper_Model_Stored_Filelist::KEY_CURSOR, false );
@@ -188,7 +188,7 @@ class Shipper_Task_Import_Files extends Shipper_Task_Import {
 	 */
 	public function get_download_file_command( $relpath, $remote = false ) {
 		if ( empty( $remote ) ) {
-			$remote = new Shipper_Helper_Fs_Remote;
+			$remote = new Shipper_Helper_Fs_Remote();
 		}
 		$domain = $this->get_destination_domain();
 
@@ -209,12 +209,12 @@ class Shipper_Task_Import_Files extends Shipper_Task_Import {
 	 */
 	public function get_individual_destination( $relpath ) {
 		$download_root = Shipper_Helper_Fs_Path::get_temp_dir();
-		if ( pathinfo( $relpath, PATHINFO_EXTENSION ) != 'sql' ) {
+		if ( pathinfo( $relpath, PATHINFO_EXTENSION ) !== 'sql' ) {
 			$download_root = Shipper_Helper_Fs_Path::get_temp_dir();
 		}
 		$destination = trailingslashit(
-			               $download_root
-		               ) . $relpath;
+			$download_root
+		) . $relpath;
 		if ( ! file_exists( dirname( $destination ) ) ) {
 			wp_mkdir_p( dirname( $destination ) );
 		}
@@ -234,7 +234,7 @@ class Shipper_Task_Import_Files extends Shipper_Task_Import {
 	public function apply( $args = array() ) {
 		$pos           = $this->get_initialized_position();
 		$shipper_pos   = $pos;
-		$this->storage = new Shipper_Model_Stored_Filelist;
+		$this->storage = new Shipper_Model_Stored_Filelist();
 		$statements    = $this->get_file_statements( $pos );
 		$batch         = array();
 		$sources       = array();
@@ -247,20 +247,20 @@ class Shipper_Task_Import_Files extends Shipper_Task_Import {
 				continue;
 			}
 			/**
-			 * if sql files we download from s3, but if it other files we'll do nothing
+			 * If sql files we download from s3, but if it other files we'll do nothing.
 			 */
-			if ( pathinfo( $data['destination'], PATHINFO_EXTENSION ) == 'sql' ) {
+			if ( pathinfo( $data['destination'], PATHINFO_EXTENSION ) === 'sql' ) {
 				$cmd = $this->get_download_file_command( $data['destination'] );
 				if ( $cmd ) {
 					$batch[]                         = $cmd;
 					$sources[ $data['destination'] ] = $this->get_individual_destination(
 						$data['destination']
 					);
-					$queue_size                      += $data['size'];
+					$queue_size                     += $data['size'];
 				}
 			} else {
-				if ( pathinfo( $data['source'], PATHINFO_BASENAME ) != pathinfo( $data['destination'], PATHINFO_BASENAME ) ) {
-					//ths is config files
+				if ( pathinfo( $data['source'], PATHINFO_BASENAME ) !== pathinfo( $data['destination'], PATHINFO_BASENAME ) ) {
+					// ths is config files.
 					$dest                            = trailingslashit( pathinfo( $data['destination'], PATHINFO_DIRNAME ) ) . pathinfo( $data['source'], PATHINFO_BASENAME );
 					$sources[ $data['destination'] ] = $this->get_individual_destination( $dest );
 				} else {
@@ -271,12 +271,15 @@ class Shipper_Task_Import_Files extends Shipper_Task_Import {
 		}
 
 		if ( ! empty( $batch ) ) {
-			$remote = new Shipper_Helper_Fs_Remote;
+			$remote = new Shipper_Helper_Fs_Remote();
 			$status = $remote->execute_batch_queue( $batch );
-			Shipper_Helper_Log::debug( sprintf(
-				'About to download queue with %d files, %s size',
-				count( $batch ), size_format( $queue_size )
-			) );
+			Shipper_Helper_Log::debug(
+				sprintf(
+					'About to download queue with %d files, %s size',
+					count( $batch ),
+					size_format( $queue_size )
+				)
+			);
 			$batch = null; // Give it our best shot in memory cleanup.
 		}
 
@@ -284,7 +287,7 @@ class Shipper_Task_Import_Files extends Shipper_Task_Import {
 
 		foreach ( $sources as $relpath => $source ) {
 			if ( ! $this->is_to_be_moved( $relpath, $source ) ) {
-				// SQLs and config files remain in place
+				// SQLs and config files remain in place.
 				continue;
 			}
 			$this->deploy_file( $source, $relpath );
@@ -304,22 +307,28 @@ class Shipper_Task_Import_Files extends Shipper_Task_Import {
 		return $is_done;
 	}
 
+	/**
+	 * Deploy files
+	 *
+	 * @param string $source source path.
+	 * @param string $dest_relpath destination path.
+	 *
+	 * @return bool
+	 */
 	public function deploy_file( $source, $dest_relpath ) {
 		$destination = trailingslashit( ABSPATH ) . preg_replace(
-				'/^' . preg_quote(
-					trailingslashit( Shipper_Model_Stored_Migration::COMPONENT_FS ),
-					'/'
-				) . '/',
-				'',
-				$dest_relpath
-			);
-		//Shipper_Helper_Log::debug( sprintf( 'Start to deploy %s to %s', $source, $destination ) );
+			'/^' . preg_quote(
+				trailingslashit( Shipper_Model_Stored_Migration::COMPONENT_FS ),
+				'/'
+			) . '/',
+			'',
+			$dest_relpath
+		);
+
 		$time = microtime( true );
 		if ( Shipper_Helper_Fs_Path::is_config_file( $destination ) ) {
 			// We will move those, just not now.
 			$this->add_config_file( $destination );
-
-			//Shipper_Helper_Log::debug( 'Check config: ' . round( microtime( true ) - $time, 4 ) );
 
 			return false;
 		}
@@ -328,8 +337,6 @@ class Shipper_Task_Import_Files extends Shipper_Task_Import {
 		if ( Shipper_Helper_Fs_Path::is_active_file( $destination ) ) {
 			// We will move those, just not now.
 			$this->add_active_file( $destination, $this->storage );
-
-			//Shipper_Helper_Log::debug( 'Check active: ' . round( microtime( true ) - $time, 4 ) );
 
 			return false;
 		}
@@ -361,17 +368,18 @@ class Shipper_Task_Import_Files extends Shipper_Task_Import {
 					);
 				}
 			}
-			//Shipper_Helper_Log::debug( 'Check dir: ' . round( microtime( true ) - $time, 4 ) );
+
 			$time = microtime( true );
 			if ( ! copy( $source, $destination ) ) {
 				Shipper_Helper_Log::write(
 					sprintf(
+						/* translators: %1$s %2$s: dest and source path. */
 						__( 'WARNING: unable to copy staged file %1$s to %2$s', 'shipper' ),
-						$source, $destination
+						$source,
+						$destination
 					)
 				);
 			}
-			//Shipper_Helper_Log::debug( 'copy: ' . round( microtime( true ) - $time, 4 ) );
 		}
 
 		return shipper_delete_file( $source );
@@ -413,14 +421,14 @@ class Shipper_Task_Import_Files extends Shipper_Task_Import {
 	/**
 	 * Sets the position, shorting out if neccessary
 	 *
-	 * @param int $position Position to set.
+	 * @param int    $position Position to set.
 	 * @param object $filelist Optional filelist model instance to use.
 	 *
 	 * @return bool
 	 */
 	public function set_initialized_position( $position, $filelist = false ) {
 		if ( empty( $filelist ) ) {
-			$filelist = new Shipper_Model_Stored_Filelist;
+			$filelist = new Shipper_Model_Stored_Filelist();
 		}
 
 		$newpos = $filelist->get( Shipper_Model_Stored_Filelist::KEY_CURSOR, false );
@@ -435,18 +443,20 @@ class Shipper_Task_Import_Files extends Shipper_Task_Import {
 	}
 
 	/**
+	 * Get memory limit.
+	 *
 	 * @return float|int|string
 	 */
 	private function get_memory_limit() {
 		$migration    = new Shipper_Model_Stored_Migration();
 		$memory_limit = $migration->get( 'memory_limit' );
-		//convert all to M
+		// convert all to M.
 		if ( preg_match( '/^(\d+)(.)$/', $memory_limit, $matches ) ) {
-			if ( strtoupper( $matches[2] ) == 'M' ) {
+			if ( strtoupper( $matches[2] ) === 'M' ) {
 				$memory_limit = $matches[1];
-			} else if ( strtoupper( $matches[2] ) == 'K' ) {
-				$memory_limit = $matches[1] / 1024; // nnnK -> nnn KB
-			} elseif ( strtoupper( $matches[2] ) == 'G' ) {
+			} elseif ( strtoupper( $matches[2] ) === 'K' ) {
+				$memory_limit = $matches[1] / 1024; // nnnK -> nnn KB.
+			} elseif ( strtoupper( $matches[2] ) === 'G' ) {
 				$memory_limit = $matches[1] * 1024;
 			}
 		}
@@ -454,11 +464,33 @@ class Shipper_Task_Import_Files extends Shipper_Task_Import {
 		return $memory_limit;
 	}
 
+	/**
+	 * Get total steps.
+	 *
+	 * @return int
+	 */
 	public function get_total_steps() {
 		return $this->get_total_files();
 	}
 
+	/**
+	 * Get current step.
+	 *
+	 * @return int
+	 */
 	public function get_current_step() {
 		return $this->get_initialized_position();
+	}
+
+	/**
+	 * Cleanup data, move file cursor to it's initial position
+	 *
+	 * @since 1.1.4
+	 *
+	 * @return void
+	 */
+	public function cleanup() {
+		$file_list = new Shipper_Model_Stored_Filelist();
+		$file_list->cleanup();
 	}
 }

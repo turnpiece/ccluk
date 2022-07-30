@@ -2,7 +2,7 @@
 /**
  * The Google analytics popular contents widget class.
  *
- * @link    http://premium.wpmudev.org
+ * @link    http://wpmudev.com
  * @since   3.2.0
  *
  * @author  Joel James <joel@incsub.com>
@@ -143,6 +143,9 @@ class Popular extends Widget {
 		 */
 		$vars['retries'] = apply_filters( 'beehive_google_popular_widget_retries', 1 );
 
+		// Statistics type.
+		$vars['stats_type'] = beehive_analytics()->settings->get( 'statistics_type', 'google', false, 'ua' );
+
 		return $vars;
 	}
 
@@ -180,7 +183,7 @@ class Popular extends Widget {
 		if ( ! $admin ) {
 			// Most popular widget.
 			$scripts['beehive-popular-widget'] = array(
-				'src'  => 'popular-widget.min.js',
+				'src'  => 'ga-popular-posts.min.js',
 				'deps' => array( 'jquery' ),
 			);
 		}
@@ -199,14 +202,16 @@ class Popular extends Widget {
 	 * pages API response, you will get less no. of items after the
 	 * emission of other sites.
 	 *
+	 * @since 3.2.4
+	 * @since 3.4.0 Added new param v2.
+	 *
 	 * @param int  $count      No. of items required.
 	 * @param bool $cache_only Should check only cache.
-	 *
-	 * @since 3.2.4
+	 * @param bool $v2         Is GA4 (v2) stats.
 	 *
 	 * @return array
 	 */
-	public function get_list( $count = 0, $cache_only = false ) {
+	public function get_list( $count = 0, $cache_only = false, $v2 = false ) {
 		// Get the count from widget settings.
 		if ( empty( $count ) ) {
 			// Get settings.
@@ -232,7 +237,11 @@ class Popular extends Widget {
 		$count = apply_filters( 'beehive_google_popular_widget_items_count', $count );
 
 		// Get cache key.
-		$cache_key = Cache::cache_key( 'popular_posts_' . $count );
+		if ( $v2 ) {
+			$cache_key = Cache::cache_key( 'popular_posts_v2_' . $count );
+		} else {
+			$cache_key = Cache::cache_key( 'popular_posts_' . $count );
+		}
 
 		// Get list from cache.
 		$list = Cache::get_transient( $cache_key );
@@ -247,7 +256,11 @@ class Popular extends Widget {
 			$list = array();
 
 			// Get the stats instance.
-			$stats = Google_Analytics\Stats::instance();
+			if ( $v2 ) {
+				$stats = Google_Analytics\Stats\GA4::instance();
+			} else {
+				$stats = Google_Analytics\Stats\UA::instance();
+			}
 
 			// Get the stats.
 			$urls = $stats->stats(
@@ -329,7 +342,6 @@ class Popular extends Widget {
 				$url = $this->process_url( $url );
 
 				// Now try to get the post id.
-				// phpcs:ignore
 				$post_id = url_to_postid( ( is_ssl() ? 'https://' : 'http://' ) . $url );
 
 				// This page is not from this site.

@@ -1,7 +1,28 @@
 <template>
 	<div class="sui-wrap" id="beehive-wrap">
+		<black-friday-notice/>
+
+		<sui-notice type="warning" v-if="showGA4Notice">
+			<p v-html="$i18n.notice.ga4_not_setup"></p>
+		</sui-notice>
+
 		<sui-header :title="$i18n.title.dashboard">
+			<template v-slot:left>
+				<sui-select
+					v-model="statisticsType"
+					id="beehive-statics-type-select"
+					width="175px"
+					:options="$moduleVars.stats_types"
+					:is-small="true"
+				/>
+			</template>
 			<template v-slot:right>
+				<!-- Button to clear the cached data -->
+				<refresh-button
+					:loading.sync="loading"
+					:notice="false"
+					@refreshed="getSummary"
+				/>
 				<sui-calendar-range
 					id="beehive-stats-datepicker"
 					:periods="$vars.dates.periods"
@@ -13,51 +34,74 @@
 			</template>
 		</sui-header>
 
-		<summary-widget :stats="stats.summary" :loading="loading" />
+		<summary-widget :stats="stats.summary" :loading="loading"/>
+
+		<tutorial-slider/>
 
 		<div class="sui-row">
-			<div class="sui-col-md-6">
-				<statistics-widget :stats="stats.list" :loading="loading" />
+			<div class="sui-col-lg-6">
+				<statistics-widget :stats="stats.list" :loading="loading"/>
 			</div>
-			<div class="sui-col-md-6">
-				<gtm-widget />
+			<div class="sui-col-lg-6">
+				<div class="sui-row">
+					<div class="sui-col-md-12">
+						<gtm-widget/>
+					</div>
+				</div>
+				<div class="sui-row">
+					<div class="sui-col">
+						<ga-widget/>
+					</div>
+				</div>
 			</div>
 		</div>
 
-		<sui-footer />
+		<sui-footer/>
 
 		<!-- Onboarding start -->
-		<onboarding v-if="showOnboarding" />
+		<onboarding v-if="showOnboarding"/>
 		<!-- Onboarding end -->
 		<!-- Welcome modal -->
-		<welcome-modal v-else-if="showWelcome" />
+		<welcome-modal v-else-if="showWelcome"/>
 		<!-- welcome modal end -->
 	</div>
 </template>
 
 <script>
-import { restGet } from '@/helpers/api'
+import {restGetStats} from '@/helpers/api'
+import GaWidget from './widgets/ga-widget'
 import GtmWidget from './widgets/gtm-widget'
 import Onboarding from './../onboarding/onboarding'
 import SuiHeader from '@/components/sui/sui-header'
 import SuiFooter from '@/components/sui/sui-footer'
+import SuiNotice from '@/components/sui/sui-notice'
+import SuiSelect from '@/components/sui/sui-select'
 import SummaryWidget from './widgets/summary-widget'
 import StatisticsWidget from './widgets/statistics-widget'
+import RefreshButton from '@/components/elements/refresh-button'
 import SuiCalendarRange from '@/components/sui/sui-calendar-range'
 import WelcomeModal from '@/components/elements/modals/welcome-modal'
+import BlackFridayNotice from '@/components/elements/black-friday-notice'
+import TutorialSlider from '@/components/elements/tutorial-slider.vue'
 
 export default {
 	name: 'App',
 
 	components: {
+		GaWidget,
 		GtmWidget,
 		SuiHeader,
 		SuiFooter,
+		SuiSelect,
+		SuiNotice,
 		Onboarding,
 		WelcomeModal,
 		SummaryWidget,
+		RefreshButton,
 		StatisticsWidget,
 		SuiCalendarRange,
+		TutorialSlider,
+		BlackFridayNotice,
 	},
 
 	data() {
@@ -115,6 +159,7 @@ export default {
 		this.$root.$on('googleConnectProcessed', (data) => {
 			// Update profiles.
 			if (data.success) {
+				this.$store.dispatch('helpers/updateGoogleStreams', {})
 				this.$store.dispatch('helpers/updateGoogleProfiles', {
 					reInit: true, // Re load settings.
 				})
@@ -181,6 +226,40 @@ export default {
 				return false
 			}
 		},
+
+		/**
+		 * Computed object to get the selected type.
+		 *
+		 * @since 3.4.0
+		 *
+		 * @returns {string}
+		 */
+		statisticsType: {
+			get() {
+				return this.getOption('statistics_type', 'google', 'ua')
+			},
+			set(value) {
+				this.setOption('statistics_type', 'google', value)
+				// Save right away.
+				this.saveOptions()
+				// Emit type change event.
+				this.$root.$emit('statsTypeChanged')
+
+				// Get new stats.
+				this.getSummary()
+			},
+		},
+
+		/**
+		 * Check if we should show GA4 notice.
+		 *
+		 * @since 3.4.0
+		 *
+		 * @returns {boolean}
+		 */
+		showGA4Notice() {
+			return !this.getOption('stream', 'google')
+		},
 	},
 
 	methods: {
@@ -196,7 +275,7 @@ export default {
 
 			this.loading = true
 
-			restGet({
+			restGetStats({
 				path: 'stats/summary',
 				params: {
 					from: this.dateStart,

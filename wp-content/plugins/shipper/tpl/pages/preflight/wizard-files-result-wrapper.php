@@ -9,26 +9,22 @@
 
 <?php
 if ( 'package_size' === $check_type ) {
-	echo $html;
+	echo $html; // phpcs:ignore
 	return;
 }
 ?>
 
 <p>
-	<?php if ( 'file_sizes' === $check_type ) { ?>
-		<?php esc_html_e(
-			'Files over 8MB are listed below. Large files such as media files or backups can cause timeout issues on some budget hosts during the migration. We recommend excluding them from the migration and uploading them via FTP to your destination.',
-			'shipper'
-		); ?>
-	<?php } else if ( 'file_names' === $check_type ) { ?>
-		<?php esc_html_e(
-			'Files with names longer than 256 characters are listed below. Files with large names can cause issues on some hosts. We recommend excluding them from the migration and uploading them via FTP to your destination.',
-			'shipper'
-		); ?>
-	<?php } ?>
+	<?php
+	if ( 'file_sizes' === $check_type ) {
+		esc_html_e( 'Files over 8MB are listed below. Large files such as media files or backups can cause timeout issues on some budget hosts during the migration. We recommend excluding them from the migration and uploading them via FTP to your destination.', 'shipper' );
+	} elseif ( 'file_names' === $check_type ) {
+		esc_html_e( 'Files with names longer than 256 characters are listed below. Files with large names can cause issues on some hosts. We recommend excluding them from the migration and uploading them via FTP to your destination.', 'shipper' );
+	}
+	?>
 </p>
 
-<hr />
+<hr/>
 <?php $this->render( 'pages/preflight/wizard-files-result-pagination' ); ?>
 
 <div class="shipper-filter-area sui-box">
@@ -38,16 +34,18 @@ if ( 'package_size' === $check_type ) {
 				<label class="sui-label">
 					<span><?php esc_html_e( 'File path has keyword', 'shipper' ); ?></span>
 				</label>
-				<input type="text"
+				<input
+					type="text"
 					placeholder="<?php esc_attr_e( 'E.g. Plugin Name', 'shipper' ); ?>"
-					name="shipper-filter-path" class="sui-form-control" />
+					name="shipper-filter-path" class="sui-form-control"
+				>
 				<i class="sui-icon-magnifying-glass-search" aria-hidden="true"></i>
 			</div>
 			<div class="sui-col" data-filter-field="type">
 				<label class="sui-label">
 					<span><?php esc_html_e( 'Type', 'shipper' ); ?></span>
 				</label>
-				<select name="shipper-filter-extension">
+				<select name="shipper-filter-extension" class="sui-select">
 					<option value=""><?php esc_html_e( 'Any', 'shipper' ); ?></option>
 					<option value="zip"><?php esc_html_e( 'Archive', 'shipper' ); ?></option>
 				</select>
@@ -60,13 +58,15 @@ if ( 'package_size' === $check_type ) {
 						<label class="sui-label">
 							<span><?php esc_html_e( 'Size', 'shipper' ); ?></span>
 						</label>
-						<input type="number"
+						<input
+							type="number"
 							placeholder="<?php esc_attr_e( 'E.g. 150', 'shipper' ); ?>"
-							name="shipper-filter-size" class="sui-form-control" />
+							name="shipper-filter-size" class="sui-form-control"
+						>
 					</div>
 					<div class="sui-col">
 						<label class="sui-label"><span>&nbsp;</span></label>
-						<select>
+						<select class="sui-select">
 							<option value=""><?php esc_html_e( 'Mb', 'shipper' ); ?></option>
 						</select>
 					</div>
@@ -110,8 +110,12 @@ if ( 'package_size' === $check_type ) {
 	</span>
 </div>
 
+<?php
+echo $html; // phpcs:ignore
 
-<?php echo $html; ?>
-
-
-<?php $this->render( 'pages/preflight/wizard-files-result-pagination' ); ?>
+$this->render(
+	'pages/preflight/wizard-files-result-pagination',
+	array(
+		'hide_filter' => true,
+	)
+);

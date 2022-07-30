@@ -2,7 +2,7 @@
 /**
  * The settings helper class of the plugin.
  *
- * @link    http://premium.wpmudev.org
+ * @link    http://wpmudev.com
  * @since   3.2.0
  *
  * @author  Joel James <joel@incsub.com>
@@ -28,18 +28,18 @@ class Settings extends Base {
 	/**
 	 * Settings key name.
 	 *
-	 * @var string
-	 *
 	 * @since 3.2.0
+	 *
+	 * @var string
 	 */
 	private $setting_key = 'beehive_settings';
 
 	/**
 	 * Default network settings array.
 	 *
-	 * @var array
-	 *
 	 * @since 3.2.0
+	 *
+	 * @var array
 	 */
 	private $default_settings = array(
 		'general'      => array(
@@ -49,9 +49,14 @@ class Settings extends Base {
 			'advertising'              => false, // Flag to enable advertising.
 			'prosites_settings_level'  => array(), // Pro Sites level for accessing settings.
 			'prosites_analytics_level' => array(), // Pro Sites level to accessing analytics.
+			'statistics_menu'          => false, // Statistics menu position.
+			'statistics_menu_title'    => '', // Menu title.
 		),
 		'tracking'     => array(
-			'code' => '', // Tracking code.
+			'code'          => '', // Tracking code.
+			'measurement'   => '', // Measurement ID.
+			'exclude_roles' => array(), // Excluded roles.
+			'post_types'    => array( 'post', 'page' ), // Default post types.
 		),
 		'permissions'  => array(
 			'roles'                  => array(), // Roles enabled for statistics.
@@ -64,11 +69,14 @@ class Settings extends Base {
 		),
 		'reports'      => array(), // Selected report permissions.
 		'google'       => array(
-			'client_id'     => '', // Google client id entered by user.
-			'client_secret' => '', // Google client secret entered by user.
-			'api_key'       => '', // Google API key (unused).
-			'account_id'    => '', // Selected profile id.
-			'auto_track'    => true, // Check if automatic tracking code detection is enabled.
+			'client_id'       => '', // Google client id entered by user.
+			'client_secret'   => '', // Google client secret entered by user.
+			'api_key'         => '', // Google API key (unused).
+			'account_id'      => '', // UA account.
+			'stream'          => '', // GA4 stream.
+			'auto_track'      => true, // Check if automatic tracking code detection is enabled for UA.
+			'auto_track_ga4'  => true, // Check if automatic tracking code detection is enabled for GA4.
+			'statistics_type' => 'ga4', // Analytics statistics type (ua or ga4).
 		),
 		'google_login' => array(
 			'client_id'     => '', // The client id used to login.
@@ -83,35 +91,38 @@ class Settings extends Base {
 		'misc'         => array(
 			'onboarding_done' => false, // Flag to check if onboarding is dismissed/done.
 			'auto_track'      => false, // Auto tracking code collected from selected profile.
+			'auto_track_ga4'  => false, // Auto tracking code collected from selected profile.
 			'show_welcome'    => false, // To show welcome modal.
+			'hide_tutorials'  => false, // To show tutorials.
+			'hide_bf_notice'  => false, // To show tutorials.
 		),
-		'integrations' => array(
-			'active' => array(),
+		'data'         => array(
+			'settings' => true,
 		),
 	);
 
 	/**
 	 * Network settings array.
 	 *
-	 * @var array
-	 *
 	 * @since 3.2.0
+	 *
+	 * @var array
 	 */
 	private $network_settings = array();
 
 	/**
 	 * Single site settings array.
 	 *
-	 * @var array
-	 *
 	 * @since 3.2.0
+	 *
+	 * @var array
 	 */
 	private $settings = array();
 
 	/**
 	 * Settings constructor.
 	 *
-	 * Initialize the setttings values.
+	 * Initialize the settings values.
 	 *
 	 * @since 3.2.0
 	 */
@@ -133,9 +144,9 @@ class Settings extends Base {
 	 * We need to initialize network settings and single
 	 * site settings separately.
 	 *
-	 * @param bool $network Is network level settings?.
-	 *
 	 * @since 3.2.0
+	 *
+	 * @param bool $network Is network level settings?.
 	 */
 	public function init( $network = false ) {
 		// Get network options.
@@ -147,10 +158,10 @@ class Settings extends Base {
 		/**
 		 * Action hook to execute after initializing settings.
 		 *
+		 * @since 3.2.0
+		 *
 		 * @param array $options Current options.
 		 * @param bool  $network Network flag.
-		 *
-		 * @since 3.2.0
 		 */
 		do_action( 'beehive_settings_init', $options, $network );
 	}
@@ -162,9 +173,9 @@ class Settings extends Base {
 	 * using filters so that other plugins can add new item
 	 * to the array.
 	 *
-	 * @param bool $network Is network level?.
-	 *
 	 * @since 3.2.0
+	 *
+	 * @param bool $network Is network level?.
 	 *
 	 * @return array
 	 */
@@ -174,11 +185,13 @@ class Settings extends Base {
 
 		if ( $network ) {
 			/**
-			 * Filter to modify default settings array.
+			 * Filter to modify default network settings array.
 			 *
 			 * Use this filter to add new item to settings array.
 			 *
 			 * @since 3.2.0
+			 *
+			 * @param array $settings Settings data.
 			 */
 			return apply_filters( 'beehive_default_network_settings', $settings );
 		} else {
@@ -188,6 +201,8 @@ class Settings extends Base {
 				unset( $settings['general']['prosites_settings_level'] );
 				unset( $settings['general']['prosites_analytics_level'] );
 				unset( $settings['permissions']['overwrite_cap'] );
+				unset( $settings['data']['data'] );
+				unset( $settings['data']['settings'] );
 			}
 
 			/**
@@ -209,9 +224,9 @@ class Settings extends Base {
 	 * value instead.
 	 * Also for the report section, we will use all available roles with empty items.
 	 *
-	 * @param bool $network Is network level?.
-	 *
 	 * @since 3.2.4
+	 *
+	 * @param bool $network Is network level?.
 	 *
 	 * @return array
 	 */
@@ -258,10 +273,11 @@ class Settings extends Base {
 		/**
 		 * Filter to include or exclude settings item.
 		 *
-		 * @param array $settings Settings data.
+		 * @since 3.2.4
+		 *
 		 * @param bool  $network  Network flag.
 		 *
-		 * @since 3.2.4
+		 * @param array $settings Settings data.
 		 */
 		return apply_filters( 'beehive_get_settings_with_default', $settings, $network );
 	}
@@ -269,13 +285,13 @@ class Settings extends Base {
 	/**
 	 * Get a single setting value.
 	 *
+	 * @since  3.2.0
+	 *
 	 * @param string $key     Setting key.
 	 * @param string $group   Setting group.
 	 * @param bool   $network Should check network wide?.
 	 * @param mixed  $default Default value.
 	 * @param bool   $force   Should force from db?.
-	 *
-	 * @since  3.2.0
 	 *
 	 * @return mixed
 	 */
@@ -294,11 +310,11 @@ class Settings extends Base {
 	/**
 	 * Get a setting group values.
 	 *
+	 * @since  3.2.0
+	 *
 	 * @param bool $group   Setting group.
 	 * @param bool $network Should check network wide?.
 	 * @param bool $force   Should force from db?.
-	 *
-	 * @since  3.2.0
 	 *
 	 * @return mixed
 	 */
@@ -316,11 +332,12 @@ class Settings extends Base {
 		 *
 		 * Keeping this for backward compatibility.
 		 *
-		 * @param array  $settings
+		 * @deprecated 3.2.0
+		 *
 		 * @param bool   $network
 		 * @param string $setting
 		 *
-		 * @deprecated 3.2.0
+		 * @param array  $settings
 		 */
 		$options = apply_filters_deprecated(
 			'ga_get_options',
@@ -332,11 +349,11 @@ class Settings extends Base {
 		/**
 		 * Filter to modify settings values before returning.
 		 *
-		 * @paran array $options Option values.
-		 *
-		 * @param bool $network Network flag.
-		 *
 		 * @since 1.0.0
+		 *
+		 * @param bool  $network Network flag.
+		 *
+		 * @param array $options Option values.
 		 */
 		$options = apply_filters( 'beehive_get_options', $options, $network );
 
@@ -345,11 +362,12 @@ class Settings extends Base {
 		 *
 		 * Keeping this for backward compatibility.
 		 *
-		 * @param array  $settings
+		 * @deprecated 3.2.0
+		 *
 		 * @param bool   $network
 		 * @param string $setting
 		 *
-		 * @deprecated 3.2.0
+		 * @param array  $settings
 		 */
 		do_action_deprecated(
 			'ga_plus_before_return_options',
@@ -368,12 +386,12 @@ class Settings extends Base {
 	/**
 	 * Update a single setting value.
 	 *
+	 * @since  3.2.0
+	 *
 	 * @param string $key     Setting key.
 	 * @param mixed  $value   Setting value.
 	 * @param string $group   Setting group.
 	 * @param bool   $network Should check network wide?.
-	 *
-	 * @since  3.2.0
 	 *
 	 * @return bool False if value was not updated. True if value was updated.
 	 */
@@ -387,7 +405,7 @@ class Settings extends Base {
 		$options = $this->get_options( false, $network, true );
 
 		/**
-		 * Filter to modify settings values before updating.
+		 * Filter to modify settings a value before updating.
 		 *
 		 * @paran mixed  $value Option value.
 		 * @paran string $key Option key.
@@ -405,11 +423,11 @@ class Settings extends Base {
 	/**
 	 * Update a single setting value.
 	 *
+	 * @since  3.2.0
+	 *
 	 * @param mixed  $values  Setting values.
 	 * @param string $group   Setting group.
 	 * @param bool   $network Should check network wide?.
-	 *
-	 * @since  3.2.0
 	 *
 	 * @return bool False if value was not updated. True if value was updated.
 	 */
@@ -423,10 +441,9 @@ class Settings extends Base {
 		$options = $this->get_options( false, $network, true );
 
 		/**
-		 * Filter to modify settings values before updating.
+		 * Filter to modify a settings group values before updating.
 		 *
-		 * @paran mixed  $value Option value.
-		 * @paran string $key Option key.
+		 * @paran array  $values Option value.
 		 * @paran string $options Option group.
 		 *
 		 * @since 1.0.0
@@ -441,10 +458,10 @@ class Settings extends Base {
 	/**
 	 * Update a setting group value.
 	 *
+	 * @since  3.2.0
+	 *
 	 * @param array $values  Setting values.
 	 * @param bool  $network Should check network wide?.
-	 *
-	 * @since  3.2.0
 	 *
 	 * @return bool False if value was not updated. True if value was updated.
 	 */
@@ -483,11 +500,12 @@ class Settings extends Base {
 		/**
 		 * Action hook to execute after updating settings.
 		 *
-		 * @param array $options Old values.
+		 * @since 3.2.0
+		 *
 		 * @param array $values  New values.
 		 * @param bool  $network Network flag.
 		 *
-		 * @since 3.2.0
+		 * @param array $options Old values.
 		 */
 		do_action( 'beehive_settings_update', $options, $values, $network );
 
@@ -500,9 +518,9 @@ class Settings extends Base {
 	 * We need to include parent item if all the children are
 	 * selected in settings.
 	 *
-	 * @param array $values Setting values.
-	 *
 	 * @since  3.2.4
+	 *
+	 * @param array $values Setting values.
 	 *
 	 * @return array
 	 */
@@ -547,11 +565,11 @@ class Settings extends Base {
 	 * If there is another group of children found, do it
 	 * recursively.
 	 *
+	 * @since 3.2.4
+	 *
 	 * @param string $parent   Parent item key.
 	 * @param array  $children Children of the group.
 	 * @param array  $items    Report items array.
-	 *
-	 * @since 3.2.4
 	 *
 	 * @return array
 	 */
@@ -571,7 +589,7 @@ class Settings extends Base {
 			// Now process the parent.
 			if ( isset( $child['name'] ) && in_array( $child['name'], $items, true ) ) {
 				// Increase the selected children count.
-				$selected_count++;
+				$selected_count ++;
 			}
 		}
 
@@ -588,5 +606,42 @@ class Settings extends Base {
 		}
 
 		return $items;
+	}
+
+	/**
+	 * Reset settings to default state.
+	 *
+	 * Use this only when it's necessary. This will reset the
+	 * entire settings to it's default state.
+	 *
+	 * @since 3.3.5
+	 *
+	 * @param bool $network Is network level?.
+	 *
+	 * @return bool
+	 */
+	public function reset_settings( $network = false ) {
+		// Get default settings.
+		$settings = $this->default_settings( $network );
+
+		// Do not show modals again.
+		$settings['misc']['onboarding_done'] = true;
+		$settings['misc']['show_welcome']    = false;
+
+		// Update to default state.
+		$success = $this->update_options( $settings, $network );
+
+		/**
+		 * Action hook to execute after resetting settings.
+		 *
+		 * @since 3.3.5
+		 *
+		 * @param bool $network Network flag.
+		 *
+		 * @param bool $success Success?.
+		 */
+		do_action( 'beehive_after_settings_reset', $success, $network );
+
+		return $success;
 	}
 }

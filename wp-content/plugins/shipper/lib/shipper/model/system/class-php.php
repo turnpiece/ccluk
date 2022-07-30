@@ -10,16 +10,16 @@
  */
 class Shipper_Model_System_Php extends Shipper_Model {
 
-	const VERSION = 'version';
+	const VERSION       = 'version';
 	const VERSION_MAJOR = 'version_major';
-	const TIMEOUT = 'max_execution_time';
-	const RESTRICTED = 'open_basedir';
-	const UPLOAD = 'upload_max_filesize';
-	const POSTSIZE = 'post_max_size';
-	const MEMORY = 'memory_limit';
-	const ZIP_SUPPORT = 'zip_archive';
-	const AWS_SUPPORT = 'aws_support';
-	const HAS_SUHOSIN = 'has_suhosin';
+	const TIMEOUT       = 'max_execution_time';
+	const RESTRICTED    = 'open_basedir';
+	const UPLOAD        = 'upload_max_filesize';
+	const POSTSIZE      = 'post_max_size';
+	const MEMORY        = 'memory_limit';
+	const ZIP_SUPPORT   = 'zip_archive';
+	const AWS_SUPPORT   = 'aws_support';
+	const HAS_SUHOSIN   = 'has_suhosin';
 
 	/**
 	 * Constructor
@@ -38,14 +38,16 @@ class Shipper_Model_System_Php extends Shipper_Model {
 	 * Populates internal data structure
 	 */
 	public function populate() {
-		$this->set_data(array(
-			self::TIMEOUT => (int) ini_get( self::TIMEOUT ),
-			self::RESTRICTED => ! ! ini_get( self::RESTRICTED ),
-			self::UPLOAD => $this->get_ini_bytes( ini_get( self::UPLOAD ) ),
-			self::POSTSIZE => $this->get_ini_bytes( ini_get( self::POSTSIZE ) ),
-			self::MEMORY => (int) ini_get( self::MEMORY ) * 1024 * 1024,
-			self::ZIP_SUPPORT => ! ! class_exists( 'ZipArchive' ),
-		));
+		$this->set_data(
+			array(
+				self::TIMEOUT     => (int) ini_get( self::TIMEOUT ),
+				self::RESTRICTED  => ! ! ini_get( self::RESTRICTED ),
+				self::UPLOAD      => $this->get_ini_bytes( ini_get( self::UPLOAD ) ),
+				self::POSTSIZE    => $this->get_ini_bytes( ini_get( self::POSTSIZE ) ),
+				self::MEMORY      => (int) ini_get( self::MEMORY ) * 1024 * 1024,
+				self::ZIP_SUPPORT => ! ! class_exists( 'ZipArchive' ),
+			)
+		);
 
 		$this->set( self::VERSION, phpversion() );
 
@@ -80,9 +82,9 @@ class Shipper_Model_System_Php extends Shipper_Model {
 	 *
 	 * @return int|string
 	 */
-	function get_ini_bytes( $val ) {
-		$val = trim( $val );
-		$test = strtolower( $val );
+	public function get_ini_bytes( $val ) {
+		$val   = trim( $val );
+		$test  = strtolower( $val );
 		$units = array(
 			'g' => 1073741824,
 			'm' => 1048576,
@@ -186,15 +188,17 @@ class Shipper_Model_System_Php extends Shipper_Model {
 	public function has_aws_s3_client() {
 		if ( ! class_exists( 'Aws\S3\S3Client' ) ) {
 			// Require external SDK just in time for this.
-			require_once( dirname( SHIPPER_PLUGIN_FILE ) . '/lib/external/autoload.php' );
+			require_once dirname( SHIPPER_PLUGIN_FILE ) . '/vendor/autoload.php';
 		}
 
 		$client = false;
 		try {
-			$client = new Aws\S3\S3Client(array(
-				'version' => '2006-03-01',
-				'region' => 'us-east-1',
-			));
+			$client = new Aws\S3\S3Client(
+				array(
+					'version' => '2006-03-01',
+					'region'  => 'us-east-1',
+				)
+			);
 		} catch ( Exception $e ) {
 			return false;
 		}

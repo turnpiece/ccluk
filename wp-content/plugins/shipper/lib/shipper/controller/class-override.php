@@ -19,7 +19,7 @@ abstract class Shipper_Controller_Override extends Shipper_Controller {
 	 *
 	 * @var object Shipper_Model_Constants_Shipper
 	 */
-	private $_constants;
+	private $constants;
 
 	/**
 	 * Check whether we're in debug mode
@@ -49,10 +49,10 @@ abstract class Shipper_Controller_Override extends Shipper_Controller {
 	 *
 	 * Used in tests.
 	 *
-	 * @param object Shipper_Model_Constants_Shipper instance.
+	 * @param object $constants Shipper_Model_Constants_Shipper instance.
 	 */
 	public function set_constants( $constants ) {
-		$this->_constants = $constants;
+		$this->constants = $constants;
 	}
 
 	/**
@@ -61,9 +61,9 @@ abstract class Shipper_Controller_Override extends Shipper_Controller {
 	 * @return object Shipper_Model_Constants_Shipper instance
 	 */
 	public function get_constants() {
-		if ( empty( $this->_constants ) ) {
-			$this->_constants = new Shipper_Model_Constants_Shipper;
+		if ( empty( $this->constants ) ) {
+			$this->constants = new Shipper_Model_Constants_Shipper();
 		}
-		return $this->_constants;
+		return $this->constants;
 	}
 }

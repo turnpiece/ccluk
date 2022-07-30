@@ -36,6 +36,35 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<small><?php _e( '(click to expand)', AI1WM_PLUGIN_NAME ); ?></small>
 		</h4>
 		<ul>
+			<?php if ( ai1wm_can_encrypt() ) : ?>
+				<li class="ai1wm-encrypt-backups-container">
+					<label for="ai1wm-encrypt-backups">
+						<input type="checkbox" id="ai1wm-encrypt-backups" name="options[encrypt_backups]" />
+						<?php _e( 'Protect this backup with a password', AI1WM_PLUGIN_NAME ); ?>
+						<small style="color: red;">beta</small>
+					</label>
+					<div class="ai1wm-encrypt-backups-passwords-toggle">
+						<div class="ai1wm-encrypt-backups-passwords-container">
+							<div class="ai1wm-input-password-container">
+								<input type="password" placeholder="<?php _e( 'Enter a password', AI1WM_PLUGIN_NAME ); ?>" name="options[encrypt_password]" id="ai1wm-backup-encrypt-password">
+								<a href="#ai1wm-backup-encrypt-password" class="ai1wm-toggle-password-visibility ai1wm-icon-eye-blocked"></a>
+								<div class="ai1wm-error-message"><?php _e( 'A password is required', AI1WM_PLUGIN_NAME ); ?></div>
+							</div>
+							<div class="ai1wm-input-password-container">
+								<input type="password" name="options[encrypt_password_confirmation]" placeholder="<?php _e( 'Repeat the password', AI1WM_PLUGIN_NAME ); ?>" id="ai1wm-backup-encrypt-password-confirmation">
+								<a href="#ai1wm-backup-encrypt-password-confirmation" class="ai1wm-toggle-password-visibility ai1wm-icon-eye-blocked"></a>
+								<div class="ai1wm-error-message"><?php _e( 'The passwords do not match', AI1WM_PLUGIN_NAME ); ?></div>
+							</div>
+						</div>
+					</div>
+				</li>
+			<?php else : ?>
+				<li class="ai1wm-encrypt-backups-container-disabled">
+					<input type="checkbox" id="ai1wm-encrypt-backups" name="options[encrypt_backups]" disabled />
+					<?php _e( 'Password-protect and encrypt backups', AI1WM_PLUGIN_NAME ); ?>
+					<a href="https://help.servmask.com/knowledgebase/unable-to-encrypt-and-decrypt-backups/" target="_blank"><span class="ai1wm-icon-help"></span></a>
+				</li>
+			<?php endif; ?>
 			<li>
 				<label for="ai1wm-no-spam-comments">
 					<input type="checkbox" id="ai1wm-no-spam-comments" name="options[no_spam_comments]" />

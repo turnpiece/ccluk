@@ -68,3 +68,13 @@
   }
 
 }
+
+/* Forms */
+
+textarea {
+  max-width: 100%;
+}
+
+#wie-import-data {
+  display: none;
+}

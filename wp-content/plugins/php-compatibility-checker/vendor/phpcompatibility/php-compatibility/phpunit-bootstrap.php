@@ -1,8 +1,15 @@
 <?php
 /**
+ * PHPCompatibility, an external standard for PHP_CodeSniffer.
+ *
  * Bootstrap file for tests.
  *
- * @package PHPCompatibility
+ * @package   PHPCompatibility
+ * @copyright 2012-2019 PHPCompatibility Contributors
+ * @license   https://opensource.org/licenses/LGPL-3.0 LGPL3
+ * @link      https://github.com/PHPCompatibility/PHPCompatibility
+ *
+ * @since 5.5
  */
 
 if (defined('PHP_CODESNIFFER_IN_TESTS') === false) {

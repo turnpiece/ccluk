@@ -437,7 +437,7 @@ class RSA
                 case \defined('MATH_BIGINTEGER_OPENSSL_DISABLE'):
                     \define('CRYPT_RSA_MODE', self::MODE_INTERNAL);
                     break;
-                case \extension_loaded('openssl') && \file_exists($this->configFile):
+                case \function_exists('phpinfo') && \extension_loaded('openssl') && \file_exists($this->configFile):
                     // some versions of XAMPP have mismatched versions of OpenSSL which causes it not to work
                     $versions = array();
                     // avoid generating errors (even with suppression) when phpinfo() is disabled (common in production systems)
@@ -476,12 +476,12 @@ class RSA
                     \define('CRYPT_RSA_MODE', self::MODE_INTERNAL);
             }
         }
-        $this->zero = new \Beehive\phpseclib\Math\BigInteger();
-        $this->one = new \Beehive\phpseclib\Math\BigInteger(1);
-        $this->hash = new \Beehive\phpseclib\Crypt\Hash('sha1');
+        $this->zero = new BigInteger();
+        $this->one = new BigInteger(1);
+        $this->hash = new Hash('sha1');
         $this->hLen = $this->hash->getLength();
         $this->hashName = 'sha1';
-        $this->mgfHash = new \Beehive\phpseclib\Crypt\Hash('sha1');
+        $this->mgfHash = new Hash('sha1');
         $this->mgfHLen = $this->mgfHash->getLength();
     }
     /**
@@ -496,7 +496,7 @@ class RSA
      * @access public
      * @param int $bits
      * @param int $timeout
-     * @param array $p
+     * @param array $partial
      */
     function createKey($bits = 1024, $timeout = \false, $partial = array())
     {
@@ -532,7 +532,7 @@ class RSA
         }
         static $e;
         if (!isset($e)) {
-            $e = new \Beehive\phpseclib\Math\BigInteger(CRYPT_RSA_EXPONENT);
+            $e = new BigInteger(CRYPT_RSA_EXPONENT);
         }
         \extract($this->_generateMinMax($bits));
         $absoluteMin = $min;
@@ -547,7 +547,7 @@ class RSA
         \extract($this->_generateMinMax($temp + $bits % $temp));
         $finalMax = $max;
         \extract($this->_generateMinMax($temp));
-        $generator = new \Beehive\phpseclib\Math\BigInteger();
+        $generator = new BigInteger();
         $n = $this->one->copy();
         if (!empty($partial)) {
             \extract(\unserialize($partial));
@@ -625,7 +625,12 @@ class RSA
      *
      * @access private
      * @see self::setPrivateKeyFormat()
-     * @param string $RSAPrivateKey
+     * @param Math_BigInteger $n
+     * @param Math_BigInteger $e
+     * @param Math_BigInteger $d
+     * @param array<int,Math_BigInteger> $primes
+     * @param array<int,Math_BigInteger> $exponents
+     * @param array<int,Math_BigInteger> $coefficients
      * @return string
      */
     function _convertPrivateKey($n, $e, $d, $primes, $exponents, $coefficients)
@@ -671,7 +676,7 @@ class RSA
                     $source .= \pack('Na*', \strlen($private), $private);
                     $hashkey = 'putty-private-key-file-mac-key';
                 } else {
-                    $private .= \Beehive\phpseclib\Crypt\Random::string(16 - (\strlen($private) & 15));
+                    $private .= Random::string(16 - (\strlen($private) & 15));
                     $source .= \pack('Na*', \strlen($private), $private);
                     $sequence = 0;
                     $symkey = '';
@@ -680,7 +685,7 @@ class RSA
                         $symkey .= \pack('H*', \sha1($temp));
                     }
                     $symkey = \substr($symkey, 0, 32);
-                    $crypto = new \Beehive\phpseclib\Crypt\AES();
+                    $crypto = new AES();
                     $crypto->setKey($symkey);
                     $crypto->disablePadding();
                     $private = $crypto->encrypt($private);
@@ -689,7 +694,7 @@ class RSA
                 $private = \base64_encode($private);
                 $key .= 'Private-Lines: ' . (\strlen($private) + 63 >> 6) . "\r\n";
                 $key .= \chunk_split($private, 64);
-                $hash = new \Beehive\phpseclib\Crypt\Hash('sha1');
+                $hash = new Hash('sha1');
                 $hash->setKey(\pack('H*', \sha1($hashkey)));
                 $key .= 'Private-MAC: ' . \bin2hex($hash->hash($source)) . "\r\n";
                 return $key;
@@ -699,15 +704,15 @@ class RSA
                 }
                 $publicKey = \pack('Na*Na*Na*', \strlen('ssh-rsa'), 'ssh-rsa', \strlen($raw['publicExponent']), $raw['publicExponent'], \strlen($raw['modulus']), $raw['modulus']);
                 $privateKey = \pack('Na*Na*Na*Na*Na*Na*Na*', \strlen('ssh-rsa'), 'ssh-rsa', \strlen($raw['modulus']), $raw['modulus'], \strlen($raw['publicExponent']), $raw['publicExponent'], \strlen($raw['privateExponent']), $raw['privateExponent'], \strlen($raw['coefficient']), $raw['coefficient'], \strlen($raw['prime1']), $raw['prime1'], \strlen($raw['prime2']), $raw['prime2']);
-                $checkint = \Beehive\phpseclib\Crypt\Random::string(4);
+                $checkint = Random::string(4);
                 $paddedKey = \pack('a*Na*', $checkint . $checkint . $privateKey, \strlen($this->comment), $this->comment);
                 $paddingLength = 7 * \strlen($paddedKey) % 8;
                 for ($i = 1; $i <= $paddingLength; $i++) {
                     $paddedKey .= \chr($i);
                 }
                 $key = \pack('Na*Na*Na*NNa*Na*', \strlen('none'), 'none', \strlen('none'), 'none', 0, '', 1, \strlen($publicKey), $publicKey, \strlen($paddedKey), $paddedKey);
-                $key = "openssh-key-v1\0{$key}";
-                return "-----BEGIN OPENSSH PRIVATE KEY-----\r\n" . \chunk_split(\base64_encode($key), 70) . "-----END OPENSSH PRIVATE KEY-----";
+                $key = "openssh-key-v1\x00{$key}";
+                return "-----BEGIN OPENSSH PRIVATE KEY-----\n" . \chunk_split(\base64_encode($key), 70, "\n") . "-----END OPENSSH PRIVATE KEY-----\n";
             default:
                 // eg. self::PRIVATE_FORMAT_PKCS1
                 $components = array();
@@ -736,16 +741,16 @@ class RSA
                 if ($this->privateKeyFormat == self::PRIVATE_FORMAT_PKCS8) {
                     $rsaOID = \pack('H*', '300d06092a864886f70d0101010500');
                     // hex version of MA0GCSqGSIb3DQEBAQUA
-                    $RSAPrivateKey = \pack('Ca*a*Ca*a*', self::ASN1_INTEGER, "\1\0", $rsaOID, 4, $this->_encodeLength(\strlen($RSAPrivateKey)), $RSAPrivateKey);
+                    $RSAPrivateKey = \pack('Ca*a*Ca*a*', self::ASN1_INTEGER, "\x01\x00", $rsaOID, 4, $this->_encodeLength(\strlen($RSAPrivateKey)), $RSAPrivateKey);
                     $RSAPrivateKey = \pack('Ca*a*', self::ASN1_SEQUENCE, $this->_encodeLength(\strlen($RSAPrivateKey)), $RSAPrivateKey);
                     if (!empty($this->password) || \is_string($this->password)) {
-                        $salt = \Beehive\phpseclib\Crypt\Random::string(8);
+                        $salt = Random::string(8);
                         $iterationCount = 2048;
-                        $crypto = new \Beehive\phpseclib\Crypt\DES();
+                        $crypto = new DES();
                         $crypto->setPassword($this->password, 'pbkdf1', 'md5', $salt, $iterationCount);
                         $RSAPrivateKey = $crypto->encrypt($RSAPrivateKey);
                         $parameters = \pack('Ca*a*Ca*N', self::ASN1_OCTETSTRING, $this->_encodeLength(\strlen($salt)), $salt, self::ASN1_INTEGER, $this->_encodeLength(4), $iterationCount);
-                        $pbeWithMD5AndDES_CBC = "*†H†÷\r\1\5\3";
+                        $pbeWithMD5AndDES_CBC = "*\x86H\x86\xf7\r\x01\x05\x03";
                         $encryptionAlgorithm = \pack('Ca*a*Ca*a*', self::ASN1_OBJECT, $this->_encodeLength(\strlen($pbeWithMD5AndDES_CBC)), $pbeWithMD5AndDES_CBC, self::ASN1_SEQUENCE, $this->_encodeLength(\strlen($parameters)), $parameters);
                         $RSAPrivateKey = \pack('Ca*a*Ca*a*', self::ASN1_SEQUENCE, $this->_encodeLength(\strlen($encryptionAlgorithm)), $encryptionAlgorithm, self::ASN1_OCTETSTRING, $this->_encodeLength(\strlen($RSAPrivateKey)), $RSAPrivateKey);
                         $RSAPrivateKey = \pack('Ca*a*', self::ASN1_SEQUENCE, $this->_encodeLength(\strlen($RSAPrivateKey)), $RSAPrivateKey);
@@ -756,11 +761,11 @@ class RSA
                     return $RSAPrivateKey;
                 }
                 if (!empty($this->password) || \is_string($this->password)) {
-                    $iv = \Beehive\phpseclib\Crypt\Random::string(8);
+                    $iv = Random::string(8);
                     $symkey = \pack('H*', \md5($this->password . $iv));
                     // symkey is short for symmetric key
                     $symkey .= \substr(\pack('H*', \md5($symkey . $this->password . $iv)), 0, 8);
-                    $des = new \Beehive\phpseclib\Crypt\TripleDES();
+                    $des = new TripleDES();
                     $des->setKey($symkey);
                     $des->setIV($iv);
                     $iv = \strtoupper(\bin2hex($iv));
@@ -776,8 +781,9 @@ class RSA
      *
      * @access private
      * @see self::setPublicKeyFormat()
-     * @param string $RSAPrivateKey
-     * @return string
+     * @param Math_BigInteger $n
+     * @param Math_BigInteger $e
+     * @return string|array<string,Math_BigInteger>
      */
     function _convertPublicKey($n, $e)
     {
@@ -900,21 +906,21 @@ class RSA
                     }
                     switch ($matches[1]) {
                         case 'AES-256-CBC':
-                            $crypto = new \Beehive\phpseclib\Crypt\AES();
+                            $crypto = new AES();
                             break;
                         case 'AES-128-CBC':
                             $symkey = \substr($symkey, 0, 16);
-                            $crypto = new \Beehive\phpseclib\Crypt\AES();
+                            $crypto = new AES();
                             break;
                         case 'DES-EDE3-CFB':
-                            $crypto = new \Beehive\phpseclib\Crypt\TripleDES(\Beehive\phpseclib\Crypt\Base::MODE_CFB);
+                            $crypto = new TripleDES(Base::MODE_CFB);
                             break;
                         case 'DES-EDE3-CBC':
                             $symkey = \substr($symkey, 0, 24);
-                            $crypto = new \Beehive\phpseclib\Crypt\TripleDES();
+                            $crypto = new TripleDES();
                             break;
                         case 'DES-CBC':
-                            $crypto = new \Beehive\phpseclib\Crypt\DES();
+                            $crypto = new DES();
                             break;
                         default:
                             return \false;
@@ -946,7 +952,7 @@ class RSA
                                    22:d=1  hl=4 l= 609 prim:  OCTET STRING
 
                                    ie. PKCS8 keys*/
-                if ($tag == self::ASN1_INTEGER && \substr($key, 0, 3) == "\1\0000") {
+                if ($tag == self::ASN1_INTEGER && \substr($key, 0, 3) == "\x01\x000") {
                     $this->_string_shift($key, 3);
                     $tag = self::ASN1_SEQUENCE;
                 }
@@ -957,10 +963,12 @@ class RSA
                     }
                     $length = $this->_decodeLength($temp);
                     switch ($this->_string_shift($temp, $length)) {
-                        case "*†H†÷\r\1\1\1":
-                            // rsaEncryption
+                        case "*\x86H\x86\xf7\r\x01\x01\x01":
+                        // rsaEncryption
+                        case "*\x86H\x86\xf7\r\x01\x01\n":
+                            // rsaPSS
                             break;
-                        case "*†H†÷\r\1\5\3":
+                        case "*\x86H\x86\xf7\r\x01\x05\x03":
                             // pbeWithMD5AndDES-CBC
                             /*
                                PBEParameter ::= SEQUENCE {
@@ -987,7 +995,7 @@ class RSA
                             if (\strlen($key) != $length) {
                                 return \false;
                             }
-                            $crypto = new \Beehive\phpseclib\Crypt\DES();
+                            $crypto = new DES();
                             $crypto->setPassword($this->password, 'pbkdf1', 'md5', $salt, $iterationCount);
                             $key = $crypto->decrypt($key);
                             if ($key === \false) {
@@ -1028,39 +1036,39 @@ class RSA
                 $length = $this->_decodeLength($key);
                 $temp = $this->_string_shift($key, $length);
                 if (\strlen($temp) != 1 || \ord($temp) > 2) {
-                    $components['modulus'] = new \Beehive\phpseclib\Math\BigInteger($temp, 256);
+                    $components['modulus'] = new BigInteger($temp, 256);
                     $this->_string_shift($key);
                     // skip over self::ASN1_INTEGER
                     $length = $this->_decodeLength($key);
-                    $components[$type == self::PUBLIC_FORMAT_PKCS1 ? 'publicExponent' : 'privateExponent'] = new \Beehive\phpseclib\Math\BigInteger($this->_string_shift($key, $length), 256);
+                    $components[$type == self::PUBLIC_FORMAT_PKCS1 ? 'publicExponent' : 'privateExponent'] = new BigInteger($this->_string_shift($key, $length), 256);
                     return $components;
                 }
                 if (\ord($this->_string_shift($key)) != self::ASN1_INTEGER) {
                     return \false;
                 }
                 $length = $this->_decodeLength($key);
-                $components['modulus'] = new \Beehive\phpseclib\Math\BigInteger($this->_string_shift($key, $length), 256);
+                $components['modulus'] = new BigInteger($this->_string_shift($key, $length), 256);
                 $this->_string_shift($key);
                 $length = $this->_decodeLength($key);
-                $components['publicExponent'] = new \Beehive\phpseclib\Math\BigInteger($this->_string_shift($key, $length), 256);
+                $components['publicExponent'] = new BigInteger($this->_string_shift($key, $length), 256);
                 $this->_string_shift($key);
                 $length = $this->_decodeLength($key);
-                $components['privateExponent'] = new \Beehive\phpseclib\Math\BigInteger($this->_string_shift($key, $length), 256);
+                $components['privateExponent'] = new BigInteger($this->_string_shift($key, $length), 256);
                 $this->_string_shift($key);
                 $length = $this->_decodeLength($key);
-                $components['primes'] = array(1 => new \Beehive\phpseclib\Math\BigInteger($this->_string_shift($key, $length), 256));
+                $components['primes'] = array(1 => new BigInteger($this->_string_shift($key, $length), 256));
                 $this->_string_shift($key);
                 $length = $this->_decodeLength($key);
-                $components['primes'][] = new \Beehive\phpseclib\Math\BigInteger($this->_string_shift($key, $length), 256);
+                $components['primes'][] = new BigInteger($this->_string_shift($key, $length), 256);
                 $this->_string_shift($key);
                 $length = $this->_decodeLength($key);
-                $components['exponents'] = array(1 => new \Beehive\phpseclib\Math\BigInteger($this->_string_shift($key, $length), 256));
+                $components['exponents'] = array(1 => new BigInteger($this->_string_shift($key, $length), 256));
                 $this->_string_shift($key);
                 $length = $this->_decodeLength($key);
-                $components['exponents'][] = new \Beehive\phpseclib\Math\BigInteger($this->_string_shift($key, $length), 256);
+                $components['exponents'][] = new BigInteger($this->_string_shift($key, $length), 256);
                 $this->_string_shift($key);
                 $length = $this->_decodeLength($key);
-                $components['coefficients'] = array(2 => new \Beehive\phpseclib\Math\BigInteger($this->_string_shift($key, $length), 256));
+                $components['coefficients'] = array(2 => new BigInteger($this->_string_shift($key, $length), 256));
                 if (!empty($key)) {
                     if (\ord($this->_string_shift($key)) != self::ASN1_SEQUENCE) {
                         return \false;
@@ -1073,13 +1081,13 @@ class RSA
                         $this->_decodeLength($key);
                         $key = \substr($key, 1);
                         $length = $this->_decodeLength($key);
-                        $components['primes'][] = new \Beehive\phpseclib\Math\BigInteger($this->_string_shift($key, $length), 256);
+                        $components['primes'][] = new BigInteger($this->_string_shift($key, $length), 256);
                         $this->_string_shift($key);
                         $length = $this->_decodeLength($key);
-                        $components['exponents'][] = new \Beehive\phpseclib\Math\BigInteger($this->_string_shift($key, $length), 256);
+                        $components['exponents'][] = new BigInteger($this->_string_shift($key, $length), 256);
                         $this->_string_shift($key);
                         $length = $this->_decodeLength($key);
-                        $components['coefficients'][] = new \Beehive\phpseclib\Math\BigInteger($this->_string_shift($key, $length), 256);
+                        $components['coefficients'][] = new BigInteger($this->_string_shift($key, $length), 256);
                     }
                 }
                 return $components;
@@ -1090,23 +1098,23 @@ class RSA
                     return \false;
                 }
                 $comment = isset($parts[2]) ? $parts[2] : \false;
-                $cleanup = \substr($key, 0, 11) == "\0\0\0\7ssh-rsa";
+                $cleanup = \substr($key, 0, 11) == "\x00\x00\x00\x07ssh-rsa";
                 if (\strlen($key) <= 4) {
                     return \false;
                 }
                 \extract(\unpack('Nlength', $this->_string_shift($key, 4)));
-                $publicExponent = new \Beehive\phpseclib\Math\BigInteger($this->_string_shift($key, $length), -256);
+                $publicExponent = new BigInteger($this->_string_shift($key, $length), -256);
                 if (\strlen($key) <= 4) {
                     return \false;
                 }
                 \extract(\unpack('Nlength', $this->_string_shift($key, 4)));
-                $modulus = new \Beehive\phpseclib\Math\BigInteger($this->_string_shift($key, $length), -256);
+                $modulus = new BigInteger($this->_string_shift($key, $length), -256);
                 if ($cleanup && \strlen($key)) {
                     if (\strlen($key) <= 4) {
                         return \false;
                     }
                     \extract(\unpack('Nlength', $this->_string_shift($key, 4)));
-                    $realModulus = new \Beehive\phpseclib\Math\BigInteger($this->_string_shift($key, $length), -256);
+                    $realModulus = new BigInteger($this->_string_shift($key, $length), -256);
                     return \strlen($key) ? \false : array('modulus' => $realModulus, 'publicExponent' => $modulus, 'comment' => $comment);
                 } else {
                     return \strlen($key) ? \false : array('modulus' => $modulus, 'publicExponent' => $publicExponent, 'comment' => $comment);
@@ -1129,11 +1137,19 @@ class RSA
                 \xml_parser_free($xml);
                 unset($xml);
                 return isset($this->components['modulus']) && isset($this->components['publicExponent']) ? $this->components : \false;
-            // from PuTTY's SSHPUBK.C
+            // see PuTTY's SSHPUBK.C and https://tartarus.org/~simon/putty-snapshots/htmldoc/AppendixC.html
             case self::PRIVATE_FORMAT_PUTTY:
                 $components = array();
                 $key = \preg_split('#\\r\\n|\\r|\\n#', $key);
-                $type = \trim(\preg_replace('#PuTTY-User-Key-File-2: (.+)#', '$1', $key[0]));
+                if ($this->_string_shift($key[0], \strlen('PuTTY-User-Key-File-')) != 'PuTTY-User-Key-File-') {
+                    return \false;
+                }
+                $version = (int) $this->_string_shift($key[0], 3);
+                // should be either "2: " or "3: 0" prior to int casting
+                if ($version != 2 && $version != 3) {
+                    return \false;
+                }
+                $type = \rtrim($key[0]);
                 if ($type != 'ssh-rsa') {
                     return \false;
                 }
@@ -1143,24 +1159,55 @@ class RSA
                 $public = \base64_decode(\implode('', \array_map('trim', \array_slice($key, 4, $publicLength))));
                 $public = \substr($public, 11);
                 \extract(\unpack('Nlength', $this->_string_shift($public, 4)));
-                $components['publicExponent'] = new \Beehive\phpseclib\Math\BigInteger($this->_string_shift($public, $length), -256);
+                $components['publicExponent'] = new BigInteger($this->_string_shift($public, $length), -256);
                 \extract(\unpack('Nlength', $this->_string_shift($public, 4)));
-                $components['modulus'] = new \Beehive\phpseclib\Math\BigInteger($this->_string_shift($public, $length), -256);
-                $privateLength = \trim(\preg_replace('#Private-Lines: (\\d+)#', '$1', $key[$publicLength + 4]));
-                $private = \base64_decode(\implode('', \array_map('trim', \array_slice($key, $publicLength + 5, $privateLength))));
+                $components['modulus'] = new BigInteger($this->_string_shift($public, $length), -256);
+                $offset = $publicLength + 4;
                 switch ($encryption) {
                     case 'aes256-cbc':
-                        $symkey = '';
-                        $sequence = 0;
-                        while (\strlen($symkey) < 32) {
-                            $temp = \pack('Na*', $sequence++, $this->password);
-                            $symkey .= \pack('H*', \sha1($temp));
+                        $crypto = new AES();
+                        switch ($version) {
+                            case 3:
+                                if (!\function_exists('sodium_crypto_pwhash')) {
+                                    return \false;
+                                }
+                                $flavour = \trim(\preg_replace('#Key-Derivation: (.*)#', '$1', $key[$offset++]));
+                                switch ($flavour) {
+                                    case 'Argon2i':
+                                        $flavour = \SODIUM_CRYPTO_PWHASH_ALG_ARGON2I13;
+                                        break;
+                                    case 'Argon2id':
+                                        $flavour = \SODIUM_CRYPTO_PWHASH_ALG_ARGON2ID13;
+                                        break;
+                                    default:
+                                        return \false;
+                                }
+                                $memory = \trim(\preg_replace('#Argon2-Memory: (\\d+)#', '$1', $key[$offset++]));
+                                $passes = \trim(\preg_replace('#Argon2-Passes: (\\d+)#', '$1', $key[$offset++]));
+                                $parallelism = \trim(\preg_replace('#Argon2-Parallelism: (\\d+)#', '$1', $key[$offset++]));
+                                $salt = \pack('H*', \trim(\preg_replace('#Argon2-Salt: ([0-9a-f]+)#', '$1', $key[$offset++])));
+                                $length = 80;
+                                // keylen + ivlen + mac_keylen
+                                $temp = \sodium_crypto_pwhash($length, $this->password, $salt, $passes, $memory << 10, $flavour);
+                                $symkey = \substr($temp, 0, 32);
+                                $symiv = \substr($temp, 32, 16);
+                                break;
+                            case 2:
+                                $symkey = '';
+                                $sequence = 0;
+                                while (\strlen($symkey) < 32) {
+                                    $temp = \pack('Na*', $sequence++, $this->password);
+                                    $symkey .= \pack('H*', \sha1($temp));
+                                }
+                                $symkey = \substr($symkey, 0, 32);
+                                $symiv = \str_repeat("\x00", 16);
                         }
-                        $symkey = \substr($symkey, 0, 32);
-                        $crypto = new \Beehive\phpseclib\Crypt\AES();
                 }
+                $privateLength = \trim(\preg_replace('#Private-Lines: (\\d+)#', '$1', $key[$offset++]));
+                $private = \base64_decode(\implode('', \array_map('trim', \array_slice($key, $offset, $privateLength))));
                 if ($encryption != 'none') {
                     $crypto->setKey($symkey);
+                    $crypto->setIV($symiv);
                     $crypto->disablePadding();
                     $private = $crypto->decrypt($private);
                     if ($private === \false) {
@@ -1171,17 +1218,17 @@ class RSA
                 if (\strlen($private) < $length) {
                     return \false;
                 }
-                $components['privateExponent'] = new \Beehive\phpseclib\Math\BigInteger($this->_string_shift($private, $length), -256);
+                $components['privateExponent'] = new BigInteger($this->_string_shift($private, $length), -256);
                 \extract(\unpack('Nlength', $this->_string_shift($private, 4)));
                 if (\strlen($private) < $length) {
                     return \false;
                 }
-                $components['primes'] = array(1 => new \Beehive\phpseclib\Math\BigInteger($this->_string_shift($private, $length), -256));
+                $components['primes'] = array(1 => new BigInteger($this->_string_shift($private, $length), -256));
                 \extract(\unpack('Nlength', $this->_string_shift($private, 4)));
                 if (\strlen($private) < $length) {
                     return \false;
                 }
-                $components['primes'][] = new \Beehive\phpseclib\Math\BigInteger($this->_string_shift($private, $length), -256);
+                $components['primes'][] = new BigInteger($this->_string_shift($private, $length), -256);
                 $temp = $components['primes'][1]->subtract($this->one);
                 $components['exponents'] = array(1 => $components['publicExponent']->modInverse($temp));
                 $temp = $components['primes'][2]->subtract($this->one);
@@ -1190,13 +1237,13 @@ class RSA
                 if (\strlen($private) < $length) {
                     return \false;
                 }
-                $components['coefficients'] = array(2 => new \Beehive\phpseclib\Math\BigInteger($this->_string_shift($private, $length), -256));
+                $components['coefficients'] = array(2 => new BigInteger($this->_string_shift($private, $length), -256));
                 return $components;
             case self::PRIVATE_FORMAT_OPENSSH:
                 $components = array();
                 $decoded = $this->_extractBER($key);
                 $magic = $this->_string_shift($decoded, 15);
-                if ($magic !== "openssh-key-v1\0") {
+                if ($magic !== "openssh-key-v1\x00") {
                     return \false;
                 }
                 $options = $this->_string_shift($decoded, 24);
@@ -1204,7 +1251,7 @@ class RSA
                 // \0\0\0\4none = kdfname
                 // \0\0\0\0 = kdfoptions
                 // \0\0\0\1 = numkeys
-                if ($options != "\0\0\0\4none\0\0\0\4none\0\0\0\0\0\0\0\1") {
+                if ($options != "\x00\x00\x00\x04none\x00\x00\x00\x04none\x00\x00\x00\x00\x00\x00\x00\x01") {
                     return \false;
                 }
                 \extract(\unpack('Nlength', $this->_string_shift($decoded, 4)));
@@ -1217,7 +1264,7 @@ class RSA
                     return \false;
                 }
                 $paddedKey = $this->_string_shift($decoded, $length);
-                if ($this->_string_shift($publicKey, 11) !== "\0\0\0\7ssh-rsa") {
+                if ($this->_string_shift($publicKey, 11) !== "\x00\x00\x00\x07ssh-rsa") {
                     return \false;
                 }
                 $checkint1 = $this->_string_shift($paddedKey, 4);
@@ -1225,7 +1272,7 @@ class RSA
                 if (\strlen($checkint1) != 4 || $checkint1 !== $checkint2) {
                     return \false;
                 }
-                if ($this->_string_shift($paddedKey, 11) !== "\0\0\0\7ssh-rsa") {
+                if ($this->_string_shift($paddedKey, 11) !== "\x00\x00\x00\x07ssh-rsa") {
                     return \false;
                 }
                 $values = array(&$components['modulus'], &$components['publicExponent'], &$components['privateExponent'], &$components['coefficients'][2], &$components['primes'][1], &$components['primes'][2]);
@@ -1234,7 +1281,7 @@ class RSA
                     if (\strlen($paddedKey) < $length) {
                         return \false;
                     }
-                    $value = new \Beehive\phpseclib\Math\BigInteger($this->_string_shift($paddedKey, $length), -256);
+                    $value = new BigInteger($this->_string_shift($paddedKey, $length), -256);
                 }
                 \extract(\unpack('Nlength', $this->_string_shift($paddedKey, 4)));
                 if (\strlen($paddedKey) < $length) {
@@ -1313,7 +1360,7 @@ class RSA
     function _stop_element_handler($parser, $name)
     {
         if (isset($this->current)) {
-            $this->current = new \Beehive\phpseclib\Math\BigInteger(\base64_decode($this->current), 256);
+            $this->current = new BigInteger(\base64_decode($this->current), 256);
             unset($this->current);
         }
     }
@@ -1345,7 +1392,7 @@ class RSA
      */
     function loadKey($key, $type = \false)
     {
-        if ($key instanceof \Beehive\phpseclib\Crypt\RSA) {
+        if ($key instanceof RSA) {
             $this->privateKeyFormat = $key->privateKeyFormat;
             $this->publicKeyFormat = $key->publicKeyFormat;
             $this->k = $key->k;
@@ -1358,10 +1405,10 @@ class RSA
             $this->configFile = $key->configFile;
             $this->comment = $key->comment;
             if (\is_object($key->hash)) {
-                $this->hash = new \Beehive\phpseclib\Crypt\Hash($key->hash->getHash());
+                $this->hash = new Hash($key->hash->getHash());
             }
             if (\is_object($key->mgfHash)) {
-                $this->mgfHash = new \Beehive\phpseclib\Crypt\Hash($key->mgfHash->getHash());
+                $this->mgfHash = new Hash($key->mgfHash->getHash());
             }
             if (\is_object($key->modulus)) {
                 $this->modulus = $key->modulus->copy();
@@ -1529,7 +1576,7 @@ class RSA
             $this->publicExponent = \false;
             return \true;
         }
-        $rsa = new \Beehive\phpseclib\Crypt\RSA();
+        $rsa = new RSA();
         if (!$rsa->loadKey($key, $type)) {
             return \false;
         }
@@ -1547,7 +1594,6 @@ class RSA
      *
      * @see self::getPublicKey()
      * @access public
-     * @param string $key
      * @param int $type optional
      */
     function getPublicKey($type = self::PUBLIC_FORMAT_PKCS8)
@@ -1583,7 +1629,7 @@ class RSA
         $RSAPublicKey = \pack('Na*Na*Na*', \strlen('ssh-rsa'), 'ssh-rsa', \strlen($publicExponent), $publicExponent, \strlen($modulus), $modulus);
         switch ($algorithm) {
             case 'sha256':
-                $hash = new \Beehive\phpseclib\Crypt\Hash('sha256');
+                $hash = new Hash('sha256');
                 $base = \base64_encode($hash->hash($RSAPublicKey));
                 return \substr($base, 0, \strlen($base) - 1);
             case 'md5':
@@ -1599,7 +1645,6 @@ class RSA
      *
      * @see self::getPublicKey()
      * @access public
-     * @param string $key
      * @param int $type optional
      * @return mixed
      */
@@ -1622,8 +1667,7 @@ class RSA
      *
      * @see self::getPrivateKey()
      * @access private
-     * @param string $key
-     * @param int $type optional
+     * @param int $mode optional
      */
     function _getPrivatePublicKey($mode = self::PUBLIC_FORMAT_PKCS8)
     {
@@ -1659,7 +1703,7 @@ class RSA
      */
     function __clone()
     {
-        $key = new \Beehive\phpseclib\Crypt\RSA();
+        $key = new RSA();
         $key->loadKey($this);
         return $key;
     }
@@ -1682,7 +1726,7 @@ class RSA
         } else {
             $min[0] = \chr(0x80);
         }
-        return array('min' => new \Beehive\phpseclib\Math\BigInteger($min, 256), 'max' => new \Beehive\phpseclib\Math\BigInteger($max, 256));
+        return array('min' => new BigInteger($min, 256), 'max' => new BigInteger($max, 256));
     }
     /**
      * DER-decode the length
@@ -1780,11 +1824,11 @@ class RSA
             case 'sha256':
             case 'sha384':
             case 'sha512':
-                $this->hash = new \Beehive\phpseclib\Crypt\Hash($hash);
+                $this->hash = new Hash($hash);
                 $this->hashName = $hash;
                 break;
             default:
-                $this->hash = new \Beehive\phpseclib\Crypt\Hash('sha1');
+                $this->hash = new Hash('sha1');
                 $this->hashName = 'sha1';
         }
         $this->hLen = $this->hash->getLength();
@@ -1808,10 +1852,10 @@ class RSA
             case 'sha256':
             case 'sha384':
             case 'sha512':
-                $this->mgfHash = new \Beehive\phpseclib\Crypt\Hash($hash);
+                $this->mgfHash = new Hash($hash);
                 break;
             default:
-                $this->mgfHash = new \Beehive\phpseclib\Crypt\Hash('sha1');
+                $this->mgfHash = new Hash('sha1');
         }
         $this->mgfHLen = $this->mgfHash->getLength();
     }
@@ -1824,7 +1868,7 @@ class RSA
      *    of the hash function Hash) and 0.
      *
      * @access public
-     * @param int $format
+     * @param int $sLen
      */
     function setSaltLength($sLen)
     {
@@ -1855,12 +1899,12 @@ class RSA
      * See {@link http://tools.ietf.org/html/rfc3447#section-4.2 RFC3447#section-4.2}.
      *
      * @access private
-     * @param string $x
+     * @param int|string|resource $x
      * @return \phpseclib\Math\BigInteger
      */
     function _os2ip($x)
     {
-        return new \Beehive\phpseclib\Math\BigInteger($x, 256);
+        return new BigInteger($x, 256);
     }
     /**
      * Exponentiate with or without Chinese Remainder Theorem
@@ -1905,7 +1949,7 @@ class RSA
                     $smallest = $this->primes[$i];
                 }
             }
-            $one = new \Beehive\phpseclib\Math\BigInteger(1);
+            $one = new BigInteger(1);
             $r = $one->random($one, $smallest->subtract($one));
             $m_i = array(1 => $this->_blind($x, $r, 1), 2 => $this->_blind($x, $r, 2));
             $h = $m_i[1]->subtract($m_i[2]);
@@ -1967,12 +2011,12 @@ class RSA
         if (\strlen($x) != \strlen($y)) {
             return \false;
         }
-        $result = "\0";
+        $result = "\x00";
         $x ^= $y;
         for ($i = 0; $i < \strlen($x); $i++) {
             $result |= $x[$i];
         }
-        return $result === "\0";
+        return $result === "\x00";
     }
     /**
      * RSAEP
@@ -2049,7 +2093,7 @@ class RSA
      *
      * @access private
      * @param string $mgfSeed
-     * @param int $mgfLen
+     * @param int $maskLen
      * @return string
      */
     function _mgf1($mgfSeed, $maskLen)
@@ -2088,7 +2132,7 @@ class RSA
         $lHash = $this->hash->hash($l);
         $ps = \str_repeat(\chr(0), $this->k - $mLen - 2 * $this->hLen - 2);
         $db = $lHash . $ps . \chr(1) . $m;
-        $seed = \Beehive\phpseclib\Crypt\Random::string($this->hLen);
+        $seed = Random::string($this->hLen);
         $dbMask = $this->_mgf1($seed, $this->k - $this->hLen - 1);
         $maskedDB = $db ^ $dbMask;
         $seedMask = $this->_mgf1($maskedDB, $this->hLen);
@@ -2160,13 +2204,13 @@ class RSA
         $patternMatch = 0;
         $offset = 0;
         for ($i = 0; $i < \strlen($m); $i++) {
-            $patternMatch |= $leadingZeros & $m[$i] === "\1";
-            $leadingZeros &= $m[$i] === "\0";
+            $patternMatch |= $leadingZeros & $m[$i] === "\x01";
+            $leadingZeros &= $m[$i] === "\x00";
             $offset += $patternMatch ? 0 : 1;
         }
-        // we do & instead of && to avoid https://en.wikipedia.org/wiki/Short-circuit_evaluation
+        // we do | instead of || to avoid https://en.wikipedia.org/wiki/Short-circuit_evaluation
         // to protect against timing attacks
-        if (!$hashesMatch & !$patternMatch) {
+        if (!$hashesMatch | !$patternMatch) {
             \user_error('Decryption error');
             return \false;
         }
@@ -2209,8 +2253,8 @@ class RSA
         $psLen = $this->k - $mLen - 3;
         $ps = '';
         while (\strlen($ps) != $psLen) {
-            $temp = \Beehive\phpseclib\Crypt\Random::string($psLen - \strlen($ps));
-            $temp = \str_replace("\0", '', $temp);
+            $temp = Random::string($psLen - \strlen($ps));
+            $temp = \str_replace("\x00", '', $temp);
             $ps .= $temp;
         }
         $type = 2;
@@ -2218,7 +2262,7 @@ class RSA
         if (\defined('CRYPT_RSA_PKCS15_COMPAT') && (!isset($this->publicExponent) || $this->exponent !== $this->publicExponent)) {
             $type = 1;
             // "The padding string PS shall consist of k-3-||D|| octets. ... for block type 01, they shall have value FF"
-            $ps = \str_repeat("ÿ", $psLen);
+            $ps = \str_repeat("\xff", $psLen);
         }
         $em = \chr(0) . \chr($type) . $ps . \chr(0) . $m;
         // RSA encryption
@@ -2299,8 +2343,8 @@ class RSA
             \user_error('Encoding error');
             return \false;
         }
-        $salt = \Beehive\phpseclib\Crypt\Random::string($sLen);
-        $m2 = "\0\0\0\0\0\0\0\0" . $mHash . $salt;
+        $salt = Random::string($sLen);
+        $m2 = "\x00\x00\x00\x00\x00\x00\x00\x00" . $mHash . $salt;
         $h = $this->hash->hash($m2);
         $ps = \str_repeat(\chr(0), $emLen - $sLen - $this->hLen - 2);
         $db = $ps . \chr(1) . $salt;
@@ -2350,7 +2394,7 @@ class RSA
         }
         $salt = \substr($db, $temp + 1);
         // should be $sLen long
-        $m2 = "\0\0\0\0\0\0\0\0" . $mHash . $salt;
+        $m2 = "\x00\x00\x00\x00\x00\x00\x00\x00" . $mHash . $salt;
         $h2 = $this->hash->hash($m2);
         return $this->_equals($h, $h2);
     }
@@ -2450,7 +2494,54 @@ class RSA
             return \false;
         }
         $ps = \str_repeat(\chr(0xff), $emLen - $tLen - 3);
-        $em = "\0\1{$ps}\0{$t}";
+        $em = "\x00\x01{$ps}\x00{$t}";
+        return $em;
+    }
+    /**
+     * EMSA-PKCS1-V1_5-ENCODE (without NULL)
+     *
+     * Quoting https://tools.ietf.org/html/rfc8017#page-65,
+     *
+     * "The parameters field associated with id-sha1, id-sha224, id-sha256,
+     *  id-sha384, id-sha512, id-sha512/224, and id-sha512/256 should
+     *  generally be omitted, but if present, it shall have a value of type
+     *  NULL"
+     *
+     * @access private
+     * @param string $m
+     * @param int $emLen
+     * @return string
+     */
+    function _emsa_pkcs1_v1_5_encode_without_null($m, $emLen)
+    {
+        $h = $this->hash->hash($m);
+        if ($h === \false) {
+            return \false;
+        }
+        switch ($this->hashName) {
+            case 'sha1':
+                $t = \pack('H*', '301f300706052b0e03021a0414');
+                break;
+            case 'sha256':
+                $t = \pack('H*', '302f300b06096086480165030402010420');
+                break;
+            case 'sha384':
+                $t = \pack('H*', '303f300b06096086480165030402020430');
+                break;
+            case 'sha512':
+                $t = \pack('H*', '304f300b06096086480165030402030440');
+                break;
+            default:
+                return \false;
+        }
+        $t .= $h;
+        $tLen = \strlen($t);
+        if ($emLen < $tLen + 11) {
+            \user_error('Intended encoded message length too short');
+            return \false;
+        }
+        $ps = \str_repeat(\chr(0xff), $emLen - $tLen - 3);
+        $em = "\x00\x01{$ps}\x00{$t}";
         return $em;
     }
     /**
@@ -2484,6 +2575,7 @@ class RSA
      *
      * @access private
      * @param string $m
+     * @param string $s
      * @return string
      */
     function _rsassa_pkcs1_v1_5_verify($m, $s)
@@ -2507,12 +2599,13 @@ class RSA
         }
         // EMSA-PKCS1-v1_5 encoding
         $em2 = $this->_emsa_pkcs1_v1_5_encode($m, $this->k);
-        if ($em2 === \false) {
+        $em3 = $this->_emsa_pkcs1_v1_5_encode_without_null($m, $this->k);
+        if ($em2 === \false && $em3 === \false) {
             \user_error('RSA modulus too short');
             return \false;
         }
         // Compare
-        return $this->_equals($em, $em2);
+        return $em2 !== \false && $this->_equals($em, $em2) || $em3 !== \false && $this->_equals($em, $em3);
     }
     /**
      * Set Encryption Mode
@@ -2610,7 +2703,7 @@ class RSA
      *
      * @see self::encrypt()
      * @access public
-     * @param string $plaintext
+     * @param string $ciphertext
      * @return string
      */
     function decrypt($ciphertext)

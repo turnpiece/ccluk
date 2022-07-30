@@ -176,22 +176,22 @@ class Random
             // http://en.wikipedia.org/wiki/Cryptographically_secure_pseudorandom_number_generator#Designs_based_on_cryptographic_primitives
             switch (\true) {
                 case \class_exists('Beehive\\phpseclib\\Crypt\\AES'):
-                    $crypto = new \Beehive\phpseclib\Crypt\AES(\Beehive\phpseclib\Crypt\Base::MODE_CTR);
+                    $crypto = new AES(Base::MODE_CTR);
                     break;
                 case \class_exists('Beehive\\phpseclib\\Crypt\\Twofish'):
-                    $crypto = new \Beehive\phpseclib\Crypt\Twofish(\Beehive\phpseclib\Crypt\Base::MODE_CTR);
+                    $crypto = new Twofish(Base::MODE_CTR);
                     break;
                 case \class_exists('Beehive\\phpseclib\\Crypt\\Blowfish'):
-                    $crypto = new \Beehive\phpseclib\Crypt\Blowfish(\Beehive\phpseclib\Crypt\Base::MODE_CTR);
+                    $crypto = new Blowfish(Base::MODE_CTR);
                     break;
                 case \class_exists('Beehive\\phpseclib\\Crypt\\TripleDES'):
-                    $crypto = new \Beehive\phpseclib\Crypt\TripleDES(\Beehive\phpseclib\Crypt\Base::MODE_CTR);
+                    $crypto = new TripleDES(Base::MODE_CTR);
                     break;
                 case \class_exists('Beehive\\phpseclib\\Crypt\\DES'):
-                    $crypto = new \Beehive\phpseclib\Crypt\DES(\Beehive\phpseclib\Crypt\Base::MODE_CTR);
+                    $crypto = new DES(Base::MODE_CTR);
                     break;
                 case \class_exists('Beehive\\phpseclib\\Crypt\\RC4'):
-                    $crypto = new \Beehive\phpseclib\Crypt\RC4();
+                    $crypto = new RC4();
                     break;
                 default:
                     \user_error(__CLASS__ . ' requires at least one symmetric cipher be loaded');

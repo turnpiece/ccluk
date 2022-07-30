@@ -4,7 +4,7 @@
  *
  * This class will handle all the language strings required in tag manager module.
  *
- * @link    http://premium.wpmudev.org
+ * @link    http://wpmudev.com
  * @since   3.3.0
  *
  * @author  Joel James <joel@incsub.com>
@@ -74,9 +74,12 @@ class Locale {
 				'gtm_id_output' => __( 'This tracking ID is being output in the %s section of your pages.', 'ga_trans' ),
 			),
 			'notice' => array(
-				'account_connected' => __( 'Google Tag Manager has been successfully added to your website.', 'ga_trans' ),
-				/* translators: %s: Link to GTM docs. */
-				'gtm_invalid_id'    => __( 'Whoops, looks like that\'s an invalid container ID. Double-check you have your <a href="%s" target="_blank">Google Tag Manager ID</a> and try again.', 'ga_trans' ),
+				'account_connected'   => __( 'Google Tag Manager has been successfully added to your website.', 'ga_trans' ),
+				'duplicate_connected' => __( 'Google Tag Manager has been successfully added to your website. Note: Your network container ID will be ignored since duplicated Container IDs are not supported by Google Tag Manager.', 'ga_trans' ),
+				'gtm_invalid_id'      => sprintf( /* translators: %s: Link to GTM docs. */
+					__( 'Whoops, looks like that\'s an invalid container ID. Double-check you have your <a href="%s" target="_blank">Google Tag Manager ID</a> and try again.', 'ga_trans' ),
+					'https://tagmanager.google.com/'
+				),
 			),
 		);
 	}
@@ -133,26 +136,34 @@ class Locale {
 				'hustle_leads'       => __( 'Hustle Leads', 'ga_trans' ),
 			),
 			'desc'        => array(
-				'variables'                  => __( 'Assign variables to the data layer to simplify and automate your tags in Google Tag Manager.', 'ga_trans' ),
-				'integrations'               => __( 'Integrate your plugins with Google Tag Manager adding a data layer event to fire a conversion tracking tag after each successful user interaction.', 'ga_trans' ),
+				'variables'                   => __( 'Assign variables to the data layer to simplify and automate your tags in Google Tag Manager.', 'ga_trans' ),
+				'integrations'                => __( 'Integrate your plugins with Google Tag Manager adding a data layer event to fire a conversion tracking tag after each successful user interaction.', 'ga_trans' ),
 				/* translators: %s: Link to GTM references page. */
-				'custom_variables'           => __( 'Add global variables that will show on all pages. To see some examples, please visit the <a href="%s" target="_blank">Google Tag Manager Reference</a>.', 'ga_trans' ),
-				'forminator_forms'           => __( 'Enable this to include a dataLayer event after a successful form submission.', 'ga_trans' ),
+				'custom_variables'            => __( 'Add global variables that will show on all pages. To see some examples, please visit the <a href="%s" target="_blank">Google Tag Manager Reference</a>.', 'ga_trans' ),
+				'forminator_forms'            => __( 'Enable this to include a dataLayer event after a successful form submission.', 'ga_trans' ),
 				/* translators: %s: Link to Forminator. */
-				'forminator_forms_install'   => sprintf( __( '<a href="%s" target="_blank">Install Forminator</a> to enable. This will  include a dataLayer event after a successful form submission.', 'ga_trans' ), 'https://premium.wpmudev.org/project/forminator-pro/' ),
-				'forminator_polls'           => __( 'Enable this to include a dataLayer event after a successful poll submission.', 'ga_trans' ),
+				'forminator_forms_install'    => sprintf( __( '<a href="%s" target="_blank">Install Forminator</a> to enable. This will  include a dataLayer event after a successful form submission.', 'ga_trans' ), 'https://wpmudev.com/project/forminator-pro/' ),
+				/* translators: %s: Link to Forminator. */
+				'forminator_forms_activate'   => sprintf( __( '<a href="%s">Activate Forminator</a> to enable. This will  include a dataLayer event after a successful form submission.', 'ga_trans' ), network_admin_url( 'plugins.php' ) ),
+				'forminator_polls'            => __( 'Enable this to include a dataLayer event after a successful poll submission.', 'ga_trans' ),
 				/* translators: %s: Link to plugins page. */
-				'forminator_polls_update'    => sprintf( __( '<a href="%s">Update Forminator</a> to enable. This will  include a dataLayer event after a successful poll submission.', 'ga_trans' ), network_admin_url( 'plugins.php' ) ),
-				/* translators: %s: Link to Forminator. */
-				'forminator_polls_install'   => sprintf( __( '<a href="%s" target="_blank">Install Forminator</a> to enable. This will  include a dataLayer event after a successful poll submission.', 'ga_trans' ), 'https://premium.wpmudev.org/project/forminator-pro/' ),
-				'forminator_quizzes'         => __( 'Enable this to include a dataLayer event after a successful quiz submission.', 'ga_trans' ),
+				'forminator_polls_update'     => sprintf( __( '<a href="%s">Update Forminator</a> to enable. This will  include a dataLayer event after a successful poll submission.', 'ga_trans' ), network_admin_url( 'plugins.php' ) ),
 				/* translators: %s: Link to plugins page. */
-				'forminator_quizzes_update'  => sprintf( __( '<a href="%s">Update Forminator</a> to enable. This will include a dataLayer event after a successful quiz submission.', 'ga_trans' ), network_admin_url( 'plugins.php' ) ),
+				'forminator_polls_activate'   => sprintf( __( '<a href="%s">Activate Forminator</a> to enable. This will  include a dataLayer event after a successful poll submission.', 'ga_trans' ), network_admin_url( 'plugins.php' ) ),
 				/* translators: %s: Link to Forminator. */
-				'forminator_quizzes_install' => sprintf( __( '<a href="%s" target="_blank">Install Forminator</a> to enable. This will include a dataLayer event after a successful quiz submission.', 'ga_trans' ), 'https://premium.wpmudev.org/project/forminator-pro/' ),
-				'hustle_leads'               => __( 'Enable this to include a dataLayer event after a successful form submission.', 'ga_trans' ),
+				'forminator_polls_install'    => sprintf( __( '<a href="%s" target="_blank">Install Forminator</a> to enable. This will  include a dataLayer event after a successful poll submission.', 'ga_trans' ), 'https://wpmudev.com/project/forminator-pro/' ),
+				'forminator_quizzes'          => __( 'Enable this to include a dataLayer event after a successful quiz submission.', 'ga_trans' ),
+				/* translators: %s: Link to plugins page. */
+				'forminator_quizzes_update'   => sprintf( __( '<a href="%s">Update Forminator</a> to enable. This will include a dataLayer event after a successful quiz submission.', 'ga_trans' ), network_admin_url( 'plugins.php' ) ),
+				/* translators: %s: Link to plugins page. */
+				'forminator_quizzes_activate' => sprintf( __( '<a href="%s">Activate Forminator</a> to enable. This will include a dataLayer event after a successful quiz submission.', 'ga_trans' ), network_admin_url( 'plugins.php' ) ),
+				/* translators: %s: Link to Forminator. */
+				'forminator_quizzes_install'  => sprintf( __( '<a href="%s" target="_blank">Install Forminator</a> to enable. This will include a dataLayer event after a successful quiz submission.', 'ga_trans' ), 'https://wpmudev.com/project/forminator-pro/' ),
+				'hustle_leads'                => __( 'Enable this to include a dataLayer event after a successful form submission.', 'ga_trans' ),
 				/* translators: %s: Link to Hustle. */
-				'hustle_leads_install'       => sprintf( __( '<a href="%s" target="_blank">Install Hustle</a> to enable. This will include a dataLayer event after a successful form submission.', 'ga_trans' ), 'https://premium.wpmudev.org/project/hustle/' ),
+				'hustle_leads_install'        => sprintf( __( '<a href="%s" target="_blank">Install Hustle</a> to enable. This will include a dataLayer event after a successful form submission.', 'ga_trans' ), 'https://wpmudev.com/project/hustle/' ),
+				/* translators: %s: Link to Hustle. */
+				'hustle_leads_activate'       => sprintf( __( '<a href="%s">Activate Hustle</a> to enable. This will include a dataLayer event after a successful form submission.', 'ga_trans' ), network_admin_url( 'plugins.php' ) ),
 			),
 			'notice'      => array(
 				/* translators: %s: Link to GTM account setup page. */

@@ -13,7 +13,7 @@
 					class="sui-box-header sui-flatten sui-content-center sui-spacing-top--60 sui-spacing-left--60 sui-spacing-right--60"
 				>
 					<whitelabel-banner
-						src="welcome/gtm-welcome.png"
+						src="welcome/ga4.png"
 						:alt="$i18n.title.new_welcome_title"
 					/>
 
@@ -37,38 +37,17 @@
 					</p>
 				</div>
 
-				<div class="sui-box-body">
-					<div class="sui-form-field">
-						<h6 class="sui-settings-label beehive-label-sm">
-							{{ $i18n.label.new_container_id }}
-						</h6>
-						<p
-							class="sui-description"
-							ref="settingsLink"
-							v-html="$i18n.desc.new_container_id"
-						></p>
-					</div>
-					<div class="sui-form-field">
-						<h6 class="sui-settings-label beehive-label-sm">
-							{{ $i18n.label.new_variables }}
-						</h6>
-						<p
-							class="sui-description"
-							ref="settingsLink"
-							v-html="$i18n.desc.new_variables"
-						></p>
-					</div>
-				</div>
-
 				<div class="sui-box-footer sui-flatten sui-content-center">
-					<button
+					<a
+						:href="$vars.urls.ga_account"
 						type="button"
-						class="sui-button"
+						class="sui-button sui-button-blue"
 						aria-live="polite"
 						@click="dismiss"
 					>
-						{{ $i18n.button.got_it }}
-					</button>
+						<span class="sui-icon-wrench-tool" aria-hidden="true"></span>
+						{{ $i18n.button.setup_ga4 }}
+					</a>
 				</div>
 			</div>
 		</div>

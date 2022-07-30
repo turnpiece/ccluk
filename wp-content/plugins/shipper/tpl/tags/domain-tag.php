@@ -6,7 +6,7 @@
  * @package shipper
  */
 
-$domain = ! empty( $domain )
+$domain = ! empty( $domain ) // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- this is not WordPress global
 	? $domain
 	: home_url();
 

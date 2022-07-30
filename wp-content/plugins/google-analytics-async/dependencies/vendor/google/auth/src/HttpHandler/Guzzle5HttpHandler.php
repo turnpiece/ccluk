@@ -34,7 +34,7 @@ class Guzzle5HttpHandler
     /**
      * @param ClientInterface $client
      */
-    public function __construct(\Beehive\GuzzleHttp\ClientInterface $client)
+    public function __construct(ClientInterface $client)
     {
         $this->client = $client;
     }
@@ -45,7 +45,7 @@ class Guzzle5HttpHandler
      * @param array $options
      * @return ResponseInterface
      */
-    public function __invoke(\Beehive\Psr\Http\Message\RequestInterface $request, array $options = [])
+    public function __invoke(RequestInterface $request, array $options = [])
     {
         $response = $this->client->send($this->createGuzzle5Request($request, $options));
         return $this->createPsr7Response($response);
@@ -57,34 +57,34 @@ class Guzzle5HttpHandler
      * @param array $options
      * @return Promise
      */
-    public function async(\Beehive\Psr\Http\Message\RequestInterface $request, array $options = [])
+    public function async(RequestInterface $request, array $options = [])
     {
         if (!\class_exists('Beehive\\GuzzleHttp\\Promise\\Promise')) {
-            throw new \Exception('Install guzzlehttp/promises to use async with Guzzle 5');
+            throw new Exception('Install guzzlehttp/promises to use async with Guzzle 5');
         }
         $futureResponse = $this->client->send($this->createGuzzle5Request($request, ['future' => \true] + $options));
-        $promise = new \Beehive\GuzzleHttp\Promise\Promise(function () use($futureResponse) {
+        $promise = new Promise(function () use($futureResponse) {
             try {
                 $futureResponse->wait();
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 // The promise is already delivered when the exception is
                 // thrown, so don't rethrow it.
             }
         }, [$futureResponse, 'cancel']);
         $futureResponse->then([$promise, 'resolve'], [$promise, 'reject']);
-        return $promise->then(function (\Beehive\GuzzleHttp\Message\ResponseInterface $response) {
+        return $promise->then(function (Guzzle5ResponseInterface $response) {
             // Adapt the Guzzle 5 Response to a PSR-7 Response.
             return $this->createPsr7Response($response);
-        }, function (\Exception $e) {
-            return new \Beehive\GuzzleHttp\Promise\RejectedPromise($e);
+        }, function (Exception $e) {
+            return new RejectedPromise($e);
         });
     }
-    private function createGuzzle5Request(\Beehive\Psr\Http\Message\RequestInterface $request, array $options)
+    private function createGuzzle5Request(RequestInterface $request, array $options)
     {
         return $this->client->createRequest($request->getMethod(), $request->getUri(), \array_merge_recursive(['headers' => $request->getHeaders(), 'body' => $request->getBody()], $options));
     }
-    private function createPsr7Response(\Beehive\GuzzleHttp\Message\ResponseInterface $response)
+    private function createPsr7Response(Guzzle5ResponseInterface $response)
     {
-        return new \Beehive\GuzzleHttp\Psr7\Response($response->getStatusCode(), $response->getHeaders() ?: [], $response->getBody(), $response->getProtocolVersion(), $response->getReasonPhrase());
+        return new Response($response->getStatusCode(), $response->getHeaders() ?: [], $response->getBody(), $response->getProtocolVersion(), $response->getReasonPhrase());
     }
 }

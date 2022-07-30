@@ -1,5 +1,9 @@
 <template>
-	<sui-box titleIcon="gtm" :title="$i18n.title.gtm_box">
+	<sui-box
+		class="beehive-widget"
+		titleIcon="gtm"
+		:title="$i18n.title.gtm_box"
+	>
 		<template v-slot:body>
 			<p>{{ $i18n.desc.gtm_box }}</p>
 

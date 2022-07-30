@@ -13,29 +13,31 @@
  */
 
 $url_check  = add_query_arg( 'action', 'check-updates' );
-$last_check = WPMUDEV_Dashboard::$site->get_option( 'last_run_updates' );
+$last_check = WPMUDEV_Dashboard::$settings->get( 'last_run_updates', 'general' );
 
-if ( isset( $_GET['success-action'] ) ) { // wpcs csrf ok. ?>
+if ( isset( $_GET['success-action'] ) ) { // phpcs:ignore ?>
+	<div class="sui-floating-notices">
 
-	<?php switch ( $_GET['success-action'] ) { // wpcs csrf ok.
-
-		case 'check-updates': ?>
-
-			<div class="sui-notice-top sui-notice-success sui-can-dismiss">
-				<div class="sui-notice-content">
-					<p><?php esc_html_e( 'Data successfully updated.', 'wpmudev' ); ?></p>
+		<?php
+		if ( 'check-updates' === $_GET['success-action'] ) { // phpcs:ignore
+				$notice_msg = '<p>' . esc_html__( 'Data successfully updated.', 'wpmudev' ) . '</p>';
+				$notice_id  = 'remote-check-success';
+			?>
+				<div
+				role="alert"
+				id="<?php echo esc_attr( $notice_id ); ?>"
+				class="sui-common-notice-alert sui-notice"
+				aria-live="assertive"
+				data-show-dismiss="true"
+				data-notice-type="success"
+				data-notice-msg="<?php echo wp_kses_post( $notice_msg ); ?>"
+				>
 				</div>
-				<span class="sui-notice-dismiss">
-					<a role="button" aria-label="Dismiss" class="sui-icon-check"></a>
-				</span>
-			</div>
-
-			<?php
-			break;
-
-		default:
-			break;
-	}
+				<?php
+		}
+		?>
+	</div>
+	<?php
 }
 
 if ( $last_check ) { ?>

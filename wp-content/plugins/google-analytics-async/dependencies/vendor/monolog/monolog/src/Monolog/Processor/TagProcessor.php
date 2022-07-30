@@ -15,7 +15,7 @@ namespace Beehive\Monolog\Processor;
  *
  * @author Martijn Riemers
  */
-class TagProcessor implements \Beehive\Monolog\Processor\ProcessorInterface
+class TagProcessor implements ProcessorInterface
 {
     private $tags;
     public function __construct(array $tags = array())

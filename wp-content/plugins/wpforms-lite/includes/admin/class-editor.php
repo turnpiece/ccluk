@@ -13,7 +13,8 @@ class WPForms_Admin_Editor {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-		add_action( 'media_buttons', array( $this, 'media_button' ), 15 );
+
+		add_action( 'media_buttons', [ $this, 'media_button' ], 15 );
 	}
 
 	/**
@@ -21,7 +22,7 @@ class WPForms_Admin_Editor {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string $editor_id
+	 * @param string $editor_id Editor Id.
 	 */
 	public function media_button( $editor_id ) {
 
@@ -31,8 +32,8 @@ class WPForms_Admin_Editor {
 
 		// Provide the ability to conditionally disable the button, so it can be
 		// disabled for custom fields or front-end use such as bbPress. We default
-		// to only showing within the admin panel.
-		if ( ! apply_filters( 'wpforms_display_media_button', is_admin(), $editor_id ) ) {
+		// to only showing within the post editor page.
+		if ( ! apply_filters( 'wpforms_display_media_button', $this->is_post_editor_page(), $editor_id ) ) {
 			return;
 		}
 
@@ -43,14 +44,46 @@ class WPForms_Admin_Editor {
 			'<a href="#" class="button wpforms-insert-form-button" data-editor="%s" title="%s">%s %s</a>',
 			esc_attr( $editor_id ),
 			esc_attr__( 'Add Form', 'wpforms-lite' ),
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			$icon,
-			__( 'Add Form', 'wpforms-lite' )
+			esc_html__( 'Add Form', 'wpforms-lite' )
 		);
 
-		// If we have made it this far then load the JS.
-		wp_enqueue_script( 'wpforms-editor', WPFORMS_PLUGIN_URL . 'assets/js/admin-editor.js', array( 'jquery' ), WPFORMS_VERSION, true );
+		$min = wpforms_get_min_suffix();
 
-		add_action( 'admin_footer', array( $this, 'shortcode_modal' ) );
+		// If we have made it this far then load the JS.
+		wp_enqueue_script(
+			'wpforms-editor',
+			WPFORMS_PLUGIN_URL . "assets/js/admin-editor{$min}.js",
+			[ 'jquery' ],
+			WPFORMS_VERSION,
+			true
+		);
+
+		add_action( 'admin_footer', [ $this, 'shortcode_modal' ] );
+	}
+
+	/**
+	 * Check if we are on the post editor admin page.
+	 *
+	 * @since 1.6.2
+	 *
+	 * @returns boolean True if it is post editor admin page.
+	 */
+	public function is_post_editor_page() {
+
+		if ( ! is_admin() ) {
+			return false;
+		}
+
+		// get_current_screen() is loaded after 'admin_init' hook and may not exist yet.
+		if ( ! function_exists( 'get_current_screen' ) ) {
+			return false;
+		}
+
+		$screen = get_current_screen();
+
+		return $screen !== null && $screen->parent_base === 'edit';
 	}
 
 	/**
@@ -77,8 +110,7 @@ class WPForms_Admin_Editor {
 						<?php
 						echo '<p id="wpforms-modal-notice">';
 						printf(
-							wp_kses(
-								/* translators: %s - WPForms documentation link. */
+							wp_kses( /* translators: %s - WPForms documentation URL. */
 								__( 'Heads up! Don\'t forget to test your form. <a href="%s" target="_blank" rel="noopener noreferrer">Check out our complete guide</a>!', 'wpforms-lite' ),
 								array(
 									'a' => array(
@@ -134,6 +166,14 @@ class WPForms_Admin_Editor {
 			</form>
 		</div>
 		<style type="text/css">
+			.wpforms-insert-form-button svg path {
+				fill: #0071a1;
+			}
+
+			.wpforms-insert-form-button:hover svg path {
+				fill: #016087;
+			}
+
 			#wpforms-modal-wrap {
 				display: none;
 				background-color: #fff;
@@ -147,7 +187,7 @@ class WPForms_Admin_Editor {
 				position: fixed;
 				top: 50%;
 				left: 50%;
-				z-index: 100105;
+				z-index: 100205;
 				-webkit-transition: height 0.2s, margin-top 0.2s;
 				transition: height 0.2s, margin-top 0.2s;
 			}
@@ -163,7 +203,7 @@ class WPForms_Admin_Editor {
 				background: #000;
 				opacity: 0.7;
 				filter: alpha(opacity=70);
-				z-index: 100100;
+				z-index: 100200;
 			}
 
 			#wpforms-modal {
@@ -336,4 +376,4 @@ class WPForms_Admin_Editor {
 
 }
 
-new WPForms_Admin_Editor;
+new WPForms_Admin_Editor();

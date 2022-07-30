@@ -2,7 +2,7 @@
 /**
  * Base class for all endpoint classes.
  *
- * @link       http://premium.wpmudev.org
+ * @link       http://wpmudev.com
  * @since      3.3.0
  *
  * @author     Joel James <joel@incsub.com>
@@ -14,10 +14,12 @@ namespace Beehive\Core\Utils\Abstracts;
 // If this file is called directly, abort.
 defined( 'WPINC' ) || die;
 
+use Beehive\Google\Exception;
 use WP_REST_Request;
 use WP_REST_Response;
 use Beehive\Core\Helpers\General;
 use Beehive\Core\Helpers\Permission;
+use Beehive\Google\Service\Exception as Google_Exception;
 
 /**
  * Class Endpoint
@@ -29,18 +31,18 @@ abstract class Endpoint extends Base {
 	/**
 	 * API endpoint version.
 	 *
-	 * @var int $version
-	 *
 	 * @since 3.2.4
+	 *
+	 * @var int $version
 	 */
 	protected $version = 1;
 
 	/**
 	 * API endpoint namespace.
 	 *
-	 * @var string $namespace
-	 *
 	 * @since 3.2.4
+	 *
+	 * @var string $namespace
 	 */
 	private $namespace;
 
@@ -97,10 +99,10 @@ abstract class Endpoint extends Base {
 	/**
 	 * Get formatted response for the current request.
 	 *
+	 * @since 3.2.4
+	 *
 	 * @param array $data    Response data.
 	 * @param bool  $success Is request success.
-	 *
-	 * @since 3.2.4
 	 *
 	 * @return WP_REST_Response
 	 */
@@ -120,28 +122,18 @@ abstract class Endpoint extends Base {
 	/**
 	 * Send error message response from exception class.
 	 *
-	 * @param \Exception|\Google_Service_Exception|bool $exception Exception object.
-	 * @param array                                     $data      Response data.
-	 * @param bool                                      $status    Response status.
-	 *
 	 * @since 3.2.4
+	 *
+	 * @param \Exception|Google_Exception|bool $exception Exception object.
+	 * @param array                            $data      Response data.
+	 * @param bool                             $status    Response status.
 	 *
 	 * @return WP_REST_Response
 	 */
 	public function get_error_response( $exception, $data = array(), $status = false ) {
-		// If error instance found, get error message.
-		if ( $exception instanceof \Google_Service_Exception ) {
-			// Format error message.
-			$error = $exception->getErrors();
-			$error = isset( $error[0]['message'] ) ? $error[0]['message'] : $error;
-			$error = empty( $error ) ? __( 'Unknown error occurred.', 'ga_trans' ) : $error;
-
-			// Try to get the error message.
+		if ( $exception instanceof Exception ) {
 			// translators: %s is error message from Google API.
-			$data['error'] = sprintf( __( 'Google API Error: %s', 'ga_trans' ), $error );
-		} elseif ( $exception instanceof \Exception ) {
-			// translators: %s is error message from Google API.
-			$data['error'] = sprintf( __( 'Google API Error: %s', 'ga_trans' ), $exception->getMessage() );
+			$data['error'] = sprintf( __( 'Google API Error: %s', 'ga_trans' ), Google_API::get_message( $exception ) );
 		} elseif ( ! empty( $exception ) && method_exists( $exception, 'getMessage' ) ) {
 			// translators: %s is error message from Google API.
 			$data['error'] = sprintf( __( 'Google API Error: %s', 'ga_trans' ), $exception->getMessage() );
@@ -162,12 +154,12 @@ abstract class Endpoint extends Base {
 	 * This is a wrapper function to get default value if the param
 	 * is not found. Also with optional sanitization.
 	 *
+	 * @since 3.2.4
+	 *
 	 * @param WP_REST_Request $request           Request object.
 	 * @param string          $key               Parameter name.
 	 * @param mixed           $default           Default value.
 	 * @param string|bool     $sanitize_callback Sanitization callback.
-	 *
-	 * @since 3.2.4
 	 *
 	 * @return mixed
 	 */
@@ -189,9 +181,9 @@ abstract class Endpoint extends Base {
 	/**
 	 * Check if a given request has access to manage settings.
 	 *
-	 * @param WP_REST_Request $request Request object.
-	 *
 	 * @since 3.2.4
+	 *
+	 * @param WP_REST_Request $request Request object.
 	 *
 	 * @return bool
 	 */
@@ -203,11 +195,11 @@ abstract class Endpoint extends Base {
 		/**
 		 * Filter to modify settings rest capability.
 		 *
-		 * @paran bool $capable Is user capable?.
+		 * @since 3.2.4
 		 *
 		 * @param WP_REST_Request $request Request object.
 		 *
-		 * @since 3.2.4
+		 * @param bool            $capable Is user capable?.
 		 */
 		return apply_filters( 'beehive_rest_settings_permission', $capable, $request );
 	}
@@ -215,9 +207,9 @@ abstract class Endpoint extends Base {
 	/**
 	 * Check if a given request has access to the analytics data.
 	 *
-	 * @param WP_REST_Request $request Request object.
-	 *
 	 * @since 3.2.4
+	 *
+	 * @param WP_REST_Request $request Request object.
 	 *
 	 * @return bool
 	 */
@@ -229,11 +221,11 @@ abstract class Endpoint extends Base {
 		/**
 		 * Filter to modify stats rest capability.
 		 *
-		 * @paran bool $capable Is user capable?.
+		 * @since 3.2.4
 		 *
 		 * @param WP_REST_Request $request Request object.
 		 *
-		 * @since 3.2.4
+		 * @param bool            $capable Is user capable?.
 		 */
 		return apply_filters( 'beehive_rest_analytics_permission', $capable, $request );
 	}
@@ -241,9 +233,9 @@ abstract class Endpoint extends Base {
 	/**
 	 * Check if a given request has access to public data.
 	 *
-	 * @param WP_REST_Request $request Request object.
-	 *
 	 * @since 3.2.4
+	 *
+	 * @param WP_REST_Request $request Request object.
 	 *
 	 * @return bool
 	 */
@@ -251,13 +243,13 @@ abstract class Endpoint extends Base {
 		$capable = true;
 
 		/**
-		 * Filter to modify stats rest capability.
+		 * Filter to modify default rest capability.
 		 *
 		 * @paran bool $capable Is user capable?.
 		 *
-		 * @param WP_REST_Request $request Request object.
-		 *
 		 * @since 3.2.4
+		 *
+		 * @param WP_REST_Request $request Request object.
 		 */
 		return apply_filters( 'beehive_rest_public_permission', $capable, $request );
 	}
@@ -269,11 +261,11 @@ abstract class Endpoint extends Base {
 	 * Please note, if the parameter key is not specifically
 	 * checked, the validation will return true.
 	 *
+	 * @since 3.2.4
+	 *
 	 * @param mixed           $param   Paramter value.
 	 * @param WP_REST_Request $request Request object.
 	 * @param string          $key     Paramter key.
-	 *
-	 * @since 3.2.4
 	 *
 	 * @return bool
 	 */

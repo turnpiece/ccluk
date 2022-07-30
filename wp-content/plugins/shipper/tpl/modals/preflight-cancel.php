@@ -7,13 +7,14 @@
 
 ?>
 
-<div class="sui-dialog sui-dialog-sm" id="shipper-preflight-cancel-dialog" aria-hidden="true">
-	<div class="sui-dialog-overlay" tabindex="-1" data-a11y-dialog-hide></div>
-
-	<div class="sui-dialog-content" role="dialog">
-
+<div class="sui-modal sui-modal-sm" aria-hidden="true">
+	<div
+		role="dialog"
+		id="shipper-preflight-cancel-dialog"
+		class="sui-modal-content"
+		>
 		<div class="sui-box" role="document">
-			<div class="sui-box-header">
+			<div class="sui-box-header sui-flatten sui-content-center sui-spacing-top--60">
 				<h3 class="sui-dialog-title">
 					<?php esc_html_e( 'Cancel Pre-Flight Check', 'shipper' ); ?>
 				</h3>
@@ -37,5 +38,5 @@
 			</div><?php // .sui-box-body ?>
 		</div><?php // .sui-box ?>
 
-	</div><?php // .sui-dialog-content ?>
-</div><?php // .sui-dialog ?>
+	</div><?php // .sui-modal-content ?>
+</div><?php // .sui-modal ?>

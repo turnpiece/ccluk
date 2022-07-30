@@ -7,7 +7,12 @@
 
 ?>
 <div class="sui-notice sui-notice-warning">
-	<p><?php esc_html_e( 'You have a few warnings, please check the sections above for more info.', 'shipper' ); ?></p>
+	<div class="sui-notice-content">
+		<div class="sui-notice-message">
+			<i class="sui-notice-icon sui-icon-info sui-md" aria-hidden="true"></i>
+			<p><?php esc_html_e( 'You have a few warnings, please check the sections above for more info.', 'shipper' ); ?></p>
+		</div>
+	</div>
 </div>
 <p>
 	<?php esc_html_e( 'Don\'t worry!', 'shipper' ); ?>

@@ -34,6 +34,29 @@ abstract class Shipper_Controller_Heartbeat extends Shipper_Controller {
 			// Allow heartbeat API on WPEngine.
 			add_filter( 'wpe_heartbeat_allowed_pages', array( $this, 'allow_shipper_page' ) );
 		}
+
+		add_action( 'shipper_runner_ping', array( $this, 'on_ping' ) );
+		add_action( 'shipper_runner_pre_request_tick', array( $this, 'on_pre_request_tick' ) );
+	}
+
+	/**
+	 * Log action
+	 *
+	 * @since 1.2.6
+	 */
+	public function on_ping() {
+		$ping = new Shipper_Model_Stored_Ping();
+		$ping->log_action();
+	}
+
+	/**
+	 * Clear registered action on ajax request
+	 *
+	 * @since 1.2.6
+	 */
+	public function on_pre_request_tick() {
+		$ping = new Shipper_Model_Stored_Ping();
+		$ping->clear_action();
 	}
 
 	/**

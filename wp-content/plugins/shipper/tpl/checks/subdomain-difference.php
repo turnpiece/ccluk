@@ -7,10 +7,14 @@
  */
 
 $source_type = ! empty( $local )
+	// translators: %s: site name.
 	? sprintf( __( '<b>%s</b> is a subdomain installation', 'shipper' ), $source )
+	// translators: %s: site name.
 	: sprintf( __( '<b>%s</b> is a subdirectory installation', 'shipper' ), $source );
 $dest_type = ! empty( $remote )
+	// translators: %s: site name.
 	? sprintf( __( '<b>%s</b> is a subdomain installation', 'shipper' ), $destination )
+	// translators: %s: site name.
 	: sprintf( __( '<b>%s</b> is a subdirectory installation', 'shipper' ), $destination );
 ?>
 <div>
@@ -23,14 +27,23 @@ $dest_type = ! empty( $remote )
 
 	<h4><?php esc_html_e( 'Status', 'shipper' ); ?></h4>
 	<div class="sui-notice sui-notice-error">
-		<p>
-			<?php
-				echo wp_kses_post( sprintf(
-					__( '%1$s but %2$s.', 'shipper' ),
-					$source_type, $dest_type
-				) );
-			?>
-		</p>
+		<div class="sui-notice-content">
+			<div class="sui-notice-message">
+				<i class="sui-notice-icon sui-icon-info sui-md" aria-hidden="true"></i>
+				<p>
+					<?php
+					echo wp_kses_post(
+						sprintf(
+							// translators: %s: source and destination type.
+							__( '%1$s but %2$s.', 'shipper' ),
+							$source_type,
+							$dest_type
+						)
+					);
+					?>
+				</p>
+			</div>
+		</div>
 	</div>
 
 	<h4><?php esc_html_e( 'How To Fix', 'shipper' ); ?></h4>

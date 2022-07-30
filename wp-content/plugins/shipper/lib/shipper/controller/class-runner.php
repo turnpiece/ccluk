@@ -47,7 +47,7 @@ abstract class Shipper_Controller_Runner extends Shipper_Controller {
 	 */
 	protected function __construct( $process ) {
 		parent::__construct();
-		$this->_process = $process;
+		$this->process = $process;
 	}
 
 	/**
@@ -58,7 +58,7 @@ abstract class Shipper_Controller_Runner extends Shipper_Controller {
 	 * @return string
 	 */
 	public function get_action() {
-		return sprintf( 'shipper_%s_self_ping', $this->_process );
+		return sprintf( 'shipper_%s_self_ping', $this->process );
 	}
 
 	/**
@@ -73,7 +73,7 @@ abstract class Shipper_Controller_Runner extends Shipper_Controller {
 		return (int) apply_filters(
 			'shipper_runner_tick_validity_interval',
 			600,
-			$this->_process
+			$this->process
 		);
 	}
 
@@ -136,11 +136,25 @@ abstract class Shipper_Controller_Runner extends Shipper_Controller {
 	 * Sets process lock.
 	 */
 	public function json_process_request() {
-		if ( function_exists( 'ignore_user_abort' ) ) { ignore_user_abort( true ); }
-		if ( function_exists( 'fastcgi_finish_request' ) ) { fastcgi_finish_request(); }
+		if ( Shipper_Model_Force::maybe_stuck_on_migration_preflight() ) {
+			/**
+			 * Force fully stuck pre-flight check for API migration.
+			 *
+			 * @since 1.2.6
+			 */
+			return;
+		}
 
-		$locks = new Shipper_Helper_Locks;
-		$lock = $this->get_process_lock();
+		if ( function_exists( 'ignore_user_abort' ) ) {
+			ignore_user_abort( true );
+		}
+
+		if ( function_exists( 'fastcgi_finish_request' ) ) {
+			fastcgi_finish_request();
+		}
+
+		$locks = new Shipper_Helper_Locks();
+		$lock  = $this->get_process_lock();
 
 		if ( $locks->has_lock( Shipper_Helper_Locks::LOCK_CANCEL ) ) {
 			Shipper_Helper_Log::write( 'Cancel lock set, process shutting down' );
@@ -152,7 +166,8 @@ abstract class Shipper_Controller_Runner extends Shipper_Controller {
 			die;
 		}
 
-		$hash = isset( $_GET['hash'] ) ? sanitize_text_field( $_GET['hash'] ) : false;
+		$data     = wp_unslash( $_GET ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- nonce already checked.
+		$hash     = isset( $data['hash'] ) ? sanitize_text_field( $data['hash'] ) : false;
 		$expected = $this->get_hash();
 
 		// @codingStandardsIgnoreLine `hash_equals` is WP-backported
@@ -205,10 +220,15 @@ abstract class Shipper_Controller_Runner extends Shipper_Controller {
 		);
 
 		if ( in_array( $error['type'], $fatals, true ) ) {
-			Shipper_Helper_Log::write(sprintf(
-				__( 'Encountered a FATAL ERROR: %1$s in %2$s on line %3$d', 'shipper' ),
-				$error['message'], $error['file'], $error['line']
-			));
+			Shipper_Helper_Log::write(
+				sprintf(
+					/* translators: %1$s %2$s %3$s: error message, file and line number. */
+					__( 'Encountered a FATAL ERROR: %1$s in %2$s on line %3$d', 'shipper' ),
+					$error['message'],
+					$error['file'],
+					$error['line']
+				)
+			);
 			$this->cancel(); // Yeah, cancel too.
 		}
 	}
@@ -221,8 +241,8 @@ abstract class Shipper_Controller_Runner extends Shipper_Controller {
 	 * Sets the cancellation lock.
 	 */
 	public function attempt_cancel() {
-		$locks = new Shipper_Helper_Locks;
-		$lock = $this->get_process_lock();
+		$locks = new Shipper_Helper_Locks();
+		$lock  = $this->get_process_lock();
 
 		if ( $locks->has_lock( $lock ) ) {
 			if ( ! $locks->has_lock( Shipper_Helper_Locks::LOCK_CANCEL ) ) {
@@ -251,8 +271,8 @@ abstract class Shipper_Controller_Runner extends Shipper_Controller {
 	 * Wraps process cancelling and deals with locking
 	 */
 	public function cancel() {
-		$locks = new Shipper_Helper_Locks;
-		$lock = $this->get_process_lock();
+		$locks = new Shipper_Helper_Locks();
+		$lock  = $this->get_process_lock();
 
 		$locks->set_lock( $lock );
 		$status = $this->process_cancel();
@@ -270,8 +290,8 @@ abstract class Shipper_Controller_Runner extends Shipper_Controller {
 	 * @return bool
 	 */
 	public function ping() {
-		$locks = new Shipper_Helper_Locks;
-		$lock = $this->get_process_lock();
+		$locks = new Shipper_Helper_Locks();
+		$lock  = $this->get_process_lock();
 		if ( $locks->has_lock( $lock ) ) {
 			if ( ! $locks->is_old_lock( $lock ) ) {
 				// Process is already locked - meaning, it's still running in another thread.
@@ -295,30 +315,41 @@ abstract class Shipper_Controller_Runner extends Shipper_Controller {
 			}
 		}
 
-		$args = http_build_query(array(
-			'action' => $this->get_action(),
-			'hash' => $this->get_hash(),
-		));
+		$args   = http_build_query(
+			array(
+				'action' => $this->get_action(),
+				'hash'   => $this->get_hash(),
+			)
+		);
 		$params = array(
-			'url' => admin_url( "admin-ajax.php?{$args}" ),
+			'url'  => admin_url( "admin-ajax.php?{$args}" ),
 			'args' => $this->get_ping_request_args(),
 		);
-
-		$rsp = wp_remote_post( $params['url'], $params['args'] );
+		$rsp    = wp_remote_post( $params['url'], $params['args'] );
 
 		if ( $this->is_blocking_request() ) {
 			$code = wp_remote_retrieve_response_code( $rsp );
 			if ( 200 !== (int) $code ) {
-				Shipper_Helper_Log::debug( sprintf(
-					__( 'Non-success response code (%d)', 'shipper' ),
-					$code
-				));
+				Shipper_Helper_Log::debug(
+					sprintf(
+						/* translators: $d: response code. */
+						__( 'Non-success response code (%d)', 'shipper' ),
+						$code
+					)
+				);
 			}
 		}
 
 		// Re-schedule here. The request can silently drop without ever reaching processor.
 		// In this case the kickstart is left unscheduled.
 		$this->kickstarter->schedule_reboot();
+
+		/**
+		 * Fire `shipper_runner_ping` action
+		 *
+		 * @since 1.2.6
+		 */
+		do_action( 'shipper_runner_ping', $this );
 
 		return true;
 	}
@@ -333,7 +364,7 @@ abstract class Shipper_Controller_Runner extends Shipper_Controller {
 			'timeout'   => $this->get_ping_timeout(),
 			'blocking'  => $this->is_blocking_request(),
 			'sslverify' => false,
-			'headers' => array(
+			'headers'   => array(
 				'user-agent' => shipper_get_user_agent(),
 			),
 		);
@@ -358,35 +389,41 @@ abstract class Shipper_Controller_Runner extends Shipper_Controller {
 			return $cookies;
 		}
 
-		$user_id = $user->ID;
+		$user_id          = $user->ID;
 		$auth_cookie_name = AUTH_COOKIE;
-		$scheme = 'auth';
+		$scheme           = 'auth';
 
 		$secure = is_ssl();
 		$secure = apply_filters( 'secure_auth_cookie', $secure, $user_id );
 		if ( $secure ) {
 			$auth_cookie_name = SECURE_AUTH_COOKIE;
-			$scheme = 'secure_auth';
+			$scheme           = 'secure_auth';
 		}
 
 		// Allow one hour runtime.
 		$expiration = time() + HOUR_IN_SECONDS;
 
-		$cookies[] = new WP_Http_Cookie(array(
-			'name' => $auth_cookie_name,
-			'value' => wp_generate_auth_cookie( $user_id, $expiration, $scheme ),
-		));
-		$cookies[] = new WP_Http_Cookie(array(
-			'name' => LOGGED_IN_COOKIE,
-			'value' => wp_generate_auth_cookie( $user_id, $expiration, 'logged_in' ),
-		));
+		$cookies[] = new WP_Http_Cookie(
+			array(
+				'name'  => $auth_cookie_name,
+				'value' => wp_generate_auth_cookie( $user_id, $expiration, $scheme ),
+			)
+		);
+		$cookies[] = new WP_Http_Cookie(
+			array(
+				'name'  => LOGGED_IN_COOKIE,
+				'value' => wp_generate_auth_cookie( $user_id, $expiration, 'logged_in' ),
+			)
+		);
 
 		if ( defined( 'WPE_APIKEY' ) ) {
 			// WP Engine's proprietary auth cookie.
-			$cookies[] = new WP_Http_Cookie(array(
-				'name' => 'wpe-auth',
-				'value' => md5( 'wpe_auth_salty_dog|' . WPE_APIKEY ),
-			));
+			$cookies[] = new WP_Http_Cookie(
+				array(
+					'name'  => 'wpe-auth',
+					'value' => md5( 'wpe_auth_salty_dog|' . WPE_APIKEY ),
+				)
+			);
 		}
 
 		return $cookies;
@@ -400,8 +437,7 @@ abstract class Shipper_Controller_Runner extends Shipper_Controller {
 	public function get_ping_timeout() {
 		$timeout = $this->is_blocking_request()
 			? 30.0
-			: 1.0
-		;
+			: 1.0;
 
 		/**
 		 * Gets the runner ping timeout

@@ -34,11 +34,10 @@ class Shipper_Controller_Override_Remote extends Shipper_Controller_Override {
 	 * @return bool Bound callback value
 	 */
 	public function apply_remote_scrubbing_skip() {
-		$constants = $this->get_constants();
+		$constants   = $this->get_constants();
 		$scrub_cback = $constants->get( 'SHIPPER_SKIP_REMOTE_SCRUB' )
 			? '__return_true'
-			: '__return_false'
-		;
+			: '__return_false';
 		add_filter( 'shipper_import_skip_scrub', $scrub_cback );
 
 		return call_user_func( $scrub_cback );
@@ -55,7 +54,6 @@ class Shipper_Controller_Override_Remote extends Shipper_Controller_Override {
 		$tm = $this->get_constants()->get( 'SHIPPER_MAX_UPLOAD_STATEMENTS' );
 		return is_numeric( $tm )
 			? (int) $tm
-			: $limit
-		;
+			: $limit;
 	}
 }

@@ -4,7 +4,7 @@
  *
  * Defines admin-specific functionality of the plugin.
  *
- * @link    http://premium.wpmudev.org
+ * @link    http://wpmudev.com
  * @since   3.2.0
  * @author  Joel James <joel@incsub.com>
  * @package Beehive\Core\Controllers
@@ -27,14 +27,6 @@ use Beehive\Core\Views\Admin as Admin_View;
 class Menu extends Base {
 
 	/**
-	 * Main slug of the beehive menu page.
-	 *
-	 * @since 3.3.0
-	 * @var string
-	 */
-	const SLUG = 'beehive';
-
-	/**
 	 * Initialize the class by registering hooks.
 	 *
 	 * @since 3.2.0
@@ -44,9 +36,13 @@ class Menu extends Base {
 	public function init() {
 		// Setup plugin menu.
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
-
-		// Setup network admin menu.
 		add_action( 'network_admin_menu', array( $this, 'admin_menu' ) );
+
+		// Setup menu items.
+		add_filter( 'beehive_main_menu_items', array( $this, 'dashboard_menu' ), 1 );
+		add_filter( 'beehive_main_menu_items', array( $this, 'accounts_menu' ), 4 );
+		add_filter( 'beehive_main_menu_items', array( $this, 'settings_menu' ), 5 );
+		add_filter( 'beehive_main_menu_items', array( $this, 'tutorials_menu' ), 6 );
 	}
 
 	/**
@@ -57,6 +53,7 @@ class Menu extends Base {
 	 *
 	 * @since 3.2.0
 	 * @since 3.2.4 Modified to add Dashboard menu.
+	 * @since 3.3.7 Modified to support multiple items.
 	 *
 	 * @return void
 	 */
@@ -66,83 +63,30 @@ class Menu extends Base {
 			return;
 		}
 
-		// Setup dashboard menu.
-		$this->dashboard_menu();
-
-		/**
-		 * Register additional menus for Beehive.
-		 *
-		 * @since 3.2.4
-		 */
-		do_action( 'beehive_admin_menu' );
-
-		// Setup accounts menu.
-		$this->accounts_menu();
-
-		// Setup settings menu.
-		$this->settings_menu();
-
-		// Statistics menu.
-		$this->statistics_menu();
-
-		global $menu;
-
-		foreach ( $menu as $position => $data ) {
-			// Only when it's Beehive menu.
-			if ( isset( $data[2] ) && self::SLUG === $data[2] ) {
-				// Rename the plugin main menu title to Beehive.
-				// phpcs:ignore
-				$menu[ $position ][0] = General::plugin_name();
-			}
-		}
-	}
-
-	/**
-	 * Register admin menu for the statistics reports.
-	 *
-	 * Modules can use `beehive_statistics_menu_items` filter to add
-	 * new items to the menu. Menu will appear only if at least one
-	 * submenu item is added to the hook.
-	 *
-	 * @since 3.2.4
-	 *
-	 * @return void
-	 */
-	private function statistics_menu() {
 		// Get the list of registered sub menus.
-		$submenus = apply_filters( 'beehive_statistics_menu_items', array() );
+		$submenus = apply_filters( 'beehive_main_menu_items', array() );
 
 		// No need to continue if empty.
 		if ( empty( $submenus ) ) {
 			return;
 		}
 
-		// The main menu slug.
-		$main_slug = 'beehive-statistics';
+		// Get main menu item.
+		$main_slug = array_keys( $submenus )[0];
+		$main_item = array_values( $submenus )[0];
 
-		// Add the statistics main menu.
+		// Remove main item.
+		unset( $submenus[ $main_slug ] );
+
+		// Add the main page.
 		add_menu_page(
-			__( 'Statistics', 'ga_trans' ),
-			__( 'Statistics', 'ga_trans' ),
-			Capability::ANALYTICS_CAP,
+			$main_item['page_title'],
+			$main_item['menu_title'],
+			$main_item['cap'],
 			$main_slug,
-			null,
-			Admin_View::instance()->get_statistics_icon(),
-			3
+			$main_item['callback'],
+			Admin_View::instance()->get_settings_icon()
 		);
-
-		// Add a fake page and we will remove it later.
-		add_submenu_page(
-			$main_slug,
-			'',
-			'',
-			Capability::ANALYTICS_CAP,
-			$main_slug,
-			null
-		);
-
-		// Remove the fake submenu.
-		remove_submenu_page( 'beehive-statistics', 'beehive-statistics' );
 
 		// Add settings page.
 		foreach ( $submenus as $slug => $submenu ) {
@@ -157,33 +101,45 @@ class Menu extends Base {
 		}
 
 		/**
-		 * Action hook to run after statistics menu setup.
+		 * Action hook to run after main menu setup.
 		 *
-		 * @since 3.2.4
+		 * @since 3.2.7
 		 */
-		do_action( 'beehive_statistics_menu' );
+		do_action( 'beehive_main_menu' );
+
+		global $menu;
+
+		foreach ( $menu as $position => $data ) {
+			// Only when it's Beehive menu.
+			if ( isset( $data[2] ) && 'beehive' === $data[2] ) {
+				// Rename the plugin main menu title to Beehive.
+				// phpcs:ignore
+				$menu[ $position ][0] = General::plugin_name();
+			}
+		}
 	}
 
 	/**
-	 * Register admin menu for integrations settings.
+	 * Register admin menu for Beehive dashboard.
 	 *
-	 * Modules can use `beehive_integrations` filter to add integrations
-	 * to the list. If the list is empty, the menu will not be added.
+	 * @param array $menu_items Menu items.
 	 *
-	 * @since 3.3.0
+	 * @since 3.3.7
 	 *
-	 * @return void
+	 * @return array
 	 */
-	private function dashboard_menu() {
+	public function dashboard_menu( $menu_items ) {
 		// Add the dashboard page.
-		add_menu_page(
-			__( 'Beehive Dashboard', 'ga_trans' ),
-			__( 'Dashboard', 'ga_trans' ),
-			Capability::SETTINGS_CAP,
-			self::SLUG,
-			array( Admin_View::instance(), 'dashboard_page' ),
-			Admin_View::instance()->get_settings_icon()
-		);
+		if ( current_user_can( Capability::SETTINGS_CAP ) ) {
+			$menu_items['beehive'] = array(
+				'page_title' => __( 'Beehive Dashboard', 'ga_trans' ),
+				'menu_title' => __( 'Dashboard', 'ga_trans' ),
+				'cap'        => Capability::SETTINGS_CAP,
+				'callback'   => array( Admin_View::instance(), 'dashboard_page' ),
+			);
+		}
+
+		return $menu_items;
 	}
 
 	/**
@@ -192,20 +148,24 @@ class Menu extends Base {
 	 * This is where we handle the authentications for all integrations
 	 * such as Google, Facebook etc.
 	 *
-	 * @since 3.3.0
+	 * @param array $menu_items Menu items.
 	 *
-	 * @return void
+	 * @since 3.3.7
+	 *
+	 * @return array
 	 */
-	private function accounts_menu() {
+	public function accounts_menu( $menu_items ) {
 		// Add accounts page.
-		add_submenu_page(
-			self::SLUG,
-			__( 'Beehive Accounts', 'ga_trans' ),
-			__( 'Accounts', 'ga_trans' ),
-			Capability::SETTINGS_CAP,
-			'beehive-accounts',
-			array( Admin_View::instance(), 'accounts_page' )
-		);
+		if ( current_user_can( Capability::SETTINGS_CAP ) ) {
+			$menu_items['beehive-accounts'] = array(
+				'page_title' => __( 'Beehive Accounts', 'ga_trans' ),
+				'menu_title' => __( 'Accounts', 'ga_trans' ),
+				'cap'        => Capability::SETTINGS_CAP,
+				'callback'   => array( Admin_View::instance(), 'accounts_page' ),
+			);
+		}
+
+		return $menu_items;
 	}
 
 	/**
@@ -213,32 +173,51 @@ class Menu extends Base {
 	 *
 	 * Beehive's general settings are managed in this page.
 	 *
-	 * @since 3.3.0
+	 * @param array $menu_items Menu items.
 	 *
-	 * @return void
+	 * @since 3.3.7
+	 *
+	 * @return array
 	 */
-	private function settings_menu() {
-		// Hide menu if not allowed.
-		if ( General::is_networkwide() && ! $this->is_network() ) {
-			// Get permission overriding settings.
-			$settings_cap  = beehive_analytics()->settings->get( 'overwrite_settings_cap', 'permissions', true );
-			$analytics_cap = beehive_analytics()->settings->get( 'overwrite_cap', 'permissions', true );
+	public function settings_menu( $menu_items ) {
+		// Add settings page.
+		if ( current_user_can( Capability::SETTINGS_CAP ) ) {
+			$menu_items['beehive-settings'] = array(
+				'page_title' => __( 'Beehive Settings', 'ga_trans' ),
+				'menu_title' => __( 'Settings', 'ga_trans' ),
+				'cap'        => Capability::SETTINGS_CAP,
+				'callback'   => array( Admin_View::instance(), 'settings_page' ),
+			);
+		}
 
-			// If permissions can not be overridden.
-			if ( empty( $settings_cap ) && empty( $analytics_cap ) ) {
-				return;
+		return $menu_items;
+	}
+
+	/**
+	 * Register admin menu for tutorials.
+	 *
+	 * @param array $menu_items Menu items.
+	 *
+	 * @since 3.3.7
+	 *
+	 * @return array
+	 */
+	public function tutorials_menu( $menu_items ) {
+		// Add tutorials page.
+		if ( current_user_can( Capability::SETTINGS_CAP ) ) {
+			// Check if tutorials should be hidden.
+			$hide = apply_filters( 'wpmudev_branding_hide_doc_link', false );
+
+			if ( ! $hide ) {
+				$menu_items['beehive-tutorials'] = array(
+					'page_title' => __( 'Beehive Tutorials', 'ga_trans' ),
+					'menu_title' => __( 'Tutorials', 'ga_trans' ),
+					'cap'        => Capability::SETTINGS_CAP,
+					'callback'   => array( Admin_View::instance(), 'tutorials_page' ),
+				);
 			}
 		}
 
-		// Add settings page.
-		add_submenu_page(
-			self::SLUG,
-			__( 'Beehive Settings', 'ga_trans' ),
-			__( 'Settings', 'ga_trans' ),
-			Capability::SETTINGS_CAP,
-			'beehive-settings',
-			array( Admin_View::instance(), 'settings_page' ),
-			998
-		);
+		return $menu_items;
 	}
 }

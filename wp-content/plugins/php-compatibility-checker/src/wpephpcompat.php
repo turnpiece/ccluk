@@ -69,6 +69,7 @@ class WPEPHPCompat {
 	 *  @var array
 	 */
 	public $whitelist = array(
+		'*/autoupdater/*'                                 => '7.0', // WP Engine Smart Plugin Manager uses a php5 package to maintain backwards compatibility.
 		'*/jetpack/*'                                     => '7.0', // https://github.com/wpengine/phpcompat/wiki/Results#jetpack
 		'*/wordfence/*'                                   => '7.0', // https://github.com/wpengine/phpcompat/wiki/Results#wordfence-security
 		'*/woocommerce/*'                                 => '7.0', // https://github.com/wpengine/phpcompat/wiki/Results#woocommerce
@@ -393,6 +394,7 @@ class WPEPHPCompat {
 		foreach ( $all_themes as $k => $v ) {
 			if ( 'yes' === $this->only_active ) {
 				$current_theme = wp_get_theme();
+				// phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 				if ( $all_themes[ $k ]->Name !== $current_theme->Name ) {
 					continue;
 				}

@@ -12,7 +12,7 @@
  */
 abstract class Shipper_Task_Check extends Shipper_Task {
 
-	const ERR_WARNING = 'issue_warning';
+	const ERR_WARNING  = 'issue_warning';
 	const ERR_BLOCKING = 'issue_blocking';
 
 	/**
@@ -20,17 +20,17 @@ abstract class Shipper_Task_Check extends Shipper_Task {
 	 *
 	 * @var array
 	 */
-	private $_checks = array();
+	private $checks = array();
 
 	/**
 	 * Adds a check result
 	 *
-	 * @param object $check Shipper_Model_Check instance.
+	 * @param Shipper_Model_Check $check Shipper_Model_Check instance.
 	 *
 	 * @return object Shipper_Task_Check instance
 	 */
 	public function add_check( Shipper_Model_Check $check ) {
-		$this->_checks[] = $check;
+		$this->checks[] = $check;
 
 		return $this;
 	}
@@ -41,7 +41,7 @@ abstract class Shipper_Task_Check extends Shipper_Task {
 	 * @return array
 	 */
 	public function get_checks() {
-		return (array) $this->_checks;
+		return (array) $this->checks;
 	}
 
 	/**
@@ -52,7 +52,8 @@ abstract class Shipper_Task_Check extends Shipper_Task {
 	public function get_checks_with_errors() {
 		$with_errors = array();
 		foreach ( $this->get_checks() as $check ) {
-			if ( $check->is_fatal() ) { $with_errors[] = $check; }
+			if ( $check->is_fatal() ) {
+				$with_errors[] = $check; }
 		}
 		return $with_errors;
 	}
@@ -76,7 +77,7 @@ abstract class Shipper_Task_Check extends Shipper_Task {
 	}
 
 	/**
-	 * Reset any stored progress indicatos
+	 * Reset any stored progress indicators
 	 *
 	 * @return bool
 	 */

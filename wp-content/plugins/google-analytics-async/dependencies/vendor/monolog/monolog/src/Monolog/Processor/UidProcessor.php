@@ -16,7 +16,7 @@ use Beehive\Monolog\ResettableInterface;
  *
  * @author Simon Mönch <sm@webfactory.de>
  */
-class UidProcessor implements \Beehive\Monolog\Processor\ProcessorInterface, \Beehive\Monolog\ResettableInterface
+class UidProcessor implements ProcessorInterface, ResettableInterface
 {
     private $uid;
     public function __construct($length = 7)

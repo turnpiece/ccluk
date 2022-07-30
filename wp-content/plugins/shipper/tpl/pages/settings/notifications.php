@@ -5,10 +5,10 @@
  * @package shipper
  */
 
-$model = new Shipper_Model_Stored_Options;
-$do_send = $model->get( Shipper_Model_Stored_Options::KEY_SEND );
+$model        = new Shipper_Model_Stored_Options();
+$do_send      = $model->get( Shipper_Model_Stored_Options::KEY_SEND );
 $failure_send = $model->get( Shipper_Model_Stored_Options::KEY_SEND_FAIL );
-$emails = $model->get_emails();
+$emails       = $model->get_emails();
 ?>
 <div class="sui-box shipper-page-settings-notifications">
 
@@ -25,23 +25,36 @@ $emails = $model->get_emails();
 		<?php if ( ! empty( $do_send ) ) { ?>
 			<div class="sui-notice sui-notice-success shipper-notifications-status-notice">
 				<div class="sui-notice-content">
-					<p><?php echo esc_html(sprintf(
-						_n(
-							'Migration notification emails are enabled for %d recipient',
-							'Migration notification emails are enabled for %d recipients',
-							count( $emails ),
-							'shipper'
-						),
-						count( $emails )
-					)); ?></p>
+					<div class="sui-notice-message">
+						<i class="sui-notice-icon sui-icon-info sui-md" aria-hidden="true"></i>
+						<p>
+						<?php
+						echo esc_html(
+							sprintf(
+								/* translators: %d: number of users. */
+								_n(
+									'Migration notification emails are enabled for %d recipient',
+									'Migration notification emails are enabled for %d recipients',
+									count( $emails ),
+									'shipper'
+								),
+								count( $emails )
+							)
+						);
+						?>
+						</p>
+					</div>
 				</div>
 			</div>
 		<?php } else { ?>
 			<div class="sui-notice">
 				<div class="sui-notice-content">
-					<p><?php echo esc_html(
-						__( 'Migration notification emails are currently disabled', 'shipper' )
-					); ?></p>
+					<div class="sui-notice-message">
+						<i class="sui-notice-icon sui-icon-info sui-md" aria-hidden="true"></i>
+						<p>
+							<?php esc_html_e( 'Migration notification emails are currently disabled', 'shipper' ); ?>
+						</p>
+					</div>
 				</div>
 			</div>
 		<?php } ?>
@@ -50,7 +63,7 @@ $emails = $model->get_emails();
 
 			<div class="sui-box-settings-col-1">
 				<label class="sui-settings-label"><?php esc_html_e( 'Email Notifications', 'shipper' ); ?></label>
-				<p class="sui-description">
+				<p class="shipper-description">
 					<?php esc_html_e( 'Choose who should receive an email when migration completes.', 'shipper' ); ?>
 				</p>
 			</div>
@@ -58,11 +71,10 @@ $emails = $model->get_emails();
 			<div class="sui-box-settings-col-2">
 				<div class="shipper-form-item">
 					<label class="sui-toggle">
-					<input type="checkbox" <?php checked( $do_send ); ?>
+					<input
+						type="checkbox" <?php checked( $do_send ); ?>
 						id="shipper-email-notifications"
-						value="<?php echo esc_attr(
-							wp_create_nonce( 'shipper_email_notifications_toggle' )
-						); ?>" />
+						value="<?php echo esc_attr( wp_create_nonce( 'shipper_email_notifications_toggle' ) ); ?>">
 						<span class="sui-toggle-slider"></span>
 					</label>
 					<label for="shipper-email-notifications">
@@ -70,24 +82,29 @@ $emails = $model->get_emails();
 					</label>
 				</div>
 
-				<div class="<?php
-					echo $do_send ? 'wrapper-active' : '';
-				?> shipper-notifications-wrapper sui-border-frame sui-toggle-content">
+				<div class="<?php echo $do_send ? 'wrapper-active' : ''; ?> shipper-notifications-wrapper sui-border-frame sui-toggle-content">
 
 					<div class="shipper-form-item shipper-notifications-list">
 						<label class="sui-label"><?php esc_html_e( 'Recipients', 'shipper' ); ?></label>
 					<?php if ( empty( $emails ) ) { ?>
 						<div class="sui-notice sui-notice-warning">
 							<div class="sui-notice-content">
-								<p><?php echo esc_html(
-									__( 'You haven\'t added any recipients yet', 'shipper' )
-								); ?></p>
+								<div class="sui-notice-message">
+									<i class="sui-notice-icon sui-icon-info sui-md" aria-hidden="true"></i>
+									<p>
+										<?php echo esc_html( __( 'You haven\'t added any recipients yet', 'shipper' ) ); ?>
+									</p>
+								</div>
 							</div>
 						</div>
 					<?php } else { ?>
 						<div class="sui-recipients">
 						<?php foreach ( $emails as $email => $name ) { ?>
-						<?php if ( empty( $email ) ) { continue; } ?>
+							<?php
+							if ( empty( $email ) ) {
+								continue;
+							}
+							?>
 						<div class="shipper-notification-item sui-recipient">
 							<span class="shipper-user sui-recipient-name">
 								<?php echo esc_html( $name ); ?>
@@ -97,11 +114,10 @@ $emails = $model->get_emails();
 							</span>
 
 							<span class="shipper-actions">
-								<a href=#remove" type="button"
-								   data-rmv="<?php echo esc_attr(
-									   wp_create_nonce( 'shipper_email_notifications_rmv' )
-								   ); ?>"
-								   class="sui-button-icon shipper-rmv shipper-work-activator">
+								<a
+									href="#remove" type="button"
+									data-rmv="<?php echo esc_attr( wp_create_nonce( 'shipper_email_notifications_rmv' ) ); ?>"
+									class="sui-button-icon shipper-rmv shipper-work-activator">
 									<i class="sui-icon-trash" aria-hidden="true"></i>
 								</a>
 							</span>
@@ -122,22 +138,20 @@ $emails = $model->get_emails();
 						<label class="sui-label">
 							<?php esc_html_e( 'Options', 'shipper' ); ?>
 						</label>
-						<label class="sui-checkbox">
+						<label for="email-migration-checkbox" class="sui-checkbox">
 							<input
-								value="<?php echo esc_attr(
-									wp_create_nonce( 'shipper_email_fail_only' )
-								); ?>"
+								id="email-migration-checkbox"
+								value="<?php echo esc_attr( wp_create_nonce( 'shipper_email_fail_only' ) ); ?>"
 								<?php checked( $failure_send ); ?>
-								type="checkbox" />
-							<span></span>
-							<span class="sui-description"><?php
-								esc_html_e(
-									'Only send an email if a migration fails',
-									'shipper'
-								); ?></span>
+								type="checkbox"
+								aria-labelledby="email-migration-checkbox-label"
+							/>
+							<span aria-hidden="true"></span>
+							<span id="email-migration-checkbox-label">
+								<?php esc_html_e( 'Only send an email if a migration fails', 'shipper' ); ?>
+							</span>
 						</label>
 					</div>
-
 
 				</div><?php // .shipper-notifications-wrapper ?>
 
@@ -159,22 +173,17 @@ $emails = $model->get_emails();
 		</div>
 	</div>
 
-<?php // Status notifications. ?>
-<div class="sui-notice-top sui-notice-error sui-can-dismiss shipper-recipient-notice shipper-add">
-	<div class="sui-notice-content">
-		<p><?php esc_html_e( 'Error adding recipient', 'shipper' ); ?></p>
-	</div>
-</div>
-<div class="sui-notice-top sui-notice-success sui-can-dismiss shipper-recipient-success shipper-add">
-	<div class="sui-notice-content">
-		<p><?php esc_html_e( 'Recipient has been added', 'shipper' ); ?></p>
-	</div>
-</div>
-<div class="sui-notice-top sui-notice-error sui-can-dismiss shipper-recipient-notice shipper-rmv">
-	<div class="sui-notice-content">
-		<p><?php esc_html_e( 'Error removing recipient', 'shipper' ); ?></p>
-	</div>
-</div>
-<?php // End status notifications. ?>
+	<div class="sui-floating-notices"> <!-- Start: sui-notifications -->
+		<div
+			role="alert"
+			id="shipper-recipient-add-notice"
+			class="sui-notice"
+			aria-live="assertive"
+		>
+		</div>
 
+		<div class="sui-notice-content">
+			<div class="sui-notice-message" />
+		</div>
+	</div> <!-- End: sui-notifications -->
 </div>

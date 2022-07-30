@@ -40,12 +40,12 @@ class Shipper_Task_Import_Config extends Shipper_Task_Import {
 	 * @return object Shipper_Helper_Fs_List instance
 	 */
 	public function get_fs_lister() {
-		if ( ! isset( $this->_files ) ) {
-			$storage      = new Shipper_Model_Stored_Filelist;
-			$this->_files = new Shipper_Helper_Fs_List( $storage );
+		if ( ! isset( $this->files ) ) {
+			$storage     = new Shipper_Model_Stored_Filelist();
+			$this->files = new Shipper_Helper_Fs_List( $storage );
 		}
 
-		return $this->_files;
+		return $this->files;
 	}
 
 	/**
@@ -84,6 +84,7 @@ class Shipper_Task_Import_Config extends Shipper_Task_Import {
 		if ( ! file_exists( $root ) || ! is_dir( $root ) ) {
 			$this->add_error(
 				self::ERR_ACCESS,
+				/* translators: %s: file path. */
 				sprintf( __( 'Temporary files directory doesn\'t seem to exist: %s', 'shipper' ), $root )
 			);
 
@@ -94,14 +95,18 @@ class Shipper_Task_Import_Config extends Shipper_Task_Import {
 			array()
 		);
 
-		$replacement = trailingslashit( Shipper_Helper_Fs_Path::get_temp_dir() ) .
-		               trailingslashit( Shipper_Model_Stored_Migration::COMPONENT_FS );
+		$replacement = trailingslashit( Shipper_Helper_Fs_Path::get_temp_dir() ) . trailingslashit( Shipper_Model_Stored_Migration::COMPONENT_FS );
 		$root_rx     = preg_quote( trailingslashit( ABSPATH ), '/' );
 		$replacer    = new Shipper_Helper_Replacer_File( Shipper_Helper_Codec::DECODE );
-		$replacer->add_codec( new Shipper_Helper_Codec_Rewrite );
-		$replacer->add_codec( new Shipper_Helper_Codec_Paths );
-		foreach ( $config_files as $destination ) {
+		$replacer->add_codec( new Shipper_Helper_Codec_Rewrite() );
+		$replacer->add_codec( new Shipper_Helper_Codec_Paths() );
 
+		if ( ! is_multisite() ) {
+			// Remove Multisite defined constants for sub-site => single site migration.
+			$replacer->add_codec( new Shipper_Helper_Codec_MsDefine() );
+		}
+
+		foreach ( $config_files as $destination ) {
 			$file = preg_replace( "/^{$root_rx}/", $replacement, $destination );
 
 			if ( ! $this->is_config_file_deployable( $file ) ) {
@@ -111,14 +116,10 @@ class Shipper_Task_Import_Config extends Shipper_Task_Import {
 			// Apply transformations to the file.
 			$tmp_file = $replacer->transform( $file );
 
-			if ( Shipper_Helper_Fs_Path::is_wp_config( $destination ) ) {
-				// Check here, because we're taking absolute path into consideration.
-				$model = new Shipper_Model_Stored_Options;
-				if ( $model->get( Shipper_Model_Stored_Options::KEY_SKIPCONFIG ) ) {
-					// We're not to deploy the wp-config file.
-					Shipper_Helper_Log::write( 'Skipping wp-config deployment in import' );
-					continue;
-				}
+			if ( Shipper_Helper_Fs_Path::is_wp_config( $destination ) && $this->get_manifest()->get( 'is_wp_config_skipped' ) ) {
+				Shipper_Helper_Log::write( __( 'Skipping wp-config deployment in import', 'shipper' ) );
+
+				continue;
 			}
 
 			/**
@@ -138,17 +139,16 @@ class Shipper_Task_Import_Config extends Shipper_Task_Import {
 			if ( ! $is_mock_import ) {
 				if ( ! copy( $tmp_file, $destination ) ) {
 					$is_file_exists = file_exists( $tmp_file );
-//					$this->add_error(
-//						self::ERR_ACCESS,
-//						sprintf(
-//							__( 'Unable to copy staged config file %1$s to %2$s %s', 'shipper' ),
-//							$file, $destination
-//						)
-//					);
-					Shipper_Helper_Log::write( sprintf(
-						__( 'Unable to copy staged config file %1$s to %2$s %s', 'shipper' ),
-						$file, $destination, $is_file_exists ? null : "File not exists"
-					) );
+
+					Shipper_Helper_Log::write(
+						sprintf(
+							/* translators: %1$s %2$s %3$s: source and dest path file not exists. */
+							__( 'Unable to copy staged config file %1$s to %2$s %3$s', 'shipper' ),
+							$file,
+							$destination,
+							$is_file_exists ? null : __( 'File not exists', 'shipper' )
+						)
+					);
 					// Actually, keep plowing - we're committed now.
 					// return true; // Break, has error.
 				}
@@ -158,6 +158,7 @@ class Shipper_Task_Import_Config extends Shipper_Task_Import {
 				$this->add_error(
 					self::ERR_ACCESS,
 					sprintf(
+						/* translators: %s: file name. */
 						__( 'Error removing staged file %s', 'shipper' ),
 						$file
 					)
@@ -167,7 +168,7 @@ class Shipper_Task_Import_Config extends Shipper_Task_Import {
 		}
 
 		// Now that we're done with this, also retrogress options.
-		$options = new Shipper_Model_Stored_Options;
+		$options = new Shipper_Model_Stored_Options();
 		$options->retrogress_data();
 
 		return true;

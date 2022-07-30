@@ -740,6 +740,13 @@ function give_get_required_fields( $form_id ) {
 		}
 	}
 
+	if ( give_is_last_name_required( $form_id ) ) {
+		$required_fields['give_last'] = [
+			'error_id'      => 'invalid_last_name',
+			'error_message' => __( 'Please enter your last name.', 'give' ),
+		];
+	}
+
 	/**
 	 * Filters the donation form required field.
 	 *
@@ -1132,51 +1139,45 @@ function give_register_and_login_new_user( $user_data = [] ) {
 /**
  * Get Donation Form User
  *
+ * @since   1.0
+ * @since 2.17.1 Do not run validation check for ajax request expect donation validation ajax request.
+ *
  * @param array $valid_data Valid Data.
  *
  * @access  private
- * @since   1.0
- *
  * @return  array|bool
  */
 function give_get_donation_form_user( $valid_data = [] ) {
+    // Initialize user.
+    $user                                = false;
+    $post_data                           = give_clean($_POST); // WPCS: input var ok, sanitization ok, CSRF ok.
+    $is_validating_donation_form_on_ajax = ! empty($_POST['give_ajax']) ? $post_data['give_ajax'] : 0; // WPCS: input var ok, sanitization ok, CSRF ok.
 
-	// Initialize user.
-	$user      = false;
-	$is_ajax   = defined( 'DOING_AJAX' ) && DOING_AJAX;
-	$post_data = give_clean( $_POST ); // WPCS: input var ok, sanitization ok, CSRF ok.
+    if ( $is_validating_donation_form_on_ajax ) {
+        // Do not create or login the user during the ajax submission (check for errors only).
+        return true;
+    } elseif ( is_user_logged_in() ) {
+        // Set the valid user as the logged in collected data.
+        $user = $valid_data['logged_in_user'];
+    } elseif ( true === $valid_data['need_new_user'] || true === $valid_data['need_user_login'] ) {
+        // New user registration.
+        if ( true === $valid_data['need_new_user'] ) {
+            // Set user.
+            $user = $valid_data['new_user_data'];
 
-	if ( $is_ajax ) {
+            // Register and login new user.
+            $user['user_id'] = give_register_and_login_new_user($user);
+        } elseif ( true === $valid_data['need_user_login'] ) {
+            /**
+             * The login form is now processed in the give_process_donation_login() function.
+             * This is still here for backwards compatibility.
+             * This also allows the old login process to still work if a user removes the checkout login submit button.
+             *
+             * This also ensures that the donor is logged in correctly if they click "Donation" instead of submitting the login form, meaning the donor is logged in during the donation process.
+             */
+            $user = $valid_data['login_user_data'];
 
-		// Do not create or login the user during the ajax submission (check for errors only).
-		return true;
-	} elseif ( is_user_logged_in() ) {
-
-		// Set the valid user as the logged in collected data.
-		$user = $valid_data['logged_in_user'];
-	} elseif ( true === $valid_data['need_new_user'] || true === $valid_data['need_user_login'] ) {
-
-		// New user registration.
-		if ( true === $valid_data['need_new_user'] ) {
-
-			// Set user.
-			$user = $valid_data['new_user_data'];
-
-			// Register and login new user.
-			$user['user_id'] = give_register_and_login_new_user( $user );
-
-		} elseif ( true === $valid_data['need_user_login'] && ! $is_ajax ) {
-
-			/**
-			 * The login form is now processed in the give_process_donation_login() function.
-			 * This is still here for backwards compatibility.
-			 * This also allows the old login process to still work if a user removes the checkout login submit button.
-			 *
-			 * This also ensures that the donor is logged in correctly if they click "Donation" instead of submitting the login form, meaning the donor is logged in during the donation process.
-			 */
-			$user = $valid_data['login_user_data'];
-
-			// Login user.
+            // Login user.
 			give_log_user_in( $user['user_id'], $user['user_login'], $user['user_pass'] );
 		}
 	} // End if().
@@ -1376,7 +1377,7 @@ function give_donation_form_validate_cc_zip( $zip = 0, $country_code = '' ) {
 		'KE' => '\d{5}',
 		'KG' => '\d{6}',
 		'KH' => '\d{5}',
-		'KR' => '\d{3}[\-]\d{3}',
+		'KR' => '\d{5}',
 		'KW' => '\d{5}',
 		'KZ' => '\d{6}',
 		'LA' => '\d{5}',
@@ -1568,18 +1569,13 @@ add_action( 'give_checkout_error_checks', 'give_validate_donation_amount', 10, 1
  * @since 2.0
  */
 function give_validate_required_form_fields( $form_id ) {
-
 	// Sanitize values submitted with donation form.
-	$post_data = give_clean( $_POST ); // WPCS: input var ok, sanitization ok, CSRF ok.
+	$post_data          = give_clean( $_POST ); // WPCS: input var ok, sanitization ok, CSRF ok.
+	$requiredFormFields = give_get_required_fields( $form_id );
 
 	// Loop through required fields and show error messages.
-	foreach ( give_get_required_fields( $form_id ) as $field_name => $value ) {
-
-		// Clean Up Data of the input fields.
-		$field_value = $post_data[ $field_name ];
-
-		// Check whether the required field is empty, then show the error message.
-		if ( in_array( $value, give_get_required_fields( $form_id ), true ) && empty( $field_value ) ) {
+	foreach ( $requiredFormFields as $field_name => $value ) {
+		if ( empty( $post_data[ $field_name ] ) ) {
 			give_set_error( $value['error_id'], $value['error_message'] );
 		}
 	}

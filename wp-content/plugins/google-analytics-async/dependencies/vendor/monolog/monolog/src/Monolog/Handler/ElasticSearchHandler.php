@@ -31,7 +31,7 @@ use Beehive\Elastica\Exception\ExceptionInterface;
  *
  * @author Jelle Vink <jelle.vink@gmail.com>
  */
-class ElasticSearchHandler extends \Beehive\Monolog\Handler\AbstractProcessingHandler
+class ElasticSearchHandler extends AbstractProcessingHandler
 {
     /**
      * @var Client
@@ -47,7 +47,7 @@ class ElasticSearchHandler extends \Beehive\Monolog\Handler\AbstractProcessingHa
      * @param int    $level   The minimum logging level at which this handler will be triggered
      * @param bool   $bubble  Whether the messages that are handled can bubble up the stack or not
      */
-    public function __construct(\Beehive\Elastica\Client $client, array $options = array(), $level = \Beehive\Monolog\Logger::DEBUG, $bubble = \true)
+    public function __construct(Client $client, array $options = array(), $level = Logger::DEBUG, $bubble = \true)
     {
         parent::__construct($level, $bubble);
         $this->client = $client;
@@ -69,9 +69,9 @@ class ElasticSearchHandler extends \Beehive\Monolog\Handler\AbstractProcessingHa
     /**
      * {@inheritdoc}
      */
-    public function setFormatter(\Beehive\Monolog\Formatter\FormatterInterface $formatter)
+    public function setFormatter(FormatterInterface $formatter)
     {
-        if ($formatter instanceof \Beehive\Monolog\Formatter\ElasticaFormatter) {
+        if ($formatter instanceof ElasticaFormatter) {
             return parent::setFormatter($formatter);
         }
         throw new \InvalidArgumentException('ElasticSearchHandler is only compatible with ElasticaFormatter');
@@ -89,7 +89,7 @@ class ElasticSearchHandler extends \Beehive\Monolog\Handler\AbstractProcessingHa
      */
     protected function getDefaultFormatter()
     {
-        return new \Beehive\Monolog\Formatter\ElasticaFormatter($this->options['index'], $this->options['type']);
+        return new ElasticaFormatter($this->options['index'], $this->options['type']);
     }
     /**
      * {@inheritdoc}
@@ -108,7 +108,7 @@ class ElasticSearchHandler extends \Beehive\Monolog\Handler\AbstractProcessingHa
     {
         try {
             $this->client->addDocuments($documents);
-        } catch (\Beehive\Elastica\Exception\ExceptionInterface $e) {
+        } catch (ExceptionInterface $e) {
             if (!$this->options['ignore_error']) {
                 throw new \RuntimeException("Error sending messages to Elasticsearch", 0, $e);
             }

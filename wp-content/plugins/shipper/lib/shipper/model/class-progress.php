@@ -12,15 +12,15 @@
  */
 class Shipper_Model_Progress extends Shipper_Model {
 
-	const KEY_TOTAL = 'total';
+	const KEY_TOTAL   = 'total';
 	const KEY_CURRENT = 'current';
-	const KEY_STATUS = 'status';
-	const KEY_ERROR = 'error';
+	const KEY_STATUS  = 'status';
+	const KEY_ERROR   = 'error';
 
-	const STATUS_IDLE = 'idle';
+	const STATUS_IDLE    = 'idle';
 	const STATUS_WORKING = 'working';
-	const STATUS_DONE = 'done';
-	const STATUS_ERROR = 'error';
+	const STATUS_DONE    = 'done';
+	const STATUS_ERROR   = 'error';
 
 	/**
 	 * Constructor
@@ -35,10 +35,12 @@ class Shipper_Model_Progress extends Shipper_Model {
 	 * Initializes the data
 	 */
 	public function populate() {
-		$this->set_data(array(
-			self::KEY_TOTAL => 1,
-			self::KEY_CURRENT => 0,
-		));
+		$this->set_data(
+			array(
+				self::KEY_TOTAL   => 1,
+				self::KEY_CURRENT => 0,
+			)
+		);
 	}
 
 	/**
@@ -50,7 +52,8 @@ class Shipper_Model_Progress extends Shipper_Model {
 	 */
 	public function set_total( $total ) {
 		$total = (int) $total;
-		if ( empty( $total ) ) { $total = 1; }
+		if ( empty( $total ) ) {
+			$total = 1; }
 
 		return $this->set( self::KEY_TOTAL, $total );
 	}
@@ -112,12 +115,14 @@ class Shipper_Model_Progress extends Shipper_Model {
 	 */
 	public function get_percentage() {
 		$current = (int) $this->get( self::KEY_CURRENT );
-		if ( empty( $current ) ) { return 0; }
+		if ( empty( $current ) ) {
+			return 0; }
 
 		$total = (int) $this->get( self::KEY_TOTAL );
-		if ( empty( $total ) ) { return 0; }
+		if ( empty( $total ) ) {
+			return 0; }
 
-		return ($current * 100) / $total;
+		return ( $current * 100 ) / $total;
 	}
 
 	/**
@@ -155,23 +160,35 @@ class Shipper_Model_Progress extends Shipper_Model {
 		if ( $this->is_done() ) {
 			return false; // We're done - nothing to update.
 		}
+
 		$step_size = (int) $step_size;
-		if ( empty( $step_size ) ) { $step_size = 1; }
+
+		if ( empty( $step_size ) ) {
+			$step_size = 1;
+		}
 
 		$current = (int) $this->get( self::KEY_CURRENT );
-		if ( empty( $current ) ) { $current = 0; }
+
+		if ( empty( $current ) ) {
+			$current = 0;
+		}
 
 		$total = (int) $this->get( self::KEY_TOTAL );
-		if ( empty( $total ) ) { $total = 1; }
+
+		if ( empty( $total ) ) {
+			$total = 1;
+		}
 
 		$current += $step_size;
+
 		if ( $current > $total ) {
 			// We're either at 100, or lower.
 			$total = $current;
 		}
-		$this->set( self::KEY_CURRENT, $current );
 
+		$this->set( self::KEY_CURRENT, $current );
 		$status = self::STATUS_WORKING;
+
 		if ( $total === $current ) {
 			// We're done!
 			$status = self::STATUS_DONE;

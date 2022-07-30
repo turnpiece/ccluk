@@ -23,10 +23,10 @@ use Beehive\Monolog\Formatter\NormalizerFormatter;
  *
  * @author Thomas Tourlourat <thomas@tourlourat.com>
  */
-class MongoDBHandler extends \Beehive\Monolog\Handler\AbstractProcessingHandler
+class MongoDBHandler extends AbstractProcessingHandler
 {
     protected $mongoCollection;
-    public function __construct($mongo, $database, $collection, $level = \Beehive\Monolog\Logger::DEBUG, $bubble = \true)
+    public function __construct($mongo, $database, $collection, $level = Logger::DEBUG, $bubble = \true)
     {
         if (!($mongo instanceof \MongoClient || $mongo instanceof \Mongo || $mongo instanceof \Beehive\MongoDB\Client)) {
             throw new \InvalidArgumentException('MongoClient, Mongo or MongoDB\\Client instance required');
@@ -47,6 +47,6 @@ class MongoDBHandler extends \Beehive\Monolog\Handler\AbstractProcessingHandler
      */
     protected function getDefaultFormatter()
     {
-        return new \Beehive\Monolog\Formatter\NormalizerFormatter();
+        return new NormalizerFormatter();
     }
 }

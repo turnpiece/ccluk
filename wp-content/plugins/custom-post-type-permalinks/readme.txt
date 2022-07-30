@@ -4,11 +4,11 @@ Contributors:      Toro_Unit, inc2734, ixkaito, keita_kobayashi, strategio
 Donate link:       https://www.paypal.me/torounit  
 Tags:              permalink, url, link, address, custom post type  
 Requires at least: 4.7  
-Tested up to:      5.5  
+Tested up to:      5.8  
 Requires PHP:      5.6  
 License:           GPLv2 or Later  
 License URI:       http://www.gnu.org/licenses/gpl-2.0.txt  
-Stable tag:        3.4.1
+Stable tag:        3.4.5
 
 
 Edit the permalink of custom post type.
@@ -82,6 +82,18 @@ That's it. You can access the permalinks setting by going to *Settings -> Permal
 * screenshot-1.png
 
 == Changelog ==
+
+= 3.4.5 =
+* Update test for WP 5.7
+
+= 3.4.4 =
+* WPML support: Only apply slug translation if post type is supported. (Props @ffauvel)
+
+= 3.4.3 =
+* Fix archive link bug fix.
+
+= 3.4.2 =
+* Tested WP 5.6.
 
 = 3.4.1 =
 * Fix readme.

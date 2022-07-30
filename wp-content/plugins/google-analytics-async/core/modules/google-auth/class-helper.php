@@ -2,7 +2,7 @@
 /**
  * The Google helper class.
  *
- * @link    http://premium.wpmudev.org
+ * @link    http://wpmudev.com
  * @since   3.2.0
  *
  * @author  Joel James <joel@incsub.com>
@@ -93,7 +93,7 @@ class Helper extends Base {
 	 *
 	 * @since 3.2.0
 	 *
-	 * @return bool
+	 * @return string
 	 */
 	public function login_method( $network = false ) {
 		$method = '';
@@ -112,6 +112,34 @@ class Helper extends Base {
 		 * @since 3.2.0
 		 */
 		return apply_filters( 'beehive_google_login_method', $method );
+	}
+
+	/**
+	 * Check if current subsite is using network login.
+	 *
+	 * When subsites can reuse network API project credentials.
+	 *
+	 * @since 3.3.9
+	 *
+	 * @return bool
+	 */
+	public function using_network_login() {
+		$network_login = false;
+
+		// Only in multisite.
+		if ( is_multisite() ) {
+			// If logged in using API method in network.
+			$network_login = 'network_connect' === $this->login_method() || ( $this->is_logged_in( true ) && 'api' === $this->login_method( true ) );
+		}
+
+		/**
+		 * Filter hook to modify using network login flag.
+		 *
+		 * @param bool $network_login Login method.
+		 *
+		 * @since 3.3.9
+		 */
+		return apply_filters( 'beehive_google_using_network_login', $network_login );
 	}
 
 	/**
@@ -150,68 +178,6 @@ class Helper extends Base {
 		 * @since 3.2.0
 		 */
 		return apply_filters( 'beehive_google_auth_url', $url );
-	}
-
-	/**
-	 * Check if current site needs to reauthenticate with Google.
-	 *
-	 * Re-authentication is required when the logged in flag is 1.
-	 *
-	 * @param bool $network Network flag.
-	 *
-	 * @since 3.2.0
-	 *
-	 * @return bool
-	 */
-	public function reauth_required( $network = false ) {
-		// Try to get the login status.
-		$logged_in = (int) beehive_analytics()->settings->get( 'logged_in', 'google_login', $network );
-
-		/**
-		 * 2 - Logged in.
-		 * 1 - Re-auth required.
-		 * 0 - Not logged in.
-		 */
-		$required = ( 1 === $logged_in );
-
-		/**
-		 * Filter hook to modify reauth required status.
-		 *
-		 * @param bool $required Is reauth required?.
-		 *
-		 * @since 3.2.0
-		 */
-		return apply_filters( 'beehive_google_reauth_required', $required );
-	}
-
-	/**
-	 * Check if current site needs to setup with Google.
-	 *
-	 * This should be true only for the first time. If user logged
-	 * in with Google once, this should be false. We can check re-auth
-	 * for that.
-	 *
-	 * @param bool $network Network flag.
-	 *
-	 * @since 3.2.0
-	 *
-	 * @return bool
-	 */
-	public function setup_required( $network = false ) {
-		// Try to get the access token.
-		$token = beehive_analytics()->settings->get( 'access_token', 'google_login', $network );
-
-		// If token is empty, not logged in for the first time.
-		$required = empty( $token );
-
-		/**
-		 * Filter hook to modify setup required status.
-		 *
-		 * @param bool $required Is setup required?.
-		 *
-		 * @since 3.2.0
-		 */
-		return apply_filters( 'beehive_google_reauth_required', $required );
 	}
 
 	/**
@@ -276,7 +242,6 @@ class Helper extends Base {
 			'origin'        => $network ? 'network' : get_current_blog_id(),
 			'default'       => $default ? 1 : 0,
 			// To identify if it is from modal.
-			// phpcs:ignore
 			'modal'         => empty( $data['is_modal'] ) ? 0 : 1,
 			'page'          => empty( $data['page'] ) ? 'settings' : $data['page'],
 		);
@@ -334,7 +299,7 @@ class Helper extends Base {
 		if ( empty( $id ) ) {
 			// If already logged in by network admin, get the network client id.
 			if ( ! $network && is_multisite() ) {
-				$network = $this->is_logged_in( true ) || 'network_connect' === $this->login_method();
+				$network = $this->using_network_login();
 			}
 
 			$id = beehive_analytics()->settings->get( 'client_id', 'google', $network );
@@ -365,7 +330,7 @@ class Helper extends Base {
 		if ( empty( $secret ) ) {
 			// If already logged in by network admin, get the network client secret.
 			if ( ! $network && is_multisite() ) {
-				$network = $this->is_logged_in( true ) || 'network_connect' === $this->login_method();
+				$network = $this->using_network_login();
 			}
 
 			$secret = beehive_analytics()->settings->get( 'client_secret', 'google', $network );

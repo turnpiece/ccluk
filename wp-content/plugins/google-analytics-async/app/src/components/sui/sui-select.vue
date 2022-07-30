@@ -1,11 +1,5 @@
 <template>
-	<select
-		:id="id"
-		:class="selectClass"
-		:aria-labelledby="id + '-label'"
-		ref="select"
-		v-model="selected"
-	>
+	<select v-model="selected" :id="id" :class="selectClass" ref="suiSelect" :data-width="width">
 		<option
 			v-for="(label, key) in options"
 			:value="key"
@@ -22,30 +16,21 @@ export default {
 	name: 'SuiSelect',
 
 	props: {
-		id: {
-			type: String,
-			required: true,
-		},
-		value: {
-			type: String | Number,
-			default: null,
-		},
-		options: {
-			type: Object,
-			required: true,
-		},
-		isSmall: {
-			type: Boolean,
-			default: false,
-		},
+		id: String,
+		value: String | Number,
+		options: Object | Array,
+		isSmall: Boolean,
+		width: Boolean | String
 	},
 
 	mounted() {
 		// Initialize select.
-		this.select = jQuery(this.$refs.select)
+		this.select = jQuery(this.$refs.suiSelect)
 
 		// Sui Select.
-		SUI.suiSelect(this.select)
+		this.select.SUIselect2({
+			minimumResultsForSearch: Infinity,
+		})
 
 		// Handle change event.
 		this.select.on('change', this.handleChange)
@@ -62,13 +47,13 @@ export default {
 		/**
 		 * Get select class based on the props.
 		 *
-		 * @since 1.8.0
+		 * @since 3.2.0
 		 *
 		 * @returns {object}
 		 */
 		selectClass() {
 			return {
-				//'sui-select-inline': false,
+				'sui-select': true,
 				'sui-select-sm': this.isSmall,
 			}
 		},
@@ -78,7 +63,7 @@ export default {
 		/**
 		 * Handle change event of select element.
 		 *
-		 * @since 1.8.0
+		 * @since 3.2.0
 		 */
 		handleChange() {
 			// Update model.

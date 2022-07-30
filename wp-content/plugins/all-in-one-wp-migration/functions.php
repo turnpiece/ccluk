@@ -59,11 +59,23 @@ function ai1wm_backup_path( $params ) {
 	}
 
 	// Validate archive path
-	if ( validate_file( $params['archive'] ) !== 0 ) {
+	if ( ai1wm_validate_file( $params['archive'] ) !== 0 ) {
 		throw new Ai1wm_Archive_Exception( __( 'Invalid archive path. <a href="https://help.servmask.com/knowledgebase/invalid-archive-path/" target="_blank">Technical details</a>', AI1WM_PLUGIN_NAME ) );
 	}
 
 	return AI1WM_BACKUPS_PATH . DIRECTORY_SEPARATOR . $params['archive'];
+}
+
+/**
+ * Validates a file name and path against an allowed set of rules
+ *
+ * @param  string  $file          File path
+ * @param  array   $allowed_files Array of allowed files
+ * @return integer
+ */
+function ai1wm_validate_file( $file, $allowed_files = array() ) {
+	$file = str_replace( '\\', '/', $file );
+	return validate_file( $file, $allowed_files );
 }
 
 /**
@@ -78,7 +90,7 @@ function ai1wm_archive_path( $params ) {
 	}
 
 	// Validate archive path
-	if ( validate_file( $params['archive'] ) !== 0 ) {
+	if ( ai1wm_validate_file( $params['archive'] ) !== 0 ) {
 		throw new Ai1wm_Archive_Exception( __( 'Invalid archive path. <a href="https://help.servmask.com/knowledgebase/invalid-archive-path/" target="_blank">Technical details</a>', AI1WM_PLUGIN_NAME ) );
 	}
 
@@ -88,26 +100,6 @@ function ai1wm_archive_path( $params ) {
 	}
 
 	return ai1wm_backup_path( $params );
-}
-
-/**
- * Get export log absolute path
- *
- * @param  array  $params Request parameters
- * @return string
- */
-function ai1wm_export_path( $params ) {
-	return ai1wm_storage_path( $params ) . DIRECTORY_SEPARATOR . AI1WM_EXPORT_NAME;
-}
-
-/**
- * Get import log absolute path
- *
- * @param  array  $params Request parameters
- * @return string
- */
-function ai1wm_import_path( $params ) {
-	return ai1wm_storage_path( $params ) . DIRECTORY_SEPARATOR . AI1WM_IMPORT_NAME;
 }
 
 /**
@@ -138,6 +130,86 @@ function ai1wm_content_list_path( $params ) {
  */
 function ai1wm_media_list_path( $params ) {
 	return ai1wm_storage_path( $params ) . DIRECTORY_SEPARATOR . AI1WM_MEDIA_LIST_NAME;
+}
+
+/**
+ * Get plugins.list absolute path
+ *
+ * @param  array  $params Request parameters
+ * @return string
+ */
+function ai1wm_plugins_list_path( $params ) {
+	return ai1wm_storage_path( $params ) . DIRECTORY_SEPARATOR . AI1WM_PLUGINS_LIST_NAME;
+}
+
+/**
+ * Get themes.list absolute path
+ *
+ * @param  array  $params Request parameters
+ * @return string
+ */
+function ai1wm_themes_list_path( $params ) {
+	return ai1wm_storage_path( $params ) . DIRECTORY_SEPARATOR . AI1WM_THEMES_LIST_NAME;
+}
+
+/**
+ * Get tables.list absolute path
+ *
+ * @param  array  $params Request parameters
+ * @return string
+ */
+function ai1wm_tables_list_path( $params ) {
+	return ai1wm_storage_path( $params ) . DIRECTORY_SEPARATOR . AI1WM_TABLES_LIST_NAME;
+}
+
+/**
+ * Get incremental.content.list absolute path
+ *
+ * @param  array  $params Request parameters
+ * @return string
+ */
+function ai1wm_incremental_content_list_path( $params ) {
+	return ai1wm_storage_path( $params ) . DIRECTORY_SEPARATOR . AI1WM_INCREMENTAL_CONTENT_LIST_NAME;
+}
+
+/**
+ * Get incremental.media.list absolute path
+ *
+ * @param  array  $params Request parameters
+ * @return string
+ */
+function ai1wm_incremental_media_list_path( $params ) {
+	return ai1wm_storage_path( $params ) . DIRECTORY_SEPARATOR . AI1WM_INCREMENTAL_MEDIA_LIST_NAME;
+}
+
+/**
+ * Get incremental.plugins.list absolute path
+ *
+ * @param  array  $params Request parameters
+ * @return string
+ */
+function ai1wm_incremental_plugins_list_path( $params ) {
+	return ai1wm_storage_path( $params ) . DIRECTORY_SEPARATOR . AI1WM_INCREMENTAL_PLUGINS_LIST_NAME;
+}
+
+/**
+ * Get incremental.themes.list absolute path
+ *
+ * @param  array  $params Request parameters
+ * @return string
+ */
+function ai1wm_incremental_themes_list_path( $params ) {
+	return ai1wm_storage_path( $params ) . DIRECTORY_SEPARATOR . AI1WM_INCREMENTAL_THEMES_LIST_NAME;
+}
+
+/**
+ * Get incremental.backups.list absolute path
+ *
+ * @param  array  $params Request parameters
+ * @return string
+ */
+function ai1wm_incremental_backups_list_path( $params ) {
+	return ai1wm_storage_path( $params ) . DIRECTORY_SEPARATOR . AI1WM_INCREMENTAL_BACKUPS_LIST_NAME;
 }
 
 /**
@@ -191,6 +263,16 @@ function ai1wm_database_path( $params ) {
 }
 
 /**
+ * Get cookies.txt absolute path
+ *
+ * @param  array  $params Request parameters
+ * @return string
+ */
+function ai1wm_cookies_path( $params ) {
+	return ai1wm_storage_path( $params ) . DIRECTORY_SEPARATOR . AI1WM_COOKIES_NAME;
+}
+
+/**
  * Get error log absolute path
  *
  * @return string
@@ -227,6 +309,16 @@ function ai1wm_backup_url( $params ) {
  */
 function ai1wm_archive_bytes( $params ) {
 	return filesize( ai1wm_archive_path( $params ) );
+}
+
+/**
+ * Get archive modified time in seconds
+ *
+ * @param  array   $params Request parameters
+ * @return integer
+ */
+function ai1wm_archive_mtime( $params ) {
+	return filemtime( ai1wm_archive_path( $params ) );
 }
 
 /**
@@ -305,8 +397,8 @@ function ai1wm_parse_size( $size, $default = null ) {
 	);
 
 	// Parse size format
-	if ( preg_match( '/([0-9]+)\s*(k|m|g)?(b?(ytes?)?)/i', $size, $match ) ) {
-		return $match[1] * $suffixes[ strtolower( $match[2] ) ];
+	if ( preg_match( '/([0-9]+)\s*(k|m|g)?(b?(ytes?)?)/i', $size, $matches ) ) {
+		return $matches[1] * $suffixes[ strtolower( $matches[2] ) ];
 	}
 
 	return $default;
@@ -747,10 +839,26 @@ function ai1wm_content_filters( $filters = array() ) {
 	return array_merge(
 		$filters,
 		array(
+			AI1WM_BACKUPS_PATH,
 			AI1WM_BACKUPS_NAME,
 			AI1WM_PACKAGE_NAME,
 			AI1WM_MULTISITE_NAME,
 			AI1WM_DATABASE_NAME,
+		)
+	);
+}
+
+/**
+ * Get default media filters
+ *
+ * @param  array $filters List of files and directories
+ * @return array
+ */
+function ai1wm_media_filters( $filters = array() ) {
+	return array_merge(
+		$filters,
+		array(
+			AI1WM_BACKUPS_PATH,
 		)
 	);
 }
@@ -762,161 +870,52 @@ function ai1wm_content_filters( $filters = array() ) {
  * @return array
  */
 function ai1wm_plugin_filters( $filters = array() ) {
-	// WP Migration Plugin
-	if ( defined( 'AI1WM_PLUGIN_BASENAME' ) ) {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . dirname( AI1WM_PLUGIN_BASENAME );
-	} else {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . 'all-in-one-wp-migration';
-	}
-
-	// Microsoft Azure Extension
-	if ( defined( 'AI1WMZE_PLUGIN_BASENAME' ) ) {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . dirname( AI1WMZE_PLUGIN_BASENAME );
-	} else {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . 'all-in-one-wp-migration-azure-storage-extension';
-	}
-
-	// Backblaze B2 Extension
-	if ( defined( 'AI1WMAE_PLUGIN_BASENAME' ) ) {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . dirname( AI1WMAE_PLUGIN_BASENAME );
-	} else {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . 'all-in-one-wp-migration-b2-extension';
-	}
-
-	// Backup Plugin
-	if ( defined( 'AI1WMVE_PLUGIN_BASENAME' ) ) {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . dirname( AI1WMVE_PLUGIN_BASENAME );
-	} else {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . 'all-in-one-wp-migration-backup';
-	}
-
-	// Box Extension
-	if ( defined( 'AI1WMBE_PLUGIN_BASENAME' ) ) {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . dirname( AI1WMBE_PLUGIN_BASENAME );
-	} else {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . 'all-in-one-wp-migration-box-extension';
-	}
-
-	// DigitalOcean Spaces Extension
-	if ( defined( 'AI1WMIE_PLUGIN_BASENAME' ) ) {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . dirname( AI1WMIE_PLUGIN_BASENAME );
-	} else {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . 'all-in-one-wp-migration-digitalocean-extension';
-	}
-
-	// Direct Extension
-	if ( defined( 'AI1WMXE_PLUGIN_BASENAME' ) ) {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . dirname( AI1WMXE_PLUGIN_BASENAME );
-	} else {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . 'all-in-one-wp-migration-direct-extension';
-	}
-
-	// Dropbox Extension
-	if ( defined( 'AI1WMDE_PLUGIN_BASENAME' ) ) {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . dirname( AI1WMDE_PLUGIN_BASENAME );
-	} else {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . 'all-in-one-wp-migration-dropbox-extension';
-	}
-
-	// File Extension
-	if ( defined( 'AI1WMTE_PLUGIN_BASENAME' ) ) {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . dirname( AI1WMTE_PLUGIN_BASENAME );
-	} else {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . 'all-in-one-wp-migration-file-extension';
-	}
-
-	// FTP Extension
-	if ( defined( 'AI1WMFE_PLUGIN_BASENAME' ) ) {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . dirname( AI1WMFE_PLUGIN_BASENAME );
-	} else {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . 'all-in-one-wp-migration-ftp-extension';
-	}
-
-	// Google Cloud Storage Extension
-	if ( defined( 'AI1WMCE_PLUGIN_BASENAME' ) ) {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . dirname( AI1WMCE_PLUGIN_BASENAME );
-	} else {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . 'all-in-one-wp-migration-gcloud-storage-extension';
-	}
-
-	// Google Drive Extension
-	if ( defined( 'AI1WMGE_PLUGIN_BASENAME' ) ) {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . dirname( AI1WMGE_PLUGIN_BASENAME );
-	} else {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . 'all-in-one-wp-migration-gdrive-extension';
-	}
-
-	// Amazon Glacier Extension
-	if ( defined( 'AI1WMRE_PLUGIN_BASENAME' ) ) {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . dirname( AI1WMRE_PLUGIN_BASENAME );
-	} else {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . 'all-in-one-wp-migration-glacier-extension';
-	}
-
-	// Mega Extension
-	if ( defined( 'AI1WMEE_PLUGIN_BASENAME' ) ) {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . dirname( AI1WMEE_PLUGIN_BASENAME );
-	} else {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . 'all-in-one-wp-migration-mega-extension';
-	}
-
-	// Multisite Extension
-	if ( defined( 'AI1WMME_PLUGIN_BASENAME' ) ) {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . dirname( AI1WMME_PLUGIN_BASENAME );
-	} else {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . 'all-in-one-wp-migration-multisite-extension';
-	}
-
-	// OneDrive Extension
-	if ( defined( 'AI1WMOE_PLUGIN_BASENAME' ) ) {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . dirname( AI1WMOE_PLUGIN_BASENAME );
-	} else {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . 'all-in-one-wp-migration-onedrive-extension';
-	}
-
-	// pCloud Extension
-	if ( defined( 'AI1WMPE_PLUGIN_BASENAME' ) ) {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . dirname( AI1WMPE_PLUGIN_BASENAME );
-	} else {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . 'all-in-one-wp-migration-pcloud-extension';
-	}
-
-	// S3 Client Extension
-	if ( defined( 'AI1WNE_PLUGIN_BASENAME' ) ) {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . dirname( AI1WMNE_PLUGIN_BASENAME );
-	} else {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . 'all-in-one-wp-migration-s3-client-extension';
-	}
-
-	// Amazon S3 Extension
-	if ( defined( 'AI1WMSE_PLUGIN_BASENAME' ) ) {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . dirname( AI1WMSE_PLUGIN_BASENAME );
-	} else {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . 'all-in-one-wp-migration-s3-extension';
-	}
-
-	// Unlimited Extension
-	if ( defined( 'AI1WMUE_PLUGIN_BASENAME' ) ) {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . dirname( AI1WMUE_PLUGIN_BASENAME );
-	} else {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . 'all-in-one-wp-migration-unlimited-extension';
-	}
-
-	// URL Extension
-	if ( defined( 'AI1WMLE_PLUGIN_BASENAME' ) ) {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . dirname( AI1WMLE_PLUGIN_BASENAME );
-	} else {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . 'all-in-one-wp-migration-url-extension';
-	}
-
-	// WebDAV Extension
-	if ( defined( 'AI1WMWE_PLUGIN_BASENAME' ) ) {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . dirname( AI1WMWE_PLUGIN_BASENAME );
-	} else {
-		$filters[] = 'plugins' . DIRECTORY_SEPARATOR . 'all-in-one-wp-migration-webdav-extension';
-	}
+	return array_merge(
+		$filters,
+		array(
+			AI1WM_BACKUPS_PATH,
+			AI1WM_PLUGIN_BASEDIR,
+			AI1WMZE_PLUGIN_BASEDIR,
+			AI1WMAE_PLUGIN_BASEDIR,
+			AI1WMVE_PLUGIN_BASEDIR,
+			AI1WMBE_PLUGIN_BASEDIR,
+			AI1WMIE_PLUGIN_BASEDIR,
+			AI1WMXE_PLUGIN_BASEDIR,
+			AI1WMDE_PLUGIN_BASEDIR,
+			AI1WMTE_PLUGIN_BASEDIR,
+			AI1WMFE_PLUGIN_BASEDIR,
+			AI1WMCE_PLUGIN_BASEDIR,
+			AI1WMGE_PLUGIN_BASEDIR,
+			AI1WMRE_PLUGIN_BASEDIR,
+			AI1WMEE_PLUGIN_BASEDIR,
+			AI1WMME_PLUGIN_BASEDIR,
+			AI1WMOE_PLUGIN_BASEDIR,
+			AI1WMPE_PLUGIN_BASEDIR,
+			AI1WMKE_PLUGIN_BASEDIR,
+			AI1WMNE_PLUGIN_BASEDIR,
+			AI1WMSE_PLUGIN_BASEDIR,
+			AI1WMUE_PLUGIN_BASEDIR,
+			AI1WMLE_PLUGIN_BASEDIR,
+			AI1WMWE_PLUGIN_BASEDIR,
+		)
+	);
 
 	return $filters;
+}
+
+/**
+ * Get default theme filters
+ *
+ * @param  array $filters List of files and directories
+ * @return array
+ */
+function ai1wm_theme_filters( $filters = array() ) {
+	return array_merge(
+		$filters,
+		array(
+			AI1WM_BACKUPS_PATH,
+		)
+	);
 }
 
 /**
@@ -1008,6 +1007,11 @@ function ai1wm_active_servmask_plugins( $plugins = array() ) {
 	// pCloud Extension
 	if ( defined( 'AI1WMPE_PLUGIN_BASENAME' ) ) {
 		$plugins[] = AI1WMPE_PLUGIN_BASENAME;
+	}
+
+	// Pro Plugin
+	if ( defined( 'AI1WMKE_PLUGIN_BASENAME' ) ) {
+		$plugins[] = AI1WMKE_PLUGIN_BASENAME;
 	}
 
 	// S3 Client Extension
@@ -1191,6 +1195,23 @@ function ai1wm_deactivate_jetpack_modules( $modules ) {
 }
 
 /**
+ * Deactivate Swift Optimizer rules
+ *
+ * @param  array   $rules List of rules
+ * @return boolean
+ */
+function ai1wm_deactivate_swift_optimizer_rules( $rules ) {
+	$current = get_option( AI1WM_SWIFT_OPTIMIZER_PLUGIN_ORGANIZER, array() );
+
+	// Remove rules
+	foreach ( $rules as $rule ) {
+		unset( $current['rules'][ $rule ] );
+	}
+
+	return update_option( AI1WM_SWIFT_OPTIMIZER_PLUGIN_ORGANIZER, $current );
+}
+
+/**
  * Deactivate sitewide Revolution Slider
  *
  * @param  string  $basename Plugin basename
@@ -1364,6 +1385,22 @@ function ai1wm_elementor_cache_flush() {
 }
 
 /**
+ * Set WooCommerce Force SSL checkout
+ *
+ * @param  boolean $yes Force SSL checkout
+ * @return void
+ */
+function ai1wm_woocommerce_force_ssl( $yes = true ) {
+	if ( get_option( 'woocommerce_force_ssl_checkout' ) ) {
+		if ( $yes ) {
+			update_option( 'woocommerce_force_ssl_checkout', 'yes' );
+		} else {
+			update_option( 'woocommerce_force_ssl_checkout', 'no' );
+		}
+	}
+}
+
+/**
  * Set URL scheme
  *
  * @param  string $url    URL value
@@ -1410,6 +1447,8 @@ function ai1wm_write( $handle, $content ) {
 		if ( ( $meta = stream_get_meta_data( $handle ) ) ) {
 			throw new Ai1wm_Not_Writable_Exception( sprintf( __( 'Unable to write to: %s. <a href="https://help.servmask.com/knowledgebase/invalid-file-permissions/" target="_blank">Technical details</a>', AI1WM_PLUGIN_NAME ), $meta['uri'] ) );
 		}
+	} elseif ( null === $write_result ) {
+		return strlen( $content );
 	} elseif ( strlen( $content ) !== $write_result ) {
 		if ( ( $meta = stream_get_meta_data( $handle ) ) ) {
 			throw new Ai1wm_Quota_Exceeded_Exception( sprintf( __( 'Out of disk space. Unable to write to: %s. <a href="https://help.servmask.com/knowledgebase/out-of-disk-space/" target="_blank">Technical details</a>', AI1WM_PLUGIN_NAME ), $meta['uri'] ) );
@@ -1422,26 +1461,32 @@ function ai1wm_write( $handle, $content ) {
 /**
  * Read contents from a file
  *
- * @param  resource $handle   File handle to read from
- * @param  string   $filesize File size
- * @return integer
+ * @param  resource $handle File handle to read from
+ * @param  integer  $length Up to length number of bytes read
+ * @return string
  * @throws Ai1wm_Not_Readable_Exception
  */
-function ai1wm_read( $handle, $filesize ) {
-	$read_result = @fread( $handle, $filesize );
-	if ( false === $read_result ) {
-		if ( ( $meta = stream_get_meta_data( $handle ) ) ) {
-			throw new Ai1wm_Not_Readable_Exception( sprintf( __( 'Unable to read file: %s. <a href="https://help.servmask.com/knowledgebase/invalid-file-permissions/" target="_blank">Technical details</a>', AI1WM_PLUGIN_NAME ), $meta['uri'] ) );
+function ai1wm_read( $handle, $length ) {
+	if ( $length > 0 ) {
+		$read_result = @fread( $handle, $length );
+		if ( false === $read_result ) {
+			if ( ( $meta = stream_get_meta_data( $handle ) ) ) {
+				throw new Ai1wm_Not_Readable_Exception( sprintf( __( 'Unable to read file: %s. <a href="https://help.servmask.com/knowledgebase/invalid-file-permissions/" target="_blank">Technical details</a>', AI1WM_PLUGIN_NAME ), $meta['uri'] ) );
+			}
 		}
+
+		return $read_result;
 	}
 
-	return $read_result;
+	return false;
 }
 
 /**
  * Seeks on a file pointer
  *
- * @param  string  $handle File handle to seeks
+ * @param  resource $handle File handle
+ * @param  integer  $offset File offset
+ * @param  integer  $mode   Offset mode
  * @return integer
  */
 function ai1wm_seek( $handle, $offset, $mode = SEEK_SET ) {
@@ -1456,9 +1501,9 @@ function ai1wm_seek( $handle, $offset, $mode = SEEK_SET ) {
 }
 
 /**
- * Tells on a file pointer
+ * Returns the current position of the file read/write pointer
  *
- * @param  string  $handle File handle to tells
+ * @param  resource $handle File handle
  * @return integer
  */
 function ai1wm_tell( $handle ) {
@@ -1470,6 +1515,25 @@ function ai1wm_tell( $handle ) {
 	}
 
 	return $tell_result;
+}
+
+/**
+ * Write fields to a file
+ *
+ * @param  resource $handle File handle to write to
+ * @param  array    $fields Fields to write to the file
+ * @return integer
+ * @throws Ai1wm_Not_Writable_Exception
+ */
+function ai1wm_putcsv( $handle, $fields ) {
+	$write_result = @fputcsv( $handle, $fields );
+	if ( false === $write_result ) {
+		if ( ( $meta = stream_get_meta_data( $handle ) ) ) {
+			throw new Ai1wm_Not_Writable_Exception( sprintf( __( 'Unable to write to: %s. <a href="https://help.servmask.com/knowledgebase/invalid-file-permissions/" target="_blank">Technical details</a>', AI1WM_PLUGIN_NAME ), $meta['uri'] ) );
+		}
+	}
+
+	return $write_result;
 }
 
 /**
@@ -1554,6 +1618,21 @@ function ai1wm_is_filesize_supported( $file, $php_int_size = PHP_INT_SIZE, $php_
 	}
 
 	return $size_result;
+}
+
+/**
+ * Check whether file name is supported by All-in-One WP Migration
+ *
+ * @param  string  $file       Path to file
+ * @param  array   $extensions File extensions
+ * @return boolean
+ */
+function ai1wm_is_filename_supported( $file, $extensions = array( 'wpress' ) ) {
+	if ( in_array( pathinfo( $file, PATHINFO_EXTENSION ), $extensions ) ) {
+		return true;
+	}
+
+	return false;
 }
 
 /**
@@ -1675,6 +1754,33 @@ function ai1wm_get_filters( $tag ) {
 }
 
 /**
+ * Get WordPress plugins directories
+ *
+ * @return array
+ */
+function ai1wm_get_themes_dirs() {
+	$theme_dirs = array();
+	foreach ( search_theme_directories() as $theme_name => $theme_info ) {
+		if ( isset( $theme_info['theme_root'] ) ) {
+			if ( ! in_array( $theme_info['theme_root'], $theme_dirs ) ) {
+				$theme_dirs[] = untrailingslashit( $theme_info['theme_root'] );
+			}
+		}
+	}
+
+	return $theme_dirs;
+}
+
+/**
+ * Get WordPress plugins directory
+ *
+ * @return string
+ */
+function ai1wm_get_plugins_dir() {
+	return untrailingslashit( WP_PLUGIN_DIR );
+}
+
+/**
  * Get WordPress uploads directory
  *
  * @return string
@@ -1765,36 +1871,195 @@ function ai1wm_escape_windows_directory_separator( $path ) {
 }
 
 /**
- * Returns whether the server supports URL rewriting.
- * Detects Apache's mod_rewrite, IIS 7.0+ permalink support, and nginx.
+ * Should reset WordPress permalinks?
  *
- * @return boolean Whether the server supports URL rewriting.
+ * @param  array   $params Request parameters
+ * @return boolean
  */
-function ai1wm_got_url_rewrite() {
-	if ( iis7_supports_permalinks() ) {
-		return true;
-	} elseif ( ! empty( $GLOBALS['is_nginx'] ) ) {
-		return true;
+function ai1wm_should_reset_permalinks( $params ) {
+	global $wp_rewrite, $is_apache;
+
+	// Permalinks are not supported
+	if ( empty( $params['using_permalinks'] ) ) {
+		if ( $wp_rewrite->using_permalinks() ) {
+			if ( $is_apache ) {
+				if ( ! apache_mod_loaded( 'mod_rewrite', false ) ) {
+					return true;
+				}
+			}
+		}
 	}
 
-	return apache_mod_loaded( 'mod_rewrite', false );
+	return false;
 }
 
 /**
- * Returns whether the server supports URL permalinks.
- * Detects Apache's mod_rewrite and URL permalinks.
+ * Get .htaccess file content
  *
- * @return boolean Whether the server supports URL permalinks.
+ * @return string
  */
-function ai1wm_got_url_permalinks() {
-	global $wp_rewrite, $is_apache;
-	if ( $wp_rewrite->using_permalinks() ) {
-		return true;
+function ai1wm_get_htaccess() {
+	if ( is_file( AI1WM_WORDPRESS_HTACCESS ) ) {
+		return @file_get_contents( AI1WM_WORDPRESS_HTACCESS );
+	}
+}
+
+/**
+ * Get web.config file content
+ *
+ * @return string
+ */
+function ai1wm_get_webconfig() {
+	if ( is_file( AI1WM_WORDPRESS_WEBCONFIG ) ) {
+		return @file_get_contents( AI1WM_WORDPRESS_WEBCONFIG );
+	}
+}
+
+/**
+ * Get available space on filesystem or disk partition
+ *
+ * @param  string $path Directory of the filesystem or disk partition
+ * @return mixed
+ */
+function ai1wm_disk_free_space( $path ) {
+	if ( function_exists( 'disk_free_space' ) ) {
+		return @disk_free_space( $path );
+	}
+}
+
+/**
+ * Determines if the server can encrypt backups
+ *
+ * @return boolean
+ */
+function ai1wm_can_encrypt() {
+	if ( ! function_exists( 'openssl_encrypt' ) ) {
+		return false;
 	}
 
-	if ( $is_apache ) {
-		return apache_mod_loaded( 'mod_rewrite', false );
+	if ( ! function_exists( 'openssl_random_pseudo_bytes' ) ) {
+		return false;
+	}
+
+	if ( ! function_exists( 'openssl_cipher_iv_length' ) ) {
+		return false;
+	}
+
+	if ( ! function_exists( 'sha1' ) ) {
+		return false;
+	}
+
+	if ( ! in_array( AI1WM_CIPHER_NAME, array_map( 'strtoupper', openssl_get_cipher_methods() ) ) ) {
+		return false;
 	}
 
 	return true;
+}
+
+/**
+ * Determines if the server can decrypt backups
+ *
+ * @return boolean
+ */
+function ai1wm_can_decrypt() {
+	if ( ! function_exists( 'openssl_decrypt' ) ) {
+		return false;
+	}
+
+	if ( ! function_exists( 'openssl_random_pseudo_bytes' ) ) {
+		return false;
+	}
+
+	if ( ! function_exists( 'openssl_cipher_iv_length' ) ) {
+		return false;
+	}
+
+	if ( ! function_exists( 'sha1' ) ) {
+		return false;
+	}
+
+	if ( ! in_array( AI1WM_CIPHER_NAME, array_map( 'strtoupper', openssl_get_cipher_methods() ) ) ) {
+		return false;
+	}
+
+	return true;
+}
+
+/**
+ * Encrypts a string with a key
+ *
+ * @param string $string String to encrypt
+ * @param string $key    Key to encrypt the string with
+ * @return string
+ * @throws Ai1wm_Not_Encryptable_Exception
+ */
+function ai1wm_encrypt_string( $string, $key ) {
+	$iv_length = ai1wm_crypt_iv_length();
+	$key       = substr( sha1( $key, true ), 0, $iv_length );
+
+	$iv = openssl_random_pseudo_bytes( $iv_length );
+	if ( $iv === false ) {
+		throw new Ai1wm_Not_Encryptable_Exception( __( 'Unable to generate random bytes.', AI1WM_PLUGIN_NAME ) );
+	}
+
+	$encrypted_string = openssl_encrypt( $string, AI1WM_CIPHER_NAME, $key, OPENSSL_RAW_DATA, $iv );
+	if ( $encrypted_string === false ) {
+		throw new Ai1wm_Not_Encryptable_Exception( __( 'Unable to encrypt data.', AI1WM_PLUGIN_NAME ) );
+	}
+
+	return sprintf( '%s%s', $iv, $encrypted_string );
+}
+
+/**
+ * Returns encrypt/decrypt iv length
+ *
+ * @return int
+ * @throws Ai1wm_Not_Encryptable_Exception
+ */
+function ai1wm_crypt_iv_length() {
+	$iv_length = openssl_cipher_iv_length( AI1WM_CIPHER_NAME );
+	if ( $iv_length === false ) {
+		throw new Ai1wm_Not_Encryptable_Exception( __( 'Unable to obtain cipher length.', AI1WM_PLUGIN_NAME ) );
+	}
+
+	return $iv_length;
+}
+
+/**
+ * Decrypts a string with a eky
+ *
+ * @param string $encrypted_string String to decrypt
+ * @param string $key              Key to decrypt the string with
+ * @return string
+ * @throws Ai1wm_Not_Encryptable_Exception
+ * @throws Ai1wm_Not_Decryptable_Exception
+ */
+function ai1wm_decrypt_string( $encrypted_string, $key ) {
+	$iv_length = ai1wm_crypt_iv_length();
+	$key       = substr( sha1( $key, true ), 0, $iv_length );
+	$iv        = substr( $encrypted_string, 0, $iv_length );
+
+	$decrypted_string = openssl_decrypt( substr( $encrypted_string, $iv_length ), AI1WM_CIPHER_NAME, $key, OPENSSL_RAW_DATA, $iv );
+	if ( $decrypted_string === false ) {
+		throw new Ai1wm_Not_Decryptable_Exception( __( 'Unable to decrypt data.', AI1WM_PLUGIN_NAME ) );
+	}
+
+	return $decrypted_string;
+}
+
+/**
+ * Checks if decryption password is valid
+ *
+ * @param string $encrypted_signature
+ * @param string $password
+ * @return bool
+ */
+function ai1wm_is_decryption_password_valid( $encrypted_signature, $password ) {
+	try {
+		$encrypted_signature = base64_decode( $encrypted_signature );
+
+		return ai1wm_decrypt_string( $encrypted_signature, $password ) === AI1WM_SIGN_TEXT;
+	} catch ( Ai1wm_Not_Decryptable_Exception $exception ) {
+		return false;
+	}
 }

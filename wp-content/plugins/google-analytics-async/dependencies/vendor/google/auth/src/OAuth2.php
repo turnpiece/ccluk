@@ -17,10 +17,12 @@
  */
 namespace Beehive\Google\Auth;
 
+use Beehive\Firebase\JWT\JWT;
 use Beehive\Google\Auth\HttpHandler\HttpClientCache;
 use Beehive\Google\Auth\HttpHandler\HttpHandlerFactory;
-use Beehive\GuzzleHttp\Psr7;
+use Beehive\GuzzleHttp\Psr7\Query;
 use Beehive\GuzzleHttp\Psr7\Request;
+use Beehive\GuzzleHttp\Psr7\Utils;
 use InvalidArgumentException;
 use Beehive\Psr\Http\Message\RequestInterface;
 use Beehive\Psr\Http\Message\ResponseInterface;
@@ -32,7 +34,7 @@ use Beehive\Psr\Http\Message\UriInterface;
  * - service account authorization
  * - authorization where a user already has an access token
  */
-class OAuth2 implements \Beehive\Google\Auth\FetchAuthTokenInterface
+class OAuth2 implements FetchAuthTokenInterface
 {
     const DEFAULT_EXPIRY_SECONDS = 3600;
     // 1 hour
@@ -360,14 +362,20 @@ class OAuth2 implements \Beehive\Google\Auth\FetchAuthTokenInterface
         }
         $now = \time();
         $opts = \array_merge(['skew' => self::DEFAULT_SKEW_SECONDS], $config);
-        $assertion = ['iss' => $this->getIssuer(), 'aud' => $this->getAudience(), 'exp' => $now + $this->getExpiry(), 'iat' => $now - $opts['skew']];
+        $assertion = ['iss' => $this->getIssuer(), 'exp' => $now + $this->getExpiry(), 'iat' => $now - $opts['skew']];
         foreach ($assertion as $k => $v) {
             if (\is_null($v)) {
                 throw new \DomainException($k . ' should not be null');
             }
         }
+        if (!\is_null($this->getAudience())) {
+            $assertion['aud'] = $this->getAudience();
+        }
         if (!\is_null($this->getScope())) {
             $assertion['scope'] = $this->getScope();
+        }
+        if (empty($assertion['scope']) && empty($assertion['aud'])) {
+            throw new \DomainException('one of scope or aud should not be null');
         }
         if (!\is_null($this->getSub())) {
             $assertion['sub'] = $this->getSub();
@@ -419,7 +427,7 @@ class OAuth2 implements \Beehive\Google\Auth\FetchAuthTokenInterface
                 $params = \array_merge($params, $this->getExtensionParams());
         }
         $headers = ['Cache-Control' => 'no-store', 'Content-Type' => 'application/x-www-form-urlencoded'];
-        return new \Beehive\GuzzleHttp\Psr7\Request('POST', $uri, $headers, \Beehive\GuzzleHttp\Psr7\build_query($params));
+        return new Request('POST', $uri, $headers, Query::build($params));
     }
     /**
      * Fetches the auth tokens based on the current state.
@@ -430,7 +438,7 @@ class OAuth2 implements \Beehive\Google\Auth\FetchAuthTokenInterface
     public function fetchAuthToken(callable $httpHandler = null)
     {
         if (\is_null($httpHandler)) {
-            $httpHandler = \Beehive\Google\Auth\HttpHandler\HttpHandlerFactory::build(\Beehive\Google\Auth\HttpHandler\HttpClientCache::getHttpClient());
+            $httpHandler = HttpHandlerFactory::build(HttpClientCache::getHttpClient());
         }
         $response = $httpHandler($this->generateCredentialsRequest());
         $credentials = $this->parseTokenResponse($response);
@@ -462,7 +470,7 @@ class OAuth2 implements \Beehive\Google\Auth\FetchAuthTokenInterface
      * @return array the tokens parsed from the response body.
      * @throws \Exception
      */
-    public function parseTokenResponse(\Beehive\Psr\Http\Message\ResponseInterface $resp)
+    public function parseTokenResponse(ResponseInterface $resp)
     {
         $body = (string) $resp->getBody();
         if ($resp->hasHeader('Content-Type') && $resp->getHeaderLine('Content-Type') == 'application/x-www-form-urlencoded') {
@@ -539,25 +547,25 @@ class OAuth2 implements \Beehive\Google\Auth\FetchAuthTokenInterface
     public function buildFullAuthorizationUri(array $config = [])
     {
         if (\is_null($this->getAuthorizationUri())) {
-            throw new \InvalidArgumentException('requires an authorizationUri to have been set');
+            throw new InvalidArgumentException('requires an authorizationUri to have been set');
         }
         $params = \array_merge(['response_type' => 'code', 'access_type' => 'offline', 'client_id' => $this->clientId, 'redirect_uri' => $this->redirectUri, 'state' => $this->state, 'scope' => $this->getScope()], $config);
         // Validate the auth_params
         if (\is_null($params['client_id'])) {
-            throw new \InvalidArgumentException('missing the required client identifier');
+            throw new InvalidArgumentException('missing the required client identifier');
         }
         if (\is_null($params['redirect_uri'])) {
-            throw new \InvalidArgumentException('missing the required redirect URI');
+            throw new InvalidArgumentException('missing the required redirect URI');
         }
         if (!empty($params['prompt']) && !empty($params['approval_prompt'])) {
-            throw new \InvalidArgumentException('prompt and approval_prompt are mutually exclusive');
+            throw new InvalidArgumentException('prompt and approval_prompt are mutually exclusive');
         }
         // Construct the uri object; return it if it is valid.
         $result = clone $this->authorizationUri;
-        $existingParams = \Beehive\GuzzleHttp\Psr7\parse_query($result->getQuery());
-        $result = $result->withQuery(\Beehive\GuzzleHttp\Psr7\build_query(\array_merge($existingParams, $params)));
+        $existingParams = Query::parse($result->getQuery());
+        $result = $result->withQuery(Query::build(\array_merge($existingParams, $params)));
         if ($result->getScheme() != 'https') {
-            throw new \InvalidArgumentException('Authorization endpoint must be protected by TLS');
+            throw new InvalidArgumentException('Authorization endpoint must be protected by TLS');
         }
         return $result;
     }
@@ -626,7 +634,7 @@ class OAuth2 implements \Beehive\Google\Auth\FetchAuthTokenInterface
             // "postmessage" is a reserved URI string in Google-land
             // @see https://developers.google.com/identity/sign-in/web/server-side-flow
             if ('postmessage' !== (string) $uri) {
-                throw new \InvalidArgumentException('Redirect URI must be absolute');
+                throw new InvalidArgumentException('Redirect URI must be absolute');
             }
         }
         $this->redirectUri = (string) $uri;
@@ -660,12 +668,12 @@ class OAuth2 implements \Beehive\Google\Auth\FetchAuthTokenInterface
             foreach ($scope as $s) {
                 $pos = \strpos($s, ' ');
                 if ($pos !== \false) {
-                    throw new \InvalidArgumentException('array scope values should not contain spaces');
+                    throw new InvalidArgumentException('array scope values should not contain spaces');
                 }
             }
             $this->scope = $scope;
         } else {
-            throw new \InvalidArgumentException('scopes should be a string or array of strings');
+            throw new InvalidArgumentException('scopes should be a string or array of strings');
         }
     }
     /**
@@ -707,7 +715,7 @@ class OAuth2 implements \Beehive\Google\Auth\FetchAuthTokenInterface
         } else {
             // validate URI
             if (!$this->isAbsoluteUri($grantType)) {
-                throw new \InvalidArgumentException('invalid grant type');
+                throw new InvalidArgumentException('invalid grant type');
             }
             $this->grantType = (string) $grantType;
         }
@@ -915,7 +923,7 @@ class OAuth2 implements \Beehive\Google\Auth\FetchAuthTokenInterface
         if (\is_null($signingAlgorithm)) {
             $this->signingAlgorithm = null;
         } elseif (!\in_array($signingAlgorithm, self::$knownSigningAlgorithms)) {
-            throw new \InvalidArgumentException('unknown signing algorithm');
+            throw new InvalidArgumentException('unknown signing algorithm');
         } else {
             $this->signingAlgorithm = $signingAlgorithm;
         }
@@ -1096,14 +1104,28 @@ class OAuth2 implements \Beehive\Google\Auth\FetchAuthTokenInterface
     /**
      * The expiration of the last received token.
      *
-     * @return array
+     * @return array|null
      */
     public function getLastReceivedToken()
     {
         if ($token = $this->getAccessToken()) {
-            return ['access_token' => $token, 'expires_at' => $this->getExpiresAt()];
+            // the bare necessity of an auth token
+            $authToken = ['access_token' => $token, 'expires_at' => $this->getExpiresAt()];
+        } elseif ($idToken = $this->getIdToken()) {
+            $authToken = ['id_token' => $idToken, 'expires_at' => $this->getExpiresAt()];
+        } else {
+            return null;
         }
-        return null;
+        if ($expiresIn = $this->getExpiresIn()) {
+            $authToken['expires_in'] = $expiresIn;
+        }
+        if ($issuedAt = $this->getIssuedAt()) {
+            $authToken['issued_at'] = $issuedAt;
+        }
+        if ($refreshToken = $this->getRefreshToken()) {
+            $authToken['refresh_token'] = $refreshToken;
+        }
+        return $authToken;
     }
     /**
      * Get the client ID.
@@ -1129,7 +1151,7 @@ class OAuth2 implements \Beehive\Google\Auth\FetchAuthTokenInterface
         if (\is_null($uri)) {
             return;
         }
-        return \Beehive\GuzzleHttp\Psr7\uri_for($uri);
+        return Utils::uriFor($uri);
     }
     /**
      * @param string $idToken
@@ -1139,17 +1161,11 @@ class OAuth2 implements \Beehive\Google\Auth\FetchAuthTokenInterface
      */
     private function jwtDecode($idToken, $publicKey, $allowedAlgs)
     {
-        if (\class_exists('Beehive\\Firebase\\JWT\\JWT')) {
-            return \Beehive\Firebase\JWT\JWT::decode($idToken, $publicKey, $allowedAlgs);
-        }
-        return \Beehive\JWT::decode($idToken, $publicKey, $allowedAlgs);
+        return JWT::decode($idToken, $publicKey, $allowedAlgs);
     }
     private function jwtEncode($assertion, $signingKey, $signingAlgorithm, $signingKeyId = null)
     {
-        if (\class_exists('Beehive\\Firebase\\JWT\\JWT')) {
-            return \Beehive\Firebase\JWT\JWT::encode($assertion, $signingKey, $signingAlgorithm, $signingKeyId);
-        }
-        return \Beehive\JWT::encode($assertion, $signingKey, $signingAlgorithm, $signingKeyId);
+        return JWT::encode($assertion, $signingKey, $signingAlgorithm, $signingKeyId);
     }
     /**
      * Determines if the URI is absolute based on its scheme and host or path

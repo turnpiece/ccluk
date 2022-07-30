@@ -12,9 +12,9 @@
 </template>
 
 <script>
-import { restGet } from '@/helpers/api'
-import WidgetBody from './components/widget-body'
-import WidgetHeader from './components/widget-header'
+import { restGetStats } from '@/helpers/api'
+import WidgetBody from './views/widget-body'
+import WidgetHeader from './views/widget-header'
 
 export default {
 	name: 'App',
@@ -69,7 +69,7 @@ export default {
 
 			this.loading = true
 
-			restGet({
+			restGetStats({
 				path: 'stats/dashboard',
 				params: {
 					from: this.dateStart,

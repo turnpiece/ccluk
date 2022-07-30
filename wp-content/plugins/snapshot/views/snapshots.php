@@ -24,6 +24,18 @@ if ( version_compare(PHP_VERSION, '5.5.0', '<') ) {
 
 <div id="container" class="snapshot-three wps-page-snapshots">
 
+	<?php
+		WPMUDEVSnapshot::instance()->need_show_v4_notice() && $this->render(
+			'common/v4-notice',
+			false,
+			array(
+				'bg_image_url' => WPMUDEVSnapshot::get_file_url( '/assets/img/snapshot-hero-notice.svg' ),
+			),
+			false,
+			false
+		);
+	?>
+
 	<?php if ( 0 === $count_all_snapshots ) { ?>
 
 		<section class="wpmud-box get-started-box">
@@ -364,3 +376,5 @@ if ( version_compare(PHP_VERSION, '5.5.0', '<') ) {
 if( Snapshot_Helper_Utility::is_wpmu_hosting() ) {
 	$this->render( 'boxes/modals/popup-hosting', false, array(), false, false );
 }
+
+WPMUDEVSnapshot::instance()->need_show_v4_modal() && $this->render( 'boxes/modals/popup-upgrade-to-v4', false, array(), false, false );

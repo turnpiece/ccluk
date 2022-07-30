@@ -13,7 +13,7 @@
 abstract class Shipper_Helper_Timer extends Shipper_Helper_Singleton {
 
 	const TIMER_START = 'start';
-	const TIMER_END = 'end';
+	const TIMER_END   = 'end';
 
 	/**
 	 * Gets individual timer hash
@@ -69,7 +69,7 @@ abstract class Shipper_Helper_Timer extends Shipper_Helper_Singleton {
 	 */
 	public function start( $timer ) {
 		$this->reset( $timer );
-		$this->set_time( $timer, Shipper_Helper_Timer::TIMER_START );
+		$this->set_time( $timer, self::TIMER_START );
 	}
 
 	/**
@@ -80,7 +80,7 @@ abstract class Shipper_Helper_Timer extends Shipper_Helper_Singleton {
 	 * @return bool
 	 */
 	public function is_started( $timer ) {
-		return false !== $this->get_time( $timer, Shipper_Helper_Timer::TIMER_START );
+		return false !== $this->get_time( $timer, self::TIMER_START );
 	}
 
 	/**
@@ -91,7 +91,7 @@ abstract class Shipper_Helper_Timer extends Shipper_Helper_Singleton {
 	 * @return bool
 	 */
 	public function is_stopped( $timer ) {
-		return false !== $this->get_time( $timer, Shipper_Helper_Timer::TIMER_END );
+		return false !== $this->get_time( $timer, self::TIMER_END );
 	}
 
 	/**
@@ -114,9 +114,9 @@ abstract class Shipper_Helper_Timer extends Shipper_Helper_Singleton {
 	 * @return float|bool
 	 */
 	public function get_time( $timer, $part = false ) {
-		$part = Shipper_Helper_Timer::TIMER_START === $part
-			? Shipper_Helper_Timer::TIMER_START
-			: Shipper_Helper_Timer::TIMER_END;
+		$part = self::TIMER_START === $part
+			? self::TIMER_START
+			: self::TIMER_END;
 		$data = $this->get_timer( $timer );
 		return ! empty( $data[ $part ] ) && is_numeric( $data[ $part ] )
 			? $data[ $part ]
@@ -131,14 +131,14 @@ abstract class Shipper_Helper_Timer extends Shipper_Helper_Singleton {
 	 * @param float  $time Optional timestamp - will default to current.
 	 */
 	public function set_time( $timer, $part, $time = false ) {
-		$part = Shipper_Helper_Timer::TIMER_START === $part
-			? Shipper_Helper_Timer::TIMER_START
-			: Shipper_Helper_Timer::TIMER_END;
+		$part = self::TIMER_START === $part
+			? self::TIMER_START
+			: self::TIMER_END;
 		$time = ! empty( $time ) && is_numeric( $time )
 			? $time
 			: $this->get_timestamp();
 
-		$data = $this->get_timer( $timer );
+		$data          = $this->get_timer( $timer );
 		$data[ $part ] = $time;
 		$this->set_timer( $timer, $data );
 	}
@@ -149,7 +149,7 @@ abstract class Shipper_Helper_Timer extends Shipper_Helper_Singleton {
 	 * @param string $timer Timer ID.
 	 */
 	public function stop( $timer ) {
-		$this->set_time( $timer, Shipper_Helper_Timer::TIMER_END );
+		$this->set_time( $timer, self::TIMER_END );
 	}
 
 	/**
@@ -162,11 +162,13 @@ abstract class Shipper_Helper_Timer extends Shipper_Helper_Singleton {
 	 * @return float|bool
 	 */
 	public function diff( $timer ) {
-		$start = $this->get_time( $timer, Shipper_Helper_Timer::TIMER_START );
-		if ( empty( $start ) ) { return false; }
+		$start = $this->get_time( $timer, self::TIMER_START );
+		if ( empty( $start ) ) {
+			return false; }
 
-		$end = $this->get_time( $timer, Shipper_Helper_Timer::TIMER_END );
-		if ( empty( $end ) ) { $end = $this->get_timestamp(); }
+		$end = $this->get_time( $timer, self::TIMER_END );
+		if ( empty( $end ) ) {
+			$end = $this->get_timestamp(); }
 
 		return $end - $start;
 	}

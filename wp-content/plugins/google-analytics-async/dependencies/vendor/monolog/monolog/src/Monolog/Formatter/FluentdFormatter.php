@@ -32,7 +32,7 @@ use Beehive\Monolog\Utils;
  *
  * @author Andrius Putna <fordnox@gmail.com>
  */
-class FluentdFormatter implements \Beehive\Monolog\Formatter\FormatterInterface
+class FluentdFormatter implements FormatterInterface
 {
     /**
      * @var bool $levelTag should message level be a part of the fluentd tag
@@ -60,7 +60,7 @@ class FluentdFormatter implements \Beehive\Monolog\Formatter\FormatterInterface
             $message['level'] = $record['level'];
             $message['level_name'] = $record['level_name'];
         }
-        return \Beehive\Monolog\Utils::jsonEncode(array($tag, $record['datetime']->getTimestamp(), $message));
+        return Utils::jsonEncode(array($tag, $record['datetime']->getTimestamp(), $message));
     }
     public function formatBatch(array $records)
     {

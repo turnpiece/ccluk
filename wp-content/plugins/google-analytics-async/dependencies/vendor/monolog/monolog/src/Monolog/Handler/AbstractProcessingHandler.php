@@ -19,7 +19,7 @@ use Beehive\Monolog\ResettableInterface;
  * @author Jordi Boggiano <j.boggiano@seld.be>
  * @author Christophe Coevoet <stof@notk.org>
  */
-abstract class AbstractProcessingHandler extends \Beehive\Monolog\Handler\AbstractHandler
+abstract class AbstractProcessingHandler extends AbstractHandler
 {
     /**
      * {@inheritdoc}

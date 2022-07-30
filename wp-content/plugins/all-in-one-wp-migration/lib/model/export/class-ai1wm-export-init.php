@@ -30,7 +30,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Ai1wm_Export_Init {
 
 	public static function execute( $params ) {
-
 		$blog_id = null;
 
 		// Get subsite Blog ID
@@ -39,6 +38,9 @@ class Ai1wm_Export_Init {
 				$blog_id = array_shift( $sites );
 			}
 		}
+
+		// Set progress
+		Ai1wm_Status::info( __( 'Preparing to export...', AI1WM_PLUGIN_NAME ) );
 
 		// Set archive
 		if ( empty( $params['archive'] ) ) {

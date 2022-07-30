@@ -1,8 +1,146 @@
 Plugin Name: Shipper
 Author: Incsub
 
-Change Log:
------------------------------------------------------------------------ Fix: hotfix-1.1.3 (2020-02-06)
+1.2.12 - 2022-04-04
+- New: Added "Google Login" support
+
+1.2.11 - 2021-11-03
+- Improvement: White labeling support
+
+1.2.10 - 2021-11-01
+- Improvement: Academy links removed
+
+1.2.9 - 2021-05-18
+- New: Documentation links tracking
+- Fix: jQuery compatibility with WP 5.8
+- Fix: Fatal Error on Windows host
+- Fix: Cross sign added before email ID while adding new user
+- Fix: Missing placeholder in File Exclusions Filter
+
+1.2.8 - 2021-03-25
+- New: Show Shipper logs on package building modal.
+- New: Implement AJAX search functionality for sub-sites selection.
+- New: Add option to exclude WordPress core files on migration.
+- New: Add option to exclude email addresses from being replaced after migration.
+- New: Add the Go Back button to the Pre-flight modal for better usability.
+- Fix: Compatibility issue with Beaver Page Builder.
+- Fix: Remove all multisite constant for sub-site to single-site migration.
+- Fix: Do not migrate wp-config.php for API migration option doesn't work properly.
+- Fix: Network settings get lost on sub-site to single-site migration.
+- Improvement: Network migration description copy.
+- Improvement: Migrate all the premium.wpmudev.org links to wpmudev.com
+
+1.2.7 - 2021-03-08
+- Fix: Choose destination arrow button moves up when the button is clicked.
+- Fix: Restore doesn't process when fetch database credentials from the config file is selected.
+
+1.2.6 - 2021-03-03
+- New: Add Shipper tutorials.
+- New: Add HTML template for email notification.
+- New: Add detailed file exclusion rules on the file exclusion modal.
+- New: Suggest Package migration once the API migration preflight check is stuck.
+- New: Add a notification not to rename package files.
+- New: Show suggestion on pre-flight check regarding safe mode.
+- Fix: Shipper is not working on the flywheel live site.
+- Fix: Update Shared UI to the latest version.
+- Fix: Shipper doesn't work well with WPML enabled site.
+- Fix: Blank screen is showing after canceling the API migration.
+- Fix: API migration doesn't migrate any content when the existing prefix is chosen.
+- Fix: Wildcard file exclusion is not working for package migration.
+- Fix: Shipper version doesn't match with HUB when the shipper is updated or installed without removing the existing plugin.
+- Improvement: Rewrote the description for network migration.
+- Improvement: Change X to Cancel button to make it more clear to the user.
+
+1.2.5 - 2021-01-25
+- Fix: Shipper package can't be restored on localhost such as MAMP, WAMP, etc.
+- Fix: Responsive issue on the package download screen.
+- Fix: Package migration doesn't work on password-protected sites.
+- Fix: While downloading a package, the site goes down or timeout if the package is large.
+- Fix: Some typos in error messages.
+- Fix: Installer.php file size is static instead of dynamic.
+- Fix: Character encoding issue after migration on some site.
+- Fix: Package migration is not replacing the custom menu URL when some URL has SSL and some are not.
+- Fix: Dashboard shows `Creating Package` even if there is no package creation in progress.
+- Fix: Subsite media files are missing on the whole network package migration.
+- Fix: Format logs for package migration installer.
+
+1.2.4 - 2021-01-13
+- Feat: Add safe mode for package migration, so that Shipper can work well on low-budget hosts.
+- Improvement: Speed up the API migration process.
+- Improvement: Add which file is successfully added to the zip archive and which doesn't in the shipper log.
+- Fix: On sub-site migration, all the media of other subsites are also getting exported.
+- Fix: Shipper eating up the whole server storage, and crashing the site.
+- Fix: After migration, the parent theme is getting activated instead of the child theme.
+- Fix: WPMU DEV user is unable to add new users in Shipper.
+- Fix: Fatal error on running installer.php on PHP 5.6 sites in some edge cases.
+- Fix: If the domain mapping plugin is activated on the source site, the destination site gets down after migrating a subsite through package migration.
+- Fix: The error message is not styled properly on the package migration settings page.
+
+1.2.3 - 2020-11-30
+- Fix: Make Shipper compatible with PHP 8.0
+
+1.2.2 - 2020-11-23
+- Improvement: Speedup package migration process.
+- Feat: Add logs to detect which table is exporting.
+- Fix: Exclude shipper-working dir by default on running installer.php on destination site.
+- Fix: If there are negative values in pagination settings then Large files are not showing on the Preflight screen.
+- Fix: Pagination result count is not correct when the filter is applied on the preflight check.
+- Fix: Both Shipper and Whitelabel logo are showing up on the preflight check of API migration.
+- Fix: Package migration fails on local by flywheel sites.
+- Fix: Skip WordPress default meta_key transformation on Package Migration.
+
+1.2.1 - 2020-10-22
+- Improvement: Speed up database task for package migration.
+- Improvement: Change API Migration connect to WPMU DEV experience.
+- Fix: Shipper doesn't show all the sub-sites to choose from and search field doesn't work.
+- Fix: Back button is not working on the Ready to Ship page.
+- Fix: Package migration fails when the source site has duplicator plugin installed.
+- Fix: The migration date-time on the dashboard doesn't match with the current timezone.
+- Fix: Typo in export and import succession email.
+- Fix: Some text is not visible in high contrast mode on the Permission page.
+- Fix: Cancellation on pre-flight issues screen, bring back pre-flight check to 99%.
+- Fix: Documentation link is missing in package migration and settings Page.
+
+1.2.0 - 2020-09-08
+- Add: Migrate a subsite from a multisite network to a single site
+- Add: Highlight new features in the welcome modal
+- Fix: Shipper is loading itself on every page load in wp-admin and on frontend
+- Fix: Shipper using up all the disk space
+- Fix: Deleted admin user is able to access Shipper plugin
+- Fix: Some sites are not showing up on the site selection modal when user has more than 20 websites
+- Fix: Package migration fails due to MySQL can not compare float like value
+- Fix: Exclude large file doesn't work on flywheel site
+-Improvement: Update SUI to latest version (2.9.6)
+
+1.1.6 - 2020-08-20
+----------------------------------------------------------------------
+- Fix: WordPress 5.5 compatibility issues
+- Fix: Shipper whitelabel image is not working in the dashboard page
+- Fix: Escape {{ character with double backslash to be used in MySQL 8.0
+- Fix: Package migration fails if there are extra tables (unknown DB prefix) in source site
+- Fix: Sometimes null value replaced with 0 in MySQL resulting duplicate entry issue
+- Fix: Documentation link on migration wizard page pointing to wrong url
+- Improvement: shinst_is_multisite function regex so that it ignores commented out lines
+
+1.1.5 - 2020-07-20
+----------------------------------------------------------------------
+- Fix: Shipper password verification fails on some hosts
+
+1.1.4 - 2020-07-13
+----------------------------------------------------------------------
+- Add: Shipper Dashboard to quickly run the migration and see migration states.
+- Add: Ask for the WPMU DEV password before fetching the connected sites in the API migration.
+- Improvement: Improve the estimated time of arrival (ETA) for API migration.
+- Improvement: Some UI improvements in various places.
+- Fix: Some users still seeing old Shipper character.
+- Fix: Package Migration > View Logs link doesn't work on multisite.
+- Fix: High contrast mode doesn't apply properly to some of the plugin elements.
+- Fix: Remove PHP warning when API migration import is in progress.
+- Fix: All the media items aren't transferred well with API migration.
+- Fix: Migration Filters (files, database, and advanced) are not working properly.
+- Fix: Destination Database Prefix doesn't change even if the user wants to.
+- Fix: Plugins and media exclusion doesn't work properly.
+- Fix: Remove Storage Directory and Exclude from package build options from Package migration settings.
 
 1.1.2 - 2019-23-12
 ----------------------------------------------------------------------
@@ -35,7 +173,7 @@ Change Log:
 - Fix: Placement of Back buttons
 - Fix: Update copy of Package Size pre-flight check
 - Fix: Remove Greeting modal if it's not the users first website
-- Fix: Update the package size on excluding the large files 
+- Fix: Update the package size on excluding the large files
 
 1.0.1.1 - 2018-03-22
 ----------------------------------------------------------------------
@@ -60,4 +198,4 @@ Change Log:
 - Initial release
 
 
-87274-1582990917-au
+87274-1659205603-au

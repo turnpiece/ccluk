@@ -83,7 +83,7 @@ class Snapshot_Model_Full_Remote_Signature {
 	 *
 	 * @return string
 	 */
-	public function get_signature ($components= array(), $secret, $algo= false) {
+	public function get_signature ($components= array(), $secret = '', $algo= false) {
 		$raw = $this->get_raw_signature($components);
 		return $this->get_hashed_signature($raw, $secret, $algo);
 	}

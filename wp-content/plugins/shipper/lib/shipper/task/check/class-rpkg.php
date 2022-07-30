@@ -13,7 +13,7 @@
 class Shipper_Task_Check_Rpkg extends Shipper_Task_Check {
 
 	const ERR_BLOCKING = 'issue_blocking';
-	const ERR_WARNING = 'issue_warning';
+	const ERR_WARNING  = 'issue_warning';
 
 	/**
 	 * Runs the diff checks suite.
@@ -46,27 +46,27 @@ class Shipper_Task_Check_Rpkg extends Shipper_Task_Check {
 	 * @return object Shipper_Model_Check instance
 	 */
 	public function is_remote_package_size_acceptable( $remote ) {
-		$check = new Shipper_Model_Check( __( 'Package size', 'shipper' ) );
-		$status = Shipper_Model_Check::STATUS_OK;
+		$check     = new Shipper_Model_Check( __( 'Package size', 'shipper' ) );
+		$status    = Shipper_Model_Check::STATUS_OK;
 		$threshold = Shipper_Model_Stored_Migration::get_package_size_threshold();
 
-		$size = ! empty( $remote['estimated_package_size'] )
+		$size                = ! empty( $remote['estimated_package_size'] )
 			? (int) $remote['estimated_package_size']
 			: 0;
 		$has_existing_export = ! empty( $remote['existing_export'] )
 			? (bool) $remote['existing_export']
 			: false;
 
-		$tpl = new Shipper_Helper_Template;
+		$tpl  = new Shipper_Helper_Template();
 		$args = array(
-			'size' => $size,
+			'size'                => $size,
 			'has_existing_export' => $has_existing_export,
 		);
 		if ( $size > $threshold ) {
 			$status = Shipper_Model_Check::STATUS_WARNING;
 			$check->set( 'title', __( 'Package size is large', 'shipper' ) );
 			$check->set( 'message', $tpl->get( 'checks/remote-package-large', $args ) );
-		} else if ( $size === 0 ) {
+		} elseif ( 0 === $size ) {
 			$status = Shipper_Model_Check::STATUS_WARNING;
 			if ( $has_existing_export ) {
 				$check->set( 'title', __( 'Using existing remote export', 'shipper' ) );

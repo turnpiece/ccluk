@@ -17,14 +17,22 @@
 
 	<h4><?php esc_html_e( 'Status', 'shipper' ); ?></h4>
 	<div class="sui-notice sui-notice-error">
-		<p>
-			<?php
-				echo wp_kses_post( sprintf(
-					__( 'PHP ZipArchive class not found on <b>%s</b>.', 'shipper' ),
-					$domain
-				) );
-			?>
-		</p>
+		<div class="sui-notice-content">
+			<div class="sui-notice-message">
+				<i class="sui-notice-icon sui-icon-info sui-md" aria-hidden="true"></i>
+				<p>
+					<?php
+					echo wp_kses_post(
+						sprintf(
+							// translators: %s: website name.
+							__( 'PHP ZipArchive class not found on <b>%s</b>.', 'shipper' ),
+							$domain
+						)
+					);
+					?>
+				</p>
+			</div>
+		</div>
 	</div>
 
 	<h4><?php esc_html_e( 'How To Fix', 'shipper' ); ?></h4>
@@ -35,7 +43,7 @@
 	</p>
 	<p>
 		<?php
-			esc_html_e( '1. Most hosts have the ZipArchive extension installed and available by default, but it may not be active. Open your cPanel, and under the Software section, click on select the PHP version option. You\'ll see your current PHP version, extensions available, and active PHP extensions. Check the zip option, and click on save to activate it. Note that if the zip option is not available in this list, please contact your hosting support, and ask them to install zip extension for you.'  , 'shipper' );
+			esc_html_e( '1. Most hosts have the ZipArchive extension installed and available by default, but it may not be active. Open your cPanel, and under the Software section, click on select the PHP version option. You\'ll see your current PHP version, extensions available, and active PHP extensions. Check the zip option, and click on save to activate it. Note that if the zip option is not available in this list, please contact your hosting support, and ask them to install zip extension for you.', 'shipper' );
 		?>
 	</p>
 	<p>
@@ -84,15 +92,24 @@
 		?>
 	</p>
 </div>
-<div class="sui-notice-top sui-notice-error sui-can-dismiss shipper-recheck-unsuccessful" style="display:none">
+<div class="sui-notice sui-notice-top sui-notice-error sui-can-dismiss shipper-recheck-unsuccessful" style="display:none">
 	<div class="sui-notice-content">
-		<p>
-			<?php echo wp_kses_post( sprintf(
-				__( 'Zip support is not found on %1$s. Please fix this and check again.', 'shipper' ),
-				$domain
-			) ); ?>
-		</p>
+		<div class="sui-notice-message">
+			<i class="sui-notice-icon sui-icon-info sui-md" aria-hidden="true"></i>
+			<p>
+				<?php
+				echo wp_kses_post(
+					sprintf(
+						// translators: %s: website name.
+						__( 'Zip support is not found on %1$s. Please fix this and check again.', 'shipper' ),
+						$domain
+					)
+				);
+				?>
+			</p>
+		</div>
 	</div>
+
 	<span class="sui-notice-dismiss">
 		<a role="button" href="#" aria-label="Dismiss" class="sui-icon-check"></a>
 	</span>

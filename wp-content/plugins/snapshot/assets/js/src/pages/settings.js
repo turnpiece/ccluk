@@ -8,7 +8,7 @@
 			} else {
 				$('#wps-settings-localdir .wpmud-box-gray').addClass('hidden');
 			}
-		}).change();
+		}).trigger('change');
 
 		// Page: Settings
 		// Add or remove "hidden" from error reporting options
@@ -22,7 +22,7 @@
 				} else {
 					box_child.addClass('hidden');
 				}
-			}).change();
+			}).trigger('change');
 		});
 
 	};

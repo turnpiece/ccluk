@@ -34,6 +34,7 @@ class SWP_Notice_Loader {
 	 *
 	 * @since  3.0.9  | 09 JUN 2018 | Created.
 	 * @since  3.1.0 | 27 JUN 2018 | Updated to use separate methods per notice.
+	 * @since  4.0.1 | 04 APR 2020 | Added the "clear caches" notice.
 	 * @see    SWP_Notice.php
 	 * @param  void
 	 * @return void
@@ -41,7 +42,9 @@ class SWP_Notice_Loader {
 	 */
     public function __construct() {
 		$this->activate_json_notices();
-		$this->debug();
+		$this->activate_clear_caches_notice();
+		// $this->load_persistent_notices();
+		add_action( 'wp_footer', array( $this, 'debug' ) );
     }
 
 
@@ -162,6 +165,49 @@ class SWP_Notice_Loader {
 			 */
 			$this->notices[] = $notice;
 
+		}
+	}
+
+	private function activate_clear_caches_notice() {
+
+		$key = 'clear_caches_' . SWP_VERSION;
+		$message = '<h3>Social Warfare has been updated. If you have installed a caching plugin, please Clear Your Caching Plugins.</h3><b>Congratulations!</b> You\'ve just updated to the latest version of Social Warfare. After updating any plugin or theme, you should be sure to <b>clear all of your site\'s caches</b> (W3 Total Cache, WP Super Cache, etc.) to ensure that all of the newest CSS and Javascript files are being loaded. Loading outdated files is the number one cause of bugs after plugin and theme updates, and <b>clearing your site\'s caches is the solution.</b> Consult your caching plugin documentation for more information about how to clear the cache.';
+
+		new SWP_Notice( $key, $message );
+	}
+
+	public static function create_persistent_notice(  $key = "", $message = "", $ctas = array() ) {
+
+		// Fetch the current array of persistent notices from the database.
+		$notices = get_option( 'social_warfare_persistent_notices', false );
+
+		// If there aren't currently any, then create a default array.
+		if ( false === $notices ) {
+			$notices = array();
+		}
+
+		$notices[$key] = array( 'key' => $key, 'message' => $message, 'ctas' => $ctas );
+		update_option( 'social_warfare_persistent_notices', $notices );
+	}
+
+	private function load_persistent_notices() {
+
+		// Fetch the current array of persistent notices from the database.
+		$notices = get_option( 'social_warfare_persistent_notices', false );
+
+		// If there aren't currently any, then bail out.
+		if ( false === $notices ) {
+			return;
+		}
+
+		foreach( $notices as $notice ) {
+
+			// Each notice needs as least a key and a message.
+			if( empty( $notice['key'] ) || empty( $notice['message'] ) ) {
+				continue;
+			}
+
+			new SWP_Notice( $notice['key'], $notice['message'], $notice['ctas'] );
 		}
 	}
 }

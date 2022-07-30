@@ -1,24 +1,25 @@
 <?php
 /**
- * \PHPCompatibility\ComplexVersionInterface.
+ * PHPCompatibility, an external standard for PHP_CodeSniffer.
  *
- * @category PHP
- * @package  PHPCompatibility
- * @author   Juliette Reinders Folmer <phpcompatibility_nospam@adviesenzo.nl>
+ * @package   PHPCompatibility
+ * @copyright 2012-2019 PHPCompatibility Contributors
+ * @license   https://opensource.org/licenses/LGPL-3.0 LGPL3
+ * @link      https://github.com/PHPCompatibility/PHPCompatibility
  */
 
 namespace PHPCompatibility;
 
+use PHP_CodeSniffer_File as File;
+
 /**
- * \PHPCompatibility\ComplexVersionInterface.
+ * Complex Version Interface.
  *
  * Interface to be implemented by sniffs using a multi-dimensional array of
  * PHP features (functions, classes etc) being sniffed for with version
  * information in sub-arrays.
  *
- * @category PHP
- * @package  PHPCompatibility
- * @author   Juliette Reinders Folmer <phpcompatibility_nospam@adviesenzo.nl>
+ * @since 7.1.0
  */
 interface ComplexVersionInterface
 {
@@ -28,6 +29,8 @@ interface ComplexVersionInterface
      * Handle the retrieval of relevant information and - if necessary - throwing of an
      * error/warning for an item.
      *
+     * @since 7.1.0
+     *
      * @param \PHP_CodeSniffer_File $phpcsFile The file being scanned.
      * @param int                   $stackPtr  The position of the relevant token in
      *                                         the stack.
@@ -35,11 +38,13 @@ interface ComplexVersionInterface
      *
      * @return void
      */
-    public function handleFeature(\PHP_CodeSniffer_File $phpcsFile, $stackPtr, array $itemInfo);
+    public function handleFeature(File $phpcsFile, $stackPtr, array $itemInfo);
 
 
     /**
      * Get the relevant sub-array for a specific item from a multi-dimensional array.
+     *
+     * @since 7.1.0
      *
      * @param array $itemInfo Base information about the item.
      *
@@ -50,6 +55,8 @@ interface ComplexVersionInterface
 
     /**
      * Retrieve the relevant detail (version) information for use in an error message.
+     *
+     * @since 7.1.0
      *
      * @param array $itemArray Version and other information about the item.
      * @param array $itemInfo  Base information about the item.
@@ -62,6 +69,8 @@ interface ComplexVersionInterface
     /**
      * Generates the error or warning for this item.
      *
+     * @since 7.1.0
+     *
      * @param \PHP_CodeSniffer_File $phpcsFile The file being scanned.
      * @param int                   $stackPtr  The position of the relevant token in
      *                                         the stack.
@@ -71,7 +80,5 @@ interface ComplexVersionInterface
      *
      * @return void
      */
-    public function addError(\PHP_CodeSniffer_File $phpcsFile, $stackPtr, array $itemInfo, array $errorInfo);
-
-
-}//end interface
+    public function addError(File $phpcsFile, $stackPtr, array $itemInfo, array $errorInfo);
+}

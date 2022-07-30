@@ -2,7 +2,7 @@
 /**
  * The Google auth class.
  *
- * @link    http://premium.wpmudev.org
+ * @link    http://wpmudev.com
  * @since   3.2.0
  *
  * @author  Joel James <joel@incsub.com>
@@ -14,12 +14,12 @@ namespace Beehive\Core\Modules\Google_Auth;
 // If this file is called directly, abort.
 defined( 'WPINC' ) || die;
 
-use Beehive\Google_Client;
+use Beehive\Google\Client;
 use Beehive\Core\Helpers\Cache;
 use Beehive\Core\Helpers\General;
 use Beehive\Core\Helpers\Permission;
 use Beehive\Core\Utils\Abstracts\Base;
-use Beehive\Google_Service_PeopleService;
+use Beehive\Google\Service\PeopleService;
 
 /**
  * Class Auth
@@ -31,9 +31,9 @@ class Auth extends Base {
 	/**
 	 * Google client instance.
 	 *
-	 * @var Google_Client
-	 *
 	 * @since 3.2.0
+	 *
+	 * @var Client
 	 */
 	private $client;
 
@@ -56,7 +56,7 @@ class Auth extends Base {
 	}
 
 	/**
-	 * Getter method for Google_Client instance.
+	 * Getter method for Client instance.
 	 *
 	 * It will always return the existing client instance.
 	 * If you need new instance set $new param as true.
@@ -65,16 +65,16 @@ class Auth extends Base {
 	 *
 	 * @since 3.2.0
 	 *
-	 * @return Google_Client
+	 * @return Client
 	 */
 	public function client( $new = false ) {
 		// Make sure the autoloader is ready.
 		General::vendor_autoload();
 
 		// If requested for new instance.
-		if ( $new || ! $this->client instanceof Google_Client ) {
+		if ( $new || ! $this->client instanceof Client ) {
 			// Set new instance.
-			$this->client = new Google_Client();
+			$this->client = new Client();
 
 			// Set our application name.
 			$this->client->setApplicationName( General::plugin_name() );
@@ -137,8 +137,8 @@ class Auth extends Base {
 
 		// These are always required.
 		$required_scopes = array(
-			Google_Service_PeopleService::USERINFO_PROFILE,
-			Google_Service_PeopleService::USERINFO_EMAIL,
+			PeopleService::USERINFO_PROFILE,
+			PeopleService::USERINFO_EMAIL,
 		);
 
 		// Merge all scopes.
@@ -163,13 +163,13 @@ class Auth extends Base {
 	/**
 	 * Setup the Google Client instance using default API keys.
 	 *
-	 * This is not a recommeded method. But if user would like to
+	 * This is not a recommended method. But if user would like to
 	 * connect with Google without API keys, we could let them using
 	 * the default hardcoded API keys.
-	 * If client ID is specificed, we will use that client ID and it's
+	 * If client ID is specified, we will use that client ID and it's
 	 * client secret pair.
 	 *
-	 * @param bool   $network Network flag.
+	 * @param bool   $network   Network flag.
 	 * @param string $client_id Client ID.
 	 *
 	 * @since 3.2.0
@@ -201,19 +201,21 @@ class Auth extends Base {
 		 * Filter to change default client ID.
 		 *
 		 * @param string $default_client_id Default client ID.
+		 * @param bool   $network           Network flag.
 		 *
 		 * @since 3.0.0
 		 */
-		$default_client_id = apply_filters( 'beehive_google_default_client_id', $credential['client_id'] );
+		$default_client_id = apply_filters( 'beehive_google_default_client_id', $credential['client_id'], $network );
 
 		/**
 		 * Filter to change default client secret.
 		 *
 		 * @param string $default_client_secret Default client secret.
+		 * @param bool   $network               Network flag.
 		 *
 		 * @since 3.0.0
 		 */
-		$default_client_secret = apply_filters( 'beehive_google_default_client_secret', $credential['client_secret'] );
+		$default_client_secret = apply_filters( 'beehive_google_default_client_secret', $credential['client_secret'], $network );
 
 		// Setup using default credentials.
 		$this->setup( $network, $default_client_id, $default_client_secret );
@@ -315,15 +317,19 @@ class Auth extends Base {
 
 		// Remove the account id and tracking id.
 		if ( $logout ) {
+			beehive_analytics()->settings->update( 'stream', '', 'google', $network );
+			beehive_analytics()->settings->update( 'api_error', false, 'google', $network );
 			beehive_analytics()->settings->update( 'account_id', '', 'google', $network );
 			beehive_analytics()->settings->update( 'auto_track', '', 'misc', $network );
+			beehive_analytics()->settings->update( 'auto_track_ga4', '', 'misc', $network );
 		}
 
-		// Delete profiles from cache.
+		// Delete profiles and streams from cache.
 		Cache::delete_transient( 'google_profiles', $network );
+		Cache::delete_transient( 'google_streams_v3400', $network );
 
 		// Refresh caches.
-		Cache::refresh_transient();
+		Cache::refresh_transient( $network );
 		Cache::refresh_cache();
 
 		/**
@@ -357,7 +363,7 @@ class Auth extends Base {
 		// Prepare for the random selection.
 		foreach ( $client_ids as $key => $client_id ) {
 			if ( isset( $default_creds[ $client_id ]['weight'] ) ) {
-				for ( $i = 0; $i < $default_creds[ $client_id ]['weight']; $i++ ) {
+				for ( $i = 0; $i < $default_creds[ $client_id ]['weight']; $i ++ ) {
 					$keys[] = $key;
 				}
 			}

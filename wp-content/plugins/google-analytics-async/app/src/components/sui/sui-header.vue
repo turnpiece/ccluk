@@ -2,13 +2,18 @@
 	<div class="sui-header">
 		<h1 class="sui-header-title">{{ title }}</h1>
 
+		<div class="sui-actions-left" v-if="hasLeftSlot && leftActions">
+			<!-- Extra left actions -->
+			<slot name="left"></slot>
+		</div>
+
 		<div class="sui-actions-right" v-if="rightActions">
 			<!-- Extra actions -->
 			<slot name="right"></slot>
 			<a
 				v-if="showDocLink && !$vars.whitelabel.hide_doc_link"
 				class="sui-button sui-button-ghost"
-				href="https://premium.wpmudev.org/docs/wpmu-dev-plugins/beehive/"
+				href="https://wpmudev.com/docs/wpmu-dev-plugins/beehive/"
 				target="_blank"
 			>
 				<i class="sui-icon-academy"></i>
@@ -36,6 +41,10 @@ export default {
 			type: String,
 			required: true,
 		},
+		leftActions: {
+			type: Boolean,
+			default: true,
+		},
 		rightActions: {
 			type: Boolean,
 			default: true,
@@ -47,6 +56,19 @@ export default {
 		showTopNotice: {
 			type: Boolean,
 			default: true,
+		},
+	},
+
+	computed: {
+		/**
+		 * Check if content assigned to left slot.
+		 *
+		 * @since 3.3.7
+		 *
+		 * @return {boolean}
+		 */
+		hasLeftSlot() {
+			return !!this.$slots.left
 		},
 	},
 }

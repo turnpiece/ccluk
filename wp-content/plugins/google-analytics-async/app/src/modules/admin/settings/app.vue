@@ -1,45 +1,56 @@
 <template>
 	<!-- Open sui-wrap -->
 	<div class="sui-wrap" id="beehive-wrap">
-		<sui-header :title="$i18n.title.settings">
-			<template v-slot:right>
-				<!-- Button to clear the cached data -->
-				<refresh-button />
-			</template>
-		</sui-header>
+		<black-friday-notice/>
+
+		<sui-header :title="$i18n.title.settings"/>
 
 		<div class="sui-row-with-sidenav">
-			<div class="sui-sidenav">
-				<ul class="sui-vertical-tabs sui-sidenav-hide-md">
-					<router-link
-						class="sui-vertical-tab"
-						tag="li"
-						to="/permissions"
-					>
-						<a>{{ $i18n.menus.permissions }}</a>
-					</router-link>
-				</ul>
-				<div class="sui-sidenav-hide-lg">
-					<sui-select
-						class="sui-mobile-nav"
-						style="display: none;"
-						id="settings-nav"
-						:options="navigation"
-						v-model="selectedPage"
-					/>
+			<div class="sui-sidenav" role="navigation">
+				<div class="sui-sidenav-settings">
+					<ul class="sui-vertical-tabs sui-sidenav-hide-md">
+						<router-link
+							class="sui-vertical-tab"
+							tag="li"
+							to="/general"
+						>
+							<a>{{ $i18n.title.general }}</a>
+						</router-link>
+						<router-link
+							class="sui-vertical-tab"
+							tag="li"
+							to="/data"
+						>
+							<a>{{ $i18n.title.data_settings }}</a>
+						</router-link>
+						<router-link
+							class="sui-vertical-tab"
+							tag="li"
+							to="/permissions"
+							v-if="showPermissions"
+						>
+							<a>{{ $i18n.menus.permissions }}</a>
+						</router-link>
+					</ul>
+
+					<mobile-nav :selected="$route.path" :paths="getNavs"/>
 				</div>
 			</div>
-			<router-view :processing="processing" @submit="saveSettings" />
+
+			<router-view :processing="processing" @submit="saveSettings"/>
 		</div>
 
-		<sui-footer />
+		<sui-footer/>
 
 		<!-- Onboarding start -->
-		<onboarding v-if="showOnboarding" />
+		<onboarding v-if="showOnboarding"/>
 		<!-- Onboarding end -->
 		<!-- Welcome modal -->
-		<welcome-modal v-else-if="showWelcome" />
+		<welcome-modal v-else-if="showWelcome"/>
 		<!-- welcome modal end -->
+
+		<!-- Reset confirmation modal -->
+		<reset-confirmation/>
 	</div>
 	<!-- Close sui-wrap -->
 </template>
@@ -48,9 +59,11 @@
 import Onboarding from './../onboarding/onboarding'
 import SuiHeader from '@/components/sui/sui-header'
 import SuiFooter from '@/components/sui/sui-footer'
-import SuiSelect from '@/components/sui/sui-select'
-import RefreshButton from '@/components/elements/refresh-button'
+import {hasPermissionsAccess} from '@/helpers/utils'
+import MobileNav from '@/components/elements/mobile-nav'
 import WelcomeModal from '@/components/elements/modals/welcome-modal'
+import ResetConfirmation from './tabs/data/modals/reset-confirmation'
+import BlackFridayNotice from '@/components/elements/black-friday-notice'
 
 export default {
 	name: 'App',
@@ -58,19 +71,16 @@ export default {
 	components: {
 		SuiHeader,
 		SuiFooter,
-		SuiSelect,
+		MobileNav,
 		Onboarding,
 		WelcomeModal,
-		RefreshButton,
+		ResetConfirmation,
+		BlackFridayNotice,
 	},
 
 	data() {
 		return {
 			processing: false,
-			selectedPage: '#' + this.$route.path,
-			navigation: {
-				'#/permissions': this.$i18n.menus.permissions,
-			},
 		}
 	},
 
@@ -114,6 +124,26 @@ export default {
 		},
 
 		/**
+		 * Get the navigation items.
+		 *
+		 * @since 3.3.5
+		 *
+		 * @returns {*}
+		 */
+		getNavs() {
+			let navs = {
+				'/general': this.$i18n.title.general,
+				'/data': this.$i18n.title.data_settings,
+			}
+
+			if (this.showPermissions) {
+				navs['/permissions'] = this.$i18n.menus.permissions
+			}
+
+			return navs
+		},
+
+		/**
 		 * Check if we can show welcome modal.
 		 *
 		 * @since 3.2.5
@@ -137,6 +167,21 @@ export default {
 			} else {
 				return false
 			}
+		},
+
+		/**
+		 * Check if we can show the permissions tab.
+		 *
+		 * If statistics and permissions settings are not allowed
+		 * by network admin on multisite, hide permissions tab.
+		 *
+		 * @since 3.2.4
+		 * @since 3.2.5 Added settings permissions.
+		 *
+		 * @returns {boolean}
+		 */
+		showPermissions() {
+			return hasPermissionsAccess()
 		},
 	},
 

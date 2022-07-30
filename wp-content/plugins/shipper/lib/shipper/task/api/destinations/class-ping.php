@@ -24,8 +24,7 @@ class Shipper_Task_Api_Destinations_Ping extends Shipper_Task_Api {
 	public function apply( $args = array() ) {
 		$domain = ! empty( $args['domain'] )
 			? $args['domain']
-			: false
-		;
+			: false;
 
 		if ( empty( $domain ) ) {
 			$this->clear_cached_api_response( 'destinations-ping' );
@@ -36,15 +35,20 @@ class Shipper_Task_Api_Destinations_Ping extends Shipper_Task_Api {
 			return false;
 		}
 
-		$status = $this->get_response( 'destinations-ping', self::METHOD_GET, array(
-			'domain' => $domain,
-		));
+		$status = $this->get_response(
+			'destinations-ping',
+			self::METHOD_GET,
+			array(
+				'domain' => $domain,
+			)
+		);
 
 		if ( empty( $status['success'] ) ) {
 			$this->record_non_success(
 				'destinations-ping',
 				self::ERR_SERVICE,
 				sprintf(
+					/* translators: %s: domain name. */
 					__( 'Domain %s is not Hub-accessible', 'shipper' ),
 					$domain
 				)

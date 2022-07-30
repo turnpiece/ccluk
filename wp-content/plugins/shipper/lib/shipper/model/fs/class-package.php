@@ -8,7 +8,6 @@
  * @package shipper
  */
 
-
 /**
  * Shipper filesystem package model class
  */
@@ -23,14 +22,8 @@ class Shipper_Model_Fs_Package {
 	 *
 	 * @return string
 	 */
-	static public function get_root_path() {
-		$fallback = trailingslashit( Shipper_Helper_Fs_Path::get_log_dir() ) .
-			self::DIRECTORY;
-		$model = new Shipper_Model_Stored_Options;
-		return $model->get(
-			Shipper_Model_Stored_Options::KEY_PACKAGE_LOCATION,
-			$fallback
-		);
+	public static function get_root_path() {
+		return trailingslashit( Shipper_Helper_Fs_Path::get_log_dir() ) . self::DIRECTORY;
 	}
 
 	/**
@@ -40,7 +33,7 @@ class Shipper_Model_Fs_Package {
 	 *
 	 * @return string
 	 */
-	static public function get_root() {
+	public static function get_root() {
 		$path = self::get_root_path();
 
 		if ( ! is_dir( $path ) ) {
@@ -60,7 +53,7 @@ class Shipper_Model_Fs_Package {
 	 *
 	 * @return bool
 	 */
-	static public function has_package() {
+	public static function has_package() {
 		$files = self::get_packages();
 		return ! empty( $files );
 	}
@@ -70,7 +63,7 @@ class Shipper_Model_Fs_Package {
 	 *
 	 * @return string|bool Absolute path to a package zip, or (bool)false on failure
 	 */
-	static public function get_package() {
+	public static function get_package() {
 		$files = self::get_packages();
 		return ! empty( $files )
 			? reset( $files )
@@ -82,9 +75,9 @@ class Shipper_Model_Fs_Package {
 	 *
 	 * @return array
 	 */
-	static public function get_packages() {
+	public static function get_packages() {
 		$files = shipper_glob_all( self::get_root() );
-		$zips = array();
+		$zips  = array();
 		foreach ( $files as $file ) {
 			if ( ! preg_match( '/\.zip$/', $file ) ) {
 				continue;

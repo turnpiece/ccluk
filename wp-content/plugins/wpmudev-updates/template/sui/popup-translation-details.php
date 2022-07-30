@@ -7,26 +7,30 @@
  */
 
 ?>
+<div class="sui-modal sui-modal-sm">
+	<div
+	role="dialog"
+	id="update-translation-modal"
+	class="sui-modal-content"
+	aria-modal="true"
+	aria-labelledby="update-translation-modal-title"
+	aria-describedby="update-translation-modal-desc"
+	>
+		<div class="sui-box">
+			<div class="sui-box-header sui-flatten sui-content-center sui-spacing-top--60">
 
-<div class="sui-dialog sui-dialog-alt sui-dialog-sm" aria-hidden="true" tabindex="-1" id="translation-details">
+				<button class="sui-button-icon sui-button-float--right" data-modal-close="">
+					<i class="sui-icon-close sui-md" aria-hidden="true"></i>
+					<span class="sui-screen-reader-text"><?php esc_html_e( 'Close this dialog.', 'wpmudev' ); ?></span>
+				</button>
 
-	<div class="sui-dialog-overlay" data-a11y-dialog-hide></div>
+				<h3 id="update-translation-modal-title" class="sui-box-title sui-lg"><?php esc_html_e( 'Update Translations', 'wpmudev' ); ?></h3>
 
-	<div class="sui-dialog-content" aria-labelledby="dialogTitle" aria-describedby="dialogDescription" role="dialog">
+				<p id="update-translation-modal-desc" class="sui-description"><?php esc_html_e( 'Choose which translations you want to update today.', 'wpmudev' ); ?></p>
 
-		<div class="sui-box" role="document">
-
-			<div class="sui-box-header sui-block-content-center">
-				<h3 class="sui-box-title" id="dialogTitle"><?php esc_html_e( 'Update Translations', 'wpmudev' ); ?></h3>
-				<div class="sui-actions-right">
-					<button data-a11y-dialog-hide="sample-dialog--alt-basic-sm" class="sui-dialog-close" aria-label="Close this dialog window"></button>
-				</div>
 			</div>
 
-			<div class="sui-box-body sui-box-body-slim sui-block-content-center">
-				<p id="dialogDescription" class="sui-description">
-					<?php esc_html_e( 'Choose which translations you want to update today.', 'wpmudev' ); ?>
-				</p>
+			<div class="sui-box-body">
 				<?php foreach ( $translation_update as $key => $value ) { ?>
 
 					<div class="sui-form-field" style="margin-bottom:5px;">
@@ -42,19 +46,25 @@
 						</label>
 					</div>
 				<?php } ?>
-
 			</div>
 
 			<div class="sui-box-footer sui-space-between" style="border-top: 1px solid #e6e6e6; padding:30px">
 
-				<button class="sui-button sui-button-ghost" data-a11y-dialog-hide="translation-details"><?php esc_html_e( 'Cancel', 'wpmudev' ); ?></button>
-
-				<button class="sui-modal-close sui-button sui-button-blue" id="update-selected-translations" disabled="disabled">
+				<button class="sui-button sui-button-ghost" data-modal-close="" data-a11y-dialog-hide="translation-details"><?php esc_html_e( 'Cancel', 'wpmudev' ); ?></button>
+				<button
+				id="update-selected-translations"
+				data-modal-open="bulk-action-translation-modal"
+				data-modal-mask="true"
+				data-replace="true"
+				data-trigger="wpmudev:startTranslation"
+				class="sui-button modal-open"
+				disabled="disabled"
+				>
 					<span class="sui-loading-text">
-                        <i class="sui-icon-update" aria-hidden="true"></i>
-					    <?php esc_html_e( 'Update', 'wpmudev' ); ?>
+						<i class="sui-icon-update" aria-hidden="true"></i>
+						<?php esc_html_e( 'Update', 'wpmudev' ); ?>
 					</span>
-                    <i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
+					<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
 				</button>
 
 			</div>
@@ -63,4 +73,55 @@
 
 	</div>
 
+</div>
+
+<?php // bulk action. ?>
+<div class="sui-modal sui-modal-sm">
+	<div
+	role="dialog"
+	id="bulk-action-translation-modal"
+	class="sui-modal-content"
+	aria-modal="true"
+	aria-labelledby="wpmudev-update-translation-title"
+	aria-describedby="wpmudev-update-translation-desc"
+	>
+		<div class="sui-box">
+
+			<div class="sui-box-header sui-flatten sui-content-center sui-spacing-top--60">
+
+				<h3 id="wpmudev-update-translation-title" class="sui-box-title sui-lg"><?php esc_html_e( 'Updating Translations', 'wpmudev' ); ?></h3>
+
+				<p id="wpmudev-update-translation-desc" class="sui-description"><?php esc_html_e( 'Please wait while we download and install those translations for you.', 'wpmudev' ); ?></p>
+
+			</div>
+			<div class="sui-box-body">
+				<div class="sui-notice sui-notice-warning js-bulk-errors" style="text-align:left"></div>
+
+				<div class="sui-progress-block">
+
+					<div class="sui-progress">
+
+						<span class="sui-progress-icon js-bulk-actions-loader-icon" aria-hidden="true">
+							<i class="sui-icon-loader sui-loading"></i>
+						</span>
+
+						<span class="sui-progress-text">
+							<span>0%</span>
+						</span>
+
+						<div class="sui-progress-bar" aria-hidden="true">
+							<span style="width: 0%" class="js-bulk-actions-progress"></span>
+						</div>
+					</div>
+				</div>
+
+				<div class="sui-progress-state">
+					<span class="js-bulk-actions-state"></span>
+				</div>
+
+				<div class="sui-hidden js-bulk-hash" data-translation-update="<?php echo esc_attr( wp_create_nonce( 'translation-update' ) ); ?>"></div>
+
+			</div>
+		</div>
+	</div>
 </div>

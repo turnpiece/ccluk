@@ -2,7 +2,7 @@
 /**
  * The internationalization class of the plugin.
  *
- * @link    http://premium.wpmudev.org
+ * @link    http://wpmudev.com
  * @since   3.2.4
  *
  * @author  Joel James <joel@incsub.com>
@@ -97,7 +97,15 @@ class I18n extends Base {
 					Locale::settings(),
 					Locale::onboarding(),
 					Locale::auth_form(),
-					Locale::welcome()
+					Locale::welcome(),
+					Locale::tutorials()
+				);
+				break;
+			case 'beehive-tutorials':
+				// Add strings.
+				$strings = array_merge_recursive(
+					$strings,
+					Locale::tutorials()
 				);
 				break;
 		}

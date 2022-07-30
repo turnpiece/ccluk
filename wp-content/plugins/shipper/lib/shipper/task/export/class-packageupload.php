@@ -21,16 +21,16 @@ class Shipper_Task_Export_PackageUpload extends Shipper_Task_Export {
 	 * @return bool
 	 */
 	public function apply( $args = array() ) {
-		$this->_has_done_anything = true;
+		$this->has_done_anything = true;
 
 		$packages    = new Shipper_Model_Dumped_Packagelist();
-		$migration   = new Shipper_Model_Stored_Migration;
+		$migration   = new Shipper_Model_Stored_Migration();
 		$dest_root   = Shipper_Helper_Fs_Path::clean_fname( $migration->get_destination() );
 		$pos         = $this->get_initialized_position();
 		$shipper_pos = $pos;
 		$data        = $packages->get_statements( $pos );
 		if ( empty( $data ) ) {
-			//mean this is done, reset the pointer
+			// mean this is done, reset the pointer.
 			return true;
 		}
 
@@ -41,6 +41,7 @@ class Shipper_Task_Export_PackageUpload extends Shipper_Task_Export {
 
 		if ( ! is_readable( $path ) ) {
 			Shipper_Helper_Log::write(
+				/* translators: %s: file path. */
 				sprintf( 'File unreadable: %s', $path )
 			);
 			$this->set_initialized_position( $shipper_pos + 1 );
@@ -50,9 +51,10 @@ class Shipper_Task_Export_PackageUpload extends Shipper_Task_Export {
 
 		$filesize = filesize( $path );
 		Shipper_Helper_Log::debug(
+			/* translators: %1$s %2$s: file path, and file size*/
 			sprintf( 'Uploading %1$s, size: %2$s', $path, size_format( $filesize ) )
 		);
-		$remote = new Shipper_Helper_Fs_Remote;
+		$remote = new Shipper_Helper_Fs_Remote();
 		try {
 			$destination = trailingslashit( $dest_root ) . $data['destination'];
 			$progress    = $remote->upload(
@@ -62,8 +64,10 @@ class Shipper_Task_Export_PackageUpload extends Shipper_Task_Export {
 		} catch ( Exception $e ) {
 			Shipper_Helper_Log::write(
 				sprintf(
+					/* translators: %1$s %2$s: file path, error message. */
 					__( 'Unable to upload %1$s: %2$s', 'shipper' ),
-					$path, $e->getMessage()
+					$path,
+					$e->getMessage()
 				)
 			);
 			$this->set_initialized_position( $shipper_pos + 1 );
@@ -74,8 +78,10 @@ class Shipper_Task_Export_PackageUpload extends Shipper_Task_Export {
 		if ( $progress->has_error() ) {
 			Shipper_Helper_Log::write(
 				sprintf(
+					/* translators: %1$s %2$s: file path, error message. */
 					__( 'Unable to upload %1$s: %2$s', 'shipper' ),
-					$path, $progress->get_error()
+					$path,
+					$progress->get_error()
 				)
 			);
 			$this->set_initialized_position( $shipper_pos + 1 );
@@ -84,12 +90,14 @@ class Shipper_Task_Export_PackageUpload extends Shipper_Task_Export {
 		}
 
 		if ( $progress->is_done() ) {
-			$shipper_pos += 1;
+			$shipper_pos ++;
 			if ( ! $this->set_initialized_position( $shipper_pos ) ) {
 				// List got re-initialized - cancel.
 
 				return true;
 			}
+			// remove the package.
+			@unlink( $path );
 		}
 
 		$statements = $packages->get_statements( $shipper_pos );
@@ -156,9 +164,16 @@ class Shipper_Task_Export_PackageUpload extends Shipper_Task_Export {
 		return 'cloud';
 	}
 
+	/**
+	 * Get initialized position.
+	 *
+	 * @param false $filelist list of files.
+	 *
+	 * @return false|int|mixed
+	 */
 	public function get_initialized_position( $filelist = false ) {
 		if ( empty( $filelist ) ) {
-			$filelist = new Shipper_Model_Stored_Filelist;
+			$filelist = new Shipper_Model_Stored_Filelist();
 		}
 
 		$pos = $filelist->get( Shipper_Model_Stored_Filelist::KEY_CURSOR, false );
@@ -180,12 +195,12 @@ class Shipper_Task_Export_PackageUpload extends Shipper_Task_Export {
 	 */
 	public function get_initialized_position1( $filelist = false ) {
 		if ( empty( $filelist ) ) {
-			$filelist = new Shipper_Model_Stored_Filelist;
+			$filelist = new Shipper_Model_Stored_Filelist();
 		}
 
 		$pos          = $filelist->get( Shipper_Model_Stored_Filelist::KEY_CURSOR, false );
 		$current_task = $filelist->get( Shipper_Model_Stored_Filelist::KEY_CURRENT_TASK, false );
-		if ( $current_task != __CLASS__ ) {
+		if ( __CLASS__ !== $current_task ) {
 			$pos = false;
 		}
 		if ( false === $pos ) {
@@ -203,14 +218,14 @@ class Shipper_Task_Export_PackageUpload extends Shipper_Task_Export {
 	 *
 	 * Shorts out if necessary.
 	 *
-	 * @param int $position Position to set.
+	 * @param int    $position Position to set.
 	 * @param object $filelist Stored filelist model instance to use (optional, used in tests).
 	 *
 	 * @return bool False if short-circuited, true on success
 	 */
 	public function set_initialized_position( $position, $filelist = false ) {
 		if ( empty( $filelist ) ) {
-			$filelist = new Shipper_Model_Stored_Filelist;
+			$filelist = new Shipper_Model_Stored_Filelist();
 		}
 
 		$newpos = $filelist->get( Shipper_Model_Stored_Filelist::KEY_CURSOR, false );
@@ -246,11 +261,14 @@ class Shipper_Task_Export_PackageUpload extends Shipper_Task_Export {
 	 */
 	public function get_work_description() {
 		$desc = sprintf(
+			/* translators: %1$s %2$s: current step and total step. */
 			__( '( %1$d of %2$d total )', 'shipper' ),
-			$this->get_current_step(), $this->get_total_steps()
+			$this->get_current_step(),
+			$this->get_total_steps()
 		);
 
 		return sprintf(
+			/* translators: %s: description. */
 			__( 'Upload package %s', 'shipper' ),
 			$desc
 		);

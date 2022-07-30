@@ -22,7 +22,7 @@ final class RequestOptions
      * - strict: (bool, default=false) Set to true to use strict redirects
      *   meaning redirect POST requests with POST requests vs. doing what most
      *   browsers do which is redirect POST requests with GET requests
-     * - referer: (bool, default=true) Set to false to disable the Referer
+     * - referer: (bool, default=false) Set to true to enable the Referer
      *   header.
      * - protocols: (array, default=['http', 'https']) Allowed redirect
      *   protocols.
@@ -133,6 +133,14 @@ final class RequestOptions
     const HTTP_ERRORS = 'http_errors';
 
     /**
+     * idn: (bool|int, default=true) A combination of IDNA_* constants for
+     * idn_to_ascii() PHP's function (see "options" parameter). Set to false to
+     * disable IDN support completely, or to true to use the default
+     * configuration (IDNA_DEFAULT constant).
+     */
+    const IDN_CONVERSION = 'idn_conversion';
+
+    /**
      * json: (mixed) Adds JSON data to a request. The provided value is JSON
      * encoded and a Content-Type header of application/json will be added to
      * the request if no Content-Type header is already present.
@@ -238,7 +246,18 @@ final class RequestOptions
     const TIMEOUT = 'timeout';
 
     /**
+     * read_timeout: (float, default=default_socket_timeout ini setting) Float describing
+     * the body read timeout, for stream requests.
+     */
+    const READ_TIMEOUT = 'read_timeout';
+
+    /**
      * version: (float) Specifies the HTTP protocol version to attempt to use.
      */
     const VERSION = 'version';
+
+    /**
+     * force_ip_resolve: (bool) Force client to use only ipv4 or ipv6 protocol
+     */
+    const FORCE_IP_RESOLVE = 'force_ip_resolve';
 }

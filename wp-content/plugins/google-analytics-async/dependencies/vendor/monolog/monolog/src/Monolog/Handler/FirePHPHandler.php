@@ -16,7 +16,7 @@ use Beehive\Monolog\Formatter\WildfireFormatter;
  *
  * @author Eric Clemmons (@ericclemmons) <eric@uxdriven.com>
  */
-class FirePHPHandler extends \Beehive\Monolog\Handler\AbstractProcessingHandler
+class FirePHPHandler extends AbstractProcessingHandler
 {
     /**
      * WildFire JSON header message format
@@ -61,7 +61,7 @@ class FirePHPHandler extends \Beehive\Monolog\Handler\AbstractProcessingHandler
      *
      * @see createHeader()
      * @param  array  $record
-     * @return string
+     * @return array
      */
     protected function createRecordHeader(array $record)
     {
@@ -74,7 +74,7 @@ class FirePHPHandler extends \Beehive\Monolog\Handler\AbstractProcessingHandler
      */
     protected function getDefaultFormatter()
     {
-        return new \Beehive\Monolog\Formatter\WildfireFormatter();
+        return new WildfireFormatter();
     }
     /**
      * Wildfire initialization headers to enable message parsing

@@ -17,7 +17,7 @@ use Beehive\Psr\Log\LoggerInterface;
  *
  * @author Michael Moussa <michael.moussa@gmail.com>
  */
-class PsrHandler extends \Beehive\Monolog\Handler\AbstractHandler
+class PsrHandler extends AbstractHandler
 {
     /**
      * PSR-3 compliant logger
@@ -30,7 +30,7 @@ class PsrHandler extends \Beehive\Monolog\Handler\AbstractHandler
      * @param int             $level  The minimum logging level at which this handler will be triggered
      * @param bool            $bubble Whether the messages that are handled can bubble up the stack or not
      */
-    public function __construct(\Beehive\Psr\Log\LoggerInterface $logger, $level = \Beehive\Monolog\Logger::DEBUG, $bubble = \true)
+    public function __construct(LoggerInterface $logger, $level = Logger::DEBUG, $bubble = \true)
     {
         parent::__construct($level, $bubble);
         $this->logger = $logger;

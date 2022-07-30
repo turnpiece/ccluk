@@ -5,42 +5,36 @@
 		<fragment v-if="!$vars.whitelabel.hide_branding">
 			<ul v-if="$vars.flags.is_pro" class="sui-footer-nav">
 				<li>
-					<a href="https://premium.wpmudev.org/hub/" target="_blank">
+					<a href="https://wpmudev.com/hub2/" target="_blank">
 						{{ $i18n.footer.hub }}
 					</a>
 				</li>
 				<li>
 					<a
-						href="https://premium.wpmudev.org/projects/category/plugins/"
+						href="https://wpmudev.com/projects/category/plugins/"
 						target="_blank"
 					>
 						{{ $i18n.footer.plugins }}
 					</a>
 				</li>
 				<li>
-					<a
-						href="https://premium.wpmudev.org/roadmap/"
-						target="_blank"
-					>
+					<a href="https://wpmudev.com/roadmap/" target="_blank">
 						{{ $i18n.footer.roadmap }}
 					</a>
 				</li>
 				<li>
-					<a
-						href="https://premium.wpmudev.org/hub/support/"
-						target="_blank"
-					>
+					<a href="https://wpmudev.com/hub/support/" target="_blank">
 						{{ $i18n.footer.support }}
 					</a>
 				</li>
 				<li>
-					<a href="https://premium.wpmudev.org/docs/" target="_blank">
+					<a href="https://wpmudev.com/docs/" target="_blank">
 						{{ $i18n.footer.docs }}
 					</a>
 				</li>
 				<li>
 					<a
-						href="https://premium.wpmudev.org/hub/community/"
+						href="https://wpmudev.com/hub2/community/"
 						target="_blank"
 					>
 						{{ $i18n.footer.community }}
@@ -48,15 +42,7 @@
 				</li>
 				<li>
 					<a
-						href="https://premium.wpmudev.org/academy/"
-						target="_blank"
-					>
-						{{ $i18n.footer.academy }}
-					</a>
-				</li>
-				<li>
-					<a
-						href="https://premium.wpmudev.org/terms-of-service/"
+						href="https://wpmudev.com/terms-of-service/"
 						target="_blank"
 					>
 						{{ $i18n.footer.tos }}
@@ -81,18 +67,12 @@
 					</a>
 				</li>
 				<li>
-					<a
-						href="https://premium.wpmudev.org/features/"
-						target="_blank"
-					>
+					<a href="https://wpmudev.com/features/" target="_blank">
 						{{ $i18n.footer.membership }}
 					</a>
 				</li>
 				<li>
-					<a
-						href="https://premium.wpmudev.org/roadmap/"
-						target="_blank"
-					>
+					<a href="https://wpmudev.com/roadmap/" target="_blank">
 						{{ $i18n.footer.roadmap }}
 					</a>
 				</li>
@@ -105,21 +85,18 @@
 					</a>
 				</li>
 				<li>
-					<a href="https://premium.wpmudev.org/docs/" target="_blank">
+					<a href="https://wpmudev.com/docs/" target="_blank">
 						{{ $i18n.footer.docs }}
 					</a>
 				</li>
 				<li>
-					<a
-						href="https://premium.wpmudev.org/hub-welcome/"
-						target="_blank"
-					>
+					<a href="https://wpmudev.com/hub-welcome/" target="_blank">
 						{{ $i18n.footer.hub }}
 					</a>
 				</li>
 				<li>
 					<a
-						href="https://premium.wpmudev.org/terms-of-service/"
+						href="https://wpmudev.com/terms-of-service/"
 						target="_blank"
 					>
 						{{ $i18n.footer.tos }}

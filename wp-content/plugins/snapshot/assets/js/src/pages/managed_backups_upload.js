@@ -29,8 +29,8 @@
 			},
 			update_progress: function (completed_steps, total_steps) {
 				if (
-					!$.isNumeric(completed_steps)
-					|| !$.isNumeric(total_steps)
+					isNaN(parseInt(completed_steps))
+					|| isNaN(parseInt(total_steps))
 					|| parseInt(total_steps) < 1
 				) {
 					return;

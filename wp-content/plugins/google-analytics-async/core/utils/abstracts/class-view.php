@@ -2,7 +2,7 @@
 /**
  * The view base class of the plugin.
  *
- * @link    http://premium.wpmudev.org
+ * @link    http://wpmudev.com
  * @since   3.2.0
  *
  * @author  Joel James <joel@incsub.com>
@@ -46,33 +46,5 @@ class View extends Base {
 			/* @noinspection PhpIncludeInspection */
 			include $file_name;
 		}
-	}
-
-	/**
-	 * Render notification template.
-	 *
-	 * @param string $content Notice content.
-	 * @param string $type    Notice type.
-	 * @param bool   $top     Is this a top notice?.
-	 * @param bool   $dismiss Is a dismissble notice?.
-	 *
-	 * @since 3.2.0
-	 *
-	 * @return void
-	 */
-	public function notice( $content, $type = 'success', $top = true, $dismiss = true ) {
-		// Available notice types.
-		$types = array( 'success', 'warning', 'error', 'info', 'purple', 'orange', 'loading' );
-
-		// Render notice.
-		$this->view(
-			'settings/common/notice',
-			array(
-				'content' => $content,
-				'type'    => in_array( $type, $types, true ) ? $type : '',
-				'top'     => $top,
-				'dismiss' => $dismiss,
-			)
-		);
 	}
 }

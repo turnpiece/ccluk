@@ -54,7 +54,7 @@ use InvalidArgumentException;
  *
  *   $res = $client->get('myproject/taskqueues/myqueue');
  */
-class GCECredentials extends \Beehive\Google\Auth\CredentialsLoader implements \Beehive\Google\Auth\SignBlobInterface, \Beehive\Google\Auth\ProjectIdProviderInterface, \Beehive\Google\Auth\GetQuotaProjectInterface
+class GCECredentials extends CredentialsLoader implements SignBlobInterface, ProjectIdProviderInterface, GetQuotaProjectInterface
 {
     // phpcs:disable
     const cacheKey = 'GOOGLE_AUTH_PHP_GCE';
@@ -152,11 +152,11 @@ class GCECredentials extends \Beehive\Google\Auth\CredentialsLoader implements \
      * @param string $serviceAccountIdentity [optional] Specify a service
      *   account identity name to use instead of "default".
      */
-    public function __construct(\Beehive\Google\Auth\Iam $iam = null, $scope = null, $targetAudience = null, $quotaProject = null, $serviceAccountIdentity = null)
+    public function __construct(Iam $iam = null, $scope = null, $targetAudience = null, $quotaProject = null, $serviceAccountIdentity = null)
     {
         $this->iam = $iam;
         if ($scope && $targetAudience) {
-            throw new \InvalidArgumentException('Scope and targetAudience cannot both be supplied');
+            throw new InvalidArgumentException('Scope and targetAudience cannot both be supplied');
         }
         $tokenUri = self::getTokenUri($serviceAccountIdentity);
         if ($scope) {
@@ -252,7 +252,7 @@ class GCECredentials extends \Beehive\Google\Auth\CredentialsLoader implements \
      */
     public static function onGce(callable $httpHandler = null)
     {
-        $httpHandler = $httpHandler ?: \Beehive\Google\Auth\HttpHandler\HttpHandlerFactory::build(\Beehive\Google\Auth\HttpHandler\HttpClientCache::getHttpClient());
+        $httpHandler = $httpHandler ?: HttpHandlerFactory::build(HttpClientCache::getHttpClient());
         $checkUri = 'http://' . self::METADATA_IP;
         for ($i = 1; $i <= self::MAX_COMPUTE_PING_TRIES; $i++) {
             try {
@@ -264,12 +264,12 @@ class GCECredentials extends \Beehive\Google\Auth\CredentialsLoader implements \
                 // could lead to false negatives in the event that we are on GCE, but
                 // the metadata resolution was particularly slow. The latter case is
                 // "unlikely".
-                $resp = $httpHandler(new \Beehive\GuzzleHttp\Psr7\Request('GET', $checkUri, [self::FLAVOR_HEADER => 'Google']), ['timeout' => self::COMPUTE_PING_CONNECTION_TIMEOUT_S]);
+                $resp = $httpHandler(new Request('GET', $checkUri, [self::FLAVOR_HEADER => 'Google']), ['timeout' => self::COMPUTE_PING_CONNECTION_TIMEOUT_S]);
                 return $resp->getHeaderLine(self::FLAVOR_HEADER) == 'Google';
-            } catch (\Beehive\GuzzleHttp\Exception\ClientException $e) {
-            } catch (\Beehive\GuzzleHttp\Exception\ServerException $e) {
-            } catch (\Beehive\GuzzleHttp\Exception\RequestException $e) {
-            } catch (\Beehive\GuzzleHttp\Exception\ConnectException $e) {
+            } catch (ClientException $e) {
+            } catch (ServerException $e) {
+            } catch (RequestException $e) {
+            } catch (ConnectException $e) {
             }
         }
         return \false;
@@ -295,7 +295,7 @@ class GCECredentials extends \Beehive\Google\Auth\CredentialsLoader implements \
      */
     public function fetchAuthToken(callable $httpHandler = null)
     {
-        $httpHandler = $httpHandler ?: \Beehive\Google\Auth\HttpHandler\HttpHandlerFactory::build(\Beehive\Google\Auth\HttpHandler\HttpClientCache::getHttpClient());
+        $httpHandler = $httpHandler ?: HttpHandlerFactory::build(HttpClientCache::getHttpClient());
         if (!$this->hasCheckedOnGce) {
             $this->isOnGce = self::onGce($httpHandler);
             $this->hasCheckedOnGce = \true;
@@ -311,9 +311,9 @@ class GCECredentials extends \Beehive\Google\Auth\CredentialsLoader implements \
         if (null === ($json = \json_decode($response, \true))) {
             throw new \Exception('Invalid JSON response');
         }
+        $json['expires_at'] = \time() + $json['expires_in'];
         // store this so we can retrieve it later
         $this->lastReceivedToken = $json;
-        $this->lastReceivedToken['expires_at'] = \time() + $json['expires_in'];
         return $json;
     }
     /**
@@ -346,7 +346,7 @@ class GCECredentials extends \Beehive\Google\Auth\CredentialsLoader implements \
         if ($this->clientName) {
             return $this->clientName;
         }
-        $httpHandler = $httpHandler ?: \Beehive\Google\Auth\HttpHandler\HttpHandlerFactory::build(\Beehive\Google\Auth\HttpHandler\HttpClientCache::getHttpClient());
+        $httpHandler = $httpHandler ?: HttpHandlerFactory::build(HttpClientCache::getHttpClient());
         if (!$this->hasCheckedOnGce) {
             $this->isOnGce = self::onGce($httpHandler);
             $this->hasCheckedOnGce = \true;
@@ -367,17 +367,22 @@ class GCECredentials extends \Beehive\Google\Auth\CredentialsLoader implements \
      * @param string $stringToSign The string to sign.
      * @param bool $forceOpenSsl [optional] Does not apply to this credentials
      *        type.
+     * @param string $accessToken The access token to use to sign the blob. If
+     *        provided, saves a call to the metadata server for a new access
+     *        token. **Defaults to** `null`.
      * @return string
      */
-    public function signBlob($stringToSign, $forceOpenSsl = \false)
+    public function signBlob($stringToSign, $forceOpenSsl = \false, $accessToken = null)
     {
-        $httpHandler = \Beehive\Google\Auth\HttpHandler\HttpHandlerFactory::build(\Beehive\Google\Auth\HttpHandler\HttpClientCache::getHttpClient());
+        $httpHandler = HttpHandlerFactory::build(HttpClientCache::getHttpClient());
         // Providing a signer is useful for testing, but it's undocumented
         // because it's not something a user would generally need to do.
-        $signer = $this->iam ?: new \Beehive\Google\Auth\Iam($httpHandler);
+        $signer = $this->iam ?: new Iam($httpHandler);
         $email = $this->getClientName($httpHandler);
-        $previousToken = $this->getLastReceivedToken();
-        $accessToken = $previousToken ? $previousToken['access_token'] : $this->fetchAuthToken($httpHandler)['access_token'];
+        if (\is_null($accessToken)) {
+            $previousToken = $this->getLastReceivedToken();
+            $accessToken = $previousToken ? $previousToken['access_token'] : $this->fetchAuthToken($httpHandler)['access_token'];
+        }
         return $signer->signBlob($email, $accessToken, $stringToSign);
     }
     /**
@@ -393,7 +398,7 @@ class GCECredentials extends \Beehive\Google\Auth\CredentialsLoader implements \
         if ($this->projectId) {
             return $this->projectId;
         }
-        $httpHandler = $httpHandler ?: \Beehive\Google\Auth\HttpHandler\HttpHandlerFactory::build(\Beehive\Google\Auth\HttpHandler\HttpClientCache::getHttpClient());
+        $httpHandler = $httpHandler ?: HttpHandlerFactory::build(HttpClientCache::getHttpClient());
         if (!$this->hasCheckedOnGce) {
             $this->isOnGce = self::onGce($httpHandler);
             $this->hasCheckedOnGce = \true;
@@ -413,7 +418,7 @@ class GCECredentials extends \Beehive\Google\Auth\CredentialsLoader implements \
      */
     private function getFromMetadata(callable $httpHandler, $uri)
     {
-        $resp = $httpHandler(new \Beehive\GuzzleHttp\Psr7\Request('GET', $uri, [self::FLAVOR_HEADER => 'Google']));
+        $resp = $httpHandler(new Request('GET', $uri, [self::FLAVOR_HEADER => 'Google']));
         return (string) $resp->getBody();
     }
     /**

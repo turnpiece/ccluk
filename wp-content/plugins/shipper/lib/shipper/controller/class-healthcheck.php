@@ -64,8 +64,8 @@ class Shipper_Controller_Healthcheck extends Shipper_Controller {
 	 * @param string $flag Model flag constant.
 	 */
 	public function update_model_flag( $flag ) {
-		$model = new Shipper_Model_Stored_Healthcheck;
-		$value = $model->get( $flag, array() );
+		$model   = new Shipper_Model_Stored_Healthcheck();
+		$value   = $model->get( $flag, array() );
 		$value[] = time();
 		$model->set( $flag, $value )->save();
 	}

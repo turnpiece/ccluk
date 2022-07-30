@@ -218,7 +218,8 @@ var swpWidget, widgetSubmit;
 
 			var parent = $(this).parents(".swp-dismiss-notice");
 
-			$.post({
+			$.ajax({
+				type: 'POST',
 				url: ajaxurl,
 				data: {
 					action: 'dismiss',
@@ -300,7 +301,7 @@ var swpWidget, widgetSubmit;
 	 * @return {[type]} [description]
 	 */
 	function fillContainer(container) {
-		var positions = ['full-width', 'left', 'right'];
+		var positions = ['full-width', 'left', 'right', 'centered'];
 		var type = $(container).data('type');
 
 		positions.forEach(function(position) {
@@ -369,15 +370,13 @@ var swpWidget, widgetSubmit;
 	//* The next version should have a more long-term sustainable way to manage
 	//* post-editor fields with dependencies.
 	function setTempConditionalField() {
-		$('[field=#swp_twitter_use_open_graph]').click(function(event) {
+		$('#social_warfare .twitter_og_toggle').on('click', function(event) {
 			var target = $("#swp_twitter_use_open_graph");
 
-			if (target.attr('value') == 'true') {
+			if(jQuery('#swp_twitter_use_open_graph').is(':checked')) {
 				$('.swpmb-meta-container[data-type=twitter]').slideUp()
-				target.attr('value', 'true');
 			} else {
 				$('.swpmb-meta-container[data-type=twitter]').slideDown()
-				target.attr('value', 'false');
 			}
 
 			socialWarfareAdmin.resizeImageFields();
@@ -412,17 +411,17 @@ var swpWidget, widgetSubmit;
 		setTimeout(socialWarfareAdmin.resizeImageFields, 3000);
 
 		//* Begin Temp code only for 3.4.1
-		var status = $("#swp_twitter_use_open_graph").val()
-		if (status == 'false') {
-			$('.swpmb-meta-container[data-type=twitter]').slideDown()
+		if(jQuery('#swp_twitter_use_open_graph').is(':checked')) {
+			$('.swpmb-meta-container[data-type=twitter]').hide()
 		} else {
-			$('.swpmb-meta-container[data-type=twitter]').slideUp()
+			$('.swpmb-meta-container[data-type=twitter]').show()
 		}
+
 		setTempConditionalField();
 		//* End Temp code
 
-		$('ul.swpmb-media-list').find(".swpmb-overlay").click(socialWarfareAdmin.resizeImageFields);
-		$("#social_warfare.ui-sortable-handle").click(socialWarfareAdmin.resizeImageFields);  //* The open/close handle WP gives us. Images need to be resized if it was closed then opened.
+//		$('ul.swpmb-media-list').find(".swpmb-overlay").click(socialWarfareAdmin.resizeImageFields);
+//		$("#social_warfare.ui-sortable-handle").click(socialWarfareAdmin.resizeImageFields);  //* The open/close handle WP gives us. Images need to be resized if it was closed then opened.
 		socialWarfareAdmin.addImageEditListeners()
 
 		$("#social_warfare.postbox").show();
@@ -430,8 +429,8 @@ var swpWidget, widgetSubmit;
 
 	//* These elements are only created once an image exists
 	socialWarfareAdmin.addImageEditListeners = function() {
-		$('.swpmb-edit-media, .swpmb-remove-media').off(socialWarfareAdmin.resizeImageFields);
-		$('.swpmb-edit-media, .swpmb-remove-media').on(socialWarfareAdmin.resizeImageFields);
+		$(document).on('change', '.swpmb-image_advanced', socialWarfareAdmin.resizeImageFields );
+		$(document).on('click', '.swpmb-edit-media, .swpmb-remove-media', function() {setTimeout(socialWarfareAdmin.resizeImageFields, 200)});
 	}
 
 	// The network key is stored in a classname `swp-network-$network`.
@@ -492,8 +491,8 @@ var swpWidget, widgetSubmit;
 
 	socialWarfareAdmin.triggerDeletePostMeta = function(event) {
 		event.preventDefault()
-		var message = "This will delete all Social Warfare meta keys for this post, including Open Graph, Twitter, and Pinterest descriptions and images. If you want to keep these, please copy them to an offline file first, and paste them back in after the reset. To reset, enter reset_post_meta";
-		var prompt = window.prompt(message, 'reset_or_cancel');
+		var message = "This will delete all Social Warfare data (share counts and custom fields) for this post, including Open Graph, Twitter, and Pinterest descriptions and images. If you want to keep these, please copy them to an offline file first, and paste them back in after the reset. To reset, enter reset_post_meta";
+		var prompt = window.prompt(message, '');
 		console.log('prompt', prompt)
 		if (prompt == 'reset_post_meta') {
 			jQuery.post({

@@ -32,69 +32,61 @@ class Shipper_Task_Import_Parse extends Shipper_Task_Import {
 	 * @return bool
 	 */
 	public function apply( $args = array() ) {
-		$migration = new Shipper_Model_Stored_Migration;
-		$manifest  = $this->get_manifest( Shipper_Model_Manifest::MANIFEST_BASENAME );
-		// @TODO populate any migration data
-		$migration->set( 'export_time', $manifest->get( 'created' ) );
-		$migration->set( 'import_time', date( 'r' ) );
+		$migration      = new Shipper_Model_Stored_Migration();
+		$migration_meta = new Shipper_Model_Stored_MigrationMeta();
 
-		$source_prefix = $manifest->get( 'table_prefix' );
-		/**
-		 * we have to determine the prefix will use for destination
-		 */
-		$type   = $migration->get_type();
-		$origin = $migration->get_origin();
-		if ( $type == Shipper_Model_Stored_Migration::TYPE_IMPORT
-		     && $origin == Shipper_Model_Stored_Migration::ORIG_HUB ) {
-			//this is a destination, get from manifest
+		$manifest = $this->get_manifest();
+		$migration->set( 'export_time', $manifest->get( 'created' ) );
+		$migration->set( 'import_time', gmdate( 'r' ) );
+
+		if ( ! empty( $migration_meta->get( Shipper_Model_Stored_MigrationMeta::KEY_DBPREFIX_OPTION ) ) ) {
+			// It's API import migration.
+			$prefix_option = $migration_meta->get( Shipper_Model_Stored_MigrationMeta::KEY_DBPREFIX_OPTION );
+			$prefix_value  = $migration_meta->get( Shipper_Model_Stored_MigrationMeta::KEY_DBPREFIX_VALUE );
+		} else {
+			// It's API export migration.
 			$prefix_option = $manifest->get( 'dbprefix_option' );
 			$prefix_value  = $manifest->get( 'dbprefix_value' );
-		} else {
-			//fallback but this is usually trigger import from locally
-			$dbprefix      = new Shipper_Model_Stored_Dbprefix();
-			$prefix_option = $dbprefix->get( 'option' );
-			$prefix_value  = $dbprefix->get( 'value' );
 		}
 
-		if ( $prefix_option == 'source' ) {
-			$migration->set( 'destination_prefix', $source_prefix );
-		} elseif ( $prefix_option == 'custom' ) {
-			$migration->set( 'destination_prefix', $prefix_value );
+		/**
+		 * Update the `db_prefix` only when all the tables are exported. Sometimes, user may want to change the db_prefix
+		 * Without exporting all the tables, which will end up with db error.
+		 *
+		 * @since 1.1.4
+		 */
+		$is_important_tables_missing = ! ! $manifest->get( 'is_important_tables_missing' );
+		$source_prefix               = $manifest->get( 'table_prefix' );
+
+		if ( $is_important_tables_missing ) {
+			Shipper_Helper_Log::write( __( 'Some important tables are not imported, so we won\'t update the db_prefix', 'shipper' ) );
+			$migration->set( 'destination_prefix', false );
 		} else {
-			//falback, change nothing
-			global $table_prefix;
-			$migration->set( 'destination_prefix', $table_prefix );
+			// So all the important tables are included.
+			if ( 'source' === $prefix_option ) {
+				$migration->set( 'destination_prefix', $source_prefix );
+			} elseif ( 'custom' === $prefix_option ) {
+				$migration->set( 'destination_prefix', $prefix_value );
+			} else {
+				// Fallback, change nothing.
+				$migration->set( 'destination_prefix', false );
+			}
 		}
-		//end prefix
+
+		$migration->set( 'export_type', $manifest->get( 'export_type' ) );
+
 		if ( ! empty( $source_prefix ) ) {
 			$migration->set( 'source_prefix', $source_prefix );
 		}
 
-		$dumped = new Shipper_Model_Dumped_Filelist;
+		$migration->set( 'other_tables', $manifest->get( 'other_tables' ) );
+		$dumped = new Shipper_Model_Dumped_Filelist();
 		$migration->set( 'total-manifest-files', $dumped->get_statements_count() );
 
-		$large = new Shipper_Model_Dumped_Largelist;
+		$large = new Shipper_Model_Dumped_Largelist();
 		$migration->set( 'total-manifest-large-files', $large->get_statements_count() );
-
 		$migration->save();
 
 		return true;
 	}
-
-	/**
-	 * Gets migration manifest data
-	 *
-	 * @param string $file File basename (sans extension) to export.
-	 *
-	 * @return array
-	 */
-	public function get_manifest( $file ) {
-		$source = trailingslashit( Shipper_Helper_Fs_Path::get_temp_dir() ) .
-		          trailingslashit( Shipper_Model_Stored_Migration::COMPONENT_META ) .
-		          preg_replace( '/[^-_a-z0-9]/i', '', $file ) .
-		          '.json';
-
-		return Shipper_Model_Manifest::from_source( $source );
-	}
-
 }

@@ -27,10 +27,12 @@ class Shipper_Model_Api extends Shipper_Model {
 	 * Initializes the data
 	 */
 	public function populate() {
-		$this->set_data(array(
-			'api_key' => $this->get_api_key(),
-			'api_secret' => $this->get_api_secret(),
-		));
+		$this->set_data(
+			array(
+				'api_key'    => $this->get_api_key(),
+				'api_secret' => $this->get_api_secret(),
+			)
+		);
 	}
 
 	/**
@@ -39,15 +41,19 @@ class Shipper_Model_Api extends Shipper_Model {
 	 * @return string
 	 */
 	public function get_api_secret() {
-		$key = shipper_get_site_uniqid( shipper_network_home_url() );
-		$hasher = new Shipper_Helper_Hash;
-		$algo = $hasher->get_default_algo();
+		$key    = shipper_get_site_uniqid( shipper_network_home_url() );
+		$hasher = new Shipper_Helper_Hash();
+		$algo   = $hasher->get_default_algo();
 
-		return substr(hash_hmac(
-			$algo,
-			$key,
-			$hasher->get_default_secret()
-		), 0, 16);
+		return substr(
+			hash_hmac(
+				$algo,
+				$key,
+				$hasher->get_default_secret()
+			),
+			0,
+			16
+		);
 	}
 
 	/**
@@ -109,15 +115,18 @@ class Shipper_Model_Api extends Shipper_Model {
 	 * @since v1.0.3
 	 *
 	 * @param string $endpoint API endpoint.
-	 * @param array $payload Request arguments.
-	 * @param int $ttl Expected time to live for the cache.
+	 * @param array  $payload Request arguments.
+	 * @param int    $ttl Expected time to live for the cache.
 	 *
 	 * @return false|array Cached API response, or (bool)false on failure.
 	 */
 	public function get_cached_api_response( $endpoint, $payload, $ttl = 0 ) {
-		$key = $this->get_payload_cache_key( $payload );
+		$key  = $this->get_payload_cache_key( $payload );
 		$data = get_site_option( 'shipper-storage-apicaches', array() );
-		if ( ! is_array( $data ) ) { $data = array(); }
+
+		if ( ! is_array( $data ) ) {
+			$data = array();
+		}
 
 		if ( ! isset( $data[ $endpoint ][ $key ] ) ) {
 			return false;
@@ -126,7 +135,7 @@ class Shipper_Model_Api extends Shipper_Model {
 		$cache_timestamp = ! empty( $data[ $endpoint ][ $key ]['timestamp'] )
 			? (int) $data[ $endpoint ][ $key ]['timestamp']
 			: false;
-		$cache_data = ! empty( $data[ $endpoint ][ $key ]['data'] )
+		$cache_data      = ! empty( $data[ $endpoint ][ $key ]['data'] )
 			? $data[ $endpoint ][ $key ]['data']
 			: array();
 
@@ -144,20 +153,24 @@ class Shipper_Model_Api extends Shipper_Model {
 	 *
 	 * @since v1.0.3
 	 *
-	 * @param string $endpoint API endpoint
-	 * @param array $payload Request arguments.
-	 * @param array $response Data to cache.
+	 * @param string $endpoint API endpoint.
+	 * @param array  $payload Request arguments.
+	 * @param array  $response Data to cache.
 	 */
 	public function set_cached_api_response( $endpoint, $payload, $response ) {
-		$key = $this->get_payload_cache_key( $payload );
+		$key  = $this->get_payload_cache_key( $payload );
 		$data = get_site_option( 'shipper-storage-apicaches', array() );
 
-		if ( ! is_array( $data ) ) { $data = array(); }
-		if ( empty( $data[ $endpoint ] ) ) { $data[ $endpoint ] = array(); }
+		if ( ! is_array( $data ) ) {
+			$data = array();
+		}
+		if ( empty( $data[ $endpoint ] ) ) {
+			$data[ $endpoint ] = array();
+		}
 
 		$data[ $endpoint ][ $key ] = array(
 			'timestamp' => time(),
-			'data' => $response,
+			'data'      => $response,
 		);
 
 		update_site_option( 'shipper-storage-apicaches', $data );
@@ -171,15 +184,19 @@ class Shipper_Model_Api extends Shipper_Model {
 	 *
 	 * @since v1.0.3
 	 *
-	 * @param string $endpoint API endpoint.
+	 * @param string      $endpoint API endpoint.
 	 * @param array|false $payload Optional request arguments.
 	 */
 	public function clear_cached_api_response( $endpoint, $payload = false ) {
 		$key = false === $payload ? false : $this->get_payload_cache_key( $payload );
 
 		$data = get_site_option( 'shipper-storage-apicaches', array() );
-		if ( ! is_array( $data ) ) { $data = array(); }
-		if ( empty( $data[ $endpoint ] ) ) { $data[ $endpoint ] = array(); }
+		if ( ! is_array( $data ) ) {
+			$data = array();
+		}
+		if ( empty( $data[ $endpoint ] ) ) {
+			$data[ $endpoint ] = array();
+		}
 
 		if ( false !== $key && isset( $data[ $endpoint ][ $key ] ) ) {
 			unset( $data[ $endpoint ][ $key ] );
@@ -193,7 +210,7 @@ class Shipper_Model_Api extends Shipper_Model {
 	/**
 	 * Gets cache key from request args.
 	 *
-	 * @param array Request arguments.
+	 * @param array $payload Request payload.
 	 *
 	 * @return string Cache key.
 	 */
@@ -203,6 +220,6 @@ class Shipper_Model_Api extends Shipper_Model {
 			return $key;
 		}
 
-		return md5( json_encode( $payload ) );
+		return md5( wp_json_encode( $payload ) );
 	}
 }

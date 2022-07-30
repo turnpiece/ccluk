@@ -17,7 +17,7 @@
  */
 namespace Beehive\Google\Auth\Middleware;
 
-use Beehive\GuzzleHttp\Psr7;
+use Beehive\GuzzleHttp\Psr7\Query;
 use Beehive\Psr\Http\Message\RequestInterface;
 /**
  * SimpleMiddleware is a Guzzle Middleware that implements Google's Simple API
@@ -71,14 +71,14 @@ class SimpleMiddleware
      */
     public function __invoke(callable $handler)
     {
-        return function (\Beehive\Psr\Http\Message\RequestInterface $request, array $options) use($handler) {
+        return function (RequestInterface $request, array $options) use($handler) {
             // Requests using "auth"="scoped" will be authorized.
             if (!isset($options['auth']) || $options['auth'] !== 'simple') {
                 return $handler($request, $options);
             }
-            $query = \Beehive\GuzzleHttp\Psr7\parse_query($request->getUri()->getQuery());
+            $query = Query::parse($request->getUri()->getQuery());
             $params = \array_merge($query, $this->config);
-            $uri = $request->getUri()->withQuery(\Beehive\GuzzleHttp\Psr7\build_query($params));
+            $uri = $request->getUri()->withQuery(Query::build($params));
             $request = $request->withUri($uri);
             return $handler($request, $options);
         };

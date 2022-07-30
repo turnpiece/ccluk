@@ -23,7 +23,7 @@ class Shipper_Helper_Codec_Msdomain extends Shipper_Helper_Codec_Domain {
 			'http://' . Shipper_Model_Stored_Destinations::get_current_domain()
 		);
 		// @TODO: generalize this (ports and stuff).
-		$path = parse_url( $current, PHP_URL_HOST );
+		$path = wp_parse_url( $current, PHP_URL_HOST );
 		return array(
 			$path => '{{SHIPPER_MS_DOMAIN}}',
 		);

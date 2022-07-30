@@ -11,11 +11,31 @@
 class Shipper_Helper_Codec_Sql extends Shipper_Helper_Codec {
 
 	/**
+	 * Model instance holder
+	 *
+	 * @var \Shipper_Model_Stored_Migration
+	 */
+	private $model;
+
+	/**
 	 * Optional intermediate prefix
 	 *
 	 * @var string
 	 */
-	private $_intermediate_prefix = '';
+	private $intermediate_prefix = '';
+
+	/**
+	 * Shipper_Helper_Codec_Sql constructor.
+	 *
+	 * @param null $model Shipper_Model_Stored_Migration instance holder.
+	 */
+	public function __construct( $model = null ) {
+		if ( null === $model ) {
+			$this->model = new Shipper_Model_Stored_Migration();
+		} else {
+			$this->model = $model;
+		}
+	}
 
 	/**
 	 * Gets intermediate codec expansion
@@ -27,8 +47,9 @@ class Shipper_Helper_Codec_Sql extends Shipper_Helper_Codec {
 	 * @return object Shipper_Helper_Codec_Sql instance.
 	 */
 	public static function get_intermediate( $prefix = '' ) {
-		$me = new self;
-		$me->_intermediate_prefix = $prefix;
+		$me                      = new self();
+		$me->intermediate_prefix = $prefix;
+
 		return $me;
 	}
 
@@ -42,12 +63,13 @@ class Shipper_Helper_Codec_Sql extends Shipper_Helper_Codec {
 	 */
 	public function get_replacements_list() {
 		global $wpdb;
-		$like = $wpdb->esc_like( $wpdb->base_prefix ) . '%';
-		$tables = $wpdb->get_col($wpdb->prepare(
-			// @codingStandardsIgnoreLine Not preparing DB name
-			'SHOW TABLES FROM `' . DB_NAME . '` LIKE %s',
-			$like
-		));
+		$like   = $wpdb->esc_like( $wpdb->base_prefix ) . '%';
+		$tables = $wpdb->get_col(
+			$wpdb->prepare(
+				'SHOW TABLES FROM `' . DB_NAME . '` LIKE %s', // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+				$like
+			)
+		); // db call ok,cache ok.
 
 		// Also add whatever are the WP defaults.
 		foreach ( $wpdb->tables as $rtbl ) {
@@ -63,21 +85,22 @@ class Shipper_Helper_Codec_Sql extends Shipper_Helper_Codec {
 			$tables[] = "{$wpdb->base_prefix}{$rtbl}";
 		}
 		$tables = array_values( array_unique( $tables ) );
+
 		// End defaults stuffing.
 		$result = array();
 
 		$rx = preg_quote( $wpdb->base_prefix, '/' );
 		foreach ( $tables as $table ) {
 			$key = $table;
-			if ( ! empty( $this->_intermediate_prefix ) ) {
-				$key = "{$this->_intermediate_prefix}_{$table}";
+			if ( ! empty( $this->intermediate_prefix ) ) {
+				$key = "{$this->intermediate_prefix}_{$table}";
 			}
 			$result[ $key ] = preg_replace( "/^{$rx}/", '{{SHIPPER_TABLE_PREFIX}}', $table );
 		}
 
 		// Catch-all clause.
-		if ( ! empty( $this->_intermediate_prefix ) ) {
-			$result[ "{$this->_intermediate_prefix}_{$wpdb->base_prefix}" ] = '{{SHIPPER_TABLE_PREFIX}}';
+		if ( ! empty( $this->intermediate_prefix ) ) {
+			$result[ "{$this->intermediate_prefix}_{$wpdb->base_prefix}" ] = '{{SHIPPER_TABLE_PREFIX}}';
 		}
 
 		return $result;
@@ -100,22 +123,30 @@ class Shipper_Helper_Codec_Sql extends Shipper_Helper_Codec {
 		$value = ! empty( $value )
 			? preg_quote( $value, '/' )
 			: preg_quote( $string, '/' );
-		// @codingStandardsIgnoreStart
+
+		// phpcs:disable
 		return '^' .
-			'(' .
-				'DROP TABLE IF EXISTS' .
-				'|' .
-				'CREATE TABLE' .
-				'|' .
-				'INSERT INTO' .
-			')' .
-			'\s*' .
-			'(' .
-				'`?' . $value . '`?' .
-			')' .
-			'(.*)' .
-		'$';
-		// @codingStandardsIgnoreEnd
+		       '(' .
+		       'DROP TABLE IF EXISTS' .
+		       '|' .
+		       'CREATE TABLE IF NOT EXISTS' .
+		       '|' .
+		       'CREATE TABLE' .
+		       '|' .
+		       'LOCK TABLES' .
+		       '|' .
+		       'INSERT INTO' .
+		       '|' .
+		       'ALTER TABLE' .
+		       ')' .
+		       '\s*' .
+		       '(' .
+		       '`?' . $value . '`?' .
+		       ')' .
+		       '\s' .
+		       '(.*)' .
+		       '$';
+		// phpcs:enable
 	}
 
 	/**
@@ -128,6 +159,6 @@ class Shipper_Helper_Codec_Sql extends Shipper_Helper_Codec {
 	 * @return string
 	 */
 	public function get_replacement( $name, $value ) {
-		return '\1 ' . $value . '\3';
+		return '\1 ' . $value . ' \3';
 	}
 }

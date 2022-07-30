@@ -18,7 +18,7 @@ class Shipper_Task_Api_Destinations_Get extends Shipper_Task_Api {
 	 * @return array List of destination hashes.
 	 */
 	public function apply( $args = array() ) {
-		$status = $this->get_response( 'destinations-get' );
+		$status       = $this->get_response( 'destinations-get' );
 		$destinations = array();
 
 		if ( empty( $status['success'] ) ) {
@@ -32,8 +32,7 @@ class Shipper_Task_Api_Destinations_Get extends Shipper_Task_Api {
 
 		$destinations = ! empty( $status['data'] ) && is_array( $status['data'] )
 			? $status['data']
-			: array()
-		;
+			: array();
 
 		if ( empty( $destinations ) ) {
 			$this->clear_cached_api_response( 'destinations-get' );

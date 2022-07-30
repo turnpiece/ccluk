@@ -17,6 +17,6 @@
  */
 namespace Beehive\Google\Auth\HttpHandler;
 
-class Guzzle7HttpHandler extends \Beehive\Google\Auth\HttpHandler\Guzzle6HttpHandler
+class Guzzle7HttpHandler extends Guzzle6HttpHandler
 {
 }

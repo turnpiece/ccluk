@@ -2,7 +2,7 @@
 /**
  * Common action functionality REST endpoint.
  *
- * @link       http://premium.wpmudev.org
+ * @link       http://wpmudev.com
  * @since      3.2.0
  *
  * @author     Joel James <joel@incsub.com>
@@ -96,11 +96,6 @@ class Auth extends Endpoint {
 								'settings',
 								'dashboard',
 							),
-						),
-						'modal'         => array(
-							'required'    => false,
-							'description' => __( 'Are you using it in a modal.', 'ga_trans' ),
-							'type'        => 'boolean',
 						),
 						'network'       => array(
 							'required'    => false,
@@ -206,8 +201,7 @@ class Auth extends Endpoint {
 
 			// Custom data.
 			$data = array(
-				'is_modal' => $this->get_param( $request, 'modal', false ),
-				'page'     => $this->get_param( $request, 'context', 'settings' ),
+				'page' => $this->get_param( $request, 'context', 'settings' ),
 			);
 
 			// Auth url.

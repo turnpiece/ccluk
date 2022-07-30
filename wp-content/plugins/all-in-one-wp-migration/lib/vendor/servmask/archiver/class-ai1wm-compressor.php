@@ -53,6 +53,8 @@ class Ai1wm_Compressor extends Ai1wm_Archiver {
 	 * @return bool
 	 */
 	public function add_file( $file_name, $new_file_name = '', &$file_written = 0, &$file_offset = 0 ) {
+		global $ai1wm_params;
+
 		$file_written = 0;
 
 		// Replace forward slash with current directory separator in file name
@@ -67,21 +69,20 @@ class Ai1wm_Compressor extends Ai1wm_Archiver {
 		// Start time
 		$start = microtime( true );
 
-		// Open the file for reading in binary mode
-		if ( ( $file_handle = @fopen( $file_name, 'rb' ) ) !== false ) {
+		// Open the file for reading in binary mode (fopen may return null for quarantined files)
+		if ( ( $file_handle = @fopen( $file_name, 'rb' ) ) ) {
 			$file_bytes = 0;
 
 			// Get header block
 			if ( ( $block = $this->get_file_block( $file_name, $new_file_name ) ) ) {
-
 				// Write header block
 				if ( $file_offset === 0 ) {
 					if ( ( $file_bytes = @fwrite( $this->file_handle, $block ) ) !== false ) {
 						if ( strlen( $block ) !== $file_bytes ) {
-							throw new Ai1wm_Quota_Exceeded_Exception( sprintf( 'Out of disk space. Unable to write header to file. File: %s', $this->file_name ) );
+							throw new Ai1wm_Quota_Exceeded_Exception( sprintf( __( 'Out of disk space. Unable to write header to file. File: %s', AI1WM_PLUGIN_NAME ), $this->file_name ) );
 						}
 					} else {
-						throw new Ai1wm_Not_Writable_Exception( sprintf( 'Unable to write header to file. File: %s', $this->file_name ) );
+						throw new Ai1wm_Not_Writable_Exception( sprintf( __( 'Unable to write header to file. File: %s', AI1WM_PLUGIN_NAME ), $this->file_name ) );
 					}
 				}
 
@@ -93,12 +94,17 @@ class Ai1wm_Compressor extends Ai1wm_Archiver {
 
 						// Read the file in chunks of 512KB
 						if ( ( $file_content = @fread( $file_handle, 512000 ) ) !== false ) {
+							// Don't encrypt package.json
+							if ( isset( $ai1wm_params['options']['encrypt_backups'] ) && basename( $file_name ) !== 'package.json' ) {
+								$file_content = ai1wm_encrypt_string( $file_content, $ai1wm_params['options']['encrypt_password'] );
+							}
+
 							if ( ( $file_bytes = @fwrite( $this->file_handle, $file_content ) ) !== false ) {
 								if ( strlen( $file_content ) !== $file_bytes ) {
-									throw new Ai1wm_Quota_Exceeded_Exception( sprintf( 'Out of disk space. Unable to write content to file. File: %s', $this->file_name ) );
+									throw new Ai1wm_Quota_Exceeded_Exception( sprintf( __( 'Out of disk space. Unable to write content to file. File: %s', AI1WM_PLUGIN_NAME ), $this->file_name ) );
 								}
 							} else {
-								throw new Ai1wm_Not_Writable_Exception( sprintf( 'Unable to write content to file. File: %s', $this->file_name ) );
+								throw new Ai1wm_Not_Writable_Exception( sprintf( __( 'Unable to write content to file. File: %s', AI1WM_PLUGIN_NAME ), $this->file_name ) );
 							}
 
 							// Set file written
@@ -123,27 +129,21 @@ class Ai1wm_Compressor extends Ai1wm_Archiver {
 
 					// Seek to beginning of file size
 					if ( @fseek( $this->file_handle, - $file_offset - 4096 - 12 - 14, SEEK_CUR ) === -1 ) {
-						throw new Ai1wm_Not_Seekable_Exception(
-							'Your PHP is 32-bit. In order to export your file, please change your PHP version to 64-bit and try again. ' .
-							'<a href="https://help.servmask.com/knowledgebase/php-32bit/" target="_blank">Technical details</a>'
-						);
+						throw new Ai1wm_Not_Seekable_Exception( __( 'Your PHP is 32-bit. In order to export your file, please change your PHP version to 64-bit and try again. <a href="https://help.servmask.com/knowledgebase/php-32bit/" target="_blank">Technical details</a>', AI1WM_PLUGIN_NAME ) );
 					}
 
 					// Write file size to file header
 					if ( ( $file_bytes = @fwrite( $this->file_handle, $block ) ) !== false ) {
 						if ( strlen( $block ) !== $file_bytes ) {
-							throw new Ai1wm_Quota_Exceeded_Exception( sprintf( 'Out of disk space. Unable to write size to file. File: %s', $this->file_name ) );
+							throw new Ai1wm_Quota_Exceeded_Exception( sprintf( __( 'Out of disk space. Unable to write size to file. File: %s', AI1WM_PLUGIN_NAME ), $this->file_name ) );
 						}
 					} else {
-						throw new Ai1wm_Not_Writable_Exception( sprintf( 'Unable to write size to file. File: %s', $this->file_name ) );
+						throw new Ai1wm_Not_Writable_Exception( sprintf( __( 'Unable to write size to file. File: %s', AI1WM_PLUGIN_NAME ), $this->file_name ) );
 					}
 
 					// Seek to end of file content
 					if ( @fseek( $this->file_handle, + $file_offset + 4096 + 12, SEEK_CUR ) === -1 ) {
-						throw new Ai1wm_Not_Seekable_Exception(
-							'Your PHP is 32-bit. In order to export your file, please change your PHP version to 64-bit and try again. ' .
-							'<a href="https://help.servmask.com/knowledgebase/php-32bit/" target="_blank">Technical details</a>'
-						);
+						throw new Ai1wm_Not_Seekable_Exception( __( 'Your PHP is 32-bit. In order to export your file, please change your PHP version to 64-bit and try again. <a href="https://help.servmask.com/knowledgebase/php-32bit/" target="_blank">Technical details</a>', AI1WM_PLUGIN_NAME ) );
 					}
 				}
 			}

@@ -26,14 +26,14 @@ abstract class Shipper_Helper_Replacer {
 	 *
 	 * @var string
 	 */
-	private $_direction;
+	private $direction;
 
 	/**
 	 * Holds a list of codecs to apply
 	 *
 	 * @var array
 	 */
-	private $_codec_list = array();
+	private $codec_list = array();
 
 	/**
 	 * Constructor
@@ -41,7 +41,7 @@ abstract class Shipper_Helper_Replacer {
 	 * @param string $direction Replacement direction - export (encode) or import (decode).
 	 */
 	public function __construct( $direction ) {
-		$this->_direction = $direction;
+		$this->direction = $direction;
 	}
 
 	/**
@@ -52,15 +52,16 @@ abstract class Shipper_Helper_Replacer {
 	 * @return array
 	 */
 	public function get_codec_list() {
-		if ( empty( $this->_codec_list ) ) {
-			$this->_codec_list = array(
-				new Shipper_Helper_Codec_Define,
-				new Shipper_Helper_Codec_Var,
-				new Shipper_Helper_Codec_Sql,
-				new Shipper_Helper_Codec_Domain,
+		if ( empty( $this->codec_list ) ) {
+			$this->codec_list = array(
+				new Shipper_Helper_Codec_Define(),
+				new Shipper_Helper_Codec_Var(),
+				new Shipper_Helper_Codec_Sql(),
+				new Shipper_Helper_Codec_Domain(),
+				new Shipper_Helper_Codec_Preoptionname(),
 			);
 		}
-		return $this->_codec_list;
+		return $this->codec_list;
 	}
 
 	/**
@@ -71,19 +72,19 @@ abstract class Shipper_Helper_Replacer {
 	 * @return Shipper_Helper_Replacer
 	 */
 	public function set_codec_list( $list = array() ) {
-		$this->_codec_list = (array) $list;
+		$this->codec_list = (array) $list;
 		return $this;
 	}
 
 	/**
 	 * Adds a codec to list to be used in replacement
 	 *
-	 * @param object $codec Shipper_Helper_Codec instance.
+	 * @param Shipper_Helper_Codec $codec Shipper_Helper_Codec instance.
 	 *
 	 * @return Shipper_Helper_Replacer
 	 */
 	public function add_codec( Shipper_Helper_Codec $codec ) {
-		$list = $this->get_codec_list();
+		$list   = $this->get_codec_list();
 		$list[] = $codec;
 		return $this->set_codec_list( $list );
 	}
@@ -94,7 +95,6 @@ abstract class Shipper_Helper_Replacer {
 	 * @return string
 	 */
 	public function get_direction() {
-		return $this->_direction;
+		return $this->direction;
 	}
-
 }

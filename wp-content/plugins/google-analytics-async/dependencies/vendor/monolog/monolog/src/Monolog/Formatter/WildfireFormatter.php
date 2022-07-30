@@ -18,13 +18,13 @@ use Beehive\Monolog\Logger;
  * @author Christophe Coevoet <stof@notk.org>
  * @author Kirill chEbba Chebunin <iam@chebba.org>
  */
-class WildfireFormatter extends \Beehive\Monolog\Formatter\NormalizerFormatter
+class WildfireFormatter extends NormalizerFormatter
 {
     const TABLE = 'table';
     /**
      * Translates Monolog log levels to Wildfire levels.
      */
-    private $logLevels = array(\Beehive\Monolog\Logger::DEBUG => 'LOG', \Beehive\Monolog\Logger::INFO => 'INFO', \Beehive\Monolog\Logger::NOTICE => 'INFO', \Beehive\Monolog\Logger::WARNING => 'WARN', \Beehive\Monolog\Logger::ERROR => 'ERROR', \Beehive\Monolog\Logger::CRITICAL => 'ERROR', \Beehive\Monolog\Logger::ALERT => 'ERROR', \Beehive\Monolog\Logger::EMERGENCY => 'ERROR');
+    private $logLevels = array(Logger::DEBUG => 'LOG', Logger::INFO => 'INFO', Logger::NOTICE => 'INFO', Logger::WARNING => 'WARN', Logger::ERROR => 'ERROR', Logger::CRITICAL => 'ERROR', Logger::ALERT => 'ERROR', Logger::EMERGENCY => 'ERROR');
     /**
      * {@inheritdoc}
      */

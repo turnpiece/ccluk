@@ -114,7 +114,7 @@ class WPMUDEV_Dashboard_Message {
 		if ( $Queue_Loaded ) { return; }
 		$Queue_Loaded = true;
 
-		$this->queue = WPMUDEV_Dashboard::$site->get_option( 'notifications' );
+		$this->queue = WPMUDEV_Dashboard::$settings->get( 'notifications' );
 		if ( ! is_array( $this->queue ) ) {
 			$this->queue = array();
 			$changed = true;
@@ -176,7 +176,7 @@ class WPMUDEV_Dashboard_Message {
 		}
 
 		// Save the queue to database.
-		WPMUDEV_Dashboard::$site->set_option( 'notifications', $this->queue );
+		WPMUDEV_Dashboard::$settings->set( 'notifications', $this->queue );
 	}
 
 	/**
@@ -311,10 +311,10 @@ class WPMUDEV_Dashboard_Message {
 	 * @since  4.0.0
 	 * @param  string $msg_id Message ID.
 	 */
-	protected function mark_as_done( $msg_id ) {
+	protected function mark_as_done( $msg_id, $force = 0 ) {
 		$this->load_queue();
 
-		if ( isset( $this->queue[ $msg_id ] ) ) {
+		if ( isset( $this->queue[ $msg_id ] ) || $force ) {
 			$this->queue[ $msg_id ]['dismissed'] = true;
 			$this->save_queue();
 		}
@@ -333,9 +333,10 @@ class WPMUDEV_Dashboard_Message {
 	 */
 	public function ajax_dismiss() {
 		$msg_id = intval( $_POST['msg_id'] );
+		$force  = isset( $_POST['force'] ) ? intval( $_POST['force'] ) : 0;
 
 		if ( ! empty( $msg_id ) ) {
-			$this->mark_as_done( $msg_id );
+			$this->mark_as_done( $msg_id, $force );
 			wp_send_json_success();
 		}
 

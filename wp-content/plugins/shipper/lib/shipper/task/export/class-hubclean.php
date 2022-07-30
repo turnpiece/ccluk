@@ -18,17 +18,19 @@ class Shipper_Task_Export_Hubclean extends Shipper_Task_Export {
 	 * @return bool
 	 */
 	public function apply( $args = array() ) {
-		$this->_has_done_anything = true;
-		$migration = new Shipper_Model_Stored_Migration;
-		$remote_site = $migration->get_destination();
+		$this->has_done_anything = true;
+		$migration               = new Shipper_Model_Stored_Migration();
+		$remote_site             = $migration->get_destination();
 
-		$task = new Shipper_Task_Api_Migrations_Set;
-		$task->apply(array(
-			'domain' => $remote_site,
-			'type' => Shipper_Model_Stored_Migration::TYPE_IMPORT,
-			'status' => 0,
-			'file' => '',
-		));
+		$task = new Shipper_Task_Api_Migrations_Set();
+		$task->apply(
+			array(
+				'domain' => $remote_site,
+				'type'   => Shipper_Model_Stored_Migration::TYPE_IMPORT,
+				'status' => 0,
+				'file'   => '',
+			)
+		);
 
 		return true;
 	}
@@ -73,6 +75,7 @@ class Shipper_Task_Export_Hubclean extends Shipper_Task_Export {
 	public function get_destination_type() {
 		return '';
 	}
+
 	/**
 	 * Gets task job description
 	 *

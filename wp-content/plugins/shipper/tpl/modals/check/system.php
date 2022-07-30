@@ -5,21 +5,23 @@
  * @package shipper
  */
 
-$model = new Shipper_Model_Stored_Modals;
+$model = new Shipper_Model_Stored_Modals();
 if ( Shipper_Model_Stored_Modals::STATE_CLOSED === $model->get( 'system', Shipper_Model_Stored_Modals::STATE_OPEN ) ) {
 	// User dismissed this modal - don't even bother.
 	return false;
 }
 
-$task = new Shipper_Task_Check_System;
-$model = new Shipper_Model_System;
+$task  = new Shipper_Task_Check_System();
+$model = new Shipper_Model_System();
 
-$status = $task->apply( $model->get_data() );
-$errors = count( $task->get_errors() );
+$status = $task->apply( $model->get_data() ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- this is not WordPress global variable
+$errors = count( $task->get_errors() ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- this is not WordPress global variable
 $checks = $task->get_checks();
 
 foreach ( $checks as $check ) {
-	if ( $check->is_fatal() ) { $errors++; }
+	if ( $check->is_fatal() ) {
+		$errors++;
+	}
 }
 
 if ( ! empty( $status ) && empty( $errors ) ) {
@@ -27,9 +29,7 @@ if ( ! empty( $status ) && empty( $errors ) ) {
 }
 
 ?>
-<div class="sui-dialog shipper-system-check shipper-check-result" data-wpnonce="<?php echo esc_attr(
-	wp_create_nonce( 'shipper_modal_close' )
-);?>" aria-hidden="true">
+<div class="sui-dialog shipper-system-check shipper-check-result" data-wpnonce="<?php echo esc_attr( wp_create_nonce( 'shipper_modal_close' ) ); ?>" aria-hidden="true">
 	<div class="sui-dialog-overlay sui-fade-in" tabindex="-1" data-a11y-dialog-hide=""></div>
 
 	<div class="sui-dialog-content sui-bounce-in" role="dialog">
@@ -46,16 +46,25 @@ if ( ! empty( $status ) && empty( $errors ) ) {
 					</div>
 					<h3 class="shipper-dialog-title"><?php esc_html_e( 'Requirements failed', 'shipper' ); ?></h3>
 
-					<p><?php echo esc_html( sprintf(
-						__( '%s, we’ve uncovered a few potential issues that may cause the migration to fail. Please fix the following errors to continue using the plugin.', 'shipper' ),
-						shipper_get_user_name()
-					) );; ?></p>
+					<p>
+						<?php
+						echo esc_html(
+							sprintf(
+								/* translators: %s: admin username. */
+								__( '%s, we’ve uncovered a few potential issues that may cause the migration to fail. Please fix the following errors to continue using the plugin.', 'shipper' ),
+								shipper_get_user_name()
+							)
+						);
+						?>
+					</p>
 				</div>
 
 				<table class="sui-table sui-accordion shipper-system-checks-list">
 				<?php foreach ( $checks as $check ) { ?>
 					<?php
-						if ( ! $check->is_fatal() ) { continue; }
+					if ( ! $check->is_fatal() ) {
+						continue;
+					}
 					?>
 					<tr class="sui-accordion-item sui-error">
 						<td class="sui-accordion-item-title">

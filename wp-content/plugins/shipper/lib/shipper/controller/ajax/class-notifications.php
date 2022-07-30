@@ -14,7 +14,8 @@ class Shipper_Controller_Ajax_Notifications extends Shipper_Controller_Ajax {
 	 * Boots the controller and sets up event listeners.
 	 */
 	public function boot() {
-		if ( ! is_admin() ) { return false; }
+		if ( ! is_admin() ) {
+			return false; }
 
 		add_action(
 			'wp_ajax_shipper_notifications_enable',
@@ -50,7 +51,7 @@ class Shipper_Controller_Ajax_Notifications extends Shipper_Controller_Ajax {
 		// @codingStandardsIgnoreLine Nonce already checked in `do_request_sanity_check`
 		$data = stripslashes_deep( $_POST );
 		$email = ! empty( $data['email'] ) ? $data['email'] : false;
-		$name = ! empty( $data['name'] ) ? $data['name'] : false;
+		$name  = ! empty( $data['name'] ) ? $data['name'] : false;
 
 		if ( empty( $name ) ) {
 			return wp_send_json_error(
@@ -60,19 +61,26 @@ class Shipper_Controller_Ajax_Notifications extends Shipper_Controller_Ajax {
 
 		if ( ! is_email( $email ) ) {
 			return wp_send_json_error(
+				/* translators: %s: email address. */
 				sprintf( __( 'This is not a valid email: %s', 'shipper' ), $email )
 			);
 		}
 
-		$model = new Shipper_Model_Stored_Options;
+		$model = new Shipper_Model_Stored_Options();
 
 		$status = $model->add_email( $email, $name );
 		if ( $status ) {
-			$tpl = new Shipper_Helper_Template;
-			return wp_send_json_success( $tpl->get( 'pages/settings/notifications' ) );
+			$tpl  = new Shipper_Helper_Template();
+			$data = array(
+				'data'    => $tpl->get( 'pages/settings/notifications' ),
+				'message' => __( 'Recipient has been added', 'shipper' ),
+			);
+
+			return wp_send_json_success( $data );
 		}
 
 		return wp_send_json_error(
+			/* translators: %s: email address. */
 			sprintf( __( 'Unable to add email %s', 'shipper' ), $email )
 		);
 	}
@@ -92,15 +100,21 @@ class Shipper_Controller_Ajax_Notifications extends Shipper_Controller_Ajax {
 			);
 		}
 
-		$model = new Shipper_Model_Stored_Options;
+		$model = new Shipper_Model_Stored_Options();
 
 		$status = $model->drop_email( $email );
 		if ( $status ) {
-			$tpl = new Shipper_Helper_Template;
-			return wp_send_json_success( $tpl->get( 'pages/settings/notifications' ) );
+			$tpl  = new Shipper_Helper_Template();
+			$data = array(
+				'data'    => $tpl->get( 'pages/settings/notifications' ),
+				'message' => __( 'Recipient has been removed', 'shipper' ),
+			);
+
+			return wp_send_json_success( $data );
 		}
 
 		return wp_send_json_error(
+			/* translators: %s: email address. */
 			sprintf( __( 'Unable to delete email %s', 'shipper' ), $email )
 		);
 	}
@@ -110,7 +124,7 @@ class Shipper_Controller_Ajax_Notifications extends Shipper_Controller_Ajax {
 	 */
 	public function handle_notifications_enable() {
 		$this->do_request_sanity_check( 'shipper_email_notifications_toggle' );
-		$model = new Shipper_Model_Stored_Options;
+		$model = new Shipper_Model_Stored_Options();
 		$model->set( Shipper_Model_Stored_Options::KEY_SEND, true );
 		$model->save();
 		return wp_send_json_success();
@@ -121,7 +135,7 @@ class Shipper_Controller_Ajax_Notifications extends Shipper_Controller_Ajax {
 	 */
 	public function handle_notifications_disable() {
 		$this->do_request_sanity_check( 'shipper_email_notifications_toggle' );
-		$model = new Shipper_Model_Stored_Options;
+		$model = new Shipper_Model_Stored_Options();
 		$model->set( Shipper_Model_Stored_Options::KEY_SEND, false );
 		$model->save();
 		return wp_send_json_success();
@@ -132,7 +146,7 @@ class Shipper_Controller_Ajax_Notifications extends Shipper_Controller_Ajax {
 	 */
 	public function handle_notifications_failure_enable() {
 		$this->do_request_sanity_check( 'shipper_email_fail_only' );
-		$model = new Shipper_Model_Stored_Options;
+		$model = new Shipper_Model_Stored_Options();
 		$model->set( Shipper_Model_Stored_Options::KEY_SEND_FAIL, true );
 		$model->save();
 		return wp_send_json_success();
@@ -143,10 +157,9 @@ class Shipper_Controller_Ajax_Notifications extends Shipper_Controller_Ajax {
 	 */
 	public function handle_notifications_failure_disable() {
 		$this->do_request_sanity_check( 'shipper_email_fail_only' );
-		$model = new Shipper_Model_Stored_Options;
+		$model = new Shipper_Model_Stored_Options();
 		$model->set( Shipper_Model_Stored_Options::KEY_SEND_FAIL, false );
 		$model->save();
 		return wp_send_json_success();
 	}
-
 }

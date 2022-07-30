@@ -54,7 +54,7 @@ abstract class Shipper_Helper_Codec {
 	 *
 	 * @return bool
 	 */
-	static public function has_shipper_macro( $str ) {
+	public static function has_shipper_macro( $str ) {
 		$macro_rx = '/' .
 			preg_quote( '{{SHIPPER_', '/' ) .
 			'\w+' .
@@ -113,8 +113,8 @@ abstract class Shipper_Helper_Codec {
 	public function transform( $source = '', $direction = false ) {
 		$direction = ! empty( $direction ) && in_array( $direction, array( self::ENCODE, self::DECODE ), true )
 			? $direction
-			: self::ENCODE
-		;
+			: self::ENCODE;
+
 		return self::ENCODE === $direction
 			? $this->encode( $source )
 			: $this->decode( $source );
@@ -132,14 +132,22 @@ abstract class Shipper_Helper_Codec {
 	 */
 	public function encode( $source = '' ) {
 		$definitions = (array) apply_filters(
-			sprintf( 'shipper_codec_%s_replacements_encode', $this->get_codec_type() ),
+			'shipper_codec_' . $this->get_codec_type() . '_replacements_encode',
 			$this->get_replacements_list()
 		);
+
+		$serialized_replacer = new Shipper_Helper_Serialized_Replacer();
+
 		foreach ( $definitions as $original => $macro ) {
-			$rx = $this->get_matcher( $original );
+			$rx    = $this->get_matcher( $original );
 			$value = $this->get_replacement( $original, $macro );
 
-			$source = preg_replace( "/{$rx}/m", $value, $source );
+			/**
+			 * Let's decode strings with serialized object in mind.
+			 *
+			 * @since 1.2.8
+			 */
+			$source = $serialized_replacer->replace( $rx, $value, $source );
 		}
 
 		return $source;
@@ -157,25 +165,29 @@ abstract class Shipper_Helper_Codec {
 	 */
 	public function decode( $source = '' ) {
 		$definitions = (array) apply_filters(
-			sprintf( 'shipper_codec_%s_replacements_decode', $this->get_codec_type() ),
+			'shipper_codec_' . $this->get_codec_type() . '_replacements_decode',
 			$this->get_replacements_list()
 		);
+
+		$serialized_replacer = new Shipper_Helper_Serialized_Replacer();
+
 		foreach ( $definitions as $original => $macro ) {
-			$rx = $this->get_matcher( $original, $macro );
+			$rx    = $this->get_matcher( $original, $macro );
 			$value = '';
 			if ( $this->is_original_present( $original ) ) {
 				$current_value = apply_filters(
-					sprintf(
-						'shipper_codec_%s_%s_decode',
-						$this->get_codec_type(),
-						$this->get_safe_macro_name( $macro )
-					),
+					'shipper_codec_' . $this->get_codec_type() . '_' . $this->get_safe_macro_name( $macro ) . '_decode',
 					$this->get_original_value( $original )
 				);
-				$value = $this->get_replacement( $original, $current_value );
+				$value         = $this->get_replacement( $original, $current_value );
 			}
 
-			$source = preg_replace( "/{$rx}/m", $value, $source );
+			/**
+			 * Let's decode strings with serialized object in mind.
+			 *
+			 * @since 1.2.8
+			 */
+			$source = $serialized_replacer->replace( $rx, $value, $source );
 		}
 
 		return $source;
@@ -190,9 +202,9 @@ abstract class Shipper_Helper_Codec {
 	 * @return string
 	 */
 	public function get_codec_type() {
-		$parent = strtolower( get_class() );
+		$parent  = strtolower( get_class() );
 		$current = strtolower( get_called_class() );
-		return preg_replace( '/^' . preg_quote( $parent ) . '_?/', '', $current );
+		return preg_replace( '/^' . preg_quote( $parent, '/' ) . '_?/', '', $current );
 	}
 
 	/**

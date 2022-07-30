@@ -152,7 +152,7 @@ export default {
 
 				// Perform the API request.
 				restGet({
-					path: 'auth/exchange-code',
+					path: 'v1/auth/exchange-code',
 					params: {
 						access_code: this.accessCode,
 						client_id: this.$moduleVars.google.client_id,

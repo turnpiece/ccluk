@@ -5,12 +5,12 @@
  * @package shipper
  */
 
-$check = new Shipper_Task_Check_Hub;
+$check = new Shipper_Task_Check_Hub();
 
 if ( ! $check->has_dashboard_present() ) {
 	$this->render( 'msgs/welcome-dash-not-present', array( 'action' => $action ) );
-} else if ( ! $check->is_dashboard_active() ) {
+} elseif ( ! $check->is_dashboard_active() ) {
 	$this->render( 'msgs/welcome-dash-not-active', array( 'action' => $action ) );
-} else if ( ! $check->has_api_key() ) {
+} elseif ( ! $check->has_api_key() ) {
 	$this->render( 'msgs/welcome-dash-not-logged', array( 'action' => $action ) );
 }

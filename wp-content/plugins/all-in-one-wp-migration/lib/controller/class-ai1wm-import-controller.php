@@ -34,6 +34,7 @@ class Ai1wm_Import_Controller {
 	}
 
 	public static function import( $params = array() ) {
+		global $ai1wm_params;
 		ai1wm_setup_environment();
 
 		// Set params
@@ -59,6 +60,8 @@ class Ai1wm_Import_Controller {
 			exit;
 		}
 
+		$ai1wm_params = $params;
+
 		// Loop over filters
 		if ( ( $filters = ai1wm_get_filters( 'ai1wm_import' ) ) ) {
 			while ( $hooks = current( $filters ) ) {
@@ -68,9 +71,6 @@ class Ai1wm_Import_Controller {
 
 							// Run function hook
 							$params = call_user_func_array( $hook['function'], array( $params ) );
-
-							// Log request
-							Ai1wm_Log::import( $params );
 
 						} catch ( Ai1wm_Import_Retry_Exception $e ) {
 							if ( defined( 'WP_CLI' ) ) {
@@ -120,9 +120,10 @@ class Ai1wm_Import_Controller {
 							exit;
 						}
 
-						wp_remote_post(
-							apply_filters( 'ai1wm_http_import_url', admin_url( 'admin-ajax.php?action=ai1wm_import' ) ),
+						wp_remote_request(
+							apply_filters( 'ai1wm_http_import_url', add_query_arg( array( 'ai1wm_import' => 1 ), admin_url( 'admin-ajax.php?action=ai1wm_import' ) ) ),
 							array(
+								'method'    => apply_filters( 'ai1wm_http_import_method', 'POST' ),
 								'timeout'   => apply_filters( 'ai1wm_http_import_timeout', 10 ),
 								'blocking'  => apply_filters( 'ai1wm_http_import_blocking', false ),
 								'sslverify' => apply_filters( 'ai1wm_http_import_sslverify', false ),

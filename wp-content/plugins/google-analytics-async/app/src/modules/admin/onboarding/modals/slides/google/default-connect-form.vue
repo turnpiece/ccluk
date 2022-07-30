@@ -4,13 +4,7 @@
 			id="beehive-onboarding-google-auth-error"
 			type="error"
 			:show="error"
-			:message="
-				this.sprintf(
-					this.$i18n.notice.google_connect_error,
-					'https://premium.wpmudev.org/docs/wpmu-dev-plugins/beehive/#set-up-api-project',
-					'https://premium.wpmudev.org/get-support/'
-				)
-			"
+			:message="this.$i18n.notice.google_connect_error"
 		/>
 		<div class="sui-border-frame beehive-google-setup-connect">
 			<!-- Show the simple form parts -->

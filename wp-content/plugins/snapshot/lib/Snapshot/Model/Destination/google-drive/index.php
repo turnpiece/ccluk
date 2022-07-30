@@ -8,15 +8,11 @@ if ( ! defined( 'WPMUDEV_SNAPSHOT_DESTINATION_GOOGLE_DRIVE_LOAD_LIB' ) ) {
 	define( 'WPMUDEV_SNAPSHOT_DESTINATION_GOOGLE_DRIVE_LOAD_LIB', 'init' );
 }
 
-if ( ! class_exists( 'SnapshotDestinationGoogleDrive' ) && version_compare( phpversion(), '5.2', '>' )
+if ( ! class_exists( 'SnapshotDestinationGoogleDrive' ) && version_compare( phpversion(), '5.6', '>' )
 	 && stristr( WPMUDEV_SNAPSHOT_DESTINATIONS_EXCLUDE, 'SnapshotDestinationGoogleDrive' ) === false ) {
 
 	if ( WPMUDEV_SNAPSHOT_DESTINATION_GOOGLE_DRIVE_LOAD_LIB === 'head' ) {
-		// phpcs:ignore
-		set_include_path( dirname( __FILE__ ) . PATH_SEPARATOR . get_include_path() );
-		require_once  dirname( __FILE__ ) . '/Google/Client.php' ;
-		require_once  dirname( __FILE__ ) . '/Google/Http/MediaFileUpload.php' ;
-		require_once  dirname( __FILE__ ) . '/Google/Service/Drive.php' ;
+		require_once __DIR__ . '/vendor/autoload.php';
 	}
 
 	class SnapshotDestinationGoogleDrive extends Snapshot_Model_Destination {
@@ -29,10 +25,13 @@ if ( ! class_exists( 'SnapshotDestinationGoogleDrive' ) && version_compare( phpv
 		public $snapshot_locker;
 
 		/**
-		 * @public Google_0814_Client
+		 * @public Google_Client
 		 */
 		public $client;
 
+		/**
+		 * @var Google_Service_Drive
+		 */
 		public $connection;
 
 		public $SCOPES = array(
@@ -56,11 +55,7 @@ if ( ! class_exists( 'SnapshotDestinationGoogleDrive' ) && version_compare( phpv
 		public function init() {
 
 			if ( WPMUDEV_SNAPSHOT_DESTINATION_GOOGLE_DRIVE_LOAD_LIB === __FUNCTION__ ) {
-				// phpcs:ignore
-				set_include_path( dirname( __FILE__ ) . PATH_SEPARATOR . get_include_path() );
-				require_once  dirname( __FILE__ ) . '/Google/Client.php' ;
-				require_once  dirname( __FILE__ ) . '/Google/Http/MediaFileUpload.php' ;
-				require_once  dirname( __FILE__ ) . '/Google/Service/Drive.php' ;
+				require_once __DIR__ . '/vendor/autoload.php';
 			}
 
 			if ( isset( $this->destination_info ) ) {
@@ -213,7 +208,7 @@ if ( ! class_exists( 'SnapshotDestinationGoogleDrive' ) && version_compare( phpv
 
 			try {
 
-				$this->client = new Google_0814_Client();
+				$this->client = new Google_Client();
 				$this->client->setClientId( $this->destination_info['clientid'] );
 				$this->client->setClientSecret( $this->destination_info['clientsecret'] );
 				$this->client->setRedirectUri( $this->destination_info['redirecturi'] );
@@ -254,7 +249,7 @@ if ( ! class_exists( 'SnapshotDestinationGoogleDrive' ) && version_compare( phpv
 				return false;
 			}
 
-			$this->connection = new Google_0814_Service_Drive( $this->client );
+			$this->connection = new Google_Service_Drive( $this->client );
 
 			return true;
 		}
@@ -288,23 +283,30 @@ if ( ! class_exists( 'SnapshotDestinationGoogleDrive' ) && version_compare( phpv
 			$items = array();
 			$query = array(
 				"mimeType = 'application/zip'",
-				"title contains '{$root}'",
+				"name contains '{$root}'",
 			);
 
 			// Add parent directories to the query
 			if ( ! empty( $this->destination_info['directory'] ) ) {
 				$parent_directories = explode( ',', $this->destination_info['directory'] );
+
+				// https://developers.google.com/drive/api/v3/ref-single-parent
+				$parent_directories = array_slice($parent_directories, 0, 1);
+
 				foreach ($parent_directories as $dir) {
 					$query[] = "'{$dir}' in parents";
 				}
 			}
 
 			try {
-				$items = $this->connection->files->listFiles(
-                    array(
-						'q' => join(' and ', $query)
+				$q        = implode( ' and ', $query );
+				$fileList = $this->connection->files->listFiles(
+					array(
+						'q' => $q,
+						'fields' => 'files(id, name, createdTime)',
 					)
-                )->items;
+				);
+				$items    = $fileList->files;
 			} catch (Exception $e) {
 				$this->handle_exception($e, 'list');
 			}
@@ -323,9 +325,9 @@ if ( ! class_exists( 'SnapshotDestinationGoogleDrive' ) && version_compare( phpv
 		public function get_prepared_items ($items) {
 			$prepared = array();
 			foreach ($items as $item) {
-				$prepared[strtotime($item->createdDate)] = array(
-					'created' => $item->createdDate,
-					'title' => $item->title,
+				$prepared[strtotime($item->createdTime)] = array(
+					'created' => $item->createdTime,
+					'title' => $item->name,
 					'id' => $item->id,
 				);
 			}
@@ -356,31 +358,36 @@ if ( ! class_exists( 'SnapshotDestinationGoogleDrive' ) && version_compare( phpv
 
 			try {
 
-				$file = new Google_0814_Service_Drive_DriveFile();
-				$file->title = basename( $filename );
+				$file = new Google_Service_Drive_DriveFile();
+				$file->setName( basename( $filename ) );
 				$chunkSizeBytes = 1 * 1024 * 1024;
 				//echo "chunkSizeBytes[". $chunkSizeBytes ."]<br />";
 
 				if ( ! empty( $this->destination_info['directory'] ) ) {
 					$parent_directories = explode( ',', $this->destination_info['directory'] );
-					$parent = new Google_0814_Service_Drive_ParentReference();
+
+					// https://developers.google.com/drive/api/v3/ref-single-parent
+					$parent_directories = array_slice($parent_directories, 0, 1);
+
+					$parents = array();
 					foreach ( $parent_directories as $parent_directory ) {
 						$parent_directory = trim( $parent_directory );
 						if ( ! empty( $parent_directory ) ) {
-							$parent->setId( $parent_directory );
+							$parents[] = $parent_directory;
 						}
 					}
-					$file->setParents( array( $parent ) );
+					$file->setParents( $parents );
 				}
 
 				// Call the API with the media upload, defer so it doesn't immediately return.
 				$this->client->setDefer( true );
-				$request = $this->connection->files->insert( $file );
-				//Add Support for Team Drive
-				$request->setQueryParam('supportsTeamDrives', 'true' );
+				$request = $this->connection->files->create(
+					$file,
+					array( 'supportsAllDrives' => true )
+				);
 				if ( is_object( $request ) ) {
 					// Create a media file upload to represent our upload process.
-					$media = new Google_0814_Http_MediaFileUpload(
+					$media = new Google_Http_MediaFileUpload(
 						$this->client,
 						$request,
 						'application/x-zip',
@@ -746,9 +753,8 @@ if ( ! class_exists( 'SnapshotDestinationGoogleDrive' ) && version_compare( phpv
 							<td style="width:50%">
 								<p><?php esc_html_e( 'Instructions', SNAPSHOT_I18N_DOMAIN ); ?></p>
 								<ol>
-									<li><?php echo sprintf( esc_html__( 'Go to your %s', SNAPSHOT_I18N_DOMAIN ), '<a href="https://drive.google.com/#my-drive">' . esc_html__( 'Drive account. Navigate to or create a new directory where you want to upload the Snapshot archives. Make sure you are viewing the destination directory.', SNAPSHOT_I18N_DOMAIN ) . '</a>' ); ?></li>
-									<li><?php wp_kses_post( 'The URL for the directory will be something similar to <em>https://drive.google.com/#folders/0B6GD66ctHXXCOWZKNDRIRGJJXS3</em>. The Directory ID would be the last part after /#folders/ <strong><em>0B6GD66ctHXXCOWZKNDRIRGJJXS3</em></strong>.', SNAPSHOT_I18N_DOMAIN ); ?></li>
-									<li><?php esc_html_e( 'You can define multiple Directory IDs seperated by comma', SNAPSHOT_I18N_DOMAIN ); ?></li>
+									<li><?php echo sprintf( esc_html__( 'Go to your %s', SNAPSHOT_I18N_DOMAIN ), '<a href="https://drive.google.com/drive/my-drive">' . esc_html__( 'Drive account. Navigate to or create a new directory where you want to upload the Snapshot archives. Make sure you are viewing the destination directory.', SNAPSHOT_I18N_DOMAIN ) . '</a>' ); ?></li>
+									<li><?php wp_kses_post( 'The URL for the directory will be something similar to <em>https://drive.google.com/drive/folders/0B6GD66ctHXXCOWZKNDRIRGJJXS3</em>. The Directory ID would be the last part after /folders/ <strong><em>0B6GD66ctHXXCOWZKNDRIRGJJXS3</em></strong>.', SNAPSHOT_I18N_DOMAIN ); ?></li>
 								</ol>
 							</td>
 						</tr>
@@ -868,8 +874,8 @@ if ( ! class_exists( 'SnapshotDestinationGoogleDrive' ) && version_compare( phpv
 
 										$this->login();
 										if ( is_object( $this->client ) ) {
-											$this->client->authenticate( $_GET['code'] );
-											$this->destination_info['access_token'] = $this->client->getAccessToken();
+											$this->client->fetchAccessTokenWithAuthCode( filter_input( INPUT_GET, 'code', FILTER_SANITIZE_STRING ) );
+											$this->destination_info['access_token'] = wp_json_encode( $this->client->getAccessToken() );
 											//echo "access_token<pre>"; "[". $this->destination_info['access_token'] ."]<br />";
 											if ( ! empty( $this->destination_info['access_token'] ) ) {
 												?>

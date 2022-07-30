@@ -2,7 +2,7 @@
 /**
  * The Google authentication class.
  *
- * @link    http://premium.wpmudev.org
+ * @link    http://wpmudev.com
  * @since   3.2.0
  *
  * @author  Joel James <joel@incsub.com>
@@ -70,7 +70,7 @@ class Actions extends Base {
 				if ( 'dashboard' === $state['page'] ) {
 					$url = Template::dashboard_url( true );
 				} else {
-					$url = Template::settings_url( 'permissions', true );
+					$url = Template::accounts_url( 'google', true );
 				}
 			} else {
 				// If from dashboard.

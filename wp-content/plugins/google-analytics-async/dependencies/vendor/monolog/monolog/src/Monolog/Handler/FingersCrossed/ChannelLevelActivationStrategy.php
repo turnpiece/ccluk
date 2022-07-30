@@ -31,7 +31,7 @@ use Beehive\Monolog\Logger;
  *
  * @author Mike Meessen <netmikey@gmail.com>
  */
-class ChannelLevelActivationStrategy implements \Beehive\Monolog\Handler\FingersCrossed\ActivationStrategyInterface
+class ChannelLevelActivationStrategy implements ActivationStrategyInterface
 {
     private $defaultActionLevel;
     private $channelToActionLevel;
@@ -41,7 +41,7 @@ class ChannelLevelActivationStrategy implements \Beehive\Monolog\Handler\Fingers
      */
     public function __construct($defaultActionLevel, $channelToActionLevel = array())
     {
-        $this->defaultActionLevel = \Beehive\Monolog\Logger::toMonologLevel($defaultActionLevel);
+        $this->defaultActionLevel = Logger::toMonologLevel($defaultActionLevel);
         $this->channelToActionLevel = \array_map('Monolog\\Logger::toMonologLevel', $channelToActionLevel);
     }
     public function isHandlerActivated(array $record)

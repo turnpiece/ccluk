@@ -18,14 +18,14 @@ class Shipper_Task_Import_All extends Shipper_Task_Import {
 	 *
 	 * @var object Shipper_Task_Import instance
 	 */
-	private $_current_task;
+	private $current_task;
 
 	/**
 	 * Holds a flag reference to whether we completed a task in this run
 	 *
 	 * @var bool
 	 */
-	private $_task_completed = false;
+	private $task_completed = false;
 
 	/**
 	 * Task runner method
@@ -41,19 +41,20 @@ class Shipper_Task_Import_All extends Shipper_Task_Import {
 			return true;
 		}
 
-		$this->_task_completed = false;
+		$this->task_completed = false;
 
-		$migration = new Shipper_Model_Stored_Migration;
+		$migration = new Shipper_Model_Stored_Migration();
 
-		//we should at least stop here if found out it not compatibility
+		// we should at least stop here if found out it not compatibility.
 		if ( ! $this->is_signal_come_from_compatibility_version() ) {
-			//check if this is import
-			$err = __( "Shipper version difference, please update both source and destination to latest version and try again.", 'shipper' );
+			// check if this is import.
+			$err = __( 'Shipper version difference, please update both source and destination to latest version and try again.', 'shipper' );
 			Shipper_Controller_Runner_Migration::get()->attempt_cancel();
 			Shipper_Helper_Log::write(
+				/* translators: %s: error message. */
 				sprintf( __( 'Export issue: %s', 'shipper' ), $err )
 			);
-			$migration->set( 'errors', [ $err ] );
+			$migration->set( 'errors', array( $err ) );
 
 			return $this->mark_all_tasks_done( $migration ); // We're done because we had errors.
 		}
@@ -61,7 +62,7 @@ class Shipper_Task_Import_All extends Shipper_Task_Import {
 		$incomplete = $this->get_incomplete_tasks( $migration );
 
 		foreach ( $incomplete as $type => $task ) {
-			$this->_current_task = $task;
+			$this->current_task = $task;
 
 			/**
 			 * Fires just before the current task processing
@@ -90,19 +91,26 @@ class Shipper_Task_Import_All extends Shipper_Task_Import {
 
 			Shipper_Helper_Log::write(
 				sprintf(
+					/* translators: %1$d %2$d %3$s: current step, total steps and descriptions. */
 					__( '[Task %1$d of %2$d]: %3$s', 'shipper' ),
 					$this->get_current_step(),
 					$this->get_total_steps(),
 					$task->get_work_description()
 				)
 			);
-			$migration->set( 'progress', array(
-				'message'    => sprintf(
-					__( '%1$s: %2$d of %3$d', 'shipper' ),
-					$task->get_work_description(), $this->get_current_step(), $this->get_total_steps()
-				),
-				'percentage' => $this->get_status_percentage(),
-			) );
+			$migration->set(
+				'progress',
+				array(
+					'message'    => sprintf(
+						/* translators: %1$s %2$d %3$d: descriptions, current step, total steps. */
+						__( '%1$s: %2$d of %3$d', 'shipper' ),
+						$task->get_work_description(),
+						$this->get_current_step(),
+						$this->get_total_steps()
+					),
+					'percentage' => $this->get_status_percentage(),
+				)
+			);
 
 			if ( $task->has_errors() ) {
 				$errors = array();
@@ -110,6 +118,7 @@ class Shipper_Task_Import_All extends Shipper_Task_Import {
 				foreach ( $task->get_errors() as $error ) {
 					$err = $error->get_error_message();
 					Shipper_Helper_Log::write(
+						/* translators: %s: import message. */
 						sprintf( __( 'Import issue: %s', 'shipper' ), $err )
 					);
 					$errors[] = $err;
@@ -122,6 +131,18 @@ class Shipper_Task_Import_All extends Shipper_Task_Import {
 			if ( ! empty( $status ) ) {
 				// Task done, mark it so.
 				$this->mark_task_done( $migration, $type );
+
+				/**
+				 * Task is done, so clean up the saved data so that it doesn't interfere to other migration
+				 *
+				 * @since 1.1.4
+				 *
+				 * @see https://incsub.atlassian.net/browse/SHI-127
+				 */
+				if ( is_callable( array( $task, 'cleanup' ) ) ) {
+					$task->cleanup();
+				}
+
 				unset( $incomplete[ $type ] );
 			}
 
@@ -147,7 +168,7 @@ class Shipper_Task_Import_All extends Shipper_Task_Import {
 	 * @return bool
 	 */
 	public function is_done() {
-		$migration  = new Shipper_Model_Stored_Migration;
+		$migration  = new Shipper_Model_Stored_Migration();
 		$incomplete = $this->get_incomplete_tasks( $migration );
 
 		return empty( $incomplete );
@@ -162,34 +183,34 @@ class Shipper_Task_Import_All extends Shipper_Task_Import {
 	 * @return array
 	 */
 	public function get_tasks() {
-		if ( empty( $this->_tasks ) ) {
-			$this->_tasks = array();
-			$migration    = new Shipper_Model_Stored_Migration;
+		if ( empty( $this->tasks ) ) {
+			$this->tasks = array();
+			$migration   = new Shipper_Model_Stored_Migration();
 
 			if ( ! $migration->is_from_hub() ) {
-				$this->_tasks['hubclean'] = new Shipper_Task_Import_Hubclean;
+				$this->tasks['hubclean'] = new Shipper_Task_Import_Hubclean();
 			}
 
 			if ( ! $migration->is_from_hub() ) {
-				$this->_tasks['remote'] = new Shipper_Task_Import_Remote;
+				$this->tasks['remote'] = new Shipper_Task_Import_Remote();
 			}
 
-			$this->_tasks['prepare']     = new Shipper_Task_Import_Prepare;
-			$this->_tasks['download']    = new Shipper_Task_Import_Download;
-			$this->_tasks['parse']       = new Shipper_Task_Import_Parse;
-			$this->_tasks['uncompress']  = new Shipper_Task_Import_Uncompress();
-			$this->_tasks['files']       = new Shipper_Task_Import_Files;
-			$this->_tasks['large']       = new Shipper_Task_Import_Large;
-			$this->_tasks['active']      = new Shipper_Task_Import_Active;
-			$this->_tasks['tables']      = new Shipper_Task_Import_Tables;
-			$this->_tasks['config']      = new Shipper_Task_Import_Config;
-			$this->_tasks['dbprefix']    = new Shipper_Task_Import_DBPrefix;
-			$this->_tasks['scrubremote'] = new Shipper_Task_Import_Scrubremote;
-			$this->_tasks['cleanup']     = new Shipper_Task_Import_Cleanup;
-			$this->_tasks['postporcess'] = new Shipper_Task_Import_Postprocess;
+			$this->tasks['prepare']     = new Shipper_Task_Import_Prepare();
+			$this->tasks['download']    = new Shipper_Task_Import_Download();
+			$this->tasks['parse']       = new Shipper_Task_Import_Parse();
+			$this->tasks['uncompress']  = new Shipper_Task_Import_Uncompress();
+			$this->tasks['files']       = new Shipper_Task_Import_Files();
+			$this->tasks['large']       = new Shipper_Task_Import_Large();
+			$this->tasks['active']      = new Shipper_Task_Import_Active();
+			$this->tasks['tables']      = new Shipper_Task_Import_Tables();
+			$this->tasks['config']      = new Shipper_Task_Import_Config();
+			$this->tasks['dbprefix']    = new Shipper_Task_Import_DBPrefix();
+			$this->tasks['scrubremote'] = new Shipper_Task_Import_Scrubremote();
+			$this->tasks['postporcess'] = new Shipper_Task_Import_Postprocess();
+			$this->tasks['cleanup']     = new Shipper_Task_Import_Cleanup();
 		}
 
-		return $this->_tasks;
+		return $this->tasks;
 	}
 
 	/**
@@ -240,7 +261,7 @@ class Shipper_Task_Import_All extends Shipper_Task_Import {
 	 * @return int
 	 */
 	public function get_current_step() {
-		$migration  = new Shipper_Model_Stored_Migration;
+		$migration  = new Shipper_Model_Stored_Migration();
 		$incomplete = $this->get_incomplete_tasks( $migration );
 		$not_done   = count( $incomplete ) + 1;
 
@@ -253,11 +274,16 @@ class Shipper_Task_Import_All extends Shipper_Task_Import {
 	 * @return object Shipper_Task_Import instance
 	 */
 	public function get_current_task() {
-		return isset( $this->_current_task )
-			? $this->_current_task
+		return isset( $this->current_task )
+			? $this->current_task
 			: $this;
 	}
 
+	/**
+	 * Get status percentage.
+	 *
+	 * @return float|int
+	 */
 	public function get_status_percentage() {
 		$old     = parent::get_status_percentage();
 		$current = $this->get_current_task();
@@ -305,7 +331,7 @@ class Shipper_Task_Import_All extends Shipper_Task_Import {
 		$done[] = $type;
 		$migration->set( 'done', array_unique( $done ) );
 		$migration->save();
-		$this->_task_completed = true;
+		$this->task_completed = true;
 
 		return true;
 	}
@@ -316,7 +342,7 @@ class Shipper_Task_Import_All extends Shipper_Task_Import {
 	 * @return bool
 	 */
 	public function has_completed_task() {
-		return (bool) $this->_task_completed;
+		return (bool) $this->task_completed;
 	}
 
 	/**
@@ -330,7 +356,7 @@ class Shipper_Task_Import_All extends Shipper_Task_Import {
 		$migration->set( 'done', array_keys( $this->get_tasks() ) );
 		$migration->set( 'tasks_completed', true );
 		$migration->save();
-		$this->_task_completed = true;
+		$this->task_completed = true;
 
 		return true;
 	}
@@ -343,5 +369,4 @@ class Shipper_Task_Import_All extends Shipper_Task_Import {
 	public function get_work_description() {
 		return __( 'Import the migration package', 'shipper' );
 	}
-
 }

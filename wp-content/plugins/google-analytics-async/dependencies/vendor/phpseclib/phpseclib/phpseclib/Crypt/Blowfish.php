@@ -44,7 +44,7 @@ namespace Beehive\phpseclib\Crypt;
  * @author  Hans-Juergen Petrich <petrich@tronic-media.com>
  * @access  public
  */
-class Blowfish extends \Beehive\phpseclib\Crypt\Base
+class Blowfish extends Base
 {
     /**
      * Block Length of the cipher
@@ -208,7 +208,7 @@ class Blowfish extends \Beehive\phpseclib\Crypt\Base
         }
         // encrypt the zero-string, replace P1 and P2 with the encrypted data,
         // encrypt P3 and P4 with the new P1 and P2, do it with all P-array and subkeys
-        $data = "\0\0\0\0\0\0\0\0";
+        $data = "\x00\x00\x00\x00\x00\x00\x00\x00";
         for ($i = 0; $i < 18; $i += 2) {
             list($l, $r) = \array_values(\unpack('N*', $data = $this->_encryptBlock($data)));
             $this->bctx['p'][$i] = $l;

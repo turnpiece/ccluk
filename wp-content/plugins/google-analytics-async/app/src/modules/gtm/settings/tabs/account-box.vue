@@ -5,7 +5,13 @@
 			<div class="sui-box-settings-row">
 				<div class="sui-box-settings-col-2">
 					<p>{{ $i18n.desc.account_desc }}</p>
-					<sui-notice type="info" v-if="showNotice">
+					<sui-notice
+						type="info"
+						v-if="showNotice && duplicateContainer"
+					>
+						<p>{{ $i18n.notice.duplicate_connected }}</p>
+					</sui-notice>
+					<sui-notice type="info" v-else-if="showNotice">
 						<p>{{ $i18n.notice.account_connected }}</p>
 					</sui-notice>
 				</div>
@@ -27,7 +33,7 @@
 						id="beehive-gtm-invalid-gtm-id-error-notice"
 						type="error"
 						:show="error"
-						:message="sprintf($i18n.notice.gtm_invalid_id, '')"
+						:message="$i18n.notice.gtm_invalid_id"
 					/>
 				</div>
 			</div>
@@ -84,6 +90,25 @@ export default {
 		},
 
 		/**
+		 * Check if container ID is duplicate with network.
+		 *
+		 * @since 3.3.0
+		 *
+		 * @return {boolean}
+		 */
+		duplicateContainer() {
+			// Only when subsite.
+			if (this.isSubsite()) {
+				let subsite = this.getOption('container', 'gtm', '')
+				let network = this.getOption('container', 'gtm', '', true)
+
+				return subsite === network
+			} else {
+				return false
+			}
+		},
+
+		/**
 		 * Validate the current container ID.
 		 *
 		 * Check if the given container ID matches the GTM
@@ -96,7 +121,7 @@ export default {
 		isValid() {
 			let id = this.getOption('container', 'gtm', '')
 
-			return /^GTM-[A-Z0-9]+$/i.test(id) || !id
+			return /^GTM-[A-Z0-9]{1,7}$/i.test(id) || !id
 		},
 
 		/**

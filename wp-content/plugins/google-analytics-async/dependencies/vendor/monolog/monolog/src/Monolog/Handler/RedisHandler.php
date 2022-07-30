@@ -23,7 +23,7 @@ use Beehive\Monolog\Logger;
  *
  * @author Thomas Tourlourat <thomas@tourlourat.com>
  */
-class RedisHandler extends \Beehive\Monolog\Handler\AbstractProcessingHandler
+class RedisHandler extends AbstractProcessingHandler
 {
     private $redisClient;
     private $redisKey;
@@ -33,9 +33,9 @@ class RedisHandler extends \Beehive\Monolog\Handler\AbstractProcessingHandler
      * @param string                $key     The key name to push records to
      * @param int                   $level   The minimum logging level at which this handler will be triggered
      * @param bool                  $bubble  Whether the messages that are handled can bubble up the stack or not
-     * @param int                   $capSize Number of entries to limit list size to
+     * @param int|false             $capSize Number of entries to limit list size to
      */
-    public function __construct($redis, $key, $level = \Beehive\Monolog\Logger::DEBUG, $bubble = \true, $capSize = \false)
+    public function __construct($redis, $key, $level = Logger::DEBUG, $bubble = \true, $capSize = \false)
     {
         if (!($redis instanceof \Beehive\Predis\Client || $redis instanceof \Redis)) {
             throw new \InvalidArgumentException('Predis\\Client or Redis instance required');
@@ -82,6 +82,6 @@ class RedisHandler extends \Beehive\Monolog\Handler\AbstractProcessingHandler
      */
     protected function getDefaultFormatter()
     {
-        return new \Beehive\Monolog\Formatter\LineFormatter();
+        return new LineFormatter();
     }
 }

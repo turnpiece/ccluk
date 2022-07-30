@@ -7,35 +7,39 @@
 
 ?>
 
-<div class="sui-dialog sui-dialog-sm" id="shipper-settings-reset-dialog" aria-hidden="true">
-	<div class="sui-dialog-overlay" tabindex="-1" data-a11y-dialog-hide></div>
+<div class="sui-modal sui-modal-sm">
+	<div
+		role="dialog"
+		id="shipper-settings-reset-dialog"
+		class="sui-modal-content"
+		aria-modal="true"
+		aria-labelledby="shipper-settings-reset-dialog-title"
+		aria-describedby="shipper-settings-reset-dialog-description"
+	>
+		<div class="sui-box">
+			<div class="sui-box-header sui-flatten sui-content-center sui-spacing-top--60">
+				<button class="sui-button-icon sui-button-float--right" data-modal-close="">
+					<i class="sui-icon-close sui-md" aria-hidden="true"></i>
+					<span class="sui-screen-reader-text">
+						<?php esc_attr_e( 'Close this dialog window', 'shipper' ); ?>
+					</span>
+				</button>
 
-	<div class="sui-dialog-content" role="dialog">
-
-		<div class="sui-box" role="document">
-			<div class="sui-box-header">
-				<h3 class="sui-dialog-title">
+				<h3 id="shipper-settings-reset-dialog-title" class="sui-box-title sui-lg">
 					<?php esc_html_e( 'Reset Settings', 'shipper' ); ?>
 				</h3>
-				<button data-a11y-dialog-hide="" class="sui-dialog-close" aria-label="<?php esc_attr_e( 'Close this dialog window', 'shipper' ); ?>"></button>
-			</div>
-			<div class="sui-box-body">
-				<p>
+				<p id="shipper-settings-reset-dialog-description" class="shipper-description">
 					<?php esc_html_e( 'Are you sure you want to reset Shipper’s settings back to the factory defaults?', 'shipper' ); ?>
 				</p>
-
-				<div class="shipper-actions">
-					<button class="sui-button sui-button-ghost shipper-goback">
-						<?php esc_html_e( 'Cancel', 'shipper' ); ?>
-					</button>
-					<button class="sui-button sui-button-ghost sui-button-red shipper-reset">
-						<i class="sui-icon-undo" aria-hidden="true"></i>
-						<?php esc_html_e( 'Reset', 'shipper' ); ?>
-					</button>
-				</div>
-
-			</div><?php // .sui-box-body ?>
-		</div><?php // .sui-box ?>
-
-	</div><?php // .sui-dialog-content ?>
-</div><?php // .sui-dialog ?>
+			</div>
+			<div class="sui-box-footer sui-flatten sui-content-center">
+				<button class="sui-button sui-button-ghost" data-modal-close="">
+					<?php esc_html_e( 'Cancel', 'shipper' ); ?>
+				</button>
+				<button class="sui-button sui-button-red sui-button-ghost shipper-reset">
+					<?php esc_html_e( 'Reset', 'shipper' ); ?>
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

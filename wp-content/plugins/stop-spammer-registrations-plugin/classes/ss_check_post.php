@@ -1,38 +1,41 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+
+if ( !defined( 'ABSPATH' ) ) {
+	http_response_code( 404 );
+	die();
 }
 
 class ss_check_post extends be_module {
-	public function process(
-		$ip, &$stats = array(), &$options = array(), &$post = array()
-	) {
-// does all of the post checks
-// these are the deny before addons
-// returns array 
-// [0]=class location, [1]=class name (also used as counter), [2]=addon name,
-// [3]=addon author, [4]=addon description
-// if already in Good Cache then exit quick - prevents looking when good checking has already been done
+	public function process( $ip, &$stats = array(), &$options = array(), &$post = array() ) {
+		// does all of the post checks
+		// these are the block before addons
+		// returns array 
+		// [0] = class location,
+		// [1] = class name (also used as counter),
+		// [2] = addon name,
+		// [3] = addon author,
+		// [4] = addon description
+		// if already in Good Cache then exit quick - prevents looking when good checking has already been done
 		$reason = be_load( 'chkgcache', ss_get_ip(), $stats, $options, $post );
 		if ( $reason !== false ) {
 			return;
 		}
 		$addons = array();
-		$addons = apply_filters( 'ss_addons_deny', $addons );
-		if ( ! empty( $addons ) && is_array( $addons ) ) {
+		$addons = apply_filters( 'ss_addons_block', $addons );
+		if ( !empty( $addons ) && is_array( $addons ) ) {
 			foreach ( $addons as $add ) {
-				if ( ! empty( $add ) && is_array( $add ) ) {
+				if ( !empty( $add ) && is_array( $add ) ) {
 					$reason = be_load( $add, ss_get_ip(), $stats, $options,
 						$post );
 					if ( $reason !== false ) {
-// need to log a passed hit on post here
+						// need to log a passed hit on post here
 						ss_log_bad( ss_get_ip(), $reason, $add[1], $add );
 						exit();
 					}
 				}
 			}
 		}
-// here on a post only so it will not check GET vars
+		// here on a post only so it will not check GET vars
 		$noipactions = array( // these don't need the IP to detect spam
 			'chkagent',
 			'chkbbcode',
@@ -45,11 +48,13 @@ class ss_check_post extends be_module {
 			'chkreferer',
 			'chksession',
 			'chkspamwords',
+			'chkperiods',
+			'chkurlshort',
 			'chktld',
 			'chkaccept',
 			'chkadmin',
 		);
-		$actions     = array( // these require an IP that can be trusted
+		$actions = array( // these require an IP that can be trusted
 			'chkamazon',
 			'chkbcache',
 			'chkblip',
@@ -203,12 +208,12 @@ class ss_check_post extends be_module {
 			'chkhoney',
 			'chkbotscout',
 			'chkdnsbl'
-// check countries
+			// check countries
 		);
-		$chk         = '';
-// start with the no IP list
+		$chk = '';
+		// start with the no IP list
 		foreach ( $noipactions as $chk ) {
-			if ( $options[ $chk ] == 'Y' ) {
+			if ( $options[$chk] == 'Y' ) {
 				$reason = be_load( $chk, ss_get_ip(), $stats, $options, $post );
 				if ( $reason !== false ) {
 					break;
@@ -216,50 +221,48 @@ class ss_check_post extends be_module {
 			}
 		}
 		if ( $reason === false ) {
-// check for a valid IP - if IP is valid we can do the IP checks
-			$actionvalid
-				= array( 'chkvalidip' ); // took out the Cloudflare exclusion
+			// check for a valid IP - if IP is valid we can do the IP checks
+			$actionvalid = array( 'chkvalidip' ); // took out the Cloudflare exclusion
 			foreach ( $actionvalid as $chk ) {
 				$reason = be_load( $chk, ss_get_ip(), $stats, $options, $post );
 				if ( $reason !== false ) {
 					break;
 				}
 			}
-// if the IP is valid reason will be false - things like 127.0.0.1, etc. or IP same as server
-// can't check the IP based checks because the IP is invalid
+			// if the IP is valid reason will be false - things like 127.0.0.1, etc. or IP same as server
+			// can't check the IP based checks because the IP is invalid
 			if ( $reason !== false ) {
 				return false;
 			}
 		}
 		if ( $reason === false ) {
 			foreach ( $actions as $chk ) {
-				if ( $options[ $chk ] == 'Y' ) {
-					$reason = be_load( $chk, ss_get_ip(), $stats, $options,
-						$post );
+				if ( $options[$chk] == 'Y' ) {
+					$reason = be_load( $chk, ss_get_ip(), $stats, $options, $post );
 					if ( $reason !== false ) {
 						break;
 					}
 				}
 			}
 		}
-// sfs_debug_msg( "check post $ip, " . print_r( $post,true ) );
-// for testing the cache without doing spam
-		if ( array_key_exists( 'email', $post )
-		     && $post['email'] == 'tester@tester.com'
-		) {
-			$post['reason'] = "testing IP - will always be blocked"; // use to test plugin
+		// sfs_debug_msg( "check post $ip, " . print_r( $post,true ) );
+		// for testing the cache without doing spam
+		if ( array_key_exists( 'email', $post ) && $post['email'] == 'email@example.com' ) {
+			$post['reason'] = __( 'Testing Email (will always be blocked)', 'stop-spammer-registrations-plugin' ); // use to test plugin
 			be_load( 'ss_challenge', ss_get_ip(), $stats, $options, $post );
-
 			return;
 		}
-// these are the deny after addons
-// returns array 
-// [0]=class location, [1]=class name (also used as counter), [2]=addon name,
-// [3]=addon author, [4]=addon description
+		// these are the block after addons
+		// returns array 
+		// [0] = class location,
+		// [1] = class name (also used as counter),
+		// [2] = addon name,
+		// [3] = addon author,
+		// [4] = addon description
 		if ( $reason === false ) {
 			return false;
 		}
-// here because we have a spammer that's been caught
+		// here because we have a spammer that's been caught
 		$ss_check_sempahore = true;
 		ss_log_bad( ss_get_ip(), $reason, $chk );
 		exit;

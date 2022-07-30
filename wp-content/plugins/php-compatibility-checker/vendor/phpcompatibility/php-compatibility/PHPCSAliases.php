@@ -1,12 +1,16 @@
 <?php
 /**
+ * PHPCompatibility, an external standard for PHP_CodeSniffer.
+ *
  * PHPCS cross-version compatibility helper.
  *
- * @category PHP
- * @package  PHPCompatibility
- * @author   Juliette Reinders Folmer <phpcompatibility_nospam@adviesenzo.nl>
+ * @package   PHPCompatibility
+ * @copyright 2012-2019 PHPCompatibility Contributors
+ * @license   https://opensource.org/licenses/LGPL-3.0 LGPL3
+ * @link      https://github.com/PHPCompatibility/PHPCompatibility
+ *
+ * @since 8.0.0
  */
-
 
 /*
  * Alias a number of PHPCS 3.x classes to their PHPCS 2.x equivalents.
@@ -17,11 +21,11 @@
  * {@internal The PHPCS file have been reorganized in PHPCS 3.x, quite
  * a few "old" classes have been split and spread out over several "new"
  * classes. In other words, this will only work for a limited number
- * of classes.}}
+ * of classes.}
  *
  * {@internal The `class_exists` wrappers are needed to play nice with other
  * external PHPCS standards creating cross-version compatibility in the same
- * manner.}}
+ * manner.}
  */
 if (defined('PHPCOMPATIBILITY_PHPCS_ALIASES_SET') === false) {
     if (interface_exists('\PHP_CodeSniffer_Sniff') === false) {
@@ -48,15 +52,11 @@ if (defined('PHPCOMPATIBILITY_PHPCS_ALIASES_SET') === false) {
     /*
      * Register an autoloader.
      *
-     * {@internal This autoloader is not needed for running the sniffs, however, it *is*
-     * needed for running the unit tests as the PHPCS native autoloader runs into trouble there.
-     * This issue will be fixed in PHPCS 3.1, so the below code can be removed once the
-     * minimum PHPCS 3.x requirement for PHPCompatibility has gone up to 3.1.
-     * Upstream issue: {@link https://github.com/squizlabs/PHP_CodeSniffer/issues/1564} }}
+     * {@internal When `installed_paths` is set via the ruleset, this autoloader
+     * is needed to run the sniffs.
+     * Upstream issue: {@link https://github.com/squizlabs/PHP_CodeSniffer/issues/1591} }
      *
-     * {@internal Update: when `installed_paths` is set via the ruleset, this autoloader
-     * **is** needed to run the sniffs.
-     * Upstream issue: {@link https://github.com/squizlabs/PHP_CodeSniffer/issues/1591} }}
+     * @since 8.0.0
      */
     spl_autoload_register(function ($class) {
         // Only try & load our own classes.

@@ -108,9 +108,9 @@
 								Sfb.StartHostingBackups.Viewer.show_backup_result('in progress', false);
 
 								$('.wps-page-hosting-backups input[name="start_hosting_backup"]').addClass('button-disabled');
-								$('.wps-page-hosting-backups input[name="start_hosting_backup"]').attr('disabled','disabled');
+								$('.wps-page-hosting-backups input[name="start_hosting_backup"]').prop('disabled', true);
 								$('.wps-page-hosting-backups input[name="start_first_hosting_backup"]').addClass('button-disabled');
-								$('.wps-page-hosting-backups input[name="start_first_hosting_backup"]').attr('disabled','disabled');
+								$('.wps-page-hosting-backups input[name="start_first_hosting_backup"]').prop('disabled', true);
 							}
 						} else {
 							$('.wps-new-hosting-backup-state').hide();
@@ -338,10 +338,10 @@
 				toggle_new_backup: function (toggle) {
 					if (toggle === 'disable') {
 						$('.wps-page-hosting-backups input[name="start_hosting_backup"]').addClass('button-disabled');
-						$('.wps-page-hosting-backups input[name="start_hosting_backup"]').attr('disabled','disabled');
+						$('.wps-page-hosting-backups input[name="start_hosting_backup"]').prop('disabled', true);
 					} else {
 						$('.wps-page-hosting-backups input[name="start_hosting_backup"]').removeClass('button-disabled');
-						$('.wps-page-hosting-backups input[name="start_hosting_backup"]').removeAttr('disabled');
+						$('.wps-page-hosting-backups input[name="start_hosting_backup"]').prop('disabled', false);
 					}
 				},
 
@@ -889,13 +889,13 @@
 
 			$('input[name="wps-managed-backups-menu"]').on('change', function (e) {
 				var value = $(this).filter(':checked').val();
-				$('select[name="wps-managed-backups-menu-mobile"]').val(value).change();
+				$('select[name="wps-managed-backups-menu-mobile"]').val(value).trigger('change');
 				$('.wps-managed-backups-pages > .wpmud-box').addClass('hidden').filter('.' + value).removeClass('hidden');
 			});
 	
 			$('select[name="wps-managed-backups-menu-mobile"]').on('change', function (e) {
 				var value = $(this).val();
-				$('input[name="wps-managed-backups-menu"][value="' + value + '"]').attr('checked', 'checked');
+				$('input[name="wps-managed-backups-menu"][value="' + value + '"]').prop('checked', true);
 				$('.wps-managed-backups-pages > .wpmud-box').addClass('hidden').filter('.' + value).removeClass('hidden');
 			});
 

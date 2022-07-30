@@ -33,7 +33,7 @@ abstract class Shipper_Helper_Storage {
 	 *
 	 * @var array()
 	 */
-	private static $_buckets = array();
+	private static $buckets = array();
 
 	/**
 	 * Current namespaced storage instance data
@@ -47,7 +47,7 @@ abstract class Shipper_Helper_Storage {
 	 *
 	 * @var string
 	 */
-	private $_namespace = '';
+	private $namespace = '';
 
 	/**
 	 * Constructor (internal)
@@ -75,12 +75,11 @@ abstract class Shipper_Helper_Storage {
 	public static function get( $namespace, $alt = false ) {
 		$cls = ! empty( $alt )
 			? 'Shipper_Helper_Storage_Db'
-			: 'Shipper_Helper_Storage_File'
-		;
-		if ( ! isset( self::$_buckets[ $namespace ] ) ) {
-			self::$_buckets[ $namespace ] = new $cls( $namespace );
+			: 'Shipper_Helper_Storage_File';
+		if ( ! isset( self::$buckets[ $namespace ] ) ) {
+			self::$buckets[ $namespace ] = new $cls( $namespace );
 		}
-		return self::$_buckets[ $namespace ];
+		return self::$buckets[ $namespace ];
 	}
 
 	/**
@@ -93,14 +92,13 @@ abstract class Shipper_Helper_Storage {
 	public function set_namespace( $namespace = '' ) {
 		$namespace = is_string( $namespace ) && ! empty( $namespace )
 			? strtolower( preg_replace( '/[^_a-z0-9]/', '', $namespace ) )
-			: self::DEFAULT_NAMESPACE
-		;
+			: self::DEFAULT_NAMESPACE;
 
 		if ( false === stristr( $namespace, self::DEFAULT_NAMESPACE ) ) {
 			$namespace = self::DEFAULT_NAMESPACE . "-{$namespace}";
 		}
 
-		return $this->_namespace = $namespace;
+		return $this->namespace = $namespace; // phpcs:ignore Squiz.PHP.DisallowMultipleAssignments.Found
 	}
 
 	/**
@@ -109,7 +107,7 @@ abstract class Shipper_Helper_Storage {
 	 * @return string
 	 */
 	public function get_namespace() {
-		return (string) $this->_namespace;
+		return (string) $this->namespace;
 	}
 
 	/**
@@ -135,7 +133,6 @@ abstract class Shipper_Helper_Storage {
 
 		return JSON_ERROR_NONE === json_last_error()
 			? $data
-			: array()
-		;
+			: array();
 	}
 }

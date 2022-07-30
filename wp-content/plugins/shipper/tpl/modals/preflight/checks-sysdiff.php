@@ -6,20 +6,20 @@
  * @package shipper
  */
 
-$checks = $result['checks']['sysdiff'];
+$checks             = $result['checks']['sysdiff'];
 $has_service_errors = ! empty( $checks['errors'] );
-$sorted = Shipper_Helper_Template_Sorter::checks_by_error_status( $checks['checks'] );
+$sorted             = Shipper_Helper_Template_Sorter::checks_by_error_status( $checks['checks'] );
 ?>
 
 <div class="sui-accordion sui-accordion-block">
-
-	<?php foreach ( $sorted as $check ) {
+	<?php
+	foreach ( $sorted as $check ) {
 		if ( 'ok' === $check['status'] ) {
 			if ( ! empty( $is_recheck ) ) {
 				$this->render(
 					'tags/check-success-tag',
 					array(
-						'check' => $check,
+						'check'      => $check,
 						'is_recheck' => ! empty( $is_recheck ),
 					)
 				);
@@ -28,11 +28,12 @@ $sorted = Shipper_Helper_Template_Sorter::checks_by_error_status( $checks['check
 			$this->render(
 				'tags/check-failure-tag',
 				array(
-					'check' => $check,
+					'check'      => $check,
 					'is_recheck' => ! empty( $is_recheck ),
 				)
 			);
 		}
-	} ?>
+	}
+	?>
 
 </div>

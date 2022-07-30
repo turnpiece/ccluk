@@ -2,10 +2,10 @@
 
 /**
  * Shipper Package Installer
- * Version: 1.1.2
- * Build: 2019-12-09
+ * Version: 1.2.12
+ * Build: 2022-04-04
  *
- * Copyright 2009-2019 Incsub (http://incsub.com)
+ * Copyright 2009-2022 Incsub (http://incsub.com)
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License (Version 2 - GPLv2) as published by
@@ -29,6 +29,7 @@
  * Preamble file
  *
  * Sets general PHP setup and installer password/salt.
+ * phpcs:ignoreFile as it's out side of WP scope.
  *
  * @package shipper-installer
  */
@@ -76,14 +77,16 @@ abstract class Shinst_Controller {
 	 * Handles invalid request sent to controller
 	 *
 	 * @param string $rq Request string (raw).
-	 * @param int $status Status code.
+	 * @param int    $status Status code.
 	 */
 	public function handle_invalid_request( $rq, $status = 500 ) {
 		http_response_code( $status );
-		throw new Shinst_Exception( sprintf(
-			'We don\'t know how to handle your request: [%s]',
-			preg_replace( '/[^-_a-z0-9]/i', '', $rq )
-		) );
+		throw new Shinst_Exception(
+			sprintf(
+				'We don\'t know how to handle your request: [%s]',
+				preg_replace( '/[^-_a-z0-9]/i', '', $rq )
+			)
+		);
 	}
 }
 
@@ -215,13 +218,15 @@ class Shinst_Controller_Ajax_Cleanup extends Shinst_Controller_Ajax {
 	 */
 	public function cleanup_work_dir() {
 		Shinst_Model_Fs_Path::rmdir_r(
-			Shinst_Model_Fs_Path::get_working_dir(), ''
+			Shinst_Model_Fs_Path::get_working_dir(),
+			''
 		);
 		@rmdir( Shinst_Model_Fs_Path::get_working_dir( false ) );
 		$progress = new Shinst_View_Cmp_Progress(
-			'Deleting install.php', 50
+			'Deleting install.php',
+			50
 		);
-		$main     = new Shinst_View_Cmp_Main;
+		$main     = new Shinst_View_Cmp_Main();
 		$main
 			->add_component( new Shinst_View_Cmp_Title( 'Running Cleanup' ) )
 			->add_component( new Shinst_View_Cmp_Paragraph( 'We’re running the cleanup on your new website, and you’ll be redirected to the admin login screen after that. This will only take a couple of seconds.' ) )
@@ -234,10 +239,12 @@ class Shinst_Controller_Ajax_Cleanup extends Shinst_Controller_Ajax {
 		echo '</style>';
 		$out = ob_get_clean();
 
-		return $this->send_success( array(
-			'is_done' => false,
-			'markup'  => $out,
-		) );
+		return $this->send_success(
+			array(
+				'is_done' => false,
+				'markup'  => $out,
+			)
+		);
 	}
 
 	/**
@@ -248,11 +255,11 @@ class Shinst_Controller_Ajax_Cleanup extends Shinst_Controller_Ajax {
 			$archive = Shinst_Model_Fs_Archive::get_archive();
 			unlink( $archive );
 		} catch ( Exception $e ) {
+			Shinst_Model_Log::write( $e->getMessage() );
 		}
 		@rmdir( Shinst_Model_Fs_Path::get_working_dir( false ) );
 		unlink( __FILE__ );
-		unlink( shinst_trailingslash( Shinst_Model_Fs_Path::get_working_dir( false ) ) .
-		        'installer.log' );
+		unlink( shinst_trailingslash( Shinst_Model_Fs_Path::get_working_dir( false ) ) . 'installer.log' );
 
 		return $this->send_all_done();
 	}
@@ -261,7 +268,7 @@ class Shinst_Controller_Ajax_Cleanup extends Shinst_Controller_Ajax {
 	 * Responds with all done markup and status
 	 */
 	public function send_all_done() {
-		$main = new Shinst_View_Cmp_Main;
+		$main = new Shinst_View_Cmp_Main();
 		$main
 			->add_component( new Shinst_View_Cmp_Title( 'Redirecting…' ) )
 			->add_component( new Shinst_View_Cmp_Paragraph( 'Cleanup on your new website is finished! We are redirecting you to the admin login screen.' ) );
@@ -277,10 +284,12 @@ class Shinst_Controller_Ajax_Cleanup extends Shinst_Controller_Ajax {
 		$session->clear();
 		$session->save();
 
-		return $this->send_success( array(
-			'is_done' => true,
-			'markup'  => $out,
-		) );
+		return $this->send_success(
+			array(
+				'is_done' => true,
+				'markup'  => $out,
+			)
+		);
 	}
 }
 
@@ -307,13 +316,15 @@ class Shinst_Controller_Ajax_Connection extends Shinst_Controller_Ajax {
 		);
 		$fetch = ! empty( $_POST['fetch'] ) ? $_POST['fetch'] : false;
 		$fetch = filter_var( $fetch, FILTER_VALIDATE_BOOLEAN );
-		if ( $fetch == true ) {
+
+		if ( $fetch ) {
 			$config           = shinst_read_wpconfig();
 			$args['name']     = $config['db_name'];
 			$args['user']     = $config['db_user'];
 			$args['password'] = $config['db_password'];
 			$args['host']     = $config['db_host'];
 			$args['port']     = $config['port'];
+			$args['prefix']   = ! empty( $args['prefix'] ) ? $args['prefix'] : $config['table_prefix'];
 		} else {
 			if ( ! empty( $_POST['host'] ) ) {
 				$args['host'] = $_POST['host'];
@@ -347,11 +358,27 @@ class Shinst_Controller_Ajax_Connection extends Shinst_Controller_Ajax {
 		$config->set_value( 'table_prefix', $args['prefix'] );
 		$config->save();
 
+		if ( Shinst_Model_Env::is_flywheel() ) {
+			$table_prefix = shinst_read_wpconfig()['table_prefix'];
+
+			if ( $args['prefix'] !== $table_prefix ) {
+				return $this->send_success(
+					array(
+						'prefix' => $table_prefix,
+					)
+				);
+			}
+
+			return $this->send_success();
+		}
+
 		$table_prefix = $this->get_unique_table_prefix( $args );
 		if ( $table_prefix !== $args['prefix'] ) {
-			return $this->send_success( array(
-				'prefix' => $table_prefix,
-			) );
+			return $this->send_success(
+				array(
+					'prefix' => $table_prefix,
+				)
+			);
 		}
 
 		$this->send_success();
@@ -400,16 +427,7 @@ class Shinst_Controller_Ajax_Connection extends Shinst_Controller_Ajax {
 	 * @return string
 	 */
 	public function get_longest_table_name() {
-		$tables  = Shinst_Model_Package::get_tables();
-		$longest = reset( $tables );
-		foreach ( $tables as $table ) {
-			if ( strlen( $table ) <= strlen( $longest ) ) {
-				continue;
-			}
-			$longest = $table;
-		}
-
-		return (string) $longest;
+		return Shinst_Model_Package::get_dumped_sql_file_name();
 	}
 }
 
@@ -442,16 +460,16 @@ class Shinst_Controller_Ajax_Deploy extends Shinst_Controller_Ajax {
 	 * @param int $percentage Current progress, in percents.
 	 */
 	public function send_update( $percentage ) {
-		return $this->send_success( array(
-			'is_done'    => $percentage >= 100,
-			'percentage' => $percentage,
-		) );
+		return $this->send_success(
+			array(
+				'is_done'    => $percentage >= 100,
+				'percentage' => $percentage,
+			)
+		);
 	}
 
-	/**
-	 * Unpacks the deployment archive
-	 */
-	public function deploy_unpack() {
+	public function deploy_unpack1() {
+		set_time_limit( - 1 );
 		Shinst_Model_Fs_Archive::extract_all();
 		$session = Shinst_Model_Session::get( Shinst_Model_Session::SESS_DEPLOY );
 		$session->clear();
@@ -463,6 +481,35 @@ class Shinst_Controller_Ajax_Deploy extends Shinst_Controller_Ajax {
 		$list->reset();
 
 		return $this->send_update( 100 );
+	}
+
+	public function deploy_unpack() {
+		set_time_limit( - 1 );
+		$session   = Shinst_Model_Session::get( Shinst_Model_Session::SESS_DEPLOY );
+		$flag_path = Shinst_Model_Fs_Path::get_working_dir() . 'extracting';
+		if ( ! file_exists( $flag_path ) ) {
+			$session->clear();
+			$session->save();
+			file_put_contents( $flag_path, 1 );
+		}
+		$offset = $session->get_value( 'unpack_offset' );
+		if ( $offset == false ) {
+			// unpack the meta first
+			$offset = 0;
+		}
+		$ret = Shinst_Model_Fs_Archive::extract_by_offset( $offset );
+		if ( $offset === true ) {
+			// this done
+			$list = new Shinst_Model_Fs_List(
+				Shinst_Model_Package::get_component_dir( Shinst_Model_Package::COMPONENT_FS )
+			);
+			$list->reset();
+			$this->send_update( 100 );
+		}
+		list( $offset, $percent ) = $ret;
+		$session->set_value( 'unpack_offset', $offset );
+		$session->save();
+		$this->send_update( $percent );
 	}
 
 	/**
@@ -477,7 +524,9 @@ class Shinst_Controller_Ajax_Deploy extends Shinst_Controller_Ajax {
 
 		$files   = $list->get_files();
 		$is_done = $list->is_done();
+
 		if ( $is_done ) {
+
 			$list->reset();
 		}
 
@@ -510,9 +559,11 @@ class Shinst_Controller_Ajax_Deploy extends Shinst_Controller_Ajax {
 		$total_files    = $session->get_value( 'total_files', 0 );
 		$deployed_files = $session->get_value( 'deployed_files', 0 );
 		$config_files   = $session->get_value( 'config_files', array() );
-		$list           = new Shinst_Model_Fs_List(
+
+		$list = new Shinst_Model_Fs_List(
 			Shinst_Model_Package::get_component_dir( Shinst_Model_Package::COMPONENT_FS )
 		);
+
 		if ( $list->is_done() ) {
 			$list->reset();
 
@@ -547,9 +598,30 @@ class Shinst_Controller_Ajax_Deploy extends Shinst_Controller_Ajax {
 				continue;
 			}
 
+			/**
+			 * We'll remove the plugins and theme dir first and deploy files later.
+			 * We're doing this cause, we want to make both source and destination site identical.
+			 * So source and destination site will have same plugins
+			 *
+			 * @since 1.1.4
+			 */
+			if ( ! $session->get_value( 'plugins_deleted', false ) && false !== strpos( $destination, '/wp-content/plugins' ) ) {
+				$plugins_dir = strstr( $destination, 'plugins', true ) . 'plugins';
+				Shinst_Model_Fs_Path::rmdir_r( $plugins_dir, false );
+				$session->set_value( 'plugins_deleted', true );
+				$session->save();
+			}
+
+			if ( ! $session->get_value( 'themes_deleted', false ) && false !== strpos( $destination, '/wp-content/themes' ) ) {
+				$themes_dir = strstr( $destination, 'themes', true ) . 'themes';
+				Shinst_Model_Fs_Path::rmdir_r( $themes_dir, false );
+				$session->set_value( 'themes_deleted', true );
+				$session->save();
+			}
+
 			$dir = pathinfo( $destination, PATHINFO_DIRNAME );
 			if ( ! is_dir( $dir ) ) {
-				//create it
+				// create it
 				Shinst_Model_Fs_Path::mkdir_p( $dir );
 			}
 
@@ -557,7 +629,8 @@ class Shinst_Controller_Ajax_Deploy extends Shinst_Controller_Ajax {
 				Shinst_Model_Log::write(
 					sprintf(
 						'WARNING: unable to copy staged file %1$s to %2$s',
-						$source, $destination
+						$source,
+						$destination
 					)
 				);
 			}
@@ -579,55 +652,6 @@ class Shinst_Controller_Ajax_Deploy extends Shinst_Controller_Ajax {
 		}
 
 		return $this->send_update( $percentage );
-	}
-
-	public function deploy_tables() {
-		$session = Shinst_Model_Session::get( Shinst_Model_Session::SESS_DEPLOY );
-
-		$all_tables = Shinst_Model_Package::get_table_files();
-		if ( empty( $all_tables ) ) {
-			Shinst_Model_Log::write( 'No tables' );
-			throw new Shinst_Exception_Fs(
-				'Unable to find the tables to import'
-			);
-		}
-
-		$processed_tables = $session->get_value( 'processed', array() );
-		if ( count( $all_tables ) === count( $processed_tables ) ) {
-			Shinst_Model_Log::write( 'We are done' );
-
-			// We are done.
-			return $this->send_update( 100 );
-		}
-		$current_table_file = $first_table_file = reset( $all_tables );
-		foreach ( $all_tables as $t ) {
-			if ( ! in_array( $t, $processed_tables, true ) ) {
-				$current_table_file = $t;
-				break;
-			}
-		}
-		$current_table_pos = $session->get_value( 'current_position', 0 );
-		$model             = new Shinst_Model_Db_Table_Install( $current_table_file );
-
-		$table = basename( $current_table_file );
-		Shinst_Model_Log::write( "Importing {$table} from {$current_table_pos}" );
-
-		$restored = $model->import_statements( $current_table_pos, 50 );
-		if ( empty( $restored ) ) {
-			// We are done with this table.
-			$processed_tables[] = $current_table_file;
-			$session->set_value( 'processed', $processed_tables );
-			$session->set_value( 'current_position', 0 );
-			$session->save();
-		} else {
-			// We are still not done processing this table.
-			$session->set_value( 'current_position', $current_table_pos + $restored );
-			$session->save();
-		}
-
-		return $this->send_update(
-			( count( $processed_tables ) / count( $all_tables ) ) * 100
-		);
 	}
 }
 
@@ -653,7 +677,7 @@ class Shinst_Controller_Ajax_Password extends Shinst_Controller_Ajax {
 			);
 		}
 
-		$ctrl = new Shinst_Controller_Front;
+		$ctrl = new Shinst_Controller_Front();
 		if ( $ctrl->get_password() !== $password ) {
 			throw new Shinst_Exception_Auth( 'Invalid password' );
 		}
@@ -684,14 +708,14 @@ class Shinst_Controller_Ajax_Password extends Shinst_Controller_Ajax {
 class Shinst_Controller_Ajax_Requirements extends Shinst_Controller_Ajax {
 
 	public function run() {
-		$ctrl = new Shinst_Controller_Front;
+		$ctrl = new Shinst_Controller_Front();
 		if ( ! $ctrl->is_user_allowed() ) {
 			throw new Shinst_Exception_Auth(
 				'You are not wanted here, please leave'
 			);
 		}
 
-		$main = new Shinst_View_Cmp_Main;
+		$main = new Shinst_View_Cmp_Main();
 		$main
 			->add_component( new Shinst_View_Cmp_Title( 'Requirements Check' ) )
 			->add_component( new Shinst_View_Cmp_Paragraph( 'We’ve uncovered a few potential issues that may affect this migration. Take a look through them and action what you like. While you can ignore the warnings, you must fix the errors (if any) to continue your migration.' ) )
@@ -701,9 +725,8 @@ class Shinst_Controller_Ajax_Requirements extends Shinst_Controller_Ajax {
 			->add_component( $this->get_basedir_component() )
 			->add_component( $this->get_exec_time_component() )
 
-			->add_component( new Shinst_View_Cmp_Button_Recheck )
-			->add_component( new Shinst_View_Cmp_Button_Continue )
-		;
+			->add_component( new Shinst_View_Cmp_Button_Recheck() )
+			->add_component( new Shinst_View_Cmp_Button_Continue() );
 
 		ob_start();
 		$main->print_markup();
@@ -782,10 +805,126 @@ class Shinst_Controller_Ajax_Update extends Shinst_Controller_Ajax {
 	}
 
 	public function send_update( $percentage ) {
-		return $this->send_success( array(
-			'is_done'    => $percentage >= 100,
-			'percentage' => $percentage,
-		) );
+		return $this->send_success(
+			array(
+				'is_done'    => $percentage >= 100,
+				'percentage' => $percentage,
+			)
+		);
+	}
+
+	/**
+	 * Update tables
+	 *
+	 * @throws \Shinst_Exception_Fs
+	 * @throws \Shinst_Exception_Recoverable_Db
+	 */
+	public function update_tables() {
+		$dumped_sql_file = Shinst_Model_Package::get_dumped_sql_file();
+
+		if ( ! file_exists( $dumped_sql_file ) ) {
+			Shinst_Model_Log::write( 'Dumped SQL file is not found. Trying once again.' );
+
+			if ( ! Shinst_Model_Fs_Archive::extract_dumped_sqls() ) {
+				throw new Shinst_Exception_Fs(
+					'Unable to find the tables to import'
+				);
+			}
+		}
+
+		$session = Shinst_Model_Session::get( Shinst_Model_Session::SESS_DEPLOY );
+
+		$config = Shinst_Model_Session::get( Shinst_Model_Session::SESS_CONFIG );
+		$dbh    = Shinst_Model_Db::create(
+			array(
+				'name'     => $config->get_value( 'dbname' ),
+				'user'     => $config->get_value( 'dbuser' ),
+				'password' => $config->get_value( 'dbpassword' ),
+				'host'     => $config->get_value( 'dbhost' ),
+			)
+		);
+
+		$query_string       = "";
+		$replacer           = new Shinst_Model_Replacer();
+		$serialize_decoder  = new Shinst_Model_Serialize_Decoder();
+		$reader             = $this->read_file( $dumped_sql_file );
+		$total_line         = $session->get_value( 'total_line', false );
+
+		if ( false === $total_line ) {
+			$reader->seek( PHP_INT_MAX );
+			$total_line = $reader->key();
+			$session->set_value( 'total_line', $total_line );
+			$session->save();
+			$reader->rewind();
+		}
+
+		$limit    = 1000;
+		$max_line = $session->get_value( 'max_line', $limit );
+		$pointer  = $session->get_value( 'pointer', 0 );
+
+		$reader->seek( $pointer );
+
+		while ( ! $reader->eof() ) {
+			$line = $reader->current();
+			$reader->next();
+
+			$left_trimmed_line = ltrim( $line );
+			$temp_query_string = trim( $query_string );
+
+			if ( 1 === preg_match( "/^#|^\-\-/", $left_trimmed_line ) && empty( $temp_query_string ) ) {
+				continue; // skip one-line comments.
+			}
+
+			if ( preg_match( "/^\/\*\!/m", $left_trimmed_line ) ) {
+				continue;
+			}
+
+			$decoded_serialized = $serialize_decoder->transform( $left_trimmed_line );
+			$decoded_string     = $replacer->replace( $decoded_serialized );
+			$query_string      .= $decoded_string . "\n"; // append the line to the current query.
+			$trimmed_line      = rtrim( $decoded_string );
+
+			if ( 1 !== preg_match( "/;$/", $trimmed_line ) ) {
+				continue; // skip incomplete statement.
+			}
+
+			$query_string = trim( $query_string );
+			$query_string = shinst_maybe_randomize_constraint_sql( $query_string );
+
+			$dbh->query( "SET SQL_MODE='ALLOW_INVALID_DATES'" );
+			$dbh->query( 'SET foreign_key_checks = 0' );
+			$dbh->query( $query_string );
+			$dbh->query( 'SET foreign_key_checks = 1' );
+
+			$line_number  = $reader->key();
+			$query_string = "";
+
+			if ( $line_number >= $max_line ) {
+				$total_line  = $session->get_value( 'total_line' );
+				$session->set_value( 'pointer', $line_number );
+				$session->set_value( 'max_line', $max_line + $limit );
+				$session->save();
+
+				return $this->send_update( floor( ( $line_number / $total_line ) * 100 ) );
+			}
+		}
+
+		return $this->send_update( 100 );
+	}
+
+	/**
+	 * Read file
+	 *
+	 * @param $path
+	 *
+	 * @return SplFileObject
+	 */
+	public function read_file( $path ) {
+		if ( ! is_file( $path ) || ! is_readable( $path ) ) {
+			Shinst_Model_Log::write( 'Unable to read file:' . $path );
+		}
+
+		return new SplFileObject( $path );
 	}
 
 	/**
@@ -811,11 +950,11 @@ class Shinst_Controller_Ajax_Update extends Shinst_Controller_Ajax {
 		$cfg->set_value( 'site_title', $title );
 		$cfg->save();
 
-		$main = new Shinst_View_Cmp_Main;
+		$main = new Shinst_View_Cmp_Main();
 		$main
 			->add_component( new Shinst_View_Cmp_Title( 'Update Data' ) )
 			->add_component( new Shinst_View_Cmp_Paragraph( 'Please keep this window open while we update data on your new site. This can take anywhere from a few seconds to a few minutes depending upon the size of your database.' ) )
-			->add_component( new Shinst_View_Cmp_Progress );
+			->add_component( new Shinst_View_Cmp_Progress() );
 
 		ob_start();
 		$main->print_markup();
@@ -831,57 +970,11 @@ class Shinst_Controller_Ajax_Update extends Shinst_Controller_Ajax {
 		$this->send_success( $out );
 	}
 
-	public function update_tables() {
-		$session    = Shinst_Model_Session::get( Shinst_Model_Session::SESS_REPLACE );
-		$processed  = $session->get_value( 'processed', array() );
-		$all_tables = Shinst_Model_Package::get_tables();
-
-		if ( count( $processed ) === count( $all_tables ) ) {
-			Shinst_Model_Log::write( 'All done' );
-
+	public function update_files() {
+		if ( shinst_maybe_return_early( 'As some important tables are not found, skipping file update' ) ) {
 			return $this->send_update( 100 );
 		}
 
-		$current = false;
-		foreach ( $all_tables as $tbl ) {
-			if ( ! empty( $processed[ $tbl ] ) && 'done' === $processed[ $tbl ] ) {
-				continue;
-			}
-			$current = $tbl;
-			break;
-		}
-		if ( empty( $current ) ) {
-			throw new Shist_Exception(
-				'Unable to determine where to continue replacing'
-			);
-		}
-		$model = new Shinst_Model_Db_Table_Replace( $current );
-
-		$position = ! empty( $processed[ $current ] )
-			? (int) $processed[ $current ]
-			: 0;
-		Shinst_Model_Log::write( "Processing table [{$current}], at [{$position}]" );
-
-		$result = $model->process( $position, 10 );
-		if ( $result > 0 ) {
-			// We have something processed, we are not done with this table yet.
-			$processed[ $current ] = $position + $result;
-			Shinst_Model_Log::write( "\t[{$result}] rows replaced" );
-		} else {
-			// Nothing processed, we are done with this table.
-			$model->finalize();
-			$processed[ $current ] = 'done';
-		}
-
-		$session->set_value( 'processed', $processed );
-		$session->save();
-
-		return $this->send_update(
-			( count( $processed ) / count( $all_tables ) ) * 100
-		);
-	}
-
-	public function update_files() {
 		$dsess        = Shinst_Model_Session::get( Shinst_Model_Session::SESS_DEPLOY );
 		$config_files = $dsess->get_value( 'config_files', array() );
 		if ( empty( $config_files ) ) {
@@ -893,7 +986,7 @@ class Shinst_Controller_Ajax_Update extends Shinst_Controller_Ajax {
 		$session        = Shinst_Model_Session::get( Shinst_Model_Session::SESS_REPLACE );
 		$deployed_files = $session->get_value( 'deployed_files', array() );
 
-		$replacer = new Shinst_Model_Replacer;
+		$replacer = new Shinst_Model_Replacer();
 
 		foreach ( $config_files as $source => $destination ) {
 			if ( in_array( $source, $deployed_files, true ) ) {
@@ -905,7 +998,7 @@ class Shinst_Controller_Ajax_Update extends Shinst_Controller_Ajax {
 				continue;
 			}
 			$interim = shinst_trailingslash( Shinst_Model_Fs_Path::get_temp_dir() ) .
-			           md5( $source . SHINST_SALT );
+					   md5( $source . SHINST_SALT );
 			$content = file_get_contents( $source );
 			file_put_contents( $interim, $replacer->replace( $content ) );
 
@@ -925,26 +1018,33 @@ class Shinst_Controller_Ajax_Update extends Shinst_Controller_Ajax {
 	}
 
 	public function update_title() {
+		if ( shinst_maybe_return_early( 'As some important tables are not found, skipping title update' ) ) {
+			return $this->send_update( 100 );
+		}
+
 		$config = Shinst_Model_Session::get( Shinst_Model_Session::SESS_CONFIG );
 		$title  = $config->get_value( 'site_title' );
 		if ( empty( $title ) ) {
-			Shinst_Model_Log::write( "Skipping site title update" );
+			Shinst_Model_Log::write( 'Skipping site title update' );
 
 			return $this->send_update( 100 );
 		}
 
 		Shinst_Model_Log::write( "Updating site title: [{$title}]" );
-		$options = Shinst_Model_Db_Table::create( array(
-			'name'       => $config->get_value( 'dbname' ),
-			'user'       => $config->get_value( 'dbuser' ),
-			'password'   => $config->get_value( 'dbpassword' ),
-			'host'       => $config->get_value( 'dbhost' ),
-			'prefix'     => $config->get_value( 'table_prefix' ),
-			'table_name' => 'options',
-		) );
+		$options = Shinst_Model_Db_Table::create(
+			array(
+				'name'       => $config->get_value( 'dbname' ),
+				'user'       => $config->get_value( 'dbuser' ),
+				'password'   => $config->get_value( 'dbpassword' ),
+				'host'       => $config->get_value( 'dbhost' ),
+				'prefix'     => $config->get_value( 'table_prefix' ),
+				'table_name' => 'options',
+			)
+		);
+
 		$options->query(
 			"UPDATE {$options->get_table()} SET " .
-			"option_value=%s WHERE " .
+			'option_value=%s WHERE ' .
 			"option_name='blogname'",
 			array( $title )
 		);
@@ -952,32 +1052,259 @@ class Shinst_Controller_Ajax_Update extends Shinst_Controller_Ajax {
 		return $this->send_update( 100 );
 	}
 
-	public function update_wpmudev() {
-		$config    = Shinst_Model_Session::get( Shinst_Model_Session::SESS_CONFIG );
-		$options   = Shinst_Model_Db::create( array(
-			'name'     => $config->get_value( 'dbname' ),
-			'user'     => $config->get_value( 'dbuser' ),
-			'password' => $config->get_value( 'dbpassword' ),
-			'host'     => $config->get_value( 'dbhost' ),
-			'prefix'   => $config->get_value( 'table_prefix' )
-		) );
-		$key       = "wdp_un_analytics_role";
-		$table     = $config->get_value( 'table_prefix' ) . 'options';
-		$key_name  = 'option_name';
-		$key_value = 'option_value';
-		if ( shinst_is_multisite() ) {
-			$table     = $config->get_value( 'table_prefix' ) . 'sitemeta';
-			$key_name  = 'meta_key';
-			$key_value = 'meta_value';
+	public function update_finalize() {
+		if ( shinst_maybe_return_early( 'As some important tables are not found, skipping final table update.' ) ) {
+			return $this->send_update( 100 );
 		}
 
-		$sql   = $options->prepare_sql( "SELECT $key_value FROM $table WHERE $key_name=%s", $key );
-		$value = $options->get_val( $sql );
-		if ( $value == 1 ) {
-//			$options->query(
-//				"INSERT INTO $table ($key_name,$key_value) VALUES ('shipper_need_init')"
-//			);
+		$config     = Shinst_Model_Session::get( Shinst_Model_Session::SESS_CONFIG );
+		$current = $config->get_value( 'site_url' );
+
+		Shinst_Model_Log::write( "Updating site url: [{$current}]" );
+		$options = Shinst_Model_Db_Table::create(
+			array(
+				'name'       => $config->get_value( 'dbname' ),
+				'user'       => $config->get_value( 'dbuser' ),
+				'password'   => $config->get_value( 'dbpassword' ),
+				'host'       => $config->get_value( 'dbhost' ),
+				'prefix'     => $config->get_value( 'table_prefix' ),
+				'table_name' => 'options',
+			)
+		);
+
+		$network_type = Shinst_Model_Manifest::get()->get_value( 'network_type' );
+
+		Shinst_Model_Log::write( "Updating new site url: [{$current}]" );
+		$options->query(
+			"UPDATE {$options->get_table()} SET " .
+			'option_value=%s WHERE ' .
+			"option_name='siteurl'",
+			array( $current )
+		);
+		$options->query(
+			"UPDATE {$options->get_table()} SET " .
+			'option_value=%s WHERE ' .
+			"option_name='home'",
+			array( $current )
+		);
+
+		Shinst_Model_Log::write( "Finally updating active theme and plugins of: [{$current}]" );
+		$site_info     = Shinst_Model_Manifest::get()->get_value( 'site_info' );
+		$plugins       = ! empty( $site_info['plugins'] ) ? $site_info['plugins'] : array();
+		$theme         = ! empty( $site_info['template'] ) ? $site_info['template'] : '';
+		$child_theme   = ! empty( $site_info['stylesheet'] ) ? $site_info['stylesheet'] : '';
+		$is_multi_site = 'whole_network' === $network_type;
+
+		$this->set_plugins( $plugins, $options, $is_multi_site );
+		$this->set_theme( $theme, $child_theme, $options );
+		$this->maybe_move_sitemeta_to_options_table( $network_type );
+
+		return $this->send_update( 100 );
+	}
+
+	/**
+	 * Set active plugins on destination site
+	 *
+	 * @param array                 $plugins
+	 * @param Shinst_Model_Db_Table $model
+	 * @param bool                  $is_multi_site
+	 */
+	public function set_plugins( $plugins, $model, $is_multi_site = false ) {
+		$plugins_to_keep = array();
+		Shinst_Model_Log::write( 'Found plugins from manifest.json: ' . shinst_convert_array_to_string( $plugins ) );
+
+		$plugins_dir   = Shinst_Model_Fs_Path::get_plugins_dir();
+		$plugins_files = Shinst_Model_Fs_Path::glob_all( $plugins_dir );
+
+		$available_plugins = array_map(
+			function( $plugins_file ) {
+				return basename( $plugins_file );
+			},
+			$plugins_files
+		);
+
+		Shinst_Model_Log::write( 'Available plugins in wp-content/plugins:' . shinst_convert_array_to_string( $available_plugins ) );
+
+		foreach ( $plugins as $plugin ) {
+			$plugin_name = dirname( $plugin );
+
+			if ( in_array( $plugin_name, $available_plugins, true ) ) {
+				$plugins_to_keep[] = $plugin;
+			}
 		}
+
+		Shinst_Model_Log::write( 'Setting these plugins as active: ' . shinst_convert_array_to_string( $plugins_to_keep ) );
+
+		$model->query(
+			"UPDATE {$model->get_table()} SET " .
+			'option_value=%s WHERE ' .
+			"option_name='active_plugins'",
+			array( serialize( $plugins_to_keep ) )
+		);
+
+		if ( $is_multi_site ) {
+			$cfg  = Shinst_Model_Session::get( Shinst_Model_Session::SESS_CONFIG );
+			$meta = Shinst_Model_Db_Table::create(
+				array(
+					'name'       => $cfg->get_value( 'dbname' ),
+					'user'       => $cfg->get_value( 'dbuser' ),
+					'password'   => $cfg->get_value( 'dbpassword' ),
+					'host'       => $cfg->get_value( 'dbhost' ),
+					'prefix'     => $cfg->get_value( 'table_prefix' ),
+					'table_name' => 'sitemeta',
+				)
+			);
+
+			$flattened_plugins = array();
+			array_map(
+				function( $plugin ) use ( &$flattened_plugins ) {
+					$flattened_plugins = array_merge( $flattened_plugins, array( $plugin => time() ) );
+				},
+				$plugins_to_keep
+			);
+
+			$meta->query(
+				"UPDATE {$meta->get_table()} SET " .
+				'meta_value=%s WHERE ' .
+				"meta_key='active_sitewide_plugins'",
+				array( serialize( $flattened_plugins ) )
+			);
+
+			Shinst_Model_Log::write( 'Setting these plugins as active for the network: ' . shinst_convert_array_to_string( $plugins_to_keep ) );
+		}
+	}
+
+	/**
+	 * Set active theme in destination site
+	 *
+	 * @param string                $theme
+	 * @param Shinst_Model_Db_Table $model
+	 */
+	public function set_theme( $theme, $child_theme, $model ) {
+		Shinst_Model_Log::write( "Found themes from manifest.json: {$child_theme}" );
+
+		$themes_dir   = Shinst_Model_Fs_Path::get_themes_dir();
+		$themes_files = Shinst_Model_Fs_Path::glob_all( $themes_dir );
+
+		$available_themes = array_map(
+			function( $themes_file ) {
+				return basename( $themes_file );
+			},
+			$themes_files
+		);
+
+		Shinst_Model_Log::write( 'Available themes in wp-content/themes:' . shinst_convert_array_to_string( $available_themes ) );
+
+		if ( in_array( $child_theme, $available_themes, true ) ) {
+			Shinst_Model_Log::write( 'Setting this theme as active: ' . $child_theme );
+
+			$model->query(
+				"UPDATE {$model->get_table()} SET " .
+				'option_value=%s WHERE ' .
+				"option_name='stylesheet'",
+				array( $child_theme )
+			);
+
+			$model->query(
+				"UPDATE {$model->get_table()} SET " .
+				'option_value=%s WHERE ' .
+				"option_name='template'",
+				array( $theme )
+			);
+		} else {
+			$theme = is_array( $available_themes ) && ! empty( $available_themes ) ? array_rand( array_flip( $available_themes ) ) : '';
+			Shinst_Model_Log::write( sprintf( 'The active theme from manifest.json is not found in wp-content/themes. So trying to activate a random theme: %s', $theme ) );
+
+			$model->query(
+				"UPDATE {$model->get_table()} SET " .
+				'option_value=%s WHERE ' .
+				"option_name='stylesheet'",
+				array( $theme )
+			);
+
+			$model->query(
+				"UPDATE {$model->get_table()} SET " .
+				'option_value=%s WHERE ' .
+				"option_name='template'",
+				array( $theme )
+			);
+		}
+	}
+
+	/**
+	 * Maybe move sitemeta to options table
+	 *
+	 * @since 1.2.8
+	 *
+	 * @param string $network_type network type.
+	 *
+	 * @return void
+	 */
+	public function maybe_move_sitemeta_to_options_table( $network_type ) {
+		if ( 'subsite' !== $network_type ) {
+			return;
+		}
+
+		$cfg = Shinst_Model_Session::get( Shinst_Model_Session::SESS_CONFIG );
+		$db  = Shinst_Model_Db::create(
+			array(
+				'name'       => $cfg->get_value( 'dbname' ),
+				'user'       => $cfg->get_value( 'dbuser' ),
+				'password'   => $cfg->get_value( 'dbpassword' ),
+				'host'       => $cfg->get_value( 'dbhost' )
+			)
+		);
+
+		$prefix         = $cfg->get_value( 'table_prefix' );
+		$sitemeta_table = $prefix . 'sitemeta';
+		$options_table  = $prefix . 'options';
+		$has_sitemeta   = $db->query( "show tables like '{$sitemeta_table}'" );
+
+		if ( empty( $has_sitemeta ) ) {
+			return;
+		}
+
+		$site_meta = $db->query( "select * from {$sitemeta_table};" );
+
+		if ( empty( $site_meta ) || ! is_array( $site_meta ) ) {
+			return;
+		}
+
+		foreach ( $site_meta as $meta ) {
+			if ( in_array( $meta['meta_key'], $this->meta_to_ignore(), true ) ) {
+				continue;
+			}
+
+			$db->query(
+				"INSERT IGNORE INTO {$options_table} ( option_name, option_value )" .
+				"VALUES( %s, %s );",
+				array(
+					$meta['meta_key'],
+					$meta_value = is_string( $meta['meta_value'] )
+						? $meta['meta_value']
+						: serialize( $meta['meta_value'] )
+				)
+			);
+		}
+
+		$db->query( "DROP TABLE {$sitemeta_table};" );
+	}
+
+	/**
+	 * Meta to ignore
+	 *
+	 * @since 1.2.8
+	 *
+	 * @return array
+	 */
+	public function meta_to_ignore() {
+		return array(
+			'site_name',
+			'admin_email',
+			'admin_user_id',
+			'site_admins',
+			'siteurl'
+		);
 	}
 }
 
@@ -1000,14 +1327,22 @@ class Shinst_Controller_Ajax extends Shinst_Controller {
 		// Showing errors will break JSON and header setting.
 		ini_set( 'display_errors', 'off' );
 
-		$action = preg_replace( '/[^-_a-zA-Z0-9]/', '', $_GET['action'] );
-		$cls = 'Shinst_Controller_Ajax_' . ucfirst( strtolower( $action ) );
-		if ( ! class_exists( $cls ) ) {
+		$action  = preg_replace( '/[^-_a-zA-Z0-9]/', '', $_GET['action'] );
+		$cls     = 'Shinst_Controller_Ajax_' . ucfirst( strtolower( $action ) );
+		$allowed = array(
+			Shinst_Controller_Ajax_Cleanup::class,
+			Shinst_Controller_Ajax_Connection::class,
+			Shinst_Controller_Ajax_Deploy::class,
+			Shinst_Controller_Ajax_Password::class,
+			Shinst_Controller_Ajax_Requirements::class,
+			Shinst_Controller_Ajax_Update::class,
+		);
+		if ( ! class_exists( $cls ) || ! in_array( $cls, $allowed ) ) {
 			throw new Shinst_Exception(
 				sprintf( 'Unable to handle your action: [%s]', $action )
 			);
 		}
-		$ctrl = new $cls;
+		$ctrl = new $cls();
 
 		return $ctrl->run();
 	}
@@ -1015,16 +1350,18 @@ class Shinst_Controller_Ajax extends Shinst_Controller {
 	public function send_success( $data = array() ) {
 		http_response_code( 200 );
 		$data = is_string( $data ) ? $data : json_encode( $data );
-		return $this->die( $data );
+
+		return $this->drop_dead( $data );
 	}
 
 	public function send_error( $data, $status = 500 ) {
 		http_response_code( $status );
 		$data = is_string( $data ) ? $data : json_encode( $data );
-		return $this->die( $data );
+
+		return $this->drop_dead( $data );
 	}
 
-	public function die( $data=null ) {
+	public function drop_dead( $data = null ) {
 		die( $data );
 	}
 }
@@ -1048,10 +1385,10 @@ class Shinst_Controller_Front extends Shinst_Controller {
 	 *
 	 * @var string
 	 */
-	static private $_password;
+	private static $_password;
 
 	public function run() {
-		$pages = new Shinst_Controller_Page;
+		$pages = new Shinst_Controller_Page();
 		try {
 			$pages->run();
 		} catch ( Exception $e ) {
@@ -1061,7 +1398,7 @@ class Shinst_Controller_Front extends Shinst_Controller {
 			return false;
 		}
 
-		$ajax = new Shinst_Controller_Ajax;
+		$ajax = new Shinst_Controller_Ajax();
 		try {
 			$ajax->run();
 		} catch ( Exception $e ) {
@@ -1145,14 +1482,16 @@ class Shinst_Controller_Page extends Shinst_Controller {
 			return $this->handle_invalid_request( $page );
 		}
 
-		$cls = 'Shinst_View_Page_' . ucfirst( strtolower(
-			preg_replace( '/[^a-z]/i', '', $page )
-		) );
+		$cls = 'Shinst_View_Page_' . ucfirst(
+			strtolower(
+				preg_replace( '/[^a-z]/i', '', $page )
+			)
+		);
 		if ( ! class_exists( $cls ) ) {
 			return $this->handle_invalid_request( $page );
 		}
 
-		return $this->serve_page( new $cls );
+		return $this->serve_page( new $cls() );
 	}
 
 	/**
@@ -1166,7 +1505,7 @@ class Shinst_Controller_Page extends Shinst_Controller {
 	 */
 	public function serve_page( Shinst_View_Page $page ) {
 		if ( $page->is_protected() ) {
-			$ctrl = new Shinst_Controller_Front;
+			$ctrl = new Shinst_Controller_Front();
 			if ( ! $ctrl->is_user_allowed() ) {
 				throw new Shinst_Exception( 'You are not allowed here, please leave.' );
 				return false;
@@ -1183,7 +1522,7 @@ class Shinst_Controller_Page extends Shinst_Controller {
 	 * @return string Default page slug
 	 */
 	public function get_default_page() {
-		$ctrl = new Shinst_Controller_Front;
+		$ctrl = new Shinst_Controller_Front();
 		return $ctrl->is_user_allowed()
 			? 'requirements'
 			: 'password';
@@ -1215,9 +1554,11 @@ class Shinst_Controller_Page extends Shinst_Controller {
 	 * @return string
 	 */
 	public function get_page_url( $page ) {
-		return Shinst_Model_Url::get_self_url() . '?' . http_build_query( array (
-			'page' => $page,
-		) );
+		return Shinst_Model_Url::get_self_url() . '?' . http_build_query(
+			array(
+				'page' => $page,
+			)
+		);
 	}
 }
 
@@ -1303,7 +1644,7 @@ function shinst_trailingslash( $what ) {
  *
  * Simplified `wp_list_pluck`
  *
- * @param array $list List to process.
+ * @param array  $list List to process.
  * @param string $what Key/property to extract.
  *
  * @return array List of results
@@ -1330,7 +1671,7 @@ function shinst_list_pluck( $list, $what ) {
  * Taken from wp-core (`is_serialized`).
  *
  * @param string $data Data to check.
- * @param bool $strict Strictness flag.
+ * @param bool   $strict Strictness flag.
  *
  * @return bool
  */
@@ -1340,7 +1681,7 @@ function shinst_is_serialized( $data, $strict = true ) {
 		return false;
 	}
 	$data = trim( $data );
-	if ( 'N;' == $data ) {
+	if ( 'N;' === $data ) {
 		return true;
 	}
 	if ( strlen( $data ) < 4 ) {
@@ -1379,7 +1720,8 @@ function shinst_is_serialized( $data, $strict = true ) {
 			} elseif ( false === strpos( $data, '"' ) ) {
 				return false;
 			}
-		// or else fall through
+			break;
+		// or else fall through.
 		case 'a':
 		case 'O':
 			return (bool) preg_match( "/^{$token}:[0-9]+:/s", $data );
@@ -1416,14 +1758,11 @@ function shinst_is_multisite() {
 	if ( $wpconfig_path == false ) {
 		return false;
 	}
-	//get if it is multisite
-	$pattern  = "/define\(\s*'MULTISITE'\s*,\s*true\s*\);/";
+	// get if it is multisite
+	$pattern  = "/^\s*?define\(\s*'MULTISITE'\s*,\s*true\s*\);/";
 	$wpconfig = file_get_contents( $wpconfig_path );
-	if ( preg_match_all( $pattern, $wpconfig ) ) {
-		return true;
-	}
 
-	return false;
+	return preg_match_all( $pattern, $wpconfig );
 }
 
 function shinst_read_wpconfig() {
@@ -1435,13 +1774,14 @@ function shinst_read_wpconfig() {
 	if ( ! $configs ) {
 		return false;
 	}
-	$params = [
-		'db_name'     => "/define.+?'DB_NAME'.+?'(.*?)'.+/",
-		'db_user'     => "/define.+?'DB_USER'.+?'(.*?)'.+/",
-		'db_password' => "/define.+?'DB_PASSWORD'.+?'(.*?)'.+/",
-		'db_host'     => "/define.+?'DB_HOST'.+?'(.*?)'.+/",
-	];
-	$return = [];
+	$params = array(
+		'db_name'      => "/define.+?'DB_NAME'.+?'(.*?)'.+/",
+		'db_user'      => "/define.+?'DB_USER'.+?'(.*?)'.+/",
+		'db_password'  => "/define.+?'DB_PASSWORD'.+?'(.*?)'.+/",
+		'db_host'      => "/define.+?'DB_HOST'.+?'(.*?)'.+/",
+		'table_prefix' => "/\\\$table_prefix\s*=\s*[\'|\"](\w*\-?\w*)[\'|\"]\s*;/"
+	);
+	$return = array();
 
 	foreach ( $params as $key => $value ) {
 		$found = preg_match_all( $value, $configs, $result );
@@ -1450,11 +1790,12 @@ function shinst_read_wpconfig() {
 			if ( $key == 'db_host' ) {
 				if ( stristr( $result[1][0], ':' ) ) {
 					list( $host, $port ) = explode( ':', $result[1][0] );
-					$return['db_host'] = $host;
-					$return['port']    = $port;
+					$return['db_host']   = $host;
+					$return['port']      = $port;
 				} else {
+					$default_port      = (int) ini_get( 'mysqli.default_port' );
 					$return['db_host'] = $result[1][0];
-					$return['port']    = 3306;
+					$return['port']    = $default_port ? $default_port : 3306;
 				}
 			} else {
 				$return[ $key ] = $result[1][0];
@@ -1469,15 +1810,129 @@ function shinst_read_wpconfig() {
 
 /**
  * Borrow from WP core
+ *
  * @param $original
  *
  * @return mixed
  */
 function shinst_maybe_unserialize( $original ) {
 	if ( shinst_is_serialized( $original ) ) { // don't attempt to unserialize data that wasn't serialized going in
+		// @RIPS\Annotation\Ignore
 		return @unserialize( $original );
 	}
 	return $original;
+}
+
+/**
+ * Check whether to return early or not
+ *
+ * @since 1.1.4
+ *
+ * @param $message_log
+ *
+ * @return bool
+ */
+function shinst_maybe_return_early( $message_log = '' ) {
+	$is_missing = ! ! Shinst_Model_Manifest::get()->get_value( 'is_important_tables_missing' );
+
+	if ( $is_missing && ! empty( $message_log ) ) {
+		Shinst_Model_Log::write( $message_log );
+	}
+
+	return $is_missing;
+}
+
+/**
+ * Check whether the string is a float like value
+ *
+ * @since 1.2.0
+ *
+ * @param $string
+ *
+ * @return bool
+ */
+function shinst_is_float_string( $string ) {
+	return is_numeric( $string )
+		   && false !== strpos( $string, '.' )
+		   && 2 === count( explode( '.', $string ) );
+}
+
+/**
+ * Check whether the sql string is foreign key constraint or not
+ *
+ * @since 1.2.2
+ *
+ * @param $string
+ *
+ * @return false|int
+ */
+function shinst_is_constraint( $string ) {
+	return preg_match( "/constraint\s([`_a-z]+)\sFOREIGN\sKEY/mi", $string );
+}
+
+/**
+ * Generate random string
+ *
+ * @since 1.2.2
+ *
+ * @param int $len
+ *
+ * @return string
+ * @throws Exception
+ */
+function shinst_random_string( $len = 5 ) {
+	$random = function_exists( 'random_bytes' )
+		? 'random_bytes'
+		: 'openssl_random_pseudo_bytes';
+
+	return $len <= 1 ? 'r' : 'r' . substr( bin2hex( $random( $len ) ), 0, $len - 1 );
+}
+
+/**
+ * If it's a foreign key constraint sql, add some random string and make it unique
+ *
+ * @since 1.2.2
+ *
+ * @param $string
+ *
+ * @return string|string[]|null
+ * @throws Exception
+ */
+function shinst_maybe_randomize_constraint_sql( $string ) {
+	if ( ! shinst_is_constraint( $string ) ) {
+		return $string;
+	}
+
+	return preg_replace(
+		"/constraint\s([`_a-z])/mi",
+		'constraint $1' . shinst_random_string( 5 ) . '$3',
+		$string
+	);
+}
+
+/**
+ * Convert a list of plugins/themes to a string.
+ *
+ * @since 1.2.5
+ *
+ * @param array $items An array of items.
+ *
+ * @return string|void
+ */
+function shinst_convert_array_to_string( $items ) {
+	if ( ! is_array( $items ) || empty( $items ) ) {
+		return;
+	}
+
+	$items = array_map(
+		function( $item ) {
+			$info = pathinfo( $item );
+			return '.' !== $info['dirname'] ? $info['dirname'] : $info['filename'];
+		},
+		$items
+	);
+
+	return implode( ', ', $items );
 }
 
 
@@ -1541,7 +1996,7 @@ class Shinst_Model_Db {
 	 * @return object Shinst_Model_Db instance
 	 */
 	public static function create( $args = array() ) {
-		$me   = new self;
+		$me   = new self();
 		$args = array_merge(
 			self::get_empty_args_list(),
 			$args
@@ -1569,6 +2024,7 @@ class Shinst_Model_Db {
 			'name'     => '',
 			'user'     => '',
 			'password' => '',
+			'port'     => '',
 		);
 	}
 
@@ -1579,7 +2035,6 @@ class Shinst_Model_Db {
 	 *
 	 * @return resource
 	 * @throws Shinst_Exception_Db on failure.
-	 *
 	 */
 	public function get_handle() {
 		if ( $this->_handle ) {
@@ -1609,8 +2064,11 @@ class Shinst_Model_Db {
 		}
 
 		$this->_handle = @mysqli_connect(
-			$host, $user, $password,
-			$name, $port
+			$host,
+			$user,
+			$password,
+			$name,
+			$port
 		);
 
 		if ( ! $this->_handle ) {
@@ -1630,11 +2088,14 @@ class Shinst_Model_Db {
 	 */
 	public function set_port( $port ) {
 		$port = (int) $port;
+
 		if ( empty( $port ) ) {
-			$port = ini_get( 'mysqli.default_port' );
+			$port = (int) ini_get( 'mysqli.default_port' );
 		}
 
-		$this->_port = $port;
+		if ( ! empty( $port ) ) {
+			$this->_port = $port;
+		}
 	}
 
 	/**
@@ -1736,12 +2197,11 @@ class Shinst_Model_Db {
 	 * Prepares and executes a query with supplied parameters
 	 *
 	 * @param string $raw_sql SQL with optional placeholders.
-	 * @param array $params Optional list of parameters.
+	 * @param array  $params Optional list of parameters.
 	 *
 	 * @return mixed (bool)true on success, or
 	 *               result array for SELECT, DESCRIBE, SHOW, EXPLAIN queries.
 	 * @throws Shinst_Exception_Recoverable_Db Recoverable exception on query failure.
-	 *
 	 */
 	public function query( $raw_sql, $params = array() ) {
 		$handle = $this->get_handle();
@@ -1762,7 +2222,7 @@ class Shinst_Model_Db {
 			return true;
 		}
 		if ( ! function_exists( 'mysqli_fetch_all' ) ) {
-			$actual = [];
+			$actual = array();
 			while ( $row = $result->fetch_assoc() ) {
 				$actual[] = $row;
 			}
@@ -1779,13 +2239,12 @@ class Shinst_Model_Db {
 	 * Gets a particular row hash from prepared query results
 	 *
 	 * @param string $raw_sql SQL with optional placeholders.
-	 * @param array $params Optional list of parameters.
-	 * @param int $row Optional row index to fetch.
+	 * @param array  $params Optional list of parameters.
+	 * @param int    $row Optional row index to fetch.
 	 *
 	 * @return array
 	 * @throws Shinst_Exception_Recoverable_Db Recoverable exception on result non-array.
 	 * @throws Shinst_Exception_Recoverable_Db Recoverable exception on index not in result.
-	 *
 	 */
 	public function get_row( $raw_sql, $params = array(), $row = 0 ) {
 		$result = $this->query( $raw_sql, $params );
@@ -1813,13 +2272,12 @@ class Shinst_Model_Db {
 	 * Gets a particular column values from prepared query results
 	 *
 	 * @param string $raw_sql SQL with optional placeholders.
-	 * @param array $params Optional list of parameters.
-	 * @param int $col Optional column index to fetch.
+	 * @param array  $params Optional list of parameters.
+	 * @param int    $col Optional column index to fetch.
 	 *
 	 * @return array
 	 * @throws Shinst_Exception_Recoverable_Db Recoverable exception on result non-array.
 	 * @throws Shinst_Exception_Recoverable_Db Recoverable exception on index not in result.
-	 *
 	 */
 	public function get_col( $raw_sql, $params = array(), $col = 0 ) {
 		$result = $this->query( $raw_sql, $params );
@@ -1858,13 +2316,12 @@ class Shinst_Model_Db {
 	 * Gets a particular value from prepared query results
 	 *
 	 * @param string $raw_sql SQL with optional placeholders.
-	 * @param array $params Optional list of parameters.
-	 * @param int $row Optional row index to fetch.
-	 * @param int $col Optional column index to fetch.
+	 * @param array  $params Optional list of parameters.
+	 * @param int    $row Optional row index to fetch.
+	 * @param int    $col Optional column index to fetch.
 	 *
 	 * @return scalar
 	 * @throws Shinst_Exception_Recoverable_Db Recoverable exception on index not in result.
-	 *
 	 */
 	public function get_val( $raw_sql, $params = array(), $row = 0, $col = 0 ) {
 		$result = $this->get_col( $raw_sql, $params, $col );
@@ -1888,7 +2345,7 @@ class Shinst_Model_Db {
 	 * Escapes the parameters and builds query from those.
 	 *
 	 * @param string $raw_sql SQL with optional placeholders.
-	 * @param array $params Optional list of parameters.
+	 * @param array  $params Optional list of parameters.
 	 *
 	 * @return string
 	 */
@@ -1931,6 +2388,57 @@ class Shinst_Model_Db {
 
 
 
+// Source: lib/installer/src/lib/model/class-env.php
+
+/**
+ * Environment checking class
+ *
+ * @package shipper-installer
+ */
+
+/**
+ * Class Shinst_Model_Env
+ *
+ * @since 1.2.6
+ */
+class Shinst_Model_Env {
+
+	/**
+	 * Checks whether we're on WPMU DEV Hosting
+	 *
+	 * @return bool
+	 */
+	public static function is_wpmu_hosting() {
+		return isset( $_SERVER['WPMUDEV_HOSTED'] ) && ! empty( $_SERVER['WPMUDEV_HOSTED'] );
+	}
+
+	/**
+	 * Checks whether we're on WPMU DEV Hosting
+	 *
+	 * @return bool
+	 */
+	public static function is_wpmu_staging() {
+		if ( ! self::is_wpmu_hosting() ) {
+			return false;
+		}
+
+		return isset( $_SERVER['WPMUDEV_HOSTING_ENV'] ) && 'production' !== $_SERVER['WPMUDEV_HOSTING_ENV'];
+	}
+
+	/**
+	 * Checks whether we're dealing with Flywheel hosting
+	 *
+	 * @return bool
+	 */
+	public static function is_flywheel() {
+		$wp_config_path = Shinst_Model_Fs_Path::is_wpconfig_located();
+
+		return $wp_config_path && false !== strpos( file_get_contents( $wp_config_path ), 'FLYWHEEL_PLUGIN_DIR' );
+	}
+}
+
+
+
 // Source: lib/installer/src/lib/model/class-log.php
 
 /**
@@ -1946,7 +2454,7 @@ class Shinst_Model_Log {
 	 *
 	 * @return string
 	 */
-	static public function get_file_path() {
+	public static function get_file_path() {
 		return shinst_trailingslash( Shinst_Model_Fs_Path::get_working_dir() ) .
 			'installer.log';
 	}
@@ -1958,7 +2466,7 @@ class Shinst_Model_Log {
 	 *
 	 * @return string
 	 */
-	static public function get_log_line( $msg ) {
+	public static function get_log_line( $msg ) {
 		$msg = is_string( $msg )
 			? $msg
 			: json_encode( $msg );
@@ -1976,7 +2484,7 @@ class Shinst_Model_Log {
 	 *
 	 * @return bool
 	 */
-	static public function write( $msg ) {
+	public static function write( $msg ) {
 		return (bool) file_put_contents(
 			self::get_file_path(),
 			self::get_log_line( $msg ),
@@ -2011,16 +2519,16 @@ class Shinst_Model_Manifest {
 	 *
 	 * @var object Shinst_Model_Manifest instance
 	 */
-	static private $_instance;
+	private static $_instance;
 
 	/**
 	 * Singleton instance getter
 	 *
 	 * @return object Shinst_Model_Manifest instance
 	 */
-	static public function get() {
+	public static function get() {
 		if ( empty( self::$_instance ) ) {
-			self::$_instance = new self;
+			self::$_instance = new self();
 		}
 		return self::$_instance;
 	}
@@ -2030,7 +2538,7 @@ class Shinst_Model_Manifest {
 	 *
 	 * @return string
 	 */
-	static public function get_file_path() {
+	public static function get_file_path() {
 		$dir = Shinst_Model_Package::get_component_dir(
 			Shinst_Model_Package::COMPONENT_META
 		);
@@ -2082,7 +2590,7 @@ class Shinst_Model_Manifest {
 			);
 		}
 
-		$data = @json_decode( $raw, true );
+		$data  = @json_decode( $raw, true );
 		$error = json_last_error();
 		if ( empty( $data ) && ! empty( $error ) ) {
 			throw new Shinst_Exception_Data(
@@ -2098,7 +2606,7 @@ class Shinst_Model_Manifest {
 	 * Gets specific property
 	 *
 	 * @param string $prop Property name to fetch.
-	 * @param mixed $fallback Optional fallback value, defaults to (bool)false.
+	 * @param mixed  $fallback Optional fallback value, defaults to (bool)false.
 	 *
 	 * @return mixed Property value, or fallback.
 	 */
@@ -2123,9 +2631,10 @@ class Shinst_Model_Manifest {
 
 class Shinst_Model_Package {
 
-	const COMPONENT_FS = 'files';
-	const COMPONENT_DB = 'sqls';
-	const COMPONENT_META = 'meta';
+	const COMPONENT_FS      = 'files';
+	const COMPONENT_DB      = 'sqls';
+	const COMPONENT_META    = 'meta';
+	const COMPONENT_DB_FILE = 'dump.sql';
 
 	/**
 	 * Generic component directory path getter
@@ -2136,12 +2645,16 @@ class Shinst_Model_Package {
 	 *
 	 * @return string
 	 */
-	static public function get_component_dir( $component ) {
-		if ( ! in_array( $component, array(
-			self::COMPONENT_META,
-			self::COMPONENT_DB,
-			self::COMPONENT_FS,
-		), true ) ) {
+	public static function get_component_dir( $component ) {
+		if ( ! in_array(
+			$component,
+			array(
+				self::COMPONENT_META,
+				self::COMPONENT_DB,
+				self::COMPONENT_FS,
+			),
+			true
+		) ) {
 			throw new Shinst_Exception_Fs(
 				sprintf( 'Unknown directory: %s', $component )
 			);
@@ -2156,47 +2669,13 @@ class Shinst_Model_Package {
 		return shinst_trailingslash( $dir );
 	}
 
-	/**
-	 * Gets a list of extracted SQL files
-	 *
-	 * @return array
-	 */
-	static public function get_table_files() {
-		$tables = array();
-		$files = Shinst_Model_Fs_Path::glob_all(
-			self::get_component_dir( self::COMPONENT_DB )
-		);
-
-		foreach ( $files as $file ) {
-			if ( preg_match( '/\.sql$/', $file ) ) {
-				$tables[] = $file;
-			}
-		}
-
-		return $tables;
+	public static function get_dumped_sql_file() {
+		return self::get_component_dir( self::COMPONENT_DB ) . self::COMPONENT_DB_FILE;
 	}
 
-	/**
-	 * Gets a list of tables to restore
-	 *
-	 * Generated from the list of SQL files
-	 *
-	 * @return array
-	 */
-	static public function get_tables() {
-		$tables = array();
-		$files = self::get_table_files();
-
-		foreach ( $files as $file ) {
-			$tables[] = pathinfo(
-				$file,
-				PATHINFO_FILENAME
-			);
-		}
-
-		return $tables;
+	public static function get_dumped_sql_file_name() {
+		return self::COMPONENT_DB_FILE;
 	}
-
 }
 
 
@@ -2232,7 +2711,7 @@ class Shinst_Model_Replacer {
 		}
 
 		foreach ( $this->get_macros() as $macro => $value ) {
-			//before replace, we need to check if this is serialize
+			// before replace, we need to check if this is serialize
 			$what = preg_replace(
 				'/' . preg_quote( $macro, '/' ) . '/',
 				$value,
@@ -2240,7 +2719,26 @@ class Shinst_Model_Replacer {
 			);
 		}
 
-		return $what;
+		/**
+		 * if this is subsite extract, we need to clean up the mulitiste config in wp-config
+		 */
+		foreach ( $this->_get_subsite_extract_macros() as $macro => $value ) {
+			$what = preg_replace(
+				'/' . $macro . '/',
+				$value,
+				$what
+			);
+		}
+
+		foreach ( $this->get_other_macros() as $macro => $value ) {
+			$what = preg_replace(
+				'/' . $macro . '/',
+				$value,
+				$what
+			);
+		}
+
+		return ( new Shinst_Model_JSON_Serializer( $what ) )->run();
 	}
 
 	/**
@@ -2256,6 +2754,46 @@ class Shinst_Model_Replacer {
 		}
 
 		return $this->_macros;
+	}
+
+	public function _get_subsite_extract_macros() {
+		$network_type = Shinst_Model_Manifest::get()->get_value( 'network_type' );
+		$macros       = array();
+		$cfg          = Shinst_Model_Session::get( Shinst_Model_Session::SESS_CONFIG );
+		$current      = $cfg->get_value( 'site_url' );
+		if ( $network_type == 'subsite' ) {
+			/**
+			 * remove the network config inside wp-config.php
+			 */
+			$macros = array_merge(
+				$macros,
+				array(
+					"define\(\s*'SUNRISE'\s*,\s*(.*)\s*\);"                    => null,
+					"define\(\s*'MULTISITE'\s*,\s*(true|false)\s*\);"          => null,
+					"define\(\s*'WP_ALLOW_MULTISITE'\s*,\s*(true|false)\s*\);" => null,
+					"define\(\s*'SUBDOMAIN_INSTALL'\s*,\s*(true|false)\s*\);"  => null,
+					"define\s*\(\s*'DOMAIN_CURRENT_SITE'\s*,\s*'.*?'\s*\);"    => null,
+					"define\s*\(\s*'PATH_CURRENT_SITE'\s*,\s*'.*?'\s*\);"      => null,
+					"define\(\s*'SITE_ID_CURRENT_SITE'\s*,\s*\d+\s*\);"        => null,
+					"define\(\s*'BLOG_ID_CURRENT_SITE'\s*,\s*\d+\s*\);"        => null,
+				)
+			);
+		}
+
+		return $macros;
+	}
+
+	/**
+	 * Get other macros to replace
+	 *
+	 * @since 1.2.8
+	 *
+	 * @return array;
+	 */
+	public function get_other_macros() {
+		return array(
+			"define\(\s*'WP_CACHE_KEY_SALT'\s*,\s*(.*)\s*\);" => null,
+		);
 	}
 
 	private function _get_macros() {
@@ -2282,8 +2820,7 @@ class Shinst_Model_Replacer {
 			$abspath,
 			$codecs['{{SHIPPER_ABSPATH}}']
 		);
-
-		return array(
+		$macros       = array(
 			'{{SHIPPER_DB_NAME}}'             => $cfg->get_value( 'dbname' ),
 			'{{SHIPPER_DB_HOST}}'             => $cfg->get_value( 'dbhost' ),
 			'{{SHIPPER_DB_USER}}'             => $cfg->get_value( 'dbuser' ),
@@ -2294,6 +2831,7 @@ class Shinst_Model_Replacer {
 			'{{SHIPPER_WPURL_WITH_SCHEME}}'   => $current,
 			'{{SHIPPER_URL_WITH_SCHEME}}'     => $current,
 			'{{SHIPPER_URL}}'                 => $current,
+			'{{SHIPPER_HOME_URL}}'            => $domain,
 			'{{SHIPPER_ADMIN_URL}}'           => shinst_trailingslash( $current ) . 'wp-admin',
 			'{{SHIPPER_DOMAIN}}'              => $domain,
 			'{{SHIPPER_MS_DOMAIN}}'           => $domain,
@@ -2302,33 +2840,33 @@ class Shinst_Model_Replacer {
 			'{{SHIPPER_ABSPATH}}'             => shinst_trailingslash( $abspath ),
 			'{{SHIPPER_REWRITE_BASE}}'        => "RewriteBase {$path}",
 		);
+
+		return $macros;
 	}
 
 	/**
-	 * Gets a list of tables to restore
+	 * @param $string
+	 * @param string $value
 	 *
-	 * The list is keyed by table with macro-replaced prefix,
-	 * and values are the actual table names to replace with.
-	 *
-	 * @param string $pfx New prefix.
-	 *
-	 * @return array
+	 * @return string
 	 */
-	public function get_tables( $pfx ) {
-		$sources = Shinst_Model_Package::get_tables();
-		$old_pfx = Shinst_Model_Manifest::get()->get_value( 'table_prefix' );
-		$tables  = array();
+	public function get_matcher( $string, $value = '' ) {
+		$value = ! empty( $value )
+			? preg_quote( $value, '/' )
+			: '[^\'"]*?';
 
-		foreach ( $sources as $table ) {
-			$base                                      = preg_replace(
-				'/^' . preg_quote( $old_pfx, '/' ) . '/',
-				'',
-				$table
-			);
-			$tables["{{SHIPPER_TABLE_PREFIX}}{$base}"] = "{$pfx}{$base}";
-		}
-
-		return $tables;
+		// @codingStandardsIgnoreStart
+		return '(?:^|\b)define\s?\(\s*' .
+		       '(?:\'|")' .
+		       preg_quote( $string, '/' ) .
+		       '(?:\'|")' .
+		       '\s*,\s*' .
+		       '(?:\'|")' .
+		       '((.*?))' .
+		       '(?:\'|")' .
+		       '\s*' .
+		       '\)\s*;\s*(?:\b|$)';
+		// @codingStandardsIgnoreEnd
 	}
 }
 
@@ -2349,12 +2887,12 @@ class Shinst_Model_Replacer {
  */
 class Shinst_Model_Session {
 
-	const SESS_FSLIST = 'fslist';
-	const SESS_CONFIG = 'config';
-	const SESS_DEPLOY = 'deploy';
+	const SESS_FSLIST  = 'fslist';
+	const SESS_CONFIG  = 'config';
+	const SESS_DEPLOY  = 'deploy';
 	const SESS_REPLACE = 'replace';
 
-	static protected $_instances = array();
+	protected static $_instances = array();
 
 	/**
 	 * Singleton factory method
@@ -2363,7 +2901,7 @@ class Shinst_Model_Session {
 	 *
 	 * @return object Shinst_Model_Session instance
 	 */
-	static public function get( $id ) {
+	public static function get( $id ) {
 		if ( ! isset( self::$_instances[ $id ] ) ) {
 			self::$_instances[ $id ] = new self( $id );
 		}
@@ -2438,7 +2976,7 @@ class Shinst_Model_Session {
 
 		$raw = file_get_contents( $file );
 
-		$data = @json_decode( $raw, true );
+		$data  = @json_decode( $raw, true );
 		$error = json_last_error();
 		if ( empty( $data ) && ! empty( $error ) ) {
 			throw new Shinst_Exception_Data(
@@ -2477,7 +3015,7 @@ class Shinst_Model_Session {
 		}
 
 		$data = json_encode( $this->_data );
-		return ( bool ) file_put_contents( $file, $data );
+		return (bool) file_put_contents( $file, $data );
 	}
 
 	/**
@@ -2494,7 +3032,7 @@ class Shinst_Model_Session {
 	 * Sets specific property
 	 *
 	 * @param string $key Property name to set.
-	 * @param mixed $value Property value to set.
+	 * @param mixed  $value Property value to set.
 	 */
 	public function set_value( $key, $value ) {
 		$this->_data[ $key ] = $value;
@@ -2504,7 +3042,7 @@ class Shinst_Model_Session {
 	 * Gets specific property
 	 *
 	 * @param string $prop Property name to fetch.
-	 * @param mixed $fallback Optional fallback value, defaults to (bool)false.
+	 * @param mixed  $fallback Optional fallback value, defaults to (bool)false.
 	 *
 	 * @return mixed Property value, or fallback.
 	 */
@@ -2536,31 +3074,31 @@ class Shinst_Model_Session {
 
 class Shinst_Model_Style {
 
-	const GLOBAL_BG = '#FFFFFF';
-	const GLOBAL_FG = '#333333';
-	const GLOBAL_FONT = 'Roboto';
+	const GLOBAL_BG          = '#FFFFFF';
+	const GLOBAL_FG          = '#333333';
+	const GLOBAL_FONT        = 'Roboto';
 	const GLOBAL_LINE_HEIGHT = 30;
 
 	const PARAGRAPH_FG = '#666666';
-	const GHOST_FG = '#888888';
+	const GHOST_FG     = '#888888';
 
 	const BUTTON_BG = '#17A8E3';
 
 	const GLOBAL_FONT_SIZE = 15;
-	const LABEL_FONT_SIZE = 12;
+	const LABEL_FONT_SIZE  = 12;
 
-	const SIDEBAR_BG = '#FAFAFA';
+	const SIDEBAR_BG    = '#FAFAFA';
 	const SIDEBAR_WIDTH = 268;
 
 	const MAIN_WIDTH = 420;
 
-	const COLOR_LABEL = '#AAAAAA';
+	const COLOR_LABEL  = '#AAAAAA';
 	const COLOR_BORDER = '#DDDDDD';
 
 	const INPUT_HEIGHT = 40;
-	const INPUT_INNER = 22;
+	const INPUT_INNER  = 22;
 
-	const COLOR_ERROR = '#FF6D6D';
+	const COLOR_ERROR   = '#FF6D6D';
 	const COLOR_WARNING = '#FECF2F';
 	const COLOR_SUCCESS = 'green';
 
@@ -2584,7 +3122,7 @@ class Shinst_Model_Url {
 	 *
 	 * @return bool
 	 */
-	static public function is_ssl() {
+	public static function is_ssl() {
 		return isset( $_SERVER['HTTPS'] ) && 'on' === $_SERVER['HTTPS'];
 	}
 
@@ -2595,11 +3133,19 @@ class Shinst_Model_Url {
 	 *
 	 * @return string
 	 */
-	static public function get_host() {
+	public static function get_host() {
 		if ( empty( $_SERVER['HTTP_HOST'] ) ) {
 			throw new Shinst_Exception( 'Unable to determine server host' );
 		}
-		return $_SERVER['HTTP_HOST'];
+
+		// @RIPS\Annotation\Ignore
+		$host = urlencode( $_SERVER['HTTP_HOST'] );
+
+		if ( false !== strpos( $_SERVER['HTTP_HOST'], ':' ) ) {
+			$host = urldecode( $host );
+		}
+
+		return $host;
 	}
 
 	/**
@@ -2609,10 +3155,11 @@ class Shinst_Model_Url {
 	 *
 	 * @return string
 	 */
-	static public function get_self_path() {
+	public static function get_self_path() {
 		if ( ! isset( $_SERVER['REQUEST_URI'] ) ) {
 			throw new Shinst_Exception( 'Unable to determine root path' );
 		}
+
 		return trim( parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH ), '/' );
 	}
 
@@ -2621,7 +3168,7 @@ class Shinst_Model_Url {
 	 *
 	 * @return string
 	 */
-	static public function get_self_url() {
+	public static function get_self_url() {
 		return self::get_url( basename( __FILE__ ) );
 	}
 
@@ -2632,9 +3179,10 @@ class Shinst_Model_Url {
 	 *
 	 * @return string
 	 */
-	static public function get_root_path() {
+	public static function get_root_path() {
 		$path = self::get_self_path();
 		$root = dirname( $path );
+
 		return shinst_trailingslash(
 			'.' === $root ? '' : $root
 		);
@@ -2645,7 +3193,7 @@ class Shinst_Model_Url {
 	 *
 	 * @return string
 	 */
-	static public function get_protocol() {
+	public static function get_protocol() {
 		return self::is_ssl() ? 'https://' : 'http://';
 	}
 
@@ -2656,10 +3204,10 @@ class Shinst_Model_Url {
 	 *
 	 * @return string
 	 */
-	static public function get_root_url() {
+	public static function get_root_url() {
 		return self::get_protocol() .
-			shinst_trailingslash( self::get_host() ) .
-			ltrim( self::get_root_path(), '/' );
+			   shinst_trailingslash( self::get_host() ) .
+			   ltrim( self::get_root_path(), '/' );
 	}
 
 	/**
@@ -2669,7 +3217,7 @@ class Shinst_Model_Url {
 	 *
 	 * @return string
 	 */
-	static public function get_url( $path ) {
+	public static function get_url( $path ) {
 		return self::get_root_url() . ltrim( $path, '/' );
 	}
 
@@ -2680,7 +3228,7 @@ class Shinst_Model_Url {
 	 *
 	 * @return string
 	 */
-	static public function get_fs_url_path( $fs_path ) {
+	public static function get_fs_url_path( $fs_path ) {
 		return Shinst_Model_Fs_Path::get_rerooted(
 			$fs_path,
 			self::get_root_path()
@@ -2694,114 +3242,10 @@ class Shinst_Model_Url {
 	 *
 	 * @return string
 	 */
-	static public function get_fs_url( $fs_path ) {
+	public static function get_fs_url( $fs_path ) {
 		return self::get_protocol() .
-			shinst_trailingslash( self::get_host() ) .
-			ltrim( self::get_fs_url_path( $fs_path ), '/' );
-	}
-}
-
-
-
-// Source: lib/installer/src/lib/model/db/class-sqlfile.php
-
-/**
- * Handles SQL file operations
- *
- * @package shipper-installer
- */
-
-class Shinst_Model_Db_Sqlfile {
-
-	const STATEMENT_DELIMITER = 'end_shipper_statement';
-	const TEMP_PREFIX = 'tbi_';
-
-	/**
-	 * Path to SQL file
-	 *
-	 * @var string
-	 */
-	private $_file;
-
-	/**
-	 * Constructor
-	 *
-	 * @param string $file Path to SQL file.
-	 */
-	public function __construct( $file ) {
-		$this->_file = $file;
-	}
-
-	/**
-	 * Opens up a reading file pointer to a table file.
-	 *
-	 * @return resource|bool File pointer on success, (bool)false otherwise
-	 */
-	public function get_file_pointer() {
-		$source = $this->_file;
-
-		if ( ! file_exists( $source ) || ! is_readable( $source ) ) {
-			throw new Shinst_Exception_Fs( sprintf(
-				'Unable to extract statements to import for %s: %s',
-				basename( $this->_file ),
-				$this->_file
-			) );
-		}
-
-		$fp = fopen( $source, 'r' );
-		if ( false === $fp ) { return false; }
-
-		fseek( $fp, 0 );
-
-		return $fp;
-	}
-
-	/**
-	 * Extracts a number of statements to import from source
-	 *
-	 * @param int $position Offset to start from.
-	 * @param int $limit Import at most this many statements.
-	 *
-	 * @return array Statements to import, as SQL strings
-	 */
-	public function get_statements( $position, $limit ) {
-		$statements = array();
-		$fp = $this->get_file_pointer();
-
-		$delimiter_rx = preg_quote( self::STATEMENT_DELIMITER, '/' );
-		$count = 0;
-		while ( ($line = fgets( $fp )) !== false ) {
-			$line = trim( $line );
-			if ( empty( $line ) ) {
-				// Nothing to do, empty line.
-				continue;
-			}
-			if ( preg_match( "/{$delimiter_rx}/", $line ) ) {
-				// We have the delimiter - increase the count, but don't include.
-				$count++;
-				// Had enough? We're done for now.
-				if ( count( $statements ) >= $limit ) { break; }
-				continue;
-			}
-			if ( preg_match( '/^#/', $line ) ) {
-				// Comment line - don't include.
-				continue;
-			}
-
-			// The meat part - add statement to the queue.
-			if ( $count >= $position ) {
-				if ( ! isset( $statements[ $count ] ) ) { $statements[ $count ] = ''; }
-				$statements[ $count ] .= $line;
-			}
-		}
-
-		// At this point, we have somewhat randonly indexes statements.
-		$statements = array_values( $statements );
-
-		// Clean up after ourselves.
-		fclose( $fp );
-
-		return $statements;
+			   shinst_trailingslash( self::get_host() ) .
+			   ltrim( self::get_fs_url_path( $fs_path ), '/' );
 	}
 }
 
@@ -2841,7 +3285,7 @@ class Shinst_Model_Db_Table extends Shinst_Model_Db {
 	 * @return object Shinst_Model_Db_Table instance
 	 */
 	public static function create( $args = array() ) {
-		$me = new self;
+		$me   = new self();
 		$args = array_merge(
 			self::get_empty_args_list(),
 			$args
@@ -2866,9 +3310,10 @@ class Shinst_Model_Db_Table extends Shinst_Model_Db {
 	 * @return array
 	 */
 	public static function get_empty_args_list() {
-		$list = parent::get_empty_args_list();
-		$list['prefix'] = '';
+		$list               = parent::get_empty_args_list();
+		$list['prefix']     = '';
 		$list['table_name'] = '';
+
 		return $list;
 	}
 
@@ -2878,7 +3323,7 @@ class Shinst_Model_Db_Table extends Shinst_Model_Db {
 	 * @param string $prefix Table prefix.
 	 */
 	public function set_prefix( $prefix ) {
-		$prefix = is_string( $prefix )
+		$prefix            = is_string( $prefix )
 			? $prefix
 			: '';
 		$this->_tbl_prefix = $prefix;
@@ -2899,7 +3344,7 @@ class Shinst_Model_Db_Table extends Shinst_Model_Db {
 	 * @param string $name Raw table name.
 	 */
 	public function set_table_name( $name ) {
-		$name = is_string( $name )
+		$name            = is_string( $name )
 			? $name
 			: '';
 		$this->_tbl_name = $name;
@@ -2921,601 +3366,6 @@ class Shinst_Model_Db_Table extends Shinst_Model_Db {
 	 */
 	public function get_table() {
 		return $this->get_prefix() . $this->get_table_name();
-	}
-}
-
-
-
-// Source: lib/installer/src/lib/model/db/table/class-install.php
-
-/**
- * Handles initial database table import
- *
- * @package shipper-installer
- */
-
-class Shinst_Model_Db_Table_Install {
-
-	/**
-	 * Source SQL file path
-	 *
-	 * @var string
-	 */
-	private $_sql_file;
-
-	/**
-	 * Replacer instance
-	 *
-	 * @var object Shinst_Model_Replacer instance
-	 */
-	private $_replacer;
-
-	/**
-	 * Constructor
-	 *
-	 * @param string $sql_file Path to SQL file to import from.
-	 */
-	public function __construct( $sql_file ) {
-		$this->_sql_file = $sql_file;
-		$this->_replacer = new Shinst_Model_Replacer;
-	}
-
-	/**
-	 * Gets the source file abstraction from which to import
-	 *
-	 * @return object Shinst_Model_Db_Sqlfile instance
-	 */
-	public function get_source() {
-		static $file;
-		if ( empty( $file ) ) {
-			$file = new Shinst_Model_Db_Sqlfile( $this->_sql_file );
-		}
-		return $file;
-	}
-
-	/**
-	 * Gets the destination table abstraction to which to import
-	 *
-	 * @uses Shinst_Model_Session config session to set up DB/table access.
-	 *
-	 * @return object Shinst_Model_Db_Table instance
-	 */
-	public function get_destination() {
-		static $table;
-		if ( empty( $table ) ) {
-			$config = Shinst_Model_Session::get( Shinst_Model_Session::SESS_CONFIG );
-			$table = Shinst_Model_Db_Table::create( array(
-				'name' => $config->get_value( 'dbname' ),
-				'user' => $config->get_value( 'dbuser' ),
-				'password' => $config->get_value( 'dbpassword' ),
-				'host' => $config->get_value( 'dbhost' ),
-				'table_name' => $this->get_table_name_from_file(),
-				'prefix' => Shinst_Model_Db_Sqlfile::TEMP_PREFIX,
-			) );
-		}
-		return $table;
-	}
-
-	/**
-	 * Gets destination table prefix
-	 *
-	 * Overridden in some tests to allow for contextless suite runs.
-	 *
-	 * @uses Shinst_Model_Manifest
-	 *
-	 * @return string
-	 */
-	public function get_prefix() {
-		return Shinst_Model_Manifest::get()->get_value( 'table_prefix'  );
-	}
-
-	/**
-	 * Gets full table name from the file to import
-	 *
-	 * Full table name includes its prefix
-	 *
-	 * @return string
-	 */
-	public function get_table_from_file() {
-		return pathinfo( $this->_sql_file, PATHINFO_FILENAME );
-	}
-
-	/**
-	 * Gets just the table name, sans prefix
-	 *
-	 * @return string
-	 */
-	public function get_table_name_from_file() {
-		$table_name = $this->get_table_from_file();
-
-		return preg_replace(
-			'/^' . preg_quote( $this->get_prefix(), '/' ) . '/',
-			'',
-			$table_name
-		);
-	}
-
-	/**
-	 * Imports a set of statements
-	 *
-	 * Main functionality driver called from the controller.
-	 *
-	 * @param int $position Statements to import start at this index.
-	 * @param int $limit Import at most this many statements.
-	 *
-	 * @return int Number of imported statements
-	 */
-	public function import_statements( $position, $limit ) {
-		$this->get_destination()->query(
-			"SET SQL_MODE='ALLOW_INVALID_DATES'"
-		);
-
-		$this->get_destination()->query( 'SET foreign_key_checks = 0' );
-
-		$statements = $this->get_source()->get_statements( $position, $limit );
-		foreach( $statements as $statement ) {
-			if ( $this->is_constrained_create( $statement ) ) {
-				$statement = $this->get_fixed_constrained_create( $statement );
-			}
-			$this->import_statement( $statement );
-		}
-		$this->get_destination()->query( 'SET foreign_key_checks = 1' );
-
-		return count( $statements );
-	}
-
-	/**
-	 * Checks whether the SQL statement is a table creation one
-	 *
-	 * @param string $statement SQL statement.
-	 *
-	 * @return bool
-	 */
-	public function is_create_statement( $statement ) {
-		return (bool) preg_match( '/create table/i', $statement );
-	}
-
-	/**
-	 * Checks whether the SQL statement is create and has constraints applied
-	 *
-	 * @param string $statement SQL statement.
-	 *
-	 * @return bool
-	 */
-	public function is_constrained_create( $statement ) {
-		return $this->is_create_statement( $statement ) &&
-			(bool) preg_match( '/constraint/i', $statement );
-	}
-
-	/**
-	 * Fixes constrained create statement
-	 *
-	 * Makes sure the constraint name is unique to prevent conflicts.
-	 * Also ensures that the referenced table uses proper end value.
-	 *
-	 * @param string $statement SQL create statement.
-	 *
-	 * @return string
-	 */
-	public function get_fixed_constrained_create( $statement ) {
-		$original = $this->get_table_name_from_file();
-		Shinst_Model_Log::write(
-			"Preprocessing constrained statement in [{$original}]"
-		);
-		$rx = '/constraint ([_a-z]+)(' . preg_quote( $original, '/' ) . ')([^ ]+)/i';
-
-		// Fix constraint name - there can be only one.
-		$random_constraint_name = 'c';
-		foreach ( range( 0, strlen( $original ) ) as $idx ) {
-			$random_constraint_name .= shinst_randchar();
-		}
-		$changed = preg_replace(
-			$rx,
-			'constraint $1' . $random_constraint_name . '$3',
-			$statement
-		);
-		if ( $changed !== $statement ) {
-			Shinst_Model_Log::write(
-				"\tUpdated constraint infix to [{$random_constraint_name}]"
-			);
-		} else {
-			Shinst_Model_Log::write(
-				"\tNo actual constraint processed"
-			);
-			// Nothing changed, no reference to process further.
-			return $statement;
-		}
-
-		$session = Shinst_Model_Session::get( Shinst_Model_Session::SESS_CONFIG );
-		$table_prefix = $session->get_value( 'table_prefix' );
-
-		// Fix which table it references.
-		if ( ! empty( $table_prefix ) && $this->get_prefix() !== $table_prefix ) {
-			Shinst_Model_Log::write( "\tChecking references" );
-			$tables = Shinst_Model_Package::get_tables();
-			foreach ( $tables as $table ) {
-				$rx = '/references ' . preg_quote( $table, '/' ) . '/i';
-				if ( ! (bool) preg_match( $rx, $changed ) ) {
-					continue;
-				}
-				$dest = preg_replace(
-					'/^' . preg_quote( $this->get_prefix(), '/' ) . '/',
-					$table_prefix,
-					$table
-				);
-				$changed = preg_replace(
-					$rx,
-					'references ' . $dest,
-					$changed
-				);
-				Shinst_Model_Log::write( "\tFixing [{$table}] reference to [{$dest}]" );
-			}
-		}
-
-		return $changed;
-	}
-
-	/**
-	 * Actually imports a statement
-	 *
-	 * @param string $statement Raw statement to import.
-	 *
-	 * @return bool
-	 */
-	public function import_statement( $statement ) {
-		$result = (bool) $this->get_destination()
-		   ->query( $this->get_processed_statement( $statement ) );
-	}
-
-	/**
-	 * Processes the statement to remove Shipper table name macros
-	 *
-	 * @param string $statement SQL statement to process.
-	 *
-	 * @return string Processed statement
-	 */
-	public function get_processed_statement( $statement ) {
-		static $tables;
-		if ( empty( $tables ) ) {
-			$tables = $this->_replacer->get_tables(
-				Shinst_Model_Db_Sqlfile::TEMP_PREFIX
-			);
-		}
-		foreach ( $tables as $rx => $rpl ) {
-			if ( false === strpos( $statement, '{{' ) ) {
-				break;
-			}
-			$statement = preg_replace(
-				'/' . preg_quote( $rx, '/' ) . '/',
-				$rpl,
-				$statement
-			);
-		}
-		return $statement;
-	}
-}
-
-
-
-// Source: lib/installer/src/lib/model/db/table/class-replace.php
-
-/**
- * Handles database table values replacement
- *
- * @package shipper-installer
- */
-
-class Shinst_Model_Db_Table_Replace {
-
-	/**
-	 * Source table
-	 *
-	 * @var string
-	 */
-	private $_source_table;
-
-	/**
-	 * Columns cache
-	 *
-	 * @var array
-	 */
-	private $_columns = array();
-
-	/**
-	 * Replacer instance
-	 *
-	 * @var object Shinst_Model_Replacer
-	 */
-	private $_replacer;
-
-	/**
-	 * Constructor
-	 *
-	 * @param string $source_table Full source table name to process.
-	 */
-	public function __construct( $source_table ) {
-		$this->_source_table = $source_table;
-		$this->_replacer     = new Shinst_Model_Replacer;
-	}
-
-	/**
-	 * Gets the source table abstraction - interim named table
-	 *
-	 * @return object Shinst_Model_Db_Table instance
-	 * @uses Shinst_Model_Db_Sqlfile for table temporary prefix.
-	 *
-	 * @uses Shinst_Model_Session config session to set up DB/table access.
-	 */
-	public function get_source() {
-		static $table;
-		if ( empty( $table ) ) {
-			$config = Shinst_Model_Session::get( Shinst_Model_Session::SESS_CONFIG );
-			$table  = Shinst_Model_Db_Table::create( array(
-				'name'       => $config->get_value( 'dbname' ),
-				'user'       => $config->get_value( 'dbuser' ),
-				'password'   => $config->get_value( 'dbpassword' ),
-				'host'       => $config->get_value( 'dbhost' ),
-				'table_name' => $this->get_table_name_from_source(),
-				'prefix'     => Shinst_Model_Db_Sqlfile::TEMP_PREFIX,
-			) );
-		}
-
-		return $table;
-	}
-
-	/**
-	 * Gets the destination table abstraction - final table destination
-	 *
-	 * @return object Shinst_Model_Db_Table instance
-	 * @uses Shinst_Model_Session config session to set up DB/table access.
-	 *
-	 */
-	public function get_destination() {
-		static $table;
-		if ( empty( $table ) ) {
-			$config = Shinst_Model_Session::get( Shinst_Model_Session::SESS_CONFIG );
-			$table  = Shinst_Model_Db_Table::create( array(
-				'name'       => $config->get_value( 'dbname' ),
-				'user'       => $config->get_value( 'dbuser' ),
-				'password'   => $config->get_value( 'dbpassword' ),
-				'host'       => $config->get_value( 'dbhost' ),
-				'table_name' => $this->get_table_name_from_source(),
-				'prefix'     => $config->get_value( 'table_prefix' ),
-			) );
-		}
-
-		return $table;
-	}
-
-	/**
-	 * Gets source table prefix
-	 *
-	 * Overridden in some tests to allow for contextless suite runs.
-	 *
-	 * @return string
-	 * @uses Shinst_Model_Manifest
-	 *
-	 */
-	public function get_prefix() {
-		return Shinst_Model_Manifest::get()->get_value( 'table_prefix' );
-	}
-
-	public function get_columns() {
-		if ( empty( $this->_columns ) ) {
-			$dbh            = $this->get_source();
-			$this->_columns = $dbh->get_col(
-				"SHOW COLUMNS FROM {$dbh->get_table()}"
-			);
-		}
-
-		return $this->_columns;
-	}
-
-	/**
-	 * Gets just the table name, sans prefix
-	 *
-	 * @return string
-	 */
-	public function get_table_name_from_source() {
-		$table_name = $this->_source_table;
-
-		return preg_replace(
-			'/^' . preg_quote( $this->get_prefix(), '/' ) . '/',
-			'',
-			$table_name
-		);
-	}
-
-	/**
-	 * Processes a set of rows
-	 *
-	 * Main functionality driver called from the controller.
-	 *
-	 * @param int $position Rows to process start at this index.
-	 * @param int $limit Process at most this many rows.
-	 *
-	 * @return int Number of processed rows
-	 */
-	public function process( $position, $limit ) {
-		$dbh     = $this->get_source();
-		$columns = $this->get_columns();
-		$parts   = array();
-		foreach ( $columns as $col ) {
-			//check if col is a reserved name
-			$col     = $this->escape_reserved_column( $col );
-			$parts[] = "{$col} REGEXP '\{\{SHIPPER.+\}\}'";
-		}
-		$sql = "SELECT * FROM {$dbh->get_table()} WHERE " .
-		       join( ' OR ', $parts ) .
-		       " LIMIT {$limit}";
-
-		$rows = $dbh->query( $sql );
-
-		if ( empty( $rows ) ) {
-			return 0; // Nothing to do here!
-		}
-
-		$processed                  = 0;
-		$has_serialized_replacement = false;
-		foreach ( $rows as $row ) {
-			$resrow                     = array();
-			$has_serialized_replacement = false;
-			foreach ( $row as $key => $value ) {
-				if ( shinst_is_serialized( $value ) ) {
-					$resrow[ $this->expand_scalar( $key ) ] = $this->expand_serialized( $value );
-					$has_serialized_replacement             = true;
-				} else {
-					$resrow[ $this->expand_scalar( $key ) ] = $this->expand_scalar( $value );
-				}
-			}
-
-			if ( md5( serialize( $row ) ) !== md5( serialize( $resrow ) ) ) {
-				$this->update_row( $row, $resrow );
-				$processed ++;
-				if ( $has_serialized_replacement ) {
-					// Just one serialized replacement per try.
-					break;
-				}
-			}
-		}
-
-		return $processed;
-	}
-
-	/**
-	 * Add backtick to reserved column name
-	 *
-	 * @param $column
-	 *
-	 * @return string
-	 */
-	public function escape_reserved_column( $column ) {
-		$reserved_names = $this->get_reserved_words();
-		if ( in_array( $column, $reserved_names ) ) {
-			return "`{$column}`";
-		}
-
-		return $column;
-	}
-
-	/**
-	 * Gets reserved SQL names list
-	 *
-	 * @return array
-	 */
-	public function get_reserved_words() {
-		$reserved_names = array( 'key', 'group', 'show', 'order', 'require', 'virtual' );
-
-		return $reserved_names;
-	}
-
-	public function update_row( $source_row, $new_row ) {
-		$dbh = $this->get_source();
-
-		$replacements = array();
-		foreach ( $new_row as $key => $value ) {
-			$original = $source_row[ $key ];
-			if ( $value === $original ) {
-				continue;
-			}
-
-			$replacements[] = "`{$key}`=" . $dbh->escape_param( $value );
-		}
-		if ( empty( $replacements ) ) {
-			return false;
-		}
-
-		$where = array();
-		foreach ( $source_row as $key => $value ) {
-			// Do not include large values in where statement.
-			if ( strlen( $value ) > 512 ) {
-				continue;
-			}
-			$where[] = "`{$key}`=" . $dbh->escape_param( $value );
-		}
-
-		$dbh->query(
-			"SET SQL_MODE='ALLOW_INVALID_DATES'"
-		);
-		$dbh->query( 'SET foreign_key_checks = 0' );
-
-		$result = (bool) $dbh->query(
-			"UPDATE {$dbh->get_table()} SET " .
-			join( ',', $replacements ) .
-			" WHERE " .
-			join( ' AND ', $where ) .
-			" LIMIT 1"
-		);
-
-		$dbh->query( 'SET foreign_key_checks = 1' );
-
-		return $result;
-	}
-
-	public function expand_serialized( $what ) {
-		$which = unserialize( $what );
-		if ( ! is_object( $which ) && ! is_array( $which ) ) {
-			$which = unserialize( stripslashes($what) );
-		}
-
-		if ( ! is_object( $which ) && ! is_array( $which ) ) {
-			//can't unserlize, blind replace
-			return $this->expand_scalar( $what );
-		}
-
-		$which = $this->_expand_serialized( $which );
-
-		return serialize( $which );
-	}
-
-	private function _expand_serialized( $what ) {
-		foreach ( $what as $key => $value ) {
-			if ( is_object( $what ) ) {
-				if ( ! is_object( $value ) && ! is_array( $value ) ) {
-					$what->$key = $this->expand_scalar( $value );
-				} else {
-					$what->$key = $this->_expand_serialized( $value );
-				}
-			} else {
-				if ( ! is_object( $value ) && ! is_array( $value ) ) {
-					$what[ $key ] = $this->expand_scalar( $value );
-				} else {
-					$what[ $key ] = $this->_expand_serialized( $value );
-				}
-			}
-		}
-
-		return $what;
-	}
-
-	public function expand_scalar( $what ) {
-		return $this->_replacer->replace( $what );
-	}
-
-	public function finalize() {
-		$dbh         = $this->get_source();
-		$source      = $dbh->get_table();
-		$destination = $this->get_destination()->get_table();
-
-		$existing = $dbh->query(
-			"SHOW TABLES LIKE %s",
-			array( $destination )
-		);
-		$dbh->query( 'SET foreign_key_checks = 0' );
-		if ( ! empty( $existing ) ) {
-			Shinst_Model_Log::write(
-				"Destination table {$destination} exists, deleting it first"
-			);
-			$dbh->query( "DROP TABLE {$destination}" );
-		}
-
-		Shinst_Model_Log::write(
-			"Renaming {$source} to its final destination: {$destination}"
-		);
-
-		return $dbh->query(
-			"RENAME TABLE {$source} TO {$destination}"
-		);
 	}
 }
 
@@ -3544,20 +3394,23 @@ class Shinst_Model_Fs_Archive {
 			$zip = '';
 		}
 		if ( empty( $zip ) ) {
-			$path = shinst_trailingslash( Shinst_Model_Fs_Path::get_root() );
+			$path  = shinst_trailingslash( Shinst_Model_Fs_Path::get_root() );
 			$files = glob( "{$path}*.shipper.zip" );
 			if ( empty( $files ) ) {
 				throw new Shinst_Exception_Fs(
 					"Unable to find any archives in [{$path}]"
 				);
 			}
+			// we always get the latest
+			$by_date = array();
 			$by_size = array();
 			foreach ( $files as $file ) {
-				$by_size[ $file ] = filesize( $file );
+				// $by_size[ $file ] = filesize( $file );
+				$by_date[ $file ] = filemtime( $file );
 			}
-			arsort( $by_size );
-			$keys = array_keys( $by_size );
-			$zip = reset( $keys );
+			arsort( $by_date );
+			$keys = array_keys( $by_date );
+			$zip  = reset( $keys );
 		}
 
 		return $zip;
@@ -3572,7 +3425,7 @@ class Shinst_Model_Fs_Archive {
 	 */
 	public static function extract_all( $reset_cache = false ) {
 		$archive = self::get_archive( $reset_cache );
-		$zip = new ZipArchive;
+		$zip     = new ZipArchive();
 		if ( true !== $zip->open( $archive ) ) {
 			throw new Shinst_Exception_Fs(
 				"Unable to open archive [{$archive}]"
@@ -3589,22 +3442,95 @@ class Shinst_Model_Fs_Archive {
 		return true;
 	}
 
-	static public function extract_manifest( $reset_cache = false ) {
+	/**
+	 * Extract by entries
+	 *
+	 * @param $lists
+	 *
+	 * @return bool
+	 * @throws Shinst_Exception_Fs
+	 */
+	public static function extract( $lists ) {
+		$archive = self::get_archive( true );
+		$zip     = new ZipArchive();
+		if ( true !== $zip->open( $archive ) ) {
+			throw new Shinst_Exception_Fs(
+				"Unable to open archive [{$archive}]"
+			);
+		}
+		$destination = Shinst_Model_Fs_Path::get_working_dir();
+
+		if ( true !== $zip->extractTo( $destination, $lists ) ) {
+			throw new Shinst_Exception_Fs(
+				"Unable to extract archive [{$archive}] to [{$destination}]"
+			);
+		}
+
+		return true;
+	}
+
+	public static function extract_by_offset( $offset ) {
+		$archive = self::get_archive( true );
+		$zip     = new ZipArchive();
+		if ( true !== $zip->open( $archive ) ) {
+			throw new Shinst_Exception_Fs(
+				"Unable to open archive [{$archive}]"
+			);
+		}
+		if ( $offset >= $zip->numFiles ) {
+			return true;
+		}
+		$destination = Shinst_Model_Fs_Path::get_working_dir();
+		$limit       = 500;
+		for ( $i = $offset; $i < $zip->numFiles; $i ++ ) {
+			$path = $zip->getNameIndex( $i );
+			$zip->extractTo( $destination, array( $path ) );
+			$limit --;
+			if ( $limit <= 0 ) {
+				break;
+			}
+		}
+
+		return array( $i, floor( ( $i / $zip->numFiles ) * 100 ) );
+	}
+
+	public static function extract_manifest( $reset_cache = false ) {
 		$archive = self::get_archive( $reset_cache );
-		$zip = new ZipArchive;
+		$zip     = new ZipArchive();
 		if ( true !== $zip->open( $archive ) ) {
 			throw new Shinst_Exception_Fs(
 				"Unable to open archive [{$archive}]"
 			);
 		}
 		$manifest = shinst_trailingslash( Shinst_Model_Package::COMPONENT_META ) .
-			Shinst_Model_Manifest::MANIFEST_BASENAME . '.json';
-
+					Shinst_Model_Manifest::MANIFEST_BASENAME . '.json';
 
 		$destination = Shinst_Model_Fs_Path::get_working_dir();
 		if ( true !== $zip->extractTo( $destination, array( $manifest ) ) ) {
 			throw new Shinst_Exception_Fs(
 				"Unable to extract [{$manifest}] from archive [{$archive}]"
+			);
+		}
+
+		return true;
+	}
+
+	public static function extract_dumped_sqls( $reset_cache = false ) {
+		$archive = self::get_archive( $reset_cache );
+		$zip     = new ZipArchive();
+
+		if ( true !== $zip->open( $archive ) ) {
+			throw new Shinst_Exception_Fs(
+				"Unable to open archive [{$archive}]"
+			);
+		}
+
+		$sql_file    = shinst_trailingslash( Shinst_Model_Package::COMPONENT_DB ) . Shinst_Model_Package::COMPONENT_DB_FILE;
+		$destination = Shinst_Model_Fs_Path::get_working_dir();
+
+		if ( true !== $zip->extractTo( $destination, array( $sql_file ) ) ) {
+			throw new Shinst_Exception_Fs(
+				"Unable to extract [{$sql_file}] from archive [{$archive}]"
 			);
 		}
 
@@ -3628,9 +3554,9 @@ class Shinst_Model_Fs_Archive {
 class Shinst_Model_Fs_List {
 
 	const KEY_TOTAL = 'total';
-	const KEY_STEP = 'step';
+	const KEY_STEP  = 'step';
 	const KEY_PATHS = 'paths';
-	const KEY_DONE = 'is_done';
+	const KEY_DONE  = 'is_done';
 
 	/**
 	 * Root directory to start the crawl from
@@ -3708,7 +3634,7 @@ class Shinst_Model_Fs_List {
 	 * @return int
 	 */
 	public function get_paths_limit() {
-		return 50;
+		return 250;
 	}
 
 	/**
@@ -3717,7 +3643,7 @@ class Shinst_Model_Fs_List {
 	 * @return int Size limitation, in bytes (zero means no limit)
 	 */
 	public function get_bytes_limit() {
-		return 2 * 1024 * 1024;
+		return 25 * 1024 * 1024;
 	}
 
 	/**
@@ -3726,10 +3652,11 @@ class Shinst_Model_Fs_List {
 	 * @return array
 	 */
 	public function process_files() {
-		if ( $this->is_done() ) { return $this->_files; }
+		if ( $this->is_done() ) {
+			return $this->_files; }
 
-		$processed = 0;
-		$limit = $this->get_paths_limit();
+		$processed   = 0;
+		$limit       = $this->get_paths_limit();
 		$limit_files = $limit * 6;
 		$limit_bytes = $this->get_bytes_limit();
 
@@ -3738,7 +3665,7 @@ class Shinst_Model_Fs_List {
 		$paths = $session->get_value( self::KEY_PATHS, array( $this->_root ) );
 
 		while ( ! empty( $paths ) ) {
-			$path = array_pop( $paths );
+			$path = array_shift( $paths );
 			$processed++;
 
 			$contents = Shinst_Model_Fs_Path::glob_all( $path );
@@ -3836,7 +3763,7 @@ class Shinst_Model_Fs_Path {
 	 *
 	 * @return string Root directory full path
 	 */
-	static public function get_root() {
+	public static function get_root() {
 		return dirname( __FILE__ );
 	}
 
@@ -3849,7 +3776,7 @@ class Shinst_Model_Fs_Path {
 	 *
 	 * @return string
 	 */
-	static public function get_working_dir( $create_path = true ) {
+	public static function get_working_dir( $create_path = true ) {
 		$shipper_dir = shinst_trailingslash( self::get_root() ) . 'shipper-working';
 
 		if ( ! empty( $create_path ) ) {
@@ -3866,13 +3793,46 @@ class Shinst_Model_Fs_Path {
 	}
 
 	/**
+	 * Get wp-content directory
+	 *
+	 * @return string
+	 */
+	public static function get_content_dir() {
+		$wp_content_dir = shinst_trailingslash( self::get_root() ) . 'wp-content';
+
+		return shinst_trailingslash( $wp_content_dir );
+	}
+
+	/**
+	 * Get plugins directory
+	 *
+	 * @return string
+	 */
+	public static function get_plugins_dir() {
+		$plugins_dir = shinst_trailingslash( self::get_content_dir() ) . 'plugins';
+
+		return shinst_trailingslash( $plugins_dir );
+	}
+
+	/**
+	 * Get themes directory
+	 *
+	 * @return string
+	 */
+	public static function get_themes_dir() {
+		$themes_dir = shinst_trailingslash( self::get_content_dir() ) . 'themes';
+
+		return shinst_trailingslash( $themes_dir );
+	}
+
+	/**
 	 * Gets absolute path to installer temporary directory
 	 *
 	 * Will create the directory if it doesn't exist, as a side-effect.
 	 *
 	 * @return string
 	 */
-	static public function get_temp_dir() {
+	public static function get_temp_dir() {
 		$working = self::get_working_dir();
 		$temp    = shinst_trailingslash( $working ) . 'tmp';
 
@@ -3922,7 +3882,7 @@ class Shinst_Model_Fs_Path {
 	 *
 	 * @return array
 	 */
-	static public function glob_all( $path ) {
+	public static function glob_all( $path ) {
 		return defined( 'GLOB_BRACE' )
 			? glob( shinst_trailingslash( $path ) . '{,.}[!.,!..]*', GLOB_BRACE )
 			: glob( shinst_trailingslash( $path ) . '[!.,!..]*' );
@@ -3937,7 +3897,7 @@ class Shinst_Model_Fs_Path {
 	 *
 	 * @return string
 	 */
-	static public function get_rerooted( $abspath, $newroot, $oldroot = false ) {
+	public static function get_rerooted( $abspath, $newroot, $oldroot = false ) {
 		$oldroot = ! empty( $oldroot )
 			? $oldroot
 			: self::get_root();
@@ -3955,7 +3915,7 @@ class Shinst_Model_Fs_Path {
 	 *
 	 * @return bool
 	 */
-	static public function is_config_file( $path ) {
+	public static function is_config_file( $path ) {
 		$configs = array(
 			'wp-config.php',
 			'wp-tests-config.php',
@@ -3976,7 +3936,7 @@ class Shinst_Model_Fs_Path {
 	 *
 	 * @return bool
 	 */
-	static public function rmdir_r( $path, $previous ) {
+	public static function rmdir_r( $path, $previous ) {
 		$next    = ( ! empty( $previous ) ? shinst_trailingslash( $previous ) : '' ) . basename( $path );
 		$cleanup = self::glob_all( $path );
 		$status  = true;
@@ -4009,6 +3969,7 @@ class Shinst_Model_Fs_Path {
 
 	/**
 	 * Check if the current directory alreayd have an old wp-config.php
+	 *
 	 * @return string | bool
 	 */
 	public static function is_wpconfig_located() {
@@ -4027,7 +3988,7 @@ class Shinst_Model_Fs_Path {
 	 *
 	 * @return bool
 	 */
-	static public function mkdir_p( $target ) {
+	public static function mkdir_p( $target ) {
 		// From php.net/mkdir user contributed notes.
 		$target = str_replace( '//', '/', $target );
 
@@ -4079,6 +4040,357 @@ class Shinst_Model_Fs_Path {
 
 
 
+// Source: lib/installer/src/lib/model/json/class-serializer.php
+
+/**
+ * JSON to Serializer
+ *
+ * @package shipper-installer
+ */
+
+/**
+ * Class Shinst_Model_JSON_Serializer
+ */
+class Shinst_Model_JSON_Serializer {
+
+	/**
+	 * @var string
+	 */
+	private $string;
+
+	const SHIPPER_JSON_START = '{{SHIPPER_JSON_START}}';
+	const SHIPPER_JSON_END   = '{{SHIPPER_JSON_END}}';
+
+	public function __construct( $string ) {
+		$this->string = $string;
+	}
+
+	private function get_json_start_pos() {
+		return strpos( $this->string, self::SHIPPER_JSON_START );
+	}
+
+	private function is_json() {
+		return false !== strpos( $this->string, self::SHIPPER_JSON_START );
+	}
+
+	private function get_json_end_pos() {
+		return strpos( $this->string, self::SHIPPER_JSON_END );
+	}
+
+	private function get_json() {
+		if ( ! $this->is_json() ) {
+			return false;
+		}
+
+		$pos                = $this->get_json_start_pos() + strlen( self::SHIPPER_JSON_START );
+		$without_first_part = substr( $this->string, $pos );
+		$json               = strstr( $without_first_part, self::SHIPPER_JSON_END, true );
+
+		return stripslashes( $json );
+	}
+
+	private function get_json_last_part( $without_const = true ) {
+		$pos = $without_const
+			? $this->get_json_end_pos() + strlen( self::SHIPPER_JSON_END )
+			: $this->get_json_end_pos();
+
+		return substr( $this->string, $pos );
+	}
+
+	private function get_json_first_part( $without_const = true ) {
+		$pos = $without_const
+			? $this->get_json_start_pos()
+			: $this->get_json_start_pos() + strlen( self::SHIPPER_JSON_START );
+
+		return substr( $this->string, 0, $pos );
+	}
+
+	private function get_serialize() {
+		return addslashes( serialize( json_decode( $this->get_json(), true ) ) );
+	}
+
+	public function run() {
+		if ( ! $this->get_json() ) {
+			return $this->string;
+		}
+
+		return $this->get_json_first_part() . $this->get_serialize() . $this->get_json_last_part();
+	}
+}
+
+
+
+// Source: lib/installer/src/lib/model/serialize/class-decoder.php
+
+
+/**
+ * Class Shipper_Helper_Replacer_Serialize
+ */
+class Shinst_Model_Serialize_Decoder {
+
+	/**
+	 * String holder
+	 *
+	 * @var string
+	 */
+	private $string;
+
+	const SHIPPER_SERIALIZE_START = '{{SHIPPER_SERIALIZE_START}}';
+	const SHIPPER_SERIALIZE_END   = '{{SHIPPER_SERIALIZE_END}}';
+
+	/**
+	 * Check whether it's serialized or not
+	 *
+	 * @return bool
+	 */
+	private function is_serialized() {
+		return false !== strpos( $this->string, self::SHIPPER_SERIALIZE_START );
+	}
+
+	/**
+	 * Get serialized starting position
+	 *
+	 * @return false|int
+	 */
+	private function get_serialized_start_pos() {
+		return strpos( $this->string, self::SHIPPER_SERIALIZE_START );
+	}
+
+	/**
+	 * Get serialized ending position
+	 *
+	 * @return false|int
+	 */
+	private function get_serialized_end_pos() {
+		return strpos( $this->string, self::SHIPPER_SERIALIZE_END );
+	}
+
+	/**
+	 * Get Serialize string
+	 *
+	 * @return false|string
+	 */
+	private function get_serialized() {
+		if ( ! $this->is_serialized() ) {
+			return false;
+		}
+
+		$pos                = $this->get_serialized_start_pos() + strlen( self::SHIPPER_SERIALIZE_START );
+		$without_first_part = substr( $this->string, $pos );
+		$serialized         = strstr( $without_first_part, self::SHIPPER_SERIALIZE_END, true );
+
+		return stripslashes( $serialized );
+	}
+
+	/**
+	 * Get Serialize last part
+	 *
+	 * @param bool $without_const Whether to return the string without the CONST or NOT.
+	 *
+	 * @return false|string
+	 */
+	private function get_serialized_last_part( $without_const = true ) {
+		$pos = $without_const
+			? $this->get_serialized_end_pos() + strlen( self::SHIPPER_SERIALIZE_END )
+			: $this->get_serialized_end_pos();
+
+		return substr( $this->string, $pos );
+	}
+
+	/**
+	 * Get first part of the Serialize string
+	 *
+	 * @param bool $without_const Whether to return the string without the CONST or NOT.
+	 *
+	 * @return false|string
+	 */
+	private function get_serialized_first_part( $without_const = true ) {
+		$pos = $without_const
+			? $this->get_serialized_start_pos()
+			: $this->get_serialized_start_pos() + strlen( self::SHIPPER_SERIALIZE_START );
+
+		return substr( $this->string, 0, $pos );
+	}
+
+	/**
+	 * Get serialized string
+	 *
+	 * @return string
+	 */
+	private function get_decoded_serialized() {
+		$model               = new Shinst_Model_Replacer();
+		$serialized_replacer = new Shinst_Model_Serialize_Replacer();
+
+		$decoded_string = $this->get_serialized();
+
+		foreach ( $model->get_macros() as $find => $replace ) {
+			$decoded_string = $serialized_replacer->replace( $find, $replace, $decoded_string );
+		}
+
+		foreach ( $model->_get_subsite_extract_macros() as $find => $replace ) {
+			$decoded_string = $serialized_replacer->replace( $find, $replace, $decoded_string );
+		}
+
+		return addslashes( $decoded_string );
+	}
+
+	/**
+	 * Transform the Serialize string
+	 *
+	 * @param string $string the string to be transformed.
+	 *
+	 * @return string
+	 */
+	public function transform( $string ) {
+		$this->string = $string;
+
+		if ( ! $this->get_serialized() ) {
+			return $this->string;
+		}
+
+		return $this->get_serialized_first_part() . $this->get_decoded_serialized() . $this->get_serialized_last_part();
+	}
+}
+
+
+
+// Source: lib/installer/src/lib/model/serialize/class-replacer.php
+
+/**
+ * Shipper helpers: serialized values replacer
+ *
+ * Handles low level serialized values replacement transformations.
+ *
+ * @package shipper
+ */
+
+/**
+ * String replacer class
+ */
+class Shinst_Model_Serialize_Replacer {
+	/**
+	 * Whether to use regex replace or not
+	 *
+	 * @var bool
+	 */
+	private $regex_replace;
+
+	/**
+	 * Shipper_Helper_Replacer_Serialized constructor.
+	 *
+	 * @param false $regex_replace
+	 */
+	public function __construct( $regex_replace = false ) {
+		$this->regex_replace = $regex_replace;
+	}
+
+	/**
+	 * @param string $search string to replace.
+	 * @param string $replace replacement string.
+	 * @param string $string subject string.
+	 * @param int    $count number of replacement.
+	 *
+	 * @return array|mixed|string|string[]|null
+	 */
+	private function str_replace( $search, $replace, $string, &$count = 0 ) {
+		if ( $this->regex_replace ) {
+			return preg_replace( "/{$search}/m", $replace, $string, -1, $count );
+		}
+
+		if ( function_exists( 'mb_split' ) ) {
+			return self::mb_str_replace( $search, $replace, $string, $count );
+		} else {
+			return str_replace( $search, $replace, $string, $count );
+		}
+	}
+
+	/**
+	 * @param string $search string to replace.
+	 * @param string $replace replacement string.
+	 * @param string $string subject string.
+	 * @param int    $count number of replacement.
+	 *
+	 * @return array|mixed|string
+	 */
+	private static function mb_str_replace( $search, $replace, $subject, &$count = 0 ) {
+		if ( ! is_array( $subject ) ) {
+			// Normalize $search and $replace so they are both arrays of the same length
+			$searches     = is_array( $search ) ? array_values( $search ) : array( $search );
+			$replacements = is_array( $replace )
+				? array_values( $replace )
+				: array( $replace );
+			$replacements = array_pad( $replacements, count( $searches ), '' );
+
+			foreach ( $searches as $key => $search ) {
+				$parts = mb_split( preg_quote( $search ), $subject );
+
+				if ( ! is_array( $parts ) ) {
+					continue;
+				}
+
+				$count   += count( $parts ) - 1;
+				$subject = implode( $replacements[ $key ], $parts );
+			}
+		} else {
+			// Call mb_str_replace for each subject in array, recursively
+			foreach ($subject as $key => $value) {
+				$subject[$key] = self::mb_str_replace( $search, $replace, $value, $count );
+			}
+		}
+
+		return $subject;
+	}
+
+	/**
+	 * Replace the serialized string
+	 *
+	 * @param string $from
+	 * @param string $to
+	 * @param string $data
+	 * @param false $serialised
+	 *
+	 * @return __PHP_Incomplete_Class|array|mixed|string|string[]|null
+	 */
+	public function replace( $from = '', $to = '', $data = '', $serialised = false ) {
+		if ( is_string( $data ) && shinst_is_serialized( $data ) && ( $unserialized = @unserialize( $data ) ) !== false ) {
+			$data = $this->replace( $from, $to, $unserialized, true );
+		} elseif ( is_array( $data ) ) {
+			$tmp_array = array();
+
+			foreach ( $data as $key => $value ) {
+				$tmp_array[$key] = $this->replace( $from, $to, $value, false );
+			}
+
+			$data = $tmp_array;
+			unset( $tmp_array );
+		} elseif ( is_object( $data ) && ! $data instanceof __PHP_Incomplete_Class ) {
+			$tmp_object = $data;
+			$props     = get_object_vars( $data );
+
+			foreach ( $props as $key => $value ) {
+				if ( is_int( $key ) ) {
+					continue;
+				}
+
+				$tmp_object->$key = $this->replace( $from, $to, $value, false );
+			}
+
+			$data = $tmp_object;
+			unset( $tmp_object );
+		} elseif ( is_string( $data ) ) {
+			$data = $this->str_replace( $from, $to, $data );
+		}
+
+		if ( $serialised ) {
+			return serialize( $data );
+		}
+
+		return $data;
+	}
+}
+
+
+
 // Source: lib/installer/src/lib/view/class-page.php
 
 /**
@@ -4095,7 +4407,7 @@ class Shinst_View_Page extends Shinst_View {
 	 * @return bool
 	 */
 	public function is_protected() {
-		$ctrl = new Shinst_Controller_Front;
+		$ctrl = new Shinst_Controller_Front();
 		return $ctrl->has_password();
 	}
 
@@ -4113,12 +4425,12 @@ class Shinst_View_Page extends Shinst_View {
 	 */
 	public function __construct( $title ) {
 		$this->set_title( $title );
-		$this->_main = new Shinst_View_Cmp_Main;
+		$this->_main = new Shinst_View_Cmp_Main();
 		$this
 			->add_to_body( new Shinst_View_Cmp_Title( $title ) );
 		$this
 			->add_component( new Shinst_View_Cmp_Sidebar( $title ) )
-			->add_component( new Shinst_View_Cmp_Topnav )
+			->add_component( new Shinst_View_Cmp_Topnav() )
 			->add_component( $this->_main );
 	}
 
@@ -4144,7 +4456,7 @@ class Shinst_View_Page extends Shinst_View {
 	}
 
 	public function print_styles() {
-?>
+		?>
 body {
 	font-family: <?php echo Shinst_Model_Style::GLOBAL_FONT; ?>;
 	font-size: <?php echo Shinst_Model_Style::GLOBAL_FONT_SIZE; ?>px;
@@ -4168,12 +4480,12 @@ p {
 main {
 	margin-bottom: 100px;
 }
-<?php
+		<?php
 		parent::print_styles();
 	}
 
 	public function print_scripts() {
-?>
+		?>
 <script>
 ;( function( $ ) {
 
@@ -4192,12 +4504,12 @@ main {
 
 } )( jQuery );
 </script>
-<?php
+		<?php
 		parent::print_scripts();
 	}
 
 	public function print_markup() {
-?>
+		?>
 <html>
 	<head>
 		<title><?php echo $this->get_title(); ?>: Shipper Package Installer</title>
@@ -4234,7 +4546,7 @@ main {
 		<?php } ?>
 	</body>
 </html>
-<?php
+		<?php
 	}
 }
 
@@ -4281,37 +4593,39 @@ class Shinst_View_Cmp_Button_Admin extends Shinst_View_Cmp_Button {
 		$retcode = curl_getinfo( $ch, CURLINFO_HTTP_CODE );
 
 		if ( $retcode == 200 ) {
-			//thing is fine
+			// thing is fine
 			return $admin_url;
 		}
-		//need to lookup a bit if defender mask login here
+		// need to lookup a bit if defender mask login here
 		$config  = Shinst_Model_Session::get( Shinst_Model_Session::SESS_CONFIG );
-		$options = Shinst_Model_Db::create( array(
-			'name'     => $config->get_value( 'dbname' ),
-			'user'     => $config->get_value( 'dbuser' ),
-			'password' => $config->get_value( 'dbpassword' ),
-			'host'     => $config->get_value( 'dbhost' ),
-			'prefix'   => $config->get_value( 'table_prefix' ),
-		) );
+		$options = Shinst_Model_Db::create(
+			array(
+				'name'     => $config->get_value( 'dbname' ),
+				'user'     => $config->get_value( 'dbuser' ),
+				'password' => $config->get_value( 'dbpassword' ),
+				'host'     => $config->get_value( 'dbhost' ),
+				'prefix'   => $config->get_value( 'table_prefix' ),
+			)
+		);
 
-		//get if it is multisite
+		// get if it is multisite
 		$table_name   = $config->get_value( 'table_prefix' ) . 'options';
-		$field_value  = "option_value";
-		$field_name   = "option_name";
+		$field_value  = 'option_value';
+		$field_name   = 'option_name';
 		$is_multisite = shinst_is_multisite();
 		if ( $is_multisite ) {
 			$table_name  = $config->get_value( 'table_prefix' ) . 'sitemeta';
-			$field_name  = "meta_key";
-			$field_value = "meta_value";
+			$field_name  = 'meta_key';
+			$field_value = 'meta_value';
 		}
-		$sql = $options->prepare_sql( "SELECT $field_value FROM $table_name WHERE $field_name = %s", [ "wd_masking_login_settings" ] );
+		$sql = $options->prepare_sql( "SELECT $field_value FROM $table_name WHERE $field_name = %s", array( 'wd_masking_login_settings' ) );
 
 		$data = $options->get_val( $sql );
 		$data = json_decode( $data, true );
 		if ( $data == false ) {
 			return $admin_url;
 		}
-		//data is array,we have value here
+		// data is array,we have value here
 		if ( $data['enabled'] == true && ! empty( $data['mask_url'] ) ) {
 			$admin_url = Shinst_Model_Url::get_url( $data['mask_url'] );
 		}
@@ -4337,12 +4651,12 @@ class Shinst_View_Cmp_Button_Back extends Shinst_View_Cmp_Button {
 	}
 
 	public function get_icon() {
-		return new Shinst_View_Svg_Arrow;
+		return new Shinst_View_Svg_Arrow();
 	}
 
 	public function print_styles() {
 		parent::print_styles();
-?>
+		?>
 a.button.back {
 	background: <?php echo Shinst_Model_Style::GLOBAL_BG; ?>;
 	margin-left: 30px;
@@ -4355,7 +4669,7 @@ a.button.back .icon svg {
 	fill: <?php echo Shinst_Model_Style::GHOST_FG; ?>;
 	height: 16px;
 }
-<?php
+		<?php
 	}
 }
 
@@ -4376,7 +4690,7 @@ class Shinst_View_Cmp_Button_Continue extends Shinst_View_Cmp_Button {
 	}
 
 	public function get_icon() {
-		return new Shinst_View_Svg_Arrow;
+		return new Shinst_View_Svg_Arrow();
 	}
 
 	public function get_icon_order() {
@@ -4384,7 +4698,7 @@ class Shinst_View_Cmp_Button_Continue extends Shinst_View_Cmp_Button {
 	}
 
 	public function get_href() {
-		$ctrl = new Shinst_Controller_Page;
+		$ctrl = new Shinst_Controller_Page();
 		return $ctrl->get_page_url( 'connection' );
 	}
 }
@@ -4402,7 +4716,7 @@ class Shinst_View_Cmp_Button_Continue extends Shinst_View_Cmp_Button {
 class Shinst_View_Cmp_Button_Documentation extends Shinst_View_Cmp_Button {
 
 	public function __construct() {
-		return parent::__construct( 'Documentation' );
+		return parent::__construct( 'Documentation', true );
 	}
 
 	public function get_class() {
@@ -4410,15 +4724,15 @@ class Shinst_View_Cmp_Button_Documentation extends Shinst_View_Cmp_Button {
 	}
 
 	public function get_href() {
-		return 'http://premium.wpmudev.org/';
+		return 'https://wpmudev.com/docs/wpmu-dev-plugins/shipper/#package';
 	}
 
 	public function get_icon() {
-		return new Shinst_View_Svg_Documentation;
+		return new Shinst_View_Svg_Documentation();
 	}
 
 	public function print_styles() {
-?>
+		?>
 a.button.documentation {
 	background: <?php echo Shinst_Model_Style::GLOBAL_BG; ?>;
 	border: 1px solid <?php echo Shinst_Model_Style::COLOR_BORDER; ?>;
@@ -4427,7 +4741,7 @@ a.button.documentation {
 a.button.documentation .icon svg {
 	fill: <?php echo Shinst_Model_Style::GHOST_FG; ?>;
 }
-<?php
+		<?php
 		parent::print_styles();
 	}
 }
@@ -4449,11 +4763,11 @@ class Shinst_View_Cmp_Button_Logs extends Shinst_View_Cmp_Button {
 	}
 
 	public function get_icon() {
-		return new Shinst_View_Svg_Eye;
+		return new Shinst_View_Svg_Eye();
 	}
 
 	public function get_href() {
-		$ctrl = new Shinst_Controller_Page;
+		$ctrl = new Shinst_Controller_Page();
 
 		return $ctrl->get_page_url( 'logs' );
 	}
@@ -4490,7 +4804,7 @@ class Shinst_View_Cmp_Button_Next extends Shinst_View_Cmp_Button {
 	}
 
 	public function get_icon() {
-		return new Shinst_View_Svg_Arrow;
+		return new Shinst_View_Svg_Arrow();
 	}
 
 	public function get_icon_order() {
@@ -4515,7 +4829,7 @@ class Shinst_View_Cmp_Button_Recheck extends Shinst_View_Cmp_Button {
 	}
 
 	public function get_icon() {
-		return new Shinst_View_Svg_Repeat;
+		return new Shinst_View_Svg_Repeat();
 	}
 }
 
@@ -4559,11 +4873,11 @@ class Shinst_View_Cmp_Button extends Shinst_View {
 		$icon_order = false;
 		if ( ! empty( $icon ) ) {
 			$icon_order = $this->get_icon_order();
-			$cls        .= ' with-icon icon-' . $icon_order;
+			$cls       .= ' with-icon icon-' . $icon_order;
 		}
 		?>
-		<a <?php echo $this->open_new_tab == true ? 'target="_blank"' : null ?> href="<?php echo $this->get_href(); ?>"
-		                                                                        class="button <?php echo $cls; ?>">
+		<a <?php echo $this->open_new_tab == true ? 'target="_blank"' : null; ?> href="<?php echo $this->get_href(); ?>"
+																				class="button <?php echo $cls; ?>">
 			<?php if ( 'before' === $icon_order ) { ?>
 				<span class="icon"><?php $icon->print_markup(); ?></span>
 			<?php } ?>
@@ -4637,9 +4951,9 @@ class Shinst_View_Cmp_Button extends Shinst_View {
 class Shinst_View_Cmp_Code extends Shinst_View_Cmp_Paragraph {
 
 	public function print_markup() {
-?>
+		?>
 	<pre><code><?php echo $this->get_title(); ?></code></pre>
-<?php
+		<?php
 	}
 }
 
@@ -4687,7 +5001,7 @@ abstract class Shinst_View_Cmp_Input extends Shinst_View {
 
 	public function print_markup() {
 		$cls = $this->get_classes();
-?>
+		?>
 <label class="field-<?php echo $this->get_type(); ?> <?php echo $cls; ?>">
 	<span class="title"><?php echo $this->get_label(); ?></span>
 	<input
@@ -4698,14 +5012,14 @@ abstract class Shinst_View_Cmp_Input extends Shinst_View {
 	/>
 	<span class="error">Error</span>
 </label>
-<?php
+		<?php
 	}
 
 	public function print_styles() {
-		$input_outer = Shinst_Model_Style::INPUT_HEIGHT;
-		$input_inner = Shinst_Model_Style::INPUT_INNER;
+		$input_outer        = Shinst_Model_Style::INPUT_HEIGHT;
+		$input_inner        = Shinst_Model_Style::INPUT_INNER;
 		$input_vertical_pad = ( $input_outer - ( $input_inner + 2 ) ) / 2;
-?>
+		?>
 label span {
 	display: block;
 	color: <?php echo Shinst_Model_Style::COLOR_LABEL; ?>;
@@ -4755,11 +5069,12 @@ label.has-error span.error {
 	font-weight: normal;
 	text-align: right;
 }
-<?php
+		<?php
 		parent::print_styles();
 	}
 
-	public function get_placeholder() { return ''; }
+	public function get_placeholder() {
+		return ''; }
 }
 
 
@@ -4781,13 +5096,13 @@ class Shinst_View_Cmp_Logs extends Shinst_View {
 	}
 
 	public function print_markup() {
-		$ctrl = new Shinst_Controller_Front;
-		$log = Shinst_Model_Log::get_file_path();
+		$ctrl  = new Shinst_Controller_Front();
+		$log   = Shinst_Model_Log::get_file_path();
 		$title = $this->get_title();
-?>
-	<?php if ( $ctrl->is_user_allowed() ) { ?>
-		<?php if ( file_exists( $log ) ) { ?>
-			<?php if ( ! empty( $title ) ) { ?>
+		?>
+		<?php if ( $ctrl->is_user_allowed() ) { ?>
+			<?php if ( file_exists( $log ) ) { ?>
+				<?php if ( ! empty( $title ) ) { ?>
 				<h3><?php echo $title; ?></h3>
 			<?php } ?>
 			<pre class="logs"><?php echo file_get_contents( $log ); ?></pre>
@@ -4797,16 +5112,16 @@ class Shinst_View_Cmp_Logs extends Shinst_View {
 	<?php } else { ?>
 		You are not authorized to view the log
 	<?php } ?>
-<?php
+		<?php
 	}
 
 	public function print_styles() {
-?>
+		?>
 	pre.logs {
 		padding: 1em;
 		overflow-x: scroll;
 	}
-<?php
+		<?php
 		parent::print_styles();
 	}
 }
@@ -4824,19 +5139,19 @@ class Shinst_View_Cmp_Logs extends Shinst_View {
 class Shinst_View_Cmp_Main extends Shinst_View {
 
 	public function print_markup() {
-?>
+		?>
 <main>
 	<section>
-	<?php foreach ( $this->get_components() as $cmp ) { ?>
-		<?php $cmp->print_markup(); ?>
+		<?php foreach ( $this->get_components() as $cmp ) { ?>
+			<?php $cmp->print_markup(); ?>
 	<?php } ?>
 	</section>
 </main>
-<?php
+		<?php
 	}
 
 	public function print_styles() {
-?>
+		?>
 main {
 	float: left;
 	width: calc( 100% - <?php echo Shinst_Model_Style::SIDEBAR_WIDTH; ?>px );
@@ -4849,7 +5164,7 @@ main section>p {
 	text-align: center;
 	margin-bottom: 30px;
 }
-<?php
+		<?php
 		parent::print_styles();
 	}
 }
@@ -4873,9 +5188,9 @@ abstract class Shinst_View_Cmp_Notification extends Shinst_View {
 	}
 
 	public function print_markup() {
-		$type = $this->get_type();
-		$alert = new Shinst_View_Svg_Alert;
-?>
+		$type  = $this->get_type();
+		$alert = new Shinst_View_Svg_Alert();
+		?>
 <div class="notification <?php echo $type; ?>">
 	<div class="icon">
 		<span><?php echo $alert->print_markup(); ?></span>
@@ -4884,11 +5199,11 @@ abstract class Shinst_View_Cmp_Notification extends Shinst_View {
 		<?php echo $this->get_title(); ?>
 	</div>
 </div>
-<?php
+		<?php
 	}
 
 	public function print_styles() {
-?>
+		?>
 	.notification {
 		padding: 18px 12px;
 		border-radius: 4px;
@@ -4900,9 +5215,9 @@ abstract class Shinst_View_Cmp_Notification extends Shinst_View {
 	.notification.warning {
 		box-shadow: inset 2px 0 0 0 <?php echo Shinst_Model_Style::COLOR_WARNING; ?>, inset 0 0 0 1px <?php echo Shinst_Model_Style::DISABLED_BG; ?>;
 	}
-    .notification.info {
-        box-shadow: inset 2px 0 0 0 #AAAAAA, inset 0 0 0 1px #E6E6E6;
-    }
+	.notification.info {
+		box-shadow: inset 2px 0 0 0 #AAAAAA, inset 0 0 0 1px #E6E6E6;
+	}
 	.notification .icon {
 		height: 16px;
 		width: 16px;
@@ -4920,7 +5235,7 @@ abstract class Shinst_View_Cmp_Notification extends Shinst_View {
 		margin-left: 10px;
 		font-size: 13px;
 	}
-<?php
+		<?php
 		parent::print_styles();
 	}
 }
@@ -4942,9 +5257,9 @@ class Shinst_View_Cmp_Paragraph extends Shinst_View {
 	}
 
 	public function print_markup() {
-?>
+		?>
 	<p><?php echo $this->get_title(); ?></p>
-<?php
+		<?php
 	}
 }
 
@@ -4976,31 +5291,31 @@ class Shinst_View_Cmp_Progress extends Shinst_View {
 	}
 
 	public function print_markup() {
-		$loader = new Shinst_View_Svg_Loader;
-		$title = $this->get_title();
+		$loader     = new Shinst_View_Svg_Loader();
+		$title      = $this->get_title();
 		$percentage = $this->get_percentage();
 
 		if ( empty( $title ) ) {
 			$title = 'Connecting...';
 		}
-?>
+		?>
 <div class="progress">
 	<div class="meter">
 		<span class="icon loader"><?php $loader->print_markup(); ?></span>
 		<b class="status-percentage"><?php echo (int) $percentage; ?>%</b>
 		<div class="progress-bar">
-			<div class="status-bar" style="width: <?php echo (int) $percentage;?>%"></div>
+			<div class="status-bar" style="width: <?php echo (int) $percentage; ?>%"></div>
 		</div>
 	</div>
 	<div class="status-message">
 		<span><?php echo $title; ?></span>
 	</div>
 </div>
-<?php
+		<?php
 	}
 
 	public function print_styles() {
-?>
+		?>
 .progress {
 	margin-top: 30px;
 	color: <?php echo Shinst_Model_Style::GHOST_FG; ?>;
@@ -5055,7 +5370,7 @@ class Shinst_View_Cmp_Progress extends Shinst_View {
 	0% { transform:rotate(0); }
 	100% { transform:rotate(360deg); }
 }
-<?php
+		<?php
 		parent::print_styles();
 	}
 }
@@ -5072,7 +5387,7 @@ class Shinst_View_Cmp_Progress extends Shinst_View {
 
 abstract class Shinst_View_Cmp_RequirementsItem extends Shinst_View {
 
-	const SEVERITY_ERROR = 'error';
+	const SEVERITY_ERROR   = 'error';
 	const SEVERITY_WARNING = 'warning';
 
 	public function __construct( $title ) {
@@ -5092,21 +5407,21 @@ abstract class Shinst_View_Cmp_RequirementsItem extends Shinst_View {
 	 * @return object Shinst_View_Svg instance
 	 */
 	public function get_success_icon() {
-		return new Shinst_View_Svg_Check;
+		return new Shinst_View_Svg_Check();
 	}
 
 	/**
 	 * @return object Shinst_View_Svg instance
 	 */
 	public function get_warning_icon() {
-		return new Shinst_View_Svg_Alert;
+		return new Shinst_View_Svg_Alert();
 	}
 
 	/**
 	 * @return object Shinst_View_Svg instance
 	 */
 	public function get_error_icon() {
-		return new Shinst_View_Svg_Alert;
+		return new Shinst_View_Svg_Alert();
 	}
 
 	/**
@@ -5123,17 +5438,17 @@ abstract class Shinst_View_Cmp_RequirementsItem extends Shinst_View {
 
 	public function print_markup() {
 		$success_state_cls = 'success';
-		$status = $this->get_status();
-		$content = false;
+		$status            = $this->get_status();
+		$content           = false;
 		if ( true !== $status ) {
 			$success_state_cls = "failure {$status}";
-			$content = $this->get_components();
+			$content           = $this->get_components();
 			if ( ! empty( $content ) ) {
 				$success_state_cls .= ' has-content';
 			}
 		}
-		$chevron = new Shinst_View_Svg_Chevron;
-?>
+		$chevron = new Shinst_View_Svg_Chevron();
+		?>
 <div class="requirements-item <?php echo $success_state_cls; ?> closed">
 	<div class="requirements-item-title">
 		<div class="status icon">
@@ -5142,13 +5457,13 @@ abstract class Shinst_View_Cmp_RequirementsItem extends Shinst_View {
 		<div class="title">
 			<?php echo $this->get_title(); ?>
 		</div>
-	<?php if ( true !== $status ) { ?>
+		<?php if ( true !== $status ) { ?>
 		<div class="toggle">
 			<span><?php echo $chevron->print_markup(); ?></span>
 		</div>
 	<?php } ?>
 	</div>
-<?php if ( ! empty( $content ) ) { ?>
+		<?php if ( ! empty( $content ) ) { ?>
 	<div class="requirements-item-content">
 		<div class="content-wrap">
 			<?php foreach ( $content as $item ) { ?>
@@ -5156,16 +5471,16 @@ abstract class Shinst_View_Cmp_RequirementsItem extends Shinst_View {
 			<?php } ?>
 		</div>
 		<div class="requirements-item-footer">
-			<?php (new Shinst_View_Cmp_Button_Recheck())->print_markup(); ?>
+			<?php ( new Shinst_View_Cmp_Button_Recheck() )->print_markup(); ?>
 		</div>
 	</div>
 <?php } ?>
 </div>
-<?php
+		<?php
 	}
 
 	public function print_styles() {
-?>
+		?>
 .requirements-item {
 	box-sizing: border-box;
 }
@@ -5276,7 +5591,7 @@ abstract class Shinst_View_Cmp_RequirementsItem extends Shinst_View {
 .requirements-item-footer a.button.recheck .icon svg {
 	fill: <?php echo Shinst_Model_Style::GHOST_FG; ?>;
 }
-<?php
+		<?php
 		parent::print_styles();
 	}
 }
@@ -5315,7 +5630,7 @@ class Shinst_View_Cmp_Sidebar extends Shinst_View {
 
 	public function print_markup() {
 		$title = new Shinst_View_Cmp_Title( 'Migration Wizard' );
-?>
+		?>
 <aside class="sidebar">
 	<nav>
 		<?php $title->print_markup(); ?>
@@ -5325,13 +5640,18 @@ class Shinst_View_Cmp_Sidebar extends Shinst_View {
 		<?php } ?>
 		</ul>
 	</nav>
-	<?php try { $this->get_button()->print_markup(); } catch( Exception $e ) {} ?>
+		<?php
+		try {
+			$this->get_button()->print_markup();
+		} catch ( Exception $e ) {
+			echo ''; }
+		?>
 </aside>
-<?php
+		<?php
 	}
 
 	public function print_styles() {
-?>
+		?>
 aside.sidebar {
 	float: left;
 	width: <?php echo Shinst_Model_Style::SIDEBAR_WIDTH; ?>px;
@@ -5396,14 +5716,14 @@ aside.sidebar li span.status.next {
 	bottom: 10px;
 	left: 40px;
 }
-<?php
+		<?php
 		$this->get_button()->print_styles();
 		parent::print_styles();
 	}
 
 	public function get_button() {
 		if ( empty( $this->_button ) ) {
-			$this->_button = new Shinst_View_Cmp_Button_Logs;
+			$this->_button = new Shinst_View_Cmp_Button_Logs();
 		}
 		return $this->_button;
 	}
@@ -5432,8 +5752,8 @@ class Shinst_View_Cmp_SidebarItem extends Shinst_View {
 		$this->set_title( $title );
 
 		$this->_current = $active;
-		$this->_self = $title;
-		$this->_items = $all_items;
+		$this->_self    = $title;
+		$this->_items   = $all_items;
 	}
 
 	/**
@@ -5446,12 +5766,12 @@ class Shinst_View_Cmp_SidebarItem extends Shinst_View {
 	}
 
 	public function print_markup() {
-?>
+		?>
 	<li class="<?php echo $this->is_active() ? 'active' : ''; ?>">
 		<?php echo $this->get_status_indicator(); ?>
 		<span><?php echo $this->get_title(); ?></span>
 	</li>
-<?php
+		<?php
 	}
 
 	/**
@@ -5477,14 +5797,14 @@ class Shinst_View_Cmp_SidebarItem extends Shinst_View {
 	 * @return string
 	 */
 	public function get_inactive_indicator() {
-		$active = array_search( $this->_current, $this->_items );
+		$active  = array_search( $this->_current, $this->_items );
 		$current = array_search( $this->_self, $this->_items );
 		if ( false === $active || false === $current ) {
 			return '';
 		}
 
 		if ( $active > $current ) {
-			$icon = new Shinst_View_Svg_Check;
+			$icon = new Shinst_View_Svg_Check();
 			ob_start();
 			$icon->print_markup();
 			$markup = ob_get_clean();
@@ -5510,9 +5830,9 @@ class Shinst_View_Cmp_SidebarItem extends Shinst_View {
 class Shinst_View_Cmp_Subtitle extends Shinst_View_Cmp_Title {
 
 	public function print_markup() {
-?>
+		?>
 	<h3><?php echo $this->get_title(); ?></h3>
-<?php
+		<?php
 	}
 }
 
@@ -5533,9 +5853,9 @@ class Shinst_View_Cmp_Title extends Shinst_View {
 	}
 
 	public function print_markup() {
-?>
+		?>
 	<h1><?php echo $this->get_title(); ?></h1>
-<?php
+		<?php
 	}
 }
 
@@ -5552,22 +5872,22 @@ class Shinst_View_Cmp_Title extends Shinst_View {
 class Shinst_View_Cmp_Topnav extends Shinst_View {
 
 	public function __construct() {
-		$this->add_component( new Shinst_View_Cmp_Button_Back );
-		$this->add_component( new Shinst_View_Cmp_Button_Documentation );
+		$this->add_component( new Shinst_View_Cmp_Button_Back() );
+		$this->add_component( new Shinst_View_Cmp_Button_Documentation() );
 	}
 
 	public function print_markup() {
-?>
+		?>
 <nav class="top">
-<?php foreach ( $this->get_components() as $c ) { ?>
-	<?php echo $c->print_markup(); ?>
+		<?php foreach ( $this->get_components() as $c ) { ?>
+			<?php echo $c->print_markup(); ?>
 <?php } ?>
 </nav>
-<?php
+		<?php
 	}
 
 	public function print_styles() {
-?>
+		?>
 nav.top {
 	margin-top: 35px;
 	margin-right: 30px;
@@ -5575,7 +5895,7 @@ nav.top {
 nav.top a.documentation {
 	float: right;
 }
-<?php
+		<?php
 		parent::print_styles();
 	}
 }
@@ -5601,20 +5921,20 @@ class Shinst_View_Cmp_Input_InstallerPassword extends Shinst_View_Cmp_Input_Pass
 
 	public function print_markup() {
 		parent::print_markup();
-		$eye = new Shinst_View_Svg_Eye;
-		$blind = new Shinst_View_Svg_Blindeye;
-?>
+		$eye   = new Shinst_View_Svg_Eye();
+		$blind = new Shinst_View_Svg_Blindeye();
+		?>
 <span class="installer-password icon eye active">
-	<?php $eye->print_markup(); ?>
+		<?php $eye->print_markup(); ?>
 </span>
 <span class="installer-password icon blindeye">
-	<?php $blind->print_markup(); ?>
+		<?php $blind->print_markup(); ?>
 </span>
-<?php
+		<?php
 	}
 
 	public function print_scripts() {
-?>
+		?>
 <script>
 ;(function( $ ) {
 
@@ -5683,12 +6003,12 @@ class Shinst_View_Cmp_Input_InstallerPassword extends Shinst_View_Cmp_Input_Pass
 	$( init );
 })( jQuery );
 </script>
-<?php
+		<?php
 	}
 
 	public function print_styles() {
 		parent::print_styles();
-?>
+		?>
 .installer-password.icon {
 	position: absolute;
 	top: 2px;
@@ -5712,7 +6032,7 @@ label.field-password input {
 	background-image: none !important;
 	background-attachment:none !important;
 }
-<?php
+		<?php
 	}
 }
 
@@ -5728,9 +6048,11 @@ label.field-password input {
 
 abstract class Shinst_View_Cmp_Input_Password extends Shinst_View_Cmp_Input {
 
-	public function get_type() { return 'password'; }
+	public function get_type() {
+		return 'password'; }
 
-	public function get_name() { return 'password'; }
+	public function get_name() {
+		return 'password'; }
 }
 
 
@@ -5757,10 +6079,13 @@ class Shinst_View_Cmp_Input_Text extends Shinst_View_Cmp_Input {
 		return strtolower( preg_replace( '/[^a-z0-9]/i', '', $this->get_title() ) );
 	}
 
-	public function get_type() { return 'text'; }
+	public function get_type() {
+		return 'text'; }
 
-	public function get_name() { return $this->get_safe_title(); }
-	public function get_classes() { return $this->get_safe_title(); }
+	public function get_name() {
+		return $this->get_safe_title(); }
+	public function get_classes() {
+		return $this->get_safe_title(); }
 
 	public function get_placeholder() {
 		return 'Enter your ' . strtolower( $this->get_title() );
@@ -5840,8 +6165,7 @@ class Shinst_View_Cmp_RequirementsItem_Archive extends Shinst_View_Cmp_Requireme
 			->add_component( new Shinst_View_Cmp_Notification_Error( 'Package archive not found.' ) )
 
 			->add_component( new Shinst_View_Cmp_Subtitle( 'How To Fix' ) )
-			->add_component( new Shinst_View_Cmp_Paragraph( 'Please make sure you uploaded the site package you wish to restore to the same directory as this installer script.' ) )
-		;
+			->add_component( new Shinst_View_Cmp_Paragraph( 'Please make sure you uploaded the site package you wish to restore to the same directory as this installer script.' ) );
 	}
 
 }
@@ -5873,8 +6197,7 @@ class Shinst_View_Cmp_RequirementsItem_Basedir extends Shinst_View_Cmp_Requireme
 			->add_component( new Shinst_View_Cmp_Paragraph( '2. Open your php.ini file, comment the open_basedir rule, and restart your server. To comment a line of code in the php.ini file, you need to suffixit with a semicolon. So, to comment the open_basedir rule, add a semicolon in the beginning as in: “; open_basedir true”. Commenting is preferred to deleting the rule, in case you want to reactivate it after the migration.' ) )
 			->add_component( new Shinst_View_Cmp_Paragraph( '3. You can also edit the Apache configuration file to disable the PHP open_basedir restriction. Open the httpd.conf file. Add the following line of code at the end, and restart your web server.' ) )
 			->add_component( new Shinst_View_Cmp_Code( 'php_admin_value open_basedir none' ) )
-			->add_component( new Shinst_View_Cmp_Paragraph( '4. If none of the above works, you can ask your hosting support to turn off the open_basedir restriction for you.' ) )
-		;
+			->add_component( new Shinst_View_Cmp_Paragraph( '4. If none of the above works, you can ask your hosting support to turn off the open_basedir restriction for you.' ) );
 	}
 
 	public function get_status() {
@@ -5912,8 +6235,7 @@ class Shinst_View_Cmp_RequirementsItem_Exectime extends Shinst_View_Cmp_Requirem
 			->add_component( new Shinst_View_Cmp_Code( 'php_value max_execution_time 120' ) )
 			->add_component( new Shinst_View_Cmp_Paragraph( '3. If you have access to the php.ini file, you can increase the execution time limit by adding the following line of code or updating it (if it exists already) in your php.ini file.' ) )
 			->add_component( new Shinst_View_Cmp_Code( 'max_execution_time = 120;' ) )
-			->add_component( new Shinst_View_Cmp_Paragraph( '4. If none of the above works, you can ask your hosting support to increase the max execution time for you.' ) )
-		;
+			->add_component( new Shinst_View_Cmp_Paragraph( '4. If none of the above works, you can ask your hosting support to increase the max execution time for you.' ) );
 	}
 
 	public function get_status() {
@@ -5961,8 +6283,7 @@ class Shinst_View_Cmp_RequirementsItem_Phpversion extends Shinst_View_Cmp_Requir
 
 			->add_component( new Shinst_View_Cmp_Subtitle( 'How To Fix' ) )
 			->add_component( new Shinst_View_Cmp_Paragraph( 'You need to upgrade your PHP version to the latest stable release. You can either contact your hosting provider and ask them to update your PHP version, or do it yourself following an official WordPress tutorial <a href="https://wordpress.org/support/update-php/" target="_blank">on updating your PHP version</a>.' ) )
-			->add_component( new Shinst_View_Cmp_Paragraph( '<b>Note:</b> Make sure you run a full backup of your website before updating your PHP version. <a href="https://premium.wpmudev.org/project/snapshot/" target="_blank">Snapshot Pro</a> can help you with this!' ) )
-		;
+			->add_component( new Shinst_View_Cmp_Paragraph( '<b>Note:</b> Make sure you run a full backup of your website before updating your PHP version. <a href="https://wpmudev.com/project/snapshot/" target="_blank">Snapshot Pro</a> can help you with this!' ) );
 	}
 }
 
@@ -5991,8 +6312,7 @@ class Shinst_View_Cmp_RequirementsItem_Zip extends Shinst_View_Cmp_RequirementsI
 			->add_component( new Shinst_View_Cmp_Paragraph( 'You need to make sure the ZipArchive PHP extension is installed and available to use. You can use any of the following methods to install the extension:' ) )
 			->add_component( new Shinst_View_Cmp_Paragraph( '1. Most hosts have the ZipArchive extension installed and available by default, but it may not be active. Open your cPanel, and under the Software section, click on select the PHP version option. You\'ll see your current PHP version, extensions available, and active PHP extensions. Check the zip option, and click on save to activate it. Note that if the zip option is not available in this list, please contact your hosting support, and ask them to install zip extension for you.' ) )
 			->add_component( new Shinst_View_Cmp_Paragraph( '2. If you have your own VPS, you must install the zip extension, and restart your server. You can ask your sysadmin to install the zip extension.' ) )
-			->add_component( new Shinst_View_Cmp_Paragraph( '3. If none of the above works, you can ask your hosting support or your system admin to install the zip extension on your server.' ) )
-		;
+			->add_component( new Shinst_View_Cmp_Paragraph( '3. If none of the above works, you can ask your hosting support or your system admin to install the zip extension on your server.' ) );
 	}
 
 }
@@ -6011,33 +6331,42 @@ class Shinst_View_Page_Connection extends Shinst_View_Page {
 
 	public function __construct() {
 		$title = 'Database Connection';
-		$ctrl  = new Shinst_Controller_Page;
+		$ctrl  = new Shinst_Controller_Page();
 		parent::__construct( $title );
-		$next = new Shinst_View_Cmp_Button_Next;
+		$next = new Shinst_View_Cmp_Button_Next();
 		$next->set_title( 'Test Connection & Deploy' );
+
+		$is_flywheel = Shinst_Model_Env::is_flywheel();
+		$content     = $is_flywheel
+			? 'We’ve detected that your site is hosted with Flywheel. As Flywheel doesn’t allow replacing core files and the database prefix, please do not change your prefix to a new one. Make sure that your prefix below matches the default prefix inside the Flywheel database.'
+			: 'Let’s connect to your database. We recommend creating a new database. However, if you are using an existing database, please use a different prefix to avoid any data loss.';
+
 		$this
-			->add_to_body( new Shinst_View_Cmp_Paragraph(
-				'Let’s connect to your database. We recommend creating a new database. However, if you are using an existing database, please use a different prefix to avoid any data loss.'
-			) )
+			->add_to_body( new Shinst_View_Cmp_Paragraph( $content ) )
 			->add_to_body( new Shinst_View_Cmp_Notification_Error( 'NA' ) )
-			->add_to_body( new Shinst_View_Cmp_Notification_Warning(
-				sprintf(
-					'We detected existing tables in your database using the prefix you supplied. <a href="%s">Click here to proceed using this prefix</a> - <b>note:</b> this will destroy the data you already have in your existing tables. Alternatively, you can re-test the connection with the conflict-free table prefix we automatically created for you below.',
-					$ctrl->get_page_url( 'deploy' )
+			->add_to_body(
+				new Shinst_View_Cmp_Notification_Warning(
+					sprintf(
+						'We detected existing tables in your database using the prefix you supplied. <a href="%s">Click here to proceed using this prefix</a> - <b>note:</b> this will destroy the data you already have in your existing tables. Alternatively, you can re-test the connection with the conflict-free table prefix we automatically created for you below.',
+						$ctrl->get_page_url( 'deploy' )
+					)
 				)
-			) );
-		//need to check if we allow to copy from wp-config
+			);
+
+		// need to check if we allow to copy from wp-config
 		if ( Shinst_Model_Fs_Path::is_wpconfig_located() ) {
-			$this->add_to_body( new Shinst_View_Cmp_Notification_Info(
-				sprintf(
-					'<div><strong>Fetch database credentials from the config file</strong><label class="sui-toggle">
+			$this->add_to_body(
+				new Shinst_View_Cmp_Notification_Info(
+					sprintf(
+						'<div><strong>Fetch database credentials from the config file</strong><label class="sui-toggle">
 	<input type="checkbox" id="use-wpconfig">
 	<span class="sui-toggle-slider"></span>
 </label></div><p>
 Trying to override an existing WordPress installation? Enable this option to fetch the database credentials from the existing wp-config.php file automatically. 
 </p>'
+					)
 				)
-			) );
+			);
 		}
 		$this
 			->add_to_body( new Shinst_View_Cmp_Input_Text( 'Database Host' ) )
@@ -6268,6 +6597,11 @@ Trying to override an existing WordPress installation? Enable this option to fet
 
 	public function get_table_prefix() {
 		$prefix = '';
+
+		if ( Shinst_Model_Env::is_flywheel() ) {
+			return shinst_read_wpconfig()['table_prefix'];
+		}
+
 		try {
 			Shinst_Model_Fs_Archive::extract_manifest();
 			$prefix = Shinst_Model_Manifest::get()->get_value( 'table_prefix' );
@@ -6296,7 +6630,7 @@ class Shinst_View_Page_Deploy extends Shinst_View_Page {
 		$this->add_to_body(
 			new Shinst_View_Cmp_Paragraph( 'Please keep this window open while we deploy your website. This can take anywhere from a few seconds to a few minutes depending upon the size of your archive and database.' )
 		);
-		$this->add_to_body( new Shinst_View_Cmp_Progress );
+		$this->add_to_body( new Shinst_View_Cmp_Progress() );
 
 		// Update page title because it's different than sidebar.
 		$body = $this->get_body();
@@ -6310,7 +6644,7 @@ class Shinst_View_Page_Deploy extends Shinst_View_Page {
 	}
 
 	public function print_scripts() {
-?>
+		?>
 <script>
 ;( function( $ ) {
 
@@ -6318,7 +6652,6 @@ class Shinst_View_Page_Deploy extends Shinst_View_Page {
 		{ step: 'Unpacking Archive', endpoint: 'unpack', dfr: new $.Deferred },
 		{ step: 'Analyzing Restore', endpoint: 'analyze', dfr: new $.Deferred },
 		{ step: 'Restoring Files', endpoint: 'files', dfr: new $.Deferred },
-		{ step: 'Installing Database', endpoint: 'tables', dfr: new $.Deferred },
 	];
 	var _step = false;
 
@@ -6410,7 +6743,7 @@ class Shinst_View_Page_Deploy extends Shinst_View_Page {
 
 } )( jQuery );
 </script>
-<?php
+		<?php
 		parent::print_scripts();
 	}
 }
@@ -6442,16 +6775,16 @@ class Shinst_View_Page_Error extends Shinst_View_Page {
 	public function print_markup() {
 		$e = $this->_exception;
 
-		$ctrl = new Shinst_Controller_Front;
-		$log = new Shinst_View_Cmp_Logs( 'Log File' );
-		$msg = ! empty( $e )
+		$ctrl         = new Shinst_Controller_Front();
+		$log          = new Shinst_View_Cmp_Logs( 'Log File' );
+		$msg          = ! empty( $e )
 			? $e->getMessage()
 			: ( $ctrl->is_user_allowed()
 				? 'Please check the log below'
 				: 'You are not authorized to view the log'
 			);
 		$notification = new Shinst_View_Cmp_Notification_Error( $msg );
-?>
+		?>
 <html>
 	<head>
 		<title>Error: Shipper Installer</title>
@@ -6500,7 +6833,7 @@ class Shinst_View_Page_Error extends Shinst_View_Page {
 		</main>
 	</body>
 </html>
-<?php
+		<?php
 	}
 }
 
@@ -6526,15 +6859,15 @@ class Shinst_View_Page_Finish extends Shinst_View_Page {
 			new Shinst_View_Cmp_Paragraph( 'Your website is ready! Please login to your new website and make sure everything looks perfect. Once confirmed, please return here and run the cleanup script to clear the migration files from your server. ' )
 		);
 
-		$this->add_to_body( new Shinst_View_Cmp_Button_Admin );
+		$this->add_to_body( new Shinst_View_Cmp_Button_Admin() );
 
-		$next = new Shinst_View_Cmp_Button_Next;
+		$next = new Shinst_View_Cmp_Button_Next();
 		$next->set_title( 'Run Cleanup' );
 		$this->add_to_body( $next );
 	}
 
 	public function print_scripts() {
-?>
+		?>
 <script>
 ;( function( $ ) {
 
@@ -6577,12 +6910,12 @@ class Shinst_View_Page_Finish extends Shinst_View_Page {
 
 } )( jQuery );
 </script>
-<?php
+		<?php
 		parent::print_scripts();
 	}
 
 	public function print_styles() {
-?>
+		?>
 nav.top .button.back {
 	display: none;
 }
@@ -6595,7 +6928,7 @@ main .button {
 .button.adminlogin {
 	background: <?php echo Shinst_Model_Style::GHOST_FG; ?>;
 }
-<?php
+		<?php
 		parent::print_styles();
 	}
 }
@@ -6620,8 +6953,8 @@ class Shinst_View_Page_Logs extends Shinst_View_Page {
 	}
 
 	public function print_markup() {
-		$log = new Shinst_View_Cmp_Logs;
-?>
+		$log = new Shinst_View_Cmp_Logs();
+		?>
 <html>
 	<head>
 		<title>Shipper Installer: View Logs</title>
@@ -6651,7 +6984,7 @@ class Shinst_View_Page_Logs extends Shinst_View_Page {
 		</main>
 	</body>
 </html>
-<?php
+		<?php
 	}
 }
 
@@ -6675,16 +7008,17 @@ class Shinst_View_Page_Password extends Shinst_View_Page {
 		$title = 'Installer Password';
 		parent::__construct( $title );
 		$this
-			->add_to_body( new Shinst_View_Cmp_Paragraph(
-				'You’ve password protected your installer file. Please enter your chosen password to continue the migration process.'
-			) )
-			->add_to_body( new Shinst_View_Cmp_Input_InstallerPassword )
-			->add_to_body( new Shinst_View_Cmp_Button_Next )
-		;
+			->add_to_body(
+				new Shinst_View_Cmp_Paragraph(
+					'You’ve password protected your installer file. Please enter your chosen password to continue the migration process.'
+				)
+			)
+			->add_to_body( new Shinst_View_Cmp_Input_InstallerPassword() )
+			->add_to_body( new Shinst_View_Cmp_Button_Next() );
 	}
 
 	public function print_styles() {
-?>
+		?>
 nav.top .button.back {
 	display: none;
 }
@@ -6692,12 +7026,12 @@ main a.button.next {
 	margin-top: 30px;
 	float: right;
 }
-<?php
+		<?php
 		parent::print_styles();
 	}
 
 	public function print_scripts() {
-?>
+		?>
 <script>
 ;( function( $ ) {
 
@@ -6715,7 +7049,7 @@ main a.button.next {
 	$( init );
 } )( jQuery );
 </script>
-<?php
+		<?php
 		parent::print_scripts();
 	}
 }
@@ -6737,11 +7071,11 @@ class Shinst_View_Page_Requirements extends Shinst_View_Page {
 		$this->add_to_body(
 			new Shinst_View_Cmp_Paragraph( 'We are looking for any issues that might prevent a successful migration. This will only take a couple of seconds.' )
 		);
-		$this->add_to_body( new Shinst_View_Cmp_Progress );
+		$this->add_to_body( new Shinst_View_Cmp_Progress() );
 	}
 
 	public function print_scripts() {
-?>
+		?>
 <script>
 ;( function( $ ) {
 
@@ -6828,12 +7162,12 @@ class Shinst_View_Page_Requirements extends Shinst_View_Page {
 
 })( jQuery );
 </script>
-<?php
+		<?php
 		parent::print_scripts();
 	}
 
 	public function print_styles() {
-?>
+		?>
 main.has-results section {
 	width: 600px;
 }
@@ -6845,7 +7179,7 @@ main.has-results section {
 	background: <?php echo Shinst_Model_Style::GHOST_FG; ?>;
 	margin-top: 30px;
 }
-<?php
+		<?php
 		parent::print_styles();
 	}
 }
@@ -6865,7 +7199,7 @@ class Shinst_View_Page_Update extends Shinst_View_Page {
 	public function __construct() {
 		$title = 'Update Data';
 		parent::__construct( $title );
-		$next = new Shinst_View_Cmp_Button_Next;
+		$next = new Shinst_View_Cmp_Button_Next();
 		$next->set_title( 'Update' );
 		$this
 			->add_to_body(
@@ -6874,12 +7208,11 @@ class Shinst_View_Page_Update extends Shinst_View_Page {
 			->add_to_body( new Shinst_View_Cmp_Input_Text( 'New Site URL' ) )
 			->add_to_body( new Shinst_View_Cmp_Input_Text( 'New Site Path' ) )
 			->add_to_body( new Shinst_View_Cmp_Input_Text( 'New Site Title' ) )
-			->add_to_body( $next )
-		;
+			->add_to_body( $next );
 	}
 
 	public function print_scripts() {
-?>
+		?>
 <script>
 ;( function( $ ) {
 
@@ -6887,7 +7220,7 @@ class Shinst_View_Page_Update extends Shinst_View_Page {
 		{ step: 'Updating Database', endpoint: 'tables', dfr: new $.Deferred },
 		{ step: 'Updating config files', endpoint: 'files', dfr: new $.Deferred },
 		{ step: 'Updating site title', endpoint: 'title', dfr: new $.Deferred },
-		// { step: 'Settling WPMUDEV', endpoint: 'wpmudev', dfr: new $.Deferred },
+		{ step: 'Finalizing...', endpoint: 'finalize', dfr: new $.Deferred },
 	];
 	var _step = false;
 
@@ -6924,18 +7257,7 @@ class Shinst_View_Page_Update extends Shinst_View_Page {
 			per_step = 1 / total_steps,
 			total_clean = ( step_index * per_step ) * 100,
 			total_step = ( step_percentage * per_step );
-/*
-console.log({
-	step: step.step,
-	step_index: step_index,
-	total: total_steps,
-	per_step: per_step,
-	step_percentage: step_percentage,
-	total_clean: total_clean,
-	total_step: total_step,
-	result: total_clean + total_step
-});
- */
+
 		return total_clean + total_step;
 	}
 
@@ -7019,12 +7341,12 @@ console.log({
 
 } )( jQuery );
 </script>
-<?php
+		<?php
 		parent::print_scripts();
 	}
 
 	public function print_styles() {
-?>
+		?>
 	nav.top .button.back {
 		display: none;
 	}
@@ -7036,7 +7358,7 @@ console.log({
 		margin-top: 10px;
 		float: right;
 	}
-<?php
+		<?php
 		parent::print_styles();
 	}
 }
@@ -7054,7 +7376,8 @@ console.log({
 class Shinst_View_Svg_Alert extends Shinst_View_Svg {
 
 	public function print_markup() {
-?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M512 0c70.667 0 137 13.333 199 40 62.667 26.667 117.166 63.166 163.5 109.5S957.333 250.333 984 313c26.667 62 40 128.333 40 199s-13.333 137-40 199c-26.667 62.667-63.166 117.166-109.5 163.5S773.667 957.333 711 984c-62 26.667-128.333 40-199 40s-137-13.333-199-40c-62.667-26.667-117.166-63.166-163.5-109.5S66.667 773.667 40 711C13.333 649 0 582.667 0 512s13.333-137 40-199c26.667-62.667 63.166-117.166 109.5-163.5S250.333 66.667 313 40C375 13.333 441.333 0 512 0zm0 256c-35.346 0-64 28.654-64 64v192c0 35.346 28.654 64 64 64s64-28.654 64-64V320c0-35.346-28.654-64-64-64zm0 512c35.346 0 64-28.654 64-64s-28.654-64-64-64c-35.346 0-64 28.654-64 64s28.654 64 64 64z"/></svg><?php
+		?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M512 0c70.667 0 137 13.333 199 40 62.667 26.667 117.166 63.166 163.5 109.5S957.333 250.333 984 313c26.667 62 40 128.333 40 199s-13.333 137-40 199c-26.667 62.667-63.166 117.166-109.5 163.5S773.667 957.333 711 984c-62 26.667-128.333 40-199 40s-137-13.333-199-40c-62.667-26.667-117.166-63.166-163.5-109.5S66.667 773.667 40 711C13.333 649 0 582.667 0 512s13.333-137 40-199c26.667-62.667 63.166-117.166 109.5-163.5S250.333 66.667 313 40C375 13.333 441.333 0 512 0zm0 256c-35.346 0-64 28.654-64 64v192c0 35.346 28.654 64 64 64s64-28.654 64-64V320c0-35.346-28.654-64-64-64zm0 512c35.346 0 64-28.654 64-64s-28.654-64-64-64c-35.346 0-64 28.654-64 64s28.654 64 64 64z"/></svg>
+		<?php
 	}
 }
 
@@ -7071,7 +7394,8 @@ class Shinst_View_Svg_Alert extends Shinst_View_Svg {
 class Shinst_View_Svg_Arrow extends Shinst_View_Svg {
 
 	public function print_markup() {
-?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M963.754 491.008L574.805 102.4c-5.491-5.46-13.061-8.836-21.419-8.836s-15.927 3.375-21.42 8.837l-62.463 62.121c-5.46 5.491-8.836 13.061-8.836 21.419s3.375 15.927 8.837 21.42L700.073 437.76H78.164h-.001c-14.644 0-26.527 11.823-26.623 26.444v95.583c0 14.704 11.92 26.624 26.624 26.624h621.909l-230.4 230.4c-5.46 5.491-8.836 13.061-8.836 21.419s3.375 15.927 8.837 21.42l62.292 61.951c5.491 5.46 13.061 8.836 21.419 8.836s15.927-3.375 21.42-8.837l388.948-388.607c5.38-5.401 8.706-12.851 8.706-21.077s-3.326-15.677-8.707-21.078z"/></svg><?php
+		?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M963.754 491.008L574.805 102.4c-5.491-5.46-13.061-8.836-21.419-8.836s-15.927 3.375-21.42 8.837l-62.463 62.121c-5.46 5.491-8.836 13.061-8.836 21.419s3.375 15.927 8.837 21.42L700.073 437.76H78.164h-.001c-14.644 0-26.527 11.823-26.623 26.444v95.583c0 14.704 11.92 26.624 26.624 26.624h621.909l-230.4 230.4c-5.46 5.491-8.836 13.061-8.836 21.419s3.375 15.927 8.837 21.42l62.292 61.951c5.491 5.46 13.061 8.836 21.419 8.836s15.927-3.375 21.42-8.837l388.948-388.607c5.38-5.401 8.706-12.851 8.706-21.077s-3.326-15.677-8.707-21.078z"/></svg>
+		<?php
 	}
 }
 
@@ -7088,7 +7412,8 @@ class Shinst_View_Svg_Arrow extends Shinst_View_Svg {
 class Shinst_View_Svg_Blindeye extends Shinst_View_Svg {
 
 	public function print_markup() {
-?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M201.216 121.003c-2.596-2.605-6.187-4.217-10.155-4.217s-7.559 1.612-10.154 4.216l-61.44 60.928c-2.605 2.596-4.217 6.187-4.217 10.155s1.612 7.559 4.216 10.154l701.27 700.758c2.596 2.605 6.187 4.217 10.155 4.217s7.559-1.612 10.154-4.216l60.928-60.928c2.605-2.596 4.217-6.187 4.217-10.155s-1.612-7.559-4.216-10.154zM665.6 503.467c-4.372-78.297-66.77-140.695-144.666-145.049zm-307.2 19.114c5.285 76.768 66.251 137.734 142.541 142.992zM512 288.085l.818-.002c123.288 0 223.232 99.944 223.232 223.232 0 19.895-2.603 39.181-7.486 57.539l150.881 148.97c60.159-57.039 108.919-125.422 142.957-201.809S887.467 159.914 512 159.914c-.695-.003-1.517-.005-2.339-.005-58.177 0-114.196 9.241-166.669 26.335l113.712 108.838c16.592-4.431 35.643-6.983 55.287-6.997zm0 448l-.768.001C387.944 736.086 288 636.142 288 512.854c0-19.337 2.459-38.1 7.081-55.993L143.701 307.2C83.962 364.008 35.501 432.036 1.599 507.99S136.533 863.915 512 863.915c.727.004 1.587.006 2.447.006 57.572 0 113.029-9.053 165.026-25.812l-113.884-109.02c-16.056 4.238-34.509 6.722-53.525 6.826z"/></svg><?php
+		?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M201.216 121.003c-2.596-2.605-6.187-4.217-10.155-4.217s-7.559 1.612-10.154 4.216l-61.44 60.928c-2.605 2.596-4.217 6.187-4.217 10.155s1.612 7.559 4.216 10.154l701.27 700.758c2.596 2.605 6.187 4.217 10.155 4.217s7.559-1.612 10.154-4.216l60.928-60.928c2.605-2.596 4.217-6.187 4.217-10.155s-1.612-7.559-4.216-10.154zM665.6 503.467c-4.372-78.297-66.77-140.695-144.666-145.049zm-307.2 19.114c5.285 76.768 66.251 137.734 142.541 142.992zM512 288.085l.818-.002c123.288 0 223.232 99.944 223.232 223.232 0 19.895-2.603 39.181-7.486 57.539l150.881 148.97c60.159-57.039 108.919-125.422 142.957-201.809S887.467 159.914 512 159.914c-.695-.003-1.517-.005-2.339-.005-58.177 0-114.196 9.241-166.669 26.335l113.712 108.838c16.592-4.431 35.643-6.983 55.287-6.997zm0 448l-.768.001C387.944 736.086 288 636.142 288 512.854c0-19.337 2.459-38.1 7.081-55.993L143.701 307.2C83.962 364.008 35.501 432.036 1.599 507.99S136.533 863.915 512 863.915c.727.004 1.587.006 2.447.006 57.572 0 113.029-9.053 165.026-25.812l-113.884-109.02c-16.056 4.238-34.509 6.722-53.525 6.826z"/></svg>
+		<?php
 	}
 }
 
@@ -7105,7 +7430,8 @@ class Shinst_View_Svg_Blindeye extends Shinst_View_Svg {
 class Shinst_View_Svg_Check extends Shinst_View_Svg {
 
 	public function print_markup() {
-?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M874.008 149.931C781.357 57.295 653.369 0 512 0 229.23 0 0 229.23 0 512s229.23 512 512 512c141.37 0 269.358-57.295 362.009-149.932C966.68 781.412 1024 653.4 1024 512s-57.32-269.412-149.991-362.068zM724.675 424.875L473.283 676.267c-10.683 10.67-25.435 17.268-41.728 17.268s-31.045-6.599-41.729-17.269L263.021 549.461c-6.868-6.884-11.116-16.386-11.116-26.88s4.247-19.996 11.116-26.881l29.695-29.695c6.893-6.919 16.429-11.201 26.965-11.201s20.073 4.282 26.964 11.2l85.335 85.335 209.067-210.091c6.884-6.868 16.386-11.116 26.88-11.116s19.996 4.247 26.881 11.116l29.695 29.695c6.868 6.884 11.116 16.386 11.116 26.88s-4.247 19.996-11.116 26.881z"/></svg><?php
+		?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M874.008 149.931C781.357 57.295 653.369 0 512 0 229.23 0 0 229.23 0 512s229.23 512 512 512c141.37 0 269.358-57.295 362.009-149.932C966.68 781.412 1024 653.4 1024 512s-57.32-269.412-149.991-362.068zM724.675 424.875L473.283 676.267c-10.683 10.67-25.435 17.268-41.728 17.268s-31.045-6.599-41.729-17.269L263.021 549.461c-6.868-6.884-11.116-16.386-11.116-26.88s4.247-19.996 11.116-26.881l29.695-29.695c6.893-6.919 16.429-11.201 26.965-11.201s20.073 4.282 26.964 11.2l85.335 85.335 209.067-210.091c6.884-6.868 16.386-11.116 26.88-11.116s19.996 4.247 26.881 11.116l29.695 29.695c6.868 6.884 11.116 16.386 11.116 26.88s-4.247 19.996-11.116 26.881z"/></svg>
+		<?php
 	}
 }
 
@@ -7122,7 +7448,8 @@ class Shinst_View_Svg_Check extends Shinst_View_Svg {
 class Shinst_View_Svg_Chevron extends Shinst_View_Svg {
 
 	public function print_markup() {
-?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M921.583 371.441a51.346 51.346 0 0 1 12.847 18.431c2.739 6.961 4.255 14.629 4.255 22.65 0 .738-.013 1.472-.038 2.204.004.035.005.201.005.368a59.02 59.02 0 0 1-4.757 23.293 59.984 59.984 0 0 1-12.321 18.397L555.333 823.878a73.911 73.911 0 0 1-19.153 12.272c-7.479 3.363-15.665 5.215-24.282 5.215s-16.803-1.851-24.179-5.178a74.422 74.422 0 0 1-19.334-12.377L102.384 456.775a60.152 60.152 0 0 1-12.31-18.382 58.719 58.719 0 0 1-4.757-23.802l-.001-.246a61.773 61.773 0 0 1 4.76-23.857c2.613-7.223 6.867-13.729 12.297-19.037l42.506-43.359a76.148 76.148 0 0 1 18.81-12.263c7.349-3.353 15.388-5.195 23.857-5.195s16.508 1.841 23.738 5.146a75.906 75.906 0 0 1 19.004 12.379L511.983 609.18l280.576-279.723c10.689-10.554 25.384-17.073 41.602-17.073.314 0 .628.002.941.007l.198-.001a62.775 62.775 0 0 1 24.065 4.762c6.98 2.849 13.25 7.256 18.322 12.78l43.895 41.509z"/></svg><?php
+		?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M921.583 371.441a51.346 51.346 0 0 1 12.847 18.431c2.739 6.961 4.255 14.629 4.255 22.65 0 .738-.013 1.472-.038 2.204.004.035.005.201.005.368a59.02 59.02 0 0 1-4.757 23.293 59.984 59.984 0 0 1-12.321 18.397L555.333 823.878a73.911 73.911 0 0 1-19.153 12.272c-7.479 3.363-15.665 5.215-24.282 5.215s-16.803-1.851-24.179-5.178a74.422 74.422 0 0 1-19.334-12.377L102.384 456.775a60.152 60.152 0 0 1-12.31-18.382 58.719 58.719 0 0 1-4.757-23.802l-.001-.246a61.773 61.773 0 0 1 4.76-23.857c2.613-7.223 6.867-13.729 12.297-19.037l42.506-43.359a76.148 76.148 0 0 1 18.81-12.263c7.349-3.353 15.388-5.195 23.857-5.195s16.508 1.841 23.738 5.146a75.906 75.906 0 0 1 19.004 12.379L511.983 609.18l280.576-279.723c10.689-10.554 25.384-17.073 41.602-17.073.314 0 .628.002.941.007l.198-.001a62.775 62.775 0 0 1 24.065 4.762c6.98 2.849 13.25 7.256 18.322 12.78l43.895 41.509z"/></svg>
+		<?php
 	}
 }
 
@@ -7139,7 +7466,8 @@ class Shinst_View_Svg_Chevron extends Shinst_View_Svg {
 class Shinst_View_Svg_Documentation extends Shinst_View_Svg {
 
 	public function print_markup() {
-?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M487.166 877.106c-66.404 0-348.164-62.974-348.164-189.082V546.712L476.15 683.261c3.235 1.348 6.993 2.133 10.938 2.133s7.704-.783 11.127-2.201L831.448 548.25l3.724 1.843v138.239c0 126.104-281.604 189.082-348.01 189.082l.004-.308zM1023.687 896l-65.319-78.49L892.894 896V532.431v-16.742L709.503 423.53 1024 492.65l-.313 403.351zm-74.63-456.96l-358.248-69.58c-4.658-.072-7.647 2.885-7.647 6.532a6.568 6.568 0 0 0 2.665 5.281l193.028 126.732-291.689 118.119L48.152 448.241C8.811 432.3-10.159 387.486 5.781 348.144a76.86 76.86 0 0 1 42.386-42.377L487.166 128 949.02 315.022c34.251 13.869 50.773 52.879 36.904 87.129a66.907 66.907 0 0 1-36.867 36.889z"/></svg><?php
+		?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M487.166 877.106c-66.404 0-348.164-62.974-348.164-189.082V546.712L476.15 683.261c3.235 1.348 6.993 2.133 10.938 2.133s7.704-.783 11.127-2.201L831.448 548.25l3.724 1.843v138.239c0 126.104-281.604 189.082-348.01 189.082l.004-.308zM1023.687 896l-65.319-78.49L892.894 896V532.431v-16.742L709.503 423.53 1024 492.65l-.313 403.351zm-74.63-456.96l-358.248-69.58c-4.658-.072-7.647 2.885-7.647 6.532a6.568 6.568 0 0 0 2.665 5.281l193.028 126.732-291.689 118.119L48.152 448.241C8.811 432.3-10.159 387.486 5.781 348.144a76.86 76.86 0 0 1 42.386-42.377L487.166 128 949.02 315.022c34.251 13.869 50.773 52.879 36.904 87.129a66.907 66.907 0 0 1-36.867 36.889z"/></svg>
+		<?php
 	}
 }
 
@@ -7156,7 +7484,8 @@ class Shinst_View_Svg_Documentation extends Shinst_View_Svg {
 class Shinst_View_Svg_Eye extends Shinst_View_Svg {
 
 	public function print_markup() {
-?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M512 736.085c123.759 0 224.085-100.326 224.085-224.085S635.759 287.915 512 287.915c-123.759 0-224.085 100.326-224.085 224.085S388.241 736.085 512 736.085zM0 512s136.533-352.085 512-352.085S1024 512 1024 512 887.467 864.085 512 864.085 0 512 0 512zm512 95.915c52.972 0 95.915-42.942 95.915-95.915S564.973 416.085 512 416.085c-52.972 0-95.915 42.942-95.915 95.915s42.942 95.915 95.915 95.915z"/></svg><?php
+		?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M512 736.085c123.759 0 224.085-100.326 224.085-224.085S635.759 287.915 512 287.915c-123.759 0-224.085 100.326-224.085 224.085S388.241 736.085 512 736.085zM0 512s136.533-352.085 512-352.085S1024 512 1024 512 887.467 864.085 512 864.085 0 512 0 512zm512 95.915c52.972 0 95.915-42.942 95.915-95.915S564.973 416.085 512 416.085c-52.972 0-95.915 42.942-95.915 95.915s42.942 95.915 95.915 95.915z"/></svg>
+		<?php
 	}
 }
 
@@ -7173,7 +7502,8 @@ class Shinst_View_Svg_Eye extends Shinst_View_Svg {
 class Shinst_View_Svg_Loader extends Shinst_View_Svg {
 
 	public function print_markup() {
-?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M512 0c-34.404 0-62.293 27.89-62.293 62.293v151.723c0 34.404 27.89 62.293 62.293 62.293s62.293-27.89 62.293-62.293V62.293C574.293 27.889 546.403 0 512 0zm0 747.691c-34.404 0-62.293 27.89-62.293 62.293v151.723c0 34.404 27.89 62.293 62.293 62.293s62.293-27.89 62.293-62.293V809.984c0-34.404-27.89-62.293-62.293-62.293zm210.603-384h.11c17.165 0 32.7-6.981 43.92-18.259L873.985 238.08c11.99-11.377 19.45-27.428 19.45-45.221 0-34.404-27.89-62.293-62.293-62.293-17.793 0-33.843 7.46-45.195 19.422L678.572 257.365c-11.263 11.271-18.229 26.838-18.229 44.032 0 34.392 27.871 62.275 62.26 62.293zM301.397 660.309h-.11c-17.165 0-32.7 6.981-43.92 18.259L150.015 785.92c-11.99 11.377-19.45 27.428-19.45 45.221 0 34.404 27.89 62.293 62.293 62.293 17.793 0 33.843-7.46 45.195-19.422l107.375-107.377c11.263-11.271 18.229-26.838 18.229-44.032 0-34.392-27.871-62.275-62.26-62.293zm660.31-210.602H809.984c-34.404 0-62.293 27.89-62.293 62.293s27.89 62.293 62.293 62.293h151.723c34.404 0 62.293-27.89 62.293-62.293s-27.89-62.293-62.293-62.293zM276.309 512c0-34.404-27.89-62.293-62.293-62.293H62.293C27.889 449.707 0 477.597 0 512s27.89 62.293 62.293 62.293h151.723c34.404 0 62.293-27.89 62.293-62.293zm490.326 166.571c-11.377-11.99-27.428-19.45-45.221-19.45-34.404 0-62.293 27.89-62.293 62.293 0 17.793 7.46 33.843 19.422 45.195L785.92 873.984c11.377 11.99 27.428 19.45 45.221 19.45 34.404 0 62.293-27.89 62.293-62.293 0-17.793-7.46-33.843-19.422-45.195zM238.08 150.016c-11.14-10.571-26.233-17.073-42.843-17.073-34.404 0-62.293 27.89-62.293 62.293 0 16.611 6.502 31.703 17.099 42.871l107.323 107.322c11.377 11.99 27.428 19.45 45.221 19.45 34.404 0 62.293-27.89 62.293-62.293 0-17.793-7.46-33.843-19.422-45.195z"/></svg><?php
+		?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M512 0c-34.404 0-62.293 27.89-62.293 62.293v151.723c0 34.404 27.89 62.293 62.293 62.293s62.293-27.89 62.293-62.293V62.293C574.293 27.889 546.403 0 512 0zm0 747.691c-34.404 0-62.293 27.89-62.293 62.293v151.723c0 34.404 27.89 62.293 62.293 62.293s62.293-27.89 62.293-62.293V809.984c0-34.404-27.89-62.293-62.293-62.293zm210.603-384h.11c17.165 0 32.7-6.981 43.92-18.259L873.985 238.08c11.99-11.377 19.45-27.428 19.45-45.221 0-34.404-27.89-62.293-62.293-62.293-17.793 0-33.843 7.46-45.195 19.422L678.572 257.365c-11.263 11.271-18.229 26.838-18.229 44.032 0 34.392 27.871 62.275 62.26 62.293zM301.397 660.309h-.11c-17.165 0-32.7 6.981-43.92 18.259L150.015 785.92c-11.99 11.377-19.45 27.428-19.45 45.221 0 34.404 27.89 62.293 62.293 62.293 17.793 0 33.843-7.46 45.195-19.422l107.375-107.377c11.263-11.271 18.229-26.838 18.229-44.032 0-34.392-27.871-62.275-62.26-62.293zm660.31-210.602H809.984c-34.404 0-62.293 27.89-62.293 62.293s27.89 62.293 62.293 62.293h151.723c34.404 0 62.293-27.89 62.293-62.293s-27.89-62.293-62.293-62.293zM276.309 512c0-34.404-27.89-62.293-62.293-62.293H62.293C27.889 449.707 0 477.597 0 512s27.89 62.293 62.293 62.293h151.723c34.404 0 62.293-27.89 62.293-62.293zm490.326 166.571c-11.377-11.99-27.428-19.45-45.221-19.45-34.404 0-62.293 27.89-62.293 62.293 0 17.793 7.46 33.843 19.422 45.195L785.92 873.984c11.377 11.99 27.428 19.45 45.221 19.45 34.404 0 62.293-27.89 62.293-62.293 0-17.793-7.46-33.843-19.422-45.195zM238.08 150.016c-11.14-10.571-26.233-17.073-42.843-17.073-34.404 0-62.293 27.89-62.293 62.293 0 16.611 6.502 31.703 17.099 42.871l107.323 107.322c11.377 11.99 27.428 19.45 45.221 19.45 34.404 0 62.293-27.89 62.293-62.293 0-17.793-7.46-33.843-19.422-45.195z"/></svg>
+		<?php
 	}
 }
 
@@ -7190,7 +7520,8 @@ class Shinst_View_Svg_Loader extends Shinst_View_Svg {
 class Shinst_View_Svg_Repeat extends Shinst_View_Svg {
 
 	public function print_markup() {
-?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M311.743 737.378c.929.838 1.863 1.67 2.802 2.497 69.009 60.732 161.584 87.586 253.821 71.323 103.046-18.17 187.795-87.13 227.628-181.864 17.126-40.729 64.026-59.863 104.755-42.737s59.863 64.026 42.737 104.755c-60.693 144.344-190.177 249.705-347.337 277.416-140.63 24.797-282.185-16.266-387.309-108.781a465.842 465.842 0 0 1-16.422-15.167l-47.146 42.45a64.004 64.004 0 0 1-42.81 16.439c-35.346.008-64.006-28.639-64.014-63.986L38.4 624.021a63.868 63.868 0 0 1 .352-6.718c3.703-35.152 35.2-60.646 70.352-56.944l214.515 22.595a63.996 63.996 0 0 1 40.857 20.824c23.651 26.267 21.53 66.734-4.737 90.386l-47.997 43.216zm405.156-449.962a312.68 312.68 0 0 0-3.885-3.478c-69.009-60.732-161.584-87.586-253.821-71.323-103.046 18.17-187.795 87.13-227.628 181.864-17.126 40.729-64.026 59.863-104.755 42.737S66.947 373.19 84.073 332.461C144.766 188.117 274.25 82.756 431.41 55.045c140.63-24.797 282.185 16.266 387.309 108.781a465.935 465.935 0 0 1 17.467 16.183l48.274-43.466a64.004 64.004 0 0 1 42.81-16.439c35.346-.008 64.006 28.639 64.014 63.986l.048 215.702c0 2.244-.117 4.487-.352 6.718-3.703 35.152-35.2 60.646-70.352 56.944l-214.515-22.595a63.996 63.996 0 0 1-40.857-20.824c-23.651-26.267-21.53-66.734 4.737-90.386l46.906-42.235z"/></svg><?php
+		?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M311.743 737.378c.929.838 1.863 1.67 2.802 2.497 69.009 60.732 161.584 87.586 253.821 71.323 103.046-18.17 187.795-87.13 227.628-181.864 17.126-40.729 64.026-59.863 104.755-42.737s59.863 64.026 42.737 104.755c-60.693 144.344-190.177 249.705-347.337 277.416-140.63 24.797-282.185-16.266-387.309-108.781a465.842 465.842 0 0 1-16.422-15.167l-47.146 42.45a64.004 64.004 0 0 1-42.81 16.439c-35.346.008-64.006-28.639-64.014-63.986L38.4 624.021a63.868 63.868 0 0 1 .352-6.718c3.703-35.152 35.2-60.646 70.352-56.944l214.515 22.595a63.996 63.996 0 0 1 40.857 20.824c23.651 26.267 21.53 66.734-4.737 90.386l-47.997 43.216zm405.156-449.962a312.68 312.68 0 0 0-3.885-3.478c-69.009-60.732-161.584-87.586-253.821-71.323-103.046 18.17-187.795 87.13-227.628 181.864-17.126 40.729-64.026 59.863-104.755 42.737S66.947 373.19 84.073 332.461C144.766 188.117 274.25 82.756 431.41 55.045c140.63-24.797 282.185 16.266 387.309 108.781a465.935 465.935 0 0 1 17.467 16.183l48.274-43.466a64.004 64.004 0 0 1 42.81-16.439c35.346-.008 64.006 28.639 64.014 63.986l.048 215.702c0 2.244-.117 4.487-.352 6.718-3.703 35.152-35.2 60.646-70.352 56.944l-214.515-22.595a63.996 63.996 0 0 1-40.857-20.824c-23.651-26.267-21.53-66.734 4.737-90.386l46.906-42.235z"/></svg>
+		<?php
 	}
 }
 
@@ -7207,5 +7538,5 @@ class Shinst_View_Svg_Repeat extends Shinst_View_Svg {
  * @package shipper-installer
  */
 
-$ctrl = new Shinst_Controller_Front;
+$ctrl = new Shinst_Controller_Front();
 $ctrl->run();

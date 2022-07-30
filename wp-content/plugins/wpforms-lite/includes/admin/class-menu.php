@@ -15,11 +15,12 @@ class WPForms_Admin_Menu {
 	public function __construct() {
 
 		// Let's make some menus.
-		add_action( 'admin_menu', array( $this, 'register_menus' ), 9 );
-		add_action( 'admin_head', array( $this, 'hide_wpforms_submenu_items' ) );
+		add_action( 'admin_menu', [ $this, 'register_menus' ], 9 );
+		add_action( 'admin_head', [ $this, 'hide_wpforms_submenu_items' ] );
+		add_action( 'admin_head', [ $this, 'style_upgrade_pro_link' ] );
 
 		// Plugins page settings link.
-		add_filter( 'plugin_action_links_' . plugin_basename( WPFORMS_PLUGIN_DIR . 'wpforms.php' ), array( $this, 'settings_link' ), 10 );
+		add_filter( 'plugin_action_links_' . plugin_basename( WPFORMS_PLUGIN_DIR . 'wpforms.php' ), [ $this, 'settings_link' ], 10, 4 );
 	}
 
 	/**
@@ -32,6 +33,10 @@ class WPForms_Admin_Menu {
 		$manage_cap = wpforms_get_capability_manage_options();
 		$access     = wpforms()->get( 'access' );
 
+		if ( ! method_exists( $access, 'get_menu_cap' ) ) {
+			return;
+		}
+
 		// Default Forms top level menu item.
 		add_menu_page(
 			esc_html__( 'WPForms', 'wpforms-lite' ),
@@ -40,7 +45,7 @@ class WPForms_Admin_Menu {
 			'wpforms-overview',
 			array( $this, 'admin_page' ),
 			'data:image/svg+xml;base64,' . base64_encode( '<svg width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path fill="#9ea3a8" d="M643 911v128h-252v-128h252zm0-255v127h-252v-127h252zm758 511v128h-341v-128h341zm0-256v128h-672v-128h672zm0-255v127h-672v-127h672zm135 860v-1240q0-8-6-14t-14-6h-32l-378 256-210-171-210 171-378-256h-32q-8 0-14 6t-6 14v1240q0 8 6 14t14 6h1240q8 0 14-6t6-14zm-855-1110l185-150h-406zm430 0l221-150h-406zm553-130v1240q0 62-43 105t-105 43h-1240q-62 0-105-43t-43-105v-1240q0-62 43-105t105-43h1240q62 0 105 43t43 105z"/></svg>' ),
-			apply_filters( 'wpforms_menu_position', '57.7' )
+			apply_filters( 'wpforms_menu_position', '58.9' )
 		);
 
 		// All Forms sub menu item.
@@ -160,6 +165,16 @@ class WPForms_Admin_Menu {
 			WPForms\Admin\Pages\Community::SLUG,
 			array( $this, 'admin_page' )
 		);
+
+		if ( ! wpforms()->is_pro() ) {
+			add_submenu_page(
+				'wpforms-overview',
+				esc_html__( 'Upgrade to Pro', 'wpforms-lite' ),
+				esc_html__( 'Upgrade to Pro', 'wpforms-lite' ),
+				$manage_cap,
+				esc_url( 'https://wpforms.com/lite-upgrade/?utm_campaign=liteplugin&utm_medium=admin-menu&utm_source=WordPress&utm_content=Upgrade+to+Pro' )
+			);
+		}
 	}
 
 	/**
@@ -213,6 +228,40 @@ class WPForms_Admin_Menu {
 	}
 
 	/**
+	 * Define inline styles for "Upgrade to Pro" left sidebar menu item.
+	 *
+	 * @since 1.7.4
+	 *
+	 * @return void
+	 */
+	public function style_upgrade_pro_link() {
+
+		global $submenu;
+
+		// The "Upgrade to Pro" is 10th submenu item.
+		if ( ! isset( $submenu['wpforms-overview'][10] ) ) {
+			return;
+		}
+
+		// 0 = menu_title, 1 = capability, 2 = menu_slug, 3 = page_title, 4 = classes.
+		if ( strpos( $submenu['wpforms-overview'][10][2], 'https://wpforms.com/lite-upgrade' ) !== 0 ) {
+			return;
+		}
+
+		// Prepare a HTML class.
+		// phpcs:disable WordPress.WP.GlobalVariablesOverride.Prohibited
+		if ( isset( $submenu['wpforms-overview'][10][4] ) ) {
+			$submenu['wpforms-overview'][10][4] .= ' wpforms-sidebar-upgrade-pro';
+		} else {
+			$submenu['wpforms-overview'][10][] = 'wpforms-sidebar-upgrade-pro';
+		}
+		// phpcs:enable WordPress.WP.GlobalVariablesOverride.Prohibited
+
+		// Output inline styles.
+		echo '<style>a.wpforms-sidebar-upgrade-pro { background-color: #00a32a !important; color: #fff !important; font-weight: 600 !important; }</style>';
+	}
+
+	/**
 	 * Wrapper for the hook to render our custom settings pages.
 	 *
 	 * @since 1.0.0
@@ -226,19 +275,41 @@ class WPForms_Admin_Menu {
 	 *
 	 * @since 1.3.9
 	 *
-	 * @param array $links Plugin row links.
+	 * @param array  $links       Plugin row links.
+	 * @param string $plugin_file Path to the plugin file relative to the plugins directory.
+	 * @param array  $plugin_data An array of plugin data. See `get_plugin_data()`.
+	 * @param string $context     The plugin context.
 	 *
 	 * @return array $links
 	 */
-	public function settings_link( $links ) {
+	public function settings_link( $links, $plugin_file, $plugin_data, $context ) {
+
+		$custom['pro'] = sprintf(
+			'<a href="%1$s" aria-label="%2$s" target="_blank" rel="noopener noreferrer" 
+				style="color: #00a32a; font-weight: 700;" 
+				onmouseover="this.style.color=\'#008a20\';" 
+				onmouseout="this.style.color=\'#00a32a\';"
+				>%3$s</a>',
+			esc_url(
+				add_query_arg(
+					[
+						'utm_content'  => 'Get+WPForms+Pro',
+						'utm_campaign' => 'liteplugin',
+						'utm_medium'   => 'all-plugins',
+						'utm_source'   => 'WordPress',
+					],
+					'https://wpforms.com/lite-upgrade/'
+				)
+			),
+			esc_attr__( 'Upgrade to WPForms Pro', 'wpforms-lite' ),
+			esc_html__( 'Get WPForms Pro', 'wpforms-lite' )
+		);
 
 		$custom['settings'] = sprintf(
 			'<a href="%s" aria-label="%s">%s</a>',
 			esc_url(
 				add_query_arg(
-					array(
-						'page' => 'wpforms-settings',
-					),
+					[ 'page' => 'wpforms-settings' ],
 					admin_url( 'admin.php' )
 				)
 			),
@@ -246,19 +317,21 @@ class WPForms_Admin_Menu {
 			esc_html__( 'Settings', 'wpforms-lite' )
 		);
 
-		$custom['support'] = sprintf(
-			'<a href="%1$s" aria-label="%2$s" style="font-weight:bold;">%3$s</a>',
+		$custom['docs'] = sprintf(
+			'<a href="%1$s" aria-label="%2$s" target="_blank" rel="noopener noreferrer">%3$s</a>',
 			esc_url(
 				add_query_arg(
-					array(
-						'page' => 'wpforms-about',
-						'view' => 'versus',
-					),
-					admin_url( 'admin.php' )
+					[
+						'utm_content'  => 'Documentation',
+						'utm_campaign' => 'liteplugin',
+						'utm_medium'   => 'all-plugins',
+						'utm_source'   => 'WordPress',
+					],
+					'https://wpforms.com/docs/'
 				)
 			),
-			esc_attr__( 'Go to WPForms Lite vs Pro comparison page', 'wpforms-lite' ),
-			esc_html__( 'Premium Support', 'wpforms-lite' )
+			esc_attr__( 'Read the documentation', 'wpforms-lite' ),
+			esc_html__( 'Docs', 'wpforms-lite' )
 		);
 
 		return array_merge( $custom, (array) $links );

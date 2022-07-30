@@ -2,17 +2,6 @@
 /**
  * Shipper models: cached destinations class
  *
- * Holds migration estimates related info.
- *
- * Rates:
- * 0.000031705173
- * 0.0000474953824992674
- * 0.0000280331080042246
- * 0.0000334056712034759
- * 0.0000822984448926682
- * 0.0000659464953038672
- * 0.0000659464953038672
- *
  * @package shipper
  */
 
@@ -30,8 +19,8 @@ class Shipper_Model_Stored_Estimate extends Shipper_Model_Stored {
 	 *
 	 * @return string
 	 */
-	static public function get_estimated_migration_time_msg( $size = 0 ) {
-		$me = new self;
+	public static function get_estimated_migration_time_msg( $size = 0 ) {
+		$me = new self();
 		return $me->get_migration_time_msg( $size );
 	}
 
@@ -44,10 +33,10 @@ class Shipper_Model_Stored_Estimate extends Shipper_Model_Stored {
 	 *
 	 * @param int $size Optional package size in bytes.
 	 *
-	 * @return string
+	 * @return array
 	 */
-	static public function get_estimated_migration_time_span( $size = 0 ) {
-		$me = new self;
+	public static function get_estimated_migration_time_span( $size = 0 ) {
+		$me = new self();
 		return $me->get_migration_time_span( $size );
 	}
 
@@ -61,31 +50,98 @@ class Shipper_Model_Stored_Estimate extends Shipper_Model_Stored {
 	}
 
 	/**
-	 * Gets migration estimated time span, in hours
+	 * Gets migration estimated time span, in hours or minutes
 	 *
 	 * @param int $size Optional package size in bytes.
 	 *
 	 * @return array
 	 */
 	public function get_migration_time_span( $size = 0 ) {
-		$time_per_b = 0.000050690110;
-		$package_size = ! empty( $size ) && is_numeric( $size )
+		/**
+		 * 331MB for 11 minutes = 347078656 bytes in 660s
+		 */
+		$number_of_rows    = $this->get_estimated_number_of_table_rows();
+		$time_for_database = $this->get_estimated_time_for_database( $number_of_rows );
+		$package_size      = ! empty( $size ) && is_numeric( $size )
 			? (float) $size
 			: $this->get( 'package_size', 0 );
+		$time_per_b        = 0.000002593 * 2;
+		$estimate_secs     = ( $time_per_b * $package_size ) + ( ( $package_size / 2097152 ) * 2 ) + $time_for_database;
+		$padding           = $estimate_secs * 0.2;
 
-		$estimate_secs = $time_per_b * $package_size;
-		$padding = $estimate_secs * 0.2;
+		// The minimum time for package import on the remote site is 2 minutes, so add that anyway.
+		if ( $estimate_secs <= MINUTE_IN_SECONDS * 2 ) {
+			$estimate_secs += MINUTE_IN_SECONDS * 2;
+		}
 
-		$time_low_estimate = ! empty( $package_size )
-			? max( 1, floor( ($estimate_secs - $padding) / HOUR_IN_SECONDS ) )
+		$low_estimated_time_in_minutes  = ! empty( $package_size )
+			? max( 1, floor( $estimate_secs - $padding ) / MINUTE_IN_SECONDS )
 			: 0;
-		$time_high_estimate = ! empty( $package_size )
-			? ceil( ($estimate_secs + $padding) / HOUR_IN_SECONDS )
+		$high_estimated_time_in_minutes = ! empty( $package_size )
+			? max( 1, ceil( $estimate_secs + $padding ) / MINUTE_IN_SECONDS )
 			: 0;
 
 		return array(
-			'high' => $time_high_estimate,
-			'low' => $time_low_estimate,
+			'unit' => $high_estimated_time_in_minutes > 60 ? __( 'hours', 'shipper' ) : __( 'minutes', 'shipper' ),
+			'high' => $this->get_human_readable_time( $high_estimated_time_in_minutes ),
+			'low'  => $this->get_human_readable_time( $low_estimated_time_in_minutes ),
+		);
+	}
+
+	/**
+	 * Get human readable time
+	 *
+	 * @since 1.1.4
+	 *
+	 * @param int $number_of_minutes number of minutes.
+	 *
+	 * @return string
+	 */
+	public function get_human_readable_time( $number_of_minutes ) {
+		if ( $number_of_minutes < 60 ) {
+			/* translators: %d: %d: number of minute. */
+			$estimated_time = sprintf( _n( '%d minute', '%d minutes', $number_of_minutes, 'shipper' ), $number_of_minutes );
+		} else {
+			$time    = $this->get_hours_and_minutes( $number_of_minutes );
+			$hours   = $time['hours'];
+			$minutes = $time['minutes'];
+
+			/* translators: %d: %d: number of hours. */
+			$estimated_time = sprintf( _n( '%d hour', '%d hours', $hours, 'shipper' ), $hours );
+			$estimated_time = $minutes
+				/* translators: %d: %d: number of minute. */
+				? $estimated_time . sprintf( _n( ' %d minute', ' %d minutes', $minutes, 'shipper' ), $minutes )
+				: $estimated_time;
+		}
+
+		return apply_filters( 'shipper_get_human_readable_time', $estimated_time );
+	}
+
+
+	/**
+	 * Get hours and minutes from number of minutes in an array
+	 *
+	 * @since 1.1.4
+	 *
+	 * @param int $number_of_minutes number of minutes.
+	 *
+	 * @return array
+	 */
+	public function get_hours_and_minutes( $number_of_minutes ) {
+		if ( $number_of_minutes < 60 ) {
+			return array(
+				'hours'   => 0,
+				'minutes' => $number_of_minutes,
+			);
+		}
+
+		$result  = $number_of_minutes / 60;
+		$hours   = is_float( $result ) ? explode( '.', $result )[0] : $result;
+		$minutes = $number_of_minutes % 60;
+
+		return array(
+			'hours'   => $hours,
+			'minutes' => $minutes,
 		);
 	}
 
@@ -101,13 +157,51 @@ class Shipper_Model_Stored_Estimate extends Shipper_Model_Stored {
 		}
 
 		$package_size = $this->get( 'package_size', 0 );
-		$msg =  __( 'Your website is %1$s in size which <b>could take %2$d to %3$d hours to migrate</b> as we are using our advanced API to make sure the process is as stable as possible.', 'shipper' );
+
+		/* translators: %1$s %2$s: package size and eta time. */
+		$msg = __( 'Your website is %1$s in size which <b>could take up to %2$s to migrate</b> as we are using our advanced API to make sure the process is as stable as possible.', 'shipper' );
 
 		return sprintf(
 			$msg,
 			size_format( $package_size ),
-			$estimated_span['low'],
 			$estimated_span['high']
 		);
+	}
+
+	/**
+	 * Get estimated number of table rows
+	 *
+	 * @since 1.1.4
+	 *
+	 * @return int
+	 */
+	public function get_estimated_number_of_table_rows() {
+		$db                = new Shipper_Model_Database();
+		$exclusion         = new Shipper_Model_Stored_MigrationMeta();
+		$tables            = $db->get_tables_list();
+		$excluded_tables   = $exclusion->get( Shipper_Model_Stored_MigrationMeta::KEY_EXCLUSIONS_DB, array() );
+		$tables_to_include = array_diff( $tables, $excluded_tables );
+
+		return array_sum( $db->get_tables_rows_count( $tables_to_include ) );
+	}
+
+	/**
+	 * Get estimated time for database rows in seconds
+	 *
+	 * @since 1.1.4
+	 *
+	 * @param int $number_of_rows number of rows.
+	 *
+	 * @return int
+	 */
+	public function get_estimated_time_for_database( $number_of_rows ) {
+		if ( empty( $number_of_rows ) || intval( $number_of_rows ) < 1 ) {
+			$number_of_rows = 0;
+		}
+
+		$time_per_row_in_seconds = 0.0015; // Assuming 2 seconds is required for every 1k rows.
+		$seconds                 = round( $number_of_rows * $time_per_row_in_seconds );
+
+		return apply_filters( 'shipper_get_estimated_time_for_database', $seconds );
 	}
 }

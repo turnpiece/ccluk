@@ -1,4 +1,4 @@
-/* global wpforms_builder_providers, wpforms_builder, wpf, jQuery */
+/* global wpforms_builder_providers, wpforms_builder, wpf */
 
 ( function( $ ) {
 
@@ -7,8 +7,8 @@
 	var WPFormsProviders = {
 
 		settings: {
-			form  : $( '#wpforms-builder-form' ),
-			spinner: '<i class="fa fa-circle-o-notch fa-spin wpforms-button-icon" />',
+			spinner: '<i class="wpforms-loading-spinner wpforms-loading-inline"></i>',
+			spinnerWhite: '<i class="wpforms-loading-spinner wpforms-loading-inline wpforms-loading-white"></i>',
 		},
 
 		/**
@@ -17,10 +17,11 @@
 		 * @since 1.0.0
 		 */
 		init: function() {
+
 			s = this.settings;
 
 			// Document ready.
-			$( document ).ready( WPFormsProviders.ready );
+			$( WPFormsProviders.ready );
 
 			WPFormsProviders.bindUIActions();
 		},
@@ -33,7 +34,7 @@
 		ready: function() {
 
 			// Setup/cache some vars not available before.
-			s.formID = $( '#wpforms-builder-form' ).data( 'id' );
+			s.form = $( '#wpforms-builder-form' );
 		},
 
 		/**
@@ -129,11 +130,10 @@
 			e.preventDefault();
 
 			var $this = $( el );
+
 			$.confirm( {
 				title: false,
 				content: wpforms_builder_providers.confirm_connection,
-				backgroundDismiss: false,
-				closeIcon: false,
 				icon: 'fa fa-exclamation-circle',
 				type: 'orange',
 				buttons: {
@@ -142,7 +142,14 @@
 						btnClass: 'btn-confirm',
 						keys: [ 'enter' ],
 						action: function() {
+
+							var $section = $this.closest( '.wpforms-panel-content-section' );
+
 							$this.closest( '.wpforms-provider-connection' ).remove();
+
+							if ( ! $section.find( '.wpforms-provider-connection' ).length ) {
+								$section.find( '.wpforms-builder-provider-connections-default' ).removeClass( 'wpforms-hidden' );
+							}
 						},
 					},
 					cancel: {
@@ -177,8 +184,6 @@
 				content: modalContent,
 				icon: 'fa fa-info-circle',
 				type: 'blue',
-				backgroundDismiss: false,
-				closeIcon: false,
 				buttons: {
 					confirm: {
 						text: wpforms_builder.ok,
@@ -206,6 +211,7 @@
 								};
 								WPFormsProviders.fireAJAX( $this, data, function( res ) {
 									if ( res.success ) {
+										$connections.find( '.wpforms-builder-provider-connections-default' ).addClass( 'wpforms-hidden' );
 										$connections.find( '.wpforms-provider-connections' ).prepend( res.data.html );
 
 										// Process and load the accounts if they exist.
@@ -353,12 +359,15 @@
 				task         : 'select_list',
 				account_id   : $connection.find( '.wpforms-provider-accounts option:selected' ).val(),
 				list_id      : $this.find( ':selected' ).val(),
-				form_id      : s.formID,
+				form_id      : s.form.data( 'id' ),
 			};
 
 			WPFormsProviders.fireAJAX( $this, data, function( res ) {
 				if ( res.success ) {
 					$container.after( res.data.html );
+
+					// Re-init tooltips for new fields.
+					wpf.initTooltips();
 				} else {
 					WPFormsProviders.errorDisplay( res.data.error, $container );
 				}
@@ -374,14 +383,12 @@
 		providerPanelConfirm: function( targetPanel ) {
 
 			wpforms_panel_switch = true;
-			if ( targetPanel === 'providers' ) {
+			if ( targetPanel === 'providers' && ! s.form.data( 'revision' ) ) {
 				if ( wpf.savedState != wpf.getFormState( '#wpforms-builder-form' ) ) {
 					wpforms_panel_switch = false;
 					$.confirm( {
 						title: false,
 						content: wpforms_builder_providers.confirm_save,
-						backgroundDismiss: false,
-						closeIcon: false,
 						icon: 'fa fa-info-circle',
 						type: 'blue',
 						buttons: {
@@ -447,7 +454,7 @@
 				if ( $this.is( 'select' ) ) {
 					$this.prop( 'disabled', true ).after( s.spinner );
 				} else {
-					$this.prop( 'disabled', true ).prepend( s.spinner );
+					$this.prop( 'disabled', true ).prepend( s.spinnerWhite );
 				}
 			}
 		},

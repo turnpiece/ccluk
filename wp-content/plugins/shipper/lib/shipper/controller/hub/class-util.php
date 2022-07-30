@@ -32,7 +32,7 @@ class Shipper_Controller_Hub_Util extends Shipper_Controller_Hub {
 	 * @param object $request Optional WPMUDEV_Dashboard_Remote object.
 	 */
 	public function json_reset_creds_cache( $params, $action, $request = false ) {
-		$model = new Shipper_Model_Stored_Creds;
+		$model = new Shipper_Model_Stored_Creds();
 		$model->clear();
 		$model->set_timestamp( false );
 		$model->save();
@@ -68,7 +68,7 @@ class Shipper_Controller_Hub_Util extends Shipper_Controller_Hub {
 			);
 		}
 
-		$migration = new Shipper_Model_Stored_Migration;
+		$migration = new Shipper_Model_Stored_Migration();
 		if ( $migration->is_active() ) {
 			return $this->send_response_error(
 				new WP_Error(
@@ -86,11 +86,11 @@ class Shipper_Controller_Hub_Util extends Shipper_Controller_Hub {
 			true
 		);
 
-		$ctrl = Shipper_Controller_Runner_Preflight::get();
+		$ctrl      = Shipper_Controller_Runner_Preflight::get();
 		$preflight = $ctrl->get_status();
-		$data = $preflight->get_data();
-		$result = array(
-			'is_done' => false,
+		$data      = $preflight->get_data();
+		$result    = array(
+			'is_done'                => false,
 			'estimated_package_size' => 0,
 		);
 
@@ -103,7 +103,7 @@ class Shipper_Controller_Hub_Util extends Shipper_Controller_Hub {
 		if ( $preflight->get( Shipper_Model_Stored_Preflight::KEY_DONE ) ) {
 			$result['is_done'] = true;
 
-			$estimate = new Shipper_Model_Stored_Estimate;
+			$estimate                         = new Shipper_Model_Stored_Estimate();
 			$result['estimated_package_size'] = $estimate->get( 'package_size' );
 
 			// One and done. Restart next time.

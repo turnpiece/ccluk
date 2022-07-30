@@ -4,6 +4,7 @@
  *
  * @package shipper
  */
+
 $ctrl = Shipper_Controller_Runner_Preflight::get();
 $done = $ctrl->is_done() ? ' shipper-select-check-done' : '';
 ?>
@@ -15,17 +16,17 @@ $done = $ctrl->is_done() ? ' shipper-select-check-done' : '';
 				<span><?php esc_html_e( 'Go back', 'shipper' ); ?></span>
 			</a>
 		</div>
-		<div class="shipper-content <?php echo esc_attr($done); ?>">
+		<div class="shipper-content <?php echo esc_attr( $done ); ?>">
 
 			<?php
-				$this->render(
-					'modals/preflight',
-					array( 'modal' => 'loading' )
-				);
-				$this->render(
-					'modals/preflight',
-					array( 'modal' => 'results' )
-				);
+			$this->render(
+				'modals/preflight',
+				array( 'modal' => 'loading' )
+			);
+			$this->render(
+				'modals/preflight',
+				array( 'modal' => 'results' )
+			);
 			?>
 
 		</div><?php // .shipper-content ?>

@@ -88,9 +88,16 @@ if (!class_exists('WT_UserImport_Uninstall_Feedback')) :
                                 </li>
                             <?php } ?>
                         </ul>
+                        <div class="wt-uninstall-feedback-privacy-policy">
+                            <?php _e('We do not collect any personal data when you submit this form. It\'s your feedback that we value.', 'users-customers-import-export-for-wp-woocommerce'); ?>
+                            <a href="https://www.webtoffee.com/privacy-policy/" target="_blank"><?php _e('Privacy Policy', 'users-customers-import-export-for-wp-woocommerce'); ?></a>
+                        </div>                        
                     </div>
                     <div class="userimport-modal-footer">
                         <a href="#" class="dont-bother-me"><?php _e('I rather wouldn\'t say', 'users-customers-import-export-for-wp-woocommerce'); ?></a>
+                        <a class="button-primary" href="https://wordpress.org/support/plugin/users-customers-import-export-for-wp-woocommerce/" target="_blank">
+                        <span class="dashicons dashicons-external" style="margin-top:3px;"></span>
+                        <?php _e('Get support', 'users-customers-import-export-for-wp-woocommerce'); ?></a>
                         <button class="button-primary userimport-model-submit"><?php _e('Submit & Deactivate', 'users-customers-import-export-for-wp-woocommerce'); ?></button>
                         <button class="button-secondary userimport-model-cancel"><?php _e('Cancel', 'users-customers-import-export-for-wp-woocommerce'); ?></button>
                     </div>
@@ -141,6 +148,20 @@ if (!class_exists('WT_UserImport_Uninstall_Feedback')) :
                 .review-and-deactivate{
                         padding:5px;
                     }
+                .wt-uninstall-feedback-privacy-policy {
+                    text-align: left;
+                    font-size: 12px;
+                    color: #aaa;
+                    line-height: 14px;
+                    margin-top: 20px;
+                    font-style: italic;
+                }
+
+                .wt-uninstall-feedback-privacy-policy a {
+                    font-size: 11px;
+                    color: #4b9cc3;
+                    text-decoration-color: #99c3d7;
+                }                    
             </style>
             <script type="text/javascript">
                 (function ($) {
@@ -168,12 +189,17 @@ if (!class_exists('WT_UserImport_Uninstall_Feedback')) :
                             var parent = $(this).parents('li:first');
                             modal.find('.reason-input').remove();
                             var inputType = parent.data('type'),
-                                    inputPlaceholder = parent.data('placeholder');
-                                    
+                                inputPlaceholder = parent.data('placeholder');
+                                var reasonInputHtml = '';                                                                      
                                 if ('reviewhtml' === inputType) {
-                                    var reasonInputHtml = '<div class="reviewlink"><a href="#" target="_blank" class="review-and-deactivate"><?php _e('Deactivate and leave a review', 'users-customers-import-export-for-wp-woocommerce'); ?> <span class="wt-userimport-rating-link"> &#9733;&#9733;&#9733;&#9733;&#9733; </span></a></div>';
+                                    if($('.reviewlink').length == 0){
+                                        reasonInputHtml = '<div class="reviewlink"><a href="#" target="_blank" class="review-and-deactivate"><?php _e('Deactivate and leave a review', 'users-customers-import-export-for-wp-woocommerce'); ?> <span class="wt-userimport-rating-link"> &#9733;&#9733;&#9733;&#9733;&#9733; </span></a></div>';
+                                    }
                                 } else {
-                                    var reasonInputHtml = '<div class="reason-input">' + (('text' === inputType) ? '<input type="text" class="input-text" size="40" />' : '<textarea rows="5" cols="45"></textarea>') + '</div>';
+                                    if($('.reviewlink').length){
+                                       $('.reviewlink'). remove();
+                                    }                                
+                                    reasonInputHtml = '<div class="reason-input">' + (('text' === inputType) ? '<input type="text" class="input-text" size="40" />' : '<textarea rows="5" cols="45"></textarea>') + '</div>';
                                 }
                             if (inputType !== '') {
                                 parent.append($(reasonInputHtml));
@@ -237,7 +263,7 @@ if (!class_exists('WT_UserImport_Uninstall_Feedback')) :
                 'wc_version' => (!defined('WC_VERSION')) ? '' : WC_VERSION,
                 'locale' => get_locale(),
                 'multisite' => is_multisite() ? 'Yes' : 'No',
-                'userimport_version' => WF_CUSTOMER_IMP_EXP_VERSION
+                'userimport_version' => WT_U_IEW_VERSION
             );
             // Write an action/hook here in webtoffe to recieve the data
             $resp = wp_remote_post('https://feedback.webtoffee.com/wp-json/userimport/v1/uninstall', array(

@@ -5,25 +5,30 @@
  * @package shipper
  */
 
-$cancel_url = remove_query_arg(array(
-	'begin', 'check', 'site', 'type',
-));
+$cancel_url = remove_query_arg(
+	array(
+		'begin',
+		'check',
+		'site',
+		'type',
+	)
+);
 ?>
 
-<div class="sui-dialog" id="shipper-migration-ready">
-	<div class="sui-dialog-overlay" tabindex="-1" data-a11y-dialog-hide></div>
-
-	<div class="sui-dialog-content" role="dialog">
-
+<div class="sui-modal sui-modal-md">
+	<div
+		role="dialog"
+		id="shipper-migration-ready"
+		class="sui-modal-content"
+	>
 		<div class="sui-box" role="document">
 			<div class="sui-box-body">
 				<button
 					data-cancel-url="<?php echo esc_url( $cancel_url ); ?>"
-					data-wpnonce="<?php echo esc_attr(
-						wp_create_nonce( 'shipper-reset-migration' )
-					); ?>"
+					data-wpnonce="<?php echo esc_attr( wp_create_nonce( 'shipper-reset-migration' ) ); ?>"
 					data-a11y-dialog-hide=""
-					class="sui-dialog-close"></button>
+					class="sui-dialog-close">
+				</button>
 				<h3>
 					<?php if ( 'export' === $type ) { ?>
 						<?php esc_html_e( 'Ready to migrate!', 'shipper' ); ?>
@@ -33,10 +38,13 @@ $cancel_url = remove_query_arg(array(
 				</h3>
 
 				<?php
-					$this->render('pages/migration/sourcedest-tag', array(
+				$this->render(
+					'pages/migration/sourcedest-tag',
+					array(
 						'destinations' => $destinations,
-						'site' => $site,
-					));
+						'site'         => $site,
+					)
+				);
 				?>
 
 				<div class="sui-notice sui-notice-success">
@@ -54,6 +62,7 @@ $cancel_url = remove_query_arg(array(
 						<?php esc_html_e( 'You\'re ready to go!', 'shipper' ); ?>
 						<?php esc_html_e( 'Note that Shipper will overwrite any existing files or database tables on your destination website.', 'shipper' ); ?>
 					<?php } else { ?>
+						<?php /* translators: %s: admin username. */ ?>
 						<?php echo esc_html( sprintf( __( '%s, importing will overwrite any files or database tables on this website.', 'shipper' ), shipper_get_user_name() ) ); ?>
 					<?php } ?>
 						<?php esc_html_e( 'Please make sure to have a backup of your destination site so you can easily restore it if needed.', 'shipper' ); ?>
@@ -67,11 +76,12 @@ $cancel_url = remove_query_arg(array(
 						<?php } ?>
 						</a>
 					</p>
-					<?php echo Shipper_Helper_Assets::get_custom_hero_image_markup(); ?>
+					<?php echo wp_kses_post( Shipper_Helper_Assets::get_custom_hero_image_markup() ); ?>
 				</div>
 
-			</div><?php // .sui-box-body ?>
-		</div><?php // .sui-box ?>
+			</div> <!-- .sui-box-body -->
+		</div> <!-- .sui-box -->
 
-	</div><?php // .sui-dialog-content ?>
-</div><?php // .sui-dialog ?>
+	</div> <!-- .sui-modal-content -->
+</div> <!-- .sui-modal -->
+

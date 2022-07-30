@@ -14,14 +14,14 @@ $icon = 'ok' === $item['status']
 	? 'check-tick'
 	: 'warning-alert';
 
-$status = 'ok' !== $item['status']
+$status = 'ok' !== $item['status'] // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- this is not WordPress global
 	? $item['status']
 	: 'success';
 
 $this->render(
 	'tags/status-icon',
 	array(
-		'icon' => $icon,
+		'icon'   => $icon,
 		'status' => $status,
 	)
 );

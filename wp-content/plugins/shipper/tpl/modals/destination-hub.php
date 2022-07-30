@@ -22,13 +22,13 @@
 		<?php esc_html_e( 'Let\'s jump over to the Hub and add a new website.', 'shipper' ); ?>
 	</p>
 
-	<a target="_blank" href="https://premium.wpmudev.org/hub/getting-started/?add-website" class="sui-button sui-button-primary shipper-connect">
+	<a target="_blank" href="https://wpmudev.com/hub2/connect/choose-method/" class="sui-button sui-button-primary shipper-connect">
 		<i class="sui-icon-hub" aria-hidden="true"></i>
 		<?php esc_html_e( 'Go to the Hub', 'shipper' ); ?>
 	</a>
 
 	<p class="shipper-note">
 		<?php esc_html_e( 'Prefer to install Shipper manually?', 'shipper' ); ?>
-		<a href="https://premium.wpmudev.org/project/shipper-pro/"><?php esc_html_e( 'Download Shipper', 'shipper' ); ?></a>
+		<a href="https://wpmudev.com/project/shipper-pro/"><?php esc_html_e( 'Download Shipper', 'shipper' ); ?></a>
 	</p>
 </div>

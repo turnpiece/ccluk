@@ -1,5 +1,6 @@
 // Overwrite font path.
 $sui-font-path: '~@wpmudev/shared-ui/dist/fonts/';
+$sui-image-path: '~@wpmudev/shared-ui/dist/images/';
 
 // Share UI styles
 @import '~@wpmudev/shared-ui/scss/shared-ui';
@@ -7,6 +8,7 @@ $sui-font-path: '~@wpmudev/shared-ui/dist/fonts/';
 // Components.
 @import '../../../styles/components/inactive';
 @import '../../../styles/components/forms';
+@import '../../../styles/components/whitelabel';
 
 // Custom styles.
 @import "variables";

@@ -7,12 +7,9 @@
 		ref="selector"
 		:id="id"
 	>
-		<i class="sui-icon-calendar sui-md" aria-hidden="true"></i>
+		<span class="sui-icon-calendar sui-sm" aria-hidden="true"></span>
 		<span class="beehive-range-picker-value">{{ label }}</span>
-		<i
-			class="sui-icon-chevron-down sui-sm beehive-range-picker-button"
-			aria-hidden="true"
-		></i>
+		<span class="sui-icon-chevron-down sui-sm beehive-range-picker-button" aria-hidden="true"></span>
 	</div>
 </template>
 

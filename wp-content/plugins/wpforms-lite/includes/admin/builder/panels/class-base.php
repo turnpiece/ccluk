@@ -11,6 +11,7 @@ abstract class WPForms_Builder_Panel {
 	 * Full name of the panel.
 	 *
 	 * @since 1.0.0
+	 *
 	 * @var string
 	 */
 	public $name;
@@ -19,6 +20,7 @@ abstract class WPForms_Builder_Panel {
 	 * Slug.
 	 *
 	 * @since 1.0.0
+	 *
 	 * @var string
 	 */
 	public $slug;
@@ -27,6 +29,7 @@ abstract class WPForms_Builder_Panel {
 	 * Font Awesome Icon used for the editor button, eg "fa-list".
 	 *
 	 * @since 1.0.0
+	 *
 	 * @var mixed
 	 */
 	public $icon = false;
@@ -35,7 +38,8 @@ abstract class WPForms_Builder_Panel {
 	 * Priority order the field button should show inside the "Add Fields" tab.
 	 *
 	 * @since 1.0.0
-	 * @var integer
+	 *
+	 * @var int
 	 */
 	public $order = 50;
 
@@ -43,22 +47,25 @@ abstract class WPForms_Builder_Panel {
 	 * If panel contains a sidebar element or is full width.
 	 *
 	 * @since 1.0.0
-	 * @var boolean
+	 *
+	 * @var bool
 	 */
 	public $sidebar = false;
 
 	/**
-	 * Contains form object if we have one.
+	 * Contain form object if we have one.
 	 *
 	 * @since 1.0.0
+	 *
 	 * @var object
 	 */
 	public $form;
 
 	/**
-	 * Contains array of the form data (post_content).
+	 * Contain array of the form data (post_content).
 	 *
 	 * @since 1.0.0
+	 *
 	 * @var array
 	 */
 	public $form_data;
@@ -71,21 +78,31 @@ abstract class WPForms_Builder_Panel {
 	public function __construct() {
 
 		// Load form if found.
-		$form_id         = isset( $_GET['form_id'] ) ? absint( $_GET['form_id'] ) : false;
-		$this->form      = wpforms()->form->get( $form_id );
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$form_id    = isset( $_GET['form_id'] ) ? absint( $_GET['form_id'] ) : false;
+		$this->form = wpforms()->get( 'form' )->get( $form_id );
+
 		$this->form_data = $this->form ? wpforms_decode( $this->form->post_content ) : false;
+
+		// Get current revision, if available.
+		$revision = wpforms()->get( 'revisions' )->get_revision();
+
+		// If we're viewing a valid revision, replace the form data so the Form Builder shows correct state.
+		if ( $revision && isset( $revision->post_content ) ) {
+			$this->form_data = wpforms_decode( $revision->post_content );
+		}
 
 		// Bootstrap.
 		$this->init();
 
 		// Load panel specific enqueues.
-		add_action( 'admin_enqueue_scripts', array( $this, 'enqueues' ), 15 );
+		add_action( 'admin_enqueue_scripts', [ $this, 'enqueues' ], 15 );
 
 		// Primary panel button.
-		add_action( 'wpforms_builder_panel_buttons', array( $this, 'button' ), $this->order, 2 );
+		add_action( 'wpforms_builder_panel_buttons', [ $this, 'button' ], $this->order, 2 );
 
 		// Output.
-		add_action( 'wpforms_builder_panels', array( $this, 'panel_output' ), $this->order, 2 );
+		add_action( 'wpforms_builder_panels', [ $this, 'panel_output' ], $this->order, 2 );
 	}
 
 	/**
@@ -126,21 +143,27 @@ abstract class WPForms_Builder_Panel {
 	}
 
 	/**
-	 * Outputs the contents of the panel.
+	 * Output the contents of the panel.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param object $form
-	 * @param string $view
+	 * @param object $form Current form object.
+	 * @param string $view Active Form Builder view (panel).
 	 */
 	public function panel_output( $form, $view ) {
 
-		$active = $view === $this->slug ? 'active' : '';
-		$wrap   = $this->sidebar ? 'wpforms-panel-sidebar-content' : 'wpforms-panel-full-content';
+		$wrap    = $this->sidebar ? 'wpforms-panel-sidebar-content' : 'wpforms-panel-full-content';
+		$classes = [ 'wpforms-panel' ];
 
-		printf( '<div class="wpforms-panel %s" id="wpforms-panel-%s">', $active, esc_attr( $this->slug ) );
+		if ( in_array( $this->slug, [ 'fields', 'revisions' ], true ) ) {
+			$classes[] = 'wpforms-panel-fields';
+		}
 
-		printf( '<div class="wpforms-panel-name">%s</div>', $this->name );
+		if ( $view === $this->slug ) {
+			$classes[] = 'active';
+		}
+
+		printf( '<div class="%s" id="wpforms-panel-%s">', wpforms_sanitize_classes( $classes, true ), esc_attr( $this->slug ) );
 
 		printf( '<div class="%s">', $wrap );
 
@@ -178,7 +201,7 @@ abstract class WPForms_Builder_Panel {
 	}
 
 	/**
-	 * Outputs the panel's sidebar if we have one.
+	 * Output the panel's sidebar if we have one.
 	 *
 	 * @since 1.0.0
 	 */
@@ -186,7 +209,7 @@ abstract class WPForms_Builder_Panel {
 	}
 
 	/**
-	 * Outputs panel sidebar sections.
+	 * Output panel sidebar sections.
 	 *
 	 * @since 1.0.0
 	 *
@@ -214,7 +237,7 @@ abstract class WPForms_Builder_Panel {
 	}
 
 	/**
-	 * Outputs the panel's primary content.
+	 * Output the panel's primary content.
 	 *
 	 * @since 1.0.0
 	 */

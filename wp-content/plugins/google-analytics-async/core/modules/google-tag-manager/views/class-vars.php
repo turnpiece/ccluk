@@ -2,7 +2,7 @@
 /**
  * The script variables view class for the Tag Manager module.
  *
- * @link    http://premium.wpmudev.org
+ * @link    http://wpmudev.com
  * @since   3.3.0
  *
  * @author  Joel James <joel@incsub.com>
@@ -14,6 +14,7 @@ namespace Beehive\Core\Modules\Google_Tag_Manager\Views;
 // If this file is called directly, abort.
 defined( 'WPINC' ) || die;
 
+use Beehive\Core\Helpers\General;
 use Beehive\Core\Utils\Abstracts\Base;
 use Beehive\Core\Modules\Google_Tag_Manager\Helper;
 use Beehive\Core\Modules\Google_Tag_Manager\Integrations\Forminator;
@@ -271,7 +272,9 @@ class Vars extends Base {
 		// Integrations.
 		$vars['integrations'] = array(
 			'hustle_active'        => class_exists( 'Opt_In' ),
+			'hustle_installed'     => General::is_plugin_installed( 'hustle/opt-in.php' ) || General::is_plugin_installed( 'wordpress-popup/popover.php' ),
 			'forminator_active'    => class_exists( 'Forminator' ),
+			'forminator_installed' => General::is_plugin_installed( 'forminator/forminator.php' ),
 			'forminator_supported' => Forminator::is_supported( $this->is_network() ),
 		);
 

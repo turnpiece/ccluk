@@ -20,7 +20,7 @@ class Shipper_Controller_Runner_Package extends Shipper_Controller_Runner_Migrat
 	 */
 	protected function __construct() {
 		parent::__construct( 'package' );
-		$this->_process = 'package';
+		$this->process = 'package';
 	}
 
 	/**
@@ -34,7 +34,7 @@ class Shipper_Controller_Runner_Package extends Shipper_Controller_Runner_Migrat
 	 * @return bool
 	 */
 	public function process_cancel() {
-		$migration = new Shipper_Model_Stored_Migration;
+		$migration = new Shipper_Model_Stored_Migration();
 
 		if ( ! $migration->is_active() ) {
 			Shipper_Helper_Log::write(
@@ -46,7 +46,7 @@ class Shipper_Controller_Runner_Package extends Shipper_Controller_Runner_Migrat
 			);
 
 			// Do early cleanup.
-			$task = new Shipper_Task_Package_Cleanup;
+			$task = new Shipper_Task_Package_Cleanup();
 			$task->apply();
 
 			// Re-initialize the storages.
@@ -89,10 +89,11 @@ class Shipper_Controller_Runner_Package extends Shipper_Controller_Runner_Migrat
 	 * Actually process the migration step
 	 */
 	public function process_tick() {
-		$migration = new Shipper_Model_Stored_Migration;
-		if ( ! $migration->is_active() ) { return false; }
+		$migration = new Shipper_Model_Stored_Migration();
+		if ( ! $migration->is_active() ) {
+			return false; }
 
-		$task = new Shipper_Task_Package_All;
+		$task = new Shipper_Task_Package_All();
 		Shipper_Helper_System::optimize();
 
 		$status = $task->apply();
@@ -118,7 +119,7 @@ class Shipper_Controller_Runner_Package extends Shipper_Controller_Runner_Migrat
 
 		if ( $status ) {
 			// Migration is done, one way or another.
-			$locks = new Shipper_Helper_Locks;
+			$locks = new Shipper_Helper_Locks();
 			if ( ! $locks->has_lock( Shipper_Helper_Locks::LOCK_CANCEL ) ) {
 				// Not a lock-cancelled process. We're ticking and completing.
 				// If we are cancel-locked, let cancel take over in next tick.

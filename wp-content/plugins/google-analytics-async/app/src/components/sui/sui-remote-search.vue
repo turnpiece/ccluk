@@ -1,7 +1,9 @@
 <template>
 	<select
-		class="sui-search"
+		class="sui-select"
+		data-theme="search"
 		multiple="multiple"
+		ref="select"
 		:id="id"
 		:aria-labelledby="labelId"
 		:aria-describedby="descId"
@@ -42,6 +44,10 @@ export default {
 			type: Object,
 			required: true,
 		},
+		parentElement: {
+			type: String,
+			required: false,
+		},
 	},
 
 	data() {
@@ -52,7 +58,7 @@ export default {
 
 	mounted() {
 		// Get the select2 element.
-		this.select2 = jQuery('#' + this.id)
+		this.select2 = jQuery(this.$refs.select)
 
 		// Init select2.
 		this.initSelect2()
@@ -81,14 +87,22 @@ export default {
 		initSelect2() {
 			const vm = this
 
+			let settings = {
+				minimumInputLength: 2,
+				maximumSelectionLength: 1,
+				dropdownCssClass: 'sui-search-dropdown',
+				placeholder: this.placeholder,
+				ajax: this.ajax,
+				theme: 'search',
+			}
+
+			// If parent element id is set.
+			if (this.parentElement) {
+				settings['dropdownParent'] = jQuery('#' + this.parentElement)
+			}
+
 			this.select2
-				.SUIselect2({
-					minimumInputLength: 2,
-					maximumSelectionLength: 1,
-					dropdownCssClass: 'sui-search-dropdown',
-					placeholder: this.placeholder,
-					ajax: this.ajax,
-				})
+				.SUIselect2(settings)
 				.on('change', function () {
 					// Emit change event.
 					vm.$emit('input', this.value)

@@ -6,7 +6,7 @@
  * @package shipper
  */
 
-$checks = $result['checks']['remote_package'];
+$checks             = $result['checks']['remote_package'];
 $has_service_errors = ! empty( $checks['errors'] );
 ?>
 
@@ -14,7 +14,11 @@ $has_service_errors = ! empty( $checks['errors'] );
 <?php if ( ! $has_service_errors ) { ?>
 
 	<?php foreach ( $checks['checks'] as $check_type => $check ) { ?>
-		<?php if ( 'is_done' === $check_type ) { continue; } ?>
+		<?php
+		if ( 'is_done' === $check_type ) {
+			return;
+		}
+		?>
 		<?php
 			$check_id = ! empty( $check['check_id'] )
 				? $check['check_id']
@@ -33,14 +37,15 @@ $has_service_errors = ! empty( $checks['errors'] );
 				</div>
 				<div>
 					<?php
-						$content = ! empty( $check['estimated_package_size'] )
-							? size_format( $check['estimated_package_size'] )
-							: 0;
-						$type = 'ok' === $check['status'] ? 'success' : 'warning';
-						$this->render(
-							'tags/status-text',
-							array( 'status' => $type, 'text' => $content )
-						);
+					$content = ! empty( $check['estimated_package_size'] ) ? size_format( $check['estimated_package_size'] ) : 0;
+					$type    = 'ok' === $check['status'] ? 'success' : 'warning'; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- this is not WordPress global variable
+					$this->render(
+						'tags/status-text',
+						array(
+							'status' => $type,
+							'text'   => $content,
+						)
+					);
 					?>
 				</div>
 				<div>
@@ -55,8 +60,10 @@ $has_service_errors = ! empty( $checks['errors'] );
 			<?php } ?>
 			</div>
 		</div>
-	<?php } ?>
-<?php } else {
+		<?php
+	}
+} else {
 	$this->render( 'msgs/wizard-rpkg-errors', array( 'result' => $result ) );
-} ?>
+}
+?>
 </div>

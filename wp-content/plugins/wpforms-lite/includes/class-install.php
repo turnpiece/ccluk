@@ -1,7 +1,9 @@
 <?php
 
+use WPForms\Tasks\Meta;
+
 /**
- * Handles plugin installation upon activation.
+ * Handle plugin installation upon activation.
  *
  * @since 1.0.0
  */
@@ -30,8 +32,8 @@ class WPForms_Install {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param boolean $network_wide Whether to enable the plugin for all sites in the network
-	 *                              or just the current site. Multisite only. Default is false.
+	 * @param bool $network_wide Whether to enable the plugin for all sites in the network
+	 *                           or just the current site. Multisite only. Default is false.
 	 */
 	public function install( $network_wide = false ) {
 
@@ -39,25 +41,17 @@ class WPForms_Install {
 		if ( is_multisite() && $network_wide ) {
 
 			// Multisite - go through each subsite and run the installer.
-			if ( function_exists( 'get_sites' ) && class_exists( 'WP_Site_Query', false ) ) {
+			$sites = get_sites(
+				[
+					'fields' => 'ids',
+					'number' => 0,
+				]
+			);
 
-				// WP 4.6+.
-				$sites = get_sites();
-
-				foreach ( $sites as $site ) {
-					switch_to_blog( $site->blog_id );
-					$this->run();
-					restore_current_blog();
-				}
-			} else {
-
-				$sites = wp_get_sites( array( 'limit' => 0 ) );
-
-				foreach ( $sites as $site ) {
-					switch_to_blog( $site['blog_id'] );
-					$this->run();
-					restore_current_blog();
-				}
+			foreach ( $sites as $blog_id ) {
+				switch_to_blog( $blog_id );
+				$this->run();
+				restore_current_blog();
 			}
 		} else {
 
@@ -65,8 +59,10 @@ class WPForms_Install {
 			$this->run();
 		}
 
+		set_transient( 'wpforms_just_activated', wpforms()->is_pro() ? 'pro' : 'lite', 60 );
+
 		// Abort so we only set the transient for single site installs.
-		if ( is_network_admin() || isset( $_GET['activate-multi'] ) ) {
+		if ( isset( $_GET['activate-multi'] ) || is_network_admin() ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			return;
 		}
 
@@ -130,11 +126,23 @@ class WPForms_Install {
 	 */
 	protected function run() {
 
+		$meta = new Meta();
+
+		// Create the table if it doesn't exist.
+		if ( ! $meta->table_exists() ) {
+			$meta->create_table();
+		}
+
 		// Hook for Pro users.
 		do_action( 'wpforms_install' );
 
-		// Set current version, to be referenced in future updates.
+		/*
+		 * Set current version, to be referenced in future updates.
+		 */
+		// Used by Pro migrations.
 		update_option( 'wpforms_version', WPFORMS_VERSION );
+		// Used by Lite migrations.
+		update_option( 'wpforms_version_lite', WPFORMS_VERSION );
 
 		// Store the date when the initial activation was performed.
 		$type      = class_exists( 'WPForms_Lite', false ) ? 'lite' : 'pro';

@@ -16,12 +16,12 @@ use Beehive\Monolog\Logger;
  *
  * @author Christophe Coevoet <stof@notk.org>
  */
-class ChromePHPFormatter implements \Beehive\Monolog\Formatter\FormatterInterface
+class ChromePHPFormatter implements FormatterInterface
 {
     /**
      * Translates Monolog log levels to Wildfire levels.
      */
-    private $logLevels = array(\Beehive\Monolog\Logger::DEBUG => 'log', \Beehive\Monolog\Logger::INFO => 'info', \Beehive\Monolog\Logger::NOTICE => 'info', \Beehive\Monolog\Logger::WARNING => 'warn', \Beehive\Monolog\Logger::ERROR => 'error', \Beehive\Monolog\Logger::CRITICAL => 'error', \Beehive\Monolog\Logger::ALERT => 'error', \Beehive\Monolog\Logger::EMERGENCY => 'error');
+    private $logLevels = array(Logger::DEBUG => 'log', Logger::INFO => 'info', Logger::NOTICE => 'info', Logger::WARNING => 'warn', Logger::ERROR => 'error', Logger::CRITICAL => 'error', Logger::ALERT => 'error', Logger::EMERGENCY => 'error');
     /**
      * {@inheritdoc}
      */

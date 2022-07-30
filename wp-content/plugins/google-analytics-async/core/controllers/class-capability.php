@@ -2,7 +2,7 @@
 /**
  * The capability class of the plugin.
  *
- * @link    http://premium.wpmudev.org
+ * @link    http://wpmudev.com
  * @since   3.2.0
  * @author  Joel James <joel@incsub.com>
  * @package Beehive\Core\Controllers
@@ -276,7 +276,7 @@ class Capability extends Base {
 	/**
 	 * Filter a user's capabilities so they can be altered at runtime.
 	 *
-	 * Forcefully include granted individual users and deny exlcluded individual
+	 * Forcefully include granted individual users and deny excluded individual
 	 * users on run-time.
 	 *
 	 * @param bool[]   $user_caps     Array of key/value pairs where keys represent a capability name and boolean values

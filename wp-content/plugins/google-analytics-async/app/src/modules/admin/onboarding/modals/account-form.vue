@@ -8,13 +8,22 @@
 			:id="modal"
 		>
 			<!-- Show account selection if connected -->
-			<slide-google-account @dismiss="dismiss" v-if="isConnected" />
+			<slide-google-account
+				:can-continue="showAdminTracking"
+				v-if="isConnected"
+				@dismiss="dismiss"
+				@submit="submit"
+			/>
 
 			<!-- Show auth form if not connected yet -->
 			<slide-google-auth @dismiss="dismiss" v-else />
 
 			<!-- Admin tracking settings modal -->
-			<slide-admin-tracking @dismiss="dismiss" @submit="submit" />
+			<slide-admin-tracking
+				v-if="showAdminTracking"
+				@dismiss="dismiss"
+				@submit="submit"
+			/>
 
 			<!-- Finishing modal -->
 			<slide-finishing />
@@ -85,6 +94,21 @@ export default {
 		 */
 		isConnected() {
 			return this.$store.state.helpers.google.logged_in
+		},
+
+		/**
+		 * Check if we can show Admin Tracking option.
+		 *
+		 * @since 3.3.3
+		 *
+		 * @returns {boolean}
+		 */
+		showAdminTracking() {
+			return (
+				!this.isMultisite() ||
+				!this.isNetworkWide() ||
+				(this.isNetworkWide() && this.isNetwork())
+			)
 		},
 	},
 

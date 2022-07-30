@@ -9,6 +9,8 @@
  * @author Joel James <joel@incsub.com>
  */
 
+/* global window, beehiveI18n, beehiveVars, beehiveModuleVars */
+
 ;(function ($) {
 	'use strict'
 
@@ -21,6 +23,7 @@
 		retry: 0, // No. of retries.
 		restUrl: beehiveVars.rest.base, // Rest base URL.
 		restNonce: beehiveVars.rest.nonce, // Rest nonce.
+		statsType: beehiveModuleVars.stats_type, // Stats type (ua ga4).
 		loaderContainer: $('#beehive-popular-widget-loading'), // Content container.
 
 		/**
@@ -65,8 +68,9 @@
 
 			// Only if loader found.
 			if (this.loaderContainer.length > 0 && this.canGetStats) {
+				let restBase = this.restUrl + (this.statsType === 'ua' ? 'v1/' : 'v2/')
 				// Send ajax request.
-				$.get(this.restUrl + 'stats/popular').done(function (response) {
+				$.get(restBase + 'stats/popular').done(function (response) {
 					// If response data is found.
 					if (
 						true === response.success &&
@@ -135,5 +139,5 @@
 	}
 
 	// Initialize the popular posts widget.
-	window.addEventListener('load', () => beehivePopularWidget.load())
+	$(window).on('load', () => beehivePopularWidget.load())
 })(jQuery)

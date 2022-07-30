@@ -11,15 +11,31 @@
  */
 class Shipper_Task_Package_All extends Shipper_Task_Package {
 
-	private $_migration;
+	/**
+	 * Migration model holder.
+	 *
+	 * @var $migration
+	 */
+	private $migration;
 
+	/**
+	 * Get migration
+	 *
+	 * @return \Shipper_Model_Stored_Migration
+	 */
 	public function get_migration() {
-		if ( empty( $this->_migration ) ) {
-			$this->_migration = new Shipper_Model_Stored_Migration;
+		if ( empty( $this->migration ) ) {
+			$this->migration = new Shipper_Model_Stored_Migration();
 		}
-		return $this->_migration;
+
+		return $this->migration;
 	}
 
+	/**
+	 * Get total steps
+	 *
+	 * @return int|void
+	 */
 	public function get_total_steps() {
 		return count( $this->get_tasks() );
 	}
@@ -30,13 +46,13 @@ class Shipper_Task_Package_All extends Shipper_Task_Package {
 	 * @return float
 	 */
 	public function get_status_percentage() {
-		if ( empty( $this->_current_task ) ) {
+		if ( empty( $this->current_task ) ) {
 			return 1;
 		}
 
-		$tasks = $this->get_tasks();
+		$tasks    = $this->get_tasks();
 		$task_pos = array_search(
-			get_class( $this->_current_task ),
+			get_class( $this->current_task ),
 			array_map( 'get_class', array_values( $tasks ) ),
 			true
 		);
@@ -44,14 +60,16 @@ class Shipper_Task_Package_All extends Shipper_Task_Package {
 			return 1;
 		}
 
-		$total = $this->get_total_steps();
+		$total    = $this->get_total_steps();
 		$per_task = 100 / $total;
 
 		$percentage = $task_pos * $per_task;
 
-		if ( $this->_current_task ) {
-			$task_percentage = $this->_current_task->get_status_percentage();
-			if ( $task_percentage < 1 ) { $task_percentage = 1; }
+		if ( $this->current_task ) {
+			$task_percentage = $this->current_task->get_status_percentage();
+			if ( $task_percentage < 1 ) {
+				$task_percentage = 1;
+			}
 			$percentage += $per_task * ( $task_percentage / 100 );
 		}
 
@@ -62,21 +80,28 @@ class Shipper_Task_Package_All extends Shipper_Task_Package {
 		return $percentage;
 	}
 
+	/**
+	 * Apply method
+	 *
+	 * @param array $args array of arguments.
+	 *
+	 * @return bool|mixed
+	 */
 	public function apply( $args = array() ) {
 		if ( $this->is_done() ) {
 			return true;
 		}
 
-		$migration = $this->get_migration();
-
+		$migration  = $this->get_migration();
 		$incomplete = $this->get_incomplete_tasks();
 
 		foreach ( $incomplete as $type => $task ) {
 			$migration->set( 'tasks_completed', false );
-			$this->_current_task = $task;
+			$this->current_task = $task;
 
 			$status = $task->apply();
-			$msg = sprintf(
+			$msg    = sprintf(
+				/* translators: %1$s %2$d %3$d %4$d %5$d: task type, step and total steps. */
 				__( 'Running %1$s task, %2$d of %3$d ( %4$d%% / %5$d%% )', 'shipper' ),
 				$type,
 				$task->get_current_step(),
@@ -113,13 +138,13 @@ class Shipper_Task_Package_All extends Shipper_Task_Package {
 	 */
 	public function get_tasks() {
 		return array(
-			'prepare' => new Shipper_Task_Package_Prepare,
-			'gather' => new Shipper_Task_Package_Gather,
-			'files' => new Shipper_Task_Package_Files,
-			'tables' => new Shipper_Task_Package_Tables,
-			'large' => new Shipper_Task_Package_Large,
-			'meta' => new Shipper_Task_Package_Meta,
-			'cleanup' => new Shipper_Task_Package_Cleanup,
+			'prepare' => new Shipper_Task_Package_Prepare(),
+			'gather'  => new Shipper_Task_Package_Gather(),
+			'files'   => new Shipper_Task_Package_Files(),
+			'wpmudev' => new Shipper_Task_Package_Wpmudev(),
+			'tables'  => new Shipper_Task_Package_Tables(),
+			'meta'    => new Shipper_Task_Package_Meta(),
+			'cleanup' => new Shipper_Task_Package_Cleanup(),
 		);
 	}
 
@@ -132,6 +157,7 @@ class Shipper_Task_Package_All extends Shipper_Task_Package {
 	 */
 	public function is_done() {
 		$incomplete = $this->get_incomplete_tasks();
+
 		return empty( $incomplete );
 	}
 
@@ -144,9 +170,11 @@ class Shipper_Task_Package_All extends Shipper_Task_Package {
 	 */
 	public function get_incomplete_tasks() {
 		$incomplete = array();
-		$done = $this->get_migration()->get( 'done', array() );
+		$done       = $this->get_migration()->get( 'done', array() );
 		foreach ( $this->get_tasks() as $type => $task ) {
-			if ( ! in_array( $type, $done, true ) ) { $incomplete[ $type ] = $task; }
+			if ( ! in_array( $type, $done, true ) ) {
+				$incomplete[ $type ] = $task;
+			}
 		}
 
 		return $incomplete;
@@ -161,16 +189,18 @@ class Shipper_Task_Package_All extends Shipper_Task_Package {
 	 */
 	public function mark_task_done( $type ) {
 		$migration = $this->get_migration();
-		$done = $migration->get( 'done', array() );
-		$done[] = $type;
+		$done      = $migration->get( 'done', array() );
+		$done[]    = $type;
 		$migration->set( 'done', array_unique( $done ) );
 		$migration->save();
+
 		return true;
 	}
 
 	/**
 	 * Marks all tasks in this migration as completed
 	 *
+	 * @param object $migration migration model instance.
 	 * @return bool
 	 */
 	public function mark_all_tasks_done( $migration ) {
@@ -178,6 +208,7 @@ class Shipper_Task_Package_All extends Shipper_Task_Package {
 		$migration->set( 'done', array_keys( $this->get_tasks() ) );
 		$migration->set( 'tasks_completed', true );
 		$migration->save();
+
 		return true;
 	}
 }

@@ -31,7 +31,22 @@ class Shipper_Controller_Heartbeat_Preflight extends Shipper_Controller_Heartbea
 			return $response;
 		}
 
-		$preflight = Shipper_Controller_Runner_Preflight::get()->get_status();
+		$ping           = new Shipper_Model_Stored_Ping();
+		$preflight_ctrl = Shipper_Controller_Runner_Preflight::get();
+		$is_stuck       = false;
+
+		if ( $ping->maybe_show_package_migration_notice() ) {
+			/**
+			 * Seems like it's stuck. So try to cancel the preflight check and show an error notice.
+			 *
+			 * @since 1.2.6
+			 */
+			$is_stuck = true;
+			$preflight_ctrl->attempt_cancel();
+			$preflight_ctrl->clear();
+		}
+
+		$preflight = $preflight_ctrl->get_status();
 		if ( ! $preflight->get( Shipper_Model_Stored_Preflight::KEY_DONE ) ) {
 			$this->check_locks();
 			$data = $preflight->get_data();
@@ -54,7 +69,7 @@ class Shipper_Controller_Heartbeat_Preflight extends Shipper_Controller_Heartbea
 			),
 		);
 
-		$migration = new Shipper_Model_Stored_Migration;
+		$migration = new Shipper_Model_Stored_Migration();
 		if ( Shipper_Model_Stored_Migration::TYPE_IMPORT === $migration->get_type() ) {
 			$checks = $preflight->get_check( Shipper_Model_Stored_Preflight::KEY_CHECKS_RPKG );
 		} else {
@@ -69,14 +84,20 @@ class Shipper_Controller_Heartbeat_Preflight extends Shipper_Controller_Heartbea
 		$response['shipper-preflight']  = array(
 			'is_done'  => $all_done,
 			'sections' => $sections,
+			'is_stuck' => $is_stuck,
 		);
 		$response['heartbeat_interval'] = Shipper_Helper_Assets::get_update_interval();
 
 		if ( $all_done ) {
-			//we need to reset the db prefix
-			$model = new Shipper_Model_Stored_Dbprefix();
-			$model->clear();
-			$model->save();
+
+			/**
+			 * Fire an action when preflight checking is done.
+			 *
+			 * @since 1.2
+			 *
+			 * @uses Shipper_Model_Stored_Migration
+			 */
+			do_action( 'shipper_preflight_checking_done' );
 		}
 
 		return $response;
@@ -90,7 +111,7 @@ class Shipper_Controller_Heartbeat_Preflight extends Shipper_Controller_Heartbea
 	 * @since v1.0.3
 	 */
 	public function check_locks() {
-		$locks   = new Shipper_Helper_Locks;
+		$locks   = new Shipper_Helper_Locks();
 		$ctrl    = Shipper_Controller_Runner_Preflight::get();
 		$process = $ctrl->get_process_lock();
 

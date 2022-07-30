@@ -4,19 +4,19 @@
 
 		$(document).ready(function () {
 			if ('#wps-backups-settings-schedule' === window.location.hash) {
-				$('[for="wps-managed-backups-configs"]').click();
+				$('[for="wps-managed-backups-configs"]').trigger('click');
 			}
 		});
 
 		$("#wps-managed-backups-configure").on("click", function (e) {
 			e.preventDefault();
-			$("[for='wps-managed-backups-menu-config']").click();
+			$("[for='wps-managed-backups-menu-config']").trigger('click');
 			$('html,body').animate({
 				scrollTop: $(".wps-managed-backups-configs").offset().top
 			}, 'slow');
 		});
 
-		jQuery("input[name='frequency']").change(function () {
+		jQuery("input[name='frequency']").on('change', function () {
 			var backup_frequency_options = jQuery("input[name='frequency']:checked").val();
 			if ((backup_frequency_options === "once")) {
 				jQuery('div#snapshot-schedule-options-container').slideUp('fast');
@@ -25,7 +25,7 @@
 				jQuery('div#snapshot-schedule-options-container').slideDown('slow');
 				jQuery('#snapshot-backup-action').attr('name', 'snapshot-schedule');
 			}
-		}).change();
+		}).trigger('change');
 
 		jQuery('#checkbox-run-backup-now').on('change', function (e) {
 			var run_now = $(this).is(':checked');
@@ -562,10 +562,10 @@
 						$(".snapshot-settings.log-levels")
 							.hide()
 							.find('input[type="radio"]')
-							.attr("checked", false)
+							.prop("checked", false)
 							.end()
 							.find('input[type="radio"][value="' + dflt + '"]')
-							.attr("checked", true)
+							.prop("checked", true)
 						;
 					}
 				},

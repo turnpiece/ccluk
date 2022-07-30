@@ -16,7 +16,7 @@ use Beehive\Monolog\Logger;
  *
  * @author Adam Nicholson <adamnicholson10@gmail.com>
  */
-class MandrillHandler extends \Beehive\Monolog\Handler\MailHandler
+class MandrillHandler extends MailHandler
 {
     protected $message;
     protected $apiKey;
@@ -26,7 +26,7 @@ class MandrillHandler extends \Beehive\Monolog\Handler\MailHandler
      * @param int                     $level   The minimum logging level at which this handler will be triggered
      * @param bool                    $bubble  Whether the messages that are handled can bubble up the stack or not
      */
-    public function __construct($apiKey, $message, $level = \Beehive\Monolog\Logger::ERROR, $bubble = \true)
+    public function __construct($apiKey, $message, $level = Logger::ERROR, $bubble = \true)
     {
         parent::__construct($level, $bubble);
         if (!$message instanceof \Beehive\Swift_Message && \is_callable($message)) {
@@ -45,12 +45,16 @@ class MandrillHandler extends \Beehive\Monolog\Handler\MailHandler
     {
         $message = clone $this->message;
         $message->setBody($content);
-        $message->setDate(\time());
+        if (\version_compare(\Beehive\Swift::VERSION, '6.0.0', '>=')) {
+            $message->setDate(new \DateTimeImmutable());
+        } else {
+            $message->setDate(\time());
+        }
         $ch = \curl_init();
         \curl_setopt($ch, \CURLOPT_URL, 'https://mandrillapp.com/api/1.0/messages/send-raw.json');
         \curl_setopt($ch, \CURLOPT_POST, 1);
         \curl_setopt($ch, \CURLOPT_RETURNTRANSFER, 1);
         \curl_setopt($ch, \CURLOPT_POSTFIELDS, \http_build_query(array('key' => $this->apiKey, 'raw_message' => (string) $message, 'async' => \false)));
-        \Beehive\Monolog\Handler\Curl\Util::execute($ch);
+        Curl\Util::execute($ch);
     }
 }

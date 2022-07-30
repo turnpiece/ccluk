@@ -22,7 +22,7 @@ class Shipper_Helper_Timer_Persistent extends Shipper_Helper_Timer {
 	 * @return array
 	 */
 	public function get_timer( $timer ) {
-		$model = new Shipper_Model_Stored_Timer;
+		$model = new Shipper_Model_Stored_Timer();
 		return $model->get( $timer, array() );
 	}
 
@@ -33,7 +33,7 @@ class Shipper_Helper_Timer_Persistent extends Shipper_Helper_Timer {
 	 * @param array  $data Timer data - an array with start and optional end keys.
 	 */
 	public function set_timer( $timer, $data ) {
-		$model = new Shipper_Model_Stored_Timer;
+		$model = new Shipper_Model_Stored_Timer();
 		$model->set( $timer, $data )->save();
 	}
 
@@ -43,7 +43,7 @@ class Shipper_Helper_Timer_Persistent extends Shipper_Helper_Timer {
 	 * @param string $timer Timer ID.
 	 */
 	public function reset( $timer ) {
-		$model = new Shipper_Model_Stored_Timer;
+		$model = new Shipper_Model_Stored_Timer();
 		$model->set( $timer, array() )->save();
 	}
 
@@ -51,7 +51,7 @@ class Shipper_Helper_Timer_Persistent extends Shipper_Helper_Timer {
 	 * Reset all timers
 	 */
 	public function reset_all() {
-		$model = new Shipper_Model_Stored_Timer;
+		$model = new Shipper_Model_Stored_Timer();
 		$model->clear()->save();
 	}
 
@@ -61,7 +61,7 @@ class Shipper_Helper_Timer_Persistent extends Shipper_Helper_Timer {
 	 * @return array A list of timer hashes.
 	 */
 	public function get_all() {
-		$model = new Shipper_Model_Stored_Timer;
+		$model = new Shipper_Model_Stored_Timer();
 		return $model->get_data();
 	}
 

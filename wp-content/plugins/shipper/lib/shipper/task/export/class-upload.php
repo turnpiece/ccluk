@@ -21,17 +21,17 @@ class Shipper_Task_Export_Upload extends Shipper_Task_Export {
 	 * @return bool
 	 */
 	public function apply( $args = array() ) {
-		$this->_has_done_anything = true;
+		$this->has_done_anything = true;
 
-		$remote = new Shipper_Helper_Fs_Remote;
-		$dumped = new Shipper_Model_Dumped_Filelist;
+		$remote = new Shipper_Helper_Fs_Remote();
+		$dumped = new Shipper_Model_Dumped_Filelist();
 
-		$pos = $this->get_initialized_position();
+		$pos         = $this->get_initialized_position();
 		$shipper_pos = $pos;
 
 		$is_done = true;
 
-		$migration = new Shipper_Model_Stored_Migration;
+		$migration = new Shipper_Model_Stored_Migration();
 		$dest_root = Shipper_Helper_Fs_Path::clean_fname( $migration->get_destination() );
 
 		$batch = array();
@@ -49,10 +49,10 @@ class Shipper_Task_Export_Upload extends Shipper_Task_Export {
 			'shipper_export_max_upload_statements',
 			100
 		);
-		$statements = $dumped->get_statements( $pos, $max_statements );
+		$statements     = $dumped->get_statements( $pos, $max_statements );
 		foreach ( $statements as $data ) {
 			$destination = trailingslashit( $dest_root ) . $data['destination'];
-			$cmd = $remote->get_upload_command( $data['source'], $destination );
+			$cmd         = $remote->get_upload_command( $data['source'], $destination );
 			if ( ! empty( $cmd ) ) {
 				// Only add to batch if we were able to create the upload command.
 				$batch[] = $cmd;
@@ -69,7 +69,7 @@ class Shipper_Task_Export_Upload extends Shipper_Task_Export {
 		}
 		$batch = null;
 
-		$is_done = empty( $statements );
+		$is_done     = empty( $statements );
 		$shipper_pos = $is_done
 			? 0
 			: $shipper_pos + count( $statements );
@@ -128,9 +128,16 @@ class Shipper_Task_Export_Upload extends Shipper_Task_Export {
 		return 'cloud';
 	}
 
+	/**
+	 * Get initialized position
+	 *
+	 * @param false $filelist list of files.
+	 *
+	 * @return false|int|mixed
+	 */
 	public function get_initialized_position( $filelist = false ) {
 		if ( empty( $filelist ) ) {
-			$filelist = new Shipper_Model_Stored_Filelist;
+			$filelist = new Shipper_Model_Stored_Filelist();
 		}
 
 		$pos = $filelist->get( Shipper_Model_Stored_Filelist::KEY_CURSOR, false );
@@ -143,13 +150,22 @@ class Shipper_Task_Export_Upload extends Shipper_Task_Export {
 		return $pos;
 	}
 
+	/**
+	 * Set initialized position
+	 *
+	 * @param int   $position file cursor position.
+	 * @param false $filelist list of files.
+	 *
+	 * @return bool
+	 */
 	public function set_initialized_position( $position, $filelist = false ) {
 		if ( empty( $filelist ) ) {
-			$filelist = new Shipper_Model_Stored_Filelist;
+			$filelist = new Shipper_Model_Stored_Filelist();
 		}
 
 		$newpos = $filelist->get( Shipper_Model_Stored_Filelist::KEY_CURSOR, false );
-		if ( false === $newpos ) { return false; }
+		if ( false === $newpos ) {
+			return false; }
 
 		$filelist->set( Shipper_Model_Stored_Filelist::KEY_CURSOR, $position );
 		$filelist->save();
@@ -157,9 +173,16 @@ class Shipper_Task_Export_Upload extends Shipper_Task_Export {
 		return true;
 	}
 
+	/**
+	 * Get total files
+	 *
+	 * @param false $dumped list of total files.
+	 *
+	 * @return int
+	 */
 	public function get_total_files( $dumped = false ) {
 		if ( empty( $dumped ) ) {
-			$dumped = new Shipper_Model_Dumped_Filelist;
+			$dumped = new Shipper_Model_Dumped_Filelist();
 		}
 		return $dumped->get_statements_count();
 	}
@@ -174,10 +197,13 @@ class Shipper_Task_Export_Upload extends Shipper_Task_Export {
 		$pos = ( empty( $this->get_initialized_position() ) && $this->has_done_anything() ) ? $this->get_total_files() : $this->get_initialized_position();
 
 		$desc = sprintf(
+			/* translators: %1$d %2$d: position and total file count. */
 			__( '( %1$d of %2$d total )', 'shipper' ),
-			$pos, $this->get_total_files()
+			$pos,
+			$this->get_total_files()
 		);
 		return sprintf(
+			/* translators: %s: gathered files. */
 			__( 'Upload gathered files %s', 'shipper' ),
 			$desc
 		);

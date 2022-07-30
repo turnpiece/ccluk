@@ -2,7 +2,7 @@
 /**
  * The stats view functionality for the analytics
  *
- * @link    http://premium.wpmudev.org
+ * @link    http://wpmudev.com
  * @since   3.2.0
  *
  * @author  Joel James <joel@incsub.com>
@@ -17,6 +17,7 @@ defined( 'WPINC' ) || die;
 use Beehive\Core\Helpers;
 use Beehive\Core\Controllers\Assets;
 use Beehive\Core\Utils\Abstracts\View;
+use Beehive\Core\Controllers\Capability;
 use Beehive\Core\Modules\Google_Analytics;
 
 /**
@@ -34,17 +35,17 @@ class Stats extends View {
 	 * @return void
 	 */
 	public function init() {
-		// Setup vars for the all stats page.
-		add_filter( 'beehive_google_stats_page_localize_vars', array( $this, 'all_stats_vars' ) );
-
 		// Common vars.
 		add_filter( 'beehive_assets_scripts_common_localize_vars', array( $this, 'common_vars' ) );
 
 		// Setup vars for the scripts.
 		add_filter( 'beehive_assets_scripts_localize_vars_beehive-post-statistics', array( $this, 'post_vars' ) );
 		add_filter( 'beehive_assets_scripts_localize_vars_beehive-post-statistics', array( $this, 'stats_vars' ) );
-		add_filter( 'beehive_assets_scripts_localize_vars_beehive-statistics-page', array( $this, 'stats_vars' ) );
 		add_filter( 'beehive_assets_scripts_localize_vars_beehive-dashboard-widget', array( $this, 'stats_vars' ) );
+		add_filter( 'beehive_assets_scripts_localize_vars_beehive-dashboard-widget', array( $this, 'admin_vars' ) );
+		add_filter( 'beehive_assets_scripts_localize_vars_beehive-statistics-page', array( $this, 'stats_vars' ) );
+		add_filter( 'beehive_assets_scripts_localize_vars_beehive-ga-admin', array( $this, 'stats_vars' ) );
+		add_filter( 'beehive_assets_scripts_localize_vars_beehive-ga-admin', array( $this, 'admin_vars' ) );
 		add_filter( 'beehive_assets_scripts_localize_vars_beehive-dashboard', array( $this, 'stats_vars' ) );
 	}
 
@@ -111,7 +112,7 @@ class Stats extends View {
 	/**
 	 * Render stats page content for the dashboard.
 	 *
-	 * @since 3.2.0
+	 * @since 3.2.7
 	 *
 	 * @return void
 	 */
@@ -131,11 +132,11 @@ class Stats extends View {
 	 * @return void
 	 */
 	public function settings_page() {
-		echo '<div id="beehive-ga-settings-app"></div>';
+		echo '<div id="beehive-ga-admin-app"></div>';
 
 		// Enqueue assets.
-		Assets::instance()->enqueue_style( 'beehive-ga-settings' );
-		Assets::instance()->enqueue_script( 'beehive-ga-settings' );
+		Assets::instance()->enqueue_style( 'beehive-ga-admin' );
+		Assets::instance()->enqueue_script( 'beehive-ga-admin' );
 	}
 
 	/**
@@ -176,6 +177,28 @@ class Stats extends View {
 	public function stats_vars( $vars ) {
 		$vars['can_get_stats']     = Google_Analytics\Helper::instance()->can_get_stats( $this->is_network() );
 		$vars['stats_permissions'] = $this->stats_permissions();
+		$vars['stats_types']       = array(
+			'ga4' => __( 'Google Analytics 4', 'ga_trans' ),
+			'ua'  => __( 'Universal Analytics', 'ga_trans' ),
+		);
+
+		return $vars;
+	}
+
+	/**
+	 * Setup script vars for GA admin page.
+	 *
+	 * @param array $vars Localized vars.
+	 *
+	 * @since 3.3.5
+	 *
+	 * @return array
+	 */
+	public function admin_vars( $vars ) {
+		$vars['show_statistics'] = (int) Google_Analytics\Admin::instance()->show_statistics_tab();
+		$vars['show_settings']   = (int) current_user_can( Capability::SETTINGS_CAP );
+		$vars['roles']           = Helpers\Permission::get_roles( true, Helpers\General::is_networkwide() );
+		$vars['post_types']      = $this->get_post_types();
 
 		return $vars;
 	}
@@ -359,5 +382,47 @@ class Stats extends View {
 		);
 
 		return $items;
+	}
+
+	/**
+	 * Get available post types data.
+	 *
+	 * @since 3.3.6
+	 *
+	 * @return array
+	 */
+	private function get_post_types() {
+		$data = array();
+
+		// Get available post types.
+		$post_types = get_post_types(
+			array(
+				'public'  => true,
+				'show_ui' => true,
+			),
+			'objects'
+		);
+
+		// Get post type and label.
+		if ( ! empty( $post_types ) ) {
+			// Post types to exclude.
+			$exclude = array( 'attachment' );
+
+			foreach ( $post_types as $post_type ) {
+				// Get name and label.
+				if ( ! in_array( $post_type->name, $exclude, true ) ) {
+					$data[ $post_type->name ] = empty( $post_type->label ) ? $post_type->name : $post_type->label;
+				}
+			}
+		}
+
+		/**
+		 * Filter to add or remove post types.
+		 *
+		 * @param array $data Post types array.
+		 *
+		 * @since 3.3.6
+		 */
+		return apply_filters( 'beehive_get_post_types', $data );
 	}
 }

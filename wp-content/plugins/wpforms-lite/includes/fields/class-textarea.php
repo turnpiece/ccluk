@@ -23,6 +23,35 @@ class WPForms_Field_Textarea extends WPForms_Field {
 	}
 
 	/**
+	 * Get the value, that is used to prefill via dynamic or fallback population.
+	 * Based on field data and current properties.
+	 *
+	 * @since 1.6.4
+	 *
+	 * @param string $raw_value  Value from a GET param, always a string.
+	 * @param string $input      Represent a subfield inside the field. May be empty.
+	 * @param array  $properties Field properties.
+	 * @param array  $field      Current field specific data.
+	 *
+	 * @return array Modified field properties.
+	 */
+	protected function get_field_populated_single_property_value( $raw_value, $input, $properties, $field ) {
+
+		if ( ! is_string( $raw_value ) ) {
+			return $properties;
+		}
+
+		if (
+			! empty( $input ) &&
+			isset( $properties['inputs'][ $input ] )
+		) {
+			$properties['inputs'][ $input ]['attr']['value'] = wpforms_sanitize_textarea_field( wp_unslash( $raw_value ) );
+		}
+
+		return $properties;
+	}
+
+	/**
 	 * Field options panel inside the builder.
 	 *
 	 * @since 1.0.0
@@ -77,14 +106,11 @@ class WPForms_Field_Textarea extends WPForms_Field {
 		// Placeholder.
 		$this->field_option( 'placeholder', $field );
 
-		// Hide label.
-		$this->field_option( 'label_hide', $field );
-
 		// Limit length.
 		$args = array(
 			'slug'    => 'limit_enabled',
 			'content' => $this->field_element(
-				'checkbox',
+				'toggle',
 				$field,
 				array(
 					'slug'    => 'limit_enabled',
@@ -139,13 +165,16 @@ class WPForms_Field_Textarea extends WPForms_Field {
 		// Custom CSS classes.
 		$this->field_option( 'css', $field );
 
+		// Hide label.
+		$this->field_option( 'label_hide', $field );
+
 		// Options close markup.
 		$this->field_option(
 			'advanced-options',
 			$field,
-			array(
+			[
 				'markup' => 'close',
-			)
+			]
 		);
 	}
 
@@ -162,9 +191,10 @@ class WPForms_Field_Textarea extends WPForms_Field {
 		$this->field_preview_option( 'label', $field );
 
 		// Primary input.
-		$placeholder = ! empty( $field['placeholder'] ) ? $field['placeholder'] : '';
+		$placeholder   = ! empty( $field['placeholder'] ) ? $field['placeholder'] : '';
+		$default_value = ! empty( $field['default_value'] ) ? $field['default_value'] : '';
 
-		echo '<textarea placeholder="' . esc_attr( $placeholder ) . '" class="primary-input" disabled></textarea>';
+		echo '<textarea placeholder="' . esc_attr( $placeholder ) . '" class="primary-input" readonly>' . wpforms_sanitize_textarea_field( $default_value ) . '</textarea>';
 
 		// Description.
 		$this->field_preview_option( 'description', $field );
@@ -185,7 +215,7 @@ class WPForms_Field_Textarea extends WPForms_Field {
 		$primary = $field['properties']['inputs']['primary'];
 		$value   = '';
 
-		if ( ! empty( $primary['attr']['value'] ) ) {
+		if ( isset( $primary['attr']['value'] ) ) {
 			$value = wpforms_sanitize_textarea_field( $primary['attr']['value'] );
 			unset( $primary['attr']['value'] );
 		}
@@ -269,35 +299,13 @@ class WPForms_Field_Textarea extends WPForms_Field {
 
 		$field = $form_data['fields'][ $field_id ];
 		if ( is_array( $field_submit ) ) {
-			$field_submit = array_filter( $field_submit );
-			$field_submit = implode( "\r\n", $field_submit );
+			$field_submit = implode( "\r\n", array_filter( $field_submit ) );
 		}
 
 		$name = ! empty( $field['label'] ) ? sanitize_text_field( $field['label'] ) : '';
 
 		// Sanitize but keep line breaks.
 		$value = wpforms_sanitize_textarea_field( $field_submit );
-
-		if ( isset( $field['limit_enabled'] ) ) {
-			$limit = absint( $field['limit_count'] );
-			$mode  = sanitize_key( $field['limit_mode'] );
-
-			if ( 'characters' === $mode ) {
-				if ( mb_strlen( str_replace( "\r\n", "\n", $value ) ) > $limit ) {
-					/* translators: %s - limit characters number. */
-					wpforms()->process->errors[ $form_data['id'] ][ $field_id ] = sprintf( _n( 'Text can\'t exceed %d character.', 'Text can\'t exceed %d characters.', $limit, 'wpforms-lite' ), $limit );
-					return;
-				}
-			} else {
-				$words = preg_split( '/[\s,]+/', $value );
-				$words = is_array( $words ) ? count( $words ) : 0;
-				if ( $words > $limit ) {
-					/* translators: %s - limit words number. */
-					wpforms()->process->errors[ $form_data['id'] ][ $field_id ] = sprintf( _n( 'Text can\'t exceed %d word.', 'Text can\'t exceed %d words.', $limit, 'wpforms-lite' ), $limit );
-					return;
-				}
-			}
-		}
 
 		wpforms()->process->fields[ $field_id ] = array(
 			'name'  => $name,
@@ -307,6 +315,46 @@ class WPForms_Field_Textarea extends WPForms_Field {
 		);
 	}
 
+	/**
+	 * Validate field on form submit.
+	 *
+	 * @since 1.6.2
+	 *
+	 * @param int   $field_id     Field ID.
+	 * @param mixed $field_submit Field value that was submitted.
+	 * @param array $form_data    Form data and settings.
+	 */
+	public function validate( $field_id, $field_submit, $form_data ) {
+
+		parent::validate( $field_id, $field_submit, $form_data );
+
+		if ( empty( $form_data['fields'][ $field_id ] ) || empty( $form_data['fields'][ $field_id ]['limit_enabled'] ) ) {
+			return;
+		}
+
+		if ( is_array( $field_submit ) ) {
+			$field_submit = implode( "\r\n", array_filter( $field_submit ) );
+		}
+
+		$field = $form_data['fields'][ $field_id ];
+		$limit = absint( $field['limit_count'] );
+		$mode  = ! empty( $field['limit_mode'] ) ? sanitize_key( $field['limit_mode'] ) : 'characters';
+		$value = wpforms_sanitize_textarea_field( $field_submit );
+
+		if ( 'characters' === $mode ) {
+			if ( mb_strlen( str_replace( "\r\n", "\n", $value ) ) > $limit ) {
+				/* translators: %s - limit characters number. */
+				wpforms()->process->errors[ $form_data['id'] ][ $field_id ] = sprintf( _n( 'Text can\'t exceed %d character.', 'Text can\'t exceed %d characters.', $limit, 'wpforms-lite' ), $limit );
+				return;
+			}
+		} else {
+			if ( wpforms_count_words( $value ) > $limit ) {
+				/* translators: %s - limit words number. */
+				wpforms()->process->errors[ $form_data['id'] ][ $field_id ] = sprintf( _n( 'Text can\'t exceed %d word.', 'Text can\'t exceed %d words.', $limit, 'wpforms-lite' ), $limit );
+				return;
+			}
+		}
+	}
 }
 
 new WPForms_Field_Textarea();

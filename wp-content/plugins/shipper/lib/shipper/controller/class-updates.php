@@ -19,7 +19,7 @@ class Shipper_Controller_Updates extends Shipper_Controller {
 	 *
 	 * @var string
 	 */
-	private $_updater_task_class_name;
+	private $updater_task_class_name;
 
 	/**
 	 * Overridden data_model class name
@@ -28,7 +28,7 @@ class Shipper_Controller_Updates extends Shipper_Controller {
 	 *
 	 * @var string
 	 */
-	private $_data_model_class_name;
+	private $data_model_class_name;
 
 	/**
 	 * Boot event listeners
@@ -37,7 +37,8 @@ class Shipper_Controller_Updates extends Shipper_Controller {
 		add_action(
 			'shipper_migration_tick',
 			array( $this, 'send_updates_tick' ),
-			10, 2
+			10,
+			2
 		);
 		add_action(
 			'shipper_migration_complete',
@@ -66,7 +67,8 @@ class Shipper_Controller_Updates extends Shipper_Controller {
 		 */
 		$do_update = apply_filters(
 			'shipper_migration_api_status_update',
-			true, $task
+			true,
+			$task
 		);
 		if ( empty( $do_update ) ) {
 			return false;
@@ -88,7 +90,7 @@ class Shipper_Controller_Updates extends Shipper_Controller {
 
 		if ( $status ) {
 			$cname = $this->get_data_model_class_name();
-			$model = new $cname;
+			$model = new $cname();
 			$model
 				->set(
 					Shipper_Model_Stored_Updates::KEY_PERCENT,
@@ -119,14 +121,16 @@ class Shipper_Controller_Updates extends Shipper_Controller {
 		}
 
 		$task = Shipper_Model_Stored_Migration::TYPE_EXPORT === $migration->get_type()
-			? new Shipper_Task_Export_All
-			: new Shipper_Task_Import_All;
+			? new Shipper_Task_Export_All()
+			: new Shipper_Task_Import_All();
 
 		$status = $this->send_update(
-			$migration, 100, $this->get_updater_file_name( $migration, $task )
+			$migration,
+			100,
+			$this->get_updater_file_name( $migration, $task )
 		);
 		$cname  = $this->get_data_model_class_name();
-		$model  = new $cname;
+		$model  = new $cname();
 		$model->clear()->save();
 
 		return $status;
@@ -141,10 +145,12 @@ class Shipper_Controller_Updates extends Shipper_Controller {
 	 */
 	public function send_updates_cancel( $migration ) {
 		$status = $this->send_update(
-			$migration, 0, ''
+			$migration,
+			0,
+			''
 		);
 		$cname  = $this->get_data_model_class_name();
-		$model  = new $cname;
+		$model  = new $cname();
 		$model->clear()->save();
 
 		return $status;
@@ -164,7 +170,7 @@ class Shipper_Controller_Updates extends Shipper_Controller {
 
 		$rounded = $this->get_rounded_percentage( $percentage );
 		$cname   = $this->get_data_model_class_name();
-		$model   = new $cname;
+		$model   = new $cname();
 		if ( $model->is_expired() ) {
 			$model->clear()->save();
 		}
@@ -193,7 +199,7 @@ class Shipper_Controller_Updates extends Shipper_Controller {
 	 */
 	public function set_updater_task_class_name( $cname ) {
 		if ( class_exists( $cname ) ) {
-			$this->_updater_task_class_name = $cname;
+			$this->updater_task_class_name = $cname;
 		}
 	}
 
@@ -204,8 +210,8 @@ class Shipper_Controller_Updates extends Shipper_Controller {
 	 */
 	public function get_updater_task_class_name() {
 		$cname = 'Shipper_Task_Api_Migrations_Set';
-		if ( $this->_updater_task_class_name && class_exists( $this->_data_model_class_name ) ) {
-			$cname = $this->_updater_task_class_name;
+		if ( $this->updater_task_class_name && class_exists( $this->data_model_class_name ) ) {
+			$cname = $this->updater_task_class_name;
 		}
 
 		return $cname;
@@ -220,7 +226,7 @@ class Shipper_Controller_Updates extends Shipper_Controller {
 	 */
 	public function set_data_model_class_name( $cname ) {
 		if ( class_exists( $cname ) ) {
-			$this->_data_model_class_name = $cname;
+			$this->data_model_class_name = $cname;
 		}
 	}
 
@@ -231,8 +237,8 @@ class Shipper_Controller_Updates extends Shipper_Controller {
 	 */
 	public function get_data_model_class_name() {
 		$cname = 'Shipper_Model_Stored_Updates';
-		if ( $this->_data_model_class_name && class_exists( $this->_data_model_class_name ) ) {
-			$cname = $this->_data_model_class_name;
+		if ( $this->data_model_class_name && class_exists( $this->data_model_class_name ) ) {
+			$cname = $this->data_model_class_name;
 		}
 
 		return $cname;
@@ -242,21 +248,22 @@ class Shipper_Controller_Updates extends Shipper_Controller {
 	 * Actually sends out an update
 	 *
 	 * @param object $migration Migration model instance.
-	 * @param int $status Status update.
+	 * @param int    $status Status update.
 	 * @param string $filename Filename.
 	 *
 	 * @return bool
 	 */
 	public function send_update( $migration, $status, $filename ) {
 		$cname  = $this->get_updater_task_class_name();
-		$task   = new $cname;
-		$status = $task->apply( array(
-			'domain' => $migration->get_source(),
-			'status' => $status,
-			'type'   => $migration->get_type(),
-			'file'   => $filename,
-		) );
-
+		$task   = new $cname();
+		$status = $task->apply(
+			array(
+				'domain' => $migration->get_source(),
+				'status' => $status,
+				'type'   => $migration->get_type(),
+				'file'   => $filename,
+			)
+		);
 
 		if ( $task->has_errors() ) {
 			foreach ( $task->get_errors() as $err ) {

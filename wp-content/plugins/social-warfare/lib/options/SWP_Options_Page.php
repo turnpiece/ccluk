@@ -1,4 +1,5 @@
 <?php
+
 /**
 * The core Social Warfare admin settings page.
 *
@@ -20,6 +21,8 @@
 *
 */
 class SWP_Options_Page extends SWP_Option_Abstract {
+
+
 	/**
 	* The Options Page Tabs
 	*
@@ -152,7 +155,17 @@ class SWP_Options_Page extends SWP_Option_Abstract {
 			'manage_options',
 			'social-warfare',
 			array( $this, 'render_HTML'),
-			SWP_PLUGIN_URL . '/assets/images/admin-options-page/socialwarfare-20x20.png'
+			'none'
+		);
+
+		add_submenu_page(
+			'social-warfare',
+			'Social Warfare Settings',
+			'Settings',
+			'manage_options',
+			'social-warfare',
+			array( $this, 'render_HTML'),
+			1
 		);
 
 		// Hook into the CSS and Javascript Enqueue process for this specific page
@@ -534,8 +547,6 @@ class SWP_Options_Page extends SWP_Option_Abstract {
 
 			$button_position->add_option( $button_position_table );
 
-
-
 		$display->add_sections( [$social_networks, $share_counts, $button_position] );
 
 		$this->tabs->display = $display;
@@ -594,7 +605,7 @@ class SWP_Options_Page extends SWP_Option_Abstract {
 			$access_token = $instance->get_access_token();
 
 			// No access tokens exists for this network.
-			if ( false == $access_token ) {
+			if ( false === $instance->has_valid_token() ) {
 				$link = $instance->get_authorization_link();
 				$display_text = $instance->get_auth_button_text();
 				$classname = "swp-button swp-{$network_key} swp-authorization-button";

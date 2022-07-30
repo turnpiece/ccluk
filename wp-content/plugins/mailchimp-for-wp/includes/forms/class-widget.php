@@ -51,7 +51,7 @@ class MC4WP_Form_Widget extends WP_Widget {
 		}
 
 		$instance_settings = array_merge( $this->default_instance_settings, $instance_settings );
-		$title             = apply_filters( 'widget_title', $instance_settings['title'] );
+		$title             = apply_filters( 'widget_title', $instance_settings['title'], $instance_settings, $this->id_base );
 
 		echo $args['before_widget'];
 
@@ -92,7 +92,7 @@ class MC4WP_Form_Widget extends WP_Widget {
 		do_action( 'mc4wp_form_widget_form', $settings, $this );
 		?>
 
-		<p class="help">
+		<p class="description">
 			<?php printf( __( 'You can edit your sign-up form in the <a href="%s">Mailchimp for WordPress form settings</a>.', 'mailchimp-for-wp' ), admin_url( 'admin.php?page=mailchimp-for-wp-forms' ) ); ?>
 		</p>
 		<?php

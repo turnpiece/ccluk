@@ -61,6 +61,14 @@ class Ai1wm_Status {
 		self::log( array( 'type' => 'progress', 'percent' => $percent ) );
 	}
 
+	public static function backup_is_encrypted( $error ) {
+		self::log( array( 'type' => 'backup_is_encrypted', 'error' => $error ) );
+	}
+
+	public static function server_cannot_decrypt( $message ) {
+		self::log( array( 'type' => 'server_cannot_decrypt', 'message' => $message ) );
+	}
+
 	public static function log( $data ) {
 		if ( ! ai1wm_is_scheduled_backup() ) {
 			update_option( AI1WM_STATUS, $data );

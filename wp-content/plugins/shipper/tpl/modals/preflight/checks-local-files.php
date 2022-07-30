@@ -6,19 +6,26 @@
  * @package shipper
  */
 
-$checks = $result['checks']['files'];
+$checks     = $result['checks']['files'];
 $has_issues = (bool) $checks['errors_count'];
 ?>
 
 <div class="sui-accordion sui-accordion-block" data-section="files">
 
-	<?php foreach ( $checks['checks'] as $check_type => $check ) { ?>
-		<?php if ( 'ok' === $check['status'] && 'package_size' !== $check['check_type']) { continue; } ?>
-		<?php if ( 'is_done' === $check_type ) { continue; } ?>
-		<?php
-			$check_id = ! empty( $check['check_id'] )
-				? $check['check_id']
-				: ( ! empty( $check['title'] ) ? md5( $check['title'] ) : '' );
+	<?php
+	foreach ( $checks['checks'] as $check_type => $check ) {
+		if ( isset( $check['status'] ) && 'ok' === $check['status'] && 'package_size' !== $check['check_type'] ) {
+			continue;
+		}
+
+		if ( 'is_done' === $check_type ) {
+			continue;
+		}
+
+
+		$check_id = ! empty( $check['check_id'] )
+			? $check['check_id']
+			: ( ! empty( $check['title'] ) ? md5( $check['title'] ) : '' );
 		?>
 		<div class="sui-accordion-item shipper-<?php echo esc_attr( $check['check_type'] ); ?>" data-check_item="<?php echo esc_attr( $check_id ); ?>">
 			<div class="sui-accordion-item-header">
@@ -33,19 +40,22 @@ $has_issues = (bool) $checks['errors_count'];
 				</div>
 				<div class="shipper-check-status">
 					<?php
-						$content = ! empty( $check['count'] )
-							? $check['count']
-							: 0;
-						$type = $content > 0 ? 'warning' : 'success';
-						if ( 'package_size' === $check['check_type'] ) {
-							$estimate = new Shipper_Model_Stored_Estimate;
-							$content = size_format( $estimate->get( 'package_size' ) );
-							$type = 'ok' === $check['status'] ? 'success' : 'warning';
-						}
-						$this->render(
-							'tags/status-text',
-							array( 'status' => $type, 'text' => $content )
-						);
+					$content = ! empty( $check['count'] ) ? $check['count'] : 0;
+					$type    = $content > 0 ? 'warning' : 'success'; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- this is not WordPress global variable
+
+					if ( 'package_size' === $check['check_type'] ) {
+						$estimate = new Shipper_Model_Stored_Estimate();
+						$content  = size_format( $estimate->get( 'package_size' ) );
+						$type     = 'ok' === $check['status'] ? 'success' : 'warning'; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- this is not WordPress global variable
+					}
+
+					$this->render(
+						'tags/status-text',
+						array(
+							'status' => $type,
+							'text'   => $content,
+						)
+					);
 					?>
 				</div>
 				<div>
@@ -58,10 +68,9 @@ $has_issues = (bool) $checks['errors_count'];
 			<?php if ( ! empty( $check['message'] ) ) { ?>
 				<div class="shipper-wizard-result-files">
 					<?php
-						$check_type = ! empty( $check['check_type'] )
-							? $check['check_type']
-							: $check_type;
-						echo preg_replace(
+						$check_type = ! empty( $check['check_type'] ) ? $check['check_type'] : $check_type;
+
+						echo preg_replace( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 							'/' . preg_quote( '{{', '/' ) .
 							'shipper-nonce-placeholder' .
 							preg_quote( '}}', '/' ) . '/',
@@ -69,7 +78,7 @@ $has_issues = (bool) $checks['errors_count'];
 							$this->get(
 								'pages/preflight/wizard-files-result-wrapper',
 								array(
-									'html' => $check['message'],
+									'html'       => $check['message'],
 									'check_type' => $check_type,
 								)
 							)
@@ -86,13 +95,13 @@ $has_issues = (bool) $checks['errors_count'];
 		<div class="sui-notice-content shipper-exclude-success" style="display:none">
 			<p>
 				<span class="shipper-toggle-count">0</span>
-				<?php esc_html_e('files excluded from migration successfully.'); ?>
+				<?php esc_html_e( 'files excluded from migration successfully.', 'shipper' ); ?>
 			</p>
 		</div>
 		<div class="sui-notice-content shipper-include-success" style="display:none">
 			<p>
 				<span class="shipper-toggle-count">0</span>
-				<?php esc_html_e('files included to migration successfully.'); ?>
+				<?php esc_html_e( 'files included to migration successfully.', 'shipper' ); ?>
 			</p>
 		</div>
 		<span class="sui-notice-dismiss">

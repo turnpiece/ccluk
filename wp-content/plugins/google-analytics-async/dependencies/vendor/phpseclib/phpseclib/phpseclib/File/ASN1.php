@@ -193,7 +193,7 @@ class ASN1
      */
     function decodeBER($encoded)
     {
-        if ($encoded instanceof \Beehive\phpseclib\File\ASN1\Element) {
+        if ($encoded instanceof Element) {
             $encoded = $encoded->element;
         }
         $this->encoded = $encoded;
@@ -216,22 +216,37 @@ class ASN1
     function _decode_ber($encoded, $start = 0, $encoded_pos = 0)
     {
         $current = array('start' => $start);
+        if (!isset($encoded[$encoded_pos])) {
+            return \false;
+        }
         $type = \ord($encoded[$encoded_pos++]);
-        $start++;
+        $startOffset = 1;
         $constructed = $type >> 5 & 1;
         $tag = $type & 0x1f;
         if ($tag == 0x1f) {
             $tag = 0;
             // process septets (since the eighth bit is ignored, it's not an octet)
             do {
+                if (!isset($encoded[$encoded_pos])) {
+                    return \false;
+                }
                 $temp = \ord($encoded[$encoded_pos++]);
+                $startOffset++;
                 $loop = $temp >> 7;
                 $tag <<= 7;
-                $tag |= $temp & 0x7f;
-                $start++;
+                $temp &= 0x7f;
+                // "bits 7 to 1 of the first subsequent octet shall not all be zero"
+                if ($startOffset == 2 && $temp == 0) {
+                    return \false;
+                }
+                $tag |= $temp;
             } while ($loop);
         }
+        $start += $startOffset;
         // Length, as discussed in paragraph 8.1.3 of X.690-0207.pdf#page=13
+        if (!isset($encoded[$encoded_pos])) {
+            return \false;
+        }
         $length = \ord($encoded[$encoded_pos++]);
         $start++;
         if ($length == 0x80) {
@@ -285,7 +300,7 @@ class ASN1
                     }
                     $length = $temp['length'];
                     // end-of-content octets - see paragraph 8.1.5
-                    if (\substr($content, $content_pos + $length, 2) == "\0\0") {
+                    if (\substr($content, $content_pos + $length, 2) == "\x00\x00") {
                         $length += 2;
                         $start += $length;
                         $newcontent[] = $temp;
@@ -312,14 +327,17 @@ class ASN1
         switch ($tag) {
             case self::TYPE_BOOLEAN:
                 // "The contents octets shall consist of a single octet." -- paragraph 8.2.1
-                //if (strlen($content) != 1) {
-                //    return false;
-                //}
+                if ($constructed || \strlen($content) != 1) {
+                    return \false;
+                }
                 $current['content'] = (bool) \ord($content[$content_pos]);
                 break;
             case self::TYPE_INTEGER:
             case self::TYPE_ENUMERATED:
-                $current['content'] = new \Beehive\phpseclib\Math\BigInteger(\substr($content, $content_pos), -256);
+                if ($constructed) {
+                    return \false;
+                }
+                $current['content'] = new BigInteger(\substr($content, $content_pos), -256);
                 break;
             case self::TYPE_REAL:
                 // not currently supported
@@ -339,15 +357,15 @@ class ASN1
                     $last = \count($temp) - 1;
                     for ($i = 0; $i < $last; $i++) {
                         // all subtags should be bit strings
-                        //if ($temp[$i]['type'] != self::TYPE_BIT_STRING) {
-                        //    return false;
-                        //}
+                        if ($temp[$i]['type'] != self::TYPE_BIT_STRING) {
+                            return \false;
+                        }
                         $current['content'] .= \substr($temp[$i]['content'], 1);
                     }
                     // all subtags should be bit strings
-                    //if ($temp[$last]['type'] != self::TYPE_BIT_STRING) {
-                    //    return false;
-                    //}
+                    if ($temp[$last]['type'] != self::TYPE_BIT_STRING) {
+                        return \false;
+                    }
                     $current['content'] = $temp[$last]['content'][0] . $current['content'] . \substr($temp[$i]['content'], 1);
                 }
                 break;
@@ -357,20 +375,20 @@ class ASN1
                 } else {
                     $current['content'] = '';
                     $length = 0;
-                    while (\substr($content, $content_pos, 2) != "\0\0") {
+                    while (\substr($content, $content_pos, 2) != "\x00\x00") {
                         $temp = $this->_decode_ber($content, $length + $start, $content_pos);
                         if ($temp === \false) {
                             return \false;
                         }
                         $content_pos += $temp['length'];
                         // all subtags should be octet strings
-                        //if ($temp['type'] != self::TYPE_OCTET_STRING) {
-                        //    return false;
-                        //}
+                        if ($temp['type'] != self::TYPE_OCTET_STRING) {
+                            return \false;
+                        }
                         $current['content'] .= $temp['content'];
                         $length += $temp['length'];
                     }
-                    if (\substr($content, $content_pos, 2) == "\0\0") {
+                    if (\substr($content, $content_pos, 2) == "\x00\x00") {
                         $length += 2;
                         // +2 for the EOC
                     }
@@ -378,19 +396,22 @@ class ASN1
                 break;
             case self::TYPE_NULL:
                 // "The contents octets shall not contain any octets." -- paragraph 8.8.2
-                //if (strlen($content)) {
-                //    return false;
-                //}
+                if ($constructed || \strlen($content)) {
+                    return \false;
+                }
                 break;
             case self::TYPE_SEQUENCE:
             case self::TYPE_SET:
+                if (!$constructed) {
+                    return \false;
+                }
                 $offset = 0;
                 $current['content'] = array();
                 $content_len = \strlen($content);
                 while ($content_pos < $content_len) {
                     // if indefinite length construction was used and we have an end-of-content string next
                     // see paragraphs 8.1.1.3, 8.1.3.2, 8.1.3.6, 8.1.5, and (for an example) 8.6.4.2
-                    if (!isset($current['headerlength']) && \substr($content, $content_pos, 2) == "\0\0") {
+                    if (!isset($current['headerlength']) && \substr($content, $content_pos, 2) == "\x00\x00") {
                         $length = $offset + 2;
                         // +2 for the EOC
                         break 2;
@@ -405,7 +426,13 @@ class ASN1
                 }
                 break;
             case self::TYPE_OBJECT_IDENTIFIER:
+                if ($constructed) {
+                    return \false;
+                }
                 $current['content'] = $this->_decodeOID(\substr($content, $content_pos));
+                if ($current['content'] === \false) {
+                    return \false;
+                }
                 break;
             /* Each character string type shall be encoded as if it had been declared:
                            [UNIVERSAL x] IMPLICIT OCTET STRING
@@ -435,12 +462,20 @@ class ASN1
             case self::TYPE_UTF8_STRING:
             // ????
             case self::TYPE_BMP_STRING:
+                if ($constructed) {
+                    return \false;
+                }
                 $current['content'] = \substr($content, $content_pos);
                 break;
             case self::TYPE_UTC_TIME:
             case self::TYPE_GENERALIZED_TIME:
+                if ($constructed) {
+                    return \false;
+                }
                 $current['content'] = $this->_decodeTime(\substr($content, $content_pos), $tag);
+                break;
             default:
+                return \false;
         }
         $start += $length;
         // ie. length is the length of the full TLV encoding - it's not just the length of the value
@@ -471,7 +506,7 @@ class ASN1
             case $mapping['type'] == self::TYPE_ANY:
                 $intype = $decoded['type'];
                 if (isset($decoded['constant']) || !isset($this->ANYmap[$intype]) || \ord($this->encoded[$decoded['start']]) & 0x20) {
-                    return new \Beehive\phpseclib\File\ASN1\Element(\substr($this->encoded, $decoded['start'], $decoded['length']));
+                    return new Element(\substr($this->encoded, $decoded['start'], $decoded['length']));
                 }
                 $inmap = $this->ANYmap[$intype];
                 if (\is_string($inmap)) {
@@ -718,7 +753,7 @@ class ASN1
             case self::TYPE_ENUMERATED:
                 $temp = $decoded['content'];
                 if (isset($mapping['implicit'])) {
-                    $temp = new \Beehive\phpseclib\Math\BigInteger($decoded['content'], -256);
+                    $temp = new BigInteger($decoded['content'], -256);
                 }
                 if (isset($mapping['mapping'])) {
                     $temp = (int) $temp->toString();
@@ -737,7 +772,7 @@ class ASN1
      *
      * @param string $source
      * @param string $mapping
-     * @param int $idx
+     * @param array $special
      * @return string
      * @access public
      */
@@ -752,12 +787,13 @@ class ASN1
      * @param string $source
      * @param string $mapping
      * @param int $idx
+     * @param array $special
      * @return string
      * @access private
      */
     function _encode_der($source, $mapping, $idx = null, $special = array())
     {
-        if ($source instanceof \Beehive\phpseclib\File\ASN1\Element) {
+        if ($source instanceof Element) {
             return $source->element;
         }
         // do not encode (implicitly optional) fields with value set to default
@@ -876,7 +912,7 @@ class ASN1
             case self::TYPE_ENUMERATED:
                 if (!isset($mapping['mapping'])) {
                     if (\is_numeric($source)) {
-                        $source = new \Beehive\phpseclib\Math\BigInteger($source);
+                        $source = new BigInteger($source);
                     }
                     $value = $source->toBytes(\true);
                 } else {
@@ -884,7 +920,7 @@ class ASN1
                     if ($value === \false) {
                         return \false;
                     }
-                    $value = new \Beehive\phpseclib\Math\BigInteger($value);
+                    $value = new BigInteger($value);
                     $value = $value->toBytes(\true);
                 }
                 if (!\strlen($value)) {
@@ -895,7 +931,10 @@ class ASN1
             case self::TYPE_GENERALIZED_TIME:
                 $format = $mapping['type'] == self::TYPE_UTC_TIME ? 'y' : 'Y';
                 $format .= 'mdHis';
-                $date = new \DateTime($source, new \DateTimeZone('GMT'));
+                // if $source does _not_ include timezone information within it then assume that the timezone is GMT
+                $date = new DateTime($source, new DateTimeZone('GMT'));
+                // if $source _does_ include timezone information within it then convert the time to GMT
+                $date->setTimezone(new DateTimeZone('GMT'));
                 $value = $date->format($format) . 'Z';
                 break;
             case self::TYPE_BIT_STRING:
@@ -943,7 +982,7 @@ class ASN1
                     case !isset($source):
                         return $this->_encode_der(null, array('type' => self::TYPE_NULL) + $mapping, null, $special);
                     case \is_int($source):
-                    case $source instanceof \Beehive\phpseclib\Math\BigInteger:
+                    case $source instanceof BigInteger:
                         return $this->_encode_der($source, array('type' => self::TYPE_INTEGER) + $mapping, null, $special);
                     case \is_float($source):
                         return $this->_encode_der($source, array('type' => self::TYPE_REAL) + $mapping, null, $special);
@@ -986,7 +1025,7 @@ class ASN1
                 $value = $source;
                 break;
             case self::TYPE_BOOLEAN:
-                $value = $source ? "ÿ" : "\0";
+                $value = $source ? "\xff" : "\x00";
                 break;
             default:
                 \user_error('Mapping provides no type definition for ' . \implode('/', $this->location));
@@ -1036,19 +1075,22 @@ class ASN1
     {
         static $eighty;
         if (!$eighty) {
-            $eighty = new \Beehive\phpseclib\Math\BigInteger(80);
+            $eighty = new BigInteger(80);
         }
         $oid = array();
         $pos = 0;
         $len = \strlen($content);
-        $n = new \Beehive\phpseclib\Math\BigInteger();
+        if (\ord($content[$len - 1]) & 0x80) {
+            return \false;
+        }
+        $n = new BigInteger();
         while ($pos < $len) {
             $temp = \ord($content[$pos++]);
             $n = $n->bitwise_leftShift(7);
-            $n = $n->bitwise_or(new \Beehive\phpseclib\Math\BigInteger($temp & 0x7f));
+            $n = $n->bitwise_or(new BigInteger($temp & 0x7f));
             if (~$temp & 0x80) {
                 $oid[] = $n;
-                $n = new \Beehive\phpseclib\Math\BigInteger();
+                $n = new BigInteger();
             }
         }
         $part1 = \array_shift($oid);
@@ -1075,16 +1117,16 @@ class ASN1
      * Called by _encode_der()
      *
      * @access private
-     * @param string $content
+     * @param string $source
      * @return string
      */
     function _encodeOID($source)
     {
         static $mask, $zero, $forty;
         if (!$mask) {
-            $mask = new \Beehive\phpseclib\Math\BigInteger(0x7f);
-            $zero = new \Beehive\phpseclib\Math\BigInteger();
-            $forty = new \Beehive\phpseclib\Math\BigInteger(40);
+            $mask = new BigInteger(0x7f);
+            $zero = new BigInteger();
+            $forty = new BigInteger(40);
         }
         $oid = \preg_match('#(?:\\d+\\.)+#', $source) ? $source : \array_search($source, $this->oids);
         if ($oid === \false) {
@@ -1094,17 +1136,17 @@ class ASN1
         $parts = \explode('.', $oid);
         $part1 = \array_shift($parts);
         $part2 = \array_shift($parts);
-        $first = new \Beehive\phpseclib\Math\BigInteger($part1);
+        $first = new BigInteger($part1);
         $first = $first->multiply($forty);
-        $first = $first->add(new \Beehive\phpseclib\Math\BigInteger($part2));
+        $first = $first->add(new BigInteger($part2));
         \array_unshift($parts, $first->toString());
         $value = '';
         foreach ($parts as $part) {
             if (!$part) {
-                $temp = "\0";
+                $temp = "\x00";
             } else {
                 $temp = '';
-                $part = new \Beehive\phpseclib\Math\BigInteger($part);
+                $part = new BigInteger($part);
                 while (!$part->equals($zero)) {
                     $submask = $part->bitwise_and($mask);
                     $submask->setPrecision(8);
@@ -1157,7 +1199,7 @@ class ASN1
         }
         // error supression isn't necessary as of PHP 7.0:
         // http://php.net/manual/en/migration70.other-changes.php
-        return @\DateTime::createFromFormat($format, $content);
+        return @DateTime::createFromFormat($format, $content);
     }
     /**
      * Set the time format

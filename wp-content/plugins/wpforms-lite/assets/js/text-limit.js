@@ -6,6 +6,7 @@
 	 * Predefine hint text to display.
 	 *
 	 * @since 1.5.6
+	 * @since 1.6.4 Added a new macros - {remaining}.
 	 *
 	 * @param {string} hintText Hint text.
 	 * @param {number} count Current count.
@@ -15,7 +16,7 @@
 	 */
 	function renderHint( hintText, count, limit ) {
 
-		return hintText.replace( '{count}', count ).replace( '{limit}', limit );
+		return hintText.replace( '{count}', count ).replace( '{limit}', limit ).replace( '{remaining}', limit - count );
 	}
 
 	/**
@@ -62,6 +63,36 @@
 	}
 
 	/**
+	 * Count words in the string.
+	 *
+	 * @since 1.6.2
+	 *
+	 * @param {string} string String value.
+	 *
+	 * @returns {number} Words count.
+	 */
+	function countWords( string ) {
+
+		if ( typeof string !== 'string' ) {
+			return 0;
+		}
+
+		if ( ! string.length ) {
+			return 0;
+		}
+
+		[
+			/([A-Z]+),([A-Z]+)/gi,
+			/([0-9]+),([A-Z]+)/gi,
+			/([A-Z]+),([0-9]+)/gi,
+		].forEach( function( pattern ) {
+			string = string.replace( pattern, '$1, $2' );
+		} );
+
+		return string.split( /\s+/ ).length;
+	}
+
+	/**
 	 * Keyup/Keydown event higher order function for words limit.
 	 *
 	 * @since 1.5.6
@@ -75,17 +106,19 @@
 
 		return function( e ) {
 
-			var words = this.value.trim().split( /\s+/ );
-
-			if ( e.keyCode === 32 && words.length >= limit ) {
-				e.preventDefault();
-			}
+			var value = this.value.trim(),
+				words = countWords( value );
 
 			hint.textContent = renderHint(
 				window.wpforms_settings.val_limit_words,
-				words.length,
+				words,
 				limit
 			);
+
+			// We should prevent the keys: Enter, Space, Comma.
+			if ( [ 13, 32, 188 ].indexOf( e.keyCode ) > -1 && words >= limit ) {
+				e.preventDefault();
+			}
 		};
 	}
 
@@ -110,6 +143,66 @@
 	}
 
 	/**
+	 * Paste event higher order function for characters limit.
+	 *
+	 * @since 1.6.7.1
+	 *
+	 * @param {number} limit Max allowed number of characters.
+	 *
+	 * @returns {Function} Event handler.
+	 */
+	function pasteText( limit ) {
+
+		return function( e ) {
+
+			e.preventDefault();
+
+			var pastedText = getPastedText( e ),
+				newPosition = this.selectionStart + pastedText.length,
+				newText = this.value.substring( 0, this.selectionStart ) + pastedText + this.value.substring( this.selectionStart );
+
+			this.value = newText.substring( 0, limit );
+			this.setSelectionRange( newPosition, newPosition );
+		};
+	}
+
+	/**
+	 * Limit string length to a certain number of words, preserving line breaks.
+	 *
+	 * @since 1.6.8
+	 *
+	 * @param {string} text  Text.
+	 * @param {number} limit Max allowed number of words.
+	 *
+	 * @returns {string} Text with the limited number of words.
+	 */
+	function limitWords( text, limit ) {
+
+		var separators,
+			newTextArray,
+			result = '';
+
+		// Regular expression pattern: match any space character.
+		var regEx = /\s+/g;
+
+		// Store separators for further join.
+		separators = text.trim().match( regEx ) || [];
+
+		// Split the new text by regular expression.
+		newTextArray = text.split( regEx );
+
+		// Limit the number of words.
+		newTextArray.splice( limit, newTextArray.length );
+
+		// Join the words together using stored separators.
+		for ( var i = 0; i < newTextArray.length; i++ ) {
+			result += newTextArray[ i ] + ( separators[ i ] || '' );
+		}
+
+		return result.trim();
+	}
+
+	/**
 	 * Paste event higher order function for words limit.
 	 *
 	 * @since 1.5.6
@@ -123,9 +216,13 @@
 		return function( e ) {
 
 			e.preventDefault();
-			var pastedText = getPastedText( e ).trim().split( /\s+/ );
-			pastedText.splice( limit, pastedText.length );
-			this.value = pastedText.join( ' ' );
+
+			var pastedText = getPastedText( e ),
+				newPosition = this.selectionStart + pastedText.length,
+				newText = this.value.substring( 0, this.selectionStart ) + pastedText + this.value.substring( this.selectionStart );
+
+			this.value = limitWords( newText, limit );
+			this.setSelectionRange( newPosition, newPosition );
 		};
 	}
 
@@ -170,6 +267,7 @@
 
 					e.addEventListener( 'keydown', fn );
 					e.addEventListener( 'keyup', fn );
+					e.addEventListener( 'paste', pasteText( limit ) );
 				}
 			);
 
@@ -178,13 +276,15 @@
 				function( e ) {
 
 					var limit = parseInt( e.dataset.textLimit, 10 ) || 0;
-					e.value = e.value.trim().split( /\s+/ ).slice( 0, limit ).join( ' ' );
+
+					e.value = limitWords( e.value, limit );
+
 					var hint = createHint(
 						e.dataset.formId,
 						e.dataset.fieldId,
 						renderHint(
 							window.wpforms_settings.val_limit_words,
-							e.value.trim().split( /\s+/ ).length,
+							countWords( e.value.trim() ),
 							limit
 						)
 					);

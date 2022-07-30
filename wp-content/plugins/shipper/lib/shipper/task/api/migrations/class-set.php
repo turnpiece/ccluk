@@ -20,20 +20,16 @@ class Shipper_Task_Api_Migrations_Set extends Shipper_Task_Api {
 	public function apply( $args = array() ) {
 		$domain = ! empty( $args['domain'] )
 			? $args['domain']
-			: false
-		;
-		$file = ! empty( $args['file'] )
+			: false;
+		$file   = ! empty( $args['file'] )
 			? $args['file']
-			: false
-		;
+			: false;
 		$status = ! empty( $args['status'] )
 			? $args['status']
-			: false
-		;
-		$type = ! empty( $args['type'] )
+			: false;
+		$type   = ! empty( $args['type'] )
 			? $args['type']
-			: false
-		;
+			: false;
 
 		if ( empty( $domain ) ) {
 			$this->clear_cached_api_response( 'migration-set' );
@@ -44,11 +40,11 @@ class Shipper_Task_Api_Migrations_Set extends Shipper_Task_Api {
 			return false;
 		}
 
-		$args = array(
-			'domain' => $domain,
-			'file' => $file,
-			'type' => $type,
-			'status' => $status,
+		$args   = array(
+			'domain'  => $domain,
+			'file'    => $file,
+			'type'    => $type,
+			'status'  => $status,
 			'version' => SHIPPER_VERSION,
 		);
 		$status = $this->get_response( 'migration-set', self::METHOD_POST, $args );
@@ -58,6 +54,7 @@ class Shipper_Task_Api_Migrations_Set extends Shipper_Task_Api {
 				'migration-set',
 				self::ERR_SERVICE,
 				sprintf(
+					/* translators: %s: error message. */
 					__( 'Service error: %s', 'shipper' ),
 					$this->get_formatted_error( $status )
 				)

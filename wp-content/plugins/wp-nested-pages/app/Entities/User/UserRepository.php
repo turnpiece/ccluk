@@ -1,6 +1,7 @@
 <?php
 namespace NestedPages\Entities\User;
 
+use NestedPages\Config\SettingsRepository;
 use NestedPages\Entities\PluginIntegration\IntegrationFactory;
 
 /**
@@ -10,6 +11,12 @@ use NestedPages\Entities\PluginIntegration\IntegrationFactory;
 class UserRepository
 {
 	/**
+	* Settings Repository
+	* @var object
+	*/
+	private $settings;
+
+	/**
 	* Plugin Integrations
 	* @var object
 	*/
@@ -17,6 +24,7 @@ class UserRepository
 
 	public function __construct()
 	{
+		$this->settings = new SettingsRepository;
 		$this->integrations = new IntegrationFactory;
 	}
 
@@ -90,18 +98,42 @@ class UserRepository
 	* Can current user sort pages
 	* @return boolean
 	* @since 1.1.7
+	* @see NestedPages\Entities\User\UserCapabilities
 	*/
-	public function canSortPages()
+	public function canSortPosts($post_type = 'page')
 	{
 		$roles = $this->getRoles();
-		$cansort = get_option('nestedpages_allowsorting', []);
-		if ( $cansort == "" ) $cansort = [];
+		$user_can_sort = false;
+		$roles_cansort = get_option('nestedpages_allowsorting', []);
+		if ( $roles_cansort == "" ) $roles_cansort = [];
 
 		foreach($roles as $role){
 			if ( $role == 'administrator' ) return true;
-			if ( in_array($role, $cansort) ) return true;
+			if ( in_array($role, $roles_cansort) ) $user_can_sort = true; // Plugin Option
+			$role_obj = get_role($role);
+			if ( $role_obj->has_cap("nestedpages_sorting_$post_type") ) $user_can_sort = true; // Custom Capability
 		}
-		return false;
+
+		return $user_can_sort;
+	}
+
+	/**
+	* Can current user view the Nested Pages Sort View
+	* @return boolean
+	* @since 3.1.9
+	*/
+	public function canViewSorting($post_type = 'page')
+	{
+		$roles = $this->getRoles();
+		$viewable_roles = $this->settings->sortViewEnabled();
+		$user_can_view = false;
+
+		foreach($roles as $role){
+			if ( $role == 'administrator' ) return true;
+			if ( in_array($role, $viewable_roles) ) $user_can_view = true; // Custom Capability
+		}
+		
+		return $user_can_view;
 	}
 
 	/**
@@ -113,6 +145,18 @@ class UserRepository
 			return ( current_user_can('publish_pages') ) ? true : false;
 		}
 		if ( current_user_can('publish_posts') ) return true;
+		return false;
+	}
+
+	/**
+	* Can the user add new posts for review?
+	*/
+	public function canSubmitPending($post_type = 'post')
+	{
+		if ( $post_type == 'page' ) {
+			return ( current_user_can('edit_pages') ) ? true : false;
+		}
+		if ( current_user_can('edit_posts') ) return true;
 		return false;
 	}
 
@@ -152,5 +196,31 @@ class UserRepository
 			'np_visible_posts',
 			serialize($visible)
 		);
+	}
+
+	/**
+	* Update User's Status Preference (All/Published/Draft)
+	*/
+	public function updateStatusPreference($post_type, $status)
+	{
+		$preference = get_user_meta(get_current_user_id(), 'np_status_preference', true);
+		if ( !$preference ) $preference = [];
+		$preference[$post_type] = sanitize_text_field($status);
+		update_user_meta(
+			get_current_user_id(),
+			'np_status_preference',
+			$preference
+		);
+	}
+
+	/**
+	* Get the current user's status preference for a post type
+	* (show all/published/draft)
+	*/
+	public function getStatusPreference($post_type)
+	{
+		$preference = get_user_meta(get_current_user_id(), 'np_status_preference', true);
+		if ( !$preference || !is_array($preference) || !isset($preference[$post_type])) return 'all';
+		return $preference[$post_type];
 	}
 }

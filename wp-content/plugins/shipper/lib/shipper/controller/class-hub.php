@@ -13,14 +13,14 @@
  */
 abstract class Shipper_Controller_Hub extends Shipper_Controller {
 
-	const ACTION_MIGRATION_START = 'migration_start';
-	const ACTION_MIGRATION_CANCEL = 'migration_cancel';
+	const ACTION_MIGRATION_START     = 'migration_start';
+	const ACTION_MIGRATION_CANCEL    = 'migration_cancel';
 	const ACTION_MIGRATION_KICKSTART = 'migration_kickstart';
-	const ACTION_PING = 'ping';
-	const ACTION_PREFLIGHT = 'preflight';
-	const ACTION_RESET_DESTINATIONS = 'reset_destination_cache';
-	const ACTION_RESET_CREDS = 'reset_creds_cache';
-	const ACTION_ADD = 'destination_add';
+	const ACTION_PING                = 'ping';
+	const ACTION_PREFLIGHT           = 'preflight';
+	const ACTION_RESET_DESTINATIONS  = 'reset_destination_cache';
+	const ACTION_RESET_CREDS         = 'reset_creds_cache';
+	const ACTION_ADD                 = 'destination_add';
 
 	/**
 	 * Gets the list of known Hub actions
@@ -44,10 +44,12 @@ abstract class Shipper_Controller_Hub extends Shipper_Controller {
 	 * @return array Augmented actions
 	 */
 	public function register_endpoints( $actions ) {
-		if ( ! is_array( $actions ) ) { return $actions; }
+		if ( ! is_array( $actions ) ) {
+			return $actions; }
 
 		$known = $this->get_known_actions();
-		if ( ! is_array( $known ) ) { return $actions; }
+		if ( ! is_array( $known ) ) {
+			return $actions; }
 
 		foreach ( $known as $action_raw_name ) {
 			$method = "json_{$action_raw_name}";
@@ -55,7 +57,7 @@ abstract class Shipper_Controller_Hub extends Shipper_Controller {
 				continue; // We don't know how to handle this action.
 			}
 
-			$action_name = "shipper_{$action_raw_name}";
+			$action_name             = "shipper_{$action_raw_name}";
 			$actions[ $action_name ] = array( $this, $method );
 		}
 
@@ -78,11 +80,11 @@ abstract class Shipper_Controller_Hub extends Shipper_Controller {
 	public function send_response_error( $info, $request = false ) {
 		$status = $info;
 		if ( is_wp_error( $info ) ) {
-			$code = $info->get_error_code();
+			$code   = $info->get_error_code();
 			$status = array(
-				'code' => $code,
+				'code'    => $code,
 				'message' => $info->get_error_message( $code ),
-				'data' => $info->get_error_data( $code ),
+				'data'    => $info->get_error_data( $code ),
 			);
 		}
 		if (

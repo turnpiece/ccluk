@@ -1,14 +1,14 @@
 /**
  * WordPress dependencies
  */
-const { __ } = wp.i18n;
-const { registerBlockType } = wp.blocks;
+import { __ } from '@wordpress/i18n'
+import { registerBlockType } from '@wordpress/blocks';
 
 /**
  * Internal dependencies
  */
 import './style.scss';
-import GiveLogo from '../components/logo';
+import GiveIcon from '@givewp/components/GiveIcon';
 import blockAttributes from './data/attributes';
 import GiveForm from './edit/block';
 
@@ -18,12 +18,12 @@ import GiveForm from './edit/block';
 
 export default registerBlockType( 'give/donation-form', {
 
-	title: __( 'Donation Form' ),
-	description: __( 'The GiveWP Donation Form block inserts an existing donation form into the page. Each donation form\'s presentation can be customized below.' ),
+	title: __( 'Donation Form', 'give' ),
+	description: __( 'The GiveWP Donation Form block inserts an existing donation form into the page. Each donation form\'s presentation can be customized below.', 'give' ),
 	category: 'give',
-	icon: <GiveLogo color="grey" />,
+	icon: <GiveIcon color="grey" />,
 	keywords: [
-		__( 'donation' ),
+		__( 'donation', 'give' ),
 	],
 	supports: {
 		html: false,

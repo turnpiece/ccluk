@@ -40,6 +40,7 @@ class Ai1wm_Recursive_Exclude_Filter extends RecursiveFilterIterator {
 		}
 	}
 
+	#[\ReturnTypeWillChange]
 	public function accept() {
 		if ( in_array( ai1wm_replace_forward_slash_with_directory_separator( $this->getInnerIterator()->getSubPathname() ), $this->exclude ) ) {
 			return false;
@@ -64,6 +65,7 @@ class Ai1wm_Recursive_Exclude_Filter extends RecursiveFilterIterator {
 		return true;
 	}
 
+	#[\ReturnTypeWillChange]
 	public function getChildren() {
 		return new self( $this->getInnerIterator()->getChildren(), $this->exclude );
 	}

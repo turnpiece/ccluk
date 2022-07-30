@@ -11,13 +11,19 @@
 class Shipper_Task_Api_Destinations_Hublist extends Shipper_Task_Api {
 
 	/**
+	 * Priority cache
+	 *
+	 * @var bool
+	 */
+	protected $priority_cache = true;
+
+	/**
 	 * Gets maximum API cache time for this task
 	 *
 	 * This can be a bit longer.
 	 *
-	 * @since v1.0.3
-	 *
 	 * @return int
+	 * @since v1.0.3
 	 */
 	public function get_api_cache_ttl() {
 		return 300;
@@ -31,7 +37,11 @@ class Shipper_Task_Api_Destinations_Hublist extends Shipper_Task_Api {
 	 * @return array List of destination hashes.
 	 */
 	public function apply( $args = array() ) {
-		$status = $this->get_response( 'destinations-listall' );
+		if ( isset( $args['priority_cache'] ) ) {
+			$this->priority_cache = $args['priority_cache'];
+			apply_filters( 'shipper_check_api_communication_health_state', '__return_true' );
+		}
+		$status       = $this->get_response( 'destinations-listall' );
 		$destinations = array();
 
 		if ( empty( $status['success'] ) ) {
@@ -40,13 +50,13 @@ class Shipper_Task_Api_Destinations_Hublist extends Shipper_Task_Api {
 				self::ERR_SERVICE,
 				__( 'Error listing Hub sites: service encountered an error', 'shipper' )
 			);
+
 			return $destinations;
 		}
 
 		$destinations = ! empty( $status['data'] ) && is_array( $status['data'] )
 			? $status['data']
-			: array()
-		;
+			: array();
 
 		if ( empty( $destinations ) ) {
 			$this->record_non_success(
@@ -54,10 +64,21 @@ class Shipper_Task_Api_Destinations_Hublist extends Shipper_Task_Api {
 				self::ERR_SERVICE,
 				__( 'Error listing Hub sites: service responded with an empty list', 'shipper' )
 			);
+
 			return $destinations;
 		}
 
 		$this->record_success( 'destinations-listall' );
+
 		return $destinations;
+	}
+
+	/**
+	 * Is cacheable.
+	 *
+	 * @return bool
+	 */
+	public function is_cacheable() {
+		return $this->priority_cache;
 	}
 }

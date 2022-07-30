@@ -19,8 +19,11 @@ use Beehive\Monolog\Utils;
  *
  * @author Jordi Boggiano <j.boggiano@seld.be>
  */
-class StreamHandler extends \Beehive\Monolog\Handler\AbstractProcessingHandler
+class StreamHandler extends AbstractProcessingHandler
 {
+    /** @private 512KB */
+    const CHUNK_SIZE = 524288;
+    /** @var resource|null */
     protected $stream;
     protected $url;
     private $errorMessage;
@@ -37,13 +40,14 @@ class StreamHandler extends \Beehive\Monolog\Handler\AbstractProcessingHandler
      * @throws \Exception                If a missing directory is not buildable
      * @throws \InvalidArgumentException If stream is not a resource or string
      */
-    public function __construct($stream, $level = \Beehive\Monolog\Logger::DEBUG, $bubble = \true, $filePermission = null, $useLocking = \false)
+    public function __construct($stream, $level = Logger::DEBUG, $bubble = \true, $filePermission = null, $useLocking = \false)
     {
         parent::__construct($level, $bubble);
         if (\is_resource($stream)) {
             $this->stream = $stream;
+            $this->streamSetChunkSize();
         } elseif (\is_string($stream)) {
-            $this->url = \Beehive\Monolog\Utils::canonicalizePath($stream);
+            $this->url = Utils::canonicalizePath($stream);
         } else {
             throw new \InvalidArgumentException('A stream must either be a resource or a string.');
         }
@@ -100,6 +104,7 @@ class StreamHandler extends \Beehive\Monolog\Handler\AbstractProcessingHandler
                 $this->stream = null;
                 throw new \UnexpectedValueException(\sprintf('The stream or file "%s" could not be opened in append mode: ' . $this->errorMessage, $this->url));
             }
+            $this->streamSetChunkSize();
         }
         if ($this->useLocking) {
             // ignoring errors here, there's not much we can do about them
@@ -119,6 +124,13 @@ class StreamHandler extends \Beehive\Monolog\Handler\AbstractProcessingHandler
     {
         \fwrite($stream, (string) $record['formatted']);
     }
+    protected function streamSetChunkSize()
+    {
+        if (\version_compare(\PHP_VERSION, '5.4.0', '>=')) {
+            return \stream_set_chunk_size($this->stream, self::CHUNK_SIZE);
+        }
+        return \false;
+    }
     private function customErrorHandler($code, $msg)
     {
         $this->errorMessage = \preg_replace('{^(fopen|mkdir)\\(.*?\\): }', '', $msg);
@@ -137,7 +149,7 @@ class StreamHandler extends \Beehive\Monolog\Handler\AbstractProcessingHandler
         if ('file://' === \substr($stream, 0, 7)) {
             return \dirname(\substr($stream, 7));
         }
-        return;
+        return null;
     }
     private function createDir()
     {

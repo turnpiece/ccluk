@@ -2,7 +2,7 @@
 /**
  * The common class of the plugin.
  *
- * @link    http://premium.wpmudev.org
+ * @link    http://wpmudev.com
  * @since   3.2.0
  *
  * @author  Joel James <joel@incsub.com>
@@ -60,6 +60,7 @@ class Common extends Base {
 	 * it is activated.
 	 *
 	 * @since 3.2.0
+	 * @deprecated 3.3.15 Used only if old plugin structure.
 	 */
 	public function deactivate_free() {
 		// Only when both constants found.

@@ -17,12 +17,15 @@ class Shipper_Controller_Setup_Uninstall extends Shipper_Controller_Setup {
 	 */
 	public static function uninstall() {
 		self::get()
-		    ->clear_intermediate_tables()
-		    ->clear_fs_storage()
-		    ->clear_stub_storage();
+			->clear_intermediate_tables()
+			->clear_fs_storage()
+			->clear_stub_storage();
 		self::get()
-		    ->clear_db_storage()
-		    ->unregister_from_api();
+			->clear_db_storage()
+			->unregister_from_api();
+
+		// Black Friday banner.
+		delete_site_option( 'shipper_bf_banner_seen' );
 	}
 
 	/**
@@ -32,13 +35,12 @@ class Shipper_Controller_Setup_Uninstall extends Shipper_Controller_Setup {
 	 *
 	 * @return object Shipper_Controller_Setup instance
 	 * @uses $wpdb
-	 *
 	 */
 	public function clear_db_storage( $model = false ) {
 		global $wpdb;
 
 		if ( ! is_object( $model ) ) {
-			$model = new Shipper_Model_Stored_Options;
+			$model = new Shipper_Model_Stored_Options();
 		}
 		if ( $model->get( Shipper_Model_Stored_Options::KEY_SETTINGS ) ) {
 			// Preserve settings.
@@ -47,6 +49,7 @@ class Shipper_Controller_Setup_Uninstall extends Shipper_Controller_Setup {
 
 		$storage = $wpdb->esc_like( Shipper_Helper_Storage::DEFAULT_NAMESPACE ) . '%';
 
+		// phpcs:disable
 		if ( ! empty( $wpdb->sitemeta ) ) {
 			$wpdb->query(
 				$wpdb->prepare( "DELETE FROM {$wpdb->sitemeta} WHERE meta_key LIKE %s", $storage )
@@ -59,6 +62,7 @@ class Shipper_Controller_Setup_Uninstall extends Shipper_Controller_Setup {
 		$wpdb->query(
 			$wpdb->prepare( "DELETE FROM {$wpdb->options} WHERE option_name = %s", 'shipper_version' )
 		);
+		// phpcs:enable
 
 		shipper_flush_cache();
 
@@ -73,12 +77,12 @@ class Shipper_Controller_Setup_Uninstall extends Shipper_Controller_Setup {
 	public function unregister_from_api() {
 		$site_id = false;
 
-		$model = new Shipper_Model_Stored_Destinations;
+		$model = new Shipper_Model_Stored_Destinations();
 		$site  = $model->get_current();
 
 		if ( empty( $site['site_id'] ) ) {
 			// Attempt to re-acquire the data.
-			$task  = new Shipper_Task_Api_Destinations_Get;
+			$task  = new Shipper_Task_Api_Destinations_Get();
 			$sites = $task->apply();
 			$model->set_data( $sites );
 			$site = $model->get_current();
@@ -92,10 +96,12 @@ class Shipper_Controller_Setup_Uninstall extends Shipper_Controller_Setup {
 			return $this;
 		}
 
-		$task = new Shipper_Task_Api_Destinations_Remove;
-		$task->apply( array(
-			'site_id' => $site_id,
-		) );
+		$task = new Shipper_Task_Api_Destinations_Remove();
+		$task->apply(
+			array(
+				'site_id' => $site_id,
+			)
+		);
 
 		return $this;
 	}

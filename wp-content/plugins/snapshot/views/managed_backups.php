@@ -38,6 +38,18 @@ $model = new Snapshot_Model_Full_Backup();
 
 	<div id="container" class="snapshot-three wps-page-backups">
 
+		<?php
+			WPMUDEVSnapshot::instance()->need_show_v4_notice() && $this->render(
+				'common/v4-notice',
+				false,
+				array(
+					'bg_image_url' => WPMUDEVSnapshot::get_file_url( '/assets/img/snapshot-hero-notice.svg' ),
+				),
+				false,
+				false
+			);
+		?>
+
 		<section class="wpmud-box wps-widget-backups_status">
 
 			<div class="wpmud-box-content">
@@ -593,20 +605,21 @@ $model = new Snapshot_Model_Full_Backup();
 											<label><?php esc_html_e( 'Storage Limit', SNAPSHOT_I18N_DOMAIN ); ?></label>
 
 											<p>
-												<small><?php esc_html_e( 'By default, Snapshot will run as many scheduled backups as you need. If you would like to keep all of your snapshot archives, just set your storage limit to 0.', SNAPSHOT_I18N_DOMAIN ); ?></small>
+												<small><?php esc_html_e( 'Snapshot will store a certain number of backups, and will then remove the oldest backups when new ones get created. You can adjust the number of backups to keep here.', SNAPSHOT_I18N_DOMAIN ); ?></small>
 											</p>
 
 										</div>
 
 										<div class="col-right">
 
-											<label><?php esc_html_e( 'Keep', SNAPSHOT_I18N_DOMAIN ); ?></label>
+											<label for="backups-limit" style="font-size: 12px;font-weight: bold;color: #888888;padding-left: 0;line-height: 22px;margin-bottom: 0;"><?php esc_html_e( 'Limit', SNAPSHOT_I18N_DOMAIN ); ?></label>
 
-											<input type="number" min="0" name="backups-limit" id="snapshot-archive-count"
-											       value="<?php echo esc_attr( Snapshot_Model_Full_Remote_Storage::get()->get_max_backups_limit() ); ?>">
+											<input type="number" min="1" name="backups-limit" id="snapshot-archive-count"
+											       value="<?php echo esc_attr( Snapshot_Model_Full_Remote_Storage::get()->get_max_backups_limit() ); ?>" style=" display: block; margin-left: 0; ">
 
-											<label><?php esc_html_e( 'backups before removing older archives.', SNAPSHOT_I18N_DOMAIN ); ?></label>
-
+											<p style=" margin-top: 5px; ">
+												<small><?php esc_html_e( 'Set the number of backups you want to store. It must be greater than 0.', SNAPSHOT_I18N_DOMAIN ); ?></small>
+											</p>
 										</div>
 
 									</div>
@@ -718,3 +731,5 @@ $modal_data = array(
 );
 
 $this->render( "boxes/modals/popup-dynamic", false, $modal_data, false, false );
+
+WPMUDEVSnapshot::instance()->need_show_v4_modal() && $this->render( 'boxes/modals/popup-upgrade-to-v4', false, array(), false, false );

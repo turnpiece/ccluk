@@ -29,7 +29,7 @@ trait ProcessableHandlerTrait
      * {@inheritdoc}
      * @suppress PhanTypeMismatchReturn
      */
-    public function pushProcessor($callback) : \Beehive\Monolog\Handler\HandlerInterface
+    public function pushProcessor($callback) : HandlerInterface
     {
         \array_unshift($this->processors, $callback);
         return $this;
@@ -57,7 +57,7 @@ trait ProcessableHandlerTrait
     protected function resetProcessors() : void
     {
         foreach ($this->processors as $processor) {
-            if ($processor instanceof \Beehive\Monolog\ResettableInterface) {
+            if ($processor instanceof ResettableInterface) {
                 $processor->reset();
             }
         }

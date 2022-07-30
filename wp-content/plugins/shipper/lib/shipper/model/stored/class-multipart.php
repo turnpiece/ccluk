@@ -13,10 +13,10 @@
 abstract class Shipper_Model_Stored_Multipart extends Shipper_Model_Stored {
 
 	const KEY_TRANSFER_ID = 'transfer_id';
-	const KEY_PARTS = 'parts';
+	const KEY_PARTS       = 'parts';
 
 	const KEY_PART_DONE = 'is_done';
-	const KEY_PART_IDX = 'index';
+	const KEY_PART_IDX  = 'index';
 
 	/**
 	 * Gets upload parts queue
@@ -44,7 +44,7 @@ abstract class Shipper_Model_Stored_Multipart extends Shipper_Model_Stored {
 	 * @return int
 	 */
 	public function get_transfered_count() {
-		$parts = $this->get_parts();
+		$parts    = $this->get_parts();
 		$uploaded = 0;
 
 		foreach ( $parts as $part ) {
@@ -69,10 +69,10 @@ abstract class Shipper_Model_Stored_Multipart extends Shipper_Model_Stored {
 			return $this;
 		}
 		$parts = $this->get_parts();
-		$idx = count( $parts );
+		$idx   = count( $parts );
 
 		$part[ self::KEY_PART_DONE ] = false;
-		$part[ self::KEY_PART_IDX ] = $idx;
+		$part[ self::KEY_PART_IDX ]  = $idx;
 
 		$parts[ $idx ] = $part;
 
@@ -102,7 +102,7 @@ abstract class Shipper_Model_Stored_Multipart extends Shipper_Model_Stored {
 	 */
 	public function get_next() {
 		$parts = $this->get_parts();
-		$next = array();
+		$next  = array();
 		foreach ( $parts as $part ) {
 			if ( ! empty( $part[ self::KEY_PART_DONE ] ) ) {
 				continue;
@@ -124,8 +124,7 @@ abstract class Shipper_Model_Stored_Multipart extends Shipper_Model_Stored {
 		if ( is_array( $idx ) ) {
 			$idx = isset( $idx[ self::KEY_PART_IDX ] ) && is_numeric( $idx[ self::KEY_PART_IDX ] )
 				? (int) $idx[ self::KEY_PART_IDX ]
-				: $idx
-			;
+				: $idx;
 		}
 		if ( ! is_numeric( $idx ) ) {
 			return false;
@@ -160,7 +159,7 @@ abstract class Shipper_Model_Stored_Multipart extends Shipper_Model_Stored {
 	 */
 	public function has_transfer() {
 		$transfer = $this->get_transfer_id();
-		$parts = $this->get_parts();
+		$parts    = $this->get_parts();
 
 		return ! empty( $transfer ) && ! empty( $parts );
 	}
@@ -184,10 +183,12 @@ abstract class Shipper_Model_Stored_Multipart extends Shipper_Model_Stored {
 	 * @return object
 	 */
 	public function create( $transfer_id, $parts ) {
-		$this->set_data(array(
-			self::KEY_TRANSFER_ID => $transfer_id,
-			self::KEY_PARTS => array(),
-		));
+		$this->set_data(
+			array(
+				self::KEY_TRANSFER_ID => $transfer_id,
+				self::KEY_PARTS       => array(),
+			)
+		);
 		if ( is_array( $parts ) ) {
 			foreach ( $parts as $part ) {
 				$this->add_part( $part );
@@ -208,7 +209,7 @@ abstract class Shipper_Model_Stored_Multipart extends Shipper_Model_Stored {
 		$parts = array();
 
 		if ( ! (int) $increment ) {
-			$increment = 10 * 1024 * 1024;
+			$increment = 25 * 1024 * 1024;
 		}
 
 		if ( ! (int) $increment || ! (int) $total_size ) {

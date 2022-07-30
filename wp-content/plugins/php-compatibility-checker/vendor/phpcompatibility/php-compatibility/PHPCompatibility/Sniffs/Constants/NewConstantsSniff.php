@@ -1,10 +1,11 @@
 <?php
 /**
- * \PHPCompatibility\Sniffs\Constants\NewConstantsSniff.
+ * PHPCompatibility, an external standard for PHP_CodeSniffer.
  *
- * @category PHP
- * @package  PHPCompatibility
- * @author   Juliette Reinders Folmer <phpcompatibility_nospam@adviesenzo.nl>
+ * @package   PHPCompatibility
+ * @copyright 2012-2019 PHPCompatibility Contributors
+ * @license   https://opensource.org/licenses/LGPL-3.0 LGPL3
+ * @link      https://github.com/PHPCompatibility/PHPCompatibility
  */
 
 namespace PHPCompatibility\Sniffs\Constants;
@@ -13,11 +14,11 @@ use PHPCompatibility\AbstractNewFeatureSniff;
 use PHP_CodeSniffer_File as File;
 
 /**
- * \PHPCompatibility\Sniffs\Constants\NewConstantsSniff.
+ * Detect use of new PHP native global constants.
  *
- * @category PHP
- * @package  PHPCompatibility
- * @author   Juliette Reinders Folmer <phpcompatibility_nospam@adviesenzo.nl>
+ * PHP version All
+ *
+ * @since 8.1.0
  */
 class NewConstantsSniff extends AbstractNewFeatureSniff
 {
@@ -28,9 +29,11 @@ class NewConstantsSniff extends AbstractNewFeatureSniff
      * The array lists : version number with false (not present) or true (present).
      * If's sufficient to list the first version where the constant appears.
      *
-     * Note: PHP Constants are case-sensitive!
+     * Note: PHP constants are case-sensitive!
      *
-     * @var array(string => array(string => bool|string|null))
+     * @since 8.1.0
+     *
+     * @var array(string => array(string => bool))
      */
     protected $newConstants = array(
         'E_STRICT' => array(
@@ -2687,6 +2690,22 @@ class NewConstantsSniff extends AbstractNewFeatureSniff
             '7.1' => false,
             '7.2' => true,
         ),
+        'SODIUM_BASE64_VARIANT_ORIGINAL' => array(
+            '7.1' => false,
+            '7.2' => true,
+        ),
+        'SODIUM_BASE64_VARIANT_ORIGINAL_NO_PADDING' => array(
+            '7.1' => false,
+            '7.2' => true,
+        ),
+        'SODIUM_BASE64_VARIANT_URLSAFE' => array(
+            '7.1' => false,
+            '7.2' => true,
+        ),
+        'SODIUM_BASE64_VARIANT_URLSAFE_NO_PADDING' => array(
+            '7.1' => false,
+            '7.2' => true,
+        ),
         'SODIUM_CRYPTO_AEAD_AES256GCM_KEYBYTES' => array(
             '7.1' => false,
             '7.2' => true,
@@ -2732,6 +2751,22 @@ class NewConstantsSniff extends AbstractNewFeatureSniff
             '7.2' => true,
         ),
         'SODIUM_CRYPTO_AEAD_CHACHA20POLY1305_IETF_ABYTES' => array(
+            '7.1' => false,
+            '7.2' => true,
+        ),
+        'SODIUM_CRYPTO_AEAD_XCHACHA20POLY1305_IETF_KEYBYTES' => array(
+            '7.1' => false,
+            '7.2' => true,
+        ),
+        'SODIUM_CRYPTO_AEAD_XCHACHA20POLY1305_IETF_NSECBYTES' => array(
+            '7.1' => false,
+            '7.2' => true,
+        ),
+        'SODIUM_CRYPTO_AEAD_XCHACHA20POLY1305_IETF_NPUBBYTES' => array(
+            '7.1' => false,
+            '7.2' => true,
+        ),
+        'SODIUM_CRYPTO_AEAD_XCHACHA20POLY1305_IETF_ABYTES' => array(
             '7.1' => false,
             '7.2' => true,
         ),
@@ -2835,6 +2870,10 @@ class NewConstantsSniff extends AbstractNewFeatureSniff
             '7.1' => false,
             '7.2' => true,
         ),
+        'SODIUM_CRYPTO_PWHASH_ALG_ARGON2ID13' => array(
+            '7.1' => false,
+            '7.2' => true,
+        ),
         'SODIUM_CRYPTO_PWHASH_ALG_DEFAULT' => array(
             '7.1' => false,
             '7.2' => true,
@@ -2920,6 +2959,38 @@ class NewConstantsSniff extends AbstractNewFeatureSniff
             '7.2' => true,
         ),
         'SODIUM_CRYPTO_SECRETBOX_NONCEBYTES' => array(
+            '7.1' => false,
+            '7.2' => true,
+        ),
+        'SODIUM_CRYPTO_SECRETSTREAM_XCHACHA20POLY1305_ABYTES' => array(
+            '7.1' => false,
+            '7.2' => true,
+        ),
+        'SODIUM_CRYPTO_SECRETSTREAM_XCHACHA20POLY1305_HEADERBYTES' => array(
+            '7.1' => false,
+            '7.2' => true,
+        ),
+        'SODIUM_CRYPTO_SECRETSTREAM_XCHACHA20POLY1305_KEYBYTES' => array(
+            '7.1' => false,
+            '7.2' => true,
+        ),
+        'SODIUM_CRYPTO_SECRETSTREAM_XCHACHA20POLY1305_MESSAGEBYTES_MAX' => array(
+            '7.1' => false,
+            '7.2' => true,
+        ),
+        'SODIUM_CRYPTO_SECRETSTREAM_XCHACHA20POLY1305_TAG_MESSAGE' => array(
+            '7.1' => false,
+            '7.2' => true,
+        ),
+        'SODIUM_CRYPTO_SECRETSTREAM_XCHACHA20POLY1305_TAG_PUSH' => array(
+            '7.1' => false,
+            '7.2' => true,
+        ),
+        'SODIUM_CRYPTO_SECRETSTREAM_XCHACHA20POLY1305_TAG_REKEY' => array(
+            '7.1' => false,
+            '7.2' => true,
+        ),
+        'SODIUM_CRYPTO_SECRETSTREAM_XCHACHA20POLY1305_TAG_FINAL' => array(
             '7.1' => false,
             '7.2' => true,
         ),
@@ -3445,6 +3516,19 @@ class NewConstantsSniff extends AbstractNewFeatureSniff
             '7.3' => true,
         ),
 
+        'CURL_VERSION_ALTSVC' => array(
+            '7.3.5' => false,
+            '7.3.6' => true,
+        ),
+        'CURL_VERSION_CURLDEBUG' => array(
+            '7.3.5' => false,
+            '7.3.6' => true,
+        ),
+
+        'IMG_FILTER_SCATTER' => array(
+            '7.3' => false,
+            '7.4' => true,
+        ),
         'MB_ONIGURUMA_VERSION' => array(
             '7.3' => false,
             '7.4' => true,
@@ -3469,11 +3553,19 @@ class NewConstantsSniff extends AbstractNewFeatureSniff
             '7.3' => false,
             '7.4' => true,
         ),
+        'PASSWORD_ARGON2_PROVIDER' => array(
+            '7.3' => false,
+            '7.4' => true,
+        ),
         'PHP_WINDOWS_EVENT_CTRL_C' => array(
             '7.3' => false,
             '7.4' => true,
         ),
         'PHP_WINDOWS_EVENT_CTRL_BREAK' => array(
+            '7.3' => false,
+            '7.4' => true,
+        ),
+        'T_BAD_CHARACTER' => array(
             '7.3' => false,
             '7.4' => true,
         ),
@@ -3595,6 +3687,8 @@ class NewConstantsSniff extends AbstractNewFeatureSniff
     /**
      * Returns an array of tokens this test wants to listen for.
      *
+     * @since 8.1.0
+     *
      * @return array
      */
     public function register()
@@ -3604,6 +3698,8 @@ class NewConstantsSniff extends AbstractNewFeatureSniff
 
     /**
      * Processes this test, when one of its tokens is encountered.
+     *
+     * @since 8.1.0
      *
      * @param \PHP_CodeSniffer_File $phpcsFile The file being scanned.
      * @param int                   $stackPtr  The position of the current token in the
@@ -3634,6 +3730,8 @@ class NewConstantsSniff extends AbstractNewFeatureSniff
     /**
      * Get the relevant sub-array for a specific item from a multi-dimensional array.
      *
+     * @since 8.1.0
+     *
      * @param array $itemInfo Base information about the item.
      *
      * @return array Version and other information about the item.
@@ -3646,6 +3744,8 @@ class NewConstantsSniff extends AbstractNewFeatureSniff
 
     /**
      * Get the error message template for this sniff.
+     *
+     * @since 8.1.0
      *
      * @return string
      */

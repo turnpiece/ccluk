@@ -53,7 +53,7 @@ use Beehive\Psr\Log\AbstractLogger;
  * @method bool hasInfoThatPasses($message)
  * @method bool hasDebugThatPasses($message)
  */
-class TestLogger extends \Beehive\Psr\Log\AbstractLogger
+class TestLogger extends AbstractLogger
 {
     /**
      * @var array

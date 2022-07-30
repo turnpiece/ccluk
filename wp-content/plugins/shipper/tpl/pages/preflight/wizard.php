@@ -5,7 +5,7 @@
  * @package shipper
  */
 
-$migration = new Shipper_Model_Stored_Migration;
+$migration = new Shipper_Model_Stored_Migration();
 ?>
 
 <div class="shipper-migration-content shipper-migration-progress-content shipper-preflight-wizard">
@@ -16,11 +16,14 @@ $migration = new Shipper_Model_Stored_Migration;
 	</div>
 
 	<?php
-		$destinations = new Shipper_Model_Stored_Destinations;
-		$this->render('pages/migration/sourcedest-tag', array(
+	$destinations = new Shipper_Model_Stored_Destinations();
+	$this->render(
+		'pages/migration/sourcedest-tag',
+		array(
 			'destinations' => $destinations,
-			'site' => $site,
-		));
+			'site'         => $site,
+		)
+	);
 	?>
 
 	<div class="sui-tabs sui-tabs-flushed shipper-preflight-results">
@@ -30,20 +33,15 @@ $migration = new Shipper_Model_Stored_Migration;
 				<span><?php echo esc_html( $migration->get_source() ); ?></span>
 				<span class="shipper-check-status">
 				<?php
-					$checks = $result['checks']['local'];
-					$icon_type = empty( $checks['errors_count'] )
-						? 'check-tick'
-						: 'warning-alert'
-					;
-					$icon_kind = 'warning-alert' === $icon_type
-						? ( empty( $checks['breaking_errors_count'] ) ? 'warning' : 'error' )
-						: 'success'
-					;
+				$checks    = $result['checks']['local'];
+				$icon_type = empty( $checks['errors_count'] )
+					? 'check-tick'
+					: 'warning-alert';
+				$icon_kind = 'warning-alert' === $icon_type
+					? ( empty( $checks['breaking_errors_count'] ) ? 'warning' : 'error' )
+					: 'success';
 				?>
-					<i aria-hidden="true"
-						class="sui-icon-<?php
-							echo $icon_type;
-						?> sui-<?php echo $icon_kind; ?>"></i>
+					<i aria-hidden="true" class="sui-icon-<?php echo esc_attr( $icon_type ); ?> sui-<?php echo esc_attr( $icon_kind ); ?>"></i>
 				</span>
 			</div>
 			<div class="shipper-preflight-done-tab" id="shipper-tab-remote">
@@ -53,20 +51,15 @@ $migration = new Shipper_Model_Stored_Migration;
 				</span>
 				<span class="shipper-check-status">
 				<?php
-					$checks = $result['checks']['remote'];
-					$icon_type = empty( $checks['errors_count'] )
-						? 'check-tick'
-						: 'warning-alert'
-					;
-					$icon_kind = 'warning-alert' === $icon_type
-						? ( empty( $checks['breaking_errors_count'] ) ? 'warning' : 'error' )
-						: 'success'
-					;
+				$checks    = $result['checks']['remote'];
+				$icon_type = empty( $checks['errors_count'] )
+					? 'check-tick'
+					: 'warning-alert';
+				$icon_kind = 'warning-alert' === $icon_type
+					? ( empty( $checks['breaking_errors_count'] ) ? 'warning' : 'error' )
+					: 'success';
 				?>
-					<i aria-hidden="true"
-						class="sui-icon-<?php
-							echo $icon_type;
-						?> sui-<?php echo $icon_kind; ?>"></i>
+					<i aria-hidden="true" class="sui-icon-<?php echo esc_attr( $icon_type ); ?> sui-<?php echo esc_attr( $icon_kind ); ?>"></i>
 				</span>
 			</div>
 			<div class="shipper-preflight-done-tab" id="shipper-tab-sysdiff">
@@ -74,20 +67,15 @@ $migration = new Shipper_Model_Stored_Migration;
 				<span><?php esc_html_e( 'System Difference', 'shipper' ); ?></span>
 				<span class="shipper-check-status">
 				<?php
-					$checks = $result['checks']['sysdiff'];
-					$icon_type = empty( $checks['errors_count'] )
-						? 'check-tick'
-						: 'warning-alert'
-					;
-					$icon_kind = 'warning-alert' === $icon_type
-						? ( empty( $checks['breaking_errors_count'] ) ? 'warning' : 'error' )
-						: 'success'
-					;
+				$checks    = $result['checks']['sysdiff'];
+				$icon_type = empty( $checks['errors_count'] )
+					? 'check-tick'
+					: 'warning-alert';
+				$icon_kind = 'warning-alert' === $icon_type
+					? ( empty( $checks['breaking_errors_count'] ) ? 'warning' : 'error' )
+					: 'success';
 				?>
-					<i aria-hidden="true"
-						class="sui-icon-<?php
-							echo $icon_type;
-						?> sui-<?php echo $icon_kind; ?>"></i>
+					<i aria-hidden="true" class="sui-icon-<?php echo esc_attr( $icon_type ); ?> sui-<?php echo esc_attr( $icon_kind ); ?>"></i>
 				</span>
 			</div>
 			<div  class="shipper-preflight-done-tab active" id="shipper-tab-overall">
@@ -95,58 +83,73 @@ $migration = new Shipper_Model_Stored_Migration;
 				<span><?php esc_html_e( 'Ready to sail', 'shipper' ); ?></span>
 				<span class="shipper-check-status">
 				<?php
-					$icon_type = empty( $has_issues )
-						? 'check-tick'
-						: 'warning-alert'
-					;
-					$icon_kind = 'warning-alert' === $icon_type
-						? ( empty( $has_errors ) ? 'warning' : 'error' )
-						: 'success'
-					;
+				$icon_type = empty( $has_issues )
+					? 'check-tick'
+					: 'warning-alert';
+				$icon_kind = 'warning-alert' === $icon_type
+					? ( empty( $has_errors ) ? 'warning' : 'error' )
+					: 'success';
 				?>
-					<i aria-hidden="true"
-						class="sui-icon-<?php
-							echo $icon_type;
-						?> sui-<?php echo $icon_kind; ?>"></i>
+					<i aria-hidden="true" class="sui-icon-<?php echo esc_attr( $icon_type ); ?> sui-<?php echo esc_attr( $icon_kind ); ?>"></i>
 				</span>
 			</div>
 		</div>
 		<div data-panes="">
 			<div>
-				<?php $this->render( 'pages/preflight/wizard-source', array(
-					'result' => $result,
-					'has_issues' => $has_issues,
-					'has_errors' => $has_errors,
-					'issues_count' => $issues_count,
-					'shipper_url' => $shipper_url,
-				) ); ?>
+				<?php
+				$this->render(
+					'pages/preflight/wizard-source',
+					array(
+						'result'       => $result,
+						'has_issues'   => $has_issues,
+						'has_errors'   => $has_errors,
+						'issues_count' => $issues_count,
+						'shipper_url'  => $shipper_url,
+					)
+				);
+				?>
 			</div>
 			<div>
-				<?php $this->render( 'pages/preflight/wizard-destination', array(
-					'result' => $result,
-					'has_issues' => $has_issues,
-					'has_errors' => $has_errors,
-					'issues_count' => $issues_count,
-					'shipper_url' => $shipper_url,
-				) ); ?>
+				<?php
+				$this->render(
+					'pages/preflight/wizard-destination',
+					array(
+						'result'       => $result,
+						'has_issues'   => $has_issues,
+						'has_errors'   => $has_errors,
+						'issues_count' => $issues_count,
+						'shipper_url'  => $shipper_url,
+					)
+				);
+				?>
 			</div>
 			<div>
-				<?php $this->render( 'pages/preflight/wizard-sysdiff', array(
-					'result' => $result,
-					'has_issues' => $has_issues,
-					'has_errors' => $has_errors,
-					'issues_count' => $issues_count,
-					'shipper_url' => $shipper_url,
-				) ); ?>
+				<?php
+				$this->render(
+					'pages/preflight/wizard-sysdiff',
+					array(
+						'result'       => $result,
+						'has_issues'   => $has_issues,
+						'has_errors'   => $has_errors,
+						'issues_count' => $issues_count,
+						'shipper_url'  => $shipper_url,
+					)
+				);
+				?>
 			</div>
 			<div class="active">
-				<?php $this->render( 'pages/preflight/wizard-ready', array(
-					'result' => $result,
-					'has_issues' => $has_issues,
-					'has_errors' => $has_errors,
-					'issues_count' => $issues_count,
-					'shipper_url' => $shipper_url,
-				) ); ?>
+				<?php
+				$this->render(
+					'pages/preflight/wizard-ready',
+					array(
+						'result'       => $result,
+						'has_issues'   => $has_issues,
+						'has_errors'   => $has_errors,
+						'issues_count' => $issues_count,
+						'shipper_url'  => $shipper_url,
+					)
+				);
+				?>
 			</div>
 		</div>
 	</div>

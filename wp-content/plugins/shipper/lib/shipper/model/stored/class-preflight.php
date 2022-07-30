@@ -12,15 +12,15 @@
  */
 class Shipper_Model_Stored_Preflight extends Shipper_Model_Stored {
 
-	const KEY_DONE = 'is_done';
+	const KEY_DONE   = 'is_done';
 	const KEY_ERRORS = 'errors';
 	const KEY_CHECKS = 'checks';
 
-	const KEY_CHECKS_SYSTEM = 'local';
-	const KEY_CHECKS_REMOTE = 'remote';
+	const KEY_CHECKS_SYSTEM  = 'local';
+	const KEY_CHECKS_REMOTE  = 'remote';
 	const KEY_CHECKS_SYSDIFF = 'sysdiff';
-	const KEY_CHECKS_FILES = 'files';
-	const KEY_CHECKS_RPKG = 'remote_package';
+	const KEY_CHECKS_FILES   = 'files';
+	const KEY_CHECKS_RPKG    = 'remote_package';
 
 	/**
 	 * Constructor
@@ -40,11 +40,13 @@ class Shipper_Model_Stored_Preflight extends Shipper_Model_Stored {
 	 * @return object
 	 */
 	public function start( $status ) {
-		$this->set_data(array(
-			self::KEY_DONE => ! ! $status,
-			self::KEY_ERRORS => array(),
-			self::KEY_CHECKS => array(),
-		));
+		$this->set_data(
+			array(
+				self::KEY_DONE   => ! ! $status,
+				self::KEY_ERRORS => array(),
+				self::KEY_CHECKS => array(),
+			)
+		);
 		$this->save();
 
 		return $this;
@@ -61,8 +63,7 @@ class Shipper_Model_Stored_Preflight extends Shipper_Model_Stored {
 	public function add_errors( $check, $errors ) {
 		$errors = ! empty( $errors ) && is_array( $errors )
 			? $errors
-			: array()
-		;
+			: array();
 		foreach ( $errors as $error ) {
 			$this->add_error( $check, $error );
 		}
@@ -80,19 +81,21 @@ class Shipper_Model_Stored_Preflight extends Shipper_Model_Stored {
 	public function add_error( $check, $error ) {
 		$message = is_wp_error( $error )
 			? $error->get_error_message()
-			: ( ! empty( $error['message'] ) ? $error['message'] : '')
-		;
+			: ( ! empty( $error['message'] ) ? $error['message'] : '' );
+
 		if ( empty( $message ) ) {
 			$message = __( 'Generic preflight error', 'shipper' );
 		}
+
 		$errs = $this->get( self::KEY_ERRORS, array() );
 		$errs = ! empty( $errs ) && is_array( $errs )
 			? $errs
-			: array()
-		;
+			: array();
+
 		if ( empty( $errs[ $check ] ) ) {
 			$errs[ $check ] = array();
 		}
+
 		$errs[ $check ][] = $message;
 		$this->set( self::KEY_ERRORS, $errs );
 
@@ -110,10 +113,9 @@ class Shipper_Model_Stored_Preflight extends Shipper_Model_Stored {
 	public function set_check( $check, $data = array() ) {
 		$data = ! empty( $data ) && is_array( $data )
 			? $data
-			: array()
-		;
+			: array();
 
-		$checks = $this->get( self::KEY_CHECKS, array() );
+		$checks           = $this->get( self::KEY_CHECKS, array() );
 		$checks[ $check ] = $data;
 
 		$this->set( self::KEY_CHECKS, $checks );
@@ -132,11 +134,12 @@ class Shipper_Model_Stored_Preflight extends Shipper_Model_Stored {
 		if ( self::KEY_CHECKS_FILES === $check ) {
 			return $this->get_files_check();
 		}
+
 		$checks = $this->get( self::KEY_CHECKS, array() );
-		$data = ! empty( $checks[ $check ] ) && is_array( $checks[ $check ] )
+		$data   = ! empty( $checks[ $check ] ) && is_array( $checks[ $check ] )
 			? $checks[ $check ]
-			: array()
-		;
+			: array();
+
 		return $data;
 	}
 
@@ -149,13 +152,12 @@ class Shipper_Model_Stored_Preflight extends Shipper_Model_Stored {
 	 */
 	public function get_files_check() {
 		$checks = $this->get( self::KEY_CHECKS, array() );
-		$key = self::KEY_CHECKS_FILES;
-		$data = ! empty( $checks[ $key ] ) && is_array( $checks[ $key ] )
+		$key    = self::KEY_CHECKS_FILES;
+		$data   = ! empty( $checks[ $key ] ) && is_array( $checks[ $key ] )
 			? $checks[ $key ]
-			: array()
-		;
+			: array();
 
-		$check = new Shipper_Task_Check_Files;
+		$check  = new Shipper_Task_Check_Files();
 		$data[] = $check->get_package_size_check()->get_data();
 		if ( ! isset( $data['is_done'] ) ) {
 			$data['is_done'] = false;
@@ -175,8 +177,7 @@ class Shipper_Model_Stored_Preflight extends Shipper_Model_Stored {
 		$errs = $this->get( self::KEY_ERRORS, array() );
 		return ! empty( $errs[ $check ] ) && is_array( $errs[ $check ] )
 			? $errs[ $check ]
-			: array()
-		;
+			: array();
 	}
 
 	/**
@@ -185,7 +186,7 @@ class Shipper_Model_Stored_Preflight extends Shipper_Model_Stored {
 	 * @param string $check Check for the errors to be reset for.
 	 */
 	public function clear_check_errors( $check ) {
-		$errs = $this->get( self::KEY_ERRORS, array() );
+		$errs           = $this->get( self::KEY_ERRORS, array() );
 		$errs[ $check ] = array();
 		return $this->set( self::KEY_ERRORS, $errs );
 	}
@@ -202,7 +203,7 @@ class Shipper_Model_Stored_Preflight extends Shipper_Model_Stored {
 			self::KEY_CHECKS_SYSDIFF,
 		);
 
-		$migration = new Shipper_Model_Stored_Migration;
+		$migration = new Shipper_Model_Stored_Migration();
 		if ( Shipper_Model_Stored_Migration::TYPE_IMPORT === $migration->get_type() ) {
 			$types[] = self::KEY_CHECKS_RPKG;
 		} else {

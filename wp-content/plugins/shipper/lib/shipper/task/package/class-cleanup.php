@@ -23,6 +23,11 @@ class Shipper_Task_Package_Cleanup extends Shipper_Task_Package {
 			Shipper_Helper_Fs_Path::get_temp_dir(),
 			''
 		);
+
+		// add a flag to show flash notice.
+		( new Shipper_Model_Stored_PackageMeta() )->set( 'show_flash', true )->save();
+		( new Shipper_Model_Stored_Exclusions() )->clear()->save();
+
 		return true;
 	}
 

@@ -57,7 +57,7 @@ use InvalidArgumentException;
  *
  *   $res = $client->get('myproject/taskqueues/myqueue');
  */
-class ServiceAccountCredentials extends \Beehive\Google\Auth\CredentialsLoader implements \Beehive\Google\Auth\GetQuotaProjectInterface, \Beehive\Google\Auth\SignBlobInterface, \Beehive\Google\Auth\ProjectIdProviderInterface
+class ServiceAccountCredentials extends CredentialsLoader implements GetQuotaProjectInterface, SignBlobInterface, ProjectIdProviderInterface
 {
     use ServiceAccountSignerTrait;
     /**
@@ -76,6 +76,18 @@ class ServiceAccountCredentials extends \Beehive\Google\Auth\CredentialsLoader i
      * @var string|null
      */
     protected $projectId;
+    /*
+     * @var array|null
+     */
+    private $lastReceivedJwtAccessToken;
+    /*
+     * @var bool
+     */
+    private $useJwtAccessWithScope = \false;
+    /*
+     * @var ServiceAccountJwtAccessCredentials|null
+     */
+    private $jwtAccessCredentials;
     /**
      * Create a new ServiceAccountCredentials.
      *
@@ -108,14 +120,25 @@ class ServiceAccountCredentials extends \Beehive\Google\Auth\CredentialsLoader i
             $this->quotaProject = (string) $jsonKey['quota_project_id'];
         }
         if ($scope && $targetAudience) {
-            throw new \InvalidArgumentException('Scope and targetAudience cannot both be supplied');
+            throw new InvalidArgumentException('Scope and targetAudience cannot both be supplied');
         }
         $additionalClaims = [];
         if ($targetAudience) {
             $additionalClaims = ['target_audience' => $targetAudience];
         }
-        $this->auth = new \Beehive\Google\Auth\OAuth2(['audience' => self::TOKEN_CREDENTIAL_URI, 'issuer' => $jsonKey['client_email'], 'scope' => $scope, 'signingAlgorithm' => 'RS256', 'signingKey' => $jsonKey['private_key'], 'sub' => $sub, 'tokenCredentialUri' => self::TOKEN_CREDENTIAL_URI, 'additionalClaims' => $additionalClaims]);
+        $this->auth = new OAuth2(['audience' => self::TOKEN_CREDENTIAL_URI, 'issuer' => $jsonKey['client_email'], 'scope' => $scope, 'signingAlgorithm' => 'RS256', 'signingKey' => $jsonKey['private_key'], 'sub' => $sub, 'tokenCredentialUri' => self::TOKEN_CREDENTIAL_URI, 'additionalClaims' => $additionalClaims]);
         $this->projectId = isset($jsonKey['project_id']) ? $jsonKey['project_id'] : null;
+    }
+    /**
+     * When called, the ServiceAccountCredentials will use an instance of
+     * ServiceAccountJwtAccessCredentials to fetch (self-sign) an access token
+     * even when only scopes are supplied. Otherwise,
+     * ServiceAccountJwtAccessCredentials is only called when no scopes and an
+     * authUrl (audience) is suppled.
+     */
+    public function useJwtAccessWithScope()
+    {
+        $this->useJwtAccessWithScope = \true;
     }
     /**
      * @param callable $httpHandler
@@ -128,6 +151,15 @@ class ServiceAccountCredentials extends \Beehive\Google\Auth\CredentialsLoader i
      */
     public function fetchAuthToken(callable $httpHandler = null)
     {
+        if ($this->useSelfSignedJwt()) {
+            $jwtCreds = $this->createJwtAccessCredentials();
+            $accessToken = $jwtCreds->fetchAuthToken($httpHandler);
+            if ($lastReceivedToken = $jwtCreds->getLastReceivedToken()) {
+                // Keep self-signed JWTs in memory as the last received token
+                $this->lastReceivedJwtAccessToken = $lastReceivedToken;
+            }
+            return $accessToken;
+        }
         return $this->auth->fetchAuthToken($httpHandler);
     }
     /**
@@ -146,7 +178,9 @@ class ServiceAccountCredentials extends \Beehive\Google\Auth\CredentialsLoader i
      */
     public function getLastReceivedToken()
     {
-        return $this->auth->getLastReceivedToken();
+        // If self-signed JWTs are being used, fetch the last received token
+        // from memory. Else, fetch it from OAuth2
+        return $this->useSelfSignedJwt() ? $this->lastReceivedJwtAccessToken : $this->auth->getLastReceivedToken();
     }
     /**
      * Get the project ID from the service account keyfile.
@@ -171,14 +205,30 @@ class ServiceAccountCredentials extends \Beehive\Google\Auth\CredentialsLoader i
     public function updateMetadata($metadata, $authUri = null, callable $httpHandler = null)
     {
         // scope exists. use oauth implementation
-        $scope = $this->auth->getScope();
-        if (!\is_null($scope)) {
+        if (!$this->useSelfSignedJwt()) {
             return parent::updateMetadata($metadata, $authUri, $httpHandler);
         }
-        // no scope found. create jwt with the auth uri
-        $credJson = array('private_key' => $this->auth->getSigningKey(), 'client_email' => $this->auth->getIssuer());
-        $jwtCreds = new \Beehive\Google\Auth\Credentials\ServiceAccountJwtAccessCredentials($credJson);
-        return $jwtCreds->updateMetadata($metadata, $authUri, $httpHandler);
+        $jwtCreds = $this->createJwtAccessCredentials();
+        if ($this->auth->getScope()) {
+            // Prefer user-provided "scope" to "audience"
+            $updatedMetadata = $jwtCreds->updateMetadata($metadata, null, $httpHandler);
+        } else {
+            $updatedMetadata = $jwtCreds->updateMetadata($metadata, $authUri, $httpHandler);
+        }
+        if ($lastReceivedToken = $jwtCreds->getLastReceivedToken()) {
+            // Keep self-signed JWTs in memory as the last received token
+            $this->lastReceivedJwtAccessToken = $lastReceivedToken;
+        }
+        return $updatedMetadata;
+    }
+    private function createJwtAccessCredentials()
+    {
+        if (!$this->jwtAccessCredentials) {
+            // Create credentials for self-signing a JWT (JwtAccess)
+            $credJson = array('private_key' => $this->auth->getSigningKey(), 'client_email' => $this->auth->getIssuer());
+            $this->jwtAccessCredentials = new ServiceAccountJwtAccessCredentials($credJson, $this->auth->getScope());
+        }
+        return $this->jwtAccessCredentials;
     }
     /**
      * @param string $sub an email address account to impersonate, in situations when
@@ -208,5 +258,17 @@ class ServiceAccountCredentials extends \Beehive\Google\Auth\CredentialsLoader i
     public function getQuotaProject()
     {
         return $this->quotaProject;
+    }
+    private function useSelfSignedJwt()
+    {
+        // If claims are set, this call is for "id_tokens"
+        if ($this->auth->getAdditionalClaims()) {
+            return \false;
+        }
+        // When true, ServiceAccountCredentials will always use JwtAccess for access tokens
+        if ($this->useJwtAccessWithScope) {
+            return \true;
+        }
+        return \is_null($this->auth->getScope());
     }
 }

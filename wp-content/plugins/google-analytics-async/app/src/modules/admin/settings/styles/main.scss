@@ -2,6 +2,7 @@ $summary-image: '../../../images/beehive-summary.png';
 
 // Overwrite font path.
 $sui-font-path: '~@wpmudev/shared-ui/dist/fonts/';
+$sui-image-path: '~@wpmudev/shared-ui/dist/images/';
 
 // Share UI styles
 @import '~@wpmudev/shared-ui/scss/shared-ui';
@@ -10,6 +11,7 @@ $sui-font-path: '~@wpmudev/shared-ui/dist/fonts/';
 @import '../../../styles/components/icons';
 @import '../../../styles/components/inactive';
 @import '../../../styles/components/google_auth';
+@import '../../../styles/components/search';
 
 // Onboarding.
 @import '../../../styles/modals/onboarding';

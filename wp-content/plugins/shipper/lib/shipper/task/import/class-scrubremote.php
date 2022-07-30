@@ -36,9 +36,9 @@ class Shipper_Task_Import_Scrubremote extends Shipper_Task_Import {
 			return true;
 		}
 
-		$migration = new Shipper_Model_Stored_Migration;
+		$migration = new Shipper_Model_Stored_Migration();
 		$domain    = Shipper_Helper_Fs_Path::clean_fname( $migration->get_source() );
-		$remote    = new Shipper_Helper_Fs_Remote;
+		$remote    = new Shipper_Helper_Fs_Remote();
 
 		$pos         = $this->get_initialized_position();
 		$shipper_pos = $pos;
@@ -53,10 +53,10 @@ class Shipper_Task_Import_Scrubremote extends Shipper_Task_Import {
 		}
 
 		if ( empty( $statements ) && empty( $objects ) ) {
-			$files   = new Shipper_Model_Dumped_Filelist;
-			$large   = new Shipper_Model_Dumped_Largelist;
+			$files   = new Shipper_Model_Dumped_Filelist();
+			$large   = new Shipper_Model_Dumped_Largelist();
 			$package = new Shipper_Model_Dumped_Packagelist();
-			// Done, remove meta files and parent object
+			// Done, remove meta files and parent object.
 			$objects[] = array(
 				'Key' => $remote->get_remote_path(
 					trailingslashit( $domain ) . 'meta/migration_manifest.json'
@@ -89,12 +89,14 @@ class Shipper_Task_Import_Scrubremote extends Shipper_Task_Import {
 			try {
 				$s3    = $remote->get_remote_storage_handler();
 				$creds = $remote->get_creds();
-				$s3->deleteObjects( array(
-					'Bucket' => $creds->get( Shipper_Model_Stored_Creds::KEY_BUCKET ),
-					'Delete' => array(
-						'Objects' => $objects,
-					),
-				) );
+				$s3->deleteObjects(
+					array(
+						'Bucket' => $creds->get( Shipper_Model_Stored_Creds::KEY_BUCKET ),
+						'Delete' => array(
+							'Objects' => $objects,
+						),
+					)
+				);
 				$result = true;
 			} catch ( Exception $e ) {
 				Shipper_Helper_Log::write( 'NOTICE: remote export not scrubbed' );
@@ -111,9 +113,17 @@ class Shipper_Task_Import_Scrubremote extends Shipper_Task_Import {
 		return $is_done;
 	}
 
+	/**
+	 * Get file statements
+	 *
+	 * @param int   $pos pointer position on a file.
+	 * @param false $dumped list of dumped files.
+	 *
+	 * @return array
+	 */
 	public function get_file_statements( $pos, $dumped = false ) {
 		if ( empty( $dumped ) ) {
-			$dumped = new Shipper_Model_Dumped_Filelist;
+			$dumped = new Shipper_Model_Dumped_Filelist();
 		}
 		$list = $dumped->get_statements( $pos, 999, 1000 );
 
@@ -124,16 +134,23 @@ class Shipper_Task_Import_Scrubremote extends Shipper_Task_Import {
 			if ( $pos < 0 ) {
 				$pos = 0;
 			}
-			$dumped = new Shipper_Model_Dumped_Largelist;
+			$dumped = new Shipper_Model_Dumped_Largelist();
 			$list   = $dumped->get_statements( $pos, 999, 10000 );
 		}
 
 		return $list;
 	}
 
+	/**
+	 * Get initialized position
+	 *
+	 * @param false $filelist array of files.
+	 *
+	 * @return false|int|mixed
+	 */
 	public function get_initialized_position( $filelist = false ) {
 		if ( empty( $filelist ) ) {
-			$filelist = new Shipper_Model_Stored_Filelist;
+			$filelist = new Shipper_Model_Stored_Filelist();
 		}
 
 		$pos = $filelist->get( Shipper_Model_Stored_Filelist::KEY_SCRUB_CURSOR, false );
@@ -146,9 +163,17 @@ class Shipper_Task_Import_Scrubremote extends Shipper_Task_Import {
 		return $pos;
 	}
 
+	/**
+	 * Set initialized pointer position
+	 *
+	 * @param int   $position pointer position in a file.
+	 * @param false $filelist list of files.
+	 *
+	 * @return bool
+	 */
 	public function set_initialized_position( $position, $filelist = false ) {
 		if ( empty( $filelist ) ) {
-			$filelist = new Shipper_Model_Stored_Filelist;
+			$filelist = new Shipper_Model_Stored_Filelist();
 		}
 
 		$newpos = $filelist->get( Shipper_Model_Stored_Filelist::KEY_SCRUB_CURSOR, false );

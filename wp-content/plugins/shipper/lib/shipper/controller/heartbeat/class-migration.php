@@ -30,15 +30,15 @@ class Shipper_Controller_Heartbeat_Migration extends Shipper_Controller_Heartbea
 			return $response;
 		}
 
-		$migration = new Shipper_Model_Stored_Migration;
-		$info = $migration->get( 'progress', array() );
-		$errors = $migration->get( 'errors', array() );
+		$migration = new Shipper_Model_Stored_Migration();
+		$info      = $migration->get( 'progress', array() );
+		$errors    = $migration->get( 'errors', array() );
 
 		$failed = ! empty( $errors );
-		$data = array(
-			'is_done' => $migration->get( 'tasks_completed' ),
-			'progress' => ( ! empty( $info['percentage'] ) ? (int) $info['percentage'] : 0),
-			'message' => ( ! empty( $info['message'] ) ? $info['message'] : ''),
+		$data   = array(
+			'is_done'  => $migration->get( 'tasks_completed' ),
+			'progress' => ( ! empty( $info['percentage'] ) ? (int) $info['percentage'] : 0 ),
+			'message'  => ( ! empty( $info['message'] ) ? $info['message'] : '' ),
 		);
 
 		if ( $failed ) {
@@ -50,10 +50,10 @@ class Shipper_Controller_Heartbeat_Migration extends Shipper_Controller_Heartbea
 
 		$data['kickstart'] = $this->get_kickstart_info();
 
-		$health = new Shipper_Model_Stored_Healthcheck;
+		$health          = new Shipper_Model_Stored_Healthcheck();
 		$data['is_slow'] = $health->is_slow_migration();
 
-		$response['shipper-migration'] = $data;
+		$response['shipper-migration']  = $data;
 		$response['heartbeat_interval'] = Shipper_Helper_Assets::get_update_interval();
 
 		return $response;
@@ -74,8 +74,8 @@ class Shipper_Controller_Heartbeat_Migration extends Shipper_Controller_Heartbea
 		$this->attempt_cron_respawn_if_needed( $event );
 		$this->reschedule_kickstart_cron( $event );
 		return array(
-			'when' => date( 'r', $event ),
-			'in' => ( ! empty( $event ) ? $event - time() : 'never' ),
+			'when' => gmdate( 'r', $event ),
+			'in'   => ( ! empty( $event ) ? $event - time() : 'never' ),
 		);
 	}
 
@@ -88,10 +88,12 @@ class Shipper_Controller_Heartbeat_Migration extends Shipper_Controller_Heartbea
 	 * @return bool
 	 */
 	public function attempt_cron_respawn_if_needed( $event_ts ) {
-		if ( empty( $event_ts ) ) { return false; }
+		if ( empty( $event_ts ) ) {
+			return false; }
 
 		$fire_in = $event_ts - time();
-		if ( $fire_in >= 0 ) { return false; }
+		if ( $fire_in >= 0 ) {
+			return false; }
 		if ( abs( $fire_in ) < Shipper_Helper_System::get_max_exec_time_capped() ) {
 			return false;
 		}
@@ -120,9 +122,10 @@ class Shipper_Controller_Heartbeat_Migration extends Shipper_Controller_Heartbea
 	 * @return bool
 	 */
 	public function reschedule_kickstart_cron( $event_ts ) {
-		if ( false !== $event_ts ) { return false; }
+		if ( false !== $event_ts ) {
+			return false; }
 
-		$migration = new Shipper_Model_Stored_Migration;
+		$migration = new Shipper_Model_Stored_Migration();
 		if ( ! $migration->is_active() ) {
 			return false;
 		}

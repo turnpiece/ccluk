@@ -2,7 +2,7 @@
 /**
  * The admin view class of the plugin.
  *
- * @link    http://premium.wpmudev.org
+ * @link    http://wpmudev.com
  * @since   3.2.0
  *
  * @author  Joel James <joel@incsub.com>
@@ -82,6 +82,20 @@ class Admin extends View {
 	}
 
 	/**
+	 * Render tutorials page content for the site.
+	 *
+	 * @since 3.3.6
+	 *
+	 * @return void
+	 */
+	public function tutorials_page() {
+		echo '<div id="beehive-tutorials-app"></div>';
+
+		Assets::instance()->enqueue_style( 'beehive-tutorials' );
+		Assets::instance()->enqueue_script( 'beehive-tutorials' );
+	}
+
+	/**
 	 * Get Beehive menu icon data.
 	 *
 	 * Get svg image instead of an image url.
@@ -93,8 +107,11 @@ class Admin extends View {
 	public function get_settings_icon() {
 		ob_start();
 		?>
-		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 292 337.2" fill="#fff">
-			<path d="M125.4 153.4l51.7 47.9 5.9-6.3-38-73.3zM81 112.3l25.5 23.6L147 70.2l54.6 105.4 88.6-92.4L146 0 0 84.3v119.8zm211 58.1v-53.6l-78.1 82.4 10.7 20.9zm-76.2 87.8l-20.5-39.4-17.1 18.1-66.4-61.5L47.1 280l98.9 57.2 146-84.3v-51.4zM93 158l-10.2-9.3L0 242.2v10.7l25.5 14.7z"/>
+		<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<path d="M14.5 9.09095H12.7V13.6364H14.5V9.09095Z" fill="#A7AAAD"/>
+			<path d="M9.99988 2.07275L17.1999 6.07272V13.9273L9.99988 17.9272L2.79988 13.9273V6.07272L9.99988 2.07275ZM9.99988 0L0.999878 5V15L9.99988 20L18.9999 15V5L9.99988 0Z" fill="#A7AAAD"/>
+			<path d="M7.29991 11.8182H5.49991V13.6364H7.29991V11.8182Z" fill="#A7AAAD"/>
+			<path d="M10.8999 6.36368H9.09995V13.6364H10.8999V6.36368Z" fill="#A7AAAD"/>
 		</svg>
 		<?php
 		$svg = ob_get_clean();
@@ -154,6 +171,9 @@ class Admin extends View {
 			$vars['current_user'] = get_current_user_id();
 		}
 
+		// Check if current user can access permissions.
+		$vars['show_permissions'] = $this->can_show_permissions();
+
 		// Report items.
 		$vars['report_tree'] = $this->report_items();
 
@@ -201,7 +221,7 @@ class Admin extends View {
 
 		// Rest data.
 		$vars['rest'] = array(
-			'base'  => rest_url( 'beehive/v1/' ),
+			'base'  => rest_url( 'beehive/' ),
 			'nonce' => wp_create_nonce( 'wp_rest' ),
 		);
 
@@ -235,6 +255,7 @@ class Admin extends View {
 				'plugins'  => is_multisite() ? network_admin_url( 'plugins.php' ) : admin_url( 'plugins.php' ),
 				'settings' => Helpers\Template::settings_url( 'permissions', $this->is_network() ),
 				'accounts' => Helpers\Template::accounts_url( 'google', $this->is_network() ),
+				'bf'       => 'https://wpmudev.com/black-friday/?coupon=BFP-2021&utm_source=beehive_' . ( beehive_analytics()->is_pro() ? 'pro' : 'free' ) . '&utm_medium=referral&utm_campaign=bf2021',
 			);
 
 			// Flags.
@@ -245,6 +266,7 @@ class Admin extends View {
 				'admin'       => Helpers\Permission::is_admin_user( $this->is_network() ) ? 1 : 0,
 				'super_admin' => is_multisite() && current_user_can( 'manage_network' ) ? 1 : 0,
 				'is_pro'      => beehive_analytics()->is_pro(),
+				'show_bf'     => $this->show_bf_notice(),
 			);
 
 			$vars['dates'] = array(
@@ -408,9 +430,95 @@ class Admin extends View {
 		 * Filter hook to modify the list of users excluded/included.
 		 *
 		 * @param array $users Users list.
+		 * @param array $ids   User IDs.
 		 *
 		 * @since  3.2.5
 		 */
 		return apply_filters( 'beehive_admin_vars_get_users_data', $users, $ids );
+	}
+
+	/**
+	 * Check if current user can access permissions menu.
+	 *
+	 * This applies only to subsites.
+	 *
+	 * @since 3.3.5
+	 *
+	 * @return array
+	 */
+	private function can_show_permissions() {
+		$can = true;
+
+		// Only on network subsite.
+		if ( Helpers\General::is_networkwide() && ! $this->is_network() ) {
+			// Get overwriting options.
+			$stats    = beehive_analytics()->settings->get( 'overwrite_cap', 'permissions', true );
+			$settings = beehive_analytics()->settings->get( 'overwrite_settings_cap', 'permissions', true );
+
+			$can = $stats || $settings;
+		}
+
+		/**
+		 * Filter hook to modify access of permissions menu.
+		 *
+		 * @param bool $can Can access.
+		 *
+		 * @since  3.3.5
+		 */
+		return apply_filters( 'beehive_settings_can_show_permissions', $can );
+	}
+
+	/**
+	 * Check if we need to show Black Friday banner.
+	 *
+	 * @since 3.3.11
+	 *
+	 * @return bool
+	 */
+	private function show_bf_notice() {
+		// Is the plugin active networkwide.
+		$network = Helpers\General::is_networkwide();
+
+		// Only show to super admins on multisite.
+		if ( $network && ! current_user_can( 'manage_network' ) ) {
+			return false;
+		}
+
+		// Only show to admins on single sites.
+		if ( ! $network && ! current_user_can( 'manage_options' ) ) {
+			return false;
+		}
+
+		// If WPMUDEV Dashboard is active check if allowed user.
+		if ( class_exists( '\WPMUDEV_Dashboard' ) && method_exists( '\WPMUDEV_Dashboard_Site', 'allowed_user' ) ) {
+			if ( ! \WPMUDEV_Dashboard::$site->allowed_user() ) {
+				return false;
+			}
+		}
+
+		// If white label is enabled.
+		if ( apply_filters( 'wpmudev_branding_hide_branding', false ) ) {
+			return false;
+		}
+
+		// If dismissed already.
+		if ( beehive_analytics()->settings->get( 'hide_bf_notice', 'misc', $network, false ) ) {
+			return false;
+		}
+
+		// Don't show before Nov 1st.
+		if ( date_create( date_i18n( 'd-m-Y' ) ) < date_create( date_i18n( '01-11-Y' ) ) ) {
+			return false;
+		}
+
+		// Don't show after Dec 6th.
+		if ( date_create( date_i18n( 'd-m-Y' ) ) >= date_create( date_i18n( '06-12-Y' ) ) ) {
+			// Set the flag.
+			beehive_analytics()->settings->update( 'hide_bf_notice', true, 'misc', $network );
+
+			return false;
+		}
+
+		return true;
 	}
 }

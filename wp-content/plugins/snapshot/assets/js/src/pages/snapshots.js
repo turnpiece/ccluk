@@ -17,7 +17,7 @@
 		});
 
 		$("#my-snapshot-all").on('change', function () {
-			$('input[id^="my-snapshot"]').attr('checked', $(this).is(':checked'));
+			$('input[id^="my-snapshot"]').prop('checked', $(this).is(':checked'));
 		});
 
 		$('#wps-snapshot-log').find('.wps-popup-close').on('click', function (e) {

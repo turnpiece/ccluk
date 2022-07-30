@@ -15,6 +15,7 @@ class Shipper_Helper_Wpcli {
 	/**
 	 * Excludes a path from a migration fileset
 	 *
+	 * @param array $args an array of arguments.
 	 *
 	 * ## OPTIONS
 	 *
@@ -24,16 +25,16 @@ class Shipper_Helper_Wpcli {
 	public function exclude( $args ) {
 		$fragment = $args[0];
 
-		$files = new Shipper_Task_Check_Package_Files;
+		$files = new Shipper_Task_Check_Package_Files();
 		$files->restart();
 		while ( ! $files->is_done() ) {
 			$files->apply();
 		}
 
-		$storage = new Shipper_Model_Stored_Filelist;
-		$oversized = $storage->get( 'oversized', array() );
-		$exclusions = new Shipper_Model_Stored_Exclusions;
-		$all = $exclusions->get_data();
+		$storage    = new Shipper_Model_Stored_Filelist();
+		$oversized  = $storage->get( 'oversized', array() );
+		$exclusions = new Shipper_Model_Stored_Exclusions();
+		$all        = $exclusions->get_data();
 
 		$updated = 0;
 		foreach ( $oversized as $info ) {
@@ -47,11 +48,11 @@ class Shipper_Helper_Wpcli {
 			if ( empty( $result ) ) {
 				continue;
 			}
-			if ( in_array( $path, array_keys( $all ) ) ) {
+			if ( in_array( $path, array_keys( $all ), true ) ) {
 				continue;
 			}
 			$exclusions->set( $path, md5( $path ) );
-			$updated += 1;
+			$updated++;
 		}
 
 		if ( ! empty( $updated ) ) {
@@ -65,25 +66,26 @@ class Shipper_Helper_Wpcli {
 	/**
 	 * Includes a path to a migration fileset
 	 *
+	 * @param array $args an array of arguments.
 	 *
 	 * ## OPTIONS
 	 *
 	 * <path>
 	 * : Path fragment to include (will include everything matching the passed arg).
 	 */
-	public function include( $args ) {
+	public function includes( $args ) {
 		$fragment = $args[0];
 
-		$files = new Shipper_Task_Check_Package_Files;
+		$files = new Shipper_Task_Check_Package_Files();
 		$files->restart();
 		while ( ! $files->is_done() ) {
 			$files->apply();
 		}
 
-		$storage = new Shipper_Model_Stored_Filelist;
-		$oversized = $storage->get( 'oversized', array() );
-		$exclusions = new Shipper_Model_Stored_Exclusions;
-		$all = $exclusions->get_data();
+		$storage    = new Shipper_Model_Stored_Filelist();
+		$oversized  = $storage->get( 'oversized', array() );
+		$exclusions = new Shipper_Model_Stored_Exclusions();
+		$all        = $exclusions->get_data();
 
 		$updated = 0;
 		foreach ( $oversized as $info ) {
@@ -97,11 +99,11 @@ class Shipper_Helper_Wpcli {
 			if ( empty( $result ) ) {
 				continue;
 			}
-			if ( ! in_array( $path, array_keys( $all ) ) ) {
+			if ( ! in_array( $path, array_keys( $all ), true ) ) {
 				continue;
 			}
 			$exclusions->remove( $path );
-			$updated += 1;
+			$updated++;
 		}
 
 		if ( ! empty( $updated ) ) {
@@ -112,8 +114,15 @@ class Shipper_Helper_Wpcli {
 		$files->restart();
 	}
 
+	/**
+	 * Get validated domain
+	 *
+	 * @param string $domain domain name.
+	 *
+	 * @return false|mixed
+	 */
 	protected function get_validated_domain( $domain ) {
-		$destinations = new Shipper_Model_Stored_Destinations;
+		$destinations = new Shipper_Model_Stored_Destinations();
 		if ( $destinations->is_expired() ) {
 			$ctrl = Shipper_Controller_Admin::get();
 			$ctrl->update_destinations_cache();
@@ -126,9 +135,14 @@ class Shipper_Helper_Wpcli {
 			: false;
 	}
 
+	/**
+	 * Run subtasks
+	 *
+	 * @param object $overall overall sub subtasks.
+	 */
 	protected function run_subtasks( $overall ) {
-		foreach( $overall->get_tasks() as $type => $task ) {
-			$total = $task->get_total_steps();
+		foreach ( $overall->get_tasks() as $type => $task ) {
+			$total    = $task->get_total_steps();
 			$progress = WP_CLI\Utils\make_progress_bar(
 				"Processing {$type} task: {$total}",
 				$total
@@ -145,8 +159,16 @@ class Shipper_Helper_Wpcli {
 		}
 	}
 
+	/**
+	 * Prepare migration
+	 *
+	 * @param string $type type of a migration.
+	 * @param string $destination destination site name.
+	 *
+	 * @return \Shipper_Model_Stored_Migration
+	 */
 	protected function prepare_migration( $type, $destination ) {
-		$migration = new Shipper_Model_Stored_Migration;
+		$migration = new Shipper_Model_Stored_Migration();
 		$migration->clear()->save();
 
 		$migration->prepare(
@@ -160,31 +182,46 @@ class Shipper_Helper_Wpcli {
 		return $migration;
 	}
 
+	/**
+	 * Get cli dest
+	 *
+	 * @return string
+	 */
 	protected function get_cli_dest() {
 		return 'whatever.org';
 	}
 
+	/**
+	 * Render preflight results
+	 *
+	 * @param object $preflight prefilght object.
+	 */
 	protected function render_preflight_results( $preflight ) {
-		$check_types = $preflight->get_check_types();
+		$check_types        = $preflight->get_check_types();
 		$has_remote_package = in_array(
 			Shipper_Model_Stored_Preflight::KEY_CHECKS_RPKG,
-			$check_types
+			$check_types,
+			true
 		);
-		$messages = array(
+		$messages           = array(
 			'warnings' => array(),
-			'errors' => array(),
+			'errors'   => array(),
 		);
-		foreach( $check_types as $type ) {
+
+		foreach ( $check_types as $type ) {
 			foreach ( $preflight->get_check( $type ) as $check ) {
 				if ( Shipper_Model_Check::STATUS_WARNING === $check['status'] ) {
 					$msg = "{$type}: {$check['title']}";
 					if ( Shipper_Model_Stored_Preflight::KEY_CHECKS_RPKG === $type ) {
-						$tmp = preg_replace(
+						$tmp  = preg_replace(
 							'/\s+/',
 							' ',
 							strtr(
 								wp_strip_all_tags( $check['message'] ),
-								array( "\n" => ' ', "\r" => " " )
+								array(
+									"\n" => ' ',
+									"\r" => ' ',
+								)
 							)
 						);
 						$msg .= "\n{$tmp}";
@@ -197,14 +234,14 @@ class Shipper_Helper_Wpcli {
 			}
 		}
 		$messages['warnings'] = array_unique( $messages['warnings'] );
-		$messages['errors'] = array_unique( $messages['errors'] );
+		$messages['errors']   = array_unique( $messages['errors'] );
 		if ( ! empty( $messages['warnings'] ) ) {
-			foreach( $messages['warnings'] as $warning ) {
+			foreach ( $messages['warnings'] as $warning ) {
 				WP_CLI::warning( $warning );
 			}
 		}
 		if ( ! empty( $messages['errors'] ) ) {
-			foreach( $messages['errors'] as $error ) {
+			foreach ( $messages['errors'] as $error ) {
 				WP_CLI::error( $error );
 			}
 		}
@@ -223,29 +260,34 @@ class Shipper_Helper_Wpcli {
 		);
 	}
 
+	/**
+	 * Render preflight file results
+	 *
+	 * @return void
+	 */
 	protected function render_preflight_file_results() {
-		$storage = new Shipper_Model_Stored_Filelist;
+		$storage   = new Shipper_Model_Stored_Filelist();
 		$oversized = $storage->get( 'oversized', array() );
 
-		$estimate = new Shipper_Model_Stored_Estimate;
+		$estimate     = new Shipper_Model_Stored_Estimate();
 		$package_size = $estimate->get( 'raw_package_size', 0 );
 
-		$exclusions_model = new Shipper_Model_Stored_Exclusions;
-		$exclusions = array_keys( $exclusions_model->get_data() );
+		$exclusions_model = new Shipper_Model_Stored_Exclusions();
+		$exclusions       = array_keys( $exclusions_model->get_data() );
 		foreach ( $exclusions as $exc ) {
 			$package_size -= filesize( $exc );
 		}
 
 		$files = array();
-		foreach( $oversized as $item ) {
-			$excl = ( in_array( $item['path'], $exclusions ) )
+		foreach ( $oversized as $item ) {
+			$excl    = ( in_array( $item['path'], $exclusions, true ) )
 				? 'Yes'
 				: 'No';
-			$size = size_format( $item['size'] );
+			$size    = size_format( $item['size'] );
 			$files[] = array(
 				'Excluded' => $excl,
-				'Path' => $item['path'],
-				'Size' => $size,
+				'Path'     => $item['path'],
+				'Size'     => $size,
 			);
 		}
 		if ( ! empty( $files ) ) {

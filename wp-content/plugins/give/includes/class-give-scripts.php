@@ -1,5 +1,7 @@
 <?php
 
+use Give\Helpers\EnqueueScript;
+
 /**
  * Loads the plugin's scripts and styles.
  *
@@ -73,9 +75,9 @@ class Give_Scripts {
 	 * @access public
 	 *
 	 * @param string $handle Script Handle.
-	 * @param string $src    Script Source URL.
-	 * @param array  $dep    Dependency on a script.
-	 * @param mixed  $ver    Script Version
+	 * @param string $src Script Source URL.
+	 * @param array  $dep Dependency on a script.
+	 * @param mixed  $ver Script Version
 	 */
 	public static function register_script( $handle, $src, $dep = [], $ver = false ) {
 		wp_register_script( $handle, $src, $dep, $ver, self::$scripts_footer );
@@ -114,19 +116,21 @@ class Give_Scripts {
 	 * @since 2.1.0
 	 */
 	public function register_scripts() {
-
-		// WP-Admin.
-		wp_register_script(
-			'give-admin-scripts',
-			GIVE_PLUGIN_URL . 'assets/dist/js/admin.js',
-			[
-				'jquery',
-				'jquery-ui-datepicker',
-				'wp-color-picker',
-				'jquery-query',
-			],
-			GIVE_VERSION
-		);
+        // WP-Admin.
+        EnqueueScript::make(
+            'give-admin-scripts',
+            'assets/dist/js/admin.js'
+        )
+            ->dependencies(
+                [
+                    'jquery',
+                    'jquery-ui-datepicker',
+                    'wp-color-picker',
+                    'jquery-query',
+                ]
+            )
+            ->registerTranslations()
+            ->register();
 
 		// WP-admin: plugin page.
 		wp_register_script(
@@ -146,8 +150,15 @@ class Give_Scripts {
 			true
 		);
 
-		// Frontend.
-		wp_register_script( 'give', GIVE_PLUGIN_URL . 'assets/dist/js/give.js', [ 'jquery' ], GIVE_VERSION, self::$scripts_footer );
+        // Frontend.
+        $giveScript = EnqueueScript::make('give', 'assets/dist/js/give.js')
+                                   ->registerTranslations();
+
+        if (self::$scripts_footer) {
+            $giveScript->loadInFooter();
+        }
+
+        $giveScript->register();
 	}
 
 	/**
@@ -424,6 +435,7 @@ class Give_Scripts {
 				width: 18px;
 				height: 18px;
 				content: "\e800";
+				padding-top: 8px;
 			}
 		</style>
 		<?php
@@ -446,20 +458,6 @@ class Give_Scripts {
 	 * @since 2.1.0
 	 */
 	public function public_enqueue_scripts() {
-
-		// Call Babel Polyfill with common handle so that it is compatible with plugins and themes.
-		if ( ! wp_script_is( 'babel-polyfill', 'enqueued' )
-			 && give_is_setting_enabled( give_get_option( 'babel_polyfill_script', 'enabled' ) )
-		) {
-			wp_enqueue_script(
-				'babel-polyfill',
-				GIVE_PLUGIN_URL . 'assets/dist/js/babel-polyfill.js',
-				[ 'jquery' ],
-				GIVE_VERSION,
-				false
-			);
-		}
-
 		wp_enqueue_script( 'give' );
 
 		$this->public_localize_scripts();
@@ -473,10 +471,11 @@ class Give_Scripts {
 		/**
 		 * Filter to modify access mail send notice
 		 *
+		 * @since 2.1.3
+		 *
 		 * @param string Send notice message for email access.
 		 *
 		 * @return  string $message Send notice message for email access.
-		 * @since 2.1.3
 		 */
 		$message = (string) apply_filters( 'give_email_access_mail_send_notice', __( 'Please check your email and click on the link to access your complete donation history.', 'give' ) );
 
@@ -496,7 +495,9 @@ class Give_Scripts {
 				'bad_maximum'                 => __( 'The maximum custom donation amount for this form is', 'give' ),
 				'general_loading'             => __( 'Loading...', 'give' ),
 				'purchase_loading'            => __( 'Please Wait...', 'give' ),
+				'textForOverlayScreen'        => sprintf( '<h3>%1$s</h3><p>%2$s</p>', esc_html__( 'Processing...', 'give' ), esc_html__( 'This will only take a second!', 'give' ) ),
 				'number_decimals'             => give_get_price_decimals(),
+				'is_test_mode'                => give_is_test_mode(),
 				'give_version'                => GIVE_VERSION,
 				'magnific_options'            => apply_filters(
 					'give_magnific_options',
@@ -511,6 +512,7 @@ class Give_Scripts {
 						// Field name               Validation message.
 						'payment-mode'           => __( 'Please select payment mode.', 'give' ),
 						'give_first'             => __( 'Please enter your first name.', 'give' ),
+						'give_last'              => __( 'Please enter your last name.', 'give' ),
 						'give_email'             => __( 'Please enter a valid email address.', 'give' ),
 						'give_user_login'        => __( 'Invalid email address or username.', 'give' ),
 						'give_user_pass'         => __( 'Enter a password.', 'give' ),
@@ -592,36 +594,28 @@ class Give_Scripts {
 
 	}
 
-	/**
-	 * Gutenberg admin scripts.
-	 */
-	public function gutenberg_admin_scripts() {
+    /**
+     * Gutenberg admin scripts.
+     *
+     * @since 2.19.0 Remove undefined gutenberg.css
+     * @since 2.19.6 Load script with EnqueueScript.
+     * @since 2.19.6 Load missing block styles
+     */
+    public function gutenberg_admin_scripts()
+    {
+        // Enqueue the bundled block JS file
+        EnqueueScript::make('give-blocks-js', 'assets/dist/js/gutenberg.js')
+            ->dependencies(['give-admin-scripts'])
+            ->registerTranslations()
+            ->enqueue();
 
-		// Enqueue the bundled block JS file
-		// @todo: Update dependencies on 5.0 Stable release
-		wp_enqueue_script(
-			'give-blocks-js',
-			GIVE_PLUGIN_URL . 'assets/dist/js/gutenberg.js',
-			[
-				'wp-i18n',
-				'wp-element',
-				'wp-blocks',
-				'wp-components',
-				'wp-api',
-				'wp-editor',
-				'give-admin-scripts',
-			],
-			GIVE_VERSION
-		);
+        wp_enqueue_style(
+            'give-blocks-css',
+            GIVE_PLUGIN_URL . 'assets/dist/css/admin-block-editor.css',
+            [],
+            GIVE_VERSION
+        );
 
-		// Enqueue the bundled block css file
-		wp_enqueue_style(
-			'give-blocks-css',
-			GIVE_PLUGIN_URL . 'assets/dist/css/gutenberg.css',
-			[ 'give-styles' ],
-			GIVE_VERSION
-		);
 
-	}
-
+    }
 }

@@ -31,38 +31,46 @@ class Shipper_Task_Import_Uncompress extends Shipper_Task_Import {
 		$shipper_pos = $pos;
 
 		$statements = $dumped->get_statements( $pos, 1 );
-		$migration  = new Shipper_Model_Stored_Migration;
+		$migration  = new Shipper_Model_Stored_Migration();
 		$domain     = $migration->get_source();
 		$s3_dirname = Shipper_Helper_Fs_Path::clean_fname( $domain );
 		foreach ( $statements as $item ) {
 			$source      = trailingslashit( $s3_dirname ) . $item['destination'];
 			$destination = Shipper_Helper_Fs_Path::get_temp_dir() . pathinfo( $source, PATHINFO_BASENAME );
-			$remote      = new Shipper_Helper_Fs_Remote;
+			$remote      = new Shipper_Helper_Fs_Remote();
 			Shipper_Helper_Log::debug(
-				sprintf( __( "About to download package %s size %s", "shipper" ),
+				sprintf(
+					/* translators: %1$s %1$s: dest path and size. */
+					__( 'About to download package %1$s size %2$s', 'shipper' ),
 					pathinfo( $item['destination'], PATHINFO_BASENAME ),
 					$item['size']
 				)
 			);
 			$progress = $remote->download( $source, $destination );
 			if ( $progress->is_done() ) {
-				//unzip it
+				// unzip it.
 				$archive = Shipper_Model_Archive::get( $destination );
 				$archive->extract( Shipper_Helper_Fs_Path::get_temp_dir() );
 				$shipper_pos ++;
+			} else {
+				/* translators: %s: file name. */
+				Shipper_Helper_Log::debug( sprintf( 'Downloading %s', $source ) );
+				// download not done, so we wait a bit.
+				return false;
 			}
 		}
+
+		$is_done     = empty( $statements );
+		$shipper_pos = $is_done
+			? 0
+			: $shipper_pos;
 
 		if ( ! $this->set_initialized_position( $shipper_pos ) ) {
 			// List got re-initialized - cancel.
 			return true;
 		}
 
-		if ( empty( $statements ) ) {
-			return true;
-		}
-
-		return false;
+		return $is_done;
 	}
 
 	/**
@@ -74,7 +82,7 @@ class Shipper_Task_Import_Uncompress extends Shipper_Task_Import {
 	 */
 	public function get_initialized_position( $filelist = false ) {
 		if ( empty( $filelist ) ) {
-			$filelist = new Shipper_Model_Stored_Filelist;
+			$filelist = new Shipper_Model_Stored_Filelist();
 		}
 
 		$pos = $filelist->get( Shipper_Model_Stored_Filelist::KEY_CURSOR, false );
@@ -92,14 +100,14 @@ class Shipper_Task_Import_Uncompress extends Shipper_Task_Import {
 	 *
 	 * Shorts out if necessary.
 	 *
-	 * @param int $position Position to set.
+	 * @param int    $position Position to set.
 	 * @param object $filelist Stored filelist model instance to use (optional, used in tests).
 	 *
 	 * @return bool False if short-circuited, true on success
 	 */
 	public function set_initialized_position( $position, $filelist = false ) {
 		if ( empty( $filelist ) ) {
-			$filelist = new Shipper_Model_Stored_Filelist;
+			$filelist = new Shipper_Model_Stored_Filelist();
 		}
 
 		$newpos = $filelist->get( Shipper_Model_Stored_Filelist::KEY_CURSOR, false );
@@ -135,11 +143,14 @@ class Shipper_Task_Import_Uncompress extends Shipper_Task_Import {
 	 */
 	public function get_work_description() {
 		$desc = sprintf(
+			/* translators: %1$d %2$d: get_current_step and total steps. */
 			__( '( %1$d of %2$d total )', 'shipper' ),
-			$this->get_current_step(), $this->get_total_steps()
+			$this->get_current_step(),
+			$this->get_total_steps()
 		);
 
 		return sprintf(
+			/* translators: %s: description. */
 			__( 'Uncompress package %s', 'shipper' ),
 			$desc
 		);
@@ -172,5 +183,17 @@ class Shipper_Task_Import_Uncompress extends Shipper_Task_Import {
 		$current ++;
 
 		return $current;
+	}
+
+	/**
+	 * Cleanup data, move file cursor to it's initial position
+	 *
+	 * @since 1.1.4
+	 *
+	 * @return void
+	 */
+	public function cleanup() {
+		$file_list = new Shipper_Model_Stored_Filelist();
+		$file_list->cleanup();
 	}
 }

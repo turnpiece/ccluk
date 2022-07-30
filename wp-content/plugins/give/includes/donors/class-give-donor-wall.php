@@ -93,23 +93,32 @@ class Give_Donor_Wall {
 	 *                                   Accepts 'best-fit', '1', '2', '3', '4'.
 	 * @type bool   $show_avatar         Whether to display the donor's gravatar image if available. Default 'true'.
 	 * @type bool   $show_name           Whether to display the donor's full name, first and last. Default 'true'.
+	 * @type bool   $show_company_name   Whether to display the donor's company name. Default 'false'.
 	 * @type bool   $show_total          Whether to display the donor's donation amount. Default 'true'.
-	 * @type bool   $show_time           Whether to display date of the last donation. Default 'true'.
 	 * @type bool   $show_comments       Whether to display the donor's comment if they left one. Default 'true'.
 	 * @type int    $comment_length      The number of words to display for the comments before a "Read more" field
 	 * @type int    $only_comments       Whether to display the donors only with comment. Default 'false'.
+     * @type bool   $show_time Whether to display date of the last donation. Default 'true'.
 	 *
 	 * @type string $readmore_text       Link label for modal in which donor can read full comment.
 	 * @type string $loadmore_text       Button label which will load more donor comments.
-	 * @type int    $avatar_size         Avatar image size in pixels without the "px". Default "60"
+	 * @type int    $avatar_size         Avatar image size in pixels without the "px". Default "75"
 	 * @type string $orderby             The order in which you want the donations to appear.
-	 *                                   Currently we are using this attribute internally and it will sort donations by created date.
+	 *                                   Currently we are using this attribute internally and, it will sort donations by created date.
 	 * @type string $order               The order in which you want the donors to appear. Accepts "ASC". "DESC".
 	 *
 	 * }
 	 * @return string|bool The markup of the form grid or false.
 	 */
 	public function render_shortcode( $atts ) {
+
+        /**
+         * @since 2.20.0 Check nonce for AJAX request to prevent scrapping.
+         * @link https://github.com/impress-org/givewp/issues/6374
+         */
+        if( wp_doing_ajax() ) {
+            check_ajax_referer( 'givewp-donor-wall-more', 'nonce' );
+        }
 
 		$give_settings = give_get_settings();
 
@@ -122,9 +131,18 @@ class Give_Donor_Wall {
 			ob_start();
 
 			foreach ( $donations as $donation ) {
-				// Give/templates/shortcode-donor-wall.php.
-				give_get_template( 'shortcode-donor-wall', [ $donation, $give_settings, $atts ] );
-			}
+                $donor = new Give_Donor($donation['_give_payment_donor_id']);
+                // Give/templates/shortcode-donor-wall.php.
+                give_get_template(
+                    'shortcode-donor-wall',
+                    [
+                        $donation,
+                        $give_settings,
+                        $atts,
+                        $donor
+                    ]
+                );
+            }
 
 			$html = ob_get_clean();
 
@@ -142,8 +160,9 @@ class Give_Donor_Wall {
 		$temp_atts['paged'] = $atts['paged'] + 1;
 
 		$more_btn_html = sprintf(
-			'<input type="hidden" class="give-donor-wall-shortcode-attrs" data-shortcode="%1$s">',
-			rawurlencode( http_build_query( $atts ) )
+			'<input type="hidden" class="give-donor-wall-shortcode-attrs" data-shortcode="%s" data-nonce="%s">',
+			rawurlencode( http_build_query( $atts ) ),
+            wp_create_nonce( 'givewp-donor-wall-more' )
 		);
 
 		if ( $this->has_donations( $temp_atts ) ) {
@@ -178,26 +197,32 @@ class Give_Donor_Wall {
 	public function parse_atts( $atts ) {
 		$atts = shortcode_atts(
 			[
-				'donors_per_page' => 12,
-				'form_id'         => 0,
-				'paged'           => 1,
-				'ids'             => '',
-				'columns'         => 'best-fit',
-				'anonymous'       => true,
-				'show_avatar'     => true,
-				'show_name'       => true,
-				'show_total'      => true,
-				'show_time'       => true,
-				'show_comments'   => true,
-				'comment_length'  => 140,
-				'only_comments'   => false,
-				'readmore_text'   => esc_html__( 'Read more', 'give' ),
-				'loadmore_text'   => esc_html__( 'Load more', 'give' ),
-				'avatar_size'     => 60,
-				'orderby'         => 'post_date',
-				'order'           => 'DESC',
-				'hide_empty'      => true,  // Deprecated in 2.3.0
-				'only_donor_html' => false, // Only for internal use.
+				'donors_per_page'   => 12,
+				'form_id'           => 0,
+				'paged'             => 1,
+				'ids'               => '',
+                'cats'              => '',
+                'tags'              => '',
+				'columns'           => '3',
+				'anonymous'         => true,
+				'show_avatar'       => true,
+				'show_name'         => true,
+				'show_company_name' => false,
+				'show_form'         => false,
+				'show_total'        => true,
+				'show_comments'     => true,
+                'show_tributes'     => true,
+                'comment_length'    => 140,
+				'only_comments'     => false,
+				'readmore_text'     => esc_html__( 'Read more', 'give' ),
+				'loadmore_text'     => esc_html__( 'Load more', 'give' ),
+				'avatar_size'       => 75,
+                'color'             => "#219653",
+				'orderby'           => 'post_date',
+				'order'             => 'DESC',
+				'hide_empty'        => true,  // Deprecated in 2.3.0
+				'only_donor_html'   => false, // Only for internal use.,
+                'show_time'         => true,
 			],
 			$atts
 		);
@@ -207,13 +232,14 @@ class Give_Donor_Wall {
 			'anonymous',
 			'show_avatar',
 			'show_name',
+			'show_company_name',
 			'show_total',
-			'show_time',
 			'show_comments',
-			'show_comments',
+			'show_tributes',
 			'hide_empty',
 			'only_comments',
 			'only_donor_html',
+            'show_time'
 		];
 
 		foreach ( $boolean_attributes as $att ) {
@@ -229,7 +255,6 @@ class Give_Donor_Wall {
 		// Validate numeric attributes.
 		$numeric_attributes = [
 			'donors_per_page',
-			'form_id',
 			'paged',
 			'comment_length',
 			'avatar_size',
@@ -242,20 +267,23 @@ class Give_Donor_Wall {
 
 		// Validate comma separated numeric attributes and keep original data format ( comma separated string).
 		if ( ! empty( $atts['ids'] ) ) {
-			if ( false === strpos( $atts['ids'], ',' ) ) {
-				$tmp = [ absint( $atts['ids'] ) ];
-			} else {
-				$tmp = array_filter(
-					array_map(
-						static function( $id ) {
-							return absint( trim( $id ) ); },
-						explode( ',', $atts['ids'] )
-					)
-				);
-			}
-
-			$atts['ids'] = implode( ',', $tmp );
+			$atts['ids'] = implode( ',', $this->split_string($atts['ids'], 'absint') );
 		}
+
+        // Validate Form IDs
+        if ( ! empty( $atts['form_id'] ) ) {
+            $atts['form_id'] = implode( ',', $this->split_string($atts['form_id'], 'absint') );
+        }
+
+        // Donation form categories
+        if ( ! empty( $atts['cats'] ) ) {
+            $atts['cats'] = $this->split_string($atts['cats']);
+        }
+
+        // Donation form tags
+        if ( ! empty( $atts['tags'] ) ) {
+            $atts['tags'] = $this->split_string($atts['tags']);
+        }
 
 		return $atts;
 	}
@@ -328,8 +356,10 @@ class Give_Donor_Wall {
 		$query_atts['orderby']       = in_array( $atts['orderby'], $valid_orderby ) ? $atts['orderby'] : 'post_date';
 		$query_atts['limit']         = $atts['donors_per_page'];
 		$query_atts['offset']        = $atts['donors_per_page'] * ( $atts['paged'] - 1 );
-		$query_atts['form_id']       = $atts['form_id'];
+		$query_atts['form_id']       = implode( '\',\'', explode( ',', $atts['form_id'] ) );
 		$query_atts['ids']           = implode( '\',\'', explode( ',', $atts['ids'] ) );
+		$query_atts['cats']          = $atts['cats'];
+		$query_atts['tags']          = $atts['tags'];
 		$query_atts['only_comments'] = ( true === $atts['only_comments'] );
 		$query_atts['anonymous']     = ( true === $atts['anonymous'] );
 
@@ -430,7 +460,7 @@ class Give_Donor_Wall {
 
 		if ( $query_params['form_id'] ) {
 			$sql   .= " INNER JOIN {$wpdb->donationmeta} as m2 ON (p1.ID = m2.{$donation_id_col})";
-			$where .= " AND m2.meta_key='_give_payment_form_id' AND m2.meta_value={$query_params['form_id']}";
+			$where .= " AND m2.meta_key='_give_payment_form_id' AND m2.meta_value IN ('{$query_params['form_id']}')";
 		}
 
 		// Get donations only from specific donors.
@@ -452,6 +482,54 @@ class Give_Donor_Wall {
 		) {
 			$where .= " AND p1.ID NOT IN ( SELECT DISTINCT({$donation_id_col}) FROM {$wpdb->donationmeta} WHERE meta_key='_give_anonymous_donation' AND meta_value='1')";
 		}
+
+        // Handle Taxonomy
+        $args = [
+            'post_type' => 'give_forms',
+            'posts_per_page' => -1,
+            'fields' => 'ids',
+            'tax_query' => [],
+        ];
+
+        // Categories
+        if ( is_array($atts['cats'])) {
+            $args['tax_query']['conditions'] = ['relation' => 'OR'];
+
+            foreach ($atts['cats'] as $category) {
+                $args['tax_query']['conditions'][] = [
+                    'operator' => 'IN',
+                    'taxonomy' => 'give_forms_category',
+                    'field' => 'slug',
+                    'terms' => $category,
+                ];
+            }
+        }
+
+        // Tags
+        if ( is_array($atts['tags'])) {
+            if (empty($args['tax_query'])) {
+                $args['tax_query']['conditions'] = ['relation' => 'OR'];
+            }
+
+            foreach($atts['tags'] as $tag) {
+                $args['tax_query']['conditions'][] = [
+                    'operator' => 'IN',
+                    'taxonomy' => 'give_forms_tag',
+                    'field' => 'slug',
+                    'terms' => $tag,
+                ];
+            }
+        }
+
+        if ( ! empty( $args['tax_query'] ) ) {
+            $query = new WP_Query( $args );
+
+            if ( ! empty($query->posts) ) {
+                $form_ids = implode("','", $query->posts );
+                $sql   .= " INNER JOIN {$wpdb->donationmeta} as m4 ON (p1.ID = m4.{$donation_id_col})";
+                $where .= " AND m4.meta_key='_give_payment_form_id' AND m4.meta_value IN ('{$form_ids}')";
+            }
+        }
 
 		// order by query based on parameter.
 		if ( 'donation_amount' === $query_params['orderby'] ) {
@@ -541,6 +619,41 @@ class Give_Donor_Wall {
 	private function has_donations( $atts = [] ) {
 		return (bool) $this->get_donations( $atts );
 	}
+
+    /**
+     * @since 2.20.0
+     *
+     * @param string $string
+     * @param null|callable $filter
+     * @param string $separator
+     *
+     * @return array
+     */
+    private function split_string($string, $filter = null, $separator = ',') {
+        if ( false === strpos( $string, $separator ) ) {
+            $string = trim( $string );
+
+            if (is_callable($filter)) {
+                $string = $filter($string);
+            }
+
+            return [$string];
+        }
+
+        return array_filter(
+            array_map(
+                static function( $value ) use ($filter) {
+                    $value = trim( $value );
+
+                    if (is_callable($filter)) {
+                        return $filter($value);
+                    }
+                    return $value;
+                },
+                explode( $separator, $string )
+            )
+        );
+    }
 }
 
 // Initialize shortcode.

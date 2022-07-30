@@ -60,7 +60,7 @@ namespace Beehive\phpseclib\Crypt;
  * @author  Jim Wigginton <terrafrost@php.net>
  * @access  public
  */
-class Rijndael extends \Beehive\phpseclib\Crypt\Base
+class Rijndael extends Base
 {
     /**
      * The mcrypt specific name of the cipher

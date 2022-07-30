@@ -2,7 +2,7 @@
 /**
  * The installer class of the plugin.
  *
- * @link    http://premium.wpmudev.org
+ * @link    http://wpmudev.com
  * @since   3.2.0
  *
  * @author  Joel James <joel@incsub.com>
@@ -51,10 +51,11 @@ class Installer extends Base {
 		/**
 		 * Action hook to execute after activation.
 		 *
-		 * @param int Old version.
+		 * @since 3.2.0
+		 *
 		 * @param int New version.
 		 *
-		 * @since 3.2.0
+		 * @param int Old version.
 		 */
 		do_action( 'beehive_after_activate', $version, BEEHIVE_VERSION );
 	}
@@ -103,6 +104,16 @@ class Installer extends Base {
 			$this->upgrade_3_3();
 		}
 
+		// Upgrade to 3.3.8.
+		if ( version_compare( $version, '3.3.8', '<' ) ) {
+			$this->upgrade_3_3_8();
+		}
+
+		// Upgrade to 3.4.
+		if ( version_compare( $version, '3.4.0', '<' ) ) {
+			$this->upgrade_3_4();
+		}
+
 		// If new installation or older versions.
 		if ( BEEHIVE_VERSION !== $version ) {
 			// Mark the plugin version.
@@ -118,10 +129,11 @@ class Installer extends Base {
 			/**
 			 * Action hook to execute after upgrade.
 			 *
-			 * @param int Old version.
+			 * @since 3.2.0
+			 *
 			 * @param int New version.
 			 *
-			 * @since 3.2.0
+			 * @param int Old version.
 			 */
 			do_action( 'beehive_after_upgrade', $version, BEEHIVE_VERSION );
 		}
@@ -136,8 +148,9 @@ class Installer extends Base {
 	 * This method is specific for multisite admin. For subsites
 	 * and single installations we use upgrade_3_2_0_single().
 	 *
-	 * @since 3.2.0
+	 * @since      3.2.0
 	 *
+	 * @deprecated 3.3.0
 	 * @return void
 	 */
 	private function upgrade_3_2_0() {
@@ -218,8 +231,9 @@ class Installer extends Base {
 	 *
 	 * Reports settings changed in 3.2.4.
 	 *
-	 * @since 3.2.4
+	 * @since      3.2.4
 	 *
+	 * @deprecated 3.3.8
 	 * @return void
 	 */
 	private function upgrade_3_2_4() {
@@ -251,7 +265,8 @@ class Installer extends Base {
 	 *
 	 * Added new option to show welcome modal.
 	 *
-	 * @since 3.3.0
+	 * @since      3.3.0
+	 * @deprecated 3.4.0
 	 *
 	 * @return void
 	 */
@@ -267,9 +282,64 @@ class Installer extends Base {
 		if ( empty( $settings ) ) {
 			return;
 		}
+	}
 
-		// Set welcome modal.
-		beehive_analytics()->settings->update( 'show_welcome', 1, 'misc', General::is_networkwide() );
+	/**
+	 * Upgrade to 3.3.8 version.
+	 *
+	 * @since 3.3.8
+	 *
+	 * @return void
+	 */
+	private function upgrade_3_3_8() {
+		// Get the settings.
+		if ( $this->is_network() ) {
+			$settings = get_site_option( 'beehive_settings', array() );
+		} else {
+			$settings = get_option( 'beehive_settings', array() );
+		}
+
+		// Upgrade is not required because old settings does not exist.
+		if ( empty( $settings ) ) {
+			return;
+		}
+
+		// Upgrade post types.
+		if ( empty( $settings['tracking']['post_types'] ) ) {
+			beehive_analytics()->settings->update(
+				'post_types',
+				array( 'post', 'page' ),
+				'tracking',
+				$this->is_network()
+			);
+		}
+
+		// Show welcome modal.
+		$this->show_welcome();
+	}
+
+	/**
+	 * Upgrade to 3.4.0 version.
+	 *
+	 * @since 3.3.8
+	 *
+	 * @return void
+	 */
+	private function upgrade_3_4() {
+		// Check whether old settings still exist.
+		if ( $this->is_network() ) {
+			$old_options = get_site_option( 'ga2_settings', array() );
+		} else {
+			$old_options = get_option( 'ga2_settings', array() );
+		}
+
+		if ( ! empty( $old_options ) ) {
+			// Set statistics type to ua on existing sites.
+			beehive_analytics()->settings->update( 'statistics_type', 'ua', 'google', $this->is_network() );
+		}
+
+		// Show welcome modal.
+		$this->show_welcome();
 	}
 
 	/**
@@ -300,16 +370,18 @@ class Installer extends Base {
 	 *
 	 * This works only upto 3.1
 	 *
+	 * @since 3.2.0
+	 *
 	 * @param string $key     Setting key.
 	 * @param string $group   Setting group.
 	 * @param mixed  $default Default value.
 	 *
-	 * @since 3.2.0
-	 *
 	 * @return string
 	 */
 	private function option_3_2( $key, $group = 'track_settings', $default = '' ) {
-		static $options         = array();
+		// Single/subsite option.
+		static $options = array();
+		// Network options.
 		static $network_options = array();
 
 		// Get old options.
@@ -422,9 +494,9 @@ class Installer extends Base {
 	 *
 	 * New reports settings introduced in 3.2.4.
 	 *
-	 * @param array $settings Settings data.
-	 *
 	 * @since 3.2.4
+	 *
+	 * @param array $settings Settings data.
 	 *
 	 * @return array
 	 */
@@ -475,7 +547,7 @@ class Installer extends Base {
 	}
 
 	/**
-	 * Set a user meta field to identify who activated the plugin.
+	 * Set a user id identify who activated the plugin.
 	 *
 	 * @since 3.2.0
 	 *
@@ -517,5 +589,22 @@ class Installer extends Base {
 				$role_object->add_cap( Capability::ANALYTICS_CAP );
 			}
 		}
+	}
+
+	/**
+	 * On upgrade call this if you want to show the welcome modal.
+	 *
+	 * @since 3.3.3
+	 *
+	 * @return void
+	 */
+	private function show_welcome() {
+		// Set welcome modal.
+		beehive_analytics()->settings->update(
+			'show_welcome',
+			true,
+			'misc',
+			General::is_networkwide()
+		);
 	}
 }

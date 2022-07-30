@@ -17,20 +17,29 @@
 
 	<h4><?php esc_html_e( 'Status', 'shipper' ); ?></h4>
 	<div class="sui-notice sui-notice-error">
-		<p>
-			<?php
-				echo wp_kses_post( sprintf(
-					__( 'Working directory on <b>%s</b> is visible and accessible on the web.', 'shipper' ),
-					$domain
-				) );
-			?>
-		</p>
+		<div class="sui-notice-content">
+			<div class="sui-notice-message">
+				<i class="sui-notice-icon sui-icon-info sui-md" aria-hidden="true"></i>
+				<p>
+					<?php
+					echo wp_kses_post(
+						sprintf(
+							/* translators: %s: website name.*/
+							__( 'Working directory on <b>%s</b> is visible and accessible on the web.', 'shipper' ),
+							$domain
+						)
+					);
+					?>
+				</p>
+			</div>
+		</div>
 	</div>
 
 	<h4><?php esc_html_e( 'How To Fix', 'shipper' ); ?></h4>
 	<p>
 		<?php
-			echo wp_kses_post( sprintf( __( 'Shipper automatically tries to protect your working directory ( <code>%s</code> ) by adding a protective .htaccess file to your working directory. We add the following .htaccess rule to protect your working directory:'  , 'shipper' ), $value ) );
+		/* translators: %1$s: website name.*/
+		echo wp_kses_post( sprintf( __( 'Shipper automatically tries to protect your working directory ( <code>%s</code> ) by adding a protective .htaccess file to your working directory. We add the following .htaccess rule to protect your working directory:', 'shipper' ), $value ) );
 		?>
 	</p>
 	<pre class="sui-code-snippet">Order deny,allow
@@ -47,15 +56,24 @@ Options -Indexes</pre>
 		?>
 	</p>
 </div>
-<div class="sui-notice-top sui-notice-error sui-can-dismiss shipper-recheck-unsuccessful" style="display:none">
+<div class="sui-notice sui-notice-top sui-notice-error sui-can-dismiss shipper-recheck-unsuccessful" style="display:none">
 	<div class="sui-notice-content">
-		<p>
-			<?php echo wp_kses_post( sprintf(
-				__( 'Working directory web visible on %1$s. Please fix this and check again.', 'shipper' ),
-				$domain
-			) ); ?>
-		</p>
+		<div class="sui-notice-message">
+			<i class="sui-notice-icon sui-icon-info sui-md" aria-hidden="true"></i>
+			<p>
+				<?php
+				echo wp_kses_post(
+					sprintf(
+						/* translators: %1$s: website name.*/
+						__( 'Working directory web visible on %1$s. Please fix this and check again.', 'shipper' ),
+						$domain
+					)
+				);
+				?>
+			</p>
+		</div>
 	</div>
+
 	<span class="sui-notice-dismiss">
 		<a role="button" href="#" aria-label="Dismiss" class="sui-icon-check"></a>
 	</span>

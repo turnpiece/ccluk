@@ -1,10 +1,11 @@
 <?php
 /**
- * \PHPCompatibility\Sniffs\Constants\RemovedConstantsSniff.
+ * PHPCompatibility, an external standard for PHP_CodeSniffer.
  *
- * @category PHP
- * @package  PHPCompatibility
- * @author   Juliette Reinders Folmer <phpcompatibility_nospam@adviesenzo.nl>
+ * @package   PHPCompatibility
+ * @copyright 2012-2019 PHPCompatibility Contributors
+ * @license   https://opensource.org/licenses/LGPL-3.0 LGPL3
+ * @link      https://github.com/PHPCompatibility/PHPCompatibility
  */
 
 namespace PHPCompatibility\Sniffs\Constants;
@@ -13,11 +14,11 @@ use PHPCompatibility\AbstractRemovedFeatureSniff;
 use PHP_CodeSniffer_File as File;
 
 /**
- * \PHPCompatibility\Sniffs\Constants\RemovedConstantsSniff.
+ * Detect use of deprecated and/or removed PHP native global constants.
  *
- * @category PHP
- * @package  PHPCompatibility
- * @author   Juliette Reinders Folmer <phpcompatibility_nospam@adviesenzo.nl>
+ * PHP version All
+ *
+ * @since 8.1.0
  */
 class RemovedConstantsSniff extends AbstractRemovedFeatureSniff
 {
@@ -28,9 +29,14 @@ class RemovedConstantsSniff extends AbstractRemovedFeatureSniff
      * The array lists : version number with false (deprecated) or true (removed).
      * If's sufficient to list the first version where the constant was deprecated/removed.
      *
+     * Optional, the array can contain an `alternative` key listing an alternative constant
+     * to be used instead.
+     *
      * Note: PHP Constants are case-sensitive!
      *
-     * @var array(string => array(string => bool|string|null))
+     * @since 8.1.0
+     *
+     * @var array(string => array(string => bool|string))
      */
     protected $removedConstants = array(
         // Disabled since PHP 5.3.0 due to thread safety issues.
@@ -58,6 +64,12 @@ class RemovedConstantsSniff extends AbstractRemovedFeatureSniff
         ),
 
         'PGSQL_ATTR_DISABLE_NATIVE_PREPARED_STATEMENT' => array(
+            '7.0' => true,
+        ),
+        'T_CHARACTER' => array(
+            '7.0' => true,
+        ),
+        'T_BAD_CHARACTER' => array(
             '7.0' => true,
         ),
 
@@ -293,6 +305,13 @@ class RemovedConstantsSniff extends AbstractRemovedFeatureSniff
             '7.3' => false,
         ),
 
+        'CURLPIPE_HTTP1' => array(
+            '7.4' => false,
+        ),
+        'FILTER_SANITIZE_MAGIC_QUOTES' => array(
+            '7.4'         => false,
+            'alternative' => 'FILTER_SANITIZE_ADD_SLASHES',
+        ),
         'IBASE_BKP_CONVERT' => array(
             '7.4' => true,
         ),
@@ -485,6 +504,8 @@ class RemovedConstantsSniff extends AbstractRemovedFeatureSniff
     /**
      * Returns an array of tokens this test wants to listen for.
      *
+     * @since 8.1.0
+     *
      * @return array
      */
     public function register()
@@ -495,6 +516,8 @@ class RemovedConstantsSniff extends AbstractRemovedFeatureSniff
 
     /**
      * Processes this test, when one of its tokens is encountered.
+     *
+     * @since 8.1.0
      *
      * @param \PHP_CodeSniffer_File $phpcsFile The file being scanned.
      * @param int                   $stackPtr  The position of the current token in
@@ -525,6 +548,8 @@ class RemovedConstantsSniff extends AbstractRemovedFeatureSniff
     /**
      * Get the relevant sub-array for a specific item from a multi-dimensional array.
      *
+     * @since 8.1.0
+     *
      * @param array $itemInfo Base information about the item.
      *
      * @return array Version and other information about the item.
@@ -537,6 +562,8 @@ class RemovedConstantsSniff extends AbstractRemovedFeatureSniff
 
     /**
      * Get the error message template for this sniff.
+     *
+     * @since 8.1.0
      *
      * @return string
      */

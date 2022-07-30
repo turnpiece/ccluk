@@ -1,9 +1,9 @@
 === WordPress Social Sharing Plugin - Social Warfare ===
-Contributors: holas84, dustinwstout, webinator, warfareplugins, cdegraff1, ckmahoney
+Contributors: holas84, webinator, warfareplugins, cdegraff1
 Tags: sharing buttons, social media share, floating share buttons, facebook share, google plus share, linkedin share, pin it, pinterest save, mix button, tweet button, twitter share, click to tweet, social sharing buttons, social share, social sharing, social media sharing, wordpress social sharing plugin, social sharing plugin, share buttons, share counts
 Requires at least: 4.5.0
-Tested up to: 5.2
-Stable tag: 3.6.1
+Tested up to: 5.8
+Stable tag: 4.3.0
 Requires PHP: 5.6
 License: GNU General Public License v2.0 or later
 
@@ -193,6 +193,72 @@ We have a growing archive of <a href="https://warfareplugins.com/support/" rel="
 > Robert Ryan, Professional Web Designer
 
 == Changelog ==
+
+= 4.3.0 (20 JUL 2020) =
+This is a major update to the Facebook share checking functionality of the plugin.
+
+= 4.2.1 (07 DEC 2020) =
+The 4.2 release was a major release that introduced a whole suite of social analytics
+tools. As you might imagine with a release featuring that many new features, and
+new lines of code, there were a few hiccups along the way. But we've spent the weekend
+getting them all fixed right up and now here we are with 4.2.1.
+
+* Fix for broken admin pages due to some JS errors on the analytics charts.
+* Fix for division by zero errors in the social optimizer PHP file.
+* Fix for a few other minor bugs and glitches.
+
+= 4.2.0 (02 DEC 2020) =
+* BRAND NEW!!! A whole suite of social analytics tools!
+* Social Optimizer scores are now saved allowing for comparisons and recommendations.
+* Added a check for share counts on URLs with UTM codes for Pinterest.
+* Fixed a few minor CSS issues.
+* Fix for line breaks in font URLs in the CSS that made the icon font not appear.
+* Fixed blank settings page on some page loads.
+* Cleaned up some post meta remnants.
+* Clean out share counts for buttons that don't use share counts like "email" or "more"
+* Added a posts column to display the social optimization score.
+
+= 4.1.0 (17 AUG 2020) =
+* BRAND NEW!!! Added a "Social Optimizer" to the Gutenberg post editor sidebar.
+* Fixed a few minor CSS issues.
+* Updated the post editor custom fields to be compatible with WP 5.5.
+
+= 4.0.2 (28 JUL 2020) =
+* Added Facebook authentications to core to allow for faster and more reliable share counts when authenticated.
+* Added full AMP compatibility to the plugin.
+* Fixed the custom CSS field on the settings page so that it saves properly now.
+* Added dashboard notifications to alert users as to the state of their Facebook authentications.
+
+= 4.0.1 (14 APR 2020) =
+* New: Added the ability to connect Social Warfare with Facebook. We use this to fetch follow counts for pages and faster, more accurate share counts for the share buttons. Go to Social Warfare -> Social Identity -> Social Network Connections to get started.
+* New: Added a notice about clearing caches after updates.
+* New: Added additional share count debugging to the ?swp_debug=recover debugger.
+* Fixed: Fixed some CSS for the "more" share box overlay.
+* Fixed: Fixed a PHP error related to user options.
+* Maintenance: Adjusted the cache rebuild schedule.
+
+= 4.0.0 =
+* New: Added the ability to assign multiple Pinterest images with a slick overlay interface.
+* New: Added a "More" button that brings up an overlay with all of the available share options.
+* New: Added social follow widget with lots of styles and options.
+* New: Added lots of new network buttons (Xing, VK, Viber, Blogger, Evernote)
+* New: Added a print button.
+* New: Added OpenShareCount API as a source for Tweet counts.
+* New: Added Rebrandly as a link shortening service.
+* New: Added a bunch of brand new shortcodes.
+* New: Added the ability to emphasize the first one or two buttons in the panel.
+* New: Added the ability to use ?swp_cache=rebuild&swp_debug=recovery to view the URL's being checked for shares.
+* New: Converted all of the plugin's CSS to neatly organized SCSS/SASS.
+* New: Updated a few styles in the admin options page.
+* New: Updated the descriptions and image placeholders for the Social Warfare custom options in the post editor.
+* New: Added an "opt-in" only "Powered by Social Warfare" that will automatically link to our site using your affiliate URL.
+* New: Added an "age of post" check for shortlinks.
+* New: Added the option to delay the display of share counts on new posts.
+* Fixed: Fixed an extra doctype that would sometimes get added to the content.
+* Fixed: Fixed some javascript/jQuery errors.
+* Fixed: Fixed some PHP errors.
+* Removed: Removed all instances of Google Plus.
+* Maintenance: Vastly improved codebase organization and documentation.
 
 = 3.6.1 (3 JUN 2019) =
 * Updated Hover Save Pin functionality to work more globally.

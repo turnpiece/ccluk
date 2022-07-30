@@ -7,13 +7,13 @@
 
 /**
  * Plugin Name: Shipper Pro
- * Plugin URI: http://premium.wpmudev.org/project/shipper/
+ * Plugin URI: https://wpmudev.com/project/shipper/
  * Description: Migrate WordPress websites from host to host, local to production, development to live with just a few clicks.
- * Version: 1.1.3
+ * Version: 1.2.12
  * Network: true
  * Text Domain: shipper
  * Author: WPMU DEV
- * Author URI: http://premium.wpmudev.org
+ * Author URI: https://wpmudev.com
  * WDP ID: 2175128
  */
 
@@ -35,17 +35,28 @@
 * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 */
 
-define( 'SHIPPER_VERSION', '1.1' );
+define( 'SHIPPER_VERSION', '1.2.12' );
 define( 'SHIPPER_PLUGIN_FILE', __FILE__ );
 
 if ( ! defined( 'SHIPPER_IS_TEST_ENV' ) ) {
 	define( 'SHIPPER_IS_TEST_ENV', false );
 }
 
-require_once( dirname( __FILE__ ) . '/lib/functions.php' );
-require_once( dirname( __FILE__ ) . '/lib/exceptions.php' );
-require_once( dirname( __FILE__ ) . '/lib/loader.php' );
-require_once( dirname( __FILE__ ) . '/lib/upgrader.php' );
+require_once dirname( __FILE__ ) . '/lib/functions.php';
+require_once dirname( __FILE__ ) . '/lib/exceptions.php';
+require_once dirname( __FILE__ ) . '/lib/loader.php';
+require_once dirname( __FILE__ ) . '/lib/upgrader.php';
+
+add_action(
+	'init',
+	function() {
+		load_plugin_textdomain(
+			'shipper',
+			false,
+			dirname( plugin_basename( __FILE__ ) ) . '/languages'
+		);
+	}
+);
 
 register_activation_hook(
 	__FILE__,

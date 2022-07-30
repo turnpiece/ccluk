@@ -11,6 +11,11 @@
  */
 class Shipper_Model_Archive_Stream extends Shipper_Model_Archive {
 
-	public function add_file( $source, $destination ) {
-	}
+	/**
+	 * Add file to stream
+	 *
+	 * @param string $source source file path.
+	 * @param string $destination destination file path.
+	 */
+	public function add_file( $source, $destination ) {}
 }

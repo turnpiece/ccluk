@@ -20,18 +20,22 @@ class Shipper_Task_Api_Destinations_Remove extends Shipper_Task_Api {
 	public function apply( $args = array() ) {
 		$site_id = ! empty( $args['site_id'] )
 			? $args['site_id']
-			: false
-		;
+			: false;
 
-		$status = $this->get_response( 'destinations-remove', self::METHOD_POST, array(
-			'site_id' => $site_id,
-		));
+		$status = $this->get_response(
+			'destinations-remove',
+			self::METHOD_POST,
+			array(
+				'site_id' => $site_id,
+			)
+		);
 
 		if ( empty( $status['success'] ) ) {
 			$this->record_non_success(
 				'destinations-remove',
 				self::ERR_SERVICE,
 				sprintf(
+					/* translators: %s: domain name. */
 					__( 'Error removing domain %s from API list', 'shipper' ),
 					$domain
 				)

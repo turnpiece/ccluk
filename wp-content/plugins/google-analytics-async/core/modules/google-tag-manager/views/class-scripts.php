@@ -2,7 +2,7 @@
 /**
  * The scripts view class for the Tag Manager module.
  *
- * @link    http://premium.wpmudev.org
+ * @link    http://wpmudev.com
  * @since   3.3.0
  *
  * @author  Joel James <joel@incsub.com>

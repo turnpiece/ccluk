@@ -74,11 +74,7 @@ class Ai1wm_Export_Media {
 		}
 
 		// What percent of files have we processed?
-		if ( empty( $total_media_files_size ) ) {
-			$progress = 100;
-		} else {
-			$progress = (int) min( ( $processed_files_size / $total_media_files_size ) * 100, 100 );
-		}
+		$progress = (int) min( ( $processed_files_size / $total_media_files_size ) * 100, 100 );
 
 		// Set progress
 		Ai1wm_Status::info( sprintf( __( 'Archiving %d media files...<br />%d%% complete', AI1WM_PLUGIN_NAME ), $total_media_files_count, $progress ) );
@@ -92,7 +88,7 @@ class Ai1wm_Export_Media {
 		// Get media list file
 		$media_list = ai1wm_open( ai1wm_media_list_path( $params ), 'r' );
 
-		// Set media pointer at the current index
+		// Set the file pointer at the current index
 		if ( fseek( $media_list, $media_bytes_offset ) !== -1 ) {
 
 			// Open the archive file for writing
@@ -102,11 +98,11 @@ class Ai1wm_Export_Media {
 			$archive->set_file_pointer( $archive_bytes_offset );
 
 			// Loop over files
-			while ( $file_path = trim( fgets( $media_list ) ) ) {
+			while ( list( $file_abspath, $file_relpath, $file_size, $file_mtime ) = fgetcsv( $media_list ) ) {
 				$file_bytes_written = 0;
 
 				// Add file to archive
-				if ( ( $completed = $archive->add_file( ai1wm_get_uploads_dir() . DIRECTORY_SEPARATOR . $file_path, 'uploads' . DIRECTORY_SEPARATOR . $file_path, $file_bytes_written, $file_bytes_offset ) ) ) {
+				if ( ( $completed = $archive->add_file( $file_abspath, 'uploads' . DIRECTORY_SEPARATOR . $file_relpath, $file_bytes_written, $file_bytes_offset ) ) ) {
 					$file_bytes_offset = 0;
 
 					// Get media bytes offset
@@ -117,11 +113,7 @@ class Ai1wm_Export_Media {
 				$processed_files_size += $file_bytes_written;
 
 				// What percent of files have we processed?
-				if ( empty( $total_media_files_size ) ) {
-					$progress = 100;
-				} else {
-					$progress = (int) min( ( $processed_files_size / $total_media_files_size ) * 100, 100 );
-				}
+				$progress = (int) min( ( $processed_files_size / $total_media_files_size ) * 100, 100 );
 
 				// Set progress
 				Ai1wm_Status::info( sprintf( __( 'Archiving %d media files...<br />%d%% complete', AI1WM_PLUGIN_NAME ), $total_media_files_count, $progress ) );

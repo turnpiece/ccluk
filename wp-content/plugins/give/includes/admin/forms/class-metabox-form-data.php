@@ -15,6 +15,7 @@ use Give\Form\Template;
 use Give\FormAPI\Fields;
 use Give\FormAPI\Section;
 use Give\Helpers\Form\Template as FormTemplateUtils;
+use Give\Views\Admin\UpsellNotice;
 
 /**
  * Give_Meta_Box_Form_Data Class.
@@ -151,6 +152,7 @@ class Give_MetaBox_Form_Data {
 								'name'          => __( 'Set Donation', 'give' ),
 								'description'   => __( 'This is the set donation amount for this form. If you have a "Custom Amount Minimum" set, make sure it is less than this amount.', 'give' ),
 								'id'            => $prefix . 'set_price',
+								'default'          => give_format_decimal( [ 'amount' => '25.00' ] ),
 								'type'          => 'text_small',
 								'data_type'     => 'price',
 								'attributes'    => [
@@ -184,8 +186,8 @@ class Give_MetaBox_Form_Data {
 								],
 								'options'       => [
 									'display_label' => __( 'Donation Limits: ', 'give' ),
-									'minimum'       => give_format_decimal( ['amount' => '5.00' ] ),
-									'maximum'       => give_format_decimal( ['amount' => '999999.99' ] ),
+									'minimum'       => give_format_decimal( [ 'amount' => '5.00' ] ),
+									'maximum'       => give_format_decimal( [ 'amount' => '999999.99' ] ),
 								],
 							],
 							[
@@ -316,7 +318,7 @@ class Give_MetaBox_Form_Data {
 							],
 							[
 								'name'    => __( 'Name Title Prefix', 'give' ),
-								'desc'    => __( 'Do you want to add a name title prefix dropdown field before the donor\'s first name field? This will display a dropdown with options such as Mrs, Miss, Ms, Sir, and Dr for donor to choose from.', 'give' ),
+								'desc'    => __( 'Do you want to add a name title prefix dropdown field before the donor\'s first name field? This will display a dropdown with options such as Mrs, Miss, Ms, Sir, and Dr for the donor to choose from.', 'give' ),
 								'id'      => $prefix . 'name_title_prefix',
 								'type'    => 'radio_inline',
 								'options' => [
@@ -350,6 +352,18 @@ class Give_MetaBox_Form_Data {
 									'optional' => __( 'Optional', 'give' ),
 									'disabled' => __( 'Disabled', 'give' ),
 
+								],
+							],
+							[
+								'name'    => __( 'Last Name Field Required', 'give' ),
+								'desc'    => __( 'Do you want to force the Last Name field to be required?', 'give' ),
+								'id'      => $prefix . 'last_name_field_required',
+								'type'    => 'radio_inline',
+								'default' => 'global',
+								'options' => [
+									'global'   => __( 'Global Option', 'give' ),
+									'required' => __( 'Required', 'give' ),
+									'optional' => __( 'Optional', 'give' ),
 								],
 							],
 							[
@@ -457,8 +471,9 @@ class Give_MetaBox_Form_Data {
 								'id'            => $prefix . 'set_goal',
 								'type'          => 'text_small',
 								'data_type'     => 'price',
-								'attributes'    => [
-									'placeholder' => $price_placeholder,
+                                'default'       => give_format_decimal( [ 'amount' => '10000.00' ] ),
+                                'attributes'    => [
+									'placeholder' => give_format_decimal( [ 'amount' => '10000.00' ] ),
 									'class'       => 'give-money-field',
 								],
 								'wrapper_class' => 'give-hidden',
@@ -582,6 +597,58 @@ class Give_MetaBox_Form_Data {
 					),
 				]
 			),
+
+            /**
+             * Form Grid
+             *
+             * @since 2.20.0
+             */
+            'form_grid_options'    => apply_filters(
+                'give_forms_grid_options',
+                [
+                    'id'        => 'form_grid_options',
+                    'title'     => __( 'Form Grid', 'give' ),
+                    'icon-html' => '<i class="fas fa-th-large"></i>',
+                    'fields'    => [
+                        [
+                            'name'        => __( 'Form Grid', 'give' ),
+                            'description' => __( 'These settings are used to customize how this form looks or functions when displayed as a part of a Form Grid. The default option is for donors to be redirected to the individual form page (linked above), and to have "Donate" as the default text. To change that behavior, select to customize the options.', 'give' ),
+                            'id'          => $prefix . 'form_grid_option',
+                            'type'        => 'radio_inline',
+                            'default'     => 'default',
+                            'options'     => [
+                                'default' => __( 'Default options', 'give' ),
+                                'custom'  => __( 'Customize', 'give' ),
+                            ],
+                            'attributes'  => [
+                                'class' => 'give-visibility-handler',
+                            ]
+                        ],
+                        [
+                            'name'          => __( 'Redirect URL', 'give' ),
+                            'description'   => __( 'The full URL of the page you want this form to redirect to when clicked on from the Form Grid. This only applies when the Form Grid uses the “Redirect” method. ', 'give' ),
+                            'id'            => $prefix . 'form_grid_redirect_url',
+                            'type'          => 'text-medium',
+                            'attributes'    => [
+                                'placeholder' => 'https://example.com/donation-form',
+                                'data-field-visibility' => htmlspecialchars(json_encode([  $prefix . 'form_grid_option' => 'custom' ])),
+                            ],
+                            'wrapper_class' => 'give-hidden',
+                        ],
+                        [
+                            'name'          => __( 'Donate Button Text', 'give' ),
+                            'description'   => __( 'The text on the Donate Button for this form when displayed on the Form Grid. This setting only applies if the Donate Button display option is enabled in your Form Grid.', 'give' ),
+                            'id'            => $prefix . 'form_grid_donate_button_text',
+                            'type'          => 'text-medium',
+                            'attributes'    => [
+                                'placeholder' => 'Donate Here',
+                                'data-field-visibility' => htmlspecialchars(json_encode([  $prefix . 'form_grid_option' => 'custom' ])),
+                            ],
+                            'wrapper_class' => 'give-hidden',
+                        ],
+                    ],
+                ]
+            ),
 		];
 
 		/**
@@ -722,7 +789,6 @@ class Give_MetaBox_Form_Data {
 			$active_tab = ! empty( $_GET['give_tab'] ) ? give_clean( $_GET['give_tab'] ) : 'form_template_options';
 			wp_nonce_field( 'give_save_form_meta', 'give_form_meta_nonce' );
 
-			$upsell_html          = $this->upsell_html();
 			$added_upsells_notice = false;
 			?>
 			<input id="give_form_active_tab" type="hidden" name="give_form_active_tab">
@@ -774,7 +840,7 @@ class Give_MetaBox_Form_Data {
 						 class="panel give_options_panel<?php echo( $is_active ? ' active' : '' ); ?>">
 						<?php
 						if ( ! $added_upsells_notice ) {
-							echo $upsell_html;
+							echo UpsellNotice::recurringAddon();
 							$added_upsells_notice = true;
 						}
 						?>
@@ -805,39 +871,6 @@ class Give_MetaBox_Form_Data {
 			</div>
 			<?php
 		endif; // End if().
-	}
-
-
-	/**
-	 * Gt upsells html
-	 *
-	 * @return string
-	 * @since 2.6.0
-	 */
-	private function upsell_html() {
-		if ( Give_License::get_plugin_by_slug( 'give-recurring' ) ) {
-			return '';
-		}
-
-		$addon_link_url   = esc_url( 'http://docs.givewp.com/form-recurring' );
-		$addon_button_url = esc_url( 'http://docs.givewp.com/form-recurring' );
-
-		return sprintf(
-			'
-			<div class="give-upsell-notice">
-				<span class="icon dashicons dashicons-update-alt"></span>
-				<span class="description">%1$s</span>
-				<a class="view-addon-link button" href="%2$s" target="_blank">%3$s</a>
-			</div>
-			',
-			sprintf(
-				__( 'Activate the <a href="%1$s" title="%2$s" target="_blank">Recurring Donations add-on</a> and provide your donors with flexible subscription giving options.', 'give' ),
-				$addon_link_url,
-				__( 'Click to view the Recurring Donations add-on', 'give' )
-			),
-			$addon_button_url,
-			__( 'View Add-on', 'give' )
-		);
 	}
 
 	/**
@@ -949,7 +982,7 @@ class Give_MetaBox_Form_Data {
 				// Set default value for checkbox fields.
 				if (
 					! isset( $_POST[ $form_meta_key ] ) &&
-					in_array( $this->get_field_type( $form_meta_key ), [ 'checkbox', 'chosen' ] )
+					in_array( $this->get_field_type( $form_meta_key ), [ 'checkbox', 'chosen', 'multicheck' ] )
 				) {
 					$_POST[ $form_meta_key ] = '';
 				}
@@ -1450,8 +1483,7 @@ class Give_MetaBox_Form_Data {
 			'give_forms' === get_post_type( $post_id ) &&
 			! empty( $_POST['give_form_active_tab'] )
 		) {
-			$location = add_query_arg( 'give_tab', give_clean( $_POST['give_form_active_tab'] ), $location );
-		}
+			$location = esc_url_raw( add_query_arg( 'give_tab', give_clean( $_POST['give_form_active_tab'] ), $location ) ); }
 
 		return $location;
 	}

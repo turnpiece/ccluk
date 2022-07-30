@@ -19,12 +19,12 @@ use Beehive\Monolog\Utils;
  *
  * @author Tiago Brito <tlfbrito@gmail.com>
  */
-class HtmlFormatter extends \Beehive\Monolog\Formatter\NormalizerFormatter
+class HtmlFormatter extends NormalizerFormatter
 {
     /**
      * Translates Monolog log levels to html color priorities.
      */
-    protected $logLevels = array(\Beehive\Monolog\Logger::DEBUG => '#cccccc', \Beehive\Monolog\Logger::INFO => '#468847', \Beehive\Monolog\Logger::NOTICE => '#3a87ad', \Beehive\Monolog\Logger::WARNING => '#c09853', \Beehive\Monolog\Logger::ERROR => '#f0ad4e', \Beehive\Monolog\Logger::CRITICAL => '#FF7708', \Beehive\Monolog\Logger::ALERT => '#C12A19', \Beehive\Monolog\Logger::EMERGENCY => '#000000');
+    protected $logLevels = array(Logger::DEBUG => '#cccccc', Logger::INFO => '#468847', Logger::NOTICE => '#3a87ad', Logger::WARNING => '#c09853', Logger::ERROR => '#f0ad4e', Logger::CRITICAL => '#FF7708', Logger::ALERT => '#C12A19', Logger::EMERGENCY => '#000000');
     /**
      * @param string $dateFormat The format of the timestamp: one supported by DateTime::format
      */
@@ -112,8 +112,8 @@ class HtmlFormatter extends \Beehive\Monolog\Formatter\NormalizerFormatter
         }
         $data = $this->normalize($data);
         if (\version_compare(\PHP_VERSION, '5.4.0', '>=')) {
-            return \Beehive\Monolog\Utils::jsonEncode($data, \JSON_PRETTY_PRINT | \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_UNICODE, \true);
+            return Utils::jsonEncode($data, \JSON_PRETTY_PRINT | \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_UNICODE, \true);
         }
-        return \str_replace('\\/', '/', \Beehive\Monolog\Utils::jsonEncode($data, null, \true));
+        return \str_replace('\\/', '/', Utils::jsonEncode($data, null, \true));
     }
 }

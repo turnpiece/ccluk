@@ -15,7 +15,7 @@ namespace Beehive\Monolog\Processor;
  *
  * @author Andreas Hörnicke
  */
-class ProcessIdProcessor implements \Beehive\Monolog\Processor\ProcessorInterface
+class ProcessIdProcessor implements ProcessorInterface
 {
     /**
      * @param  array $record

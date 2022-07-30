@@ -6,11 +6,11 @@
  * @package shipper
  */
 
-$assets = new Shipper_Helper_Assets;
-$model = new Shipper_Model_Stored_Package;
+$assets       = new Shipper_Helper_Assets();
+$model        = new Shipper_Model_Stored_Package();
 $has_packages = $model->has_package();
 ?>
-<div class="shipper-packages-migration <?php if ( $has_packages ) echo 'shipper-has-packages'; ?>">
+<div class="shipper-packages-migration <?php echo $has_packages ? 'shipper-has-packages' : ''; ?>">
 	<div class="sui-box shipper-packages-migration-main">
 
 		<div class="sui-box-header">
@@ -37,7 +37,7 @@ $has_packages = $model->has_package();
 
 		<?php if ( ! empty( $has_packages ) ) { ?>
 			<?php $this->render( 'pages/packages/migration/additional' ); ?>
-			<?php echo Shipper_Helper_Assets::get_custom_hero_image_markup(); ?>
+			<?php echo wp_kses_post( Shipper_Helper_Assets::get_custom_hero_image_markup() ); ?>
 		<?php } ?>
 	</div><!-- sui-box -->
 

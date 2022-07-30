@@ -16,7 +16,7 @@ class Shipper_Helper_Storage_Db extends Shipper_Helper_Storage {
 	 * @return bool
 	 */
 	public function load() {
-		$str = get_site_option( $this->get_namespace(), '[]', false );
+		$str        = get_site_option( $this->get_namespace(), '[]', false );
 		$this->data = (array) $this->decode( $str );
 
 		return ! empty( $this->data );

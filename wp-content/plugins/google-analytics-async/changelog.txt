@@ -3,458 +3,181 @@ Author: Mariusz Misiek, Joel James
 
 Change Log:
 
-= 3.3.0 (2020-09-23) =
-**📦 New:**
+= 3.4.0 ( 2021-07-21 ) =
 
-- Google Tag Manager integration.
-- Accounts page to manage authentication to different services.
-- Separate page for Google Analytics settings.
+- New: Google Analytics 4 statistics & tracking.
+- Enhance: Upgrade GA APIs.
+- Enhance: Performance improvements.
 
-**👌 Improvements:**
+= 3.3.15 ( 2021-06-06 ) =
 
-- Improvements in onboarding modal.
-- Performance improvements in dashboard widget.
-- Cleanup unwanted services from Google library.
+- Enhance: WordPress 6.0 compatibility.
+- Enhance: Update submodules.
+- Enhance: Notice styles.
 
-**🐛 Bug Fixes:**
+= 3.3.14 ( 2021-05-06 ) =
 
-- API client failure on old PHP versions (PHP v5).
+- Fix: GuzzleHttp conflict.
 
-= 3.2.8 (2020-08-26) =
-**👌 Improvements:**
+= 3.3.13 ( 2021-04-27 ) =
 
-- API keys load balancing to avoid request limit issues.
-- Store authentication client id in database.
-- The original admin who installed Beehive can't be denied the settings access.
-- Show Google login and tracking ID status notice in settings page.
+- Enhance: PHP 8.0 compatibility.
+- Enhance: Update libraries.
+- Enhance: Update SUI.
+- Fix: Composer autoload conflicts.
+- Fix: Unable to dismiss tutorials widget.
+- Fix: Conflict with Google Listings and Ads plugin.
 
-**🐛 Bug Fixes:**
+= 3.3.12 ( 2021-11-03 ) =
 
-- Manual tracking ID is being used when automatic detection is enabled.
-- Network URL is used for authentication redirect if plugin is not activated network wide.
-- Composer autoload conflict with Updraft.
-- Conflict with Google Site Kit.
-- Log texts are hidden in Dashboard summary box.
+- Enhance: White label support.
+- Enhance: Permission checks.
 
-= 3.2.7 (2020-08-14) =
-**🐛 Bug Fixes:**
+= 3.3.11 ( 2021-11-01 ) =
 
-- Fixed broken pages when site is using different locale.
+- Enhance: Remove unused UI elements.
+- Enhance: Performance improvements.
 
-**👌 Improvements:**
+= 3.3.10 ( 2021-04-19 ) =
 
-- Updated Google lib to v2.7.0.
+- Enhance: Update external libraries.
+- Enhance: WP 5.8 support.
+- Fix: Subdirectory subsite post statistics are empty.
+- Fix: Invalid API credentials are being used on multisite.
+
+= 3.3.9 ( 2021-03-16 ) =
+
+- Enhance: Update links to wpmudev.com.
+- Fix: Tutorials are not loading.
+- Fix: Submodule is not initialized.
+
+= 3.3.8 ( 2021-03-04 ) =
+
+- New: Realtime visitors statistics.
+- Enhance: Improve whitelabel support.
+- Enhance: Hide irrelevant settings in network admin.
+- Enhance: Improvements in Exclude Roles settings.
+- Enhance: Improve GTM container ID validation.
+- Fix: Scroll bar is hidden after closing onboarding modal.
+- Fix: Wrong redirect URL after Google authentication.
+- Fix: Menu item is missing in mobile.
+- Fix: Ajax form submits are not triggering GTM events.
+
+= 3.3.7 ( 2021-01-27 ) =
+
+- New: Tutorials section.
+- New: Disable tracking based on user roles.
+- New: Ability to add/remove statistics meta box support for post types.
+- New: Statistics menu position settings.
+- Enhance: Improve whitelabel support.
+
+= 3.3.6 ( 2020-12-17 ) =
+
+- Fix: Dashboard Widget is hidden to admin users.
+- Fix: Active tab contents are not visible in Dashboard Widget.
+
+= 3.3.5 ( 2020-12-16 ) =
+
+- New: Option to reset plugin settings & data.
+- New: Option to cleanup plugin settings and data on uninstall.
+- Enhance: Move statistics pages to Beehive main menu.
+- Enhance: Update to latest SUI.
+- Enhance: Show refresh statistics button only on statistics pages.
+- Enhance: Remove restricted links when the user doesn't have permission.
+- Fix: Empty dashboard widget when the user doesn't have permission.
+
+= 3.3.4 ( 2020-11-19 ) =
+
+- New: GA4 measurement ID support.
+- Enhance: Improvements in GTM integrations.
+- Enhance: Remove links from comments.
+- Enhance: Remove unused settings from onboarding modal.
+- Enhance: Upgrade to gtag.js from analytics.js.
+- Fix: Search is not working in onboarding modal profile selector.
+- Fix: Can't scroll after onboarding is closed.
+- Fix: In some setup, onboarding modal is showing even after closing it.
+- Fix: Beehive logo is not hidden when whitelabel feature is enabled.
+- Fix: Comparison graph is not showing on first period change.
+- Fix: Permission settings are broken after upgrade.
+- Fix: Fatal error after upgrade.
+
+= 3.3.3 ( 2020-11-11 ) =
+
+- Fix: Security vulnerability
+
+= 3.3.2 ( 2020-10-22 ) =
+
+- New: Show redirect URIs for Google API project.
+- Enhance: Improvements in permissions UI.
+- Enhance: Show notice when subsites can view statistics without authentication.
+- Enhance: Show notice when duplicate GTM Container ID is being used network.
+- Fix: Mobile navigation is hidden.
+- Fix: Fatal error when upgrading from v3.2.8.
+- Fix: Analytics reports are not visible to the shop manager role when enabled.
+- Fix: Placeholder text is not visible.
+
+= 3.3.1 ( 2020-10-12 ) =
+
+- Enhance: Small fixes and improvements.
+
+= 3.3.0 ( 2020-09-23 ) =
+
+- New: Google Tag Manager integration.
+- New: Accounts page to manage authentication to different services.
+- New: Separate page for Google Analytics settings.
+- Enhance: Improvements in onboarding modal.
+- Enhance: Performance improvements in dashboard widget.
+- Enhance: Cleanup unwanted services from Google library.
+- Fix: API client failure on old PHP versions (PHP v5).
+
+= 3.2.8 ( 2020-08-26 ) =
+
+- Enhance: API keys load balancing to avoid request limit issues.
+- Enhance: Store authentication client id in database.
+- Enhance: The original admin who installed Beehive can't be denied the settings access.
+- Enhance: Show Google login and tracking ID status notice in settings page.
+- Fix: Manual tracking ID is being used when automatic detection is enabled.
+- Fix: Network URL is used for authentication redirect if plugin is not activated network wide.
+- Fix: Composer autoload conflict with Updraft.
+- Fix: Conflict with Google Site Kit.
+- Fix: Log texts are hidden in Dashboard summary box.
+
+= 3.2.7 ( 2020-08-14 ) =
+
+- Enhance: Updated Google lib to v2.7.0.
+- Fix: Broken pages when site is using different locale.
 
 = 3.2.6 (2020-05-29) =
-**🐛 Bug Fixes:**
 
-- Fixed blank page after the update.
-
-= 3.2.5 (2020-05-27) =
-**📦 New:**
-
-- Ability to control who can manage Beehive settings.
-- Added welcome modal to highlight important changes.
-
-**👌 Improvements:**
-
-- Prefix vendor libraries to avoid composer conflicts.
-- Combine chart tooltips when the comparison is used.
-- Use prefixed vendor libraries to avoid conflict.
-
-**🐛 Bug Fixes:**
-
-- Fixed conflicts with other plugins using Guzzle PHP lib.
-- Fixed using network_site_url only when Beehive is not network-wide active.
-- Fixed wrong Client ID and Client Secret check on subsites.
-
-= 3.2.4 (2020-04-06) =
-**📦 New:**
-
-- Added dashboard page.
-- Upgraded statistics page to use SUI.
-- Upgraded statistics widget to use SUI.
-- Added white labelling support.
-- Added ability to clear statistics cache from plugin settings.
-- Added rest endpoints for statistics and settings.
-- Added new filters for domain mapping support.
-
-**👌 Improvements:**
-
-- Upgraded to new SUI.
-- Improved UX to connect with Google.
-- Using ChartJS for all charts except Geo Chart.
-- Improved caching using transient.
-- Store plugin version in subsites for the upgrade process.
-- Merged reports and permission settings.
-
-**🐛 Bug Fixes:**
-
-- Fixed domain mapping support.
-
-= 3.2.3 (2019-12-16) =
-**👌 Improvements:**
-
-- Use Select2 for Google Analytics view selector.
-
-**🐛 Bug Fixes:**
-
-- WP 5.3.1 breaks statistics when an array is passed to wp_kses_post.
-
-= 3.2.2 (2019-11-20) =
-**📦 New:**
-
-- Added admin pages tracking option in single sites.
-
-**👌 Improvements:**
-
-- Show loading indicator when stats are being loaded.
-- Hide IP Anonymization settings in subsites if forced from the network.
-- Updated the UI descriptions.
-- Show error message in plugin settings when required APIs are not enabled.
-
-**🐛 Bug Fixes:**
-
-- Fixed conflict with UpdraftPlus.
-- Fixed conflict with Backup Buddy.
-- Fixed wrong tooltip title in the statistics page.
-
-= 3.2.1 (2019-10-28) =
-**📦 New:**
-
-- New filter beehive_google_api_error_log to enable debug log for api errors.
-
-**👌 Improvements:**
-
-- Improvements in re-authentication message.
-
-**🐛 Bug Fixes:**
-
-- Fixed conflict with Remould theme.
-- Fixed wrong legend text in visitors section.
-- Fixed empty stats when a page is set as front page.
-- Fixed admin page tracking issues in subsites.
-
-= 3.2.0 (2019-10-11) =
-**📦 New:**
-
-- Upgraded UI to SUI.
-- Renamed to Beehive Analytics.
-- Added new stats data to widgets.
-- Added Members & User Role Editor integrations.
-- Added role-based report restriction.
-- Added unit tests.
-- Added Onboarding setup.
-
-**👌 Improvements:**
-
-- Upgraded Google Analytics API.
-- Upgraded Google API Client library.
-- Removed obsolete custom table.
-
-= 3.1.7.2 (2018-10-22) =
-**🐛 Bug Fixes:**
-
-- Fixed undefined index notice issue.
-
-= 3.1.7.1 (2018-05-24) =
-**🐛 Bug Fixes:**
-
-- Fixed backward compatibility
-
-= 3.1.7 (2018-05-23) =
-**📦 New:**
-
-- Added ability to force IP Anonymization on sub-sites tracking.
-- Added "ga_load_tracking" filter to be able to disabled tracking on demand.
-- Added "gaplus_track" JS function to be able to turn on tracking when it has been disabled.
-- Added privacy guide support.
-
-**👌 Improvements:**
-
-- Improved accessibility.
-- Removed deprecated Google authorization code.
-- Removed old tracking method.
-- Removed domain mapping option.
-- Other small improvements.
-
- = 3.1.6 (2017-09-04) =
-**🐛 Bug Fixes:**
-
-- Use async loading for Google visualization API.
-- Only draw visitors table if we have actual data.
-
-
-= 3.1.5.6 (2017-07-06) =
-**🐛 Bug Fixes:**
-
-- Fixed Google Analytics API compatibility issue.
-
-= 3.1.5.5 (2016-12-16) =
-**📦 New:**
-
-- Added IP Anonymization option.
-
-**👌 Improvements:**
-
-- Improved dashboard stats precission.
-- Improved Google API error handling.
-
-**🐛 Bug Fixes:**
-
-- Fixed tracking code issue when using "both" method on site.
-
-= 3.1.5.1 (2015-09-22) =
-**🐛 Bug Fixes:**
-
-- Fixed Google App compatibility issues.
-- Fixed widget notice.
-
-= 3.1.5 (2015-06-15) =
-**📦 New:**
-
-- Added "Most popular posts(beta)" widget.
-
-= 3.1.4.1 (2015-04-10) =
-**🐛 Bug Fixes:**
-
-- Fixed problem with profiles list not being visible after logging in on fresh GA+ install.
-
-= 3.1.4 (2015-04-09) =
-**📦 New:**
-
-- Added compatibility with new Google login method. IMPORTANT: reauthentication will be needed so dashboard stats can continue to work in future.
-
-= 3.1.3.1 =
-**🐛 Bug Fixes:**
-
-- Fixed compatibility with WPMUDEV Domain Mapping plugin.
-
-= 3.1.3 (2015-01-09) =
-**📦 New:**
-
-- Added support for display advertising in universal analytics.
-
-**👌 Improvements:**
-
-- Improved error handling.
-- Improved multisite page path filtering.
-- Decreased number of requests to improve speed.
-
-= 3.1.2 (2014-05-06) =
-**👌 Improvements:**
-
-- Improved stats accuracy.
-- Decreased cache time for logged in users.
-- Other Improvements.
-
-**🐛 Bug Fixes:**
-
-- Fixed post stats widget not displaying for custom capability type.
-- Fixed loading image.
-
-= 3.1.1.2 (2014-02-28) =
-**📦 New:**
-
-- Added ability for site admins to overwrite minimum capability to view stats.
-
-**👌 Improvements:**
-
-- Improved support for domain mapping.
-
-**🐛 Bug Fixes:**
-
-- Fixed stats widget not displaying for proper user level.
-- Fixed displaying statistics page when not connected to Google.
-- Fixed admin tracking for universal analytics.
-- Removed admin page tracking for individual tracking codes when enabled in network settings.
-
-= 3.1.1.1 (2014-02-13) =
-**🐛 Bug Fixes:**
-
-- Fixed include error.
-
-= 3.1.1 (2014-02-13) =
-**📦 New:**
-
-- Added ability to set minimal role or capability to view statistics.
-- Added automatic detection of use of subdomains in multisite.
-
-**🐛 Bug Fixes:**
-
-- Fixed missing translation strings.
-- Fixed possible problem with domain mapping.
-- Fixed possible problems for single site.
-- Fixed incorrect links on network statistics page.
-
-= 3.1.0.1 (2014-01-29) =
-**👌 Improvements:**
-
-- Small improvements to error reporting.
-
-**🐛 Bug Fixes:**
-
-- Fixed missing translation strings.
-
-= 3.1 (2014-01-27) =
-**📦 New:**
-
-- Added dedicated page with full statistics.
-
-**👌 Improvements:**
-
-- Simplified dashboard widget with statistics.
-- Decreased risk of timeouts when requesting statistics.
-- Removed possibility of adding unnecessary code to header.
-- Improved UI.
-
-= 3.0 (2014-01-14) =
-**📦 New:**
-
-- Added ability to display network, site, post and page statistics inside WordPress dashboard.
-- Added Google login button to automatically detect correct Google Analytics settings.
-- Added support for "Universal Analytics".
-- Added better integration with Pro Sites.
-- Added single site compatibility.
-
-**👌 Improvements:**
-
-- Improved UI.
-- Removed option to track page time (depreciated by Google Analytics).
-
-= 2.1.1 (2013-10-22) =
-**📦 New:**
-
-- Added option to support display advertising.
-
-**👌 Improvements:**
-
-- Improved and fixed option pages.
-
-= 2.1 (2013-09-06) =
-**📦 New:**
-
-- Now compatible with https websites.
-- Mapped domain tracking is now supported.
-
-= 2.0.4 (2012-05-19) =
-**🐛 Bug Fixes:**
-
-- Multisite Analytics not tracking network.
-
-= 2.0.3 (2011-12-22) =
-**🐛 Bug Fixes:**
-
-- Fixed notice.
-
-= 2.0.2 (2011-12-21) =
-**🐛 Bug Fixes:**
-
-- Fixed problem with CSS.
-
-= 2.0.1 (2011-12-21) =
-**👌 Improvements:**
-
-- Changed save TableID.
-- Added more information text.
-
-**🐛 Bug Fixes:**
-
-- Fixed conflict with some JS.
-- Fixed conflict with some themes.
-- Fixed broken links.
-
-= 2.0.0 (2011-12-04) =
-**👌 Improvements:**
-
-- Added Google Analytics Data Export with next features.
-- Display reports on pages.
-- Create\edit your reports(feeds).
-- There are several default reports.
-- Show\hide reports.
-
-= 1.2.1 (2011-05-31) =
-**👌 Improvements:**
-
-- Added status text when saving settings.
-
-= 1.2.0 (2011-05-06) =
-**👌 Improvements:**
-
-- Add "Page load times" tracking.
-- Remove backward compatibility for 1.1.0.
-
-= 1.1.9 (2011-03-09) =
-**🐛 Bug Fixes:**
-
-- Fix bug with "www" in domain constant - credits Scott.
-
-= 1.1.8 (2011-03-08) =
-**🐛 Bug Fixes:**
-
-- Fix bug with site tracking code - credits Shawn @ 12pointdesign.com.
-- Admin menus architecture changed.
-- Current version is not backward compatible with WP 3.0.
-
-= 1.1.7 (2011-03-01) =
-**🐛 Bug Fixes:**
-
-- Fix bug with localization.
-
-= 1.1.6 (2011-02-18) =
-**🐛 Bug Fixes:**
-
-- Fix bug with additional tracking code - credits Nick Daugherty @ skyrocket.me.
-
-= 1.1.5 (2011-01-11) =
-**🐛 Bug Fixes:**
-
-- WordPress 3.1 menu regression bug fix.
-
-= 1.1.4 (2011-01-11) =
-**📦 New:**
-
-- Update notification notice added.
-
-= 1.1.3 (2011-01-11) =
-**👌 Improvements:**
-
-- Internal architecture changes.
-- Compatibility update for WordPress 3.1.
-
-= 1.1.2 =
-**📦 New:**
-
-- Added localization.
-
-**👌 Improvements:**
-
-- Plugin architecture changed.
-- Added function which handles migration of data from deprecated DB options.
-- Code improvements.
-
-= 1.1.1 =
-**🐛 Bug Fixes:**
-
-- Small bug fixes.
-
-= 1.1.0 =
-**📦 New:**
-
-- Plugin updated with the new asynchronous Google Analytics tracking code.
-- Cross-Domain Tracking.
-- Admin Pages Tracking.
-- Code improvements.
-
-= 1.0.1 (2010-06-17) =
-**👌 Improvements:**
-
-- WP 3.0 Multi-Site compatibility.
-
-= 1.0.0 (2009-04-01) =
-**📦 New:**
-
-- WPMU 2.7 Compatible.
-
-
-87274-1602263353-au
+- Fix: Blank page after the update.
+
+= 3.2.5 ( 2020-05-27 ) =
+
+- New: Ability to control who can manage Beehive settings.
+- New: Added welcome modal to highlight important changes.
+- Enhance: Prefix vendor libraries to avoid composer conflicts.
+- Enhance: Combine chart tooltips when the comparison is used.
+- Enhance: Use prefixed vendor libraries to avoid conflict.
+- Fix: Conflicts with other plugins using Guzzle PHP lib.
+- Fix: Using network_site_url only when Beehive is not network-wide active.
+- Fix: Wrong Client ID and Client Secret check on subsites.
+
+= 3.2.4 ( 2020-04-06 ) =
+
+- New: Added dashboard page.
+- New: Upgraded statistics page to use SUI.
+- New: Upgraded statistics widget to use SUI.
+- New: Added white labelling support.
+- New: Added ability to clear statistics cache from plugin settings.
+- New: Added rest endpoints for statistics and settings.
+- New: Added new filters for domain mapping support.
+- Enhance: Upgraded to new SUI.
+- Enhance: Improved UX to connect with Google.
+- Enhance: Using ChartJS for all charts except Geo Chart.
+- Enhance: Improved caching using transient.
+- Enhance: Store plugin version in subsites for the upgrade process.
+- Enhance: Merged reports and permission settings.
+- Fix: Domain mapping support.
+
+
+87274-1659205532-au

@@ -11,7 +11,7 @@
 class Shipper_Helper_Locks {
 
 	const LOCK_MIGRATION = 'migration';
-	const LOCK_CANCEL = 'cancel';
+	const LOCK_CANCEL    = 'cancel';
 	const LOCK_PREFLIGHT = 'preflight';
 
 	const LOCKED = 'locked';
@@ -25,8 +25,20 @@ class Shipper_Helper_Locks {
 	 */
 	public function has_lock( $process ) {
 		$lockfile = $this->get_lock_file( $process );
-		if ( ! file_exists( $lockfile ) ) { return false; }
-		$lock = @file_get_contents( $lockfile );
+		if ( ! file_exists( $lockfile ) ) {
+			return false;
+		}
+
+		$fs = Shipper_Helper_Fs_File::open( $lockfile );
+
+		if ( ! $fs ) {
+			return false;
+		}
+
+		$lock = $fs->isReadable() ?
+			$fs->fread( $fs->getSize() )
+			: false;
+
 		if ( false === $lock ) {
 			// OK, so it _does_ exist, but can't be read.
 			// Probably just cleared. Let's go with that.
@@ -87,7 +99,13 @@ class Shipper_Helper_Locks {
 	 * @return bool
 	 */
 	public function set_lock( $process ) {
-		return ! ! file_put_contents( $this->get_lock_file( $process ), self::LOCKED );
+		$fs = Shipper_Helper_Fs_File::open( $this->get_lock_file( $process ), 'w' );
+
+		if ( ! $fs ) {
+			return false;
+		}
+
+		return ! ! $fs->fwrite( self::LOCKED );
 	}
 
 	/**
@@ -99,7 +117,13 @@ class Shipper_Helper_Locks {
 	 */
 	public function release_lock( $process ) {
 		$lockfile = $this->get_lock_file( $process );
-		file_put_contents( $lockfile, '' );
+		$fs       = Shipper_Helper_Fs_File::open( $lockfile, 'w' );
+
+		if ( ! $fs ) {
+			return false;
+		}
+
+		$fs->fwrite( '' );
 
 		return shipper_delete_file( $lockfile );
 	}
@@ -111,11 +135,18 @@ class Shipper_Helper_Locks {
 	 */
 	public function clear_locks() {
 		$locks = glob( trailingslashit( Shipper_Helper_Fs_Path::get_log_dir() ) . '*.lock' );
-		if ( empty( $locks ) ) { return true; }
+		if ( empty( $locks ) ) {
+			return true; }
 
 		$status = true;
 		foreach ( $locks as $lock ) {
-			file_put_contents( $lock, '' );
+			$fs = Shipper_Helper_Fs_File::open( $lock, 'w' );
+
+			if ( ! $fs ) {
+				continue;
+			}
+
+			$fs->fwrite( '' );
 			if ( ! shipper_delete_file( $lock ) ) {
 				$status = false;
 			}

@@ -25,8 +25,8 @@ use Beehive\Firebase\JWT\SignatureInvalidException;
 use Beehive\Google\Auth\Cache\MemoryCacheItemPool;
 use Beehive\Google\Auth\HttpHandler\HttpClientCache;
 use Beehive\Google\Auth\HttpHandler\HttpHandlerFactory;
-use Beehive\GuzzleHttp\Psr7;
 use Beehive\GuzzleHttp\Psr7\Request;
+use Beehive\GuzzleHttp\Psr7\Utils;
 use InvalidArgumentException;
 use Beehive\phpseclib\Crypt\RSA;
 use Beehive\phpseclib\Math\BigInteger;
@@ -62,10 +62,10 @@ class AccessToken
      * @param callable $httpHandler [optional] An HTTP Handler to deliver PSR-7 requests.
      * @param CacheItemPoolInterface $cache [optional] A PSR-6 compatible cache implementation.
      */
-    public function __construct(callable $httpHandler = null, \Beehive\Psr\Cache\CacheItemPoolInterface $cache = null)
+    public function __construct(callable $httpHandler = null, CacheItemPoolInterface $cache = null)
     {
-        $this->httpHandler = $httpHandler ?: \Beehive\Google\Auth\HttpHandler\HttpHandlerFactory::build(\Beehive\Google\Auth\HttpHandler\HttpClientCache::getHttpClient());
-        $this->cache = $cache ?: new \Beehive\Google\Auth\Cache\MemoryCacheItemPool();
+        $this->httpHandler = $httpHandler ?: HttpHandlerFactory::build(HttpClientCache::getHttpClient());
+        $this->cache = $cache ?: new MemoryCacheItemPool();
     }
     /**
      * Verifies an id token and returns the authenticated apiLoginTicket.
@@ -107,26 +107,26 @@ class AccessToken
         $certs = $this->getCerts($certsLocation, $cacheKey, $options);
         $alg = $this->determineAlg($certs);
         if (!\in_array($alg, ['RS256', 'ES256'])) {
-            throw new \InvalidArgumentException('unrecognized "alg" in certs, expected ES256 or RS256');
+            throw new InvalidArgumentException('unrecognized "alg" in certs, expected ES256 or RS256');
         }
         try {
             if ($alg == 'RS256') {
                 return $this->verifyRs256($token, $certs, $audience, $issuer);
             }
             return $this->verifyEs256($token, $certs, $audience, $issuer);
-        } catch (\Beehive\Firebase\JWT\ExpiredException $e) {
+        } catch (ExpiredException $e) {
             // firebase/php-jwt 3+
         } catch (\Beehive\ExpiredException $e) {
             // firebase/php-jwt 2
-        } catch (\Beehive\Firebase\JWT\SignatureInvalidException $e) {
+        } catch (SignatureInvalidException $e) {
             // firebase/php-jwt 3+
         } catch (\Beehive\SignatureInvalidException $e) {
             // firebase/php-jwt 2
-        } catch (\Beehive\SimpleJWT\InvalidTokenException $e) {
+        } catch (InvalidTokenException $e) {
             // simplejwt
-        } catch (\Beehive\Google\Auth\DomainException $e) {
-        } catch (\InvalidArgumentException $e) {
-        } catch (\UnexpectedValueException $e) {
+        } catch (DomainException $e) {
+        } catch (InvalidArgumentException $e) {
+        } catch (UnexpectedValueException $e) {
         }
         if ($throwException) {
             throw $e;
@@ -146,11 +146,11 @@ class AccessToken
         $alg = null;
         foreach ($certs as $cert) {
             if (empty($cert['alg'])) {
-                throw new \InvalidArgumentException('certs expects "alg" to be set');
+                throw new InvalidArgumentException('certs expects "alg" to be set');
             }
             $alg = $alg ?: $cert['alg'];
             if ($alg != $cert['alg']) {
-                throw new \InvalidArgumentException('More than one alg detected in certs');
+                throw new InvalidArgumentException('More than one alg detected in certs');
             }
         }
         return $alg;
@@ -170,22 +170,22 @@ class AccessToken
     private function verifyEs256($token, array $certs, $audience = null, $issuer = null)
     {
         $this->checkSimpleJwt();
-        $jwkset = new \Beehive\SimpleJWT\Keys\KeySet();
+        $jwkset = new KeySet();
         foreach ($certs as $cert) {
-            $jwkset->add(\Beehive\SimpleJWT\Keys\KeyFactory::create($cert, 'php'));
+            $jwkset->add(KeyFactory::create($cert, 'php'));
         }
         // Validate the signature using the key set and ES256 algorithm.
         $jwt = $this->callSimpleJwtDecode([$token, $jwkset, 'ES256']);
         $payload = $jwt->getClaims();
         if (isset($payload['aud'])) {
             if ($audience && $payload['aud'] != $audience) {
-                throw new \UnexpectedValueException('Audience does not match');
+                throw new UnexpectedValueException('Audience does not match');
             }
         }
         // @see https://cloud.google.com/iap/docs/signed-headers-howto#verifying_the_jwt_payload
         $issuer = $issuer ?: self::IAP_ISSUER;
         if (!isset($payload['iss']) || $payload['iss'] !== $issuer) {
-            throw new \UnexpectedValueException('Issuer does not match');
+            throw new UnexpectedValueException('Issuer does not match');
         }
         return $payload;
     }
@@ -207,27 +207,27 @@ class AccessToken
         $keys = [];
         foreach ($certs as $cert) {
             if (empty($cert['kid'])) {
-                throw new \InvalidArgumentException('certs expects "kid" to be set');
+                throw new InvalidArgumentException('certs expects "kid" to be set');
             }
             if (empty($cert['n']) || empty($cert['e'])) {
-                throw new \InvalidArgumentException('RSA certs expects "n" and "e" to be set');
+                throw new InvalidArgumentException('RSA certs expects "n" and "e" to be set');
             }
-            $rsa = new \Beehive\phpseclib\Crypt\RSA();
-            $rsa->loadKey(['n' => new \Beehive\phpseclib\Math\BigInteger($this->callJwtStatic('urlsafeB64Decode', [$cert['n']]), 256), 'e' => new \Beehive\phpseclib\Math\BigInteger($this->callJwtStatic('urlsafeB64Decode', [$cert['e']]), 256)]);
+            $rsa = new RSA();
+            $rsa->loadKey(['n' => new BigInteger($this->callJwtStatic('urlsafeB64Decode', [$cert['n']]), 256), 'e' => new BigInteger($this->callJwtStatic('urlsafeB64Decode', [$cert['e']]), 256)]);
             // create an array of key IDs to certs for the JWT library
             $keys[$cert['kid']] = $rsa->getPublicKey();
         }
         $payload = $this->callJwtStatic('decode', [$token, $keys, ['RS256']]);
         if (\property_exists($payload, 'aud')) {
             if ($audience && $payload->aud != $audience) {
-                throw new \UnexpectedValueException('Audience does not match');
+                throw new UnexpectedValueException('Audience does not match');
             }
         }
         // support HTTP and HTTPS issuers
         // @see https://developers.google.com/identity/sign-in/web/backend-auth
         $issuers = $issuer ? [$issuer] : [self::OAUTH2_ISSUER, self::OAUTH2_ISSUER_HTTPS];
         if (!isset($payload->iss) || !\in_array($payload->iss, $issuers)) {
-            throw new \UnexpectedValueException('Issuer does not match');
+            throw new UnexpectedValueException('Issuer does not match');
         }
         return (array) $payload;
     }
@@ -248,8 +248,8 @@ class AccessToken
                 $token = $token['access_token'];
             }
         }
-        $body = \Beehive\GuzzleHttp\Psr7\stream_for(\http_build_query(['token' => $token]));
-        $request = new \Beehive\GuzzleHttp\Psr7\Request('POST', self::OAUTH2_REVOKE_URI, ['Cache-Control' => 'no-store', 'Content-Type' => 'application/x-www-form-urlencoded'], $body);
+        $body = Utils::streamFor(\http_build_query(['token' => $token]));
+        $request = new Request('POST', self::OAUTH2_REVOKE_URI, ['Cache-Control' => 'no-store', 'Content-Type' => 'application/x-www-form-urlencoded'], $body);
         $httpHandler = $this->httpHandler;
         $response = $httpHandler($request, $options);
         return $response->getStatusCode() == 200;
@@ -276,14 +276,14 @@ class AccessToken
         }
         if (!isset($certs['keys'])) {
             if ($location !== self::IAP_CERT_URL) {
-                throw new \InvalidArgumentException('federated sign-on certs expects "keys" to be set');
+                throw new InvalidArgumentException('federated sign-on certs expects "keys" to be set');
             }
-            throw new \InvalidArgumentException('certs expects "keys" to be set');
+            throw new InvalidArgumentException('certs expects "keys" to be set');
         }
         // Push caching off until after verifying certs are in a valid format.
         // Don't want to cache bad data.
         if ($gotNewCerts) {
-            $cacheItem->expiresAt(new \DateTime('+1 hour'));
+            $cacheItem->expiresAt(new DateTime('+1 hour'));
             $cacheItem->set($certs);
             $this->cache->save($cacheItem);
         }
@@ -303,22 +303,22 @@ class AccessToken
         // If we're retrieving a local file, just grab it.
         if (\strpos($url, 'http') !== 0) {
             if (!\file_exists($url)) {
-                throw new \InvalidArgumentException(\sprintf('Failed to retrieve verification certificates from path: %s.', $url));
+                throw new InvalidArgumentException(\sprintf('Failed to retrieve verification certificates from path: %s.', $url));
             }
             return \json_decode(\file_get_contents($url), \true);
         }
         $httpHandler = $this->httpHandler;
-        $response = $httpHandler(new \Beehive\GuzzleHttp\Psr7\Request('GET', $url), $options);
+        $response = $httpHandler(new Request('GET', $url), $options);
         if ($response->getStatusCode() == 200) {
             return \json_decode((string) $response->getBody(), \true);
         }
-        throw new \RuntimeException(\sprintf('Failed to retrieve verification certificates: "%s".', $response->getBody()->getContents()), $response->getStatusCode());
+        throw new RuntimeException(\sprintf('Failed to retrieve verification certificates: "%s".', $response->getBody()->getContents()), $response->getStatusCode());
     }
     private function checkAndInitializePhpsec()
     {
         // @codeCoverageIgnoreStart
         if (!\class_exists('Beehive\\phpseclib\\Crypt\\RSA')) {
-            throw new \RuntimeException('Please require phpseclib/phpseclib v2 to use this utility.');
+            throw new RuntimeException('Please require phpseclib/phpseclib v2 to use this utility.');
         }
         // @codeCoverageIgnoreEnd
         $this->setPhpsecConstants();
@@ -327,7 +327,7 @@ class AccessToken
     {
         // @codeCoverageIgnoreStart
         if (!\class_exists('Beehive\\SimpleJWT\\JWT')) {
-            throw new \RuntimeException('Please require kelvinmo/simplejwt ^0.2 to use this utility.');
+            throw new RuntimeException('Please require kelvinmo/simplejwt ^0.2 to use this utility.');
         }
         // @codeCoverageIgnoreEnd
     }
@@ -347,7 +347,7 @@ class AccessToken
                 \define('MATH_BIGINTEGER_OPENSSL_ENABLED', \true);
             }
             if (!\defined('CRYPT_RSA_MODE')) {
-                \define('CRYPT_RSA_MODE', \Beehive\phpseclib\Crypt\RSA::MODE_OPENSSL);
+                \define('CRYPT_RSA_MODE', RSA::MODE_OPENSSL);
             }
         }
     }
@@ -360,7 +360,7 @@ class AccessToken
      */
     protected function callJwtStatic($method, array $args = [])
     {
-        $class = \class_exists('Beehive\\Firebase\\JWT\\JWT') ? 'Firebase\\JWT\\JWT' : 'JWT';
+        $class = 'Beehive\\Firebase\\JWT\\JWT';
         return \call_user_func_array([$class, $method], $args);
     }
     /**

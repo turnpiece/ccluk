@@ -2,7 +2,7 @@
 /**
  * Stats functionality REST endpoint.
  *
- * @link       http://premium.wpmudev.org
+ * @link       http://wpmudev.com
  * @since      3.3.0
  *
  * @author     Joel James <joel@incsub.com>
@@ -181,7 +181,7 @@ class Settings extends Endpoint {
 		unset( $data['google_login']['access_token'] );
 
 		/**
-		 * Filter to perform additional masking.
+		 * Filter to perform additional masking for settings endpoint.
 		 *
 		 * @param array $data Data.
 		 *
@@ -205,12 +205,12 @@ class Settings extends Endpoint {
 		);
 
 		/**
-		 * Filter to modify stats capability.
+		 * Filter to modify settings endpoint capability.
 		 *
 		 * @paran bool $capable Is user capable?.
 		 *
 		 * @since 3.2.4
 		 */
-		return apply_filters( 'beehive_rest_settings_capability', true );
+		return apply_filters( 'beehive_rest_settings_capability', $capable );
 	}
 }

@@ -2,7 +2,7 @@
 /**
  * Defines permission helper functionality of the plugin.
  *
- * @link    http://premium.wpmudev.org
+ * @link    http://wpmudev.com
  * @since   3.2.0
  *
  * @author  Joel James <joel@incsub.com>
@@ -127,7 +127,7 @@ class Permission {
 		}
 
 		/**
-		 * Filter hook to modify has capability check.
+		 * Filter hook to modify admin capability check.
 		 *
 		 * @param bool $is_admin Is admin.
 		 * @param bool $network  Network flag.
@@ -251,63 +251,6 @@ class Permission {
 	}
 
 	/**
-	 * Get the available report capabilities of the current user role.
-	 *
-	 * Different user role has different capabilities according to settings.
-	 *
-	 * @param string $section Report section.
-	 * @param string $sub     Report sub section.
-	 * @param string $type    Report type (dashboard or statistics).
-	 * @param bool   $network Network flag.
-	 *
-	 * @since 3.2.0
-	 *
-	 * @return array
-	 */
-	public static function has_report_cap( $section, $sub = '', $type = 'dashboard', $network = false ) {
-		// Is he an admin?.
-		$is_admin = self::is_admin_user( $network );
-
-		// Admin has the power.
-		if ( $is_admin ) {
-			$has = true;
-		} elseif ( $network && ! $is_admin ) {
-			$has = false;
-		} else {
-			// If sub sites can't overwrite permissions get network custom capability.
-			$network = self::can_overwrite( 'analytics' ) ? $network : true;
-
-			// Check for custom capability.
-			$custom_cap = beehive_analytics()->settings->get( 'custom_cap', 'permissions', $network );
-
-			// If current user has the custom cap, good to go.
-			if ( ! empty( $custom_cap ) && current_user_can( $custom_cap ) ) {
-				$has = true;
-			} else {
-				// Get capabilities of current user.
-				$caps = self::user_report_caps( $type );
-
-				// Has capability set.
-				$has = empty( $sub ) ? ! empty( $caps[ $section ] ) : ! empty( $caps[ $section ][ $sub ] );
-			}
-		}
-
-		/**
-		 * Filter hook to modify report capability check.
-		 *
-		 * @param bool   $has     Has capability.
-		 * @param string $section Report section
-		 * @param string $roles   Roles of user.
-		 * @param string $type    Report type (dashboard or statistics).
-		 * @param bool   $network Network flag.
-		 *
-		 * @since 3.2.0
-		 */
-		return apply_filters( 'beehive_permissions_has_report_cap', $has, $section, $sub, $type, $network );
-
-	}
-
-	/**
 	 * Get the available report capabilities of the current user.
 	 *
 	 * Different user role has different capabilities according to settings.
@@ -365,7 +308,6 @@ class Permission {
 		 *
 		 * @param array  $user_caps Capabilities.
 		 * @param string $type      Report type.
-		 * @param array  $user      User.
 		 * @param bool   $network   Network flag.
 		 *
 		 * @since 3.2.0
@@ -380,18 +322,26 @@ class Permission {
 	 * with WP will also included.
 	 *
 	 * @param bool $include_admin Should include admin.
+	 * @param bool $network       Network flag.
 	 *
 	 * @since 3.2.0
+	 * @since 3.3.7 Added network param.
 	 *
 	 * @return array $roles Roles array.
 	 */
-	public static function get_roles( $include_admin = true ) {
+	public static function get_roles( $include_admin = true, $network = false ) {
 		// Get all available roles.
 		$roles = wp_roles()->get_names();
 
 		// Admins can manage the settings, so he should have all access.
 		if ( ! $include_admin ) {
 			unset( $roles['administrator'] );
+		} elseif ( $network && General::is_networkwide() ) {
+			// Add network admin.
+			$roles = array_merge(
+				array( 'super_admin' => __( 'Network Administrator', 'ga_trans' ) ),
+				$roles
+			);
 		}
 
 		/**
@@ -429,7 +379,7 @@ class Permission {
 		}
 
 		/**
-		 * Filter hook to add/remove roles to settings.
+		 * Filter hook to add/remove roles from current user roles.
 		 *
 		 * @param array $roles   Roles.
 		 * @param bool  $network Is network level?.
@@ -472,12 +422,65 @@ class Permission {
 		}
 
 		/**
-		 * Filter hook to add/remove levels.
+		 * Filter hook to add/remove Pro Sites levels.
 		 *
 		 * @param array $levels Levels.
 		 *
 		 * @since 3.2.0
 		 */
 		return apply_filters( 'beehive_prosites_levels', $levels );
+	}
+
+	/**
+	 * Check if we need to show Dashboard Widget.
+	 *
+	 * If the current logged in user doesn't have access
+	 * to any of the items in Dashboard widget, hide it.
+	 *
+	 * @since 3.3.5
+	 *
+	 * @return bool
+	 */
+	public static function can_show_dashboard_widget() {
+		static $show = null;
+
+		// Only if not already calculated.
+		if ( is_null( $show ) ) {
+			$show = true;
+
+			// Network admin and subsite/single admins should always have access.
+			if ( ! is_network_admin() && ! current_user_can( 'manage_options' ) ) {
+				$network = false;
+
+				// Check if network options should be considered.
+				if ( General::is_networkwide() ) {
+					// Can sub sites override.
+					$network = ! (bool) beehive_analytics()->settings->get( 'overwrite_cap', 'permissions', true );
+				}
+
+				// Get the custom capability.
+				$custom_cap = beehive_analytics()->settings->get( 'custom_cap', 'permissions', $network );
+
+				// If custom capability is set, check that.
+				if ( ! empty( $custom_cap ) && current_user_can( $custom_cap ) ) {
+					$show = true;
+				} else {
+					// Get the available report items for the user.
+					$reports = self::user_report_caps( 'dashboard', $network );
+
+					// Show if it's not empty.
+					$show = ! empty( $reports );
+				}
+			}
+		}
+
+		/**
+		 * Filter hook to alter visibility of dashboard widget.
+		 *
+		 * @param bool $show Should show.
+		 *
+		 * @since 3.3.5
+		 */
+		return apply_filters( 'beehive_can_show_dashboard_widget', $show );
 	}
 }

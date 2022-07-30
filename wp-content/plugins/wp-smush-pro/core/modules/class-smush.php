@@ -7,6 +7,7 @@
 
 namespace Smush\Core\Modules;
 
+use Smush\Core\Core;
 use Smush\Core\Helper;
 use WP_Error;
 use WP_Smush;
@@ -35,25 +36,20 @@ class Smush extends Abstract_Module {
 	public $image_sizes = array();
 
 	/**
-	 * Attachment type, being Smushed currently.
-	 *
-	 * @var string $media_type  Default: 'wp'. Accepts: 'wp', 'nextgen'.
-	 */
-	public $media_type = 'wp';
-
-	/**
-	 * Attachment ID for the image being Smushed currently.
-	 *
-	 * @var int $attachment_id
-	 */
-	public $attachment_id;
-
-	/**
 	 * Stores the headers returned by the latest API call.
 	 *
 	 * @var array $api_headers
 	 */
 	protected $api_headers = array();
+
+	/**
+	 * Prevent third party try to run another smush while it's running.
+	 *
+	 * @access private
+	 *
+	 * @var bool
+	 */
+	private $prevent_infinite_loop;
 
 	/**
 	 * WP_Smush constructor.
@@ -72,8 +68,11 @@ class Smush extends Abstract_Module {
 		add_action( 'wp_async_wp_generate_attachment_metadata', array( $this, 'wp_smush_handle_async' ) );
 		add_action( 'wp_async_wp_save_image_editor_file', array( $this, 'wp_smush_handle_editor_async' ), '', 2 );
 
-		// Register function for sending unsmushed image count to hub.
-		add_filter( 'wdp_register_hub_action', array( $this, 'smush_stats' ) );
+		// Make sure we treat scaled images as additional size.
+		add_filter( 'wp_smush_add_scaled_images_to_meta', array( $this, 'add_scaled_to_meta' ), 10, 2 );
+
+		// Fix SSL CA certificates issue.
+		add_action( 'wp_smush_before_smush_file', array( $this, 'fix_ssl_ca_certificate_error' ) );
 	}
 
 	/**
@@ -93,7 +92,7 @@ class Smush extends Abstract_Module {
 		}
 
 		// Show warning, if function says it's premium and api says not premium.
-		if ( isset( $this->api_headers['is_premium'] ) && ! intval( $this->api_headers['is_premium'] ) ) {
+		if ( isset( $this->api_headers['is_premium'] ) && ! (int) $this->api_headers['is_premium'] ) {
 			return true;
 		}
 
@@ -132,7 +131,7 @@ class Smush extends Abstract_Module {
 		}
 
 		// Add the timestamp.
-		$super_smushed['timestamp'] = current_time( 'timestamp' );
+		$super_smushed['timestamp'] = time();
 
 		update_option( $key, $super_smushed, false );
 
@@ -221,37 +220,40 @@ class Smush extends Abstract_Module {
 	}
 
 	/**
-	 * Check whether to skip a specific image size or not
+	 * Check whether to skip a specific image size or not.
 	 *
 	 * @param string $size  Registered image size.
 	 *
-	 * @return bool true/false Whether to skip the image size or not
+	 * @return bool Skip the image size or not.
 	 */
-	public function skip_image_size( $size = '' ) {
+	public function skip_image_size( $size ) {
 		// No image size specified, Don't skip.
 		if ( empty( $size ) ) {
 			return false;
 		}
 
-		$image_sizes = $this->settings->get_setting( WP_SMUSH_PREFIX . 'image_sizes' );
+		$image_sizes = $this->settings->get_setting( 'wp-smush-image_sizes' );
 
-		// If Images sizes aren't set, don't skip any of the image size.
+		// If image sizes aren't set, don't skip any of the image size.
 		if ( false === $image_sizes ) {
 			return false;
 		}
 
 		// Check if the size is in the smush list.
-		return is_array( $image_sizes ) && ! in_array( $size, $image_sizes );
+		return is_array( $image_sizes ) && ! in_array( $size, $image_sizes, true );
 	}
 
 	/**
 	 * Process an image with Smush.
 	 *
-	 * @param string $file_path  Absolute path to the image.
+	 * @since 3.8.0 Added new param $convert_to_webp.
+	 *
+	 * @param string $file_path        Absolute path to the image.
+	 * @param bool   $convert_to_webp  Convert the image to webp.
 	 *
 	 * @return array|bool|WP_Error
 	 */
-	public function do_smushit( $file_path = '' ) {
+	public function do_smushit( $file_path = '', $convert_to_webp = false ) {
 		$errors   = new WP_Error();
 		$dir_name = trailingslashit( dirname( $file_path ) );
 
@@ -284,6 +286,12 @@ class Smush extends Abstract_Module {
 		}
 
 		if ( count( $errors->get_error_messages() ) ) {
+			Helper::logger()->error(
+				array(
+					sprintf( 'Skipped file [%s] due to error:', Helper::clean_file_path( $file_path ) ),
+					$errors->get_error_messages(),
+				)
+			);
 			return $errors;
 		}
 
@@ -291,8 +299,8 @@ class Smush extends Abstract_Module {
 		clearstatcache();
 		$perms = fileperms( $file_path ) & 0777;
 
-		/** Send image for smushing, and fetch the response */
-		$response = $this->_post( $file_path, $file_size );
+		// Optimize image, and fetch the response.
+		$response = $this->_post( $file_path, $convert_to_webp );
 
 		if ( ! $response['success'] ) {
 			$errors->add( 'false_response', $response['message'] );
@@ -302,30 +310,44 @@ class Smush extends Abstract_Module {
 		}
 
 		if ( count( $errors->get_error_messages() ) ) {
+			Helper::logger()->error(
+				array(
+					sprintf( $convert_to_webp ? 'Cannot convert to webp for image [%s].' : 'Cannot smush image [%s].', Helper::clean_file_path( $file_path ) ),
+					$errors->get_error_messages(),
+				)
+			);
 			return $errors;
 		}
 
-		// If there are no savings, or image returned is bigger in size.
-		if ( ( ! empty( $response['data']->bytes_saved ) && intval( $response['data']->bytes_saved ) <= 0 ) || empty( $response['data']->image ) ) {
+		// If there are no savings, or image returned is bigger (size).
+		if ( ( ! empty( $response['data']->bytes_saved ) && (int) $response['data']->bytes_saved ) <= 0 || empty( $response['data']->image ) ) {
+			$bytes_saved = ! empty( $response['data']->bytes_saved ) ? $response['data']->bytes_saved : 0;
+			Helper::logger()->notice( sprintf( 'The smushed image is larger than the original image [%s] (bytes saved %d), keep original image.', Helper::clean_file_path( $file_path ), $bytes_saved ) );
 			return $response;
 		}
-		$tempfile = $file_path . '.tmp';
 
-		// Add the file as tmp.
-		file_put_contents( $tempfile, $response['data']->image );
+		if ( $convert_to_webp ) {
+			$file_path = WP_Smush::get_instance()->core()->mod->webp->get_webp_file_path( $file_path, true );
+			file_put_contents( $file_path, $response['data']->image );
+		} else {
+			$temp_file = $file_path . '.tmp';
 
-		// Replace the file.
-		$success = @rename( $tempfile, $file_path );
+			// Add the file as tmp.
+			file_put_contents( $temp_file, $response['data']->image );
 
-		// If tempfile still exists, unlink it.
-		if ( file_exists( $tempfile ) ) {
-			@unlink( $tempfile );
-		}
+			// Replace the file.
+			$success = rename( $temp_file, $file_path );
 
-		// If file renaming failed.
-		if ( ! $success ) {
-			@copy( $tempfile, $file_path );
-			@unlink( $tempfile );
+			// If temp file still exists, unlink it.
+			if ( file_exists( $temp_file ) ) {
+				unlink( $temp_file );
+			}
+
+			// If file renaming failed.
+			if ( ! $success ) {
+				copy( $temp_file, $file_path );
+				unlink( $temp_file );
+			}
 		}
 
 		// Some servers are having issue with file permission, this should fix it.
@@ -334,7 +356,8 @@ class Smush extends Abstract_Module {
 			$stat  = stat( dirname( $file_path ) );
 			$perms = $stat['mode'] & 0000666; // Same permissions as parent folder, strip off the executable bits.
 		}
-		@chmod( $file_path, $perms );
+
+		chmod( $file_path, $perms );
 
 		return $response;
 	}
@@ -342,21 +365,27 @@ class Smush extends Abstract_Module {
 	/**
 	 * Posts an image to Smush.
 	 *
-	 * @param string $file_path  Path of file to send to Smush.
-	 * @param int    $file_size  File size.
+	 * @since 3.8.0 Added new param $convert_to_webp.
+	 *
+	 * @param string $file_path        Path of file to send to Smush.
+	 * @param bool   $convert_to_webp  Convert the image to webp.
 	 *
 	 * @return bool|array array containing success status, and stats
 	 */
-	private function _post( $file_path, $file_size ) {
+	private function _post( $file_path, $convert_to_webp = false ) {
 		$headers = array(
 			'accept'       => 'application/json',   // The API returns JSON.
 			'content-type' => 'application/binary', // Set content type to binary.
-			'lossy'        => WP_Smush::is_pro() && $this->settings->get( 'lossy' ) ? 'true' : 'false',
+			'lossy'        => $this->settings->get( 'lossy' ) ? 'true' : 'false',
 			'exif'         => $this->settings->get( 'strip_exif' ) ? 'false' : 'true',
 		);
 
+		if ( $convert_to_webp ) {
+			$headers['webp'] = 'true';
+		}
+
 		// Check if premium member, add API key.
-		$api_key = $this->get_api_key();
+		$api_key = Helper::get_wpmudev_apikey();
 		if ( ! empty( $api_key ) && WP_Smush::is_pro() ) {
 			$headers['apikey'] = $api_key;
 		}
@@ -377,15 +406,15 @@ class Smush extends Abstract_Module {
 		if ( is_wp_error( $result ) ) {
 			$er_msg = $result->get_error_message();
 
-			// Hostgator Issue.
+			// Hostgator issue.
 			if ( ! empty( $er_msg ) && strpos( $er_msg, 'SSL CA cert' ) !== false ) {
 				// Update DB for using http protocol.
-				$this->settings->set_setting( WP_SMUSH_PREFIX . 'use_http', 1 );
+				$this->settings->set_setting( 'wp-smush-use_http', 1 );
 			}
 
 			// Check for timeout error and suggest to filter timeout.
 			if ( strpos( $er_msg, 'timed out' ) ) {
-				$data['message'] = esc_html__( "Skipped due to a timeout error. You can increase the request timeout to make sure Smush has enough time to process larger files. define('WP_SMUSH_API_TIMEOUT', 150);", 'wp-smushit' );
+				$data['message'] = esc_html__( "Skipped due to a timeout error. You can increase the request timeout to make sure Smush has enough time to process larger files. define('WP_SMUSH_TIMEOUT', 150);", 'wp-smushit' );
 			} else {
 				// Handle error.
 				/* translators: %s error message */
@@ -397,7 +426,7 @@ class Smush extends Abstract_Module {
 			return $data;
 		} elseif ( 200 !== wp_remote_retrieve_response_code( $result ) ) {
 			// Handle error.
-			/* translators: %1$s: respnse code, %2$s error message */
+			/* translators: %1$s: response code, %2$s error message */
 			$data['message'] = sprintf( __( 'Error posting to API: %1$s %2$s', 'wp-smushit' ), wp_remote_retrieve_response_code( $result ), wp_remote_retrieve_response_message( $result ) );
 			$data['success'] = false;
 			unset( $result ); // Free memory.
@@ -443,9 +472,6 @@ class Smush extends Abstract_Module {
 			$data['success'] = false;
 		}
 
-		// Free memory and return data.
-		unset( $result );
-		unset( $response );
 		return $data;
 	}
 
@@ -458,7 +484,7 @@ class Smush extends Abstract_Module {
 		if ( empty( $api_message ) || ! count( $api_message ) || empty( $api_message['timestamp'] ) || empty( $api_message['message'] ) ) {
 			return;
 		}
-		$o_api_message = get_site_option( WP_SMUSH_PREFIX . 'api_message', array() );
+		$o_api_message = get_site_option( 'wp-smush-api_message', array() );
 		if ( array_key_exists( $api_message['timestamp'], $o_api_message ) ) {
 			return;
 		}
@@ -470,7 +496,7 @@ class Smush extends Abstract_Module {
 			'type'    => sanitize_text_field( $api_message['type'] ),
 			'status'  => 'show',
 		);
-		update_site_option( WP_SMUSH_PREFIX . 'api_message', $message );
+		update_site_option( 'wp-smush-api_message', $message );
 	}
 
 	/**
@@ -509,23 +535,29 @@ class Smush extends Abstract_Module {
 	/**
 	 * Optimises the image sizes
 	 *
-	 * Note: Function name is bit confusing, it is for optimisation, and calls the resizing function as well
+	 * Note: Function name is a bit confusing, it is for optimisation, and calls the resizing function as well
 	 *
 	 * Read the image paths from an attachment's metadata and process each image
 	 * with wp_smushit().
 	 *
-	 * @param array    $meta  Image metadata.
-	 * @param null|int $id    Image ID.
+	 * @param int   $attachment_id  Image ID.
+	 * @param array $meta           Image metadata.
 	 *
-	 * @return mixed
+	 * @return WP_Error|array
 	 */
-	public function resize_from_meta_data( $meta, $id = null ) {
-		// Flag to check, if original size image should be smushed or not.
-		$original   = $this->settings->get( 'original' );
-		$smush_full = WP_Smush::is_pro() && true === $original;
+	public function resize_from_meta_data( $attachment_id, $meta ) {
+		// Check if it's real image, and is supported.
+		if ( ! Helper::is_smushable( $attachment_id ) ) {
+			return $meta;
+		}
 
-		$errors = new WP_Error();
-		$stats  = array(
+		// Maybe add scaled file to the meta sizes.
+		$meta = apply_filters( 'wp_smush_add_scaled_images_to_meta', $meta, $attachment_id );
+
+		// Flag to check, if uploaded size image should be smushed or not.
+		$smush_uploaded = true === $this->settings->get( 'original' );
+
+		$stats = array(
 			'stats' => array_merge(
 				$this->get_size_signature(),
 				array(
@@ -537,191 +569,152 @@ class Smush extends Abstract_Module {
 			'sizes' => array(),
 		);
 
-		if ( $id && false === wp_attachment_is_image( $id ) ) {
-			return $meta;
-		}
-
-		// Set attachment id and media type.
-		$this->attachment_id = $id;
-		$this->media_type    = 'wp';
-
 		// File path and URL for original image.
-		$attachment_file_path = Helper::get_attached_file( $id );
+		$file_path = Helper::get_attached_file( $attachment_id );// S3+.
 
 		// If images has other registered size, smush them first.
-		if ( ! empty( $meta['sizes'] ) ) {
+		if ( ! empty( $meta['sizes'] ) && ! has_filter( 'wp_image_editors', 'photon_subsizes_override_image_editors' ) ) {
+			$optimized_thumbs = array();
 			foreach ( $meta['sizes'] as $size_key => $size_data ) {
 				// Check if registered size is supposed to be Smushed or not.
-				if ( 'full' !== $size_key && $this->skip_image_size( $size_key ) ) {
-					continue;
+				if ( 'full' !== $size_key ) {
+					if ( $this->skip_image_size( $size_key ) || isset( $optimized_thumbs[ $size_data['file'] ] ) ) {
+						// If a thumbnail file is optimized we don't need to optimize it again.
+						continue;
+					}
+					/**
+					 * Save optimized thumbnail file.
+					 * We save all cases included failure case which user can re-check images later.
+					 */
+					$optimized_thumbs[ $size_data['file'] ] = $size_key;
 				}
 
 				// We take the original image. The 'sizes' will all match the same URL and
 				// path. So just get the dirname and replace the filename.
-				$attachment_file_path_size = path_join( dirname( $attachment_file_path ), $size_data['file'] );
+				$file_path_size = path_join( dirname( $file_path ), $size_data['file'] );
 
-				/**
-				 * Allows S3 to hook over here and check if the given file path exists else download the file.
-				 */
-				do_action( 'smush_file_exists', $attachment_file_path_size, $id, $size_data );
-
-				$ext = Helper::get_mime_type( $attachment_file_path_size );
-
-				if ( $ext ) {
-					$valid_mime = array_search(
-						$ext,
-						array(
-							'jpg' => 'image/jpeg',
-							'png' => 'image/png',
-							'gif' => 'image/gif',
-						),
-						true
-					);
-
-					if ( false === $valid_mime ) {
-						continue;
-					}
+				$ext = Helper::get_mime_type( $file_path_size );
+				if ( $ext && false === array_search( $ext, Core::$mime_types, true ) ) {
+					continue;
 				}
 
 				/**
-				 * Allows to skip a image from smushing.
+				 * Allows to skip an image from optimization.
 				 *
-				 * @param bool , Smush image or not
-				 * @$size string, Size of image being smushed
+				 * @param bool   $compress       Optimize image or not.
+				 * @param string $size_key       Size of image being smushed.
+				 * @param string $file_path_size Full thumbnail path of current size.
+				 * @param int    $attachment_id  Attachment ID.
+				 *
+				 * @since 3.9.6 Add two parameters for the filter.
 				 */
-				if ( ! apply_filters( 'wp_smush_media_image', true, $size_key ) ) {
+				if ( ! apply_filters( 'wp_smush_media_image', true, $size_key, $file_path_size, $attachment_id ) ) {
+					continue;
+				}
+
+				/**
+				 * Check if the file exists on the server,
+				 * if not, might try to download it from the cloud (s3).
+				 *
+				 * @since 3.9.6
+				 */
+				if ( ! Helper::exists_or_downloaded( $file_path_size, $attachment_id ) ) {
 					continue;
 				}
 
 				// Store details for each size key.
-				$response = $this->do_smushit( $attachment_file_path_size );
+				$response = $this->do_smushit( $file_path_size );
 
 				if ( is_wp_error( $response ) ) {
+					// Logged the error inside do_smushit.
 					return $response;
 				}
 
-				// If there are no stats.
-				if ( empty( $response['data'] ) ) {
+				// If there are no stats or resulting image is larger than original.
+				if ( empty( $response['data'] ) || $response['data']->after_size > $response['data']->before_size ) {
 					continue;
 				}
 
-				// If the image size grew after smushing, skip it.
-				if ( $response['data']->after_size > $response['data']->before_size ) {
-					continue;
-				}
-
-				// All Clear, Store the stat.
-				// TODO: Move the existing stats code over here, we don't need to do the stats part twice.
+				// All clear, store the stat.
 				$stats['sizes'][ $size_key ] = (object) $this->array_fill_placeholders( $this->get_size_signature(), (array) $response['data'] );
-
-				if ( empty( $stats['stats']['api_version'] ) || $stats['stats']['api_version'] == - 1 ) {
-					$stats['stats']['api_version'] = $response['data']->api_version;
-					$stats['stats']['lossy']       = $response['data']->lossy;
-					$stats['stats']['keep_exif']   = ! empty( $response['data']->keep_exif ) ? $response['data']->keep_exif : 0;
-				}
 			}
-		} else {
-			$smush_full = true;
+		} elseif ( ! has_filter( 'wp_image_editors', 'photon_subsizes_override_image_editors' ) ) {
+			$smush_uploaded = true;
 		}
 
 		/**
-		 * Allows to skip a image from smushing
+		 * Allows to skip an image from optimization.
 		 *
-		 * @param bool , Smush image or not
-		 * @$size string, Size of image being smushed
+		 * @param bool   $compress  Optimize image or not.
+		 * @param string $size_key  Size of image being smushed.
 		 */
-		$smush_full_image = apply_filters( 'wp_smush_media_image', true, 'full' );
-
-		// Whether to update the image stats or not.
-		$store_stats = true;
+		$smush_full_image = apply_filters( 'wp_smush_media_image', true, 'full', $file_path, $attachment_id );
 
 		// If original size is supposed to be smushed.
-		if ( $smush_full && $smush_full_image ) {
+		if ( $smush_uploaded && $smush_full_image ) {
+			$response = $this->do_smushit( $file_path );
 
-			$full_image_response = $this->do_smushit( $attachment_file_path );
-
-			if ( is_wp_error( $full_image_response ) ) {
-				return $full_image_response;
+			if ( is_wp_error( $response ) ) {
+				// Logged the error inside do_smushit.
+				return $response;
 			}
 
-			// If there are no stats.
-			if ( empty( $full_image_response['data'] ) ) {
-				$store_stats = false;
-			}
-
-			// If the image size grew after smushing, skip it.
-			if ( $full_image_response['data']->after_size > $full_image_response['data']->before_size ) {
-				$store_stats = false;
-			}
-
-			if ( $store_stats ) {
-				$stats['sizes']['full'] = (object) $this->array_fill_placeholders( $this->get_size_signature(), (array) $full_image_response['data'] );
-			}
-
-			// Api version and lossy, for some images, full image i skipped and for other images only full exists
-			// so have to add code again.
-			if ( empty( $stats['stats']['api_version'] ) || $stats['stats']['api_version'] == - 1 ) {
-				$stats['stats']['api_version'] = $full_image_response['data']->api_version;
-				$stats['stats']['lossy']       = $full_image_response['data']->lossy;
-				$stats['stats']['keep_exif']   = ! empty( $full_image_response['data']->keep_exif ) ? $full_image_response['data']->keep_exif : 0;
-			}
+			// All clear, store the stat.
+			$stats['sizes']['full'] = (object) $this->array_fill_placeholders( $this->get_size_signature(), (array) $response['data'] );
 		}
 
-		$has_errors = (bool) count( $errors->get_error_messages() );
+		// Make sure we have the correct API details.
+		if ( isset( $response ) && isset( $response['data'] ) && ( empty( $stats['stats']['api_version'] ) || - 1 === $stats['stats']['api_version'] ) ) {
+			$stats['stats']['api_version'] = $response['data']->api_version;
+			$stats['stats']['lossy']       = $response['data']->lossy;
+			$stats['stats']['keep_exif']   = ! empty( $response['data']->keep_exif ) ? $response['data']->keep_exif : 0;
+		}
 
 		// Set smush status for all the images, store it in wp-smpro-smush-data.
-		if ( ! $has_errors ) {
-			$existing_stats = get_post_meta( $id, self::$smushed_meta_key, true );
+		$existing_stats = get_post_meta( $attachment_id, self::$smushed_meta_key, true );
 
-			if ( ! empty( $existing_stats ) ) {
+		if ( ! empty( $existing_stats ) ) {
+			// Update stats for each size.
+			if ( isset( $existing_stats['sizes'] ) && ! empty( $stats['sizes'] ) ) {
+				foreach ( $existing_stats['sizes'] as $size_name => $size_stats ) {
+					// If stats for a particular size doesn't exists.
+					if ( empty( $stats['sizes'][ $size_name ] ) ) {
+						$stats['sizes'][ $size_name ] = $existing_stats['sizes'][ $size_name ];
+					} else {
+						$existing_stats_size = (object) $existing_stats['sizes'][ $size_name ];
 
-				// Update stats for each size.
-				if ( isset( $existing_stats['sizes'] ) && ! empty( $stats['sizes'] ) ) {
+						// Store the original image size.
+						$stats['sizes'][ $size_name ]->size_before = ( ! empty( $existing_stats_size->size_before ) && $existing_stats_size->size_before > $stats['sizes'][ $size_name ]->size_before ) ? $existing_stats_size->size_before : $stats['sizes'][ $size_name ]->size_before;
 
-					foreach ( $existing_stats['sizes'] as $size_name => $size_stats ) {
-						// If stats for a particular size doesn't exists.
-						if ( empty( $stats['sizes'][ $size_name ] ) ) {
-							$stats['sizes'][ $size_name ] = $existing_stats['sizes'][ $size_name ];
-						} else {
-
-							$existing_stats_size = (object) $existing_stats['sizes'][ $size_name ];
-
-							// Store the original image size.
-							$stats['sizes'][ $size_name ]->size_before = ( ! empty( $existing_stats_size->size_before ) && $existing_stats_size->size_before > $stats['sizes'][ $size_name ]->size_before ) ? $existing_stats_size->size_before : $stats['sizes'][ $size_name ]->size_before;
-
-							// Update compression percent and bytes saved for each size.
-							$stats['sizes'][ $size_name ]->bytes   = $stats['sizes'][ $size_name ]->bytes + $existing_stats_size->bytes;
-							$stats['sizes'][ $size_name ]->percent = $this->calculate_percentage( $stats['sizes'][ $size_name ], $existing_stats_size );
-						}
+						// Update compression percent and bytes saved for each size.
+						$stats['sizes'][ $size_name ]->bytes   = $stats['sizes'][ $size_name ]->bytes + $existing_stats_size->bytes;
+						$stats['sizes'][ $size_name ]->percent = $this->calculate_percentage( $stats['sizes'][ $size_name ], $existing_stats_size );
 					}
 				}
 			}
 
-			// Sum Up all the stats.
-			$stats = WP_Smush::get_instance()->core()->total_compression( $stats );
-
-			// If there was any compression and there was no error in smushing.
-			if ( isset( $stats['stats']['bytes'] ) && $stats['stats']['bytes'] >= 0 && ! $has_errors ) {
-				/**
-				 * Runs if the image smushing was successful
-				 *
-				 * @param int $id Image Id
-				 *
-				 * @param array $stats Smush Stats for the image
-				 *
-				 * @param array $meta Attachment meta.
-				 */
-				do_action( 'wp_smush_image_optimised', $id, $stats, $meta );
+			// Keep WebP flag.
+			if ( isset( $existing_stats['webp_flag'] ) ) {
+				$stats['webp_flag'] = $existing_stats['webp_flag'];
 			}
-			update_post_meta( $id, self::$smushed_meta_key, $stats );
 		}
 
-		unset( $stats );
+		// Sum Up all the stats.
+		$stats = WP_Smush::get_instance()->core()->total_compression( $stats );
 
-		// Unset response.
-		if ( ! empty( $response ) ) {
-			unset( $response );
+		// If there was any compression and there was no error during optimization.
+		if ( isset( $stats['stats']['bytes'] ) && $stats['stats']['bytes'] >= 0 ) {
+			/**
+			 * Runs if the image optimization was successful.
+			 *
+			 * @param int   $attachment_id  Image ID.
+			 * @param array $stats          Smush stats for the image.
+			 * @param array $meta           Attachment meta.
+			 */
+			do_action( 'wp_smush_image_optimised', $attachment_id, $stats, $meta );
 		}
+
+		update_post_meta( $attachment_id, self::$smushed_meta_key, $stats );
 
 		return $meta;
 	}
@@ -752,44 +745,140 @@ class Smush extends Abstract_Module {
 	}
 
 	/**
-	 * Read the image paths from an attachment's metadata and process each image with wp_smushit().
+	 * Fix SSL CA Certificate issue.
 	 *
-	 * @uses resize_from_meta_data
+	 * @since 3.9.6
 	 *
-	 * @param array $meta  Attachment metadata.
-	 * @param int   $id    Attachment ID.
+	 * Check for use of http url (Hostgator mostly) - got it from smush_image.
+	 */
+	public function fix_ssl_ca_certificate_error() {
+		// Return if the member defined it.
+		if ( defined( 'WP_SMUSH_API_HTTP' ) ) {
+			return;
+		}
+		static $use_http;
+		/**
+		 * Fix for Hostgator.
+		 * Check for use of http url (Hostgator mostly).
+		 */
+		if ( is_null( $use_http ) ) {
+			$use_http = $this->settings->get_setting( 'wp-smush-use_http', false );
+		}
+
+		if ( $use_http ) {
+			define( 'WP_SMUSH_API_HTTP', 'http://smushpro.wpmudev.com/1.0/' );
+		}
+	}
+
+	/**
+	 * Add action when we don't smush an image,
+	 * or get any errors while smushing.
 	 *
+	 * @param  int      $attachment_id Attachment ID.
+	 * @param  WP_Error $errors an instance of WP_Error.
+	 * @param  mixed    $result The data to return.
 	 * @return mixed
 	 */
-	public function smush_image( $meta, $id ) {
-		// We need to check if this call originated from Gutenberg and allow only media.
-		if ( ! empty( $GLOBALS['wp']->query_vars['rest_route'] ) ) {
-			$route = untrailingslashit( $GLOBALS['wp']->query_vars['rest_route'] );
+	private function no_smushit( $attachment_id, $errors, $result = null ) {
+		do_action( 'wp_smush_no_smushit', $attachment_id, $errors );
+		return isset( $result ) ? $result : false;
+	}
 
-			// Only allow media routes.
-			if ( empty( $route ) || '/wp/v2/media' !== $route ) {
-				// If not - return image metadata.
-				return $meta;
+	/**
+	 * Smush image
+	 *
+	 * @since 3.9.6
+	 *
+	 * @param int      $attachment_id  Attachment ID.
+	 * @param array    $ref_meta Original metadata (passed by reference).
+	 * @param WP_Error $ref_errors WP_Error (passed by reference).
+	 *
+	 * We need to detect the response status by using $ref_errors->has_errors().
+	 *
+	 * @return mixed Returns response data, TRUE if smushed the file, or FALSE with error(s).
+	 */
+	public function smushit( $attachment_id, &$ref_meta, &$ref_errors ) {
+		/**
+		 * Prevent infinite loop when someone call
+		 * wp_generate_attachment_metadata inside smushit.
+		 *
+		 * By default, we already avoid it via set in-progress,
+		 * but it's better to prevent it from another attachment file from third party and issue from object cache too.
+		 */
+		if ( $this->prevent_infinite_loop ) {
+			return $this->no_smushit( $attachment_id, $ref_errors );
+		}
+
+		// Handle errors.
+		if ( ! $ref_errors || ! is_wp_error( $ref_errors ) ) {
+			$ref_errors = new WP_Error();
+		}
+
+		/**
+		 * Error code sample.
+		 *
+		 * $ref_errors->add(
+		 *      'error_code',
+		 *      'error_message',
+		 *      array(
+		 *          'file_name' => 'cleaned file path',
+		 *      )
+		 * );
+		 */
+
+		$attachment_id = (int) $attachment_id;
+		if ( $attachment_id < 1 ) {
+			$message = __( 'No attachment ID was received.', 'wp-smushit' );
+			$ref_errors->add( 'missing_id', $message, array( 'file_name' => 'undefined' ) );
+			return $this->no_smushit( $attachment_id, $ref_errors );
+		}
+
+		$file_name = sprintf( /* translators: %d - attachment ID */
+			esc_html__( 'attachment ID: %d', 'wp-smushit' ),
+			$attachment_id
+		);
+
+		// Check if the file is ignored or animated.
+		$is_ignored = (int) get_post_meta( $attachment_id, 'wp-smush-ignore-bulk', true );
+		if ( $is_ignored > 0 ) {
+			$type    = 'ignored';
+			$message = __( 'Skip ignored file.', 'wp-smushit' );
+
+			if ( Core::STATUS_ANIMATED === $is_ignored ) {
+				$type    = 'animated';
+				$message = __( 'Skip animated file.', 'wp-smushit' );
 			}
+
+			$ref_errors->add( $type, $message, array( 'file_name' => $file_name ) );
+			return $this->no_smushit( $attachment_id, $ref_errors );
 		}
 
-		$upload_attachment    = filter_input( INPUT_POST, 'action', FILTER_SANITIZE_STRING );
-		$is_upload_attachment = 'upload-attachment' === $upload_attachment || isset( $_POST['post_id'] );
-
-		// Our async task runs when action is upload-attachment and post_id found. So do not run on these conditions.
-		if ( $is_upload_attachment && defined( 'WP_SMUSH_ASYNC' ) && WP_SMUSH_ASYNC ) {
-			return $meta;
+		// Return the status if the file is in progress.
+		if ( get_transient( 'wp-smush-restore-' . $attachment_id ) || get_transient( 'smush-in-progress-' . $attachment_id ) ) {
+			$message = __( 'File processing is in progress.', 'wp-smushit' );
+			$ref_errors->add( 'in_progress', $message, array( 'file_name' => $file_name ) );
+			return $this->no_smushit( $attachment_id, $ref_errors );
 		}
 
-		// Return directly if not a image.
-		if ( ! wp_attachment_is_image( $id ) ) {
-			return $meta;
+		// Image metadata.
+		if ( empty( $ref_meta ) ) {
+			// We use unfiltered metadata.
+			$ref_meta = wp_get_attachment_metadata( $attachment_id, true );
+		}
+		/**
+		 * This is often not set when images are imported to the database, without properly adding the meta values.
+		 * Causes PHP Warning: Illegal string offset 'file' message.
+		 */
+		if ( ! is_array( $ref_meta ) || ! isset( $ref_meta['file'] ) ) {
+			$message = __( 'No file data found in image meta', 'wp-smushit' );
+			$ref_errors->add( 'no_file_meta', $message, array( 'file_name' => $file_name ) );
+			return $this->no_smushit( $attachment_id, $ref_errors );
 		}
 
-		// Check if we're restoring the image Or already smushing the image.
-		if ( get_option( "wp-smush-restore-$id", false ) || get_option( "smush-in-progress-$id", false ) ) {
-			return $meta;
-		}
+		// Try to get the file name from path.
+		$file_name = explode( '/', $ref_meta['file'] );
+		$file_name = is_array( $file_name ) ? array_pop( $file_name ) : $ref_meta['file'];
+		$file_name = Helper::get_image_media_link( $attachment_id, $file_name );
 
 		/**
 		 * Filter: wp_smush_image
@@ -799,58 +888,160 @@ class Smush extends Abstract_Module {
 		 * @param bool $skip  Bool, whether to Smush image or not.
 		 * @param int  $ID    Attachment Id, Attachment id of the image being processed.
 		 */
-		if ( ! apply_filters( 'wp_smush_image', true, $id ) ) {
+		if ( ! apply_filters( 'wp_smush_image', true, $attachment_id ) ) {
+			$message = esc_html__( 'Skipped with wp_smush_image filter', 'wp-smushit' );
+			$ref_errors->add( 'skipped', $message, array( 'file_name' => $file_name ) );
+			return $this->no_smushit( $attachment_id, $ref_errors );
+		}
+
+		// Get the file path for backup.
+		$file_path = Helper::get_attached_file( $attachment_id );// S3+.
+
+		// If the file doesn't exist, return.
+		if ( ! file_exists( $file_path ) ) {
+			$message = esc_html__( 'Image not found.', 'wp-smushit' );
+			$ref_errors->add( 'not_found', $message, array( 'file_name' => $file_name ) );
+			return $this->no_smushit( $attachment_id, $ref_errors );
+		}
+
+		// Check if file is animated, return.
+		if ( Helper::check_animated_status( $file_path, $attachment_id ) ) {
+			$message = esc_html__( 'Skip animated file.', 'wp-smushit' );
+			$ref_errors->add( 'animated', $message, array( 'file_name' => $file_name ) );
+			return $this->no_smushit( $attachment_id, $ref_errors );
+		}
+
+		// Set prevent_infinite_loop before adding some actions, only return after resetting this value.
+		$this->prevent_infinite_loop = true;
+
+		/**
+		 * Fires before Smushing a file.
+		 *
+		 * @param int $attachment_id Attachment ID.
+		 * @param array $ref_meta Metadata.
+		 * @param WP_Error The WP_Error object (passed by reference).
+		 *
+		 * @hooked self::fix_ssl_ca_certificate_error()
+		 * @hooked Smush\Core\Integrations\S3::activate_smush_mode()
+		 */
+		do_action_ref_array( 'wp_smush_before_smush_file', array( $attachment_id, $ref_meta, &$ref_errors ) );
+
+		// Only Smush if there is no error from third party.
+		$has_error = $ref_errors->has_errors();
+		if ( ! $has_error ) {
+			// Set a transient to avoid multiple request.
+			set_transient( 'smush-in-progress-' . $attachment_id, 1, HOUR_IN_SECONDS );
+
+			// Is doing wp_generate_attachment_metadata.
+			$generating_metadata = doing_filter( 'wp_generate_attachment_metadata' );
+
+			// Nothing to smush if that is generating metadata while disabling auto-smush.
+			if ( $generating_metadata && ! $this->is_auto_smush_enabled() ) {
+				// Remove stats and update cache.
+				WP_Smush::get_instance()->core()->remove_stats( $attachment_id );
+			} else {
+				// We only take backup before smushing image.
+				WP_Smush::get_instance()->core()->mod->backup->create_backup( $file_path, $attachment_id );
+				// While uploading from Mobile App or other sources, admin_init action may not fire.
+				// So we need to manually initialize those.
+				if ( $generating_metadata ) {
+					WP_Smush::get_instance()->core()->mod->resize->initialize( true );
+				}
+				// Send image for resizing, if enabled resize first before any other operation.
+				$updated_meta = $this->resize_image( $attachment_id, $ref_meta );
+
+				/**
+				 * Convert PNGs to JPG, it should be run with resize_image in order to retrieve the transparent status from the cache.
+				 *
+				 * @see SMUSH-1027
+				 */
+				$updated_meta = WP_Smush::get_instance()->core()->mod->png2jpg->png_to_jpg( $attachment_id, $updated_meta );
+
+				$ref_meta = ! empty( $updated_meta ) ? $updated_meta : $ref_meta;
+
+				// Convert to webp.
+				$webp_files = WP_Smush::get_instance()->core()->mod->webp->convert_to_webp( $attachment_id, $ref_meta );
+				// Handle webp errors.
+				if ( is_wp_error( $webp_files ) ) {
+					$ref_errors = $webp_files;
+				}
+
+				// Smush the image.
+				$smush = $this->resize_from_meta_data( $attachment_id, $ref_meta );
+				// Handle compress errors.
+				if ( is_wp_error( $smush ) ) {
+					// Handle WP_Error.
+					$ref_errors->merge_from( $smush );
+				}
+			}
+		}
+
+		/**
+		 * Fires after optimizing a file.
+		 *
+		 * @param int $attachment_id Attachment ID.
+		 * @param array $ref_meta Metadata.
+		 * @param WP_Error The WP_Error object (passed by reference).
+		 *
+		 * @hooked Smush\Core\Integrations\S3::release_smush_mode()
+		 * @hooked Smush\Core\Integrations\S3::maybe_remove_sizes_from_s3_upload()
+		 */
+		do_action_ref_array( 'wp_smush_after_smush_file', array( $attachment_id, $ref_meta, &$ref_errors ) );
+
+		// Maybe update metadata after smushing image.
+		$has_error = $has_error || $ref_errors && is_wp_error( $ref_errors ) && $ref_errors->has_errors();
+		// Update the metadata if there are no errors or converted PNG2JPG or resized image.
+		if ( isset( $generating_metadata ) && ! $generating_metadata && ( ! $has_error || did_action( 'wp_smush_png_jpg_converted' ) || did_action( 'wp_smush_image_resized' ) ) ) {
+			Helper::wp_update_attachment_metadata( $attachment_id, $ref_meta );
+		}
+
+		// Log all errors.
+		if ( $has_error ) {
+			Helper::logger()->error( $ref_errors->errors );
+		}
+
+		// Delete the transient after attachment meta is updated.
+		delete_transient( 'smush-in-progress-' . $attachment_id );
+
+		// Reset prevent infinite loop.
+		$this->prevent_infinite_loop = null;
+
+		return $has_error ? $this->no_smushit( $attachment_id, $ref_errors ) : true;
+	}
+
+	/**
+	 * Read the image paths from an attachment's metadata and process each image with wp_smushit().
+	 *
+	 * @param array $meta  Attachment metadata.
+	 * @param int   $id    Attachment ID.
+	 *
+	 * @return mixed
+	 */
+	public function smush_image( $meta, $id ) {
+		// We need to check if this call originated from Gutenberg and allow only media.
+		if ( Helper::is_non_rest_media() ) {
+			// If not - return image metadata.
+			return $this->no_smushit( $id, null, $meta );
+		}
+
+		$upload_attachment    = filter_input( INPUT_POST, 'action', FILTER_SANITIZE_SPECIAL_CHARS );
+		$is_upload_attachment = 'upload-attachment' === $upload_attachment || isset( $_POST['post_id'] );
+
+		// Our async task runs when action is upload-attachment and post_id found. So do not run on these conditions.
+		if ( $is_upload_attachment && defined( 'WP_SMUSH_ASYNC' ) && WP_SMUSH_ASYNC ) {
 			return $meta;
 		}
 
-		// Set a transient to avoid multiple request.
-		update_option( 'smush-in-progress-' . $id, true );
-
-		// While uploading from Mobile App or other sources, admin_init action may not fire.
-		// So we need to manually initialize those.
-		WP_Smush::get_instance()->core()->mod->resize->initialize( true );
-
-		// Check if auto is enabled.
-		$auto_smush = $this->is_auto_smush_enabled();
-
-		// Get the file path for backup.
-		$attachment_file_path = Helper::get_attached_file( $id );
-
-		Helper::check_animated_status( $attachment_file_path, $id );
-
-		// Take backup.
-		WP_Smush::get_instance()->core()->mod->backup->create_backup( $attachment_file_path, $id );
-
-		// Optionally resize images.
-		$meta = WP_Smush::get_instance()->core()->mod->resize->auto_resize( $id, $meta );
-
-		// Auto Smush the new image.
-		if ( $auto_smush ) {
-			// Optionally convert PNGs to JPG.
-			$meta = WP_Smush::get_instance()->core()->mod->png2jpg->png_to_jpg( $id, $meta );
-
-			/**
-			 * Fix for Hostgator.
-			 * Check for use of http url (Hostgator mostly).
-			 */
-			$use_http = wp_cache_get( WP_SMUSH_PREFIX . 'use_http', 'smush' );
-			if ( ! $use_http ) {
-				$use_http = $this->settings->get_setting( WP_SMUSH_PREFIX . 'use_http', false );
-				wp_cache_add( WP_SMUSH_PREFIX . 'use_http', $use_http, 'smush' );
-			}
-
-			if ( $use_http ) {
-				define( 'WP_SMUSH_API_HTTP', 'http://smushpro.wpmudev.org/1.0/' );
-			}
-
-			$this->resize_from_meta_data( $meta, $id );
-		} else {
-			// Remove the smush metadata.
-			delete_post_meta( $id, self::$smushed_meta_key );
-		}
-
-		// Delete transient.
-		delete_option( 'smush-in-progress-' . $id );
+		/**
+		 * Smush image.
+		 *
+		 * @since 3.9.6
+		 *
+		 * @param int      $id  Attachment ID.
+		 * @param array    $meta Image metadata (passed by reference).
+		 * @param WP_Error $errors WP_Error (passed by reference).
+		 */
+		$this->smushit( $id, $meta, $errors );
 
 		return $meta;
 	}
@@ -864,104 +1055,67 @@ class Smush extends Abstract_Module {
 	 * @return array|string
 	 */
 	public function smush_single( $attachment_id, $return = false ) {
-		// If the smushing option is already set, return the status.
-		if ( get_option( "smush-in-progress-{$attachment_id}", false ) || get_option( "wp-smush-restore-{$attachment_id}", false ) ) {
+		/**
+		 * If the smushing option is already set, return the status.
+		 *
+		 * @since 3.9.6
+		 * If it's not in ajax we are already handled it inside self::smushit().
+		 */
+		if ( ! $return && $attachment_id > 0 && ( get_transient( 'smush-in-progress-' . $attachment_id ) || get_transient( 'wp-smush-restore-' . $attachment_id ) ) ) {
 			// Get the button status.
 			$status = WP_Smush::get_instance()->library()->generate_markup( $attachment_id );
-			if ( $return ) {
-				return $status;
-			}
-
 			wp_send_json_success( $status );
 		}
-
-		// Set a transient to avoid multiple request.
-		update_option( "smush-in-progress-{$attachment_id}", true );
-
-		$attachment_id = absint( (int) $attachment_id );
-
-		// Get the file path for backup.
-		$attachment_file_path = Helper::get_attached_file( $attachment_id );
-
-		Helper::check_animated_status( $attachment_file_path, $attachment_id );
-
-		// Take backup.
-		WP_Smush::get_instance()->core()->mod->backup->create_backup( $attachment_file_path, $attachment_id );
 
 		// Get the image metadata from $_POST.
 		$original_meta = ! empty( $_POST['metadata'] ) ? Helper::format_meta_from_post( $_POST['metadata'] ) : '';
 
-		$original_meta = empty( $original_meta ) ? wp_get_attachment_metadata( $attachment_id ) : $original_meta;
-
-		// Send image for resizing, if enabled resize first before any other operation.
-		$updated_meta = $this->resize_image( $attachment_id, $original_meta );
-
-		// Convert PNGs to JPG.
-		$updated_meta = WP_Smush::get_instance()->core()->mod->png2jpg->png_to_jpg( $attachment_id, $updated_meta );
-
-		$original_meta = ! empty( $updated_meta ) ? $updated_meta : $original_meta;
-
-		// Smush the image.
-		$smush = $this->resize_from_meta_data( $original_meta, $attachment_id );
-
 		/**
-		 * When S3 integration is enabled, the wp_update_attachment_metadata below will trigger the
-		 * wp_update_attachment_metadata filter WP Offload Media, which in turn will try to re-upload all the files
-		 * to an S3 bucket. But, if some sizes are skipped during Smushing, WP Offload Media will print error
-		 * messages to debug.log. This will help avoid that.
+		 * Smush image.
 		 *
-		 * @since 3.0
+		 * @since 3.9.6
+		 *
+		 * @param int      $attachment_id  Attachment ID.
+		 * @param array    $original_meta Image metadata (passed by reference).
+		 * @param WP_Error $errors WP_Error (passed by reference).
 		 */
-		add_filter( 'as3cf_attachment_file_paths', array( $this, 'remove_sizes_from_s3_upload' ), 10, 3 );
+		$this->smushit( $attachment_id, $original_meta, $errors );
 
-		// Update the details, after smushing, so that latest image is used in hook.
-		wp_update_attachment_metadata( $attachment_id, $original_meta );
+		// Send JSON response if we are not supposed to return the results.
+		if ( $errors && is_wp_error( $errors ) && $errors->has_errors() ) {
+			if ( $return ) {
+				return array( 'error' => $errors->get_error_message() );
+			}
 
-		// Delete the transient after attachment meta is updated.
-		delete_option( 'smush-in-progress-' . $attachment_id );
+			// Prepare data for ajax.
+			$error_code = $errors->get_error_code();
+			$error_data = $errors->get_error_data();
+
+			$status = array(
+				'error'        => $error_code,
+				'error_msg'    => '<p class="wp-smush-error-message">' . Helper::filter_error( $errors->get_error_message( $error_code ), $attachment_id ) . '</p>',
+				'show_warning' => (int) $this->show_warning(),
+			);
+
+			// Add error data (file_name) to status.
+			if ( $error_data && is_array( $error_data ) ) {
+				$status = array_merge( $error_data, $status );
+			}
+
+			// Send data.
+			wp_send_json_error( $status );
+		}
 
 		// Get the button status.
 		$status = WP_Smush::get_instance()->library()->generate_markup( $attachment_id );
 
-		// Send Json response if we are not suppose to return the results.
-		if ( is_wp_error( $smush ) ) {
-			if ( $return ) {
-				return array( 'error' => $smush->get_error_message() );
-			}
-
-			wp_send_json_error(
-				array(
-					'error_msg'    => '<p class="wp-smush-error-message">' . Helper::filter_error( $smush->get_error_message(), $attachment_id ) . '</p>',
-					'show_warning' => intval( $this->show_warning() ),
-				)
-			);
-		}
-
 		$this->update_resmush_list( $attachment_id );
+		\Smush\Core\Core::add_to_smushed_list( $attachment_id );
 		if ( $return ) {
 			return $status;
 		}
 
 		wp_send_json_success( $status );
-	}
-
-	/**
-	 * Returns api key.
-	 *
-	 * @return mixed
-	 */
-	private function get_api_key() {
-		$api_key = false;
-
-		// If API key defined manually, get that.
-		if ( defined( 'WPMUDEV_APIKEY' ) && WPMUDEV_APIKEY ) {
-			$api_key = WPMUDEV_APIKEY;
-		} elseif ( class_exists( 'WPMUDEV_Dashboard' ) ) {
-			// If dashboard plugin is active, get API key from db.
-			$api_key = get_site_option( 'wpmudev_apikey' );
-		}
-
-		return $api_key;
 	}
 
 	/**
@@ -987,7 +1141,7 @@ class Smush extends Abstract_Module {
 	 *
 	 * @param int $image_id  Attachment ID.
 	 *
-	 * @return bool
+	 * @return bool|void
 	 */
 	public function delete_images( $image_id ) {
 		// Update the savings cache.
@@ -1010,6 +1164,15 @@ class Smush extends Abstract_Module {
 		/** Delete Backups  */
 		// Check if we have any smush data for image.
 		WP_Smush::get_instance()->core()->mod->backup->delete_backup_files( $image_id );
+
+		/**
+		 * Delete webp.
+		 *
+		 * Run WebP::delete_images always even when the module is deactivated.
+		 *
+		 * @since 3.8.0
+		 */
+		WP_Smush::get_instance()->core()->mod->webp->delete_images( $image_id, false );
 	}
 
 	/**
@@ -1057,28 +1220,12 @@ class Smush extends Abstract_Module {
 	 * @param int $id  Attachment ID.
 	 */
 	public function wp_smush_handle_async( $id ) {
-		// If we don't have image id, or the smush is already in progress for the image, return.
-		if ( empty( $id ) || get_option( 'smush-in-progress-' . $id, false ) || get_option( "wp-smush-restore-$id", false ) ) {
+		// If we don't have image id or auto Smush is disabled, return.
+		if ( empty( $id ) || ! $this->is_auto_smush_enabled() ) {
 			return;
 		}
 
-		// If auto Smush is disabled.
-		if ( ! $this->is_auto_smush_enabled() ) {
-			return;
-		}
-
-		/**
-		 * Filter: wp_smush_image
-		 *
-		 * Whether to smush the given attachment id or not
-		 *
-		 * @param bool $skip  Whether to Smush image or not.
-		 * @param int  $id    Attachment id of the image being processed.
-		 */
-		if ( ! apply_filters( 'wp_smush_image', true, $id ) ) {
-			return;
-		}
-
+		// Try to use smushit.
 		$this->smush_single( $id, true );
 	}
 
@@ -1090,7 +1237,7 @@ class Smush extends Abstract_Module {
 	 */
 	public function wp_smush_handle_editor_async( $id, $post_data ) {
 		// If we don't have image id, or the smush is already in progress for the image, return.
-		if ( empty( $id ) || get_option( "smush-in-progress-$id", false ) || get_option( "wp-smush-restore-$id", false ) ) {
+		if ( empty( $id ) || get_transient( 'smush-in-progress-' . $id ) || get_transient( 'wp-smush-restore-' . $id ) ) {
 			return;
 		}
 
@@ -1111,21 +1258,19 @@ class Smush extends Abstract_Module {
 			return;
 		}
 
-		// If filepath is not set or file doesn't exists.
+		// If filepath is not set or file doesn't exist.
 		if ( ! isset( $post_data['filepath'] ) || ! file_exists( $post_data['filepath'] ) ) {
 			return;
 		}
 
-		// Send image for smushing.
 		$res = $this->do_smushit( $post_data['filepath'] );
 
-		// Exit if smushing wasn't successful.
 		if ( is_wp_error( $res ) || empty( $res['success'] ) || ! $res['success'] ) {
+			// Logged the error inside do_smushit.
 			return;
 		}
 
-		// Update stats if it's the full size image.
-		// Return if it's not the full image size.
+		// Update stats if it's the full size image. Return if it's not the full image size.
 		if ( $post_data['filepath'] != get_attached_file( $post_data['postid'] ) ) {
 			return;
 		}
@@ -1153,76 +1298,29 @@ class Smush extends Abstract_Module {
 	}
 
 	/**
-	 * Registers smush action for HUB API
+	 * Make sure we treat the scaled image as an attachment size, rather than the original uploaded image.
 	 *
-	 * @param array $actions  Array of registered actions.
+	 * @since 3.9.1
 	 *
-	 * @return mixed
+	 * @param array $meta           Attachment meta data.
+	 * @param int   $attachment_id  Attachment ID.
+	 *
+	 * @return array
 	 */
-	public function smush_stats( $actions ) {
-		$actions['smush_get_stats'] = array( $this, 'smush_attachment_count' );
+	public function add_scaled_to_meta( $meta, $attachment_id ) {
+		// If the image is not a scaled version - do nothing.
+		if ( false === strpos( $meta['file'], '-scaled.' ) || ! isset( $meta['original_image'] ) || isset( $meta['sizes']['wp_scaled'] ) ) {
+			return $meta;
+		}
 
-		return $actions; // always return at least the original array so we don't mess up other integrations.
-	}
-
-	/**
-	 * Send stats to Hub
-	 *
-	 * @param $params
-	 * @param $action
-	 * @param $request
-	 */
-	public function smush_attachment_count( $params, $action, $request ) {
-		$core = WP_Smush::get_instance()->core();
-
-		$stats = array(
-			'count_total'     => 0,
-			'count_smushed'   => 0,
-			'count_unsmushed' => 0,
-			'savings'         => array(),
+		$meta['sizes']['wp_scaled'] = array(
+			'file'      => basename( $meta['file'] ),
+			'width'     => $meta['width'],
+			'height'    => $meta['height'],
+			'mime-type' => get_post_mime_type( $attachment_id ),
 		);
 
-		if ( ! isset( $core->stats ) ) {
-			// Setup stats, if not set already.
-			$core->setup_global_stats();
-		}
-		// Total, Smushed, Unsmushed, Savings.
-		$stats['count_total']   = $core->total_count;
-		$stats['count_smushed'] = $core->smushed_count;
-		// Considering the images to be resmushed.
-		$stats['count_unsmushed'] = $core->remaining_count;
-		$stats['savings']         = $core->stats;
-
-		$request->send_json_success( $stats );
-	}
-
-	/**
-	 * Remove paths that should not be re-uploaded to an S3 bucket.
-	 *
-	 * See as3cf_attachment_file_paths filter description for more information.
-	 *
-	 * @since 3.0
-	 *
-	 * @param array $paths          Paths to be uploaded to S3 bucket.
-	 * @param int   $attachment_id  Attachment ID.
-	 * @param array $meta           Image metadata.
-	 *
-	 * @return mixed
-	 */
-	public function remove_sizes_from_s3_upload( $paths, $attachment_id, $meta ) {
-		// Only run when S3 integration is active. It won't run otherwise, but check just in case.
-		if ( ! $this->settings->get( 's3' ) ) {
-			return $paths;
-		}
-
-		foreach ( $meta['sizes'] as $size_key => $size_data ) {
-			// Check if registered size is supposed to be Smushed or not.
-			if ( 'full' !== $size_key && $this->skip_image_size( $size_key ) ) {
-				unset( $paths[ $size_key ] );
-			}
-		}
-
-		return $paths;
+		return $meta;
 	}
 
 }

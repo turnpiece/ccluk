@@ -28,29 +28,29 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return void
  */
 function give_add_options_links() {
-	global $give_settings_page, $give_payments_page, $give_reports_page, $give_donors_page, $give_tools_page;
+    global $give_settings_page, $give_payments_page, $give_reports_page, $give_donors_page, $give_tools_page;
 
-	// Payments
-	/* @var WP_Post_Type $give_payment */
-	$give_payment       = get_post_type_object( 'give_payment' );
-	$give_payments_page = add_submenu_page(
-		'edit.php?post_type=give_forms',
-		$give_payment->labels->name,
-		$give_payment->labels->menu_name,
-		'edit_give_payments',
-		'give-payment-history',
-		'give_payment_history_page'
-	);
+    // Payments
+    /* @var WP_Post_Type $give_payment */
+    $give_payment = get_post_type_object('give_payment');
+    $give_payments_page = add_submenu_page(
+    	'edit.php?post_type=give_forms',
+    	$give_payment->labels->name,
+    	$give_payment->labels->menu_name,
+    	'edit_give_payments',
+    	'give-payment-history',
+    	'give_payment_history_page'
+    );
 
-	// Donors
-	$give_donors_page = add_submenu_page(
-		'edit.php?post_type=give_forms',
-		esc_html__( 'Donors', 'give' ),
-		esc_html__( 'Donors', 'give' ),
-		'view_give_reports',
-		'give-donors',
-		'give_donors_page'
-	);
+    // Donors
+    $give_donors_page = add_submenu_page(
+        'edit.php?post_type=give_forms',
+        esc_html__('Donors', 'give'),
+        esc_html__('Donors', 'give'),
+        'view_give_reports',
+        'give-donors',
+        'give_donors_page'
+    );
 
 	// Settings
 	$give_settings_page = add_submenu_page(
@@ -82,39 +82,6 @@ function give_add_options_links() {
 add_action( 'admin_menu', 'give_add_options_links', 10 );
 
 
-
-/**
- * Creates the admin add-ons submenu page under the Give menu and assigns their
- * link to global variable
- *
- * @since 2.5.0
- *
- * @return void
- */
-function give_add_add_ons_option_link() {
-	global $submenu;
-
-	// Show menu only if user has permission.
-	if ( ! current_user_can( 'edit_give_payments' ) ) {
-		return;
-	}
-
-	// Add-ons
-	$submenu['edit.php?post_type=give_forms'][] = [
-		esc_html__( 'Add-ons', 'give' ),
-		'install_plugins',
-
-		/**
-		 * Filter the add-on page url.
-		 *
-		 * @since 2.6.0
-		 */
-		apply_filters( 'give_addon_menu_item_url', esc_url( 'http://docs.givewp.com/addons-menu-link' ) ),
-	];
-
-}
-add_action( 'admin_menu', 'give_add_add_ons_option_link', 999999 );
-
 /**
  *  Determines whether the current admin page is a Give admin page.
  *
@@ -123,6 +90,7 @@ add_action( 'admin_menu', 'give_add_add_ons_option_link', 999999 );
  *
  * @since 1.0
  * @since 2.1 Simplified function.
+ * @since 2.15.0 Use anonymous function in array_map to convert only strings to lowercase.
  *
  * @param string $passed_page Optional. Main page's slug
  * @param string $passed_view Optional. Page view ( ex: `edit` or `delete` )
@@ -133,10 +101,21 @@ function give_is_admin_page( $passed_page = '', $passed_view = '' ) {
 	global $pagenow, $typenow;
 
 	$found          = true;
-	$get_query_args = ! empty( $_GET ) ? @array_map( 'strtolower', $_GET ) : [];
+	$get_query_args = ! empty( $_GET ) ?
+		array_map( function ( $data ) {
+			return is_string( $data ) ? strtolower( $data ) : $data;
+		}, $_GET ) :
+		[];
 
 	// Set default argument, if not passed.
-	$query_args = wp_parse_args( $get_query_args, array_fill_keys( [ 'post_type', 'action', 'taxonomy', 'page', 'view', 'tab' ], false ) );
+	$query_args = wp_parse_args( $get_query_args, array_fill_keys( [
+		'post_type',
+		'action',
+		'taxonomy',
+		'page',
+		'view',
+		'tab'
+	], false ) );
 
 	switch ( $passed_page ) {
 		case 'categories':
@@ -224,17 +203,17 @@ function give_is_admin_page( $passed_page = '', $passed_view = '' ) {
 		default:
 			global $give_payments_page, $give_settings_page, $give_reports_page, $give_system_info_page, $give_settings_export, $give_donors_page, $give_tools_page;
 			$admin_pages = apply_filters(
-				'give_admin_pages',
-				[
-					$give_payments_page,
-					$give_settings_page,
-					$give_reports_page,
-					$give_system_info_page,
-					$give_settings_export,
-					$give_donors_page,
-					$give_tools_page,
-				]
-			);
+                'give_admin_pages',
+                [
+                    //$give_payments_page,
+                    $give_settings_page,
+                    $give_reports_page,
+                    $give_system_info_page,
+                    $give_settings_export,
+                    $give_donors_page,
+                    $give_tools_page,
+                ]
+            );
 
 			$found = ( 'give_forms' === $typenow || in_array( $pagenow, array_merge( $admin_pages, [ 'index.php', 'post-new.php', 'post.php', 'widgets.php', 'customize.php' ] ), true ) ) ? true : false;
 	}
@@ -273,6 +252,11 @@ function give_settings_page_pages( $settings ) {
 		// Advanced settings.
 		include GIVE_PLUGIN_DIR . 'includes/admin/settings/class-settings-advanced.php',
 	];
+
+    // Recurring Donations settings.
+    if ( !defined('GIVE_RECURRING_VERSION') ) {
+        $settings[] = include GIVE_PLUGIN_DIR . 'includes/admin/settings/class-settings-recurring.php';
+    }
 
 	// Output.
 	return $settings;

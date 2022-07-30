@@ -16,7 +16,7 @@
 				return;
 			}
 
-			field.select();
+			field.trigger('select');
 			document.execCommand('copy');
 		});
 

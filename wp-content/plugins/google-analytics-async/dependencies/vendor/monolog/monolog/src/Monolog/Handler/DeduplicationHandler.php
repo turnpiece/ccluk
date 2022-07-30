@@ -31,7 +31,7 @@ use Beehive\Monolog\Logger;
  *
  * @author Jordi Boggiano <j.boggiano@seld.be>
  */
-class DeduplicationHandler extends \Beehive\Monolog\Handler\BufferHandler
+class DeduplicationHandler extends BufferHandler
 {
     /**
      * @var string
@@ -56,11 +56,11 @@ class DeduplicationHandler extends \Beehive\Monolog\Handler\BufferHandler
      * @param int              $time               The period (in seconds) during which duplicate entries should be suppressed after a given log is sent through
      * @param bool             $bubble             Whether the messages that are handled can bubble up the stack or not
      */
-    public function __construct(\Beehive\Monolog\Handler\HandlerInterface $handler, $deduplicationStore = null, $deduplicationLevel = \Beehive\Monolog\Logger::ERROR, $time = 60, $bubble = \true)
+    public function __construct(HandlerInterface $handler, $deduplicationStore = null, $deduplicationLevel = Logger::ERROR, $time = 60, $bubble = \true)
     {
-        parent::__construct($handler, 0, \Beehive\Monolog\Logger::DEBUG, $bubble, \false);
+        parent::__construct($handler, 0, Logger::DEBUG, $bubble, \false);
         $this->deduplicationStore = $deduplicationStore === null ? \sys_get_temp_dir() . '/monolog-dedup-' . \substr(\md5(__FILE__), 0, 20) . '.log' : $deduplicationStore;
-        $this->deduplicationLevel = \Beehive\Monolog\Logger::toMonologLevel($deduplicationLevel);
+        $this->deduplicationLevel = Logger::toMonologLevel($deduplicationLevel);
         $this->time = $time;
     }
     public function flush()

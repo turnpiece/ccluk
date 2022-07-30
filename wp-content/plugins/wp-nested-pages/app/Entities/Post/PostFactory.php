@@ -39,6 +39,7 @@ class PostFactory
 	*/
 	public function createChildPosts($data)
 	{
+		if ( !current_user_can('publish_posts') ) return;
 		$post_type = sanitize_text_field($data['post_type']);
 
 		// Set the initial menu order
@@ -60,11 +61,16 @@ class PostFactory
 				'post_type' => $post_type,
 				'menu_order' => $menu_order
 			];
+			$post = apply_filters('nestedpages_new_post', $post, $data);
 			$new_page_id = wp_insert_post($post);
 			$data['post_id'] = $new_page_id;
 			if ( isset($data['page_template']) ) $this->post_update_repo->updateTemplate($data);
 			if ( isset($data['nav_status']) ) $this->post_update_repo->updateNavStatus($data);
 			$this->new_ids[$key] = $new_page_id;
+
+			$new_post = get_post($new_page_id);
+			$new_post->post_content = (string) apply_filters('default_content', $new_post->post_content, $new_post);
+			wp_update_post($new_post);
 		}
 		return $this->getNewPosts($post_type);
 	}
@@ -74,6 +80,7 @@ class PostFactory
 	*/
 	public function createBeforeAfterPosts($data)
 	{
+		if ( !current_user_can('publish_posts') ) return;
 		global $wpdb;
 		$menu_order = 0;
 		$parent = false;

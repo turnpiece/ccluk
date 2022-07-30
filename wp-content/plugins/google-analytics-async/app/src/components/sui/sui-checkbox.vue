@@ -4,6 +4,7 @@
 			type="checkbox"
 			:id="id"
 			:aria-labelledby="id + '-label'"
+			:disabled="disabled"
 			v-model="model"
 			@change="handleChange"
 		/>
@@ -21,19 +22,20 @@ export default {
 			type: String,
 			required: true,
 		},
-
 		label: {
 			type: String,
 			required: true,
 		},
-
 		type: {
 			validator: function (value) {
 				return ['small', 'stacked', 'stacked-sm'].indexOf(value) !== -1
 			},
 			default: null,
 		},
-
+		disabled: {
+			type: Boolean,
+			default: false,
+		},
 		value: Boolean,
 	},
 

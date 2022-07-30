@@ -30,7 +30,7 @@ trait FormattableHandlerTrait
      * {@inheritdoc}
      * @suppress PhanTypeMismatchReturn
      */
-    public function setFormatter(\Beehive\Monolog\Formatter\FormatterInterface $formatter) : \Beehive\Monolog\Handler\HandlerInterface
+    public function setFormatter(FormatterInterface $formatter) : HandlerInterface
     {
         $this->formatter = $formatter;
         return $this;
@@ -38,7 +38,7 @@ trait FormattableHandlerTrait
     /**
      * {@inheritdoc}
      */
-    public function getFormatter() : \Beehive\Monolog\Formatter\FormatterInterface
+    public function getFormatter() : FormatterInterface
     {
         if (!$this->formatter) {
             $this->formatter = $this->getDefaultFormatter();
@@ -50,8 +50,8 @@ trait FormattableHandlerTrait
      *
      * Overwrite this if the LineFormatter is not a good default for your handler.
      */
-    protected function getDefaultFormatter() : \Beehive\Monolog\Formatter\FormatterInterface
+    protected function getDefaultFormatter() : FormatterInterface
     {
-        return new \Beehive\Monolog\Formatter\LineFormatter();
+        return new LineFormatter();
     }
 }

@@ -15,7 +15,7 @@ class Shipper_Helper_Template {
 	 *
 	 * @var Shipper_Model_Constants_Shipper
 	 */
-	private $_constants;
+	private $constants;
 
 	/**
 	 * Sets internal constants instance
@@ -24,10 +24,10 @@ class Shipper_Helper_Template {
 	 *
 	 * @since v1.0.3
 	 *
-	 * @param object $obj Shipper_Model_Constants instance.
+	 * @param Shipper_Model_Constants $obj Shipper_Model_Constants instance.
 	 */
 	public function set_constants( Shipper_Model_Constants $obj ) {
-		$this->_constants = $obj;
+		$this->constants = $obj;
 	}
 
 	/**
@@ -40,10 +40,10 @@ class Shipper_Helper_Template {
 	 * @return object Shipper_Model_Constants instance
 	 */
 	public function get_constants() {
-		if ( ! empty( $this->_constants ) ) {
-			return $this->_constants;
+		if ( ! empty( $this->constants ) ) {
+			return $this->constants;
 		}
-		return new Shipper_Model_Constants_Shipper;
+		return new Shipper_Model_Constants_Shipper();
 	}
 
 	/**
@@ -59,8 +59,7 @@ class Shipper_Helper_Template {
 
 		return $path && preg_match( '/' . preg_quote( $root, '/' ) . '/', $path )
 			? $path
-			: ''
-		;
+			: '';
 	}
 
 	/**
@@ -73,7 +72,8 @@ class Shipper_Helper_Template {
 	 */
 	public function render( $relpath, $args = array() ) {
 		$template = $this->get_template_path( $relpath );
-		if ( empty( $template ) ) { return false; }
+		if ( empty( $template ) ) {
+			return false; }
 
 		$constants = $this->get_constants();
 		if ( $constants->get( 'DEBUG_TEMPLATE' ) ) {
@@ -84,7 +84,7 @@ class Shipper_Helper_Template {
 
 		// @codingStandardsIgnoreLine Using extract for templating
 		if ( ! empty( $args ) ) { extract( $args, EXTR_PREFIX_SAME, 'view_' ); }
-		include( $template );
+		include $template;
 
 		if ( $constants->get( 'DEBUG_TEMPLATE' ) ) {
 			echo '</div>';

@@ -22,7 +22,7 @@ use Beehive\Psr\Cache\CacheItemPoolInterface;
  * A class to implement caching for any object implementing
  * FetchAuthTokenInterface
  */
-class FetchAuthTokenCache implements \Beehive\Google\Auth\FetchAuthTokenInterface, \Beehive\Google\Auth\GetQuotaProjectInterface, \Beehive\Google\Auth\SignBlobInterface, \Beehive\Google\Auth\ProjectIdProviderInterface, \Beehive\Google\Auth\UpdateMetadataInterface
+class FetchAuthTokenCache implements FetchAuthTokenInterface, GetQuotaProjectInterface, SignBlobInterface, ProjectIdProviderInterface, UpdateMetadataInterface
 {
     use CacheTrait;
     /**
@@ -42,7 +42,7 @@ class FetchAuthTokenCache implements \Beehive\Google\Auth\FetchAuthTokenInterfac
      * @param array $cacheConfig Configuration for the cache
      * @param CacheItemPoolInterface $cache
      */
-    public function __construct(\Beehive\Google\Auth\FetchAuthTokenInterface $fetcher, array $cacheConfig = null, \Beehive\Psr\Cache\CacheItemPoolInterface $cache)
+    public function __construct(FetchAuthTokenInterface $fetcher, array $cacheConfig = null, CacheItemPoolInterface $cache)
     {
         $this->fetcher = $fetcher;
         $this->cache = $cache;
@@ -60,29 +60,11 @@ class FetchAuthTokenCache implements \Beehive\Google\Auth\FetchAuthTokenInterfac
      */
     public function fetchAuthToken(callable $httpHandler = null)
     {
-        // Use the cached value if its available.
-        //
-        // TODO: correct caching; update the call to setCachedValue to set the expiry
-        // to the value returned with the auth token.
-        //
-        // TODO: correct caching; enable the cache to be cleared.
-        $cacheKey = $this->fetcher->getCacheKey();
-        $cached = $this->getCachedValue($cacheKey);
-        if (\is_array($cached)) {
-            if (empty($cached['expires_at'])) {
-                // If there is no expiration data, assume token is not expired.
-                // (for JwtAccess and ID tokens)
-                return $cached;
-            }
-            if (\time() < $cached['expires_at']) {
-                // access token is not expired
-                return $cached;
-            }
+        if ($cached = $this->fetchAuthTokenFromCache()) {
+            return $cached;
         }
         $auth_token = $this->fetcher->fetchAuthToken($httpHandler);
-        if (isset($auth_token['access_token']) || isset($auth_token['id_token'])) {
-            $this->setCachedValue($cacheKey, $auth_token);
-        }
+        $this->saveAuthTokenInCache($auth_token);
         return $auth_token;
     }
     /**
@@ -107,6 +89,9 @@ class FetchAuthTokenCache implements \Beehive\Google\Auth\FetchAuthTokenInterfac
      */
     public function getClientName(callable $httpHandler = null)
     {
+        if (!$this->fetcher instanceof SignBlobInterface) {
+            throw new \RuntimeException('Credentials fetcher does not implement ' . 'Google\\Auth\\SignBlobInterface');
+        }
         return $this->fetcher->getClientName($httpHandler);
     }
     /**
@@ -122,8 +107,15 @@ class FetchAuthTokenCache implements \Beehive\Google\Auth\FetchAuthTokenInterfac
      */
     public function signBlob($stringToSign, $forceOpenSsl = \false)
     {
-        if (!$this->fetcher instanceof \Beehive\Google\Auth\SignBlobInterface) {
+        if (!$this->fetcher instanceof SignBlobInterface) {
             throw new \RuntimeException('Credentials fetcher does not implement ' . 'Google\\Auth\\SignBlobInterface');
+        }
+        // Pass the access token from cache to GCECredentials for signing a blob.
+        // This saves a call to the metadata server when a cached token exists.
+        if ($this->fetcher instanceof Credentials\GCECredentials) {
+            $cached = $this->fetchAuthTokenFromCache();
+            $accessToken = isset($cached['access_token']) ? $cached['access_token'] : null;
+            return $this->fetcher->signBlob($stringToSign, $forceOpenSsl, $accessToken);
         }
         return $this->fetcher->signBlob($stringToSign, $forceOpenSsl);
     }
@@ -135,7 +127,7 @@ class FetchAuthTokenCache implements \Beehive\Google\Auth\FetchAuthTokenInterfac
      */
     public function getQuotaProject()
     {
-        if ($this->fetcher instanceof \Beehive\Google\Auth\GetQuotaProjectInterface) {
+        if ($this->fetcher instanceof GetQuotaProjectInterface) {
             return $this->fetcher->getQuotaProject();
         }
     }
@@ -149,7 +141,7 @@ class FetchAuthTokenCache implements \Beehive\Google\Auth\FetchAuthTokenInterfac
      */
     public function getProjectId(callable $httpHandler = null)
     {
-        if (!$this->fetcher instanceof \Beehive\Google\Auth\ProjectIdProviderInterface) {
+        if (!$this->fetcher instanceof ProjectIdProviderInterface) {
             throw new \RuntimeException('Credentials fetcher does not implement ' . 'Google\\Auth\\ProvidesProjectIdInterface');
         }
         return $this->fetcher->getProjectId($httpHandler);
@@ -166,15 +158,54 @@ class FetchAuthTokenCache implements \Beehive\Google\Auth\FetchAuthTokenInterfac
      */
     public function updateMetadata($metadata, $authUri = null, callable $httpHandler = null)
     {
-        if (!$this->fetcher instanceof \Beehive\Google\Auth\UpdateMetadataInterface) {
+        if (!$this->fetcher instanceof UpdateMetadataInterface) {
             throw new \RuntimeException('Credentials fetcher does not implement ' . 'Google\\Auth\\UpdateMetadataInterface');
         }
-        // Set the `Authentication` header from the cache, so it is not set
-        // again by the fetcher
-        $result = $this->fetchAuthToken($httpHandler);
-        if (isset($result['access_token'])) {
-            $metadata[self::AUTH_METADATA_KEY] = ['Bearer ' . $result['access_token']];
+        $cached = $this->fetchAuthTokenFromCache($authUri);
+        if ($cached) {
+            // Set the access token in the `Authorization` metadata header so
+            // the downstream call to updateMetadata know they don't need to
+            // fetch another token.
+            if (isset($cached['access_token'])) {
+                $metadata[self::AUTH_METADATA_KEY] = ['Bearer ' . $cached['access_token']];
+            }
         }
-        return $this->fetcher->updateMetadata($metadata, $authUri, $httpHandler);
+        $newMetadata = $this->fetcher->updateMetadata($metadata, $authUri, $httpHandler);
+        if (!$cached && ($token = $this->fetcher->getLastReceivedToken())) {
+            $this->saveAuthTokenInCache($token, $authUri);
+        }
+        return $newMetadata;
+    }
+    private function fetchAuthTokenFromCache($authUri = null)
+    {
+        // Use the cached value if its available.
+        //
+        // TODO: correct caching; update the call to setCachedValue to set the expiry
+        // to the value returned with the auth token.
+        //
+        // TODO: correct caching; enable the cache to be cleared.
+        // if $authUri is set, use it as the cache key
+        $cacheKey = $authUri ? $this->getFullCacheKey($authUri) : $this->fetcher->getCacheKey();
+        $cached = $this->getCachedValue($cacheKey);
+        if (\is_array($cached)) {
+            if (empty($cached['expires_at'])) {
+                // If there is no expiration data, assume token is not expired.
+                // (for JwtAccess and ID tokens)
+                return $cached;
+            }
+            if (\time() < $cached['expires_at']) {
+                // access token is not expired
+                return $cached;
+            }
+        }
+        return null;
+    }
+    private function saveAuthTokenInCache($authToken, $authUri = null)
+    {
+        if (isset($authToken['access_token']) || isset($authToken['id_token'])) {
+            // if $authUri is set, use it as the cache key
+            $cacheKey = $authUri ? $this->getFullCacheKey($authUri) : $this->fetcher->getCacheKey();
+            $this->setCachedValue($cacheKey, $authToken);
+        }
     }
 }

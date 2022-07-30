@@ -77,6 +77,8 @@ class Ai1wm_Export_Download {
 			);
 		}
 
+		do_action( 'ai1wm_status_export_done', $params );
+
 		return $params;
 	}
 }

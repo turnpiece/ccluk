@@ -53,11 +53,12 @@ class Shipper_Controller_Admin_Settings extends Shipper_Controller_Admin {
 		}
 
 		$tool = 'notifications';
-		if ( ! empty( $_GET['tool'] ) ) {
-			$tool = sanitize_text_field( $_GET['tool'] );
+		$get  = wp_unslash( $_GET ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( ! empty( $get['tool'] ) ) {
+			$tool = sanitize_text_field( $get['tool'] );
 		}
 
-		$tpl = new Shipper_Helper_Template;
+		$tpl = new Shipper_Helper_Template();
 		$tpl->render( 'pages/settings/main', array( 'current_tool' => $tool ) );
 	}
 
@@ -65,7 +66,8 @@ class Shipper_Controller_Admin_Settings extends Shipper_Controller_Admin {
 	 * Adds front-end dependencies specific for the settings page
 	 */
 	public function add_settings_dependencies() {
-		if ( ! shipper_user_can_ship() ) { return false; }
+		if ( ! shipper_user_can_ship() ) {
+			return false; }
 		$this->add_shared_dependencies();
 	}
 
@@ -78,21 +80,30 @@ class Shipper_Controller_Admin_Settings extends Shipper_Controller_Admin {
 		}
 
 		$tool = false;
-		if ( ! empty( $_GET['tool'] ) ) {
-			$tool = sanitize_text_field( $_GET['tool'] );
-		}
-		if ( empty( $tool ) ) { return false; }
+		$get  = wp_unslash( $_GET ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
-		if ( empty( $_POST[ $tool ] ) ) {
+		if ( ! empty( $get['tool'] ) ) {
+			$tool = sanitize_text_field( $get['tool'] );
+		}
+		if ( empty( $tool ) ) {
+			return false;
+		}
+
+		$post = wp_unslash( $_POST ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
+		if ( empty( $post[ $tool ] ) ) {
 			return false; // Nothing to do here.
 		}
-		if ( empty( $_POST[ $tool ]['shipper-nonce'] ) ) {
+
+		if ( empty( $post[ $tool ]['shipper-nonce'] ) ) {
 			return false; // Can't validate.
 		}
-		if ( ! wp_verify_nonce( $_POST[ $tool ]['shipper-nonce'], "shipper-{$tool}" ) ) {
+
+		if ( ! wp_verify_nonce( $post[ $tool ]['shipper-nonce'], "shipper-{$tool}" ) ) {
 			return false; // Invalid.
 		}
-		$model = new Shipper_Model_Stored_Options;
+
+		$model = new Shipper_Model_Stored_Options();
 
 		// A11n.
 		if ( 'accessibility' === $tool ) {
@@ -106,11 +117,11 @@ class Shipper_Controller_Admin_Settings extends Shipper_Controller_Admin {
 		if ( 'data' === $tool ) {
 			$model->set(
 				Shipper_Model_Stored_Options::KEY_SETTINGS,
-				! empty( $_POST[ $tool ][ Shipper_Model_Stored_Options::KEY_SETTINGS ] )
+				! empty( $post[ $tool ][ Shipper_Model_Stored_Options::KEY_SETTINGS ] )
 			);
 			$model->set(
 				Shipper_Model_Stored_Options::KEY_DATA,
-				! empty( $_POST[ $tool ][ Shipper_Model_Stored_Options::KEY_DATA ] )
+				! empty( $post[ $tool ][ Shipper_Model_Stored_Options::KEY_DATA ] )
 			);
 		}
 
@@ -118,28 +129,28 @@ class Shipper_Controller_Admin_Settings extends Shipper_Controller_Admin {
 		if ( 'migration' === $tool ) {
 			$model->set(
 				Shipper_Model_Stored_Options::KEY_UPLOADS,
-				! empty( $_POST[ $tool ][ Shipper_Model_Stored_Options::KEY_UPLOADS ] )
+				! empty( $post[ $tool ][ Shipper_Model_Stored_Options::KEY_UPLOADS ] )
 			);
 			$model->set(
 				Shipper_Model_Stored_Options::KEY_SKIPCONFIG,
-				! empty( $_POST[ $tool ][ Shipper_Model_Stored_Options::KEY_SKIPCONFIG ] )
+				! empty( $post[ $tool ][ Shipper_Model_Stored_Options::KEY_SKIPCONFIG ] )
 			);
 			$model->set(
 				Shipper_Model_Stored_Options::KEY_SKIPEMAILS,
-				! empty( $_POST[ $tool ][ Shipper_Model_Stored_Options::KEY_SKIPEMAILS ] )
+				! empty( $post[ $tool ][ Shipper_Model_Stored_Options::KEY_SKIPEMAILS ] )
 			);
 		}
 
 		if ( 'pagination' === $tool ) {
 			$model->set(
 				Shipper_Model_Stored_Options::KEY_PER_PAGE,
-				intval( $_POST[ $tool ][ Shipper_Model_Stored_Options::KEY_PER_PAGE ] )
+				absint( $post[ $tool ][ Shipper_Model_Stored_Options::KEY_PER_PAGE ] )
 			);
 		}
 
 		// Access control.
 		if ( 'permissions' === $tool ) {
-			$data = $_POST[ $tool ];
+			$data     = $post[ $tool ];
 			$user_ids = ! empty( $data[ Shipper_Model_Stored_Options::KEY_USER_ACCESS ] )
 				? $data[ Shipper_Model_Stored_Options::KEY_USER_ACCESS ]
 				: array();

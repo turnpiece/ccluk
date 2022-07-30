@@ -34,6 +34,7 @@ class Ai1wm_Export_Controller {
 	}
 
 	public static function export( $params = array() ) {
+		global $ai1wm_params;
 		ai1wm_setup_environment();
 
 		// Set params
@@ -59,6 +60,8 @@ class Ai1wm_Export_Controller {
 			exit;
 		}
 
+		$ai1wm_params = $params;
+
 		// Loop over filters
 		if ( ( $filters = ai1wm_get_filters( 'ai1wm_export' ) ) ) {
 			while ( $hooks = current( $filters ) ) {
@@ -69,9 +72,15 @@ class Ai1wm_Export_Controller {
 							// Run function hook
 							$params = call_user_func_array( $hook['function'], array( $params ) );
 
-							// Log request
-							Ai1wm_Log::export( $params );
-
+						} catch ( Ai1wm_Database_Exception $e ) {
+							if ( defined( 'WP_CLI' ) ) {
+								WP_CLI::error( sprintf( __( 'Unable to export. Error code: %s. %s', AI1WM_PLUGIN_NAME ), $e->getCode(), $e->getMessage() ) );
+							} else {
+								status_header( $e->getCode() );
+								echo json_encode( array( 'errors' => array( array( 'code' => $e->getCode(), 'message' => $e->getMessage() ) ) ) );
+							}
+							Ai1wm_Directory::delete( ai1wm_storage_path( $params ) );
+							exit;
 						} catch ( Exception $e ) {
 							if ( defined( 'WP_CLI' ) ) {
 								WP_CLI::error( sprintf( __( 'Unable to export: %s', AI1WM_PLUGIN_NAME ), $e->getMessage() ) );
@@ -103,9 +112,10 @@ class Ai1wm_Export_Controller {
 							exit;
 						}
 
-						wp_remote_post(
-							apply_filters( 'ai1wm_http_export_url', admin_url( 'admin-ajax.php?action=ai1wm_export' ) ),
+						wp_remote_request(
+							apply_filters( 'ai1wm_http_export_url', add_query_arg( array( 'ai1wm_import' => 1 ), admin_url( 'admin-ajax.php?action=ai1wm_export' ) ) ),
 							array(
+								'method'    => apply_filters( 'ai1wm_http_export_method', 'POST' ),
 								'timeout'   => apply_filters( 'ai1wm_http_export_timeout', 10 ),
 								'blocking'  => apply_filters( 'ai1wm_http_export_blocking', false ),
 								'sslverify' => apply_filters( 'ai1wm_http_export_sslverify', false ),
@@ -259,7 +269,7 @@ class Ai1wm_Export_Controller {
 			$iterator = new Ai1wm_Recursive_Directory_Iterator( AI1WM_STORAGE_PATH );
 
 			// Exclude index.php
-			$iterator = new Ai1wm_Recursive_Exclude_Filter( $iterator, array( 'index.php' ) );
+			$iterator = new Ai1wm_Recursive_Exclude_Filter( $iterator, array( 'index.php', 'index.html' ) );
 
 			// Loop over folders and files
 			foreach ( $iterator as $item ) {

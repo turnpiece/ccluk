@@ -8,7 +8,7 @@
 					</th>
 					<td class="content-center">
 						<span class="sui-tag sui-tag-blue sui-tag-sm">
-							{{ $i18n.label.gtm_active }}
+							{{ $i18n.label.item_active }}
 						</span>
 					</td>
 					<td class="content-right">

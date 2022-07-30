@@ -17,7 +17,7 @@ use Beehive\Monolog\Logger;
  * @author Pablo de Leon Belloc <pablolb@gmail.com>
  * @see    http://php.net/manual/en/function.fsockopen.php
  */
-class SocketHandler extends \Beehive\Monolog\Handler\AbstractProcessingHandler
+class SocketHandler extends AbstractProcessingHandler
 {
     private $connectionString;
     private $connectionTimeout;
@@ -35,7 +35,7 @@ class SocketHandler extends \Beehive\Monolog\Handler\AbstractProcessingHandler
      * @param int    $level            The minimum logging level at which this handler will be triggered
      * @param bool   $bubble           Whether the messages that are handled can bubble up the stack or not
      */
-    public function __construct($connectionString, $level = \Beehive\Monolog\Logger::DEBUG, $bubble = \true)
+    public function __construct($connectionString, $level = Logger::DEBUG, $bubble = \true)
     {
         parent::__construct($level, $bubble);
         $this->connectionString = $connectionString;

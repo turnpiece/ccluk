@@ -5,11 +5,11 @@
  * @package Beehive
  *
  * Plugin Name: Beehive Pro
- * Plugin URI:  http://premium.wpmudev.org/project/google-analytics-for-wordpress-mu-sitewide-and-single-blog-solution/
+ * Plugin URI:  https://wpmudev.com/project/beehive-analytics-pro/
  * Description: Enables Google Analytics for your site with statistics inside WordPress admin panel. Single and multi site compatible!
  * Author:      WPMU DEV
- * Author URI:  http://premium.wpmudev.org
- * Version:     3.3.0
+ * Author URI:  https://wpmudev.com
+ * Version:     3.4.0
  * License:     GNU General Public License (Version 2 - GPLv2)
  * Text Domain: ga_trans
  * Domain Path: /languages
@@ -32,12 +32,10 @@
 // If this file is called directly, abort.
 defined( 'WPINC' ) || die;
 
-/**
- * Flag to check if it's Pro or Free.
- *
- * This flag will be replaced in Free version with `BEEHIVE_FREE`.
- */
-define( 'BEEHIVE_PRO', true );
+// Flag to check if it's Pro or Free.
+if ( ! defined( 'BEEHIVE_PRO' ) ) {
+	define( 'BEEHIVE_PRO', true );
+}
 
 // Define BEEHIVE_PLUGIN_FILE.
 if ( ! defined( 'BEEHIVE_PLUGIN_FILE' ) ) {
@@ -46,7 +44,7 @@ if ( ! defined( 'BEEHIVE_PLUGIN_FILE' ) ) {
 
 // Plugin version.
 if ( ! defined( 'BEEHIVE_VERSION' ) ) {
-	define( 'BEEHIVE_VERSION', '3.3.0' );
+	define( 'BEEHIVE_VERSION', '3.4.0' );
 }
 
 // Auto load classes.

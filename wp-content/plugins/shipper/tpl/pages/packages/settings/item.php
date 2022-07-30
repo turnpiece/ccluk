@@ -6,7 +6,7 @@
  * @package shipper
  */
 
-$item = ! empty( $item ) ? $item : false;
+$item     = ! empty( $item ) ? $item : false;
 $item_tpl = "pages/packages/settings/item-{$item}";
 ?>
 <div class="sui-box-settings-row shipper-settings-item shipper-item-<?php echo esc_attr( $item ); ?>">

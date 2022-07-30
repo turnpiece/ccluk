@@ -2,7 +2,7 @@
 /**
  * Common action functionality REST endpoint.
  *
- * @link       http://premium.wpmudev.org
+ * @link       http://wpmudev.com
  * @since      3.2.0
  *
  * @author     Joel James <joel@incsub.com>
@@ -18,7 +18,7 @@ use WP_REST_Server;
 use WP_REST_Request;
 use WP_REST_Response;
 use Beehive\Core\Helpers\Cache;
-use Beehive\Core\Controllers\Integrations;
+use Beehive\Core\Controllers\Cleanup;
 use Beehive\Core\Utils\Abstracts\Endpoint;
 
 /**
@@ -31,9 +31,9 @@ class Actions extends Endpoint {
 	/**
 	 * API endpoint for the current endpoint.
 	 *
-	 * @var string $endpoint
-	 *
 	 * @since 3.2.4
+	 *
+	 * @var string $endpoint
 	 */
 	private $endpoint = '/actions';
 
@@ -64,6 +64,7 @@ class Actions extends Endpoint {
 							'enum'        => array(
 								'refresh',
 								'dismiss_onboarding',
+								'reset_settings',
 							),
 						),
 						'network' => array(
@@ -101,6 +102,9 @@ class Actions extends Endpoint {
 			// Dismiss onboarding.
 			case 'dismiss_onboarding':
 				return $this->dismiss_onboarding( $network );
+			// Reset settings.
+			case 'reset_settings':
+				return $this->reset_settings( $network );
 		}
 
 		// Send error response.
@@ -154,5 +158,33 @@ class Actions extends Endpoint {
 
 		// Send response.
 		return $this->get_response( array() );
+	}
+
+	/**
+	 * Clear the cache created by Beehive and refresh data.
+	 *
+	 * Please note we will clear the whole cache instead of
+	 * To clear network cache, set network param.
+	 *
+	 * @param bool $network Network flag.
+	 *
+	 * @since 3.3.5
+	 *
+	 * @return WP_REST_Response
+	 */
+	public function reset_settings( $network ) {
+		// Clean cache transients.
+		Cleanup::clean_transients( $network );
+
+		// Reset settings.
+		$success = beehive_analytics()->settings->reset_settings( $network );
+
+		// Send response.
+		return $this->get_response(
+			array(
+				'message' => $success ? __( 'Plugin settings reset succesfully.', 'ga_trans' ) : __( 'Couldn\'t reset the settings.', 'ga_trans' ),
+			),
+			$success
+		);
 	}
 }

@@ -1,8 +1,0 @@
-{
-	"config": {
-		"vendor-dir": "lib/external"
-	},
-	"require": {
-		"aws/aws-sdk-php": "3.67.*"
-	}
-}

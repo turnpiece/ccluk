@@ -1,11 +1,11 @@
 ﻿=== Nested Pages ===
 Contributors: kylephillips
-Donate link: http://nestedpages.com/
+Donate link: https://github.com/sponsors/kylephillips/
 Tags: pages, admin, nested, tree view, page tree, sort, quick edit, structure
 Requires at least: 3.8
-Tested up to: 5.3
+Tested up to: 6.0
 Requires PHP: 5.4
-Stable tag: 3.1.7
+Stable tag: 3.1.20
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -104,6 +104,71 @@ No. The menu synchronization currently only works within the pages post type.
 9. The Nested Pages interface can be enabled on a per-post-type basis, with customizable options for each type.
 
 == Changelog ==
+
+= 3.1.21 =
+* Fixes issue where Nested Pages menu persists in some instances when "Disable menu completely" is checked/enabled.
+* Tested with WordPress V6
+* Security Updates
+
+= 3.1.20 =
+* Fixes bug where menu item descriptions (Added in the Appearance > Menus interface) were being removed when synchronizing the Nested Pages menu
+* Removes deprecation notice from authors dropdown in quick edit interface
+* Adds 'nestedpages_row_parent_css_classes' developer filter for filtering css classes output in each row's parent <li> element
+* Adds 'nestedpages_new_post' developer filter for filtering new posts before they are added (through child pages or through the "Add Multiple" interface)
+
+= 3.1.19 =
+* Fixes dragging/sorting bug introduced in WordPress version 5.9.
+
+= 3.1.18 =
+* Fixes issue where some custom blocks were not duplicating when cloning a post.
+
+= 3.1.17 =
+* Adds background saving of post status selection (Selecting "Published" in the post status filter will now persist on page reload)
+* Fixes bugs in admin customization related to addition of menu items added by other plugins
+* Security Update (Thanks to Chloe Chamberland at Wordfence for reporting)
+
+= 3.1.16 =
+* Includes security updates. Thanks to Ram Gall at Wordfence for reporting
+
+= 3.1.15 = 
+* Action added for outputting markup along with the add new/add multiple buttons (nestedpages_top_buttons)
+* PHP 8 deprecation errors corrected
+* Tested with WordPress v5.8
+
+= 3.1.14 =
+* Additional security enhancements (Thanks Nico Mollet)
+* Developer improvements through added filters and filter usage corrections (Thanks Bjørnar Tollaksen & Alexandre Sadowski)
+* Adds post title filter for customizing title display beyond the_title filter
+
+= 3.1.13 =
+* Corrects permission issues introduced in previous update
+
+= 3.1.12 =
+* Includes security updates
+* Fixes bug where posts not appearing when filtering by a non top-level hierarchical taxonomy. Allows order sorting while the list is filtered (not parent order)
+* Adds ability to save and synchronize post type archive menu items when using menu sync
+
+= 3.1.11 =
+* Security Update.
+
+= 3.1.10 =
+* Updates German translations.
+* Adds support for preview_post_link filter.
+* Bug fixes in WPML integration (thanks to Timothee Moulin).
+* Fixes issue where menu options where still available under the quick edit and bulk edit forms if the menu sync was disabled completely.
+* Fixes issue where "Hide in Nested View" option was still available under the bulk edit form if the field was disabled through the plugin settings.
+* Links full page editor admin back to nested view if the "replace menu" option is selected for the post type.
+* Removes trash dropdown selection on posts with no children.
+* Adds option to include private pages in the generated menu.
+* Allows users with edit_pages/edit_posts capabilities to see "new" options for submitting non-published content (following core functionality).
+
+= 3.1.9 =
+* Adds a custom sorting user capability for each public post type: nestedpages_sort_$type, enabling control of capabilities through 3rd party plugins. 
+* Adds filter for sorting capability: nestedpages_sort_capability. Filter passes 3 parameters: $grant_capability (boolean), $type (post type name), and $role (user role object)
+* Adds a plugin option for disabling the sort view based on user role.
+* Adds filters for each post type to allow/disable the sort view based on user role and post type: nestedpages_sort_view_$type. Filter returns 2 parameters: $grant_access (boolean), and $roles (array of roles assigned to the current user).
+* Updates Dutch translation (Thank you to Arno Vije).
+* Tested in WordPress version 5.4.
 
 = 3.1.8 =
 * Fixes conflict with Subpages Expanded plugin where sidebar selections under the appearance > widgets screen was broken

@@ -64,7 +64,11 @@ class SWP_User_Options {
 	protected function establish_option_data() {
 		$this->unfiltered_options = get_option( 'social_warfare_settings', false );
 		$this->registered_options = get_option( 'swp_registered_options', false );
-		$this->user_options       = $this->unfiltered_options;
+
+		if( false == $this->unfiltered_options || empty( $this->unfiltered_options ) ) {
+			$this->unfiltered_options = array();
+		}
+		$this->user_options = $this->unfiltered_options;
 	}
 
 
@@ -278,10 +282,19 @@ class SWP_User_Options {
 		 * saved in the database. Only save those keys that are registered.
 		 *
 		 */
-		$defaults          = array_keys( $this->registered_options['defaults'] );
-		$options           = array_keys ( $this->user_options );
-		$available_options = array_intersect( $defaults, $options );
+		$defaults = array_keys( $this->registered_options['defaults'] );
+		$options  = array_keys( $this->user_options );
 
+
+		/**
+		 * Bail out if either of the above checks failed to process properly.
+		 *
+		 */
+		if( false == $defaults || false == $options ) {
+			return;
+		}
+
+		$available_options = array_intersect( $defaults, $options );
 
 		/**
 		 * Loop through each of the options in the users options and validate

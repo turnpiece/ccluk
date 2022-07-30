@@ -17,7 +17,7 @@ class Shipper_Controller_Admin_Tools extends Shipper_Controller_Admin {
 	 * @return int Page order
 	 */
 	public function get_page_order() {
-		return parent::get_page_order() + 2;
+		return parent::get_page_order() + 4;
 	}
 
 	/**
@@ -47,15 +47,17 @@ class Shipper_Controller_Admin_Tools extends Shipper_Controller_Admin {
 	 */
 	public function page_tools() {
 		if ( ! $this->can_user_access_shipper_pages() ) {
-			return wp_die( esc_html( __( 'Nope.', 'shipper' ) ) );
+			wp_die( esc_html( __( 'Nope.', 'shipper' ) ) );
 		}
 
 		$tool = 'logs';
-		if ( ! empty( $_GET['tool'] ) ) {
-			$tool = sanitize_text_field( $_GET['tool'] );
+		$get  = wp_unslash( $_GET ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
+		if ( ! empty( $get['tool'] ) ) {
+			$tool = sanitize_text_field( $get['tool'] );
 		}
 
-		$tpl = new Shipper_Helper_Template;
+		$tpl = new Shipper_Helper_Template();
 		$tpl->render( 'pages/tools/main', array( 'current_tool' => $tool ) );
 	}
 
@@ -63,7 +65,8 @@ class Shipper_Controller_Admin_Tools extends Shipper_Controller_Admin {
 	 * Adds front-end dependencies specific for the tools page
 	 */
 	public function add_tools_dependencies() {
-		if ( ! shipper_user_can_ship() ) { return false; }
+		if ( ! shipper_user_can_ship() ) {
+			return false; }
 		$this->add_shared_dependencies();
 	}
 }

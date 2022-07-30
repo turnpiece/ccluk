@@ -1,22 +1,17 @@
 <?php
-/**
- * Builder related functions.
- *
- * @since 1.0.0
- */
 
 /**
- * Outputs fields to be used on panels (settings etc).
+ * Output fields to be used on panels (settings etc).
  *
  * @since 1.0.0
  *
  * @param string $option
  * @param string $panel
  * @param string $field
- * @param array $form_data
+ * @param array  $form_data
  * @param string $label
- * @param array $args
- * @param boolean $echo
+ * @param array  $args
+ * @param bool   $echo
  *
  * @return string
  */
@@ -28,27 +23,52 @@ function wpforms_panel_field( $option, $panel, $field, $form_data, $label, $args
 	}
 
 	// Setup basic vars.
-	$panel       = esc_attr( $panel );
-	$field       = esc_attr( $field );
-	$panel_id    = sanitize_html_class( $panel );
-	$parent      = ! empty( $args['parent'] ) ? esc_attr( $args['parent'] ) : '';
-	$subsection  = ! empty( $args['subsection'] ) ? esc_attr( $args['subsection'] ) : '';
-	$label       = ! empty( $label ) ? esc_html( $label ) : '';
-	$class       = ! empty( $args['class'] ) ? esc_attr( $args['class'] ) : '';
-	$input_class = ! empty( $args['input_class'] ) ? esc_attr( $args['input_class'] ) : '';
-	$default     = isset( $args['default'] ) ? $args['default'] : '';
-	$placeholder = ! empty( $args['placeholder'] ) ? esc_attr( $args['placeholder'] ) : '';
-	$data_attr   = '';
-	$output      = '';
-	$input_id    = sprintf( 'wpforms-panel-field-%s-%s', sanitize_html_class( $panel_id ), sanitize_html_class( $field ) );
+	$panel            = esc_attr( $panel );
+	$field            = esc_attr( $field );
+	$panel_id         = sanitize_html_class( $panel );
+	$parent           = ! empty( $args['parent'] ) ? esc_attr( $args['parent'] ) : '';
+	$subsection       = ! empty( $args['subsection'] ) ? esc_attr( $args['subsection'] ) : '';
+	$index            = isset( $args['index'] ) ? esc_attr( $args['index'] ) : '';
+	$index            = is_numeric( $index ) ? absint( $index ) : $index;
+	$label            = ! empty( $label ) ? esc_html( $label ) : '';
+	$class            = ! empty( $args['class'] ) ? wpforms_sanitize_classes( $args['class'] ) : '';
+	$input_class      = ! empty( $args['input_class'] ) ? wpforms_sanitize_classes( $args['input_class'] ) : '';
+	$default          = isset( $args['default'] ) ? $args['default'] : '';
+	$placeholder      = ! empty( $args['placeholder'] ) ? esc_attr( $args['placeholder'] ) : '';
+	$data_attr        = '';
+	$output           = '';
+	$smarttags_toggle = '';
+	$input_id         = sprintf( 'wpforms-panel-field-%s-%s', sanitize_html_class( $panel_id ), sanitize_html_class( $field ) );
 
 	if ( ! empty( $args['input_id'] ) ) {
 		$input_id = esc_attr( $args['input_id'] );
 	}
 
+	if ( ! empty( $args['smarttags'] ) ) {
+		$type   = ! empty( $args['smarttags']['type'] ) ? esc_attr( $args['smarttags']['type'] ) : 'fields';
+		$fields = ! empty( $args['smarttags']['fields'] ) ? esc_attr( $args['smarttags']['fields'] ) : '';
+
+		$smarttags_toggle = sprintf(
+			'<a href="#" class="toggle-smart-tag-display toggle-unfoldable-cont" data-type="%s" data-fields="%s">
+				<i class="fa fa-tags"></i><span>%s</span>
+			</a>',
+			esc_attr( $type ),
+			esc_attr( $fields ),
+			esc_html__( 'Show Smart Tags', 'wpforms-lite' )
+		);
+	}
+
+	if ( ! empty( $args['pro_badge'] ) ) {
+		$label .= '<span class="wpforms-field-option-education-pro-badge">pro</span>';
+	}
+
 	// Check if we should store values in a parent array.
 	if ( ! empty( $parent ) ) {
-		if ( ! empty( $subsection ) ) {
+		if ( $subsection && ! wpforms_is_empty_string( $index ) ) {
+			$field_name = sprintf( '%s[%s][%s][%s][%s]', $parent, $panel, $subsection, $index, $field );
+			$value      = isset( $form_data[ $parent ][ $panel ][ $subsection ][ $index ][ $field ] ) ? $form_data[ $parent ][ $panel ][ $subsection ][ $index ][ $field ] : $default;
+			$input_id   = sprintf( 'wpforms-panel-field-%s-%s-%s-%s', sanitize_html_class( $panel_id ), sanitize_html_class( $subsection ), sanitize_html_class( $index ), sanitize_html_class( $field ) );
+		} elseif ( ! empty( $subsection ) ) {
 			$field_name = sprintf( '%s[%s][%s][%s]', $parent, $panel, $subsection, $field );
 			$value      = isset( $form_data[ $parent ][ $panel ][ $subsection ][ $field ] ) ? $form_data[ $parent ][ $panel ][ $subsection ][ $field ] : $default;
 			$input_id   = sprintf( 'wpforms-panel-field-%s-%s-%s', sanitize_html_class( $panel_id ), sanitize_html_class( $subsection ), sanitize_html_class( $field ) );
@@ -81,13 +101,12 @@ function wpforms_panel_field( $option, $panel, $field, $form_data, $label, $args
 	}
 
 	// Check for readonly inputs.
-	if ( ! empty( $args['readonly' ] ) ) {
+	if ( ! empty( $args['readonly'] ) ) {
 		$data_attr .= 'readonly';
 	}
 
 	// Determine what field type to output.
 	switch ( $option ) {
-
 		// Text input.
 		case 'text':
 			$output = sprintf(
@@ -145,10 +164,22 @@ function wpforms_panel_field( $option, $panel, $field, $form_data, $label, $args
 				$input_id,
 				$label
 			);
+
+			if ( ! empty( $args['before_tooltip'] ) ) {
+				$output .= $args['before_tooltip'];
+			}
+
 			if ( ! empty( $args['tooltip'] ) ) {
-				$output .= sprintf( ' <i class="fa fa-question-circle wpforms-help-tooltip" title="%s"></i>', esc_attr( $args['tooltip'] ) );
+				$output .= sprintf( '<i class="fa fa-question-circle-o wpforms-help-tooltip" title="%s"></i>', esc_attr( $args['tooltip'] ) );
 			}
 			$output .= '</label>';
+			break;
+
+		// Toggle.
+		case 'toggle':
+			$toggle_args                = $args;
+			$toggle_args['input-class'] = $input_class;
+			$output                     = wpforms_panel_field_toggle_control( $toggle_args, $input_id, $field_name, $label, $value, $data_attr );
 			break;
 
 		// Radio.
@@ -193,7 +224,7 @@ function wpforms_panel_field( $option, $panel, $field, $form_data, $label, $args
 				}
 
 				if ( ! empty( $item['tooltip'] ) ) {
-					$output .= sprintf( ' <i class="fa fa-question-circle wpforms-help-tooltip" title="%s"></i>', esc_attr( $item['tooltip'] ) );
+					$output .= sprintf( '<i class="fa fa-question-circle-o wpforms-help-tooltip" title="%s"></i>', esc_attr( $item['tooltip'] ) );
 				}
 				$output .= '</label></span>';
 				$radio_counter ++;
@@ -206,26 +237,37 @@ function wpforms_panel_field( $option, $panel, $field, $form_data, $label, $args
 
 		// Select.
 		case 'select':
-			if ( empty( $args['options'] ) && empty( $args['field_map'] ) ) {
+
+			if ( empty( $args['options'] ) && empty( $args['field_map'] ) && empty( $args['multiple'] ) ) {
 				return '';
 			}
 
 			if ( ! empty( $args['field_map'] ) ) {
-				$options          = array();
+				$options          = [];
 				$available_fields = wpforms_get_form_fields( $form_data, $args['field_map'] );
+
 				if ( ! empty( $available_fields ) ) {
 					foreach ( $available_fields as $id => $available_field ) {
-						$lbl            = ! empty( $available_field['label'] ) ? esc_attr( $available_field['label'] ) : esc_html__( 'Field #' ) . $id;
-						$options[ $id ] = $lbl;
+						$options[ $id ] = ! empty( $available_field['label'] )
+							? esc_attr( $available_field['label'] )
+							: sprintf( /* translators: %d - field ID. */
+								esc_html__( 'Field #%d', 'wpforms-lite' ),
+								absint( $id )
+							);
 					}
 				}
 				$input_class .= ' wpforms-field-map-select';
 				$data_attr   .= ' data-field-map-allowed="' . implode( ' ', $args['field_map'] ) . '"';
+
 				if ( ! empty( $placeholder ) ) {
 					$data_attr .= ' data-field-map-placeholder="' . esc_attr( $placeholder ) . '"';
 				}
 			} else {
 				$options = $args['options'];
+			}
+
+			if ( ! empty( $args['multiple'] ) ) {
+				$data_attr .= ' multiple';
 			}
 
 			$output = sprintf(
@@ -241,7 +283,19 @@ function wpforms_panel_field( $option, $panel, $field, $form_data, $label, $args
 			}
 
 			foreach ( $options as $key => $item ) {
-				$output .= sprintf( '<option value="%s" %s>%s</option>', esc_attr( $key ), selected( $key, $value, false ), $item );
+
+				if ( is_array( $value ) ) {
+					$selected = in_array( $key, $value, true ) ? 'selected' : '';
+				} else {
+					$selected = selected( $key, $value, false );
+				}
+
+				$output .= sprintf(
+					'<option value="%s" %s>%s</option>',
+					esc_attr( $key ),
+					$selected,
+					$item
+				);
 			}
 
 			$output .= '</select>';
@@ -256,33 +310,39 @@ function wpforms_panel_field( $option, $panel, $field, $form_data, $label, $args
 		'wpforms-panel-field-' . sanitize_html_class( $option )
 	);
 	$field_open .= ! empty( $args['before'] ) ? $args['before'] : '';
-	if ( 'checkbox' !== $option && ! empty( $label ) ) {
+
+	if ( $option !== 'toggle' && $option !== 'checkbox' && ! empty( $label ) ) {
 		$field_label = sprintf(
 			'<label for="%s">%s',
 			$input_id,
 			$label
 		);
+
 		if ( ! empty( $args['tooltip'] ) ) {
-			$field_label .= sprintf( ' <i class="fa fa-question-circle wpforms-help-tooltip" title="%s"></i>', esc_attr( $args['tooltip'] ) );
+			$field_label .= sprintf( '<i class="fa fa-question-circle-o wpforms-help-tooltip" title="%s"></i>', esc_attr( $args['tooltip'] ) );
 		}
 		if ( ! empty( $args['after_tooltip'] ) ) {
 			$field_label .= $args['after_tooltip'];
 		}
-		if ( ! empty( $args['smarttags'] ) ) {
-
-			$type   = ! empty( $args['smarttags']['type'] ) ? esc_attr( $args['smarttags']['type'] ) : 'fields';
-			$fields = ! empty( $args['smarttags']['fields'] ) ? esc_attr( $args['smarttags']['fields'] ) : '';
-
-			$field_label .= '<a href="#" class="toggle-smart-tag-display" data-type="' . $type . '" data-fields="' . $fields . '"><i class="fa fa-tags"></i> <span>' . esc_html__( 'Show Smart Tags', 'wpforms-lite' ) . '</span></a>';
+		if ( $smarttags_toggle && ! ( $option === 'textarea' && ! empty( $args['tinymce'] ) ) ) {
+			$field_label .= $smarttags_toggle;
 		}
 		$field_label .= '</label>';
+
 		if ( ! empty( $args['after_label'] ) ) {
 			$field_label .= $args['after_label'];
 		}
 	} else {
 		$field_label = '';
 	}
-	$field_close  = ! empty( $args['after'] ) ? $args['after'] : '';
+
+	$field_close = '';
+
+	if ( $smarttags_toggle && $option === 'textarea' && ! empty( $args['tinymce'] ) ) {
+		$field_close .= $smarttags_toggle;
+	}
+
+	$field_close .= ! empty( $args['after'] ) ? $args['after'] : '';
 	$field_close .= '</div>';
 	$output       = $field_open . $field_label . $output . $field_close;
 
@@ -295,19 +355,88 @@ function wpforms_panel_field( $option, $panel, $field, $form_data, $label, $args
 }
 
 /**
- * Get notification state, whether it's opened or closed.
+ * Create toggle control.
  *
- * @since 1.4.1
- * @deprecated 1.4.8
+ * It's like a regular checkbox but with a modern visual appearance.
  *
- * @param int $form_id
- * @param int $notification_id
+ * @since 1.6.8
+ *
+ * @param array  $args       Arguments array.
+ *
+ *    @type bool   $status        If `true`, control will display the current status next to the toggle.
+ *    @type string $status-on     Status `On` text. By default `On`.
+ *    @type string $status-off    Status `Off` text. By default `Off`.
+ *    @type bool   $label-hide    If `true` then label will not display.
+ *    @type string $tooltip       Tooltip text.
+ *    @type string $input-class   CSS class for the hidden `<input type=checkbox>`.
+ *    @type string $control-class CSS class for the wrapper `<span>`.
+ *
+ * @param string $input_id   Input ID.
+ * @param string $field_name Field name.
+ * @param string $label      Label text. Can contain HTML in order to display additional badges.
+ * @param mixed  $value      Value.
+ * @param string $data_attr  Attributes.
  *
  * @return string
  */
-function wpforms_builder_notification_get_state( $form_id, $notification_id ) {
-	_deprecated_function( __FUNCTION__, '1.4.8 of WPForms plugin', 'wpforms_builder_settings_block_get_state()' );
-	return wpforms_builder_settings_block_get_state( $form_id, $notification_id, 'notification' );
+function wpforms_panel_field_toggle_control( $args, $input_id, $field_name, $label, $value, $data_attr ) {
+
+	$checked = checked( true, (bool) $value, false );
+	$status  = '';
+
+	if ( ! empty( $args['status'] ) ) {
+		$status_on  = ! empty( $args['status-on'] ) ? $args['status-on'] : esc_html__( 'On', 'wpforms-lite' );
+		$status_off = ! empty( $args['status-off'] ) ? $args['status-off'] : esc_html__( 'Off', 'wpforms-lite' );
+		$status     = sprintf(
+			'<label
+				for="%s"
+				class="wpforms-toggle-control-status"
+				data-on="%s"
+				data-off="%s">
+				%s
+			</label>',
+			esc_attr( $input_id ),
+			esc_attr( $status_on ),
+			esc_attr( $status_off ),
+			esc_html( ! empty( $args['value'] ) ? $status_on : $status_off )
+		);
+	}
+
+	$label_html  = empty( $args['label-hide'] ) && ! empty( $label ) ?
+		sprintf(
+			'<label for="%s" class="wpforms-toggle-control-label">%s</label>',
+			esc_attr( $input_id ),
+			$label
+		) : '';
+	$label_html .= isset( $args['tooltip'] ) ?
+		sprintf(
+			'<i class="fa fa-question-circle-o wpforms-help-tooltip" title="%s"></i>',
+			esc_attr( $args['tooltip'] )
+		) : '';
+
+	$label_left    = ! empty( $args['label-left'] ) ? $label_html . $status : '';
+	$label_right   = empty( $args['label-left'] ) ? $status . $label_html : '';
+	$title         = isset( $args['title'] ) ? ' title="' . esc_attr( $args['title'] ) . '"' : '';
+	$control_class = ! empty( $args['control-class'] ) ? $args['control-class'] : '';
+	$input_class   = ! empty( $args['input-class'] ) ? $args['input-class'] : '';
+
+	return sprintf(
+		'<span class="wpforms-toggle-control %8$s" %9$s>
+			%1$s
+			<input type="checkbox" id="%2$s" name="%3$s" class="%7$s" value="1" %4$s %5$s>
+			<label class="wpforms-toggle-control-icon" for="%2$s"></label>
+			%6$s
+		</span>',
+		$label_left,
+		esc_attr( $input_id ),
+		esc_attr( $field_name ),
+		$checked,
+		$data_attr,
+		$label_right,
+		wpforms_sanitize_classes( $input_class ),
+		wpforms_sanitize_classes( $control_class ),
+		$title
+	);
 }
 
 /**
@@ -364,7 +493,7 @@ function wpforms_builder_settings_block_get_state( $form_id, $block_id, $block_t
 
 /**
  * Get the list of allowed tags, used in pair with wp_kses() function.
- * Allows getting rid of all potentially harmful HTML tags and attributes.
+ * This allows getting rid of all potentially harmful HTML tags and attributes.
  *
  * @since 1.5.9
  *
@@ -385,4 +514,59 @@ function wpforms_builder_preview_get_allowed_tags() {
 	$allowed_tags = array_fill_keys( $tags, $allowed_atts );
 
 	return $allowed_tags;
+}
+
+/**
+ * Output builder panel fields group wrapper.
+ *
+ * @since 1.6.6
+ *
+ * @param string $inner Inner HTML to wrap.
+ * @param array  $args  Array of arguments.
+ * @param bool   $echo  Flag to display.
+ *
+ * @return string
+ */
+function wpforms_panel_fields_group( $inner, $args = [], $echo = true ) {
+
+	$group      = ! empty( $args['group'] ) ? $args['group'] : '';
+	$unfoldable = ! empty( $args['unfoldable'] );
+	$opened     = ! empty( $_COOKIE[ 'wpforms_fields_group_' . $group ] ) && $_COOKIE[ 'wpforms_fields_group_' . $group ] === 'true' ? ' opened' : '';
+
+	$output = sprintf(
+		'<div class="wpforms-panel-fields-group%1$s"%2$s>',
+		$unfoldable ? ' unfoldable' . $opened : '',
+		$unfoldable ? ' data-group="' . $group . '"' : ''
+	);
+
+	if ( ! empty( $args['borders'] ) && in_array( 'top', $args['borders'], true ) ) {
+		$output .= '<div class="wpforms-panel-fields-group-border-top"></div>';
+	}
+
+	if ( ! empty( $args['title'] ) ) {
+		$chevron = $unfoldable ? '<i class="fa fa-chevron-circle-right"></i>' : '';
+		$output .= '<div class="wpforms-panel-fields-group-title">' . esc_html( $args['title'] ) . $chevron . '</div>';
+	}
+
+	if ( ! empty( $args['description'] ) ) {
+		$output .= '<div class="wpforms-panel-fields-group-description">' . wp_kses_post( $args['description'] ) . '</div>';
+	}
+
+	$output .= sprintf(
+		'<div class="wpforms-panel-fields-group-inner"%s>%s</div>',
+		empty( $opened ) && $unfoldable ? ' style="display: none;"' : '',
+		$inner
+	);
+
+	if ( ! empty( $args['borders'] ) && in_array( 'bottom', $args['borders'], true ) ) {
+		$output .= '<div class="wpforms-panel-fields-group-border-bottom"></div>';
+	}
+
+	$output .= '</div>';
+
+	if ( ! $echo ) {
+		return $output;
+	}
+
+	echo $output; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 }

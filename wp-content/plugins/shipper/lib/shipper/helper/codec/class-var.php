@@ -63,8 +63,7 @@ class Shipper_Helper_Codec_Var extends Shipper_Helper_Codec {
 	public function get_matcher( $string, $value = '' ) {
 		$value = ! empty( $value )
 			? preg_quote( $value, '/' )
-			: '[-_a-zA-Z0-9]+'
-		;
+			: '[-_a-zA-Z0-9]+';
 		// @codingStandardsIgnoreStart
 		return '(?:^|\b)\$' .
 			preg_quote( $string, '/' ) .
@@ -87,7 +86,7 @@ class Shipper_Helper_Codec_Var extends Shipper_Helper_Codec {
 	 */
 	public function get_replacement( $name, $value ) {
 		$varstart = '$';
-		$vquots = strpos( $value, "'" ) === false ? "'" : '"';
+		$vquots   = strpos( $value, "'" ) === false ? "'" : '"';
 
 		return "{$varstart}$name = {$vquots}{$value}{$vquots};\$2";
 	}

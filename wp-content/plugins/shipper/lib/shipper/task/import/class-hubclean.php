@@ -29,16 +29,18 @@ class Shipper_Task_Import_Hubclean extends Shipper_Task_Import {
 	 * @return bool
 	 */
 	public function apply( $args = array() ) {
-		$migration = new Shipper_Model_Stored_Migration;
+		$migration   = new Shipper_Model_Stored_Migration();
 		$remote_site = $migration->get_destination();
 
-		$task = new Shipper_Task_Api_Migrations_Set;
-		$task->apply(array(
-			'domain' => $remote_site,
-			'type' => Shipper_Model_Stored_Migration::TYPE_EXPORT,
-			'status' => 0,
-			'file' => Shipper_Task_Import::ARCHIVE,
-		));
+		$task = new Shipper_Task_Api_Migrations_Set();
+		$task->apply(
+			array(
+				'domain' => $remote_site,
+				'type'   => Shipper_Model_Stored_Migration::TYPE_EXPORT,
+				'status' => 0,
+				'file'   => Shipper_Task_Import::ARCHIVE,
+			)
+		);
 
 		return true;
 	}

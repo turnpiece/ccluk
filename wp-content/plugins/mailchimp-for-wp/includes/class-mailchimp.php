@@ -69,12 +69,7 @@ class MC4WP_MailChimp {
 						$existing_interests = array_fill_keys( array_keys( $existing_interests ), false );
 					}
 
-					// TODO: Use array_replace here (PHP 5.3+)
-					$new_interests     = $args['interests'];
-					$args['interests'] = $existing_interests;
-					foreach ( $new_interests as $interest_id => $interest_status ) {
-						$args['interests'][ "{$interest_id}" ] = $interest_status;
-					}
+					$args['interests'] = array_replace( $existing_interests, $args['interests'] );
 				}
 			} elseif ( $args['status'] === 'pending' && $existing_member_data->status === 'pending' ) {
 				// this ensures that a new double opt-in email is send out
@@ -99,6 +94,10 @@ class MC4WP_MailChimp {
 			if ( $existing_member_data ) {
 				$data                      = $api->update_list_member( $list_id, $email_address, $args );
 				$data->was_already_on_list = $existing_member_data->status === 'subscribed';
+
+				if ( isset( $args['tags'] ) && is_array( $args['tags'] ) ) {
+					$this->list_add_tags_to_subscriber( $list_id, $data, $args['tags'] );
+				}
 			} else {
 				$data                      = $api->add_new_list_member( $list_id, $args );
 				$data->was_already_on_list = false;
@@ -110,6 +109,67 @@ class MC4WP_MailChimp {
 		}
 
 		return $data;
+	}
+
+	/**
+	 * Format tags to send to Mailchimp.
+	 *
+	 * @since 4.7.9
+	 * @param $mailchimp_tags array existent user tags
+	 * @param $new_tags array new tags to add
+	 * @return array
+	 */
+	private function merge_and_format_member_tags( $mailchimp_tags, $new_tags ) {
+		$mailchimp_tags = array_map(
+			function ( $tag ) {
+				return $tag->name;
+			},
+			$mailchimp_tags
+		);
+
+		$tags = array_unique( array_merge( $mailchimp_tags, $new_tags ), SORT_REGULAR );
+
+		return array_map(
+			function ( $tag ) {
+				return array(
+				'name' => $tag,
+				'status' => 'active',
+				);
+			},
+			$tags
+		);
+	}
+
+	/**
+	 *  Post the tags on a list member.
+	 *
+	 * @param $mailchimp_list_id string The list id to subscribe to
+	 * @param $mailchimp_member stdClass mailchimp user informations
+	 * @param $new_tags array tags to add to the user
+	 *
+	 * @return bool
+	 * @throws Exception
+	 * @since 4.7.9
+	 */
+	private function list_add_tags_to_subscriber( $mailchimp_list_id, $mailchimp_member, array $new_tags ) {
+		// do nothing if no tags given
+		if ( count( $new_tags ) === 0 ) {
+			return true;
+		}
+
+		$api = $this->get_api();
+		$data = array(
+			'tags' => $this->merge_and_format_member_tags( $mailchimp_member->tags, $new_tags ),
+		);
+
+		try {
+			$api->update_list_member_tags( $mailchimp_list_id, $mailchimp_member->email_address, $data );
+		} catch ( MC4WP_API_Exception $ex ) {
+			// fail silently
+			return false;
+		}
+
+		return true;
 	}
 
 	/**
@@ -280,25 +340,50 @@ class MC4WP_MailChimp {
 	}
 
 	private function fetch_lists() {
-		/**
-		 * Filters the amount of Mailchimp lists to fetch.
-		 *
-		 * If you increase this, it might be necessary to increase your PHP configuration to allow for a higher max_execution_time.
-		 *
-		 * @param int
-		 */
-		$limit = apply_filters( 'mc4wp_mailchimp_list_limit', 200 );
+		$client = $this->get_api()->get_client();
+		$lists_data = array();
+		$offset = 0;
+		$count = 10;
 
-		try {
-			$lists_data = $this->get_api()->get_lists(
-				array(
-					'count'  => $limit,
-					'fields' => 'lists.id,lists.name,lists.stats,lists.web_id',
-				)
-			);
-		} catch ( MC4WP_API_Exception $e ) {
-			return array();
-		}
+		// increase time limits
+		@set_time_limit( 180 );
+		add_filter(
+			'mc4wp_http_request_args',
+			function( $args ) {
+				$args['timeout'] = 30;
+				return $args;
+			}
+		);
+
+		// collect all lists in separate HTTP requests (batches of 5)
+		do {
+			try {
+				$data       = $client->get(
+					'/lists',
+					array(
+					'count'  => $count,
+					'offset' => $offset,
+					'fields' => 'total_items,lists.id,lists.name,lists.web_id,lists.stats.member_count,lists.marketing_permissions',
+					)
+				);
+				$lists_data = array_merge( $lists_data, $data->lists );
+				$offset += $count;
+			} catch ( MC4WP_API_Connection_Exception $e ) {
+				// ignore timeout errors as this is likely due to mailchimp being slow to calculate the lists.stats.member_count property
+				// keep going so we can at least pull-in all other lists
+				$offset += $count;
+
+				// failsafe against infinite loop
+				if ( $offset > 300 ) {
+					break;
+				}
+
+				continue;
+			} catch ( MC4WP_API_Exception $e ) {
+				// break on other errors, like "API key missing"etc.
+				break;
+			}
+		} while ( $data->total_items > $offset );
 
 		// key by list ID
 		$lists = array();

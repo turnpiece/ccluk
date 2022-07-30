@@ -10,10 +10,10 @@
  */
 class Shipper_Model_System_Db extends Shipper_Model {
 
-	const VERSION = 'version';
+	const VERSION    = 'version';
 	const QUERY_SIZE = 'max_allowed_packet';
-	const CHARSET = 'charset';
-	const COLLATE = 'collate';
+	const CHARSET    = 'charset';
+	const COLLATE    = 'collate';
 
 	/**
 	 * Constructor

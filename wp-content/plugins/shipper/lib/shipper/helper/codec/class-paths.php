@@ -21,7 +21,7 @@ class Shipper_Helper_Codec_Paths extends Shipper_Helper_Codec_Domain {
 	public function get_replacements_list() {
 		$rpl = array(
 			trailingslashit( WP_CONTENT_DIR ) => '{{SHIPPER_CONTENT_DIR}}',
-			trailingslashit( ABSPATH ) => '{{SHIPPER_ABSPATH}}',
+			trailingslashit( ABSPATH )        => '{{SHIPPER_ABSPATH}}',
 		);
 
 		return $rpl;

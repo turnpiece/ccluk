@@ -125,7 +125,7 @@ class WPForms_Welcome {
 	 */
 	public function output() {
 
-		$class = wpforms()->pro ? 'pro' : 'lite';
+		$class = wpforms()->is_pro() ? 'pro' : 'lite';
 		?>
 
 		<div id="wpforms-welcome" class="<?php echo sanitize_html_class( $class ); ?>">
@@ -237,7 +237,7 @@ class WPForms_Welcome {
 							<div class="feature-block last">
 								<img src="<?php echo WPFORMS_PLUGIN_URL; ?>assets/images/welcome-feature-icon-10.png">
 								<h5><?php esc_html_e( 'Spam Protection', 'wpforms-lite' ); ?></h5>
-								<p><?php esc_html_e( 'Our smart captcha and honeypot automatically prevent spam submissions.', 'wpforms-lite' ); ?></p>
+								<p><?php esc_html_e( 'Our smart captcha and spam protection automatically prevents spam submissions.', 'wpforms-lite' ); ?></p>
 							</div>
 
 						</div>
@@ -260,18 +260,18 @@ class WPForms_Welcome {
 						<div class="left">
 							<h2><?php esc_html_e( 'Upgrade to PRO', 'wpforms-lite' ); ?></h2>
 							<ul>
-								<li><span class="dashicons dashicons-yes"></span> <?php esc_html_e( 'PayPal', 'wpforms-lite' ); ?></li>
-								<li><span class="dashicons dashicons-yes"></span> <?php esc_html_e( 'Post Submissions', 'wpforms-lite' ); ?></li>
-								<li><span class="dashicons dashicons-yes"></span> <?php esc_html_e( 'Stripe', 'wpforms-lite' ); ?></li>
+								<li><span class="dashicons dashicons-yes"></span> <?php esc_html_e( 'Advanced Fields', 'wpforms-lite' ); ?></li>
+								<li><span class="dashicons dashicons-yes"></span> <?php esc_html_e( 'Conditional Logic', 'wpforms-lite' ); ?></li>
+								<li><span class="dashicons dashicons-yes"></span> <?php esc_html_e( 'Payment Forms', 'wpforms-lite' ); ?></li>
+								<li><span class="dashicons dashicons-yes"></span> <?php esc_html_e( 'Surveys & Polls', 'wpforms-lite' ); ?></li>
 								<li><span class="dashicons dashicons-yes"></span> <?php esc_html_e( 'Signatures', 'wpforms-lite' ); ?></li>
-								<li><span class="dashicons dashicons-yes"></span> <?php esc_html_e( 'User Registration', 'wpforms-lite' ); ?></li>
 								<li><span class="dashicons dashicons-yes"></span> <?php esc_html_e( 'Form Abandonment', 'wpforms-lite' ); ?></li>
+								<li><span class="dashicons dashicons-yes"></span> <?php esc_html_e( 'Entry Management', 'wpforms-lite' ); ?></li>
+								<li><span class="dashicons dashicons-yes"></span> <?php esc_html_e( 'File Uploads', 'wpforms-lite' ); ?></li>
 								<li><span class="dashicons dashicons-yes"></span> <?php esc_html_e( 'Geolocation', 'wpforms-lite' ); ?></li>
-								<li><span class="dashicons dashicons-yes"></span> <?php esc_html_e( 'Polls', 'wpforms-lite' ); ?></li>
-								<li><span class="dashicons dashicons-yes"></span> <?php esc_html_e( 'Zapier', 'wpforms-lite' ); ?></li>
-								<li><span class="dashicons dashicons-yes"></span> <?php esc_html_e( 'Unlimited Sites', 'wpforms-lite' ); ?></li>
-								<li><span class="dashicons dashicons-yes"></span> <?php esc_html_e( 'Surveys', 'wpforms-lite' ); ?></li>
-								<li><span class="dashicons dashicons-yes"></span> <?php esc_html_e( 'Priority Support', 'wpforms-lite' ); ?></li>
+								<li><span class="dashicons dashicons-yes"></span> <?php esc_html_e( 'Conversational Forms', 'wpforms-lite' ); ?></li>
+								<li><span class="dashicons dashicons-yes"></span> <?php esc_html_e( 'User Registration', 'wpforms-lite' ); ?></li>
+								<li><span class="dashicons dashicons-yes"></span> <?php esc_html_e( 'Marketing Integrations', 'wpforms-lite' ); ?></li>
 							</ul>
 						</div>
 

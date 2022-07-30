@@ -3,13 +3,13 @@
  * Upgrade Functions
  *
  * @package     Give
- * @subpackage  Admin/Upgrades
- * @copyright   Copyright (c) 2016, GiveWP
- * @license     https://opensource.org/licenses/gpl-license GNU Public License
  * @since       1.0
  *
  * NOTICE: When adding new upgrade notices, please be sure to put the action into the upgrades array during install:
  * /includes/install.php @ Appox Line 156
+ * @copyright   Copyright (c) 2016, GiveWP
+ * @license     https://opensource.org/licenses/gpl-license GNU Public License
+ * @subpackage  Admin/Upgrades
  */
 
 // Exit if accessed directly.
@@ -155,6 +155,10 @@ function give_do_automatic_upgrades() {
 
 			give_v270_upgrades();
 
+			$did_upgrade = true;
+
+		case version_compare( $give_version, '2.9.0', '<' ):
+			give_v290_remove_old_export_files();
 			$did_upgrade = true;
 	}
 
@@ -306,16 +310,6 @@ function give_show_upgrade_notices( $give_updates ) {
 		]
 	);
 
-	// v2.0.0 Upgrades
-	$give_updates->register(
-		[
-			'id'       => 'v20_logs_upgrades',
-			'version'  => '2.0.0',
-			'callback' => 'give_v20_logs_upgrades_callback',
-
-		]
-	);
-
 	// v2.0.0 Donor Name Upgrades
 	$give_updates->register(
 		[
@@ -343,7 +337,6 @@ function give_show_upgrade_notices( $give_updates ) {
 			'callback' => 'give_v20_rename_donor_tables_callback',
 			'depend'   => [
 				'v20_move_metadata_into_new_table',
-				'v20_logs_upgrades',
 				'v20_upgrades_form_metadata',
 				'v20_upgrades_payment_metadata',
 				'v20_upgrades_user_address',
@@ -377,15 +370,6 @@ function give_show_upgrade_notices( $give_updates ) {
 			'version'  => '2.0.1',
 			'callback' => 'give_v201_move_metadata_into_new_table_callback',
 			'depend'   => [ 'v201_upgrades_payment_metadata', 'v201_add_missing_donors' ],
-		]
-	);
-
-	// Run v2.0.0 Upgrades again in 2.0.1
-	$give_updates->register(
-		[
-			'id'       => 'v201_logs_upgrades',
-			'version'  => '2.0.1',
-			'callback' => 'give_v201_logs_upgrades_callback',
 		]
 	);
 
@@ -488,16 +472,6 @@ function give_show_upgrade_notices( $give_updates ) {
 			'id'       => 'v240_update_form_goal_progress',
 			'version'  => '2.4.0',
 			'callback' => 'give_v240_update_form_goal_progress_callback',
-		]
-	);
-
-	// v2.4.1 Update to remove sale type log
-	$give_updates->register(
-		[
-			'id'       => 'v241_remove_sale_logs',
-			'version'  => '2.4.1',
-			'callback' => 'give_v241_remove_sale_logs_callback',
-			'depend'   => [ 'v201_logs_upgrades' ],
 		]
 	);
 
@@ -1913,8 +1887,8 @@ function give_v20_upgrades_form_metadata_callback() {
  * Upgrade payment metadata for new metabox settings.
  *
  * @since  2.0
- * @global wpdb $wpdb
  * @return void
+ * @global wpdb $wpdb
  */
 function give_v20_upgrades_payment_metadata_callback() {
 	global $wpdb;
@@ -1991,125 +1965,6 @@ function give_v20_upgrades_payment_metadata_callback() {
 		// $wpdb->get_var( $wpdb->prepare( "DELETE FROM $wpdb->postmeta WHERE meta_key=%s", '_give_payment_user_id' ) );
 		// No more forms found, finish up.
 		give_set_upgrade_complete( 'v20_upgrades_payment_metadata' );
-	}
-}
-
-
-/**
- * Upgrade logs data.
- *
- * @since  2.0
- * @return void
- */
-function give_v20_logs_upgrades_callback() {
-	global $wpdb;
-	$give_updates = Give_Updates::get_instance();
-
-	// form query
-	$forms = new WP_Query(
-		[
-			'paged'          => $give_updates->step,
-			'order'          => 'DESC',
-			'post_type'      => 'give_log',
-			'post_status'    => 'any',
-			'posts_per_page' => 100,
-		]
-	);
-
-	if ( $forms->have_posts() ) {
-		$give_updates->set_percentage( $forms->found_posts, $give_updates->step * 100 );
-
-		while ( $forms->have_posts() ) {
-			$forms->the_post();
-			global $post;
-
-			if ( $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}give_logs WHERE ID=%d", $post->ID ) ) ) {
-				continue;
-			}
-
-			$term      = get_the_terms( $post->ID, 'give_log_type' );
-			$term      = ! is_wp_error( $term ) && ! empty( $term ) ? $term[0] : [];
-			$term_name = ! empty( $term ) ? $term->slug : '';
-
-			$log_data = [
-				'ID'           => $post->ID,
-				'log_title'    => $post->post_title,
-				'log_content'  => $post->post_content,
-				'log_parent'   => 0,
-				'log_type'     => $term_name,
-				'log_date'     => $post->post_date,
-				'log_date_gmt' => $post->post_date_gmt,
-			];
-			$log_meta = [];
-
-			if ( $old_log_meta = get_post_meta( $post->ID ) ) {
-				foreach ( $old_log_meta as $meta_key => $meta_value ) {
-					switch ( $meta_key ) {
-						case '_give_log_payment_id':
-							$log_data['log_parent']        = current( $meta_value );
-							$log_meta['_give_log_form_id'] = $post->post_parent;
-							break;
-
-						default:
-							$log_meta[ $meta_key ] = current( $meta_value );
-					}
-				}
-			}
-
-			if ( 'api_request' === $term_name ) {
-				$log_meta['_give_log_api_query'] = $post->post_excerpt;
-			}
-
-			$wpdb->insert( "{$wpdb->prefix}give_logs", $log_data );
-
-			if ( ! empty( $log_meta ) ) {
-				foreach ( $log_meta as $meta_key => $meta_value ) {
-					Give()->logs->logmeta_db->update_meta( $post->ID, $meta_key, $meta_value );
-				}
-			}
-
-			$logIDs[] = $post->ID;
-		}// End while().
-
-		wp_reset_postdata();
-	} else {
-		// @todo: Delete terms and taxonomy after releases 2.0.
-		/*
-		$terms = get_terms( 'give_log_type', array( 'fields' => 'ids', 'hide_empty' => false ) );
-		if ( ! empty( $terms ) ) {
-			foreach ( $terms as $term ) {
-				wp_delete_term( $term, 'give_log_type' );
-			}
-		}*/
-
-		// @todo: Delete logs after releases 2.0.
-		/*
-		$logIDs = get_posts( array(
-				'order'          => 'DESC',
-				'post_type'      => 'give_log',
-				'post_status'    => 'any',
-				'posts_per_page' => - 1,
-				'fields'         => 'ids',
-			)
-		);*/
-
-		/*
-		if ( ! empty( $logIDs ) ) {
-			foreach ( $logIDs as $log ) {
-				// Delete term relationship and posts.
-				wp_delete_object_term_relationships( $log, 'give_log_type' );
-				wp_delete_post( $log, true );
-			}
-		}*/
-
-		// @todo: Unregister taxonomy after releases 2.0.
-		/*unregister_taxonomy( 'give_log_type' );*/
-
-		// Delete log cache.
-		Give()->logs->delete_cache();
-
-		// No more forms found, finish up.
-		give_set_upgrade_complete( 'v20_logs_upgrades' );
 	}
 }
 
@@ -2249,9 +2104,9 @@ function give_v20_upgrades_donor_name() {
  * Upgrade routine for user addresses.
  *
  * @since 2.0
+ * @return void
  * @global wpdb $wpdb
  *
- * @return void
  */
 function give_v20_upgrades_user_address() {
 	global $wpdb;
@@ -2313,8 +2168,8 @@ function give_v20_upgrades_user_address() {
  * Upgrade logs data.
  *
  * @since  2.0
- * @global wpdb $wpdb
  * @return void
+ * @global wpdb $wpdb
  */
 function give_v20_rename_donor_tables_callback() {
 	global $wpdb;
@@ -2356,8 +2211,8 @@ function give_v20_rename_donor_tables_callback() {
  * Create missing meta tables.
  *
  * @since  2.0.1
- * @global wpdb $wpdb
  * @return void
+ * @global wpdb $wpdb
  */
 function give_v201_create_tables() {
 	global $wpdb;
@@ -2369,22 +2224,14 @@ function give_v201_create_tables() {
 	if ( ! $wpdb->query( $wpdb->prepare( 'SHOW TABLES LIKE %s', "{$wpdb->prefix}give_formmeta" ) ) ) {
 		Give()->form_meta->create_table();
 	}
-
-	if ( ! $wpdb->query( $wpdb->prepare( 'SHOW TABLES LIKE %s', "{$wpdb->prefix}give_logs" ) ) ) {
-		Give()->logs->log_db->create_table();
-	}
-
-	if ( ! $wpdb->query( $wpdb->prepare( 'SHOW TABLES LIKE %s', "{$wpdb->prefix}give_logmeta" ) ) ) {
-		Give()->logs->logmeta_db->create_table();
-	}
 }
 
 /**
  * Upgrade payment metadata for new metabox settings.
  *
  * @since  2.0.1
- * @global wpdb $wpdb
  * @return void
+ * @global wpdb $wpdb
  */
 function give_v201_upgrades_payment_metadata_callback() {
 	global $wpdb, $post;
@@ -2557,93 +2404,6 @@ function give_v201_move_metadata_into_new_table_callback() {
 		give_set_upgrade_complete( 'v201_move_metadata_into_new_table' );
 	}
 
-}
-
-/**
- * Move data to new log table.
- *
- * @since  2.0.1
- * @return void
- */
-function give_v201_logs_upgrades_callback() {
-	global $wpdb, $post;
-	$give_updates = Give_Updates::get_instance();
-	give_v201_create_tables();
-
-	$logs = $wpdb->get_col(
-		"
-			SELECT ID FROM $wpdb->posts
-			WHERE 1=1
-			AND $wpdb->posts.post_type = 'give_log'
-			AND {$wpdb->posts}.post_status IN ('" . implode( "','", array_keys( give_get_payment_statuses() ) ) . "')
-			ORDER BY $wpdb->posts.post_date ASC
-			LIMIT 100
-			OFFSET " . $give_updates->get_offset( 100 )
-	);
-
-	if ( ! empty( $logs ) ) {
-		$give_updates->set_percentage( give_get_total_post_type_count( 'give_log' ), $give_updates->step * 100 );
-
-		foreach ( $logs as $log_id ) {
-			$post = get_post( $log_id );
-			setup_postdata( $post );
-
-			if ( $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}give_logs WHERE ID=%d", $post->ID ) ) ) {
-				continue;
-			}
-
-			$term      = get_the_terms( $post->ID, 'give_log_type' );
-			$term      = ! is_wp_error( $term ) && ! empty( $term ) ? $term[0] : [];
-			$term_name = ! empty( $term ) ? $term->slug : '';
-
-			$log_data = [
-				'ID'           => $post->ID,
-				'log_title'    => $post->post_title,
-				'log_content'  => $post->post_content,
-				'log_parent'   => 0,
-				'log_type'     => $term_name,
-				'log_date'     => $post->post_date,
-				'log_date_gmt' => $post->post_date_gmt,
-			];
-			$log_meta = [];
-
-			if ( $old_log_meta = get_post_meta( $post->ID ) ) {
-				foreach ( $old_log_meta as $meta_key => $meta_value ) {
-					switch ( $meta_key ) {
-						case '_give_log_payment_id':
-							$log_data['log_parent']        = current( $meta_value );
-							$log_meta['_give_log_form_id'] = $post->post_parent;
-							break;
-
-						default:
-							$log_meta[ $meta_key ] = current( $meta_value );
-					}
-				}
-			}
-
-			if ( 'api_request' === $term_name ) {
-				$log_meta['_give_log_api_query'] = $post->post_excerpt;
-			}
-
-			$wpdb->insert( "{$wpdb->prefix}give_logs", $log_data );
-
-			if ( ! empty( $log_meta ) ) {
-				foreach ( $log_meta as $meta_key => $meta_value ) {
-					Give()->logs->logmeta_db->update_meta( $post->ID, $meta_key, $meta_value );
-				}
-			}
-
-			$logIDs[] = $post->ID;
-		}// End while().
-
-		wp_reset_postdata();
-	} else {
-		// Delete log cache.
-		Give()->logs->delete_cache();
-
-		// No more forms found, finish up.
-		give_set_upgrade_complete( 'v201_logs_upgrades' );
-	}
 }
 
 
@@ -3417,31 +3177,6 @@ function give_v240_update_form_goal_progress_callback() {
 	}
 }
 
-
-/**
- * Manual update handler for v241_remove_sale_logs
- *
- * @since 2.4.1
- */
-function give_v241_remove_sale_logs_callback() {
-	global $wpdb;
-
-	$log_table      = Give()->logs->log_db->table_name;
-	$log_meta_table = Give()->logs->logmeta_db->table_name;
-
-	$sql = "DELETE {$log_table}, {$log_meta_table}
-		FROM {$log_table}
-		INNER JOIN  {$log_meta_table} ON {$log_meta_table}.log_id={$log_table}.ID
-		WHERE log_type='sale'
-		";
-
-	// Remove donation logs.
-	$wpdb->query( $sql );
-
-	give_set_upgrade_complete( 'v241_remove_sale_logs' );
-}
-
-
 /**
  * DB upgrades for Give 2.5.0
  *
@@ -3650,8 +3385,8 @@ function give_v263_upgrades() {
  * Upgrade routine to call for backward compatibility to manage default Stripe account.
  *
  * @since 2.7.0
- * @global wpdb $wpdb
  * @return void
+ * @global wpdb $wpdb
  */
 function give_v270_upgrades() {
 	global $wpdb;
@@ -3814,4 +3549,14 @@ function give_v270_store_stripe_account_for_donation_callback() {
 		// Update Ran Successfully.
 		give_set_upgrade_complete( 'v270_store_stripe_account_for_donation' );
 	}
+}
+
+/**
+ * Removes any leftover export files that should've been deleted
+ *
+ * @since 2.9.0
+ */
+function give_v290_remove_old_export_files() {
+	@unlink( WP_CONTENT_DIR . '/uploads/give-payments.csv' );
+	@unlink( WP_CONTENT_DIR . '/uploads/give-donors.csv' );
 }

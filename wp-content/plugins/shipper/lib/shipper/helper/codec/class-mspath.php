@@ -22,7 +22,7 @@ class Shipper_Helper_Codec_Mspath extends Shipper_Helper_Codec_Domain {
 		$current = trailingslashit(
 			'http://' . Shipper_Model_Stored_Destinations::get_current_domain()
 		);
-		$path = parse_url( $current, PHP_URL_PATH );
+		$path    = wp_parse_url( $current, PHP_URL_PATH );
 		return array(
 			$path => '{{SHIPPER_MS_PATH}}',
 		);

@@ -5,13 +5,13 @@
         newModal.find(".wpmud-box-title > h3").html(title);
         newModal.find(".wpmud-box-content").html(content);
         $("#wpbody-content").append(newModal);
-        if($.isFunction(onRender))onRender();
+        if(typeof(onRender) === 'function')onRender();
         newModal.fadeIn();
         newModal.on("click", ".wpmud-box-title > .close", function(){
             newModal.fadeOut();
             setTimeout(function(){
                 newModal.remove();
-                if($.isFunction(onClose)) onClose();
+                if(typeof(onClose) === 'function') onClose();
             },400);
         });
     };

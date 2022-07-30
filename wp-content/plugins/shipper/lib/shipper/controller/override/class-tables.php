@@ -34,7 +34,8 @@ class Shipper_Controller_Override_Tables extends Shipper_Controller_Override {
 		 */
 		$migration = new Shipper_Model_Stored_Migration();
 		$prefix    = $migration->get( 'destination_prefix' );
-		if ( $constants->get( 'SHIPPER_IMPORT_TABLE_PREFIX' ) || $prefix != false ) {
+
+		if ( $constants->get( 'SHIPPER_IMPORT_TABLE_PREFIX' ) || ! empty( $prefix ) ) {
 			$this->apply_import_table_prefix( $prefix );
 		}
 		/**
@@ -42,8 +43,48 @@ class Shipper_Controller_Override_Tables extends Shipper_Controller_Override {
 		 */
 		add_action( 'shipper_migration_before_task', array( &$this, 'append_exclude_table_listener' ), 10 );
 		add_action( 'shipper_export_table_include_row', array( &$this, 'maybe_exclude_row' ), 10, 3 );
+		$meta = new Shipper_Model_Stored_MigrationMeta();
+		if ( $meta->is_extract_mode() ) {
+			add_action( 'shipper_export_table_include_row', array( &$this, 'maybe_include_user' ), 11, 3 );
+		}
 	}
 
+	/**
+	 * Maybe include user
+	 *
+	 * @param bool   $include whether to include or not.
+	 * @param string $raw raw string.
+	 * @param string $table table name.
+	 *
+	 * @return false
+	 */
+	public function maybe_include_user( $include, $raw, $table ) {
+		global $wpdb;
+		$meta = new Shipper_Model_Stored_MigrationMeta();
+		if ( $table === $wpdb->users ) {
+			if ( ! is_user_member_of_blog( $raw['ID'], $meta->get_site_id() ) ) {
+				return false;
+			}
+		}
+
+		if ( $table === $wpdb->usermeta ) {
+			if ( ! is_user_member_of_blog( $raw['user_id'], $meta->get_site_id() ) ) {
+				return false;
+			}
+		}
+
+		return $include;
+	}
+
+	/**
+	 * Maybe exclude a row
+	 *
+	 * @param bool   $include whether to include or not.
+	 * @param string $raw row name.
+	 * @param string $table table name.
+	 *
+	 * @return false
+	 */
 	public function maybe_exclude_row( $include, $raw, $table ) {
 		global $wpdb;
 		$tbl        = $wpdb->options;
@@ -52,18 +93,16 @@ class Shipper_Controller_Override_Tables extends Shipper_Controller_Override {
 			$tbl        = $wpdb->sitemeta;
 			$field_name = 'meta_key';
 		}
-		if ( $tbl == $table ) {
-			$fields = [
-				//'wdp_un_analytics_enabled',
+		if ( $tbl === $table ) {
+			$fields = array(
+				// 'wdp_un_analytics_enabled',
 				'wdp_un_analytics_site_id',
 				'wdp_un_analytics_tracker',
 				'wdp_un_analytics_metrics',
-				'wdp_un_remote_access'
-			];
-			if ( isset( $raw[ $field_name ] ) && in_array( $raw[ $field_name ], $fields ) ) {
-				//Shipper_Helper_Log::write( var_export( $raw, true ) );
-
-				//we dont copy support staff status
+				'wdp_un_remote_access',
+			);
+			if ( isset( $raw[ $field_name ] ) && in_array( $raw[ $field_name ], $fields, true ) ) {
+				// we dont copy support staff status.
 				return false;
 			}
 		}
@@ -71,49 +110,59 @@ class Shipper_Controller_Override_Tables extends Shipper_Controller_Override {
 		return $include;
 	}
 
+	/**
+	 * Append exclude table listener.
+	 *
+	 * @param object $current_task current running task.
+	 *
+	 * @return void
+	 */
 	public function append_exclude_table_listener( $current_task ) {
 		if ( ! $current_task instanceof Shipper_Task_Export_Tables ) {
 			return;
 		}
 
-		$model      = new Shipper_Model_Stored_MigrationExclusion();
-		$exclusions = $model->get( Shipper_Model_Stored_MigrationExclusion::KEY_EXCLUSIONS_DB );
-		if ( empty( $exclusions ) ) {
-			return;
-		}
-
 		add_filter(
 			'shipper_path_include_table',
-			array( $this, 'maybe_include_table' ), 10, 2
+			array( $this, 'maybe_include_table' ),
+			10,
+			2
 		);
 	}
 
+	/**
+	 * Maybe include a table
+	 *
+	 * @param bool   $include whether to inlcude a table or not.
+	 * @param string $table table name.
+	 *
+	 * @return bool
+	 */
 	public function maybe_include_table( $include, $table ) {
 		if ( empty( $include ) ) {
 			return $include;
 		}
 
-		$model      = new Shipper_Model_Stored_MigrationExclusion();
-		$exclusions = $model->get( Shipper_Model_Stored_MigrationExclusion::KEY_EXCLUSIONS_DB );
+		$model      = new Shipper_Model_Stored_MigrationMeta();
+		$exclusions = $model->get( Shipper_Model_Stored_MigrationMeta::KEY_EXCLUSIONS_DB );
 		if ( empty( $exclusions ) ) {
 			return $include;
 		}
-
 		return ! in_array( $table, $exclusions, true );
 	}
 
 	/**
 	 * Binds to needed filters in order to apply the new table prefix
 	 *
-	 * @param $prefix
+	 * @param string $prefix table prefix.
 	 *
 	 * @return bool
 	 */
 	public function apply_import_table_prefix( $prefix ) {
-		if ( ! defined( 'SHIPPER_IMPORT_TABLE_PREFIX' ) && $prefix == false ) {
+		if ( ! defined( 'SHIPPER_IMPORT_TABLE_PREFIX' ) && ! $prefix ) {
 			return false;
 		}
-		if ( $prefix == false ) {
+		if ( ! $prefix ) {
 			$prefix = SHIPPER_IMPORT_TABLE_PREFIX;
 		}
 		if ( empty( $prefix ) || ! is_string( $prefix ) ) {
@@ -148,12 +197,15 @@ class Shipper_Controller_Override_Tables extends Shipper_Controller_Override {
 		$migration = new Shipper_Model_Stored_Migration();
 		$prefix    = $migration->get( 'destination_prefix' );
 		$constants = $this->get_constants();
-		if ( ! $constants->is_defined( 'SHIPPER_IMPORT_TABLE_PREFIX' ) && $prefix == false ) {
+
+		if ( ! $constants->is_defined( 'SHIPPER_IMPORT_TABLE_PREFIX' ) && ! $prefix ) {
 			return $source;
 		}
-		if ( $prefix == false ) {
+
+		if ( ! $prefix ) {
 			$prefix = $constants->get( 'SHIPPER_IMPORT_TABLE_PREFIX' );
 		}
+
 		if ( empty( $prefix ) || ! is_string( $prefix ) ) {
 			return $source;
 		}
@@ -170,7 +222,6 @@ class Shipper_Controller_Override_Tables extends Shipper_Controller_Override {
 	 */
 	public function apply_destination_table_prefix( $table ) {
 		$prefix = $this->get_import_table_prefix();
-		Shipper_Helper_Log::write( 'get prefix before ' . $prefix );
 		if ( empty( $prefix ) ) {
 			return $table;
 		}

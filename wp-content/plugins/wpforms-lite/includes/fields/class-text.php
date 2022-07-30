@@ -165,7 +165,8 @@ class WPForms_Field_Text extends WPForms_Field {
 				$properties['inputs']['primary']['data']['inputmask-inputformat'] = $mask;
 
 			} else {
-				$properties['inputs']['primary']['data']['inputmask-mask'] = $field['input_mask'];
+				$properties['inputs']['primary']['data']['inputmask-mask']    = $field['input_mask'];
+				$properties['inputs']['primary']['data']['rule-empty-blanks'] = true;
 			}
 		}
 
@@ -230,105 +231,109 @@ class WPForms_Field_Text extends WPForms_Field {
 		// Placeholder.
 		$this->field_option( 'placeholder', $field );
 
-		// Hide label.
-		$this->field_option( 'label_hide', $field );
-
 		// Limit length.
-		$args = array(
+		$args = [
 			'slug'    => 'limit_enabled',
 			'content' => $this->field_element(
-				'checkbox',
+				'toggle',
 				$field,
-				array(
+				[
 					'slug'    => 'limit_enabled',
 					'value'   => isset( $field['limit_enabled'] ),
 					'desc'    => esc_html__( 'Limit Length', 'wpforms-lite' ),
 					'tooltip' => esc_html__( 'Check this option to limit text length by characters or words count.', 'wpforms-lite' ),
-				),
+				],
 				false
 			),
-		);
+		];
+
 		$this->field_element( 'row', $field, $args );
 
 		$count = $this->field_element(
 			'text',
 			$field,
-			array(
+			[
 				'type'  => 'number',
 				'slug'  => 'limit_count',
-				'attrs' => array(
+				'attrs' => [
 					'min'     => 1,
 					'step'    => 1,
 					'pattern' => '[0-9]',
-				),
+				],
 				'value' => ! empty( $field['limit_count'] ) ? absint( $field['limit_count'] ) : 1,
-			),
+			],
 			false
 		);
 
 		$mode = $this->field_element(
 			'select',
 			$field,
-			array(
+			[
 				'slug'    => 'limit_mode',
 				'value'   => ! empty( $field['limit_mode'] ) ? esc_attr( $field['limit_mode'] ) : 'characters',
-				'options' => array(
+				'options' => [
 					'characters' => esc_html__( 'Characters', 'wpforms-lite' ),
 					'words'      => esc_html__( 'Words', 'wpforms-lite' ),
-				),
-			),
+				],
+			],
 			false
 		);
-		$args = array(
+
+		$args = [
 			'slug'    => 'limit_controls',
 			'class'   => ! isset( $field['limit_enabled'] ) ? 'wpforms-hide' : '',
 			'content' => $count . $mode,
-		);
+		];
+
 		$this->field_element( 'row', $field, $args );
 
 		// Default value.
 		$this->field_option( 'default_value', $field );
 
-		// Custom CSS classes.
-		$this->field_option( 'css', $field );
-
 		// Input Mask.
 		$lbl = $this->field_element(
 			'label',
 			$field,
-			array(
+			[
 				'slug'          => 'input_mask',
 				'value'         => esc_html__( 'Input Mask', 'wpforms-lite' ),
 				'tooltip'       => esc_html__( 'Enter your custom input mask.', 'wpforms-lite' ),
 				'after_tooltip' => '<a href="https://wpforms.com/how-to-use-custom-input-masks/" class="after-label-description" target="_blank" rel="noopener noreferrer">' . esc_html__( 'See Examples & Docs', 'wpforms-lite' ) . '</a>',
-			),
+			],
 			false
 		);
 		$fld = $this->field_element(
 			'text',
 			$field,
-			array(
+			[
 				'slug'  => 'input_mask',
 				'value' => ! empty( $field['input_mask'] ) ? esc_attr( $field['input_mask'] ) : '',
-			),
+			],
 			false
 		);
+
 		$this->field_element(
 			'row',
 			$field,
-			array(
+			[
 				'slug'    => 'input_mask',
 				'content' => $lbl . $fld,
-			)
+			]
 		);
+
+		// Custom CSS classes.
+		$this->field_option( 'css', $field );
+
+		// Hide label.
+		$this->field_option( 'label_hide', $field );
 
 		// Options close markup.
 		$this->field_option(
 			'advanced-options',
 			$field,
-			array(
+			[
 				'markup' => 'close',
-			)
+			]
 		);
 	}
 
@@ -342,13 +347,14 @@ class WPForms_Field_Text extends WPForms_Field {
 	public function field_preview( $field ) {
 
 		// Define data.
-		$placeholder = ! empty( $field['placeholder'] ) ? esc_attr( $field['placeholder'] ) : '';
+		$placeholder   = ! empty( $field['placeholder'] ) ? $field['placeholder'] : '';
+		$default_value = ! empty( $field['default_value'] ) ? $field['default_value'] : '';
 
 		// Label.
 		$this->field_preview_option( 'label', $field );
 
 		// Primary input.
-		echo '<input type="text" placeholder="' . esc_attr( $placeholder ) . '" class="primary-input" disabled>';
+		echo '<input type="text" placeholder="' . esc_attr( $placeholder ) . '" value="' . esc_attr( $default_value ) . '" class="primary-input" readonly>';
 
 		// Description.
 		$this->field_preview_option( 'description', $field );
@@ -450,33 +456,49 @@ class WPForms_Field_Text extends WPForms_Field {
 		// Sanitize.
 		$value = sanitize_text_field( $field_submit );
 
-		if ( isset( $field['limit_enabled'] ) ) {
-			$limit = absint( $field['limit_count'] );
-			$mode  = sanitize_key( $field['limit_mode'] );
-
-			if ( 'characters' === $mode ) {
-				if ( mb_strlen( $value ) > $limit ) {
-					/* translators: %s - limit characters number. */
-					wpforms()->process->errors[ $form_data['id'] ][ $field_id ] = sprintf( _n( 'Text can\'t exceed %d character.', 'Text can\'t exceed %d characters.', $limit, 'wpforms-lite' ), $limit );
-					return;
-				}
-			} else {
-				$words = preg_split( '/[\s,]+/', $value );
-				$words = is_array( $words ) ? count( $words ) : 0;
-				if ( $words > $limit ) {
-					/* translators: %s - limit words number. */
-					wpforms()->process->errors[ $form_data['id'] ][ $field_id ] = sprintf( _n( 'Text can\'t exceed %d word.', 'Text can\'t exceed %d words.', $limit, 'wpforms-lite' ), $limit );
-					return;
-				}
-			}
-		}
-
 		wpforms()->process->fields[ $field_id ] = array(
 			'name'  => $name,
 			'value' => $value,
 			'id'    => absint( $field_id ),
 			'type'  => $this->type,
 		);
+	}
+
+	/**
+	 * Validate field on form submit.
+	 *
+	 * @since 1.6.2
+	 *
+	 * @param int   $field_id     Field ID.
+	 * @param mixed $field_submit Field value that was submitted.
+	 * @param array $form_data    Form data and settings.
+	 */
+	public function validate( $field_id, $field_submit, $form_data ) {
+
+		parent::validate( $field_id, $field_submit, $form_data );
+
+		if ( empty( $form_data['fields'][ $field_id ] ) || empty( $form_data['fields'][ $field_id ]['limit_enabled'] ) ) {
+			return;
+		}
+
+		$field = $form_data['fields'][ $field_id ];
+		$limit = absint( $field['limit_count'] );
+		$mode  = ! empty( $field['limit_mode'] ) ? sanitize_key( $field['limit_mode'] ) : 'characters';
+		$value = sanitize_text_field( $field_submit );
+
+		if ( 'characters' === $mode ) {
+			if ( mb_strlen( str_replace( "\r\n", "\n", $value ) ) > $limit ) {
+				/* translators: %s - limit characters number. */
+				wpforms()->process->errors[ $form_data['id'] ][ $field_id ] = sprintf( _n( 'Text can\'t exceed %d character.', 'Text can\'t exceed %d characters.', $limit, 'wpforms-lite' ), $limit );
+				return;
+			}
+		} else {
+			if ( wpforms_count_words( $value ) > $limit ) {
+				/* translators: %s - limit words number. */
+				wpforms()->process->errors[ $form_data['id'] ][ $field_id ] = sprintf( _n( 'Text can\'t exceed %d word.', 'Text can\'t exceed %d words.', $limit, 'wpforms-lite' ), $limit );
+				return;
+			}
+		}
 	}
 }
 

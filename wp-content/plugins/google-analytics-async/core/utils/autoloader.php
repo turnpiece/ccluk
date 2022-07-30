@@ -2,7 +2,7 @@
 /**
  * The core auto loader class.
  *
- * @link    http://premium.wpmudev.org
+ * @link    http://wpmudev.com
  * @since   3.2.0
  *
  * @author  Joel James <joel@incsub.com>
@@ -72,16 +72,6 @@ if ( ! function_exists( 'beehive_auto_loader' ) ) {
 		// If the file exists in the specified path, then include it.
 		if ( file_exists( $filepath ) ) {
 			include_once $filepath;
-		} else {
-			wp_die(
-				esc_html(
-					printf(
-						// translators: %s is the file path.
-						esc_html__( 'The file attempting to be loaded at %s does not exist.', 'ga_trans' ),
-						$filepath
-					)
-				)
-			);
 		}
 	}
 }

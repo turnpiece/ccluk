@@ -2,7 +2,7 @@
 /**
  * The Google core class.
  *
- * @link    http://premium.wpmudev.org
+ * @link    http://wpmudev.com
  * @since   3.2.0
  *
  * @author  Joel James <joel@incsub.com>
@@ -15,7 +15,7 @@ namespace Beehive\Core\Modules\Google_Analytics;
 defined( 'WPINC' ) || die;
 
 use Beehive\Core\Helpers\Permission;
-use Beehive\Google_Service_Analytics;
+use Beehive\Google\Service\Analytics as Analytics_Service;
 use Beehive\Core\Utils\Abstracts\Base;
 use Beehive\Core\Modules\Google_Analytics\Views\Stats;
 use Beehive\Core\Modules\Google_Analytics\Views\Tracking;
@@ -52,9 +52,12 @@ class Analytics extends Base {
 		Stats::instance()->init();
 		Tracking::instance()->init();
 
-		// Rest API.
-		Endpoints\Stats::instance();
-		Endpoints\Data::instance();
+		// Rest API for UA.
+		Endpoints\V1\Data::instance();
+		Endpoints\V1\Stats::instance();
+		// Rest API for GA4.
+		Endpoints\V2\Data::instance();
+		Endpoints\V2\Stats::instance();
 	}
 
 	/**
@@ -68,7 +71,7 @@ class Analytics extends Base {
 	 */
 	public function auth_scopes( $scopes = array() ) {
 		// Add Google Analytics auth scope.
-		$scopes[] = Google_Service_Analytics::ANALYTICS_READONLY;
+		$scopes[] = Analytics_Service::ANALYTICS_READONLY;
 
 		return $scopes;
 	}
@@ -90,6 +93,7 @@ class Analytics extends Base {
 		}
 	}
 
+
 	/**
 	 * Update the available list of GA profiles after the authentication.
 	 *
@@ -106,6 +110,7 @@ class Analytics extends Base {
 	public function setup_profiles( $success, $default, $network ) {
 		// Fetch the list of profiles.
 		if ( $success ) {
+			Data::instance()->streams( $network, true );
 			Data::instance()->profiles_list( $network, true );
 		}
 	}

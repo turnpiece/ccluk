@@ -22,11 +22,15 @@
 /** @var  WPMUDEV_Dashboard_Sui_Page_Urls $urls */
 $url_upgrade = $urls->remote_site . 'hub/account/';
 
-$url_upgrade = add_query_arg( array(
-    'utm_source' 	=> 'wpmudev-dashboard',
-    'utm_medium' 	=> 'plugin',
-    'utm_campaign' 	=> 'dashboard_expired_modal_reactivate',
-), $url_upgrade );
+$url_upgrade = add_query_arg(
+	array(
+		'utm_source'   => 'wpmudev-dashboard',
+		'utm_medium'   => 'plugin',
+		'utm_campaign' => 'dashboard_expired_modal_reactivate',
+	),
+	$url_upgrade
+);
+
 
 $url_logout  = $urls->dashboard_url . '&clear_key=1';
 $url_refresh = wp_nonce_url( add_query_arg( 'action', 'check-updates' ), 'check-updates', 'hash' );

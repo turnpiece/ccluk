@@ -28,22 +28,22 @@ class HttpHandlerFactory
      * @return Guzzle5HttpHandler|Guzzle6HttpHandler|Guzzle7HttpHandler
      * @throws \Exception
      */
-    public static function build(\Beehive\GuzzleHttp\ClientInterface $client = null)
+    public static function build(ClientInterface $client = null)
     {
-        $client = $client ?: new \Beehive\GuzzleHttp\Client();
+        $client = $client ?: new Client();
         $version = null;
         if (\defined('Beehive\GuzzleHttp\ClientInterface::MAJOR_VERSION')) {
-            $version = \Beehive\GuzzleHttp\ClientInterface::MAJOR_VERSION;
+            $version = ClientInterface::MAJOR_VERSION;
         } elseif (\defined('Beehive\GuzzleHttp\ClientInterface::VERSION')) {
-            $version = (int) \substr(\Beehive\GuzzleHttp\ClientInterface::VERSION, 0, 1);
+            $version = (int) \substr(ClientInterface::VERSION, 0, 1);
         }
         switch ($version) {
             case 5:
-                return new \Beehive\Google\Auth\HttpHandler\Guzzle5HttpHandler($client);
+                return new Guzzle5HttpHandler($client);
             case 6:
-                return new \Beehive\Google\Auth\HttpHandler\Guzzle6HttpHandler($client);
+                return new Guzzle6HttpHandler($client);
             case 7:
-                return new \Beehive\Google\Auth\HttpHandler\Guzzle7HttpHandler($client);
+                return new Guzzle7HttpHandler($client);
             default:
                 throw new \Exception('Version not supported');
         }

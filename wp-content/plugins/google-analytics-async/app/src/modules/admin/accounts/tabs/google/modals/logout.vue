@@ -106,7 +106,7 @@ export default {
 			this.processing = true
 
 			restGet({
-				path: 'auth/logout',
+				path: 'v1/auth/logout',
 				params: {
 					network: this.isNetwork() ? 1 : 0,
 				},

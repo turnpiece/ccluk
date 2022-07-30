@@ -306,6 +306,19 @@ trait SWP_Buttons_Panel_Trait {
 
 
 	/**
+	* A method for getting the ID of the current post.
+	*
+	* @since  4.0.1 | 01 APR 2020 | Created
+	* @param  void
+	* @return string The HTML attribute to be added to the buttons panel.
+	*
+	*/
+	protected function get_post_id_attribute() {
+		return 'data-post-id="'.$this->post_id.'" ';
+	}
+
+
+	/**
 	* A method for getting the transition mode for the side floating buttons.
 	*
 	* @since  3.0.0 | 01 MAR 2018 | Created
@@ -724,6 +737,17 @@ trait SWP_Buttons_Panel_Trait {
 
 
 		/**
+		 * If the share counts are delayed in the options, then we'll check the
+		 * current age of the post and check to see if they are still delayed
+		 * or if they can be shown now.
+		 *
+		 */
+		if( true === SWP_Buttons_Panel::are_share_counts_delayed( $this->post_id ) ) {
+			return false;
+		}
+
+
+		/**
 		 * Find out if the total shares are activated on the settings page. We
 		 * will overwrite this variable if the user has passed in a 'buttons'
 		 * argument and instead use what they've passed in.
@@ -831,6 +855,7 @@ trait SWP_Buttons_Panel_Trait {
 		$attributes .= $this->get_float_location_attribute();
 		$attributes .= $this->get_mobile_float_location();
 		$attributes .= $this->get_float_transition();
+		$attributes .= $this->get_post_id_attribute();
 		$this->attributes = $attributes;
 	}
 
@@ -868,5 +893,32 @@ trait SWP_Buttons_Panel_Trait {
 	 */
    protected function combine_html_assets() {
 	   $this->html = '<div ' . $this->classes . $this->attributes . '>' . $this->inner_html . '</div>';
+   }
+
+
+   /**
+	* This allows users to delay the display of share counts until the post
+	* has reached a certain age in hours. So if they set the option to 10,
+	* then the share counts will not display until the post is at least
+	* that old.
+	*
+	* @since  4.0.0 | 12 JUL 2019 | Created
+	* @param  integer $post_id The Post ID
+	* @return boolean True if delayed, false if not delayed.
+	*
+	*/
+   public static function are_share_counts_delayed( $post_id ) {
+	   $delay_share_counts = SWP_Utility::get_option( 'delay_share_counts' );
+	   if( !empty($delay_share_counts) && is_numeric($delay_share_counts) && $delay_share_counts > 0 ) {
+		   $delay_share_counts = $delay_share_counts * 60 * 60;
+		   $current_time       = date( 'U' );
+		   $publication_time   = get_post_time( 'U' , true , $post_id );
+		   $post_age           = $current_time - $publication_time;
+
+		   if($post_age < $delay_share_counts ) {
+			   return true;
+		   }
+	   }
+	   return false;
    }
 }

@@ -35,18 +35,13 @@ class Loader {
 		$core_class_names = array(
 			'Connect',
 			'DashboardWidget',
-			'Challenge',
-			'Education',
 			'FlyoutMenu',
-			'Builder\Education',
 			'Builder\LicenseAlert',
 			'Pages\Community',
 			'Pages\SMTP',
 			'Pages\Analytics',
-			'Settings\Education',
 			'Entries\PrintPreview',
 			'Entries\DefaultScreen',
-			'Entries\Export\Export',
 		);
 
 		$class_names = \apply_filters( 'wpforms_admin_classes_available', $core_class_names );
@@ -65,25 +60,30 @@ class Loader {
 	 */
 	public function register_class( $class_name ) {
 
-		$class_name = \sanitize_text_field( $class_name );
+		$class_name = sanitize_text_field( $class_name );
 
 		// Load Lite class if exists.
-		if ( ! \wpforms()->pro && \class_exists( 'WPForms\Lite\Admin\\' . $class_name ) ) {
+		if ( class_exists( 'WPForms\Lite\Admin\\' . $class_name ) && ! wpforms()->is_pro() ) {
 			$class_name = 'WPForms\Lite\Admin\\' . $class_name;
+
 			new $class_name();
+
 			return;
 		}
 
 		// Load Pro class if exists.
-		if ( \wpforms()->pro && \class_exists( 'WPForms\Pro\Admin\\' . $class_name ) ) {
+		if ( class_exists( 'WPForms\Pro\Admin\\' . $class_name ) && wpforms()->is_pro() ) {
 			$class_name = 'WPForms\Pro\Admin\\' . $class_name;
+
 			new $class_name();
+
 			return;
 		}
 
 		// Load general class if neither Pro nor Lite class exists.
-		if ( \class_exists( __NAMESPACE__ . '\\' . $class_name ) ) {
+		if ( class_exists( __NAMESPACE__ . '\\' . $class_name ) ) {
 			$class_name = __NAMESPACE__ . '\\' . $class_name;
+
 			new $class_name();
 		}
 	}

@@ -8,7 +8,7 @@ use Beehive\Psr\Http\Message\StreamInterface;
  *
  * @var $stream
  */
-class Stream implements \Beehive\Psr\Http\Message\StreamInterface
+class Stream implements StreamInterface
 {
     /**
      * Resource modes.
@@ -67,8 +67,10 @@ class Stream implements \Beehive\Psr\Http\Message\StreamInterface
     public function __toString()
     {
         try {
-            $this->seek(0);
-            return (string) \stream_get_contents($this->stream);
+            if ($this->isSeekable()) {
+                $this->seek(0);
+            }
+            return $this->getContents();
         } catch (\Exception $e) {
             return '';
         }

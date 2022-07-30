@@ -44,8 +44,12 @@ class Shipper_Model_Stored_Destinations extends Shipper_Model_Stored {
 	 * @return bool
 	 */
 	public function is_valid_destination( $dest = array() ) {
-		if ( empty( $dest['domain'] ) ) { return false; }
-		if ( empty( $dest['site_id'] ) || ! is_numeric( $dest['site_id'] ) ) { return false; }
+		if ( empty( $dest['domain'] ) ) {
+			return false;
+		}
+		if ( empty( $dest['site_id'] ) || ! is_numeric( $dest['site_id'] ) ) {
+			return false;
+		}
 
 		return true;
 	}
@@ -58,12 +62,18 @@ class Shipper_Model_Stored_Destinations extends Shipper_Model_Stored {
 	 * @return array Destination hash
 	 */
 	public function get_by_site_id( $site_id ) {
-		if ( ! is_numeric( $site_id ) ) { return array(); }
+		if ( ! is_numeric( $site_id ) ) {
+			return array();
+		}
 
 		$domains = $this->get_data();
 		foreach ( $domains as $domain ) {
-			if ( empty( $domain['site_id'] ) ) { continue; }
-			if ( (int) $domain['site_id'] === (int) $site_id ) { return $domain; }
+			if ( empty( $domain['site_id'] ) ) {
+				continue;
+			}
+			if ( (int) $domain['site_id'] === (int) $site_id ) {
+				return $domain;
+			}
 		}
 
 		return array();
@@ -77,14 +87,20 @@ class Shipper_Model_Stored_Destinations extends Shipper_Model_Stored {
 	 * @return array Destination hash
 	 */
 	public function get_by_domain( $source ) {
-		if ( ! is_string( $source ) ) { return array(); }
+		if ( ! is_string( $source ) ) {
+			return array();
+		}
 
 		$source = self::get_normalized_domain( $source );
 
 		$domains = $this->get_data();
 		foreach ( $domains as $domain ) {
-			if ( empty( $domain['domain'] ) ) { continue; }
-			if ( $domain['domain'] === $source ) { return $domain; }
+			if ( empty( $domain['domain'] ) ) {
+				continue;
+			}
+			if ( $domain['domain'] === $source ) {
+				return $domain;
+			}
 		}
 
 		return array();
@@ -123,17 +139,21 @@ class Shipper_Model_Stored_Destinations extends Shipper_Model_Stored {
 		$domains = $this->get_data();
 		$current = self::get_current_domain();
 		foreach ( $domains as $domain ) {
-			if ( empty( $domain['domain'] ) ) { continue; }
-			if ( $current !== $domain['domain'] ) { continue; }
+			if ( empty( $domain['domain'] ) ) {
+				continue;
+			}
+			if ( $current !== $domain['domain'] ) {
+				continue;
+			}
 
 			return $domain;
 		}
 
 		return array(
-			'domain' => $current,
-			'home_url' => self::get_normalized_domain( home_url() ),
+			'domain'    => $current,
+			'home_url'  => self::get_normalized_domain( home_url() ),
 			'admin_url' => network_admin_url(),
-			'site_id' => null,
+			'site_id'   => null,
 		);
 	}
 
@@ -154,7 +174,6 @@ class Shipper_Model_Stored_Destinations extends Shipper_Model_Stored {
 	 * @return string
 	 */
 	public static function get_normalized_domain( $url ) {
-		$resolved = untrailingslashit( shipper_get_protocol_agnostic( $url, true ) );
-		return $resolved;
+		return untrailingslashit( shipper_get_protocol_agnostic( $url, true ) );
 	}
 }

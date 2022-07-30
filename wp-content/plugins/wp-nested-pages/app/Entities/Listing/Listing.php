@@ -122,6 +122,12 @@ class Listing
 	private $sticky_posts;
 
 	/**
+	* User status preference
+	* @var array
+	*/
+	private $status_preference;
+
+	/**
 	* Enabled Custom Fields
 	*/
 	private $enabled_custom_fields;
@@ -143,6 +149,7 @@ class Listing
 		$this->setTaxonomies();
 		$this->setPostTypeSettings();
 		$this->setStandardFields();
+		$this->setStatusPreference();
 	}
 
 	/**
@@ -163,7 +170,7 @@ class Listing
 	private function pageURL()
 	{
 		$base = ( $this->post_type->name == 'post' ) ? admin_url('edit.php') : admin_url('admin.php');
-		return $base . '?page=' . $_GET['page'];
+		return $base . '?page=' . sanitize_text_field($_GET['page']);
 	}
 
 	/**
@@ -225,8 +232,8 @@ class Listing
 		$out = '';
 		$post_states = [];
 		if ( !$assigned_pt ) {
-			if ( $this->post->id == get_option('page_on_front') ) $post_states['page_on_front'] = __('Front Page', 'wp-nested-pages');
-			if ( $this->post->id == get_option('page_for_posts') ) $post_states['page_for_posts'] = __('Posts Page', 'wp-nested-pages');
+			if ( $this->post->id == get_option('page_on_front') ) $post_states['page_on_front'] = '&ndash; ' . __('Front Page', 'wp-nested-pages');
+			if ( $this->post->id == get_option('page_for_posts') ) $post_states['page_for_posts'] = '&ndash; ' . __('Posts Page', 'wp-nested-pages');
 		}
 		$post_states = apply_filters('display_post_states', $post_states, $this->post);
 		if ( empty($post_states) ) return $out;
@@ -234,8 +241,8 @@ class Listing
 		$i = 0;
 		foreach ( $post_states as $state ) {
 			++$i;
-			( $i == $state_count ) ? $sep = '' : $sep = ', ';
-			$out .= " <em class='np-page-type'><strong>&ndash; $state</strong>$sep</em>";
+			( $i == $state_count ) ? $sep = '' : $sep = ',';
+			$out .= " <em class='np-page-type'><strong>$state</strong>$sep</em>";
 		}
 		return $out;
 	}
@@ -283,6 +290,14 @@ class Listing
 	}
 
 	/**
+	* Set the user status preference
+	*/
+	private function setStatusPreference()
+	{
+		$this->status_preference = $this->user->getStatusPreference($this->post_type->name);
+	}
+
+	/**
 	* Opening list tag <ol>
 	* @param array $pages - array of page objects from current query
 	* @param int $count - current count in loop
@@ -302,7 +317,7 @@ class Listing
 		$compared = array_intersect($this->listing_repo->visiblePages($this->post_type->name), $children);
 
 		$list_classes = 'sortable visible nplist';
-		if ( !$this->user->canSortPages() || !$sortable || $this->listing_repo->isSearch() ) $list_classes .= ' no-sort';
+		if ( !$this->user->canSortPosts($this->post_type->name) || !$sortable || $this->listing_repo->isSearch() ) $list_classes .= ' no-sort';
 		if ( $this->listing_repo->isOrdered($this->post_type->name) ) $list_classes .= ' no-sort';
 		if ( $this->integrations->plugins->wpml->installed && $this->integrations->plugins->wpml->getCurrentLanguage() == 'all' ) $list_classes .= ' no-sort';
 		if ( $this->integrations->plugins->yoast->installed ) $list_classes .= ' has-yoast';
@@ -364,7 +379,12 @@ class Listing
 		$wpml_current_language = null;
 		if ( $wpml ) $wpml_current_language = $this->integrations->plugins->wpml->getCurrentLanguage();
 
-		if ( !$this->listing_repo->isSearch() ){
+		if ( $this->listing_repo->isFiltered() ){
+			$parent_status = null;
+			$pages = $this->all_posts;
+			$level++;
+			echo '<ol class="sortable nplist visible filtered">';
+		} elseif ( !$this->listing_repo->isSearch() ) {
 			$pages = get_page_children($parent, $this->all_posts);
 			if ( !$pages ) return;
 			$parent_status = get_post_status($parent);
@@ -379,7 +399,7 @@ class Listing
 		
 		foreach($pages as $page) :
 
-			if ( $page->post_parent !== $parent && !$this->listing_repo->isSearch() ) continue;
+			if ( $page->post_parent !== $parent && !$this->listing_repo->isSearch() && !$this->listing_repo->isFiltered() ) continue;
 			$count++;
 
 			global $post;
@@ -388,25 +408,28 @@ class Listing
 
 			if ( $this->post->status !== 'trash' ) :
 
-				echo '<li id="menuItem_' . esc_attr($this->post->id) . '" class="page-row';
-
+				$row_parent_classes = 'page-row';
 				// Post Type
-				echo ' post-type-' . esc_attr($this->post->post_type);
+				$row_parent_classes .= ' post-type-' . esc_attr($this->post->post_type);
 
-				// Assigned to manage a post type?
-				if ( $this->listing_repo->isAssignedPostType($this->post->id, $this->assigned_pt_pages) ) echo ' is-page-assignment';
+				// Managed Post Type page?
+				if ( $this->listing_repo->isAssignedPostType($this->post->id, $this->assigned_pt_pages) ) $row_parent_classes .= ' is-page-assignment';
 
 				// Published?
-				if ( $this->post->status == 'publish' ) echo ' published';
-				if ( $this->post->status == 'draft' ) echo ' draft';
-				
+				if ( $this->post->status == 'publish' ) $row_parent_classes .= ' published';
+				if ( $this->post->status == 'draft' ) $row_parent_classes .=  ' draft';
+
 				// Hidden in Nested Pages?
-				if ( $this->post->np_status == 'hide' ) echo ' np-hide';
+				if ( $this->post->np_status == 'hide' ) $row_parent_classes .= ' np-hide';
+
+				// User Status Preference
+				if ( $this->status_preference == 'published' && $this->post->status == 'draft' ) $row_parent_classes .= ' np-hide';
+				if ( $this->status_preference == 'draft' && $this->post->status !== 'draft' ) $row_parent_classes .= ' np-hide';
 
 				// Taxonomies
-				echo ' ' . $this->post_repo->getTaxonomyCSS($this->post, $this->h_taxonomies, $this->f_taxonomies);
-				
-				echo '">';
+				$row_parent_classes .= ' ' . $this->post_repo->getTaxonomyCSS($this->post, $this->h_taxonomies, $this->f_taxonomies);
+
+				echo '<li id="menuItem_' . esc_attr($this->post->id) . '" class="' . apply_filters('nestedpages_row_parent_css_classes', $row_parent_classes, $this->post, $this->post_type) . '">';
 				
 				$count++;
 
@@ -414,19 +437,19 @@ class Listing
 
 				// CSS Classes for the <li> row element
 				$template = ( $this->post->template )
-					? ' tpl-' .  str_replace('.php', '', $this->post->template)
+					? ' tpl-' .  sanitize_html_class( str_replace('.php', '', $this->post->template ) )
 					: '';
 
 				$row_classes = '';
 				if ( !$this->post_type->hierarchical ) $row_classes .= ' non-hierarchical';
-				if ( !$this->user->canSortPages() ) $row_classes .= ' no-sort';
+				if ( !$this->user->canSortPosts($this->post_type->name) ) $row_classes .= ' no-sort';
 				if ( $wpml_current_language == 'all' ) $row_classes .= ' no-sort';
 				if ( $this->listing_repo->isSearch() || $this->listing_repo->isOrdered($this->post_type->name) ) $row_classes .= ' search';
 				if ( $this->post->template ) $row_classes .= $template;
 
 				// Filter sortable per post
 				$filtered_sortable = apply_filters('nestedpages_post_sortable', true, $this->post, $this->post_type);
-				if ( !$filtered_sortable && $this->user->canSortPages() && $this->post_type->hierarchical && !$wpml_current_language ) $row_classes .= ' no-sort-filtered';
+				if ( !$filtered_sortable && $this->user->canSortPosts($this->post_type->name) && $this->post_type->hierarchical && !$wpml_current_language ) $row_classes .= ' no-sort-filtered';
 
 				// Page Assignment for Post Type
 				$assigned_pt = ( $this->listing_repo->isAssignedPostType($this->post->id, $this->assigned_pt_pages) ) 
@@ -437,11 +460,11 @@ class Listing
 
 			endif; // trash status
 			
-			if ( !$this->listing_repo->isSearch() ) $this->listPostLevel($page->ID, $count, $level);
+			if ( !$this->listing_repo->isSearch() && !$this->listing_repo->isFiltered() ) $this->listPostLevel($page->ID, $count, $level);
 
 			if ( $this->post->status !== 'trash' ) echo '</li>';
 
-			if ( $this->publishedChildrenCount($this->post) > 0 && !$this->listing_repo->isSearch() && $continue_nest ) echo '</ol>';
+			if ( $this->publishedChildrenCount($this->post) > 0 && !$this->listing_repo->isSearch() && !$this->listing_repo->isFiltered() ) echo '</ol>';
 
 		endforeach; // Loop
 			

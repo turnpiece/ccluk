@@ -21,7 +21,7 @@ function wpforms_admin_styles() {
 	// jQuery confirm.
 	wp_enqueue_style(
 		'jquery-confirm',
-		WPFORMS_PLUGIN_URL . 'assets/css/jquery-confirm.min.css',
+		WPFORMS_PLUGIN_URL . 'assets/lib/jquery.confirm/jquery-confirm.min.css',
 		array(),
 		'3.3.2'
 	);
@@ -29,7 +29,7 @@ function wpforms_admin_styles() {
 	// Minicolors (color picker).
 	wp_enqueue_style(
 		'minicolors',
-		WPFORMS_PLUGIN_URL . 'assets/css/jquery.minicolors.css',
+		WPFORMS_PLUGIN_URL . 'assets/lib/jquery.minicolors/jquery.minicolors.min.css',
 		array(),
 		'2.2.6'
 	);
@@ -37,7 +37,7 @@ function wpforms_admin_styles() {
 	// FontAwesome.
 	wp_enqueue_style(
 		'wpforms-font-awesome',
-		WPFORMS_PLUGIN_URL . 'assets/css/font-awesome.min.css',
+		WPFORMS_PLUGIN_URL . 'assets/lib/font-awesome/font-awesome.min.css',
 		null,
 		'4.7.0'
 	);
@@ -49,8 +49,20 @@ function wpforms_admin_styles() {
 		array(),
 		WPFORMS_VERSION
 	);
-}
 
+	// Remove TinyMCE editor styles from third-party themes and plugins.
+	remove_editor_styles();
+
+	// WordPress 5.7 color set.
+	if ( version_compare( get_bloginfo( 'version' ), '5.7', '>=' ) ) {
+		wp_enqueue_style(
+			'wpforms-admin-wp5.7-color',
+			WPFORMS_PLUGIN_URL . "assets/css/admin-wp5.7-colors{$min}.css",
+			[ 'wpforms-admin' ],
+			WPFORMS_VERSION
+		);
+	}
+}
 add_action( 'admin_enqueue_scripts', 'wpforms_admin_styles' );
 
 /**
@@ -71,8 +83,8 @@ function wpforms_admin_scripts() {
 	// jQuery confirm.
 	wp_enqueue_script(
 		'jquery-confirm',
-		WPFORMS_PLUGIN_URL . 'assets/js/jquery.jquery-confirm.min.js',
-		array( 'jquery' ),
+		WPFORMS_PLUGIN_URL . 'assets/lib/jquery.confirm/jquery-confirm.min.js',
+		[ 'jquery' ],
 		'3.3.2',
 		false
 	);
@@ -80,8 +92,8 @@ function wpforms_admin_scripts() {
 	// Minicolors (color picker).
 	wp_enqueue_script(
 		'minicolors',
-		WPFORMS_PLUGIN_URL . 'assets/js/jquery.minicolors.min.js',
-		array( 'jquery' ),
+		WPFORMS_PLUGIN_URL . 'assets/lib/jquery.minicolors/jquery.minicolors.min.js',
+		[ 'jquery' ],
 		'2.2.6',
 		false
 	);
@@ -89,8 +101,8 @@ function wpforms_admin_scripts() {
 	// Choices.js.
 	wp_enqueue_script(
 		'choicesjs',
-		WPFORMS_PLUGIN_URL . 'assets/js/choices.min.js',
-		array(),
+		WPFORMS_PLUGIN_URL . 'assets/lib/choices.min.js',
+		[],
 		'9.0.1',
 		false
 	);
@@ -98,8 +110,8 @@ function wpforms_admin_scripts() {
 	// jQuery Conditionals.
 	wp_enqueue_script(
 		'jquery-conditionals',
-		WPFORMS_PLUGIN_URL . 'assets/js/jquery.conditionals.min.js',
-		array( 'jquery' ),
+		WPFORMS_PLUGIN_URL . 'assets/lib/jquery.conditionals.min.js',
+		[ 'jquery' ],
 		'1.0.1',
 		false
 	);
@@ -108,26 +120,48 @@ function wpforms_admin_scripts() {
 	wp_enqueue_script(
 		'wpforms-admin',
 		WPFORMS_PLUGIN_URL . "assets/js/admin{$min}.js",
-		array( 'jquery' ),
+		[ 'jquery' ],
 		WPFORMS_VERSION,
 		false
 	);
 
-	$strings = array(
+	$default_choicesjs_loading_text     = esc_html__( 'Loading...', 'wpforms-lite' );
+	$default_choicesjs_no_results_text  = esc_html__( 'No results found', 'wpforms-lite' );
+	$default_choicesjs_no_choices_text  = esc_html__( 'No choices to choose from', 'wpforms-lite' );
+	$default_choicesjs_item_select_text = esc_html__( 'Press to select', 'wpforms-lite' );
+
+	$strings = [
 		'addon_activate'                  => esc_html__( 'Activate', 'wpforms-lite' ),
 		'addon_activated'                 => esc_html__( 'Activated', 'wpforms-lite' ),
 		'addon_active'                    => esc_html__( 'Active', 'wpforms-lite' ),
 		'addon_deactivate'                => esc_html__( 'Deactivate', 'wpforms-lite' ),
 		'addon_inactive'                  => esc_html__( 'Inactive', 'wpforms-lite' ),
 		'addon_install'                   => esc_html__( 'Install Addon', 'wpforms-lite' ),
-		'addon_error'                     => esc_html__( 'Could not install addon. Please download from wpforms.com and install manually.', 'wpforms-lite' ),
-		'plugin_error'                    => esc_html__( 'Could not install a plugin. Please download from WordPress.org and install manually.', 'wpforms-lite' ),
+		'addon_error'                     => sprintf(
+			wp_kses( /* translators: %1$s - An addon download URL, %2$s - Link to manual installation guide. */
+				__( 'Could not install the addon. Please <a href="%1$s" target="_blank" rel="noopener noreferrer">download it from wpforms.com</a> and <a href="%2$s" target="_blank" rel="noopener noreferrer">install it manually</a>.', 'wpforms-lite' ),
+				[
+					'a' => [
+						'href'   => true,
+						'target' => true,
+						'rel'    => true,
+					],
+				]
+			),
+			'https://wpforms.com/account/licenses/',
+			'https://wpforms.com/docs/how-to-manually-install-addons-in-wpforms/'
+		),
+		'plugin_error'                    => esc_html__( 'Could not install the plugin automatically. Please download and install it manually.', 'wpforms-lite' ),
 		'addon_search'                    => esc_html__( 'Searching Addons', 'wpforms-lite' ),
 		'ajax_url'                        => admin_url( 'admin-ajax.php' ),
 		'cancel'                          => esc_html__( 'Cancel', 'wpforms-lite' ),
 		'close'                           => esc_html__( 'Close', 'wpforms-lite' ),
-		'entry_delete_confirm'            => esc_html__( 'Are you sure you want to delete this entry?', 'wpforms-lite' ),
-		'entry_delete_all_confirm'        => esc_html__( 'Are you sure you want to delete ALL entries?', 'wpforms-lite' ),
+		'entry_delete_confirm'            => esc_html__( 'Are you sure you want to delete this entry and all its information (files, notes, logs, etc.)?', 'wpforms-lite' ),
+		'entry_delete_all_confirm'        => esc_html__( 'Are you sure you want to delete ALL entries and all their information (files, notes, logs, etc.)?', 'wpforms-lite' ),
+		'entry_delete_n_confirm'          => sprintf( /* translators: %s - entry count. */
+			esc_html__( 'Are you sure you want to delete %s entry(s) and all the information (files, notes, logs, etc.)?', 'wpforms-lite' ),
+			'{entry_count}'
+		),
 		'entry_empty_fields_hide'         => esc_html__( 'Hide Empty Fields', 'wpforms-lite' ),
 		'entry_empty_fields_show'         => esc_html__( 'Show Empty Fields', 'wpforms-lite' ),
 		'entry_field_columns'             => esc_html__( 'Entries Field Columns', 'wpforms-lite' ),
@@ -136,11 +170,13 @@ function wpforms_admin_scripts() {
 		'entry_star'                      => esc_html__( 'Star entry', 'wpforms-lite' ),
 		'entry_read'                      => esc_html__( 'Mark entry read', 'wpforms-lite' ),
 		'entry_unread'                    => esc_html__( 'Mark entry unread', 'wpforms-lite' ),
-		'form_delete_confirm'             => esc_html__( 'Are you sure you want to delete this form?', 'wpforms-lite' ),
+		'form_delete_confirm'             => esc_html__( 'Are you sure you want to delete this form and all its entries?', 'wpforms-lite' ),
+		'form_delete_n_confirm'           => esc_html__( 'Are you sure you want to delete the selected forms and all their entries?', 'wpforms-lite' ),
+		'form_delete_all_confirm'         => esc_html__( 'Are you sure you want to delete ALL the forms in the trash and all their entries?', 'wpforms-lite' ),
 		'form_duplicate_confirm'          => esc_html__( 'Are you sure you want to duplicate this form?', 'wpforms-lite' ),
 		'heads_up'                        => esc_html__( 'Heads up!', 'wpforms-lite' ),
 		'importer_forms_required'         => esc_html__( 'Please select at least one form to import.', 'wpforms-lite' ),
-		'isPro'                           => wpforms()->pro,
+		'isPro'                           => wpforms()->is_pro(),
 		'nonce'                           => wp_create_nonce( 'wpforms-admin' ),
 		'almost_done'                     => esc_html__( 'Almost Done', 'wpforms-lite' ),
 		'oops'                            => esc_html__( 'Oops!', 'wpforms-lite' ),
@@ -150,36 +186,36 @@ function wpforms_admin_scripts() {
 		'plugin_activate_btn'             => esc_html__( 'Activate', 'wpforms-lite' ),
 		'plugin_activate_confirm'         => esc_html__( 'needs to be activated to import its forms. Would you like us to activate it for you?', 'wpforms-lite' ),
 		'provider_delete_confirm'         => esc_html__( 'Are you sure you want to disconnect this account?', 'wpforms-lite' ),
+		'provider_delete_error'           => esc_html__( 'Could not disconnect this account.', 'wpforms-lite' ),
 		'provider_auth_error'             => esc_html__( 'Could not authenticate with the provider.', 'wpforms-lite' ),
+		'connecting'                      => esc_html__( 'Connecting...', 'wpforms-lite' ),
 		'save_refresh'                    => esc_html__( 'Save and Refresh', 'wpforms-lite' ),
-		'server_error'                    => esc_html__( 'Unfortunately, there was an server connection error.', 'wpforms-lite' ),
+		'server_error'                    => esc_html__( 'Unfortunately there was a server connection error.', 'wpforms-lite' ),
 		'settings_form_style_base'        => sprintf(
-			wp_kses(
-				/* translators: %s - WPForms.com docs page URL. */
+			wp_kses( /* translators: %s - WPForms.com docs page URL. */
 				__( 'You\'ve selected <strong>Base Styling Only</strong>, which may result in styling issues. <a href="%s" target="_blank" rel="noopener noreferrer">Please check out our tutorial</a> for common issues and recommendations.', 'wpforms-lite' ),
-				array(
-					'strong' => array(),
-					'a'      => array(
-						'href'   => array(),
-						'target' => array(),
-						'rel'    => array(),
-					),
-				)
+				[
+					'strong' => [],
+					'a'      => [
+						'href'   => [],
+						'target' => [],
+						'rel'    => [],
+					],
+				]
 			),
 			'https://wpforms.com/docs/how-to-choose-an-include-form-styling-setting/'
 		),
 		'settings_form_style_none'        => sprintf(
-			wp_kses(
-				/* translators: %s - WPForms.com docs page URL. */
+			wp_kses( /* translators: %s - WPForms.com docs page URL. */
 				__( 'You\'ve selected <strong>No Styling</strong>, which will likely result in significant styling issues and is recommended only for developers. <a href="%s" target="_blank" rel="noopener noreferrer">Please check out our tutorial</a> for more details and recommendations.', 'wpforms-lite' ),
-				array(
-					'strong' => array(),
-					'a'      => array(
-						'href'   => array(),
-						'target' => array(),
-						'rel'    => array(),
-					),
-				)
+				[
+					'strong' => [],
+					'a'      => [
+						'href'   => [],
+						'target' => [],
+						'rel'    => [],
+					],
+				]
 			),
 			'https://wpforms.com/docs/how-to-choose-an-include-form-styling-setting/'
 		),
@@ -188,13 +224,50 @@ function wpforms_admin_scripts() {
 		'upload_image_title'              => esc_html__( 'Upload or Choose Your Image', 'wpforms-lite' ),
 		'upload_image_button'             => esc_html__( 'Use Image', 'wpforms-lite' ),
 		'upgrade_modal'                   => wpforms_get_upgrade_modal_text(),
-		'choicesjs_fields_select'         => esc_html__( 'Select fields', 'wpforms-lite' ),
-		'choicesjs_loading'               => esc_html__( 'Loading...', 'wpforms-lite' ),
-		'choicesjs_no_results'            => esc_html__( 'No results found', 'wpforms-lite' ),
-		'choicesjs_no_choices'            => esc_html__( 'No choices to choose from', 'wpforms-lite' ),
-		'choicesjs_item_select'           => esc_html__( 'Press to select', 'wpforms-lite' ),
+		'choicesjs_loading'               => $default_choicesjs_loading_text,
+		'choicesjs_no_results'            => $default_choicesjs_no_results_text,
+		'choicesjs_no_choices'            => $default_choicesjs_no_choices_text,
+		'choicesjs_item_select'           => $default_choicesjs_item_select_text,
+		'debug'                           => wpforms_debug(),
+		'edit_license'                    => esc_html__( 'To edit the License Key, please first click the Deactivate Key button. Please note that deactivating this key will remove access to updates, addons, and support.', 'wpforms-lite' ),
+		'something_went_wrong'            => esc_html__( 'Something went wrong', 'wpforms-lite' ),
+		'success'                         => esc_html__( 'Success', 'wpforms-lite' ),
+	];
+
+	/**
+	 * Allow theme/plugin developers to adjust main strings on backend/admin part.
+	 *
+	 * @since 1.3.9
+	 *
+	 * @param array $strings Main admin localized strings.
+	 */
+	$strings = (array) apply_filters( 'wpforms_admin_strings', $strings );
+
+	/**
+	 * Allow theme/plugin developers to adjust Choices.js settings on backend/admin part.
+	 *
+	 * @see https://github.com/Choices-js/Choices#setup For configuration options.
+	 *
+	 * @since 1.7.3
+	 *
+	 * @param array $choicesjs_config Choicesjs configuration.
+	 */
+	$choicesjs_config = (array) apply_filters(
+		'wpforms_admin_scripts_choicesjs_config',
+		[
+			'searchEnabled'  => false,
+			'loadingText'    => ! empty( $strings['choicesjs_loading'] ) ? $strings['choicesjs_loading'] : $default_choicesjs_loading_text,
+			'noResultsText'  => ! empty( $strings['choicesjs_no_results'] ) ? $strings['choicesjs_no_results'] : $default_choicesjs_no_results_text,
+			'noChoicesText'  => ! empty( $strings['choicesjs_no_choices'] ) ? $strings['choicesjs_no_choices'] : $default_choicesjs_no_choices_text,
+			'itemSelectText' => ! empty( $strings['choicesjs_item_select'] ) ? $strings['choicesjs_item_select'] : $default_choicesjs_item_select_text,
+		]
 	);
-	$strings = apply_filters( 'wpforms_admin_strings', $strings );
+
+	wp_localize_script(
+		'wpforms-admin',
+		'wpforms_admin_choicesjs_config',
+		$choicesjs_config
+	);
 
 	wp_localize_script(
 		'wpforms-admin',
@@ -226,7 +299,7 @@ function wpforms_admin_body_class( $classes ) {
 add_filter( 'admin_body_class', 'wpforms_admin_body_class', 10, 1 );
 
 /**
- * Outputs the WPForms admin header.
+ * Output the WPForms admin header.
  *
  * @since 1.3.9
  */
@@ -262,50 +335,70 @@ add_action( 'in_admin_header', 'wpforms_admin_header', 100 );
  * Remove non-WPForms notices from WPForms pages.
  *
  * @since 1.3.9
+ * @since 1.6.9 Added callback for removing on `admin_footer` hook.
  */
-function wpforms_admin_hide_unrelated_notices() {
+function wpforms_admin_hide_unrelated_notices() { // phpcs:ignore Generic.Metrics.CyclomaticComplexity.MaxExceeded, Generic.Metrics.NestingLevel.MaxExceeded
 
-	// Bail if we're not on a WPForms screen or page.
-	if ( empty( $_REQUEST['page'] ) || strpos( $_REQUEST['page'], 'wpforms' ) === false ) {
+	if ( ! wpforms_is_admin_page() ) {
 		return;
 	}
 
-	// Extra banned classes and callbacks from third-party plugins.
-	$blacklist = array(
-		'classes'   => array(),
-		'callbacks' => array(
-			'wpformsdb_admin_notice', // 'Database for WPforms' plugin.
-		),
-	);
-
 	global $wp_filter;
 
-	foreach ( array( 'user_admin_notices', 'admin_notices', 'all_admin_notices' ) as $notices_type ) {
-		if ( empty( $wp_filter[ $notices_type ]->callbacks ) || ! is_array( $wp_filter[ $notices_type ]->callbacks ) ) {
+	// Define rules to remove callbacks.
+	$rules = [
+		'user_admin_notices' => [], // remove all callbacks.
+		'admin_notices'      => [],
+		'all_admin_notices'  => [],
+		'admin_footer'       => [
+			'render_delayed_admin_notices', // remove this particular callback.
+		],
+	];
+
+	// Extra deny callbacks (will be removed for each hook tag defined in $rules).
+	$common_deny_callbacks = [
+		'wpformsdb_admin_notice', // 'Database for WPForms' plugin.
+	];
+
+	$notice_types = array_keys( $rules );
+
+	foreach ( $notice_types as $notice_type ) {
+		if ( empty( $wp_filter[ $notice_type ]->callbacks ) || ! is_array( $wp_filter[ $notice_type ]->callbacks ) ) {
 			continue;
 		}
-		foreach ( $wp_filter[ $notices_type ]->callbacks as $priority => $hooks ) {
+
+		$remove_all_filters = empty( $rules[ $notice_type ] );
+
+		foreach ( $wp_filter[ $notice_type ]->callbacks as $priority => $hooks ) {
 			foreach ( $hooks as $name => $arr ) {
-				if ( is_object( $arr['function'] ) && $arr['function'] instanceof Closure ) {
-					unset( $wp_filter[ $notices_type ]->callbacks[ $priority ][ $name ] );
+				if ( is_object( $arr['function'] ) && is_callable( $arr['function'] ) ) {
+					if ( $remove_all_filters ) {
+						unset( $wp_filter[ $notice_type ]->callbacks[ $priority ][ $name ] );
+					}
 					continue;
 				}
+
 				$class = ! empty( $arr['function'][0] ) && is_object( $arr['function'][0] ) ? strtolower( get_class( $arr['function'][0] ) ) : '';
-				if (
-					! empty( $class ) &&
-					strpos( $class, 'wpforms' ) !== false &&
-					! in_array( $class, $blacklist['classes'], true )
-				) {
+
+				// Remove all callbacks except WPForms notices.
+				if ( $remove_all_filters && strpos( $class, 'wpforms' ) === false ) {
+					unset( $wp_filter[ $notice_type ]->callbacks[ $priority ][ $name ] );
 					continue;
 				}
-				if (
-					! empty( $name ) && (
-						strpos( $name, 'wpforms' ) === false ||
-						in_array( $class, $blacklist['classes'], true ) ||
-						in_array( $name, $blacklist['callbacks'], true )
-					)
-				) {
-					unset( $wp_filter[ $notices_type ]->callbacks[ $priority ][ $name ] );
+
+				$cb = is_array( $arr['function'] ) ? $arr['function'][1] : $arr['function'];
+
+				// Remove a specific callback.
+				if ( ! $remove_all_filters ) {
+					if ( in_array( $cb, $rules[ $notice_type ], true ) ) {
+						unset( $wp_filter[ $notice_type ]->callbacks[ $priority ][ $name ] );
+					}
+					continue;
+				}
+
+				// Remove non-WPForms callbacks from `$common_deny_callbacks` denylist.
+				if ( in_array( $cb, $common_deny_callbacks, true ) ) {
+					unset( $wp_filter[ $notice_type ]->callbacks[ $priority ][ $name ] );
 				}
 			}
 		}
@@ -321,22 +414,37 @@ add_action( 'admin_print_scripts', 'wpforms_admin_hide_unrelated_notices' );
  *
  * @since 1.3.9
  *
- * @param string $medium  utm_medium URL parameter.
- * @param string $content utm_content URL parameter.
+ * @param string $medium  URL parameter: utm_medium.
+ * @param string $content URL parameter: utm_content.
  *
- * @return string.
+ * @return string
  */
 function wpforms_admin_upgrade_link( $medium = 'link', $content = '' ) {
 
-	$upgrade = add_query_arg(
-		array(
-			'discount'     => 'LITEUPGRADE',
-			'utm_source'   => 'WordPress',
-			'utm_campaign' => 'liteplugin',
-			'utm_medium'   => apply_filters( 'wpforms_upgrade_link_medium', $medium ),
-		),
-		'https://wpforms.com/lite-upgrade/'
-	);
+	$medium      = apply_filters( 'wpforms_upgrade_link_medium', $medium );
+	$license_key = wpforms_get_license_key();
+
+	if ( wpforms()->is_pro() ) {
+		$upgrade = add_query_arg(
+			[
+				'utm_source'   => 'WordPress',
+				'utm_campaign' => 'plugin',
+				'utm_medium'   => $medium,
+				'license_key'  => sanitize_text_field( $license_key ),
+			],
+			'https://wpforms.com/pricing/'
+		);
+	} else {
+		$upgrade = add_query_arg(
+			[
+				'discount'     => 'LITEUPGRADE',
+				'utm_source'   => 'WordPress',
+				'utm_campaign' => 'liteplugin',
+				'utm_medium'   => $medium,
+			],
+			'https://wpforms.com/lite-upgrade/'
+		);
+	}
 
 	if ( ! empty( $content ) ) {
 		$upgrade = add_query_arg( 'utm_content', $content, $upgrade );
@@ -353,7 +461,7 @@ function wpforms_admin_upgrade_link( $medium = 'link', $content = '' ) {
  */
 function wpforms_check_php_version() {
 
-	// Display for PHP below 5.6
+	// Display for PHP below 5.6.
 	if ( version_compare( PHP_VERSION, '5.5', '>=' ) ) {
 		return;
 	}
@@ -369,19 +477,18 @@ function wpforms_check_php_version() {
 	}
 
 	// Display the notice, finally.
-	WPForms_Admin_Notice::error(
+	\WPForms\Admin\Notice::error(
 		'<p>' .
 		sprintf(
-			wp_kses(
-				/* translators: %1$s - WPForms plugin name; %2$s - WPForms.com URL to a related doc. */
+			wp_kses( /* translators: %1$s - WPForms plugin name; %2$s - WPForms.com URL to a related doc. */
 				__( 'Your site is running an outdated version of PHP that is no longer supported and may cause issues with %1$s. <a href="%2$s" target="_blank" rel="noopener noreferrer">Read more</a> for additional information.', 'wpforms-lite' ),
-				array(
-					'a' => array(
-						'href'   => array(),
-						'target' => array(),
-						'rel'    => array(),
-					),
-				)
+				[
+					'a' => [
+						'href'   => [],
+						'target' => [],
+						'rel'    => [],
+					],
+				]
 			),
 			'<strong>WPForms</strong>',
 			'https://wpforms.com/docs/supported-php-version/'
@@ -389,10 +496,10 @@ function wpforms_check_php_version() {
 		'<br><br><em>' .
 		wp_kses(
 			__( '<strong>Please Note:</strong> Support for PHP 5.5 will be discontinued in 2020. After this, if no further action is taken, WPForms functionality will be disabled.', 'wpforms-lite' ),
-			array(
-				'strong' => array(),
-				'em'     => array(),
-			)
+			[
+				'strong' => [],
+				'em'     => [],
+			]
 		) .
 		'</em></p>'
 	);
@@ -414,28 +521,70 @@ function wpforms_get_upgrade_modal_text( $type = 'pro' ) {
 		case 'elite':
 			$level = 'WPForms Elite';
 			break;
+
 		case 'pro':
 		default:
 			$level = 'WPForms Pro';
 	}
 
-	return
-		'<p>' .
+	if ( wpforms()->is_pro() ) {
+		return '<p>' .
+			sprintf(
+				wp_kses( /* translators: %s - WPForms.com contact page URL. */
+					__( 'Thank you for considering upgrading. If you have any questions, please <a href="%s" target="_blank" rel="noopener noreferrer">let us know</a>.', 'wpforms-lite' ),
+					[
+						'a' => [
+							'href'   => [],
+							'target' => [],
+							'rel'    => [],
+						],
+					]
+				),
+				'https://wpforms.com/contact/'
+			) .
+			'</p>' .
+			'<p>' .
+			wp_kses(
+				__( 'After upgrading, your license key will remain the same.<br>You may need to do a quick refresh to unlock your new addons. In your WordPress admin, go to <strong>WPForms >> Settings</strong>. If you don\'t see your updated plan, click <em>refresh</em>.', 'wpforms-lite' ),
+				[
+					'strong' => [],
+					'br'     => [],
+					'em'     => [],
+				]
+			) .
+			'</p>' .
+			'<p>' .
+			sprintf(
+				wp_kses( /* translators: %s - WPForms.com upgrade license docs page URL. */
+					__( 'Check out <a href="%s" target="_blank" rel="noopener noreferrer">our documentation</a> for step-by-step instructions.', 'wpforms-lite' ),
+					[
+						'a' => [
+							'href'   => [],
+							'target' => [],
+							'rel'    => [],
+						],
+					]
+				),
+				'https://wpforms.com/docs/upgrade-wpforms-license/'
+			) .
+			'</p>';
+	}
+
+	return '<p>' .
 		sprintf( /* translators: %s - license level, WPForms Pro or WPForms Elite. */
 			esc_html__( 'Thanks for your interest in %s!', 'wpforms-lite' ),
 			$level
 		) . '<br>' .
 		sprintf(
-			wp_kses(
-				/* translators: %s - WPForms.com contact page URL. */
+			wp_kses( /* translators: %s - WPForms.com contact page URL. */
 				__( 'If you have any questions or issues just <a href="%s" target="_blank" rel="noopener noreferrer">let us know</a>.', 'wpforms-lite' ),
-				array(
-					'a' => array(
-						'href'   => array(),
-						'target' => array(),
-						'rel'    => array(),
-					),
-				)
+				[
+					'a' => [
+						'href'   => [],
+						'target' => [],
+						'rel'    => [],
+					],
+				]
 			),
 			'https://wpforms.com/contact/'
 		) .
@@ -457,13 +606,13 @@ function wpforms_get_upgrade_modal_text( $type = 'pro' ) {
 		sprintf(
 			wp_kses( /* translators: %s - WPForms.com upgrade from Lite to paid docs page URL. */
 				__( 'Check out <a href="%s" target="_blank" rel="noopener noreferrer">our documentation</a> for step-by-step instructions.', 'wpforms-lite' ),
-				array(
-					'a' => array(
-						'href'   => array(),
-						'target' => array(),
-						'rel'    => array(),
-					),
-				)
+				[
+					'a' => [
+						'href'   => [],
+						'target' => [],
+						'rel'    => [],
+					],
+				]
 			),
 			'https://wpforms.com/docs/upgrade-wpforms-lite-paid-license/?utm_source=WordPress&amp;utm_medium=link&amp;utm_campaign=liteplugin'
 		) .

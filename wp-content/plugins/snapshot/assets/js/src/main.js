@@ -10,7 +10,7 @@ window.SS_PAGES = {};
 
 		// Fire page-specific init JS
 		$.each(document.body.className.replace(/-/g, '_').split(/\s+/), function (i, classnm) {
-			if ($.isFunction(SS_PAGES[classnm])) {
+			if (typeof(SS_PAGES[classnm]) === 'function') {
 				SS_PAGES[classnm]();
 			}
 		});
@@ -34,7 +34,7 @@ window.SS_PAGES = {};
 					if (!(r || {}).success) return show_key_popup((r || {}).data);
 					return window.location.reload();
 				})
-				.error(show_key_popup)
+				.fail(show_key_popup)
 				.always(function () {
 					$me.html(content);
 				})
@@ -66,7 +66,7 @@ window.SS_PAGES = {};
 					if (!(r || {}).success) return show_key_notice((r || {}).data);
 					return window.location.reload();
 				})
-				.error(show_key_notice)
+				.fail(show_key_notice)
 				.always(function () {
 					$me.html(content);
 				})
@@ -207,7 +207,67 @@ window.SS_PAGES = {};
 		$('.wpmud-box-tab-title.can-toggle').on('click',function(e){
 			e.preventDefault();
 			$(this).parents('.wpmud-box-tab').toggleClass('open');
-		})
+		});
+
+		$('.snapshot-install-v4-button').on('click', function () {
+			var form = $(this).closest('form');
+			$.ajax({
+				type: 'POST',
+				url: ajaxurl,
+				beforeSend: function () {
+					form.find('.button').prop('disabled', true);
+					form.find('.button').addClass('button-disabled');
+				},
+				complete: function () {
+					form.find('.button').prop('disabled', false);
+					form.find('.button').removeClass('button-disabled');
+				},
+				data: {
+					action: 'snapshot_admin_notice_v4_install',
+					_wpnonce: $('#_wpnonce-snapshot_admin_notice').val()
+				},
+				success: function (response) {
+					if (response.success) {
+						if (response.data.redirect_to) {
+							window.location.href = response.data.redirect_to;
+						}
+					} else {
+						if (response.data && typeof response.data === 'object') {
+							for (var key in response.data) {
+								console.error(key, response.data[key]);
+							}
+						}
+					}
+				}
+			});
+
+			return false;
+		});
+
+		$('.snapshot-upgrade-to-v4-modal-dismiss').on('click', function () {
+			$.ajax({
+				type: 'POST',
+				url: ajaxurl,
+				data: {
+					action: 'snapshot_upgrade_to_v4_modal_dismiss',
+					_wpnonce: $('#_wpnonce-snapshot_admin_notice').val()
+				}
+			});
+			$(this).closest('.wps-popup-modal').removeClass('show');
+			return false;
+		});
+
+		$('.snapshot-upgrade-to-v4-notice-dismiss').on('click', function () {
+			$.ajax({
+				type: 'POST',
+				url: ajaxurl,
+				data: {
+					action: 'snapshot_upgrade_to_v4_notice_dismiss',
+					_wpnonce: $('#_wpnonce-snapshot_admin_notice').val()
+				}
+			});
+			$('.upgrade-to-v4-notice').fadeOut('fast');
+		});
 
 	});
 

@@ -425,10 +425,10 @@ Sfb.Logs = {
 				$(".snapshot-settings.log-levels")
 					.hide()
 					.find('input[type="radio"]')
-						.attr("checked", false)
+						.prop("checked", false)
 					.end()
 					.find('input[type="radio"][value="' + dflt + '"]')
-						.attr("checked", true)
+						.prop("checked", true)
 				;
 			}
 		},

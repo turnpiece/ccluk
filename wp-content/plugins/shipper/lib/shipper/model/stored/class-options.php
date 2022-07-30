@@ -12,30 +12,27 @@
  */
 class Shipper_Model_Stored_Options extends Shipper_Model_Stored {
 
-	const KEY_SEND = 'send_email';
+	const KEY_SEND      = 'send_email';
 	const KEY_SEND_FAIL = 'failure_send';
-	const KEY_EMAILS = 'emails';
+	const KEY_EMAILS    = 'emails';
 
 	const KEY_A11N = 'use_a11n';
 
 	const KEY_SETTINGS = 'preserve_settings';
-	const KEY_DATA = 'preserve_data';
+	const KEY_DATA     = 'preserve_data';
 
-	const KEY_UPLOADS = 'use_uploads_dir';
+	const KEY_UPLOADS    = 'use_uploads_dir';
 	const KEY_SKIPCONFIG = 'skip_wp_config';
 	const KEY_SKIPEMAILS = 'skip_email_replacement';
 
-	const KEY_PER_PAGE = 'entries_per_page';
-
+	const KEY_PER_PAGE    = 'entries_per_page';
 	const KEY_USER_ACCESS = 'allow_user_ids';
 
-	const KEY_PACKAGE_LOCATION = 'package_location';
-	const KEY_PACKAGE_EXCLUDE = 'exclude_location';
-
-	const KEY_PACKAGE_DB_BINARY = 'package_db_use_binary';
-	const KEY_PACKAGE_DB_LIMIT = 'package_db_query_limit';
+	const KEY_PACKAGE_DB_BINARY  = 'package_db_use_binary';
+	const KEY_PACKAGE_DB_LIMIT   = 'package_db_query_limit';
 	const KEY_PACKAGE_ZIP_BINARY = 'package_zip_use_binary';
-	const KEY_PACKAGE_ZIP_LIMIT = 'package_zip_fs_limit';
+	const KEY_PACKAGE_ZIP_LIMIT  = 'package_zip_file_limit';
+	const KEY_PACKAGE_SAFE_MODE  = 'package_safe_mode';
 
 	/**
 	 * Constructor
@@ -80,10 +77,15 @@ class Shipper_Model_Stored_Options extends Shipper_Model_Stored {
 	 * @return bool
 	 */
 	public function add_email( $email, $name = '' ) {
-		if ( empty( $email ) || ! is_email( $email ) ) { return false; }
+		if ( empty( $email ) || ! is_email( $email ) ) {
+			return false;
+		}
 
 		$emails = $this->get_emails();
-		if ( in_array( $email, array_keys( $emails ), true ) ) { return false; }
+
+		if ( in_array( $email, array_keys( $emails ), true ) ) {
+			return false;
+		}
 
 		$emails[ $email ] = $name;
 		$this->set_emails( $emails );
@@ -101,10 +103,15 @@ class Shipper_Model_Stored_Options extends Shipper_Model_Stored {
 	 * @return bool
 	 */
 	public function drop_email( $email ) {
-		if ( empty( $email ) || ! is_email( $email ) ) { return false; }
+		if ( empty( $email ) || ! is_email( $email ) ) {
+			return false;
+		}
 
 		$emails = $this->get_emails();
-		if ( ! in_array( $email, array_keys( $emails ), true ) ) { return false; }
+
+		if ( ! in_array( $email, array_keys( $emails ), true ) ) {
+			return false;
+		}
 
 		unset( $emails[ $email ] );
 		$this->set_emails( $emails );
@@ -127,7 +134,8 @@ class Shipper_Model_Stored_Options extends Shipper_Model_Stored {
 
 		foreach ( $emails as $email => $name ) {
 			$email = is_email( $email );
-			if ( empty( $email ) ) { continue; }
+			if ( empty( $email ) ) {
+				continue; }
 
 			$name = ! empty( $name )
 				? $name
@@ -148,7 +156,7 @@ class Shipper_Model_Stored_Options extends Shipper_Model_Stored {
 	 * @return object Shipper_Helper_Storage
 	 */
 	public function get_alternate_storage() {
-		$storage = $this->get_storage();
+		$storage   = $this->get_storage();
 		$namespace = sprintf( '%s-alternate', $storage->get_namespace() );
 		return Shipper_Helper_Storage::get( $namespace, false );
 	}
@@ -161,7 +169,7 @@ class Shipper_Model_Stored_Options extends Shipper_Model_Stored {
 	 * @return bool
 	 */
 	public function jettison_data() {
-		$storage = $this->get_alternate_storage();
+		$storage       = $this->get_alternate_storage();
 		$storage->data = $this->get_data();
 
 		return $storage->save();

@@ -33,12 +33,15 @@ abstract class Shipper_Controller_Setup extends Shipper_Controller {
 
 		$tables = $wpdb->get_col(
 			$wpdb->prepare( 'SHOW TABLES LIKE %s', $intermediate )
-		);
+		); // db call ok, cache ok.
+
 		if ( ! empty( $tables ) ) {
+			// phpcs:disable
 			$tables = array_filter( array_unique( array_values( $tables ) ) );
 			$wpdb->query(
 				'DROP TABLE IF EXISTS ' . join( ',', $tables )
 			);
+			// phpcs:enable
 		}
 
 		return $this;
@@ -67,7 +70,7 @@ abstract class Shipper_Controller_Setup extends Shipper_Controller {
 		$working = Shipper_Helper_Fs_Path::get_working_dir();
 
 		Shipper_Helper_Fs_Path::rmdir_r( $working, '' );
-		@rmdir( $working );
+		@rmdir( $working ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
 
 		return $this;
 	}
@@ -83,7 +86,7 @@ abstract class Shipper_Controller_Setup extends Shipper_Controller {
 	 */
 	public function clear_storage_fs_exposed( $model = false ) {
 		if ( ! is_object( $model ) ) {
-			$model = new Shipper_Model_Stored_Options;
+			$model = new Shipper_Model_Stored_Options();
 		}
 		if ( $model->get( Shipper_Model_Stored_Options::KEY_DATA ) ) {
 			// Preserve exposed data - move on.
@@ -92,7 +95,7 @@ abstract class Shipper_Controller_Setup extends Shipper_Controller {
 		$log = Shipper_Helper_Fs_Path::get_log_dir();
 
 		Shipper_Helper_Fs_Path::rmdir_r( $log, '' );
-		@rmdir( $log );
+		@rmdir( $log ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
 
 		return $this;
 	}
@@ -110,6 +113,7 @@ abstract class Shipper_Controller_Setup extends Shipper_Controller {
 		$info = $wpdb->esc_like( 'shipper-info-' ) . '%';
 		$migr = $wpdb->esc_like( 'shipper-migration-' ) . '%';
 
+		// phpcs:disable
 		if ( ! empty( $wpdb->sitemeta ) ) {
 			$wpdb->query(
 				$wpdb->prepare( "DELETE FROM {$wpdb->sitemeta} WHERE meta_key LIKE %s", $info )
@@ -124,6 +128,7 @@ abstract class Shipper_Controller_Setup extends Shipper_Controller {
 		$wpdb->query(
 			$wpdb->prepare( "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s", $migr )
 		);
+		// phpcs:enable
 
 		return $this;
 	}

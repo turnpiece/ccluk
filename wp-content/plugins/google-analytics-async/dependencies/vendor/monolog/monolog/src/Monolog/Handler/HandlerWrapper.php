@@ -29,7 +29,7 @@ use Beehive\Monolog\Formatter\FormatterInterface;
  *
  * @author Alexey Karapetov <alexey@karapetov.com>
  */
-class HandlerWrapper implements \Beehive\Monolog\Handler\HandlerInterface, \Beehive\Monolog\ResettableInterface
+class HandlerWrapper implements HandlerInterface, ResettableInterface
 {
     /**
      * @var HandlerInterface
@@ -39,7 +39,7 @@ class HandlerWrapper implements \Beehive\Monolog\Handler\HandlerInterface, \Beeh
      * HandlerWrapper constructor.
      * @param HandlerInterface $handler
      */
-    public function __construct(\Beehive\Monolog\Handler\HandlerInterface $handler)
+    public function __construct(HandlerInterface $handler)
     {
         $this->handler = $handler;
     }
@@ -82,7 +82,7 @@ class HandlerWrapper implements \Beehive\Monolog\Handler\HandlerInterface, \Beeh
     /**
      * {@inheritdoc}
      */
-    public function setFormatter(\Beehive\Monolog\Formatter\FormatterInterface $formatter)
+    public function setFormatter(FormatterInterface $formatter)
     {
         $this->handler->setFormatter($formatter);
         return $this;
@@ -96,7 +96,7 @@ class HandlerWrapper implements \Beehive\Monolog\Handler\HandlerInterface, \Beeh
     }
     public function reset()
     {
-        if ($this->handler instanceof \Beehive\Monolog\ResettableInterface) {
+        if ($this->handler instanceof ResettableInterface) {
             return $this->handler->reset();
         }
     }

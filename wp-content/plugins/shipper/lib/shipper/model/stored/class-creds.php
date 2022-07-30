@@ -15,9 +15,9 @@
  */
 class Shipper_Model_Stored_Creds extends Shipper_Model_Stored {
 
-	const KEY_ID = 'AccessKeyId';
+	const KEY_ID     = 'AccessKeyId';
 	const KEY_SECRET = 'SecretAccessKey';
-	const KEY_TOKEN = 'SessionToken';
+	const KEY_TOKEN  = 'SessionToken';
 	const KEY_BUCKET = 'Bucket';
 	const KEY_PREFIX = 'Prefix';
 

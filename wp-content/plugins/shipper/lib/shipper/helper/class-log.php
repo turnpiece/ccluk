@@ -15,7 +15,7 @@ class Shipper_Helper_Log {
 	 *
 	 * @var object Shipper_Helper_Hash instance
 	 */
-	private static $_hasher;
+	private static $hasher;
 
 	const LOG_BASENAME = 'shipper-log';
 
@@ -28,12 +28,13 @@ class Shipper_Helper_Log {
 	 * @return string Just the file name
 	 */
 	public static function get_file_name( $basename = false, $type = 'txt' ) {
-		if ( empty( self::$_hasher ) ) {
-			self::$_hasher = new Shipper_Helper_Hash;
+		if ( empty( self::$hasher ) ) {
+			self::$hasher = new Shipper_Helper_Hash();
 		}
 		$basename = self::get_validated_basename( $basename );
-		$type = self::get_validated_file_type( $type );
-		return self::$_hasher->get_concealed( $basename ) . ".{$type}";
+		$type     = self::get_validated_file_type( $type );
+
+		return self::$hasher->get_concealed( $basename ) . ".{$type}";
 	}
 
 	/**
@@ -60,6 +61,7 @@ class Shipper_Helper_Log {
 	 */
 	public static function get_validated_file_type( $type ) {
 		$types = array( 'txt', 'csv', 'json' );
+
 		return in_array( $type, $types, true )
 			? $type
 			: 'txt';
@@ -84,9 +86,14 @@ class Shipper_Helper_Log {
 	 */
 	public static function get_contents() {
 		$path = self::get_file_path();
-		if ( ! is_readable( $path ) ) { return ''; }
 
-		return file_get_contents( $path );
+		$fs = Shipper_Helper_Fs_File::open( $path );
+
+		if ( ! $fs || ! $fs->isReadable() ) {
+			return '';
+		}
+
+		return $fs->fread( $fs->getSize() );
 	}
 
 	/**
@@ -95,25 +102,27 @@ class Shipper_Helper_Log {
 	 * @return array A list of line hashes
 	 */
 	public static function get_lines() {
-		$lines = array();
+		$lines    = array();
 		$contents = self::get_contents();
-		if ( empty( $contents ) ) { return $lines; }
+		if ( empty( $contents ) ) {
+			return $lines;
+		}
 
 		foreach ( explode( "\n", $contents ) as $line ) {
-			if ( empty( $line ) ) { continue; }
+			if ( empty( $line ) ) {
+				continue;
+			}
 
-			$raw = explode( Shipper_Model::SCOPE_DELIMITER, $line, 2 );
-			$time = ! empty( $raw[0] )
+			$raw     = explode( Shipper_Model::SCOPE_DELIMITER, $line, 2 );
+			$time    = ! empty( $raw[0] )
 				? trim( $raw[0] )
-				: 'never'
-			;
+				: 'never';
 			$message = ! empty( $raw[1] )
 				? trim( $raw[1] )
-				: ''
-			;
+				: '';
 			$lines[] = array(
 				'timestamp' => strtotime( $time ),
-				'message' => $message,
+				'message'   => $message,
 			);
 		}
 
@@ -128,14 +137,33 @@ class Shipper_Helper_Log {
 	 * @return bool
 	 */
 	public static function write( $msg ) {
-		$path = self::get_file_path();
-		if ( file_exists( $path ) && ! is_readable( $path ) ) { return false; }
+		$path        = self::get_file_path();
+		$file_exists = file_exists( $path );
+
+		if ( $file_exists && ! is_writable( $path ) ) {
+			return false;
+		}
+
+		$size = $file_exists ? filesize( $path ) : 0;
+		if ( $size > 100 * 1000000 ) {
+			// fail safe.
+			return false;
+		}
 
 		$line = sprintf(
 			'%s %s %s' . "\n",
-			date( 'Y-m-d H:i:s' ), Shipper_Model::SCOPE_DELIMITER, $msg
+			gmdate( 'Y-m-d H:i:s' ),
+			Shipper_Model::SCOPE_DELIMITER,
+			$msg
 		);
-		return ! ! file_put_contents( $path, $line, FILE_APPEND );
+
+		$fs = Shipper_Helper_Fs_File::open( $path, 'a' );
+
+		if ( ! $fs ) {
+			return false;
+		}
+
+		return ! ! $fs->fwrite( $line );
 	}
 
 	/**
@@ -162,9 +190,16 @@ class Shipper_Helper_Log {
 	 * @param array $data Data to add.
 	 */
 	public static function data( $data ) {
-		$fp = fopen( self::get_file_path( 'debug', 'csv' ), 'a' );
-		fputcsv( $fp, $data );
-		fclose( $fp );
+		$fs = Shipper_Helper_Fs_File::open(
+			self::get_file_path( 'debug', 'csv' ),
+			'a'
+		);
+
+		if ( ! $fs ) {
+			return false;
+		}
+
+		$fs->fputcsv( $data );
 	}
 
 	/**
@@ -174,14 +209,18 @@ class Shipper_Helper_Log {
 	 */
 	public static function clear() {
 		$path = self::get_file_path();
-		if ( false !== file_put_contents( $path, '' ) ) {
+		$fs   = Shipper_Helper_Fs_File::open( $path, 'w' );
+
+		if ( ! $fs || $fs->fwrite( '' ) ) {
 			self::write( __( 'Log file cleared', 'shipper' ) );
 		}
+
 		// Also clear data file.
 		$path = self::get_file_path( 'debug', 'csv' );
 		if ( file_exists( $path ) ) {
 			unlink( $path );
 		}
+
 		return true;
 	}
 }

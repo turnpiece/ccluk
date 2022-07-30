@@ -12,9 +12,9 @@ class Shipper_Helper_Hash {
 
 	const ALGO_DELIMITER = '//';
 
-	const INTERVAL_SHORT = 120;
+	const INTERVAL_SHORT  = 120;
 	const INTERVAL_MEDIUM = 600;
-	const INTERVAL_LONG = 3600;
+	const INTERVAL_LONG   = 3600;
 
 	/**
 	 * Constructor
@@ -25,7 +25,7 @@ class Shipper_Helper_Hash {
 	 */
 	public function __construct( $interval = false ) {
 		if ( ! empty( $interval ) && is_numeric( $interval ) ) {
-			$this->_interval = (int) $interval;
+			$this->interval = (int) $interval;
 		}
 	}
 
@@ -37,7 +37,7 @@ class Shipper_Helper_Hash {
 	 * @return string
 	 */
 	public function get_concealed( $what = '' ) {
-		$tahw = strrev( $what );
+		$tahw   = strrev( $what );
 		$secret = $this->get_obfuscation_key();
 
 		$algo = $this->get_default_algo();
@@ -60,12 +60,11 @@ class Shipper_Helper_Hash {
 		}
 
 		$algo = $this->get_default_algo();
-		$raw = strrev( str_rot13( $key ) );
+		$raw  = strrev( str_rot13( $key ) ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_str_rot13
 
 		$key = ! empty( $key )
 			? hash_hmac( $algo, $raw, md5( $raw ) )
-			: $fallback
-		;
+			: $fallback;
 
 		/**
 		 * Gets the site-specific obfuscation key
@@ -88,10 +87,10 @@ class Shipper_Helper_Hash {
 	 * @return int
 	 */
 	public function get_interval() {
-		if ( empty( $this->_interval ) ) {
-			$this->_interval = self::INTERVAL_MEDIUM;
+		if ( empty( $this->interval ) ) {
+			$this->interval = self::INTERVAL_MEDIUM;
 		}
-		return (int) $this->_interval;
+		return (int) $this->interval;
 	}
 
 	/**
@@ -103,18 +102,23 @@ class Shipper_Helper_Hash {
 	 * @return string Formatted hash
 	 */
 	public function get_hash( $what, $secret = '' ) {
-		if ( empty( $secret ) ) { $secret = $this->get_default_secret(); }
-		$validity = $this->get_interval();
+		if ( empty( $secret ) ) {
+			$secret = $this->get_default_secret();
+		}
 
-		$tick = $this->get_tick( $validity );
+		$validity = $this->get_interval();
+		$tick     = $this->get_tick( $validity );
 
 		$algo = $this->get_default_algo();
 		$hash = hash_hmac( $algo, "{$what}{$tick}", $secret );
 
-		$final = join(self::ALGO_DELIMITER, array(
-			$algo,
-			$hash,
-		));
+		$final = join(
+			self::ALGO_DELIMITER,
+			array(
+				$algo,
+				$hash,
+			)
+		);
 
 		return $final;
 	}
@@ -128,7 +132,8 @@ class Shipper_Helper_Hash {
 	 * @return float
 	 */
 	public function get_tick( $validity, $time = false ) {
-		if ( empty( $time ) ) { $time = time(); }
+		if ( empty( $time ) ) {
+			$time = time(); }
 		$tick = ceil( $time / $validity ) * $validity;
 
 		return $tick;
@@ -142,7 +147,8 @@ class Shipper_Helper_Hash {
 	 * @return bool
 	 */
 	public function is_known_algo( $algo = false ) {
-		if ( empty( $algo ) ) { return false; }
+		if ( empty( $algo ) ) {
+			return false; }
 		return in_array( $algo, hash_algos(), true );
 	}
 
@@ -154,7 +160,8 @@ class Shipper_Helper_Hash {
 	 * @return bool
 	 */
 	public function is_preferred_algo( $algo = false ) {
-		if ( ! $this->is_known_algo( $algo ) ) { return false; }
+		if ( ! $this->is_known_algo( $algo ) ) {
+			return false; }
 		return in_array( $algo, $this->get_preferred_algos(), true );
 	}
 
@@ -201,7 +208,8 @@ class Shipper_Helper_Hash {
 
 		if ( ! $preferred ) {
 			foreach ( $this->get_preferred_algos() as $algo ) {
-				if ( ! $this->is_known_algo( $algo ) ) { continue; }
+				if ( ! $this->is_known_algo( $algo ) ) {
+					continue; }
 
 				$preferred = $algo;
 				break;
@@ -219,8 +227,8 @@ class Shipper_Helper_Hash {
 	 * @return string
 	 */
 	public function get_default_secret() {
-		$raw = $this->get_obfuscation_key();
-		$secret = md5( strrev( str_rot13( $raw ) ) );
+		$raw    = $this->get_obfuscation_key();
+		$secret = md5( strrev( str_rot13( $raw ) ) ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_str_rot13
 		return $secret;
 	}
 }

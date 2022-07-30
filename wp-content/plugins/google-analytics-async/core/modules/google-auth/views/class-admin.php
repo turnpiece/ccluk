@@ -2,7 +2,7 @@
 /**
  * The admin view class of the plugin.
  *
- * @link    http://premium.wpmudev.org
+ * @link    http://wpmudev.com
  * @since   3.2.0
  *
  * @author  Joel James <joel@incsub.com>
@@ -70,8 +70,10 @@ class Admin extends View {
 		// Get Google profiles.
 		if ( Google_Auth\Helper::instance()->is_logged_in( $this->is_network() ) ) {
 			$vars['google']['profiles'] = Google_Analytics\Data::instance()->profiles_list( $this->is_network() );
+			$vars['google']['streams']  = array_values( Google_Analytics\Data::instance()->streams( $this->is_network() ) );
 		} else {
 			$vars['google']['profiles'] = array();
+			$vars['google']['streams']  = array();
 		}
 
 		return $vars;
@@ -134,6 +136,18 @@ class Admin extends View {
 			// Client ID.
 			$vars['google']['client_id'] = $creds['client_id'];
 		}
+
+		// Get the home url.
+		$redirect_url = network_site_url();
+
+		// Use the sub-site's url when not networkwide active on multisite.
+		if ( is_multisite() && ! General::is_networkwide() && ! $this->is_network() ) {
+			$redirect_url = site_url();
+		}
+
+		// Get the redirect URIs.
+		$vars['google']['redirect_uri1'] = trailingslashit( $redirect_url );
+		$vars['google']['redirect_uri2'] = untrailingslashit( $redirect_url );
 
 		return $vars;
 	}

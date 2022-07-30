@@ -29,16 +29,10 @@ export default {
 			type: Boolean,
 			default: true,
 		},
-		processing: {
+		loading: {
 			type: Boolean,
 			default: false,
 		},
-	},
-
-	data() {
-		return {
-			loading: false,
-		}
 	},
 
 	computed: {
@@ -51,7 +45,7 @@ export default {
 		 */
 		loadingClass() {
 			return {
-				'sui-button-onload-text': this.loading || this.processing,
+				'sui-button-onload-text': this.loading,
 			}
 		},
 	},
@@ -68,22 +62,18 @@ export default {
 		 * @returns {void}
 		 */
 		refreshData() {
-			// Update loading state.
-			this.loading = true
 			// For 2 way sync.
-			this.$emit('update:processing', true)
+			this.$emit('update:loading', true)
 
 			restGet({
-				path: 'actions',
+				path: 'v1/actions',
 				params: {
 					action: 'refresh',
 					network: this.isNetwork() ? 1 : 0,
 				},
 			}).then((response) => {
-				// Update loading state.
-				this.loading = false
 				// For 2 way sync.
-				this.$emit('update:processing', false)
+				this.$emit('update:loading', false)
 
 				// Emit refresh event.
 				this.$emit('refreshed')

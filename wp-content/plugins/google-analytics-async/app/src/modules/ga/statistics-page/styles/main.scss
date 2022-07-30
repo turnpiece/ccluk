@@ -1,21 +1,29 @@
+$summary-image: '../../../images/beehive-summary.png';
+
 // Overwrite font path.
 $sui-font-path: '~@wpmudev/shared-ui/dist/fonts/';
+$sui-image-path: '~@wpmudev/shared-ui/dist/images/';
 
 // Share UI styles
 @import '~@wpmudev/shared-ui/scss/shared-ui';
 
 // Components.
 @import '../../../styles/components/box';
+@import '../../../styles/components/icons';
 @import '../../../styles/components/calendar-range';
 @import '../../../styles/components/chart-pie';
-@import '../../../styles/components/chart-map';
 @import '../../../styles/components/chart-tooltip';
+@import '../../../styles/components/chart-map';
+@import '../../../styles/components/chart-progress';
+@import '../../../styles/components/visitors';
 
-// Page styles.
-@import 'page';
-@import 'visitors';
-@import 'pages';
+// Onboarding.
+@import '../../../styles/modals/onboarding';
 
-// Custom components.
-@import 'component-legend';
-@import 'component-chart-tooltips';
+// Statistics.
+@import '../../../styles/statistics/pages';
+@import '../../../styles/statistics/actions';
+@import '../../../styles/statistics/visitors';
+@import '../../../styles/statistics/chart-tooltips';
+@import '../../../styles/statistics/chart-legend';
+@import '../../../admin/dashboard/styles/header';

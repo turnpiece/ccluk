@@ -2,7 +2,7 @@
 /**
  * The Forminator integration for GTM.
  *
- * @link    http://premium.wpmudev.org
+ * @link    http://wpmudev.com
  * @since   3.3.0
  *
  * @author  Joel James <joel@incsub.com>
@@ -71,7 +71,7 @@ class Forminator extends Base {
 			$fields = wp_json_encode( $this->excluded_fields( 'form', $network ), JSON_UNESCAPED_UNICODE );
 
 			// Add form success event.
-			$scripts['forminator_form'] = 'jQuery(".forminator-custom-form").on("forminator:form:submit:success", function(e, data) {
+			$scripts['forminator_form'] = 'jQuery("body").on("forminator:form:submit:success", ".forminator-custom-form", function(e, data) {
 				let formData = {};
 				let excluded = ' . $fields . ';
 				for ( const [key, value]  of data.entries() ) {
@@ -122,7 +122,7 @@ class Forminator extends Base {
 			// Format the vars.
 			$fields = wp_json_encode( $this->excluded_fields( 'poll', $network ), JSON_UNESCAPED_UNICODE );
 
-			$scripts['forminator_poll'] = 'jQuery(".forminator-poll").on("forminator:poll:submit:success", function(e, data, formData) {
+			$scripts['forminator_poll'] = 'jQuery("body").on("forminator:poll:submit:success", ".forminator-poll", function(e, data, formData) {
 				let pollData = {};
 				let excluded = ' . $fields . ';
 				for ( const [key, value]  of formData.entries() ) {
@@ -173,7 +173,7 @@ class Forminator extends Base {
 			// Format the vars.
 			$fields = wp_json_encode( $this->excluded_fields( 'quiz', $network ), JSON_UNESCAPED_UNICODE );
 
-			$scripts['forminator_quiz'] = 'jQuery(".forminator-quiz").on("forminator:quiz:submit:success", function(e, data, formData) {
+			$scripts['forminator_quiz'] = 'jQuery("body").on("forminator:quiz:submit:success", ".forminator-quiz", function(e, data, formData) {
 				let quizData = {};
 				let excluded = ' . $fields . ';
 				for ( const [key, value]  of formData.entries() ) {

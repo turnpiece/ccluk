@@ -23,21 +23,25 @@ class Shipper_Task_Export_Files extends Shipper_Task_Export {
 	 * @return bool
 	 */
 	public function apply( $args = array() ) {
-		$migration = new Shipper_Model_Stored_Migration;
+		$migration   = new Shipper_Model_Stored_Migration();
+		$meta        = $this->get_migrationmeta();
+		$storage     = new Shipper_Model_Stored_Filelist();
+		$this->files = new Shipper_Helper_Fs_List( $storage );
+		$dumped      = new Shipper_Model_Dumped_Filelist();
+		$large       = new Shipper_Model_Dumped_Largelist();
 
-		$storage      = new Shipper_Model_Stored_Filelist;
-		$this->_files = new Shipper_Helper_Fs_List( $storage );
-		$dumped       = new Shipper_Model_Dumped_Filelist;
-		$large        = new Shipper_Model_Dumped_Largelist;
-
-		if ( $this->_files->is_done() ) {
+		if ( $this->files->is_done() ) {
 			return true;
 		}
 
-		// Update status flag first.
-		$this->_has_done_anything = true;
+		// place here so we can hook the exclude filters.
+		// temp comment out this.
+		// do_action( 'shipper_before_process_package_or_files' );.
 
-		$exclusions = new Shipper_Model_Fs_Blacklist;
+		// Update status flag first.
+		$this->has_done_anything = true;
+
+		$exclusions = new Shipper_Model_Fs_Blacklist();
 		$exclusions->add_directory(
 			Shipper_Helper_Fs_Path::get_working_dir()
 		);
@@ -45,7 +49,12 @@ class Shipper_Task_Export_Files extends Shipper_Task_Export {
 			Shipper_Helper_Fs_Path::get_log_dir()
 		);
 
-		foreach ( $this->_files->get_files() as $item ) {
+		$media_replacer = '';
+		if ( $meta->get_mode() === 'subsite' && $meta->get_site_id() !== 1 ) {
+			$media_replacer = "sites/{$meta->get_site_id()}/";
+		}
+
+		foreach ( $this->files->get_files() as $item ) {
 			if ( empty( $item['path'] ) ) {
 				continue;
 			}
@@ -57,9 +66,16 @@ class Shipper_Task_Export_Files extends Shipper_Task_Export {
 
 			$destination = $this->get_destination_path( $item['path'] );
 
+			// we have to check if this is subsite extractor, as the media path will be something like.
+			// files/uploads/sites/id/....
+			if ( ! empty( $media_replacer ) ) {
+				$destination = str_replace( $media_replacer, '', $destination );
+			}
+
 			if ( ! is_readable( $source ) ) {
 				$this->add_error(
 					self::ERR_ACCESS,
+					/* translators: %s: file name. */
 					sprintf( __( 'Shipper couldn\'t read file: %s', 'shipper' ), $source )
 				);
 			}
@@ -67,6 +83,7 @@ class Shipper_Task_Export_Files extends Shipper_Task_Export {
 			if ( $exclusions->is_excluded( $item['path'] ) ) {
 				Shipper_Helper_Log::debug(
 					sprintf(
+						/* translators: %s: file name. */
 						__( 'Skipping excluded item: %s', 'shipper' ),
 						$item['path']
 					)
@@ -89,7 +106,16 @@ class Shipper_Task_Export_Files extends Shipper_Task_Export {
 		$dumped->close();
 		$large->close();
 
-		return $this->_files->is_done();
+		return $this->files->is_done();
+	}
+
+	/**
+	 * Get migration meta
+	 *
+	 * @return Shipper_Model_Stored_MigrationMeta
+	 */
+	protected function get_migrationmeta() {
+		return new Shipper_Model_Stored_MigrationMeta();
 	}
 
 	/**
@@ -108,28 +134,30 @@ class Shipper_Task_Export_Files extends Shipper_Task_Export {
 			return $path;
 		}
 
-		if ( Shipper_Helper_Fs_Path::is_wp_config( $path ) && ! $this->is_config_included() ) {
+		if ( Shipper_Helper_Fs_Path::is_wp_config( $path ) && $this->is_wp_config_skipped() ) {
 			Shipper_Helper_Log::write( 'Skipping wp-config in export' );
 
 			return false;
 		}
 
 		$replacer = new Shipper_Helper_Replacer_File( Shipper_Helper_Codec::ENCODE );
-		$replacer->add_codec( new Shipper_Helper_Codec_Rewrite );
-		$replacer->add_codec( new Shipper_Helper_Codec_Paths );
+		$replacer->add_codec( new Shipper_Helper_Codec_Rewrite() );
+		$replacer->add_codec( new Shipper_Helper_Codec_Paths() );
 
-		return $replacer->transform( $path );
+		$destination = $replacer->transform( $path );
+
+		return $destination;
 	}
 
 	/**
-	 * Checks whether to include the wp-config in gathered files list
+	 * Checks whether to exclude the wp-config in gathered files list
 	 *
 	 * @return bool
 	 */
-	public function is_config_included() {
-		$model = new Shipper_Model_Stored_Options;
+	public function is_wp_config_skipped() {
+		$model = new Shipper_Model_Stored_Options();
 
-		return $model->get( Shipper_Model_Stored_Options::KEY_SKIPCONFIG );
+		return $model->get( Shipper_Model_Stored_Options::KEY_SKIPCONFIG, false );
 	}
 
 	/**
@@ -149,12 +177,12 @@ class Shipper_Task_Export_Files extends Shipper_Task_Export {
 	 * @return int
 	 */
 	public function get_total_steps() {
-		if ( ! isset( $this->_files ) ) {
-			$storage      = new Shipper_Model_Stored_Filelist;
-			$this->_files = new Shipper_Helper_Fs_List( $storage );
+		if ( ! isset( $this->files ) ) {
+			$storage     = new Shipper_Model_Stored_Filelist();
+			$this->files = new Shipper_Helper_Fs_List( $storage );
 		}
 
-		return $this->_files->get_total_steps();
+		return $this->files->get_total_steps();
 	}
 
 	/**
@@ -163,12 +191,12 @@ class Shipper_Task_Export_Files extends Shipper_Task_Export {
 	 * @return int
 	 */
 	public function get_current_step() {
-		if ( ! isset( $this->_files ) ) {
-			$storage      = new Shipper_Model_Stored_Filelist;
-			$this->_files = new Shipper_Helper_Fs_List( $storage );
+		if ( ! isset( $this->files ) ) {
+			$storage     = new Shipper_Model_Stored_Filelist();
+			$this->files = new Shipper_Helper_Fs_List( $storage );
 		}
 
-		return $this->_files->get_current_step();
+		return $this->files->get_current_step();
 	}
 
 	/**
@@ -177,25 +205,27 @@ class Shipper_Task_Export_Files extends Shipper_Task_Export {
 	 * @return string
 	 */
 	public function get_work_description() {
-		if ( ! isset( $this->_files ) ) {
-			$storage      = new Shipper_Model_Stored_Filelist;
-			$this->_files = new Shipper_Helper_Fs_List( $storage );
+		if ( ! isset( $this->files ) ) {
+			$storage     = new Shipper_Model_Stored_Filelist();
+			$this->files = new Shipper_Helper_Fs_List( $storage );
 		}
-		$files = $this->_files->get_files();
+		$files = $this->files->get_files();
 		$size  = array_sum( wp_list_pluck( $files, 'size' ) );
 
 		$current = '';
 		if ( ! empty( $size ) ) {
 			$current = sprintf(
+				/* translators: %1$d %2$s: file count and size. */
 				__( ' (%1$d files, %2$s)', 'shipper' ),
-				count( $files ), size_format( $size )
+				count( $files ),
+				size_format( $size )
 			);
 		}
 
 		return sprintf(
+			/* translators: %s: file name. */
 			__( 'Gather files for upload %s', 'shipper' ),
 			$current
 		);
 	}
-
 }

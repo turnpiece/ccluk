@@ -542,6 +542,15 @@ $warning = $requirements_test['warning'];
 														<label for="snapshot-files-option-plugins"><?php esc_html_e( 'Plugins', SNAPSHOT_I18N_DOMAIN ); ?></label>
 													</li>
 												<?php } ?>
+												<?php if ( array_search( 'mu-plugins', $item['data'][ $data_item_key ]['files-sections'], true ) !== false ) { ?>
+													<li id="snapshot-files-option-mu-plugins-li" class="wps-input--item">
+														<div class="wps-input--checkbox">
+															<input type="checkbox" class="snapshot-backup-sub-options" checked="checked" id="snapshot-files-option-mu-plugins" value="mu-plugins" name="snapshot-files-sections[mu-plugins]">
+															<label for="snapshot-files-option-mu-plugins"></label>
+														</div>
+														<label for="snapshot-files-option-mu-plugins"><?php esc_html_e( 'MU-Plugins', SNAPSHOT_I18N_DOMAIN ); ?></label>
+													</li>
+												<?php } ?>
 												<?php if ( array_search( 'media', $item['data'][ $data_item_key ]['files-sections'], true ) !== false ) { ?>
 													<li id="snapshot-files-option-media-li" class="wps-input--item">
 														<div class="wps-input--checkbox">
@@ -552,7 +561,7 @@ $warning = $requirements_test['warning'];
 													</li>
 												<?php } ?>
 												<?php if ( array_search( 'config', $item['data'][ $data_item_key ]['files-sections'], true ) !== false ) { ?>
-													<li id="snapshot-files-option-config-li">
+													<li id="snapshot-files-option-config-li" class="wps-input--item">
 														<div class="wps-input--checkbox">
 															<input type="checkbox" class="snapshot-backup-sub-options" id="snapshot-files-option-config" value="config" name="snapshot-files-sections[config]">
 															<label for="snapshot-files-option-config"></label>
@@ -561,7 +570,7 @@ $warning = $requirements_test['warning'];
 													</li>
 												<?php } ?>
 												<?php if ( array_search( 'htaccess', $item['data'][ $data_item_key ]['files-sections'], true ) !== false ) { ?>
-													<li id="snapshot-files-option-htaccess-li">
+													<li id="snapshot-files-option-htaccess-li" class="wps-input--item">
 														<div class="wps-input--checkbox">
 															<input type="checkbox" class="snapshot-backup-sub-options" id="snapshot-files-option-htaccess" value="htaccess" name="snapshot-files-sections[htaccess]">
 															<label for="snapshot-files-option-htaccess"></label>

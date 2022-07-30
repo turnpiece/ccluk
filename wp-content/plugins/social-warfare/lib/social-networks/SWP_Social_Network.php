@@ -120,6 +120,7 @@ class SWP_Social_Network {
 	 */
 	public $html_store = array();
 
+
 	/**
 	 * The Base URL for the share link
 	 *
@@ -133,12 +134,16 @@ class SWP_Social_Network {
 	 */
 	public $base_share_url = '';
 
+
 	/**
 	 * Whether or not to show the share count for this network.
 	 *
 	 * @var boolean $show_shares;
 	 */
 	public $show_shares = false;
+
+	// TODO: Docblock
+	public $visible_on_amp = true;
 
 
 	/**
@@ -351,6 +356,11 @@ class SWP_Social_Network {
 	 */
 	public function render_HTML( $panel_context , $echo = false ) {
 
+		// TODO: DOCBLOCK
+		if( false === $this->visible_on_amp && SWP_AMP::is_amp() ) {
+			return '';
+		}
+
 		$post_data = $panel_context['post_data'];
 		$share_counts = $panel_context['shares'];
 		$post_data['options'] = $panel_context['options'];
@@ -366,7 +376,7 @@ class SWP_Social_Network {
 			$icon .= '</span>';
 		$icon .= '</span>';
 
-		if ( true === $this->are_shares_shown( $share_counts , $panel_context['options'] ) ) :
+		if ( true === $this->are_shares_shown( $panel_context ) ) :
 			$icon .= '<span class="swp_count">' . SWP_Utility::kilomega( $share_counts[$this->key] ) . '</span>';
 		else :
 			$icon = '<span class="swp_count swp_hide">' . $icon . '</span>';
@@ -397,18 +407,57 @@ class SWP_Social_Network {
 	 * Returns a boolean indicateding whether or not to display share counts.
 	 *
 	 * @since  3.0.0 | 18 APR 2018 | Created
-	 * @since  3.3.0 | 24 AUG 2018 | Removed use of $options, calls SWP::Utility instead.
-	 *
+	 * @since  3.3.0 | 24 AUG 2018 | Removed use of $options, calls
+	 *                               SWP_Utility::get_option() instead.
+	 * @since  4.0.0 | 12 JUL 2019 | Added check for delayed share count display.
 	 * @param  array $share_counts The array of share counts
 	 * @param  array $options  DEPRECATED The array of options from the button panel object.
-	 *
 	 * @return bool  True if share counts should be displayed, else false.
 	 *
 	 */
-	public function are_shares_shown( $share_counts , $options = array()) {
+	public function are_shares_shown( $panel_context = array() ) {
 
-		// Cast a string 'true'/'false' to a boolean true/false in case it was
-		// passed in via the shortcode.
+
+		/**
+		 * Bail out and return false if the $panel_context was not passed in
+		 * properly as a paramter. We'll need this for share counts, post data,
+		 * and other important information.
+		 *
+		 */
+		$required_context = array( 'shares', 'options', 'post_data' );
+		foreach( $required_context as $requirement ) {
+			if( empty( $panel_context[$requirement] ) ) {
+				return false;
+			}
+		}
+
+
+		/**
+		 * There are three main sections of the $panel_context. We'll take what
+		 * we need here so that we can have cleaner, neater access to them later.
+		 *
+		 */
+		$share_counts = $panel_context['shares'];
+		$options      = $panel_context['options'];
+		$post_id      = $panel_context['post_data']['ID'];
+
+
+		/**
+		 * If the share counts are delayed in the option, then we'll check the
+		 * current age of the post and check to see if they are still delayed
+		 * or if they can be shown now.
+		 *
+		 */
+		if( true === SWP_Buttons_Panel::are_share_counts_delayed( $post_id ) ) {
+			return false;
+		}
+
+
+		/**
+		 * Cast a string 'true'/'false' to a boolean true/false in case it was
+		 * passed in via the shortcode.
+		 *
+		 */
 		if( is_string( $options['network_shares'] ) ) {
 			$options['network_shares'] = (strtolower( $options['network_shares'] ) === 'true');
 		}
@@ -450,7 +499,7 @@ class SWP_Social_Network {
 	 *
 	 */
 	public function get_shareable_permalink( $post_data ) {
-		return urlencode( urldecode( SWP_URL_Management::process_url( $post_data['permalink'] , $this->key , $post_data['ID'] ) ) );
+		return urlencode( urldecode( SWP_Link_Manager::process_url( $post_data['permalink'] , $this->key , $post_data['ID'] ) ) );
 	}
 
 
@@ -513,4 +562,93 @@ class SWP_Social_Network {
 		return 0;
 	}
 
+
+	/**
+	 * The get_share_count() method is a quick and easy method for getting the
+	 * currently stored share count for this network for a given post. You must
+	 * pass it the post_id for the desired post.
+	 *
+	 * @since  4.1.0 | 17 APR 2020 | Created
+	 * @param  integer $post_id The ID of the desired post.
+	 * @return integer The number of shares for this post for this network.
+	 *
+	 */
+	public function get_share_count( $post_id ) {
+
+		// Get the share counts from the stored meta field.
+		$share_counts = get_post_meta( $post_id, '_' . $this->key . '_shares', true );
+
+		// If false was returned, return the integer 0 instead.
+		if( false === $share_counts ) {
+			return 0;
+		}
+
+		// Otherwise return the integer of the share counts.
+		return (int) $share_counts;
+	}
+
+
+	/**
+	 * The update_share_count() method will update the share counts for this
+	 * social network for a given post. It will check first to ensure that the
+	 * new numbers coming in are higher than the old, previous numbers, and then
+	 * store the new numbers.
+	 *
+	 * @since  4.0.2 | 21 JUL 2020 | Created
+	 * @since  4.1.0 | 06 AUG 2020 | Added a check for force_new_shares debugging.
+	 * @param  integer $post_id     The Post ID
+	 * @param  integer $share_count The new number of shares/activity
+	 * @return boolean True if updated, False if not updated.
+	 *
+	 */
+	public function update_share_count( $post_id, $share_count ) {
+
+		/**
+		 * Check if the new counts are higher than the old counts.
+		 *
+		 * However, right here we also check to see if the
+		 * ?swp_debug=force_new_shares URL parameter has been set. This will
+		 * force us to accept the new share counts even if they are lower than
+		 * the previously stored share counts.
+		 * 
+		 */
+		$previous_counts = get_post_meta( $post_id, '_' . $this->key . '_shares', true );
+		if( $previous_counts > $share_count && false == SWP_Utility::debug( 'force_new_shares' ) ) {
+			return false;
+		}
+
+		// Remove the old counts and replace them with the new counts.
+		delete_post_meta( $post_id, '_' . $this->key . '_shares');
+		update_post_meta( $post_id, '_' . $this->key . '_shares', $share_count );
+		return true;
+	}
+
+
+	/**
+	 * The update_total_counts() method is used to update the "total shares"
+	 * value which aggregates the share counts of all the active social networks
+	 * combined.
+	 *
+	 * @since  4.1.0 | 21 JUL 2020 | Created
+	 * @param  integer $post_id The Post ID
+	 * @return void
+	 *
+	 */
+	public function update_total_counts( $post_id ) {
+		global $swp_social_networks;
+
+		// Fetch the current share count for each active network.
+		$total_shares = 0;
+		foreach( $swp_social_networks as $Network ) {
+			if( $Network->is_active() ) {
+
+				// Add the share count to our running total.
+				$total_shares += $Network->get_share_count( $post_id );
+			}
+		}
+
+		// Remove the old total and replace it with the new one.
+		delete_post_meta( $post_id, '_total_shares' );
+		update_post_meta( $post_id, '_total_shares', $total_shares );
+	}
 }

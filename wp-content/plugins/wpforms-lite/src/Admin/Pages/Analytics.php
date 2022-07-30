@@ -27,6 +27,7 @@ class Analytics {
 	 */
 	private $config = array(
 		'lite_plugin'         => 'google-analytics-for-wordpress/googleanalytics.php',
+		'lite_wporg_url'      => 'https://wordpress.org/plugins/google-analytics-for-wordpress/',
 		'lite_download_url'   => 'https://downloads.wordpress.org/plugin/google-analytics-for-wordpress.zip',
 		'pro_plugin'          => 'google-analytics-premium/googleanalytics-premium.php',
 		'forms_addon'         => 'monsterinsights-forms/monsterinsights-forms.php',
@@ -99,14 +100,14 @@ class Analytics {
 		// Lity.
 		wp_enqueue_style(
 			'wpforms-lity',
-			WPFORMS_PLUGIN_URL . 'assets/css/lity.min.css',
+			WPFORMS_PLUGIN_URL . 'assets/lib/lity/lity.min.css',
 			null,
 			'3.0.0'
 		);
 
 		wp_enqueue_script(
 			'wpforms-lity',
-			WPFORMS_PLUGIN_URL . 'assets/js/lity.min.js',
+			WPFORMS_PLUGIN_URL . 'assets/lib/lity/lity.min.js',
 			array( 'jquery' ),
 			'3.0.0',
 			true
@@ -114,7 +115,7 @@ class Analytics {
 
 		wp_enqueue_script(
 			'wpforms-admin-page-analytics',
-			WPFORMS_PLUGIN_URL . "assets/js/components/admin/pages/analytics{$min}.js",
+			WPFORMS_PLUGIN_URL . "assets/js/components/admin/pages/mi-analytics{$min}.js",
 			array( 'jquery' ),
 			WPFORMS_VERSION,
 			true
@@ -138,29 +139,29 @@ class Analytics {
 
 		$error_could_not_install = sprintf(
 			wp_kses( /* translators: %s - Lite plugin download URL. */
-				__( 'Could not install plugin. Please <a href="%s">download</a> and install manually.', 'wpforms-lite' ),
-				array(
-					'a' => array(
+				__( 'Could not install the plugin automatically. Please <a href="%s">download</a> it and install it manually.', 'wpforms-lite' ),
+				[
+					'a' => [
 						'href' => true,
-					),
-				)
+					],
+				]
 			),
 			esc_url( $this->config['lite_download_url'] )
 		);
 
 		$error_could_not_activate = sprintf(
 			wp_kses( /* translators: %s - Lite plugin download URL. */
-				__( 'Could not activate plugin. Please activate from the <a href="%s">Plugins page</a>.', 'wpforms-lite' ),
-				array(
-					'a' => array(
+				__( 'Could not activate the plugin. Please activate it on the <a href="%s">Plugins page</a>.', 'wpforms-lite' ),
+				[
+					'a' => [
 						'href' => true,
-					),
-				)
+					],
+				]
 			),
 			esc_url( admin_url( 'plugins.php' ) )
 		);
 
-		return array(
+		return [
 			'installing'               => esc_html__( 'Installing...', 'wpforms-lite' ),
 			'activating'               => esc_html__( 'Activating...', 'wpforms-lite' ),
 			'activated'                => esc_html__( 'MonsterInsights Installed & Activated', 'wpforms-lite' ),
@@ -172,7 +173,7 @@ class Analytics {
 			'error_could_not_activate' => $error_could_not_activate,
 			'mi_manual_install_url'    => $this->config['lite_download_url'],
 			'mi_manual_activate_url'   => admin_url( 'plugins.php' ),
-		);
+		];
 	}
 
 	/**
@@ -259,6 +260,37 @@ class Analytics {
 			return;
 		}
 
+		$button_format       = '<button class="button %3$s" data-plugin="%1$s" data-action="%4$s">%2$s</button>';
+		$button_allowed_html = [
+			'button' => [
+				'class'       => true,
+				'data-plugin' => true,
+				'data-action' => true,
+			],
+		];
+
+		if (
+			! $this->output_data['plugin_installed'] &&
+			! $this->output_data['pro_plugin_installed'] &&
+			! wpforms_can_install( 'plugin' )
+		) {
+			$button_format       = '<a class="link" href="%1$s" target="_blank" rel="nofollow noopener">%2$s <span aria-hidden="true" class="dashicons dashicons-external"></span></a>';
+			$button_allowed_html = [
+				'a'    => [
+					'class'  => true,
+					'href'   => true,
+					'target' => true,
+					'rel'    => true,
+				],
+				'span' => [
+					'class'       => true,
+					'aria-hidden' => true,
+				],
+			];
+		}
+
+		$button = sprintf( $button_format, esc_attr( $step['plugin'] ), esc_html( $step['button_text'] ), esc_attr( $step['button_class'] ), esc_attr( $step['button_action'] ) );
+
 		printf(
 			'<section class="step step-install">
 				<aside class="num">
@@ -268,17 +300,14 @@ class Analytics {
 				<div>
 					<h2>%3$s</h2>
 					<p>%4$s</p>
-					<button class="button %5$s" data-plugin="%6$s" data-action="%7$s">%8$s</button>
-				</div>		
+					%5$s
+				</div>
 			</section>',
 			esc_url( WPFORMS_PLUGIN_URL . 'assets/images/' . $step['icon'] ),
 			esc_attr__( 'Step 1', 'wpforms-lite' ),
-			esc_html__( 'Install & Activate MonsterInsights', 'wpforms-lite' ),
-			esc_html__( 'Track form impressions and conversions.', 'wpforms-lite' ),
-			esc_attr( $step['button_class'] ),
-			esc_attr( $step['plugin'] ),
-			esc_attr( $step['button_action'] ),
-			esc_html( $step['button_text'] )
+			esc_html( $step['heading'] ),
+			esc_html( $step['description'] ),
+			wp_kses( $button, $button_allowed_html )
 		);
 	}
 
@@ -363,25 +392,34 @@ class Analytics {
 	 */
 	protected function get_data_step_install() {
 
+		$step                = array();
+		$step['heading']     = esc_html__( 'Install & Activate MonsterInsights', 'wpforms-lite' );
+		$step['description'] = esc_html__( 'Track form impressions and conversions.', 'wpforms-lite' );
+
 		$this->output_data['all_plugins']          = get_plugins();
 		$this->output_data['plugin_installed']     = array_key_exists( $this->config['lite_plugin'], $this->output_data['all_plugins'] );
 		$this->output_data['plugin_activated']     = false;
 		$this->output_data['pro_plugin_installed'] = array_key_exists( $this->config['pro_plugin'], $this->output_data['all_plugins'] );
 		$this->output_data['pro_plugin_activated'] = false;
 
-		$step = array();
-
 		if ( ! $this->output_data['plugin_installed'] && ! $this->output_data['pro_plugin_installed'] ) {
 			$step['icon']          = 'step-1.svg';
 			$step['button_text']   = esc_html__( 'Install MonsterInsights', 'wpforms-lite' );
-			$step['button_class']  = '';
+			$step['button_class']  = 'button-primary';
 			$step['button_action'] = 'install';
 			$step['plugin']        = $this->config['lite_download_url'];
+
+			if ( ! wpforms_can_install( 'plugin' ) ) {
+				$step['heading']     = esc_html__( 'MonsterInsights', 'wpforms-lite' );
+				$step['description'] = '';
+				$step['button_text'] = esc_html__( 'MonsterInsights on WordPress.org', 'wpforms-lite' );
+				$step['plugin']      = $this->config['lite_wporg_url'];
+			}
 		} else {
 			$this->output_data['plugin_activated'] = is_plugin_active( $this->config['lite_plugin'] ) || is_plugin_active( $this->config['pro_plugin'] );
 			$step['icon']                          = $this->output_data['plugin_activated'] ? 'step-complete.svg' : 'step-1.svg';
 			$step['button_text']                   = $this->output_data['plugin_activated'] ? esc_html__( 'MonsterInsights Installed & Activated', 'wpforms-lite' ) : esc_html__( 'Activate MonsterInsights', 'wpforms-lite' );
-			$step['button_class']                  = $this->output_data['plugin_activated'] ? 'grey disabled' : '';
+			$step['button_class']                  = $this->output_data['plugin_activated'] ? 'grey disabled' : 'button-primary';
 			$step['button_action']                 = $this->output_data['plugin_activated'] ? '' : 'activate';
 			$step['plugin']                        = $this->output_data['pro_plugin_installed'] ? $this->config['pro_plugin'] : $this->config['lite_plugin'];
 		}
@@ -415,7 +453,7 @@ class Analytics {
 			$step['section_class'] = '';
 			$step['button_text']   = esc_html__( 'Setup Complete', 'wpforms-lite' );
 		} else {
-			$step['button_class'] = $this->output_data['plugin_activated'] ? '' : 'grey disabled';
+			$step['button_class'] = $this->output_data['plugin_activated'] ? 'button-primary' : 'grey disabled';
 		}
 
 		return $step;
@@ -452,13 +490,14 @@ class Analytics {
 		switch ( $plugin_license_level ) {
 			case 'lite':
 				$step['button_url']   = $this->config['mi_forms_addon_page'];
-				$step['button_class'] = '';
+				$step['button_class'] = $this->output_data['plugin_setup'] ? 'button-primary' : 'grey';
 				break;
+
 			case 'pro':
 				$addon_installed      = array_key_exists( $this->config['forms_addon'], $this->output_data['all_plugins'] );
 				$step['button_text']  = $addon_installed ? esc_html__( 'Activate Now', 'wpforms-lite' ) : esc_html__( 'Install Now', 'wpforms-lite' );
 				$step['button_url']   = admin_url( $this->config['mi_addons'] );
-				$step['button_class'] = '';
+				$step['button_class'] = $this->output_data['plugin_setup'] ? 'button-primary' : 'grey';
 				break;
 		}
 

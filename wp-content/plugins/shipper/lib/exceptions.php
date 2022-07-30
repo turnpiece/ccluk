@@ -6,7 +6,6 @@
  * @package shipper
  */
 
-
 /**
  * Shipper root exception class
  */

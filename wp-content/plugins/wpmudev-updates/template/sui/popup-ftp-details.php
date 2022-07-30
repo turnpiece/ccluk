@@ -18,28 +18,29 @@ $credentials             = get_option(
 		'hostname' => '',
 		'username' => '',
 	) );
+
 $credentials['hostname'] = defined( 'FTP_HOST' ) ? FTP_HOST : $credentials['hostname'];
 $credentials['username'] = defined( 'FTP_USER' ) ? FTP_USER : $credentials['username'];
 $hostname                = isset( $credentials['hostname'] ) ? $credentials['hostname'] : '';
 $username                = isset( $credentials['username'] ) ? $credentials['username'] : '';
 ?>
-
-<div class="sui-dialog" aria-hidden="true" tabindex="-1" id="ftp-details">
-
-	<div class="sui-dialog-overlay" data-a11y-dialog-hide></div>
-
-	<div class="sui-dialog-content" aria-labelledby="dialogTitle" aria-describedby="ftpdialogDescription" role="dialog">
-
-		<div class="sui-box" role="document">
+<div class="sui-modal sui-modal-lg">
+	<div
+	role="dialog"
+	id="ftp-details"
+	class="sui-modal-content sui-content-fade-in"
+	aria-modal="true"
+	aria-labelledby="ftpdialogTitle"
+	aria-describedby="ftpdialogDescription">
+		<div class="sui-box">
+			<div class="sui-box-header">
+				<button class="sui-button-icon plugin-modal-close sui-button-float--right" data-modal-close="" >
+					<i class="sui-icon-close sui-md" aria-hidden="true"></i>
+					<span class="sui-screen-reader-text"><?php esc_html_e( 'Close this dialog.', 'wpmudev' ); ?></span>
+				</button>
+				<h3 class="sui-box-title" id="ftpdialogTitle"><?php esc_html_e( 'We need your help, boss!', 'wpmudev' ); ?></h3>
+			</div>
 			<form>
-
-				<div class="sui-box-header">
-					<h3 class="sui-box-title" id="dialogTitle"><?php esc_html_e( 'We need your help, boss!', 'wpmudev' ); ?></h3>
-					<div class="sui-actions-right">
-						<a href="#" data-a11y-dialog-hide class="sui-dialog-close" aria-label="<?php esc_html_e( 'Close this dialog window', 'wpmudev' ); ?>"></a>
-					</div>
-				</div>
-
 				<div class="sui-box-body">
 					<p id="ftpdialogDescription">
 						<?php esc_html_e( 'Hang on a minute... It looks like your WordPress site isn\'t configured to allow one-click installations of plugins and themes. But don\'t worry! You can still install this plugin by entering your server\'s FTP credentials here:',
@@ -123,7 +124,7 @@ define( 'FTP_HOST', '<?php echo esc_html( $ftp_host ); ?>' );
 				<div class="sui-box-footer">
 					<input type="hidden" name="hash" value="<?php echo esc_attr( wp_create_nonce( 'credentials' ) ); ?>"/>
 					<div class="sui-flex-child-right">
-						<a href="#" class="sui-button" data-a11y-dialog-hide="ftp-details"><?php esc_html_e( 'Cancel', 'wpmudev' ); ?></a>
+						<a href="#" class="sui-button plugin-modal-close"><?php esc_html_e( 'Cancel', 'wpmudev' ); ?></a>
 						<button class="sui-button sui-button-blue ftp-submit">
 							<span class="sui-loading-text">
 							<?php esc_html_e( 'Okay, continue!', 'wpmudev' ); ?>
@@ -134,7 +135,5 @@ define( 'FTP_HOST', '<?php echo esc_html( $ftp_host ); ?>' );
 				</div>
 			</form>
 		</div>
-
 	</div>
-
 </div>

@@ -24,6 +24,7 @@ use Beehive\Google\Auth\Credentials\ServiceAccountCredentials;
 use Beehive\Google\Auth\HttpHandler\HttpClientCache;
 use Beehive\Google\Auth\HttpHandler\HttpHandlerFactory;
 use Beehive\Google\Auth\Middleware\AuthTokenMiddleware;
+use Beehive\Google\Auth\Middleware\ProxyAuthTokenMiddleware;
 use Beehive\Google\Auth\Subscriber\AuthTokenSubscriber;
 use Beehive\GuzzleHttp\Client;
 use InvalidArgumentException;
@@ -83,10 +84,10 @@ class ApplicationDefaultCredentials
      * @return AuthTokenSubscriber
      * @throws DomainException if no implementation can be obtained.
      */
-    public static function getSubscriber($scope = null, callable $httpHandler = null, array $cacheConfig = null, \Beehive\Psr\Cache\CacheItemPoolInterface $cache = null)
+    public static function getSubscriber($scope = null, callable $httpHandler = null, array $cacheConfig = null, CacheItemPoolInterface $cache = null)
     {
         $creds = self::getCredentials($scope, $httpHandler, $cacheConfig, $cache);
-        return new \Beehive\Google\Auth\Subscriber\AuthTokenSubscriber($creds, $httpHandler);
+        return new AuthTokenSubscriber($creds, $httpHandler);
     }
     /**
      * Obtains an AuthTokenMiddleware that uses the default FetchAuthTokenInterface
@@ -106,20 +107,16 @@ class ApplicationDefaultCredentials
      * @return AuthTokenMiddleware
      * @throws DomainException if no implementation can be obtained.
      */
-    public static function getMiddleware($scope = null, callable $httpHandler = null, array $cacheConfig = null, \Beehive\Psr\Cache\CacheItemPoolInterface $cache = null, $quotaProject = null)
+    public static function getMiddleware($scope = null, callable $httpHandler = null, array $cacheConfig = null, CacheItemPoolInterface $cache = null, $quotaProject = null)
     {
         $creds = self::getCredentials($scope, $httpHandler, $cacheConfig, $cache, $quotaProject);
-        return new \Beehive\Google\Auth\Middleware\AuthTokenMiddleware($creds, $httpHandler);
+        return new AuthTokenMiddleware($creds, $httpHandler);
     }
     /**
-     * Obtains an AuthTokenMiddleware which will fetch an access token to use in
-     * the Authorization header. The middleware is configured with the default
-     * FetchAuthTokenInterface implementation to use in this environment.
+     * Obtains the default FetchAuthTokenInterface implementation to use
+     * in this environment.
      *
-     * If supplied, $scope is used to in creating the credentials instance if
-     * this does not fallback to the Compute Engine defaults.
-     *
-     * @param string|array scope the scope of the access request, expressed
+     * @param string|array $scope the scope of the access request, expressed
      *        either as an Array or as a space-delimited String.
      * @param callable $httpHandler callback which delivers psr7 request
      * @param array $cacheConfig configuration for the cache when it's present
@@ -127,36 +124,40 @@ class ApplicationDefaultCredentials
      *        provided if you have one already available for use.
      * @param string $quotaProject specifies a project to bill for access
      *   charges associated with the request.
+     * @param string|array $defaultScope The default scope to use if no
+     *   user-defined scopes exist, expressed either as an Array or as a
+     *   space-delimited string.
      *
      * @return CredentialsLoader
      * @throws DomainException if no implementation can be obtained.
      */
-    public static function getCredentials($scope = null, callable $httpHandler = null, array $cacheConfig = null, \Beehive\Psr\Cache\CacheItemPoolInterface $cache = null, $quotaProject = null)
+    public static function getCredentials($scope = null, callable $httpHandler = null, array $cacheConfig = null, CacheItemPoolInterface $cache = null, $quotaProject = null, $defaultScope = null)
     {
         $creds = null;
-        $jsonKey = \Beehive\Google\Auth\CredentialsLoader::fromEnv() ?: \Beehive\Google\Auth\CredentialsLoader::fromWellKnownFile();
+        $jsonKey = CredentialsLoader::fromEnv() ?: CredentialsLoader::fromWellKnownFile();
+        $anyScope = $scope ?: $defaultScope;
         if (!$httpHandler) {
-            if (!($client = \Beehive\Google\Auth\HttpHandler\HttpClientCache::getHttpClient())) {
-                $client = new \Beehive\GuzzleHttp\Client();
-                \Beehive\Google\Auth\HttpHandler\HttpClientCache::setHttpClient($client);
+            if (!($client = HttpClientCache::getHttpClient())) {
+                $client = new Client();
+                HttpClientCache::setHttpClient($client);
             }
-            $httpHandler = \Beehive\Google\Auth\HttpHandler\HttpHandlerFactory::build($client);
+            $httpHandler = HttpHandlerFactory::build($client);
         }
         if (!\is_null($jsonKey)) {
             if ($quotaProject) {
                 $jsonKey['quota_project_id'] = $quotaProject;
             }
-            $creds = \Beehive\Google\Auth\CredentialsLoader::makeCredentials($scope, $jsonKey);
-        } elseif (\Beehive\Google\Auth\Credentials\AppIdentityCredentials::onAppEngine() && !\Beehive\Google\Auth\Credentials\GCECredentials::onAppEngineFlexible()) {
-            $creds = new \Beehive\Google\Auth\Credentials\AppIdentityCredentials($scope);
+            $creds = CredentialsLoader::makeCredentials($scope, $jsonKey, $defaultScope);
+        } elseif (AppIdentityCredentials::onAppEngine() && !GCECredentials::onAppEngineFlexible()) {
+            $creds = new AppIdentityCredentials($anyScope);
         } elseif (self::onGce($httpHandler, $cacheConfig, $cache)) {
-            $creds = new \Beehive\Google\Auth\Credentials\GCECredentials(null, $scope, null, $quotaProject);
+            $creds = new GCECredentials(null, $anyScope, null, $quotaProject);
         }
         if (\is_null($creds)) {
-            throw new \DomainException(self::notFound());
+            throw new DomainException(self::notFound());
         }
         if (!\is_null($cache)) {
-            $creds = new \Beehive\Google\Auth\FetchAuthTokenCache($creds, $cacheConfig, $cache);
+            $creds = new FetchAuthTokenCache($creds, $cacheConfig, $cache);
         }
         return $creds;
     }
@@ -176,10 +177,31 @@ class ApplicationDefaultCredentials
      * @return AuthTokenMiddleware
      * @throws DomainException if no implementation can be obtained.
      */
-    public static function getIdTokenMiddleware($targetAudience, callable $httpHandler = null, array $cacheConfig = null, \Beehive\Psr\Cache\CacheItemPoolInterface $cache = null)
+    public static function getIdTokenMiddleware($targetAudience, callable $httpHandler = null, array $cacheConfig = null, CacheItemPoolInterface $cache = null)
     {
         $creds = self::getIdTokenCredentials($targetAudience, $httpHandler, $cacheConfig, $cache);
-        return new \Beehive\Google\Auth\Middleware\AuthTokenMiddleware($creds, $httpHandler);
+        return new AuthTokenMiddleware($creds, $httpHandler);
+    }
+    /**
+     * Obtains an ProxyAuthTokenMiddleware which will fetch an ID token to use in the
+     * Authorization header. The middleware is configured with the default
+     * FetchAuthTokenInterface implementation to use in this environment.
+     *
+     * If supplied, $targetAudience is used to set the "aud" on the resulting
+     * ID token.
+     *
+     * @param string $targetAudience The audience for the ID token.
+     * @param callable $httpHandler callback which delivers psr7 request
+     * @param array $cacheConfig configuration for the cache when it's present
+     * @param CacheItemPoolInterface $cache A cache implementation, may be
+     *        provided if you have one already available for use.
+     * @return ProxyAuthTokenMiddleware
+     * @throws DomainException if no implementation can be obtained.
+     */
+    public static function getProxyIdTokenMiddleware($targetAudience, callable $httpHandler = null, array $cacheConfig = null, CacheItemPoolInterface $cache = null)
+    {
+        $creds = self::getIdTokenCredentials($targetAudience, $httpHandler, $cacheConfig, $cache);
+        return new ProxyAuthTokenMiddleware($creds, $httpHandler);
     }
     /**
      * Obtains the default FetchAuthTokenInterface implementation to use
@@ -195,36 +217,36 @@ class ApplicationDefaultCredentials
      * @throws DomainException if no implementation can be obtained.
      * @throws InvalidArgumentException if JSON "type" key is invalid
      */
-    public static function getIdTokenCredentials($targetAudience, callable $httpHandler = null, array $cacheConfig = null, \Beehive\Psr\Cache\CacheItemPoolInterface $cache = null)
+    public static function getIdTokenCredentials($targetAudience, callable $httpHandler = null, array $cacheConfig = null, CacheItemPoolInterface $cache = null)
     {
         $creds = null;
-        $jsonKey = \Beehive\Google\Auth\CredentialsLoader::fromEnv() ?: \Beehive\Google\Auth\CredentialsLoader::fromWellKnownFile();
+        $jsonKey = CredentialsLoader::fromEnv() ?: CredentialsLoader::fromWellKnownFile();
         if (!$httpHandler) {
-            if (!($client = \Beehive\Google\Auth\HttpHandler\HttpClientCache::getHttpClient())) {
-                $client = new \Beehive\GuzzleHttp\Client();
-                \Beehive\Google\Auth\HttpHandler\HttpClientCache::setHttpClient($client);
+            if (!($client = HttpClientCache::getHttpClient())) {
+                $client = new Client();
+                HttpClientCache::setHttpClient($client);
             }
-            $httpHandler = \Beehive\Google\Auth\HttpHandler\HttpHandlerFactory::build($client);
+            $httpHandler = HttpHandlerFactory::build($client);
         }
         if (!\is_null($jsonKey)) {
             if (!\array_key_exists('type', $jsonKey)) {
                 throw new \InvalidArgumentException('json key is missing the type field');
             }
             if ($jsonKey['type'] == 'authorized_user') {
-                throw new \InvalidArgumentException('ID tokens are not supported for end user credentials');
+                throw new InvalidArgumentException('ID tokens are not supported for end user credentials');
             }
             if ($jsonKey['type'] != 'service_account') {
-                throw new \InvalidArgumentException('invalid value in the type field');
+                throw new InvalidArgumentException('invalid value in the type field');
             }
-            $creds = new \Beehive\Google\Auth\Credentials\ServiceAccountCredentials(null, $jsonKey, null, $targetAudience);
+            $creds = new ServiceAccountCredentials(null, $jsonKey, null, $targetAudience);
         } elseif (self::onGce($httpHandler, $cacheConfig, $cache)) {
-            $creds = new \Beehive\Google\Auth\Credentials\GCECredentials(null, null, $targetAudience);
+            $creds = new GCECredentials(null, null, $targetAudience);
         }
         if (\is_null($creds)) {
-            throw new \DomainException(self::notFound());
+            throw new DomainException(self::notFound());
         }
         if (!\is_null($cache)) {
-            $creds = new \Beehive\Google\Auth\FetchAuthTokenCache($creds, $cacheConfig, $cache);
+            $creds = new FetchAuthTokenCache($creds, $cacheConfig, $cache);
         }
         return $creds;
     }
@@ -236,7 +258,7 @@ class ApplicationDefaultCredentials
         $msg .= ' for more information';
         return $msg;
     }
-    private static function onGce(callable $httpHandler = null, array $cacheConfig = null, \Beehive\Psr\Cache\CacheItemPoolInterface $cache = null)
+    private static function onGce(callable $httpHandler = null, array $cacheConfig = null, CacheItemPoolInterface $cache = null)
     {
         $gceCacheConfig = [];
         foreach (['lifetime', 'prefix'] as $key) {
@@ -244,6 +266,6 @@ class ApplicationDefaultCredentials
                 $gceCacheConfig[$key] = $cacheConfig['gce_' . $key];
             }
         }
-        return (new \Beehive\Google\Auth\GCECache($gceCacheConfig, $cache))->onGce($httpHandler);
+        return (new GCECache($gceCacheConfig, $cache))->onGce($httpHandler);
     }
 }

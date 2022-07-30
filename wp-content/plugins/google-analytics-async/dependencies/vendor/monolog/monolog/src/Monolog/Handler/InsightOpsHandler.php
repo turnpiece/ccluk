@@ -17,7 +17,7 @@ use Beehive\Monolog\Logger;
  * @author Robert Kaufmann III <rok3@rok3.me>
  * @author Gabriel Machado <gabriel.ms1@hotmail.com>
  */
-class InsightOpsHandler extends \Beehive\Monolog\Handler\SocketHandler
+class InsightOpsHandler extends SocketHandler
 {
     /**
      * @var string
@@ -32,10 +32,10 @@ class InsightOpsHandler extends \Beehive\Monolog\Handler\SocketHandler
      *
      * @throws MissingExtensionException If SSL encryption is set to true and OpenSSL is missing
      */
-    public function __construct($token, $region = 'us', $useSSL = \true, $level = \Beehive\Monolog\Logger::DEBUG, $bubble = \true)
+    public function __construct($token, $region = 'us', $useSSL = \true, $level = Logger::DEBUG, $bubble = \true)
     {
         if ($useSSL && !\extension_loaded('openssl')) {
-            throw new \Beehive\Monolog\Handler\MissingExtensionException('The OpenSSL PHP plugin is required to use SSL encrypted connection for InsightOpsHandler');
+            throw new MissingExtensionException('The OpenSSL PHP plugin is required to use SSL encrypted connection for InsightOpsHandler');
         }
         $endpoint = $useSSL ? 'ssl://' . $region . '.data.logs.insight.rapid7.com:443' : $region . '.data.logs.insight.rapid7.com:80';
         parent::__construct($endpoint, $level, $bubble);

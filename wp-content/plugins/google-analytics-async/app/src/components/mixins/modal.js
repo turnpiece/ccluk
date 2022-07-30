@@ -45,6 +45,9 @@ export default {
 
 			// Emit modal close event.
 			this.$emit('modal:close', this.modal)
+
+			// Temporary fix to remove non scrollable class from the html.
+			document.body.parentNode.classList.remove('sui-has-modal')
 		},
 	},
 }

@@ -12,8 +12,7 @@
 		<i class="sui-icon-update" aria-hidden="true"></i>
 		<span><?php esc_html_e( 'Refresh', 'shipper' ); ?></span>
 	</a>
-	<input type="hidden" name="_wpnonce"
-		value="<?php echo esc_attr( wp_create_nonce( 'shipper_list_hub_sites' ) );?>" />
+	<input type="hidden" name="_wpnonce" value="<?php echo esc_attr( wp_create_nonce( 'shipper_list_hub_sites' ) ); ?>" />
 	<h3 class="sui-dialog-title"><?php esc_html_e( 'Add Destination', 'shipper' ); ?></h3>
 	<button data-a11y-dialog-hide="" class="sui-dialog-close" aria-label="<?php esc_attr_e( 'Close this dialog window', 'shipper' ); ?>"></button>
 </div>

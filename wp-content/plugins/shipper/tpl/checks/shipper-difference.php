@@ -19,19 +19,31 @@
 
 	<h4><?php esc_html_e( 'Status', 'shipper' ); ?></h4>
 	<div class="sui-notice sui-notice-error">
-		<p>
-			<?php
-			echo wp_kses_post( sprintf(
-				__( '%s is using Shipper v%s whereas %s is using Shipper v%s', 'shipper' ),
-				$source, $local, $destination, $remote
-			) );
-			?>
-		</p>
+		<div class="sui-notice-content">
+			<div class="sui-notice-message">
+				<i class="sui-notice-icon sui-icon-info sui-md" aria-hidden="true"></i>
+				<p>
+					<?php
+					echo wp_kses_post(
+						sprintf(
+							// translators: %1$s %2$s %3$s %4$s: source, local, destination and remote site name.
+							__( '%1$s is using Shipper v%2$s whereas %3$s is using Shipper v%4$s', 'shipper' ),
+							$source,
+							$local,
+							$destination,
+							$remote
+						)
+					);
+					?>
+				</p>
+			</div>
+		</div>
 	</div>
+
 	<h4><?php esc_html_e( 'How To Fix', 'shipper' ); ?></h4>
 	<p>
 		<?php
-		echo wp_kses_post( __( "We recommend using the same (and preferably the latest) version of Shipper on both the sites to avoid migration failure. So visit the plugins page on each website and update the Shipper plugin to it’s the latest available version to ensure both sites are using the same and latest plugin version.", 'shipper' ) );
+			echo wp_kses_post( __( 'We recommend using the same (and preferably the latest) version of Shipper on both the sites to avoid migration failure. So visit the plugins page on each website and update the Shipper plugin to it’s the latest available version to ensure both sites are using the same and latest plugin version.', 'shipper' ) );
 		?>
 	</p>
 </div>

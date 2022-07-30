@@ -55,7 +55,7 @@ namespace Beehive\phpseclib\Crypt;
  * @author  Jim Wigginton <terrafrost@php.net>
  * @access  public
  */
-class AES extends \Beehive\phpseclib\Crypt\Rijndael
+class AES extends Rijndael
 {
     /**
      * Dummy function

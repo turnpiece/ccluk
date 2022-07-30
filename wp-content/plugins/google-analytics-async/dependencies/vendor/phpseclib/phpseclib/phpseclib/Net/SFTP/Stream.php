@@ -163,7 +163,7 @@ class Stream
         if ($host[0] == '$') {
             $host = \substr($host, 1);
             global ${$host};
-            if (${$host} instanceof \Beehive\phpseclib\Net\SFTP === \false) {
+            if (${$host} instanceof SFTP === \false) {
                 return \false;
             }
             $this->sftp = ${$host};
@@ -177,7 +177,7 @@ class Stream
             if (isset($context[$scheme]['sftp'])) {
                 $sftp = $context[$scheme]['sftp'];
             }
-            if (isset($sftp) && $sftp instanceof \Beehive\phpseclib\Net\SFTP) {
+            if (isset($sftp) && $sftp instanceof SFTP) {
                 $this->sftp = $sftp;
                 return $path;
             }
@@ -187,7 +187,7 @@ class Stream
             if (isset($context[$scheme]['password'])) {
                 $pass = $context[$scheme]['password'];
             }
-            if (isset($context[$scheme]['privkey']) && $context[$scheme]['privkey'] instanceof \Beehive\phpseclib\Crypt\RSA) {
+            if (isset($context[$scheme]['privkey']) && $context[$scheme]['privkey'] instanceof RSA) {
                 $pass = $context[$scheme]['privkey'];
             }
             if (!isset($user) || !isset($pass)) {
@@ -197,7 +197,7 @@ class Stream
             if (isset(self::$instances[$host][$port][$user][(string) $pass])) {
                 $this->sftp = self::$instances[$host][$port][$user][(string) $pass];
             } else {
-                $this->sftp = new \Beehive\phpseclib\Net\SFTP($host, $port);
+                $this->sftp = new SFTP($host, $port);
                 $this->sftp->disableStatCache();
                 if (isset($this->notification) && \is_callable($this->notification)) {
                     /* if !is_callable($this->notification) we could do this:
@@ -316,7 +316,7 @@ class Stream
             case 'r':
                 return \false;
         }
-        $result = $this->sftp->put($this->path, $data, \Beehive\phpseclib\Net\SFTP::SOURCE_STRING, $this->pos);
+        $result = $this->sftp->put($this->path, $data, SFTP::SOURCE_STRING, $this->pos);
         if (isset($this->notification) && \is_callable($this->notification)) {
             if (!$result) {
                 \call_user_func($this->notification, \STREAM_NOTIFY_FAILURE, \STREAM_NOTIFY_SEVERITY_ERR, $this->sftp->getLastSFTPError(), NET_SFTP_OPEN, 0, 0);
@@ -374,7 +374,7 @@ class Stream
     {
         switch ($whence) {
             case \SEEK_SET:
-                if ($offset >= $this->size || $offset < 0) {
+                if ($offset < 0) {
                     return \false;
                 }
                 break;
@@ -409,7 +409,9 @@ class Stream
         switch ($option) {
             case 1:
                 // PHP_STREAM_META_TOUCH
-                return $this->sftp->touch($path, $var[0], $var[1]);
+                $time = isset($var[0]) ? $var[0] : null;
+                $atime = isset($var[1]) ? $var[1] : null;
+                return $this->sftp->touch($path, $time, $atime);
             case 2:
             // PHP_STREAM_OWNER_NAME
             case 3:
@@ -581,7 +583,6 @@ class Stream
      * $options. What does 8 correspond to?
      *
      * @param string $path
-     * @param int $mode
      * @param int $options
      * @return bool
      * @access public
@@ -709,8 +710,8 @@ class Stream
      * If NET_SFTP_STREAM_LOGGING is defined all calls will be output on the screen and then (regardless of whether or not
      * NET_SFTP_STREAM_LOGGING is enabled) the parameters will be passed through to the appropriate method.
      *
-     * @param string
-     * @param array
+     * @param string $name
+     * @param array $arguments
      * @return mixed
      * @access public
      */

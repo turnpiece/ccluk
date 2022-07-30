@@ -1,153 +1,103 @@
 <?php
-if( 'full' === $type ):
-	// Render the page header section.
-	/** @var WPMUDEV_Dashboard_Sui $this */
-	$page_title = __( 'Dashboard', 'wpmudev' );
-	$page_slug  = 'dashboard';
-	$this->render_sui_header( $page_title, $page_slug );
+/**
+ * Dashboard home template
+ *
+ * @var array                           $member
+ * @var WPMUDEV_Dashboard_Sui_Page_Urls $urls
+ * @var int|string                      $update_plugins
+ * @var string                          $type
+ * @var array                           $data
+ * @var array                           $licensed_projects
+ * @var array                           $membership_data
+ * @var object|bool                     $staff_login
+ * @var bool                            $analytics_enabled
+ * @var bool                            $analytics_allowed
+ * @var bool                            $whitelabel_allowed
+ * @var array                           $whitelabel_settings
+ * @var int                             $total_visits
+ * @var bool                            $tickets_hidden
+ * @var array                           $free_plugins
+ *
+ * @package WPMUDEV DASHBOARD 4.9.0
+ */
 
-	/** @var WPMUDEV_Dashboard_Sui_Page_Urls $urls */
-	// Support & update stats
-	$support_thread_url = $urls->support_url;
+$this->render_sui_header(
+	__( 'Dashboard', 'wpmudev' ),
+	'dashboard'
+);
 
-	$support_threads = count( $member['forum']['support_threads'] );
-	$support_threads = $support_threads > 0 ? sprintf( '<span class="sui-tag sui-tag-sm sui-tag-branded"><a href="%s" style="color:#fff">%s</a></span>', esc_url( $support_thread_url ), absint( $support_threads ) ) :  absint( $support_threads );
+$queue = WPMUDEV_Dashboard::$settings->get( 'notifications' );
 
-	$update_plugins_html = $update_plugins > 0 ? sprintf( '<span class="sui-tag sui-tag-sm sui-tag-warning"><a href="%s" style="color:#333">%s</a></span>', esc_url( $urls->plugins_url ), $update_plugins ) : $update_plugins;
-	$total_active_plugins = isset( $active_projects['all'] ) ? absint( $active_projects['all'] ) : 0 ;
+// Is current membership type expired or paused?.
+$expired_type = in_array( $type, array( 'expired', 'paused' ), true );
 
-	// Find the 5 most popular plugins, that are not installed yet.
-	$selected_plugins = array();
-	asort( $data['projects'] );
-	$projects = wp_list_pluck( $data['projects'], 'id', 'name' );
+// If already dismissed don't show.
+if ( 'expired' === $type || 'single' === $type ) {
+	$this->render_upgrade_header( $type, $licensed_projects );
+}
 
-	//sort by name
-	ksort( $projects );
-	if( $update_plugins > 0 ):
-		foreach ( $projects as $key => $item ) {
-			//if update is complete break
-			if( $update_plugins <= count( $selected_plugins ) ){
-				break;
-			}
+// @var WPMUDEV_Dashboard_Sui_Page_Urls $urls.
+// Support & update stats.
+$support_thread_url = $urls->support_url;
 
-			// Skip themes.
-			if ( 'plugin' != $data['projects'][$item]['type'] ) {
-				continue;
-			}
+$support_threads = count( $member['forum']['support_threads'] );
+$support_threads = $support_threads > 0 ? sprintf( '<span class="sui-tag sui-tag-sm sui-tag-branded"><a href="%s" style="color:#fff">%s</a></span>', esc_url( $support_thread_url ), absint( $support_threads ) ) : absint( $support_threads );
 
-			$plugin = WPMUDEV_Dashboard::$site->get_project_info( $item );
-			//get the updates first
-			if( ! $plugin->has_update ){
-				continue;
-			}
+$update_plugins_html  = $update_plugins > 0 ? sprintf( '<span class="sui-tag sui-tag-sm sui-tag-warning"><a href="%s" style="color:#333">%s</a></span>', esc_url( $urls->plugins_url ), $update_plugins ) : $update_plugins;
+$total_active_plugins = isset( $active_projects['all'] ) ? absint( $active_projects['all'] ) : 0;
 
-			$selected_plugins[] = $plugin->pid;
-		}
-	endif;
-
-	foreach ( $projects as $key => $item ) {
-		// Skip themes.
-		if ( 'plugin' != $data['projects'][$item]['type'] ) {
-			continue;
-		}
-
-		$plugin = WPMUDEV_Dashboard::$site->get_project_info( $item );
-
-		//if update is complete break
-		if( 5 <= count( $selected_plugins ) ){
-			break;
-		}
-
-		//ignore plugin with updates
-		if( $plugin->has_update ){
-			continue;
-		}
-
-		// Skip plugin if it's already installed.
-		if ( ! $plugin->is_active ) {
-			continue;
-		}
-
-		// Skip plugins that are not compatible with current site.
-		if ( ! $plugin->is_compatible ) {
-			continue;
-		}
-
-		// Skip hidden/deprecated projects.
-		if ( $plugin->is_hidden ) {
-			continue;
-		}
-
-		$selected_plugins[] = $plugin->pid;
-
-	}
-	?>
+?>
+<?php if ( 'free' !== $type ) : ?>
 	<div class="sui-box sui-summary sui-summary-sm">
-
 		<div class="sui-summary-image-space" aria-hidden="true"></div>
-
-			<div class="sui-summary-segment">
-
-			<div class="sui-summary-details">
-
-				<span class="sui-summary-large"><?php echo absint( $total_active_plugins ); ?></span>
-				<span class="sui-summary-sub"><?php echo esc_html( _n( 'Active Pro plugin', 'Active Pro plugins', $total_active_plugins, 'wpmudev' ) ); ?></span>
-
-			</div>
-
-		</div>
-
 		<div class="sui-summary-segment">
-
+			<div class="sui-summary-details">
+				<span class="sui-summary-large"><?php echo absint( $total_active_plugins ); ?></span>
+				<span class="sui-summary-sub">
+					<?php echo esc_html( _n( 'Active Pro plugin', 'Active Pro plugins', $total_active_plugins, 'wpmudev' ) ); ?>
+				</span>
+			</div>
+		</div>
+		<div class="sui-summary-segment">
 			<ul class="sui-list">
-
 				<li>
 					<span class="sui-list-label"><?php esc_html_e( 'Plugin Updates Available', 'wpmudev' ); ?> </span>
 					<span class="sui-list-detail"><?php echo $update_plugins_html; //phpcs:ignore ?></span>
 				</li>
-
 				<li>
 					<span class="sui-list-label"><?php esc_html_e( 'Active Support Tickets', 'wpmudev' ); ?></span>
 					<span class="sui-list-detail">
-						<?php echo $support_threads; //phpcs:ignore  ?>
-					</span>
+					<?php echo $support_threads; //phpcs:ignore  ?>
+				</span>
 				</li>
-
 			</ul>
-
 		</div>
-
 	</div><!-- End Overview -->
+<?php endif; ?>
 
 	<div class="sui-row dashui-table-widgets">
 		<div class="sui-col-md-6">
-			<?php // BOX: Installed Plugins ?>
-			<?php $this->render( 'sui/dashboard-templates/installed-plugins', compact( 'data', 'urls', 'selected_plugins' ) ); ?>
-
-			<?php // BOX: Services ?>
-			<?php $this->render( 'sui/dashboard-templates/services', compact( 'urls', 'membership_data' ) ); ?>
-
-			<?php // BOX: Support ?>
-			<?php $this->render( 'sui/dashboard-templates/support', compact( 'urls', 'member', 'staff_login' ) ); ?>
+			<?php $this->render( 'sui/dashboard-templates/plugins', compact( 'data', 'urls', 'update_plugins', 'free_plugins', 'membership_data', 'type' ) ); // BOX: Installed Plugins. ?>
+			<?php $this->render( 'sui/dashboard-templates/services', compact( 'urls', 'expired_type', 'membership_data' ) ); // BOX: Services. ?>
+			<?php if ( 'free' !== $type ) : ?>
+				<?php $this->render( 'sui/dashboard-templates/support', compact( 'urls', 'member', 'staff_login', 'membership_data', 'tickets_hidden' ) ); // BOX: Support. ?>
+			<?php endif; ?>
 		</div>
 
 		<div class="sui-col-md-6">
-
-			<?php // BOX: Tools ?>
-			<?php $this->render( 'sui/dashboard-templates/tools', compact( 'urls', 'whitelabel_settings', 'analytics_enabled', 'total_visits' ) ); ?>
-
-			<?php // BOX: Resources ?>
-			<?php $this->render( 'sui/dashboard-templates/resources', compact( 'urls' ) ); ?>
-
+			<?php if ( 'expired' === $type ) : ?>
+				<?php $this->render( 'sui/dashboard-templates/switch-to-free', compact( 'urls' ) ); // BOX: Analytics. ?>
+			<?php endif; ?>
+			<?php if ( $expired_type ) : ?>
+				<?php $this->render( 'sui/dashboard-templates/expired-membership-info', compact( 'urls', 'whitelabel_settings', 'analytics_enabled', 'total_visits', 'membership_data', 'type' ) ); // BOX: Expired Membership Info. ?>
+			<?php endif; ?>
+			<?php $this->render( 'sui/dashboard-templates/analytics', compact( 'urls', 'analytics_enabled', 'analytics_allowed', 'membership_data' ) ); // BOX: Analytics. ?>
+			<?php if ( 'free' !== $type ) : ?>
+				<?php $this->render( 'sui/dashboard-templates/whitelabel', compact( 'urls', 'whitelabel_settings', 'whitelabel_allowed', 'membership_data' ) ); // BOX: Whitelabel. ?>
+			<?php endif; ?>
+			<?php $this->render( 'sui/dashboard-templates/resources', compact( 'urls', 'type', 'membership_data' ) ); // BOX: Resources. ?>
 		</div>
 	</div>
-
-	<?php
-	$this->render( 'sui/element-last-refresh' );
-
-	$this->render( 'sui/footer' );
-endif;
-
-if ( 'free' === $type || 'single' === $type ) :
-	$this->render_upgrade_box( $type );
-endif;
+<?php
+$this->render( 'sui/element-last-refresh', array(), true );
+$this->render( 'sui/footer', array(), true );

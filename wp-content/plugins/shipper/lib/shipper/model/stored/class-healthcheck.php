@@ -13,8 +13,8 @@
 class Shipper_Model_Stored_Healthcheck extends Shipper_Model_Stored {
 
 	const KICKSTARTED = 'kickstarted';
-	const STALLED = 'stalled';
-	const PINGED = 'pinged';
+	const STALLED     = 'stalled';
+	const PINGED      = 'pinged';
 
 	const THRESHOLD_KICKSTARTS = 3;
 

@@ -35,7 +35,8 @@ class SWP_Utility {
 
 	/**
 	 *
-	 * Fetches a key from our filtered $swp_user_options.
+	 * Given a unique option key, this will return the option value from our
+	 * filtered, processed and cleaned up $swp_user_options global array.
 	 *
 	 * @since  3.0.0 | 24 APR 2018 | Created.
 	 * @since  3.0.8 | 16 MAY 2018 | Added $options parameter.
@@ -160,9 +161,8 @@ class SWP_Utility {
 		}
 
 		$new_settings = array_merge( $options, $settings );
-
 		echo json_encode( update_option( 'social_warfare_settings', $new_settings ) );
-
+	
 		wp_die();
 	}
 
@@ -516,4 +516,51 @@ class SWP_Utility {
 
 		return false;
 	}
+
+
+	/**
+	 * A simple utility method that can be used as a shortcut to see if a string
+	 * starts with a particular character/string. For example, this can be used to see
+	 * if a permalink currently starts with https.
+	 *
+	 * if( true === starts_with( $some_link, 'https' ) ) {
+	 *     echo 'This is an https link!'
+	 * }
+	 *
+	 * @since  4.0.0 | 21 FEB 2020 | Created
+	 * @param  string $haystack The string to be examined.
+	 * @param  string $needle   The string to search for.
+	 * @return boolean True on success, False on failure.
+	 *
+	 */
+	static function starts_with($haystack, $needle) {
+	     $length = strlen($needle);
+	     return (substr($haystack, 0, $length) === $needle);
+	}
+
+
+	/**
+	 * A simple utility method that can be used as a shortcut to see if a string
+	 * ends with a particular character/string. For example, this can be used to see
+	 * if a permalink currently ends with a trailing slash (/).
+	 *
+	 * if( true === ends_with( $some_link, '/' ) ) {
+	 *     echo 'This link ends with a trailing slash!'
+	 * }
+	 *
+	 * @since  4.0.0 | 21 FEB 2020 | Created
+	 * @param  string $haystack The string to be examined.
+	 * @param  string $needle   The string to search for.
+	 * @return boolean True on success, False on failure.
+	 *
+	 */
+	static function ends_with($haystack, $needle){
+	    $length = strlen($needle);
+	    if ($length == 0) {
+	        return true;
+	    }
+
+	    return (substr($haystack, -$length) === $needle);
+	}
+
 }

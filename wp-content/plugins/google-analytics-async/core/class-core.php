@@ -5,7 +5,7 @@
  * @note    Only hooks fired after the `plugins_loaded` hook will work here.
  *       You need to register earlier hooks separately.
  *
- * @link    http://premium.wpmudev.org
+ * @link    http://wpmudev.com
  * @since   3.2.0
  *
  * @author  Joel James <joel@incsub.com>

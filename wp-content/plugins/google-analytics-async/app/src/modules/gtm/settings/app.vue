@@ -1,47 +1,39 @@
 <template>
 	<!-- Open sui-wrap -->
 	<div class="sui-wrap" id="beehive-wrap">
-		<sui-header :title="$i18n.title.tag_manager">
-			<template v-slot:right>
-				<!-- Button to clear the cached data -->
-				<refresh-button />
-			</template>
-		</sui-header>
+		<black-friday-notice/>
+
+		<sui-header :title="$i18n.title.tag_manager"/>
 
 		<div class="sui-row-with-sidenav" v-if="isActive">
 			<div role="navigation" class="sui-sidenav">
-				<ul class="sui-vertical-tabs sui-sidenav-hide-md">
-					<router-link
-						class="sui-vertical-tab"
-						tag="li"
-						to="/account"
-						exact
-					>
-						<a>{{ $i18n.label.account }}</a>
-					</router-link>
-					<router-link
-						class="sui-vertical-tab"
-						tag="li"
-						to="/settings"
-					>
-						<a>{{ $i18n.label.settings }}</a>
-					</router-link>
-				</ul>
-				<div class="sui-sidenav-hide-lg">
-					<sui-select
-						class="sui-mobile-nav"
-						style="display: none;"
-						id="settings-nav"
-						:options="navigation"
-						v-model="selectedPage"
-					/>
+				<div class="sui-sidenav-settings">
+					<ul class="sui-vertical-tabs sui-sidenav-hide-md">
+						<router-link
+							class="sui-vertical-tab"
+							tag="li"
+							to="/account"
+							exact
+						>
+							<a>{{ $i18n.label.account }}</a>
+						</router-link>
+						<router-link
+							class="sui-vertical-tab"
+							tag="li"
+							to="/settings"
+						>
+							<a>{{ $i18n.label.settings }}</a>
+						</router-link>
+					</ul>
+
+					<mobile-nav :selected="$route.path" :paths="nav"/>
 				</div>
 			</div>
-			<router-view @submit="saveSettings" />
+			<router-view @submit="saveSettings"/>
 		</div>
-		<activation-box v-else />
+		<activation-box v-else/>
 
-		<sui-footer />
+		<sui-footer/>
 	</div>
 	<!-- Close sui-wrap -->
 </template>
@@ -51,7 +43,8 @@ import ActivationBox from './tabs/activation-box'
 import SuiHeader from '@/components/sui/sui-header'
 import SuiFooter from '@/components/sui/sui-footer'
 import SuiSelect from '@/components/sui/sui-select'
-import RefreshButton from '@/components/elements/refresh-button'
+import MobileNav from '@/components/elements/mobile-nav'
+import BlackFridayNotice from '@/components/elements/black-friday-notice'
 
 export default {
 	name: 'App',
@@ -60,16 +53,16 @@ export default {
 		SuiHeader,
 		SuiFooter,
 		SuiSelect,
-		RefreshButton,
+		MobileNav,
 		ActivationBox,
+		BlackFridayNotice,
 	},
 
 	data() {
 		return {
-			selectedPage: '#' + this.$route.path,
-			navigation: {
-				'#/account': this.$i18n.label.account,
-				'#/settings': this.$i18n.label.settings,
+			nav: {
+				'/account': this.$i18n.label.account,
+				'/settings': this.$i18n.label.settings,
 			},
 		}
 	},

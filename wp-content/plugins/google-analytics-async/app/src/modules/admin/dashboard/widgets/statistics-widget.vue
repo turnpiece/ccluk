@@ -1,6 +1,7 @@
 <template>
 	<sui-box
 		id="beehive-widget-stats"
+		class="beehive-widget"
 		titleIcon="graph-line"
 		aria-live="polite"
 		:loading="loading"

@@ -2,7 +2,7 @@
 /**
  * The assets controller class of the plugin.
  *
- * @link    http://premium.wpmudev.org
+ * @link    http://wpmudev.com
  * @since   3.3.0
  * @author  Joel James <joel@incsub.com>
  * @package Beehive\Core\Controllers
@@ -32,6 +32,9 @@ class Assets extends Base {
 	public function init() {
 		add_action( 'wp_enqueue_scripts', array( $this, 'public_assets' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_assets' ) );
+
+		// Include clipboard JS.
+		add_filter( 'beehive_assets_get_scripts', array( $this, 'register_clipboard' ) );
 	}
 
 	/**
@@ -80,10 +83,13 @@ class Assets extends Base {
 
 		// Register all styles.
 		foreach ( $styles as $handle => $data ) {
+			// Get the source full url.
+			$src = empty( $data['external'] ) ? BEEHIVE_URL . 'app/assets/css/' . $data['src'] : $data['src'];
+
 			// Register custom videos scripts.
 			wp_register_style(
 				$handle,
-				BEEHIVE_URL . 'app/assets/css/' . $data['src'],
+				$src,
 				empty( $data['deps'] ) ? array() : $data['deps'],
 				empty( $data['version'] ) ? BEEHIVE_VERSION : $data['version'],
 				empty( $data['media'] ) ? false : true
@@ -109,10 +115,13 @@ class Assets extends Base {
 
 		// Register all available scripts.
 		foreach ( $scripts as $handle => $data ) {
+			// Get the source full url.
+			$src = empty( $data['external'] ) ? BEEHIVE_URL . 'app/assets/js/' . $data['src'] : $data['src'];
+
 			// Register custom videos scripts.
 			wp_register_script(
 				$handle,
-				BEEHIVE_URL . 'app/assets/js/' . $data['src'],
+				$src,
 				empty( $data['deps'] ) ? array() : $data['deps'],
 				empty( $data['version'] ) ? BEEHIVE_VERSION : $data['version'],
 				isset( $data['footer'] ) ? $data['footer'] : true
@@ -219,6 +228,10 @@ class Assets extends Base {
 				),
 				'beehive-accounts'   => array(
 					'src'  => 'accounts.min.js',
+					'deps' => array( 'beehive-sui-common', 'beehive-vendors', 'beehive-common', 'clipboard' ),
+				),
+				'beehive-tutorials'  => array(
+					'src'  => 'tutorials.min.js',
 					'deps' => array( 'beehive-sui-common', 'beehive-vendors', 'beehive-common' ),
 				),
 				'beehive-common'     => array(
@@ -269,6 +282,9 @@ class Assets extends Base {
 				'beehive-accounts'  => array(
 					'src' => 'accounts.min.css',
 				),
+				'beehive-tutorials' => array(
+					'src' => 'tutorials.min.css',
+				),
 			);
 		} else {
 			$styles = array();
@@ -285,5 +301,28 @@ class Assets extends Base {
 		 * @since 3.2.4
 		 */
 		return apply_filters( 'beehive_assets_get_styles', $styles, $admin );
+	}
+
+	/**
+	 * Add clipboard JS to the scripts list if required.
+	 *
+	 * @param array $scripts Scripts list.
+	 *
+	 * @since 3.3.1
+	 *
+	 * @return array
+	 */
+	public function register_clipboard( $scripts ) {
+		global $wp_version;
+
+		// We need to include the lib manually for WP below 5.2.
+		if ( version_compare( $wp_version, '5.2', '<' ) ) {
+			$scripts['clipboard'] = array(
+				'src'  => 'clipboard.min.js',
+				'deps' => array( 'jquery' ),
+			);
+		}
+
+		return $scripts;
 	}
 }

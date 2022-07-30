@@ -42,6 +42,7 @@
 							{{ $i18n.label.search_users }}
 						</label>
 						<sui-remote-search
+							parent-element="beehive-settings-permissions-exclude-modal"
 							v-model="selected"
 							:id="`${modal}-search`"
 							:label-id="`${modal}-search-label`"

@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { restGet } from '@/helpers/api'
+import { restGetStats } from '@/helpers/api'
 import SectionColumn from './components/section-column'
 
 export default {
@@ -120,7 +120,7 @@ export default {
 		 * @returns {void}
 		 */
 		getStats() {
-			restGet({
+			restGetStats({
 				path: 'stats/post',
 				params: {
 					id: this.$moduleVars.post,

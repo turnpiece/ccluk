@@ -31,13 +31,13 @@ class Shipper_Controller_Hub_Destination extends Shipper_Controller_Hub {
 	 * @param object $request Optional WPMUDEV_Dashboard_Remote object.
 	 */
 	public function json_destination_add( $params, $action, $request = false ) {
-		$task = new Shipper_Task_Api_Destinations_Add;
+		$task   = new Shipper_Task_Api_Destinations_Add();
 		$status = $task->apply();
 
-		if ( ! empty( $status) ) {
+		if ( ! empty( $status ) ) {
 			// Let's also refresh our systems info.
-			$info_task = new Shipper_Task_Api_Info_Set;
-			$system = new Shipper_Model_System;
+			$info_task = new Shipper_Task_Api_Info_Set();
+			$system    = new Shipper_Model_System();
 			$info_task->apply( $system->get_data() );
 		}
 
@@ -54,7 +54,7 @@ class Shipper_Controller_Hub_Destination extends Shipper_Controller_Hub {
 	 * @param object $request Optional WPMUDEV_Dashboard_Remote object.
 	 */
 	public function json_reset_destination_cache( $params, $action, $request = false ) {
-		$model = new Shipper_Model_Stored_Destinations;
+		$model = new Shipper_Model_Stored_Destinations();
 		$model->clear();
 		$model->set_timestamp( false );
 		$model->save();

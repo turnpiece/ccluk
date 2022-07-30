@@ -2,7 +2,7 @@
 /**
  * Defines general helper functionality of the plugin.
  *
- * @link    http://premium.wpmudev.org
+ * @link    http://wpmudev.com
  * @since   3.2.0
  *
  * @author  Joel James <joel@incsub.com>
@@ -27,8 +27,7 @@ class General {
 	 * List of plugin dashboard pages.
 	 *
 	 * @since 3.2.4
-	 *
-	 * @var array $pages
+	 * @var array $dashboard_pages
 	 */
 	public static $dashboard_pages = array(
 		'toplevel_page_beehive',
@@ -39,8 +38,7 @@ class General {
 	 * List of plugin settings pages.
 	 *
 	 * @since 3.2.4
-	 *
-	 * @var array $pages
+	 * @var array $settings_pages
 	 */
 	public static $settings_pages = array(
 		'dashboard_page_beehive-settings',
@@ -48,20 +46,31 @@ class General {
 	);
 
 	/**
-	 * List of plugin integration pages.
+	 * List of plugin accounts pages.
 	 *
-	 * @var array $pages
-	 *
-	 * @since 3.3.0
+	 * @since 3.3.7
+	 * @var array $accounts_pages
 	 */
-	public static $integrations_pages = array(
-		'dashboard_page_beehive-integrations',
-		'dashboard_page_beehive-integrations-network',
+	public static $accounts_pages = array(
+		'dashboard_page_beehive-accounts',
+		'dashboard_page_beehive-accounts-network',
+	);
+
+	/**
+	 * List of plugin tutorials pages.
+	 *
+	 * @since 3.3.7
+	 * @var array $accounts_pages
+	 */
+	public static $tutorials_pages = array(
+		'dashboard_page_beehive-tutorials',
+		'dashboard_page_beehive-tutorials-network',
 	);
 
 	/**
 	 * List of dashboard pages.
 	 *
+	 * @since  3.3.7
 	 * @var array $dashboard_pages
 	 */
 	public static $wp_dashboard_pages = array(
@@ -82,9 +91,9 @@ class General {
 		/**
 		 * Filter to modify Beehive plugin name.
 		 *
-		 * @param string $name Plugin name.
-		 *
 		 * @since 3.2.0
+		 *
+		 * @param string $name Plugin name.
 		 */
 		return apply_filters( 'beehive_plugin_name', $name );
 	}
@@ -164,18 +173,19 @@ class General {
 	}
 
 	/**
-	 * Check if current page is plugin dashboard widget page.
+	 * Check if current page is plugin tutorials page.
 	 *
-	 * @since 3.2.0
+	 * @since 3.3.7
 	 *
 	 * @return bool
 	 */
-	public static function is_wp_dashboard_page() {
+	public static function is_plugin_tutorials() {
 		// Get current screen id.
 		$current_screen = get_current_screen();
 
-		// Check if current page is dashboard page.
-		return isset( $current_screen->id ) && in_array( $current_screen->id, self::$wp_dashboard_pages, true );
+		// Check if current page is our plugin page.
+		// Using strpos to support translation - https://incsub.atlassian.net/browse/BEE-15.
+		return isset( $current_screen->id ) && strpos( $current_screen->id, 'page_beehive-tutorials' );
 	}
 
 	/**
@@ -190,14 +200,19 @@ class General {
 	 */
 	public static function get_plugin_admin_pages() {
 		// Merge dashboard and settings pages.
-		$pages = array_merge( self::$dashboard_pages, self::$settings_pages );
+		$pages = array_merge(
+			self::$dashboard_pages,
+			self::$settings_pages,
+			self::$accounts_pages,
+			self::$tutorials_pages
+		);
 
 		/**
 		 * Filter the list of Beehive admin page ids.
 		 *
-		 * @param array $pages
-		 *
 		 * @since 3.2.4
+		 *
+		 * @param array $pages Page IDs.
 		 */
 		return apply_filters( 'beehive_admin_pages_list', $pages );
 	}
@@ -241,9 +256,15 @@ class General {
 			// Dashboard is active.
 			if ( class_exists( 'WPMUDEV_Dashboard' ) ) {
 				// Get membership type.
-				$status = WPMUDEV_Dashboard::$api->get_membership_type( $project_id );
-				// Check if API key is available.
-				if ( 'free' === $status && WPMUDEV_Dashboard::$api->has_key() ) {
+				$status = WPMUDEV_Dashboard::$api->get_membership_type();
+				// Get available projects.
+				$projects = WPMUDEV_Dashboard::$api->get_membership_projects();
+
+				// Beehive single plan.
+				if ( ( 'unit' === $status && ! in_array( 51, $projects, true ) ) || ( 'single' === $status && 51 !== $projects ) ) {
+					$status = 'upgrade';
+				} elseif ( 'free' === $status && WPMUDEV_Dashboard::$api->has_key() ) {
+					// Check if API key is available but status is free, then it's expired.
 					$status = 'expired';
 				}
 			} else {
@@ -254,9 +275,9 @@ class General {
 		/**
 		 * Filter to modify WPMUDEV membership status or user.
 		 *
-		 * @param string $status Status.
-		 *
 		 * @since 3.2.0
+		 *
+		 * @param string $status Status.
 		 */
 		return apply_filters( 'beehive_wpmudev_membership_status', $status );
 	}
@@ -266,10 +287,10 @@ class General {
 	 *
 	 * If the input is not an array it will not process.
 	 *
+	 * @since 3.2.2
+	 *
 	 * @param array  $data     Data to sanitize.
 	 * @param string $function Function name to use.
-	 *
-	 * @since 3.2.2
 	 *
 	 * @return array
 	 */
@@ -284,10 +305,10 @@ class General {
 	/**
 	 * Check if a given date string is in required format.
 	 *
+	 * @since 3.2.4
+	 *
 	 * @param string $date   Date string to check.
 	 * @param string $format Date format to check.
-	 *
-	 * @since 3.2.4
 	 *
 	 * @return bool
 	 */
@@ -313,14 +334,34 @@ class General {
 		static $loaded = null;
 
 		if ( ! $loaded ) {
+			// Temporary fix for composer conflict.
+			if ( ! empty( $GLOBALS['__composer_autoload_files'] ) ) {
+				foreach ( $GLOBALS['__composer_autoload_files'] as $identifier => $loaded ) {
+					$GLOBALS['__composer_autoload_files'][ $identifier ] = false;
+				}
+			}
+
 			if ( file_exists( plugin_dir_path( BEEHIVE_PLUGIN_FILE ) . '/dependencies/vendor/scoper-autoload.php' ) ) {
 				require_once plugin_dir_path( BEEHIVE_PLUGIN_FILE ) . '/dependencies/vendor/scoper-autoload.php';
 			} elseif ( BEEHIVE_VERSION && version_compare( BEEHIVE_VERSION, '3.2.4', '>' ) ) {
 				// We need autoload.
-				wp_die( esc_html__( 'Autoloader is missing. Please run composer install if you are on development version.', 'ga_trans' ) );
+				wp_die( esc_html__( 'Autoloader is missing. Please run `composer install` if you are on development version.', 'ga_trans' ) );
 			}
 
 			$loaded = true;
 		}
+	}
+
+	/**
+	 * Check if a plugin is installed in WP.
+	 *
+	 * @since 3.3.3
+	 *
+	 * @param string $plugin Plugin file.
+	 *
+	 * @return bool
+	 */
+	public static function is_plugin_installed( $plugin ) {
+		return file_exists( trailingslashit( WP_PLUGIN_DIR ) . $plugin );
 	}
 }

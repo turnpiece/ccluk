@@ -196,7 +196,7 @@ class Agent
             $key_type = \substr($key_blob, 4, $length);
             switch ($key_type) {
                 case 'ssh-rsa':
-                    $key = new \Beehive\phpseclib\Crypt\RSA();
+                    $key = new RSA();
                     $key->loadKey($key_str);
                     break;
                 case 'ssh-dss':
@@ -205,7 +205,7 @@ class Agent
             }
             // resources are passed by reference by default
             if (isset($key)) {
-                $identity = new \Beehive\phpseclib\System\SSH\Agent\Identity($this->fsock);
+                $identity = new Identity($this->fsock);
                 $identity->setPublicKey($key);
                 $identity->setPublicKeyBlob($key_blob);
                 $identities[] = $identity;
@@ -218,11 +218,10 @@ class Agent
      * Signal that agent forwarding should
      * be requested when a channel is opened
      *
-     * @param Net_SSH2 $ssh
      * @return bool
      * @access public
      */
-    function startSSHForwarding($ssh)
+    function startSSHForwarding()
     {
         if ($this->forward_status == self::FORWARD_NONE) {
             $this->forward_status = self::FORWARD_REQUEST;

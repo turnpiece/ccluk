@@ -2,7 +2,7 @@
 /**
  * The Google general data class.
  *
- * @link    http://premium.wpmudev.org
+ * @link    http://wpmudev.com
  * @since   3.2.0
  *
  * @author  Joel James <joel@incsub.com>
@@ -15,9 +15,9 @@ namespace Beehive\Core\Modules\Google_Auth;
 defined( 'WPINC' ) || die;
 
 use Exception;
-use Beehive\Google_Service_Exception;
+use Beehive\Google\Service\Exception as Google_Exception;
 use Beehive\Core\Utils\Abstracts\Google_API;
-use Beehive\Google_Service_PeopleService as Google_People;
+use Beehive\Google\Service\PeopleService as Google_People;
 
 /**
  * Class Data
@@ -47,6 +47,10 @@ class Data extends Google_API {
 			),
 			'600314239770-5huksonskhpspttt9euamsd2vfv3m0gr.apps.googleusercontent.com' => array(
 				'secret' => 'z02i4rsfhTLNC0hYjLJgn5P_',
+				'weight' => 5,
+			),
+			'928518476274-818pcuoanph73nduovspp3g9gvs8u3ho.apps.googleusercontent.com' => array(
+				'secret' => 'iG7m1aeBsZ7S1WWcrC_YUzNN',
 				'weight' => 5,
 			),
 		);
@@ -129,7 +133,7 @@ class Data extends Google_API {
 				 * @since 3.2.0
 				 */
 				do_action( 'beehive_after_google_user_fetch', $user );
-			} catch ( Google_Service_Exception $e ) {
+			} catch ( Google_Exception $e ) {
 				$user = array();
 
 				// Process the exception.

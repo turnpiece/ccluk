@@ -27,7 +27,7 @@ class Shipper_Task_Check_Rsystem extends Shipper_Task_Check_System {
 	 * @return string
 	 */
 	public function get_domain() {
-		$migration = new Shipper_Model_Stored_Migration;
+		$migration = new Shipper_Model_Stored_Migration();
 		return $migration->get_destination();
 	}
 }

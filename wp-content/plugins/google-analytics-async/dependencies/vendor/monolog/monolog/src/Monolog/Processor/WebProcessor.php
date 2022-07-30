@@ -15,7 +15,7 @@ namespace Beehive\Monolog\Processor;
  *
  * @author Jordi Boggiano <j.boggiano@seld.be>
  */
-class WebProcessor implements \Beehive\Monolog\Processor\ProcessorInterface
+class WebProcessor implements ProcessorInterface
 {
     /**
      * @var array|\ArrayAccess

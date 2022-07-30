@@ -17,7 +17,7 @@ class Shipper_Helper_Timer_Basic extends Shipper_Helper_Timer {
 	 *
 	 * @var array
 	 */
-	private $_times = array();
+	private $times = array();
 
 	/**
 	 * Gets individual timer hash
@@ -29,10 +29,9 @@ class Shipper_Helper_Timer_Basic extends Shipper_Helper_Timer {
 	 * @return array
 	 */
 	public function get_timer( $timer ) {
-		return isset( $this->_times[ $timer ] ) && is_array( $this->_times[ $timer ] )
-			? $this->_times[ $timer ]
-			: array()
-		;
+		return isset( $this->times[ $timer ] ) && is_array( $this->times[ $timer ] )
+			? $this->times[ $timer ]
+			: array();
 	}
 
 	/**
@@ -42,7 +41,7 @@ class Shipper_Helper_Timer_Basic extends Shipper_Helper_Timer {
 	 * @param array  $data Timer data - an array with start and optional end keys.
 	 */
 	public function set_timer( $timer, $data ) {
-		$this->_times[ $timer ] = $data;
+		$this->times[ $timer ] = $data;
 	}
 
 	/**
@@ -51,14 +50,14 @@ class Shipper_Helper_Timer_Basic extends Shipper_Helper_Timer {
 	 * @param string $timer Timer ID.
 	 */
 	public function reset( $timer ) {
-		$this->_times[ $timer ] = array();
+		$this->times[ $timer ] = array();
 	}
 
 	/**
 	 * Reset all timers
 	 */
 	public function reset_all() {
-		$this->_times = array();
+		$this->times = array();
 	}
 
 	/**
@@ -67,7 +66,6 @@ class Shipper_Helper_Timer_Basic extends Shipper_Helper_Timer {
 	 * @return array A list of timer hashes.
 	 */
 	public function get_all() {
-		return $this->_times;
+		return $this->times;
 	}
-
 }
